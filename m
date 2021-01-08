@@ -1,17 +1,17 @@
-Received: from NAM02-CY1-obe.outbound.protection.outlook.com (NAM02-CY1-obe.outbound.protection.outlook.com [40.107.76.42])
- by mx.groups.io with SMTP id smtpd.web10.1962.1610122084306750400
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.84])
+ by mx.groups.io with SMTP id smtpd.web12.303.1610126781474102528
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 08 Jan 2021 08:08:04 -0800
+ Fri, 08 Jan 2021 09:26:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=H3LgXVEC;
- spf=pass (domain: windriver.com, ip: 40.107.76.42, mailfrom: trevor.gamblin@windriver.com)
+ dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=YkpBX9qY;
+ spf=pass (domain: windriver.com, ip: 40.107.236.84, mailfrom: randy.macleod@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GynO3JZgjRxDzUBly3wwO8cMg55448UmJekE51raomMT1TpAwDZqbfwFw/YgR51Q+jfOOJ4QcAhCJILHDxUapu3sBaeZxGlkQ/a2BNFeyIIrKV8k5iADn4T9Z06ghpkPvauQu5WYfRR59lvvISsa1oRSkG7JToODGznE4K8wCCyhlPD3E1qZAeokB03j3w1kdoYo9ouwy0LRhowON7M4/bAoNY082VmiTjSzaIUpZlkCG6kLgcdX+JyunBsJaeK1P0gM0sXLaqatYIAKoym9YCjFUVoUFmuFrFM6IjxzLxceSDkdo4X4X7PNtGlaarPvgaD+I5w6EP5fXiopiaTf/Q==
+ b=ZS7uk8X8APLiA+0WNixTRfydod2v3lx90RnOxc3MTlsMYpqcOCB+mihmruXQVf7ZgZbKDjov2tJGAl2Uam+aPxbxgU7C3Sy7im9JqlQDCWO/DM7Yo+RFPrSNEWzuE1qrWXHSsIwjl1HLqc5HNF4Q5dueL0QWTvt7l9Z8BOVTvJJR01hcTIq7EFwd5cdNCe37XJR1fNbG8QF4g8MIfBLzDd93JwQCXaZPGe9SyM/HZ2hx4WcJuFkZmPdY+LrHSfM6BM7C8hFEjd/b7HuCCESj4Ly0Ffe+hIB2n8lttImvdUy0y5q4NXc9WWLodTxnr6QSVDVnXLiJTXkDmLKWr7Ykug==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hSZ+OC/j0eXvmuVmnb6OD/90yniodLLmzpkOyt/KJUA=;
- b=a/nKZbGAhNKNBg+i7nW/VmjvUEK0MgU1XvunjxtmdVr1MGGPce+lD4T+UTwghWhvH8Dky1a5QQXMr5wLR7nnac155vngt36s2t1gGoR9ol5RAGbzpRNm98ThD4YCoz95Hl/31nrDi9W1amIXKVI/UfF6YYkEp66mghrICROxvBEcww7eyMn75SqHSKUqbW2VIuT0uA8DGo6vAAouBJ+AZs5S7uzwh1i2o/MT6MK0CP8vK0/CylvHRokbM56qbhgzoRD3gwVdNeLYwy+YeOpReP1bMZXdM+R5ov/4/s1WvE18rKFi8EMlZfl/QG1hJRWO5IeBvqjNZAQ1EfaJXwA/AA==
+ bh=OBc1pW56A8rTsd4emhnmdhsC1/TmWMrLh/WoPut0RA4=;
+ b=FamL1ACWe2PUJvcLXELLN2rFhlhd0yR6Me38CIIm3ldEPQt0w0LXlE1FmhMWe76QzsMXq7J1PGj3ImJEEaE1ppRCllwd8+2UY75B9LbPl2Aly7eO5hRSTrun+TzCb7uaAs4JIWSrvmPMq1bPMRsLK3jcXznndWLT5A6E8gx56qf6jokITgRN11EBNV1OdfbhClsyB+Dvx9PzHKEVT8fnSvZcEr1TKQ7z99muWS1wDhoOYRy9Zgd+mt3zELDPcM2fQFzbyEWRu0Dc3aBO4PuRusbF+Zby+pW40BVwrlaiQ4BANzE570xehJHxTMHB1BgkZXUUgoquCqitKv7X5LDTag==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,219 +19,474 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hSZ+OC/j0eXvmuVmnb6OD/90yniodLLmzpkOyt/KJUA=;
- b=H3LgXVECAaP9OlNgOvNl1GcV2Xu0Tykk7N9nFJ8gtOTAMLs52sYkcweUzUoAcn/o5FsCAEuf6EV2P/yab4h1zvgCNsBptYKGSuGr2Nw+nPKo/+j9ly4KpPsHHlvFpM/ksx4SoZk0JCnSQmAvRuDz/sKpp7Idaemr4koP7KHZCbw=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
+ bh=OBc1pW56A8rTsd4emhnmdhsC1/TmWMrLh/WoPut0RA4=;
+ b=YkpBX9qYlGR2RBqP33ZbI6vZgc/aM9X13Moxv3nWhwNwW4vpM6/hG4lVDybfkv8ZC22MUpeUHbtOES7adg7WZdj1J4uhUolyJYsH2MlpJLj/BQP8rK6dDrmkS2pdYw0wcOPTeEqSfGZXfQCoBenGzDAjRPjG7K8jqvFRX+0dIyE=
+Authentication-Results: windriver.com; dkim=none (message not signed)
+ header.d=none;windriver.com; dmarc=none action=none
  header.from=windriver.com;
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BY5PR11MB4150.namprd11.prod.outlook.com (2603:10b6:a03:190::33) with
+Received: from DM6PR11MB3994.namprd11.prod.outlook.com (2603:10b6:5:193::19)
+ by DM6PR11MB4724.namprd11.prod.outlook.com (2603:10b6:5:2ad::9) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.6; Fri, 8 Jan
- 2021 16:08:03 +0000
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::6806:275a:a0b:55f6]) by BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::6806:275a:a0b:55f6%7]) with mapi id 15.20.3742.009; Fri, 8 Jan 2021
- 16:08:03 +0000
-Subject: Re: [oe] [meta-python][PATCH 10/10] python3-babel: Upgrade 2.8.0 -> 2.9.0
-To: Leon Anavi <leon.anavi@konsulko.com>,
- openembedded-devel@lists.openembedded.org
-References: <20210106220702.10483-1-leon.anavi@konsulko.com>
- <20210106220702.10483-10-leon.anavi@konsulko.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <295d8330-292f-117a-b27d-313fe6302b68@windriver.com>
-Date: Fri, 8 Jan 2021 11:08:00 -0500
+ 2021 17:26:19 +0000
+Received: from DM6PR11MB3994.namprd11.prod.outlook.com
+ ([fe80::8e2:471a:7b63:1a0e]) by DM6PR11MB3994.namprd11.prod.outlook.com
+ ([fe80::8e2:471a:7b63:1a0e%7]) with mapi id 15.20.3742.006; Fri, 8 Jan 2021
+ 17:26:19 +0000
+Subject: Re: [oe] [PATCH 07/28] xfwm4: upgrade 4.14.5 -> 4.16.0
+To: Khem Raj <raj.khem@gmail.com>, =?UTF-8?Q?Andreas_M=c3=bcller?=
+ <schnitzeltony@gmail.com>, openembedded-devel@lists.openembedded.org,
+ "Mittal, Anuj" <anuj.mittal@intel.com>, Kang Kai <kai.kang@windriver.com>
+References: <20210106151717.1779543-1-schnitzeltony@gmail.com>
+ <20210106151717.1779543-7-schnitzeltony@gmail.com>
+ <d1bd0b10-bdd2-6820-61c1-38b7c8e5dc7e@gmail.com>
+From: "Randy MacLeod" <randy.macleod@windriver.com>
+Message-ID: <7aabf117-f702-0813-db20-831446869875@windriver.com>
+Date: Fri, 8 Jan 2021 12:25:21 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.5.0
-In-Reply-To: <20210106220702.10483-10-leon.anavi@konsulko.com>
-X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: MN2PR01CA0058.prod.exchangelabs.com (2603:10b6:208:23f::27)
- To BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
-Return-Path: trevor.gamblin@windriver.com
+In-Reply-To: <d1bd0b10-bdd2-6820-61c1-38b7c8e5dc7e@gmail.com>
+X-Originating-IP: [198.48.226.187]
+X-ClientProxiedBy: SJ0PR03CA0130.namprd03.prod.outlook.com
+ (2603:10b6:a03:33c::15) To DM6PR11MB3994.namprd11.prod.outlook.com
+ (2603:10b6:5:193::19)
+Return-Path: randy.macleod@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by MN2PR01CA0058.prod.exchangelabs.com (2603:10b6:208:23f::27) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.6 via Frontend Transport; Fri, 8 Jan 2021 16:08:02 +0000
+Received: from [172.25.44.2] (198.48.226.187) by SJ0PR03CA0130.namprd03.prod.outlook.com (2603:10b6:a03:33c::15) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.6 via Frontend Transport; Fri, 8 Jan 2021 17:26:18 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: be73e4a4-72d2-4a3a-8d5e-08d8b3ef93ee
-X-MS-TrafficTypeDiagnostic: BY5PR11MB4150:
+X-MS-Office365-Filtering-Correlation-Id: 31f3e31e-a26e-4c4b-df8f-08d8b3fa8310
+X-MS-TrafficTypeDiagnostic: DM6PR11MB4724:
+X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB41506B3C9089E2FACA0523369FAE0@BY5PR11MB4150.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:332;
+	<DM6PR11MB4724563CC9D039F95F557DF0F8AE0@DM6PR11MB4724.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:312;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	0iZigUn6fsBnCsjpOlWf1sXVXzgJ+Nx16KTFo9hM5w1Dczi2+8HS/hK1Lt9qkT7UslG+G3Pea1TtTezg+b+kpeZ4mfZQdzy6luqXWqfrNBrdS36UZjmm0RXtGPSXm0uudBY4xnfFj6HQLLoPpVkHvyxmpgu2qqqa7vme5fxjaRJE1ieImm3RpbT6E4qt30ioAnPvl88PGnvIRB7/m57xnf4bAgw0ambUb0k8TXqQM9URlQ1AW7XXAxUIunBUDsAkouEsV75GJJP7Q5GYBAS4BFJOMGKbO2WrLkRURWx60RfHkarNjp3RWKHsQ4QB6XHsKn/oVN4BroMMVm6ogrEHfjAMyu/IscDaKFp9GKgBAZm1AOTQ9A9Cjb6lN3+QUy+guwwgzv2I/hgble7ng6l0YmxA3jg7T56+xW0IkoIrdSFdhcoqSsBYTZCrirspLe1yM43B+JQs5msjyDiBt68EYhDs+K4sdGRv95ZpMRyZLjsTyK+PsYvk+P7cNIVAba5tZB6Z5k2MrbNVuafAXmHDQw==
+	zXRUqaStzMyZNMQstVp/zmOagKocYtZnayGKWeZDbG5dhB6Yht7m/wErzwxrNMryBqnel3SSn5/z1CHeBIQsZSyYpOYte0nzjs6sENkgWxNYOre1gAae8/pJk9gUii6WKl2/YMNvFoXpT1+GsDVkx+Uw+YCxhaNToTFBf3Ot+BCCxswJhDuImnhVIqu0URxWVWKckqdd2rbSf/+JStakP0CsCNtNmTw1THRL8Mq40U8U+BSAeOw47tn9nxmm2ZorCtOTKiV7YqbXWl5Y/kcQrO4KBpAm8b4MeP5S0yJl3pe/v5SQQGukgt8Cl0F3v7uAnaBYsvmkL7hoPrdRaWsb52Rr1K+bD/1bouGnviDfibqSkQ6ET02HTZyD0Z03wf0Ok3sqOsPKCCqJSygsA1OwFegwqFgw1EeqMrdPAI5Gm92Wn39uUjorb/e/ZpzX+ESSPdJi8IKC2/A5QvSjO1g+1ZQpuJtlBlrRj3+49xy/r1q5aRaq+4Iw6elTeqH/XkMJXjThWdXDQLnxtXfMDw/m1cVJ4VbZ0Zd6F7ePNIaxpuhHR06NVuuac7eIpTOoeldX
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(366004)(376002)(346002)(39850400004)(136003)(956004)(2616005)(66946007)(16526019)(66556008)(31686004)(44832011)(53546011)(66476007)(33964004)(31696002)(186003)(36756003)(83380400001)(52116002)(8676002)(6486002)(478600001)(16576012)(166002)(2906002)(5660300002)(86362001)(26005)(8936002)(966005)(316002)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3994.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(136003)(366004)(396003)(39850400004)(346002)(110136005)(66556008)(66946007)(6666004)(478600001)(31696002)(66476007)(966005)(83380400001)(6486002)(16576012)(31686004)(186003)(956004)(2616005)(2906002)(53546011)(26005)(86362001)(16526019)(8936002)(316002)(30864003)(36756003)(6636002)(52116002)(66574015)(8676002)(5660300002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?OHgzU051U3RiR1NqMlJvOXJlTVRRZkhnanhkVWZINURNYlUrc0ZOdVNMajQ0?=
- =?utf-8?B?c3BzS3hLL2l3WmRVSHdSRDI0KzhiYnFqRlhEeUU4L25hKzlqM1JhUHFkUFBG?=
- =?utf-8?B?QThobHhkclJsN3Vhd28vWWhmU2RtMlNQLzB2ejlSR1lwaDBGWHJ5TWJ6dEg0?=
- =?utf-8?B?MU9vdy9NaXJvRlVldEx4TjBmYzVZcUpsblNaOTRsTjVtNTFRVnA3eXpKdU51?=
- =?utf-8?B?bVQ0emwvMUU2RC9NZUpCME16TVd5VHNDQkcwSjBLYUJVbC9pR2NwM29DUnly?=
- =?utf-8?B?WloyUitzd1N0YnNDVGRoSW50UGtra0RpUVdGNGFIZFVzdjVodmFIdnpiSnhh?=
- =?utf-8?B?NUwwRmVFWHkxZ3RlQUFKSXZMU2piUVZEa1BPRUNZL1QwZ0dZT3JxSVRxRzh1?=
- =?utf-8?B?WWN4Ynpma05OTWg4QWp6R2V4Sng3OGV3YldUQnlmNnd2bVAwSWlPdVBPTWxx?=
- =?utf-8?B?eFB4MGlXNmJEbEZGVDcyUkluYjFVVERIN0tUL3crQkI2SHV1a0JKUndMUGhN?=
- =?utf-8?B?aXBjc3diZWx4UEZPNDU0M2E1dEc2dHJGOUZwR0hUVEM5Qk4veGhxRGQxdkxm?=
- =?utf-8?B?M0l3cHJPam8yR25kVjV4Q01qQXRwWHpqc2J1UnBLZEpBQ2F4a1JHM2tLS1M0?=
- =?utf-8?B?UE45NHg2aHdWWVMrbEc2bzFjR1BiTGF4dlhiemJCK2VibE9HVy9yV25Vc1hO?=
- =?utf-8?B?MHF4d1lnNCtLOFN1bXFEUXNXY2VNZ3N1dGlVZ3p0VEFRdE5Vc3ltaGtjckRw?=
- =?utf-8?B?aFptS1lXREE1WENoMlpBd1BGL2lsOVlJa0JpL2lDWHRiUUxpSzB5RU9QZVNm?=
- =?utf-8?B?d1MxaEZEUTJjOUZKRlNOL2diOHd3WkMzeTlGejQyQjBBSk53VmVERVIxM1Ja?=
- =?utf-8?B?ditJSnVxZ2hsc21TblBMRFFGREJnOUZVd2RmdDVRbzhwOTRndzBRd2lvcjV5?=
- =?utf-8?B?RG1pU3FZLzZ6ZVJOOFA1bVVVQWRpV0Q2MlN4NmFlWHQ0UFB5SzhQd2Q5MG1E?=
- =?utf-8?B?VzM0WXo0VVc5M0t3TjlQRWFmY1ZzN2k5dW45citnaklVN0FwNGFVVWJYRzBw?=
- =?utf-8?B?bW1yYjVINUNYY3AxVDVzUHgrcFViM3VQM05zRFdCSWpadDZmaFhBb2thRTg3?=
- =?utf-8?B?cGFpQWVZTlVzV0x0Ym8xR0c1S1Z0Tmx2M3VKeGRvU1huYm1VQTdOM0h4ZHV6?=
- =?utf-8?B?UHFFQ3VGYnRHNVZ4U3kxcmhIRTFray9zaWJqWHo1dXAvUFg5VFhsVkc1VHRs?=
- =?utf-8?B?MkZzUThaelFacmcyOFdDQmtKWkxObDVUaFphRktBMVNMMTRHcE1oRERIYytq?=
- =?utf-8?Q?fiaJ7xPoHMYPnxyc0L5N295i7D0pEqufDA?=
+	=?us-ascii?Q?lM4eCkr6YprPZaC27sgd4+Hsqzj6aHSaDkb1X5dL5nJ0EqlE/hT7mXWgP6kN?=
+ =?us-ascii?Q?YlRGa9h3B8kE1sGx+9mcHQRiJUvldrS8M4itO6QEWW/CptDCzWo4VYYt7HDd?=
+ =?us-ascii?Q?Enjqq7jKpoq7AcM8XIP+GMOm0n9rG0l9S3kp2HCFi3bp5y5dJ0xiLdopOGOT?=
+ =?us-ascii?Q?9cZgtGxCb2xuUi8Cx5tj4otXiTOHLib5E2EWGdbaZEN6Rm7k80u1eeyE1peP?=
+ =?us-ascii?Q?hPSFEtm94ZWHT8kkf14mH6PCeiWvBNGHOAzfzZ8B7daBySTOJ3Vc/ghZDb3o?=
+ =?us-ascii?Q?4hNiwyw4lvnRvFXCUYA0l5tLH4fwj4V7qM3HlP0VpX9D7fj5iQ47QCZr4Gtg?=
+ =?us-ascii?Q?ONaZuZUcwVxBCRJJ32F3cqC83QPp5VzzPwqVdnlnpEMhhx0lwE2arYrsnCde?=
+ =?us-ascii?Q?GOn69rUUeZo/PsTBkJn/SRXE2xhztmiq0ZUUurX9chC5wP3T58ma498OlTlS?=
+ =?us-ascii?Q?KZ7ULLb3lturRt232n+ej6alK8oeGXPxLBreqMGEpBPY2ybB1pM41dtGt2qJ?=
+ =?us-ascii?Q?UDY+mlRvF6c/rXRq/T/Eftm/NOXz5uNts3CGfTZYyK9MfDD2ANaev/d8VY+9?=
+ =?us-ascii?Q?rC8bF4W2EsWiqKYNak9XtVD587+ReX7QAwrRVqUn0aKOVmX6udWmbgx48PXP?=
+ =?us-ascii?Q?go2LURHdUkePqj6yksWYNuHy+fcggrngVSChYJz1huTg/FYeFknXDICsL7Nr?=
+ =?us-ascii?Q?hDV9bGYTJ7xvkm1pAGKPPXd+kKOHT7MV/58yjblRyCKNafdqtNLmU6XcA6N3?=
+ =?us-ascii?Q?4nZBQakG1jVW5qqXJMbFolZKIzOSBuMrmheDO8//OQPtBwekdMXzk1PdI0KQ?=
+ =?us-ascii?Q?oAglmsp8qhY1kDF8vUszV++fPROo9mWXvyKfpByflg2PAtIcA4Fb02YT6BIv?=
+ =?us-ascii?Q?buGFcc9yscmOw9ZE8ny8YufFRZ9BXncQbj7OG0QKxZ9p+MNrMP4pKOA+ebNd?=
+ =?us-ascii?Q?RrJ8mikYk6iXZhjkzuJxwTriw2lp3UeuedpnBxMhgIaiqi+jBTv9G271IaVv?=
+ =?us-ascii?Q?iOAN?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3994.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2021 16:08:03.2925
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2021 17:26:19.4262
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-Network-Message-Id: be73e4a4-72d2-4a3a-8d5e-08d8b3ef93ee
+X-MS-Exchange-CrossTenant-Network-Message-Id: 31f3e31e-a26e-4c4b-df8f-08d8b3fa8310
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: CJScUDWMZF0fKDJ6/kBpbvT6EeNJa5YaUp16t5Rv4K+/lmaknSYecjPwLkANmPY3ufFD9/CxKEOBsreMqWA2xWTiifkcm3ciJz8RCEeWgno=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4150
-Content-Type: multipart/alternative;
- boundary="------------F498A7F20E9DB30572AE682B"
-Content-Language: en-US
-
---------------F498A7F20E9DB30572AE682B
+X-MS-Exchange-CrossTenant-UserPrincipalName: GEv1+qL1J6ORZ1KohwZQKcPEdvWMUYDSRj0wkNlGmpO5SxRWHAANQzeRFfjMLVNdbKQcyj8K8PwmRYYqTZ6uOvW6etDCOKJvpbUVZybEubw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB4724
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Language: en-CA
 
-
-On 2021-01-06 5:07 p.m., Leon Anavi wrote:
-> - CLDR: Use CLDR 37
-> - Dates: Handle ZoneInfo objects in get_timezone_location,
->    get_timezone_name
-> - Numbers: Add group_separator feature in number formatting
-> - Dates: Correct default Format().timedelta format to 'long' to
->    mute deprecation warnings
-> - Import: Simplify iteration code in "import_cldr.py"
-> - Import: Stop using deprecated ElementTree methods
->    "getchildren()" and "getiterator()"
-> - Messages: Fix unicode printing error on Python 2 without TTY.
-> - Messages: Introduce invariant that _invalid_pofile() takes
->    unicode line.
-> - Tests: fix tests when using Python 3.9
-> - Tests: Remove deprecated 'sudo: false' from Travis configuration
-> - Tests: Support Py.test 6.x
-> - Utilities: LazyProxy: Handle AttributeError in specified func
-> - Utilities: Replace usage of parser.suite with ast.parse
+On 2021-01-06 1:55 p.m., Khem Raj wrote:
+> Anuj and Randy FYI
 >
-> License-Update: Update year
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   .../{python3-babel_2.8.0.bb => python3-babel_2.9.0.bb}       | 5 ++---
->   1 file changed, 2 insertions(+), 3 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-babel_2.8.0.bb => python3-babel_2.9.0.bb} (70%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-babel_2.8.0.bb b/meta-python/recipes-devtools/python/python3-babel_2.9.0.bb
-> similarity index 70%
-> rename from meta-python/recipes-devtools/python/python3-babel_2.8.0.bb
-> rename to meta-python/recipes-devtools/python/python3-babel_2.9.0.bb
-> index c69098b226..7248abf33b 100644
-> --- a/meta-python/recipes-devtools/python/python3-babel_2.8.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-babel_2.9.0.bb
-> @@ -1,10 +1,9 @@
->   DESCRIPTION = "A collection of tools for internationalizing Python applications"
->   HOMEPAGE = "http://babel.edgewall.org/"
->   LICENSE = "BSD-3-Clause"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=942469df9305abb1c59e95f778310384"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=22a580b27e4ebf9689e466b63aedeb7f"
->   
-> -SRC_URI[md5sum] = "6fad9772e75421969ddb41975483abdf"
-> -SRC_URI[sha256sum] = "1aac2ae2d0d8ea368fa90906567f5c08463d98ade155c0c4bfedd6a0f7160e38"
-> +SRC_URI[sha256sum] = "da031ab54472314f210b0adcff1588ee5d1d1d0ba4dbd07b94dba82bde791e05"
->   
->   PYPI_PACKAGE = "Babel"
->   
->
-> 
->
+> On 1/6/21 7:16 AM, Andreas M=C3=BCller wrote:
+>> Compositor patch does not apply anymore and testing x86-64 excceeds my
+>> resources. Looked into Fedora sources: They build xfwm4 un-patched=20
+>> either.
 
---------------F498A7F20E9DB30572AE682B
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
+Thanks for the heads up Khem.
 
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 2021-01-06 5:07 p.m., Leon Anavi
-      wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:20210106220702.10483-10-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">- CLDR: Use CLDR 37
-- Dates: Handle ZoneInfo objects in get_timezone_location,
-  get_timezone_name
-- Numbers: Add group_separator feature in number formatting
-- Dates: Correct default Format().timedelta format to 'long' to
-  mute deprecation warnings
-- Import: Simplify iteration code in &quot;import_cldr.py&quot;
-- Import: Stop using deprecated ElementTree methods
-  &quot;getchildren()&quot; and &quot;getiterator()&quot;
-- Messages: Fix unicode printing error on Python 2 without TTY.
-- Messages: Introduce invariant that _invalid_pofile() takes
-  unicode line.
-- Tests: fix tests when using Python 3.9
-- Tests: Remove deprecated 'sudo: false' from Travis configuration
-- Tests: Support Py.test 6.x
-- Utilities: LazyProxy: Handle AttributeError in specified func
-- Utilities: Replace usage of parser.suite with ast.parse
+Kai, can you take a look in the coming days/weeks?
 
-License-Update: Update year
+../Randy
 
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
-    </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210106220702.10483-10-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">
----
- .../{python3-babel_2.8.0.bb =&gt; python3-babel_2.9.0.bb}       | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-babel_2.8.0.bb =&gt; python3-babel_2.9.0.bb} (70%)
+>>
+>> Release notes for 4.16.0
+>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D
+>> - common: Avoid zero refresh rate for monitor
+>> - hints: Protect against XError from XGetTransientFor()
+>> - netwm: Allow above/below only for regular windows
+>> - netwm: Mark splashscreen as transient for groups
+>> - client: Complete client state even on different workspaces
+>> - build: Increase GTK+ requirement to 3.22
+>> - Add `cycle_minimized` option
+>> - compositor: Release overlay window last
+>> - compositor: Free GLX data when really using GLX
+>> - compositor: Remove useless trace message
+>> - compositor: Release current GLX context on teardown
+>> - display: Remove custom XError handler
+>> - compositor: Check for XError when adding windows
+>> - compositor: Trap XErrors when disabling compositor
+>> - main: Enable compositor by default
+>> - compositor: Remove automatic redirect support
+>> - main: Add short command line options
+>> - main: Add debug command line option
+>> - pixmap: Use a safer strncpy()
+>> - settings: Fix compiler warning
+>> - Remove useless autotools macros and Makefile targets
+>> - Use --enable-debug=3Dyes when compiling from git
+>> - Revert "compositor: Do not damage on opaque region update"
+>> - themes: Use smaller, lighter shadows
+>> - compositor: Check if compositor is enabled
+>> - compositor: Avoid XError when disabling compositor
+>> - compositor: Warn for missing epoxy GL function
+>> - netwm: Do not raise window if activate is set to none
+>> - Remove GSourceFunc casts
+>> - compositor: Fix build with older epoxy versions
+>> - settings: Add 'Always on top' to the double click action
+>> - Settings: Remove default alphabetical sorting of keyboard shortcuts
+>> =C2=A0=C2=A0 Closes: #451 (Disable initial sorting of keyboard shortcut=
+s)
+>> - compositor: Handle XFixes XError
+>> - compositor: Add support for GL_ARB_sync
+>> - compositor: Return early if a Present swap is pending
+>> - debug: Fix build in debug mode
+>> - compositor: Fix compilation issue with Xpresent
+>> - compositor: Log fence and GLX swap time in debug mode
+>> - compositor: Move fence sync to redraw_glx
+>> - compositor: Move fence triggered to its own function
+>> - compositor: Set swap control if possible
+>> - compositor: Adjust to the actual number of buffers
+>> - compositor: Use a GLX drawable per buffer
+>> - client: Allow transients for group to be minimized
+>> - settings: Add a UI option for desktop zooming
+>> - themes: Remove title shadow
+>> - themes: Adjust shadows size/opacity
+>> - client: Make above/below consistent
+>> - compositor: Limit damage region to the screen
+>> - compositor: Optimize repaint without vblank
+>> - compositor: Only accumulate damage with multiple buffers
+>> - compositor: Copy entire content for GLX buffers
+>> - xsync: Handle XError
+>> - compositor: Ignore opaque region for shaded windows
+>> - compositor: Clip opaque region against window shape
+>> - client: Protect against XError in XKillClient()
+>> - compositor: Do not damage on opaque region update
+>> - compositor: Opaque region applies to client window
+>> - compositor: Reuse client size
+>> - client: Toggle tiling on key shortcut
+>> - client: Small cleanup
+>> - Add README.md to EXTRA_DIST
+>> - client: Keep tiled size of windows
+>> - compositor: No need to update compositor window on configure
+>> - compositor: Limit opaque region clipping to window extents
+>> - compositor: Damage on opaque region update only if visible
+>> - client: Send synthetic configure on force redraw
+>> - Post release tag bump
+>> - Translation Updates:
+>> =C2=A0=C2=A0 Albanian, Arabic, Armenian (Armenia), Basque, Belarusian, =
+Belarusian
+>> =C2=A0=C2=A0 (Tarask), Bengali, Bulgarian, Catalan, Chinese (China), Ch=
+inese (Hong
+>> =C2=A0=C2=A0 Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch, E=
+astern
+>> =C2=A0=C2=A0 Armenian, English (Australia), English (Canada), English (=
+United
+>> =C2=A0=C2=A0 Kingdom), Estonian, Finnish, French, Galician, Georgian, G=
+erman,
+>> =C2=A0=C2=A0 Greek, Hebrew, Hungarian, Icelandic, Indonesian, Interling=
+ue,
+>> =C2=A0=C2=A0 Italian, Japanese, Kazakh, Korean, Latvian, Lithuanian, Ma=
+lay,
+>> =C2=A0=C2=A0 Norwegian Bokm=C3=A5l, Norwegian Nynorsk, Occitan (post 15=
+00), Persian
+>> =C2=A0=C2=A0 (Iran), Polish, Portuguese, Portuguese (Brazil), Romanian,=
+ Russian,
+>> =C2=A0=C2=A0 Serbian, Slovak, Slovenian, Spanish, Swedish, Thai, Turkis=
+h,
+>> =C2=A0=C2=A0 Ukrainian, Urdu, Urdu (Pakistan), Uyghur
+>>
+>> Release notes for 4.15.3
+>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D
+>> [Please note that this is a development release.]
+>>
+>> - Quick release after 4.15.2 to fix a regression with opaque
+>> =C2=A0=C2=A0 regions leaving trails of unpainted areas on resize.
+>>
+>> Release notes for 4.15.2
+>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D
+>> [Please note this is a preview release of a development version]
+>>
+>> - Add support for opaque regions in the compositor
+>> - Make cursor zoom optional (xfce/xfwm4#439)
+>> - Remove the deprecated options "--daemon" (Pablo Mazzini)
+>> - Disable Xi2 support by default
+>> - Add column sorting in settings
+>> - Optimize window matching in the compositor with a hash table
+>> =C2=A0=C2=A0 (Michael Banack)
+>> - Add more XErrors traps
+>> - I18n: Updated translations: ar, ast, be, be@tarask, bg, bn, ca,
+>> =C2=A0=C2=A0 cs, da, de, el, en_AU, en_CA, en_GB, es, et, eu, fa_IR, fi=
+, fr,
+>> =C2=A0=C2=A0 gl, he, hr, hu, hy_AM, hye, id, ie, is, it, ja, ka, kk, ko=
+, lt,
+>> =C2=A0=C2=A0 lv, ms, nb, nl, nn, oc, pl, pt, pt_BR, ro, ru, sk, sl, sq,=
+ sr,
+>> =C2=A0=C2=A0 sv, th, tr, ug, uk, ur, ur_PK,
+>> =C2=A0=C2=A0 vi, zh_CN, zh_HK, zh_TW
+>> =C2=A0=C2=A0 New translations: be@tarask, fa_IR, hye, ka
+>>
+>> Release notes for 4.15.1
+>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D
+>> [Please note that this is a development release.]
+>>
+>> - Fix an error leak in compositor (xfce/xfwm4#351)
+>> - Fix compositor selection atom misuse
+>> - Prefer zero initialized memory allocation functions
+>> - Use g_slice allocator for compositor windows
+>>
+>> Release notes for 4.15.0
+>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D
+>> [Please note that this is a development release.]
+>>
+>> - First 4.15.x development release
+>> - Show tabwin only on primary monitor if set
+>> - All fixes and i18n as found in 4.14.4
+>>
+>> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+>> ---
+>> =C2=A0 ...r-Revert-to-GLX-as-default-vblank-me.patch | 92 -------------=
+------
+>> =C2=A0 .../{xfwm4_4.14.5.bb =3D> xfwm4_4.16.0.bb}=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 |=C2=A0 5 +-
+>> =C2=A0 2 files changed, 2 insertions(+), 95 deletions(-)
+>> =C2=A0 delete mode 100644=20
+>> meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-GLX=
+-as-default-vblank-me.patch
+>> =C2=A0 rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.14.5.bb =3D>=20
+>> xfwm4_4.16.0.bb} (82%)
+>>
+>> diff --git=20
+>> a/meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-G=
+LX-as-default-vblank-me.patch=20
+>> b/meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-G=
+LX-as-default-vblank-me.patch=20
+>>
+>> deleted file mode 100644
+>> index 04fd623e8..000000000
+>> ---=20
+>> a/meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-G=
+LX-as-default-vblank-me.patch
+>> +++ /dev/null
+>> @@ -1,92 +0,0 @@
+>> -From acdceb0b28d86199b8c2233880fa8a04cb24d4d4 Mon Sep 17 00:00:00 2001
+>> -From: Kai Kang <kai.kang@windriver.com>
+>> -Date: Wed, 24 Jul 2019 09:48:04 +0800
+>> -Subject: [PATCH] Revert "compositor: Revert to GLX as default vblank=
+=20
+>> method
+>> - (again)"
+>> -
+>> -This reverts commit e07574d6e7a2dbaa08c3ba4765c6306073d9493e.
+>> -
+>> -It sets the default vblank method (auto) to GLX from 4.13.2. But it
+>> -fails to start xfwm4 on intel-x86-64 boards with error:
+>> -
+>> -| xfwm4:=20
+>> ../mesa-19.1.1/src/mesa/drivers/dri/i965/intel_mipmap_tree.c:1293:
+>> -| intel_miptree_match_image: Assertion `image->TexObject->Target =3D=
+=3D=20
+>> mt->target' failed.
+>> -| Aborted
+>> -
+>> -There is also a RHEL defect:
+>> -https://bugzilla.redhat.com/show_bug.cgi?id=3D1678334
+>> -
+>> -Revert the commit to fix the issue.
+>> -
+>> -Upstream-Status: Inappropriate [workaround]
+>> -
+>> -Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>> ----
+>> - src/compositor.c | 41 +++++++++++++++++++----------------------
+>> - 1 file changed, 19 insertions(+), 22 deletions(-)
+>> -
+>> -diff --git a/src/compositor.c b/src/compositor.c
+>> -index 25615282..daced607 100644
+>> ---- a/src/compositor.c
+>> -+++ b/src/compositor.c
+>> -@@ -4483,13 +4483,28 @@ compositorManageScreen (ScreenInfo=20
+>> *screen_info)
+>> -=C2=A0=C2=A0=C2=A0=C2=A0 XClearArea (display_info->dpy, screen_info->o=
+utput, 0, 0, 0, 0,=20
+>> TRUE);
+>> -=C2=A0=C2=A0=C2=A0=C2=A0 TRACE ("manual compositing enabled");
+>> -
+>> -+#ifdef HAVE_PRESENT_EXTENSION
+>> -+=C2=A0=C2=A0=C2=A0 screen_info->use_present =3D display_info->have_pr=
+esent &&
+>> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (screen_info->vblank_mode =3D=3D=
+=20
+>> VBLANK_AUTO ||
+>> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->vblank_mode =3D=
+=
+=3D=20
+>> VBLANK_XPRESENT);
+>> -+=C2=A0=C2=A0=C2=A0 if (screen_info->use_present)
+>> -+=C2=A0=C2=A0=C2=A0 {
+>> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->present_pendi=
+ng =3D FALSE;
+>> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 XPresentSelectInput (displ=
+ay_info->dpy,
+>> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->output,
+>> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 PresentCompleteNotifyMask);
+>> -+=C2=A0=C2=A0=C2=A0 }
+>> -+#else /* HAVE_PRESENT_EXTENSION */
+>> -+=C2=A0=C2=A0=C2=A0 screen_info->use_present =3D FALSE;
+>> -+#endif /* HAVE_PRESENT_EXTENSION */
+>> -+
+>> - #ifdef HAVE_EPOXY
+>> --=C2=A0=C2=A0=C2=A0 screen_info->use_glx =3D (screen_info->vblank_mode=
+ =3D=3D VBLANK_AUTO ||
+>> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 screen_info->vblank_mode =3D=3D VBLANK_GLX);
+>> -+=C2=A0=C2=A0=C2=A0 screen_info->use_glx =3D !screen_info->use_present=
+ &&
+>> - #ifdef HAVE_XSYNC
+>> --=C2=A0=C2=A0=C2=A0 screen_info->use_glx &=3D display_info->have_xsync=
+;
+>> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 display_info->have_xsync &&
+>> - #endif /* HAVE_XSYNC */
+>> --=20
+>> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 (screen_info->vblank_mode =3D=3D=20
+>> VBLANK_AUTO ||
+>> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->vblank_mode =3D=3D VBLANK_GLX);
+>> -=C2=A0=C2=A0=C2=A0=C2=A0 if (screen_info->use_glx)
+>> -=C2=A0=C2=A0=C2=A0=C2=A0 {
+>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->glx_cont=
+ext =3D None;
+>> -@@ -4503,24 +4518,6 @@ compositorManageScreen (ScreenInfo *screen_info=
+)
+>> -=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->use_glx =3D FALSE;
+>> - #endif /* HAVE_EPOXY */
+>> -
+>> --#ifdef HAVE_PRESENT_EXTENSION
+>> --=C2=A0=C2=A0=C2=A0 screen_info->use_present =3D display_info->have_pr=
+esent &&
+>> --#ifdef HAVE_EPOXY
+>> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 !screen_info->use_glx &&
+>> --#endif /* HAVE_EPOXY */
+>> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (screen_info->vblank_mode =3D=3D=
+=20
+>> VBLANK_AUTO ||
+>> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->vblank_mode =3D=
+=
+=3D=20
+>> VBLANK_XPRESENT);
+>> --=C2=A0=C2=A0=C2=A0 if (screen_info->use_present)
+>> --=C2=A0=C2=A0=C2=A0 {
+>> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->present_pendi=
+ng =3D FALSE;
+>> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 XPresentSelectInput (displ=
+ay_info->dpy,
+>> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->output,
+>> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 PresentCompleteNotifyMask);
+>> --=C2=A0=C2=A0=C2=A0 }
+>> --#else /* HAVE_PRESENT_EXTENSION */
+>> --=C2=A0=C2=A0=C2=A0 screen_info->use_present =3D FALSE;
+>> --#endif /* HAVE_PRESENT_EXTENSION */
+>> --=20
+>> -=C2=A0=C2=A0=C2=A0=C2=A0 if (screen_info->use_present)
+>> -=C2=A0=C2=A0=C2=A0=C2=A0 {
+>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 g_info ("Compositor u=
+sing XPresent for vsync");
+>> ---
+>> -2.20.1
+>> -
+>> diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.5.bb=20
+>> b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.16.0.bb
+>> similarity index 82%
+>> rename from meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.5.bb
+>> rename to meta-xfce/recipes-xfce/xfwm4/xfwm4_4.16.0.bb
+>> index f8febe804..3f64365f0 100644
+>> --- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.5.bb
+>> +++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.16.0.bb
+>> @@ -2,14 +2,13 @@ DESCRIPTION =3D "Xfce4 Window Manager"
+>> =C2=A0 SECTION =3D "x11/wm"
+>> =C2=A0 LICENSE =3D "GPLv2"
+>> =C2=A0 LIC_FILES_CHKSUM =3D=20
+>> "file://COPYING;md5=3Dd791728a073bc009b4ffaf00b7599855"
+>> -DEPENDS =3D "virtual/libx11 libxfce4ui libwnck3 libxinerama exo-native=
+"
+>> +DEPENDS =3D "virtual/libx11 libxfce4ui libwnck3 libxinerama"
+>> =C2=A0 =C2=A0 inherit xfce update-alternatives features_check
+>> =C2=A0 =C2=A0 REQUIRED_DISTRO_FEATURES =3D "x11"
+>> =C2=A0 -SRC_URI +=3D=20
+>> "file://0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patch=
+"
+>> -SRC_URI[sha256sum] =3D=20
+>> "d7a7c63fa42ec6d7cb3caab130d6f496be5bd7689b775d20e8786b7f3e282930"
+>> +SRC_URI[sha256sum] =3D=20
+>> "1e22eae1bbb66cebfd1753b0a5606e76ecbf6b09ce4cdfd732d093c936f1feb3"
+>> =C2=A0 =C2=A0 PACKAGECONFIG ?=3D " \
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ${@bb.utils.contains('DISTRO_FEATURES', =
+'opengl', 'epoxy', '',=20
+>> d)} \
+>>
+>>
+>>
+>>=20
+>>
 
-diff --git a/meta-python/recipes-devtools/python/python3-babel_2.8.0.bb b/meta-python/recipes-devtools/python/python3-babel_2.9.0.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-babel_2.8.0.bb
-rename to meta-python/recipes-devtools/python/python3-babel_2.9.0.bb
-index c69098b226..7248abf33b 100644
---- a/meta-python/recipes-devtools/python/python3-babel_2.8.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-babel_2.9.0.bb
-@@ -1,10 +1,9 @@
- DESCRIPTION = &quot;A collection of tools for internationalizing Python applications&quot;
- HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://babel.edgewall.org/">&quot;http://babel.edgewall.org/&quot;</a>
- LICENSE = &quot;BSD-3-Clause&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=942469df9305abb1c59e95f778310384">&quot;file://LICENSE;md5=942469df9305abb1c59e95f778310384&quot;</a>
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=22a580b27e4ebf9689e466b63aedeb7f">&quot;file://LICENSE;md5=22a580b27e4ebf9689e466b63aedeb7f&quot;</a>
- 
--SRC_URI[md5sum] = &quot;6fad9772e75421969ddb41975483abdf&quot;
--SRC_URI[sha256sum] = &quot;1aac2ae2d0d8ea368fa90906567f5c08463d98ade155c0c4bfedd6a0f7160e38&quot;
-+SRC_URI[sha256sum] = &quot;da031ab54472314f210b0adcff1588ee5d1d1d0ba4dbd07b94dba82bde791e05&quot;
- 
- PYPI_PACKAGE = &quot;Babel&quot;
- 
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
+--=20
+# Randy MacLeod
+# Wind River Linux
 
-
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------F498A7F20E9DB30572AE682B--
