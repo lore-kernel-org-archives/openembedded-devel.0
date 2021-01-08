@@ -1,117 +1,64 @@
-Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net [217.70.183.196])
- by mx.groups.io with SMTP id smtpd.web10.442.1610086888699065513
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.1905.1610101707601376547
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Jan 2021 22:21:29 -0800
+ Fri, 08 Jan 2021 02:28:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: bootlin.com, ip: 217.70.183.196, mailfrom: thomas.perrot@bootlin.com)
-X-Originating-IP: 88.162.151.131
-Received: from [192.168.1.67] (unknown [88.162.151.131])
-	(Authenticated sender: thomas.perrot@bootlin.com)
-	by relay4-d.mail.gandi.net (Postfix) with ESMTPSA id 18688E0005;
-	Fri,  8 Jan 2021 06:21:25 +0000 (UTC)
-Message-ID: <588762a734ff5fb78471a17a4e10721f9018696a.camel@bootlin.com>
-Subject: Re: [oe] [OE-core][PATCH] go.bbclass: don't stage test data with sources of dependencies
-From: "Thomas Perrot" <thomas.perrot@bootlin.com>
-To: Khem Raj <raj.khem@gmail.com>, tperrot <thomas.perrot@tupi.fr>, 
-	openembedded-devel@lists.openembedded.org
-Date: Fri, 08 Jan 2021 07:21:24 +0100
-In-Reply-To: <0319ba44-3ac6-d21c-b483-4ce0dba17ff8@gmail.com>
-References: <20210107180238.1866108-1-thomas.perrot@tupi.fr>
-	 <0319ba44-3ac6-d21c-b483-4ce0dba17ff8@gmail.com>
-User-Agent: Evolution 3.38.2 (3.38.2-1.fc33) 
-MIME-Version: 1.0
-X-Groupsio-MsgNum: 88610
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-IRZh07lPE6gkufXHwQE8"
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=44762 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1kxp0K-0000kU-L2; Fri, 08 Jan 2021 12:28:25 +0200
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-jsonrpcserver: Upgrade 4.1.3 -> 4.2.0
+Date: Fri,  8 Jan 2021 12:28:12 +0200
+Message-Id: <20210108102814.9560-3-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210108102814.9560-1-leon.anavi@konsulko.com>
+References: <20210108102814.9560-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
---=-IRZh07lPE6gkufXHwQE8
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Upgrade to release 4.2.0:
 
-Hi Khem,
+- Add ability to use custom serializer and deserializer
+- Add ability to use custom method name
+- Deny additional parameters in json-rpc request
 
-On Thu, 2021-01-07 at 12:43 -0800, Khem Raj wrote:
-> Hi Thomas
->=20
-> This needs to go into openembedded-core mailing list.
->=20
-Thank you and sorry for my mistake.
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ ...3-jsonrpcserver_4.1.3.bb => python3-jsonrpcserver_4.2.0.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-jsonrpcserver_4.1.3.bb => python3-jsonrpcserver_4.2.0.bb} (76%)
 
-Best regards,
-Thomas
+diff --git a/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.1.3.bb b/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.2.0.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-jsonrpcserver_4.1.3.bb
+rename to meta-python/recipes-devtools/python/python3-jsonrpcserver_4.2.0.bb
+index 75a0926f0..53f01f622 100644
+--- a/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.1.3.bb
++++ b/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.2.0.bb
+@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/bcb/jsonrpcserver"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c89120516900f96f4c60d35fdc4c3f15"
+ 
+-SRC_URI[md5sum] = "e73b0bd90e99115d3f9e0ac42882c5b7"
+-SRC_URI[sha256sum] = "649680c293facb6ae7c3f5c8028e4623c55195db5216847e9f25f85cba2d443a"
++SRC_URI[sha256sum] = "0c9e5b9445621138521e912016ae39b3badadd2607140dcbb0c8062934ab4854"
+ 
+ inherit pypi setuptools3
+ 
+-- 
+2.17.1
 
-> On 1/7/21 10:02 AM, tperrot wrote:
-> > From: Thomas Perrot <thomas.perrot@bootlin.com>
-> >=20
-> > As for the sources the dependencies contain test data, ELF files
-> > and other
-> > binaries which aren't necessary for building and which lead to
-> > unnecessary QA
-> > warnings.
-> >=20
-> > Signed-off-by: Thomas Perrot <thomas.perrot@bootlin.com>
-> > ---
-> > =C2=A0 meta/classes/go.bbclass | 3 ++-
-> > =C2=A0 1 file changed, 2 insertions(+), 1 deletion(-)
-> >=20
-> > diff --git a/meta/classes/go.bbclass b/meta/classes/go.bbclass
-> > index 5b26378a4e..fa147892b0 100644
-> > --- a/meta/classes/go.bbclass
-> > +++ b/meta/classes/go.bbclass
-> > @@ -116,7 +116,8 @@ go_do_install() {
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0install -d ${D}${libdi=
-r}/go/src/${GO_IMPORT}
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0tar -C ${S}/src/${GO_I=
-MPORT} -cf - --exclude-vcs --exclude
-> > '*.test' --exclude 'testdata' . | \
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0tar -C ${D}${libdir}/go/src/${GO_IMPORT} --no-s=
-ame-
-> > owner -xf -
-> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0tar -C ${B} -cf - --exclude=
--vcs pkg | tar -C
-> > ${D}${libdir}/go --no-same-owner -xf -
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0tar -C ${B} -cf - --exclude=
--vcs --exclude '*.test' --
-> > exclude 'testdata' pkg | \
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=
-=A0=C2=A0=C2=A0=C2=A0tar -C ${D}${libdir}/go --no-same-owner -xf -
-> > =C2=A0=20
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if [ -n "`ls ${B}/${GO=
-_BUILD_BINDIR}/`" ]; then
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0install -d ${D}${bindir}
-> >=20
-> >=20
-> >=20
-> >=20
-> >=20
-
---=20
-Thomas Perrot, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
-
-
---=-IRZh07lPE6gkufXHwQE8
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCAAdFiEEh0B3xqajCiMDqBIhn8ALBXH+Cu0FAl/3+eQACgkQn8ALBXH+
-Cu0zlQwApOQ8gm0y07hyh3z6eDFk1YB3+sSps3EDW+HLet495b4ggklVY2/nv1Ma
-G2HoInjyQQN0XGiaqccwCxA/WWixjp8v0mm4+XZotrh//6H6nIXwUYEsNMXdziBN
-hktUyvzyJR32QqCYV7MFyXQnRfnFkxu+R35+ZZEJ10gXUhoC/PckBckk1l0D5q2W
-D8YM7PtjshZHvBvc5MeZOjK4PtjptQO0dSL9UzimlQKUyNYK1DF6FGot/qbPDu4t
-sKXT45EBGaY4inItpa4oeSuJrg34bmlWcCfmlTF9CvwXN9r++nBCGO3OA5rrnRQ7
-Gyh/+mPle5om0OCLZHCYoFqEnFXXSZhYQe7kFlL/DJAt5B2i8gsEKO17vMWZ8JIw
-5C469Lk/57uzYsHf34vXuz5tkIowR+hsjirphiDD/cavyCFhvH0nfAqTvgJCqwmG
-JHsROelDiBoFbWvrBuZdNZrt0KcWtk9+RDXUw5+UmQp5LbP7vqY4BgCLBWkXQ4oC
-WCaRpMIL
-=nV+C
------END PGP SIGNATURE-----
-
---=-IRZh07lPE6gkufXHwQE8--
