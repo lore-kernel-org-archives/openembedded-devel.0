@@ -1,492 +1,383 @@
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.84])
- by mx.groups.io with SMTP id smtpd.web12.303.1610126781474102528
+Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com [209.85.222.173])
+ by mx.groups.io with SMTP id smtpd.web09.824.1610135663178771649
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 08 Jan 2021 09:26:22 -0800
+ Fri, 08 Jan 2021 11:54:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=YkpBX9qY;
- spf=pass (domain: windriver.com, ip: 40.107.236.84, mailfrom: randy.macleod@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZS7uk8X8APLiA+0WNixTRfydod2v3lx90RnOxc3MTlsMYpqcOCB+mihmruXQVf7ZgZbKDjov2tJGAl2Uam+aPxbxgU7C3Sy7im9JqlQDCWO/DM7Yo+RFPrSNEWzuE1qrWXHSsIwjl1HLqc5HNF4Q5dueL0QWTvt7l9Z8BOVTvJJR01hcTIq7EFwd5cdNCe37XJR1fNbG8QF4g8MIfBLzDd93JwQCXaZPGe9SyM/HZ2hx4WcJuFkZmPdY+LrHSfM6BM7C8hFEjd/b7HuCCESj4Ly0Ffe+hIB2n8lttImvdUy0y5q4NXc9WWLodTxnr6QSVDVnXLiJTXkDmLKWr7Ykug==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OBc1pW56A8rTsd4emhnmdhsC1/TmWMrLh/WoPut0RA4=;
- b=FamL1ACWe2PUJvcLXELLN2rFhlhd0yR6Me38CIIm3ldEPQt0w0LXlE1FmhMWe76QzsMXq7J1PGj3ImJEEaE1ppRCllwd8+2UY75B9LbPl2Aly7eO5hRSTrun+TzCb7uaAs4JIWSrvmPMq1bPMRsLK3jcXznndWLT5A6E8gx56qf6jokITgRN11EBNV1OdfbhClsyB+Dvx9PzHKEVT8fnSvZcEr1TKQ7z99muWS1wDhoOYRy9Zgd+mt3zELDPcM2fQFzbyEWRu0Dc3aBO4PuRusbF+Zby+pW40BVwrlaiQ4BANzE570xehJHxTMHB1BgkZXUUgoquCqitKv7X5LDTag==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=DwTgGfbb;
+ spf=pass (domain: gmail.com, ip: 209.85.222.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f173.google.com with SMTP id 19so9540325qkm.8
+        for <openembedded-devel@lists.openembedded.org>; Fri, 08 Jan 2021 11:54:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OBc1pW56A8rTsd4emhnmdhsC1/TmWMrLh/WoPut0RA4=;
- b=YkpBX9qYlGR2RBqP33ZbI6vZgc/aM9X13Moxv3nWhwNwW4vpM6/hG4lVDybfkv8ZC22MUpeUHbtOES7adg7WZdj1J4uhUolyJYsH2MlpJLj/BQP8rK6dDrmkS2pdYw0wcOPTeEqSfGZXfQCoBenGzDAjRPjG7K8jqvFRX+0dIyE=
-Authentication-Results: windriver.com; dkim=none (message not signed)
- header.d=none;windriver.com; dmarc=none action=none
- header.from=windriver.com;
-Received: from DM6PR11MB3994.namprd11.prod.outlook.com (2603:10b6:5:193::19)
- by DM6PR11MB4724.namprd11.prod.outlook.com (2603:10b6:5:2ad::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.6; Fri, 8 Jan
- 2021 17:26:19 +0000
-Received: from DM6PR11MB3994.namprd11.prod.outlook.com
- ([fe80::8e2:471a:7b63:1a0e]) by DM6PR11MB3994.namprd11.prod.outlook.com
- ([fe80::8e2:471a:7b63:1a0e%7]) with mapi id 15.20.3742.006; Fri, 8 Jan 2021
- 17:26:19 +0000
-Subject: Re: [oe] [PATCH 07/28] xfwm4: upgrade 4.14.5 -> 4.16.0
-To: Khem Raj <raj.khem@gmail.com>, =?UTF-8?Q?Andreas_M=c3=bcller?=
- <schnitzeltony@gmail.com>, openembedded-devel@lists.openembedded.org,
- "Mittal, Anuj" <anuj.mittal@intel.com>, Kang Kai <kai.kang@windriver.com>
-References: <20210106151717.1779543-1-schnitzeltony@gmail.com>
- <20210106151717.1779543-7-schnitzeltony@gmail.com>
- <d1bd0b10-bdd2-6820-61c1-38b7c8e5dc7e@gmail.com>
-From: "Randy MacLeod" <randy.macleod@windriver.com>
-Message-ID: <7aabf117-f702-0813-db20-831446869875@windriver.com>
-Date: Fri, 8 Jan 2021 12:25:21 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.0
-In-Reply-To: <d1bd0b10-bdd2-6820-61c1-38b7c8e5dc7e@gmail.com>
-X-Originating-IP: [198.48.226.187]
-X-ClientProxiedBy: SJ0PR03CA0130.namprd03.prod.outlook.com
- (2603:10b6:a03:33c::15) To DM6PR11MB3994.namprd11.prod.outlook.com
- (2603:10b6:5:193::19)
-Return-Path: randy.macleod@windriver.com
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=Qj0OruVFsKRlk3LhieFVHRXOrsX9xYIOXjEVvwppt2I=;
+        b=DwTgGfbbjlDBQIl7iG2UW6ecO1UYrkN4iZYI54soK1cLNPpHR04l4JRBb611RxkSWs
+         5it0vX+SduOTYlA1Nbesb1NONPpmSGXsJl8gh/IFJSFb/KoNT5llpjyqq72zbay9VtKu
+         R6gv8VXcdxNs7RJl3evux3HMtDfWpsWfBhoMJ64tYxrMVCulDuXFcNyrS33Fr4HGjvAa
+         E7iFGGQZ8Yc5E5iw5MHNo3ntU765CLvuSOw/Ip8v4mzkP8MRqZdSsUSM+ZLQWmgrJ9Td
+         bY28l0B0KWbr9gD9fj8Mmh42gim+tam7eUZWKp7HSGZoUfbplxoc7OQ1tHk7imbEruMZ
+         nYYw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=Qj0OruVFsKRlk3LhieFVHRXOrsX9xYIOXjEVvwppt2I=;
+        b=RDNyL7bFMV50ZkssP2/+GAQYA2SvkPbwY1pHHYFaKT1jyKAoPADinncjqBi18nueP/
+         b+2/gqCUaYEedPX8Mk9kcOe7WtW7QespQVD6D0nGoLJrKwOlc/FaeRO9ihMRnU4JwHdQ
+         rps0kVVLnCAe9vAjPrPUVTBhyvdWqSrm7qfU0XJnOYAr7572p3cC1Arlk6LS1BdLwWkv
+         5V36fDwQKy4hM7T6iyvB3JrA8EzlSjxTnJDCPKmZNl1iyRaN65qS5Ec5IX8ESY317TEB
+         +uSz32cf7rlcVmIAZQUT1+1WKtZEcwBhx97Fo39Zxo24PLcOxkw07TYjd/ri6oxbykNg
+         J71A==
+X-Gm-Message-State: AOAM530Lt9iRLAx40vUiTeqtH6aXESN7D6lWTn6bCK2DG53nPanCfDzu
+	yuXUXpimn6dxLCiMJeSCWrc7R3aA71NnnHoEwhU=
+X-Google-Smtp-Source: ABdhPJyjmL1ddCpuRMQ7TlVNYwvJ7dublhF51rLDysQIIly6ssqhF/R2NpPy9HNz0chNLvd11GjO3LkbKcrA2c1taX8=
+X-Received: by 2002:a37:6189:: with SMTP id v131mr5271370qkb.337.1610135662042;
+ Fri, 08 Jan 2021 11:54:22 -0800 (PST)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [172.25.44.2] (198.48.226.187) by SJ0PR03CA0130.namprd03.prod.outlook.com (2603:10b6:a03:33c::15) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.6 via Frontend Transport; Fri, 8 Jan 2021 17:26:18 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 31f3e31e-a26e-4c4b-df8f-08d8b3fa8310
-X-MS-TrafficTypeDiagnostic: DM6PR11MB4724:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<DM6PR11MB4724563CC9D039F95F557DF0F8AE0@DM6PR11MB4724.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:312;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	zXRUqaStzMyZNMQstVp/zmOagKocYtZnayGKWeZDbG5dhB6Yht7m/wErzwxrNMryBqnel3SSn5/z1CHeBIQsZSyYpOYte0nzjs6sENkgWxNYOre1gAae8/pJk9gUii6WKl2/YMNvFoXpT1+GsDVkx+Uw+YCxhaNToTFBf3Ot+BCCxswJhDuImnhVIqu0URxWVWKckqdd2rbSf/+JStakP0CsCNtNmTw1THRL8Mq40U8U+BSAeOw47tn9nxmm2ZorCtOTKiV7YqbXWl5Y/kcQrO4KBpAm8b4MeP5S0yJl3pe/v5SQQGukgt8Cl0F3v7uAnaBYsvmkL7hoPrdRaWsb52Rr1K+bD/1bouGnviDfibqSkQ6ET02HTZyD0Z03wf0Ok3sqOsPKCCqJSygsA1OwFegwqFgw1EeqMrdPAI5Gm92Wn39uUjorb/e/ZpzX+ESSPdJi8IKC2/A5QvSjO1g+1ZQpuJtlBlrRj3+49xy/r1q5aRaq+4Iw6elTeqH/XkMJXjThWdXDQLnxtXfMDw/m1cVJ4VbZ0Zd6F7ePNIaxpuhHR06NVuuac7eIpTOoeldX
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3994.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(136003)(366004)(396003)(39850400004)(346002)(110136005)(66556008)(66946007)(6666004)(478600001)(31696002)(66476007)(966005)(83380400001)(6486002)(16576012)(31686004)(186003)(956004)(2616005)(2906002)(53546011)(26005)(86362001)(16526019)(8936002)(316002)(30864003)(36756003)(6636002)(52116002)(66574015)(8676002)(5660300002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?lM4eCkr6YprPZaC27sgd4+Hsqzj6aHSaDkb1X5dL5nJ0EqlE/hT7mXWgP6kN?=
- =?us-ascii?Q?YlRGa9h3B8kE1sGx+9mcHQRiJUvldrS8M4itO6QEWW/CptDCzWo4VYYt7HDd?=
- =?us-ascii?Q?Enjqq7jKpoq7AcM8XIP+GMOm0n9rG0l9S3kp2HCFi3bp5y5dJ0xiLdopOGOT?=
- =?us-ascii?Q?9cZgtGxCb2xuUi8Cx5tj4otXiTOHLib5E2EWGdbaZEN6Rm7k80u1eeyE1peP?=
- =?us-ascii?Q?hPSFEtm94ZWHT8kkf14mH6PCeiWvBNGHOAzfzZ8B7daBySTOJ3Vc/ghZDb3o?=
- =?us-ascii?Q?4hNiwyw4lvnRvFXCUYA0l5tLH4fwj4V7qM3HlP0VpX9D7fj5iQ47QCZr4Gtg?=
- =?us-ascii?Q?ONaZuZUcwVxBCRJJ32F3cqC83QPp5VzzPwqVdnlnpEMhhx0lwE2arYrsnCde?=
- =?us-ascii?Q?GOn69rUUeZo/PsTBkJn/SRXE2xhztmiq0ZUUurX9chC5wP3T58ma498OlTlS?=
- =?us-ascii?Q?KZ7ULLb3lturRt232n+ej6alK8oeGXPxLBreqMGEpBPY2ybB1pM41dtGt2qJ?=
- =?us-ascii?Q?UDY+mlRvF6c/rXRq/T/Eftm/NOXz5uNts3CGfTZYyK9MfDD2ANaev/d8VY+9?=
- =?us-ascii?Q?rC8bF4W2EsWiqKYNak9XtVD587+ReX7QAwrRVqUn0aKOVmX6udWmbgx48PXP?=
- =?us-ascii?Q?go2LURHdUkePqj6yksWYNuHy+fcggrngVSChYJz1huTg/FYeFknXDICsL7Nr?=
- =?us-ascii?Q?hDV9bGYTJ7xvkm1pAGKPPXd+kKOHT7MV/58yjblRyCKNafdqtNLmU6XcA6N3?=
- =?us-ascii?Q?4nZBQakG1jVW5qqXJMbFolZKIzOSBuMrmheDO8//OQPtBwekdMXzk1PdI0KQ?=
- =?us-ascii?Q?oAglmsp8qhY1kDF8vUszV++fPROo9mWXvyKfpByflg2PAtIcA4Fb02YT6BIv?=
- =?us-ascii?Q?buGFcc9yscmOw9ZE8ny8YufFRZ9BXncQbj7OG0QKxZ9p+MNrMP4pKOA+ebNd?=
- =?us-ascii?Q?RrJ8mikYk6iXZhjkzuJxwTriw2lp3UeuedpnBxMhgIaiqi+jBTv9G271IaVv?=
- =?us-ascii?Q?iOAN?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3994.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2021 17:26:19.4262
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-Network-Message-Id: 31f3e31e-a26e-4c4b-df8f-08d8b3fa8310
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GEv1+qL1J6ORZ1KohwZQKcPEdvWMUYDSRj0wkNlGmpO5SxRWHAANQzeRFfjMLVNdbKQcyj8K8PwmRYYqTZ6uOvW6etDCOKJvpbUVZybEubw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB4724
-Content-Type: text/plain; charset=utf-8; format=flowed
+References: <20210106151717.1779543-1-schnitzeltony@gmail.com> <20210106151717.1779543-4-schnitzeltony@gmail.com>
+In-Reply-To: <20210106151717.1779543-4-schnitzeltony@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 8 Jan 2021 11:53:56 -0800
+Message-ID: <CAMKF1srRCWhAcsVaNM=rou6_ys+KC_16PyB4KGB+Kj2vjfvZWQ@mail.gmail.com>
+Subject: Re: [oe] [PATCH 04/28] libxfce4ui: upgrade 4.14.1 -> 4.16.0
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Language: en-CA
 
-On 2021-01-06 1:55 p.m., Khem Raj wrote:
-> Anuj and Randy FYI
+I see an odd failure on qemuriscv64
+https://errors.yoctoproject.org/Errors/Details/540832/
+
+On Wed, Jan 6, 2021 at 7:17 AM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m> wrote:
 >
-> On 1/6/21 7:16 AM, Andreas M=C3=BCller wrote:
->> Compositor patch does not apply anymore and testing x86-64 excceeds my
->> resources. Looked into Fedora sources: They build xfwm4 un-patched=20
->> either.
-
-Thanks for the heads up Khem.
-
-Kai, can you take a look in the coming days/weeks?
-
-../Randy
-
->>
->> Release notes for 4.16.0
->> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
->> - common: Avoid zero refresh rate for monitor
->> - hints: Protect against XError from XGetTransientFor()
->> - netwm: Allow above/below only for regular windows
->> - netwm: Mark splashscreen as transient for groups
->> - client: Complete client state even on different workspaces
->> - build: Increase GTK+ requirement to 3.22
->> - Add `cycle_minimized` option
->> - compositor: Release overlay window last
->> - compositor: Free GLX data when really using GLX
->> - compositor: Remove useless trace message
->> - compositor: Release current GLX context on teardown
->> - display: Remove custom XError handler
->> - compositor: Check for XError when adding windows
->> - compositor: Trap XErrors when disabling compositor
->> - main: Enable compositor by default
->> - compositor: Remove automatic redirect support
->> - main: Add short command line options
->> - main: Add debug command line option
->> - pixmap: Use a safer strncpy()
->> - settings: Fix compiler warning
->> - Remove useless autotools macros and Makefile targets
->> - Use --enable-debug=3Dyes when compiling from git
->> - Revert "compositor: Do not damage on opaque region update"
->> - themes: Use smaller, lighter shadows
->> - compositor: Check if compositor is enabled
->> - compositor: Avoid XError when disabling compositor
->> - compositor: Warn for missing epoxy GL function
->> - netwm: Do not raise window if activate is set to none
->> - Remove GSourceFunc casts
->> - compositor: Fix build with older epoxy versions
->> - settings: Add 'Always on top' to the double click action
->> - Settings: Remove default alphabetical sorting of keyboard shortcuts
->> =C2=A0=C2=A0 Closes: #451 (Disable initial sorting of keyboard shortcut=
-s)
->> - compositor: Handle XFixes XError
->> - compositor: Add support for GL_ARB_sync
->> - compositor: Return early if a Present swap is pending
->> - debug: Fix build in debug mode
->> - compositor: Fix compilation issue with Xpresent
->> - compositor: Log fence and GLX swap time in debug mode
->> - compositor: Move fence sync to redraw_glx
->> - compositor: Move fence triggered to its own function
->> - compositor: Set swap control if possible
->> - compositor: Adjust to the actual number of buffers
->> - compositor: Use a GLX drawable per buffer
->> - client: Allow transients for group to be minimized
->> - settings: Add a UI option for desktop zooming
->> - themes: Remove title shadow
->> - themes: Adjust shadows size/opacity
->> - client: Make above/below consistent
->> - compositor: Limit damage region to the screen
->> - compositor: Optimize repaint without vblank
->> - compositor: Only accumulate damage with multiple buffers
->> - compositor: Copy entire content for GLX buffers
->> - xsync: Handle XError
->> - compositor: Ignore opaque region for shaded windows
->> - compositor: Clip opaque region against window shape
->> - client: Protect against XError in XKillClient()
->> - compositor: Do not damage on opaque region update
->> - compositor: Opaque region applies to client window
->> - compositor: Reuse client size
->> - client: Toggle tiling on key shortcut
->> - client: Small cleanup
->> - Add README.md to EXTRA_DIST
->> - client: Keep tiled size of windows
->> - compositor: No need to update compositor window on configure
->> - compositor: Limit opaque region clipping to window extents
->> - compositor: Damage on opaque region update only if visible
->> - client: Send synthetic configure on force redraw
->> - Post release tag bump
->> - Translation Updates:
->> =C2=A0=C2=A0 Albanian, Arabic, Armenian (Armenia), Basque, Belarusian, =
-Belarusian
->> =C2=A0=C2=A0 (Tarask), Bengali, Bulgarian, Catalan, Chinese (China), Ch=
-inese (Hong
->> =C2=A0=C2=A0 Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch, E=
-astern
->> =C2=A0=C2=A0 Armenian, English (Australia), English (Canada), English (=
-United
->> =C2=A0=C2=A0 Kingdom), Estonian, Finnish, French, Galician, Georgian, G=
-erman,
->> =C2=A0=C2=A0 Greek, Hebrew, Hungarian, Icelandic, Indonesian, Interling=
-ue,
->> =C2=A0=C2=A0 Italian, Japanese, Kazakh, Korean, Latvian, Lithuanian, Ma=
-lay,
->> =C2=A0=C2=A0 Norwegian Bokm=C3=A5l, Norwegian Nynorsk, Occitan (post 15=
-00), Persian
->> =C2=A0=C2=A0 (Iran), Polish, Portuguese, Portuguese (Brazil), Romanian,=
- Russian,
->> =C2=A0=C2=A0 Serbian, Slovak, Slovenian, Spanish, Swedish, Thai, Turkis=
-h,
->> =C2=A0=C2=A0 Ukrainian, Urdu, Urdu (Pakistan), Uyghur
->>
->> Release notes for 4.15.3
->> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
->> [Please note that this is a development release.]
->>
->> - Quick release after 4.15.2 to fix a regression with opaque
->> =C2=A0=C2=A0 regions leaving trails of unpainted areas on resize.
->>
->> Release notes for 4.15.2
->> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
->> [Please note this is a preview release of a development version]
->>
->> - Add support for opaque regions in the compositor
->> - Make cursor zoom optional (xfce/xfwm4#439)
->> - Remove the deprecated options "--daemon" (Pablo Mazzini)
->> - Disable Xi2 support by default
->> - Add column sorting in settings
->> - Optimize window matching in the compositor with a hash table
->> =C2=A0=C2=A0 (Michael Banack)
->> - Add more XErrors traps
->> - I18n: Updated translations: ar, ast, be, be@tarask, bg, bn, ca,
->> =C2=A0=C2=A0 cs, da, de, el, en_AU, en_CA, en_GB, es, et, eu, fa_IR, fi=
-, fr,
->> =C2=A0=C2=A0 gl, he, hr, hu, hy_AM, hye, id, ie, is, it, ja, ka, kk, ko=
-, lt,
->> =C2=A0=C2=A0 lv, ms, nb, nl, nn, oc, pl, pt, pt_BR, ro, ru, sk, sl, sq,=
- sr,
->> =C2=A0=C2=A0 sv, th, tr, ug, uk, ur, ur_PK,
->> =C2=A0=C2=A0 vi, zh_CN, zh_HK, zh_TW
->> =C2=A0=C2=A0 New translations: be@tarask, fa_IR, hye, ka
->>
->> Release notes for 4.15.1
->> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
->> [Please note that this is a development release.]
->>
->> - Fix an error leak in compositor (xfce/xfwm4#351)
->> - Fix compositor selection atom misuse
->> - Prefer zero initialized memory allocation functions
->> - Use g_slice allocator for compositor windows
->>
->> Release notes for 4.15.0
->> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
->> [Please note that this is a development release.]
->>
->> - First 4.15.x development release
->> - Show tabwin only on primary monitor if set
->> - All fixes and i18n as found in 4.14.4
->>
->> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
->> ---
->> =C2=A0 ...r-Revert-to-GLX-as-default-vblank-me.patch | 92 -------------=
-------
->> =C2=A0 .../{xfwm4_4.14.5.bb =3D> xfwm4_4.16.0.bb}=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 |=C2=A0 5 +-
->> =C2=A0 2 files changed, 2 insertions(+), 95 deletions(-)
->> =C2=A0 delete mode 100644=20
->> meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-GLX=
--as-default-vblank-me.patch
->> =C2=A0 rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.14.5.bb =3D>=20
->> xfwm4_4.16.0.bb} (82%)
->>
->> diff --git=20
->> a/meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-G=
-LX-as-default-vblank-me.patch=20
->> b/meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-G=
-LX-as-default-vblank-me.patch=20
->>
->> deleted file mode 100644
->> index 04fd623e8..000000000
->> ---=20
->> a/meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-G=
-LX-as-default-vblank-me.patch
->> +++ /dev/null
->> @@ -1,92 +0,0 @@
->> -From acdceb0b28d86199b8c2233880fa8a04cb24d4d4 Mon Sep 17 00:00:00 2001
->> -From: Kai Kang <kai.kang@windriver.com>
->> -Date: Wed, 24 Jul 2019 09:48:04 +0800
->> -Subject: [PATCH] Revert "compositor: Revert to GLX as default vblank=
-=20
->> method
->> - (again)"
->> -
->> -This reverts commit e07574d6e7a2dbaa08c3ba4765c6306073d9493e.
->> -
->> -It sets the default vblank method (auto) to GLX from 4.13.2. But it
->> -fails to start xfwm4 on intel-x86-64 boards with error:
->> -
->> -| xfwm4:=20
->> ../mesa-19.1.1/src/mesa/drivers/dri/i965/intel_mipmap_tree.c:1293:
->> -| intel_miptree_match_image: Assertion `image->TexObject->Target =3D=
-=3D=20
->> mt->target' failed.
->> -| Aborted
->> -
->> -There is also a RHEL defect:
->> -https://bugzilla.redhat.com/show_bug.cgi?id=3D1678334
->> -
->> -Revert the commit to fix the issue.
->> -
->> -Upstream-Status: Inappropriate [workaround]
->> -
->> -Signed-off-by: Kai Kang <kai.kang@windriver.com>
->> ----
->> - src/compositor.c | 41 +++++++++++++++++++----------------------
->> - 1 file changed, 19 insertions(+), 22 deletions(-)
->> -
->> -diff --git a/src/compositor.c b/src/compositor.c
->> -index 25615282..daced607 100644
->> ---- a/src/compositor.c
->> -+++ b/src/compositor.c
->> -@@ -4483,13 +4483,28 @@ compositorManageScreen (ScreenInfo=20
->> *screen_info)
->> -=C2=A0=C2=A0=C2=A0=C2=A0 XClearArea (display_info->dpy, screen_info->o=
-utput, 0, 0, 0, 0,=20
->> TRUE);
->> -=C2=A0=C2=A0=C2=A0=C2=A0 TRACE ("manual compositing enabled");
->> -
->> -+#ifdef HAVE_PRESENT_EXTENSION
->> -+=C2=A0=C2=A0=C2=A0 screen_info->use_present =3D display_info->have_pr=
-esent &&
->> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (screen_info->vblank_mode =3D=3D=
-=20
->> VBLANK_AUTO ||
->> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->vblank_mode =3D=
-=
-=3D=20
->> VBLANK_XPRESENT);
->> -+=C2=A0=C2=A0=C2=A0 if (screen_info->use_present)
->> -+=C2=A0=C2=A0=C2=A0 {
->> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->present_pendi=
-ng =3D FALSE;
->> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 XPresentSelectInput (displ=
-ay_info->dpy,
->> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->output,
->> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 PresentCompleteNotifyMask);
->> -+=C2=A0=C2=A0=C2=A0 }
->> -+#else /* HAVE_PRESENT_EXTENSION */
->> -+=C2=A0=C2=A0=C2=A0 screen_info->use_present =3D FALSE;
->> -+#endif /* HAVE_PRESENT_EXTENSION */
->> -+
->> - #ifdef HAVE_EPOXY
->> --=C2=A0=C2=A0=C2=A0 screen_info->use_glx =3D (screen_info->vblank_mode=
- =3D=3D VBLANK_AUTO ||
->> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 screen_info->vblank_mode =3D=3D VBLANK_GLX);
->> -+=C2=A0=C2=A0=C2=A0 screen_info->use_glx =3D !screen_info->use_present=
- &&
->> - #ifdef HAVE_XSYNC
->> --=C2=A0=C2=A0=C2=A0 screen_info->use_glx &=3D display_info->have_xsync=
-;
->> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 display_info->have_xsync &&
->> - #endif /* HAVE_XSYNC */
->> --=20
->> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 (screen_info->vblank_mode =3D=3D=20
->> VBLANK_AUTO ||
->> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->vblank_mode =3D=3D VBLANK_GLX);
->> -=C2=A0=C2=A0=C2=A0=C2=A0 if (screen_info->use_glx)
->> -=C2=A0=C2=A0=C2=A0=C2=A0 {
->> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->glx_cont=
-ext =3D None;
->> -@@ -4503,24 +4518,6 @@ compositorManageScreen (ScreenInfo *screen_info=
-)
->> -=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->use_glx =3D FALSE;
->> - #endif /* HAVE_EPOXY */
->> -
->> --#ifdef HAVE_PRESENT_EXTENSION
->> --=C2=A0=C2=A0=C2=A0 screen_info->use_present =3D display_info->have_pr=
-esent &&
->> --#ifdef HAVE_EPOXY
->> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 !screen_info->use_glx &&
->> --#endif /* HAVE_EPOXY */
->> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (screen_info->vblank_mode =3D=3D=
-=20
->> VBLANK_AUTO ||
->> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->vblank_mode =3D=
-=
-=3D=20
->> VBLANK_XPRESENT);
->> --=C2=A0=C2=A0=C2=A0 if (screen_info->use_present)
->> --=C2=A0=C2=A0=C2=A0 {
->> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->present_pendi=
-ng =3D FALSE;
->> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 XPresentSelectInput (displ=
-ay_info->dpy,
->> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->output,
->> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 PresentCompleteNotifyMask);
->> --=C2=A0=C2=A0=C2=A0 }
->> --#else /* HAVE_PRESENT_EXTENSION */
->> --=C2=A0=C2=A0=C2=A0 screen_info->use_present =3D FALSE;
->> --#endif /* HAVE_PRESENT_EXTENSION */
->> --=20
->> -=C2=A0=C2=A0=C2=A0=C2=A0 if (screen_info->use_present)
->> -=C2=A0=C2=A0=C2=A0=C2=A0 {
->> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 g_info ("Compositor u=
-sing XPresent for vsync");
->> ---
->> -2.20.1
->> -
->> diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.5.bb=20
->> b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.16.0.bb
->> similarity index 82%
->> rename from meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.5.bb
->> rename to meta-xfce/recipes-xfce/xfwm4/xfwm4_4.16.0.bb
->> index f8febe804..3f64365f0 100644
->> --- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.5.bb
->> +++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.16.0.bb
->> @@ -2,14 +2,13 @@ DESCRIPTION =3D "Xfce4 Window Manager"
->> =C2=A0 SECTION =3D "x11/wm"
->> =C2=A0 LICENSE =3D "GPLv2"
->> =C2=A0 LIC_FILES_CHKSUM =3D=20
->> "file://COPYING;md5=3Dd791728a073bc009b4ffaf00b7599855"
->> -DEPENDS =3D "virtual/libx11 libxfce4ui libwnck3 libxinerama exo-native=
+> GTK2 libs are gone so extra GRK2/GTK3 packages can go
+>
+> Release notes for 4.16.0
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> - about: Harmonize capitalisation
+> - Update credits for Xfce 4.16
+> - Translation Updates:
+>   Basque, Bulgarian, Catalan, Chinese (Taiwan), Dutch, Galician,
+>   Japanese, Lithuanian, Norwegian Bokm=C3=A5l, Portuguese, Portuguese
+>   (Brazil), Serbian
+>
+> Release notes for 4.15.7
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> [Please note that this is a development release.]
+> - libxfce4ui now needs libxfce4util >=3D 4.15.6
+> - Update configure.ac.in syntax
+> - Namespace of the gir needs capital first letter
+> - Remove hardcoded translators list
+> - Bump libepoxy version to 1.2
+> - Translation Updates:
+>   Portuguese (Brazil), Slovenian, Swedish
+>
+> Release notes for 4.15.6
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> [Please note that this is a development release.]
+> - Introduce xfce_spawn and xfce_spawn_command_line
+>   in favor and instead of xfce_spawn_no_child
+> - Bump GLib (and gio, gthread, etc) minimum to 2.50.0
+> - about: Support multiple GPUs and print GPU memory size
+> - about: Drop window subtitle
+> - Always perform sanity check
+> - Avoid checking for epoxy if libgtop is disabled
+> - XfceTitledDialog: Fix erroneous check (Fixes #30)
+> - No startup notification in Wayland to prevent crash (Issue #17)
+> - Translation Updates:
+>   Chinese (China), Chinese (Taiwan), Estonian, French, German, Hebrew,
+>   Indonesian, Italian, Japanese, Lithuanian, Norwegian Bokm=C3=A5l,
+>   Portuguese, Portuguese (Brazil), Russian, Serbian, Spanish, Swedish,
+>   Turkish
+>
+> Release notes for 4.15.5
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> [Please note that this is a development release.]
+> - Add new API xfce_spawn_no_child (!8):
+>   Launch processes re-parenting them to init vs. as children
+> - about: Fix icon names
+> - about: Display userspace bitness if it differs from OS kernel bitness
+> - about: Print GPU name in system info
+> - about: Use more understandable arch labels (Issue #27)
+> - Improve xfce_icon_name API
+> - No startup notification in wayland to prevent crash (Issue #17)
+> - Add missing docstring
+> - Fix typos
+> - Add README.md to EXTRA_DIST
+> - Translation Updates:
+>   Catalan, Chinese (China), Danish, Galician, German, Italian,
+>   Lithuanian, Turkish
+>
+> Release notes for 4.15.4
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> This is a development release of libxfce4ui aiming the upcoming release
+> of Xfce 4.16.
+>
+> - Avoid redundant key re-grabbing
+> - Adds new README.md and updates AM_INIT_AUTOMAKE
+> - Silence compiler warnings (Fixes #25)
+> - AC_CONFIG_MACRO_DIR =E2=86=92 AC_CONFIG_MACRO_DIRS
+> - Add default shortcuts for tiling (Fixes #4)
+> - Avoid shortening the keycodes GArray while walking it.
+> - about: Revamp About Xfce tab
+> - about: More icon name fixes
+> - Add more logo icons and new about icon
+> - Update deprecated icon names
+> - keyboard-shortcuts: Improve UI for setting shortcuts
+> - shortcut-dialog: Add label to clear button
+> - shortcut-dialog: Port to new XfceTitledDialog API
+> - shortcut-dialog: Only grab keyboard
+> - Always return GTK_RESPONSE_OK for accepted shortcut keys (fixes #20)
+> - Translation Updates:
+>   Albanian, Amharic, Arabic, Armenian, Armenian (Armenia), Basque,
+>   Belarusian, Bengali, Bulgarian, Catalan, Chinese (China), Chinese
+>   (Hong Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch,
+>   Eastern Armenian, English (Australia), English (United Kingdom),
+>   Estonian, Finnish, French, Galician, Georgian, German, Greek, Hebrew,
+>   Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
+>   Kazakh, Korean, Latvian, Lithuanian, Malay, Norwegian Bokm=C3=A5l,
+>   Norwegian Nynorsk, Occitan (post 1500), Polish, Portuguese,
+>   Portuguese (Brazil), Romanian, Russian, Serbian, Slovak, Slovenian,
+>   Spanish, Swedish, Telugu, Thai, Turkish, Ukrainian, Uyghur, Welsh
+>
+> Release notes for 4.15.3
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> [Please note that this is a development release.]
+>
+> - Update bug URLs to point to gitlab.xfce
+> - xfce-about: Hide empty email address tags (Fixes #12)
+> - Remove translator email address as per request (Fixes #11)
+> - Add missing translator "Hugo Carvalho" to xfce4-about (issue #18)
+> - Replace deprecated 'gdk_keyboard_ungrab' function (Fixes #15)
+> - shortcuts-grabber: Correctly ungrab keys on updating shortcuts (Fixes
+>   #16)
+> - Add basic GitLab pipeline
+> - Allow more granular control over menu item accelerators.
+>   - No automatic accelerator activation formenu items
+>   - Added 'gtk_menu_item_set_accel_label'
+>   - Added 'xfce_gtk_accel_group_connect_action_entries'
+> - renamed 'xfce_gtk_accel_group_append' to
+>   'xfce_gtk_accel_map_add_entries' and modified internals accordingly.
+>   No automatic add to an accel_group any more, since this may lead to
+>   double-activation in some cases.
+> - Add "xfce_gtk_accel_group_disconnect_action_entries" to be able to
+>   revert "xfce_gtk_accel_group_connect_action_entries"
+> - Add title to xfce_dialog_confirm_close_tabs
+> - Add new methods to libxfce4ui.symbols. Followup of
+>   231e57daccb5946379f413ed440629c32025f6f3
+> - Translation Updates:
+>   Albanian, Amharic, Arabic, Armenian, Armenian (Armenia), Basque,
+>   Belarusian, Bengali, Bulgarian, Catalan, Chinese (China), Chinese
+>   (Hong Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch,
+>   Eastern Armenian, English (Australia), English (United Kingdom),
+>   Estonian, Finnish, French, Galician, German, Greek, Hebrew,
+>   Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
+>   Kazakh, Korean, Latvian, Lithuanian, Malay, Norwegian Bokm=C3=A5l,
+>   Norwegian Nynorsk, Occitan (post 1500), Polish, Portuguese,
+>   Portuguese (Brazil), Romanian, Russian, Serbian, Slovak,
+>   Slovenian, Spanish, Swedish, Telugu, Thai, Turkish,
+>   Uighur, Ukrainian, Welsh
+>
+> Release notes for 4.15.2
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> [Please note that this is a development release.]
+>
+> - Introduced 'XfceGtkActionEntry' as replacement for the deprecated
+>   'GtkAction', 'GtkActionEntry' in order to keep simple menu creation.
+>   This includes various support methods, like:
+>   'xfce_gtk_translate_action_entries' to to translate a list of
+>      XfceGtkActionEntrys
+>   'xfce_gtk_accel_group_append' to register the provided
+>      accelerators of the entries
+>   'xfce_gtk_get_action_entry_by_id' to find a single
+>      XfceGtkActionEntry, e.g. by using a enumeration
+>   'xfce_gtk_***_new_from_action_entry' to create the specific
+>      menu- or tool-items from an XfceGtkActionEntry
+> - Add a widget for filename input (Bug #16542)
+> - Enabled doc generation for XfceGtkActionEntry and related
+>   methods
+> - Enabled doc generation for new widget 'xfce-filename-input'
+> - Switch Ctrl+Alt+Del to xfce4-session-logout (Bug #11979)
+> - Add more default keyboard shortcuts (Bug #16470)
+> - shortcuts: Replace xfrun4 by xfce4-appfinder
+> - shortcuts: Also map Homepage to browser
+> - shortcuts: Remove calculator shortcut
+> - Update gitignore
+> - Translation Updates:
+>   Albanian, Basque, Belarusian, Chinese (China), Chinese (Taiwan),
+>   Croatian, Danish, Dutch, French, Galician, German, Hebrew, Hungarian,
+>   Kazakh, Malay, Norwegian Bokm=C3=A5l, Portuguese, Portuguese (Brazil),
+>   Russian, Serbian, Slovenian, Swedish, Ukrainian
+>
+> Release notes for 4.15.1
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> This release introduces the following features:
+> - Switch XfceTitledDialog to headerbar/CSD layout
+> - Use GtkMessageDialog as base class for Xfce Dialogs
+> - Add two new functions to search for app icons
+> - Improve Tests and Docs
+>
+> Full changelog:
+> - Switch XfceTitledDialog to headerbar layout
+> - XfceTitledDialog: Keep buttons in the action area
+> - XfceTitledDialog: Also repack xfce_titled_dialog_new
+> - XfceTitledDialog: Make sure windows can be dragged
+> - XfceTitledDialog: Add _create_action_area, _add_button
+>   and _add_action_widget
+> - Introduce xfce_titled_dialog_set_default_response
+> - Mark xfce_titled_dialog_new_with_buttons as deprecated
+> - Add two new functions to search for app icons
+> - xfce-about: Fix Makefile
+> - shortcut-dialog: Show dialog content (Bug #16338)
+> - xfce-dialogs: Use GtkMessageDialog as base class
+> - xfce-dialogs: Improve layout of confirm_close_tabs
+> - xfce-dialogs: Improve alignment and layout of dialogs
+> - xfce-dialogs: Add right margin back to labels
+> - xfce-dialogs: Drop default window titles
+> - docs: Add xfce_dialog_confirm_close_tabs
+> - tests: Add xfce_dialog_confirm_close_tabs
+> - tests: Improve UI
+> - tests: Add icons to dialog buttons
+> - tests: Simplify code by using XfceTitledDialog
+> - tests: Re-order buttons
+> - tests: Fix typo in test-ui.c (Bug #16253)
+> - Rename test-ui-gtk3 to test-ui
+> - Improve docstrings
+> - Fix typos
+> - Drop gladeui Gtk2 from distcheck options
+> - Drop unused declaration
+> - Fix compiler warnings
+> - Remove trailing whitespace
+> - Always provides needed files for vala binding in dist tarball
+> - Add recents functions to libxfce4ui.symbols
+> - Drop xfce-header from pot files
+> - Update docstrings
+> - Fix license text box too small (Bug #16259)
+> - .gitignore: ignore all .o files
+> - Make autogen output friendlier
+> - Translation Updates:
+>   Albanian, Bulgarian, Catalan, Chinese (China), Croatian, Danish,
+>   Dutch, French, Galician, German, Hungarian, Italian, Japanese,
+>   Lithuanian, Norwegian Bokm=C3=A5l, Polish, Portuguese, Portuguese
+>   (Brazil), Russian, Serbian, Slovak, Slovenian, Spanish, Swedish,
+>   Turkish, Ukrainian
+>
+> Release notes for 4.15.0
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> - Drop support for Gtk2
+> - Make glibtop an optional dependency ("About System" tab)
+> - about: Add system info tab
+> - about: Hide system tab conditionally
+> - dialogs: Use symbolic window-close icon
+> - Fix Window not visible when grabbing keyboard (Bug #16054)
+> - Bump Gtk3 to 3.22 (Bug #15781)
+> - Do not use gdk_screen_get_monitor_at_point (Bug #15781)
+> - Replace gtk_show_uri (Bug #15781)
+> - Replace gdk_display_get_screen (Bug #15781)
+> - Replace gdk_keymap_get_default (Bug #15781)
+> - Replace deprecated device functions (Bug #15781)
+> - Replace gdk_error_trap_* and gdk_flush (Bug #15781)
+> - Ignore what is hard to replace (Bug #15781)
+> - Add a dialog to confirm closure of multiple tabs (bug #15873)
+> - Translation Updates:
+>   Bulgarian, Chinese (China), Chinese (Taiwan), Croatian, Czech,
+>   Danish, Dutch, English (United Kingdom), Finnish, French,
+>   Galician, German, Hungarian, Interlingue, Italian, Japanese,
+>   Korean, Norwegian Bokm=C3=A5l, Norwegian Nynorsk, Polish, Portuguese,
+>   Portuguese (Brazil), Russian, Serbian, Slovak, Slovenian,
+>   Spanish, Turkish
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> ---
+>  ...ivate-xfce4-keyboard-shortcuts.xml-fix.patch |  2 +-
+>  ...ibxfce4ui_4.14.1.bb =3D> libxfce4ui_4.16.0.bb} | 17 ++++------------=
+-
+>  2 files changed, 5 insertions(+), 14 deletions(-)
+>  rename meta-xfce/recipes-xfce/libxfce4ui/{libxfce4ui_4.14.1.bb =3D> lib=
+xfce4ui_4.16.0.bb} (50%)
+>
+> diff --git a/meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-pr=
+ivate-xfce4-keyboard-shortcuts.xml-fix.patch b/meta-xfce/recipes-xfce/libxf=
+ce4ui/files/0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch
+> index 6d107b1b6..616142761 100644
+> --- a/meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-private-x=
+fce4-keyboard-shortcuts.xml-fix.patch
+> +++ b/meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-private-x=
+fce4-keyboard-shortcuts.xml-fix.patch
+> @@ -19,7 +19,7 @@ index 723a10d..e6502f3 100644
+>  --- a/libxfce4kbd-private/xfce4-keyboard-shortcuts.xml
+>  +++ b/libxfce4kbd-private/xfce4-keyboard-shortcuts.xml
+>  @@ -75,4 +75,8 @@
+> -       <property name=3D"&lt;Primary&gt;F12" type=3D"string" value=3D"w=
+orkspace_12_key"/>
+> +       <property name=3D"<Super>KP_Next" type=3D"string" value=3D"tile_=
+down_right_key"/>
+>       </property>
+>     </property>
+>  +  <property name=3D"providers" type=3D"array">
+> diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.14.1.bb b/me=
+ta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.16.0.bb
+> similarity index 50%
+> rename from meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.14.1.bb
+> rename to meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.16.0.bb
+> index 348b685be..7a269ad66 100644
+> --- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.14.1.bb
+> +++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.16.0.bb
+> @@ -2,17 +2,15 @@ SUMMARY =3D "Xfce4 Widget library and X Window System =
+interaction"
+>  SECTION =3D "x11/libs"
+>  LICENSE =3D "GPLv2"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D252890d9eee26aab7b432e8b8a61=
+6475"
+> -DEPENDS =3D "intltool-native perl-native gtk+ gtk+3 libice libsm libxfc=
+e4util xfce4-dev-tools xfconf virtual/libx11"
+> +DEPENDS =3D "intltool-native perl-native gtk+3 libice libsm libxfce4uti=
+l xfce4-dev-tools xfconf virtual/libx11"
+>
+>  inherit xfce gtk-doc gobject-introspection features_check
+>
+>  REQUIRED_DISTRO_FEATURES =3D "x11"
+>
+> -SRC_URI +=3D " \
+> -    file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.pa=
+tch \
+> -"
+> -SRC_URI[md5sum] =3D "50eae4bab5eeced186bce16fb5f802ac"
+> -SRC_URI[sha256sum] =3D "c449075eaeae4d1138d22eeed3d2ad7032b87fb8878eada=
+9b770325bed87f2da"
+> +# TODO: Check if this can go
+> +SRC_URI +=3D "file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.=
+xml-fix.patch"
+> +SRC_URI[sha256sum] =3D "8b06c9e94f4be88a9d87c47592411b6cbc32073e7af9cbd=
+64c7b2924ec90ceaa"
+>
+>  EXTRA_OECONF +=3D "--with-vendor-info=3D${DISTRO}"
+>
+> @@ -20,15 +18,8 @@ PACKAGECONFIG ??=3D ""
+>  PACKAGECONFIG[gladeui2] =3D "--enable-gladeui2,--disable-gladeui2,glade=
 "
->> +DEPENDS =3D "virtual/libx11 libxfce4ui libwnck3 libxinerama"
->> =C2=A0 =C2=A0 inherit xfce update-alternatives features_check
->> =C2=A0 =C2=A0 REQUIRED_DISTRO_FEATURES =3D "x11"
->> =C2=A0 -SRC_URI +=3D=20
->> "file://0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patch=
-"
->> -SRC_URI[sha256sum] =3D=20
->> "d7a7c63fa42ec6d7cb3caab130d6f496be5bd7689b775d20e8786b7f3e282930"
->> +SRC_URI[sha256sum] =3D=20
->> "1e22eae1bbb66cebfd1753b0a5606e76ecbf6b09ce4cdfd732d093c936f1feb3"
->> =C2=A0 =C2=A0 PACKAGECONFIG ?=3D " \
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ${@bb.utils.contains('DISTRO_FEATURES', =
-'opengl', 'epoxy', '',=20
->> d)} \
->>
->>
->>
->>=20
->>
-
---=20
-# Randy MacLeod
-# Wind River Linux
-
+>  PACKAGECONFIG[startup-notification] =3D "--enable-startup-notification,=
+--disable-startup-notification,startup-notification"
+>
+> -PACKAGES =3D+ "${PN}-gtk2 ${PN}-gtk3"
+> -FILES_${PN}-gtk2 +=3D "${libdir}/libxfce4ui-1.so.* ${libdir}/libxfce4kb=
+d-private-2.so.*"
+> -FILES_${PN}-gtk3 +=3D "${libdir}/libxfce4ui-2.so.* ${libdir}/libxfce4kb=
+d-private-3.so.*"
+> -
+>  PACKAGES +=3D "${PN}-glade"
+>  FILES_${PN}-glade =3D " \
+>      ${libdir}/glade \
+>      ${datadir}/glade \
+>  "
+> -
+> -RDEPENDS_${PN}-gtk2 =3D "${PN}"
+> -RDEPENDS_${PN}-gtk3 =3D "${PN}"
+> --
+> 2.26.2
+>
+>
+>=20
+>
