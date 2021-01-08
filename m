@@ -1,72 +1,71 @@
-Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com [209.85.160.169])
- by mx.groups.io with SMTP id smtpd.web08.1335.1610137921347575123
+Received: from mail-oi1-f169.google.com (mail-oi1-f169.google.com [209.85.167.169])
+ by mx.groups.io with SMTP id smtpd.web08.1472.1610138595740700458
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 08 Jan 2021 12:32:01 -0800
+ Fri, 08 Jan 2021 12:43:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=TnxpDyXS;
- spf=pass (domain: gmail.com, ip: 209.85.160.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f169.google.com with SMTP id 7so7512073qtp.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 08 Jan 2021 12:32:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=ceMzGlTDq9K95DMwMNzsKYvOn40sYj8NRjCFp3eBuaU=;
-        b=TnxpDyXS4q8dxPOqSMmSPH6uZnVU3k7VGNjxpsQOspIrn1ODfR3YIXk0EWR0ph5Gyr
-         5ypJP6ZpoyGN8DJWzC69JN+AaRSB+btrJHZVj50YRhFtrSolk0uHf/SBLly36VV/+YAi
-         4jJ0RBD7f1oI/ki+98rsjg5KP8qvxsKx0eW+Khv4s6yJsS3D70o8bGKj3NMmqQvWIMEQ
-         neEFbcGDVtbDGE9lg6PI2eswAiNP+gclrrKvM1OHNi2xJRnwL6EUm+i5iQ1udFvoF+q3
-         TNYru6l/c3EHhM2jrfH77If22f2SkqlA8/eh8QtU5eD2Jc/1aCqt9STGj+jo5mR8/Px2
-         5oxQ==
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.167.169, mailfrom: aehs29@gmail.com)
+Received: by mail-oi1-f169.google.com with SMTP id s2so12827031oij.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 08 Jan 2021 12:43:15 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=ceMzGlTDq9K95DMwMNzsKYvOn40sYj8NRjCFp3eBuaU=;
-        b=MwY11vz1Syutq9azXqLNQxN1VPdeFF2NPqIGviFQEkqUDioXyKnI7hc+FzMjWSo8dS
-         q/yGtAActkDI2A3jB+bGTeCFIEGjuC0YgQ9iy9cM21XlKkUWt3T5Y2AvUrVX3JdJTOU+
-         UfBs8CRQsn+ZPOWKc+/bIxGsRz7E4bU26hMqIOtnqEnVvX9R7Kxo8FhvApni6H/g0Sms
-         kKEdaZGhbvKJH3n5DAZxAY2iM26PF/AEM2anxC4o9nDQ1exanw6jHNHFPmihCCZnmzj2
-         a2hTaDUpqFXTTTRHEGvproyd0FB6vZd2O0IVwsXmeKa9v7aYrIGwzSBTtV1UNospvItJ
-         3Pew==
-X-Gm-Message-State: AOAM531mfX8BkZzb58e3UBWG6J090KsAIV1eyR8ZhSsvuGt17Phl2VCD
-	Dt2YTn6YvFsjd+yZUOS/8y9HQ98sNQOWu59z8gs=
-X-Google-Smtp-Source: ABdhPJzmMbfLr9wky2Ud/XoqISqgoEMlahYkLq5zHXsC/VrtLNuFVIPgLipK/RXdBzR2zBl+RgHTwv03h/GxJHASr9E=
-X-Received: by 2002:ac8:3417:: with SMTP id u23mr5333032qtb.80.1610137920466;
- Fri, 08 Jan 2021 12:32:00 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=6NV/psqUWNeAbT2LuVcIDhBpCvAEpUcnDRN59p0RF/I=;
+        b=a4T990w8FlfToo6d/h8A4jpOa02wg4PVQ3bq0n8Jcz5w3QK63aTQzhUy+7HV26Ohyh
+         Y3g6Hqn9HJafCKD0FZRBBa4fK+zOWyr8aHo6sCdz8FEGBpcfFnNDYf2Nj0sCemV6hObj
+         UXe5AFGtb2omGQtkdvqs1+WzqDPD0F5JXZ92r/4Ylx8cAYL7jQdtY58KUI0gu9bVX85X
+         l5ltbW6WgCsxq8J2jSCHJQRyHqovkfQFVmPCKW4p4PJOwXP9aAdzMWZUPr73+SSEQEmX
+         596bx8C2SALj6HqNvanMT8mj0joz3I9/xjLDcz8ERJOyIDgtGqeoyCY0X8thDIEH2A+Z
+         vGVw==
+X-Gm-Message-State: AOAM531MbA3EluOtYxnw0cLyDFoM3LWzRDT/+KHVFTGfCRTpM1eDpSFv
+	xYsa3owic7YUv5JRNzxdmO2ZMeb/ZHt+uA==
+X-Google-Smtp-Source: ABdhPJzWAmMZpN1TDov2S/dY5+J+8lmigTv7DBvJBeq7OiPrHGt3vsSjY3n+1SNIWm/jY2bRIkHdjw==
+X-Received: by 2002:aca:cc89:: with SMTP id c131mr3343675oig.2.1610138594683;
+        Fri, 08 Jan 2021 12:43:14 -0800 (PST)
+Return-Path: <aehs29@gmail.com>
+Received: from alsamon-xub.lan (2603-8080-9140-1427-791a-15bf-0351-bf68.res6.spectrum.com. [2603:8080:9140:1427:791a:15bf:351:bf68])
+        by smtp.gmail.com with ESMTPSA id l5sm1963126otj.57.2021.01.08.12.43.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 08 Jan 2021 12:43:13 -0800 (PST)
+From: "Alejandro Hernandez Samaniego" <alejandro@enedino.org>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alejandro Enedino Hernandez Samaniego <alejandro@enedino.org>
+Subject: [PATCH] remmina: Update to 1.4.10
+Date: Fri,  8 Jan 2021 13:43:04 -0700
+Message-Id: <20210108204304.1127549-1-alejandro@enedino.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20210106151717.1779543-1-schnitzeltony@gmail.com>
- <20210106151717.1779543-4-schnitzeltony@gmail.com> <CAMKF1srRCWhAcsVaNM=rou6_ys+KC_16PyB4KGB+Kj2vjfvZWQ@mail.gmail.com>
- <CALbNGRTreOS2m9z9tOp_Z3sGrVVypZr=5J9RBFwwnPF+fieYcw@mail.gmail.com>
-In-Reply-To: <CALbNGRTreOS2m9z9tOp_Z3sGrVVypZr=5J9RBFwwnPF+fieYcw@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Fri, 8 Jan 2021 12:31:34 -0800
-Message-ID: <CAMKF1sqht8W9eaqY6sVAVEqq_fKXsefOkjCSaLF=eCt-f+6vMQ@mail.gmail.com>
-Subject: Re: [oe] [PATCH 04/28] libxfce4ui: upgrade 4.14.1 -> 4.16.0
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Fri, Jan 8, 2021 at 12:29 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m> wrote:
->
-> On Fri, Jan 8, 2021 at 8:54 PM Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > I see an odd failure on qemuriscv64
-> > https://errors.yoctoproject.org/Errors/Details/540832/
-> Hi Khem,
->
-> Have seen this either but assumed it was caused by going back and
-> forth during tests. Worked around this by cleansstate.
->
-> I think there is some race (unrelated to qemuriscv64): when I saw the
-> error, the file was there. I looked into that already but did not find
-> suspicious yet. Have put libxfce4ui back on my TODO...
->
+Set PV to contain SRCPV properly as well
 
-yeah it seems intermittent, its already in master so will observe how
-it fairs in CI builds over few days
-and if its too noisy we might need a quick solution
+Signed-off-by: Alejandro Enedino Hernandez Samaniego <alejandro@enedino.org>
+---
+ .../remmina/{remmina_1.4.8.bb => remmina_1.4.10.bb}           | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+ rename meta-oe/recipes-support/remmina/{remmina_1.4.8.bb => remmina_1.4.10.bb} (93%)
 
-> Andreas
+diff --git a/meta-oe/recipes-support/remmina/remmina_1.4.8.bb b/meta-oe/recipes-support/remmina/remmina_1.4.10.bb
+similarity index 93%
+rename from meta-oe/recipes-support/remmina/remmina_1.4.8.bb
+rename to meta-oe/recipes-support/remmina/remmina_1.4.10.bb
+index 336357088..ef36fddcb 100644
+--- a/meta-oe/recipes-support/remmina/remmina_1.4.8.bb
++++ b/meta-oe/recipes-support/remmina/remmina_1.4.10.bb
+@@ -9,10 +9,12 @@ DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi libsodium libss
+ DEPENDS_append_libc-musl = " libexecinfo"
+ LDFLAGS_append_libc-musl = " -lexecinfo"
+ 
+-SRCREV = "7ebc497062de66881b71bbe7f54dabfda0129ac2"
++SRCREV = "9d1dbdf2d648644e0de9590c6291d7e7b72a1473"
+ SRC_URI = "git://gitlab.com/Remmina/Remmina;protocol=https \
+ "
+ 
++PV .= "+git${SRCPV}"
++
+ S = "${WORKDIR}/git"
+ 
+ inherit cmake features_check mime-xdg
+-- 
+2.25.1
+
