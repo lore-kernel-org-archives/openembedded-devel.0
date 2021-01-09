@@ -1,494 +1,791 @@
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.40])
- by mx.groups.io with SMTP id smtpd.web10.1283.1610183765615803148
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.web12.4579.1610205106992928423
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 09 Jan 2021 01:16:05 -0800
+ Sat, 09 Jan 2021 07:11:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=NM7EYBCi;
- spf=pass (domain: windriver.com, ip: 40.107.94.40, mailfrom: kai.kang@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=dFSQJdasBtRRYK8SJdteZyEmsTJsOtrtJ+YkX174oaKMiDCwQaHEd6OqVTZkYNZbKi/fe0AW9rAklTv5GDwWZi8TTkwyvSkfWWLsTPAWp95xnJjFJ5m8WowuxWYTLskf2MgH4IhdhGyR50sWdSljbYMHzvIdhr8bZYSGpqwf5iOMGWDMYFrgYfVfbWl56qjDM00Ia4aOV9s9h2zz5g5ZBvpf2EF/Y8GPZ+y5F3WqouSFikVBLMo5MYc81m7pXpv6MyhjMBqqNJaChpunrEhnVsEt/ZqrYI2iQqeoT/Gveg95zzetDjt+rZxk5AaQp0kgVG0ip7UALMOzPaIskrnQ4Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UHjuL6jbFpiD3vI97W4/oYjH/9ajzAOlaRxgsdcluhc=;
- b=PhQcdJmvKylQkuuZqAs0Rv+R/W/WR2o4WujtRchi/qNKUQwoAjuLu6IMaUx+s8qyr/GwvzKmxr3SOZkGv01q2td9cklArq80CqoCZ3giwX9W+4omfQhozauy2CWNYDf9F5+vXWnZEwD1BetzOVw9jDyWCpiMaDin0pSqmAWANYdhoy6HIIwZMdBIfzwenkOvTKLJO4ph2dHRTFc79Vcy2ngFz3HeqfbHlb5PAxpMOrIwt76gBiuq3nF9VYDoTC/R3dYY5yPcYpksZS2fHqdBCA3lOHPdbaq4YgUmF0QDj/E+nD5hBd4f0oi1nmMFfAWWyYObNP5xrVMT7mqbR5bqsw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZibClyYY;
+ spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wm1-f45.google.com with SMTP id 190so10146464wmz.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 09 Jan 2021 07:11:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UHjuL6jbFpiD3vI97W4/oYjH/9ajzAOlaRxgsdcluhc=;
- b=NM7EYBCiVa72uf0EzJ8hFoO8FiXEPoldhEHxD1xDEqfWS8t5ptMdq73rTQCFmDC+Nitl448qdZkm6nxWC/cJoJLCuhyCTSBTFJfHYRmvjnTjA09CBww7BSmf/EKOTcIWS3ShHR/jMwQ9FYFZrh5nlv+chIo409WrfXVJtTK+oHY=
-Authentication-Results: windriver.com; dkim=none (message not signed)
- header.d=none;windriver.com; dmarc=none action=none
- header.from=windriver.com;
-Received: from SN6PR11MB3294.namprd11.prod.outlook.com (2603:10b6:805:c4::33)
- by SN6PR11MB3198.namprd11.prod.outlook.com (2603:10b6:805:c3::31) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.6; Sat, 9 Jan
- 2021 09:16:03 +0000
-Received: from SN6PR11MB3294.namprd11.prod.outlook.com
- ([fe80::b4b5:fc79:127b:66f4]) by SN6PR11MB3294.namprd11.prod.outlook.com
- ([fe80::b4b5:fc79:127b:66f4%6]) with mapi id 15.20.3742.009; Sat, 9 Jan 2021
- 09:16:03 +0000
-Subject: Re: [oe] [PATCH 07/28] xfwm4: upgrade 4.14.5 -> 4.16.0
-To: Randy MacLeod <randy.macleod@windriver.com>, Khem Raj
- <raj.khem@gmail.com>, =?UTF-8?Q?Andreas_M=c3=bcller?=
- <schnitzeltony@gmail.com>, openembedded-devel@lists.openembedded.org,
- "Mittal, Anuj" <anuj.mittal@intel.com>
-References: <20210106151717.1779543-1-schnitzeltony@gmail.com>
- <20210106151717.1779543-7-schnitzeltony@gmail.com>
- <d1bd0b10-bdd2-6820-61c1-38b7c8e5dc7e@gmail.com>
- <7aabf117-f702-0813-db20-831446869875@windriver.com>
-From: "kai" <kai.kang@windriver.com>
-Message-ID: <1062f406-8478-29af-ec4e-8c9d7c4c17e1@windriver.com>
-Date: Sat, 9 Jan 2021 17:11:25 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-In-Reply-To: <7aabf117-f702-0813-db20-831446869875@windriver.com>
-X-Originating-IP: [60.247.85.82]
-X-ClientProxiedBy: HK2PR02CA0165.apcprd02.prod.outlook.com
- (2603:1096:201:1f::25) To SN6PR11MB3294.namprd11.prod.outlook.com
- (2603:10b6:805:c4::33)
-Return-Path: kai.kang@windriver.com
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=W8ZwxGCUc2EOP9AVYYTSqQF6PjKH3VRTuOBXLMkLTX8=;
+        b=ZibClyYYBC3H0VWChip43bi1YEUx6Snz7Padeo9dx4pIUXa8A/xJ8nNkL+RWszho6A
+         davT5emK3C3A7K7+LnRisZ7gHirG6q7/agpqHUTQ+UtQbUGI8OUXN4CfNr5nUWpdlVEU
+         dFx/a8V8MtClPBeVGs/JOShrqm8F7t8eZceQN/Sj4yLfxeJ9ITb2/4bpa+wbPC4WtFy2
+         XgGIBv2OX7YWHpQSJrMeIhPE0m2TSQZkozDMQfJBUpmevOXDVtxN91zi8QJE/2aKnkrQ
+         5I7w9bpt0qqFSMaCZ7tDgTThAZCNeYH5NATorzVSZ49dU4nB1VmdvrgNg9oZ0xJc8Njx
+         rZqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=W8ZwxGCUc2EOP9AVYYTSqQF6PjKH3VRTuOBXLMkLTX8=;
+        b=UAFmS2wLurozIVOCXJFysLx9sXhs57/SU0WiVCBnz7qMOEIvr9Cx4vTrdMTsyvPe11
+         pV5J/13aE3DMeorOZeOPeVxqQkOAq6XMqFbLuearKh9mKYMjoGhHeM0MS4r/sFQ7WAaF
+         C8XJthX+9QgqX8y1xFeG7aqQ5KEyxD8N5app0FuHnOys8v1x+LDJ1emFrtR/cnuoZeBR
+         S2oh97LsaAkI+7D6msELCQW+J2xc0GnOEAlJocuf1+pqNtx0oudFLeQVz/y2kEcbM6iF
+         6sA2L8DUwRuo7qVuwWskepWSmg2VzbuUWcpmYDoOBQ+GqcllrCBiYf27Qvkd1ABxthxt
+         MYzQ==
+X-Gm-Message-State: AOAM530tAd3x8juyh1rZugkIXJ9tqskC97Aiu5ucMWa70Ofig+zWj6KZ
+	yndcrRM5R6N2JxatlGUdVD9PrVhGv0dqdw==
+X-Google-Smtp-Source: ABdhPJyxr8P5YfsQzMAjwSOKxrpg9TS7Tp6g0duABInn4Bjn9zk3hjzGHhbFQRDTCoIEarmTWahOQg==
+X-Received: by 2002:a05:600c:214a:: with SMTP id v10mr7483880wml.138.1610205104961;
+        Sat, 09 Jan 2021 07:11:44 -0800 (PST)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from superandy.speedport.ip (p200300f07f09bb3762d71a5d34ee0918.dip0.t-ipconnect.de. [2003:f0:7f09:bb37:62d7:1a5d:34ee:918])
+        by smtp.gmail.com with ESMTPSA id u83sm16673912wmu.12.2021.01.09.07.11.43
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 09 Jan 2021 07:11:43 -0800 (PST)
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH 1/3] libunique: remove
+Date: Sat,  9 Jan 2021 16:11:28 +0100
+Message-Id: <20210109151130.417269-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [128.224.162.141] (60.247.85.82) by HK2PR02CA0165.apcprd02.prod.outlook.com (2603:1096:201:1f::25) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.6 via Frontend Transport; Sat, 9 Jan 2021 09:16:01 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: cad0464e-acf8-49ba-8478-08d8b47f301f
-X-MS-TrafficTypeDiagnostic: SN6PR11MB3198:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<SN6PR11MB3198A1098EE9C01353C8F6DB95AD0@SN6PR11MB3198.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:312;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	J/wdLh3Hr4CoH5zUXcXq6ThwnqlQDYPE27Z2lG7SJnGOVGBhco1LYWs6F2efgt99UNz6LstdpZLaa71z1N57THNobyt6+MMizc8AaGgpXsI2Dd5NZjrT9ZH5STUNnRbkRnoiTqeelr+HILiBrvwh9zR03RQCVLuTOcT9j4/xjhtd9tm0LPkadByYUnklH2DrOcX0JanTyQUvgCyFHkh6g1a0N8Kmscfo+vthAglv3Fq2odpM/S0MP8VpDPPlOHxaXYQyDL4Dzx/6ln1hxe9VUPbGiEVL1bxuhHzf/53PBCR2oge+cgZU6Ue+2bZOSLaduQ8Pb5hybznzGVaGmhtLTM+J3rFGNYWjJqUfs3SL3NmrBpEcuHXfvfhY1sZQ4mvg5+5fOY7RSLMUH1ZwOUP2jDJYz25zfh0OKcoMgmwNANWPaMIV30m9MFgTfGiP2FK0Woi2IKbSGUUFz95NE+l0jf3gWhi/NGH/mTLq54Pi2rJF+adOmYk8TnU3oeOBE2tKTImrImGNzX81a3DvFuVxKa6vLvVew1J7AhXiP7U1kv9NBDOkSo+TVm7L5dweAHWhopaoG7hPWdI4kaHl2KqOMA==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN6PR11MB3294.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(136003)(366004)(346002)(39850400004)(376002)(2906002)(31686004)(36756003)(8936002)(53546011)(6666004)(186003)(956004)(86362001)(110136005)(31696002)(52116002)(8676002)(2616005)(16526019)(6486002)(30864003)(83380400001)(6706004)(316002)(478600001)(5660300002)(66476007)(26005)(66556008)(966005)(16576012)(66946007)(66574015)(78286007)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?7cC2qMpNoe3QGrb49ohXi0C5FpxqtqoP0N8aUti/ddBPhttV8DcNdytjS58q?=
- =?us-ascii?Q?XLEaoutYypMRINLqR21MoHch0Ao9k/rjAzW+8SCTykLiWhivX+KZUKK9WHlt?=
- =?us-ascii?Q?o1fk2wjaBF3cnX9YvhaxgEgZv77LZQi0c61ybRsW1MIel5hGxE9RjgAGR/Qw?=
- =?us-ascii?Q?HPJXsDQ52LXNMHbqUnFUPisWWhHjV4PyJr0AmAJBDYciHBEZy3wTMls6qk6T?=
- =?us-ascii?Q?bvdJZFuTTpW9EfY8E7DV33QfST/RjcmNSFAM95C9mjpQjM6A48SkcVQrlX3m?=
- =?us-ascii?Q?lHpGkXUaNEl93AEdNLCQ/K9U7mMoVP7n/lEpqZvmWonFVm6DuuOpJBUl2ehS?=
- =?us-ascii?Q?ndU9QxvAJ137NCGtATzNN/TFvqqDSJXKBqImBXyMvyy9i1M2Kpc/DOGKBKjX?=
- =?us-ascii?Q?KZ7O9DZSKRxtB9/Fin83incZh1xiuzi5EHEON+PtGuZcwVP+DqDtiqIy2QB0?=
- =?us-ascii?Q?Pabrc2ppTot+NlJhNZ4J/WfOCs+P9YCq6dMGGzWdDfUBlCWlN5RcqN+tir3e?=
- =?us-ascii?Q?nvKHK5WjfEmNdVZZtxawsqFAwPQ3pYV/8o8Tr9rGco/sCfvrjZTU0nYTujT5?=
- =?us-ascii?Q?+vKbIFS35TgXWj+418At1DKIrN7KTYYwlRsl1X4WMHraAMroCW6qHyLbfuPK?=
- =?us-ascii?Q?OSCYMCsZN7jXesgPohqcr7k/gKOJXQBFNi1p1q11NYoQCRBYEJWVYKawP7YZ?=
- =?us-ascii?Q?amBY49jGYworzDPj/mujX3p5fnbMCD7TWMwudadixvK/XlREJcpchwpEOgkM?=
- =?us-ascii?Q?S4z+K0G/C2fXojDc8gXyvxMY+JarFiW5GiW4XKJZVkFpBekWVYtaz75w4Quu?=
- =?us-ascii?Q?fB1kb54ZMfOa/0sJki/DOwceCkdNxlVXcub1nt7hwHg8k6MCpouM3li2vo7m?=
- =?us-ascii?Q?ipRPFYe9nGHB1QYTKTL77HuDx64Ri0Qz6fri+KANy735mOUqkLtVhh+yMxqp?=
- =?us-ascii?Q?OP2YxMFsHtF0zP5gmvNXEw7C3JN45HIJpwY+wZCX5bk=3D?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-AuthSource: SN6PR11MB3294.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jan 2021 09:16:03.3223
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-Network-Message-Id: cad0464e-acf8-49ba-8478-08d8b47f301f
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: TmqgG6roqrCgkUlGsWGIDEx3Fn/6AWUQPnUoOEjYPVhx8KqrMCYlmz1inlQX3Jeoek2WdvG5l3ecmulvk6nTDQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR11MB3198
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 1/9/21 1:25 AM, Randy MacLeod wrote:
-> On 2021-01-06 1:55 p.m., Khem Raj wrote:
->> Anuj and Randy FYI
->>
->> On 1/6/21 7:16 AM, Andreas M=C3=BCller wrote:
->>> Compositor patch does not apply anymore and testing x86-64 excceeds my
->>> resources. Looked into Fedora sources: They build xfwm4 un-patched=20
->>> either.
->
-> Thanks for the heads up Khem.
->
-> Kai, can you take a look in the coming days/weeks?
+* development has stopped almost a decade ago
+* since xfce 4.16 no recipe requires it any more
+* it is GTK2 based
 
-OK. I'll try it next week.
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ ...LIBTOOL-instead-of-hardcoded-libtool.patch |  27 --
+ ...ue-Add-format-qualifier-s-for-string.patch |  32 --
+ .../libunique/libunique/build.patch           | 421 ------------------
+ .../fix_for_compile_with_gcc-4.6.0.patch      |  36 --
+ .../libunique/libunique/noconst.patch         | 130 ------
+ .../libunique/libunique_1.1.6.bb              |  34 --
+ 6 files changed, 680 deletions(-)
+ delete mode 100644 meta-xfce/recipes-extended/libunique/libunique/0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch
+ delete mode 100644 meta-xfce/recipes-extended/libunique/libunique/0001-test-unique-Add-format-qualifier-s-for-string.patch
+ delete mode 100644 meta-xfce/recipes-extended/libunique/libunique/build.patch
+ delete mode 100644 meta-xfce/recipes-extended/libunique/libunique/fix_for_compile_with_gcc-4.6.0.patch
+ delete mode 100644 meta-xfce/recipes-extended/libunique/libunique/noconst.patch
+ delete mode 100644 meta-xfce/recipes-extended/libunique/libunique_1.1.6.bb
 
-Regards,
-Kai
-
-
->
-> ../Randy
->
->>>
->>> Release notes for 4.16.0
->>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
->>> - common: Avoid zero refresh rate for monitor
->>> - hints: Protect against XError from XGetTransientFor()
->>> - netwm: Allow above/below only for regular windows
->>> - netwm: Mark splashscreen as transient for groups
->>> - client: Complete client state even on different workspaces
->>> - build: Increase GTK+ requirement to 3.22
->>> - Add `cycle_minimized` option
->>> - compositor: Release overlay window last
->>> - compositor: Free GLX data when really using GLX
->>> - compositor: Remove useless trace message
->>> - compositor: Release current GLX context on teardown
->>> - display: Remove custom XError handler
->>> - compositor: Check for XError when adding windows
->>> - compositor: Trap XErrors when disabling compositor
->>> - main: Enable compositor by default
->>> - compositor: Remove automatic redirect support
->>> - main: Add short command line options
->>> - main: Add debug command line option
->>> - pixmap: Use a safer strncpy()
->>> - settings: Fix compiler warning
->>> - Remove useless autotools macros and Makefile targets
->>> - Use --enable-debug=3Dyes when compiling from git
->>> - Revert "compositor: Do not damage on opaque region update"
->>> - themes: Use smaller, lighter shadows
->>> - compositor: Check if compositor is enabled
->>> - compositor: Avoid XError when disabling compositor
->>> - compositor: Warn for missing epoxy GL function
->>> - netwm: Do not raise window if activate is set to none
->>> - Remove GSourceFunc casts
->>> - compositor: Fix build with older epoxy versions
->>> - settings: Add 'Always on top' to the double click action
->>> - Settings: Remove default alphabetical sorting of keyboard shortcuts
->>> =C2=A0=C2=A0 Closes: #451 (Disable initial sorting of keyboard shortcu=
-ts)
->>> - compositor: Handle XFixes XError
->>> - compositor: Add support for GL_ARB_sync
->>> - compositor: Return early if a Present swap is pending
->>> - debug: Fix build in debug mode
->>> - compositor: Fix compilation issue with Xpresent
->>> - compositor: Log fence and GLX swap time in debug mode
->>> - compositor: Move fence sync to redraw_glx
->>> - compositor: Move fence triggered to its own function
->>> - compositor: Set swap control if possible
->>> - compositor: Adjust to the actual number of buffers
->>> - compositor: Use a GLX drawable per buffer
->>> - client: Allow transients for group to be minimized
->>> - settings: Add a UI option for desktop zooming
->>> - themes: Remove title shadow
->>> - themes: Adjust shadows size/opacity
->>> - client: Make above/below consistent
->>> - compositor: Limit damage region to the screen
->>> - compositor: Optimize repaint without vblank
->>> - compositor: Only accumulate damage with multiple buffers
->>> - compositor: Copy entire content for GLX buffers
->>> - xsync: Handle XError
->>> - compositor: Ignore opaque region for shaded windows
->>> - compositor: Clip opaque region against window shape
->>> - client: Protect against XError in XKillClient()
->>> - compositor: Do not damage on opaque region update
->>> - compositor: Opaque region applies to client window
->>> - compositor: Reuse client size
->>> - client: Toggle tiling on key shortcut
->>> - client: Small cleanup
->>> - Add README.md to EXTRA_DIST
->>> - client: Keep tiled size of windows
->>> - compositor: No need to update compositor window on configure
->>> - compositor: Limit opaque region clipping to window extents
->>> - compositor: Damage on opaque region update only if visible
->>> - client: Send synthetic configure on force redraw
->>> - Post release tag bump
->>> - Translation Updates:
->>> =C2=A0=C2=A0 Albanian, Arabic, Armenian (Armenia), Basque, Belarusian,=
- Belarusian
->>> =C2=A0=C2=A0 (Tarask), Bengali, Bulgarian, Catalan, Chinese (China), C=
-hinese=20
->>> (Hong
->>> =C2=A0=C2=A0 Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch, =
-Eastern
->>> =C2=A0=C2=A0 Armenian, English (Australia), English (Canada), English =
-(United
->>> =C2=A0=C2=A0 Kingdom), Estonian, Finnish, French, Galician, Georgian, =
-German,
->>> =C2=A0=C2=A0 Greek, Hebrew, Hungarian, Icelandic, Indonesian, Interlin=
-gue,
->>> =C2=A0=C2=A0 Italian, Japanese, Kazakh, Korean, Latvian, Lithuanian, M=
-alay,
->>> =C2=A0=C2=A0 Norwegian Bokm=C3=A5l, Norwegian Nynorsk, Occitan (post 1=
-500), Persian
->>> =C2=A0=C2=A0 (Iran), Polish, Portuguese, Portuguese (Brazil), Romanian=
-, Russian,
->>> =C2=A0=C2=A0 Serbian, Slovak, Slovenian, Spanish, Swedish, Thai, Turki=
-sh,
->>> =C2=A0=C2=A0 Ukrainian, Urdu, Urdu (Pakistan), Uyghur
->>>
->>> Release notes for 4.15.3
->>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
->>> [Please note that this is a development release.]
->>>
->>> - Quick release after 4.15.2 to fix a regression with opaque
->>> =C2=A0=C2=A0 regions leaving trails of unpainted areas on resize.
->>>
->>> Release notes for 4.15.2
->>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
->>> [Please note this is a preview release of a development version]
->>>
->>> - Add support for opaque regions in the compositor
->>> - Make cursor zoom optional (xfce/xfwm4#439)
->>> - Remove the deprecated options "--daemon" (Pablo Mazzini)
->>> - Disable Xi2 support by default
->>> - Add column sorting in settings
->>> - Optimize window matching in the compositor with a hash table
->>> =C2=A0=C2=A0 (Michael Banack)
->>> - Add more XErrors traps
->>> - I18n: Updated translations: ar, ast, be, be@tarask, bg, bn, ca,
->>> =C2=A0=C2=A0 cs, da, de, el, en_AU, en_CA, en_GB, es, et, eu, fa_IR, f=
-i, fr,
->>> =C2=A0=C2=A0 gl, he, hr, hu, hy_AM, hye, id, ie, is, it, ja, ka, kk, k=
-o, lt,
->>> =C2=A0=C2=A0 lv, ms, nb, nl, nn, oc, pl, pt, pt_BR, ro, ru, sk, sl, sq=
-, sr,
->>> =C2=A0=C2=A0 sv, th, tr, ug, uk, ur, ur_PK,
->>> =C2=A0=C2=A0 vi, zh_CN, zh_HK, zh_TW
->>> =C2=A0=C2=A0 New translations: be@tarask, fa_IR, hye, ka
->>>
->>> Release notes for 4.15.1
->>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
->>> [Please note that this is a development release.]
->>>
->>> - Fix an error leak in compositor (xfce/xfwm4#351)
->>> - Fix compositor selection atom misuse
->>> - Prefer zero initialized memory allocation functions
->>> - Use g_slice allocator for compositor windows
->>>
->>> Release notes for 4.15.0
->>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
->>> [Please note that this is a development release.]
->>>
->>> - First 4.15.x development release
->>> - Show tabwin only on primary monitor if set
->>> - All fixes and i18n as found in 4.14.4
->>>
->>> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
->>> ---
->>> =C2=A0 ...r-Revert-to-GLX-as-default-vblank-me.patch | 92=20
->>> -------------------
->>> =C2=A0 .../{xfwm4_4.14.5.bb =3D> xfwm4_4.16.0.bb}=C2=A0=C2=A0=C2=A0=C2=
-=
-=A0=C2=A0 |=C2=A0 5 +-
->>> =C2=A0 2 files changed, 2 insertions(+), 95 deletions(-)
->>> =C2=A0 delete mode 100644=20
->>> meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-GL=
-X-as-default-vblank-me.patch
->>> =C2=A0 rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.14.5.bb =3D>=20
->>> xfwm4_4.16.0.bb} (82%)
->>>
->>> diff --git=20
->>> a/meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-=
-GLX-as-default-vblank-me.patch=20
->>> b/meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-=
-GLX-as-default-vblank-me.patch=20
->>>
->>> deleted file mode 100644
->>> index 04fd623e8..000000000
->>> ---=20
->>> a/meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-=
-GLX-as-default-vblank-me.patch
->>> +++ /dev/null
->>> @@ -1,92 +0,0 @@
->>> -From acdceb0b28d86199b8c2233880fa8a04cb24d4d4 Mon Sep 17 00:00:00 200=
-1
->>> -From: Kai Kang <kai.kang@windriver.com>
->>> -Date: Wed, 24 Jul 2019 09:48:04 +0800
->>> -Subject: [PATCH] Revert "compositor: Revert to GLX as default=20
->>> vblank method
->>> - (again)"
->>> -
->>> -This reverts commit e07574d6e7a2dbaa08c3ba4765c6306073d9493e.
->>> -
->>> -It sets the default vblank method (auto) to GLX from 4.13.2. But it
->>> -fails to start xfwm4 on intel-x86-64 boards with error:
->>> -
->>> -| xfwm4:=20
->>> ../mesa-19.1.1/src/mesa/drivers/dri/i965/intel_mipmap_tree.c:1293:
->>> -| intel_miptree_match_image: Assertion `image->TexObject->Target =3D=
-=3D=20
->>> mt->target' failed.
->>> -| Aborted
->>> -
->>> -There is also a RHEL defect:
->>> -https://bugzilla.redhat.com/show_bug.cgi?id=3D1678334
->>> -
->>> -Revert the commit to fix the issue.
->>> -
->>> -Upstream-Status: Inappropriate [workaround]
->>> -
->>> -Signed-off-by: Kai Kang <kai.kang@windriver.com>
->>> ----
->>> - src/compositor.c | 41 +++++++++++++++++++----------------------
->>> - 1 file changed, 19 insertions(+), 22 deletions(-)
->>> -
->>> -diff --git a/src/compositor.c b/src/compositor.c
->>> -index 25615282..daced607 100644
->>> ---- a/src/compositor.c
->>> -+++ b/src/compositor.c
->>> -@@ -4483,13 +4483,28 @@ compositorManageScreen (ScreenInfo=20
->>> *screen_info)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0 XClearArea (display_info->dpy, screen_info->=
-output, 0, 0, 0,=20
->>> 0, TRUE);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0 TRACE ("manual compositing enabled");
->>> -
->>> -+#ifdef HAVE_PRESENT_EXTENSION
->>> -+=C2=A0=C2=A0=C2=A0 screen_info->use_present =3D display_info->have_p=
-resent &&
->>> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (screen_info->vblank_mode =3D=
-=3D=20
->>> VBLANK_AUTO ||
->>> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->vblank_mode =
-=
-=3D=3D=20
->>> VBLANK_XPRESENT);
->>> -+=C2=A0=C2=A0=C2=A0 if (screen_info->use_present)
->>> -+=C2=A0=C2=A0=C2=A0 {
->>> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->present_pend=
-ing =3D FALSE;
->>> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 XPresentSelectInput (disp=
-lay_info->dpy,
->>> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->output,
->>> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 PresentCompleteNotifyMask);
->>> -+=C2=A0=C2=A0=C2=A0 }
->>> -+#else /* HAVE_PRESENT_EXTENSION */
->>> -+=C2=A0=C2=A0=C2=A0 screen_info->use_present =3D FALSE;
->>> -+#endif /* HAVE_PRESENT_EXTENSION */
->>> -+
->>> - #ifdef HAVE_EPOXY
->>> --=C2=A0=C2=A0=C2=A0 screen_info->use_glx =3D (screen_info->vblank_mod=
-e =3D=3D=20
->>> VBLANK_AUTO ||
->>> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->vblank_mode =3D=3D VBLANK_GLX);
->>> -+=C2=A0=C2=A0=C2=A0 screen_info->use_glx =3D !screen_info->use_presen=
-t &&
->>> - #ifdef HAVE_XSYNC
->>> --=C2=A0=C2=A0=C2=A0 screen_info->use_glx &=3D display_info->have_xsyn=
-c;
->>> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 display_info->have_xsync &&
->>> - #endif /* HAVE_XSYNC */
->>> --=20
->>> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 (screen_info->vblank_mode =3D=3D=20
->>> VBLANK_AUTO ||
->>> -+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->vblank_mode =3D=3D VBLANK_GLX)=
-;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0 if (screen_info->use_glx)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0 {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->glx_con=
-text =3D None;
->>> -@@ -4503,24 +4518,6 @@ compositorManageScreen (ScreenInfo=20
->>> *screen_info)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->use_glx =3D FALSE;
->>> - #endif /* HAVE_EPOXY */
->>> -
->>> --#ifdef HAVE_PRESENT_EXTENSION
->>> --=C2=A0=C2=A0=C2=A0 screen_info->use_present =3D display_info->have_p=
-resent &&
->>> --#ifdef HAVE_EPOXY
->>> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 !screen_info->use_glx &&
->>> --#endif /* HAVE_EPOXY */
->>> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (screen_info->vblank_mode =3D=
-=3D=20
->>> VBLANK_AUTO ||
->>> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->vblank_mode =
-=
-=3D=3D=20
->>> VBLANK_XPRESENT);
->>> --=C2=A0=C2=A0=C2=A0 if (screen_info->use_present)
->>> --=C2=A0=C2=A0=C2=A0 {
->>> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->present_pend=
-ing =3D FALSE;
->>> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 XPresentSelectInput (disp=
-lay_info->dpy,
->>> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 screen_info->output,
->>> --=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 PresentCompleteNotifyMask);
->>> --=C2=A0=C2=A0=C2=A0 }
->>> --#else /* HAVE_PRESENT_EXTENSION */
->>> --=C2=A0=C2=A0=C2=A0 screen_info->use_present =3D FALSE;
->>> --#endif /* HAVE_PRESENT_EXTENSION */
->>> --=20
->>> -=C2=A0=C2=A0=C2=A0=C2=A0 if (screen_info->use_present)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0 {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 g_info ("Compositor =
-using XPresent for vsync");
->>> ---
->>> -2.20.1
->>> -
->>> diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.5.bb=20
->>> b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.16.0.bb
->>> similarity index 82%
->>> rename from meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.5.bb
->>> rename to meta-xfce/recipes-xfce/xfwm4/xfwm4_4.16.0.bb
->>> index f8febe804..3f64365f0 100644
->>> --- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.14.5.bb
->>> +++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.16.0.bb
->>> @@ -2,14 +2,13 @@ DESCRIPTION =3D "Xfce4 Window Manager"
->>> =C2=A0 SECTION =3D "x11/wm"
->>> =C2=A0 LICENSE =3D "GPLv2"
->>> =C2=A0 LIC_FILES_CHKSUM =3D=20
->>> "file://COPYING;md5=3Dd791728a073bc009b4ffaf00b7599855"
->>> -DEPENDS =3D "virtual/libx11 libxfce4ui libwnck3 libxinerama exo-nativ=
-e"
->>> +DEPENDS =3D "virtual/libx11 libxfce4ui libwnck3 libxinerama"
->>> =C2=A0 =C2=A0 inherit xfce update-alternatives features_check
->>> =C2=A0 =C2=A0 REQUIRED_DISTRO_FEATURES =3D "x11"
->>> =C2=A0 -SRC_URI +=3D=20
->>> "file://0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patc=
-h"=20
->>>
->>> -SRC_URI[sha256sum] =3D=20
->>> "d7a7c63fa42ec6d7cb3caab130d6f496be5bd7689b775d20e8786b7f3e282930"
->>> +SRC_URI[sha256sum] =3D=20
->>> "1e22eae1bbb66cebfd1753b0a5606e76ecbf6b09ce4cdfd732d093c936f1feb3"
->>> =C2=A0 =C2=A0 PACKAGECONFIG ?=3D " \
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ${@bb.utils.contains('DISTRO_FEATURES',=
- 'opengl', 'epoxy', '',=20
->>> d)} \
->>>
->>>
->>>
->>>=20
->>>
->
-
---=20
-Kai Kang
-Wind River Linux
+diff --git a/meta-xfce/recipes-extended/libunique/libunique/0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch b/meta-xfce/recipes-extended/libunique/libunique/0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch
+deleted file mode 100644
+index 2b5eda0d1..000000000
+--- a/meta-xfce/recipes-extended/libunique/libunique/0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch
++++ /dev/null
+@@ -1,27 +0,0 @@
+-From f39bcd5af79aa3efe2cecb2212793c5b596890a8 Mon Sep 17 00:00:00 2001
+-From: Alexander Kanavin <alex.kanavin@gmail.com>
+-Date: Thu, 18 Feb 2016 17:40:45 +0200
+-Subject: [PATCH] Makefile.am: use $(LIBTOOL) instead of hardcoded libtool name
+-
+-Upstream-Status: Pending
+-Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
+----
+- unique/Makefile.am | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/unique/Makefile.am b/unique/Makefile.am
+-index 6475a87..734f431 100644
+---- a/unique/Makefile.am
+-+++ b/unique/Makefile.am
+-@@ -114,7 +114,7 @@ Unique-1.0.gir: $(INTROSPECTION_SCANNER) libunique-1.0.la
+- 		--include=GObject-2.0 \
+- 		--include=Gtk-2.0 \
+- 		--library=libunique-1.0.la \
+--		--libtool="$(top_builddir)/libtool" \
+-+		--libtool="$(LIBTOOL)" \
+- 		--pkg gobject-2.0 \
+- 		--pkg gtk+-2.0 \
+- 		--output $@ \
+--- 
+-2.7.0
+-
+diff --git a/meta-xfce/recipes-extended/libunique/libunique/0001-test-unique-Add-format-qualifier-s-for-string.patch b/meta-xfce/recipes-extended/libunique/libunique/0001-test-unique-Add-format-qualifier-s-for-string.patch
+deleted file mode 100644
+index 7f9fdf397..000000000
+--- a/meta-xfce/recipes-extended/libunique/libunique/0001-test-unique-Add-format-qualifier-s-for-string.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From 37632aca00d48c53e91f08bc7435c721ba81b2cd Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Thu, 30 Mar 2017 14:32:55 -0700
+-Subject: [PATCH] test-unique: Add format qualifier %s for string
+-
+-Fixes potential security issues that compiler flags
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- tests/test-unique.c | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/tests/test-unique.c b/tests/test-unique.c
+-index b7cde45..82ee81b 100644
+---- a/tests/test-unique.c
+-+++ b/tests/test-unique.c
+-@@ -82,10 +82,10 @@ app_message_cb (UniqueApp         *app,
+-                                    GTK_DIALOG_DESTROY_WITH_PARENT,
+-                                    GTK_MESSAGE_INFO,
+-                                    GTK_BUTTONS_CLOSE,
+--                                   title);
+-+                                   "%s",title);
+-   if (message)
+-     gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+--                                              message);
+-+                                              "%s",message);
+- 
+-   gtk_window_set_urgency_hint (GTK_WINDOW (dialog), TRUE);
+- 
+--- 
+-2.12.1
+-
+diff --git a/meta-xfce/recipes-extended/libunique/libunique/build.patch b/meta-xfce/recipes-extended/libunique/libunique/build.patch
+deleted file mode 100644
+index 46a5c62e4..000000000
+--- a/meta-xfce/recipes-extended/libunique/libunique/build.patch
++++ /dev/null
+@@ -1,421 +0,0 @@
+-Upstream-Status: Backport [http://git.gnome.org/browse/unique/commit/?h=unique-1.1&id=f75ca2d7aad7d27686acca6090c1c569a79d7e63]
+-Signed-off-By: Ross Burton <ross.burton@intel.com>
+-
+-From f75ca2d7aad7d27686acca6090c1c569a79d7e63 Mon Sep 17 00:00:00 2001
+-From: Emmanuele Bassi <ebassi@gnome.org>
+-Date: Sat, 08 May 2010 11:17:21 +0000
+-Subject: build: Update the build environment
+-
+-Require autoconf 2.63, automake 1.11 and libtool 2.2.6 to remove Shave.
+-
+-Also bump up the requirement for gobject-introspection to 0.6.7.
+----
+-diff --git a/build/autotools/Makefile.am b/build/autotools/Makefile.am
+-index 5f35b85..b78428f 100644
+---- a/build/autotools/Makefile.am
+-+++ b/build/autotools/Makefile.am
+-@@ -1,7 +1,4 @@
+- EXTRA_DIST = \
+--	shave-libtool.in 	\
+--	shave.in 		\
+--	shave.m4 		\
+- 	as-compiler-flag.m4	\
+- 	introspection.m4	\
+- 	Makefile.am.enums	\
+-diff --git a/build/autotools/Makefile.am.silent b/build/autotools/Makefile.am.silent
+-index 249f6af..8576846 100644
+---- a/build/autotools/Makefile.am.silent
+-+++ b/build/autotools/Makefile.am.silent
+-@@ -1,10 +1,5 @@
+- # custom rules for quiet builds
+- 
+--if USE_SHAVE
+--QUIET_GEN = $(Q:@=@echo '  GEN   '$@;)
+--QUIET_LN  = $(Q:@=@echo '  LN    '$@;)
+--QUIET_RM  = $(Q:@=@echo '  RM    '$@;)
+--else
+- QUIET_GEN = $(AM_V_GEN)
+- 
+- QUIET_LN   = $(QUIET_LN_$(V))
+-@@ -14,4 +9,3 @@ QUIET_LN_0 = @echo '  LN     '$@;
+- QUIET_RM   = $(QUIET_RM_$(V))
+- QUIET_RM_  = $(QUIET_RM_$(AM_DEFAULT_VERBOSITY))
+- QUIET_RM_0 = @echo '  RM     '$@;
+--endif # USE_SHAVE
+-diff --git a/build/autotools/introspection.m4 b/build/autotools/introspection.m4
+-index f9ce49c..589721c 100644
+---- a/build/autotools/introspection.m4
+-+++ b/build/autotools/introspection.m4
+-@@ -59,12 +59,18 @@ m4_define([_GOBJECT_INTROSPECTION_CHECK_INTERNAL],
+-        INTROSPECTION_GENERATE=`$PKG_CONFIG --variable=g_ir_generate gobject-introspection-1.0`
+-        INTROSPECTION_GIRDIR=`$PKG_CONFIG --variable=girdir gobject-introspection-1.0`
+-        INTROSPECTION_TYPELIBDIR="$($PKG_CONFIG --variable=typelibdir gobject-introspection-1.0)"
+-+       INTROSPECTION_CFLAGS=`$PKG_CONFIG --cflags gobject-introspection-1.0`
+-+       INTROSPECTION_LIBS=`$PKG_CONFIG --libs gobject-introspection-1.0`
+-+       INTROSPECTION_MAKEFILE=`$PKG_CONFIG --variable=datadir gobject-introspection-1.0`/gobject-introspection-1.0/Makefile.introspection
+-     fi
+-     AC_SUBST(INTROSPECTION_SCANNER)
+-     AC_SUBST(INTROSPECTION_COMPILER)
+-     AC_SUBST(INTROSPECTION_GENERATE)
+-     AC_SUBST(INTROSPECTION_GIRDIR)
+-     AC_SUBST(INTROSPECTION_TYPELIBDIR)
+-+    AC_SUBST(INTROSPECTION_CFLAGS)
+-+    AC_SUBST(INTROSPECTION_LIBS)
+-+    AC_SUBST(INTROSPECTION_MAKEFILE)
+- 
+-     AM_CONDITIONAL(HAVE_INTROSPECTION, test "x$found_introspection" = "xyes")
+- ])
+-diff --git a/build/autotools/shave-libtool.in b/build/autotools/shave-libtool.in
+-deleted file mode 100644
+-index 1f3a720..0000000
+---- a/build/autotools/shave-libtool.in
+-+++ b/dev/null
+-@@ -1,69 +0,0 @@
+--#!/bin/sh
+--
+--# we need sed
+--SED=@SED@
+--if test -z "$SED" ; then
+--SED=sed
+--fi
+--
+--lt_unmangle ()
+--{
+--   last_result=`echo $1 | $SED -e 's#.libs/##' -e 's#[0-9a-zA-Z_\-\.]*_la-##'`
+--}
+--
+--# the real libtool to use
+--LIBTOOL="$1"
+--shift
+--
+--# if 1, don't print anything, the underlaying wrapper will do it
+--pass_though=0
+--
+--# scan the arguments, keep the right ones for libtool, and discover the mode
+--preserved_args=
+--while test "$#" -gt 0; do
+--    opt="$1"
+--    shift
+--
+--    case $opt in
+--    --mode=*)
+--        mode=`echo $opt | $SED -e 's/[-_a-zA-Z0-9]*=//'`
+--        preserved_args="$preserved_args $opt"
+--        ;;
+--    -o)
+--        lt_output="$1"
+--        preserved_args="$preserved_args $opt"
+--	;;
+--    *)
+--        preserved_args="$preserved_args $opt"
+--        ;;
+--      esac
+--done
+--
+--case "$mode" in
+--compile)
+--    # shave will be called and print the actual CC/CXX/LINK line
+--    preserved_args="$preserved_args --shave-mode=$mode"
+--    pass_though=1
+--    ;;
+--link)
+--    preserved_args="$preserved_args --shave-mode=$mode"
+--    Q="  LINK  "
+--    ;;
+--*)
+--    # let's u
+--    # echo "*** libtool: Unimplemented mode: $mode, fill a bug report"
+--    ;;
+--esac
+--
+--lt_unmangle "$lt_output"
+--output=$last_result
+--
+--if test -z $V; then
+--    if test $pass_though -eq 0; then
+--        echo "$Q$output"
+--    fi
+--    $LIBTOOL --silent $preserved_args
+--else
+--    echo $LIBTOOL $preserved_args
+--    $LIBTOOL $preserved_args
+--fi
+-diff --git a/build/autotools/shave.in b/build/autotools/shave.in
+-deleted file mode 100644
+-index 5c16f27..0000000
+---- a/build/autotools/shave.in
+-+++ b/dev/null
+-@@ -1,79 +0,0 @@
+--#!/bin/sh
+--
+--# we need sed
+--SED=@SED@
+--if test -z "$SED" ; then
+--SED=sed
+--fi
+--
+--lt_unmangle ()
+--{
+--   last_result=`echo $1 | $SED -e 's#.libs/##' -e 's#[0-9a-zA-Z_\-\.]*_la-##'`
+--}
+--
+--# the tool to wrap (cc, cxx, ar, ranlib, ..)
+--tool="$1"
+--shift
+--
+--# the reel tool (to call)
+--REEL_TOOL="$1"
+--shift
+--
+--pass_through=0
+--preserved_args=
+--while test "$#" -gt 0; do
+--    opt="$1"
+--    shift
+--
+--    case $opt in
+--    --shave-mode=*)
+--        mode=`echo $opt | $SED -e 's/[-_a-zA-Z0-9]*=//'`
+--	;;
+--    -o)
+--        lt_output="$1"
+--        preserved_args="$preserved_args $opt"
+--	;;
+--    *)
+--        preserved_args="$preserved_args $opt"
+--        ;;
+--      esac
+--done
+--
+--# mode=link is handled in the libtool wrapper
+--case "$mode,$tool" in
+--link,*)
+--    pass_through=1
+--    ;;
+--*,cxx)
+--    Q="  CXX   "
+--    ;;
+--*,cc)
+--    Q="  CC    "
+--    ;;
+--*,fc)
+--    Q="  FC    "
+--    ;;
+--*,f77)
+--    Q="  F77   "
+--    ;;
+--*,objc)
+--    Q="  OBJC   "
+--    ;;
+--*,*)
+--    # should not happen
+--    Q="  CC    "
+--    ;;
+--esac
+--
+--lt_unmangle "$lt_output"
+--output=$last_result
+--
+--if test -z $V; then
+--    if test $pass_through -eq 0; then
+--        echo "$Q$output"
+--    fi
+--    $REEL_TOOL $preserved_args
+--else
+--    echo $REEL_TOOL $preserved_args
+--    $REEL_TOOL $preserved_args
+--fi
+-diff --git a/build/autotools/shave.m4 b/build/autotools/shave.m4
+-deleted file mode 100644
+-index 0a3509e..0000000
+---- a/build/autotools/shave.m4
+-+++ b/dev/null
+-@@ -1,77 +0,0 @@
+--dnl Make automake/libtool output more friendly to humans
+--dnl  Damien Lespiau <damien.lespiau@gmail.com>
+--dnl
+--dnl SHAVE_INIT([shavedir],[default_mode])
+--dnl
+--dnl shavedir: the directory where the shave scripts are, it defaults to
+--dnl           $(top_builddir)
+--dnl default_mode: (enable|disable) default shave mode.  This parameter
+--dnl               controls shave's behaviour when no option has been
+--dnl               given to configure.  It defaults to disable.
+--dnl
+--dnl * SHAVE_INIT should be called late in your configure.(ac|in) file (just
+--dnl   before AC_CONFIG_FILE/AC_OUTPUT is perfect.  This macro rewrites CC and
+--dnl   LIBTOOL, you don't want the configure tests to have these variables
+--dnl   re-defined.
+--dnl * This macro requires GNU make's -s option.
+--
+--AC_DEFUN([_SHAVE_ARG_ENABLE],
+--[
+--  AC_ARG_ENABLE([shave],
+--    AS_HELP_STRING(
+--      [--enable-shave],
+--      [use shave to make the build pretty [[default=$1]]]),,
+--      [enable_shave=$1]
+--    )
+--])
+--
+--AC_DEFUN([SHAVE_INIT],
+--[
+--  dnl you can tweak the default value of enable_shave
+--  m4_if([$2], [enable], [_SHAVE_ARG_ENABLE(yes)], [_SHAVE_ARG_ENABLE(no)])
+--
+--  if test x"$enable_shave" = xyes; then
+--    dnl where can we find the shave scripts?
+--    m4_if([$1],,
+--      [shavedir="$ac_pwd"],
+--      [shavedir="$ac_pwd/$1"])
+--    AC_SUBST(shavedir)
+--
+--    dnl make is now quiet
+--    AC_SUBST([MAKEFLAGS], [-s])
+--    AC_SUBST([AM_MAKEFLAGS], ['`test -z $V && echo -s`'])
+--
+--    dnl we need sed
+--    AC_CHECK_PROG(SED,sed,sed,false)
+--
+--    dnl substitute libtool
+--    SHAVE_SAVED_LIBTOOL=$LIBTOOL
+--    LIBTOOL="${SHELL} ${shavedir}/shave-libtool '${SHAVE_SAVED_LIBTOOL}'"
+--    AC_SUBST(LIBTOOL)
+--
+--    dnl substitute cc/cxx
+--    SHAVE_SAVED_CC=$CC
+--    SHAVE_SAVED_CXX=$CXX
+--    SHAVE_SAVED_FC=$FC
+--    SHAVE_SAVED_F77=$F77
+--    SHAVE_SAVED_OBJC=$OBJC
+--    CC="${SHELL} ${shavedir}/shave cc ${SHAVE_SAVED_CC}"
+--    CXX="${SHELL} ${shavedir}/shave cxx ${SHAVE_SAVED_CXX}"
+--    FC="${SHELL} ${shavedir}/shave fc ${SHAVE_SAVED_FC}"
+--    F77="${SHELL} ${shavedir}/shave f77 ${SHAVE_SAVED_F77}"
+--    OBJC="${SHELL} ${shavedir}/shave objc ${SHAVE_SAVED_OBJC}"
+--    AC_SUBST(CC)
+--    AC_SUBST(CXX)
+--    AC_SUBST(FC)
+--    AC_SUBST(F77)
+--    AC_SUBST(OBJC)
+--
+--    V=@
+--  else
+--    V=1
+--  fi
+--  Q='$(V:1=)'
+--  AC_SUBST(V)
+--  AC_SUBST(Q)
+--])
+--
+-diff --git a/configure.ac b/configure.ac
+-index a3ed3ee..bc3163a 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -14,7 +14,7 @@ m4_define([unique_api_version], [1.0])
+- # This is the X.Y used in the protocol negotiation
+- m4_define([unique_protocol_version], [1.0])
+- 
+--AC_PREREQ([2.59])
+-+AC_PREREQ([2.63])
+- 
+- AC_INIT([unique], [unique_version],
+-         [http://bugzilla.gnome.org/enter_bug.cgi?product=libunique],
+-@@ -23,9 +23,21 @@ AC_INIT([unique], [unique_version],
+- AC_CONFIG_SRCDIR([unique/unique.h])
+- AC_CONFIG_MACRO_DIR([build/autotools])
+- 
+--AM_INIT_AUTOMAKE([1.10])
+-+AM_INIT_AUTOMAKE([1.11 no-define -Wno-portability dist-bzip2])
+- AM_CONFIG_HEADER([config.h])
+- 
+-+AM_SILENT_RULES([yes])
+-+
+-+AC_PROG_CC_C_O
+-+
+-+AM_PATH_GLIB_2_0
+-+
+-+LT_PREREQ([2.2.6])
+-+LT_INIT([disable-static])
+-+
+-+# Honor aclocal flags
+-+ACLOCAL="$ACLOCAL $ACLOCAL_FLAGS"
+-+
+- # version symbols
+- UNIQUE_MAJOR_VERSION=unique_major_version
+- UNIQUE_MINOR_VERSION=unique_minor_version
+-@@ -49,21 +61,6 @@ UNIQUE_LT_CURRENT_MINUS_AGE=m4_eval(lt_current - lt_age)
+- AC_SUBST(UNIQUE_LT_VERSION_INFO)
+- AC_SUBST(UNIQUE_LT_CURRENT_MINUS_AGE)
+- 
+--AC_ISC_POSIX
+--AC_PROG_CC
+--AC_PROG_INSTALL
+--AC_PROG_MAKE_SET
+--AC_C_CONST
+--AC_PROG_LIBTOOL
+--AC_PATH_PROG(GLIB_MKENUMS, [glib-mkenums])
+--AC_PATH_PROG(GLIB_GENMARSHAL, [glib-genmarshal])
+--
+--AM_SANITY_CHECK
+--AM_PROG_CC_STDC
+--
+--# Honor aclocal flags
+--ACLOCAL="$ACLOCAL $ACLOCAL_FLAGS"
+--
+- m4_define([glib_required], [2.12.0])
+- m4_define([gtk_required],  [2.11.0])
+- m4_define([dbus_required], [0.70])
+-@@ -122,7 +119,6 @@ AM_CONDITIONAL([HAVE_DBUS], [test "x$have_dbus" = "xyes"])
+- dnl Bacon backend
+- dnl This is the fallback backend, so we *need* these headers and functions
+- dnl even if we end up using D-Bus
+--dnl D-Bus backend dependencies
+- m4_define([have_bacon_default], [yes])
+- AC_ARG_ENABLE([bacon],
+-               [AC_HELP_STRING([--enable-bacon=@<:@yes/no@:>@],
+-@@ -178,9 +174,9 @@ AC_ARG_ENABLE([maintainer-flags],
+- AS_IF([test "x$enable_maintainer_flags" = "xyes" &&  test "x$GCC" = "xyes"],
+-       [
+-         AS_COMPILER_FLAGS([MAINTAINER_CFLAGS],
+--                          ["-Werror -Wall -Wshadow -Wcast-align
+--                            -Wno-uninitialized -Wempty-body -Wformat-security
+--                            -Winit-self"])
+-+                          ["-Wall -Wshadow -Wcast-align
+-+                            -Wno-uninitialized -Wempty-body
+-+                            -Wformat-security -Winit-self"])
+-       ]
+- )
+- 
+-@@ -230,27 +226,10 @@ AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],
+- AM_GLIB_DEFINE_LOCALEDIR(UNIQUE_LOCALEDIR)
+- 
+- # introspection
+--GOBJECT_INTROSPECTION_CHECK([0.6.3])
+-+GOBJECT_INTROSPECTION_CHECK([0.6.7])
+- 
+- # gtk-doc
+--GTK_DOC_CHECK([1.11])
+--
+--# nice builds
+--m4_ifdef([AM_SILENT_RULES],
+--         [
+--           AM_SILENT_RULES([yes])
+--           use_shave=no
+--         ],
+--         [
+--           SHAVE_INIT([build/autotools], [enable])
+--           AC_CONFIG_FILES([
+--                build/autotools/shave-libtool
+--                build/autotools/shave
+--           ])
+--           use_shave=yes
+--         ])
+--
+--AM_CONDITIONAL([USE_SHAVE], [test "x$use_shave" = "xyes"])
+-+GTK_DOC_CHECK([1.13])
+- 
+- AC_CONFIG_FILES([
+-         Makefile
+---
+-cgit v0.9.0.2
+diff --git a/meta-xfce/recipes-extended/libunique/libunique/fix_for_compile_with_gcc-4.6.0.patch b/meta-xfce/recipes-extended/libunique/libunique/fix_for_compile_with_gcc-4.6.0.patch
+deleted file mode 100644
+index d75de93fc..000000000
+--- a/meta-xfce/recipes-extended/libunique/libunique/fix_for_compile_with_gcc-4.6.0.patch
++++ /dev/null
+@@ -1,36 +0,0 @@
+-Upstream-Status: Pending
+-
+-Fix Following compilation errors with gcc 4.6.0
+-
+-Nitin A Kamble <nitin.a.kamble@intel.com> 2011/05/10
+-
+-| uniquebackend-dbus.c: In function 'unique_backend_dbus_request_name':
+-| uniquebackend-dbus.c:87:22: error: variable 'backend_dbus' set but not used [-Werror=unused-but-set-variable]
+-| uniquebackend-dbus.c: In function 'unique_backend_dbus_send_message':
+-| uniquebackend-dbus.c:189:12: error: variable 'res' set but not used [-Werror=unused-but-set-variable]
+-| cc1: all warnings being treated as errors
+-| 
+-| make[5]: *** [libunique_dbus_la-uniquebackend-dbus.lo] Error 1
+-
+-Index: libunique-1.1.6/unique/dbus/uniquebackend-dbus.c
+-===================================================================
+---- libunique-1.1.6.orig/unique/dbus/uniquebackend-dbus.c
+-+++ libunique-1.1.6/unique/dbus/uniquebackend-dbus.c
+-@@ -84,7 +84,7 @@ unique_backend_dbus_register_proxy (Uniq
+- static gboolean
+- unique_backend_dbus_request_name (UniqueBackend *backend)
+- {
+--  UniqueBackendDBus *backend_dbus;
+-+  UniqueBackendDBus __attribute__((__unused__)) *backend_dbus;
+-   const gchar *name;
+-   DBusGConnection *connection;
+-   DBusGProxy *proxy;
+-@@ -186,7 +186,7 @@ unique_backend_dbus_send_message (Unique
+-   GValueArray *data;
+-   gchar *cmd;
+-   gchar *resp;
+--  gboolean res;
+-+  gboolean __attribute__((__unused__)) res;
+-   GError *error;
+-   UniqueResponse response;
+- 
+diff --git a/meta-xfce/recipes-extended/libunique/libunique/noconst.patch b/meta-xfce/recipes-extended/libunique/libunique/noconst.patch
+deleted file mode 100644
+index 2cc03473c..000000000
+--- a/meta-xfce/recipes-extended/libunique/libunique/noconst.patch
++++ /dev/null
+@@ -1,130 +0,0 @@
+-G_CONST_RETURN is deprecated in glib 2.30 so remove to to avoid
+-build failures.
+-
+-RP 2011/10/12
+-
+-Upstream-Status: Pending
+-
+-Index: libunique-1.1.6/unique/uniqueapp.c
+-===================================================================
+---- libunique-1.1.6.orig/unique/uniqueapp.c	2011-10-12 01:21:25.842046488 +0100
+-+++ libunique-1.1.6/unique/uniqueapp.c	2011-10-12 01:21:55.062046796 +0100
+-@@ -781,7 +781,7 @@
+- }
+- 
+- 
+--G_CONST_RETURN gchar *
+-+const gchar *
+- unique_command_to_string (UniqueApp *app,
+-                           gint       command)
+- {
+-@@ -863,7 +863,7 @@
+-   return retval;
+- }
+- 
+--G_CONST_RETURN gchar *
+-+const gchar *
+- unique_response_to_string (UniqueResponse response)
+- {
+-   GEnumClass *enum_class;
+-Index: libunique-1.1.6/unique/uniquebackend.c
+-===================================================================
+---- libunique-1.1.6.orig/unique/uniquebackend.c	2011-10-12 01:21:25.742046323 +0100
+-+++ libunique-1.1.6/unique/uniquebackend.c	2011-10-12 01:21:55.062046796 +0100
+-@@ -111,7 +111,7 @@
+-  *
+-  * Return value: FIXME
+-  */
+--G_CONST_RETURN gchar *
+-+const gchar *
+- unique_backend_get_name (UniqueBackend *backend)
+- {
+-   g_return_val_if_fail (UNIQUE_IS_BACKEND (backend), NULL);
+-@@ -154,7 +154,7 @@
+-  *
+-  * Return value: FIXME
+-  */
+--G_CONST_RETURN gchar *
+-+const gchar *
+- unique_backend_get_startup_id (UniqueBackend *backend)
+- {
+-   g_return_val_if_fail (UNIQUE_IS_BACKEND (backend), NULL);
+-Index: libunique-1.1.6/unique/uniquebackend.h
+-===================================================================
+---- libunique-1.1.6.orig/unique/uniquebackend.h	2011-10-12 01:21:25.992046521 +0100
+-+++ libunique-1.1.6/unique/uniquebackend.h	2011-10-12 01:21:56.512047875 +0100
+-@@ -94,10 +94,10 @@
+- 
+- UniqueBackend *       unique_backend_create         (void);
+- 
+--G_CONST_RETURN gchar *unique_backend_get_name       (UniqueBackend     *backend);
+-+const gchar *unique_backend_get_name       (UniqueBackend     *backend);
+- void                  unique_backend_set_name       (UniqueBackend     *backend,
+-                                                      const gchar       *name);
+--G_CONST_RETURN gchar *unique_backend_get_startup_id (UniqueBackend     *backend);
+-+const gchar *unique_backend_get_startup_id (UniqueBackend     *backend);
+- void                  unique_backend_set_startup_id (UniqueBackend     *backend,
+-                                                      const gchar       *startup_id);
+- GdkScreen *           unique_backend_get_screen     (UniqueBackend     *backend);
+-Index: libunique-1.1.6/unique/uniqueinternals.h
+-===================================================================
+---- libunique-1.1.6.orig/unique/uniqueinternals.h	2011-10-12 01:21:25.892046532 +0100
+-+++ libunique-1.1.6/unique/uniqueinternals.h	2011-10-12 01:21:56.512047875 +0100
+-@@ -44,11 +44,11 @@
+-  * and then back into an id
+-  */
+- UniqueResponse        unique_response_from_string  (const gchar    *response);
+--G_CONST_RETURN gchar *unique_response_to_string    (UniqueResponse  response);
+-+const gchar *unique_response_to_string    (UniqueResponse  response);
+- 
+- gint                  unique_command_from_string   (UniqueApp      *app,
+-                                                     const gchar    *command);
+--G_CONST_RETURN gchar *unique_command_to_string     (UniqueApp      *app,
+-+const gchar *unique_command_to_string     (UniqueApp      *app,
+-                                                     gint            command);
+- 
+- G_END_DECLS
+-Index: libunique-1.1.6/unique/uniquemessage.c
+-===================================================================
+---- libunique-1.1.6.orig/unique/uniquemessage.c	2011-10-12 01:21:25.942046524 +0100
+-+++ libunique-1.1.6/unique/uniquemessage.c	2011-10-12 01:21:55.072046595 +0100
+-@@ -185,7 +185,7 @@
+-  *
+-  * Since: 1.0.2
+-  */
+--G_CONST_RETURN guchar *
+-+const guchar *
+- unique_message_data_get (UniqueMessageData *message_data,
+-                          gsize             *length)
+- {
+-@@ -525,7 +525,7 @@
+-  *   owned by the #UniqueMessageData structure and should not be
+-  *   modified or freed
+-  */
+--G_CONST_RETURN gchar *
+-+const gchar *
+- unique_message_data_get_startup_id (UniqueMessageData *message_data)
+- {
+-   g_return_val_if_fail (message_data != NULL, NULL);
+-Index: libunique-1.1.6/unique/uniquemessage.h
+-===================================================================
+---- libunique-1.1.6.orig/unique/uniquemessage.h	2011-10-12 01:21:25.792046596 +0100
+-+++ libunique-1.1.6/unique/uniquemessage.h	2011-10-12 01:21:56.512047875 +0100
+-@@ -48,7 +48,7 @@
+- void                   unique_message_data_set            (UniqueMessageData *message_data,
+-                                                            const guchar      *data,
+-                                                            gsize              length);
+--G_CONST_RETURN guchar *unique_message_data_get            (UniqueMessageData *message_data,
+-+const guchar *unique_message_data_get            (UniqueMessageData *message_data,
+-                                                            gsize             *length);
+- 
+- gboolean               unique_message_data_set_text       (UniqueMessageData *message_data,
+-@@ -63,7 +63,7 @@
+- gchar *                unique_message_data_get_filename   (UniqueMessageData *message_data);
+- 
+- GdkScreen *            unique_message_data_get_screen     (UniqueMessageData *message_data);
+--G_CONST_RETURN gchar * unique_message_data_get_startup_id (UniqueMessageData *message_data);
+-+const gchar * unique_message_data_get_startup_id (UniqueMessageData *message_data);
+- guint                  unique_message_data_get_workspace  (UniqueMessageData *message_data);
+- 
+- G_END_DECLS
+diff --git a/meta-xfce/recipes-extended/libunique/libunique_1.1.6.bb b/meta-xfce/recipes-extended/libunique/libunique_1.1.6.bb
+deleted file mode 100644
+index a6d335a2e..000000000
+--- a/meta-xfce/recipes-extended/libunique/libunique_1.1.6.bb
++++ /dev/null
+@@ -1,34 +0,0 @@
+-SUMMARY = "Library for supporting single instance GTK+ applications"
+-DESCRIPTION = "Unique is a library for writing single instance GTK+ applications. If you launch a single instance application twice, the second instance will either just quit or will send a message to the running instance."
+-HOMEPAGE = "https://wiki.gnome.org/Attic/LibUnique"
+-BUGTRACKER = "https://bugzilla.gnome.org/enter_bug.cgi?product=libunique"
+-
+-SRC_URI = "${GNOME_MIRROR}/libunique/1.1/libunique-${PV}.tar.bz2 \
+-           file://fix_for_compile_with_gcc-4.6.0.patch \
+-           file://noconst.patch \
+-           file://build.patch \
+-           file://0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch \
+-           file://0001-test-unique-Add-format-qualifier-s-for-string.patch \
+-           "
+-
+-SRC_URI[md5sum] = "7955769ef31f1bc4f83446dbb3625e6d"
+-SRC_URI[sha256sum] = "e5c8041cef8e33c55732f06a292381cb345db946cf792a4ae18aa5c66cdd4fbb"
+-
+-PR = "r7"
+-
+-DEPENDS = "dbus-glib-native glib-2.0 gtk+"
+-
+-PACKAGECONFIG ??= "dbus"
+-PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,dbus dbus-glib"
+-
+-LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+-
+-
+-inherit autotools pkgconfig gobject-introspection features_check gtk-doc
+-
+-REQUIRED_DISTRO_FEATURES = "x11"
+-
+-do_install_append () {
+-    rmdir --ignore-fail-on-non-empty ${D}${datadir}
+-}
+-- 
+2.26.2
 
