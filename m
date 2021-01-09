@@ -1,288 +1,251 @@
-Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com [209.85.161.42])
- by mx.groups.io with SMTP id smtpd.web12.6180.1610211778000245457
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.web09.6161.1610212552214019216
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 09 Jan 2021 09:02:58 -0800
+ Sat, 09 Jan 2021 09:15:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=UQVf/fB/;
- spf=pass (domain: gmail.com, ip: 209.85.161.42, mailfrom: toertel@gmail.com)
-Received: by mail-oo1-f42.google.com with SMTP id y14so3151989oom.10
-        for <openembedded-devel@lists.openembedded.org>; Sat, 09 Jan 2021 09:02:57 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=N2k4++lf;
+ spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-wm1-f48.google.com with SMTP id 3so11105320wmg.4
+        for <openembedded-devel@lists.openembedded.org>; Sat, 09 Jan 2021 09:15:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=UzU4Z2aRa4NFBnXV5e+Qop+g7MParMTSLJqaV6fnJ/0=;
-        b=UQVf/fB/MOwQ6klCc94FiRqdkkwwiziIxafq07fNuN/7QAUmSsVueYyH9XYVFhtxDu
-         8r2/pO7sIgpyAoFOBBQbG2BKNh0WqaVbG4Nw5AhvKzwcL76uLhI7YqHc+3EKikm29EIi
-         4IUPDi8n7mo+t8zsFigzdRk8HHb0MbFUtEDTkWTwZVDJdnFwymgrkWl4r6zohwacZddN
-         mUJ/9bfZtt2j1rlLc6HG6/oR8m4m/tVvHuDSUV9IiKJOFT9Fc+rQM1Va6aCZz02AVFq9
-         BsQlK/dl8dl0hNaXVl0WEjq5ZyrsXtfR1WWL6j5Ye6+rOnI8a4EigqUwmz2rZpOOvUKZ
-         TPyg==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=TAVYjZPmf5ie3XXuPd1DbJIhPn+Lnm9gXKGutjfn+es=;
+        b=N2k4++lfa1W7DRfjRVxMLgQVyJLQTUSLYRAbMcUQXudBxdxVd2GGgixnscj/RDeFPZ
+         bKMEbSJ6BVgh0NMv97qdhzhAR/jTSxgZJVkwOSMWvrXVfd2q7i2LCAfBZpnWOChv2X3T
+         /syHN51SRNv2ddfarxOCKv8nhMbFj25G5dMQwImJCQfSjRvEo0aSJaUYxmzWP/5wez1b
+         jHICAYscRyU/P2Qr0WGP5u1FMLu3zymh/Hwq+ZDku4foKr4sNUdApxtIAEf9fGc4Bt2V
+         u7R3BtANJ8yamCOOT+4oku8nlRLHY9cpkf1FyfgT5ZhuwrWMvexUBmWSniIWtrulNp3W
+         4Liw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=UzU4Z2aRa4NFBnXV5e+Qop+g7MParMTSLJqaV6fnJ/0=;
-        b=jff4Z+PyAKZI2qaIEFs1P1mmkDGCyV3EQ6KMH+O3ksNSPDHdgwDL/hHr9DfjEoRt6R
-         pXTVHCSNmxNsPCb8ztcTbzLXZbezuBhlKdXNIXtLIYHnfPUI2EyXvZ9L+tU2wo0qdXpq
-         jJFUnEHHSZZXRznuyJoEJXu+LwjJrW2oTd0Z9UFWCokGD3zjTCQgSvkgPF0c4ydyDhaU
-         +qbzhlGgjNQC62UfH6zFndfVcaS4/XAlaxrnQBM0J9u3UOd3ICiCPHhPkI0fk+eIHx1b
-         kbgmw+SoA69Tk2dudGAPKjpo9iGURw3xzEEKoYr8jc+oLcist7xB+APi8DWhsM4y7BPa
-         eFyA==
-X-Gm-Message-State: AOAM531lH8rcQyju3oytGGjIvpklXQR6GqpuO8DaJM00gHFeKSoN7C/U
-	H9HYYdn08FuSDxeo44FO4Np9zUvTwkXFoLg56n8=
-X-Google-Smtp-Source: ABdhPJzjOjgb3iP15X5wxW785nKPgiMbUMiDlwzzrCu9R8X8G+cDYFfU0DQG+6kneYKYu83Sdb4twCN6Xe6DDLgVwCo=
-X-Received: by 2002:a4a:bc8d:: with SMTP id m13mr7794581oop.63.1610211777251;
- Sat, 09 Jan 2021 09:02:57 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=TAVYjZPmf5ie3XXuPd1DbJIhPn+Lnm9gXKGutjfn+es=;
+        b=mrbwikAxPxjCwCG/m6wji/+AzbrV6dWXENhZiG+ma/wVA1ztwx/S8/IhOQK3O6u3i1
+         WpIqsfcKRAZi/8YqnuTO5qtooZuvWat6t0uqq4EANb992qFnCSyKx2vq9iCtPnh5ggT3
+         2K+E4zOfJelr6jNQ1Lr4m5rdx3RM6oNi9rnt68EDWTHhednybsgMVt7VHNgqU7mx8KgM
+         9xo39cNe3qOBkceHSH9jGZ2aZuXhV3R5Jv3L35oyHVVN38KKOPFtbes9HUd+oKO6JD85
+         OcfMijDiqtd/LZv/vtiwipl11RQyMY2pWoGCxYA+Dy0GRwCnT3++CMxT2R65r+ZVUJPg
+         58/w==
+X-Gm-Message-State: AOAM53010Ne2nW9rgCGPg6xuIvVYTfwPlKq1eXZFT4WnTXOXs0jqVulK
+	la2QQbaITU/hpAmUlC0DOGtRCOIEW2E=
+X-Google-Smtp-Source: ABdhPJwqOASzo4AiQxZsLHlYEzMs64GRbtXwNY+Ov4+wY7TH0qQ1jgfUCQ1HgrOnTnEIPFRH7RhE8A==
+X-Received: by 2002:a05:600c:4152:: with SMTP id h18mr7984979wmm.110.1610212550214;
+        Sat, 09 Jan 2021 09:15:50 -0800 (PST)
+Return-Path: <costamagna.gianfranco@gmail.com>
+Received: from Unimatrix08-Focal.lan ([5.170.141.245])
+        by smtp.gmail.com with ESMTPSA id u6sm19626098wrm.90.2021.01.09.09.15.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 09 Jan 2021 09:15:49 -0800 (PST)
+From: "Gianfranco" <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+To: openembedded-devel@lists.openembedded.org
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	Gianfranco Costamagna <locutusofborg@debian.org>
+Subject: [meta-oe][PATCH] dlt-daemon: update to new release 2.18.6
+Date: Sat,  9 Jan 2021 18:15:46 +0100
+Message-Id: <20210109171546.3367628-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20201224065952.3714857-1-raj.khem@gmail.com>
-In-Reply-To: <20201224065952.3714857-1-raj.khem@gmail.com>
-From: "Mark Jonas" <toertel@gmail.com>
-Date: Sat, 9 Jan 2021 18:02:46 +0100
-Message-ID: <CAEE5dN1hqOm_2WepkQ+iDnRvwSvXv=r7TtkQJReueawV5QQ3Eg@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH v3] beep: Update to 1.4.9 in new repository
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-Hi Khem,
+- drop patches 241 245 275: upstream
 
-I wanted to create a patch for beep's mainline so it could be used in
-meta-openembedded without your patch. That is, what hinders
-compilation with Clang 11 and -Werror. To my astonishment the
-unmodified beep v1.4.9 compiles just fine with clang-11 from
-https://apt.llvm.org/ on Ubuntu 20.04. And it definitely fails when
-building with meta-clang without your patch.
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+---
+ .../dlt-daemon/dlt-daemon/241.patch           | 30 --------
+ .../dlt-daemon/dlt-daemon/245.patch           | 74 -------------------
+ .../dlt-daemon/dlt-daemon/275.patch           | 38 ----------
+ ...-daemon_2.18.5.bb => dlt-daemon_2.18.6.bb} |  5 +-
+ 4 files changed, 1 insertion(+), 146 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/241.patch
+ delete mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/245.patch
+ delete mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch
+ rename meta-oe/recipes-extended/dlt-daemon/{dlt-daemon_2.18.5.bb => dlt-daemon_2.18.6.bb} (96%)
 
-What is the difference between the two Clangs?
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/241.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/241.patch
+deleted file mode 100644
+index 7d8f22ec7..000000000
+--- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/241.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From b8f9919f000e642fc8970d0a42c1bdadf5a9d720 Mon Sep 17 00:00:00 2001
+-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+-Date: Mon, 10 Aug 2020 08:30:34 +0200
+-Subject: [PATCH] sd-daemon.c: Fix build with newer glibc and musl libc
+-
+-Reported by Khem Raj on meta-oe list
+-
+-TOPDIR/build/tmp/work/armv7vet2hf-neon-yoe-linux-musleabi/dlt-daemon/2.18.5-r0/recipe-sysroot/usr/include/sys/fcntl.h:1:2: error: redirecting incorrect #include <sys/fcntl.h> to <fcntl.h> [-Werror,-W#warnings]
+- ^
+-1 error generated.
+-
+-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+----
+- systemd/3rdparty/sd-daemon.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/systemd/3rdparty/sd-daemon.c b/systemd/3rdparty/sd-daemon.c
+-index 88936d2..de3f985 100644
+---- a/systemd/3rdparty/sd-daemon.c
+-+++ b/systemd/3rdparty/sd-daemon.c
+-@@ -35,7 +35,7 @@
+- #ifdef __BIONIC__
+- #include <linux/fcntl.h>
+- #else
+--#include <sys/fcntl.h>
+-+#include <fcntl.h>
+- #endif
+- #include <netinet/in.h>
+- #include <stdlib.h>
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/245.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/245.patch
+deleted file mode 100644
+index 43057489c..000000000
+--- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/245.patch
++++ /dev/null
+@@ -1,74 +0,0 @@
+-From 57fd61ea5c58a4f9fcd7140b53ac6cd6e971ef47 Mon Sep 17 00:00:00 2001
+-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+-Date: Fri, 31 Jul 2020 15:16:02 +0200
+-Subject: [PATCH] dlt_offline: fix build failures with gcc-10
+-
+-see bug report: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=957140
+-
+-/usr/bin/ld: CMakeFiles/dlt-daemon.dir/dlt_daemon_client.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: multiple definition of `g_logstorage_cache_max'; CMakeFiles/dlt-daemon.dir/dlt-daemon.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: first defined here
+-/usr/bin/ld: CMakeFiles/dlt-daemon.dir/dlt_daemon_common.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:118: multiple definition of `g_logstorage_cache_size'; CMakeFiles/dlt-daemon.dir/dlt-daemon.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:118: first defined here
+-/usr/bin/ld: CMakeFiles/dlt-daemon.dir/dlt_daemon_common.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: multiple definition of `g_logstorage_cache_max'; CMakeFiles/dlt-daemon.dir/dlt-daemon.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: first defined here
+-/usr/bin/ld: CMakeFiles/dlt-daemon.dir/dlt_daemon_connection.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:118: multiple definition of `g_logstorage_cache_size'; CMakeFiles/dlt-daemon.dir/dlt-daemon.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:118: first defined here
+-/usr/bin/ld: CMakeFiles/dlt-daemon.dir/dlt_daemon_connection.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: multiple definition of `g_logstorage_cache_max'; CMakeFiles/dlt-daemon.dir/dlt-daemon.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: first defined here
+-/usr/bin/ld: CMakeFiles/dlt-daemon.dir/dlt_daemon_event_handler.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:118: multiple definition of `g_logstorage_cache_size'; CMakeFiles/dlt-daemon.dir/dlt-daemon.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:118: first defined here
+-/usr/bin/ld: CMakeFiles/dlt-daemon.dir/dlt_daemon_event_handler.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: multiple definition of `g_logstorage_cache_max'; CMakeFiles/dlt-daemon.dir/dlt-daemon.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: first defined here
+-/usr/bin/ld: CMakeFiles/dlt-daemon.dir/dlt_daemon_offline_logstorage.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: multiple definition of `g_logstorage_cache_max'; CMakeFiles/dlt-daemon.dir/dlt-daemon.c.o:./obj-x86_64-linux-gnu/src/daemon/./src/offlinelogstorage/dlt_offline_logstorage.h:116: first defined here
+----
+- src/daemon/dlt_daemon_offline_logstorage.c              | 1 +
+- src/offlinelogstorage/dlt_offline_logstorage.h          | 4 ++--
+- src/offlinelogstorage/dlt_offline_logstorage_behavior.c | 1 +
+- tests/gtest_dlt_daemon_offline_log.cpp                  | 1 +
+- 4 files changed, 5 insertions(+), 2 deletions(-)
+-
+-diff --git a/src/daemon/dlt_daemon_offline_logstorage.c b/src/daemon/dlt_daemon_offline_logstorage.c
+-index 0b3c14f..db9637e 100644
+---- a/src/daemon/dlt_daemon_offline_logstorage.c
+-+++ b/src/daemon/dlt_daemon_offline_logstorage.c
+-@@ -56,6 +56,7 @@ DLT_STATIC DltReturnValue dlt_logstorage_split_ecuid(char *key,
+-     return DLT_RETURN_OK;
+- }
+- 
+-+unsigned int g_logstorage_cache_max;
+- /**
+-  * dlt_logstorage_split_ctid
+-  *
+-diff --git a/src/offlinelogstorage/dlt_offline_logstorage.h b/src/offlinelogstorage/dlt_offline_logstorage.h
+-index b58da70..c9bc93b 100644
+---- a/src/offlinelogstorage/dlt_offline_logstorage.h
+-+++ b/src/offlinelogstorage/dlt_offline_logstorage.h
+-@@ -114,9 +114,9 @@
+- #define DLT_OFFLINE_LOGSTORAGE_IS_STRATEGY_SET(S, s) ((S)&(s))
+- 
+- /* logstorage max cache */
+--unsigned int g_logstorage_cache_max;
+-+extern unsigned int g_logstorage_cache_max;
+- /* current logstorage cache size */
+--unsigned int g_logstorage_cache_size;
+-+extern unsigned int g_logstorage_cache_size;
+- 
+- typedef struct
+- {
+-diff --git a/src/offlinelogstorage/dlt_offline_logstorage_behavior.c b/src/offlinelogstorage/dlt_offline_logstorage_behavior.c
+-index afbf8c4..edef482 100644
+---- a/src/offlinelogstorage/dlt_offline_logstorage_behavior.c
+-+++ b/src/offlinelogstorage/dlt_offline_logstorage_behavior.c
+-@@ -32,6 +32,7 @@
+- #include "dlt_offline_logstorage_behavior.h"
+- #include "dlt_offline_logstorage_behavior_internal.h"
+- 
+-+unsigned int g_logstorage_cache_size;
+- /**
+-  * dlt_logstorage_log_file_name
+-  *
+-diff --git a/tests/gtest_dlt_daemon_offline_log.cpp b/tests/gtest_dlt_daemon_offline_log.cpp
+-index b8965de..0bd4d5e 100644
+---- a/tests/gtest_dlt_daemon_offline_log.cpp
+-+++ b/tests/gtest_dlt_daemon_offline_log.cpp
+-@@ -29,6 +29,7 @@ extern "C"
+- #include <fcntl.h>
+- }
+- 
+-+unsigned int g_logstorage_cache_max;
+- /* Begin Method: dlt_logstorage::t_dlt_logstorage_list_add*/
+- TEST(t_dlt_logstorage_list_add, normal)
+- {
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch
+deleted file mode 100644
+index 75065eb05..000000000
+--- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch
++++ /dev/null
+@@ -1,38 +0,0 @@
+-Upstream-status: Backport
+-CVE: CVE-2020-29394
+-From 7f5cd5404a03fa330e192084f6bdafb2dc9bdcb7 Mon Sep 17 00:00:00 2001
+-From: GwanYeong Kim <gy741.kim@gmail.com>
+-Date: Sat, 28 Nov 2020 12:24:46 +0900
+-Subject: [PATCH] dlt_common: Fix buffer overflow in dlt_filter_load
+-
+-A buffer overflow in the dlt_filter_load function in dlt_common.c in dlt-daemon allows arbitrary code execution via an unsafe usage of fscanf, because it does not limit the number of characters to be read in a format argument.
+-
+-Fixed: #274
+-
+-Signed-off-by: GwanYeong Kim <gy741.kim@gmail.com>
+----
+- src/shared/dlt_common.c | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/src/shared/dlt_common.c b/src/shared/dlt_common.c
+-index 254f4ce4..d15b1cec 100644
+---- a/src/shared/dlt_common.c
+-+++ b/src/shared/dlt_common.c
+-@@ -404,7 +404,7 @@ DltReturnValue dlt_filter_load(DltFilter *filter, const char *filename, int verb
+-     while (!feof(handle)) {
+-         str1[0] = 0;
+- 
+--        if (fscanf(handle, "%s", str1) != 1)
+-+        if (fscanf(handle, "%254s", str1) != 1)
+-             break;
+- 
+-         if (str1[0] == 0)
+-@@ -419,7 +419,7 @@ DltReturnValue dlt_filter_load(DltFilter *filter, const char *filename, int verb
+- 
+-         str1[0] = 0;
+- 
+--        if (fscanf(handle, "%s", str1) != 1)
+-+        if (fscanf(handle, "%254s", str1) != 1)
+-             break;
+- 
+-         if (str1[0] == 0)
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.6.bb
+similarity index 96%
+rename from meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb
+rename to meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.6.bb
+index 5066e76d3..b3cfb4709 100644
+--- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.5.bb
++++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.6.bb
+@@ -17,11 +17,8 @@ DEPENDS = "zlib gzip-native"
+ SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=https \
+     file://0002-Don-t-execute-processes-as-a-specific-user.patch \
+     file://0004-Modify-systemd-config-directory.patch \
+-    file://241.patch \
+-    file://245.patch \
+-    file://275.patch \
+ "
+-SRCREV = "f1ac087c766827b1d0ed9c3a814b3cc052e948f2"
++SRCREV = "22715aeceaa81ace2c832312529bde3a42d0814f"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.25.1
 
-I have to admit that this is the first time I used clang.
-
-$ clang-11 --version
-Ubuntu clang version
-11.0.1-++20201218093155+43ff75f2c3fe-1~exp1~20201218203809.158
-Target: x86_64-pc-linux-gnu
-Thread model: posix
-InstalledDir: /usr/bin
-
-$ make COMPILER_gcc=no COMPILER_clang=clang-11 LINKER_clang=clang-11
-/bin/sed  -e s/@PACKAGE_TARNAME@/beep/g -e s/@PACKAGE_VERSION@/1.4.9/g
--e s/@DEFAULT_FREQ@/440/g -e s/@DEFAULT_LENGTH@/200/g -e
-s/@DEFAULT_DELAY@/100/g -e 's|[@]pkgdocdir@|/usr/share/doc/beep|g' <
-beep-config.h.in > beep-config.h.new
-mv -f beep-config.h.new beep-config.h
-clang-11 -MT beep-main.clang-o -MMD -MP -MF
-.deps/beep-main.clang-o.dep   -DPACKAGE_TARNAME='"beep"'
--DPACKAGE_VERSION='"1.4.9"'    -Wall -Wextra -Weverything -Wno-padded
--std=gnu99 -pedantic -Werror -fsanitize=undefined -O -g -o
-beep-main.clang-o -c beep-main.c
-/bin/sed  -e s/@PACKAGE_TARNAME@/beep/g -e s/@PACKAGE_VERSION@/1.4.9/g
--e s/@DEFAULT_FREQ@/440/g -e s/@DEFAULT_LENGTH@/200/g -e
-s/@DEFAULT_DELAY@/100/g -e 's|[@]pkgdocdir@|/usr/share/doc/beep|g' <
-beep-usage.txt.in > beep-usage.txt.new
-mv -f beep-usage.txt.new beep-usage.txt
-echo '/* Auto-generated from `beep-usage.txt`. Modify that file
-instead. */' > beep-usage.c
-echo '#include "beep-usage.h"' >> beep-usage.c
-echo 'char beep_usage[] =' >> beep-usage.c
-set -e; IFS=""; while read line; do \
-    printf '  "%s\\n"\n' "${line}" >> beep-usage.c; \
-done < beep-usage.txt
-echo '  ;' >> beep-usage.c
-clang-11 -MT beep-usage.clang-o -MMD -MP -MF
-.deps/beep-usage.clang-o.dep   -DPACKAGE_TARNAME='"beep"'
--DPACKAGE_VERSION='"1.4.9"'    -Wall -Wextra -Weverything -Wno-padded
--std=gnu99 -pedantic -Werror -fsanitize=undefined -O -g -o
-beep-usage.clang-o -c beep-usage.c
-clang-11  -Wall -Wextra -Weverything -Wno-padded -std=gnu99 -pedantic
--Werror -fsanitize=undefined -O -g   -o beep.clang beep-log.clang-o
-beep-main.clang-o beep-library.clang-o beep-usage.clang-o
-beep-drivers.clang-o beep-driver-console.clang-o
-beep-driver-evdev.clang-o
-cp -f beep.clang beep
-/bin/sed  -e s/@PACKAGE_TARNAME@/beep/g -e s/@PACKAGE_VERSION@/1.4.9/g
--e s/@DEFAULT_FREQ@/440/g -e s/@DEFAULT_LENGTH@/200/g -e
-s/@DEFAULT_DELAY@/100/g -e 's|[@]pkgdocdir@|/usr/share/doc/beep|g' <
-beep.1.in > beep.1.new
-mv -f beep.1.new beep.1
-
-Cheers,
-Mark
-
-On Thu, Dec 24, 2020 at 7:59 AM Khem Raj <raj.khem@gmail.com> wrote:
->
-> From: Mark Jonas <toertel@gmail.com>
->
-> The previous version 1.2.2 of beep was provided by
-> http://johnath.com/beep and was released in 2002. The latest version 1.3
-> was released 2010-07-13. On https://github.com/johnath/beep the
-> development stopped 2013-02-07.
->
-> In 2018 a developer worked on fixing CVE-2018-1000532 and realized that
-> fixing this would be more than just a simple patch. Because the original
-> repository was unmaintained for several years he created
-> https://github.com/spkr-beep/beep as the new home for beep.
->
-> Debian switched to the new beep with Buster.
->     https://packages.debian.org/buster/beep
->
-> Alpine 3.11, Arch Linux, Fedora, and Ubuntu 20.04 also switched to the
-> same new beep.
->
-> Fix build with clang
->
-> Signed-off-by: Mark Jonas <toertel@gmail.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
-> v2: Fix build with clang
-> v3: Do not build with both clang and gcc
->
->  meta-oe/recipes-extended/beep/beep_1.2.2.bb   | 25 --------
->  meta-oe/recipes-extended/beep/beep_1.4.9.bb   | 32 ++++++++++
->  ...rror-as-it-fails-with-newer-clang-11.patch | 63 +++++++++++++++++++
->  3 files changed, 95 insertions(+), 25 deletions(-)
->  delete mode 100644 meta-oe/recipes-extended/beep/beep_1.2.2.bb
->  create mode 100644 meta-oe/recipes-extended/beep/beep_1.4.9.bb
->  create mode 100644 meta-oe/recipes-extended/beep/files/0001-Do-not-use-Werror-as-it-fails-with-newer-clang-11.patch
->
-> diff --git a/meta-oe/recipes-extended/beep/beep_1.2.2.bb b/meta-oe/recipes-extended/beep/beep_1.2.2.bb
-> deleted file mode 100644
-> index cafc869645..0000000000
-> --- a/meta-oe/recipes-extended/beep/beep_1.2.2.bb
-> +++ /dev/null
-> @@ -1,25 +0,0 @@
-> -DESCRIPTION = "beep is a command line tool for linux that beeps the PC speaker"
-> -LICENSE = "GPL-2.0"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
-> -
-> -SRC_URI = "\
-> -    http://johnath.com/beep/beep-${PV}.tar.gz \
-> -    file://linux-input.patch \
-> -"
-> -
-> -SRC_URI[sha256sum] = "5c0445dac43950b7c7c3f235c6fb21f620ab3fd2f3aafaf09896e5730fcf49a1"
-> -
-> -S = "${WORKDIR}/${BPN}-${PV}"
-> -
-> -EXTRA_OEMAKE += 'CC="${CC}"'
-> -EXTRA_OEMAKE += 'FLAGS="${CFLAGS} ${LDFLAGS}"'
-> -
-> -do_configure[noexec] = "1"
-> -
-> -do_compile() {
-> -   oe_runmake
-> -}
-> -
-> -do_install() {
-> -       install -Dm 0755 ${B}/${PN} ${D}${bindir}/${PN}
-> -}
-> diff --git a/meta-oe/recipes-extended/beep/beep_1.4.9.bb b/meta-oe/recipes-extended/beep/beep_1.4.9.bb
-> new file mode 100644
-> index 0000000000..8d332b2faf
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/beep/beep_1.4.9.bb
-> @@ -0,0 +1,32 @@
-> +SUMMARY = "beep allows you to have the PC speaker issue beeps and beep patterns"
-> +DESCRIPTION = "beep allows you to have the PC speaker issue beeps and beep \
-> +patterns with given frequencies, durations, and spacing."
-> +HOMEPAGE = "https://github.com/spkr-beep/beep"
-> +BUGTRACKER = "https://github.com/spkr-beep/beep/issues"
-> +
-> +LICENSE = "GPLv2+"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> +
-> +SRC_URI = "git://github.com/spkr-beep/beep.git;protocol=https \
-> +           file://0001-Do-not-use-Werror-as-it-fails-with-newer-clang-11.patch \
-> +"
-> +SRCREV = "8b85ddd09f73b9fd7caa5679298781a57af194ac"
-> +S = "${WORKDIR}/git"
-> +
-> +EXTRA_OEMAKE = " \
-> +    COMPILER_gcc='${CC}' \
-> +    LINKER_gcc='${CC}' \
-> +    COMPILER_clang=no \
-> +    LINKER_clang=no \
-> +"
-> +
-> +EXTRA_OEMAKE_toolchain-clang = " \
-> +    COMPILER_clang='${CC}' \
-> +    LINKER_clang='${CC}' \
-> +    COMPILER_gcc=no \
-> +    LINKER_gcc=no \
-> +"
-> +
-> +do_install() {
-> +    oe_runmake install DESTDIR='${D}'
-> +}
-> diff --git a/meta-oe/recipes-extended/beep/files/0001-Do-not-use-Werror-as-it-fails-with-newer-clang-11.patch b/meta-oe/recipes-extended/beep/files/0001-Do-not-use-Werror-as-it-fails-with-newer-clang-11.patch
-> new file mode 100644
-> index 0000000000..ba7681b983
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/beep/files/0001-Do-not-use-Werror-as-it-fails-with-newer-clang-11.patch
-> @@ -0,0 +1,63 @@
-> +From 6b33adfa438e35b6a37cfb0364274370ef4f9fc1 Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Wed, 23 Dec 2020 18:00:59 +0000
-> +Subject: [PATCH] Do not use -Werror as it fails with newer clang 11+
-> +
-> +Upstream-Status: Pending
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> + GNUmakefile | 1 -
-> + 1 file changed, 1 deletion(-)
-> +
-> +--- a/GNUmakefile
-> ++++ b/GNUmakefile
-> +@@ -91,12 +91,13 @@ comma := ,
-> + # If supported by COMPILER_gcc, add given flags to CFLAGS_gcc.
-> + # Example usage:
-> + #   $(eval $(call CHECK_CFLAGS_gcc,-fasynchronous-unwind-tables))
-> +-define CHECK_CFLAGS_gcc
-> +-CFLAGS_gcc += $$(if $$(shell if $$(COMPILER_gcc) $(1) -x c -o compile-check.gcc-o -c - < /dev/null > /dev/null 2>&1; then echo yes; else :; fi; rm -f compile-check.gcc-o > /dev/null 2>&1),$(1))
-> +-endef
-> +
-> + COMPILER_gcc = gcc
-> + LINKER_gcc = gcc
-> ++ifneq ($(COMPILER_gcc),no)
-> ++define CHECK_CFLAGS_gcc
-> ++CFLAGS_gcc += $$(if $$(shell if $$(COMPILER_gcc) $(1) -x c -o compile-check.gcc-o -c - < /dev/null > /dev/null 2>&1; then echo yes; else :; fi; rm -f compile-check.gcc-o > /dev/null 2>&1),$(1))
-> ++endef
-> + CPPFLAGS_gcc =
-> + CFLAGS_gcc =
-> + CFLAGS_gcc += -std=gnu99 -pedantic
-> +@@ -113,30 +114,24 @@ CFLAGS_gcc += -save-temps=obj
-> + LDFLAGS_gcc =
-> + LIBS_gcc =
-> +
-> +-ifneq ($(call pathsearch,$(COMPILER_gcc)),)
-> +-ifneq ($(COMPILER_gcc)),no)
-> + COMPILERS += gcc
-> + endif
-> +-endif
-> +
-> + COMPILER_clang = clang
-> + LINKER_clang = clang
-> ++
-> ++ifneq ($(COMPILER_clang),no)
-> + CPPFLAGS_clang =
-> + CFLAGS_clang += -Wall -Wextra
-> + CFLAGS_clang += -Weverything
-> + CFLAGS_clang += -Wno-padded
-> + CFLAGS_clang += -std=gnu99 -pedantic
-> +-CFLAGS_clang += -Werror
-> +-CFLAGS_clang += -fsanitize=undefined
-> + CFLAGS_clang += -O -g
-> + LDFLAGS_clang =
-> + LIBS_clang =
-> +
-> +-ifneq ($(call pathsearch,$(COMPILER_clang)),)
-> +-ifneq ($(COMPILER_clang),no)
-> + COMPILERS += clang
-> + endif
-> +-endif
-> +
-> +
-> + ########################################################################
-> --
-> 2.29.2
->
