@@ -1,130 +1,91 @@
-Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net [217.70.183.198])
- by mx.groups.io with SMTP id smtpd.web10.11467.1610235811501831837
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web10.13803.1610249286585444606
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 09 Jan 2021 15:43:32 -0800
+ Sat, 09 Jan 2021 19:28:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: redrectangle.org, ip: 217.70.183.198, mailfrom: robert.joslyn@redrectangle.org)
-X-Originating-IP: 173.197.191.182
-Received: from loomas.localdomain (rrcs-173-197-191-182.west.biz.rr.com [173.197.191.182])
-	(Authenticated sender: robert.joslyn@redrectangle.org)
-	by relay6-d.mail.gandi.net (Postfix) with ESMTPSA id C1F5CC0003;
-	Sat,  9 Jan 2021 23:43:27 +0000 (UTC)
-From: "Robert Joslyn" <robert.joslyn@redrectangle.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: Robert Joslyn <robert.joslyn@redrectangle.org>
-Subject: [meta-oe][PATCH] htop: Update to 3.0.4
-Date: Sat,  9 Jan 2021 15:43:00 -0800
-Message-Id: <20210109234300.3421236-1-robert.joslyn@redrectangle.org>
-X-Mailer: git-send-email 2.26.2
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=uwXYJk6L;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id g3so7747618plp.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 09 Jan 2021 19:28:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Q01T3MSAPn77qpzkR4nQcvwfnNgKJCkVbmUf+wQyphI=;
+        b=uwXYJk6L6mYTTP77WaVLaIXj7uwcR26PxS0n3IOQx1eAwXrNtuoeN6fZahzZLqEF7D
+         Gn/j4nRoVWk+5qshZv+C2ph1G3iKVi7UDVXrIgMoUGOa+PgYl7EacVhVcUsyjRYXedoc
+         4PScW8YkyOWjqvw/m5E7crtHROUneU9kB2y3RckESJXCQZBFCDt7C0BSSTyf4483+ryG
+         mgB1VhM+TWsR3jAaUmYzHJJFFwoF+TmqlGWY6Qsbtc4XOaC8e5IJu3AaesP7e+NTNCmn
+         vHH31IwTKXD/e3Grx0c3QkLpyxcyNQSaEawVgKHWUPTPCGMmRJ1EsD/fvmVoVlusdyeT
+         FZpQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Q01T3MSAPn77qpzkR4nQcvwfnNgKJCkVbmUf+wQyphI=;
+        b=JnHBMdvlcwOh5xWahpbLkBY2pxwPfgC6u8Td7aWV99MfT7Tiyz2yCa8O8dM7JEgIU8
+         nYYS+kcfScnqObX15WGfDHN0/gn0ys2c1ynCjAnd5JhdZ/ZLP8VQ8zEGUUjdVjK1NBUz
+         s2whEzJONEyvuQy5fcZf9U0h13jLZ2jNt/20BFyMKvegXzF0PBpdCeUMBXXOopsPhwf2
+         5GGGCrlm7a+ao6XcN63LDJ0T37Vt/bx0v3pUP2CJsJ21HEumqWkmYk8uGJepqMjPDvt4
+         jIGbNHZ5c02B+HMgcnBt2qaRR8A4e7lkwq/8ciguxscGIFkzzi6VhzGCmLs6AM4CN0u9
+         EG1w==
+X-Gm-Message-State: AOAM533AH80oqBIX8BbX9RsKd2qmzcaYFQfXCnNB+vWJqiYC+a7K21EW
+	n63P12WV2qQzSNlIK3lo6sYI2/dJrzF6UacpwlU=
+X-Google-Smtp-Source: ABdhPJxyRxU1/7YMP7Fu2j2/f8YlfKYkCcidY6X0JbAohq1eMzdiEUg2CmqhaqP+XKjJOoDp3utSRWqUXLFYcXQHFok=
+X-Received: by 2002:a17:902:d70d:b029:db:fc74:67fa with SMTP id
+ w13-20020a170902d70db02900dbfc7467famr10887619ply.65.1610249286088; Sat, 09
+ Jan 2021 19:28:06 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210106151717.1779543-1-schnitzeltony@gmail.com>
+ <20210106151717.1779543-4-schnitzeltony@gmail.com> <CAMKF1srRCWhAcsVaNM=rou6_ys+KC_16PyB4KGB+Kj2vjfvZWQ@mail.gmail.com>
+ <CALbNGRTreOS2m9z9tOp_Z3sGrVVypZr=5J9RBFwwnPF+fieYcw@mail.gmail.com>
+ <CAMKF1sqht8W9eaqY6sVAVEqq_fKXsefOkjCSaLF=eCt-f+6vMQ@mail.gmail.com>
+ <CALbNGRT_Jgtqd=LzHSNxBOvowHWLDx481tNsJ2bBiR=G2uaP3A@mail.gmail.com> <CAMKF1sqQFRVW7aXJbbykZR+RoQumbHBka6A_BhF1=VESe5OGkA@mail.gmail.com>
+In-Reply-To: <CAMKF1sqQFRVW7aXJbbykZR+RoQumbHBka6A_BhF1=VESe5OGkA@mail.gmail.com>
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+Date: Sun, 10 Jan 2021 04:27:54 +0100
+Message-ID: <CALbNGRQFCDtxGwCRrP8_gdSmkgLb0ihXFshP4ovYZ_afSxF-GQ@mail.gmail.com>
+Subject: Re: [oe] [PATCH 04/28] libxfce4ui: upgrade 4.14.1 -> 4.16.0
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Along with the update, make a few cleanups to the recipe:
- * Refresh patch with devtool.
- * The cgroup and taskstats configure options are no longer provided by
-   upstream.
- * Add ancient-vserver configure option. Leave it disabled by default
-   since it is rarly used.
- * Reorder PACKAGECONFIG options to match upstream ./configure --help
-   output to make future updates easier.
- * Add new sensors PACKAGECONFIG option that adds lmsensors integration.
-   htop will dlopen libsensors. Disable by default to avoid pulling in
-   excess dependencies.
- * Package new icon.
+On Sat, Jan 9, 2021 at 7:42 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+>
+>> > > On Fri, Jan 8, 2021 at 8:54 PM Khem Raj <raj.khem@gmail.com> wrote:
+>> > > >
+>> > > > I see an odd failure on qemuriscv64
+>> > > > https://errors.yoctoproject.org/Errors/Details/540832/
+>> > > Hi Khem,
+>> > >
+>> > > Have seen this either but assumed it was caused by going back and
+>> > > forth during tests. Worked around this by cleansstate.
+>> > >
+>> > > I think there is some race (unrelated to qemuriscv64): when I saw the
+>> > > error, the file was there. I looked into that already but did not find
+>> > > suspicious yet. Have put libxfce4ui back on my TODO...
+>> > >
+>> >
+>> > yeah it seems intermittent, its already in master so will observe how
+>> > it fairs in CI builds over few days
+>> > and if its too noisy we might need a quick solution
+>> >
+>> If you look in the logs and search for
+>> 'TOPDIR/build/tmpfs/hosttools/install -c -m 644
+>> ../../libxfce4ui-4.16.0/libxfce4ui/libxfce4ui.h', you'll find it
+>> twice. Seems there are two make jobs doing same (sometimes at the same
+>> time).
+>
+>
+> That seems to be a install time race we can disable it for do_install perhaps
 
-Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
----
- .../htop/files/0001-Use-pkg-config.patch      | 19 +++++++++++++-----
- .../htop/{htop_3.0.1.bb => htop_3.0.4.bb}     | 20 ++++++++++---------
- 2 files changed, 25 insertions(+), 14 deletions(-)
- rename meta-oe/recipes-support/htop/{htop_3.0.1.bb => htop_3.0.4.bb} (69%)
+Did send a fix here and upstream
 
-diff --git a/meta-oe/recipes-support/htop/files/0001-Use-pkg-config.patch b/meta-oe/recipes-support/htop/files/0001-Use-pkg-config.patch
-index fc0d86e33..93d6d5857 100644
---- a/meta-oe/recipes-support/htop/files/0001-Use-pkg-config.patch
-+++ b/meta-oe/recipes-support/htop/files/0001-Use-pkg-config.patch
-@@ -1,3 +1,8 @@
-+From 14100c6fc2cce7260ca5ace81094aee0ae40dd07 Mon Sep 17 00:00:00 2001
-+From: Paul Barker <pbarker@toganlabs.com>
-+Date: Sun, 5 Nov 2017 22:07:30 +0000
-+Subject: [PATCH] htop: Update to v2.0.2
-+
- We need to use pkg-config to find the ncurses library instead of the
- ncurses*-config applications.
- 
-@@ -7,11 +12,15 @@ Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
- Upstream-status: Inappropriate
-     (`ncurses*-config` can be used outside of OpenEmbedded)
- 
-+---
-+ configure.ac | 12 ++++++------
-+ 1 file changed, 6 insertions(+), 6 deletions(-)
-+
- diff --git a/configure.ac b/configure.ac
--index 559dc4d..77aea22 100644
-+index 115d894..0e0a1eb 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -185,10 +185,10 @@ m4_define([HTOP_CHECK_LIB],
-+@@ -205,10 +205,10 @@ AS_VAR_POPDEF([CACHEVAR])dnl
-  
-  AC_ARG_ENABLE(unicode, [AS_HELP_STRING([--enable-unicode], [enable Unicode support])], ,enable_unicode="yes")
-  if test "x$enable_unicode" = xyes; then
-@@ -26,9 +35,9 @@ index 559dc4d..77aea22 100644
-         HTOP_CHECK_LIB([ncursesw6], [addnwstr], [HAVE_LIBNCURSESW],
-          HTOP_CHECK_LIB([ncursesw], [addnwstr], [HAVE_LIBNCURSESW],
-           HTOP_CHECK_LIB([ncurses], [addnwstr], [HAVE_LIBNCURSESW],
--@@ -201,8 +201,8 @@ if test "x$enable_unicode" = xyes; then
--          [AC_CHECK_HEADERS([ncurses/curses.h],[:],
--             [AC_CHECK_HEADERS([ncurses.h],[:],[missing_headers="$missing_headers $ac_header"])])])])
-+@@ -225,8 +225,8 @@ if test "x$enable_unicode" = xyes; then
-+    # (at this point we already link against a working ncurses library with wide character support)
-+    AC_SEARCH_LIBS([keypad], [tinfow tinfo])
-  else
- -   HTOP_CHECK_SCRIPT([ncurses6], [refresh], [HAVE_LIBNCURSES], "ncurses6-config",
- -    HTOP_CHECK_SCRIPT([ncurses], [refresh], [HAVE_LIBNCURSES], "ncurses5-config",
-diff --git a/meta-oe/recipes-support/htop/htop_3.0.1.bb b/meta-oe/recipes-support/htop/htop_3.0.4.bb
-similarity index 69%
-rename from meta-oe/recipes-support/htop/htop_3.0.1.bb
-rename to meta-oe/recipes-support/htop/htop_3.0.4.bb
-index d677e36c0..49d53ec98 100644
---- a/meta-oe/recipes-support/htop/htop_3.0.1.bb
-+++ b/meta-oe/recipes-support/htop/htop_3.0.4.bb
-@@ -9,23 +9,25 @@ DEPENDS = "ncurses"
- SRC_URI = "git://github.com/htop-dev/htop.git \
-            file://0001-Use-pkg-config.patch \
-            "
--SRCREV = "dace850fa6e27b5626115b366059258cfe4d60c9"
-+SRCREV = "0b989ee38ce37eb4a50265faa11df2bd7ed8e5c3"
- 
- S = "${WORKDIR}/git"
- 
- inherit autotools pkgconfig
- 
--PACKAGECONFIG ??= "cgroup \
--                   taskstats \
--                   unicode \
--                   linux-affinity \
--                   delayacct"
-+PACKAGECONFIG ??= " \
-+    unicode \
-+    linux-affinity \
-+    delayacct \
-+"
- PACKAGECONFIG[openvz] = "--enable-openvz,--disable-openvz"
--PACKAGECONFIG[cgroup] = "--enable-cgroup,--disable-cgroup"
- PACKAGECONFIG[vserver] = "--enable-vserver,--disable-vserver"
--PACKAGECONFIG[taskstats] = "--enable-taskstats,--disable-taskstats"
-+PACKAGECONFIG[ancient-vserver] = "--enable-ancient-vserver,--disable-ancient-vserver"
- PACKAGECONFIG[unicode] = "--enable-unicode,--disable-unicode"
--PACKAGECONFIG[linux-affinity] = "--enable-linux-affinity,--disable-linux-affinity"
- PACKAGECONFIG[hwloc] = "--enable-hwloc,--disable-hwloc,hwloc"
-+PACKAGECONFIG[linux-affinity] = "--enable-linux-affinity,--disable-linux-affinity"
- PACKAGECONFIG[setuid] = "--enable-setuid,--disable-setuid"
- PACKAGECONFIG[delayacct] = "--enable-delayacct,--disable-delayacct,libnl"
-+PACKAGECONFIG[sensors] = "--with-sensors,--without-sensors,lmsensors,lmsensors-libsensors"
-+
-+FILES_${PN} += "${datadir}/icons/hicolor/scalable/apps/htop.svg"
--- 
-2.26.2
-
+Andreas
+>>
+>>
+>>
+>> This is at least a start...
+>>
+>> Andreas
