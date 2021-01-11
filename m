@@ -1,84 +1,70 @@
-Received: from mail-qv1-f50.google.com (mail-qv1-f50.google.com [209.85.219.50])
- by mx.groups.io with SMTP id smtpd.web10.38169.1610387327356789008
+Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com [209.85.222.182])
+ by mx.groups.io with SMTP id smtpd.web08.38033.1610387367058422428
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Jan 2021 09:48:47 -0800
+ Mon, 11 Jan 2021 09:49:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=c52IiGJJ;
- spf=pass (domain: gmail.com, ip: 209.85.219.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f50.google.com with SMTP id j18so37255qvu.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 11 Jan 2021 09:48:47 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=KOYEGgPg;
+ spf=pass (domain: gmail.com, ip: 209.85.222.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f182.google.com with SMTP id 22so237941qkf.9
+        for <openembedded-devel@lists.openembedded.org>; Mon, 11 Jan 2021 09:49:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=DNT+mzSu+8/TmEinXhCXf6CjXgnWTkPjgMTpylsT5k4=;
-        b=c52IiGJJJqaLUOOYMEFGJt1mBWgGV3kbQetdP9TN2zB26i9hvR3UL1J65uigsN6bjb
-         4STIgHl96hi0vefeIBCGZc3rKLCbK7ixGWmHYwSVz5OXSpasJkiI2TRrJYECuDlb1XBr
-         dRxN6Wmp7XyGCbUOrcFuvqHTtPEXT/EKS6qP4E+GwBxo0jsNiWvHhfTS2vfSCFdw4I1L
-         nidw+k+N3Jq+f4BOU9MBdogbWOMHX/z30IdEUCL4xE0pQPHCneL+TouRkqxqt895naVO
-         SyWbwvH6ydybC8aWh0utKdEEfJuatqzjZ14odtLx1k/v5BiB6MTF9lVe73uLKGwRIHp4
-         06jQ==
+        bh=QBDSxsQrkVagW2xdAiaBc6W9NLxEU8J2nBUdwlShzUc=;
+        b=KOYEGgPgHaA4yk7pYqej8E0IAK8XMDwkIBf7RT02msK/HTD9wuQDp+866fYybbqIfn
+         MtQboqIxjWV+GsoE8NPdB7Sd779ns9Gt/jna1ER3eLYb31TS9lXQ9XN6qB/fmnhTOPdF
+         EIQFlVF45glYruKEd83jo2+dvmY26lGpvxWmWN9b+aQJsOXzLANr7jxqSSEeHOI3ggn0
+         lbbkN58aIn2IzDVkH0SPnTfYmk4abM3Jp8ZxGUBv2Z+1IVakkRSOn7xrcid3JxQ1f9vl
+         Snt1E6O6qwCFnCmZhYs7+ZXAaMO1uHEZWDOFdV5q0Lxp8dAjM1isDMQceuSblSMbcE2m
+         UuqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=DNT+mzSu+8/TmEinXhCXf6CjXgnWTkPjgMTpylsT5k4=;
-        b=rg78wPutsQtklxgTspdq356tp5SxsR/gO40JgXTBJSWP5P1XFeNqyHpro4Ne8qgzJt
-         nv3Dr+d2vFlLxYzYwsNCSaLOh7yJXGAYo2lnaqhFl5Rpa8FRF7TLfO4i01jrGeWsb8W2
-         Ryr9onfKuP8XShzgQ9q7dQiqyrvLrHm+xloXf0/FPL/j2eDcAfnCbxRjTcy9Szat9FyF
-         /rkxHUBEaVlQFaApX+yclvVoiK2JCdL47wo2TjbPKeKbHJ0yhmN+mbWkcfP7JFcnWbmw
-         UOSXR4uJxKOy+hcwO5GX2kXwtbtnoe7tStR/oDe3wUVpLNh7b3dOWaS1s0Gc2Sa/l/lU
-         baCw==
-X-Gm-Message-State: AOAM531we9BzVVnOkNlcAPT0SzbA9mWN6+9Qsnt56eo8lZ6d5x+sLfs0
-	Z2SJ8hKNNib3IJ5QTBgZR7iEq59Dweouly0SPGw=
-X-Google-Smtp-Source: ABdhPJxLmYkSbnbpotk5t4Yfyr0s0VOTEgIQYjKp85qZyNKtIDXnphIMgOAxHuoMt6cUjcAWpPYGph5iXHtpZ044UjY=
-X-Received: by 2002:a05:6214:28f:: with SMTP id l15mr659865qvv.38.1610387326452;
- Mon, 11 Jan 2021 09:48:46 -0800 (PST)
+        bh=QBDSxsQrkVagW2xdAiaBc6W9NLxEU8J2nBUdwlShzUc=;
+        b=XVMKGY6JK/37Js8zhzhUHZDRoEDtJzMx3SZ85TQ3xM6CxgMLfzujNsF9nPyEErIpio
+         W6SuF0OutQax6P1qrcUaTBb8fcyL2veycJZRmd9yqA3cBeCBag04s8Lx83Ya5Gay79p3
+         MXrJzQu12prwTyNXb32NAytmwy6CM2PwdAjWBaPyEtZP9nxSbHsvnUwtw4v7MN6qN+/S
+         KvGktUWRgSPU9HyUuo79mv33QxLUHtv8c3ZYj1+f7YsrDsr0i9lhrpHpQCDhYO7pl/kn
+         nVTiKgvhsbPPRRlw9NXnLGJ3+NvvEr1SDKDV99YLBa5/kD0G5LyKdYE7jMCWWC64FXif
+         yChw==
+X-Gm-Message-State: AOAM53123QzL4wxD1cHOzKnpwZkPZu/9Kf/6nssf6GvrDXnk+wq9e4Lr
+	4lF+hpYB1gVPb98K7HBNmOth6UBqul5iHdyp7ik=
+X-Google-Smtp-Source: ABdhPJwy7DvOssx7Z5/QXI9fVUb/fwUwlII16AnK08DMvnkMB4QfP4twAtjqJ+s7mTZ5t/vzjzmvF3Z1xwHG7f0v5xs=
+X-Received: by 2002:a05:620a:1139:: with SMTP id p25mr444449qkk.9.1610387366199;
+ Mon, 11 Jan 2021 09:49:26 -0800 (PST)
 MIME-Version: 1.0
-References: <20210107183743.28823-1-Diego.SantaCruz@spinetix.com>
- <7ef6b205-3759-737c-6c16-677556062757@gmail.com> <DB6PR0102MB26301088AE72EDF1F07AEF5088AB0@DB6PR0102MB2630.eurprd01.prod.exchangelabs.com>
-In-Reply-To: <DB6PR0102MB26301088AE72EDF1F07AEF5088AB0@DB6PR0102MB2630.eurprd01.prod.exchangelabs.com>
+References: <CAAfyv35iGwiKWorpEthr_CCDj_dVQUT0PW6MacAA+4k3h=foWQ@mail.gmail.com>
+In-Reply-To: <CAAfyv35iGwiKWorpEthr_CCDj_dVQUT0PW6MacAA+4k3h=foWQ@mail.gmail.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Mon, 11 Jan 2021 09:48:20 -0800
-Message-ID: <CAMKF1sr1UwbLOoVk2U_OsS8SbSF_QofV140ZZ3XHDVYX9_+6kA@mail.gmail.com>
-Subject: Re: [oe] [gatesgarth][meta-multimedia][PATCH 1/2] gssdp: Upgrade to 1.2.2 -> 1.2.3
-To: Diego Santa Cruz <diego.santacruz@spinetix.com>
-Cc: akuster808 <akuster808@gmail.com>, 
-	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Date: Mon, 11 Jan 2021 09:49:00 -0800
+Message-ID: <CAMKF1sryLZF-Qx2UDXCFpguOi4Yd3AVVR3KV+4g-QUoskL-SCQ@mail.gmail.com>
+Subject: Re: [oe] nodejs complation fails on dunfell
+To: Marek Belisko <marek.belisko@gmail.com>
+Cc: OpenEmbedded Development mailing list <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Jan 11, 2021 at 6:52 AM Diego Santa Cruz via
-lists.openembedded.org
-<diego.santacruz=spinetix.com@lists.openembedded.org> wrote:
->
-> > -----Original Message-----
-> > From: akuster808 <akuster808@gmail.com>
-> > Sent: 11 January 2021 15:47
-> > To: Diego Santa Cruz <Diego.SantaCruz@spinetix.com>; openembedded-
-> > devel@lists.openembedded.org
-> > Subject: Re: [oe] [gatesgarth][meta-multimedia][PATCH 1/2] gssdp: Upgrade
-> > to 1.2.2 -> 1.2.3
-> >
-> >
-> >
-> > On 1/7/21 10:37 AM, Diego Santa Cruz via lists.openembedded.org wrote:
-> > > Dependency of gupnp 1.2.3
-> >
-> > Whats in the update?
-> >
->
-> From what I understand from https://gitlab.gnome.org/GNOME/gssdp/-/blob/gssdp-1.2.3/NEWS
->  * Bugfixes
->  * One API addition to support the fix / mitigation for CVE-2020-12695 in gupnp
->
+you might have to add -latomic to LDFLAGS
 
-adding a new API should be ok.
-
-> --
-> Diego Santa Cruz, PhD
-> Technology Architect
-> spinetix.com
+On Mon, Jan 11, 2021 at 5:18 AM Marek Belisko <marek.belisko@gmail.com> wrote:
 >
+> Hi,
+>
+> I'm trying to compile nodejs12 from dunfell branch for
+> raspberrypi0-wifi and getting following issue:
+>
+> /usr/include/c++/9.3.0/atomic:254: undefined reference to `__atomic_load_8'
+>
+> For raspberrypi3 build it works perfectly fine. relevant flags are:
+> -march=armv6 -mfpu=vfp -mfloat-abi=hard -mtune=arm1176jzf-s
+>
+> Strange is that nodejs8 from rocko branch works fine for
+> raspberrypi0-wifi. Any ideas?
+>
+> Thanks and regards,
+>
+> marek
 >
 > 
 >
