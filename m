@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.35617.1610378725662100810
+ by mx.groups.io with SMTP id smtpd.web09.35845.1610378726477472078
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 11 Jan 2021 07:25:26 -0800
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=55680 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kyz4O-0006IU-Mg; Mon, 11 Jan 2021 17:25:25 +0200
+	id 1kyz4P-0006IU-HK; Mon, 11 Jan 2021 17:25:26 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 03/10] python3-pychromecast: Upgrade 7.7.1 -> 7.7.2
-Date: Mon, 11 Jan 2021 17:25:05 +0200
-Message-Id: <20210111152512.23506-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 04/10] python3-hyperlink: Upgrade 20.0.1 -> 21.0.0
+Date: Mon, 11 Jan 2021 17:25:06 +0200
+Message-Id: <20210111152512.23506-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210111152512.23506-1-leon.anavi@konsulko.com>
 References: <20210111152512.23506-1-leon.anavi@konsulko.com>
@@ -30,32 +30,36 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 7.7.2:
+Upgrade to release 21.0.0:
 
-- Use urllib.request instead of requests
-- docs: fix simple typo, neeeded -> needed
+- Update plus sign (+) handling to work with/like HTML form
+  encoding (POST) by default, fixes #129, and associated
+  roundtripping
+- Package IDNA tables
+- Long overdue dependency bumps
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...hon3-pychromecast_7.7.1.bb => python3-pychromecast_7.7.2.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pychromecast_7.7.1.bb => python3-pychromecast_7.7.2.bb} (76%)
+ ...python3-hyperlink_20.0.1.bb => python3-hyperlink_21.0.0.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-hyperlink_20.0.1.bb => python3-hyperlink_21.0.0.bb} (74%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_7.7.1.bb b/meta-python/recipes-devtools/python/python3-pychromecast_7.7.2.bb
-similarity index 76%
-rename from meta-python/recipes-devtools/python/python3-pychromecast_7.7.1.bb
-rename to meta-python/recipes-devtools/python/python3-pychromecast_7.7.2.bb
-index ca55740ba..c0ff58cfd 100644
---- a/meta-python/recipes-devtools/python/python3-pychromecast_7.7.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pychromecast_7.7.2.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
+diff --git a/meta-python/recipes-devtools/python/python3-hyperlink_20.0.1.bb b/meta-python/recipes-devtools/python/python3-hyperlink_21.0.0.bb
+similarity index 74%
+rename from meta-python/recipes-devtools/python/python3-hyperlink_20.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-hyperlink_21.0.0.bb
+index c9e281504..5a8791dfb 100644
+--- a/meta-python/recipes-devtools/python/python3-hyperlink_20.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-hyperlink_21.0.0.bb
+@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/python-hyper/hyperlink"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=6dc5b4bd3d02faedf08461621aa2aeca"
  
--SRC_URI[sha256sum] = "d6fd0382395303b3260ea7a89a850c8c9e5c83e7ce71a5fbd793bb157cf8ad26"
-+SRC_URI[sha256sum] = "aad4b145cb8c76b629c700877e49c418810aaabb26ace5035c49940f9657f2f0"
+-SRC_URI[sha256sum] = "47fcc7cd339c6cb2444463ec3277bdcfe142c8b1daf2160bdd52248deec815af"
+-SRC_URI[md5sum] = "d7983e3d2625e5f7dffc8d12da8803ab"
++SRC_URI[sha256sum] = "427af957daa58bc909471c6c40f74c5450fa123dd093fc53efd2e91d2705a56b"
  
- PYPI_PACKAGE = "PyChromecast"
+ inherit pypi setuptools3
  
 -- 
 2.17.1
