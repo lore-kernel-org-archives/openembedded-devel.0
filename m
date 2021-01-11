@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.36057.1610378727461042877
+ by mx.groups.io with SMTP id smtpd.web12.36058.1610378728300164912
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Jan 2021 07:25:27 -0800
+ Mon, 11 Jan 2021 07:25:28 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=55680 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1kyz4Q-0006IU-C4; Mon, 11 Jan 2021 17:25:27 +0200
+	id 1kyz4R-0006IU-BB; Mon, 11 Jan 2021 17:25:28 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 05/10] python3-dnspython: Upgrade 2.0.0 -> 2.1.0
-Date: Mon, 11 Jan 2021 17:25:07 +0200
-Message-Id: <20210111152512.23506-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 06/10] python3-prompt-toolkit: Upgrade 3.0.9 -> 3.0.10
+Date: Mon, 11 Jan 2021 17:25:08 +0200
+Message-Id: <20210111152512.23506-6-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210111152512.23506-1-leon.anavi@konsulko.com>
 References: <20210111152512.23506-1-leon.anavi@konsulko.com>
@@ -30,54 +30,36 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.1.0:
+Upgrade to release 3.0.10:
 
-- End-of-line comments are now associated with rdata when read
-  from text. For backwards compatibility with prior versions of
-  dnspython, they are only emitted in to_text() when requested.
-- Synchronous I/O is a bit more efficient, as we now try the I/O
-  and only use poll() or select() if the I/O would block.
-- The resolver cache classes now offer basic hit and miss
-  statistics, and the LRUCache can also provide hits for every
-  cache key.
-- The resolver has a canonical_name() method.
-- There is now a registration mechanism for EDNS option types.
-- The default EDNS payload size has changed from 1280 to 1232.
-- The SVCB, HTTPS, and SMIMEA RR types are now supported.
-- TSIG has been enhanced with TKEY and GSS-TSIG support. Thanks
-  to Nick Hall for writing this.
-- Zones now can be updated via transactions.
-- A new zone subclass, dns.versioned.Zone is available which has
-  a thread-safe transaction implementation and support for keeping
-  many versions of a zone.
-- The zone file reading code has been adapted to use transactions,
-  and is now a public API.
-- Inbound zone transfer support has been rewritten and is available
-  as dns.query.inbound_xfr() and dns.asyncquery.inbound_xfr(). It
-  uses the transaction mechanism, and fully supports IXFR and AXFR.
+- Improved `WordCompleter`: accept `display_dict`. Also accept
+  formatted text for both `display_dict` and `meta_dict`.
+- Allow customization of button arrows.
+- Correctly recognize backtab on Windows.
+- Show original display text in fuzzy completer if no filtering
+  was done.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-dnspython_2.0.0.bb => python3-dnspython_2.1.0.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-dnspython_2.0.0.bb => python3-dnspython_2.1.0.bb} (81%)
+ ...prompt-toolkit_3.0.9.bb => python3-prompt-toolkit_3.0.10.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_3.0.9.bb => python3-prompt-toolkit_3.0.10.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-dnspython_2.0.0.bb b/meta-python/recipes-devtools/python/python3-dnspython_2.1.0.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-dnspython_2.0.0.bb
-rename to meta-python/recipes-devtools/python/python3-dnspython_2.1.0.bb
-index a4e984619..20de09391 100644
---- a/meta-python/recipes-devtools/python/python3-dnspython_2.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-dnspython_2.1.0.bb
-@@ -3,8 +3,7 @@ HOMEPAGE = "http://www.dnspython.org/"
- LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5af50906b5929837f667dfe31052bd34"
+diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.9.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.10.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.9.bb
+rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.10.bb
+index 589d9398d..abd9eb18c 100644
+--- a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.9.bb
++++ b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.10.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://python-prompt-toolkit.readthedocs.io/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f"
  
--SRC_URI[md5sum] = "42f922c9223dde0275e8c0695ead37da"
--SRC_URI[sha256sum] = "044af09374469c3a39eeea1a146e8cac27daec951f1f1f157b1962fc7cb9d1b7"
-+SRC_URI[sha256sum] = "e4a87f0b573201a0f3727fa18a516b055fd1107e0e5477cded4a2de497df1dd4"
+-SRC_URI[sha256sum] = "c5eeab58dd31b541442825d7870777f2a2f764eb5fda03334d5219cd84b9722f"
++SRC_URI[sha256sum] = "b8b3d0bde65da350290c46a8f54f336b3cbf5464a4ac11239668d986852e79d5"
  
- PYPI_PACKAGE_EXT = "zip"
+ inherit pypi setuptools3
  
 -- 
 2.17.1
