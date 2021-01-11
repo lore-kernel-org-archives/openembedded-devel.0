@@ -1,51 +1,51 @@
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web11.1658.1610408270338392120
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web09.1732.1610408391875120458
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Jan 2021 15:37:50 -0800
+ Mon, 11 Jan 2021 15:39:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=LszfoWPz;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id b5so510552pjk.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 11 Jan 2021 15:37:50 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=qbaNwcx6;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id iq13so479475pjb.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 11 Jan 2021 15:39:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=2HfsuvB24UEfL9TSeYClMMBbxZ+gTGazbtKeiKV1yTU=;
-        b=LszfoWPzNaXfG3+OEOuw7ZXFY9flQZittSS52nFWMtb+p/ghEQpZIIJgw5cXV962hX
-         WUSq0/DUjSYeqVq9i9Ij5cnG1DW/tCP+kJLctadmeTPO1qLh3l0KjQIb1nFlWA4CCAto
-         ML2J3L1obxZuxDBTfuUkEa8dVrl6qw1oRmIb9XCeSc891IuPOS6C0q2R3o3lfE6HFjpY
-         bcDa7H2c/qbbRsSAVTzphWYzO7scvgklFbiZT4IJX3h4Mn6SMl41rt2gk+7g43xyIl2R
-         bqD7BxWwdqc/pDQwvh1b3GqllryOHO0zrybyuO7jj4gAuEBUu5jooSFs2Q2O4HdWzOXJ
-         sjDg==
+        bh=u8qV0QHUALS6s5QSdwJvWCg/BkRwvGKbalgwTN6Hmsc=;
+        b=qbaNwcx6UbOmLpmA9gWWknxDrSh1F4KsVZq+/pn8Q3VD2w0w1PLcYdp0L3wEcdVSdd
+         ZeNVVizWNR720luNHcs6HXiGcPLmZtPF2vy5VF1ri+9SO69FhlLaBvNRI5hnhjrQ4GFH
+         PZti421ufTVUt+S9xzkVdRqXNfva6bxsu9pUwddyLBw2hC+v+i9fsR1kRT0pH9NQo6Kf
+         S2tS3JT4Nd82S4R0U6W7rdDRUmPi00nOLW0hWxEog00zBRmJnmTLwzl/dP4gV/M7RAlc
+         qoYDCoc6pwwNWwNIr6jlQXE48nMQh2FITqQHPDvYdRhPVIrrSBYnZRSer+iPTnkPQX54
+         AJzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=2HfsuvB24UEfL9TSeYClMMBbxZ+gTGazbtKeiKV1yTU=;
-        b=O/xyQhcoiDv6PlXvytUWjVUOJWQ+ZvcAnfBI/81Vz7XpuSf4oQmJYoxTe4xbjIFnMB
-         p8TNgo/LZj54hmHdwL7WgdN+UvZoTE57yG0W7QVqSGdFBSWJdnycAn9p8RsAogjG0cJ8
-         cOvkjVLNm6UifVMEYQi3mfi4oM7LQwg0JZhYd4aid9oCAxKUxd4OJWJ0pStHF/4Sen3Q
-         E5Y9Q0DYI1/WRred7/VyX3X61N8RWoF3jeNQMK748/r9KcUPMwuXVLJ384aDMr8uK2jz
-         JtnVALzoa9MRanlaMKZ5V2QwyS0sIwaw9xHsafP+WmmzfcaXM3ZHHq07T93bSuR3oZBb
-         Xb9g==
-X-Gm-Message-State: AOAM531o4Rn//Ms80GIFeddCScfhcYTGU8zUaTTzF0ACGsYxaMm/mH78
-	czGeHZ2/1AuGvNpTnktCRTw8Mt+sXQNIeg==
-X-Google-Smtp-Source: ABdhPJzctGyg59aEkynVr/wpOFJ2X49lnQ++TgZvYqaWv6rZFOFCqsIqfqDdOgrqxS7AuVrfr5wT2g==
-X-Received: by 2002:a17:90a:d148:: with SMTP id t8mr1331332pjw.126.1610408269432;
-        Mon, 11 Jan 2021 15:37:49 -0800 (PST)
+        bh=u8qV0QHUALS6s5QSdwJvWCg/BkRwvGKbalgwTN6Hmsc=;
+        b=SjvaIq7MXLaSzK6gYioUD4P7EL9zVd5LTxWWpj6tgKzSIX5axVnYLCnLtbvy0Kv22T
+         CuEYODxuK8ZnN/xz+6hp9IQwgTOr325s10v1WaQBNdtTARdXYGrjT1OBB6qUoUgg5jJM
+         d8hEFnFSRtJgFKg24SD+rmCIb4nC1pfEZadCfjJFdwJq2/SJSGehfgBKfzM0iMTWCndE
+         5o0B64mvJWjGGo6zclfrdVMLpbmqoYTZ/qushrGaPSa4BaHKqLMWYpA6EDz7LGY7XVVq
+         z/eSBSNmPUE9hRMpls5BqkMAQIzXgq7oxiU8mtIbj3bxR4r2ff1E0GeaBPMgDlxi9BPd
+         BqzA==
+X-Gm-Message-State: AOAM532/2RIUiIvQsUQjyQNEhEjAcSoXaXbKS6DOUVI0Srsas2lQKF2J
+	3wKGaoO5Gl30WyZEpVCp/32vFKLrR5OPvQ==
+X-Google-Smtp-Source: ABdhPJz9iUNqgu4kOl8qhhYKcUGizVuDc0kQkRot14hYjvgsvmRQbgywwJMxAREOSzPNMBinkPA1Lg==
+X-Received: by 2002:a17:90b:1945:: with SMTP id nk5mr1344708pjb.30.1610408390462;
+        Mon, 11 Jan 2021 15:39:50 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::248c])
-        by smtp.gmail.com with ESMTPSA id e21sm842808pgv.74.2021.01.11.15.37.48
+        by smtp.gmail.com with ESMTPSA id 123sm883062pgf.38.2021.01.11.15.39.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 11 Jan 2021 15:37:48 -0800 (PST)
+        Mon, 11 Jan 2021 15:39:50 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>,
 	Thomas Perrot <thomas.perrot@bootlin.com>
-Subject: [meta-oe][PATCH] influxdb: Fix build on mips
-Date: Mon, 11 Jan 2021 15:37:46 -0800
-Message-Id: <20210111233746.3892853-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] packagegroup-meta-oe: Add new package influxdb
+Date: Mon, 11 Jan 2021 15:39:47 -0800
+Message-Id: <20210111233947.3893454-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.30.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -53,50 +53,21 @@ Content-Transfer-Encoding: 8bit
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Cc: Thomas Perrot <thomas.perrot@bootlin.com>
 ---
- ...e-for-mips-ispeed-ospeed-termios-abs.patch | 20 +++++++++++++++++++
- .../recipes-dbs/influxdb/influxdb_1.7.10.bb   |  2 ++
- 2 files changed, 22 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/influxdb/influxdb/0001-patch-term-module-for-mips-ispeed-ospeed-termios-abs.patch
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-dbs/influxdb/influxdb/0001-patch-term-module-for-mips-ispeed-ospeed-termios-abs.patch b/meta-oe/recipes-dbs/influxdb/influxdb/0001-patch-term-module-for-mips-ispeed-ospeed-termios-abs.patch
-new file mode 100644
-index 0000000000..3cb2090d19
---- /dev/null
-+++ b/meta-oe/recipes-dbs/influxdb/influxdb/0001-patch-term-module-for-mips-ispeed-ospeed-termios-abs.patch
-@@ -0,0 +1,20 @@
-+From f3713628fac72e45223013dcf8e37ac65d17d886 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 11 Jan 2021 15:16:57 -0800
-+Subject: [PATCH] patch term module for mips ispeed/ospeed termios absense
-+
-+Upstream-Status: OE-Specific [needed on mips]
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ go.mod | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+--- a/go.mod
-++++ b/go.mod
-+@@ -54,3 +54,5 @@ require (
-+ 	gonum.org/v1/gonum v0.6.0 // indirect
-+ 	google.golang.org/grpc v1.26.0
-+ )
-++
-++replace github.com/pkg/term => github.com/kraj/term v0.0.0-20210111231523-7c42fcb0e627
-diff --git a/meta-oe/recipes-dbs/influxdb/influxdb_1.7.10.bb b/meta-oe/recipes-dbs/influxdb/influxdb_1.7.10.bb
-index 4f2bb78b23..06f7947642 100644
---- a/meta-oe/recipes-dbs/influxdb/influxdb_1.7.10.bb
-+++ b/meta-oe/recipes-dbs/influxdb/influxdb_1.7.10.bb
-@@ -22,6 +22,8 @@ SRC_URI = "\
-     file://influxdb.conf \
- "
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 2a84d669a1..ac986a5c1c 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -197,6 +197,7 @@ RDEPENDS_packagegroup-meta-oe-crypto ="\
+ RDEPENDS_packagegroup-meta-oe-crypto_remove_riscv32 = "botan"
  
-+SRC_URI_append_mipsarch = " file://0001-patch-term-module-for-mips-ispeed-ospeed-termios-abs.patch;patchdir=src/${GO_IMPORT}"
-+
- SRCREV = "c958f436b2e538a88a7815aad721c7774a0b8f63"
- 
- inherit go-mod systemd update-rc.d useradd
+ RDEPENDS_packagegroup-meta-oe-dbs ="\
++    influxdb \
+     leveldb \
+     libdbi \
+     mariadb \
 -- 
 2.30.0
 
