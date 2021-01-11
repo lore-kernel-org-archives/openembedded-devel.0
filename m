@@ -1,70 +1,80 @@
-Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com [209.85.222.182])
- by mx.groups.io with SMTP id smtpd.web08.38033.1610387367058422428
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
+ by mx.groups.io with SMTP id smtpd.web12.1286.1610391440410798134
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Jan 2021 09:49:27 -0800
+ Mon, 11 Jan 2021 10:57:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=KOYEGgPg;
- spf=pass (domain: gmail.com, ip: 209.85.222.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f182.google.com with SMTP id 22so237941qkf.9
-        for <openembedded-devel@lists.openembedded.org>; Mon, 11 Jan 2021 09:49:26 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=rzQ9D15L;
+ spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: marek.belisko@gmail.com)
+Received: by mail-ed1-f48.google.com with SMTP id i24so848437edj.8
+        for <openembedded-devel@lists.openembedded.org>; Mon, 11 Jan 2021 10:57:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=QBDSxsQrkVagW2xdAiaBc6W9NLxEU8J2nBUdwlShzUc=;
-        b=KOYEGgPgHaA4yk7pYqej8E0IAK8XMDwkIBf7RT02msK/HTD9wuQDp+866fYybbqIfn
-         MtQboqIxjWV+GsoE8NPdB7Sd779ns9Gt/jna1ER3eLYb31TS9lXQ9XN6qB/fmnhTOPdF
-         EIQFlVF45glYruKEd83jo2+dvmY26lGpvxWmWN9b+aQJsOXzLANr7jxqSSEeHOI3ggn0
-         lbbkN58aIn2IzDVkH0SPnTfYmk4abM3Jp8ZxGUBv2Z+1IVakkRSOn7xrcid3JxQ1f9vl
-         Snt1E6O6qwCFnCmZhYs7+ZXAaMO1uHEZWDOFdV5q0Lxp8dAjM1isDMQceuSblSMbcE2m
-         UuqQ==
+        bh=AWk2BqptbknUu81QpcXK5znPgBLBbUJbmOldIfyPqYs=;
+        b=rzQ9D15LDtZ5kSnZ5fqRNunKOYIfksYc4AThNlhv9UB+5G3Gm6T2x6Cd0BWCFQEFdt
+         TLgDHT+FOU+5JRtR5pB2VuTpbtUUDH08871HYOgqrOAe2MH8NJPgJS3gUmx4UWxrzjnq
+         u2gyc2VD0laxRvAqjgCT8odol+ZjumccRWjj69OEX21huHOoke2RXAEDnUsbYsfUfl0+
+         Ljwusx/Bq7khBgtwNvrLKbH84SkWI7FOB79xjItNluhrZrNw0doSa+sv9lX+ZlSoj7My
+         Z19sI1mImbAF0EqKgak0x/4phgmNwMADTRAginoW2JgS7V+TrqySGVAdUuu2OXLhbYai
+         qYHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=QBDSxsQrkVagW2xdAiaBc6W9NLxEU8J2nBUdwlShzUc=;
-        b=XVMKGY6JK/37Js8zhzhUHZDRoEDtJzMx3SZ85TQ3xM6CxgMLfzujNsF9nPyEErIpio
-         W6SuF0OutQax6P1qrcUaTBb8fcyL2veycJZRmd9yqA3cBeCBag04s8Lx83Ya5Gay79p3
-         MXrJzQu12prwTyNXb32NAytmwy6CM2PwdAjWBaPyEtZP9nxSbHsvnUwtw4v7MN6qN+/S
-         KvGktUWRgSPU9HyUuo79mv33QxLUHtv8c3ZYj1+f7YsrDsr0i9lhrpHpQCDhYO7pl/kn
-         nVTiKgvhsbPPRRlw9NXnLGJ3+NvvEr1SDKDV99YLBa5/kD0G5LyKdYE7jMCWWC64FXif
-         yChw==
-X-Gm-Message-State: AOAM53123QzL4wxD1cHOzKnpwZkPZu/9Kf/6nssf6GvrDXnk+wq9e4Lr
-	4lF+hpYB1gVPb98K7HBNmOth6UBqul5iHdyp7ik=
-X-Google-Smtp-Source: ABdhPJwy7DvOssx7Z5/QXI9fVUb/fwUwlII16AnK08DMvnkMB4QfP4twAtjqJ+s7mTZ5t/vzjzmvF3Z1xwHG7f0v5xs=
-X-Received: by 2002:a05:620a:1139:: with SMTP id p25mr444449qkk.9.1610387366199;
- Mon, 11 Jan 2021 09:49:26 -0800 (PST)
+        bh=AWk2BqptbknUu81QpcXK5znPgBLBbUJbmOldIfyPqYs=;
+        b=LuTso+iXBqB5fwijTJXWgeUjaOObMgeGs7pwd4boiRHppH0oq6LiTFoVvXt8RInXr0
+         k0/8cjFh3O2rZ3urrjBXYwYs4a+w8PnwuAo4Us52PlT1T0MLO6MVpWk9Gagg++lqzCrQ
+         ySq2trqK9Z9O5Ljn0copM6pSzEG9qgqr4e5/aNKeJMwB16HnsCGebZeh/GKNUf//+RWP
+         STu5YnLssFfl5EvaRDFJ3nE8mxbM9j4a+hqvivi72QBrnfJOBn8ypB6S41FIUxJ4aiuE
+         GnIzAcPK0jSlRx1C2dWVST9GcTZA3tOux30N15Yfqc/MOS+D/2xJXhkPwX6Fwsh5c8RB
+         QBvA==
+X-Gm-Message-State: AOAM533O54rt81Af+8kj+dbeFMg83NMYXmUuH+rxCRXSB8Ly/brw/YGm
+	fOxo9JMPe9QlXcQZe/FkZRmhyoSmd3DEYqCqFuI=
+X-Google-Smtp-Source: ABdhPJwxai1fqdR0uc0NEf2O5wSS0WT0Uh+f9Iq+XBKMOUwVuLLMwfoZ4wiCebmbkxUf7I6T+tVoApW5gbl6tyRUlxw=
+X-Received: by 2002:a05:6402:1352:: with SMTP id y18mr591020edw.178.1610391438923;
+ Mon, 11 Jan 2021 10:57:18 -0800 (PST)
 MIME-Version: 1.0
 References: <CAAfyv35iGwiKWorpEthr_CCDj_dVQUT0PW6MacAA+4k3h=foWQ@mail.gmail.com>
-In-Reply-To: <CAAfyv35iGwiKWorpEthr_CCDj_dVQUT0PW6MacAA+4k3h=foWQ@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Mon, 11 Jan 2021 09:49:00 -0800
-Message-ID: <CAMKF1sryLZF-Qx2UDXCFpguOi4Yd3AVVR3KV+4g-QUoskL-SCQ@mail.gmail.com>
+ <CAMKF1sryLZF-Qx2UDXCFpguOi4Yd3AVVR3KV+4g-QUoskL-SCQ@mail.gmail.com>
+In-Reply-To: <CAMKF1sryLZF-Qx2UDXCFpguOi4Yd3AVVR3KV+4g-QUoskL-SCQ@mail.gmail.com>
+From: "Marek Belisko" <marek.belisko@gmail.com>
+Date: Mon, 11 Jan 2021 19:57:07 +0100
+Message-ID: <CAAfyv34raB-VGfLOc6DOOQ4bMPsFW3xNmXrW=q43XeNiK1ANtg@mail.gmail.com>
 Subject: Re: [oe] nodejs complation fails on dunfell
-To: Marek Belisko <marek.belisko@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: OpenEmbedded Development mailing list <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-you might have to add -latomic to LDFLAGS
+Hi Khem,
 
-On Mon, Jan 11, 2021 at 5:18 AM Marek Belisko <marek.belisko@gmail.com> wrote:
+On Mon, Jan 11, 2021 at 6:49 PM Khem Raj <raj.khem@gmail.com> wrote:
 >
-> Hi,
+> you might have to add -latomic to LDFLAGS
+I added it to LDFLAGS but it doesn't help.
 >
-> I'm trying to compile nodejs12 from dunfell branch for
-> raspberrypi0-wifi and getting following issue:
->
-> /usr/include/c++/9.3.0/atomic:254: undefined reference to `__atomic_load_8'
->
-> For raspberrypi3 build it works perfectly fine. relevant flags are:
-> -march=armv6 -mfpu=vfp -mfloat-abi=hard -mtune=arm1176jzf-s
->
-> Strange is that nodejs8 from rocko branch works fine for
-> raspberrypi0-wifi. Any ideas?
->
-> Thanks and regards,
->
-> marek
->
-> 
->
+> On Mon, Jan 11, 2021 at 5:18 AM Marek Belisko <marek.belisko@gmail.com> wrote:
+> >
+> > Hi,
+> >
+> > I'm trying to compile nodejs12 from dunfell branch for
+> > raspberrypi0-wifi and getting following issue:
+> >
+> > /usr/include/c++/9.3.0/atomic:254: undefined reference to `__atomic_load_8'
+> >
+> > For raspberrypi3 build it works perfectly fine. relevant flags are:
+> > -march=armv6 -mfpu=vfp -mfloat-abi=hard -mtune=arm1176jzf-s
+> >
+> > Strange is that nodejs8 from rocko branch works fine for
+> > raspberrypi0-wifi. Any ideas?
+> >
+> > Thanks and regards,
+> >
+> > marek
+> >
+> > 
+> >
+
+BR,
+
+marek
