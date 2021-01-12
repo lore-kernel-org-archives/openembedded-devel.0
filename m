@@ -1,92 +1,73 @@
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web10.15073.1610481816716231571
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
+ by mx.groups.io with SMTP id smtpd.web09.16725.1610486999804452573
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Jan 2021 12:03:36 -0800
+ Tue, 12 Jan 2021 13:30:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=nYX5M7cN;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id h186so2063878pfe.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Jan 2021 12:03:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=D99VYtRnc17R7GG/onuzfZHY4U0k3Mm4uP/j/cd9f04=;
-        b=nYX5M7cN6+5oCUj/i3dY0kAhmpg6jV4Nu1/Tn77jHp97CA1g30boZjPoBh1qJeN7Zg
-         ci/Ii/7H2yyJO3dVVK4nr8AM7nWryIDqM6+wEfzDeUUuFa3L9HzdrmKdtHAIW8b8hJak
-         mmOCslom7/iRkC+ImEO+IzZOJsZMhAhkPFHhRNCyvciBKDTBmMhiTqHdXKIcJxsBEE4F
-         C2Ck9Lvpe4eJchIJURCSqiEuM9XRGyQFra4yeAirDJTddHlRC/kU23+1QVfuxLS+G/Yy
-         IXtu18jwPOkQrwJWGf2kiOEzqKvMgwTFdJx0sd3slIdrTNeZsXcTgt5A1wMCspOfJF6d
-         IuAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=D99VYtRnc17R7GG/onuzfZHY4U0k3Mm4uP/j/cd9f04=;
-        b=jI1xhVZ5IDabwBEehHwfpcyo2OM6EJyIpFEmbZkrrxYtb4kfcvFozuECKIChDnRNhK
-         R/l54zijpdHysu3lWSnI5C808U/g5ipDIOAt4MI7/jsGmmkvfB9nJFeUkQn94BgW4n/S
-         IVLzZ3smUzSDr+RfnuPlODToD1PH8YL/nk6c21AArTAbTmPc6yQOoZEJzn8zvVek0h4Y
-         6Sn8zK9Kca4WwIZByGQd/hKtqJqSCuZKxCHE+WHOYGX0HkpWLpLUVZgymnxH434xusqj
-         Re9x1IeGtBBId1qBUTB62UjbgrKlvwwxUHlXyY7VyP/OOsPBqUdpNtf+jgz3IrgWV6gA
-         UlFA==
-X-Gm-Message-State: AOAM5323CMTt98oBHAKcMU+i+b/iu7+wkRDIGSsH68zlU4QkYYRKNETL
-	MsX/t0Qxl/muZWUkuz7xlDoPsfAdv+PpfA==
-X-Google-Smtp-Source: ABdhPJyXd+1APCGE57O8Ob+3F539jCy0Hpp6ZHzpJYPsv8ixPbFZSv1OUHPVsvcvfrh/qSpmJ7j4Og==
-X-Received: by 2002:aa7:8f35:0:b029:19b:1258:ec5d with SMTP id y21-20020aa78f350000b029019b1258ec5dmr778614pfr.9.1610481816136;
-        Tue, 12 Jan 2021 12:03:36 -0800 (PST)
-Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:2960:99d5:cba5:7114])
-        by smtp.gmail.com with ESMTPSA id gj1sm4314188pjb.11.2021.01.12.12.03.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Jan 2021 12:03:35 -0800 (PST)
-From: "akuster" <akuster808@gmail.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denx.de, ip: 212.18.0.10, mailfrom: sbabic@denx.de)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+	by mail-out.m-online.net (Postfix) with ESMTP id 4DFkHn2gBHz1s46W;
+	Tue, 12 Jan 2021 22:29:57 +0100 (CET)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+	by mail.m-online.net (Postfix) with ESMTP id 4DFkHn24z8z1qql5;
+	Tue, 12 Jan 2021 22:29:57 +0100 (CET)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+	by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new, port 10024)
+	with ESMTP id woGEmlavies0; Tue, 12 Jan 2021 22:29:56 +0100 (CET)
+Received: from babic.homelinux.org (host-88-217-136-221.customer.m-online.net [88.217.136.221])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mail.mnet-online.de (Postfix) with ESMTPS;
+	Tue, 12 Jan 2021 22:29:56 +0100 (CET)
+Received: from localhost (mail.babic.homelinux.org [127.0.0.1])
+	by babic.homelinux.org (Postfix) with ESMTP id A63A04540908;
+	Tue, 12 Jan 2021 22:29:55 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at babic.homelinux.org
+Received: from babic.homelinux.org ([127.0.0.1])
+	by localhost (mail.babic.homelinux.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id msefdJf2XtHX; Tue, 12 Jan 2021 22:29:52 +0100 (CET)
+Received: from paperino.fritz.box (paperino.fritz.box [192.168.178.64])
+	by babic.homelinux.org (Postfix) with ESMTP id CD1094540829;
+	Tue, 12 Jan 2021 22:29:52 +0100 (CET)
+From: "Stefano Babic" <sbabic@denx.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Armin Kuster <akuster@mvista.com>
-Subject: [meta-networking][master][gatesgarth][dunfell][PATCH] wireshark: Several securtiy fixes
-Date: Tue, 12 Jan 2021 12:03:33 -0800
-Message-Id: <20210112200333.2603-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
+Cc: stefan@herbrechtsmeier.net,
+	Stefano Babic <sbabic@denx.de>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [PATCH] libconfig: split package for C++
+Date: Tue, 12 Jan 2021 22:29:43 +0100
+Message-Id: <20210112212943.373595-1-sbabic@denx.de>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 
-From: Armin Kuster <akuster@mvista.com>
+There is current just one package for libconfig and libconfig++ library.
+In case footprint matters as an image in initramfs, the C++ binding if
+not required adds additional dependencies (libstdc++).
 
-Source: Wireshark.org
-MR: 106181, 106696, 107655, 107673, 107682
-Type: Security Fix
-Disposition: Backport from wireshark.org
-ChangeID: 57df6ac3b11aabd96e6aec728501ce7988bc176a
-Description:
+This split the packages to let include just what is needed.
 
-Bugfix only update including these cves:
-3.2.8
-CVE-2020-26575
-CVE-2020-28030
-
-3.2.9
-CVE-2020-26418
-CVE-2020-26421
-CVE-2020-26420
-
-Signed-off-by: Armin Kuster <akuster@mvista.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Stefano Babic <sbabic@denx.de>
+Suggested-by : Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
+Reported-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../wireshark/{wireshark_3.2.7.bb => wireshark_3.2.10.bb}       | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_3.2.7.bb => wireshark_3.2.10.bb} (96%)
+ meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.2.7.bb b/meta-networking/recipes-support/wireshark/wireshark_3.2.10.bb
-similarity index 96%
-rename from meta-networking/recipes-support/wireshark/wireshark_3.2.7.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_3.2.10.bb
-index 65f925ce1f..d284824149 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_3.2.7.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_3.2.10.bb
-@@ -12,7 +12,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
- 
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
- 
--SRC_URI[sha256sum] = "be832fb86d9c455c5be8b225a755cdc77cb0e92356bdfc1fe4b000d93f7d70da"
-+SRC_URI[sha256sum] = "1e9e239f2449f240a7910ed598084ccaf8ea308b2b46b196c5adbec59612226c"
- 
- PE = "1"
- 
--- 
-2.17.1
+diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb b/meta=
+-oe/recipes-extended/libconfig/libconfig_1.7.2.bb
+index 148e85ce1..70ea82eb9 100644
+--- a/meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb
++++ b/meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb
+@@ -13,3 +13,7 @@ inherit autotools-brokensep pkgconfig
+=20
+ SRC_URI[md5sum] =3D "6bd98ee3a6e6b9126c82c916d7a9e690"
+ SRC_URI[sha256sum] =3D "7c3c7a9c73ff3302084386e96f903eb62ce06953bb166623=
+5fac74363a16fad9"
++
++PACKAGE_BEFORE_PN =3D "${PN}++"
++FILES_${PN}++ =3D "${libdir}/${BPN}++*${SOLIBS}"
++
+--=20
+2.25.1
 
