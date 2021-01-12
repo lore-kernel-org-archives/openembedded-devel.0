@@ -1,48 +1,48 @@
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web12.623.1610495735370386374
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web09.601.1610495758467808830
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Jan 2021 15:55:35 -0800
+ Tue, 12 Jan 2021 15:55:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=LyXcPO7Z;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id g3so41849plp.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Jan 2021 15:55:35 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=odLT7Z+t;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id j1so39995pld.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Jan 2021 15:55:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id;
-        bh=9tqeaHOnVgV+Ih1rHsHUoJqwwn/DEURHCT3IfXI+x5I=;
-        b=LyXcPO7Zmpbz+p6ixUwE523bjoYqaYhpxeF3zCuLQdVQ2PpuaoPlfjkfiwSuKoJbbf
-         /088dmRobHZcZPgY2vsr0V/UWsVy//0QW3kwkm3+g7AR+zHbgHlj0Stm7YKFnZzr/E8H
-         U6/4yQgw0f0cOVpxFKfx52IV0qdkNvXCBQRK8kIGhyXG8s2SMwQtcDb8N+HfJhyTwsVa
-         oj37zWxr46cjefi5l7txsvcLK6w4kzoDkVq8m06kQhYrTf1KRwQUF6GqYwcz4tySZIWI
-         YxkphfDzKocnWzyWScLvkuNoRZQ5cJQNhoO2l0OS9z0vk8ANLcBrFHAtT1LCHteQsWWL
-         O0Fg==
+        bh=HQtdmkkb4gMA8Jyhln++gabE7j2ns+TxVwEYfERevTo=;
+        b=odLT7Z+tBzno4RtAN2PkKpoqZFxFDy0ASK0RGBBrXN9LRrHx8nMzXahy5ksQmYtZEh
+         WH6Uwn8ZIx1A5LxYceCB0F8ZKCJtKui+KJ7b3n9VTWeYQ8F8hKELys4mtrctUKH9IA9s
+         Xz4WuWYN9Yy4zRsamlcBZyKiYvdZ9OyDotNPdJGW2N7alU/V4g+rqPba/TEei9nbMHMF
+         rdfuVRelkWA0szQ/pjuZi3sR0BZmKttLjMjrIMWwzvYAurfOTEbXHD7w8al61yh3wj1G
+         v+LeEy3TgU6g5POMMljaRV9N2NEJPRWEcrTv7GD4DYAUKN32D24sXraYV4PsiWqMrDY8
+         dRHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=9tqeaHOnVgV+Ih1rHsHUoJqwwn/DEURHCT3IfXI+x5I=;
-        b=EI8lMI46v7qLlWhNlo0LQ1jLJzBDEGJIUsIiZ74lUNIf64u9I/4+SoVjoNMk1LjcyE
-         3ki1VV2mlHzDuMJ/+U9qZS4ij9ih9Y0FdIAIshCh/5jseh1QHr1Fa+mm6LZoLqOOL/ZS
-         V64Ds+lX3dDXZtIMOFUNRuqnnv6wEtg/fC9mNkgFIU3o1MXkmOWyEpLkv/BmiJsoHw+N
-         j2ItsvcHxR1Zw5xGVhtjxqnhPXqBqpCL9I1h1uzi/KrzttDBBsApoewxH2OL3Sn3AxmP
-         3mf/zBNn26bLWhwUb3sMhJ/c0PbxaEocQ3EL45CYMl9dpV1A03/uiYTLRfvkXKcAZWOv
-         r+mw==
-X-Gm-Message-State: AOAM5326ilFGzyJFvtiU0W+6K3FeOBxJ9gYEziltVAlGqQ+tGTkbz7h+
-	TG5vDVdz2xR4tw6NMGN04GjSrT9d3kuHTw==
-X-Google-Smtp-Source: ABdhPJxBn6fcW7/jBXap9GrXcuHfsINx1fa19SLALRrngoWVNC16EKV+xpWZkdyjVTtS0xwkNNrOkA==
-X-Received: by 2002:a17:902:be11:b029:da:ba30:5791 with SMTP id r17-20020a170902be11b02900daba305791mr1842320pls.13.1610495734684;
-        Tue, 12 Jan 2021 15:55:34 -0800 (PST)
+        bh=HQtdmkkb4gMA8Jyhln++gabE7j2ns+TxVwEYfERevTo=;
+        b=sUksKr1nP5/obV9WXVPIW9b79twNPFWyonNeW+ioh08YVzYwypIUF18hSHB52AdHO1
+         d700ZQq3pCC/ZJlKkjlVgT8oHqXiJVJayRQ+fN89Pbn3n6rsK+l/2jHo7Jn8/YnC7EZe
+         0G6pCD2WX74Jaw13PoiYul/TE+BREAZR58g6wpLKIBhOQHwZnaDD+sKlBMxLgTzLKYAd
+         ImggDQdbDCq/PTeuMGg5p71IFqhuLsmOMc5rXrDiHKzCcm0CpahUmd4q3jsP4nFqSWr8
+         0E11fkhnj+eXLI7pQKv8YApIslNH69uR3ww6M64CxY60XecnJ1MplpSPVx6HOsGYb6Tv
+         fMhg==
+X-Gm-Message-State: AOAM530DIKDZoLeb4bgI7gObJVOm4j+g//f1tSFdmQFPN4A0Uq6kPkNI
+	uGkQKaARUO6n6pfMj9I7/Vv/VD7teDQrxA==
+X-Google-Smtp-Source: ABdhPJzJNiXk3icVk9seUJxxeB+5PfCPo0uTVbVEsoCqM6Na8Y+N66/QmZKgZqV+nFlkRalK8izXXA==
+X-Received: by 2002:a17:902:7489:b029:de:23eb:c1eb with SMTP id h9-20020a1709027489b02900de23ebc1ebmr1397937pll.75.1610495757788;
+        Tue, 12 Jan 2021 15:55:57 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:2960:99d5:cba5:7114])
-        by smtp.gmail.com with ESMTPSA id b26sm94483pgm.25.2021.01.12.15.55.33
+        by smtp.gmail.com with ESMTPSA id n1sm239491pfu.28.2021.01.12.15.55.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Jan 2021 15:55:34 -0800 (PST)
+        Tue, 12 Jan 2021 15:55:57 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Armin Kuster <akuster@mvista.com>
-Subject: [meta-oe][master][gatesgarth][PATCH] lua: update to 5.3.6
-Date: Tue, 12 Jan 2021 15:55:32 -0800
-Message-Id: <20210112235532.7871-1-akuster808@gmail.com>
+Subject: [meta-oe][dunfell][PATCH] lua: update to 5.3.6
+Date: Tue, 12 Jan 2021 15:55:56 -0800
+Message-Id: <20210112235556.7943-1-akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 
 From: Armin Kuster <akuster@mvista.com>
@@ -65,7 +65,7 @@ diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb b/meta-oe/recipes-devtool
 similarity index 92%
 rename from meta-oe/recipes-devtools/lua/lua_5.3.5.bb
 rename to meta-oe/recipes-devtools/lua/lua_5.3.6.bb
-index 60c33d6586..5e8f54588b 100644
+index 7d84ea60b6..342ed1b547 100644
 --- a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
 +++ b/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
 @@ -1,7 +1,7 @@
