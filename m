@@ -1,73 +1,99 @@
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
- by mx.groups.io with SMTP id smtpd.web09.16725.1610486999804452573
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+ by mx.groups.io with SMTP id smtpd.web08.17122.1610488331965130301
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Jan 2021 13:30:00 -0800
+ Tue, 12 Jan 2021 13:52:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denx.de, ip: 212.18.0.10, mailfrom: sbabic@denx.de)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
-	by mail-out.m-online.net (Postfix) with ESMTP id 4DFkHn2gBHz1s46W;
-	Tue, 12 Jan 2021 22:29:57 +0100 (CET)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
-	by mail.m-online.net (Postfix) with ESMTP id 4DFkHn24z8z1qql5;
-	Tue, 12 Jan 2021 22:29:57 +0100 (CET)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
-	by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new, port 10024)
-	with ESMTP id woGEmlavies0; Tue, 12 Jan 2021 22:29:56 +0100 (CET)
-Received: from babic.homelinux.org (host-88-217-136-221.customer.m-online.net [88.217.136.221])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mail.mnet-online.de (Postfix) with ESMTPS;
-	Tue, 12 Jan 2021 22:29:56 +0100 (CET)
-Received: from localhost (mail.babic.homelinux.org [127.0.0.1])
-	by babic.homelinux.org (Postfix) with ESMTP id A63A04540908;
-	Tue, 12 Jan 2021 22:29:55 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at babic.homelinux.org
-Received: from babic.homelinux.org ([127.0.0.1])
-	by localhost (mail.babic.homelinux.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id msefdJf2XtHX; Tue, 12 Jan 2021 22:29:52 +0100 (CET)
-Received: from paperino.fritz.box (paperino.fritz.box [192.168.178.64])
-	by babic.homelinux.org (Postfix) with ESMTP id CD1094540829;
-	Tue, 12 Jan 2021 22:29:52 +0100 (CET)
-From: "Stefano Babic" <sbabic@denx.de>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=I84Z21R6;
+ spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wr1-f43.google.com with SMTP id c5so12444wrp.6
+        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Jan 2021 13:52:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=D+n9uiq3iIcQl2BwaKYcPYt/UXBMEGxKDCswLicf73M=;
+        b=I84Z21R66Bcnd0Q08c2SdjIIxqp/AuwGctUMUECvJ6Cy0WInVgCJmJaIX8uvvYrqpo
+         bd8svI6+FJM166ZkbZi41qZWhkeljIsXk9hj5Y/dHqcCjixtl4+KOCGcENQ+KrDK07N4
+         LuBQUuP0CkYPuGqf+aWj+RFIsOq/OFKzOCeUeJwIcgJWdr2KzEnmpn0IMDcpcHZVmXDj
+         ajDrPb8lyJM9yDjH8VDgqjiBRqOeljikAgVIdn1Uv2Pm8KtnULRXU3UmlvlMmQ94PxsQ
+         eCOb1XWA9lNn2cGwS9WJ2db10HmDr+HoJrmoEJNRV1pgO8lBYZTXS8g0Mi+5tJAZEWNn
+         4uMg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=D+n9uiq3iIcQl2BwaKYcPYt/UXBMEGxKDCswLicf73M=;
+        b=VAQxr8s0mJn+t9NuHhTaXZHa9DmfVFIRvw4TtGr4K+Un3Yd2DIIWqWL3+MVvr1SiMc
+         wincnLUjD38aB5vH0Z9uS6DlhwGGnVvqTJ1DenYogi7d+ZbOIRKEDlnXNJKk6V+YCxQL
+         BQAczD1FD3fM6/LvZ7XTZFTKQeKeuDxdvurx0ZPEwsmehc4ubq1+L04EBu9uVEFzcZmz
+         CMYaHjIPgVVN+UIw/WoqpuBphPyBTCBZ391sxYR9rWBEQ4fr3pT4DIWLQZELdSnEvhPm
+         LS3X/FsTEig7uusBpbaM77Af1B+6L2cKcb0lYHP+ZuC2pDWyAc0fv8DF8XDADsdttNVY
+         iiSg==
+X-Gm-Message-State: AOAM530d1bL7F9/rPyqUiKAuHXY53Po4Ds3EsRI0mpzOhRteR1b0wACT
+	mefX7a5v/DAPvjttN/or6+CBha80/HQnIA==
+X-Google-Smtp-Source: ABdhPJzXMp7vWVt6MIAk+4O9ayjspXt4AITnoQ6gPfocjz+tzuNE71sYJLQq7QUzY47KrFBSZiqv1A==
+X-Received: by 2002:a5d:5105:: with SMTP id s5mr792293wrt.136.1610488330448;
+        Tue, 12 Jan 2021 13:52:10 -0800 (PST)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from superandy.speedport.ip (p200300f07f0538793397820a7f9846fa.dip0.t-ipconnect.de. [2003:f0:7f05:3879:3397:820a:7f98:46fa])
+        by smtp.gmail.com with ESMTPSA id c6sm6881300wrh.7.2021.01.12.13.52.09
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 12 Jan 2021 13:52:09 -0800 (PST)
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: stefan@herbrechtsmeier.net,
-	Stefano Babic <sbabic@denx.de>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH] libconfig: split package for C++
-Date: Tue, 12 Jan 2021 22:29:43 +0100
-Message-Id: <20210112212943.373595-1-sbabic@denx.de>
-X-Mailer: git-send-email 2.25.1
+Subject: [PATCH 1/8] poppler: upgrade 20.12.1 -> 21.01.0
+Date: Tue, 12 Jan 2021 22:51:54 +0100
+Message-Id: <20210112215201.3940196-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-There is current just one package for libconfig and libconfig++ library.
-In case footprint matters as an image in initramfs, the C++ binding if
-not required adds additional dependencies (libstdc++).
+Release 21.01.0
+core:
+ * Faster routines for jpeg decoding
+ * Fix reading signatures in encrypted files
+ * Add white point correction when lcms is used
+ * JBIG2Stream: Fix byte counting
+ * Fix potential data loss if we try to fetch a non existing Ref after modifying the document
+ * Specifically use DeviceGray instead of DefaultGray for softmasks
+ * Fix various issues handling broken files
+utils:
+ * pdftocairo: Setmode binary for windows
+ * pdfsig: Add hability to digitally sign files
+ * pdftoppm: add options to set DeviceGray/DeviceRGB/DeviceCMYK
+ * pdftops: add options to set DeviceGray/DeviceRGB/DeviceCMYK
+ * pdfimages: Account for rotation in PPI calculation
+qt5:
+ * Add hability to digitally sign files
+qt6:
+ * Add hability to digitally sign files
+build system:
+ * Enable clang-tidy bugprone-signed-char-misuse
 
-This split the packages to let include just what is needed.
-
-Signed-off-by: Stefano Babic <sbabic@denx.de>
-Suggested-by : Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
-Reported-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ .../poppler/{poppler_20.12.1.bb => poppler_21.01.0.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/poppler/{poppler_20.12.1.bb => poppler_21.01.0.bb} (96%)
 
-diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb b/meta=
--oe/recipes-extended/libconfig/libconfig_1.7.2.bb
-index 148e85ce1..70ea82eb9 100644
---- a/meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb
-+++ b/meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb
-@@ -13,3 +13,7 @@ inherit autotools-brokensep pkgconfig
-=20
- SRC_URI[md5sum] =3D "6bd98ee3a6e6b9126c82c916d7a9e690"
- SRC_URI[sha256sum] =3D "7c3c7a9c73ff3302084386e96f903eb62ce06953bb166623=
-5fac74363a16fad9"
-+
-+PACKAGE_BEFORE_PN =3D "${PN}++"
-+FILES_${PN}++ =3D "${libdir}/${BPN}++*${SOLIBS}"
-+
---=20
-2.25.1
+diff --git a/meta-oe/recipes-support/poppler/poppler_20.12.1.bb b/meta-oe/recipes-support/poppler/poppler_21.01.0.bb
+similarity index 96%
+rename from meta-oe/recipes-support/poppler/poppler_20.12.1.bb
+rename to meta-oe/recipes-support/poppler/poppler_21.01.0.bb
+index 87a57523f..4d4c310a4 100644
+--- a/meta-oe/recipes-support/poppler/poppler_20.12.1.bb
++++ b/meta-oe/recipes-support/poppler/poppler_21.01.0.bb
+@@ -7,7 +7,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://0001-Do-not-overwrite-all-our-build-flags.patch \
+            file://basename-include.patch \
+            "
+-SRC_URI[sha256sum] = "d0aa2586c0a4296c775f0d2045f28bb95a694113fc995f95350faa12930f7b35"
++SRC_URI[sha256sum] = "016dde34e5f868ea98a32ca99b643325a9682281500942b7113f4ec88d20e2f3"
+ 
+ DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
+ 
+-- 
+2.26.2
 
