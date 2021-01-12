@@ -1,184 +1,93 @@
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web12.18208.1610492904153179979
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.web12.623.1610495735370386374
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Jan 2021 15:08:24 -0800
+ Tue, 12 Jan 2021 15:55:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=V+Mr0/j1;
- spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id t6so2286784plq.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Jan 2021 15:08:24 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=LyXcPO7Z;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f173.google.com with SMTP id g3so41849plp.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Jan 2021 15:55:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=LXwIK1ZeTnVJbTb/+32yCbMJbE0eXitXUeFnNzjOPdw=;
-        b=V+Mr0/j1ESGKej1Pdv3qbQp25QLKg+plv+YRoagYveGlr/T5IrDlmrid6RoOzUiPFB
-         UEYcuUihteo/y45tuACiUFSTkzY+xUdQ6NKOaHDEe+NfgZICmtgnYPC1p78JeJxvIIGd
-         XMZywv0LxEwULF9HfTBCgAkuPoKyr57NYvYpa1JtiFiRnxQoJmyVhTWRjeYvJpsj0CO9
-         V806J5WiW2hZ/ppu+um2TMTih6v/FBDKuwdcr+k6bfCdF7uxpnlaejW7jdcY2lIzENwe
-         bMv8XnJJoJf5otlfPvPHTNPN7LiqzMMNc0ZxvORE/Sh/5VOkbA0ZnkacT5AKR7rOPSpH
-         QeOw==
+        h=from:to:cc:subject:date:message-id;
+        bh=9tqeaHOnVgV+Ih1rHsHUoJqwwn/DEURHCT3IfXI+x5I=;
+        b=LyXcPO7Zmpbz+p6ixUwE523bjoYqaYhpxeF3zCuLQdVQ2PpuaoPlfjkfiwSuKoJbbf
+         /088dmRobHZcZPgY2vsr0V/UWsVy//0QW3kwkm3+g7AR+zHbgHlj0Stm7YKFnZzr/E8H
+         U6/4yQgw0f0cOVpxFKfx52IV0qdkNvXCBQRK8kIGhyXG8s2SMwQtcDb8N+HfJhyTwsVa
+         oj37zWxr46cjefi5l7txsvcLK6w4kzoDkVq8m06kQhYrTf1KRwQUF6GqYwcz4tySZIWI
+         YxkphfDzKocnWzyWScLvkuNoRZQ5cJQNhoO2l0OS9z0vk8ANLcBrFHAtT1LCHteQsWWL
+         O0Fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=LXwIK1ZeTnVJbTb/+32yCbMJbE0eXitXUeFnNzjOPdw=;
-        b=kVVseTtaF/i9YtjFPG2muHlO1UhT+ELGdWANAFAW+FCKObGmp0EOA9/JQV9EZKMAv6
-         nUcoc9GFrYY18fRsKloDo/XfhcyPi+uXxuvXS7DbTrBX2xlSCF/zruAPt5ZWQkOIamoT
-         8NlVk1KpsjXIVjaGeM87EUEvclTzs2sGOZznrwb8MQj7W40CGSPTP0kv1uktfh1jhzk/
-         uGTyw/Fm3SMKSIlNslnTIftlXvTdHthXaS9mbPnwuoME2ixDgoDjZHLmevMlcRLiOIjX
-         D6d/BZzEl4owA8+ISHfrWouFhGAYOuk0WIgV0rCwPrzyHBtlJqlH5A7KdMGQ7KrYaM34
-         Lkow==
-X-Gm-Message-State: AOAM530iH/WF7FdD4blzrND/5NM/mRfrxSZt/dOUPAUoibZwGzWWvH4n
-	oIIRxLBPputD9CXWCpCm7qSigS8KLcopkg==
-X-Google-Smtp-Source: ABdhPJyBAomTVswJVVHUj6Kpi1KRpt7ShBRfuHO441bFzsirm8Dc7H8hzgTiV2c+muDfZ1Rq/a+hvQ==
-X-Received: by 2002:a17:902:ed14:b029:da:9da4:3091 with SMTP id b20-20020a170902ed14b02900da9da43091mr1263971pld.29.1610492903442;
-        Tue, 12 Jan 2021 15:08:23 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=9tqeaHOnVgV+Ih1rHsHUoJqwwn/DEURHCT3IfXI+x5I=;
+        b=EI8lMI46v7qLlWhNlo0LQ1jLJzBDEGJIUsIiZ74lUNIf64u9I/4+SoVjoNMk1LjcyE
+         3ki1VV2mlHzDuMJ/+U9qZS4ij9ih9Y0FdIAIshCh/5jseh1QHr1Fa+mm6LZoLqOOL/ZS
+         V64Ds+lX3dDXZtIMOFUNRuqnnv6wEtg/fC9mNkgFIU3o1MXkmOWyEpLkv/BmiJsoHw+N
+         j2ItsvcHxR1Zw5xGVhtjxqnhPXqBqpCL9I1h1uzi/KrzttDBBsApoewxH2OL3Sn3AxmP
+         3mf/zBNn26bLWhwUb3sMhJ/c0PbxaEocQ3EL45CYMl9dpV1A03/uiYTLRfvkXKcAZWOv
+         r+mw==
+X-Gm-Message-State: AOAM5326ilFGzyJFvtiU0W+6K3FeOBxJ9gYEziltVAlGqQ+tGTkbz7h+
+	TG5vDVdz2xR4tw6NMGN04GjSrT9d3kuHTw==
+X-Google-Smtp-Source: ABdhPJxBn6fcW7/jBXap9GrXcuHfsINx1fa19SLALRrngoWVNC16EKV+xpWZkdyjVTtS0xwkNNrOkA==
+X-Received: by 2002:a17:902:be11:b029:da:ba30:5791 with SMTP id r17-20020a170902be11b02900daba305791mr1842320pls.13.1610495734684;
+        Tue, 12 Jan 2021 15:55:34 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:2960:99d5:cba5:7114])
-        by smtp.gmail.com with ESMTPSA id d203sm165622pfd.148.2021.01.12.15.08.22
+        by smtp.gmail.com with ESMTPSA id b26sm94483pgm.25.2021.01.12.15.55.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Jan 2021 15:08:23 -0800 (PST)
+        Tue, 12 Jan 2021 15:55:34 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wenlin Kang <wenlin.kang@windriver.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Armin Kuster <akuster@mvista.com>
-Subject: [meta-oe][dunfell][PATCH 2/2] lua: fix CVE-2020-24371
-Date: Tue, 12 Jan 2021 15:08:20 -0800
-Message-Id: <20210112230820.5071-2-akuster808@gmail.com>
+Cc: Armin Kuster <akuster@mvista.com>
+Subject: [meta-oe][master][gatesgarth][PATCH] lua: update to 5.3.6
+Date: Tue, 12 Jan 2021 15:55:32 -0800
+Message-Id: <20210112235532.7871-1-akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210112230820.5071-1-akuster808@gmail.com>
-References: <20210112230820.5071-1-akuster808@gmail.com>
 
-From: Wenlin Kang <wenlin.kang@windriver.com>
+From: Armin Kuster <akuster@mvista.com>
 
-Source: openembedded.org
-MR: 105165
-Type: Security Fix
-Disposition: Backport from https://git.openembedded.org/meta-openembedded gatesgarth
-ChangeID: 747161877824daae061bc4fb458f55ab033f62f4
-Description:
+LIC_FILES_CHKSUM changed to do year updates
 
-Fix CVE-2020-24371
+This is the last 5.3.x update. This will give us the best
+starting point for doing Maintence moving forward.
 
-Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Its a bug fix only update. See http://www.lua.org/work/diffs-lua-5.3.5-lua-5.3.6.html
+
 Signed-off-by: Armin Kuster <akuster@mvista.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...rriers-cannot-be-active-during-sweep.patch | 90 +++++++++++++++++++
- meta-oe/recipes-devtools/lua/lua_5.3.5.bb     |  1 +
- 2 files changed, 91 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/lua/lua/0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch
+ meta-oe/recipes-devtools/lua/{lua_5.3.5.bb => lua_5.3.6.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-devtools/lua/{lua_5.3.5.bb => lua_5.3.6.bb} (92%)
 
-diff --git a/meta-oe/recipes-devtools/lua/lua/0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch b/meta-oe/recipes-devtools/lua/lua/0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch
-new file mode 100644
-index 0000000000..a302874d76
---- /dev/null
-+++ b/meta-oe/recipes-devtools/lua/lua/0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch
-@@ -0,0 +1,90 @@
-+From 1e6df25ac28dcd89f0324177bb55019422404b44 Mon Sep 17 00:00:00 2001
-+From: Roberto Ierusalimschy <roberto@inf.puc-rio.br>
-+Date: Thu, 3 Sep 2020 15:32:17 +0800
-+Subject: [PATCH] Fixed bug: barriers cannot be active during sweep
-+
-+Barriers cannot be active during sweep, even in generational mode.
-+(Although gen. mode is not incremental, it can hit a barrier when
-+deleting a thread and closing its upvalues.)  The colors of objects are
-+being changed during sweep and, therefore, cannot be trusted.
-+
-+Upstream-Status: Backport [https://github.com/lua/lua/commit/a6da1472c0c5e05ff249325f979531ad51533110]
-+CVE: CVE-2020-24371
-+
-+[Adjust code KGC_INC -> KGC_NORMAL, refer 69371c4b84becac09c445aae01d005b49658ef82]
-+Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
-+---
-+ src/lgc.c | 33 ++++++++++++++++++++++++---------
-+ 1 file changed, 24 insertions(+), 9 deletions(-)
-+
-+diff --git a/src/lgc.c b/src/lgc.c
-+index 973c269..7af23d5 100644
-+--- a/src/lgc.c
-++++ b/src/lgc.c
-+@@ -142,10 +142,17 @@ static int iscleared (global_State *g, const TValue *o) {
-+ 
-+ 
-+ /*
-+-** barrier that moves collector forward, that is, mark the white object
-+-** being pointed by a black object. (If in sweep phase, clear the black
-+-** object to white [sweep it] to avoid other barrier calls for this
-+-** same object.)
-++** Barrier that moves collector forward, that is, marks the white object
-++** 'v' being pointed by the black object 'o'.  In the generational
-++** mode, 'v' must also become old, if 'o' is old; however, it cannot
-++** be changed directly to OLD, because it may still point to non-old
-++** objects. So, it is marked as OLD0. In the next cycle it will become
-++** OLD1, and in the next it will finally become OLD (regular old). By
-++** then, any object it points to will also be old.  If called in the
-++** incremental sweep phase, it clears the black object to white (sweep
-++** it) to avoid other barrier calls for this same object. (That cannot
-++** be done is generational mode, as its sweep does not distinguish
-++** whites from deads.)
-+ */
-+ void luaC_barrier_ (lua_State *L, GCObject *o, GCObject *v) {
-+   global_State *g = G(L);
-+@@ -154,7 +161,8 @@ void luaC_barrier_ (lua_State *L, GCObject *o, GCObject *v) {
-+     reallymarkobject(g, v);  /* restore invariant */
-+   else {  /* sweep phase */
-+     lua_assert(issweepphase(g));
-+-    makewhite(g, o);  /* mark main obj. as white to avoid other barriers */
-++    if (g->gckind == KGC_NORMAL)  /* incremental mode? */
-++      makewhite(g, o);  /* mark 'o' as white to avoid other barriers */
-+   }
-+ }
-+ 
-+@@ -299,10 +307,15 @@ static void markbeingfnz (global_State *g) {
-+ 
-+ 
-+ /*
-+-** Mark all values stored in marked open upvalues from non-marked threads.
-+-** (Values from marked threads were already marked when traversing the
-+-** thread.) Remove from the list threads that no longer have upvalues and
-+-** not-marked threads.
-++** For each non-marked thread, simulates a barrier between each open
-++** upvalue and its value. (If the thread is collected, the value will be
-++** assigned to the upvalue, but then it can be too late for the barrier
-++** to act. The "barrier" does not need to check colors: A non-marked
-++** thread must be young; upvalues cannot be older than their threads; so
-++** any visited upvalue must be young too.) Also removes the thread from
-++** the list, as it was already visited. Removes also threads with no
-++** upvalues, as they have nothing to be checked. (If the thread gets an
-++** upvalue later, it will be linked in the list again.)
-+ */
-+ static void remarkupvals (global_State *g) {
-+   lua_State *thread;
-+@@ -313,9 +326,11 @@ static void remarkupvals (global_State *g) {
-+       p = &thread->twups;  /* keep marked thread with upvalues in the list */
-+     else {  /* thread is not marked or without upvalues */
-+       UpVal *uv;
-++      lua_assert(!isold(thread) || thread->openupval == NULL);
-+       *p = thread->twups;  /* remove thread from the list */
-+       thread->twups = thread;  /* mark that it is out of list */
-+       for (uv = thread->openupval; uv != NULL; uv = uv->u.open.next) {
-++        lua_assert(getage(uv) <= getage(thread));
-+         if (uv->u.open.touched) {
-+           markvalue(g, uv->v);  /* remark upvalue's value */
-+           uv->u.open.touched = 0;
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-index 4f89579c78..7d84ea60b6 100644
+diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb b/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
+similarity index 92%
+rename from meta-oe/recipes-devtools/lua/lua_5.3.5.bb
+rename to meta-oe/recipes-devtools/lua/lua_5.3.6.bb
+index 60c33d6586..5e8f54588b 100644
 --- a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-+++ b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-@@ -9,6 +9,7 @@ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
-            file://0001-Allow-building-lua-without-readline-on-Linux.patch \
-            file://CVE-2020-15888.patch \
-            file://CVE-2020-15945.patch \
-+           file://0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch \
-            "
++++ b/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Lua is a powerful light-weight programming language designed \
+ for extending applications."
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=60aa5cfdbd40086501778d9b6ebf29ee"
++LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=f43d8ee6bc4df18ef8b276439cc4a153"
+ HOMEPAGE = "http://www.lua.org/"
  
- # if no test suite matches PV release of Lua exactly, download the suite for the closest Lua release.
+ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
+@@ -20,8 +20,8 @@ SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \
+             file://run-ptest \
+            ', '', d)}"
+ 
+-SRC_URI[tarballsrc.md5sum] = "4f4b4f323fd3514a68e0ab3da8ce3455"
+-SRC_URI[tarballsrc.sha256sum] = "0c2eed3f960446e1a3e4b9a1ca2f3ff893b6ce41942cf54d5dd59ab4b3b058ac"
++SRC_URI[tarballsrc.md5sum] = "83f23dbd5230140a3770d5f54076948d"
++SRC_URI[tarballsrc.sha256sum] = "fc5fd69bb8736323f026672b1b7235da613d7177e72558893a0bdcd320466d60"
+ SRC_URI[tarballtest.md5sum] = "b14fe3748c1cb2d74e3acd1943629ba3"
+ SRC_URI[tarballtest.sha256sum] = "b80771238271c72565e5a1183292ef31bd7166414cd0d43a8eb79845fa7f599f"
+ 
 -- 
 2.17.1
 
