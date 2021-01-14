@@ -1,79 +1,96 @@
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by mx.groups.io with SMTP id smtpd.web11.5213.1610645798850106199
+Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
+ by mx.groups.io with SMTP id smtpd.web08.5606.1610646612780043062
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Jan 2021 09:36:39 -0800
+ Thu, 14 Jan 2021 09:50:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linux.microsoft.com header.s=default header.b=q+vjqFiS;
- spf=pass (domain: linux.microsoft.com, ip: 13.77.154.182, mailfrom: anbelski@linux.microsoft.com)
-Received: from anbelski-lsg-linux-yocto-1.irsgb21fvobu5fvmalxug44hib.xx.internal.cloudapp.net (unknown [52.247.218.173])
-	by linux.microsoft.com (Postfix) with ESMTPSA id 13AEA20B6C40
-	for <openembedded-devel@lists.openembedded.org>; Thu, 14 Jan 2021 09:36:38 -0800 (PST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 13AEA20B6C40
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1610645798;
-	bh=dUrxCq8DPxl52ftgE9phGFnWG7fuV6P6+N/cq61CELQ=;
-	h=From:To:Subject:Date:From;
-	b=q+vjqFiSR24B/ExjBBfh62qfqPN1o8A3dZrrAMuAO87X8Hgup2EidAYAsLvVenW0o
-	 gxfC31ev0UWeDpQmDg8DfOnLFzy1rbOARa3coVdXLZcIgLypb4M6U5NpZ61ki0EZP9
-	 vnm4w+bljA0NEaOsGCXEHDPskQot95Z+V1xEKtfg=
-From: "Anatol Belski" <anbelski@linux.microsoft.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH v2] xmlsec1: Fix configure QA error caused by host lookup path
-Date: Thu, 14 Jan 2021 17:36:23 +0000
-Message-Id: <20210114173623.26233-1-anbelski@linux.microsoft.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=QNgYpiH6;
+ spf=pass (domain: axis.com, ip: 195.60.68.17, mailfrom: peter.kjellerstedt@axis.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=axis.com; q=dns/txt; s=axis-central1; t=1610646613;
+  x=1642182613;
+  h=from:to:cc:subject:date:message-id:
+   content-transfer-encoding:mime-version;
+  bh=R38bq4yB0FFjTr9WJw7jc6eWPDLN8vI9kOcVtiIN5J0=;
+  b=QNgYpiH6ZnyY8ETTgjUmHFJjKNyTs8SwMIMUHw2zn5aJq2mSdpUh5YcH
+   Yzy7hmBFsDS8gsWbLvvwAI3rQFcI3xI5S92NO1Ml8AgWsrjRcK/QOx2fa
+   1yVFSE+7h03diKgl0PlN/6lw+61GC9UlM1B05JQlJMdMRuhE/RXPH7T15
+   JnI3moQq+ltX80048nOSV9AqZd9wOXxbr77Zu5eeJS9kvAJF7hmw9da9K
+   VooPr96MJiLTU0C027ARXzHRevq2VSTVwIgEGSu0ZQkCInVKg3ImNalLo
+   FTTBGhod9yf3TDx7Ek9e+h7V5AxZsr8hHczkcK56hYJQ+CZ5DIaqu8jhU
+   w==;
+From: "Peter Kjellerstedt" <peter.kjellerstedt@axis.com>
+To: Steve Sakoman <steve@sakoman.com>, "Mittal, Anuj" <anuj.mittal@intel.com>,
+	Armin Kuster <akuster808@gmail.com>
+CC: "OE Core (openembedded-core@lists.openembedded.org)"
+	<openembedded-core@lists.openembedded.org>, "OE Development
+ (openembedded-devel@lists.openembedded.org)"
+	<openembedded-devel@lists.openembedded.org>, "BitBake Development
+ (bitbake-devel@lists.openembedded.org)"
+	<bitbake-devel@lists.openembedded.org>
+Subject: Backport changes for _PYTHON_SYSCONFIGDATA_NAME to Gatesgarth and Dunfell
+Thread-Topic: Backport changes for _PYTHON_SYSCONFIGDATA_NAME to Gatesgarth
+ and Dunfell
+Thread-Index: AdbqluypjM9qGzPGT4u0xlyyjXAnKg==
+Date: Thu, 14 Jan 2021 17:50:10 +0000
+Message-ID: <17b543581ffb421b812323891405dcfb@XBOX03.axis.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.20.13.13]
+MIME-Version: 1.0
+Return-Path: peter.kjellerstedt@axis.com
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-The configure script contains hardcoded lookup paths to /usr and other
-paths that might interfere with the host. These are overwritten with the
-staging dir locations for Poky compatibility.
+[ Cross-posting since these changes affect all of bitbake, openembedded-cor=
+e=20
+  and meta-openembedded and need to be made (at least somewhat) in sync. ]
 
-Signed-off-by: Anatol Belski <anbelski@linux.microsoft.com>
----
- .../xmlsec1/ensure-search-path-non-host.patch | 22 +++++++++++++++++++
- .../recipes-support/xmlsec1/xmlsec1_1.2.31.bb |  1 +
- 2 files changed, 23 insertions(+)
- create mode 100644 meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch
+Can the solution for _PYTHON_SYSCONFIGDATA_NAME please be backported to=20
+Gatesgarth and Dunfell? We are seeing problems for developers who have=20
+updated the python3 version on their hosts when they try to do devtool=20
+modify on recipes that inherit python3native. The following relevant=20
+changes should cherry-pick cleanly to the respective repositories for=20
+both gatesgarth and dunfell:
 
-diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch b/meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch
-new file mode 100644
-index 0000000000..a5a298af0d
---- /dev/null
-+++ b/meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch
-@@ -0,0 +1,22 @@
-+xmlsec1: Fix configure QA error caused by host lookup path
-+
-+ERROR: mc:my-sdk:xmlsec1-1.2.30-r0 do_configure: QA Issue: This autoconf log indicates errors, it looked at host include and/or library paths while determining system capabilities.
-+
-+It will eventually arise after the configure QA as the configure script should only look at the staging sysroot dir, not at the host.
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+Signed-off-by: Anatol Belski <anbelski@linux.microsoft.com>
-+
-+--- a/configure.ac.orig   2021-01-13 14:37:42.254991177 +0000
-++++ b/configure.ac        2021-01-13 14:40:56.546269330 +0000
-+@@ -250,8 +250,8 @@
-+ dnl ==========================================================================
-+ dnl Common installation locations
-+ dnl ==========================================================================
-+-COMMON_INCLUDE_DIR="/usr/include /usr/local/include"
-+-COMMON_LIB_DIR="/usr/lib /usr/lib64 /usr/local/lib"
-++COMMON_INCLUDE_DIR="${STAGING_INCDIR}"
-++COMMON_LIB_DIR="${STAGING_LIBDIR}"
-+ case $host in
-+     i*86-*-linux-gnu)   COMMON_LIB_DIR="$COMMON_LIB_DIR /usr/lib/i386-linux-gnu" ;;
-+     x86_64-*-linux-gnu) COMMON_LIB_DIR="$COMMON_LIB_DIR /usr/lib/x86_64-linux-gnu" ;;
-diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.31.bb b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.31.bb
-index 803016c96e..3464f2f43c 100644
---- a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.31.bb
-+++ b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.31.bb
-@@ -19,6 +19,7 @@ SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
-     file://xmlsec1-examples-allow-build-in-separate-dir.patch \
-     file://0001-nss-nspr-fix-for-multilib.patch \
-     file://run-ptest \
-+    file://ensure-search-path-non-host.patch \
-     "
- 
- SRC_URI[md5sum] = "182f5cbdfb8ddbac535c04470c170dc3"
--- 
-2.17.1
+openembedded-core:
+5a118d4e python3: split python target configuration into own class
+dadf001c python3-pycairo: use python3targetconfig
+9c8f6660 distutils3-base.bbclass: use python3targetconfig
+d3a81dd0 meta: drop _PYTHON_SYSCONFIGDATA_NAME hacks
+38ecb83c gpgme: use python3targetconfig
+c99bb790 python3targetconfig.bbclass: Make py3 dep and tasks only for targe=
+t recipes
+
+bitbake:
+47b64cfa lib/bb/fetch2/__init__.py: drop _PYTHON_SYSCONFIGDATA_NAME unsetti=
+ng
+
+meta-openembedded:
+a06cdf5a gedit: Inherit python3targetconfig
+59f817bb openipmi: Inherit python3targetconfig
+be7d2286 libplist: Inherit python3targetconfig
+c499aaee postgresql: Inherit python3targetconfig
+
+I guess there may be some controversy regarding whether these changes shoul=
+d=20
+be backported to the stable branches since they modify what python3native=20
+does and may require existing recipes to be modified to inherit the new=20
+python3targetconfig class. However, I believe that having devtool modify=20
+fail on random recipes without an easy solution for the user is much worse=
+=20
+than having to update a recipe or two once due to a build failure after=20
+upgrading to a new version of OE-Core (in my book that is pretty normal and=
+=20
+something I always have to do anyway when we update OE-Core). And based on=
+=20
+the number of recipes in openembedded-core and meta-openembedded that neede=
+d=20
+to be updated (2+4), I do not expect there to be many other recipes in the=
+=20
+first place that actually need to be updated.
+
+//Peter
 
