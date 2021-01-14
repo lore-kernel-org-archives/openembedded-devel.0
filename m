@@ -1,17 +1,17 @@
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.66])
- by mx.groups.io with SMTP id smtpd.web09.260.1610649795914203067
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.62])
+ by mx.groups.io with SMTP id smtpd.web09.266.1610649807990932395
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Jan 2021 10:43:16 -0800
+ Thu, 14 Jan 2021 10:43:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=disJvqfa;
- spf=pass (domain: windriver.com, ip: 40.107.244.66, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=DdoECyeX;
+ spf=pass (domain: windriver.com, ip: 40.107.93.62, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IgxqifJ5gzSrDuUB3c6hnyjIUjVCfL+27s7B6s07xW+nOBuNILo8jKl571iGGxwILdIwuLM0dqDl75EVpr+OGk+5eCOSm48Brks8qr87p4gb+KVPc4UrORAJqgb0ah7HYY8yOEihRBkBHAZ5DyxyBNq6482x9wgBDMHIbPN6dBNIzbCrPq69Lfyja1/56BFa2m1TacptVqAryuhd5kyOsiJGulvgpm6jcXkFVrz2TwZ8ryiJ0hwjZQ2GxfiHXTG/Y30wS0uKgSiX3S8nU1uItlNGRGN06NCAsgf/zl88Hwg3Tzis10SEPOT8DXi/yCcwHyog7QHsIStbPv4v3I1Saw==
+ b=gloTq7d39yJezB32dr3q5jcbf0wBqMadgO+bffU/ZPv6gE+ogW5soi754OppLx1yMk2ACE8z7wyodKqreF019zoFkSNIj4e+2EBPi6R9pSlkpbrvpAgAFUw/xAcht/RhA55ROujKt3MtyV8HjXxc8xbbUAnTC7Q78XJ1eaO5t/1Grp5Emxfi4UfcaPbPLjTdApswh0JuM2v1UXNRXDGx1CHO53L2HEEYPbIE5B5K3BCt6i+2ipVjFuCPeOIgaEcNuyQnxGaAnu7FZGc4B+2ysVsz3wSDg4Z0Be54qmENqjOn3FlB8Kq/AE6O5q+VNnHKuYFz7VOvabyCc5uiu/IlWw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RVOw8sCeaxDGgapDlJGaDNlHe7XeJgxoki8mwboBzxI=;
- b=A/cN1MI73iUVadvC+JJ/bJc/3dY1T9lwQdSe43c23NUiR9F0C4Oo2BoYKYudpLrHN5IDzNt3gXeup17SpyInqsYah98JPCH0g8VERjEQ3eLrT7VkSXRc7AvALMTdCPsqgWqPUEFDPhYldwESLDqBx1AfBdBmtnnOCu8pfsHABzUv/mAwJiAatzs6xyABF1PFRD1KWdPB21Q6/j34rs543/b20xuHDU4yhyBoJrtkMLFg54Cjrhk/aX7QoSg+D0k8d8JFb8L67c9eysiQ4x79XBrCvjpvQzsoX4F+65/Lr9pewRBosfLV2igH3QeGkyjsXnZ5VBATCw1foT7GG7BuNg==
+ bh=m/b8Oc8RrmkdiYKnoKRZZQap7L4PL8M1kW6gpct6PWs=;
+ b=dmcuRyagGdbYQfIoEpfuR0KZ+x1ys8FXJedC/s+6UGUIEEuyzSbgo5v8dlCwUVT4NeXLA1FdsR8Cxpg3kSgJplNKDsXHrNw7ikZ03PhlaYJvzxtQKMZAn9N0QyIQeqCXx/hWgRaXUeFoqNRuTKn17sMn7y2UWk4IyweMkXBJXog/9L8njuWj7V/YXmixazYY/l639eLIuZV00qG9I4dt9xu5tH/QjTmv6dQ1hCroHlGP5chlUYqPHfzq4REMB+Dx7nz32pIhAvXKcleKa8uy7RgKc1GallRY9MJIugg1ctV/3rvg6/H3+wkBcQTVtf647MfJ/QOqNJKMohuoKFCxCw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,130 +19,132 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RVOw8sCeaxDGgapDlJGaDNlHe7XeJgxoki8mwboBzxI=;
- b=disJvqfaNWOuWKBaW5NXMpAfA3SVmyxhYEEBL2HqPvTgEMbVO8/Yie4ye1P5c6bWz6cuSIb1/EGavaqy8+lv5UbbftCd8BXIRwqR3cOTaAP8KaERwELCVQtSysm7kiDX92+WLQHrm2K2OTBZNiyQOrI0RAVjOL4z7zd8SwKloNk=
+ bh=m/b8Oc8RrmkdiYKnoKRZZQap7L4PL8M1kW6gpct6PWs=;
+ b=DdoECyeXueNL+/x125332b2vnOy+hys6gbEyv+8j0Gf6yEyd3lxxkZhJKhhSgOdZOjBuVY2TG0e8osyUmTgmSQyeeUUyuwUpqvBQnE1cpdpyGt7vO2csy73xveo2hezOfC2L3yTUERGdQsXVxnyk4rnKyL5S4Od1Bun/8wCaXTw=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by SJ0PR11MB4800.namprd11.prod.outlook.com (2603:10b6:a03:2af::14) with
+ by BYAPR11MB3606.namprd11.prod.outlook.com (2603:10b6:a03:b5::25) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3763.9; Thu, 14 Jan
- 2021 18:43:15 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.6; Thu, 14 Jan
+ 2021 18:43:26 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::6806:275a:a0b:55f6]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::6806:275a:a0b:55f6%7]) with mapi id 15.20.3742.012; Thu, 14 Jan 2021
- 18:43:15 +0000
-Subject: Re: [oe] [meta-python][PATCH 1/2] python3-rsa: Upgrade 4.6 -> 4.7
+ 18:43:26 +0000
+Subject: Re: [oe] [meta-python][PATCH 2/2] python3-pyjwt: Upgrade 1.7.1 -> 2.0.0
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20210112182354.15359-1-leon.anavi@konsulko.com>
+ <20210112182354.15359-2-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <ffd63166-a74a-7563-8289-964e9272b2ca@windriver.com>
-Date: Thu, 14 Jan 2021 13:43:12 -0500
+Message-ID: <6bbe63e4-c3a5-f386-e96b-132fecea632f@windriver.com>
+Date: Thu, 14 Jan 2021 13:43:24 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.5.0
-In-Reply-To: <20210112182354.15359-1-leon.anavi@konsulko.com>
+In-Reply-To: <20210112182354.15359-2-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: MN2PR22CA0021.namprd22.prod.outlook.com
- (2603:10b6:208:238::26) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: MN2PR22CA0010.namprd22.prod.outlook.com
+ (2603:10b6:208:238::15) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by MN2PR22CA0021.namprd22.prod.outlook.com (2603:10b6:208:238::26) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3763.10 via Frontend Transport; Thu, 14 Jan 2021 18:43:14 +0000
+Received: from [192.168.0.55] (174.115.236.231) by MN2PR22CA0010.namprd22.prod.outlook.com (2603:10b6:208:238::15) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3763.9 via Frontend Transport; Thu, 14 Jan 2021 18:43:26 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 58bd5fd4-3cfe-4fa4-845c-08d8b8bc40ab
-X-MS-TrafficTypeDiagnostic: SJ0PR11MB4800:
+X-MS-Office365-Filtering-Correlation-Id: 73a14a22-2ec5-49bb-1dff-08d8b8bc47b0
+X-MS-TrafficTypeDiagnostic: BYAPR11MB3606:
 X-Microsoft-Antispam-PRVS: 
-	<SJ0PR11MB480083CFB541EF9F75348CB79FA80@SJ0PR11MB4800.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:765;
+	<BYAPR11MB360666337161DAD5D922DDC69FA80@BYAPR11MB3606.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:632;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	njwabvsA9f0Gl5rx04k5m964qKqlLXGad6llo5MwAKFTotZ9vYDNn64BAu5OgId1DUEwvCu6C9BEW9Ig4iHXFKd9Up/JAfn+jWgxIkmaGDdZH9w8v6w2o+KJ1zlVy43zFJxswcPsBIJQ1gt8UXuoN/h+HIhm9Ut8cLwbkCKH9chJIrZ1Gm00q/yyL/zXgEejvRvtpp5AKvTl+MpifMgDI3GxpTlcgozB7bBArn4/IzBccctVWCJOrOpX21/47KomKSjyuq7R5D7O6NMF8OnUfkZu/f88pMyARFnuyE0uOv7uteDeo9BTtTfeP1meU/dHar91zYUkSFoWuO7WXN0GZbEyyj2CFGPYhb18SykCGldt4hh0/WFDV0SCMUxJN5FOsy9fCCqeEbCdEpbLkMTe5amD5iu8WNHNb4vtDxmFcvby/YVCNhdpwQgPPC2+6mSSRH70ogOwFE8iII5x0Q8Bgy6o/reztLM11W7/LUiKkry2wjyZY5/dTM9s+FwH4yavzjVSvxrsLoUTkxBBpdqTDWDAFfwvtpdwl+W8kKXKgaNdSeN4Pf/ZuYiWmgKRFP5Q
+	vBjAHsANX1uDMGk/j06+87Ss3JQZ3estGQ6w+SweTy7UtbMGIbJSY9NsdptlroaJtTQrDq09Rnlr4eQxwF1g5C4tT7R4GSYEuVQE7zd8cU4WpkEL39CkLGQVCBrgCeB4Yp26eezh8sPSUoRwu+AULCQlXSisg1eyYR6IM3abCb+vEuLVMN9lQMntPrZcNal0djROTn2pedbwX+JZNLEVqeERUUAMflugRm51meGl9EbkGkXyqqQJq6l9U8n/ii/wSufjU3qR2IKPC+1HbbTFwclnZCmH8LndHHrva24Zi/SWbCAObdcJerfy1zCh2O3MjYNDphC5dl2ZlvGLNcNDhcnXuRPbbmrTiWEIRTjoJpfuOvGTvIudDBKXMluLR4ldoBAzj/6PijP/xKC9CPqAe/HqFTBID75Te8fonbnh25IK63K/f74vs5q7NSuVPsSmfCC4eBGwQkUIRKtzi0Ksz/O9Ade/mtbPvm6yDxrahyljFgdXFHSXHojzlQZJKa/pm2ySSusizr2C+TFFAMpRL7ATgt047ru4I5rNUktQgCXT7Q45OX+JW6czr9WywmT5m3D6j3zcIHDm/gSxbkDwQQ==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(366004)(396003)(136003)(376002)(346002)(86362001)(478600001)(83380400001)(66946007)(2906002)(31696002)(31686004)(166002)(16576012)(316002)(966005)(8936002)(5660300002)(186003)(16526019)(53546011)(6486002)(52116002)(8676002)(66476007)(36756003)(33964004)(26005)(2616005)(956004)(44832011)(66556008)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(136003)(396003)(346002)(366004)(39850400004)(966005)(186003)(33964004)(83380400001)(16526019)(8936002)(478600001)(956004)(52116002)(5660300002)(2616005)(2906002)(19273905006)(53546011)(86362001)(31696002)(66946007)(26005)(316002)(16576012)(166002)(8676002)(36756003)(66556008)(66476007)(31686004)(6486002)(44832011)(43740500002)(45980500001)(563064011);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?N0dFcEY3S0VYMEQ1NHF1UXFTTWpQUjEzSG1SNEJFZ2NEUkRJbkI5VTluR001?=
- =?utf-8?B?Kzh4eWRRMm5heEFOcWdLT2MyMkxKZUxzbTZaU1R2YUNpZ0tDWUc4MWlxVnpp?=
- =?utf-8?B?L3JQZXR6Zmt4SFh2b1U5c2ZsQVJ2MHcrbUFuYSswUWZCQTVlanlNK1NFTHIr?=
- =?utf-8?B?TjloMkphMmhSNnY1K2FYdjdCR2lZZ2RQcDJ0RytJUUt6c2FZb0xTc2Vhbmxp?=
- =?utf-8?B?d2l3enNZWFM5QVlETVJTNzJnYTBGNy9IVTNDNVF3ZXl5SEwrWnYzTTdQMlR3?=
- =?utf-8?B?NjAxTy9JSmdFWTBSME5mbkdPdU8zL1NnN1A3Nm1DM2FDOVlqK1NwaGt5aW9h?=
- =?utf-8?B?dWVqREdSZ0tVN0l3QlhTWVFkZDNsSjNyeVRlVVB0V2swTmZRbmhtZXZWQ0k1?=
- =?utf-8?B?eWliUWhpNTUrankweStnTUxGb1cyeGx6K250UFlOYUo2N1RHdFgybVdtUk54?=
- =?utf-8?B?aWFleXlaTEdFRjFzSlRkMEQza0tUM0g2ZEtWU1cvKzRmcHNGNmdOYmFkRUZp?=
- =?utf-8?B?Tzhnd1NPQjNydmJPRm5VT2VsN2s1aGRuWVVkNjlZcStZMXY4U2dBdHF0eith?=
- =?utf-8?B?ZnlyNTAwYmlGMEc0NllXK3J6a0xHZXl5dm43ZEluRDFwZWM1cnU0OVJXQ3M4?=
- =?utf-8?B?cjhSNUduSS9iZHRQSjBjTTdKYkVycGZpb3pzYW42TDFxQnU5VEwzTjhNZnND?=
- =?utf-8?B?SG9pQmtOa0RBL1FMWTV4dHIvNXNDdFJNdjBXNVJQQmN3SlJoN1p1SXhMZjR1?=
- =?utf-8?B?Si82STFnT1RuUVd4OFYyYUcvWHU4S3A5RklPb2Z4Ky91bjMwb3I1WUxVelll?=
- =?utf-8?B?ZW9lTW5yUm1PSnZxUVQrMmwySmlzTmlBZkxIMnVhYU1JUmFoTmtkSkd0V3hE?=
- =?utf-8?B?bGxMRmRWMUlvZjBhOTF6UnFMZHpvcDBXU3FXSXFMQ0RISU84bGgyY0VYY2dI?=
- =?utf-8?B?WW9RVHlIcGQzZlJCQmdyUEJzdUc1OXVpZ1diM2VweFhEVEdpTXdjL041RXhy?=
- =?utf-8?B?cWhxeWFYUDJuRjUrSXNaSmRHZ1M1dnhJZVB6Y3IvUHViR1UzQ0NwdTA3RmJT?=
- =?utf-8?B?bnZBd29WRklYazhDMFdtU2ZVR1lmZWR4ZGZvMFNyZVBzZ1lhUVNNL0gwTDdK?=
- =?utf-8?B?MWlCUEV2Y0N2Y1ZDU1YyQjVrci93OXBIdk5hUUxJVW1qVmJVQ0RVbCtDSUhT?=
- =?utf-8?B?akVhM2tteTk3MmNwMmRwcTR6TUhrN3JDTHEwQXRGVGNGSFR6ZlRQOHA3Nmg1?=
- =?utf-8?B?WkcxcGMvNUxxbG1MSFREWXBPelV4TkZNRzRJdDdFZ0dZOFlieU94WnFLeEpz?=
- =?utf-8?Q?GH529cD+9ctsYwOK18iO+t14+Gg8jpIZyf?=
+	=?utf-8?B?UGRkdW4wMWN2cEdFMFhpR1lpZFdnRll6UWhleFlhTUNtYXd4RTRLRW1UMmhz?=
+ =?utf-8?B?ZE1yVC9zZ2IxT0NCY3krSEZDWGpLV2xsYnM5bFFpWVlCdUtLeTJoc2ZlRkln?=
+ =?utf-8?B?SGJsTCtlczJIWm1FZSthY3Mxd2lFMFRtYjJRdXk3MytJdGZITmZETjBlNytQ?=
+ =?utf-8?B?cTBUWEhqMkxoV2JqUEJ2MitaMjVTaVhTSy83RlgrS3lhY1ZHa3dNbU9QNkJu?=
+ =?utf-8?B?RGl0TklmNjBsajFuUG5FSjl6YzFETDVwQnpwSzB0aTMxUkRRNFFCWFJSNjA0?=
+ =?utf-8?B?Zkhvck96Y1hZVHVyWmtPKzdXN2lEREl4OE53dG11VTUxRkZjK2M0aTlvUlpn?=
+ =?utf-8?B?cUFDMWFic3hDVDdvMmxTUndxSHFZWGFrQWNCeUlzUjlLQXB5RDVRcWxQUTNM?=
+ =?utf-8?B?VnFKazVCZGRFUm91YnNHYkZHaFNZeWZtZzdQaDhReGIxeG1XdklWU0VjZTR5?=
+ =?utf-8?B?eGNNNzFxSzVCNVJNSEh6eUl0N0dtSE9XaDhuMjJ3VmNub0VteTl5RXRuOVRO?=
+ =?utf-8?B?Q1Y3ZTN0eDAvSHROTGQvakgxUUlyU3EyRXJlNHowZXBSYWVnSFIwNFUrM0VP?=
+ =?utf-8?B?OGNJTkl2SUJZbnNrejNPY29nRmN5Rzk1dkUvQkxIUTBUeC82aDU0Z3ZYTGlH?=
+ =?utf-8?B?Q3E3b1U5cm9PbE1WZHY5OXJnM0dVRU1XaHlZQUw2TFNiQUVhbGcyY2J1NFNB?=
+ =?utf-8?B?T09qb0dhWHdHSklKcUVGa0RySW5HUCtLNUVKQkk3VXY5MmJWOVZzZklsSTc5?=
+ =?utf-8?B?WUxYMkI2UFc0TWdLOVpUSWZzejJHdlBpNVpyM0ZIMTRUanZOY29zT0k4cFIr?=
+ =?utf-8?B?T2JqZXBRZDBOc1B2TkxseVl5TDVMMEpDVE01Vk1NL2JqcmtUOFRqdUhyY05v?=
+ =?utf-8?B?SXFOYkgwWndTZHM4ZmpuTW91VmJpRFB3dFdGQ0E5elhqOXQ4bUxlVWRlenBN?=
+ =?utf-8?B?c2g1aGtKTWtSYWQ1SVNXejZ6QkpyVjNKZDdLRkFLL05NdUxuaVBWQys5dDR2?=
+ =?utf-8?B?RFRGbXhWR3Bjbyt6Rk52Vkh6K29LM3FWNDYwWXZsZGlzbEpuN3lOMXF4Zi9J?=
+ =?utf-8?B?S3praU5IOEdYSTZKajZhdnc2eW5vZTRvRWpvemI3U1JqWEJYNlVBYm5WLzV4?=
+ =?utf-8?B?Zklxb3dYSlpGUEw1dDRRWnRoUGZCTlhENjN4YWlqc0dhb1FseWNoQ2NNZDNl?=
+ =?utf-8?B?NFJBaWlHVW54TXIvRE9zS2tWbEZZNzJ2dmJIOGxjMW4wdGJvVXd0ZUJsYzhM?=
+ =?utf-8?B?ZDRlc1NtbGJKYnN1KzNDRHMyQmtiM0JiTFlTM05DenhSS2FGUjNGY3F0bDdo?=
+ =?utf-8?Q?XoFl4hpeFAfRQg/GpvkIv5c9wGKF+fs4Sf?=
 X-OriginatorOrg: windriver.com
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2021 18:43:15.0530
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2021 18:43:26.8412
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-Network-Message-Id: 58bd5fd4-3cfe-4fa4-845c-08d8b8bc40ab
+X-MS-Exchange-CrossTenant-Network-Message-Id: 73a14a22-2ec5-49bb-1dff-08d8b8bc47b0
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Zni7zBNxKxZPEbkUO34Zt45Ea+yb+5h9J4SemoLS7dUPe1nWGhb9xwSoPWd0lMS3MVueL977JDTqYIuEYv0n1+l2sQr0etwMKnrr57UtJzk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB4800
+X-MS-Exchange-CrossTenant-UserPrincipalName: qSw2Vc9qV968bgH0+spzNu/t2SMg9HiDgjfTB4VMOFwxmmoqqtOHPnMK+1gDftDGGdF4rAufjstLbeVcR0n+STpXWYOnzEPHNGMn4dI1664=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3606
 Content-Type: multipart/alternative;
- boundary="------------361CC0DD66BF02D8C09D6BC6"
+ boundary="------------76AFDE9FF9030E91659A622B"
 Content-Language: en-US
 
---------------361CC0DD66BF02D8C09D6BC6
+--------------76AFDE9FF9030E91659A622B
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 2021-01-12 1:23 p.m., Leon Anavi wrote:
-> - Fix: CVE-2020-25658 - Bleichenbacher-style timing oracle in
->    PKCS#1 v1.5 decryption code
-> - Add padding length check as described by PKCS#1 v1.5
-> - Reuse of blinding factors to speed up blinding operations
-> - Declare & test support for Python 3.9
+> - Drop support for Python 2 and Python 3.0-3.5
+> - Drop support for PyCrypto and ECDSA
+> - Improve typings
+> - Introduce better experience for JWKs
+> - Support for JWKs containing ECDSA keys
+> - Add support for Ed25519 / EdDSA
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-rsa_4.6.bb => python3-rsa_4.7.bb}          | 3 +--
+>   .../python/{python3-pyjwt_1.7.1.bb => python3-pyjwt_2.0.0.bb}  | 3 +--
 >   1 file changed, 1 insertion(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-rsa_4.6.bb => python3-rsa_4.7.bb} (88%)
+>   rename meta-python/recipes-devtools/python/{python3-pyjwt_1.7.1.bb => python3-pyjwt_2.0.0.bb} (76%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-rsa_4.6.bb b/meta-python/recipes-devtools/python/python3-rsa_4.7.bb
-> similarity index 88%
-> rename from meta-python/recipes-devtools/python/python3-rsa_4.6.bb
-> rename to meta-python/recipes-devtools/python/python3-rsa_4.7.bb
-> index d2b108635..c4c36020f 100644
-> --- a/meta-python/recipes-devtools/python/python3-rsa_4.6.bb
-> +++ b/meta-python/recipes-devtools/python/python3-rsa_4.7.bb
-> @@ -4,8 +4,7 @@ AUTHOR = "Sybren A. Stuvel"
->   LICENSE = "Apache-2.0"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=c403f6882d4f97a9cd927df987d55634"
+> diff --git a/meta-python/recipes-devtools/python/python3-pyjwt_1.7.1.bb b/meta-python/recipes-devtools/python/python3-pyjwt_2.0.0.bb
+> similarity index 76%
+> rename from meta-python/recipes-devtools/python/python3-pyjwt_1.7.1.bb
+> rename to meta-python/recipes-devtools/python/python3-pyjwt_2.0.0.bb
+> index d2f7be46c..aa6531ea3 100644
+> --- a/meta-python/recipes-devtools/python/python3-pyjwt_1.7.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pyjwt_2.0.0.bb
+> @@ -5,8 +5,7 @@ HOMEPAGE = "http://github.com/jpadilla/pyjwt"
+>   LICENSE = "MIT"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=68626705a7b513ca8d5f44a3e200ed0c"
 >   
-> -SRC_URI[md5sum] = "bbf1c954865319bd542600ab07f92aca"
-> -SRC_URI[sha256sum] = "109ea5a66744dd859bf16fe904b8d8b627adafb9408753161e766a92e7d681fa"
-> +SRC_URI[sha256sum] = "69805d6b69f56eb05b62daea3a7dbd7aa44324ad1306445e05da8060232d00f4"
+> -SRC_URI[md5sum] = "a4712f980c008696e13e09504120b2a0"
+> -SRC_URI[sha256sum] = "8d59a976fb773f3e6a39c85636357c4f0e242707394cadadd9814f5cbaa20e96"
+> +SRC_URI[sha256sum] = "7a2b271c6dac2fda9e0c33d176c4253faba2c6c6b3a99c7f28a32c3c97522779"
 >   
->   inherit pypi setuptools3 update-alternatives
->   
+>   PYPI_PACKAGE = "PyJWT"
+>   inherit pypi setuptools3
 >
 > 
 >
 
---------------361CC0DD66BF02D8C09D6BC6
+--------------76AFDE9FF9030E91659A622B
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -155,40 +157,41 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2021-01-12 1:23 p.m., Leon Anavi
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210112182354.15359-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">- Fix: CVE-2020-25658 - Bleichenbacher-style timing oracle in
-  PKCS#1 v1.5 decryption code
-- Add padding length check as described by PKCS#1 v1.5
-- Reuse of blinding factors to speed up blinding operations
-- Declare &amp; test support for Python 3.9
+    <blockquote type="cite" cite="mid:20210112182354.15359-2-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">- Drop support for Python 2 and Python 3.0-3.5
+- Drop support for PyCrypto and ECDSA
+- Improve typings
+- Introduce better experience for JWKs
+- Support for JWKs containing ECDSA keys
+- Add support for Ed25519 / EdDSA
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210112182354.15359-1-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210112182354.15359-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-rsa_4.6.bb =&gt; python3-rsa_4.7.bb}          | 3 +--
+ .../python/{python3-pyjwt_1.7.1.bb =&gt; python3-pyjwt_2.0.0.bb}  | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-rsa_4.6.bb =&gt; python3-rsa_4.7.bb} (88%)
+ rename meta-python/recipes-devtools/python/{python3-pyjwt_1.7.1.bb =&gt; python3-pyjwt_2.0.0.bb} (76%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-rsa_4.6.bb b/meta-python/recipes-devtools/python/python3-rsa_4.7.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-rsa_4.6.bb
-rename to meta-python/recipes-devtools/python/python3-rsa_4.7.bb
-index d2b108635..c4c36020f 100644
---- a/meta-python/recipes-devtools/python/python3-rsa_4.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-rsa_4.7.bb
-@@ -4,8 +4,7 @@ AUTHOR = &quot;Sybren A. Stuvel&quot;
- LICENSE = &quot;Apache-2.0&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=c403f6882d4f97a9cd927df987d55634">&quot;file://LICENSE;md5=c403f6882d4f97a9cd927df987d55634&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-pyjwt_1.7.1.bb b/meta-python/recipes-devtools/python/python3-pyjwt_2.0.0.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-pyjwt_1.7.1.bb
+rename to meta-python/recipes-devtools/python/python3-pyjwt_2.0.0.bb
+index d2f7be46c..aa6531ea3 100644
+--- a/meta-python/recipes-devtools/python/python3-pyjwt_1.7.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pyjwt_2.0.0.bb
+@@ -5,8 +5,7 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://github.com/jpadilla/pyjwt">&quot;http://github.com/jpadilla/pyjwt&quot;</a>
+ LICENSE = &quot;MIT&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=68626705a7b513ca8d5f44a3e200ed0c">&quot;file://LICENSE;md5=68626705a7b513ca8d5f44a3e200ed0c&quot;</a>
  
--SRC_URI[md5sum] = &quot;bbf1c954865319bd542600ab07f92aca&quot;
--SRC_URI[sha256sum] = &quot;109ea5a66744dd859bf16fe904b8d8b627adafb9408753161e766a92e7d681fa&quot;
-+SRC_URI[sha256sum] = &quot;69805d6b69f56eb05b62daea3a7dbd7aa44324ad1306445e05da8060232d00f4&quot;
+-SRC_URI[md5sum] = &quot;a4712f980c008696e13e09504120b2a0&quot;
+-SRC_URI[sha256sum] = &quot;8d59a976fb773f3e6a39c85636357c4f0e242707394cadadd9814f5cbaa20e96&quot;
++SRC_URI[sha256sum] = &quot;7a2b271c6dac2fda9e0c33d176c4253faba2c6c6b3a99c7f28a32c3c97522779&quot;
  
- inherit pypi setuptools3 update-alternatives
- 
+ PYPI_PACKAGE = &quot;PyJWT&quot;
+ inherit pypi setuptools3
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -200,4 +203,4 @@ index d2b108635..c4c36020f 100644
   </body>
 </html>
 
---------------361CC0DD66BF02D8C09D6BC6--
+--------------76AFDE9FF9030E91659A622B--
