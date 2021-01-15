@@ -1,23 +1,23 @@
 Received: from mail.kapsi.fi (mail.kapsi.fi [91.232.154.25])
- by mx.groups.io with SMTP id smtpd.web10.2190.1610707878776970143
+ by mx.groups.io with SMTP id smtpd.web10.2192.1610707883151543235
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Jan 2021 02:51:19 -0800
+ Fri, 15 Jan 2021 02:51:23 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: lakka.kapsi.fi, ip: 91.232.154.25, mailfrom: mcfrisk@lakka.kapsi.fi)
 Received: from kapsi.fi ([2001:67c:1be8::11] helo=lakka.kapsi.fi)
 	by mail.kapsi.fi with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.89)
 	(envelope-from <mcfrisk@lakka.kapsi.fi>)
-	id 1l0MhJ-0005fN-15; Fri, 15 Jan 2021 12:51:17 +0200
+	id 1l0MhN-0005gS-I1; Fri, 15 Jan 2021 12:51:21 +0200
 Received: from mcfrisk by lakka.kapsi.fi with local (Exim 4.92)
 	(envelope-from <mcfrisk@lakka.kapsi.fi>)
-	id 1l0MhI-00044k-VM; Fri, 15 Jan 2021 12:51:16 +0200
+	id 1l0MhN-00049w-GV; Fri, 15 Jan 2021 12:51:21 +0200
 From: "Mikko Rapeli" <mikko.rapeli@bmw.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Mikko Rapeli <mikko.rapeli@bmw.de>
-Subject: [PATCH][meta-filesystems][gatesgarth] fuse: set CVE_PRODUCT to "fuse_project:fuse"
-Date: Fri, 15 Jan 2021 12:50:48 +0200
-Message-Id: <20210115105049.12928-2-mikko.rapeli@bmw.de>
+Subject: [PATCH][meta-filesystems] fuse: set CVE_PRODUCT to "fuse_project:fuse"
+Date: Fri, 15 Jan 2021 12:50:49 +0200
+Message-Id: <20210115105049.12928-3-mikko.rapeli@bmw.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20210115105049.12928-1-mikko.rapeli@bmw.de>
 References: <20210115105049.12928-1-mikko.rapeli@bmw.de>
@@ -43,7 +43,7 @@ X-Rspam-Report: Action: no action
  Symbol: FROM_NEQ_ENVFROM(0.00)
  Symbol: BAYES_HAM(-3.00)
  Symbol: RCVD_COUNT_TWO(0.00)
- Message-ID: 20210115105049.12928-2-mikko.rapeli@bmw.de
+ Message-ID: 20210115105049.12928-3-mikko.rapeli@bmw.de
 X-SA-Exim-Connect-IP: 2001:67c:1be8::11
 X-SA-Exim-Mail-From: mcfrisk@lakka.kapsi.fi
 X-SA-Exim-Scanned: No (on mail.kapsi.fi); SAEximRunCond expanded to false
@@ -57,14 +57,14 @@ https://nvd.nist.gov/vuln/detail/CVE-2020-25689
 
 Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
 ---
- meta-filesystems/recipes-support/fuse/fuse3_3.9.3.bb | 2 ++
- meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb  | 2 ++
+ meta-filesystems/recipes-support/fuse/fuse3_3.10.1.bb | 2 ++
+ meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb   | 2 ++
  2 files changed, 4 insertions(+)
 
-diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.9.3.bb b/meta-filesystems/recipes-support/fuse/fuse3_3.9.3.bb
-index 8ef9ee12c..e80b3f553 100644
---- a/meta-filesystems/recipes-support/fuse/fuse3_3.9.3.bb
-+++ b/meta-filesystems/recipes-support/fuse/fuse3_3.9.3.bb
+diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.10.1.bb b/meta-filesystems/recipes-support/fuse/fuse3_3.10.1.bb
+index 80ce02872..49d6c15da 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse3_3.10.1.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse3_3.10.1.bb
 @@ -20,6 +20,8 @@ S = "${WORKDIR}/fuse-${PV}"
  UPSTREAM_CHECK_URI = "https://github.com/libfuse/libfuse/releases"
  UPSTREAM_CHECK_REGEX = "fuse\-(?P<pver>3(\.\d+)+).tar.xz"
