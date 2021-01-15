@@ -1,107 +1,80 @@
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by mx.groups.io with SMTP id smtpd.web12.2422.1610709062288791630
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.web12.4649.1610730231331646736
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Jan 2021 03:11:02 -0800
+ Fri, 15 Jan 2021 09:03:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linux.microsoft.com header.s=default header.b=lsv0676H;
- spf=pass (domain: linux.microsoft.com, ip: 13.77.154.182, mailfrom: anbelski@linux.microsoft.com)
-Received: from [192.168.178.23] (unknown [87.123.127.52])
-	by linux.microsoft.com (Postfix) with ESMTPSA id F25F120B7192;
-	Fri, 15 Jan 2021 03:11:00 -0800 (PST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com F25F120B7192
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1610709061;
-	bh=X2HRDqz+w7oTImRHoKStt3OhkRmSRH3g2TlDgzeOoBU=;
-	h=Subject:To:References:From:Date:In-Reply-To:From;
-	b=lsv0676H04zMOpLoylnvwjRFOfK3Pibx0tkgi6fJyzST2PzpFquun3RINHuomRfmv
-	 Z5ta/wRIzZBgtwhg+stvI+gAA+eQk6pOxYjHk6wJf7cfzI2J+iWSMVkuP5nXuqWh7S
-	 CxzUooJQh4oeyloiEMnISkpAGqcpirHqzpw3Kkv0=
-Subject: Re: [oe] [meta-oe][PATCH v2] xmlsec1: Fix configure QA error caused by host lookup path
-To: akuster808 <akuster808@gmail.com>,
- openembedded-devel@lists.openembedded.org
-References: <20210114173623.26233-1-anbelski@linux.microsoft.com>
- <3c1127ea-1125-3a66-8e66-63be6d87a5ee@gmail.com>
-From: "Anatol Belski" <anbelski@linux.microsoft.com>
-Message-ID: <65de5bb9-6d64-b069-1942-9fc2315df036@linux.microsoft.com>
-Date: Fri, 15 Jan 2021 12:10:46 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=jhzoQcdf;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id e9so847833plh.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 15 Jan 2021 09:03:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=+tsWCTKMlOW2iqw4EohKjojw28SmQNPNObEU/aM7dzA=;
+        b=jhzoQcdffCwUwHGQsmjusI7PYnDmGuEU5PKJyboU8iJHvDYA5ubZ5hih4ZU8pfNw+N
+         /G1Lzq6XsG4asKFw5A4KuwzxLPShhuOIv8F6pGbbhOob/TB3VPoQ6NApHGCeubC6iC/K
+         PJGfeK5UV8hjl3SLO+LdaEOwjn4mJqQ6OUcUd49oUFBm1ozimFnrCtnH/04+QdrRUsg7
+         l2OEroS9Zzfgrd4xzLVANcFoyP653NFg07gcEqj0mnyX3uxV+GFAVutLt8JUjxr8D9b0
+         szRr+saKltQtZd5qDEm8tlBIXOE5EHZg56zxMM/iQi0/oYeyo6BSQCLZFqV5JoCigH5X
+         NU1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=+tsWCTKMlOW2iqw4EohKjojw28SmQNPNObEU/aM7dzA=;
+        b=HM599CU7i0CwezB1OF6WDXC58s7f5/hwWJZsD9+cJ8b2LsWqix5QGjA1P7yAZcdCVP
+         WyBArV5+C1F8pJACSdSIK8RO4WbJauYUXdLuePaSy9TNaiE/l47/AATngN4O+AlhCu5f
+         8tfPXYREFi7FfdrC1Qx630UwuUCI3A7hiRr10Yduj5BxTCfZjCzSv3gCJhNNJNUZJ+T1
+         QBKGkF1lsN2K6SndC+Fs+buHbO0Uw0KGXkRik6ESFlq9XP6OzkWHkdHSKAYIvhwqtTFD
+         /UiSiPUB0IWrMDHyETXteqCwPRpmA3WdCQXz09bxDncwquRVm0OpVry1eZ3+Ka2tFQ0n
+         A5Ew==
+X-Gm-Message-State: AOAM530OkYQTt4I7jwBlZSRARQy+jrUgoXUMCln/kg76S6Y5ydyFT/vk
+	RmhZF0m+nf3Iu3DkLsfif5j2Jrl29CfpxQ==
+X-Google-Smtp-Source: ABdhPJxyWpIHMkHWBPRLAmYNgm78jBCsnXKI6W/AmGnrSAEPpQHzT6uCYxmzppMPIHbG7RLQaaGS9Q==
+X-Received: by 2002:a17:90a:bd12:: with SMTP id y18mr11672550pjr.146.1610730230266;
+        Fri, 15 Jan 2021 09:03:50 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::f3c9])
+        by smtp.gmail.com with ESMTPSA id w8sm4788318pjc.24.2021.01.15.09.03.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 15 Jan 2021 09:03:48 -0800 (PST)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Shlomi Vaknin <shlomi.39sd@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-sh: remove python3-tests from RDEPENDS
+Date: Fri, 15 Jan 2021 09:03:46 -0800
+Message-Id: <20210115170346.117081-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.30.0
 MIME-Version: 1.0
-In-Reply-To: <3c1127ea-1125-3a66-8e66-63be6d87a5ee@gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-Hi,
+From: Shlomi Vaknin <shlomi.39sd@gmail.com>
 
-On 1/15/2021 3:56 AM, akuster808 wrote:
->
-> On 1/14/21 9:36 AM, Anatol Belski wrote:
->> The configure script contains hardcoded lookup paths to /usr and other
->> paths that might interfere with the host. These are overwritten with the
->> staging dir locations for Poky compatibility.
-> The QA message has "xmlsec1-1.2.30" so this appears it needs to be
-> backported to Gatesgarth and Dunfell.
->
-> Please confirm.
+python3-tests installs the unit tests of python
+as well as stuff that no one should care about
+in its rootfs. Thus, it is not a runtime dependency
+of python3-sh.
 
-Correct, the initial issue is in Dunfell. It should be either backported 
-or I was intended to file a patch against Dunfell, whatever is 
-preferred. Please let me know. The v2 is the version to be taken.
+Signed-off-by: Shlomi Vaknin <shlomi.39sd@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-python/recipes-devtools/python/python3-sh_1.14.1.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-Thanks
+diff --git a/meta-python/recipes-devtools/python/python3-sh_1.14.1.bb b/meta-python/recipes-devtools/python/python3-sh_1.14.1.bb
+index c7b50c21a4..89d5008e98 100644
+--- a/meta-python/recipes-devtools/python/python3-sh_1.14.1.bb
++++ b/meta-python/recipes-devtools/python/python3-sh_1.14.1.bb
+@@ -18,7 +18,6 @@ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-resource \
+     ${PYTHON_PN}-shell \
+     ${PYTHON_PN}-terminal \
+-    ${PYTHON_PN}-tests \
+     ${PYTHON_PN}-threading \
+     ${PYTHON_PN}-unixadmin \
+ "
+-- 
+2.30.0
 
-Anatol
-
->
-> -armin
->> Signed-off-by: Anatol Belski <anbelski@linux.microsoft.com>
->> ---
->>   .../xmlsec1/ensure-search-path-non-host.patch | 22 +++++++++++++++++++
->>   .../recipes-support/xmlsec1/xmlsec1_1.2.31.bb |  1 +
->>   2 files changed, 23 insertions(+)
->>   create mode 100644 meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch
->>
->> diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch b/meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch
->> new file mode 100644
->> index 0000000000..a5a298af0d
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch
->> @@ -0,0 +1,22 @@
->> +xmlsec1: Fix configure QA error caused by host lookup path
->> +
->> +ERROR: mc:my-sdk:xmlsec1-1.2.30-r0 do_configure: QA Issue: This autoconf log indicates errors, it looked at host include and/or library paths while determining system capabilities.
->> +
->> +It will eventually arise after the configure QA as the configure script should only look at the staging sysroot dir, not at the host.
->> +
->> +Upstream-Status: Inappropriate [embedded specific]
->> +Signed-off-by: Anatol Belski <anbelski@linux.microsoft.com>
->> +
->> +--- a/configure.ac.orig   2021-01-13 14:37:42.254991177 +0000
->> ++++ b/configure.ac        2021-01-13 14:40:56.546269330 +0000
->> +@@ -250,8 +250,8 @@
->> + dnl ==========================================================================
->> + dnl Common installation locations
->> + dnl ==========================================================================
->> +-COMMON_INCLUDE_DIR="/usr/include /usr/local/include"
->> +-COMMON_LIB_DIR="/usr/lib /usr/lib64 /usr/local/lib"
->> ++COMMON_INCLUDE_DIR="${STAGING_INCDIR}"
->> ++COMMON_LIB_DIR="${STAGING_LIBDIR}"
->> + case $host in
->> +     i*86-*-linux-gnu)   COMMON_LIB_DIR="$COMMON_LIB_DIR /usr/lib/i386-linux-gnu" ;;
->> +     x86_64-*-linux-gnu) COMMON_LIB_DIR="$COMMON_LIB_DIR /usr/lib/x86_64-linux-gnu" ;;
->> diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.31.bb b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.31.bb
->> index 803016c96e..3464f2f43c 100644
->> --- a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.31.bb
->> +++ b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.31.bb
->> @@ -19,6 +19,7 @@ SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
->>       file://xmlsec1-examples-allow-build-in-separate-dir.patch \
->>       file://0001-nss-nspr-fix-for-multilib.patch \
->>       file://run-ptest \
->> +    file://ensure-search-path-non-host.patch \
->>       "
->>   
->>   SRC_URI[md5sum] = "182f5cbdfb8ddbac535c04470c170dc3"
->>
->> 
->>
