@@ -1,65 +1,90 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web11.4508.1610680783132021224
+Received: from mail.kapsi.fi (mail.kapsi.fi [91.232.154.25])
+ by mx.groups.io with SMTP id smtpd.web12.2234.1610707875143459202
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Jan 2021 19:19:43 -0800
+ Fri, 15 Jan 2021 02:51:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.79,347,1602518400"; 
-   d="scan'208";a="103502160"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 15 Jan 2021 11:19:41 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id D0BCF4CE1A08
-	for <openembedded-devel@lists.openembedded.org>; Fri, 15 Jan 2021 11:19:37 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 15 Jan 2021 11:19:38 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-perl] [PATCH] librole-tiny-perl: upgrade 2.001004 -> 2.002003
-Date: Fri, 15 Jan 2021 23:19:36 +0800
-Message-ID: <1610723976-7417-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=missing; spf=none, err=permanent DNS error (domain: lakka.kapsi.fi, ip: 91.232.154.25, mailfrom: mcfrisk@lakka.kapsi.fi)
+Received: from kapsi.fi ([2001:67c:1be8::11] helo=lakka.kapsi.fi)
+	by mail.kapsi.fi with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.89)
+	(envelope-from <mcfrisk@lakka.kapsi.fi>)
+	id 1l0MhC-0005dt-TG; Fri, 15 Jan 2021 12:51:12 +0200
+Received: from mcfrisk by lakka.kapsi.fi with local (Exim 4.92)
+	(envelope-from <mcfrisk@lakka.kapsi.fi>)
+	id 1l0MhC-0003yK-Ra; Fri, 15 Jan 2021 12:51:10 +0200
+From: "Mikko Rapeli" <mikko.rapeli@bmw.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Mikko Rapeli <mikko.rapeli@bmw.de>
+Subject: [PATCH][meta-filesystems][dunfell] fuse: set CVE_PRODUCT to "fuse_project:fuse"
+Date: Fri, 15 Jan 2021 12:50:47 +0200
+Message-Id: <20210115105049.12928-1-mikko.rapeli@bmw.de>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: D0BCF4CE1A08.A54AB
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+X-Rspam-Score: 2.3 (++)
+X-Rspam-Report: Action: no action
+ Symbol: RCVD_TLS_LAST(0.00)
+ Symbol: ARC_NA(0.00)
+ Symbol: DMARC_POLICY_SOFTFAIL(0.10)
+ Symbol: FROM_HAS_DN(0.00)
+ Symbol: TO_DN_SOME(0.00)
+ Symbol: R_MISSING_CHARSET(2.50)
+ Symbol: TO_MATCH_ENVRCPT_ALL(0.00)
+ Symbol: MIME_GOOD(-0.10)
+ Symbol: BROKEN_CONTENT_TYPE(1.50)
+ Symbol: RCPT_COUNT_TWO(0.00)
+ Symbol: MID_CONTAINS_FROM(1.00)
+ Symbol: R_SPF_NA(0.00)
+ Symbol: FORGED_SENDER(0.30)
+ Symbol: R_DKIM_NA(0.00)
+ Symbol: MIME_TRACE(0.00)
+ Symbol: ASN(0.00)
+ Symbol: FROM_NEQ_ENVFROM(0.00)
+ Symbol: BAYES_HAM(-3.00)
+ Symbol: RCVD_COUNT_TWO(0.00)
+ Message-ID: 20210115105049.12928-1-mikko.rapeli@bmw.de
+X-SA-Exim-Connect-IP: 2001:67c:1be8::11
+X-SA-Exim-Mail-From: mcfrisk@lakka.kapsi.fi
+X-SA-Exim-Scanned: No (on mail.kapsi.fi); SAEximRunCond expanded to false
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Other products like "RedHat:fuse" introduce false CVE findings like:
+
+https://nvd.nist.gov/vuln/detail/CVE-2018-10906
+https://nvd.nist.gov/vuln/detail/CVE-2019-14860
+https://nvd.nist.gov/vuln/detail/CVE-2020-25689
+
+Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
 ---
- ...-tiny-perl_2.001004.bb => librole-tiny-perl_2.002003.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-perl/recipes-perl/librole/{librole-tiny-perl_2.001004.bb => librole-tiny-perl_2.002003.bb} (77%)
+ meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb | 2 ++
+ meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb  | 2 ++
+ 2 files changed, 4 insertions(+)
 
-diff --git a/meta-perl/recipes-perl/librole/librole-tiny-perl_2.001004.bb b/meta-perl/recipes-perl/librole/librole-tiny-perl_2.002003.bb
-similarity index 77%
-rename from meta-perl/recipes-perl/librole/librole-tiny-perl_2.001004.bb
-rename to meta-perl/recipes-perl/librole/librole-tiny-perl_2.002003.bb
-index 41743d5082..531e77a107 100644
---- a/meta-perl/recipes-perl/librole/librole-tiny-perl_2.001004.bb
-+++ b/meta-perl/recipes-perl/librole/librole-tiny-perl_2.002003.bb
-@@ -6,11 +6,11 @@ SECTION = "libs"
- HOMEPAGE = "https://metacpan.org/pod/Role::Tiny"
+diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb b/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb
+index 24b17fc93..23028c605 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb
+@@ -20,6 +20,8 @@ S = "${WORKDIR}/fuse-${PV}"
+ UPSTREAM_CHECK_URI = "https://github.com/libfuse/libfuse/releases"
+ UPSTREAM_CHECK_REGEX = "fuse\-(?P<pver>3(\.\d+)+).tar.xz"
  
- LICENSE = "Artistic-1.0 | GPL-1.0+"
--LIC_FILES_CHKSUM = "file://README;beginline=182;endline=219;md5=26df7e7c20551fb1906e2286624f0b71"
-+LIC_FILES_CHKSUM = "file://README;beginline=197;endline=234;md5=26df7e7c20551fb1906e2286624f0b71"
++CVE_PRODUCT = "fuse_project:fuse"
++
+ inherit meson pkgconfig
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/Role-Tiny-${PV}.tar.gz"
--SRC_URI[md5sum] = "98446826608b1e943e65c1f6e35942fe"
--SRC_URI[sha256sum] = "92ba5712850a74102c93c942eb6e7f62f7a4f8f483734ed289d08b324c281687"
-+SRC_URI[md5sum] = "065e459cdc3c6e163c6e8359baf69f45"
-+SRC_URI[sha256sum] = "6981e5f2d0beded157840199d678da462b22a9a3753333cab322ab6efb0fbb89"
+ DEPENDS = "udev"
+diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
+index 95e870691..2c272d452 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
+@@ -22,6 +22,8 @@ SRC_URI[sha256sum] = "d0e69d5d608cc22ff4843791ad097f554dd32540ddc9bed7638cc6fea7
+ UPSTREAM_CHECK_URI = "https://github.com/libfuse/libfuse/releases"
+ UPSTREAM_CHECK_REGEX = "fuse\-(?P<pver>2(\.\d+)+).tar.gz"
  
- S = "${WORKDIR}/Role-Tiny-${PV}"
++CVE_PRODUCT = "fuse_project:fuse"
++
+ inherit autotools pkgconfig update-rc.d systemd
  
+ INITSCRIPT_NAME = "fuse"
 -- 
-2.25.1
-
-
+2.20.1
 
