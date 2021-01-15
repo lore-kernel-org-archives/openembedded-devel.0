@@ -1,110 +1,107 @@
-Received: from mail.kapsi.fi (mail.kapsi.fi [91.232.154.25])
- by mx.groups.io with SMTP id smtpd.web11.2264.1610708087641542257
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+ by mx.groups.io with SMTP id smtpd.web12.2422.1610709062288791630
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Jan 2021 02:54:48 -0800
+ Fri, 15 Jan 2021 03:11:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: lakka.kapsi.fi, ip: 91.232.154.25, mailfrom: mcfrisk@lakka.kapsi.fi)
-Received: from kapsi.fi ([2001:67c:1be8::11] helo=lakka.kapsi.fi)
-	by mail.kapsi.fi with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.89)
-	(envelope-from <mcfrisk@lakka.kapsi.fi>)
-	id 1l0Mkf-0006Rz-GX; Fri, 15 Jan 2021 12:54:45 +0200
-Received: from mcfrisk by lakka.kapsi.fi with local (Exim 4.92)
-	(envelope-from <mcfrisk@lakka.kapsi.fi>)
-	id 1l0Mkf-0008ED-F5; Fri, 15 Jan 2021 12:54:45 +0200
-From: "Mikko Rapeli" <mikko.rapeli@bmw.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: Mikko Rapeli <mikko.rapeli@bmw.de>
-Subject: [PATCH][meta-oe][dunfell][gatesgarth][master] giflib: apply patch for CVE-2019-15133 and set CVE_PRODUCT
-Date: Fri, 15 Jan 2021 12:54:37 +0200
-Message-Id: <20210115105437.31051-1-mikko.rapeli@bmw.de>
-X-Mailer: git-send-email 2.20.1
+ dkim=pass header.i=@linux.microsoft.com header.s=default header.b=lsv0676H;
+ spf=pass (domain: linux.microsoft.com, ip: 13.77.154.182, mailfrom: anbelski@linux.microsoft.com)
+Received: from [192.168.178.23] (unknown [87.123.127.52])
+	by linux.microsoft.com (Postfix) with ESMTPSA id F25F120B7192;
+	Fri, 15 Jan 2021 03:11:00 -0800 (PST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com F25F120B7192
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+	s=default; t=1610709061;
+	bh=X2HRDqz+w7oTImRHoKStt3OhkRmSRH3g2TlDgzeOoBU=;
+	h=Subject:To:References:From:Date:In-Reply-To:From;
+	b=lsv0676H04zMOpLoylnvwjRFOfK3Pibx0tkgi6fJyzST2PzpFquun3RINHuomRfmv
+	 Z5ta/wRIzZBgtwhg+stvI+gAA+eQk6pOxYjHk6wJf7cfzI2J+iWSMVkuP5nXuqWh7S
+	 CxzUooJQh4oeyloiEMnISkpAGqcpirHqzpw3Kkv0=
+Subject: Re: [oe] [meta-oe][PATCH v2] xmlsec1: Fix configure QA error caused by host lookup path
+To: akuster808 <akuster808@gmail.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20210114173623.26233-1-anbelski@linux.microsoft.com>
+ <3c1127ea-1125-3a66-8e66-63be6d87a5ee@gmail.com>
+From: "Anatol Belski" <anbelski@linux.microsoft.com>
+Message-ID: <65de5bb9-6d64-b069-1942-9fc2315df036@linux.microsoft.com>
+Date: Fri, 15 Jan 2021 12:10:46 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-X-Rspam-Score: 2.3 (++)
-X-Rspam-Report: Action: no action
- Symbol: RCVD_TLS_LAST(0.00)
- Symbol: ARC_NA(0.00)
- Symbol: DMARC_POLICY_SOFTFAIL(0.10)
- Symbol: FROM_HAS_DN(0.00)
- Symbol: TO_DN_SOME(0.00)
- Symbol: R_MISSING_CHARSET(2.50)
- Symbol: TO_MATCH_ENVRCPT_ALL(0.00)
- Symbol: MIME_GOOD(-0.10)
- Symbol: BROKEN_CONTENT_TYPE(1.50)
- Symbol: RCPT_COUNT_TWO(0.00)
- Symbol: MID_CONTAINS_FROM(1.00)
- Symbol: R_SPF_NA(0.00)
- Symbol: FORGED_SENDER(0.30)
- Symbol: R_DKIM_NA(0.00)
- Symbol: MIME_TRACE(0.00)
- Symbol: ASN(0.00)
- Symbol: FROM_NEQ_ENVFROM(0.00)
- Symbol: BAYES_HAM(-3.00)
- Symbol: RCVD_COUNT_TWO(0.00)
- Message-ID: 20210115105437.31051-1-mikko.rapeli@bmw.de
-X-SA-Exim-Connect-IP: 2001:67c:1be8::11
-X-SA-Exim-Mail-From: mcfrisk@lakka.kapsi.fi
-X-SA-Exim-Scanned: No (on mail.kapsi.fi); SAEximRunCond expanded to false
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <3c1127ea-1125-3a66-8e66-63be6d87a5ee@gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Backport upstream patch for CVE-2019-15133.
-Set CVE_PRODUCT to "giflib_project:giflib" which is used
-in NVD. https://nvd.nist.gov/vuln/detail/CVE-2019-15133
+Hi,
 
-Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
----
- .../giflib/files/CVE-2019-15133.patch         | 23 +++++++++++++++++++
- .../recipes-devtools/giflib/giflib_5.1.4.bb   |  7 +++++-
- 2 files changed, 29 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
+On 1/15/2021 3:56 AM, akuster808 wrote:
+>
+> On 1/14/21 9:36 AM, Anatol Belski wrote:
+>> The configure script contains hardcoded lookup paths to /usr and other
+>> paths that might interfere with the host. These are overwritten with the
+>> staging dir locations for Poky compatibility.
+> The QA message has "xmlsec1-1.2.30" so this appears it needs to be
+> backported to Gatesgarth and Dunfell.
+>
+> Please confirm.
 
-diff --git a/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch b/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
-new file mode 100644
-index 000000000..9957be82f
---- /dev/null
-+++ b/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
-@@ -0,0 +1,23 @@
-+From 799eb6a3af8a3dd81e2429bf11a72a57e541f908 Mon Sep 17 00:00:00 2001
-+From: "Eric S. Raymond" <esr@thyrsus.com>
-+Date: Sun, 17 Mar 2019 12:37:21 -0400
-+Subject: [PATCH] Address SF bug #119: MemorySanitizer: FPE on unknown address
-+
-+---
-+ dgif_lib.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+Upstream-status: Backport [https://sourceforge.net/p/giflib/code/ci/799eb6a3af8a3dd81e2429bf11a72a57e541f908/]
-+CVE: CVE-2019-15133
-+
-+--- a/lib/dgif_lib.c	2021-01-13 19:28:18.923493586 +0100
-++++ b/lib/dgif_lib.c	2021-01-13 19:28:55.245863085 +0100
-+@@ -1099,7 +1099,7 @@ DGifSlurp(GifFileType *GifFile)
-+ 
-+               sp = &GifFile->SavedImages[GifFile->ImageCount - 1];
-+               /* Allocate memory for the image */
-+-              if (sp->ImageDesc.Width < 0 && sp->ImageDesc.Height < 0 &&
-++              if (sp->ImageDesc.Width <= 0 && sp->ImageDesc.Height <= 0 &&
-+                       sp->ImageDesc.Width > (INT_MAX / sp->ImageDesc.Height)) {
-+                   return GIF_ERROR;
-+               }
-diff --git a/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb b/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
-index 21fa352cd..1871bab46 100644
---- a/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
-+++ b/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
-@@ -3,7 +3,12 @@ SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=ae11c61b04b2917be39b11f78d71519a"
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2"
-+SRC_URI = " \
-+    ${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2 \
-+    file://CVE-2019-15133.patch \
-+"
-+
-+CVE_PRODUCT = "giflib_project:giflib"
- 
- inherit autotools
- 
--- 
-2.20.1
+Correct, the initial issue is in Dunfell. It should be either backported 
+or I was intended to file a patch against Dunfell, whatever is 
+preferred. Please let me know. The v2 is the version to be taken.
 
+Thanks
+
+Anatol
+
+>
+> -armin
+>> Signed-off-by: Anatol Belski <anbelski@linux.microsoft.com>
+>> ---
+>>   .../xmlsec1/ensure-search-path-non-host.patch | 22 +++++++++++++++++++
+>>   .../recipes-support/xmlsec1/xmlsec1_1.2.31.bb |  1 +
+>>   2 files changed, 23 insertions(+)
+>>   create mode 100644 meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch
+>>
+>> diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch b/meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch
+>> new file mode 100644
+>> index 0000000000..a5a298af0d
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch
+>> @@ -0,0 +1,22 @@
+>> +xmlsec1: Fix configure QA error caused by host lookup path
+>> +
+>> +ERROR: mc:my-sdk:xmlsec1-1.2.30-r0 do_configure: QA Issue: This autoconf log indicates errors, it looked at host include and/or library paths while determining system capabilities.
+>> +
+>> +It will eventually arise after the configure QA as the configure script should only look at the staging sysroot dir, not at the host.
+>> +
+>> +Upstream-Status: Inappropriate [embedded specific]
+>> +Signed-off-by: Anatol Belski <anbelski@linux.microsoft.com>
+>> +
+>> +--- a/configure.ac.orig   2021-01-13 14:37:42.254991177 +0000
+>> ++++ b/configure.ac        2021-01-13 14:40:56.546269330 +0000
+>> +@@ -250,8 +250,8 @@
+>> + dnl ==========================================================================
+>> + dnl Common installation locations
+>> + dnl ==========================================================================
+>> +-COMMON_INCLUDE_DIR="/usr/include /usr/local/include"
+>> +-COMMON_LIB_DIR="/usr/lib /usr/lib64 /usr/local/lib"
+>> ++COMMON_INCLUDE_DIR="${STAGING_INCDIR}"
+>> ++COMMON_LIB_DIR="${STAGING_LIBDIR}"
+>> + case $host in
+>> +     i*86-*-linux-gnu)   COMMON_LIB_DIR="$COMMON_LIB_DIR /usr/lib/i386-linux-gnu" ;;
+>> +     x86_64-*-linux-gnu) COMMON_LIB_DIR="$COMMON_LIB_DIR /usr/lib/x86_64-linux-gnu" ;;
+>> diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.31.bb b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.31.bb
+>> index 803016c96e..3464f2f43c 100644
+>> --- a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.31.bb
+>> +++ b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.31.bb
+>> @@ -19,6 +19,7 @@ SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
+>>       file://xmlsec1-examples-allow-build-in-separate-dir.patch \
+>>       file://0001-nss-nspr-fix-for-multilib.patch \
+>>       file://run-ptest \
+>> +    file://ensure-search-path-non-host.patch \
+>>       "
+>>   
+>>   SRC_URI[md5sum] = "182f5cbdfb8ddbac535c04470c170dc3"
+>>
+>> 
+>>
