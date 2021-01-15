@@ -1,206 +1,163 @@
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.75])
- by mx.groups.io with SMTP id smtpd.web11.289.1610649948493873903
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.web12.4233.1610679386461187546
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Jan 2021 10:45:48 -0800
+ Thu, 14 Jan 2021 18:56:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=JWvJUPq3;
- spf=pass (domain: windriver.com, ip: 40.107.93.75, mailfrom: trevor.gamblin@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AvlWLXce3ERd9TXASR5N1z5HN6vLZnwrXNJ2uQWXICp+R+UkMnW6YCWxgjJRuDuD/rTYVb76F80afwPzlj2IsSAjQBEHwuI/Gt5qfoMaIo4V52KeoU3z+y8E8ZKDOEi5DJ/o5+N29x09uHBzkAP31BMm+bUN5YvfDIDPdaPA0hwcletGRXxpHwEeOIPDmR7VDivP2SfSjqTRyN5VFcP5o2W2nATAPjBhUubzJqypQxXeFBLP/DzUPBgBM4rxzNW/027r5lWBcwRuf6XSViTa4XdyzTirgYLqeNyi6x33i7MkbPAER4OGKK2e+rsdW8XfndUoLvpqr0ZwPcGaWtrMcQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MbB0/DhLw5rRquE2aQ0WmSlxGACkW9WvlM+Gf61t9NQ=;
- b=DbGSPcAEzXhSmRTvoCnFftKv6+3EGFa5xXFMaLYXf806dWI6RFuquXvYx27O9NO6bMFlQlsy/OkR32FKphJkfkXxjEl5zX192Y4G7JDjyBFVPzGaoY/hplZaLWzGdX2FnMdZpV8QoNLfIZWZtTVDSI6SSO4nTGfqNFj8V2X07b3HG42qNn6cbzMOSGHuFN6pggyrb6zE+yD66eMD9XJmTDBCkEKmWkRM7KtRmdqWtRCgmnuXVxhB9xYr+F/HtgyG63R4ezGXnKiqbLoGJE44E2TmetxUnDlxTl8O/yjtRIEu3gV5ILHEiCzbLiqKRhVpPFUagLwhr50epRlxkA873w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=IdBAIMeP;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id ce17so2088585pjb.5
+        for <openembedded-devel@lists.openembedded.org>; Thu, 14 Jan 2021 18:56:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MbB0/DhLw5rRquE2aQ0WmSlxGACkW9WvlM+Gf61t9NQ=;
- b=JWvJUPq3KmoVQtV8UEy73Z9dzwhFRXYOrbVJ27dDlD0WwoMYXlJ3r11Mh6+ACkLgaXYU2M7gUtBBto9X6r7TddgpDpjeaQ4CP4aDz4Y9JywgXi57IIkFUg5Aj9e3HlIca9wgnURy/ukc9MOtX/fzvBlOtE2z6E/RFbinH+vylLc=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BYAPR11MB3479.namprd11.prod.outlook.com (2603:10b6:a03:1e::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3763.9; Thu, 14 Jan
- 2021 18:45:47 +0000
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::6806:275a:a0b:55f6]) by BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::6806:275a:a0b:55f6%7]) with mapi id 15.20.3742.012; Thu, 14 Jan 2021
- 18:45:47 +0000
-Subject: Re: [oe] [meta-python][PATCH 10/10] python3-pyzmq: Upgrade 19.0.2 -> 20.0.0
-To: Leon Anavi <leon.anavi@konsulko.com>,
+        d=gmail.com; s=20161025;
+        h=subject:to:references:from:autocrypt:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=edEmD5A27vrTvtomtObKw1Jt30luJvLG+aYEWmR0Ktw=;
+        b=IdBAIMePEjp1TBFa5LNy3lspdV/wU5iBoDsesHVvqfNQv9NSX57+i3hytfFavqGsPY
+         tUQzfFYSJyZd8mCAAQjuKN2MnVvDAGcA9EDlZfrwN2T9JtiaY5G4mdUw4sVNYdDE7d0l
+         vz92nsal1Rnl+DadnyvJLUCPExesgcZ4dmdBcIxozsL6BhQFZsf0Ix6mAWAcaQKAq3pq
+         V7M8WWqQeKMX11exkoCFODYqcYbwgiVylCCXhnG2IH45KwkHinU4qFTQisD0nCRS+AZK
+         yt/H8kw619xUNRbFuu1tHC3ts9rdysdcvaTkKwexpXQbzXSjDZAIVzXYpxMEsLfHe/mW
+         mBLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
+         :date:user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=edEmD5A27vrTvtomtObKw1Jt30luJvLG+aYEWmR0Ktw=;
+        b=BFwaChsEBOoD0FnxhkEDDLH1z8LUmWj7IsrikWnPH1NSlDiBWSRF+zvg0YPM2jKxl5
+         MG8qfz9LfT6Fz6zB+nsDKS6xjXakoojPt+cpYjz3rmM3tEWPVFWARnMq9OVy17iZPhyd
+         4yKJRUtFRu+Z6iAjap1b/eQH3P4RJbZZw+m+Q+9kjAvYITxe7A5f11qh/x778gZIvC5B
+         5mt/evBkSYC9ucd+piLXj+3YKTL8xUEsA+5nugS5z/bl3GMW3M0xBBXoRgwIyVuHHAkW
+         HMRfo1Y27EgSqXMTCHkCz2i55u81/jpHjHyoQfmmNUCxAA3v40ZS3pP94F3hhshZnRJG
+         tR8w==
+X-Gm-Message-State: AOAM532CidJH5XiOT1fCgaCxUsQHr1Hh/QZTag7u1APEoXEB1EnRapwi
+	vWa8uVz6ICku+dVqemqhYYb9QeMb4EpEeA==
+X-Google-Smtp-Source: ABdhPJzYg4vpCFTSJ1DroWjqKNwkUm8Tb97hJ9H4IZ0XTDmrm70ImLsAf5ae7z/D3xnDdUeFjzVMMQ==
+X-Received: by 2002:a17:90a:a60f:: with SMTP id c15mr8446562pjq.53.1610679385580;
+        Thu, 14 Jan 2021 18:56:25 -0800 (PST)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:19ce:8609:7a34:860? ([2601:202:4180:a5c0:19ce:8609:7a34:860])
+        by smtp.gmail.com with ESMTPSA id u4sm2884411pjv.22.2021.01.14.18.56.23
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 14 Jan 2021 18:56:24 -0800 (PST)
+Subject: Re: [oe] [meta-oe][PATCH v2] xmlsec1: Fix configure QA error caused by host lookup path
+To: Anatol Belski <anbelski@linux.microsoft.com>,
  openembedded-devel@lists.openembedded.org
-References: <20210113142626.27599-1-leon.anavi@konsulko.com>
- <20210113142626.27599-10-leon.anavi@konsulko.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <57f84625-afb7-e6e0-96a8-005ed7736014@windriver.com>
-Date: Thu, 14 Jan 2021 13:45:44 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.0
-In-Reply-To: <20210113142626.27599-10-leon.anavi@konsulko.com>
-X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BLAPR03CA0075.namprd03.prod.outlook.com
- (2603:10b6:208:329::20) To BY5PR11MB3909.namprd11.prod.outlook.com
- (2603:10b6:a03:191::13)
-Return-Path: trevor.gamblin@windriver.com
+References: <20210114173623.26233-1-anbelski@linux.microsoft.com>
+From: "akuster" <akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+ 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
+ 8CS2NxU=
+Message-ID: <3c1127ea-1125-3a66-8e66-63be6d87a5ee@gmail.com>
+Date: Thu, 14 Jan 2021 18:56:22 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BLAPR03CA0075.namprd03.prod.outlook.com (2603:10b6:208:329::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3763.11 via Frontend Transport; Thu, 14 Jan 2021 18:45:46 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 7e784de7-dcbf-4aea-9204-08d8b8bc9b7c
-X-MS-TrafficTypeDiagnostic: BYAPR11MB3479:
-X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB34792B6DE7365679552CB6A59FA80@BYAPR11MB3479.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:639;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	BlGYVy332QsW7TWXbis7F9NQoCh1lyUoHqlVYkQhaGHEElG7/2xTTRV9UZvBZFIJlIFV1dCrTr4Gu83R6oEjxxTe1L5ApiSbhNGLq7YEYWYExPPZNpr5+0PbMrKOSZ+Mkz28sL4P6W9gIEcxAagaQJJJ5e9HIf1p6oV0ar4BKY0XJTmpfUzZNnZIcAK/pLOMR8YmSoP+DpwNFya9gY5eV2ZCrWnj4NhJSNIHihBtgwHj40CEbfyGRb9c0pp4pL+iY1zXTl4v79s2789df3w5b81v4EEp94AC+/3+f+p65WCREn0Jr3awf+2YjgLpnNszwpwx3AKtuFebzdff/qRushEat1DO4iVVLNjxfVojny71ZpnQeK+Gasems9+5dalfBUGR4PcnhOzXBuPHqy95qK2Mo8lYGoAflK5VN+uJDEu+xjTGrNXRxJ6cpKi2vCAu88KTj7+XIM241hdjYtDg9FXsUktK2oDCVnnZagwXg3WQ/Uc4xjhOSOINn4tWORKjcsoL/XdZanW50/MuBYzl9ceeRZ/D0RpZAgSgBTwWe5nwtRuV66aC8oA5SeHAJK6d
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(136003)(396003)(366004)(346002)(39850400004)(316002)(6486002)(186003)(44832011)(83380400001)(36756003)(478600001)(966005)(33964004)(16526019)(956004)(52116002)(26005)(31686004)(5660300002)(2616005)(8676002)(66476007)(2906002)(86362001)(166002)(31696002)(66556008)(53546011)(66946007)(16576012)(8936002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?dDlNbWVTY3MramNpYjBFNHlmMXRZQ0xnUHdSU3B2MzFjdUUwMFVVbXpWbzNX?=
- =?utf-8?B?ODZjRk1VdnpGUElsL0Q0WExiVEN4ZFJMQThGbWdtaVlBUTJVMzZteXNnWCsv?=
- =?utf-8?B?RDRCazdZNjltclJDbWo2U1lIZkNMOFpud3RqWlFoV3ZTUXhiUmFQRC8xcktV?=
- =?utf-8?B?WDNYNDhBZzJqeHNXYjdmVXlmRTdtUFB3WExxQnJTSC9FcCs4M3piZ3NOZ0F4?=
- =?utf-8?B?VVkrUmJjUFBYOEFvWTNocStZNFplaW5Gb0RPNHNuNmZBQ3IzQUFMWWxDUmJp?=
- =?utf-8?B?K3pHSFRmbHY4RFNobGZVVnJKRXAyZy9lbWR0N0xiOFd4dHNha0JrdzI1ZGUw?=
- =?utf-8?B?a2ljTXN5U0U5dm9IWGxjUzBFa2dabkRzeE5JemV0RDFqY3RpSmlhUkZabzZm?=
- =?utf-8?B?Q0paR3BIbnRUcUlWNUtWRzdRUkdqTEpZUEczdFVlY1ZiZjJqNVg4WmxlcThw?=
- =?utf-8?B?KzVIc2psVzRoVmN6ZWtaY0d3YmRqMnljQ3VTVHFiMmFsRDRvOTEzZW9GNE5R?=
- =?utf-8?B?ZCs3a3p3ZU83QXRTemplYWMzbDI2N0RCU0lPajNSeFdqK3ZCeEtUTVRMZUpy?=
- =?utf-8?B?MmkxWUhXSGQrVnY4WkdZVllTRFNIb0kvVzhqOStZMENRSzl3dkhrY09qUXpN?=
- =?utf-8?B?MU9GVHhjY1dWYmE1dy8yclVEUk1HRUFsY0p0Q0NWZm5vUURMMnNDbHBmVWtB?=
- =?utf-8?B?RTk1WEN1TElLNHQxL2R2bnJueDgwcWFQV0VsUmhicGh5a1VBT2JObFdPOTNC?=
- =?utf-8?B?MTkzQ1lWaXNQU2xzd1hRNXBXQW5helVvYVZyNHFCTDhHREliUjlJN1hLdGtk?=
- =?utf-8?B?dTh5WUUwbnVzWGg4QmM4SGNJVTlhemRnTC9wN1hGWGJPY1BRbGsxUnNMSU1H?=
- =?utf-8?B?OWFPNXYyMXhxNGtwUm13VnpyZ3cxQVNKN3h4em0xVWxJcnJjNGxPMlg0Mm9U?=
- =?utf-8?B?RTBCL216Q1luTHdTQm1QYU1mK2lIenRFMXpOQ0pWWStydjhveTZCYjRhNk90?=
- =?utf-8?B?NHR3Z3Q1aUhqdEdBVTNnVEtqSkhWM2VEWEFCcURIVWVkdUQ5N0wxZllka2s4?=
- =?utf-8?B?RjlpdnM4eEJnQ3B5TVpwbUJOdzVGMm5tVVVrQitwa3FubVEyeEtaVCtqQnhL?=
- =?utf-8?B?U2pKK1l0cCs0TmZvaklIRXcwNVEzMDdYb1NCQ082WXlFQUNDMDhmU2YyMzk3?=
- =?utf-8?B?MGpvVVFOOXVtbmFaS3ZsSTl1ZElLakR1Um5pcHJ0bmlzUUc3eTVKdDdNTkdC?=
- =?utf-8?B?TFE2N3Rnd3lDZEtPT3hpS2hUd2l5VXg5aEY2WlhJbXM4VENiRUVTdUN3RjZ1?=
- =?utf-8?Q?BEet01IBU719NNaj/5AKgAL3W4al7PdfQG?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2021 18:45:47.4070
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7e784de7-dcbf-4aea-9204-08d8b8bc9b7c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: u15jve3FPjny5gN8q79BpugFMVwjRtN+D8urLE2XFa9qwWUcWS7lrkYtkvxZWQCl2mcw5V4kiH5khhCOeIH4mUNYt6BRUtJ7NRjpUISwUZc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3479
-Content-Type: multipart/alternative;
- boundary="------------683BD6444E841F7C621A70FD"
+In-Reply-To: <20210114173623.26233-1-anbelski@linux.microsoft.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
---------------683BD6444E841F7C621A70FD
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
 
 
-On 2021-01-13 9:26 a.m., Leon Anavi wrote:
-> - Update bundled libzmq to 4.3.3
-> - Socket.bind() and Socket.connect() can now be used as context
->    managers
-> - Better error when libzmq is bundled and fails to be loaded
-> - Hold GIL while calling zmq_curve_ functions, which may fix
->    apparent threadsafety issues
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+On 1/14/21 9:36 AM, Anatol Belski wrote:
+> The configure script contains hardcoded lookup paths to /usr and other
+> paths that might interfere with the host. These are overwritten with the
+> staging dir locations for Poky compatibility.
+The QA message has "xmlsec1-1.2.30" so this appears it needs to be
+backported to Gatesgarth and Dunfell.
+
+Please confirm.
+
+-armin
+> Signed-off-by: Anatol Belski <anbelski@linux.microsoft.com>
 > ---
->   .../{python3-pyzmq_19.0.2.bb => python3-pyzmq_20.0.0.bb}       | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-pyzmq_19.0.2.bb => python3-pyzmq_20.0.0.bb} (86%)
+>  .../xmlsec1/ensure-search-path-non-host.patch | 22 +++++++++++++++++++
+>  .../recipes-support/xmlsec1/xmlsec1_1.2.31.bb |  1 +
+>  2 files changed, 23 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_19.0.2.bb b/meta-python/recipes-devtools/python/python3-pyzmq_20.0.0.bb
-> similarity index 86%
-> rename from meta-python/recipes-devtools/python/python3-pyzmq_19.0.2.bb
-> rename to meta-python/recipes-devtools/python/python3-pyzmq_20.0.0.bb
-> index 3c4e32b5e..a668eb11e 100644
-> --- a/meta-python/recipes-devtools/python/python3-pyzmq_19.0.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pyzmq_20.0.0.bb
-> @@ -8,8 +8,7 @@ DEPENDS = "zeromq"
->   FILESEXTRAPATHS_prepend := "${THISDIR}/python-pyzmq:"
->   
->   SRC_URI += "file://club-rpath-out.patch"
-> -SRC_URI[md5sum] = "200abc1a75bdcfff7adf61304f46f55e"
-> -SRC_URI[sha256sum] = "296540a065c8c21b26d63e3cea2d1d57902373b16e4256afe46422691903a438"
-> +SRC_URI[sha256sum] = "824ad5888331aadeac772bce27e1c2fbcab82fade92edbd234542c4e12f0dca9"
->   
->   inherit pypi pkgconfig setuptools3
->   
+> diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch b/meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch
+> new file mode 100644
+> index 0000000000..a5a298af0d
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch
+> @@ -0,0 +1,22 @@
+> +xmlsec1: Fix configure QA error caused by host lookup path
+> +
+> +ERROR: mc:my-sdk:xmlsec1-1.2.30-r0 do_configure: QA Issue: This autoconf log indicates errors, it looked at host include and/or library paths while determining system capabilities.
+> +
+> +It will eventually arise after the configure QA as the configure script should only look at the staging sysroot dir, not at the host.
+> +
+> +Upstream-Status: Inappropriate [embedded specific]
+> +Signed-off-by: Anatol Belski <anbelski@linux.microsoft.com>
+> +
+> +--- a/configure.ac.orig   2021-01-13 14:37:42.254991177 +0000
+> ++++ b/configure.ac        2021-01-13 14:40:56.546269330 +0000
+> +@@ -250,8 +250,8 @@
+> + dnl ==========================================================================
+> + dnl Common installation locations
+> + dnl ==========================================================================
+> +-COMMON_INCLUDE_DIR="/usr/include /usr/local/include"
+> +-COMMON_LIB_DIR="/usr/lib /usr/lib64 /usr/local/lib"
+> ++COMMON_INCLUDE_DIR="${STAGING_INCDIR}"
+> ++COMMON_LIB_DIR="${STAGING_LIBDIR}"
+> + case $host in
+> +     i*86-*-linux-gnu)   COMMON_LIB_DIR="$COMMON_LIB_DIR /usr/lib/i386-linux-gnu" ;;
+> +     x86_64-*-linux-gnu) COMMON_LIB_DIR="$COMMON_LIB_DIR /usr/lib/x86_64-linux-gnu" ;;
+> diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.31.bb b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.31.bb
+> index 803016c96e..3464f2f43c 100644
+> --- a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.31.bb
+> +++ b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.31.bb
+> @@ -19,6 +19,7 @@ SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
+>      file://xmlsec1-examples-allow-build-in-separate-dir.patch \
+>      file://0001-nss-nspr-fix-for-multilib.patch \
+>      file://run-ptest \
+> +    file://ensure-search-path-non-host.patch \
+>      "
+>  
+>  SRC_URI[md5sum] = "182f5cbdfb8ddbac535c04470c170dc3"
 >
 > 
 >
 
---------------683BD6444E841F7C621A70FD
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 2021-01-13 9:26 a.m., Leon Anavi
-      wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:20210113142626.27599-10-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">- Update bundled libzmq to 4.3.3
-- Socket.bind() and Socket.connect() can now be used as context
-  managers
-- Better error when libzmq is bundled and fails to be loaded
-- Hold GIL while calling zmq_curve_ functions, which may fix
-  apparent threadsafety issues
-
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
-    </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210113142626.27599-10-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">
----
- .../{python3-pyzmq_19.0.2.bb =&gt; python3-pyzmq_20.0.0.bb}       | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pyzmq_19.0.2.bb =&gt; python3-pyzmq_20.0.0.bb} (86%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_19.0.2.bb b/meta-python/recipes-devtools/python/python3-pyzmq_20.0.0.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-pyzmq_19.0.2.bb
-rename to meta-python/recipes-devtools/python/python3-pyzmq_20.0.0.bb
-index 3c4e32b5e..a668eb11e 100644
---- a/meta-python/recipes-devtools/python/python3-pyzmq_19.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyzmq_20.0.0.bb
-@@ -8,8 +8,7 @@ DEPENDS = &quot;zeromq&quot;
- FILESEXTRAPATHS_prepend := &quot;${THISDIR}/python-pyzmq:&quot;
- 
- SRC_URI += <a class="moz-txt-link-rfc2396E" href="file://club-rpath-out.patch">&quot;file://club-rpath-out.patch&quot;</a>
--SRC_URI[md5sum] = &quot;200abc1a75bdcfff7adf61304f46f55e&quot;
--SRC_URI[sha256sum] = &quot;296540a065c8c21b26d63e3cea2d1d57902373b16e4256afe46422691903a438&quot;
-+SRC_URI[sha256sum] = &quot;824ad5888331aadeac772bce27e1c2fbcab82fade92edbd234542c4e12f0dca9&quot;
- 
- inherit pypi pkgconfig setuptools3
- 
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
-
-
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------683BD6444E841F7C621A70FD--
