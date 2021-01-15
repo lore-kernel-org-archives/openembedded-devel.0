@@ -1,26 +1,24 @@
 Received: from mail.kapsi.fi (mail.kapsi.fi [91.232.154.25])
- by mx.groups.io with SMTP id smtpd.web10.2192.1610707883151543235
+ by mx.groups.io with SMTP id smtpd.web08.2256.1610707994651280117
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Jan 2021 02:51:23 -0800
+ Fri, 15 Jan 2021 02:53:15 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: lakka.kapsi.fi, ip: 91.232.154.25, mailfrom: mcfrisk@lakka.kapsi.fi)
 Received: from kapsi.fi ([2001:67c:1be8::11] helo=lakka.kapsi.fi)
 	by mail.kapsi.fi with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.89)
 	(envelope-from <mcfrisk@lakka.kapsi.fi>)
-	id 1l0MhN-0005gS-I1; Fri, 15 Jan 2021 12:51:21 +0200
+	id 1l0MjA-00065t-JL; Fri, 15 Jan 2021 12:53:12 +0200
 Received: from mcfrisk by lakka.kapsi.fi with local (Exim 4.92)
 	(envelope-from <mcfrisk@lakka.kapsi.fi>)
-	id 1l0MhN-00049w-GV; Fri, 15 Jan 2021 12:51:21 +0200
+	id 1l0MjA-0006Yr-HY; Fri, 15 Jan 2021 12:53:12 +0200
 From: "Mikko Rapeli" <mikko.rapeli@bmw.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Mikko Rapeli <mikko.rapeli@bmw.de>
-Subject: [PATCH][meta-filesystems] fuse: set CVE_PRODUCT to "fuse_project:fuse"
-Date: Fri, 15 Jan 2021 12:50:49 +0200
-Message-Id: <20210115105049.12928-3-mikko.rapeli@bmw.de>
+Subject: [PATCH][meta-oe][dunfell] flatbuffers: whitelist CVE-2020-35864
+Date: Fri, 15 Jan 2021 12:53:04 +0200
+Message-Id: <20210115105305.24713-1-mikko.rapeli@bmw.de>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20210115105049.12928-1-mikko.rapeli@bmw.de>
-References: <20210115105049.12928-1-mikko.rapeli@bmw.de>
 MIME-Version: 1.0
 X-Rspam-Score: 2.3 (++)
 X-Rspam-Report: Action: no action
@@ -43,50 +41,37 @@ X-Rspam-Report: Action: no action
  Symbol: FROM_NEQ_ENVFROM(0.00)
  Symbol: BAYES_HAM(-3.00)
  Symbol: RCVD_COUNT_TWO(0.00)
- Message-ID: 20210115105049.12928-3-mikko.rapeli@bmw.de
+ Message-ID: 20210115105305.24713-1-mikko.rapeli@bmw.de
 X-SA-Exim-Connect-IP: 2001:67c:1be8::11
 X-SA-Exim-Mail-From: mcfrisk@lakka.kapsi.fi
 X-SA-Exim-Scanned: No (on mail.kapsi.fi); SAEximRunCond expanded to false
 Content-Transfer-Encoding: 8bit
 
-Other products like "RedHat:fuse" introduce false CVE findings like:
+CVE-2020-35864 is for the rust crate for flatbuffers, not
+flatbuffers itself.
 
-https://nvd.nist.gov/vuln/detail/CVE-2018-10906
-https://nvd.nist.gov/vuln/detail/CVE-2019-14860
-https://nvd.nist.gov/vuln/detail/CVE-2020-25689
+https://security-tracker.debian.org/tracker/CVE-2020-35864
+
+"NOT-FOR-US: flatbuffers rust crate"
 
 Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
 ---
- meta-filesystems/recipes-support/fuse/fuse3_3.10.1.bb | 2 ++
- meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb   | 2 ++
- 2 files changed, 4 insertions(+)
+ meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.10.1.bb b/meta-filesystems/recipes-support/fuse/fuse3_3.10.1.bb
-index 80ce02872..49d6c15da 100644
---- a/meta-filesystems/recipes-support/fuse/fuse3_3.10.1.bb
-+++ b/meta-filesystems/recipes-support/fuse/fuse3_3.10.1.bb
-@@ -20,6 +20,8 @@ S = "${WORKDIR}/fuse-${PV}"
- UPSTREAM_CHECK_URI = "https://github.com/libfuse/libfuse/releases"
- UPSTREAM_CHECK_REGEX = "fuse\-(?P<pver>3(\.\d+)+).tar.xz"
+diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb
+index c31cef63c..42cfec910 100644
+--- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb
++++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb
+@@ -14,6 +14,8 @@ SRCREV = "6df40a2471737b27271bdd9b900ab5f3aec746c7"
  
-+CVE_PRODUCT = "fuse_project:fuse"
+ SRC_URI = "git://github.com/google/flatbuffers.git"
+ 
++CVE_CHECK_WHITELIST += "CVE-2020-35864"
 +
- inherit meson pkgconfig ptest
- 
- SRC_URI += " \
-diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
-index 95e870691..2c272d452 100644
---- a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
-+++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
-@@ -22,6 +22,8 @@ SRC_URI[sha256sum] = "d0e69d5d608cc22ff4843791ad097f554dd32540ddc9bed7638cc6fea7
- UPSTREAM_CHECK_URI = "https://github.com/libfuse/libfuse/releases"
- UPSTREAM_CHECK_REGEX = "fuse\-(?P<pver>2(\.\d+)+).tar.gz"
- 
-+CVE_PRODUCT = "fuse_project:fuse"
-+
- inherit autotools pkgconfig update-rc.d systemd
- 
- INITSCRIPT_NAME = "fuse"
+ # Make sure C++11 is used, required for example for GCC 4.9
+ CXXFLAGS += "-std=c++11 -fPIC"
+ BUILD_CXXFLAGS += "-std=c++11 -fPIC"
 -- 
 2.20.1
 
