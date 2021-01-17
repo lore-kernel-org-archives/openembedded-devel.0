@@ -1,377 +1,262 @@
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web11.21233.1610905606551870634
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.web10.21306.1610905607316650486
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Jan 2021 09:46:46 -0800
+ Sun, 17 Jan 2021 09:46:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ETZf10+F;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id b3so8831431pft.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 09:46:46 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=pLwp/oLd;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id e9so3190785plh.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 09:46:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=xAfPIXcpoJMjnasatBBx9dqjqrbsyZNpdvBDWoXBDqM=;
-        b=ETZf10+FrL7H3UvkLnjXOm2EkYxlMjBpeI2rwUetHRy1SUwYr5ZyQ0fLyiZqBHYaic
-         B2erCtxXoHwu6Auk1tkT9/ZyVpYlEpcIEJOvzS5L0qusLYLjGx5tyPtxImjEYj1QBevH
-         FYfsmp4/HXORgQBgTLnTvC0y8xKZK48QA4kImGdrzl5wmVelQ/hH4dKM5NlsIlSknQg1
-         lqtxfFWpPKka+0FS39EbDyxfdEvhrTOk4ufeQX2XC9xXhSIq/KEHswF8/B6d/fM+s29P
-         XnnwgwF9K1ZGAO28YcrYtspLmiR8VWAbzvf0zMx3TMz2Yl0aM+OOOD9Lzd7NBlBLjHa9
-         2hhQ==
+        bh=OSlpA/U6BkCcR0c7nAPEKXj+URV+WqSVi+ftgJqxevc=;
+        b=pLwp/oLdsR6Bbgw1YChwBdmr4GJA6jrlzis5XbJByt3KzMzcJOBLjJ+bOP9MziVLrI
+         /nUUrj1oL8uLbqclYPvrTFf3vFGLRNuP0msKGWYkcqhUpygyfoVfyctHK26WUqLbS62Y
+         G4Qgz9rTc9JqDGBePkkYFJYPKkDe4RfGGg/WD38bN+E6hYvjd/K9ycmGb+q9xjVPcGi8
+         rt/SIG8+LYG9n/+iSDTmP3D6fk7BKpjUlge+eRlf6C4RYmxpfy34PdMB+fFYMjZAE4kf
+         LHDB7YK+i/pK1iSwK3F0Hvp3a3o2wtA0ovRPoerSWP9kgv9P3wpzbERTeZlix2eWDPnA
+         DYMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=xAfPIXcpoJMjnasatBBx9dqjqrbsyZNpdvBDWoXBDqM=;
-        b=chKJ2qFH/6TTn2Xow7WSOo3xvB4qmOXcdiRe5k2A1yAQ2KFlH0mhqZwRH4+cb+LBiA
-         F17jXebdEPV7+9f13qXbRkOO3oM03EgafS9+EdxCpozSFfhuX82pa4XbaQxNnQY8Zuvu
-         uSrhPqPoCherSi+jfhFiAsGPdjMkxvqzhowy0lL+bRdxV2Tf+W0JGdE/ljLDDl0XYN2g
-         6TxKFdr02aMJJd+stBYI8ufqGLCNjmP0UNOEgevL7+xGVdAvBlSTmkL9shurYJ1SKmu7
-         4rn/DtaLxTg7KNwKYHjE28utxaU4xFpsqzmXTOmIzhMd74CDnR4jOGoLUHaxvdTXgZDn
-         3OlQ==
-X-Gm-Message-State: AOAM530zz4Y/HyM47+lMI9o2Z0fa6HAURqhS3dMZjL4cs1rtmNOiML1j
-	+cEnrWU6Smor6rxPtPPqDFGsX99dYCx8Nw==
-X-Google-Smtp-Source: ABdhPJxQ66wXgk6ymC8h0JkIxsAEGzOiPDvlwfb+zskJ+XiDjZCwQCcTNwTIBMQnsW1P6P7QOHqCIQ==
-X-Received: by 2002:aa7:9a48:0:b029:1b7:bb17:38c9 with SMTP id x8-20020aa79a480000b02901b7bb1738c9mr972158pfj.51.1610905605664;
-        Sun, 17 Jan 2021 09:46:45 -0800 (PST)
+        bh=OSlpA/U6BkCcR0c7nAPEKXj+URV+WqSVi+ftgJqxevc=;
+        b=a9vddyHdHZ+wTtMgA+zj20Xbtdw+Twvrj2ABZyL6wkrV132/ZzkmpCo8XPsWN8Yagb
+         hgFfujAbcy61e4gcwTbPyb3F5rueXoAtL1nGB6VEpIoncf+VfarDAEgtPJztJzKuuwn5
+         TQIG7JgH7tzOP8o0BIGobLBQ2L6GjBBS07G2hHR3ale8hVJj5kp4dm3hfMTzXGCRJekS
+         OI4M21h10qWbs2J3yKkBB2d5LGJpk8EiopalHMVPEtt5/8hd/H+Or4UlbUwqUVfeEMzZ
+         rM95oyKiWHI5CudUe0ilxwnjMW8Xeg0s/bJ72TebmsRdS4HdrKGzPKP15OlWasOu9Hnt
+         7zpQ==
+X-Gm-Message-State: AOAM532gqMydIjiPBmfNR+qzQpFkjLEWEQyOZg0KRvZasB7LmNd74Bzv
+	6wldwCojWcbPXqBMlvWwEOqW7nATM3kIZA==
+X-Google-Smtp-Source: ABdhPJwBNgbgf4V47EXFnYiuUzKXZpwZsk9vndSVz9dm+t2AR+D8VvDKcfR/EvGC1gJba7iUVKFS/w==
+X-Received: by 2002:a17:90b:517:: with SMTP id r23mr3848765pjz.188.1610905606613;
+        Sun, 17 Jan 2021 09:46:46 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:ed67:500f:ea8f:e947])
-        by smtp.gmail.com with ESMTPSA id bk18sm10427870pjb.41.2021.01.17.09.46.44
+        by smtp.gmail.com with ESMTPSA id bk18sm10427870pjb.41.2021.01.17.09.46.45
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 Jan 2021 09:46:45 -0800 (PST)
+        Sun, 17 Jan 2021 09:46:46 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 14/28] mariadb: update to 10.4.17 for cve fixes
-Date: Sun, 17 Jan 2021 09:46:12 -0800
-Message-Id: <aecc12c22ed0019d024471365b89e049a218b26c.1610905441.git.akuster808@gmail.com>
+Subject: [dunfell 15/28] lua: fix CVE-2020-15945
+Date: Sun, 17 Jan 2021 09:46:13 -0800
+Message-Id: <61922b26e0a7a36a9367590a82c3871feb855fc8.1610905441.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1610905441.git.akuster808@gmail.com>
 References: <cover.1610905441.git.akuster808@gmail.com>
 
-Source: mariadb.org
-MR: 107836, 107837, 107838, 107839, 107840, 107852, 106414, 106414, 107864, 107876, 107888
+From: Wenlin Kang <wenlin.kang@windriver.com>
+
+Source: openembedded.org
+MR: 104897
 Type: Security Fix
-Disposition: Backport from mariadb.org
-ChangeID: 75fb83ced15990b94659af6e107c063d288cb037
+Disposition: Backport from https://git.openembedded.org/meta-openembedded gatesgarth
+ChangeID: 6c43941d116bbb9f0d62ca5376da24ae03eb9eab
 Description:
 
-refresh several patches
-Drop 0001-Fix-build-breakage-from-lock_guard-error-6161.patch as fix included in update
+Fixes CVE-2020-15945
 
-Bugfix only update including these cves:
+Backport with modifications to apply successfully.
 
-10.4.13
-CVE-2020-2752
-CVE-2020-2812
-CVE-2020-2814
-CVE-2020-2760
-CVE-2020-13249
-
-10.4.15
-CVE-2020-15180
-
-10.4.16
-CVE-2020-14812
-CVE-2020-14765
-CVE-2020-14776
-CVE-2020-14789
-CVE-2020-28912 (MDEV-24040)
-
+Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Armin Kuster <akuster@mvista.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...e_10.4.12.bb => mariadb-native_10.4.17.bb} |  0
- meta-oe/recipes-dbs/mysql/mariadb.inc         |  6 ++--
- ...-breakage-from-lock_guard-error-6161.patch | 32 -------------------
- .../mariadb/0001-Fix-library-LZ4-lookup.patch | 19 +++++------
- .../mysql/mariadb/c11_atomics.patch           | 24 ++++++++------
- .../configure.cmake-fix-valgrind.patch        | 10 +++---
- .../mariadb/fix-a-building-failure.patch      | 13 +++-----
- .../mysql/mariadb/fix-arm-atomic.patch        | 13 +++-----
- ...Lists.txt-fix-gen_lex_hash-not-found.patch | 12 +++----
- ...akeLists.txt-fix-do_populate_sysroot.patch | 10 +++---
- ...{mariadb_10.4.12.bb => mariadb_10.4.17.bb} |  0
- 11 files changed, 51 insertions(+), 88 deletions(-)
- rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.4.12.bb => mariadb-native_10.4.17.bb} (100%)
- delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-build-breakage-from-lock_guard-error-6161.patch
- rename meta-oe/recipes-dbs/mysql/{mariadb_10.4.12.bb => mariadb_10.4.17.bb} (100%)
+ .../lua/lua/CVE-2020-15945.patch              | 167 ++++++++++++++++++
+ meta-oe/recipes-devtools/lua/lua_5.3.5.bb     |   1 +
+ 2 files changed, 168 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/lua/lua/CVE-2020-15945.patch
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.4.12.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.4.17.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.4.12.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.4.17.bb
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 95f5acba1f..1a86bc0446 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -18,11 +18,9 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
-            file://c11_atomics.patch \
-            file://clang_version_header_conflict.patch \
-            file://fix-arm-atomic.patch \
--           file://0001-Fix-build-breakage-from-lock_guard-error-6161.patch \
--           file://0001-Fix-library-LZ4-lookup.patch \
-           "
--SRC_URI[md5sum] = "97d7c0f508c04a31c138fdb24e95dbc4"
--SRC_URI[sha256sum] = "fef1e1d38aa253dd8a51006bd15aad184912fce31c446bb69434fcde735aa208"
-+SRC_URI[md5sum] = "e8193b9cd008b6d7f177f5a5c44c7a9f"
-+SRC_URI[sha256sum] = "a7b104e264311cd46524ae546ff0c5107978373e4a01cf7fd8a241454548d16e"
+diff --git a/meta-oe/recipes-devtools/lua/lua/CVE-2020-15945.patch b/meta-oe/recipes-devtools/lua/lua/CVE-2020-15945.patch
+new file mode 100644
+index 0000000000..89ce491487
+--- /dev/null
++++ b/meta-oe/recipes-devtools/lua/lua/CVE-2020-15945.patch
+@@ -0,0 +1,167 @@
++From d8d344365945a534f700c82c5dd26f704f89fef3 Mon Sep 17 00:00:00 2001
++From: Roberto Ierusalimschy <roberto@inf.puc-rio.br>
++Date: Wed, 5 Aug 2020 16:59:58 +0800
++Subject: [PATCH] Fixed bug: invalid 'oldpc' when returning to a function
++
++The field 'L->oldpc' is not always updated when control returns to a
++function; an invalid value can seg. fault when computing 'changedline'.
++(One example is an error in a finalizer; control can return to
++'luaV_execute' without executing 'luaD_poscall'.) Instead of trying to
++fix all possible corner cases, it seems safer to be resilient to invalid
++values for 'oldpc'. Valid but wrong values at most cause an extra call
++to a line hook.
++
++CVE: CVE-2020-15945
++
++[Adjust the code to be applicable to the tree]
++
++Upstream-Status: Backport [https://github.com/lua/lua/commit/a2195644d89812e5b157ce7bac35543e06db05e3]
++
++Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
++Signed-off-by: Joe Slater <joe.slater@@windriver.com>
++
++---
++ src/ldebug.c | 30 +++++++++++++++---------------
++ src/ldebug.h |  4 ++++
++ src/ldo.c    |  2 +-
++ src/lstate.c |  1 +
++ src/lstate.h |  2 +-
++ 5 files changed, 22 insertions(+), 17 deletions(-)
++
++diff --git a/src/ldebug.c b/src/ldebug.c
++index 239affb..832b16c 100644
++--- a/src/ldebug.c
+++++ b/src/ldebug.c
++@@ -34,9 +34,8 @@
++ #define noLuaClosure(f)		((f) == NULL || (f)->c.tt == LUA_TCCL)
++ 
++ 
++-/* Active Lua function (given call info) */
++-#define ci_func(ci)		(clLvalue((ci)->func))
++-
+++/* inverse of 'pcRel' */
+++#define invpcRel(pc, p)                ((p)->code + (pc) + 1)
++ 
++ static const char *funcnamefromcode (lua_State *L, CallInfo *ci,
++                                     const char **name);
++@@ -71,20 +70,18 @@ static void swapextra (lua_State *L) {
++ 
++ /*
++ ** This function can be called asynchronously (e.g. during a signal).
++-** Fields 'oldpc', 'basehookcount', and 'hookcount' (set by
++-** 'resethookcount') are for debug only, and it is no problem if they
++-** get arbitrary values (causes at most one wrong hook call). 'hookmask'
++-** is an atomic value. We assume that pointers are atomic too (e.g., gcc
++-** ensures that for all platforms where it runs). Moreover, 'hook' is
++-** always checked before being called (see 'luaD_hook').
+++** Fields 'basehookcount' and 'hookcount' (set by 'resethookcount')
+++** are for debug only, and it is no problem if they get arbitrary
+++** values (causes at most one wrong hook call). 'hookmask' is an atomic
+++** value. We assume that pointers are atomic too (e.g., gcc ensures that
+++** for all platforms where it runs). Moreover, 'hook' is always checked
+++** before being called (see 'luaD_hook').
++ */
++ LUA_API void lua_sethook (lua_State *L, lua_Hook func, int mask, int count) {
++   if (func == NULL || mask == 0) {  /* turn off hooks? */
++     mask = 0;
++     func = NULL;
++   }
++-  if (isLua(L->ci))
++-    L->oldpc = L->ci->u.l.savedpc;
++   L->hook = func;
++   L->basehookcount = count;
++   resethookcount(L);
++@@ -665,7 +662,10 @@ l_noret luaG_runerror (lua_State *L, const char *fmt, ...) {
++ void luaG_traceexec (lua_State *L) {
++   CallInfo *ci = L->ci;
++   lu_byte mask = L->hookmask;
+++  const Proto *p = ci_func(ci)->p;
++   int counthook = (--L->hookcount == 0 && (mask & LUA_MASKCOUNT));
+++  /* 'L->oldpc' may be invalid; reset it in this case */
+++  int oldpc = (L->oldpc < p->sizecode) ? L->oldpc : 0;
++   if (counthook)
++     resethookcount(L);  /* reset count */
++   else if (!(mask & LUA_MASKLINE))
++@@ -677,15 +677,15 @@ void luaG_traceexec (lua_State *L) {
++   if (counthook)
++     luaD_hook(L, LUA_HOOKCOUNT, -1);  /* call count hook */
++   if (mask & LUA_MASKLINE) {
++-    Proto *p = ci_func(ci)->p;
++     int npc = pcRel(ci->u.l.savedpc, p);
++     int newline = getfuncline(p, npc);
++     if (npc == 0 ||  /* call linehook when enter a new function, */
++-        ci->u.l.savedpc <= L->oldpc ||  /* when jump back (loop), or when */
++-        newline != getfuncline(p, pcRel(L->oldpc, p)))  /* enter a new line */
+++        ci->u.l.savedpc <= invpcRel(oldpc, p) ||  /* when jump back (loop), or when */
+++        newline != getfuncline(p, oldpc))  /* enter a new line */
++       luaD_hook(L, LUA_HOOKLINE, newline);  /* call line hook */
+++
+++    L->oldpc = npc;  /* 'pc' of last call to line hook */
++   }
++-  L->oldpc = ci->u.l.savedpc;
++   if (L->status == LUA_YIELD) {  /* did hook yield? */
++     if (counthook)
++       L->hookcount = 1;  /* undo decrement to zero */
++diff --git a/src/ldebug.h b/src/ldebug.h
++index 0e31546..c224cc4 100644
++--- a/src/ldebug.h
+++++ b/src/ldebug.h
++@@ -13,6 +13,10 @@
++ 
++ #define pcRel(pc, p)	(cast(int, (pc) - (p)->code) - 1)
++ 
+++/* Active Lua function (given call info) */
+++#define ci_func(ci)            (clLvalue((ci)->func))
+++
+++
++ #define getfuncline(f,pc)	(((f)->lineinfo) ? (f)->lineinfo[pc] : -1)
++ 
++ #define resethookcount(L)	(L->hookcount = L->basehookcount)
++diff --git a/src/ldo.c b/src/ldo.c
++index 90b695f..f66ac1a 100644
++--- a/src/ldo.c
+++++ b/src/ldo.c
++@@ -382,7 +382,7 @@ int luaD_poscall (lua_State *L, CallInfo *ci, StkId firstResult, int nres) {
++       luaD_hook(L, LUA_HOOKRET, -1);
++       firstResult = restorestack(L, fr);
++     }
++-    L->oldpc = ci->previous->u.l.savedpc;  /* 'oldpc' for caller function */
+++    L->oldpc = pcRel(ci->u.l.savedpc, ci_func(ci)->p);  /* 'oldpc' for caller function */
++   }
++   res = ci->func;  /* res == final position of 1st result */
++   L->ci = ci->previous;  /* back to caller */
++diff --git a/src/lstate.c b/src/lstate.c
++index 9194ac3..3573e36 100644
++--- a/src/lstate.c
+++++ b/src/lstate.c
++@@ -236,6 +236,7 @@ static void preinit_thread (lua_State *L, global_State *g) {
++   L->nny = 1;
++   L->status = LUA_OK;
++   L->errfunc = 0;
+++  L->oldpc = 0;
++ }
++ 
++ 
++diff --git a/src/lstate.h b/src/lstate.h
++index a469466..d75eadf 100644
++--- a/src/lstate.h
+++++ b/src/lstate.h
++@@ -164,7 +164,6 @@ struct lua_State {
++   StkId top;  /* first free slot in the stack */
++   global_State *l_G;
++   CallInfo *ci;  /* call info for current function */
++-  const Instruction *oldpc;  /* last pc traced */
++   StkId stack_last;  /* last free slot in the stack */
++   StkId stack;  /* stack base */
++   UpVal *openupval;  /* list of open upvalues in this stack */
++@@ -174,6 +173,7 @@ struct lua_State {
++   CallInfo base_ci;  /* CallInfo for first level (C calling Lua) */
++   volatile lua_Hook hook;
++   ptrdiff_t errfunc;  /* current error handling function (stack index) */
+++  int oldpc;  /* last pc traced */
++   int stacksize;
++   int basehookcount;
++   int hookcount;
++-- 
++2.13.3
++
+diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
+index d3461b06de..4f89579c78 100644
+--- a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
++++ b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
+@@ -8,6 +8,7 @@ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
+            file://lua.pc.in \
+            file://0001-Allow-building-lua-without-readline-on-Linux.patch \
+            file://CVE-2020-15888.patch \
++           file://CVE-2020-15945.patch \
+            "
  
- UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
- 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-build-breakage-from-lock_guard-error-6161.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-build-breakage-from-lock_guard-error-6161.patch
-deleted file mode 100644
-index 87c70617a1..0000000000
---- a/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-build-breakage-from-lock_guard-error-6161.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--Subject: [PATCH] Fix build breakage from lock_guard error (#6161)
--
--Summary:
--This change fixes a source issue that caused compile time error which
--breaks build for many fbcode services in that setup. The size() member
--function of channel is a const member, so member variables accessed
--within it are implicitly const as well. This caused error when clang
--fails to resolve to a constructor that takes std::mutex because the
--suitable constructor got rejected due to loss of constness for its
--argument. The fix is to add mutable modifier to the lock_ member of
--channel.
--
--Pull Request resolved: https://github.com/facebook/rocksdb/pull/6161
--
--Differential Revision: D18967685
--
--Pulled By: maysamyabandeh
--
--Upstream-Status: Backport
--
--fbshipit-source-id:698b6a5153c3c92eeacb842c467aa28cc350d432 
----- a/storage/rocksdb/rocksdb/util/channel.h
--+++ b/storage/rocksdb/rocksdb/util/channel.h
--@@ -60,7 +60,7 @@ class channel {
-- 
--  private:
--   std::condition_variable cv_;
---  std::mutex lock_;
--+  mutable std::mutex lock_;
--   std::queue<T> buffer_;
--   bool eof_;
-- };
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-library-LZ4-lookup.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-library-LZ4-lookup.patch
-index 574dfd317a..4b90d280ac 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-library-LZ4-lookup.patch
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-library-LZ4-lookup.patch
-@@ -8,15 +8,15 @@ Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-  cmake/FindLZ4.cmake | 9 +++++++--
-  1 file changed, 7 insertions(+), 2 deletions(-)
- 
--diff --git a/cmake/FindLZ4.cmake b/cmake/FindLZ4.cmake
--index e97dd63e2b0..2f4694e727c 100644
----- a/cmake/FindLZ4.cmake
--+++ b/cmake/FindLZ4.cmake
--@@ -1,5 +1,10 @@
---find_path(LZ4_INCLUDE_DIR NAMES lz4.h)
---find_library(LZ4_LIBRARY NAMES lz4)
-+Index: mariadb-10.4.17/cmake/FindLZ4.cmake
-+===================================================================
-+--- mariadb-10.4.17.orig/cmake/FindLZ4.cmake
-++++ mariadb-10.4.17/cmake/FindLZ4.cmake
-+@@ -1,5 +1,11 @@
-+ find_path(LZ4_INCLUDE_DIR NAMES lz4.h)
-+-find_library(LZ4_LIBRARIES NAMES lz4)
- +find_path(LZ4_INCLUDE_DIR
--+  NAMES	lz4.h
-++  NAMES    lz4.h
- +  NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
- +
- +find_library(LZ4_LIBRARY
-@@ -25,6 +25,3 @@ index e97dd63e2b0..2f4694e727c 100644
-  
-  include(FindPackageHandleStandardArgs)
-  FIND_PACKAGE_HANDLE_STANDARD_ARGS(
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch b/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
-index 169986130c..b1ce963602 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
-@@ -10,9 +10,11 @@ Date:   Fri Dec 21 19:14:04 2018 +0200
- Upstream-Status: Pending
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
----- a/configure.cmake
--+++ b/configure.cmake
--@@ -926,7 +926,25 @@ int main()
-+Index: mariadb-10.4.17/configure.cmake
-+===================================================================
-+--- mariadb-10.4.17.orig/configure.cmake
-++++ mariadb-10.4.17/configure.cmake
-+@@ -863,7 +863,25 @@ int main()
-    long long int *ptr= &var;
-    return (int)__atomic_load_n(ptr, __ATOMIC_SEQ_CST);
-  }"
-@@ -39,10 +41,12 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  
-  IF(WITH_VALGRIND)
-    SET(HAVE_valgrind 1)
----- a/mysys/CMakeLists.txt
--+++ b/mysys/CMakeLists.txt
-+Index: mariadb-10.4.17/mysys/CMakeLists.txt
-+===================================================================
-+--- mariadb-10.4.17.orig/mysys/CMakeLists.txt
-++++ mariadb-10.4.17/mysys/CMakeLists.txt
- @@ -78,6 +78,10 @@ TARGET_LINK_LIBRARIES(mysys dbug strings
--  ${LIBNSL} ${LIBM} ${LIBRT} ${LIBDL} ${LIBSOCKET} ${LIBEXECINFO} ${CRC32_LIBRARY})
-+  ${LIBNSL} ${LIBM} ${LIBRT} ${CMAKE_DL_LIBS} ${LIBSOCKET} ${LIBEXECINFO} ${CRC32_LIBRARY})
-  DTRACE_INSTRUMENT(mysys)
-  
- +IF (HAVE_GCC_C11_ATOMICS_WITH_LIBATOMIC)
-@@ -52,9 +56,11 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  IF(HAVE_BFD_H)
-    TARGET_LINK_LIBRARIES(mysys bfd)  
-  ENDIF(HAVE_BFD_H)
----- a/sql/CMakeLists.txt
--+++ b/sql/CMakeLists.txt
--@@ -178,6 +178,10 @@ ELSE()
-+Index: mariadb-10.4.17/sql/CMakeLists.txt
-+===================================================================
-+--- mariadb-10.4.17.orig/sql/CMakeLists.txt
-++++ mariadb-10.4.17/sql/CMakeLists.txt
-+@@ -196,6 +196,10 @@ ELSE()
-    SET(MYSQLD_SOURCE main.cc ${DTRACE_PROBES_ALL})
-  ENDIF()
-  
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/configure.cmake-fix-valgrind.patch b/meta-oe/recipes-dbs/mysql/mariadb/configure.cmake-fix-valgrind.patch
-index ac94279585..162b1e295b 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb/configure.cmake-fix-valgrind.patch
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/configure.cmake-fix-valgrind.patch
-@@ -21,11 +21,11 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  configure.cmake | 5 ++---
-  1 file changed, 2 insertions(+), 3 deletions(-)
- 
--diff --git a/configure.cmake b/configure.cmake
--index 3cfc4b31..d017b3b3 100644
----- a/configure.cmake
--+++ b/configure.cmake
--@@ -930,10 +930,9 @@ HAVE_GCC_C11_ATOMICS)
-+Index: mariadb-10.4.17/configure.cmake
-+===================================================================
-+--- mariadb-10.4.17.orig/configure.cmake
-++++ mariadb-10.4.17/configure.cmake
-+@@ -867,10 +867,9 @@ HAVE_GCC_C11_ATOMICS)
-  
-  IF(WITH_VALGRIND)
-    SET(HAVE_valgrind 1)
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/fix-a-building-failure.patch b/meta-oe/recipes-dbs/mysql/mariadb/fix-a-building-failure.patch
-index 9149ee21f2..5fc94835ea 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb/fix-a-building-failure.patch
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/fix-a-building-failure.patch
-@@ -14,11 +14,11 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  CMakeLists.txt | 5 -----
-  1 file changed, 5 deletions(-)
- 
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index fc30750..4f9110e 100644
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -347,11 +347,6 @@ CHECK_PCRE()
-+Index: mariadb-10.4.17/CMakeLists.txt
-+===================================================================
-+--- mariadb-10.4.17.orig/CMakeLists.txt
-++++ mariadb-10.4.17/CMakeLists.txt
-+@@ -376,11 +376,6 @@ CHECK_PCRE()
-  
-  CHECK_SYSTEMD()
-  
-@@ -30,6 +30,3 @@ index fc30750..4f9110e 100644
-  #
-  # Setup maintainer mode options. Platform checks are
-  # not run with the warning options as to not perturb fragile checks
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/fix-arm-atomic.patch b/meta-oe/recipes-dbs/mysql/mariadb/fix-arm-atomic.patch
-index 05b0cf8ff7..db72709439 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb/fix-arm-atomic.patch
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/fix-arm-atomic.patch
-@@ -15,11 +15,11 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  storage/rocksdb/build_rocksdb.cmake | 3 +++
-  1 file changed, 3 insertions(+)
- 
--diff --git a/storage/rocksdb/build_rocksdb.cmake b/storage/rocksdb/build_rocksdb.cmake
--index d7895b0..3bcd52a 100644
----- a/storage/rocksdb/build_rocksdb.cmake
--+++ b/storage/rocksdb/build_rocksdb.cmake
--@@ -470,6 +470,9 @@ list(APPEND SOURCES ${CMAKE_CURRENT_BINARY_DIR}/build_version.cc)
-+Index: mariadb-10.4.17/storage/rocksdb/build_rocksdb.cmake
-+===================================================================
-+--- mariadb-10.4.17.orig/storage/rocksdb/build_rocksdb.cmake
-++++ mariadb-10.4.17/storage/rocksdb/build_rocksdb.cmake
-+@@ -498,6 +498,9 @@ list(APPEND SOURCES ${CMAKE_CURRENT_BINA
-  
-  ADD_CONVENIENCE_LIBRARY(rocksdblib ${SOURCES})
-  target_link_libraries(rocksdblib ${THIRDPARTY_LIBS} ${SYSTEM_LIBS})
-@@ -29,6 +29,3 @@ index d7895b0..3bcd52a 100644
-  IF(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    set_target_properties(rocksdblib PROPERTIES COMPILE_FLAGS "-fPIC -fno-builtin-memcmp -Wno-error")
-  endif()
---- 
--2.7.4
--
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch b/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
-index afc1be47b5..16cd584da9 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
-@@ -15,11 +15,11 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  sql/CMakeLists.txt | 30 ++++++++++++++++++++----------
-  1 file changed, 20 insertions(+), 10 deletions(-)
- 
--diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
--index c6910f46..bf51f4cb 100644
----- a/sql/CMakeLists.txt
--+++ b/sql/CMakeLists.txt
--@@ -50,11 +50,16 @@ ${WSREP_INCLUDES}
-+Index: mariadb-10.4.17/sql/CMakeLists.txt
-+===================================================================
-+--- mariadb-10.4.17.orig/sql/CMakeLists.txt
-++++ mariadb-10.4.17/sql/CMakeLists.txt
-+@@ -55,11 +55,16 @@ ${CMAKE_BINARY_DIR}/sql
-  
-  
-  
-@@ -41,7 +41,7 @@ index c6910f46..bf51f4cb 100644
-  
-  ADD_DEFINITIONS(-DMYSQL_SERVER -DHAVE_EVENT_SCHEDULER)
-  
--@@ -370,11 +375,16 @@ IF(NOT CMAKE_CROSSCOMPILING)
-+@@ -364,11 +369,16 @@ IF(NOT CMAKE_CROSSCOMPILING)
-    ADD_EXECUTABLE(gen_lex_hash gen_lex_hash.cc)
-  ENDIF()
-  
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/support-files-CMakeLists.txt-fix-do_populate_sysroot.patch b/meta-oe/recipes-dbs/mysql/mariadb/support-files-CMakeLists.txt-fix-do_populate_sysroot.patch
-index 4f9a4e9b0e..937d13da31 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb/support-files-CMakeLists.txt-fix-do_populate_sysroot.patch
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/support-files-CMakeLists.txt-fix-do_populate_sysroot.patch
-@@ -15,11 +15,11 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  support-files/CMakeLists.txt | 7 -------
-  1 file changed, 7 deletions(-)
- 
--diff --git a/support-files/CMakeLists.txt b/support-files/CMakeLists.txt
--index b5767432..56733de1 100644
----- a/support-files/CMakeLists.txt
--+++ b/support-files/CMakeLists.txt
--@@ -165,12 +165,5 @@ IF(UNIX)
-+Index: mariadb-10.4.17/support-files/CMakeLists.txt
-+===================================================================
-+--- mariadb-10.4.17.orig/support-files/CMakeLists.txt
-++++ mariadb-10.4.17/support-files/CMakeLists.txt
-+@@ -192,12 +192,5 @@ IF(UNIX)
-        INSTALL(FILES rpm/enable_encryption.preset DESTINATION ${INSTALL_SYSCONF2DIR}
-                COMPONENT IniFiles)
-      ENDIF()
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.4.12.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.4.17.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb_10.4.12.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb_10.4.17.bb
+ # if no test suite matches PV release of Lua exactly, download the suite for the closest Lua release.
 -- 
 2.17.1
 
