@@ -1,75 +1,77 @@
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
- by mx.groups.io with SMTP id smtpd.web09.21199.1610905620087008762
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.web09.21200.1610905620826751193
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 17 Jan 2021 09:47:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=KpukLyQH;
- spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f182.google.com with SMTP id v19so9459317pgj.12
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=nLufSdrZ;
+ spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f169.google.com with SMTP id m6so8814721pfm.6
         for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 09:47:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=uhrUXTSRuKEcmuLBdIrx1yExQLTr5vI7FpiZjnnxya4=;
-        b=KpukLyQHW5AkScU5T6arBcSvqwXScECb5DLGEKzPNTroIzeNg3rny/vl9cmxTQWYlM
-         ZdpeLfNHLTS5X8kr+64cXCmbzTZAhr/lYQzuTXi4YRuwdFzJSFF9dSPQPj5Hz4tD7rUr
-         eaFSULF/3oWGxAYBZJEfpEOv6vIO6F0edWOtNJmIVRmeDBzbA48I2IaNtaHn1bNaH5jo
-         FVpwFWAEGUiXVwd9zC/WwuD7kcatIsqMsrKuY2FshgfGyjanLuv2YqhIbwWkT8A3YZfD
-         GWK/Scbd3l0LBb9S+a3hQnbD0KubBZ/jce+LZx1XkSuUk+1ddMQGkTlkKrI1+8D0hAxg
-         hYpQ==
+        bh=QPFwbw6eJBixAOlAKShSPLuL74XioFFXjgyVnzNeU38=;
+        b=nLufSdrZarnQ2Y9EkARxX03uBoF5r42py5u3xJr1EXKfTOyIUFVq8doUwb8j1GRtaC
+         r7lnly9PR8pNBX1gSp06U9VItqxk9qvqsWrUgu3GoM2fAjmex8mWv7DRqqgiPM38kRvX
+         AeTdq244OFPkOKhqR5v9TFyfaPRnlcLsZrrCwgkFXIraMMRuEssuTDDQt80bEei46EJ4
+         Sd3yIIpLYQzZVocAdd1HBvKHDPnwr2w6nVdvPpYT/aq7U6Vvnf2K7XAc3n0jyZQo8Q2K
+         B0b3gpQGv/RpWIZTL9blWcSKj6iXCNUM1Nj3BjunC2gyUrv51MIwV18UQCmiBbrbUtjZ
+         iLtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=uhrUXTSRuKEcmuLBdIrx1yExQLTr5vI7FpiZjnnxya4=;
-        b=By46gMWbvwgOW2j9I/RU+QBiQJsvwNwAPF4zxOiW6ZLSnU9Fdu8rp9wpS6pAV8GhCB
-         CFz4tteDWDT+69Du1UvnaZakr4z0JJoii2CjgATQtQP9kPm21IO/FlFIP18DxPx4obWP
-         mi5zu6PEu/kvN6cNoiEhi57oBKmyqR6Kxn69rSjhrCGozEk6m8f4K279oS7/3S2nLIX+
-         9x5+X/PMgoiT+TKLZefJgBOqDAbon+gXpNnD6EkFymh7HTn0fxnkdHd5/5SDYu54lK8t
-         VSLN1CQyKpcukMD9NMsRbE33PKZuQ3GrRxYTRF0UqHCeIEy9qiEujni+rZSb/xt7Zc2w
-         Qsyw==
-X-Gm-Message-State: AOAM531eDdt9FK/OV/0jSglDps+CDQG22lJoLEqUC8Aa7IsIrR9bxZRl
-	yxFLbFwJ0aUz8hOS1kd9m0erin/FKfTF4Q==
-X-Google-Smtp-Source: ABdhPJzDH6M4me+fgPBtAkbyrnxA93GJm+/Ch6jb+3DaxeeFKAdY4ZZ0wYYvjt1hvcQFiT7JZCQ27w==
-X-Received: by 2002:aa7:8eda:0:b029:19e:c8c3:ed74 with SMTP id b26-20020aa78eda0000b029019ec8c3ed74mr22354981pfr.66.1610905619556;
-        Sun, 17 Jan 2021 09:46:59 -0800 (PST)
+        bh=QPFwbw6eJBixAOlAKShSPLuL74XioFFXjgyVnzNeU38=;
+        b=Kw8p1iP+HqaIrgXnf7+Zpxnpig6Gx0+nWr/XBLEHknkZgThW5n2iKoncW1A9TF54FS
+         awh2Ezpxi1/11eaKw8yxL+zKvsfvPl+iLBKH0dBFbrtz98wHxkFQc6dtvWRJncenWRF0
+         Rha2vgmTWKraYKGLgX4G0RgWJhsiQ6dvBdjdZaz0kvH/Q79tER7KCoj0AS6SIUPakgB3
+         MryHpLmH3EanKYHfNr8qnu5/ccH2Dhxx+EwAsdFziT7q5E2Spr7b/pyUqDCe0Hp13TaK
+         BlA78VIjxO1OYH845GAT9Q89lYsSLCsbhKsPyQkmsdKSIFmXse7o0SoB+TVHlbWZWYKb
+         Il6w==
+X-Gm-Message-State: AOAM533CWB4i4szhCXpjFeWCIDfslXTtYb8j9CFS2ONBv4aLcd5DIjvX
+	6VoNniIdABwWEbnWdYZSNUzjI2GVhm6UoQ==
+X-Google-Smtp-Source: ABdhPJwsL/QZLDWs2ix+wk6PEQAcTKxRkXfg82PcZDcj/bS6fHwLTT/lK499QQZG8bMHWiLPmUlOtA==
+X-Received: by 2002:a63:ce42:: with SMTP id r2mr22720901pgi.8.1610905620313;
+        Sun, 17 Jan 2021 09:47:00 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:ed67:500f:ea8f:e947])
-        by smtp.gmail.com with ESMTPSA id bk18sm10427870pjb.41.2021.01.17.09.46.58
+        by smtp.gmail.com with ESMTPSA id bk18sm10427870pjb.41.2021.01.17.09.46.59
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 Jan 2021 09:46:59 -0800 (PST)
+        Sun, 17 Jan 2021 09:47:00 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 27/28] libsdl2-mixer: set --disable-music-ogg-shared to link statically
-Date: Sun, 17 Jan 2021 09:46:25 -0800
-Message-Id: <d3cb0e1645e7894a2cfeadd53892690d90b726ca.1610905441.git.akuster808@gmail.com>
+Subject: [dunfell 28/28] geoclue: select avahi-daemon if nmea enabled
+Date: Sun, 17 Jan 2021 09:46:26 -0800
+Message-Id: <b208c536f43d45d43094644466f1074b303ee3a1.1610905441.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1610905441.git.akuster808@gmail.com>
 References: <cover.1610905441.git.akuster808@gmail.com>
 
-From: jabdoa2 <jabdoa2@users.noreply.github.com>
+From: Chenxi Mao <maochenxi@eswin.com>
+
+geoclue serivce rely on avahi-daemon, so enable it by default.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 69bae2a2360643805de2ae1cd9ebc4202cd5a2fb)
+(cherry picked from commit 9239584e717bb2093c9bfd6972bb2f01507ab859)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb | 2 +-
+ meta-oe/recipes-navigation/geoclue/geoclue_2.5.3.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb
-index 77e50d3841..8f1960d8ad 100644
---- a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb
-+++ b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb
-@@ -14,7 +14,7 @@ S = "${WORKDIR}/SDL2_mixer-${PV}"
- inherit autotools-brokensep pkgconfig
+diff --git a/meta-oe/recipes-navigation/geoclue/geoclue_2.5.3.bb b/meta-oe/recipes-navigation/geoclue/geoclue_2.5.3.bb
+index b46445a2ba..e57e7a7209 100644
+--- a/meta-oe/recipes-navigation/geoclue/geoclue_2.5.3.bb
++++ b/meta-oe/recipes-navigation/geoclue/geoclue_2.5.3.bb
+@@ -31,7 +31,7 @@ PACKAGECONFIG ??= "3g modem-gps cdma nmea lib"
+ PACKAGECONFIG[3g] = "-D3g-source=true,-D3g-source=false,modemmanager"
+ PACKAGECONFIG[modem-gps] = "-Dmodem-gps-source=true,-Dmodem-gps-source=false,modemmanager"
+ PACKAGECONFIG[cdma] = "-Dcdma-source=true,-Dcdma-source=false,modemmanager"
+-PACKAGECONFIG[nmea] = "-Dnmea-source=true,-Dnmea-source=false,avahi"
++PACKAGECONFIG[nmea] = "-Dnmea-source=true,-Dnmea-source=false,avahi,avahi-daemon"
+ PACKAGECONFIG[lib] = "-Dlibgeoclue=true,-Dlibgeoclue=false,gobject-introspection"
  
- EXTRA_AUTORECONF += "--include=acinclude"
--EXTRA_OECONF = "--disable-music-mp3 --enable-music-ogg LIBS=-L${STAGING_LIBDIR}"
-+EXTRA_OECONF = "--disable-music-mp3 --enable-music-ogg --disable-music-ogg-shared LIBS=-L${STAGING_LIBDIR}"
- 
- PACKAGECONFIG[mad] = "--enable-music-mp3-mad-gpl,--disable-music-mp3-mad-gpl,libmad"
- 
+ GTKDOC_MESON_OPTION = "gtk-doc"
 -- 
 2.17.1
 
