@@ -1,225 +1,199 @@
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web09.21049.1610905004485309981
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.web08.21351.1610905005227859621
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Jan 2021 09:36:44 -0800
+ Sun, 17 Jan 2021 09:36:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=GVo22T+n;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id b5so8221775pjl.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 09:36:44 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=AUirV7fR;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id v1so7976294pjr.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 09:36:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=72Fh/3ByaeLGr1mssLDOvNVYfhNcNkigr7G5NgY80/w=;
-        b=GVo22T+nLKlI5jRBv8hmr3zRgM5Dw6s+7U6T5AhHsP+fYq9AnLi/KUbLsLO9lgJJW7
-         DPkHQt9irDS9p6cwkTaYO/O/boRKem7LuQojQBmAhTbNYvjmjoCYcZTwaxQOGqRTCCX+
-         GhaoI1TE+iepuSAJLudRW6V0hKnOUNtZ7qaMEANrPfTZRyOG76FSeFANVmAggAxx5kKg
-         I7KNqRMupgyvD18DZW1klPYVRkotd7ZNyXtbnV2u1iwNQKST5EmCw5eUU9ILjQSDvuWv
-         HIfIdNZkn1J/eWYTmoSCLD4Dyz59L9Qo1dkqvABNlNmPkB0gI6HuO3tHqWEYb7wpz9cL
-         D19Q==
+        h=from:to:subject:date:message-id:mime-version:in-reply-to:references
+         :content-transfer-encoding;
+        bh=v+1ucEaIE0sQpe/Q9U66yb7es0ghtNnMKmE/2hiTnnM=;
+        b=AUirV7fRNw63aXOPuYpn/oW26lB555JH1GSTXBvLehwbyHWiIcy6wBcld2QvZwIwei
+         CpJjMLbOH3j35FWffcfXueR5DGB/f/KGlqRslIznJaz9KYA0UGS00h4Ek93Sy4jnPkDW
+         PKCT7t98JoMD3TRNIZC8G+98gEVDz9Ic/mRBLJnlYLmxPoH3NtpkN1323sMd/y183s9E
+         dhCInunvCxXv024e3RCzrnrzrbP/YFghEfdUstMKosWWzOWjaNJIAv+SjsAiI7j7Yu4v
+         dEJBf/M2Vf59UkRk7vpFOuNg7nNNT/QjOBgSnzHqf9lJKqD4aa40CGvDwZ8EWBdgO5cz
+         uYDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=72Fh/3ByaeLGr1mssLDOvNVYfhNcNkigr7G5NgY80/w=;
-        b=gA1Lc65kPiIEPk5M3x/mH1ZwcXECI5LBieAgS4+a0hitCdvjOP6xzsSWl2hDUZ9CZX
-         bGQ+4D/EHZMcM795yb1YhwSVLhi+X6Tqxh6O8NhGwhLQOkUcCyTziz7G5hFPueAndh5K
-         +BEV1Aa7/N3FsWHO6q0RgOB5+hKPRnSgD2dDp6PaNAgN2Wnu87CKN/s26gCztHCj1Ext
-         WXqUANp+jxzGNsG+ekI4izGtcfQtLHWm7SysL6eBjKE3cvBo2+cmtOeoz+Y9RLTvEus/
-         Xk5ffdA1XCy0E7xYsYmTqqbHE19l3eQMfFnMmu9ITl0ozeH98c1m5JuLWs/5UuNG/d2M
-         hNWQ==
-X-Gm-Message-State: AOAM5307ikv/r6LnfOPkrRV6DgLcHbMPgnJv0Vi2/L7JvRZVWnmxUe2+
-	ysWfH6WZB03UZGyXBMYHVpk8UdKlvot24A==
-X-Google-Smtp-Source: ABdhPJxoNSNlnuj7Um/aMr8HuLvE21U3G63/W9DS0KYoAXfKulcqa+7HHAt2g1sQ5tM8FXyXdfx/cw==
-X-Received: by 2002:a17:90a:8508:: with SMTP id l8mr21022371pjn.131.1610905003671;
-        Sun, 17 Jan 2021 09:36:43 -0800 (PST)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :in-reply-to:references:content-transfer-encoding;
+        bh=v+1ucEaIE0sQpe/Q9U66yb7es0ghtNnMKmE/2hiTnnM=;
+        b=S/0zqgqEuiJCuZlhDBc3VVw5/8SDgY2oxZCJ5ddgOovciCbWqVluGOz2S7VYXR/+DX
+         UlJtaPkFr19D6hHEF03VA+Od8a7MPH8rz7Bb9Jzx+IIIhhqC4WnYFiuCcP+1eYBrFq9O
+         6aBGx8WrNOLEZ3hTmWbZZ7oKm4aSW0D6Lc75HblCWZERX6QJg42LtHrkNKYV2mmVbOUB
+         DP9bCHdOnDVPjBk1FGUQmB75Lr/LNJ7fCorfQ+FM7cnJAIv5UcpAsKN1UIXJCPiAqj1D
+         IVbDn8R7MLOICNMORDXLOpu6zjrlIy06wsAOcLmkeuLhuIQWstyp4InfFTm4SR7+tE6n
+         IrMw==
+X-Gm-Message-State: AOAM532N/+bdkw/5nyGg2j5QfQYfMTdqse1IPjHEG1hokFaBzfmdgJpu
+	c1Z9cnNEd/uPoZ8rpf/39CvlK23N0iD3Aw==
+X-Google-Smtp-Source: ABdhPJw/rApWlUyZ6Fiq7va7lsTCamKbnpexdF3OBljQRpzrdtfPSQQMi0GUHfna8sUVTdHDobmliQ==
+X-Received: by 2002:a17:903:230b:b029:dd:7cf1:8c33 with SMTP id d11-20020a170903230bb02900dd7cf18c33mr22456281plh.31.1610905004641;
+        Sun, 17 Jan 2021 09:36:44 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:ed67:500f:ea8f:e947])
         by smtp.gmail.com with ESMTPSA id t4sm13661338pfe.212.2021.01.17.09.36.43
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 Jan 2021 09:36:43 -0800 (PST)
+        Sun, 17 Jan 2021 09:36:44 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 03/31] samba: CVE-2020-14318 Security Advisory
-Date: Sun, 17 Jan 2021 09:36:08 -0800
-Message-Id: <38beb6fe98894ffaf82a05ccfd6694f735daba26.1610904793.git.akuster808@gmail.com>
+Subject: [gatesgarth 04/31] samba: CVE-2020-14383 Security Advisory
+Date: Sun, 17 Jan 2021 09:36:09 -0800
+Message-Id: <81d14a86353829eba1d55a93d478faf4c5527a89.1610904793.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
 In-Reply-To: <cover.1610904792.git.akuster808@gmail.com>
 References: <cover.1610904792.git.akuster808@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
 From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 
 References
-https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14318
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14383
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 1d44b4c03d51e91ce01cf5fd0b33155ce36f1862)
+(cherry picked from commit baee1ebeafce5d6a99dafc30b91e6fb760197686)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../samba/samba/CVE-2020-14318.patch          | 142 ++++++++++++++++++
+ .../samba/samba/CVE-2020-14383.patch          | 112 ++++++++++++++++++
  .../samba/samba_4.10.18.bb                    |   1 +
- 2 files changed, 143 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/samba/samba/CVE-2020-14318.patch
+ 2 files changed, 113 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba/CVE-2020-14383.patch
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba/CVE-2020-14318.patch b/meta-networking/recipes-connectivity/samba/samba/CVE-2020-14318.patch
+diff --git a/meta-networking/recipes-connectivity/samba/samba/CVE-2020-14383.patch b/meta-networking/recipes-connectivity/samba/samba/CVE-2020-14383.patch
 new file mode 100644
-index 0000000000..ff1225db07
+index 0000000000..3341b80a38
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/samba/samba/CVE-2020-14318.patch
-@@ -0,0 +1,142 @@
-+From ccf53dfdcd39f3526dbc2f20e1245674155380ff Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-connectivity/samba/samba/CVE-2020-14383.patch
+@@ -0,0 +1,112 @@
++From ff17443fe761eda864d13957bec45f5bac478fe3 Mon Sep 17 00:00:00 2001
 +From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-+Date: Fri, 11 Dec 2020 11:32:44 +0900
-+Subject: [PATCH] s4: torture: Add smb2.notify.handle-permissions test.
++Date: Fri, 11 Dec 2020 14:34:31 +0900
++Subject: [PATCH] CVE-2020-14383: s4/dns: Ensure variable initialization with 
++ NULL. do not crash when additional data not found
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
 +
-+s3: smbd: Ensure change notifies can't get set unless the
-+ directory handle is open for SEC_DIR_LIST.
++Found by Francis Brosnan BlÃ¡zquez <francis@aspl.es>.
++Based on patches from Francis Brosnan BlÃ¡zquez <francis@aspl.es>
++and Jeremy Allison <jra@samba.org>
 +
-+CVE-2020-14318
++BUG: https://bugzilla.samba.org/show_bug.cgi?id=14472
++BUG: https://bugzilla.samba.org/show_bug.cgi?id=12795
 +
-+BUG: https://bugzilla.samba.org/show_bug.cgi?id=14434
++Signed-off-by: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
++Reviewed-by: Jeremy Allison <jra@samba.org>
 +
-+Signed-off-by: Jeremy Allison <jra@samba.org>
++Autobuild-User(master): Douglas Bagnall <dbagnall@samba.org>
++Autobuild-Date(master): Mon Aug 24 00:21:41 UTC 2020 on sn-devel-184
++
++(based on commit df98e7db04c901259dd089e20cd557bdbdeaf379)
++(based on commit 7afe449e7201be92bed8e53cbb37b74af720ef4e
 +
 +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 +---
-+ source3/smbd/notify.c         |  8 ++++
-+ source4/torture/smb2/notify.c | 82 ++++++++++++++++++++++++++++++++++-
-+ 2 files changed, 89 insertions(+), 1 deletion(-)
++ .../rpc_server/dnsserver/dcerpc_dnsserver.c   | 31 ++++++++++---------
++ 1 file changed, 17 insertions(+), 14 deletions(-)
 +
-+diff --git a/source3/smbd/notify.c b/source3/smbd/notify.c
-+index 44c0b09..d23c03b 100644
-+--- a/source3/smbd/notify.c
-++++ b/source3/smbd/notify.c
-+@@ -283,6 +283,14 @@ NTSTATUS change_notify_create(struct files_struct *fsp, uint32_t filter,
-+ 	char fullpath[len+1];
-+ 	NTSTATUS status = NT_STATUS_NOT_IMPLEMENTED;
++diff --git a/source4/rpc_server/dnsserver/dcerpc_dnsserver.c b/source4/rpc_server/dnsserver/dcerpc_dnsserver.c
++index 910de9a1..618c7096 100644
++--- a/source4/rpc_server/dnsserver/dcerpc_dnsserver.c
+++++ b/source4/rpc_server/dnsserver/dcerpc_dnsserver.c
++@@ -1754,15 +1754,17 @@ static WERROR dnsserver_enumerate_records(struct dnsserver_state *dsstate,
++ 	TALLOC_CTX *tmp_ctx;
++ 	char *name;
++ 	const char * const attrs[] = { "name", "dnsRecord", NULL };
++-	struct ldb_result *res;
++-	struct DNS_RPC_RECORDS_ARRAY *recs;
+++	struct ldb_result *res = NULL;
+++	struct DNS_RPC_RECORDS_ARRAY *recs = NULL;
++ 	char **add_names = NULL;
++-	char *rname;
+++	char *rname = NULL;
++ 	const char *preference_name = NULL;
++ 	int add_count = 0;
++ 	int i, ret, len;
++ 	WERROR status;
++-	struct dns_tree *tree, *base, *node;
+++	struct dns_tree *tree = NULL;
+++	struct dns_tree *base = NULL;
+++	struct dns_tree *node = NULL;
 + 
-++	/*
-++	 * Setting a changenotify needs READ/LIST access
-++	 * on the directory handle.
-++	 */
-++	if (!(fsp->access_mask & SEC_DIR_LIST)) {
-++		return NT_STATUS_ACCESS_DENIED;
-++	}
-++
-+ 	if (fsp->notify != NULL) {
-+ 		DEBUG(1, ("change_notify_create: fsp->notify != NULL, "
-+ 			  "fname = %s\n", fsp->fsp_name->base_name));
-+diff --git a/source4/torture/smb2/notify.c b/source4/torture/smb2/notify.c
-+index ebb4f8a..a5c9b94 100644
-+--- a/source4/torture/smb2/notify.c
-++++ b/source4/torture/smb2/notify.c
-+@@ -2569,6 +2569,83 @@ done:
-+ 	return ok;
-+ }
++ 	tmp_ctx = talloc_new(mem_ctx);
++ 	W_ERROR_HAVE_NO_MEMORY(tmp_ctx);
++@@ -1845,15 +1847,15 @@ static WERROR dnsserver_enumerate_records(struct dnsserver_state *dsstate,
++ 		}
++ 	}
 + 
-++/*
-++  Test asking for a change notify on a handle without permissions.
-++*/
-++
-++#define BASEDIR_HPERM BASEDIR "_HPERM"
-++
-++static bool torture_smb2_notify_handle_permissions(
-++		struct torture_context *torture,
-++		struct smb2_tree *tree)
-++{
-++	bool ret = true;
-++	NTSTATUS status;
-++	union smb_notify notify;
-++	union smb_open io;
-++	struct smb2_handle h1 = {{0}};
-++	struct smb2_request *req;
-++
-++	smb2_deltree(tree, BASEDIR_HPERM);
-++	smb2_util_rmdir(tree, BASEDIR_HPERM);
-++
-++	torture_comment(torture,
-++		"TESTING CHANGE NOTIFY "
-++		"ON A HANDLE WITHOUT PERMISSIONS\n");
-++
-++	/*
-++	  get a handle on the directory
-++	*/
-++	ZERO_STRUCT(io.smb2);
-++	io.generic.level = RAW_OPEN_SMB2;
-++	io.smb2.in.create_flags = 0;
-++	io.smb2.in.desired_access = SEC_FILE_READ_ATTRIBUTE;
-++	io.smb2.in.create_options = NTCREATEX_OPTIONS_DIRECTORY;
-++	io.smb2.in.file_attributes = FILE_ATTRIBUTE_NORMAL;
-++	io.smb2.in.share_access = NTCREATEX_SHARE_ACCESS_READ |
-++				NTCREATEX_SHARE_ACCESS_WRITE;
-++	io.smb2.in.alloc_size = 0;
-++	io.smb2.in.create_disposition = NTCREATEX_DISP_CREATE;
-++	io.smb2.in.impersonation_level = SMB2_IMPERSONATION_ANONYMOUS;
-++	io.smb2.in.security_flags = 0;
-++	io.smb2.in.fname = BASEDIR_HPERM;
-++
-++	status = smb2_create(tree, torture, &io.smb2);
-++	CHECK_STATUS(status, NT_STATUS_OK);
-++	h1 = io.smb2.out.file.handle;
-++
-++	/* ask for a change notify,
-++	   on file or directory name changes */
-++	ZERO_STRUCT(notify.smb2);
-++	notify.smb2.level = RAW_NOTIFY_SMB2;
-++	notify.smb2.in.buffer_size = 1000;
-++	notify.smb2.in.completion_filter = FILE_NOTIFY_CHANGE_NAME;
-++	notify.smb2.in.file.handle = h1;
-++	notify.smb2.in.recursive = true;
-++
-++	req = smb2_notify_send(tree, &notify.smb2);
-++	torture_assert_goto(torture,
-++			req != NULL,
-++			ret,
-++			done,
-++			"smb2_notify_send failed\n");
-++
-++	/*
-++	 * Cancel it, we don't really want to wait.
-++	 */
-++	smb2_cancel(req);
-++	status = smb2_notify_recv(req, torture, &notify.smb2);
-++	/* Handle h1 doesn't have permissions for ChangeNotify. */
-++	CHECK_STATUS(status, NT_STATUS_ACCESS_DENIED);
-++
-++done:
-++	if (!smb2_util_handle_empty(h1)) {
-++		smb2_util_close(tree, h1);
-++	}
-++	smb2_deltree(tree, BASEDIR_HPERM);
-++	return ret;
-++}
-++
-+ /*
-+    basic testing of SMB2 change notify
-+ */
-+@@ -2602,7 +2679,10 @@ struct torture_suite *torture_smb2_notify_init(TALLOC_CTX *ctx)
-+ 				     torture_smb2_notify_rmdir3);
-+ 	torture_suite_add_2smb2_test(suite, "rmdir4",
-+ 				     torture_smb2_notify_rmdir4);
++-	talloc_free(res);
++-	talloc_free(tree);
++-	talloc_free(name);
+++	TALLOC_FREE(res);
+++	TALLOC_FREE(tree);
+++	TALLOC_FREE(name);
++ 
++ 	/* Add any additional records */
++ 	if (select_flag & DNS_RPC_VIEW_ADDITIONAL_DATA) {
++ 		for (i=0; i<add_count; i++) {
++-			struct dnsserver_zone *z2;
 +-
-++	torture_suite_add_1smb2_test(suite,
-++				    "handle-permissions",
-++				    torture_smb2_notify_handle_permissions);
-++ 
-+ 	suite->description = talloc_strdup(suite, "SMB2-NOTIFY tests");
+++			struct dnsserver_zone *z2 = NULL;
+++			struct ldb_message *msg = NULL;
++ 			/* Search all the available zones for additional name */
++ 			for (z2 = dsstate->zones; z2; z2 = z2->next) {
++ 				char *encoded_name;
++@@ -1865,14 +1867,15 @@ static WERROR dnsserver_enumerate_records(struct dnsserver_state *dsstate,
++ 						LDB_SCOPE_ONELEVEL, attrs,
++ 						"(&(objectClass=dnsNode)(name=%s)(!(dNSTombstoned=TRUE)))",
++ 						encoded_name);
++-				talloc_free(name);
+++				TALLOC_FREE(name);
++ 				if (ret != LDB_SUCCESS) {
++ 					continue;
++ 				}
++ 				if (res->count == 1) {
+++					msg = res->msgs[0];
++ 					break;
++ 				} else {
++-					talloc_free(res);
+++					TALLOC_FREE(res);
++ 					continue;
++ 				}
++ 			}
++@@ -1885,10 +1888,10 @@ static WERROR dnsserver_enumerate_records(struct dnsserver_state *dsstate,
++ 			}
++ 			status = dns_fill_records_array(tmp_ctx, NULL, DNS_TYPE_A,
++ 							select_flag, rname,
++-							res->msgs[0], 0, recs,
+++							msg, 0, recs,
++ 							NULL, NULL);
++-			talloc_free(rname);
++-			talloc_free(res);
+++			TALLOC_FREE(rname);
+++			TALLOC_FREE(res);
++ 		}
++ 	}
 + 
-+ 	return suite;
 +-- 
 +2.25.1
 +
 diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.18.bb b/meta-networking/recipes-connectivity/samba/samba_4.10.18.bb
-index b5085c913b..923b2ddf16 100644
+index 923b2ddf16..1a982368ec 100644
 --- a/meta-networking/recipes-connectivity/samba/samba_4.10.18.bb
 +++ b/meta-networking/recipes-connectivity/samba/samba_4.10.18.bb
-@@ -28,6 +28,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
-            file://0002-util_sec.c-Move-__thread-variable-to-global-scope.patch \
+@@ -29,6 +29,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
             file://0001-Add-options-to-configure-the-use-of-libbsd.patch \
             file://0001-nsswitch-nsstest.c-Avoid-nss-function-conflicts-with.patch \
-+           file://CVE-2020-14318.patch \
+            file://CVE-2020-14318.patch \
++           file://CVE-2020-14383.patch \
             "
  SRC_URI_append_libc-musl = " \
             file://samba-pam.patch \
