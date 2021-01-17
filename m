@@ -1,88 +1,91 @@
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
- by mx.groups.io with SMTP id smtpd.web09.21063.1610905028146722884
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web09.21064.1610905029254621282
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Jan 2021 09:37:08 -0800
+ Sun, 17 Jan 2021 09:37:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Nre9YGWN;
- spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f175.google.com with SMTP id i7so9476775pgc.8
-        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 09:37:08 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=YyLoDb3I;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id c12so8801162pfo.10
+        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 09:37:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=Os3nG5Q/8M0/Ee1WBlPbPzKU+zkNpRxV6R/0Jo8IZcc=;
-        b=Nre9YGWNQGG08sy54khWUZOZVHRfP+wzxC4brcDA1zGaWtadEISH1OOiSHEJKEIxUf
-         d3Tx1QAwpcryO2ei3+m2Z9ZRtF6vTjofqzoINW8MUCPxKq1zoBPhtMEzpc79PtzX7XuW
-         9bpZaocCD/RSvr1LCQy7N9g++NlmxZiEdekAiaBXUgE3X+rO2pk1CVlITk0dm3LS3s8q
-         sVwxhTibsq2AICrjBupWJkPIug5myokLyvy3SOZyObLlE86n74KgJQhBLeenMV+ziKjo
-         Sg27gidFC4oafHT4vo3QdTVzVmorlBjtvZ6DTHZ3/kSW1V9LMchPj8LxJXDbgZp/bFd3
-         t7vw==
+        bh=4As/Uqivo8nQ1z2LCyLw1yoTAT10ifZFGrdXeEssygw=;
+        b=YyLoDb3IvOSi3fWrNUV4m3fjxgBVqhXsqTZ8vJS+pkp8iZNJ72JLIGMH8Epe2XnLZG
+         Cg8/O7S8K39L7WUSO7HMYpE3WhYSUi+bec3tYgT/ZLKeiJG5gUfKxrKQMUI/NMaZTFHp
+         N1LYZqAg447XNMpJy4EQ+6JZwLOUodSXG8s8M2UUioL+QyPTgAeR0teS1XBhm2M8ZpVQ
+         oFTcSLjzoKuGFAShDkIOj29MT/Dc7CgNpA0ZfYKKfO6uGIxsGb2LjB8O/EnFE/3GQ7TR
+         gT+9yR2h14ex2i4yaWk0jJcGPffLyuOhQZPPJDa6D3j/+wsh/3Z5mKiJcFXyDfRrKf2T
+         7lnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=Os3nG5Q/8M0/Ee1WBlPbPzKU+zkNpRxV6R/0Jo8IZcc=;
-        b=tRwMd2zHEszQUwSTec7BFoRDs7xEdt+Wk2PJO9PH9mFAU8KL4K8ZN6gJAWs/9mqVCK
-         M7u//FRO2yaWGErIoysmEb9KyKQ9b4W6qfVkAqHo/OYbu/n66h2Ax/lS+KtX7G7NxQ/G
-         KspQWHKNdy3xfPVrEn4bBvZy/260zCabyX4DFz6EQt5xFP1Fi01FwdbhNtdWuu9cR7yj
-         3ub+0Gtndc/xe2mCYCQUFJq8NQ0DwvwoSguFEkggPju9veBXT8YDVXpvuMjfwSZP3ffl
-         +9BybUAuApfEXrJaIBDktFIRgnVse0b+iOlUCkSLlg9/in4LLWhp707wNW5oQKi2+s4x
-         aK/A==
-X-Gm-Message-State: AOAM533aeFARLyoPVMRDtk0O6NIlAw769PWUF/e7S8DMSVQy5r6RPkYU
-	834Kz6MxmPZBQmp2YUqAKkaVYyKDcfTmdg==
-X-Google-Smtp-Source: ABdhPJx0KH7fauRPyNcfNrdiWNB/6YAITLNqHZrvyooHQPpK+u9Gspuo3bQ4dpIMeuP/NvoX5sPgHw==
-X-Received: by 2002:a63:d141:: with SMTP id c1mr22390522pgj.75.1610905027400;
-        Sun, 17 Jan 2021 09:37:07 -0800 (PST)
+        bh=4As/Uqivo8nQ1z2LCyLw1yoTAT10ifZFGrdXeEssygw=;
+        b=X1FERQcc2MLS2BxlIXcNPZYEytIhXp19jRJRBc6upxDec70aCVsdtLnN1K7o3KYx5e
+         TpLA1hc72bRZ8jtDC4+cIIsButBDdW1SV3on91tCrcXXr2+1HQx/Sw4LblTaccYK1PmD
+         V6dG2AK3kb2r9EArmrYq3oJi325guoo1RK3tJ+skEV2qjVhGtesuTygYYEy9OuddtUeJ
+         sZQvay5yj4f0sZQ/6870SAX47kbvhCfkcq1899lHz/4hY26XZWdCVjN7j5/K5L0nw4yY
+         bWLG8Bt7QcdTAW5gu4ryAc7WK/eapLlYSqILfLFLhxz+hxRKlOxb4PocRNphGukveJvg
+         rxYQ==
+X-Gm-Message-State: AOAM531CjJPm72Hi04QNaX+EDyeaxSQRuEPzKdCBAR0+oOFGjjAe4HG5
+	tvKtHqW0LJ9+2E1qy/3/oagjhpSP3eFZ3Q==
+X-Google-Smtp-Source: ABdhPJzlFpsJ+C7Mtj41poz95d12i1rQA7/HzOuarpx+tdGpft/9Nz5iLWJhy45yw961F1WgjSqi5A==
+X-Received: by 2002:a63:66c3:: with SMTP id a186mr22480737pgc.198.1610905028678;
+        Sun, 17 Jan 2021 09:37:08 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:ed67:500f:ea8f:e947])
-        by smtp.gmail.com with ESMTPSA id t4sm13661338pfe.212.2021.01.17.09.37.06
+        by smtp.gmail.com with ESMTPSA id t4sm13661338pfe.212.2021.01.17.09.37.07
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 Jan 2021 09:37:07 -0800 (PST)
+        Sun, 17 Jan 2021 09:37:08 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 26/31] nodejs: 12.19.1 -> 12.20.1
-Date: Sun, 17 Jan 2021 09:36:31 -0800
-Message-Id: <ac6bc96e7da6b3c9d5b9c9272b487a926fbb462e.1610904793.git.akuster808@gmail.com>
+Subject: [gatesgarth 27/31] libsdl2-mixer: Fix ogg/vorbis support in libsdl2-mixer
+Date: Sun, 17 Jan 2021 09:36:32 -0800
+Message-Id: <af0c3a62d6faba0f0a9d8cc09e8b72845575346b.1610904793.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1610904792.git.akuster808@gmail.com>
 References: <cover.1610904792.git.akuster808@gmail.com>
 
-From: Sean Nyekjaer <sean@geanix.com>
+From: jabdoa2 <jabdoa2@users.noreply.github.com>
 
-Signed-off-by: Sean Nyekjaer <sean@geanix.com>
+Remove --enable-music-ogg-tremor  as it broke vorbis support:
+
+checking tremor/ivorbisfile.h usability... no
+checking tremor/ivorbisfile.h presence... no
+checking for tremor/ivorbisfile.h... no
+checking for ov_open_callbacks in -lvorbisidec... no
+configure: WARNING: *** Unable to find Ogg Vorbis Tremor library (http://www.xiph.org/)
+configure: WARNING: Ogg Vorbis support disabled
+
+With this change:
+
+checking vorbis/vorbisfile.h usability... yes
+checking vorbis/vorbisfile.h presence... yes
+checking for vorbis/vorbisfile.h... yes
+checking for ov_open_callbacks in -lvorbisfile... yes
+-- dynamic libvorbisfile -> libvorbisfile.so.3
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit cde1019804c2f7b67bf89d178eec9f4efafea414)
+(cherry picked from commit 074c7d9a1ebb86674f02d8a5545e1ed54f6d87fe)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../nodejs/{nodejs_12.19.1.bb => nodejs_12.20.1.bb}           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_12.19.1.bb => nodejs_12.20.1.bb} (97%)
+ meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_12.19.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_12.20.1.bb
-similarity index 97%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_12.19.1.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_12.20.1.bb
-index 8021fedf44..0673a3202d 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_12.19.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_12.20.1.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
- HOMEPAGE = "http://nodejs.org"
- LICENSE = "MIT & BSD & Artistic-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=30e27bd6830002d9415e4a5da7901f03"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=8c66ff8861d9f96076a7cb61e3d75f54"
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb
+index aa246f9995..77e50d3841 100644
+--- a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb
++++ b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb
+@@ -14,7 +14,7 @@ S = "${WORKDIR}/SDL2_mixer-${PV}"
+ inherit autotools-brokensep pkgconfig
  
- DEPENDS = "openssl"
- DEPENDS_append_class-target = " nodejs-native"
-@@ -26,7 +26,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
- SRC_URI_append_class-target = " \
-            file://0002-Using-native-binaries.patch \
-            "
--SRC_URI[sha256sum] = "74077e0cc3db000a6f3cc685b220e609807b61adc8e7d8243e8511d478d1b17d"
-+SRC_URI[sha256sum] = "e00eee325d705b2bfa9929b7d061eb2315402d7e8548945eac9870bf84321853"
+ EXTRA_AUTORECONF += "--include=acinclude"
+-EXTRA_OECONF = "--disable-music-mp3 --enable-music-ogg --enable-music-ogg-tremor LIBS=-L${STAGING_LIBDIR}"
++EXTRA_OECONF = "--disable-music-mp3 --enable-music-ogg LIBS=-L${STAGING_LIBDIR}"
  
- S = "${WORKDIR}/node-v${PV}"
+ PACKAGECONFIG[mad] = "--enable-music-mp3-mad-gpl,--disable-music-mp3-mad-gpl,libmad"
  
 -- 
 2.17.1
