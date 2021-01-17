@@ -1,142 +1,96 @@
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web11.21235.1610905610339407482
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
+ by mx.groups.io with SMTP id smtpd.web09.21196.1610905611711064036
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Jan 2021 09:46:50 -0800
+ Sun, 17 Jan 2021 09:46:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=qxbEYddV;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id o20so412058pfu.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 09:46:50 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=kj/hp9BE;
+ spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f175.google.com with SMTP id c12so8810341pfo.10
+        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 09:46:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=3tLtyv3iCWeF2UWcCJfKHEc2oW/zQ71Tw4IZwHnENi8=;
-        b=qxbEYddVX+x9MdnPApjnaDuT3BCN5kkHzLq5PBov5ppuYagjSDwjwTdqS14Lj3LINb
-         N1h8xuW08NUAYFGcmI24AxfKl75XHbUhDJ/OY2vFCE3DcLkqwDhVZZkciTMLQNsOPEee
-         V8jNQRw6/i+QZGFJ42SxO4Z6LyNR8dDRuKICyaHC+TNRqNhI8jMJ4gXOGInlzQFssaD5
-         f+/Nbmo7vkR1RVfvZeycOmoCMs3QjrsJYuuGpcdiHkj1pZIoBrgCwhWyusW/vlg5tNnh
-         iRmrNjIgLo7Xx8UBLxrmc6iliAN+TwXBo0YVp69M4aUkweIzLZkmHouk2hJA4SuFjD0J
-         nG/g==
+        bh=PCPCVgwCVZ9hlEqVb+t/dyS6efs2DzTNpmIpUhmuEIs=;
+        b=kj/hp9BE4/ieBpjtstS30Jj4ntk1YmtjwEBM1X7EVhj/wV1wlegnB/QrOgnoJJPp8c
+         KZPFgJT6Fcb3RfG6irw00VgzfnQmkJ9w1qBLHlOa290LUaFwldIFhlzb4Kd74O6ACitm
+         8bob3i1AS2nj5q0P+EyloKv8BJtlMheJ6AeYcDRzuVkKd9f34calQAIy5S5N5GGaCuzP
+         z15oFtKs4hCOiFAy4ZRhBKokXKcrep9+zYqV+i9wTypovTpiYVsyBGu5frhple0wGbM5
+         aGCskhqHmMC2QTjdqPmUGU/5XmhT03BqdGF93MH3lr4uwuWTuc0Lo8dmfV9pZ8AquAXF
+         +4zQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=3tLtyv3iCWeF2UWcCJfKHEc2oW/zQ71Tw4IZwHnENi8=;
-        b=iCqbstV0anxKRs417asuh2KR++Nlmz+rCx/ZWmXbnhAh9NPJU3scoIW8DyJpjBjQRa
-         aWDR0kbYmM80IJMZfaHXKh/IGerbT+35L1GWSrkFOgY69Iq2bSkpz4Q2eVdqdWb5Zt3I
-         1Zv/qasS6j57FYhuHYXd315K78EHfsag8hyqKD7zlhPjX6q9db/y1LixiNop27yVmvLg
-         NrNm62esBTG258QyzPDUtUOkRr9NOiQaIV30aS9rBTcUzKOpMGeNHJd5bwzNsD7ZuhMJ
-         EQxcXWfFcinWHZIFiYzr8FPHZhsnfv9OkPZmliTa+D3B+9j4IqWVOWOdYOtKy8nMlD4a
-         kyRA==
-X-Gm-Message-State: AOAM533qMXdjas4obwxbZrIjirgQKfxwJl2ji5hZ1/bekdkjX5AfVDH3
-	4FIMPmUh9fJMvLU7b3m1PstN5d41qmz1vg==
-X-Google-Smtp-Source: ABdhPJwn4sEFG6NqBrcXxaHwB+6i+gBj7SIf69QYPlJUtjXqEqauibyBVfnuhWpGdZCktVPP2Z0cpg==
-X-Received: by 2002:a63:2fc5:: with SMTP id v188mr22186398pgv.243.1610905609748;
-        Sun, 17 Jan 2021 09:46:49 -0800 (PST)
+        bh=PCPCVgwCVZ9hlEqVb+t/dyS6efs2DzTNpmIpUhmuEIs=;
+        b=mHJQQ49tEZRXy/pUSKDgRgCmUFqFcEElNGi4txU3SOt9H4OmOwQHPbWcKEiW8Z35HU
+         2+jTUN2UNNjDvSiTe2JtKWD/gXVn2MlveHLf4y622t/Vpg7bC2gB2SYRGxGqG2KwQRFM
+         N4cQ1FCWV6W3mg44r6biw7Hcp7YEMqZ9J+ybuzm/hf7rXEAiHM2H6MxdYKMd5iPEV72j
+         dJ+Rf+eASbCwNp+8tX0WfKUeyWA57H+8wc1edjASSt64OfP2BOu/DUNo9E4otfWdtPBM
+         fh/2HFOetuiP5eGOHigtyrIq1QfouAzwf/A22WA0NV8YH63GuWHciBzy0X5hqKVbIR6G
+         jn+A==
+X-Gm-Message-State: AOAM532KzEhhtd+j9Zm4u8xU/tzHfiifjl4jKA+57Hj0Jzb5P7DIkp3b
+	TcnZzoNoaXxLjgPD88B105XQ+JWFDV861w==
+X-Google-Smtp-Source: ABdhPJzhhXOSPOzIK30sYXtieEdvcsJkDo7s5s4320J6R/BgchtRZzXVLfIiqgEjCUbXl2WXZM6dsA==
+X-Received: by 2002:a62:1558:0:b029:1b7:fbf9:25f0 with SMTP id 85-20020a6215580000b02901b7fbf925f0mr178053pfv.79.1610905611125;
+        Sun, 17 Jan 2021 09:46:51 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:ed67:500f:ea8f:e947])
         by smtp.gmail.com with ESMTPSA id bk18sm10427870pjb.41.2021.01.17.09.46.49
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 Jan 2021 09:46:49 -0800 (PST)
+        Sun, 17 Jan 2021 09:46:50 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 18/28] nss: Security fix CVE-2020-12401
-Date: Sun, 17 Jan 2021 09:46:16 -0800
-Message-Id: <7b55e1ec32ae91faacfa855d10f871e2ccab187c.1610905441.git.akuster808@gmail.com>
+Subject: [dunfell 19/28] wireshark: Several securtiy fixes
+Date: Sun, 17 Jan 2021 09:46:17 -0800
+Message-Id: <8f632dfbf9b8e6f51a4e83f84669003deb453cea.1610905441.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1610905441.git.akuster808@gmail.com>
 References: <cover.1610905441.git.akuster808@gmail.com>
 
 From: Armin Kuster <akuster@mvista.com>
 
-Source: Mozilla.org
-MR: 106876
+Source: Wireshark.org
+MR: 106181, 106696, 107655, 107673, 107682
 Type: Security Fix
-Disposition: Backport from https://hg.mozilla.org/projects/nss/raw-rev/aeb2e583ee957a699d949009c7ba37af76515c20
-ChangeID: a61d4926f8ab5afc54c23e58cd86b4a7609c9708
+Disposition: Backport from wireshark.org
+ChangeID: 57df6ac3b11aabd96e6aec728501ce7988bc176a
 Description:
 
-Fixes CVE-2020-12401
+Bugfix only update including these cves:
+3.2.8
+CVE-2020-26575
+CVE-2020-28030
+
+3.2.9
+CVE-2020-26418
+CVE-2020-26421
+CVE-2020-26420
 
 Signed-off-by: Armin Kuster <akuster@mvista.com>
+(cherry picked from commit a10ea62a1c9c7b0c4810f2e4ef0dcc6f75b0ca6b)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../nss/nss/CVE-2020-12401.patch              | 52 +++++++++++++++++++
- meta-oe/recipes-support/nss/nss_3.51.1.bb     |  1 +
- 2 files changed, 53 insertions(+)
- create mode 100644 meta-oe/recipes-support/nss/nss/CVE-2020-12401.patch
+ .../wireshark/{wireshark_3.2.7.bb => wireshark_3.2.10.bb}       | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_3.2.7.bb => wireshark_3.2.10.bb} (96%)
 
-diff --git a/meta-oe/recipes-support/nss/nss/CVE-2020-12401.patch b/meta-oe/recipes-support/nss/nss/CVE-2020-12401.patch
-new file mode 100644
-index 0000000000..e67926fe50
---- /dev/null
-+++ b/meta-oe/recipes-support/nss/nss/CVE-2020-12401.patch
-@@ -0,0 +1,52 @@
-+# HG changeset patch
-+# User Billy Brumley <bbrumley@gmail.com>
-+# Date 1595283525 0
-+# Node ID aeb2e583ee957a699d949009c7ba37af76515c20
-+# Parent  ca207655b4b7cb1d3a5e438c1fb9b90d45596da6
-+Bug 1631573: Remove unnecessary scalar padding in ec.c r=kjacobs,bbeurdouche
-+
-+Subsequent calls to ECPoints_mul and ECPoint_mul remove this padding.
-+
-+Timing attack countermeasures are now applied more generally deeper in
-+the call stack.
-+
-+Differential Revision: https://phabricator.services.mozilla.com/D82011
-+
-+
-+Upstream-Status: Backport
-+
-+CVE: CVE-2020-1240
-+Signed-off-by: Armin Kuster <akuster@mvista.com>
-+
-+Index: nss-3.51.1/nss/lib/freebl/ec.c
-+===================================================================
-+--- nss-3.51.1.orig/nss/lib/freebl/ec.c
-++++ nss-3.51.1/nss/lib/freebl/ec.c
-+@@ -724,27 +724,6 @@ ECDSA_SignDigestWithSeed(ECPrivateKey *k
-+     }
-+ 
-+     /*
-+-    ** We do not want timing information to leak the length of k,
-+-    ** so we compute k*G using an equivalent scalar of fixed
-+-    ** bit-length.
-+-    ** Fix based on patch for ECDSA timing attack in the paper
-+-    ** by Billy Bob Brumley and Nicola Tuveri at
-+-    **   http://eprint.iacr.org/2011/232
-+-    **
-+-    ** How do we convert k to a value of a fixed bit-length?
-+-    ** k starts off as an integer satisfying 0 <= k < n.  Hence,
-+-    ** n <= k+n < 2n, which means k+n has either the same number
-+-    ** of bits as n or one more bit than n.  If k+n has the same
-+-    ** number of bits as n, the second addition ensures that the
-+-    ** final value has exactly one more bit than n.  Thus, we
-+-    ** always end up with a value that exactly one more bit than n.
-+-    */
-+-    CHECK_MPI_OK(mp_add(&k, &n, &k));
-+-    if (mpl_significant_bits(&k) <= mpl_significant_bits(&n)) {
-+-        CHECK_MPI_OK(mp_add(&k, &n, &k));
-+-    }
-+-
-+-    /*
-+     ** ANSI X9.62, Section 5.3.2, Step 2
-+     **
-+     ** Compute kG
-diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-index c00bd34cb2..3e3c3a3fdf 100644
---- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-@@ -35,6 +35,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
-            file://riscv.patch \
-            file://0001-Enable-uint128-on-mips64.patch \
-            file://0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch \
-+           file://CVE-2020-12401.patch \
-            "
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.2.7.bb b/meta-networking/recipes-support/wireshark/wireshark_3.2.10.bb
+similarity index 96%
+rename from meta-networking/recipes-support/wireshark/wireshark_3.2.7.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_3.2.10.bb
+index 65f925ce1f..d284824149 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.2.7.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.2.10.bb
+@@ -12,7 +12,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
  
- SRC_URI[md5sum] = "6acaf1ddff69306ae30a908881c6f233"
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+ 
+-SRC_URI[sha256sum] = "be832fb86d9c455c5be8b225a755cdc77cb0e92356bdfc1fe4b000d93f7d70da"
++SRC_URI[sha256sum] = "1e9e239f2449f240a7910ed598084ccaf8ea308b2b46b196c5adbec59612226c"
+ 
+ PE = "1"
+ 
 -- 
 2.17.1
 
