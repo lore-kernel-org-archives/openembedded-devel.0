@@ -1,84 +1,94 @@
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.web09.21061.1610905026186633283
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
+ by mx.groups.io with SMTP id smtpd.web10.21176.1610905027104393599
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Jan 2021 09:37:06 -0800
+ Sun, 17 Jan 2021 09:37:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=XU1JNrzw;
- spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f171.google.com with SMTP id h10so8799624pfo.9
-        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 09:37:06 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=PRfzmH/d;
+ spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f171.google.com with SMTP id n25so9496979pgb.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 09:37:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=KSmXD/vYLXB5RZPQEP2DfUhfwd1r9BWAHRjWDsB9aIs=;
-        b=XU1JNrzwv7OZ9LOHiz9rbf7tkzCJ2U6/8P3jJ/UQZOJfcTDToRAMKBRGtdsb3xDoqL
-         qNH4EBYCQPDHXEQ+0DkczGNvqF8/8WvlOH0byTT0rnCawsJlBUql1B1FKHnuTVBKfD5s
-         2J0waHeoY9LL8sFvk5enzyTxnJxzDqQVe9zg1DQWOoaI3v99FUKTLXLgv8PUFYTTM3qj
-         MdEWyk4Gmthjbz1IEaDExn1bKTfhpnvznZg88Dk+DM8aFkqhPemY5k7O4VqpnJaluHov
-         sCt6T6cue0abzY1rfaVlms6pilB3iil7SJiSz1FEZIxBJV5BNxTHsgGOZzf1T2YTwKFu
-         DeKw==
+        bh=wALYLFYvqP3KlW75uSv2orC/HaDtSFkS9N2k08alarY=;
+        b=PRfzmH/dbeh+GUsrJkOAZZuy7dj/Krpe73kn2+6jIWGvKHM/8oGuKCD6Ew/3SJZ1Ha
+         wSp+0hR2U0E/fypPiOO3mFmdcRC6rHK1FSbUebK2BdayhRW9S5K9FG6J41hA25k5VuFS
+         PIxrGDgmxLBjJ9/T/HyiGQDH2gI2GbTj+7UPyQa5heubCh6RARCycDgGlsyJTWiQtY3j
+         OdkEJ9Q9GLQLEM1MjFZhIUwaqo9xtWHzHeXl+iVWFQ2hISU6IGtAzNtGx6yDaniYIj6L
+         Y0OfdHydSuYsQ2+z9CI9t3mJaeCIWipiq8qPrmLPLj0QTiHhJawbiJ9RkOKtgOvhNRLs
+         MR7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=KSmXD/vYLXB5RZPQEP2DfUhfwd1r9BWAHRjWDsB9aIs=;
-        b=SP0dRMOaDWteUPJG830nbpiIus3jspv630pz2PBK2h7IWo0c/p0BkaQWlw5dIn+zLR
-         QcsYWTWKcsxCkmtimhZTmABnss+BSwY1iOZi5evsZDLPlRcVXvw/QkeIVaY3pxWyoPqu
-         iqoHtA3R5WVOodf5hK0a7K9+JC7SSwQP1e+bNJin7osrG89VTTpKr9igojr5Z6RQWfw3
-         iZOutUKeqnhw1ms5AgQ6yPUZhNollhQPSqaqHnJPVci1byBSEcf0xNQMD7EIzDEzDYsf
-         +tHcDv1U81CheXgRSi1x7Hrdpmk43Nl4qGiu7/tZXhyJjU6tM8fvlVD+1rNKaIHVet0J
-         2kkA==
-X-Gm-Message-State: AOAM533StqveV2lVbz0X8mvEWqoEWWzRtHitYfnaBKPN7N04lL8+M1pO
-	YGLzZkjLo9fDOlnweYdGIBEPThsIBJ30PA==
-X-Google-Smtp-Source: ABdhPJwkT+4DeSiuJdtT+47q5H5a4S3AeGLkAJLZkx9gq/wylcKJ5d5TVbOiKo3LmfNPIjDkob0ewQ==
-X-Received: by 2002:a63:5c61:: with SMTP id n33mr4737981pgm.337.1610905025684;
-        Sun, 17 Jan 2021 09:37:05 -0800 (PST)
+        bh=wALYLFYvqP3KlW75uSv2orC/HaDtSFkS9N2k08alarY=;
+        b=Hx68kAqGC0YxMjYiAmPNbiJppCawTUiSKjjh+kjyLeNpe26q0i6w35Nzh0dp2B2X5y
+         DyPB6+XwWAxJOxLZEFlFgOnVDIm1h5V/mXN5O3Z5qKnakK7Q0wUncVltOnHojjPhOFaR
+         mFSwAxwXx6fcJ8YBur6PVIda/5lARoycfQegyg99x8las5EiHOGx7Cj+KFNODi63UeAy
+         Qr9WnBU9qCms3EyAvUB63W0JPx4lzyKAWwnQaj3FouiUJPhNhawqVHd0ymNRxiwMhSVj
+         VDYFw8+P4ZNxjqgCpYB65S8By+zv+yX/tPYQaPA8qlfIpiopdRg2CbN1WnkfsRFXEqk1
+         1CdA==
+X-Gm-Message-State: AOAM531bVyecBtHUVsKHlmVEeZPRlXPDdb/K5O3PyFRMjLw+csf969eb
+	qkDxn4TkxyAajTcOAk/geGGuKb5EMSTVFA==
+X-Google-Smtp-Source: ABdhPJxuQGJz0ROyCEikPR5jVh0fe0vYz5SH+gVBNuk1EvsgVLDg9FGik6ZxDi3jwSoXsLFeJJJBPw==
+X-Received: by 2002:a63:545f:: with SMTP id e31mr22684649pgm.327.1610905026505;
+        Sun, 17 Jan 2021 09:37:06 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:ed67:500f:ea8f:e947])
-        by smtp.gmail.com with ESMTPSA id t4sm13661338pfe.212.2021.01.17.09.37.04
+        by smtp.gmail.com with ESMTPSA id t4sm13661338pfe.212.2021.01.17.09.37.05
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 Jan 2021 09:37:04 -0800 (PST)
+        Sun, 17 Jan 2021 09:37:06 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 24/31] lmbench: Fix setting LDLIBS failure
-Date: Sun, 17 Jan 2021 09:36:29 -0800
-Message-Id: <a5d1580a4da90379f4ac6afc4826a95c9106320d.1610904793.git.akuster808@gmail.com>
+Subject: [gatesgarth 25/31] wireshark: Several securtiy fixes
+Date: Sun, 17 Jan 2021 09:36:30 -0800
+Message-Id: <a10ea62a1c9c7b0c4810f2e4ef0dcc6f75b0ca6b.1610904793.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1610904792.git.akuster808@gmail.com>
 References: <cover.1610904792.git.akuster808@gmail.com>
 
-From: He Zhe <zhe.he@windriver.com>
+From: Armin Kuster <akuster@mvista.com>
 
-scripts/build is interpreted as an sh script which may not recognize variable
-assignment operator += and thus give the following error and fail to append
-LDLIBS.
+Source: Wireshark.org
+MR: 106181, 106696, 107655, 107673, 107682
+Type: Security Fix
+Disposition: Backport from wireshark.org
+ChangeID: 57df6ac3b11aabd96e6aec728501ce7988bc176a
+Description:
 
-../scripts/build: 21: ../scripts/build: LDLIBS+=-lm: not found
+Bugfix only update including these cves:
+3.2.8
+CVE-2020-26575
+CVE-2020-28030
 
-Use the basic assignment instead.
+3.2.9
+CVE-2020-26418
+CVE-2020-26421
+CVE-2020-26420
 
-Signed-off-by: He Zhe <zhe.he@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit a6a8fc75bad04be0842e22fb137d0e7a2dcb7279)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Armin Kuster <akuster@mvista.com>
 ---
- ...2-build-Adjust-CFLAGS-LDFLAGS-to-append-values-passed-.patch | 2 +-
+ .../wireshark/{wireshark_3.2.7.bb => wireshark_3.2.10.bb}       | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_3.2.7.bb => wireshark_3.2.10.bb} (96%)
 
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0002-build-Adjust-CFLAGS-LDFLAGS-to-append-values-passed-.patch b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0002-build-Adjust-CFLAGS-LDFLAGS-to-append-values-passed-.patch
-index 353d80b3b7..1d5d9c12ab 100644
---- a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0002-build-Adjust-CFLAGS-LDFLAGS-to-append-values-passed-.patch
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0002-build-Adjust-CFLAGS-LDFLAGS-to-append-values-passed-.patch
-@@ -22,7 +22,7 @@ index 34a1371..3786741 100755
-  trap 'rm -f ${BASE}$$.s ${BASE}$$.c ${BASE}$$.o ${BASE}$$; exit 1' 1 2 15
-  
- -LDLIBS=-lm
--+LDLIBS+=-lm
-++LDLIBS="$LDLIBS -lm"
-  
-  # check for HP-UX's ANSI compiler
-  echo "main(int ac, char *av[]) { int i; }" > ${BASE}$$.c
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.2.7.bb b/meta-networking/recipes-support/wireshark/wireshark_3.2.10.bb
+similarity index 96%
+rename from meta-networking/recipes-support/wireshark/wireshark_3.2.7.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_3.2.10.bb
+index 65f925ce1f..d284824149 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.2.7.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.2.10.bb
+@@ -12,7 +12,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
+ 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+ 
+-SRC_URI[sha256sum] = "be832fb86d9c455c5be8b225a755cdc77cb0e92356bdfc1fe4b000d93f7d70da"
++SRC_URI[sha256sum] = "1e9e239f2449f240a7910ed598084ccaf8ea308b2b46b196c5adbec59612226c"
+ 
+ PE = "1"
+ 
 -- 
 2.17.1
 
