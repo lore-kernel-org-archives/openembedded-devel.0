@@ -1,74 +1,81 @@
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.web10.21177.1610905030155893656
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
+ by mx.groups.io with SMTP id smtpd.web10.21178.1610905031329966575
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Jan 2021 09:37:10 -0800
+ Sun, 17 Jan 2021 09:37:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=HbDlDyz4;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id e9so3183010plh.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 09:37:10 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=VVVuOy45;
+ spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f176.google.com with SMTP id i5so9496025pgo.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 09:37:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=uhrUXTSRuKEcmuLBdIrx1yExQLTr5vI7FpiZjnnxya4=;
-        b=HbDlDyz4+f47vRK0Q+48iP+d4Ql7CVl8bUNgWaSJIgwD5Yub58xvbqqMAaN8p5rHlL
-         sjij6zdnrsTcjiaQLdefufBaNN+R+uG1OKD2EQNy6OzUuairhI1H+W1118lraEXjqEK8
-         SKm7Wv2hzAL03/YPQW885gt/7UOysvnl5+ShnOTJoeOy6+AhuZxay1qhYVDEvR7awEL+
-         d6yCMIm9m16PEzNk7CaZ51fyFhBZW97+6vVpQEMmVlZApS6e7aT7lvWnnqolEOa8n0dh
-         F9baXVTBCIrfWFnhPO0lkTs1EIKfRmgy/YrNiQmt3kZUtNg+/0bvCjsXZ1yOW25IXgGS
-         qb7g==
+        bh=yKABuh2oZ9obq+Q38v0sDFT+retKkYypfkVw12bOVIs=;
+        b=VVVuOy45mvvLCeTWCGKbib2TGOvM40KaxwwgC6aZ3fHR61mSykMKEFsrlQlXzCmSTi
+         qDJ8Bym+Us2x3+bfgWHdIfibbr9xStjGfdVEtqq4VznGSIjSYYGd+oPRDypZeqnEWxSx
+         izc9mP0bVll7/C1cTf0Lu5eCkLdWzWLZ9OebbEjeB/oLc+x28uopf3GtWXS3tNIopIO0
+         b1F0KBKkWHLq3D46CKDChUPTL6xghi47Q8wmOdPX6Y2FLJMtrQjZmjMlSXvhStVny4zD
+         n2V9pq0zatUEqvEJHOhPk/L8ub+0a+lcJoYB3FhmVaIKMzEMXWTYyjRFfd0VAZXKbLiU
+         hMyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=uhrUXTSRuKEcmuLBdIrx1yExQLTr5vI7FpiZjnnxya4=;
-        b=pzI9OW1fim1YMEMCZdVzWfJm1ecm2N3opaR/bpIABXnD34xha/dqM1ij3mcJ9TD2nF
-         V4xFLxYJJ7FAfw2Yy83ohMsGTJhy40/Y/YtBO4oVAdPrzhNrI83eWi79VEJjj7yloZUJ
-         1stGGMah87TYdFp4w3v6vYib6/xSCUajiUCWD8g9eRVmN9er9rEJwewNxZcaUUSZ7565
-         uTsJWaEdEuaeGKETBvhgE/z6vu0C1Tt4V+Ujo6w0XuPe3pm2Pe1qh1evsnnTzXE3B9uR
-         sSZGPJKvSl9/bHFRxx0D70P1pItlx5gadddAH59z4TIvARjM0PR8iqUeOTpZHmnfoXxv
-         8Cbg==
-X-Gm-Message-State: AOAM533/NIXiDsQs0HsyewPOtw2YJYk/0LX75OTIUkMlGC3UNuvrezsy
-	xgQ5o/xD+2ZCeez+SbfTtBvWc7JZVcraWg==
-X-Google-Smtp-Source: ABdhPJy1IUHX7pcZupoEdWMK+A1/mD+YN5G0R3QEdpDHXgQ4gSHaX1sj7mjd1ZgH8+cf+N3wvZOr8A==
-X-Received: by 2002:a17:90b:3711:: with SMTP id mg17mr4474496pjb.163.1610905029563;
-        Sun, 17 Jan 2021 09:37:09 -0800 (PST)
+        bh=yKABuh2oZ9obq+Q38v0sDFT+retKkYypfkVw12bOVIs=;
+        b=DPVggQBiRE2MnK/m1FPBYbUjz0wslzxACq8+uGKhM5tOFZImgx8XAE2Ss05U76eWHj
+         t1eHW5Qouh6hFts8jz2dpfiG1S6ELsg1MDO+fp1POlyZTmhR293itkWpZPmkZgUOUxpc
+         5v2+t78EzMVXxKvnPxTYwtjxMqsordMaIHR1ZdtztBlsFxwuVeujybGTyheTJa2UMfMz
+         NuDrxVbMeaZBcBrJo+dD81yLlJBggPecm/x1FRRq0uyJoKl8XsmFvvU9UP1xbBCt5NSH
+         /eHGQB3PUzw6X/5VDYKQ+zT8oMXIERTcVehY7KpC7VaSyF/7b3VB6StrhbOQt9V8FKDf
+         HSRA==
+X-Gm-Message-State: AOAM531zDmaH+67HFGz0u53QdGQbg5VxQY1ItkY4KpOhOU1udGF6y2s+
+	o8EzUXnqE6U7uRFZZST1LljqDUuhQR5wWg==
+X-Google-Smtp-Source: ABdhPJyTGIpcCrLRIa/wnJdnaex3h2W2/vg1axF599TJdIUXn2TfZ65Die7oiSHJmoZdmkkCxb0gyQ==
+X-Received: by 2002:a63:4d41:: with SMTP id n1mr22401063pgl.147.1610905030756;
+        Sun, 17 Jan 2021 09:37:10 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:ed67:500f:ea8f:e947])
-        by smtp.gmail.com with ESMTPSA id t4sm13661338pfe.212.2021.01.17.09.37.08
+        by smtp.gmail.com with ESMTPSA id t4sm13661338pfe.212.2021.01.17.09.37.09
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 Jan 2021 09:37:09 -0800 (PST)
+        Sun, 17 Jan 2021 09:37:10 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 28/31] libsdl2-mixer: set --disable-music-ogg-shared to link statically
-Date: Sun, 17 Jan 2021 09:36:33 -0800
-Message-Id: <27626b4eea4428e60972796ec2d0678670b6f7be.1610904793.git.akuster808@gmail.com>
+Subject: [gatesgarth 29/31] gssdp: Upgrade to 1.2.2 -> 1.2.3
+Date: Sun, 17 Jan 2021 09:36:34 -0800
+Message-Id: <e788d4673888f15c302842fb1ce0284aafa6e3d7.1610904793.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1610904792.git.akuster808@gmail.com>
 References: <cover.1610904792.git.akuster808@gmail.com>
 
-From: jabdoa2 <jabdoa2@users.noreply.github.com>
+From: Diego Santa Cruz <diego.santacruz@spinetix.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 69bae2a2360643805de2ae1cd9ebc4202cd5a2fb)
+Dependency of gupnp 1.2.3
+
+Signed-off-by: Diego Santa Cruz <Diego.SantaCruz@spinetix.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../gupnp/{gssdp_1.2.2.bb => gssdp_1.2.3.bb}                  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-multimedia/recipes-connectivity/gupnp/{gssdp_1.2.2.bb => gssdp_1.2.3.bb} (83%)
 
-diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb
-index 77e50d3841..8f1960d8ad 100644
---- a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb
-+++ b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb
-@@ -14,7 +14,7 @@ S = "${WORKDIR}/SDL2_mixer-${PV}"
- inherit autotools-brokensep pkgconfig
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.2.2.bb b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.2.3.bb
+similarity index 83%
+rename from meta-multimedia/recipes-connectivity/gupnp/gssdp_1.2.2.bb
+rename to meta-multimedia/recipes-connectivity/gupnp/gssdp_1.2.3.bb
+index ddaddd2094..7d82c3e2e6 100644
+--- a/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.2.2.bb
++++ b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.2.3.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
+ DEPENDS = "glib-2.0 libsoup-2.4"
  
- EXTRA_AUTORECONF += "--include=acinclude"
--EXTRA_OECONF = "--disable-music-mp3 --enable-music-ogg LIBS=-L${STAGING_LIBDIR}"
-+EXTRA_OECONF = "--disable-music-mp3 --enable-music-ogg --disable-music-ogg-shared LIBS=-L${STAGING_LIBDIR}"
+ SRC_URI = "${GNOME_MIRROR}/${BPN}/1.2/${BPN}-${PV}.tar.xz"
+-SRC_URI[md5sum] = "f00a470ebcba96f34def8f83ac5891ed"
+-SRC_URI[sha256sum] = "cabb9e3b456b8354a55e23eb0207545d974643cda6d623523470ebbc4188b0a4"
++SRC_URI[md5sum] = "ef3295a965c06ce0f683522391fbb910"
++SRC_URI[sha256sum] = "a263dcb6730e3b3dc4bbbff80cf3fab4cd364021981d419db6dd5a8e148aa7e8"
  
- PACKAGECONFIG[mad] = "--enable-music-mp3-mad-gpl,--disable-music-mp3-mad-gpl,libmad"
+ GTKDOC_MESON_OPTION = 'gtk_doc'
  
 -- 
 2.17.1
