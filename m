@@ -1,78 +1,84 @@
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web09.21060.1610905024689912491
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web09.21061.1610905026186633283
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Jan 2021 09:37:04 -0800
+ Sun, 17 Jan 2021 09:37:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gHvNNAxa;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id v1so7976551pjr.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 09:37:04 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=XU1JNrzw;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id h10so8799624pfo.9
+        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 09:37:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=hQnyVsv98SLX22q5+L4u+ew7k6ZeEhxEDBb5P1G1Dv8=;
-        b=gHvNNAxaK8niZRps3EKOiIgV0E2UIqKKrdwm+g43Xu+1wkkJ4nlAvajZbO+udHk76i
-         DoDgbBNr/6J8MMJCzUatRMGPfSat87PIo75VzbOzJE1nVhLMESwCrkwzWwjUKouRMfYR
-         VRrFRTPWqlFwJtlDC33Yhe8MbsTfgZx8BT552XAPOs70hzu5po08XmiCXa+UqZrprPyn
-         v2g2LB/7WgmrrzX0hlUgy6rDwnK1j3tbP4fL+aYjj1OiFU3ld1FlntBJ0hDUQokXBEI7
-         PObjOwIDfUF+2wk33BzDE7q5Mp8E0FG9nT3O2CS4kHDluIOpzYTAuR51U1EOH1gP2LFp
-         HHlQ==
+        bh=KSmXD/vYLXB5RZPQEP2DfUhfwd1r9BWAHRjWDsB9aIs=;
+        b=XU1JNrzwv7OZ9LOHiz9rbf7tkzCJ2U6/8P3jJ/UQZOJfcTDToRAMKBRGtdsb3xDoqL
+         qNH4EBYCQPDHXEQ+0DkczGNvqF8/8WvlOH0byTT0rnCawsJlBUql1B1FKHnuTVBKfD5s
+         2J0waHeoY9LL8sFvk5enzyTxnJxzDqQVe9zg1DQWOoaI3v99FUKTLXLgv8PUFYTTM3qj
+         MdEWyk4Gmthjbz1IEaDExn1bKTfhpnvznZg88Dk+DM8aFkqhPemY5k7O4VqpnJaluHov
+         sCt6T6cue0abzY1rfaVlms6pilB3iil7SJiSz1FEZIxBJV5BNxTHsgGOZzf1T2YTwKFu
+         DeKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=hQnyVsv98SLX22q5+L4u+ew7k6ZeEhxEDBb5P1G1Dv8=;
-        b=Ic8uAyYeJ+WEqghsZcdTupk3djN9wqaPzuMSF3ri/t3EB4h7mn28eD9Yxa+zBzfNBF
-         6ZhNRJbmMudp11RnHp8S6f/Yq7+U4jPJaTA+RRDiSk/kbJpjmhYjsoYKSHibnZ6dQKTl
-         epeRY/gDMrMKhik4ue13r6lur2MD4NAkGgGBn0+YUKEs0X5Dqm8sStTEnA9pCP0rEmNQ
-         xHwgtPnOF0eaAUdQRMJ+3TbhBnJknEQMtcXHAUwNJKy7j2Vy9zjbJ+4FtKCshkU3q95Y
-         ZDW/PHPBvD01JXZG6zwUZ0CKrfD5zCL6G1Q0v8GglkvaNeElxciq00obZc6E91U4hCLa
-         Be+g==
-X-Gm-Message-State: AOAM531AWlrlM4ZZSikBzL0kK/+B5BzntfcLO5iEEYtZ9AAKhWJLveTk
-	8bzLHJe+9923feKnu0AYC4yRbg06uOlJYQ==
-X-Google-Smtp-Source: ABdhPJxnLno93bRQLoLkoZ9sDnHfBmsON/0UJEqLybRmE1YRAkX00Ir92k5YGUd0cQs8DT/84iW4LA==
-X-Received: by 2002:a17:902:e887:b029:de:7863:19b0 with SMTP id w7-20020a170902e887b02900de786319b0mr11610146plg.42.1610905024150;
-        Sun, 17 Jan 2021 09:37:04 -0800 (PST)
+        bh=KSmXD/vYLXB5RZPQEP2DfUhfwd1r9BWAHRjWDsB9aIs=;
+        b=SP0dRMOaDWteUPJG830nbpiIus3jspv630pz2PBK2h7IWo0c/p0BkaQWlw5dIn+zLR
+         QcsYWTWKcsxCkmtimhZTmABnss+BSwY1iOZi5evsZDLPlRcVXvw/QkeIVaY3pxWyoPqu
+         iqoHtA3R5WVOodf5hK0a7K9+JC7SSwQP1e+bNJin7osrG89VTTpKr9igojr5Z6RQWfw3
+         iZOutUKeqnhw1ms5AgQ6yPUZhNollhQPSqaqHnJPVci1byBSEcf0xNQMD7EIzDEzDYsf
+         +tHcDv1U81CheXgRSi1x7Hrdpmk43Nl4qGiu7/tZXhyJjU6tM8fvlVD+1rNKaIHVet0J
+         2kkA==
+X-Gm-Message-State: AOAM533StqveV2lVbz0X8mvEWqoEWWzRtHitYfnaBKPN7N04lL8+M1pO
+	YGLzZkjLo9fDOlnweYdGIBEPThsIBJ30PA==
+X-Google-Smtp-Source: ABdhPJwkT+4DeSiuJdtT+47q5H5a4S3AeGLkAJLZkx9gq/wylcKJ5d5TVbOiKo3LmfNPIjDkob0ewQ==
+X-Received: by 2002:a63:5c61:: with SMTP id n33mr4737981pgm.337.1610905025684;
+        Sun, 17 Jan 2021 09:37:05 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:ed67:500f:ea8f:e947])
-        by smtp.gmail.com with ESMTPSA id t4sm13661338pfe.212.2021.01.17.09.37.02
+        by smtp.gmail.com with ESMTPSA id t4sm13661338pfe.212.2021.01.17.09.37.04
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 Jan 2021 09:37:03 -0800 (PST)
+        Sun, 17 Jan 2021 09:37:04 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 23/31] tclap: fix branch
-Date: Sun, 17 Jan 2021 09:36:28 -0800
-Message-Id: <6313a640ab1a4ec27f41324405c7d0396fe2d8d3.1610904793.git.akuster808@gmail.com>
+Subject: [gatesgarth 24/31] lmbench: Fix setting LDLIBS failure
+Date: Sun, 17 Jan 2021 09:36:29 -0800
+Message-Id: <a5d1580a4da90379f4ac6afc4826a95c9106320d.1610904793.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1610904792.git.akuster808@gmail.com>
 References: <cover.1610904792.git.akuster808@gmail.com>
 
-From: Chen Qi <Qi.Chen@windriver.com>
+From: He Zhe <zhe.he@windriver.com>
 
-Upstream has deleted the 'master' branch, so use the 1.2 branch.
+scripts/build is interpreted as an sh script which may not recognize variable
+assignment operator += and thus give the following error and fail to append
+LDLIBS.
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+../scripts/build: 21: ../scripts/build: LDLIBS+=-lm: not found
+
+Use the basic assignment instead.
+
+Signed-off-by: He Zhe <zhe.he@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 583fbb4775a960391cb62d55164b91570a70921a)
+(cherry picked from commit a6a8fc75bad04be0842e22fb137d0e7a2dcb7279)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-devtools/tclap/tclap_1.2.2.bb | 2 +-
+ ...2-build-Adjust-CFLAGS-LDFLAGS-to-append-values-passed-.patch | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/tclap/tclap_1.2.2.bb b/meta-oe/recipes-devtools/tclap/tclap_1.2.2.bb
-index 47ab2fd7b2..bba8d5c215 100644
---- a/meta-oe/recipes-devtools/tclap/tclap_1.2.2.bb
-+++ b/meta-oe/recipes-devtools/tclap/tclap_1.2.2.bb
-@@ -4,7 +4,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0ca8b9c5c5445cfa7af7e78fd27e60ed"
- 
- SRCREV = "ec3ddcfe41b0544a4551a57439b6b3682fe31479"
--SRC_URI = "git://git.code.sf.net/p/tclap/code \
-+SRC_URI = "git://git.code.sf.net/p/tclap/code;branch=1.2 \
-     file://Makefile.am-disable-docs.patch \
- "
- 
+diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0002-build-Adjust-CFLAGS-LDFLAGS-to-append-values-passed-.patch b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0002-build-Adjust-CFLAGS-LDFLAGS-to-append-values-passed-.patch
+index 353d80b3b7..1d5d9c12ab 100644
+--- a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0002-build-Adjust-CFLAGS-LDFLAGS-to-append-values-passed-.patch
++++ b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0002-build-Adjust-CFLAGS-LDFLAGS-to-append-values-passed-.patch
+@@ -22,7 +22,7 @@ index 34a1371..3786741 100755
+  trap 'rm -f ${BASE}$$.s ${BASE}$$.c ${BASE}$$.o ${BASE}$$; exit 1' 1 2 15
+  
+ -LDLIBS=-lm
+-+LDLIBS+=-lm
+++LDLIBS="$LDLIBS -lm"
+  
+  # check for HP-UX's ANSI compiler
+  echo "main(int ac, char *av[]) { int i; }" > ${BASE}$$.c
 -- 
 2.17.1
 
