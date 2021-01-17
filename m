@@ -1,76 +1,86 @@
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
- by mx.groups.io with SMTP id smtpd.web09.21052.1610905010858980116
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
+ by mx.groups.io with SMTP id smtpd.web10.21168.1610905011731189295
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Jan 2021 09:36:50 -0800
+ Sun, 17 Jan 2021 09:36:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ctB1OvNP;
- spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f181.google.com with SMTP id 30so9474976pgr.6
-        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 09:36:50 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Jvp8vsOn;
+ spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f45.google.com with SMTP id m5so8208420pjv.5
+        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 09:36:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=keMUm3G9ojcu084/k1TDSbX9dabsqDZ+n7XETgqsq4E=;
-        b=ctB1OvNPwimJ4NAuY/Nuj6+XswPBYziMCZ3cOD/HSf3Mk3y7u8SoEZsaFgkbltrdHT
-         1TaNDKVGuAbWrsKnNq030YpBVqwaq63OnFGBnAlocsgJGxj3Qew+BLnS/xlU/KN78KJk
-         O6M5NHblXNYyqRCvPzitz9j+ZqyHDmZ5I9ZHzh6WHeueWoDHrlo8EFSfcnRSYS04YpUL
-         LsmCCFAlwbqJYEIlvjZynsTu1/xF2YmNcFAiiV/a7eidvypVhkvLJskfheyoQNxlh6Zf
-         8lRItAnbYi1ba/Aa15u3/UjIUnvwRBznFHaREWwNvFzl+v8zN4yDaSQ2gEHI5EUxoRCC
-         DBwQ==
+        bh=SkHUnk91AGXpeUwnb/l9ssdsfbkhsmJcr3hCM63fRY8=;
+        b=Jvp8vsOnyfb5M0pkVeKOZwhFNXDmIZuIp41YZoJQNU2FmHYLDOIRZchiVsBJyEmwnj
+         vYvBkDEsDxdEQWY/INfnfOpzsWZlt7hpK+4QzNWMFFJXk8QsuUseG1XzK+Mt8L8aUlCT
+         CXVFCGW4ceZ+9NbDX2EhECCOqc3bgwUg9LvWu8jdArrCaPwpX8HUFdd0OR5pp0kqtx89
+         NB5sNqwVFxp5IVYVp6SSLF+pm/DyE6+Pbuy8RsoM02jF2gMXz17d/PwuPQpp9+1d6JcT
+         mjqjpBHGihSunlvT/olZGGub1SGt5v2IqfE23xsELnlIntFwA8uvySJsRCc9JcToX2ql
+         hWUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=keMUm3G9ojcu084/k1TDSbX9dabsqDZ+n7XETgqsq4E=;
-        b=d33hRlfswN8GvpnTJOWyoFSMC8KeCE27dyVVCFAveM2ypz4O110XTqzBclr4brKprr
-         vpwBXgKsP/Doejfpa5VwcnzC1NJ4mGqKSM3DchDteWkymgZdDwVPFcrmm5Eck7Of8LBU
-         PCMWnUECD4K0sF1CBYVholdTecMGkZMoztgzsQ645kguVKP+IK4SUDbKNhtfxmZirxNa
-         XGaMjXUf/V5aioALTAQ3aV54ovle3BA451YjJlQq+hBuXASxEMzd5sDtsvv3R3Tjktn2
-         uZX6nVeeLzPlAcMzztc6aYcvQtlkcvdEsqL2HDro3Fs58sjkaufEWzZJyvXRX8+Gbt5f
-         7gNA==
-X-Gm-Message-State: AOAM531B7eFTb3SJO/X7W3tL2ekaIW8IDxZ1MMPaQG3s5vnNdB6OlsFe
-	yDJ8lDZmlr5+3S9qwRWpfluNz9z2ChY74g==
-X-Google-Smtp-Source: ABdhPJzY0CpdQVTNyLjNI9DyJbJS+ro5/U9C6hJFiBr6EWhKPeXlZE59MBQqxGEU/JYrF+u/HKSG8w==
-X-Received: by 2002:a62:d5:0:b029:1b4:144c:f217 with SMTP id 204-20020a6200d50000b02901b4144cf217mr11492184pfa.13.1610905010307;
-        Sun, 17 Jan 2021 09:36:50 -0800 (PST)
+        bh=SkHUnk91AGXpeUwnb/l9ssdsfbkhsmJcr3hCM63fRY8=;
+        b=jLwkXGSRVPv5VM/pZL1W6mlvzj06HCXYZ3IjpHm/a0+NgnM8ddf8Wuvs0Z+xDfplMK
+         +Ka0M5D0YHTYml+JOxiEWwtzsz01gxbkMWJWlr3Pc8T++qFPCXPRJ2G8YzOlC8pz+kH/
+         jEWlNMSNZ6B7axzG6Tg3Hyogfkutkh1BIHVrb0/ixE968g91cy1gvFVz8eDpmYJ3WHdG
+         5uVHmbZ8lwYdHZ2+COsvE5k9Gc/Qo5/3ncTcuQXIe1PR7NLtD0bPMA6ONdMcDzVZNyB6
+         rnlbB2fGJI3nkAdHMiixYxPYRghOvNbqGLd2OhghqFEHgCsosO9aB4BUhHuIyucEAhAT
+         +mxA==
+X-Gm-Message-State: AOAM530GqDzdkkSf6dOpYCuz/6Ai+Lf9fF6fIxdkb6JNFqBOK8Z2BVuS
+	mmOHx7Bp26aN+D2h+L4URv0rqvAQNRbsQg==
+X-Google-Smtp-Source: ABdhPJwYcunw9cS0wUtOVWS78GhEY1I/4VyB5+rjiPG0f1DciJSFPwcqvHGzUjwS1DKzah37jqDgqQ==
+X-Received: by 2002:a17:90a:be0a:: with SMTP id a10mr22450357pjs.139.1610905011164;
+        Sun, 17 Jan 2021 09:36:51 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:ed67:500f:ea8f:e947])
-        by smtp.gmail.com with ESMTPSA id t4sm13661338pfe.212.2021.01.17.09.36.49
+        by smtp.gmail.com with ESMTPSA id t4sm13661338pfe.212.2021.01.17.09.36.50
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sun, 17 Jan 2021 09:36:50 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 10/31] lockfile-progs: use DEBIAN_MIRROR in SRC_URI
-Date: Sun, 17 Jan 2021 09:36:15 -0800
-Message-Id: <db892b5e626302009146eafcf0decbc78b7fe800.1610904793.git.akuster808@gmail.com>
+Subject: [gatesgarth 11/31] python3-aiohttp: added missing RDEPENDs
+Date: Sun, 17 Jan 2021 09:36:16 -0800
+Message-Id: <89d0acd967133208298326d8e76a8ac2c1638d67.1610904793.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1610904792.git.akuster808@gmail.com>
 References: <cover.1610904792.git.akuster808@gmail.com>
 
-From: Roland Hieber <rhi@pengutronix.de>
+From: Vyacheslav Yurkov <uvv.mail@gmail.com>
 
-Signed-off-by: Roland Hieber <rhi@pengutronix.de>
+aiohttp implicitly RDEPENDs on html, json, and socketserver modules,
+which are part of python3 recipe. They can't be properly imported if
+they are missing from RDEPENDS
+
+Signed-off-by: Vyacheslav Yurkov <uvv.mail@gmail.com>
+Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 7b8efbbd0f22d1871cfe2e90adec6aa9f5e9483d)
+(cherry picked from commit 8e7c57bd8f8250251e54fcbe149dc81743c0e30a)
+[Fixup for Gatesgarth context]
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-extended/lockfile-progs/lockfile-progs_0.1.18.bb    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python3-aiohttp_3.7.2.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.18.bb b/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.18.bb
-index c76e0f69e0..a82f10b919 100644
---- a/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.18.bb
-+++ b/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.18.bb
-@@ -8,7 +8,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
- DEPENDS = "liblockfile"
- 
--SRC_URI = "http://ftp.de.debian.org/debian/pool/main/l/${BPN}/${BPN}_${PV}.tar.gz"
-+SRC_URI = "${DEBIAN_MIRROR}/main/l/${BPN}/${BPN}_${PV}.tar.gz"
- SRC_URI[md5sum] = "4eb83bdf88016db836b7cc09591fb0f3"
- SRC_URI[sha256sum] = "a42995a4b97e6188efc90fcc1a761163c4b2cff5c81b936f85c84301ddb05ce6"
- 
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.7.2.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.7.2.bb
+index 178e68bd97..c98e3aee7a 100644
+--- a/meta-python/recipes-devtools/python/python3-aiohttp_3.7.2.bb
++++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.7.2.bb
+@@ -13,9 +13,11 @@ RDEPENDS_${PN} = "\
+     ${PYTHON_PN}-async-timeout \
+     ${PYTHON_PN}-attrs \
+     ${PYTHON_PN}-chardet \
++    ${PYTHON_PN}-html \
+     ${PYTHON_PN}-idna-ssl \
++    ${PYTHON_PN}-json \
+     ${PYTHON_PN}-misc \
+     ${PYTHON_PN}-multidict \
+-    ${PYTHON_PN}-typing \
++    ${PYTHON_PN}-netserver \
+     ${PYTHON_PN}-yarl \
+ "
 -- 
 2.17.1
 
