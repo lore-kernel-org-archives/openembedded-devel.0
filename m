@@ -1,152 +1,128 @@
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web10.21301.1610905593103081207
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+ by mx.groups.io with SMTP id smtpd.web10.21302.1610905593662210741
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 17 Jan 2021 09:46:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=pqXKf2D6;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id m5so8218196pjv.5
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=SS6Hj1Yd;
+ spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f175.google.com with SMTP id x18so7354899pln.6
         for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 09:46:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=jk+qDWv7ti2bxdXXJwVQ6M+7/Bh+11C+4TORJAyEi1Q=;
-        b=pqXKf2D6YJH6YngTUITuVMSkdF4otboyQgSNaF5bMYYvPKpDaXmYsJ6v6MaJNGQvim
-         SZJQLUb5H8j0qEsnGXnz56LGpfM6kw8XQ9bGAdkM3nUv+m6b7Cxgw/rsmLrI13zWcmVc
-         jeqMkCfXis21ks2Q48UgfuCZ2bgRGjIkiXTTqBGTabheSgNa3SzNoT3ACTOrulH9o3wp
-         vGBX2Mf0SqklWI/F5pF8DG7/ZYXy7xAi+U+Mtn+KGqgQQavAzbeKG5dibyOZ0nXNceIA
-         /ieLY/ofaUfcrKx9NqP2hly74TBhM+xP2pQZLOZkcaLACIzxzaCMTZppzI3RuygZZk+b
-         L5Yg==
+        bh=9oECxSb3XOzhFEhvQ+EG3Q4lLtYSNud1dIUuecrB1nQ=;
+        b=SS6Hj1YdRrjU6LigK9wPns5M4o+TM0nQFxXnWEo7wRiaO8JuvaZOK3Zd5ZwvjeT6Ug
+         F58FrUNDa4p7tTzPzKRvnOXWEtUgrWQZbT3xUIC9WXOvma6KCMeNeL2xRg3+yFCS/i3d
+         aa1cvaZQRzspbCXP2enyyt+BbDRPKGoByfD7SQ/+OXFwAPbwUCgnr47W41MY0jo9gfjd
+         b6+ODF98YRCi/Sp42cxVBPIfDQEI+36XjoNU5IsRCerHLDvi1A1TWQT4GidtkpT8sDnJ
+         EilYuQM6u1Gu6lhIi2Q8j7qJhxNaeR7VdCrjRc7XJcwXaulN9l5w0ENdSECQ9RoQ0/NQ
+         qn6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=jk+qDWv7ti2bxdXXJwVQ6M+7/Bh+11C+4TORJAyEi1Q=;
-        b=dvHsC8cYj0k/puTgaWGHfT7RhEyQ3sucwDECQahFpgTOSkrKFodybH0jb3Hz8/1rpN
-         F0Y61V3Ghi/tMvIcOv83MZKY1TrX/mCA4xdqYCU7RIe+7O8o23btWOxNP6TRKGPcPNAW
-         ZgqbIC0AoQ8plw8tMeUug6X9tEAN+5155sJlTu85Vgv5KbZZ5kIjaaG0K5AysMtJz6Yw
-         W7FZUEplvN5PDCnFRHP44THIEogXvW6qyUMUBTQZINQaW5rvGeHBhjHzKCxRYkirrn0+
-         QqhY+zLvT1aypK/21fBqPs3V2UM1NDrgzS/9pyfQ+T6S8IJgbh/wf9xifc07q0nYEFyX
-         MsRg==
-X-Gm-Message-State: AOAM532WF+9D0MgZYGKsksuMHG3APgaP90/zEyle77cEKp3oz5+f9mQB
-	JJoPC+E3tkWFgvq+p5DUyPTiFZWrYtirsw==
-X-Google-Smtp-Source: ABdhPJwxy3/+ztgHdfk6sIN/JgsFWxbeCtPrJGTyxCipCgrN9RXHAhojNRNG9F5OzvL67g0tl1ph/g==
-X-Received: by 2002:a17:902:b606:b029:da:c8ed:7c2e with SMTP id b6-20020a170902b606b02900dac8ed7c2emr22617814pls.5.1610905592251;
-        Sun, 17 Jan 2021 09:46:32 -0800 (PST)
+        bh=9oECxSb3XOzhFEhvQ+EG3Q4lLtYSNud1dIUuecrB1nQ=;
+        b=Wi0jvRqpX6EkvAG0BDNB3P2+TJTuU15OFQ2ANPtw2+RFYsAKSXlWM5FDiVq94W2NGj
+         fmKDHepFhv6k3RJN+UdSXkRi29KB/BKBbPCHzBspJ5ZeWsQecPLrJdAluXCi7y1idSPg
+         HzcHaioOUYnhPxvbL1UGUx51MWGGvKWtDuhUmiuHaxFOGxzt3jfF4Pekhiwv5H0dGbM1
+         P8DXysVPDUAOj/QLgdj6UpTQZtz0dxcRm38K7wCvHJ41TBGkQpsgm4cSNiteC+f5slcF
+         3bUN/5bMjrH8wkxe5w0nTQzBjzVOkRkkILn8seitSmbfTjuawuG01yxzWhFtKLcHXnje
+         wW8g==
+X-Gm-Message-State: AOAM533LOEM3u5BLpwtgey56kY4OQM2EdnUYQsRDmk9mgNbdfrcvz8rA
+	FL+bA3PcNUxdtliAcZcjT1UqoLk4pT19RA==
+X-Google-Smtp-Source: ABdhPJw72UOmKmJUypj4fW7p0Gv03NDKH8LI8HS99FiQ5s1yP1qWLrmNlTFi5/eoIlMNmxNTZI6XGA==
+X-Received: by 2002:a17:90a:6401:: with SMTP id g1mr21616021pjj.165.1610905593135;
+        Sun, 17 Jan 2021 09:46:33 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:ed67:500f:ea8f:e947])
-        by smtp.gmail.com with ESMTPSA id bk18sm10427870pjb.41.2021.01.17.09.46.31
+        by smtp.gmail.com with ESMTPSA id bk18sm10427870pjb.41.2021.01.17.09.46.32
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 Jan 2021 09:46:31 -0800 (PST)
+        Sun, 17 Jan 2021 09:46:32 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 01/28] tcpdump: Patch for CVE-2020-8037
-Date: Sun, 17 Jan 2021 09:45:59 -0800
-Message-Id: <27832ef6c02bf71694f5539d42046f148453a49b.1610905441.git.akuster808@gmail.com>
+Subject: [dunfell 02/28] dlt-daemon: add upstream patch to fix CVE-2020-29394
+Date: Sun, 17 Jan 2021 09:46:00 -0800
+Message-Id: <0c158538eda581450dbdb5762d668721ba7fe4f0.1610905441.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1610905441.git.akuster808@gmail.com>
 References: <cover.1610905441.git.akuster808@gmail.com>
 
-From: viatsk <viatsk@fastmail.com>
+From: Gianfranco <costamagna.gianfranco@gmail.com>
 
-Signed-off-by: Stacy Gaikovaia <stacy.gaikovaia@windriver.com>
+More information on: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=976228
+| A buffer overflow in the dlt_filter_load function in dlt_common.c in
+| dlt-daemon 2.8.5 (GENIVI Diagnostic Log and Trace) allows arbitrary
+| code execution because fscanf is misused (no limit on the number of
+| characters to be read in a format argument).
+
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+[Fix up for Dunfell context - AK]
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...ping-don-t-allocate-a-too-large-buff.patch | 70 +++++++++++++++++++
- .../recipes-support/tcpdump/tcpdump_4.9.3.bb  |  1 +
- 2 files changed, 71 insertions(+)
- create mode 100644 meta-networking/recipes-support/tcpdump/tcpdump/0001-PPP-When-un-escaping-don-t-allocate-a-too-large-buff.patch
+ .../dlt-daemon/dlt-daemon/275.patch           | 38 +++++++++++++++++++
+ .../dlt-daemon/dlt-daemon_2.18.4.bb           |  1 +
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch
 
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/0001-PPP-When-un-escaping-don-t-allocate-a-too-large-buff.patch b/meta-networking/recipes-support/tcpdump/tcpdump/0001-PPP-When-un-escaping-don-t-allocate-a-too-large-buff.patch
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch
 new file mode 100644
-index 0000000000..9b74e00c5b
+index 0000000000..75065eb054
 --- /dev/null
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump/0001-PPP-When-un-escaping-don-t-allocate-a-too-large-buff.patch
-@@ -0,0 +1,70 @@
-+From 32027e199368dad9508965aae8cd8de5b6ab5231 Mon Sep 17 00:00:00 2001
-+From: Guy Harris <guy@alum.mit.edu>
-+Date: Sat, 18 Apr 2020 14:04:59 -0700
-+Subject: [PATCH] PPP: When un-escaping, don't allocate a too-large buffer.
++++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch
+@@ -0,0 +1,38 @@
++Upstream-status: Backport
++CVE: CVE-2020-29394
++From 7f5cd5404a03fa330e192084f6bdafb2dc9bdcb7 Mon Sep 17 00:00:00 2001
++From: GwanYeong Kim <gy741.kim@gmail.com>
++Date: Sat, 28 Nov 2020 12:24:46 +0900
++Subject: [PATCH] dlt_common: Fix buffer overflow in dlt_filter_load
 +
-+The buffer should be big enough to hold the captured data, but it
-+doesn't need to be big enough to hold the entire on-the-network packet,
-+if we haven't captured all of it.
++A buffer overflow in the dlt_filter_load function in dlt_common.c in dlt-daemon allows arbitrary code execution via an unsafe usage of fscanf, because it does not limit the number of characters to be read in a format argument.
 +
-+(backported from commit e4add0b010ed6f2180dcb05a13026242ed935334)
++Fixed: #274
 +
-+Upstream-Status: Backport
-+Signed-off-by: Stacy Gaikovaia <stacy.gaikovaia@windriver.com>
-+
++Signed-off-by: GwanYeong Kim <gy741.kim@gmail.com>
 +---
-+ print-ppp.c | 18 ++++++++++++++----
-+ 1 file changed, 14 insertions(+), 4 deletions(-)
++ src/shared/dlt_common.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
 +
-+diff --git a/print-ppp.c b/print-ppp.c
-+index 89176172..33fb0341 100644
-+--- a/print-ppp.c
-++++ b/print-ppp.c
-+@@ -1367,19 +1367,29 @@ trunc:
-+ 	return 0;
-+ }
++diff --git a/src/shared/dlt_common.c b/src/shared/dlt_common.c
++index 254f4ce4..d15b1cec 100644
++--- a/src/shared/dlt_common.c
+++++ b/src/shared/dlt_common.c
++@@ -404,7 +404,7 @@ DltReturnValue dlt_filter_load(DltFilter *filter, const char *filename, int verb
++     while (!feof(handle)) {
++         str1[0] = 0;
 + 
-++/*
-++ * Un-escape RFC 1662 PPP in HDLC-like framing, with octet escapes.
-++ * The length argument is the on-the-wire length, not the captured
-++ * length; we can only un-escape the captured part.
-++ */
-+ static void
-+ ppp_hdlc(netdissect_options *ndo,
-+          const u_char *p, int length)
-+ {
-++	u_int caplen = ndo->ndo_snapend - p;
-+ 	u_char *b, *t, c;
-+ 	const u_char *s;
-+-	int i, proto;
-++	u_int i;
-++	int proto;
-+ 	const void *se;
++-        if (fscanf(handle, "%s", str1) != 1)
+++        if (fscanf(handle, "%254s", str1) != 1)
++             break;
 + 
-++	if (caplen == 0)
-++		return;
-++
-+         if (length <= 0)
-+                 return;
++         if (str1[0] == 0)
++@@ -419,7 +419,7 @@ DltReturnValue dlt_filter_load(DltFilter *filter, const char *filename, int verb
 + 
-+-	b = (u_char *)malloc(length);
-++	b = (u_char *)malloc(caplen);
-+ 	if (b == NULL)
-+ 		return;
++         str1[0] = 0;
 + 
-+@@ -1388,10 +1398,10 @@ ppp_hdlc(netdissect_options *ndo,
-+ 	 * Do this so that we dont overwrite the original packet
-+ 	 * contents.
-+ 	 */
-+-	for (s = p, t = b, i = length; i > 0 && ND_TTEST(*s); i--) {
-++	for (s = p, t = b, i = caplen; i != 0; i--) {
-+ 		c = *s++;
-+ 		if (c == 0x7d) {
-+-			if (i <= 1 || !ND_TTEST(*s))
-++			if (i <= 1)
-+ 				break;
-+ 			i--;
-+ 			c = *s++ ^ 0x20;
-+-- 
-+2.17.1
-+
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
-index 94543dd1da..8f7bd59f18 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
-@@ -17,6 +17,7 @@ SRC_URI = " \
-     file://avoid-absolute-path-when-searching-for-libdlpi.patch \
-     file://add-ptest.patch \
-     file://run-ptest \
-+    file://0001-PPP-When-un-escaping-don-t-allocate-a-too-large-buff.patch \
++-        if (fscanf(handle, "%s", str1) != 1)
+++        if (fscanf(handle, "%254s", str1) != 1)
++             break;
++ 
++         if (str1[0] == 0)
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.4.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.4.bb
+index 35c638bc78..45724e98ac 100644
+--- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.4.bb
++++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.4.bb
+@@ -18,6 +18,7 @@ SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=https \
+     file://0002-Don-t-execute-processes-as-a-specific-user.patch \
+     file://0004-Modify-systemd-config-directory.patch \
+     file://204.patch \
++    file://275.patch \
  "
+ SRCREV = "14ea971be7e808b9c5099c7f404ed3cf341873c4"
  
- SRC_URI[md5sum] = "a4ead41d371f91aa0a2287f589958bae"
 -- 
 2.17.1
 
