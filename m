@@ -1,198 +1,85 @@
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.web09.23648.1610915910310067359
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.web09.28706.1610942444714734925
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Jan 2021 12:38:30 -0800
+ Sun, 17 Jan 2021 20:00:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=BNe3qoY0;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id o20so574823pfu.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 12:38:30 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=V1iWkNeW;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id w1so8435111pjc.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Jan 2021 20:00:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=zybFsrDnZhCVDsYilVCXM4v+nl4pkF6tC0fl9i5zAEc=;
-        b=BNe3qoY0MDaQ9Qn2oS06TG9JcnIbiSZiB6JevjOnRjNBa4+fZizT2zfTW54/YeY2dN
-         7GBwhRrjRW4YTFTpS2uwfJcpq8gnGbE6adRH7pNAUFOzDBrmJ2n1n8DMWCAjXrKY86UA
-         uocTwtiKwIQUjgILE3NY5hWhG3idmSRjcUvKWtKma3KY0ZCg+yvx81Sh6KYDv+mWosJ8
-         1NHU/zoBQ05eFIFj/zNZ2Nl9ECEtRHtid2Fvm3ZIDt6OOltAoCUw5jTYuk8zGxgwZKoL
-         WvSoKbJWwkpQtHBQGyDqBl42ayVADVRaefQrLgFb32siQFRrfY8fYVu91bH+mKoIKN1i
-         j/Ww==
+        h=from:to:subject:date:message-id;
+        bh=w85KjI4gWX64V7FRM+IJcCRpEY8Z1aO16jTkkAerL3A=;
+        b=V1iWkNeWTPqNJ9GsXkN3cUCMHdc+vjBsXlvOsEPoaC0DzceVQXbrUIcAZmHBES/QX5
+         Dpi7i2CcDxM2dBVh5yMCjQBXa+NXtwbKqB4a6931GWyWpY+K4CLXn8YV7HZnMa4JTUfi
+         fOcgeMLtgyvD/RCJLsGsNZN7+ITKOZuh1iRJtB4Xy+9lNpfWlCbeBHsckEGXW37eO4nX
+         Ju9GQ7iPLH/N66ZfMV3ODiWp0fZmg0Ne1tBrYtlIextRb6Kh6NEu3i2yDuY5iy5KFPs9
+         uxBxQ2TbjCesj81rftrv53Ybc/8EhjRpb0IDE1dYZOqwIrMygUOwty6AMpVx2+sZmA+A
+         tAMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=zybFsrDnZhCVDsYilVCXM4v+nl4pkF6tC0fl9i5zAEc=;
-        b=gh8NDJwQzIysvzUxHHu6YKbe2er09Js7CdpzGp6q/UA9Ck9ATZ2F9ER3WFzQ++P3Pw
-         wZ7QmVb0fJC6VLCTYcjYiCG6tJ0K04Hv63lFio0AhCa6M89erONLW2JBxNLXFKrIgL3l
-         zzXBu1fmmuLVeIUqVSaJoUmxt59khFU3UcGHy3BlvWYi1OeatEVJyDAQFDKoIz88zytp
-         WWui3RLC2pqRvYz12zX1zTmNm0P95RUlrYJq2gSFLrWwT55a9Cb/7RABRZKIJw+Kb9Wy
-         LyQlstHuW8irqnk+yQC2a+FmV1EXvWj1oNaX0wjOiU856bRKlM4ayhDDfaM9oTGJXCx2
-         BTsw==
-X-Gm-Message-State: AOAM530UUnaZAHy3vRu2Q2aXU466HKq2JiNefxaoNkStLw1X52jJd68w
-	hpl2afO6chRwE+K3Hp4lTHgFhU+tFusQPW7llnA=
-X-Google-Smtp-Source: ABdhPJzIu8iwddaQh1zFO1kHql+2XvfgeRylh71OHoQSq8JnrV+EHTz91lN7wK40dKyyOs0qOkCBWYtUYfHw8yBzfvE=
-X-Received: by 2002:a65:5283:: with SMTP id y3mr22964723pgp.174.1610915909920;
- Sun, 17 Jan 2021 12:38:29 -0800 (PST)
-MIME-Version: 1.0
-References: <cover.1610905441.git.akuster808@gmail.com>
-In-Reply-To: <cover.1610905441.git.akuster808@gmail.com>
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-Date: Sun, 17 Jan 2021 21:38:18 +0100
-Message-ID: <CALbNGRRUDhOSUiqAPBeTiuRofNy8Z0tUcq0n4=HQ3RqM_DzHBA@mail.gmail.com>
-Subject: Re: [oe] [dunfell 00/28] Patch review Jan 17th
-To: akuster <akuster808@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+        h=x-gm-message-state:from:to:subject:date:message-id;
+        bh=w85KjI4gWX64V7FRM+IJcCRpEY8Z1aO16jTkkAerL3A=;
+        b=rS1crc+NVt3fPYJ36gFjum2kpzX5hXN+ktaTD56tuYfv63hyRzbMR1DFVGg9qRPGf6
+         NZ9V2t/o+GY8BXcufQ0KAwxma1wyTiGYsfXEtcAVxI98xwsvYUFEjmBFEEK8RUG9uHh7
+         UIFQOc5BZhS+N7XFpXBSAPQThw0BXHQBp/V/D395WJEF/X0yWkFhJHTVW2V3tO/9ANm0
+         zQRFilAF9xisjAd+08BcKNSM4gINijncEDef7rI6SX9tNMGS1OM+j3QO7T9MPNAH7Ovi
+         OL0LimRYIFMZPWBRcNTybm1pEewrIu+PXf6KNjkE+cEtdKJCIt99qw1fXKgEmIH3zN2Z
+         m9LQ==
+X-Gm-Message-State: AOAM532Yv6+Hl1uDrhfhLzJEMMwoTEQCbnGwh+C6RfRcH9Wpn4sJ7glt
+	kzzv3uudFqu4FnJyqPNNIArToC8BxxyU0A==
+X-Google-Smtp-Source: ABdhPJxpNGQQfzX28alNLQiRk1IxR1q+76UQQ/lZGWEiK+Xh8GAgjPmanW2SRkkNaxYexlTZ3887fg==
+X-Received: by 2002:a17:90b:1b50:: with SMTP id nv16mr19239984pjb.153.1610942443949;
+        Sun, 17 Jan 2021 20:00:43 -0800 (PST)
+Return-Path: <akuster808@gmail.com>
+Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:64d8:445c:d3ae:b514])
+        by smtp.gmail.com with ESMTPSA id z13sm1625978pgf.89.2021.01.17.20.00.42
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 17 Jan 2021 20:00:43 -0800 (PST)
+From: "akuster" <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH] ipset: add recipe
+Date: Sun, 17 Jan 2021 20:00:41 -0800
+Message-Id: <20210118040041.30941-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.17.1
 
-On Sun, Jan 17, 2021 at 6:46 PM akuster <akuster808@gmail.com> wrote:
->
-> Here is the next batch for Dunfell. Please review and have comments back by Wednesday.
->
-> The following changes since commit f2d02cb71eaff8eb285a1997b30be52486c160ae:
->
->   python3-pyinotify: Add missing ctypes dependency (2020-11-15 11:13:25 -0800)
->
-> are available in the Git repository at:
->
->   git://git.openembedded.org/meta-openembedded-contrib stable/dunfell-nut
->   http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/dunfell-nut
->
-> Armin Kuster (5):
->   wireguard-module: fix build issue with 5.4 kernel
->   mariadb: update to 10.4.17 for cve fixes
->   lua: update to 5.3.6
->   nss: Security fix CVE-2020-12401
->   wireshark: Several securtiy fixes
->
-> Chenxi Mao (1):
->   geoclue: select avahi-daemon if nmea enabled
->
-> Gianfranco (1):
->   dlt-daemon: add upstream patch to fix CVE-2020-29394
->
-> Khem Raj (4):
->   nodejs: Fix build with icu 67.1
->   nodejs: Upgrade to 12.18.3
->   nodejs: Fix arm32/thumb builds with clang
->   nodejs: Update to 12.19.0
->
-> Leon Anavi (1):
->   php: Upgrade 7.4.4 -> 7.4.9
->
-> Max Kellermann (1):
->   php: remove the failing ${D}/${TMPDIR} code
->
-> Roland Hieber (1):
->   pcsc-lite: provide pcsc-lite-lib-native explicitly for native build
->
-> Sakib Sajal (1):
->   apache2: upgrade v2.4.43 -> v2.4.46
->
-> Sean Nyekjaer (1):
->   nodejs: 12.19.1 -> 12.20.1
->
-> Stacy Gaikovaia (1):
->   nodejs: 12.19.0 -> 12.19.1
->
-> Wang Mingyu (1):
->   zabbix: CVE-2020-15803 Security Advisory
->
-> Wenlin Kang (2):
->   lua: fix CVE-2020-15945
->   lua: fix CVE-2020-24371
->
-> Zang Ruochen (1):
->   mcpp: Normalize the patch format of CVE
->
-> Zheng Ruoqin (4):
->   samba: CVE-2020-14318 Security Advisory
->   samba: CVE-2020-14383 Security Advisory
->   php: CVE-2020-7070
->   php: CVE-2020-7069
->
-> jabdoa2 (2):
->   libsdl2-mixer: Fix ogg/vorbis support in libsdl2-mixer
->   libsdl2-mixer: set --disable-music-ogg-shared to link statically
->
-> viatsk (1):
->   tcpdump: Patch for CVE-2020-8037
->
->  .../samba/samba/CVE-2020-14318.patch          | 142 +++++++++++++++
->  .../samba/samba/CVE-2020-14383.patch          | 112 ++++++++++++
->  .../samba/samba_4.10.18.bb                    |   2 +
->  ...NC_-START-END-were-backported-to-5.4.patch |  29 +++
->  .../wireguard-module_1.0.20200401.bb          |   3 +-
->  ...ping-don-t-allocate-a-too-large-buff.patch |  70 ++++++++
->  .../recipes-support/tcpdump/tcpdump_4.9.3.bb  |   1 +
->  ...wireshark_3.2.7.bb => wireshark_3.2.10.bb} |   2 +-
->  .../zabbix/zabbix/CVE-2020-15803.patch        |  36 ++++
->  .../zabbix/zabbix_4.4.6.bb                    |   1 +
->  ...e_10.4.12.bb => mariadb-native_10.4.17.bb} |   0
->  meta-oe/recipes-dbs/mysql/mariadb.inc         |   6 +-
->  ...-breakage-from-lock_guard-error-6161.patch |  32 ----
->  .../mariadb/0001-Fix-library-LZ4-lookup.patch |  19 +-
->  .../mysql/mariadb/c11_atomics.patch           |  24 ++-
->  .../configure.cmake-fix-valgrind.patch        |  10 +-
->  .../mariadb/fix-a-building-failure.patch      |  13 +-
->  .../mysql/mariadb/fix-arm-atomic.patch        |  13 +-
->  ...Lists.txt-fix-gen_lex_hash-not-found.patch |  12 +-
->  ...akeLists.txt-fix-do_populate_sysroot.patch |  10 +-
->  ...{mariadb_10.4.12.bb => mariadb_10.4.17.bb} |   0
->  ...rriers-cannot-be-active-during-sweep.patch |  90 ++++++++++
->  .../lua/lua/CVE-2020-15945.patch              | 167 ++++++++++++++++++
->  .../lua/{lua_5.3.5.bb => lua_5.3.6.bb}        |   8 +-
->  .../mcpp/files/CVE-2019-14274.patch           |  34 ++++
->  .../mcpp/files/ice-mcpp.patch                 |  31 ----
->  meta-oe/recipes-devtools/mcpp/mcpp_2.7.2.bb   |   3 +-
->  ...gister-r7-because-llvm-now-issues-an.patch |  53 ++++++
->  ...-passing-multiple-libs-to-pkg_config.patch |  41 -----
->  ...allow-use-of-system-installed-brotli.patch |  66 -------
->  ...Install-both-binaries-and-use-libdir.patch |  28 ++-
->  .../{nodejs_12.14.1.bb => nodejs_12.20.1.bb}  |  12 +-
->  .../php/php/CVE-2020-7069.patch               | 158 +++++++++++++++++
->  .../php/php/CVE-2020-7070.patch               |  24 +++
->  .../php/php/debian-php-fixheader.patch        |  27 +--
->  .../php/{php_7.4.4.bb => php_7.4.9.bb}        |  16 +-
->  .../dlt-daemon/dlt-daemon/275.patch           |  38 ++++
->  .../dlt-daemon/dlt-daemon_2.18.4.bb           |   1 +
->  .../libsdl/libsdl2-mixer_2.0.4.bb             |   2 +-
->  .../geoclue/geoclue_2.5.3.bb                  |   2 +-
->  .../nss/nss/CVE-2020-12401.patch              |  52 ++++++
->  meta-oe/recipes-support/nss/nss_3.51.1.bb     |   1 +
->  .../pcsc-lite/pcsc-lite_1.8.26.bb             |   1 +
->  .../{apache2_2.4.43.bb => apache2_2.4.46.bb}  |   4 +-
->  44 files changed, 1111 insertions(+), 285 deletions(-)
->  create mode 100644 meta-networking/recipes-connectivity/samba/samba/CVE-2020-14318.patch
->  create mode 100644 meta-networking/recipes-connectivity/samba/samba/CVE-2020-14383.patch
->  create mode 100644 meta-networking/recipes-kernel/wireguard/files/0001-compat-SYM_FUNC_-START-END-were-backported-to-5.4.patch
->  create mode 100644 meta-networking/recipes-support/tcpdump/tcpdump/0001-PPP-When-un-escaping-don-t-allocate-a-too-large-buff.patch
->  rename meta-networking/recipes-support/wireshark/{wireshark_3.2.7.bb => wireshark_3.2.10.bb} (96%)
->  create mode 100644 meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2020-15803.patch
->  rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.4.12.bb => mariadb-native_10.4.17.bb} (100%)
->  delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-build-breakage-from-lock_guard-error-6161.patch
->  rename meta-oe/recipes-dbs/mysql/{mariadb_10.4.12.bb => mariadb_10.4.17.bb} (100%)
->  create mode 100644 meta-oe/recipes-devtools/lua/lua/0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch
->  create mode 100644 meta-oe/recipes-devtools/lua/lua/CVE-2020-15945.patch
->  rename meta-oe/recipes-devtools/lua/{lua_5.3.5.bb => lua_5.3.6.bb} (87%)
->  create mode 100644 meta-oe/recipes-devtools/mcpp/files/CVE-2019-14274.patch
->  create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-Remove-use-of-register-r7-because-llvm-now-issues-an.patch
->  delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-build-allow-passing-multiple-libs-to-pkg_config.patch
->  delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0002-build-allow-use-of-system-installed-brotli.patch
->  rename meta-oe/recipes-devtools/nodejs/{nodejs_12.14.1.bb => nodejs_12.20.1.bb} (94%)
->  create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2020-7069.patch
->  create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2020-7070.patch
->  mode change 100755 => 100644 meta-oe/recipes-devtools/php/php/debian-php-fixheader.patch
->  rename meta-oe/recipes-devtools/php/{php_7.4.4.bb => php_7.4.9.bb} (97%)
->  create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch
->  create mode 100644 meta-oe/recipes-support/nss/nss/CVE-2020-12401.patch
->  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.43.bb => apache2_2.4.46.bb} (98%)
->
-Hi Armin,
+This is needed for login-shield pkg in meta-security
 
-maybe you take the graphviz patches into account I just sent out. As
-said in cover letter: graphviz is broken currently
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../recipes-filter/ipset/ipset_7.9.bb         | 21 +++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-networking/recipes-filter/ipset/ipset_7.9.bb
 
-Cheers
+diff --git a/meta-networking/recipes-filter/ipset/ipset_7.9.bb b/meta-networking/recipes-filter/ipset/ipset_7.9.bb
+new file mode 100644
+index 0000000000..95e48f0131
+--- /dev/null
++++ b/meta-networking/recipes-filter/ipset/ipset_7.9.bb
+@@ -0,0 +1,21 @@
++# Copyright (C) 2017 Aaron Brice <aaron.brice@datasoft.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
++
++DESCRIPTION = "Administration tool for IP sets"
++HOMEPAGE = "http://ipset.netfilter.org"
++LICENSE = "GPL-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
++SECTION = "base"
++
++DEPENDS = "libtool libmnl"
++
++SRC_URI = "http://ftp.netfilter.org/pub/ipset/${BP}.tar.bz2"
++SRC_URI[sha256sum] = "b75c13689eddf1d95b396840a69dc04fd7ae4112b10b70594bc0405df7b9b30a"
++
++inherit autotools pkgconfig module-base
++
++EXTRA_OECONF += "-with-kbuild=${KBUILD_OUTPUT} --with-ksource=${STAGING_KERNEL_DIR}"
++
++RRCOMMENDS_${PN} = "\
++    kernel-module-ip-set \
++" 
+-- 
+2.17.1
 
-Andreas
