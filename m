@@ -1,53 +1,92 @@
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
- by mx.groups.io with SMTP id smtpd.web11.36052.1610987654602416219
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web12.37008.1610991018202205792
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Jan 2021 08:34:15 -0800
+ Mon, 18 Jan 2021 09:30:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: uol@pengutronix.de)
-Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
-	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=42860 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
-	(envelope-from <uol@pengutronix.de>)
-	id 1l1XTo-0007OE-5S; Mon, 18 Jan 2021 17:34:12 +0100
-Received: from uol by dude.hi.pengutronix.de with local (Exim 4.92)
-	(envelope-from <uol@pengutronix.de>)
-	id 1l1XTn-0000re-N2; Mon, 18 Jan 2021 17:34:11 +0100
-From: "Ulrich ?lmann" <u.oelmann@pengutronix.de>
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1l1YM1-0000AX-4M; Mon, 18 Jan 2021 19:30:15 +0200
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Ulrich=20=C3=96lmann?= <u.oelmann@pengutronix.de>,
-	=?UTF-8?q?S=C3=B8ren=20Andersen?= <san@skov.dk>
-Subject: [PATCH] zram: fix sourcing of zram parameters
-Date: Mon, 18 Jan 2021 17:33:53 +0100
-Message-Id: <20210118163353.3267-1-u.oelmann@pengutronix.de>
-X-Mailer: git-send-email 2.30.0
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::7
-X-SA-Exim-Mail-From: uol@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-greenlet: Upgrade 0.4.17 -> 1.0.0
+Date: Mon, 18 Jan 2021 19:30:06 +0200
+Message-Id: <20210118173007.20996-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.2
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-From: Søren Andersen <san@skov.dk>
+Upgrade to release 1.0.0:
 
-Signed-off-by: Søren Andersen <san@skov.dk>
+- Add the ability to set a greenlet's PEP 567 contextvars context
+  directly, by assigning to the greenlet's gr_context attribute.
+  This restores support for some patterns of using greenlets atop
+  an async environment that became more challenging in 0.4.17.
+- The repr of greenlet objects now includes extra information
+  about its state. This is purely informative and the details are
+  subject to change.
+- The greenlet module is now a package. There are no API changes,
+  so all existing imports, including from C code, should continue
+  to work.
+- (C API) The undocumented GREENLET_VERSION macro that defined a
+  string giving the greenlet version is now deprecated and will
+  not be updated.
+- Fix %s and %r formatting of a greenlet on Python 2. Previously
+  it would result in a Unicode string instead of a native string.
+- Move continuous integration from Travis CI to Github Actions.
+
+License-Update: move to the src/ layout and this affects the note
+in LICENSE about Stackless Python
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-extended/zram/zram/zram-swap-init | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-devtools/python/python3-greenlet_0.4.17.bb   | 9 ---------
+ .../recipes-devtools/python/python3-greenlet_1.0.0.bb    | 8 ++++++++
+ 2 files changed, 8 insertions(+), 9 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-greenlet_0.4.17.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-greenlet_1.0.0.bb
 
-diff --git a/meta-oe/recipes-extended/zram/zram/zram-swap-init b/meta-oe/recipes-extended/zram/zram/zram-swap-init
-index 0643dbca2341..ccc3aafe3a6f 100755
---- a/meta-oe/recipes-extended/zram/zram/zram-swap-init
-+++ b/meta-oe/recipes-extended/zram/zram/zram-swap-init
-@@ -14,7 +14,7 @@ fi
- ZRAM_SIZE_PERCENT=100
- ZRAM_ALGORITHM=lz4
- 
--[ -f /etc/default/zram ] && ./etc/default/zram || true
-+[ -f /etc/default/zram ] && . /etc/default/zram || true
- 
- memtotal=$(grep MemTotal /proc/meminfo | awk ' { print $2 } ')
- memzram=$(($memtotal*${ZRAM_SIZE_PERCENT}/100))
+diff --git a/meta-python/recipes-devtools/python/python3-greenlet_0.4.17.bb b/meta-python/recipes-devtools/python/python3-greenlet_0.4.17.bb
+deleted file mode 100644
+index 744265e1f..000000000
+--- a/meta-python/recipes-devtools/python/python3-greenlet_0.4.17.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-SUMMARY = "Python lightweight in-process concurrent programming"
+-LICENSE = "MIT & PSF"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
+-                    file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
+-
+-SRC_URI[md5sum] = "d964c95c2d2f0f02f36c75e158d8e3dc"
+-SRC_URI[sha256sum] = "41d8835c69a78de718e466dd0e6bfd4b46125f21a67c3ff6d76d8d8059868d6b"
+-
+-inherit pypi distutils3
+diff --git a/meta-python/recipes-devtools/python/python3-greenlet_1.0.0.bb b/meta-python/recipes-devtools/python/python3-greenlet_1.0.0.bb
+new file mode 100644
+index 000000000..32194dba7
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-greenlet_1.0.0.bb
+@@ -0,0 +1,8 @@
++SUMMARY = "Python lightweight in-process concurrent programming"
++LICENSE = "MIT & PSF"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=e95668d68e4329085c7ab3535e6a7aee \
++                    file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
++
++SRC_URI[sha256sum] = "719e169c79255816cdcf6dccd9ed2d089a72a9f6c42273aae12d55e8d35bdcf8"
++
++inherit pypi distutils3 setuptools3
 -- 
-2.30.0
+2.17.1
 
