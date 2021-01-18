@@ -1,194 +1,298 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.40])
- by mx.groups.io with SMTP id smtpd.web10.34881.1610983064389359866
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.web08.36308.1610987648687108218
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Jan 2021 07:17:45 -0800
+ Mon, 18 Jan 2021 08:34:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=bp/uDyS7;
- spf=pass (domain: windriver.com, ip: 40.107.237.40, mailfrom: trevor.gamblin@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cxsiO34dzEDwW7fHKECRk955rMSxdcFDqCBjpUU5pF2ep/rFAEL79Tm5yvke8NhjWVCFBowJj4ubO8l/SrvxZ3jfVyCF2oDtRgRlWBvWHZ5jxTCCKklrqDcqtcT/D7WOU6Isk+hVIl0cQwjsmEBTj6hRPRX7qEYyNr/p9o/ybv2Ve0WsshGQpt15Ob5GdrUd0NgqYqSuscWnN5o2+Gk1AooE4scFQOWwFw2QRi1/oMldcHz0nAqTqGWSHCY9Kjjb59965G7jY2v2gg5C8X7V6PZcv6yBcpqPSmcz5K/rSn+4xbhZBH2etp6yFo3EkOQI+k6Srd5KiwG/R+ZvUwGDtQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EsOtGKhn2nw+GPyVpzR448KJkaWDXREjTpj0tGy7jsc=;
- b=jWP6+JcGR6/IaroWG/Fi5q3eCSISalj0PXhGOZ31U5riG6HGgI0mafrsBjoV5iNICdzP6uz6hwrk8KEol/Y+2Sf9Tm06/3mkp0PznWvBqG6aNrtnXFkBfasHjGQoktTYzMx3rXOm+LM18F9OUYpcWqqXasJ9KXFb7/OOoKkDaI+Lm6noAIiJjLBPb7PkJOgi6sEkR1A8RFNyDyymbTtclE8WzGJFdEo4b4/B+LHymMu4apJmEy5y90VzfKpry9GJZbtAqewldzeYVU3/srIsZdDjrlFK3weT2YC7/FCXS32hFsZddhYK/w6EocH6pCGMpb/QCGpG8AwBq5zeToSfXg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=KCa1pi/Y;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id j12so1230356pjy.5
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 Jan 2021 08:34:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EsOtGKhn2nw+GPyVpzR448KJkaWDXREjTpj0tGy7jsc=;
- b=bp/uDyS7WaubKJDi6tKxcRmfCDIQrdQzGMq+KQgavzlNF7FQkfHQ5Rgbl7FQiXojNWhxmv5oZf3dRpmstwfZ7jis+JtbAubjR1HeV1B5suagflxrHvUjzrGOPA/AA3MMjuVim8GeNMkihxMnKxILEmIIHZ8edf1yps4Wta4fz1Y=
-Authentication-Results: gmail.com; dkim=none (message not signed)
- header.d=none;gmail.com; dmarc=none action=none header.from=windriver.com;
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by SJ0PR11MB4942.namprd11.prod.outlook.com (2603:10b6:a03:2ac::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3763.13; Mon, 18 Jan
- 2021 15:17:42 +0000
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3763.014; Mon, 18 Jan 2021
- 15:17:42 +0000
-Subject: Re: [oe] [meta-python][PATCH] python3-sh: remove python3-tests from RDEPENDS
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-Cc: Shlomi Vaknin <shlomi.39sd@gmail.com>
-References: <20210115170346.117081-1-raj.khem@gmail.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <c18a942a-92ab-c440-a925-4d327585a341@windriver.com>
-Date: Mon, 18 Jan 2021 10:17:39 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.0
-In-Reply-To: <20210115170346.117081-1-raj.khem@gmail.com>
-X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: CH2PR05CA0045.namprd05.prod.outlook.com
- (2603:10b6:610:38::22) To BY5PR11MB3909.namprd11.prod.outlook.com
- (2603:10b6:a03:191::13)
-Return-Path: trevor.gamblin@windriver.com
+        d=gmail.com; s=20161025;
+        h=subject:to:references:from:autocrypt:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=QkLmSpktpJIiUstXfiB5u3+9B5BKGIqKQrG+TzT9itI=;
+        b=KCa1pi/YIkPnIzxvAAj7BK19biQx7ALFlnCTcRQgE0PQE/MD0gzJ6JZ6y1DxZe5jo/
+         kU74r2tvunvbM1vW9A4ytTZRj1/UBmBYpyzR1BqKmeILbGe31xOHcBkqM9ePysCKty7y
+         EMUxy2di/3HZhWGl7J1+7nqndWIA9NSoozppk5lNfgmbVPSiAWg7GlZ+ClMHbR/1oXQT
+         xlmQo4H41RpBiGqaz+d3pF3yLP956itGUbqtuFSButfTQ/ilO1KWKml/KqC+VTyJO62C
+         8Tm1Wtcz7JUdjDfHz/JdVyfKhALsvk9moeJT4+1HOsKTZauyk8Pt0QIUAEJ+V+JGm8fw
+         rVUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
+         :date:user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=QkLmSpktpJIiUstXfiB5u3+9B5BKGIqKQrG+TzT9itI=;
+        b=rX7ZMxCag4dr94xHZ2VUd9CArS7pXRnnji7s1sQ1d0SOvPx/zCIAV8tPQMoGuhlUAM
+         eq3TQ0zrVlUBwEf7G7xDG5HgHOcbH98jGFyK0WvgdkaxrJcyIZQ9h751wiIVJ8fh7NfG
+         BgvC8dSWjE3SXfcRudvFJUjLh+TFAaJLQJn1g+s4UtpypisijX6eW10OqyxY8uE8xZZC
+         q7HzaIp1LgMgv0wowhye05+zNRhit2ROa935dSJF92BdQHU0lpoWFfvSAYQRLpuK/KNV
+         2vlSMTS02GQP16el7UKU8fi5HY6uaLztSD19Ub778Or+u4UJccPlqfVTRTixhyWViMEq
+         MtnA==
+X-Gm-Message-State: AOAM533YC9Ctsz9qtJiONz+aRZc3IGEWSB6v86+SPLEZORUay6CqNKqn
+	3G40Ge8wgSc8dPBtviFfA6UDKRafohpJFg==
+X-Google-Smtp-Source: ABdhPJyg0pgaFTQKYDxi+MZNh1SUHqxVk2WRjbJasdS8choPj3OGaNdnnjsrQ1mVdKAoMEm97jjAqw==
+X-Received: by 2002:a17:90a:b296:: with SMTP id c22mr112393pjr.142.1610987647909;
+        Mon, 18 Jan 2021 08:34:07 -0800 (PST)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:64d8:445c:d3ae:b514? ([2601:202:4180:a5c0:64d8:445c:d3ae:b514])
+        by smtp.gmail.com with ESMTPSA id a29sm16245866pfr.73.2021.01.18.08.34.06
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 18 Jan 2021 08:34:07 -0800 (PST)
+Subject: Re: [oe] [dunfell 00/28] Patch review Jan 17th
+To: Diego Santa Cruz <Diego.SantaCruz@spinetix.com>,
+ "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>
+References: <cover.1610905441.git.akuster808@gmail.com>
+ <DB6PR0102MB26300183FAF7CBC1B993E95A88A40@DB6PR0102MB2630.eurprd01.prod.exchangelabs.com>
+From: "akuster" <akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+ xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
+ Jmd71vHMw+coBetWC3lk+IKjX815Ox0puYXQVRRtI+yMCgd6ib3oGxoQ8tCMwhf9c9/aKjaz
+ mP97lWgGHbiEVsDpjzmMZGlJ6pDVZzxykkJExKaosE46AcA8KvfhRQg5zRyYBtinzs8Zu8AP
+ aquZVHNXxPwjKPaSEEYqQjFeiNgFTavV+AhM2dmPmGUWCX9RZisrqA4slGwEB0srMdFf12Zg
+ mD35Y9jZ80qpu5LPtJCFcsaAlebqR+dg36pIpiRR+olhN1wmC6LYP1vw6uMEYBjkTa2Rnb6+
+ C4FDzCJD4UCrUvLMNeTW810DY0bjMMj3SfmSGSfQUssaaaTXCVlLGuGxyCr/kza1rHaXMKum
+ Ek4EFj1fyn7AfkSLEHfJfY4sO1tpgigvs4eD/4ZSQEXSu/TjVvyKx4EvUbhlGMRyH2CPwD/H
+ 7DFF8tcVtJvCwUUW+zKtjxjSSLrhniNMXAOQJZ6CdaqCe4OyJQT5aRdr+FWbBRjpaRCCf5nf
+ dTc88NMU9PrBT3vu0QJ5WNPO6MJpnb+d8iMNLZAz8tv8JMm2l+sMcNKSJ6lhX8peoBsfMVqc
+ FgiykEO0fUt7DCbUYR5tLjM/3E5tHvTjMooVJyOxoufVLYtTtQARAQABzSFha3VzdGVyODA4
+ IDxha3VzdGVyODA4QGdtYWlsLmNvbT7CwX0EEwEIACcFAlnlUP4CGyMFCQlmAYAFCwkIBwIG
+ FQgJCgsCBBYCAwECHgECF4AACgkQ7ou0mfRW5/kuhRAAlR2FTq5572jrX5nnPR7AqI2bvSVb
+ vqGLlvv739WhghvagbC+tu05QguopAhWW1/DcHK2+QtfIoC9UZrSW4RaO0CCo5sPjqK7l1KT
+ ngWX/rGjF6xTF2QN0U/btcpMyVN2CNtVLwsDF9e+GHKoUcnFkP+JP8vHGokN9k6E/c97hLaL
+ IJPeKl8LZXc2Efk+MaW1NXkfDJdcp/p+voajbihSQO6OZ/o+x9d2I3ZybKfTZ71+ek5Hxzjz
+ g6KkMOI7KJjlmBlrQFAtVbS+CFAKrwkYznE6ggkcmGv3N7DeUBTUR78hf+EZEAM+ajeLMtrG
+ rXE00pIb+gLGYPZxba5pCdQ+qWUW38qi9UnIRPm6fq7Ypx1r6XwJvbgCOkhbxo3D4YUdyC0b
+ FE9lgrg8htbc9in4j2+hVI6ALswNjLprzXdzdKrd+T3Egx36o3Z/qrYsW2o5/A5sVvvASVKi
+ wRPuEKhEhfmiHUPLvuKqhMoymHaz3fg5D2Q8G0gSDkLgeEpAjiWqf4+AGLx+MSDai7DSOsmI
+ t61kWxs7cFTB32UrB/TDoVNn3Fm88ZFQpA/bngikE9jgEm045mSY86fNlbFj2mcCd0Ha1i1n
+ aYc97RpgfjNMWyHDVHOGrNg/hJjkGa5RsAXkfyBwltHRw0Hj4urUQ3rr8um8PLe43SezPwXA
+ oRoyDxDOwU0EWeVQ/gEQALNHwj5VSPdnvXy1RXUuH+rclMx4x8zaqDyY0YqHfA7b/d8Y0VAt
+ Y6YpzDeFTwD8A0Wfb7kZ2mlDIE6ODCB71uT/E3C6b+FiiN+lgzslznjUW+9l8ddDhRrC8HMG
+ 37vrXF5h++PTXUKEKUlkDib1w093tu3mlJXUvIAzl8CEHkptF6Br0L9XxFwuWoNUfjT9IorQ
+ 0SVIhvq5PhVAITXUD5fD7/N8B4TYegmHFRo1UaaKSnSHwlJJkzKpeWOH8QTYrP0RHxX86Obv
+ IZuwbAo3F3oojcvLJt9NxWnbEmEALkleklLZnukgu7q5Wp1VDwhUbMFTLb6qmnBa/Xi30uOk
+ 0l1TMHDbeQswvQDOZBAMukSRqyBetKxQ3iTfZ/3z1ubQRcVDbVlMDScSHQq0LK3F9yMOMM/6
+ 0QPqJjl13xn/+Bn7WJiAIXXwzAV7uo6i0khFfjDtCDQ40aeffqOLxp1yMLkc3EKJGcQ5F6O2
+ ycEf4QXCYUbMXjxB0EJB8y7z+xOi5Mmd/pPlVmZ2gQK84NAL90p7n7jRlyf3gOUY+JOl4c5e
+ UFiIhOzmuqNrvPOiZ02GXh6SGUU5y7IgSoIKvXSFgHAn2OG/tcspBmkyv6IuNVpmbmEgYn4I
+ Rnt40UXVQkxTh0dENFhk2cjunMYozV/OqYCgmZLFSeJd8kAo4yn+yOtNABEBAAHCwWUEGAEI
+ AA8FAlnlUP4CGwwFCQlmAYAACgkQ7ou0mfRW5/nNcg//R63cbOS6zLtvdnPub3Ssp1Ft8Wmv
+ mni+kccuNApuDV7d63QckYxjAfUv2zYMLpbh87gVbLyCq9ASn552EbfRhTvHdk44CgbHBVcI
+ ZBEdZWgRR5ViJakQSYHpP2e5AGNFnx9gSIuRTaa5rvZM+4xeoZ2vJiq93TtaYPr7UFNfK+c4
+ vv4C66lkt9l95/I10eSc3RqbOKZW47emlg4X3ygEoB9k2lPrpspyf6sUuSEi0WrlSxoLAr6p
+ JG8rTUErYNeXe6JCdL31odDx1Dh5sdKIj2RicUYZNilxu9f1M7jZwf2ra1FGAlKj2ybqmgpZ
+ EFteaiCinEYsvDyZyOiWHjAFI+RZIPQQL3AnVp4l7wYD3r9hnqYPww0slyMDcb9262RoFkHq
+ dDwxPYarrNjWUpOzxB6bFxOgNRdCTgvQl8Ftk8a/yXB6vHeUSm1vPFCBxQPZytyfOLhEWm0J
+ /mkVL0Z6iRK3p1LKnpLYCS4/esL2u7RrhPyCs2SsL58YcQF/g+PpeT9geZ+oyZ/4IQ+TWJoU
+ PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
+ ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
+ 8CS2NxU=
+Message-ID: <76f02fb3-c89f-57fd-df8e-0e36d7e9e081@gmail.com>
+Date: Mon, 18 Jan 2021 08:34:06 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by CH2PR05CA0045.namprd05.prod.outlook.com (2603:10b6:610:38::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.5 via Frontend Transport; Mon, 18 Jan 2021 15:17:41 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: cd2ace16-6df0-4db6-5c5c-08d8bbc43318
-X-MS-TrafficTypeDiagnostic: SJ0PR11MB4942:
-X-Microsoft-Antispam-PRVS: 
-	<SJ0PR11MB4942E331D5A61D813C13522D9FA40@SJ0PR11MB4942.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2089;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	l/nee0jm8Rv5GdKXnv0VGHEYA5cnN1mahOMbdqV11m+m6hPhvxzavuCix2uPWLYvPL5SMLJv9rlVoXWIR7LdycN3UOmOZbrbRLP8jhNZVB0jNYKn5gEwQM/OLr46RcwG7Hh0Onk792BmRnpfg4JKkYjWNgrYy55QaTfkGjKXo9gvHhS2lPILC29umRxuuRL7v3sZTWMDAfzMpMUwiUp3HAfBQcoIFwNzpNO1h5M7LaiO129oMv3ZVAHcgAKx4CPfyg8gIwtDSZt3XLpjSrYcWuwtqUSmCRbtioSuEhL+Xh6WGtUetxhqp/cBd9SxOEwLKbRfv9jNkb53/wWP5sioUdevsWHaf011MKn+yMRXhtPpg2l/WarKS6ZXxmI6pSlFQy0GDDMQlI9PFVNXa5dlicUPQIUXLRe42xt1Ihiyh3Vc6wi/oDeJ0qyz6jLdIwNA7rgD+8W3v59nG7umMlo1VLBNZ62DVhTi24GynGP1+uGSf0FNYZcONmRddiikrMqxxt63/EFrj0XCKI/TZzPTLReJ0X+1bb3xAMUwUb98V6kJG7X6sVzNhl8KhnM7FzAZ
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(39850400004)(136003)(396003)(366004)(376002)(8936002)(66556008)(186003)(66476007)(66946007)(956004)(31686004)(2616005)(8676002)(33964004)(166002)(52116002)(16526019)(44832011)(26005)(53546011)(86362001)(31696002)(6486002)(83380400001)(4326008)(966005)(2906002)(478600001)(5660300002)(36756003)(16576012)(316002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?KzVDNHZTWWlRNThuSXhrU1NEaXArNzBrVklEMmJvRTg3TXIwVHdSTGFrM3lz?=
- =?utf-8?B?Rk5MaHljSVplTHQrdWVjMmY5elZMOHZmcWI0bTljcldad290a3ArdldNM1BG?=
- =?utf-8?B?cUtrVWtiMktoVEtmdjZNTkNRbnNtMjZEeE9TTENwK1R2VmFtdExEM3EzUTBy?=
- =?utf-8?B?T3dXbzlDeFN6VU1QZlJ2a2xvV25BSkJmUHArNHhSVjVLeVlqc0kya3c4WnVY?=
- =?utf-8?B?Q25jUmhvYnVLWnk5SS9YdDlGTlloalBmYmgrRTNQaDMwR0VRR3dxUG1leGFa?=
- =?utf-8?B?OWdhemFyTE9oUUN1V1BzVlFQL2xYS0tKWVVZWHpCNDh3TnpqQmgxajVob2sv?=
- =?utf-8?B?dnZFTG9lYUd1V083dnFNWllwVWZWUnZEa1dzSGRXU3NLcHpXTkZ2R1VVK3ph?=
- =?utf-8?B?Q3M2NmNnSkMvbkNVSnVkZUFHN24rWEdWZ2VpcU9qb01qb2RHLyswN1pRVkRM?=
- =?utf-8?B?NGxLdkJNcE9zbXV5bjAweWlhODBVQ3JaZkRNSFJCdXpYKzd6Y3Vhd2RiUUl4?=
- =?utf-8?B?Z3A0c3hKZTBOWmtHeFpWdXF6NDRDaGduQnFGckJFMkNvZERNc2VLU29wR2Nw?=
- =?utf-8?B?d2hEL2ZTSkJiTTRzMHRHbEx6TnJpbU5qSVV5dUYrTXZWSExma3FoWllVYVNs?=
- =?utf-8?B?YVJ4RjZMb3V3eG9YcTV1UWc0cDBHS2RQeStXa2hJTzZOZ0x3ckhhS2wrdTBE?=
- =?utf-8?B?MnI2M2xpZmpNRitPRWVZVEpwSjFBWGxNZ1N5VGRmUWpPb043cmpXN01JTlBS?=
- =?utf-8?B?cE1ibkZ2QnpLRG1EZHFXeGFzWXhvUUI1M1RLeTRpOGVRNkdPQUF0UGJGZ1FI?=
- =?utf-8?B?aFFyRkxGd29hbzBsZWwrV2ZaR3gyVW9raVhIeitJMGZ2OEFJb25pckx3MlVJ?=
- =?utf-8?B?TmR1VWg3a2huTzdjd1NqT094ZWQrVXVScEZQdFp1Z1JQQnZ4aTBIQWpESlRZ?=
- =?utf-8?B?UnFGSXJjZlpUcUxMc0V3WE44bUs0eXVUd1F6RFMvY1VNM3hqNGJkZk5ZUG02?=
- =?utf-8?B?OGEwbjNPR0F3YXVka2FydUVsbndMUEJvczkxMmZtcExKaFBiemtNNFUzNkxR?=
- =?utf-8?B?bWpFdWdtRmFPZnpuZmxJWWZTUTZHUTAwd1hnMktGWit5bTduTHRQY2RxdFQ5?=
- =?utf-8?B?dXhHRm44WlZGeklKc0crU09jWUdJdldIMWtJR0w1Qk9FbzZPUFlmR0c5M09P?=
- =?utf-8?B?dVFSQUptTzhkZVo2bVZIUm16bDhEdkNUMGMvdlZncmt1dTRDRFhmcStPVVNV?=
- =?utf-8?B?NGhMRmZxK1RKeXF2VUJBRjNKN2dNOS93a2xXYlpWKy8wMW1nYk44UmFkbFZj?=
- =?utf-8?Q?lr5QewWWgqKJz1pyJR+769HekGSzCzbm7d?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cd2ace16-6df0-4db6-5c5c-08d8bbc43318
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jan 2021 15:17:41.9702
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: z5vy9gw8OGuxVaIekdBfoRaUPQbjg5Jrp1/78F5yJqjqgJZCJdjnUrI9T8EaLKjwuAv6uLcEqau+RKoIYjl4h7CaOzSOOb4/paKwh/oyg3U=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB4942
-Content-Type: multipart/alternative;
- boundary="------------8EE4DA0271FAF3B763035DC8"
+In-Reply-To: <DB6PR0102MB26300183FAF7CBC1B993E95A88A40@DB6PR0102MB2630.eurprd01.prod.exchangelabs.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
---------------8EE4DA0271FAF3B763035DC8
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
 
 
-On 2021-01-15 12:03 p.m., Khem Raj wrote:
-> From: Shlomi Vaknin <shlomi.39sd@gmail.com>
+On 1/18/21 2:12 AM, Diego Santa Cruz wrote:
+>> -----Original Message-----
+>> From: openembedded-devel@lists.openembedded.org <openembedded-
+>> devel@lists.openembedded.org> On Behalf Of akuster via
+>> lists.openembedded.org
+>> Sent: 17 January 2021 18:46
+>> To: openembedded-devel@lists.openembedded.org
+>> Subject: [oe] [dunfell 00/28] Patch review Jan 17th
+>>
+>> Here is the next batch for Dunfell. Please review and have comments back by
+>> Wednesday.
+>>
+>> The following changes since commit
+>> f2d02cb71eaff8eb285a1997b30be52486c160ae:
+>>
+>>   python3-pyinotify: Add missing ctypes dependency (2020-11-15 11:13:25 -
+>> 0800)
+>>
+>> are available in the Git repository at:
+>>
+>>   git://git.openembedded.org/meta-openembedded-contrib stable/dunfell-
+>> nut
+>>   http://cgit.openembedded.org/meta-openembedded-
+>> contrib/log/?h=stable/dunfell-nut
+>>
+>> Armin Kuster (5):
+>>   wireguard-module: fix build issue with 5.4 kernel
+>>   mariadb: update to 10.4.17 for cve fixes
+>>   lua: update to 5.3.6
+>>   nss: Security fix CVE-2020-12401
+>>   wireshark: Several securtiy fixes
+>>
+>> Chenxi Mao (1):
+>>   geoclue: select avahi-daemon if nmea enabled
+>>
+>> Gianfranco (1):
+>>   dlt-daemon: add upstream patch to fix CVE-2020-29394
+>>
+>> Khem Raj (4):
+>>   nodejs: Fix build with icu 67.1
+>>   nodejs: Upgrade to 12.18.3
+>>   nodejs: Fix arm32/thumb builds with clang
+>>   nodejs: Update to 12.19.0
+>>
+>> Leon Anavi (1):
+>>   php: Upgrade 7.4.4 -> 7.4.9
+>>
+>> Max Kellermann (1):
+>>   php: remove the failing ${D}/${TMPDIR} code
+>>
+>> Roland Hieber (1):
+>>   pcsc-lite: provide pcsc-lite-lib-native explicitly for native build
+>>
+>> Sakib Sajal (1):
+>>   apache2: upgrade v2.4.43 -> v2.4.46
+>>
+>> Sean Nyekjaer (1):
+>>   nodejs: 12.19.1 -> 12.20.1
+>>
+>> Stacy Gaikovaia (1):
+>>   nodejs: 12.19.0 -> 12.19.1
+>>
+>> Wang Mingyu (1):
+>>   zabbix: CVE-2020-15803 Security Advisory
+>>
+>> Wenlin Kang (2):
+>>   lua: fix CVE-2020-15945
+>>   lua: fix CVE-2020-24371
+>>
+>> Zang Ruochen (1):
+>>   mcpp: Normalize the patch format of CVE
+>>
+>> Zheng Ruoqin (4):
+>>   samba: CVE-2020-14318 Security Advisory
+>>   samba: CVE-2020-14383 Security Advisory
+>>   php: CVE-2020-7070
+>>   php: CVE-2020-7069
+>>
+>> jabdoa2 (2):
+>>   libsdl2-mixer: Fix ogg/vorbis support in libsdl2-mixer
+>>   libsdl2-mixer: set --disable-music-ogg-shared to link statically
+>>
+>> viatsk (1):
+>>   tcpdump: Patch for CVE-2020-8037
+>>
+>>  .../samba/samba/CVE-2020-14318.patch          | 142 +++++++++++++++
+>>  .../samba/samba/CVE-2020-14383.patch          | 112 ++++++++++++
+>>  .../samba/samba_4.10.18.bb                    |   2 +
+>>  ...NC_-START-END-were-backported-to-5.4.patch |  29 +++
+>>  .../wireguard-module_1.0.20200401.bb          |   3 +-
+>>  ...ping-don-t-allocate-a-too-large-buff.patch |  70 ++++++++
+>>  .../recipes-support/tcpdump/tcpdump_4.9.3.bb  |   1 +
+>>  ...wireshark_3.2.7.bb => wireshark_3.2.10.bb} |   2 +-
+>>  .../zabbix/zabbix/CVE-2020-15803.patch        |  36 ++++
+>>  .../zabbix/zabbix_4.4.6.bb                    |   1 +
+>>  ...e_10.4.12.bb => mariadb-native_10.4.17.bb} |   0
+>>  meta-oe/recipes-dbs/mysql/mariadb.inc         |   6 +-
+>>  ...-breakage-from-lock_guard-error-6161.patch |  32 ----
+>>  .../mariadb/0001-Fix-library-LZ4-lookup.patch |  19 +-
+>>  .../mysql/mariadb/c11_atomics.patch           |  24 ++-
+>>  .../configure.cmake-fix-valgrind.patch        |  10 +-
+>>  .../mariadb/fix-a-building-failure.patch      |  13 +-
+>>  .../mysql/mariadb/fix-arm-atomic.patch        |  13 +-
+>>  ...Lists.txt-fix-gen_lex_hash-not-found.patch |  12 +-
+>>  ...akeLists.txt-fix-do_populate_sysroot.patch |  10 +-
+>>  ...{mariadb_10.4.12.bb => mariadb_10.4.17.bb} |   0
+>>  ...rriers-cannot-be-active-during-sweep.patch |  90 ++++++++++
+>>  .../lua/lua/CVE-2020-15945.patch              | 167 ++++++++++++++++++
+>>  .../lua/{lua_5.3.5.bb => lua_5.3.6.bb}        |   8 +-
+>>  .../mcpp/files/CVE-2019-14274.patch           |  34 ++++
+>>  .../mcpp/files/ice-mcpp.patch                 |  31 ----
+>>  meta-oe/recipes-devtools/mcpp/mcpp_2.7.2.bb   |   3 +-
+>>  ...gister-r7-because-llvm-now-issues-an.patch |  53 ++++++
+>>  ...-passing-multiple-libs-to-pkg_config.patch |  41 -----
+>>  ...allow-use-of-system-installed-brotli.patch |  66 -------
+>>  ...Install-both-binaries-and-use-libdir.patch |  28 ++-
+>>  .../{nodejs_12.14.1.bb => nodejs_12.20.1.bb}  |  12 +-
+>>  .../php/php/CVE-2020-7069.patch               | 158 +++++++++++++++++
+>>  .../php/php/CVE-2020-7070.patch               |  24 +++
+>>  .../php/php/debian-php-fixheader.patch        |  27 +--
+>>  .../php/{php_7.4.4.bb => php_7.4.9.bb}        |  16 +-
+>>  .../dlt-daemon/dlt-daemon/275.patch           |  38 ++++
+>>  .../dlt-daemon/dlt-daemon_2.18.4.bb           |   1 +
+>>  .../libsdl/libsdl2-mixer_2.0.4.bb             |   2 +-
+>>  .../geoclue/geoclue_2.5.3.bb                  |   2 +-
+>>  .../nss/nss/CVE-2020-12401.patch              |  52 ++++++
+>>  meta-oe/recipes-support/nss/nss_3.51.1.bb     |   1 +
+>>  .../pcsc-lite/pcsc-lite_1.8.26.bb             |   1 +
+>>  .../{apache2_2.4.43.bb => apache2_2.4.46.bb}  |   4 +-
+>>  44 files changed, 1111 insertions(+), 285 deletions(-)
+>>  create mode 100644 meta-networking/recipes-
+>> connectivity/samba/samba/CVE-2020-14318.patch
+>>  create mode 100644 meta-networking/recipes-
+>> connectivity/samba/samba/CVE-2020-14383.patch
+>>  create mode 100644 meta-networking/recipes-kernel/wireguard/files/0001-
+>> compat-SYM_FUNC_-START-END-were-backported-to-5.4.patch
+>>  create mode 100644 meta-networking/recipes-
+>> support/tcpdump/tcpdump/0001-PPP-When-un-escaping-don-t-allocate-a-
+>> too-large-buff.patch
+>>  rename meta-networking/recipes-support/wireshark/{wireshark_3.2.7.bb
+>> => wireshark_3.2.10.bb} (96%)
+>>  create mode 100644 meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2020-
+>> 15803.patch
+>>  rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.4.12.bb =>
+>> mariadb-native_10.4.17.bb} (100%)
+>>  delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-build-
+>> breakage-from-lock_guard-error-6161.patch
+>>  rename meta-oe/recipes-dbs/mysql/{mariadb_10.4.12.bb =>
+>> mariadb_10.4.17.bb} (100%)
+>>  create mode 100644 meta-oe/recipes-devtools/lua/lua/0001-Fixed-bug-
+>> barriers-cannot-be-active-during-sweep.patch
+>>  create mode 100644 meta-oe/recipes-devtools/lua/lua/CVE-2020-
+>> 15945.patch
+>>  rename meta-oe/recipes-devtools/lua/{lua_5.3.5.bb => lua_5.3.6.bb} (87%)
+>>  create mode 100644 meta-oe/recipes-devtools/mcpp/files/CVE-2019-
+>> 14274.patch
+>>  create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-
+>> Remove-use-of-register-r7-because-llvm-now-issues-an.patch
+>>  delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-build-
+>> allow-passing-multiple-libs-to-pkg_config.patch
+>>  delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0002-build-
+>> allow-use-of-system-installed-brotli.patch
+>>  rename meta-oe/recipes-devtools/nodejs/{nodejs_12.14.1.bb =>
+>> nodejs_12.20.1.bb} (94%)
+>>  create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2020-
+>> 7069.patch
+>>  create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2020-
+>> 7070.patch
+>>  mode change 100755 => 100644 meta-oe/recipes-
+>> devtools/php/php/debian-php-fixheader.patch
+>>  rename meta-oe/recipes-devtools/php/{php_7.4.4.bb => php_7.4.9.bb}
+>> (97%)
+>>  create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-
+>> daemon/275.patch
+>>  create mode 100644 meta-oe/recipes-support/nss/nss/CVE-2020-
+>> 12401.patch
+>>  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.43.bb =>
+>> apache2_2.4.46.bb} (98%)
+>>
+>> --
+>> 2.17.1
+> Hi Armin,
 >
-> python3-tests installs the unit tests of python
-> as well as stuff that no one should care about
-> in its rootfs. Thus, it is not a runtime dependency
-> of python3-sh.
+> Is there any specific reason why the gssdp and gupnp updates I sent for dunfell a while ago to fix a CVE are not in? They are in the patch review you've sent for gatesgarth though.
+I most forgot to merge them from Gatesgarth. They are in there shortly.
+-armin
 >
-> Signed-off-by: Shlomi Vaknin <shlomi.39sd@gmail.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   meta-python/recipes-devtools/python/python3-sh_1.14.1.bb | 1 -
->   1 file changed, 1 deletion(-)
+> Anything I should do?
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-sh_1.14.1.bb b/meta-python/recipes-devtools/python/python3-sh_1.14.1.bb
-> index c7b50c21a4..89d5008e98 100644
-> --- a/meta-python/recipes-devtools/python/python3-sh_1.14.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-sh_1.14.1.bb
-> @@ -18,7 +18,6 @@ RDEPENDS_${PN} += " \
->       ${PYTHON_PN}-resource \
->       ${PYTHON_PN}-shell \
->       ${PYTHON_PN}-terminal \
-> -    ${PYTHON_PN}-tests \
->       ${PYTHON_PN}-threading \
->       ${PYTHON_PN}-unixadmin \
->   "
+> Thanks,
 >
-> 
+> Diego
 >
 
---------------8EE4DA0271FAF3B763035DC8
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 2021-01-15 12:03 p.m., Khem Raj
-      wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:20210115170346.117081-1-raj.khem@gmail.com">
-      <pre class="moz-quote-pre" wrap="">From: Shlomi Vaknin <a class="moz-txt-link-rfc2396E" href="mailto:shlomi.39sd@gmail.com">&lt;shlomi.39sd@gmail.com&gt;</a>
-
-python3-tests installs the unit tests of python
-as well as stuff that no one should care about
-in its rootfs. Thus, it is not a runtime dependency
-of python3-sh.
-
-Signed-off-by: Shlomi Vaknin <a class="moz-txt-link-rfc2396E" href="mailto:shlomi.39sd@gmail.com">&lt;shlomi.39sd@gmail.com&gt;</a>
-Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a></pre>
-    </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
-    <blockquote type="cite" cite="mid:20210115170346.117081-1-raj.khem@gmail.com">
-      <pre class="moz-quote-pre" wrap="">
----
- meta-python/recipes-devtools/python/python3-sh_1.14.1.bb | 1 -
- 1 file changed, 1 deletion(-)
-
-diff --git a/meta-python/recipes-devtools/python/python3-sh_1.14.1.bb b/meta-python/recipes-devtools/python/python3-sh_1.14.1.bb
-index c7b50c21a4..89d5008e98 100644
---- a/meta-python/recipes-devtools/python/python3-sh_1.14.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-sh_1.14.1.bb
-@@ -18,7 +18,6 @@ RDEPENDS_${PN} += &quot; \
-     ${PYTHON_PN}-resource \
-     ${PYTHON_PN}-shell \
-     ${PYTHON_PN}-terminal \
--    ${PYTHON_PN}-tests \
-     ${PYTHON_PN}-threading \
-     ${PYTHON_PN}-unixadmin \
- &quot;
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
-
-
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------8EE4DA0271FAF3B763035DC8--
