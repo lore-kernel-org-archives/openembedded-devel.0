@@ -1,31 +1,31 @@
 Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web11.8132.1611037966312665436
+ by mx.groups.io with SMTP id smtpd.web12.8409.1611038120368269184
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Jan 2021 22:32:47 -0800
+ Mon, 18 Jan 2021 22:35:25 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: wangmy@cn.fujitsu.com)
 X-IronPort-AV: E=Sophos;i="5.79,357,1602518400"; 
-   d="scan'208";a="103609617"
+   d="scan'208";a="103609738"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 19 Jan 2021 14:32:30 +0800
+  by heian.cn.fujitsu.com with ESMTP; 19 Jan 2021 14:35:18 +0800
 Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id 852E74CE6783
-	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Jan 2021 14:32:30 +0800 (CST)
+	by cn.fujitsu.com (Postfix) with ESMTP id 1D4DF4CE603D
+	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Jan 2021 14:35:15 +0800 (CST)
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Tue, 19 Jan 2021 14:32:29 +0800
+ (TLS) id 15.0.1497.2; Tue, 19 Jan 2021 14:35:14 +0800
 From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@cn.fujitsu.com>
-Subject: [oe] [meta-oe][PATCH] dovecot upgrade: 2.2.36.4 -> 2.3.13
-Date: Tue, 19 Jan 2021 14:32:26 +0800
-Message-ID: <1611037946-38955-1-git-send-email-wangmy@cn.fujitsu.com>
+Subject: [oe] [meta-oe][PATCH] dovecot: upgrade 2.2.36.4 -> 2.3.13
+Date: Tue, 19 Jan 2021 14:35:10 +0800
+Message-ID: <1611038110-39056-1-git-send-email-wangmy@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.33]
 X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
  G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204)
-X-yoursite-MailScanner-ID: 852E74CE6783.A393E
+X-yoursite-MailScanner-ID: 1D4DF4CE603D.A46AA
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
 X-Spam-Status: No
