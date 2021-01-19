@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.14832.1611077878126023475
+ by mx.groups.io with SMTP id smtpd.web09.14580.1611077878329574767
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 19 Jan 2021 09:37:58 -0800
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=59758 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1l1ux2-0001eq-Nw; Tue, 19 Jan 2021 19:37:57 +0200
+	id 1l1ux1-0001eq-Rp; Tue, 19 Jan 2021 19:37:56 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 04/10] python3-cheetah: Upgrade 3.2.5 -> 3.2.6
-Date: Tue, 19 Jan 2021 19:37:40 +0200
-Message-Id: <20210119173746.24694-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 03/10] python3-pyperf: Upgrade 2.0.0 -> 2.1.0
+Date: Tue, 19 Jan 2021 19:37:39 +0200
+Message-Id: <20210119173746.24694-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210119173746.24694-1-leon.anavi@konsulko.com>
 References: <20210119173746.24694-1-leon.anavi@konsulko.com>
@@ -30,30 +30,41 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.2.6:
+Upgrade to release 2.1.0:
 
-- Fixed use of uninitialized variable in _namemapper
+- The compare_to command now computes the geometric mean.
+- The compare_to command no longer displays percentages: display
+  less numbers to make the output easier to read. Also, percentage
+  were almost the same values than the xxx faster or xxx slower
+  values, but rounded differenly which introduced confusion.
+- Project moved to https://github.com/psf/pyperf/
+- system command now only emits a warning rather than failing with
+  a hard error if it fails to get or set the frequency of a CPU.
+- The pyperf project is now covered by the PSF Code of Conduct.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-cheetah_3.2.5.bb => python3-cheetah_3.2.6.bb}     | 3 +--
+ .../{python3-pyperf_2.0.0.bb => python3-pyperf_2.1.0.bb}       | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-cheetah_3.2.5.bb => python3-cheetah_3.2.6.bb} (72%)
+ rename meta-python/recipes-devtools/python/{python3-pyperf_2.0.0.bb => python3-pyperf_2.1.0.bb} (84%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cheetah_3.2.5.bb b/meta-python/recipes-devtools/python/python3-cheetah_3.2.6.bb
-similarity index 72%
-rename from meta-python/recipes-devtools/python/python3-cheetah_3.2.5.bb
-rename to meta-python/recipes-devtools/python/python3-cheetah_3.2.6.bb
-index 6fa088f59..a7e5443f2 100644
---- a/meta-python/recipes-devtools/python/python3-cheetah_3.2.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-cheetah_3.2.6.bb
-@@ -11,5 +11,4 @@ RDEPENDS_${PN}_class-native = ""
+diff --git a/meta-python/recipes-devtools/python/python3-pyperf_2.0.0.bb b/meta-python/recipes-devtools/python/python3-pyperf_2.1.0.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-pyperf_2.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-pyperf_2.1.0.bb
+index 7ced7d017..b57ea16eb 100644
+--- a/meta-python/recipes-devtools/python/python3-pyperf_2.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pyperf_2.1.0.bb
+@@ -13,8 +13,7 @@ Features: \
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=78bc2e6e87c8c61272937b879e6dc2f8"
  
- BBCLASSEXTEND = "native nativesdk"
+-SRC_URI[md5sum] = "7f62d3f6fc5475138791d3d883fdf4cd"
+-SRC_URI[sha256sum] = "2189fbc4af08d519f85468e70e32c902eab0f1341b2c41028b94b2832d3169a7"
++SRC_URI[sha256sum] = "1257d673d89fdcdbaec8077afeb365e7a94739c1b263572b09403cac25708ad3"
  
--SRC_URI[md5sum] = "fc735d4ca7997df2a2da1cae0cf89a1e"
--SRC_URI[sha256sum] = "ececc9ca7c58b9a86ce71eb95594c4619949e2a058d2a1af74c7ae8222515eb1"
-+SRC_URI[sha256sum] = "f1c2b693cdcac2ded2823d363f8459ae785261e61c128d68464c8781dba0466b"
+ DEPENDS += "${PYTHON_PN}-six-native"
+ 
 -- 
 2.17.1
 
