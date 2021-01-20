@@ -1,147 +1,294 @@
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.69])
- by mx.groups.io with SMTP id smtpd.web12.22156.1611107387817816108
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web08.23696.1611117824882804712
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Jan 2021 17:49:48 -0800
+ Tue, 19 Jan 2021 20:43:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Rgkh3QHA;
- spf=pass (domain: windriver.com, ip: 40.107.244.69, mailfrom: kai.kang@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JtMcVi3bJjSYBv0+87goLvW0S/oXlTbVmbHwZKMOyGD4ffMngeVnDM7oyaRk1BPNWtDp5zMi4V7O9kdaBcEoKo2+lPj1hEZIOXOWk9jEnnw9g+10UxdnyHndGdBwBmQXyQcvWVXifl1FFAA9Mk6LVpOI5iCL5O/XUoVQKM/2Te2tSOpx1vv5534BV9bWgkiEnJbLtHrhAik0TvaIWwOrJf5plfAa3hU9NTFQkc3hOr1WgqQ07XiTI6n4Vf6toMOLt2rXmyuHvTxz1eyPFGsRGGu6xbbOCtu3cY4tC4TzAfT5fQ0k+vvEw4z0khexQ+i9icDaGsHkpRG0fMH+BJ/QOA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JsZ4tCh7XWViyca4xkmokarL6F7pJuxhk3AgcmrIfXs=;
- b=RDG9R/0NJjY8sDkoYnWLO/zaAoYuLeCV6QTVh5QQQC1JsOn63pBkLG4vfE5Af84NGAS5l5SHCzmIjw8DtC5Igf4wGykX5Po1gSmHA440URZrwA3pYQx/42Ctcwneocl/TonA8fCLzWmcE9QpDs9NXT8z+ZT8a49sWcnrtIXKDWUI6YgBtGmvkHBxtZskteIDS6xgLbD3KglK/DAIiSdYpyViwVLS6LImnyQAH0SbFOyp2HkL8UCsXqSJfsmf/zPhtEhv33e66kFbX38LiNEKKZ5FDHNbRGYEUZ3nQ0508g/k44rFoP9gvE3HiUoiN4Mbnacq8hkDYbGySlFkXf7RuA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=c+Yj3gF4;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id w18so2453219pfu.9
+        for <openembedded-devel@lists.openembedded.org>; Tue, 19 Jan 2021 20:43:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JsZ4tCh7XWViyca4xkmokarL6F7pJuxhk3AgcmrIfXs=;
- b=Rgkh3QHA0/1rg11IIYbmUxrgZjN3rfUBR1k2ESMNrfXM3UdQFoaXjA3kSvGnIym+oyWrABCM1h2FXLzPlY+7i4JXbfi8lEM0hWU1BPzWLH0w5XO7uLAqAbog02NyrHLyUYInHnnNVWhv8k0n+Dfv6Sn3OhWb3eeRi8i/93RKeyw=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BYAPR11MB3687.namprd11.prod.outlook.com (2603:10b6:a03:ff::26)
- by BY5PR11MB4194.namprd11.prod.outlook.com (2603:10b6:a03:1c0::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3763.10; Wed, 20 Jan
- 2021 01:49:46 +0000
-Received: from BYAPR11MB3687.namprd11.prod.outlook.com
- ([fe80::25dc:1dca:8fb5:ea28]) by BYAPR11MB3687.namprd11.prod.outlook.com
- ([fe80::25dc:1dca:8fb5:ea28%5]) with mapi id 15.20.3763.014; Wed, 20 Jan 2021
- 01:49:46 +0000
-From: "kai" <kai.kang@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] blueman: refresh patch
-Date: Wed, 20 Jan 2021 09:49:20 +0800
-Message-Id: <20210120014920.16094-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
-X-Originating-IP: [60.247.85.82]
-X-ClientProxiedBy: HK2PR03CA0066.apcprd03.prod.outlook.com
- (2603:1096:202:17::36) To BYAPR11MB3687.namprd11.prod.outlook.com
- (2603:10b6:a03:ff::26)
-Return-Path: kai.kang@windriver.com
+        d=gmail.com; s=20161025;
+        h=to:cc:from:subject:autocrypt:message-id:date:user-agent
+         :mime-version:content-transfer-encoding:content-language;
+        bh=VKXnklsmFg59XAdFY5MdIwxDrnDYRo5UcL/39+f1Cz0=;
+        b=c+Yj3gF4gFkWGXu8KTrdwk1xwyZhpFk9Fp9POQBHmBH6pUmeU2S9YulystnPOzCIg9
+         EzMOehA1Me8ZeQMGOtiV5NRc8lbfHlsS/r9zlr68odLOLA62idTvqfwrrR8s+XbxjJUF
+         ivzUk5buHP7tSFXbNbGRq8rHwEc+j8QBQWhirk47iJMXr9GypdLK5VcshPUPrzci8JnY
+         H9DIu/dE9EktFEqcLkRB5080uD/zZsvVOde11ZvY/0gMXnRjJ0kRq405KqqabF6C8H1p
+         ZfZz6eKFXHaAislixdEA2XXG0H+1ptHRSY9bQKiMRn5k1UTRHhW5RgRPWJ9V4b1xKoYs
+         XdbQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:to:cc:from:subject:autocrypt:message-id:date
+         :user-agent:mime-version:content-transfer-encoding:content-language;
+        bh=VKXnklsmFg59XAdFY5MdIwxDrnDYRo5UcL/39+f1Cz0=;
+        b=PuCjPmlyLcx1A0eLhhgmB5JShW9HPTS16ooRtRLcjwgJ4XAxJncowuD55Rhk/SpZ1/
+         5iplqJBT2gaF//UGUG23HFQOSkw/dlADhI5hYjzfz9gpPswmksOVhWUjD2e5oTiOAS3b
+         4m1w2awRuq3oqZhv5181Aq+fvjPgyljIjEkPWM2I1VBcUGTL/WBn7EddBPjTRI6CDigJ
+         HF3ftM4n/5nli4ffZ8sPSLXRQo9hZrcWfxvDYHn1mA48ppLG33Ce0g9ctXGg9pw5gRbE
+         cwyjK2E8gOXfryTjPOrBz6CeABF7RzDNcv25XLAZ2pgC1t0+J4lt5o7mUr+/+kY2YPiO
+         o3ug==
+X-Gm-Message-State: AOAM530IyNDQeyWdVtXqDUZ2I0z5IeOrozNikRfkk1daJNATVEm13gAB
+	UNfsDvaQ+RRlYk6LHah8l98=
+X-Google-Smtp-Source: ABdhPJyWj2SzQ7qHPB+guO8Sf+EDkFSSwzlK0OIZ4VzfAGAV1WAISEjHsrKJ1XurWWCDeEaXRNHcXA==
+X-Received: by 2002:a62:e515:0:b029:1b9:2dc3:a0da with SMTP id n21-20020a62e5150000b02901b92dc3a0damr7556798pff.9.1611117824246;
+        Tue, 19 Jan 2021 20:43:44 -0800 (PST)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:94e1:880f:156e:2b08? ([2601:202:4180:a5c0:94e1:880f:156e:2b08])
+        by smtp.gmail.com with ESMTPSA id v1sm618324pga.63.2021.01.19.20.43.43
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 19 Jan 2021 20:43:43 -0800 (PST)
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Khem Raj <raj.khem@gmail.com>
+From: "akuster" <akuster808@gmail.com>
+Subject: Gatesgarth pull request Jan 19th
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+ 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
+ 8CS2NxU=
+Message-ID: <aea156ae-bcd6-ce3f-afb3-22a3fbef18e5@gmail.com>
+Date: Tue, 19 Jan 2021 20:43:42 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from pek-lpg-core3.wrs.com (60.247.85.82) by HK2PR03CA0066.apcprd03.prod.outlook.com (2603:1096:202:17::36) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.7 via Frontend Transport; Wed, 20 Jan 2021 01:49:44 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 1a2adb83-d43f-4a9c-ab09-08d8bce5a985
-X-MS-TrafficTypeDiagnostic: BY5PR11MB4194:
-X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB4194B16F50422F90B7A7680295A20@BY5PR11MB4194.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2657;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	5mQyn0CuIXtSu7bUhA3Q9HPzuGV5hmSmpFqX5rcny3Hem0S/vzaev94KcwdVPbrGqeSn1MZP33e+dhSIoxJFcrSTWb/FxlrSkmn07CRuF392osdAJW8ZyNFNvKlAzHkGRA3UhBM9gG+o8KFySS2L5RYRnLzxAzeSWt/By//vYSg4RSuUJ0bQD4EcpzZJpwHkJUoThWZbK2UQnG8EbuF8vUsUi8SR/dPsyXQzRdrJxgGy8bwpuFL9xpM1SCcQAIDWbfbUvZeEXOxhAhg1ltkqaLF1Xd1yUCWLeHzR6DVTqiwYOE5XV1tK58rxZTs6WZGBoThh+6n+6qpH/4uqCeOPqyyk9Yr+K7EFLI7e0jTTFo/RT1Jq7iRx0+ci3dCN93w+xdZQ3nlr+xA1RI7zD6CwcYiczLpw6jd3K9p9P0Os9JN2aupqEvAXX2AWR/87NfZeahy06E/xt4hw8w5ipPcH/g==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR11MB3687.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(136003)(396003)(346002)(366004)(39830400003)(66476007)(2906002)(956004)(66556008)(6512007)(316002)(52116002)(5660300002)(36756003)(83380400001)(966005)(6666004)(6486002)(9686003)(2616005)(6916009)(8676002)(86362001)(8936002)(478600001)(66946007)(16526019)(186003)(26005)(1076003)(6506007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?6+WvB99hesrmr3H49YNhJw009bIId9WtrW+w3ntF7MXz/bBjr8xY5F+mVbXz?=
- =?us-ascii?Q?VcBX7CS8Vkj2wU3EBeh/pvPozIoIWC4efDSt2w0wUgB7ijdXaFJVK6hdYMdS?=
- =?us-ascii?Q?mVDz6zsb0eLu3XAdzK7Wi6qvEurYEACyNts7KTQCSez6fhiBYxZ2Yk3zyswC?=
- =?us-ascii?Q?ZjnYUqSLmBYpOo+Ia1Np7sDpHfuwKr2ARIaxtvEKK6qtOLaX8KuvNWOInkJd?=
- =?us-ascii?Q?PV4JbLyNjdy4Up70+lkrMwMU6R+TnZUGuM8nhnEr4XOKh5D0vAzo3GFl6iiB?=
- =?us-ascii?Q?rr7gnpE7mYOWCr4nx7FJC8M+x1dszjyBe0ORtfw9YlxQpVRBVI+HEhwO3125?=
- =?us-ascii?Q?E8qxLhHHYTmKo4ee4LDK0tj5hrh6CBfoc7N8vkPGEsLirUuI288QNSEN1JRS?=
- =?us-ascii?Q?tcBqQWTF/+IQl0bVG0AMnmmsHt7X/Ftkg5ELGss47onrAkVBKggOAWy7RyEW?=
- =?us-ascii?Q?T41/VW5gRBpSnNSe5PrBfM6Zb/hq1QZEOXDW7HzeAKSIhoPHV6cY9KR9w1gK?=
- =?us-ascii?Q?wuVl/KYrnMEoh27wuwHLr7p02cEtbKfFMue8JPhBLKE/38bW24ecefzCQJeS?=
- =?us-ascii?Q?GYmKazvP+9B1b6FlBVYGZg0TjE+ivPb9Q1Cgmzj/QdFaLaJNi6G9/4Tnjodt?=
- =?us-ascii?Q?4i48JU3dWnCvCdtH/2QZ3KVsQvmgfPjuMhlAZE6GI/U4kiodd6dOlt41r0uJ?=
- =?us-ascii?Q?FkTkGaayVwTpq8XOXm3OOMttynzrQCkLi3MH/y8qEJvgMCHiEtLjho0Uf350?=
- =?us-ascii?Q?icXTOOgpMTwILYalirVqd5Q5Pnl7vevl80I/RUFLwY9DjzaWOEEcvwoqOtzH?=
- =?us-ascii?Q?Vjw7tpBHWq60FsiKg/F6HiJoLB4E9SgLSObaBRld+Z9EVYytJQablZihr0hT?=
- =?us-ascii?Q?tEBbtPKcxSIp/qiTr4PBzjGLcl5gbtwll3QypUU/UKYMp1MVy0s/lWZUQ8AT?=
- =?us-ascii?Q?6ZxyPbMK+tBl0L2xSg6lw5h4ydMwKNscoMSPJgUAf28ffxE1sb62VcxdQD4V?=
- =?us-ascii?Q?XLJF?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1a2adb83-d43f-4a9c-ab09-08d8bce5a985
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR11MB3687.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jan 2021 01:49:46.1851
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: TLDokfnAI4wRcEX4R5IujC+DQ/reuAGaEF4JUKq0iPRi1DBJ6LpfnmGEVl4Ql+vE1lK6Xf12J/Y+SyboVV7a8w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4194
-Content-Type: text/plain
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-From: Kai Kang <kai.kang@windriver.com>
+The following changes since commit b9dcf17700014dec679307dc1247882dccd439ca:
 
-Module 'time' had been imported in Functions.py by upstream, so not
-import in 0002-fix-fail-to-enable-bluetooth.patch and update accordingly.
+  Revert "numactl: Remove the recipe" (2020-11-05 09:00:37 -0800)
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- .../0002-fix-fail-to-enable-bluetooth.patch     | 17 ++++-------------
- 1 file changed, 4 insertions(+), 13 deletions(-)
+are available in the Git repository at:
 
-diff --git a/meta-networking/recipes-connectivity/blueman/blueman/0002-fix-fail-to-enable-bluetooth.patch b/meta-networking/recipes-connectivity/blueman/blueman/0002-fix-fail-to-enable-bluetooth.patch
-index 00115cfca..55d1ac94c 100644
---- a/meta-networking/recipes-connectivity/blueman/blueman/0002-fix-fail-to-enable-bluetooth.patch
-+++ b/meta-networking/recipes-connectivity/blueman/blueman/0002-fix-fail-to-enable-bluetooth.patch
-@@ -20,7 +20,7 @@ https://github.com/blueman-project/blueman/pull/1121
- 
- Signed-off-by: Kai Kang <kai.kang@windriver.com>
- ---
-- blueman/Functions.py                   | 12 +++++++++++-
-+ blueman/Functions.py                   | 10 ++++++++++
-  blueman/plugins/applet/PowerManager.py |  4 ++++
-  2 files changed, 15 insertions(+), 1 deletion(-)
- 
-@@ -28,24 +28,15 @@ diff --git a/blueman/Functions.py b/blueman/Functions.py
- index 3b76271..c5eeb27 100644
- --- a/blueman/Functions.py
- +++ b/blueman/Functions.py
--@@ -17,7 +17,7 @@
-- # You should have received a copy of the GNU General Public License
-- # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-- #
---from time import sleep
--+from time import sleep, time
-- import re
-- import os
-- import signal
- @@ -86,6 +86,16 @@ def check_bluetooth_status(message, exitfunc):
-              return
-  
-      applet.SetBluetoothStatus('(b)', True)
- +
--+    timeout = time() + 10
-++    timeout = time.time() + 10
- +    while applet.GetRequestStatus():
--+        sleep(0.1)
--+        if time() > timeout:
-++        time.sleep(0.1)
-++        if time.time() > timeout:
- +            # timeout 5s has been set in applet/PowerManager.py
- +            # so it should NOT reach timeout here
- +            logging.warning('Should NOT reach timeout.')
--- 
-2.17.1
+  https://git.openembedded.org/meta-openembedded gatesgarth-next
+
+for you to fetch changes up to 6ff4bd4f345b4e8030b9197d13097308df521576:
+
+  postgresql: Update to 12.5 (2021-01-18 08:20:58 -0800)
+
+----------------------------------------------------------------
+Armin Kuster (2):
+      Revert "gnome-calendar: update to 3.38.1, add libhandy 1.x support"
+      wireshark: Several securtiy fixes
+
+Chen Qi (1):
+      tclap: fix branch
+
+Chencheng Zhang (1):
+      tclap: align version to tag v1.2.2
+
+Diego Santa Cruz (2):
+      gssdp: Upgrade to 1.2.2 -> 1.2.3
+      gupnp: Upgrade to 1.2.2 -> 1.2.4
+
+Gianfranco (1):
+      dlt-daemon: add upstream patch to fix CVE-2020-29394
+
+He Zhe (1):
+      lmbench: Fix setting LDLIBS failure
+
+Hongxu Jia (1):
+      lvm2.inc: switch branch master to main
+
+Joe Slater (1):
+      multipath-tools: fix error handling for
+udev_monitor_set_receive_buffer_size
+
+Kai Kang (1):
+      colord: fix installed-vs-shipped error
+
+Khem Raj (4):
+      pidgin-sipe: Do not add native libdir to pkgconfig search path
+      sdbus-c++-libsystemd: Fix reallocarray check in meson
+      networkmanager: Fix reallocarray check in meson and configure
+      postgresql: Use /dev/urandom when openssl is not used
+
+Martin Jansa (1):
+      nanopb: move to dynamic-layers
+
+Max Kellermann (1):
+      php: remove the failing ${D}/${TMPDIR} code
+
+Mikko Rapeli (1):
+      fuse: set CVE_PRODUCT to "fuse_project:fuse"
+
+Philip Balister (1):
+      spdlog: Fix recipe so other recipes can use spdlog with external fmt.
+
+Robert Joslyn (1):
+      postgresql: Update to 12.5
+
+Roland Hieber (5):
+      pcsc-lite: provide pcsc-lite-lib-native explicitly for native build
+      lockfile-progs: use DEBIAN_MIRROR in SRC_URI
+      liboop: use upstream SRC_URI
+      fbset: use DEBIAN_MIRROR in SRC_URI
+      openct: use upstream SRC_URI
+
+Sean Nyekjaer (1):
+      nodejs: 12.19.1 -> 12.20.1
+
+Stacy Gaikovaia (1):
+      nodejs: 12.19.0 -> 12.19.1
+
+Vyacheslav Yurkov (1):
+      python3-aiohttp: added missing RDEPENDs
+
+Wang Mingyu (1):
+      zabbix: CVE-2020-15803 Security Advisory
+
+Yi Zhao (2):
+      minifi-cpp: depend on nettle and lz4
+      ebtables: do not install /etc/ethertypes
+
+Zang Ruochen (1):
+      mcpp: Normalize the patch format of CVE
+
+Zheng Ruoqin (4):
+      samba: CVE-2020-14318 Security Advisory
+      samba: CVE-2020-14383 Security Advisory
+      php: CVE-2020-7070
+      php: CVE-2020-7069
+
+jabdoa2 (2):
+      libsdl2-mixer: Fix ogg/vorbis support in libsdl2-mixer
+      libsdl2-mixer: set --disable-music-ogg-shared to link statically
+
+viatsk (1):
+      tcpdump: Patch for CVE-2020-8037
+
+ .../recipes-support/fuse/fuse3_3.9.3.bb            |   2 +
+ .../recipes-support/fuse/fuse_2.9.9.bb             |   2 +
+ .../8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch | 242
+---------------------
+ ...calendar_3.38.1.bb => gnome-calendar_3.36.2.bb} |   3 +-
+ .../gupnp/{gssdp_1.2.2.bb => gssdp_1.2.3.bb}       |   4 +-
+ .../gupnp/{gupnp_1.2.2.bb => gupnp_1.2.4.bb}       |   4 +-
+ .../networkmanager/fix_reallocarray_check.patch    |  27 +++
+ .../networkmanager/networkmanager_1.22.14.bb       |   1 +
+ .../samba/samba/CVE-2020-14318.patch               | 142 ++++++++++++
+ .../samba/samba/CVE-2020-14383.patch               | 112 ++++++++++
+ .../recipes-connectivity/samba/samba_4.10.18.bb    |   2 +
+ ...01-Makefile-do-not-install-etc-ethertypes.patch |  35 +++
+ .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   |   3 +-
+ ...-escaping-don-t-allocate-a-too-large-buff.patch |  70 ++++++
+ .../recipes-support/tcpdump/tcpdump_4.9.3.bb       |   1 +
+ .../{wireshark_3.2.7.bb => wireshark_3.2.10.bb}    |   2 +-
+ .../recipes-devtools/nanopb/nanopb_0.4.3.bb        |   0
+ ...t-CFLAGS-LDFLAGS-to-append-values-passed-.patch |   2 +-
+ .../zabbix/zabbix/CVE-2020-15803.patch             |  36 +++
+ .../recipes-connectivity/zabbix/zabbix_4.4.6.bb    |   1 +
+ .../0001-meson-Fix-reallocarray-check.patch        |  25 +++
+ .../sdbus-c++/sdbus-c++-libsystemd_243.bb          |   1 +
+ meta-oe/recipes-dbs/postgresql/postgresql.inc      |   2 +-
+ .../{postgresql_12.4.bb => postgresql_12.5.bb}     |   2 +-
+ .../mcpp/files/CVE-2019-14274.patch                |  34 +++
+ meta-oe/recipes-devtools/mcpp/files/ice-mcpp.patch |  31 ---
+ meta-oe/recipes-devtools/mcpp/mcpp_2.7.2.bb        |   3 +-
+ .../{nodejs_12.19.0.bb => nodejs_12.20.1.bb}       |   4 +-
+ .../recipes-devtools/php/php/CVE-2020-7069.patch   | 158 ++++++++++++++
+ .../recipes-devtools/php/php/CVE-2020-7070.patch   |  24 ++
+ meta-oe/recipes-devtools/php/php_7.4.9.bb          |  11 +-
+ meta-oe/recipes-devtools/tclap/tclap_1.2.2.bb      |   4 +-
+ .../dlt-daemon/dlt-daemon/275.patch                |  38 ++++
+ .../dlt-daemon/dlt-daemon_2.18.5.bb                |   1 +
+ .../lockfile-progs/lockfile-progs_0.1.18.bb        |   2 +-
+ .../minifi-cpp/minifi-cpp_0.7.0.bb                 |   2 +-
+ .../recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb |   2 +-
+ meta-oe/recipes-support/colord/colord.bb           |   2 +-
+ meta-oe/recipes-support/fbset/fbset_2.1.bb         |   2 +-
+ meta-oe/recipes-support/liboop/liboop_1.0.1.bb     |   2 +-
+ meta-oe/recipes-support/lvm2/lvm2.inc              |   2 +-
+ ...h-uevent.c-fix-error-handling-for-udev_mo.patch |  39 ++++
+ .../multipath-tools/multipath-tools_0.8.4.bb       |   1 +
+ meta-oe/recipes-support/openct/openct_0.6.20.bb    |   2 +-
+ .../recipes-support/pcsc-lite/pcsc-lite_1.9.0.bb   |   1 +
+ ...o-not-add-native-paths-to-pkgconfig-searc.patch |  36 +++
+ .../recipes-support/pidgin/pidgin-sipe_1.25.0.bb   |   1 +
+ .../0001-Enable-use-of-external-fmt-library.patch  |  26 +++
+ meta-oe/recipes-support/spdlog/spdlog_1.8.1.bb     |   5 +-
+ .../python/python3-aiohttp_3.7.2.bb                |   4 +-
+ 50 files changed, 849 insertions(+), 309 deletions(-)
+ delete mode 100644
+meta-gnome/recipes-gnome/gnome-calendar/files/8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch
+ rename
+meta-gnome/recipes-gnome/gnome-calendar/{gnome-calendar_3.38.1.bb =>
+gnome-calendar_3.36.2.bb} (78%)
+ rename meta-multimedia/recipes-connectivity/gupnp/{gssdp_1.2.2.bb =>
+gssdp_1.2.3.bb} (83%)
+ rename meta-multimedia/recipes-connectivity/gupnp/{gupnp_1.2.2.bb =>
+gupnp_1.2.4.bb} (64%)
+ create mode 100644
+meta-networking/recipes-connectivity/networkmanager/networkmanager/fix_reallocarray_check.patch
+ create mode 100644
+meta-networking/recipes-connectivity/samba/samba/CVE-2020-14318.patch
+ create mode 100644
+meta-networking/recipes-connectivity/samba/samba/CVE-2020-14383.patch
+ create mode 100644
+meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0001-Makefile-do-not-install-etc-ethertypes.patch
+ create mode 100644
+meta-networking/recipes-support/tcpdump/tcpdump/0001-PPP-When-un-escaping-don-t-allocate-a-too-large-buff.patch
+ rename meta-networking/recipes-support/wireshark/{wireshark_3.2.7.bb =>
+wireshark_3.2.10.bb} (96%)
+ rename meta-oe/{ =>
+dynamic-layers/meta-python}/recipes-devtools/nanopb/nanopb_0.4.3.bb (100%)
+ create mode 100644
+meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2020-15803.patch
+ create mode 100644
+meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd-243/0001-meson-Fix-reallocarray-check.patch
+ rename meta-oe/recipes-dbs/postgresql/{postgresql_12.4.bb =>
+postgresql_12.5.bb} (73%)
+ create mode 100644 meta-oe/recipes-devtools/mcpp/files/CVE-2019-14274.patch
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_12.19.0.bb =>
+nodejs_12.20.1.bb} (97%)
+ create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2020-7069.patch
+ create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2020-7070.patch
+ create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch
+ create mode 100644
+meta-oe/recipes-support/multipath-tools/files/0001-libmultipath-uevent.c-fix-error-handling-for-udev_mo.patch
+ create mode 100644
+meta-oe/recipes-support/pidgin/pidgin-sipe/0001-configure-Do-not-add-native-paths-to-pkgconfig-searc.patch
+ create mode 100644
+meta-oe/recipes-support/spdlog/files/0001-Enable-use-of-external-fmt-library.patch
 
