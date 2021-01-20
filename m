@@ -1,196 +1,149 @@
-Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.42])
- by mx.groups.io with SMTP id smtpd.web10.27707.1611149801521196384
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com (EUR05-DB8-obe.outbound.protection.outlook.com [40.107.20.64])
+ by mx.groups.io with SMTP id smtpd.web12.30392.1611159773107456045
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Jan 2021 05:36:41 -0800
+ Wed, 20 Jan 2021 08:22:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=B5Ci6zg/;
- spf=pass (domain: windriver.com, ip: 40.107.75.42, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@spinetix.com header.s=selector2 header.b=ucBhl+xN;
+ spf=pass (domain: spinetix.com, ip: 40.107.20.64, mailfrom: diego.santacruz@spinetix.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=CeWl4a8aCVWpm12cQDZRG0LyaWaGyY1M0xX2TEpYIVO6jgxg24VXyssvKAFBJgjLhzu+A0UypFkSkL3U89DUvulF2SnsY1XsFvNt8isX6vQDCdGsfPqTwaJIkwx11qqnrIjhLch5F/jivwFoWGvj0Z/px2uKPp8XUMYrbBLeIEHil7wKh7iE/ur0outm3clDzKKa9T59EWlIEiXzXK7Dej92PE3Amxg48M/2Txz4ngN0qmRsmfqUKd6iCyRbzffHV25cQrlKVaed18N5iqRbJSiNHUyWf3K6ge/8787Zk2L3QxQsul0NeRykhNiWyctFtzc4AK90OnCMqTBBSACdjA==
+ b=B/zLacuCU2pDf+aieyXnQ/dj+LREBtOS2sywSbx5PUt7QOumDMw/S9vdHqfhFIjWMzoWd8F+Nr33o4TYmEfDTmVQ6rMMq0s4x2RaSMikxNcK6LFu6svDlOEa828nteuB8JmnOVwbfqxG0OR5b/iAOwy9GHdEioxzG3vPTFZt2tNTNYvcRZoVQ62LomYvVL71nnZQjQWzZRpAp711UO/8nLSy2tA+E3aXdypnkMmKG27D97E5xMWNj6CzKkkpB01wRipnfib/LP9CASpcjsO5w+c/LBYsmObxGCaXQk8L2u09d5yV9GkH8kOKtGVwX7TNVJ9E6s1pXIJlZHJ8lbGoaA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Q8gy5nN1BcF+srfBqqjeOfWvBUTQdzNyiMRuabWTOHQ=;
- b=HQR6pUozJb5r1eFMdPxeJCfCxIhva2jCa4KixtXccAzqzaKtV0RvbFK5zdPkK+eYpCAcfLYhBFeuKdHjkXwldSxBXDNvgKxrO2iZMRcv0ld11ja8nWHi4cGvJUQP9yDVV/m3qlr4NrfFg8rLULXJQONm3y4+xyjYz3kBa8dI0jMfpGaJm2YIZJh+g8jntc4gvADJJAtrmn/r0ehIIfHs6lvP2qkXbP56LbSfbjPHETPsfarWNuSy9kCidQGK9Tqp+eTTMu22Gk0wf8UUQbhrn4+vQ+KRWpaX2haXQ6EYnvOBcaCdJ7MF5ngraLJH8qbK+zK9NJruw0IRcWryvKs9gg==
+ bh=5xXrdp0q2N/xifNnAYHSqyIBF4Jmw7BWOEK3rlsqJ4o=;
+ b=ll75HzvlxkgajH2PH1ocPPc4HDwZh9DgSXpfzt5SeKMDg3GT7AiJEQ5EC1fvBFYFKLCromI+oqCRGyYeFlJhYljeyopo69b+F/uVQhLN3vk6RRzUC/Ep1gzwkZzeWsYS2dAKSQ3iw8tKe7JmVJru4AlJ9f6KyuIz5xvINYYjPsJ6+yT9R4h0zugl7kFApSrOb+TU/KQiF/ieTbBULE9Pzzj1+nFVPf3sb1MXnr3UCfPYzVXP02FGR8Id9fE2fjJiiDL5UK9yRlwBYdQdLnTE1/G1y/IcNOAFZqZOV2EcISiZAy7mVt26NTK1ug2z1NxX/jlCsJTItBylkCbZvRCK1A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
+ smtp.mailfrom=spinetix.com; dmarc=pass action=none header.from=spinetix.com;
+ dkim=pass header.d=spinetix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=spinetix.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Q8gy5nN1BcF+srfBqqjeOfWvBUTQdzNyiMRuabWTOHQ=;
- b=B5Ci6zg/EDq0Q5Ci9gxP2m6nSCh019teMWAFYeF6TKPYMR5T05wcoo7Nv0JRJ6DUj0ReIdsu09Jm0aqH4//6uykosAh3N256rNk4KxPWes7dLwXbzSJ3FSFsnntuC6f2E21B0/VsB7wmy+4xjeVeVCUzh8KqcqzIDsBtuA+LuE0=
+ bh=5xXrdp0q2N/xifNnAYHSqyIBF4Jmw7BWOEK3rlsqJ4o=;
+ b=ucBhl+xNPAewiRn5MOFWh2PGjPT3dWQN6ywb83IVfhsr90KZCAlf17X8TBLQ3AwNI/4B/b+znDjRYMqmAZXeNn3BjZp6dL56wKyM9qd3IfRmmTkMOeFSAsn+mThzYEtCNEO+hE2F8LmVOR8R/+1fCtaTCtgGXjUy/3GZmrmn3Q8=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BYAPR11MB3559.namprd11.prod.outlook.com (2603:10b6:a03:f7::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3763.9; Wed, 20 Jan
- 2021 13:36:40 +0000
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3763.014; Wed, 20 Jan 2021
- 13:36:40 +0000
-Subject: Re: [oe] [meta-python][PATCH 10/10] python3-yappi: Upgrade 1.3.0 -> 1.3.2
-To: Leon Anavi <leon.anavi@konsulko.com>,
- openembedded-devel@lists.openembedded.org
-References: <20210119173746.24694-1-leon.anavi@konsulko.com>
- <20210119173746.24694-10-leon.anavi@konsulko.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <21c4bdf2-8d47-ae51-fb8e-d98e1cb00073@windriver.com>
-Date: Wed, 20 Jan 2021 08:36:37 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.0
-In-Reply-To: <20210119173746.24694-10-leon.anavi@konsulko.com>
-X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BN3PR03CA0099.namprd03.prod.outlook.com
- (2603:10b6:400:4::17) To BY5PR11MB3909.namprd11.prod.outlook.com
- (2603:10b6:a03:191::13)
-Return-Path: trevor.gamblin@windriver.com
+ header.from=spinetix.com;
+Received: from DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
+ (2603:10a6:6:e::19) by DBBPR01MB7562.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:1f3::11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3763.10; Wed, 20 Jan
+ 2021 16:22:50 +0000
+Received: from DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
+ ([fe80::c880:793c:c5b1:c7a8]) by
+ DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
+ ([fe80::c880:793c:c5b1:c7a8%5]) with mapi id 15.20.3763.014; Wed, 20 Jan 2021
+ 16:22:49 +0000
+From: "Diego Santa Cruz" <diego.santacruz@spinetix.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Diego Santa Cruz <Diego.SantaCruz@spinetix.com>
+Subject: [meta-networking][PATCH] net-snmp: control smux via PACKAGECONFIG
+Date: Wed, 20 Jan 2021 17:22:27 +0100
+Message-Id: <20210120162227.8041-1-Diego.SantaCruz@spinetix.com>
+X-Mailer: git-send-email 2.18.4
+X-Originating-IP: [46.14.255.78]
+X-ClientProxiedBy: GV0P278CA0070.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:710:2a::21) To DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
+ (2603:10a6:6:e::19)
+Return-Path: Diego.SantaCruz@spinetix.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BN3PR03CA0099.namprd03.prod.outlook.com (2603:10b6:400:4::17) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.12 via Frontend Transport; Wed, 20 Jan 2021 13:36:39 +0000
+Received: from prefix.spinetix.local (46.14.255.78) by GV0P278CA0070.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:2a::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3763.10 via Frontend Transport; Wed, 20 Jan 2021 16:22:49 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: e0e6889a-6cd1-4735-9355-08d8bd486ab2
-X-MS-TrafficTypeDiagnostic: BYAPR11MB3559:
+X-MS-Office365-Filtering-Correlation-Id: ccc05b66-b753-4832-63dc-08d8bd5fa12d
+X-MS-TrafficTypeDiagnostic: DBBPR01MB7562:
+X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB355948A14B470F1C792362CF9FA20@BYAPR11MB3559.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:632;
+	<DBBPR01MB756210217122FE522047325F88A20@DBBPR01MB7562.eurprd01.prod.exchangelabs.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	LDvuiTXDzB/jRSiFsId4E9w4V7DG97QHzgO7TP2eq54Eq43W/qGFktB6acrwvVcig6bGfraWdQs0w2TmiYjZ2QKu/NM7a8VokaOqltrt8QIXSPEN1UonMzt4jry7YuG4wArMfXjoPM4FdZ62RddKO2dtPkamFxwSkuy9AvWHXjlh77g3koeDIdH4glUKyinUQubyAYeXPHy8SzpehhG2R+tGZkmbLXLtgSj2y4ucD3I6oqHB1VIy5cQ6u8EqnXuidw+R0/FW/PDs7RwSfKO4jNtd4kuLjKBagZ9Co3AGAeXty6YW3sKIMEDDv9yUfZxV1w28Zqwb1z3MKtUKB/DYEHQKSiKw/iKw0D/05p5Z+CaPfJKnC9nhO5/8uCvp8YcoUiA8WbaH2XDJPboiouJACJqeSIDerhcay0V0dW4RmDM1r2yERrHDJA/vNpknYXyaRtP3AyfysvmK8nQpfQolP9BSZ3sq3WelRgUYJyIl/ZlY+O9hL+dSb788G15rAztL4ruJC7czp9a984rPoMoU+ZbR9kpcAuXyys9beweObNlOK5fzuk6NbVTYRG+XvtYD
+	lQrSmeFyrlowxyttsBtbwy8qQ6zgn/fiaZHGEaIzX1gGVIh91B38gVQTA2qcy/DGqE+QLNi22RRMq5Iw7OWCw4K44JQt2Rs/BOGUfgjtv3jJ+I3UmlOFxb610DzPD8c69rmNFHipfUcmU0tXfXEU5rYxUdhJomR72fjOb6Cw71WRDwwKDmyBtMWNTQmsqI0/Ep+KknqQofsE+GTVEpj4q8Nrq/i4XVSYqRImlwjZeQ9Ki4gmr5PwFIgWHjuo/8x6UHXwKmwZjM6Kw86V7aKnuNmUEpbjMcu7DsN0i46fidM7bdTtMdqbFpF3dOWLLw/RJtUwQshYGPMe9my7UN9SVa7Ug3HVdWn0Gpa+uYqZaTVNRVs/TIyycsNtBqbNubMVzxhd4W96YmShoiwwn/77Hw==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(39850400004)(366004)(396003)(136003)(376002)(956004)(26005)(53546011)(44832011)(478600001)(33964004)(16576012)(31696002)(86362001)(966005)(66476007)(66946007)(166002)(83380400001)(66556008)(186003)(16526019)(316002)(2616005)(5660300002)(36756003)(6486002)(8676002)(52116002)(8936002)(2906002)(31686004)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB6PR0102MB2630.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(136003)(396003)(39830400003)(346002)(376002)(8676002)(6916009)(6666004)(2906002)(86362001)(6486002)(16526019)(26005)(956004)(52116002)(6512007)(1076003)(478600001)(66946007)(8936002)(4326008)(66476007)(83380400001)(107886003)(36756003)(186003)(5660300002)(2616005)(66556008)(6506007)(316002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?b0hQR2ZEQnkvMGJ2S1FSL05DSXNSL0VMd0xzK1NWZjdPT0hpY3BoSmkrMURu?=
- =?utf-8?B?VnhyT1VqMmxvdmlxTTBFbElJUXFiZlRkckhUOWFOcHZkd3VsdENac2lpM1gr?=
- =?utf-8?B?ejRLU2s0TnJWOGE3c2wvUjMvSm9pNHArL3JyOUlGT09GMlRNSVZabkhlSjkv?=
- =?utf-8?B?bnNvRUlGaTArV3JRRjdrMzBVTnQ1dnV0dk0zTzZKK2hhbmp6MzRtS285WXlG?=
- =?utf-8?B?TmZ6VDIzWFJzVDJEME9FY1ZURi85WlduaURYNStRZHk1M2JtWGFqRVNLbkNG?=
- =?utf-8?B?R25jM0J5WWszelNEc3FuU2dxUzgzbjYvaUJsY3pwL1piaHE2R3dCUlhMUGlY?=
- =?utf-8?B?REdlVFJHcTBnRmplblc4WDU3cjBOR0FTdmlmL3U5VW9WTlRQS3FJV1hPNzR3?=
- =?utf-8?B?VUdweVB2UFNlSlFPNU9YbEVMQ2Q4b0tCTmJ4TDFwY3ZHK2gyZVJ4N2srdEcw?=
- =?utf-8?B?UzNOOFo5L3k3ckNUMmFtOVl6REcvbzFacmZjNjBMMERzZTBHZlM4YU5qUmhh?=
- =?utf-8?B?UVRyY0dKaEt1NlR2cXFDclpMM1F4K1VMemREMjFFRG1veVg1R0ViU3VaWXJk?=
- =?utf-8?B?cSt2eEdIL2ZLbEpWUnBBd04wcVEzZUpNbDhTc2lRa2NTUDhubyt5SGE4d092?=
- =?utf-8?B?T2JWcHhLcndsbGhzVVo0V3h4c0RhMkY4S3FXbFNMeFhYdHpxWmhjMVJwZVJ4?=
- =?utf-8?B?SUt4NC9PN1lHaXNTcXlZVU1DOGoyWmU0NXBSeHhxSzJ3Q0xOS0NjN0kyYnp2?=
- =?utf-8?B?c0M0SWlrZlZUSDFLYkZ6Ull6eXRiaUNkY1I5ZnkrTlRyZDRCam52QmtWTys3?=
- =?utf-8?B?Qk04L3F2MGRWRDhHeU1LYzZ1OUxQelYxbEJtWFN5Ti9hWVNnWDVvUGZGVmJL?=
- =?utf-8?B?Zkw0eUxOa0QySWVwM0VZWjNST0FqQlFJZytxdjlWNFB5TnljQXV1S2kycmNy?=
- =?utf-8?B?bmtiU3pZaFpHeXpwYk1QR25xM1pQek5EQ21vRldIL2JLbitRK3dNL1U0bGE5?=
- =?utf-8?B?TCs1ZEJyaWdQbEVrb0U1bGdOWjErRW5yMk1mRGRITnVUTEgzS1BaemZ4N1VN?=
- =?utf-8?B?OVJFa3c4ajIzQmpWZTNaM05YSDBIRmF1NWs5Q3lmQy9WK2s5dC9RWkc3ODZX?=
- =?utf-8?B?UU41alRycGpJa1psd3J5QmhUSUpLYW1xK3g1Q0NrbGdhRUd3TXdlTk96aGVo?=
- =?utf-8?B?V1FwWE1wVnBuRlpCS3Rodjd1VlpXR3FPWXdyUzFkVUdUK2FUV3VoL3JaVWZS?=
- =?utf-8?B?Y21XRi9ENWVQcUgwN0ZKUFE4UXFxbGdyNXMxWVpnengvU21tMWlnY0VkVGhD?=
- =?utf-8?Q?xMa4d5d438bLVvCw9V1pZ4UGgkb4cfa8iN?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e0e6889a-6cd1-4735-9355-08d8bd486ab2
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
+	=?us-ascii?Q?JcOL/hB//8KQ5Kbvvs1EyAqKNTZS8t9DlYBeH6LXe+Ehtd5GmZjdxJlQW8eb?=
+ =?us-ascii?Q?GsxkNIWQXiEhzEtR2av5TYJWNA0d1+j9vmyc48KMXxcCUUN4vV0PDFXjpF2K?=
+ =?us-ascii?Q?FlvUWMHYGO2iJq4r4d2hz+mhVsP3GBmRgPJ9VeIqe0e7ljjTyJtDfPfLXfN4?=
+ =?us-ascii?Q?w4cvLxvJaiTKdAhZnkzPHAB/6v/XIXt8OiOZtVUOhgQ1oUb2S6nAF8tHSrQv?=
+ =?us-ascii?Q?VjRJbynJPGK1mVfBKPTGYXNwGUbUtXjvNCf2mh5wugJywpem8Y1mO/olakv7?=
+ =?us-ascii?Q?wFOW5Jx+s+KPdwJkrEH+aadveuWFy8zBZuXkfqnqAdkz7EGzuQmhXQ3/7e8A?=
+ =?us-ascii?Q?LRnmDRI554HtGuyaZv4cwcDZLuw1QWXvDadaQGhZe/yV8RlRhdHpw2adkt1v?=
+ =?us-ascii?Q?hNSvQ6ziv1H7ci++4OnpmL6pN2cmga5WkAEzUuDzeDPVXW2zlZqI/5U/9amK?=
+ =?us-ascii?Q?2qPsT+xrhZYAeBr2ReM9uNiNQUgpZQ4n0wqKKcFtEreMFzQ/4OkMM0wHIjMG?=
+ =?us-ascii?Q?VccKjAzh+BIgWGMBCdwPKIbP6yS6lR5apvusjW/U22mOp29o8578welwn37v?=
+ =?us-ascii?Q?crMcw9g5Dxxxp/KkhLOXxYxfn0q6IiY/+jjYDacF1U+6JC16p3T8fskV4twE?=
+ =?us-ascii?Q?5JsWKgmqtGVPHF78pfsdVjI8RV+sau0wWPDPYslg6I9fShoxF/XCbSXOIgrn?=
+ =?us-ascii?Q?rfHqb/gh+W+5gocN3WY4gRUCCmv7TlaEoPtDMQv7+2xO+Iues1xMeN+9jGap?=
+ =?us-ascii?Q?PE4A94gRdiH7eSlleeIIp03cmCbWrcIXBy8iuDbjEBajW84OK2VklTWnc6+6?=
+ =?us-ascii?Q?42FskA40+m1bmwOUYmpF0CL693fbSFrzYuoRReJ8lSHf9nihrC4L47tqQ7CN?=
+ =?us-ascii?Q?R2xo4pCWaVB6iCbq9hUQPxCFEud77QRivZF0JaX7CJ7yy++UxTtkDIkavzj0?=
+ =?us-ascii?Q?lvyXg9CJcBmasjZb42/PVIaDorQPuAuDKAJqmnccr2KWnB2S/t8eKEGEB+b9?=
+ =?us-ascii?Q?WTDT?=
+X-OriginatorOrg: spinetix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ccc05b66-b753-4832-63dc-08d8bd5fa12d
+X-MS-Exchange-CrossTenant-AuthSource: DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jan 2021 13:36:40.0466
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jan 2021 16:22:49.8163
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-Id: 5f4034fa-ed2d-4840-a93f-acb1e9633b93
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: I7l9WcvV07WpFkqYfZ4nZxSu1tPfnuSF3NwcLooSqgq4dS7CHZ78TBLu7dTgu0CG4r5r5ZxU1F09GCElCSmkiiBXwxN2jn4IFc9GUGbL1tw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3559
-Content-Type: multipart/alternative;
- boundary="------------407DBC9F6133076478328800"
-Content-Language: en-US
+X-MS-Exchange-CrossTenant-UserPrincipalName: nqMAQAd6Mo2BmQfA/SbUUOGmlROKZD1VPayXIl7kIBUgNIRjloMT2FjDm6089/OAelbdGMSUr5d4jDL+R7jAEQ3dFEaM7AFckzpSkqwS5bw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR01MB7562
+Content-Type: text/plain
 
---------------407DBC9F6133076478328800
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Support for smux is always enabled by the recipe, but it can be a
+security risk since it makes the snmpd daemon listen on TCP port 199.
 
+This makes it contrallable via PACKAGECONFIG, so that it can be easily
+disabled from the distro or local config. The mechanism makes it easy
+to add control for other MIB modules via PACKAGECONFIG later if need
+be.
 
-On 2021-01-19 12:37 p.m., Leon Anavi wrote:
-> - Add support for Python 3.10
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   .../python/{python3-yappi_1.3.0.bb => python3-yappi_1.3.2.bb}  | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-yappi_1.3.0.bb => python3-yappi_1.3.2.bb} (81%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-yappi_1.3.0.bb b/meta-python/recipes-devtools/python/python3-yappi_1.3.2.bb
-> similarity index 81%
-> rename from meta-python/recipes-devtools/python/python3-yappi_1.3.0.bb
-> rename to meta-python/recipes-devtools/python/python3-yappi_1.3.2.bb
-> index f87c3fb63..7c3f0fd4b 100644
-> --- a/meta-python/recipes-devtools/python/python3-yappi_1.3.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-yappi_1.3.2.bb
-> @@ -4,8 +4,7 @@ HOMEPAGE = "https://github.com/sumerc/yappi"
->   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=71c208c9a4fd864385eb69ad4caa3bee"
->   
-> -SRC_URI[md5sum] = "6dde41b116566cbe1575e41a1e376f74"
-> -SRC_URI[sha256sum] = "a443240f4a776fa1be04430bf423dbf09615c05eba34f4a2a6af344a7ce8ff61"
-> +SRC_URI[sha256sum] = "a51d3e6e5563cc74b5bb82ed6e7bd44a9c1a7eae3d97e4d52e9465edb3a8da8d"
->   
->   SRC_URI += " \
->       file://run-ptest \
->
-> 
->
+For compatibility smux is added to the default PACKAGECONFIG, so there
+is no change in the default build configuration.
 
---------------407DBC9F6133076478328800
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 2021-01-19 12:37 p.m., Leon Anavi
-      wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:20210119173746.24694-10-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">- Add support for Python 3.10
-
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
-    </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210119173746.24694-10-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">
+Signed-off-by: Diego Santa Cruz <Diego.SantaCruz@spinetix.com>
 ---
- .../python/{python3-yappi_1.3.0.bb =&gt; python3-yappi_1.3.2.bb}  | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-yappi_1.3.0.bb =&gt; python3-yappi_1.3.2.bb} (81%)
+ .../recipes-protocols/net-snmp/net-snmp_5.9.bb            | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-yappi_1.3.0.bb b/meta-python/recipes-devtools/python/python3-yappi_1.3.2.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-yappi_1.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-yappi_1.3.2.bb
-index f87c3fb63..7c3f0fd4b 100644
---- a/meta-python/recipes-devtools/python/python3-yappi_1.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-yappi_1.3.2.bb
-@@ -4,8 +4,7 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/sumerc/yappi">&quot;https://github.com/sumerc/yappi&quot;</a>
- LICENSE = &quot;MIT&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=71c208c9a4fd864385eb69ad4caa3bee">&quot;file://LICENSE;md5=71c208c9a4fd864385eb69ad4caa3bee&quot;</a>
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb
+index 5df1f9340..bee83c4d1 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb
+@@ -40,7 +40,7 @@ CCACHE = ""
  
--SRC_URI[md5sum] = &quot;6dde41b116566cbe1575e41a1e376f74&quot;
--SRC_URI[sha256sum] = &quot;a443240f4a776fa1be04430bf423dbf09615c05eba34f4a2a6af344a7ce8ff61&quot;
-+SRC_URI[sha256sum] = &quot;a51d3e6e5563cc74b5bb82ed6e7bd44a9c1a7eae3d97e4d52e9465edb3a8da8d&quot;
+ TARGET_CC_ARCH += "${LDFLAGS}"
  
- SRC_URI += &quot; \
-     <a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
+-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} des"
++PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} des smux"
+ PACKAGECONFIG[elfutils] = "--with-elf, --without-elf, elfutils"
+ PACKAGECONFIG[libnl] = "--with-nl, --without-nl, libnl"
+ 
+@@ -49,6 +49,7 @@ PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,,"
+ PACKAGECONFIG[perl] = "--enable-embedded-perl --with-perl-modules=yes, --disable-embedded-perl --with-perl-modules=no,\
+                        perl,"
+ PACKAGECONFIG[des] = "--enable-des,--disable-des"
++PACKAGECONFIG[smux] = ""
+ 
+ EXTRA_OECONF = "--enable-shared \
+                 --disable-manuals \
+@@ -57,10 +58,11 @@ EXTRA_OECONF = "--enable-shared \
+                 --with-persistent-directory=${localstatedir}/lib/net-snmp \
+                 ${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', '--with-endianness=little', '--with-endianness=big', d)} \
+                 --with-openssl=${STAGING_EXECPREFIXDIR} \
++                --with-mib-modules='${MIB_MODULES}' \
+ "
+ 
+-# net-snmp needs to have mib-modules=smux enabled to enable quagga to support snmp
+-EXTRA_OECONF += "--with-mib-modules=smux"
++MIB_MODULES = ""
++MIB_MODULES_append = " ${@bb.utils.filter('PACKAGECONFIG', 'smux', d)}"
+ 
+ CACHED_CONFIGUREVARS = " \
+     ac_cv_header_valgrind_valgrind_h=no \
+-- 
+2.18.4
 
-
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------407DBC9F6133076478328800--
