@@ -1,597 +1,259 @@
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
- by mx.groups.io with SMTP id smtpd.web12.27461.1611147685202770152
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.72])
+ by mx.groups.io with SMTP id smtpd.web09.27848.1611149596681502954
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Jan 2021 05:01:25 -0800
+ Wed, 20 Jan 2021 05:33:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=otckvU3j;
- spf=pass (domain: gmail.com, ip: 209.85.208.53, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-ed1-f53.google.com with SMTP id b21so16817096edy.6
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Jan 2021 05:01:24 -0800 (PST)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=hGWgm9Ae;
+ spf=pass (domain: windriver.com, ip: 40.107.93.72, mailfrom: trevor.gamblin@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=O/nKMLj0W1+j+85IiaUTDk6cg1Yj1xDPAsVNZCov5kohuydJxNRzb7ywnkHwW287jDAnbWYJgLPXi1bf2EaWhX+8OqkpdoWsmye+arRu37SlgrYiqLV9RjqiwEqvpP16es8ayyBrzB2mHOaIX5nQKQuWxAfGFligIGZ4ie+599vHz/E8lys0ipzSuE0mUc4aaEtOMxFvsfb4rk7qlOjD6n00xkxQok/VYhim5gD+0Q6dK4TwNU6ecIrET+a+cCCZU2gLJZNoA6MvMF3ISrJwMAWAEdCnABz60h5bWEVYbfM74D9eQz/r2l57PXRE0ESBh/qtRst0IiKAJexXn2Dx9w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=y3a8Yc4XKlfJ9JtVA2zbwYNr6+k/IgkkdkWtQ8zIlfA=;
+ b=QTguL1a1MZDKOeJRH8tSNrckXE+QgxZUHQqixK9QBXSqqxfw85M3SMcvQ2CQvEik9qp3kKCBc0gdrUHFUbD/wCj3U/YlwRjDuWgOFnSIBm0Q8FIZxMZYEzg+52325xkd+Sa4bIGf8X4xiQS2DNvdIxKBnDTW3BgBraFoPvPwaPvuwg6O4ns7hnFnA9LYhFCwCsolW3jxiukwLp7Hl5LIbyFjW0BXow32HvgSfjke7E5+0msQ53OXbKDj7jaacMWT4auxFzqjdjh/44WzXoITiGqLo4OWhJxW3k1lm2AKVH+GVwFSgciVeB47hB+FF8TaDnfNRdWhME0HgHSjPitrAg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=eSxB8LRVTZ85dTNICQDe7/bV+KFe5JmulqFpS0Y91BU=;
-        b=otckvU3j+9F4M2Y2Ol9iQM4g4q0WHz8flmRw4CwRcGnDWJ9fXb4ByCyNL1Y/wkwKod
-         Vp1609qHtPRzCq6BIm5Pnaw/KX60UqjxuX4PYQIjLcllQ3/ZW7v4T+WVT9yejtRQKPWv
-         JcRyil5hPx76J70bkUrj7xhvOvg1AE6vkiuNnA9HsLEnsvtIIF7Gugizzk6ZWB/EXHdK
-         4askhiNGia9UMAmqI2v2l76Zda1kwTOeeZkSZ0xlGEyYRd2E2GxR8CVWxzVeU1Q0imen
-         zQ+DIyYPp/5mAgFsfx2ups8VuXJVLJnWFxFIOFJ0sW86C9PfH7fYmNtmVJgYO1oyGwGE
-         RKCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=eSxB8LRVTZ85dTNICQDe7/bV+KFe5JmulqFpS0Y91BU=;
-        b=HFfxVOrMjjXbpcMOlHJekKYMwXq8GqpqnnvjlxpVl7KUCRZDqH9U9Xosne8ABKsGrV
-         7iYB1WtzAdW97VLnIX4aqVentnnqmetyZIsEU+tyFDgtR7WfVnTbtPmMebdyUzpmou7g
-         66XN8CB1M3H7DHxuObhi2d4HKwQIWi7+ff/+4J9qjlDEASEpUOI/ByDAg2G/kD+vur0p
-         gZCAwKbHT8SrMfDuAiEPvka6S6t9gZ6cl1L5ic5HVCnwHKAl5E1HexSClQhDTeqRuaJW
-         cq6PXwgnYyfEJwYZrR0p5HbQSX8sUmzqNUMpIhEwLDSoroAMHgi9bQrkT3q3sYM6Wo+M
-         m3Tg==
-X-Gm-Message-State: AOAM532JiTACeh8nD3oghBr7duN4W/cYWRBH59AhRQpN7tJ1/HwGD9jG
-	3PgrhFdB51Mez/QaX2PkqziD8XJWk0I=
-X-Google-Smtp-Source: ABdhPJynMOX2nZYxRwSa7Tywn5N5/aQq20+TMjkPkYph5a4hfnZJ2gutvkJHPncYFlUNUkeIRhL0xQ==
-X-Received: by 2002:a50:d90a:: with SMTP id t10mr7570174edj.162.1611147683164;
-        Wed, 20 Jan 2021 05:01:23 -0800 (PST)
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from Unimatrix08-Focal.lan (mob-109-113-179-59.net.vodafone.it. [109.113.179.59])
-        by smtp.gmail.com with ESMTPSA id p89sm1131158edb.61.2021.01.20.05.01.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 Jan 2021 05:01:22 -0800 (PST)
-From: "Gianfranco" <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	Gianfranco Costamagna <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH] vboxguestdrivers: upgrade 6.1.16 -> 6.1.18
-Date: Wed, 20 Jan 2021 14:01:18 +0100
-Message-Id: <20210120130118.1410689-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.25.1
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=y3a8Yc4XKlfJ9JtVA2zbwYNr6+k/IgkkdkWtQ8zIlfA=;
+ b=hGWgm9AeFKxwZZeXR9zuG6gn7OJ2W2tYflfyRxLsBHlCIK72wn/kOX0aoIGrSaLV450MKlyf+6MBrGDOuI3Q6Oda3iyrsI+kC+ZS49DNsyc3rEQG2Mcw/uAqRsePcEQEUqCTBsKI6rbdugxgvhplSWnPI9xDuvED3Ozp88QA3rg=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
+ by BYAPR11MB3190.namprd11.prod.outlook.com (2603:10b6:a03:7b::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3763.11; Wed, 20 Jan
+ 2021 13:33:14 +0000
+Received: from BY5PR11MB3909.namprd11.prod.outlook.com
+ ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
+ ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3763.014; Wed, 20 Jan 2021
+ 13:33:14 +0000
+Subject: Re: [oe] [meta-python][PATCH 1/2] python3-greenlet: Upgrade 0.4.17 -> 1.0.0
+To: Leon Anavi <leon.anavi@konsulko.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20210118173007.20996-1-leon.anavi@konsulko.com>
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+Message-ID: <64c7098c-f480-9dfc-2a62-c280550d1995@windriver.com>
+Date: Wed, 20 Jan 2021 08:33:11 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.5.0
+In-Reply-To: <20210118173007.20996-1-leon.anavi@konsulko.com>
+X-Originating-IP: [174.115.236.231]
+X-ClientProxiedBy: CH2PR02CA0010.namprd02.prod.outlook.com
+ (2603:10b6:610:4e::20) To BY5PR11MB3909.namprd11.prod.outlook.com
+ (2603:10b6:a03:191::13)
+Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [192.168.0.55] (174.115.236.231) by CH2PR02CA0010.namprd02.prod.outlook.com (2603:10b6:610:4e::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.12 via Frontend Transport; Wed, 20 Jan 2021 13:33:13 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 2c80293d-2d65-4e59-837f-08d8bd47f015
+X-MS-TrafficTypeDiagnostic: BYAPR11MB3190:
+X-Microsoft-Antispam-PRVS: 
+	<BYAPR11MB31904A2C4384EA6B5456DD169FA20@BYAPR11MB3190.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	uZzd9Vah9CkJj/lgdUtCe5w1Rmu3h9Pe1kSoRz8Ng9LAUqhZclqRteNe0fSQECJr0Zz+LxQ/MhbESop1pX6xgW7rlrLa/bI0mZrQA5gXYbCLAE06bmmQ4PUWy1BxdfW3YfRfnRTbJ19VMFkuDPfK0TSwKjLaN/LfPgsvv6PQ1F5k3x+JtFFPtrNK8MlMf3AjYYRHcVJUK3LisqbNUwXPq7IeL+G8192eFaCL6Bb1ad0N/OGDGCTRSOkKaFcZzHpxcVkjuH3PfZ+gzFqkH65Q7LQ0dMRuoQlssfV8/Uu54Es7qKJOc44w2kyZsEx3ToFyBncQPaKxXtuuFFm3LK4LB5SyagsDfRZv37o88HgBYWfvFJEbsl2HxM93LXbTpowIgDpKCtxUuBYVO4UgvCpFlnsD6jzXYpOYYg9IUDMs6SpWM9cH7b96NIX6tgSK1ddCFKs8UQ6lbuVI5BT9cvN1HLSkEtywM254mzk6pZlpVLRI6fRtefWadWgOTYcpHm4xzRj1wtCCmP0LOcQyJ+9BWItCc2azXzPNOi93p/GxQP444aJ4g/xvXBO6/ka3pKxL
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(366004)(346002)(396003)(136003)(39850400004)(83380400001)(6486002)(26005)(31686004)(166002)(16526019)(52116002)(44832011)(478600001)(186003)(316002)(31696002)(16576012)(2616005)(66946007)(2906002)(33964004)(36756003)(53546011)(8676002)(966005)(5660300002)(66556008)(86362001)(8936002)(66476007)(956004)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	=?utf-8?B?eDJ0NlZsYXZmWUVuaVR3akp6SkYyWDY1M2JYSFFkanJCY1E0N3QyTEdISnkv?=
+ =?utf-8?B?Z0xDdWMrSG4wRjBFYVRFcnJXTm1PRVNnNW0yTlZZRSs4Nld2UTVsdVNWWnVQ?=
+ =?utf-8?B?MUkvaUJCNlc1aHBQT3ZrbkloK21xUG0wOHlEbmo1eDFuRTZGSnR2Z2ZPdHk5?=
+ =?utf-8?B?WndHbUlMTWFpcFRQS1BhSXdrUHFhblV2S2YxVUlTMzMweHpudjNnemlhcnhB?=
+ =?utf-8?B?R0JmVDVpbmRSZ3MzZjVPeFFuQnZaa3dGVFhrUFZKSTFWOXVOTVg3VEhlWFB1?=
+ =?utf-8?B?cWJpUXpFN2c2Rk9SVzIzZ2V5QzFDSVJkdlFZOXc5RkVmQk5qQkNnOWhtcVgv?=
+ =?utf-8?B?MzdBZ2R4dXkyYWhqQWNqQ2hVTys1QXJhd1prb0dteEE1NmpPeE9idW0zWjFU?=
+ =?utf-8?B?NWR6VjdQQjN0K2swZHQ5bldYRVE3LytsMyt2RTRNWG9OVzlJK2h3Nk93L0VY?=
+ =?utf-8?B?NFM3Q0FQV0FQQ0hDMXF6TzlsTXF4a0xidnBwVEJDUzd6dUorLzV6U05qSnFv?=
+ =?utf-8?B?MHFMSWxtbHZTbW42STE4eE1nbGpSOXFSUno1cEM3cnppaGNNb2oxbCt6MG9p?=
+ =?utf-8?B?SFZoT2ZBTm9NQnNMNlIvSjJLQlRkTk1wY3dzZWloVnNwRk1IYnBOcGFRUWtZ?=
+ =?utf-8?B?TnE0ZFdCSDc4UDdmakVHMTM2dkd6bEMzMVFpeGRUVnlwZ2wxZk92bG1uNTcx?=
+ =?utf-8?B?NGxWQkErYmlNaWRFZ3NTMVk1M08yd2IvSU9pTWRVZHJPb1JiQkZjWWxyUStw?=
+ =?utf-8?B?QVNOVTVJTnQrYzBEY1dsdHd6L1RSeVRWejIxa3VIT21uTU1IbnZsNGlSN05m?=
+ =?utf-8?B?bldZNC9abWFmOGlzQnJtMXNxSHV1VmRJL04wVGFhNnZDRUd5Y2JlS0ZDWGRK?=
+ =?utf-8?B?SmVzcTdCY0VON2EvU21YMGNiK3dPMTdkTGtkcnR3UGxOTlJIc01iY1Irbk1r?=
+ =?utf-8?B?VWNJTGpxLzYveTNUS3kvcGtnZUlZanVGM0cwZkFMaG1QMHh5Q1pNQjhqUHpp?=
+ =?utf-8?B?ZWVWZnR3bEczc0FwSUdMdFBwU0hHZVVobE5ydnhvVXpXYjZkV2xSNUhIZnhM?=
+ =?utf-8?B?STdBUEV0QjV1Q1pEOHhoSlVESFBtaUZRYWxiRVF0NFpjYlVSMG1WdkMraml1?=
+ =?utf-8?B?MlF6M0oxV2NMTFZyOUs1eTlPbXF1TkJQbFNiV0E1RFN6d1VsS1lMMldyMmVx?=
+ =?utf-8?B?RWd3anczTW5OVjY0Rzd0TmxHeGRCVWg4cUttM0pVRDZuWkppT1BUdFIxSG0w?=
+ =?utf-8?B?aVlzUXQwaW1raUdnbFFYSkIycDR1UVVGK1VLNjNJa3Y1M0tiUXhJd0ZuN1Q5?=
+ =?utf-8?Q?td5N0lc0vFfSlKrEjxuAEpKM81kF8yfCpG?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2c80293d-2d65-4e59-837f-08d8bd47f015
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jan 2021 13:33:14.5901
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: PJQAxOvFNQ4FOFJt3bPp1WL1/FMKlsc3Ym8quw7PDihVCLTaIjmOG00/BFq/xuIgebQrjBNPedwEmS9eZ/9FTPBgNwOPQZZDclo42/vJjeU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3190
+Content-Type: multipart/alternative;
+ boundary="------------CA0985C9BC3847A1CD389E0C"
+Content-Language: en-US
 
-Drop kernel 5.10 build fixes patches, now part of upstream codebase
+--------------CA0985C9BC3847A1CD389E0C
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+
+On 2021-01-18 12:30 p.m., Leon Anavi wrote:
+> - Add the ability to set a greenlet's PEP 567 contextvars context
+>    directly, by assigning to the greenlet's gr_context attribute.
+>    This restores support for some patterns of using greenlets atop
+>    an async environment that became more challenging in 0.4.17.
+> - The repr of greenlet objects now includes extra information
+>    about its state. This is purely informative and the details are
+>    subject to change.
+> - The greenlet module is now a package. There are no API changes,
+>    so all existing imports, including from C code, should continue
+>    to work.
+> - (C API) The undocumented GREENLET_VERSION macro that defined a
+>    string giving the greenlet version is now deprecated and will
+>    not be updated.
+> - Fix %s and %r formatting of a greenlet on Python 2. Previously
+>    it would result in a Unicode string instead of a native string.
+> - Move continuous integration from Travis CI to Github Actions.
+>
+> License-Update: move to the src/ layout and this affects the note
+> in LICENSE about Stackless Python
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> ---
+>   .../recipes-devtools/python/python3-greenlet_0.4.17.bb   | 9 ---------
+>   .../recipes-devtools/python/python3-greenlet_1.0.0.bb    | 8 ++++++++
+>   2 files changed, 8 insertions(+), 9 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python3-greenlet_0.4.17.bb
+>   create mode 100644 meta-python/recipes-devtools/python/python3-greenlet_1.0.0.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-greenlet_0.4.17.bb b/meta-python/recipes-devtools/python/python3-greenlet_0.4.17.bb
+> deleted file mode 100644
+> index 744265e1f..000000000
+> --- a/meta-python/recipes-devtools/python/python3-greenlet_0.4.17.bb
+> +++ /dev/null
+> @@ -1,9 +0,0 @@
+> -SUMMARY = "Python lightweight in-process concurrent programming"
+> -LICENSE = "MIT & PSF"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
+> -                    file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
+> -
+> -SRC_URI[md5sum] = "d964c95c2d2f0f02f36c75e158d8e3dc"
+> -SRC_URI[sha256sum] = "41d8835c69a78de718e466dd0e6bfd4b46125f21a67c3ff6d76d8d8059868d6b"
+> -
+> -inherit pypi distutils3
+> diff --git a/meta-python/recipes-devtools/python/python3-greenlet_1.0.0.bb b/meta-python/recipes-devtools/python/python3-greenlet_1.0.0.bb
+> new file mode 100644
+> index 000000000..32194dba7
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-greenlet_1.0.0.bb
+> @@ -0,0 +1,8 @@
+> +SUMMARY = "Python lightweight in-process concurrent programming"
+> +LICENSE = "MIT & PSF"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=e95668d68e4329085c7ab3535e6a7aee \
+> +                    file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
+> +
+> +SRC_URI[sha256sum] = "719e169c79255816cdcf6dccd9ed2d089a72a9f6c42273aae12d55e8d35bdcf8"
+> +
+> +inherit pypi distutils3 setuptools3
+>
+> 
+>
+
+--------------CA0985C9BC3847A1CD389E0C
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 2021-01-18 12:30 p.m., Leon Anavi
+      wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:20210118173007.20996-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">- Add the ability to set a greenlet's PEP 567 contextvars context
+  directly, by assigning to the greenlet's gr_context attribute.
+  This restores support for some patterns of using greenlets atop
+  an async environment that became more challenging in 0.4.17.
+- The repr of greenlet objects now includes extra information
+  about its state. This is purely informative and the details are
+  subject to change.
+- The greenlet module is now a package. There are no API changes,
+  so all existing imports, including from C code, should continue
+  to work.
+- (C API) The undocumented GREENLET_VERSION macro that defined a
+  string giving the greenlet version is now deprecated and will
+  not be updated.
+- Fix %s and %r formatting of a greenlet on Python 2. Previously
+  it would result in a Unicode string instead of a native string.
+- Move continuous integration from Travis CI to Github Actions.
+
+License-Update: move to the src/ layout and this affects the note
+in LICENSE about Stackless Python
+
+Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+    </blockquote>
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
+    <blockquote type="cite" cite="mid:20210118173007.20996-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">
 ---
- ...-linux-drm-Adjustment-for-Linux-5.10.patch | 321 ------------------
- ...0drv-linux.c-Changes-to-support-the-.patch | 119 -------
- ...justment-for-linux-5.10-TASK_SIZE_MA.patch |  46 ---
- ...s_6.1.16.bb => vboxguestdrivers_6.1.18.bb} |   7 +-
- 4 files changed, 2 insertions(+), 491 deletions(-)
- delete mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Additions-linux-drm-Adjustment-for-Linux-5.10.patch
- delete mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Runtime-memobj-r0drv-linux.c-Changes-to-support-the-.patch
- delete mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-linser-vboxsf-Adjustment-for-linux-5.10-TASK_SIZE_MA.patch
- rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_6.1.16.bb => vboxguestdrivers_6.1.18.bb} (88%)
+ .../recipes-devtools/python/python3-greenlet_0.4.17.bb   | 9 ---------
+ .../recipes-devtools/python/python3-greenlet_1.0.0.bb    | 8 ++++++++
+ 2 files changed, 8 insertions(+), 9 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-greenlet_0.4.17.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-greenlet_1.0.0.bb
 
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Additions-linux-drm-Adjustment-for-Linux-5.10.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Additions-linux-drm-Adjustment-for-Linux-5.10.patch
+diff --git a/meta-python/recipes-devtools/python/python3-greenlet_0.4.17.bb b/meta-python/recipes-devtools/python/python3-greenlet_0.4.17.bb
 deleted file mode 100644
-index a444901f8..000000000
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Additions-linux-drm-Adjustment-for-Linux-5.10.patch
+index 744265e1f..000000000
+--- a/meta-python/recipes-devtools/python/python3-greenlet_0.4.17.bb
 +++ /dev/null
-@@ -1,321 +0,0 @@
--From b6c765d693a0833b94cb2e91b32842570c3458d2 Mon Sep 17 00:00:00 2001
--From: vboxsync <vboxsync@cfe28804-0f27-0410-a406-dd0f0b0b656f>
--Date: Tue, 15 Dec 2020 22:29:56 +0000
--Subject: [PATCH] Additions/linux/drm: Adjustment for Linux 5.10.
+@@ -1,9 +0,0 @@
+-SUMMARY = &quot;Python lightweight in-process concurrent programming&quot;
+-LICENSE = &quot;MIT &amp; PSF&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36\-file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a">&quot;file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
+-                    file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a&quot;</a>
 -
--Upstream-Status: Backport
+-SRC_URI[md5sum] = &quot;d964c95c2d2f0f02f36c75e158d8e3dc&quot;
+-SRC_URI[sha256sum] = &quot;41d8835c69a78de718e466dd0e6bfd4b46125f21a67c3ff6d76d8d8059868d6b&quot;
 -
--git-svn-id: http://www.virtualbox.org/svn/vbox@87092 cfe28804-0f27-0410-a406-dd0f0b0b656f
--
--Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
--
-----
-- src/VBox/Additions/linux/drm/vbox_drv.h | 10 +-
-- src/VBox/Additions/linux/drm/vbox_fb.c  |  2 +-
-- .../src/VBox/Additions/linux/drm/vbox_mode.c  |  2 +-
-- src/VBox/Additions/linux/drm/vbox_ttm.c | 99 +++++++++++++++++--
-- 4 files changed, 99 insertions(+), 14 deletions(-)
--
--diff --git a/src/VBox/Additions/linux/drm/vbox_drv.h b/src/VBox/Additions/linux/drm/vbox_drv.h
--index 8c85371749..7937f2f2d2 100644
----- a/src/VBox/Additions/linux/drm/vbox_drv.h
--+++ b/src/VBox/Additions/linux/drm/vbox_drv.h
--@@ -175,6 +175,9 @@
-- #include <drm/ttm/ttm_placement.h>
-- #include <drm/ttm/ttm_memory.h>
-- #include <drm/ttm/ttm_module.h>
--+#if RTLNX_VER_MIN(5,10,0)
--+# include <drm/ttm/ttm_resource.h>
--+#endif
-- 
-- #include "vboxvideo_guest.h"
-- #include "vboxvideo_vbe.h"
--@@ -444,7 +447,10 @@ int vbox_bo_create(struct drm_device *dev, int size, int align,
-- int vbox_gem_create(struct drm_device *dev,
-- 		    u32 size, bool iskernel, struct drm_gem_object **obj);
-- 
---int vbox_bo_pin(struct vbox_bo *bo, u32 pl_flag, u64 *gpu_addr);
--+#define VBOX_MEM_TYPE_VRAM   0x1
--+#define VBOX_MEM_TYPE_SYSTEM 0x2
--+
--+int vbox_bo_pin(struct vbox_bo *bo, u32 mem_type, u64 *gpu_addr);
-- int vbox_bo_unpin(struct vbox_bo *bo);
-- 
-- static inline int vbox_bo_reserve(struct vbox_bo *bo, bool no_wait)
--@@ -469,7 +475,7 @@ static inline void vbox_bo_unreserve(struct vbox_bo *bo)
-- 	ttm_bo_unreserve(&bo->bo);
-- }
-- 
---void vbox_ttm_placement(struct vbox_bo *bo, int domain);
--+void vbox_ttm_placement(struct vbox_bo *bo, u32 mem_type);
-- int vbox_bo_push_sysram(struct vbox_bo *bo);
-- int vbox_mmap(struct file *filp, struct vm_area_struct *vma);
-- 
--diff --git a/src/VBox/Additions/linux/drm/vbox_fb.c b/src/VBox/Additions/linux/drm/vbox_fb.c
--index adead98d3d..7182d9da1a 100644
----- a/src/VBox/Additions/linux/drm/vbox_fb.c
--+++ b/src/VBox/Additions/linux/drm/vbox_fb.c
--@@ -295,7 +295,7 @@ static int vboxfb_create(struct drm_fb_helper *helper,
-- 	if (ret)
-- 		return ret;
-- 
---	ret = vbox_bo_pin(bo, TTM_PL_FLAG_VRAM, NULL);
--+	ret = vbox_bo_pin(bo, VBOX_MEM_TYPE_VRAM, NULL);
-- 	if (ret) {
-- 		vbox_bo_unreserve(bo);
-- 		return ret;
--diff --git a/src/VBox/Additions/linux/drm/vbox_mode.c b/src/VBox/Additions/linux/drm/vbox_mode.c
--index ce7d135cb6..5557db5ef8 100644
----- a/src/VBox/Additions/linux/drm/vbox_mode.c
--+++ b/src/VBox/Additions/linux/drm/vbox_mode.c
--@@ -227,7 +227,7 @@ static int vbox_crtc_set_base(struct drm_crtc *crtc,
-- 	if (ret)
-- 		return ret;
-- 
---	ret = vbox_bo_pin(bo, TTM_PL_FLAG_VRAM, &gpu_addr);
--+	ret = vbox_bo_pin(bo, VBOX_MEM_TYPE_VRAM, &gpu_addr);
-- 	vbox_bo_unreserve(bo);
-- 	if (ret)
-- 		return ret;
--diff --git a/src/VBox/Additions/linux/drm/vbox_ttm.c b/src/VBox/Additions/linux/drm/vbox_ttm.c
--index bf87aabc05..5eac926a42 100644
----- a/src/VBox/Additions/linux/drm/vbox_ttm.c
--+++ b/src/VBox/Additions/linux/drm/vbox_ttm.c
--@@ -41,6 +41,7 @@
-- #define PLACEMENT_FLAGS(placement) ((placement).flags)
-- #endif
-- 
--+
-- static inline struct vbox_private *vbox_bdev(struct ttm_bo_device *bd)
-- {
-- 	return container_of(bd, struct vbox_private, ttm.bdev);
--@@ -125,6 +126,7 @@ static bool vbox_ttm_bo_is_vbox_bo(struct ttm_buffer_object *bo)
-- 	return false;
-- }
-- 
--+#if RTLNX_VER_MAX(5,10,0)
-- static int
-- vbox_bo_init_mem_type(struct ttm_bo_device *bdev, u32 type,
-- 		      struct ttm_mem_type_manager *man)
--@@ -148,6 +150,7 @@ vbox_bo_init_mem_type(struct ttm_bo_device *bdev, u32 type,
-- 
-- 	return 0;
-- }
--+#endif
-- 
-- static void
-- vbox_bo_evict_flags(struct ttm_buffer_object *bo, struct ttm_placement *pl)
--@@ -157,7 +160,7 @@ vbox_bo_evict_flags(struct ttm_buffer_object *bo, struct ttm_placement *pl)
-- 	if (!vbox_ttm_bo_is_vbox_bo(bo))
-- 		return;
-- 
---	vbox_ttm_placement(vboxbo, TTM_PL_FLAG_SYSTEM);
--+	vbox_ttm_placement(vboxbo, VBOX_MEM_TYPE_SYSTEM);
-- 	*pl = vboxbo->placement;
-- }
-- 
--@@ -167,11 +170,12 @@ static int vbox_bo_verify_access(struct ttm_buffer_object *bo,
-- 	return 0;
-- }
-- 
--+#if RTLNX_VER_MAX(5,10,0)
-- static int vbox_ttm_io_mem_reserve(struct ttm_bo_device *bdev,
-- 				   struct ttm_mem_reg *mem)
-- {
---	struct ttm_mem_type_manager *man = &bdev->man[mem->mem_type];
-- 	struct vbox_private *vbox = vbox_bdev(bdev);
--+	struct ttm_mem_type_manager *man = &bdev->man[mem->mem_type];
-- 
-- 	mem->bus.addr = NULL;
-- 	mem->bus.offset = 0;
--@@ -194,12 +198,53 @@ static int vbox_ttm_io_mem_reserve(struct ttm_bo_device *bdev,
-- 	}
-- 	return 0;
-- }
--+#else
--+static int vbox_ttm_io_mem_reserve(struct ttm_bo_device *bdev,
--+				   struct ttm_resource *mem)
--+{
--+	struct vbox_private *vbox = vbox_bdev(bdev);
--+	mem->bus.addr = NULL;
--+	mem->bus.offset = 0;
--+	mem->size = mem->num_pages << PAGE_SHIFT;
--+	mem->start = 0;
--+	mem->bus.is_iomem = false;
--+	switch (mem->mem_type) {
--+	case TTM_PL_SYSTEM:
--+		/* system memory */
--+		return 0;
--+	case TTM_PL_VRAM:
--+		mem->bus.offset = mem->start << PAGE_SHIFT;
--+		mem->start = pci_resource_start(vbox->dev->pdev, 0);
--+		mem->bus.is_iomem = true;
--+		break;
--+	default:
--+		return -EINVAL;
--+	}
--+	return 0;
--+}
--+#endif
-- 
--+
--+
--+#if RTLNX_VER_MIN(5,10,0)
--+static void vbox_ttm_io_mem_free(struct ttm_bo_device *bdev,
--+				 struct ttm_resource *mem)
--+{
--+}
--+#else
-- static void vbox_ttm_io_mem_free(struct ttm_bo_device *bdev,
-- 				 struct ttm_mem_reg *mem)
-- {
-- }
--+#endif
-- 
--+#if RTLNX_VER_MIN(5,10,0)
--+static void vbox_ttm_tt_destroy(struct ttm_bo_device *bdev, struct ttm_tt *tt)
--+{
--+	ttm_tt_fini(tt);
--+	kfree(tt);
--+}
--+#else
-- static void vbox_ttm_backend_destroy(struct ttm_tt *tt)
-- {
-- 	ttm_tt_fini(tt);
--@@ -209,6 +254,7 @@ static void vbox_ttm_backend_destroy(struct ttm_tt *tt)
-- static struct ttm_backend_func vbox_tt_backend_func = {
-- 	.destroy = &vbox_ttm_backend_destroy,
-- };
--+#endif
-- 
-- #if RTLNX_VER_MAX(4,17,0) && !RTLNX_RHEL_MAJ_PREREQ(7,6) && !RTLNX_SUSE_MAJ_PREREQ(15,1) && !RTLNX_SUSE_MAJ_PREREQ(12,5)
-- static struct ttm_tt *vbox_ttm_tt_create(struct ttm_bo_device *bdev,
--@@ -226,7 +272,9 @@ static struct ttm_tt *vbox_ttm_tt_create(struct ttm_buffer_object *bo,
-- 	if (!tt)
-- 		return NULL;
-- 
--+#if RTLNX_VER_MAX(5,10,0)
-- 	tt->func = &vbox_tt_backend_func;
--+#endif
-- #if RTLNX_VER_MAX(4,17,0) && !RTLNX_RHEL_MAJ_PREREQ(7,6) && !RTLNX_SUSE_MAJ_PREREQ(15,1) && !RTLNX_SUSE_MAJ_PREREQ(12,5)
-- 	if (ttm_tt_init(tt, bdev, size, page_flags, dummy_read_page)) {
-- #else
--@@ -261,11 +309,16 @@ static void vbox_ttm_tt_unpopulate(struct ttm_tt *ttm)
-- 
-- static struct ttm_bo_driver vbox_bo_driver = {
-- 	.ttm_tt_create = vbox_ttm_tt_create,
--+#if RTLNX_VER_MIN(5,10,0)
--+	.ttm_tt_destroy = vbox_ttm_tt_destroy,
--+#endif
-- #if RTLNX_VER_MAX(4,17,0)
-- 	.ttm_tt_populate = vbox_ttm_tt_populate,
-- 	.ttm_tt_unpopulate = vbox_ttm_tt_unpopulate,
-- #endif
--+#if RTLNX_VER_MAX(5,10,0)
-- 	.init_mem_type = vbox_bo_init_mem_type,
--+#endif
-- #if RTLNX_VER_MIN(4,10,0) || RTLNX_RHEL_MAJ_PREREQ(7,4)
-- 	.eviction_valuable = ttm_bo_eviction_valuable,
-- #endif
--@@ -318,8 +371,13 @@ int vbox_mm_init(struct vbox_private *vbox)
-- #endif
-- 	}
-- 
--+#if RTLNX_VER_MIN(5,10,0)
--+	ret = ttm_range_man_init(bdev, TTM_PL_VRAM, false,
--+			     vbox->available_vram_size >> PAGE_SHIFT);
--+#else
-- 	ret = ttm_bo_init_mm(bdev, TTM_PL_VRAM,
-- 			     vbox->available_vram_size >> PAGE_SHIFT);
--+#endif
-- 	if (ret) {
-- 		DRM_ERROR("Failed ttm VRAM init: %d\n", ret);
-- 		goto err_device_release;
--@@ -359,7 +417,7 @@ void vbox_mm_fini(struct vbox_private *vbox)
-- #endif
-- }
-- 
---void vbox_ttm_placement(struct vbox_bo *bo, int domain)
--+void vbox_ttm_placement(struct vbox_bo *bo, u32 mem_type)
-- {
-- 	u32 c = 0;
-- #if RTLNX_VER_MAX(3,18,0) && !RTLNX_RHEL_MAJ_PREREQ(7,2)
--@@ -372,15 +430,36 @@ void vbox_ttm_placement(struct vbox_bo *bo, int domain)
-- 	bo->placement.placement = bo->placements;
-- 	bo->placement.busy_placement = bo->placements;
-- 
---	if (domain & TTM_PL_FLAG_VRAM)
--+	if (mem_type & VBOX_MEM_TYPE_VRAM) {
--+#if RTLNX_VER_MIN(5,10,0)
--+		bo->placements[c].mem_type = TTM_PL_VRAM;
--+		PLACEMENT_FLAGS(bo->placements[c++]) =
--+		    TTM_PL_FLAG_WC | TTM_PL_FLAG_UNCACHED;
--+#else
-- 		PLACEMENT_FLAGS(bo->placements[c++]) =
-- 		    TTM_PL_FLAG_WC | TTM_PL_FLAG_UNCACHED | TTM_PL_FLAG_VRAM;
---	if (domain & TTM_PL_FLAG_SYSTEM)
--+#endif
--+	}
--+	if (mem_type & VBOX_MEM_TYPE_SYSTEM) {
--+#if RTLNX_VER_MIN(5,10,0)
--+		bo->placements[c].mem_type = TTM_PL_SYSTEM;
--+		PLACEMENT_FLAGS(bo->placements[c++]) =
--+		    TTM_PL_MASK_CACHING;
--+#else
-- 		PLACEMENT_FLAGS(bo->placements[c++]) =
-- 		    TTM_PL_MASK_CACHING | TTM_PL_FLAG_SYSTEM;
---	if (!c)
--+#endif
--+	}
--+	if (!c) {
--+#if RTLNX_VER_MIN(5,10,0)
--+		bo->placements[c].mem_type = TTM_PL_SYSTEM;
--+		PLACEMENT_FLAGS(bo->placements[c++]) =
--+		    TTM_PL_MASK_CACHING;
--+#else
-- 		PLACEMENT_FLAGS(bo->placements[c++]) =
-- 		    TTM_PL_MASK_CACHING | TTM_PL_FLAG_SYSTEM;
--+#endif
--+	}
-- 
-- 	bo->placement.num_placement = c;
-- 	bo->placement.num_busy_placement = c;
--@@ -414,7 +493,7 @@ int vbox_bo_create(struct drm_device *dev, int size, int align,
-- 	vboxbo->bo.bdev->dev_mapping = dev->dev_mapping;
-- #endif
-- 
---	vbox_ttm_placement(vboxbo, TTM_PL_FLAG_VRAM | TTM_PL_FLAG_SYSTEM);
--+	vbox_ttm_placement(vboxbo, VBOX_MEM_TYPE_VRAM | VBOX_MEM_TYPE_SYSTEM);
-- 
-- 	acc_size = ttm_bo_dma_acc_size(&vbox->ttm.bdev, size,
-- 				       sizeof(struct vbox_bo));
--@@ -452,7 +531,7 @@ static inline u64 vbox_bo_gpu_offset(struct vbox_bo *bo)
-- #endif
-- }
-- 
---int vbox_bo_pin(struct vbox_bo *bo, u32 pl_flag, u64 *gpu_addr)
--+int vbox_bo_pin(struct vbox_bo *bo, u32 mem_type, u64 *gpu_addr)
-- {
-- #if RTLNX_VER_MIN(4,16,0) || RTLNX_RHEL_MAJ_PREREQ(7,6) || RTLNX_SUSE_MAJ_PREREQ(15,1) || RTLNX_SUSE_MAJ_PREREQ(12,5)
-- 	struct ttm_operation_ctx ctx = { false, false };
--@@ -467,7 +546,7 @@ int vbox_bo_pin(struct vbox_bo *bo, u32 pl_flag, u64 *gpu_addr)
-- 		return 0;
-- 	}
-- 
---	vbox_ttm_placement(bo, pl_flag);
--+	vbox_ttm_placement(bo, mem_type);
-- 
-- 	for (i = 0; i < bo->placement.num_placement; i++)
-- 		PLACEMENT_FLAGS(bo->placements[i]) |= TTM_PL_FLAG_NO_EVICT;
--@@ -540,7 +619,7 @@ int vbox_bo_push_sysram(struct vbox_bo *bo)
-- 	if (bo->kmap.virtual)
-- 		ttm_bo_kunmap(&bo->kmap);
-- 
---	vbox_ttm_placement(bo, TTM_PL_FLAG_SYSTEM);
--+	vbox_ttm_placement(bo, VBOX_MEM_TYPE_SYSTEM);
-- 
-- 	for (i = 0; i < bo->placement.num_placement; i++)
-- 		PLACEMENT_FLAGS(bo->placements[i]) |= TTM_PL_FLAG_NO_EVICT;
---- 
--2.19.1
--
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Runtime-memobj-r0drv-linux.c-Changes-to-support-the-.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Runtime-memobj-r0drv-linux.c-Changes-to-support-the-.patch
-deleted file mode 100644
-index db27cb883..000000000
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Runtime-memobj-r0drv-linux.c-Changes-to-support-the-.patch
-+++ /dev/null
-@@ -1,119 +0,0 @@
--From 2a6e3cf63f58e289802a11faad5fb495e2d04e97 Mon Sep 17 00:00:00 2001
--From: vboxsync <vboxsync@cfe28804-0f27-0410-a406-dd0f0b0b656f>
--Date: Wed, 9 Dec 2020 18:59:04 +0000
--Subject: [PATCH] Runtime/memobj-r0drv-linux.c: Changes to support the upcoming
-- 5.10 kernel, bugref:9879
--
--Upstream-Status: Backport
--
--git-svn-id: http://www.virtualbox.org/svn/vbox@87074 cfe28804-0f27-0410-a406-dd0f0b0b656f
--
--Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
-----
-- .../Runtime/r0drv/linux/memobj-r0drv-linux.c  | 68 ++++++++++++++++++-
-- 1 file changed, 67 insertions(+), 1 deletion(-)
--
----- a/src/VBox/Runtime/r0drv/linux/memobj-r0drv-linux.c
--+++ b/src/VBox/Runtime/r0drv/linux/memobj-r0drv-linux.c
--@@ -56,9 +56,19 @@
--  * Whether we use alloc_vm_area (3.2+) for executable memory.
--  * This is a must for 5.8+, but we enable it all the way back to 3.2.x for
--  * better W^R compliance (fExecutable flag). */
---#if RTLNX_VER_MIN(3,2,0) || defined(DOXYGEN_RUNNING)
--+#if RTLNX_VER_RANGE(3,2,0, 5,10,0) || defined(DOXYGEN_RUNNING)
-- # define IPRT_USE_ALLOC_VM_AREA_FOR_EXEC
-- #endif
--+/** @def IPRT_USE_APPLY_TO_PAGE_RANGE_FOR_EXEC
--+ * alloc_vm_area was removed with 5.10 so we have to resort to a different way
--+ * to allocate executable memory.
--+ * It would be possible to remove IPRT_USE_ALLOC_VM_AREA_FOR_EXEC and use
--+ * this path execlusively for 3.2+ but no time to test it really works on every
--+ * supported kernel, so better play safe for now.
--+ */
--+#if RTLNX_VER_MIN(5,10,0) || defined(DOXYGEN_RUNNING)
--+# define IPRT_USE_APPLY_TO_PAGE_RANGE_FOR_EXEC
--+#endif
-- 
-- /*
--  * 2.6.29+ kernels don't work with remap_pfn_range() anymore because
--@@ -502,6 +512,46 @@ static void rtR0MemObjLinuxFreePages(PRT
-- }
-- 
-- 
--+#ifdef IPRT_USE_APPLY_TO_PAGE_RANGE_FOR_EXEC
--+/**
--+ * User data passed to the apply_to_page_range() callback.
--+ */
--+typedef struct LNXAPPLYPGRANGE
--+{
--+    /** Pointer to the memory object. */
--+    PRTR0MEMOBJLNX pMemLnx;
--+    /** The page protection flags to apply. */
--+    pgprot_t       fPg;
--+} LNXAPPLYPGRANGE;
--+/** Pointer to the user data. */
--+typedef LNXAPPLYPGRANGE *PLNXAPPLYPGRANGE;
--+/** Pointer to the const user data. */
--+typedef const LNXAPPLYPGRANGE *PCLNXAPPLYPGRANGE;
--+
--+/**
--+ * Callback called in apply_to_page_range().
--+ *
--+ * @returns Linux status code.
--+ * @param   pPte                Pointer to the page table entry for the given address.
--+ * @param   uAddr               The address to apply the new protection to.
--+ * @param   pvUser              The opaque user data.
--+ */
--+#ifdef __i386__
--+static int rtR0MemObjLinuxApplyPageRange(pte_t *pPte, unsigned long uAddr, void *pvUser)
--+#else
--+static DECLCALLBACK(int) rtR0MemObjLinuxApplyPageRange(pte_t *pPte, unsigned long uAddr, void *pvUser)
--+#endif
--+{
--+    PCLNXAPPLYPGRANGE pArgs = (PCLNXAPPLYPGRANGE)pvUser;
--+    PRTR0MEMOBJLNX pMemLnx = pArgs->pMemLnx;
--+    size_t idxPg = (uAddr - (unsigned long)pMemLnx->Core.pv) >> PAGE_SHIFT;
--+
--+    set_pte(pPte, mk_pte(pMemLnx->apPages[idxPg], pArgs->fPg));
--+    return 0;
--+}
--+#endif
--+
--+
-- /**
--  * Maps the allocation into ring-0.
--  *
--@@ -584,6 +634,11 @@ static int rtR0MemObjLinuxVMap(PRTR0MEMO
--         else
-- # endif
--         {
--+#  if defined(IPRT_USE_APPLY_TO_PAGE_RANGE_FOR_EXEC)
--+            if (fExecutable)
--+                pgprot_val(fPg) |= _PAGE_NX; /* Uses RTR0MemObjProtect to clear NX when memory ready, W^X fashion. */
--+#  endif
--+
-- # ifdef VM_MAP
--             pMemLnx->Core.pv = vmap(&pMemLnx->apPages[0], pMemLnx->cPages, VM_MAP, fPg);
-- # else
--@@ -1851,6 +1906,21 @@ DECLHIDDEN(int) rtR0MemObjNativeProtect(
--         preempt_enable();
--         return VINF_SUCCESS;
--     }
--+# elif defined(IPRT_USE_APPLY_TO_PAGE_RANGE_FOR_EXEC)
--+    PRTR0MEMOBJLNX pMemLnx = (PRTR0MEMOBJLNX)pMem;
--+    if (   pMemLnx->fExecutable
--+        && pMemLnx->fMappedToRing0)
--+    {
--+        LNXAPPLYPGRANGE Args;
--+        Args.pMemLnx = pMemLnx;
--+        Args.fPg = rtR0MemObjLinuxConvertProt(fProt, true /*fKernel*/);
--+        int rcLnx = apply_to_page_range(current->active_mm, (unsigned long)pMemLnx->Core.pv + offSub, cbSub,
--+                                        rtR0MemObjLinuxApplyPageRange, (void *)&Args);
--+        if (rcLnx)
--+            return VERR_NOT_SUPPORTED;
--+
--+        return VINF_SUCCESS;
--+    }
-- # endif
-- 
--     NOREF(pMem);
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-linser-vboxsf-Adjustment-for-linux-5.10-TASK_SIZE_MA.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-linser-vboxsf-Adjustment-for-linux-5.10-TASK_SIZE_MA.patch
-deleted file mode 100644
-index 3cfe2e917..000000000
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-linser-vboxsf-Adjustment-for-linux-5.10-TASK_SIZE_MA.patch
-+++ /dev/null
-@@ -1,46 +0,0 @@
--From a276f8bc5e4515f7ea51e2c56e0e634a723ca104 Mon Sep 17 00:00:00 2001
--From: vboxsync <vboxsync@cfe28804-0f27-0410-a406-dd0f0b0b656f>
--Date: Tue, 8 Dec 2020 13:52:53 +0000
--Subject: [PATCH] linser/vboxsf: Adjustment for linux 5.10 - TASK_SIZE_MAX
-- replaces USER_DS.seg. bugref:9879
--
--Upstream-Status: Backport
--
--git-svn-id: http://www.virtualbox.org/svn/vbox@87053 cfe28804-0f27-0410-a406-dd0f0b0b656f
--
--Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
-----
-- src/VBox/Additions/linux/sharedfolders/regops.c | 9 ++++++++-
-- 1 file changed, 8 insertions(+), 1 deletion(-)
--
--diff --git a/src/VBox/Additions/linux/sharedfolders/regops.c b/src/VBox/Additions/linux/sharedfolders/regops.c
--index e1fad3d820..401fd69930 100644
----- a/src/VBox/Additions/linux/sharedfolders/regops.c
--+++ b/src/VBox/Additions/linux/sharedfolders/regops.c
--@@ -147,7 +147,11 @@ static int vbsf_iov_iter_detect_type(struct iovec const *paIov, size_t cSegs)
--     while (cSegs-- > 0) {
--         if (paIov->iov_len > 0) {
--             if (access_ok(VERIFY_READ, paIov->iov_base, paIov->iov_len))
--+#if RTLNX_VER_MIN(5,10,0)
--+                return (uintptr_t)paIov->iov_base >= TASK_SIZE_MAX ? ITER_KVEC : 0;
--+#else
--                 return (uintptr_t)paIov->iov_base >= USER_DS.seg ? ITER_KVEC : 0;
--+#endif
--             AssertMsgFailed(("%p LB %#zx\n", paIov->iov_base, paIov->iov_len));
--             break;
--         }
--@@ -1401,7 +1405,10 @@ static int vbsf_lock_user_pages_failed_check_kernel(uintptr_t uPtrFrom, size_t c
--     /*
--      * Check that this is valid user memory that is actually in the kernel range.
--      */
---#if RTLNX_VER_MIN(5,0,0) || RTLNX_RHEL_MIN(8,1)
--+#if RTLNX_VER_MIN(5,10,0)
--+    if (   access_ok((void *)uPtrFrom, cPages << PAGE_SHIFT)
--+        && uPtrFrom >= TASK_SIZE_MAX)
--+#elif RTLNX_VER_MIN(5,0,0) || RTLNX_RHEL_MIN(8,1)
--     if (   access_ok((void *)uPtrFrom, cPages << PAGE_SHIFT)
--         && uPtrFrom >= USER_DS.seg)
-- #else
---- 
--2.19.1
--
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.16.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.18.bb
-similarity index 88%
-rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.16.bb
-rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.18.bb
-index ff639c09f..ea6a082f6 100644
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.16.bb
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.18.bb
-@@ -13,12 +13,9 @@ VBOX_NAME = "VirtualBox-${PV}"
- 
- SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
-     file://Makefile.utils \
--    file://0001-Additions-linux-drm-Adjustment-for-Linux-5.10.patch \
--    file://0001-Runtime-memobj-r0drv-linux.c-Changes-to-support-the-.patch \
--    file://0001-linser-vboxsf-Adjustment-for-linux-5.10-TASK_SIZE_MA.patch \
- "
--SRC_URI[md5sum] = "a12a647f6c114f2cb1571089b36841fe"
--SRC_URI[sha256sum] = "49c1990da16d8a3d5bda8cdb961ec8195a901e67e4c79aea44c1521a5fc2f9f1"
-+SRC_URI[md5sum] = "c61001386eb3822ab8f06d688a82e84b"
-+SRC_URI[sha256sum] = "108d42b9b391b7a332a33df1662cf7b0e9d9a80f3079d16288d8b9487f427d40"
- 
- S ?= "${WORKDIR}/vbox_module"
- S_task-patch = "${WORKDIR}/${VBOX_NAME}"
--- 
-2.25.1
+-inherit pypi distutils3
+diff --git a/meta-python/recipes-devtools/python/python3-greenlet_1.0.0.bb b/meta-python/recipes-devtools/python/python3-greenlet_1.0.0.bb
+new file mode 100644
+index 000000000..32194dba7
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-greenlet_1.0.0.bb
+@@ -0,0 +1,8 @@
++SUMMARY = &quot;Python lightweight in-process concurrent programming&quot;
++LICENSE = &quot;MIT &amp; PSF&quot;
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=e95668d68e4329085c7ab3535e6a7aee\+file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a">&quot;file://LICENSE;md5=e95668d68e4329085c7ab3535e6a7aee \
++                    file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a&quot;</a>
++
++SRC_URI[sha256sum] = &quot;719e169c79255816cdcf6dccd9ed2d089a72a9f6c42273aae12d55e8d35bdcf8&quot;
++
++inherit pypi distutils3 setuptools3
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
 
+
+</pre>
+    </blockquote>
+  </body>
+</html>
+
+--------------CA0985C9BC3847A1CD389E0C--
