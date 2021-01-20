@@ -1,80 +1,597 @@
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.web12.26550.1611141369570229682
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
+ by mx.groups.io with SMTP id smtpd.web12.27461.1611147685202770152
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Jan 2021 03:16:09 -0800
+ Wed, 20 Jan 2021 05:01:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=J22vxo37;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: luca.boccassi@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id l12so17481737wry.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Jan 2021 03:16:09 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=otckvU3j;
+ spf=pass (domain: gmail.com, ip: 209.85.208.53, mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-ed1-f53.google.com with SMTP id b21so16817096edy.6
+        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Jan 2021 05:01:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=tvy26TsgtSinaB+amsIvMzAtAzvCGtIx3ne1FaJB7Xw=;
-        b=J22vxo37VSNBj/0+0uVmLkjh4ZI6zZcRp0O0BAda2e5z7a4gOUUPG/vQAxR/TB26Lp
-         mMm/Koywj+S5+RnpNd83q+7oZv8GD2ziiKVZC8blNdsxBFshqdmhxbNdDNJMNWAlxAKO
-         ODY2Ueh2FXtU+PLuMW/3WfiABjkQ8a8gTceaiGJc/Sm/r9vp7lY0B1DffjAMf9e+sMbk
-         iFPcJITrMpLWbULOa5UxlvCGDSygQ0bk7J6PQVpQSCObU8yYlH+h+Wqh59TcCUIbFfm9
-         8DOOfcvkQeDgiecFxLvsXwS51LBkCu16+LK3UrFWrCN3o+9lFSRs4fBkcq721AHJI18u
-         df/g==
+        bh=eSxB8LRVTZ85dTNICQDe7/bV+KFe5JmulqFpS0Y91BU=;
+        b=otckvU3j+9F4M2Y2Ol9iQM4g4q0WHz8flmRw4CwRcGnDWJ9fXb4ByCyNL1Y/wkwKod
+         Vp1609qHtPRzCq6BIm5Pnaw/KX60UqjxuX4PYQIjLcllQ3/ZW7v4T+WVT9yejtRQKPWv
+         JcRyil5hPx76J70bkUrj7xhvOvg1AE6vkiuNnA9HsLEnsvtIIF7Gugizzk6ZWB/EXHdK
+         4askhiNGia9UMAmqI2v2l76Zda1kwTOeeZkSZ0xlGEyYRd2E2GxR8CVWxzVeU1Q0imen
+         zQ+DIyYPp/5mAgFsfx2ups8VuXJVLJnWFxFIOFJ0sW86C9PfH7fYmNtmVJgYO1oyGwGE
+         RKCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=tvy26TsgtSinaB+amsIvMzAtAzvCGtIx3ne1FaJB7Xw=;
-        b=ZTToP1YNO5cO8oAWpOzPA1J3KYuxG9RWA7PPaj95WB/hMGPkiT40eWuFTebY6RyOaM
-         crwbfZZOItsnHs6mlxCO8XcVGh4AjbQJimHIfHGGYgpxAOr8eZ5LWfcWj2BaTIsOp1NL
-         qnfqNeKA7uJRVPV6qtF6/TjdcjTkv4x2xuUjMgXnPItsp4liu7AoPgNWo/+tqvc5XX3J
-         Oj3154jO+vFltgteKUaEssgaCZ4cH7pRw/9ykzJiWiAjpGG9aJB2MCNjsPEkC54pRWZP
-         NTFSZOLrFJ14yEC2M5V+8n3bfkNxcIg+kEE6MXklEcRLSy85y7e+0r+q+XDckshosZb0
-         T2kg==
-X-Gm-Message-State: AOAM5336BYf3JZ9sM28ik9LYqfzSm+YwIW/40Eu09tn1Rqkw3cdR0j6r
-	7KEU97Nap5xDZ2Jp9S33v7h5DFkxHtF5Cg==
-X-Google-Smtp-Source: ABdhPJwUaYHES2qopESf1kRs3E1ewWRULJjaHhrB63wiogfgQeprNb+pte+zOn3YlQHjHaDfphCOcg==
-X-Received: by 2002:adf:e704:: with SMTP id c4mr8782203wrm.355.1611141367921;
-        Wed, 20 Jan 2021 03:16:07 -0800 (PST)
-Return-Path: <luca.boccassi@gmail.com>
-Received: from localhost ([88.98.246.218])
-        by smtp.gmail.com with ESMTPSA id l11sm3486110wrt.23.2021.01.20.03.16.06
-        for <openembedded-devel@lists.openembedded.org>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=eSxB8LRVTZ85dTNICQDe7/bV+KFe5JmulqFpS0Y91BU=;
+        b=HFfxVOrMjjXbpcMOlHJekKYMwXq8GqpqnnvjlxpVl7KUCRZDqH9U9Xosne8ABKsGrV
+         7iYB1WtzAdW97VLnIX4aqVentnnqmetyZIsEU+tyFDgtR7WfVnTbtPmMebdyUzpmou7g
+         66XN8CB1M3H7DHxuObhi2d4HKwQIWi7+ff/+4J9qjlDEASEpUOI/ByDAg2G/kD+vur0p
+         gZCAwKbHT8SrMfDuAiEPvka6S6t9gZ6cl1L5ic5HVCnwHKAl5E1HexSClQhDTeqRuaJW
+         cq6PXwgnYyfEJwYZrR0p5HbQSX8sUmzqNUMpIhEwLDSoroAMHgi9bQrkT3q3sYM6Wo+M
+         m3Tg==
+X-Gm-Message-State: AOAM532JiTACeh8nD3oghBr7duN4W/cYWRBH59AhRQpN7tJ1/HwGD9jG
+	3PgrhFdB51Mez/QaX2PkqziD8XJWk0I=
+X-Google-Smtp-Source: ABdhPJynMOX2nZYxRwSa7Tywn5N5/aQq20+TMjkPkYph5a4hfnZJ2gutvkJHPncYFlUNUkeIRhL0xQ==
+X-Received: by 2002:a50:d90a:: with SMTP id t10mr7570174edj.162.1611147683164;
+        Wed, 20 Jan 2021 05:01:23 -0800 (PST)
+Return-Path: <costamagna.gianfranco@gmail.com>
+Received: from Unimatrix08-Focal.lan (mob-109-113-179-59.net.vodafone.it. [109.113.179.59])
+        by smtp.gmail.com with ESMTPSA id p89sm1131158edb.61.2021.01.20.05.01.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 Jan 2021 03:16:07 -0800 (PST)
-From: "Luca Bocassi" <luca.boccassi@gmail.com>
+        Wed, 20 Jan 2021 05:01:22 -0800 (PST)
+From: "Gianfranco" <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] fsverity: fix MinGW build
-Date: Wed, 20 Jan 2021 11:16:00 +0000
-Message-Id: <20210120111600.879308-2-luca.boccassi@gmail.com>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20210120111600.879308-1-luca.boccassi@gmail.com>
-References: <20210120111600.879308-1-luca.boccassi@gmail.com>
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	Gianfranco Costamagna <locutusofborg@debian.org>
+Subject: [meta-oe][PATCH] vboxguestdrivers: upgrade 6.1.16 -> 6.1.18
+Date: Wed, 20 Jan 2021 14:01:18 +0100
+Message-Id: <20210120130118.1410689-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Luca Boccassi <luca.boccassi@microsoft.com>
+Drop kernel 5.10 build fixes patches, now part of upstream codebase
 
-Upstream supports building a binary with MinGW but not a shared library,
-so remove the configure option for MinGW targets.
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 ---
- meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.3.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ ...-linux-drm-Adjustment-for-Linux-5.10.patch | 321 ------------------
+ ...0drv-linux.c-Changes-to-support-the-.patch | 119 -------
+ ...justment-for-linux-5.10-TASK_SIZE_MA.patch |  46 ---
+ ...s_6.1.16.bb => vboxguestdrivers_6.1.18.bb} |   7 +-
+ 4 files changed, 2 insertions(+), 491 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Additions-linux-drm-Adjustment-for-Linux-5.10.patch
+ delete mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Runtime-memobj-r0drv-linux.c-Changes-to-support-the-.patch
+ delete mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-linser-vboxsf-Adjustment-for-linux-5.10-TASK_SIZE_MA.patch
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_6.1.16.bb => vboxguestdrivers_6.1.18.bb} (88%)
 
-diff --git a/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.3.bb b/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.3.bb
-index 72b742fec..9b1ba4f2e 100644
---- a/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.3.bb
-+++ b/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.3.bb
-@@ -16,7 +16,10 @@ S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Additions-linux-drm-Adjustment-for-Linux-5.10.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Additions-linux-drm-Adjustment-for-Linux-5.10.patch
+deleted file mode 100644
+index a444901f8..000000000
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Additions-linux-drm-Adjustment-for-Linux-5.10.patch
++++ /dev/null
+@@ -1,321 +0,0 @@
+-From b6c765d693a0833b94cb2e91b32842570c3458d2 Mon Sep 17 00:00:00 2001
+-From: vboxsync <vboxsync@cfe28804-0f27-0410-a406-dd0f0b0b656f>
+-Date: Tue, 15 Dec 2020 22:29:56 +0000
+-Subject: [PATCH] Additions/linux/drm: Adjustment for Linux 5.10.
+-
+-Upstream-Status: Backport
+-
+-git-svn-id: http://www.virtualbox.org/svn/vbox@87092 cfe28804-0f27-0410-a406-dd0f0b0b656f
+-
+-Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
+-
+----
+- src/VBox/Additions/linux/drm/vbox_drv.h | 10 +-
+- src/VBox/Additions/linux/drm/vbox_fb.c  |  2 +-
+- .../src/VBox/Additions/linux/drm/vbox_mode.c  |  2 +-
+- src/VBox/Additions/linux/drm/vbox_ttm.c | 99 +++++++++++++++++--
+- 4 files changed, 99 insertions(+), 14 deletions(-)
+-
+-diff --git a/src/VBox/Additions/linux/drm/vbox_drv.h b/src/VBox/Additions/linux/drm/vbox_drv.h
+-index 8c85371749..7937f2f2d2 100644
+---- a/src/VBox/Additions/linux/drm/vbox_drv.h
+-+++ b/src/VBox/Additions/linux/drm/vbox_drv.h
+-@@ -175,6 +175,9 @@
+- #include <drm/ttm/ttm_placement.h>
+- #include <drm/ttm/ttm_memory.h>
+- #include <drm/ttm/ttm_module.h>
+-+#if RTLNX_VER_MIN(5,10,0)
+-+# include <drm/ttm/ttm_resource.h>
+-+#endif
+- 
+- #include "vboxvideo_guest.h"
+- #include "vboxvideo_vbe.h"
+-@@ -444,7 +447,10 @@ int vbox_bo_create(struct drm_device *dev, int size, int align,
+- int vbox_gem_create(struct drm_device *dev,
+- 		    u32 size, bool iskernel, struct drm_gem_object **obj);
+- 
+--int vbox_bo_pin(struct vbox_bo *bo, u32 pl_flag, u64 *gpu_addr);
+-+#define VBOX_MEM_TYPE_VRAM   0x1
+-+#define VBOX_MEM_TYPE_SYSTEM 0x2
+-+
+-+int vbox_bo_pin(struct vbox_bo *bo, u32 mem_type, u64 *gpu_addr);
+- int vbox_bo_unpin(struct vbox_bo *bo);
+- 
+- static inline int vbox_bo_reserve(struct vbox_bo *bo, bool no_wait)
+-@@ -469,7 +475,7 @@ static inline void vbox_bo_unreserve(struct vbox_bo *bo)
+- 	ttm_bo_unreserve(&bo->bo);
+- }
+- 
+--void vbox_ttm_placement(struct vbox_bo *bo, int domain);
+-+void vbox_ttm_placement(struct vbox_bo *bo, u32 mem_type);
+- int vbox_bo_push_sysram(struct vbox_bo *bo);
+- int vbox_mmap(struct file *filp, struct vm_area_struct *vma);
+- 
+-diff --git a/src/VBox/Additions/linux/drm/vbox_fb.c b/src/VBox/Additions/linux/drm/vbox_fb.c
+-index adead98d3d..7182d9da1a 100644
+---- a/src/VBox/Additions/linux/drm/vbox_fb.c
+-+++ b/src/VBox/Additions/linux/drm/vbox_fb.c
+-@@ -295,7 +295,7 @@ static int vboxfb_create(struct drm_fb_helper *helper,
+- 	if (ret)
+- 		return ret;
+- 
+--	ret = vbox_bo_pin(bo, TTM_PL_FLAG_VRAM, NULL);
+-+	ret = vbox_bo_pin(bo, VBOX_MEM_TYPE_VRAM, NULL);
+- 	if (ret) {
+- 		vbox_bo_unreserve(bo);
+- 		return ret;
+-diff --git a/src/VBox/Additions/linux/drm/vbox_mode.c b/src/VBox/Additions/linux/drm/vbox_mode.c
+-index ce7d135cb6..5557db5ef8 100644
+---- a/src/VBox/Additions/linux/drm/vbox_mode.c
+-+++ b/src/VBox/Additions/linux/drm/vbox_mode.c
+-@@ -227,7 +227,7 @@ static int vbox_crtc_set_base(struct drm_crtc *crtc,
+- 	if (ret)
+- 		return ret;
+- 
+--	ret = vbox_bo_pin(bo, TTM_PL_FLAG_VRAM, &gpu_addr);
+-+	ret = vbox_bo_pin(bo, VBOX_MEM_TYPE_VRAM, &gpu_addr);
+- 	vbox_bo_unreserve(bo);
+- 	if (ret)
+- 		return ret;
+-diff --git a/src/VBox/Additions/linux/drm/vbox_ttm.c b/src/VBox/Additions/linux/drm/vbox_ttm.c
+-index bf87aabc05..5eac926a42 100644
+---- a/src/VBox/Additions/linux/drm/vbox_ttm.c
+-+++ b/src/VBox/Additions/linux/drm/vbox_ttm.c
+-@@ -41,6 +41,7 @@
+- #define PLACEMENT_FLAGS(placement) ((placement).flags)
+- #endif
+- 
+-+
+- static inline struct vbox_private *vbox_bdev(struct ttm_bo_device *bd)
+- {
+- 	return container_of(bd, struct vbox_private, ttm.bdev);
+-@@ -125,6 +126,7 @@ static bool vbox_ttm_bo_is_vbox_bo(struct ttm_buffer_object *bo)
+- 	return false;
+- }
+- 
+-+#if RTLNX_VER_MAX(5,10,0)
+- static int
+- vbox_bo_init_mem_type(struct ttm_bo_device *bdev, u32 type,
+- 		      struct ttm_mem_type_manager *man)
+-@@ -148,6 +150,7 @@ vbox_bo_init_mem_type(struct ttm_bo_device *bdev, u32 type,
+- 
+- 	return 0;
+- }
+-+#endif
+- 
+- static void
+- vbox_bo_evict_flags(struct ttm_buffer_object *bo, struct ttm_placement *pl)
+-@@ -157,7 +160,7 @@ vbox_bo_evict_flags(struct ttm_buffer_object *bo, struct ttm_placement *pl)
+- 	if (!vbox_ttm_bo_is_vbox_bo(bo))
+- 		return;
+- 
+--	vbox_ttm_placement(vboxbo, TTM_PL_FLAG_SYSTEM);
+-+	vbox_ttm_placement(vboxbo, VBOX_MEM_TYPE_SYSTEM);
+- 	*pl = vboxbo->placement;
+- }
+- 
+-@@ -167,11 +170,12 @@ static int vbox_bo_verify_access(struct ttm_buffer_object *bo,
+- 	return 0;
+- }
+- 
+-+#if RTLNX_VER_MAX(5,10,0)
+- static int vbox_ttm_io_mem_reserve(struct ttm_bo_device *bdev,
+- 				   struct ttm_mem_reg *mem)
+- {
+--	struct ttm_mem_type_manager *man = &bdev->man[mem->mem_type];
+- 	struct vbox_private *vbox = vbox_bdev(bdev);
+-+	struct ttm_mem_type_manager *man = &bdev->man[mem->mem_type];
+- 
+- 	mem->bus.addr = NULL;
+- 	mem->bus.offset = 0;
+-@@ -194,12 +198,53 @@ static int vbox_ttm_io_mem_reserve(struct ttm_bo_device *bdev,
+- 	}
+- 	return 0;
+- }
+-+#else
+-+static int vbox_ttm_io_mem_reserve(struct ttm_bo_device *bdev,
+-+				   struct ttm_resource *mem)
+-+{
+-+	struct vbox_private *vbox = vbox_bdev(bdev);
+-+	mem->bus.addr = NULL;
+-+	mem->bus.offset = 0;
+-+	mem->size = mem->num_pages << PAGE_SHIFT;
+-+	mem->start = 0;
+-+	mem->bus.is_iomem = false;
+-+	switch (mem->mem_type) {
+-+	case TTM_PL_SYSTEM:
+-+		/* system memory */
+-+		return 0;
+-+	case TTM_PL_VRAM:
+-+		mem->bus.offset = mem->start << PAGE_SHIFT;
+-+		mem->start = pci_resource_start(vbox->dev->pdev, 0);
+-+		mem->bus.is_iomem = true;
+-+		break;
+-+	default:
+-+		return -EINVAL;
+-+	}
+-+	return 0;
+-+}
+-+#endif
+- 
+-+
+-+
+-+#if RTLNX_VER_MIN(5,10,0)
+-+static void vbox_ttm_io_mem_free(struct ttm_bo_device *bdev,
+-+				 struct ttm_resource *mem)
+-+{
+-+}
+-+#else
+- static void vbox_ttm_io_mem_free(struct ttm_bo_device *bdev,
+- 				 struct ttm_mem_reg *mem)
+- {
+- }
+-+#endif
+- 
+-+#if RTLNX_VER_MIN(5,10,0)
+-+static void vbox_ttm_tt_destroy(struct ttm_bo_device *bdev, struct ttm_tt *tt)
+-+{
+-+	ttm_tt_fini(tt);
+-+	kfree(tt);
+-+}
+-+#else
+- static void vbox_ttm_backend_destroy(struct ttm_tt *tt)
+- {
+- 	ttm_tt_fini(tt);
+-@@ -209,6 +254,7 @@ static void vbox_ttm_backend_destroy(struct ttm_tt *tt)
+- static struct ttm_backend_func vbox_tt_backend_func = {
+- 	.destroy = &vbox_ttm_backend_destroy,
+- };
+-+#endif
+- 
+- #if RTLNX_VER_MAX(4,17,0) && !RTLNX_RHEL_MAJ_PREREQ(7,6) && !RTLNX_SUSE_MAJ_PREREQ(15,1) && !RTLNX_SUSE_MAJ_PREREQ(12,5)
+- static struct ttm_tt *vbox_ttm_tt_create(struct ttm_bo_device *bdev,
+-@@ -226,7 +272,9 @@ static struct ttm_tt *vbox_ttm_tt_create(struct ttm_buffer_object *bo,
+- 	if (!tt)
+- 		return NULL;
+- 
+-+#if RTLNX_VER_MAX(5,10,0)
+- 	tt->func = &vbox_tt_backend_func;
+-+#endif
+- #if RTLNX_VER_MAX(4,17,0) && !RTLNX_RHEL_MAJ_PREREQ(7,6) && !RTLNX_SUSE_MAJ_PREREQ(15,1) && !RTLNX_SUSE_MAJ_PREREQ(12,5)
+- 	if (ttm_tt_init(tt, bdev, size, page_flags, dummy_read_page)) {
+- #else
+-@@ -261,11 +309,16 @@ static void vbox_ttm_tt_unpopulate(struct ttm_tt *ttm)
+- 
+- static struct ttm_bo_driver vbox_bo_driver = {
+- 	.ttm_tt_create = vbox_ttm_tt_create,
+-+#if RTLNX_VER_MIN(5,10,0)
+-+	.ttm_tt_destroy = vbox_ttm_tt_destroy,
+-+#endif
+- #if RTLNX_VER_MAX(4,17,0)
+- 	.ttm_tt_populate = vbox_ttm_tt_populate,
+- 	.ttm_tt_unpopulate = vbox_ttm_tt_unpopulate,
+- #endif
+-+#if RTLNX_VER_MAX(5,10,0)
+- 	.init_mem_type = vbox_bo_init_mem_type,
+-+#endif
+- #if RTLNX_VER_MIN(4,10,0) || RTLNX_RHEL_MAJ_PREREQ(7,4)
+- 	.eviction_valuable = ttm_bo_eviction_valuable,
+- #endif
+-@@ -318,8 +371,13 @@ int vbox_mm_init(struct vbox_private *vbox)
+- #endif
+- 	}
+- 
+-+#if RTLNX_VER_MIN(5,10,0)
+-+	ret = ttm_range_man_init(bdev, TTM_PL_VRAM, false,
+-+			     vbox->available_vram_size >> PAGE_SHIFT);
+-+#else
+- 	ret = ttm_bo_init_mm(bdev, TTM_PL_VRAM,
+- 			     vbox->available_vram_size >> PAGE_SHIFT);
+-+#endif
+- 	if (ret) {
+- 		DRM_ERROR("Failed ttm VRAM init: %d\n", ret);
+- 		goto err_device_release;
+-@@ -359,7 +417,7 @@ void vbox_mm_fini(struct vbox_private *vbox)
+- #endif
+- }
+- 
+--void vbox_ttm_placement(struct vbox_bo *bo, int domain)
+-+void vbox_ttm_placement(struct vbox_bo *bo, u32 mem_type)
+- {
+- 	u32 c = 0;
+- #if RTLNX_VER_MAX(3,18,0) && !RTLNX_RHEL_MAJ_PREREQ(7,2)
+-@@ -372,15 +430,36 @@ void vbox_ttm_placement(struct vbox_bo *bo, int domain)
+- 	bo->placement.placement = bo->placements;
+- 	bo->placement.busy_placement = bo->placements;
+- 
+--	if (domain & TTM_PL_FLAG_VRAM)
+-+	if (mem_type & VBOX_MEM_TYPE_VRAM) {
+-+#if RTLNX_VER_MIN(5,10,0)
+-+		bo->placements[c].mem_type = TTM_PL_VRAM;
+-+		PLACEMENT_FLAGS(bo->placements[c++]) =
+-+		    TTM_PL_FLAG_WC | TTM_PL_FLAG_UNCACHED;
+-+#else
+- 		PLACEMENT_FLAGS(bo->placements[c++]) =
+- 		    TTM_PL_FLAG_WC | TTM_PL_FLAG_UNCACHED | TTM_PL_FLAG_VRAM;
+--	if (domain & TTM_PL_FLAG_SYSTEM)
+-+#endif
+-+	}
+-+	if (mem_type & VBOX_MEM_TYPE_SYSTEM) {
+-+#if RTLNX_VER_MIN(5,10,0)
+-+		bo->placements[c].mem_type = TTM_PL_SYSTEM;
+-+		PLACEMENT_FLAGS(bo->placements[c++]) =
+-+		    TTM_PL_MASK_CACHING;
+-+#else
+- 		PLACEMENT_FLAGS(bo->placements[c++]) =
+- 		    TTM_PL_MASK_CACHING | TTM_PL_FLAG_SYSTEM;
+--	if (!c)
+-+#endif
+-+	}
+-+	if (!c) {
+-+#if RTLNX_VER_MIN(5,10,0)
+-+		bo->placements[c].mem_type = TTM_PL_SYSTEM;
+-+		PLACEMENT_FLAGS(bo->placements[c++]) =
+-+		    TTM_PL_MASK_CACHING;
+-+#else
+- 		PLACEMENT_FLAGS(bo->placements[c++]) =
+- 		    TTM_PL_MASK_CACHING | TTM_PL_FLAG_SYSTEM;
+-+#endif
+-+	}
+- 
+- 	bo->placement.num_placement = c;
+- 	bo->placement.num_busy_placement = c;
+-@@ -414,7 +493,7 @@ int vbox_bo_create(struct drm_device *dev, int size, int align,
+- 	vboxbo->bo.bdev->dev_mapping = dev->dev_mapping;
+- #endif
+- 
+--	vbox_ttm_placement(vboxbo, TTM_PL_FLAG_VRAM | TTM_PL_FLAG_SYSTEM);
+-+	vbox_ttm_placement(vboxbo, VBOX_MEM_TYPE_VRAM | VBOX_MEM_TYPE_SYSTEM);
+- 
+- 	acc_size = ttm_bo_dma_acc_size(&vbox->ttm.bdev, size,
+- 				       sizeof(struct vbox_bo));
+-@@ -452,7 +531,7 @@ static inline u64 vbox_bo_gpu_offset(struct vbox_bo *bo)
+- #endif
+- }
+- 
+--int vbox_bo_pin(struct vbox_bo *bo, u32 pl_flag, u64 *gpu_addr)
+-+int vbox_bo_pin(struct vbox_bo *bo, u32 mem_type, u64 *gpu_addr)
+- {
+- #if RTLNX_VER_MIN(4,16,0) || RTLNX_RHEL_MAJ_PREREQ(7,6) || RTLNX_SUSE_MAJ_PREREQ(15,1) || RTLNX_SUSE_MAJ_PREREQ(12,5)
+- 	struct ttm_operation_ctx ctx = { false, false };
+-@@ -467,7 +546,7 @@ int vbox_bo_pin(struct vbox_bo *bo, u32 pl_flag, u64 *gpu_addr)
+- 		return 0;
+- 	}
+- 
+--	vbox_ttm_placement(bo, pl_flag);
+-+	vbox_ttm_placement(bo, mem_type);
+- 
+- 	for (i = 0; i < bo->placement.num_placement; i++)
+- 		PLACEMENT_FLAGS(bo->placements[i]) |= TTM_PL_FLAG_NO_EVICT;
+-@@ -540,7 +619,7 @@ int vbox_bo_push_sysram(struct vbox_bo *bo)
+- 	if (bo->kmap.virtual)
+- 		ttm_bo_kunmap(&bo->kmap);
+- 
+--	vbox_ttm_placement(bo, TTM_PL_FLAG_SYSTEM);
+-+	vbox_ttm_placement(bo, VBOX_MEM_TYPE_SYSTEM);
+- 
+- 	for (i = 0; i < bo->placement.num_placement; i++)
+- 		PLACEMENT_FLAGS(bo->placements[i]) |= TTM_PL_FLAG_NO_EVICT;
+--- 
+-2.19.1
+-
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Runtime-memobj-r0drv-linux.c-Changes-to-support-the-.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Runtime-memobj-r0drv-linux.c-Changes-to-support-the-.patch
+deleted file mode 100644
+index db27cb883..000000000
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Runtime-memobj-r0drv-linux.c-Changes-to-support-the-.patch
++++ /dev/null
+@@ -1,119 +0,0 @@
+-From 2a6e3cf63f58e289802a11faad5fb495e2d04e97 Mon Sep 17 00:00:00 2001
+-From: vboxsync <vboxsync@cfe28804-0f27-0410-a406-dd0f0b0b656f>
+-Date: Wed, 9 Dec 2020 18:59:04 +0000
+-Subject: [PATCH] Runtime/memobj-r0drv-linux.c: Changes to support the upcoming
+- 5.10 kernel, bugref:9879
+-
+-Upstream-Status: Backport
+-
+-git-svn-id: http://www.virtualbox.org/svn/vbox@87074 cfe28804-0f27-0410-a406-dd0f0b0b656f
+-
+-Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
+----
+- .../Runtime/r0drv/linux/memobj-r0drv-linux.c  | 68 ++++++++++++++++++-
+- 1 file changed, 67 insertions(+), 1 deletion(-)
+-
+---- a/src/VBox/Runtime/r0drv/linux/memobj-r0drv-linux.c
+-+++ b/src/VBox/Runtime/r0drv/linux/memobj-r0drv-linux.c
+-@@ -56,9 +56,19 @@
+-  * Whether we use alloc_vm_area (3.2+) for executable memory.
+-  * This is a must for 5.8+, but we enable it all the way back to 3.2.x for
+-  * better W^R compliance (fExecutable flag). */
+--#if RTLNX_VER_MIN(3,2,0) || defined(DOXYGEN_RUNNING)
+-+#if RTLNX_VER_RANGE(3,2,0, 5,10,0) || defined(DOXYGEN_RUNNING)
+- # define IPRT_USE_ALLOC_VM_AREA_FOR_EXEC
+- #endif
+-+/** @def IPRT_USE_APPLY_TO_PAGE_RANGE_FOR_EXEC
+-+ * alloc_vm_area was removed with 5.10 so we have to resort to a different way
+-+ * to allocate executable memory.
+-+ * It would be possible to remove IPRT_USE_ALLOC_VM_AREA_FOR_EXEC and use
+-+ * this path execlusively for 3.2+ but no time to test it really works on every
+-+ * supported kernel, so better play safe for now.
+-+ */
+-+#if RTLNX_VER_MIN(5,10,0) || defined(DOXYGEN_RUNNING)
+-+# define IPRT_USE_APPLY_TO_PAGE_RANGE_FOR_EXEC
+-+#endif
+- 
+- /*
+-  * 2.6.29+ kernels don't work with remap_pfn_range() anymore because
+-@@ -502,6 +512,46 @@ static void rtR0MemObjLinuxFreePages(PRT
+- }
+- 
+- 
+-+#ifdef IPRT_USE_APPLY_TO_PAGE_RANGE_FOR_EXEC
+-+/**
+-+ * User data passed to the apply_to_page_range() callback.
+-+ */
+-+typedef struct LNXAPPLYPGRANGE
+-+{
+-+    /** Pointer to the memory object. */
+-+    PRTR0MEMOBJLNX pMemLnx;
+-+    /** The page protection flags to apply. */
+-+    pgprot_t       fPg;
+-+} LNXAPPLYPGRANGE;
+-+/** Pointer to the user data. */
+-+typedef LNXAPPLYPGRANGE *PLNXAPPLYPGRANGE;
+-+/** Pointer to the const user data. */
+-+typedef const LNXAPPLYPGRANGE *PCLNXAPPLYPGRANGE;
+-+
+-+/**
+-+ * Callback called in apply_to_page_range().
+-+ *
+-+ * @returns Linux status code.
+-+ * @param   pPte                Pointer to the page table entry for the given address.
+-+ * @param   uAddr               The address to apply the new protection to.
+-+ * @param   pvUser              The opaque user data.
+-+ */
+-+#ifdef __i386__
+-+static int rtR0MemObjLinuxApplyPageRange(pte_t *pPte, unsigned long uAddr, void *pvUser)
+-+#else
+-+static DECLCALLBACK(int) rtR0MemObjLinuxApplyPageRange(pte_t *pPte, unsigned long uAddr, void *pvUser)
+-+#endif
+-+{
+-+    PCLNXAPPLYPGRANGE pArgs = (PCLNXAPPLYPGRANGE)pvUser;
+-+    PRTR0MEMOBJLNX pMemLnx = pArgs->pMemLnx;
+-+    size_t idxPg = (uAddr - (unsigned long)pMemLnx->Core.pv) >> PAGE_SHIFT;
+-+
+-+    set_pte(pPte, mk_pte(pMemLnx->apPages[idxPg], pArgs->fPg));
+-+    return 0;
+-+}
+-+#endif
+-+
+-+
+- /**
+-  * Maps the allocation into ring-0.
+-  *
+-@@ -584,6 +634,11 @@ static int rtR0MemObjLinuxVMap(PRTR0MEMO
+-         else
+- # endif
+-         {
+-+#  if defined(IPRT_USE_APPLY_TO_PAGE_RANGE_FOR_EXEC)
+-+            if (fExecutable)
+-+                pgprot_val(fPg) |= _PAGE_NX; /* Uses RTR0MemObjProtect to clear NX when memory ready, W^X fashion. */
+-+#  endif
+-+
+- # ifdef VM_MAP
+-             pMemLnx->Core.pv = vmap(&pMemLnx->apPages[0], pMemLnx->cPages, VM_MAP, fPg);
+- # else
+-@@ -1851,6 +1906,21 @@ DECLHIDDEN(int) rtR0MemObjNativeProtect(
+-         preempt_enable();
+-         return VINF_SUCCESS;
+-     }
+-+# elif defined(IPRT_USE_APPLY_TO_PAGE_RANGE_FOR_EXEC)
+-+    PRTR0MEMOBJLNX pMemLnx = (PRTR0MEMOBJLNX)pMem;
+-+    if (   pMemLnx->fExecutable
+-+        && pMemLnx->fMappedToRing0)
+-+    {
+-+        LNXAPPLYPGRANGE Args;
+-+        Args.pMemLnx = pMemLnx;
+-+        Args.fPg = rtR0MemObjLinuxConvertProt(fProt, true /*fKernel*/);
+-+        int rcLnx = apply_to_page_range(current->active_mm, (unsigned long)pMemLnx->Core.pv + offSub, cbSub,
+-+                                        rtR0MemObjLinuxApplyPageRange, (void *)&Args);
+-+        if (rcLnx)
+-+            return VERR_NOT_SUPPORTED;
+-+
+-+        return VINF_SUCCESS;
+-+    }
+- # endif
+- 
+-     NOREF(pMem);
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-linser-vboxsf-Adjustment-for-linux-5.10-TASK_SIZE_MA.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-linser-vboxsf-Adjustment-for-linux-5.10-TASK_SIZE_MA.patch
+deleted file mode 100644
+index 3cfe2e917..000000000
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-linser-vboxsf-Adjustment-for-linux-5.10-TASK_SIZE_MA.patch
++++ /dev/null
+@@ -1,46 +0,0 @@
+-From a276f8bc5e4515f7ea51e2c56e0e634a723ca104 Mon Sep 17 00:00:00 2001
+-From: vboxsync <vboxsync@cfe28804-0f27-0410-a406-dd0f0b0b656f>
+-Date: Tue, 8 Dec 2020 13:52:53 +0000
+-Subject: [PATCH] linser/vboxsf: Adjustment for linux 5.10 - TASK_SIZE_MAX
+- replaces USER_DS.seg. bugref:9879
+-
+-Upstream-Status: Backport
+-
+-git-svn-id: http://www.virtualbox.org/svn/vbox@87053 cfe28804-0f27-0410-a406-dd0f0b0b656f
+-
+-Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
+----
+- src/VBox/Additions/linux/sharedfolders/regops.c | 9 ++++++++-
+- 1 file changed, 8 insertions(+), 1 deletion(-)
+-
+-diff --git a/src/VBox/Additions/linux/sharedfolders/regops.c b/src/VBox/Additions/linux/sharedfolders/regops.c
+-index e1fad3d820..401fd69930 100644
+---- a/src/VBox/Additions/linux/sharedfolders/regops.c
+-+++ b/src/VBox/Additions/linux/sharedfolders/regops.c
+-@@ -147,7 +147,11 @@ static int vbsf_iov_iter_detect_type(struct iovec const *paIov, size_t cSegs)
+-     while (cSegs-- > 0) {
+-         if (paIov->iov_len > 0) {
+-             if (access_ok(VERIFY_READ, paIov->iov_base, paIov->iov_len))
+-+#if RTLNX_VER_MIN(5,10,0)
+-+                return (uintptr_t)paIov->iov_base >= TASK_SIZE_MAX ? ITER_KVEC : 0;
+-+#else
+-                 return (uintptr_t)paIov->iov_base >= USER_DS.seg ? ITER_KVEC : 0;
+-+#endif
+-             AssertMsgFailed(("%p LB %#zx\n", paIov->iov_base, paIov->iov_len));
+-             break;
+-         }
+-@@ -1401,7 +1405,10 @@ static int vbsf_lock_user_pages_failed_check_kernel(uintptr_t uPtrFrom, size_t c
+-     /*
+-      * Check that this is valid user memory that is actually in the kernel range.
+-      */
+--#if RTLNX_VER_MIN(5,0,0) || RTLNX_RHEL_MIN(8,1)
+-+#if RTLNX_VER_MIN(5,10,0)
+-+    if (   access_ok((void *)uPtrFrom, cPages << PAGE_SHIFT)
+-+        && uPtrFrom >= TASK_SIZE_MAX)
+-+#elif RTLNX_VER_MIN(5,0,0) || RTLNX_RHEL_MIN(8,1)
+-     if (   access_ok((void *)uPtrFrom, cPages << PAGE_SHIFT)
+-         && uPtrFrom >= USER_DS.seg)
+- #else
+--- 
+-2.19.1
+-
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.16.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.18.bb
+similarity index 88%
+rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.16.bb
+rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.18.bb
+index ff639c09f..ea6a082f6 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.16.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.18.bb
+@@ -13,12 +13,9 @@ VBOX_NAME = "VirtualBox-${PV}"
  
- DEPENDS = "openssl"
+ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
+     file://Makefile.utils \
+-    file://0001-Additions-linux-drm-Adjustment-for-Linux-5.10.patch \
+-    file://0001-Runtime-memobj-r0drv-linux.c-Changes-to-support-the-.patch \
+-    file://0001-linser-vboxsf-Adjustment-for-linux-5.10-TASK_SIZE_MA.patch \
+ "
+-SRC_URI[md5sum] = "a12a647f6c114f2cb1571089b36841fe"
+-SRC_URI[sha256sum] = "49c1990da16d8a3d5bda8cdb961ec8195a901e67e4c79aea44c1521a5fc2f9f1"
++SRC_URI[md5sum] = "c61001386eb3822ab8f06d688a82e84b"
++SRC_URI[sha256sum] = "108d42b9b391b7a332a33df1662cf7b0e9d9a80f3079d16288d8b9487f427d40"
  
--EXTRA_OEMAKE += "PREFIX=${prefix} USE_SHARED_LIB=1"
-+EXTRA_OEMAKE_append = "PREFIX=${prefix} USE_SHARED_LIB=1"
-+# We want to statically link the binary to libfsverity on native Windows
-+EXTRA_OEMAKE_remove_mingw32_class-nativesdk = "USE_SHARED_LIB=1"
-+EXTRA_OEMAKE_remove_mingw32_class-native = "USE_SHARED_LIB=1"
- 
- do_install() {
-         oe_runmake install DESTDIR=${D}
+ S ?= "${WORKDIR}/vbox_module"
+ S_task-patch = "${WORKDIR}/${VBOX_NAME}"
 -- 
-2.29.2
+2.25.1
 
