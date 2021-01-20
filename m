@@ -1,17 +1,17 @@
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.68])
- by mx.groups.io with SMTP id smtpd.web11.27504.1611149607599936264
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.45])
+ by mx.groups.io with SMTP id smtpd.web08.27643.1611149618127220885
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Jan 2021 05:33:27 -0800
+ Wed, 20 Jan 2021 05:33:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=oTAtGsTB;
- spf=pass (domain: windriver.com, ip: 40.107.93.68, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=ffWzj7iX;
+ spf=pass (domain: windriver.com, ip: 40.107.93.45, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=dEZMLyYCfXcvyE1ZYUHIOyI/LrLyFcUbWQc9EJSly+Mi55FXmM5bsed3cLYE08JjeSmGw5eV5Kj6dfTuhg67/3UT0KR+phol8UUyjhXjxNiXHaXJ/NymyZ14iggxsVgUmhx5BbscTsN1ukBIWhMSh/A2EA8DJdgK0Q98TkFnHL52CZPBLi8oPNlGQt5oBX0+ls8cFBv0Gj7zMO5C96Dnd97lfTsOs9u2dWtwArI1lynRYxq7g4N+XXvJwHY2ltBn2+yEMt6EhhR6Iyl82zR/PXunwAgetJr8e3PfL9e/SBfzHf8rzVBORg3G0ask3ydBPx50rVKVsrpIQZKlPL7eKg==
+ b=LOJCa88JBAWDlLzNWUjoI4WVDAJXnYJazVcmkp7Ugob3tWt9G7fKEQnIwUlbPi3wgGwIyxnD85pqAvwWEZPF1MzBvi+Gtlvm+58hZFiGsvEQi/gyFEEOIybNuihgmvxc6Ram6nW1vn/E9TEYWhka1SVibaVqDA0J/TEosWA79LU1tq19lUnt6e1A0z4SCE8mIaKqZcSM/eBZ21SX1z0pdwMtsLCgUiX56pfg7dIcAZVpJn6LANhalqCj1k/aF1v5g6H53CobPeiNCM9rImWGleWSrdBqoUebL67A2cH0xJ6q0cNc7J9KoxiCcnV7sQ8ZgC+HUq0xHrqixCD0csX+fg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QEz+GGh6I5Rnra9KFkbvB/aBfPPi54uKh0XVrfd+6c4=;
- b=GPXRT/NRBXfVpVNrrcdgkopRSPh3qqUQaG68jrCNToixPMAUIJCSszfT2ASnyNfEPS5QhDnaJP6i9HJv8k7y5xja0xbTYptwZL8IjnDssMjD0WTEgZfmm9x7kyyPWYsDly9AXchH+jlvYVYE0J8FeKQBPIG3kUaiLL/F3weQVO4P+v15To1yJDH5C2YITRs2ozxACB5nXj4W5stEtNgmNTsmHe09Edj1IK14lyoHmDT50bsnhj3TtQ5b7n1gzTjs5nMvqxYuqp0h+bLX1WmV92cB689Aj8cNoKTtf+XNmhA87qLSASo2l0xw/VsRoobauNihCByQqjlJoTajpqU5FA==
+ bh=0u+n2VehcLOGpLAiMo0JEnBdM1hL3tFcmmCcaDiBzwg=;
+ b=oBkgPmK/LcLKspIfCAlTtBgVbzYB40HkQVkyxzNrxfHiM1e0qCMwIvVtJMYKoNyJKZzTUHqbiJXJL3es4g9WADBssZ6+eZOCitPMCt7LucSHi23mL++R23p0l9ghFrEptjDURDTIW749Sqsqu2wLxoWUZBHxxKbvzcpJ/hs0YEKD27yOJogyIIjZdlQf81Ulv+74rhVmjrXAVJlBAil5+0En7qAgTeBX8khGAe7W3b5xBL/0VB+jK/JfpYf+/e7GiLfTZyvkKn4NgZlCYaqY/AtfvEPU9PiivcvdKeSC1ySHP30T3OL8vP77rBMjZ4Qzuo2PxMldSL57FFu1FQ51Rw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QEz+GGh6I5Rnra9KFkbvB/aBfPPi54uKh0XVrfd+6c4=;
- b=oTAtGsTBX4S0fMnYRzrGzdAKHOy9AXIeA3FHzXoWrccMzqnU3WZ8qxn2r918b0wPBTPoSG/wFigRDTU5UMxSMsDIdjDFjxz/kBIeoDwrGuNC7f05MylYAmd916mlIFoGNohz75zkFaXhDsfDWpBcG62Q+u56xOvaVhjil8R4hBI=
+ bh=0u+n2VehcLOGpLAiMo0JEnBdM1hL3tFcmmCcaDiBzwg=;
+ b=ffWzj7iXyBZg5ElJOWTQ61B+zgGt2z59QF4nMKXj8zlQJ0Z+drowwkZN9er9wIVxkcLsA1ImpE6hnnll/oH63XuFtfRiLAYEDVYwUXtaVn/1RsZ4CyLNPJrK7dk1m0X5lY0rkDkMRfpHBwRR/S8nZ9t+/Q5Yw76OPQU4I/LOiEw=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,118 +28,144 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BYAPR11MB3190.namprd11.prod.outlook.com (2603:10b6:a03:7b::17) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3763.11; Wed, 20 Jan
- 2021 13:33:25 +0000
+ 2021 13:33:37 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3763.014; Wed, 20 Jan 2021
- 13:33:25 +0000
-Subject: Re: [oe] [meta-python][PATCH 2/2] python3-parse: Upgrade 1.18.0 -> 1.19.0
-To: Leon Anavi <leon.anavi@konsulko.com>,
+ 13:33:36 +0000
+Subject: Re: [oe] [meta-python] [PATCH] python3-smbus: upgrade 4.1 -> 4.2
+To: zangrc <zangrc.fnst@cn.fujitsu.com>,
  openembedded-devel@lists.openembedded.org
-References: <20210118173007.20996-1-leon.anavi@konsulko.com>
- <20210118173007.20996-2-leon.anavi@konsulko.com>
+References: <1611069884-4580-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <8101c070-2f68-aaf2-deee-a8aafd9c563c@windriver.com>
-Date: Wed, 20 Jan 2021 08:33:23 -0500
+Message-ID: <9c45fb65-245d-4898-0cfd-87b2bd9434ee@windriver.com>
+Date: Wed, 20 Jan 2021 08:33:34 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.5.0
-In-Reply-To: <20210118173007.20996-2-leon.anavi@konsulko.com>
+In-Reply-To: <1611069884-4580-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: CH2PR02CA0015.namprd02.prod.outlook.com
- (2603:10b6:610:4e::25) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: CH2PR02CA0006.namprd02.prod.outlook.com
+ (2603:10b6:610:4e::16) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by CH2PR02CA0015.namprd02.prod.outlook.com (2603:10b6:610:4e::25) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.12 via Frontend Transport; Wed, 20 Jan 2021 13:33:25 +0000
+Received: from [192.168.0.55] (174.115.236.231) by CH2PR02CA0006.namprd02.prod.outlook.com (2603:10b6:610:4e::16) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.11 via Frontend Transport; Wed, 20 Jan 2021 13:33:36 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: ae5d983a-7f37-40ae-7933-08d8bd47f6d7
+X-MS-Office365-Filtering-Correlation-Id: 36f33d2c-bccb-4dc5-15ed-08d8bd47fd7b
 X-MS-TrafficTypeDiagnostic: BYAPR11MB3190:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB31900D9D143E9173462929CA9FA20@BYAPR11MB3190.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:369;
+	<BYAPR11MB31908C5079D29F791225AE269FA20@BYAPR11MB3190.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:6430;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	Agc9IQQDzNESF8ama4AKqT8im1uUK5MoKCTg0VPd26gFybaBsyeTzYUhIGKwxUol34z84Wy0QDOqPbYIpHweEY+ebxw0xabTmahQ2AIDiAge+HwqLM5pA+kLpSEe+egJFKSTGHI41wjWb63F7sIv110Qa5IS3sELQ9j8bFjBVRwwG+MmAiKQuLlhJDxiXcHyKdGu28N0epnztPHFq2xVDvPoRcgq9IffdcwGIvDMxBTJMYQUZYY0r2aleC+TndWYeeok4UGfAkoU91+qBrxBnixUAfev25lewWiNW0giFJNItufKyKmRAkJ5VZB5cDAn/XQA3O05i7xj4PU8uQhzRPGDqHk3iJ8gVbraY6iRWShDlyjCUtgKDJguu8AT93b+PiFYakEG73C6V2UDut+XwuE/eQdbOmJWlxzSOWjDm9Ibzx5GlhcGCdRrZFpBb62EHHpztYyIdDXQHMAhMncWlcxOFMREnvhNDBD4PEGxM8tWpLPjf/wLrn29HXVCqCzKYe0H+Uuvg7P8NDRE7cg+KUykZRjV0ADZ2Nkx3DLIYX4zZODMQl3s8WRYNLfeWWLA
+	iQ8H7wcevIl3aroIU5oEUtp1CTt7Bmf7gUHqT7uSMJA/toHymkcHy9D9x1ckvXorIbLre1tEiibcGlJGtLCrVrzsXeKJtGtsj9L9cq4nFY+HbdBvLdbv3mW/paPWINy6MY0zczZU0eaPmv+Ngk+IK6Ppg92kpvAXiV0bvcMgpP/NtWy22EzA/g1E90YhTrLp7XpP8IHtXlddJVATv61m1qbSuZrlpZbgPWV+9p8azbxBQVx2T9tZiQlHY5kRhPPSmOh7Ndy2GqAvMJUHPTxeqEQbS0GwJ08Mh4YOuynZSIfbiaLtbGXbcjfJ7GKVe0PntMwfB91nsgwWimVnhSD9gAmpclL6Y3C8ji5RcWOT6rR8YM9FNIobordA85/R9TOp3s92UI17APQAdDwVV1V1jM+oXhZYQlxvRtfSw7o7gmDqEcwKqWj/D7GaQ7YxLGhxPi2rKHjoABdHMO+crTzjbQpQ5EGMRRHr9Mbi0Zyjvs9s3uFqLEfUd/p16nBfwelY4sPbXRQ5eS0nIz+CV6TQTlVbeH70/9Cv/7jWpuP7ZGVYj0rR1Q6csT9AfmiBWKcL
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(366004)(346002)(396003)(136003)(39850400004)(83380400001)(6486002)(26005)(31686004)(166002)(16526019)(52116002)(44832011)(478600001)(186003)(316002)(31696002)(16576012)(2616005)(66946007)(2906002)(33964004)(36756003)(53546011)(8676002)(966005)(5660300002)(66556008)(86362001)(8936002)(66476007)(956004)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?N0dKSDNodW1WM0tvNVVzODdHS2l0cVdNSW5wSXZWVGZzQTNhMGE5M055Si9B?=
- =?utf-8?B?UW9nNW8xbkhwVlVsK3JVRnNmK21CUEVwdGo2WEwrT2pjdEdqMkowb20vNkNJ?=
- =?utf-8?B?bWxPSWpZbFZxbHVRSWNsNGFwSXJQRVZpNUtLVDhYUGdYT0JmcVFaczlyU0hJ?=
- =?utf-8?B?SDJzQlYvZ2hYZzM1eCt1Vm55MWpLRU8xSm1sNnM0YWcvdlZrSGQzdFgxMUNl?=
- =?utf-8?B?YnJaSDZnUVdwdzFlMVNJMXZPd0RGdndoeHZETU1EM2IvS0lyTndsczNzL2tj?=
- =?utf-8?B?SkcxUWcyNHZCcFJvVEhNT2puNlF3c3JDN293a3Q1R1k3WWZFaWFKbGNkSG9z?=
- =?utf-8?B?RzdVYzVQejMvaHdySlJXV01MSHVUT0hNTEkyYVBDSGovZ012TlhEVUZoMzJE?=
- =?utf-8?B?RUVBQ2x4SzFqaHFIaVJ6SUVGbVllNENoV0g3Z2wzSzR0VFV0VVViT3BMZzVn?=
- =?utf-8?B?aXRGeDVKVGR3NktqTk9Nek9Wc2hDbzZXZENrSEZGYmlxb0tjR1YvYXBZV0h5?=
- =?utf-8?B?UHJEdlQ1bDVtNjFZdko3QjJjZmJZSERSUTQvT1RJZndQcE83aThrSjVrNnRi?=
- =?utf-8?B?Y1NkUmYxcXV4Rm5MNUVLTXlSaUFUcHJTdDcwakllZDlLczBpWVJLRUFnUGxV?=
- =?utf-8?B?K0JoWFFzSXFkMkpJS0ZDc1RKY0gyaHlFcVdOa1YzTzZ5dXk0UHZKOXNRWGpm?=
- =?utf-8?B?c1BQMSsrV3FoaTIvQy8rNGxOaktuNEVNRzhWUG9hTmpQaldBSnFhYlloMzZU?=
- =?utf-8?B?STdhVEVoZnpCTjhQUThPSTVRS2RRZGdjOVhnTDllRDJUL0V0ZndxUVNsMzhS?=
- =?utf-8?B?bTlqckd4YlJ3MTdvZ3pxSVBGSnNySnRYYWV6U3BjOFQ1VDFLWVlLVjE4bW4y?=
- =?utf-8?B?eEZkSk5KbzlNQ3B5cm1ucC9NT1gxUUxpcXhyVnMraUhCUkRmVUhudDZlS1Rw?=
- =?utf-8?B?ZE8vdy9kUEdtemFVMDlQZVNrcm1vb2tHem5XQ05vamEyRUJQM2VsYlY0R3Er?=
- =?utf-8?B?WnlRVEt4MjNwWFBKTFhWNmZpOU1nU3MwQXZodFJLd1dBWVgrcVUrS2RycGtG?=
- =?utf-8?B?TG1hN1kwaytwVU50QTFVOXdsMUlNU0ZLOEJyc2kvejNrRy9acDZHYnR2eWEw?=
- =?utf-8?B?YVJ3SVMwRTlxTTRNRVVxVklEQndsL3pNYnNhdUdmTE9xaU9BNnpZZTI0OXlt?=
- =?utf-8?B?VWtmNGp5TmpjMFFOMEZEbkU5Z1l0WFY2KzVtUGJMR1lRTmM0WEhmV1hRcEpY?=
- =?utf-8?B?U1dPSUNRTEpGMk1OWXlxZy9xSG5EdWpMVnBTVkI3WXEyNzBIL05ITlVCakU1?=
- =?utf-8?Q?f8OvlPwBNS5psUoIjqlTuxfrC/BDiphsuP?=
+	=?utf-8?B?QjlySHlNZ0lEOWZOaWFFVkdQanZ3LzZyTnk4bHZ2T3R1eHpwMkxkV2xiaEJH?=
+ =?utf-8?B?ZHBrL2l3Z0VFSnBWZG9oalRIOVAzQjlDYTh2WG9WWTRYTm9BNTd0UjZBREVz?=
+ =?utf-8?B?TUtrRTRHbEMvMHZIVHJucWI2RCsyMzdsb1lOWjhRQTB2S0F0L0Y5WXRSd1gv?=
+ =?utf-8?B?M2lYRHpld0V5NmdQQTNqaWdHb0w4U1ZyZkpqZEUxSjVTWGYzNFJYZVBYcGZ0?=
+ =?utf-8?B?bTJCOWJpUWd2YXpQOXExcTVzNERXdE1uWnFSeXRETkx6K1UxcTRjVURjSVlK?=
+ =?utf-8?B?Tk9FbUVLOTJzK0VGdDg4T1NobjM0YkMza2pENTNYVzNwUzg4ZnhadXdxUjk0?=
+ =?utf-8?B?Q2tZeVpKQnR6T045ZExXb2lTdXdWMlVncFlDQzBvYk9jbDIxUy9zRnRNclNk?=
+ =?utf-8?B?N0lFbW91WXZTZXdDbDJoY2xEenlSbVk4dU1pVWhvLzIra2FDWnJCNHZZVGJ5?=
+ =?utf-8?B?cERqTW5Eckx4enZJYkkwTnNQR0JPdUN1b1NFa2piTDlvdFlqTU5qbjliQTVL?=
+ =?utf-8?B?ZmVUSnFOdzByYis2TGgrWjhRNi9JaEN5UjQvNXptUVEzVWpPT1N0ZWRFTHY1?=
+ =?utf-8?B?VUFuYUFKenVqL2tndmtKaUh6NlRSbThOWVNoVE8wUkwvN2JHTXBYenFObVJP?=
+ =?utf-8?B?bGR4SXN6N3hNZVVzbHoyVWtGczd0TktoaStrbElYUVRDVTBGTjNidXhGZCtP?=
+ =?utf-8?B?YW04SGxMUHU3U0pYOWNxeVkrb1FBSzFCeEtEeXZia3JOT3BMUml5cWxGWkk0?=
+ =?utf-8?B?a25ycU82OUdXNjZOcG9yS1Rla0d5WGJlWmtLTkpIRGg1VW5SYURhTXI2RTBi?=
+ =?utf-8?B?dVRYSWE4YlBTSzdwckFtM3E2RW5OWE9CeVU1SGxXZGNNVUVXOS84eWNJOWN5?=
+ =?utf-8?B?QkpydUpSK0x2aHdUSkgyODIrMzI4ek9lL2U0NFVRdkxkc1puVC9WZDJUNUNh?=
+ =?utf-8?B?d1RVY3dEcy83c3AyOWU0dnlScFptQzllTmswUzhrVHBlbkhLZXQ5YTdqZGdO?=
+ =?utf-8?B?TVUzaGVWelZHZld2cnE3ZE1xTitrNVBRdk9KODdIeGE4ejd0RTRGeVI3ZUxs?=
+ =?utf-8?B?OU5MdDlHWU5BcFZvcWNVdmdlcmNLWEZKTWV1bjZlVHpFNWVnYTA1dEdrVXpa?=
+ =?utf-8?B?NUNmZXgzZW96U0JJT2pCSWh5a0RzYUd1azNEUHNoSjVRWFpNc3VrdmlBdlB2?=
+ =?utf-8?B?Z3VqN0hNdGs0eHl0bldtenlQdlpIdDBGTGpMZTFNU09SaTVIS2tIVTVXdFJX?=
+ =?utf-8?B?bkZkSlQ5Q2E0VjYyL1lWQlpWKzlYaXJGK2RZb1dsVXhrK2hsa3c5NkRJU09m?=
+ =?utf-8?Q?tqhrUeeeLWdOoCrrQSg5JXbeePq4u0A0rP?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ae5d983a-7f37-40ae-7933-08d8bd47f6d7
+X-MS-Exchange-CrossTenant-Network-Message-Id: 36f33d2c-bccb-4dc5-15ed-08d8bd47fd7b
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jan 2021 13:33:25.6658
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jan 2021 13:33:36.8383
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Z2r+x5MyPhXFxOHM56Hie+nRjLMrByoCp8M5PKob7daDSF9qGrJXDfYRzFYSjF/P2ExMrjcXy/M4K5gWnb9X4ubUJdUyu2j1CMZ0CRwh5MU=
+X-MS-Exchange-CrossTenant-UserPrincipalName: kPrXKU72wB4fpEdADuEBj0r/n3etKBU6kHAePTNO83vk3pOCOpzULVZ2miwFiiYdO4kq0Y+cqaG26L3G4rBVfcdLsR06wYesQfsACGRLzm0=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3190
 Content-Type: multipart/alternative;
- boundary="------------EC9987C4F07B4433EBDF3F1F"
+ boundary="------------FF121AAB67BA05A4F089393A"
 Content-Language: en-US
 
---------------EC9987C4F07B4433EBDF3F1F
+--------------FF121AAB67BA05A4F089393A
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 2021-01-18 12:30 p.m., Leon Anavi wrote:
-> - Fix using digit field numbering and types
+On 2021-01-19 10:24 a.m., zangrc wrote:
+> 4.2 (2020-09-22)
+>    manpages: Add BUGS section to let people know how to contact us
+>    Makefile: Allow to preset all CFLAGS and LDFLAGS variables
+>    tools: Consistently use snprintf instead of sprintf
+>           Restrict addresses 0x03-0x07, too (defined by I2C standard)
+>    decode-dimms: Print SPD revision for DDR3 too
+>                  Print primary bus width for DDR3 and DDR4
+>                  List ee1004 as a candidate driver
+>                  Display MAC for DDR3
+>                  Add MAC abbreviation for DDR4
+>                  Round DDR4 speed properly
+>                  Detect and report truncated input files
+>                  Print kernel driver used
+>                  Print DDR memory speed in MT/s
+>                  Add DDR5 memory types
+>                  Decode manufacturing data for LPDDR3
+>                  Fix the version string
+>                  Point the user to the right drivers
+>                  Update the list of vendors to Jedec JEP106BB
+>    decode-vaio: Add support for the at24 driver
+>                 Scan more i2c buses
+>    i2cset: Fix short writes with mask
+>    i2ctransfer: Mention '-a' everywhere in the manpage
+>                 Support messages using I2C_M_RECV_LEN
+>                 Add check for returned length from driver
+>    i2c-stub-from-dump: Read dumps from hexdump -C
+>    library: Add a manual page to document the API
 >
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../{python3-parse_1.18.0.bb => python3-parse_1.19.0.bb}       | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-parse_1.18.0.bb => python3-parse_1.19.0.bb} (78%)
+>   .../python/{python3-smbus_4.1.bb => python3-smbus_4.2.bb}     | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-smbus_4.1.bb => python3-smbus_4.2.bb} (71%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-parse_1.18.0.bb b/meta-python/recipes-devtools/python/python3-parse_1.19.0.bb
-> similarity index 78%
-> rename from meta-python/recipes-devtools/python/python3-parse_1.18.0.bb
-> rename to meta-python/recipes-devtools/python/python3-parse_1.19.0.bb
-> index ed9204e3b..b5e076954 100644
-> --- a/meta-python/recipes-devtools/python/python3-parse_1.18.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-parse_1.19.0.bb
-> @@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/r1chardj0n3s/parse"
->   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=8ab458ad281b60e6f1b39b3feafbfc05"
+> diff --git a/meta-python/recipes-devtools/python/python3-smbus_4.1.bb b/meta-python/recipes-devtools/python/python3-smbus_4.2.bb
+> similarity index 71%
+> rename from meta-python/recipes-devtools/python/python3-smbus_4.1.bb
+> rename to meta-python/recipes-devtools/python/python3-smbus_4.2.bb
+> index 6b33649434..862a547c00 100644
+> --- a/meta-python/recipes-devtools/python/python3-smbus_4.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-smbus_4.2.bb
+> @@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://smbusmodule.c;beginline=1;endline=18;md5=46e424fb0459
+>   PR = "r1"
 >   
-> -SRC_URI[md5sum] = "42ea0002cf36bfd2bd74f3c05bf25f60"
-> -SRC_URI[sha256sum] = "91666032d6723dc5905248417ef0dc9e4c51df9526aaeef271eacad6491f06a4"
-> +SRC_URI[sha256sum] = "9ff82852bcb65d139813e2a5197627a94966245c897796760a3a2a8eb66f020b"
+>   SRC_URI = "${KERNELORG_MIRROR}/software/utils/i2c-tools/i2c-tools-${PV}.tar.gz "
+> -SRC_URI[md5sum] = "3536237a6b51fb10caacdc3b8a496237"
+> -SRC_URI[sha256sum] = "ef8f77afc70e7dbfd1171bfeae87a8a7f10074829370ce8d9ccd585a014e0073"
+> +SRC_URI[md5sum] = "d6861c89521f2a2773e19edadb2befee"
+> +SRC_URI[sha256sum] = "7de18ed890e111fa54ab7ea896804d5faa4d1f0462a258aad9fbb7a8cc6b60cc"
 >   
->   inherit pypi setuptools3 ptest
+>   DEPENDS += "i2c-tools"
 >   
 >
 > 
 >
 
---------------EC9987C4F07B4433EBDF3F1F
+--------------FF121AAB67BA05A4F089393A
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -149,38 +175,64 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 2021-01-18 12:30 p.m., Leon Anavi
-      wrote:<br>
+    <div class="moz-cite-prefix">On 2021-01-19 10:24 a.m., zangrc wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210118173007.20996-2-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">- Fix using digit field numbering and types
+    <blockquote type="cite" cite="mid:1611069884-4580-1-git-send-email-zangrc.fnst@cn.fujitsu.com">
+      <pre class="moz-quote-pre" wrap="">4.2 (2020-09-22)
+  manpages: Add BUGS section to let people know how to contact us
+  Makefile: Allow to preset all CFLAGS and LDFLAGS variables
+  tools: Consistently use snprintf instead of sprintf
+         Restrict addresses 0x03-0x07, too (defined by I2C standard)
+  decode-dimms: Print SPD revision for DDR3 too
+                Print primary bus width for DDR3 and DDR4
+                List ee1004 as a candidate driver
+                Display MAC for DDR3
+                Add MAC abbreviation for DDR4
+                Round DDR4 speed properly
+                Detect and report truncated input files
+                Print kernel driver used
+                Print DDR memory speed in MT/s
+                Add DDR5 memory types
+                Decode manufacturing data for LPDDR3
+                Fix the version string
+                Point the user to the right drivers
+                Update the list of vendors to Jedec JEP106BB
+  decode-vaio: Add support for the at24 driver
+               Scan more i2c buses
+  i2cset: Fix short writes with mask
+  i2ctransfer: Mention '-a' everywhere in the manpage
+               Support messages using I2C_M_RECV_LEN
+               Add check for returned length from driver
+  i2c-stub-from-dump: Read dumps from hexdump -C
+  library: Add a manual page to document the API
 
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+Signed-off-by: Zang Ruochen <a class="moz-txt-link-rfc2396E" href="mailto:zangrc.fnst@cn.fujitsu.com">&lt;zangrc.fnst@cn.fujitsu.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210118173007.20996-2-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:1611069884-4580-1-git-send-email-zangrc.fnst@cn.fujitsu.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../{python3-parse_1.18.0.bb =&gt; python3-parse_1.19.0.bb}       | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-parse_1.18.0.bb =&gt; python3-parse_1.19.0.bb} (78%)
+ .../python/{python3-smbus_4.1.bb =&gt; python3-smbus_4.2.bb}     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-smbus_4.1.bb =&gt; python3-smbus_4.2.bb} (71%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-parse_1.18.0.bb b/meta-python/recipes-devtools/python/python3-parse_1.19.0.bb
-similarity index 78%
-rename from meta-python/recipes-devtools/python/python3-parse_1.18.0.bb
-rename to meta-python/recipes-devtools/python/python3-parse_1.19.0.bb
-index ed9204e3b..b5e076954 100644
---- a/meta-python/recipes-devtools/python/python3-parse_1.18.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-parse_1.19.0.bb
-@@ -3,8 +3,7 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/r1chardj0n3s/parse">&quot;https://github.com/r1chardj0n3s/parse&quot;</a>
- LICENSE = &quot;MIT&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=8ab458ad281b60e6f1b39b3feafbfc05">&quot;file://LICENSE;md5=8ab458ad281b60e6f1b39b3feafbfc05&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-smbus_4.1.bb b/meta-python/recipes-devtools/python/python3-smbus_4.2.bb
+similarity index 71%
+rename from meta-python/recipes-devtools/python/python3-smbus_4.1.bb
+rename to meta-python/recipes-devtools/python/python3-smbus_4.2.bb
+index 6b33649434..862a547c00 100644
+--- a/meta-python/recipes-devtools/python/python3-smbus_4.1.bb
++++ b/meta-python/recipes-devtools/python/python3-smbus_4.2.bb
+@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://smbusmodule.c;beginline=1;endline=18;md5=46e424fb0459PR=">&quot;file://smbusmodule.c;beginline=1;endline=18;md5=46e424fb0459
+ PR = &quot;</a>r1&quot;
  
--SRC_URI[md5sum] = &quot;42ea0002cf36bfd2bd74f3c05bf25f60&quot;
--SRC_URI[sha256sum] = &quot;91666032d6723dc5905248417ef0dc9e4c51df9526aaeef271eacad6491f06a4&quot;
-+SRC_URI[sha256sum] = &quot;9ff82852bcb65d139813e2a5197627a94966245c897796760a3a2a8eb66f020b&quot;
+ SRC_URI = &quot;${KERNELORG_MIRROR}/software/utils/i2c-tools/i2c-tools-${PV}.tar.gz &quot;
+-SRC_URI[md5sum] = &quot;3536237a6b51fb10caacdc3b8a496237&quot;
+-SRC_URI[sha256sum] = &quot;ef8f77afc70e7dbfd1171bfeae87a8a7f10074829370ce8d9ccd585a014e0073&quot;
++SRC_URI[md5sum] = &quot;d6861c89521f2a2773e19edadb2befee&quot;
++SRC_URI[sha256sum] = &quot;7de18ed890e111fa54ab7ea896804d5faa4d1f0462a258aad9fbb7a8cc6b60cc&quot;
  
- inherit pypi setuptools3 ptest
+ DEPENDS += &quot;i2c-tools&quot;
  
 </pre>
       <br>
@@ -193,4 +245,4 @@ index ed9204e3b..b5e076954 100644
   </body>
 </html>
 
---------------EC9987C4F07B4433EBDF3F1F--
+--------------FF121AAB67BA05A4F089393A--
