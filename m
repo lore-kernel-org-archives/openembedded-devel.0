@@ -1,91 +1,283 @@
-Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com [209.85.222.173])
- by mx.groups.io with SMTP id smtpd.web08.31744.1611166260683122431
- for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Jan 2021 10:11:00 -0800
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=FN9oO9MF;
- spf=pass (domain: gmail.com, ip: 209.85.222.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f173.google.com with SMTP id 19so26210855qkm.8
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Jan 2021 10:11:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=fyGLZqXJVEbVv13irNtZKZSGafb8CM1vAelvP4lkcDk=;
-        b=FN9oO9MFQkyqhD4V47pI/pf63IKv5/rireVm/lLiDB2YHwT8mTjSk8FJ/SRvTnwuHF
-         aqz8/yM63Y4sxuWpax82fm/AMEY2qQuG+kRWN6k8qAlxrOuhmQiyqlAkbBWbXEo4mnuc
-         yrW4/BBbWC4qkPERg9if9YR5ulwooU9Yd47WN3Ce789d704ekihfTI+/lBdP0ck5V5Tc
-         oA2hmoLvMINku4EDHK0YICYvGk90l6OCJMYYRlhdsazlLM36cIvfyglYwxY8F6if5f/h
-         1NM9OUH3RAyvrWH8/kbhIeKfSpWROwpgfpi95E6bYCUvw/Fn+4kHznJD+IjJtlzXSfIj
-         iB5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=fyGLZqXJVEbVv13irNtZKZSGafb8CM1vAelvP4lkcDk=;
-        b=n8oDe8Z3bodPSXk4rsaYSTmrrrrYOg+YqKFiUtnqzhsmTa0CuNSgKVSMYIphaBIVAh
-         eKd2dlQXmilkQKkl5Itb6ZI2ehqYWv1z0iCEHUoyZaHbihbbpHoxNY9fVKu3mQW/Zi/v
-         6N5NIhXlP9DTnh2JMlC8GjEKOPpOX/maArRiZbZwZRjz5tHQuuWOSRuO6Gd6IZKYIHrW
-         x3SEj4qlqv9zyDYPNJZGPTwaJWzu7Srw24uSBTA0m1l6irtWojSwgLrve4ZmdnLD0DDp
-         8Vl2/J2ESu7F51vBHfzSP0WVKFrPNAqmFSrf9wZRQuAUPNtkF8BM2Dcyooe8E3L3Zt1K
-         i6Xw==
-X-Gm-Message-State: AOAM533EIZ//IIxSVaUMT2bqSCNzs+YHfKohn+b+lEaWiAhWhF8SFVRW
-	XZyK4Lr3dQsyOUv2zNjY/0swJBi8wzVbwOiywuA=
-X-Google-Smtp-Source: ABdhPJwqAe1Loc82ICQ2wYOR+aUOGlli1H9tepOe/S9XXiTIOA1NLglVISGM6ikzcNfANd+uALXx5FbOJOajkUbj9DU=
-X-Received: by 2002:a37:4286:: with SMTP id p128mr2217154qka.337.1611166259689;
- Wed, 20 Jan 2021 10:10:59 -0800 (PST)
+Subject: [meta-python][Question] python3-dlib recipe?
+To: openembedded-devel@lists.openembedded.org
+From: open.prac@gmail.com
+X-Originating-Location: Amealco, Querétaro, MX (187.145.20.250)
+X-Originating-Platform: Linux Firefox 84
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-References: <20210120165300.8588-1-leon.anavi@konsulko.com> <20210120165300.8588-2-leon.anavi@konsulko.com>
-In-Reply-To: <20210120165300.8588-2-leon.anavi@konsulko.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Wed, 20 Jan 2021 10:10:33 -0800
-Message-ID: <CAMKF1sp2qB-QE4aNWFhRfjKNcM1f=b8JZA6y6L0wBP+qmopFmA@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 2/2] python3-alembic: Upgrade 1.4.3 -> 1.5.1
-To: Leon Anavi <leon.anavi@konsulko.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Date: Wed, 20 Jan 2021 13:12:08 -0800
+Message-ID: <qCdQ.1611177128438633625.2UtR@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="buXKzggm0mYZvuhbSTwh"
 
-On Wed, Jan 20, 2021 at 8:53 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
->
-> Upgrade to release 1.5.1:
->
-> - Fixed installation issue where the "templates" directory was not
->   being installed, preventing commands like "list_templates" and
->   "init" from working.
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> ---
->  .../{python3-alembic_1.4.3.bb => python3-alembic_1.5.1.bb}   | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
->  rename meta-python/recipes-devtools/python/{python3-alembic_1.4.3.bb => python3-alembic_1.5.1.bb} (54%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-alembic_1.4.3.bb b/meta-python/recipes-devtools/python/python3-alembic_1.5.1.bb
-> similarity index 54%
-> rename from meta-python/recipes-devtools/python/python3-alembic_1.4.3.bb
-> rename to meta-python/recipes-devtools/python/python3-alembic_1.5.1.bb
-> index 0e7f629d4..f07be042f 100644
-> --- a/meta-python/recipes-devtools/python/python3-alembic_1.4.3.bb
-> +++ b/meta-python/recipes-devtools/python/python3-alembic_1.5.1.bb
-> @@ -1,11 +1,10 @@
->  DESCRIPTION = "A database migration tool for SQLAlchemy"
->  LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=bd64aba1b968c2bfbc2b525a181ce85c"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=c4ece55266dcdd02ce165b1ee0e490bb"
->
+--buXKzggm0mYZvuhbSTwh
+Content-Type: text/plain; charset="utf-8"; markup=markdown
+Content-Transfer-Encoding: quoted-printable
 
-you forgot to describe this change
+Hi everyone, first time in the mailing list...
 
->  inherit pypi setuptools3
->
-> -SRC_URI[md5sum] = "6051576d8e25e3d4a9fd818d79531bad"
-> -SRC_URI[sha256sum] = "5334f32314fb2a56d86b4c4dd1ae34b08c03cae4cb888bc699942104d66bc245"
-> +SRC_URI[sha256sum] = "52d1d48109f17959982779e3c4b5cdeca701e449897bacb75bab173bd6ba984e"
->
->  PYPI_PACKAGE = "alembic"
->
-> --
-> 2.17.1
->
->
-> 
->
+I was wondering if anybody is already working in a recipe for the package =
+dlib pyhon3 module,
+so far this is the recipe I've been working on
+```bitbake
+# python3-dlib_19.21.1.bb
+SUMMARY =3D "A toolkit for making real world machine learning and data ana=
+lysis applications"
+HOMEPAGE =3D "https://pypi.python.org/pypi/dlib"
+PYPI_PACKAGE =3D "dlib"
+LICENSE =3D "Boost-Software"
+SRC_URI[md5sum] =3D "1e7e357d7d54e86267ef60f606cb40e1"
+LIC_FILES_CHKSUM =3D "file://dlib/LICENSE.txt;md5=3D2c7a3fa82e66676005cd4e=
+e2608fd7d2 \                                
+                    file://dlib/external/libpng/LICENSE;md5=3D243135ddedf7=
+02158f9170807cbcfb66 \
+                    file://dlib/external/pybind11/LICENSE;md5=3Dbeb87117af=
+69fd10fbf9fb14c22a2e62 \
+                    file://python_examples/LICENSE_FOR_EXAMPLE_PROGRAMS.tx=
+t;md5=3D064f53ab40ea2b6a4bba1324149e4fde \
+"
+DEPENDS =3D "cmake-native"
+
+inherit  pypi setuptools3
+BBCLASSEXTEND =3D "native nativesdk"
+
+```
+
+
+I'm not a bitbake or cmake expert, during do_compile() task i get the foll=
+owing error message
+```
+| [ 95%] Building CXX object CMakeFiles/_dlib_pybind11.dir/src/shape_predi=
+ctor.cpp.o
+| [ 96%] Building CXX object CMakeFiles/_dlib_pybind11.dir/src/correlation=
+_tracker.cpp.o
+| [ 96%] Building CXX object CMakeFiles/_dlib_pybind11.dir/src/face_recogn=
+ition.cpp.o
+| [ 97%] Building CXX object CMakeFiles/_dlib_pybind11.dir/src/cnn_face_de=
+tector.cpp.o
+| [ 98%] Building CXX object CMakeFiles/_dlib_pybind11.dir/src/global_opti=
+mization.cpp.o
+| [ 98%] Building CXX object CMakeFiles/_dlib_pybind11.dir/src/image_datas=
+et_metadata.cpp.o
+| [ 99%] Building CXX object CMakeFiles/_dlib_pybind11.dir/src/numpy_retur=
+ns.cpp.o
+| [100%] Building CXX object CMakeFiles/_dlib_pybind11.dir/src/line.cpp.o
+| [100%] Linking CXX shared module build_dunfell/tmp/work/aarch64-poky-lin=
+ux/python3-dlib/19.21.1-r0/build/lib.linux-x86_64-3.8/_dlib_pybind11.cpytho=
+n-38-aarch64-linux-gnu.so
+| build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21.1-r0/recipe=
+-sysroot-native/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux=
+/gcc/aarch64-poky-linux/8.3.0/ld: build_dunfell/tmp/work/aarch64-poky-linux=
+/python3-dlib/19.21.1-r0/recipe-sysroot-native/usr/lib/libsqlite3.so: error=
+ adding symbols: file in wrong format
+| collect2: error: ld returned 1 exit status
+| CMakeFiles/_dlib_pybind11.dir/build.make:445: recipe for target 'build_d=
+unfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21.1-r0/build/lib.linux-=
+x86_64-3.8/_dlib_pybind11.cpython-38-aarch64-linux-gnu.so' failed
+| make[2]: *** [build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.=
+21.1-r0/build/lib.linux-x86_64-3.8/_dlib_pybind11.cpython-38-aarch64-linux-=
+gnu.so] Error 1
+| CMakeFiles/Makefile2:116: recipe for target 'CMakeFiles/_dlib_pybind11.d=
+ir/all' failed
+| make[1]: *** [CMakeFiles/_dlib_pybind11.dir/all] Error 2
+| Makefile:83: recipe for target 'all' failed
+| make: *** [all] Error 2
+| Traceback (most recent call last):
+|   File "build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21.1-r=
+0/dlib-19.21.1/setup.py", line 223, in <module>
+|     setup(
+|   File "build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21.1-r=
+0/recipe-sysroot-native/usr/lib/python3.8/site-packages/setuptools/__init__=
+.py", line 144, in setup
+|     return distutils.core.setup(**attrs)
+|   File "build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21.1-r=
+0/recipe-sysroot-native/usr/lib/python3.8/distutils/core.py", line 148, in =
+setup
+|     dist.run_commands()
+|   File "build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21.1-r=
+0/recipe-sysroot-native/usr/lib/python3.8/distutils/dist.py", line 966, in =
+run_commands
+|     self.run_command(cmd)
+|   File "build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21.1-r=
+0/recipe-sysroot-native/usr/lib/python3.8/distutils/dist.py", line 985, in =
+run_command
+|     cmd_obj.run()
+|   File "build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21.1-r=
+0/recipe-sysroot-native/usr/lib/python3.8/distutils/command/build.py", line=
+ 135, in run
+|     self.run_command(cmd_name)
+|   File "build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21.1-r=
+0/recipe-sysroot-native/usr/lib/python3.8/distutils/cmd.py", line 313, in r=
+un_command
+|     self.distribution.run_command(command)
+|   File "build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21.1-r=
+0/recipe-sysroot-native/usr/lib/python3.8/distutils/dist.py", line 985, in =
+run_command
+|     cmd_obj.run()
+|   File "build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21.1-r=
+0/dlib-19.21.1/setup.py", line 135, in run
+|     self.build_extension(ext)
+|   File "build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21.1-r=
+0/dlib-19.21.1/setup.py", line 175, in build_extension
+|     subprocess.check_call(cmake_build, cwd=3Dbuild_folder)
+|   File "build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21.1-r=
+0/recipe-sysroot-native/usr/lib/python3.8/subprocess.py", line 364, in chec=
+k_call
+|     raise CalledProcessError(retcode, cmd)
+| subprocess.CalledProcessError: Command '['cmake', '--build', '.', '--con=
+fig', 'Release', '--', '-j8']' returned non-zero exit status 2.
+| WARNING: exit code 1 from a shell command.
+|=20
+
+```
+
+Not sure why the linker **gcc/aarch64-poky-linux/8.3.0/ld** is showing the=
+ error
+```
+ error adding symbols: file in wrong format
+```
+Perhaps i'm messing things up with cmake-native environment but not sure h=
+ow i can enable cmake to be used by setup.py if it is not with DEPENDS=3Dcm=
+ake-native.
+
+Any clue to solve this issue will be highly appreciated, or if you know wh=
+o is already working on this it will be great to have its contact :)
+
+Also i use dunfell branch for meta-oe
+
+BR,
+
+--buXKzggm0mYZvuhbSTwh
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<p>Hi everyone, first time in the mailing list...</p>
+
+<p>I was wondering if anybody is already working in a recipe for the packa=
+ge dlib pyhon3 module,
+so far this is the recipe I've been working on</p>
+<pre class=3D"prettyprint"><code class=3D"language-bitbake"># python3-dlib=
+_19.21.1.bb
+SUMMARY =3D &#34;A toolkit for making real world machine learning and data=
+ analysis applications&#34;
+HOMEPAGE =3D &#34;https://pypi.python.org/pypi/dlib&#34;
+PYPI_PACKAGE =3D &#34;dlib&#34;
+LICENSE =3D &#34;Boost-Software&#34;
+SRC_URI[md5sum] =3D &#34;1e7e357d7d54e86267ef60f606cb40e1&#34;
+LIC_FILES_CHKSUM =3D &#34;file://dlib/LICENSE.txt;md5=3D2c7a3fa82e66676005=
+cd4ee2608fd7d2 \                                
+                    file://dlib/external/libpng/LICENSE;md5=3D243135ddedf7=
+02158f9170807cbcfb66 \
+                    file://dlib/external/pybind11/LICENSE;md5=3Dbeb87117af=
+69fd10fbf9fb14c22a2e62 \
+                    file://python_examples/LICENSE_FOR_EXAMPLE_PROGRAMS.tx=
+t;md5=3D064f53ab40ea2b6a4bba1324149e4fde \
+&#34;
+DEPENDS =3D &#34;cmake-native&#34;
+
+inherit  pypi setuptools3
+BBCLASSEXTEND =3D &#34;native nativesdk&#34;
+
+</code></pre>
+<p>I'm not a bitbake or cmake expert, during do_compile() task i get the f=
+ollowing error message</p>
+<pre class=3D"prettyprint"><code class=3D"language-unknown">| [ 95%] Build=
+ing CXX object CMakeFiles/_dlib_pybind11.dir/src/shape_predictor.cpp.o
+| [ 96%] Building CXX object CMakeFiles/_dlib_pybind11.dir/src/correlation=
+_tracker.cpp.o
+| [ 96%] Building CXX object CMakeFiles/_dlib_pybind11.dir/src/face_recogn=
+ition.cpp.o
+| [ 97%] Building CXX object CMakeFiles/_dlib_pybind11.dir/src/cnn_face_de=
+tector.cpp.o
+| [ 98%] Building CXX object CMakeFiles/_dlib_pybind11.dir/src/global_opti=
+mization.cpp.o
+| [ 98%] Building CXX object CMakeFiles/_dlib_pybind11.dir/src/image_datas=
+et_metadata.cpp.o
+| [ 99%] Building CXX object CMakeFiles/_dlib_pybind11.dir/src/numpy_retur=
+ns.cpp.o
+| [100%] Building CXX object CMakeFiles/_dlib_pybind11.dir/src/line.cpp.o
+| [100%] Linking CXX shared module build_dunfell/tmp/work/aarch64-poky-lin=
+ux/python3-dlib/19.21.1-r0/build/lib.linux-x86_64-3.8/_dlib_pybind11.cpytho=
+n-38-aarch64-linux-gnu.so
+| build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21.1-r0/recipe=
+-sysroot-native/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux=
+/gcc/aarch64-poky-linux/8.3.0/ld: build_dunfell/tmp/work/aarch64-poky-linux=
+/python3-dlib/19.21.1-r0/recipe-sysroot-native/usr/lib/libsqlite3.so: error=
+ adding symbols: file in wrong format
+| collect2: error: ld returned 1 exit status
+| CMakeFiles/_dlib_pybind11.dir/build.make:445: recipe for target &#39;bui=
+ld_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21.1-r0/build/lib.li=
+nux-x86_64-3.8/_dlib_pybind11.cpython-38-aarch64-linux-gnu.so&#39; failed
+| make[2]: *** [build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.=
+21.1-r0/build/lib.linux-x86_64-3.8/_dlib_pybind11.cpython-38-aarch64-linux-=
+gnu.so] Error 1
+| CMakeFiles/Makefile2:116: recipe for target &#39;CMakeFiles/_dlib_pybind=
+11.dir/all&#39; failed
+| make[1]: *** [CMakeFiles/_dlib_pybind11.dir/all] Error 2
+| Makefile:83: recipe for target &#39;all&#39; failed
+| make: *** [all] Error 2
+| Traceback (most recent call last):
+|   File &#34;build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21=
+.1-r0/dlib-19.21.1/setup.py&#34;, line 223, in &lt;module&gt;
+|     setup(
+|   File &#34;build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21=
+.1-r0/recipe-sysroot-native/usr/lib/python3.8/site-packages/setuptools/__in=
+it__.py&#34;, line 144, in setup
+|     return distutils.core.setup(**attrs)
+|   File &#34;build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21=
+.1-r0/recipe-sysroot-native/usr/lib/python3.8/distutils/core.py&#34;, line =
+148, in setup
+|     dist.run_commands()
+|   File &#34;build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21=
+.1-r0/recipe-sysroot-native/usr/lib/python3.8/distutils/dist.py&#34;, line =
+966, in run_commands
+|     self.run_command(cmd)
+|   File &#34;build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21=
+.1-r0/recipe-sysroot-native/usr/lib/python3.8/distutils/dist.py&#34;, line =
+985, in run_command
+|     cmd_obj.run()
+|   File &#34;build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21=
+.1-r0/recipe-sysroot-native/usr/lib/python3.8/distutils/command/build.py&#3=
+4;, line 135, in run
+|     self.run_command(cmd_name)
+|   File &#34;build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21=
+.1-r0/recipe-sysroot-native/usr/lib/python3.8/distutils/cmd.py&#34;, line 3=
+13, in run_command
+|     self.distribution.run_command(command)
+|   File &#34;build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21=
+.1-r0/recipe-sysroot-native/usr/lib/python3.8/distutils/dist.py&#34;, line =
+985, in run_command
+|     cmd_obj.run()
+|   File &#34;build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21=
+.1-r0/dlib-19.21.1/setup.py&#34;, line 135, in run
+|     self.build_extension(ext)
+|   File &#34;build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21=
+.1-r0/dlib-19.21.1/setup.py&#34;, line 175, in build_extension
+|     subprocess.check_call(cmake_build, cwd=3Dbuild_folder)
+|   File &#34;build_dunfell/tmp/work/aarch64-poky-linux/python3-dlib/19.21=
+.1-r0/recipe-sysroot-native/usr/lib/python3.8/subprocess.py&#34;, line 364,=
+ in check_call
+|     raise CalledProcessError(retcode, cmd)
+| subprocess.CalledProcessError: Command &#39;[&#39;cmake&#39;, &#39;--bui=
+ld&#39;, &#39;.&#39;, &#39;--config&#39;, &#39;Release&#39;, &#39;--&#39;, =
+&#39;-j8&#39;]&#39; returned non-zero exit status 2.
+| WARNING: exit code 1 from a shell command.
+|=20
+
+</code></pre>
+<p>Not sure why the linker <strong>gcc/aarch64-poky-linux/8.3.0/ld</strong=
+> is showing the error</p>
+<pre class=3D"prettyprint"><code class=3D"language-unknown"> error adding =
+symbols: file in wrong format
+</code></pre>
+<p>Perhaps i'm messing things up with cmake-native environment but not sur=
+e how i can enable cmake to be used by setup.py if it is not with DEPENDS=
+=3Dcmake-native.</p>
+
+<p>Any clue to solve this issue will be highly appreciated, or if you know=
+ who is already working on this it will be great to have its contact :)</p>
+
+<p>Also i use dunfell branch for meta-oe</p>
+
+<p>BR,</p>
+
+--buXKzggm0mYZvuhbSTwh--
