@@ -1,68 +1,76 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.30501.1611161591730971012
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web10.31378.1611164593691048427
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Jan 2021 08:53:12 -0800
+ Wed, 20 Jan 2021 09:43:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=54830 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1l2GjG-0007OW-2q; Wed, 20 Jan 2021 18:53:10 +0200
-From: "Leon Anavi" <leon.anavi@konsulko.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ydbyvev8;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id m6so14945004pfm.6
+        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Jan 2021 09:43:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=PhhOaVtHNDaCHsh3ZX4keav4ErF9LJEx4GzJSO99dho=;
+        b=Ydbyvev8zAGm37pA4vTa5Nw3V5QlwoRhdcDBlmxwWw8GonQVmvn871c5xcjUwQRNel
+         OaxY0veWih2uNLxiSC/ujHR1+0NY0KMBPr0KO7Jxfc82kIFQ0gpDFi8/XzmzJUSx6gvf
+         Y0H0MpBgKLR1yuvMfhpnFcDeZwloXd5csiXZ6ox8cTYKLGX8Fc1JXXDW9JJHPlzXHSFK
+         cNmCUffPJpQ7nu5iVIlO0qsCRIqHPvVnAsfo22PDtlveu0EBcSFHEgdcIdJHdmp8pTK8
+         rFMRocCWq+z234rca6IZFCWa5E07Ept6LYePRv6nFSg0GuuZHLZdmhjWUcvRFxskTuV0
+         wL5Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=PhhOaVtHNDaCHsh3ZX4keav4ErF9LJEx4GzJSO99dho=;
+        b=H4dlnke3nQYkVxX4YFe9jIglNo5CX14d6Fzt0516Md8izj8rblc3MnTWhno2frgUm/
+         fN60dlIeMd/g+rk+aiPqlZSU7mAVfVquu+lYUueHJh3fDXCuo+VxtTUZkWicSYPFsTuk
+         AZzXs2NEPIlciofMm4ti7TGredNqblEIHN7iUhd31UwD+yb3DG5bXUUF0v1VaPYosqOj
+         PkstVwePQGw18tjtlbiIK9RAHytNR6o4WEQTraJCcwNNy/b+tPBg65mnW8nMDaVQEkLZ
+         N8+GBsdcRtxpsxbth1/V3AzLktsacnBSgTcWJrN+i97UDCanJ9bKPCO5i6jmxmwbwctt
+         lR0g==
+X-Gm-Message-State: AOAM531xb+YSRXq0J4xMsZmgBSLq1UVY8bXNzkOqOP7Xw4O0s3KVukrM
+	8Jgn7G+fBNYJENVh8BZ0bMGBOMDKTiq2/Q==
+X-Google-Smtp-Source: ABdhPJxuc8VmGAMXKt0Xd1V4QOSFQmxT1MseV8+36cYjQzww1E6606b5SRmqlSK6zIe9GdIYRJrylQ==
+X-Received: by 2002:a62:1981:0:b029:1b7:ec14:e2d9 with SMTP id 123-20020a6219810000b02901b7ec14e2d9mr10031638pfz.54.1611164592547;
+        Wed, 20 Jan 2021 09:43:12 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b408])
+        by smtp.gmail.com with ESMTPSA id k6sm2973000pgk.36.2021.01.20.09.43.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 20 Jan 2021 09:43:11 -0800 (PST)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-alembic: Upgrade 1.4.3 -> 1.5.1
-Date: Wed, 20 Jan 2021 18:53:00 +0200
-Message-Id: <20210120165300.8588-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210120165300.8588-1-leon.anavi@konsulko.com>
-References: <20210120165300.8588-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Cc: Khem Raj <raj.khem@gmail.com>,
+	=?UTF-8?q?Cl=C3=A9ment=20P=C3=A9ron?= <peron.clem@gmail.com>
+Subject: [meta-oe][PATCH] packagegroup-meta-oe: Add re2
+Date: Wed, 20 Jan 2021 09:43:09 -0800
+Message-Id: <20210120174309.4991-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.30.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 1.5.1:
+re2 is newly added package
 
-- Fixed installation issue where the "templates" directory was not
-  being installed, preventing commands like "list_templates" and
-  "init" from working.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Clément Péron <peron.clem@gmail.com>
 ---
- .../{python3-alembic_1.4.3.bb => python3-alembic_1.5.1.bb}   | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-alembic_1.4.3.bb => python3-alembic_1.5.1.bb} (54%)
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-alembic_1.4.3.bb b/meta-python/recipes-devtools/python/python3-alembic_1.5.1.bb
-similarity index 54%
-rename from meta-python/recipes-devtools/python/python3-alembic_1.4.3.bb
-rename to meta-python/recipes-devtools/python/python3-alembic_1.5.1.bb
-index 0e7f629d4..f07be042f 100644
---- a/meta-python/recipes-devtools/python/python3-alembic_1.4.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-alembic_1.5.1.bb
-@@ -1,11 +1,10 @@
- DESCRIPTION = "A database migration tool for SQLAlchemy"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=bd64aba1b968c2bfbc2b525a181ce85c"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=c4ece55266dcdd02ce165b1ee0e490bb"
- 
- inherit pypi setuptools3
- 
--SRC_URI[md5sum] = "6051576d8e25e3d4a9fd818d79531bad"
--SRC_URI[sha256sum] = "5334f32314fb2a56d86b4c4dd1ae34b08c03cae4cb888bc699942104d66bc245"
-+SRC_URI[sha256sum] = "52d1d48109f17959982779e3c4b5cdeca701e449897bacb75bab173bd6ba984e"
- 
- PYPI_PACKAGE = "alembic"
- 
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index ac986a5c1c..94830e2970 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -844,6 +844,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
+     pps-tools \
+     raptor2 \
+     rdfind \
++    re2 \
+     sdparm \
+     serial-forward \
+     read-edid \
 -- 
-2.17.1
+2.30.0
 
