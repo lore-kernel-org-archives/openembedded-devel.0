@@ -1,76 +1,91 @@
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.web10.31378.1611164593691048427
+Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com [209.85.222.173])
+ by mx.groups.io with SMTP id smtpd.web08.31744.1611166260683122431
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Jan 2021 09:43:13 -0800
+ Wed, 20 Jan 2021 10:11:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ydbyvev8;
- spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f171.google.com with SMTP id m6so14945004pfm.6
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Jan 2021 09:43:13 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=FN9oO9MF;
+ spf=pass (domain: gmail.com, ip: 209.85.222.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f173.google.com with SMTP id 19so26210855qkm.8
+        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Jan 2021 10:11:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=PhhOaVtHNDaCHsh3ZX4keav4ErF9LJEx4GzJSO99dho=;
-        b=Ydbyvev8zAGm37pA4vTa5Nw3V5QlwoRhdcDBlmxwWw8GonQVmvn871c5xcjUwQRNel
-         OaxY0veWih2uNLxiSC/ujHR1+0NY0KMBPr0KO7Jxfc82kIFQ0gpDFi8/XzmzJUSx6gvf
-         Y0H0MpBgKLR1yuvMfhpnFcDeZwloXd5csiXZ6ox8cTYKLGX8Fc1JXXDW9JJHPlzXHSFK
-         cNmCUffPJpQ7nu5iVIlO0qsCRIqHPvVnAsfo22PDtlveu0EBcSFHEgdcIdJHdmp8pTK8
-         rFMRocCWq+z234rca6IZFCWa5E07Ept6LYePRv6nFSg0GuuZHLZdmhjWUcvRFxskTuV0
-         wL5Q==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=fyGLZqXJVEbVv13irNtZKZSGafb8CM1vAelvP4lkcDk=;
+        b=FN9oO9MFQkyqhD4V47pI/pf63IKv5/rireVm/lLiDB2YHwT8mTjSk8FJ/SRvTnwuHF
+         aqz8/yM63Y4sxuWpax82fm/AMEY2qQuG+kRWN6k8qAlxrOuhmQiyqlAkbBWbXEo4mnuc
+         yrW4/BBbWC4qkPERg9if9YR5ulwooU9Yd47WN3Ce789d704ekihfTI+/lBdP0ck5V5Tc
+         oA2hmoLvMINku4EDHK0YICYvGk90l6OCJMYYRlhdsazlLM36cIvfyglYwxY8F6if5f/h
+         1NM9OUH3RAyvrWH8/kbhIeKfSpWROwpgfpi95E6bYCUvw/Fn+4kHznJD+IjJtlzXSfIj
+         iB5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=PhhOaVtHNDaCHsh3ZX4keav4ErF9LJEx4GzJSO99dho=;
-        b=H4dlnke3nQYkVxX4YFe9jIglNo5CX14d6Fzt0516Md8izj8rblc3MnTWhno2frgUm/
-         fN60dlIeMd/g+rk+aiPqlZSU7mAVfVquu+lYUueHJh3fDXCuo+VxtTUZkWicSYPFsTuk
-         AZzXs2NEPIlciofMm4ti7TGredNqblEIHN7iUhd31UwD+yb3DG5bXUUF0v1VaPYosqOj
-         PkstVwePQGw18tjtlbiIK9RAHytNR6o4WEQTraJCcwNNy/b+tPBg65mnW8nMDaVQEkLZ
-         N8+GBsdcRtxpsxbth1/V3AzLktsacnBSgTcWJrN+i97UDCanJ9bKPCO5i6jmxmwbwctt
-         lR0g==
-X-Gm-Message-State: AOAM531xb+YSRXq0J4xMsZmgBSLq1UVY8bXNzkOqOP7Xw4O0s3KVukrM
-	8Jgn7G+fBNYJENVh8BZ0bMGBOMDKTiq2/Q==
-X-Google-Smtp-Source: ABdhPJxuc8VmGAMXKt0Xd1V4QOSFQmxT1MseV8+36cYjQzww1E6606b5SRmqlSK6zIe9GdIYRJrylQ==
-X-Received: by 2002:a62:1981:0:b029:1b7:ec14:e2d9 with SMTP id 123-20020a6219810000b02901b7ec14e2d9mr10031638pfz.54.1611164592547;
-        Wed, 20 Jan 2021 09:43:12 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b408])
-        by smtp.gmail.com with ESMTPSA id k6sm2973000pgk.36.2021.01.20.09.43.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 Jan 2021 09:43:11 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	=?UTF-8?q?Cl=C3=A9ment=20P=C3=A9ron?= <peron.clem@gmail.com>
-Subject: [meta-oe][PATCH] packagegroup-meta-oe: Add re2
-Date: Wed, 20 Jan 2021 09:43:09 -0800
-Message-Id: <20210120174309.4991-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=fyGLZqXJVEbVv13irNtZKZSGafb8CM1vAelvP4lkcDk=;
+        b=n8oDe8Z3bodPSXk4rsaYSTmrrrrYOg+YqKFiUtnqzhsmTa0CuNSgKVSMYIphaBIVAh
+         eKd2dlQXmilkQKkl5Itb6ZI2ehqYWv1z0iCEHUoyZaHbihbbpHoxNY9fVKu3mQW/Zi/v
+         6N5NIhXlP9DTnh2JMlC8GjEKOPpOX/maArRiZbZwZRjz5tHQuuWOSRuO6Gd6IZKYIHrW
+         x3SEj4qlqv9zyDYPNJZGPTwaJWzu7Srw24uSBTA0m1l6irtWojSwgLrve4ZmdnLD0DDp
+         8Vl2/J2ESu7F51vBHfzSP0WVKFrPNAqmFSrf9wZRQuAUPNtkF8BM2Dcyooe8E3L3Zt1K
+         i6Xw==
+X-Gm-Message-State: AOAM533EIZ//IIxSVaUMT2bqSCNzs+YHfKohn+b+lEaWiAhWhF8SFVRW
+	XZyK4Lr3dQsyOUv2zNjY/0swJBi8wzVbwOiywuA=
+X-Google-Smtp-Source: ABdhPJwqAe1Loc82ICQ2wYOR+aUOGlli1H9tepOe/S9XXiTIOA1NLglVISGM6ikzcNfANd+uALXx5FbOJOajkUbj9DU=
+X-Received: by 2002:a37:4286:: with SMTP id p128mr2217154qka.337.1611166259689;
+ Wed, 20 Jan 2021 10:10:59 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20210120165300.8588-1-leon.anavi@konsulko.com> <20210120165300.8588-2-leon.anavi@konsulko.com>
+In-Reply-To: <20210120165300.8588-2-leon.anavi@konsulko.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Wed, 20 Jan 2021 10:10:33 -0800
+Message-ID: <CAMKF1sp2qB-QE4aNWFhRfjKNcM1f=b8JZA6y6L0wBP+qmopFmA@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 2/2] python3-alembic: Upgrade 1.4.3 -> 1.5.1
+To: Leon Anavi <leon.anavi@konsulko.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-re2 is newly added package
+On Wed, Jan 20, 2021 at 8:53 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
+>
+> Upgrade to release 1.5.1:
+>
+> - Fixed installation issue where the "templates" directory was not
+>   being installed, preventing commands like "list_templates" and
+>   "init" from working.
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> ---
+>  .../{python3-alembic_1.4.3.bb => python3-alembic_1.5.1.bb}   | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python3-alembic_1.4.3.bb => python3-alembic_1.5.1.bb} (54%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-alembic_1.4.3.bb b/meta-python/recipes-devtools/python/python3-alembic_1.5.1.bb
+> similarity index 54%
+> rename from meta-python/recipes-devtools/python/python3-alembic_1.4.3.bb
+> rename to meta-python/recipes-devtools/python/python3-alembic_1.5.1.bb
+> index 0e7f629d4..f07be042f 100644
+> --- a/meta-python/recipes-devtools/python/python3-alembic_1.4.3.bb
+> +++ b/meta-python/recipes-devtools/python/python3-alembic_1.5.1.bb
+> @@ -1,11 +1,10 @@
+>  DESCRIPTION = "A database migration tool for SQLAlchemy"
+>  LICENSE = "MIT"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=bd64aba1b968c2bfbc2b525a181ce85c"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=c4ece55266dcdd02ce165b1ee0e490bb"
+>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Clément Péron <peron.clem@gmail.com>
----
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 1 +
- 1 file changed, 1 insertion(+)
+you forgot to describe this change
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index ac986a5c1c..94830e2970 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -844,6 +844,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
-     pps-tools \
-     raptor2 \
-     rdfind \
-+    re2 \
-     sdparm \
-     serial-forward \
-     read-edid \
--- 
-2.30.0
-
+>  inherit pypi setuptools3
+>
+> -SRC_URI[md5sum] = "6051576d8e25e3d4a9fd818d79531bad"
+> -SRC_URI[sha256sum] = "5334f32314fb2a56d86b4c4dd1ae34b08c03cae4cb888bc699942104d66bc245"
+> +SRC_URI[sha256sum] = "52d1d48109f17959982779e3c4b5cdeca701e449897bacb75bab173bd6ba984e"
+>
+>  PYPI_PACKAGE = "alembic"
+>
+> --
+> 2.17.1
+>
+>
+> 
+>
