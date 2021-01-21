@@ -1,518 +1,597 @@
-Received: from mail-qv1-f42.google.com (mail-qv1-f42.google.com [209.85.219.42])
- by mx.groups.io with SMTP id smtpd.web08.153.1611265335344361618
+Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
+ by mx.groups.io with SMTP id smtpd.web10.40.1611265905062829209
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Jan 2021 13:42:15 -0800
+ Thu, 21 Jan 2021 13:51:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Phw5LeWt;
- spf=pass (domain: gmail.com, ip: 209.85.219.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f42.google.com with SMTP id 2so1713772qvd.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Jan 2021 13:42:15 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=o1C4Tc5a;
+ spf=pass (domain: gmail.com, ip: 209.85.208.54, mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-ed1-f54.google.com with SMTP id g24so4267836edw.9
+        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Jan 2021 13:51:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=/zp5xChYJzQojSFbVxfZcIdtiMmaSCpvgTix8P6wl2k=;
-        b=Phw5LeWt1mF7/um8pVg57ExE7E+XdYcAFdkKeHOMRB0uD7oi0LXDhFjBgOPfOH8+vY
-         GTgKEStLa1ZwpOPLVsLZDITPmooMx6q77yCmcBcmnB3ETn1veUJjgU26KdAiSVBytM63
-         TxmrPHtVepTHlAi89rsFx6CGSFIH0HY0uta+aWEl/yXjF4SW3Q/6YBhRHPAZehSogll/
-         XQ5BlUiQLXNKbOe0r8Sqm7a2f+y/mCS45ikNSqX5OljVWTZOe1XOOzDQ7waF0i5Ge8oH
-         iA9E7wvSA5uUky6i+agUjLx6Zyc63bTwoBusUqJZj1Z6oME6x3VDtJDME7x3cawfqlEt
-         nb7w==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=eSxB8LRVTZ85dTNICQDe7/bV+KFe5JmulqFpS0Y91BU=;
+        b=o1C4Tc5aCyGHypfck+jsL4HTohfBGVR6I1ohKJv9C+FPev0Z98ykrvRFGL/0VTP/ru
+         BavG4FN7jz/S80gdaKfky/bSJ6aHKMk+P6fowTqv/riDKO8x+9zpqnWWLrlP8rt74cAV
+         6e+AH9xjlWnJSCyWhniL3/NwJASdmRwkLMlY03TTruffA/DLzgCanvOkIlKA/CAHcXfT
+         Z3F0oUCQoONyDW/H+pwBQ8/XiH/srSE84p8GW6y2ApzX7nDKTOqarh2vMIA4gQRcxsPg
+         j3q5VNJ0gJtQr1I99WRPGu8fWRH4Ycw4tgdxJma7IgfVqmXnrY+Ufur0pcQp19FUJ7FB
+         fr3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=/zp5xChYJzQojSFbVxfZcIdtiMmaSCpvgTix8P6wl2k=;
-        b=sDOV9ITP2XlTf7yp9O0qeAPiEhJ1ksLRICONes9XyYJpOR/hHsHTebStoq4uXBvWwR
-         6tPQkhooUdrIVhQFVOck7R9YaoW8L1cMy7nT9rQCqNVjpf1GQI4m/solT3Yd+Qnq83ju
-         tpYF2jXrksgSfibTxShlHJIqi7A5bAbFTaQ6ayg+UgQOWA7lEbp+EbtBEw0LXZVJ4KHu
-         1MkGE8U7Vrmyy1iCqOhO8+iC1b8YnOp7SaUzvtXzUqqjkbYMoOqZhPPWrlz9ICYS9Ub2
-         TIq90oG0OajqZuFijQuVqJ2X3/XggddAeiBgVAbwpcKLB7n/1Ruc58R+7kPmy+JZdjjI
-         WAAQ==
-X-Gm-Message-State: AOAM530AKkCsUiLpIYFrmPlJ/2H31Ecd3NqGlmOa+L9uEznbtbyhojNg
-	tjJOB9fgifG5tAHog0E9vUuse6TBG4S35AHoBoQ=
-X-Google-Smtp-Source: ABdhPJwlAAAOCEF4Cz3FlwNmSCQGSXiwrHf9WxuNBxTs1Z2+mEyQfX080IJ8UDnFIMjYYi+qjFkzVSDr9P1ynP+n1wc=
-X-Received: by 2002:a05:6214:28f:: with SMTP id l15mr1484786qvv.38.1611265334348;
- Thu, 21 Jan 2021 13:42:14 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=eSxB8LRVTZ85dTNICQDe7/bV+KFe5JmulqFpS0Y91BU=;
+        b=e5EyjIjKw0fACPdLVx8ZVny9z28LEX2w2Xdo9WT/cVh0J3SOop+102YuChSbDNdWkp
+         g3+T7MGj2mADfNcAiD+6sd7SGWiMJQ0KcmGmIMkTjLdghnKqX1Tw360o5sGEXL9EdSsT
+         j6pR2vWeFM6Ql8ZSWnSWeOVzW3fvQ/ZkdXJ1t2k0BqUt8iVInppM1J3Mzb9DPlYc+P37
+         4540zmVP5BeSeaez4Ebs+DKhFz/dtLhK3k8MCBBTomcpCKL6DU2RHNJURwIAAQsSHXjO
+         o7XiM80A+axcjjcjQurMrcXdNABMWZB4Rq7icz8f4/OdHeZmyvEZx2qOj3vy7FVQ0F6d
+         nrsw==
+X-Gm-Message-State: AOAM532ZOVMjL9p+WFy3uw6TPlCOETS2lR+WsUhCs+OLBrpZhEyb+IFA
+	LM5iSft8Z+rVmTCfrsu82DR2YDfe1PI=
+X-Google-Smtp-Source: ABdhPJyJZScIO/CQHEyTQQMqNBGzN0OX4lIPmwV4lozl09i+L4VzL+bFh7dVryFFtSkCUr5trlFAig==
+X-Received: by 2002:a05:6402:1a56:: with SMTP id bf22mr941989edb.284.1611265902741;
+        Thu, 21 Jan 2021 13:51:42 -0800 (PST)
+Return-Path: <costamagna.gianfranco@gmail.com>
+Received: from Unimatrix08-Focal.lan (mob-109-119-49-251.net.vodafone.it. [109.119.49.251])
+        by smtp.gmail.com with ESMTPSA id v9sm2780925ejd.92.2021.01.21.13.51.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 21 Jan 2021 13:51:41 -0800 (PST)
+From: "Gianfranco" <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+To: openembedded-devel@lists.openembedded.org
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	Gianfranco Costamagna <locutusofborg@debian.org>
+Subject: [meta-oe][PATCH 1/2] vboxguestdrivers: upgrade 6.1.16 -> 6.1.18
+Date: Thu, 21 Jan 2021 22:51:37 +0100
+Message-Id: <20210121215138.1509067-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20210121171036.3019430-1-peron.clem@gmail.com>
-In-Reply-To: <20210121171036.3019430-1-peron.clem@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 21 Jan 2021 13:41:48 -0800
-Message-ID: <CAMKF1sq5ZGpUbJJ_ZPC4hz8wQ8cZMS6C65Ypn1mLQt91Lw61kw@mail.gmail.com>
-Subject: Re: [PATCH] abseil-cpp: bump to LTS 2020_09_23 Patch Release 3
-To: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-it seems to add 0002-absl-always-use-asm-sgidefs.h.patch but the patch
-file itself it missing.
+Drop kernel 5.10 build fixes patches, now part of upstream codebase
 
-On Thu, Jan 21, 2021 at 9:10 AM Cl=C3=A9ment P=C3=A9ron <peron.clem@gmail.c=
-om> wrote:
->
-> Most patches have been upstreamed and accepted.
->
-> We can drop the -fPIC patch and pass BUILD_SHARED_LIBS instead.
->
-> Signed-off-by: Cl=C3=A9ment P=C3=A9ron <peron.clem@gmail.com>
-> ---
->
-> Hi,
->
-> I'm looking to bump gRPC that now use abseil-cpp.
->
-> When building i got some strange error that have been fixed in recent rel=
-ease.
->
-> Instead of backporting all the fixes required I prefer to bump the packag=
-e.
->
-> Regards,
-> Clement
->
->  ...d-RISCV-support-to-GetProgramCounter.patch | 29 --------
->  .../0001-Fix-build-on-riscv32.patch           | 74 -------------------
->  ...e-maes-option-from-cross-compilation.patch | 53 -------------
->  .../0001-absl-always-use-asm-sgidefs.h.patch  |  8 +-
->  ...n-ABSL_HAVE_VDSO_SUPPORT-conditional.patch | 35 ---------
->  ...e-maes-option-from-cross-compilation.patch | 37 ++++++++++
->  .../abseil-cpp/0003-Add-fPIC-option.patch     | 27 -------
->  .../abseil-cpp/abseil-cpp_git.bb              | 21 +++---
->  8 files changed, 51 insertions(+), 233 deletions(-)
->  delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-A=
-dd-RISCV-support-to-GetProgramCounter.patch
->  delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-F=
-ix-build-on-riscv32.patch
->  delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-R=
-emove-maes-option-from-cross-compilation.patch
->  delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0002-A=
-dd-forgotten-ABSL_HAVE_VDSO_SUPPORT-conditional.patch
->  create mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0002-R=
-emove-maes-option-from-cross-compilation.patch
->  delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0003-A=
-dd-fPIC-option.patch
->
-> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Add-RISC=
-V-support-to-GetProgramCounter.patch b/meta-oe/recipes-devtools/abseil-cpp/=
-abseil-cpp/0001-Add-RISCV-support-to-GetProgramCounter.patch
-> deleted file mode 100644
-> index 95ec070f6c5a..000000000000
-> --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Add-RISCV-suppo=
-rt-to-GetProgramCounter.patch
-> +++ /dev/null
-> @@ -1,29 +0,0 @@
-> -From 983eeae0792946fe5c090f95164c892ec6db5cc4 Mon Sep 17 00:00:00 2001
-> -From: Khem Raj <raj.khem@gmail.com>
-> -Date: Sun, 16 Feb 2020 16:22:53 -0800
-> -Subject: [PATCH] Add RISCV support to GetProgramCounter()
-> -
-> -Identify PC register from signal context
-> -
-> -Upstream-Status: Submitted [https://github.com/abseil/abseil-cpp/pull/62=
-1]
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ----
-> - absl/debugging/internal/examine_stack.cc | 2 ++
-> - 1 file changed, 2 insertions(+)
-> -
-> -diff --git a/absl/debugging/internal/examine_stack.cc b/absl/debugging/i=
-nternal/examine_stack.cc
-> -index 4739fbc..fb77450 100644
-> ---- a/absl/debugging/internal/examine_stack.cc
-> -+++ b/absl/debugging/internal/examine_stack.cc
-> -@@ -53,6 +53,8 @@ void* GetProgramCounter(void* vuc) {
-> -     return reinterpret_cast<void*>(context->uc_mcontext.gp_regs[32]);
-> - #elif defined(__powerpc__)
-> -     return reinterpret_cast<void*>(context->uc_mcontext.regs->nip);
-> -+#elif defined(__riscv)
-> -+    return reinterpret_cast<void*>(context->uc_mcontext.__gregs[REG_PC]=
-);
-> - #elif defined(__s390__) && !defined(__s390x__)
-> -     return reinterpret_cast<void*>(context->uc_mcontext.psw.addr & 0x7f=
-ffffff);
-> - #elif defined(__s390__) && defined(__s390x__)
-> ---
-> -2.25.0
-> -
-> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Fix-buil=
-d-on-riscv32.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Fi=
-x-build-on-riscv32.patch
-> deleted file mode 100644
-> index e7c9b43c2994..000000000000
-> --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Fix-build-on-ri=
-scv32.patch
-> +++ /dev/null
-> @@ -1,74 +0,0 @@
-> -From 04e28fdda03b545a0f7b446a784ec2fa7249cbb8 Mon Sep 17 00:00:00 2001
-> -From: Khem Raj <raj.khem@gmail.com>
-> -Date: Wed, 29 Apr 2020 15:37:40 -0700
-> -Subject: [PATCH] Fix build on riscv32
-> -
-> -Define __NR_mmap in terms of __NR_mmap2 and __NR_futex interms of
-> -__NR_futex_time64 for rv32, since there calls dont exist for rv32
-> -
-> -Also recognise rv32 as a new 32bit platform
-> -
-> -Upstream-Status: Submitted [https://github.com/abseil/abseil-cpp/pull/67=
-5]
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ----
-> - absl/base/internal/direct_mmap.h        | 5 +++++
-> - absl/base/internal/spinlock_linux.inc   | 4 ++++
-> - absl/synchronization/internal/waiter.cc | 4 ++++
-> - 3 files changed, 13 insertions(+)
-> -
-> -diff --git a/absl/base/internal/direct_mmap.h b/absl/base/internal/direc=
-t_mmap.h
-> -index 5618867..90cfeca 100644
-> ---- a/absl/base/internal/direct_mmap.h
-> -+++ b/absl/base/internal/direct_mmap.h
-> -@@ -26,6 +26,10 @@
-> -
-> - #ifdef __linux__
-> -
-> -+#if !defined(__NR_mmap) && defined(__riscv) && __riscv_xlen =3D=3D 32
-> -+# define __NR_mmap __NR_mmap2
-> -+#endif
-> -+
-> - #include <sys/types.h>
-> - #ifdef __BIONIC__
-> - #include <sys/syscall.h>
-> -@@ -72,6 +76,7 @@ inline void* DirectMmap(void* start, size_t length, in=
-t prot, int flags, int fd,
-> - #if defined(__i386__) || defined(__ARM_ARCH_3__) || defined(__ARM_EABI_=
-_) || \
-> -     (defined(__mips__) && _MIPS_SIM =3D=3D _MIPS_SIM_ABI32) ||         =
-          \
-> -     (defined(__PPC__) && !defined(__PPC64__)) ||                       =
-      \
-> -+    (defined(__riscv) && __riscv_xlen =3D=3D 32)  ||                   =
-          \
-> -     (defined(__s390__) && !defined(__s390x__))
-> -   // On these architectures, implement mmap with mmap2.
-> -   static int pagesize =3D 0;
-> -diff --git a/absl/base/internal/spinlock_linux.inc b/absl/base/internal/=
-spinlock_linux.inc
-> -index 323edd6..3dca444 100644
-> ---- a/absl/base/internal/spinlock_linux.inc
-> -+++ b/absl/base/internal/spinlock_linux.inc
-> -@@ -14,6 +14,10 @@
-> - //
-> - // This file is a Linux-specific part of spinlock_wait.cc
-> -
-> -+#if !defined(__NR_futex) && defined(__riscv) && __riscv_xlen =3D=3D 32
-> -+# define __NR_futex __NR_futex_time64
-> -+#endif
-> -+
-> - #include <linux/futex.h>
-> - #include <sys/syscall.h>
-> - #include <unistd.h>
-> -diff --git a/absl/synchronization/internal/waiter.cc b/absl/synchronizat=
-ion/internal/waiter.cc
-> -index 2949f5a..7411042 100644
-> ---- a/absl/synchronization/internal/waiter.cc
-> -+++ b/absl/synchronization/internal/waiter.cc
-> -@@ -24,6 +24,10 @@
-> - #include <unistd.h>
-> - #endif
-> -
-> -+#if !defined(__NR_futex) && defined(__riscv) && __riscv_xlen =3D=3D 32
-> -+# define __NR_futex __NR_futex_time64
-> -+#endif
-> -+
-> - #ifdef __linux__
-> - #include <linux/futex.h>
-> - #include <sys/syscall.h>
-> ---
-> -2.26.2
-> -
-> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Remove-m=
-aes-option-from-cross-compilation.patch b/meta-oe/recipes-devtools/abseil-c=
-pp/abseil-cpp/0001-Remove-maes-option-from-cross-compilation.patch
-> deleted file mode 100644
-> index 4c41cd890259..000000000000
-> --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Remove-maes-opt=
-ion-from-cross-compilation.patch
-> +++ /dev/null
-> @@ -1,53 +0,0 @@
-> -From 70926666f7c5c35add363e3bcade6eaabace7206 Mon Sep 17 00:00:00 2001
-> -From: Sinan Kaya <sinan.kaya@microsoft.com>
-> -Date: Mon, 3 Feb 2020 03:25:57 +0000
-> -Subject: [PATCH] Remove maes option from cross-compilation
-> -
-> ----
-> - absl/copts/GENERATED_AbseilCopts.cmake | 4 ----
-> - absl/copts/GENERATED_copts.bzl         | 4 ----
-> - absl/copts/copts.py                    | 4 ----
-> - 3 files changed, 12 deletions(-)
-> -
-> -diff --git a/absl/copts/GENERATED_AbseilCopts.cmake b/absl/copts/GENERAT=
-ED_AbseilCopts.cmake
-> -index 01bd40b..af99694 100644
-> ---- a/absl/copts/GENERATED_AbseilCopts.cmake
-> -+++ b/absl/copts/GENERATED_AbseilCopts.cmake
-> -@@ -230,7 +230,3 @@ list(APPEND ABSL_RANDOM_HWAES_MSVC_X64_FLAGS
-> -     "/Ob2"
-> - )
-> -
-> --list(APPEND ABSL_RANDOM_HWAES_X64_FLAGS
-> --    "-maes"
-> --    "-msse4.1"
-> --)
-> -diff --git a/absl/copts/GENERATED_copts.bzl b/absl/copts/GENERATED_copts=
-.bzl
-> -index 82f332f..9a548d1 100644
-> ---- a/absl/copts/GENERATED_copts.bzl
-> -+++ b/absl/copts/GENERATED_copts.bzl
-> -@@ -231,7 +231,3 @@ ABSL_RANDOM_HWAES_MSVC_X64_FLAGS =3D [
-> -     "/Ob2",
-> - ]
-> -
-> --ABSL_RANDOM_HWAES_X64_FLAGS =3D [
-> --    "-maes",
-> --    "-msse4.1",
-> --]
-> -diff --git a/absl/copts/copts.py b/absl/copts/copts.py
-> -index 068abce..c2f70fb 100644
-> ---- a/absl/copts/copts.py
-> -+++ b/absl/copts/copts.py
-> -@@ -203,10 +203,6 @@ COPT_VARS =3D {
-> -     # to improve performance of some random bit generators.
-> -     "ABSL_RANDOM_HWAES_ARM64_FLAGS": ["-march=3Darmv8-a+crypto"],
-> -     "ABSL_RANDOM_HWAES_ARM32_FLAGS": ["-mfpu=3Dneon"],
-> --    "ABSL_RANDOM_HWAES_X64_FLAGS": [
-> --        "-maes",
-> --        "-msse4.1",
-> --    ],
-> -     "ABSL_RANDOM_HWAES_MSVC_X64_FLAGS": [
-> -         "/O2",  # Maximize speed
-> -         "/Ob2",  # Aggressive inlining
-> ---
-> -2.23.0
-> -
-> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-absl-alw=
-ays-use-asm-sgidefs.h.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cp=
-p/0001-absl-always-use-asm-sgidefs.h.patch
-> index 6bb59d933694..2bafcc6b1305 100644
-> --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-absl-always-use=
--asm-sgidefs.h.patch
-> +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-absl-always-use=
--asm-sgidefs.h.patch
-> @@ -1,7 +1,7 @@
-> -From 14229e8c6f42a96e4d725124193ceefa54e5e1a4 Mon Sep 17 00:00:00 2001
-> +From 8f21fdfb83b0fa844a9f1f03a86a9ca46642d85e Mon Sep 17 00:00:00 2001
->  From: Khem Raj <raj.khem@gmail.com>
->  Date: Thu, 9 Apr 2020 13:06:27 -0700
-> -Subject: [PATCH] absl: always use <asm/sgidefs.h>
-> +Subject: [PATCH 1/2] absl: always use <asm/sgidefs.h>
->
->  Fixes mips/musl build, since sgidefs.h is not present on all C libraries
->  but on linux asm/sgidefs.h is there and contains same definitions, using
-> @@ -15,7 +15,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
->   1 file changed, 1 insertion(+), 5 deletions(-)
->
->  diff --git a/absl/base/internal/direct_mmap.h b/absl/base/internal/direc=
-t_mmap.h
-> -index 2e5e422..c515325 100644
-> +index 16accf096604..ba7936cc934e 100644
->  --- a/absl/base/internal/direct_mmap.h
->  +++ b/absl/base/internal/direct_mmap.h
->  @@ -41,13 +41,9 @@
-> @@ -34,5 +34,5 @@ index 2e5e422..c515325 100644
->
->   // SYS_mmap and SYS_munmap are not defined in Android.
->  --
-> -2.26.0
-> +2.25.1
->
-> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0002-Add-forg=
-otten-ABSL_HAVE_VDSO_SUPPORT-conditional.patch b/meta-oe/recipes-devtools/a=
-bseil-cpp/abseil-cpp/0002-Add-forgotten-ABSL_HAVE_VDSO_SUPPORT-conditional.=
-patch
-> deleted file mode 100644
-> index fab4a738ea74..000000000000
-> --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0002-Add-forgotten-A=
-BSL_HAVE_VDSO_SUPPORT-conditional.patch
-> +++ /dev/null
-> @@ -1,35 +0,0 @@
-> -From 9384735383a0b8688e3f05ed23a53f18863eae20 Mon Sep 17 00:00:00 2001
-> -From: Sinan Kaya <sinan.kaya@microsoft.com>
-> -Date: Tue, 11 Feb 2020 11:36:00 -0500
-> -Subject: [PATCH] Add forgotten ABSL_HAVE_VDSO_SUPPORT conditional
-> -
-> -Signed-off-by: Sinan Kaya <sinan.kaya@microsoft.com>
-> ----
-> - absl/debugging/internal/stacktrace_x86-inl.inc | 4 ++++
-> - 1 file changed, 4 insertions(+)
-> -
-> -diff --git a/absl/debugging/internal/stacktrace_x86-inl.inc b/absl/debug=
-ging/internal/stacktrace_x86-inl.inc
-> -index ff0fd31..28607c3 100644
-> ---- a/absl/debugging/internal/stacktrace_x86-inl.inc
-> -+++ b/absl/debugging/internal/stacktrace_x86-inl.inc
-> -@@ -171,6 +171,7 @@ static void **NextStackFrame(void **old_fp, const vo=
-id *uc) {
-> -     static const unsigned char *kernel_rt_sigreturn_address =3D nullptr=
-;
-> -     static const unsigned char *kernel_vsyscall_address =3D nullptr;
-> -     if (num_push_instructions =3D=3D -1) {
-> -+#ifdef ABSL_HAVE_VDSO_SUPPORT
-> -       absl::debugging_internal::VDSOSupport vdso;
-> -       if (vdso.IsPresent()) {
-> -         absl::debugging_internal::VDSOSupport::SymbolInfo
-> -@@ -199,6 +200,9 @@ static void **NextStackFrame(void **old_fp, const vo=
-id *uc) {
-> -       } else {
-> -         num_push_instructions =3D 0;
-> -       }
-> -+#else
-> -+      num_push_instructions =3D 0;
-> -+#endif
-> -     }
-> -     if (num_push_instructions !=3D 0 && kernel_rt_sigreturn_address !=
-=3D nullptr &&
-> -         old_fp[1] =3D=3D kernel_rt_sigreturn_address) {
-> ---
-> -2.20.1.windows.1
-> -
-> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0002-Remove-m=
-aes-option-from-cross-compilation.patch b/meta-oe/recipes-devtools/abseil-c=
-pp/abseil-cpp/0002-Remove-maes-option-from-cross-compilation.patch
-> new file mode 100644
-> index 000000000000..da9dbd936761
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0002-Remove-maes-opt=
-ion-from-cross-compilation.patch
-> @@ -0,0 +1,37 @@
-> +From a9e15a4855c82eb948dedeecd83d5e17c3c8f767 Mon Sep 17 00:00:00 2001
-> +From: Sinan Kaya <sinan.kaya@microsoft.com>
-> +Date: Mon, 3 Feb 2020 03:25:57 +0000
-> +Subject: [PATCH 2/2] Remove maes option from cross-compilation
-> +
-> +---
-> + absl/copts/GENERATED_AbseilCopts.cmake | 4 ----
-> + absl/copts/GENERATED_copts.bzl         | 4 ----
-> + 2 files changed, 8 deletions(-)
-> +
-> +diff --git a/absl/copts/GENERATED_AbseilCopts.cmake b/absl/copts/GENERAT=
-ED_AbseilCopts.cmake
-> +index 97bd283eb739..ce29ac031b9c 100644
-> +--- a/absl/copts/GENERATED_AbseilCopts.cmake
-> ++++ b/absl/copts/GENERATED_AbseilCopts.cmake
-> +@@ -210,7 +210,3 @@ list(APPEND ABSL_RANDOM_HWAES_ARM64_FLAGS
-> + list(APPEND ABSL_RANDOM_HWAES_MSVC_X64_FLAGS
-> + )
-> +
-> +-list(APPEND ABSL_RANDOM_HWAES_X64_FLAGS
-> +-    "-maes"
-> +-    "-msse4.1"
-> +-)
-> +diff --git a/absl/copts/GENERATED_copts.bzl b/absl/copts/GENERATED_copts=
-.bzl
-> +index bcdd61ef8211..3e8eddd4bb08 100644
-> +--- a/absl/copts/GENERATED_copts.bzl
-> ++++ b/absl/copts/GENERATED_copts.bzl
-> +@@ -211,7 +211,3 @@ ABSL_RANDOM_HWAES_ARM64_FLAGS =3D [
-> + ABSL_RANDOM_HWAES_MSVC_X64_FLAGS =3D [
-> + ]
-> +
-> +-ABSL_RANDOM_HWAES_X64_FLAGS =3D [
-> +-    "-maes",
-> +-    "-msse4.1",
-> +-]
-> +--
-> +2.25.1
-> +
-> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0003-Add-fPIC=
--option.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0003-Add-fPI=
-C-option.patch
-> deleted file mode 100644
-> index bb78813a7fae..000000000000
-> --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0003-Add-fPIC-option=
-.patch
-> +++ /dev/null
-> @@ -1,27 +0,0 @@
-> -From d7160d647c8f8847f3ea8d7b0eb222936962c1af Mon Sep 17 00:00:00 2001
-> -From: Sinan Kaya <sinan.kaya@microsoft.com>
-> -Date: Tue, 11 Feb 2020 11:58:02 -0500
-> -Subject: [PATCH] Add fPIC option
-> -
-> -Signed-off-by: Sinan Kaya <sinan.kaya@microsoft.com>
-> ----
-> - CMakeLists.txt | 3 +++
-> - 1 file changed, 3 insertions(+)
-> -
-> -diff --git a/CMakeLists.txt b/CMakeLists.txt
-> -index 74a3a4c..4f837b3 100644
-> ---- a/CMakeLists.txt
-> -+++ b/CMakeLists.txt
-> -@@ -79,6 +79,9 @@ option(ABSL_USE_GOOGLETEST_HEAD
-> -
-> - option(ABSL_RUN_TESTS "If ON, Abseil tests will be run." OFF)
-> -
-> -+# link fails on arm64 and x86-64 without this
-> -+add_compile_options(-fPIC)
-> -+
-> - if(${ABSL_RUN_TESTS})
-> -   # enable CTest.  This will set BUILD_TESTING to ON unless otherwise s=
-pecified
-> -   # on the command line
-> ---
-> -2.20.1.windows.1
-> -
-> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta=
--oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-> index 8efa31e95311..eb2ed9e478e1 100644
-> --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-> +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-> @@ -7,16 +7,12 @@ SECTION =3D "libs"
->  LICENSE =3D "Apache-2.0"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddf52c6edb7adc22e533b2bacc3bd3=
-915"
->
-> -PV =3D "20190808+git${SRCPV}"
-> -SRCREV =3D "aa844899c937bde5d2b24f276b59997e5b668bde"
-> -BRANCH =3D "lts_2019_08_08"
-> -SRC_URI =3D "git://github.com/abseil/abseil-cpp;branch=3D${BRANCH}      =
-          \
-> -           file://0001-Remove-maes-option-from-cross-compilation.patch  =
-      \
-> -           file://0002-Add-forgotten-ABSL_HAVE_VDSO_SUPPORT-conditional.=
-patch \
-> -           file://0003-Add-fPIC-option.patch                            =
-      \
-> -           file://0001-Add-RISCV-support-to-GetProgramCounter.patch \
-> -           file://0001-absl-always-use-asm-sgidefs.h.patch \
-> -           file://0001-Fix-build-on-riscv32.patch \
-> +PV =3D "20200923+git${SRCPV}"
-> +SRCREV =3D "6f9d96a1f41439ac172ee2ef7ccd8edf0e5d068c"
-> +BRANCH =3D "lts_2020_09_23"
-> +SRC_URI =3D "git://github.com/abseil/abseil-cpp;branch=3D${BRANCH}      =
-   \
-> +           file://0001-Remove-maes-option-from-cross-compilation.patch \
-> +           file://0002-absl-always-use-asm-sgidefs.h.patch             \
->            "
->
->  S =3D "${WORKDIR}/git"
-> @@ -28,6 +24,10 @@ ASNEEDED_class-nativesdk =3D ""
->
->  inherit cmake
->
-> +EXTRA_OECMAKE =3D "-DBUILD_SHARED_LIBS=3DON \
-> +                 -DBUILD_TESTING=3DOFF    \
-> +                "
-> +
->  BBCLASSEXTEND =3D "native nativesdk"
->  ALLOW_EMPTY_${PN} =3D "1"
->
-> @@ -55,4 +55,3 @@ python () {
->              raise bb.parse.SkipRecipe("%s-%s Needs support for corei7 on=
- x86_64" % (pkgn, pkgv))
->
->  }
-> -
-> --
-> 2.25.1
->
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+---
+ ...-linux-drm-Adjustment-for-Linux-5.10.patch | 321 ------------------
+ ...0drv-linux.c-Changes-to-support-the-.patch | 119 -------
+ ...justment-for-linux-5.10-TASK_SIZE_MA.patch |  46 ---
+ ...s_6.1.16.bb => vboxguestdrivers_6.1.18.bb} |   7 +-
+ 4 files changed, 2 insertions(+), 491 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Additions-linux-drm-Adjustment-for-Linux-5.10.patch
+ delete mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Runtime-memobj-r0drv-linux.c-Changes-to-support-the-.patch
+ delete mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-linser-vboxsf-Adjustment-for-linux-5.10-TASK_SIZE_MA.patch
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_6.1.16.bb => vboxguestdrivers_6.1.18.bb} (88%)
+
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Additions-linux-drm-Adjustment-for-Linux-5.10.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Additions-linux-drm-Adjustment-for-Linux-5.10.patch
+deleted file mode 100644
+index a444901f8..000000000
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Additions-linux-drm-Adjustment-for-Linux-5.10.patch
++++ /dev/null
+@@ -1,321 +0,0 @@
+-From b6c765d693a0833b94cb2e91b32842570c3458d2 Mon Sep 17 00:00:00 2001
+-From: vboxsync <vboxsync@cfe28804-0f27-0410-a406-dd0f0b0b656f>
+-Date: Tue, 15 Dec 2020 22:29:56 +0000
+-Subject: [PATCH] Additions/linux/drm: Adjustment for Linux 5.10.
+-
+-Upstream-Status: Backport
+-
+-git-svn-id: http://www.virtualbox.org/svn/vbox@87092 cfe28804-0f27-0410-a406-dd0f0b0b656f
+-
+-Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
+-
+----
+- src/VBox/Additions/linux/drm/vbox_drv.h | 10 +-
+- src/VBox/Additions/linux/drm/vbox_fb.c  |  2 +-
+- .../src/VBox/Additions/linux/drm/vbox_mode.c  |  2 +-
+- src/VBox/Additions/linux/drm/vbox_ttm.c | 99 +++++++++++++++++--
+- 4 files changed, 99 insertions(+), 14 deletions(-)
+-
+-diff --git a/src/VBox/Additions/linux/drm/vbox_drv.h b/src/VBox/Additions/linux/drm/vbox_drv.h
+-index 8c85371749..7937f2f2d2 100644
+---- a/src/VBox/Additions/linux/drm/vbox_drv.h
+-+++ b/src/VBox/Additions/linux/drm/vbox_drv.h
+-@@ -175,6 +175,9 @@
+- #include <drm/ttm/ttm_placement.h>
+- #include <drm/ttm/ttm_memory.h>
+- #include <drm/ttm/ttm_module.h>
+-+#if RTLNX_VER_MIN(5,10,0)
+-+# include <drm/ttm/ttm_resource.h>
+-+#endif
+- 
+- #include "vboxvideo_guest.h"
+- #include "vboxvideo_vbe.h"
+-@@ -444,7 +447,10 @@ int vbox_bo_create(struct drm_device *dev, int size, int align,
+- int vbox_gem_create(struct drm_device *dev,
+- 		    u32 size, bool iskernel, struct drm_gem_object **obj);
+- 
+--int vbox_bo_pin(struct vbox_bo *bo, u32 pl_flag, u64 *gpu_addr);
+-+#define VBOX_MEM_TYPE_VRAM   0x1
+-+#define VBOX_MEM_TYPE_SYSTEM 0x2
+-+
+-+int vbox_bo_pin(struct vbox_bo *bo, u32 mem_type, u64 *gpu_addr);
+- int vbox_bo_unpin(struct vbox_bo *bo);
+- 
+- static inline int vbox_bo_reserve(struct vbox_bo *bo, bool no_wait)
+-@@ -469,7 +475,7 @@ static inline void vbox_bo_unreserve(struct vbox_bo *bo)
+- 	ttm_bo_unreserve(&bo->bo);
+- }
+- 
+--void vbox_ttm_placement(struct vbox_bo *bo, int domain);
+-+void vbox_ttm_placement(struct vbox_bo *bo, u32 mem_type);
+- int vbox_bo_push_sysram(struct vbox_bo *bo);
+- int vbox_mmap(struct file *filp, struct vm_area_struct *vma);
+- 
+-diff --git a/src/VBox/Additions/linux/drm/vbox_fb.c b/src/VBox/Additions/linux/drm/vbox_fb.c
+-index adead98d3d..7182d9da1a 100644
+---- a/src/VBox/Additions/linux/drm/vbox_fb.c
+-+++ b/src/VBox/Additions/linux/drm/vbox_fb.c
+-@@ -295,7 +295,7 @@ static int vboxfb_create(struct drm_fb_helper *helper,
+- 	if (ret)
+- 		return ret;
+- 
+--	ret = vbox_bo_pin(bo, TTM_PL_FLAG_VRAM, NULL);
+-+	ret = vbox_bo_pin(bo, VBOX_MEM_TYPE_VRAM, NULL);
+- 	if (ret) {
+- 		vbox_bo_unreserve(bo);
+- 		return ret;
+-diff --git a/src/VBox/Additions/linux/drm/vbox_mode.c b/src/VBox/Additions/linux/drm/vbox_mode.c
+-index ce7d135cb6..5557db5ef8 100644
+---- a/src/VBox/Additions/linux/drm/vbox_mode.c
+-+++ b/src/VBox/Additions/linux/drm/vbox_mode.c
+-@@ -227,7 +227,7 @@ static int vbox_crtc_set_base(struct drm_crtc *crtc,
+- 	if (ret)
+- 		return ret;
+- 
+--	ret = vbox_bo_pin(bo, TTM_PL_FLAG_VRAM, &gpu_addr);
+-+	ret = vbox_bo_pin(bo, VBOX_MEM_TYPE_VRAM, &gpu_addr);
+- 	vbox_bo_unreserve(bo);
+- 	if (ret)
+- 		return ret;
+-diff --git a/src/VBox/Additions/linux/drm/vbox_ttm.c b/src/VBox/Additions/linux/drm/vbox_ttm.c
+-index bf87aabc05..5eac926a42 100644
+---- a/src/VBox/Additions/linux/drm/vbox_ttm.c
+-+++ b/src/VBox/Additions/linux/drm/vbox_ttm.c
+-@@ -41,6 +41,7 @@
+- #define PLACEMENT_FLAGS(placement) ((placement).flags)
+- #endif
+- 
+-+
+- static inline struct vbox_private *vbox_bdev(struct ttm_bo_device *bd)
+- {
+- 	return container_of(bd, struct vbox_private, ttm.bdev);
+-@@ -125,6 +126,7 @@ static bool vbox_ttm_bo_is_vbox_bo(struct ttm_buffer_object *bo)
+- 	return false;
+- }
+- 
+-+#if RTLNX_VER_MAX(5,10,0)
+- static int
+- vbox_bo_init_mem_type(struct ttm_bo_device *bdev, u32 type,
+- 		      struct ttm_mem_type_manager *man)
+-@@ -148,6 +150,7 @@ vbox_bo_init_mem_type(struct ttm_bo_device *bdev, u32 type,
+- 
+- 	return 0;
+- }
+-+#endif
+- 
+- static void
+- vbox_bo_evict_flags(struct ttm_buffer_object *bo, struct ttm_placement *pl)
+-@@ -157,7 +160,7 @@ vbox_bo_evict_flags(struct ttm_buffer_object *bo, struct ttm_placement *pl)
+- 	if (!vbox_ttm_bo_is_vbox_bo(bo))
+- 		return;
+- 
+--	vbox_ttm_placement(vboxbo, TTM_PL_FLAG_SYSTEM);
+-+	vbox_ttm_placement(vboxbo, VBOX_MEM_TYPE_SYSTEM);
+- 	*pl = vboxbo->placement;
+- }
+- 
+-@@ -167,11 +170,12 @@ static int vbox_bo_verify_access(struct ttm_buffer_object *bo,
+- 	return 0;
+- }
+- 
+-+#if RTLNX_VER_MAX(5,10,0)
+- static int vbox_ttm_io_mem_reserve(struct ttm_bo_device *bdev,
+- 				   struct ttm_mem_reg *mem)
+- {
+--	struct ttm_mem_type_manager *man = &bdev->man[mem->mem_type];
+- 	struct vbox_private *vbox = vbox_bdev(bdev);
+-+	struct ttm_mem_type_manager *man = &bdev->man[mem->mem_type];
+- 
+- 	mem->bus.addr = NULL;
+- 	mem->bus.offset = 0;
+-@@ -194,12 +198,53 @@ static int vbox_ttm_io_mem_reserve(struct ttm_bo_device *bdev,
+- 	}
+- 	return 0;
+- }
+-+#else
+-+static int vbox_ttm_io_mem_reserve(struct ttm_bo_device *bdev,
+-+				   struct ttm_resource *mem)
+-+{
+-+	struct vbox_private *vbox = vbox_bdev(bdev);
+-+	mem->bus.addr = NULL;
+-+	mem->bus.offset = 0;
+-+	mem->size = mem->num_pages << PAGE_SHIFT;
+-+	mem->start = 0;
+-+	mem->bus.is_iomem = false;
+-+	switch (mem->mem_type) {
+-+	case TTM_PL_SYSTEM:
+-+		/* system memory */
+-+		return 0;
+-+	case TTM_PL_VRAM:
+-+		mem->bus.offset = mem->start << PAGE_SHIFT;
+-+		mem->start = pci_resource_start(vbox->dev->pdev, 0);
+-+		mem->bus.is_iomem = true;
+-+		break;
+-+	default:
+-+		return -EINVAL;
+-+	}
+-+	return 0;
+-+}
+-+#endif
+- 
+-+
+-+
+-+#if RTLNX_VER_MIN(5,10,0)
+-+static void vbox_ttm_io_mem_free(struct ttm_bo_device *bdev,
+-+				 struct ttm_resource *mem)
+-+{
+-+}
+-+#else
+- static void vbox_ttm_io_mem_free(struct ttm_bo_device *bdev,
+- 				 struct ttm_mem_reg *mem)
+- {
+- }
+-+#endif
+- 
+-+#if RTLNX_VER_MIN(5,10,0)
+-+static void vbox_ttm_tt_destroy(struct ttm_bo_device *bdev, struct ttm_tt *tt)
+-+{
+-+	ttm_tt_fini(tt);
+-+	kfree(tt);
+-+}
+-+#else
+- static void vbox_ttm_backend_destroy(struct ttm_tt *tt)
+- {
+- 	ttm_tt_fini(tt);
+-@@ -209,6 +254,7 @@ static void vbox_ttm_backend_destroy(struct ttm_tt *tt)
+- static struct ttm_backend_func vbox_tt_backend_func = {
+- 	.destroy = &vbox_ttm_backend_destroy,
+- };
+-+#endif
+- 
+- #if RTLNX_VER_MAX(4,17,0) && !RTLNX_RHEL_MAJ_PREREQ(7,6) && !RTLNX_SUSE_MAJ_PREREQ(15,1) && !RTLNX_SUSE_MAJ_PREREQ(12,5)
+- static struct ttm_tt *vbox_ttm_tt_create(struct ttm_bo_device *bdev,
+-@@ -226,7 +272,9 @@ static struct ttm_tt *vbox_ttm_tt_create(struct ttm_buffer_object *bo,
+- 	if (!tt)
+- 		return NULL;
+- 
+-+#if RTLNX_VER_MAX(5,10,0)
+- 	tt->func = &vbox_tt_backend_func;
+-+#endif
+- #if RTLNX_VER_MAX(4,17,0) && !RTLNX_RHEL_MAJ_PREREQ(7,6) && !RTLNX_SUSE_MAJ_PREREQ(15,1) && !RTLNX_SUSE_MAJ_PREREQ(12,5)
+- 	if (ttm_tt_init(tt, bdev, size, page_flags, dummy_read_page)) {
+- #else
+-@@ -261,11 +309,16 @@ static void vbox_ttm_tt_unpopulate(struct ttm_tt *ttm)
+- 
+- static struct ttm_bo_driver vbox_bo_driver = {
+- 	.ttm_tt_create = vbox_ttm_tt_create,
+-+#if RTLNX_VER_MIN(5,10,0)
+-+	.ttm_tt_destroy = vbox_ttm_tt_destroy,
+-+#endif
+- #if RTLNX_VER_MAX(4,17,0)
+- 	.ttm_tt_populate = vbox_ttm_tt_populate,
+- 	.ttm_tt_unpopulate = vbox_ttm_tt_unpopulate,
+- #endif
+-+#if RTLNX_VER_MAX(5,10,0)
+- 	.init_mem_type = vbox_bo_init_mem_type,
+-+#endif
+- #if RTLNX_VER_MIN(4,10,0) || RTLNX_RHEL_MAJ_PREREQ(7,4)
+- 	.eviction_valuable = ttm_bo_eviction_valuable,
+- #endif
+-@@ -318,8 +371,13 @@ int vbox_mm_init(struct vbox_private *vbox)
+- #endif
+- 	}
+- 
+-+#if RTLNX_VER_MIN(5,10,0)
+-+	ret = ttm_range_man_init(bdev, TTM_PL_VRAM, false,
+-+			     vbox->available_vram_size >> PAGE_SHIFT);
+-+#else
+- 	ret = ttm_bo_init_mm(bdev, TTM_PL_VRAM,
+- 			     vbox->available_vram_size >> PAGE_SHIFT);
+-+#endif
+- 	if (ret) {
+- 		DRM_ERROR("Failed ttm VRAM init: %d\n", ret);
+- 		goto err_device_release;
+-@@ -359,7 +417,7 @@ void vbox_mm_fini(struct vbox_private *vbox)
+- #endif
+- }
+- 
+--void vbox_ttm_placement(struct vbox_bo *bo, int domain)
+-+void vbox_ttm_placement(struct vbox_bo *bo, u32 mem_type)
+- {
+- 	u32 c = 0;
+- #if RTLNX_VER_MAX(3,18,0) && !RTLNX_RHEL_MAJ_PREREQ(7,2)
+-@@ -372,15 +430,36 @@ void vbox_ttm_placement(struct vbox_bo *bo, int domain)
+- 	bo->placement.placement = bo->placements;
+- 	bo->placement.busy_placement = bo->placements;
+- 
+--	if (domain & TTM_PL_FLAG_VRAM)
+-+	if (mem_type & VBOX_MEM_TYPE_VRAM) {
+-+#if RTLNX_VER_MIN(5,10,0)
+-+		bo->placements[c].mem_type = TTM_PL_VRAM;
+-+		PLACEMENT_FLAGS(bo->placements[c++]) =
+-+		    TTM_PL_FLAG_WC | TTM_PL_FLAG_UNCACHED;
+-+#else
+- 		PLACEMENT_FLAGS(bo->placements[c++]) =
+- 		    TTM_PL_FLAG_WC | TTM_PL_FLAG_UNCACHED | TTM_PL_FLAG_VRAM;
+--	if (domain & TTM_PL_FLAG_SYSTEM)
+-+#endif
+-+	}
+-+	if (mem_type & VBOX_MEM_TYPE_SYSTEM) {
+-+#if RTLNX_VER_MIN(5,10,0)
+-+		bo->placements[c].mem_type = TTM_PL_SYSTEM;
+-+		PLACEMENT_FLAGS(bo->placements[c++]) =
+-+		    TTM_PL_MASK_CACHING;
+-+#else
+- 		PLACEMENT_FLAGS(bo->placements[c++]) =
+- 		    TTM_PL_MASK_CACHING | TTM_PL_FLAG_SYSTEM;
+--	if (!c)
+-+#endif
+-+	}
+-+	if (!c) {
+-+#if RTLNX_VER_MIN(5,10,0)
+-+		bo->placements[c].mem_type = TTM_PL_SYSTEM;
+-+		PLACEMENT_FLAGS(bo->placements[c++]) =
+-+		    TTM_PL_MASK_CACHING;
+-+#else
+- 		PLACEMENT_FLAGS(bo->placements[c++]) =
+- 		    TTM_PL_MASK_CACHING | TTM_PL_FLAG_SYSTEM;
+-+#endif
+-+	}
+- 
+- 	bo->placement.num_placement = c;
+- 	bo->placement.num_busy_placement = c;
+-@@ -414,7 +493,7 @@ int vbox_bo_create(struct drm_device *dev, int size, int align,
+- 	vboxbo->bo.bdev->dev_mapping = dev->dev_mapping;
+- #endif
+- 
+--	vbox_ttm_placement(vboxbo, TTM_PL_FLAG_VRAM | TTM_PL_FLAG_SYSTEM);
+-+	vbox_ttm_placement(vboxbo, VBOX_MEM_TYPE_VRAM | VBOX_MEM_TYPE_SYSTEM);
+- 
+- 	acc_size = ttm_bo_dma_acc_size(&vbox->ttm.bdev, size,
+- 				       sizeof(struct vbox_bo));
+-@@ -452,7 +531,7 @@ static inline u64 vbox_bo_gpu_offset(struct vbox_bo *bo)
+- #endif
+- }
+- 
+--int vbox_bo_pin(struct vbox_bo *bo, u32 pl_flag, u64 *gpu_addr)
+-+int vbox_bo_pin(struct vbox_bo *bo, u32 mem_type, u64 *gpu_addr)
+- {
+- #if RTLNX_VER_MIN(4,16,0) || RTLNX_RHEL_MAJ_PREREQ(7,6) || RTLNX_SUSE_MAJ_PREREQ(15,1) || RTLNX_SUSE_MAJ_PREREQ(12,5)
+- 	struct ttm_operation_ctx ctx = { false, false };
+-@@ -467,7 +546,7 @@ int vbox_bo_pin(struct vbox_bo *bo, u32 pl_flag, u64 *gpu_addr)
+- 		return 0;
+- 	}
+- 
+--	vbox_ttm_placement(bo, pl_flag);
+-+	vbox_ttm_placement(bo, mem_type);
+- 
+- 	for (i = 0; i < bo->placement.num_placement; i++)
+- 		PLACEMENT_FLAGS(bo->placements[i]) |= TTM_PL_FLAG_NO_EVICT;
+-@@ -540,7 +619,7 @@ int vbox_bo_push_sysram(struct vbox_bo *bo)
+- 	if (bo->kmap.virtual)
+- 		ttm_bo_kunmap(&bo->kmap);
+- 
+--	vbox_ttm_placement(bo, TTM_PL_FLAG_SYSTEM);
+-+	vbox_ttm_placement(bo, VBOX_MEM_TYPE_SYSTEM);
+- 
+- 	for (i = 0; i < bo->placement.num_placement; i++)
+- 		PLACEMENT_FLAGS(bo->placements[i]) |= TTM_PL_FLAG_NO_EVICT;
+--- 
+-2.19.1
+-
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Runtime-memobj-r0drv-linux.c-Changes-to-support-the-.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Runtime-memobj-r0drv-linux.c-Changes-to-support-the-.patch
+deleted file mode 100644
+index db27cb883..000000000
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-Runtime-memobj-r0drv-linux.c-Changes-to-support-the-.patch
++++ /dev/null
+@@ -1,119 +0,0 @@
+-From 2a6e3cf63f58e289802a11faad5fb495e2d04e97 Mon Sep 17 00:00:00 2001
+-From: vboxsync <vboxsync@cfe28804-0f27-0410-a406-dd0f0b0b656f>
+-Date: Wed, 9 Dec 2020 18:59:04 +0000
+-Subject: [PATCH] Runtime/memobj-r0drv-linux.c: Changes to support the upcoming
+- 5.10 kernel, bugref:9879
+-
+-Upstream-Status: Backport
+-
+-git-svn-id: http://www.virtualbox.org/svn/vbox@87074 cfe28804-0f27-0410-a406-dd0f0b0b656f
+-
+-Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
+----
+- .../Runtime/r0drv/linux/memobj-r0drv-linux.c  | 68 ++++++++++++++++++-
+- 1 file changed, 67 insertions(+), 1 deletion(-)
+-
+---- a/src/VBox/Runtime/r0drv/linux/memobj-r0drv-linux.c
+-+++ b/src/VBox/Runtime/r0drv/linux/memobj-r0drv-linux.c
+-@@ -56,9 +56,19 @@
+-  * Whether we use alloc_vm_area (3.2+) for executable memory.
+-  * This is a must for 5.8+, but we enable it all the way back to 3.2.x for
+-  * better W^R compliance (fExecutable flag). */
+--#if RTLNX_VER_MIN(3,2,0) || defined(DOXYGEN_RUNNING)
+-+#if RTLNX_VER_RANGE(3,2,0, 5,10,0) || defined(DOXYGEN_RUNNING)
+- # define IPRT_USE_ALLOC_VM_AREA_FOR_EXEC
+- #endif
+-+/** @def IPRT_USE_APPLY_TO_PAGE_RANGE_FOR_EXEC
+-+ * alloc_vm_area was removed with 5.10 so we have to resort to a different way
+-+ * to allocate executable memory.
+-+ * It would be possible to remove IPRT_USE_ALLOC_VM_AREA_FOR_EXEC and use
+-+ * this path execlusively for 3.2+ but no time to test it really works on every
+-+ * supported kernel, so better play safe for now.
+-+ */
+-+#if RTLNX_VER_MIN(5,10,0) || defined(DOXYGEN_RUNNING)
+-+# define IPRT_USE_APPLY_TO_PAGE_RANGE_FOR_EXEC
+-+#endif
+- 
+- /*
+-  * 2.6.29+ kernels don't work with remap_pfn_range() anymore because
+-@@ -502,6 +512,46 @@ static void rtR0MemObjLinuxFreePages(PRT
+- }
+- 
+- 
+-+#ifdef IPRT_USE_APPLY_TO_PAGE_RANGE_FOR_EXEC
+-+/**
+-+ * User data passed to the apply_to_page_range() callback.
+-+ */
+-+typedef struct LNXAPPLYPGRANGE
+-+{
+-+    /** Pointer to the memory object. */
+-+    PRTR0MEMOBJLNX pMemLnx;
+-+    /** The page protection flags to apply. */
+-+    pgprot_t       fPg;
+-+} LNXAPPLYPGRANGE;
+-+/** Pointer to the user data. */
+-+typedef LNXAPPLYPGRANGE *PLNXAPPLYPGRANGE;
+-+/** Pointer to the const user data. */
+-+typedef const LNXAPPLYPGRANGE *PCLNXAPPLYPGRANGE;
+-+
+-+/**
+-+ * Callback called in apply_to_page_range().
+-+ *
+-+ * @returns Linux status code.
+-+ * @param   pPte                Pointer to the page table entry for the given address.
+-+ * @param   uAddr               The address to apply the new protection to.
+-+ * @param   pvUser              The opaque user data.
+-+ */
+-+#ifdef __i386__
+-+static int rtR0MemObjLinuxApplyPageRange(pte_t *pPte, unsigned long uAddr, void *pvUser)
+-+#else
+-+static DECLCALLBACK(int) rtR0MemObjLinuxApplyPageRange(pte_t *pPte, unsigned long uAddr, void *pvUser)
+-+#endif
+-+{
+-+    PCLNXAPPLYPGRANGE pArgs = (PCLNXAPPLYPGRANGE)pvUser;
+-+    PRTR0MEMOBJLNX pMemLnx = pArgs->pMemLnx;
+-+    size_t idxPg = (uAddr - (unsigned long)pMemLnx->Core.pv) >> PAGE_SHIFT;
+-+
+-+    set_pte(pPte, mk_pte(pMemLnx->apPages[idxPg], pArgs->fPg));
+-+    return 0;
+-+}
+-+#endif
+-+
+-+
+- /**
+-  * Maps the allocation into ring-0.
+-  *
+-@@ -584,6 +634,11 @@ static int rtR0MemObjLinuxVMap(PRTR0MEMO
+-         else
+- # endif
+-         {
+-+#  if defined(IPRT_USE_APPLY_TO_PAGE_RANGE_FOR_EXEC)
+-+            if (fExecutable)
+-+                pgprot_val(fPg) |= _PAGE_NX; /* Uses RTR0MemObjProtect to clear NX when memory ready, W^X fashion. */
+-+#  endif
+-+
+- # ifdef VM_MAP
+-             pMemLnx->Core.pv = vmap(&pMemLnx->apPages[0], pMemLnx->cPages, VM_MAP, fPg);
+- # else
+-@@ -1851,6 +1906,21 @@ DECLHIDDEN(int) rtR0MemObjNativeProtect(
+-         preempt_enable();
+-         return VINF_SUCCESS;
+-     }
+-+# elif defined(IPRT_USE_APPLY_TO_PAGE_RANGE_FOR_EXEC)
+-+    PRTR0MEMOBJLNX pMemLnx = (PRTR0MEMOBJLNX)pMem;
+-+    if (   pMemLnx->fExecutable
+-+        && pMemLnx->fMappedToRing0)
+-+    {
+-+        LNXAPPLYPGRANGE Args;
+-+        Args.pMemLnx = pMemLnx;
+-+        Args.fPg = rtR0MemObjLinuxConvertProt(fProt, true /*fKernel*/);
+-+        int rcLnx = apply_to_page_range(current->active_mm, (unsigned long)pMemLnx->Core.pv + offSub, cbSub,
+-+                                        rtR0MemObjLinuxApplyPageRange, (void *)&Args);
+-+        if (rcLnx)
+-+            return VERR_NOT_SUPPORTED;
+-+
+-+        return VINF_SUCCESS;
+-+    }
+- # endif
+- 
+-     NOREF(pMem);
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-linser-vboxsf-Adjustment-for-linux-5.10-TASK_SIZE_MA.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-linser-vboxsf-Adjustment-for-linux-5.10-TASK_SIZE_MA.patch
+deleted file mode 100644
+index 3cfe2e917..000000000
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-linser-vboxsf-Adjustment-for-linux-5.10-TASK_SIZE_MA.patch
++++ /dev/null
+@@ -1,46 +0,0 @@
+-From a276f8bc5e4515f7ea51e2c56e0e634a723ca104 Mon Sep 17 00:00:00 2001
+-From: vboxsync <vboxsync@cfe28804-0f27-0410-a406-dd0f0b0b656f>
+-Date: Tue, 8 Dec 2020 13:52:53 +0000
+-Subject: [PATCH] linser/vboxsf: Adjustment for linux 5.10 - TASK_SIZE_MAX
+- replaces USER_DS.seg. bugref:9879
+-
+-Upstream-Status: Backport
+-
+-git-svn-id: http://www.virtualbox.org/svn/vbox@87053 cfe28804-0f27-0410-a406-dd0f0b0b656f
+-
+-Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
+----
+- src/VBox/Additions/linux/sharedfolders/regops.c | 9 ++++++++-
+- 1 file changed, 8 insertions(+), 1 deletion(-)
+-
+-diff --git a/src/VBox/Additions/linux/sharedfolders/regops.c b/src/VBox/Additions/linux/sharedfolders/regops.c
+-index e1fad3d820..401fd69930 100644
+---- a/src/VBox/Additions/linux/sharedfolders/regops.c
+-+++ b/src/VBox/Additions/linux/sharedfolders/regops.c
+-@@ -147,7 +147,11 @@ static int vbsf_iov_iter_detect_type(struct iovec const *paIov, size_t cSegs)
+-     while (cSegs-- > 0) {
+-         if (paIov->iov_len > 0) {
+-             if (access_ok(VERIFY_READ, paIov->iov_base, paIov->iov_len))
+-+#if RTLNX_VER_MIN(5,10,0)
+-+                return (uintptr_t)paIov->iov_base >= TASK_SIZE_MAX ? ITER_KVEC : 0;
+-+#else
+-                 return (uintptr_t)paIov->iov_base >= USER_DS.seg ? ITER_KVEC : 0;
+-+#endif
+-             AssertMsgFailed(("%p LB %#zx\n", paIov->iov_base, paIov->iov_len));
+-             break;
+-         }
+-@@ -1401,7 +1405,10 @@ static int vbsf_lock_user_pages_failed_check_kernel(uintptr_t uPtrFrom, size_t c
+-     /*
+-      * Check that this is valid user memory that is actually in the kernel range.
+-      */
+--#if RTLNX_VER_MIN(5,0,0) || RTLNX_RHEL_MIN(8,1)
+-+#if RTLNX_VER_MIN(5,10,0)
+-+    if (   access_ok((void *)uPtrFrom, cPages << PAGE_SHIFT)
+-+        && uPtrFrom >= TASK_SIZE_MAX)
+-+#elif RTLNX_VER_MIN(5,0,0) || RTLNX_RHEL_MIN(8,1)
+-     if (   access_ok((void *)uPtrFrom, cPages << PAGE_SHIFT)
+-         && uPtrFrom >= USER_DS.seg)
+- #else
+--- 
+-2.19.1
+-
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.16.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.18.bb
+similarity index 88%
+rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.16.bb
+rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.18.bb
+index ff639c09f..ea6a082f6 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.16.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.18.bb
+@@ -13,12 +13,9 @@ VBOX_NAME = "VirtualBox-${PV}"
+ 
+ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
+     file://Makefile.utils \
+-    file://0001-Additions-linux-drm-Adjustment-for-Linux-5.10.patch \
+-    file://0001-Runtime-memobj-r0drv-linux.c-Changes-to-support-the-.patch \
+-    file://0001-linser-vboxsf-Adjustment-for-linux-5.10-TASK_SIZE_MA.patch \
+ "
+-SRC_URI[md5sum] = "a12a647f6c114f2cb1571089b36841fe"
+-SRC_URI[sha256sum] = "49c1990da16d8a3d5bda8cdb961ec8195a901e67e4c79aea44c1521a5fc2f9f1"
++SRC_URI[md5sum] = "c61001386eb3822ab8f06d688a82e84b"
++SRC_URI[sha256sum] = "108d42b9b391b7a332a33df1662cf7b0e9d9a80f3079d16288d8b9487f427d40"
+ 
+ S ?= "${WORKDIR}/vbox_module"
+ S_task-patch = "${WORKDIR}/${VBOX_NAME}"
+-- 
+2.25.1
+
