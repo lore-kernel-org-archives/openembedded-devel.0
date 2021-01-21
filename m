@@ -1,121 +1,77 @@
-Received: from esa11.hc324-48.eu.iphmx.com (esa11.hc324-48.eu.iphmx.com [207.54.69.30])
- by mx.groups.io with SMTP id smtpd.web12.6046.1611230240352371275
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.web08.6559.1611234140211858382
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Jan 2021 03:57:21 -0800
+ Thu, 21 Jan 2021 05:02:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bmw.de header.s=mailing1 header.b=Wbmx8Qaa;
- spf=pass (domain: bmw.de, ip: 207.54.69.30, mailfrom: prvs=64801436a=mikko.rapeli@bmw.de)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=ooYiy6rv;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.46, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f46.google.com with SMTP id m2so1381989wmm.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Jan 2021 05:02:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=bmw.de; i=@bmw.de; q=dns/txt; s=mailing1;
-  t=1611230240; x=1642766240;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-id:content-transfer-encoding:
-   mime-version;
-  bh=AZYtC3XBm97HZKQZ8xs6x+1iM4hRxexXv3uVPFnZHeA=;
-  b=Wbmx8QaaTd0xnzUbV7mig03m35l0fIQAupxLMhKgtcYoHP6uE9Mpixyx
-   Gr+QFH7Ls+6aHDW7ekINAa4/FJ69DslWnOfS86WRcEGR9BCAt2opPYcvT
-   3Cu+eBHv4ngVr2B3/DxIoP3QPBp9NEyWJ+b+rTaDXxbOW3GlGq4jlMZcO
-   Y=;
-Received: from esagw5.bmwgroup.com (HELO esagw5.muc) ([160.46.252.46]) by
- esa11.hc324-48.eu.iphmx.com with ESMTP/TLS; 21 Jan 2021 12:57:18 +0100
-Received: from esabb5.muc ([160.50.100.47])  by esagw5.muc with ESMTP/TLS;
- 21 Jan 2021 12:57:17 +0100
-Received: from smucm33k.bmwgroup.net (HELO smucm33k.europe.bmw.corp) ([160.46.167.67])
- by esabb5.muc with ESMTP/TLS; 21 Jan 2021 12:57:17 +0100
-Received: from smucm33l.europe.bmw.corp (160.46.167.68) by smucm33k.europe.bmw.corp
- (160.46.167.67) with Microsoft SMTP Server (TLS;
- Thu, 21 Jan 2021 12:57:16 +0100
-Received: from smucm33l.europe.bmw.corp ([160.46.167.68]) by
- smucm33l.europe.bmw.corp ([160.46.167.68]) with mapi id 15.00.1497.010; Thu,
- 21 Jan 2021 12:57:17 +0100
-From: "Mikko Rapeli" <mikko.rapeli@bmw.de>
-To: <Harpritkaur.Bhandari@kpit.com>
-CC: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>,
-	<nisha.parrakat@kpit.com>, <Aditya.Tayade@kpit.com>
-Subject: Re: [oe] [meta-oe][dunfell][PATCH] rapidjson: Upgrade SRCREV to latest
-Thread-Topic: [oe] [meta-oe][dunfell][PATCH] rapidjson: Upgrade SRCREV to
- latest
-Thread-Index: AQHW7+i5GATn7COC8Eu5jZ8terNEhqox6IoA
-Date: Thu, 21 Jan 2021 11:57:17 +0000
-Message-ID: <YAlsHMz2Unf8YfVb@korppu>
-References: <1611122392-13465-1-git-send-email-Harpritkaur.Bhandari@kpit.com>
-In-Reply-To: <1611122392-13465-1-git-send-email-Harpritkaur.Bhandari@kpit.com>
-Accept-Language: en-US, de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-messagesentrepresentingtype: 1
+        d=konsulko.com; s=google;
+        h=subject:to:references:from:message-id:date:user-agent:mime-version
+         :in-reply-to:content-transfer-encoding:content-language;
+        bh=x375UBIEr5fSE90aoUdO6NULqNFFjG9r0Ake+yY7q+g=;
+        b=ooYiy6rvD9Ipbwo4txjHgapYzYNAeWctLwKxievuLSl9lmRs9yA+293lFjJ08lfWaX
+         wX8RwKQbWVes90+tdHCcP/6ge6usEX3MEl5954ztSMdY8WCD4+yPeRMM6kLI0Ufvxyn0
+         vMQaGGtIOBWGrljIWHCCD9lV8iNUQptIftTss=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=x375UBIEr5fSE90aoUdO6NULqNFFjG9r0Ake+yY7q+g=;
+        b=ZzQYpbBQTb+pFwxWVjrEfD3hav7Fw3DJmX9U6CNjfSsZQtm1PK08U02MslMDNfG/CA
+         MThedomxqxX2Uw6kYiakLgnSkQZNdRJmoIeTQq+vNoD9X+JZfxzlE8EPoQjI8GOBEipq
+         stRyruySC0mpTor/4T242Pneu2HrfeQsJ3UcBXXEsYH7XK7csmSy+iTBLyMcnfuKyJ4O
+         LbL9CwBdO1Q4nn7SczojQTjYJeNyvdpAyQvEiUgtrBndLhHCzxRTjKnrhe48NbwrAIcI
+         8WazxDrToY4RSBodR5et8sP0yWSLhAfjCxFnWaYE585CzFCw2TP5d1e9yfq6IEU4zJhU
+         ar/w==
+X-Gm-Message-State: AOAM532aUgmjMfBd1qKyoLqHvCjPbVrkLBIZT9ztwiWFFn73dYsMxVXn
+	BfO6UxDAph5AYQeW/xldiqZC3w==
+X-Google-Smtp-Source: ABdhPJztTfFdbqbk1vJQAvyjOf5rTvbjbzJGTAMEmGd78LqCDSMbx5wKDiYNZQURnmEcd7Bi5E1oyw==
+X-Received: by 2002:a1c:7c03:: with SMTP id x3mr8835709wmc.103.1611234138574;
+        Thu, 21 Jan 2021 05:02:18 -0800 (PST)
+Return-Path: <leon.anavi@konsulko.com>
+Received: from [192.168.4.166] ([78.130.197.211])
+        by smtp.gmail.com with ESMTPSA id h13sm8236175wrm.28.2021.01.21.05.02.17
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 21 Jan 2021 05:02:17 -0800 (PST)
+Subject: Re: [oe] OpenEmbedded Virtual Stand at FOSDEM 2021
+To: Paul Barker <pbarker@konsulko.com>,
+ openembedded-core <openembedded-core@lists.openembedded.org>,
+ openembedded-devel@lists.openembedded.org,
+ Yocto-mailing-list <yocto@lists.yoctoproject.org>
+References: <CAM9ZRVuEaZLvg4trA-LhNyz8=yMs=cYhRzSR-emzmEGo8BdMhw@mail.gmail.com>
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+Message-ID: <e12afb9d-9074-05b1-d7f1-60bd36645ae8@konsulko.com>
+Date: Thu, 21 Jan 2021 15:02:16 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
+In-Reply-To: <CAM9ZRVuEaZLvg4trA-LhNyz8=yMs=cYhRzSR-emzmEGo8BdMhw@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <4E1EB11BAAB49941A74BFB3DBA8ABEF0@bmwmail.corp>
-Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Hi Paul,
 
-On Wed, Jan 20, 2021 at 11:29:52AM +0530, Harpritkaur Bhandari wrote:
-> Upgrade SRCREV to latest as it fixes the below issue:
-> Running UndefinedBehaviorSanitizer on projects that use
-> rapidjson triggers 'applying non-zero offset <NN> to null
-> pointer' findings in 'internal/stack.h' which are hard
-> to suppress by library users.
-> Removed "0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch"
-> as the changes are already incorporated in the latest
-> codebase.
-> As per abi-compliance-checker report the source compatibility
-> and binary compatibility between previous SRCREV
-> 6a905f9311f82d306da77bd963ec5aa5da07da9c and current
-> SRCREV 0ccdbf364c577803e2a751f5aededce935314313
-> is 100% and this patch is already tested on 64bit
-> ARM (aarch64) in a product with on target CI tests.
->=20
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> (cherry picked from commit 04d9ea0ba7ece968244bf049893dd5636675b76f)
-> Signed-off-by: Harpritkaur Bhandari <Harpritkaur.Bhandari@kpit.com>
-> ---
->  meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb b/meta-=
-oe/recipes-devtools/rapidjson/rapidjson_git.bb
-> index e3ed9c6..5b5c8b2 100644
-> --- a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
-> +++ b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
-> @@ -4,10 +4,9 @@ SECTION =3D "libs"
->  LICENSE =3D "MIT"
->  LIC_FILES_CHKSUM =3D "file://license.txt;md5=3Dba04aa8f65de1396a7e59d1d=
-746c2125"
->=20
-> -SRC_URI =3D "git://github.com/miloyip/rapidjson.git;nobranch=3D1 \
-> -           file://0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-p=
-ath.patch"
+On 13.01.21 г. 23:33 ч., Paul Barker wrote:
+> * Any participants in the project who want to help host the Matrix
+> chat room between 09:00 and 18:00 each day of the event. This will
+> likely involve introducing the project to folks dropping in the chat
+> who aren't familiar with OpenEmbedded, answering basic questions and
+> chatting about example uses of the project. You don't need to be a
+> long-standing expert in the project to help out here! If you can do a
+> couple of hours or a half day please let us know.
+I will be happy to help with this task as a volunteer for a couple of 
+hours during FOSDEM 2021.
 
-Please also remove the patch file. Also from master branch if it's still t=
-here
-but no longer applied.
+Best regards,
+Leon
 
-Cheers,
+-- 
+Leon Anavi
+Software Engineer
+konsulko.com
 
--Mikko
-
-> +SRC_URI =3D "git://github.com/miloyip/rapidjson.git;nobranch=3D1"
->=20
-> -SRCREV =3D "6a905f9311f82d306da77bd963ec5aa5da07da9c"
-> +SRCREV =3D "0ccdbf364c577803e2a751f5aededce935314313"
->=20
->  PV =3D "1.1.0+git${SRCPV}"
->=20
-> --
-> 2.7.4
->=20
-> This message contains information that may be privileged or confidential=
- and is the property of the KPIT Technologies Ltd. It is intended only for =
-the person to whom it is addressed. If you are not the intended recipient, =
-you are not authorized to read, print, retain copy, disseminate, distribute=
-, or use this message or any part thereof. If you receive this message in e=
-rror, please notify the sender immediately and delete all copies of this me=
-ssage. KPIT Technologies Ltd. does not accept any liability for virus infec=
-ted mails.
-
->=20
->=20
->=20
