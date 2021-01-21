@@ -1,50 +1,50 @@
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.web09.976.1611269709503400534
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.web10.1049.1611269710568046434
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Jan 2021 14:55:09 -0800
+ Thu, 21 Jan 2021 14:55:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gW/wuAFl;
- spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f50.google.com with SMTP id c12so3316536wrc.7
-        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Jan 2021 14:55:09 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=SGz5561q;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id c12so3316571wrc.7
+        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Jan 2021 14:55:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=D0Ht4NJDb7rqp0MDii4rjjLBOPVb15Do2Qg/xZsRnUo=;
-        b=gW/wuAFlLP/U3qxQYtetLkjv0jJq7cqy3toYxfpFovBEePrnz8Vbkj2wBDX1xIr9iV
-         W9HJgLxrNs7/bBhgowWl3nx/dFhkCwPemssMr3XjxUKfQyhuCUDYrol+d7M6TcMOgCoM
-         Vbu62s/kTALeR9S32/BwLN1j0RyIx2vwZ0bxa+oDVuRMgSyzRsyYq0QY+zostpqn9Moc
-         Z4JM1Q0HU4tBMnj+A3OTeJSXewJe+PUvs5ucmPmWjsjvdakOmhScaqNqztqrfnYjFAsD
-         HSzcheNojQLBSUN/sZjQBWz1pWlkJ3gVshQnrB/0Oh/47FnK0EWjBwloz5s7RFp1NE/e
-         2ziw==
+        bh=/J88r+iFHmQ4cP+bZARM8ia++nLwETjd8oVTN7vE2fw=;
+        b=SGz5561q4+GhVsirpWy9/9OxYTqeCFN5FSndjjpnTTjS547QvN6tlJvxixcjOtbYcZ
+         Xl1SoItS6761fEcayn58mrVL75kYI963JBF94lcJUyRnoKtf3g71Vg8wqlZ9F2wG/yom
+         mM3Djv8RSD7AHrT6TsJfBBo98zZCMqhL64GvtThDV87BABnFqFqiRt3JmHG71EvM3Ovm
+         1kdIQqtexn6a7eD9ngkTRHEyMpk5tQ/x/x1CAfhWG0g2TmtzVUp26oI+UaSjsKjObp97
+         D79wnfFieHuI+E2ozmIhAlpEO/ja4CdddaMRo355jxxnrIskN2iBzp4rA8yB/QpB83A1
+         fxTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=D0Ht4NJDb7rqp0MDii4rjjLBOPVb15Do2Qg/xZsRnUo=;
-        b=iUXklkw6oIm9Z1UxgAx4TmH70PrtMBzdnpSTYWrZ0AIDYX+9xrtoqnEb8n+KhGCv7c
-         UXyBCAhwReI6pb/WkLvjVj0LU2MP+RtKhPefXj97hauJmZ21R+JUNyf8iLAZYEQ2Kjuq
-         TnrsjaEIlsexYxpA9xkvlq7mjubfwS6YHP5ZOhWrI8LJVEHCvia2dlO21W4lk7OYK1pk
-         mnog7qqoDy2FN3uCf+xLGHzwdpkUh71Th/eh5uuSwcbgvDaHXmFemKnkN0MwEm3/urXd
-         SNpn4tBWCzjKFSNqwINjUkQzrRltaIlwnycuUDGr87S5zsw/VEO32V1nu7f8xcK7gorA
-         GzAQ==
-X-Gm-Message-State: AOAM5325paXqoIt9B90/zX/eumN4boM2kihT74HundxLxn+mhrYf3e2Y
-	LmkS6cRgvLpETahGNQyxOydIMV7n8M0/2A==
-X-Google-Smtp-Source: ABdhPJyPEdrsjXk5wcAxHaRcfzjbxZ+xsCrvgDuHiX0co/9MXBkSeLNYBieSTG5OMC4J7H0m34q9Jg==
-X-Received: by 2002:adf:9427:: with SMTP id 36mr1544163wrq.271.1611269708129;
-        Thu, 21 Jan 2021 14:55:08 -0800 (PST)
+        bh=/J88r+iFHmQ4cP+bZARM8ia++nLwETjd8oVTN7vE2fw=;
+        b=OfJ0WebSEJkpkI8OXK5Chm1MpM94AfmxckJEpAQohUIJ+yOy8siHUH7WBOg9z7XUnS
+         Gl1tqCs5o7iWmwfWZssLOOMuCZCLyLuA2lfQtJhKuglaKxHUW4sJJexX7nDb8ahFLD4X
+         b4p3b7WHu/H/kBnHqJ0/h8ijCkMY+ocWWJjZsQBGbRR07A11iBpImRx6qfUOnbDHKAC2
+         dqCRxaM/Xj1NnH4kzbSXmc11H2nkXgrC9g7mNBoxxcTStgMEaAlTCbUl2mGImjwCiJPj
+         XiP/CDkmcdcNbB5/ppUMC1EkEUSQ1Gvj5cU1tTOlV2HKCZQgT5EIa9NeVlT9ZpvNxybN
+         S47w==
+X-Gm-Message-State: AOAM5330oDKhYV1EF6kqnSEgMrQCoq61JQ7XN9TYL1mvEMdO1qLRUoFp
+	QefRAQccfNmFaDWQrFOypdy7+899CjdrWw==
+X-Google-Smtp-Source: ABdhPJzLXmeb7LZz8Z/8GT4aQwXytGPzh64kOpvfD75SWE8Dlrj/Wr6O5Yg657fou48g+kosMjBfYA==
+X-Received: by 2002:a05:6000:1142:: with SMTP id d2mr1575690wrx.307.1611269709168;
+        Thu, 21 Jan 2021 14:55:09 -0800 (PST)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f09d446818dfa6dffe17955.dip0.t-ipconnect.de. [2003:f0:7f09:d446:818d:fa6d:ffe1:7955])
-        by smtp.gmail.com with ESMTPSA id n9sm10019742wrq.41.2021.01.21.14.55.07
+        by smtp.gmail.com with ESMTPSA id n9sm10019742wrq.41.2021.01.21.14.55.08
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 Jan 2021 14:55:07 -0800 (PST)
+        Thu, 21 Jan 2021 14:55:08 -0800 (PST)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 1/7] garcon: upgrade 0.8.0 -> 4.16.1
-Date: Thu, 21 Jan 2021 23:54:52 +0100
-Message-Id: <20210121225458.278343-2-schnitzeltony@gmail.com>
+Subject: [PATCH 2/7] xfce4-whiskermenu-plugin: upgrade 2.5.1 -> 2.5.2
+Date: Thu, 21 Jan 2021 23:54:53 +0100
+Message-Id: <20210121225458.278343-3-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210121225458.278343-1-schnitzeltony@gmail.com>
 References: <20210121225458.278343-1-schnitzeltony@gmail.com>
@@ -52,34 +52,32 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Release notes for 4.16.1
-========================
-- Launch applications as children again (Fixes #18)
-- Translation Updates:
-  Kabyle, Portuguese
+Release notes for 2.5.2
+=======================
+- Do not reparent launched programs. (Issue #32)
+- Translation updates: Basque, Danish, Greek.
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-xfce/garcon/{garcon_0.8.0.bb => garcon_4.16.1.bb}   | 2 +-
+ ...ermenu-plugin_2.5.1.bb => xfce4-whiskermenu-plugin_2.5.2.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-xfce/garcon/{garcon_0.8.0.bb => garcon_4.16.1.bb} (86%)
+ rename meta-xfce/recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-plugin_2.5.1.bb => xfce4-whiskermenu-plugin_2.5.2.bb} (76%)
 
-diff --git a/meta-xfce/recipes-xfce/garcon/garcon_0.8.0.bb b/meta-xfce/recipes-xfce/garcon/garcon_4.16.1.bb
-similarity index 86%
-rename from meta-xfce/recipes-xfce/garcon/garcon_0.8.0.bb
-rename to meta-xfce/recipes-xfce/garcon/garcon_4.16.1.bb
-index bbaa6fd6f..3e596323d 100644
---- a/meta-xfce/recipes-xfce/garcon/garcon_0.8.0.bb
-+++ b/meta-xfce/recipes-xfce/garcon/garcon_4.16.1.bb
-@@ -9,7 +9,7 @@ inherit xfce gtk-doc gobject-introspection features_check
- REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.5.1.bb b/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.5.2.bb
+similarity index 76%
+rename from meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.5.1.bb
+rename to meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.5.2.bb
+index 6077fdfc6..366597731 100644
+--- a/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.5.1.bb
++++ b/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.5.2.bb
+@@ -5,6 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- SRC_URI += "file://0001-xfce-applications.menu-don-t-bloat-settings-menu-by-.patch"
--SRC_URI[sha256sum] = "4811d89ee5bc48dbdeffd69fc3eec6c112bbf01fde98a9e848335b374a4aa1bb"
-+SRC_URI[sha256sum] = "84914927a2c1fda167f67af26a6640630a744a22940df508aa6c752cdbd3d21d"
+ inherit xfce-panel-plugin cmake
  
- EXTRA_OECONF = "--disable-gtk-doc"
+-SRC_URI[sha256sum] = "b2074f8a9caa766e2d97f0b960ef2f4d1e20dd804497229bc1f0157791896925"
++SRC_URI[sha256sum] = "a6f7070afd1c9020257d8ed7483872643a6cddd76d5d73de107c7fbd981fc515"
  
+ RRECOMMENDS_${PN} += "menulibre"
 -- 
 2.26.2
 
