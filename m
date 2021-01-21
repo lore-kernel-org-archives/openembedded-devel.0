@@ -1,293 +1,260 @@
-Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com [209.85.222.173])
- by mx.groups.io with SMTP id smtpd.web10.2531.1611262869770438265
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com [209.85.160.180])
+ by mx.groups.io with SMTP id smtpd.web12.2641.1611263409388594285
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Jan 2021 13:01:09 -0800
+ Thu, 21 Jan 2021 13:10:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=WOhRnDYN;
- spf=pass (domain: gmail.com, ip: 209.85.222.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f173.google.com with SMTP id r77so2936185qka.12
-        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Jan 2021 13:01:09 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=U1uvHho2;
+ spf=pass (domain: gmail.com, ip: 209.85.160.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f180.google.com with SMTP id d15so2621726qtw.12
+        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Jan 2021 13:10:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=Gg6b1EiBkUPDCyBbBpLDR0MyN7TRhxhOXySUytZMiJ0=;
-        b=WOhRnDYNboLogxYfvqvvgweVDeJIkpVVSkF8+iLDl5EwWnTSKR4bqaCvBQcFbCe7+g
-         obSNeRytxNBrj87c/PefuYvyfGFKyyTuWOJhYrrlxLcEuuCrWK5/TtjKTY0s40Nn1JEN
-         aHy9AA8GvkrMBuldF3SS0/EHXbpiDe6dHL51/n46nRLmQtgx48kDkYZ280HkbEIM9oGf
-         JS7OIZKlqEoVvbOcFW2DyV/m5GxABqYpFhzO4E+tmFlIVYYuZLjvUYbutgYCs8y1WqtM
-         2vvqZRVPj3cooWYoPHV6VQDNHtdcTYp1VxA1Km8Z6Ldja9Ustv9Z1Cx7RkBWlw8E59CP
-         LEyA==
+        bh=9ERW2+f8Kb6tpVpbzdT6loZvUl+7HOCgqgYZl5avVQU=;
+        b=U1uvHho2W+8kfP7KZMOY9n46/DKQpxlOBKr4pY39frtj97uQuLrq9wQ8WEBHyzvJEh
+         fhV99sqTOPrlfowwa/lGfnR/YHw/0PIs9OUmaQHbiwzMa6Ompe3hhJo6eUpCJSbqxpzo
+         QW/QP6Z1CXlAv7922iyKe4T2ovKgt7x59p/9TlyUqUTa/DQ7TiqSR26sgOrOpD1zn1YW
+         +2HXrMSmqE2S0qLit8AW12SWbBf3INozwbaCKqf5VRD2g+S1P+11+CyCZaxp5KAmdnHR
+         WzW6lqx7iEsrNaOxbwEy+EXc0aqXV/K65zu9yLkFq5tLDI+tPnZgRDXpfI8I3e/+3lSB
+         tTKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=Gg6b1EiBkUPDCyBbBpLDR0MyN7TRhxhOXySUytZMiJ0=;
-        b=roTkwrDC4GSIHBrxzxGLf1PZiWuVpG0VRLHkN/4ZJ+BtNUd1xszfAlgmLAyQz4vWhQ
-         Ems+FALXtMeUTMITF/GjCUE75xokKSwJ+jPQ19CasIgR6XlJ/FXAqoHveZkbsUvCfvNt
-         1+T0BxTJzyDJSva9s7MK5c3IbvfFQokqaw/PdcxvisyYq5JnMKnO6OwivH/mGc2BWk+p
-         QTzI7cUxYtPXv1T8m4c9+vyxJfQxpFi/1rGf9BbZAUFh6ZGHXXa4+YsbbA5Yj3IQMySX
-         F/Yb14GxPbx6T8OBKMjpILc73DM82qZoVantQIwej3T3EuSr63GXG5t9N1NYDWYvVpsY
-         m2Rg==
-X-Gm-Message-State: AOAM533RMUka+TQc97Q9thN2JiMud0TDxIzO9krmQJ6yitoC2Aq8qXwK
-	nsm6XrshGast/D6YGaGnTZ6Nq8Cul+DTRexwXHw=
-X-Google-Smtp-Source: ABdhPJxnlpNJ3fdjLrQ3BYgdlh6yUZqW65ArVefR+yFDNt3rAqs3nwpDpEKr1VJiG//7GBh7UHeeh/attmJNEPpNKfg=
-X-Received: by 2002:a37:4286:: with SMTP id p128mr1672781qka.337.1611262868670;
- Thu, 21 Jan 2021 13:01:08 -0800 (PST)
+        bh=9ERW2+f8Kb6tpVpbzdT6loZvUl+7HOCgqgYZl5avVQU=;
+        b=J7j2/L1e92fzV5swMewfmpo/a7WSds4cRDWdtQnuYa1zPyjXDs9PzDS5k+RWfWmDuP
+         rfCAobkM5E7fG1vz+05LnXiN4jszHB8jeAuN6Q5vFIsBdJdUWtAUdZrz0DBW97zdOg2o
+         KKoSexZIqUEdxbzhN4G2KUQYY5xLF6sXbrOSL7XiRJakPX4zy/45wVmpiQMFO7ibSnqO
+         QdJrl0foaHdfGJeL12D2VwMB931AlW7LoxGFWS9/5YHoaCDW9j9mhCZLD6Q0VaGUJDBU
+         kjsmdrOJqxbLJGCvRW3FHMg9xfUtaGNkvHIy33BTKQDqGcgP3pnrBOK7hZHkBeSTul6P
+         PCaw==
+X-Gm-Message-State: AOAM530XPo/W/QzvIiisg4G2BJ40d8KXRjjwNi7O0rSorx0YfBOO79An
+	rdXcTyMKU6BFBrKLtfgNId8wHjrDgf/5pivdH3M=
+X-Google-Smtp-Source: ABdhPJwhWv7Rx/Ix9aEI6XdRgjEOYwyTXnygg96CRgJ6DCXXNeX6/rnXszBX2kqajwjwshpdLso5xgNmpC29SRYMA0A=
+X-Received: by 2002:ac8:6714:: with SMTP id e20mr1551654qtp.378.1611263408387;
+ Thu, 21 Jan 2021 13:10:08 -0800 (PST)
 MIME-Version: 1.0
-References: <20210121204451.8110-1-daniel@qtec.com>
-In-Reply-To: <20210121204451.8110-1-daniel@qtec.com>
+References: <165BD7203D261159.3497@lists.openembedded.org> <56cba49c-633d-6f7b-af00-0ce75beae3f6@gmail.com>
+In-Reply-To: <56cba49c-633d-6f7b-af00-0ce75beae3f6@gmail.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 21 Jan 2021 13:00:42 -0800
-Message-ID: <CAMKF1spWhjPpiwzPQ1S6yAb72tStHAZA7mN0Zjj4Bhpf0X=-1Q@mail.gmail.com>
-Subject: Re: [oe][meta-oe][PATCH] zbar: Add support for mchehab/zbar
-To: Daniel Gomez <daniel@qtec.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Date: Thu, 21 Jan 2021 13:09:42 -0800
+Message-ID: <CAMKF1sr1i5_45Q6RqDiPzTkoUkGpRs43MUOWZtEau6=H7T7xdA@mail.gmail.com>
+Subject: Re: [oe] Gatesgarth pull request Jan 19th
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Jan 21, 2021 at 12:45 PM Daniel Gomez <daniel@qtec.com> wrote:
+On Thu, Jan 21, 2021 at 7:58 AM akuster808 <akuster808@gmail.com> wrote:
 >
-> ZBar project development stopped in 2012 but it was forked and
-> maintained by Mauro Carvalho Chehab to keep it up to date with V4L2 api.
 >
-> Main repository:
-> https://github.com/mchehab/zbar
+> The Dunfell merge request sent after this got merged. Is their an issue
+> Gatesgarth?
 >
-> Add support for zbar library mantained by mchehab. Use latest
-> version available 0.23.1.
->
-> Compile by default with options: video & python3.
->
-> As ZBar (original project) and mchehab/zbar (new & updated) are
-> different, keep both recipes as:
 
-I would prefer to keep just one version if possible. What would be a
-reason for keeping 0.10 ?
+No issues found, I was doing a local build which got stuck. It should be in now.
 
+> -armin
 >
-> -  zbar_0.10.bb: ZBar version 0.10
-> -  zbar_git.bb: mchehab/zbar Version 0.23.1
->
-> Signed-off-by: Daniel Gomez <daniel@qtec.com>
-> ---
->  .../0001-qt-Create-subdir-in-Makefile.patch   | 35 +++++++++++
->  ...02-zbarcam-Create-subdir-in-Makefile.patch | 40 ++++++++++++
->  meta-oe/recipes-support/zbar/zbar_0.10.bb     | 31 ++++++++++
->  meta-oe/recipes-support/zbar/zbar_git.bb      | 62 ++++++++++++++-----
->  4 files changed, 151 insertions(+), 17 deletions(-)
->  create mode 100644 meta-oe/recipes-support/zbar/zbar/0001-qt-Create-subdir-in-Makefile.patch
->  create mode 100644 meta-oe/recipes-support/zbar/zbar/0002-zbarcam-Create-subdir-in-Makefile.patch
->  create mode 100644 meta-oe/recipes-support/zbar/zbar_0.10.bb
->
-> diff --git a/meta-oe/recipes-support/zbar/zbar/0001-qt-Create-subdir-in-Makefile.patch b/meta-oe/recipes-support/zbar/zbar/0001-qt-Create-subdir-in-Makefile.patch
-> new file mode 100644
-> index 000000000..d7ca15207
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/zbar/zbar/0001-qt-Create-subdir-in-Makefile.patch
-> @@ -0,0 +1,35 @@
-> +From 9c67f377477a07495a712f478eabfa8d33164c45 Mon Sep 17 00:00:00 2001
-> +From: Daniel Gomez <dagmcr@gmail.com>
-> +Date: Sun, 17 Jan 2021 23:32:51 +0100
-> +Subject: [PATCH 1/2] qt: Create subdir in Makefile
-> +
-> +Create builddir/qt subdir when --with-qt5 is enabled.
-> +
-> +Fixes the following error:
-> +
-> +moc -Iqt -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
-> +-I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtWidgets
-> +-I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtGui
-> +-I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtCore
-> +-I../git/include ../git/include/zbar/QZBar.h -o qt/moc_QZBar.cpp
-> +moc: Cannot create qt/moc_QZBar.cpp
-> +make: *** [Makefile:2459: qt/moc_QZBar.cpp] Error 1
-> +
-> +Signed-off-by: Daniel Gomez <dagmcr@gmail.com>
-> +---
-> + qt/Makefile.am.inc | 1 +
-> + 1 file changed, 1 insertion(+)
-> +
-> +diff --git a/qt/Makefile.am.inc b/qt/Makefile.am.inc
-> +index b099c2b..c98fbeb 100644
-> +--- a/qt/Makefile.am.inc
-> ++++ b/qt/Makefile.am.inc
-> +@@ -15,4 +15,5 @@ qt/moc_%.cpp: qt/%.h
-> +       $(MOC) $(qt_libzbarqt_la_CPPFLAGS) $< -o $@
-> +
-> + qt/moc_%.cpp: include/zbar/%.h
-> ++      @$(mkdir_p) qt 2>/dev/null
-> +       $(MOC) $(qt_libzbarqt_la_CPPFLAGS) $< -o $@
-> +--
-> +2.29.2
-> +
-> diff --git a/meta-oe/recipes-support/zbar/zbar/0002-zbarcam-Create-subdir-in-Makefile.patch b/meta-oe/recipes-support/zbar/zbar/0002-zbarcam-Create-subdir-in-Makefile.patch
-> new file mode 100644
-> index 000000000..a1c27b8b4
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/zbar/zbar/0002-zbarcam-Create-subdir-in-Makefile.patch
-> @@ -0,0 +1,40 @@
-> +From fe751929ccc8fd75e350ed6db9d28d04bd31fc79 Mon Sep 17 00:00:00 2001
-> +From: Daniel Gomez <dagmcr@gmail.com>
-> +Date: Sun, 17 Jan 2021 23:33:19 +0100
-> +Subject: [PATCH 2/2] zbarcam: Create subdir in Makefile
-> +
-> +Create builddir/zbarcam when --with-qt5 is enabled.
-> +
-> +Fixes the following error:
-> +
-> +moc -i -Izbarcam -DQT_WIDGETS_LIB -DQT_X11EXTRAS_LIB -DQT_GUI_LIB
-> +-DQT_CORE_LIB
-> +-I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtWidgets
-> +-I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtX11Extras
-> +-I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtGui
-> +-I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtCore
-> +-I../git/include ../git/zbarcam/zbarcam-qt.cpp -o
-> +zbarcam/moc_zbarcam_qt.h
-> +moc: Cannot create zbarcam/moc_zbarcam_qt.h
-> +make: *** [Makefile:2438: zbarcam/moc_zbarcam_qt.h] Error 1
-> +
-> +Signed-off-by: Daniel Gomez <dagmcr@gmail.com>
-> +---
-> + zbarcam/Makefile.am.inc | 1 +
-> + 1 file changed, 1 insertion(+)
-> +
-> +diff --git a/zbarcam/Makefile.am.inc b/zbarcam/Makefile.am.inc
-> +index b6de82c..e90c50c 100644
-> +--- a/zbarcam/Makefile.am.inc
-> ++++ b/zbarcam/Makefile.am.inc
-> +@@ -28,6 +28,7 @@ DISTCLEANFILES += $(nodist_zbarcam_zbarcam_qt_SOURCES) zbarcam/moc_zbarcam_qt.h
-> +
-> +
-> + zbarcam/moc_zbarcam_qt.h: zbarcam/zbarcam-qt.cpp
-> ++      @$(mkdir_p) zbarcam 2>/dev/null
-> +       $(MOC) -i $(zbarcam_zbarcam_qt_CPPFLAGS) $< -o $@
-> + endif
-> +
-> +--
-> +2.29.2
-> +
-> diff --git a/meta-oe/recipes-support/zbar/zbar_0.10.bb b/meta-oe/recipes-support/zbar/zbar_0.10.bb
-> new file mode 100644
-> index 000000000..181d7ae43
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/zbar/zbar_0.10.bb
-> @@ -0,0 +1,31 @@
-> +DESCRIPTION = "2D barcode scanner toolkit."
-> +SECTION = "graphics"
-> +LICENSE = "LGPL-2.1"
-> +
-> +DEPENDS = "pkgconfig intltool-native libpng jpeg"
-> +
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=4015840237ca7f0175cd626f78714ca8"
-> +
-> +PV = "0.10+git${SRCPV}"
-> +
-> +#  iPhoneSDK-1.3.1 tag
-> +SRCREV = "67003d2a985b5f9627bee2d8e3e0b26d0c474b57"
-> +SRC_URI = "git://github.com/ZBar/Zbar \
-> +           file://0001-make-relies-GNU-extentions.patch \
-> +"
-> +S = "${WORKDIR}/git"
-> +
-> +inherit autotools pkgconfig
-> +
-> +PACKAGECONFIG = "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
-> +
-> +PACKAGECONFIG[x11] = "--with-x,-without-x,libxcb libx11 libsm libxau libxext libxv libice libxdmcp"
-> +
-> +EXTRA_OECONF = "--without-imagemagick --without-qt --without-python --disable-video --without-gtk"
-> +
-> +CPPFLAGS += "-Wno-error"
-> +
-> +do_install_append() {
-> +    #remove usr/bin if empty
-> +    rmdir ${D}${bindir}
-> +}
-> diff --git a/meta-oe/recipes-support/zbar/zbar_git.bb b/meta-oe/recipes-support/zbar/zbar_git.bb
-> index 181d7ae43..dae912252 100644
-> --- a/meta-oe/recipes-support/zbar/zbar_git.bb
-> +++ b/meta-oe/recipes-support/zbar/zbar_git.bb
-> @@ -1,31 +1,59 @@
-> -DESCRIPTION = "2D barcode scanner toolkit."
-> +HOMEPAGE = "https://github.com/mchehab/zbar"
-> +SUMMARY = "A bar code library"
-> +DESRIPTION = "ZBar is an open source software suite for reading bar codes \
-> +from various sources, such as video streams, image files and raw \
-> +intensity sensors. It supports EAN-13/UPC-A, UPC-E, EAN-8, Code 128, \
-> +Code 93, Code 39, Codabar, Interleaved 2 of 5, QR Code and SQ Code"
->  SECTION = "graphics"
-> +
->  LICENSE = "LGPL-2.1"
-> +LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5e9ee833a2118adc7d8b5ea38e5b1cef"
->
-> -DEPENDS = "pkgconfig intltool-native libpng jpeg"
-> +SRC_URI = "git://github.com/mchehab/zbar.git;branch=master \
-> +           file://0001-qt-Create-subdir-in-Makefile.patch \
-> +           file://0002-zbarcam-Create-subdir-in-Makefile.patch \
-> +"
-> +SRCREV = "89e7900d85dd54ef351a7ed582aec6a5a5d7fa37"
->
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=4015840237ca7f0175cd626f78714ca8"
-> +S = "${WORKDIR}/git"
-> +PV = "0.23.1+git${SRCPV}"
->
-> -PV = "0.10+git${SRCPV}"
-> +DEPENDS += "xmlto-native"
->
-> -#  iPhoneSDK-1.3.1 tag
-> -SRCREV = "67003d2a985b5f9627bee2d8e3e0b26d0c474b57"
-> -SRC_URI = "git://github.com/ZBar/Zbar \
-> -           file://0001-make-relies-GNU-extentions.patch \
-> +PACKAGECONFIG ??= "\
-> +        ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
->  "
-> -S = "${WORKDIR}/git"
->
-> -inherit autotools pkgconfig
-> +PACKAGECONFIG ??= "video python3"
->
-> -PACKAGECONFIG = "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
-> +inherit autotools pkgconfig gettext \
-> +        ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3native', '', d)} \
-> +        ${@bb.utils.contains('PACKAGECONFIG', 'gtk3', 'gobject-introspection', '', d)} \
-> +        ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'qmake5_paths', '', d)}
->
-> -PACKAGECONFIG[x11] = "--with-x,-without-x,libxcb libx11 libsm libxau libxext libxv libice libxdmcp"
-> +PACKAGECONFIG[x11] = "--with-x, --without-x, libxv"
-> +PACKAGECONFIG[video] = "--enable-video, --disable-video, v4l-utils libv4l"
-> +PACKAGECONFIG[jpeg] = "--with-jpeg, --without-jpeg, jpeg"
-> +PACKAGECONFIG[python3] = "--with-python=auto, --without-python, python3"
-> +PACKAGECONFIG[gtk3] = "--with-gtk=gtk3, --without-gtk, gtk+3"
-> +PACKAGECONFIG[qt5] = "--with-qt5, --without-qt5, qtbase qtbase-native qtx11extras qtsvg, qtbase"
-> +PACKAGECONFIG[imagemagick] = "--with-imagemagick, --without-imagemagick, imagemagick"
->
-> -EXTRA_OECONF = "--without-imagemagick --without-qt --without-python --disable-video --without-gtk"
-> +FILES_${PN} += "${bindir} \
-> +        ${@bb.utils.contains('DEPENDS', 'python3-native', '${libdir}', '', d)} \
-> +"
-> +
-> +CPPFLAGS_append = "\
-> +        ${@bb.utils.contains('PACKAGECONFIG', 'qt5', '\
-> +        -I${STAGING_INCDIR}/QtX11Extras \
-> +        -I${STAGING_INCDIR}/dbus-1.0 \
-> +        -I${STAGING_LIBDIR}/dbus-1.0/include \
-> +        ', '', d)} \
-> +"
->
-> -CPPFLAGS += "-Wno-error"
-> +TARGET_CXXFLAGS_append = " -fPIC"
->
-> -do_install_append() {
-> -    #remove usr/bin if empty
-> -    rmdir ${D}${bindir}
-> +do_prepare_recipe_sysroot_gettext() {
-> +        install -m 755 ${STAGING_DATADIR_NATIVE}/gettext/ABOUT-NLS ${S}/
->  }
-> +addtask do_prepare_recipe_sysroot_gettext after do_prepare_recipe_sysroot before do_configure
-> \ No newline at end of file
-> --
-> 2.29.2
->
->
-> 
+> On 1/19/21 8:43 PM, akuster via lists.openembedded.org wrote:
+> > The following changes since commit b9dcf17700014dec679307dc1247882dccd439ca:
+> >
+> >   Revert "numactl: Remove the recipe" (2020-11-05 09:00:37 -0800)
+> >
+> > are available in the Git repository at:
+> >
+> >   https://git.openembedded.org/meta-openembedded gatesgarth-next
+> >
+> > for you to fetch changes up to 6ff4bd4f345b4e8030b9197d13097308df521576:
+> >
+> >   postgresql: Update to 12.5 (2021-01-18 08:20:58 -0800)
+> >
+> > ----------------------------------------------------------------
+> > Armin Kuster (2):
+> >       Revert "gnome-calendar: update to 3.38.1, add libhandy 1.x support"
+> >       wireshark: Several securtiy fixes
+> >
+> > Chen Qi (1):
+> >       tclap: fix branch
+> >
+> > Chencheng Zhang (1):
+> >       tclap: align version to tag v1.2.2
+> >
+> > Diego Santa Cruz (2):
+> >       gssdp: Upgrade to 1.2.2 -> 1.2.3
+> >       gupnp: Upgrade to 1.2.2 -> 1.2.4
+> >
+> > Gianfranco (1):
+> >       dlt-daemon: add upstream patch to fix CVE-2020-29394
+> >
+> > He Zhe (1):
+> >       lmbench: Fix setting LDLIBS failure
+> >
+> > Hongxu Jia (1):
+> >       lvm2.inc: switch branch master to main
+> >
+> > Joe Slater (1):
+> >       multipath-tools: fix error handling for
+> > udev_monitor_set_receive_buffer_size
+> >
+> > Kai Kang (1):
+> >       colord: fix installed-vs-shipped error
+> >
+> > Khem Raj (4):
+> >       pidgin-sipe: Do not add native libdir to pkgconfig search path
+> >       sdbus-c++-libsystemd: Fix reallocarray check in meson
+> >       networkmanager: Fix reallocarray check in meson and configure
+> >       postgresql: Use /dev/urandom when openssl is not used
+> >
+> > Martin Jansa (1):
+> >       nanopb: move to dynamic-layers
+> >
+> > Max Kellermann (1):
+> >       php: remove the failing ${D}/${TMPDIR} code
+> >
+> > Mikko Rapeli (1):
+> >       fuse: set CVE_PRODUCT to "fuse_project:fuse"
+> >
+> > Philip Balister (1):
+> >       spdlog: Fix recipe so other recipes can use spdlog with external fmt.
+> >
+> > Robert Joslyn (1):
+> >       postgresql: Update to 12.5
+> >
+> > Roland Hieber (5):
+> >       pcsc-lite: provide pcsc-lite-lib-native explicitly for native build
+> >       lockfile-progs: use DEBIAN_MIRROR in SRC_URI
+> >       liboop: use upstream SRC_URI
+> >       fbset: use DEBIAN_MIRROR in SRC_URI
+> >       openct: use upstream SRC_URI
+> >
+> > Sean Nyekjaer (1):
+> >       nodejs: 12.19.1 -> 12.20.1
+> >
+> > Stacy Gaikovaia (1):
+> >       nodejs: 12.19.0 -> 12.19.1
+> >
+> > Vyacheslav Yurkov (1):
+> >       python3-aiohttp: added missing RDEPENDs
+> >
+> > Wang Mingyu (1):
+> >       zabbix: CVE-2020-15803 Security Advisory
+> >
+> > Yi Zhao (2):
+> >       minifi-cpp: depend on nettle and lz4
+> >       ebtables: do not install /etc/ethertypes
+> >
+> > Zang Ruochen (1):
+> >       mcpp: Normalize the patch format of CVE
+> >
+> > Zheng Ruoqin (4):
+> >       samba: CVE-2020-14318 Security Advisory
+> >       samba: CVE-2020-14383 Security Advisory
+> >       php: CVE-2020-7070
+> >       php: CVE-2020-7069
+> >
+> > jabdoa2 (2):
+> >       libsdl2-mixer: Fix ogg/vorbis support in libsdl2-mixer
+> >       libsdl2-mixer: set --disable-music-ogg-shared to link statically
+> >
+> > viatsk (1):
+> >       tcpdump: Patch for CVE-2020-8037
+> >
+> >  .../recipes-support/fuse/fuse3_3.9.3.bb            |   2 +
+> >  .../recipes-support/fuse/fuse_2.9.9.bb             |   2 +
+> >  .../8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch | 242
+> > ---------------------
+> >  ...calendar_3.38.1.bb => gnome-calendar_3.36.2.bb} |   3 +-
+> >  .../gupnp/{gssdp_1.2.2.bb => gssdp_1.2.3.bb}       |   4 +-
+> >  .../gupnp/{gupnp_1.2.2.bb => gupnp_1.2.4.bb}       |   4 +-
+> >  .../networkmanager/fix_reallocarray_check.patch    |  27 +++
+> >  .../networkmanager/networkmanager_1.22.14.bb       |   1 +
+> >  .../samba/samba/CVE-2020-14318.patch               | 142 ++++++++++++
+> >  .../samba/samba/CVE-2020-14383.patch               | 112 ++++++++++
+> >  .../recipes-connectivity/samba/samba_4.10.18.bb    |   2 +
+> >  ...01-Makefile-do-not-install-etc-ethertypes.patch |  35 +++
+> >  .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   |   3 +-
+> >  ...-escaping-don-t-allocate-a-too-large-buff.patch |  70 ++++++
+> >  .../recipes-support/tcpdump/tcpdump_4.9.3.bb       |   1 +
+> >  .../{wireshark_3.2.7.bb => wireshark_3.2.10.bb}    |   2 +-
+> >  .../recipes-devtools/nanopb/nanopb_0.4.3.bb        |   0
+> >  ...t-CFLAGS-LDFLAGS-to-append-values-passed-.patch |   2 +-
+> >  .../zabbix/zabbix/CVE-2020-15803.patch             |  36 +++
+> >  .../recipes-connectivity/zabbix/zabbix_4.4.6.bb    |   1 +
+> >  .../0001-meson-Fix-reallocarray-check.patch        |  25 +++
+> >  .../sdbus-c++/sdbus-c++-libsystemd_243.bb          |   1 +
+> >  meta-oe/recipes-dbs/postgresql/postgresql.inc      |   2 +-
+> >  .../{postgresql_12.4.bb => postgresql_12.5.bb}     |   2 +-
+> >  .../mcpp/files/CVE-2019-14274.patch                |  34 +++
+> >  meta-oe/recipes-devtools/mcpp/files/ice-mcpp.patch |  31 ---
+> >  meta-oe/recipes-devtools/mcpp/mcpp_2.7.2.bb        |   3 +-
+> >  .../{nodejs_12.19.0.bb => nodejs_12.20.1.bb}       |   4 +-
+> >  .../recipes-devtools/php/php/CVE-2020-7069.patch   | 158 ++++++++++++++
+> >  .../recipes-devtools/php/php/CVE-2020-7070.patch   |  24 ++
+> >  meta-oe/recipes-devtools/php/php_7.4.9.bb          |  11 +-
+> >  meta-oe/recipes-devtools/tclap/tclap_1.2.2.bb      |   4 +-
+> >  .../dlt-daemon/dlt-daemon/275.patch                |  38 ++++
+> >  .../dlt-daemon/dlt-daemon_2.18.5.bb                |   1 +
+> >  .../lockfile-progs/lockfile-progs_0.1.18.bb        |   2 +-
+> >  .../minifi-cpp/minifi-cpp_0.7.0.bb                 |   2 +-
+> >  .../recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb |   2 +-
+> >  meta-oe/recipes-support/colord/colord.bb           |   2 +-
+> >  meta-oe/recipes-support/fbset/fbset_2.1.bb         |   2 +-
+> >  meta-oe/recipes-support/liboop/liboop_1.0.1.bb     |   2 +-
+> >  meta-oe/recipes-support/lvm2/lvm2.inc              |   2 +-
+> >  ...h-uevent.c-fix-error-handling-for-udev_mo.patch |  39 ++++
+> >  .../multipath-tools/multipath-tools_0.8.4.bb       |   1 +
+> >  meta-oe/recipes-support/openct/openct_0.6.20.bb    |   2 +-
+> >  .../recipes-support/pcsc-lite/pcsc-lite_1.9.0.bb   |   1 +
+> >  ...o-not-add-native-paths-to-pkgconfig-searc.patch |  36 +++
+> >  .../recipes-support/pidgin/pidgin-sipe_1.25.0.bb   |   1 +
+> >  .../0001-Enable-use-of-external-fmt-library.patch  |  26 +++
+> >  meta-oe/recipes-support/spdlog/spdlog_1.8.1.bb     |   5 +-
+> >  .../python/python3-aiohttp_3.7.2.bb                |   4 +-
+> >  50 files changed, 849 insertions(+), 309 deletions(-)
+> >  delete mode 100644
+> > meta-gnome/recipes-gnome/gnome-calendar/files/8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch
+> >  rename
+> > meta-gnome/recipes-gnome/gnome-calendar/{gnome-calendar_3.38.1.bb =>
+> > gnome-calendar_3.36.2.bb} (78%)
+> >  rename meta-multimedia/recipes-connectivity/gupnp/{gssdp_1.2.2.bb =>
+> > gssdp_1.2.3.bb} (83%)
+> >  rename meta-multimedia/recipes-connectivity/gupnp/{gupnp_1.2.2.bb =>
+> > gupnp_1.2.4.bb} (64%)
+> >  create mode 100644
+> > meta-networking/recipes-connectivity/networkmanager/networkmanager/fix_reallocarray_check.patch
+> >  create mode 100644
+> > meta-networking/recipes-connectivity/samba/samba/CVE-2020-14318.patch
+> >  create mode 100644
+> > meta-networking/recipes-connectivity/samba/samba/CVE-2020-14383.patch
+> >  create mode 100644
+> > meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0001-Makefile-do-not-install-etc-ethertypes.patch
+> >  create mode 100644
+> > meta-networking/recipes-support/tcpdump/tcpdump/0001-PPP-When-un-escaping-don-t-allocate-a-too-large-buff.patch
+> >  rename meta-networking/recipes-support/wireshark/{wireshark_3.2.7.bb =>
+> > wireshark_3.2.10.bb} (96%)
+> >  rename meta-oe/{ =>
+> > dynamic-layers/meta-python}/recipes-devtools/nanopb/nanopb_0.4.3.bb (100%)
+> >  create mode 100644
+> > meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2020-15803.patch
+> >  create mode 100644
+> > meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd-243/0001-meson-Fix-reallocarray-check.patch
+> >  rename meta-oe/recipes-dbs/postgresql/{postgresql_12.4.bb =>
+> > postgresql_12.5.bb} (73%)
+> >  create mode 100644 meta-oe/recipes-devtools/mcpp/files/CVE-2019-14274.patch
+> >  rename meta-oe/recipes-devtools/nodejs/{nodejs_12.19.0.bb =>
+> > nodejs_12.20.1.bb} (97%)
+> >  create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2020-7069.patch
+> >  create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2020-7070.patch
+> >  create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/275.patch
+> >  create mode 100644
+> > meta-oe/recipes-support/multipath-tools/files/0001-libmultipath-uevent.c-fix-error-handling-for-udev_mo.patch
+> >  create mode 100644
+> > meta-oe/recipes-support/pidgin/pidgin-sipe/0001-configure-Do-not-add-native-paths-to-pkgconfig-searc.patch
+> >  create mode 100644
+> > meta-oe/recipes-support/spdlog/files/0001-Enable-use-of-external-fmt-library.patch
+> >
+> >
+> > 
+> >
 >
