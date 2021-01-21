@@ -1,50 +1,50 @@
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.web12.1089.1611269711403242846
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.web09.977.1611269712424222751
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Jan 2021 14:55:11 -0800
+ Thu, 21 Jan 2021 14:55:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=YZuo98wv;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id 6so3326362wri.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Jan 2021 14:55:11 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=bKn7ALYC;
+ spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wm1-f42.google.com with SMTP id e15so2847916wme.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Jan 2021 14:55:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=foWg2ptD7d43veDQ0I0jGK5Nj2ohdzzuX4ypF38+VhI=;
-        b=YZuo98wvSgT+1Sd/gxz07b481H33JJQ0AfY1EYbNc8LuBJR5L56xVKwIFnw5H/4+Bp
-         Ku75Oe4gW434QYjozgQpnqxWFR2PK1CvNHYUBHF9H8e0mq+DA2K+UhuqXeQaYrFSryz9
-         AdgG0DWhtVOROEFx58QYXQbF7NOqKeUMJPRd3Q/p5tmuhJpAYR90rRvDZSchAPwhp0CJ
-         Y0Sy5srdWMIhnYOiDwb8yBs4CTtB/XKkbK522890sX67U+FnSM43bFxNbOU2oNCOsWsX
-         IxcZfA4bt6AWJl//Jhz0OSMBuixPSpzgLxZsDj7yOXkQmjb710lCXkYN4nOjfjUW6MGw
-         dkpg==
+        bh=Iq7U+LxntlrrvxlOPeplq992fCg0SAackNiZZP6zTPc=;
+        b=bKn7ALYCiMSA6NtmnLOrTlqvQp1AGA6f7bCxOpmJYXsSSMhVuR+/JgsnyRoZUy91pL
+         mpX8vnA5tg5ncgz/eMb1/3AEWYqhHjedmtN63zJyUbRTosrvEZOLuc6xzYwwnR47hEgu
+         jJ5QRA2E7VOhvLzbdebqPkSmGJNOKwoADHnvAxdiiu2sSCTebKlMwEMMMb06aohi/Npr
+         rEGAGNwULw0t9Xy7jxy+//Ey/+8fY3nNaN/+O68wLuptUGSVrLIL6tE9hgLUPHqIwUz/
+         zXLOEwlWQxBtO2JWzCWBuwBtBGN/r6oHCeqgslyLyiPMD8b9Q+Sjcg5EW/i6piWo7NBK
+         kKZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=foWg2ptD7d43veDQ0I0jGK5Nj2ohdzzuX4ypF38+VhI=;
-        b=WxrFDpfNZARLH6ImWpZwLmRGQO3aZp2BgvOmVvk5xVZg9SkLfgDL/WEjqHHHOjE9nX
-         i+W52b/9Y9Jd9DxS9dqYYLn9JQwCxTurIUdrTASDANgR8ZEJ61pmgJwqMOqFKMAWKtvS
-         KK5Ne7uxtUsI7WZiB2tpNnxKov0PKoAFLuBlurPEJEj18PVE1+gyvjWKQzNE6EeQWdIw
-         2oj3W0mAHaOwWe0SFeQHyHVBd8yNr2alPTIt6xilbSS0sL81qrL90puD9S7Elm08Z1hR
-         W6im8/jOCQc/wvRe9+7fqddUW23nlmBlEIOE5nPNI0orBuePjw+MWissdlNGjgym/hLx
-         Ykeg==
-X-Gm-Message-State: AOAM532Yx3YqVSpiHXMidKLftBGn96YYKzsZAl7bDAVYmAhimVHTkg6F
-	zj/He5tvz287brSbVZSLE1CEoO7o/TxwHw==
-X-Google-Smtp-Source: ABdhPJzkgASjED+KPvoXAz8FVx+wjmRjt+SM5dL+8IcJ6Ss/Qu9CQCOEDz286gT4ZRv9I6HRnI7dTw==
-X-Received: by 2002:adf:fb49:: with SMTP id c9mr1631043wrs.72.1611269710097;
-        Thu, 21 Jan 2021 14:55:10 -0800 (PST)
+        bh=Iq7U+LxntlrrvxlOPeplq992fCg0SAackNiZZP6zTPc=;
+        b=uTFZhO2cLAB0P8+uxoE5wwNE2vf+VdlCUDtdJNyTDudI5CNYzCfZJyVjI92hk+Lu1a
+         +40FBi8/lyI62054mV77rLlwV2paa2voHArbSMb9Zl0whY1wUlkHMF1/00wmJTTVRNWo
+         DUpyxx6yQ3fYe6olwyijTJFf9epDG7qf5nwlyJjGU0c+HShPU+1vLeh0IuQCoiqyeqU/
+         ddJAaUOVqpHVADVOQs1dzFUtk9mtDUM5QxW5YcZS22ZrmCF2qNJqUbVyer6jyo1hHKiq
+         MuP90g1K+EY9B6hcla6qPSi6q4oMPDlaoFuaV+87/wY+TWUf2JD/fzei5U1B5gkUMN0r
+         0gJA==
+X-Gm-Message-State: AOAM533JosFmY/PW0W0Xw1YKx0vZduNbCnnAXuioUKptJfWwW74mzcLf
+	K8zX/wQnLwvru+WKw43AmPBBlDwXheTMng==
+X-Google-Smtp-Source: ABdhPJzYfk/qg4TAtrm0knfQKOfvzVLDgl79wu2qY3vKGeGvcIoF+j4kfFOiELlu6gJSKOGeX2sOSA==
+X-Received: by 2002:a1c:4e:: with SMTP id 75mr1305899wma.150.1611269711030;
+        Thu, 21 Jan 2021 14:55:11 -0800 (PST)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f09d446818dfa6dffe17955.dip0.t-ipconnect.de. [2003:f0:7f09:d446:818d:fa6d:ffe1:7955])
-        by smtp.gmail.com with ESMTPSA id n9sm10019742wrq.41.2021.01.21.14.55.09
+        by smtp.gmail.com with ESMTPSA id n9sm10019742wrq.41.2021.01.21.14.55.10
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 Jan 2021 14:55:09 -0800 (PST)
+        Thu, 21 Jan 2021 14:55:10 -0800 (PST)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 3/7] thunar: upgrade 4.16.0 -> 4.16.2
-Date: Thu, 21 Jan 2021 23:54:54 +0100
-Message-Id: <20210121225458.278343-4-schnitzeltony@gmail.com>
+Subject: [PATCH 4/7] jack: upgrade 1.19.16 -> 1.19.17
+Date: Thu, 21 Jan 2021 23:54:55 +0100
+Message-Id: <20210121225458.278343-5-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210121225458.278343-1-schnitzeltony@gmail.com>
 References: <20210121225458.278343-1-schnitzeltony@gmail.com>
@@ -52,52 +52,118 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Changes (and yes 4.16.2 'Regression:'... was on my list)
+removed patch was merged
 
-4.16.2
+1.9.17
 
-- Regression: "Open with other application" missing (Issue #470)
-- Always create new files and folders in current directory (Issue #462)
-- Translation Updates:
-  Albanian, Arabic, Armenian, Armenian (Armenia), Asturian, Basque,
-  Belarusian, Bengali, Bulgarian, Catalan, Chinese (China), Chinese
-  (Hong Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch,
-  Eastern Armenian, English (Australia), English (United Kingdom),
-  Esperanto, Estonian, Finnish, French, Galician, German, Greek,
-  Hebrew, Hungarian, Icelandic, Indonesian, Interlingue, Italian,
-  Japanese, Kazakh, Korean, Latvian, Lithuanian, Malay, Norwegian
-  Bokmål, Norwegian Nynorsk, Occitan (post 1500), Panjabi (Punjabi),
-  Persian (Iran), Polish, Portuguese, Portuguese (Brazil), Romanian,
-  Russian, Serbian, Slovak, Spanish, Swedish, Telugu, Thai, Turkish,
-  Ukrainian, Urdu, Urdu (Pakistan), Vietnamese
+    Fix jack_control stopping after first command iteration
+    Fix library compat/current version under macOS
+    Fix return codes of jackd on success
+    Ignore DB_VERSION_MISMATCH error on windows, it is expected
+    Remove old workaround for asio4all, as it breaks with jack-router
 
-4.16.1
+External changes, related to macOS/Windows installer:
 
-- Prevent crash on Ctrl+H when there is no sidepane (Issue #453)
-- Roleback to previous spinner handling (Issue #448)
+    Add jack-router to Windows installer, opt-in
+    Fix registry keys for Windows, add 32bit compat ones on 64bit
+    Support for arm64 macOS builds
+    Show welcome and license pages on windows installer
+    Update QjackCtl used in macOS/Windows installers to v0.9.0, with some commits cherry-picked from develop branch
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-xfce/thunar/{thunar_4.16.0.bb => thunar_4.16.2.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-xfce/thunar/{thunar_4.16.0.bb => thunar_4.16.2.bb} (89%)
+ ...-Use-SYS_futex-instead-of-__NR_futex.patch | 62 -------------------
+ .../jack/{jack_1.19.16.bb => jack_1.19.17.bb} |  3 +-
+ 2 files changed, 1 insertion(+), 64 deletions(-)
+ delete mode 100644 meta-oe/recipes-multimedia/jack/jack/0001-Use-SYS_futex-instead-of-__NR_futex.patch
+ rename meta-oe/recipes-multimedia/jack/{jack_1.19.16.bb => jack_1.19.17.bb} (93%)
 
-diff --git a/meta-xfce/recipes-xfce/thunar/thunar_4.16.0.bb b/meta-xfce/recipes-xfce/thunar/thunar_4.16.2.bb
-similarity index 89%
-rename from meta-xfce/recipes-xfce/thunar/thunar_4.16.0.bb
-rename to meta-xfce/recipes-xfce/thunar/thunar_4.16.2.bb
-index ae05f867f..6b1a6b482 100644
---- a/meta-xfce/recipes-xfce/thunar/thunar_4.16.0.bb
-+++ b/meta-xfce/recipes-xfce/thunar/thunar_4.16.2.bb
-@@ -8,7 +8,7 @@ inherit xfce gobject-introspection features_check mime-xdg
+diff --git a/meta-oe/recipes-multimedia/jack/jack/0001-Use-SYS_futex-instead-of-__NR_futex.patch b/meta-oe/recipes-multimedia/jack/jack/0001-Use-SYS_futex-instead-of-__NR_futex.patch
+deleted file mode 100644
+index dd1b7ccfd..000000000
+--- a/meta-oe/recipes-multimedia/jack/jack/0001-Use-SYS_futex-instead-of-__NR_futex.patch
++++ /dev/null
+@@ -1,62 +0,0 @@
+-From 83068f9b71aea16d1ad036fdcc326de1027b5585 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sun, 15 Nov 2020 22:13:29 -0800
+-Subject: [PATCH] Use SYS_futex instead of __NR_futex
+-
+-SYS_futex is expected from system C library.
+-in glibc (/usr/include/bits/syscall.h defines it in terms of of NR_futex)
+-rv32 is using 64bit time_t from get go unlike other 32bit architectures
+-in glibc, therefore it wont have NR_futex defined but just NR_futex_time64
+-this aliases it to NR_futex so that SYS_futex is then defined for rv32
+-
+-Upstream-Status: Submitted [https://github.com/jackaudio/jack2/pull/670]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- linux/JackLinuxFutex.cpp | 10 +++++++---
+- 1 file changed, 7 insertions(+), 3 deletions(-)
+-
+-diff --git a/linux/JackLinuxFutex.cpp b/linux/JackLinuxFutex.cpp
+-index deff006b..aef99cd2 100644
+---- a/linux/JackLinuxFutex.cpp
+-+++ b/linux/JackLinuxFutex.cpp
+-@@ -29,6 +29,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+- #include <syscall.h>
+- #include <linux/futex.h>
+- 
+-+#if !defined(SYS_futex) && defined(SYS_futex_time64)
+-+#define SYS_futex SYS_futex_time64
+-+#endif
+-+
+- namespace Jack
+- {
+- 
+-@@ -67,7 +71,7 @@ bool JackLinuxFutex::Signal()
+-         if (! fFutex->internal) return true;
+-     }
+- 
+--    ::syscall(__NR_futex, fFutex, fFutex->internal ? FUTEX_WAKE_PRIVATE : FUTEX_WAKE, 1, NULL, NULL, 0);
+-+    ::syscall(SYS_futex, fFutex, fFutex->internal ? FUTEX_WAKE_PRIVATE : FUTEX_WAKE, 1, NULL, NULL, 0);
+-     return true;
+- }
+- 
+-@@ -94,7 +98,7 @@ bool JackLinuxFutex::Wait()
+-         if (__sync_bool_compare_and_swap(&fFutex->futex, 1, 0))
+-             return true;
+- 
+--        if (::syscall(__NR_futex, fFutex, fFutex->internal ? FUTEX_WAIT_PRIVATE : FUTEX_WAIT, 0, NULL, NULL, 0) != 0 && errno != EWOULDBLOCK)
+-+        if (::syscall(SYS_futex, fFutex, fFutex->internal ? FUTEX_WAIT_PRIVATE : FUTEX_WAIT, 0, NULL, NULL, 0) != 0 && errno != EWOULDBLOCK)
+-             return false;
+-     }
+- }
+-@@ -122,7 +126,7 @@ bool JackLinuxFutex::TimedWait(long usec)
+-         if (__sync_bool_compare_and_swap(&fFutex->futex, 1, 0))
+-             return true;
+- 
+--        if (::syscall(__NR_futex, fFutex, fFutex->internal ? FUTEX_WAIT_PRIVATE : FUTEX_WAIT, 0, &timeout, NULL, 0) != 0 && errno != EWOULDBLOCK)
+-+        if (::syscall(SYS_futex, fFutex, fFutex->internal ? FUTEX_WAIT_PRIVATE : FUTEX_WAIT, 0, &timeout, NULL, 0) != 0 && errno != EWOULDBLOCK)
+-             return false;
+-     }
+- }
+--- 
+-2.29.2
+-
+diff --git a/meta-oe/recipes-multimedia/jack/jack_1.19.16.bb b/meta-oe/recipes-multimedia/jack/jack_1.19.17.bb
+similarity index 93%
+rename from meta-oe/recipes-multimedia/jack/jack_1.19.16.bb
+rename to meta-oe/recipes-multimedia/jack/jack_1.19.17.bb
+index c13d6261c..d5288c7b7 100644
+--- a/meta-oe/recipes-multimedia/jack/jack_1.19.16.bb
++++ b/meta-oe/recipes-multimedia/jack/jack_1.19.17.bb
+@@ -16,9 +16,8 @@ DEPENDS = "libsamplerate0 libsndfile1 readline"
  
- REQUIRED_DISTRO_FEATURES = "x11"
+ SRC_URI = "git://github.com/jackaudio/jack2.git \
+            file://0001-example-clients-Use-c-compiler-for-jack_simdtests.patch \
+-           file://0001-Use-SYS_futex-instead-of-__NR_futex.patch \
+           "
+-SRCREV = "5b78c2ef158c2d9ffe09818a7dd80209ed251c5f"
++SRCREV = "9e23888b8def6527774889cf4ef6348fb78c7154"
  
--SRC_URI[sha256sum] = "6277c448116a91ebfa564972645d8d79ef69864992a02bb164b7b13f98fdfd9b"
-+SRC_URI[sha256sum] = "67a90b98c436192f9aa6cd18a22a089e713007864aebfa65f36f121c86ba7add"
+ S = "${WORKDIR}/git"
  
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[pcre] = "--enable-pcre,--disable-pcre,libpcre"
 -- 
 2.26.2
 
