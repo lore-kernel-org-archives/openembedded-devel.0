@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.6740.1611235039528751315
+ by mx.groups.io with SMTP id smtpd.web12.6817.1611235040359528877
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Jan 2021 05:17:19 -0800
+ Thu, 21 Jan 2021 05:17:20 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=46072 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1l2Zpt-0002jH-UX; Thu, 21 Jan 2021 15:17:18 +0200
+	id 1l2Zpu-0002jH-F4; Thu, 21 Jan 2021 15:17:19 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-lz4: Upgrade 3.1.1 -> 3.1.3
-Date: Thu, 21 Jan 2021 15:17:06 +0200
-Message-Id: <20210121131709.27097-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-bitarray: Upgrade 1.6.1 -> 1.6.3
+Date: Thu, 21 Jan 2021 15:17:07 +0200
+Message-Id: <20210121131709.27097-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210121131709.27097-1-leon.anavi@konsulko.com>
 References: <20210121131709.27097-1-leon.anavi@konsulko.com>
@@ -30,35 +30,37 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.1.3:
+Upgrade to release 1.6.3:
 
-- Add support for publishing wheels to PyPi for Python 3.9. Wheel
-  building is currently broken for Python 3.9 on Arm/Aarch64
-- Drop building of wheels for Python 3.5
-- Move to Visual Studio 2019 (14.2) on AppVeyor
-- Build against the XCode 12.2 image on Travis
+- add missing .h files to sdist tarball
+- use `Py_SET_TYPE()` and `Py_SET_SIZE()` for Python 3.10
+- add official Python 3.10 support
+- fix slice assignement to same object, e.g. a[2::] = a or
+  a[::-1] = a
+- add bitarray.h
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-lz4_3.1.1.bb => python3-lz4_3.1.3.bb}       | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-lz4_3.1.1.bb => python3-lz4_3.1.3.bb} (79%)
+ .../{python3-bitarray_1.6.1.bb => python3-bitarray_1.6.3.bb}   | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-bitarray_1.6.1.bb => python3-bitarray_1.6.3.bb} (68%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-lz4_3.1.1.bb b/meta-python/recipes-devtools/python/python3-lz4_3.1.3.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-lz4_3.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-lz4_3.1.3.bb
-index 1cc378def..b14484b78 100644
---- a/meta-python/recipes-devtools/python/python3-lz4_3.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-lz4_3.1.3.bb
-@@ -8,7 +8,7 @@ DEPENDS += " \
-     ${PYTHON_PN}-pkgconfig-native \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.6.1.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.6.3.bb
+similarity index 68%
+rename from meta-python/recipes-devtools/python/python3-bitarray_1.6.1.bb
+rename to meta-python/recipes-devtools/python/python3-bitarray_1.6.3.bb
+index f54d54f92..16beab551 100644
+--- a/meta-python/recipes-devtools/python/python3-bitarray_1.6.1.bb
++++ b/meta-python/recipes-devtools/python/python3-bitarray_1.6.3.bb
+@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+ LICENSE = "PSF"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
  
--SRC_URI[sha256sum] = "1ac354804cb2d5fb3d213857a6bf8590a301ef051cc16fbb4938bd2d6e524bda"
-+SRC_URI[sha256sum] = "081ef0a3b5941cb03127f314229a1c78bd70c9c220bb3f4dd80033e707feaa18"
+-SRC_URI[md5sum] = "a082075dbae478fb53c69e25cc7f9cd6"
+-SRC_URI[sha256sum] = "ab85b38365dd9956264226b30dababa02161ed49bb36c7ee82cc6545e07b1599"
++SRC_URI[sha256sum] = "ae27ce4bef4f35b4cc2c0b0d9cf02ed49eee567c23d70cb5066ad215f9b62b3c"
  
- inherit pypi setuptools3
+ inherit setuptools3 pypi
  
 -- 
 2.17.1
