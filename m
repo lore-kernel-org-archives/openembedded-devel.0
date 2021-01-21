@@ -1,50 +1,50 @@
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.web10.1050.1611269714331246870
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+ by mx.groups.io with SMTP id smtpd.web11.1024.1611269715358534468
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Jan 2021 14:55:14 -0800
+ Thu, 21 Jan 2021 14:55:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=MLsDkwi/;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id y187so2838932wmd.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Jan 2021 14:55:14 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=qPA0nEo8;
+ spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wm1-f43.google.com with SMTP id e15so2847999wme.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Jan 2021 14:55:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=AxcW8HnJ7cZV8mX1AadvbzgAnPKyeI/gDdQXOvTFx6s=;
-        b=MLsDkwi/QZz3cMlVkT9OHtqoDj20KPN+h3n3QExJW4DkuD5gCGdJZ62ZO+BTZBHV/0
-         uWs2R1//QTOXCot0lsa4wDvCsxJNtBoCKCZb6bRv7tfhs3hJym+fbnypfIcOW8db3KaV
-         2zEVv3LixEJscck1q7twYSAqyb9V3yIoZI9vKjPoR4vD1i7QWGGO3CAQI4Xxd6p5O/bB
-         0nkvw9mPAbDA0p4qTZCrngjT4A9LZVhh6BlTj5EmMndrtPHtOURv3Dbrc1xhMvFu6sbQ
-         hfk2Qp8kEiRMTcieFz58YazU3tJDWzrQKhzEBTuHWxkkY3U1Wu3B9T61pLJTmiwCw63C
-         KxCw==
+        bh=8A6BoZ+0Nvr+JaNtsvJDLrr+P5lcBNNylrn9wLddThs=;
+        b=qPA0nEo8qdVA39Atib2oZ3lUoEwtgvlaTvwEg56ixRN4ZfZNsSuPmiHGKqS7ZPjc/i
+         8UjyxSgZ8AWspnnUH/3CaSr0WteO8npuyGe6opmfQKEtUciJf7QrnxA/prM/gEEbMg1G
+         YXCAFpxNvQdm+Qw/6hbJkAg3U2HP+gmFwOPOz8rSb15+T5sk2CSXq5A/32UfAhVj3zFj
+         ALFn3VVbPofQKSem04JvUo/+x+wnfkx9H8YuBDT5OcIa9BZ4YTd69gaA3Pwq7P27l/q9
+         iBRo0VuPefJL7UltJtl30vxZourYCfYgEgvOI0XDznSDEe5krJ8GvVn4k1Rz+1P5dgTA
+         Gr5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=AxcW8HnJ7cZV8mX1AadvbzgAnPKyeI/gDdQXOvTFx6s=;
-        b=eUZX5xM7sZ8Ve/lJTLJqJTgCri+RbrknuJlxgTEiaCjvpec+disR+G1fJYYcQaFC5N
-         myhoPBLO48Iw7R4OHV8rvyupCpyVlKeQ1DlF+pHNsvp3+BvXzSgaIKd61fVpli/rjWJp
-         mpoPH6yghOqr4QkAa+rJrDQScfr1hsEuA4dfCOMh1PB7EE4FCJ/MSl21VDvUoztUJwG+
-         eye30ECAofkkT/HjRcUtUKfhtDw+TmRJPzfqsigTfjsaCpIS9u/SWOWqFyYgDqJkoAs5
-         /tmiKBdxv2I6HKrRQzmGAWTGu4xvcWeZuDTTD+yNknzZAieGAKHAF6+X9TR2GkIxeZtl
-         J/Qw==
-X-Gm-Message-State: AOAM533ADK7NaROozofW+qGfm3Ryt6boOBbg9HfnDeTK7oYQ6nwoj55M
-	7EdepssFDc4AIc2bs1e18dZuw7zv6HFRZQ==
-X-Google-Smtp-Source: ABdhPJxvSgO/kn/KsJQoq2cDfUal2UJ8xgduOHpt7iEWehYVrvhUJ3imYJnM0nHGKzduqzsE9sKBeA==
-X-Received: by 2002:a1c:f30e:: with SMTP id q14mr1250956wmq.139.1611269713014;
-        Thu, 21 Jan 2021 14:55:13 -0800 (PST)
+        bh=8A6BoZ+0Nvr+JaNtsvJDLrr+P5lcBNNylrn9wLddThs=;
+        b=VUa9eJeUUFkLJa4eTQGljTy2slRRqXpdHyofqfm+N+dL+erebtapHsHW+0wY4faFm8
+         1kczqDdOoef2h8UllYXjU1e2W9vqDPlI2zIn3FZxkqZpy34PkjwMTJnvWP7AQwdjBzNE
+         C1E5aQVb7vtmazHgc49UGov2sPWAIb/CCwTn2idPRfq8+AEgfiAonxIqNE27sd9Y1pwm
+         hwMDNTTw81rooVEDHXCND1VFLvLtZQ3UhEV8UdQTb8cc2AmIY1DDMLkYm70Lkc4JVnOv
+         2vKlTGyREFaTCl+Ect76KaeWp3AYZvfEV+UfVcLLt+y398pMqWuVPIexBHOwYYTFUZOC
+         lJlg==
+X-Gm-Message-State: AOAM533Cx2HkW2/J6HQS/Q1fLFuAmxBoPnsQGwV5apnxdsgDSslyh2Sn
+	UXEBVO8rrxYAvoFiO6vGBukNK3iARmBVMA==
+X-Google-Smtp-Source: ABdhPJxV1Fsy+OpZVEoz+CHBgPY5WjRwzVZV8nLCVOHGON4rxqTa5qu3UYmuNKYGkkr3CrL6xJIWOg==
+X-Received: by 2002:a1c:9a90:: with SMTP id c138mr1293406wme.147.1611269714014;
+        Thu, 21 Jan 2021 14:55:14 -0800 (PST)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f09d446818dfa6dffe17955.dip0.t-ipconnect.de. [2003:f0:7f09:d446:818d:fa6d:ffe1:7955])
-        by smtp.gmail.com with ESMTPSA id n9sm10019742wrq.41.2021.01.21.14.55.12
+        by smtp.gmail.com with ESMTPSA id n9sm10019742wrq.41.2021.01.21.14.55.13
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 Jan 2021 14:55:12 -0800 (PST)
+        Thu, 21 Jan 2021 14:55:13 -0800 (PST)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 6/7] appstream-glib: upgrade 0.7.17 -> 0.7.18
-Date: Thu, 21 Jan 2021 23:54:57 +0100
-Message-Id: <20210121225458.278343-7-schnitzeltony@gmail.com>
+Subject: [PATCH 7/7] vlc: upgrade 3.0.11.1 -> 3.0.12
+Date: Thu, 21 Jan 2021 23:54:58 +0100
+Message-Id: <20210121225458.278343-8-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210121225458.278343-1-schnitzeltony@gmail.com>
 References: <20210121225458.278343-1-schnitzeltony@gmail.com>
@@ -52,45 +52,107 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Version 0.7.18
-~~~~~~~~~~~~~~
-Released: 2020-09-07
+This at least a security upgrade. Although not mentioning CVEs in [1] it sounds
+importand to upgrade.
 
-New Features:
- - Add content rating system APIs from gnome-software (Philip Withnall)
- - Add "validate-version" command (Florian Müllner)
-
-Bugfixes:
- - Allow timestamp in the future in validate-relax (Bartłomiej Piotrowski)
- - Don't ignore localized strings that are the same as original (Isaque Galdino)
- - Fix crash with invalid children of <ul/> (Fabian Vogt)
- - Lower the OARS/CSM mapping of sex-homosexuality/intense (Philip Withnall)
- - Properly initialize mutexes (Laurent Bigonville)
- - Test launchable tags in validation (Ian McInerney)
+[1] https://www.videolan.org/security/sb-vlc3012.html
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{appstream-glib_0.7.17.bb => appstream-glib_0.7.18.bb}     | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-gnome/recipes-support/appstream-glib/{appstream-glib_0.7.17.bb => appstream-glib_0.7.18.bb} (84%)
+ .../vlc/vlc/0005-Fix-build-with-Qt-5.15.patch | 56 -------------------
+ ...Use-SYS_futex-instead-of-__NR_futex.patch} |  0
+ .../vlc/{vlc_3.0.11.1.bb => vlc_3.0.12.bb}    |  5 +-
+ 3 files changed, 2 insertions(+), 59 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/0005-Fix-build-with-Qt-5.15.patch
+ rename meta-multimedia/recipes-multimedia/vlc/vlc/{0001-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch => 0005-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch} (100%)
+ rename meta-multimedia/recipes-multimedia/vlc/{vlc_3.0.11.1.bb => vlc_3.0.12.bb} (96%)
 
-diff --git a/meta-gnome/recipes-support/appstream-glib/appstream-glib_0.7.17.bb b/meta-gnome/recipes-support/appstream-glib/appstream-glib_0.7.18.bb
-similarity index 84%
-rename from meta-gnome/recipes-support/appstream-glib/appstream-glib_0.7.17.bb
-rename to meta-gnome/recipes-support/appstream-glib/appstream-glib_0.7.18.bb
-index eb60bd968..e40354f56 100644
---- a/meta-gnome/recipes-support/appstream-glib/appstream-glib_0.7.17.bb
-+++ b/meta-gnome/recipes-support/appstream-glib/appstream-glib_0.7.18.bb
-@@ -20,8 +20,7 @@ DEPENDS = " \
- inherit meson gobject-introspection gettext bash-completion
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0005-Fix-build-with-Qt-5.15.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0005-Fix-build-with-Qt-5.15.patch
+deleted file mode 100644
+index c4465b6af..000000000
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc/0005-Fix-build-with-Qt-5.15.patch
++++ /dev/null
+@@ -1,56 +0,0 @@
+-From c805c6f64da6d8b03355b4796865b75e2f3b500d Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+-Date: Mon, 8 Jun 2020 00:50:08 +0200
+-Subject: [PATCH] Fix build with Qt >= 5.15
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+----
+- modules/gui/qt/components/playlist/views.cpp | 1 +
+- modules/gui/qt/dialogs/plugins.cpp           | 1 +
+- modules/gui/qt/util/timetooltip.hpp          | 1 +
+- 3 files changed, 3 insertion(+)
+-
+-diff --git a/modules/gui/qt/components/playlist/views.cpp b/modules/gui/qt/components/playlist/views.cpp
+-index 24db9d9..71d8514 100644
+---- a/modules/gui/qt/components/playlist/views.cpp
+-+++ b/modules/gui/qt/components/playlist/views.cpp
+-@@ -35,6 +35,7 @@
+- #include <QMetaType>
+- #include <QHeaderView>
+- #include <QSvgRenderer>
+-+#include <QPainterPath>
+- 
+- #include <assert.h>
+- 
+-diff --git a/modules/gui/qt/dialogs/plugins.cpp b/modules/gui/qt/dialogs/plugins.cpp
+-index d233382..9ae9a63 100644
+---- a/modules/gui/qt/dialogs/plugins.cpp
+-+++ b/modules/gui/qt/dialogs/plugins.cpp
+-@@ -66,6 +66,7 @@
+- #include <QSplitter>
+- #include <QToolButton>
+- #include <QStackedWidget>
+-+#include <QPainterPath>
+- 
+- //match the image source (width/height)
+- #define SCORE_ICON_WIDTH_SCALE 4
+-diff --git a/modules/gui/qt/util/timetooltip.hpp b/modules/gui/qt/util/timetooltip.hpp
+-index 6a1329e..9f50b18 100644
+---- a/modules/gui/qt/util/timetooltip.hpp
+-+++ b/modules/gui/qt/util/timetooltip.hpp
+-@@ -25,6 +25,7 @@
+- #include "qt.hpp"
+- 
+- #include <QWidget>
+-+#include <QPainterPath>
+- 
+- class TimeTooltip : public QWidget
+- {
+--- 
+-2.26.2
+-
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0001-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0005-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch
+similarity index 100%
+rename from meta-multimedia/recipes-multimedia/vlc/vlc/0001-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch
+rename to meta-multimedia/recipes-multimedia/vlc/vlc/0005-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.11.1.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.12.bb
+similarity index 96%
+rename from meta-multimedia/recipes-multimedia/vlc/vlc_3.0.11.1.bb
+rename to meta-multimedia/recipes-multimedia/vlc/vlc_3.0.12.bb
+index 7902825f2..046c059fb 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.11.1.bb
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.12.bb
+@@ -24,10 +24,9 @@ SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz \
+            file://0002-use-vorbisidec.patch \
+            file://0003-fix-luaL-checkint.patch \
+            file://0004-Use-packageconfig-to-detect-mmal-support.patch \
+-           file://0005-Fix-build-with-Qt-5.15.patch \
+-           file://0001-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch \
++           file://0005-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch \
+ "
+-SRC_URI[sha256sum] = "189311d28aa814f106a7b3645211ac52c0b3e2b9f4b348de2f63bab3218086b8"
++SRC_URI[sha256sum] = "eff458f38a92126094f44f2263c2bf2c7cdef271b48192d0fe7b1726388cf879"
  
- SRC_URI = "https://people.freedesktop.org/~hughsient/${BPN}/releases/${BP}.tar.xz"
--SRC_URI[md5sum] = "67d441fb0fb3e14551b47db656565fc4"
--SRC_URI[sha256sum] = "7ca7e91d4accefa1c0d2c6e310cb3fe2686c017810e23b3f82d9f5724345e549"
-+SRC_URI[sha256sum] = "ca1ed22e3bde3912cb903aaa7de085d55771da454f1c0573fd9608e1de9c4002"
+ inherit autotools features_check gettext pkgconfig mime-xdg
  
- EXTRA_OEMESON = " \
-     -Drpm=false \
 -- 
 2.26.2
 
