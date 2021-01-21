@@ -1,158 +1,124 @@
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.web11.1024.1611269715358534468
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.web09.1062.1611270144772784098
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Jan 2021 14:55:15 -0800
+ Thu, 21 Jan 2021 15:02:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=qPA0nEo8;
- spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id e15so2847999wme.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Jan 2021 14:55:15 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=lLkpBwxn;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id e6so2651318pjj.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Jan 2021 15:02:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=8A6BoZ+0Nvr+JaNtsvJDLrr+P5lcBNNylrn9wLddThs=;
-        b=qPA0nEo8qdVA39Atib2oZ3lUoEwtgvlaTvwEg56ixRN4ZfZNsSuPmiHGKqS7ZPjc/i
-         8UjyxSgZ8AWspnnUH/3CaSr0WteO8npuyGe6opmfQKEtUciJf7QrnxA/prM/gEEbMg1G
-         YXCAFpxNvQdm+Qw/6hbJkAg3U2HP+gmFwOPOz8rSb15+T5sk2CSXq5A/32UfAhVj3zFj
-         ALFn3VVbPofQKSem04JvUo/+x+wnfkx9H8YuBDT5OcIa9BZ4YTd69gaA3Pwq7P27l/q9
-         iBRo0VuPefJL7UltJtl30vxZourYCfYgEgvOI0XDznSDEe5krJ8GvVn4k1Rz+1P5dgTA
-         Gr5A==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=l6TY7vKgEnntm1W2jQDYZdv1r0dmZT9BzyhUdVG69Ts=;
+        b=lLkpBwxn+HPU+2Zkvv2v359y/YJQeCLJqdCJA5nFFW85mnhCKRGipEckzbcSfeCwGI
+         RN7cT3a6A9/573NqlScSXynAV5SNQYxQhUDtOmt1GkbR0qM3JcNpRj4aR99yXezsAp2z
+         cyrsEVeaRwYcf4E6ACPmu41tzD+OVnnnBml+gk//SwTDUSjPLMvDQhPehx+YPHUpz1dH
+         RRlDXSQU+tZVO7SayRrU6S+f237Vb4ynQ9jsOiKUGZRBmZ79SqLC/YbiNPIC8Ml3Sz3j
+         kpbOHlPP3/frp7fbDdgpoR3xMaBBA6DZz1MYAiU48yUSh8Gqlh8szM4rX0sKlNQhm6Dh
+         RH0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=8A6BoZ+0Nvr+JaNtsvJDLrr+P5lcBNNylrn9wLddThs=;
-        b=VUa9eJeUUFkLJa4eTQGljTy2slRRqXpdHyofqfm+N+dL+erebtapHsHW+0wY4faFm8
-         1kczqDdOoef2h8UllYXjU1e2W9vqDPlI2zIn3FZxkqZpy34PkjwMTJnvWP7AQwdjBzNE
-         C1E5aQVb7vtmazHgc49UGov2sPWAIb/CCwTn2idPRfq8+AEgfiAonxIqNE27sd9Y1pwm
-         hwMDNTTw81rooVEDHXCND1VFLvLtZQ3UhEV8UdQTb8cc2AmIY1DDMLkYm70Lkc4JVnOv
-         2vKlTGyREFaTCl+Ect76KaeWp3AYZvfEV+UfVcLLt+y398pMqWuVPIexBHOwYYTFUZOC
-         lJlg==
-X-Gm-Message-State: AOAM533Cx2HkW2/J6HQS/Q1fLFuAmxBoPnsQGwV5apnxdsgDSslyh2Sn
-	UXEBVO8rrxYAvoFiO6vGBukNK3iARmBVMA==
-X-Google-Smtp-Source: ABdhPJxV1Fsy+OpZVEoz+CHBgPY5WjRwzVZV8nLCVOHGON4rxqTa5qu3UYmuNKYGkkr3CrL6xJIWOg==
-X-Received: by 2002:a1c:9a90:: with SMTP id c138mr1293406wme.147.1611269714014;
-        Thu, 21 Jan 2021 14:55:14 -0800 (PST)
-Return-Path: <schnitzeltony@gmail.com>
-Received: from superandy.speedport.ip (p200300f07f09d446818dfa6dffe17955.dip0.t-ipconnect.de. [2003:f0:7f09:d446:818d:fa6d:ffe1:7955])
-        by smtp.gmail.com with ESMTPSA id n9sm10019742wrq.41.2021.01.21.14.55.13
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 Jan 2021 14:55:13 -0800 (PST)
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 7/7] vlc: upgrade 3.0.11.1 -> 3.0.12
-Date: Thu, 21 Jan 2021 23:54:58 +0100
-Message-Id: <20210121225458.278343-8-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210121225458.278343-1-schnitzeltony@gmail.com>
-References: <20210121225458.278343-1-schnitzeltony@gmail.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=l6TY7vKgEnntm1W2jQDYZdv1r0dmZT9BzyhUdVG69Ts=;
+        b=Zuqzk7piZJ4G0Xmz1IRkJPv0UQ247Ymrjbs8C2GkflCD0sg4G5UL52iOC/HAROhXYP
+         xPoJD69zuh98p2amEHetMYsaK7xPxURQ5ycQQevgNzYz/ye4sUbSzrDITAMbguBKPTAV
+         bsQmwwxrs1zAGgSwhb6Yg4/Su9c3kzQPmGxI0ioUOmWZtnkJYDalQBGr4n896KaZySjb
+         9U6+CQvhJZx0faFtCbvmYEm7CqXvtxkYCXZcVB/BWq5SV+0O7P7K++1OfdNWKdJyxCey
+         /GgXCdFH1wuXYOt8zKjvuss0xFVF/OC1PFBSloxmfBVCTOBclnhu3LKcfiNVJ7DyYPrh
+         BsGA==
+X-Gm-Message-State: AOAM533qDKSqCWeltOT+3/dsluABrt4vskCsqqGW5v7hJAoEZoh8U3EO
+	fSZfLYjIlnl3ExrHtMIVerX6FvhIUDSNoVnrNss=
+X-Google-Smtp-Source: ABdhPJzS3PSf2cOH+0FcPfLEHnsZsl97moKcCILp9cW+mOhozT1HB5n50W1YuBunNmVMmFdCL2XoynoTQ6ZeuOHd9nc=
+X-Received: by 2002:a17:902:6ac2:b029:de:3560:391e with SMTP id
+ i2-20020a1709026ac2b02900de3560391emr2001689plt.60.1611270144156; Thu, 21 Jan
+ 2021 15:02:24 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <165C61438689639B.32132@lists.openembedded.org>
+In-Reply-To: <165C61438689639B.32132@lists.openembedded.org>
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+Date: Fri, 22 Jan 2021 00:02:12 +0100
+Message-ID: <CALbNGRSA74bM6+tbpbxoS9SME4G8XTZooGyxwVDz8-BZyER_ew@mail.gmail.com>
+Subject: Re: [oe] [PATCH 0/7] upgrades
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This at least a security upgrade. Although not mentioning CVEs in [1] it sounds
-importand to upgrade.
+On Thu, Jan 21, 2021 at 11:55 PM Andreas M=C3=BCller via
+lists.openembedded.org
+<schnitzeltony=3Dgmail.com@lists.openembedded.org> wrote:
+>
+> Patch 1-3 are resends - patchwork ignored them first time
+I saw they were applied - too late. So please ignore 1-3
 
-[1] https://www.videolan.org/security/sb-vlc3012.html
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- .../vlc/vlc/0005-Fix-build-with-Qt-5.15.patch | 56 -------------------
- ...Use-SYS_futex-instead-of-__NR_futex.patch} |  0
- .../vlc/{vlc_3.0.11.1.bb => vlc_3.0.12.bb}    |  5 +-
- 3 files changed, 2 insertions(+), 59 deletions(-)
- delete mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/0005-Fix-build-with-Qt-5.15.patch
- rename meta-multimedia/recipes-multimedia/vlc/vlc/{0001-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch => 0005-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch} (100%)
- rename meta-multimedia/recipes-multimedia/vlc/{vlc_3.0.11.1.bb => vlc_3.0.12.bb} (96%)
-
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0005-Fix-build-with-Qt-5.15.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0005-Fix-build-with-Qt-5.15.patch
-deleted file mode 100644
-index c4465b6af..000000000
---- a/meta-multimedia/recipes-multimedia/vlc/vlc/0005-Fix-build-with-Qt-5.15.patch
-+++ /dev/null
-@@ -1,56 +0,0 @@
--From c805c6f64da6d8b03355b4796865b75e2f3b500d Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
--Date: Mon, 8 Jun 2020 00:50:08 +0200
--Subject: [PATCH] Fix build with Qt >= 5.15
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--Upstream-Status: Pending
--
--Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-----
-- modules/gui/qt/components/playlist/views.cpp | 1 +
-- modules/gui/qt/dialogs/plugins.cpp           | 1 +
-- modules/gui/qt/util/timetooltip.hpp          | 1 +
-- 3 files changed, 3 insertion(+)
--
--diff --git a/modules/gui/qt/components/playlist/views.cpp b/modules/gui/qt/components/playlist/views.cpp
--index 24db9d9..71d8514 100644
----- a/modules/gui/qt/components/playlist/views.cpp
--+++ b/modules/gui/qt/components/playlist/views.cpp
--@@ -35,6 +35,7 @@
-- #include <QMetaType>
-- #include <QHeaderView>
-- #include <QSvgRenderer>
--+#include <QPainterPath>
-- 
-- #include <assert.h>
-- 
--diff --git a/modules/gui/qt/dialogs/plugins.cpp b/modules/gui/qt/dialogs/plugins.cpp
--index d233382..9ae9a63 100644
----- a/modules/gui/qt/dialogs/plugins.cpp
--+++ b/modules/gui/qt/dialogs/plugins.cpp
--@@ -66,6 +66,7 @@
-- #include <QSplitter>
-- #include <QToolButton>
-- #include <QStackedWidget>
--+#include <QPainterPath>
-- 
-- //match the image source (width/height)
-- #define SCORE_ICON_WIDTH_SCALE 4
--diff --git a/modules/gui/qt/util/timetooltip.hpp b/modules/gui/qt/util/timetooltip.hpp
--index 6a1329e..9f50b18 100644
----- a/modules/gui/qt/util/timetooltip.hpp
--+++ b/modules/gui/qt/util/timetooltip.hpp
--@@ -25,6 +25,7 @@
-- #include "qt.hpp"
-- 
-- #include <QWidget>
--+#include <QPainterPath>
-- 
-- class TimeTooltip : public QWidget
-- {
---- 
--2.26.2
--
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0001-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0005-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch
-similarity index 100%
-rename from meta-multimedia/recipes-multimedia/vlc/vlc/0001-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch
-rename to meta-multimedia/recipes-multimedia/vlc/vlc/0005-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.11.1.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.12.bb
-similarity index 96%
-rename from meta-multimedia/recipes-multimedia/vlc/vlc_3.0.11.1.bb
-rename to meta-multimedia/recipes-multimedia/vlc/vlc_3.0.12.bb
-index 7902825f2..046c059fb 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.11.1.bb
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.12.bb
-@@ -24,10 +24,9 @@ SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz \
-            file://0002-use-vorbisidec.patch \
-            file://0003-fix-luaL-checkint.patch \
-            file://0004-Use-packageconfig-to-detect-mmal-support.patch \
--           file://0005-Fix-build-with-Qt-5.15.patch \
--           file://0001-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch \
-+           file://0005-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch \
- "
--SRC_URI[sha256sum] = "189311d28aa814f106a7b3645211ac52c0b3e2b9f4b348de2f63bab3218086b8"
-+SRC_URI[sha256sum] = "eff458f38a92126094f44f2263c2bf2c7cdef271b48192d0fe7b1726388cf879"
- 
- inherit autotools features_check gettext pkgconfig mime-xdg
- 
--- 
-2.26.2
-
+Andreas
+>
+> Andreas M=C3=BCller (7):
+>   garcon: upgrade 0.8.0 -> 4.16.1
+>   xfce4-whiskermenu-plugin: upgrade 2.5.1 -> 2.5.2
+>   thunar: upgrade 4.16.0 -> 4.16.2
+>   jack: upgrade 1.19.16 -> 1.19.17
+>   networkmanager: upgrade 1.22.14 -> 1.28.0
+>   appstream-glib: upgrade 0.7.17 -> 0.7.18
+>   vlc: upgrade 3.0.11.1 -> 3.0.12
+>
+>  ...lib_0.7.17.bb =3D> appstream-glib_0.7.18.bb} |  3 +-
+>  .../vlc/vlc/0005-Fix-build-with-Qt-5.15.patch | 56 -----------------
+>  ...Use-SYS_futex-instead-of-__NR_futex.patch} |  0
+>  .../vlc/{vlc_3.0.11.1.bb =3D> vlc_3.0.12.bb}    |  5 +-
+>  ...ttings-settings-property-documentati.patch | 43 ++++++++-----
+>  ...-to-var-libdir-rather-than-hardcod-.patch} |  0
+>  ...atch =3D> 0004-fix_reallocarray_check.patch} |  2 +-
+>  ...Fix-build-with-musl-systemd-specific.patch | 29 +++++----
+>  .../musl/0002-Fix-build-with-musl.patch       | 23 ++++---
+>  ...0003-Fix-build-with-musl-for-n-dhcp4.patch | 61 ------------------
+>  ...ix-build-with-musl-systemd-specific.patch} |  6 +-
+>  ...er_1.22.14.bb =3D> networkmanager_1.28.0.bb} |  9 ++-
+>  ...-Use-SYS_futex-instead-of-__NR_futex.patch | 62 -------------------
+>  .../jack/{jack_1.19.16.bb =3D> jack_1.19.17.bb} |  3 +-
+>  ...1.bb =3D> xfce4-whiskermenu-plugin_2.5.2.bb} |  2 +-
+>  .../{garcon_0.8.0.bb =3D> garcon_4.16.1.bb}     |  2 +-
+>  .../{thunar_4.16.0.bb =3D> thunar_4.16.2.bb}    |  2 +-
+>  17 files changed, 72 insertions(+), 236 deletions(-)
+>  rename meta-gnome/recipes-support/appstream-glib/{appstream-glib_0.7.17=
+.bb =3D> appstream-glib_0.7.18.bb} (84%)
+>  delete mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/0005-Fix-=
+build-with-Qt-5.15.patch
+>  rename meta-multimedia/recipes-multimedia/vlc/vlc/{0001-linux-thread-Us=
+e-SYS_futex-instead-of-__NR_futex.patch =3D> 0005-linux-thread-Use-SYS_fute=
+x-instead-of-__NR_futex.patch} (100%)
+>  rename meta-multimedia/recipes-multimedia/vlc/{vlc_3.0.11.1.bb =3D> vlc=
+_3.0.12.bb} (96%)
+>  rename meta-networking/recipes-connectivity/networkmanager/networkmanag=
+er/{0001-install-firewalld-to-var-libdir-rather-than-hardcod-.patch =3D> 00=
+03-install-firewalld-to-var-libdir-rather-than-hardcod-.patch} (100%)
+>  rename meta-networking/recipes-connectivity/networkmanager/networkmanag=
+er/{fix_reallocarray_check.patch =3D> 0004-fix_reallocarray_check.patch} (9=
+0%)
+>  delete mode 100644 meta-networking/recipes-connectivity/networkmanager/=
+networkmanager/musl/0003-Fix-build-with-musl-for-n-dhcp4.patch
+>  rename meta-networking/recipes-connectivity/networkmanager/networkmanag=
+er/musl/{0004-Fix-build-with-musl-systemd-specific.patch =3D> 0003-Fix-buil=
+d-with-musl-systemd-specific.patch} (81%)
+>  rename meta-networking/recipes-connectivity/networkmanager/{networkmana=
+ger_1.22.14.bb =3D> networkmanager_1.28.0.bb} (95%)
+>  delete mode 100644 meta-oe/recipes-multimedia/jack/jack/0001-Use-SYS_fu=
+tex-instead-of-__NR_futex.patch
+>  rename meta-oe/recipes-multimedia/jack/{jack_1.19.16.bb =3D> jack_1.19.=
+17.bb} (93%)
+>  rename meta-xfce/recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-p=
+lugin_2.5.1.bb =3D> xfce4-whiskermenu-plugin_2.5.2.bb} (76%)
+>  rename meta-xfce/recipes-xfce/garcon/{garcon_0.8.0.bb =3D> garcon_4.16.=
+1.bb} (86%)
+>  rename meta-xfce/recipes-xfce/thunar/{thunar_4.16.0.bb =3D> thunar_4.16=
+.2.bb} (89%)
+>
+> --
+> 2.26.2
+>
+>
+>=20
+>
