@@ -1,130 +1,126 @@
-Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com [66.111.4.29])
- by mx.groups.io with SMTP id smtpd.web12.5337.1611294350946978007
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.66])
+ by mx.groups.io with SMTP id smtpd.web10.5405.1611295394547693741
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Jan 2021 21:45:51 -0800
+ Thu, 21 Jan 2021 22:03:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@aj.id.au header.s=fm1 header.b=kb2u3UZ6;
- spf=pass (domain: aj.id.au, ip: 66.111.4.29, mailfrom: andrew@aj.id.au)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
-	by mailout.nyi.internal (Postfix) with ESMTP id 773DC5C0247;
-	Fri, 22 Jan 2021 00:45:49 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
-  by compute3.internal (MEProxy); Fri, 22 Jan 2021 00:45:49 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aj.id.au; h=from
-	:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding; s=fm1; bh=7psZsLaLjV5bB
-	BXdRSyKbBLcPRpaUGkCkD2AOtvOkog=; b=kb2u3UZ6WTjhGZzzOroA1OSfOImAJ
-	71GJA8JS+Bhc75CdLAtC6tFOY3VtXFh4hg+P/lHRv1xFaqg8kXhbCe1sDuyzOCF0
-	R/U2A38k/IQYqMvwlYxve1lAgW6Q421pGDOZIYCehOBm6DcVLLlBRQuEWFNGGuKK
-	WfdmvLtPcQVjN6lDLn1B1ifdV5NW/RkUBsEYV7Haxf4jWQ5nRYHLuQSpDzgZY2gq
-	4jCE0vFG96hLNKbI23h2OUZXX7f6A5n0BDJKSbT3eqoDfwzrmHaHbSsdeh0mn8pj
-	/tdul0zdumSi0nMNclQcxoTluAizXTUqEmfkKF+omlnzrdhmMkWTVyhLQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-transfer-encoding:date:from
-	:in-reply-to:message-id:mime-version:references:subject:to
-	:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm1; bh=7psZsLaLjV5bBBXdRSyKbBLcPRpaUGkCkD2AOtvOkog=; b=WbMpWtwu
-	fr9suoQOFNeL1VvLNVdo4NjfREKjF6fDb0I/Cn0cBcWPm3izpuDl4LgMBKHSsF5d
-	8BD7fcXFGs0DHrhkkKMVuRA6LxAouR+8UuH1Ax2b9Jsq/jQodmpkfx/duPiAyUWR
-	Rsu3DdVRLZCAw2huydBLiNPu8t58k7Qu32OgYmei23VcVUitG2HDVbYvg23CgZU0
-	FmR7nzIxd0Tnr5ANP32JeQvf3QBcd8ykt2IAB9mBG5K/a6I4zk6DpLIlkZqZh2+B
-	HYPhnI8SV9wxPOFFkXWiOe9YApHaI4xSTTuSm32TroTkbelS9KBhhHBvjGnFucUz
-	XTrfseHHJBnazQ==
-X-ME-Sender: <xms:jWYKYLxBJKAx19Mf1rQRzQr52OX6_gX8_N9EgKR4tPSuWNwsayK2Lg>
-    <xme:jWYKYDQBxavw_aTeBFOd1ocx8YM1UdIMWZ99uaEw4iDf2V9IwsoQtOAv5IELdeVKi
-    jot3xn4h-A1jIpuAQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrudehgdekkecutefuodetggdotefrodftvf
-    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-    uegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffojghfggfgsedtkeertd
-    ertddtnecuhfhrohhmpeetnhgurhgvficulfgvfhhfvghrhicuoegrnhgurhgvfiesrghj
-    rdhiugdrrghuqeenucggtffrrghtthgvrhhnpeeuhfethfduueefhefffeefteeiueefud
-    elvefgkeetfeetkeelteffheejueekheenucffohhmrghinhepghhithhhuhgsrdgtohhm
-    necukfhppedvtdefrdehjedrvdduhedrvdefvdenucevlhhushhtvghrufhiiigvpedtne
-    curfgrrhgrmhepmhgrihhlfhhrohhmpegrnhgurhgvfiesrghjrdhiugdrrghu
-X-ME-Proxy: <xmx:jWYKYFWTRk0tmRTLmmaj06YVpY7Av8RGDCYz6OCUZmvY9N7SjO_lqg>
-    <xmx:jWYKYFiFqhzkS8B9HCafnYrL5QIQ4D6bc3RuCdA6N2OxRjyW58eEew>
-    <xmx:jWYKYNCay-EQ12epqAvEvxc4E1WvY85FNL8O0mf6e2cVro538aQRgA>
-    <xmx:jWYKYI-mbGiarUgrVkWRAOuRFTl0_HbZR4AUBECavbO2Klu9YjvbkA>
-Received: from localhost.localdomain (203-57-215-232.dyn.iinet.net.au [203.57.215.232])
-	by mail.messagingengine.com (Postfix) with ESMTPA id 29A381080059;
-	Fri, 22 Jan 2021 00:45:47 -0500 (EST)
-From: "Andrew Jeffery" <andrew@aj.id.au>
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=XRQ0sq/P;
+ spf=pass (domain: windriver.com, ip: 40.107.243.66, mailfrom: yi.zhao@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=mS+tuQz4KYoHpl4YjmyeGcRzhoFm9rdBQVXiB7DLA86reEQJV1jC3BTZskZoZPUke5YqDqCrgImApLkLlmIK7niEdW764XohvQWNrFnoQH2iR2tGUU3Y3DL1raPelm2M3ioJYcroeZkL/+Am0lgmiRyNSBvmqL0VNRLQm3bxiTYX7hG6u3Mo5kxw6BfaITsfctrEatqwdPE2MKBrPGhYrhlMnmnnRtxbsR08HH1Np+Ldz1Djij7aBbv0tgs0C84YsmIEbR3wxJ4ardLA8NksQQiLLL8GDHkrL1KgvaGO7EsR6k3BfgOnocSxdN+cX391/A95ZCZitk4gniszOYh6JA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xjVix5aIJJirVj096OcqmJbHlIzG0kr8lyJIchS84iU=;
+ b=Kf4Yg2/Y34+iQ0+wMhXAyOHUEOS0ZoaFBP2Dje7FZv3gsbewZqavoWxNqfnvIZvtlfhEvG0IIu7z2qSGHrcqAKb4qeLrG66kruxDhju9P0nOIrhdEuIOAGrsFI1d35iWqVIYbU8thkxJYburyF7I4TxBRcjCYkBCuCnrv8CAkF6Rk0JlVw80nNLwnktO5kTmwrh8q2MEi2NUSE/AIzB1keaY9Xscp/ZEhc+uLJlOCAysZY6j1Hx0JjT0wGd6uJEvN9RY8WnDLD8TC1iwWAQSuGVTqnRAreszSXHuTKB2hXiwlPYu/J86oyJazkHvVeyMia1qfMfU5uj7ai2emWGG2g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xjVix5aIJJirVj096OcqmJbHlIzG0kr8lyJIchS84iU=;
+ b=XRQ0sq/PRZh/zzUfKA1bPdhYxfmxBEx61XIgbx1KbkBXjcQ0DThK7Or6gah5qm6o7mnsAKW6bM4fbx2tBGyro59mB7+OqqSzCWIc/8ClQBRAo4SGIx86mRhaOkoo6d26ti/0FiuQiihm7sVKJzYog3dHvAzOQbb7Njn1N1cMwIs=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from SA2PR11MB4875.namprd11.prod.outlook.com (2603:10b6:806:11a::6)
+ by SN6PR11MB2816.namprd11.prod.outlook.com (2603:10b6:805:5b::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.11; Fri, 22 Jan
+ 2021 06:03:13 +0000
+Received: from SA2PR11MB4875.namprd11.prod.outlook.com
+ ([fe80::f5a6:5d68:aeaa:6c19]) by SA2PR11MB4875.namprd11.prod.outlook.com
+ ([fe80::f5a6:5d68:aeaa:6c19%6]) with mapi id 15.20.3784.013; Fri, 22 Jan 2021
+ 06:03:13 +0000
+From: "Yi Zhao" <yi.zhao@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: raj.khem@gmail.com
-Subject: [meta-python][PATCH v2 2/2] meta-python: Add jstyleson
-Date: Fri, 22 Jan 2021 16:15:38 +1030
-Message-Id: <20210122054538.3675758-2-andrew@aj.id.au>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20210122054538.3675758-1-andrew@aj.id.au>
-References: <20210122054538.3675758-1-andrew@aj.id.au>
+Subject: [meta-oe][PATCH] minifi-cpp: set correct python processor directory in configure file
+Date: Fri, 22 Jan 2021 14:02:56 +0800
+Message-Id: <20210122060256.16014-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.17.1
+X-Originating-IP: [60.247.85.82]
+X-ClientProxiedBy: HK2PR02CA0140.apcprd02.prod.outlook.com
+ (2603:1096:202:16::24) To SA2PR11MB4875.namprd11.prod.outlook.com
+ (2603:10b6:806:11a::6)
+Return-Path: yi.zhao@windriver.com
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from pek-lpg-core2.corp.ad.wrs.com (60.247.85.82) by HK2PR02CA0140.apcprd02.prod.outlook.com (2603:1096:202:16::24) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.11 via Frontend Transport; Fri, 22 Jan 2021 06:03:12 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: be21c882-45b8-4383-5b4b-08d8be9b66d2
+X-MS-TrafficTypeDiagnostic: SN6PR11MB2816:
+X-Microsoft-Antispam-PRVS: 
+	<SN6PR11MB281639663DD47846ADC85706F9A09@SN6PR11MB2816.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2399;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	BekAfbF/yjBg3Ncm08fbk/YgGezEN08TFc3n+S7k2iDXixqpNFB+AK8hSqr7uvMgIE89aGRNmuMQW/DYxctTD3BUPP2y+MEFIVVzTpfdX6cpdqC14Zbho296rDJw33rGNAyTkuNW8NKf2VwprpLJQQD6pbQxFxTOWmjJFpJ+AP0PfBKqh8G3H+zkAoLXGWc9orvKWMCk7MDBVNqEqf0iCURR++3M1EhK+vQJ4cIyAPwEeAgVgXDPQ91hJ1YXS9+b3pNF+68eXB/CRYhx/aOULQ59zuvY7JA18f5Zn50bA7mymVj55wDqrIAdGGXQQ2wzmM/DkbLhlJQ+lnK5VTIHsMKF0iaO33rYhE/gNdrsFyvAQoCM589ZXK/uMufXYQ7Qt8zpVq6KMPVtcxG+rSB31A==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA2PR11MB4875.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(39850400004)(376002)(346002)(136003)(396003)(86362001)(5660300002)(83380400001)(6666004)(956004)(2616005)(36756003)(26005)(8936002)(8676002)(186003)(6486002)(52116002)(316002)(16526019)(44832011)(66556008)(66946007)(6512007)(478600001)(1076003)(6506007)(2906002)(66476007)(6916009);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	=?us-ascii?Q?26ritsGE0DXQbgnPO49XUeS7Ion9FBjUhY+fGpv37KAAfQGw/tqT0tHMPEi8?=
+ =?us-ascii?Q?0Uze2vUBphGf54gAvkxCeHqtp8Mc8E8R+At2wG93xuD+7pI9NHrRzK882Ewo?=
+ =?us-ascii?Q?iYYgONSjXp8yXGoN8mvBCQTW8QYBdqgrXYXiSgs90GvnqvCJkCD7xjd1glyZ?=
+ =?us-ascii?Q?TS4k1PP/3NXFpmKT+ldp31+/adojY7RNlvdgYkhRRubQ7FNPLSzefyJU1ZHJ?=
+ =?us-ascii?Q?WpQRGA+U5B+EbG/v4a1ozyUayCTTJOW/hn0fbuDXAv2DAx1hBHsg049grorq?=
+ =?us-ascii?Q?F/xkIvoVdUTL2XoDcbeDmLBmWwJ000rcKSpS2vY/oWl+yJKiRjq7UwqrU/UV?=
+ =?us-ascii?Q?K2a2EYKovEZbFJopL2oFuImvKWwP4Tg+8DR+zy8aLVOn+KHtGxGiCRw9RZvC?=
+ =?us-ascii?Q?NT6jWgSizDYaMypgF4gVV18Xt3fbC9YXzTjMnUXxxPJ1wzmInZzIikw6wF5w?=
+ =?us-ascii?Q?HquYKAcCV9mK6Ke6xmAG+KwQJAojUIpcMoeZ9ZG22MtEPk95HknCHnYhxYmy?=
+ =?us-ascii?Q?ipbGxQSZevcqGX+HvT+VsFaYcLfMcPgQQyFhEZ+TRCJOmAKBBJpS1Rg2rf9F?=
+ =?us-ascii?Q?SNZ8vBnyBJsRSIdPPwEo3kSOmEE5GFT5AEMZsvSioqU4bW4G2dqFLnzEOuCY?=
+ =?us-ascii?Q?5dmSsjXPvpIuILMzuVZbJQiyKqMFHX6z2xNY74Fb86GzWgl1MLhmxv48aVKt?=
+ =?us-ascii?Q?qExScDWxumQdcnOcStUj1+F5gkHLNpIP1kS/pnt8z1V4FzLALeTzDHBnLJWW?=
+ =?us-ascii?Q?OZXSdHKDZ4SpB+v9+3SnCIRxFXl39K144p8sT1k/ewpjL1hvM9Qt21vzFFnr?=
+ =?us-ascii?Q?HlHIkTPrx6xEXqq+jX/tpIbKsUCREXo3DgWHgJ3TA6YK9ihXvQ4h+zkPeQtn?=
+ =?us-ascii?Q?L3VFZm+2YB4XRvMWxvp30pVdmnkhZhEA+95XjFY8QW8TXYTaiyEFGm/uBPSb?=
+ =?us-ascii?Q?NUVWZJh5cfmcCcyKb4K3mUe5F/FvYzI4qYIRNHcC65MvCcud0Y0tgeaSAiGZ?=
+ =?us-ascii?Q?j0LQ?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: be21c882-45b8-4383-5b4b-08d8be9b66d2
+X-MS-Exchange-CrossTenant-AuthSource: SA2PR11MB4875.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2021 06:03:12.9734
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8M8dRGv/puPqAp8BkAha2bIdHTkZmhLeJfdchE07pJItMFuaNG12iNpTg7CPNNGdjVUPDVIoYuyTbaRApqOJ7g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR11MB2816
+Content-Type: text/plain
 
-jstyleson is a library to parse JSON with js-style comments.
+Set an appropriate python processor directory in configure file to fix
+the minifi startup warning:
+[org::apache::nifi::minifi::python::PythonCreator] [error] Could not access /etc/minifi/minifi-python/
 
-The license isn't shipped in the pypi package, so it was extracted from
-the github repo at [1].
-
-[1] https://github.com/linjackson78/jstyleson/blob/8c47cc9e665b3b1744cccfaa7a650de5f3c575dd/LICENSE
-
-Change-Id: I1e22ef42e823d172fd52f40e84bd5194c131310a
-Signed-off-by: Andrew Jeffery <andrew@aj.id.au>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../packagegroups/packagegroup-meta-python.bb     |  1 +
- .../python/python3-jstyleson/LICENSE              |  8 ++++++++
- .../python/python3-jstyleson_0.0.2.bb             | 15 +++++++++++++++
- 3 files changed, 24 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-jstyleson/LICENSE
- create mode 100644 meta-python/recipes-devtools/python/python3-jstyleson_0.0.2.bb
+ meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index 41f376b39b55..5f81fd35b75f 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -417,6 +417,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-cvxopt \
-     python3-jsonpath-rw \
-     python3-hexdump \
-+    python3-jstyleson \
- "
+diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
+index b3ea44c3c..ee5d172e4 100644
+--- a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
++++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
+@@ -86,6 +86,7 @@ do_install() {
+     install -d ${D}${MINIFI_BIN}
+     install -d ${D}${MINIFI_HOME}/conf
+     install -m 755 -d ${D}${localstatedir}/lib/minifi
++    install -m 755 -d ${D}${libexecdir}/minifi-python
+     cp -a ${WORKDIR}/minifi-install/usr/bin/*   ${D}${MINIFI_BIN}/
+     cp -a ${WORKDIR}/minifi-install/usr/conf/*  ${D}${MINIFI_HOME}/conf/
  
- RDEPENDS_packagegroup-meta-python3-extended = "\
-diff --git a/meta-python/recipes-devtools/python/python3-jstyleson/LICENSE b/meta-python/recipes-devtools/python/python3-jstyleson/LICENSE
-new file mode 100644
-index 000000000000..807babd62b64
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-jstyleson/LICENSE
-@@ -0,0 +1,8 @@
-+The MIT License (MIT)
-+Copyright (c) 2016 linjackson
-+
-+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-+
-+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-+
-+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-\ No newline at end of file
-diff --git a/meta-python/recipes-devtools/python/python3-jstyleson_0.0.2.bb b/meta-python/recipes-devtools/python/python3-jstyleson_0.0.2.bb
-new file mode 100644
-index 000000000000..e70ce33efcd2
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-jstyleson_0.0.2.bb
-@@ -0,0 +1,15 @@
-+SUMMARY = "Library to parse JSON with js-style comments."
-+HOMEPAGE = "https://github.com/linjackson78/jstyleson"
-+
-+SRC_URI += " file://LICENSE "
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=d97b96c7337934ee448ffd4392f32079"
-+
-+PYPI_PACKAGE_EXT = "tar.gz"
-+
-+inherit pypi setuptools3
-+
-+SRC_URI[sha256sum] = "680003f3b15a2959e4e6a351f3b858e3c07dd3e073a0d54954e34d8ea5e1308e"
-+
-+BBCLASSEXTEND = "native nativesdk"
+@@ -99,6 +100,8 @@ do_install() {
+         ${D}${MINIFI_HOME}/conf/minifi.properties
+     sed -i 's|nifi.flow.configuration.file=.*|nifi.flow.configuration.file='${MINIFI_HOME}'/conf/config.yml|g' \
+         ${D}${MINIFI_HOME}/conf/minifi.properties
++    sed -i 's|nifi.python.processor.dir=.*|nifi.python.processor.dir=${libexecdir}/minifi-python|g' \
++        ${D}${MINIFI_HOME}/conf/minifi.properties
+ 
+     sed -i 's|export MINIFI_HOME=.*|export MINIFI_HOME='${MINIFI_HOME}'|g' ${D}${MINIFI_BIN}/minifi.sh
+     sed -i 's|bin_dir=${MINIFI_HOME}/bin|bin_dir='${MINIFI_BIN}'|g' ${D}${MINIFI_BIN}/minifi.sh
 -- 
-2.27.0
+2.17.1
 
