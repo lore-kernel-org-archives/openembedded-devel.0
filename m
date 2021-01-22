@@ -1,100 +1,60 @@
-Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
- by mx.groups.io with SMTP id smtpd.web09.10016.1611328168543390613
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+ by mx.groups.io with SMTP id smtpd.web11.10766.1611331017609736314
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Jan 2021 07:09:28 -0800
+ Fri, 22 Jan 2021 07:56:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=EeU/qLYJ;
- spf=pass (domain: konsulko.com, ip: 209.85.167.175, mailfrom: paul.barker@konsulko.com)
-Received: by mail-oi1-f175.google.com with SMTP id 9so6292083oiq.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 22 Jan 2021 07:09:28 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ONos3yPp;
+ spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f175.google.com with SMTP id t6so3452483plq.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 22 Jan 2021 07:56:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=QjHVuDC9iMn6Cp4AuhP43hsMY6ZMiQBD3GmW3rPqaOc=;
-        b=EeU/qLYJVLOqzsro2HZ6HrT4/K7wJLeGz5BqkKFvL6Krdv44EETD2dPSvWRhwEbcLO
-         UsrZdolK12Zm1Y6G/XFKDiZ94XOTGHaj9fEJkzCOkQFFvGz9NbMRfYToQGV5JLq4TYPf
-         +2Vxl7iNTvl6d3Mlkq8CcGQ74IplbHzEm/dCs=
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id;
+        bh=TTMX68Sr777yEV51UScZwJNqj98QB570C8TrMs7B3sA=;
+        b=ONos3yPpB6kG5en8DFtxYi6SlmzxW+wxF5eVN2lX2b5sOrGZ+suKXAzZ1q0VzG6aMZ
+         3TA6bW04MQjxoXTapXZd6Qq7cqjLGHsOJFkiDBqBpG6ikj7hLNJjgqaAfB75wFOUB30Z
+         PLnPdNwYgbiyz/3Ci74wVm46H1hdU6qbI7nVz/jq7o+UHtDzVXcAl7LPZvq/PQIVgkQZ
+         X9Zxg62nWfvyNyacXQ5igQJ7rxXOnDtSbPM8wea1BJInborEfBAQWuDhIB703VTpSvaE
+         v2IjW1+XHMS/3SH+7OwX2lJLzkk6Y0AR4cexmj7YjG5zpfNmncJCqc/y0ohsdECpIR1o
+         2TUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=QjHVuDC9iMn6Cp4AuhP43hsMY6ZMiQBD3GmW3rPqaOc=;
-        b=McrrW7sysTGAZSU8q8q3QFg4JKEbiDHrPR5JK7Jac0u3uSisq+wNYnQ3zSysSmF9ii
-         kAY5Z3gHui8I6O4og2hCeZ0MEtiG7n0xFiklHbiQEOmfQ4TOd7a1m6S2773HDgH8iqx1
-         sa4tPjQ2eH1VPAYP3ldTiyQ+bqatVkA/clrc9+y3rlo5D2GCFKDCzjRZx4rPQIfM5FIA
-         bSDBPNnoVMXj+3s84AHxYHIG/NWoRqpyMXvGj100ZGOInGaa/QEWZLv2met/1LETRg96
-         9iLROt3D6ht+YkD8z6n8PZYm8gt+4vO7BdKjFN4B0/fF74kkMCRuSQ6zMCrGZDdS0wrq
-         /Yuw==
-X-Gm-Message-State: AOAM5338uGR5Dtn8aGNrvRyxhW6M9Usqmpsged5bWIYMi8Wr6IIr8CPX
-	qbhOTxkbhxuX+X1m6FB9YITA4ruHGtF77x2DgKEX+Q==
-X-Google-Smtp-Source: ABdhPJxY9R54Rmw/LoKFOZAMoqtpA8ZIcgd0GBFsvcO0foLXxvVZj22TdU+g46eUjPdhdwSZPoqb9guB2MGF/z80ksI=
-X-Received: by 2002:aca:1114:: with SMTP id 20mr3505811oir.152.1611328167812;
- Fri, 22 Jan 2021 07:09:27 -0800 (PST)
-MIME-Version: 1.0
-References: <CAM9ZRVuEaZLvg4trA-LhNyz8=yMs=cYhRzSR-emzmEGo8BdMhw@mail.gmail.com>
- <f7a9ec47-c74b-1831-d38d-914555898ad9@gmail.com>
-In-Reply-To: <f7a9ec47-c74b-1831-d38d-914555898ad9@gmail.com>
-From: "Paul Barker" <pbarker@konsulko.com>
-Date: Fri, 22 Jan 2021 15:09:17 +0000
-Message-ID: <CAM9ZRVuYDZvbUae8in4eYG=Ag2r3z0hFLr_-i8wQfwi656AF2A@mail.gmail.com>
-Subject: Re: [yocto] OpenEmbedded Virtual Stand at FOSDEM 2021
-To: robert.berger.yocto.user@gmail.com
-Cc: openembedded-core <openembedded-core@lists.openembedded.org>, 
-	openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: text/plain; charset="UTF-8"
+        h=x-gm-message-state:from:to:subject:date:message-id;
+        bh=TTMX68Sr777yEV51UScZwJNqj98QB570C8TrMs7B3sA=;
+        b=KUVeXiuWYstRiWl50REh9hzxH8vNqOOCWIB9Zpckjqk66YumcWpHsGroM5YCpe2f7b
+         6VfdA/dWgfYZ8fxzqmnNhnk5C2IgTFTn4rx5yQ1B7Wx5UHBWqFO/q+/DkY8XlCIU5zaN
+         Aywz/5wZkvl66M1KJb8V4zK8IHkH0HmC8Ba25wY7r3YzQYZQ71eZPje21AhUMB1tC8XP
+         FY4wn1AxCmbBL5Jf1SFXwubUdBxXKFP5WbQYPl29GcsMcKz54YxfsRZi5qvWFoNRSep/
+         e0g/t8NgNr9fvEbfwknf4/eICV91wW6iK1OmU/Ktwbh+2jlkv4fQVO30eFLOiCgBTap4
+         OxgA==
+X-Gm-Message-State: AOAM530ijfK+yHt1ib4JQDqRR8/MwF9iB+envZRiRwe9aHRWGCqtGtZR
+	mVUNaV3NOVZQYPMKblS1xCbhfQxov1N+vA==
+X-Google-Smtp-Source: ABdhPJzOdsWZnK4oitk5bG01Hy7bG9iAsOAoW4UFats/DeRhO86yL6bH7Tol3HmHQkC9bu2wv/HVNg==
+X-Received: by 2002:a17:90a:d09:: with SMTP id t9mr6343296pja.139.1611331016593;
+        Fri, 22 Jan 2021 07:56:56 -0800 (PST)
+Return-Path: <akuster808@gmail.com>
+Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:558f:b0e2:ccf8:d652])
+        by smtp.gmail.com with ESMTPSA id c23sm9609181pgc.72.2021.01.22.07.56.54
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 22 Jan 2021 07:56:55 -0800 (PST)
+From: "akuster" <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH 0/1] Update lua
+Date: Fri, 22 Jan 2021 07:56:53 -0800
+Message-Id: <20210122155654.18920-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.17.1
 
-On Thu, 14 Jan 2021 at 11:02, Robert Berger@yocto.user
-<robert.berger.yocto.user@gmail.com> wrote:
->
-> Hi,
->
-> On 13/01/2021 23:33, Paul Barker wrote:
-> > Hi folks,
-> >
-> > * Any participants in the project who want to help host the Matrix
-> > chat room between 09:00 and 18:00 each day of the event. This will
-> > likely involve introducing the project to folks dropping in the chat
-> > who aren't familiar with OpenEmbedded, answering basic questions and
-> > chatting about example uses of the project. You don't need to be a
-> > long-standing expert in the project to help out here! If you can do a
-> > couple of hours or a half day please let us know.
->
-> Let's try to come up with some schedule when I should be there and just
-> let me know how the join the chat.
->
-> >
-> > * Any contributions of video content to go along with the static web
-> > pages. I'm planning to record some short introductory video content
-> > but other contributions would also be welcome. Details on how to
-> > upload videos is expected in the near future but for now it would be
-> > good to just collect folks who are interested so we can discuss this
-> > further.
-> >
-> > If you're interested in any of the above please reply to me and/or the
-> > list. I look forward to virtually seeing many of you at FOSDEM 2021!
->
-> What kind of video would you like? A small video which explains a
-> specific topic?
->
-> Something like this?[1]
->
-> [1] https://www.youtube.com/watch?v=kmpEN953pzs&feature=youtu.be
+Oldly the community allowed me to update the stable branches to this version and I missed master.
+I thought master had a later version.
 
-I'd say video content for FOSDEM should be around the level of the
-things we'd show on the stand, short demos or introductions which can
-be understood by people not too familiar with the details of the
-project.
+Armin Kuster (1):
+  lua: update to 5.3.6
 
-I'm going to record a short "Introducing OpenEmbedded" presentation
-based around the way I usually pitch the project to folks who turn up
-at our FOSDEM stand and ask what the project is about. I may also do a
-quick build & boot demo with a Raspberry Pi if I have time to record
-that.
-
-Thanks,
+ meta-oe/recipes-devtools/lua/{lua_5.3.5.bb => lua_5.3.6.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-devtools/lua/{lua_5.3.5.bb => lua_5.3.6.bb} (92%)
 
 -- 
-Paul Barker
-Konsulko Group
+2.17.1
+
