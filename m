@@ -1,96 +1,259 @@
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web10.10891.1611331018496453434
+Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com [209.85.222.169])
+ by mx.groups.io with SMTP id smtpd.web10.13097.1611338666632846220
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Jan 2021 07:56:58 -0800
+ Fri, 22 Jan 2021 10:04:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=AoStjnU2;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id e9so3445987plh.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 22 Jan 2021 07:56:58 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=eV6JFcL4;
+ spf=pass (domain: gmail.com, ip: 209.85.222.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f169.google.com with SMTP id d14so5963643qkc.13
+        for <openembedded-devel@lists.openembedded.org>; Fri, 22 Jan 2021 10:04:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=9tqeaHOnVgV+Ih1rHsHUoJqwwn/DEURHCT3IfXI+x5I=;
-        b=AoStjnU2hzTPxVIVkhTSKg6JC5J1GQSrL3RTZrGqdsFNb9YrV+p5YmrZcWsFzNqYbW
-         MsSkoE0elDtPcb+trgb0p3Sv0vZGf9+rQsYNoYWOgGvww20A/kQ2IghvJ4uDTlj9N2Xq
-         35qxozrN8lX0qO3FPXE7P9XqZ1vIpr8y6hH6s/31Jz8Usu2GCL8VcKxBz1QSKX3UPJWL
-         kaJ2MgC3x0RJFJWLlkcsOn6Nkg8IEkuzIuhx67r8sPhVfi9N3MXC3fl3zDvWjVdIFCqO
-         vCtJue+D7sexDx8Pab7aRRAiAUxzGCuu1PARknzmHqaMK38j3Z5R4CzKqQDKGwk7CEnq
-         w8Rw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=644/qYng10zK0+yOf64xi1D9roYa5qDPG5AP7MmsCwE=;
+        b=eV6JFcL4WG0zRM9Y+JM6ZxQE/jdTVABHNnhlvADru5ejG0SQ8epWSbyg7FSWLdS6Qx
+         tK2wEO+TfRbBTbwMkYAO+a1RwqBkGvPz89uRW3Uutt0H2k3Z95jsQgD6oEN2TPJX60Ry
+         Lg59jbgu8ye97GDIeVTMpDRjMg+atLqm9OC0hwIsZk3FTG9VJDtBo+CEe4TjRt5nZ2H+
+         i7Vc7BP7gY4EGlKRuzv0J44N0DPr7J64LL/e7ynM7fg+tjMmzWir/g+9wyL80SUd5bXq
+         SKL11/LppWPa43H/JjkLc4BYb/rZ7+LHy0Of6x2w9bZJDtgl5U+/FKsK7dmlaLp8BAVg
+         NFNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=9tqeaHOnVgV+Ih1rHsHUoJqwwn/DEURHCT3IfXI+x5I=;
-        b=epLoBxYYa5KA7toUHiLPr7l0CPlnm+o8Qfd/w8AEg4e6p8t4DK6w1Q9vbPoluU+bRh
-         wIKb695DzqHaZNkr7+Ic/qWdyyofxnAHReuXTKgKVExQbD1J68MauHO3owYWtLDHxUiA
-         JjeGdhRUmaPvV2p+RR4BtOImCjJWm8cZ8jzQ+ThAO9YP3MH9vgHtubBMtGGEXJPEUZWP
-         +0G62hyXKhM/AApU8KVCsiDUAFcC4P5aUyWbwvok4ljtA2ox9Us+S6JpNv5Vwr7ze3ZS
-         5x6P2dLJZ9VOXzE2onPsYHr1PtAGO6ZGA6rLHMlfZsz8bgAyU+GDSmU1BI9GRqMJssiP
-         kaeA==
-X-Gm-Message-State: AOAM533shioogfsDiBJFmxp0GefzbXGGX5Oy3Q7a+LR3giaf/NlpVJDT
-	72Qv8/kmioajz3CJ8CWrI8BUN5weMbChbA==
-X-Google-Smtp-Source: ABdhPJyLaAcc+mc5G7NeDpOBQQKfBIc8lJqsGpQzXkZvnbfBK8SJ7oqG98Z6x2ZQlomNi8+H+notWQ==
-X-Received: by 2002:a17:90a:5318:: with SMTP id x24mr9156pjh.226.1611331017809;
-        Fri, 22 Jan 2021 07:56:57 -0800 (PST)
-Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:558f:b0e2:ccf8:d652])
-        by smtp.gmail.com with ESMTPSA id c23sm9609181pgc.72.2021.01.22.07.56.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 22 Jan 2021 07:56:57 -0800 (PST)
-From: "akuster" <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Armin Kuster <akuster@mvista.com>
-Subject: [meta-oe][PATCH 1/1] lua: update to 5.3.6
-Date: Fri, 22 Jan 2021 07:56:54 -0800
-Message-Id: <20210122155654.18920-2-akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210122155654.18920-1-akuster808@gmail.com>
-References: <20210122155654.18920-1-akuster808@gmail.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=644/qYng10zK0+yOf64xi1D9roYa5qDPG5AP7MmsCwE=;
+        b=eoxS0WoOIaqedmqjykBPSZY157F+YIGYiA+FP0xJTrF3xOPfe7LC/GXh0W9ZtUxEza
+         jPE+Ajs7i8iIYuTgJ5PBgFhQ31NUQCkh+Kudpe3m4Lp82lvxJgUWP4j1/JW2+wRfOe6d
+         vmGf5YZqmD1OFe6AmgG7GAaFuzZrR1JBN8kJC2RkUgVYdF8YHVuGf0pfy8nVlUPGOHUU
+         RjnosU6askGj8DDh7kM9zRTntYBzT84VuThyyOAdJzzxH4iBwzVSyS0aBPNKEkMkk26z
+         rUqVSv7nM4s2wiP5VC/u5zwOQkEVI14oUAHSKMNXWGa6WVRxCgBsGv7Tl+KZv97369d/
+         UN7g==
+X-Gm-Message-State: AOAM530ZsaIm5mpOss2B+yw1nBC0i4p+TuniKeX4/CeNu1MZ/HvVUJvu
+	zzSoqDIh2KQvP/8xcr9hSJMu4NiVSEv/8fBFuLY=
+X-Google-Smtp-Source: ABdhPJwm3ufDzzNwMmLyPnn/7XZGJ15vjBWCTyLmw7pCFzxhqrlI1fzfgvQJWL4vcj0Fzc0045YV/p8ESVu4U0hx+vY=
+X-Received: by 2002:a37:744:: with SMTP id 65mr5605518qkh.71.1611338665679;
+ Fri, 22 Jan 2021 10:04:25 -0800 (PST)
+MIME-Version: 1.0
+References: <20210122101652.46438-1-zhe.he@windriver.com> <20210122101652.46438-2-zhe.he@windriver.com>
+In-Reply-To: <20210122101652.46438-2-zhe.he@windriver.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 22 Jan 2021 10:04:14 -0800
+Message-ID: <CAMKF1sozWaDwOdO8AgY+O_8a7VNjnKSV5yMOccQuFJDokLDSnw@mail.gmail.com>
+Subject: Re: [oe] [PATCH 2/2] lmbench: lat_fifo: Fix cleanup sequence
+To: He Zhe <zhe.he@windriver.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000c7dd8f05b98104bc"
 
-From: Armin Kuster <akuster@mvista.com>
+--000000000000c7dd8f05b98104bc
+Content-Type: text/plain; charset="UTF-8"
 
-LIC_FILES_CHKSUM changed to do year updates
+Can you submit this upstream as well please
 
-This is the last 5.3.x update. This will give us the best
-starting point for doing Maintence moving forward.
 
-Its a bug fix only update. See http://www.lua.org/work/diffs-lua-5.3.5-lua-5.3.6.html
+On Fri, Jan 22, 2021 at 2:17 AM He Zhe <zhe.he@windriver.com> wrote:
 
-Signed-off-by: Armin Kuster <akuster@mvista.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-oe/recipes-devtools/lua/{lua_5.3.5.bb => lua_5.3.6.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/lua/{lua_5.3.5.bb => lua_5.3.6.bb} (92%)
+> Files should be unlinked after all users exit. Otherwise we might
+> experience
+> (w) read/write on pipe: No such file or directory
+>
+> Signed-off-by: He Zhe <zhe.he@windriver.com>
+> ---
+>  .../0001-lat_fifo-Fix-cleanup-sequence.patch  | 42 +++++++++++++++++++
+>  .../lmbench/lmbench_3.0-a9.bb                 |  1 +
+>  2 files changed, 43 insertions(+)
+>  create mode 100644
+> meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lat_fifo-Fix-cleanup-sequence.patch
+>
+> diff --git
+> a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lat_fifo-Fix-cleanup-sequence.patch
+> b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lat_fifo-Fix-cleanup-sequence.patch
+> new file mode 100644
+> index 000000000..42b14cece
+> --- /dev/null
+> +++
+> b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lat_fifo-Fix-cleanup-sequence.patch
+> @@ -0,0 +1,42 @@
+> +From 78912c0ac5e090095a2f2bd6226e02cce949e72e Mon Sep 17 00:00:00 2001
+> +From: He Zhe <zhe.he@windriver.com>
+> +Date: Fri, 22 Jan 2021 10:03:38 +0000
+> +Subject: [PATCH] lat_fifo: Fix cleanup sequence
+> +
+> +Files should be unlinked after all users exit.
+> +
+> +Signed-off-by: He Zhe <zhe.he@windriver.com>
+> +---
+> + src/lat_fifo.c | 12 ++++++------
+> + 1 file changed, 6 insertions(+), 6 deletions(-)
+> +
+> +diff --git a/src/lat_fifo.c b/src/lat_fifo.c
+> +index c625161..85bb9d1 100644
+> +--- a/src/lat_fifo.c
+> ++++ b/src/lat_fifo.c
+> +@@ -120,16 +120,16 @@ cleanup(iter_t iterations, void * cookie)
+> +
+> +       if (iterations) return;
+> +
+> +-      unlink(state->filename1);
+> +-      unlink(state->filename2);
+> +-      close(state->wr);
+> +-      close(state->rd);
+> +-
+> +       if (state->pid > 0) {
+> +-              kill(state->pid, 15);
+> ++              kill(state->pid, SIGKILL);
+> +               waitpid(state->pid, NULL, 0);
+> +               state->pid = 0;
+> +       }
+> ++
+> ++      unlink(state->filename1);
+> ++      unlink(state->filename2);
+> ++      close(state->wr);
+> ++      close(state->rd);
+> + }
+> +
+> + void
+> +--
+> +2.29.2
+> +
+> diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+> b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+> index 68c7e7b4f..21e81ecf2 100644
+> --- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+> +++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+> @@ -28,6 +28,7 @@ SRC_URI =
+> "${SOURCEFORGE_MIRROR}/lmbench/lmbench-${PV}.tgz \
+>
+> file://0001-src-Makefile-use-libdir-instead-of-hardcoded-lib.patch \
+>             file://0001-lmbench-Point-webpage-lm-to-target-directory.patch
+> \
+>             file://0001-doc-Fix-typos-in-manual-pages.patch \
+> +           file://0001-lat_fifo-Fix-cleanup-sequence.patch \
+>             "
+>  SRC_URI[md5sum] = "b3351a3294db66a72e2864a199d37cbf"
+>  SRC_URI[sha256sum] =
+> "cbd5777d15f44eab7666dcac418054c3c09df99826961a397d9acf43d8a2a551"
+> --
+> 2.17.1
+>
+>
+> 
+>
+>
 
-diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb b/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
-similarity index 92%
-rename from meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-rename to meta-oe/recipes-devtools/lua/lua_5.3.6.bb
-index 60c33d6586..5e8f54588b 100644
---- a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-+++ b/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Lua is a powerful light-weight programming language designed \
- for extending applications."
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=60aa5cfdbd40086501778d9b6ebf29ee"
-+LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=f43d8ee6bc4df18ef8b276439cc4a153"
- HOMEPAGE = "http://www.lua.org/"
- 
- SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
-@@ -20,8 +20,8 @@ SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \
-             file://run-ptest \
-            ', '', d)}"
- 
--SRC_URI[tarballsrc.md5sum] = "4f4b4f323fd3514a68e0ab3da8ce3455"
--SRC_URI[tarballsrc.sha256sum] = "0c2eed3f960446e1a3e4b9a1ca2f3ff893b6ce41942cf54d5dd59ab4b3b058ac"
-+SRC_URI[tarballsrc.md5sum] = "83f23dbd5230140a3770d5f54076948d"
-+SRC_URI[tarballsrc.sha256sum] = "fc5fd69bb8736323f026672b1b7235da613d7177e72558893a0bdcd320466d60"
- SRC_URI[tarballtest.md5sum] = "b14fe3748c1cb2d74e3acd1943629ba3"
- SRC_URI[tarballtest.sha256sum] = "b80771238271c72565e5a1183292ef31bd7166414cd0d43a8eb79845fa7f599f"
- 
--- 
-2.17.1
+--000000000000c7dd8f05b98104bc
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div><br></div><div dir=3D"auto">Can you submit this upstream as well pleas=
+e=C2=A0</div><div dir=3D"auto"><br></div><div dir=3D"auto"><br><div class=
+=3D"gmail_quote" dir=3D"auto"><div dir=3D"ltr" class=3D"gmail_attr">On Fri=
+, Jan 22, 2021 at 2:17 AM He Zhe &lt;<a href=3D"mailto:zhe.he@windriver.com=
+">zhe.he@windriver.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_q=
+uote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1e=
+x">Files should be unlinked after all users exit. Otherwise we might experi=
+ence<br>
+(w) read/write on pipe: No such file or directory<br>
+<br>
+Signed-off-by: He Zhe &lt;<a href=3D"mailto:zhe.he@windriver.com" target=
+=3D"_blank">zhe.he@windriver.com</a>&gt;<br>
+---<br>
+=C2=A0.../0001-lat_fifo-Fix-cleanup-sequence.patch=C2=A0 | 42 ++++++++++++=
++++++++<br>
+=C2=A0.../lmbench/<a href=3D"http://lmbench_3.0-a9.bb" rel=3D"noreferrer" =
+target=3D"_blank">lmbench_3.0-a9.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 1 +<br>
+=C2=A02 files changed, 43 insertions(+)<br>
+=C2=A0create mode 100644 meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/=
+0001-lat_fifo-Fix-cleanup-sequence.patch<br>
+<br>
+diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lat_fif=
+o-Fix-cleanup-sequence.patch b/meta-oe/recipes-benchmark/lmbench/lmbench-3.=
+0-a9/0001-lat_fifo-Fix-cleanup-sequence.patch<br>
+new file mode 100644<br>
+index 000000000..42b14cece<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lat_fifo-Fix-c=
+leanup-sequence.patch<br>
+@@ -0,0 +1,42 @@<br>
++From 78912c0ac5e090095a2f2bd6226e02cce949e72e Mon Sep 17 00:00:00 2001<br=
+>
++From: He Zhe &lt;<a href=3D"mailto:zhe.he@windriver.com" target=3D"_blank=
+">zhe.he@windriver.com</a>&gt;<br>
++Date: Fri, 22 Jan 2021 10:03:38 +0000<br>
++Subject: [PATCH] lat_fifo: Fix cleanup sequence<br>
++<br>
++Files should be unlinked after all users exit.<br>
++<br>
++Signed-off-by: He Zhe &lt;<a href=3D"mailto:zhe.he@windriver.com" target=
+=3D"_blank">zhe.he@windriver.com</a>&gt;<br>
++---<br>
++ src/lat_fifo.c | 12 ++++++------<br>
++ 1 file changed, 6 insertions(+), 6 deletions(-)<br>
++<br>
++diff --git a/src/lat_fifo.c b/src/lat_fifo.c<br>
++index c625161..85bb9d1 100644<br>
++--- a/src/lat_fifo.c<br>
+++++ b/src/lat_fifo.c<br>
++@@ -120,16 +120,16 @@ cleanup(iter_t iterations, void * cookie)<br>
++ <br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0if (iterations) return;<br>
++ <br>
++-=C2=A0 =C2=A0 =C2=A0 unlink(state-&gt;filename1);<br>
++-=C2=A0 =C2=A0 =C2=A0 unlink(state-&gt;filename2);<br>
++-=C2=A0 =C2=A0 =C2=A0 close(state-&gt;wr);<br>
++-=C2=A0 =C2=A0 =C2=A0 close(state-&gt;rd);<br>
++-<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0if (state-&gt;pid &gt; 0) {<br>
++-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 kill(state-&gt;pid, 15)=
+;<br>
+++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 kill(state-&gt;pid, SIG=
+KILL);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0waitpid(state-&gt;=
+pid, NULL, 0);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0state-&gt;pid =3D =
+0;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
+++<br>
+++=C2=A0 =C2=A0 =C2=A0 unlink(state-&gt;filename1);<br>
+++=C2=A0 =C2=A0 =C2=A0 unlink(state-&gt;filename2);<br>
+++=C2=A0 =C2=A0 =C2=A0 close(state-&gt;wr);<br>
+++=C2=A0 =C2=A0 =C2=A0 close(state-&gt;rd);<br>
++ }<br>
++ <br>
++ void <br>
++-- <br>
++2.29.2<br>
++<br>
+diff --git a/meta-oe/recipes-benchmark/lmbench/<a href=3D"http://lmbench_3=
+.0-a9.bb" rel=3D"noreferrer" target=3D"_blank">lmbench_3.0-a9.bb</a> b/meta=
+-oe/recipes-benchmark/lmbench/<a href=3D"http://lmbench_3.0-a9.bb" rel=3D"n=
+oreferrer" target=3D"_blank">lmbench_3.0-a9.bb</a><br>
+index 68c7e7b4f..21e81ecf2 100644<br>
+--- a/meta-oe/recipes-benchmark/lmbench/<a href=3D"http://lmbench_3.0-a9.b=
+b" rel=3D"noreferrer" target=3D"_blank">lmbench_3.0-a9.bb</a><br>
++++ b/meta-oe/recipes-benchmark/lmbench/<a href=3D"http://lmbench_3.0-a9.b=
+b" rel=3D"noreferrer" target=3D"_blank">lmbench_3.0-a9.bb</a><br>
+@@ -28,6 +28,7 @@ SRC_URI =3D &quot;${SOURCEFORGE_MIRROR}/lmbench/lmbench-=
+${PV}.tgz \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-src-Makefile-use-lib=
+dir-instead-of-hardcoded-lib.patch \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-lmbench-Point-webpag=
+e-lm-to-target-directory.patch \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-doc-Fix-typos-in-man=
+ual-pages.patch \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-lat_fifo-Fix-cleanup=
+-sequence.patch \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
+=C2=A0SRC_URI[md5sum] =3D &quot;b3351a3294db66a72e2864a199d37cbf&quot;<br>
+=C2=A0SRC_URI[sha256sum] =3D &quot;cbd5777d15f44eab7666dcac418054c3c09df99=
+826961a397d9acf43d8a2a551&quot;<br>
+-- <br>
+2.17.1<br>
+<br>
+<br>
+<br>
+<br>
+</blockquote></div></div>
+
+--000000000000c7dd8f05b98104bc--
