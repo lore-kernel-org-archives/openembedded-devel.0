@@ -1,168 +1,535 @@
-Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.85])
- by mx.groups.io with SMTP id smtpd.web08.7179.1611310630935105958
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web09.6943.1611311007568608702
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Jan 2021 02:17:11 -0800
+ Fri, 22 Jan 2021 02:23:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=B3dqiqVw;
- spf=pass (domain: windriver.com, ip: 40.107.75.85, mailfrom: zhe.he@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=P6I8AAGEudZ9ZGZUcQbCwcWpikvxPlVvVyvTyQaFMt0ZcW8O5T7wgNZNC2g88QXO4gUp8BBTcmihtmEg0dpBTRIX1qqSAU3i9t2peZXr5dMKcbYZKkYue1b7F+gWGcGumqc1+zT0FW7Pe7jLoBAu9nU79eWzdVWNOUQk/9HoP3K+TFAySBV0vjC5+tOdwTOg0YBSU7vNrp+4ltMQdHyiiIvUHma82Z8F0PMH14WonoCiSuLh401Djl7buecVZBicQy5PVpTdCSpoDIEqloGlJrM5m2n9cEO++g+NFb5ru0JKf8s94FbZLVbkpFdSQYT++jTrjCtunPWImiCCzKBDsQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=E0MbjEUW+rK/FSjwnOoLJCGMADbKulM+aLUphRe2MNY=;
- b=Z73yvQlPH/S6N41UVwc5x3WBRtw3hHTmTQWo6MKptdZmvHw9LFkl9say/18sthNxJxZbR5J/bj3/cZufAKhX19qV517AfeuNJgseizpsuSp6SjBaW0nBg2UeiPcsr0YCDHYq4aVZ52o+VonqCTb5F2mfPV+NuQBzMSNPjYgXktssHfDH8rWlfu8Vx8ZKVmy76HnSP3c8RS8iAmYlbxsuksfH0/goVDSVswoOBgg8X3QLTkQIGtcyaSys3CVTDZ2l2kXQc1VtomCI0mcJInY47bL14iXDrzyblNlZ5W5uwuujM53TK2oLBuNBXxYP+hTwg4nW+nziVx6pHt+aYWd5LA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=LC4+FnmA;
+ spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: peron.clem@gmail.com)
+Received: by mail-ej1-f41.google.com with SMTP id 6so6922951ejz.5
+        for <openembedded-devel@lists.openembedded.org>; Fri, 22 Jan 2021 02:23:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=E0MbjEUW+rK/FSjwnOoLJCGMADbKulM+aLUphRe2MNY=;
- b=B3dqiqVwo+pzfJ5rwKOiQAXHZzEaKXO8yOl18Y5RgSVyfktkrPJQqEhYsKNl3zrbFkMS3jbkKMeNxd0xjuCVDyhsX7+9UZT/ONCEpW32aeL8w978cjBuCykVnI4BB5ogM+uLGyaIBTAVLvFf71KZ3rypc2Wzk0jsBhfaT2vl/po=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from SN6PR11MB3360.namprd11.prod.outlook.com (2603:10b6:805:c8::30)
- by SA2PR11MB4858.namprd11.prod.outlook.com (2603:10b6:806:f9::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.13; Fri, 22 Jan
- 2021 10:17:09 +0000
-Received: from SN6PR11MB3360.namprd11.prod.outlook.com
- ([fe80::f013:6c05:9f97:ca7c]) by SN6PR11MB3360.namprd11.prod.outlook.com
- ([fe80::f013:6c05:9f97:ca7c%7]) with mapi id 15.20.3763.015; Fri, 22 Jan 2021
- 10:17:09 +0000
-From: "He Zhe" <zhe.he@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 2/2] lmbench: lat_fifo: Fix cleanup sequence
-Date: Fri, 22 Jan 2021 18:16:52 +0800
-Message-Id: <20210122101652.46438-2-zhe.he@windriver.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210122101652.46438-1-zhe.he@windriver.com>
-References: <20210122101652.46438-1-zhe.he@windriver.com>
-X-Originating-IP: [60.247.85.82]
-X-ClientProxiedBy: HK0PR01CA0055.apcprd01.prod.exchangelabs.com
- (2603:1096:203:a6::19) To SN6PR11MB3360.namprd11.prod.outlook.com
- (2603:10b6:805:c8::30)
-Return-Path: zhe.he@windriver.com
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=HOgATCzJ3XUyWpAzoAmlI5bA+IIH4r/DhXPJh6L2psE=;
+        b=LC4+FnmA/9WKPfFu7a+jBNL0RjTqG6ToD3W+Sj+jbizChpXQtAVmXK6vwYXPh9qzz0
+         weUvlo+OCM9lyQsjxSpq12DJ5d6aAmW2H4bHCcnF9ivVxmAtWmd1ygjkLzgf0GLJUrUy
+         8eoJx3+oC+6o60XP3lNSXV4lUnX2qqkJ5JqqTwcb8YBYcX2+d2SiNDwwim+A/jNdVVjl
+         7G6uE5TSTsErXMykQOAd90Yb22BjOQYlrmOTRmkh6Y0oRTntpLKEb9hiP82/ZaKSooTZ
+         phwz3dhkueqKbP1r22qLcWMzUsaWz6m/LNjmcFBdpX+KS8y9iCzdEjMo96/83Kl4dbM/
+         KtKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=HOgATCzJ3XUyWpAzoAmlI5bA+IIH4r/DhXPJh6L2psE=;
+        b=LZ7dWAFqpxyuozxSN3t6Qi+y4Y4AtKaW2IWBIiRagC7ZnSutgHYg4jtqiKDOg2nfA8
+         +q5tUd4ghJmZMKnkD0bWZ1SZB683haZYJFA/5bjUXn+5UK9NI7xL1+5UHrMvZonrohHv
+         +F9H5wptJzTzrPn30c57b4dChRXbt8yTw0ktuE9UEhYpjK3x7iciBSRpOOeA5S1vzjKX
+         bqPh9WPoky4BEIIG6EKaw+AWDnUtEvhjb/zX9w2ne8Og9uNShgfSqnDlFSYKq/SOT0UR
+         FpgwTX7wpZmrWP9vENt6Bj8i/j5cHteNINqgKWxwC6khkky7vAZb5UVd8iDMeeVWEdig
+         ZObg==
+X-Gm-Message-State: AOAM530u8mdv5VRLSychAwHo1hbCw6u7dEArAXVnNfcA8Cje70EvXi1J
+	ckfFv/Kl+x2RftRFSfTIgwQNnwuVAQ3reQx+T9I=
+X-Google-Smtp-Source: ABdhPJyDvpnofBjsBazqTaHPzF2nT/IBrtfH3V6dfs0g5GJ2HPYZUar6Ep2nLk3QPYWX/UZ7DpNrXr+n92MeowVf8kY=
+X-Received: by 2002:a17:906:259a:: with SMTP id m26mr2540132ejb.399.1611311005806;
+ Fri, 22 Jan 2021 02:23:25 -0800 (PST)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from pek-lpg-core2.corp.ad.wrs.com (60.247.85.82) by HK0PR01CA0055.apcprd01.prod.exchangelabs.com (2603:1096:203:a6::19) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.11 via Frontend Transport; Fri, 22 Jan 2021 10:17:08 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: f5ea1a14-24fc-4ad0-42ad-08d8bebee088
-X-MS-TrafficTypeDiagnostic: SA2PR11MB4858:
-X-Microsoft-Antispam-PRVS: 
-	<SA2PR11MB485809351D09429163783DEE8FA09@SA2PR11MB4858.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:152;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	kC+O5JXh9nP3EeoXH+XHaotYGZqfBTcVCa2YsdmMQFjY6LMIXsNly+jlBCY+ZrNMaMFCcojOiUzWEMK13gTxtJYTfNZPsFZWdEO3zcn1Hj8MfbnWI9hHBGwl5V8Td0TZczMqJkZZT4/uImpbYKLPDRbUZX5J8+vddxzasgzN6QzM+0YwrbX3hOxbgaVxq1gCqpzOguTDL1xDXfAF2U5R8AMyVTmnsHkdD7QTd4nOKJdf5zjDVaKG3L8kag25oYpmSmZfYUJeZXNIQtBMj1m67m3jtfXwySrh74XG268FCVQR6sZMmo3xEAWV2VGIoBksathx+1MNpTD9mnWvRbh/R8kr8xXrR04ZOqVqcbgpqvqWW7p6E4WZYZUit4vfpMLj
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN6PR11MB3360.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(396003)(346002)(39850400004)(366004)(376002)(1076003)(6486002)(83380400001)(6506007)(2906002)(478600001)(8936002)(66476007)(66946007)(26005)(52116002)(6512007)(8676002)(66556008)(6666004)(956004)(316002)(36756003)(2616005)(186003)(86362001)(6916009)(16526019)(5660300002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?Zgu/vxtGqeZyGH8HaBLIi/WxXn4IKto1+ZZdRHqqseFPdlwxp1qCxPQ9FJ6s?=
- =?us-ascii?Q?zaKLii7dYTWloBWxgXG2cgp6zLQcPq4jNwoJ3R3JDe+Sc18Htci0sO/z+QHa?=
- =?us-ascii?Q?EceVHsCsdukDUIvHnvNTQ9pi4mAIhy9g12ED4mbpyxzu+rIHK0AdEHGWM8Xr?=
- =?us-ascii?Q?z5IOZnEUGVmvcSMiMxwnJJYfaOj/q1wSOv0glEvNJWKgpdfloS9VqI5Ucwid?=
- =?us-ascii?Q?ASK/tQXLDYP0buhibwJY9yKfg42bZLWtZ4zcBJGtWBHpX3luIYAY8Nh+h/J3?=
- =?us-ascii?Q?obcGCR+5IncyMTAuPn9SvgkksZI5Y3hVPgULPg7GV6Qocuh0nFUWTqIR9fYZ?=
- =?us-ascii?Q?9GcK3u1y1TSFocr+f9gXza8Fo3IFmuCNiZOgJhnfH6VbSKfmlVjVBSphRg3F?=
- =?us-ascii?Q?RrdcYwOZxQnBI/w7/98tWATPUAEEhmp43jcZuRqUx/Wcj+uinAGaxEjHSB7V?=
- =?us-ascii?Q?Q/JsizoL26QqPTh27+jUEPTfX9UVVDnwnzFbmRbW9u2CyA6W3SE3WanIPjGo?=
- =?us-ascii?Q?W/e85tBzrxoqIMnPIb19houcuH3mlKfL2sOqeRPZ6V6nHQ1WOtmeqTahqdyb?=
- =?us-ascii?Q?djPmY/BVmO0+1qDFDoDtzRugG4/iY2ACGA0qflhZ15jjOFbNduNJH9HwTho6?=
- =?us-ascii?Q?JNjuRpZo9zR3jxBI9R0GzfGIQOK5V4RPg2g4sMN4FQLKJp4vAEL8mcusNxWw?=
- =?us-ascii?Q?L8hWhHAeYtlZ4biSZsY/72hh1xbWj1AjfpxEFBcu4bYnxjm8QRk1h4eVzF0j?=
- =?us-ascii?Q?0l4yYXE2BPdIp5wOMYUD3dzinchDCAYFoh7jNRetnbT7hrZd+2Jhc3H3o8im?=
- =?us-ascii?Q?m37DFH3vLW/9ir5W/FXhHjE0yOOhBl6t1mp+B784IBFSLqIikaSkUyeRzWHm?=
- =?us-ascii?Q?cSQejYVKLoD8HikDovXM9uqLxENW5HkrnYJxpqqqSMgsuO2wqrcLNHa83PDB?=
- =?us-ascii?Q?SOpx+EI/aucRcecZWG+8JBmLYQouEuh7zAOQOsbIlt+Hf40Tb+kvPdtm0Woj?=
- =?us-ascii?Q?/Ll2?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f5ea1a14-24fc-4ad0-42ad-08d8bebee088
-X-MS-Exchange-CrossTenant-AuthSource: SN6PR11MB3360.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2021 10:17:09.5134
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: tqGm1bo1bAByksp5/T6wyIwnAq0+/EQjZqo3rTUpx7Fkfpe5gCEZ1zSFioJ1edvAHqoLNBUXC3gRbjdXesAqyw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR11MB4858
-Content-Type: text/plain
+References: <20210121171036.3019430-1-peron.clem@gmail.com> <CAMKF1sq5ZGpUbJJ_ZPC4hz8wQ8cZMS6C65Ypn1mLQt91Lw61kw@mail.gmail.com>
+In-Reply-To: <CAMKF1sq5ZGpUbJJ_ZPC4hz8wQ8cZMS6C65Ypn1mLQt91Lw61kw@mail.gmail.com>
+From: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
+Date: Fri, 22 Jan 2021 11:23:14 +0100
+Message-ID: <CAJiuCcf-PdyXdouy+=ynzx9XnHhZvULMOcubEbviXCZ9JMEZOA@mail.gmail.com>
+Subject: Re: [PATCH] abseil-cpp: bump to LTS 2020_09_23 Patch Release 3
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Files should be unlinked after all users exit. Otherwise we might experience
-(w) read/write on pipe: No such file or directory
+Hi Khem,
 
-Signed-off-by: He Zhe <zhe.he@windriver.com>
----
- .../0001-lat_fifo-Fix-cleanup-sequence.patch  | 42 +++++++++++++++++++
- .../lmbench/lmbench_3.0-a9.bb                 |  1 +
- 2 files changed, 43 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lat_fifo-Fix-cleanup-sequence.patch
+On Thu, 21 Jan 2021 at 22:42, Khem Raj <raj.khem@gmail.com> wrote:
+>
+> it seems to add 0002-absl-always-use-asm-sgidefs.h.patch but the patch
+> file itself it missing.
 
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lat_fifo-Fix-cleanup-sequence.patch b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lat_fifo-Fix-cleanup-sequence.patch
-new file mode 100644
-index 000000000..42b14cece
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lat_fifo-Fix-cleanup-sequence.patch
-@@ -0,0 +1,42 @@
-+From 78912c0ac5e090095a2f2bd6226e02cce949e72e Mon Sep 17 00:00:00 2001
-+From: He Zhe <zhe.he@windriver.com>
-+Date: Fri, 22 Jan 2021 10:03:38 +0000
-+Subject: [PATCH] lat_fifo: Fix cleanup sequence
-+
-+Files should be unlinked after all users exit.
-+
-+Signed-off-by: He Zhe <zhe.he@windriver.com>
-+---
-+ src/lat_fifo.c | 12 ++++++------
-+ 1 file changed, 6 insertions(+), 6 deletions(-)
-+
-+diff --git a/src/lat_fifo.c b/src/lat_fifo.c
-+index c625161..85bb9d1 100644
-+--- a/src/lat_fifo.c
-++++ b/src/lat_fifo.c
-+@@ -120,16 +120,16 @@ cleanup(iter_t iterations, void * cookie)
-+ 
-+ 	if (iterations) return;
-+ 
-+-	unlink(state->filename1);
-+-	unlink(state->filename2);
-+-	close(state->wr);
-+-	close(state->rd);
-+-
-+ 	if (state->pid > 0) {
-+-		kill(state->pid, 15);
-++		kill(state->pid, SIGKILL);
-+ 		waitpid(state->pid, NULL, 0);
-+ 		state->pid = 0;
-+ 	}
-++
-++	unlink(state->filename1);
-++	unlink(state->filename2);
-++	close(state->wr);
-++	close(state->rd);
-+ }
-+ 
-+ void 
-+-- 
-+2.29.2
-+
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-index 68c7e7b4f..21e81ecf2 100644
---- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-@@ -28,6 +28,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/lmbench/lmbench-${PV}.tgz \
-            file://0001-src-Makefile-use-libdir-instead-of-hardcoded-lib.patch \
-            file://0001-lmbench-Point-webpage-lm-to-target-directory.patch \
-            file://0001-doc-Fix-typos-in-manual-pages.patch \
-+           file://0001-lat_fifo-Fix-cleanup-sequence.patch \
-            "
- SRC_URI[md5sum] = "b3351a3294db66a72e2864a199d37cbf"
- SRC_URI[sha256sum] = "cbd5777d15f44eab7666dcac418054c3c09df99826961a397d9acf43d8a2a551"
--- 
-2.17.1
+Indeed, I mixed between the two patches.
+I will fix that
 
+Regards,
+Clement
+
+>
+> On Thu, Jan 21, 2021 at 9:10 AM Cl=C3=A9ment P=C3=A9ron <peron.clem@gmail=
+.com> wrote:
+> >
+> > Most patches have been upstreamed and accepted.
+> >
+> > We can drop the -fPIC patch and pass BUILD_SHARED_LIBS instead.
+> >
+> > Signed-off-by: Cl=C3=A9ment P=C3=A9ron <peron.clem@gmail.com>
+> > ---
+> >
+> > Hi,
+> >
+> > I'm looking to bump gRPC that now use abseil-cpp.
+> >
+> > When building i got some strange error that have been fixed in recent r=
+elease.
+> >
+> > Instead of backporting all the fixes required I prefer to bump the pack=
+age.
+> >
+> > Regards,
+> > Clement
+> >
+> >  ...d-RISCV-support-to-GetProgramCounter.patch | 29 --------
+> >  .../0001-Fix-build-on-riscv32.patch           | 74 -------------------
+> >  ...e-maes-option-from-cross-compilation.patch | 53 -------------
+> >  .../0001-absl-always-use-asm-sgidefs.h.patch  |  8 +-
+> >  ...n-ABSL_HAVE_VDSO_SUPPORT-conditional.patch | 35 ---------
+> >  ...e-maes-option-from-cross-compilation.patch | 37 ++++++++++
+> >  .../abseil-cpp/0003-Add-fPIC-option.patch     | 27 -------
+> >  .../abseil-cpp/abseil-cpp_git.bb              | 21 +++---
+> >  8 files changed, 51 insertions(+), 233 deletions(-)
+> >  delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001=
+-Add-RISCV-support-to-GetProgramCounter.patch
+> >  delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001=
+-Fix-build-on-riscv32.patch
+> >  delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001=
+-Remove-maes-option-from-cross-compilation.patch
+> >  delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0002=
+-Add-forgotten-ABSL_HAVE_VDSO_SUPPORT-conditional.patch
+> >  create mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0002=
+-Remove-maes-option-from-cross-compilation.patch
+> >  delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0003=
+-Add-fPIC-option.patch
+> >
+> > diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Add-RI=
+SCV-support-to-GetProgramCounter.patch b/meta-oe/recipes-devtools/abseil-cp=
+p/abseil-cpp/0001-Add-RISCV-support-to-GetProgramCounter.patch
+> > deleted file mode 100644
+> > index 95ec070f6c5a..000000000000
+> > --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Add-RISCV-sup=
+port-to-GetProgramCounter.patch
+> > +++ /dev/null
+> > @@ -1,29 +0,0 @@
+> > -From 983eeae0792946fe5c090f95164c892ec6db5cc4 Mon Sep 17 00:00:00 2001
+> > -From: Khem Raj <raj.khem@gmail.com>
+> > -Date: Sun, 16 Feb 2020 16:22:53 -0800
+> > -Subject: [PATCH] Add RISCV support to GetProgramCounter()
+> > -
+> > -Identify PC register from signal context
+> > -
+> > -Upstream-Status: Submitted [https://github.com/abseil/abseil-cpp/pull/=
+621]
+> > -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ----
+> > - absl/debugging/internal/examine_stack.cc | 2 ++
+> > - 1 file changed, 2 insertions(+)
+> > -
+> > -diff --git a/absl/debugging/internal/examine_stack.cc b/absl/debugging=
+/internal/examine_stack.cc
+> > -index 4739fbc..fb77450 100644
+> > ---- a/absl/debugging/internal/examine_stack.cc
+> > -+++ b/absl/debugging/internal/examine_stack.cc
+> > -@@ -53,6 +53,8 @@ void* GetProgramCounter(void* vuc) {
+> > -     return reinterpret_cast<void*>(context->uc_mcontext.gp_regs[32]);
+> > - #elif defined(__powerpc__)
+> > -     return reinterpret_cast<void*>(context->uc_mcontext.regs->nip);
+> > -+#elif defined(__riscv)
+> > -+    return reinterpret_cast<void*>(context->uc_mcontext.__gregs[REG_P=
+C]);
+> > - #elif defined(__s390__) && !defined(__s390x__)
+> > -     return reinterpret_cast<void*>(context->uc_mcontext.psw.addr & 0x=
+7fffffff);
+> > - #elif defined(__s390__) && defined(__s390x__)
+> > ---
+> > -2.25.0
+> > -
+> > diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Fix-bu=
+ild-on-riscv32.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-=
+Fix-build-on-riscv32.patch
+> > deleted file mode 100644
+> > index e7c9b43c2994..000000000000
+> > --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Fix-build-on-=
+riscv32.patch
+> > +++ /dev/null
+> > @@ -1,74 +0,0 @@
+> > -From 04e28fdda03b545a0f7b446a784ec2fa7249cbb8 Mon Sep 17 00:00:00 2001
+> > -From: Khem Raj <raj.khem@gmail.com>
+> > -Date: Wed, 29 Apr 2020 15:37:40 -0700
+> > -Subject: [PATCH] Fix build on riscv32
+> > -
+> > -Define __NR_mmap in terms of __NR_mmap2 and __NR_futex interms of
+> > -__NR_futex_time64 for rv32, since there calls dont exist for rv32
+> > -
+> > -Also recognise rv32 as a new 32bit platform
+> > -
+> > -Upstream-Status: Submitted [https://github.com/abseil/abseil-cpp/pull/=
+675]
+> > -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ----
+> > - absl/base/internal/direct_mmap.h        | 5 +++++
+> > - absl/base/internal/spinlock_linux.inc   | 4 ++++
+> > - absl/synchronization/internal/waiter.cc | 4 ++++
+> > - 3 files changed, 13 insertions(+)
+> > -
+> > -diff --git a/absl/base/internal/direct_mmap.h b/absl/base/internal/dir=
+ect_mmap.h
+> > -index 5618867..90cfeca 100644
+> > ---- a/absl/base/internal/direct_mmap.h
+> > -+++ b/absl/base/internal/direct_mmap.h
+> > -@@ -26,6 +26,10 @@
+> > -
+> > - #ifdef __linux__
+> > -
+> > -+#if !defined(__NR_mmap) && defined(__riscv) && __riscv_xlen =3D=3D 32
+> > -+# define __NR_mmap __NR_mmap2
+> > -+#endif
+> > -+
+> > - #include <sys/types.h>
+> > - #ifdef __BIONIC__
+> > - #include <sys/syscall.h>
+> > -@@ -72,6 +76,7 @@ inline void* DirectMmap(void* start, size_t length, =
+int prot, int flags, int fd,
+> > - #if defined(__i386__) || defined(__ARM_ARCH_3__) || defined(__ARM_EAB=
+I__) || \
+> > -     (defined(__mips__) && _MIPS_SIM =3D=3D _MIPS_SIM_ABI32) ||       =
+            \
+> > -     (defined(__PPC__) && !defined(__PPC64__)) ||                     =
+        \
+> > -+    (defined(__riscv) && __riscv_xlen =3D=3D 32)  ||                 =
+            \
+> > -     (defined(__s390__) && !defined(__s390x__))
+> > -   // On these architectures, implement mmap with mmap2.
+> > -   static int pagesize =3D 0;
+> > -diff --git a/absl/base/internal/spinlock_linux.inc b/absl/base/interna=
+l/spinlock_linux.inc
+> > -index 323edd6..3dca444 100644
+> > ---- a/absl/base/internal/spinlock_linux.inc
+> > -+++ b/absl/base/internal/spinlock_linux.inc
+> > -@@ -14,6 +14,10 @@
+> > - //
+> > - // This file is a Linux-specific part of spinlock_wait.cc
+> > -
+> > -+#if !defined(__NR_futex) && defined(__riscv) && __riscv_xlen =3D=3D 3=
+2
+> > -+# define __NR_futex __NR_futex_time64
+> > -+#endif
+> > -+
+> > - #include <linux/futex.h>
+> > - #include <sys/syscall.h>
+> > - #include <unistd.h>
+> > -diff --git a/absl/synchronization/internal/waiter.cc b/absl/synchroniz=
+ation/internal/waiter.cc
+> > -index 2949f5a..7411042 100644
+> > ---- a/absl/synchronization/internal/waiter.cc
+> > -+++ b/absl/synchronization/internal/waiter.cc
+> > -@@ -24,6 +24,10 @@
+> > - #include <unistd.h>
+> > - #endif
+> > -
+> > -+#if !defined(__NR_futex) && defined(__riscv) && __riscv_xlen =3D=3D 3=
+2
+> > -+# define __NR_futex __NR_futex_time64
+> > -+#endif
+> > -+
+> > - #ifdef __linux__
+> > - #include <linux/futex.h>
+> > - #include <sys/syscall.h>
+> > ---
+> > -2.26.2
+> > -
+> > diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Remove=
+-maes-option-from-cross-compilation.patch b/meta-oe/recipes-devtools/abseil=
+-cpp/abseil-cpp/0001-Remove-maes-option-from-cross-compilation.patch
+> > deleted file mode 100644
+> > index 4c41cd890259..000000000000
+> > --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Remove-maes-o=
+ption-from-cross-compilation.patch
+> > +++ /dev/null
+> > @@ -1,53 +0,0 @@
+> > -From 70926666f7c5c35add363e3bcade6eaabace7206 Mon Sep 17 00:00:00 2001
+> > -From: Sinan Kaya <sinan.kaya@microsoft.com>
+> > -Date: Mon, 3 Feb 2020 03:25:57 +0000
+> > -Subject: [PATCH] Remove maes option from cross-compilation
+> > -
+> > ----
+> > - absl/copts/GENERATED_AbseilCopts.cmake | 4 ----
+> > - absl/copts/GENERATED_copts.bzl         | 4 ----
+> > - absl/copts/copts.py                    | 4 ----
+> > - 3 files changed, 12 deletions(-)
+> > -
+> > -diff --git a/absl/copts/GENERATED_AbseilCopts.cmake b/absl/copts/GENER=
+ATED_AbseilCopts.cmake
+> > -index 01bd40b..af99694 100644
+> > ---- a/absl/copts/GENERATED_AbseilCopts.cmake
+> > -+++ b/absl/copts/GENERATED_AbseilCopts.cmake
+> > -@@ -230,7 +230,3 @@ list(APPEND ABSL_RANDOM_HWAES_MSVC_X64_FLAGS
+> > -     "/Ob2"
+> > - )
+> > -
+> > --list(APPEND ABSL_RANDOM_HWAES_X64_FLAGS
+> > --    "-maes"
+> > --    "-msse4.1"
+> > --)
+> > -diff --git a/absl/copts/GENERATED_copts.bzl b/absl/copts/GENERATED_cop=
+ts.bzl
+> > -index 82f332f..9a548d1 100644
+> > ---- a/absl/copts/GENERATED_copts.bzl
+> > -+++ b/absl/copts/GENERATED_copts.bzl
+> > -@@ -231,7 +231,3 @@ ABSL_RANDOM_HWAES_MSVC_X64_FLAGS =3D [
+> > -     "/Ob2",
+> > - ]
+> > -
+> > --ABSL_RANDOM_HWAES_X64_FLAGS =3D [
+> > --    "-maes",
+> > --    "-msse4.1",
+> > --]
+> > -diff --git a/absl/copts/copts.py b/absl/copts/copts.py
+> > -index 068abce..c2f70fb 100644
+> > ---- a/absl/copts/copts.py
+> > -+++ b/absl/copts/copts.py
+> > -@@ -203,10 +203,6 @@ COPT_VARS =3D {
+> > -     # to improve performance of some random bit generators.
+> > -     "ABSL_RANDOM_HWAES_ARM64_FLAGS": ["-march=3Darmv8-a+crypto"],
+> > -     "ABSL_RANDOM_HWAES_ARM32_FLAGS": ["-mfpu=3Dneon"],
+> > --    "ABSL_RANDOM_HWAES_X64_FLAGS": [
+> > --        "-maes",
+> > --        "-msse4.1",
+> > --    ],
+> > -     "ABSL_RANDOM_HWAES_MSVC_X64_FLAGS": [
+> > -         "/O2",  # Maximize speed
+> > -         "/Ob2",  # Aggressive inlining
+> > ---
+> > -2.23.0
+> > -
+> > diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-absl-a=
+lways-use-asm-sgidefs.h.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-=
+cpp/0001-absl-always-use-asm-sgidefs.h.patch
+> > index 6bb59d933694..2bafcc6b1305 100644
+> > --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-absl-always-u=
+se-asm-sgidefs.h.patch
+> > +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-absl-always-u=
+se-asm-sgidefs.h.patch
+> > @@ -1,7 +1,7 @@
+> > -From 14229e8c6f42a96e4d725124193ceefa54e5e1a4 Mon Sep 17 00:00:00 2001
+> > +From 8f21fdfb83b0fa844a9f1f03a86a9ca46642d85e Mon Sep 17 00:00:00 2001
+> >  From: Khem Raj <raj.khem@gmail.com>
+> >  Date: Thu, 9 Apr 2020 13:06:27 -0700
+> > -Subject: [PATCH] absl: always use <asm/sgidefs.h>
+> > +Subject: [PATCH 1/2] absl: always use <asm/sgidefs.h>
+> >
+> >  Fixes mips/musl build, since sgidefs.h is not present on all C librari=
+es
+> >  but on linux asm/sgidefs.h is there and contains same definitions, usi=
+ng
+> > @@ -15,7 +15,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> >   1 file changed, 1 insertion(+), 5 deletions(-)
+> >
+> >  diff --git a/absl/base/internal/direct_mmap.h b/absl/base/internal/dir=
+ect_mmap.h
+> > -index 2e5e422..c515325 100644
+> > +index 16accf096604..ba7936cc934e 100644
+> >  --- a/absl/base/internal/direct_mmap.h
+> >  +++ b/absl/base/internal/direct_mmap.h
+> >  @@ -41,13 +41,9 @@
+> > @@ -34,5 +34,5 @@ index 2e5e422..c515325 100644
+> >
+> >   // SYS_mmap and SYS_munmap are not defined in Android.
+> >  --
+> > -2.26.0
+> > +2.25.1
+> >
+> > diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0002-Add-fo=
+rgotten-ABSL_HAVE_VDSO_SUPPORT-conditional.patch b/meta-oe/recipes-devtools=
+/abseil-cpp/abseil-cpp/0002-Add-forgotten-ABSL_HAVE_VDSO_SUPPORT-conditiona=
+l.patch
+> > deleted file mode 100644
+> > index fab4a738ea74..000000000000
+> > --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0002-Add-forgotten=
+-ABSL_HAVE_VDSO_SUPPORT-conditional.patch
+> > +++ /dev/null
+> > @@ -1,35 +0,0 @@
+> > -From 9384735383a0b8688e3f05ed23a53f18863eae20 Mon Sep 17 00:00:00 2001
+> > -From: Sinan Kaya <sinan.kaya@microsoft.com>
+> > -Date: Tue, 11 Feb 2020 11:36:00 -0500
+> > -Subject: [PATCH] Add forgotten ABSL_HAVE_VDSO_SUPPORT conditional
+> > -
+> > -Signed-off-by: Sinan Kaya <sinan.kaya@microsoft.com>
+> > ----
+> > - absl/debugging/internal/stacktrace_x86-inl.inc | 4 ++++
+> > - 1 file changed, 4 insertions(+)
+> > -
+> > -diff --git a/absl/debugging/internal/stacktrace_x86-inl.inc b/absl/deb=
+ugging/internal/stacktrace_x86-inl.inc
+> > -index ff0fd31..28607c3 100644
+> > ---- a/absl/debugging/internal/stacktrace_x86-inl.inc
+> > -+++ b/absl/debugging/internal/stacktrace_x86-inl.inc
+> > -@@ -171,6 +171,7 @@ static void **NextStackFrame(void **old_fp, const =
+void *uc) {
+> > -     static const unsigned char *kernel_rt_sigreturn_address =3D nullp=
+tr;
+> > -     static const unsigned char *kernel_vsyscall_address =3D nullptr;
+> > -     if (num_push_instructions =3D=3D -1) {
+> > -+#ifdef ABSL_HAVE_VDSO_SUPPORT
+> > -       absl::debugging_internal::VDSOSupport vdso;
+> > -       if (vdso.IsPresent()) {
+> > -         absl::debugging_internal::VDSOSupport::SymbolInfo
+> > -@@ -199,6 +200,9 @@ static void **NextStackFrame(void **old_fp, const =
+void *uc) {
+> > -       } else {
+> > -         num_push_instructions =3D 0;
+> > -       }
+> > -+#else
+> > -+      num_push_instructions =3D 0;
+> > -+#endif
+> > -     }
+> > -     if (num_push_instructions !=3D 0 && kernel_rt_sigreturn_address !=
+=3D nullptr &&
+> > -         old_fp[1] =3D=3D kernel_rt_sigreturn_address) {
+> > ---
+> > -2.20.1.windows.1
+> > -
+> > diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0002-Remove=
+-maes-option-from-cross-compilation.patch b/meta-oe/recipes-devtools/abseil=
+-cpp/abseil-cpp/0002-Remove-maes-option-from-cross-compilation.patch
+> > new file mode 100644
+> > index 000000000000..da9dbd936761
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0002-Remove-maes-o=
+ption-from-cross-compilation.patch
+> > @@ -0,0 +1,37 @@
+> > +From a9e15a4855c82eb948dedeecd83d5e17c3c8f767 Mon Sep 17 00:00:00 2001
+> > +From: Sinan Kaya <sinan.kaya@microsoft.com>
+> > +Date: Mon, 3 Feb 2020 03:25:57 +0000
+> > +Subject: [PATCH 2/2] Remove maes option from cross-compilation
+> > +
+> > +---
+> > + absl/copts/GENERATED_AbseilCopts.cmake | 4 ----
+> > + absl/copts/GENERATED_copts.bzl         | 4 ----
+> > + 2 files changed, 8 deletions(-)
+> > +
+> > +diff --git a/absl/copts/GENERATED_AbseilCopts.cmake b/absl/copts/GENER=
+ATED_AbseilCopts.cmake
+> > +index 97bd283eb739..ce29ac031b9c 100644
+> > +--- a/absl/copts/GENERATED_AbseilCopts.cmake
+> > ++++ b/absl/copts/GENERATED_AbseilCopts.cmake
+> > +@@ -210,7 +210,3 @@ list(APPEND ABSL_RANDOM_HWAES_ARM64_FLAGS
+> > + list(APPEND ABSL_RANDOM_HWAES_MSVC_X64_FLAGS
+> > + )
+> > +
+> > +-list(APPEND ABSL_RANDOM_HWAES_X64_FLAGS
+> > +-    "-maes"
+> > +-    "-msse4.1"
+> > +-)
+> > +diff --git a/absl/copts/GENERATED_copts.bzl b/absl/copts/GENERATED_cop=
+ts.bzl
+> > +index bcdd61ef8211..3e8eddd4bb08 100644
+> > +--- a/absl/copts/GENERATED_copts.bzl
+> > ++++ b/absl/copts/GENERATED_copts.bzl
+> > +@@ -211,7 +211,3 @@ ABSL_RANDOM_HWAES_ARM64_FLAGS =3D [
+> > + ABSL_RANDOM_HWAES_MSVC_X64_FLAGS =3D [
+> > + ]
+> > +
+> > +-ABSL_RANDOM_HWAES_X64_FLAGS =3D [
+> > +-    "-maes",
+> > +-    "-msse4.1",
+> > +-]
+> > +--
+> > +2.25.1
+> > +
+> > diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0003-Add-fP=
+IC-option.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0003-Add-f=
+PIC-option.patch
+> > deleted file mode 100644
+> > index bb78813a7fae..000000000000
+> > --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0003-Add-fPIC-opti=
+on.patch
+> > +++ /dev/null
+> > @@ -1,27 +0,0 @@
+> > -From d7160d647c8f8847f3ea8d7b0eb222936962c1af Mon Sep 17 00:00:00 2001
+> > -From: Sinan Kaya <sinan.kaya@microsoft.com>
+> > -Date: Tue, 11 Feb 2020 11:58:02 -0500
+> > -Subject: [PATCH] Add fPIC option
+> > -
+> > -Signed-off-by: Sinan Kaya <sinan.kaya@microsoft.com>
+> > ----
+> > - CMakeLists.txt | 3 +++
+> > - 1 file changed, 3 insertions(+)
+> > -
+> > -diff --git a/CMakeLists.txt b/CMakeLists.txt
+> > -index 74a3a4c..4f837b3 100644
+> > ---- a/CMakeLists.txt
+> > -+++ b/CMakeLists.txt
+> > -@@ -79,6 +79,9 @@ option(ABSL_USE_GOOGLETEST_HEAD
+> > -
+> > - option(ABSL_RUN_TESTS "If ON, Abseil tests will be run." OFF)
+> > -
+> > -+# link fails on arm64 and x86-64 without this
+> > -+add_compile_options(-fPIC)
+> > -+
+> > - if(${ABSL_RUN_TESTS})
+> > -   # enable CTest.  This will set BUILD_TESTING to ON unless otherwise=
+ specified
+> > -   # on the command line
+> > ---
+> > -2.20.1.windows.1
+> > -
+> > diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/me=
+ta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+> > index 8efa31e95311..eb2ed9e478e1 100644
+> > --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+> > +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+> > @@ -7,16 +7,12 @@ SECTION =3D "libs"
+> >  LICENSE =3D "Apache-2.0"
+> >  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddf52c6edb7adc22e533b2bacc3b=
+d3915"
+> >
+> > -PV =3D "20190808+git${SRCPV}"
+> > -SRCREV =3D "aa844899c937bde5d2b24f276b59997e5b668bde"
+> > -BRANCH =3D "lts_2019_08_08"
+> > -SRC_URI =3D "git://github.com/abseil/abseil-cpp;branch=3D${BRANCH}    =
+            \
+> > -           file://0001-Remove-maes-option-from-cross-compilation.patch=
+        \
+> > -           file://0002-Add-forgotten-ABSL_HAVE_VDSO_SUPPORT-conditiona=
+l.patch \
+> > -           file://0003-Add-fPIC-option.patch                          =
+        \
+> > -           file://0001-Add-RISCV-support-to-GetProgramCounter.patch \
+> > -           file://0001-absl-always-use-asm-sgidefs.h.patch \
+> > -           file://0001-Fix-build-on-riscv32.patch \
+> > +PV =3D "20200923+git${SRCPV}"
+> > +SRCREV =3D "6f9d96a1f41439ac172ee2ef7ccd8edf0e5d068c"
+> > +BRANCH =3D "lts_2020_09_23"
+> > +SRC_URI =3D "git://github.com/abseil/abseil-cpp;branch=3D${BRANCH}    =
+     \
+> > +           file://0001-Remove-maes-option-from-cross-compilation.patch=
+ \
+> > +           file://0002-absl-always-use-asm-sgidefs.h.patch            =
+ \
+> >            "
+> >
+> >  S =3D "${WORKDIR}/git"
+> > @@ -28,6 +24,10 @@ ASNEEDED_class-nativesdk =3D ""
+> >
+> >  inherit cmake
+> >
+> > +EXTRA_OECMAKE =3D "-DBUILD_SHARED_LIBS=3DON \
+> > +                 -DBUILD_TESTING=3DOFF    \
+> > +                "
+> > +
+> >  BBCLASSEXTEND =3D "native nativesdk"
+> >  ALLOW_EMPTY_${PN} =3D "1"
+> >
+> > @@ -55,4 +55,3 @@ python () {
+> >              raise bb.parse.SkipRecipe("%s-%s Needs support for corei7 =
+on x86_64" % (pkgn, pkgv))
+> >
+> >  }
+> > -
+> > --
+> > 2.25.1
+> >
