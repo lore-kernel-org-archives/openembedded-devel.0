@@ -1,93 +1,100 @@
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
- by mx.groups.io with SMTP id smtpd.web08.10177.1611327854272921690
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
+ by mx.groups.io with SMTP id smtpd.web09.10016.1611328168543390613
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Jan 2021 07:04:14 -0800
+ Fri, 22 Jan 2021 07:09:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ibm.com header.s=pp1 header.b=jfLyD1Ma;
- spf=none, err=permanent DNS error (domain: linux.vnet.ibm.com, ip: 148.163.158.5, mailfrom: klaus@linux.vnet.ibm.com)
-Received: from pps.filterd (m0098417.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id 10MF2r5i119578;
-	Fri, 22 Jan 2021 10:04:10 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=pp1;
- bh=2+2MNhm6EVQKjc1Pb2HMHQYoCXoduDu+5XslqfhnkwY=;
- b=jfLyD1MaeOlgOxpvEKDqFXBpj4KK9VUAKQcM5pAadhTs4B68diOS4AZEQrsHU2ZXPosk
- LMijMb+snjFeVEbEnIhbGLO+HBtEjxqUEbJUolJ4Z3h8Byim9MGO7oYoT3vzfl8zFM+X
- YwSHS7+dd3cvhOFjsZyydXGcW6v3iMhufLQsnC53Icn3VmGEfZq3P5nq7dmQnj0yBVx1
- OIsbvub5auM3/nhPLBAV58Ni3/KtqlpZFGRpvisKp0YxnZHQaSL0I/1DHHMHSWO9H2sD
- 5sM0Ju2tSumXWMYA87g0paYuckWwQYKy566pUHKaHJAbsKqB5mENTN8qXuwZKyPB1lgw 4A== 
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com with ESMTP id 367ync2wgr-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 22 Jan 2021 10:04:10 -0500
-Received: from m0098417.ppops.net (m0098417.ppops.net [127.0.0.1])
-	by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 10MF30hc120216;
-	Fri, 22 Jan 2021 10:04:09 -0500
-Received: from ppma04dal.us.ibm.com (7a.29.35a9.ip4.static.sl-reverse.com [169.53.41.122])
-	by mx0a-001b2d01.pphosted.com with ESMTP id 367ync2wg7-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 22 Jan 2021 10:04:09 -0500
-Received: from pps.filterd (ppma04dal.us.ibm.com [127.0.0.1])
-	by ppma04dal.us.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 10MF2u1o030698;
-	Fri, 22 Jan 2021 15:04:09 GMT
-Received: from b01cxnp22034.gho.pok.ibm.com (b01cxnp22034.gho.pok.ibm.com [9.57.198.24])
-	by ppma04dal.us.ibm.com with ESMTP id 367k0snvg6-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 22 Jan 2021 15:04:09 +0000
-Received: from b01ledav004.gho.pok.ibm.com (b01ledav004.gho.pok.ibm.com [9.57.199.109])
-	by b01cxnp22034.gho.pok.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 10MF48rT36897190
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Fri, 22 Jan 2021 15:04:08 GMT
-Received: from b01ledav004.gho.pok.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 50A88112066;
-	Fri, 22 Jan 2021 15:04:08 +0000 (GMT)
-Received: from b01ledav004.gho.pok.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 9E5BC112063;
-	Fri, 22 Jan 2021 15:04:07 +0000 (GMT)
-Received: from [9.85.152.90] (unknown [9.85.152.90])
-	by b01ledav004.gho.pok.ibm.com (Postfix) with ESMTP;
-	Fri, 22 Jan 2021 15:04:07 +0000 (GMT)
-Subject: Re: [oe] [meta-python][PATCH v2 2/2] meta-python: Add jstyleson
-To: Andrew Jeffery <andrew@aj.id.au>,
-        openembedded-devel@lists.openembedded.org
-Cc: raj.khem@gmail.com
-Newsgroups: gmane.comp.handhelds.openembedded
-References: <20210122054538.3675758-1-andrew@aj.id.au>
- <20210122054538.3675758-2-andrew@aj.id.au>
-From: "Klaus Heinrich Kiwi" <klaus@linux.vnet.ibm.com>
-Message-ID: <c21c1fab-4193-5355-004d-9c6961e4919d@linux.vnet.ibm.com>
-Date: Fri, 22 Jan 2021 12:04:04 -0300
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.1
+ dkim=pass header.i=@konsulko.com header.s=google header.b=EeU/qLYJ;
+ spf=pass (domain: konsulko.com, ip: 209.85.167.175, mailfrom: paul.barker@konsulko.com)
+Received: by mail-oi1-f175.google.com with SMTP id 9so6292083oiq.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 22 Jan 2021 07:09:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=QjHVuDC9iMn6Cp4AuhP43hsMY6ZMiQBD3GmW3rPqaOc=;
+        b=EeU/qLYJVLOqzsro2HZ6HrT4/K7wJLeGz5BqkKFvL6Krdv44EETD2dPSvWRhwEbcLO
+         UsrZdolK12Zm1Y6G/XFKDiZ94XOTGHaj9fEJkzCOkQFFvGz9NbMRfYToQGV5JLq4TYPf
+         +2Vxl7iNTvl6d3Mlkq8CcGQ74IplbHzEm/dCs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=QjHVuDC9iMn6Cp4AuhP43hsMY6ZMiQBD3GmW3rPqaOc=;
+        b=McrrW7sysTGAZSU8q8q3QFg4JKEbiDHrPR5JK7Jac0u3uSisq+wNYnQ3zSysSmF9ii
+         kAY5Z3gHui8I6O4og2hCeZ0MEtiG7n0xFiklHbiQEOmfQ4TOd7a1m6S2773HDgH8iqx1
+         sa4tPjQ2eH1VPAYP3ldTiyQ+bqatVkA/clrc9+y3rlo5D2GCFKDCzjRZx4rPQIfM5FIA
+         bSDBPNnoVMXj+3s84AHxYHIG/NWoRqpyMXvGj100ZGOInGaa/QEWZLv2met/1LETRg96
+         9iLROt3D6ht+YkD8z6n8PZYm8gt+4vO7BdKjFN4B0/fF74kkMCRuSQ6zMCrGZDdS0wrq
+         /Yuw==
+X-Gm-Message-State: AOAM5338uGR5Dtn8aGNrvRyxhW6M9Usqmpsged5bWIYMi8Wr6IIr8CPX
+	qbhOTxkbhxuX+X1m6FB9YITA4ruHGtF77x2DgKEX+Q==
+X-Google-Smtp-Source: ABdhPJxY9R54Rmw/LoKFOZAMoqtpA8ZIcgd0GBFsvcO0foLXxvVZj22TdU+g46eUjPdhdwSZPoqb9guB2MGF/z80ksI=
+X-Received: by 2002:aca:1114:: with SMTP id 20mr3505811oir.152.1611328167812;
+ Fri, 22 Jan 2021 07:09:27 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20210122054538.3675758-2-andrew@aj.id.au>
-X-TM-AS-GCONF: 00
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.343,18.0.737
- definitions=2021-01-22_11:2021-01-22,2021-01-22 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 phishscore=0
- spamscore=0 priorityscore=1501 adultscore=0 clxscore=1015 malwarescore=0
- bulkscore=0 impostorscore=0 mlxlogscore=999 lowpriorityscore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2009150000 definitions=main-2101220085
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <CAM9ZRVuEaZLvg4trA-LhNyz8=yMs=cYhRzSR-emzmEGo8BdMhw@mail.gmail.com>
+ <f7a9ec47-c74b-1831-d38d-914555898ad9@gmail.com>
+In-Reply-To: <f7a9ec47-c74b-1831-d38d-914555898ad9@gmail.com>
+From: "Paul Barker" <pbarker@konsulko.com>
+Date: Fri, 22 Jan 2021 15:09:17 +0000
+Message-ID: <CAM9ZRVuYDZvbUae8in4eYG=Ag2r3z0hFLr_-i8wQfwi656AF2A@mail.gmail.com>
+Subject: Re: [yocto] OpenEmbedded Virtual Stand at FOSDEM 2021
+To: robert.berger.yocto.user@gmail.com
+Cc: openembedded-core <openembedded-core@lists.openembedded.org>, 
+	openembedded-devel@lists.openembedded.org, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>
+Content-Type: text/plain; charset="UTF-8"
 
-On 1/22/2021 2:45 AM, Andrew Jeffery wrote:
-> jstyleson is a library to parse JSON with js-style comments.
-> 
-> The license isn't shipped in the pypi package, so it was extracted from
-> the github repo at [1].
-> 
-> [1] https://github.com/linjackson78/jstyleson/blob/8c47cc9e665b3b1744cccfaa7a650de5f3c575dd/LICENSE
+On Thu, 14 Jan 2021 at 11:02, Robert Berger@yocto.user
+<robert.berger.yocto.user@gmail.com> wrote:
+>
+> Hi,
+>
+> On 13/01/2021 23:33, Paul Barker wrote:
+> > Hi folks,
+> >
+> > * Any participants in the project who want to help host the Matrix
+> > chat room between 09:00 and 18:00 each day of the event. This will
+> > likely involve introducing the project to folks dropping in the chat
+> > who aren't familiar with OpenEmbedded, answering basic questions and
+> > chatting about example uses of the project. You don't need to be a
+> > long-standing expert in the project to help out here! If you can do a
+> > couple of hours or a half day please let us know.
+>
+> Let's try to come up with some schedule when I should be there and just
+> let me know how the join the chat.
+>
+> >
+> > * Any contributions of video content to go along with the static web
+> > pages. I'm planning to record some short introductory video content
+> > but other contributions would also be welcome. Details on how to
+> > upload videos is expected in the near future but for now it would be
+> > good to just collect folks who are interested so we can discuss this
+> > further.
+> >
+> > If you're interested in any of the above please reply to me and/or the
+> > list. I look forward to virtually seeing many of you at FOSDEM 2021!
+>
+> What kind of video would you like? A small video which explains a
+> specific topic?
+>
+> Something like this?[1]
+>
+> [1] https://www.youtube.com/watch?v=kmpEN953pzs&feature=youtu.be
 
-Tested as python3-jstyleson-native as part of an OpenBMC build..
+I'd say video content for FOSDEM should be around the level of the
+things we'd show on the stand, short demos or introductions which can
+be understood by people not too familiar with the details of the
+project.
 
+I'm going to record a short "Introducing OpenEmbedded" presentation
+based around the way I usually pitch the project to folks who turn up
+at our FOSDEM stand and ask what the project is about. I may also do a
+quick build & boot demo with a Raspberry Pi if I have time to record
+that.
 
-> Change-Id: I1e22ef42e823d172fd52f40e84bd5194c131310a
-> Signed-off-by: Andrew Jeffery <andrew@aj.id.au>
-Reviewed-by: Klaus Heinrich Kiwi <klaus@linux.vnet.ibm.com>
+Thanks,
 
-- Klaus
-
+-- 
+Paul Barker
+Konsulko Group
