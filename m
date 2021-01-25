@@ -1,265 +1,516 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.117])
- by mx.groups.io with SMTP id smtpd.web12.99.1611600212957760982
+Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com [209.85.222.177])
+ by mx.groups.io with SMTP id smtpd.web12.3765.1611614056378312392
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Jan 2021 10:43:33 -0800
+ Mon, 25 Jan 2021 14:34:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@studentsecuedu66932.onmicrosoft.com header.s=selector2-studentsecuedu66932-onmicrosoft-com header.b=YQ71w8+v;
- spf=pass (domain: ecu.edu, ip: 40.107.237.117, mailfrom: pawluchm@ecu.edu)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=LILaotdUERueFLtgTz7/aBPTxHx4DWjSlA/FOawMBjHcyvwLOQBjYFuxx++7y78A9GpWFoJKQNAdFuaz4vSbEU30w7IbOdp9xRDyYD8vOjhrh1SLn4qkVrXGhYv7EUduc+QOw1TXI1mMIKzNgAJgzhxyQlsaz/DiV7mMUgPSNEwOYVOYZCCKsxEOtimr9thyATL/ZL7Kq8rTO5A2fsnXVYM3Y8p8Nw8Q3Md8PlLp0XJsQiMppWAHFGTnuMD9DF1m8cQQHxGjC96cdVDqsEG6Ol0cG+s6AaQNNWaqDdhYdq/VmwwnCkBxgNERa8QzaDNvA1tabCMBTdBSb/d6HYXFmg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/v8OeYQprDjNmqMkZWx+gyaeT6UAvvgt7Sfb5TYocx4=;
- b=JY21nVymnR71R2t1Q+PjMz1te4qyIVvtdWE8qd1TVFHS5VXnHPmfMAFobNcIRUPm1DKNjjkEIhUVtn+Jli/HdztldquuuGHQHhQkKYETOy3t68P5aQVHKaAAcw/nBvYhNh6xigV6DKoz3bOZNA3llcLGOpggnEgsxmoIuHIVBXZ46bmqLbr9bvSoHsnnFpweXXcmOECvd2KY6c3yj75cW5fFGOP6u1q8p+eqm2mLOW5f1DwwJeTuugkmYDnvgNQWU0uBFAClVy7aV5ohJhtcjGH7OQaPhNC/KnJo3gxgmV317pYSzaHEiUxarAxat2wt6JzKltxfYS7Q3lnm5LGsSA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=ecu.edu; dmarc=pass action=none header.from=ecu.edu; dkim=pass
- header.d=ecu.edu; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=LaZRtDup;
+ spf=pass (domain: gmail.com, ip: 209.85.222.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f177.google.com with SMTP id t63so1560457qkc.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Jan 2021 14:34:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=studentsecuedu66932.onmicrosoft.com;
- s=selector2-studentsecuedu66932-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/v8OeYQprDjNmqMkZWx+gyaeT6UAvvgt7Sfb5TYocx4=;
- b=YQ71w8+vNJ87fFItplPBnrGNN8KeggaFAK1V3E+x9E3MkNCOTcQEA9+n8dfv0nDl/PQ/1vQHZWW4B8eXi2FkqWD5HUGnz1wxIFhbSdf6ZwpTA3bWHpca/JvSAV5aS0XNRphpdC+cREQ4rhKYaJsvY66sf+bOqx/9oQhkq3jcA4U=
-Received: from BL0PR0102MB3377.prod.exchangelabs.com (2603:10b6:207:1e::19) by
- BL0PR01MB4340.prod.exchangelabs.com (2603:10b6:208:81::15) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3784.19; Mon, 25 Jan 2021 18:43:31 +0000
-Received: from BL0PR0102MB3377.prod.exchangelabs.com
- ([fe80::b586:28bb:d36b:487b]) by BL0PR0102MB3377.prod.exchangelabs.com
- ([fe80::b586:28bb:d36b:487b%3]) with mapi id 15.20.3784.017; Mon, 25 Jan 2021
- 18:43:31 +0000
-From: "Pawluch, Michael Mila" <pawluchm@ecu.edu>
-To: "dmurphy@ti.com" <dmurphy@ti.com>, "akuster808@gmail.com"
-	<akuster808@gmail.com>
-CC: "Openembedded-issues@lists.openembedded.org"
-	<Openembedded-issues@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [Openembedded-issues] [RFC] Issues with mariadb-10.4.17 and aarch64
-Thread-Topic: [Openembedded-issues] [RFC] Issues with mariadb-10.4.17 and
- aarch64
-Thread-Index: AQHW80HXHTynbOqvQ0+iUbuvBADZfKo4rQN2
-Date: Mon, 25 Jan 2021 18:43:30 +0000
-Message-ID: 
- <BL0PR0102MB3377F2478792A70F7F565A0DCABD9@BL0PR0102MB3377.prod.exchangelabs.com>
-References: <6cde28bf-c69d-1d42-785e-dc228202e357@ti.com>
-In-Reply-To: <6cde28bf-c69d-1d42-785e-dc228202e357@ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: ti.com; dkim=none (message not signed)
- header.d=none;ti.com; dmarc=none action=none header.from=ecu.edu;
-x-originating-ip: [150.216.21.56]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: a9539c4e-6a07-43b1-c15f-08d8c1611cd1
-x-ms-traffictypediagnostic: BL0PR01MB4340:
-x-microsoft-antispam-prvs: 
- <BL0PR01MB434026D172B3C66BE7895D55CABD9@BL0PR01MB4340.prod.exchangelabs.com>
-x-ms-oob-tlc-oobclassifiers: OLM:8882;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- j+XhsJaIehRsiKfLbMNUCgE6MZ8w42tbyD5qeai0EhLnT7KM4mZQu5soQP0ogs7YpX6HVha4tiSMf3fXmMqtT3//c8HhM+ykTxt8PSlRp3q09dpo7aCpoEcZBpiBX+ZC5yRXgyCHbTRnkTDC9AakBTuhihK/dfCl0lz7Jnfx32yIWBZJYrjEqGuHSuBhFTm0cQ8nwS7Z63n8FD/mZ4gmd395oen2fQgUe1IkqauuWUF2pmhncyf5Nt5mW8IM8X4pzZMpSpSUjuNFKLz6fBALXn/g2h/rQtXD3MbCrXpDzyNxVCqnJR6nmsx/QgmJIi8HjQWUY8gCL00XfVZDcfOTYRehOg8m9oyF+jg63smlzNVUliKSsb13A+SFZyGEk6IL3vBsP2L09tb6pVe/3ULRjDYs5A1mDpPXL+XPYSk+xDvk7dx91ny8USVrlzgRaeIKS7M+X872mGOPlH4kLZgqRA==
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL0PR0102MB3377.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(4636009)(39860400002)(366004)(396003)(136003)(376002)(346002)(83380400001)(6506007)(53546011)(166002)(54906003)(110136005)(316002)(786003)(186003)(33656002)(86362001)(75432002)(7696005)(2906002)(76116006)(66946007)(26005)(64756008)(66476007)(66446008)(66556008)(8676002)(9686003)(55016002)(52536014)(5660300002)(8936002)(71200400001)(478600001)(4326008);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata: 
- 4LO708v4HdfRbTdtnALIpHyGfhJHyoldko987ooB2Ht+o8/yDmx9jGLcYPSSIcYNcevRaZM1C5RM0V9b9n0m5YxVs53X5W27697oO9Y71kvRwBNqqmeov3qCShqrAL9B4V8EIrlBeTWFHocrlY+jlJFbP3JVFPi7XZFrL31Yl9SnSlWLKpviitDS+fiM006VztopfyoUr0pm4lEtcDj12yzcRkDOawWOxQCn7XlTPEumjkuzs4rV4dFmapUo4rrQ6wNEL0OkUZb2PRCgS03XEG1yfEG+YOLVjto1OxWEDYGZ40NDOyj//JYGDTeLhtQT9i53dKp2bN3Ws7PLuFMFztyKf7Iy6cO1EUiErzxhb30s3ipXKXgKTiJmngxpezbDaPQ8csUfAOHPS6fR+olaplzorxpH9ymgWDU2g6Me06NxWJ/paHGFCgfzkJnGqHR6qn0/aXJqt6W6+1kMjqML9iU3HUgOdn3YsauVqWQ8XTHPtO6VIPmixDs3o9DmlB11484M4Thgat+c72g/Tf8nW5ikkeR+LwzCmfdOka5jsMz5dTai+JCj90tY6I3Lo+VreDB1Ho8WaXvUxjbvf+Mj71tYMbeHzVbgQVG7sLWhkwwT9+sGe6AVUke/XzcgIhFDdmerfcxln0CrHHCJ3c18Ya7mgjKryFMfrQ5aoSwLtcOMFFnwRIgIZhBXQi7aqZzlhR/ofJZ8PFNUHY3a/yvdqO1mGVfhUtgbcujftlr3opaPiyMg2oSfwGM4eBUGZzhDhAgL3J6/X3vhSz/WptoSfA==
-x-ms-exchange-transport-forked: True
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=/8AGD+KmVElDeADGUuoLkgSY7h3eFnqqv/9xwSH9hYc=;
+        b=LaZRtDupwFKYIVmeFa7Jj6UHGFR1H1zOSYuCdZE00+79JqmfrIPFqYAh3qITDXiJKI
+         d2qDebazCwW1sp3ZoC4TNYa/5qyJfq+rS7ySIuF+k5n2T9Vht0qBzfZPlyXN5Dbx8tMn
+         +csrmW3vUV2F2ZPjti46jPrfOGfRWnxa+KXLAKOl/ig1rw3ZPLdNb3ENm2+7UHfRaFK9
+         l6wJFKsA/S3k4mXjHPN2qUsznwD6XVIo8EuwnTuF3rHemYLmdvOTDxJEeGTMB1+PjqcG
+         C5ZlRfK7bj6CJOyVW2sRL2i/PVE1OizQowjbTCuv39x92b9cyf1+h8e7Hg/b8WpWtBQz
+         cL8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=/8AGD+KmVElDeADGUuoLkgSY7h3eFnqqv/9xwSH9hYc=;
+        b=bBYSqnxVz+wgS7n69mHUCUf2YWOruykkpVzRIgl+JxkobpOhSgYz111N7/8KgB43DU
+         D2vdGdT8ixNttS4dFX8+1vyiweuNWZnjnKaJ1Fo/M8+7Q0HRJ9kQyDYYSduQZCSk/CJZ
+         pigfhEED60HXXF8eedx9YkGy1N7z9vxzyNk/BjoNx8UaS849r/MapCMSDYAENlR4eWf5
+         AKVZRCW5GxtXAMEKdJfN880o67tlgmSIzuu5rpb/yF+uL9aDt8w4x+YqPT0HNEXdefGB
+         +S5Tdbfrm8EtyeIJ2rXZSGN/d4KNSpgRv29WbvURMmy9DCIM+cZ1VbIkuLBVJ2a2ZEW4
+         BYiA==
+X-Gm-Message-State: AOAM530WhR14sKfg7XGSii22+HW/C361AbnDuSkNpE9H1+gYY32TP4ne
+	wQIuuDRLWzPUiLgA6ZqQHw+hmKHnTHUjLkGPWEk=
+X-Google-Smtp-Source: ABdhPJyG/O4eABYQCwNz7dDlWzINvyg8OjDPIDZYmgIJJCg4P8u9yBuZntHAaEcSEH+M/P6AkH9UAkwaOSug81UDHHU=
+X-Received: by 2002:a37:9b8b:: with SMTP id d133mr2901746qke.71.1611614055303;
+ Mon, 25 Jan 2021 14:34:15 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: ecu.edu
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BL0PR0102MB3377.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a9539c4e-6a07-43b1-c15f-08d8c1611cd1
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Jan 2021 18:43:31.0683
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 17143cbb-385c-4c45-a36a-c65b72e3eae8
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: WHFETMBq1wb4i9mS7sPdLHmqQz0Uspt2y9i/aqvq4tJf3yp+FkUuHQ8U6TOBTbKy5ZOhDRpMC+fTLnpgy3oitg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR01MB4340
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_BL0PR0102MB3377F2478792A70F7F565A0DCABD9BL0PR0102MB3377_"
-
---_000_BL0PR0102MB3377F2478792A70F7F565A0DCABD9BL0PR0102MB3377_
-Content-Type: text/plain; charset="us-ascii"
+References: <20210122105651.3094011-1-peron.clem@gmail.com>
+In-Reply-To: <20210122105651.3094011-1-peron.clem@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Mon, 25 Jan 2021 14:33:49 -0800
+Message-ID: <CAMKF1sqtgNZ9rBdJGJx90EusPU7uHYcfsRpP82NdiF4cimGfpg@mail.gmail.com>
+Subject: Re: [oe] [PATCH v2] abseil-cpp: bump to LTS 2020_09_23 Patch Release 3
+To: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Why oh why is all of these being directed to me when I have nothing to do w=
-ith Open embedded?
+I see packaging failures e.g.
 
-Sent from Mail<https://go.microsoft.com/fwlink/?LinkId=3D550986> for Window=
-s 10
+https://errors.yoctoproject.org/Errors/Details/541790/
 
-From: Dan Murphy via lists.openembedded.org<mailto:dmurphy=3Dti.com@lists.o=
-penembedded.org>
-Sent: Monday, January 25, 2021 1:40 PM
-To: akuster808@gmail.com<mailto:akuster808@gmail.com>
-Cc: Openembedded-issues@lists.openembedded.org<mailto:Openembedded-issues@l=
-ists.openembedded.org>; openembedded-devel@lists.openembedded.org<mailto:op=
-enembedded-devel@lists.openembedded.org>
-Subject: [Openembedded-issues] [RFC] Issues with mariadb-10.4.17 and aarch6=
-4
-
-This email originated from outside ECU.
-
-
-Hello
-
-I was wondering if there has been any reports of the mariadb update on the =
-dunfell branch causing issues with 64bit compilers when the 'pam' is set fo=
-r DISTRO_FEATURES
-
-There does not seem to be a compilation issue but more of an installation i=
-ssue in which the lib/security directory is not being created.
-
-We are seeing issues in our arago distro with the following errors
-
- mv: cannot stat '/OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-ex=
-ternal-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image/lib/security':=
- No such file or directory
-
-09:38:06 WARNING: /OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-ex=
-ternal-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/temp/run.do_install.=
-5379:1 exit 1 from 'mv /OE/arago-dunfell-next-build/build-AARCH64_1/arago-t=
-mp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image/lib/secur=
-ity /OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-external-arm-gli=
-bc/work/aarch64-linux/mariadb/10.4.17-r0/image//usr/lib'
-
-
-
-
-
-
---_000_BL0PR0102MB3377F2478792A70F7F565A0DCABD9BL0PR0102MB3377_
-Content-Type: text/html; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-<html xmlns:o=3D"urn:schemas-microsoft-com:office:office" xmlns:w=3D"urn:sc=
-hemas-microsoft-com:office:word" xmlns:m=3D"http://schemas.microsoft.com/of=
-fice/2004/12/omml" xmlns=3D"http://www.w3.org/TR/REC-html40">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+On Fri, Jan 22, 2021 at 2:57 AM Cl=C3=A9ment P=C3=A9ron <peron.clem@gmail.=
+com> wrote:
 >
-<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
-<style><!--
-/* Font Definitions */
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0in;
-	font-size:11.0pt;
-	font-family:"Calibri",sans-serif;}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:blue;
-	text-decoration:underline;}
-pre
-	{mso-style-priority:99;
-	mso-style-link:"HTML Preformatted Char";
-	margin:0in;
-	font-size:10.0pt;
-	font-family:"Courier New";}
-span.HTMLPreformattedChar
-	{mso-style-name:"HTML Preformatted Char";
-	mso-style-priority:99;
-	mso-style-link:"HTML Preformatted";
-	font-family:"Courier New";}
-span.timestamp
-	{mso-style-name:timestamp;}
-.MsoChpDefault
-	{mso-style-type:export-only;}
-@page WordSection1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.0in 1.0in 1.0in;}
-div.WordSection1
-	{page:WordSection1;}
---></style>
-</head>
-<body lang=3D"EN-US" link=3D"blue" vlink=3D"#954F72" style=3D"word-wrap:bre=
-ak-word">
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal"><b><span style=3D"font-size:20.0pt">Why oh why is al=
-l of these being directed to me when I have nothing to do with Open embedde=
-d?<o:p></o:p></span></b></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">Sent from <a href=3D"https://go.microsoft.com/fwlink=
-/?LinkId=3D550986">
-Mail</a> for Windows 10</p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<div style=3D"mso-element:para-border-div;border:none;border-top:solid #E1E=
-1E1 1.0pt;padding:3.0pt 0in 0in 0in">
-<p class=3D"MsoNormal" style=3D"border:none;padding:0in"><b>From: </b><a hr=
-ef=3D"mailto:dmurphy=3Dti.com@lists.openembedded.org">Dan Murphy via lists.=
-openembedded.org</a><br>
-<b>Sent: </b>Monday, January 25, 2021 1:40 PM<br>
-<b>To: </b><a href=3D"mailto:akuster808@gmail.com">akuster808@gmail.com</a>=
-<br>
-<b>Cc: </b><a href=3D"mailto:Openembedded-issues@lists.openembedded.org">Op=
-enembedded-issues@lists.openembedded.org</a>;
-<a href=3D"mailto:openembedded-devel@lists.openembedded.org">openembedded-d=
-evel@lists.openembedded.org</a><br>
-<b>Subject: </b>[Openembedded-issues] [RFC] Issues with mariadb-10.4.17 and=
- aarch64</p>
-</div>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<table class=3D"MsoNormalTable" border=3D"0" cellspacing=3D"0" cellpadding=
-=3D"0" style=3D"border-collapse:collapse">
-<tbody>
-<tr>
-<td valign=3D"top" style=3D"border:solid black 1.0pt;background:#592A8A;pad=
-ding:.75pt .75pt .75pt .75pt">
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ar=
-ial&quot;,sans-serif;color:white">This email originated from outside ECU.<o=
-:p></o:p></span></p>
-</td>
-</tr>
-</tbody>
-</table>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<div>
-<p>Hello</p>
-<p>I was wondering if there has been any reports of the mariadb update on t=
-he dunfell branch causing issues with 64bit compilers when the 'pam' is set=
- for DISTRO_FEATURES</p>
-<p>There does not seem to be a compilation issue but more of an installatio=
-n issue in which the lib/security directory is not being created.</p>
-<p>We are seeing issues in our arago distro with the following errors<o:p><=
-/o:p></p>
-<pre style=3D"box-sizing: border-box;white-space:pre-wrap;overflow-wrap: br=
-eak-word;font-variant-ligatures: normal;font-variant-caps: normal;orphans: =
-2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration=
--thickness: initial;text-decoration-style: initial;text-decoration-color: i=
-nitial;word-spacing:0px"><span class=3D"timestamp"><span style=3D"font-size=
-:10.5pt;color:#333333"> </span></span><span style=3D"font-size:10.5pt;color=
-:#333333">mv: cannot stat '/OE/arago-dunfell-next-build/build-AARCH64_1/ara=
-go-tmp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image/lib/s=
-ecurity': No such file or directory<o:p></o:p></span></pre>
-<pre><span class=3D"timestamp"><b><span style=3D"font-size:10.5pt;color:#33=
-3333">09:38:06</span></b></span><span class=3D"timestamp"><span style=3D"fo=
-nt-size:10.5pt;color:#333333"> </span></span><span style=3D"font-size:10.5p=
-t;color:#333333">WARNING: /OE/arago-dunfell-next-build/build-AARCH64_1/arag=
-o-tmp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/temp/run.do_=
-install.5379:1 exit 1 from 'mv /OE/arago-dunfell-next-build/build-AARCH64_1=
-/arago-tmp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image/l=
-ib/security /OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-external=
--arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image//usr/lib'<o:p></o:p>=
-</span></pre>
-<pre><span style=3D"font-size:10.5pt;color:#333333"><o:p>&nbsp;</o:p></span=
-></pre>
-</div>
-<pre><span style=3D"font-size:10.5pt;color:#333333"><o:p>&nbsp;</o:p></span=
-></pre>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;"><o:p>&nbsp;</o:p></span></p>
-</div>
-</body>
-</html>
-
---_000_BL0PR0102MB3377F2478792A70F7F565A0DCABD9BL0PR0102MB3377_--
+> Most patches have been upstreamed and accepted.
+>
+> We can drop the -fPIC patch and pass BUILD_SHARED_LIBS instead.
+>
+> Signed-off-by: Cl=C3=A9ment P=C3=A9ron <peron.clem@gmail.com>
+> ---
+>
+> Changes since v1:
+>  - SRC_URI fix mixup between 0001 and 0002 patches name
+>
+>  ...d-RISCV-support-to-GetProgramCounter.patch | 29 --------
+>  .../0001-Fix-build-on-riscv32.patch           | 74 -------------------
+>  ...e-maes-option-from-cross-compilation.patch | 53 -------------
+>  .../0001-absl-always-use-asm-sgidefs.h.patch  |  8 +-
+>  ...n-ABSL_HAVE_VDSO_SUPPORT-conditional.patch | 35 ---------
+>  ...e-maes-option-from-cross-compilation.patch | 37 ++++++++++
+>  .../abseil-cpp/0003-Add-fPIC-option.patch     | 27 -------
+>  .../abseil-cpp/abseil-cpp_git.bb              | 21 +++---
+>  8 files changed, 51 insertions(+), 233 deletions(-)
+>  delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-=
+Add-RISCV-support-to-GetProgramCounter.patch
+>  delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-=
+Fix-build-on-riscv32.patch
+>  delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-=
+Remove-maes-option-from-cross-compilation.patch
+>  delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0002-=
+Add-forgotten-ABSL_HAVE_VDSO_SUPPORT-conditional.patch
+>  create mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0002-=
+Remove-maes-option-from-cross-compilation.patch
+>  delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0003-=
+Add-fPIC-option.patch
+>
+> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Add-RIS=
+CV-support-to-GetProgramCounter.patch b/meta-oe/recipes-devtools/abseil-cpp=
+/abseil-cpp/0001-Add-RISCV-support-to-GetProgramCounter.patch
+> deleted file mode 100644
+> index 95ec070f6c5a..000000000000
+> --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Add-RISCV-supp=
+ort-to-GetProgramCounter.patch
+> +++ /dev/null
+> @@ -1,29 +0,0 @@
+> -From 983eeae0792946fe5c090f95164c892ec6db5cc4 Mon Sep 17 00:00:00 2001
+> -From: Khem Raj <raj.khem@gmail.com>
+> -Date: Sun, 16 Feb 2020 16:22:53 -0800
+> -Subject: [PATCH] Add RISCV support to GetProgramCounter()
+> -
+> -Identify PC register from signal context
+> -
+> -Upstream-Status: Submitted [https://github.com/abseil/abseil-cpp/pull/6=
+21]
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ----
+> - absl/debugging/internal/examine_stack.cc | 2 ++
+> - 1 file changed, 2 insertions(+)
+> -
+> -diff --git a/absl/debugging/internal/examine_stack.cc b/absl/debugging/=
+internal/examine_stack.cc
+> -index 4739fbc..fb77450 100644
+> ---- a/absl/debugging/internal/examine_stack.cc
+> -+++ b/absl/debugging/internal/examine_stack.cc
+> -@@ -53,6 +53,8 @@ void* GetProgramCounter(void* vuc) {
+> -     return reinterpret_cast<void*>(context->uc_mcontext.gp_regs[32]);
+> - #elif defined(__powerpc__)
+> -     return reinterpret_cast<void*>(context->uc_mcontext.regs->nip);
+> -+#elif defined(__riscv)
+> -+    return reinterpret_cast<void*>(context->uc_mcontext.__gregs[REG_PC=
+]);
+> - #elif defined(__s390__) && !defined(__s390x__)
+> -     return reinterpret_cast<void*>(context->uc_mcontext.psw.addr & 0x7=
+fffffff);
+> - #elif defined(__s390__) && defined(__s390x__)
+> ---
+> -2.25.0
+> -
+> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Fix-bui=
+ld-on-riscv32.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-F=
+ix-build-on-riscv32.patch
+> deleted file mode 100644
+> index e7c9b43c2994..000000000000
+> --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Fix-build-on-r=
+iscv32.patch
+> +++ /dev/null
+> @@ -1,74 +0,0 @@
+> -From 04e28fdda03b545a0f7b446a784ec2fa7249cbb8 Mon Sep 17 00:00:00 2001
+> -From: Khem Raj <raj.khem@gmail.com>
+> -Date: Wed, 29 Apr 2020 15:37:40 -0700
+> -Subject: [PATCH] Fix build on riscv32
+> -
+> -Define __NR_mmap in terms of __NR_mmap2 and __NR_futex interms of
+> -__NR_futex_time64 for rv32, since there calls dont exist for rv32
+> -
+> -Also recognise rv32 as a new 32bit platform
+> -
+> -Upstream-Status: Submitted [https://github.com/abseil/abseil-cpp/pull/6=
+75]
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ----
+> - absl/base/internal/direct_mmap.h        | 5 +++++
+> - absl/base/internal/spinlock_linux.inc   | 4 ++++
+> - absl/synchronization/internal/waiter.cc | 4 ++++
+> - 3 files changed, 13 insertions(+)
+> -
+> -diff --git a/absl/base/internal/direct_mmap.h b/absl/base/internal/dire=
+ct_mmap.h
+> -index 5618867..90cfeca 100644
+> ---- a/absl/base/internal/direct_mmap.h
+> -+++ b/absl/base/internal/direct_mmap.h
+> -@@ -26,6 +26,10 @@
+> -
+> - #ifdef __linux__
+> -
+> -+#if !defined(__NR_mmap) && defined(__riscv) && __riscv_xlen =3D=3D 32
+> -+# define __NR_mmap __NR_mmap2
+> -+#endif
+> -+
+> - #include <sys/types.h>
+> - #ifdef __BIONIC__
+> - #include <sys/syscall.h>
+> -@@ -72,6 +76,7 @@ inline void* DirectMmap(void* start, size_t length, i=
+nt prot, int flags, int fd,
+> - #if defined(__i386__) || defined(__ARM_ARCH_3__) || defined(__ARM_EABI=
+__) || \
+> -     (defined(__mips__) && _MIPS_SIM =3D=3D _MIPS_SIM_ABI32) ||        =
+           \
+> -     (defined(__PPC__) && !defined(__PPC64__)) ||                      =
+       \
+> -+    (defined(__riscv) && __riscv_xlen =3D=3D 32)  ||                  =
+           \
+> -     (defined(__s390__) && !defined(__s390x__))
+> -   // On these architectures, implement mmap with mmap2.
+> -   static int pagesize =3D 0;
+> -diff --git a/absl/base/internal/spinlock_linux.inc b/absl/base/internal=
+/spinlock_linux.inc
+> -index 323edd6..3dca444 100644
+> ---- a/absl/base/internal/spinlock_linux.inc
+> -+++ b/absl/base/internal/spinlock_linux.inc
+> -@@ -14,6 +14,10 @@
+> - //
+> - // This file is a Linux-specific part of spinlock_wait.cc
+> -
+> -+#if !defined(__NR_futex) && defined(__riscv) && __riscv_xlen =3D=3D 32
+> -+# define __NR_futex __NR_futex_time64
+> -+#endif
+> -+
+> - #include <linux/futex.h>
+> - #include <sys/syscall.h>
+> - #include <unistd.h>
+> -diff --git a/absl/synchronization/internal/waiter.cc b/absl/synchroniza=
+tion/internal/waiter.cc
+> -index 2949f5a..7411042 100644
+> ---- a/absl/synchronization/internal/waiter.cc
+> -+++ b/absl/synchronization/internal/waiter.cc
+> -@@ -24,6 +24,10 @@
+> - #include <unistd.h>
+> - #endif
+> -
+> -+#if !defined(__NR_futex) && defined(__riscv) && __riscv_xlen =3D=3D 32
+> -+# define __NR_futex __NR_futex_time64
+> -+#endif
+> -+
+> - #ifdef __linux__
+> - #include <linux/futex.h>
+> - #include <sys/syscall.h>
+> ---
+> -2.26.2
+> -
+> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Remove-=
+maes-option-from-cross-compilation.patch b/meta-oe/recipes-devtools/abseil-=
+cpp/abseil-cpp/0001-Remove-maes-option-from-cross-compilation.patch
+> deleted file mode 100644
+> index 4c41cd890259..000000000000
+> --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Remove-maes-op=
+tion-from-cross-compilation.patch
+> +++ /dev/null
+> @@ -1,53 +0,0 @@
+> -From 70926666f7c5c35add363e3bcade6eaabace7206 Mon Sep 17 00:00:00 2001
+> -From: Sinan Kaya <sinan.kaya@microsoft.com>
+> -Date: Mon, 3 Feb 2020 03:25:57 +0000
+> -Subject: [PATCH] Remove maes option from cross-compilation
+> -
+> ----
+> - absl/copts/GENERATED_AbseilCopts.cmake | 4 ----
+> - absl/copts/GENERATED_copts.bzl         | 4 ----
+> - absl/copts/copts.py                    | 4 ----
+> - 3 files changed, 12 deletions(-)
+> -
+> -diff --git a/absl/copts/GENERATED_AbseilCopts.cmake b/absl/copts/GENERA=
+TED_AbseilCopts.cmake
+> -index 01bd40b..af99694 100644
+> ---- a/absl/copts/GENERATED_AbseilCopts.cmake
+> -+++ b/absl/copts/GENERATED_AbseilCopts.cmake
+> -@@ -230,7 +230,3 @@ list(APPEND ABSL_RANDOM_HWAES_MSVC_X64_FLAGS
+> -     "/Ob2"
+> - )
+> -
+> --list(APPEND ABSL_RANDOM_HWAES_X64_FLAGS
+> --    "-maes"
+> --    "-msse4.1"
+> --)
+> -diff --git a/absl/copts/GENERATED_copts.bzl b/absl/copts/GENERATED_copt=
+s.bzl
+> -index 82f332f..9a548d1 100644
+> ---- a/absl/copts/GENERATED_copts.bzl
+> -+++ b/absl/copts/GENERATED_copts.bzl
+> -@@ -231,7 +231,3 @@ ABSL_RANDOM_HWAES_MSVC_X64_FLAGS =3D [
+> -     "/Ob2",
+> - ]
+> -
+> --ABSL_RANDOM_HWAES_X64_FLAGS =3D [
+> --    "-maes",
+> --    "-msse4.1",
+> --]
+> -diff --git a/absl/copts/copts.py b/absl/copts/copts.py
+> -index 068abce..c2f70fb 100644
+> ---- a/absl/copts/copts.py
+> -+++ b/absl/copts/copts.py
+> -@@ -203,10 +203,6 @@ COPT_VARS =3D {
+> -     # to improve performance of some random bit generators.
+> -     "ABSL_RANDOM_HWAES_ARM64_FLAGS": ["-march=3Darmv8-a+crypto"],
+> -     "ABSL_RANDOM_HWAES_ARM32_FLAGS": ["-mfpu=3Dneon"],
+> --    "ABSL_RANDOM_HWAES_X64_FLAGS": [
+> --        "-maes",
+> --        "-msse4.1",
+> --    ],
+> -     "ABSL_RANDOM_HWAES_MSVC_X64_FLAGS": [
+> -         "/O2",  # Maximize speed
+> -         "/Ob2",  # Aggressive inlining
+> ---
+> -2.23.0
+> -
+> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-absl-al=
+ways-use-asm-sgidefs.h.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-c=
+pp/0001-absl-always-use-asm-sgidefs.h.patch
+> index 6bb59d933694..2bafcc6b1305 100644
+> --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-absl-always-us=
+e-asm-sgidefs.h.patch
+> +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-absl-always-us=
+e-asm-sgidefs.h.patch
+> @@ -1,7 +1,7 @@
+> -From 14229e8c6f42a96e4d725124193ceefa54e5e1a4 Mon Sep 17 00:00:00 2001
+> +From 8f21fdfb83b0fa844a9f1f03a86a9ca46642d85e Mon Sep 17 00:00:00 2001
+>  From: Khem Raj <raj.khem@gmail.com>
+>  Date: Thu, 9 Apr 2020 13:06:27 -0700
+> -Subject: [PATCH] absl: always use <asm/sgidefs.h>
+> +Subject: [PATCH 1/2] absl: always use <asm/sgidefs.h>
+>
+>  Fixes mips/musl build, since sgidefs.h is not present on all C librarie=
+s
+>  but on linux asm/sgidefs.h is there and contains same definitions, usin=
+g
+> @@ -15,7 +15,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>   1 file changed, 1 insertion(+), 5 deletions(-)
+>
+>  diff --git a/absl/base/internal/direct_mmap.h b/absl/base/internal/dire=
+ct_mmap.h
+> -index 2e5e422..c515325 100644
+> +index 16accf096604..ba7936cc934e 100644
+>  --- a/absl/base/internal/direct_mmap.h
+>  +++ b/absl/base/internal/direct_mmap.h
+>  @@ -41,13 +41,9 @@
+> @@ -34,5 +34,5 @@ index 2e5e422..c515325 100644
+>
+>   // SYS_mmap and SYS_munmap are not defined in Android.
+>  --
+> -2.26.0
+> +2.25.1
+>
+> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0002-Add-for=
+gotten-ABSL_HAVE_VDSO_SUPPORT-conditional.patch b/meta-oe/recipes-devtools/=
+abseil-cpp/abseil-cpp/0002-Add-forgotten-ABSL_HAVE_VDSO_SUPPORT-conditional=
+.patch
+> deleted file mode 100644
+> index fab4a738ea74..000000000000
+> --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0002-Add-forgotten-=
+ABSL_HAVE_VDSO_SUPPORT-conditional.patch
+> +++ /dev/null
+> @@ -1,35 +0,0 @@
+> -From 9384735383a0b8688e3f05ed23a53f18863eae20 Mon Sep 17 00:00:00 2001
+> -From: Sinan Kaya <sinan.kaya@microsoft.com>
+> -Date: Tue, 11 Feb 2020 11:36:00 -0500
+> -Subject: [PATCH] Add forgotten ABSL_HAVE_VDSO_SUPPORT conditional
+> -
+> -Signed-off-by: Sinan Kaya <sinan.kaya@microsoft.com>
+> ----
+> - absl/debugging/internal/stacktrace_x86-inl.inc | 4 ++++
+> - 1 file changed, 4 insertions(+)
+> -
+> -diff --git a/absl/debugging/internal/stacktrace_x86-inl.inc b/absl/debu=
+gging/internal/stacktrace_x86-inl.inc
+> -index ff0fd31..28607c3 100644
+> ---- a/absl/debugging/internal/stacktrace_x86-inl.inc
+> -+++ b/absl/debugging/internal/stacktrace_x86-inl.inc
+> -@@ -171,6 +171,7 @@ static void **NextStackFrame(void **old_fp, const v=
+oid *uc) {
+> -     static const unsigned char *kernel_rt_sigreturn_address =3D nullpt=
+r;
+> -     static const unsigned char *kernel_vsyscall_address =3D nullptr;
+> -     if (num_push_instructions =3D=3D -1) {
+> -+#ifdef ABSL_HAVE_VDSO_SUPPORT
+> -       absl::debugging_internal::VDSOSupport vdso;
+> -       if (vdso.IsPresent()) {
+> -         absl::debugging_internal::VDSOSupport::SymbolInfo
+> -@@ -199,6 +200,9 @@ static void **NextStackFrame(void **old_fp, const v=
+oid *uc) {
+> -       } else {
+> -         num_push_instructions =3D 0;
+> -       }
+> -+#else
+> -+      num_push_instructions =3D 0;
+> -+#endif
+> -     }
+> -     if (num_push_instructions !=3D 0 && kernel_rt_sigreturn_address !=
+=3D nullptr &&
+> -         old_fp[1] =3D=3D kernel_rt_sigreturn_address) {
+> ---
+> -2.20.1.windows.1
+> -
+> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0002-Remove-=
+maes-option-from-cross-compilation.patch b/meta-oe/recipes-devtools/abseil-=
+cpp/abseil-cpp/0002-Remove-maes-option-from-cross-compilation.patch
+> new file mode 100644
+> index 000000000000..da9dbd936761
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0002-Remove-maes-op=
+tion-from-cross-compilation.patch
+> @@ -0,0 +1,37 @@
+> +From a9e15a4855c82eb948dedeecd83d5e17c3c8f767 Mon Sep 17 00:00:00 2001
+> +From: Sinan Kaya <sinan.kaya@microsoft.com>
+> +Date: Mon, 3 Feb 2020 03:25:57 +0000
+> +Subject: [PATCH 2/2] Remove maes option from cross-compilation
+> +
+> +---
+> + absl/copts/GENERATED_AbseilCopts.cmake | 4 ----
+> + absl/copts/GENERATED_copts.bzl         | 4 ----
+> + 2 files changed, 8 deletions(-)
+> +
+> +diff --git a/absl/copts/GENERATED_AbseilCopts.cmake b/absl/copts/GENERA=
+TED_AbseilCopts.cmake
+> +index 97bd283eb739..ce29ac031b9c 100644
+> +--- a/absl/copts/GENERATED_AbseilCopts.cmake
+> ++++ b/absl/copts/GENERATED_AbseilCopts.cmake
+> +@@ -210,7 +210,3 @@ list(APPEND ABSL_RANDOM_HWAES_ARM64_FLAGS
+> + list(APPEND ABSL_RANDOM_HWAES_MSVC_X64_FLAGS
+> + )
+> +
+> +-list(APPEND ABSL_RANDOM_HWAES_X64_FLAGS
+> +-    "-maes"
+> +-    "-msse4.1"
+> +-)
+> +diff --git a/absl/copts/GENERATED_copts.bzl b/absl/copts/GENERATED_copt=
+s.bzl
+> +index bcdd61ef8211..3e8eddd4bb08 100644
+> +--- a/absl/copts/GENERATED_copts.bzl
+> ++++ b/absl/copts/GENERATED_copts.bzl
+> +@@ -211,7 +211,3 @@ ABSL_RANDOM_HWAES_ARM64_FLAGS =3D [
+> + ABSL_RANDOM_HWAES_MSVC_X64_FLAGS =3D [
+> + ]
+> +
+> +-ABSL_RANDOM_HWAES_X64_FLAGS =3D [
+> +-    "-maes",
+> +-    "-msse4.1",
+> +-]
+> +--
+> +2.25.1
+> +
+> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0003-Add-fPI=
+C-option.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0003-Add-fP=
+IC-option.patch
+> deleted file mode 100644
+> index bb78813a7fae..000000000000
+> --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0003-Add-fPIC-optio=
+n.patch
+> +++ /dev/null
+> @@ -1,27 +0,0 @@
+> -From d7160d647c8f8847f3ea8d7b0eb222936962c1af Mon Sep 17 00:00:00 2001
+> -From: Sinan Kaya <sinan.kaya@microsoft.com>
+> -Date: Tue, 11 Feb 2020 11:58:02 -0500
+> -Subject: [PATCH] Add fPIC option
+> -
+> -Signed-off-by: Sinan Kaya <sinan.kaya@microsoft.com>
+> ----
+> - CMakeLists.txt | 3 +++
+> - 1 file changed, 3 insertions(+)
+> -
+> -diff --git a/CMakeLists.txt b/CMakeLists.txt
+> -index 74a3a4c..4f837b3 100644
+> ---- a/CMakeLists.txt
+> -+++ b/CMakeLists.txt
+> -@@ -79,6 +79,9 @@ option(ABSL_USE_GOOGLETEST_HEAD
+> -
+> - option(ABSL_RUN_TESTS "If ON, Abseil tests will be run." OFF)
+> -
+> -+# link fails on arm64 and x86-64 without this
+> -+add_compile_options(-fPIC)
+> -+
+> - if(${ABSL_RUN_TESTS})
+> -   # enable CTest.  This will set BUILD_TESTING to ON unless otherwise =
+specified
+> -   # on the command line
+> ---
+> -2.20.1.windows.1
+> -
+> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/met=
+a-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+> index 8efa31e95311..4b8dfe250d48 100644
+> --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+> +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+> @@ -7,16 +7,12 @@ SECTION =3D "libs"
+>  LICENSE =3D "Apache-2.0"
+>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddf52c6edb7adc22e533b2bacc3bd=
+3915"
+>
+> -PV =3D "20190808+git${SRCPV}"
+> -SRCREV =3D "aa844899c937bde5d2b24f276b59997e5b668bde"
+> -BRANCH =3D "lts_2019_08_08"
+> -SRC_URI =3D "git://github.com/abseil/abseil-cpp;branch=3D${BRANCH}     =
+           \
+> -           file://0001-Remove-maes-option-from-cross-compilation.patch =
+       \
+> -           file://0002-Add-forgotten-ABSL_HAVE_VDSO_SUPPORT-conditional=
+.patch \
+> -           file://0003-Add-fPIC-option.patch                           =
+       \
+> -           file://0001-Add-RISCV-support-to-GetProgramCounter.patch \
+> -           file://0001-absl-always-use-asm-sgidefs.h.patch \
+> -           file://0001-Fix-build-on-riscv32.patch \
+> +PV =3D "20200923+git${SRCPV}"
+> +SRCREV =3D "6f9d96a1f41439ac172ee2ef7ccd8edf0e5d068c"
+> +BRANCH =3D "lts_2020_09_23"
+> +SRC_URI =3D "git://github.com/abseil/abseil-cpp;branch=3D${BRANCH}     =
+    \
+> +           file://0001-absl-always-use-asm-sgidefs.h.patch             =
+\
+> +           file://0002-Remove-maes-option-from-cross-compilation.patch =
+\
+>            "
+>
+>  S =3D "${WORKDIR}/git"
+> @@ -28,6 +24,10 @@ ASNEEDED_class-nativesdk =3D ""
+>
+>  inherit cmake
+>
+> +EXTRA_OECMAKE =3D "-DBUILD_SHARED_LIBS=3DON \
+> +                 -DBUILD_TESTING=3DOFF    \
+> +                "
+> +
+>  BBCLASSEXTEND =3D "native nativesdk"
+>  ALLOW_EMPTY_${PN} =3D "1"
+>
+> @@ -55,4 +55,3 @@ python () {
+>              raise bb.parse.SkipRecipe("%s-%s Needs support for corei7 o=
+n x86_64" % (pkgn, pkgv))
+>
+>  }
+> -
+> --
+> 2.25.1
+>
+>
+>=20
+>
