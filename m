@@ -1,86 +1,62 @@
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
- by mx.groups.io with SMTP id smtpd.web09.33049.1611558061972748702
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web10.34439.1611567045104067838
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 24 Jan 2021 23:01:02 -0800
+ Mon, 25 Jan 2021 01:30:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: intel.com, ip: 134.134.136.100, mailfrom: junjie.mao@intel.com)
-IronPort-SDR: NAgh2XVB2YSyBUIvz5ICg2wH+E5/siO4843SQp5JdXYpWthMnLcTStSmZKh5iYG1YoMu69p31S
- 5bf7cj66GCIw==
-X-IronPort-AV: E=McAfee;i="6000,8403,9874"; a="243750846"
-X-IronPort-AV: E=Sophos;i="5.79,372,1602572400"; 
-   d="scan'208";a="243750846"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Jan 2021 23:00:59 -0800
-IronPort-SDR: PMPk1WEIraUlQsXpQdFSUAPA4Ps+NKXWOHuNavV/Z+NJkVRsFLbResjMyDjeO5eFi9bQd2Oa/d
- UoYDuirnsU4A==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.79,372,1602572400"; 
-   d="scan'208";a="471906249"
-Received: from junjie-optiplex-7050.sh.intel.com ([10.239.153.129])
-  by fmsmga001.fm.intel.com with ESMTP; 24 Jan 2021 23:00:58 -0800
-From: "Junjie Mao" <junjie.mao@intel.com>
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=58296 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1l3yCo-0004I9-Hi; Mon, 25 Jan 2021 11:30:43 +0200
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Junjie Mao <junjie.mao@intel.com>
-Subject: [meta-python][PATCH] python3-xmlschema: Yocto recipes for validating against XSD 1.1
-Date: Mon, 25 Jan 2021 15:00:46 +0800
-Message-Id: <1611558046-30976-1-git-send-email-junjie.mao@intel.com>
-X-Mailer: git-send-email 2.7.4
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/2] python3-pyyaml: Upgrade 5.4 -> 5.4.1
+Date: Mon, 25 Jan 2021 11:30:35 +0200
+Message-Id: <20210125093035.6177-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210125093035.6177-1-leon.anavi@konsulko.com>
+References: <20210125093035.6177-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-This patch adds recipes for xmlschema and its dependency in order to enable
-XML validation against XSD 1.1 in Python.
+Upgrade to release 5.4.1:
 
-Signed-off-by: Junjie Mao <junjie.mao@intel.com>
+- Fix stub compat with older pyyaml versions that may unwittingly
+  load it
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python3-elementpath_2.1.2.bb              | 12 ++++++++++++
- .../python/python3-xmlschema_1.4.1.bb                | 20 ++++++++++++++++++++
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-xmlschema_1.4.1.bb
+ .../python/{python3-pyyaml_5.4.bb => python3-pyyaml_5.4.1.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pyyaml_5.4.bb => python3-pyyaml_5.4.1.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb b/meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb
-new file mode 100644
-index 0000000..f47f152
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb
-@@ -0,0 +1,12 @@
-+DESCRIPTION = "Provide XPath 1.0 and 2.0 selectors for Python's ElementTree XML data structures, both for the standard ElementTree library and for the lxml.etree library."
-+HOMEPAGE = "https://github.com/sissaschool/elementpath"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=5dbb7fb7d72da3921202dd7b995d3ecf"
-+
-+SRC_URI[md5sum] = "887f60e9c4fb9b0804a38372b2798101"
-+SRC_URI[sha256sum] = "23e1fed8d196d9a6cc4d220ef11fbe7eb8cff3a27848621c447e9d96134b2085"
-+
-+PYPI_PACKAGE = "elementpath"
-+inherit pypi setuptools3
-+
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-xmlschema_1.4.1.bb b/meta-python/recipes-devtools/python/python3-xmlschema_1.4.1.bb
-new file mode 100644
-index 0000000..c609931
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-xmlschema_1.4.1.bb
-@@ -0,0 +1,20 @@
-+SUMMARY = "The xmlschema library is an implementation of XML Schema for Python (supports Python 3.6+)."
-+HOMEPAGE = "https://github.com/sissaschool/xmlschema"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=47489cb18c469474afeb259ed1d4832f"
-+
-+SRC_URI[md5sum] = "f4c46f8c4415a0ca31dc2f623b668664"
-+SRC_URI[sha256sum] = "ade693114ff2e4a9ed5a2371ce29ae888f689bc58e326e5796f8a7dc8954dd4a"
-+
-+PYPI_PACKAGE = "xmlschema"
-+inherit pypi setuptools3
-+
-+DEPENDS += "\
-+    ${PYTHON_PN}-elementpath \
-+"
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-elementpath \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-pyyaml_5.4.bb b/meta-python/recipes-devtools/python/python3-pyyaml_5.4.1.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-pyyaml_5.4.bb
+rename to meta-python/recipes-devtools/python/python3-pyyaml_5.4.1.bb
+index e46b608f7..c3025fdc6 100644
+--- a/meta-python/recipes-devtools/python/python3-pyyaml_5.4.bb
++++ b/meta-python/recipes-devtools/python/python3-pyyaml_5.4.1.bb
+@@ -8,7 +8,7 @@ PYPI_PACKAGE = "PyYAML"
+ 
+ inherit pypi setuptools3
+ 
+-SRC_URI[sha256sum] = "3c49e39ac034fd64fd576d63bb4db53cda89b362768a67f07749d55f128ac18a"
++SRC_URI[sha256sum] = "607774cbba28732bfa802b54baa7484215f530991055bb562efbed5b2f20a45e"
+ 
+ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-datetime \
 -- 
-2.7.4
+2.17.1
 
