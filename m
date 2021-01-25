@@ -1,17 +1,17 @@
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.77])
- by mx.groups.io with SMTP id smtpd.web08.35758.1611578628465579051
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.76])
+ by mx.groups.io with SMTP id smtpd.web10.36005.1611578718300212238
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Jan 2021 04:43:48 -0800
+ Mon, 25 Jan 2021 04:45:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=JXrvx0IR;
- spf=pass (domain: windriver.com, ip: 40.107.244.77, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Qg2uKV3I;
+ spf=pass (domain: windriver.com, ip: 40.107.243.76, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=LcAzkJ4y6jLgtY8P+ECYqJc5/jz63gXus+oLo833g3Vp5fkVVkBfnlR1WEDcgp4wTdMz605+tl7tIK7vY1tHsdY2mJqO4jJT6B3ySoRqfw6yIupvM7L6EfZ9GUhpItK9IEtQ5Pi/Hp14Q7x72qFGrjNJ7eG3MoSGrgf1Ye68Fc7OMAIvdI6GtNhvm4Qoe3uAUMeFRFfrp1Ki3DCMX6dLePT0b1WGCf3cbKZyvhv84c9Nslw9gtumqAxvfV/AOseDWdnvKa4M8xv73bQO3Xn1qhf1d/uKgxCWG4vKslqS+EerpJMfGo5zFLsnAK6uO9aIf7g/Sz8d0sNgAi+Moll9yQ==
+ b=gVB/nqlgfKt7Ef7O+LWLCj61dlUBSxLXIeSt1n8YYY9CeQ/DpfvvzT8wpGHNFJy8Dn08FEHYH4f9zReOxM61iI9zXE5yamGAwp/N/f2TZuxi/1w+3P+G0a70mwbwdztS0imik/GNL7FtDpVMNwfTHfoiEv16Zd8vVn0wGmG3UBkPWwPkhuSmPrf9zdQFW6qGawANm4hLlK2eeyzsUiTbAa0gWmz4sPqsCirZYgX9Qum/iK0wEizRTMIuweJl3C3UsQupjBxzJbHOxKD0zeE8hs5HXS/H55hb96jkNDrMt76y3ARnLg083TobMBcvQkzQf6TmAhlaQTbAFJ9T4Gie+Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PgOhSqFqz/sIEcLfdEdyfXLD5nOkaHsQhCc6O1DEtyo=;
- b=XA83qO1nkZ8j4QSqtj+Tgi0sQCjpmNnO4eGj3E5XYOdjDHdJn/IcTIE0N58s9ovqbtTZw+OQDqEifUIrmsR9dVHwEZYRMub4f1l6LzWZ4jFLNk4xnUuvMtLpHB00Dy1lw/Afgd5Rm/p0h9tgFTRLWz5DEwPtbn4G51kA8wtlBKWGR7tUFxmVY8LN9qR1yDyUv897PM9OqLvwiXLomUqYvQSk+9s+wL4IPDZc3ImhJJaP/DfqGIrQTE6haWJ48WHKEA8/aNNn5UgcEQmcTnGvJZ+Ma6rHfu57vQpswyo3dSW/Nj3dizQgGB95tkHJ1wXbSLHI5eChaiaFDomTCwA0+g==
+ bh=tcl0ip9As/b6mWSUuirLEPLorvPgi4WPyfwHyk8ssbk=;
+ b=cQju8Xf2IYWfZ5OsTD9H+/7snVM7aJSpFHaK7se3N6KaK3RuzYnd56z5V5yufcybKnCOLBZXK+/52heD2S2uD1B6yZrcRBePjGNJcSTkIUea1Uv4eFW31uSM5EsQ/cOUP6GVX6hFcSihUIjMiX5hWL2pvxPNqhX737RLkQORoFEhXA58Aig+UmRnvp1MQxcSZHowiyfXXNyPRwBsQLTGILThNEB31xBlTZYeuqH1+t2CPhmsVYbqBohNeW/u4RTbJZ5ZlHCoTbQ1XKFN+gFik0AjKVFhJMCCPsYV42FW884j3XFD4UrYH+Pq3DtuQqhIhR213slzfBWPBkmnpTnHhw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,135 +19,130 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PgOhSqFqz/sIEcLfdEdyfXLD5nOkaHsQhCc6O1DEtyo=;
- b=JXrvx0IRM7y41erBUmo0LQDTmrBfaHgGdl7NUoBn2lq2mL5ZrXbaG/NdTghQ5SFu1y/euT6rhqm6KDnawZ7pnC5muX318agB81YTci3lLLwxxTgvZdcQLgxf74Pfw/1cn7NJ91SI/rPQIewDjKAqklbJqS39+KfvxQSiJQL/aOc=
+ bh=tcl0ip9As/b6mWSUuirLEPLorvPgi4WPyfwHyk8ssbk=;
+ b=Qg2uKV3IJuxMeoVyxLZUAAR/e/eCxhB6mFfWGznUpb4pjQBTI1kScOUnuThs2LtQggkj5fkvsv2eMdvC8j2w0yqXEDzRPLg9xTILhlNHK1G9o9KJE1v1VAf8qfImTdFkjVldMY5kxheWgUi8YL5eFCETIp6Du/kSQT7IYmyE7x8=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from MN2PR11MB3919.namprd11.prod.outlook.com (2603:10b6:208:13b::27)
- by MN2PR11MB3678.namprd11.prod.outlook.com (2603:10b6:208:f8::11) with
+ by MN2PR11MB3647.namprd11.prod.outlook.com (2603:10b6:208:ec::26) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.16; Mon, 25 Jan
- 2021 12:43:47 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.17; Mon, 25 Jan
+ 2021 12:45:16 +0000
 Received: from MN2PR11MB3919.namprd11.prod.outlook.com
  ([fe80::5462:9c04:72b3:6c44]) by MN2PR11MB3919.namprd11.prod.outlook.com
  ([fe80::5462:9c04:72b3:6c44%7]) with mapi id 15.20.3763.019; Mon, 25 Jan 2021
- 12:43:47 +0000
-Subject: Re: [oe] [meta-python][PATCH 5/5] python3-prompt-toolkit: Upgrade 3.0.10 -> 3.0.11
-To: Leon Anavi <leon.anavi@konsulko.com>,
+ 12:45:16 +0000
+Subject: Re: [oe] [meta-networking] [PATCH] python3-networkmanager: upgrade 2.1 -> 2.2
+To: zangrc <zangrc.fnst@cn.fujitsu.com>,
  openembedded-devel@lists.openembedded.org
-References: <20210122101126.25982-1-leon.anavi@konsulko.com>
- <20210122101126.25982-5-leon.anavi@konsulko.com>
+References: <1611348464-4528-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <485cd2f8-f161-cd72-e19b-4a78cde8c20b@windriver.com>
-Date: Mon, 25 Jan 2021 07:43:46 -0500
+Message-ID: <276e4089-7d9a-85ee-11b3-73feaf310289@windriver.com>
+Date: Mon, 25 Jan 2021 07:45:14 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.0
-In-Reply-To: <20210122101126.25982-5-leon.anavi@konsulko.com>
+In-Reply-To: <1611348464-4528-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BN9PR03CA0450.namprd03.prod.outlook.com
- (2603:10b6:408:113::35) To MN2PR11MB3919.namprd11.prod.outlook.com
+X-ClientProxiedBy: BN9PR03CA0395.namprd03.prod.outlook.com
+ (2603:10b6:408:111::10) To MN2PR11MB3919.namprd11.prod.outlook.com
  (2603:10b6:208:13b::27)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BN9PR03CA0450.namprd03.prod.outlook.com (2603:10b6:408:113::35) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.14 via Frontend Transport; Mon, 25 Jan 2021 12:43:47 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BN9PR03CA0395.namprd03.prod.outlook.com (2603:10b6:408:111::10) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.14 via Frontend Transport; Mon, 25 Jan 2021 12:45:16 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 37c7ecef-38cc-4e52-666f-08d8c12edbd1
-X-MS-TrafficTypeDiagnostic: MN2PR11MB3678:
+X-MS-Office365-Filtering-Correlation-Id: 3d154fc3-fa88-496e-a5c4-08d8c12f10e2
+X-MS-TrafficTypeDiagnostic: MN2PR11MB3647:
 X-Microsoft-Antispam-PRVS: 
-	<MN2PR11MB36785005409E0995E59C94129FBD9@MN2PR11MB3678.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:4714;
+	<MN2PR11MB364773BF2CD2A8458CFB18E89FBD9@MN2PR11MB3647.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:369;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	WsoRrUAwaDxSKqoKmdyINQw2/xl8NTUAmUvtshKCfAi0DE/unNtUGucGH3PyHwl2K3T5nrcqG+c86VxKWYdzt85mVkJWqxEzuDv/pwI1sPA06qPt6aG27MACp6zurbDEHDbb1sML+89yc4xZGjMEZ4k06CtnGPwhWvClQGToe8D9zDzMx+zeYij9hVdBI+QP1SVf88gENue6ZP4Zaq5erE9rD8/9NMNJ5ms6rMjqKcoD6eXl8j66MpiwT2DHrjV/lpU8d3TLXvhagBfemeXnCzPz9CqNKToQ03Ow/l2aEeTQAzh8TT7tmyX/JgZ+dcezWPUqWmkDQOwUjt+X+yx/wmsYwguZOyABJxS0M8wyAPN9A6g/pzAUp6utHz/Eo4yUN5ka8waHkTItbaR2dv+/nlD3PmkaEcNV5jMjDQi9zluUreh35b/2MXBD6Zz0N9EsIjnNztK9suotLz74YZke6m9hGcu8I0VVB0pIV++4EF03/u1ZK0Cofd5oMxrOmbd1/puCDtXZaJuurSJP7uLI3986jB/fFaI0ArEbinsn2rw=
+	20SRKKzb3pKRO3UOcXu2fNwEotGNYVFHCsvAKy6WXByX5+l2gnr3aEHFmLDFOr9EUWTRYFL+IUl9NBPBKpLMxjnuBn+pl5LgCw6MFPDvV/6OSbDjbkTYxHpMbmf1CNT4VDOAIacgkWBE8BL2fe1BcCK3HwalDnn3JUJIMj580DktTe8N+Nb6bP7r8mxwyUCwbZkvOhKmC/VSKzevDveBS+IufebipdXExj74aqvYbtheNX0wPCpXK8vlxbXvDoIF5hMcKudljo1RjhE9dAXWw9cfTWrNH7lR/TyQEiEfmTzr+J+NIE5lOsPlFxnIdepP3KBbqz+3s8pid+BH1k21/M52CT7lg/xtxBk0Y8cuSvkNhdpuhca8zOFILtHbkl1e4Y7Rf3D+ZeN7hp0lPCJjuxm639CNpPFPdrWtANBYN6l4yv8yGVGnDH9RYUC1Q+lgw0Zyv6/m1zTK0PH7vAgS2S0cybWliCPFsBscONghOJLHi+uQEXIWJv8eBlPdUDSJoi0q42ZdwJe7+QiP7EjElWoSg6o9yBoEbirWBm9aBQ7U015CovvtgohLyaBrzTiS
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR11MB3919.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(136003)(376002)(366004)(39840400004)(346002)(33964004)(2906002)(966005)(478600001)(186003)(316002)(956004)(5660300002)(52116002)(166002)(66556008)(53546011)(66476007)(16526019)(8936002)(36756003)(6486002)(66946007)(26005)(31696002)(44832011)(31686004)(8676002)(86362001)(83380400001)(16576012)(2616005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR11MB3919.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(376002)(39850400004)(346002)(136003)(366004)(66946007)(8936002)(5660300002)(44832011)(86362001)(31686004)(956004)(166002)(186003)(966005)(66476007)(66556008)(36756003)(478600001)(26005)(52116002)(16526019)(16576012)(2906002)(316002)(83380400001)(2616005)(31696002)(53546011)(33964004)(6486002)(8676002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?UmRJVmR6OE12VXJXN3VKTUZVdndZUlFnOHJYZk5GcjMvVFlnNUdSMTFMM0ph?=
- =?utf-8?B?ZExjQWpmNFF2NGltSm9QQmtZTHNKenl1RFBGWkx3SWVKMFJUa2h1YWF4aFJ4?=
- =?utf-8?B?OGpNa1BPbkZlNlZpZ0k0UzdiK0kzdG1FSk1FeWM3aTBtTkZpWEF2a3VOR1o1?=
- =?utf-8?B?REZpQUxnM0k3MWlzVDh2T2xLMzMraWpZK084QURVS25aVTFXNGxscGNLSHIv?=
- =?utf-8?B?N0lhNy9TTVZvdlNEdzQzWGhFQU56aENFdkV4Yk4zMXYrdDNLZWdCazJrUk9m?=
- =?utf-8?B?cUZURnpCbk1oQm5KRVQ0TUNmaDlTSFExQUVjbzFnY1l5VzFnbkVmNUpVRTh5?=
- =?utf-8?B?dEEyR0FyUDlXT0hnZmxhdnVDL09FRWcyalRpbVJ3L0hTbVRGV2xva2F4UHdr?=
- =?utf-8?B?REx4RDExMTRVWlhrbzRNZ21ORUVzUmJHamdvSGUwaVVyekdTZG1FanZoa0Ja?=
- =?utf-8?B?TEpKYnVTTi9FdW9IdUVYL2J0M0FkQlV5OVZ4cE1HOE9UcVZabWphaGxFL25w?=
- =?utf-8?B?a0dlMmpDMjFRK0pnYzc2NFJOR1dZQ21RdEhuc2VGV2dKZnBBWUlrTXJSaUVQ?=
- =?utf-8?B?MXZzZHYrWTB3cGgrU1dXcnNROUl2QmZtZ2d2SXZRbHdFanNrQ3pENER0YStM?=
- =?utf-8?B?UHZWWjN0b1hGNklsa2t2VXN3REN6YlJCUDZjSzZqWnU4TkNvMWNWRW5mVlVZ?=
- =?utf-8?B?aEJjNzR2Qk42RTJyVGNXVnd6VnlhY01iTWhjdG9GRXZBcVVlaXNhMVBpb1Jr?=
- =?utf-8?B?K0UwdGZDcmUyaHJNT3lJYkQzZUZuYmFhbnpLT0dTbFJVZmtEVXdIdlZ6QURp?=
- =?utf-8?B?K1U4Ni9uRTE5M3Q4bHdoVzRFK2gzcHlZRUI0d1NDa0pZWnVSSTl1aDdkWjNU?=
- =?utf-8?B?eC9WbWJOM3BtUVhUazc4b1ZNRlBVdDZBT212bzVwRU1FaGN0ZkhLbWQ2Z3Jx?=
- =?utf-8?B?ejh6RFhsS2JLTGJmQnJtZmxhSUlwbUd0enZ1M3ZucEJjUHpUVHZHS1Q1RWFW?=
- =?utf-8?B?WDkycEFGUGtqVDZIU1RlZng2Q0V5YWJsK2czVVROaEZoUWdjeUZKTU84TjJv?=
- =?utf-8?B?aExqVUxrZmF6SEp1K3JybDV5MXZlTkIwVlpPOHd2YVhDRzVtR3BSMmhSWjE2?=
- =?utf-8?B?aXMwT2Q3UTd4NzVFSGwvMWJlWEduTlNnVGNSaFAwU0JPdk5FQjlYOW1telY0?=
- =?utf-8?B?QmFtVzFUUlpaYmhMZkRBSmd2anZ4M254QlRrNFEwcHloa3NXVzhVcVRWeXQ5?=
- =?utf-8?B?QUVjVVYxNVdISkNtOEV4T0hvRmRmZFZhUGQxZ3hQWXFMa3BSSXY0Ky9SYzJr?=
- =?utf-8?Q?TFjNreSjfA5YWeKr3X80u4hJxwll5iRLWu?=
+	=?utf-8?B?ZTBIdEE0NTFLM1Y5dUhNVm5iaUhaMkVSenVHL2p4bHVYVVh3WlJjc21hWG9r?=
+ =?utf-8?B?Y3RlQ0V4SUpKRTZjQzB0aWw0MjkxZlhDWjc3eHNLT1NOdjB1eDkzbHRBUDZx?=
+ =?utf-8?B?U0dpNVBrcU15OVZERDBOMUtnYTg0cTh2QW5xV2N2Q3lHNUhlRXdOUlBZWlRl?=
+ =?utf-8?B?cXBiUEt5b1hpeW82OElVQkk4ZFVKNWQ0UWd3aTZiNE9WaDFZL3JSQ0NZeDBJ?=
+ =?utf-8?B?Nld1cStVVm1nSVdGYkdmQW5ObXlZTXUyelZhQU9tVnlUay9KVTExZzZpWmVW?=
+ =?utf-8?B?UW1kYm5MYy9XeVpCd0lGeUpYNW4yUVNvbHA4TVJRaml3VDJWSW9wTzdPbTZj?=
+ =?utf-8?B?VkljUlpkeFNZdWtSS25OVUdKSHZrN082dGk2dFVRYXBwRVlpQklrTmJMYkwr?=
+ =?utf-8?B?VDNVNWw1eUt4MjY3QUZ4WlA2STFGQWRqNnZaRnF1RjRHWVYrSmdiYkxMYTJX?=
+ =?utf-8?B?TnZIV2VKcGZsVUdRWnBlbmEwOTI1NVdQRW9QMHozQmRFaGNqTzg5SHJrM2d1?=
+ =?utf-8?B?bDRxRlV4Z0JSQ1FaclozbjlMdFRMbDh4Z1k4dGpXTWtUQU5HMC93bVRLTERy?=
+ =?utf-8?B?cDlSMmhTaStVdjhqYTNkZE1KNWV1cklRMWFZVnNrVjlFWjJXQWNhWHNJL0pS?=
+ =?utf-8?B?WnlFV21uUnJXbFVsbURBTXFTd3l2WWw3ZXJiTUtOcXNVVFhsbWZFSnlmT1Bt?=
+ =?utf-8?B?SzBmS2RFUFdsOGRSbXhqbFpIVEVRMHFMVlVsYzZUYUVkR1RWa0plN0pHeHUy?=
+ =?utf-8?B?cVN5aXY5bHhuMFdFTys1N05RMFlEQWNESWZzWFgvV0NtR3JQTmJCczJEUVY2?=
+ =?utf-8?B?d1NtSUY3M2l3bzRTLzIwSW1LRE94R2s5Umdxc3JReWQ4eG5IbmpyckJKVmlW?=
+ =?utf-8?B?NHRHalJKS3hyVUJ1dC9pYzFuRzNxRS9YWUEzVXREaWdzMk0yTGpsNmNEWS9O?=
+ =?utf-8?B?TElGMzlKNldMT0JnZk92dHQ0R1RKSWEybzZ6NndhS1psRmtjdlhobFNZc1hj?=
+ =?utf-8?B?OHY2NGpEeE9UYnRzVDdOQmtPc1ZXWXVNYkpRT3k0cEc2dlA3REdFN01ma3dw?=
+ =?utf-8?B?Nlk1R0g1VGF3bWFjSUVJcFVDb3k4ODAzdVEyek8zOCtjUnQweFh0M1J3ZkE0?=
+ =?utf-8?B?eDNGUDVBSjE1RXdWbnJubmVZR001VTBkdzZBaXJNekxGUGxidk14M050ZlpV?=
+ =?utf-8?B?bDdNTEFUbm4yYVFyVHpiaVI2R0VnblNkTUdML1phOU9ZZVU1SERQZ2cvcnFL?=
+ =?utf-8?B?UWgrMU01U3pZOFlPVXJIZ2c1c213OXFtVGpGb1oyOUNrc3ZVd1ZzdGZraldz?=
+ =?utf-8?Q?EDOrbc37t7IPuxpWkMkmNnXed2n3AuJBrh?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 37c7ecef-38cc-4e52-666f-08d8c12edbd1
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3d154fc3-fa88-496e-a5c4-08d8c12f10e2
 X-MS-Exchange-CrossTenant-AuthSource: MN2PR11MB3919.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jan 2021 12:43:47.4914
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jan 2021 12:45:16.5397
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3+DC+UJUpNqhlJkVh9YcMosUBeIf9h2G3trI5Km+YWo3bHLjoqIW8sZqJMIVHUGzFoYoIz2BIpk8GheXmTpB1VieQXHLTFK+3+yuNSgVJp4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR11MB3678
+X-MS-Exchange-CrossTenant-UserPrincipalName: rWLCt8AYUsq+nn3Lb80dFWpv/n3Mg04TNepBa4QLOtLCdHK6rGnr7vx2m43tOVeAiz/H7GyDCe3nCCW2SS88TP55FdFfV3btWEhWwSBaVj8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR11MB3647
 Content-Type: multipart/alternative;
- boundary="------------B13D20FCAD2D2BC76BC53CF0"
+ boundary="------------2F94F9FF7CC88D4C74EB73C3"
 Content-Language: en-US
 
---------------B13D20FCAD2D2BC76BC53CF0
+--------------2F94F9FF7CC88D4C74EB73C3
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 2021-01-22 5:11 a.m., Leon Anavi wrote:
-> - Poll terminal size: better handle resize events when the
->    application runs in a thread other than the main thread (where
->    handling SIGWINCH doesn't work) or in the Windows console.
-> - Fix bug in system toolbar. The execution of system commands was
->    broken.
-> - A refactoring of patch_stdout that includes several fixes.
-> - A refactoring of the `ThreadedHistory`, which includes several
->    fixes, in particular a race condition that happened when editing
->    input while a big history was still being loaded in the
->    background.
+On 2021-01-22 3:47 p.m., zangrc wrote:
+> -License-Update: Copyright year updated to 2021.
 >
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...rompt-toolkit_3.0.10.bb => python3-prompt-toolkit_3.0.11.bb} | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->   rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_3.0.10.bb => python3-prompt-toolkit_3.0.11.bb} (86%)
+>   ...-networkmanager_2.1.bb => python3-networkmanager_2.2.bb} | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>   rename meta-networking/recipes-connectivity/python-networkmanager/{python3-networkmanager_2.1.bb => python3-networkmanager_2.2.bb} (55%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.10.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.11.bb
-> similarity index 86%
-> rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.10.bb
-> rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.11.bb
-> index abd9eb18c..0b832c064 100644
-> --- a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.10.bb
-> +++ b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.11.bb
-> @@ -3,7 +3,7 @@ HOMEPAGE = "https://python-prompt-toolkit.readthedocs.io/"
->   LICENSE = "BSD-3-Clause"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f"
+> diff --git a/meta-networking/recipes-connectivity/python-networkmanager/python3-networkmanager_2.1.bb b/meta-networking/recipes-connectivity/python-networkmanager/python3-networkmanager_2.2.bb
+> similarity index 55%
+> rename from meta-networking/recipes-connectivity/python-networkmanager/python3-networkmanager_2.1.bb
+> rename to meta-networking/recipes-connectivity/python-networkmanager/python3-networkmanager_2.2.bb
+> index 91a6edd241..d447231fc5 100644
+> --- a/meta-networking/recipes-connectivity/python-networkmanager/python3-networkmanager_2.1.bb
+> +++ b/meta-networking/recipes-connectivity/python-networkmanager/python3-networkmanager_2.2.bb
+> @@ -2,10 +2,10 @@ SUMMARY = "Easy communication with NetworkManager from Python"
+>   HOMEPAGE = "https://github.com/seveas/python-networkmanager"
+>   LICENSE = "Zlib"
 >   
-> -SRC_URI[sha256sum] = "b8b3d0bde65da350290c46a8f54f336b3cbf5464a4ac11239668d986852e79d5"
-> +SRC_URI[sha256sum] = "dc83e6368b0edd9ceabe17a055f2e22f6ed95b9aa39dbd59d0b4f3585bdfe9ed"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=8d8bac174bf8422b151200e6cc78ebe4"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=9f8a5b5844f027357ab19ef3e3c6a956"
 >   
+> -SRC_URI[md5sum] = "f638d854a3639fb37c0e06d1092a771e"
+> -SRC_URI[sha256sum] = "aef1e34d98d7bec7cc368e0ca0f2e97493f9b5ebe6d7103f8f6460cfca3dc6fc"
+> +SRC_URI[md5sum] = "7e05d3ca40a4fa50222ba93cda3d0d02"
+> +SRC_URI[sha256sum] = "de6eb921d94aba7549f428ed2b3aa482a5d543ecb6965cbaa0fbb555ab31b9d5"
+>   
+>   PYPI_PACKAGE = "python-networkmanager"
 >   inherit pypi setuptools3
->   
 >
 > 
 >
 
---------------B13D20FCAD2D2BC76BC53CF0
+--------------2F94F9FF7CC88D4C74EB73C3
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -157,47 +152,42 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 2021-01-22 5:11 a.m., Leon Anavi
-      wrote:<br>
+    <div class="moz-cite-prefix">On 2021-01-22 3:47 p.m., zangrc wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210122101126.25982-5-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">- Poll terminal size: better handle resize events when the
-  application runs in a thread other than the main thread (where
-  handling SIGWINCH doesn't work) or in the Windows console.
-- Fix bug in system toolbar. The execution of system commands was
-  broken.
-- A refactoring of patch_stdout that includes several fixes.
-- A refactoring of the `ThreadedHistory`, which includes several
-  fixes, in particular a race condition that happened when editing
-  input while a big history was still being loaded in the
-  background.
+    <blockquote type="cite" cite="mid:1611348464-4528-1-git-send-email-zangrc.fnst@cn.fujitsu.com">
+      <pre class="moz-quote-pre" wrap="">-License-Update: Copyright year updated to 2021.
 
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+Signed-off-by: Zang Ruochen <a class="moz-txt-link-rfc2396E" href="mailto:zangrc.fnst@cn.fujitsu.com">&lt;zangrc.fnst@cn.fujitsu.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210122101126.25982-5-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:1611348464-4528-1-git-send-email-zangrc.fnst@cn.fujitsu.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...rompt-toolkit_3.0.10.bb =&gt; python3-prompt-toolkit_3.0.11.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_3.0.10.bb =&gt; python3-prompt-toolkit_3.0.11.bb} (86%)
+ ...-networkmanager_2.1.bb =&gt; python3-networkmanager_2.2.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-connectivity/python-networkmanager/{python3-networkmanager_2.1.bb =&gt; python3-networkmanager_2.2.bb} (55%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.10.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.11.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.10.bb
-rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.11.bb
-index abd9eb18c..0b832c064 100644
---- a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.10.bb
-+++ b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.11.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://python-prompt-toolkit.readthedocs.io/">&quot;https://python-prompt-toolkit.readthedocs.io/&quot;</a>
- LICENSE = &quot;BSD-3-Clause&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f">&quot;file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f&quot;</a>
+diff --git a/meta-networking/recipes-connectivity/python-networkmanager/python3-networkmanager_2.1.bb b/meta-networking/recipes-connectivity/python-networkmanager/python3-networkmanager_2.2.bb
+similarity index 55%
+rename from meta-networking/recipes-connectivity/python-networkmanager/python3-networkmanager_2.1.bb
+rename to meta-networking/recipes-connectivity/python-networkmanager/python3-networkmanager_2.2.bb
+index 91a6edd241..d447231fc5 100644
+--- a/meta-networking/recipes-connectivity/python-networkmanager/python3-networkmanager_2.1.bb
++++ b/meta-networking/recipes-connectivity/python-networkmanager/python3-networkmanager_2.2.bb
+@@ -2,10 +2,10 @@ SUMMARY = &quot;Easy communication with NetworkManager from Python&quot;
+ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/seveas/python-networkmanager">&quot;https://github.com/seveas/python-networkmanager&quot;</a>
+ LICENSE = &quot;Zlib&quot;
  
--SRC_URI[sha256sum] = &quot;b8b3d0bde65da350290c46a8f54f336b3cbf5464a4ac11239668d986852e79d5&quot;
-+SRC_URI[sha256sum] = &quot;dc83e6368b0edd9ceabe17a055f2e22f6ed95b9aa39dbd59d0b4f3585bdfe9ed&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=8d8bac174bf8422b151200e6cc78ebe4">&quot;file://COPYING;md5=8d8bac174bf8422b151200e6cc78ebe4&quot;</a>
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=9f8a5b5844f027357ab19ef3e3c6a956">&quot;file://COPYING;md5=9f8a5b5844f027357ab19ef3e3c6a956&quot;</a>
  
+-SRC_URI[md5sum] = &quot;f638d854a3639fb37c0e06d1092a771e&quot;
+-SRC_URI[sha256sum] = &quot;aef1e34d98d7bec7cc368e0ca0f2e97493f9b5ebe6d7103f8f6460cfca3dc6fc&quot;
++SRC_URI[md5sum] = &quot;7e05d3ca40a4fa50222ba93cda3d0d02&quot;
++SRC_URI[sha256sum] = &quot;de6eb921d94aba7549f428ed2b3aa482a5d543ecb6965cbaa0fbb555ab31b9d5&quot;
+ 
+ PYPI_PACKAGE = &quot;python-networkmanager&quot;
  inherit pypi setuptools3
- 
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -209,4 +199,4 @@ index abd9eb18c..0b832c064 100644
   </body>
 </html>
 
---------------B13D20FCAD2D2BC76BC53CF0--
+--------------2F94F9FF7CC88D4C74EB73C3--
