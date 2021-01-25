@@ -1,118 +1,265 @@
-Received: from NAM04-SN1-obe.outbound.protection.outlook.com (NAM04-SN1-obe.outbound.protection.outlook.com [40.107.70.84])
- by mx.groups.io with SMTP id smtpd.web09.1105.1611599771407649061
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.117])
+ by mx.groups.io with SMTP id smtpd.web12.99.1611600212957760982
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Jan 2021 10:36:11 -0800
+ Mon, 25 Jan 2021 10:43:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=YxN4dZ11;
- spf=pass (domain: windriver.com, ip: 40.107.70.84, mailfrom: mark.asselstine@windriver.com)
+ dkim=pass header.i=@studentsecuedu66932.onmicrosoft.com header.s=selector2-studentsecuedu66932-onmicrosoft-com header.b=YQ71w8+v;
+ spf=pass (domain: ecu.edu, ip: 40.107.237.117, mailfrom: pawluchm@ecu.edu)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IfEt8a3U5/7tv8dO55MKJ2KYPcUXyegixjnjN4TgZl+SbR435/Ns4/oUUOjQAPa8wiB0i8wJbDqsf6tbnN6u98I1z+6+Qy7VbTskg9DgklYGXGrAFyf33jv5cAnSbnJEGVhoWYlJHBfyV8C0ZBTndPvc+wP9cwHFYRYON7KvlkLeKdRwAbhrhQIRaSYQOwoq1dGvKZcxxQ3dTI7pW3Qh9i0XJvov9NdJcPptUyREnACuvYkMRgMZyQ54hyKTOk2uEGiu7CGJWJs4C7w2SBmHoEOxFTe4+5zFnBAXC1/5rdsHYjoeUsOiMJfpb+9TZlOhxA7JnTrDlquY/puQgHPiVw==
+ b=LILaotdUERueFLtgTz7/aBPTxHx4DWjSlA/FOawMBjHcyvwLOQBjYFuxx++7y78A9GpWFoJKQNAdFuaz4vSbEU30w7IbOdp9xRDyYD8vOjhrh1SLn4qkVrXGhYv7EUduc+QOw1TXI1mMIKzNgAJgzhxyQlsaz/DiV7mMUgPSNEwOYVOYZCCKsxEOtimr9thyATL/ZL7Kq8rTO5A2fsnXVYM3Y8p8Nw8Q3Md8PlLp0XJsQiMppWAHFGTnuMD9DF1m8cQQHxGjC96cdVDqsEG6Ol0cG+s6AaQNNWaqDdhYdq/VmwwnCkBxgNERa8QzaDNvA1tabCMBTdBSb/d6HYXFmg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HkrFK6U6ra9j2eCX8LwQuAs20kZXoioHc9Vv1Co3HPY=;
- b=TI7r+GzDhegfEoX8X1EOBczsbd3MOEZlgtHuD5Y3utHRzfkiiq+dIBrbqnss0NSX6jDvePHjBCk8OlTmLAHIvyyAVAzRgZBDg4wqQFpGbYdW9KBc0QT0p1Q2agqAVCBos9aO5LIyFkspNpBTZrfv/ubwnqrkayw1AeDEO6lWtMds3LrI0Z1CixiYqyvqICoWp95Xe9SI2sEUgyMEhAaVCqid6MRV/rtQdgx5SjT1BJh2FKSzGrh5Wfrzsw3foWmnZu5ytYvBAWLwu7vASbi11dvJPFopW87xKFSq9FyF8eAh1DOKKcHqsDzSjbXRtQllKtJH7cz2ZDbe5zDjys3EyA==
+ bh=/v8OeYQprDjNmqMkZWx+gyaeT6UAvvgt7Sfb5TYocx4=;
+ b=JY21nVymnR71R2t1Q+PjMz1te4qyIVvtdWE8qd1TVFHS5VXnHPmfMAFobNcIRUPm1DKNjjkEIhUVtn+Jli/HdztldquuuGHQHhQkKYETOy3t68P5aQVHKaAAcw/nBvYhNh6xigV6DKoz3bOZNA3llcLGOpggnEgsxmoIuHIVBXZ46bmqLbr9bvSoHsnnFpweXXcmOECvd2KY6c3yj75cW5fFGOP6u1q8p+eqm2mLOW5f1DwwJeTuugkmYDnvgNQWU0uBFAClVy7aV5ohJhtcjGH7OQaPhNC/KnJo3gxgmV317pYSzaHEiUxarAxat2wt6JzKltxfYS7Q3lnm5LGsSA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ smtp.mailfrom=ecu.edu; dmarc=pass action=none header.from=ecu.edu; dkim=pass
+ header.d=ecu.edu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
+ d=studentsecuedu66932.onmicrosoft.com;
+ s=selector2-studentsecuedu66932-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HkrFK6U6ra9j2eCX8LwQuAs20kZXoioHc9Vv1Co3HPY=;
- b=YxN4dZ11sUiZRvTPbnxXFO2TdoTG01HhfnrNKSZ6ud2R874TaV2pw8t9PF/A1VH2bm4GchQ/wUYltaS9y3o57zGNwSbaZsPomNhXaQVZw5OVTPDRpNbHNQJAxr10QPFL3BdFlsDQaS73e6T+/ix6Icq4ydpc+TYhSr5Jf3OHFDw=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from CO1PR11MB4820.namprd11.prod.outlook.com (2603:10b6:303:6f::8)
- by MWHPR1101MB2286.namprd11.prod.outlook.com (2603:10b6:301:5b::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.13; Mon, 25 Jan
- 2021 18:36:10 +0000
-Received: from CO1PR11MB4820.namprd11.prod.outlook.com
- ([fe80::35f8:3959:57d5:9d0a]) by CO1PR11MB4820.namprd11.prod.outlook.com
- ([fe80::35f8:3959:57d5:9d0a%4]) with mapi id 15.20.3784.017; Mon, 25 Jan 2021
- 18:36:10 +0000
-From: "Mark Asselstine" <mark.asselstine@windriver.com>
-To: openembedded-devel@lists.openembedded.org, Mario Schuknecht <mario.schuknecht@dresearch-fe.de>
-Cc: raj.khem@gmail.com, Mario Schuknecht <mario.schuknecht@dresearch-fe.de>
-Subject: Re: [oe][meta-networking][PATCH] dnsmasq: Fix systemd service
-Date: Mon, 25 Jan 2021 13:36:06 -0500
-Message-ID: <8398216.VV5PYv0bhD@yow-masselst-lx1>
-Organization: Wind River
-In-Reply-To: <20210125170919.5952-1-mario.schuknecht@dresearch-fe.de>
-References: <20210125170919.5952-1-mario.schuknecht@dresearch-fe.de>
-X-Originating-IP: [198.84.181.245]
-X-ClientProxiedBy: YQBPR0101CA0117.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:c01:5::20) To CO1PR11MB4820.namprd11.prod.outlook.com
- (2603:10b6:303:6f::8)
-Return-Path: mark.asselstine@windriver.com
+ bh=/v8OeYQprDjNmqMkZWx+gyaeT6UAvvgt7Sfb5TYocx4=;
+ b=YQ71w8+vNJ87fFItplPBnrGNN8KeggaFAK1V3E+x9E3MkNCOTcQEA9+n8dfv0nDl/PQ/1vQHZWW4B8eXi2FkqWD5HUGnz1wxIFhbSdf6ZwpTA3bWHpca/JvSAV5aS0XNRphpdC+cREQ4rhKYaJsvY66sf+bOqx/9oQhkq3jcA4U=
+Received: from BL0PR0102MB3377.prod.exchangelabs.com (2603:10b6:207:1e::19) by
+ BL0PR01MB4340.prod.exchangelabs.com (2603:10b6:208:81::15) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3784.19; Mon, 25 Jan 2021 18:43:31 +0000
+Received: from BL0PR0102MB3377.prod.exchangelabs.com
+ ([fe80::b586:28bb:d36b:487b]) by BL0PR0102MB3377.prod.exchangelabs.com
+ ([fe80::b586:28bb:d36b:487b%3]) with mapi id 15.20.3784.017; Mon, 25 Jan 2021
+ 18:43:31 +0000
+From: "Pawluch, Michael Mila" <pawluchm@ecu.edu>
+To: "dmurphy@ti.com" <dmurphy@ti.com>, "akuster808@gmail.com"
+	<akuster808@gmail.com>
+CC: "Openembedded-issues@lists.openembedded.org"
+	<Openembedded-issues@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [Openembedded-issues] [RFC] Issues with mariadb-10.4.17 and aarch64
+Thread-Topic: [Openembedded-issues] [RFC] Issues with mariadb-10.4.17 and
+ aarch64
+Thread-Index: AQHW80HXHTynbOqvQ0+iUbuvBADZfKo4rQN2
+Date: Mon, 25 Jan 2021 18:43:30 +0000
+Message-ID: 
+ <BL0PR0102MB3377F2478792A70F7F565A0DCABD9@BL0PR0102MB3377.prod.exchangelabs.com>
+References: <6cde28bf-c69d-1d42-785e-dc228202e357@ti.com>
+In-Reply-To: <6cde28bf-c69d-1d42-785e-dc228202e357@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: ti.com; dkim=none (message not signed)
+ header.d=none;ti.com; dmarc=none action=none header.from=ecu.edu;
+x-originating-ip: [150.216.21.56]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: a9539c4e-6a07-43b1-c15f-08d8c1611cd1
+x-ms-traffictypediagnostic: BL0PR01MB4340:
+x-microsoft-antispam-prvs: 
+ <BL0PR01MB434026D172B3C66BE7895D55CABD9@BL0PR01MB4340.prod.exchangelabs.com>
+x-ms-oob-tlc-oobclassifiers: OLM:8882;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ j+XhsJaIehRsiKfLbMNUCgE6MZ8w42tbyD5qeai0EhLnT7KM4mZQu5soQP0ogs7YpX6HVha4tiSMf3fXmMqtT3//c8HhM+ykTxt8PSlRp3q09dpo7aCpoEcZBpiBX+ZC5yRXgyCHbTRnkTDC9AakBTuhihK/dfCl0lz7Jnfx32yIWBZJYrjEqGuHSuBhFTm0cQ8nwS7Z63n8FD/mZ4gmd395oen2fQgUe1IkqauuWUF2pmhncyf5Nt5mW8IM8X4pzZMpSpSUjuNFKLz6fBALXn/g2h/rQtXD3MbCrXpDzyNxVCqnJR6nmsx/QgmJIi8HjQWUY8gCL00XfVZDcfOTYRehOg8m9oyF+jg63smlzNVUliKSsb13A+SFZyGEk6IL3vBsP2L09tb6pVe/3ULRjDYs5A1mDpPXL+XPYSk+xDvk7dx91ny8USVrlzgRaeIKS7M+X872mGOPlH4kLZgqRA==
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL0PR0102MB3377.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(4636009)(39860400002)(366004)(396003)(136003)(376002)(346002)(83380400001)(6506007)(53546011)(166002)(54906003)(110136005)(316002)(786003)(186003)(33656002)(86362001)(75432002)(7696005)(2906002)(76116006)(66946007)(26005)(64756008)(66476007)(66446008)(66556008)(8676002)(9686003)(55016002)(52536014)(5660300002)(8936002)(71200400001)(478600001)(4326008);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata: 
+ 4LO708v4HdfRbTdtnALIpHyGfhJHyoldko987ooB2Ht+o8/yDmx9jGLcYPSSIcYNcevRaZM1C5RM0V9b9n0m5YxVs53X5W27697oO9Y71kvRwBNqqmeov3qCShqrAL9B4V8EIrlBeTWFHocrlY+jlJFbP3JVFPi7XZFrL31Yl9SnSlWLKpviitDS+fiM006VztopfyoUr0pm4lEtcDj12yzcRkDOawWOxQCn7XlTPEumjkuzs4rV4dFmapUo4rrQ6wNEL0OkUZb2PRCgS03XEG1yfEG+YOLVjto1OxWEDYGZ40NDOyj//JYGDTeLhtQT9i53dKp2bN3Ws7PLuFMFztyKf7Iy6cO1EUiErzxhb30s3ipXKXgKTiJmngxpezbDaPQ8csUfAOHPS6fR+olaplzorxpH9ymgWDU2g6Me06NxWJ/paHGFCgfzkJnGqHR6qn0/aXJqt6W6+1kMjqML9iU3HUgOdn3YsauVqWQ8XTHPtO6VIPmixDs3o9DmlB11484M4Thgat+c72g/Tf8nW5ikkeR+LwzCmfdOka5jsMz5dTai+JCj90tY6I3Lo+VreDB1Ho8WaXvUxjbvf+Mj71tYMbeHzVbgQVG7sLWhkwwT9+sGe6AVUke/XzcgIhFDdmerfcxln0CrHHCJ3c18Ya7mgjKryFMfrQ5aoSwLtcOMFFnwRIgIZhBXQi7aqZzlhR/ofJZ8PFNUHY3a/yvdqO1mGVfhUtgbcujftlr3opaPiyMg2oSfwGM4eBUGZzhDhAgL3J6/X3vhSz/WptoSfA==
+x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from yow-masselst-lx1.localnet (198.84.181.245) by YQBPR0101CA0117.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:c01:5::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.12 via Frontend Transport; Mon, 25 Jan 2021 18:36:09 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a4ae8859-f544-4557-85cb-08d8c16015d7
-X-MS-TrafficTypeDiagnostic: MWHPR1101MB2286:
-X-Microsoft-Antispam-PRVS: 
-	<MWHPR1101MB2286D1F7E4612BC55D4A4830EDBD9@MWHPR1101MB2286.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	+X5afoyft0gKH4dirRqta8uS+MhXioR2Wn9X7acRnePTLBQddBVglrX3e+S7Iaokg+OcmDdPFabjNNLjJ7k59s5youLWIXhU401PJ4eWI4FYpPGHUFZ3GzW829tes5tpkHaJmjxg6iyvj7VL54gdzmv6r2SJ8Gj2y5fRscTp0X9Wq+rX9aSf7m8Wb9jiXrKjNoOVwMuEMi1P/QfuMyGJQRjn3mG30CKaxe/FNL19B7RcJiC3gxv9wWOK+Nepv3MoLSKofM8zzKpKUPz5LDUB5JSTHyLT68GVebh3QKDBS4LH6GI53duFCLnF8Tziw7PaXndtWP8tLtEdX8NiL4fBZwY//DimYGHqoGDm144xTqHeG4tp2L/Y91SzD4z5SV+zAMzxvJkgQHvO1vTAPM5wzE3LQKPzpa1LP/VISEwxHe3z9oeXLFp+r88SMrbnuSTO6G92kUWIrJyqAY4VW+rhYaX6I078mMdGqVDFIBKrUsM=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4820.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(346002)(366004)(396003)(39850400004)(136003)(5660300002)(186003)(16526019)(6486002)(83380400001)(2906002)(33716001)(26005)(8936002)(956004)(66556008)(66476007)(4326008)(478600001)(8676002)(52116002)(9686003)(36916002)(6916009)(6666004)(316002)(6506007)(53546011)(44832011)(66946007)(6512007)(86362001)(39026012);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	aGGU33uhpQQysEv3GbW5Kl84VZTnyoJ+Sam/x/ZZIaWf2m54BT17i+rSqZdQsWr+5HOWO93g4foK0FqzD7GfpYt0UsfVesfmDnF8XP2WdCZta1bcLj0jGzYDlKUbD5iAstSbhPcJQGmwB91aKVX8u5iSw9gQYQfMfQOnZ5ce2zVwRpeWeBHF3QrVNkjACVsfR/xsQxWbBiXM9D8IHpjsrjP11OUGq1haf7r0EyPrqbj3X5bpfq7oGNjzBy7UD94r/zaXzdEFlIqiZ7fK8Z84pvslHUEuBD1F50GAnq1Ch+PlR3CRxe6mOmP0UkpJaWn7bZcVd6bULdHKWfq7CcHX7x8rua7oKOYCw4LTczUu5VUzZS6d5S3kxznNjslSLd811ey15mRRCkqkH3Fo9zfcwWi5/0R7IhLwhOdPgQsTCredTaE4YqtMpaci+OJ/t+2UFnv3uhimSI5C1DdtWem5FY11LE+e0wgFtIIqrnC2WgCBKOt9VvNo1KBz9v+c22z+CYlaIsxpAQKFgBUkXyIIwnr5/SLSr1cy+LFzX/Yfjdge9iwQvakrHRLcAEH5QjjC8+gzEni8AITKfXlpqdNUVY4iV0M5fzl99cTirIlu5wAjnnvEYecoOcw+XG++8b/T4QDEt1D/fiGKYYgQKXygNVuY+YG+0BWxDuDGGd7HnYEW4jHGwdXgKPJ91TsaR+6Zf1gEyx3pemwm0b6ku181IuF2QOVREz1rJBuTwOEmu7iBHs4Vzb5t9fTn4Z+fST4p
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a4ae8859-f544-4557-85cb-08d8c16015d7
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4820.namprd11.prod.outlook.com
+X-OriginatorOrg: ecu.edu
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jan 2021 18:36:10.1467
+X-MS-Exchange-CrossTenant-AuthSource: BL0PR0102MB3377.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a9539c4e-6a07-43b1-c15f-08d8c1611cd1
+X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Jan 2021 18:43:31.0683
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ZQgNjBNJIU1gaB5Oje6bFPFUkecc8FB57t3d71jYiA8tbhiuv64rxMzSpBzDM8PIMsMoaDzvH4yCXXeDxH9Wx7fJUIDY0tXYGDEZfRY9MXk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR1101MB2286
-Content-Transfer-Encoding: 7Bit
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 17143cbb-385c-4c45-a36a-c65b72e3eae8
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: WHFETMBq1wb4i9mS7sPdLHmqQz0Uspt2y9i/aqvq4tJf3yp+FkUuHQ8U6TOBTbKy5ZOhDRpMC+fTLnpgy3oitg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR01MB4340
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_BL0PR0102MB3377F2478792A70F7F565A0DCABD9BL0PR0102MB3377_"
+
+--_000_BL0PR0102MB3377F2478792A70F7F565A0DCABD9BL0PR0102MB3377_
 Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Monday, January 25, 2021 12:09:19 P.M. EST Mario Schuknecht wrote:
-> Systemd service file option 'ExecStopPre' is warned and ignored by
-> systemd. By replacing 'ExecStopPre' with 'ExecStop', the intended
-> behavior is realized. The 'ExecStop' commands are executed one after the
-> other.
-> 
-> Signed-off-by: Mario Schuknecht <mario.schuknecht@dresearch-fe.de>
-> ---
+Why oh why is all of these being directed to me when I have nothing to do w=
+ith Open embedded?
 
-According to Lennart's comment on [https://bugs.freedesktop.org/show_bug.cgi?
-id=73177] this looks to be aligned. Thanks for sending the update.
+Sent from Mail<https://go.microsoft.com/fwlink/?LinkId=3D550986> for Window=
+s 10
 
-Mark
+From: Dan Murphy via lists.openembedded.org<mailto:dmurphy=3Dti.com@lists.o=
+penembedded.org>
+Sent: Monday, January 25, 2021 1:40 PM
+To: akuster808@gmail.com<mailto:akuster808@gmail.com>
+Cc: Openembedded-issues@lists.openembedded.org<mailto:Openembedded-issues@l=
+ists.openembedded.org>; openembedded-devel@lists.openembedded.org<mailto:op=
+enembedded-devel@lists.openembedded.org>
+Subject: [Openembedded-issues] [RFC] Issues with mariadb-10.4.17 and aarch6=
+4
 
->  .../recipes-support/dnsmasq/files/dnsmasq-resolvconf.service            | 2
-> +- 1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git
-> a/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf.service
-> b/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf.service
-> index 2980f7def..ef2f3f7e4 100644
-> ---
-> a/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf.service
-> +++
-> b/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf.service
-> @@ -8,7 +8,7 @@ PIDFile=/run/dnsmasq.pid
->  ExecStartPre=/usr/bin/dnsmasq --test
->  ExecStart=/usr/bin/dnsmasq -x /run/dnsmasq.pid -7 /etc/dnsmasq.d
-> --local-service ExecStartPost=/usr/bin/dnsmasq-resolvconf-helper start
-> -ExecStopPre=/usr/bin/dnsmasq-resolvconf-helper stop
-> +ExecStop=/usr/bin/dnsmasq-resolvconf-helper stop
->  ExecStop=/bin/kill $MAINPID
->  ExecReload=/bin/kill -HUP $MAINPID
+This email originated from outside ECU.
 
 
+Hello
+
+I was wondering if there has been any reports of the mariadb update on the =
+dunfell branch causing issues with 64bit compilers when the 'pam' is set fo=
+r DISTRO_FEATURES
+
+There does not seem to be a compilation issue but more of an installation i=
+ssue in which the lib/security directory is not being created.
+
+We are seeing issues in our arago distro with the following errors
+
+ mv: cannot stat '/OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-ex=
+ternal-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image/lib/security':=
+ No such file or directory
+
+09:38:06 WARNING: /OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-ex=
+ternal-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/temp/run.do_install.=
+5379:1 exit 1 from 'mv /OE/arago-dunfell-next-build/build-AARCH64_1/arago-t=
+mp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image/lib/secur=
+ity /OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-external-arm-gli=
+bc/work/aarch64-linux/mariadb/10.4.17-r0/image//usr/lib'
 
 
 
+
+
+
+--_000_BL0PR0102MB3377F2478792A70F7F565A0DCABD9BL0PR0102MB3377_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:o=3D"urn:schemas-microsoft-com:office:office" xmlns:w=3D"urn:sc=
+hemas-microsoft-com:office:word" xmlns:m=3D"http://schemas.microsoft.com/of=
+fice/2004/12/omml" xmlns=3D"http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+pre
+	{mso-style-priority:99;
+	mso-style-link:"HTML Preformatted Char";
+	margin:0in;
+	font-size:10.0pt;
+	font-family:"Courier New";}
+span.HTMLPreformattedChar
+	{mso-style-name:"HTML Preformatted Char";
+	mso-style-priority:99;
+	mso-style-link:"HTML Preformatted";
+	font-family:"Courier New";}
+span.timestamp
+	{mso-style-name:timestamp;}
+.MsoChpDefault
+	{mso-style-type:export-only;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style>
+</head>
+<body lang=3D"EN-US" link=3D"blue" vlink=3D"#954F72" style=3D"word-wrap:bre=
+ak-word">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:20.0pt">Why oh why is al=
+l of these being directed to me when I have nothing to do with Open embedde=
+d?<o:p></o:p></span></b></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Sent from <a href=3D"https://go.microsoft.com/fwlink=
+/?LinkId=3D550986">
+Mail</a> for Windows 10</p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div style=3D"mso-element:para-border-div;border:none;border-top:solid #E1E=
+1E1 1.0pt;padding:3.0pt 0in 0in 0in">
+<p class=3D"MsoNormal" style=3D"border:none;padding:0in"><b>From: </b><a hr=
+ef=3D"mailto:dmurphy=3Dti.com@lists.openembedded.org">Dan Murphy via lists.=
+openembedded.org</a><br>
+<b>Sent: </b>Monday, January 25, 2021 1:40 PM<br>
+<b>To: </b><a href=3D"mailto:akuster808@gmail.com">akuster808@gmail.com</a>=
+<br>
+<b>Cc: </b><a href=3D"mailto:Openembedded-issues@lists.openembedded.org">Op=
+enembedded-issues@lists.openembedded.org</a>;
+<a href=3D"mailto:openembedded-devel@lists.openembedded.org">openembedded-d=
+evel@lists.openembedded.org</a><br>
+<b>Subject: </b>[Openembedded-issues] [RFC] Issues with mariadb-10.4.17 and=
+ aarch64</p>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0" style=3D"border-collapse:collapse">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"border:solid black 1.0pt;background:#592A8A;pad=
+ding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ar=
+ial&quot;,sans-serif;color:white">This email originated from outside ECU.<o=
+:p></o:p></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<p>Hello</p>
+<p>I was wondering if there has been any reports of the mariadb update on t=
+he dunfell branch causing issues with 64bit compilers when the 'pam' is set=
+ for DISTRO_FEATURES</p>
+<p>There does not seem to be a compilation issue but more of an installatio=
+n issue in which the lib/security directory is not being created.</p>
+<p>We are seeing issues in our arago distro with the following errors<o:p><=
+/o:p></p>
+<pre style=3D"box-sizing: border-box;white-space:pre-wrap;overflow-wrap: br=
+eak-word;font-variant-ligatures: normal;font-variant-caps: normal;orphans: =
+2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;text-decoration=
+-thickness: initial;text-decoration-style: initial;text-decoration-color: i=
+nitial;word-spacing:0px"><span class=3D"timestamp"><span style=3D"font-size=
+:10.5pt;color:#333333"> </span></span><span style=3D"font-size:10.5pt;color=
+:#333333">mv: cannot stat '/OE/arago-dunfell-next-build/build-AARCH64_1/ara=
+go-tmp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image/lib/s=
+ecurity': No such file or directory<o:p></o:p></span></pre>
+<pre><span class=3D"timestamp"><b><span style=3D"font-size:10.5pt;color:#33=
+3333">09:38:06</span></b></span><span class=3D"timestamp"><span style=3D"fo=
+nt-size:10.5pt;color:#333333"> </span></span><span style=3D"font-size:10.5p=
+t;color:#333333">WARNING: /OE/arago-dunfell-next-build/build-AARCH64_1/arag=
+o-tmp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/temp/run.do_=
+install.5379:1 exit 1 from 'mv /OE/arago-dunfell-next-build/build-AARCH64_1=
+/arago-tmp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image/l=
+ib/security /OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-external=
+-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image//usr/lib'<o:p></o:p>=
+</span></pre>
+<pre><span style=3D"font-size:10.5pt;color:#333333"><o:p>&nbsp;</o:p></span=
+></pre>
+</div>
+<pre><span style=3D"font-size:10.5pt;color:#333333"><o:p>&nbsp;</o:p></span=
+></pre>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
+urier New&quot;"><o:p>&nbsp;</o:p></span></p>
+</div>
+</body>
+</html>
+
+--_000_BL0PR0102MB3377F2478792A70F7F565A0DCABD9BL0PR0102MB3377_--
