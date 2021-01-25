@@ -1,17 +1,17 @@
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.49])
- by mx.groups.io with SMTP id smtpd.web10.35975.1611578518962074382
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.82])
+ by mx.groups.io with SMTP id smtpd.web09.35552.1611578570634274667
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Jan 2021 04:41:59 -0800
+ Mon, 25 Jan 2021 04:42:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=B6VBZzQ2;
- spf=pass (domain: windriver.com, ip: 40.107.92.49, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=HHOG3QSU;
+ spf=pass (domain: windriver.com, ip: 40.107.94.82, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=MVOfqXclA2MzMUARr0bqXOqhB0tHNlzyixxu7bSJWhjt8i/QE8hgi752FPca+XXOOgBSOXCQpY26qbZA3jfCtomiUREitSO7xqmdgolyNx4CqSqiXweb7Kb0VoK4DCSJEiU8yW+OvhjwKR+yADZ3Mb0swEGuXWMDZjeBLDh1P9oPqqt9K500U/hExsAV2sEqzTT4jxqu6CguCPhTmkC3etnTQPLHc7eYIRJDYk4ehrKrxvatZ5YTzzzwoZHGyuVfm5Vh1AmPglsPIxH62FDvMWIYUd32STrRfak/QFfuJ5o72K/fApdvZfiWLE2GmFcdFq4uKJtO1aCOaDGBmIcqtg==
+ b=V46x50+0KIegKKHpOnNxZK5f47MssXKOJVKvPPVF4JkHXHKr2fiDhBYhKzYf8PC/vLLuwQ7aOCAsU73h7/kqVmctksY7xqVGc0Rn20hEiZzp7dl1z1cOhVSELJlVkXl5PMHkCHmLms3uyXBSINOWCCEt2kiekdZaFynuhOKE7auQ1A/Sm/WkKuiKuH65pUCiXop/G4SgU9FO17R608UbPJGs1w7VzGwRGRP9uAk1k/OrwloLsimFE+Q3DpPZ5vrI4h0e1iibr6G0gv8ds/TntJlFA1p/vq209a1t2EfxuST4labEbgt9pev+dXYuFhbrjSSOGmXCMoREzY/A3vGnlQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=s4lAlg44vqqzjcaLQD8qgF0ZyHNJvNOO9D5vvik0Vvg=;
- b=j1ntKPDgu5hFcuY0DWHFOeUHIdKoPzOMV17D1aANu9cPsVAs+4zDa6wNTsg3tUTWgyo8FepRk6jR4If0e91nchz3JzLK5k0EuApFShjSXgJl7MUM2mMorUCt4u33MSXShE8vV7WlI0tSytq2Uq+3EpN1YAmXa1f7cAxdlKy/9YSGemNjDlBvooYuXZSp0j/yoPG191zb7SFzz2nWX36dlPQOB4ZqEVh3iA21lxnMDMNroVPTz/RZE5AbdTTIGOPyKmiIgbqtS9uM0XkY1xU6mOBXhT+ZEMkAhmBVfBBFS3reyINLutiZJrUPIJEeoFBmMDGn+4n9aKkmaXRf4oN2yg==
+ bh=PUq1u0y23Bqa5t5+O1UdsstOJ7Os0J/e9kFdKcZ+tJM=;
+ b=mxM5FnulW/RFe0I3IBnc2B6jJqHykV7fER8qTlum/0p51ZcdjLFVKRSPZlhfCLwVRwHfG48FTe++pNPoKcXzT5E1PJTcP5OnVIQktmVm/4tnTJDp6liptyThF8+yFJGti57OBL6TK7VQNYtHPt+6lgiXVzZxuVEZSTykLZY0xc/jvY91Rh0fy/QdHtwZgEfNI1JQu9fh/INvdkQJZRhwE+8tYMUXTcLWE1r6o7FywmWFtjMGs5KDYF1bxUJ+Cws/0buImiECsMlS6Bb+dxoGYp907ljhxc+Qndz2fH4G4sVKpDo5Qp47cGcfqFIIKbQFakrWfM6+NFLHaz4IkZ4qpA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,90 +19,91 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=s4lAlg44vqqzjcaLQD8qgF0ZyHNJvNOO9D5vvik0Vvg=;
- b=B6VBZzQ2u8eMSk9Giwlgz4gSl3Gvoc54ZKoecX0eaaeZDG1IctHeEH1JYiB9wTL90FTp9zKEoA17zUSZVXD9z6AhTzD8cTXXSzT0OPq4lYQgD+LDBEWZ3YpzhdzUTxAjnxLhm0Ik6hoYE/rbxH1Iem3AVLo6tky2dRo7QLcofgs=
+ bh=PUq1u0y23Bqa5t5+O1UdsstOJ7Os0J/e9kFdKcZ+tJM=;
+ b=HHOG3QSUVdwqKWRS854UmW2z58H02Mu0UXvOhd+ZVmJKZiE/rPyoFNCM0ht5RzsEDOVDKO3yh6sYC5I3QIRXUFxqw8rPaJZG0XiZz3hoH2N7a5zHta4z+Vg84iBrUPIC0R8riwr/WGUtSKi1Upc0EiMuQjlGrf71hWKtEAdfzas=
 Authentication-Results: gmail.com; dkim=none (message not signed)
  header.d=none;gmail.com; dmarc=none action=none header.from=windriver.com;
 Received: from MN2PR11MB3919.namprd11.prod.outlook.com (2603:10b6:208:13b::27)
- by MN2PR11MB3678.namprd11.prod.outlook.com (2603:10b6:208:f8::11) with
+ by MN2PR11MB3647.namprd11.prod.outlook.com (2603:10b6:208:ec::26) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.16; Mon, 25 Jan
- 2021 12:41:57 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.17; Mon, 25 Jan
+ 2021 12:42:49 +0000
 Received: from MN2PR11MB3919.namprd11.prod.outlook.com
  ([fe80::5462:9c04:72b3:6c44]) by MN2PR11MB3919.namprd11.prod.outlook.com
  ([fe80::5462:9c04:72b3:6c44%7]) with mapi id 15.20.3763.019; Mon, 25 Jan 2021
- 12:41:57 +0000
-Subject: Re: [oe] [meta-python][PATCH v2 1/2] meta-python: Add hexdump package
+ 12:42:49 +0000
+Subject: Re: [oe] [meta-python][PATCH v2 2/2] meta-python: Add jstyleson
 To: Andrew Jeffery <andrew@aj.id.au>,
  openembedded-devel@lists.openembedded.org
 Cc: raj.khem@gmail.com
 References: <20210122054538.3675758-1-andrew@aj.id.au>
+ <20210122054538.3675758-2-andrew@aj.id.au>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <e2199e7d-d3c6-2e94-19d7-ca1f598b9f1f@windriver.com>
-Date: Mon, 25 Jan 2021 07:41:56 -0500
+Message-ID: <bab4f2a6-a1a0-c300-2003-db584b993e9a@windriver.com>
+Date: Mon, 25 Jan 2021 07:42:47 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.0
-In-Reply-To: <20210122054538.3675758-1-andrew@aj.id.au>
+In-Reply-To: <20210122054538.3675758-2-andrew@aj.id.au>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: MN2PR14CA0013.namprd14.prod.outlook.com
- (2603:10b6:208:23e::18) To MN2PR11MB3919.namprd11.prod.outlook.com
+X-ClientProxiedBy: BN9PR03CA0447.namprd03.prod.outlook.com
+ (2603:10b6:408:113::32) To MN2PR11MB3919.namprd11.prod.outlook.com
  (2603:10b6:208:13b::27)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by MN2PR14CA0013.namprd14.prod.outlook.com (2603:10b6:208:23e::18) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.12 via Frontend Transport; Mon, 25 Jan 2021 12:41:57 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BN9PR03CA0447.namprd03.prod.outlook.com (2603:10b6:408:113::32) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.14 via Frontend Transport; Mon, 25 Jan 2021 12:42:48 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 477415df-28bf-4800-5cf3-08d8c12e9a66
-X-MS-TrafficTypeDiagnostic: MN2PR11MB3678:
+X-MS-Office365-Filtering-Correlation-Id: 3d7d2a35-a160-4cc0-f752-08d8c12eb8e3
+X-MS-TrafficTypeDiagnostic: MN2PR11MB3647:
 X-Microsoft-Antispam-PRVS: 
-	<MN2PR11MB367841EA1FB75D231722EA9A9FBD9@MN2PR11MB3678.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:6790;
+	<MN2PR11MB3647DD72525CA75E39D3764D9FBD9@MN2PR11MB3647.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2733;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	fF6WmijzWmpb38Pmj5J+mioi/ghS4N8ZXEbVgc7sQ+JgPfPPzACWVhJvTmBZ0EqCpCUhHe4XmsP7Z35cdHt9JnSoFntPEMrO7AXNHw33CMrtstmHrL6Pu9q4ZmN02tz8gF9spFX2xB2NBLwbQhaVRc4dh1ErxQS+4izbosuhTOWl06xGXO4uj+GOzTKMsyfWEm6rF/v0qQD0nqtq7nby6tpWZ0DOnfCAWRFj3vlM94Mq2FpURF8ri7jPXhwMTRjo+YYcZyCZNYYbhY+DSIM982easGANSoBxlpuTszWuBJ1BvHhDwRJm/85XpkPfv2+vDNnzUmmxO/hdoD0UuIM51NmeMIeiYbxXW9ubCzRgZVzxxBAwCl4x1xOQrn8xPWQtf8DMBCTE7xKWEVDPhNXEWnUoIbumDVoSWqvMLbJA5nkXdmlZAf+arSHs6yhS+5rShg5GvyOyV+ziSKQ2UJ7ueAuI4JBmDAzxVwQTRcNZJIq0nSsiNTTmPiCbTTw7JZripqVa6m7c3juVU88+L2Fp2wFQ+8DM5RdW6iiqP3MyZms=
+	kMdcTbgmFaDdwookYGvd0RdGX4HwGBBVuNWVBa2aeyDfZMAAcSsMcx+s43UUM6lV0K9eec8YZ/mdrRw+CuyvHHPB+GR6nySXORIo06q3GV9+9dD+/nVniivQgLpFHUmdh73qPWWvDgh8fHFnluAqqLYvnWB4Z/J5KaaLvV4owAUquap/3tRfXAQhlADhViLw9ZO72nf4tHUOFN/BaGAHG2RW7iJ7HqF0rNdTe0RvbSHN+hM7oZxOqYoAhzSm4LVX7uZSedbur3aL17uLLy//K+ymkr73YwoRB+vRjnJ1O4g4Tg9mcTSU3tCPzWOF479/UgwmxjyU/wrSjNFNZFHDEuc4ptNc/uSzJFhXC/dGFwd/ntuJeb3T1ODBuGGDq7xN9HExFAXPMvxWvoB6jKIrj6Iskl6QREYEbQ68Q+k/92r0wV82MGA3atZtgGyv0hBfbXB9gafZoPm2qYCjwYJnAAr48qihb1hn72JAG1Y95eAdjKEELSEjmS7sUCpq3w5sQ9fwYf2G1DzvLUgUQSt0m5Mz4OGeydzGqvmi0sRWaJJKu97XXcjOc1k6u7cI2kmN
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR11MB3919.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(136003)(376002)(366004)(39840400004)(346002)(33964004)(2906002)(966005)(478600001)(186003)(316002)(956004)(5660300002)(52116002)(4326008)(166002)(66556008)(53546011)(66476007)(16526019)(8936002)(36756003)(6486002)(66946007)(26005)(31696002)(44832011)(31686004)(8676002)(86362001)(83380400001)(16576012)(2616005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR11MB3919.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(376002)(39850400004)(346002)(136003)(366004)(66946007)(8936002)(5660300002)(44832011)(86362001)(31686004)(956004)(166002)(186003)(966005)(66476007)(66556008)(36756003)(478600001)(26005)(52116002)(16526019)(16576012)(2906002)(316002)(83380400001)(2616005)(4326008)(31696002)(53546011)(33964004)(6486002)(8676002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?ZTAvbkJ4MUdYNTVtay9kT3VwUXFvOGRjZW5VZDFlN0dRMWpmcjExWWF2UW9G?=
- =?utf-8?B?MWM2dmxtYStjMHJkL29relB2MW9zYzY2NG1kY1R3TnBrM3NHMDV4YjN5RllP?=
- =?utf-8?B?eS9VaW1SUVJYT3doMENoR1drbkkvVzUrVlVzMmZZQ2MyRzJNMmJCOFBMUDZI?=
- =?utf-8?B?OUJKbGZSZlNlTElEUkRkN050MDY4VTRFdytsdVg4bklrelROeEE1MVBMeDVy?=
- =?utf-8?B?bUc1ZVkyMWozUXpaNGNUd3gzcmlHUzU2YWJBSEFZQ0xIc29NR2JYZTVZSG1E?=
- =?utf-8?B?eXg5cG1nbTRselJzOEIvM0RrNmZzYVNIYzZ3aDVDQkl1NU1Ud2F1NmFtUzl4?=
- =?utf-8?B?S1V3OE1IdG0rejVQWnBvcmw4VTNXem9tWFRPQnFxcnpvcW82T3l0K0ZZVXRP?=
- =?utf-8?B?WmF0OHZPVGo0NzR4K3ZYRkRkbFdIUHJRVzZBcWlsVWhZWSs1blZWcnhwZDBx?=
- =?utf-8?B?RUl3UlMyVFFXZUROTjc4Z1NwS0t5dkxxUG5xU1FPandXWk5FazVJcTAyL1Fh?=
- =?utf-8?B?aDJJb2ZqZXhoTWp3K2lENUlMcXY2dHZIUmNOQ3hsY1RSNHJLclpzZ1dPSnNS?=
- =?utf-8?B?WFZoY0JJQnhmcDM1bkRwclJEbVllMWlqVGEwcXFGb2dwOHVTSUpNZXp4bnpR?=
- =?utf-8?B?b1ZXUG1hc1MzejA2RmZIKzRMOGRDZU43V0xhUXVPYXg2Y2RVVDhRNmVmOEJn?=
- =?utf-8?B?d0Q1OHpZblJGaEdKZlhpdFFIYTQrQ0tqYnk1WlhwOVhOaHdvWWJ2aXY0RzFI?=
- =?utf-8?B?YWp3aHlDeGNBRFA2L0NUY1RJeE1yRHdVTVBtUDBVSzhQS3BCVmNqVUduazYz?=
- =?utf-8?B?bXMraUZjQUVIUVErWFhKT0xMajFoQUowNVZ6Z1V4V1E4UlIyMVlBbTRGWWFv?=
- =?utf-8?B?YXY3R0FtcjgxK2ZGUnZLanFZMDArVHhhSjQvTnMySVY5YWdFdmx0RVkzNXdt?=
- =?utf-8?B?T0R6MGlTSjR6bWJiWU9GSFZoSkllRjdjZ3dML3RkSG5LTFdYNyttbEFUbUVi?=
- =?utf-8?B?aVVwRkRETGpkTEc1VENWRnNPR0dKU3lSTU9DZXZJVVNiVDBZbDlFVjFUTTBC?=
- =?utf-8?B?NHU4Z3h2TWoxVkljVkJBVzhic1dEdmx0N2xXNEpBRDRNT0tyZzNnRlVIMkdv?=
- =?utf-8?B?T3BqOWNPOUJqSDFSTW5DbHQ1WG1nWEFKVjBmV3UxbENjM3hRd2NsNENoNFQ3?=
- =?utf-8?B?UmFMa1VCUHRuZDh2Rk40bytxRGtkOWpJWjUwV0Q5RTU1NUt1TEhTWUJVTWR3?=
- =?utf-8?B?NFZ6elZaWi9oY2JrRWduaTFDL3hxTGdpZWNkWXZDRTJuRWdGSEVwUzBwRXJz?=
- =?utf-8?Q?KLtNgj08gJMkF3Mk0CRIWC1X8VbA9pnJkq?=
+	=?utf-8?B?c1FCcktsaFFCWFBBUzNOVEtEcVh5cWExNzlFamJRenJtaGJiOHpVRXRGTDR5?=
+ =?utf-8?B?aHJXci90NmhtWlJIc044YTQzcEZScTJIdGdiZDk1ZFFyeTVTZ2hRblFwMlla?=
+ =?utf-8?B?K3RtdmQwY1FzanJrRHdMSEFpa2lHMlhaWGM5YkJXTE9LRElPS3FkMjl3R3FV?=
+ =?utf-8?B?WmovQlNhWHBIRWhQejNSYzRPdjNGeWEvM2ZMOXJBc3VOZThaNnprcVNOOVBE?=
+ =?utf-8?B?OWlEaytzQ1d5anErZTRnaFRzb2U4TWtXUkxhOHRORlBVY0taeWdrTXFkSFo0?=
+ =?utf-8?B?UW1jb1VLRUN0MXZmSVBwTllqUGRTbmpKL1RXRnhjek9lY0xUZmpCRUx6SkFs?=
+ =?utf-8?B?SkxHTkVXdVJwb3JZN1p6VmhKZUZGMzJkcVRkVVlVRm00M0NTQkdTWnhmT0Ft?=
+ =?utf-8?B?V0hEdXV6b0EzandjRXJSLzhVL3IwQ0c5Vy9JaDB3QkMrcWRQZnp6MWptcEVU?=
+ =?utf-8?B?WjE5V1I0OS9uMWl5NmE5STJYT2w4bWVlcWJvZHg5WE9ZdjNhNnNWeUx6T3hC?=
+ =?utf-8?B?N2IrS1ZXV1BvazJhdmVFeml0dForWlpMdjZ4TmZacUU0cDI0R204RVUwQmxj?=
+ =?utf-8?B?T095dHZ4NTkzNXZ1U3pYRXRQV3c3SkRDeEcxaVJrVjdER2t6MENTckY4Ykow?=
+ =?utf-8?B?eGRsQlhDOWVzNjl6UTRwTkpUREhFZVlnY2VLTlo3Qk0wemRwVytsMEI4U3hz?=
+ =?utf-8?B?OVlYcHlMbmlxOFBmMjJWdFR5QUpwd3V3NmhENWdxZTFyZnVaek4rTnZtRHlu?=
+ =?utf-8?B?R2xyTTFxaEtMWGg0TmRJS2dRZm1qWk1yRGZKMlJpWmRBeG8vU0djSzJRaU03?=
+ =?utf-8?B?RjBzT3BjQTJUMWlQNmFSWlV0T211WHlteWdyM2RBYUp2cm4yZUJHWHd1bEpz?=
+ =?utf-8?B?eG1PUDJIRnhEd2dJaW9iTVJKNDZpMDRlV2JQcFRtZkRYNGdJRlBSY29vVVM0?=
+ =?utf-8?B?TDdxZ3JHSTBsdDZIL09rUFdIZVR2Q1R2d25jL05XSlBJb203WkZLK0l6TGNs?=
+ =?utf-8?B?OXhTZ3dFcEdZbDBaRDNLZlJva2U2TnYvc1hVVkFFc3dxTldrVlByeVEzaGZH?=
+ =?utf-8?B?WnpaZDJKMzFzbFI1ZEkxYVBURG5KR1F5czhzQ281c3l0TWwzL2pBcFJKb0Fq?=
+ =?utf-8?B?cDU2STN1RUk1K05wa3loSHNVSlVQenpIYyswWTdZYS9rMktDc091WjBoak52?=
+ =?utf-8?B?Zis1dHFLNU0ra0cwZHRYcWZGMkVvQ2FxdENNeTVITG1KbGVLZjg2LzJva1ds?=
+ =?utf-8?B?Y2h0blBFUWhRdjMwRXYxWFo2bXBGQVFyWmxndk1wV09KVVhaRWpUOWl3UUVv?=
+ =?utf-8?Q?jNh33ci8s5aUmhbAeF4nlZEAVy4dr7zI/R?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 477415df-28bf-4800-5cf3-08d8c12e9a66
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3d7d2a35-a160-4cc0-f752-08d8c12eb8e3
 X-MS-Exchange-CrossTenant-AuthSource: MN2PR11MB3919.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jan 2021 12:41:57.7400
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jan 2021 12:42:48.8878
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: DwpFY9Y8qFsQfJtrSIhi7x7hxM+XeW/AKJuVOnXX91v6Z4ErjFLE93arAb8TTWDtWkQsqff1FV8Ow+DeclEIgSeO8tMal2JL5UYifk4cI8g=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR11MB3678
+X-MS-Exchange-CrossTenant-UserPrincipalName: wAyCFFSfsX7hjL359l366NdZq/Ab/RbFY9xmkHrF+zcTa58mnl9LbdxIepUBAe5GknUSAz0GurDPquovFAVmgZ9sBxlq0yFCeV0MssBCSxI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR11MB3647
 Content-Type: multipart/alternative;
- boundary="------------F878E0C277F5EE2A86D18E6A"
+ boundary="------------CE19BCECBBC4FC8A1A49BE72"
 Content-Language: en-US
 
---------------F878E0C277F5EE2A86D18E6A
+--------------CE19BCECBBC4FC8A1A49BE72
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -110,63 +111,72 @@ Content-Transfer-Encoding: 7bit
 On 2021-01-22 12:45 a.m., Andrew Jeffery wrote:
 > [Please note this e-mail is from an EXTERNAL e-mail address]
 >
-> The hexdump package appears to be abandoned, but it's used as the
-> dependency of another project I'm packaging.
+> jstyleson is a library to parse JSON with js-style comments.
 >
-> Change-Id: Id90d770fb48fa502f3abeb541b7febef42799b21
+> The license isn't shipped in the pypi package, so it was extracted from
+> the github repo at [1].
+>
+> [1] https://github.com/linjackson78/jstyleson/blob/8c47cc9e665b3b1744cccfaa7a650de5f3c575dd/LICENSE
+>
+> Change-Id: I1e22ef42e823d172fd52f40e84bd5194c131310a
 > Signed-off-by: Andrew Jeffery <andrew@aj.id.au>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../packagegroups/packagegroup-meta-python.bb |  1 +
->   .../python/python3-hexdump_3.3.bb             | 27 +++++++++++++++++++
->   2 files changed, 28 insertions(+)
->   create mode 100644 meta-python/recipes-devtools/python/python3-hexdump_3.3.bb
+>   .../packagegroups/packagegroup-meta-python.bb     |  1 +
+>   .../python/python3-jstyleson/LICENSE              |  8 ++++++++
+>   .../python/python3-jstyleson_0.0.2.bb             | 15 +++++++++++++++
+>   3 files changed, 24 insertions(+)
+>   create mode 100644 meta-python/recipes-devtools/python/python3-jstyleson/LICENSE
+>   create mode 100644 meta-python/recipes-devtools/python/python3-jstyleson_0.0.2.bb
 >
 > diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-> index bf46896f1c9b..41f376b39b55 100644
+> index 41f376b39b55..5f81fd35b75f 100644
 > --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
 > +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-> @@ -416,6 +416,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
->       python3-cerberus \
+> @@ -417,6 +417,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
 >       python3-cvxopt \
 >       python3-jsonpath-rw \
-> +    python3-hexdump \
+>       python3-hexdump \
+> +    python3-jstyleson \
 >   "
 >
 >   RDEPENDS_packagegroup-meta-python3-extended = "\
-> diff --git a/meta-python/recipes-devtools/python/python3-hexdump_3.3.bb b/meta-python/recipes-devtools/python/python3-hexdump_3.3.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-jstyleson/LICENSE b/meta-python/recipes-devtools/python/python3-jstyleson/LICENSE
 > new file mode 100644
-> index 000000000000..cb04e17dfdfb
+> index 000000000000..807babd62b64
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-hexdump_3.3.bb
-> @@ -0,0 +1,27 @@
-> +SUMMARY = "view/edit your binary with any text editor"
+> +++ b/meta-python/recipes-devtools/python/python3-jstyleson/LICENSE
+> @@ -0,0 +1,8 @@
+> +The MIT License (MIT)
+> +Copyright (c) 2016 linjackson
 > +
-> +# The homepage listed on pypi is [1] but the repository has been removed.
-> +# Instead, set the homepage to pypi.
-> +#
-> +# [1] https://bitbucket.org/techtonik/hexdump/
-> +HOMEPAGE = "https://pypi.org/project/hexdump/"
+> +Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 > +
-> +LICENSE = "PD"
-> +LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/PD;md5=b3597d12946881e13cb3b548d1173851"
+> +The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 > +
-> +PYPI_PACKAGE_EXT = "zip"
+> +THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+> \ No newline at end of file
+> diff --git a/meta-python/recipes-devtools/python/python3-jstyleson_0.0.2.bb b/meta-python/recipes-devtools/python/python3-jstyleson_0.0.2.bb
+> new file mode 100644
+> index 000000000000..e70ce33efcd2
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-jstyleson_0.0.2.bb
+> @@ -0,0 +1,15 @@
+> +SUMMARY = "Library to parse JSON with js-style comments."
+> +HOMEPAGE = "https://github.com/linjackson78/jstyleson"
 > +
-> +inherit pypi distutils3
+> +SRC_URI += " file://LICENSE "
 > +
-> +SRC_URI[sha256sum] = "d781a43b0c16ace3f9366aade73e8ad3a7bd5137d58f0b45ab2d3f54876f20db"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=d97b96c7337934ee448ffd4392f32079"
 > +
-> +S = "${WORKDIR}"
+> +PYPI_PACKAGE_EXT = "tar.gz"
+> +
+> +inherit pypi setuptools3
+> +
+> +SRC_URI[sha256sum] = "680003f3b15a2959e4e6a351f3b858e3c07dd3e073a0d54954e34d8ea5e1308e"
 > +
 > +BBCLASSEXTEND = "native nativesdk"
-> +
-> +do_cleanup_hexfile() {
-> +    rm ${D}${datadir}/data/hexfile.bin
-> +    rmdir ${D}${datadir}/data ${D}${datadir}
-> +}
-> +
-> +addtask cleanup_hexfile before do_package after do_install
 > --
 > 2.27.0
 >
@@ -174,7 +184,7 @@ Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > 
 >
 
---------------F878E0C277F5EE2A86D18E6A
+--------------CE19BCECBBC4FC8A1A49BE72
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -187,69 +197,78 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2021-01-22 12:45 a.m., Andrew
       Jeffery wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210122054538.3675758-1-andrew@aj.id.au">
+    <blockquote type="cite" cite="mid:20210122054538.3675758-2-andrew@aj.id.au">
       <pre class="moz-quote-pre" wrap="">[Please note this e-mail is from an EXTERNAL e-mail address]
 
-The hexdump package appears to be abandoned, but it's used as the
-dependency of another project I'm packaging.
+jstyleson is a library to parse JSON with js-style comments.
 
-Change-Id: Id90d770fb48fa502f3abeb541b7febef42799b21
+The license isn't shipped in the pypi package, so it was extracted from
+the github repo at [1].
+
+[1] <a class="moz-txt-link-freetext" href="https://github.com/linjackson78/jstyleson/blob/8c47cc9e665b3b1744cccfaa7a650de5f3c575dd/LICENSE">https://github.com/linjackson78/jstyleson/blob/8c47cc9e665b3b1744cccfaa7a650de5f3c575dd/LICENSE</a>
+
+Change-Id: I1e22ef42e823d172fd52f40e84bd5194c131310a
 Signed-off-by: Andrew Jeffery <a class="moz-txt-link-rfc2396E" href="mailto:andrew@aj.id.au">&lt;andrew@aj.id.au&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210122054538.3675758-1-andrew@aj.id.au">
+    <blockquote type="cite" cite="mid:20210122054538.3675758-2-andrew@aj.id.au">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../packagegroups/packagegroup-meta-python.bb |  1 +
- .../python/python3-hexdump_3.3.bb             | 27 +++++++++++++++++++
- 2 files changed, 28 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-hexdump_3.3.bb
+ .../packagegroups/packagegroup-meta-python.bb     |  1 +
+ .../python/python3-jstyleson/LICENSE              |  8 ++++++++
+ .../python/python3-jstyleson_0.0.2.bb             | 15 +++++++++++++++
+ 3 files changed, 24 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-jstyleson/LICENSE
+ create mode 100644 meta-python/recipes-devtools/python/python3-jstyleson_0.0.2.bb
 
 diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index bf46896f1c9b..41f376b39b55 100644
+index 41f376b39b55..5f81fd35b75f 100644
 --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
 +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -416,6 +416,7 @@ RDEPENDS_packagegroup-meta-python3 = &quot;\
-     python3-cerberus \
+@@ -417,6 +417,7 @@ RDEPENDS_packagegroup-meta-python3 = &quot;\
      python3-cvxopt \
      python3-jsonpath-rw \
-+    python3-hexdump \
+     python3-hexdump \
++    python3-jstyleson \
  &quot;
 
  RDEPENDS_packagegroup-meta-python3-extended = &quot;\
-diff --git a/meta-python/recipes-devtools/python/python3-hexdump_3.3.bb b/meta-python/recipes-devtools/python/python3-hexdump_3.3.bb
+diff --git a/meta-python/recipes-devtools/python/python3-jstyleson/LICENSE b/meta-python/recipes-devtools/python/python3-jstyleson/LICENSE
 new file mode 100644
-index 000000000000..cb04e17dfdfb
+index 000000000000..807babd62b64
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-hexdump_3.3.bb
-@@ -0,0 +1,27 @@
-+SUMMARY = &quot;view/edit your binary with any text editor&quot;
++++ b/meta-python/recipes-devtools/python/python3-jstyleson/LICENSE
+@@ -0,0 +1,8 @@
++The MIT License (MIT)
++Copyright (c) 2016 linjackson
 +
-+# The homepage listed on pypi is [1] but the repository has been removed.
-+# Instead, set the homepage to pypi.
-+#
-+# [1] <a class="moz-txt-link-freetext" href="https://bitbucket.org/techtonik/hexdump/">https://bitbucket.org/techtonik/hexdump/</a>
-+HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://pypi.org/project/hexdump/">&quot;https://pypi.org/project/hexdump/&quot;</a>
++Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 +
-+LICENSE = &quot;PD&quot;
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://${COREBASE}/meta/files/common-licenses/PD;md5=b3597d12946881e13cb3b548d1173851">&quot;file://${COREBASE}/meta/files/common-licenses/PD;md5=b3597d12946881e13cb3b548d1173851&quot;</a>
++The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 +
-+PYPI_PACKAGE_EXT = &quot;zip&quot;
++THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+\ No newline at end of file
+diff --git a/meta-python/recipes-devtools/python/python3-jstyleson_0.0.2.bb b/meta-python/recipes-devtools/python/python3-jstyleson_0.0.2.bb
+new file mode 100644
+index 000000000000..e70ce33efcd2
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-jstyleson_0.0.2.bb
+@@ -0,0 +1,15 @@
++SUMMARY = &quot;Library to parse JSON with js-style comments.&quot;
++HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/linjackson78/jstyleson">&quot;https://github.com/linjackson78/jstyleson&quot;</a>
 +
-+inherit pypi distutils3
++SRC_URI += <a class="moz-txt-link-rfc2396E" href="file://LICENSE">&quot; file://LICENSE &quot;</a>
 +
-+SRC_URI[sha256sum] = &quot;d781a43b0c16ace3f9366aade73e8ad3a7bd5137d58f0b45ab2d3f54876f20db&quot;
++LICENSE = &quot;MIT&quot;
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://${WORKDIR}/LICENSE;md5=d97b96c7337934ee448ffd4392f32079">&quot;file://${WORKDIR}/LICENSE;md5=d97b96c7337934ee448ffd4392f32079&quot;</a>
 +
-+S = &quot;${WORKDIR}&quot;
++PYPI_PACKAGE_EXT = &quot;tar.gz&quot;
++
++inherit pypi setuptools3
++
++SRC_URI[sha256sum] = &quot;680003f3b15a2959e4e6a351f3b858e3c07dd3e073a0d54954e34d8ea5e1308e&quot;
 +
 +BBCLASSEXTEND = &quot;native nativesdk&quot;
-+
-+do_cleanup_hexfile() {
-+    rm ${D}${datadir}/data/hexfile.bin
-+    rmdir ${D}${datadir}/data ${D}${datadir}
-+}
-+
-+addtask cleanup_hexfile before do_package after do_install
 --
 2.27.0
 
@@ -264,4 +283,4 @@ index 000000000000..cb04e17dfdfb
   </body>
 </html>
 
---------------F878E0C277F5EE2A86D18E6A--
+--------------CE19BCECBBC4FC8A1A49BE72--
