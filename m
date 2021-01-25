@@ -1,17 +1,17 @@
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.64])
- by mx.groups.io with SMTP id smtpd.web11.35852.1611578466370835986
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.88])
+ by mx.groups.io with SMTP id smtpd.web09.35535.1611578475610614100
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Jan 2021 04:41:06 -0800
+ Mon, 25 Jan 2021 04:41:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=ikzfkKtf;
- spf=pass (domain: windriver.com, ip: 40.107.93.64, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=K1on+m+x;
+ spf=pass (domain: windriver.com, ip: 40.107.93.88, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JDfEFGQORYU3/1OFoOvPcfdrW9TX3+2TUPuEi9YTtAOikzm7AGEelMROrDxsufHtHQ70ke21MbEF5RiccUoeo7qutvi2fL7x4INNN3Sk2hhup/yAb0ehRrsbzct1IIcG4CjzmPj32tHskY2haaMQaGQNJ8DiKxkvri05YzrTAY0f6wGU7qLBlgC4VnAaCvzlkSQp6At2pKytt05jXbkP7RrVP5IfvoPTaQ7EyZf0Kl5s9mmISCk0UHW/fUtew7QO51VPnU8nt+Vfv6j1jHylJeULcf94LeAsVhAbpu65Mps+LrAMDsLI3XbeWjuai3HZzNpz4iVqkNKgmQMvxgQUjQ==
+ b=MCl7JwwuhT/6/zPWu1RQ4bdk6tYfYygjcsZ15A1n0irHEokv+S10CfwS6VLxGNTIfFhx6pvJj7spDl3wJXlray0uS4ybkYpHCcUEa8YpBUohJKHY52+4Zk8QyAEGx9ogjOYF0BnzCZZWdOWw8jbbsGeamYlscTdlW75ZJV5E5pZ0DqVGw/FPKxV9YEAIFOk7r6a+n0bXuqM1E2mBVKNFQJyTs1z5WVYdYwYNu6RhBJe6ytSXOX7y9UmqEnbiJYTdkIDNZpdGw5/1aTSBOAXdWeAK7VbrhORvjnV9wJbmTpAQEal1h25NNTSSUkvJ1LyCIut6wBwFibbXZH8hdHLi2A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CDm8gjADvgHGvCwy9tK965DFwNmVBcPA/0XEWh1wKrQ=;
- b=bRnhzqLKYzr/KAZ/HaPOA1OxvhdvNufTvofh6vTpAmBZAwoAInR7g7mznArua4YmnT+r5SiY21GzebyOvHuXeTNsHAJWADlvLHTZuWcLoqtypDPCX6jttaUzYNDXuhswfj2soiLpKpli7twYxWI51mvVnd5S2L0a1qkJ3O1XwMaDJm4Dsz+R4fFg1sDNQxmqnk0RgX2CvDkInHijkQf029dZYwW7idp3/CU2Z75HCGFLRMRJT3Jhf5/e1ek14uh0zSFoLlz+aEirHteB2Eedy7+3J43ivb/ZPUncXjdgj63P02i3aMdcXt2K0VrfG95FJEzsV9O/KJ4BEddrwzyPzw==
+ bh=MpCsAAgBE6rqIvAWBi0lqATsZGSi50rz1sNgXqPIax8=;
+ b=CPiH85+qQ04BhmoL+kDMh84uzovTGfeH4qH0lugG1Hnj5TnGF226Y/f5oSEVZ0bXrh5s/bhezeFAtcYPamZA80SbU6NsjsWV60fLi/pMblFyIf4L1XGLv7X07IjXkeYG8ZmYNDuhBXUEBG2q3lMITrma09ZSunX6/J/VB2ku1Rel6Gers5JkiXkR3NNEmgSH6++k72jz6Q2pmoQvKHfLd9sc740J4yZMBIRnf708bQFTqx0SRC6iS8vgb9mfkg+hb5S8mWcv9g+/rIhn1lLY8q0wW/CIEemKYm9pYhjx+pM01gSWCuVeiliXYt/w4iprjVBYOB1AroszCCmmXrP2zA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CDm8gjADvgHGvCwy9tK965DFwNmVBcPA/0XEWh1wKrQ=;
- b=ikzfkKtfMSuqEcaxcgydGVYBnoGI6Z5PiriKRlGNhl1bxxA/IKEv+KJY138bes940BrGXD6ylk/aXrHQwW2mljQn6YvYXaPeBBYxcgx1RHUZ3IQ+sJ73iktHulY34u91bum+Ad/KbvcVphq48/2ZAPk+HHM60XeKuscW8TjABUg=
+ bh=MpCsAAgBE6rqIvAWBi0lqATsZGSi50rz1sNgXqPIax8=;
+ b=K1on+m+xQf8yfVCAftIcrWCpjH2EeChGZ4SJkottCjzmmI2FWpPZdnoO0HtMyL04Vcft9XL3dF85nsnIH4JwpteZAN58y949DMjY7ZHvi2oJRLOXVxzgKJBTGwH6sDNxYktVd14as0UBeI2L6yqtBH+aenqBG2WdkIQLBzSLpHU=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,22 +28,22 @@ Received: from MN2PR11MB3919.namprd11.prod.outlook.com (2603:10b6:208:13b::27)
  by MN2PR11MB3984.namprd11.prod.outlook.com (2603:10b6:208:153::10) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.13; Mon, 25 Jan
- 2021 12:41:05 +0000
+ 2021 12:41:14 +0000
 Received: from MN2PR11MB3919.namprd11.prod.outlook.com
  ([fe80::5462:9c04:72b3:6c44]) by MN2PR11MB3919.namprd11.prod.outlook.com
  ([fe80::5462:9c04:72b3:6c44%7]) with mapi id 15.20.3763.019; Mon, 25 Jan 2021
- 12:41:05 +0000
-Subject: Re: [oe] [meta-python][PATCH 3/5] python3-bitarray: Upgrade 1.6.1 -> 1.6.3
+ 12:41:14 +0000
+Subject: Re: [oe] [meta-python][PATCH 4/5] python3-pykwalify: Upgrade 1.7.0 -> 1.8.0
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20210121131709.27097-1-leon.anavi@konsulko.com>
- <20210121131709.27097-3-leon.anavi@konsulko.com>
+ <20210121131709.27097-4-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <f310b40a-24b8-fd09-5712-c50aed655d17@windriver.com>
-Date: Mon, 25 Jan 2021 07:41:03 -0500
+Message-ID: <db57b2ee-236b-834a-6df8-e58dd65ce910@windriver.com>
+Date: Mon, 25 Jan 2021 07:41:13 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.0
-In-Reply-To: <20210121131709.27097-3-leon.anavi@konsulko.com>
+In-Reply-To: <20210121131709.27097-4-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
 X-ClientProxiedBy: MN2PR14CA0015.namprd14.prod.outlook.com
  (2603:10b6:208:23e::20) To MN2PR11MB3919.namprd11.prod.outlook.com
@@ -51,102 +51,170 @@ X-ClientProxiedBy: MN2PR14CA0015.namprd14.prod.outlook.com
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by MN2PR14CA0015.namprd14.prod.outlook.com (2603:10b6:208:23e::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.12 via Frontend Transport; Mon, 25 Jan 2021 12:41:04 +0000
+Received: from [192.168.0.55] (174.115.236.231) by MN2PR14CA0015.namprd14.prod.outlook.com (2603:10b6:208:23e::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.12 via Frontend Transport; Mon, 25 Jan 2021 12:41:14 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 010e42e5-5951-40a6-062b-08d8c12e7b1d
+X-MS-Office365-Filtering-Correlation-Id: 9c91f679-b1cb-4f7f-0ba6-08d8c12e809f
 X-MS-TrafficTypeDiagnostic: MN2PR11MB3984:
 X-Microsoft-Antispam-PRVS: 
-	<MN2PR11MB3984651DA6677608DB509A9E9FBD9@MN2PR11MB3984.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2803;
+	<MN2PR11MB39846E5577AAD3BF4A5E20809FBD9@MN2PR11MB3984.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:8273;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	mUiEtcnqVb3LyNp1vaRK73t2IzF9TU5OQEyF1T/3/8ZH2XfvzNAQWjPbmR2ZRpuyStHPKTLCAjwT8710xZDTEKVqxteIlTgoFg0gW7ckezK0UiA2IWh7jnVxAFrVxrOrKXNZq2DaEaZ5EaQAH1mUFp0nyF0cgGONVD25m0LuwhPe+UpQ/EsWs1UXzRNz2X78/+GxY7/H5025RS2kdIDuHGLxg3P2E5YBUAQKOqYoC6uwHHRxnDgn3SlE+fEq5EgMQ4ys4V4EDJsqWiEJlUHppW3u3EIYb8VJGnzFD3iZOGFOEng8WKZ2z+M7S4LAAALhv5ZPg/w7vIDodahPqhQ0pNjjYAEL/uh7tf5krk4ya6eutl19htpLjgJyVW/HSh9rC9PzaC99yAbpX7uum1xE2s1YfYSQjkCEfinSIBzp55n7rjyVCOR4uTekxV/uo6kcnV+7rliu7MkEaGibSYIcT18ZYDQYyWPidtgAMYa1rKrGYHLeTtcdcyOqcO2RdBAsHIKRLamEIdyy6ELSjcNu+uv3JNcL03S/9kRdfzw0kJ8wFgY0QPGKbfYoKzp+GqJe
+	cSTq6tZW2LOvSqZbYp5RkeSSsDIVroaqZHpsOAmgUivZehMbXI09hfK59L6+si72TYMYWApGkL+zHa9pgKUP/lU1CT0qcznauL4N/Dn+MbHX9A4aGjJ5KQSk7rkYrT0fyCYoOnRpZTRTWfaT+28qBK0eig4cBh4bSCuY6p94WZPuyPdiTiefbPRhsTK4Mmvtpe7UqUx7c49y+xmTF7aO3Pin3RqG3VzE4A98vD+a2XQ/NDlMUHOM51MfdlydUPntei+0PE/6AHXhwmIhMlx3JWpU88unlSVpP/eoEq1rJbWBoYISCg/0atV/ag7DReE0QGK4bWDYrnaM13YFH+4AazXswFJkRLH4Rpn2qyZqbycNAT6mjc/C2JW+eXmRmGLuhXYhJTc+YtM7CPs3JUOr1lxZR34G0cp4/xmrR2J6derTykykSlVJ5ZfX0aAaNpnxGdaBX8y0Ciq7BDa582UBqMacaMnyXqA4YqRul999Wy0PG+bKevLnYt1bym5zXssQeaL86MqfslzLx7urC6ChAjJLEENiUYtteOtl+08zTchTv7R3rLplL513RL2569gv
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR11MB3919.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(346002)(136003)(39850400004)(396003)(366004)(8936002)(33964004)(5660300002)(86362001)(31696002)(2616005)(6486002)(478600001)(44832011)(83380400001)(956004)(31686004)(966005)(66946007)(66476007)(66556008)(36756003)(8676002)(52116002)(2906002)(316002)(16576012)(186003)(16526019)(53546011)(26005)(166002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR11MB3919.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(346002)(136003)(39850400004)(396003)(366004)(8936002)(33964004)(5660300002)(86362001)(31696002)(2616005)(6486002)(66574015)(478600001)(44832011)(83380400001)(956004)(31686004)(966005)(66946007)(66476007)(66556008)(30864003)(36756003)(8676002)(52116002)(2906002)(316002)(16576012)(186003)(16526019)(53546011)(26005)(166002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?clZLWkd4Ny82N1F3clBIYTRLWDhtejNNbk5XS3U1MVludGpKSzZHSE1SN2Ns?=
- =?utf-8?B?RGtEUHU5cWVxTmx4YlViVEJKNmtUcUxMZ2U4bTN5MXpwKzA5K1hsdm9IRTg2?=
- =?utf-8?B?eDRURlo5VURSaVE1L0dhbzkxMy9Zbm5Vdm1vQzVhcTIza0p2dHlxajVjU2dK?=
- =?utf-8?B?d09GRS9UVzNHZUVBTitlK2RGNHVORUpJSXZLM3ZlaExGZW1zc0lzVUxvd2I4?=
- =?utf-8?B?VEZJSzlBcDdENDdXaXUrWks5UXp4TnRUckxNV1BTVnN6UXpnamp6NDdVOXVh?=
- =?utf-8?B?NEthZVo1OWU3dW45c2dMUVhnaWY5Wk9JNXlwV3dhRFo0NEo4U2pjZzFWblJn?=
- =?utf-8?B?R3Z6M2MwSjB0SnhKNVBYbUo2emlrV1ZFZ3pXZVNvdW8zTkJVRzVZVXpFdXhy?=
- =?utf-8?B?a3gwYlhnWitXM1BFSjJiQzdNZWw5WmVZZVhpMWwxTU5IZ2JNK2U0QUYzVXBX?=
- =?utf-8?B?ZTFMRVBvSkQ4djNyQ2tsNkVXbHNyUGdqQ29NQ3lEdEZJRnNhYUJEUmx0YnJo?=
- =?utf-8?B?aEpOTllmY2ZvQzdmSEVwOHFzbkhxcE5MRzRBRVdiZDczQTJZRHE5bzd2eEtl?=
- =?utf-8?B?S0p6bmQ2TmdGQUwrandNUUJCaW4veG5BNU9VeVRuWVFYaG1JQ2YxVEt1RDRM?=
- =?utf-8?B?bEgvbE1oM04zQUx6Q0ttZU11VVNyMXdmU0I2TDJQOUhVaSs4ZG1ZOUVDb2t4?=
- =?utf-8?B?Q2JCWFRPVVhIdFk1SWd0SXBWKytwbGQySU45WkdnTEFDN09kRFhDSEdaQVVW?=
- =?utf-8?B?UlU4eXE4b1NobXVEZFNuTmpBK0t2WFhuU0tRNFJnRjFRVVhEMlBLR1ZzVTNH?=
- =?utf-8?B?eUFxVUcxazhRV0FERnBNNjU4aUM5cEJISnN2WFZnNkUxTEVCTTR1RFp0bkc0?=
- =?utf-8?B?cXByZll6QWI1a0N2ejhZNm93TXhXWVh5UkNGaVF1WndzV05LTUZ5WXlXWmxP?=
- =?utf-8?B?MGc1b2JXUDFFU2M3RkhJb2VuUzUwczRZWnlrYVFJWXMxckNTVUprdlN6OEVk?=
- =?utf-8?B?MXoreElXeUJ2ZXdITEZESXFVZ1U3RHc2cnB6OXdENGk3cmR3em5kTmM0d0ZV?=
- =?utf-8?B?L29HVWhHaWNmdDNscE1BYmVQTG51Z1V3QlltcEt4WW1EdGFlVEgxOFBISGNw?=
- =?utf-8?B?UmQ1NmtuZXl4ZXdBRmhxVWdkSDFBR211bnJFNWhCbW1yNlRjT0REQ2w5UXNN?=
- =?utf-8?B?cVhTdFZEQVhPM1NyRDBhbEZOWUwrdUloYXQ2SjJIWmRmT1FTZG1rVVppOFRt?=
- =?utf-8?B?ZnM0ODFvTDl6RmlKb29mUnVBTmpLU2JVYkI4S1kxMlBqZDNkQ0pqalcxZHpG?=
- =?utf-8?Q?hSLanHmk00Y3CjQ41yK5IvQrNhI9s7j3pi?=
+	=?utf-8?B?QmN2RnFWSXpocWFTbmlvUHk0TkhZYVQ1RHhPRUlLVVF6WXVoajVHRS9LYXAx?=
+ =?utf-8?B?R1BjZG1ITDBXT0dZMnl2YldYZ0poNVUzajRVV3FzTThhbnhzamRSM0dQRHE1?=
+ =?utf-8?B?dktvK3FsMmFKYS9EYTZYN3pJdkFaeEdTSFlUanJMTHNFNkJmcGdmNEJWNlJ0?=
+ =?utf-8?B?NWNhcmhrM1dKalhCb1pzVVJIOVZvVTRPMUhOVk5uUFVESEZRY1BUNlovaDVC?=
+ =?utf-8?B?eHl3QVEybUVXOGNmVGVMWlRndlpmNnFoZ2FlTlRjWjFmanZIVDB5Q3pieFBn?=
+ =?utf-8?B?M1BEZnhKekYxTFI2VGVsV1FRS1VaeTVWdUpqdnpnWFNDbEhQQ1djVys5RTM2?=
+ =?utf-8?B?UU96RWw3TlRqU01iYU1VQ0MzOGNsSU96L3R6bkVFckFINVBHMzZRdEFmYnpu?=
+ =?utf-8?B?bitXSk5OZTlkRjM2aTYrcHRDSVRQRVo3VURNMS9razZOK1hlTVRCR1lDUWk4?=
+ =?utf-8?B?S2YzUkRSUHVYZUs3M3lXUnVDdzR2VGVEdnJsSUlQYU9VS3pubG9URWw4MFV0?=
+ =?utf-8?B?T2VTRS9HOU5zM1RkdDdoR2c5eUJnd1ZSbERLbDVRYWd3enAydmVCcU8vcmpt?=
+ =?utf-8?B?cjg2NUlPenVYZGZhbHhzNEExcVFFRjRYTjlvanB2cENNKzdDb0pac2FQeVlW?=
+ =?utf-8?B?VDl5aUNFRXdqMW5CWm9Kelk4QlBpNkRFL0c4bTBrSHJKTVNvYi9qem1ZMG15?=
+ =?utf-8?B?KzJjSndjZDNFdXhlTG85T3NUdW0zL0x0ejcxMVQvbHNCMVBoSllwWm9PVmVN?=
+ =?utf-8?B?NWtuNk9vUnZsUmNrZTZFVG1hVzlRbEFyNFlQUGpzUVBiYVplSVpDbzdzUDBB?=
+ =?utf-8?B?Y3IwQTlOUkxGdnVHdnZYd3k0dnJKdmYyeTViVEUrWW13TmxvTWJOdGMyT2hT?=
+ =?utf-8?B?Ym51ZkxBRlRvcCszUTgrV2hHOFIvRjRtak9FTW45UXMwOUkzVVJFL2VwOVFv?=
+ =?utf-8?B?RWh5c2dFcDFqaWIyT1E1Y0c3RHZoekdsZTZIdEF3OEhWdmowNlkwMzdTZCsz?=
+ =?utf-8?B?TERBS1Q0emNsVU5PdHpxUk5ZUnlRQVlFSEVXbFdyb2NMajVBU1gyNUpiUnRC?=
+ =?utf-8?B?RU83UDE5Wk04ZXFwb0NzOHR2b25adFQ1WHpiNlUrK1V2RWhrcGIzcE1Db3N5?=
+ =?utf-8?B?azNMNzUzVCs1Y3FidXh6d0ZnRnpwT2EwV2RMYzVDR3Z5Q2YxQjV6SDk5UzU3?=
+ =?utf-8?B?Yk51ajNIV1BtMDIxM2NwcWVLVm5aZXNnWlR5QkJvUTh6aExLN0lwRmNlU2xK?=
+ =?utf-8?B?Ylg1bDREVmZHeHVtVkRvK0h6ZktQK1RzVnprNkNQUTRTVTVTSWc4ZUJMT0R3?=
+ =?utf-8?Q?AekJ0Hny6ujDsKwkaayuZPpVamaUOr5NMD?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 010e42e5-5951-40a6-062b-08d8c12e7b1d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9c91f679-b1cb-4f7f-0ba6-08d8c12e809f
 X-MS-Exchange-CrossTenant-AuthSource: MN2PR11MB3919.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jan 2021 12:41:05.2400
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jan 2021 12:41:14.5387
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: lCsoe6ERp8nfko+mmfgGb4/U+mtcXB7Eg7IXYBWPmWL0aACJ7Jc6HaBKQMjKnQEmw5gYsIcd9H4AMHMme1QhAZahxxUO+E1HDASHlFlPb0g=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7I/LtvjF6qbSct1dNzj6xMLiIp4uXfVa7aPXoJMWsvwF+eA3/I5BsQtYMYO5RWSsMbfBrWNj9jHyjBAaTKsAKtZgtd0dFOSUBg5cSnCwnIM=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR11MB3984
 Content-Type: multipart/alternative;
- boundary="------------EBC0E27913B780D779163135"
+ boundary="------------2F8A4AE7F4402B6642EE1828"
 Content-Language: en-US
 
---------------EBC0E27913B780D779163135
+--------------2F8A4AE7F4402B6642EE1828
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 
 On 2021-01-21 8:17 a.m., Leon Anavi wrote:
-> - add missing .h files to sdist tarball
-> - use `Py_SET_TYPE()` and `Py_SET_SIZE()` for Python 3.10
-> - add official Python 3.10 support
-> - fix slice assignement to same object, e.g. a[2::] = a or
->    a[::-1] = a
-> - add bitarray.h
+> Upgrade to release 1.8.0:
+>
+> - Dropped support for python 3.5 and below, including 2.7
+> - ruamel.yaml is now the default and preffered yaml parser
+> - Dropped support for pyyaml parser
+> - Update minimum version of ruamel.yaml to 0.16.0
+> - Update minimum version of python-dateutil to 2.8.0
+> - Added new cli argument "--encoding ENCODING" that specifies what
+>    encoding to open data and schema files with
+> - Enum error strings now output all possible values for easier
+>    debugging
+> - Removed deprecated imp module. Dynamic imports imght be affected
+> - Implement new type email that uses a relative simple regex to
+>    validate email addresses according to RFC 5322 Official Standard
+> - Implement new type url that uses a relative simple regex to
+>    validate url:s according to RFC 1808
+> - Add new argument "schema_file_obj" to Core class. Allows to pass
+>    in StringIO or similar interfaced objects to use for validation.
+> - Add new argument "data_file_obj" to Core class. Allows to pass in
+>    StringIO or similar interfaced objects to use for validation.
+> - Fixed a regression from 1.6.1 where ruamel.yaml safe_load would
+>    break for all built-in custom python tags.
+> - All normal python tags should now be possible to use again.
+> - Fixed an issue with regex values that was not converted to str()
+>    before regex mapping was attempted.
+> - This should validate things like integers and objects that support
+>    str() conversion better.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../{python3-bitarray_1.6.1.bb => python3-bitarray_1.6.3.bb}   | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-bitarray_1.6.1.bb => python3-bitarray_1.6.3.bb} (68%)
+>   .../0001-rule.py-fix-missing-comma.patch      | 34 -------------------
+>   ...fy_1.7.0.bb => python3-pykwalify_1.8.0.bb} |  7 ++--
+>   2 files changed, 2 insertions(+), 39 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python3-pykwalify/0001-rule.py-fix-missing-comma.patch
+>   rename meta-python/recipes-devtools/python/{python3-pykwalify_1.7.0.bb => python3-pykwalify_1.8.0.bb} (57%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.6.1.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.6.3.bb
-> similarity index 68%
-> rename from meta-python/recipes-devtools/python/python3-bitarray_1.6.1.bb
-> rename to meta-python/recipes-devtools/python/python3-bitarray_1.6.3.bb
-> index f54d54f92..16beab551 100644
-> --- a/meta-python/recipes-devtools/python/python3-bitarray_1.6.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-bitarray_1.6.3.bb
-> @@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
->   LICENSE = "PSF"
->   LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
+> diff --git a/meta-python/recipes-devtools/python/python3-pykwalify/0001-rule.py-fix-missing-comma.patch b/meta-python/recipes-devtools/python/python3-pykwalify/0001-rule.py-fix-missing-comma.patch
+> deleted file mode 100644
+> index 689355eea..000000000
+> --- a/meta-python/recipes-devtools/python/python3-pykwalify/0001-rule.py-fix-missing-comma.patch
+> +++ /dev/null
+> @@ -1,34 +0,0 @@
+> -From f96b76efb810d7d559254d0ec58de628e09f525a Mon Sep 17 00:00:00 2001
+> -From: =?UTF-8?q?Mart=C3=AD=20Bol=C3=ADvar?= <marti.f.bolivar@gmail.com>
+> -Date: Mon, 13 Jan 2020 08:42:05 -0800
+> -Subject: [PATCH] rule.py: fix missing comma
+> -MIME-Version: 1.0
+> -Content-Type: text/plain; charset=UTF-8
+> -Content-Transfer-Encoding: 8bit
+> -
+> -A line in the defined_keywords list is missing a comma. Add it.
+> -
+> -Signed-off-by: Martí Bolívar <marti.f.bolivar@gmail.com>
+> -
+> -Upstream-Status: Backport [https://github.com/Grokzen/pykwalify.git]
+> -Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> ----
+> - pykwalify/rule.py | 2 +-
+> - 1 file changed, 1 insertion(+), 1 deletion(-)
+> -
+> -diff --git a/pykwalify/rule.py b/pykwalify/rule.py
+> -index 7ac2c9e..f044b69 100644
+> ---- a/pykwalify/rule.py
+> -+++ b/pykwalify/rule.py
+> -@@ -340,7 +340,7 @@ class Rule(object):
+> -             ('matching', 'matching'),
+> -             ('matching_rule', 'matching_rule'),
+> -             ('name', 'name'),
+> --            ('nullable', 'nullable')
+> -+            ('nullable', 'nullable'),
+> -             ('parent', 'parent'),
+> -             ('pattern', 'pattern'),
+> -             ('pattern_regexp', 'pattern_regexp'),
+> ---
+> -2.18.2
+> -
+> diff --git a/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb b/meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb
+> similarity index 57%
+> rename from meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
+> rename to meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb
+> index 2e1bff4f2..aa14cdd4b 100644
+> --- a/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb
+> @@ -2,12 +2,9 @@ SUMMARY = "YAML/JSON validation library"
+>   DESCRIPTION = "pykwalify is a schema validator for YAML and JSON"
+>   HOMEPAGE = "https://pypi.org/project/pykwalify/"
+>   LICENSE = "MIT"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=a72ea5159364a2cd7f45c6dcbee37872"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=4eaf57328ad29ea2e0ed31a57f0914dc"
 >   
-> -SRC_URI[md5sum] = "a082075dbae478fb53c69e25cc7f9cd6"
-> -SRC_URI[sha256sum] = "ab85b38365dd9956264226b30dababa02161ed49bb36c7ee82cc6545e07b1599"
-> +SRC_URI[sha256sum] = "ae27ce4bef4f35b4cc2c0b0d9cf02ed49eee567c23d70cb5066ad215f9b62b3c"
+> -SRC_URI[md5sum] = "58357f1d0f77de976e73dbd3660af75b"
+> -SRC_URI[sha256sum] = "7e8b39c5a3a10bc176682b3bd9a7422c39ca247482df198b402e8015defcceb2"
+> -
+> -SRC_URI += "file://0001-rule.py-fix-missing-comma.patch"
+> +SRC_URI[sha256sum] = "796b2ad3ed4cb99b88308b533fb2f559c30fa6efb4fa9fda11347f483d245884"
 >   
->   inherit setuptools3 pypi
+>   PYPI_PACKAGE = "pykwalify"
 >   
 >
 > 
 >
 
---------------EBC0E27913B780D779163135
+--------------2F8A4AE7F4402B6642EE1828
 Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 <html><head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -157,40 +225,108 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2021-01-21 8:17 a.m., Leon Anavi
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210121131709.27097-3-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">- add missing .h files to sdist tarball
-- use `Py_SET_TYPE()` and `Py_SET_SIZE()` for Python 3.10
-- add official Python 3.10 support
-- fix slice assignement to same object, e.g. a[2::] = a or
-  a[::-1] = a
-- add bitarray.h
+    <blockquote type="cite" cite="mid:20210121131709.27097-4-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">Upgrade to release 1.8.0:
+
+- Dropped support for python 3.5 and below, including 2.7
+- ruamel.yaml is now the default and preffered yaml parser
+- Dropped support for pyyaml parser
+- Update minimum version of ruamel.yaml to 0.16.0
+- Update minimum version of python-dateutil to 2.8.0
+- Added new cli argument &quot;--encoding ENCODING&quot; that specifies what
+  encoding to open data and schema files with
+- Enum error strings now output all possible values for easier
+  debugging
+- Removed deprecated imp module. Dynamic imports imght be affected
+- Implement new type email that uses a relative simple regex to
+  validate email addresses according to RFC 5322 Official Standard
+- Implement new type url that uses a relative simple regex to
+  validate url:s according to RFC 1808
+- Add new argument &quot;schema_file_obj&quot; to Core class. Allows to pass
+  in StringIO or similar interfaced objects to use for validation.
+- Add new argument &quot;data_file_obj&quot; to Core class. Allows to pass in
+  StringIO or similar interfaced objects to use for validation.
+- Fixed a regression from 1.6.1 where ruamel.yaml safe_load would
+  break for all built-in custom python tags.
+- All normal python tags should now be possible to use again.
+- Fixed an issue with regex values that was not converted to str()
+  before regex mapping was attempted.
+- This should validate things like integers and objects that support
+  str() conversion better.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210121131709.27097-3-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210121131709.27097-4-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../{python3-bitarray_1.6.1.bb =&gt; python3-bitarray_1.6.3.bb}   | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-bitarray_1.6.1.bb =&gt; python3-bitarray_1.6.3.bb} (68%)
+ .../0001-rule.py-fix-missing-comma.patch      | 34 -------------------
+ ...fy_1.7.0.bb =&gt; python3-pykwalify_1.8.0.bb} |  7 ++--
+ 2 files changed, 2 insertions(+), 39 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pykwalify/0001-rule.py-fix-missing-comma.patch
+ rename meta-python/recipes-devtools/python/{python3-pykwalify_1.7.0.bb =&gt; python3-pykwalify_1.8.0.bb} (57%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.6.1.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.6.3.bb
-similarity index 68%
-rename from meta-python/recipes-devtools/python/python3-bitarray_1.6.1.bb
-rename to meta-python/recipes-devtools/python/python3-bitarray_1.6.3.bb
-index f54d54f92..16beab551 100644
---- a/meta-python/recipes-devtools/python/python3-bitarray_1.6.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-bitarray_1.6.3.bb
-@@ -3,8 +3,7 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/ilanschnell/bitarray">&quot;https://github.com/ilanschnell/bitarray&quot;</a>
- LICENSE = &quot;PSF&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d">&quot;file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-pykwalify/0001-rule.py-fix-missing-comma.patch b/meta-python/recipes-devtools/python/python3-pykwalify/0001-rule.py-fix-missing-comma.patch
+deleted file mode 100644
+index 689355eea..000000000
+--- a/meta-python/recipes-devtools/python/python3-pykwalify/0001-rule.py-fix-missing-comma.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From f96b76efb810d7d559254d0ec58de628e09f525a Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Mart=C3=AD=20Bol=C3=ADvar?= <a class="moz-txt-link-rfc2396E" href="mailto:marti.f.bolivar@gmail.com">&lt;marti.f.bolivar@gmail.com&gt;</a>
+-Date: Mon, 13 Jan 2020 08:42:05 -0800
+-Subject: [PATCH] rule.py: fix missing comma
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-A line in the defined_keywords list is missing a comma. Add it.
+-
+-Signed-off-by: Martí Bolívar <a class="moz-txt-link-rfc2396E" href="mailto:marti.f.bolivar@gmail.com">&lt;marti.f.bolivar@gmail.com&gt;</a>
+-
+-Upstream-Status: Backport [<a class="moz-txt-link-freetext" href="https://github.com/Grokzen/pykwalify.git">https://github.com/Grokzen/pykwalify.git</a>]
+-Signed-off-by: Hongxu Jia <a class="moz-txt-link-rfc2396E" href="mailto:hongxu.jia@windriver.com">&lt;hongxu.jia@windriver.com&gt;</a>
+----
+- pykwalify/rule.py | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/pykwalify/rule.py b/pykwalify/rule.py
+-index 7ac2c9e..f044b69 100644
+---- a/pykwalify/rule.py
+-+++ b/pykwalify/rule.py
+-@@ -340,7 +340,7 @@ class Rule(object):
+-             ('matching', 'matching'),
+-             ('matching_rule', 'matching_rule'),
+-             ('name', 'name'),
+--            ('nullable', 'nullable')
+-+            ('nullable', 'nullable'),
+-             ('parent', 'parent'),
+-             ('pattern', 'pattern'),
+-             ('pattern_regexp', 'pattern_regexp'),
+--- 
+-2.18.2
+-
+diff --git a/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb b/meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb
+similarity index 57%
+rename from meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
+rename to meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb
+index 2e1bff4f2..aa14cdd4b 100644
+--- a/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb
+@@ -2,12 +2,9 @@ SUMMARY = &quot;YAML/JSON validation library&quot;
+ DESCRIPTION = &quot;pykwalify is a schema validator for YAML and JSON&quot;
+ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://pypi.org/project/pykwalify/">&quot;https://pypi.org/project/pykwalify/&quot;</a>
+ LICENSE = &quot;MIT&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=a72ea5159364a2cd7f45c6dcbee37872">&quot;file://LICENSE;md5=a72ea5159364a2cd7f45c6dcbee37872&quot;</a>
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=4eaf57328ad29ea2e0ed31a57f0914dc">&quot;file://LICENSE;md5=4eaf57328ad29ea2e0ed31a57f0914dc&quot;</a>
  
--SRC_URI[md5sum] = &quot;a082075dbae478fb53c69e25cc7f9cd6&quot;
--SRC_URI[sha256sum] = &quot;ab85b38365dd9956264226b30dababa02161ed49bb36c7ee82cc6545e07b1599&quot;
-+SRC_URI[sha256sum] = &quot;ae27ce4bef4f35b4cc2c0b0d9cf02ed49eee567c23d70cb5066ad215f9b62b3c&quot;
+-SRC_URI[md5sum] = &quot;58357f1d0f77de976e73dbd3660af75b&quot;
+-SRC_URI[sha256sum] = &quot;7e8b39c5a3a10bc176682b3bd9a7422c39ca247482df198b402e8015defcceb2&quot;
+-
+-SRC_URI += <a class="moz-txt-link-rfc2396E" href="file://0001-rule.py-fix-missing-comma.patch">&quot;file://0001-rule.py-fix-missing-comma.patch&quot;</a>
++SRC_URI[sha256sum] = &quot;796b2ad3ed4cb99b88308b533fb2f559c30fa6efb4fa9fda11347f483d245884&quot;
  
- inherit setuptools3 pypi
+ PYPI_PACKAGE = &quot;pykwalify&quot;
  
 </pre>
       <br>
@@ -203,4 +339,4 @@ index f54d54f92..16beab551 100644
   </body>
 </html>
 
---------------EBC0E27913B780D779163135--
+--------------2F8A4AE7F4402B6642EE1828--
