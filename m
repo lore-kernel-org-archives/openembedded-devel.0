@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.34439.1611567045104067838
+ by mx.groups.io with SMTP id smtpd.web08.34198.1611567045103021027
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 25 Jan 2021 01:30:45 -0800
 Authentication-Results: mx.groups.io;
@@ -8,16 +8,14 @@ Received: from [78.130.197.211] (port=58296 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1l3yCo-0004I9-Hi; Mon, 25 Jan 2021 11:30:43 +0200
+	id 1l3yCm-0004I9-V5; Mon, 25 Jan 2021 11:30:42 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-pyyaml: Upgrade 5.4 -> 5.4.1
-Date: Mon, 25 Jan 2021 11:30:35 +0200
-Message-Id: <20210125093035.6177-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-pyjwt: Upgrade 2.0.0 -> 2.0.1
+Date: Mon, 25 Jan 2021 11:30:34 +0200
+Message-Id: <20210125093035.6177-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210125093035.6177-1-leon.anavi@konsulko.com>
-References: <20210125093035.6177-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -30,33 +28,33 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 5.4.1:
+Upgrade to release 2.0.1:
 
-- Fix stub compat with older pyyaml versions that may unwittingly
-  load it
+- Rename CHANGELOG.md to CHANGELOG.rst and include in docs
+- Fix from_jwk() for all algorithms
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-pyyaml_5.4.bb => python3-pyyaml_5.4.1.bb}   | 2 +-
+ .../python/{python3-pyjwt_2.0.0.bb => python3-pyjwt_2.0.1.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pyyaml_5.4.bb => python3-pyyaml_5.4.1.bb} (79%)
+ rename meta-python/recipes-devtools/python/{python3-pyjwt_2.0.0.bb => python3-pyjwt_2.0.1.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyyaml_5.4.bb b/meta-python/recipes-devtools/python/python3-pyyaml_5.4.1.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-pyyaml_5.4.bb
-rename to meta-python/recipes-devtools/python/python3-pyyaml_5.4.1.bb
-index e46b608f7..c3025fdc6 100644
---- a/meta-python/recipes-devtools/python/python3-pyyaml_5.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyyaml_5.4.1.bb
-@@ -8,7 +8,7 @@ PYPI_PACKAGE = "PyYAML"
+diff --git a/meta-python/recipes-devtools/python/python3-pyjwt_2.0.0.bb b/meta-python/recipes-devtools/python/python3-pyjwt_2.0.1.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-pyjwt_2.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-pyjwt_2.0.1.bb
+index aa6531ea3..ed52da4d4 100644
+--- a/meta-python/recipes-devtools/python/python3-pyjwt_2.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pyjwt_2.0.1.bb
+@@ -5,7 +5,7 @@ HOMEPAGE = "http://github.com/jpadilla/pyjwt"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=68626705a7b513ca8d5f44a3e200ed0c"
  
+-SRC_URI[sha256sum] = "7a2b271c6dac2fda9e0c33d176c4253faba2c6c6b3a99c7f28a32c3c97522779"
++SRC_URI[sha256sum] = "a5c70a06e1f33d81ef25eecd50d50bd30e34de1ca8b2b9fa3fe0daaabcf69bf7"
+ 
+ PYPI_PACKAGE = "PyJWT"
  inherit pypi setuptools3
- 
--SRC_URI[sha256sum] = "3c49e39ac034fd64fd576d63bb4db53cda89b362768a67f07749d55f128ac18a"
-+SRC_URI[sha256sum] = "607774cbba28732bfa802b54baa7484215f530991055bb562efbed5b2f20a45e"
- 
- RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-datetime \
 -- 
 2.17.1
 
