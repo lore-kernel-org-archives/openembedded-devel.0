@@ -1,17 +1,17 @@
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.50])
- by mx.groups.io with SMTP id smtpd.web08.35733.1611578490485778268
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.49])
+ by mx.groups.io with SMTP id smtpd.web10.35975.1611578518962074382
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Jan 2021 04:41:30 -0800
+ Mon, 25 Jan 2021 04:41:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=JmZ4iih6;
- spf=pass (domain: windriver.com, ip: 40.107.92.50, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=B6VBZzQ2;
+ spf=pass (domain: windriver.com, ip: 40.107.92.49, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WOVdUzZAJioozLvukZfGF4Jj+2pPBUBebjRWyMxWQBSA478zqjhJWMcI+Rk5hOOZmnI9ASE/9sclfH3b0EyKjUCagI+uyhLMqdWD9RQxepgNYybz+qI0s/v9mJRF7pU5GKQaHGC4NFMFasRCTOm/N14THDvyNRoaIx4sGZaFva7igsX+IMHaTLWsuWTdDUSz+95Ldt0Cap9B6XPcnQTdhGmfmcUBOIMbuHwEhYoIok3QGY9Q5ni7tv9TyBEm86xfQHQ3ubjjAh0H+WPTcdJs3YG84ZQ2cTm8A20tNftljGFV5GwzQQvPrmSWRHS6uIsavcSH467mVSUBFdNMBhmjSg==
+ b=MVOfqXclA2MzMUARr0bqXOqhB0tHNlzyixxu7bSJWhjt8i/QE8hgi752FPca+XXOOgBSOXCQpY26qbZA3jfCtomiUREitSO7xqmdgolyNx4CqSqiXweb7Kb0VoK4DCSJEiU8yW+OvhjwKR+yADZ3Mb0swEGuXWMDZjeBLDh1P9oPqqt9K500U/hExsAV2sEqzTT4jxqu6CguCPhTmkC3etnTQPLHc7eYIRJDYk4ehrKrxvatZ5YTzzzwoZHGyuVfm5Vh1AmPglsPIxH62FDvMWIYUd32STrRfak/QFfuJ5o72K/fApdvZfiWLE2GmFcdFq4uKJtO1aCOaDGBmIcqtg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AA+nTIbXw1+12zXOdpQT2L7pNtMqGUMrS7jVcpy0ibQ=;
- b=G+07VBS/AP2vOSAnJAn2PmxQE1E/GLW2g/tV6yLLSHvSd5HZnz3yvu4lpeZH2u79IjCwR+W5oLBGmcXAALoq7qNIC1nBHPJHJCCkewg2oM5DcCqSXrTbHTLrwDGQ6Zu5kAjPNlRXfU4zePvEj8PNfa7XXEHEQkM3WCu3ehTSLLCP+2e0hW4gSE4NgZ8R9tFXlbj91A2XywHZu8eHPfUkf1uBnyHWQu3KhIhN/lPyuE/PNsZGLYEO3yZ+s1rfIFd1qw7vxBLntlS4o3V5GfgciXp6wMU27Es1k80tKSywygks2CMnNoJYEriThp2vmvWpy62p1y4ykx5kA72kSX+Aug==
+ bh=s4lAlg44vqqzjcaLQD8qgF0ZyHNJvNOO9D5vvik0Vvg=;
+ b=j1ntKPDgu5hFcuY0DWHFOeUHIdKoPzOMV17D1aANu9cPsVAs+4zDa6wNTsg3tUTWgyo8FepRk6jR4If0e91nchz3JzLK5k0EuApFShjSXgJl7MUM2mMorUCt4u33MSXShE8vV7WlI0tSytq2Uq+3EpN1YAmXa1f7cAxdlKy/9YSGemNjDlBvooYuXZSp0j/yoPG191zb7SFzz2nWX36dlPQOB4ZqEVh3iA21lxnMDMNroVPTz/RZE5AbdTTIGOPyKmiIgbqtS9uM0XkY1xU6mOBXhT+ZEMkAhmBVfBBFS3reyINLutiZJrUPIJEeoFBmMDGn+4n9aKkmaXRf4oN2yg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,126 +19,162 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AA+nTIbXw1+12zXOdpQT2L7pNtMqGUMrS7jVcpy0ibQ=;
- b=JmZ4iih6e6RXrlRo2NSM3aENlRG5hMd5w76Gwq5rI3awaWJnktWVSY7rm8fF0eOSiWNwasV5WshCfBPTEhm4WqF9ZzbEnKSKLSJ0/FncKvzi6juWmxrcTjS1ZeyrBe17nj+jx+EuYZYBHvvr/0MpmP7X+k8agxTZJm9aO1fI4k8=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
+ bh=s4lAlg44vqqzjcaLQD8qgF0ZyHNJvNOO9D5vvik0Vvg=;
+ b=B6VBZzQ2u8eMSk9Giwlgz4gSl3Gvoc54ZKoecX0eaaeZDG1IctHeEH1JYiB9wTL90FTp9zKEoA17zUSZVXD9z6AhTzD8cTXXSzT0OPq4lYQgD+LDBEWZ3YpzhdzUTxAjnxLhm0Ik6hoYE/rbxH1Iem3AVLo6tky2dRo7QLcofgs=
+Authentication-Results: gmail.com; dkim=none (message not signed)
+ header.d=none;gmail.com; dmarc=none action=none header.from=windriver.com;
 Received: from MN2PR11MB3919.namprd11.prod.outlook.com (2603:10b6:208:13b::27)
  by MN2PR11MB3678.namprd11.prod.outlook.com (2603:10b6:208:f8::11) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.16; Mon, 25 Jan
- 2021 12:41:29 +0000
+ 2021 12:41:57 +0000
 Received: from MN2PR11MB3919.namprd11.prod.outlook.com
  ([fe80::5462:9c04:72b3:6c44]) by MN2PR11MB3919.namprd11.prod.outlook.com
  ([fe80::5462:9c04:72b3:6c44%7]) with mapi id 15.20.3763.019; Mon, 25 Jan 2021
- 12:41:29 +0000
-Subject: Re: [oe] [meta-python][PATCH 5/5] python3-croniter: Upgrade 1.0.1 -> 1.0.2
-To: Leon Anavi <leon.anavi@konsulko.com>,
+ 12:41:57 +0000
+Subject: Re: [oe] [meta-python][PATCH v2 1/2] meta-python: Add hexdump package
+To: Andrew Jeffery <andrew@aj.id.au>,
  openembedded-devel@lists.openembedded.org
-References: <20210121131709.27097-1-leon.anavi@konsulko.com>
- <20210121131709.27097-5-leon.anavi@konsulko.com>
+Cc: raj.khem@gmail.com
+References: <20210122054538.3675758-1-andrew@aj.id.au>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <0d5d7f40-f286-d277-9f1f-5301a50d0d1c@windriver.com>
-Date: Mon, 25 Jan 2021 07:41:27 -0500
+Message-ID: <e2199e7d-d3c6-2e94-19d7-ca1f598b9f1f@windriver.com>
+Date: Mon, 25 Jan 2021 07:41:56 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.0
-In-Reply-To: <20210121131709.27097-5-leon.anavi@konsulko.com>
+In-Reply-To: <20210122054538.3675758-1-andrew@aj.id.au>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: MN2PR14CA0030.namprd14.prod.outlook.com
- (2603:10b6:208:23e::35) To MN2PR11MB3919.namprd11.prod.outlook.com
+X-ClientProxiedBy: MN2PR14CA0013.namprd14.prod.outlook.com
+ (2603:10b6:208:23e::18) To MN2PR11MB3919.namprd11.prod.outlook.com
  (2603:10b6:208:13b::27)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by MN2PR14CA0030.namprd14.prod.outlook.com (2603:10b6:208:23e::35) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.12 via Frontend Transport; Mon, 25 Jan 2021 12:41:28 +0000
+Received: from [192.168.0.55] (174.115.236.231) by MN2PR14CA0013.namprd14.prod.outlook.com (2603:10b6:208:23e::18) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.12 via Frontend Transport; Mon, 25 Jan 2021 12:41:57 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 906b7b12-f1be-4cec-97ee-08d8c12e8944
+X-MS-Office365-Filtering-Correlation-Id: 477415df-28bf-4800-5cf3-08d8c12e9a66
 X-MS-TrafficTypeDiagnostic: MN2PR11MB3678:
 X-Microsoft-Antispam-PRVS: 
-	<MN2PR11MB367834C51A65FDCF302A59CE9FBD9@MN2PR11MB3678.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:369;
+	<MN2PR11MB367841EA1FB75D231722EA9A9FBD9@MN2PR11MB3678.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:6790;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	du/SALQnybvJ0hQFJIg18gGfcxJFUWnwAKDLeb5ytzGurn7YfCeo4s7ARjQmezq4fbaEgv9lov1I3IlNnz4D8pwIiDdJ+OO65EjyvRIymqTW28ryTRqPF/kk+ESASGwK3JxDgx8kS/w4JevZVnW3r5phrPHSn9kOZNDUbPplSvkNFgwgOJI7InBSEy4iGMv19mpZBaMxCmrCSGtPWNxAh/EPlprSAgXWfeZRYUBtbRLYzHZRM4lEXGD3uNP9Zu7sIs9nOZttdUPQhz+WfCdLmJ07SgmzqUFY8+Hg9PgiNg4kEDhJ3HO61E2zkWzQ4sSc5GDM2llyF0bQzZ8Lj5hCWAOweyVLwdPE8Qs/tQdaFLznPIiZOSOyhR++wp0FHLE+8bFk/Y3bqnQDTppUk0ILkCPiIGRmBzsIZr9Ks6WtXT8nFreyHA26QyTJg7+jPu8bVHyvgWWyOT04SqaFeUQE/pzM+TIbWnSQmKRWRJbuPPTFTZ+jYCQTe1pS4h2yqDpnEztLXMB4FKmR3RXyDhaw0qobD7wkJKAMYKrq8Ud2NWw=
+	fF6WmijzWmpb38Pmj5J+mioi/ghS4N8ZXEbVgc7sQ+JgPfPPzACWVhJvTmBZ0EqCpCUhHe4XmsP7Z35cdHt9JnSoFntPEMrO7AXNHw33CMrtstmHrL6Pu9q4ZmN02tz8gF9spFX2xB2NBLwbQhaVRc4dh1ErxQS+4izbosuhTOWl06xGXO4uj+GOzTKMsyfWEm6rF/v0qQD0nqtq7nby6tpWZ0DOnfCAWRFj3vlM94Mq2FpURF8ri7jPXhwMTRjo+YYcZyCZNYYbhY+DSIM982easGANSoBxlpuTszWuBJ1BvHhDwRJm/85XpkPfv2+vDNnzUmmxO/hdoD0UuIM51NmeMIeiYbxXW9ubCzRgZVzxxBAwCl4x1xOQrn8xPWQtf8DMBCTE7xKWEVDPhNXEWnUoIbumDVoSWqvMLbJA5nkXdmlZAf+arSHs6yhS+5rShg5GvyOyV+ziSKQ2UJ7ueAuI4JBmDAzxVwQTRcNZJIq0nSsiNTTmPiCbTTw7JZripqVa6m7c3juVU88+L2Fp2wFQ+8DM5RdW6iiqP3MyZms=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR11MB3919.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(136003)(376002)(366004)(39840400004)(346002)(33964004)(2906002)(966005)(478600001)(186003)(316002)(956004)(5660300002)(52116002)(166002)(66556008)(53546011)(66476007)(16526019)(8936002)(36756003)(6486002)(66946007)(26005)(31696002)(44832011)(31686004)(8676002)(86362001)(83380400001)(16576012)(2616005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR11MB3919.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(136003)(376002)(366004)(39840400004)(346002)(33964004)(2906002)(966005)(478600001)(186003)(316002)(956004)(5660300002)(52116002)(4326008)(166002)(66556008)(53546011)(66476007)(16526019)(8936002)(36756003)(6486002)(66946007)(26005)(31696002)(44832011)(31686004)(8676002)(86362001)(83380400001)(16576012)(2616005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?RFgvaVIycmtCak1ONnRhQWhkczd2cGJuV0Q1STFObHlFTHhuRW1vTEU2MEpl?=
- =?utf-8?B?MXJ4OTlNS0xEUWsxdVNwT2lxZDMyK1d4NkZ2R0luRGRHTHNhRTdFckJRN0hM?=
- =?utf-8?B?bXNhUVdLN2szOXJiQVZRVERybUFodTAzbUdlR01hVVdmUThaVytqTEZGZnFD?=
- =?utf-8?B?dEpaVlFKbXB6czg5a3FIMGo3RUttNHlySWtscTlVTDJiUko5dUN4NmEyWFl2?=
- =?utf-8?B?SkZQbXFtc25DVERkOUNmaDJtK1dNeTVhT2hhMHZKakswd3NhTHJzS0ZqWWFo?=
- =?utf-8?B?bm1JM282eW5mSENTL2ZRaExXU3JtckFtZEdhaFNZTmlEbXpEOEF2bm5IL3hL?=
- =?utf-8?B?dHd2c0VUK01UQUkvYXluVXNGbTg4V3NYVkRyR2hFTmp2QUhBZU0zK1RTKzIx?=
- =?utf-8?B?dmtXTmRUQjJKVGZOakxydHdvQnhxd2tpNVdVaG1uT2lvU0FscWJ5ZWtNSUpT?=
- =?utf-8?B?Qmg0ci9XUTN4R1pLS0h2amdEa0RUSE1SMTMvUGtEeTMyNGRZY3pZcWRmVjky?=
- =?utf-8?B?cWczU29WV21NR1F4K1hRTzByZ2RWYS9HNHV3ZGlGZ2wrSC83ak5wVTM1Qm9x?=
- =?utf-8?B?SE9BcWhqS2dFNlVBb3Q2UXZlYmZCeTU0eURhaFM2dmpPSlJtZHRNVE9RSFVr?=
- =?utf-8?B?c3RiSE9JTVFTcCt5NCt4NmQ2K0pMMStsZk10U3pBTzJHRGZRWHBHU2ZxUzNy?=
- =?utf-8?B?aTZyREJlckllY3NuRTNNd0RUVU5nM3htd2Y4OUxjVS9RYVlKVnRRN1Zoc2s0?=
- =?utf-8?B?NHY2ZlpKTWxwOE9PNEgvMldnVDEvdTFrZit1bFlpZHdrekE0UkNXQ0JVTXpj?=
- =?utf-8?B?WFBqd21MNHRiVXNZY2hBR1pJNGVneE5vNUFxckJuMG91bU5XUXN2Mk5BN2lX?=
- =?utf-8?B?NG5TaUduN05URlZxckpZYmpnNHozeDBDTURxN0M2aGR6NnpDd0ROeWZ3cjZ5?=
- =?utf-8?B?YTZQck1nWWIwQ1hENWtBTUJCMVhaSWYzWUFWYU5HTk9TRVdWejAxZWxqaFJ4?=
- =?utf-8?B?RXNwdXBKOHczN0NTWFFvQnhIaVJ2T2JsWGJhU3JMZkRQZ2FRRkJWZVVYNEs3?=
- =?utf-8?B?YWQxenY3b1VUWTdDMlFjekJxYVR3MGhpL05ZOG10dkUrWDBGbkUzc1dzK3FF?=
- =?utf-8?B?RW5SQkdWTGVRS0JuZFJTNS9yZkgyZDhVeEIwMlQrellNdXJtaW1QYWJGYnF2?=
- =?utf-8?B?SXFHVVc0RFAwMHM5MkUrZWtVUy85R3JJTEUxR3VQUWhNSXVBcDFYUUlUM0ta?=
- =?utf-8?B?M2tKcmowb1VlNmllcG1zTkFGMzdKdzBEaDZJZldzdm9ZT2h6Sm1sREVDUHlM?=
- =?utf-8?Q?SjU/aiSuV/8uVKmNq6eiPVZ4hoppVlxgcU?=
+	=?utf-8?B?ZTAvbkJ4MUdYNTVtay9kT3VwUXFvOGRjZW5VZDFlN0dRMWpmcjExWWF2UW9G?=
+ =?utf-8?B?MWM2dmxtYStjMHJkL29relB2MW9zYzY2NG1kY1R3TnBrM3NHMDV4YjN5RllP?=
+ =?utf-8?B?eS9VaW1SUVJYT3doMENoR1drbkkvVzUrVlVzMmZZQ2MyRzJNMmJCOFBMUDZI?=
+ =?utf-8?B?OUJKbGZSZlNlTElEUkRkN050MDY4VTRFdytsdVg4bklrelROeEE1MVBMeDVy?=
+ =?utf-8?B?bUc1ZVkyMWozUXpaNGNUd3gzcmlHUzU2YWJBSEFZQ0xIc29NR2JYZTVZSG1E?=
+ =?utf-8?B?eXg5cG1nbTRselJzOEIvM0RrNmZzYVNIYzZ3aDVDQkl1NU1Ud2F1NmFtUzl4?=
+ =?utf-8?B?S1V3OE1IdG0rejVQWnBvcmw4VTNXem9tWFRPQnFxcnpvcW82T3l0K0ZZVXRP?=
+ =?utf-8?B?WmF0OHZPVGo0NzR4K3ZYRkRkbFdIUHJRVzZBcWlsVWhZWSs1blZWcnhwZDBx?=
+ =?utf-8?B?RUl3UlMyVFFXZUROTjc4Z1NwS0t5dkxxUG5xU1FPandXWk5FazVJcTAyL1Fh?=
+ =?utf-8?B?aDJJb2ZqZXhoTWp3K2lENUlMcXY2dHZIUmNOQ3hsY1RSNHJLclpzZ1dPSnNS?=
+ =?utf-8?B?WFZoY0JJQnhmcDM1bkRwclJEbVllMWlqVGEwcXFGb2dwOHVTSUpNZXp4bnpR?=
+ =?utf-8?B?b1ZXUG1hc1MzejA2RmZIKzRMOGRDZU43V0xhUXVPYXg2Y2RVVDhRNmVmOEJn?=
+ =?utf-8?B?d0Q1OHpZblJGaEdKZlhpdFFIYTQrQ0tqYnk1WlhwOVhOaHdvWWJ2aXY0RzFI?=
+ =?utf-8?B?YWp3aHlDeGNBRFA2L0NUY1RJeE1yRHdVTVBtUDBVSzhQS3BCVmNqVUduazYz?=
+ =?utf-8?B?bXMraUZjQUVIUVErWFhKT0xMajFoQUowNVZ6Z1V4V1E4UlIyMVlBbTRGWWFv?=
+ =?utf-8?B?YXY3R0FtcjgxK2ZGUnZLanFZMDArVHhhSjQvTnMySVY5YWdFdmx0RVkzNXdt?=
+ =?utf-8?B?T0R6MGlTSjR6bWJiWU9GSFZoSkllRjdjZ3dML3RkSG5LTFdYNyttbEFUbUVi?=
+ =?utf-8?B?aVVwRkRETGpkTEc1VENWRnNPR0dKU3lSTU9DZXZJVVNiVDBZbDlFVjFUTTBC?=
+ =?utf-8?B?NHU4Z3h2TWoxVkljVkJBVzhic1dEdmx0N2xXNEpBRDRNT0tyZzNnRlVIMkdv?=
+ =?utf-8?B?T3BqOWNPOUJqSDFSTW5DbHQ1WG1nWEFKVjBmV3UxbENjM3hRd2NsNENoNFQ3?=
+ =?utf-8?B?UmFMa1VCUHRuZDh2Rk40bytxRGtkOWpJWjUwV0Q5RTU1NUt1TEhTWUJVTWR3?=
+ =?utf-8?B?NFZ6elZaWi9oY2JrRWduaTFDL3hxTGdpZWNkWXZDRTJuRWdGSEVwUzBwRXJz?=
+ =?utf-8?Q?KLtNgj08gJMkF3Mk0CRIWC1X8VbA9pnJkq?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 906b7b12-f1be-4cec-97ee-08d8c12e8944
+X-MS-Exchange-CrossTenant-Network-Message-Id: 477415df-28bf-4800-5cf3-08d8c12e9a66
 X-MS-Exchange-CrossTenant-AuthSource: MN2PR11MB3919.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jan 2021 12:41:28.9924
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jan 2021 12:41:57.7400
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: tu8BNc6BbNeDiUgSlRCDO3ILGepA7i8Z7JHsYsp1j7Pf7RG6c7dM2uasw0h8XRdBcxV+lEO6nMTFZpGAVQW0aGAfcsqmSFgg8O0XW8InkFU=
+X-MS-Exchange-CrossTenant-UserPrincipalName: DwpFY9Y8qFsQfJtrSIhi7x7hxM+XeW/AKJuVOnXX91v6Z4ErjFLE93arAb8TTWDtWkQsqff1FV8Ow+DeclEIgSeO8tMal2JL5UYifk4cI8g=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR11MB3678
 Content-Type: multipart/alternative;
- boundary="------------C11F8A1287FD4A39DA977851"
+ boundary="------------F878E0C277F5EE2A86D18E6A"
 Content-Language: en-US
 
---------------C11F8A1287FD4A39DA977851
+--------------F878E0C277F5EE2A86D18E6A
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 2021-01-21 8:17 a.m., Leon Anavi wrote:
-> - Fix match when datetime has microseconds
+On 2021-01-22 12:45 a.m., Andrew Jeffery wrote:
+> [Please note this e-mail is from an EXTERNAL e-mail address]
 >
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> The hexdump package appears to be abandoned, but it's used as the
+> dependency of another project I'm packaging.
+>
+> Change-Id: Id90d770fb48fa502f3abeb541b7febef42799b21
+> Signed-off-by: Andrew Jeffery <andrew@aj.id.au>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../{python3-croniter_1.0.1.bb => python3-croniter_1.0.2.bb}    | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->   rename meta-python/recipes-devtools/python/{python3-croniter_1.0.1.bb => python3-croniter_1.0.2.bb} (78%)
+>   .../packagegroups/packagegroup-meta-python.bb |  1 +
+>   .../python/python3-hexdump_3.3.bb             | 27 +++++++++++++++++++
+>   2 files changed, 28 insertions(+)
+>   create mode 100644 meta-python/recipes-devtools/python/python3-hexdump_3.3.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-croniter_1.0.1.bb b/meta-python/recipes-devtools/python/python3-croniter_1.0.2.bb
-> similarity index 78%
-> rename from meta-python/recipes-devtools/python/python3-croniter_1.0.1.bb
-> rename to meta-python/recipes-devtools/python/python3-croniter_1.0.2.bb
-> index 0ffae0c0d..bfe1f1d4c 100644
-> --- a/meta-python/recipes-devtools/python/python3-croniter_1.0.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-croniter_1.0.2.bb
-> @@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=b8ee59850b882cbf623188489ea748e2"
->   
->   PYPI_PACKAGE = "croniter"
->   
-> -SRC_URI[sha256sum] = "9d9942beaae10c0f9f5de4dcbfab4d85b10638cf407195b82d990bc086d6de0d"
-> +SRC_URI[sha256sum] = "12f9fd52e7cfb623d0788956d137a3de26e5583a25820fa7710fb6b58d32b213"
->   
->   inherit pypi setuptools3
->   
+> diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> index bf46896f1c9b..41f376b39b55 100644
+> --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> @@ -416,6 +416,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
+>       python3-cerberus \
+>       python3-cvxopt \
+>       python3-jsonpath-rw \
+> +    python3-hexdump \
+>   "
+>
+>   RDEPENDS_packagegroup-meta-python3-extended = "\
+> diff --git a/meta-python/recipes-devtools/python/python3-hexdump_3.3.bb b/meta-python/recipes-devtools/python/python3-hexdump_3.3.bb
+> new file mode 100644
+> index 000000000000..cb04e17dfdfb
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-hexdump_3.3.bb
+> @@ -0,0 +1,27 @@
+> +SUMMARY = "view/edit your binary with any text editor"
+> +
+> +# The homepage listed on pypi is [1] but the repository has been removed.
+> +# Instead, set the homepage to pypi.
+> +#
+> +# [1] https://bitbucket.org/techtonik/hexdump/
+> +HOMEPAGE = "https://pypi.org/project/hexdump/"
+> +
+> +LICENSE = "PD"
+> +LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/PD;md5=b3597d12946881e13cb3b548d1173851"
+> +
+> +PYPI_PACKAGE_EXT = "zip"
+> +
+> +inherit pypi distutils3
+> +
+> +SRC_URI[sha256sum] = "d781a43b0c16ace3f9366aade73e8ad3a7bd5137d58f0b45ab2d3f54876f20db"
+> +
+> +S = "${WORKDIR}"
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> +
+> +do_cleanup_hexfile() {
+> +    rm ${D}${datadir}/data/hexfile.bin
+> +    rmdir ${D}${datadir}/data ${D}${datadir}
+> +}
+> +
+> +addtask cleanup_hexfile before do_package after do_install
+> --
+> 2.27.0
+>
 >
 > 
 >
 
---------------C11F8A1287FD4A39DA977851
+--------------F878E0C277F5EE2A86D18E6A
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -148,38 +184,75 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 2021-01-21 8:17 a.m., Leon Anavi
-      wrote:<br>
+    <div class="moz-cite-prefix">On 2021-01-22 12:45 a.m., Andrew
+      Jeffery wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210121131709.27097-5-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">- Fix match when datetime has microseconds
+    <blockquote type="cite" cite="mid:20210122054538.3675758-1-andrew@aj.id.au">
+      <pre class="moz-quote-pre" wrap="">[Please note this e-mail is from an EXTERNAL e-mail address]
 
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+The hexdump package appears to be abandoned, but it's used as the
+dependency of another project I'm packaging.
+
+Change-Id: Id90d770fb48fa502f3abeb541b7febef42799b21
+Signed-off-by: Andrew Jeffery <a class="moz-txt-link-rfc2396E" href="mailto:andrew@aj.id.au">&lt;andrew@aj.id.au&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210121131709.27097-5-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210122054538.3675758-1-andrew@aj.id.au">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../{python3-croniter_1.0.1.bb =&gt; python3-croniter_1.0.2.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-croniter_1.0.1.bb =&gt; python3-croniter_1.0.2.bb} (78%)
+ .../packagegroups/packagegroup-meta-python.bb |  1 +
+ .../python/python3-hexdump_3.3.bb             | 27 +++++++++++++++++++
+ 2 files changed, 28 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-hexdump_3.3.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-croniter_1.0.1.bb b/meta-python/recipes-devtools/python/python3-croniter_1.0.2.bb
-similarity index 78%
-rename from meta-python/recipes-devtools/python/python3-croniter_1.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-croniter_1.0.2.bb
-index 0ffae0c0d..bfe1f1d4c 100644
---- a/meta-python/recipes-devtools/python/python3-croniter_1.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-croniter_1.0.2.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://docs/LICENSE;md5=b8ee59850b882cbf623188489ea748e2">&quot;file://docs/LICENSE;md5=b8ee59850b882cbf623188489ea748e2&quot;</a>
- 
- PYPI_PACKAGE = &quot;croniter&quot;
- 
--SRC_URI[sha256sum] = &quot;9d9942beaae10c0f9f5de4dcbfab4d85b10638cf407195b82d990bc086d6de0d&quot;
-+SRC_URI[sha256sum] = &quot;12f9fd52e7cfb623d0788956d137a3de26e5583a25820fa7710fb6b58d32b213&quot;
- 
- inherit pypi setuptools3
- 
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index bf46896f1c9b..41f376b39b55 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -416,6 +416,7 @@ RDEPENDS_packagegroup-meta-python3 = &quot;\
+     python3-cerberus \
+     python3-cvxopt \
+     python3-jsonpath-rw \
++    python3-hexdump \
+ &quot;
+
+ RDEPENDS_packagegroup-meta-python3-extended = &quot;\
+diff --git a/meta-python/recipes-devtools/python/python3-hexdump_3.3.bb b/meta-python/recipes-devtools/python/python3-hexdump_3.3.bb
+new file mode 100644
+index 000000000000..cb04e17dfdfb
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-hexdump_3.3.bb
+@@ -0,0 +1,27 @@
++SUMMARY = &quot;view/edit your binary with any text editor&quot;
++
++# The homepage listed on pypi is [1] but the repository has been removed.
++# Instead, set the homepage to pypi.
++#
++# [1] <a class="moz-txt-link-freetext" href="https://bitbucket.org/techtonik/hexdump/">https://bitbucket.org/techtonik/hexdump/</a>
++HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://pypi.org/project/hexdump/">&quot;https://pypi.org/project/hexdump/&quot;</a>
++
++LICENSE = &quot;PD&quot;
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://${COREBASE}/meta/files/common-licenses/PD;md5=b3597d12946881e13cb3b548d1173851">&quot;file://${COREBASE}/meta/files/common-licenses/PD;md5=b3597d12946881e13cb3b548d1173851&quot;</a>
++
++PYPI_PACKAGE_EXT = &quot;zip&quot;
++
++inherit pypi distutils3
++
++SRC_URI[sha256sum] = &quot;d781a43b0c16ace3f9366aade73e8ad3a7bd5137d58f0b45ab2d3f54876f20db&quot;
++
++S = &quot;${WORKDIR}&quot;
++
++BBCLASSEXTEND = &quot;native nativesdk&quot;
++
++do_cleanup_hexfile() {
++    rm ${D}${datadir}/data/hexfile.bin
++    rmdir ${D}${datadir}/data ${D}${datadir}
++}
++
++addtask cleanup_hexfile before do_package after do_install
+--
+2.27.0
+
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -191,4 +264,4 @@ index 0ffae0c0d..bfe1f1d4c 100644
   </body>
 </html>
 
---------------C11F8A1287FD4A39DA977851--
+--------------F878E0C277F5EE2A86D18E6A--
