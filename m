@@ -1,17 +1,17 @@
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.62])
- by mx.groups.io with SMTP id smtpd.web12.35898.1611578587404143540
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.49])
+ by mx.groups.io with SMTP id smtpd.web11.35867.1611578598119481817
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Jan 2021 04:43:07 -0800
+ Mon, 25 Jan 2021 04:43:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=e4fhsffb;
- spf=pass (domain: windriver.com, ip: 40.107.94.62, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=ZPVwyaeJ;
+ spf=pass (domain: windriver.com, ip: 40.107.244.49, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NW/B0SH2urniNao0nUbssFheWaWmOqS0kwWB7DztV8R169B1CGPr3zY7zyfVYjq0FJzMJCJfi7TqHZ2/HYQYfGnCXhzzA2/XaPnFnoQnbHYTG8A4nZNs3xod6DfHwFmZhrPHNHkOHkYXxPaZ+6Yn3mpR5rvurBpkgSTUwSQL0sjRuLA9rBtm/naPMZPUhCjPNIn7qINkYW8toRuPC+yZZS71gC9abwGVmHAu6fpdNwSJbv0UsywLSB5+RomWumLoFQXdwU644IUQ3n4UKxOwjE1StzOQ6270ExvX98hEwyFMqJ2CqGXjqltYJD0xAXHRe5KmnSEeJhPnSjCDFpaXbQ==
+ b=MSqRGK76gxclnInaZf4cS5CgguQoCsI7a8bcu5S0Nj+i/LME6jKGPumqr+6aHTvofk0Xp5G1v+sQXl3fWuM+jbx+XdivO4X5WiBxz7IjrO3AE2TVLHua2gTA11tkvD9aPmteiU2sZfsWYhm+SlqAI08pTvqoa8RH28iFzymTE8Mg52eRSTgpKoGTYZIanJOlPkLzaBxAPHx2UEI2N2Gp3lbrZNIOo9SKyqblyCg73ZrI3mK9sHcZ1kOnoxeLEzF4exI381chs4w2B/o8YSHsViVjcVg42G84SLqOEzaiyEYzVGy6ZdBorZefJya/6+4njT1EQ5G0HHDN3f39cHmRew==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BVi6x6qwsfebxgBmA4A9iip8Y3xB+fmXnUVvpTVMPmk=;
- b=Pq3EYSb6Jr7X6lsKmlE0/6G1UaUW/Xos/1ueQHx4Uc47GbKT+aWE2YUjelmQ9XoG3dxWrYZHebWQ5VoKca9JgGB3W0+2bIrOhn6yItFQNoiK2yEqoHVng2exrlq0sJ2DSbusWJ88qMziQmIR2vjAPfpdGwRBuSrV2JFhPfs3fcfz63TqKPisQDd9GKYmDbfIBgd1er7MbMB3sXOCaXlTU7axop0CHzhyW33bnF2yekvrv/UquVI6EU98Wywi3F3vDcZB+2beIP6PTWBqs1CxblK0WhdPOpFrWYaui9U23mx9KB1jA0PsAxE+DNipWUD7zcd+QnXpYSlj/HkUKURAWg==
+ bh=Mx4BEpQBxv/TCUXUb1m5zA0htwcuLOiEDeOPNjYbExg=;
+ b=Mj1vyUhJ1suU/CUs+iEIpGNPaF4w09aOQh+jPUBHlefrGfBNdrRXmrEW2hat9+0aVm1MsZz3ANQXTMyTgfE17rLl+tco7BGtj//I1EMYHiw0FBkkJb6YLpqQV+1FqNKnriE4HpIl7jqUYKRN35rDIpJlsLsmdeU8KRpval0V28QejJ2RpIgkD3c/TRKr0IQWOGPhIh2SmOiVOI790t3n3rVmGyrLQTuzRZuPs+IHnWJ92vBqwoPNTNULJga6Rv4+Ws2dMK4wB1nXnndvxQACcV2WfgGk0COS5ckaQryw2TbByL4u0WK94eCBekjBjlAELnn7bviUOG34uKP//PCZvg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,130 +19,127 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BVi6x6qwsfebxgBmA4A9iip8Y3xB+fmXnUVvpTVMPmk=;
- b=e4fhsffbwvq7mo/r6fHzIyHmyzA9EyE2fH0dWCXfgARji4p1bUR0sFIHYW8vdZhNCeTPNduEn5IcM0Bz9qbWcbEesuY8cDAChRpuPDt+MJ8Z7O+EAaReaRyNnxM2E/ZnHSzXyDjFN7bgUJTs4m6Xm9CRy83hVuhbBmbkP4EbVlw=
+ bh=Mx4BEpQBxv/TCUXUb1m5zA0htwcuLOiEDeOPNjYbExg=;
+ b=ZPVwyaeJxmw2ZJ47vFusyc3kmDHGTPIBINIOpq+l2jZ0bZmqtalA9Q3oTOjNrsd4CV4BHxB5QyjBGRHCuAXnDaQqmvHqs5KWAEqvOkRHMckybRQ4RsDjmG9OmLcbyDDdYPVp7/NYwSzVQ6faL53lb6PpllFhRjNUrINU830hAXM=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from MN2PR11MB3919.namprd11.prod.outlook.com (2603:10b6:208:13b::27)
- by MN2PR11MB3647.namprd11.prod.outlook.com (2603:10b6:208:ec::26) with
+ by MN2PR11MB3678.namprd11.prod.outlook.com (2603:10b6:208:f8::11) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.17; Mon, 25 Jan
- 2021 12:43:06 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.16; Mon, 25 Jan
+ 2021 12:43:17 +0000
 Received: from MN2PR11MB3919.namprd11.prod.outlook.com
  ([fe80::5462:9c04:72b3:6c44]) by MN2PR11MB3919.namprd11.prod.outlook.com
  ([fe80::5462:9c04:72b3:6c44%7]) with mapi id 15.20.3763.019; Mon, 25 Jan 2021
- 12:43:06 +0000
-Subject: Re: [oe] [meta-python][PATCH 1/5] python3-ujson: Upgrade 4.0.1 -> 4.0.2
+ 12:43:17 +0000
+Subject: Re: [oe] [meta-python][PATCH 2/5] python3-smbus2: Upgrade 0.4.0 -> 0.4.1
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20210122101126.25982-1-leon.anavi@konsulko.com>
+ <20210122101126.25982-2-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <25edb01c-f5d3-a24e-6cc4-781e607076e7@windriver.com>
-Date: Mon, 25 Jan 2021 07:43:04 -0500
+Message-ID: <25bb9ad8-3788-7144-578a-c3109c00b220@windriver.com>
+Date: Mon, 25 Jan 2021 07:43:15 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.0
-In-Reply-To: <20210122101126.25982-1-leon.anavi@konsulko.com>
+In-Reply-To: <20210122101126.25982-2-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BN9PR03CA0445.namprd03.prod.outlook.com
- (2603:10b6:408:113::30) To MN2PR11MB3919.namprd11.prod.outlook.com
+X-ClientProxiedBy: BN9PR03CA0443.namprd03.prod.outlook.com
+ (2603:10b6:408:113::28) To MN2PR11MB3919.namprd11.prod.outlook.com
  (2603:10b6:208:13b::27)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BN9PR03CA0445.namprd03.prod.outlook.com (2603:10b6:408:113::30) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.14 via Frontend Transport; Mon, 25 Jan 2021 12:43:05 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BN9PR03CA0443.namprd03.prod.outlook.com (2603:10b6:408:113::28) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.14 via Frontend Transport; Mon, 25 Jan 2021 12:43:16 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 3960856a-d27a-49bd-f24a-08d8c12ec326
-X-MS-TrafficTypeDiagnostic: MN2PR11MB3647:
+X-MS-Office365-Filtering-Correlation-Id: 2c91b5a3-8d36-4e12-1108-08d8c12ec9b5
+X-MS-TrafficTypeDiagnostic: MN2PR11MB3678:
 X-Microsoft-Antispam-PRVS: 
-	<MN2PR11MB3647F51422AA954285C0890E9FBD9@MN2PR11MB3647.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:3044;
+	<MN2PR11MB3678485020B2503D2FB0CA4E9FBD9@MN2PR11MB3678.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1443;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	d1N9tOz285z1RF8qc0BKJcYuqIHS+uvZVsgXrsV0xtXt9hHi/18k7e8EKIPEzETb79O1t8UPOV4eY+HVgfEFQz7HThyyht+Debe3g0wwzzOJfh5K8agBC8YO8q2+pDZPL2u7sKmLeUNus9ogVJEp8vAqGTlz+ZtUmrWwWYFt9epSR8KS3akpSlV+IOQ64M2UnuncpdlfKEahs4uW1m/W9YWigfq2WoXdYfI3IEN7IwNBs8MR/q9G9OWsMWsR0/yZ09p0ocKy3tf6KNYbhtUlZ9mcykw6En3AxIobi/b9SnhWpRtxHO1PpxjmVSPr5OX0psABcVuG6aKWWJAFebtwfD7VpcfyoEemEvlY+b1LoF3RQoO1SO6kPx1eo7nDUlTWgqAp6sww/SUeCSUsuGoeTh9nPFWojpVjLHp8poWFENiaMq571qI4CZSw0ACSPB6o2FXYSPlJXEKtNu59ZO3gXV6sNFnUSzU6TsVXHIoBn38aQRumvIcXfTzw3y+bgQ2rVPi7v8th7wDaKlmqNPzNnzuoN1HbkepVFldOVV1rA3f7fBsmPhsXmV6+TG/BVqxR
+	JYFCKZ2t9luvAm/yEMK/9hOIpsNPakDz5akgz9WHeicA61PyWPPayxtKNPORZbvMlcuLXQTXKyGN0L+figK5CzkyyPg0ubNXlNTrG/mybkVhmhUYvFxVFJ15gxKR1u1cOI18BcMWKme4Dhm2Caww9h0bvy5hnLA8hafBHxPBSbFQ0nrsgwGWd+gL6Ym1/7C5csxnWFcxNOIh1wNi0HyVIoOqmG9x1VeMHJ1P4qltON0DP4QlE9XrVHj2FTYyYdNZb7vJUyokhFGz9t3E164Q4rToMrOMUV9dPixQBBpvelb8PY/qFEL60vcHlfZBuV9wQ1omCaGEt4yHO0Mcdm/2H0w5YlTdMWVP5FA3dLOwIRtRoe0r31EQAv/UXza47nHlEwYhrtbjs28nxLNUSr0Tv4iDRAVmxVmt+rbb0A2XGVS/wGXQ0GKZA4vajjb2moI38RFE2jyPiXMZp8Pu8qtYvWOWqFmwLLVh8hw8RroODiQs/iP6Ywf8rdskZ37ZPzM3bfF34ofOef+LqwYp1lma8QEv88q/DdHZqFU2p0RmD2o=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR11MB3919.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(376002)(39850400004)(346002)(136003)(366004)(66946007)(8936002)(5660300002)(44832011)(86362001)(31686004)(956004)(166002)(186003)(966005)(66476007)(66556008)(36756003)(478600001)(26005)(52116002)(16526019)(16576012)(2906002)(316002)(83380400001)(2616005)(31696002)(53546011)(33964004)(6486002)(8676002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR11MB3919.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(136003)(376002)(366004)(39840400004)(346002)(33964004)(2906002)(966005)(478600001)(186003)(316002)(956004)(5660300002)(52116002)(166002)(66556008)(53546011)(66476007)(16526019)(8936002)(36756003)(6486002)(66946007)(26005)(31696002)(44832011)(31686004)(8676002)(86362001)(83380400001)(16576012)(2616005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?T1YwS1lOQlROTkNKTzFnSWVoS2VqSmNPdjJOdGRKdVVDeW1NT2E2aE9sOStX?=
- =?utf-8?B?YzZjTGxWMlNtL0x0Q2RxMUJoc3FrcThoZHZoMTQ1T2w1Z01lb2huK1dPQzdo?=
- =?utf-8?B?MTArdWpPZ2tyeVcrY0FqU0FBRmN3aHJzQmhGa1UySGloTEpsUXdBamR2RGhj?=
- =?utf-8?B?MFdKYjdqUmFoNmo4bUUrSVJiUlF0V3RnQkt5M0UzSWNaSDNZL0l6bGc4TFN1?=
- =?utf-8?B?ZDM0UXJPcU11UTVybHFLU1pHb2RlZXAxclVtd21Sb0lXTXNQTGM2NkFmNU1F?=
- =?utf-8?B?SG5OOU4rVVpDL1h4VzZZV2VYc3FhVGJnOEhnUndFOUF2WDMvRWVtaVFVT2Jk?=
- =?utf-8?B?dmlpU3ZHR3hxVExmK2x3OFVhbUw1YUE0aDdsMC91QnE0QWpWUG8zaEZSVmJy?=
- =?utf-8?B?aWZpSnBmM1RGTHhYaS8vbW1icjVvV2FyWlVkcVVZZEQ5MUhjdWQ2c3hsNDNP?=
- =?utf-8?B?TTBXRnM2MXlQOEkzUms2ZGpnd1ppTWhLNWNuanJVa2plL0EyMTk2U3poRzRu?=
- =?utf-8?B?Wm42T3FnMDR3YU5OeFhPMVQvazNVaVhMYVhRK3dVMzFHbmovM3dnZWFjWk5v?=
- =?utf-8?B?dlRjQ2dneXdzNW9odXhGOXg5dFFZaW4rbUdOTFNDd241ODNyVlIrRm9ndXdv?=
- =?utf-8?B?dTFaMkxzMzBXdElRTUYrdi9JU3dHMXYrU2lRRFlPZUdyUnhQWlZPcTJSWEFx?=
- =?utf-8?B?Q0Y0NlFPcnhBWjF6OXJjR1I3dkRKV2VKWk5EUlFGS1JWWVl1Z1ZpNzVTYTFN?=
- =?utf-8?B?VnpFU3ZoN20yVE5qNkpvb1pIOGZ3RXoxcGYzUk1IYVF4VGRuYlJCRXczTDhR?=
- =?utf-8?B?d2RMSGZ1S0JIeVdCMHdMM1BiVzZkbmJQZkthRFhQbVFvNVdBSXdOeXB3OUlx?=
- =?utf-8?B?RW1sQU40ZExPanhsSngwa0h5WjFXMmRTTFoyUWtiOXV2eFNzM2VXeDYwVTNT?=
- =?utf-8?B?YmNxdWpPSGc2TVh0a1pmSVhLY3ZYcytnM2JUcFBVWUdiQWY5WHdrMEFnc00r?=
- =?utf-8?B?SFp2OTczZmxrTlRVWkNCaFlBenB1cHoxcXNLaHhNUVpPUGNKT3BUakdaUWpP?=
- =?utf-8?B?V3NxSjQ3NkR2bHJ3VERMdDBIVVdvazRXOGJuWUM1Q05na0RzbC9hZE5xWW9a?=
- =?utf-8?B?bU9rTEl2TWladW90aTYramJGVDZmbXQxcEZMV2E4OG9rZzJyY21Mek1aQ0Zs?=
- =?utf-8?B?M0NXbWwvcjdaejhQZmNraWI4THBBZzhtWS9tL2JMSUpvdHpjUGF6STRvTENV?=
- =?utf-8?B?UVJOYjRRRjdKZXd5elJjTUEzMzZxdWIxUFF0aGZNeHpEaTYySUhaYVkwTWtR?=
- =?utf-8?Q?OSwtoQ2ZDsB1Su0jUXfVL9lij3LrMU6m3u?=
+	=?utf-8?B?TGY5ZnNSbmV4WnpxKytqSUpDS250eWtSWE5GRHVmYjduMVBlbWxPZFdZOXYw?=
+ =?utf-8?B?aG9Fd0ZsNUJwSXQwSUNYeUVDOGY5bmlqMnVpQm9EZGI2WXQ5a2VwWG9vUXp4?=
+ =?utf-8?B?WHVkMHh6dmczMjRQWC9ZNitlMDhITUVtenJDSmpuL1dJWWxtT0tjVlZPTVRk?=
+ =?utf-8?B?dCtBTHBzU0puZEw3K3ptS3VGSWR4bERuSEFLSENwcEtwYkxOZUtnaVNHZ0hJ?=
+ =?utf-8?B?anNDQi9jUldQOFRqVFc5L1MwdklldUpGYklyc0U4WWJaNlJoQ1hYM0pPeTlo?=
+ =?utf-8?B?b1NPU3Z5YS94ZW5SQUt2NE9xMEkxMFQrOU1GekxVU3pNamFURWw0bzd5dDFn?=
+ =?utf-8?B?ZDlnSGMyUTRCWHF0bFM0Q0lONzFxQ1RKcUdmamhrS3FiZDZsVnE2N1ZWWjkv?=
+ =?utf-8?B?dXRLeGxlWW9Lc0RieEFEOFZqcmpVUzJsaXJKcm9MTjBTSnZsREk0cStzNzFh?=
+ =?utf-8?B?aWI1MGNxMHRzclNQUHVpZGtqVEhJN3B0YTQrcTFtZzVNNjJ2eHFPZjRZTk13?=
+ =?utf-8?B?WFlvdFo3RkwyblJUZnRFekdyYWdWYjhUVXZxY290aExnQjVlTU5POGJ5c2FI?=
+ =?utf-8?B?a0xzTEp5cnIrOVQ2Y2hVYW0zZE9yeUM4S3pOd3Y1SEZVQ1RNcVZmZy8vbklJ?=
+ =?utf-8?B?ZENBai9Uc0plNVNzTUxIYzBOdUdPOTBpNjZ1Z2Y5cjhZTHhqbU9hYm1HcXBF?=
+ =?utf-8?B?dWsvMitWdkJjTk9wUHkvTyt2OFV3ZVloK3NPd0NVdVdRcmVZSnJXTlY0bXJU?=
+ =?utf-8?B?YU5BRndiRm9UaVZ5eXBuMlp3SDBIazRVVzJ5aUZ0T0ZkTm1Nd25Sc2tLeGJ6?=
+ =?utf-8?B?NjMyMlVpbzZIdkFFc25ROTc1OTlpRmszRjNZTFdOUG9CajB4Yk1DNHc5RGZF?=
+ =?utf-8?B?M3cvbEFudklDaHcwS3FWejJGb2R1d04zS3JFWGJEQ0Y3VUNBMC9BKzdoUXpa?=
+ =?utf-8?B?Z05lRnNjeG9pZzBwUmR0OEdoMWhaUkVieEJwMmJsaHBmOXV6eG1jdENYV1pI?=
+ =?utf-8?B?cWNrUEJobS9IVmphK2VLOXRjYXFsNFVETURZS09CRzJWano4YkNYRGg4b2RM?=
+ =?utf-8?B?My9zNnduZEhNNjczZUdKVlk2WFhlaXVkWUhvVWEzeVJFNmFrWUdtNjhTTW05?=
+ =?utf-8?B?S3lXU0dwdkZpOHh0NUJoanpWWFhPS0dkN0Rnb0NwR1N6amdzSmhJM1pDK3cz?=
+ =?utf-8?B?eXhRTHJBWllnbGJrSXkzYWpTMEZuWjEyNlJ5R2MwZFBTRVdBMVJ2NVEzYmRV?=
+ =?utf-8?B?NHdHd0JGOXVJYXIyWlp4WnhaVjJlOEZkdTkwU2g5SXNTUHR5Qk1xU1ViQU9t?=
+ =?utf-8?Q?tmqvZOC0xw8wCmDuxqaRea2p1b89V8XsZh?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3960856a-d27a-49bd-f24a-08d8c12ec326
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2c91b5a3-8d36-4e12-1108-08d8c12ec9b5
 X-MS-Exchange-CrossTenant-AuthSource: MN2PR11MB3919.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jan 2021 12:43:06.1080
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jan 2021 12:43:17.1137
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: V/hrwVYsrlHtCBCk2wjaVPEVjYl7SQSp6EWTIFzGAywMXTPP4w3b3vfc6pILuDytudgD8p+nPi5G87LDWzbcJZmtyqLR3lR7hHon8TtL7k4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR11MB3647
+X-MS-Exchange-CrossTenant-UserPrincipalName: aqZn8yvjz8/dwZp0DMeUE9IeAFrPM3UVeIJq/L9EAxSpxIpmbLS+L0r8JVcus6HGlqGRiZupeUO1T4flKzqFB9T7KXmVUsIksdHiX0ITTAg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR11MB3678
 Content-Type: multipart/alternative;
- boundary="------------B79D6DEC53F5055388B16F8A"
+ boundary="------------8AAC125210E2128AF27E3B92"
 Content-Language: en-US
 
---------------B79D6DEC53F5055388B16F8A
+--------------8AAC125210E2128AF27E3B92
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 2021-01-22 5:11 a.m., Leon Anavi wrote:
-> - Travis CI: Test on 3.9 final, remove 3.8
-> - Toward matching Python standard library output for float
-> - Fix errors on reading long decimal floats
-> - Make empty dict/list indented serialization match stdlib json
-> - Fix dealing with None types
+> - SonarCloud quality checks.
+> - Tests added to the dist package.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-ujson_4.0.1.bb => python3-ujson_4.0.2.bb}  | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-ujson_4.0.1.bb => python3-ujson_4.0.2.bb} (83%)
+>   .../python/{python3-smbus2_0.4.0.bb => python3-smbus2_0.4.1.bb} | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>   rename meta-python/recipes-devtools/python/{python3-smbus2_0.4.0.bb => python3-smbus2_0.4.1.bb} (84%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-ujson_4.0.1.bb b/meta-python/recipes-devtools/python/python3-ujson_4.0.2.bb
-> similarity index 83%
-> rename from meta-python/recipes-devtools/python/python3-ujson_4.0.1.bb
-> rename to meta-python/recipes-devtools/python/python3-ujson_4.0.2.bb
-> index 2475306f9..d79206fe6 100644
-> --- a/meta-python/recipes-devtools/python/python3-ujson_4.0.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-ujson_4.0.2.bb
-> @@ -4,8 +4,7 @@ DESCRIPTION = "UltraJSON is an ultra fast JSON encoder and decoder written in pu
->   LICENSE = "BSD-3-Clause"
->   LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=10fa10456417c0252bcb8a498e498ffe"
+> diff --git a/meta-python/recipes-devtools/python/python3-smbus2_0.4.0.bb b/meta-python/recipes-devtools/python/python3-smbus2_0.4.1.bb
+> similarity index 84%
+> rename from meta-python/recipes-devtools/python/python3-smbus2_0.4.0.bb
+> rename to meta-python/recipes-devtools/python/python3-smbus2_0.4.1.bb
+> index 1f6f61137..fe0b8d1ef 100644
+> --- a/meta-python/recipes-devtools/python/python3-smbus2_0.4.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-smbus2_0.4.1.bb
+> @@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 >   
-> -SRC_URI[md5sum] = "c8030a62912c3be18ff99fa5b25258b8"
-> -SRC_URI[sha256sum] = "26cf6241b36ff5ce4539ae687b6b02673109c5e3efc96148806a7873eaa229d3"
-> +SRC_URI[sha256sum] = "c615a9e9e378a7383b756b7e7a73c38b22aeb8967a8bfbffd4741f7ffd043c4d"
+>   inherit pypi setuptools3
 >   
->   inherit pypi ptest setuptools3
+> -SRC_URI[sha256sum] = "1b5c690715e1efab39e41038147dfba75afc72a10f76b3f0310d783e9f8a83a6"
+> +SRC_URI[sha256sum] = "6276eb599b76c4e74372f2582d2282f03b4398f0da16bc996608e4f21557ca9b"
+>   
+>   CLEANBROKEN = "1"
 >   
 >
 > 
 >
 
---------------B79D6DEC53F5055388B16F8A
+--------------8AAC125210E2128AF27E3B92
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -155,39 +152,35 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2021-01-22 5:11 a.m., Leon Anavi
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210122101126.25982-1-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">- Travis CI: Test on 3.9 final, remove 3.8
-- Toward matching Python standard library output for float
-- Fix errors on reading long decimal floats
-- Make empty dict/list indented serialization match stdlib json
-- Fix dealing with None types
+    <blockquote type="cite" cite="mid:20210122101126.25982-2-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">- SonarCloud quality checks.
+- Tests added to the dist package.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210122101126.25982-1-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210122101126.25982-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-ujson_4.0.1.bb =&gt; python3-ujson_4.0.2.bb}  | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-ujson_4.0.1.bb =&gt; python3-ujson_4.0.2.bb} (83%)
+ .../python/{python3-smbus2_0.4.0.bb =&gt; python3-smbus2_0.4.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-smbus2_0.4.0.bb =&gt; python3-smbus2_0.4.1.bb} (84%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ujson_4.0.1.bb b/meta-python/recipes-devtools/python/python3-ujson_4.0.2.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-ujson_4.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-ujson_4.0.2.bb
-index 2475306f9..d79206fe6 100644
---- a/meta-python/recipes-devtools/python/python3-ujson_4.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-ujson_4.0.2.bb
-@@ -4,8 +4,7 @@ DESCRIPTION = &quot;UltraJSON is an ultra fast JSON encoder and decoder written in pu
- LICENSE = &quot;BSD-3-Clause&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;beginline=8;endline=8;md5=10fa10456417c0252bcb8a498e498ffe">&quot;file://PKG-INFO;beginline=8;endline=8;md5=10fa10456417c0252bcb8a498e498ffe&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-smbus2_0.4.0.bb b/meta-python/recipes-devtools/python/python3-smbus2_0.4.1.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-smbus2_0.4.0.bb
+rename to meta-python/recipes-devtools/python/python3-smbus2_0.4.1.bb
+index 1f6f61137..fe0b8d1ef 100644
+--- a/meta-python/recipes-devtools/python/python3-smbus2_0.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-smbus2_0.4.1.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecdainheritpypisetuptools3-SRC_URI[sha256sum]=">&quot;file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
  
--SRC_URI[md5sum] = &quot;c8030a62912c3be18ff99fa5b25258b8&quot;
--SRC_URI[sha256sum] = &quot;26cf6241b36ff5ce4539ae687b6b02673109c5e3efc96148806a7873eaa229d3&quot;
-+SRC_URI[sha256sum] = &quot;c615a9e9e378a7383b756b7e7a73c38b22aeb8967a8bfbffd4741f7ffd043c4d&quot;
+ inherit pypi setuptools3
  
- inherit pypi ptest setuptools3
+-SRC_URI[sha256sum] = &quot;</a>1b5c690715e1efab39e41038147dfba75afc72a10f76b3f0310d783e9f8a83a6&quot;
++SRC_URI[sha256sum] = &quot;6276eb599b76c4e74372f2582d2282f03b4398f0da16bc996608e4f21557ca9b&quot;
+ 
+ CLEANBROKEN = &quot;1&quot;
  
 </pre>
       <br>
@@ -200,4 +193,4 @@ index 2475306f9..d79206fe6 100644
   </body>
 </html>
 
---------------B79D6DEC53F5055388B16F8A--
+--------------8AAC125210E2128AF27E3B92--
