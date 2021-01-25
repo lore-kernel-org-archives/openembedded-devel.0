@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.373.1611588227685788404
+ by mx.groups.io with SMTP id smtpd.web10.428.1611588228775116792
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Jan 2021 07:23:48 -0800
+ Mon, 25 Jan 2021 07:23:49 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=58482 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1l43iT-00057d-DV; Mon, 25 Jan 2021 17:23:47 +0200
+	id 1l43iV-00057d-8v; Mon, 25 Jan 2021 17:23:48 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-pymisp: Upgrade 2.4.135.3 -> 2.4.137.1
-Date: Mon, 25 Jan 2021 17:23:34 +0200
-Message-Id: <20210125152337.20937-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-socketio: Upgrade 4.6.0 -> 5.0.4
+Date: Mon, 25 Jan 2021 17:23:35 +0200
+Message-Id: <20210125152337.20937-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210125152337.20937-1-leon.anavi@konsulko.com>
 References: <20210125152337.20937-1-leon.anavi@konsulko.com>
@@ -30,44 +30,38 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.4.137.1:
-
-- Fail if a duplicate object is added to an event.
-- Add test case for page/limit in logs search.
-- Improve docstring for get_event.
-- Better warning if lief is outdated.
-- Update minimal dependency for lief in setup.py.
-
-Fetch source from the git repository to avoid extras_require issue
-in setup.py from the archive for this release in PyPI.
+- Include error message and arguments in CONNECT_ERROR packet
+- Fix typos in the documentation
+- Updated connection options in the documentation
+- Update to match the JavaScript Socket.IO 3.x releases
+  (Socket.IO v5 protocol revision)
+- Remove unnecessary binary argument
+- Remove dependency on the six package
+- Added version compatibility chart to README
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...hon3-pymisp_2.4.135.3.bb => python3-pymisp_2.4.137.1.bb} | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.135.3.bb => python3-pymisp_2.4.137.1.bb} (74%)
+ .../{python3-socketio_4.6.0.bb => python3-socketio_5.0.4.bb}   | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-socketio_4.6.0.bb => python3-socketio_5.0.4.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.135.3.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.137.1.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.135.3.bb
-rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.137.1.bb
-index bbfc0459d..9b2efa2cd 100644
---- a/meta-python/recipes-devtools/python/python3-pymisp_2.4.135.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymisp_2.4.137.1.bb
-@@ -3,9 +3,11 @@ HOMEPAGE = "https://github.com/MISP/PyMISP"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
+diff --git a/meta-python/recipes-devtools/python/python3-socketio_4.6.0.bb b/meta-python/recipes-devtools/python/python3-socketio_5.0.4.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-socketio_4.6.0.bb
+rename to meta-python/recipes-devtools/python/python3-socketio_5.0.4.bb
+index 7d96398e9..70db342cc 100644
+--- a/meta-python/recipes-devtools/python/python3-socketio_4.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-socketio_5.0.4.bb
+@@ -9,8 +9,7 @@ inherit pypi setuptools3
  
--SRC_URI[sha256sum] = "f0bbdd77358223ba75c9cc40f192c7a2a7a5838bdd08b28381f71d220151ea8a"
-+SRC_URI = "git://github.com/MISP/PyMISP.git;protocol=https;branch=main"
-+SRCREV = "7b64c1c9a4fec8ed37c1522b31ab56f30b83f0e1"
-+S = "${WORKDIR}/git"
+ PYPI_PACKAGE = "python-socketio"
  
--inherit pypi setuptools3
-+inherit setuptools3
+-SRC_URI[md5sum] = "44bb7854234e144655ef9c34b0165704"
+-SRC_URI[sha256sum] = "358d8fbbc029c4538ea25bcaa283e47f375be0017fcba829de8a3a731c9df25a"
++SRC_URI[sha256sum] = "f53fd0d5bd9f75a70492062f4ae6195ab5d34d67a29024d740f25e468392893e"
  
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-dateutil \
+ PACKAGECONFIG ?= "asyncio_client client"
+ PACKAGECONFIG[asyncio_client] = ",,,${PYTHON_PN}-aiohttp ${PYTHON_PN}-websockets"
 -- 
 2.17.1
 
