@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.11556.1611665419589612852
+ by mx.groups.io with SMTP id smtpd.web12.11555.1611665419589487271
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 26 Jan 2021 04:50:19 -0800
 Authentication-Results: mx.groups.io;
@@ -8,16 +8,14 @@ Received: from [78.130.197.211] (port=37874 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1l4NnU-0007hT-3t; Tue, 26 Jan 2021 14:50:17 +0200
+	id 1l4NnM-0007hT-J6; Tue, 26 Jan 2021 14:50:16 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-coverage: Upgrade 5.3.1 -> 5.4
-Date: Tue, 26 Jan 2021 14:50:00 +0200
-Message-Id: <20210126125003.27620-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-cachetools: Upgrade 4.2.0 -> 4.2.1
+Date: Tue, 26 Jan 2021 14:49:59 +0200
+Message-Id: <20210126125003.27620-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210126125003.27620-1-leon.anavi@konsulko.com>
-References: <20210126125003.27620-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -30,43 +28,33 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 5.4:
+Upgrade to release 4.2.1:
 
-- The text report produced by coverage report now always outputs
-  a TOTAL line, even if only one Python file is reported. This
-  makes regex parsing of the output easier.
-- The skip_covered and skip_empty settings in the configuration
-  file can now be specified in the [html] section, so that text
-  reports and HTML reports can use separate settings. The HTML
-  report will still use the [report] settings if there isn't a
-  value in the [html] section.
-- Combining files on Windows across drives how works properly.
-- Fix an obscure warning from deep in the _decimal module.
-- Update to support Python 3.10 alphas in progress, including
-  PEP 626: Precise line numbers for debugging and other tools.
+- Handle __missing__() not storing cache items.
+- Clean up __missing__() example.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-coverage_5.3.1.bb => python3-coverage_5.4.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-coverage_5.3.1.bb => python3-coverage_5.4.bb} (71%)
+ ...python3-cachetools_4.2.0.bb => python3-cachetools_4.2.1.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cachetools_4.2.0.bb => python3-cachetools_4.2.1.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-coverage_5.3.1.bb b/meta-python/recipes-devtools/python/python3-coverage_5.4.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python3-coverage_5.3.1.bb
-rename to meta-python/recipes-devtools/python/python3-coverage_5.4.bb
-index 14d29a247..4ea9b6a19 100644
---- a/meta-python/recipes-devtools/python/python3-coverage_5.3.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-coverage_5.4.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://coverage.readthedocs.io"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2ee41112a44fe7014dce33e26468ba93"
+diff --git a/meta-python/recipes-devtools/python/python3-cachetools_4.2.0.bb b/meta-python/recipes-devtools/python/python3-cachetools_4.2.1.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-cachetools_4.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-cachetools_4.2.1.bb
+index cc697d5a9..616e88045 100644
+--- a/meta-python/recipes-devtools/python/python3-cachetools_4.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-cachetools_4.2.1.bb
+@@ -27,7 +27,6 @@ do_install_ptest() {
+ 	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+ }
  
--SRC_URI[sha256sum] = "38f16b1317b8dd82df67ed5daa5f5e7c959e46579840d77a67a4ceb9cef0a50b"
-+SRC_URI[sha256sum] = "6d2e262e5e8da6fa56e774fb8e2643417351427604c2b177f8e8c5f75fc928ca"
+-SRC_URI[md5sum] = "9d54dacd774e2af7e9a50741386f5455"
+-SRC_URI[sha256sum] = "3796e1de094f0eaca982441c92ce96c68c89cced4cd97721ab297ea4b16db90e"
++SRC_URI[sha256sum] = "f469e29e7aa4cff64d8de4aad95ce76de8ea1125a16c68e0d93f65c3c3dc92e9"
  
- inherit pypi setuptools3
- 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
