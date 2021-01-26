@@ -1,66 +1,85 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web11.8629.1611639683614380992
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ by mx.groups.io with SMTP id smtpd.web09.9438.1611649538427797036
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Jan 2021 21:41:24 -0800
+ Tue, 26 Jan 2021 00:25:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.79,375,1602518400"; 
-   d="scan'208";a="103835102"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 26 Jan 2021 13:41:20 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id ADD254CE6781
-	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Jan 2021 13:41:19 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Tue, 26 Jan 2021 13:41:18 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-nmap: upgrade 1.4.8 -> 1.5.0
-Date: Wed, 27 Jan 2021 01:41:17 +0800
-Message-ID: <1611682877-4449-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmx.net header.s=badeba3b8450 header.b=Cq7Zl0Sq;
+ spf=pass (domain: gmx.net, ip: 212.227.17.22, mailfrom: n.jeker@gmx.net)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+	s=badeba3b8450; t=1611649536;
+	bh=5afCIIXRiPGCffegMEMGfWFcP+VM7FdAY1Ijc++PEcE=;
+	h=X-UI-Sender-Class:From:To:Subject:Date:In-Reply-To:References;
+	b=Cq7Zl0SqplOWW3s+2dbDIO88qcd5vNYRRH6KaimF4DmJR0PvrdKEhwfR8I0wbn2uh
+	 MitMyVut7VGFqb869pxHx5M/BgrWhns6pOKGxGRb7BSManTDX11cnJRKV+Z4SAxjFw
+	 iZpBMyyFKBME/+2GtbzdhTnjBbT9pooZdnhysdeo=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from station.v.cablecom.net ([84.75.156.97]) by mail.gmx.net
+ (mrgmx105 [212.227.17.168]) with ESMTPSA (Nemesis) id
+ 1M9Fjb-1l6mFL25Ch-006OCN for <openembedded-devel@lists.openembedded.org>;
+ Tue, 26 Jan 2021 09:25:36 +0100
+From: "Nicolas Jeker" <n.jeker@gmx.net>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH 2/2] networkmanager: Add Wireless Extensions to PACKAGECONFIG[wifi]
+Date: Tue, 26 Jan 2021 09:25:35 +0100
+Message-Id: <20210126082535.49621-2-n.jeker@gmx.net>
+X-Mailer: git-send-email 2.30.0
+In-Reply-To: <20210126082535.49621-1-n.jeker@gmx.net>
+References: <20210126082535.49621-1-n.jeker@gmx.net>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: ADD254CE6781.A3CCB
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+X-Provags-ID: V03:K1:aiwFUDs8pSO0WUz8MoJduVgZVA6onWICkj7avxApqUuMOGziS1P
+ dp/POskieLGohZFGZqqcYe/cFmi/7XODCN1C322JdAx33tvLSwT4ra4a8YSyJQ9GUcfhZc4
+ nl51NQvCLiNpjYIWY1Ay58FFp3XyDOJWVXxY92TW0Q9HWwasSvX9pvKp9wjdErNgQj+tmaB
+ EJxHRRBZF9n63V30/sNYA==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:4DgrDFOVICU=:htyhsO/eAYOnCFBDttIQKX
+ L6l9kELpQFZ7osykX1UZJKZQWtmylRxg6Bj4hpt2seJbMYpMJbZqgrjfx4nqEI7etTXXf2G4m
+ jHuxymy+9wIJ6tEYiTHW8GZjy604QDelcvyrAQnFncKR8Ah1gElWldmTDTw6HAsv08OLl0RhX
+ tJvAMZRgmwPxShy57cmkhgjbdY+DkIcto1HlGINBZ2o95jurfG2rUWJJ/wHWju+CoxhM6eAyZ
+ 0/xK7EiGwiiaQdnNcDxfs/M1adH7NoXekkc9apQ6qNutjcBXpXO9AYwn4nOWkW2EyGEsPe7kv
+ if91oA/YLAyVRVDhKGvBjN0IOxC7QSOGjkia7kxFi5bUoMI4epFU/QP8JdDV77eQe/DY6Bb3r
+ pc0am7QVaCpqNoYT+TFMfPg5kC2TsUdBy4HiliFXNbP+Q2hug2CNObXKHFyXasTph+tmf5p0e
+ ANtIyCC+y5Bj66cG3fRQc/j/e62d6vjM+BhXiP2pDt3mf0tBk1QSPGLYGA3d0CzLAy+oSoEpc
+ DzQs84sK+PaT9UBocdRuhULWR7slgRFMAa6UyzDC75RLOqlbmpjnDfwcsDpb/S+8rlxfCnbzQ
+ 27Ll1WY8+j7OppMk1xz4aftiKFX1lGgIWWeEG6BkmtQalYzVuyp6PuCsKXfD0lWCHpbTwod6X
+ Auv1elhd2q/82NAi82EJbC6z59GcVPr8VHWbV43txLadBm7Z9LVKBWl71KfF35efh+17mauJi
+ sODvQHu6NC2Wdjck5ipaGSZ9y0Og7VIIyxTnv+LMSQS+99RsVVHGqz1aWDSkaRORQZUY7aLIb
+ 9bdhYxubGwLOiYn3kFvrwU7joYCfBceVr0fT9lHjWbHCOo/GDa9QmaVtYZ1+Q/nOjnsaUb7ws
+ Redo8xmjUl5xKQX7C/dQ==
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
----
- .../{python3-nmap_1.4.8.bb => python3-nmap_1.5.0.bb}     | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-nmap_1.4.8.bb => python3-nmap_1.5.0.bb} (61%)
+Linux Wireless Extensions (Wext) support is enabled per default in
+NetworkManager. Having Wext enabled without enabling WiFi support, too,
+doesn't make much sense. Therefore, instead of creating a separate
+PACKAGECONFIG flag, 'wext' was added to the already existing 'wifi'
+flag.
 
-diff --git a/meta-python/recipes-devtools/python/python3-nmap_1.4.8.bb b/meta-python/recipes-devtools/python/python3-nmap_1.5.0.bb
-similarity index 61%
-rename from meta-python/recipes-devtools/python/python3-nmap_1.4.8.bb
-rename to meta-python/recipes-devtools/python/python3-nmap_1.5.0.bb
-index 2037d496a..e6f093360 100644
---- a/meta-python/recipes-devtools/python/python3-nmap_1.4.8.bb
-+++ b/meta-python/recipes-devtools/python/python3-nmap_1.5.0.bb
-@@ -8,9 +8,12 @@ DEPENDS += "${PYTHON_PN}-wheel-native"
- 
- PYPI_PACKAGE = "python3-nmap"
- 
--SRC_URI[md5sum] = "e7904b39b64a8a44f275388862659a0d"
--SRC_URI[sha256sum] = "8d7da78142bee665289a243f71c5f48407d8ab7e5a02ee672ded05f339044759"
-+SRC_URI[md5sum] = "3a43dd0f56ade8c76c7c6f994604212d"
-+SRC_URI[sha256sum] = "b52744e0c9944c567733b8deb60d6363e17233ee40466edfb1b09a5780576f9a"
- 
- inherit pypi setuptools3
- 
--RDEPENDS_${PN} += "nmap ${PYTHON_PN}-requests"
-+RDEPENDS_${PN} += "nmap \
-+	${PYTHON_PN}-requests \
-+	${PYTHON_PN}-simplejson \
-+"
--- 
-2.25.1
+Signed-off-by: Nicolas Jeker <n.jeker@gmx.net>
+=2D--
+ .../networkmanager/networkmanager_1.28.0.bb                     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkma=
+nager_1.28.0.bb b/meta-networking/recipes-connectivity/networkmanager/netw=
+orkmanager_1.28.0.bb
+index 157a7e7b0..1b4fa95a2 100644
+=2D-- a/meta-networking/recipes-connectivity/networkmanager/networkmanager=
+_1.28.0.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1=
+.28.0.bb
+@@ -80,7 +80,7 @@ PACKAGECONFIG[dnsmasq] =3D "--with-dnsmasq=3D${bindir}/d=
+nsmasq"
+ PACKAGECONFIG[nss] =3D "--with-crypto=3Dnss,,nss"
+ PACKAGECONFIG[resolvconf] =3D "--with-resolvconf=3D${base_sbindir}/resolv=
+conf,,,resolvconf"
+ PACKAGECONFIG[gnutls] =3D "--with-crypto=3Dgnutls,,gnutls"
+-PACKAGECONFIG[wifi] =3D "--enable-wifi=3Dyes,--enable-wifi=3Dno,,wpa-supp=
+licant"
++PACKAGECONFIG[wifi] =3D "--with-wext=3Dyes --enable-wifi=3Dyes,--with-wex=
+t=3Dno --enable-wifi=3Dno,,wpa-supplicant"
+ PACKAGECONFIG[ifupdown] =3D "--enable-ifupdown,--disable-ifupdown"
+ PACKAGECONFIG[qt4-x11-free] =3D "--enable-qt,--disable-qt,qt4-x11-free"
+ PACKAGECONFIG[cloud-setup] =3D "--with-nm-cloud-setup=3Dyes,--with-nm-clo=
+ud-setup=3Dno"
+=2D-
+2.30.0
 
