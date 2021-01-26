@@ -1,157 +1,66 @@
-Received: from mail-io1-f52.google.com (mail-io1-f52.google.com [209.85.166.52])
- by mx.groups.io with SMTP id smtpd.web11.8446.1611637902555427902
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web11.8629.1611639683614380992
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Jan 2021 21:11:42 -0800
+ Mon, 25 Jan 2021 21:41:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=MG4XvRpS;
- spf=pass (domain: gmail.com, ip: 209.85.166.52, mailfrom: akuster808@gmail.com)
-Received: by mail-io1-f52.google.com with SMTP id 16so840505ioz.5
-        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Jan 2021 21:11:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=6U9S+Vo+GBUY02nR+tMpwzTcY9s8pN/CmnMv66dcyfc=;
-        b=MG4XvRpSmTCfJJyQNZaOAqhmjIrtotLIUoFcJTEv8FmWyzfgKBGa6U+EHqcThRFYXL
-         H/Cp8kNMXg60NlsdOTmaGS3wYChQjyDEWC9b6PKZ3OAiV7WJAKY1Kc9vGHDzxRhw2is5
-         x+NxpPEOleMujkC5d54/B6XI+wrTNAmxpmogejojdZfuYFTYkfga2ItNCg1CpQG7htya
-         vvaA22NQZ3oef2ze69IkKgSvnFc27H2hrB9s6lsB3/PlyrcwAqVJcG15baSqQMK1/VpA
-         uDEyXyp7mw48iz6t5BShbd9roaiyYKacP+buNOqVx1tWVvTtmQIIbNEJ41g+/YLD1Unc
-         P2Uw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=6U9S+Vo+GBUY02nR+tMpwzTcY9s8pN/CmnMv66dcyfc=;
-        b=SI1Of+srm8DXwoj1Nh4W/Ms82maL9R7avZVEBiEuz+/MUJPlp56jOL7PvFi4w4FBYP
-         uoplGYIK13g3NXBsDibvqu8td//bAOzvd0CuVRfTTfsXgvuHhviOinWzkwG1KaPHeAvw
-         9urQyIoAX6niKq9mb66HQpo+0K7vbBEaqRjmwMLNqzx4/lp+G+SX/9gGLhgTUfQSfRe0
-         MnmX4VHgmqHQP4KFe/Vqwg61NrChMJJYC0IbUIz4nSatdpulpMxUSGVIdanJvbkk84dA
-         NzQQl2kfCrQkQdiySc4zDJxSkeDkssvy+snxGa0UQEJIFd1Qr6j3SzdrwGwJMJlwAZHk
-         4YUg==
-X-Gm-Message-State: AOAM5332WYCrDdy2iM3jgBr9KCIROewhBKvW89eUCqRjgf5x0D4KobZL
-	gGzur4UEuSpbY8K5KsQIYQzfHE8mDTO++A==
-X-Google-Smtp-Source: ABdhPJzYu+F5QiR+IA9m8RYYZOa88NFavCYkFA3VektLxE+Yo3+cfFyTAP6h1ijVl1V+6wPorR7slA==
-X-Received: by 2002:a02:c76b:: with SMTP id k11mr3429283jao.57.1611637901816;
-        Mon, 25 Jan 2021 21:11:41 -0800 (PST)
-Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:5442:4b7c:f358:5471])
-        by smtp.gmail.com with ESMTPSA id l7sm12039974iln.74.2021.01.25.21.11.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 25 Jan 2021 21:11:41 -0800 (PST)
-From: "akuster" <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: zangrc <zangrc.fnst@cn.fujitsu.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Armin Kuster <akuster@mvista.com>
-Subject: [meta-networking][dunfell][PATCH 3/3] iscsi-initiator-utils: upgrade 2.1.2 -> 2.1.3
-Date: Mon, 25 Jan 2021 21:11:38 -0800
-Message-Id: <20210126051138.15194-3-akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210126051138.15194-1-akuster808@gmail.com>
-References: <20210126051138.15194-1-akuster808@gmail.com>
-
-From: zangrc <zangrc.fnst@cn.fujitsu.com>
-
-Source: git.openembedded.org
-MR: 108115, 108125, 108095, 108105
-Type: Security Fix
-Disposition: Backport from https://git.openembedded.org/meta-openembedded/commit/meta-networking/recipes-daemons/iscsi-initiator-utils?id=46e30569e3b3d0cc66ce05e9accd759f37705feb
-ChangeID: 46e30569e3b3d0cc66ce05e9accd759f37705feb
-Description:
-
-0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch
-Removed since this is included in 2.1.3
-
-Bugfix only update.  Also includes these CVE fixes:
-CVE-2020-13988
-CVE-2020-13987
-CVE-2020-17438
-CVE-2020-17437
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.79,375,1602518400"; 
+   d="scan'208";a="103835102"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 26 Jan 2021 13:41:20 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id ADD254CE6781
+	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Jan 2021 13:41:19 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Tue, 26 Jan 2021 13:41:18 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-python] [PATCH] python3-nmap: upgrade 1.4.8 -> 1.5.0
+Date: Wed, 27 Jan 2021 01:41:17 +0800
+Message-ID: <1611682877-4449-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: ADD254CE6781.A3CCB
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Armin Kuster <akuster@mvista.com>
 ---
- ...Compare-with-max-int-instead-of-max-.patch | 48 -------------------
- ....1.2.bb => iscsi-initiator-utils_2.1.3.bb} |  3 +-
- 2 files changed, 1 insertion(+), 50 deletions(-)
- delete mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch
- rename meta-networking/recipes-daemons/iscsi-initiator-utils/{iscsi-initiator-utils_2.1.2.bb => iscsi-initiator-utils_2.1.3.bb} (96%)
+ .../{python3-nmap_1.4.8.bb => python3-nmap_1.5.0.bb}     | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-nmap_1.4.8.bb => python3-nmap_1.5.0.bb} (61%)
 
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch
-deleted file mode 100644
-index c71f01299b..0000000000
---- a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch
-+++ /dev/null
-@@ -1,48 +0,0 @@
--From 7bdaa32c80bb7d37668c1ff6d88bb02428459a0f Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 21 Oct 2020 09:11:20 -0700
--Subject: [PATCH] libopeniscsiusr: Compare with max int instead of max long
--
--This compares value member of int_list_tbl struct which is of unsigned
--int type.
--
--struct int_list_tbl {
--const char *name;
--unsigned int value;
--};
--
--Clang compiler reports this comparison when
---Wtautological-constant-out-of-range-compare is enabled
--
--| idbm.c:1042:2: error: result of comparison of constant 18446744073709551615 with expression of type 'unsigned int' is always true [-Werror,-Wtautological-constant-out-of-range-compare]
--|         _rec_int_list(SESSION_CHAP_ALGS, recs, node, session.auth.chap_algs,
--|         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--| idbm.c:263:23: note: expanded from macro '_rec_int_list'
--|                 if (_org->_name[_i] != ~0UL) { \
--|                     ~~~~~~~~~~~~~~~ ^  ~~~~
--
--Since max value for int can be less than unsinged long e.g. on LP64 its
--better to use UINT_MAX here
--
--Upstream-Status: Submitted [https://github.com/open-iscsi/open-iscsi/pull/227]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- libopeniscsiusr/idbm.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/libopeniscsiusr/idbm.c b/libopeniscsiusr/idbm.c
--index 7bc2381..060196f 100644
----- a/libopeniscsiusr/idbm.c
--+++ b/libopeniscsiusr/idbm.c
--@@ -260,7 +260,7 @@ do {\
-- 	_recs[_n].type = TYPE_INT_LIST; \
-- 	_strncpy(_recs[_n].name, _key, NAME_MAXVAL); \
-- 	for (unsigned int _i = 0; _i < ARRAY_LEN(_org->_name); _i++) { \
---		if (_org->_name[_i] != ~0UL) { \
--+		if (_org->_name[_i] != UINT_MAX) { \
-- 			for (unsigned int _j = 0; _j < ARRAY_LEN(_tbl); _j++) { \
-- 				if (_tbl[_j].value == _org->_name[_i]) { \
-- 					strcat(_recs[_n].value, _tbl[_j].name); \
---- 
--2.29.0
--
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.2.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.3.bb
-similarity index 96%
-rename from meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.2.bb
-rename to meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.3.bb
-index dfcd4ee3cb..4a9cf9db40 100644
---- a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.2.bb
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.3.bb
-@@ -12,11 +12,10 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)
+diff --git a/meta-python/recipes-devtools/python/python3-nmap_1.4.8.bb b/meta-python/recipes-devtools/python/python3-nmap_1.5.0.bb
+similarity index 61%
+rename from meta-python/recipes-devtools/python/python3-nmap_1.4.8.bb
+rename to meta-python/recipes-devtools/python/python3-nmap_1.5.0.bb
+index 2037d496a..e6f093360 100644
+--- a/meta-python/recipes-devtools/python/python3-nmap_1.4.8.bb
++++ b/meta-python/recipes-devtools/python/python3-nmap_1.5.0.bb
+@@ -8,9 +8,12 @@ DEPENDS += "${PYTHON_PN}-wheel-native"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ PYPI_PACKAGE = "python3-nmap"
  
--SRCREV ?= "802688debcd88c48edabe86deb7e7ed47ebadc26"
-+SRCREV ?= "34e3ffb194f6fa3028c0eb2ff57e7db2d1026771"
+-SRC_URI[md5sum] = "e7904b39b64a8a44f275388862659a0d"
+-SRC_URI[sha256sum] = "8d7da78142bee665289a243f71c5f48407d8ab7e5a02ee672ded05f339044759"
++SRC_URI[md5sum] = "3a43dd0f56ade8c76c7c6f994604212d"
++SRC_URI[sha256sum] = "b52744e0c9944c567733b8deb60d6363e17233ee40466edfb1b09a5780576f9a"
  
- SRC_URI = "git://github.com/open-iscsi/open-iscsi \
-            file://0001-Makefile-Do-not-set-Werror.patch \
--           file://0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch \
-            file://initd.debian \
-            file://99_iscsi-initiator-utils \
-            file://iscsi-initiator \
+ inherit pypi setuptools3
+ 
+-RDEPENDS_${PN} += "nmap ${PYTHON_PN}-requests"
++RDEPENDS_${PN} += "nmap \
++	${PYTHON_PN}-requests \
++	${PYTHON_PN}-simplejson \
++"
 -- 
-2.17.1
+2.25.1
+
+
 
