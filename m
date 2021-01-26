@@ -1,106 +1,72 @@
-Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net [217.70.183.194])
- by mx.groups.io with SMTP id smtpd.web08.10006.1611654627528006768
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web12.11556.1611665419589612852
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Jan 2021 01:50:28 -0800
+ Tue, 26 Jan 2021 04:50:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: bootlin.com, ip: 217.70.183.194, mailfrom: alexandre.belloni@bootlin.com)
-X-Originating-IP: 86.202.109.140
-Received: from localhost (lfbn-lyo-1-13-140.w86-202.abo.wanadoo.fr [86.202.109.140])
-	(Authenticated sender: alexandre.belloni@bootlin.com)
-	by relay2-d.mail.gandi.net (Postfix) with ESMTPSA id 8CB5B40033;
-	Tue, 26 Jan 2021 09:50:19 +0000 (UTC)
-Date: Tue, 26 Jan 2021 10:50:18 +0100
-From: "Alexandre Belloni" <alexandre.belloni@bootlin.com>
-To: Junjie Mao <junjie.mao@intel.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-python][PATCH] python3-xmlschema: Yocto recipes for validating against XSD 1.1
-Message-ID: <20210126095018.GY1196852@piout.net>
-References: <1611558046-30976-1-git-send-email-junjie.mao@intel.com>
-MIME-Version: 1.0
-In-Reply-To: <1611558046-30976-1-git-send-email-junjie.mao@intel.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=37874 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1l4NnU-0007hT-3t; Tue, 26 Jan 2021 14:50:17 +0200
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-coverage: Upgrade 5.3.1 -> 5.4
+Date: Tue, 26 Jan 2021 14:50:00 +0200
+Message-Id: <20210126125003.27620-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210126125003.27620-1-leon.anavi@konsulko.com>
+References: <20210126125003.27620-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Hello,
+Upgrade to release 5.4:
 
-On 25/01/2021 15:00:46+0800, Junjie Mao wrote:
-> This patch adds recipes for xmlschema and its dependency in order to enable
-> XML validation against XSD 1.1 in Python.
-> 
-> Signed-off-by: Junjie Mao <junjie.mao@intel.com>
-> ---
->  .../python/python3-elementpath_2.1.2.bb              | 12 ++++++++++++
->  .../python/python3-xmlschema_1.4.1.bb                | 20 ++++++++++++++++++++
->  2 files changed, 32 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb
->  create mode 100644 meta-python/recipes-devtools/python/python3-xmlschema_1.4.1.bb
-> 
-> diff --git a/meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb b/meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb
-> new file mode 100644
-> index 0000000..f47f152
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb
-> @@ -0,0 +1,12 @@
-> +DESCRIPTION = "Provide XPath 1.0 and 2.0 selectors for Python's ElementTree XML data structures, both for the standard ElementTree library and for the lxml.etree library."
-> +HOMEPAGE = "https://github.com/sissaschool/elementpath"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=5dbb7fb7d72da3921202dd7b995d3ecf"
-> +
-> +SRC_URI[md5sum] = "887f60e9c4fb9b0804a38372b2798101"
-> +SRC_URI[sha256sum] = "23e1fed8d196d9a6cc4d220ef11fbe7eb8cff3a27848621c447e9d96134b2085"
-> +
-> +PYPI_PACKAGE = "elementpath"
-> +inherit pypi setuptools3
-> +
-> +BBCLASSEXTEND = "native nativesdk"
-> diff --git a/meta-python/recipes-devtools/python/python3-xmlschema_1.4.1.bb b/meta-python/recipes-devtools/python/python3-xmlschema_1.4.1.bb
-> new file mode 100644
-> index 0000000..c609931
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-xmlschema_1.4.1.bb
-> @@ -0,0 +1,20 @@
-> +SUMMARY = "The xmlschema library is an implementation of XML Schema for Python (supports Python 3.6+)."
-> +HOMEPAGE = "https://github.com/sissaschool/xmlschema"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=47489cb18c469474afeb259ed1d4832f"
-> +
-> +SRC_URI[md5sum] = "f4c46f8c4415a0ca31dc2f623b668664"
-> +SRC_URI[sha256sum] = "ade693114ff2e4a9ed5a2371ce29ae888f689bc58e326e5796f8a7dc8954dd4a"
-> +
-> +PYPI_PACKAGE = "xmlschema"
-> +inherit pypi setuptools3
-> +
-> +DEPENDS += "\
-> +    ${PYTHON_PN}-elementpath \
-> +"
+- The text report produced by coverage report now always outputs
+  a TOTAL line, even if only one Python file is reported. This
+  makes regex parsing of the output easier.
+- The skip_covered and skip_empty settings in the configuration
+  file can now be specified in the [html] section, so that text
+  reports and HTML reports can use separate settings. The HTML
+  report will still use the [report] settings if there isn't a
+  value in the [html] section.
+- Combining files on Windows across drives how works properly.
+- Fix an obscure warning from deep in the _decimal module.
+- Update to support Python 3.10 alphas in progress, including
+  PEP 626: Precise line numbers for debugging and other tools.
 
-This failed on the autobuilders:
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../{python3-coverage_5.3.1.bb => python3-coverage_5.4.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-coverage_5.3.1.bb => python3-coverage_5.4.bb} (71%)
 
-ERROR: python3-xmlschema-1.4.1-r0 do_compile: 'python3 setup.py build ' execution failed.
-ERROR: python3-xmlschema-1.4.1-r0 do_compile: Execution of '/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/python3-xmlschema/1.4.1-r0/temp/run.do_compile.316552' failed with exit code 1:
-WARNING: The pip package is not available, falling back to EasyInstall for handling setup_requires/test_requires; this is deprecated and will be removed in a future version.
-ERROR: Do not try to fetch `elementpath<3.0.0,>=2.0.4' for building. Please add its native recipe to DEPENDS.
-
-Full log here:
-https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/884/steps/12/logs/stdio
-
-
-> +
-> +RDEPENDS_${PN} += "\
-> +    ${PYTHON_PN}-elementpath \
-> +"
-> +
-> +BBCLASSEXTEND = "native nativesdk"
-> -- 
-> 2.7.4
-> 
-
-> 
-> 
-> 
-
-
+diff --git a/meta-python/recipes-devtools/python/python3-coverage_5.3.1.bb b/meta-python/recipes-devtools/python/python3-coverage_5.4.bb
+similarity index 71%
+rename from meta-python/recipes-devtools/python/python3-coverage_5.3.1.bb
+rename to meta-python/recipes-devtools/python/python3-coverage_5.4.bb
+index 14d29a247..4ea9b6a19 100644
+--- a/meta-python/recipes-devtools/python/python3-coverage_5.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-coverage_5.4.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://coverage.readthedocs.io"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2ee41112a44fe7014dce33e26468ba93"
+ 
+-SRC_URI[sha256sum] = "38f16b1317b8dd82df67ed5daa5f5e7c959e46579840d77a67a4ceb9cef0a50b"
++SRC_URI[sha256sum] = "6d2e262e5e8da6fa56e774fb8e2643417351427604c2b177f8e8c5f75fc928ca"
+ 
+ inherit pypi setuptools3
+ 
 -- 
-Alexandre Belloni, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
+2.17.1
+
