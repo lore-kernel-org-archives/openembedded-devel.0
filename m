@@ -1,222 +1,92 @@
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web12.437.1611601310083702970
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ by mx.groups.io with SMTP id smtpd.web11.9262.1611645765003971773
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Jan 2021 11:01:50 -0800
+ Mon, 25 Jan 2021 23:22:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=e3lJzn9+;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: dmurphy@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 10PJ1mB1018765;
-	Mon, 25 Jan 2021 13:01:48 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1611601308;
-	bh=rc3J7K4cZaJ7q/CJ60g6Pw5Y/sFQRUXQfMbtOhPNRcU=;
-	h=Subject:To:CC:References:From:Date:In-Reply-To;
-	b=e3lJzn9+Dd0IE4bC6oI/S0hFTpMGv54jyKVKaHXrxld9D4pOCBxIwTo1nd2QJM2vG
-	 J7iHWVuqbv5Yy5dDxjPoBbRIEvP0j/bULbOZxVMY3JyAijZYZCaM8QbgTTMjzzs+AE
-	 vuncprGJTJqO2pqPs7QxH3E97AeyAmJZ7OB+5bf8=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 10PJ1mkX030291
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 25 Jan 2021 13:01:48 -0600
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Mon, 25
- Jan 2021 13:01:48 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Mon, 25 Jan 2021 13:01:48 -0600
-Received: from [10.250.39.117] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 10PJ1mYl107390;
-	Mon, 25 Jan 2021 13:01:48 -0600
-Subject: Re: [RFC] Issues with mariadb-10.4.17 and aarch64
-To: akuster808 <akuster808@gmail.com>
-CC: <Openembedded-issues@lists.openembedded.org>,
-        <openembedded-devel@lists.openembedded.org>
-References: <6cde28bf-c69d-1d42-785e-dc228202e357@ti.com>
- <d7ff8010-d45d-6274-ef69-1fd482314224@gmail.com>
-From: "Dan Murphy" <dmurphy@ti.com>
-Message-ID: <1539367b-171b-d8c7-ec99-dadbf27ad598@ti.com>
-Date: Mon, 25 Jan 2021 13:01:43 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ dkim=pass header.i=@gmx.net header.s=badeba3b8450 header.b=kOlOjtOr;
+ spf=pass (domain: gmx.net, ip: 212.227.17.22, mailfrom: n.jeker@gmx.net)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+	s=badeba3b8450; t=1611645762;
+	bh=Bhd2y9U6vsT2VTsrisbGayJ44Cho5FqPz+/Xo+M88jk=;
+	h=X-UI-Sender-Class:From:To:Subject:Date;
+	b=kOlOjtOrcy8YsJXFZ7H0e3e6YUZf8lI9AYs11KACCd5F0FglCtOT04mmsbuaN0Ycv
+	 vlEvtIbxIGQo8Lbat953bGlDVlc9bzz/o8X+X8VvuVt/D6U1n5cUgSfOuH0CxdcnZD
+	 VYq2x/t8CwFEmL30e3zn/mowXPftoVHIkze4rqo8=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from station.v.cablecom.net ([84.75.156.97]) by mail.gmx.net
+ (mrgmx105 [212.227.17.168]) with ESMTPSA (Nemesis) id
+ 1MAfYm-1lAwX42uDo-00B1ah for <openembedded-devel@lists.openembedded.org>;
+ Tue, 26 Jan 2021 08:22:42 +0100
+From: "Nicolas Jeker" <n.jeker@gmx.net>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH 1/2] networkmanager: Add PACKAGECONFIG for ovs
+Date: Tue, 26 Jan 2021 08:22:40 +0100
+Message-Id: <20210126072241.43425-1-n.jeker@gmx.net>
+X-Mailer: git-send-email 2.30.0
 MIME-Version: 1.0
-In-Reply-To: <d7ff8010-d45d-6274-ef69-1fd482314224@gmail.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: multipart/alternative;
-	boundary="------------DC0ADC6AC533E2FAF22CF2DD"
-Content-Language: en-US
-
---------------DC0ADC6AC533E2FAF22CF2DD
-Content-Type: text/plain; charset="utf-8"; format=flowed
+X-Provags-ID: V03:K1:G4BsShg3SCRtbHvlKoqLRBSOmHsoJLzEb/zERUnXNMcWIWXFw5h
+ NWeou72eIoK24NMeo4EJz6JFu9cSisl9/Xcv/nnji28ok2Sske2XA6tNa1mpjEt+k87Ovk4
+ t31rF8AjiJipciz0XjnRnG3xYSfveA8JbT+HwIaB3h+/Qaegqj1sxHqXO0fjtwiikix/7u0
+ f5EH77W5U9qTSxp0Dp+bA==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:X77GoVTfjyk=:SzjNSWSNGj+IhNY7Qxupr2
+ BRedy4YOOse4rEqjUQzcciI9Gvqu1VCBLpXWL8LurcNbzuTE78XJn2lNB4XcGHOQD4JEPD/re
+ kPj8XXUbHcm1654WNKquAzynPvMoAOpCMV241oRoYYFytsWWHtBK824Xn1Zm7T+jUs3QCu3/P
+ WDBgY/X+U6pi8F0Ts1l9SF8/KfnNwC9VJZvbj36bwO3fIpFMwSN5i+itWvO8hODNP86JZiiau
+ CkHmiWsLFVww1+F+EdkNq+BpDglyZBq4axoaA0dEQEimbEdVnEI00rjdI2Zbn7sIliPF5l7Eu
+ 8u6usd53xwEcC4JB0A/vWiAjVHL+ypIG39M+Vxb6egT07MdL7JW+UX/exh5WG3MNsTl4x1LXc
+ BLNhQ4EMwDG0fAeJschFver7IqVGhVzWkOdU6RY9lQvW2AvNL8lNyBcfgL0jDYS+3Xq784RoJ
+ UEmt/GBR1shdYGt9qLI9DDUUIEzvR+saxb5vgOk/og5gSmx3HfLVbvRuoHFcI5S2sF4NU3XOh
+ zCwP728RHWLcM+TNAXWTTwtDbQEWfomyZY7GZp3iJUMWNqNjQd0GNRle9JuT4QIniOHxfLDe/
+ Fn8MqNe6ZZ2MAujOZVffpF8oyRadnYXGh5WabrmFez8iqNMZ22BmFdcLUWq/weHoe2c32SIoA
+ zQesxk/nrpScPHRvyJZ4lCWZ0C6jC1KWkSOCGYpFVoAcrf/Nr+/vCLZ5En07AgfOendeO+9WQ
+ RwEv+LGj9/XFNE7mim5ogSKUv/jGubsPMnbVaSzkt3BtW7p5FENNKCGQMOwYKWphFefsdHePc
+ RYlrnQgCcIYLF7NFdvyxWgOkeN4aImk6JDsizlW+Y5SsI9w/rpVUP+INOg80odWUGcym6hRWv
+ JDIY6Gz19JZv0MEFXlWA==
 Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0015.ext.ti.com id 10PJ1mB1018765
 
-Armin
+Open vSwitch support is enabled by default in NetworkManager, but only
+useful in the context of several virtualisation environments, e.g. Xen,
+KVM, OpenStack and more. Therefore, the ovs PACKAGECONFIG is now disabled =
+by
+default.
 
-On 1/25/21 11:57 AM, akuster808 wrote:
-> Dan,
->
->
-> On 1/25/21 9:45 AM, Dan Murphy wrote:
->> Hello
->>
->> I was wondering if there has been any reports of the mariadb update on
->> the dunfell branch causing issues with 64bit compilers when the 'pam'
->> is set for DISTRO_FEATURES
->>
-> I am not aware of any.
->> There does not seem to be a compilation issue but more of an
->> installation issue in which the lib/security directory is not being
->> created.
->>
->> We are seeing issues in our arago distro with the following errors
->>
->> mv: cannot stat '/OE/arago-dunfell-next-build/build-AARCH64_1/arago-tm=
-p-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image/lib/secu=
-rity': No such file or directory
->> *09:38:06* WARNING: /OE/arago-dunfell-next-build/build-AARCH64_1/arago=
--tmp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/temp/run.do=
-_install.5379:1 exit 1 from 'mv /OE/arago-dunfell-next-build/build-AARCH6=
-4_1/arago-tmp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/im=
-age/lib/security /OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-e=
-xternal-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image//usr/lib'
-> I would be surprised if this was just limited to Arm64.
->
-> Would enabling "PAM" and appending mariadb to an image reproduce this?
+The jansson dependency is only required for Open vSwitch and teamsdctl
+support in NetworkManager. As there is no libteamsdctl recipe around
+(and no teamsdctl PACKAGECONFIG), make it dependent on the ovs
+PACKAGECONFIG.
 
-Sorry I did not specify when the error occurred.=C2=A0 This happens durin=
-g=20
-the build time not run time.
+Signed-off-by: Nicolas Jeker <n.jeker@gmx.net>
+=2D--
+ .../networkmanager/networkmanager_1.28.0.bb                     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-32bit ARM builds perform the install just fine
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkma=
+nager_1.28.0.bb b/meta-networking/recipes-connectivity/networkmanager/netw=
+orkmanager_1.28.0.bb
+index 1053bdd42..157a7e7b0 100644
+=2D-- a/meta-networking/recipes-connectivity/networkmanager/networkmanager=
+_1.28.0.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1=
+.28.0.bb
+@@ -15,7 +15,6 @@ DEPENDS =3D " \
+     util-linux \
+     libndp \
+     libnewt \
+-    jansson \
+     curl \
+ "
 
-*12:53:25* NOTE: recipe mariadb-native-10.4.17-r0: task do_install: Succe=
-eded
+@@ -85,6 +84,7 @@ PACKAGECONFIG[wifi] =3D "--enable-wifi=3Dyes,--enable-wi=
+fi=3Dno,,wpa-supplicant"
+ PACKAGECONFIG[ifupdown] =3D "--enable-ifupdown,--disable-ifupdown"
+ PACKAGECONFIG[qt4-x11-free] =3D "--enable-qt,--disable-qt,qt4-x11-free"
+ PACKAGECONFIG[cloud-setup] =3D "--with-nm-cloud-setup=3Dyes,--with-nm-clo=
+ud-setup=3Dno"
++PACKAGECONFIG[ovs] =3D "--enable-ovs,--disable-ovs,,jansson"
 
+ PACKAGES =3D+ " \
+   ${PN}-nmcli ${PN}-nmcli-doc \
+=2D-
+2.30.0
 
-64bit not so much
-
-*09:38:03* ERROR: mariadb-10.4.17-r0 do_install: Execution of '/OE/arago-=
-dunfell-next-build/build-AARCH64_1/arago-tmp-external-arm-glibc/work/aarc=
-h64-linux/mariadb/10.4.17-r0/temp/run.do_install.5379' failed with exit c=
-ode 1:
-
-Dan
-
->
-> -armin
->>
-
---------------DC0ADC6AC533E2FAF22CF2DD
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0015.ext.ti.com id 10PJ1mB1018765
-
-<html>
-  <head>
-    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF=
--8">
-  </head>
-  <body>
-    <p>Armin<br>
-    </p>
-    <div class=3D"moz-cite-prefix">On 1/25/21 11:57 AM, akuster808 wrote:=
-<br>
-    </div>
-    <blockquote type=3D"cite"
-      cite=3D"mid:d7ff8010-d45d-6274-ef69-1fd482314224@gmail.com">
-      <pre class=3D"moz-quote-pre" wrap=3D"">Dan,
-
-
-On 1/25/21 9:45 AM, Dan Murphy wrote:
-</pre>
-      <blockquote type=3D"cite">
-        <pre class=3D"moz-quote-pre" wrap=3D"">
-Hello
-
-I was wondering if there has been any reports of the mariadb update on
-the dunfell branch causing issues with 64bit compilers when the 'pam'
-is set for DISTRO_FEATURES
-
-</pre>
-      </blockquote>
-      <pre class=3D"moz-quote-pre" wrap=3D"">
-I am not aware of any.
-</pre>
-      <blockquote type=3D"cite">
-        <pre class=3D"moz-quote-pre" wrap=3D"">
-There does not seem to be a compilation issue but more of an
-installation issue in which the lib/security directory is not being
-created.
-
-We are seeing issues in our arago distro with the following errors
-
-mv: cannot stat '/OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-e=
-xternal-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image/lib/securit=
-y': No such file or directory
-*09:38:06* WARNING: /OE/arago-dunfell-next-build/build-AARCH64_1/arago-tm=
-p-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/temp/run.do_in=
-stall.5379:1 exit 1 from 'mv /OE/arago-dunfell-next-build/build-AARCH64_1=
-/arago-tmp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image=
-/lib/security /OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-exte=
-rnal-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image//usr/lib'
-</pre>
-      </blockquote>
-      <pre class=3D"moz-quote-pre" wrap=3D"">
-I would be surprised if this was just limited to Arm64.
-
-Would enabling "PAM" and appending mariadb to an image reproduce this?</p=
-re>
-    </blockquote>
-    <p>Sorry I did not specify when the error occurred.=C2=A0 This happen=
-s
-      during the build time not run time.</p>
-    <p>32bit ARM builds perform the install just fine</p>
-    <pre style=3D"box-sizing: border-box; white-space: pre-wrap; overflow=
--wrap: break-word; margin: 0px; color: rgb(51, 51, 51); font-size: 14px; =
-font-style: normal; font-variant-ligatures: normal; font-variant-caps: no=
-rmal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: s=
-tart; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0p=
-x; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; te=
-xt-decoration-style: initial; text-decoration-color: initial;"><span clas=
-s=3D"timestamp" style=3D"box-sizing: border-box;"><b style=3D"box-sizing:=
- border-box;">12:53:25</b> </span>NOTE: recipe mariadb-native-10.4.17-r0:=
- task do_install: Succeeded
-</pre>
-    <p><br>
-    </p>
-    <p>64bit not so much</p>
-    <pre style=3D"box-sizing: border-box; white-space: pre-wrap; overflow=
--wrap: break-word; margin: 0px; color: rgb(51, 51, 51); font-size: 14px; =
-font-style: normal; font-variant-ligatures: normal; font-variant-caps: no=
-rmal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: s=
-tart; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0p=
-x; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; te=
-xt-decoration-style: initial; text-decoration-color: initial;"><span clas=
-s=3D"timestamp" style=3D"box-sizing: border-box;"><b style=3D"box-sizing:=
- border-box;">09:38:03</b> </span>ERROR: mariadb-10.4.17-r0 do_install: E=
-xecution of '/OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-exter=
-nal-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/temp/run.do_install.5=
-379' failed with exit code 1:</pre>
-    <p>Dan<br>
-    </p>
-    <blockquote type=3D"cite"
-      cite=3D"mid:d7ff8010-d45d-6274-ef69-1fd482314224@gmail.com">
-      <pre class=3D"moz-quote-pre" wrap=3D"">
-
--armin
-</pre>
-      <blockquote type=3D"cite">
-        <pre class=3D"moz-quote-pre" wrap=3D"">
-
-</pre>
-      </blockquote>
-      <pre class=3D"moz-quote-pre" wrap=3D"">
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------DC0ADC6AC533E2FAF22CF2DD--
