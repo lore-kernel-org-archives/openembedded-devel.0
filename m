@@ -1,60 +1,57 @@
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- by mx.groups.io with SMTP id smtpd.web11.9262.1611645765003971773
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ by mx.groups.io with SMTP id smtpd.web10.9176.1611645765113575396
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 25 Jan 2021 23:22:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmx.net header.s=badeba3b8450 header.b=kOlOjtOr;
- spf=pass (domain: gmx.net, ip: 212.227.17.22, mailfrom: n.jeker@gmx.net)
+ dkim=pass header.i=@gmx.net header.s=badeba3b8450 header.b=Jdnx88eV;
+ spf=pass (domain: gmx.net, ip: 212.227.17.21, mailfrom: n.jeker@gmx.net)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
-	s=badeba3b8450; t=1611645762;
-	bh=Bhd2y9U6vsT2VTsrisbGayJ44Cho5FqPz+/Xo+M88jk=;
-	h=X-UI-Sender-Class:From:To:Subject:Date;
-	b=kOlOjtOrcy8YsJXFZ7H0e3e6YUZf8lI9AYs11KACCd5F0FglCtOT04mmsbuaN0Ycv
-	 vlEvtIbxIGQo8Lbat953bGlDVlc9bzz/o8X+X8VvuVt/D6U1n5cUgSfOuH0CxdcnZD
-	 VYq2x/t8CwFEmL30e3zn/mowXPftoVHIkze4rqo8=
+	s=badeba3b8450; t=1611645763;
+	bh=5afCIIXRiPGCffegMEMGfWFcP+VM7FdAY1Ijc++PEcE=;
+	h=X-UI-Sender-Class:From:To:Subject:Date:In-Reply-To:References;
+	b=Jdnx88eVs9MwLw7o0lAAoxJfO9f7Epuy0RNjJpBuJkTOT8vZt15PXYNTnmvunM6cl
+	 9ac3Mcx6lzCr+GzmJhztkeiM2JB6D7P9m6xnfXSOJ7TiyqTrzralA8YQdWQeu3RfrC
+	 oBfoc2n5PBydlN3Dn9oLSu+OWWd4xwUwbqZ4HP9E=
 X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
 Received: from station.v.cablecom.net ([84.75.156.97]) by mail.gmx.net
  (mrgmx105 [212.227.17.168]) with ESMTPSA (Nemesis) id
- 1MAfYm-1lAwX42uDo-00B1ah for <openembedded-devel@lists.openembedded.org>;
+ 1MWRRT-1lW3tB3N0t-00Xu4C for <openembedded-devel@lists.openembedded.org>;
  Tue, 26 Jan 2021 08:22:42 +0100
 From: "Nicolas Jeker" <n.jeker@gmx.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH 1/2] networkmanager: Add PACKAGECONFIG for ovs
-Date: Tue, 26 Jan 2021 08:22:40 +0100
-Message-Id: <20210126072241.43425-1-n.jeker@gmx.net>
+Subject: [meta-networking][PATCH 2/2] networkmanager: Add Wireless Extensions to PACKAGECONFIG[wifi]
+Date: Tue, 26 Jan 2021 08:22:41 +0100
+Message-Id: <20210126072241.43425-2-n.jeker@gmx.net>
 X-Mailer: git-send-email 2.30.0
+In-Reply-To: <20210126072241.43425-1-n.jeker@gmx.net>
+References: <20210126072241.43425-1-n.jeker@gmx.net>
 MIME-Version: 1.0
-X-Provags-ID: V03:K1:G4BsShg3SCRtbHvlKoqLRBSOmHsoJLzEb/zERUnXNMcWIWXFw5h
- NWeou72eIoK24NMeo4EJz6JFu9cSisl9/Xcv/nnji28ok2Sske2XA6tNa1mpjEt+k87Ovk4
- t31rF8AjiJipciz0XjnRnG3xYSfveA8JbT+HwIaB3h+/Qaegqj1sxHqXO0fjtwiikix/7u0
- f5EH77W5U9qTSxp0Dp+bA==
+X-Provags-ID: V03:K1:8kqWxrl1KIdYDg5eThL8EdR1pJO9kwltwgHZei+4iz//kFqvF8X
+ gVuJgEgTnF8xZDdI6M0nZ+dcr2UonxKU0Nswvzy9FsEdiUrXaJuBrTdvNN2YfbbmdZ0XQj4
+ fvkdMQsqj+zKcGmUwdpoMrqCHAeRDbvQYBCzq6TYbMBDUA2IfmghNBFHbaWKXL4ej7u+eYP
+ uL8qHRdxddx/b8fiNJgfA==
 X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:X77GoVTfjyk=:SzjNSWSNGj+IhNY7Qxupr2
- BRedy4YOOse4rEqjUQzcciI9Gvqu1VCBLpXWL8LurcNbzuTE78XJn2lNB4XcGHOQD4JEPD/re
- kPj8XXUbHcm1654WNKquAzynPvMoAOpCMV241oRoYYFytsWWHtBK824Xn1Zm7T+jUs3QCu3/P
- WDBgY/X+U6pi8F0Ts1l9SF8/KfnNwC9VJZvbj36bwO3fIpFMwSN5i+itWvO8hODNP86JZiiau
- CkHmiWsLFVww1+F+EdkNq+BpDglyZBq4axoaA0dEQEimbEdVnEI00rjdI2Zbn7sIliPF5l7Eu
- 8u6usd53xwEcC4JB0A/vWiAjVHL+ypIG39M+Vxb6egT07MdL7JW+UX/exh5WG3MNsTl4x1LXc
- BLNhQ4EMwDG0fAeJschFver7IqVGhVzWkOdU6RY9lQvW2AvNL8lNyBcfgL0jDYS+3Xq784RoJ
- UEmt/GBR1shdYGt9qLI9DDUUIEzvR+saxb5vgOk/og5gSmx3HfLVbvRuoHFcI5S2sF4NU3XOh
- zCwP728RHWLcM+TNAXWTTwtDbQEWfomyZY7GZp3iJUMWNqNjQd0GNRle9JuT4QIniOHxfLDe/
- Fn8MqNe6ZZ2MAujOZVffpF8oyRadnYXGh5WabrmFez8iqNMZ22BmFdcLUWq/weHoe2c32SIoA
- zQesxk/nrpScPHRvyJZ4lCWZ0C6jC1KWkSOCGYpFVoAcrf/Nr+/vCLZ5En07AgfOendeO+9WQ
- RwEv+LGj9/XFNE7mim5ogSKUv/jGubsPMnbVaSzkt3BtW7p5FENNKCGQMOwYKWphFefsdHePc
- RYlrnQgCcIYLF7NFdvyxWgOkeN4aImk6JDsizlW+Y5SsI9w/rpVUP+INOg80odWUGcym6hRWv
- JDIY6Gz19JZv0MEFXlWA==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:Aep5dP6wfb0=:9sHBVQ/sEmlfXwqLjKj2Og
+ JIfdvAlW7ScdKsjKxUygt+dCng4Pi6meBjCWHSh4N6mNx3qgpzcaotpGN8oYJYwv62K49ufRn
+ Dtf2AjdXeoXeFnWT0XgocEVZ+pAAZKHVMKGntht/Ktid+gxfhg5JViEWX24XUVrL6KjJLus51
+ ObCPuDFT+1H3cLeyjfaL/C0mvXaWJnIKdRLmRtgqTAUJKdUo3rBc/Zuf46RsggVzdZARQZY3z
+ 5nzJzCGfmJPby03dBRoFVlghnbPLDmtAaQEdoxS9YQ+8LAJksP9Cb10+FOYAPbjBdGxmLrohd
+ AA5D3QOJoIBOv8ypIx/XlQRqumwpwuxDRhfKfEZGGD0ee2V+7oXf3uVDTuhOX/Vy2KyX5aj6A
+ abEoz4jvKpOxz040UFFGHoJTq+tncutHUvwiHJgSLmin+3zHVqic16usMbGWH02EuzsPBoEvX
+ mFqQNRbcA26uZXDixcnR2JmxNpU1ZedJi3suNQ+BAdE0qlc1SC4beHYTa3F76EqZ1jiTf0hL6
+ jA+HpcaMY99PI+Ao67QfKal2vNR6kiG/URf+rn5jef+DBcnrko6EVHdZEx4A1AX+0cuAzN9aR
+ vlkJS6z+aSHppNZiypgDw5VeqwxwlWfWz42SnSylxXG5AgUndiAboYwfjQ71ZQDvc8G6fJinc
+ UFYvWmVOhGuV3bkHACVQ5ghuRN9ERjfQBI3HKLV8LhM5ANnKkeOBLeVuS+fAZeIkPYZrYryfj
+ SPfVqBQ+WQ2uBoW1AQ3zwkGKwHXl9MPrXESDZxPDzVdOJJBDgJGdHmqlSVIYE4k29fKyGP7ST
+ qJldYNTQZGld1Y79cJpAcXjBtmYGYiIxOUUEa0wokcGtge2+HYoVZ598KDAT6FZisL7KdQJPO
+ gYT20Qys19cjvTERGTUw==
 Content-Transfer-Encoding: quoted-printable
 
-Open vSwitch support is enabled by default in NetworkManager, but only
-useful in the context of several virtualisation environments, e.g. Xen,
-KVM, OpenStack and more. Therefore, the ovs PACKAGECONFIG is now disabled =
-by
-default.
-
-The jansson dependency is only required for Open vSwitch and teamsdctl
-support in NetworkManager. As there is no libteamsdctl recipe around
-(and no teamsdctl PACKAGECONFIG), make it dependent on the ovs
-PACKAGECONFIG.
+Linux Wireless Extensions (Wext) support is enabled per default in
+NetworkManager. Having Wext enabled without enabling WiFi support, too,
+doesn't make much sense. Therefore, instead of creating a separate
+PACKAGECONFIG flag, 'wext' was added to the already existing 'wifi'
+flag.
 
 Signed-off-by: Nicolas Jeker <n.jeker@gmx.net>
 =2D--
@@ -64,29 +61,25 @@ Signed-off-by: Nicolas Jeker <n.jeker@gmx.net>
 diff --git a/meta-networking/recipes-connectivity/networkmanager/networkma=
 nager_1.28.0.bb b/meta-networking/recipes-connectivity/networkmanager/netw=
 orkmanager_1.28.0.bb
-index 1053bdd42..157a7e7b0 100644
+index 157a7e7b0..1b4fa95a2 100644
 =2D-- a/meta-networking/recipes-connectivity/networkmanager/networkmanager=
 _1.28.0.bb
 +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1=
 .28.0.bb
-@@ -15,7 +15,6 @@ DEPENDS =3D " \
-     util-linux \
-     libndp \
-     libnewt \
--    jansson \
-     curl \
- "
-
-@@ -85,6 +84,7 @@ PACKAGECONFIG[wifi] =3D "--enable-wifi=3Dyes,--enable-wi=
-fi=3Dno,,wpa-supplicant"
+@@ -80,7 +80,7 @@ PACKAGECONFIG[dnsmasq] =3D "--with-dnsmasq=3D${bindir}/d=
+nsmasq"
+ PACKAGECONFIG[nss] =3D "--with-crypto=3Dnss,,nss"
+ PACKAGECONFIG[resolvconf] =3D "--with-resolvconf=3D${base_sbindir}/resolv=
+conf,,,resolvconf"
+ PACKAGECONFIG[gnutls] =3D "--with-crypto=3Dgnutls,,gnutls"
+-PACKAGECONFIG[wifi] =3D "--enable-wifi=3Dyes,--enable-wifi=3Dno,,wpa-supp=
+licant"
++PACKAGECONFIG[wifi] =3D "--with-wext=3Dyes --enable-wifi=3Dyes,--with-wex=
+t=3Dno --enable-wifi=3Dno,,wpa-supplicant"
  PACKAGECONFIG[ifupdown] =3D "--enable-ifupdown,--disable-ifupdown"
  PACKAGECONFIG[qt4-x11-free] =3D "--enable-qt,--disable-qt,qt4-x11-free"
  PACKAGECONFIG[cloud-setup] =3D "--with-nm-cloud-setup=3Dyes,--with-nm-clo=
 ud-setup=3Dno"
-+PACKAGECONFIG[ovs] =3D "--enable-ovs,--disable-ovs,,jansson"
-
- PACKAGES =3D+ " \
-   ${PN}-nmcli ${PN}-nmcli-doc \
 =2D-
 2.30.0
 
