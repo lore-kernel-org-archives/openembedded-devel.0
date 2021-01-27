@@ -1,17 +1,17 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.71])
- by mx.groups.io with SMTP id smtpd.web10.8615.1611759292547826883
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.40])
+ by mx.groups.io with SMTP id smtpd.web12.8788.1611760130693876909
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Jan 2021 06:54:52 -0800
+ Wed, 27 Jan 2021 07:08:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=ni6bbn3Z;
- spf=pass (domain: windriver.com, ip: 40.107.237.71, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=OYQWNt94;
+ spf=pass (domain: windriver.com, ip: 40.107.243.40, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PqNk+wYJylIiHUzqoOIRoGjxScK8D/TnTDmc737N30WpAJ/zxPPHmPXiWkiLpKKZ80Ww/XRUCRWsOmaSH5fFX4W1VUrAjS0uERpoavW5zDu8yN5QtQlR9ZP9Cwxsfg+zFA5Iv2l4eLWip/hiK3OTrlJwob3Hz/P8AFTzlpkES4NifCq+QG8tdbOWyj0JWg7ANlnnpze+7w02ZR+HsbWAkbr1Kc2s32whU9nme48hbbWejGtLXRqSZZHvJAetgVqni9tGSbTGlg2Gorco70+bArkOK/c+XNQ9ZWeH8fWMKyJxhvSCTvOQI/TeYKgT7eUSZ24gw7YosJdKAQX7VBQMeg==
+ b=iIC8UiGtfbPt1Ve9SRKOz3ML/9OIB5VjjDLrvI2jZmsCijfYgTCJ4vilkPJGQto4/PRh1K4qqX/KvYWrMVjSOgcwww8z84mL+et70aQUcXEa5PFLPTIdplgTR4Wk2BeqVrPeyc5AcIgVAeGa2NHo32Puxr1F7zdZwniXZ83QSW+1/FeoZA7N4b4btkqfAytdNZY1Rix6JimvDxVwh/PuZyD1XVr72GxEsZ2Eq7AAHm4noi8CNSm+uykq1cJ9m/3sibglm04tggwpsMiwJ+iqWtC7Q5h54APRvAveodDNxq7CJsX2BZ1wc6hOLgmvJFSrrxkmsjZV51sJ2BUJH5T2wA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kHwqlxRJrysXRiKXXRKAXM86JG21VAgi6x50cECh5BQ=;
- b=WbQecvkxG60BCZYO4AvcalFq75FUGxdPo2nlrhshuLI5yoLHzo7XlsjaUVMB4qUFRBWeM2U5xB7eSdTxAfHTVljAWGjfpyJ7KE9NTqTot5YaUPi81suCsZyuUQTS1wrnFKx0ujPefHqfIm2CIXfbZl7cnpkQdS3nzJRjNbxI5/g7dWKCk28npcCadw/iVycfI4p/WETro1OtGwoXOHpd5Or5M4aNJSS5U+M81K24EAR5hHiiaUCpa1S0A971iXwkefgAQYxj20otVA1NVtGI1VQfXHyAk3FgADToRswugp2HGYoyQ4ic88nwvXm9tHnFiUrXDjAnIFiIOM8uXstr5Q==
+ bh=xa34nmeu2rt/jsGM1VBDBw3rTlPjWXTWNVXATmcY7LU=;
+ b=CUdg7embR4ZwXnZujAf/R6Rf7mxok5z68GYjxpz3HoKyjuTMzRoZbJF9fj0EKpjcshDdKxIFdgGOvU6mih6TDy8E04DrwI6pje2OhAXO0Cy6YDRjj2lrlyNkY++r2m3HRZtxb74uPYSzF9ErksBYS8Q8Y36GCevD3+l0z3yGhUxZJhPfakw1ZsclYsl7xvYYOlqGCg4fij4jCo9SxwfolwmUR/ljb6NtWb0dEIXh8EsGFYV7o8v1wXsXfoe9qQLEGEvsxJiIRggt5nCURfHm+yO4esvQ76RrX2gCB1jdu7qMh1G7voBhNRuVQAoESVnBh7ur4tJ0atgzqtL+5YgmwQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,154 +19,233 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kHwqlxRJrysXRiKXXRKAXM86JG21VAgi6x50cECh5BQ=;
- b=ni6bbn3Zc46vIlxptmicj/7KceC+olBqllyJgknCGaIIC1VYsuHGPYiUNZsHg9KPuQslOR2xbzzyLuRpP9SuEdIFYkMmIHEOqfOi6OUDD8TDNOrh20HyimErhLKX4K9kndfCUKtO0my8pHO6rhLlrBu9U2Dns6kuwTQech5Ompg=
+ bh=xa34nmeu2rt/jsGM1VBDBw3rTlPjWXTWNVXATmcY7LU=;
+ b=OYQWNt94QK+PWXgiF5p508aaSOB9PQ7vt2fX3xmFs5Wggnt9hRGLgoTYhM00r7eewa7IcMrhAOu7QCkGgyBhF5VN2/FhqKs8a1LboVIt0jiA+kMJXaPOcFBPk6mVAU1hm3EjsV2rFHZchi8sMxC9gf+QATCw64EZkHyImt6w9y4=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BYAPR11MB2680.namprd11.prod.outlook.com (2603:10b6:a02:c9::21) with
+ by BYAPR11MB3478.namprd11.prod.outlook.com (2603:10b6:a03:7b::20) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.17; Wed, 27 Jan
- 2021 14:54:51 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.12; Wed, 27 Jan
+ 2021 15:08:48 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3805.017; Wed, 27 Jan 2021
- 14:54:51 +0000
-Subject: Re: [meta-python][PATCH] packagegroup-meta-python: Add asttokens/mypy/mypy-extensions/typed-ast/send2trash
-To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>,
+ 15:08:48 +0000
+Subject: Re: [oe] [meta-python][PATCH] python3-xmlschema: Yocto recipes for validating against XSD 1.1
+To: Junjie Mao <junjie.mao@intel.com>,
  openembedded-devel@lists.openembedded.org
-References: <20210124125741.2886-1-schnitzeltony@gmail.com>
+References: <1611558046-30976-1-git-send-email-junjie.mao@intel.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <2876029c-cbe1-9c72-ab77-93ad60465303@windriver.com>
-Date: Wed, 27 Jan 2021 09:54:48 -0500
+Message-ID: <f643ab1a-318c-9989-e13c-34e64b8c2192@windriver.com>
+Date: Wed, 27 Jan 2021 10:08:44 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.0
-In-Reply-To: <20210124125741.2886-1-schnitzeltony@gmail.com>
+In-Reply-To: <1611558046-30976-1-git-send-email-junjie.mao@intel.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: MN2PR13CA0008.namprd13.prod.outlook.com
- (2603:10b6:208:160::21) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: BL0PR02CA0130.namprd02.prod.outlook.com
+ (2603:10b6:208:35::35) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by MN2PR13CA0008.namprd13.prod.outlook.com (2603:10b6:208:160::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.8 via Frontend Transport; Wed, 27 Jan 2021 14:54:50 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BL0PR02CA0130.namprd02.prod.outlook.com (2603:10b6:208:35::35) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.17 via Frontend Transport; Wed, 27 Jan 2021 15:08:47 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 2ed47571-1d5b-4c94-f740-08d8c2d37f9c
-X-MS-TrafficTypeDiagnostic: BYAPR11MB2680:
+X-MS-Office365-Filtering-Correlation-Id: a646f1b0-5d94-4f7d-b31c-08d8c2d57259
+X-MS-TrafficTypeDiagnostic: BYAPR11MB3478:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB2680821C2686F0608FF5738F9FBB9@BYAPR11MB2680.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:5516;
+	<BYAPR11MB34784D2E19E5CFB33911007D9FBB9@BYAPR11MB3478.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:4941;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	t3FgNqyu2ZZXtVAOi3+g3xzrREPoePdelZ8Zw7Q3z45RKfgq0puJ9EW5s1vIfYj6jLnTT5ZPCmPXJ++SRptYkPXAuHWzbomLl37ZP2NHGmQLgw4mH0RWugBQOxASe56HcvaRolM40ZtI4LfLOcfPMNXx4uEClwoSUuirDfR2mGr8zG/lI19gni64ewTqwH+Ak27t4SQKFkgazE678pRqZ7yzZ6VXP4SwHNRaQkOLCNai8T+PFKGyz3j8DXZgaFyhAwe6lt94w782R652mcpejZ1kukCoKK3TYN3IKNaVOmZEkg12xk8XkhNt6BMHhC6lBnD6Ig6O+1iPWFnr9/v495D/YR1HEx6g2jGXrJWUDCx3l3W4I2M/IfkvakWnTa8yVslskDXVkPrcidUy4vQwEgAJ5RTb9THLRaGRZU5GVYiy9emwPD0GIT3qm2k8kWb0CYVS564IvJ8nHCsyd9Xv3NTCGvCdo6DMPs7gc0sYYE2i/buGJtNoHa57YC2fN8F2z9q1fU7KgjApdy3bg8kuEsCwyDNyP5oN/FlGZTPAFNL9GHFjHHcpw8bFXwwyeXhTJjaWERBDTiYHFY7dly+tnV+PYbEXCS5zrd13Q0HIS4o=
+	uPPFE70SfJJnACCrG/fCheLAUNHMP61hjCpjK0DtWNAsvVnqDE+p/Uo2y8OrUCDyTnUiPe9Yfoyfkvig1fgzvaEjEgrdX65Tz/dtZN2WSu4PkzHxEfPMYspE43lWUQTl25WRFNWL1vIMNyEc2TWJ9oagQAN+CW7HwLLYczw3R1AEi+VC+KHAySn+iRhq+cC2SHpOd8TJ69PwpqwB/BJiSJlp8edlsPzWd+fEV2zG0BqUCXh0pz32hfG4bVHlc5mgKDjg04wPj9b5DnPSAhAzGA9AtT2Nfo+NsF2dOzabc6lIkcA2dYWXDFS4rtIx3EWtfa1bspyon0WRYx0MCQhLLdb3aojNwPusvfHMbenvHSPU+dsUpc4kK40K35NhDhuqRSKhJT4q0sGqlRvAY4og/3aqML0KTB/b498hb2q5PYE6G17d/qWQBdAAvKAJmZzjrQcOloeBv5BLYBgF+CezTAhwdfaghrmhKOa7WK5VLHfHiL3bn3it84ni6Qo0P9xqJG1JOekuNoPmSnhU5aaizwrUKSQuZRORew7b3pExwkI6Tq7i6j63d+awjMufoF9Aaq0IE+0+GH0Dcmsyom2USJ2CTaiiM+72M6OdaE9zPW/zMpFTOTfKNeg1eLT8LU0PQflkMVNM6cT9AAH8QVa2CpVoVKUjox4PrLLgH/dElZQFtmkE/dfDRcnRs3Djy3wb
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(396003)(346002)(136003)(39850400004)(376002)(956004)(66574015)(66556008)(478600001)(8676002)(316002)(44832011)(36756003)(66476007)(66946007)(52116002)(8936002)(53546011)(16576012)(86362001)(2906002)(31686004)(16526019)(2616005)(186003)(5660300002)(31696002)(26005)(83380400001)(6486002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(366004)(346002)(136003)(376002)(396003)(5660300002)(31686004)(6486002)(2906002)(8676002)(66476007)(33964004)(2616005)(966005)(36756003)(166002)(86362001)(8936002)(66946007)(478600001)(83380400001)(66556008)(316002)(16576012)(31696002)(6666004)(26005)(186003)(956004)(16526019)(44832011)(53546011)(52116002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?4iyrYi+WtDdLIW6Zz7XQdvtCsuLC/chylASJ15GVmBRYAItSpTpBXhlo/VJo?=
- =?us-ascii?Q?TX5BO0AMuACiQxIM64GyK2IXJDOx4ErcpQztWlRehNwjCv77Qef8qlxdhz06?=
- =?us-ascii?Q?PybfcOIYnBv3wilWFyLQKe4IupL8HeAVOsGNoZijNdyo9eJT1f8pHNhcrogT?=
- =?us-ascii?Q?Z2N6bHuDNQ3f5EWbWcTmRDHjxx0jtVZJHgoA75pkth9BscsvQOrXAc5r3VrC?=
- =?us-ascii?Q?v8U86rylQ0PgBVo6SdE5ji6y6OryDN1aH75D+/njnBZhQGAC9uSK09uzsJiW?=
- =?us-ascii?Q?bKTXDX9nO1uwQc7UokWxYlyis35AIrpCJEGrJ9GgEts/F/FLiA0Xt+OcDbL6?=
- =?us-ascii?Q?Ez864MXvg57xJEltfN3CM03Tfb73CpU+n2KReNA/n95hNqvCJxzVio5lnDeI?=
- =?us-ascii?Q?mzbDHUuyX9FjqHzf4BGJot5Kw6Obzr8JmO9VJyxiX8vdzdEiZnvZy+7zGowY?=
- =?us-ascii?Q?gubLQw+lRr7N1uhRBG5mGvX+lRWsyqxxxutp81QUytKIzrh/te0fJHwJEUhs?=
- =?us-ascii?Q?a7pEdgu5XyyKJ142BZIO1NMhfnxbOMLgX7nl+/fuu0D2Em1RuO6wai3U8/a0?=
- =?us-ascii?Q?84rBaHjl8W4G41KgDUmyjSW615SWgLFWk7J+7v2FAR3fgzrVF5EClWvtwgAz?=
- =?us-ascii?Q?gCl595jGgnOzafRGV7a5wLBs5cKwUo88RbyZso9JfUVdT1tdxRLLlPlhuTLr?=
- =?us-ascii?Q?B/tYUO4C1FItkPPvaIqj7VWe7r+IaYwfBCsCVEwMjw3sBs2weK5c2tr+LHHU?=
- =?us-ascii?Q?P4QL2hNIiUF7/w5T0sbB0IxSF837pjVESMfcjBg4X4vz8LpxShO09jijIpjV?=
- =?us-ascii?Q?cfqMMzN868nWkcLxzoJfAEyTFK4yJvID+/1UeduqcnOfMY1YF94o3W1tslEB?=
- =?us-ascii?Q?YLcarD095MAASBPfScVJEVQW5nNUssHPHL5ACiN0xbm8j5HrQMIiXLeteVNm?=
- =?us-ascii?Q?agapJo887CUI56U3i7B6AKkqk6xFRBi7rmmh4F3oh8ytG0cfgO8asJ+4sQo1?=
- =?us-ascii?Q?cECfmOB6WO6LAQfPX6t4Zcm5ednWJBMmMfI7iFmCO60TKmg+7vJb5p0YRBZA?=
- =?us-ascii?Q?6HGeQDZA?=
+	=?utf-8?B?ZkZSeXpuaHc3Z2Q0enpVNzRWRUNEaWQxaVNwOXFMN08zeVowL1NHTTFTdVZ1?=
+ =?utf-8?B?MUV3Wkc4c2JxM1ZaSG9KSWd1WGUxbXF4MzVGTFMxODlSQkZJdklJbmp5d0dH?=
+ =?utf-8?B?YmFiQklRNTVoTDFGeVI4UHhiWTBudWszVmt6cWNvb0NzYXhXVWJCUXB6L3E4?=
+ =?utf-8?B?RWpHVnhOMUFSVG44b2xNVnFZb1YvREZIOXN4cWFoakZwdUtCOTkxeGYzMkVP?=
+ =?utf-8?B?SHFxNVdsMXQweVVnZU1VTnZaOEluSWJOVXhCWjhEcGQ2Wk04TklVSzVJUkpF?=
+ =?utf-8?B?QnprVDk3bCtWR0daMVNDUkdyQ2xvMWxwdkl2QUxIVFFHYVNXTTZMcS9LSXc0?=
+ =?utf-8?B?UFpiSUk1WmZVN3ZEN3JueC9TZmk2Y3BrNk56aVF4aUttVkFDS2ZpcEM1eGhY?=
+ =?utf-8?B?S01YTkE1ZWdJNUF1bkdXdTc0QVFKb1ZrU0dFTzFHTW1IVEFsMis5dmVvNGVy?=
+ =?utf-8?B?ZFdMS1QyUEplaXBPQlZNSlYvRXh6Tjk0WlM5cEIvMWMya25sbFpRSzhsV0h4?=
+ =?utf-8?B?dkNGd0h0Slg1eHpPSld5aFVTNlVIZ2h0L2R0U0dKWldBV3VMcit2NEJQdGhv?=
+ =?utf-8?B?SEY5OWV4SWUwVERXVENmbGY0akY1OXRndjJnM0tvLzZScFVoN1JRK01oYVVi?=
+ =?utf-8?B?QWNsSWthamdTSDJzRzl3K0pIK3dNVEY2L2p6UytCNUk4SXBsYWlSaFlEL21C?=
+ =?utf-8?B?a0lRZ01TVFlyczlUbjFsSUlaTkRpckNqN2xRUjQwd0ZvUll1eTZsb3dIelNm?=
+ =?utf-8?B?eWp0YXErYmVSejhiUkR5TXcrKzJuc2hJdThSdHpKc0dNcGxZbE9oTkdpaXhr?=
+ =?utf-8?B?dDN5cXFLamdvcC9sKzNKUGEwYlAwZ0wrQnRFaGZhZjhFR3Y1R2hYYUMzUlJY?=
+ =?utf-8?B?Zzdickx1cDFJQVRLWmNWTklFVlNVd3I2QytPb3ByaFZ3bHlHZHVJM1FaTEd1?=
+ =?utf-8?B?eWJnSnE5Y24xa3VmTnFRaFA3OXN3SEl0bVF3aG9FSlg4RldLdkJZSnE2NTlu?=
+ =?utf-8?B?Y1JEM3U3elNuTmJmSzFvV0NGOW8ySW5ONnVlRUcxREhaUFFZekRiQnpEQ0pE?=
+ =?utf-8?B?UTI5N3hIcEFGK0FIWjQweXVadmdEODlSL2s2L2U5WjY0NHZBZVBCbllQR3pO?=
+ =?utf-8?B?REdSdWVKWTVmWjJSTXdhQjcrVUZUb2NPek1WTlhBQy9sYkdUeXpNN1RzcWRh?=
+ =?utf-8?B?ZW9jQ1FkWVN0S3J5SlJURGx5WmJ5ays4V0dFQW1NdHV2SFk1Uk8rdjFwSnVT?=
+ =?utf-8?B?S2JKVHF4SnZhd3NERGxJMjZuMGZkWG1UWktQQU9XQ1FmQlVMVWJrMjBKNDhL?=
+ =?utf-8?B?L0dkbUI0SnVjWWh6VHFVUzUyWldFVElSeDk4NWNzdGgzRE5Tby9rZktzbFRY?=
+ =?utf-8?B?eXg1RUpLcHQvRi9rSEZiVXo2OEdqYzJYS0N1cHVFRzlyNmZtTXhwVFF3YVVI?=
+ =?utf-8?B?eEFoZ2FtZVgrZEh1dlhGczZVVUcvR0Vmcy9tK3ZBPT0=?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2ed47571-1d5b-4c94-f740-08d8c2d37f9c
+X-MS-Exchange-CrossTenant-Network-Message-Id: a646f1b0-5d94-4f7d-b31c-08d8c2d57259
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jan 2021 14:54:50.9395
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jan 2021 15:08:48.2104
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ytXVXH15AtHPJh6/V4nNTE8PMUWY7Ngw1T0G2MbaTcJELs7RWqGcsf+FaKidG01xnX9BCvWtQk1555iOVReEmLN2+YdXpCMBfTyisq/4wNU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2680
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-CrossTenant-UserPrincipalName: oLiaZ1MeT/wtxAETDVyWURnx8pya/Ru0syADd+7CpGeJdxR4t1i9yq3SLpv4twkXLt01lADD+cDP6bRr9hr9RdhLwrSsskBkFuM5RbjfMOQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3478
+Content-Type: multipart/alternative;
+ boundary="------------66BC751EB089406A7D1959BA"
 Content-Language: en-US
 
+--------------66BC751EB089406A7D1959BA
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 2021-01-24 7:57 a.m., Andreas M=C3=BCller wrote:
-> [Please note this e-mail is from an EXTERNAL e-mail address]
->
-> This is send to be a good boy because packagegroup-meta-python looks brok=
-en to
-> me:
->
-> * Tryping to build fails with:
->    | Missing or unbuildable dependency chain was: ['packagegroup-meta-pyt=
-hon3', 'python3-cvxopt', 'lapack', 'libgfortran']
-> * We have two "RDEPENDS_packagegroup-meta-python3 =3D". If I am not mista=
-ken
->    packagegroup-meta-python3-extended and packagegroup-meta-python3-conne=
-ctivity
->    are noobs just setting some variable inside of packagegroup-meta-pytho=
-n.bb.
-> * Since packages are not sorted it is close to impossible to keep track w=
-hat's
->    missing
->
-> Please don't ask me to fix this - have no use case for it - and it is bey=
-ond
-> the scope of this series.
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+
+On 2021-01-25 2:00 a.m., Junjie Mao wrote:
+> Signed-off-by: Junjie Mao <junjie.mao@intel.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../recipes-core/packagegroups/packagegroup-meta-python.bb   | 5 +++++
->   1 file changed, 5 insertions(+)
+>   .../python/python3-elementpath_2.1.2.bb              | 12 ++++++++++++
+>   .../python/python3-xmlschema_1.4.1.bb                | 20 ++++++++++++++++++++
+>   2 files changed, 32 insertions(+)
+>   create mode 100644 meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb
+>   create mode 100644 meta-python/recipes-devtools/python/python3-xmlschema_1.4.1.bb
 >
-> diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-pyt=
-hon.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-> index bf46896f1..0b00611c3 100644
-> --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-> +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-> @@ -48,6 +48,7 @@ RDEPENDS_packagegroup-meta-python3 =3D "\
->       python3-argh \
->       python3-ply \
->       python3-astroid \
-> +    python3-asttokens \
->       python3-ndg-httpsclient \
->       python3-arpeggio \
->       python3-astor \
-> @@ -184,6 +185,8 @@ RDEPENDS_packagegroup-meta-python3 =3D "\
->       python3-prctl \
->       python3-pyatspi \
->       python3-multidict \
-> +    python3-mypy \
-> +    python3-mypy-extensions \
->       python3-netaddr \
->       python3-parse \
->       python3-oauthlib \
-> @@ -397,6 +400,7 @@ RDEPENDS_packagegroup-meta-python3 =3D "\
->       python3-trafaret-config \
->       python3-twisted \
->       python3-txaio \
-> +    python3-typed-ast \
->       python3-typeguard \
->       python3-pytest-timeout \
->       python3-ujson \
-> @@ -428,6 +432,7 @@ RDEPENDS_packagegroup-meta-python3-extended =3D "\
->       python3-pyparted \
->       python3-pywbem \
->       python3-pywbemtools \
-> +    python3-send2trash \
->   "
+> diff --git a/meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb b/meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb
+> new file mode 100644
+> index 0000000..f47f152
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb
+> @@ -0,0 +1,12 @@
+> +DESCRIPTION = "Provide XPath 1.0 and 2.0 selectors for Python's ElementTree XML data structures, both for the standard ElementTree library and for the lxml.etree library."
+> +HOMEPAGE = "https://github.com/sissaschool/elementpath"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=5dbb7fb7d72da3921202dd7b995d3ecf"
+> +
+> +SRC_URI[md5sum] = "887f60e9c4fb9b0804a38372b2798101"
+> +SRC_URI[sha256sum] = "23e1fed8d196d9a6cc4d220ef11fbe7eb8cff3a27848621c447e9d96134b2085"
+> +
+> +PYPI_PACKAGE = "elementpath"
+> +inherit pypi setuptools3
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> diff --git a/meta-python/recipes-devtools/python/python3-xmlschema_1.4.1.bb b/meta-python/recipes-devtools/python/python3-xmlschema_1.4.1.bb
+> new file mode 100644
+> index 0000000..c609931
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-xmlschema_1.4.1.bb
+> @@ -0,0 +1,20 @@
+> +SUMMARY = "The xmlschema library is an implementation of XML Schema for Python (supports Python 3.6+)."
+> +HOMEPAGE = "https://github.com/sissaschool/xmlschema"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=47489cb18c469474afeb259ed1d4832f"
+> +
+> +SRC_URI[md5sum] = "f4c46f8c4415a0ca31dc2f623b668664"
+> +SRC_URI[sha256sum] = "ade693114ff2e4a9ed5a2371ce29ae888f689bc58e326e5796f8a7dc8954dd4a"
+> +
+> +PYPI_PACKAGE = "xmlschema"
+> +inherit pypi setuptools3
+> +
+> +DEPENDS += "\
+> +    ${PYTHON_PN}-elementpath \
+> +"
+> +
+> +RDEPENDS_${PN} += "\
+> +    ${PYTHON_PN}-elementpath \
+> +"
+> +
+> +BBCLASSEXTEND = "native nativesdk"
 >
->   RDEPENDS_packagegroup-meta-python3-connectivity =3D "\
-> --
-> 2.26.2
+> 
 >
+
+--------------66BC751EB089406A7D1959BA
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 2021-01-25 2:00 a.m., Junjie Mao
+      wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:1611558046-30976-1-git-send-email-junjie.mao@intel.com">
+      <pre class="moz-quote-pre" wrap="">Signed-off-by: Junjie Mao <a class="moz-txt-link-rfc2396E" href="mailto:junjie.mao@intel.com">&lt;junjie.mao@intel.com&gt;</a></pre>
+    </blockquote>
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
+    <blockquote type="cite" cite="mid:1611558046-30976-1-git-send-email-junjie.mao@intel.com">
+      <pre class="moz-quote-pre" wrap="">
+---
+ .../python/python3-elementpath_2.1.2.bb              | 12 ++++++++++++
+ .../python/python3-xmlschema_1.4.1.bb                | 20 ++++++++++++++++++++
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-xmlschema_1.4.1.bb
+
+diff --git a/meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb b/meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb
+new file mode 100644
+index 0000000..f47f152
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb
+@@ -0,0 +1,12 @@
++DESCRIPTION = &quot;Provide XPath 1.0 and 2.0 selectors for Python's ElementTree XML data structures, both for the standard ElementTree library and for the lxml.etree library.&quot;
++HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/sissaschool/elementpath">&quot;https://github.com/sissaschool/elementpath&quot;</a>
++LICENSE = &quot;MIT&quot;
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=5dbb7fb7d72da3921202dd7b995d3ecf">&quot;file://LICENSE;md5=5dbb7fb7d72da3921202dd7b995d3ecf&quot;</a>
++
++SRC_URI[md5sum] = &quot;887f60e9c4fb9b0804a38372b2798101&quot;
++SRC_URI[sha256sum] = &quot;23e1fed8d196d9a6cc4d220ef11fbe7eb8cff3a27848621c447e9d96134b2085&quot;
++
++PYPI_PACKAGE = &quot;elementpath&quot;
++inherit pypi setuptools3
++
++BBCLASSEXTEND = &quot;native nativesdk&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-xmlschema_1.4.1.bb b/meta-python/recipes-devtools/python/python3-xmlschema_1.4.1.bb
+new file mode 100644
+index 0000000..c609931
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-xmlschema_1.4.1.bb
+@@ -0,0 +1,20 @@
++SUMMARY = &quot;The xmlschema library is an implementation of XML Schema for Python (supports Python 3.6+).&quot;
++HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/sissaschool/xmlschema">&quot;https://github.com/sissaschool/xmlschema&quot;</a>
++LICENSE = &quot;MIT&quot;
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=47489cb18c469474afeb259ed1d4832f">&quot;file://LICENSE;md5=47489cb18c469474afeb259ed1d4832f&quot;</a>
++
++SRC_URI[md5sum] = &quot;f4c46f8c4415a0ca31dc2f623b668664&quot;
++SRC_URI[sha256sum] = &quot;ade693114ff2e4a9ed5a2371ce29ae888f689bc58e326e5796f8a7dc8954dd4a&quot;
++
++PYPI_PACKAGE = &quot;xmlschema&quot;
++inherit pypi setuptools3
++
++DEPENDS += &quot;\
++    ${PYTHON_PN}-elementpath \
++&quot;
++
++RDEPENDS_${PN} += &quot;\
++    ${PYTHON_PN}-elementpath \
++&quot;
++
++BBCLASSEXTEND = &quot;native nativesdk&quot;
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+
+
+</pre>
+    </blockquote>
+  </body>
+</html>
+
+--------------66BC751EB089406A7D1959BA--
