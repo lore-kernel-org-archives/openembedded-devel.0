@@ -1,74 +1,80 @@
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.web09.12807.1611774370205355943
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web08.12797.1611774450154792735
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Jan 2021 11:06:10 -0800
+ Wed, 27 Jan 2021 11:07:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=LhLfQIwC;
- spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id p15so1817822pjv.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Jan 2021 11:06:10 -0800 (PST)
+ dkim=pass header.i=@sakoman-com.20150623.gappssmtp.com header.s=20150623 header.b=DotwUYSM;
+ spf=softfail (domain: sakoman.com, ip: 209.85.214.177, mailfrom: steve@sakoman.com)
+Received: by mail-pl1-f177.google.com with SMTP id b17so1572594plz.6
+        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Jan 2021 11:07:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
+        d=sakoman-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=4MVItmX2j/0LV1UqieUwjbPbu7wPT1MZoVnyfzvnStE=;
-        b=LhLfQIwCiwYUsq04od5JpTDGRYidPKUjKom+8h0QtdYqCni3C4dxIgWgF6uY5AmWP8
-         yAe8VUx09sNzsWnPsRF4YED9UrIMxRAwM2eYFaRzfCb7FFiFwzoITw/Z4WYbQ4/HC3B+
-         1KO12JsxIfTI1iEeVZDVys1EUCqJtcaJtAeUmOkVA5TGWbswUFX7uPbCyghbXcN8sleG
-         tNJxj8FhqezGtsuVmtWUkqLhqrQU1Tu8Ok8kWNcANnvKsTP8VcSvrzG77O5K8biDTYkP
-         rCG5xSNH5HezC9vSu6/XKNlG9ZvKN9H2jRuEbdsAN25yugc0uyEIaGedUbpUCx62lLLu
-         wTpA==
+        bh=F3boKu3CAr7uHF1UFV7HuP/l33fGcxJJaot9MyAClZ4=;
+        b=DotwUYSMI4zURw/kkbMTMNgjROaENcCQXchA6LXGRqpsOct+Ih4oSt9lZPRS8KWDfZ
+         ryraO9ugkPu7/2w/Shi3b9htTgJG68CttqbTWerubpkkO3qiQ4N/Ad20jfKKBCAXRwl5
+         Sjyi6SevjS2SSHsCBwMbm04k9LbLQ8Mp8/6TJY6F/0xlx4bMKULkzS/pjUnenxEMhYmM
+         B9XurWm3pgLrjS0Qp4AK+LlTMgNvy/mnQs1SLMvxLIH22Y0Hdw0sCPVjGTnQF8PXIq1z
+         +DQ0+PQKNXAVBBOMdpp9DQrA3Fw24Oa4MvYVUFoMCqiL1ux1Z4SW5uTdm2xi6IU2Z0Py
+         FMXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=4MVItmX2j/0LV1UqieUwjbPbu7wPT1MZoVnyfzvnStE=;
-        b=P2GNtYXzCmMEvbwv7BBWckKvYWbMEH9/ww2LfXyQxZ5BlRFUIOCe+/2aDe4vpuAqMq
-         eifYaP0nuGREV83ZCGsTz9UOIWl2JshTpkrHKmoWPzwur0LqGm8ou7yiwWN2KfreD5QF
-         6pJrVClqHi752m+T1IxHaODxGQQvVBR+9n1Id0fgMYme9oT5zUasvuT/QAa7g5MdU0EI
-         liUv1praOPgfaf8fnpO1KR8kLnx64tCbJX/i4QIO/7M4akzznJxAwui5SM0KkdpDe61+
-         hBi3bRs2A7HB6DYR7yThl2ExUYsMbt/kDyylVvDtdpm2JgEkJCE74mzxshE0ndAhNWS6
-         AdAg==
-X-Gm-Message-State: AOAM53032mJEKjfE6UjxIE6x09cSQbslE2oWq/32gPqYKLry8g1N3tix
-	faVoF5eh86lWh0P4gvEV7qg6hODoKQ+ZeA==
-X-Google-Smtp-Source: ABdhPJxG/vckHeZu/Lp54UffcgQW1NQnPwDe6DLNTQqqgYmVEi/5QrF5c3cIV9STzQFOqrnd/MVwuw==
-X-Received: by 2002:a17:90b:490c:: with SMTP id kr12mr7162179pjb.227.1611774369552;
-        Wed, 27 Jan 2021 11:06:09 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::9296])
-        by smtp.gmail.com with ESMTPSA id p64sm3060739pfb.201.2021.01.27.11.06.08
+        bh=F3boKu3CAr7uHF1UFV7HuP/l33fGcxJJaot9MyAClZ4=;
+        b=mDFcnlkZZ4+p+OHg1zRXNbi4FfMnD42Tqsk1seuOntDMemIiQtqliB+mo8SFz12zof
+         0gr0nVid7WURFxxsrKmY3qHvsCCNc6esSa/wo1m4/HBqIjOnimCg4HCiTyFFfHMrSqL/
+         jgs16RDyAlObKRDl3gszTtS3fDHw5Yhz6MBr/Oquzp1ZvBJiyfUrRWO9ngY9oZaY4e37
+         +lW1PihthwvO0ivwO2IBONjacaZgEYpC0dvRQ75evRkR7kotQ5JYvOiN9Ula4VJqWHFy
+         5SN281LMFlFccfGsMrfMipMUNyPq7ZpAoyNzf+Opeg7xUuGZsPPdzfxq6z+65Q72jviv
+         ZKqw==
+X-Gm-Message-State: AOAM531bS1D1fXItJesKKXnp3b2yrOGrc1G3XAnCT6d/ZCMRrY7DTlI7
+	GYX7yXxjFEJec78fogH6j1ZQGCtqagDmR5HR9Sw=
+X-Google-Smtp-Source: ABdhPJxnSjxqp0V59R5e3VVp/9/6Wh8dNOeWJ8xuP1DjQj4FplsJW+YBjdAqij6yAhfJJWt1Tf9ZRQ==
+X-Received: by 2002:a17:90a:7e82:: with SMTP id j2mr7100691pjl.217.1611774449097;
+        Wed, 27 Jan 2021 11:07:29 -0800 (PST)
+Return-Path: <steve@sakoman.com>
+Received: from hexa.router0800d9.com (rrcs-66-91-142-162.west.biz.rr.com. [66.91.142.162])
+        by smtp.gmail.com with ESMTPSA id gg6sm6095055pjb.2.2021.01.27.11.07.27
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 27 Jan 2021 11:06:08 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
+        Wed, 27 Jan 2021 11:07:28 -0800 (PST)
+From: "Steve Sakoman" <steve@sakoman.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] dfu-util-native: Adjust Inherit order
-Date: Wed, 27 Jan 2021 11:06:07 -0800
-Message-Id: <20210127190607.344240-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.0
+Subject: [oe][meta-oe][dunfell 0/3] Update sip3 to 4.19.23
+Date: Wed, 27 Jan 2021 09:07:09 -1000
+Message-Id: <20210127190712.818807-1-steve@sakoman.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Fixes
-dfu-util-native_0.10.bb: QA Issue: dfu-util-native: native/nativesdk class is not inherited last, this can result in unexpected behaviour.  [native-last]
+Builds of the dunfell branch of meta-qt5 fail in the python3-pyqt5 recipe.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-support/dfu-util/dfu-util-native_0.10.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The fix for this issue is blocked on the need for sip 4.19.23:
 
-diff --git a/meta-oe/recipes-support/dfu-util/dfu-util-native_0.10.bb b/meta-oe/recipes-support/dfu-util/dfu-util-native_0.10.bb
-index 4305e3b408..4641b0181a 100644
---- a/meta-oe/recipes-support/dfu-util/dfu-util-native_0.10.bb
-+++ b/meta-oe/recipes-support/dfu-util/dfu-util-native_0.10.bb
-@@ -1,6 +1,6 @@
- require dfu-util_${PV}.bb
- 
--inherit native deploy
-+inherit deploy native
- 
- DEPENDS = "libusb1-native"
- 
+https://github.com/meta-qt5/meta-qt5/issues/376
+
+Also, meta-qt5 gatesgarth identifies dunfell oe-core as a supported
+layer.  This type of build also fails due to the need for sip 4.19.23
+
+This patch series cherry-picked from master without change should fix both issues
+
+Leon Anavi (2):
+  sip3: Consolidate in a single file
+  sip3: Upgrade 4.19.19 -> 4.19.23
+
+S. Lockwood-Childs (1):
+  sip3: simplify recipe
+
+ meta-oe/recipes-devtools/sip/sip.inc         | 36 ------------------
+ meta-oe/recipes-devtools/sip/sip3_4.19.19.bb | 11 ------
+ meta-oe/recipes-devtools/sip/sip3_4.19.23.bb | 40 ++++++++++++++++++++
+ 3 files changed, 40 insertions(+), 47 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/sip/sip.inc
+ delete mode 100644 meta-oe/recipes-devtools/sip/sip3_4.19.19.bb
+ create mode 100644 meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
+
 -- 
-2.30.0
+2.25.1
 
