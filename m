@@ -1,88 +1,74 @@
-Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com [209.85.219.51])
- by mx.groups.io with SMTP id smtpd.web09.12706.1611773987918265468
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
+ by mx.groups.io with SMTP id smtpd.web09.12807.1611774370205355943
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Jan 2021 10:59:48 -0800
+ Wed, 27 Jan 2021 11:06:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Kj+HNhNJ;
- spf=pass (domain: gmail.com, ip: 209.85.219.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f51.google.com with SMTP id n3so1571574qvf.11
-        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Jan 2021 10:59:47 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=LhLfQIwC;
+ spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f45.google.com with SMTP id p15so1817822pjv.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Jan 2021 11:06:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=dfbjtCRy93hTWTGh51qIA3D7Ae5Xs/Afol1CHZ46grk=;
-        b=Kj+HNhNJkWzmtAhR7LzBgPkqCi5bMmv+8XE+mHdV3DPMjrRQMG44pLuZ9XoyMLVIOv
-         9cKiGgmaouWwslJzkAKHaRrnPg8RlcGJE/ry5+6q30gtPAV/VqrZHx7kzdKTVny05tje
-         dxoCJ+ts1qTYOME+qSfB9/NOTiWb+dU3bRa7SnzVW8gZXqafLkc3VvVIzjctwJnzWS+9
-         f5NrnQ5YGIc9bfFS2lMiC9biJA4sBU5LipNiG0VA9I84Gu11h8JSPQ5vooCJyl7LSjIp
-         AXf8aps6+0p5jTO5oT51KDR96ZMWFUhrqmW6TLsF/ntqIvsURRHOnXc5EsSRc+G7w/C8
-         7Asg==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=4MVItmX2j/0LV1UqieUwjbPbu7wPT1MZoVnyfzvnStE=;
+        b=LhLfQIwCiwYUsq04od5JpTDGRYidPKUjKom+8h0QtdYqCni3C4dxIgWgF6uY5AmWP8
+         yAe8VUx09sNzsWnPsRF4YED9UrIMxRAwM2eYFaRzfCb7FFiFwzoITw/Z4WYbQ4/HC3B+
+         1KO12JsxIfTI1iEeVZDVys1EUCqJtcaJtAeUmOkVA5TGWbswUFX7uPbCyghbXcN8sleG
+         tNJxj8FhqezGtsuVmtWUkqLhqrQU1Tu8Ok8kWNcANnvKsTP8VcSvrzG77O5K8biDTYkP
+         rCG5xSNH5HezC9vSu6/XKNlG9ZvKN9H2jRuEbdsAN25yugc0uyEIaGedUbpUCx62lLLu
+         wTpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=dfbjtCRy93hTWTGh51qIA3D7Ae5Xs/Afol1CHZ46grk=;
-        b=VmDhrpYLUyx3G819PoR/XnmBL6RLkYfYKsLuz6PkLoOTvFJYqMJh2K5qrD49eE7el/
-         reAiiZ3TP5LzK1O724BlvhbXD2yai/8H1dbV9y6c8BkJbM8uX/025vBiuXhsgnNawTPR
-         HBjod97Xc+vRZ2Cw5wVOU1vaABgZ8sG3WX5bKZ3gfvfMTIDFbMHHDdguZUOgWXsQWg29
-         +ApKs4Lmk99vPYbM9SNutPs5P085jNiyV/SEJlHyOWphOGaG5sGjwEkjwftJ4zDTxQYD
-         pZHoch+/O3Z1wAszWBOtop/Trbsavp7r0PYFaOSd8TJj3hUQIekmL+0eZON5nh4bdmEI
-         l6rQ==
-X-Gm-Message-State: AOAM532bMtxtZhkH8fpH2lugad3N+wlr4javnh4ab91IznN+awjoTYfo
-	stkKzGMBQkyb8nx3ogH3Hlq/br8IPJnDLJiWMgE=
-X-Google-Smtp-Source: ABdhPJyNi0TLLLFMNo3qPxPV0va81ITcjvqxl5sFAFnkes0niRUgoAeaxAh9ebiRI6KCtVhWwo9l9ymPWuW3xafMvpY=
-X-Received: by 2002:a0c:c688:: with SMTP id d8mr12109625qvj.8.1611773986987;
- Wed, 27 Jan 2021 10:59:46 -0800 (PST)
-MIME-Version: 1.0
-References: <20210127155538.12229-1-leon.anavi@konsulko.com> <20210127155538.12229-2-leon.anavi@konsulko.com>
-In-Reply-To: <20210127155538.12229-2-leon.anavi@konsulko.com>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=4MVItmX2j/0LV1UqieUwjbPbu7wPT1MZoVnyfzvnStE=;
+        b=P2GNtYXzCmMEvbwv7BBWckKvYWbMEH9/ww2LfXyQxZ5BlRFUIOCe+/2aDe4vpuAqMq
+         eifYaP0nuGREV83ZCGsTz9UOIWl2JshTpkrHKmoWPzwur0LqGm8ou7yiwWN2KfreD5QF
+         6pJrVClqHi752m+T1IxHaODxGQQvVBR+9n1Id0fgMYme9oT5zUasvuT/QAa7g5MdU0EI
+         liUv1praOPgfaf8fnpO1KR8kLnx64tCbJX/i4QIO/7M4akzznJxAwui5SM0KkdpDe61+
+         hBi3bRs2A7HB6DYR7yThl2ExUYsMbt/kDyylVvDtdpm2JgEkJCE74mzxshE0ndAhNWS6
+         AdAg==
+X-Gm-Message-State: AOAM53032mJEKjfE6UjxIE6x09cSQbslE2oWq/32gPqYKLry8g1N3tix
+	faVoF5eh86lWh0P4gvEV7qg6hODoKQ+ZeA==
+X-Google-Smtp-Source: ABdhPJxG/vckHeZu/Lp54UffcgQW1NQnPwDe6DLNTQqqgYmVEi/5QrF5c3cIV9STzQFOqrnd/MVwuw==
+X-Received: by 2002:a17:90b:490c:: with SMTP id kr12mr7162179pjb.227.1611774369552;
+        Wed, 27 Jan 2021 11:06:09 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::9296])
+        by smtp.gmail.com with ESMTPSA id p64sm3060739pfb.201.2021.01.27.11.06.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 27 Jan 2021 11:06:08 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Wed, 27 Jan 2021 10:59:21 -0800
-Message-ID: <CAMKF1sp6oJT88VeGJL69aPe+nUNCjyGQ0m169sje2Q0q+J=40g@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 2/5] python3-portion: Add recipe
-To: Leon Anavi <leon.anavi@konsulko.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] dfu-util-native: Adjust Inherit order
+Date: Wed, 27 Jan 2021 11:06:07 -0800
+Message-Id: <20210127190607.344240-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.30.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-On Wed, Jan 27, 2021 at 7:55 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
->
-> Portion is a Python library providing data structure and
-> operations for intervals. It replaces python-intervals.
-> Release 2.1.4 brings:
->
-> - Much faster get, copy and | operations for IntervalDict.
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> ---
->  .../recipes-devtools/python/python3-portion_2.1.4.bb | 12 ++++++++++++
+Fixes
+dfu-util-native_0.10.bb: QA Issue: dfu-util-native: native/nativesdk class is not inherited last, this can result in unexpected behaviour.  [native-last]
 
-this needs to go into packagegroup-meta-python as well.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-support/dfu-util/dfu-util-native_0.10.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
->  1 file changed, 12 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python3-portion_2.1.4.bb
->
-> diff --git a/meta-python/recipes-devtools/python/python3-portion_2.1.4.bb b/meta-python/recipes-devtools/python/python3-portion_2.1.4.bb
-> new file mode 100644
-> index 000000000..d08d3e725
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-portion_2.1.4.bb
-> @@ -0,0 +1,12 @@
-> +DESCRIPTION = "Python data structure and operations for intervals"
-> +HOMEPAGE = "https://github.com/AlexandreDecan/portion"
-> +SECTION = "devel/python"
-> +
-> +LICENSE = "LGPLv3"
-> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=05f1e16a8e59ce3e9a979e881816c2ab"
-> +
-> +inherit pypi setuptools3
-> +
-> +SRC_URI[sha256sum] = "58b2792e6e9837a2d55a97d459b940c90fb08b5fba774f524e9359727c80e7b4"
-> +
-> +BBCLASSEXTEND = "native"
-> --
-> 2.17.1
->
->
-> 
->
+diff --git a/meta-oe/recipes-support/dfu-util/dfu-util-native_0.10.bb b/meta-oe/recipes-support/dfu-util/dfu-util-native_0.10.bb
+index 4305e3b408..4641b0181a 100644
+--- a/meta-oe/recipes-support/dfu-util/dfu-util-native_0.10.bb
++++ b/meta-oe/recipes-support/dfu-util/dfu-util-native_0.10.bb
+@@ -1,6 +1,6 @@
+ require dfu-util_${PV}.bb
+ 
+-inherit native deploy
++inherit deploy native
+ 
+ DEPENDS = "libusb1-native"
+ 
+-- 
+2.30.0
+
