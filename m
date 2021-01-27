@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.9688.1611762950564412106
+ by mx.groups.io with SMTP id smtpd.web11.9566.1611762951244362740
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Jan 2021 07:55:50 -0800
+ Wed, 27 Jan 2021 07:55:51 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=49388 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1l4nAa-0001GX-Vc; Wed, 27 Jan 2021 17:55:50 +0200
+	id 1l4nAc-0001GX-Ap; Wed, 27 Jan 2021 17:55:51 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/5] python3-pako: Upgrade 0.2.3 -> 0.3.0
-Date: Wed, 27 Jan 2021 17:55:36 +0200
-Message-Id: <20210127155538.12229-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/5] python3-typed-ast: Upgrade 1.4.1 -> 1.4.2
+Date: Wed, 27 Jan 2021 17:55:37 +0200
+Message-Id: <20210127155538.12229-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210127155538.12229-1-leon.anavi@konsulko.com>
 References: <20210127155538.12229-1-leon.anavi@konsulko.com>
@@ -30,39 +30,34 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.3.0 which adds support for the following
-package managers:
+Upgrade to release 1.4.2:
 
-- DNF (as used by RPM based distributions)
-- RPM-ostree (as used by Fedora CoreOS and RHEL CoreOS)
-- Pacman (as used by Arch based distributions)
-- Yum (as used by some RPM based distributions)
-- Zypper (as used by OpenSUSE based distributions)
-- APK (as used by Alpine Linux and postmarketOS)
+- Fix linker error in debug build
+- Fix cross compile by adjusting includes
+- ast27: prefix exported symbols
+- Add 3.9 to supported versions
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-pako_0.2.3.bb => python3-pako_0.3.0.bb}    | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pako_0.2.3.bb => python3-pako_0.3.0.bb} (65%)
+ .../{python3-typed-ast_1.4.1.bb => python3-typed-ast_1.4.2.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-typed-ast_1.4.1.bb => python3-typed-ast_1.4.2.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pako_0.2.3.bb b/meta-python/recipes-devtools/python/python3-pako_0.3.0.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-pako_0.2.3.bb
-rename to meta-python/recipes-devtools/python/python3-pako_0.3.0.bb
-index 21c48fca6..3eacd0bdd 100644
---- a/meta-python/recipes-devtools/python/python3-pako_0.2.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pako_0.3.0.bb
-@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/MycroftAI/pako"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
- 
--SRC_URI[md5sum] = "8eb7077075091c50e4b8a9f939607277"
--SRC_URI[sha256sum] = "6be55fd8c5a2a6f02974f37438c1c47a3d9e764ce81c9d0a1a8c9a1815a59778"
-+SRC_URI[sha256sum] = "eabd1c121d6701069d1a10132f197ee2b5f4e75a3d68a93b07f69214ab0ff9c7"
+diff --git a/meta-python/recipes-devtools/python/python3-typed-ast_1.4.1.bb b/meta-python/recipes-devtools/python/python3-typed-ast_1.4.2.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-typed-ast_1.4.1.bb
+rename to meta-python/recipes-devtools/python/python3-typed-ast_1.4.2.bb
+index 2cc9f6c43..09f387ca6 100644
+--- a/meta-python/recipes-devtools/python/python3-typed-ast_1.4.1.bb
++++ b/meta-python/recipes-devtools/python/python3-typed-ast_1.4.2.bb
+@@ -7,6 +7,6 @@ PYPI_PACKAGE = "typed_ast"
  
  inherit pypi setuptools3
  
+-SRC_URI[sha256sum] = "8c8aaad94455178e3187ab22c8b01a3837f8ee50e09cf31f1ba129eb293ec30b"
++SRC_URI[sha256sum] = "9fc0b3cb5d1720e7141d103cf4819aea239f7d136acf9ee4a69b047b7986175a"
+ 
+ BBCLASSEXTEND = "native"
 -- 
 2.17.1
 
