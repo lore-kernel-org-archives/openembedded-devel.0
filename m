@@ -1,89 +1,94 @@
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
- by mx.groups.io with SMTP id smtpd.web08.11700.1611770542855814893
+Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com [209.85.219.44])
+ by mx.groups.io with SMTP id smtpd.web10.11939.1611771573134271821
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Jan 2021 10:02:22 -0800
+ Wed, 27 Jan 2021 10:19:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=LaKcMLwp;
- spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f176.google.com with SMTP id j2so452891pgl.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Jan 2021 10:02:22 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=PGpDrYoX;
+ spf=pass (domain: gmail.com, ip: 209.85.219.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f44.google.com with SMTP id l11so1537366qvt.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Jan 2021 10:19:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=a0VdV7WDbGPW/digpmT4qZnOnzO4OqhjLA8n7EPP2EM=;
-        b=LaKcMLwpfL2u1SxSifZCdhI7VJuG336a/trzc8eoNnaPlQhgC4MMl6YZyAk3F7mOfy
-         A5dYRUbKMzugfszcgoG/17hbukBj6nuGnw9CxZf7DksdPsIMeJuqe3aBNHZsDGRiomVD
-         X5gTvANWM9EdEDyMMhndveVzdigO7XzuO3t5hUcOidCBAo0e6TzWjpZZ2LxkZhdnlRu9
-         vKi1Ymdb7E2PfLOvRB+TEHQp/x4Y0sdWpzEPnMtz24BeHnIfwohBiawgKWxqwxrLADgh
-         w/9Ju2rzHnf2lqVXfDAzZ2WTwMHyPjysIaJHfYR5TT5mfLzbx1icOVAn+aQ6gS1Ocmcb
-         bivA==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=OVgTyleQcpIr2PctztxAqgDuJO3HLFri4fRIGMamMww=;
+        b=PGpDrYoX/cq7qnwR3A0oIkJ2/DhKge25erQN0QtOzHZiYXCSJMcKM2oQ1RWySroCeu
+         OtphLIgUu24gciQwM3FAu9LExQcK0w9Y6giXhW/RWP2TUR7Di+KQlmnZijuL+vPCJmKc
+         pqOT7jsGXcuN2E68Cf8oJ75fs8tHGG9hm8XG4xw1JaFqR1M2EuC2VeKAuAGcjm9mbr7j
+         gGf6zd57bvOX8wdUcdiX+/iVurPnZ617z+rF2O89GW8n9ocTxLmzHDpJSAcUF9uuKBYj
+         ueYPLHDy21UKuoGGb++OCRxYbvT0Le+xSJi3F9e76HzrTkKYzY+Cb2Vuc8tS/aWz7K/k
+         Ln5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=a0VdV7WDbGPW/digpmT4qZnOnzO4OqhjLA8n7EPP2EM=;
-        b=a7vwJB7mtnb+xbzLlCiM0MQrFYw+cE7Y5wCTHBIeInoYSZqkdrmFhZvdSuuUIx5uRz
-         QChLZFO1pu7gyJauZfWdDWKPR3xwGrzpIcFUhlzl9y9sNmF/3pwAM/yCqJ2awcyqr/mB
-         jL7IPNIat1yil7lviOGMXgRfS8Q2DXko0dT4rd+AEVREC4DTs24WU4S3+JrmGwuRMylz
-         U9IaRQaVMOOE18XvjOZv4oAIFpIn/0OTtdF83+J02E8pBtZrRrIjm2h9nmTvSLKHhwLM
-         ojHq23UBo4JQpX9x1ttAiIXktnYN5FAPCSypKQXOgcazbTHqhZZQnqVtArXbzWhW+t+J
-         WsnA==
-X-Gm-Message-State: AOAM533BCN3JRgxSOGi5KGkSXLEWVaTEb5/vBbCm+g0+MhZFjrnNJ3he
-	iYcJFoWin+ivY9c4xOMuPf3VfwpDjxkHNQ==
-X-Google-Smtp-Source: ABdhPJz5PKGx5lfXUf5W0rRgGBvr/40xOrXxoDBpZ5VMiuLIpqXbt9MT4gbFSx4tGTARMOlySDBiAQ==
-X-Received: by 2002:a62:ea17:0:b029:1ad:4788:7815 with SMTP id t23-20020a62ea170000b02901ad47887815mr12000381pfh.1.1611770541973;
-        Wed, 27 Jan 2021 10:02:21 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::9296])
-        by smtp.gmail.com with ESMTPSA id 197sm3031321pgg.43.2021.01.27.10.02.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 27 Jan 2021 10:02:21 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] autoconf-2.13-native,xserver-xorg-cvt-native: Move inheriting native to the end
-Date: Wed, 27 Jan 2021 10:02:19 -0800
-Message-Id: <20210127180219.758901-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=OVgTyleQcpIr2PctztxAqgDuJO3HLFri4fRIGMamMww=;
+        b=AsJ32injDRJRQo+9ZwQbtyNd/ca1xd6BbMJNGGE67BkHcdZ5KppVgQ27F3bSUQAgJV
+         H2FFKcYLA4uBoU/0oyEzPISF3RjZ2Cc1fkyifBS+yAd6OisTpeeixwzV7jJ28npGiW/p
+         eXGItSP+5xyFy1O6tjQhGDClyeVQfnMampvW6H4CqA74dzmt2mYVL/EHFG02Hx1yMRRB
+         GuOiTmtI7Zu0/ezW9c9BhNGvM4u+0nPH12zcs11xR5InyXBRyc/Cp2QNdiur+S5m2fqJ
+         xIq9ZsT0a/S9Vqi5VCYQKzTTEgxvUSRJ89SBW75763dnCATgp0qY9I0vIdo9upIOIMSh
+         PMEA==
+X-Gm-Message-State: AOAM532RLYsKcUlE04JVmif0qySTONb7sdxQCfLXv3qJp63MQNkkGuy4
+	HsXXrWfeySFwFOFeWZ5Ng/xsNLYpmKSPg0gg1g0=
+X-Google-Smtp-Source: ABdhPJxRjiQlZmgOh2iEa6gN47RxMc1csLRcjBQcGqp93Yc1u7ZSRIld6LHzjojeEuAXa9CG50Odj+3ofbYYvVqVr/I=
+X-Received: by 2002:a0c:c688:: with SMTP id d8mr11937334qvj.8.1611771572205;
+ Wed, 27 Jan 2021 10:19:32 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210126093122.716978-1-n.jeker@gmx.net>
+In-Reply-To: <20210126093122.716978-1-n.jeker@gmx.net>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Wed, 27 Jan 2021 10:19:06 -0800
+Message-ID: <CAMKF1soWp0Voqn3vTZQmnvhLGz=Bmeh+3_xcQDxcCFm9kvNjgQ@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH v2] networkmanager: Add PACKAGECONFIG for ovs
+To: Nicolas Jeker <n.jeker@gmx.net>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Should fix
-QA Issue: xserver-xorg-cvt-native: native/nativesdk class is not inherited last, this can result in unexpected behaviour.  [native-last]
+it seems that network-manager-applet needs jannson, see this failure
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../recipes-devtools/autoconf-2.13/autoconf-2.13-native_2.13.bb | 2 +-
- .../xserver-xorg-cvt/xserver-xorg-cvt-native_1.20.10.bb         | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+https://errors.yoctoproject.org/Errors/Details/541973/
 
-diff --git a/meta-oe/recipes-devtools/autoconf-2.13/autoconf-2.13-native_2.13.bb b/meta-oe/recipes-devtools/autoconf-2.13/autoconf-2.13-native_2.13.bb
-index a54a7331df..604135839a 100644
---- a/meta-oe/recipes-devtools/autoconf-2.13/autoconf-2.13-native_2.13.bb
-+++ b/meta-oe/recipes-devtools/autoconf-2.13/autoconf-2.13-native_2.13.bb
-@@ -19,7 +19,7 @@ S = "${WORKDIR}/${BPN}"
- SRC_URI[md5sum] = "9de56d4a161a723228220b0f425dc711"
- SRC_URI[sha256sum] = "f0611136bee505811e9ca11ca7ac188ef5323a8e2ef19cffd3edb3cf08fd791e"
- 
--inherit native texinfo
-+inherit texinfo native
- 
- DEPENDS += "m4-native gnu-config-native"
- RDEPENDS_${PN} = "m4-native gnu-config-native"
-diff --git a/meta-oe/recipes-support/xserver-xorg-cvt/xserver-xorg-cvt-native_1.20.10.bb b/meta-oe/recipes-support/xserver-xorg-cvt/xserver-xorg-cvt-native_1.20.10.bb
-index 170e0bf785..becf991488 100644
---- a/meta-oe/recipes-support/xserver-xorg-cvt/xserver-xorg-cvt-native_1.20.10.bb
-+++ b/meta-oe/recipes-support/xserver-xorg-cvt/xserver-xorg-cvt-native_1.20.10.bb
-@@ -14,7 +14,7 @@ SRC_URI[sha256sum] = "977420c082450dc808de301ef56af4856d653eea71519a973c3490a780
- S = "${WORKDIR}/${XORG_PN}-${PV}"
- B = "${WORKDIR}/build"
- 
--inherit native pkgconfig
-+inherit pkgconfig native
- 
- do_configure[noexec] = "1"
- 
--- 
-2.30.0
-
+On Tue, Jan 26, 2021 at 1:31 AM Nicolas Jeker <n.jeker@gmx.net> wrote:
+>
+> Open vSwitch support is enabled by default in NetworkManager, but only
+> useful in the context of several virtualisation environments, e.g. Xen,
+> KVM, OpenStack and more. Therefore, the ovs PACKAGECONFIG is now disabled by
+> default.
+>
+> The jansson dependency is only required for Open vSwitch and teamsdctl
+> support in NetworkManager. As there is no libteamsdctl recipe around
+> (and no teamsdctl PACKAGECONFIG), make it dependent on the ovs
+> PACKAGECONFIG.
+>
+> Signed-off-by: Nicolas Jeker <n.jeker@gmx.net>
+> ---
+>  .../networkmanager/networkmanager_1.28.0.bb                     | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.28.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.28.0.bb
+> index 3e7a068ac..646ebea49 100644
+> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.28.0.bb
+> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.28.0.bb
+> @@ -15,7 +15,6 @@ DEPENDS = " \
+>      util-linux \
+>      libndp \
+>      libnewt \
+> -    jansson \
+>      curl \
+>  "
+>
+> @@ -85,6 +84,7 @@ PACKAGECONFIG[wifi] = "--with-wext=yes --enable-wifi=yes,--with-wext=no --enable
+>  PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
+>  PACKAGECONFIG[qt4-x11-free] = "--enable-qt,--disable-qt,qt4-x11-free"
+>  PACKAGECONFIG[cloud-setup] = "--with-nm-cloud-setup=yes,--with-nm-cloud-setup=no"
+> +PACKAGECONFIG[ovs] = "--enable-ovs,--disable-ovs,jansson"
+>
+>  PACKAGES =+ " \
+>    ${PN}-nmcli ${PN}-nmcli-doc \
+> --
+> 2.30.0
+>
+>
+> 
+>
