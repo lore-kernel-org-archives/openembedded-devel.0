@@ -1,93 +1,87 @@
-Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com [209.85.219.44])
- by mx.groups.io with SMTP id smtpd.web10.11939.1611771573134271821
+Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com [209.85.219.51])
+ by mx.groups.io with SMTP id smtpd.web09.12706.1611773987918265468
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Jan 2021 10:19:33 -0800
+ Wed, 27 Jan 2021 10:59:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=PGpDrYoX;
- spf=pass (domain: gmail.com, ip: 209.85.219.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f44.google.com with SMTP id l11so1537366qvt.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Jan 2021 10:19:33 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Kj+HNhNJ;
+ spf=pass (domain: gmail.com, ip: 209.85.219.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f51.google.com with SMTP id n3so1571574qvf.11
+        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Jan 2021 10:59:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=OVgTyleQcpIr2PctztxAqgDuJO3HLFri4fRIGMamMww=;
-        b=PGpDrYoX/cq7qnwR3A0oIkJ2/DhKge25erQN0QtOzHZiYXCSJMcKM2oQ1RWySroCeu
-         OtphLIgUu24gciQwM3FAu9LExQcK0w9Y6giXhW/RWP2TUR7Di+KQlmnZijuL+vPCJmKc
-         pqOT7jsGXcuN2E68Cf8oJ75fs8tHGG9hm8XG4xw1JaFqR1M2EuC2VeKAuAGcjm9mbr7j
-         gGf6zd57bvOX8wdUcdiX+/iVurPnZ617z+rF2O89GW8n9ocTxLmzHDpJSAcUF9uuKBYj
-         ueYPLHDy21UKuoGGb++OCRxYbvT0Le+xSJi3F9e76HzrTkKYzY+Cb2Vuc8tS/aWz7K/k
-         Ln5Q==
+        bh=dfbjtCRy93hTWTGh51qIA3D7Ae5Xs/Afol1CHZ46grk=;
+        b=Kj+HNhNJkWzmtAhR7LzBgPkqCi5bMmv+8XE+mHdV3DPMjrRQMG44pLuZ9XoyMLVIOv
+         9cKiGgmaouWwslJzkAKHaRrnPg8RlcGJE/ry5+6q30gtPAV/VqrZHx7kzdKTVny05tje
+         dxoCJ+ts1qTYOME+qSfB9/NOTiWb+dU3bRa7SnzVW8gZXqafLkc3VvVIzjctwJnzWS+9
+         f5NrnQ5YGIc9bfFS2lMiC9biJA4sBU5LipNiG0VA9I84Gu11h8JSPQ5vooCJyl7LSjIp
+         AXf8aps6+0p5jTO5oT51KDR96ZMWFUhrqmW6TLsF/ntqIvsURRHOnXc5EsSRc+G7w/C8
+         7Asg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=OVgTyleQcpIr2PctztxAqgDuJO3HLFri4fRIGMamMww=;
-        b=AsJ32injDRJRQo+9ZwQbtyNd/ca1xd6BbMJNGGE67BkHcdZ5KppVgQ27F3bSUQAgJV
-         H2FFKcYLA4uBoU/0oyEzPISF3RjZ2Cc1fkyifBS+yAd6OisTpeeixwzV7jJ28npGiW/p
-         eXGItSP+5xyFy1O6tjQhGDClyeVQfnMampvW6H4CqA74dzmt2mYVL/EHFG02Hx1yMRRB
-         GuOiTmtI7Zu0/ezW9c9BhNGvM4u+0nPH12zcs11xR5InyXBRyc/Cp2QNdiur+S5m2fqJ
-         xIq9ZsT0a/S9Vqi5VCYQKzTTEgxvUSRJ89SBW75763dnCATgp0qY9I0vIdo9upIOIMSh
-         PMEA==
-X-Gm-Message-State: AOAM532RLYsKcUlE04JVmif0qySTONb7sdxQCfLXv3qJp63MQNkkGuy4
-	HsXXrWfeySFwFOFeWZ5Ng/xsNLYpmKSPg0gg1g0=
-X-Google-Smtp-Source: ABdhPJxRjiQlZmgOh2iEa6gN47RxMc1csLRcjBQcGqp93Yc1u7ZSRIld6LHzjojeEuAXa9CG50Odj+3ofbYYvVqVr/I=
-X-Received: by 2002:a0c:c688:: with SMTP id d8mr11937334qvj.8.1611771572205;
- Wed, 27 Jan 2021 10:19:32 -0800 (PST)
+        bh=dfbjtCRy93hTWTGh51qIA3D7Ae5Xs/Afol1CHZ46grk=;
+        b=VmDhrpYLUyx3G819PoR/XnmBL6RLkYfYKsLuz6PkLoOTvFJYqMJh2K5qrD49eE7el/
+         reAiiZ3TP5LzK1O724BlvhbXD2yai/8H1dbV9y6c8BkJbM8uX/025vBiuXhsgnNawTPR
+         HBjod97Xc+vRZ2Cw5wVOU1vaABgZ8sG3WX5bKZ3gfvfMTIDFbMHHDdguZUOgWXsQWg29
+         +ApKs4Lmk99vPYbM9SNutPs5P085jNiyV/SEJlHyOWphOGaG5sGjwEkjwftJ4zDTxQYD
+         pZHoch+/O3Z1wAszWBOtop/Trbsavp7r0PYFaOSd8TJj3hUQIekmL+0eZON5nh4bdmEI
+         l6rQ==
+X-Gm-Message-State: AOAM532bMtxtZhkH8fpH2lugad3N+wlr4javnh4ab91IznN+awjoTYfo
+	stkKzGMBQkyb8nx3ogH3Hlq/br8IPJnDLJiWMgE=
+X-Google-Smtp-Source: ABdhPJyNi0TLLLFMNo3qPxPV0va81ITcjvqxl5sFAFnkes0niRUgoAeaxAh9ebiRI6KCtVhWwo9l9ymPWuW3xafMvpY=
+X-Received: by 2002:a0c:c688:: with SMTP id d8mr12109625qvj.8.1611773986987;
+ Wed, 27 Jan 2021 10:59:46 -0800 (PST)
 MIME-Version: 1.0
-References: <20210126093122.716978-1-n.jeker@gmx.net>
-In-Reply-To: <20210126093122.716978-1-n.jeker@gmx.net>
+References: <20210127155538.12229-1-leon.anavi@konsulko.com> <20210127155538.12229-2-leon.anavi@konsulko.com>
+In-Reply-To: <20210127155538.12229-2-leon.anavi@konsulko.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Wed, 27 Jan 2021 10:19:06 -0800
-Message-ID: <CAMKF1soWp0Voqn3vTZQmnvhLGz=Bmeh+3_xcQDxcCFm9kvNjgQ@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH v2] networkmanager: Add PACKAGECONFIG for ovs
-To: Nicolas Jeker <n.jeker@gmx.net>
+Date: Wed, 27 Jan 2021 10:59:21 -0800
+Message-ID: <CAMKF1sp6oJT88VeGJL69aPe+nUNCjyGQ0m169sje2Q0q+J=40g@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 2/5] python3-portion: Add recipe
+To: Leon Anavi <leon.anavi@konsulko.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-it seems that network-manager-applet needs jannson, see this failure
-
-https://errors.yoctoproject.org/Errors/Details/541973/
-
-On Tue, Jan 26, 2021 at 1:31 AM Nicolas Jeker <n.jeker@gmx.net> wrote:
+On Wed, Jan 27, 2021 at 7:55 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
 >
-> Open vSwitch support is enabled by default in NetworkManager, but only
-> useful in the context of several virtualisation environments, e.g. Xen,
-> KVM, OpenStack and more. Therefore, the ovs PACKAGECONFIG is now disabled by
-> default.
+> Portion is a Python library providing data structure and
+> operations for intervals. It replaces python-intervals.
+> Release 2.1.4 brings:
 >
-> The jansson dependency is only required for Open vSwitch and teamsdctl
-> support in NetworkManager. As there is no libteamsdctl recipe around
-> (and no teamsdctl PACKAGECONFIG), make it dependent on the ovs
-> PACKAGECONFIG.
+> - Much faster get, copy and | operations for IntervalDict.
 >
-> Signed-off-by: Nicolas Jeker <n.jeker@gmx.net>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 > ---
->  .../networkmanager/networkmanager_1.28.0.bb                     | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  .../recipes-devtools/python/python3-portion_2.1.4.bb | 12 ++++++++++++
+
+this needs to go into packagegroup-meta-python as well.
+
+>  1 file changed, 12 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-portion_2.1.4.bb
 >
-> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.28.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.28.0.bb
-> index 3e7a068ac..646ebea49 100644
-> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.28.0.bb
-> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.28.0.bb
-> @@ -15,7 +15,6 @@ DEPENDS = " \
->      util-linux \
->      libndp \
->      libnewt \
-> -    jansson \
->      curl \
->  "
->
-> @@ -85,6 +84,7 @@ PACKAGECONFIG[wifi] = "--with-wext=yes --enable-wifi=yes,--with-wext=no --enable
->  PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
->  PACKAGECONFIG[qt4-x11-free] = "--enable-qt,--disable-qt,qt4-x11-free"
->  PACKAGECONFIG[cloud-setup] = "--with-nm-cloud-setup=yes,--with-nm-cloud-setup=no"
-> +PACKAGECONFIG[ovs] = "--enable-ovs,--disable-ovs,jansson"
->
->  PACKAGES =+ " \
->    ${PN}-nmcli ${PN}-nmcli-doc \
+> diff --git a/meta-python/recipes-devtools/python/python3-portion_2.1.4.bb b/meta-python/recipes-devtools/python/python3-portion_2.1.4.bb
+> new file mode 100644
+> index 000000000..d08d3e725
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-portion_2.1.4.bb
+> @@ -0,0 +1,12 @@
+> +DESCRIPTION = "Python data structure and operations for intervals"
+> +HOMEPAGE = "https://github.com/AlexandreDecan/portion"
+> +SECTION = "devel/python"
+> +
+> +LICENSE = "LGPLv3"
+> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=05f1e16a8e59ce3e9a979e881816c2ab"
+> +
+> +inherit pypi setuptools3
+> +
+> +SRC_URI[sha256sum] = "58b2792e6e9837a2d55a97d459b940c90fb08b5fba774f524e9359727c80e7b4"
+> +
+> +BBCLASSEXTEND = "native"
 > --
-> 2.30.0
+> 2.17.1
 >
 >
 > 
