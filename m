@@ -1,85 +1,232 @@
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- by mx.groups.io with SMTP id smtpd.web10.9176.1611645765113575396
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web08.14612.1611781065845549141
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Jan 2021 23:22:45 -0800
+ Wed, 27 Jan 2021 12:57:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmx.net header.s=badeba3b8450 header.b=Jdnx88eV;
- spf=pass (domain: gmx.net, ip: 212.227.17.21, mailfrom: n.jeker@gmx.net)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
-	s=badeba3b8450; t=1611645763;
-	bh=5afCIIXRiPGCffegMEMGfWFcP+VM7FdAY1Ijc++PEcE=;
-	h=X-UI-Sender-Class:From:To:Subject:Date:In-Reply-To:References;
-	b=Jdnx88eVs9MwLw7o0lAAoxJfO9f7Epuy0RNjJpBuJkTOT8vZt15PXYNTnmvunM6cl
-	 9ac3Mcx6lzCr+GzmJhztkeiM2JB6D7P9m6xnfXSOJ7TiyqTrzralA8YQdWQeu3RfrC
-	 oBfoc2n5PBydlN3Dn9oLSu+OWWd4xwUwbqZ4HP9E=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from station.v.cablecom.net ([84.75.156.97]) by mail.gmx.net
- (mrgmx105 [212.227.17.168]) with ESMTPSA (Nemesis) id
- 1MWRRT-1lW3tB3N0t-00Xu4C for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Jan 2021 08:22:42 +0100
-From: "Nicolas Jeker" <n.jeker@gmx.net>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH 2/2] networkmanager: Add Wireless Extensions to PACKAGECONFIG[wifi]
-Date: Tue, 26 Jan 2021 08:22:41 +0100
-Message-Id: <20210126072241.43425-2-n.jeker@gmx.net>
-X-Mailer: git-send-email 2.30.0
-In-Reply-To: <20210126072241.43425-1-n.jeker@gmx.net>
-References: <20210126072241.43425-1-n.jeker@gmx.net>
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=E/Id6mYN;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: dmurphy@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 10RKviM1052841;
+	Wed, 27 Jan 2021 14:57:44 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1611781064;
+	bh=z59frnj5UDInECwQIBcV4lSeM59o+/xvt0ApT95WF5g=;
+	h=Subject:From:To:CC:References:Date:In-Reply-To;
+	b=E/Id6mYNoWRYj75TKbjeHZ4rdsaQ6E/rUN8gJJJIzFXBh43k+ycnaTMgvUoSEoNN3
+	 pDbD8VbI11t0nj7CW26aIRQu/k6hM0l9UMmDSjzknbitg27myDWU43hd9H4NDjC/Nz
+	 l3k5g+qkhriPibB0/tW6GN7IvkA2NR+MvE1GCaLo=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 10RKvi9H076480
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 27 Jan 2021 14:57:44 -0600
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Wed, 27
+ Jan 2021 14:57:44 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
+ Frontend Transport; Wed, 27 Jan 2021 14:57:44 -0600
+Received: from [10.250.70.26] (ileax41-snat.itg.ti.com [10.172.224.153])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 10RKvhB7033405;
+	Wed, 27 Jan 2021 14:57:43 -0600
+Subject: Re: [RFC] Issues with mariadb-10.4.17 and aarch64
+From: "Dan Murphy" <dmurphy@ti.com>
+To: akuster808 <akuster808@gmail.com>
+CC: <Openembedded-issues@lists.openembedded.org>,
+        <openembedded-devel@lists.openembedded.org>
+References: <6cde28bf-c69d-1d42-785e-dc228202e357@ti.com>
+ <d7ff8010-d45d-6274-ef69-1fd482314224@gmail.com>
+ <1539367b-171b-d8c7-ec99-dadbf27ad598@ti.com>
+Message-ID: <5b050fe2-cc18-64da-7731-1855fede0eb2@ti.com>
+Date: Wed, 27 Jan 2021 14:57:42 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-X-Provags-ID: V03:K1:8kqWxrl1KIdYDg5eThL8EdR1pJO9kwltwgHZei+4iz//kFqvF8X
- gVuJgEgTnF8xZDdI6M0nZ+dcr2UonxKU0Nswvzy9FsEdiUrXaJuBrTdvNN2YfbbmdZ0XQj4
- fvkdMQsqj+zKcGmUwdpoMrqCHAeRDbvQYBCzq6TYbMBDUA2IfmghNBFHbaWKXL4ej7u+eYP
- uL8qHRdxddx/b8fiNJgfA==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:Aep5dP6wfb0=:9sHBVQ/sEmlfXwqLjKj2Og
- JIfdvAlW7ScdKsjKxUygt+dCng4Pi6meBjCWHSh4N6mNx3qgpzcaotpGN8oYJYwv62K49ufRn
- Dtf2AjdXeoXeFnWT0XgocEVZ+pAAZKHVMKGntht/Ktid+gxfhg5JViEWX24XUVrL6KjJLus51
- ObCPuDFT+1H3cLeyjfaL/C0mvXaWJnIKdRLmRtgqTAUJKdUo3rBc/Zuf46RsggVzdZARQZY3z
- 5nzJzCGfmJPby03dBRoFVlghnbPLDmtAaQEdoxS9YQ+8LAJksP9Cb10+FOYAPbjBdGxmLrohd
- AA5D3QOJoIBOv8ypIx/XlQRqumwpwuxDRhfKfEZGGD0ee2V+7oXf3uVDTuhOX/Vy2KyX5aj6A
- abEoz4jvKpOxz040UFFGHoJTq+tncutHUvwiHJgSLmin+3zHVqic16usMbGWH02EuzsPBoEvX
- mFqQNRbcA26uZXDixcnR2JmxNpU1ZedJi3suNQ+BAdE0qlc1SC4beHYTa3F76EqZ1jiTf0hL6
- jA+HpcaMY99PI+Ao67QfKal2vNR6kiG/URf+rn5jef+DBcnrko6EVHdZEx4A1AX+0cuAzN9aR
- vlkJS6z+aSHppNZiypgDw5VeqwxwlWfWz42SnSylxXG5AgUndiAboYwfjQ71ZQDvc8G6fJinc
- UFYvWmVOhGuV3bkHACVQ5ghuRN9ERjfQBI3HKLV8LhM5ANnKkeOBLeVuS+fAZeIkPYZrYryfj
- SPfVqBQ+WQ2uBoW1AQ3zwkGKwHXl9MPrXESDZxPDzVdOJJBDgJGdHmqlSVIYE4k29fKyGP7ST
- qJldYNTQZGld1Y79cJpAcXjBtmYGYiIxOUUEa0wokcGtge2+HYoVZ598KDAT6FZisL7KdQJPO
- gYT20Qys19cjvTERGTUw==
+In-Reply-To: <1539367b-171b-d8c7-ec99-dadbf27ad598@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/alternative;
+	boundary="------------021623DA6A88A7B41AA03E05"
+Content-Language: en-US
+
+--------------021623DA6A88A7B41AA03E05
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0015.ext.ti.com id 10RKviM1052841
 
-Linux Wireless Extensions (Wext) support is enabled per default in
-NetworkManager. Having Wext enabled without enabling WiFi support, too,
-doesn't make much sense. Therefore, instead of creating a separate
-PACKAGECONFIG flag, 'wext' was added to the already existing 'wifi'
-flag.
+Armin
 
-Signed-off-by: Nicolas Jeker <n.jeker@gmx.net>
-=2D--
- .../networkmanager/networkmanager_1.28.0.bb                     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 1/25/21 1:01 PM, Dan Murphy wrote:
+>
+> Armin
+>
+> On 1/25/21 11:57 AM, akuster808 wrote:
+>> Dan,
+>>
+>>
+>> On 1/25/21 9:45 AM, Dan Murphy wrote:
+>>> Hello
+>>>
+>>> I was wondering if there has been any reports of the mariadb update o=
+n
+>>> the dunfell branch causing issues with 64bit compilers when the 'pam'
+>>> is set for DISTRO_FEATURES
+>>>
+>> I am not aware of any.
+>>> There does not seem to be a compilation issue but more of an
+>>> installation issue in which the lib/security directory is not being
+>>> created.
+>>>
+>>> We are seeing issues in our arago distro with the following errors
+>>>
+>>> mv: cannot stat '/OE/arago-dunfell-next-build/build-AARCH64_1/arago-t=
+mp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image/lib/sec=
+urity': No such file or directory
+>>> *09:38:06* WARNING: /OE/arago-dunfell-next-build/build-AARCH64_1/arag=
+o-tmp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/temp/run.d=
+o_install.5379:1 exit 1 from 'mv /OE/arago-dunfell-next-build/build-AARCH=
+64_1/arago-tmp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/i=
+mage/lib/security /OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-=
+external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image//usr/lib'
+>> I would be surprised if this was just limited to Arm64.
+>>
+>> Would enabling "PAM" and appending mariadb to an image reproduce this?
+>
+> Sorry I did not specify when the error occurred.=C2=A0 This happens dur=
+ing=20
+> the build time not run time.
+>
+> 32bit ARM builds perform the install just fine
+>
+> *12:53:25* NOTE: recipe mariadb-native-10.4.17-r0: task do_install: Suc=
+ceeded
+>
+>
+> 64bit not so much
+>
+> *09:38:03* ERROR: mariadb-10.4.17-r0 do_install: Execution of '/OE/arag=
+o-dunfell-next-build/build-AARCH64_1/arago-tmp-external-arm-glibc/work/aa=
+rch64-linux/mariadb/10.4.17-r0/temp/run.do_install.5379' failed with exit=
+ code 1:
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkma=
-nager_1.28.0.bb b/meta-networking/recipes-connectivity/networkmanager/netw=
-orkmanager_1.28.0.bb
-index 157a7e7b0..1b4fa95a2 100644
-=2D-- a/meta-networking/recipes-connectivity/networkmanager/networkmanager=
-_1.28.0.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1=
-.28.0.bb
-@@ -80,7 +80,7 @@ PACKAGECONFIG[dnsmasq] =3D "--with-dnsmasq=3D${bindir}/d=
-nsmasq"
- PACKAGECONFIG[nss] =3D "--with-crypto=3Dnss,,nss"
- PACKAGECONFIG[resolvconf] =3D "--with-resolvconf=3D${base_sbindir}/resolv=
-conf,,,resolvconf"
- PACKAGECONFIG[gnutls] =3D "--with-crypto=3Dgnutls,,gnutls"
--PACKAGECONFIG[wifi] =3D "--enable-wifi=3Dyes,--enable-wifi=3Dno,,wpa-supp=
-licant"
-+PACKAGECONFIG[wifi] =3D "--with-wext=3Dyes --enable-wifi=3Dyes,--with-wex=
-t=3Dno --enable-wifi=3Dno,,wpa-supplicant"
- PACKAGECONFIG[ifupdown] =3D "--enable-ifupdown,--disable-ifupdown"
- PACKAGECONFIG[qt4-x11-free] =3D "--enable-qt,--disable-qt,qt4-x11-free"
- PACKAGECONFIG[cloud-setup] =3D "--with-nm-cloud-setup=3Dyes,--with-nm-clo=
-ud-setup=3Dno"
-=2D-
-2.30.0
+Actually yes this is specific to 64 bits.=C2=A0 The lib/security director=
+y=20
+for 64 bit builds does not exist it is in lib64/security.=C2=A0 So the=20
+do_install fails because it is looking in the wrong location.
 
+Not sure how to fix this.
+
+Dan
+
+
+--------------021623DA6A88A7B41AA03E05
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0015.ext.ti.com id 10RKviM1052841
+
+<html>
+  <head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF=
+-8">
+  </head>
+  <body>
+    <p>Armin<br>
+    </p>
+    <div class=3D"moz-cite-prefix">On 1/25/21 1:01 PM, Dan Murphy wrote:<=
+br>
+    </div>
+    <blockquote type=3D"cite"
+      cite=3D"mid:1539367b-171b-d8c7-ec99-dadbf27ad598@ti.com">
+      <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DU=
+TF-8">
+      <p>Armin<br>
+      </p>
+      <div class=3D"moz-cite-prefix">On 1/25/21 11:57 AM, akuster808
+        wrote:<br>
+      </div>
+      <blockquote type=3D"cite"
+        cite=3D"mid:d7ff8010-d45d-6274-ef69-1fd482314224@gmail.com">
+        <pre class=3D"moz-quote-pre" wrap=3D"">Dan,
+
+
+On 1/25/21 9:45 AM, Dan Murphy wrote:
+</pre>
+        <blockquote type=3D"cite">
+          <pre class=3D"moz-quote-pre" wrap=3D"">Hello
+
+I was wondering if there has been any reports of the mariadb update on
+the dunfell branch causing issues with 64bit compilers when the 'pam'
+is set for DISTRO_FEATURES
+
+</pre>
+        </blockquote>
+        <pre class=3D"moz-quote-pre" wrap=3D"">I am not aware of any.
+</pre>
+        <blockquote type=3D"cite">
+          <pre class=3D"moz-quote-pre" wrap=3D"">There does not seem to b=
+e a compilation issue but more of an
+installation issue in which the lib/security directory is not being
+created.
+
+We are seeing issues in our arago distro with the following errors
+
+mv: cannot stat '/OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-e=
+xternal-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image/lib/securit=
+y': No such file or directory
+*09:38:06* WARNING: /OE/arago-dunfell-next-build/build-AARCH64_1/arago-tm=
+p-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/temp/run.do_in=
+stall.5379:1 exit 1 from 'mv /OE/arago-dunfell-next-build/build-AARCH64_1=
+/arago-tmp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image=
+/lib/security /OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-exte=
+rnal-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image//usr/lib'
+</pre>
+        </blockquote>
+        <pre class=3D"moz-quote-pre" wrap=3D"">I would be surprised if th=
+is was just limited to Arm64.
+
+Would enabling "PAM" and appending mariadb to an image reproduce this?</p=
+re>
+      </blockquote>
+      <p>Sorry I did not specify when the error occurred.=C2=A0 This happ=
+ens
+        during the build time not run time.</p>
+      <p>32bit ARM builds perform the install just fine</p>
+      <pre style=3D"box-sizing: border-box; white-space: pre-wrap; overfl=
+ow-wrap: break-word; margin: 0px; color: rgb(51, 51, 51); font-size: 14px=
+; font-style: normal; font-variant-ligatures: normal; font-variant-caps: =
+normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align:=
+ start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: =
+0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; =
+text-decoration-style: initial; text-decoration-color: initial;"><span cl=
+ass=3D"timestamp" style=3D"box-sizing: border-box;"><b style=3D"box-sizin=
+g: border-box;">12:53:25</b> </span>NOTE: recipe mariadb-native-10.4.17-r=
+0: task do_install: Succeeded
+</pre>
+      <p><br>
+      </p>
+      <p>64bit not so much</p>
+      <pre style=3D"box-sizing: border-box; white-space: pre-wrap; overfl=
+ow-wrap: break-word; margin: 0px; color: rgb(51, 51, 51); font-size: 14px=
+; font-style: normal; font-variant-ligatures: normal; font-variant-caps: =
+normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align:=
+ start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: =
+0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; =
+text-decoration-style: initial; text-decoration-color: initial;"><span cl=
+ass=3D"timestamp" style=3D"box-sizing: border-box;"><b style=3D"box-sizin=
+g: border-box;">09:38:03</b> </span>ERROR: mariadb-10.4.17-r0 do_install:=
+ Execution of '/OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-ext=
+ernal-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/temp/run.do_install=
+.5379' failed with exit code 1:</pre>
+    </blockquote>
+    <br>
+    <p>Actually yes this is specific to 64 bits.=C2=A0 The lib/security
+      directory for 64 bit builds does not exist it is in
+      lib64/security.=C2=A0 So the do_install fails because it is looking=
+ in
+      the wrong location.</p>
+    <p>Not sure how to fix this.</p>
+    <p>Dan</p>
+  </body>
+</html>
+
+--------------021623DA6A88A7B41AA03E05--
