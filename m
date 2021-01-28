@@ -1,108 +1,67 @@
-Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net [217.70.183.198])
- by mx.groups.io with SMTP id smtpd.web09.15619.1611784472528875378
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
+ by mx.groups.io with SMTP id smtpd.web09.21105.1611814531344599630
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Jan 2021 13:54:33 -0800
+ Wed, 27 Jan 2021 22:15:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: bootlin.com, ip: 217.70.183.198, mailfrom: alexandre.belloni@bootlin.com)
-X-Originating-IP: 86.202.109.140
-Received: from localhost (lfbn-lyo-1-13-140.w86-202.abo.wanadoo.fr [86.202.109.140])
-	(Authenticated sender: alexandre.belloni@bootlin.com)
-	by relay6-d.mail.gandi.net (Postfix) with ESMTPSA id EB1DEC0004;
-	Wed, 27 Jan 2021 21:54:29 +0000 (UTC)
-Date: Wed, 27 Jan 2021 22:54:29 +0100
-From: "Alexandre Belloni" <alexandre.belloni@bootlin.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe][PATCH] meta-oe: fix native inheritance order in recipes
-Message-ID: <20210127215429.GK1196852@piout.net>
-References: <20210127211356.2341996-1-alexandre.belloni@bootlin.com>
- <CA+chaQfHk5R0yvPdH9xN7Uw95uzfTf-6Bjr_u1OSb7kuFyErBA@mail.gmail.com>
+ dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: u.oelmann@pengutronix.de)
+Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
+	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <u.oelmann@pengutronix.de>)
+	id 1l50aW-0003LC-Gp; Thu, 28 Jan 2021 07:15:28 +0100
+Received: from uol by dude.hi.pengutronix.de with local (Exim 4.92)
+	(envelope-from <u.oelmann@pengutronix.de>)
+	id 1l50aV-0005md-Fp; Thu, 28 Jan 2021 07:15:27 +0100
+References: <165C3A4E85357A25.14278@lists.openembedded.org>
+User-agent: mu4e 1.4.13; emacs 28.0.50
+From: "Ulrich ?lmann" <u.oelmann@pengutronix.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: =?utf-8?Q?S=C3=B8ren?= Andersen <san@skov.dk>, Khem Raj
+ <raj.khem@gmail.com>, Ulrich
+ =?utf-8?Q?=C3=96lmann?= <u.oelmann@pengutronix.de>
+Subject: Re: [oe] [meta-oe][gatesgarth][PATCH] zram: fix sourcing of zram parameters
+In-reply-to: <165C3A4E85357A25.14278@lists.openembedded.org>
+Date: Thu, 28 Jan 2021 07:15:27 +0100
+Message-ID: <6rsg6llh8g.fsf@pengutronix.de>
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQfHk5R0yvPdH9xN7Uw95uzfTf-6Bjr_u1OSb7kuFyErBA@mail.gmail.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::7
+X-SA-Exim-Mail-From: u.oelmann@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 27/01/2021 22:44:12+0100, Martin Jansa wrote:
-> Thanks.
-> 
-> Khem already sent these changes in 2 separate patches which are already in
-> master-next:
-> https://git.openembedded.org/meta-openembedded/commit/?h=master-next&id=58a4c525ac1359f91ba8e97a26eb693e6468a362
-> https://git.openembedded.org/meta-openembedded/commit/?h=master-next&id=6d5f8cc9d444e220d212dd23a497c82a2dfce1e2
-> 
+Gentle ping!
 
-Right, I did prepare that one earlier today and just sent it now.
-
-> On Wed, Jan 27, 2021 at 10:14 PM Alexandre Belloni <
-> alexandre.belloni@bootlin.com> wrote:
-> 
-> > Classes native/nativesdk must be inherited last to prevent unexpected
-> > behaviour.
-> >
-> > Signed-off-by: Alexandre Belloni <alexandre.belloni@bootlin.com>
-> > ---
-> >  .../recipes-devtools/autoconf-2.13/autoconf-2.13-native_2.13.bb | 2 +-
-> >  meta-oe/recipes-support/dfu-util/dfu-util-native_0.10.bb        | 2 +-
-> >  .../xserver-xorg-cvt/xserver-xorg-cvt-native_1.20.10.bb         | 2 +-
-> >  3 files changed, 3 insertions(+), 3 deletions(-)
-> >
-> > diff --git a/meta-oe/recipes-devtools/autoconf-2.13/
-> > autoconf-2.13-native_2.13.bb b/meta-oe/recipes-devtools/autoconf-2.13/
-> > autoconf-2.13-native_2.13.bb
-> > index a54a7331df2d..604135839a7b 100644
-> > --- a/meta-oe/recipes-devtools/autoconf-2.13/autoconf-2.13-native_2.13.bb
-> > +++ b/meta-oe/recipes-devtools/autoconf-2.13/autoconf-2.13-native_2.13.bb
-> > @@ -19,7 +19,7 @@ S = "${WORKDIR}/${BPN}"
-> >  SRC_URI[md5sum] = "9de56d4a161a723228220b0f425dc711"
-> >  SRC_URI[sha256sum] =
-> > "f0611136bee505811e9ca11ca7ac188ef5323a8e2ef19cffd3edb3cf08fd791e"
-> >
-> > -inherit native texinfo
-> > +inherit texinfo native
-> >
-> >  DEPENDS += "m4-native gnu-config-native"
-> >  RDEPENDS_${PN} = "m4-native gnu-config-native"
-> > diff --git a/meta-oe/recipes-support/dfu-util/dfu-util-native_0.10.bb
-> > b/meta-oe/recipes-support/dfu-util/dfu-util-native_0.10.bb
-> > index 4305e3b4086e..4641b0181aef 100644
-> > --- a/meta-oe/recipes-support/dfu-util/dfu-util-native_0.10.bb
-> > +++ b/meta-oe/recipes-support/dfu-util/dfu-util-native_0.10.bb
-> > @@ -1,6 +1,6 @@
-> >  require dfu-util_${PV}.bb
-> >
-> > -inherit native deploy
-> > +inherit deploy native
-> >
-> >  DEPENDS = "libusb1-native"
-> >
-> > diff --git a/meta-oe/recipes-support/xserver-xorg-cvt/
-> > xserver-xorg-cvt-native_1.20.10.bb
-> > b/meta-oe/recipes-support/xserver-xorg-cvt/
-> > xserver-xorg-cvt-native_1.20.10.bb
-> > index 170e0bf785e4..becf9914884e 100644
-> > --- a/meta-oe/recipes-support/xserver-xorg-cvt/
-> > xserver-xorg-cvt-native_1.20.10.bb
-> > +++ b/meta-oe/recipes-support/xserver-xorg-cvt/
-> > xserver-xorg-cvt-native_1.20.10.bb
-> > @@ -14,7 +14,7 @@ SRC_URI[sha256sum] =
-> > "977420c082450dc808de301ef56af4856d653eea71519a973c3490a780
-> >  S = "${WORKDIR}/${XORG_PN}-${PV}"
-> >  B = "${WORKDIR}/build"
-> >
-> > -inherit native pkgconfig
-> > +inherit pkgconfig native
-> >
-> >  do_configure[noexec] = "1"
-> >
-> > --
-> > 2.29.2
-> >
-> >
-> > 
-> >
-> >
-
--- 
-Alexandre Belloni, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
+On Thu, Jan 21 2021 at 12:01 +0100, Ulrich ?lmann <u.oelmann@pengutronix.de=
+> wrote:
+> From: S=C3=B8ren Andersen <san@skov.dk>
+>
+> Signed-off-by: S=C3=B8ren Andersen <san@skov.dk>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> (cherry picked from commit 3c8ad9192c1c9f4323bdc7ff28456f11db689adb)
+> Signed-off-by: Ulrich =C3=96lmann <u.oelmann@pengutronix.de>
+> ---
+>  meta-oe/recipes-extended/zram/zram/zram-swap-init | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-extended/zram/zram/zram-swap-init b/meta-oe/=
+recipes-extended/zram/zram/zram-swap-init
+> index 0643dbca2341..ccc3aafe3a6f 100755
+> --- a/meta-oe/recipes-extended/zram/zram/zram-swap-init
+> +++ b/meta-oe/recipes-extended/zram/zram/zram-swap-init
+> @@ -14,7 +14,7 @@ fi
+>  ZRAM_SIZE_PERCENT=3D100
+>  ZRAM_ALGORITHM=3Dlz4
+>=20=20
+> -[ -f /etc/default/zram ] && ./etc/default/zram || true
+> +[ -f /etc/default/zram ] && . /etc/default/zram || true
+>=20=20
+>  memtotal=3D$(grep MemTotal /proc/meminfo | awk ' { print $2 } ')
+>  memzram=3D$(($memtotal*${ZRAM_SIZE_PERCENT}/100))
+--=20
+Pengutronix e.K.                           | Ulrich =C3=96lmann            =
+   |
+Industrial Linux Solutions                 | http://www.pengutronix.de/  |
+Peiner Str. 6-8, 31137 Hildesheim, Germany | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
