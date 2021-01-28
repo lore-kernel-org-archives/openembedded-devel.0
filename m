@@ -1,21 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.6327.1611829760938185423
+ by mx.groups.io with SMTP id smtpd.web10.22649.1611829763378670629
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Jan 2021 02:29:21 -0800
+ Thu, 28 Jan 2021 02:29:23 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=43042 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1l54Y4-00080R-9W; Thu, 28 Jan 2021 12:29:17 +0200
+	id 1l54Y9-00080R-Ni; Thu, 28 Jan 2021 12:29:22 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-gevent: Upgrade 20.9.0 -> 21.1.2
-Date: Thu, 28 Jan 2021 12:28:59 +0200
-Message-Id: <20210128102903.11760-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-prompt-toolkit: Upgrade 3.0.11 -> 3.0.14
+Date: Thu, 28 Jan 2021 12:29:00 +0200
+Message-Id: <20210128102903.11760-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210128102903.11760-1-leon.anavi@konsulko.com>
+References: <20210128102903.11760-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,32 +30,34 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-- Update the embedded libev from 4.31 to 4.33.
-- Update the embedded libuv from 1.38.0 to 1.40.0.
+Upgrade to release 3.0.14:
+
+- Disable bell when `PROMPT_TOOLKIT_BELL=false` environment
+  variable has been set.
+- Improve cancellation of history loading.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-gevent_20.9.0.bb => python3-gevent_21.1.2.bb}     | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-gevent_20.9.0.bb => python3-gevent_21.1.2.bb} (89%)
+ ...rompt-toolkit_3.0.11.bb => python3-prompt-toolkit_3.0.14.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_3.0.11.bb => python3-prompt-toolkit_3.0.14.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-gevent_20.9.0.bb b/meta-python/recipes-devtools/python/python3-gevent_21.1.2.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-gevent_20.9.0.bb
-rename to meta-python/recipes-devtools/python/python3-gevent_21.1.2.bb
-index 06c45f2ed..5edd96b34 100644
---- a/meta-python/recipes-devtools/python/python3-gevent_20.9.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-gevent_21.1.2.bb
-@@ -20,8 +20,7 @@ SRC_URI_append = " \
-     file://libev-conf.patch;patch=1;pnum=1 \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.11.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.14.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.11.bb
+rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.14.bb
+index 0b832c064..e5ad069d3 100644
+--- a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.11.bb
++++ b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.14.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://python-prompt-toolkit.readthedocs.io/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f"
  
--SRC_URI[md5sum] = "9366ee7eebed48003f8a748568ef1f70"
--SRC_URI[sha256sum] = "5f6d48051d336561ec08995431ee4d265ac723a64bba99cc58c3eb1a4d4f5c8d"
-+SRC_URI[sha256sum] = "520cc2a029a9eef436e4e56b007af7859315cafa21937d43c1d5269f12f2c981"
+-SRC_URI[sha256sum] = "dc83e6368b0edd9ceabe17a055f2e22f6ed95b9aa39dbd59d0b4f3585bdfe9ed"
++SRC_URI[sha256sum] = "7e966747c18ececaec785699626b771c1ba8344c8d31759a1915d6b12fad6525"
  
- # The python-gevent has no autoreconf ability
- # and the logic for detecting a cross compile is flawed
+ inherit pypi setuptools3
+ 
 -- 
 2.17.1
 
