@@ -1,17 +1,17 @@
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.58])
- by mx.groups.io with SMTP id smtpd.web09.24352.1611839362289723481
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.51])
+ by mx.groups.io with SMTP id smtpd.web09.24355.1611839373626080609
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Jan 2021 05:09:22 -0800
+ Thu, 28 Jan 2021 05:09:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=CpwkW4g9;
- spf=pass (domain: windriver.com, ip: 40.107.223.58, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=DaAt3A47;
+ spf=pass (domain: windriver.com, ip: 40.107.223.51, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cujFfl5+cpUbe9aqvJrQBwxRQdJEl4+/51zjZdpcEZBJw8JHuiSq0vBVfA00dyB7s0RuU6SQPFKE1cd/rgb/o9hznivbjY5l+mRoVXlSD0kekS+iT8LOTbuRj/gVV5qa88Q5gKVOpjx4sTv7/TOAn7opA7QuDJEQdY81L9zeQNobxjNAsywB3p+xHKwTtN/fMlaTUwmv4M1OoTQD0KAaU/Yr09VStno1HtMW7fvLDzgaLeRcO79Eg+68avoTsHoQpG6hgYVa97T4+2YigWYN0ca+ppJhAGy5XwlOF0LyBMIA5V4GzkGpnkiExvB/qKdMw/H/kAMQp1wzHCYJ3xmoRg==
+ b=I+pJY4m/iCjnU1dC3nfHmeJaOY2qKiKWmj+C1xPQ5lKmVbfYUbA/tfGQO0H/q39FedDg0+dYS+rHw2yznOVDWOCEPobzZ0PkoBCjntzY6P87nQQ2vLKGudVyMft89B4EDMLp86Dtr+iDzuemLQSEvPvfGy/dpYBATgUaGjzxyvMuIuJK8yP0tpI1o7LhjMK5nX2/vZJFaBRaBYdk3Edp8RjifWq8sTd/x9ysvduaAJPAvvZkJLMZlGzYJ0IJsSnu5GwT4L15Gum/nuVPX+bvQYuAQDAxfegmGTwn01hm8Y/TPQiPoF9qT6hXrtMMJ8jvyplMcUyt5CsDlSH1ffmcoQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YBY/amJwb3X81AglP1F1zA5x/oPq8zpIY2ZUal91UbQ=;
- b=Q3BuQ1Ah6OjN3FwRy5MMAnxNCo7YfTGG8mK07nMz7VxyIbtxoON44/1FLib79uS9dj+BHMc36iDDeksRj1bSfa1Q9vfeb16Uk1+X5Z0VfuEo9f3oOW3jP6mYHNn4/grXHCCjYun8TXXnUytYhtCEYZtHZ3UkLmGunxsNDvCbc5LWLbAdzBhfUmqHXTxZronczwOMgPA5iqJpopebf6o2Zxs1nL9LNkU9rCY4k8e1PVzaaTiPJdbADQ/Q4gWH6o1Bo9BlWJ9t24pop102qlbfd4cO8vcZhi8KQO6kMC5AtWJY8o5ZfTEMcmQsZd6wikhQvJP+Nah62W0gO48rEp3C7w==
+ bh=OGrl8DyJ/pALQOWGhH1NIa8AGpcHj8bDJ5NQGUbB6s0=;
+ b=A8gvvefa5tBo+qb8U9yml9C4Cc4h20jQ+fW8Q7GjTzN1HO6PdEshqnpQVZylHSkMDgpa+CV7N1PabqU9j2tM/A2iUzr7H2Q+aCAzbxvxGB3GD4QrLdv7N9t5B6F+farlSArabfR+ffnf/eSqlsQGHBcFM4rOPeJAuaNwX8nkuvaHHK3AaRl+YaqgbnJMpHfHNKRX9YElvssqbRRGuhlMBr9+aynmSzwMjUAO4Dk5zOy/1agK0//RSp/tEwj63k3ePBD7K6fPUsa5YfH7L2OFkdPXLzY828MqfGyyQ3OM9ddXIWLaOHK6yWdtXnDid4qHtXHuKSGVEJvJ9zVJb0vWIw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YBY/amJwb3X81AglP1F1zA5x/oPq8zpIY2ZUal91UbQ=;
- b=CpwkW4g94zDOJfThUEb0bslhBx1VYBo6T3d2jrniTwN67wZzwnOKLpWRYzzKJc2wLsyntTjgCnhpAQ7oE9DcsBOo5DSfjRQiFsUOvCeynDSuSsUE+JIgJoT/Ber+UKkV3WwH6kd7F8MuJnIvKVkIx7Ksv6q3BPB8NanlHNMRPMI=
+ bh=OGrl8DyJ/pALQOWGhH1NIa8AGpcHj8bDJ5NQGUbB6s0=;
+ b=DaAt3A47xYCH3OG2NNqT9sH8oe6NAHZDHyPj2LoCOhut/tEwJdatmZ1Xvi5ZbeRkW8izUgaxu9deOAogIDuFDiUCFui6aUbR9BA0LxQg9zCLEXfOE5cRr/HVhU/QTY0FScuKwGSUfcm3jA7WgF5CTSj/UwjhPBPHsOf3U972f6w=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,130 +28,125 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BYAPR11MB2951.namprd11.prod.outlook.com (2603:10b6:a03:90::10) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.17; Thu, 28 Jan
- 2021 13:09:21 +0000
+ 2021 13:09:32 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3805.017; Thu, 28 Jan 2021
- 13:09:21 +0000
-Subject: Re: [oe] [meta-python][PATCH 2/5] python3-portion: Add recipe
+ 13:09:32 +0000
+Subject: Re: [oe] [meta-python][PATCH 3/5] python3-pako: Upgrade 0.2.3 -> 0.3.0
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20210127155538.12229-1-leon.anavi@konsulko.com>
- <20210127155538.12229-2-leon.anavi@konsulko.com>
+ <20210127155538.12229-3-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <6553ab50-ad58-f14d-895c-25cf0c925dc1@windriver.com>
-Date: Thu, 28 Jan 2021 08:09:18 -0500
+Message-ID: <30341e77-285d-7815-6860-a556917acb70@windriver.com>
+Date: Thu, 28 Jan 2021 08:09:29 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.0
-In-Reply-To: <20210127155538.12229-2-leon.anavi@konsulko.com>
+In-Reply-To: <20210127155538.12229-3-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BL1PR13CA0092.namprd13.prod.outlook.com
- (2603:10b6:208:2b9::7) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: BL1PR13CA0093.namprd13.prod.outlook.com
+ (2603:10b6:208:2b9::8) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BL1PR13CA0092.namprd13.prod.outlook.com (2603:10b6:208:2b9::7) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.8 via Frontend Transport; Thu, 28 Jan 2021 13:09:20 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BL1PR13CA0093.namprd13.prod.outlook.com (2603:10b6:208:2b9::8) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.8 via Frontend Transport; Thu, 28 Jan 2021 13:09:31 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 6a18cb71-ab45-49fd-225d-08d8c38ded3c
+X-MS-Office365-Filtering-Correlation-Id: 4487cbde-0039-46ed-940a-08d8c38df3d8
 X-MS-TrafficTypeDiagnostic: BYAPR11MB2951:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB295101C98223B331C15EB8709FBA9@BYAPR11MB2951.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:854;
+	<BYAPR11MB2951A48C51BF261D72AD67559FBA9@BYAPR11MB2951.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:449;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	kmFpGBOyIHFUnSwubRnFKAHBroxrOzDTh1J7nNPRxnXh2qrlFJnCQ7+csy4AE+RAJ8q8e3b/QpX1YSzjeZVRP29wedEmgfWsk/9ezYRd3fNIy3qwZDknHYTOjz5Mnf/DO9BlJRdOi2PE+hZ9qVnviWM1ojDWLbDL3vYXC6oFV+4xpP50E3vptiaofQLOSBjCTnaAMSzW5d5NW4OBbBHFVEhE9meuuRe4OjRTb1Wd0yg1qPjbEjaCTXtSdDnJS6DKaPHtiDjIP+QsDEvo/2Mb/QPQjeKTsqCX/liXYDxRqYoG9Kcm5iqg8z077pplojSLSteyqVXq++c2RsDpApiHc38vGENb0mvLZRJLDE9MDeIcmSPdgTVsvljLLF8xg2/1HA2l1wQYB1FfgUlKSAAtxKM8QMI0shgJTi46SGpKepamqkuvGcAWmLY6zvcxHr+BPaKZ2xAMNTeu3kZwMTeSlcZQdJ6bm61kNB6RigeRIXFjRgsWflTSO61Uf+rxfkh8JqKIPSI+8ZpbN6JqNL/Ykgbg4oDNC0mWRsA4XUWJz9ieOzj8kyn1cLKnl1jWaPNwasGhtDhTrj7NIRpz/6UeCjoYrwOnQbfuGzsOECu+A/zc80Mu999gRd8PxzU1vMbiPVYzxh00upz/xPYTBbXgYyUPWE7eS5cpEoVRxeAU24yq5pAoCSCvexB0NZVrJ9AC
+	5uDcOOSoO7d4WPBiphnM1XSkB+kTOh9AoBkwvOCSHP1bQRySUf+GP4ZBheEHlxcqvaonqx7FW7olZGccIKrMCh8MiwU2Ei/aSoB+6T+t4IIlDGISkxiZQkeJFzPX1YMnjlqoRcsLg5dnFwS5E8J7v3gzmgrJ+0+POEWiP3DWYsJDMW1k5p9ZWwhuFpWA2KlxORYaC3sW5UXozqmcC4NxXKpWHbN9OB0sA6RTnV84A3aHqHEvgxB7Zd/MNMdzzrbIH/Vl/ghzcjPGl+M1vuUFOgn/md6RLvJqKvzxR6K0+0ATNjoOMXdLTsD0Dxprejr9Lf9CgQYVFP2U5tuNNeqfHYfjAsNEf1qyPjcwdD8fHEo1uWwoclLIcBNWrncY3yyvSOfridVo2Y7ObFw7+OpO0D76gBQb/ZWZnQx5LqWQYrFcWznr1O5I3fZrg+wbZjd6KDvYAA62RNMw/czLKkcXHUon2yZn41fvRB5GLvL9N6CAV5Vgg5jA68FVV+vaWKPkJcFS++aJ9+vqeS9NXrybjbKoHi7udRNPrio5jB/njnFWjWpm6XB1/OfK5qYxlRwA58dN6o4xwdWZLNs0Dioix2wQT4UAQOc03on7yyLOuWdh/yPWAdkMg0bSOI4oqlQ8K7cXoKqQyWBXLa0kxj20cwEuAHK1fqud8YiMs6OWeAjRz2jSEFTnR0rZhP5Yk+/X
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(136003)(366004)(39830400003)(376002)(396003)(36756003)(2906002)(33964004)(52116002)(83380400001)(166002)(8676002)(966005)(66946007)(478600001)(6486002)(66476007)(31686004)(66556008)(31696002)(5660300002)(8936002)(44832011)(53546011)(2616005)(956004)(16576012)(86362001)(186003)(16526019)(26005)(316002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?cU5JU2QvNjdKbFRDZ05aenYvVkRkN0lYdk1RSTlyVWJoR2N6ZUtMYXlDd0lP?=
- =?utf-8?B?WVdVaVl2bVNod1FRNnAwYnNLM3NMWmJmbWFTMTNvQlNMSFVOeTQySW5xTUgv?=
- =?utf-8?B?Z1VzcEx1ZmFvVTNrMWRCSEV6RGIrRjUyMVEyYTZZdGs1OHQyN0g1QndIQWdJ?=
- =?utf-8?B?UVRDOWd2Qm9zb1VHN0dFN1M3Sm92NHFpTm9qaWhZWllmeEFybnBJRXhUSkdD?=
- =?utf-8?B?OSsxNlRjQ1h0Y0MwZTg4WVYvazFaeElTazkrVjNMaHAxQlpqSlhhTFcvaXVS?=
- =?utf-8?B?MjhYeDI1VHdEczY4dVZ2bVpaNDZqd3huMmhrTjZhWXRPUmpMZjRXQVVEalNE?=
- =?utf-8?B?WFhDWjVibVUxV1pzdDRwVHBOTzU5Z3BmbUlSV2ViRzdqQS9QNHZuNWxsclNZ?=
- =?utf-8?B?WGpXMFBUZzYyQmJ5Skh2WldOcllQRGV0TDJBY0N6RW5zK3NSUlVUWGUrSXpw?=
- =?utf-8?B?MmhwNXpLQUlsbFpLN3hkY21FK2k3Z0xsT0NWYzRsOHpsZ3QvVjNybFNwYXZH?=
- =?utf-8?B?aGNMR0U1N0g2NmNCaDh2elpNeGtsS1NleXgyVDVLUW1lbmZyYVFQazZzWmov?=
- =?utf-8?B?bE90OUNLYnhwYkFVRzJtRjFBSTdZa1kwbllKc21UZFNqc20vemlkZDFiZGxZ?=
- =?utf-8?B?YjRkaTFoL3MxRlhIWUJYSkxXWHhTd1VZby93bjRoMzVUNWROYXg4Q3ROOCtQ?=
- =?utf-8?B?L3F4ekY5Ky83eC9FcFc4RjdHeHhGczlXNWZaSDZjNTdoRllYd0NlUHhINFB5?=
- =?utf-8?B?UEVwN1NId3JSbUk3a2hlR2JwR28yY2NOb2VrQkk4SnhkcnZqb0xLdEt5MFp3?=
- =?utf-8?B?SmJPK2dEc24zbkljeTZObFZEN0szVGZNQVVRbktLZ1E2MjFMdkFBNDhqMFpW?=
- =?utf-8?B?QkNRcDExeHNUOUxtUCtRNW9RYmxjZ2VhTDRpZEZhc1VFalpRRzZnZzYxUzFE?=
- =?utf-8?B?eEk2L0pDbjNFTVBCR2c4akZ5MVRUWHUySExtcVVGcDJnWlZCRUgwTUFGZVQr?=
- =?utf-8?B?V2NibHEzUWhsdjF4WnVhS3lIcTZ0akg0cTA2UlRJTHZyTzlWbzNnazVJZlR4?=
- =?utf-8?B?c0dVZ2JlMDNDNE1CWlg3bVMvamFtQ0lzaFREaW1ZWjRGcjVpbWpGdWtPYUlj?=
- =?utf-8?B?OXdOWGkwQUhTRVRHd1FyTWZNaTFNakdCUWx4UUdhaFhEN1BySGNPWENZNk51?=
- =?utf-8?B?OEhNTWI4U0h5U2JqaEFlbXc2TmNSMEU0UFlnUnoycmdOSDBsM1d6VVRlbTNW?=
- =?utf-8?B?NjlibVptYnhCRUV6b0lvTjJIcFpHSExBeS96V09XK0x2L2lzdmFraW16WXR2?=
- =?utf-8?B?dWVYM3dndGo5VHpzVkp2MFhhWTJhamp3b1BUU0ZnOGVVKzZNa0t1eU5VbDVq?=
- =?utf-8?B?RTJ4N2lSaGVhRTBTUkxGZ3V0eXBFYkFZRUg0YmdYUU9XNEFob2pLNmJ1UnJF?=
- =?utf-8?Q?CrVBGeOo?=
+	=?utf-8?B?cytpeUNaRTVLMWNTUnlzOFZlZTlXdEpST1JON1liMy8rMXBENlRDZjFpcXhm?=
+ =?utf-8?B?c2k0cG9wQUZGemV4MzZIS1JZZGlCdlE2VDlLazJ6WkZwdDdWOCtZNEY1Ly9i?=
+ =?utf-8?B?ZHJ1blZKcStCcml0c0d5K0pIQkQra1RELy9pQjJmQlA3YkFMYWhFYkdNd1hx?=
+ =?utf-8?B?WlJwRTdVNUoyR0c5UWNqMUR1ckV2VnlWR1ZGUGVWMEh3NFh4ZE1wYmdoN1B4?=
+ =?utf-8?B?Y1hBNWJwbEtLVUpmdFZJWGVuK0tNQ3ViUUJsd1JGUWVnNFpOSGtMdWtBdzhZ?=
+ =?utf-8?B?Rnd2SXA4Mm43b1ZJZnJXVzlFSFB0N0ZJUG43TFdRM2NBRUxDTnNOWFo2THpw?=
+ =?utf-8?B?T0JmTkFyM3B4QnFPeVNvNEF2TTdoUDlRRXJkZTNHdU0yZUhBTGlDa3lKR2dx?=
+ =?utf-8?B?VnRBK3Y4eFZHczk0dEF4M01sbEV1R1VFUmpCRktkQjBaNmR1RHJTbXNJd2hr?=
+ =?utf-8?B?QjhVeEM0VXVvb0E0bktTRDRmR1U2bU16cVdNM21JUjQvczNicC9TZ2lMR2Jn?=
+ =?utf-8?B?MkJxQ0k0YkxvcHl2Y2hlWmdVaThEaXhvZmZZN1FNdUdwdEg0ZDhVSzd0Wkdz?=
+ =?utf-8?B?Y0xNZUdDNG5wRFl0UkRGWktzRXRrWXIwSHFEUy9MNkRCTnU3WGZNSjlyb0dB?=
+ =?utf-8?B?Y3JNQUJGUHhJZjJNOW56VE8rcFRTbkkrbkVLZTRNRU9LK0tlRmwvUkJzdkkr?=
+ =?utf-8?B?UHN1dnpxbXkwZTAyYkVVb2lOcHlrT3hTL1pxMTBuRjIvS3NrNExHd3F0OUZE?=
+ =?utf-8?B?RHhucVdnU01RUGFjM1NhRm92ZmZ2b3Y5WFBmd0VVSzl1WHN6bUN1SzA4REhX?=
+ =?utf-8?B?NnVmaVBkS1IrTVF5eFFmN1JsN21wZ3grOFRBTG9pSDJoQzRXdld3VGZJZ1RM?=
+ =?utf-8?B?a0pVaDVDb3pveW14NVVOODh0RkhabUM1UzFkYjd5aUJUa0dvcG5iVDdKYk1u?=
+ =?utf-8?B?YzVqZmsrOStKdTV0R1NmWEEyTGwvcDVpcmhwaE42NGRjU0orc1A1WitqOGVa?=
+ =?utf-8?B?c3RYeHdPeDJPT2JIQUtIdWtGR3d4R0JQNzZtU2FraXpTNUp1aEJOVkd2RXN1?=
+ =?utf-8?B?U3hiMVdzaU02eTg1bzZnZXNBbTJFN1VVL0RuWURkNzVuTiszUGhrV0Y1TGVt?=
+ =?utf-8?B?VzdzeWxldWlGRVV1QjlISEU5UG9ZU0hXM2pDYjZDTkhHSW5aek5YY0VqTG5z?=
+ =?utf-8?B?OGhSdHlkQytQaDQ0RmhyMU9kL0FZRkZ6QkJvb0lyZk1oNU53aEcxUnpIWjJ2?=
+ =?utf-8?B?QldoSkViUlpjRk9YUVVDMDNSZ1BqOWNDeGlFcnJVZmcyOGVpM3NEWklCSVh2?=
+ =?utf-8?B?RzZsbEJjRDNkN24rOHRXUHFOcG1nQTNhQWFTNTNLS3RXUXcyS1MrMSszQmNL?=
+ =?utf-8?B?L2dER3IyMjEwWkNmTy90dWtLcjk0V1lTc3FNREEvd1ladHFkdENzOFhBdU92?=
+ =?utf-8?Q?aSYdXEfC?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6a18cb71-ab45-49fd-225d-08d8c38ded3c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4487cbde-0039-46ed-940a-08d8c38df3d8
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jan 2021 13:09:21.2110
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jan 2021 13:09:32.3266
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: isXG44SPPGSGY7Zh36gFnimJ1Eqyr1enlkXEeeKhMFSqJ0S7xJxuK4UVqjs8rQpsgS2ZbykhS4Q7Nwg9CFx4UlmqOn7jclG7X1LQ655db8Q=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 2Bp4G7N11pIqg7kBVoT6OWYYytZVmAVe+r9W36YjowBrfcIRy6/EJw5VTa5jspH7WWT0wKWHiN0ycrssvoWJbUdo5i7XIRT4x1wg8LklBR4=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2951
 Content-Type: multipart/alternative;
- boundary="------------242BC2776A07B49E94529EE0"
+ boundary="------------F40F0CDB484363CEAFD4B9EE"
 Content-Language: en-US
 
---------------242BC2776A07B49E94529EE0
+--------------F40F0CDB484363CEAFD4B9EE
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 2021-01-27 10:55 a.m., Leon Anavi wrote:
-> [Please note this e-mail is from an EXTERNAL e-mail address]
->
-> Portion is a Python library providing data structure and
-> operations for intervals. It replaces python-intervals.
-> Release 2.1.4 brings:
->
-> - Much faster get, copy and | operations for IntervalDict.
+> - DNF (as used by RPM based distributions)
+> - RPM-ostree (as used by Fedora CoreOS and RHEL CoreOS)
+> - Pacman (as used by Arch based distributions)
+> - Yum (as used by some RPM based distributions)
+> - Zypper (as used by OpenSUSE based distributions)
+> - APK (as used by Alpine Linux and postmarketOS)
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../recipes-devtools/python/python3-portion_2.1.4.bb | 12 ++++++++++++
->   1 file changed, 12 insertions(+)
->   create mode 100644 meta-python/recipes-devtools/python/python3-portion_2.1.4.bb
+>   .../python/{python3-pako_0.2.3.bb => python3-pako_0.3.0.bb}    | 3 +--
+>   1 file changed, 1 insertion(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-pako_0.2.3.bb => python3-pako_0.3.0.bb} (65%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-portion_2.1.4.bb b/meta-python/recipes-devtools/python/python3-portion_2.1.4.bb
-> new file mode 100644
-> index 000000000..d08d3e725
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-portion_2.1.4.bb
-> @@ -0,0 +1,12 @@
-> +DESCRIPTION = "Python data structure and operations for intervals"
-> +HOMEPAGE = "https://github.com/AlexandreDecan/portion"
-> +SECTION = "devel/python"
-> +
-> +LICENSE = "LGPLv3"
-> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=05f1e16a8e59ce3e9a979e881816c2ab"
-> +
-> +inherit pypi setuptools3
-> +
-> +SRC_URI[sha256sum] = "58b2792e6e9837a2d55a97d459b940c90fb08b5fba774f524e9359727c80e7b4"
-> +
-> +BBCLASSEXTEND = "native"
-> --
-> 2.17.1
->
+> diff --git a/meta-python/recipes-devtools/python/python3-pako_0.2.3.bb b/meta-python/recipes-devtools/python/python3-pako_0.3.0.bb
+> similarity index 65%
+> rename from meta-python/recipes-devtools/python/python3-pako_0.2.3.bb
+> rename to meta-python/recipes-devtools/python/python3-pako_0.3.0.bb
+> index 21c48fca6..3eacd0bdd 100644
+> --- a/meta-python/recipes-devtools/python/python3-pako_0.2.3.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pako_0.3.0.bb
+> @@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/MycroftAI/pako"
+>   LICENSE = "Apache-2.0"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
+>   
+> -SRC_URI[md5sum] = "8eb7077075091c50e4b8a9f939607277"
+> -SRC_URI[sha256sum] = "6be55fd8c5a2a6f02974f37438c1c47a3d9e764ce81c9d0a1a8c9a1815a59778"
+> +SRC_URI[sha256sum] = "eabd1c121d6701069d1a10132f197ee2b5f4e75a3d68a93b07f69214ab0ff9c7"
+>   
+>   inherit pypi setuptools3
+>   
 >
 > 
 >
 
---------------242BC2776A07B49E94529EE0
+--------------F40F0CDB484363CEAFD4B9EE
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -164,46 +159,41 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2021-01-27 10:55 a.m., Leon Anavi
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210127155538.12229-2-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">[Please note this e-mail is from an EXTERNAL e-mail address]
-
-Portion is a Python library providing data structure and
-operations for intervals. It replaces python-intervals.
-Release 2.1.4 brings:
-
-- Much faster get, copy and | operations for IntervalDict.
+    <blockquote type="cite" cite="mid:20210127155538.12229-3-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">- DNF (as used by RPM based distributions)
+- RPM-ostree (as used by Fedora CoreOS and RHEL CoreOS)
+- Pacman (as used by Arch based distributions)
+- Yum (as used by some RPM based distributions)
+- Zypper (as used by OpenSUSE based distributions)
+- APK (as used by Alpine Linux and postmarketOS)
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210127155538.12229-2-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210127155538.12229-3-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../recipes-devtools/python/python3-portion_2.1.4.bb | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-portion_2.1.4.bb
+ .../python/{python3-pako_0.2.3.bb =&gt; python3-pako_0.3.0.bb}    | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pako_0.2.3.bb =&gt; python3-pako_0.3.0.bb} (65%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-portion_2.1.4.bb b/meta-python/recipes-devtools/python/python3-portion_2.1.4.bb
-new file mode 100644
-index 000000000..d08d3e725
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-portion_2.1.4.bb
-@@ -0,0 +1,12 @@
-+DESCRIPTION = &quot;Python data structure and operations for intervals&quot;
-+HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/AlexandreDecan/portion">&quot;https://github.com/AlexandreDecan/portion&quot;</a>
-+SECTION = &quot;devel/python&quot;
-+
-+LICENSE = &quot;LGPLv3&quot;
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=05f1e16a8e59ce3e9a979e881816c2ab">&quot;file://LICENSE.txt;md5=05f1e16a8e59ce3e9a979e881816c2ab&quot;</a>
-+
-+inherit pypi setuptools3
-+
-+SRC_URI[sha256sum] = &quot;58b2792e6e9837a2d55a97d459b940c90fb08b5fba774f524e9359727c80e7b4&quot;
-+
-+BBCLASSEXTEND = &quot;native&quot;
---
-2.17.1
-
+diff --git a/meta-python/recipes-devtools/python/python3-pako_0.2.3.bb b/meta-python/recipes-devtools/python/python3-pako_0.3.0.bb
+similarity index 65%
+rename from meta-python/recipes-devtools/python/python3-pako_0.2.3.bb
+rename to meta-python/recipes-devtools/python/python3-pako_0.3.0.bb
+index 21c48fca6..3eacd0bdd 100644
+--- a/meta-python/recipes-devtools/python/python3-pako_0.2.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pako_0.3.0.bb
+@@ -3,8 +3,7 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/MycroftAI/pako">&quot;https://github.com/MycroftAI/pako&quot;</a>
+ LICENSE = &quot;Apache-2.0&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa">&quot;file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa&quot;</a>
+ 
+-SRC_URI[md5sum] = &quot;8eb7077075091c50e4b8a9f939607277&quot;
+-SRC_URI[sha256sum] = &quot;6be55fd8c5a2a6f02974f37438c1c47a3d9e764ce81c9d0a1a8c9a1815a59778&quot;
++SRC_URI[sha256sum] = &quot;eabd1c121d6701069d1a10132f197ee2b5f4e75a3d68a93b07f69214ab0ff9c7&quot;
+ 
+ inherit pypi setuptools3
+ 
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -215,4 +205,4 @@ index 000000000..d08d3e725
   </body>
 </html>
 
---------------242BC2776A07B49E94529EE0--
+--------------F40F0CDB484363CEAFD4B9EE--
