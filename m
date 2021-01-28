@@ -1,17 +1,17 @@
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.40])
- by mx.groups.io with SMTP id smtpd.web12.23959.1611839188719058282
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.89])
+ by mx.groups.io with SMTP id smtpd.web11.23999.1611839199335183691
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Jan 2021 05:06:28 -0800
+ Thu, 28 Jan 2021 05:06:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=S89oQk9v;
- spf=pass (domain: windriver.com, ip: 40.107.244.40, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=QXKN2NI1;
+ spf=pass (domain: windriver.com, ip: 40.107.223.89, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=UACTJhZt5aL0mSgi4jvEX4bIBkLjqWbdl8fYR+14JQg2AJlcl6qFQPVnlqRmyXaB/Spsr/rbdvF2tDEONer8XT1seP+i5jPGgRmzu7Y2h9I5Q3x7S7hs0AhcqcXO+W/JaMlufgfDZ7XAVb2nc9+kScpI+4EOA5zO1cAMRtIoEFxttzx6qV2DlQbHm+S05uBTteQ3Suf2gwNOiFXKh7pdQjpyVJzaL2cJvpnto52p6fukGPZkhagyI5c2P4GujQqW8n8VFeDtTzQw31T0ZhV6XqibQs7oCh3qvW8LtxzKvRPnQsci7/fV/rOvy2glCx7uThHOmUotOad2PkSECQYxBg==
+ b=bhVj4oNz5LH7PgCImJReY+RW2Jd8rjSA5ACocBftsCIdBT0ejYoMuc38XY3hst2n3SSNOJzA8ZKALgJRkMtw7iDGcMw7jRd2irw6j0mif2BcZfblRkQfQGSwUY2Rjedcz40doB9L3BHEO0oam7qRtIHhIvmDuFGwkqjm3OUABJjbv4Q7zvtOFF1xRtvEy7ijK9GulF8bOb0pmUANnTs5SE64GHg9Tam5d2KRIyuF8F5U04pKCQw34RqZW1em3aP7jLgIpVrd6y6dDG9t8QsVvYCTnVulKco9qww83tHWSimLYL5azWGj8KFyXIC3zy88dPvQcuQLgf8ULzstpWfKIg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=miumiSlcKXuo2OhKjuvKuyWZpqjjm6nbRCgm2aZtWik=;
- b=nojK2CHDyYogi74+r3EbHocfLzK+cp04j5F59Px39i2cdtM0mTJdZ1uT2Xpe31wFeI8sZLAkSACmzdMx+BpVD8Ihx7oJ1g0E2Gp5W1DQRKiwC6NyIStx0Py0G8N5uwCdpT5yD9z2hDP1Kzw8lkZEV/B4OOYOR/eMpyCkepTLE8JqLodq8oLTP49+W8ehbUQHgxPAY7vMNugxX9xyvSgyiWRGYnExUPyAelms0SENYpjEMCCTKRvOJefTglovPTZV4wtJsKfbrPfHkol/iYdCR8feAtSMs525/rpsmSYSG8xyrsiQ4eE5Oybpjzleqx+cKHv9w69jmZvBAd5U8QaO7Q==
+ bh=Kz7sPhnsT8DWcOpBZ8wRkRh2Gq8oLEjWYrYbZFUGohM=;
+ b=K6urNL2aDvQ2iSsMEuhXQrlY8rOG30ev9U+dGe6mqp8fKGAaRfXWmB0eXws6+EHC/Jsh/Gm+1jp2gdAMhzNw/V/4NJvBNB5kvuK0fvjxLtLpCRQWbFMo3dY1GiLgYUR7x0Eb5gOaK3pj29Mp4o9WQXanUncX5yqCRiBKjVx2nQItsu8unURi9Kp+jkwN/ECN9IF/XGBZPvSEFJzkiAaQGBsIr0b5nxJmFVHZs57as+5AjBO35gH9nvtPg0fP1fVl/n1uNG/VPX3WQgllKwTJWOKCvnQlYHP6Uh629XBjk7aBKGXJpVorLtKi/L6H0sJGCEmonZ55h0NPBXYaxS/Rcw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=miumiSlcKXuo2OhKjuvKuyWZpqjjm6nbRCgm2aZtWik=;
- b=S89oQk9vsBDzSDO7v+7c1s6+njn1zCPNe1XabWBMCe+SOlXo4XDk1T9T7HHfd9qRSl2idrP1uG9xnoF/1N6pb2XKMuGHNzsuhez8CjiTaYT3GfnICpbUH47fpEN/4UWPLf/WzfTVcQW14Dv2nq9apGu5jDwURXRJ9YPCJ7tzsvY=
+ bh=Kz7sPhnsT8DWcOpBZ8wRkRh2Gq8oLEjWYrYbZFUGohM=;
+ b=QXKN2NI1vXa1lgGat9TEGRpmsznHnrJwKhmnbaPtkmDePNAHOFwot+m5rVToUnqW6bxMYEHbKEFLrThdIU3uvyvXvCUkN7Pw6MbJhGrH+FI9QSJvylgamNDLO0z6hTFU4pWcHVZjo1I34kEvucMXRD2kARH0trxR2lvFpA9q7zI=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,121 +28,141 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BYAPR11MB2951.namprd11.prod.outlook.com (2603:10b6:a03:90::10) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.17; Thu, 28 Jan
- 2021 13:06:27 +0000
+ 2021 13:06:38 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3805.017; Thu, 28 Jan 2021
- 13:06:27 +0000
-Subject: Re: [oe] [meta-python][PATCH 4/5] python3-lazy-object-proxy: Upgrade 1.5.1 -> 1.5.2
+ 13:06:38 +0000
+Subject: Re: [oe] [meta-python][PATCH 5/5] python3-custom-inherit: Upgrade 2.3.0 -> 2.3.1
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20210125152337.20937-1-leon.anavi@konsulko.com>
- <20210125152337.20937-4-leon.anavi@konsulko.com>
+ <20210125152337.20937-5-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <1b52d07c-3b94-3154-c42f-4d2020c85cc9@windriver.com>
-Date: Thu, 28 Jan 2021 08:06:25 -0500
+Message-ID: <b738a681-ead4-2cfa-c235-d9138d2e3ef8@windriver.com>
+Date: Thu, 28 Jan 2021 08:06:34 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.0
-In-Reply-To: <20210125152337.20937-4-leon.anavi@konsulko.com>
+In-Reply-To: <20210125152337.20937-5-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BL0PR0102CA0043.prod.exchangelabs.com
- (2603:10b6:208:25::20) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: BL0PR0102CA0051.prod.exchangelabs.com
+ (2603:10b6:208:25::28) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BL0PR0102CA0043.prod.exchangelabs.com (2603:10b6:208:25::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.16 via Frontend Transport; Thu, 28 Jan 2021 13:06:27 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BL0PR0102CA0051.prod.exchangelabs.com (2603:10b6:208:25::28) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.17 via Frontend Transport; Thu, 28 Jan 2021 13:06:37 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 8c103266-28d6-4b9c-4dcd-08d8c38d85db
+X-MS-Office365-Filtering-Correlation-Id: 30585454-bdf1-49a7-0ce7-08d8c38d8bca
 X-MS-TrafficTypeDiagnostic: BYAPR11MB2951:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB2951AAD0F9E3F35EDCF270D59FBA9@BYAPR11MB2951.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:843;
+	<BYAPR11MB2951E4968EB60ABE370672FB9FBA9@BYAPR11MB2951.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:873;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	09zYWXglkePotcCBna9lLTHheIB7Io1Wbzrv3marGD5kaj5Bx9EmQc4pCW7yHqGTu9mefmp0teQ05GePUPWk7zBYQ7Cw9lftOZMOp1+s5VNGUqUFrveUYOfOuuPvxCByeU54uDDwhAl+D+v1eKj9ypLWezLljcVKYK1D9CCRk88eFr10B9JfSwn4ay7ClOGpCwNG4Wu4k4QMHFtoCVC2NGp35FQXOBHbvvEn4taEdqjTTVA2s5E248A6kabAif4eGkD56IpZ7ru1YkjYKiIwHxTgUfoagK23QK2lmWpuvaiSgEA78RQ1obGIgjBqEApPs/CO2sNFvpBS9pKYCYMU94GahD0CS2QwMGdCWPzLOcUt8wXv0TBhqi9N3VGWDbhhYTApnpkPx0Y6kAS7+dlXCRoR/KJr3pFBpVmzuhrEfY5dy+FN21yUdeCZ32/amKgXX3e5n8KS5iT7xzIPdLnTcycoSP1j+d0+A9tuEOfZgYJ1Tyy1O2uZRUnQvfW78iZ+sYwszHROc+ViGCposk1QO8K3S/bSqMMDP/vu706YY5UOpPyBiDi5EmG7uCUCEFplBotk5XCPX1tkKzJONnYgCMu75MuCOfscydMzAo6b14g9Jfr20Vy9BENX6ci9V/p7PMZ6K3VKu/5lHmcw0BVUC8LmxIKyiGeauUc+byJj6M4=
+	HyqO5XKn4Ydb/CRfkf9fJpk2v53CRzaAeC6J4iZHlIUdUJe3VktwfuNmByY5jhyIjh/Ff0letdm8uFFKh+7t0LL7kq1GJO0aa4h/NN/+glomoV2pTwyMfMbKxq03OHqrDg8a6q+KdC+ynSP2HlCxGnQfLXVVdHkSix3/dXOzyXm+Nd+5pnwHjL6b7TLjQTbYFXhyri25ixAdt7nFDdsq5S9j1ZCx+Dbbl7qARIeBJwJsh0uqOelKigvASaF5dpL1Xl4jpqZGVz6tGSIJKxh5/YtMG3ryLU5bXV3SAmpSey4HuJ2MbkprHmfSazetJ7wawPyBiMgx1kWgwEcLAz+s65Et7gwz4Caq5ul0t9VHAiypekRv1sBrAtXsoEdeXmrhhRSjJofz+HDUxmAp2RUojWgQfYuy1p/gQ9dCBnKXvdJJxIi429nOGHZ2iY3ydVFLbvuSuoaCgS0jy0M1ayOfdBXFnJMADgqjDHWkKvGJ3PktHGgs8QdpWDR3IvlpAAMB2xEiP12+JtlTHBXImbOUkmyp6AQ90O7fXqXzeKs/ffScwE05TkX7t0S4XLt8cpqBmBb5ZqIhOaC3ORShS7p223iapbagx91OzP1UOUNDvADDdM/d7oPeIy+0hJowG4lo5GsMAtKFw6Y407TPWGXp8g==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(136003)(366004)(39830400003)(376002)(396003)(36756003)(2906002)(33964004)(52116002)(83380400001)(166002)(8676002)(966005)(66946007)(478600001)(6486002)(66476007)(31686004)(66556008)(31696002)(5660300002)(8936002)(44832011)(53546011)(2616005)(956004)(16576012)(86362001)(186003)(16526019)(26005)(316002)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(136003)(366004)(39830400003)(376002)(396003)(36756003)(2906002)(33964004)(52116002)(83380400001)(166002)(8676002)(966005)(66946007)(478600001)(6486002)(66476007)(31686004)(66556008)(31696002)(5660300002)(8936002)(44832011)(53546011)(2616005)(956004)(16576012)(6666004)(86362001)(186003)(16526019)(26005)(316002)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?cjd6Qk81Q1RzN0ZRRmYzWlcrSlpkRGlIR1BEZEtqUkU0TjZQWThZRXYzNFFI?=
- =?utf-8?B?Q0Z1OUNxOXFodlNhQTZ0azZ1YkxaWUV6YU1zVmNRSzVCMGFBZEd6S1lMT2g4?=
- =?utf-8?B?ZnkrSkczUVh3ZjlyU1VCZFpBUnkyZjhuMWhzdGJkWEFHMktoc3lDNHNpdDlM?=
- =?utf-8?B?TVdMRW9nS3B3SVA1d25XcEg4elNWdGkrTGM1SDJiV2N1RTVydmdMRlI0RlNJ?=
- =?utf-8?B?cVpBMmdNSWErb1hIUEpERXRDMjI1NnBuSXFVOC9ZcmMxWE4vYWZjdllKakNj?=
- =?utf-8?B?SWxpZ0xmK1NIVmsvQ2RaYkVUNmtPbjA4SE9pdTU5bTJHRFd3UTFPTlU3d2VM?=
- =?utf-8?B?K2dKNnZhQUJXKzVKWkpxOEt3TkgzNXJlUzczMEVuUWdnVlJtRUpNZDZKUTU3?=
- =?utf-8?B?Z1Q0L3o2QnFGZkM2bzNOWXZxVFF5SmUwK0F2Q00rTVhvcUx5TnFsbmdRUDJG?=
- =?utf-8?B?TkN3dGRZbTh2NjkxT1ZPM0JRSkhHVlE0WERsendRa3NKRkt4cHFUMjkxRlNn?=
- =?utf-8?B?OW9nUHFFMHEyc0RRcGlQS1Fvb1RJNzhWK0pxNXBoNmhUZFdGczdnRDNQZzBK?=
- =?utf-8?B?Q3RCUnNBRXpya1h3Sml6L0tYUW9zanVoK0hSdHF3dStabkdQenVicUhQU2pF?=
- =?utf-8?B?bnNaZ2hKOGNSYlVDbi9YT0IxZDcvZXcxeWJUTWhlVldRcDYzN1hkd1VaZGxE?=
- =?utf-8?B?N0EwRWhUWFVqNnptMjVhZ2JjZU5BU21DRGo2Vnd1R3hGVHZsblhPU3RNdVJO?=
- =?utf-8?B?R05nTzRUQlpteDcwVkpoWUtpVUxTWERIaFFmRy9TSjY4KzI0MS9LdFg4YmIy?=
- =?utf-8?B?TjJtcC9uRnFZQ1pKeE9jYUFxUEFBTTBERUZhenZab0xTbnpJTDBFUU5GYmFW?=
- =?utf-8?B?LzVoc0VuRkZudkJoaVcxZ1c0R3pZM1FqNm94T1RmcWYzVHVmaXRFak0ybmI0?=
- =?utf-8?B?Z1NQQWFYbmE4ckkvUUllTWxIMXArRm9CazJUelllNXR6d1VNTW0zRm9uK2tJ?=
- =?utf-8?B?dm1DcE5Gend4dW4vaU9rMTEvZkl6RWNTWkZpZmtEdGw5NzFZQXJ0aUJrWm93?=
- =?utf-8?B?c1V3RGRkbW0reEtwV295S1Fxbk94VGNHZ2pjaEdvVEpLYWg1WEVqY1ppaEJ2?=
- =?utf-8?B?eFBnTGZkQXRIZ0Q4eW80dEVhNzZMajcrc3ZDUXhVVWsxSE9WMlVrQ1RoOHhV?=
- =?utf-8?B?aEdJdnZDd0YwaXFNR1JaL3o2aFlpR2ZwbDR4NHJWb3RQMWlERDlVejgwZUYr?=
- =?utf-8?B?T1BGckJmcmZZMW1xMHhmRm8zaHVCTXpEK2h1SEtJcnF1Nmh4Y3ZFcWdJTVFn?=
- =?utf-8?B?WElSRnJjeWgwK3VEcHJFS3RQelE2REdRN0VQVmZHcXRPenFCSFlHZlQveTRX?=
- =?utf-8?B?Q21KOFVFWkk0Z0F1b1lUTmMrd0NMTC9odVNoNFh0WGQwaUFuVzJuK3JXd2Mv?=
- =?utf-8?Q?R24I6LGh?=
+	=?utf-8?B?TFdod05uSm5HL2tNRVpKOGxGcTV6NWRieFc5VEVyaTh5TElPWTdtQUE1ZU5W?=
+ =?utf-8?B?VmFyRHZINnVUQ1R4ek0yOWRjOXJXbHFTK2loNSt2REUrLzVzUkRMcGoySGJW?=
+ =?utf-8?B?Um9aZ3RDR3Y3a1Brc2pLVEs1WndGU1NaVUJNSW9jK3NNTkw0U3MrMmxWUStq?=
+ =?utf-8?B?NCs0Ym9KcWVQVEc5K01LTks5ZnJPdWFWQk44V0Y5bWtTN2tVOFVqaURTSThH?=
+ =?utf-8?B?eHB3R0lybUdsODZ3Tm9qK2VXbUhYN09xZGk3UWxabk5kOUhTTlorbFNNYWpx?=
+ =?utf-8?B?N0xEZkpZQlhEakJzQkYvMFhqbVhidU9uZ1lTaDhVbUVEZG54SGVJaEc4OTV3?=
+ =?utf-8?B?RmZ1Zkl6MnpxODNrK1JyMGhDUzFoK0RJNjJLZTZ2VmZiYmg3VCtSMkFrK3Mr?=
+ =?utf-8?B?V3RFVmZXLzJ2Nmw5cTkvQnJqVU9mTVFZMy9FdDM1dUR0azErVW8rTTh5TUN3?=
+ =?utf-8?B?WWR4YmdaNlU0eUc5T1lXOXNQd0tPNFYrSHhwajlzVG5LVURDcnFjUlRJUnlq?=
+ =?utf-8?B?KzJRZ1pBVzRybnhGUVJKNjJKaVVQcEJERjUzYy9tZUdOVklxRVk4d3pEZjdr?=
+ =?utf-8?B?WkVVVDI5TGVUYW9FM3VZazNLR0pwZnRSc2FSZjByUS8vZ1pwQnhVRi9IWnFW?=
+ =?utf-8?B?UUZaeU9YN2MzbGp3V0g4V25YSVJzYTdzY0Zab3d5bnAzdFBaeXVOaURUNnUz?=
+ =?utf-8?B?UlI4cHRxck5IeUJNUFhUMVRnRm5XQlZtVVJzNlVmM0lYb2t3a1owc0c1VXE4?=
+ =?utf-8?B?VUdJVnNZamdWbGkvTUdCNXlBak02ZlNaUlAwVXpCTzV1ekhSVzg2bTc3ZkpR?=
+ =?utf-8?B?RWZqd2ZwdnFtUXAvd0twT2VFY2k5NXd0NjRkWmFCUHBGYkFra0FxTjIwaEhM?=
+ =?utf-8?B?TU1LQzRwV3ZIR1BkWUpESzZkcXhwTXJCb3dsNnNSM3oyU0hqZXJXZkw0L2NU?=
+ =?utf-8?B?ci9rT1Q2N0R0azhEN3c1RWY0UnEyRTFDSVhsZWNTS1pSTEY0emFFOVdzcnVh?=
+ =?utf-8?B?UFBpdnkrVFpyUWFlQnNHOWt1N01xNVNuVmw4eVJzRUlNcE94OUtMVGVlZC9H?=
+ =?utf-8?B?UUpmZUNHOG9wKzVTUmtRdjg4UVhvSlZKWmNRazQvRmRZamN5TGYwa0tIT3Qr?=
+ =?utf-8?B?cXFLNkp4VDlnUkFvdmlNdzhudlNQMTB3eUdMSEN2WExoNjgzYU1SaWsrdlRW?=
+ =?utf-8?B?NTNWeHBiWk5nYkpsVVpVRDJObElhODVOQXN5dkJSWlFteFlobnNvdjlJYkM3?=
+ =?utf-8?B?Z211QWpNalZRdVRWcnBmVW9HU2ppWDhwc2dXYXQ0MzV1Q2dhSWF5aytwSkRT?=
+ =?utf-8?B?L1lhcTRkYm4wV1BmcVQwVW03Y2R0OWxITE9jNmNjWkZkcXlhQXJtRWEvNmQ1?=
+ =?utf-8?B?eDBqb2hWd0tHZnZvWlhDQ3ptZGNVKzd5Z0V1N2s5ZzhEeTFDV0F6WWtYRDlC?=
+ =?utf-8?Q?FxUYSOKV?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8c103266-28d6-4b9c-4dcd-08d8c38d85db
+X-MS-Exchange-CrossTenant-Network-Message-Id: 30585454-bdf1-49a7-0ce7-08d8c38d8bca
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jan 2021 13:06:27.7961
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jan 2021 13:06:37.8723
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 4yq38ikLH4l9YoI7LZV+XMyOX8hbhLspjhBmWp0m6sSW18afpTO3zi9DlMQxAGEtlYw7/BGL8zMeJYJgQ63f/6pZuuQ3t5FDdB5Ngop7D+4=
+X-MS-Exchange-CrossTenant-UserPrincipalName: z4FWwfKZ/Tbwvuyxy/Go6IYnjsHrDyOvdpk98kd/o6utN0ZgntGyQRTHRxL9fMF4MLdFkCHdbV8xmKpTEjnzKGovYnmtOKI/w5egcJmRRSE=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2951
 Content-Type: multipart/alternative;
- boundary="------------C24DF5FCF4AC0782B1040094"
+ boundary="------------365223C3A6EE54A58016FC47"
 Content-Language: en-US
 
---------------C24DF5FCF4AC0782B1040094
+--------------365223C3A6EE54A58016FC47
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 On 2021-01-25 10:23 a.m., Leon Anavi wrote:
-> - Added Python 3.9 wheels.
-> - Removed Python 2.7 Windows wheels (not supported on newest
->    image with Python 3.9).
+> - Methods section is now recognized in NumPy-style docstrings
+>
+> License-Update: Use file LICENSE.md
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...bject-proxy_1.5.1.bb => python3-lazy-object-proxy_1.5.2.bb} | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-lazy-object-proxy_1.5.1.bb => python3-lazy-object-proxy_1.5.2.bb} (68%)
+>   .../python/python3-custom-inherit_2.3.0.bb           | 12 ------------
+>   .../python/python3-custom-inherit_2.3.1.bb           | 10 ++++++++++
+>   2 files changed, 10 insertions(+), 12 deletions(-)
+>   delete mode 100644 meta-python/recipes-devtools/python/python3-custom-inherit_2.3.0.bb
+>   create mode 100644 meta-python/recipes-devtools/python/python3-custom-inherit_2.3.1.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.5.1.bb b/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.5.2.bb
-> similarity index 68%
-> rename from meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.5.1.bb
-> rename to meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.5.2.bb
-> index 4ba947923..3ff7a126e 100644
-> --- a/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.5.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.5.2.bb
-> @@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9c5c2c74370826468065c5702b8a1fcf"
->   
->   DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
->   
-> -SRC_URI[md5sum] = "c168cec73acdec25a49f6f467f5b1eaa"
-> -SRC_URI[sha256sum] = "9723364577b79ad9958a68851fe2acb94da6fd25170c595516a8289e6a129043"
-> +SRC_URI[sha256sum] = "5944a9b95e97de1980c65f03b79b356f30a43de48682b8bdd90aa5089f0ec1f4"
->   
->   inherit pypi setuptools3
+> diff --git a/meta-python/recipes-devtools/python/python3-custom-inherit_2.3.0.bb b/meta-python/recipes-devtools/python/python3-custom-inherit_2.3.0.bb
+> deleted file mode 100644
+> index 489e71984..000000000
+> --- a/meta-python/recipes-devtools/python/python3-custom-inherit_2.3.0.bb
+> +++ /dev/null
+> @@ -1,12 +0,0 @@
+> -SUMMARY = "A Python package that provides customized docstring inheritance schemes between derived classes and their parents."
+> -HOMEPAGE = "https://github.com/rsokl/custom_inherit"
+> -LICENSE = "MIT"
+> -LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=adc1f231c76ee2f1f36025d56926ba2c"
+> -
+> -PYPI_PACKAGE = "custom_inherit"
+> -PYPI_SRC_URI = "https://files.pythonhosted.org/packages/0e/82/c5bb7ec49a7892a2c583e1017597e3921c59171f10602086ca93c8a83baa/custom_inherit-${PV}.tar.gz"
+> -
+> -SRC_URI[md5sum] = "adf2850dc0e488df959821a5d4c16cbd"
+> -SRC_URI[sha256sum] = "1609d283c2cffce3a58baf7c0c22b655c55f85e1ec39c4717a4423d34610723a"
+> -
+> -inherit pypi setuptools3
+> diff --git a/meta-python/recipes-devtools/python/python3-custom-inherit_2.3.1.bb b/meta-python/recipes-devtools/python/python3-custom-inherit_2.3.1.bb
+> new file mode 100644
+> index 000000000..c0e10448e
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-custom-inherit_2.3.1.bb
+> @@ -0,0 +1,10 @@
+> +SUMMARY = "A Python package that provides customized docstring inheritance schemes between derived classes and their parents."
+> +HOMEPAGE = "https://github.com/rsokl/custom_inherit"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://LICENSE.md;md5=f910a85a4c3da51edf780f17a7608434"
+> +
+> +PYPI_PACKAGE = "custom_inherit"
+> +
+> +SRC_URI[sha256sum] = "a0d104847b4cc1ae24e00061fc2e11da8766b019bf4c8c753822347366c8c49f"
+> +
+> +inherit pypi setuptools3
 >
 > 
 >
 
---------------C24DF5FCF4AC0782B1040094
+--------------365223C3A6EE54A58016FC47
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -155,37 +175,57 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2021-01-25 10:23 a.m., Leon Anavi
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210125152337.20937-4-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">- Added Python 3.9 wheels.
-- Removed Python 2.7 Windows wheels (not supported on newest
-  image with Python 3.9).
+    <blockquote type="cite" cite="mid:20210125152337.20937-5-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">- Methods section is now recognized in NumPy-style docstrings
+
+License-Update: Use file LICENSE.md
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210125152337.20937-4-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210125152337.20937-5-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...bject-proxy_1.5.1.bb =&gt; python3-lazy-object-proxy_1.5.2.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-lazy-object-proxy_1.5.1.bb =&gt; python3-lazy-object-proxy_1.5.2.bb} (68%)
+ .../python/python3-custom-inherit_2.3.0.bb           | 12 ------------
+ .../python/python3-custom-inherit_2.3.1.bb           | 10 ++++++++++
+ 2 files changed, 10 insertions(+), 12 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-custom-inherit_2.3.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-custom-inherit_2.3.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.5.1.bb b/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.5.2.bb
-similarity index 68%
-rename from meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.5.1.bb
-rename to meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.5.2.bb
-index 4ba947923..3ff7a126e 100644
---- a/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.5.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.5.2.bb
-@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=9c5c2c74370826468065c5702b8a1fcf">&quot;file://LICENSE;md5=9c5c2c74370826468065c5702b8a1fcf&quot;</a>
- 
- DEPENDS += &quot;${PYTHON_PN}-setuptools-scm-native&quot;
- 
--SRC_URI[md5sum] = &quot;c168cec73acdec25a49f6f467f5b1eaa&quot;
--SRC_URI[sha256sum] = &quot;9723364577b79ad9958a68851fe2acb94da6fd25170c595516a8289e6a129043&quot;
-+SRC_URI[sha256sum] = &quot;5944a9b95e97de1980c65f03b79b356f30a43de48682b8bdd90aa5089f0ec1f4&quot;
- 
- inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-custom-inherit_2.3.0.bb b/meta-python/recipes-devtools/python/python3-custom-inherit_2.3.0.bb
+deleted file mode 100644
+index 489e71984..000000000
+--- a/meta-python/recipes-devtools/python/python3-custom-inherit_2.3.0.bb
++++ /dev/null
+@@ -1,12 +0,0 @@
+-SUMMARY = &quot;A Python package that provides customized docstring inheritance schemes between derived classes and their parents.&quot;
+-HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/rsokl/custom_inherit">&quot;https://github.com/rsokl/custom_inherit&quot;</a>
+-LICENSE = &quot;MIT&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;beginline=8;endline=8;md5=adc1f231c76ee2f1f36025d56926ba2c">&quot;file://PKG-INFO;beginline=8;endline=8;md5=adc1f231c76ee2f1f36025d56926ba2c&quot;</a>
+-
+-PYPI_PACKAGE = &quot;custom_inherit&quot;
+-PYPI_SRC_URI = <a class="moz-txt-link-rfc2396E" href="https://files.pythonhosted.org/packages/0e/82/c5bb7ec49a7892a2c583e1017597e3921c59171f10602086ca93c8a83baa/custom_inherit-${PV}.tar.gz">&quot;https://files.pythonhosted.org/packages/0e/82/c5bb7ec49a7892a2c583e1017597e3921c59171f10602086ca93c8a83baa/custom_inherit-${PV}.tar.gz&quot;</a>
+-
+-SRC_URI[md5sum] = &quot;adf2850dc0e488df959821a5d4c16cbd&quot;
+-SRC_URI[sha256sum] = &quot;1609d283c2cffce3a58baf7c0c22b655c55f85e1ec39c4717a4423d34610723a&quot;
+-
+-inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-custom-inherit_2.3.1.bb b/meta-python/recipes-devtools/python/python3-custom-inherit_2.3.1.bb
+new file mode 100644
+index 000000000..c0e10448e
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-custom-inherit_2.3.1.bb
+@@ -0,0 +1,10 @@
++SUMMARY = &quot;A Python package that provides customized docstring inheritance schemes between derived classes and their parents.&quot;
++HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/rsokl/custom_inherit">&quot;https://github.com/rsokl/custom_inherit&quot;</a>
++LICENSE = &quot;MIT&quot;
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.md;md5=f910a85a4c3da51edf780f17a7608434">&quot;file://LICENSE.md;md5=f910a85a4c3da51edf780f17a7608434&quot;</a>
++
++PYPI_PACKAGE = &quot;custom_inherit&quot;
++
++SRC_URI[sha256sum] = &quot;a0d104847b4cc1ae24e00061fc2e11da8766b019bf4c8c753822347366c8c49f&quot;
++
++inherit pypi setuptools3
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -197,4 +237,4 @@ index 4ba947923..3ff7a126e 100644
   </body>
 </html>
 
---------------C24DF5FCF4AC0782B1040094--
+--------------365223C3A6EE54A58016FC47--
