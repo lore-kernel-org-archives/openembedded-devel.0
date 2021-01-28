@@ -1,67 +1,75 @@
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
- by mx.groups.io with SMTP id smtpd.web12.20863.1611814566803132092
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ by mx.groups.io with SMTP id smtpd.web12.21186.1611818389009506771
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Jan 2021 22:16:07 -0800
+ Wed, 27 Jan 2021 23:19:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: u.oelmann@pengutronix.de)
-Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
-	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <u.oelmann@pengutronix.de>)
-	id 1l50b7-0003RB-6q; Thu, 28 Jan 2021 07:16:05 +0100
-Received: from uol by dude.hi.pengutronix.de with local (Exim 4.92)
-	(envelope-from <u.oelmann@pengutronix.de>)
-	id 1l50b6-0005sK-Rz; Thu, 28 Jan 2021 07:16:04 +0100
-References: <165C3A563363138B.8233@lists.openembedded.org>
-User-agent: mu4e 1.4.13; emacs 28.0.50
-From: "Ulrich ?lmann" <u.oelmann@pengutronix.de>
+ dkim=pass header.i=@gmx.net header.s=badeba3b8450 header.b=h5jFa6kp;
+ spf=pass (domain: gmx.net, ip: 212.227.15.15, mailfrom: n.jeker@gmx.net)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+	s=badeba3b8450; t=1611818387;
+	bh=7YZRrAkmsPbKynpxbOjnjCOD9x/YxPiRbY4rYv69J5E=;
+	h=X-UI-Sender-Class:From:To:Subject:Date;
+	b=h5jFa6kpN8FhpslTE+X1ccrlfO1ecm2MStxjelOkTQB5GLtxP82IVRYkq0d3TU0Xk
+	 +7NnU6WVhUFjoeOWU2gRmmejiyrmnNiGYYKcjJtDadZKn0ZYoJQVw5czciYnnzuSOq
+	 3BeuPFcVFYBRFDQmRKFcTLCMnZ+iDH0mNUD5Tg5w=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from station.v.cablecom.net ([84.75.156.97]) by mail.gmx.net
+ (mrgmx004 [212.227.17.190]) with ESMTPSA (Nemesis) id
+ 1MgvvT-1ldYSc066H-00hLdq for <openembedded-devel@lists.openembedded.org>;
+ Thu, 28 Jan 2021 08:19:47 +0100
+From: "Nicolas Jeker" <n.jeker@gmx.net>
 To: openembedded-devel@lists.openembedded.org
-Cc: =?utf-8?Q?S=C3=B8ren?= Andersen <san@skov.dk>, Khem Raj
- <raj.khem@gmail.com>, Ulrich
- =?utf-8?Q?=C3=96lmann?= <u.oelmann@pengutronix.de>
-Subject: Re: [oe] [meta-oe][dunfell][PATCH] zram: fix sourcing of zram parameters
-In-reply-to: <165C3A563363138B.8233@lists.openembedded.org>
-Date: Thu, 28 Jan 2021 07:16:04 +0100
-Message-ID: <6rpn1plh7f.fsf@pengutronix.de>
+Subject: [meta-gnome][PATCH] network-manager-applet: Build without libteam support
+Date: Thu, 28 Jan 2021 08:19:46 +0100
+Message-Id: <20210128071946.9624-1-n.jeker@gmx.net>
+X-Mailer: git-send-email 2.30.0
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::7
-X-SA-Exim-Mail-From: u.oelmann@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset=utf-8
+X-Provags-ID: V03:K1:yTGa8DClzGlJsHIhIDQ/dyDUC8S4SszSc/t5PTpAh7x/3QkSv1s
+ a1lLEURTBEIiifGlwVL6o7PlPBwCtakWM7ykKWH1i5K+sFxW/6USOq9yxknu3x6csVAcvyd
+ SyOA044Rb5n/Ha855tpocWair990JspCbabz0ZvUrvVz0lBJGAeqyyoieGIakGtyEnIqNv4
+ 4fi9AtrY5BwRs1ff4W/yw==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:x0rBdPe5oQU=:6EHVYkUCFAwPEm7gL80D6X
+ k08PzIbR13ejqI8LmOGSc2saiIJe3P0m2ccIkVu6RfzETPp2lE/i1PYALBWWgaY1lnNLUDddi
+ 0O0lZER+IKa97rRXIiOMoesTXetjUVnyzGdqtf2aPzAULDOjfx5UUR/N68w7MGdTHjCuQcCKx
+ WUhbDR4OymC5X7XKpPPDzM2Rk1uIxDToTSf8cMJ6vS4ApC15/a5dmUPILn2GEocPD+B5R/OR3
+ cgzCepsz1Gy3+bTidI067O5cESKS5NMCKqC5FSSl+9sO/lDZg6DAQaxgX4UiO/Sevaw3r5Gi6
+ GT/riHIbOba4STsJb9GcIdEnwFcwHZdHlYjdP6GQk/hdz9PUIaBhDeZOd0U7xx31/d/rm61j6
+ 78H99DiBc6UhG1pyNJyo36VCzfFmfQsHglNTX8GF2/eiIQggNZxaipeuA02Fw7850NufxYhF6
+ 1EDoMABw8jvA7QA3qOSL0g7XxrDUW/cpwQt2wYqpvZRwwBZub1LlingLLUhbCe2ibAx7fqcTA
+ zBw9yYyOvkc8GckJHPWuhtTj9iGxqhHUN7kRos/0GNChk3OdZHa7QZnXqNeGJc853KI+ORLZY
+ V07t/1lKsJvVkXsQksnzAg7tjPYElyAaliU9RaT8DwBQnQTQzu36ohp75sGeKdB3rIMsumuxV
+ cNyL6PvzYY7vZH2t1XfKfnG4oPGdWna/1tJ519XZBUFfp5HtsH1rG+sXVuxl3HG9lmlD+EmfH
+ nBhbF1oYz+mhY09uXR+5k36rgQnVOBs9monboM7YOi+WysgCkPKqy7U8yIyc0gxYbM3xpjh24
+ GKbyleBW6NalWrA5UUDLyK8eDD2ewJEKfWCm52ZaUkyQJubUYutfTdjJRLaCYBN6Lwdae563J
+ CEm8nGtYROTaTz/zEB7A==
 Content-Transfer-Encoding: quoted-printable
 
-Gentle ping!
+NetworkManager is curently built without libteamdctrl support, so
+disable it in the applet, too.
+=2D--
+ .../network-manager-applet/network-manager-applet_1.18.0.bb     | 2 ++
+ 1 file changed, 2 insertions(+)
 
-On Thu, Jan 21 2021 at 12:01 +0100, Ulrich ?lmann <u.oelmann@pengutronix.de=
-> wrote:
-> From: S=C3=B8ren Andersen <san@skov.dk>
->
-> Signed-off-by: S=C3=B8ren Andersen <san@skov.dk>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> (cherry picked from commit 3c8ad9192c1c9f4323bdc7ff28456f11db689adb)
-> Signed-off-by: Ulrich =C3=96lmann <u.oelmann@pengutronix.de>
-> ---
->  meta-oe/recipes-extended/zram/zram/zram-swap-init | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-extended/zram/zram/zram-swap-init b/meta-oe/=
-recipes-extended/zram/zram/zram-swap-init
-> index 0643dbca2341..ccc3aafe3a6f 100755
-> --- a/meta-oe/recipes-extended/zram/zram/zram-swap-init
-> +++ b/meta-oe/recipes-extended/zram/zram/zram-swap-init
-> @@ -14,7 +14,7 @@ fi
->  ZRAM_SIZE_PERCENT=3D100
->  ZRAM_ALGORITHM=3Dlz4
->=20=20
-> -[ -f /etc/default/zram ] && ./etc/default/zram || true
-> +[ -f /etc/default/zram ] && . /etc/default/zram || true
->=20=20
->  memtotal=3D$(grep MemTotal /proc/meminfo | awk ' { print $2 } ')
->  memzram=3D$(($memtotal*${ZRAM_SIZE_PERCENT}/100))
---=20
-Pengutronix e.K.                           | Ulrich =C3=96lmann            =
-   |
-Industrial Linux Solutions                 | http://www.pengutronix.de/  |
-Peiner Str. 6-8, 31137 Hildesheim, Germany | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/networ=
+k-manager-applet_1.18.0.bb b/meta-gnome/recipes-connectivity/network-manag=
+er-applet/network-manager-applet_1.18.0.bb
+index f2bc24ea9..bc3e66ca2 100644
+=2D-- a/meta-gnome/recipes-connectivity/network-manager-applet/network-man=
+ager-applet_1.18.0.bb
++++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manag=
+er-applet_1.18.0.bb
+@@ -13,6 +13,8 @@ SRC_URI[archive.sha256sum] =3D "ddbb400ace804b59cc513611=
+ce9701f7ef3f00de151dbbfb96
+
+ # We don't not have ubuntu's appindicator (yet?)
+ EXTRA_OEMESON =3D "-Dappindicator=3Dno"
++# We currently don't build NetworkManager with libteamdctl support
++EXTRA_OEMESON +=3D "-Dteam=3Dfalse"
+
+ PACKAGECONFIG ??=3D ""
+ PACKAGECONFIG[modemmanager] =3D "-Dwwan=3Dtrue, -Dwwan=3Dfalse, modemmana=
+ger"
+=2D-
+2.30.0
+
