@@ -1,28 +1,28 @@
 Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
- by mx.groups.io with SMTP id smtpd.web09.21105.1611814531344599630
+ by mx.groups.io with SMTP id smtpd.web12.20863.1611814566803132092
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Jan 2021 22:15:31 -0800
+ Wed, 27 Jan 2021 22:16:07 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: u.oelmann@pengutronix.de)
 Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
 	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.92)
 	(envelope-from <u.oelmann@pengutronix.de>)
-	id 1l50aW-0003LC-Gp; Thu, 28 Jan 2021 07:15:28 +0100
+	id 1l50b7-0003RB-6q; Thu, 28 Jan 2021 07:16:05 +0100
 Received: from uol by dude.hi.pengutronix.de with local (Exim 4.92)
 	(envelope-from <u.oelmann@pengutronix.de>)
-	id 1l50aV-0005md-Fp; Thu, 28 Jan 2021 07:15:27 +0100
-References: <165C3A4E85357A25.14278@lists.openembedded.org>
+	id 1l50b6-0005sK-Rz; Thu, 28 Jan 2021 07:16:04 +0100
+References: <165C3A563363138B.8233@lists.openembedded.org>
 User-agent: mu4e 1.4.13; emacs 28.0.50
 From: "Ulrich ?lmann" <u.oelmann@pengutronix.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: =?utf-8?Q?S=C3=B8ren?= Andersen <san@skov.dk>, Khem Raj
  <raj.khem@gmail.com>, Ulrich
  =?utf-8?Q?=C3=96lmann?= <u.oelmann@pengutronix.de>
-Subject: Re: [oe] [meta-oe][gatesgarth][PATCH] zram: fix sourcing of zram parameters
-In-reply-to: <165C3A4E85357A25.14278@lists.openembedded.org>
-Date: Thu, 28 Jan 2021 07:15:27 +0100
-Message-ID: <6rsg6llh8g.fsf@pengutronix.de>
+Subject: Re: [oe] [meta-oe][dunfell][PATCH] zram: fix sourcing of zram parameters
+In-reply-to: <165C3A563363138B.8233@lists.openembedded.org>
+Date: Thu, 28 Jan 2021 07:16:04 +0100
+Message-ID: <6rpn1plh7f.fsf@pengutronix.de>
 MIME-Version: 1.0
 X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::7
 X-SA-Exim-Mail-From: u.oelmann@pengutronix.de
