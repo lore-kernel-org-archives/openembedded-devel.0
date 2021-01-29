@@ -1,99 +1,123 @@
-Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com [209.85.160.181])
- by mx.groups.io with SMTP id smtpd.web08.643.1611942933174626842
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web09.981.1611948759199066998
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Jan 2021 09:55:33 -0800
+ Fri, 29 Jan 2021 11:32:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=N7L4tTBF;
- spf=pass (domain: gmail.com, ip: 209.85.160.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f181.google.com with SMTP id c1so7315708qtc.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 29 Jan 2021 09:55:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
-        bh=QI/Byf3YWPw5utYJokG2Vx8cVXu36pQz2ylryI2mCb4=;
-        b=N7L4tTBF1n5IvoxLfbpVyx8TkEzZVzIYw16scnrY1P0/WGotoENPrndwQhT0CBoMFw
-         27gaJYeWj60gIO+XtvhKX/8CrxOE+qVmmpZvWovpNMvIWDHQcDcroDojVKmfoV4Wq6BI
-         v7wlD90FYXVW4Jc2QiplPAv1ZhnkcXSjeZISb6h+Ai+1dPTRqGbU0Fxa7l3pAZFHWW4L
-         7gmsSltb3AK/fxKTr/AX1WUqwqXRc03SY+TcjGoNswEv/U2eNqMWNc/j+Y3LtMtyW4jV
-         pZhPVGnLDMq5po9lvjaZZPAM3jfSJrMdw8T0i9D1E7ssmHYY5iqy73cOjq10uAwDNlyf
-         3hrA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to;
-        bh=QI/Byf3YWPw5utYJokG2Vx8cVXu36pQz2ylryI2mCb4=;
-        b=DS9u8F8HSgusp2F79DBrsivyeWrrFBcmhjZyjnvxPco6VXu8V+Syg+km++UYnVNMNW
-         4ovNij4V3e5Ca1QCsDPCIaogJtjDKESR4lqQ3ND1aXbu8+wSu46soi0ZCjhcDo1s5l/N
-         V9B2WafWN7gbNKYm8eLAUAd0SdgyivuVVe5FdAv3ujCtTn7FaQIn0YZJvQS1AcZooiJd
-         SnwL8arCZ25wvBciB7w14qKIY5HPqsExyoV2Ifvv77k8+1pji9g4eIyVgjk6KHCvPCka
-         wBzK54XcGRqYHT/SUBVq0Eyli2DxSRUgyGt2FuhT/cPQNepVYksgw9wRrjlM1re1GUe0
-         s4KA==
-X-Gm-Message-State: AOAM532YKYIAI4hbpbUhVMidpMQjBVCZClGb9PGrWjtE9TXk1ega7/34
-	ne3wu1l5WE/oRP4uk2b9d3oKLbk6ZAiXBHS2Mfw=
-X-Google-Smtp-Source: ABdhPJyYoqKH3dGHtvIjOQeUtb9afqEavRlh+84a1m64sQBfzQlL+PkBLbarOFOKzHWUAKRFiTupG7zd0tOdGhLEF6w=
-X-Received: by 2002:ac8:5894:: with SMTP id t20mr5294081qta.194.1611942931575;
- Fri, 29 Jan 2021 09:55:31 -0800 (PST)
-MIME-Version: 1.0
-References: <20210129100359.vwoop7ksfrvfpmlb@vctlabs.com>
-In-Reply-To: <20210129100359.vwoop7ksfrvfpmlb@vctlabs.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Fri, 29 Jan 2021 09:55:05 -0800
-Message-ID: <CAMKF1sqKS-1ANz9DBkDkn3MQgzA0FsW4GCAPgRsoBeUt5Fhw_g@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] sip3: simplify recipe
-To: "S. Lockwood-Childs" <sjl@vctlabs.com>, 
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=58130 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1l5ZVT-0005x8-NI; Fri, 29 Jan 2021 21:32:37 +0200
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCHv2] python3-prctl: Upgrade 1.7 -> 1.8.1
+Date: Fri, 29 Jan 2021 21:32:30 +0200
+Message-Id: <20210129193230.20879-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.2
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Can you rebase it on top of master-next
+Upgrade to release 1.8.1:
 
-On Fri, Jan 29, 2021 at 2:00 AM S. Lockwood-Childs <sjl@vctlabs.com> wrote:
->
-> The custom configure block can be shared between target
-> and native if you just configure the sysroot option accordingly
-> and use STAGING_INCDIR to locate the python headers to build
-> against.
->
-> Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
-> ---
->  meta-oe/recipes-devtools/sip/sip3_4.19.23.bb | 17 +++++------------
->  1 file changed, 5 insertions(+), 12 deletions(-)
->
-> diff --git a/meta-oe/recipes-devtools/sip/sip3_4.19.23.bb b/meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
-> index 320755b84..ae8df5055 100644
-> --- a/meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
-> +++ b/meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
-> @@ -19,24 +19,17 @@ PACKAGES += "python3-sip3"
->
->  BBCLASSEXTEND = "native"
->
-> -do_configure_prepend_class-target() {
-> -    echo "py_platform = linux" > sip.cfg
-> -    echo "py_inc_dir = %(sysroot)/${includedir}/python%(py_major).%(py_minor)${PYTHON_ABI}" >> sip.cfg
-> -    echo "sip_bin_dir = ${D}/${bindir}" >> sip.cfg
-> -    echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
-> -    echo "sip_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> sip.cfg
-> -    echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
-> -    ${PYTHON} configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot ${STAGING_DIR_HOST} CC="${CC}" CXX="${CXX}" LINK="${CXX}" STRIP="" LINK_SHLIB="${CXX}" CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" LFLAGS="${LDFLAGS}"
-> -}
-> +CONFIGURE_SYSROOT = "${STAGING_DIR_HOST}"
-> +CONFIGURE_SYSROOT_class-native = "${STAGING_DIR_NATIVE}"
->
-> -do_configure_prepend_class-native() {
-> +do_configure_prepend() {
->      echo "py_platform = linux" > sip.cfg
-> -    echo "py_inc_dir = ${includedir}/python%(py_major).%(py_minor)${PYTHON_ABI}" >> sip.cfg
-> +    echo "py_inc_dir = ${STAGING_INCDIR}/python%(py_major).%(py_minor)${PYTHON_ABI}" >> sip.cfg
->      echo "sip_bin_dir = ${D}/${bindir}" >> sip.cfg
->      echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
->      echo "sip_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> sip.cfg
->      echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
-> -    ${PYTHON} configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot=${STAGING_DIR_NATIVE}
-> +    ${PYTHON} configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot ${CONFIGURE_SYSROOT} CC="${CC}" CXX="${CXX}" LINK="${CXX}" STRIP="" LINK_SHLIB="${CXX}" CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" LFLAGS="${LDFLAGS}"
->  }
->
->  do_install() {
-> --
-> 2.20.1
->
-> 
->
+- Master was renamed to main
+- Backwards compatibility fixes
+- Install dependencies before trying to build/publish
+
+License-Update: Update year
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../0001-support-cross-complication.patch             | 11 ++++++-----
+ .../{python3-prctl_1.7.bb => python3-prctl_1.8.1.bb}  |  8 ++++----
+ 2 files changed, 10 insertions(+), 9 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-prctl_1.7.bb => python3-prctl_1.8.1.bb} (70%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-prctl/0001-support-cross-complication.patch b/meta-python/recipes-devtools/python/python3-prctl/0001-support-cross-complication.patch
+index 775ae1b2e..98d250c74 100644
+--- a/meta-python/recipes-devtools/python/python3-prctl/0001-support-cross-complication.patch
++++ b/meta-python/recipes-devtools/python/python3-prctl/0001-support-cross-complication.patch
+@@ -1,4 +1,4 @@
+-From 9a16800738547d117284354bbcad7dd77d9d0344 Mon Sep 17 00:00:00 2001
++From 5f3911737c63a098caf73f1365320fe1b3a7638b Mon Sep 17 00:00:00 2001
+ From: Hongxu Jia <hongxu.jia@windriver.com>
+ Date: Thu, 21 Apr 2016 03:05:57 -0400
+ Subject: [PATCH] support cross-complication
+@@ -6,12 +6,13 @@ Subject: [PATCH] support cross-complication
+ Upstream-Status: Inappropriate [oe specific]
+ 
+ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+ ---
+  setup.py | 35 -----------------------------------
+  1 file changed, 35 deletions(-)
+ 
+ diff --git a/setup.py b/setup.py
+-index 658d1a5..e8be7eb 100755
++index eb83cfe..3f9567b 100755
+ --- a/setup.py
+ +++ b/setup.py
+ @@ -13,41 +13,6 @@ import sys
+@@ -38,13 +39,13 @@ index 658d1a5..e8be7eb 100755
+ -    sys.stderr.write("You need to install gcc to build this module\n")
+ -    sys.exit(1)
+ -
+--sp = subprocess.Popen(['cpp'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
++-sp = subprocess.Popen(['cpp'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=os.environ)
+ -sp.communicate('#include <sys/prctl.h>\n'.encode())
+ -if sp.returncode:
+ -    sys.stderr.write("You need to install libc development headers to build this module\n")
+ -    exit = True
+ -
+--sp = subprocess.Popen(['cpp'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
++-sp = subprocess.Popen(['cpp'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=os.environ)
+ -sp.communicate('#include <sys/capability.h>\n'.encode())
+ -if sp.returncode:
+ -    sys.stderr.write("You need to install libcap development headers to build this module\n")
+@@ -57,5 +58,5 @@ index 658d1a5..e8be7eb 100755
+                     sources = ['_prctlmodule.c'],
+                     depends = ['securebits.h'],
+ -- 
+-2.8.1
++2.17.1
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-prctl_1.7.bb b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
+similarity index 70%
+rename from meta-python/recipes-devtools/python/python3-prctl_1.7.bb
+rename to meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
+index 54620a066..b87a470b4 100644
+--- a/meta-python/recipes-devtools/python/python3-prctl_1.7.bb
++++ b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
+@@ -5,15 +5,15 @@ limitations in C and linux. This module provides a nice non-messy python(ic) \
+ interface."
+ SECTION = "devel/python"
+ LICENSE = "GPLv3"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=23ff9f50449d4bd0e513df16e4d9755f"
++LIC_FILES_CHKSUM = "file://COPYING;md5=1475481f9ec754d758859bd2c75f6f6f"
+ 
+ S = "${WORKDIR}/git"
+ B = "${S}"
+ 
+-SRCREV = "57cd0a7cad76e8f8792eea22ee5b5d17bae0a90f"
+-PV = "1.7+git${SRCPV}"
++SRCREV = "5e12e398eb5c4e30d7b29b02458c76d2cc780700"
++PV = "1.8.1+git${SRCPV}"
+ 
+-SRC_URI = "git://github.com/seveas/python-prctl;branch=master \
++SRC_URI = "git://github.com/seveas/python-prctl;branch=main\
+            file://0001-support-cross-complication.patch \
+ "
+ inherit setuptools3 python3native
+-- 
+2.17.1
+
