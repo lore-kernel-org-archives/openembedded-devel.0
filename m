@@ -1,59 +1,68 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web11.6806.1611909825383850247
+Received: from esa2.hc324-48.eu.iphmx.com (esa2.hc324-48.eu.iphmx.com [207.54.68.120])
+ by mx.groups.io with SMTP id smtpd.web08.7459.1611911982903163022
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Jan 2021 00:43:46 -0800
+ Fri, 29 Jan 2021 01:19:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.79,384,1602518400"; 
-   d="scan'208";a="103979235"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 29 Jan 2021 16:43:43 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 9319A4CE6019
-	for <openembedded-devel@lists.openembedded.org>; Fri, 29 Jan 2021 16:43:37 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 29 Jan 2021 16:43:38 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+ dkim=fail reason="signature has expired" header.i=@bmw.de header.s=mailing1 header.b=jCgm+xTj;
+ spf=pass (domain: bmw.de, ip: 207.54.68.120, mailfrom: prvs=656a671b5=michael.ho@bmw.de)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=bmw.de; i=@bmw.de; q=dns/txt; s=mailing1;
+  t=1611911982; x=1643447982;
+  h=from:to:cc:subject:date:message-id:mime-version;
+  bh=istmgNrjYyYfosmh01GkLcOeZmJw71A11clZNf4NgPE=;
+  b=jCgm+xTj43wWwPPrnr9RwOna8KMXXDJuWid3OMsx2wNGeu/BPSLxMyiJ
+   URMb6bPYmAecTovkWuiyJNNmzuRtSoL7id7SMHKesqkahy5iR61wC5MII
+   1QyCIWilOJjIfcT4/UiKTl9WkFPWmpC/cFV7QlfQ8Pww04tp6C6sPDGz8
+   0=;
+Received: from esagw4.bmwgroup.com (HELO esagw4.muc) ([160.46.252.39]) by
+ esa2.hc324-48.eu.iphmx.com with ESMTP/TLS; 29 Jan 2021 10:19:39 +0100
+Received: from esabb6.muc ([160.50.100.50])  by esagw4.muc with ESMTP/TLS;
+ 29 Jan 2021 10:19:39 +0100
+Received: from smucm09k.bmwgroup.net (HELO smucm09k.europe.bmw.corp) ([160.48.96.43])
+ by esabb6.muc with ESMTP/TLS; 29 Jan 2021 10:19:32 +0100
+Received: from michael-pcx.bmw-carit.intra (192.168.221.41) by
+ smucm09k.europe.bmw.corp (160.48.96.43) with Microsoft SMTP Server (TLS;
+ Fri, 29 Jan 2021 10:19:30 +0100
+From: "Michael Ho" <Michael.Ho@bmw.de>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] sanlock: upgrade 3.8.2 -> 3.8.3
-Date: Sat, 30 Jan 2021 04:43:36 +0800
-Message-ID: <1611953016-5000-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+CC: Michael Ho <Michael.Ho@bmw.de>
+Subject: [meta-java][PATCH] openjdk-8-cross.inc: exclude BB_NUMBER_THREADS from sstate hash
+Date: Fri, 29 Jan 2021 10:19:21 +0100
+Message-ID: <1611911961-96454-1-git-send-email-michael.ho@bmw.de>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: 9319A4CE6019.A2EE3
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
+Return-Path: michael.ho@bmw.de
+X-ClientProxiedBy: smucm15l.europe.bmw.corp (160.48.96.68) To
+ smucm09k.europe.bmw.corp (160.48.96.43)
 Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
----
- .../sanlock/{sanlock_3.8.2.bb => sanlock_3.8.3.bb}              | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/sanlock/{sanlock_3.8.2.bb => sanlock_3.8.3.bb} (96%)
+From: Michael Ho <Michael.Ho@bmw.de>
 
-diff --git a/meta-oe/recipes-extended/sanlock/sanlock_3.8.2.bb b/meta-oe/recipes-extended/sanlock/sanlock_3.8.3.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/sanlock/sanlock_3.8.2.bb
-rename to meta-oe/recipes-extended/sanlock/sanlock_3.8.3.bb
-index 6f3685c4b..e8b2e3721 100644
---- a/meta-oe/recipes-extended/sanlock/sanlock_3.8.2.bb
-+++ b/meta-oe/recipes-extended/sanlock/sanlock_3.8.3.bb
-@@ -16,7 +16,7 @@ PV .= "+git${SRCPV}"
- SRC_URI = "git://pagure.io/sanlock.git;protocol=http \
-            file://0001-sanlock-Replace-cp-a-with-cp-R-no-dereference-preser.patch;patchdir=../ \
-           "
--SRCREV = "01b727adf1ce3c0ed5b95299d60f62bc66d98eb5"
-+SRCREV = "3a750fed849405c745dcb7b4ceb85f662c53d8d0"
+The sstate-cache for openjre is not shareable across multiple machines
+because the parallelisation configuration of Bitbake is being embedded
+into the sstate hash of openjre.
+
+Exclude BB_NUMBER_THREADS from the do_install sstate hashing to avoid
+this issue.
+
+Signed-off-by: Michael Ho <Michael.Ho@bmw.de>
+---
+ recipes-core/openjdk/openjdk-8-cross.inc | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/recipes-core/openjdk/openjdk-8-cross.inc b/recipes-core/openjdk/openjdk-8-cross.inc
+index 9f68d08..25d971f 100644
+--- a/recipes-core/openjdk/openjdk-8-cross.inc
++++ b/recipes-core/openjdk/openjdk-8-cross.inc
+@@ -99,6 +99,8 @@ do_install_append() {
+     fi
+ }
  
- S = "${WORKDIR}/git/python"
++do_install[vardepsexclude] += "BB_NUMBER_THREADS"
++
+ export MAKE_VERBOSE = "y"
+ export MFLAGS="${@jdk_make_options(d)} MAKE_VERBOSE=y QUIETLY= VERBOSE=-s LOG_LEVEL=trace STRIP_POLICY=no_strip"
  
 -- 
-2.25.1
-
-
+2.7.4
 
