@@ -1,117 +1,58 @@
 Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.7009.1611909499376904664
+ by mx.groups.io with SMTP id smtpd.web11.6779.1611909545906880644
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Jan 2021 00:38:19 -0800
+ Fri, 29 Jan 2021 00:39:06 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
 X-IronPort-AV: E=Sophos;i="5.79,384,1602518400"; 
-   d="scan'208";a="103978940"
+   d="scan'208";a="103978984"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 29 Jan 2021 16:38:05 +0800
+  by heian.cn.fujitsu.com with ESMTP; 29 Jan 2021 16:39:03 +0800
 Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 1F0F14CE6787
-	for <openembedded-devel@lists.openembedded.org>; Fri, 29 Jan 2021 16:38:05 +0800 (CST)
+	by cn.fujitsu.com (Postfix) with ESMTP id 121564CE6792
+	for <openembedded-devel@lists.openembedded.org>; Fri, 29 Jan 2021 16:39:00 +0800 (CST)
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 29 Jan 2021 16:38:05 +0800
+ (TLS) id 15.0.1497.2; Fri, 29 Jan 2021 16:39:00 +0800
 From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] libfastjson: upgrade 0.99.8 -> 0.99.9
-Date: Sat, 30 Jan 2021 04:38:03 +0800
-Message-ID: <1611952683-3848-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libio-pty-perl: upgrade 1.15 -> 1.16
+Date: Sat, 30 Jan 2021 04:38:58 +0800
+Message-ID: <1611952738-4055-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
 X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: 1F0F14CE6787.A22D7
+X-yoursite-MailScanner-ID: 121564CE6792.AFEC1
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
 Content-Type: text/plain
 
-0001-fix-jump-misses-init-gcc-8-warning.patch
-Removed since this is included in 0.99.9.
-
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- ...1-fix-jump-misses-init-gcc-8-warning.patch | 46 -------------------
- ...stjson_0.99.8.bb => libfastjson_0.99.9.bb} |  5 +-
- 2 files changed, 2 insertions(+), 49 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/rsyslog/libfastjson/0001-fix-jump-misses-init-gcc-8-warning.patch
- rename meta-oe/recipes-extended/rsyslog/{libfastjson_0.99.8.bb => libfastjson_0.99.9.bb} (71%)
+ .../perl/{libio-pty-perl_1.15.bb => libio-pty-perl_1.16.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/perl/{libio-pty-perl_1.15.bb => libio-pty-perl_1.16.bb} (73%)
 
-diff --git a/meta-oe/recipes-extended/rsyslog/libfastjson/0001-fix-jump-misses-init-gcc-8-warning.patch b/meta-oe/recipes-extended/rsyslog/libfastjson/0001-fix-jump-misses-init-gcc-8-warning.patch
-deleted file mode 100644
-index 25e5efa4b..000000000
---- a/meta-oe/recipes-extended/rsyslog/libfastjson/0001-fix-jump-misses-init-gcc-8-warning.patch
-+++ /dev/null
-@@ -1,46 +0,0 @@
--From d697182f18a421b7f80ea9de4914251b55d82532 Mon Sep 17 00:00:00 2001
--From: Rainer Gerhards <rgerhards@adiscon.com>
--Date: Sun, 15 Jul 2018 17:24:59 +0200
--Subject: [PATCH] "fix" "jump-misses-init" gcc-8 warning
--
--Actually, that warning is overly conservative, and so we
--have changed the code in a somewhat suboptimal way to "fix"
--it. In this spots, it's not that bad and we wanted to avoid
--totally disabling this warning.
--
--If it were more costly in terms of cleanness, we would probaly
--have done that. Just mention it to tell anyone else the
--cure is not really a good one, just selected due to the
--circumstances in this special case.
--
--Upstream-Status: Backport
--
--Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-----
-- json_object.c | 3 ++-
-- 1 file changed, 2 insertions(+), 1 deletion(-)
--
--diff --git a/json_object.c b/json_object.c
--index 35338e1..6e67891 100644
----- a/json_object.c
--+++ b/json_object.c
--@@ -396,6 +396,7 @@ fjson_child_get_empty_etry(struct fjson_object *const __restrict__ jso)
-- {
-- 	struct _fjson_child *chld = NULL;
-- 	struct _fjson_child_pg *pg;
--+	int pg_idx;
-- 
-- 	if (jso->o.c_obj.ndeleted > 0) {
-- 		/* we first fill deleted spots */
--@@ -415,7 +416,7 @@ fjson_child_get_empty_etry(struct fjson_object *const __restrict__ jso)
-- 		goto done;
-- 	}
-- 
---	const int pg_idx = jso->o.c_obj.nelem % FJSON_OBJECT_CHLD_PG_SIZE;
--+	pg_idx = jso->o.c_obj.nelem % FJSON_OBJECT_CHLD_PG_SIZE;
-- 	if (jso->o.c_obj.nelem > 0 && pg_idx == 0) {
-- 		if((pg = calloc(1, sizeof(struct _fjson_child_pg))) == NULL) {
-- 			errno = ENOMEM;
---- 
--2.11.0
--
-diff --git a/meta-oe/recipes-extended/rsyslog/libfastjson_0.99.8.bb b/meta-oe/recipes-extended/rsyslog/libfastjson_0.99.9.bb
-similarity index 71%
-rename from meta-oe/recipes-extended/rsyslog/libfastjson_0.99.8.bb
-rename to meta-oe/recipes-extended/rsyslog/libfastjson_0.99.9.bb
-index b84dde3d3..88ba9edaa 100644
---- a/meta-oe/recipes-extended/rsyslog/libfastjson_0.99.8.bb
-+++ b/meta-oe/recipes-extended/rsyslog/libfastjson_0.99.9.bb
-@@ -6,10 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a958bb07122368f3e1d9b2efe07d231f"
+diff --git a/meta-oe/recipes-devtools/perl/libio-pty-perl_1.15.bb b/meta-oe/recipes-devtools/perl/libio-pty-perl_1.16.bb
+similarity index 73%
+rename from meta-oe/recipes-devtools/perl/libio-pty-perl_1.15.bb
+rename to meta-oe/recipes-devtools/perl/libio-pty-perl_1.16.bb
+index 7b1a8a639..b6bc80784 100644
+--- a/meta-oe/recipes-devtools/perl/libio-pty-perl_1.15.bb
++++ b/meta-oe/recipes-devtools/perl/libio-pty-perl_1.16.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://META.yml;beginline=11;endline=12;md5=b2562f94907eeb42
  
- DEPENDS = ""
+ SRC_URI = "http://www.cpan.org/modules/by-module/IO/IO-Tty-${PV}.tar.gz"
  
--SRC_URI = "git://github.com/rsyslog/libfastjson.git;protocol=https \
--           file://0001-fix-jump-misses-init-gcc-8-warning.patch"
-+SRC_URI = "git://github.com/rsyslog/libfastjson.git;protocol=https"
+-SRC_URI[md5sum] = "060103c6d6e4d9833fa7715860f2923b"
+-SRC_URI[sha256sum] = "43f9cc0f87620bbb159e0890e196b23a8e6419cbd04224c10f3dcee948f6b51a"
++SRC_URI[md5sum] = "5ee30bf7c76f00cc69f92388ad776e2a"
++SRC_URI[sha256sum] = "8f1a09c070738adc695df903f2e7f74308dd8d991b914c0bc390a0e6021294dd"
  
--SRCREV = "4758b1caf69ada911ef79e1d80793fe489b98dff"
-+SRCREV = "0293afb3913f760c449348551cca4d2df59c1a00"
- 
- S = "${WORKDIR}/git"
+ S = "${WORKDIR}/IO-Tty-${PV}"
  
 -- 
 2.25.1
