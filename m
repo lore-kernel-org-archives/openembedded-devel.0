@@ -1,53 +1,50 @@
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
- by mx.groups.io with SMTP id smtpd.web11.3516.1611884064420364989
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
+ by mx.groups.io with SMTP id smtpd.web08.3778.1611884071007955994
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Jan 2021 17:34:24 -0800
+ Thu, 28 Jan 2021 17:34:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=p4um+nhu;
- spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f182.google.com with SMTP id r38so5528672pgk.13;
-        Thu, 28 Jan 2021 17:34:24 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=L1WP1wFm;
+ spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f181.google.com with SMTP id y205so5206260pfc.5
+        for <openembedded-devel@lists.openembedded.org>; Thu, 28 Jan 2021 17:34:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:cc:references:from:autocrypt:message-id:date:user-agent
          :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=CmMsHe9i3mMNPtC0uuYy2ZGTCABdQYoXb6B6pANE8rw=;
-        b=p4um+nhu9JTwUGK2k5jdDipn+0bsQ50+Bmc4xCVbW6Pu2kCfB1SlB28oIOyg9M6fBs
-         q9rdhGKDV6KTQRDeNwjNj2rxL3M8/sGhmBcN4eiS5Bk99NxgV7OOGfPvqD6LmR7RZ6vb
-         +ArVT9WCJbZ37EKTWbW1iWrPl/KuFiCA7bhgkEd9DFb60aY+UsqDnETPVb7hpbOq5H7Z
-         rtBt9j5J+sVhr5suxAy1iI/qi7RKLG8W8wrpqH0v0Cj23KAbpi0wot8z36Y7r3UppKxF
-         afnqz90ndKKFS57w626YFkDdKAlspqKphLH6n7Hq5TWEXf+nqV0s6Xh/QagQO3dVZQl5
-         xlcg==
+        bh=maZoS4KL0waAPCZqjoD9BDBqpqgnitokjXARCEYNT1M=;
+        b=L1WP1wFmFm+XjS+OzG7d69MF4BFVmvXkCqxaywzJpKmbablNDjOMh3/61q8Buh/oLT
+         Sdr6dOeohU3c8S13Q3JTH2Dc566G9jxa00y3T6jKemSTvwu/3SmQ64gFpdDARpz9BZa/
+         O3IdifLTYUsEO6uCBXafs+7PDuiGAr6V640gyL9lkOeHqOXrcOEzvCCtSE6hOWx26D9d
+         d5g/vM8lXWdURDVejwP0CJakvFOzA1Whc/MloLMK4qBcQ8qUa56ZPspJj2QP1OzPYRko
+         bEFUPNjggjKzqcX70vXXLYEzXX8vEQuyr8ys3+R3MuOq1gb7C6YQOLB+4HabXoD0Daae
+         DlJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:cc:references:from:autocrypt
          :message-id:date:user-agent:mime-version:in-reply-to
          :content-transfer-encoding:content-language;
-        bh=CmMsHe9i3mMNPtC0uuYy2ZGTCABdQYoXb6B6pANE8rw=;
-        b=ii4hBl6ZqiVml1A0Lh97FuMOehTEZRk0Mn2LDKfHehvq9/LnggG3EFN3PNK4dQSRVJ
-         KBbtxwKNH2MTeCEwDhiRVi0e6dY6pk8XPsu54LUWJF5pT5O+dVWayzAFEfauNNYTRsSv
-         YcBvwwhCimnEQCMVIsSbK8hPVPzCojGb/fhO3jDwwwa9ycVo4JEXPXv2mfMkosmRYhRk
-         /NMCglbhI0s7OVtTxfvSq6Wg918FUX1s5v3VmmCNZDXv+bOJ8H5SNm9BD2xJ/wuuUXJt
-         xI1DYrMFjszIybp0uiD6bC6QBIEXTXCPT7SKvy/qzGxsYDB2Pj0pYEaDjIm+Vm7TrsM7
-         a/kQ==
-X-Gm-Message-State: AOAM530mwjMXijdBa5qbQ0FIYsyhkgf5lU6YBDDzqybkXjmbsv5fw2pJ
-	FTU6rUz1lwLzSmwxo9wwjC7f6vpLZanAug==
-X-Google-Smtp-Source: ABdhPJxp3IZvaAJbNfVLRLLqwsfGYMhavTgXAIMsVdkhgHP67DnIYCFDptoqtMyvOVWhZMBRjUPGvg==
-X-Received: by 2002:a65:47c7:: with SMTP id f7mr2132173pgs.305.1611884063707;
-        Thu, 28 Jan 2021 17:34:23 -0800 (PST)
+        bh=maZoS4KL0waAPCZqjoD9BDBqpqgnitokjXARCEYNT1M=;
+        b=dtkgpa7SC+JWmZ1+Egw5D//DQW+XnYqZ6JBMtP9C0KpYyvamyByqV+PiF0tmpbujVB
+         1hWuLFpthU4TIrU92VS9hJUdix4RpswKpEAk9d7bu0q3bZ+yusstq16A7Peo/VeMNaO6
+         9VerIXJ66s/O8PzK3x6vmN9/0OPS2nQRlg+mgg67Bz5AH2t6UAadflCDxHj/O2iep++w
+         gIfJ08BNa5SRykUwOmbkzOz41Fk77Kg3ZtsN50648/j6bR5eGuJECkmpIV0KW0IvC2sc
+         F7N7k1/PSrmrSw5aqwkPDNbS4xLU163PhXrb6F5ZyFA57/gw4uvqwC6IlqKrkotW3KKb
+         c9QQ==
+X-Gm-Message-State: AOAM531zlyPooKYOq8akwFD7bpWg9hZhe1j4wmoC+wpCKOS+caMZZPha
+	6L4iFYsf+qd9+I6VwmSgpAiD9Wu0z4shJg==
+X-Google-Smtp-Source: ABdhPJxxCYQlAHZArhbztTrc2zr1DyPOz7I5G9ap1zOr5mNWJz8xltnHQWrfatXTmBZq46qYDLSmSQ==
+X-Received: by 2002:aa7:93a2:0:b029:1bf:23a3:a945 with SMTP id x2-20020aa793a20000b02901bf23a3a945mr1984017pff.70.1611884070378;
+        Thu, 28 Jan 2021 17:34:30 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from ?IPv6:2601:202:4180:a5c0:41d5:7688:5129:bafc? ([2601:202:4180:a5c0:41d5:7688:5129:bafc])
-        by smtp.gmail.com with ESMTPSA id z11sm7391788pfk.97.2021.01.28.17.34.22
+        by smtp.gmail.com with ESMTPSA id t6sm6996494pfe.177.2021.01.28.17.34.29
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 28 Jan 2021 17:34:23 -0800 (PST)
-Subject: Re: [RFC] Issues with mariadb-10.4.17 and aarch64
-To: Dan Murphy <dmurphy@ti.com>
-Cc: Openembedded-issues@lists.openembedded.org,
- openembedded-devel@lists.openembedded.org
-References: <6cde28bf-c69d-1d42-785e-dc228202e357@ti.com>
- <d7ff8010-d45d-6274-ef69-1fd482314224@gmail.com>
- <1539367b-171b-d8c7-ec99-dadbf27ad598@ti.com>
- <5b050fe2-cc18-64da-7731-1855fede0eb2@ti.com>
+        Thu, 28 Jan 2021 17:34:29 -0800 (PST)
+Subject: Re: [oe] [meta-oe][dunfell][PATCH] mariadb: update to 10.4.17 for cve fixes
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <20210112221203.14501-1-akuster808@gmail.com>
+ <CALbNGRSPPUcABa1m8kbiCJ3CS3drkL2BxaejaY20vxLRDOPWEQ@mail.gmail.com>
 From: "akuster" <akuster808@gmail.com>
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
@@ -92,73 +89,72 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
  ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
  8CS2NxU=
-Message-ID: <42729fd7-d4d3-b76e-3592-1cd407174180@gmail.com>
-Date: Thu, 28 Jan 2021 17:34:21 -0800
+Message-ID: <085aa92c-3046-40ea-9864-114eb5ef5a45@gmail.com>
+Date: Thu, 28 Jan 2021 17:34:28 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <5b050fe2-cc18-64da-7731-1855fede0eb2@ti.com>
+In-Reply-To: <CALbNGRSPPUcABa1m8kbiCJ3CS3drkL2BxaejaY20vxLRDOPWEQ@mail.gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
 
 
 
-On 1/27/21 12:57 PM, Dan Murphy wrote:
->
-> Armin
->
-> On 1/25/21 1:01 PM, Dan Murphy wrote:
->>
->> Armin
->>
->> On 1/25/21 11:57 AM, akuster808 wrote:
->>> Dan,
->>>
->>>
->>> On 1/25/21 9:45 AM, Dan Murphy wrote:
->>>> Hello
->>>>
->>>> I was wondering if there has been any reports of the mariadb update on
->>>> the dunfell branch causing issues with 64bit compilers when the 'pam'
->>>> is set for DISTRO_FEATURES
->>>>
->>> I am not aware of any.
->>>> There does not seem to be a compilation issue but more of an
->>>> installation issue in which the lib/security directory is not being
->>>> created.
->>>>
->>>> We are seeing issues in our arago distro with the following errors
->>>>
->>>> mv: cannot stat '/OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image/lib/security': No such file or directory
->>>> *09:38:06* WARNING: /OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/temp/run.do_install.5379:1 exit 1 from 'mv /OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image/lib/security /OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/image//usr/lib'
->>> I would be surprised if this was just limited to Arm64.
->>>
->>> Would enabling "PAM" and appending mariadb to an image reproduce this?
->>
->> Sorry I did not specify when the error occurred.  This happens during
->> the build time not run time.
->>
->> 32bit ARM builds perform the install just fine
->>
->> *12:53:25* NOTE: recipe mariadb-native-10.4.17-r0: task do_install: Succeeded
->>
->>
->> 64bit not so much
->>
->> *09:38:03* ERROR: mariadb-10.4.17-r0 do_install: Execution of '/OE/arago-dunfell-next-build/build-AARCH64_1/arago-tmp-external-arm-glibc/work/aarch64-linux/mariadb/10.4.17-r0/temp/run.do_install.5379' failed with exit code 1:
->
-> Actually yes this is specific to 64 bits.  The lib/security directory
-> for 64 bit builds does not exist it is in lib64/security.  So the
-> do_install fails because it is looking in the wrong location.
->
-> Not sure how to fix this.
->
+On 1/27/21 1:24 PM, Andreas Müller wrote:
+> On Tue, Jan 12, 2021 at 11:12 PM akuster <akuster808@gmail.com> wrote:
 
-Thanks for the details
+I have not seen this issue and IIRC, someone else has reported the
+problem too.  I do respond to issues logged OE github.
 
--armin
+On my list to look into.
+
+thanks,
+Armin
+>> Source: mariadb.org
+>> MR: 107836, 107837, 107838, 107839, 107840, 107852, 106414, 106414, 107864, 107876, 107888
+>> Type: Security Fix
+>> Disposition: Backport from mariadb.org
+>> ChangeID: 75fb83ced15990b94659af6e107c063d288cb037
+>> Description:
+>>
+>> refresh several patches
+>> Drop 0001-Fix-build-breakage-from-lock_guard-error-6161.patch as fix included in update
+>>
+>> Bugfix only update including these cves:
+>>
+>> 10.4.13
+>> CVE-2020-2752
+>> CVE-2020-2812
+>> CVE-2020-2814
+>> CVE-2020-2760
+>> CVE-2020-13249
+>>
+>> 10.4.15
+>> CVE-2020-15180
+>>
+>> 10.4.16
+>> CVE-2020-14812
+>> CVE-2020-14765
+>> CVE-2020-14776
+>> CVE-2020-14789
+>> CVE-2020-28912 (MDEV-24040)
+>>
+>> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> It seems that this causes:
 >
-> Dan
+> | mv: cannot stat
+> '/home/amuller/tmp/oe-core-glibc/work/aarch64-mortsgna-linux/mariadb/10.4.17-r0/image/lib/security':
+> No such file or directory
+> | WARNING: /home/amuller/tmp/oe-core-glibc/work/aarch64-mortsgna-linux/mariadb/10.4.17-r0/temp/run.do_install.40640:1
+> exit 1 from 'mv
+> /home/amuller/tmp/oe-core-glibc/work/aarch64-mortsgna-linux/mariadb/10.4.17-r0/image/lib/security
+> /home/amuller/tmp/oe-core-glibc/work/aarch64-mortsgna-linux/mariadb/10.4.17-r0/image//usr/lib'
+> |
+> ERROR: Task (/home/amuller/data/oe-core/sources/meta-openembedded/meta-oe/recipes-dbs/mysql/mariadb_10.4.17.bb:do_install)
+> failed with exit code '1'
 >
+> Cheers
+>
+> Andreas
 
