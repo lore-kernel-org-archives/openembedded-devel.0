@@ -1,115 +1,83 @@
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
- by mx.groups.io with SMTP id smtpd.web12.8541.1612035477627623994
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
+ by mx.groups.io with SMTP id smtpd.web08.8594.1612035478444932587
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Jan 2021 11:37:57 -0800
+ Sat, 30 Jan 2021 11:37:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=NiCcQtmB;
- spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f181.google.com with SMTP id n10so9148454pgl.10
-        for <openembedded-devel@lists.openembedded.org>; Sat, 30 Jan 2021 11:37:57 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=m+UQNWTK;
+ spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f182.google.com with SMTP id w18so8797337pfu.9
+        for <openembedded-devel@lists.openembedded.org>; Sat, 30 Jan 2021 11:37:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=O+Ymr/8+GYxEI2d0iKgTesN2TU0Hz6zw+1aRn7T8seg=;
-        b=NiCcQtmBBEXEHw0urElr5U/jMKluzKER6t1PUiBOPZFY/+929En74QlV+FDWtfTMLN
-         Tu/cXDMZuKcTzt28wtI2i3SHcb1nTA569hefKvUkIR4tNtmpMJjPCkgwviFhSVs/knOv
-         Htim9A9KQMSmWNjmV0Q1LLwBo7F0WBcS+R8ySGzJZ+l9CfKOioQe58SeyJGmZoZ4Xaal
-         xmqoQmOVODDoNlunaJ2Wos6gJVUzjq93XBNhlueQLT1lvT0FSFNVSgt4upLziHOr9OU4
-         qN2f1cQw+CQfdHai+G1mcdznkPhiGZmb43osxsHE5Boz8FLYgS6QvdmKoVvTRdOcvIbJ
-         E91A==
+        bh=mbjYNcmMF5VwMmtbLi7QhVM+P7cUw/lPcq6omM+QhV8=;
+        b=m+UQNWTK4pdvhE/OVJv1S/zV1SoJt8tf5h7pN9azqBr8DQJhCDGh4GUOp6VAQT/Fk3
+         Pmbf2FXuO0Bi6X+6LK2/dn3cvGvG1F6P3xfb1QUtjJQEJuMp5jBB0Y/c136AafmnpiDQ
+         CKvtXSdZ7fiVxUVzD/8lDaoh6Ks8j559wbdZ9CdLRG3UOtPSH2EGd4nX4O8oap0ru2au
+         pIUsQYazdLuyCZK/kJygBXQPABCSCG3OF4RWG+Nn9hV7UiBJggN+WBMvAk67PwyIDYas
+         3pQATPxicMPoOuaYu9wQ0TFriz0ch1uqfFqFv3IWVmlSEer7QQRmSFSHyVd8uqfgxLT7
+         /lzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=O+Ymr/8+GYxEI2d0iKgTesN2TU0Hz6zw+1aRn7T8seg=;
-        b=Kbqw/rkDotyd3YdQIPA4ZliJAMIrqOL1uTMx00mqZmr5itsxBcxK6ylW1WcYEeEi78
-         UMGbVVbg71jTdgsEWqr1l/LnheiD9P+7CyD3bX3ZvFI0dxe6dohb6WSb+lJmQlAr2KiF
-         fEPctgoQDvNpN72EPzqYy1m0n2cRG6sj6I+OJKkfFpLavt42/9G/mHd8hCFU/5EzUQUQ
-         JYfSZph6f6ktIOIgX6GDzJAWSSdu1BeE47NIL2D2BP4yC//E7GCzE4HyRTYOqiPYobMv
-         MRSFigmrAjDZjNuD+MskivdwfViHp2ODU2n2qW7nKfr2DruO2jn1RYw/QGxJNVLOZsPY
-         XINA==
-X-Gm-Message-State: AOAM531Jsc08J/5R04LEsqjELih+D8DNFAZkqzB7bG3PqcBnuulDXNUT
-	COeopH+DFfp6GY2vb9h8FQVuBLmY1zBVMg==
-X-Google-Smtp-Source: ABdhPJxOOE6S0d8NMzHgqi+8i0poJBMrx0CDZ6WEqnZuSZWlMaswAmgo+wJQH5Nmh9/0gTAjO3a1Sw==
-X-Received: by 2002:a65:6458:: with SMTP id s24mr2748490pgv.386.1612035477070;
+        bh=mbjYNcmMF5VwMmtbLi7QhVM+P7cUw/lPcq6omM+QhV8=;
+        b=B8/3ApRCXZKoAT3Y3kC00cQWnTdnNmmWLY3UYs68k7mTDsiuTGAQbyPHGjYleKK6HG
+         otASoo8yucxoxXNsPIKpah+qOLgWWBRYlUas4aovHg9y+oOWuRZIxs9LBqNn72psLhgX
+         F81POnjBoguEw78gIv1GtkQmchWdulW31GQvU76oYajjS08HT9E/N0pFE3YvlVkxSUSU
+         /xvVmzmOJ9ZZCOHJms6XlMWjENzyj/MkHJ2Lo0N7y5iN/W/OYKSPyuwPAYOMFk49Sgsv
+         g8kCOBPx4tHugFqOj5RFUrDqzcwCegB1nX31TtV2/VS9+5wx20y+wD3lNAK0YQ0nM2Yy
+         qt1Q==
+X-Gm-Message-State: AOAM5319goOZmtQb5pl37L57PL8kefZD2uFCObCWrfobRXJPqfwaoT2d
+	2buQFln6cXvlOMDVio0117rS6XSf7f+h3Q==
+X-Google-Smtp-Source: ABdhPJyXLOKrZDrIU71H88hZKnB64tZMWgxmbkAK6EVjdUXJQf2UQOb5avMkYqBvsp28tO6Dkr7gqA==
+X-Received: by 2002:a63:3c3:: with SMTP id 186mr9997253pgd.107.1612035477853;
         Sat, 30 Jan 2021 11:37:57 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:315d:c5e7:1295:54a9])
-        by smtp.gmail.com with ESMTPSA id q197sm12518096pfc.155.2021.01.30.11.37.55
+        by smtp.gmail.com with ESMTPSA id q197sm12518096pfc.155.2021.01.30.11.37.57
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 30 Jan 2021 11:37:56 -0800 (PST)
+        Sat, 30 Jan 2021 11:37:57 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 11/13] giflib: apply patch for CVE-2019-15133 and set CVE_PRODUCT
-Date: Sat, 30 Jan 2021 11:37:36 -0800
-Message-Id: <80c0a5fff685f5c5b8f484fbba3d6837912a31b7.1612035229.git.akuster808@gmail.com>
+Subject: [dunfell 12/13] networkd-dispatcher: use git fetcher
+Date: Sat, 30 Jan 2021 11:37:37 -0800
+Message-Id: <f9f3bacac75a7aaebfb5de89adfb4c9f640bb03f.1612035229.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1612035229.git.akuster808@gmail.com>
 References: <cover.1612035229.git.akuster808@gmail.com>
 
-From: Mikko Rapeli <mikko.rapeli@bmw.de>
+From: Martin Jansa <Martin.Jansa@gmail.com>
 
-Backport upstream patch for CVE-2019-15133.
-Set CVE_PRODUCT to "giflib_project:giflib" which is used
-in NVD. https://nvd.nist.gov/vuln/detail/CVE-2019-15133
+* now the gitlab QA check was backported to dunfell as well in:
+  https://git.openembedded.org/openembedded-core/commit/?h=dunfell&id=72f2c45880afbba1745e5e0cbd841d7fd666f374
+  and this started failing with:
+  ERROR: networkd-dispatcher-2.0.1-r0 do_package_qa: QA Issue: networkd-dispatcher: SRC_URI uses unstable GitHub/GitLab archives, convert recipe to use git protocol [src-uri-bad]
 
-Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../giflib/files/CVE-2019-15133.patch         | 23 +++++++++++++++++++
- .../recipes-devtools/giflib/giflib_5.1.4.bb   |  7 +++++-
- 2 files changed, 29 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
+ .../networkd-dispatcher/networkd-dispatcher_2.0.1.bb       | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch b/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
-new file mode 100644
-index 0000000000..9957be82f3
---- /dev/null
-+++ b/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
-@@ -0,0 +1,23 @@
-+From 799eb6a3af8a3dd81e2429bf11a72a57e541f908 Mon Sep 17 00:00:00 2001
-+From: "Eric S. Raymond" <esr@thyrsus.com>
-+Date: Sun, 17 Mar 2019 12:37:21 -0400
-+Subject: [PATCH] Address SF bug #119: MemorySanitizer: FPE on unknown address
-+
-+---
-+ dgif_lib.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+Upstream-status: Backport [https://sourceforge.net/p/giflib/code/ci/799eb6a3af8a3dd81e2429bf11a72a57e541f908/]
-+CVE: CVE-2019-15133
-+
-+--- a/lib/dgif_lib.c	2021-01-13 19:28:18.923493586 +0100
-++++ b/lib/dgif_lib.c	2021-01-13 19:28:55.245863085 +0100
-+@@ -1099,7 +1099,7 @@ DGifSlurp(GifFileType *GifFile)
-+ 
-+               sp = &GifFile->SavedImages[GifFile->ImageCount - 1];
-+               /* Allocate memory for the image */
-+-              if (sp->ImageDesc.Width < 0 && sp->ImageDesc.Height < 0 &&
-++              if (sp->ImageDesc.Width <= 0 && sp->ImageDesc.Height <= 0 &&
-+                       sp->ImageDesc.Width > (INT_MAX / sp->ImageDesc.Height)) {
-+                   return GIF_ERROR;
-+               }
-diff --git a/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb b/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
-index 21fa352cdc..1871bab46e 100644
---- a/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
-+++ b/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
-@@ -3,7 +3,12 @@ SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=ae11c61b04b2917be39b11f78d71519a"
+diff --git a/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.0.1.bb b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.0.1.bb
+index 6b73506c2a..61d656b7ca 100644
+--- a/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.0.1.bb
++++ b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.0.1.bb
+@@ -12,9 +12,10 @@ inherit features_check systemd
+ RDEPENDS_${PN} = "python3-pygobject python3-dbus"
+ REQUIRED_DISTRO_FEATURES = "systemd"
  
--SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2"
-+SRC_URI = " \
-+    ${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2 \
-+    file://CVE-2019-15133.patch \
-+"
+-SRC_URI = "https://gitlab.com/craftyguy/networkd-dispatcher/-/archive/${PV}/networkd-dispatcher-${PV}.tar.bz2"
+-SRC_URI[md5sum] = "304d7dcc21331ea295e207f8493cb8d8"
+-SRC_URI[sha256sum] = "21f84c3646a043329dc64787e4e58dfce592b2559b0e3069af82c469805660c2"
++SRCREV = "333ef1ed1d7c7c17264fcf7629e5c2f78ab4112c"
++SRC_URI = "git://gitlab.com/craftyguy/networkd-dispatcher;protocol=https"
 +
-+CVE_PRODUCT = "giflib_project:giflib"
++S = "${WORKDIR}/git"
  
- inherit autotools
- 
+ SYSTEMD_PACKAGES = "${PN}"
+ SYSTEMD_SERVICE_${PN} = "networkd-dispatcher.service"
 -- 
 2.17.1
 
