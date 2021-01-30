@@ -1,98 +1,114 @@
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web12.8540.1612035476180702444
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web12.8541.1612035477627623994
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Jan 2021 11:37:56 -0800
+ Sat, 30 Jan 2021 11:37:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ulml2Igq;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id z9so24956pjl.5
-        for <openembedded-devel@lists.openembedded.org>; Sat, 30 Jan 2021 11:37:56 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=NiCcQtmB;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id n10so9148454pgl.10
+        for <openembedded-devel@lists.openembedded.org>; Sat, 30 Jan 2021 11:37:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=D00DdBI7oUu+u1DvEY+DrLnZDNqR2a9p3t2HMDWLsXo=;
-        b=Ulml2Igq5xcXpuP7Y+TsOU124IubvDeH9PVSwisw37CBtA2N2YYyP61vPrGkqmP0CP
-         +l13lx6OA6gPrDIUQziTi+hGuCvg9WaL7KDUF47wx2A9n79GBc5e6D+e6hv0VT3I/mmn
-         xjLUfWec81ujjriSOSG7bT9wtXmhCQ+uJVx/52mPxlpEl4MsDxGA4y7/zd0Osq4srtnP
-         Tg9cFykHLRSgoqsK7cE/9Ovdv9I42L1BVBZzcVnxSavy7+SMMKgYuqAN7I8RK0km4Alo
-         3Qa8tcr7zK7s7lnG3dJZRDebzJHUkZn5H6bOtl3yQIdWBHzozmrzmRgKEicbT8s/TcZ6
-         Izkg==
+        bh=O+Ymr/8+GYxEI2d0iKgTesN2TU0Hz6zw+1aRn7T8seg=;
+        b=NiCcQtmBBEXEHw0urElr5U/jMKluzKER6t1PUiBOPZFY/+929En74QlV+FDWtfTMLN
+         Tu/cXDMZuKcTzt28wtI2i3SHcb1nTA569hefKvUkIR4tNtmpMJjPCkgwviFhSVs/knOv
+         Htim9A9KQMSmWNjmV0Q1LLwBo7F0WBcS+R8ySGzJZ+l9CfKOioQe58SeyJGmZoZ4Xaal
+         xmqoQmOVODDoNlunaJ2Wos6gJVUzjq93XBNhlueQLT1lvT0FSFNVSgt4upLziHOr9OU4
+         qN2f1cQw+CQfdHai+G1mcdznkPhiGZmb43osxsHE5Boz8FLYgS6QvdmKoVvTRdOcvIbJ
+         E91A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=D00DdBI7oUu+u1DvEY+DrLnZDNqR2a9p3t2HMDWLsXo=;
-        b=ZSnI0V49xxHs5ZcggWsRX1qBSGvFbOSmxcXL8o/rjMzJexxjnZaq11u008bqXnfxUl
-         gQyIEjFOuurUJMStrv24WjqydbJ41jVTT5P+oAtTyviH0CqGxX+Jvm8emklpPPo75GMG
-         8qADF4Pfsl2gCP3I4+Ul8g2IqphccDr2RGJQ+NTYAUSlorarAVaJ8bUTte0p8DHNDLg2
-         TM1F1qvnVMxdfKsTIFZLGkzSIk3mhDWHUC7uQMco+oqtI61Ofqq36LDjc1kwPuXLH0hO
-         MpOwfVRmCCicPEFQ+FU9MJrgl6snrAqR0Srwnjn+AF+1N62OAKjO06xRq53q1t9CwAyk
-         cJpA==
-X-Gm-Message-State: AOAM530COBL7Jz7aQTvmoVSQpPT76Dj1kX7GU4xLg6qqRduRpxskJrUa
-	/Q2mIVJODKyWBYmDp3sq5a5i3stcOaweUQ==
-X-Google-Smtp-Source: ABdhPJxQQfbamMr63pAQTkl9zm/fPvvjjAjpP1gEMw8lQ/GocNA1M1yq+DzSzRyKC8h43qleobHFIA==
-X-Received: by 2002:a17:902:c1cc:b029:e1:3159:8c08 with SMTP id c12-20020a170902c1ccb02900e131598c08mr4844955plc.69.1612035475604;
-        Sat, 30 Jan 2021 11:37:55 -0800 (PST)
+        bh=O+Ymr/8+GYxEI2d0iKgTesN2TU0Hz6zw+1aRn7T8seg=;
+        b=Kbqw/rkDotyd3YdQIPA4ZliJAMIrqOL1uTMx00mqZmr5itsxBcxK6ylW1WcYEeEi78
+         UMGbVVbg71jTdgsEWqr1l/LnheiD9P+7CyD3bX3ZvFI0dxe6dohb6WSb+lJmQlAr2KiF
+         fEPctgoQDvNpN72EPzqYy1m0n2cRG6sj6I+OJKkfFpLavt42/9G/mHd8hCFU/5EzUQUQ
+         JYfSZph6f6ktIOIgX6GDzJAWSSdu1BeE47NIL2D2BP4yC//E7GCzE4HyRTYOqiPYobMv
+         MRSFigmrAjDZjNuD+MskivdwfViHp2ODU2n2qW7nKfr2DruO2jn1RYw/QGxJNVLOZsPY
+         XINA==
+X-Gm-Message-State: AOAM531Jsc08J/5R04LEsqjELih+D8DNFAZkqzB7bG3PqcBnuulDXNUT
+	COeopH+DFfp6GY2vb9h8FQVuBLmY1zBVMg==
+X-Google-Smtp-Source: ABdhPJxOOE6S0d8NMzHgqi+8i0poJBMrx0CDZ6WEqnZuSZWlMaswAmgo+wJQH5Nmh9/0gTAjO3a1Sw==
+X-Received: by 2002:a65:6458:: with SMTP id s24mr2748490pgv.386.1612035477070;
+        Sat, 30 Jan 2021 11:37:57 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:315d:c5e7:1295:54a9])
-        by smtp.gmail.com with ESMTPSA id q197sm12518096pfc.155.2021.01.30.11.37.54
+        by smtp.gmail.com with ESMTPSA id q197sm12518096pfc.155.2021.01.30.11.37.55
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 30 Jan 2021 11:37:55 -0800 (PST)
+        Sat, 30 Jan 2021 11:37:56 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 10/13] sip3: Upgrade 4.19.19 -> 4.19.23
-Date: Sat, 30 Jan 2021 11:37:35 -0800
-Message-Id: <52967af42380080a89f70c4c91bbaeca2a37b9f9.1612035229.git.akuster808@gmail.com>
+Subject: [dunfell 11/13] giflib: apply patch for CVE-2019-15133 and set CVE_PRODUCT
+Date: Sat, 30 Jan 2021 11:37:36 -0800
+Message-Id: <80c0a5fff685f5c5b8f484fbba3d6837912a31b7.1612035229.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1612035229.git.akuster808@gmail.com>
 References: <cover.1612035229.git.akuster808@gmail.com>
 
-From: Leon Anavi <leon.anavi@konsulko.com>
+From: Mikko Rapeli <mikko.rapeli@bmw.de>
 
-Upgrade to release 4.19.23:
+Backport upstream patch for CVE-2019-15133.
+Set CVE_PRODUCT to "giflib_project:giflib" which is used
+in NVD. https://nvd.nist.gov/vuln/detail/CVE-2019-15133
 
-- Added some missing quotes to configure.py
-- Fixed a race condition when calling the PyQt5-specific meta-call
-  helper.
-- Fixed the wrapping of methods that return a Py_Ssize_t.
-- The code generator now distinguishes between the copy/assignment
-  helper and the array helper when determining which helpers can
-  be generated.
-- Fixed the code generation when making a copy of C++ object on
-  the stack to the heap when the class has no suitable ctor.
-- Check there is a public copy ctor when we can't using an
-  assigment operator as a workaround.
-- Preserve any current exception in the implementation of the
-  wrapper dealloc functions.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 358b3982583c93fdc0a4cebdab31f923d77b7f8b)
-Signed-off-by: Steve Sakoman <steve@sakoman.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-devtools/sip/{sip3_4.19.19.bb => sip3_4.19.23.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/sip/{sip3_4.19.19.bb => sip3_4.19.23.bb} (92%)
+ .../giflib/files/CVE-2019-15133.patch         | 23 +++++++++++++++++++
+ .../recipes-devtools/giflib/giflib_5.1.4.bb   |  7 +++++-
+ 2 files changed, 29 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
 
-diff --git a/meta-oe/recipes-devtools/sip/sip3_4.19.19.bb b/meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
-similarity index 92%
-rename from meta-oe/recipes-devtools/sip/sip3_4.19.19.bb
-rename to meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
-index e6a4653b59..320755b844 100644
---- a/meta-oe/recipes-devtools/sip/sip3_4.19.19.bb
-+++ b/meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
-@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
+diff --git a/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch b/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
+new file mode 100644
+index 0000000000..9957be82f3
+--- /dev/null
++++ b/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
+@@ -0,0 +1,23 @@
++From 799eb6a3af8a3dd81e2429bf11a72a57e541f908 Mon Sep 17 00:00:00 2001
++From: "Eric S. Raymond" <esr@thyrsus.com>
++Date: Sun, 17 Mar 2019 12:37:21 -0400
++Subject: [PATCH] Address SF bug #119: MemorySanitizer: FPE on unknown address
++
++---
++ dgif_lib.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++Upstream-status: Backport [https://sourceforge.net/p/giflib/code/ci/799eb6a3af8a3dd81e2429bf11a72a57e541f908/]
++CVE: CVE-2019-15133
++
++--- a/lib/dgif_lib.c	2021-01-13 19:28:18.923493586 +0100
+++++ b/lib/dgif_lib.c	2021-01-13 19:28:55.245863085 +0100
++@@ -1099,7 +1099,7 @@ DGifSlurp(GifFileType *GifFile)
++ 
++               sp = &GifFile->SavedImages[GifFile->ImageCount - 1];
++               /* Allocate memory for the image */
++-              if (sp->ImageDesc.Width < 0 && sp->ImageDesc.Height < 0 &&
+++              if (sp->ImageDesc.Width <= 0 && sp->ImageDesc.Height <= 0 &&
++                       sp->ImageDesc.Width > (INT_MAX / sp->ImageDesc.Height)) {
++                   return GIF_ERROR;
++               }
+diff --git a/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb b/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
+index 21fa352cdc..1871bab46e 100644
+--- a/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
++++ b/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
+@@ -3,7 +3,12 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=ae11c61b04b2917be39b11f78d71519a"
  
- SRC_URI = "https://www.riverbankcomputing.com/static/Downloads/sip/${PV}/sip-${PV}.tar.gz \
- "
--SRC_URI[md5sum] = "98111479309dc472410f26080d6d4a88"
--SRC_URI[sha256sum] = "5436b61a78f48c7e8078e93a6b59453ad33780f80c644e5f3af39f94be1ede44"
-+SRC_URI[md5sum] = "70adc0c9734e2d9dcd241d3f931dfc74"
-+SRC_URI[sha256sum] = "22ca9bcec5388114e40d4aafd7ccd0c4fe072297b628d0c5cdfa2f010c0bc7e7"
+-SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2"
++SRC_URI = " \
++    ${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2 \
++    file://CVE-2019-15133.patch \
++"
++
++CVE_PRODUCT = "giflib_project:giflib"
  
- inherit python3-dir python3native
+ inherit autotools
  
 -- 
 2.17.1
