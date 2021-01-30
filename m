@@ -1,82 +1,95 @@
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web08.8590.1612035472104935660
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
+ by mx.groups.io with SMTP id smtpd.web10.8761.1612035472956500425
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Jan 2021 11:37:52 -0800
+ Sat, 30 Jan 2021 11:37:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=lAeEOKWT;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id x11so313209pjr.3
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=LIdyTuVU;
+ spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f179.google.com with SMTP id o7so9183923pgl.1
         for <openembedded-devel@lists.openembedded.org>; Sat, 30 Jan 2021 11:37:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=DxvhcCpVh+1Sa3SMKLqMBAixaOspctX4e3UFguInriU=;
-        b=lAeEOKWTPUon9BoaodNOHlo+KIHQ94djJotf+DjCKxace4a81P48qacueWvD1sOaW6
-         6T0SFQDQrBD8Y9WzaBZ/c1T8M+tchOk73F6QWfWns+rSNlPZXj8V6U6i53FbO1qfxfvX
-         CjHaotfMkD3769qjRiYmnnh6ZOFxV4kLDm2bebBPO69OC3MYXAwsvJlWBvkBN4fxgiZ4
-         gAV+5xCUaZk7wSSRIf2+CUmPN2F7SpFZ702qd5+o4n1IoDiE1e9yQeVcSIgC1/b8mnu3
-         QczdWCLHuxR0eThahoqInQihmwSo/6lBuamgrlLx934klwiTCUu2VRMn6sZmbHkmnJuV
-         PezA==
+        bh=dVDYuS+JHrzeDcaD0g6rRiG7OzCbPgiLfKSeRI+7bD0=;
+        b=LIdyTuVUUjWg5aPap/oeAGWECss1lU2pGd5K2AC5BAKqcPky85opXhOH7CbDDQ8dEM
+         Nflx2wJqpHxRlGVfrA7yUkv/APpKKQfw980D7bulbczqZSUWJyUx8DIUPNAdGPzILN7B
+         6WPa4lOzKkzDxT9hZOFwnQgaBNyS39SnOAGXWsEo6G85rZTUExLIewCHJD1tvv6GDZOe
+         gSZIHLQ867na+dTHptATCPTHyXwngyJ5p6808epBcHiogYe4H1/trm/1aQwANDw4g6pl
+         ft8BeSnlUVt1r4crK+ATCz35l3GpxG6P6JkGLzE8PA60UdUsame1Ijx4AHlJ8VKjE/tU
+         +MHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=DxvhcCpVh+1Sa3SMKLqMBAixaOspctX4e3UFguInriU=;
-        b=BOTNXp1Ftxpw1VyD4k6R7PIHzaJTkxLDaLvsZtUZi9RUgClanSPjehT/ODvMrya8Wm
-         K4OGBz5iyzR6qFnVftQg6r00Fts8bJZNW3Fu2RVzce7GaAQoB6OAvF+vZIeAg5aobi2v
-         cjPdqOjNcPdIPeZY7Ssx+d3EMcVbAvJXvQ1w9zSZGAj6K/pmV3PjyM4kRXDfq68hvKUA
-         aTIEKbuYumXm1D45rXsmkZCXB9wUIkaHdK1h+pWNQZU5EpuTHEjmtpUpbdizgfyxtxtK
-         lQt82sanop6TADS8CiOg8Jo9zP/VfTeSDUI8O2a1XYs8v8E67ZLXKuosboy5aK0UxFKU
-         VJvw==
-X-Gm-Message-State: AOAM533RqOUD3LITpkgyqA9gxj+fANJEEHs4sAAJcHgc5+pCCmXxzXpN
-	d3BYTJbp2JK/MDpJrZ9D5dviALiDpAggpw==
-X-Google-Smtp-Source: ABdhPJzN/Dnb40vOLF30T4B2Ay0y1udlLonLfMjCZaZEBT0A867UsO464Vh1OsV9MwQjGfIwuyiEew==
-X-Received: by 2002:a17:902:223:b029:da:af1e:b112 with SMTP id 32-20020a1709020223b02900daaf1eb112mr11204366plc.83.1612035471538;
-        Sat, 30 Jan 2021 11:37:51 -0800 (PST)
+        bh=dVDYuS+JHrzeDcaD0g6rRiG7OzCbPgiLfKSeRI+7bD0=;
+        b=bUHlmJ06yNzm1WTTtQhNfbzVWzhgjM99LUU58bYB9QrOgDPG5j6rLZ6mLeOsd/Twxm
+         oGnCq6Jaxa1EYm6LEe69zlLeAHlmmPY2f34XZDO3mBsdM/xlsTe9Av/gQ7EFH5Mq2FO+
+         QRm49eBbXQkI5HqP3NaANGeWk4+B0fZ0vKr+Zy0ctg1XbJg2e+Qap66tBu2BlUWbJ+H8
+         hGQni6n8hZ/tY4+M91aChuWEPuZx+GotnB2SR7reaI9Sl1xUKIkBYHzVUMsIMh4z8oq5
+         Vl/peuX8w554ucRrWXcoTl3EYL0R3UvCmntS1fhpeAhbG1zHSKJIl9s6thDSW9gJht70
+         CeUA==
+X-Gm-Message-State: AOAM5309H2hCJI4PsfYQ5kOTgYUfbr+ZVDpnHcQ9xZVP+BlfyLXDFevQ
+	Lrt8ak/YNNWmiUkUFzuxnfRXrZZBabtcqw==
+X-Google-Smtp-Source: ABdhPJwagDw5wlLsjZCa/BD9Fh9TkMoCsu0LPrnuuXRP1eUW4Usu37hZwEnVCMUbZT7bkEu090quRA==
+X-Received: by 2002:a63:704c:: with SMTP id a12mr9788252pgn.360.1612035472345;
+        Sat, 30 Jan 2021 11:37:52 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:315d:c5e7:1295:54a9])
-        by smtp.gmail.com with ESMTPSA id q197sm12518096pfc.155.2021.01.30.11.37.50
+        by smtp.gmail.com with ESMTPSA id q197sm12518096pfc.155.2021.01.30.11.37.51
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 30 Jan 2021 11:37:51 -0800 (PST)
+        Sat, 30 Jan 2021 11:37:52 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 06/13] flatbuffers: whitelist CVE-2020-35864
-Date: Sat, 30 Jan 2021 11:37:31 -0800
-Message-Id: <4964a5a46361d9ff404662b2cdef48434536bfaf.1612035229.git.akuster808@gmail.com>
+Subject: [dunfell 07/13] rapidjson: Upgrade SRCREV to latest
+Date: Sat, 30 Jan 2021 11:37:32 -0800
+Message-Id: <e5499dc4bcbf4ea6456d65fa917547bec7a190a3.1612035229.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1612035229.git.akuster808@gmail.com>
 References: <cover.1612035229.git.akuster808@gmail.com>
 
-From: Mikko Rapeli <mikko.rapeli@bmw.de>
+From: Harpritkaur Bhandari <harpritkaur.bhandari@kpit.com>
 
-CVE-2020-35864 is for the rust crate for flatbuffers, not
-flatbuffers itself.
+Upgrade SRCREV to latest as it fixes the below issue:
+Running UndefinedBehaviorSanitizer on projects that use
+rapidjson triggers 'applying non-zero offset <NN> to null
+pointer' findings in 'internal/stack.h' which are hard
+to suppress by library users.
+Removed "0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch"
+as the changes are already incorporated in the latest
+codebase.
+As per abi-compliance-checker report the source compatibility
+and binary compatibility between previous SRCREV
+6a905f9311f82d306da77bd963ec5aa5da07da9c and current
+SRCREV 0ccdbf364c577803e2a751f5aededce935314313
+is 100% and this patch is already tested on 64bit
+ARM (aarch64) in a product with on target CI tests.
 
-https://security-tracker.debian.org/tracker/CVE-2020-35864
-
-"NOT-FOR-US: flatbuffers rust crate"
-
-Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 04d9ea0ba7ece968244bf049893dd5636675b76f)
+Signed-off-by: Harpritkaur Bhandari <Harpritkaur.Bhandari@kpit.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb
-index c31cef63cf..7b8d47d8df 100644
---- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb
-+++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb
-@@ -14,6 +14,9 @@ SRCREV = "6df40a2471737b27271bdd9b900ab5f3aec746c7"
+diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+index e3ed9c6a17..5b5c8b2570 100644
+--- a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
++++ b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+@@ -4,10 +4,9 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://license.txt;md5=ba04aa8f65de1396a7e59d1d746c2125"
  
- SRC_URI = "git://github.com/google/flatbuffers.git"
+-SRC_URI = "git://github.com/miloyip/rapidjson.git;nobranch=1 \
+-           file://0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch"
++SRC_URI = "git://github.com/miloyip/rapidjson.git;nobranch=1"
  
-+# affects only flatbuffers rust crate
-+CVE_CHECK_WHITELIST += "CVE-2020-35864"
-+
- # Make sure C++11 is used, required for example for GCC 4.9
- CXXFLAGS += "-std=c++11 -fPIC"
- BUILD_CXXFLAGS += "-std=c++11 -fPIC"
+-SRCREV = "6a905f9311f82d306da77bd963ec5aa5da07da9c"
++SRCREV = "0ccdbf364c577803e2a751f5aededce935314313"
+ 
+ PV = "1.1.0+git${SRCPV}"
+ 
 -- 
 2.17.1
 
