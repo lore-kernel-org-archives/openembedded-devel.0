@@ -1,86 +1,97 @@
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
- by mx.groups.io with SMTP id smtpd.web12.16331.1612086602376562129
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+ by mx.groups.io with SMTP id smtpd.web09.16484.1612087320282018774
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 Jan 2021 01:50:02 -0800
+ Sun, 31 Jan 2021 02:02:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=LrlGock0;
- spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f52.google.com with SMTP id s11so15469225edd.5
-        for <openembedded-devel@lists.openembedded.org>; Sun, 31 Jan 2021 01:50:02 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=OydIqXZ3;
+ spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f42.google.com with SMTP id y8so338423ede.6
+        for <openembedded-devel@lists.openembedded.org>; Sun, 31 Jan 2021 02:02:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=2WzAJrw0CDJd/Up6xWcR4NhUwB0Gze+idKnmR6kqKkU=;
-        b=LrlGock0FiHJzIwhlsG/E8En+qVheGnmpOsH6GEGK6924CHny8UfFPRMQa7vsCm+vj
-         V/2jJNzyVRdVQVNQzjD+lnJElXvDnL5MvSkSG4OVkgUV2dQDiyNt66+lsxJAaRRKqU2Y
-         o2PABNsnmJZOVkWgescACDEkZvQLVrT50Nb3f2eWhFfXYq4RAcQLSClSw4v3TUs2CRJ1
-         TAG3z/604ZJE1Wd7a/Y/AvHy/Emu4G+r4JnpwKbdnFSmKuvSHTzji4xocTqEkmGzTWel
-         iSzzE4hdnICyZReA8vakJN8yF/Ew9FORZ0OEOJX5qyrbPgy3/kiFdZ4NfzZT7FnAV9Ph
-         0zxg==
+        bh=8OrRJftBZmlq+OEc+3rLwQJ/LvasMmU5QanEwCS9FME=;
+        b=OydIqXZ3sr13InNVX94l7bHuODT+bsOs+QWlKDeqaoVzgBy2nqd3954OMrycdmc/ar
+         N+sv2yEfKwBpkFen8Y5fiqWjvqyGrwI4836WVq8mOglnY3zyZOAs9H+A5O6EpHlkRgoz
+         dcN1KP7HynobXBXdMSC4DQyOBrzJ3erM7hLbwfvOIrXn+kfO/sEBSuyRiRuU3F6tZuhQ
+         Lbbgl01YnPLdzU2sgWcpxLoJf6AFs56rw8U8TL0gZnlceaf7B9PuY1ZJcHLYrtFFCZU3
+         luWNOiS+g7gw8g/NvSNDP4F0v6wGamyRAHDoSXWfyACmGfYBWKz1uZJMUGHY7Afc/zIF
+         7SKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=2WzAJrw0CDJd/Up6xWcR4NhUwB0Gze+idKnmR6kqKkU=;
-        b=gQQe65pjLrJwmBo2oONvT4C5Ye1qV9hWNNqOyeNERU8EAp9U/uL7ntrbAFQAHI7uCa
-         7H/ncQ0b9CPB4RsKa2cBjNGbhGgOJvXRRLagRngnF94DcTJw3LWLv2tTeBiyyyTP13yd
-         EVmVhJd3IGyey5roQ5u3dT1y/QtRafGtofF67MSELtDjBLFfBlPLGq0ZlAq0UYzWZ3Cd
-         Gf2u9cRd4/PqEUZ8W/PJZP6XEANqz9uJcDEbPvLLoUMryR4sMp5CyKYuaTx4MAug52Q6
-         K/eTO4p8s777jUAYd66o1Q805yIQ/3glF6ZySvkbxtS1LqNu9/FWFd6mYaF1aT6vUNdA
-         rbNg==
-X-Gm-Message-State: AOAM5306VQE7zLiA39sfBXaLuhlew3aNqpenP3JATS49f6hVpZXc317R
-	NbEuQKTTK4R34Fu9pSMfwqQVbVn/Pqw=
-X-Google-Smtp-Source: ABdhPJzLgZiJKyUg56EVv/s3/e5XfvSjAW6rf23UdnkTfxgF8JcJF5mGJl8BXFLcWYF6xpsYhNWCpA==
-X-Received: by 2002:a50:bacb:: with SMTP id x69mr13353919ede.39.1612086600803;
-        Sun, 31 Jan 2021 01:50:00 -0800 (PST)
+        bh=8OrRJftBZmlq+OEc+3rLwQJ/LvasMmU5QanEwCS9FME=;
+        b=gGSAW8sby8HgJIu9V0VMKqcEo4alNPyChTku1hCbAY0vg395rFRuVu0DCtXCgOSYNx
+         Dp4hTYsC/U+pZSSYLLjqDQ4R+JwKXKhOEqHAFI1d7/9Xwfk+fOZ/aHCAxhwOwdaG5eL0
+         h26GMdumfoTjZf92HGPbhD0I2wJkOxpZK1z9ai8DRTC1fCsQsBlce+h7+s+Rdwwke8dI
+         jzeopNvxPZ0gq06+Q9WpHTT90WqGlRzkpz6itCPZwNMmIDvXAJi2TUAEOIFaSdK6b3ES
+         LZGRG59/18aB3RyTM3yldcsLk7KZIscVI438e3uSIhFr/5RCMN0up5xHODqoM3UXzRY7
+         6RcQ==
+X-Gm-Message-State: AOAM5306tfLa5u3AfQh7AXZWb0XKGGpKceSiG9K36/and83p2fF9grYo
+	AKuf62FXeHE8Ho8uZ3AHSIYlAneSZbs=
+X-Google-Smtp-Source: ABdhPJzyI6T9bfMJ7+bfzm1g6hJJx6hG5hOgYt+VL7LoSz421OQZgjIRkELwS4430o1s/dlNvX3BAg==
+X-Received: by 2002:aa7:cb42:: with SMTP id w2mr13649957edt.21.1612087318797;
+        Sun, 31 Jan 2021 02:01:58 -0800 (PST)
 Return-Path: <martin.jansa@gmail.com>
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id o13sm6452163ejb.10.2021.01.31.01.50.00
+        by smtp.gmail.com with ESMTPSA id b17sm7001333edv.56.2021.01.31.02.01.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 Jan 2021 01:50:00 -0800 (PST)
+        Sun, 31 Jan 2021 02:01:58 -0800 (PST)
 From: "Martin Jansa" <Martin.Jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-python2][PATCH] python-setuptools: simplify RDEPENDS setting
-Date: Sun, 31 Jan 2021 10:49:58 +0100
-Message-Id: <20210131094958.9114-1-Martin.Jansa@gmail.com>
+Subject: [meta-python2][PATCH] python-native: Fix parsing with default RPROVIDES dropped in oe-core
+Date: Sun, 31 Jan 2021 11:01:55 +0100
+Message-Id: <20210131100155.9953-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-* python2 version from meta-python2 caused parsing error now, which unfortunately left bitbake stuck after:
-  ERROR: meta-python2/recipes-devtools/python/python-setuptools_42.0.2.bb: QA Issue: meta-python2/recipes-devtools/python/python-setuptools_42.0.2.bb: Variable RPROVIDES is set as not being package specific, please fix this. [pkgvarcheck]
-  ERROR: meta-python2/recipes-devtools/python/python-setuptools_42.0.2.bb: Fatal QA errors found, failing task.
-  ERROR: Failed to parse recipe: meta-python2/recipes-devtools/python/python-setuptools_42.0.2.bb
+* adapt to:
+  https://git.openembedded.org/openembedded-core/commit/?id=b8bbc1bbe282cce2ea4d0ff293f931f6caf6153b
+* fixes:
+ERROR: meta-python2/recipes-devtools/python/python-native_2.7.18.bb: Error executing a python function in <code>:                                                                                            | ETA:  0:00:32
+
+The stack trace of python calls that resulted in this exception/failure was:
+File: '<code>', lineno: 13, function: <module>
+     0009:__anon_35__oe_core_meta_classes_devshell_bbclass(d)
+     0010:__anon_151__oe_core_meta_classes_sstate_bbclass(d)
+     0011:__anon_20__oe_core_meta_classes_blacklist_bbclass(d)
+     0012:__anon_177__oe_core_meta_classes_siteinfo_bbclass(d)
+ *** 0013:__anon_90__meta_python2_recipes_devtools_python_python_native_2_7_18_bb(d)
+File: 'meta-python2/recipes-devtools/python/python-native_2.7.18.bb', lineno: 76, function: __anon_90__meta_python2_recipes_devtools_python_python_native_2_7_18_bb
+     0072:        manifest_file.seek(json_start)
+     0073:        manifest_str = manifest_file.read()
+     0074:        python_manifest = json.loads(manifest_str)
+     0075:
+ *** 0076:    rprovides = d.getVar('RPROVIDES').split()
+     0077:
+     0078:    # Hardcoded since it cant be python-native-foo, should be python-foo-native
+     0079:    pn = 'python'
+     0080:
+Exception: AttributeError: 'NoneType' object has no attribute 'split'
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-devtools/python/python-setuptools.inc | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+ recipes-devtools/python/python-native_2.7.18.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-devtools/python/python-setuptools.inc b/recipes-devtools/python/python-setuptools.inc
-index d8bce71..5f427fd 100644
---- a/recipes-devtools/python/python-setuptools.inc
-+++ b/recipes-devtools/python/python-setuptools.inc
-@@ -24,6 +24,7 @@ RDEPENDS_${PN} = "\
-   ${PYTHON_PN}-html \
-   ${PYTHON_PN}-netserver \
-   ${PYTHON_PN}-numbers \
-+  ${PYTHON_PN}-pkg-resources \
-   ${PYTHON_PN}-pkgutil \
-   ${PYTHON_PN}-plistlib \
-   ${PYTHON_PN}-shell \
-@@ -43,8 +44,3 @@ BBCLASSEXTEND = "native nativesdk"
- # minimal distributions.
- PACKAGES =+ "${PYTHON_PN}-pkg-resources "
- FILES_${PYTHON_PN}-pkg-resources = "${PYTHON_SITEPACKAGES_DIR}/pkg_resources/*"
--# Due to the way OE-Core implemented native recipes, the native class cannot
--# have a dependency on something that is not a recipe name. Work around that by
--# manually setting RPROVIDES.
--RDEPENDS_${PN}_append = " ${PYTHON_PN}-pkg-resources"
--RPROVIDES_append_class-native = " ${PYTHON_PN}-pkg-resources-native"
+diff --git a/recipes-devtools/python/python-native_2.7.18.bb b/recipes-devtools/python/python-native_2.7.18.bb
+index 72aa34c..5b29c9f 100644
+--- a/recipes-devtools/python/python-native_2.7.18.bb
++++ b/recipes-devtools/python/python-native_2.7.18.bb
+@@ -73,7 +73,7 @@ python(){
+         manifest_str = manifest_file.read()
+         python_manifest = json.loads(manifest_str)
+ 
+-    rprovides = d.getVar('RPROVIDES').split()
++    rprovides = (d.getVar('RPROVIDES') or "").split()
+ 
+     # Hardcoded since it cant be python-native-foo, should be python-foo-native
+     pn = 'python'
 -- 
 2.27.0
 
