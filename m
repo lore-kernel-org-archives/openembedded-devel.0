@@ -1,145 +1,86 @@
-Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
- by mx.groups.io with SMTP id smtpd.web10.10513.1612043599514860580
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
+ by mx.groups.io with SMTP id smtpd.web12.16331.1612086602376562129
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Jan 2021 13:53:19 -0800
+ Sun, 31 Jan 2021 01:50:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Q74pdTXG;
- spf=pass (domain: gmail.com, ip: 209.85.167.41, mailfrom: andrey.z@gmail.com)
-Received: by mail-lf1-f41.google.com with SMTP id p21so17533574lfu.11
-        for <openembedded-devel@lists.openembedded.org>; Sat, 30 Jan 2021 13:53:19 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=LrlGock0;
+ spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f52.google.com with SMTP id s11so15469225edd.5
+        for <openembedded-devel@lists.openembedded.org>; Sun, 31 Jan 2021 01:50:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=wga59Xu6k+ftcCYcQX6LVbOBYh1vwASZK8n8F766Grw=;
-        b=Q74pdTXGaLYPpzjuRPs9kC6FT++VkZQygoDibEXblC7k2DebNn4exS7UM/LAn/9RqJ
-         x1GxP/tqN3IccCooYC2HqEBTk7tQwijFxvkUgiWsJwvOwomGwJi4XIzprvIWrdi9rooM
-         BeZ2eaK0zuvTXvimYDpz92g2jiCmS2pmPTCw6/n3J7aUITX6lV/1r+aza2PGcu9OWbgG
-         Iyp+ExpiKbF+OG5zkNo9yiAzBMM+DX3gzJGvQ+HSX5TyvuMmtMe+PtevytglxkaqMVTC
-         UqMB4ch4w1qECxuBsITbgTWoyfKw18mtMe7s2GfVDJUQkxrNQMQZxqBkhckyZchBi+rz
-         UTtA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=2WzAJrw0CDJd/Up6xWcR4NhUwB0Gze+idKnmR6kqKkU=;
+        b=LrlGock0FiHJzIwhlsG/E8En+qVheGnmpOsH6GEGK6924CHny8UfFPRMQa7vsCm+vj
+         V/2jJNzyVRdVQVNQzjD+lnJElXvDnL5MvSkSG4OVkgUV2dQDiyNt66+lsxJAaRRKqU2Y
+         o2PABNsnmJZOVkWgescACDEkZvQLVrT50Nb3f2eWhFfXYq4RAcQLSClSw4v3TUs2CRJ1
+         TAG3z/604ZJE1Wd7a/Y/AvHy/Emu4G+r4JnpwKbdnFSmKuvSHTzji4xocTqEkmGzTWel
+         iSzzE4hdnICyZReA8vakJN8yF/Ew9FORZ0OEOJX5qyrbPgy3/kiFdZ4NfzZT7FnAV9Ph
+         0zxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=wga59Xu6k+ftcCYcQX6LVbOBYh1vwASZK8n8F766Grw=;
-        b=MkhnfBz2Gd2kCibTPE+2YV/bDkqJ0ENlmYglMnFGq8p8TnXwOl1KpruvEVTVxvVp4S
-         G97cNeymv1tQ/zjkhsmLTc5wS9hzhtVg2c57ShuklwZbWnZU9sDXtEJjRsg/m2/G0ge/
-         O0T54yftvM4eYEvMfvzno41AmEGYqSOPDbSX1dG399+PgKHOebGU6saikn5s1KQv9IFl
-         LcUHFm+CO+fFbb2adcTyMk7i44j38N8T83YtMRwjgDDt8eYegE/TaG/K5ki3nMC10XIj
-         BAMfS0H3w0/vGDRcmDPnRjd4zw3DamNx3rVpNUSoyuHaDFe3amfnYC9Eo8+jSn7M78TN
-         gmMQ==
-X-Gm-Message-State: AOAM533wjVbti5NV/2JJVvT6mGKgVBOyDyTtVIjjW/0K6bA1C0vL4RjR
-	4UJ2T/jjWgXkKuwd3MyRNb7IRAH36QmZCoqq3Mk=
-X-Google-Smtp-Source: ABdhPJz4/c9fbOL3+LkybRCiUbftQArYmJrLoOkMIwE07dcgmXnWgUZhNelZcikK9Z87h1eYkRCcz7Unq9YGXX5U+7c=
-X-Received: by 2002:a19:4158:: with SMTP id o85mr5416049lfa.429.1612043597664;
- Sat, 30 Jan 2021 13:53:17 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=2WzAJrw0CDJd/Up6xWcR4NhUwB0Gze+idKnmR6kqKkU=;
+        b=gQQe65pjLrJwmBo2oONvT4C5Ye1qV9hWNNqOyeNERU8EAp9U/uL7ntrbAFQAHI7uCa
+         7H/ncQ0b9CPB4RsKa2cBjNGbhGgOJvXRRLagRngnF94DcTJw3LWLv2tTeBiyyyTP13yd
+         EVmVhJd3IGyey5roQ5u3dT1y/QtRafGtofF67MSELtDjBLFfBlPLGq0ZlAq0UYzWZ3Cd
+         Gf2u9cRd4/PqEUZ8W/PJZP6XEANqz9uJcDEbPvLLoUMryR4sMp5CyKYuaTx4MAug52Q6
+         K/eTO4p8s777jUAYd66o1Q805yIQ/3glF6ZySvkbxtS1LqNu9/FWFd6mYaF1aT6vUNdA
+         rbNg==
+X-Gm-Message-State: AOAM5306VQE7zLiA39sfBXaLuhlew3aNqpenP3JATS49f6hVpZXc317R
+	NbEuQKTTK4R34Fu9pSMfwqQVbVn/Pqw=
+X-Google-Smtp-Source: ABdhPJzLgZiJKyUg56EVv/s3/e5XfvSjAW6rf23UdnkTfxgF8JcJF5mGJl8BXFLcWYF6xpsYhNWCpA==
+X-Received: by 2002:a50:bacb:: with SMTP id x69mr13353919ede.39.1612086600803;
+        Sun, 31 Jan 2021 01:50:00 -0800 (PST)
+Return-Path: <martin.jansa@gmail.com>
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id o13sm6452163ejb.10.2021.01.31.01.50.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 31 Jan 2021 01:50:00 -0800 (PST)
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-python2][PATCH] python-setuptools: simplify RDEPENDS setting
+Date: Sun, 31 Jan 2021 10:49:58 +0100
+Message-Id: <20210131094958.9114-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-References: <cover.1612035229.git.akuster808@gmail.com>
-In-Reply-To: <cover.1612035229.git.akuster808@gmail.com>
-From: "Andrey Zhizhikin" <andrey.z@gmail.com>
-Date: Sat, 30 Jan 2021 22:53:05 +0100
-Message-ID: <CAHtQpK4jpZET4UZ=-34AJSvOCUGqOAVKMn-L-dh7WiLzerJPKg@mail.gmail.com>
-Subject: Re: [oe] [dunfell 00/13] Patch review Jan 30
-To: akuster <akuster808@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Hello Armin,
+* python2 version from meta-python2 caused parsing error now, which unfortunately left bitbake stuck after:
+  ERROR: meta-python2/recipes-devtools/python/python-setuptools_42.0.2.bb: QA Issue: meta-python2/recipes-devtools/python/python-setuptools_42.0.2.bb: Variable RPROVIDES is set as not being package specific, please fix this. [pkgvarcheck]
+  ERROR: meta-python2/recipes-devtools/python/python-setuptools_42.0.2.bb: Fatal QA errors found, failing task.
+  ERROR: Failed to parse recipe: meta-python2/recipes-devtools/python/python-setuptools_42.0.2.bb
 
-On Sat, Jan 30, 2021 at 8:37 PM akuster <akuster808@gmail.com> wrote:
->
-> Here are the next block of changes for dunfell.
-> Please have comments back my Tues
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes-devtools/python/python-setuptools.inc | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
 
-Would it be possible to include also the following commit from master:
-04afc692a gpsd: mark CLEANBROKEN
+diff --git a/recipes-devtools/python/python-setuptools.inc b/recipes-devtools/python/python-setuptools.inc
+index d8bce71..5f427fd 100644
+--- a/recipes-devtools/python/python-setuptools.inc
++++ b/recipes-devtools/python/python-setuptools.inc
+@@ -24,6 +24,7 @@ RDEPENDS_${PN} = "\
+   ${PYTHON_PN}-html \
+   ${PYTHON_PN}-netserver \
+   ${PYTHON_PN}-numbers \
++  ${PYTHON_PN}-pkg-resources \
+   ${PYTHON_PN}-pkgutil \
+   ${PYTHON_PN}-plistlib \
+   ${PYTHON_PN}-shell \
+@@ -43,8 +44,3 @@ BBCLASSEXTEND = "native nativesdk"
+ # minimal distributions.
+ PACKAGES =+ "${PYTHON_PN}-pkg-resources "
+ FILES_${PYTHON_PN}-pkg-resources = "${PYTHON_SITEPACKAGES_DIR}/pkg_resources/*"
+-# Due to the way OE-Core implemented native recipes, the native class cannot
+-# have a dependency on something that is not a recipe name. Work around that by
+-# manually setting RPROVIDES.
+-RDEPENDS_${PN}_append = " ${PYTHON_PN}-pkg-resources"
+-RPROVIDES_append_class-native = " ${PYTHON_PN}-pkg-resources-native"
+-- 
+2.27.0
 
-This solves sporadic build errors for gpsd on dunfell, see
-https://lists.openembedded.org/g/openembedded-core/message/147317
-
->
-> Yes, this is out-of-sync with Gatesgath but I am seeing build issues the=
-re and did not want to hold up this review cycle.
->
-> Clean world build
->
-> The following changes since commit 5bba79488b7d393d2258d6e917f7bf7b0d7c4=
-073:
->
->   gupnp: Upgrade to 1.2.2 -> 1.2.4 (2021-01-18 08:40:15 -0800)
->
-> are available in the Git repository at:
->
->   git://git.openembedded.org/meta-openembedded-contrib stable/dunfell-nu=
-t
->   http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=3Dstable=
-/dunfell-nut
->
-> Dan Murphy (1):
->   mariadb: Fix 64bit builds if pam is enabled
->
-> Dmitry Baryshkov (2):
->   xterm: install xterm and uxterm desktop files
->   xterm: provide virtual/x-terminal-emulator
->
-> Harpritkaur Bhandari (1):
->   rapidjson: Upgrade SRCREV to latest
->
-> Khem Raj (2):
->   iscsi-initiator-utils: Upgrade to _2.1.2
->   iscsi-initiator-utils: Silence a clang warning on 64bit systems
->
-> Leon Anavi (2):
->   sip3: Consolidate in a single file
->   sip3: Upgrade 4.19.19 -> 4.19.23
->
-> Martin Jansa (1):
->   networkd-dispatcher: use git fetcher
->
-> Mikko Rapeli (2):
->   flatbuffers: whitelist CVE-2020-35864
->   giflib: apply patch for CVE-2019-15133 and set CVE_PRODUCT
->
-> S=C3=B8ren Andersen (1):
->   zram: fix sourcing of zram parameters
->
-> zangrc (1):
->   iscsi-initiator-utils: upgrade 2.1.2 -> 2.1.3
->
->  .../0001-Makefile-Do-not-set-Werror.patch     | 31 +++++++++++++++++++
->  ....1.0.bb =3D> iscsi-initiator-utils_2.1.3.bb} |  9 ++----
->  .../networkd-dispatcher_2.0.1.bb              |  7 +++--
->  meta-oe/recipes-dbs/mysql/mariadb.inc         |  8 +++--
->  .../flatbuffers/flatbuffers_1.12.0.bb         |  3 ++
->  .../giflib/files/CVE-2019-15133.patch         | 23 ++++++++++++++
->  .../recipes-devtools/giflib/giflib_5.1.4.bb   |  7 ++++-
->  .../rapidjson/rapidjson_git.bb                |  5 ++-
->  meta-oe/recipes-devtools/sip/sip3_4.19.19.bb  | 11 -------
->  .../sip/{sip.inc =3D> sip3_4.19.23.bb}          | 17 ++++++++--
->  .../recipes-extended/zram/zram/zram-swap-init |  2 +-
->  .../recipes-graphics/xorg-app/xterm_353.bb    | 16 ++++++++--
->  12 files changed, 107 insertions(+), 32 deletions(-)
->  create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-util=
-s/files/0001-Makefile-Do-not-set-Werror.patch
->  rename meta-networking/recipes-daemons/iscsi-initiator-utils/{iscsi-ini=
-tiator-utils_2.1.0.bb =3D> iscsi-initiator-utils_2.1.3.bb} (96%)
->  create mode 100644 meta-oe/recipes-devtools/giflib/files/CVE-2019-15133=
-.patch
->  delete mode 100644 meta-oe/recipes-devtools/sip/sip3_4.19.19.bb
->  rename meta-oe/recipes-devtools/sip/{sip.inc =3D> sip3_4.19.23.bb} (79%=
-)
->
-> --
-> 2.17.1
->
->
->=20
->
-
-Thanks a lot!
-
---=20
-Regards,
-Andrey.
