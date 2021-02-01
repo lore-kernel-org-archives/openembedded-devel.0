@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.33276.1612183531187713005
+ by mx.groups.io with SMTP id smtpd.web08.33281.1612183531819374608
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Feb 2021 04:45:31 -0800
+ Mon, 01 Feb 2021 04:45:32 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=33634 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1l6Ya8-0001Fc-HT; Mon, 01 Feb 2021 14:45:30 +0200
+	id 1l6YaA-0001Fc-5T; Mon, 01 Feb 2021 14:45:30 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-elementpath: Upgrade 2.1.2 -> 2.1.3
-Date: Mon,  1 Feb 2021 14:45:13 +0200
-Message-Id: <20210201124516.30135-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-croniter: Upgrade 1.0.4 -> 1.0.5
+Date: Mon,  1 Feb 2021 14:45:14 +0200
+Message-Id: <20210201124516.30135-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210201124516.30135-1-leon.anavi@konsulko.com>
 References: <20210201124516.30135-1-leon.anavi@konsulko.com>
@@ -30,34 +30,32 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.1.3:
+Upgrade to release 1.0.5:
 
-- Extend tests for XPath 2.0 with minor fixes
-- Fix fn:round-half-to-even
+- Security fix: fix overflow when using cron ranges
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...thon3-elementpath_2.1.2.bb => python3-elementpath_2.1.3.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-elementpath_2.1.2.bb => python3-elementpath_2.1.3.bb} (74%)
+ .../{python3-croniter_1.0.4.bb => python3-croniter_1.0.5.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-croniter_1.0.4.bb => python3-croniter_1.0.5.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb b/meta-python/recipes-devtools/python/python3-elementpath_2.1.3.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb
-rename to meta-python/recipes-devtools/python/python3-elementpath_2.1.3.bb
-index f47f15222..2cba4fb5c 100644
---- a/meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-elementpath_2.1.3.bb
-@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/elementpath"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5dbb7fb7d72da3921202dd7b995d3ecf"
+diff --git a/meta-python/recipes-devtools/python/python3-croniter_1.0.4.bb b/meta-python/recipes-devtools/python/python3-croniter_1.0.5.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-croniter_1.0.4.bb
+rename to meta-python/recipes-devtools/python/python3-croniter_1.0.5.bb
+index 8328cf6d3..c8af97d7c 100644
+--- a/meta-python/recipes-devtools/python/python3-croniter_1.0.4.bb
++++ b/meta-python/recipes-devtools/python/python3-croniter_1.0.5.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=b8ee59850b882cbf623188489ea748e2"
  
--SRC_URI[md5sum] = "887f60e9c4fb9b0804a38372b2798101"
--SRC_URI[sha256sum] = "23e1fed8d196d9a6cc4d220ef11fbe7eb8cff3a27848621c447e9d96134b2085"
-+SRC_URI[sha256sum] = "b729d9376cc0f76479c9b0cef30cc0d3c9082ccb4507caa0da1a5e4964926960"
+ PYPI_PACKAGE = "croniter"
  
- PYPI_PACKAGE = "elementpath"
+-SRC_URI[sha256sum] = "7f861f4a896b2b43069ef218d2b999d2c9f760598c2592a6b842cb04bc75562e"
++SRC_URI[sha256sum] = "8636e7f0ce842b4192b7f097cab724fc15bf2459265f1a2bc6cf6eacfa44420e"
+ 
  inherit pypi setuptools3
+ 
 -- 
 2.17.1
 
