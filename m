@@ -1,17 +1,17 @@
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com (NAM04-DM6-obe.outbound.protection.outlook.com [40.107.102.48])
- by mx.groups.io with SMTP id smtpd.web12.33687.1612185856737929723
+Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.58])
+ by mx.groups.io with SMTP id smtpd.web12.33827.1612186491432147576
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Feb 2021 05:24:16 -0800
+ Mon, 01 Feb 2021 05:34:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=kslnD0y4;
- spf=pass (domain: windriver.com, ip: 40.107.102.48, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=YhK6Wnh0;
+ spf=pass (domain: windriver.com, ip: 40.107.75.58, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OSIB+J/Cgb0BU2RhAhCsvMaa7XVxXzp+JwOipmBx3QbEgWLcPjFVD7YVFLnnRb3H9FwSXQedqRIPvG/lzyKWWD372jHplNAkxSDi/Hx4YagsVVUvrZegY4V2ErxOFqRbe18rcgOyikWsBLyoVc8P/1p/JmldfKEJ3AN+fr12Gocee0q9OMeqClP+UoIjT5F2M/S6Jp7wSobQZROtUOL2fZOuXUrhEyOOO8h3Il/2bRGwwlus3wtDYXB7KylxZTOkcjSUUE+X+04M5aj2vEcdSqunCkKrcQxXe0amOuEjosNAwSUAfF5F/8I8kydSegYi8uIBMhIDHwJPso1zfmkExg==
+ b=eLZ0J9KttDxqzRHyd11PKbD3tpLLpiabnxRYwEINrvoWRZDRKd5gqNEifM17yiMQ7dNbRVEvG501ARcbXOWwCTtsim3cPtmHPTxkKnVXebQwKDOwMWTjq0KvzmZ7ISm7bcezMV2TRKm8zSi65Ge5TQ6xutuR5BaG7mhw/8PSNaSwdm8HLwMfBU7odnS3OoJP4R2mG9ZJcwGtY7wFFa8A/up9bHQDUzWiU10aFFr/atj0T3NRDcpsBc8+EsYixBCQwBMgWA7rPBbiiFqUj3DQOLqC4rGmaqKGKf6BkjZ5tcjjYh6Le8REAHhhLszRhmHk4E6CUampfTvf2YUz0dH2ew==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+9snZqF5fF/jqOEXaaiQ6jzrwxV0jbQzGXyEWvCkcv8=;
- b=nkT5ASbXiFTbbysT2k/7MHfnLmyRPsntQcFJ2WIJA+lPFmaDnsT9p835eUGlO5bVPtMFcj+x3VrWiEtRFFsmNcACbTfG65LBHSkQCAseuazxb3hac87fZskiSKWQ7wdlnNUW4umXPmab2dYJr8O0qiZy0Wb7/FHA/bralo8Z31KzUmzAosHMzh5o9xj+s5vE4E8A/gAPB2EogHUGwtAqXQE9FbzPXgaanvexWZmxHskl1DEJ943NLSFZHNR0FAe/QeYamQr+h6wDOQMEWu6oyKhmgxGHoYpOiiZg0GdYzuG+/K0Bhvq/LUgvpf3OhME5Z1/pOUz+UWH70rNfeucD3A==
+ bh=Dm0j7aT/+u2qibyxsIHTHrPMGN4MWJRjr/mEscTMOmM=;
+ b=DFOIsRRjVoCGF9SNh2C11eAC0Shgn1BDZ9YBEm43Tdm4qglkT/OKkrFmwXgcJmuSbF1eWaK/I3ef4I8DUaDeigr9ezxxzKlxmyyeODYAH13QF+r1UAg67B55klhOquy3bOOdaLOkLbxDFxzngqJW2TNUmfwbExnb4u23f7xmFmvQayo3pnYnpLAyLmFcka+37MdvNmiwlcKbPmBNxpdpoduDjFngMGS2A0rBAttFvAuJlHqKnoPyuaHb/ehB/esGDFFCVGKVi8ViUKUT/7NvFWdBeUjToztgmBsMmGMFXGpkMpcMEK6qdLW6ObpL/ZMHS+NVuck1n4ojDFRKV+gSUw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,180 +19,163 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+9snZqF5fF/jqOEXaaiQ6jzrwxV0jbQzGXyEWvCkcv8=;
- b=kslnD0y4Y7+458UhdEPsEb/Qr4/UJ/3mD2aHiRZ9ub5dKdml7tvcUAw65Xcf/ihzrcBIphAKzlzWY/NmZUs8/u8FeC4Epg12hYNYBoUql888iqmk6D7UyCLxHQW+WHhhNqZB/lJMRXy1g86j+vdOymhoJgjHuFs0Be4WVJ5Zkhc=
+ bh=Dm0j7aT/+u2qibyxsIHTHrPMGN4MWJRjr/mEscTMOmM=;
+ b=YhK6Wnh0xMShfu9jogiRuu+C8JVlGAIpHX+i7rvAcARt+8vWbrAB2lL42iLfjoZ0eEHX3dVmS7mNdog0BvuMkPzGsDc/QhtUjQi3T5MlER7n9gZDsZZ9OfYl7iTWom8Ht0XAHx+Oglh27VTzynGoZeUhBHwPYYIEdg6iGlTAgME=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by SJ0PR11MB5165.namprd11.prod.outlook.com (2603:10b6:a03:2ad::16) with
+ by BY5PR11MB4308.namprd11.prod.outlook.com (2603:10b6:a03:1b9::19) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.19; Mon, 1 Feb
- 2021 13:24:15 +0000
+ 2021 13:34:48 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3805.024; Mon, 1 Feb 2021
- 13:24:15 +0000
-Subject: Re: [oe] [meta-python][PATCH 5/5] python3-xlrd: Upgrade 1.2.0 -> 2.0.1
-To: Leon Anavi <leon.anavi@konsulko.com>,
+ 13:34:48 +0000
+Subject: Re: [oe] [meta-python][PATCH] python3-h5py: improve reproducibility
+To: "Yu, Mingli" <mingli.yu@windriver.com>,
  openembedded-devel@lists.openembedded.org
-References: <20210128102903.11760-1-leon.anavi@konsulko.com>
- <20210128102903.11760-5-leon.anavi@konsulko.com>
+References: <20210129030449.21879-1-mingli.yu@windriver.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <b3d87db0-de41-6c8d-a652-242dcaaa4484@windriver.com>
-Date: Mon, 1 Feb 2021 08:24:13 -0500
+Message-ID: <e790f656-7b6c-f84c-58e4-afbdf066926c@windriver.com>
+Date: Mon, 1 Feb 2021 08:34:46 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.0
-In-Reply-To: <20210128102903.11760-5-leon.anavi@konsulko.com>
+In-Reply-To: <20210129030449.21879-1-mingli.yu@windriver.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BN0PR04CA0005.namprd04.prod.outlook.com
- (2603:10b6:408:ee::10) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: BN6PR1101CA0014.namprd11.prod.outlook.com
+ (2603:10b6:405:4a::24) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BN0PR04CA0005.namprd04.prod.outlook.com (2603:10b6:408:ee::10) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.16 via Frontend Transport; Mon, 1 Feb 2021 13:24:14 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BN6PR1101CA0014.namprd11.prod.outlook.com (2603:10b6:405:4a::24) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.16 via Frontend Transport; Mon, 1 Feb 2021 13:34:47 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 39542a81-890b-4d49-1e39-08d8c6b4abeb
-X-MS-TrafficTypeDiagnostic: SJ0PR11MB5165:
+X-MS-Office365-Filtering-Correlation-Id: e77ed606-7e51-4201-5212-08d8c6b62536
+X-MS-TrafficTypeDiagnostic: BY5PR11MB4308:
+X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<SJ0PR11MB5165D6EF3D574397BFA600019FB69@SJ0PR11MB5165.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
+	<BY5PR11MB43082B1C00E4E4ABD2650FEA9FB69@BY5PR11MB4308.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:3173;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	5jlPJqCZA58Oz35K8Ga6+/7ZJ4O7zA1pOIfNZ48bAb6RMXZVmkuY0Seci83IDzs8435l7MxWjrzJvd/OcrYP92/B+V09QdQz/JI06cj9Qg5FD306DEigJxVUPMNem/FsVZ4W2lZOq1GCwAtBdBCuLLiKaCHn0/hwgFNZ493/UQQ017391gSJW2quSO9CFaLF6zYK89J3Db9rRisLdjGS8qtvotQEu3u+owGuL0grK12g9LQD+ALWVnubDJRrs0/5PIUL5bRaHGrYli25lHc7KsBUw+H/WL8jL17guaHQcRppf0HoVXikw1HdXxsS0AIq3SW9w8U1vacBCexZoGNrdOT/BtdAiGQHejaGDLqRH2TDUJPnieKZIlUz0Mta0gR7fPafN5DZ1u/jeaErUXvXja4c9GTewnt9YyrxbFocAT7oKXtWY3UiowIPFqFApFh9K82m7hX2soazjvd3miVjuMPN51TOkvp0xRBRBJaHek/X+vl4xQBYnYYDBqcDbhA8eCAkZCdQLbRz6GysqHkz9xuTdLq4797jxXyJOB1yyXpODQfCOiNjxMI2vdy1eeO37EGBjqGA1OBJv37vp3TMqwbLGMzRzP0AcS/ycGdq2tq5+J/n5eeubN1RN53ph8/rOEXNYNn92pJJ+1DCNCiRngTY0uJE/9q3SFZX6AKzAxMIprQZgdmX0hzJ8eQowlpC
+	vFv5/FwtP4itewV5AL1TYV7+zSaE02EI+lte5N+Lze9A2egSC4E1wD4fasywaRMdXyoS36dPDR8NPt6ZvGUk0iUN6DfGXQJ8DknzwqvQkEtM8rmHEVF0NR8EYdCSUSsH9qPRNGsRYY6Y2hmtGiHoEYnmjp/wZvE+YsA+buGa25xxB4JLIQWEq/iL4dnJ7BbQJRq/ZChXWxw6+8dh5+0NQUBi+xon76RPR+a803U/mOUv7n3SV/foPWPAcZMNKLaQjhQqigoXMWKzPJHM0qDD7t3lf1NhxxnckM9lNe79M449qlbBB+211KSBP+CD1gkkM73snxsgp8SVm1J4R805vsQzoQoppphMneuzxOlrhKS8/gYsqpLfTvtnCTJWeOVusmwTWG7M471XriW9kfrPdSoRBE3BRydhUOQQ4nPmJj0f3SPG+dZaf1aEzrM6CQtnQ6eFNHlLNrZLwPzzAvvphQZjAu9kMykOm3N9BsSGuqaZJyh0kOJns0H/RYu7jmSGqcVniC1d7Ab9cdXt8K5iudYzp1hsfDi9/nojpN/79JuPpP8WTfOPL3OBJvWNEc+9MdlLmhNJWJlmFm0jNlo68nu1L1I129aeSGW7/H4YA4NCzYz/FUa+9a+iBR3a/wmV6mNbQDMh9QwblCxb3o5gAaW92roi1HNu4Nvw0rerYGImOc97Qz4/tEjfHrGvHU5W
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(346002)(396003)(136003)(39850400004)(376002)(5660300002)(66476007)(33964004)(66946007)(16526019)(2616005)(2906002)(36756003)(186003)(66556008)(86362001)(52116002)(31686004)(6486002)(8676002)(966005)(956004)(53546011)(44832011)(83380400001)(26005)(478600001)(316002)(16576012)(8936002)(31696002)(166002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(39850400004)(136003)(376002)(396003)(366004)(5660300002)(316002)(478600001)(26005)(966005)(8936002)(53546011)(956004)(2616005)(186003)(44832011)(16526019)(166002)(86362001)(52116002)(2906002)(16576012)(66946007)(83380400001)(66556008)(66476007)(31686004)(6486002)(33964004)(31696002)(36756003)(8676002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?WnZGeGFBbUdZK3kyNkRFRk95L09xVWZndURPbFpRUlAwUjcrQ1VyMEtzck1h?=
- =?utf-8?B?ekJjaDV2eVBEYjdVeDFrS1g4TExIazk4SnBuSGZlYmJZK3VIRGk0RDBOakhX?=
- =?utf-8?B?UkVtRU5raXJEaXRUSmVLWWwzc1JzQ0tUYS9ydnUrZzRMUVUvSU5PaTM2aWhn?=
- =?utf-8?B?UlUvd0lSbUFhZCtQd25MWk82d2ZYSGR5SnFKL0NIRFdSNzBQbE5OdlNZcTVL?=
- =?utf-8?B?MnI3b0N0OEN3Wk4zTVB1OGpRL2IybVN5cXFHYVloRGU4cDE1NmtnaFZKTktR?=
- =?utf-8?B?eTRmbU96R2pTWU1JWW4vbzR1VmppZWo4STRJWitKcC9qWldySGFwZ2tVN1VR?=
- =?utf-8?B?WExTM3ZiL3gzUnpxUDh2UHhTT2IwaVpVOU5Qdk40M3FyeWdldHhVZWJ3dHFE?=
- =?utf-8?B?RFpQRkhzRnYwYm00WmtCOGpOMVNUVm1HS1ZNMS9ySEtSdTFUQ1UvT1hxenJN?=
- =?utf-8?B?emhBbklVY0ZTYVpQcjdJTFM5cTBidjZRV1lwTVRIMm1qc3pPdjF4ZzNwODE3?=
- =?utf-8?B?UGlmcEJDanFubVdUMFgrY3VqZU1NMlNvTlYvTnNsOUF1TkIvalJmVTRlcVhS?=
- =?utf-8?B?Y3BiNUJrSTREVTZMU2xBeWxTQkU1SjduaEgrT2xWNG1WUjhGQ01rK0M1Sjh2?=
- =?utf-8?B?MERIOFl1QkxabEJWSytGQi9keXFWc2FUZzZYZGpIWEVNYjM1eFJkMkhQMmVx?=
- =?utf-8?B?a1h3dVFoRDUrRjZYUTRXV1ZwMUM1TUJKS0NLMHJXMXg3ME1QRTVEazhhaDFh?=
- =?utf-8?B?TVRydFJiRVZaQ3lySEFLSU1BNmNaa2Q0OFI0L1JIampMdklUTFgvRzFTRXQ5?=
- =?utf-8?B?dU1aVVh0alNnWWt0RUsxeDhnTjE3elVYU0xuR1VNeXNMSFBHazQwWVdOV0RG?=
- =?utf-8?B?TjBrQy9iSnM0b1pOVVFTRFdOQ1ZiTEN0ekZoamVDZkVuUVp1K2xYQ0pVVDQz?=
- =?utf-8?B?OGtpYVgzcFV4VitWQVErSnJCbmlzZWpFWkFKaGRodzdHREZUUFdmYVY2cGN3?=
- =?utf-8?B?d2VtSXBvK0pYZjFWSFQ4N3ZSTy9vQ3BUM3VwSXk4bmU0R2VRbndERjZNbFcz?=
- =?utf-8?B?TkhaRExNcUVKbHRlMlUrNExicTBLNHpKUjN1YVUvTUFWcmRUZDBFMENVV2Zn?=
- =?utf-8?B?dGhFUklLdDBISlJPcjJXUW96NUY1RFQ1cjc3TTh6d2VSS3RKNmpmVkR5WENr?=
- =?utf-8?B?ajlYclhOdWxhRlVvRWs1K2RyMm0wSHhITDJ3S3orL1VGVnNud2dxclllTXV6?=
- =?utf-8?B?RktBbU5VZCtDdm9GVFFVQVZLQ2d5UTFFTjl0d25aak5pRjM5MDl0YzNvd0NQ?=
- =?utf-8?B?UTFDVmFna3Z3ODFYVEZ2OHFITUtzNURLM0tzd2FQT0dBaU1VMndtTTNJc3lj?=
- =?utf-8?B?a3FvaUdaNCtIQjA5U2djdkoySDYrMzZjYU9KWndOaTBTVXIyTXRuUHc2MlR1?=
- =?utf-8?Q?K5KgJFwE?=
+	=?utf-8?B?ODdaTlErL3B5Y2tqODVnSzk5MnAyUmIwWWx1WUdicUsrMkpwMU9zUThGcExL?=
+ =?utf-8?B?QmVuMlBRbWRITTRDb1E0b0RNMDQwWFJCVHFLbDJWRW1QV0R0Z1NsVzdaWTJm?=
+ =?utf-8?B?V2ZWc3haQkhoSnByNjdVdGE3Ym9zOVVsc0E3cCt6YmtRSDZsQjRtdXZpckg3?=
+ =?utf-8?B?K254aWpkRlFzOFJVWFBkTXJzaFFsTzRQbEVmMlpvVVNJMnZmbWlvWHJ0ZDVm?=
+ =?utf-8?B?Wm5GZWV1VnhJejcwOGlkalhkSXRJcDVnOXFJZTgvT25oR2JPL0lndlArWlFi?=
+ =?utf-8?B?K3FzeFRLRWZzd08vTHhWTTc3eGQxVld2ZWZON2xCU1RkcjlxemJSUUtnT2tE?=
+ =?utf-8?B?RGViL0RxNU1lalIxQkhsSVZ4QURzSm5EYTBiZDJFcHJ0SkxFNmd2VkNockdQ?=
+ =?utf-8?B?RjQ0N0dLQmozRFhmUVkycjRraWNxaUU1ejZ4aHNvL1NNVUdpd0FhUVNZK1Yx?=
+ =?utf-8?B?SUlUaFd6R0hRMC9FbUJMOCt0ZGVKM01ubi9kc0Y0b0xibTdvOHJkMTdaNjlF?=
+ =?utf-8?B?NnFSQlE5cWorWWZrc0dXWFd4dFdITnZJWkk4dUpwNDU1eGIzOUtIdkdHU0U1?=
+ =?utf-8?B?cjA3SGRpNFpOcDhiUFovUE1HRkxwT3oxaVM4RFoxWThxcWlXZEc3bWg0V2xW?=
+ =?utf-8?B?S0w2TDlBWnJJRGxIY1pYVHVJLzlrL2lJa0Vyc3E3d2lYMkhvMjY1aXJibTYz?=
+ =?utf-8?B?a2ZPWU9qUkN5emJ0RnVubWdlQ0RJMk5hYVJtMlJVSjNqRVVLalBnSEd0V01M?=
+ =?utf-8?B?QXA1NDlPVDFLTWNGMzZhazlQR3diaHMxU2NWcXRnTDl1VW9tN05WTnVzRk5w?=
+ =?utf-8?B?UE5yVlRud0RYVWF4N29ZbjdQWmVBTElndGhlbEs3SnZlS2c3ZWhNQzlIVWJU?=
+ =?utf-8?B?Q3h4QmJ0R3oyOWNyNGxpSnphYkoyQ082Z1FjdS9zbjlobzFBeGY4VDJZRC9D?=
+ =?utf-8?B?UzZCQkQvQi9iallNTVV2QThaQk5RUmNpYmk0d1M0bU5OSjh0cnB1WFViL3Q2?=
+ =?utf-8?B?QkJhNG52U0NORGRyMXpKRFM3b1M4cWxqZU1Pak1URHRuaFFJbk4rRVIxTzRr?=
+ =?utf-8?B?TFMyd0U5T1Rmc0NBSENHTDloUHRTQzJKa2dpVUoyY3l6SHdNaGJESk9QNEEx?=
+ =?utf-8?B?a2I3MDBveHB0SzFRNkJXaG5wOHllc1czQ014bGE1VnhzbDBkb2FvMVRabklV?=
+ =?utf-8?B?QkIxVXd2d3lXSnh1SXJER2tDbm12VE9XbEJFSDZUeUIwS29rcDlNWkQvY1A2?=
+ =?utf-8?B?OWZSaGsxUVN3dFE0UDNxS2hHOUlUajhRY2JaOEN4bHJkVVhHTXJPKzZFZWgv?=
+ =?utf-8?B?K3RVR3N4YTdSYmhDZC9mVDkwZ3BEdVFFTnJMeVZBZmpvc3JmNUFMSGVxbC9j?=
+ =?utf-8?B?RUdlOFgxZmNoMlN0Q084VWhXbFdhRHZwQkJqaVpLd1YvbGtTM3luU2xzVk9a?=
+ =?utf-8?B?U0N5RWJiRk92VDFFOFdCSkJDdGFuRThwV0JnWFlRPT0=?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 39542a81-890b-4d49-1e39-08d8c6b4abeb
+X-MS-Exchange-CrossTenant-Network-Message-Id: e77ed606-7e51-4201-5212-08d8c6b62536
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Feb 2021 13:24:15.5739
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Feb 2021 13:34:48.6078
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /SpkpLoGWTv+8WHiKaLXNEXb9k1cu35E4ifWqkHd7GHRbd52O4a+pZ5mjdbhyMop6PUUNUwx/VwAAGdkAediFkFSfeUHfZ40AnhQb1zV4Tg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB5165
+X-MS-Exchange-CrossTenant-UserPrincipalName: J84eS65F8jf1aT0azFCNSKmEpHXr4iNUr8/XHh7LQuMUa1+4GItnPkVA2ZkhWhxOxH7ama14oJKco4QU/S4HiJ2Ibs2YqCpJdx8aHTqF0+k=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4308
 Content-Type: multipart/alternative;
- boundary="------------4B788E559AF6FC68A0952415"
+ boundary="------------B01BDE600194AEA2007447B3"
 Content-Language: en-US
 
---------------4B788E559AF6FC68A0952415
+--------------B01BDE600194AEA2007447B3
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 2021-01-28 5:29 a.m., Leon Anavi wrote:
-> [Please note: This e-mail is from an EXTERNAL e-mail address]
+On 2021-01-28 10:04 p.m., Yu, Mingli wrote:
+> From: Mingli Yu <mingli.yu@windriver.com>
 >
-> Upgrade to release 2.0.1:
+> Prevent absolute path from ending up in the egg-info SOURCES.txt.
 >
-> - Use the README as the long description on PyPI.
-> - Remove support for anything other than .xls files.
-> - Remove support for psyco.
-> - Change the default encoding used when no CODEPAGE record can be
->    found from ascii to iso-8859-1.
-> - Add support for iterating over :class:`~xlrd.book.Book` objects.
-> - Add support for item access from :class:`~xlrd.book.Book`
->    objects, where integer indices and string sheet names are
->    supported.
-> - Non-unicode spaces are now stripped from the "last author"
->    information.
-> - Workbook corruption errors can now be ignored using the
->    ignore_workbook_corruption option to :class:`~xlrd.open_workbook`.
-> - Handle WRITEACCESS records with invalid trailing characters.
-> - Officially support Python 3.8 and 3.9.
->
-> Get the source code from the git repository rather than from PyPI
-> to obtain the tests.
->
-> License-Update: Use file LICENSE.
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...hon3-xlrd_1.2.0.bb => python3-xlrd_2.0.1.bb} | 17 +++++++++--------
->   1 file changed, 9 insertions(+), 8 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-xlrd_1.2.0.bb => python3-xlrd_2.0.1.bb} (63%)
+>   ...1-setup_build.py-avoid-absolute-path.patch | 30 +++++++++++++++++++
+>   .../python/python3-h5py_2.10.0.bb             |  1 +
+>   2 files changed, 31 insertions(+)
+>   create mode 100644 meta-python/recipes-devtools/python/python3-h5py/0001-setup_build.py-avoid-absolute-path.patch
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-xlrd_1.2.0.bb b/meta-python/recipes-devtools/python/python3-xlrd_2.0.1.bb
-> similarity index 63%
-> rename from meta-python/recipes-devtools/python/python3-xlrd_1.2.0.bb
-> rename to meta-python/recipes-devtools/python/python3-xlrd_2.0.1.bb
-> index 571dba6fa..8587ea8f3 100644
-> --- a/meta-python/recipes-devtools/python/python3-xlrd_1.2.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-xlrd_2.0.1.bb
-> @@ -4,16 +4,19 @@ DESCRIPTION = "Extract data from Excel spreadsheets (.xls and .xlsx,\
->   Strong support for Excel dates. Unicode-aware."
->   HOMEPAGE = "http://www.python-excel.org/"
->   LICENSE = "BSD-3-Clause"
-> -LIC_FILES_CHKSUM = "file://PKG-INFO;md5=5f4244d51fcc1e7cc2d43e96891b2f80"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=00ea1e843a43c20d9b63a8112239b0d1"
->
-> -SRC_URI[md5sum] = "e5d5b96924d791b22898b622eb3e918e"
-> -SRC_URI[sha256sum] = "546eb36cee8db40c3eaa46c351e67ffee6eeb5fa2650b71bc4c758a29a1b29b2"
-> +SRC_URI[sha256sum] = "f72f148f54442c6b056bf931dbc34f986fd0c3b0b6b5a58d013c9aef274d0c88"
->
-> -SRC_URI += " \
-> -    file://run-ptest \
+> diff --git a/meta-python/recipes-devtools/python/python3-h5py/0001-setup_build.py-avoid-absolute-path.patch b/meta-python/recipes-devtools/python/python3-h5py/0001-setup_build.py-avoid-absolute-path.patch
+> new file mode 100644
+> index 000000000..da95ee7af
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-h5py/0001-setup_build.py-avoid-absolute-path.patch
+> @@ -0,0 +1,30 @@
+> +From b5d5a7efc7aaa2be830731001ed17c5b71bcefb1 Mon Sep 17 00:00:00 2001
+> +From: Mingli Yu <mingli.yu@windriver.com>
+> +Date: Fri, 29 Jan 2021 02:33:06 +0000
+> +Subject: [PATCH] setup_build.py: avoid absolute path
 > +
-> +SRC_URI = "git://github.com/python-excel/xlrd.git \
-> +           file://run-ptest \
->   "
-> +SRCREV = "b8d573e11ec149da695d695c81a156232b89a949"
+> +Prevent absolute path from ending up in the egg-info SOURCES.txt.
 > +
-> +S = "${WORKDIR}/git"
->
-> -inherit ptest pypi setuptools3
-> +inherit ptest setuptools3
->
->   RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-io ${PYTHON_PN}-pprint ${PYTHON_PN}-shell"
->
-> @@ -24,8 +27,6 @@ RDEPENDS_${PN}-ptest += " \
->   do_install_ptest() {
->       install -d ${D}${PTEST_PATH}/tests
->       cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-> -    install -d ${D}${PTEST_PATH}/examples
-> -    cp -rf ${S}/examples/* ${D}${PTEST_PATH}/examples/
->   }
->
->   BBCLASSEXTEND = "native nativesdk"
-> --
-> 2.17.1
->
+> +Upstream-Status: Submitted [https://github.com/h5py/h5py/pull/1803]
+> +
+> +Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> +---
+> + setup_build.py | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/setup_build.py b/setup_build.py
+> +index ffd3bef..fb196c0 100644
+> +--- a/setup_build.py
+> ++++ b/setup_build.py
+> +@@ -20,7 +20,7 @@ import api_gen
+> +
+> +
+> + def localpath(*args):
+> +-    return op.abspath(op.join(op.dirname(__file__), *args))
+> ++    return op.join(*args)
+> +
+> +
+> + MODULES =  ['defs','_errors','_objects','_proxy', 'h5fd', 'h5z',
+> +--
+> +2.29.2
+> +
+> diff --git a/meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb b/meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb
+> index 3904abbb4..b812b323f 100644
+> --- a/meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb
+> @@ -9,6 +9,7 @@ SRC_URI[sha256sum] = "84412798925dc870ffd7107f045d7659e60f5d46d1c70c700375248bf6
+>   
+>   SRC_URI_append = " \
+>              file://0001-cross-compiling-support.patch \
+> +           file://0001-setup_build.py-avoid-absolute-path.patch \
+>             "
+>   
+>   inherit pypi setuptools3
 >
 > 
 >
 
---------------4B788E559AF6FC68A0952415
+--------------B01BDE600194AEA2007447B3
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -202,90 +185,73 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 2021-01-28 5:29 a.m., Leon Anavi
+    <div class="moz-cite-prefix">On 2021-01-28 10:04 p.m., Yu, Mingli
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210128102903.11760-5-leon.anavi@konsulko.com">
-      <pre class="moz-quote-pre" wrap="">[Please note: This e-mail is from an EXTERNAL e-mail address]
+    <blockquote type="cite" cite="mid:20210129030449.21879-1-mingli.yu@windriver.com">
+      <pre class="moz-quote-pre" wrap="">From: Mingli Yu <a class="moz-txt-link-rfc2396E" href="mailto:mingli.yu@windriver.com">&lt;mingli.yu@windriver.com&gt;</a>
 
-Upgrade to release 2.0.1:
+Prevent absolute path from ending up in the egg-info SOURCES.txt.
 
-- Use the README as the long description on PyPI.
-- Remove support for anything other than .xls files.
-- Remove support for psyco.
-- Change the default encoding used when no CODEPAGE record can be
-  found from ascii to iso-8859-1.
-- Add support for iterating over :class:`~xlrd.book.Book` objects.
-- Add support for item access from :class:`~xlrd.book.Book`
-  objects, where integer indices and string sheet names are
-  supported.
-- Non-unicode spaces are now stripped from the &quot;last author&quot;
-  information.
-- Workbook corruption errors can now be ignored using the
-  ignore_workbook_corruption option to :class:`~xlrd.open_workbook`.
-- Handle WRITEACCESS records with invalid trailing characters.
-- Officially support Python 3.8 and 3.9.
-
-Get the source code from the git repository rather than from PyPI
-to obtain the tests.
-
-License-Update: Use file LICENSE.
-
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+Signed-off-by: Mingli Yu <a class="moz-txt-link-rfc2396E" href="mailto:mingli.yu@windriver.com">&lt;mingli.yu@windriver.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210128102903.11760-5-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210129030449.21879-1-mingli.yu@windriver.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...hon3-xlrd_1.2.0.bb =&gt; python3-xlrd_2.0.1.bb} | 17 +++++++++--------
- 1 file changed, 9 insertions(+), 8 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-xlrd_1.2.0.bb =&gt; python3-xlrd_2.0.1.bb} (63%)
+ ...1-setup_build.py-avoid-absolute-path.patch | 30 +++++++++++++++++++
+ .../python/python3-h5py_2.10.0.bb             |  1 +
+ 2 files changed, 31 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-h5py/0001-setup_build.py-avoid-absolute-path.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-xlrd_1.2.0.bb b/meta-python/recipes-devtools/python/python3-xlrd_2.0.1.bb
-similarity index 63%
-rename from meta-python/recipes-devtools/python/python3-xlrd_1.2.0.bb
-rename to meta-python/recipes-devtools/python/python3-xlrd_2.0.1.bb
-index 571dba6fa..8587ea8f3 100644
---- a/meta-python/recipes-devtools/python/python3-xlrd_1.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-xlrd_2.0.1.bb
-@@ -4,16 +4,19 @@ DESCRIPTION = &quot;Extract data from Excel spreadsheets (.xls and .xlsx,\
- Strong support for Excel dates. Unicode-aware.&quot;
- HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://www.python-excel.org/">&quot;http://www.python-excel.org/&quot;</a>
- LICENSE = &quot;BSD-3-Clause&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;md5=5f4244d51fcc1e7cc2d43e96891b2f80">&quot;file://PKG-INFO;md5=5f4244d51fcc1e7cc2d43e96891b2f80&quot;</a>
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=00ea1e843a43c20d9b63a8112239b0d1">&quot;file://LICENSE;md5=00ea1e843a43c20d9b63a8112239b0d1&quot;</a>
-
--SRC_URI[md5sum] = &quot;e5d5b96924d791b22898b622eb3e918e&quot;
--SRC_URI[sha256sum] = &quot;546eb36cee8db40c3eaa46c351e67ffee6eeb5fa2650b71bc4c758a29a1b29b2&quot;
-+SRC_URI[sha256sum] = &quot;f72f148f54442c6b056bf931dbc34f986fd0c3b0b6b5a58d013c9aef274d0c88&quot;
-
--SRC_URI += &quot; \
--    <a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
+diff --git a/meta-python/recipes-devtools/python/python3-h5py/0001-setup_build.py-avoid-absolute-path.patch b/meta-python/recipes-devtools/python/python3-h5py/0001-setup_build.py-avoid-absolute-path.patch
+new file mode 100644
+index 000000000..da95ee7af
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-h5py/0001-setup_build.py-avoid-absolute-path.patch
+@@ -0,0 +1,30 @@
++From b5d5a7efc7aaa2be830731001ed17c5b71bcefb1 Mon Sep 17 00:00:00 2001
++From: Mingli Yu <a class="moz-txt-link-rfc2396E" href="mailto:mingli.yu@windriver.com">&lt;mingli.yu@windriver.com&gt;</a>
++Date: Fri, 29 Jan 2021 02:33:06 +0000
++Subject: [PATCH] setup_build.py: avoid absolute path
 +
-+SRC_URI = &quot;git://github.com/python-excel/xlrd.git \
-+           <a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
- &quot;
-+SRCREV = &quot;b8d573e11ec149da695d695c81a156232b89a949&quot;
++Prevent absolute path from ending up in the egg-info SOURCES.txt.
 +
-+S = &quot;${WORKDIR}/git&quot;
-
--inherit ptest pypi setuptools3
-+inherit ptest setuptools3
-
- RDEPENDS_${PN} += &quot;${PYTHON_PN}-compression ${PYTHON_PN}-io ${PYTHON_PN}-pprint ${PYTHON_PN}-shell&quot;
-
-@@ -24,8 +27,6 @@ RDEPENDS_${PN}-ptest += &quot; \
- do_install_ptest() {
-     install -d ${D}${PTEST_PATH}/tests
-     cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
--    install -d ${D}${PTEST_PATH}/examples
--    cp -rf ${S}/examples/* ${D}${PTEST_PATH}/examples/
- }
-
- BBCLASSEXTEND = &quot;native nativesdk&quot;
---
-2.17.1
-
++Upstream-Status: Submitted [<a class="moz-txt-link-freetext" href="https://github.com/h5py/h5py/pull/1803">https://github.com/h5py/h5py/pull/1803</a>]
++
++Signed-off-by: Mingli Yu <a class="moz-txt-link-rfc2396E" href="mailto:mingli.yu@windriver.com">&lt;mingli.yu@windriver.com&gt;</a>
++---
++ setup_build.py | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/setup_build.py b/setup_build.py
++index ffd3bef..fb196c0 100644
++--- a/setup_build.py
+++++ b/setup_build.py
++@@ -20,7 +20,7 @@ import api_gen
++ 
++ 
++ def localpath(*args):
++-    return op.abspath(op.join(op.dirname(__file__), *args))
+++    return op.join(*args)
++ 
++ 
++ MODULES =  ['defs','_errors','_objects','_proxy', 'h5fd', 'h5z',
++-- 
++2.29.2
++
+diff --git a/meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb b/meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb
+index 3904abbb4..b812b323f 100644
+--- a/meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb
++++ b/meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb
+@@ -9,6 +9,7 @@ SRC_URI[sha256sum] = &quot;84412798925dc870ffd7107f045d7659e60f5d46d1c70c700375248bf6
+ 
+ SRC_URI_append = &quot; \
+            <a class="moz-txt-link-freetext" href="file://0001-cross-compiling-support.patch">file://0001-cross-compiling-support.patch</a> \
++           <a class="moz-txt-link-freetext" href="file://0001-setup_build.py-avoid-absolute-path.patch">file://0001-setup_build.py-avoid-absolute-path.patch</a> \
+           &quot;
+ 
+ inherit pypi setuptools3
 </pre>
       <br>
       <fieldset class="mimeAttachmentHeader"></fieldset>
@@ -297,4 +263,4 @@ index 571dba6fa..8587ea8f3 100644
   </body>
 </html>
 
---------------4B788E559AF6FC68A0952415--
+--------------B01BDE600194AEA2007447B3--
