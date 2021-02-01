@@ -1,17 +1,17 @@
-Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.89])
- by mx.groups.io with SMTP id smtpd.web09.33741.1612186523799079391
+Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.70])
+ by mx.groups.io with SMTP id smtpd.web10.33796.1612186537176066411
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Feb 2021 05:35:24 -0800
+ Mon, 01 Feb 2021 05:35:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=RKEys467;
- spf=pass (domain: windriver.com, ip: 40.107.75.89, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=AMI03IZ+;
+ spf=pass (domain: windriver.com, ip: 40.107.75.70, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OeGPCg/nITRLTgnO3Pzk37ezRU+bxlKG6hYIzuIATDG8a8hvo/tMGuWGq0vLYzU1Tz+zNGWsAWQjNt18hRznCX7+rCZ2dWiLlJFs6rkvcfdPtN3YiJ5AZ0fF7bqB+v91Wi7EfNKvHYkhPkCeFhy8b/oXJiJLlTpKpHkzDiZAQzMJobrRVmI5mZq1u+gEzuQQTWKDdZ4W0t8CCZ9kC9I5SBza3IpUfHaZJLrR352n1frOLxo87qaK1sHAp/SxO8YFOkDGQuimdoDKCO7Bjr8BWrxy32gOZfmtNGwoM90qWT7VBqSXAmjOHMGKlUvu2jcx6XnKjBz7pwzDn0oBZMVfoQ==
+ b=XpsaA7m57xyzHNHKO2yek3RkEDWnXvTkLVJ2U90p7FUpOEZ8AaOQhTJzCewX1kX7F8BlWPojFuAq0zQ1XkP0z7l3mOkItrL4S2xg+MAwItKAfILbnsb5in32lly3IQf+FsJzPjQFATrJm5clDppL4beitnKbtF3CUATWbC5pJpEkahxZye/R2A32nsn1pa+9W2QouMTzSGOaYICKX2abfqQ3FulhS1LAE8IRN5E5UODFWZ6kC1JeZoByoPCG0Fal92BMdYya3y/yxGJNN/NQp47iMidMyLQTsoVW1pkRM9KZBIHe65OfyPy/vEPD9GgfXT2Hw8jfVnHZdVFac7qXFg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0ctoeCZ0K6+t7Rs8pU5rzgdJncC7OddPo3ioIIjDeQM=;
- b=hMLbbvZ0/OFpgcW4asJAsugSrIAfJEbWKIHM94uNgxVa7Pchm8W5asFCSpj9UFsDgSTkXwdFvLsenHseI66NBgwJ2WCAk1VWKE4dh55a102A+n5jEkTmqBwCScrs8+gTHCmeBZ6nn1yB+8BgROvv9UYk4Q6Gdej/btXtJFL1eozdhrLnvOO87TsyYfvg1pdVxaUJt4b9vGbcupzjWJXGsReiILbmxeKCrux2gUtPGdH9ktQzStcJ9Hmtwizu66x8CJy5nr1iYnDa37XzoPQeWwaQuEW8a+7VcRzoa+bnHtpjUhz2CCP7HFvWL9ns1GVfUc/jt+Cx8QYIXTzAEhBSgA==
+ bh=a4x4MxSY0go0hhs7m9U63tQlbb4RrByfffntT8zX1qw=;
+ b=lTQEMwdk7cMw9ywKL/gqmlXtMNBJrqxUMGp3xMqTCmP3f9BudcPudAoYzcmJmpMrSVg48c32i2przRYzeyCb5/0QSYahjn0oeyF2YHikU2HIn6xd94isz2hdH6AvI2/P5myad/HU4m8h24djCuTo26swza1lnpFyVGNkqVMeHAYB7V+hOJHwivgnRGgYZO6XUcdrpGbPlPMO7w3XFkF9+hVH4Fpbe1hISc+QcEAsJQa//I+Z0Zi8delHJAWedaCUhe9XujjilBElvna21YHGbCtRE6NrgUeHHt+hI2Cq/5d3KtBjrb2i4n4V3TKuk8KAwIxU9CbNJPEUhtbmyBJZDQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0ctoeCZ0K6+t7Rs8pU5rzgdJncC7OddPo3ioIIjDeQM=;
- b=RKEys4675rJgfWfyULJfyIrZsTbVTLjr/L7i54PHGtDHwvhCHd8N3Q8aWVodVLALJxGzjRMgvTegMD32vqYw2SBUx44JejvJbqCOFz4QooRQxTrCnRo1lo1bWgVRitpY2cO9LrMZvQ7KsZ1wsiavRuZJNsRJC18ief+yQtxhaZI=
+ bh=a4x4MxSY0go0hhs7m9U63tQlbb4RrByfffntT8zX1qw=;
+ b=AMI03IZ+aUeb6Pd5wfwAmMVfGWju5wfJ8o4KakEqabQ3LjU5gKAlqAFM0YY2+EroMiZT9Sz3f6nWLjWzYIcd8Td2y2WViR4e01/VALi9M0hQNlzA3EGeTzP/w9pO5xHsSc4AhMqkXcNEPjaXZrAYuTpyjLTJR655Wl30GwRobQg=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,84 +28,84 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BY5PR11MB4308.namprd11.prod.outlook.com (2603:10b6:a03:1b9::19) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.19; Mon, 1 Feb
- 2021 13:35:22 +0000
+ 2021 13:35:35 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3805.024; Mon, 1 Feb 2021
- 13:35:22 +0000
-Subject: Re: [oe] [meta-python][PATCH 3/4] python3-pyzmq: Upgrade 21.0.2 -> 22.0.2
+ 13:35:35 +0000
+Subject: Re: [oe] [meta-python][PATCH 4/4] python3-aiohttp-jinja2: Upgrade 1.2.0 -> 1.4.2
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20210129131029.2163-1-leon.anavi@konsulko.com>
- <20210129131029.2163-3-leon.anavi@konsulko.com>
+ <20210129131029.2163-4-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <29c60e01-a6f6-bf10-feff-6399f62cbff2@windriver.com>
-Date: Mon, 1 Feb 2021 08:35:19 -0500
+Message-ID: <ac484da3-c85a-3dde-9459-b8c2f28e995a@windriver.com>
+Date: Mon, 1 Feb 2021 08:35:33 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.0
-In-Reply-To: <20210129131029.2163-3-leon.anavi@konsulko.com>
+In-Reply-To: <20210129131029.2163-4-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BN6PR1101CA0019.namprd11.prod.outlook.com
- (2603:10b6:405:4a::29) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: BN6PR1101CA0016.namprd11.prod.outlook.com
+ (2603:10b6:405:4a::26) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BN6PR1101CA0019.namprd11.prod.outlook.com (2603:10b6:405:4a::29) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.17 via Frontend Transport; Mon, 1 Feb 2021 13:35:21 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BN6PR1101CA0016.namprd11.prod.outlook.com (2603:10b6:405:4a::26) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.16 via Frontend Transport; Mon, 1 Feb 2021 13:35:35 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: b4fce5e1-90bc-4f33-c1f9-08d8c6b6392a
+X-MS-Office365-Filtering-Correlation-Id: ff1f2f15-ffe2-426c-b311-08d8c6b64153
 X-MS-TrafficTypeDiagnostic: BY5PR11MB4308:
 X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB430803B524D004C834E0D64F9FB69@BY5PR11MB4308.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
+	<BY5PR11MB4308DA67B740A710B5EB13F29FB69@BY5PR11MB4308.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:6790;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	sPXgIY22Zo95VTEW9/vqyb0NhaBU94ZNyqecWmVJDOwh2m0LbkWzNoDdFbr+oTc5I8dzFwpmrBWpOB451xqpX/3/Ab4ldA/KchBMm4ELLsj6GsbvWZrQhKQ7H2uj9Ga9hQixVKemZutse/5EY2yfxAWdC1BFe0e1r6nrshfYweWdxdsYOow4NdtdqFHldwMf2ht9SwkPrn60GcjWNfR7sX/xmzt/JRQp/pLSQEsfBBr6SWqLzZOGMCHrETFedM7Qzhh/qA56PSRQqrm6E2Bv2d7OGDhtSVyuW369MUtGysfWe0Lu82txY/K6/YVPi4cZZ74NM6/Y8iA3aYwpLlvhrg7iNOTFp2NUAIWnFctaLICou4nxdMSN+0dggHIYll2HXYaOamxbmqsOfNzEeXC1JIG6lBrc/Awk4tLDTlym6DPq0UMiqetmZL2TGAb/AHHXrOrC5fUB2EieAo2XcFsu/TUBZmCBmMMs3lkWX+XtA6HDXmIRPHz6YBIZI7SCzdO0MuKJvPgOeb8GpfIyodyciqrQddaeT7nlVoCBiMFlQoV6J3p2snLV0s/n4FPUKa9FXBcNIZLVctZE9c9XEVhyvyytBrmDBd+E1jaVpVzJdhDr0EGPHwW8gw5ktmR5zXyosYQsUpdlmLAoRZB6bX70rp1xRFjveKwSxiI7XqLGpDO4qw6Kio1I0lYZ9qt2scid
+	LhxauTL73lUyGnlNhsvnLbVJslxQjgAxRkQ5Tt4qWe+kMxRnIWGnstZsDO0Pa43fMlGyGoD6WiHz7qkyy3nyh3X7BWhgi/yI1qnK2I9cz4MxQ1SLhmDzajCtP5d7Eu2P87uXgzIkNXmUBgmwIyRmiqeZO15QCCRLdlxaKIDdTvd6EDk4dXO91tYRmVOLRkSB64FOBprr71FdleavSu8CGaI5RdnLmB6rcq+Qa/Jf1rzbKmVEvmh5XYRr8pZ7jh47rdFqYjEFA1zvKv9pcd0sL2/kGAb0OITwq3SQmnn+LpXI1JG8/6LGd+NVNyWt2LCnXDLgT/pjg7QOAOmMrWrOeweoUPYAxDkAXlrs/iR+0+ScqdSnQp+JvZXR3xa5Ms/4NR6JDSaLNFsbLhE6RKQZcBrq6cEmQ2aSD6z/S+LpM44q/QJEKutTl2X7UZbLvuLFiYpPxlBcaoGzUlx7J8Nj67RGAvND0LRS6aAFNZq5DrcW2kMG1yL7+2t+5447ttqLTCGa0Kw7va73nyvQOHSp6eCsbGOYpLPZsLwC3fDYCYEN77jI1Ry2xvgAo474Wy9bQknfxeoBjQc6IRU+q7zIF+1slCyO8pCzYYWc0/d6bXMGc+tsn9pe401P1CDgUFT0SuHgKDlkXa46NfmSjvIpa1IrG8hF/baSCVTeIMLv3gEiIhgMwE9+QiwBX0M0+eDl
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(39850400004)(136003)(376002)(396003)(366004)(5660300002)(316002)(478600001)(26005)(966005)(8936002)(53546011)(956004)(2616005)(186003)(44832011)(16526019)(166002)(86362001)(52116002)(2906002)(16576012)(66946007)(83380400001)(66556008)(66476007)(31686004)(6486002)(33964004)(31696002)(36756003)(8676002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?M05uc0VMTnkwcWpGS1prSkhWTTNEYjIwempYOVEvQ05tS3lBd0tJelo2USt0?=
- =?utf-8?B?T1hUdmdSMHV4Qm1CK1dlbS9YaVJhSW5sUy9OWWJjUmZkamp1cllYY2p4SU5V?=
- =?utf-8?B?MWdWRGozREIxRXMycVE3ZGpUT3dHaUpUMUt4dmlLSHNTM3J4dm94bGx0cit0?=
- =?utf-8?B?UGViMWRZb0lLTndHblBqOFA1ckpWYXppenRZb1J0RVhtVVRCN2xuSGFnckVy?=
- =?utf-8?B?Ynd0MkcxbmN4cy9SdnB1dkVxUXZjYXZsUWZ4aithLzM1ZFY3Rm9hRUhtajdh?=
- =?utf-8?B?TTUzWnJnd1B3N0xaWjNxWkQxZnJxMjRuOEl6cUFiNUx6MnNvWnNiWXVSVXZG?=
- =?utf-8?B?YTJGMG4zd1AvVHIraVdkZFNXbnVrL0NYaEJLeTk0ZnpjSnNkNzBNVkQvc0hv?=
- =?utf-8?B?SnFwWXVaWVRQdzVVMFJiNmdzL2YwR2gwZmYxN2M4QXdVMHZodS9WZ1grY1Bp?=
- =?utf-8?B?Z1k0bjlITXJqcUpwRmNkb0lSZ3kyYkN4M044bGpvei9OcXBac24rNXBxZWcw?=
- =?utf-8?B?Z2VuTXN4aFQrN3JZVW1jS1FwNDRxbC93bU5hVjJmN053Tm5uNTBZU1NJUjRr?=
- =?utf-8?B?c3B3c0FmT0YxNW0yOGMvWWVlZmk5OHExOGN2N05kZWlqQ2dlNUxuaWZiQjhI?=
- =?utf-8?B?TVI2ZTFVak1sQWVUdTR5M3c4NHRRcFVDL3RoVHc1bXQ2NFFiME1IdDhCYS9V?=
- =?utf-8?B?QWVPbkpWRmU3d0J3MFlpY00zeUhDRmZkWXA5WkNTY1pIcmVXRi9wVTVxb2VB?=
- =?utf-8?B?QTY2amlBWnUxRkVlMlpLV1hEYVhzU2dEVEtkc0dSL0hjN2ZreWdMQVFZMTZS?=
- =?utf-8?B?L0IzNGgzRzVtTkdlbmZzZ3dneE5RV0dSWmZ2bEg5TkdpUzI0OXFuSnVnTTU1?=
- =?utf-8?B?V2N0L2xRdDBTcmI0YnpjMkhYOWQrSzQxd1NzaXEzT2t2TTA5YzFLamxoQTcv?=
- =?utf-8?B?UlorZk1relZjNVNEVHdQR3JPUk1YbXFYNmxZUTVmVlAxcjBsdWM3bk5POWcr?=
- =?utf-8?B?R2xFd2NIMERGcE05aFNyWm1NbnpzNjdOdHpoTkFoMUFKOFhNN25ZUkJFS0NI?=
- =?utf-8?B?QnhmNjM0WUFLdzNSdUJQcStjZENRaW1vL2ZPMmxWNndCRGN0YmtiWU51VEcr?=
- =?utf-8?B?SjRzdFhmM3IvamhtK2hBTDVJd0FnWkJuKzIyTG5yRXpxKzdTUUhtNkh4R21F?=
- =?utf-8?B?MjJ0U0RJN0E1dmJaK0poa0xvNFZmNUpTTkRiTHA2S3Z3TFZVZUhBanpJZWht?=
- =?utf-8?B?RUR1K2swamtDQTdody9wRGtKR1dJcWtuMXRRbDRIQ3c5UHpLTzQyVElVUG5w?=
- =?utf-8?B?cWN3aHlOM1ZDYkQrREVrQlFjYTdmWFM4Zk01WFVmOHhYcFFmSG5JdUNlNGVl?=
- =?utf-8?B?ckNXakl3QUhNU29wc0UybkpiekVUNmRGNjFHV244akFDcnlsREkrYjJDZm5a?=
- =?utf-8?Q?k85ol5VR?=
+	=?utf-8?B?cU1sMVBFR3NOZTh3OEFqS1V0VXh5QSsycHh1RmdsNTdRaTZYQ3pMdUN0TzNT?=
+ =?utf-8?B?Vjk5LytYbTA4M1ZOUDBaR1BvWHJ3YVVMMS8xbkJnZXhzTVBTRGEzcHBaSTAv?=
+ =?utf-8?B?bC84OGhyKzVpNFVNWnAvSDB0b1d5cGM1S09lbnlmUFVKTlNmYVpYSmR1Qk8v?=
+ =?utf-8?B?WXFFUlNFMGhPSjlyRnRSME9wcytDMWI0eWF2VDRQVlF5NkNzVk9DdjNyUTJ0?=
+ =?utf-8?B?VVN1TmhhSkZxWHpYQ3ZyQWlpMXVtcmxxNXBPL2VlMEs1cWN4RWZEaCt5clZy?=
+ =?utf-8?B?TVJ1OVB1c3l6NmRxYWFucTBKOXB2d0l3Q2ZkV011eUxDRUxWVCtoaEdOVEpj?=
+ =?utf-8?B?a2lqR3QzRDE2b0RsUUR6ZTd3NkVrUEdrb1RmTEl3TWZqWVEvVzQ3M0huV0R0?=
+ =?utf-8?B?NStzaTAvM1ZoWDJSeDdoUUJYL3hvZWlVYzJhRmpVVHZweXU3aExxYVVnc3pL?=
+ =?utf-8?B?allsQy92VUlDRURqMEtlUkxUUGNNbk9rRVAxcHBUM1lSR3BvOCt2YTAwd1Zp?=
+ =?utf-8?B?S015bkNrblhGWTk3T2ZENTBIRU1sSytKZnB6Zm9VV1k4WXdvZDE5bG9jSTBh?=
+ =?utf-8?B?bloyanpGdk5IUGg3bVkwOTN5V25qR3UxOXk4TUlCOXZ5Si83MVdyTzhudG4v?=
+ =?utf-8?B?T09jbS82N1B6TENVbnZsdlRsMHVoeU5vbGoyRktrN2VpWlNBY0ZUeVZXWUNw?=
+ =?utf-8?B?TnNJVFJHbXA1T2ZpWmFPZ0J1ZG1zSldwYjJjeVJnQXpqb1p0VzBsdytvNHJM?=
+ =?utf-8?B?QTJXYWo5dE4xdU1KTkcxUTc1aVMzUERhQjFBY0k2OEo4eDZNSjE2NTVPMis1?=
+ =?utf-8?B?UXhPT1RJUVlJejR5dmNRNkFzMDZtcHRtNXVzOFhFZTJXcVRBeUg5M2Zjci9F?=
+ =?utf-8?B?czlHL29qNUpwNzZqNC92NjRyMzNIODVzazJEeCtqcnY1QlRmVWpiZ25Md2VI?=
+ =?utf-8?B?Q3dRZHQ2VzVEY2w0UlNIYllzNEYvbWFZcVZIN0xaVFlBTDVvY05KVzhFMEtI?=
+ =?utf-8?B?cXdSUi81Q1FiOFVic2k1SVF6ZHBZd0NkYUVCeFMyNXRpaVUzZVhBUGc2bjk0?=
+ =?utf-8?B?SFVrK2llL1A1cENkbzNnWWtCTDhBcU9YYjdJNHEvSjlTRE85bkx0YjNIVDhE?=
+ =?utf-8?B?ZzExbU5VSXZDNitLQll6L1VQK09tNGtsMjE2ZG9jdGVoeXpzZTkzTW5pZ0U5?=
+ =?utf-8?B?ZWpkM2RTSkF5a0dPSVcwQVovQ3llQVBPdG1wZGcwVnkrL0dHK2oyZGVSNWk0?=
+ =?utf-8?B?R0ZCLzNNL1Zsb2JlVHpuVUd1WnNkb09JNHpqa09mSjBHVjJlNGJyZWZyRWhn?=
+ =?utf-8?B?eDhNTjhjdnNBYTNGdld3SVRRQkV0eU11WGRKQSswUERsa09VTDJKZXhaQnY2?=
+ =?utf-8?B?NHJHaXdYeEdxNDlEZ1JZN28wbmFKY1RLVTMxc2lyaHZsZHB3b21iOGU3UEx0?=
+ =?utf-8?Q?U9Hz7cUI?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b4fce5e1-90bc-4f33-c1f9-08d8c6b6392a
+X-MS-Exchange-CrossTenant-Network-Message-Id: ff1f2f15-ffe2-426c-b311-08d8c6b64153
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Feb 2021 13:35:22.1374
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Feb 2021 13:35:35.7365
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vr/FaK0LLIZD5PWTtMAUqwiPGG+5iLkL/dusd8BF0uI2TvwKD3dwwERQF8bdhFh14tELR+aT8jVtsKxXsdr5yWXomYQbXZhai1BzyO40fJg=
+X-MS-Exchange-CrossTenant-UserPrincipalName: NcZA0EdciRn2Ya38FF855Nkwfqnut75s+CzDSh98pirrKo1QsTkwRaI6yCy/8pKG2vk8OiJoqKOcvU9P4rphcDhxBO0XJ66UWFqEE6Hk4SU=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4308
 Content-Type: multipart/alternative;
- boundary="------------CE75D6DC712163B16BA08676"
+ boundary="------------F8BC7C74F17FAF6AAA4648E0"
 Content-Language: en-US
 
---------------CE75D6DC712163B16BA08676
+--------------F8BC7C74F17FAF6AAA4648E0
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -113,94 +113,42 @@ Content-Transfer-Encoding: 7bit
 On 2021-01-29 8:10 a.m., Leon Anavi wrote:
 > [Please note: This e-mail is from an EXTERNAL e-mail address]
 >
-> Upgrade to release 22.0.2:
+> Upgrade to release 1.4.2:
 >
-> - Add workaround for bug in DLL loading for Windows wheels with
->    conda Python >= 3.8
-> - Fix type of Frame.bytes for non-copying recvs with CFFI backend
->    (regression in 21.0)
-> - Add manylinux wheels for pypy
-> - Some typing fixes
-> - Bump bundled libzmq to 4.3.4
-> - Strip unused symbols in manylinux wheels, resulting in
->    dramatically smaller binaries. This matches behavior in v20 and
->    earlier.
-> - Windows CPython wheels bundle public libzmq binary builds,
->    instead of building libzmq as a Python Extension. This means
->    they include libsodium for the first time.
-> - Our own implementation of bundling libzmq into pyzmq on Windows
->    is removed, instead relying on delvewheel (or installations
->    putting dlls on %PATH%) to bundle dependency dlls.
-> - The (new in 21.0) Windows wheels for PyPy likely require the
->    Windows vcredist package. This may have always been the case,
->    but the delvewheel approach doesn't seem to work.
-> - Windows + PyPy is now the only remaining case where a wheel has
->    libzmq built as an Extension. All other builds ship libzmq built
->    using its own tooling, which should result in better, more
->    stable builds.
+> - Fix type annotation for context_processors argument
+> - Bump the minimal supported aiohttp version to 3.6.3 to avoid
+>    problems with uncompatibility between aiohttp and yarl
+> - Add async rendering support
+> - Document async rendering functions
+> - Add CHANGES.rst to MANIFEST.in and sdist
+>
+> License-Update: Remove an empty line at the end of the file
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/python-pyzmq/club-rpath-out.patch         | 12 +++++-------
->   ...thon3-pyzmq_21.0.2.bb => python3-pyzmq_22.0.2.bb} |  2 +-
->   2 files changed, 6 insertions(+), 8 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-pyzmq_21.0.2.bb => python3-pyzmq_22.0.2.bb} (91%)
+>   ...iohttp-jinja2_1.2.0.bb => python3-aiohttp-jinja2_1.4.2.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-aiohttp-jinja2_1.2.0.bb => python3-aiohttp-jinja2_1.4.2.bb} (60%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python-pyzmq/club-rpath-out.patch b/meta-python/recipes-devtools/python/python-pyzmq/club-rpath-out.patch
-> index d4e144a61..61aeaca5f 100644
-> --- a/meta-python/recipes-devtools/python/python-pyzmq/club-rpath-out.patch
-> +++ b/meta-python/recipes-devtools/python/python-pyzmq/club-rpath-out.patch
-> @@ -1,4 +1,4 @@
-> -From b394003d31a7187767b7d6cc7b871968d2674be9 Mon Sep 17 00:00:00 2001
-> +From efae4e08d13e0958d929ea524e21c0a210b31982 Mon Sep 17 00:00:00 2001
->   From: Leon Anavi <leon.anavi@konsulko.com>
->   Date: Fri, 22 Jan 2021 11:41:12 +0200
->   Subject: [PATCH] setup.py: Adjust _add_rpath
-> @@ -8,15 +8,16 @@ Fix error: unrecognized command-line option '-R'
->   Upstream-Status: Inappropriate [oe specific]
+> diff --git a/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.2.0.bb b/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.4.2.bb
+> similarity index 60%
+> rename from meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.2.0.bb
+> rename to meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.4.2.bb
+> index de336af22..05afed8b6 100644
+> --- a/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.2.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.4.2.bb
+> @@ -1,9 +1,9 @@
+>   SUMMARY = "jinja2 template renderer for aiohttp.web (http server for asyncio)"
 >
->   Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> +
->   ---
->    setup.py | 3 ---
->    1 file changed, 3 deletions(-)
+>   LICENSE = "Apache-2.0"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=c82758543767c96574b6e29fc478fb73"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=29dca541e03964615590ca7b50392d97"
 >
->   diff --git a/setup.py b/setup.py
-> -index 22f582d..2d28655 100755
-> +index b634d94..7f6a2f1 100755
->   --- a/setup.py
->   +++ b/setup.py
-> -@@ -231,9 +231,6 @@ def _add_rpath(settings, path):
-> +@@ -235,9 +235,6 @@ def _add_rpath(settings, path):
->        """
->        if sys.platform == 'darwin':
->            settings['extra_link_args'].extend(['-Wl,-rpath', '-Wl,%s' % path])
-> @@ -24,8 +25,5 @@ index 22f582d..2d28655 100755
->   -        settings['runtime_library_dirs'].append(path)
->   -
+> -SRC_URI[sha256sum] = "2dfe29cfd278d07cd0a851afb98471bc8ce2a830968443e40d67636f3c035d79"
+> +SRC_URI[sha256sum] = "9c22a0e48e3b277fc145c67dd8c3b8f609dab36bce9eb337f70dfe716663c9a0"
 >
-> - def settings_from_prefix(prefix=None, bundle_libzmq_dylib=False):
-> + def settings_from_prefix(prefix=None):
->        """load appropriate library/include settings from ZMQ prefix"""
-> ---
-> -2.17.1
-> -
-> diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_21.0.2.bb b/meta-python/recipes-devtools/python/python3-pyzmq_22.0.2.bb
-> similarity index 91%
-> rename from meta-python/recipes-devtools/python/python3-pyzmq_21.0.2.bb
-> rename to meta-python/recipes-devtools/python/python3-pyzmq_22.0.2.bb
-> index 8bde98247..555f27cb4 100644
-> --- a/meta-python/recipes-devtools/python/python3-pyzmq_21.0.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pyzmq_22.0.2.bb
-> @@ -8,7 +8,7 @@ DEPENDS = "zeromq"
->   FILESEXTRAPATHS_prepend := "${THISDIR}/python-pyzmq:"
->
->   SRC_URI += "file://club-rpath-out.patch"
-> -SRC_URI[sha256sum] = "098c13c6198913c2a0690235fa74d2e49161755f66b663beaec89651554cc79c"
-> +SRC_URI[sha256sum] = "d7b82a959e5e22d492f4f5a1e650e909a6c8c76ede178f538313ddb9d1e92963"
->
->   inherit pypi pkgconfig setuptools3
+>   inherit pypi setuptools3
 >
 > --
 > 2.17.1
@@ -209,7 +157,7 @@ Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > 
 >
 
---------------CE75D6DC712163B16BA08676
+--------------F8BC7C74F17FAF6AAA4648E0
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -222,100 +170,48 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2021-01-29 8:10 a.m., Leon Anavi
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210129131029.2163-3-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210129131029.2163-4-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">[Please note: This e-mail is from an EXTERNAL e-mail address]
 
-Upgrade to release 22.0.2:
+Upgrade to release 1.4.2:
 
-- Add workaround for bug in DLL loading for Windows wheels with
-  conda Python &gt;= 3.8
-- Fix type of Frame.bytes for non-copying recvs with CFFI backend
-  (regression in 21.0)
-- Add manylinux wheels for pypy
-- Some typing fixes
-- Bump bundled libzmq to 4.3.4
-- Strip unused symbols in manylinux wheels, resulting in
-  dramatically smaller binaries. This matches behavior in v20 and
-  earlier.
-- Windows CPython wheels bundle public libzmq binary builds,
-  instead of building libzmq as a Python Extension. This means
-  they include libsodium for the first time.
-- Our own implementation of bundling libzmq into pyzmq on Windows
-  is removed, instead relying on delvewheel (or installations
-  putting dlls on %PATH%) to bundle dependency dlls.
-- The (new in 21.0) Windows wheels for PyPy likely require the
-  Windows vcredist package. This may have always been the case,
-  but the delvewheel approach doesn't seem to work.
-- Windows + PyPy is now the only remaining case where a wheel has
-  libzmq built as an Extension. All other builds ship libzmq built
-  using its own tooling, which should result in better, more
-  stable builds.
+- Fix type annotation for context_processors argument
+- Bump the minimal supported aiohttp version to 3.6.3 to avoid
+  problems with uncompatibility between aiohttp and yarl
+- Add async rendering support
+- Document async rendering functions
+- Add CHANGES.rst to MANIFEST.in and sdist
+
+License-Update: Remove an empty line at the end of the file
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210129131029.2163-3-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210129131029.2163-4-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/python-pyzmq/club-rpath-out.patch         | 12 +++++-------
- ...thon3-pyzmq_21.0.2.bb =&gt; python3-pyzmq_22.0.2.bb} |  2 +-
- 2 files changed, 6 insertions(+), 8 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pyzmq_21.0.2.bb =&gt; python3-pyzmq_22.0.2.bb} (91%)
+ ...iohttp-jinja2_1.2.0.bb =&gt; python3-aiohttp-jinja2_1.4.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-aiohttp-jinja2_1.2.0.bb =&gt; python3-aiohttp-jinja2_1.4.2.bb} (60%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyzmq/club-rpath-out.patch b/meta-python/recipes-devtools/python/python-pyzmq/club-rpath-out.patch
-index d4e144a61..61aeaca5f 100644
---- a/meta-python/recipes-devtools/python/python-pyzmq/club-rpath-out.patch
-+++ b/meta-python/recipes-devtools/python/python-pyzmq/club-rpath-out.patch
-@@ -1,4 +1,4 @@
--From b394003d31a7187767b7d6cc7b871968d2674be9 Mon Sep 17 00:00:00 2001
-+From efae4e08d13e0958d929ea524e21c0a210b31982 Mon Sep 17 00:00:00 2001
- From: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a>
- Date: Fri, 22 Jan 2021 11:41:12 +0200
- Subject: [PATCH] setup.py: Adjust _add_rpath
-@@ -8,15 +8,16 @@ Fix error: unrecognized command-line option '-R'
- Upstream-Status: Inappropriate [oe specific]
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.2.0.bb b/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.4.2.bb
+similarity index 60%
+rename from meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.4.2.bb
+index de336af22..05afed8b6 100644
+--- a/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.4.2.bb
+@@ -1,9 +1,9 @@
+ SUMMARY = &quot;jinja2 template renderer for aiohttp.web (http server for asyncio)&quot;
 
- Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a>
-+
- ---
-  setup.py | 3 ---
-  1 file changed, 3 deletions(-)
+ LICENSE = &quot;Apache-2.0&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=c82758543767c96574b6e29fc478fb73">&quot;file://LICENSE;md5=c82758543767c96574b6e29fc478fb73&quot;</a>
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=29dca541e03964615590ca7b50392d97">&quot;file://LICENSE;md5=29dca541e03964615590ca7b50392d97&quot;</a>
 
- diff --git a/setup.py b/setup.py
--index 22f582d..2d28655 100755
-+index b634d94..7f6a2f1 100755
- --- a/setup.py
- +++ b/setup.py
--@@ -231,9 +231,6 @@ def _add_rpath(settings, path):
-+@@ -235,9 +235,6 @@ def _add_rpath(settings, path):
-      &quot;&quot;&quot;
-      if sys.platform == 'darwin':
-          settings['extra_link_args'].extend(['-Wl,-rpath', '-Wl,%s' % path])
-@@ -24,8 +25,5 @@ index 22f582d..2d28655 100755
- -        settings['runtime_library_dirs'].append(path)
- -
+-SRC_URI[sha256sum] = &quot;2dfe29cfd278d07cd0a851afb98471bc8ce2a830968443e40d67636f3c035d79&quot;
++SRC_URI[sha256sum] = &quot;9c22a0e48e3b277fc145c67dd8c3b8f609dab36bce9eb337f70dfe716663c9a0&quot;
 
-- def settings_from_prefix(prefix=None, bundle_libzmq_dylib=False):
-+ def settings_from_prefix(prefix=None):
-      &quot;&quot;&quot;load appropriate library/include settings from ZMQ prefix&quot;&quot;&quot;
----
--2.17.1
--
-diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_21.0.2.bb b/meta-python/recipes-devtools/python/python3-pyzmq_22.0.2.bb
-similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-pyzmq_21.0.2.bb
-rename to meta-python/recipes-devtools/python/python3-pyzmq_22.0.2.bb
-index 8bde98247..555f27cb4 100644
---- a/meta-python/recipes-devtools/python/python3-pyzmq_21.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyzmq_22.0.2.bb
-@@ -8,7 +8,7 @@ DEPENDS = &quot;zeromq&quot;
- FILESEXTRAPATHS_prepend := &quot;${THISDIR}/python-pyzmq:&quot;
-
- SRC_URI += <a class="moz-txt-link-rfc2396E" href="file://club-rpath-out.patch">&quot;file://club-rpath-out.patch&quot;</a>
--SRC_URI[sha256sum] = &quot;098c13c6198913c2a0690235fa74d2e49161755f66b663beaec89651554cc79c&quot;
-+SRC_URI[sha256sum] = &quot;d7b82a959e5e22d492f4f5a1e650e909a6c8c76ede178f538313ddb9d1e92963&quot;
-
- inherit pypi pkgconfig setuptools3
+ inherit pypi setuptools3
 
 --
 2.17.1
@@ -331,4 +227,4 @@ index 8bde98247..555f27cb4 100644
   </body>
 </html>
 
---------------CE75D6DC712163B16BA08676--
+--------------F8BC7C74F17FAF6AAA4648E0--
