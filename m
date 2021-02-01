@@ -1,17 +1,17 @@
-Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.49])
- by mx.groups.io with SMTP id smtpd.web10.33802.1612186576782205754
+Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.48])
+ by mx.groups.io with SMTP id smtpd.web11.34045.1612186629469588177
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Feb 2021 05:36:17 -0800
+ Mon, 01 Feb 2021 05:37:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=bIKqTimI;
- spf=pass (domain: windriver.com, ip: 40.107.75.49, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=lauys5Yn;
+ spf=pass (domain: windriver.com, ip: 40.107.75.48, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=VUIgGBZ6vp1ErCUuMW2LIlZnyBwhVHVrdeibzSfQ9zp5NIJmX0njuq9uRexIEsJzNMBXjdaskwHAmzBx4gcPp2CWVvgpWn3UY+p5NncxyeoqwoHIx8lwyCJS6bLC13FgdbHiE8gi+pBSuGoVeghKl9NT+HjVJ8dmvfHyiHhxKgb+hEhvZdNdBHZOz37XjWcZTqkRYfrUjtH/PDw4KLrFsT5Z06PT6g6ClmoIEOI8uuvLp0A14JTZfgoZPBCuXfKYxlKW4aKrnZNumdiRNIDyoSfXx7LHSkIEgJ8WiS53RFcxLxCLRalWOzJx5HpWzwLQdACOrouSeFabkvswhg4IVQ==
+ b=A64tZmsI+RVzGKp9IljpAy8O7+SS0ry1SBFbjSSzsNYLQwq+0ZQaD2IDTRvDswQSqZ++Oi8QsY2qF+ccdD4usURaRDYFYf+88w2RV9H+q0m0J53u06LApUq9hnxeSoLvYYHjYlxDx+efcH3Sz5RGvSUYC4cTEKdkxFEAkdtuMBW9g6mosko1GiaH32fYBCIw22VprByjE/jw34TRa+8HMclCetgEl72Lvp0nt9EGVozv/q/o7RvBvGFgWQrQxAsnK9ZtoAm8RVFMIZ2p8O+l/zhvi1954Vnr7gqgeZNpj8so5AEowB0zZnrHtLX7dYwionQbrPel0gKS/m/L9by2wQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KXIGaxzh+Csbvsl4Xy0GWukzI1t55zE7q8bXdAWdecU=;
- b=OJRiPmhZZNTRZIYFHIyYadsDVII6NEqHmqmE4tAIHP5WxWl9AOJj9Jdzwx4QYxr6I4HtiFY9GBhbRb4EFJVATQ38XrCoE+KNs0Gov4gC78w6cIt+1K0BFXUTr5kjjLcCV5nR+QXfb//59aQkdcyxxH5WZbMI8Hix3dUcuDN/4e8Bs2JT7hEAvdl98f2aK1vfVrChH2HGlZwNFkd427cScZqvR5H4Zyc5FcpoMxBi2n1JBaRB9HBXuk5Q/HCaSNE6ENMvqBQOHF1mwZky5jaSNh8/AbBiKkO+zXDQbeSSpsHnnki2Alr3UYLHr4LECOn0GqtwQ5QbA7p3WfkSNzD2dg==
+ bh=JajogNT1RjGifa61pV/sWYht22axyRWlX46Vki9QkL8=;
+ b=lKkGIQF7sQV8gqqYt66kZw6fb3E3aFq3uCvH5wSODT8sjniLcpJrFpIvLjf8eRmO4rsP/DDCCjWWpX4od9zvo6ChG9CjjHxU2IrBBQM/2gUTlVCA8R4jIfn83msvYMmSXmMqDSvxANsXp5PktHyq4eYChlumV9layqTpC+LMxw3FqjTFTRgjNEMohI+hFab3uO2y/FuV8ZyJ4vuUkdy+/H7Gnoo3M7bxx9wDMIUYz+/FDszLK1r/v0738srT3ovK7Qf5+gf7FbHH0dGp70OGM9EzXMf2KzRao33D1RJLczsBv6htpxmLfewihDeLYHvv4Yp9lAenwj2KgNO4nU/oUQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KXIGaxzh+Csbvsl4Xy0GWukzI1t55zE7q8bXdAWdecU=;
- b=bIKqTimIpunl8Lp2JUOz1zCY4WMUiTfAnqF4azaiEB5fS9q91/1ePvbiECSYyTonTN/rKyGmmXn1d3wLk2r2x6BG7jTAsQ0yfCHVKQwcuQbDt2ZFFZLOoXA2aLYKXuG/gQeGbd3T7VrWTixKwnrzfj0kg/xu0pQ30whU9d7sLUQ=
+ bh=JajogNT1RjGifa61pV/sWYht22axyRWlX46Vki9QkL8=;
+ b=lauys5YnMpovCCJX8fB/07y1Gl1D9JwL90Sj43caQCYDxCzd4qTXSaIGcu6fukPemdVs/FESqoqQzxPWS+vbkeG0QhQjvQhiu9/SKldk2xJ9F4KsMA2UwoWVx0px+JRG+HcJ3depm2TjVlE6ch57wSIv7QqsiO1GVniVEx1XBUQ=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,118 +28,189 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BY5PR11MB4308.namprd11.prod.outlook.com (2603:10b6:a03:1b9::19) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.19; Mon, 1 Feb
- 2021 13:36:15 +0000
+ 2021 13:37:07 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3805.024; Mon, 1 Feb 2021
- 13:36:15 +0000
-Subject: Re: [oe] [meta-python][PATCH] python3-ruamel-yaml: add support for native and nativesdk
-To: Peter Smith <salerio@gmail.com>, openembedded-devel@lists.openembedded.org
-References: <20210130115216.5875-1-salerio@gmail.com>
+ 13:37:07 +0000
+Subject: Re: [oe] [meta-python][PATCHv2] python3-prctl: Upgrade 1.7 -> 1.8.1
+To: Leon Anavi <leon.anavi@konsulko.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20210129193230.20879-1-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <32dc525b-58c1-b5f2-10ef-ab1dc7f5b9bf@windriver.com>
-Date: Mon, 1 Feb 2021 08:36:12 -0500
+Message-ID: <bc5dd197-2127-4297-ad37-a8f0b433cd7d@windriver.com>
+Date: Mon, 1 Feb 2021 08:37:05 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.0
-In-Reply-To: <20210130115216.5875-1-salerio@gmail.com>
+In-Reply-To: <20210129193230.20879-1-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BN6PR1101CA0021.namprd11.prod.outlook.com
- (2603:10b6:405:4a::31) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: MN2PR13CA0018.namprd13.prod.outlook.com
+ (2603:10b6:208:160::31) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BN6PR1101CA0021.namprd11.prod.outlook.com (2603:10b6:405:4a::31) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.16 via Frontend Transport; Mon, 1 Feb 2021 13:36:14 +0000
+Received: from [192.168.0.55] (174.115.236.231) by MN2PR13CA0018.namprd13.prod.outlook.com (2603:10b6:208:160::31) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.10 via Frontend Transport; Mon, 1 Feb 2021 13:37:07 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: eda17f3b-0ab1-4955-c697-08d8c6b658e9
+X-MS-Office365-Filtering-Correlation-Id: a5794d4b-6e4e-4854-7475-08d8c6b67832
 X-MS-TrafficTypeDiagnostic: BY5PR11MB4308:
 X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB430812A0A789C7C0390DFFB69FB69@BY5PR11MB4308.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2803;
+	<BY5PR11MB4308CB64398D2E40EAB28C159FB69@BY5PR11MB4308.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:446;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	NBEkTGuJvJAyp1vCI18lqeRoyLp+hrKOMhDWkhQd6jdT2YDBST+AARnMKT1yDSnE42u9D/J2FIhQqhQcAx/tPYBqI7yuv9hlrx1tSzgXqTw+7Q1jKLGCXsK9T23EAybwNhmya+loelYFR9ZtsPKv9FjkhdLGmnl2Y7gu7b3qKoLkkEegcF0fMal30cEZ9enHIGirXcGt7DDz1xunpUqEI6rVYwJ0VlRiwPEHDGSFtPI3o3QlosBWdkeRVpFrJMO7I2UGomDGV457n0TVEv2/LRk1fDAKeGdGUVnLkF7YIl8wA6etnkwUFaEY7zHyhpJ2u4oj521+g62FTes4nKkFp1gJFDbubyeOeYVxNMsbVDp+ye54xqUZ3gC2g9ycX2rqOK/Dhh8Oa6QhJjFoErxQStoID/CsV3+UDnFCVXFPn0lY68ttJWNdDlRSa0xaYSwdpV1VFWqulVMPMdGRBSGD+Z2M+kzdrsAqwHNNOwZprTIbF/wUzdTI/KREhERH49HlIhCqLFxJZ/agj+k/0qQhicH4nSs9ne02ODt/8qB7fiTVAZUEEEHXW3H8Xi+QDmAdLnN5v3k8oEKq3JxraIYRpby44bQXhPCvlfGFFTKLouCHqYg75NBzq5+frdeR0Hw7dxaSm0zYO7RpehZkMfP4uSpeTQ+aJXEzYiM+/ju/QHftFgs8hN5wOldcmA56Xb9f
+	9OGyUJyc04pBl3d3yUtL+UzpGEsOxAn0y6qab3m+a9ohJ4OAQPkljiF0GxPOna235uNycHkmKsXHR/7Z93Nr6sRnwCQt5OaV3A2r9KdxVSfWGWvpKDfLmOzsCzOURWR9gY43+uL1MN08GUlVFEdEWgVlYZSgez6QWHGDds3HsB6GgDSfa/qP6GHNnK4X/vtwElC+Ubm1U6zQjBivCpuEgPpNknbr55XYlN3n/fRls5nGaOUTACH5iooRxhJPMd7wzzywmE99GFzCruEPm4bPyfxeOohTD0ogpd/btSC0DHZ1oPIR93ELrOTd/YuT4SeEZ8H1/LPsIx3FfYleo3BImCbohauEj0r+oCH5YdVMh4JMCG7cDSGNEoTkCT6smZ5RdaUxkjLdxAaLw/4eilaevST8kNzgF8+wsLqbT1WZ4TT+LfGhEaMQ4t4KBKf3xRoCqGIVmt7ez76BTUakAQ9FB2IPxebDuZEJ2uggfXrVEzdDre2rvbI9NoHi5K5tkr4E86okHFkvsxBk1KkA2E0Nv11gZTwoOKO2uQhU1RGiCk74BAJxutTrBJP7zqfBQPcTRZZ8U1vtRIONWW6WajMwQ8iklNK/SPyyqugZmdQ1sk3jm5BnuiFbqgAw78eYYiqLiyFzHXfarq0hBfxs7tEVNFt2k8mK+mfBBB51E0a7WLkbCaCnfmUy8QeJm8hFrI0Y
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(39850400004)(136003)(376002)(396003)(366004)(5660300002)(316002)(478600001)(26005)(966005)(8936002)(53546011)(956004)(2616005)(186003)(44832011)(16526019)(166002)(86362001)(52116002)(2906002)(16576012)(66946007)(83380400001)(66556008)(66476007)(31686004)(6486002)(33964004)(31696002)(36756003)(8676002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?SWlmam5nUlh0ZzRXdnVQTzVKdnZ4bCtIdFdHdFhGTEVzRHBHWm1wTHVlYkJm?=
- =?utf-8?B?d0VlL29BRWtCZ0NHYmsxM3pvU204cUlBNmxRcjdINUlEN1RRczdhQ1VkZHBD?=
- =?utf-8?B?b3QwcXdtWFpIZUp2NXlDNVBpZXZhTG9sRTRXTjV0ZTBvUVVoczE1OXNnNWhS?=
- =?utf-8?B?NUgvbmprVk5ydEU1eXpWbjVGU1RzbHlINEo5dXdiM3MyZDFHQmhCQ09Qandl?=
- =?utf-8?B?Z29nbTlLVVpDcW5xendEVzZ2V3IzdEJibHVYSHdOb0ZtVExjVjFQK3NRQnNt?=
- =?utf-8?B?YTNzTndHS1JhQlY4b3dIMXFUMk91a1BQYzJVbElLQ3Bha2tGRi9TdW5WeCtY?=
- =?utf-8?B?TVB1YTNDa1k3NXYvbE50djZPd09KOWJwd2VsdDg1Rms4b3pHanJpU2M5R0xL?=
- =?utf-8?B?c1czS2VxcGdxTkozeUsyQ0tmeUdvUTJBaE1TMmdTMk11Sk4rcGFyVytMKzZV?=
- =?utf-8?B?MFdmOUNtcDFYMEVuWFc2K1NCVWE5c1ErVUc0TngrYmxKYWxqZlpYUElGekE2?=
- =?utf-8?B?ckNPNVV4MXluOHBycGV3NU9BNGZZOXplamFGTTFSaFk2QXpub0k1d0l6THlN?=
- =?utf-8?B?eXVHWndyWEFmNEFnZTd6cVVQc2VTaG5RTUlqUENPS25ML1A5M0txemI2TERj?=
- =?utf-8?B?RnZsaExVYXAvZ0tWN3JCekZEV0t4Vjc0UmlyY214TWUwTXEyaG1BY2pRdjlT?=
- =?utf-8?B?QW12NjdaUHpiVUx6VnhicGNqQUZoa3Q1eWRueVpQMWVRSUlhWEl5VWdFYUc2?=
- =?utf-8?B?N3kxZmUreGxZZDBoVStYeVZJQ0I2V3NUKzFaelhQOGNhQXFDQ2JaQnFpYm9X?=
- =?utf-8?B?a3duekFqUngzRGsyWUZPb3dpWFA3YjlQdUMrUnhDMm9MV2tRN0xZT3BZbUlJ?=
- =?utf-8?B?d3A3bUw5aVlQZlluNlM0QS9BRG9FU0lMTXhYZWJucDkrRjhaZnFiV0c0Smt5?=
- =?utf-8?B?QjBOUkRSYzZhYzR5SjdmZGgvb2xLTXhGdWVqVEtRVDdkL2U0bTMyZHR0ZFlZ?=
- =?utf-8?B?OWwwWkpVZUFHcjVpakdpeDVYd0srcjEvNGxQWStXUUpxbDUwVWZkaFpFL2dP?=
- =?utf-8?B?M2wxT3JtZVNSM1dIaDZzZm1NTk9neHRUWFFvdzRBT0ZyL2ltcTFObmU5UDd5?=
- =?utf-8?B?bUp2eXI4UFBheWJNWUtseXBlR0JjUUxCN3lLSW82a0s2UjdCRUlpN1YzbDNy?=
- =?utf-8?B?UEJiWTFSMC9GSXI4dEhPZkJMUURVTXNYNmxqYm5DdmRPb3Fsd05yRzhzSnl6?=
- =?utf-8?B?TlUvMnBhSCtKc2p5UUoxTDdwUzdPUTZqaVNtOGx4SGVMTmVxUUNDdTZ4cWo0?=
- =?utf-8?B?NjEwK3JpWnNsZkMzMlQyUFh5Q3YrWnk2a3NWamx2c3NkSGJDRXg0SEJFWWZO?=
- =?utf-8?B?eVpsQkRnZTNaU2NXbldaU281Y045ZHRnYWcrNjdpY1hTSm9DSlgwc01GRUVm?=
- =?utf-8?Q?CSTiLMQQ?=
+	=?utf-8?B?bW5oc2FqM3JZdVVMQXFrSnBmYXFoSTZvTWxPUFlFcG1lSE91eFNkVkEzRm9t?=
+ =?utf-8?B?Y3J5ekFIMVJodEh2dm9NZW5vY2E1ZktqUmpYOUpyblhjM0NoVFVKQmRSck5q?=
+ =?utf-8?B?REd4QmJaUk5idEVqQk9rSXl5V1VYZXZWc0xTWVp1c05mYW9pcU5ZTThtcUxY?=
+ =?utf-8?B?bTFQU2hiby9pZ0FwMUkxUk1aeWtvOTdyNEMvS0dmTEd2Vmp6bDUvUTdvV2Zq?=
+ =?utf-8?B?UGNHK3RUcFJzZnhOUFVoT2xmQS80UmhEMUNMVzFaQU1ENXNuZk9tTzk1Nmxa?=
+ =?utf-8?B?eDZSdEcraGcxd0xtazJzS2ZuYkJRdWlVVEZjbngycS9XUGI0UkpGWHl0ZWFT?=
+ =?utf-8?B?S2RSK29JamFrQmUvd3h2V2E5eFc3ZHZXRStKWWZMMXdXZENTYlJCRmhiVk5L?=
+ =?utf-8?B?cDlteVpYQmRiT1RvU1hrMUM1SHpoaWJqK2o0TE9PYWhWMU0yVHgvNTNSZG0r?=
+ =?utf-8?B?aHgwdzl2R2NWVmRKWVhjUy9vL1RaK3lFOTVmaXZqWS9Qck1vN29hWGYvMksx?=
+ =?utf-8?B?U21ndkl0bnhkcEt5anRtZ1lidkR1MjVHN2R3TFhjYVVmMDAvNG9EZDNqNGxG?=
+ =?utf-8?B?Z2NQSmJnNThzZ0UyZ1p4WFA2R29MbGpVeGk4SXJRdXBQQTN4R0FmYnBpYVJp?=
+ =?utf-8?B?eFFPTDZ1V004MmFDYXR6MVFmcmV1SkQ5Rzd1Q0drK0xWeXdQYzBScHBXckpr?=
+ =?utf-8?B?Q1pwTlRVOHhoVEovYlBoWHZQY0UyeGN4REFOR2trSXBuVGRab1VNck8rZncz?=
+ =?utf-8?B?Ly9IRE95bDZKSHNXL05oQkJJWERGN2hFV2FsNkk0M1h3d2c5Q0pZdDJHZ09v?=
+ =?utf-8?B?RXhhRkorb2JrTmFDR3BNWVlUUzRxNzdaNVk2RnE3NUhieEZPTXhyU2U5M0xt?=
+ =?utf-8?B?OFFXTTR2TEtSRjR4bjduVzVjelNUNVY4RkVqOFdKTlNFOWdaZks3UUxjWE5K?=
+ =?utf-8?B?RnlWVWlweXVHQTRERTM1WkQ3NHkyRy80WUt6VDYvTlV5RTRkVHdncllIZGFD?=
+ =?utf-8?B?Q2V5bUxQQ0lMOVBiVmR0MTUvTk5NY2NYelBqNHNKVmF2dUpXSEZldDg3bHF4?=
+ =?utf-8?B?STFhLytoam9FSnk0RVJ2S3MySnZLTnRrVm1hVVVGa0tOaEF1eHRnVU1YQXBx?=
+ =?utf-8?B?YkhKc1hGdG00eit4dmtzc1gxV29QOEZoeE1kNmJ1TllTNXZmRzlwejlrc0J5?=
+ =?utf-8?B?eGRXdCsxTVY1bGNodHprN1c0SG1wREV6V0s5SllkVEF1elVaa0x5YW1vVDdz?=
+ =?utf-8?B?UHcrcFFiVEJXQWY5OHA1U1RRd3M5TGdtUmRMdFFhVXYrMTNrSzYrWHQvZzRm?=
+ =?utf-8?B?ei8xUEtna0lrWEpubnN5ZzlMaXpNbGVoMzE1NWVoU0tIVXF3eGxNQzk0TEk1?=
+ =?utf-8?B?MERUa0dOZVhxanFaTFJtYURCREc1cFZ5STd5Y2t0WnRGV1BMVVk5TGNNNzVr?=
+ =?utf-8?Q?fnaKhL4K?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: eda17f3b-0ab1-4955-c697-08d8c6b658e9
+X-MS-Exchange-CrossTenant-Network-Message-Id: a5794d4b-6e4e-4854-7475-08d8c6b67832
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Feb 2021 13:36:15.2857
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Feb 2021 13:37:07.7734
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dEV9eG50E49ZUt6pUx2OzC0tWMB5faZFH1GjXc5o9XsBs/dW9HI8PWwmbyh0sDJRVoyLKMl4vB24ZzRj8/JnBg5riapGZXk5qddbtNYVMdU=
+X-MS-Exchange-CrossTenant-UserPrincipalName: mXvNMSAZgsow2JByLGQ3PMJu0UWeMhzr8llL5gdzxpsrusWlER5SK38PlHWAF21M6VBfVa17Po8gM/WdBgENjsdN8PIjNKIQkHbD1aKF84E=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4308
 Content-Type: multipart/alternative;
- boundary="------------A084C40965CFCD225DF83BFA"
+ boundary="------------4B7986068634418DB217FC07"
 Content-Language: en-US
 
---------------A084C40965CFCD225DF83BFA
+--------------4B7986068634418DB217FC07
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 2021-01-30 6:52 a.m., Peter Smith wrote:
+On 2021-01-29 2:32 p.m., Leon Anavi wrote:
 > [Please note: This e-mail is from an EXTERNAL e-mail address]
 >
-> The recipe is missing the BBCLASSEXTEND so it has been added.
+> Upgrade to release 1.8.1:
 >
-> Signed-off-by: Peter Smith <salerio@gmail.com>
+> - Master was renamed to main
+> - Backwards compatibility fixes
+> - Install dependencies before trying to build/publish
+>
+> License-Update: Update year
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb      | 2 ++
->   1 file changed, 2 insertions(+)
+>   .../0001-support-cross-complication.patch             | 11 ++++++-----
+>   .../{python3-prctl_1.7.bb => python3-prctl_1.8.1.bb}  |  8 ++++----
+>   2 files changed, 10 insertions(+), 9 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-prctl_1.7.bb => python3-prctl_1.8.1.bb} (70%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb
-> index ec8545dae..406da80f4 100644
-> --- a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb
-> +++ b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb
-> @@ -8,6 +8,8 @@ PYPI_PACKAGE = "ruamel.yaml"
+> diff --git a/meta-python/recipes-devtools/python/python3-prctl/0001-support-cross-complication.patch b/meta-python/recipes-devtools/python/python3-prctl/0001-support-cross-complication.patch
+> index 775ae1b2e..98d250c74 100644
+> --- a/meta-python/recipes-devtools/python/python3-prctl/0001-support-cross-complication.patch
+> +++ b/meta-python/recipes-devtools/python/python3-prctl/0001-support-cross-complication.patch
+> @@ -1,4 +1,4 @@
+> -From 9a16800738547d117284354bbcad7dd77d9d0344 Mon Sep 17 00:00:00 2001
+> +From 5f3911737c63a098caf73f1365320fe1b3a7638b Mon Sep 17 00:00:00 2001
+>   From: Hongxu Jia <hongxu.jia@windriver.com>
+>   Date: Thu, 21 Apr 2016 03:05:57 -0400
+>   Subject: [PATCH] support cross-complication
+> @@ -6,12 +6,13 @@ Subject: [PATCH] support cross-complication
+>   Upstream-Status: Inappropriate [oe specific]
 >
->   inherit pypi setuptools3
+>   Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> +Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+>   ---
+>    setup.py | 35 -----------------------------------
+>    1 file changed, 35 deletions(-)
 >
-> +BBCLASSEXTEND = "native nativesdk"
-> +
->   SRC_URI[md5sum] = "c7e4b216d9554d80be42011b448b7c61"
->   SRC_URI[sha256sum] = "076cc0bc34f1966d920a49f18b52b6ad559fbe656a0748e3535cf7b3f29ebf9e"
+>   diff --git a/setup.py b/setup.py
+> -index 658d1a5..e8be7eb 100755
+> +index eb83cfe..3f9567b 100755
+>   --- a/setup.py
+>   +++ b/setup.py
+>   @@ -13,41 +13,6 @@ import sys
+> @@ -38,13 +39,13 @@ index 658d1a5..e8be7eb 100755
+>   -    sys.stderr.write("You need to install gcc to build this module\n")
+>   -    sys.exit(1)
+>   -
+> --sp = subprocess.Popen(['cpp'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+> +-sp = subprocess.Popen(['cpp'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=os.environ)
+>   -sp.communicate('#include <sys/prctl.h>\n'.encode())
+>   -if sp.returncode:
+>   -    sys.stderr.write("You need to install libc development headers to build this module\n")
+>   -    exit = True
+>   -
+> --sp = subprocess.Popen(['cpp'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+> +-sp = subprocess.Popen(['cpp'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=os.environ)
+>   -sp.communicate('#include <sys/capability.h>\n'.encode())
+>   -if sp.returncode:
+>   -    sys.stderr.write("You need to install libcap development headers to build this module\n")
+> @@ -57,5 +58,5 @@ index 658d1a5..e8be7eb 100755
+>                       sources = ['_prctlmodule.c'],
+>                       depends = ['securebits.h'],
+>   --
+> -2.8.1
+> +2.17.1
 >
+> diff --git a/meta-python/recipes-devtools/python/python3-prctl_1.7.bb b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
+> similarity index 70%
+> rename from meta-python/recipes-devtools/python/python3-prctl_1.7.bb
+> rename to meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
+> index 54620a066..b87a470b4 100644
+> --- a/meta-python/recipes-devtools/python/python3-prctl_1.7.bb
+> +++ b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
+> @@ -5,15 +5,15 @@ limitations in C and linux. This module provides a nice non-messy python(ic) \
+>   interface."
+>   SECTION = "devel/python"
+>   LICENSE = "GPLv3"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=23ff9f50449d4bd0e513df16e4d9755f"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=1475481f9ec754d758859bd2c75f6f6f"
+>
+>   S = "${WORKDIR}/git"
+>   B = "${S}"
+>
+> -SRCREV = "57cd0a7cad76e8f8792eea22ee5b5d17bae0a90f"
+> -PV = "1.7+git${SRCPV}"
+> +SRCREV = "5e12e398eb5c4e30d7b29b02458c76d2cc780700"
+> +PV = "1.8.1+git${SRCPV}"
+>
+> -SRC_URI = "git://github.com/seveas/python-prctl;branch=master \
+> +SRC_URI = "git://github.com/seveas/python-prctl;branch=main\
+>              file://0001-support-cross-complication.patch \
+>   "
+>   inherit setuptools3 python3native
 > --
-> 2.24.3 (Apple Git-128)
+> 2.17.1
 >
 >
 > 
 >
 
---------------A084C40965CFCD225DF83BFA
+--------------4B7986068634418DB217FC07
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -149,38 +220,108 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 2021-01-30 6:52 a.m., Peter Smith
+    <div class="moz-cite-prefix">On 2021-01-29 2:32 p.m., Leon Anavi
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210130115216.5875-1-salerio@gmail.com">
+    <blockquote type="cite" cite="mid:20210129193230.20879-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">[Please note: This e-mail is from an EXTERNAL e-mail address]
 
-The recipe is missing the BBCLASSEXTEND so it has been added.
+Upgrade to release 1.8.1:
 
-Signed-off-by: Peter Smith <a class="moz-txt-link-rfc2396E" href="mailto:salerio@gmail.com">&lt;salerio@gmail.com&gt;</a></pre>
+- Master was renamed to main
+- Backwards compatibility fixes
+- Install dependencies before trying to build/publish
+
+License-Update: Update year
+
+Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210130115216.5875-1-salerio@gmail.com">
+    <blockquote type="cite" cite="mid:20210129193230.20879-1-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb      | 2 ++
- 1 file changed, 2 insertions(+)
+ .../0001-support-cross-complication.patch             | 11 ++++++-----
+ .../{python3-prctl_1.7.bb =&gt; python3-prctl_1.8.1.bb}  |  8 ++++----
+ 2 files changed, 10 insertions(+), 9 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-prctl_1.7.bb =&gt; python3-prctl_1.8.1.bb} (70%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb
-index ec8545dae..406da80f4 100644
---- a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb
-+++ b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb
-@@ -8,6 +8,8 @@ PYPI_PACKAGE = &quot;ruamel.yaml&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-prctl/0001-support-cross-complication.patch b/meta-python/recipes-devtools/python/python3-prctl/0001-support-cross-complication.patch
+index 775ae1b2e..98d250c74 100644
+--- a/meta-python/recipes-devtools/python/python3-prctl/0001-support-cross-complication.patch
++++ b/meta-python/recipes-devtools/python/python3-prctl/0001-support-cross-complication.patch
+@@ -1,4 +1,4 @@
+-From 9a16800738547d117284354bbcad7dd77d9d0344 Mon Sep 17 00:00:00 2001
++From 5f3911737c63a098caf73f1365320fe1b3a7638b Mon Sep 17 00:00:00 2001
+ From: Hongxu Jia <a class="moz-txt-link-rfc2396E" href="mailto:hongxu.jia@windriver.com">&lt;hongxu.jia@windriver.com&gt;</a>
+ Date: Thu, 21 Apr 2016 03:05:57 -0400
+ Subject: [PATCH] support cross-complication
+@@ -6,12 +6,13 @@ Subject: [PATCH] support cross-complication
+ Upstream-Status: Inappropriate [oe specific]
 
- inherit pypi setuptools3
+ Signed-off-by: Hongxu Jia <a class="moz-txt-link-rfc2396E" href="mailto:hongxu.jia@windriver.com">&lt;hongxu.jia@windriver.com&gt;</a>
++Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a>
+ ---
+  setup.py | 35 -----------------------------------
+  1 file changed, 35 deletions(-)
 
-+BBCLASSEXTEND = &quot;native nativesdk&quot;
-+
- SRC_URI[md5sum] = &quot;c7e4b216d9554d80be42011b448b7c61&quot;
- SRC_URI[sha256sum] = &quot;076cc0bc34f1966d920a49f18b52b6ad559fbe656a0748e3535cf7b3f29ebf9e&quot;
+ diff --git a/setup.py b/setup.py
+-index 658d1a5..e8be7eb 100755
++index eb83cfe..3f9567b 100755
+ --- a/setup.py
+ +++ b/setup.py
+ @@ -13,41 +13,6 @@ import sys
+@@ -38,13 +39,13 @@ index 658d1a5..e8be7eb 100755
+ -    sys.stderr.write(&quot;You need to install gcc to build this module\n&quot;)
+ -    sys.exit(1)
+ -
+--sp = subprocess.Popen(['cpp'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
++-sp = subprocess.Popen(['cpp'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=os.environ)
+ -sp.communicate('#include &lt;sys/prctl.h&gt;\n'.encode())
+ -if sp.returncode:
+ -    sys.stderr.write(&quot;You need to install libc development headers to build this module\n&quot;)
+ -    exit = True
+ -
+--sp = subprocess.Popen(['cpp'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
++-sp = subprocess.Popen(['cpp'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=os.environ)
+ -sp.communicate('#include &lt;sys/capability.h&gt;\n'.encode())
+ -if sp.returncode:
+ -    sys.stderr.write(&quot;You need to install libcap development headers to build this module\n<a class="moz-txt-link-rfc2396E" href="mailto:)@@-57,5+58,5@@index658d1a5..e8be7eb100755sources=['_prctlmodule.c'],depends=['securebits.h'],---2.8.1+2.17.1diff--gita/meta-python/recipes-devtools/python/python3-prctl_1.7.bbb/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bbsimilarityindex70%renamefrommeta-python/recipes-devtools/python/python3-prctl_1.7.bbrenametometa-python/recipes-devtools/python/python3-prctl_1.8.1.bbindex54620a066..b87a470b4100644---a/meta-python/recipes-devtools/python/python3-prctl_1.7.bb+++b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb@@-5,15+5,15@@limitationsinCandlinux.Thismoduleprovidesanicenon-messypython(ic)\interface.">&quot;)
+@@ -57,5 +58,5 @@ index 658d1a5..e8be7eb 100755
+                     sources = ['_prctlmodule.c'],
+                     depends = ['securebits.h'],
+ --
+-2.8.1
++2.17.1
 
+diff --git a/meta-python/recipes-devtools/python/python3-prctl_1.7.bb b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
+similarity index 70%
+rename from meta-python/recipes-devtools/python/python3-prctl_1.7.bb
+rename to meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
+index 54620a066..b87a470b4 100644
+--- a/meta-python/recipes-devtools/python/python3-prctl_1.7.bb
++++ b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
+@@ -5,15 +5,15 @@ limitations in C and linux. This module provides a nice non-messy python(ic) \
+ interface.&quot;</a>
+ SECTION = &quot;devel/python&quot;
+ LICENSE = &quot;GPLv3&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=23ff9f50449d4bd0e513df16e4d9755f">&quot;file://COPYING;md5=23ff9f50449d4bd0e513df16e4d9755f&quot;</a>
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://COPYING;md5=1475481f9ec754d758859bd2c75f6f6f">&quot;file://COPYING;md5=1475481f9ec754d758859bd2c75f6f6f&quot;</a>
+
+ S = &quot;${WORKDIR}/git&quot;
+ B = &quot;${S}&quot;
+
+-SRCREV = &quot;57cd0a7cad76e8f8792eea22ee5b5d17bae0a90f&quot;
+-PV = &quot;1.7+git${SRCPV}&quot;
++SRCREV = &quot;5e12e398eb5c4e30d7b29b02458c76d2cc780700&quot;
++PV = &quot;1.8.1+git${SRCPV}&quot;
+
+-SRC_URI = &quot;git://github.com/seveas/python-prctl;branch=master \
++SRC_URI = &quot;git://github.com/seveas/python-prctl;branch=main\
+            <a class="moz-txt-link-freetext" href="file://0001-support-cross-complication.patch">file://0001-support-cross-complication.patch</a> \
+ &quot;
+ inherit setuptools3 python3native
 --
-2.24.3 (Apple Git-128)
+2.17.1
 
 </pre>
       <br>
@@ -193,4 +334,4 @@ index ec8545dae..406da80f4 100644
   </body>
 </html>
 
---------------A084C40965CFCD225DF83BFA--
+--------------4B7986068634418DB217FC07--
