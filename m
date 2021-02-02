@@ -1,17 +1,17 @@
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.83])
- by mx.groups.io with SMTP id smtpd.web08.25.1612303781655032965
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.53])
+ by mx.groups.io with SMTP id smtpd.web12.16.1612303790912706225
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Feb 2021 14:09:42 -0800
+ Tue, 02 Feb 2021 14:09:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=mfa93e4U;
- spf=pass (domain: windriver.com, ip: 40.107.93.83, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=KC+r+zVC;
+ spf=pass (domain: windriver.com, ip: 40.107.93.53, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=a4uh/BClIAsMk7521Ycm/EIQVEjJ0wMJ/8noRBh6aCYpBQT5Ork03ECcl2g25hf+BG658OF7xMvf6NDbXG+bV2Upo2cZ1oe6SikNnNJ32PVr1tyOX8a82Mq2r13ZACQRr/9J9+XhEzVeeXHdTjhXcc0gAR/hoppIAd5Yi428H0iQApbSBzUrfFSB5FuEINVeNImKzgi1hDggkHKqbC3EYfMKOqwOfCshJblSWrX568coKEYxCil0Q7dtoK71sBmMuWl1LEBVtd4KK9eBQlcYhuZByrMyw29vSCBRIQ+ShBnGqEYL2Bo2S7BqA/ipz/cH/Dp+VtB/EYl1vkWcCVA+jw==
+ b=dEN4yYx7HNQVDvhR8+uZKmaeiLINmF7oRMfTkKvMwQuVf1PwzP4cLi6X01o+WV+KM80m+fELOcvAU1DOMLRL2rvxtwEbG++BetKoMoXiMk6Un+fC0a5qfTQitm7SWOsc2Zt24RJr6xo7+DLQ7XeJrfoa9WQpEAQ1iOPRC8w2JM8ekpV3/6PRhgMxA+J8arX47P714QcJ+jOpUUXUuQobFSM7MJ/4+ZvWyIK2dA6HHc6KMJWCdPGOx8zjVy6FYhNY3Si3RMHFznlokt96WaKoMBdrqQICkoLf3UZWBDTo0bgSs1tuUZUEE26BAVYTpHIuG7UOMUli3X/HooqqpBeRjw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=19c2KISDZ9BekyNVKiozlhPjMZvAHdVignpofFbhAM4=;
- b=IMfe5dCPBS65/G3VDon16meZ2XRqI5SO/4F5sxmHF8LR+bIZgSv6TfV5AviNvKaqjJg7iP8YT0nRuU/V6YuUii4N1yrbV4mHxV5Jq18Ygf5mtk+U1rNIWes73EEUMqwTcr4VP+nQdzN7K8hoANjHI3Yub2UalCYEGH7rFnOc1sMFqq+YGwFrhAYZ8xnSfFvuct4FyFo5/N/GXGJLBsr5HR7lHbggVtt/tcW4eLRs12ABxCFMjB1+pqrHmI43+i1OgSOL8EKMBEiJbm5wgy/OzSlgkfYObOcpja5Yokh+gBpKvHy9UI+y80nM+SRmjKnqD88rvX+A66OJGOof38xXeg==
+ bh=jFILAVj3FsyDgOcB3pVaAq7RmfwIlhHRX5BVBXoZLY0=;
+ b=VnTr5UJDXIshz7+NkuaGDHBMQQISXH8NvCzTWr5E6D4sTu/pEsFeK0RF/qffJX3EqPmWvH/O11UYjUjpeFMuT+zbL9GUqA2jnZ6Zg8WYCcJ8fG81+WmQw1399fZLOCl0tU8FaJO5Q6823bJAvRu4kb90WCRwFFouJOvkqE+1IlDxeunqYfJ97jNohCEJOTL4YFQRkre0y/2DrwhC456JDCL0/gy3+CRFgVpdjaZc+gb/Km+q64SvWQWziQXb6Vb9ud7ncwOeFXs/zzkeqiCS5qNptl9i1lcs2zAy0GImYSWuMVojQSY7v7j0NxDbhc99LHAOl9JbY3eRdS4XXJkmzg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=19c2KISDZ9BekyNVKiozlhPjMZvAHdVignpofFbhAM4=;
- b=mfa93e4UPSkLgMOzR8Yw/J3H/pQztlXQeGTTIqEpf3r+hmq3oFx+ktq2HK/8Fqp6uCnz/Qtd8LrwNma4Yu1n/IsWI+pGlLT5Cn56LLva+NSEe6aDJKjHGTEqjCoXXpCJbVwfda0bTqFgbey/6zn24CT1PHNGUTuDZiTFMUhTeUs=
+ bh=jFILAVj3FsyDgOcB3pVaAq7RmfwIlhHRX5BVBXoZLY0=;
+ b=KC+r+zVC+c6BSEHg91mVKnKp/VtVv3GsZJsowaHALW4FInueORka2EzBOH9DhwRud7tQwjSwXoBXcEr4D5nSTO4ke0cbIIV8i8rNdvwicmpQNl2vtQPtC/6wGQN9B5bYBMemmGQNaPjlUyJ61MYIT5R5c2n8vEVWCrNCpKMzAXk=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,82 +28,83 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BYAPR11MB3448.namprd11.prod.outlook.com (2603:10b6:a03:76::21) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.22; Tue, 2 Feb
- 2021 22:09:39 +0000
+ 2021 22:09:49 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3805.024; Tue, 2 Feb 2021
- 22:09:39 +0000
-Subject: Re: [oe] [meta-python][PATCH 1/5] python3-cmd2: Upgrade 1.4.0 -> 1.5.0
+ 22:09:49 +0000
+Subject: Re: [oe] [meta-python][PATCH 2/5] python3-elementpath: Upgrade 2.1.2 -> 2.1.3
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20210201124516.30135-1-leon.anavi@konsulko.com>
+ <20210201124516.30135-2-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <2c6b93fd-467d-e047-a011-314c36d756b2@windriver.com>
-Date: Tue, 2 Feb 2021 17:09:36 -0500
+Message-ID: <b9a45f3a-ce3f-c1fb-9cf5-ac9894968fd9@windriver.com>
+Date: Tue, 2 Feb 2021 17:09:46 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.7.0
-In-Reply-To: <20210201124516.30135-1-leon.anavi@konsulko.com>
+In-Reply-To: <20210201124516.30135-2-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BL0PR01CA0034.prod.exchangelabs.com (2603:10b6:208:71::47)
+X-ClientProxiedBy: BL0PR01CA0012.prod.exchangelabs.com (2603:10b6:208:71::25)
  To BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BL0PR01CA0034.prod.exchangelabs.com (2603:10b6:208:71::47) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.18 via Frontend Transport; Tue, 2 Feb 2021 22:09:38 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BL0PR01CA0012.prod.exchangelabs.com (2603:10b6:208:71::25) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.17 via Frontend Transport; Tue, 2 Feb 2021 22:09:48 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: bc719969-b10e-4e6b-34a4-08d8c7c73bc7
+X-MS-Office365-Filtering-Correlation-Id: 8cf68609-8d1a-43bc-bfd4-08d8c7c741f8
 X-MS-TrafficTypeDiagnostic: BYAPR11MB3448:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB3448AFC2565784465DACBA0E9FB59@BYAPR11MB3448.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
+	<BYAPR11MB3448CF7B31DEFBE329D089109FB59@BYAPR11MB3448.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1002;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	DtdSh1fHnnO4ad0gpXWrt+GN+yYut3D1bqwPIHVRY1ABjZ08RLOHruGTqevIiJqG+iA9meQh9nun6Fnbw7nX0/OJPSdKLZAo+O8upZYnscajeACmqNcqafpskLXOK8qqEnwap8zxSqv5RmButnQIZnbpMO8nOA0WsQrsol3YNSRi5xk7EnGhhGnjNqNc9JdNRjC+G/iuKIDTwQ1QAMBmx9ylqoiDL6BEubQGZFmB02nI2Prn0ru9S9gq74BxNBC4Cwe+6ORpBw/k8zGUacDtypS/ZuD0rkUggdDPwOf42ZeodxXO35GUjX7Y5ShfMUOCWNukeHEOzS/Sv7g55lpLAy6wWtp7YbVGh/1yqWYGixRN4MyhW8NNh5jh3E/ERoHmtSoHpC0ivTrn/QdkyVFxXOA8PJnLlSVofXT7+vZ+nUXC2zxwDH3ZqiDIBOKKVDusNxLlGk/yfrHZk4hCepenwFYRL46yo5zXOx5H6+KDQu/WEo/Dp+/oaWZF+6V42U7lfmdXZKhBdvGqDw8/OPKEXeiVs7Qj/qSXU4BoD2df57MPGhSOeRwcP3+WUfebAFPsdpmD3pA1jrAX/LIkFQexLF9oYBT1T8H2ENOkZWl4wVW0d+jZOpOM8jGc09JiPj88RZMxEV7dMV7v7ZdX34UzgQ==
+	8a8YAT5JMhkm+j7+yIQGpd9a3tMQ/J6jLmctqGz3xkND+KEVeyaySdCVMt7HGHUJrfNGSg8kp+uto4vH8k3Wo2vb+ae0333d+bGrW7KFxEM6g+ZISpQ20tHI9WisWKP2FIiN8m8AMLzBH2TV8zlA5BqDRKr212LIsKnMiy8nUYnzLMso7CPDtCnsbP/Uxjfn/8zT/Xx8hZWWOvo69Jrz4zrWmeozdakG9KpTInekav1GUarvFzyB3d2Ysz8jdpcY4FkgbtWrEva8z4LYZP+uFSCWFkzCALyBUb3FwjzNqQKpkTPOfEqkxIkJynzpc9IuorYYLJawtBt4SPtnyUxBPN5EDke6QWtxNL3lpGuxlq1nF8gRxQNowl8cvF2OICGlSO+3A9KcNYRtO9EJZDydey9ubM3s0mwsm6iXpXHwJxZCaAujqCp0BaTVsqdYldzDh6oS7k5Cqoe9qhHPqIhDvkcxjZlLRHCerMO/rDVNV+c+TA4aRr20McKSs5jQiB7Lpneth1+rLxkRBm0u/LcNDRzQeyORNHh2+WxPfPPiEa4ULZNDV4Vv1pbMlLg84wkDgfY/eBzMMvr71qMcu1GdmqkJ0zTNnk/zxp3KUJfww7rWDVXNbMQOki/p/5n/urWNJSJCnQ/GN5Rod8m1qvjCUA==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(366004)(346002)(396003)(39850400004)(136003)(66946007)(31696002)(186003)(86362001)(26005)(33964004)(8936002)(31686004)(8676002)(478600001)(52116002)(83380400001)(316002)(16526019)(966005)(5660300002)(956004)(2906002)(166002)(6486002)(2616005)(53546011)(16576012)(66556008)(66476007)(36756003)(44832011)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?RDZnZ1pESVRybFJURVcxYkR5a3ZteWhSWVRFYjhQZ1JrUGNQNSs1UjM4dllE?=
- =?utf-8?B?aUc3NStST1lGYlRvanFZeE5XZFF2UFhUVHMrcm53ZlZ3cURQdmY1MldVMGFj?=
- =?utf-8?B?L0VMaWY3ODB5dkdTbEpTMGRQb1QzV2VkZWZ5Z0p4VEVMeDZMakREcWdwV2VZ?=
- =?utf-8?B?cWN6RFNWZHR2SnU4QllhSW9UTGhBcDlPd0crNmxYTnZLdXdtdFhSUTM0SE16?=
- =?utf-8?B?SEkzSTgwNUNrUkpnK29FTkRCK1JnSGk1RkhiUXBpV0JJNmQvVjE3SEM4UDQx?=
- =?utf-8?B?d3lGY1RhZmNHQm5ub25XUGp3eld1dmxscnV6K1ZhUFNwdUI5YlVGMWJSb0cx?=
- =?utf-8?B?TzdlWFN1eGxuaUhIcHNPMm9yQVJIV0FkdFVZTEdpbEprdlprUHVhYXBUZ29V?=
- =?utf-8?B?cXhYU29OSU9EQ0NpblgvRmEwb3VFcG5yVms3Q0xKWDFCZE8wTDYzK2N1U0U3?=
- =?utf-8?B?NzZoWmxPRTZLSnJDMVR2ZHpBVHFrYXlUeW1ZanYrRW1ndVNDWDIyeWU1czIv?=
- =?utf-8?B?YmdSVXB1eTdiMnpneDZiTTdCdjZNb0hYckNHelM3MXdYaUtIWTQrS01PREJr?=
- =?utf-8?B?dndXRS9YY3BZQ3dTWERPRFIydUFBREE5cHJDZURPT1h4bUNpSndFWVB3QTVi?=
- =?utf-8?B?TnkvT2F4Q3B4d3lRWmN2ai8wRnhib0hmbEppUmFFbmFjWm8wYTh6emdTRFRh?=
- =?utf-8?B?bmowa1ZSYVViODdOQ3IvdVRSRE1pTEpLL1VNc3FDQkVWdk9DNkdXeE1aajhZ?=
- =?utf-8?B?NXN4d3JJTTc2RUk0WkFiZm1KVnVaNDU4L0N1OUMybHZjTTV5NjJ0VVVNV2NQ?=
- =?utf-8?B?Y1JTTlZ2REJaOC8rUnd2MUxFUGVQd01uZzl4MDVmZk1ZYkVPbkRzT29iZzBx?=
- =?utf-8?B?SWxGOGVWZEptdEd1UnZ3VURTUWdyTE9RbXIvRFNvdml6RDk5SDZQSXQ0Ukxx?=
- =?utf-8?B?KzNFQVRLWUZLVnRaTWNhVzh0U3JQYzAwUE9LSThkV1poaURWWXhWTHhKUDZO?=
- =?utf-8?B?aTJ2d3Y4Sk91YUVpcktqQ1E3elB2OUtaMjgwUVZpT1FscGpabW1kTVVZWTZY?=
- =?utf-8?B?MzRycTMzeVF0aEN3aTdHQ255aW83emlSVkMxWGtiUm84cFVrc0RwdE9kaUdJ?=
- =?utf-8?B?YkR2d0Nja3pweVlsNFExWE44U3Uxd2sxbmVkOHQzOVRaODNtZVBxMWZtQW5Y?=
- =?utf-8?B?YXNPdHRnT21KUW5HbVVKaCt4Y2krcnVTeDU4MnNTc0tIb1JYSG1GcGkvNDR1?=
- =?utf-8?B?YnFkVjNnUDczV08zNzcwWE13cWVPclQ3T1A3UUlhd2YvSWdGZnB5MlA5RFhP?=
- =?utf-8?B?cWZQY3pUYmE2S1Y5ZVQ0SFlHdU1UWFd6d3N6bUFqdUxEWTl2RFJJN0J2Z2F1?=
- =?utf-8?B?TCtJTDQ2SDlRY1A0d255d1dWb0pnM3Y4TUprV1N3T241dGVhK3FFMjNRSW9I?=
- =?utf-8?B?aDRNQ2QzQjNDTHp0TUhqUlQvaHRBVUlscWJTRFNRPT0=?=
+	=?utf-8?B?Y1hxaUlSV3NYVUVveVgwVk9UMnIvTDJzcW0rQ1RBMnlmWHNXTXd1QklBSHpF?=
+ =?utf-8?B?anpEY3lwZURJa2xFYlI0djF6amZiSkt2U1dhZE5QaDUxb3NsOW1YN3IvdTl3?=
+ =?utf-8?B?VVh1bFIrdEkxdTViN0VubG8yWGdOMEhwcEcwc3FISTN1TEdWVHBxTWhZSU5J?=
+ =?utf-8?B?RjJCdFNHdXZGNjdGdCsxMGpmVHNtQjhLOGI1c0JKMkgzWTNGelBadDU4dlFk?=
+ =?utf-8?B?OW1QTEVGK2xVRVNpTHUrWWFHR2IxSmNDTkY2QzVSU0NvN3k1RDBoU280K1RK?=
+ =?utf-8?B?Nnd4dEZzNGtUbi9kSnlUbUpkSUkvMXltOGFKamgxZGRheS9DeU5HdEtqcjVW?=
+ =?utf-8?B?YjlJUmt1NU5yQVVXTGNGbVllU1pTUEZET3N0WjEwRTYzdXk5dnMzY1Jxc0FK?=
+ =?utf-8?B?andHREw1YkF2eTJQRVVWMUdiTk5DUlB3cjBQakJVdzJCUzZyaVY0OW96cmJz?=
+ =?utf-8?B?M3A4MERSTFE1T1hkUjdpYldBZVZGaVdWNVRZZHdPSGNsL0ZoQlg1YlpSOEZx?=
+ =?utf-8?B?YmM2amxHZnFTL21yTlZFTWFJNm1JNGFQV2gwc0RRVlNqRUFQcUZiL0UrQys3?=
+ =?utf-8?B?T2hlaU8zeGNLVUQ4VnBsWDFDYkxTVC9XYzNjdTZMMStNOHF5M05SSHB3MDlL?=
+ =?utf-8?B?YmI2UGtlTDhnbzRRZzcwOTBneG5qbTQzbXdNbEl1RXZhczBPdDdJRWJlNkdi?=
+ =?utf-8?B?TVZCSnNKM2hvRlZSejR1bVZpenEwcE9UL05zVHNIQ3Z6Z3JoTitQOVRrZ05o?=
+ =?utf-8?B?WldkQW5FVElRUHhjRE5hbWVsOWd6ZmQ4VE9IV1V6cXMvR3FLZk1VdlJ0MWFP?=
+ =?utf-8?B?WkJpQlFWVFczRlh1eVAvRXBBbTAxNnZEdWFqcFlRTTZUYjFwQ2pjZ3NCVjNs?=
+ =?utf-8?B?MnpJS1YyQlY1bTJDbUd2MDdmYWw5M285d2Y2RFg3MVhTOEFXQnNJYTFWSG5P?=
+ =?utf-8?B?RVFuTkZ0MDBVUENVQUdkQ0lSOE1iYitCM1FWU0l0aER6MXhXZFNnQlNZcVhj?=
+ =?utf-8?B?QXlXT29xd0R6QjkzSHVYeHRKcFc2RDhMbkJDbzVTT1hBVTVYaU5LNmZMSHlv?=
+ =?utf-8?B?b1VSNjErWjlmSkQxcndVRXh2eEMwK3ZWd1NqaFF5TVBNaDgzR21jeDc1ZzhY?=
+ =?utf-8?B?RnAwVTZWVCtJNXF2dzBkYkVFeFBiVDUwNlhUalVjMlpFdElUUXFwaFoza1Jr?=
+ =?utf-8?B?clB3cW84NzNXNHRTUExnUi96aXJGdWx5V1N2REpsOEcwRlNEK3BjVHAyaldU?=
+ =?utf-8?B?UVJ2UGIyaFFFYkZLMnpYMTVEaTFyVmphbGVIcGNreE5URTdJemhjamd2TmY3?=
+ =?utf-8?B?aEVWanhEMFV4anQxU0lhZ1hudTltSlhUMW8wRWVYMENNTWsyNDN6VnpKejdh?=
+ =?utf-8?B?REdWaVlDVTd4OFMxZ0JwVXBmSW5Yak9Vb09ONkpWNHVtMmsrdFBhU1FNemdt?=
+ =?utf-8?B?ajl5VmFzMjB1SmY2RzZqekk5b1RFbnN5dHFndXZRPT0=?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bc719969-b10e-4e6b-34a4-08d8c7c73bc7
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8cf68609-8d1a-43bc-bfd4-08d8c7c741f8
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Feb 2021 22:09:39.1053
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Feb 2021 22:09:49.3744
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GH8ruD7VnEJ8CeLyey4izdkoTw4r4RWKlamaWWdfLW3n6NSiWsll3PlcNPmz07nmfUARbq8GQfH8e3zLupo0cwxIZs3WYkE5GIymEmVOH3I=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6yZTe6/QDWPKGuI90mbTPKgNLENQz6gJRt6Y5GVrikUqozt15q5YmXL3qAGuaoRkZB9weoTTK6cfexPCpapq3xY8ky4yRasjm6NoXNgm4EU=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3448
 Content-Type: multipart/alternative;
- boundary="------------4B51BCE29C0265C0E55C7942"
+ boundary="------------A120050FA182FE7DDF4549B2"
 Content-Language: en-US
 
---------------4B51BCE29C0265C0E55C7942
+--------------A120050FA182FE7DDF4549B2
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -111,47 +112,35 @@ Content-Transfer-Encoding: 7bit
 On 2021-02-01 7:45 a.m., Leon Anavi wrote:
 > [Please note: This e-mail is from an EXTERNAL e-mail address]
 >
-> Upgrade to release 1.5.0:
+> Upgrade to release 2.1.3:
 >
-> - Fixed bug where setting always_show_hint=True did not show a
->    hint when completing Settables
-> - Fixed bug in editor detection logic on Linux systems that do not
->    have which
-> - Fixed bug in table creator where column headers with tabs would
->    result in an incorrect width calculation
-> - Fixed FileNotFoundError which occurred when running history
->    --clear and no history file existed.
-> - Added silent_startup_script option to cmd2.Cmd.__init__(). If
->    True, then the startup script's output will be suppressed.
->    Anything written to stderr will still display.
-> - cmd2 now uses pyreadline3 when running Python 3.8 or greater
->    on Windows
-> - This is the last release planned to support Python 3.5
+> - Extend tests for XPath 2.0 with minor fixes
+> - Fix fn:round-half-to-even
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-cmd2_1.4.0.bb => python3-cmd2_1.5.0.bb}    | 3 +--
+>   ...thon3-elementpath_2.1.2.bb => python3-elementpath_2.1.3.bb} | 3 +--
 >   1 file changed, 1 insertion(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-cmd2_1.4.0.bb => python3-cmd2_1.5.0.bb} (75%)
+>   rename meta-python/recipes-devtools/python/{python3-elementpath_2.1.2.bb => python3-elementpath_2.1.3.bb} (74%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.4.0.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.5.0.bb
-> similarity index 75%
-> rename from meta-python/recipes-devtools/python/python3-cmd2_1.4.0.bb
-> rename to meta-python/recipes-devtools/python/python3-cmd2_1.5.0.bb
-> index dfe493bd2..18c7a6699 100644
-> --- a/meta-python/recipes-devtools/python/python3-cmd2_1.4.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-cmd2_1.5.0.bb
-> @@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def"
+> diff --git a/meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb b/meta-python/recipes-devtools/python/python3-elementpath_2.1.3.bb
+> similarity index 74%
+> rename from meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb
+> rename to meta-python/recipes-devtools/python/python3-elementpath_2.1.3.bb
+> index f47f15222..2cba4fb5c 100644
+> --- a/meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb
+> +++ b/meta-python/recipes-devtools/python/python3-elementpath_2.1.3.bb
+> @@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/elementpath"
+>   LICENSE = "MIT"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=5dbb7fb7d72da3921202dd7b995d3ecf"
 >
->   DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+> -SRC_URI[md5sum] = "887f60e9c4fb9b0804a38372b2798101"
+> -SRC_URI[sha256sum] = "23e1fed8d196d9a6cc4d220ef11fbe7eb8cff3a27848621c447e9d96134b2085"
+> +SRC_URI[sha256sum] = "b729d9376cc0f76479c9b0cef30cc0d3c9082ccb4507caa0da1a5e4964926960"
 >
-> -SRC_URI[md5sum] = "520afccc1d46f833d117a23fab76ed8f"
-> -SRC_URI[sha256sum] = "e59fa932418603af4e046a96c8985812b05af8a73bfd9d7a386cd1b02c6ab687"
-> +SRC_URI[sha256sum] = "701a8c9975c4abc45e5d13906ab149f959f812869106347323a3f89ac0e82a62"
->
+>   PYPI_PACKAGE = "elementpath"
 >   inherit pypi setuptools3
->
 > --
 > 2.17.1
 >
@@ -159,7 +148,7 @@ Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > 
 >
 
---------------4B51BCE29C0265C0E55C7942
+--------------A120050FA182FE7DDF4549B2
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -172,53 +161,41 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2021-02-01 7:45 a.m., Leon Anavi
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210201124516.30135-1-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210201124516.30135-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">[Please note: This e-mail is from an EXTERNAL e-mail address]
 
-Upgrade to release 1.5.0:
+Upgrade to release 2.1.3:
 
-- Fixed bug where setting always_show_hint=True did not show a
-  hint when completing Settables
-- Fixed bug in editor detection logic on Linux systems that do not
-  have which
-- Fixed bug in table creator where column headers with tabs would
-  result in an incorrect width calculation
-- Fixed FileNotFoundError which occurred when running history
-  --clear and no history file existed.
-- Added silent_startup_script option to cmd2.Cmd.__init__(). If
-  True, then the startup script's output will be suppressed.
-  Anything written to stderr will still display.
-- cmd2 now uses pyreadline3 when running Python 3.8 or greater
-  on Windows
-- This is the last release planned to support Python 3.5
+- Extend tests for XPath 2.0 with minor fixes
+- Fix fn:round-half-to-even
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210201124516.30135-1-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210201124516.30135-2-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-cmd2_1.4.0.bb =&gt; python3-cmd2_1.5.0.bb}    | 3 +--
+ ...thon3-elementpath_2.1.2.bb =&gt; python3-elementpath_2.1.3.bb} | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-cmd2_1.4.0.bb =&gt; python3-cmd2_1.5.0.bb} (75%)
+ rename meta-python/recipes-devtools/python/{python3-elementpath_2.1.2.bb =&gt; python3-elementpath_2.1.3.bb} (74%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cmd2_1.4.0.bb b/meta-python/recipes-devtools/python/python3-cmd2_1.5.0.bb
-similarity index 75%
-rename from meta-python/recipes-devtools/python/python3-cmd2_1.4.0.bb
-rename to meta-python/recipes-devtools/python/python3-cmd2_1.5.0.bb
-index dfe493bd2..18c7a6699 100644
---- a/meta-python/recipes-devtools/python/python3-cmd2_1.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-cmd2_1.5.0.bb
-@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def">&quot;file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb b/meta-python/recipes-devtools/python/python3-elementpath_2.1.3.bb
+similarity index 74%
+rename from meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb
+rename to meta-python/recipes-devtools/python/python3-elementpath_2.1.3.bb
+index f47f15222..2cba4fb5c 100644
+--- a/meta-python/recipes-devtools/python/python3-elementpath_2.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-elementpath_2.1.3.bb
+@@ -3,8 +3,7 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/sissaschool/elementpath">&quot;https://github.com/sissaschool/elementpath&quot;</a>
+ LICENSE = &quot;MIT&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=5dbb7fb7d72da3921202dd7b995d3ecf">&quot;file://LICENSE;md5=5dbb7fb7d72da3921202dd7b995d3ecf&quot;</a>
 
- DEPENDS += &quot;${PYTHON_PN}-setuptools-scm-native&quot;
+-SRC_URI[md5sum] = &quot;887f60e9c4fb9b0804a38372b2798101&quot;
+-SRC_URI[sha256sum] = &quot;23e1fed8d196d9a6cc4d220ef11fbe7eb8cff3a27848621c447e9d96134b2085&quot;
++SRC_URI[sha256sum] = &quot;b729d9376cc0f76479c9b0cef30cc0d3c9082ccb4507caa0da1a5e4964926960&quot;
 
--SRC_URI[md5sum] = &quot;520afccc1d46f833d117a23fab76ed8f&quot;
--SRC_URI[sha256sum] = &quot;e59fa932418603af4e046a96c8985812b05af8a73bfd9d7a386cd1b02c6ab687&quot;
-+SRC_URI[sha256sum] = &quot;701a8c9975c4abc45e5d13906ab149f959f812869106347323a3f89ac0e82a62&quot;
-
+ PYPI_PACKAGE = &quot;elementpath&quot;
  inherit pypi setuptools3
-
 --
 2.17.1
 
@@ -233,4 +210,4 @@ index dfe493bd2..18c7a6699 100644
   </body>
 </html>
 
---------------4B51BCE29C0265C0E55C7942--
+--------------A120050FA182FE7DDF4549B2--
