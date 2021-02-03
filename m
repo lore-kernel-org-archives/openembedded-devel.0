@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.10854.1612366710645233292
+ by mx.groups.io with SMTP id smtpd.web08.11080.1612366711396393931
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 03 Feb 2021 07:38:31 -0800
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=46228 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1l7KEf-0007tX-3F; Wed, 03 Feb 2021 17:38:29 +0200
+	id 1l7KEg-0007tX-1I; Wed, 03 Feb 2021 17:38:30 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/5] python3-graphviz: Upgrade 0.14.2 -> 0.16
-Date: Wed,  3 Feb 2021 17:38:20 +0200
-Message-Id: <20210203153822.25077-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/5] python3-tqdm: Upgrade 4.51.0 -> 4.56.0
+Date: Wed,  3 Feb 2021 17:38:21 +0200
+Message-Id: <20210203153822.25077-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210203153822.25077-1-leon.anavi@konsulko.com>
 References: <20210203153822.25077-1-leon.anavi@konsulko.com>
@@ -30,40 +30,41 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.16:
+Upgrade to release 4.56.0:
 
-- Add ``.unflatten()`` method to ``Graph``, ``Digraph``, and
-  ``Source``. Add standalone ``unflatten()``.
-- Make ``Source.__str__()`` return the ``.source`` instead of the
-  ``repr()`` (like ``Graph`` and ``Digraph``).
-- Render with ``dot -K<engine> ...`` instead of ``<engine> ...``
-  internally.
-- Add documentation hint to archived upstream version for Windows.
-- Re-render most documentation graphs with Graphviz 2.44.1.
+- add tqdm.tk
+- add tqdm.rich
+- minor formatting improvements for tqdm.gui
+- fix display() inheritance/override
+- add tests
+- add documentation
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-graphviz_0.14.2.bb => python3-graphviz_0.16.bb}   | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-graphviz_0.14.2.bb => python3-graphviz_0.16.bb} (70%)
+ .../{python3-tqdm_4.51.0.bb => python3-tqdm_4.56.0.bb}       | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-tqdm_4.51.0.bb => python3-tqdm_4.56.0.bb} (65%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-graphviz_0.14.2.bb b/meta-python/recipes-devtools/python/python3-graphviz_0.16.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-graphviz_0.14.2.bb
-rename to meta-python/recipes-devtools/python/python3-graphviz_0.16.bb
-index 0de4c8f40..1af657098 100644
---- a/meta-python/recipes-devtools/python/python3-graphviz_0.14.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-graphviz_0.16.bb
-@@ -3,8 +3,7 @@ HOMEPAGE = "https://graphviz.readthedocs.io/en/stable/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f7831c564aeff14e68aa4ff7a93dc89f"
+diff --git a/meta-python/recipes-devtools/python/python3-tqdm_4.51.0.bb b/meta-python/recipes-devtools/python/python3-tqdm_4.56.0.bb
+similarity index 65%
+rename from meta-python/recipes-devtools/python/python3-tqdm_4.51.0.bb
+rename to meta-python/recipes-devtools/python/python3-tqdm_4.56.0.bb
+index e4510ad44..d4baf6f22 100644
+--- a/meta-python/recipes-devtools/python/python3-tqdm_4.51.0.bb
++++ b/meta-python/recipes-devtools/python/python3-tqdm_4.56.0.bb
+@@ -5,9 +5,10 @@ SECTION = "devel/python"
+ LICENSE = "MIT & MPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=7ea57584e3f8bbde2ae3e1537551de25"
  
--SRC_URI[md5sum] = "7123efabb68270f579525df74bf8b0c9"
--SRC_URI[sha256sum] = "92b7637ece63c77e3d39221ae1f4df98e9256cb449e9860c598335b34496d195"
-+SRC_URI[sha256sum] = "d2d25af1c199cad567ce4806f0449cb74eb30cf451fd7597251e1da099ac6e57"
+-SRC_URI[md5sum] = "b188c2dc7802c19b262971e566c265ce"
+-SRC_URI[sha256sum] = "ef54779f1c09f346b2b5a8e5c61f96fbcb639929e640e59f8cf810794f406432"
++SRC_URI[sha256sum] = "fe3d08dd00a526850568d542ff9de9bbc2a09a791da3c334f3213d8d0bbbca65"
  
  inherit pypi setuptools3
  
++DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
++
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
