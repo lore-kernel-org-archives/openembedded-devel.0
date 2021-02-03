@@ -1,112 +1,191 @@
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web12.3966.1612320590286246002
+Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com [209.85.219.44])
+ by mx.groups.io with SMTP id smtpd.web12.4107.1612321331148211890
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Feb 2021 18:49:50 -0800
+ Tue, 02 Feb 2021 19:02:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=pSVKV8KA;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id q72so2123877pjq.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Feb 2021 18:49:50 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=croRZ0Q6;
+ spf=pass (domain: gmail.com, ip: 209.85.219.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f44.google.com with SMTP id l11so11028080qvt.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Feb 2021 19:02:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=lbHITVDOqusr95sqKbFs/w0JtitiU6IIEIUFkPbdDkE=;
-        b=pSVKV8KA3dzGd4pVKE6f/MoFozKPTkcwl3N6YXNxM2DciCKGfvnrY8DlK75T+v3uHc
-         TD9VxmYWTSesghGmAMR9ha6z5Aqkk8JiQPSSrj/OXbS7ZUREJoKtFe+O7AYoWqNd32vT
-         mY1WIb9ZxAuNOEtk7PjaxHFQA1FeQsfF0V5zwKZ9nqPyszZ1C0eIItsmH4de7nr/qouL
-         a/6TXIlxKRCP4B0hpqp/eqlgxMDikZMPmt2WPFALu7x53XVRLld5Z1hUHrKfq7gdC9vY
-         zV6wNsEYDFKq2eX35Vg1A/oZy1axh/7gklRlQib/4BMr7kXIA3S6qby1u85rGFmUwMbo
-         nEVw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=AdAxlx+m39Yol4aCkAWbQb0yVzT0uI0Eq6fEXzyHero=;
+        b=croRZ0Q6Hb8CYN0e18RaUOcAOgEn50mWyWC8Ll6mNraM3OdQh6NZ+ucJomFLf3RWoN
+         SOC6nRkCSrgzib75jWdDQEHtdLbredu/Qd8Vx5ytHy/XOz/RA6jXhoJy4QCNiBYeB4Ai
+         xD7RrlItZoDMuD3vI+XMmxJy0grl25J8WTusKw7WU+23d19bdL6T58Wf3B4tF7fVWXCJ
+         JnVZJhzI7SEPx8Llu38iYFO+WZqlCqAnpTnkLtkeZUkNPDIwa4TCwu73PaTKVM2YNIp3
+         bxbtSNg/HwiDoy15uwOGVQq4Hc+med4P+CT6/TTIufkuWz72KiAZHHvVOTO/gFsz4uxV
+         MvXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=lbHITVDOqusr95sqKbFs/w0JtitiU6IIEIUFkPbdDkE=;
-        b=U+QwLRIojTJBMPSqu2XEW6Id3I5jBGFJ02tPINOQuKsZvO48VXunvN+JPGZh9luqFq
-         yBxihDAD9Dts7bBVPQy0aPnwNy4Yo1/Ib7/+Jw5bEPHK6mgFpVmqmpD4+lGVl7E937at
-         adlGqULx/5tv787ec6SqJrMbZGZbHptXYNJnJ9oBT59tCdhY43mEORKIgX9Z1x3NDPBo
-         HA+PHcg7g5cTYG5cT/erd0CSGXrLmHX7lXExD0OOQBWGPhBRhoYIGC98748JSeM2Ea1V
-         RzLFkN6l412Dz4yLmBqvv4m4tkMLxxSPLdvfcTH2Ajhs5ESR6sqSfjJXePxG+SphpMok
-         cxZQ==
-X-Gm-Message-State: AOAM533mNUdnjgiC5y2RR6snFC76gMfREqDXdKpB1p02VIIqvm+OKNGi
-	EFV+l1SJhrT5lMO+BC+IIK7patFevOKXXQ==
-X-Google-Smtp-Source: ABdhPJxZchPyPQdkqypZLkJgHOEelQjkvJbv4dB8bUSV5lZmRRK5tcg0/FpSedlIMdfXhkCE5Husdw==
-X-Received: by 2002:a17:90a:6393:: with SMTP id f19mr948117pjj.230.1612320589502;
-        Tue, 02 Feb 2021 18:49:49 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::9296])
-        by smtp.gmail.com with ESMTPSA id z21sm287010pgk.15.2021.02.02.18.49.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Feb 2021 18:49:48 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] libssh2: Fix build with autoconf 2.70+
-Date: Tue,  2 Feb 2021 18:49:46 -0800
-Message-Id: <20210203024946.2787750-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=AdAxlx+m39Yol4aCkAWbQb0yVzT0uI0Eq6fEXzyHero=;
+        b=HlDhsFmvwXzWcadBwuJ7Z0ZsWablN5CYexPgX+R8nCzM3IiKE6mJFMsCciClRPrL5Z
+         NMdZ+pwhQhKIIvsutUgYYQD4XB0VR/5ZpGl3gOZfdSjGUlnCOpRk4CFSza1xpaIL184M
+         err2aI1wq3QBhognfUHmt6dppkZM2pjx2qvg/+4PAkfsVtdF2jPXYJFWRYygsTtKnh9I
+         taumSbQiGurBjSljec2YT9Omo6E8l1xpeCXs2zKUzjIhUhl2ko8oU2JEyEkZAYz9BL6c
+         s6IhCxfkhLNBiWD6hddYhrnkTV2pOUUNgdyEmh4ihJptPikvsa/ea/ecIixUtnSf95SM
+         js1Q==
+X-Gm-Message-State: AOAM531hPkrWoENhgL6R//SyqwbV8IW6exE11+nEqFqcOSXoS2Z6hvyD
+	QqNMXP6BojvAn2PvMWaj74DFoTsuEPh3PGmetWw=
+X-Google-Smtp-Source: ABdhPJxX+NJniCsvbWc5QzWFwgLGDB/3Jk9DaOG4unOdIk0DXGjcrGYGX501gI86VP2AwQ9jrNNzAxm4nqrcPylDtNw=
+X-Received: by 2002:a0c:eda6:: with SMTP id h6mr1111611qvr.19.1612321330158;
+ Tue, 02 Feb 2021 19:02:10 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <8f242d61-4dea-070a-217d-657e2204a807@windriver.com>
+ <CAAnfSTsku9yTFYKCMVkmKq=77V8XGgq9pdO5n_PPb_ttHWnd3w@mail.gmail.com> <3aeac6ad-c5cc-dba9-2c3e-6caaad82aa2d@windriver.com>
+In-Reply-To: <3aeac6ad-c5cc-dba9-2c3e-6caaad82aa2d@windriver.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Tue, 2 Feb 2021 19:01:44 -0800
+Message-ID: <CAMKF1soycKg2my8x_2J6o5p9peiGh1ngQEJuiTu9H2GusE0XYw@mail.gmail.com>
+Subject: Re: Help with dealing with autoconf uprev affected packages?
+To: Randy MacLeod <randy.macleod@windriver.com>
+Cc: Yi Fan Yu <yifan.yu@windriver.com>, "Jia, Hongxu" <Hongxu.Jia@windriver.com>, 
+	"Chen, Qi" <qi.chen@windriver.com>, Ross Burton <ross@burtonini.com>, 
+	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Fixes
- configure.ac:130: error: m4_undefine: undefined macro: backend
+On Tue, Feb 2, 2021 at 11:18 AM Randy MacLeod
+<randy.macleod@windriver.com> wrote:
+>
+> On 2021-02-02 12:11 p.m., Ross Burton wrote:
+> > If you have anyone willing to work through some of the recipes in that
+> > list then that will be much appreciated.
+> >
+> > If the issues are not obvious feel free to reach out to me.
+> >
+> > Ross
+>
+>
+> YiFan, Hongxu, Qi, and anyone else.
+>
+>
+> YP is upreving autoconf to 2.71 in oe-core/master-next
+> after ~7 years of using autoconf-2.69!
+>
+> It breaks a few packages in meta-openembedded and I hear
+> from Richard/Ross that usually an uprev will work for both
+> the existing version of autoconf and the new version.
+>
+> Can we split up the list below among the team and do uprevs?
+> I have checked the meta-oe list and I don't see any uprevs in the queue.
+>
+> I'll take libssh2 since I need to move it to oe-core for rust.
+>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...ditionally-undefine-backend-m4-macro.patch | 30 +++++++++++++++++++
- .../recipes-support/libssh2/libssh2_1.9.0.bb  |  1 +
- 2 files changed, 31 insertions(+)
- create mode 100644 meta-oe/recipes-support/libssh2/files/0001-configure-Conditionally-undefine-backend-m4-macro.patch
+Thanks for chiming in Randy and team, really appreciate it. I have
+fixed libssh2 already and sent the patch to ml since
+it was breaking my image builds.
 
-diff --git a/meta-oe/recipes-support/libssh2/files/0001-configure-Conditionally-undefine-backend-m4-macro.patch b/meta-oe/recipes-support/libssh2/files/0001-configure-Conditionally-undefine-backend-m4-macro.patch
-new file mode 100644
-index 0000000000..1128c7ea0c
---- /dev/null
-+++ b/meta-oe/recipes-support/libssh2/files/0001-configure-Conditionally-undefine-backend-m4-macro.patch
-@@ -0,0 +1,30 @@
-+From efe7101786193eaddb749c0583af6b54aec6f289 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 2 Feb 2021 18:45:16 -0800
-+Subject: [PATCH] configure: Conditionally undefine backend m4 macro
-+
-+Unlike the M4 builtin, this macro fails if macro is not defined
-+therefore recover the behavior of the builtin.
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index fe5054a..758f8c2 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -127,7 +127,7 @@ fi
-+ m4_set_foreach([crypto_backends], [backend],
-+   [AM_CONDITIONAL(m4_toupper(backend), test "$found_crypto" = "backend")]
-+ )
-+-m4_undefine([backend])
-++m4_ifdef([backend], [m4_undefine([backend])])
-+ 
-+ 
-+ # libz
-+-- 
-+2.30.0
-+
-diff --git a/meta-oe/recipes-support/libssh2/libssh2_1.9.0.bb b/meta-oe/recipes-support/libssh2/libssh2_1.9.0.bb
-index 4a5a05060c..0b8ccbd217 100644
---- a/meta-oe/recipes-support/libssh2/libssh2_1.9.0.bb
-+++ b/meta-oe/recipes-support/libssh2/libssh2_1.9.0.bb
-@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c5cf34fc0acb44b082ef50ef5e4354ca"
- 
- SRC_URI = "http://www.libssh2.org/download/${BP}.tar.gz \
-            file://CVE-2019-17498.patch \
-+           file://0001-configure-Conditionally-undefine-backend-m4-macro.patch \
-            file://run-ptest \
- "
- 
--- 
-2.30.0
-
+> We (Wind River) are mainly interested in:
+>
+> - libssh2 - Randy 1.9.1 is close (days/weeks?) to release:
+> https://www.libssh2.org/mail/libssh2-devel-archive-2021-01/0020.shtml
+>
+> - lksctp-tools
+>
+> - openldap
+>
+> - freeradius
+>
+> - libmcrypt - YiFan
+>
+> - iperf3 - YiFan
+>
+> - spice
+>
+> - postgresql
+>
+>
+> but given your other work, please consider helping with the other packages.
+>
+> This should be easy work and done soon. If there's a problem, reply all
+> and let
+> Ross know what's going wrong.
+>
+>
+> Other packages:
+>
+> - pidgin
+>
+> - geany
+>
+> - npdi
+>
+> - transmission
+>
+> - yasm
+>
+> - hidapi
+>
+> - libstatgrab
+>
+> - keepalived
+>
+>
+> ../Randy
+>
+>
+> >
+> > On Tue, 2 Feb 2021 at 17:07, Randy MacLeod <randy.macleod@windriver.com> wrote:
+> >> Khem, Ross,
+> >>
+> >> Richard mentioned on the YP call that there are some packages in
+> >> meta-openembedded that are affected by the autoconf uprev
+> >> in master-next.
+> >>
+> >> Do you need any help fixing/upreving those recipes
+> >> from say a WR student or more experienced WR Beijing developers?
+> >>
+> >> ../Randy
+> >>
+> >> commit a38a6203b4c584c91fc69c461bb2e1c8f4fcb389 (master-next)
+> >> Author: Richard Purdie <richard.purdie@linuxfoundation.org>
+> >> Date:   Fri Jan 29 10:57:42 2021
+> >>
+> >>       autoconf: Upgrade 2.70 -> 2.71
+> >>
+> >>       Drop patches backported from autoconf master.
+> >>
+> >>       Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+> >>
+> >>
+> >>
+> >> https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/895/steps/12/logs/stdio
+> >>
+> >> Summary: 18 tasks failed:
+> >>     .../meta-oe/recipes-support/libssh2/libssh2_1.9.0.bb:do_configure
+> >>
+> >> .../meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb:do_configure
+> >>     .../meta-oe/recipes-support/openldap/openldap_2.4.57.bb:do_configure
+> >>     .../meta-oe/recipes-dbs/postgresql/postgresql_13.1.bb:do_configure
+> >>     .../meta-oe/recipes-support/pidgin/pidgin_2.13.0.bb:do_configure
+> >>     .../meta-oe/recipes-devtools/geany/geany_1.36.bb:do_configure
+> >>     .../meta-networking/recipes-support/ntopng/ndpi_3.4.bb:do_configure
+> >>
+> >> virtual:native:.../meta-oe/recipes-support/libssh2/libssh2_1.9.0.bb:do_configure
+> >>
+> >> .../meta-oe/recipes-connectivity/transmission/transmission_git.bb:do_configure
+> >>
+> >> .../meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb:do_configure
+> >>     .../meta-oe/recipes-devtools/yasm/yasm_git.bb:do_configure
+> >>     .../meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb:do_configure
+> >>     .../meta-oe/recipes-support/hidapi/hidapi_git.bb:do_configure
+> >>     .../meta-oe/recipes-crypto/libmcrypt/libmcrypt_2.5.8.bb:do_configure
+> >>     .../meta-oe/recipes-benchmark/iperf3/iperf3_3.9.bb:do_configure
+> >>     .../meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb:do_configure
+> >>
+> >> .../meta-networking/recipes-daemons/keepalived/keepalived_2.1.5.bb:do_configure
+> >>     .../meta-networking/recipes-support/spice/spice_git.bb:do_configure
+> >> --
+> >> # Randy MacLeod
+> >> # Wind River Linux
+>
+>
+> --
+> # Randy MacLeod
+> # Wind River Linux
+>
