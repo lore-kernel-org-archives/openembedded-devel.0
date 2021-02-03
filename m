@@ -1,82 +1,75 @@
-Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com [209.85.167.65])
- by mx.groups.io with SMTP id smtpd.web08.1080.1612379070568034618
+Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com [209.85.167.67])
+ by mx.groups.io with SMTP id smtpd.web10.2159.1612383363563688037
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Feb 2021 11:04:30 -0800
+ Wed, 03 Feb 2021 12:16:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=mN/omPsi;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.65, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f65.google.com with SMTP id i187so762171lfd.4
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Feb 2021 11:04:30 -0800 (PST)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=NV3reysw;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.67, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f67.google.com with SMTP id h7so1039476lfc.6
+        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Feb 2021 12:16:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=P628cWFX1WnFisi3FewoGlZsZAC2g4CZN0TCg03E6Lg=;
-        b=mN/omPsi4fkSErVngl/IBx1TCZFFbBClXRlZh3B+zVGLyOvwrPGJADKpnc0+NRkw6p
-         BMtqvrpA9t0xq8R77OamV4EBWHVOAPYBYMzDIZQRRqn5IE/eIYggHSZUGQdSXf/jMSRf
-         rZrIkjOM9zTe4tjknWQYPxY0tpjJy4R/lQl47Yy+TsJ5NCvldRde0JBMUQs1H2cIv2bS
-         g0KdZI7PPGBAJngQzJRCCTpcueY1SetkvVnp6oF3/KFQgRI4isdT3p8tlDg9IzIpnAca
-         4JIQ85lJyXJLYpNSXbAONn/LIiuWakz9Xf0DId8UuadEmHkExCD8UI85jJCM+n0ey9mV
-         mqew==
+        bh=36679R10DPn38ldm9bHoy7O67pKtkBvzRWuv7gtXXOQ=;
+        b=NV3reyswfSU2pyOox5XbijIuoYFu1sKftgVO+aV3C3K1MHKoR7L3ruSJeQP6nr6vqh
+         nnnbihGbbSZB4rDNCIGSr2nah/lK5k1qOwC8tGtvb7x+whFLoRaFSB+xAV2FncaFHzn2
+         VdX6ZmJegEzPMDceGPG8M0fzi48KtJG0/m4Yql1aO7WR25CIS1IWYk9JVAjf0Mfgj4+k
+         lUxaB55jntqP1rJ+00qmCBkQNyWUkQ3J+7W7vHCR+To6+ecX2zsMf/mEwD/8nb7Uf80d
+         0wVjooacKVVEDGG4CROmA//g3Z3nBqX9gUdCrJfdiesA+U9KhqpOGCGl/PlUYvakdKEw
+         Dciw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=P628cWFX1WnFisi3FewoGlZsZAC2g4CZN0TCg03E6Lg=;
-        b=RgcRK0ByMovJOQZ5cvjmEnH9lSnjtZYegIIicF8lHSoa4PgMRu+YNqSUfBUl3liKwk
-         oABcTUjZGNK3w37xJZitRdUsGlcQndAWZnYVZSJmAn/e9N7q7oAgmqfleyrbNYWRm+Y2
-         P+xX+Qtrvt1KWn3QQi4PMXRVcLqTYGmqdg6Wvsjg3WXzjlHp41ha/eC6tsJ8SV5o5+FF
-         9ycpdS9Dv1fg2tClHHFUrndmFYTF/Zs0du9PMmiq/MIMyp4AjpzYEk2oQtsZ7ZRVOByn
-         ZghBZNIWmkUmEu/e16qQmqr8TRNs6dExpg/MtGTSCdTF6hDAJi+gNTLczwmBeytHyiXD
-         YQfg==
-X-Gm-Message-State: AOAM533rzRQSYu6OL2NOa0z0Wh8JwSLLvt+T8ePEKaIJPT5CVclxaC/L
-	AaY5dzLuvRCaEzEC+6pR3mub8pdw/AfmZybU
-X-Google-Smtp-Source: ABdhPJydM80ZUrMAViwm5MV5mbU0pNJ6wR5vuUs1ESwgXjlV2rTS25HpDav7Te99jw4roeD0GK6aWQ==
-X-Received: by 2002:a05:6512:292:: with SMTP id j18mr2455887lfp.613.1612379068307;
-        Wed, 03 Feb 2021 11:04:28 -0800 (PST)
+        bh=36679R10DPn38ldm9bHoy7O67pKtkBvzRWuv7gtXXOQ=;
+        b=L8AnbQqMy+urUwulyPTmOC+HC7ZnvcMqhROVBWH255r7zguv5R7cQMNERZNzJtbURB
+         CDyulz94qjricWlQNiB9CFjMuCv1dvNGeSyMtZvH4E5cwMRAbGdtfAR9WNhPcDQArJUZ
+         3/GScVVgf7Dn9MxdujeUP9rs7OyYAjaoDTuF019ehWePyJGBDnDpBtnURpswwVuw8vAQ
+         gK9aBuzkrsUR5IZ0g3wlqBQQW9GYbLcqbSS5ESbKEcW3vDR9iAlQLDDz6AGP7zeJppb7
+         MDvJUrhHoJvx0s7nIFyixpan5byPGIod5RYqq2B7310bVFdFG2hQXLPhHAfVqX5PIV+L
+         K37w==
+X-Gm-Message-State: AOAM532OCxt10w35Ug4j6FnP7YjEap0D0fryUIyOpozskv756uu8Qh6U
+	xv8NLnFHIcb27/+uuNq4n6ZIZRCuwJa6mh2E
+X-Google-Smtp-Source: ABdhPJxXmosuBiLdP3MYly+4drcVep4Uon3dmGEubsT83TicJORi6Am2G7zOIKA+zcBpMqAhsdxhQQ==
+X-Received: by 2002:ac2:57cb:: with SMTP id k11mr2496764lfo.223.1612383361314;
+        Wed, 03 Feb 2021 12:16:01 -0800 (PST)
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id m16sm344899ljg.135.2021.02.03.11.04.27
+        by smtp.gmail.com with ESMTPSA id v23sm340641lfo.43.2021.02.03.12.16.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 Feb 2021 11:04:27 -0800 (PST)
+        Wed, 03 Feb 2021 12:16:00 -0800 (PST)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] cpuid: update to 20201006
-Date: Wed,  3 Feb 2021 20:04:26 +0100
-Message-Id: <20210203190426.1415766-1-open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-support] nano: update to 5.5
+Date: Wed,  3 Feb 2021 21:15:58 +0100
+Message-Id: <20210203201558.1431983-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../cpuid/{cpuid_20200427.bb => cpuid_20201006.bb}            | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/cpuid/{cpuid_20200427.bb => cpuid_20201006.bb} (85%)
+ meta-oe/recipes-support/nano/{nano_5.4.bb => nano_5.5.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/nano/{nano_5.4.bb => nano_5.5.bb} (87%)
 
-diff --git a/meta-oe/recipes-devtools/cpuid/cpuid_20200427.bb b/meta-oe/recipes-devtools/cpuid/cpuid_20201006.bb
-similarity index 85%
-rename from meta-oe/recipes-devtools/cpuid/cpuid_20200427.bb
-rename to meta-oe/recipes-devtools/cpuid/cpuid_20201006.bb
-index ff781f694..1b42590f4 100644
---- a/meta-oe/recipes-devtools/cpuid/cpuid_20200427.bb
-+++ b/meta-oe/recipes-devtools/cpuid/cpuid_20201006.bb
-@@ -3,13 +3,13 @@ DESCRIPTION = "cpuid dumps detailed information about the CPU(s) gathered \
- from the CPUID instruction, and also determines the exact model of CPU(s). \
- It supports Intel, AMD, and VIA CPUs, as well as older Transmeta, Cyrix, \
- UMC, NexGen, Rise, and SiS CPUs"
-+HOMEPAGE="http://www.etallen.com/cpuid.html"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-oe/recipes-support/nano/nano_5.4.bb b/meta-oe/recipes-support/nano/nano_5.5.bb
+similarity index 87%
+rename from meta-oe/recipes-support/nano/nano_5.4.bb
+rename to meta-oe/recipes-support/nano/nano_5.5.bb
+index 68c326b52..29ec00a79 100644
+--- a/meta-oe/recipes-support/nano/nano_5.4.bb
++++ b/meta-oe/recipes-support/nano/nano_5.5.bb
+@@ -12,7 +12,7 @@ RDEPENDS_${PN} = "ncurses-terminfo-base"
+ PV_MAJOR = "${@d.getVar('PV').split('.')[0]}"
  
- SRC_URI = "http://www.etallen.com/${BPN}/${BP}.src.tar.gz \
-            "
--SRC_URI[md5sum] = "daa93ee2fdaf461e515b4713e7337076"
--SRC_URI[sha256sum] = "c1a9463f1f2175086120e9079e318bbd383dc1e574fafb2f724879f1d11061d4"
-+SRC_URI[sha256sum] = "13c53f16408341d11ed489b352f218ec4dbb5bedb796a9d059e924770a9c56a6"
+ SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
+-SRC_URI[sha256sum] = "fe993408b22286355809ce48ebecc4444d19af8203ed4959d269969112ed86e9"
++SRC_URI[sha256sum] = "390b81bf9b41ff736db997aede4d1f60b4453fbd75a519a4ddb645f6fd687e4a"
  
- COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
+ UPSTREAM_CHECK_URI = "https://ftp.gnu.org/gnu/nano"
  
 -- 
 2.25.1
