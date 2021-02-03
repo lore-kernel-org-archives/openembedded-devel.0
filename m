@@ -1,202 +1,227 @@
-Received: from IND01-BO1-obe.outbound.protection.outlook.com (IND01-BO1-obe.outbound.protection.outlook.com [40.107.139.81])
- by mx.groups.io with SMTP id smtpd.web12.6865.1612343202669337216
+Received: from IND01-MA1-obe.outbound.protection.outlook.com (IND01-MA1-obe.outbound.protection.outlook.com [40.107.138.42])
+ by mx.groups.io with SMTP id smtpd.web10.6973.1612345134832681239
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Feb 2021 01:06:43 -0800
+ Wed, 03 Feb 2021 01:38:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kpit.com header.s=selector1 header.b=pw3DMwrL;
- spf=pass (domain: kpit.com, ip: 40.107.139.81, mailfrom: harpritkaur.bhandari@kpit.com)
+ dkim=pass header.i=@kpit.com header.s=selector1 header.b=FsRlo2Pd;
+ spf=pass (domain: kpit.com, ip: 40.107.138.42, mailfrom: harpritkaur.bhandari@kpit.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gAmZANl7h60jh4Uv+SCxyjXjOKSdwVUptD6XinZRDklD55ivahnFoLGozmdZb9rdprzoBiwb7YmOkkofEx9sZ/crCca3gtHNKXE9oeb6OweoACCk1P03oPpUFhEtI4Y/XDQfmQOo8Hd1MUJWwYl8qxQNmQOCH6HD/imN8K65lTB7IuNtjVkDDEO/H55/H7Tj3tUqd0kO3C509Bl/Qb6NMyGakUnf/WvWfz1ki9/L8KmPsU1s0khlFwZeBhXci4yZcTbLbJey65OPnMAlz1PMxsAq9iIoKP+sA5RzMJCxqJzPaURu8kuK+bu0amOJklzEXRgOj00oJbvX6q+3GeP+Kw==
+ b=T4VowYvY2X0h9dBF3eSdtTrZ3z8/C6FhxXmTwVrPHh4cHEG2zqs24OgczWDCzmb2dA3LjD2pPmW82s5eFwEIIRJ2eTZCCOemsKMjepKhlqgJgC6J7AU7PemJnMFJ5FE4gCjugrDF5oJP3GANoKJET54RboNGU/Ee63uRj6y1KKDcKLGH+cueQFGZoGJ9nOO/li1PL8Srehgbfs8QBPL7tXklD9ECy+hOR8tYZi0k2d8JLQWjjkx7Slj2jmByzWQNQJMIndy2y1ZtRPvUmNiLkTzZvAH7E0BE8xxqjV/e505nvvH2P1pefJjU8u7xN7KI+4FB4sacVXB/D++q7tj45A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N9T8H41CDplqDd2uAo7p8hMT8C8J/nxc1+Gs8U4/kss=;
- b=glvwgWK+d7PWf3HqLaqnfIqAoLYpf6IugflTTdjhPMK1gFYcCckLOA6UlqcsNwiUy4LgJlgEXHh0JituFEF0DY44BL5RD7oWU1qGMLXGArMY993hLccWgml36b6TIeceLCB8iBlzdVrJuW+vUsJFDcg24cmKm1tf9EtNi0VGf7C0DAGnl/2dtEDi9h71/fUL8DFUwRs4EpKLw1BCQqlD71MoDzo2xUnf78cUtCQDOxw90U9lax4q80oNeU6tZlENUTH74Ob+vNUoQK4pY9XqXlRru2iM3RxiK39H0jnXnCHv87GdCgH4IaLtxyw+fTqHfoRMFig+Q14KyAgQXvTh7Q==
+ bh=UUdqEjCtAIrTmMO7y0O2PG71khLnLESXIFG0G9zMiPs=;
+ b=bfgCM4prZhNnEW9bRvPWGjVivSuqwY232681fNN0lBu++Sen2ONg6FsdEthVN5Bp6dRuN0uqjuzGRVrtWxB+aBl+3KGrLa8cDktlzsrQwXwBXslJnxmd8fMO3Pn/nNXd1k/84SPs4P6DrZT6Avbq4zGRGqqd8x9MWT1I2BgsMoPReTwifMIBticjfJ9w61Wgv65FWj9oPhtQb0B7KmqnH0fcqR98jXoqYNwa5ir0lG5Qa4VAzFdiQHaqFxNdqwVDfnzUPZsJHE+O8i61v+4vMRPSK55S/81R6ceFBHIVBloVEn4CtJEMHK/j+qLc53BtVMwjvYui3zvCKvRC2xVPQg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=kpit.com; dmarc=pass action=none header.from=kpit.com;
  dkim=pass header.d=kpit.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N9T8H41CDplqDd2uAo7p8hMT8C8J/nxc1+Gs8U4/kss=;
- b=pw3DMwrLHllW1710ONWrC9RzulZzF4nnDWIMYVdoHL5xaTmeyiz+VHPsSdUNRLgjEZ6QSV02Gm5Zso6iEG9fYX68DFTKG1aMlS4vndHUHTcloZ/haoJDusfvonCkyW4dBrfWxIGAcy7C3opgrb90yuhpOVECASF1Vnih/UBEdAc=
+ bh=UUdqEjCtAIrTmMO7y0O2PG71khLnLESXIFG0G9zMiPs=;
+ b=FsRlo2PdUGb2J0ONGvcm9bRdf9zGrLwI+jvrE8BWnYElctI7w/0F9DH5ahwcvNk1iGBmUoTWkcXVFEfm5tT29Whc7y96F6k5TWkn/4zSpjHfRC9eqy41SiByaAuT5yj00DYHtYoE5wTkWDNt/pn1RQukpR1RJM3bkZcKF2VmZjU=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=kpit.com;
 Received: from PN2PR01MB4410.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:16::13)
- by PN1PR0101MB1902.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c00:16::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.24; Wed, 3 Feb
- 2021 09:06:30 +0000
+ by PN2PR01MB4297.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01::5) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3825.19; Wed, 3 Feb 2021 09:38:49 +0000
 Received: from PN2PR01MB4410.INDPRD01.PROD.OUTLOOK.COM
  ([fe80::9d4e:7536:7e00:3cd1]) by PN2PR01MB4410.INDPRD01.PROD.OUTLOOK.COM
  ([fe80::9d4e:7536:7e00:3cd1%7]) with mapi id 15.20.3825.020; Wed, 3 Feb 2021
- 09:06:29 +0000
+ 09:38:48 +0000
 From: "Harpritkaur Bhandari" <harpritkaur.bhandari@kpit.com>
 To: openembedded-devel@lists.openembedded.org,
 	raj.khem@gmail.com
 Cc: nisha.parrakat@kpit.com,
-	aditya.tayade@kpit.com,
-	Haiqing Bai <Haiqing.Bai@windriver.com>,
-	Armin Kuster <akuster808@gmail.com>
-Subject: [meta-oe][dunfell][PATCH] python-urllib3/python3-urllib3: fix CVE-2020-7212
-Date: Wed,  3 Feb 2021 14:36:14 +0530
-Message-Id: <1612343174-28564-1-git-send-email-Harpritkaur.Bhandari@kpit.com>
+	aditya.tayade@kpit.com
+Subject: [meta-oe][master][PATCH] rapidjson: Remove unwanted patches
+Date: Wed,  3 Feb 2021 15:08:37 +0530
+Message-Id: <1612345117-31065-1-git-send-email-Harpritkaur.Bhandari@kpit.com>
 X-Mailer: git-send-email 2.7.4
 X-Originating-IP: [1.186.38.155]
-X-ClientProxiedBy: BM1PR01CA0090.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:b00:1::30) To PN2PR01MB4410.INDPRD01.PROD.OUTLOOK.COM
+X-ClientProxiedBy: PN2PR01CA0107.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:c01:27::22) To PN2PR01MB4410.INDPRD01.PROD.OUTLOOK.COM
  (2603:1096:c01:16::13)
 Return-Path: Harpritkaur.Bhandari@kpit.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from localhost.localdomain (1.186.38.155) by BM1PR01CA0090.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:1::30) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.20.3825.19 via Frontend Transport; Wed, 3 Feb 2021 09:06:28 +0000
+Received: from localhost.localdomain (1.186.38.155) by PN2PR01CA0107.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:27::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.20.3825.19 via Frontend Transport; Wed, 3 Feb 2021 09:38:47 +0000
 X-MS-PublicTrafficType: Email
 X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: abb363da-1f43-487c-30ad-08d8c822fde9
-X-MS-TrafficTypeDiagnostic: PN1PR0101MB1902:
+X-MS-Office365-Filtering-Correlation-Id: 023879a3-66e0-4b55-d7f0-08d8c8278174
+X-MS-TrafficTypeDiagnostic: PN2PR01MB4297:
 X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<PN1PR0101MB190225DD13B2D9DA877E6E6DEFB49@PN1PR0101MB1902.INDPRD01.PROD.OUTLOOK.COM>
-X-MS-Oob-TLC-OOBClassifiers: OLM:849;
+	<PN2PR01MB4297E087AD3BF0C4CE8113B6EFB49@PN2PR01MB4297.INDPRD01.PROD.OUTLOOK.COM>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2000;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	SNVoZbM5QcV7Swyl1n71uJ6SA/0xuzZljGKxC2CYPtdl6CiztXSN+Vl6p3Fi3IvkVWYpo7uZ3ZB8qEKnNK/14p5ATw0tCZQsDcG+M5c+wj+MvpW9AkZdEJCAFGb5k+yEFwpzhmgQu8TURlWqAdPsaUi/bD3qHRPaRqf5ZGNvzVK2TFYrujK32Sk32FkJioDhCQYm9G315i9LAiAt47mzllTgQtuGIiyQC5EIUF1bVlIQjShUod6qhqjCAFpg0WSbPUVAhZGXxWV50sQ+3CKBU1RrckSc3w+4ldXEcblXBP1dyTNjj4JwNAzUWHxvpnpKsVc/oqQnF+2MmvXcRabetX3jZzE8f80tFixJ5BB3txV9CfgVFzPNwH/QtoMqQSdamoFdzcenIIIMgRmBwozABOJGLeeFyD1Uu4L3J1xTR35Hw+VumMApx7sbMN2ZCAigwzfKecvZI1KX1HryjG+nGvDtyElPMxCjRqOFlOln/qzP45Tc5BOLWdQlH5Uo7h/2JxnLWGRY3rZTa09dzMxWODSt2UfgfP6OOo6e6a4a33xol+fMRMVbl/v2rIQKGmDIIbO/VL/gGuUU5rmiK+MI+KxwbxHwt1lOBPYT1xgY0eE=
+	5IT/nYU576PFvxLGB8JinTKyFnaOH9uKB2bhqAX0ozux2riFq5kDz+hbKr7Qvh/IpkoM85fDCQGfkt5ZymQQ9LiAcxA/bZSFBiHTjk7uHgWFvJeorr90uIR6IXk9innXaZGwQVSgUxM+dTG2oMBYHR4fGs2xVW38BAjKgevflu9zVGVy4aAO5LTmj/SzwYB8+M5BZJiCS0zsrtcgW+PyEVL349PGZlE8OH7/FZG19BHGqB+pfl8dHdYUNkxCDqzRl6wYVEmo7a+MIfe+ITZZ8Ay5ssWUv8S01EZdb+TMb9PWd1Ll2C5eGIX4Sf3NEZ7YN5gC6vWi9hG6LQieAIOmvOtTlKSljRFBkVq1dOHNqjEvZkrDryN9DscvvACP/qay+iBEe0AAISvCi/jsxx4nilLEmFmqeo/3K8L2tg9on9/X8qvPZvglqm5ltXNfCgAX1KdNmLPoq4FRuOznvIFFUXbEaoC9IcQN8Jjo21fVbbJmbaV8ObWH06uhBKsc+4frBmbS5IKjtWj82V+0tstaU8ucmChXU+fCwVyVTzC4dz0VwtZIiLc9tYuBAj5+ciYM5dltGfZCOMC0FIhYCKYeZbgtgrslR9wz1SOr/y8w1WJQ5IPHhE+u6FATFv0wdKhExCjXntfHIQr7BKnZOUPHk+pg1nUuaoUFv8h86zBAglkOpHw8AIQEvzUQNvnDdd0Q9UZxCdEpenAkQ3nqhPHVrw==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN2PR01MB4410.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(396003)(136003)(39850400004)(346002)(366004)(376002)(5660300002)(4326008)(66946007)(6666004)(69590400011)(36756003)(6486002)(26005)(86362001)(316002)(66574015)(1006002)(2906002)(54906003)(8676002)(66476007)(8936002)(16526019)(83380400001)(2616005)(55236004)(6506007)(956004)(6512007)(52116002)(478600001)(186003)(66556008)(36456004);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN2PR01MB4410.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(136003)(396003)(39860400002)(346002)(366004)(376002)(956004)(6486002)(66946007)(2616005)(1006002)(6666004)(316002)(478600001)(26005)(36756003)(66574015)(8676002)(16526019)(5660300002)(66476007)(8936002)(107886003)(66556008)(55236004)(4326008)(69590400011)(6506007)(52116002)(83380400001)(2906002)(86362001)(186003)(6512007)(26123001)(36456004);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?49EfCVv8cX0yUHsvSKMwjZGHuloCA/yIrbV/YClhiCc1IXlfz1E6ID1D20G+?=
- =?us-ascii?Q?HD+bFhxfZwktUtzxLOJkb3vFVIgWoG4iLJtvowXVmSt1NVWj6cMg64lD+U7h?=
- =?us-ascii?Q?YucmLiargV+Gj/1OLviCeqK7J+IFyeMfdsNdHEEkuK7BgOudImON7BZ51jv/?=
- =?us-ascii?Q?wyX7ZohsZIeJKfRm7vAF5ha1CbcR7EMtJXAwdtFp/wLXxOtx5ulLgUeL84uQ?=
- =?us-ascii?Q?Lml3ZYbSYJS/IJCtUOUSoNV0nx8KqMwwdclVXM4jEe9q7ENYwCCEN9TUKMkx?=
- =?us-ascii?Q?X7wYWdNqLAKL8p/sYp0muTXTsAN/8fyK10t3+i3+rpl2d87ogyIgSa8M/R3D?=
- =?us-ascii?Q?n9BilZaVKACEGkyRc82JuYVt1f7wGlxuZmjW48PYvk28L7LKo7FPrreU/gTy?=
- =?us-ascii?Q?no2yF/pDk90Xbxeu6HtB+efg1EJMz7vyFOlCLUtMbnCxhnrJfQnUu7NJwMF8?=
- =?us-ascii?Q?+PivvVbCdjV1CHKFjMjAYtzM2M+tHimHV2YffOpq5NjBVaMURy7ISZAtTSxb?=
- =?us-ascii?Q?ZJ96rHtRBYU/1ASgI9Sv9I1ID5znnooq9cohG9fkQTB+op95Po4sY+lHbiMV?=
- =?us-ascii?Q?51Upn7vNpYTouTM+tUFJtFWLcGmqDmVXgcwWXGltgdYPT1Ioim+oJHFY4LL/?=
- =?us-ascii?Q?8hCe0JQsF8csx93BcD1WFRI0hVuFQn7qY3vLypmgH6WJN1N7wcdurE/sITzt?=
- =?us-ascii?Q?JUjFKkOp9ULKaqR9PScq9I2UBTphHQOK0dV9UmisML/G7xIVdrjDDFwtAdBN?=
- =?us-ascii?Q?KT+mIbqR8jTi2i/JKPiXHRg6dzIB6ZbMJ6DLhn4RW3rCJXDMlFd6QNhst+tL?=
- =?us-ascii?Q?3bOszKJ3RNBvpz/52DqFluY/J8NbjaxIS3TD9M37PPwBXSAVsX95/6nHbQqg?=
- =?us-ascii?Q?Y0lh4pAyFc2fM5bbRrTuVRszyCvfDbdEwTQTuZyudlN8SUAHjvHaMw8j5cPN?=
- =?us-ascii?Q?vTdXmshMdNVq+HaKCIr7wEO5dq+Gcm+Tn2mm0kZCXoQqd0dlg8qgzgvE0vU8?=
- =?us-ascii?Q?xPzRK+U8pl8nKw7CNlGLHGqITVhAdjhjeZMZ7vTl11PbuDku7JqI3sdlM3zl?=
- =?us-ascii?Q?A1eLZ2zP?=
+	=?us-ascii?Q?sT+zhfbQMhADBXAYvLp5dJ2uJhGjoNK8KKTGwPx6MF9IRYXx+cpTPtuMsvHA?=
+ =?us-ascii?Q?2vCFJatnqMu/esdID6MqgU/xNTutPoUP/TiLzkaQB2iXZSNwa0/iRkfKnta2?=
+ =?us-ascii?Q?v8byNWHPu680bynOY0T/vJqBleSsjUMvrZCXOsgV6Ql6YSM/bxwt/QktXnSD?=
+ =?us-ascii?Q?oRZsUYKjitRd9Xi99lKGSwTZGiPvldeEdi3r4vpT5ulRHLPsCQfg1Q4m5Om2?=
+ =?us-ascii?Q?YWtkn/ehxO9iYD5rG+4VgPaEk+d5vDVQ11eoHN7NaG0IKsYdGbv2vJkyJRYH?=
+ =?us-ascii?Q?s6wAQaLoA218Q3S/YuA1QBKW/LK7VXB4VYlAVwiGEv0VCWhRjmvPhnu1EVoi?=
+ =?us-ascii?Q?4aklun5pKqNa2ndBQ/3ixrPVSkgKQBkdt4HV+Kq8BDY2gE8DUjQSJHeuikfU?=
+ =?us-ascii?Q?P0PqvaDzXKYg1s8YKRZDaq/fPQbjv52N9M27Hw+AkevQ5okVLNUJkUgj4XaC?=
+ =?us-ascii?Q?9/tFRKidKfhigIP/7j/qUE200nXAjOg83NwyjAg1/He1Bqcadl7myQwg481x?=
+ =?us-ascii?Q?rg4drO/eh8n3bS9DUtvb18NacRZG1lL6IczfZ/KJUqOk66ykDVwY5SbmQZQe?=
+ =?us-ascii?Q?Ts1gFPzNnfEHzhrU02H4BawJJzOdDfAnYck045LeGk/QbyDCzUq2QKIprX8N?=
+ =?us-ascii?Q?nS7+2sPHakCBf4WV/H2DyJ3pQ4zD5frAM8I10OslvyUaoxlQUAKyjrrtrHQd?=
+ =?us-ascii?Q?T0KbPEvLSWVw1Xs1rYY9P5cMfbh64r5dWplphwkkSr6NkfCBIVmAs575UfZ3?=
+ =?us-ascii?Q?PXnHq1+lm28k13jPGlVkH7RgbxoimkeG3iYhGJ0a5XQmJK2FaYZbAC0pqtHX?=
+ =?us-ascii?Q?qMOoNhye22Ue05LimDWasWF52S5u9eiKmPBr73wgGqmVOlvVSQyAwF4rCI8X?=
+ =?us-ascii?Q?yxcZRocgEYVUayI3sXG0+fdVochZxL2Xwj5N8U9Rm81xT0TfzoyMjR0EfR2w?=
+ =?us-ascii?Q?jcYPFpjBw6WwGrjK9Ld5GpTaWYWr8mG0XuIvJ+Z2tCJ838dRULHyjYSVr/Uz?=
+ =?us-ascii?Q?8aMa71kFb+PrEYwLlh91mOUaDS9LpMf0Ehz7HkKYSF71xSd81dMSTjGgaD50?=
+ =?us-ascii?Q?vXFZaMV1?=
 X-OriginatorOrg: kpit.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: abb363da-1f43-487c-30ad-08d8c822fde9
+X-MS-Exchange-CrossTenant-Network-Message-Id: 023879a3-66e0-4b55-d7f0-08d8c8278174
 X-MS-Exchange-CrossTenant-AuthSource: PN2PR01MB4410.INDPRD01.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2021 09:06:28.9377
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2021 09:38:47.5805
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3539451e-b46e-4a26-a242-ff61502855c7
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Pl+X1QUNIUtvkyDvdSFNIqvqjbcPhzWQv1nXoEHPcxnHAjIdlE4L0KlxezsuPy2n86kuRUMN7pSjwsRImVCIcA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN1PR0101MB1902
+X-MS-Exchange-CrossTenant-UserPrincipalName: Jg+jTDrOkE0sTUEto+wHKOIR2B5m3QqGLXIFfs9Iv3MNjNdK72F2rDSADpVIPwif2SFrOeWOTIe0C2Ki1fd0yg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN2PR01MB4297
 Content-Type: text/plain
 Content-Transfer-Encoding: quoted-printable
 
-From: Haiqing Bai <Haiqing.Bai@windriver.com>
+rapidjson is upgraded to latest SRCREV so
+removing the below patches which are not
+applicable:
+1.0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch
+2.remove-march-native-from-CMAKE_CXX_FLAGS.patch
 
-Optimize _encode_invalid_chars for a denial of service (CPU consumption)
-
-Change-Id: I67a1b0acfe905cb9c0c0bd3f5e3917d49e670673
-Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Change-Id: I42e789ba2c732c11ff507660d13a1fdb2231c9ad
 Signed-off-by: Harpritkaur Bhandari <Harpritkaur.Bhandari@kpit.com>
 ---
- .../python/python3-urllib3/CVE-2020-7212.patch     | 54 ++++++++++++++++++=
-++++
- .../python/python3-urllib3_1.25.7.bb               |  2 +
- 2 files changed, 56 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-urllib3/CVE=
--2020-7212.patch
+ ...ve-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch | 36 ------------------=
+-
+ .../remove-march-native-from-CMAKE_CXX_FLAGS.patch | 40 ------------------=
+----
+ 2 files changed, 76 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/rapidjson/rapidjson/0001-CMake=
+-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch
+ delete mode 100644 meta-oe/recipes-devtools/rapidjson/rapidjson/remove-mar=
+ch-native-from-CMAKE_CXX_FLAGS.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7=
-212.patch b/meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-72=
-12.patch
-new file mode 100644
-index 0000000..a2bb0fb
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.pat=
-ch
-@@ -0,0 +1,54 @@
-+From aff951b7a41eb5b958b32c49eaa00da02adc9c2d Mon Sep 17 00:00:00 2001
-+From: Quentin Pradet <quentin.pradet@gmail.com>
-+Date: Tue, 21 Jan 2020 22:32:56 +0400
-+Subject: [PATCH] Optimize _encode_invalid_chars (#1787)
-+
-+Co-authored-by: Seth Michael Larson <sethmichaellarson@gmail.com>
-+
-+Upstream-Status: Backport
-+[from git://github.com/urllib3/urllib3.git commit:a2697e7c6b]
-+Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
-+---
-+ src/urllib3/util/url.py | 15 ++++++---------
-+ 1 file changed, 6 insertions(+), 9 deletions(-)
-+
-+diff --git a/src/urllib3/util/url.py b/src/urllib3/util/url.py
-+index 9675f74..e353937 100644
-+--- a/src/urllib3/util/url.py
-++++ b/src/urllib3/util/url.py
-+@@ -216,18 +216,15 @@ def _encode_invalid_chars(component, allowed_chars, =
-encoding=3D"utf-8"):
-+
-+     component =3D six.ensure_text(component)
-+
-++    # Normalize existing percent-encoded bytes.
-+     # Try to see if the component we're encoding is already percent-encod=
-ed
-+     # so we can skip all '%' characters but still encode all others.
-+-    percent_encodings =3D PERCENT_RE.findall(component)
-+-
-+-    # Normalize existing percent-encoded bytes.
-+-    for enc in percent_encodings:
-+-        if not enc.isupper():
-+-            component =3D component.replace(enc, enc.upper())
-++    component, percent_encodings =3D PERCENT_RE.subn(
-++        lambda match: match.group(0).upper(), component
-++    )
-+
-+     uri_bytes =3D component.encode("utf-8", "surrogatepass")
-+-    is_percent_encoded =3D len(percent_encodings) =3D=3D uri_bytes.count(=
-b"%")
-+-
-++    is_percent_encoded =3D percent_encodings =3D=3D uri_bytes.count(b"%")
-+     encoded_component =3D bytearray()
-+
-+     for i in range(0, len(uri_bytes)):
-+@@ -237,7 +234,7 @@ def _encode_invalid_chars(component, allowed_chars, en=
-coding=3D"utf-8"):
-+         if (is_percent_encoded and byte =3D=3D b"%") or (
-+             byte_ord < 128 and byte.decode() in allowed_chars
-+         ):
-+-            encoded_component.extend(byte)
-++            encoded_component +=3D byte
-+             continue
-+         encoded_component.extend(b"%" + (hex(byte_ord)[2:].encode().zfill=
-(2).upper()))
-+
-+--
-+2.23.0
-+
-diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb =
-b/meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb
-index 34c15b6..8d987a1 100644
---- a/meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb
-@@ -8,6 +8,8 @@ SRC_URI[sha256sum] =3D "f3c5fd51747d450d4dcf6f923c81f78f811=
-aab8205fda64b0aba34a4e4
-
- inherit pypi setuptools3
-
-+SRC_URI +=3D "file://CVE-2020-7212.patch"
-+
- RDEPENDS_${PN} +=3D "\
-     ${PYTHON_PN}-certifi \
-     ${PYTHON_PN}-cryptography \
+diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson/0001-CMake-remove=
+-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch b/meta-oe/recipes-devtools/ra=
+pidjson/rapidjson/0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.=
+patch
+deleted file mode 100644
+index 745f5d0..0000000
+--- a/meta-oe/recipes-devtools/rapidjson/rapidjson/0001-CMake-remove-hardco=
+ded-CMAKECONFIG_INSTALL_DIR-path.patch
++++ /dev/null
+@@ -1,36 +0,0 @@
+-From 8d272e53a4d1dc405e08ce2dd50159c58f4451e9 Mon Sep 17 00:00:00 2001
+-From: Ruslan Bilovol <rbilovol@cisco.com>
+-Date: Thu, 24 Jan 2019 18:11:39 +0200
+-Subject: [PATCH] CMake: remove hardcoded CMAKECONFIG_INSTALL_DIR path
+-
+-Currently this path is hardcoded to lib/cmake.
+-Some distributions have different library path (like lib64).
+-So reuse LIB_INSTALL_DIR for that to make CMAKECONFIG_INSTALL_DIR
+-configurable and usable in such distros.
+-
+-Upstream-Status: Backport [https://github.com/Tencent/rapidjson/commit/8d2=
+72e53a4d1dc405e08ce2dd50159c58f4451e9]
+-
+-Signed-off-by: Ruslan Bilovol <rbilovol@cisco.com>
+----
+- CMakeLists.txt | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 7c60407..0275672 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -199,9 +199,9 @@ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_N=
+AME}ConfigVersion.cmake.in
+-     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake @ONLY)
+-
+- # ... for the install tree
+--SET( CMAKECONFIG_INSTALL_DIR lib/cmake/${PROJECT_NAME} )
+-+SET( CMAKECONFIG_INSTALL_DIR ${LIB_INSTALL_DIR}/cmake/${PROJECT_NAME} )
+- FILE( RELATIVE_PATH REL_INCLUDE_DIR
+--    "${CMAKE_INSTALL_PREFIX}/${CMAKECONFIG_INSTALL_DIR}"
+-+    "${CMAKECONFIG_INSTALL_DIR}"
+-     "${CMAKE_INSTALL_PREFIX}/include" )
+-
+- SET( ${PROJECT_NAME}_INCLUDE_DIR "\${${PROJECT_NAME}_CMAKE_DIR}/${REL_INC=
+LUDE_DIR}" )
+---
+-1.9.1
+-
+diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson/remove-march-nati=
+ve-from-CMAKE_CXX_FLAGS.patch b/meta-oe/recipes-devtools/rapidjson/rapidjso=
+n/remove-march-native-from-CMAKE_CXX_FLAGS.patch
+deleted file mode 100644
+index cf3e16e..0000000
+--- a/meta-oe/recipes-devtools/rapidjson/rapidjson/remove-march-native-from=
+-CMAKE_CXX_FLAGS.patch
++++ /dev/null
+@@ -1,40 +0,0 @@
+-From 827155e5e659b2a5065b00d701bc59b57feab2bf Mon Sep 17 00:00:00 2001
+-From: Andre McCurdy <armccurdy@gmail.com>
+-Date: Mon, 19 Dec 2016 01:37:11 -0800
+-Subject: [PATCH] remove -march=3Dnative from CMAKE_CXX_FLAGS
+-
+-Not appropriate when cross compiling.
+-
+-Upstream-Status: Inappropriate [configuration]
+-
+-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+----
+- CMakeLists.txt | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-Index: git/CMakeLists.txt
+-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+---- git.orig/CMakeLists.txt
+-+++ git/CMakeLists.txt
+-@@ -51,10 +51,10 @@ endif(CCACHE_FOUND)
+-
+- if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+-     if(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "powerpc" OR ${CMAKE_SYSTEM_PRO=
+CESSOR} STREQUAL "ppc64" OR ${CMAKE_SYSTEM_PROCESSOR} STREQUAL "ppc64le")
+--      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mcpu=3Dnative")
+-+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+-     else()
+-       #FIXME: x86 is -march=3Dnative, but doesn't mean every arch is this=
+ option. To keep original project's compatibility, I leave this except POWE=
+R.
+--      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=3Dnative")
+-+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+-     endif()
+-     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
+-     set(EXTRA_CXX_FLAGS -Weffc++ -Wswitch-default -Wfloat-equal -Wconvers=
+ion -Wsign-conversion)
+-@@ -84,7 +84,7 @@ elseif (CMAKE_CXX_COMPILER_ID MATCHES "C
+-       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mcpu=3Dnative")
+-     else()
+-       #FIXME: x86 is -march=3Dnative, but doesn't mean every arch is this=
+ option. To keep original project's compatibility, I leave this except POWE=
+R.
+--      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=3Dnative")
+-+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+-     endif()
+-     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror -Wno-mi=
+ssing-field-initializers")
+-     set(EXTRA_CXX_FLAGS -Weffc++ -Wswitch-default -Wfloat-equal -Wconvers=
+ion -Wimplicit-fallthrough -Weverything)
 --
 2.7.4
 
