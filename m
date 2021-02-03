@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.11060.1612366710633866937
+ by mx.groups.io with SMTP id smtpd.web11.10853.1612366710633129743
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 03 Feb 2021 07:38:31 -0800
 Authentication-Results: mx.groups.io;
@@ -8,15 +8,17 @@ Received: from [78.130.197.211] (port=46228 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1l7KEd-0007tX-81; Wed, 03 Feb 2021 17:38:28 +0200
+	id 1l7KEe-0007tX-4Y; Wed, 03 Feb 2021 17:38:29 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-javaobj-py3: Upgrade 0.4.1 -> 0.4.2
-Date: Wed,  3 Feb 2021 17:38:18 +0200
-Message-Id: <20210203153822.25077-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-pytest-html: Upgrade 2.1.1 -> 3.1.1
+Date: Wed,  3 Feb 2021 17:38:19 +0200
+Message-Id: <20210203153822.25077-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-X-OutGoing-Spam-Status: No, score=-0.5
+In-Reply-To: <20210203153822.25077-1-leon.anavi@konsulko.com>
+References: <20210203153822.25077-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.2
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -28,35 +30,83 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.4.2:
+Upgrade to release 3.1.1:
 
-- NumPy is now loaded lately, only if the use of numpy arrays is
-  expected. This allows the calling modules to load and configure
-  numpy beforehand.
+- Fix issue with reporting of missing CSS files
+- Stop attaching test reruns to final test report entries
+- Allow for report duration formatting
+- Respect --capture=no, --show-capture=no, and -s pytest flags
+- Make the Results table Links column sortable
+- Fix issue with missing image or video in extras
+- Fix attribute name for compatibility with pytest-xdist 2
+- Post process HTML generation to allow teardown to appear in the
+  HTML output
+
+License-Update: Following recent changes to README.rst, just use
+LICENSE downloaded from PyPI.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...thon3-javaobj-py3_0.4.1.bb => python3-javaobj-py3_0.4.2.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-javaobj-py3_0.4.1.bb => python3-javaobj-py3_0.4.2.bb} (80%)
+ .../python/python3-pytest-html_2.1.1.bb       | 24 -------------------
+ .../python/python3-pytest-html_3.1.1.bb       | 18 ++++++++++++++
+ 2 files changed, 18 insertions(+), 24 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pytest-html_2.1.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-pytest-html_3.1.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.1.bb b/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.2.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.1.bb
-rename to meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.2.bb
-index c83140a89..2f2421981 100644
---- a/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.2.bb
-@@ -7,8 +7,7 @@ HOMEPAGE = "https://github.com/tcalmant/python-javaobj"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d273d63619c9aeaf15cdaf76422c4f87"
- 
--SRC_URI[md5sum] = "47632071c3c3ca14b6c42f2a4e2e1309"
--SRC_URI[sha256sum] = "419ff99543469e68149f875abb0db5251cecd350c03d2bfb4c94a5796f1cbc14"
-+SRC_URI[sha256sum] = "ed3b1ffcfd39f165729cb53587cca02ab0bfa4c332c837a92d5ffe6aef5c8010"
- 
- inherit pypi setuptools3
- 
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-html_2.1.1.bb b/meta-python/recipes-devtools/python/python3-pytest-html_2.1.1.bb
+deleted file mode 100644
+index 27b768155..000000000
+--- a/meta-python/recipes-devtools/python/python3-pytest-html_2.1.1.bb
++++ /dev/null
+@@ -1,24 +0,0 @@
+-DESCRIPTION = "pytest plugin for generating html reports from test results"
+-DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+-
+-LICENSE = "MPL-2.0"
+-LIC_FILES_CHKSUM = "file://../pytest-html.LICENSE;md5=5d425c8f3157dbf212db2ec53d9e5132"
+-
+-# Per README.rst the license statement is fetched from
+-# https://raw.githubusercontent.com/davehunt/pytest-html/master/LICENSE
+-SRC_URI += "https://raw.githubusercontent.com/davehunt/pytest-html/master/LICENSE;name=license;downloadfilename=pytest-html.LICENSE"
+-SRC_URI[license.md5sum] = "5d425c8f3157dbf212db2ec53d9e5132"
+-SRC_URI[license.sha256sum] = "2bfdca60adf803108d4c7f009000bea76ad00e621e163197881b0eaae91b530e"
+-
+-SRC_URI[sha256sum] = "6a4ac391e105e391208e3eb9bd294a60dd336447fd8e1acddff3a6de7f4e57c5"
+-
+-
+-PYPI_PACKAGE = "pytest-html"
+-
+-inherit pypi setuptools3
+-
+-RDEPENDS_${PN} += " \
+-    ${PYTHON_PN}-pytest \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-html_3.1.1.bb b/meta-python/recipes-devtools/python/python3-pytest-html_3.1.1.bb
+new file mode 100644
+index 000000000..bd543d2f0
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pytest-html_3.1.1.bb
+@@ -0,0 +1,18 @@
++DESCRIPTION = "pytest plugin for generating html reports from test results"
++DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
++
++LICENSE = "MPL-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=5d425c8f3157dbf212db2ec53d9e5132"
++
++SRC_URI[sha256sum] = "3ee1cf319c913d19fe53aeb0bc400e7b0bc2dbeb477553733db1dad12eb75ee3"
++
++
++PYPI_PACKAGE = "pytest-html"
++
++inherit pypi setuptools3
++
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-pytest \
++"
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
