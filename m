@@ -1,192 +1,142 @@
-Received: from IND01-BO1-obe.outbound.protection.outlook.com (IND01-BO1-obe.outbound.protection.outlook.com [40.107.139.87])
- by mx.groups.io with SMTP id smtpd.web10.3937.1612418285276144947
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.51])
+ by mx.groups.io with SMTP id smtpd.web09.4230.1612420528458808593
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Feb 2021 21:58:05 -0800
+ Wed, 03 Feb 2021 22:35:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kpit.com header.s=selector1 header.b=rMbyUbaA;
- spf=pass (domain: kpit.com, ip: 40.107.139.87, mailfrom: harpritkaur.bhandari@kpit.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=fuq1Qlml;
+ spf=pass (domain: windriver.com, ip: 40.107.237.51, mailfrom: mingli.yu@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZuHagaqPv+GMqm5xQZVtbfR97GiNq/M0l/VSGxuIteMktmSzv7vXGDxsYR4KO46U1CVNmCxoOMVt0GRPdROxaTEcoSDMcHmCWHHtvfODodG7HGGAjPzcOYxAkV3iZeJ5xZJFAJYTnB2clKoeBsutl6cLc/m19ykUS8WR+N0nIoVCLXvdEPFzjN+CLVrs694N1OSqkWgwY+N/pL8sAloxwMeNVZkKA7y6b/tSeETHcCxfBex7xcASjW9OXI9Pie8GISlMCgrbl6WSvP6WvOKZi+ODrih6zl5S/17rzU9ELIz+hMEjldvqrKFFgVeBRzKQvY+ecQYdrtAjsNmLpmfZUg==
+ b=FcMUILgW0wcBoyHL9USFUsvp1l9OZks554jW8X1ZFvEpO8u2E7IYulHKcT7axEp1S9O7mLAt4AVJUZqRQ0x31qo6qzggxjUY4Ruyaiil4SHk48WwqVkSNiJpJgosKAVrqHaTF4RjvV6Jq3q5EmOL+yHy0NF2WhxyEV5YVgwAoB6iQsbm2QQl/9+5sIzaFmjfhpWJ9gY8iyDjbX28TG407oBNajeFhu4jauY5uA+NK9EWHkAscrSFp9RXdKEgG14zpaj6RlaBvK0epKkMiVgAT1b9U2//NB3IMjram0qu0kekI3b3Dx4PsV6Zv36aS5bnxPnk6ws2GzimCYArtBZQSw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZtEXI0V1Ow/uCZ1Af6sXd7s/29fcLZJR2znySw4U8nc=;
- b=W6j0+0D1pvJLTRMS65HSF/KxZkLtYKcbutAC4PSAHGR8UdGA8gTNM4hvRmRyHHvdW6ruR7TLDNQ4UWAw1nkBqvzcM4rxqCo4f3Lt3+4g/qnKOAODB4Ae0Bj690KT4PiUkVcTEhyGNkHLtyxF5gN7vBAaCFUj5E/xaXG1LGt2lBzsBKqhROPb/RdU3WZ+h7Lb/svB6HyJUxKcVnVcJ1hfcO6RWEGSc2t3svyls+wyAUYAGJNokUXTMqwuCzb84VFoqt9aH52Ir7/xzBIHt1WBLzND7vldz9Kn/QkzelXT4LTOlnIXjdYR6OizTplrLk7Qp00QNZGfCX27YAMVbQIW2w==
+ bh=epIuJSold1XU0EG6rG9KVH0sVZrHur60Aqyy240XFPM=;
+ b=Op4ymAfyc9mk2ZVJmxRfmkvpPsvhFRmD4T/nyHKeL+8PM6tp7j84xIM6dwVzNSSl+CGGHRP88QvllLlgkFJHA87d38x3EQuwA0rOPF9FGsGMZOwjrmkNQlGCoa0ugfUUCW89V9u7S0QqVBYpX6sIWNR+lU1a7sUkcdgW6+C6jFCZP922spqNjNQTduIgM/3n/zaEC584VnjzkGgASVku+FLs9vtvmdc44Wg0PqA5fOXOL5k+/bDgjKMZ5vLJLLoVLVp2J2JGrcDwSGtQbdLxMl5F60OFLGyCdYYGA+YGgDU+j0Q56GRZA3OpxexfOfG1VRgs1PAe6rXhJx3KeLIhiA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=kpit.com; dmarc=pass action=none header.from=kpit.com;
- dkim=pass header.d=kpit.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1;
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZtEXI0V1Ow/uCZ1Af6sXd7s/29fcLZJR2znySw4U8nc=;
- b=rMbyUbaAEdxbOkvtcPAa9vKKH4aohCCdueF8g+/pfY3rjN3JbwRwSfp5nBPNZcf3RHcIiioiozuue4qi/9VhUarJE2xanROYbntgKOd/CxZj020vq62lR/qZizukft77JcZ5pQEsqPoFM6Pl7Bl9Wh2u0yP1R+/mh7cW4XKtx1I=
+ bh=epIuJSold1XU0EG6rG9KVH0sVZrHur60Aqyy240XFPM=;
+ b=fuq1Qlmly2N7Mqd35+q6Ey6Ol4mbzB0waBN1G0WoEAd1H2qLK8SL5w2JAzpr1PFn7sjVCDTvX9qg7Qn9QjyRzgFsf/sTOMGvDklnVop81jhhwIdgYJe79Kx1j2nuGOAKErhKBGSRYcIDOOQ+U4lw5fyPRW1E99bpGNjNvCzHa7Q=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=kpit.com;
-Received: from PN2PR01MB4410.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:16::13)
- by PN1PR0101MB1903.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c00:13::20) with
+ header.from=windriver.com;
+Received: from CO1PR11MB5009.namprd11.prod.outlook.com (2603:10b6:303:9e::11)
+ by MWHPR11MB1902.namprd11.prod.outlook.com (2603:10b6:300:10f::11) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.23; Thu, 4 Feb
- 2021 05:57:58 +0000
-Received: from PN2PR01MB4410.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::9d4e:7536:7e00:3cd1]) by PN2PR01MB4410.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::9d4e:7536:7e00:3cd1%7]) with mapi id 15.20.3825.020; Thu, 4 Feb 2021
- 05:57:58 +0000
-From: "Harpritkaur Bhandari" <harpritkaur.bhandari@kpit.com>
-To: openembedded-devel@lists.openembedded.org,
-	raj.khem@gmail.com
-Cc: nisha.parrakat@kpit.com,
-	aditya.tayade@kpit.com,
-	Haiqing Bai <Haiqing.Bai@windriver.com>,
-	Armin Kuster <akuster808@gmail.com>
-Subject: [meta-oe][dunfell][PATCH v1] python-urllib3/python3-urllib3: fix CVE-2020-7212
-Date: Thu,  4 Feb 2021 11:27:43 +0530
-Message-Id: <1612418263-7858-1-git-send-email-Harpritkaur.Bhandari@kpit.com>
-X-Mailer: git-send-email 2.7.4
-X-Originating-IP: [1.186.38.155]
-X-ClientProxiedBy: BM1PR01CA0105.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00::21)
- To PN2PR01MB4410.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:16::13)
-Return-Path: Harpritkaur.Bhandari@kpit.com
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.17; Thu, 4 Feb
+ 2021 06:35:27 +0000
+Received: from CO1PR11MB5009.namprd11.prod.outlook.com
+ ([fe80::45:697c:a699:df64]) by CO1PR11MB5009.namprd11.prod.outlook.com
+ ([fe80::45:697c:a699:df64%7]) with mapi id 15.20.3825.017; Thu, 4 Feb 2021
+ 06:35:26 +0000
+Subject: Re: [oe] [meta-oe][PATCH] mozjs: improve reproducibility
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+References: <165F823E2231DC51.16314@lists.openembedded.org>
+Message-ID: <db7d46f2-6917-48aa-a4c7-6abcac1c005b@windriver.com>
+Date: Thu, 4 Feb 2021 14:34:21 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+In-Reply-To: <165F823E2231DC51.16314@lists.openembedded.org>
+X-Originating-IP: [60.247.85.82]
+X-ClientProxiedBy: HK2P15301CA0006.APCP153.PROD.OUTLOOK.COM
+ (2603:1096:202:1::16) To CO1PR11MB5009.namprd11.prod.outlook.com
+ (2603:10b6:303:9e::11)
+Return-Path: mingli.yu@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from localhost.localdomain (1.186.38.155) by BM1PR01CA0105.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.20.3825.19 via Frontend Transport; Thu, 4 Feb 2021 05:57:57 +0000
+Received: from [128.224.162.139] (60.247.85.82) by HK2P15301CA0006.APCP153.PROD.OUTLOOK.COM (2603:1096:202:1::16) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3846.1 via Frontend Transport; Thu, 4 Feb 2021 06:35:25 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: ba496b8b-c65f-4da6-9cfd-08d8c8d1d245
-X-MS-TrafficTypeDiagnostic: PN1PR0101MB1903:
-X-MS-Exchange-Transport-Forked: True
+X-MS-Office365-Filtering-Correlation-Id: 59a52af5-0962-4993-57b4-08d8c8d70ecc
+X-MS-TrafficTypeDiagnostic: MWHPR11MB1902:
 X-Microsoft-Antispam-PRVS: 
-	<PN1PR0101MB190328B970386049B6F90534EFB39@PN1PR0101MB1903.INDPRD01.PROD.OUTLOOK.COM>
-X-MS-Oob-TLC-OOBClassifiers: OLM:849;
+	<MWHPR11MB19029F96D3C87FF72DF98989F1B39@MWHPR11MB1902.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:901;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	lcFODm/FqzjwweNodNMgaMPSsmdlfSQ2o5Uxd11OeTKp5Ic9oFkXU31oOCpoMWvGvydOGsTuqhQpki5F5xoZ4nw52erqa+bzoWoVdKgU0r8NO4a9dQHGBAvlR+bvaW5WiKiI+pLG/gZYTS/QiF6sOXX/jgoVlVDwowV6jfOsWvCy78uDUo7+g695rOc3VsrgODFW8TYfjOAJi93WaiImB+HobSIH7JY4YtRtnp6wLQdqKFYSfwzUcp5whXo3flNZN3jpBUGF2lsi1BP7wKd8LXt5xnxy6JNQGu3k9n2nMvBrKRFRH89IqXnQNVcBzuMz14MH6JdWFAismfuhsYp6KXYPQZimU4/WspIKk6FcdzmnP8IJNSoTp38tlLxVFJjycuzUMdeJ6Slm2IYzPknfOT6l7xZjzlvG3MF5E56ydvUFjSbqXG5vCRIqsyQ7HaA3wkWEylEt+WLF/IxPv7V7JVyIgYN4vRWN7dfY1nGS9WVa+VmzdmmhlBvEjcEKWFJuimRX734kFZygw62i5yAZOvjXuMb28aYC2FhohydhXj88r7luUOZzN0Y7O7D85vsg0NCQB8xKfirjY36AJpglRi5bzRmbHbQBDuIBy+xK7Qk=
+	wlbE/0zacQHl+GaAshpKsvlSAG2vkIacCPmzl0iO+PScLp70ZOxOBC82GDk0aYE4Yq2yk6IJ52pofI00T+a8j6tb2fST4OI8j7taVUlqMsy0NyEDfcVjChe7CMiEQswBSN8El3L+1EDw3d+59Ky0jNdpnv5qEpO8oewpJB53wkWFZKW8k7sZn/zkHJ7De/nlQmDSuPY6/R6WNGPA+mdbj3Dq8HgtdVxO3jM3VVdcl8lsmuuwhSqey7YrI13iUZRX9g5Jk+CZhUKL2SJuh8iJHldkLiTVtDsPeyGEpZRBg3t3mwoQhyZoFVoCYt++l7Eyxus8j/sbYECFDyixlUpx/rGiDHeLCNypNewcKWkpbewpZmo7bi67oBiIeW7xbR0wdQu+gJ1dkatbD7k8DrIBxH0VVCX+96HUMmmYq777iIlEp1f6QhuU/wCdGcNNoJwhzrCmD9hWd/xpHlwDI1/KLTB+A6VSYAlzOxH+T3LS0SrGT5LKtacI8RB3rQXMAVEpzwzC3U5csbFWlIB+VO96h4FNPdmGN3bFxXhR1phIf6lXw40yVwlvjaikvs+ZMp6YC2oRYFBEmqc5g9YuKQklBI7MIPgiIv7cwdIbK4AOKNMNoOEIDvdLpVLY1pu8d/b8TiKfO8XJtvRzLEplr+/P5/lJKtYw9U74tutExQSHabj8YJo8F1KabZor+KFo3gJXgyIb+lEZ5ewxT2+Y5uApIw==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN2PR01MB4410.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(136003)(366004)(346002)(396003)(39850400004)(376002)(316002)(54906003)(8936002)(6512007)(478600001)(66574015)(52116002)(55236004)(2906002)(66476007)(66556008)(6486002)(66946007)(86362001)(6666004)(1006002)(36756003)(26005)(5660300002)(69590400011)(16526019)(186003)(83380400001)(8676002)(2616005)(6506007)(956004)(4326008)(36456004);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB5009.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(376002)(346002)(136003)(39850400004)(396003)(478600001)(36756003)(83380400001)(66476007)(26005)(16576012)(2616005)(8676002)(53546011)(6486002)(966005)(8936002)(316002)(52116002)(66946007)(186003)(16526019)(956004)(6706004)(86362001)(31686004)(6916009)(6666004)(66556008)(2906002)(31696002)(5660300002)(78286007)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	zw1Ry3guIvzZksXUAu+E0NoBUOp/krKiq49nODCeYOw0ZcF8M9QNbyJLx3R6bv/pz0vwZ6FRXNE3w8dK2jHCgIAH5XV7RM8cDt/EaJ/8fIZYS579HqXouaBuamAE+ryWng6p8BhP3fRKjxBVWMEKDf5sZfIFvItQgY+iZS17bC/+4SFWxiYMBBm+pPdvyhs0bC5w7uCJyFizs4lwgdvW9yaT3jIioCu048NbKT6XefFzsiGl3pQnkcnCoyrJF6tCjQftiNtG+0DPOOb35dx3KINkkaZ1PFgOEJXULN/0kmoyF7O3lvIACeyEDeLjynYGmH/s0r86DZei3BgpcOK7cLVv4usuJCGbAv3t+m4ShQHlrUReLujQiY11payHnOOFc75XIS5aRzeEPsw4jTh+CKSdcpsj53YX96OyJ/zKpV8tIMJfvW4rSAK8E0y5Ecsv4rxgKHdCuslZP8XVbEnFMJTRNMGRyCudkWzoJaJs9mT53lHhJY8xH+ivvcu5ThlcQihAy8/dO7zBl5kNo5NuaGPuFj8Gyeizhmw33wKbF466OFG4FD4R26SH8D1csuF9QUtmEK+zTOLvsnYWfVsA8wNMRiGA2MBBnVZ8MBzqbLrNKUAyk/5dgyrIbpZgIPWHm/b3044m02XyJeEyO5nGUCvjQ85Kxuid4DLS/0lkodEL6bvWG84XSCi2QiQKatqyHzDx/u606zPxs9pFAlaL+r+ehmBhHsDYL5xXE3jqcn1m9p+bjg5U6jdflplZd0wO
-X-OriginatorOrg: kpit.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ba496b8b-c65f-4da6-9cfd-08d8c8d1d245
-X-MS-Exchange-CrossTenant-AuthSource: PN2PR01MB4410.INDPRD01.PROD.OUTLOOK.COM
+	=?utf-8?B?VVM4ZFhHY2RTUHZ0N05vdDJJNFllc04vdU9NbkthRW9PRmxYaDc3TTZZazVN?=
+ =?utf-8?B?Z1h0TXJ2V3BkYlkxeGNwZ0UyWUlBWTBOTzZoZ0cxK09PdDcwOXVvTUlIMkd5?=
+ =?utf-8?B?dGRNc0U5aXByZlB1YW9qaEFONEJDeVdGeitGeDlJczBrVUwwRWpaelFVbkQ3?=
+ =?utf-8?B?TWpYZHVXdmZMTTBoY2d4ZFdHYnRaMlpHSWcvTXB2QjYvYUp4aVFUb0RuSStC?=
+ =?utf-8?B?d3FFVjA5dGV2bTJvY2ZLUjNZOHJoWDVBVW5Pb09DcUpsL1hzcXBMa2FYYTFo?=
+ =?utf-8?B?d0xnejlwalgyTmo5ellNSndpQVFBODBncnlBdkJEVkk3MGFiT2EvVkU3dkR2?=
+ =?utf-8?B?eVJkbzVHelQyWHNwdW90MjJjUzlqTlVScWVLS09xM1N2MWNLUndDZ3VDMERq?=
+ =?utf-8?B?dGtid3pMWUtkODZ4VkViYkpWdkZKOXBtVXRmRlVPc2R6cXE0a2dydVF4aENB?=
+ =?utf-8?B?cExnaERhZ2ovUE42OGpEZW92N0VRallpa1JocWh6dXE5cXZjaEdjVGt6T1B1?=
+ =?utf-8?B?NFpFRElkSWdKc2lWOXZ1UU1zMlhKaFVUT3VtQVhCM1prcEkrRXNOMDR1SHdp?=
+ =?utf-8?B?dGtWTWRzT2VsRDFGQnRsZTFidWN6TDgvS2RORFpWRmV3cTdvdk4wU2VidEdw?=
+ =?utf-8?B?dm1tMzU2cU8wWU9kZWN3VEdNQ3dsbGl0MG5GOEtZOExvOXJFRnR4ZUtkOE14?=
+ =?utf-8?B?SzBuVS90ZzFqSmdlTzNncmR1eXk3N1BadDRXdGFGbkRaVkFKRWs5ektPOXEz?=
+ =?utf-8?B?c0wwMkZVUnB5ZzVpSXQrYTJuSWNpQmJnbU5GQ2dwWEN2Z25KVmx0Y1FKUERE?=
+ =?utf-8?B?MThEL2g4TVA5Z1VoUm9WODFjZ0Y5ajJqQjhDa2lVWXVDVm9ycCtBTEFObklr?=
+ =?utf-8?B?ZGsvSm5EU0RpKzR5dVlNZmZwQ0JlSDdSYzJpR0ZwdXFRcE9pRXNDbEZSR090?=
+ =?utf-8?B?K2I5dDk0TytBd2tnUmZVN2ozeUVNSlZxNGRYK21Dd09naUhPV29JVXg5UDFq?=
+ =?utf-8?B?UmJvdEdBRUVtNWdQV0lSSU9qSW9DcERlMncrbUJaQzY2YWU4RysrbkpJSmpX?=
+ =?utf-8?B?L3ZHTnBtdnBWZWdCbVY4eklKSU5NT01NMlVLUlJ5THlzZzZxbkwzZ1RzNnRw?=
+ =?utf-8?B?c0FFSkhTVjVqS2EzTnp4MktpVVo4UnFVb0l1SHpMSFdXZDdmSlRxYkQySTMx?=
+ =?utf-8?B?eEdMRk11YlBqL0RKUHVibXZTZzZpY1luY0lyanlDRnRwd1lSTzVnREdJT3hW?=
+ =?utf-8?B?STh2RUxPUnBCekxmWVFBb0E3aDZzNktvbVdpdkhoY2Z0MHNqQ1RadE44WHdE?=
+ =?utf-8?B?ZlB5WXNSakxCMjdZMW5kbkgwOUwrMkF4SHpDZVh2V1prMFRBRUtxZXpQczFP?=
+ =?utf-8?B?MFJHU3Y1M3BjS3FFMTlvdFBZWWF3N1pqbVYrSTNIWXhtaUM2RVY3Z2RNS1Vl?=
+ =?utf-8?B?cUQvVkJ6eENObUtKVGFtTDlwdS96Q2IwRmtSdkJpRDRZVThySnYxT2VoRTF6?=
+ =?utf-8?B?TlFrNWEwTVhGeUJVRjNXTjVBbktuN3hkSnRUSkJUZVBTQkZNZ0dtN1ZjRE9X?=
+ =?utf-8?B?WCtQSDZXdXM1dWZON1JiM0xZNnRQblNzRFdVeGZwdWNHWjIwdXFoWkRwYVZJ?=
+ =?utf-8?B?cHJGb2lGT2VqRE90KzBoaHp4MDdNUFB5dmxlK24rdGRmL01laDR3alVXdENK?=
+ =?utf-8?B?NnhycnN5MzZpdDJiRlVUMUVQR1FuMkhRNis5alNGbWUxT0lDUU1Td0R2ejZn?=
+ =?utf-8?Q?EnFaGHJDcKjGJ69P/Mnisa9ydKKbM8QeUeza/C6?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 59a52af5-0962-4993-57b4-08d8c8d70ecc
+X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB5009.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Feb 2021 05:57:57.8564
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Feb 2021 06:35:26.6324
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3539451e-b46e-4a26-a242-ff61502855c7
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +2gpn74mh2tqy2srSYEzI3XPEpK7+XHSclVL7bzenGeVojw8R+ZoqGR52Ctbg6gQgGznYNh737jLXK/xJn8Npg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN1PR0101MB1903
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-CrossTenant-UserPrincipalName: EZazsEepVhL5pfKny9e4/dBhqhFXhIaGYqGN6TTqZWnP+GQzJxq5v2jx1Ws9MCCyWeFmyEpe3FWVCW2SYd4TLA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR11MB1902
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-From: Haiqing Bai <Haiqing.Bai@windriver.com>
+Ping.
 
-Optimize _encode_invalid_chars for a denial of service (CPU consumption)
+Thanks,
 
-CVE: CVE-2020-7212
-
-Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
-Signed-off-by: Harpritkaur Bhandari <Harpritkaur.Bhandari@kpit.com>
----
- .../python/python3-urllib3/CVE-2020-7212.patch     | 54 ++++++++++++++++++=
-++++
- .../python/python3-urllib3_1.25.7.bb               |  2 +
- 2 files changed, 56 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-urllib3/CVE=
--2020-7212.patch
-
-diff --git a/meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7=
-212.patch b/meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-72=
-12.patch
-new file mode 100644
-index 0000000..a2bb0fb
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.pat=
-ch
-@@ -0,0 +1,54 @@
-+From aff951b7a41eb5b958b32c49eaa00da02adc9c2d Mon Sep 17 00:00:00 2001
-+From: Quentin Pradet <quentin.pradet@gmail.com>
-+Date: Tue, 21 Jan 2020 22:32:56 +0400
-+Subject: [PATCH] Optimize _encode_invalid_chars (#1787)
-+
-+Co-authored-by: Seth Michael Larson <sethmichaellarson@gmail.com>
-+
-+Upstream-Status: Backport
-+[from git://github.com/urllib3/urllib3.git commit:a2697e7c6b]
-+Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
-+---
-+ src/urllib3/util/url.py | 15 ++++++---------
-+ 1 file changed, 6 insertions(+), 9 deletions(-)
-+
-+diff --git a/src/urllib3/util/url.py b/src/urllib3/util/url.py
-+index 9675f74..e353937 100644
-+--- a/src/urllib3/util/url.py
-++++ b/src/urllib3/util/url.py
-+@@ -216,18 +216,15 @@ def _encode_invalid_chars(component, allowed_chars, =
-encoding=3D"utf-8"):
-+
-+     component =3D six.ensure_text(component)
-+
-++    # Normalize existing percent-encoded bytes.
-+     # Try to see if the component we're encoding is already percent-encod=
-ed
-+     # so we can skip all '%' characters but still encode all others.
-+-    percent_encodings =3D PERCENT_RE.findall(component)
-+-
-+-    # Normalize existing percent-encoded bytes.
-+-    for enc in percent_encodings:
-+-        if not enc.isupper():
-+-            component =3D component.replace(enc, enc.upper())
-++    component, percent_encodings =3D PERCENT_RE.subn(
-++        lambda match: match.group(0).upper(), component
-++    )
-+
-+     uri_bytes =3D component.encode("utf-8", "surrogatepass")
-+-    is_percent_encoded =3D len(percent_encodings) =3D=3D uri_bytes.count(=
-b"%")
-+-
-++    is_percent_encoded =3D percent_encodings =3D=3D uri_bytes.count(b"%")
-+     encoded_component =3D bytearray()
-+
-+     for i in range(0, len(uri_bytes)):
-+@@ -237,7 +234,7 @@ def _encode_invalid_chars(component, allowed_chars, en=
-coding=3D"utf-8"):
-+         if (is_percent_encoded and byte =3D=3D b"%") or (
-+             byte_ord < 128 and byte.decode() in allowed_chars
-+         ):
-+-            encoded_component.extend(byte)
-++            encoded_component +=3D byte
-+             continue
-+         encoded_component.extend(b"%" + (hex(byte_ord)[2:].encode().zfill=
-(2).upper()))
-+
-+--
-+2.23.0
-+
-diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb =
-b/meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb
-index 34c15b6..8d987a1 100644
---- a/meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb
-@@ -8,6 +8,8 @@ SRC_URI[sha256sum] =3D "f3c5fd51747d450d4dcf6f923c81f78f811=
-aab8205fda64b0aba34a4e4
-
- inherit pypi setuptools3
-
-+SRC_URI +=3D "file://CVE-2020-7212.patch"
-+
- RDEPENDS_${PN} +=3D "\
-     ${PYTHON_PN}-certifi \
-     ${PYTHON_PN}-cryptography \
---
-2.7.4
-
-This message contains information that may be privileged or confidential an=
-d is the property of the KPIT Technologies Ltd. It is intended only for the=
- person to whom it is addressed. If you are not the intended recipient, you=
- are not authorized to read, print, retain copy, disseminate, distribute, o=
-r use this message or any part thereof. If you receive this message in erro=
-r, please notify the sender immediately and delete all copies of this messa=
-ge. KPIT Technologies Ltd. does not accept any liability for virus infected=
- mails.
+On 2/1/21 11:32 AM, Yu, Mingli wrote:
+> From: Mingli Yu <mingli.yu@windriver.com>
+> 
+> Remove the build path from the file js60-config.
+> 
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> ---
+>   .../meta-python/recipes-extended/mozjs/mozjs_60.9.0.bb          | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs_60.9.0.bb b/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs_60.9.0.bb
+> index 130ff13ec..614cdf6e3 100644
+> --- a/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs_60.9.0.bb
+> +++ b/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs_60.9.0.bb
+> @@ -125,6 +125,8 @@ MULTILIB_SCRIPTS += " ${PN}-dev:${bindir}/js60-config"
+>   
+>   do_install_append() {
+>          oe_multilib_header mozjs-60/js-config.h
+> +       sed -e 's@${STAGING_DIR_HOST}@@g' \
+> +           -i ${D}${bindir}/js60-config
+>   }
+>   
+>   PACKAGES =+ "lib${BPN}"
+> 
+> 
+> 
+> 
+> 
