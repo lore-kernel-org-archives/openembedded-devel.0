@@ -1,219 +1,196 @@
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
- by mx.groups.io with SMTP id smtpd.web10.6203.1612435560888105663
+Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com [66.111.4.27])
+ by mx.groups.io with SMTP id smtpd.web12.6520.1612437608102236023
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Feb 2021 02:46:01 -0800
+ Thu, 04 Feb 2021 03:20:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=d25mn6vw;
- spf=pass (domain: gmail.com, ip: 209.85.167.53, mailfrom: andrey.z@gmail.com)
-Received: by mail-lf1-f53.google.com with SMTP id f1so3839872lfu.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Feb 2021 02:46:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=dKWrVU0s+gGVVbUeb3IJ8TfaAaa7Lds1XaLUExWkzsQ=;
-        b=d25mn6vwtygp1X/nJJTsxE7Yl+iUQMAx1O23RnbxW19IndUrYaNcLhk1Sphjd/+Ikp
-         r5G1VaRhHslXO7rwidzGJGGF3Ya+9EbKJQmia/8SQTyn032sBpAEZ3EGilhObyvpe1O0
-         dphzXq962ktcRA8vZwWAs+g26xD6zs903cHVqmyeFWqAvMdxeOt85QPxPpfndSVmE7Xb
-         2yoq6y6RQb0HkmARVB0e3ap1Yeer3zHHzuBU+/XoPMFmf4NoYl15qUxLEY8Sq9i8Wuz9
-         YPQKQCOCN0DBLX3+AEd9m7VJkLEFKEaEnHrw7XunycnYl6auEWpI0bwF4EJe0tzuIHrB
-         FnJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=dKWrVU0s+gGVVbUeb3IJ8TfaAaa7Lds1XaLUExWkzsQ=;
-        b=PmWTAV+4Qvcixu1WPSQVXz90DhG6VKk1iXCLqh44g52+0w4sW31w4Dzia5eVTYRp/K
-         TSd0BHm6yULNGyev4HNemjrzO3T6c84h54ykwsEqll8GEmzhaRtT0jDM9BnTgiqTA6sp
-         V/EQgN2NkGIAfoKy1mYpn+4TKN/cII+1C9SbxsNzhOjTnCrpxw623z1Mflt9TTE4xefo
-         us+1pbk4f4gq1wS0dsT3oVzt44Y9rmIlh8GZwiJh04yGNmYmtRwKHc1K3ZoMMvFNY7ps
-         ZRC3pITmFmm3tKPg9Ck3xDXycc6JWpLVOOlYtTQTwCuNmS15kvTeb3ruE+wZCrfL9QRg
-         9AJQ==
-X-Gm-Message-State: AOAM533I7qLbYM4rwmb0We3xM+n/L/mRXc6K/AMizGjQF5zNYQleZwsM
-	Mba6iFh7vIJLNgTdo1H6s62VifOksglD0bw/SEw=
-X-Google-Smtp-Source: ABdhPJx5FNz3x8leqxuG2/96V1wMu8YDZBgXeXA/jcCV1ANJ57CDYqYXWGTTLaY+0v8rv2RcgGVhIOrgFzuz63R1ny0=
-X-Received: by 2002:a05:6512:14f:: with SMTP id m15mr4175070lfo.304.1612435559027;
- Thu, 04 Feb 2021 02:45:59 -0800 (PST)
+ dkim=pass header.i=@gherzan.com header.s=fm1 header.b=Ko9P+aIp;
+ spf=pass (domain: gherzan.com, ip: 66.111.4.27, mailfrom: andrei@gherzan.com)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+	by mailout.nyi.internal (Postfix) with ESMTP id 1881B5C01C4;
+	Thu,  4 Feb 2021 06:20:07 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute4.internal (MEProxy); Thu, 04 Feb 2021 06:20:07 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gherzan.com; h=
+	from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding; s=fm1; bh=KvdFQoU0EMQ+21J5nPlYd4N0+X
+	3KDLXdJlf7geeHV8w=; b=Ko9P+aIp72OFKYds69Rp9NCkJUQDnX9yWJdWThCZtU
+	or98VVFeek0tiy9wO10bK+xG21iSLy7pQYZLudeTkihRUKpwJ/ESLGRuEzxJ20pZ
+	JMQfSQYxfoERmakAe9HEIhTERXYBAXaGJeqCpQbSFJCUm78PmxmNDkPgZSSj06La
+	zNJDs30rCCdImvBBeCpbAsttaz3hwj9aJNVO2Z7gNeRN7n/rJs+JJGl3zQesea3f
+	9ilcihoN6KSh33nZ37j2QgmBrA238sDLAxU5qHzlmcy6vsYk3zsIsCVqTalq9Te4
+	VnU2H+ZxLJBkeMAcpOATfK8KaVySSix/ItAiuXr0YHTg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:content-transfer-encoding:date:from
+	:message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=KvdFQoU0EMQ+21J5n
+	PlYd4N0+X3KDLXdJlf7geeHV8w=; b=Mq/cq2fDc718PLVxNJSGjMuUTSe+6W6zf
+	KO4c2kve/O9Cs970w4o0UPNRvFjZsfV9Pi7JgMIDtxiTnQcaZPn0B8GanJK+7HDH
+	1NEulj6tN6Jw6YsMKoSi/wiuapApmKZhjrPTUJbBjurjOtNsSDP1IEfxFexUoui/
+	/wWWhtfAm6ktE3PLstoosoEtrkeMzh69qEoF2p9jSKvIGxYOvXg0vt38CL7B0pOp
+	vDkKAszZ+KKYyVJq9T3HCAQfp58v7HXCE7v6XCOIccD6vWcOk1ofqCU1/NYgHW7U
+	ysP1GRDESFB1HdbBaGVDXMjytmJ9O1PqAcbl8yXI/nEmpa8csx5JQ==
+X-ME-Sender: <xms:ZtgbYI9N9N-tmWJ7lr9wlLDu68QfARzZwDrNpk8SOlq9Zq1sPeVspw>
+    <xme:ZtgbYAoB_cKl2Fjj-4oP9E5yi8ErP-HyuS-_vQEOW-q8hr_2UG6Al3yEfj0Ewei6b
+    SujFahBGNY1k0vuSpM>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrgeeggddujecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+    fjughrpefhvffufffkofgggfestdekredtredttdenucfhrhhomheprghnughrvghisehg
+    hhgvrhiirghnrdgtohhmnecuggftrfgrthhtvghrnhepjeehfffhhedvjeduudelhfevje
+    eguddvhfeiudegveetieeuudffheefleehfeehnecuffhomhgrihhnpegtohhnfhdrihhn
+    pdhsvghrvhhitggvrdhinhenucfkphepuddtledrudehtddrleeirddvtdefnecuvehluh
+    hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprghnughrvghisehg
+    hhgvrhiirghnrdgtohhm
+X-ME-Proxy: <xmx:ZtgbYK5iBZcBcQaIA5PtBCPPqP9K-ls0Xi2vy5A8ju22G_4QQ-NMoA>
+    <xmx:ZtgbYANFBsLU4rWVLBoLrxhpGPs4GX0lFTm5oDKxK7CamEAZZ7NBtQ>
+    <xmx:ZtgbYMMdb4ZMaiAFKfYZKlkspEThzOP_Hdag9HX7dQe854bbtJp7Jg>
+    <xmx:Z9gbYB12WYRU46wP2kbyD_-9Cm45U8FEkaM1bhcNVWxU42hVfq0-iA>
+Received: from qwirkle.internal (host109-150-96-203.range109-150.btcentralplus.com [109.150.96.203])
+	by mail.messagingengine.com (Postfix) with ESMTPA id 7B64E1080063;
+	Thu,  4 Feb 2021 06:20:04 -0500 (EST)
+From: "Andrei Gherzan" <andrei@gherzan.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Andrei Gherzan <andrei.gherzan@huawei.com>
+Subject: [meta-python][PATCH] gateone: Cleanup assets for removed recipe
+Date: Thu,  4 Feb 2021 11:19:56 +0000
+Message-Id: <20210204111956.35015-1-andrei@gherzan.com>
+X-Mailer: git-send-email 2.30.0
 MIME-Version: 1.0
-References: <8f242d61-4dea-070a-217d-657e2204a807@windriver.com>
- <CAAnfSTsku9yTFYKCMVkmKq=77V8XGgq9pdO5n_PPb_ttHWnd3w@mail.gmail.com>
- <3aeac6ad-c5cc-dba9-2c3e-6caaad82aa2d@windriver.com> <5a73bb02-18ae-a7ea-c55b-d650db4d97a1@windriver.com>
-In-Reply-To: <5a73bb02-18ae-a7ea-c55b-d650db4d97a1@windriver.com>
-From: "Andrey Zhizhikin" <andrey.z@gmail.com>
-Date: Thu, 4 Feb 2021 11:45:47 +0100
-Message-ID: <CAHtQpK7P8JbrKCS-xMmgUu-rEUW1wbgJau+_93O9eP_+wgM_LQ@mail.gmail.com>
-Subject: Re: [oe] Help with dealing with autoconf uprev affected packages?
-To: hongxu <hongxu.jia@windriver.com>
-Cc: Randy MacLeod <randy.macleod@windriver.com>, Yi Fan Yu <yifan.yu@windriver.com>, 
-	"Chen, Qi" <qi.chen@windriver.com>, Khem Raj <raj.khem@gmail.com>, 
-	Ross Burton <ross@burtonini.com>, 
-	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Thu, Feb 4, 2021 at 11:06 AM hongxu <hongxu.jia@windriver.com> wrote:
->
-> On 2/3/21 3:17 AM, Randy MacLeod wrote:
-> > On 2021-02-02 12:11 p.m., Ross Burton wrote:
-> >> If you have anyone willing to work through some of the recipes in that
-> >> list then that will be much appreciated.
-> >>
-> >> If the issues are not obvious feel free to reach out to me.
-> >>
-> >> Ross
-> >
-> >
-> > YiFan, Hongxu, Qi, and anyone else.
-> >
-> >
-> > YP is upreving autoconf to 2.71 in oe-core/master-next
-> > after ~7 years of using autoconf-2.69!
-> >
-> > It breaks a few packages in meta-openembedded and I hear
-> > from Richard/Ross that usually an uprev will work for both
-> > the existing version of autoconf and the new version.
-> >
-> > Can we split up the list below among the team and do uprevs?
-> > I have checked the meta-oe list and I don't see any uprevs in the queue.
-> >
-> > I'll take libssh2 since I need to move it to oe-core for rust.
-> >
-> > We (Wind River) are mainly interested in:
-> >
-> > - libssh2 - Randy 1.9.1 is close (days/weeks?) to release:
-> > https://www.libssh2.org/mail/libssh2-devel-archive-2021-01/0020.shtml
-> >
-> > - lksctp-tools
-> >
-> Upstream has fixed it, it is easy to fix through backport a patch
-> > - openldap
->
-> Upstream has fixed it, but it is very hard to backport patches,
->
-> we have to upgrade it from 2.4.57 to 2.5.0 alpha through git
->
-> >
-> > - freeradius
-> Upstream is not alive and does not update autoconf to latest
-> >
-> > - libmcrypt - YiFan
-> >
-> > - iperf3 - YiFan
+From: Andrei Gherzan <andrei.gherzan@huawei.com>
 
-I just sent a patch for this one:
-https://lists.openembedded.org/g/openembedded-devel/message/89274
+We removed this recipe in 809de9b0572b8ea234af6141f73deaf2010bc54e but
+the recipe related files (for example configuration) were left behind.
+This patch cleans that up.
 
-YiFan, can you please have a look at it to see if it fits?
+Signed-off-by: Andrei Gherzan <andrei.gherzan@huawei.com>
+---
+ .../gateone/gateone/80oe.conf.in              | 24 ----------
+ .../gateone/gateone/gateone-avahi.service     | 10 ----
+ .../gateone/gateone/gateone-init.in           | 47 -------------------
+ .../gateone/gateone/gateone.service.in        | 10 ----
+ 4 files changed, 91 deletions(-)
+ delete mode 100644 meta-python/recipes-connectivity/gateone/gateone/80oe.conf.in
+ delete mode 100644 meta-python/recipes-connectivity/gateone/gateone/gateone-avahi.service
+ delete mode 100644 meta-python/recipes-connectivity/gateone/gateone/gateone-init.in
+ delete mode 100644 meta-python/recipes-connectivity/gateone/gateone/gateone.service.in
 
-> >
-> > - spice
-> >
-> > - postgresql
-> >
-> Upstream is not alive and does not update autoconf to latest
->
-> //Hongxu
->
-> >
-> > but given your other work, please consider helping with the other
-> > packages.
-> >
-> > This should be easy work and done soon. If there's a problem, reply
-> > all and let
-> > Ross know what's going wrong.
-> >
-> >
-> > Other packages:
-> >
-> > - pidgin
-> >
-> > - geany
-> >
-> > - npdi
-> >
-> > - transmission
-> >
-> > - yasm
-> >
-> > - hidapi
-> >
-> > - libstatgrab
-> >
-> > - keepalived
-> >
-> >
-> > ../Randy
-> >
-> >
-> >>
-> >> On Tue, 2 Feb 2021 at 17:07, Randy MacLeod
-> >> <randy.macleod@windriver.com> wrote:
-> >>> Khem, Ross,
-> >>>
-> >>> Richard mentioned on the YP call that there are some packages in
-> >>> meta-openembedded that are affected by the autoconf uprev
-> >>> in master-next.
-> >>>
-> >>> Do you need any help fixing/upreving those recipes
-> >>> from say a WR student or more experienced WR Beijing developers?
-> >>>
-> >>> ../Randy
-> >>>
-> >>> commit a38a6203b4c584c91fc69c461bb2e1c8f4fcb389 (master-next)
-> >>> Author: Richard Purdie <richard.purdie@linuxfoundation.org>
-> >>> Date:   Fri Jan 29 10:57:42 2021
-> >>>
-> >>>       autoconf: Upgrade 2.70 -> 2.71
-> >>>
-> >>>       Drop patches backported from autoconf master.
-> >>>
-> >>>       Signed-off-by: Richard Purdie
-> >>> <richard.purdie@linuxfoundation.org>
-> >>>
-> >>>
-> >>>
-> >>> https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/895/steps/12/logs/stdio
-> >>>
-> >>>
-> >>> Summary: 18 tasks failed:
-> >>> .../meta-oe/recipes-support/libssh2/libssh2_1.9.0.bb:do_configure
-> >>>
-> >>> .../meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb:do_configure
-> >>>
-> >>> .../meta-oe/recipes-support/openldap/openldap_2.4.57.bb:do_configure
-> >>> .../meta-oe/recipes-dbs/postgresql/postgresql_13.1.bb:do_configure
-> >>> .../meta-oe/recipes-support/pidgin/pidgin_2.13.0.bb:do_configure
-> >>> .../meta-oe/recipes-devtools/geany/geany_1.36.bb:do_configure
-> >>> .../meta-networking/recipes-support/ntopng/ndpi_3.4.bb:do_configure
-> >>>
-> >>> virtual:native:.../meta-oe/recipes-support/libssh2/libssh2_1.9.0.bb:do_configure
-> >>>
-> >>>
-> >>> .../meta-oe/recipes-connectivity/transmission/transmission_git.bb:do_configure
-> >>>
-> >>>
-> >>> .../meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb:do_configure
-> >>>
-> >>>     .../meta-oe/recipes-devtools/yasm/yasm_git.bb:do_configure
-> >>> .../meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb:do_configure
-> >>> .../meta-oe/recipes-support/hidapi/hidapi_git.bb:do_configure
-> >>> .../meta-oe/recipes-crypto/libmcrypt/libmcrypt_2.5.8.bb:do_configure
-> >>> .../meta-oe/recipes-benchmark/iperf3/iperf3_3.9.bb:do_configure
-> >>> .../meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb:do_configure
-> >>>
-> >>> .../meta-networking/recipes-daemons/keepalived/keepalived_2.1.5.bb:do_configure
-> >>>
-> >>> .../meta-networking/recipes-support/spice/spice_git.bb:do_configure
-> >>> --
-> >>> # Randy MacLeod
-> >>> # Wind River Linux
-> >
-> >
->
->
-> 
->
-
-
+diff --git a/meta-python/recipes-connectivity/gateone/gateone/80oe.conf.in b/meta-python/recipes-connectivity/gateone/gateone/80oe.conf.in
+deleted file mode 100644
+index 4503da422..000000000
+--- a/meta-python/recipes-connectivity/gateone/gateone/80oe.conf.in
++++ /dev/null
+@@ -1,24 +0,0 @@
+-// Some custom Gate One settings for OpenEmbedded
+-{
+-    "*": {
+-        "gateone": { // These settings apply to all of Gate One
+-            "log_file_prefix": "@localstate@/log/gateone.log", // default would be /var/log/gateone/gateone.log
+-            "log_file_max_size": 5242880, // 5 megabyte logs for OE by default (default would normally be 100Mb)
+-            "log_file_num_backups": 2, // Default is normally 10
+-            "origins": ["*"], // Every device has a unique origin
+-            "logging": "info",
+-            "pid_file": "/run/gateone.pid",
+-            "session_dir": "/tmp/gateone",
+-            "user_dir": "@localstate@/lib/gateone/users"
+-        },
+-        "terminal": {
+-            // Disabling session logging for embedded devices is a good idea (limited/slow storage)
+-            "session_logging": false,
+-            "syslog_session_logging": false
+-//             "commands": {
+-//                 // For some reason this doesn't work (never asks for the password)
+-//                 "login": "setsid /bin/login" // Normally this would emulate logging into the host console
+-//             }
+-        }
+-    }
+-}
+diff --git a/meta-python/recipes-connectivity/gateone/gateone/gateone-avahi.service b/meta-python/recipes-connectivity/gateone/gateone/gateone-avahi.service
+deleted file mode 100644
+index 0f613d18e..000000000
+--- a/meta-python/recipes-connectivity/gateone/gateone/gateone-avahi.service
++++ /dev/null
+@@ -1,10 +0,0 @@
+-<?xml version="1.0" standalone='no'?><!--*-nxml-*-->
+-<!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+-
+-<service-group>
+-  <name replace-wildcards="yes">GateOne on %h</name>
+-  <service>
+-    <type>_https._tcp</type>
+-    <port>443</port>
+-  </service>
+-</service-group>
+diff --git a/meta-python/recipes-connectivity/gateone/gateone/gateone-init.in b/meta-python/recipes-connectivity/gateone/gateone/gateone-init.in
+deleted file mode 100644
+index 86d655c94..000000000
+--- a/meta-python/recipes-connectivity/gateone/gateone/gateone-init.in
++++ /dev/null
+@@ -1,47 +0,0 @@
+-#!/bin/sh -e
+-### BEGIN INIT INFO
+-# Provides:          gateone
+-# Required-Start:    networking
+-# Default-Start:     2 3 4 5
+-# Default-Stop:      0 1 6
+-# Short-Description: Gateone HTML5 ssh client
+-# Description:       Gateone HTML5 terminal emulator and SSH client.
+-### END INIT INFO
+-
+-. /etc/init.d/functions
+-
+-NAME=gateone
+-DAEMON=@bindir@/gateone
+-PIDFILE=/run/gateone.pid
+-WORKDIR=@localstate@/lib/gateone
+-
+-do_start() {
+-    cd $WORKDIR
+-    @bindir@/python $DAEMON > /dev/null 2>&1 &
+-    cd $OLDPWD
+-}
+-
+-do_stop() {
+-    kill -TERM `cat $PIDFILE`
+-}
+-
+-case "$1" in
+-    start)
+-        echo "Starting gateone"
+-        do_start
+-        ;;
+-    stop)
+-        echo "Stopping gateone"
+-        do_stop
+-        ;;
+-    restart|force-reload)
+-        echo "Restart gateone"
+-        do_stop
+-        sleep 1
+-        do_start
+-        ;;
+-    *)
+-        echo "Usage: $0 {start|stop|restart|force-reload}" >&2
+-        exit 1
+-        ;;
+-esac
+diff --git a/meta-python/recipes-connectivity/gateone/gateone/gateone.service.in b/meta-python/recipes-connectivity/gateone/gateone/gateone.service.in
+deleted file mode 100644
+index 44667275a..000000000
+--- a/meta-python/recipes-connectivity/gateone/gateone/gateone.service.in
++++ /dev/null
+@@ -1,10 +0,0 @@
+-[Unit]
+-Description=GateOne daemon
+-ConditionPathExists=|@localstate@/lib/gateone
+-
+-[Service]
+-WorkingDirectory=@localstate@/lib/gateone
+-ExecStart=@bindir@/python @bindir@/gateone
+-
+-[Install]
+-WantedBy=multi-user.target
 -- 
-Regards,
-Andrey.
+2.30.0
+
