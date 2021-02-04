@@ -1,200 +1,313 @@
-Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
- by mx.groups.io with SMTP id smtpd.web11.10915.1612456287972355614
+Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com [209.85.222.172])
+ by mx.groups.io with SMTP id smtpd.web09.115.1612458415920811987
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Feb 2021 08:31:28 -0800
+ Thu, 04 Feb 2021 09:06:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=axis-central1 header.b=JhMsNVgJ;
- spf=pass (domain: axis.com, ip: 195.60.68.17, mailfrom: peter.kjellerstedt@axis.com)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=CxudKSgZ;
+ spf=pass (domain: gmail.com, ip: 209.85.222.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f172.google.com with SMTP id s77so4013125qke.4
+        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Feb 2021 09:06:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; q=dns/txt; s=axis-central1; t=1612456288;
-  x=1643992288;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=eCCNawwbj7BE6dF4Gb78yuON80I3GskDS/XYl9Ayflg=;
-  b=JhMsNVgJStPDL/m6dva7avEWMxwpx6miqAWxn/0Q3wkPzUOcPFPO5NyI
-   zz/K3Hgx+Hbwtfhk/1yOTyeKQyVz6SUL5IrsxJN7q+DFnfzZkjLLoKXda
-   HdFYvqx9PmBOE3vkfcufSvwWUrnlJ8uY8sdlNFgqAPORHKt++T3GB7IUN
-   XiFqnlAJ2E1jVAD9Sz74ThPgnyG6DGGj8jfYS3X8B98krsNH9ZD1e25bv
-   quAFqsjYoW6YeeiCr1PHx36//2T5cem5f0bBAxkd+f2gJ/+dG/1V1gr24
-   InhqT/vqjgK4n0URguOpFwy3T0uB3pMDdYiDMb2J/lGKULkDiEKdIRJIH
-   g==;
-From: "Peter Kjellerstedt" <peter.kjellerstedt@axis.com>
-To: Khem Raj <raj.khem@gmail.com>, "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-CC: Adam Miartus <adam.miartus@softhows.eu>
-Subject: Re: [oe] [meta-oe][PATCH V2] cereal: add cereal a header-only c++11 serialization library
-Thread-Topic: [oe] [meta-oe][PATCH V2] cereal: add cereal a header-only c++11
- serialization library
-Thread-Index: AQHW+dB+JykbE6BYoESDZ5vxiro1yapIMbCg
-Date: Thu, 4 Feb 2021 16:31:25 +0000
-Message-ID: <c5337d31cd64447d8aa29cc276eba6cd@XBOX03.axis.com>
-References: <20210203020115.2759192-1-raj.khem@gmail.com>
-In-Reply-To: <20210203020115.2759192-1-raj.khem@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=YOM6+8KQs6AIpDq/SHmvham60zVNhPCnh7FjmIeZmmk=;
+        b=CxudKSgZbX74sIdnNsh3mSrDF4u1WkdOQueXjdnUEHiZKEDFo6gpp8nf+jOeul//WD
+         1LarbMw3MfP170eYwIE/ILIuVgQLh6wlu3T5eVlvlQ/aqBBUtm24w1Z4KHr7q4Xaut6R
+         HiINvcWlm9qlGwpgEH3sBrL592U2XociU3K3j5mKaC09QOVpkZm50nXiMDT/GOSFqsFt
+         hD2+DCE5kYAmJzMcNwjH54qIdgn4d8h4A+iDqCcXyfo3fTjSWyyeJiaciXEWbFGDZ7pp
+         oVeGylDqbT0m4dn4gJQ0mVkFufsTbLO6U/HoiELUU3hKVn/Pm5hpuHApD4RortmKrLKz
+         nJ1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=YOM6+8KQs6AIpDq/SHmvham60zVNhPCnh7FjmIeZmmk=;
+        b=iZxZlbSdUFx4+b+PtU7IiX0GG6ZWbU1B8trZCwAVVPsu9c9hwLkWPoXlP9YCFar+7p
+         BiTG71zJw8AEghZl5b/xVPIjfeUBHjs4S6Zx//Vif34FIDw9EACx5ocoT+pfOTZnK0nh
+         O9+ySPFc4X78qZz1fgF0fZ0/NHSMoh1ckhdKPuVG2B0foT8TYsHyxXwbIjSQQVt2pjwo
+         cpAR6YLTwLFGKt9m2pb2P6dkdc9Banm5XFEvtAMtIQy7Z2pPoz/1cmHg/7oO6KSCjOtW
+         EUh8tsjx+6Ay5prQ47yYx+7qo0Q8Buef+dg2AhzBjqTYKsquaUMmbWxGh/l4rdnv2EW6
+         zf2w==
+X-Gm-Message-State: AOAM530p2G6vMSL2eV/6G+w/l9RJJiKJwj5PM1So6MCgAOny9ps7QAW5
+	mSZDHOeA2SZKjF/LXXR7dWTJsl0lNq3Idb3Uqt8=
+X-Google-Smtp-Source: ABdhPJyecQCjInKVejdVSJsIw8JMtcrRVkOwg97oc7qlBAqwuXwc77PjYQOLqIXkFvcXU18FoBJf0e1R3x59p2sQD4o=
+X-Received: by 2002:a37:a70b:: with SMTP id q11mr77254qke.474.1612458415004;
+ Thu, 04 Feb 2021 09:06:55 -0800 (PST)
 MIME-Version: 1.0
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+References: <20210203020115.2759192-1-raj.khem@gmail.com> <c5337d31cd64447d8aa29cc276eba6cd@XBOX03.axis.com>
+In-Reply-To: <c5337d31cd64447d8aa29cc276eba6cd@XBOX03.axis.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 4 Feb 2021 09:06:28 -0800
+Message-ID: <CAMKF1sqVTq1sZYT5jD8cAq0ZQjhCBobo+BHtLUkP0KDV70RfvA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH V2] cereal: add cereal a header-only c++11 serialization library
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>, 
+	Adam Miartus <adam.miartus@softhows.eu>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-V2UgYWxyZWFkeSBoYXZlIG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpYmNlcmVhbC9saWJjZXJl
-YWxfMS4zLjAuYmIhDQoNCkkgcmVjb21tZW5kIC4vbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL2Nl
-cmVhbC9jZXJlYWxfMS4wLmJiIGlzIHJlbW92ZWQgDQphZ2FpbiwgYW5kIGFueSByZWxldmFudCBj
-aGFuZ2VzIGFkZGVkIHRvIGxpYmNlcmVhbCBpbnN0ZWFkLg0KDQovL1BldGVyDQoNCj4gLS0tLS1P
-cmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9w
-ZW5lbWJlZGRlZC5vcmcgPG9wZW5lbWJlZGRlZC0NCj4gZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVk
-Lm9yZz4gT24gQmVoYWxmIE9mIEtoZW0gUmFqDQo+IFNlbnQ6IGRlbiAzIGZlYnJ1YXJpIDIwMjEg
-MDM6MDENCj4gVG86IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+
-IENjOiBBZGFtIE1pYXJ0dXMgPGFkYW0ubWlhcnR1c0Bzb2Z0aG93cy5ldT47IEtoZW0gUmFqDQo+
-IDxyYWoua2hlbUBnbWFpbC5jb20+DQo+IFN1YmplY3Q6IFtvZV0gW21ldGEtb2VdW1BBVENIIFYy
-XSBjZXJlYWw6IGFkZCBjZXJlYWwgYSBoZWFkZXItb25seSBjKysxMQ0KPiBzZXJpYWxpemF0aW9u
-IGxpYnJhcnkNCj4gDQo+IEZyb206IEFkYW0gTWlhcnR1cyA8YWRhbS5taWFydHVzQHNvZnRob3dz
-LmV1Pg0KPiANCj4gU2lnbmVkLW9mZi1ieTogQWRhbSBNaWFydHVzIDxhZGFtLm1pYXJ0dXNAc29m
-dGhvd3MuZXU+DQo+IFNpZ25lZC1vZmYtYnk6IEtoZW0gUmFqIDxyYWoua2hlbUBnbWFpbC5jb20+
-DQo+IC0tLQ0KPiB2MjogRml4IHBhY2thZ2luZyBlcnJvcnMNCj4gDQo+ICAuLi4vcGFja2FnZWdy
-b3Vwcy9wYWNrYWdlZ3JvdXAtbWV0YS1vZS5iYiAgICAgfCAgMiArLQ0KPiAgLi4uY2Vuc2UtZmls
-ZXMtZm9yLWNvbXBvbmVudHMtb2YtY2VyZWFsLnBhdGNoIHwgOTkgKysrKysrKysrKysrKysrKysr
-Kw0KPiAgbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL2NlcmVhbC9jZXJlYWxfMS4wLmJiIHwgMzYg
-KysrKysrKw0KPiAgMyBmaWxlcyBjaGFuZ2VkLCAxMzYgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlv
-bigtKQ0KPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9jZXJl
-YWwvY2VyZWFsLzAwMDEtYWRkLQ0KPiBsaWNlbnNlLWZpbGVzLWZvci1jb21wb25lbnRzLW9mLWNl
-cmVhbC5wYXRjaA0KPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1kZXZ0b29s
-cy9jZXJlYWwvY2VyZWFsXzEuMC5iYg0KPiANCj4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBl
-cy1jb3JlL3BhY2thZ2Vncm91cHMvcGFja2FnZWdyb3VwLW1ldGEtb2UuYmINCj4gYi9tZXRhLW9l
-L3JlY2lwZXMtY29yZS9wYWNrYWdlZ3JvdXBzL3BhY2thZ2Vncm91cC1tZXRhLW9lLmJiDQo+IGlu
-ZGV4IDk0ODMwZTI5NzAuLmJhODU1OTY5OTUgMTAwNjQ0DQo+IC0tLSBhL21ldGEtb2UvcmVjaXBl
-cy1jb3JlL3BhY2thZ2Vncm91cHMvcGFja2FnZWdyb3VwLW1ldGEtb2UuYmINCj4gKysrIGIvbWV0
-YS1vZS9yZWNpcGVzLWNvcmUvcGFja2FnZWdyb3Vwcy9wYWNrYWdlZ3JvdXAtbWV0YS1vZS5iYg0K
-PiBAQCAtOTYxLDcgKzk2MSw3IEBAIFJERVBFTkRTX3BhY2thZ2Vncm91cC1tZXRhLW9lLWZvcnRy
-YW4tcGFja2FnZXMgPSAiXA0KPiAgIyBubG9obWFubi1qc29uIGV4cHJ0ayBsaWJsaWdodG1vZGJ1
-cyBwOHBsYXRmb3JtIGdub21lLWRvYy11dGlscy1zdHViDQo+ICAjIGdsbSB0dGYtbXBsdXMgeGJp
-dG1hcHMgY2VyZXMtc29sdmVyIGNsaTExIGZmdHcgZ251bGliIGxpYmVpZ2VuIGFkZQ0KPiAgIyBz
-cGRsb2cgc3Bhbi1saXRlIHV0aGFzaCB3ZWJzb2NrZXRwcCBjYXRjaDIgcHJvcGVydGllcy1jcHAg
-Y3BwLW5ldGxpYg0KPiAtDQo+ICsjIGNlcmVhbA0KPiAgIyByc3lzbG9nIGNvbmZsaWN0cyB3aXRo
-IHN5c2xvZy1uZyBzbyBpdHMgbm90IGluY2x1ZGVkIGhlcmUNCj4gDQo+ICBFWENMVURFX0ZST01f
-V09STEQgPSAiMSINCj4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9jZXJl
-YWwvY2VyZWFsLzAwMDEtYWRkLWxpY2Vuc2UtDQo+IGZpbGVzLWZvci1jb21wb25lbnRzLW9mLWNl
-cmVhbC5wYXRjaCBiL21ldGEtb2UvcmVjaXBlcy0NCj4gZGV2dG9vbHMvY2VyZWFsL2NlcmVhbC8w
-MDAxLWFkZC1saWNlbnNlLWZpbGVzLWZvci1jb21wb25lbnRzLW9mLQ0KPiBjZXJlYWwucGF0Y2gN
-Cj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gaW5kZXggMDAwMDAwMDAwMC4uMDAwMGFiOTE5Nw0K
-PiAtLS0gL2Rldi9udWxsDQo+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9jZXJlYWwv
-Y2VyZWFsLzAwMDEtYWRkLWxpY2Vuc2UtZmlsZXMtZm9yLQ0KPiBjb21wb25lbnRzLW9mLWNlcmVh
-bC5wYXRjaA0KPiBAQCAtMCwwICsxLDk5IEBADQo+ICtGcm9tIDQ4MWIyYWE0NmIzZjU0ZDliZWUw
-NTlkOWRhNjgyNjNlZGVjZTJiYjMgTW9uIFNlcCAxNyAwMDowMDowMCAyMDAxDQo+ICtGcm9tOiBB
-ZGFtIE1pYXJ0dXMgPGFkYW0ubWlhcnR1c0Bzb2Z0aG93cy5ldT4NCj4gK0RhdGU6IE1vbiwgMSBG
-ZWIgMjAyMSAxNjoxNTowMSArMDEwMA0KPiArU3ViamVjdDogW1BBVENIXSBhZGQgbGljZW5zZSBm
-aWxlcyBmb3IgY29tcG9uZW50cyBvZiBjZXJlYWwNCj4gKw0KPiArU2lnbmVkLW9mZi1ieTogQWRh
-bSBNaWFydHVzIDxhZGFtLm1pYXJ0dXNAc29mdGhvd3MuZXU+DQo+ICstLS0NCj4gKyBpbmNsdWRl
-L2NlcmVhbC9leHRlcm5hbC9MSUNFTlNFICAgICAgICAgICAgICAgfCAyMSArKysrKysrKysrKysr
-Kw0KPiArIGluY2x1ZGUvY2VyZWFsL2V4dGVybmFsL3JhcGlkanNvbi9MSUNFTlNFICAgICB8IDEz
-ICsrKysrKysrKw0KPiArIC4uLi9leHRlcm5hbC9yYXBpZGpzb24vbXNpbnR0eXBlcy9MSUNFTlNF
-ICAgICB8IDI5ICsrKysrKysrKysrKysrKysrKysNCj4gKyAzIGZpbGVzIGNoYW5nZWQsIDYzIGlu
-c2VydGlvbnMoKykNCj4gKyBjcmVhdGUgbW9kZSAxMDA2NDQgaW5jbHVkZS9jZXJlYWwvZXh0ZXJu
-YWwvTElDRU5TRQ0KPiArIGNyZWF0ZSBtb2RlIDEwMDY0NCBpbmNsdWRlL2NlcmVhbC9leHRlcm5h
-bC9yYXBpZGpzb24vTElDRU5TRQ0KPiArIGNyZWF0ZSBtb2RlIDEwMDY0NCBpbmNsdWRlL2NlcmVh
-bC9leHRlcm5hbC9yYXBpZGpzb24vbXNpbnR0eXBlcy9MSUNFTlNFDQo+ICsNCj4gK2RpZmYgLS1n
-aXQgYS9pbmNsdWRlL2NlcmVhbC9leHRlcm5hbC9MSUNFTlNFDQo+IGIvaW5jbHVkZS9jZXJlYWwv
-ZXh0ZXJuYWwvTElDRU5TRQ0KPiArbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gK2luZGV4IDAwMDAw
-MDAwLi42NjMwMGI2OA0KPiArLS0tIC9kZXYvbnVsbA0KPiArKysrIGIvaW5jbHVkZS9jZXJlYWwv
-ZXh0ZXJuYWwvTElDRU5TRQ0KPiArQEAgLTAsMCArMSwyMSBAQA0KPiArK0NvcHlyaWdodCAoQykg
-MjAwNC0yMDA4IFJlbsOpIE55ZmZlbmVnZ2VyDQo+ICsrDQo+ICsrVGhpcyBzb3VyY2UgY29kZSBp
-cyBwcm92aWRlZCAnYXMtaXMnLCB3aXRob3V0IGFueSBleHByZXNzIG9yIGltcGxpZWQNCj4gKyt3
-YXJyYW50eS4gSW4gbm8gZXZlbnQgd2lsbCB0aGUgYXV0aG9yIGJlIGhlbGQgbGlhYmxlIGZvciBh
-bnkgZGFtYWdlcw0KPiArK2FyaXNpbmcgZnJvbSB0aGUgdXNlIG9mIHRoaXMgc29mdHdhcmUuDQo+
-ICsrDQo+ICsrUGVybWlzc2lvbiBpcyBncmFudGVkIHRvIGFueW9uZSB0byB1c2UgdGhpcyBzb2Z0
-d2FyZSBmb3IgYW55IHB1cnBvc2UsDQo+ICsraW5jbHVkaW5nIGNvbW1lcmNpYWwgYXBwbGljYXRp
-b25zLCBhbmQgdG8gYWx0ZXIgaXQgYW5kIHJlZGlzdHJpYnV0ZSBpdA0KPiArK2ZyZWVseSwgc3Vi
-amVjdCB0byB0aGUgZm9sbG93aW5nIHJlc3RyaWN0aW9uczoNCj4gKysNCj4gKysxLiBUaGUgb3Jp
-Z2luIG9mIHRoaXMgc291cmNlIGNvZGUgbXVzdCBub3QgYmUgbWlzcmVwcmVzZW50ZWQ7IHlvdSBt
-dXN0DQo+IG5vdA0KPiArKyAgY2xhaW0gdGhhdCB5b3Ugd3JvdGUgdGhlIG9yaWdpbmFsIHNvdXJj
-ZSBjb2RlLiBJZiB5b3UgdXNlIHRoaXMgc291cmNlDQo+IGNvZGUNCj4gKysgIGluIGEgcHJvZHVj
-dCwgYW4gYWNrbm93bGVkZ21lbnQgaW4gdGhlIHByb2R1Y3QgZG9jdW1lbnRhdGlvbiB3b3VsZCBi
-ZQ0KPiArKyAgYXBwcmVjaWF0ZWQgYnV0IGlzIG5vdCByZXF1aXJlZC4NCj4gKysNCj4gKysyLiBB
-bHRlcmVkIHNvdXJjZSB2ZXJzaW9ucyBtdXN0IGJlIHBsYWlubHkgbWFya2VkIGFzIHN1Y2gsIGFu
-ZCBtdXN0IG5vdA0KPiBiZQ0KPiArKyAgbWlzcmVwcmVzZW50ZWQgYXMgYmVpbmcgdGhlIG9yaWdp
-bmFsIHNvdXJjZSBjb2RlLg0KPiArKw0KPiArKzMuIFRoaXMgbm90aWNlIG1heSBub3QgYmUgcmVt
-b3ZlZCBvciBhbHRlcmVkIGZyb20gYW55IHNvdXJjZQ0KPiBkaXN0cmlidXRpb24uDQo+ICsrDQo+
-ICsrUmVuw6kgTnlmZmVuZWdnZXIgcmVuZS5ueWZmZW5lZ2dlckBhZHAtZ21iaC5jaA0KPiArZGlm
-ZiAtLWdpdCBhL2luY2x1ZGUvY2VyZWFsL2V4dGVybmFsL3JhcGlkanNvbi9MSUNFTlNFDQo+IGIv
-aW5jbHVkZS9jZXJlYWwvZXh0ZXJuYWwvcmFwaWRqc29uL0xJQ0VOU0UNCj4gK25ldyBmaWxlIG1v
-ZGUgMTAwNjQ0DQo+ICtpbmRleCAwMDAwMDAwMC4uNDU0NmYxNWENCj4gKy0tLSAvZGV2L251bGwN
-Cj4gKysrKyBiL2luY2x1ZGUvY2VyZWFsL2V4dGVybmFsL3JhcGlkanNvbi9MSUNFTlNFDQo+ICtA
-QCAtMCwwICsxLDEzIEBADQo+ICsrVGVuY2VudCBpcyBwbGVhc2VkIHRvIHN1cHBvcnQgdGhlIG9w
-ZW4gc291cmNlIGNvbW11bml0eSBieSBtYWtpbmcNCj4gUmFwaWRKU09OIGF2YWlsYWJsZS4NCj4g
-KysNCj4gKytDb3B5cmlnaHQgKEMpIDIwMTUgVEhMIEEyOSBMaW1pdGVkLCBhIFRlbmNlbnQgY29t
-cGFueSwgYW5kIE1pbG8gWWlwLg0KPiBBbGwgcmlnaHRzIHJlc2VydmVkLg0KPiArKw0KPiArK0xp
-Y2Vuc2VkIHVuZGVyIHRoZSBNSVQgTGljZW5zZSAodGhlICJMaWNlbnNlIik7IHlvdSBtYXkgbm90
-IHVzZSB0aGlzDQo+IGZpbGUgZXhjZXB0DQo+ICsraW4gY29tcGxpYW5jZSB3aXRoIHRoZSBMaWNl
-bnNlLiBZb3UgbWF5IG9idGFpbiBhIGNvcHkgb2YgdGhlIExpY2Vuc2UgYXQNCj4gKysNCj4gKyto
-dHRwOi8vb3BlbnNvdXJjZS5vcmcvbGljZW5zZXMvTUlUDQo+ICsrDQo+ICsrVW5sZXNzIHJlcXVp
-cmVkIGJ5IGFwcGxpY2FibGUgbGF3IG9yIGFncmVlZCB0byBpbiB3cml0aW5nLCBzb2Z0d2FyZQ0K
-PiBkaXN0cmlidXRlZA0KPiArK3VuZGVyIHRoZSBMaWNlbnNlIGlzIGRpc3RyaWJ1dGVkIG9uIGFu
-ICJBUyBJUyIgQkFTSVMsIFdJVEhPVVQNCj4gV0FSUkFOVElFUyBPUg0KPiArK0NPTkRJVElPTlMg
-T0YgQU5ZIEtJTkQsIGVpdGhlciBleHByZXNzIG9yIGltcGxpZWQuIFNlZSB0aGUgTGljZW5zZSBm
-b3INCj4gdGhlDQo+ICsrc3BlY2lmaWMgbGFuZ3VhZ2UgZ292ZXJuaW5nIHBlcm1pc3Npb25zIGFu
-ZCBsaW1pdGF0aW9ucyB1bmRlciB0aGUNCj4gTGljZW5zZS4NCj4gK2RpZmYgLS1naXQgYS9pbmNs
-dWRlL2NlcmVhbC9leHRlcm5hbC9yYXBpZGpzb24vbXNpbnR0eXBlcy9MSUNFTlNFDQo+IGIvaW5j
-bHVkZS9jZXJlYWwvZXh0ZXJuYWwvcmFwaWRqc29uL21zaW50dHlwZXMvTElDRU5TRQ0KPiArbmV3
-IGZpbGUgbW9kZSAxMDA2NDQNCj4gK2luZGV4IDAwMDAwMDAwLi5lM2Q5NmY4Zg0KPiArLS0tIC9k
-ZXYvbnVsbA0KPiArKysrIGIvaW5jbHVkZS9jZXJlYWwvZXh0ZXJuYWwvcmFwaWRqc29uL21zaW50
-dHlwZXMvTElDRU5TRQ0KPiArQEAgLTAsMCArMSwyOSBAQA0KPiArK0lTTyBDOXggIGNvbXBsaWFu
-dCBzdGRpbnQuaCBmb3IgTWljcm9zb2Z0IFZpc3VhbCBTdHVkaW8NCj4gKytCYXNlZCBvbiBJU08v
-SUVDIDk4OTk6VEMyIENvbW1pdHRlZSBkcmFmdCAoTWF5IDYsIDIwMDUpIFdHMTQvTjExMjQNCj4g
-KysNCj4gKysgQ29weXJpZ2h0IChjKSAyMDA2LTIwMTMgQWxleGFuZGVyIENoZW1lcmlzDQo+ICsr
-DQo+ICsrUmVkaXN0cmlidXRpb24gYW5kIHVzZSBpbiBzb3VyY2UgYW5kIGJpbmFyeSBmb3Jtcywg
-d2l0aCBvciB3aXRob3V0DQo+ICsrbW9kaWZpY2F0aW9uLCBhcmUgcGVybWl0dGVkIHByb3ZpZGVk
-IHRoYXQgdGhlIGZvbGxvd2luZyBjb25kaXRpb25zIGFyZQ0KPiBtZXQ6DQo+ICsrDQo+ICsrICAx
-LiBSZWRpc3RyaWJ1dGlvbnMgb2Ygc291cmNlIGNvZGUgbXVzdCByZXRhaW4gdGhlIGFib3ZlIGNv
-cHlyaWdodA0KPiBub3RpY2UsDQo+ICsrICAgICB0aGlzIGxpc3Qgb2YgY29uZGl0aW9ucyBhbmQg
-dGhlIGZvbGxvd2luZyBkaXNjbGFpbWVyLg0KPiArKw0KPiArKyAgMi4gUmVkaXN0cmlidXRpb25z
-IGluIGJpbmFyeSBmb3JtIG11c3QgcmVwcm9kdWNlIHRoZSBhYm92ZSBjb3B5cmlnaHQNCj4gKysg
-ICAgIG5vdGljZSwgdGhpcyBsaXN0IG9mIGNvbmRpdGlvbnMgYW5kIHRoZSBmb2xsb3dpbmcgZGlz
-Y2xhaW1lciBpbg0KPiB0aGUNCj4gKysgICAgIGRvY3VtZW50YXRpb24gYW5kL29yIG90aGVyIG1h
-dGVyaWFscyBwcm92aWRlZCB3aXRoIHRoZQ0KPiBkaXN0cmlidXRpb24uDQo+ICsrDQo+ICsrICAz
-LiBOZWl0aGVyIHRoZSBuYW1lIG9mIHRoZSBwcm9kdWN0IG5vciB0aGUgbmFtZXMgb2YgaXRzIGNv
-bnRyaWJ1dG9ycw0KPiBtYXkNCj4gKysgICAgIGJlIHVzZWQgdG8gZW5kb3JzZSBvciBwcm9tb3Rl
-IHByb2R1Y3RzIGRlcml2ZWQgZnJvbSB0aGlzIHNvZnR3YXJlDQo+ICsrICAgICB3aXRob3V0IHNw
-ZWNpZmljIHByaW9yIHdyaXR0ZW4gcGVybWlzc2lvbi4NCj4gKysNCj4gKytUSElTIFNPRlRXQVJF
-IElTIFBST1ZJREVEIEJZIFRIRSBBVVRIT1IgYGBBUyBJUycnIEFORCBBTlkgRVhQUkVTUyBPUg0K
-PiBJTVBMSUVEDQo+ICsrV0FSUkFOVElFUywgSU5DTFVESU5HLCBCVVQgTk9UIExJTUlURUQgVE8s
-IFRIRSBJTVBMSUVEIFdBUlJBTlRJRVMgT0YNCj4gKytNRVJDSEFOVEFCSUxJVFkgQU5EIEZJVE5F
-U1MgRk9SIEEgUEFSVElDVUxBUiBQVVJQT1NFIEFSRSBESVNDTEFJTUVELiBJTg0KPiBOTw0KPiAr
-K0VWRU5UIFNIQUxMIFRIRSBBVVRIT1IgQkUgTElBQkxFIEZPUiBBTlkgRElSRUNULCBJTkRJUkVD
-VCwgSU5DSURFTlRBTCwNCj4gKytTUEVDSUFMLCBFWEVNUExBUlksIE9SIENPTlNFUVVFTlRJQUwg
-REFNQUdFUyAoSU5DTFVESU5HLCBCVVQgTk9UDQo+IExJTUlURUQgVE8sDQo+ICsrUFJPQ1VSRU1F
-TlQgT0YgU1VCU1RJVFVURSBHT09EUyBPUiBTRVJWSUNFUzsgTE9TUyBPRiBVU0UsIERBVEEsIE9S
-DQo+IFBST0ZJVFM7DQo+ICsrT1IgQlVTSU5FU1MgSU5URVJSVVBUSU9OKSBIT1dFVkVSIENBVVNF
-RCBBTkQgT04gQU5ZIFRIRU9SWSBPRg0KPiBMSUFCSUxJVFksDQo+ICsrV0hFVEhFUiBJTiBDT05U
-UkFDVCwgU1RSSUNUIExJQUJJTElUWSwgT1IgVE9SVCAoSU5DTFVESU5HIE5FR0xJR0VOQ0UgT1IN
-Cj4gKytPVEhFUldJU0UpIEFSSVNJTkcgSU4gQU5ZIFdBWSBPVVQgT0YgVEhFIFVTRSBPRiBUSElT
-IFNPRlRXQVJFLCBFVkVOIElGDQo+ICsrQURWSVNFRCBPRiBUSEUgUE9TU0lCSUxJVFkgT0YgU1VD
-SCBEQU1BR0UuDQo+ICstLQ0KPiArMi4yOS4yDQo+ICsNCj4gZGlmZiAtLWdpdCBhL21ldGEtb2Uv
-cmVjaXBlcy1kZXZ0b29scy9jZXJlYWwvY2VyZWFsXzEuMC5iYiBiL21ldGEtDQo+IG9lL3JlY2lw
-ZXMtZGV2dG9vbHMvY2VyZWFsL2NlcmVhbF8xLjAuYmINCj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQN
-Cj4gaW5kZXggMDAwMDAwMDAwMC4uZGQzZGMxODlkYw0KPiAtLS0gL2Rldi9udWxsDQo+ICsrKyBi
-L21ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9jZXJlYWwvY2VyZWFsXzEuMC5iYg0KPiBAQCAtMCww
-ICsxLDM2IEBADQo+ICtTVU1NQVJZID0gImNlcmVhbCBpcyBhIGhlYWRlci1vbmx5IEMrKzExIHNl
-cmlhbGl6YXRpb24gbGlicmFyeSINCj4gK0hPTUVQQUdFID0gImh0dHBzOi8vdXNjaWxhYi5naXRo
-dWIuaW8vY2VyZWFsIg0KPiArTElDRU5TRSA9ICJCU0QgJiBNSVQgJiBCU0wtMS4wIg0KPiArTElD
-X0ZJTEVTX0NIS1NVTSA9ICJcDQo+ICsgICAgZmlsZTovL0xJQ0VOU0U7bWQ1PWU2MTI2OTBhZjJm
-NTc1ZGZkMDJlMmU5MTQ0M2NlYTIzIFwNCj4gKw0KPiBmaWxlOi8vaW5jbHVkZS9jZXJlYWwvZXh0
-ZXJuYWwvcmFwaWR4bWwvbGljZW5zZS50eHQ7bWQ1PWQ2M2FiNzBiYTIxY2EwNTQ0DQo+IGIwMzI4
-NDk1ODMyNDMwMSBcDQo+ICsNCj4gZmlsZTovL2luY2x1ZGUvY2VyZWFsL2V4dGVybmFsL0xJQ0VO
-U0U7bWQ1PWIwNzU3OGM5ZGY5OWMwYjhiNDVlYjA0MWVmZDRhNg0KPiA0NSBcDQo+ICsNCj4gZmls
-ZTovL2luY2x1ZGUvY2VyZWFsL2V4dGVybmFsL3JhcGlkanNvbi9MSUNFTlNFO21kNT1lN2FiYjY2
-MzExMWQ0YWMxN2NmMA0KPiAwMzIzNjk4YWZmMDggXA0KPiArDQo+IGZpbGU6Ly9pbmNsdWRlL2Nl
-cmVhbC9leHRlcm5hbC9yYXBpZGpzb24vbXNpbnR0eXBlcy9MSUNFTlNFO21kNT1kZmZjZTY1YjkN
-Cj4gOGM3NzM5NzZkZTJlMzM4YmQxMzBmNDYgXA0KPiArIg0KPiArDQo+ICtpbmhlcml0IGNtYWtl
-IHBrZ2NvbmZpZw0KPiArDQo+ICtSREVQRU5EU18ke1BOfS1kZXYgPSAiIg0KPiArDQo+ICtTUkNf
-VVJJID0gIiBcDQo+ICsgICAgZ2l0Oi8vZ2l0aHViLmNvbS9VU0NpTGFiL2NlcmVhbC5naXQ7cHJv
-dG9jb2w9aHR0cHMgXA0KPiArICAgIGZpbGU6Ly8wMDAxLWFkZC1saWNlbnNlLWZpbGVzLWZvci1j
-b21wb25lbnRzLW9mLWNlcmVhbC5wYXRjaCBcDQo+ICsiDQo+ICsNCj4gK1NSQ1JFViA9ICI0OGZk
-YTNmMGE2YjU4ZjlhOTI3OGVjMTVjMTVlN2I3YzNkY2VlY2ViIg0KPiArDQo+ICtFWFRSQV9PRUNN
-QUtFICs9ICJcDQo+ICsgICAgLURDRVJFQUxfSU5TVEFMTD1UUlVFIFwNCj4gKyAgICAtREpVU1Rf
-SU5TVEFMTF9DRVJFQUw9VFJVRSBcDQo+ICsiDQo+ICsNCj4gK1MgPSAiJHtXT1JLRElSfS9naXQi
-DQo+ICsNCj4gK1BST1ZJREVTICs9ICIke1BOfS1kZXYiDQo+ICsNCj4gK0ZJTEVTXyR7UE59LWRl
-diA9ICIgXA0KPiArICAgICR7aW5jbHVkZWRpcn0gXA0KPiArICAgICR7bGliZGlyfSBcDQo+ICsi
-DQo+ICsNCj4gLS0NCj4gMi4zMC4wDQoNCg==
+Thanks Peter, I did not realize that they could be merged but
+relooking it seems to be a better option
+I have asked the developer to look into it
+
+On Thu, Feb 4, 2021 at 8:31 AM Peter Kjellerstedt
+<peter.kjellerstedt@axis.com> wrote:
+>
+> We already have meta-oe/recipes-support/libcereal/libcereal_1.3.0.bb!
+>
+> I recommend ./meta-oe/recipes-devtools/cereal/cereal_1.0.bb is removed
+> again, and any relevant changes added to libcereal instead.
+>
+> //Peter
+>
+> > -----Original Message-----
+> > From: openembedded-devel@lists.openembedded.org <openembedded-
+> > devel@lists.openembedded.org> On Behalf Of Khem Raj
+> > Sent: den 3 februari 2021 03:01
+> > To: openembedded-devel@lists.openembedded.org
+> > Cc: Adam Miartus <adam.miartus@softhows.eu>; Khem Raj
+> > <raj.khem@gmail.com>
+> > Subject: [oe] [meta-oe][PATCH V2] cereal: add cereal a header-only c++1=
+1
+> > serialization library
+> >
+> > From: Adam Miartus <adam.miartus@softhows.eu>
+> >
+> > Signed-off-by: Adam Miartus <adam.miartus@softhows.eu>
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ---
+> > v2: Fix packaging errors
+> >
+> >  .../packagegroups/packagegroup-meta-oe.bb     |  2 +-
+> >  ...cense-files-for-components-of-cereal.patch | 99 +++++++++++++++++++
+> >  meta-oe/recipes-devtools/cereal/cereal_1.0.bb | 36 +++++++
+> >  3 files changed, 136 insertions(+), 1 deletion(-)
+> >  create mode 100644 meta-oe/recipes-devtools/cereal/cereal/0001-add-
+> > license-files-for-components-of-cereal.patch
+> >  create mode 100644 meta-oe/recipes-devtools/cereal/cereal_1.0.bb
+> >
+> > diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> > b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> > index 94830e2970..ba85596995 100644
+> > --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> > +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> > @@ -961,7 +961,7 @@ RDEPENDS_packagegroup-meta-oe-fortran-packages =3D =
+"\
+> >  # nlohmann-json exprtk liblightmodbus p8platform gnome-doc-utils-stub
+> >  # glm ttf-mplus xbitmaps ceres-solver cli11 fftw gnulib libeigen ade
+> >  # spdlog span-lite uthash websocketpp catch2 properties-cpp cpp-netlib
+> > -
+> > +# cereal
+> >  # rsyslog conflicts with syslog-ng so its not included here
+> >
+> >  EXCLUDE_FROM_WORLD =3D "1"
+> > diff --git a/meta-oe/recipes-devtools/cereal/cereal/0001-add-license-
+> > files-for-components-of-cereal.patch b/meta-oe/recipes-
+> > devtools/cereal/cereal/0001-add-license-files-for-components-of-
+> > cereal.patch
+> > new file mode 100644
+> > index 0000000000..0000ab9197
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-devtools/cereal/cereal/0001-add-license-files-for=
+-
+> > components-of-cereal.patch
+> > @@ -0,0 +1,99 @@
+> > +From 481b2aa46b3f54d9bee059d9da68263edece2bb3 Mon Sep 17 00:00:00 2001
+> > +From: Adam Miartus <adam.miartus@softhows.eu>
+> > +Date: Mon, 1 Feb 2021 16:15:01 +0100
+> > +Subject: [PATCH] add license files for components of cereal
+> > +
+> > +Signed-off-by: Adam Miartus <adam.miartus@softhows.eu>
+> > +---
+> > + include/cereal/external/LICENSE               | 21 ++++++++++++++
+> > + include/cereal/external/rapidjson/LICENSE     | 13 +++++++++
+> > + .../external/rapidjson/msinttypes/LICENSE     | 29 ++++++++++++++++++=
++
+> > + 3 files changed, 63 insertions(+)
+> > + create mode 100644 include/cereal/external/LICENSE
+> > + create mode 100644 include/cereal/external/rapidjson/LICENSE
+> > + create mode 100644 include/cereal/external/rapidjson/msinttypes/LICEN=
+SE
+> > +
+> > +diff --git a/include/cereal/external/LICENSE
+> > b/include/cereal/external/LICENSE
+> > +new file mode 100644
+> > +index 00000000..66300b68
+> > +--- /dev/null
+> > ++++ b/include/cereal/external/LICENSE
+> > +@@ -0,0 +1,21 @@
+> > ++Copyright (C) 2004-2008 Ren=C3=A9 Nyffenegger
+> > ++
+> > ++This source code is provided 'as-is', without any express or implied
+> > ++warranty. In no event will the author be held liable for any damages
+> > ++arising from the use of this software.
+> > ++
+> > ++Permission is granted to anyone to use this software for any purpose,
+> > ++including commercial applications, and to alter it and redistribute i=
+t
+> > ++freely, subject to the following restrictions:
+> > ++
+> > ++1. The origin of this source code must not be misrepresented; you mus=
+t
+> > not
+> > ++  claim that you wrote the original source code. If you use this sour=
+ce
+> > code
+> > ++  in a product, an acknowledgment in the product documentation would =
+be
+> > ++  appreciated but is not required.
+> > ++
+> > ++2. Altered source versions must be plainly marked as such, and must n=
+ot
+> > be
+> > ++  misrepresented as being the original source code.
+> > ++
+> > ++3. This notice may not be removed or altered from any source
+> > distribution.
+> > ++
+> > ++Ren=C3=A9 Nyffenegger rene.nyffenegger@adp-gmbh.ch
+> > +diff --git a/include/cereal/external/rapidjson/LICENSE
+> > b/include/cereal/external/rapidjson/LICENSE
+> > +new file mode 100644
+> > +index 00000000..4546f15a
+> > +--- /dev/null
+> > ++++ b/include/cereal/external/rapidjson/LICENSE
+> > +@@ -0,0 +1,13 @@
+> > ++Tencent is pleased to support the open source community by making
+> > RapidJSON available.
+> > ++
+> > ++Copyright (C) 2015 THL A29 Limited, a Tencent company, and Milo Yip.
+> > All rights reserved.
+> > ++
+> > ++Licensed under the MIT License (the "License"); you may not use this
+> > file except
+> > ++in compliance with the License. You may obtain a copy of the License =
+at
+> > ++
+> > ++http://opensource.org/licenses/MIT
+> > ++
+> > ++Unless required by applicable law or agreed to in writing, software
+> > distributed
+> > ++under the License is distributed on an "AS IS" BASIS, WITHOUT
+> > WARRANTIES OR
+> > ++CONDITIONS OF ANY KIND, either express or implied. See the License fo=
+r
+> > the
+> > ++specific language governing permissions and limitations under the
+> > License.
+> > +diff --git a/include/cereal/external/rapidjson/msinttypes/LICENSE
+> > b/include/cereal/external/rapidjson/msinttypes/LICENSE
+> > +new file mode 100644
+> > +index 00000000..e3d96f8f
+> > +--- /dev/null
+> > ++++ b/include/cereal/external/rapidjson/msinttypes/LICENSE
+> > +@@ -0,0 +1,29 @@
+> > ++ISO C9x  compliant stdint.h for Microsoft Visual Studio
+> > ++Based on ISO/IEC 9899:TC2 Committee draft (May 6, 2005) WG14/N1124
+> > ++
+> > ++ Copyright (c) 2006-2013 Alexander Chemeris
+> > ++
+> > ++Redistribution and use in source and binary forms, with or without
+> > ++modification, are permitted provided that the following conditions ar=
+e
+> > met:
+> > ++
+> > ++  1. Redistributions of source code must retain the above copyright
+> > notice,
+> > ++     this list of conditions and the following disclaimer.
+> > ++
+> > ++  2. Redistributions in binary form must reproduce the above copyrigh=
+t
+> > ++     notice, this list of conditions and the following disclaimer in
+> > the
+> > ++     documentation and/or other materials provided with the
+> > distribution.
+> > ++
+> > ++  3. Neither the name of the product nor the names of its contributor=
+s
+> > may
+> > ++     be used to endorse or promote products derived from this softwar=
+e
+> > ++     without specific prior written permission.
+> > ++
+> > ++THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+> > IMPLIED
+> > ++WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+> > ++MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. =
+IN
+> > NO
+> > ++EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL=
+,
+> > ++SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+> > LIMITED TO,
+> > ++PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+> > PROFITS;
+> > ++OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+> > LIABILITY,
+> > ++WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE =
+OR
+> > ++OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN I=
+F
+> > ++ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+> > +--
+> > +2.29.2
+> > +
+> > diff --git a/meta-oe/recipes-devtools/cereal/cereal_1.0.bb b/meta-
+> > oe/recipes-devtools/cereal/cereal_1.0.bb
+> > new file mode 100644
+> > index 0000000000..dd3dc189dc
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-devtools/cereal/cereal_1.0.bb
+> > @@ -0,0 +1,36 @@
+> > +SUMMARY =3D "cereal is a header-only C++11 serialization library"
+> > +HOMEPAGE =3D "https://uscilab.github.io/cereal"
+> > +LICENSE =3D "BSD & MIT & BSL-1.0"
+> > +LIC_FILES_CHKSUM =3D "\
+> > +    file://LICENSE;md5=3De612690af2f575dfd02e2e91443cea23 \
+> > +
+> > file://include/cereal/external/rapidxml/license.txt;md5=3Dd63ab70ba21ca=
+0544
+> > b03284958324301 \
+> > +
+> > file://include/cereal/external/LICENSE;md5=3Db07578c9df99c0b8b45eb041ef=
+d4a6
+> > 45 \
+> > +
+> > file://include/cereal/external/rapidjson/LICENSE;md5=3De7abb663111d4ac1=
+7cf0
+> > 0323698aff08 \
+> > +
+> > file://include/cereal/external/rapidjson/msinttypes/LICENSE;md5=3Ddffce=
+65b9
+> > 8c773976de2e338bd130f46 \
+> > +"
+> > +
+> > +inherit cmake pkgconfig
+> > +
+> > +RDEPENDS_${PN}-dev =3D ""
+> > +
+> > +SRC_URI =3D " \
+> > +    git://github.com/USCiLab/cereal.git;protocol=3Dhttps \
+> > +    file://0001-add-license-files-for-components-of-cereal.patch \
+> > +"
+> > +
+> > +SRCREV =3D "48fda3f0a6b58f9a9278ec15c15e7b7c3dceeceb"
+> > +
+> > +EXTRA_OECMAKE +=3D "\
+> > +    -DCEREAL_INSTALL=3DTRUE \
+> > +    -DJUST_INSTALL_CEREAL=3DTRUE \
+> > +"
+> > +
+> > +S =3D "${WORKDIR}/git"
+> > +
+> > +PROVIDES +=3D "${PN}-dev"
+> > +
+> > +FILES_${PN}-dev =3D " \
+> > +    ${includedir} \
+> > +    ${libdir} \
+> > +"
+> > +
+> > --
+> > 2.30.0
+>
