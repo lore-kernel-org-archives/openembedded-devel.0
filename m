@@ -1,138 +1,254 @@
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.49])
- by mx.groups.io with SMTP id smtpd.web08.2604.1612472968447545534
+Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com [209.85.160.175])
+ by mx.groups.io with SMTP id smtpd.web08.3176.1612475139401013164
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Feb 2021 13:09:28 -0800
+ Thu, 04 Feb 2021 13:45:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Dv4RSZQk;
- spf=pass (domain: windriver.com, ip: 40.107.243.49, mailfrom: yifan.yu@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mVrZN3aGFniS15pH7W1EJFvo8n04Fi4PLvqXzI9AM02bEDPkz4TjgooPbu2PJE2Dl5sBWdXaGwq9Im1UhewEQr4YZBNAN9WzOh1mlAMW8z3KA/lHfIc+PBRqKMzWh/zqB/G7aqfFkHRTJw2PoO2wW2LlpJC8goAXmQpFXD75ObbbMRlBDUWTcAGGfmEXZwJGjTM64TYOLfsM6tYlFQoS8WfFK8Wd20C5OBpuTKe6GH1lne2IV1D4P1LZnOU5itsqUvtalJw7ZbQp//mk62gys+eAWQi3X3wu2p5r19sXfuW9/wT9CZKwh3EmIsAIPLa7p6XfFTa4xCnpuRhvt3UcAw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rgVLEH5Na/Bju4wNzggF7b++tydkPoJ7QWmmIztU/T4=;
- b=RS4IxQwzUlfO0wO0JSqqn0Vz7DKuoLPozWne+5B7WI3nPamXeAVU4Vmv5emj3ymsflaTTGoJ78gwsJ7tCe47xa0YR1GlHnplVfjXNXJZMeM6zAbhBdz8rEUPpRnEGH+XdtBIRMkJbj2FMFI1VCESDHQIoWzVt0HPrndODKTqWCO1VkpMRDf1JwfC9QpXUFVKrHRY+pB7U3+bUgJqeeM7xmU/kim5kzUCS3qEbMGxzWaVGB0Jt4B1kURuox5Scbkbo/3I9LX1wcs7RMGSpo3W6TnZqp2sGzTdI79UK0u31muzwUo1y4p8dZhXwdCTfSlVqveRCV4QC9sVeUNWOPPNVQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=dmROzKek;
+ spf=pass (domain: gmail.com, ip: 209.85.160.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f175.google.com with SMTP id c1so3619129qtc.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Feb 2021 13:45:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rgVLEH5Na/Bju4wNzggF7b++tydkPoJ7QWmmIztU/T4=;
- b=Dv4RSZQkvaDjkAeegAO0PUA9/Qx0a0ctL9TTkh25F4gCzE/rN+m7cGWgOam0Cb5WrEyffiMsUiF577cYQu2Xn61kfFAyyG2jzV/WpSql/kvgVGiO941bbJUqxygj+8X89hwKZrUUcYfut7OV61yE1cLAuGzckrFPPSz/rbFSFaA=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from SA0PR11MB4719.namprd11.prod.outlook.com (2603:10b6:806:95::17)
- by SA0PR11MB4685.namprd11.prod.outlook.com (2603:10b6:806:9e::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.17; Thu, 4 Feb
- 2021 21:09:26 +0000
-Received: from SA0PR11MB4719.namprd11.prod.outlook.com
- ([fe80::1c2f:159e:f6f6:36f3]) by SA0PR11MB4719.namprd11.prod.outlook.com
- ([fe80::1c2f:159e:f6f6:36f3%7]) with mapi id 15.20.3805.027; Thu, 4 Feb 2021
- 21:09:26 +0000
-Subject: Re: [oe] Help with dealing with autoconf uprev affected packages?
-To: Andrey Zhizhikin <andrey.z@gmail.com>, hongxu <hongxu.jia@windriver.com>
-Cc: Randy MacLeod <randy.macleod@windriver.com>,
- "Chen, Qi" <qi.chen@windriver.com>, Khem Raj <raj.khem@gmail.com>,
- Ross Burton <ross@burtonini.com>,
- "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-References: <8f242d61-4dea-070a-217d-657e2204a807@windriver.com>
- <CAAnfSTsku9yTFYKCMVkmKq=77V8XGgq9pdO5n_PPb_ttHWnd3w@mail.gmail.com>
- <3aeac6ad-c5cc-dba9-2c3e-6caaad82aa2d@windriver.com>
- <5a73bb02-18ae-a7ea-c55b-d650db4d97a1@windriver.com>
- <CAHtQpK7P8JbrKCS-xMmgUu-rEUW1wbgJau+_93O9eP_+wgM_LQ@mail.gmail.com>
-From: "Yi Fan Yu" <yifan.yu@windriver.com>
-Message-ID: <c6849b7a-5dc0-ced2-b6d0-a0e6f9ec72f6@windriver.com>
-Date: Thu, 4 Feb 2021 16:09:23 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-In-Reply-To: <CAHtQpK7P8JbrKCS-xMmgUu-rEUW1wbgJau+_93O9eP_+wgM_LQ@mail.gmail.com>
-X-Originating-IP: [135.0.247.71]
-X-ClientProxiedBy: YTOPR0101CA0029.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00:15::42) To SA0PR11MB4719.namprd11.prod.outlook.com
- (2603:10b6:806:95::17)
-Return-Path: yifan.yu@windriver.com
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=2DgCU+lCl7JwRhJSUt/y4vsA419yNYkq8YmeSJBZZf4=;
+        b=dmROzKekR4h+aC3BgeIy3ST/whzQNc4VplW6R5HMV2UzReXpugFtuEnQ9SVPgpR3jR
+         SZ7PjyIVvq43hmEhEMp/Ll1ulp1GoLGnO6fUL67xNI8oVBWNadw+UOzea2FhLHp455gu
+         I0ZpVTvY08rFLwy4791MeffBYsDg1qVbSsAB2F2Q8/JCUCAn0X9f7YEKfYY7eRwDvf5o
+         kz6Ed50YmP5VIVJUrlm7yWz8+Vsd/cnPM2FDxRS4ZeuiEmg0ATlXt/sXTqBAeYk70di4
+         5GUXyTRu4vgZwh+SL+y+rRcKLR70Yg3osaNBUo8CG53M3iEfdjC6FRXrV1JOAp+18XeO
+         L9jg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=2DgCU+lCl7JwRhJSUt/y4vsA419yNYkq8YmeSJBZZf4=;
+        b=ZFGPbrFL16QJ0LMSBvLA9iPrtabOJzj7qgIqmaW/Ba78VinKxqBQAsjTNS0f8Ewf2F
+         9wolZnG1dOraEOe1yuDegLCgbhWKJajkUkpYYDWEQNAASRFIgj/0FDpJRYgW64ydYSgS
+         RMu8g5H6gPR6n4YB+4sEXe897IHAc0WJ1PfRT96R//Fz7shgrU9Fg0aMeQKWhMHqEJNM
+         5W/D3fzheJ7eZFDRaj7j5ZxlUW2k5xM+LH5pnKNWngS17YPy9eXcLARurG4DmCDVTskc
+         jZy+sxxEISwHe3dZywQFKgXXoEjxyMh4TBoxXH8cZhmciExKjdnCytZ72npYAlCUka7H
+         w9pw==
+X-Gm-Message-State: AOAM531eB1Ao4/3Ys0hjh5FCu1btQdJcopC6G7oxr9zf/OQmJRooRK5S
+	ijUu3cryAIToRIJGk9idc5bvhavlDE7dJda3DCE=
+X-Google-Smtp-Source: ABdhPJwp2vQz4DazkIWIc43dVfCdyspoaNomPTfn6c+HA1aTGa0N7lEFeMV/81nyg0titGe0utrQcznS8kc/aZSPyR0=
+X-Received: by 2002:ac8:6f06:: with SMTP id g6mr1655494qtv.80.1612475138359;
+ Thu, 04 Feb 2021 13:45:38 -0800 (PST)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.1.42] (135.0.247.71) by YTOPR0101CA0029.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00:15::42) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.19 via Frontend Transport; Thu, 4 Feb 2021 21:09:25 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 56270248-6ebd-4b84-8656-08d8c951274d
-X-MS-TrafficTypeDiagnostic: SA0PR11MB4685:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<SA0PR11MB4685B4EB47924BA8A28F61BB80B39@SA0PR11MB4685.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:3826;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	8LX6Z3n6f0Cci4QEELIDRT0L5vAss26XwPA1awUno59QmTg8cP3UGGK7ywC36HdXa86euUHQb8f5ohuiySoAYdKxxZC3S526BnEAb0yRg5NzJ6ODLCsv3VayLFy63R4l2CarKGRJhDCjIN8n6BEltVzMvWbQ7G+cwKAHtAMAchel3+/cTfnQ6txiueOTIlu7xzUi56+4YUkEgump/YpDk3BWGkEo2Fs3vQ4IMOVSa6ALaWboCeggL8OpuT3yIA4s0akAbfXXMYbIbILHqpes91M47qKc68uuTUjo5PND1ozJWRJkEnRD/2f87H7nEaUOF/tzQOyaztvPtw9QvMOLoAZzxZzvotznPhHsBPNLinmlcHDV5ZL0Slcb2JIEiv7ehdvHjTMbQaZZJ+pKYlfVWB7v05AMlQLDwOZw/+ElTp5cYGPk2ZbR7lVO/7mO4dXLBeOxDeW5nMlQwrRuvwg/MASwL54PL56+EG2M9LELHa81Du1KJFNB4s+x/2t1d+1w4o1qovc3KfCiaG0Fkac+dIa1OcHsNocv3KMWenaY7Taio89Prd9YtbFw8jYICxJsbPHlfnosxeW7BaXsmiiPHvA34hyNBZmDRbI5jERJqdGb+2G8nkw4CUhc95NJW6IBFg1SWcezWGlF/Bh6/bCRp7ogGb7qtWV/e56bC9epo4Rkz2lvfGm9VF3dNPFdyWO3
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA0PR11MB4719.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(39850400004)(376002)(366004)(346002)(136003)(8676002)(5660300002)(4744005)(6636002)(54906003)(66476007)(8936002)(16576012)(66556008)(31686004)(53546011)(966005)(31696002)(478600001)(86362001)(66946007)(110136005)(83380400001)(316002)(186003)(956004)(26005)(4326008)(2616005)(52116002)(16526019)(36756003)(6486002)(2906002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?bE01dGVaZDByeGlMVHFpNzdiVWpNN1A5NHk4NmFYdExIN3NRMmJpOWgxcjhY?=
- =?utf-8?B?OVVFU3JTSjVsYjkycTNRWUxxNmRRK05UOWMvd3hqNGI3ejFoZ0tJRm9wQnA3?=
- =?utf-8?B?enpyUC9Mc3hxeDZOMDgrN0xsZ3YwT0hUenZ1dFZyOW90SlpmWjBmd0Mva2xJ?=
- =?utf-8?B?WHI1NE5JR3BZT2kyd1ZoZkdCY1VjOS83b0ZmVWdCOXQyNllZZ2dJRHpVa3BO?=
- =?utf-8?B?N295YWZFRyt6dS9sZko4QmsyRGZjYzlFK2lHNTI3Yi91ZTV1aHltTWwvb0k0?=
- =?utf-8?B?ei84R1hoY1d4ZlV0WVVGK3dvTlZldTJuVVJtc0xwaGRib3UyY0FMYTcyWEJy?=
- =?utf-8?B?eTNKZXlxd2ppaDBvVWpYVkJiUFFBWU1pMkptWXY2SUR1aHpYaGVuM25ZaWN3?=
- =?utf-8?B?Smpqemd2SXBlRGVvSUQ5dDJDTTJvemJ0RlBoT3RNT1hPWnh6KzUrQmF2MXZX?=
- =?utf-8?B?YVpINjdtN2d3TlBZZ1FOdDRjVXFzTTdFdytHc0M0aGdSZWE3eDFxakV5WWQv?=
- =?utf-8?B?Q0pmWjVNdlJmSjNlSFU4UzgyNldUL3ZMOC9vaytKQmp2RUlDTUxmUUQzQ0x6?=
- =?utf-8?B?Mm1JTHpJT3BManQ3TVpOMmNZeUxQMlRpZkszRUFvUDBwYnpSbjBINW4wUmVP?=
- =?utf-8?B?OTJxYXZnWFBwMlB6cmdwOVE0VjN1ZWNDazhhSWZqQ255YWVGSGh5REo3bERH?=
- =?utf-8?B?SjQ2RzE4QVMwT04zSERneDBnV2s2dFdJNFkyK2lNTjlFMXdOTTVwSWpkdkJp?=
- =?utf-8?B?K1I2U3hNeVAyRDBhRE45VDhDZFJmYitNMlVGajYzSTZmZGM5N1pJbUVkajlL?=
- =?utf-8?B?VDJBbzdEUFVlNzBTajN4dXp0WG1ZYU9yWDcrVjFPa2xLVjNwanhWcmpCejlU?=
- =?utf-8?B?ck96RUtBSkFZeC9CNkFYWjY3Qkw2czllcTE5SzIzU3pvQVJPdDlneDhRd1ZS?=
- =?utf-8?B?Q1F5ZlNkNTRtV2ZZbjVPZkJxK1JmUmFaMW5WZjJBRzJCaVo5OHY4TXNTNG1Z?=
- =?utf-8?B?WFpXUnRDc1kzR1dWVXR6V0JpRmp1SkNlUENRSEtwYTVYYWQ3UGNFeXlPeklV?=
- =?utf-8?B?UFpLK0dlOFRXSFdSZDVtbHIxc3ZqNkxENDAvaUJJODltZkpodzZZUVBvNmc1?=
- =?utf-8?B?WUw1WHdJUng0M29QVGcvUk4zVTE2VVZmVU41d2Uya2RJd1R6N1NTOU9OdVMz?=
- =?utf-8?B?MEdCU3F3blBFaVBUQUxiNjdYMllQSUlWYXpVLzRwcG5ncWxTVkFuTCtPNHJu?=
- =?utf-8?B?d2poRTlzUkNFQ0w5bWNVTW9VenBCc3kvS3MrZ3cyMkIxcW9XSFd5Z1UvKzhV?=
- =?utf-8?B?bmlMSFZEQnUyR0luVUFodmx2NWhVN3ptWnROZXFRSW56MEp6dGtvUjhZd2pn?=
- =?utf-8?B?TDAzZ3FzYWFYMC9aYVBnR0JPMXpJcC9hMlMxQzkxbHIzWk9NYlpwMkRvNmN0?=
- =?utf-8?B?ME91Z2c5U1I0UVpYM0xLVlpsTnllSnVoaFBlREpUUXJ5S3pmand2MnZoMXQz?=
- =?utf-8?B?YzBXcUxPWkJySDFaNDJuRVpMNU0xc1JRUjFrSGdyVGhxa0x6a1lpcXUwSXB3?=
- =?utf-8?B?MjVyd3hMMXg3TmlzbGlSeE5zUWhERHB2cnZvUjFLaEIrRzh5ZDVRWnl6aE5F?=
- =?utf-8?B?L3psQmprbzdwNTB3Rm1VdW9LbjVHTC8yTTNnbVpwRHZQaDJtU0dqMWxxMFBE?=
- =?utf-8?B?K01CZTg5YkxrQzBzWUdOZ1hiVXBvUUVzM3BFdDZSM3IvcHVYWG8yaEZrRkFr?=
- =?utf-8?Q?xcVG3k6jbQ0kNzswa9VWrupXN62RTytvYhcUsjs?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 56270248-6ebd-4b84-8656-08d8c951274d
-X-MS-Exchange-CrossTenant-AuthSource: SA0PR11MB4719.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Feb 2021 21:09:26.3732
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ANTUzYJcqIQ3jR9WLboCThxQgRWOT5sjLpv51Q22dG84jkPr02bx096jqxbTWEdeHiqWKnXB3zRVl5yCkrlH/A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR11MB4685
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+References: <20210203153822.25077-1-leon.anavi@konsulko.com> <20210203153822.25077-5-leon.anavi@konsulko.com>
+In-Reply-To: <20210203153822.25077-5-leon.anavi@konsulko.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 4 Feb 2021 13:45:12 -0800
+Message-ID: <CAMKF1spWuFexdU0_Rwx=e576aWFismaEHDvepMoxPdojic1Yuw@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 5/5] python3-h5py: Upgrade 2.10.0 -> 3.1.0
+To: Leon Anavi <leon.anavi@konsulko.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Andrey,
+Fails on musl/x86
+https://errors.yoctoproject.org/Errors/Details/567807/
 
-i am working on this now.
-
-since you already submitted iperf3, i'll focus on
-
-libmcrypt.
-
-i'll test and build both of them once i figure out libmcrypt.
-
-
-On 2/4/21 5:45 AM, Andrey Zhizhikin wrote:
->>> - iperf3 - YiFan
-> I just sent a patch for this one:
-> https://lists.openembedded.org/g/openembedded-devel/message/89274
+On Wed, Feb 3, 2021 at 7:38 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
 >
-> YiFan, can you please have a look at it to see if it fits?
+> Upgrade to release 3.1.0:
+>
+> - Fix using bytes as names for :meth:`~Group.create_dataset` and
+> =EF=BF=BC  :meth:`~Group.create_virtual_dataset`.
+> - Fix writing data as a list to a dataset with a sub-array data
+>   type.
+> - Preserve endianess in Cython dataset Reader
+> - If pytest is missing pytest-mpi then it will now fail
+>   immediately with a clear warning message
+> - Fix a test which was failing on big-endian systems
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> ---
+>  .../0001-cross-compiling-support.patch        | 47 -------------------
+>  .../0001-setup.py-Fix-numpy-version.patch     | 30 ++++++++++++
+>  ...1-setup_build.py-avoid-absolute-path.patch | 13 ++---
+>  ...3-h5py_2.10.0.bb =3D> python3-h5py_3.1.0.bb} |  5 +-
+>  4 files changed, 39 insertions(+), 56 deletions(-)
+>  delete mode 100644 meta-python/recipes-devtools/python/python3-h5py/000=
+1-cross-compiling-support.patch
+>  create mode 100644 meta-python/recipes-devtools/python/python3-h5py/000=
+1-setup.py-Fix-numpy-version.patch
+>  rename meta-python/recipes-devtools/python/{python3-h5py_2.10.0.bb =3D>=
+ python3-h5py_3.1.0.bb} (78%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-h5py/0001-cross=
+-compiling-support.patch b/meta-python/recipes-devtools/python/python3-h5py=
+/0001-cross-compiling-support.patch
+> deleted file mode 100644
+> index 8c0b91432..000000000
+> --- a/meta-python/recipes-devtools/python/python3-h5py/0001-cross-compil=
+ing-support.patch
+> +++ /dev/null
+> @@ -1,47 +0,0 @@
+> -From 364fd0906efa349ea44a761820408dcf6b2b8726 Mon Sep 17 00:00:00 2001
+> -From: Hongxu Jia <hongxu.jia@windriver.com>
+> -Date: Tue, 29 Jan 2019 17:08:32 +0800
+> -Subject: [PATCH] cross compiling support
+> -
+> -Remove useless dirs
+> -
+> -Upstream-Status: Inappropriate [oe specific]
+> -
+> -Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> -Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> ----
+> - setup_build.py     | 4 ----
+> - setup_configure.py | 2 +-
+> - 2 files changed, 1 insertion(+), 5 deletions(-)
+> -
+> -diff --git a/setup_build.py b/setup_build.py
+> -index c0e9a28c..ffd3bef7 100644
+> ---- a/setup_build.py
+> -+++ b/setup_build.py
+> -@@ -55,10 +55,6 @@ if sys.platform.startswith('win'):
+> -         ('_HDF5USEDLL_', None),
+> -         ('H5_BUILT_AS_DYNAMIC_LIB', None)
+> -     ])
+> --else:
+> --    FALLBACK_PATHS['include_dirs'].extend(['/opt/local/include', '/usr=
+/local/include'])
+> --    FALLBACK_PATHS['library_dirs'].extend(['/opt/local/lib', '/usr/loc=
+al/lib'])
+> --
+> -
+> - class h5py_build_ext(build_ext):
+> -
+> -diff --git a/setup_configure.py b/setup_configure.py
+> -index 5576775e..75f4141e 100644
+> ---- a/setup_configure.py
+> -+++ b/setup_configure.py
+> -@@ -206,7 +206,7 @@ def autodetect_version(hdf5_dir=3DNone):
+> -         default_path =3D 'libhdf5.so'
+> -         regexp =3D re.compile(r'^libhdf5.so')
+> -
+> --    libdirs =3D ['/usr/local/lib', '/opt/local/lib']
+> -+    libdirs =3D []
+> -     try:
+> -         if pkgconfig.exists("hdf5"):
+> -             libdirs.extend(pkgconfig.parse("hdf5")['library_dirs'])
+> ---
+> -2.17.1
+> -
+> diff --git a/meta-python/recipes-devtools/python/python3-h5py/0001-setup=
+.py-Fix-numpy-version.patch b/meta-python/recipes-devtools/python/python3-h=
+5py/0001-setup.py-Fix-numpy-version.patch
+> new file mode 100644
+> index 000000000..57037a91a
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-h5py/0001-setup.py-Fix=
+-numpy-version.patch
+> @@ -0,0 +1,30 @@
+> +From 7c88e3762c2381a507dc86b90152216abe79a804 Mon Sep 17 00:00:00 2001
+> +From: Leon Anavi <leon.anavi@konsulko.com>
+> +Date: Wed, 3 Feb 2021 17:23:29 +0200
+> +Subject: [PATCH] setup.py: Fix numpy version
+> +
+> +Fix numpy version to ensure bitbake will find the pip package.
+> +
+> +Upstream-Status: Inappropriate [oe specific]
+> +
+> +Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> +---
+> + setup.py | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/setup.py b/setup.py
+> +index 7dbe5835..8fc15bc8 100755
+> +--- a/setup.py
+> ++++ b/setup.py
+> +@@ -30,7 +30,7 @@ NUMPY_MIN_VERSIONS =3D [
+> +     ('1.12',   "=3D=3D'3.6'"),
+> +     ('1.14.5', "=3D=3D'3.7'"),
+> +     ('1.17.5', "=3D=3D'3.8'"),
+> +-    ('1.19.3', ">=3D'3.9'"),
+> ++    ('1.19.5', ">=3D'3.9'"),
+> + ]
+> +
+> + # these are required to use h5py
+> +--
+> +2.17.1
+> +
+> diff --git a/meta-python/recipes-devtools/python/python3-h5py/0001-setup=
+_build.py-avoid-absolute-path.patch b/meta-python/recipes-devtools/python/p=
+ython3-h5py/0001-setup_build.py-avoid-absolute-path.patch
+> index da95ee7af..05c126e54 100644
+> --- a/meta-python/recipes-devtools/python/python3-h5py/0001-setup_build.=
+py-avoid-absolute-path.patch
+> +++ b/meta-python/recipes-devtools/python/python3-h5py/0001-setup_build.=
+py-avoid-absolute-path.patch
+> @@ -1,6 +1,6 @@
+> -From b5d5a7efc7aaa2be830731001ed17c5b71bcefb1 Mon Sep 17 00:00:00 2001
+> +From 86a2c95941a3854fda763037a16b5b22ec6f15e9 Mon Sep 17 00:00:00 2001
+>  From: Mingli Yu <mingli.yu@windriver.com>
+> -Date: Fri, 29 Jan 2021 02:33:06 +0000
+> +Date: Thu, 28 Jan 2021 18:44:10 -0800
+>  Subject: [PATCH] setup_build.py: avoid absolute path
+>
+>  Prevent absolute path from ending up in the egg-info SOURCES.txt.
+> @@ -8,15 +8,16 @@ Prevent absolute path from ending up in the egg-info S=
+OURCES.txt.
+>  Upstream-Status: Submitted [https://github.com/h5py/h5py/pull/1803]
+>
+>  Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> +Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+>  ---
+>   setup_build.py | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+>  diff --git a/setup_build.py b/setup_build.py
+> -index ffd3bef..fb196c0 100644
+> +index 3c7c7adb..d824bdda 100644
+>  --- a/setup_build.py
+>  +++ b/setup_build.py
+> -@@ -20,7 +20,7 @@ import api_gen
+> +@@ -21,7 +21,7 @@ from setup_configure import BuildConfig
+>
+>
+>   def localpath(*args):
+> @@ -24,7 +25,7 @@ index ffd3bef..fb196c0 100644
+>  +    return op.join(*args)
+>
+>
+> - MODULES =3D  ['defs','_errors','_objects','_proxy', 'h5fd', 'h5z',
+> + MODULES =3D ['defs', '_errors', '_objects', '_proxy', 'h5fd', 'h5z',
+>  --
+> -2.29.2
+> +2.17.1
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb =
+b/meta-python/recipes-devtools/python/python3-h5py_3.1.0.bb
+> similarity index 78%
+> rename from meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb
+> rename to meta-python/recipes-devtools/python/python3-h5py_3.1.0.bb
+> index b812b323f..03ae4c9db 100644
+> --- a/meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-h5py_3.1.0.bb
+> @@ -4,12 +4,11 @@ SECTION =3D "devel/python"
+>  LICENSE =3D "BSD-3-Clause"
+>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D113251d71fb0384712c719b56726=
+1c5c"
+>
+> -SRC_URI[md5sum] =3D "504b595237409ab766fbbe568e60a080"
+> -SRC_URI[sha256sum] =3D "84412798925dc870ffd7107f045d7659e60f5d46d1c70c7=
+00375248bf6bf512d"
+> +SRC_URI[sha256sum] =3D "1e2516f190652beedcb8c7acfa1c6fa92d99b42331cbef5=
+e5c7ec2d65b0fc3c2"
+>
+>  SRC_URI_append =3D " \
+> -           file://0001-cross-compiling-support.patch \
+>             file://0001-setup_build.py-avoid-absolute-path.patch \
+> +           file://0001-setup.py-Fix-numpy-version.patch \
+>            "
+>
+>  inherit pypi setuptools3
+> --
+> 2.17.1
+>
+>
+>=20
 >
