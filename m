@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.7627.1612444791438686809
+ by mx.groups.io with SMTP id smtpd.web11.7728.1612444791885759556
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Feb 2021 05:19:51 -0800
+ Thu, 04 Feb 2021 05:19:52 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=60428 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1l7eY0-00014n-Rg; Thu, 04 Feb 2021 15:19:49 +0200
+	id 1l7eY1-00014n-Mf; Thu, 04 Feb 2021 15:19:50 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-pymongo: Upgrade 3.11.2 -> 3.11.3
-Date: Thu,  4 Feb 2021 15:19:39 +0200
-Message-Id: <20210204131940.22585-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-pymisp: Upgrade 2.4.137.1 -> 2.4.137.3
+Date: Thu,  4 Feb 2021 15:19:40 +0200
+Message-Id: <20210204131940.22585-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210204131940.22585-1-leon.anavi@konsulko.com>
 References: <20210204131940.22585-1-leon.anavi@konsulko.com>
@@ -30,32 +30,34 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.11.3:
+Upgrade to release 2.4.137.3:
 
-- Fix benchmark when using Python 3
+- Bump objects
+- Fix and improve optional dependencies
+- Make brotli optional
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pymongo_3.11.2.bb => python3-pymongo_3.11.3.bb}    | 2 +-
+ ...{python3-pymisp_2.4.137.1.bb => python3-pymisp_2.4.137.3.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pymongo_3.11.2.bb => python3-pymongo_3.11.3.bb} (91%)
+ rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.137.1.bb => python3-pymisp_2.4.137.3.bb} (91%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pymongo_3.11.2.bb b/meta-python/recipes-devtools/python/python3-pymongo_3.11.3.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.137.1.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.137.3.bb
 similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-pymongo_3.11.2.bb
-rename to meta-python/recipes-devtools/python/python3-pymongo_3.11.3.bb
-index 5372ac0ff..3549adce7 100644
---- a/meta-python/recipes-devtools/python/python3-pymongo_3.11.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymongo_3.11.3.bb
-@@ -8,7 +8,7 @@ HOMEPAGE = "http://github.com/mongodb/mongo-python-driver"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.137.1.bb
+rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.137.3.bb
+index 9b2efa2cd..e363729fd 100644
+--- a/meta-python/recipes-devtools/python/python3-pymisp_2.4.137.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pymisp_2.4.137.3.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
  
--SRC_URI[sha256sum] = "c2b67881392a9e85aa108e75f62cdbe372d5a3f17ea5f8d3436dcf4662052f14"
-+SRC_URI[sha256sum] = "db5098587f58fbf8582d9bda2462762b367207246d3e19623782fb449c3c5fcc"
+ SRC_URI = "git://github.com/MISP/PyMISP.git;protocol=https;branch=main"
+-SRCREV = "7b64c1c9a4fec8ed37c1522b31ab56f30b83f0e1"
++SRCREV = "f675e2096182532bb5870e4f773476b2d8065986"
+ S = "${WORKDIR}/git"
  
- inherit pypi setuptools3
- 
+ inherit setuptools3
 -- 
 2.17.1
 
