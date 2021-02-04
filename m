@@ -1,119 +1,102 @@
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
- by mx.groups.io with SMTP id smtpd.web10.554.1612481319468063282
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web08.578.1612481320379415621
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Feb 2021 15:28:39 -0800
+ Thu, 04 Feb 2021 15:28:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=R8fPg/Lf;
- spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f47.google.com with SMTP id cl8so2604806pjb.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Feb 2021 15:28:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=C6fH6xND;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id e12so2600214pls.4
+        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Feb 2021 15:28:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=z+rmBpBxiPg9fXIUt8iN8JQikxpwK8LFOuBFcUztkWU=;
-        b=R8fPg/Lf9VvIbSIOPiWjSzUVAVuGPcND0PFZ6Ye0rLy5OoUERexpM2NV3F0ENywqVE
-         RJhyCRTPnh+3svXZkWm7LmqwZYRfJldW99vih9dr5k7NxRPN/SaJAzKOm+lx1fO3LpBb
-         CboBSLjEkV5oVGWdiQ/PKdox1lyTKsSZFenBPpIhZ6yT/s6zZue10llhhqpd2rZB+nZJ
-         M764+wXOJrujlX28qsIlxuC9BRWZMPRrFV7RLSUXXNXTsI8JKzHIOQN0hydmlaWjGzbP
-         TuTXKi7QTlPMJjYy2dWbGnXf4pRx/BWk4gBTJ+o2jeB80TyeZ4oMp2xge94AcudbjolW
-         Q3oQ==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=lbAkbX04/M/chqfAWe/VgMk/EPrmiD3s+zamyvD0I8E=;
+        b=C6fH6xNDnWEX6MinluwyKgnoTUmDG6sTadkaMVREdsSef4jwcv5fCN9e06/ryax/+2
+         XGLOGbp11rK9m/x9m3zSYi2wCo6uVT6GWq0Nwg1sA52gFOZYYztYbnGUUY8WRtg1uppj
+         rDF2p2yAHvbKpfdEtNsaa10kLNXf4NwT60hE4d+NdoFtF0LlXo/4/21VxdHzN6bPvtoH
+         D2Npe4K74YQ5ukYTNcZJkl6HIPLbgn/nJxvb9Be6VJ8D58AWJn2Kb/3ulro5vu/a62/H
+         bpxGdz8HwdnkrJgnN5uAqYU0v1nUdhIhaw8/zZyolFAlGcuXNDr4uRKs6Y/F9IXEbPT1
+         nuaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=z+rmBpBxiPg9fXIUt8iN8JQikxpwK8LFOuBFcUztkWU=;
-        b=SoUB4g4DhszMLYbJgTPSzfpdhuTGaKggkxJrPQrMB8elctaAP7ZmQnr8oVtm2mvuii
-         xNxUV6QoqSq3L2isXrwpkWpUkIp3pyicqWbEADUjocRAiEDkGT7PARyubvXdwY+ygXFi
-         mJthAUX28899j7KOKzAs5ZwjbsoNqnqknlRQFJH2otlBaDOfM/8hQuS3d3N1V2jhDkCO
-         XfZa1K13yMDyLignQfHTiVWjEr0hU1/mIJm7qURb2suu6J1KP7vakhSvLlarekA8mY0C
-         FcSTNvynReKX0fz+PI+sMCi+Qi9ENgvWHY5iLa6KjM66QUP1gVZDwvmxT8klLj3B3mMh
-         EDmw==
-X-Gm-Message-State: AOAM531dUZz/z2ybHNZvUpYq+ToqHkMAjZfvOM0LgYE/p4vlTRAuhlxR
-	j8eyj1A/GoJnvotPK8RjY2eEYqp19GM1Xw==
-X-Google-Smtp-Source: ABdhPJyUA8Kw16e1xfwyiYYFyRshXrZQ9efxDawNmjZ8bPi+lXnuVbWaWG8JQbODf6o9TzBp+xw0HA==
-X-Received: by 2002:a17:902:fe03:b029:e1:2c46:f3fd with SMTP id g3-20020a170902fe03b02900e12c46f3fdmr1437759plj.62.1612481318646;
-        Thu, 04 Feb 2021 15:28:38 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=lbAkbX04/M/chqfAWe/VgMk/EPrmiD3s+zamyvD0I8E=;
+        b=RcTqwO5qdCM+XPTEoAXVzc8xW0cVgAbd+J3I9jY7oQPfPTVFYTN+eXdr9FREJszCUM
+         l7clvVwJtsS6KV5+ZChyKwhTbWKOiTH4gBN7CYKCAOZde/xzXQWsGWnTIi8uur9epVKN
+         uNf/uQViO61hacTdGNM0AHieGL6rp7sPpeEn5ATjCLBj/LYfeTo/y0rrPdCmPrb7y6mO
+         SMTgjk0RLzj8vLMD9WCZutjgqputS41oUmhFGEU3FV4bnPfuBRorqbcOQZkR4fToK479
+         Uj9gDhYfcSvJ3wcMehlzNvzCQ9oCsVKPKn0TckAKDTBUGoBb5v9rMa8FAsEi0iIATE4G
+         FABg==
+X-Gm-Message-State: AOAM530qAD0nof92C3JD84quZ3rAacLIy8Ms/cKmp9KAOsQKG691/9Hb
+	e3aPwPVr/fTjwUFCv7lCpVgifK4Zm/V7Aw==
+X-Google-Smtp-Source: ABdhPJy4p7FaQ/U987JGDPiGg8hIcjBSRvhMbZ4Qc8Rw2M70J7/cvv5WnkkJKrSce0Z9frNkDm5J7g==
+X-Received: by 2002:a17:902:ec8f:b029:e2:9b48:69b with SMTP id x15-20020a170902ec8fb02900e29b48069bmr1668716plg.18.1612481319645;
+        Thu, 04 Feb 2021 15:28:39 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::2914])
-        by smtp.gmail.com with ESMTPSA id k6sm7886467pgk.36.2021.02.04.15.28.37
+        by smtp.gmail.com with ESMTPSA id k6sm7886467pgk.36.2021.02.04.15.28.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 04 Feb 2021 15:28:38 -0800 (PST)
+        Thu, 04 Feb 2021 15:28:39 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/3] boinc-client: Upgrade to 7.16.16 release
-Date: Thu,  4 Feb 2021 15:28:34 -0800
-Message-Id: <20210204232836.655046-1-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 2/3] net-snmp: Remove hardcoded paths to build host in net-snmp-config
+Date: Thu,  4 Feb 2021 15:28:35 -0800
+Message-Id: <20210204232836.655046-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.30.0
+In-Reply-To: <20210204232836.655046-1-raj.khem@gmail.com>
+References: <20210204232836.655046-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Drop upstreamed patch
+New autconf detects that NSC_LDFLAGS are hardcoded to use -L/usr/lib
+therefore edit these variables during build so that they have
+cross-compile friendly values when net-snmp-config is used during build
+of dependent packages
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../boinc/boinc-client/opengl_m4_check.patch  | 28 -------------------
- ...client_7.16.bb => boinc-client_7.16.16.bb} |  5 ++--
- 2 files changed, 2 insertions(+), 31 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/boinc/boinc-client/opengl_m4_check.patch
- rename meta-oe/recipes-extended/boinc/{boinc-client_7.16.bb => boinc-client_7.16.16.bb} (96%)
+ .../recipes-protocols/net-snmp/net-snmp_5.9.bb | 18 ++++++++----------
+ 1 file changed, 8 insertions(+), 10 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/boinc/boinc-client/opengl_m4_check.patch b/meta-oe/recipes-extended/boinc/boinc-client/opengl_m4_check.patch
-deleted file mode 100644
-index ad4493f0b6..0000000000
---- a/meta-oe/recipes-extended/boinc/boinc-client/opengl_m4_check.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From 4f2dd929618f149087249f3c90cc056d5080b1e4 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 3 Nov 2016 01:20:33 -0700
--Subject: [PATCH] boinc: Add recipe for boinc-client
--
--Do not add prefix/lib to library search path
--let sysroot take care of that
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--Upstream-Status: Inappropriate[Cross-compile specific]
--
-----
-- m4/ax_check_gl.m4 | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/m4/ax_check_gl.m4 b/m4/ax_check_gl.m4
--index e26ce5b930..1e60c9266a 100644
----- a/m4/ax_check_gl.m4
--+++ b/m4/ax_check_gl.m4
--@@ -58,7 +58,7 @@ else
--     else
--       ax_try_lib="${ax_lib}"
--     fi
---    LIBS="-L${prefix}/lib ${ax_try_lib} ${GL_LIBS} ${ax_save_LIBS}"
--+    LIBS="${ax_try_lib} ${GL_LIBS} ${ax_save_LIBS}"
--     AC_LINK_IFELSE(
--     [AC_LANG_PROGRAM([[
-- # if HAVE_WINDOWS_H && defined(_WIN32)
-diff --git a/meta-oe/recipes-extended/boinc/boinc-client_7.16.bb b/meta-oe/recipes-extended/boinc/boinc-client_7.16.16.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/boinc/boinc-client_7.16.bb
-rename to meta-oe/recipes-extended/boinc/boinc-client_7.16.16.bb
-index db90f06f46..441bcd3ac3 100644
---- a/meta-oe/recipes-extended/boinc/boinc-client_7.16.bb
-+++ b/meta-oe/recipes-extended/boinc/boinc-client_7.16.16.bb
-@@ -29,11 +29,10 @@ DEPENDS = "curl \
-            ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk+ libnotify xcb-util libxscrnsaver', '', d)} \
-            nettle \
- "
--SRCREV = "e0e033af9fca3cca84a3417ea6531ae25be73a7a"
--BRANCH = "client_release/7/${PV}"
-+SRCREV = "df0239e6f074207798a8ecf1358a74545dda9132"
-+BRANCH = "client_release/7/7.16"
- SRC_URI = "git://github.com/BOINC/boinc;protocol=https;branch=${BRANCH} \
-            file://boinc-AM_CONDITIONAL.patch \
--           file://opengl_m4_check.patch \
-            file://gtk-configure.patch \
- "
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb
+index 6a4d5b1eff..051e168f02 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb
+@@ -103,11 +103,10 @@ do_configure_prepend() {
+ }
  
+ do_configure_append() {
+-    if [ "${HAS_PERL}" = "1" ]; then
+-        sed -e "s@^NSC_INCLUDEDIR=.*@NSC_INCLUDEDIR=${STAGING_DIR_TARGET}\$\{includedir\}@g" \
+-            -e "s@^NSC_LIBDIR=-L.*@NSC_LIBDIR=-L${STAGING_DIR_TARGET}\$\{libdir\}@g" \
+-            -i ${B}/net-snmp-config
+-    fi
++    sed -e "s@^NSC_INCLUDEDIR=.*@NSC_INCLUDEDIR=${STAGING_DIR_TARGET}\$\{includedir\}@g" \
++        -e "s@^NSC_LIBDIR=-L.*@NSC_LIBDIR=-L${STAGING_DIR_TARGET}\$\{libdir\}@g" \
++        -e "s@^NSC_LDFLAGS=\"-L.* @NSC_LDFLAGS=\"-L${STAGING_DIR_TARGET}\$\{libdir\} @g" \
++        -i ${B}/net-snmp-config
+ }
+ 
+ do_install_append() {
+@@ -135,11 +134,10 @@ do_install_append() {
+     sed -e 's@${STAGING_DIR_HOST}@@g' \
+         -i ${D}${libdir}/pkgconfig/netsnmp*.pc
+ 
+-    if [ "${HAS_PERL}" = "1" ]; then
+-        sed -e "s@^NSC_INCLUDEDIR=.*@NSC_INCLUDEDIR=\$\{includedir\}@g" \
+-            -e "s@^NSC_LIBDIR=-L.*@NSC_LIBDIR=-L\$\{libdir\}@g" \
+-            -i ${D}${bindir}/net-snmp-config
+-    fi
++    sed -e "s@^NSC_INCLUDEDIR=.*@NSC_INCLUDEDIR=\$\{includedir\}@g" \
++        -e "s@^NSC_LIBDIR=-L.*@NSC_LIBDIR=-L\$\{libdir\}@g" \
++        -e "s@^NSC_LDFLAGS=\"-L.* @NSC_LDFLAGS=\"-L\$\{libdir\} @g" \
++        -i ${D}${bindir}/net-snmp-config
+ 
+     oe_multilib_header net-snmp/net-snmp-config.h
+ }
 -- 
 2.30.0
 
