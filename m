@@ -1,59 +1,86 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web11.2903.1612492331610161193
+Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com [209.85.222.177])
+ by mx.groups.io with SMTP id smtpd.web11.3494.1612495623529263360
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Feb 2021 18:32:11 -0800
+ Thu, 04 Feb 2021 19:27:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zhengrq.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.81,154,1610380800"; 
-   d="scan'208";a="104222290"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 05 Feb 2021 10:32:10 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 72EFF4CE6D91
-	for <openembedded-devel@lists.openembedded.org>; Fri,  5 Feb 2021 10:32:08 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
- G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 5 Feb 2021 10:32:08 +0800
-From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] live555: upgrade 20210101 -> 20210129
-Date: Fri, 5 Feb 2021 10:32:09 +0800
-Message-ID: <1612492329-18413-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Qn7geUqI;
+ spf=pass (domain: gmail.com, ip: 209.85.222.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f177.google.com with SMTP id n15so5656974qkh.8
+        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Feb 2021 19:27:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Yq2C9vsvx4YZELkIxv6a2MT8/emGA3L/baUH6KcBiho=;
+        b=Qn7geUqIdssrwsNN7o/ck4AeDQOW+gkUT1+lWwslrmbk6409Jpdv4EFvBecpYKeH8C
+         i5IY+1ggIlpQ8aixO6eVyT2szWmIax8MdN8KbY+d0SIwX5BBdERA+SGvGc6s6ceiDK9U
+         hQ902goL0QOh5T++tmyuWIwmvn+UDbGDqLEtaPoESVIsXMWZv7kPMRQMqATXjiPOdAb2
+         DnvirTtDWcLdAbjkMBOyU+CWQf8Ws2egC/uRCfOz+0pfFsvGKKallKh4G8ZKNPd7qzo/
+         51VSsc1FH1uz133JG7Hqix2NldBT/97tbXJ0kLRTXH8x1y3DlMiYwjBtGNEuGXNdvf0U
+         v95g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Yq2C9vsvx4YZELkIxv6a2MT8/emGA3L/baUH6KcBiho=;
+        b=caPifxtZQkXEMi+5b7gDB+ZghPotv5kNTgeBI7EoD4YMA95oTGor7Wkf4VSSVFur10
+         J9fN8Ev3WHpLzyxK3ReA8Mk/BhA05WHbqOdlvdd48JHVnAT/gL6ZBlnimcD9nqjM+WU/
+         Q1rg8zynVp81YdX+xtfXbrucdm1gQLgfSvUTMO/K3CDfEkDhkSimstgrbNfwkLp40Qg7
+         DWh+TbwWbSRiJpN0nyoA+J8YucV/Xr8o0CVKp5vH1BAMOfEe4Z0RjPPapa6HuvLicNxu
+         DF0apqXB0Sa9uaRoUmrwVqHIdTVqp7+neVTmb/08V0zDv72FDMkYHaSvsAOXm301dmOc
+         1nmw==
+X-Gm-Message-State: AOAM533xR2a2WUTan9O3hFTPO4mRKeeNM4YF2J15kB0IxDKwTqzUzsLo
+	L0Xw+qOod9tuF7ctt6tVCLEAVxpYIlJVmFtJxpI=
+X-Google-Smtp-Source: ABdhPJwwThonUaoKUSiAVJ+p3ucI6t7zBRtBJusy+bW2mu12BTwy2k5grntcICCtvXb9s+yVxMCeGGSTcLc9GpIYcxI=
+X-Received: by 2002:a37:b346:: with SMTP id c67mr2528832qkf.212.1612495622678;
+ Thu, 04 Feb 2021 19:27:02 -0800 (PST)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
- G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
-X-yoursite-MailScanner-ID: 72EFF4CE6D91.A8BD2
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+References: <8f242d61-4dea-070a-217d-657e2204a807@windriver.com>
+ <CAAnfSTsku9yTFYKCMVkmKq=77V8XGgq9pdO5n_PPb_ttHWnd3w@mail.gmail.com>
+ <3aeac6ad-c5cc-dba9-2c3e-6caaad82aa2d@windriver.com> <5a73bb02-18ae-a7ea-c55b-d650db4d97a1@windriver.com>
+ <CAHtQpK7P8JbrKCS-xMmgUu-rEUW1wbgJau+_93O9eP_+wgM_LQ@mail.gmail.com>
+ <c6849b7a-5dc0-ced2-b6d0-a0e6f9ec72f6@windriver.com> <CAMKF1soXQNO8Jx_iHN+3rGam6qNJ1SsUyPXZgHv=F7NyGgwpOQ@mail.gmail.com>
+In-Reply-To: <CAMKF1soXQNO8Jx_iHN+3rGam6qNJ1SsUyPXZgHv=F7NyGgwpOQ@mail.gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 4 Feb 2021 19:26:36 -0800
+Message-ID: <CAMKF1sr-fsVGdCegDri4Vy7cJK8AZ18M6X8E76XThfi7C34KLQ@mail.gmail.com>
+Subject: Re: [oe] Help with dealing with autoconf uprev affected packages?
+To: Yi Fan Yu <yifan.yu@windriver.com>
+Cc: Andrey Zhizhikin <andrey.z@gmail.com>, hongxu <hongxu.jia@windriver.com>, 
+	Randy MacLeod <randy.macleod@windriver.com>, "Chen, Qi" <qi.chen@windriver.com>, 
+	Ross Burton <ross@burtonini.com>, 
+	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
----
- .../live555/{live555_20210101.bb => live555_20210129.bb}        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-multimedia/live555/{live555_20210101.bb => live555_20210129.bb} (97%)
+We are now left with 15 odd packages
 
-diff --git a/meta-oe/recipes-multimedia/live555/live555_20210101.bb b/meta-oe/recipes-multimedia/live555/live555_20210129.bb
-similarity index 97%
-rename from meta-oe/recipes-multimedia/live555/live555_20210101.bb
-rename to meta-oe/recipes-multimedia/live555/live555_20210129.bb
-index 817e52dca..1e7a674f4 100644
---- a/meta-oe/recipes-multimedia/live555/live555_20210101.bb
-+++ b/meta-oe/recipes-multimedia/live555/live555_20210129.bb
-@@ -16,7 +16,7 @@ SRC_URI = "https://download.videolan.org/pub/contrib/live555/live.${URLV}.tar.gz
- # only latest live version stays on http://www.live555.com/liveMedia/public/, add mirror for older
- MIRRORS += "http://www.live555.com/liveMedia/public/ http://download.videolan.org/contrib/live555/ \n"
- 
--SRC_URI[sha256sum] = "a26a2fb43c56719e5e94bbde7d2c492eb8306aa457a5a08034c6b942c4a3b0d4"
-+SRC_URI[sha256sum] = "85ab8d4337d414482586089b6f64fc39af64ff4be5b51976b54b0e10dceb333b"
- 
- S = "${WORKDIR}/live"
- 
--- 
-2.25.1
+https://errors.yoctoproject.org/Errors/Build/116395/
 
-
-
+On Thu, Feb 4, 2021 at 1:47 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> here is latest list
+>
+> https://errors.yoctoproject.org/Errors/Build/116365/
+>
+> Just look at the do_configure failures for filtering to autotools issues only.
+>
+> On Thu, Feb 4, 2021 at 1:09 PM Yi Fan Yu <yifan.yu@windriver.com> wrote:
+> >
+> > Andrey,
+> >
+> > i am working on this now.
+> >
+> > since you already submitted iperf3, i'll focus on
+> >
+> > libmcrypt.
+> >
+> > i'll test and build both of them once i figure out libmcrypt.
+> >
+> >
+> > On 2/4/21 5:45 AM, Andrey Zhizhikin wrote:
+> > >>> - iperf3 - YiFan
+> > > I just sent a patch for this one:
+> > > https://lists.openembedded.org/g/openembedded-devel/message/89274
+> > >
+> > > YiFan, can you please have a look at it to see if it fits?
+> > >
