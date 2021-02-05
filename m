@@ -1,80 +1,95 @@
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web10.555.1612481321474962691
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web09.997.1612483295685170797
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Feb 2021 15:28:41 -0800
+ Thu, 04 Feb 2021 16:01:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=BDAfmrTh;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id 8so2577089plc.10
-        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Feb 2021 15:28:41 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=mpZ8SY8+;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id e12so2635537pls.4
+        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Feb 2021 16:01:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=3IVy3ngFSSRal6TpX6leKtf5Qzvp3eJZqHuECGBnMWY=;
-        b=BDAfmrThPUx3Id1DNa30KGFTEFh4yJ925xsjzMQeifuVzsxvjOI7a+ghUU+okHHy3L
-         VKdtyMD6YZ06Psg57hBo9XqUugGXswdQDmKv4xuoSArvxUNeg4zBU53dhffn+0RkWIcX
-         xQWodQUzDoNl902YNk8vLf+S1D7mlwB/veNDcv8Ab/ZsG3E8L1Sq5SyM1LtUHAU0uPqW
-         VwTHXYcHgYta6Pj8nhrF6YhmECy2Rdd2k5YjbzJKvx25zYjOCCVDUIWFOV43DrcalQcZ
-         kiZ0wR8WvDjT9QjwrR0VD10YKymLoQh2MSXZlHZxnmBgt+jLAw56d3iuBGcPsM+eBEdn
-         qsow==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=GXtKppuMd5o9YGRaRSo55e6d0QGvDqU/8o2LoldCC7o=;
+        b=mpZ8SY8+q6cMHbXDqW007poeIUOe3Pyy7AMGQx5j4EfS3g1ayJ337rgJ8w0p1tn34H
+         zpprP2oxQD74DVDFwqPNhrC8xgrCO/k5xwsioHEv5mSXBg71YZfNPsaCSfDvU1pdeNU2
+         1urxe3ForvQFRfetHOzSkp6wUAfC1nHv+zCsm1B+dCd9X7xLVBayD23Yy3D7KMU+ti3k
+         kvsZDzlCia+oA7doFafZ2tH4MaRX5EKtRDokdcNJybhXqpd3Ko/VVU9vwjaX3uDv+Mhh
+         L7LCl8LftIskKJvzS2nYb3kv0J3RqacAJE/D7kwQeCLTSfNMYPLEWmEMVeJG4fkpXdP9
+         7oGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=3IVy3ngFSSRal6TpX6leKtf5Qzvp3eJZqHuECGBnMWY=;
-        b=KIBFGtQLCJr91xCgHlzpca9lF+nLUs2RUg6cTO0nHct2IdCNpR6LOh7MlrSox1SjMg
-         YAs9o2Lc5v5dtRxLZhvErKtT0a59eduld9hjP8oH7lMEDey18cVgCoj3T87sFQihm7PA
-         5DyFtJTHNLxf52WvvFJhs8+O839GsYG4ePZAXIhKUJiP8bA4fcBYPmbWYQ65x9Nkka7b
-         5g/s8KxR8a/WL3221h0AsHpV6rKw8GnEj/BxtyisZc/q/j2IKf21m+y0YSXGM6IVTlT8
-         3mT2FG7fJPVlH3/zVgx7OHbXKn6QIVetfwzpLJEeeF+ABAzKl++UzwOHveJSSV/4P2vZ
-         YKYg==
-X-Gm-Message-State: AOAM532ztnFihmkMR1N58HehcxNSviXIJC5QlnqG+RYsj9Q0MTBAS8Lc
-	sURqxlbdf+2TDj/ua9v1BIFQpqK5l9aqHg==
-X-Google-Smtp-Source: ABdhPJz+gBNxXmqHuSwLz1Xh/UnzhixbzM+uKASqTk6PjOWWSTJ8ncGZCLeL/fYV/ew5PjGgd4e8zA==
-X-Received: by 2002:a17:90b:50d:: with SMTP id r13mr1364723pjz.159.1612481320715;
-        Thu, 04 Feb 2021 15:28:40 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=GXtKppuMd5o9YGRaRSo55e6d0QGvDqU/8o2LoldCC7o=;
+        b=iMoVCwsFs4jurUGgypKuClixg7w40wiUdc9OvXeaKMZVoEUMBZinB/xdkxkv9YvPkk
+         3PcPHpBIskH3oaMxy7oDR7FyFJ2pyl3ok+Gdu0J+yRb0qDhHDnl7COLWkuCCr/mThLAN
+         iLplwTms29+o+yRX52jCLJw6emr3SfYSnc8NjsB4e/jt9o8k9g7vdK8+TzNv267ZZfFX
+         QafbNzcq9edzBHDSzSKXMVlkJsz2AnQ1r10uPFhyxV4a0aceBzoCJlzsLwDeIrXu1Fv8
+         ucbo8nQ/XauGyBiwtaE3xKj2x8SCpVPobxtk8PSq8Wa4k/d1+myCgSGquDmdgaPWkoth
+         pS9Q==
+X-Gm-Message-State: AOAM532FGnT7L4fg/gmTo6UJfiPaw1PmSKqwUEdRJlfCw+KNNQljH7cG
+	kAVb/MOL5C+aB5avX1h6ukdBFNKx5Qzq9A==
+X-Google-Smtp-Source: ABdhPJwtp729TLPFMnXCXYWzCyj9AYQat/orYBF0hO75s4AzP3uX3OAv6/41gsiZc1zpbYhIXR7S8Q==
+X-Received: by 2002:a17:902:a9ca:b029:e1:b3e:406c with SMTP id b10-20020a170902a9cab02900e10b3e406cmr1434159plr.84.1612483294748;
+        Thu, 04 Feb 2021 16:01:34 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::2914])
-        by smtp.gmail.com with ESMTPSA id k6sm7886467pgk.36.2021.02.04.15.28.39
+        by smtp.gmail.com with ESMTPSA id v6sm6330399pjc.57.2021.02.04.16.01.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 04 Feb 2021 15:28:40 -0800 (PST)
+        Thu, 04 Feb 2021 16:01:34 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 3/3] keepalived: Upgrade to 2.2.1
-Date: Thu,  4 Feb 2021 15:28:36 -0800
-Message-Id: <20210204232836.655046-3-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/2] gst-shark: Upgrade to 0.7.2
+Date: Thu,  4 Feb 2021 16:01:30 -0800
+Message-Id: <20210205000131.756936-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.30.0
-In-Reply-To: <20210204232836.655046-1-raj.khem@gmail.com>
-References: <20210204232836.655046-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+Fix configure errors seen with autotools 2.70+
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../keepalived/{keepalived_2.1.5.bb => keepalived_2.2.1.bb}   | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
- rename meta-networking/recipes-daemons/keepalived/{keepalived_2.1.5.bb => keepalived_2.2.1.bb} (92%)
+ .../recipes-multimedia/gstreamer-1.0/gst-shark_git.bb | 11 +++--------
+ 1 file changed, 3 insertions(+), 8 deletions(-)
 
-diff --git a/meta-networking/recipes-daemons/keepalived/keepalived_2.1.5.bb b/meta-networking/recipes-daemons/keepalived/keepalived_2.2.1.bb
-similarity index 92%
-rename from meta-networking/recipes-daemons/keepalived/keepalived_2.1.5.bb
-rename to meta-networking/recipes-daemons/keepalived/keepalived_2.2.1.bb
-index 1230fcaee2..a778d26097 100644
---- a/meta-networking/recipes-daemons/keepalived/keepalived_2.1.5.bb
-+++ b/meta-networking/recipes-daemons/keepalived/keepalived_2.2.1.bb
-@@ -11,9 +11,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_git.bb b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_git.bb
+index d047caef5f..94d05def3e 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_git.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_git.bb
+@@ -10,9 +10,9 @@ DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad "
  
- SRC_URI = "http://www.keepalived.org/software/${BP}.tar.gz"
--SRC_URI[md5sum] = "27e1cfff5b8dd95062ad415957e663e5"
--SRC_URI[sha256sum] = "d94d7ccbc5c95ab39c95a0e5ae89a25a224f39b6811f2930d3a1885a69732259"
+ SRCBRANCH ?= "master"
+ 
+-PV = "0.6.1"
++PV = "0.7.2"
+ 
+-SRCREV_base = "c41a05cc9e2310c2f73eda4b4f0b4477bf4479c5"
++SRCREV_base = "50e3dbd3b131de2a39d3917576e8f834631ec46b"
+ SRCREV_common = "88e512ca7197a45c4114f7fa993108f23245bf50"
+ 
+ SRC_URI = " \
+@@ -22,7 +22,7 @@ SRC_URI = " \
+ 
+ S = "${WORKDIR}/git"
+ 
+-PACKAGECONFIG_CONFARGS = " \
++EXTRA_OECONF += " \
+        --disable-graphviz \
+        --enable-gtk-doc=no \
+ "
+@@ -33,8 +33,3 @@ FILES_${PN} += "\
+ "
+ 
+ inherit autotools gettext
 -
-+SRC_URI[sha256sum] = "91186f20c83ffc48d7a15a9a6e2329ed4feeb2dcb51f4aa9672c8840190ea741"
- UPSTREAM_CHECK_URI = "https://github.com/acassen/keepalived/releases"
- 
- DEPENDS = "libnfnetlink openssl"
+-do_configure() {
+-        ${S}/autogen.sh --noconfigure
+-        oe_runconf
+-}
 -- 
 2.30.0
 
