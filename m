@@ -1,207 +1,151 @@
-Received: from EUR03-VE1-obe.outbound.protection.outlook.com (EUR03-VE1-obe.outbound.protection.outlook.com [40.107.5.81])
- by mx.groups.io with SMTP id smtpd.web12.5277.1612511322028454359
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web10.5296.1612511697242613173
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Feb 2021 23:48:45 -0800
+ Thu, 04 Feb 2021 23:54:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@skidata.com header.s=selector1 header.b=NSGKnpBt;
- spf=pass (domain: skidata.com, ip: 40.107.5.81, mailfrom: richard.leitner@skidata.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=axoYyUxALt+22WHJ0e/qfuQza9janCCV1SBUr2bImEQOABSHcnZ9j5wPmJrPI8MEZTBn6g4PCXybJprcKLygtpRycmIwdmXCHH2gBEKIMSNpcuMfRz41CYsQxicaIkAY2G9nt5JyIb0zUkHe/y6vXPCxJRFHJMT87Rr1YrgI8k76KYwJtB6Rw8hK7ZhHHhWHcdc39rya36GgjCdKtpDilMLF/Hw8spnwyJu3tOhYMityrU8spJHndDz3xdQG3Em1CT1t2K0HvZQOggui6/K1XQb5UGh+McZeHjmur4UNhRzkTe61ecGxvF59maHes1kw7wQKI0agt31j4Yg2xR7oDQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+yaNUdET8JnciUL3Y563FpxzsZnGV85KrCoUbCvqxNY=;
- b=cwVwHbcVHc+/VRtt+3W8ZXIXni2B5PMQW/CxrylBZO5nmu8DMXcaTtk2ZRyiYqNXh85slL3ZcR1bw5z4wUn/1wd/vpW0JKwb/Z3cYAA66LPIPPgWDP/DX/NUnS7+2yjn6M28NLLEdXiOE4Xxf/Org0CftxaAJyxNtbGp7myYrMst7d49GkpllrHi+VaN7okKOCrIE4FhQ9SynR5GaOHaF5ayNAg9YbLWTXcH7CAi4IPSPYS8wHHV2cwwynH+iI/KoPa2wrTAUHRhsmVrvHvH5fjsltUBgNR4up5DdpYTzsqDWUkgvwgdON+mjDV53ZczGH4fInklJsneHtBHuUgK+g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=skidata.com; dmarc=pass action=none header.from=skidata.com;
- dkim=pass header.d=skidata.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=skidata.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+yaNUdET8JnciUL3Y563FpxzsZnGV85KrCoUbCvqxNY=;
- b=NSGKnpBtUhB3wDU7yqVHWDE1+0CSP1ODwARumxxPcEzoATK+iXRxC+Z2EE0W63QewMZN0TU54uIxcnJg53Qs0GnL6d3v7t8gqEN8CpWmD/RIjrBlehfP7jQEynZvF74wHeZG4ajieSh8lQtISym4+Cgdjap6XbairYanZwhd7zc=
-Authentication-Results: taitradio.com; dkim=none (message not signed)
- header.d=none;taitradio.com; dmarc=none action=none header.from=skidata.com;
-Received: from VI1PR01MB5007.eurprd01.prod.exchangelabs.com
- (2603:10a6:803:9d::19) by VI1PR01MB6496.eurprd01.prod.exchangelabs.com
- (2603:10a6:800:155::20) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.17; Fri, 5 Feb
- 2021 07:48:39 +0000
-Received: from VI1PR01MB5007.eurprd01.prod.exchangelabs.com
- ([fe80::5064:aac6:7226:7221]) by VI1PR01MB5007.eurprd01.prod.exchangelabs.com
- ([fe80::5064:aac6:7226:7221%7]) with mapi id 15.20.3805.024; Fri, 5 Feb 2021
- 07:48:37 +0000
-Date: Fri, 5 Feb 2021 08:48:35 +0100
-From: "Richard Leitner" <richard.leitner@skidata.com>
-To: douglas.royds@taitradio.com
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-java][PATCH] classpath-native and friends: inherit native last
-Message-ID: <YBz4U2+5CbOcUaWx@brokenbit>
-References: <20210205035846.344799-1-douglas.royds@taitradio.com>
-In-Reply-To: <20210205035846.344799-1-douglas.royds@taitradio.com>
-X-Originating-IP: [83.215.125.121]
-X-ClientProxiedBy: AM4PR0701CA0034.eurprd07.prod.outlook.com
- (2603:10a6:200:42::44) To VI1PR01MB5007.eurprd01.prod.exchangelabs.com
- (2603:10a6:803:9d::19)
-Return-Path: richard.leitner@skidata.com
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: hongxu.jia@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 1157shfA012141
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 4 Feb 2021 23:54:43 -0800 (PST)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2106.2; Thu, 4 Feb 2021 23:54:41 -0800
+Received: from ala-lpggp7.wrs.com (147.11.105.171) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2106.2 via Frontend Transport; Thu, 4 Feb 2021 23:54:41 -0800
+From: "hongxu" <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+CC: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-networking][PATCH V2] lksctp-tools: make conpatible to autoconf-2.70
+Date: Thu, 4 Feb 2021 23:54:41 -0800
+Message-ID: <20210205075441.92817-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from brokenbit (83.215.125.121) by AM4PR0701CA0034.eurprd07.prod.outlook.com (2603:10a6:200:42::44) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3846.11 via Frontend Transport; Fri, 5 Feb 2021 07:48:37 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a8d324c7-0d88-4ae8-3809-08d8c9aa7299
-X-MS-TrafficTypeDiagnostic: VI1PR01MB6496:
-X-Microsoft-Antispam-PRVS: 
-	<VI1PR01MB64963BA1800A825A848B1A3CF0B29@VI1PR01MB6496.eurprd01.prod.exchangelabs.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:3173;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	uyCj2ZF/VngOs0n8rxpbW+LuDAYC4/m17TtnKoPekGS7N0jtxAo/gCd1CrUqcAOz/dQw/25OFSWy6voFzlOL8PL+UAMDXpuePLRCLYmzZxx/wJMQBMRnXAZWGq9BN+DOOs3a7RZQw96K4mbsXQJ16q69HtyDwn0N78uBmOWP56cPt6JunH6RgMv7HDY/rntxKNNML2F1JRxXrMfm896PaZGbr/XV35Z5OQNoUhhXg5cwyLwCUH2qBczlVAVXCjG+2Q2PzSoafZP7cbFMq2aHqMlAylae7/wWX9QC7FgZWY0VjbA50meL6rcZyIKKs0l8FdfAsaP4J71P5+Bssp2EcgEMIpPbzwRV1FcctWRcOYZ5QxWPEI/gRZKTDua0nFdwKB89idou2LgLZC/LIpCp+rsRxO98huBg0lBAYQ4T4YjMkO6I4BBWNtzT90F7sYIYoUq8UWsrfejpW601xt8h2Oxl15pipElrUn3tWV6cIqizPwzrs0A6trnobpvFzTSNWkXLijKLLjKsXm01ArMUsqnoFR0ONdN/c+WTrIQEuh+doaII58Td/MZ4sLx0/5n3
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR01MB5007.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(136003)(376002)(366004)(346002)(39850400004)(396003)(66476007)(66556008)(6916009)(8676002)(4326008)(5660300002)(6496006)(9576002)(2906002)(66946007)(52116002)(44832011)(86362001)(186003)(9686003)(956004)(316002)(55016002)(33716001)(26005)(16526019)(83380400001)(8936002)(478600001)(67856001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?qhEgZYuqXuyVamn4hzJCgFuorX+04c/i8nbUnMpApyS5CC5yVGjV7PQkIwrx?=
- =?us-ascii?Q?5qIEra3+B/5SzBZDWJey8E3bwP+hJcrUhCfSbvG8iLxk1F1lU+XkW+Uf6foU?=
- =?us-ascii?Q?M8IkQNRk060i3mM6iArbm0O8eClM8r9t39e9hOhf30xd4kzjrZ3SN04kqrAd?=
- =?us-ascii?Q?LuTUurK/tEIuhTnVkQpgkqSd3hO/N66Ku8fFl3n8oF6RKm5oUAXAR3E3Z5ah?=
- =?us-ascii?Q?zy5r5nMXKZJh0t4MPaDZQNvPSD7br2dOs/cTcxTPAgTFMHZuHEo18hhenuNE?=
- =?us-ascii?Q?5i8wQz3SgJzA0YG4Yb1syC+KKhDgBs+5CYDGwP/uZAWhJzh0eWlPJMCSwCLQ?=
- =?us-ascii?Q?g4eH8rRRKVTjw16vp85lSHnVmMtGAedECSbvtGRH5Zzdr7EnB9FOACD2W0Dw?=
- =?us-ascii?Q?8xoy1M/L2FBuZ4M20IztYkourkqglWeuwwdyp/ReR7ast0vvKcRtC+SM0FgK?=
- =?us-ascii?Q?/8uhNwPYyWXIOL8wf/MV/GhpNfhuhefXiT0jqK4dNFWxSFgNPwnObbZCdHgU?=
- =?us-ascii?Q?c3wCKp9x6Hk9afs+GgaS6y1aNnmF6wEs5TRt6JW1eZoWl+eOlH2EIor4bxBo?=
- =?us-ascii?Q?WNDIFLobXOOzXTdr1vJVtu3UdSrq4DqwjFh13/ZYxXnQVWlaJvsoslgngH4h?=
- =?us-ascii?Q?xbbe0rNHBq+Gd90fbu4fwpmynvtS8wp2etjN5LiQBUSXZJ3ygbT+ngKhnYOx?=
- =?us-ascii?Q?6i1t79775PgK/ZkBmVXnhbpjU+JVbCUUf+XjaSeu2u9Fz0kLe7gCZDORIqas?=
- =?us-ascii?Q?CFGZ7vcsL75WqlAQapi7zkxD91SroFXWFhrEPb6Es+CHp0XkxvLAdu2Vhpwe?=
- =?us-ascii?Q?XnHOkMQuXDl6JlKukzL+XeniqGYebuPjpp/4Gv/ws56LGolv4jAIDm8FzY7O?=
- =?us-ascii?Q?k8+TZA5Tfh25Hwgv0ZdLnB9dpTGoWRiMzA59bc8yuqLAZ/haEdDBairMNpP2?=
- =?us-ascii?Q?773E3GGsO0fP/xOLxKEYGs5q/cy5R7z/gcloGDwG9JbrIjczXks7bmmkovqp?=
- =?us-ascii?Q?zqZzNB6/KnMvuem7075c55E42fWAbXPN86lIuvynsQZs61l6vS26rXsbhbaf?=
- =?us-ascii?Q?P618lMnBiNTB/xMUSyk2HBHxXbCquxDj/N7NOs9L7T6Q4fCbTmxjrJEslv+s?=
- =?us-ascii?Q?G3WnVt7urh0R6WnEWCMKELuufP+s4HQadzYpTOJvE9ykldVeZiXHiI6GSP1A?=
- =?us-ascii?Q?QOy1EFI3ccyuelPPtnF5UsmRh/9KP6+A/jIGZT/aImHbt7m81NZVFeacgHQC?=
- =?us-ascii?Q?WlOZgTLqwfYRXk5D7WB34ZSjg7tGY/4ROdg8WPeSSHV+G9cpGPGS7Hekxm3Y?=
- =?us-ascii?Q?VFxX6OYHcbh/werEOhEE8sQR?=
-X-OriginatorOrg: skidata.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a8d324c7-0d88-4ae8-3809-08d8c9aa7299
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR01MB5007.eurprd01.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2021 07:48:37.8611
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3d52ce8f-cef6-4b27-bace-cf9989cf3973
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: c9LNw/gB969k/g1zJBuJJheZlQ1QLZXTppGtBcwIZZxcxgJIuHNhJU6snH93KKffZOpBab3f1GkHjliXDpeyq7WmEEk8CyQVeUAnmce7apU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR01MB6496
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Hi Douglas,
-thanks for you patch!
+...
+./configure: line 16398: syntax error: unexpected end of file
+...
 
-I will review/test it in the comming days and give feedback!
+Backport a commit from upstream to fix it
 
-regards;rl
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ ....m4-make-conpatible-to-autoconf-2.70.patch | 89 +++++++++++++++++++
+ .../lksctp-tools/lksctp-tools_1.0.18.bb       |  1 +
+ 2 files changed, 90 insertions(+)
+ create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-m4-sctp.m4-make-conpatible-to-autoconf-2.70.patch
 
-On Fri, Feb 05, 2021 at 04:58:46PM +1300, Douglas via lists.openembedded.org wrote:
-> Fixes QA Issue: classpath-native: native/nativesdk class is not inherited last
-> 
-> Signed-off-by: Douglas Royds <douglas.royds@taitradio.com>
-> ---
->  recipes-core/cacao/cacao-initial-native_0.98.bb  | 2 +-
->  recipes-core/classpath/classpath-native.inc      | 2 +-
->  recipes-core/ecj/libecj-bootstrap.inc            | 2 +-
->  recipes-core/icedtea/icedtea7-native.inc         | 3 ++-
->  recipes-core/jamvm/jamvm-initial-native_1.4.5.bb | 2 +-
->  recipes-core/openjdk/openjdk-8-native.inc        | 4 ++--
->  6 files changed, 8 insertions(+), 7 deletions(-)
-> 
-> diff --git a/recipes-core/cacao/cacao-initial-native_0.98.bb b/recipes-core/cacao/cacao-initial-native_0.98.bb
-> index 8125e88..a43d3f4 100644
-> --- a/recipes-core/cacao/cacao-initial-native_0.98.bb
-> +++ b/recipes-core/cacao/cacao-initial-native_0.98.bb
-> @@ -6,7 +6,7 @@ SECTION  = "interpreters"
->  
->  PROVIDES = "virtual/java-initial-native"
->  
-> -inherit native autotools-brokensep
-> +inherit autotools-brokensep native
->  
->  DEPENDS = "zlib-native libtool-native fastjar-native classpath-initial-native jikes-initial-native"
->  
-> diff --git a/recipes-core/classpath/classpath-native.inc b/recipes-core/classpath/classpath-native.inc
-> index b1de458..c81e064 100644
-> --- a/recipes-core/classpath/classpath-native.inc
-> +++ b/recipes-core/classpath/classpath-native.inc
-> @@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=af0004801732bc4b20d90f351cf80510"
->  
->  DEPENDS = "fastjar-native zip-native"
->  
-> -inherit autotools native gettext
-> +inherit autotools gettext native
->  
->  SRC_URI = "${GNU_MIRROR}/classpath/classpath-${PV}.tar.gz"
->  
-> diff --git a/recipes-core/ecj/libecj-bootstrap.inc b/recipes-core/ecj/libecj-bootstrap.inc
-> index 04425f4..8f84fd0 100644
-> --- a/recipes-core/ecj/libecj-bootstrap.inc
-> +++ b/recipes-core/ecj/libecj-bootstrap.inc
-> @@ -9,7 +9,7 @@ DEPENDS = "classpath-initial-native fastjar-native jikes-initial-native virtual/
->  
->  INC_PR = "r5"
->  
-> -inherit native java
-> +inherit java native
->  
->  S = "${WORKDIR}"
->  
-> diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
-> index 5351fe1..f53715f 100644
-> --- a/recipes-core/icedtea/icedtea7-native.inc
-> +++ b/recipes-core/icedtea/icedtea7-native.inc
-> @@ -36,9 +36,10 @@ CFLAGS_append = " ${@oe.utils.conditional('HOST_COMPILER_MAJOR', '9', '-Wno-erro
->  # Explicitly pass -fcommon since GCC 10 defaults to -fno-common for C sources
->  CFLAGS_append = " -fcommon"
->  
-> -inherit native java autotools pkgconfig
-> +inherit java autotools pkgconfig
->  inherit openjdk-build-helper
->  inherit python3native
-> +inherit native
->  
->  JAVA_HOME[unexport] = "1"
->  
-> diff --git a/recipes-core/jamvm/jamvm-initial-native_1.4.5.bb b/recipes-core/jamvm/jamvm-initial-native_1.4.5.bb
-> index bf005db..1f5921f 100644
-> --- a/recipes-core/jamvm/jamvm-initial-native_1.4.5.bb
-> +++ b/recipes-core/jamvm/jamvm-initial-native_1.4.5.bb
-> @@ -20,7 +20,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/jamvm/jamvm-${PV}.tar.gz \
->  # This uses 32 bit arm, so force the instruction set to arm, not thumb
->  ARM_INSTRUCTION_SET = "arm"
->  
-> -inherit native autotools pkgconfig
-> +inherit autotools pkgconfig native
->  
->  # libdir must be modified so that jamvm-initial and -native
->  # do not interfere
-> diff --git a/recipes-core/openjdk/openjdk-8-native.inc b/recipes-core/openjdk/openjdk-8-native.inc
-> index 92d9473..3282257 100644
-> --- a/recipes-core/openjdk/openjdk-8-native.inc
-> +++ b/recipes-core/openjdk/openjdk-8-native.inc
-> @@ -32,10 +32,10 @@ EXTRA_OECONF_append = "\
->  "
->  # --with-boot-jdk=${WORKDIR}/fake-jdk
->  
-> -inherit native
-> -
->  require openjdk-8-common.inc
->  
-> +inherit native
-> +
->  CFLAGS_append = " ${@jdk_cpp_options(d)}"
->  CPPFLAGS_append = "${@jdk_cpp_options(d)}"
->  CXXFLAGS_append = " ${@jdk_cpp_options(d)}"
-> -- 
-> 2.25.1
-> 
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-m4-sctp.m4-make-conpatible-to-autoconf-2.70.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-m4-sctp.m4-make-conpatible-to-autoconf-2.70.patch
+new file mode 100644
+index 000000000..484af4e0f
+--- /dev/null
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-m4-sctp.m4-make-conpatible-to-autoconf-2.70.patch
+@@ -0,0 +1,89 @@
++From d6d7130f0a2e3b81880fca29966e42c1b2be40a7 Mon Sep 17 00:00:00 2001
++From: Sergei Trofimovich <slyfox@gentoo.org>
++Date: Fri, 8 Jan 2021 22:22:52 +0000
++Subject: [PATCH] m4/sctp.m4: make conpatible to autoconf-2.70
++
++On recently released `autoconf-2.70` generated `./configure`
++fails as:
++
++```
++$ ./configure
++...
++checking for struct sctp_event_subscribe.sctp_stream_reset_event... yes
++checking for gcc options needed to detect all undeclared functions... none needed
++./configure: line 16464: syntax error: unexpected end of file
++```
++
++This happens becuase new autoconf generates less whitespace:
++
++```
++{
++if ...
++...
++fi}
++```
++
++It requires at least whitespace between `fi` and `}`.
++
++As input already has newlines the change just drops extra `{}`.
++
++Tested on `autoconf-2.69` and `autoconf-2.70`.
++
++Signed-off-by: Sergei Trofimovich <slyfox@gentoo.org>
++Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
++
++Upstream-Status: Backport [git://github.com/sctp/lksctp-tools.git]
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++
++---
++ m4/sctp.m4 | 12 ++++++------
++ 1 file changed, 6 insertions(+), 6 deletions(-)
++
++diff --git a/m4/sctp.m4 b/m4/sctp.m4
++index 6593517..94527a6 100644
++--- a/m4/sctp.m4
+++++ b/m4/sctp.m4
++@@ -6,7 +6,7 @@
++ 
++ # Macros to assist on probing kernel features
++ #   Probes if a type is defined
++-AC_DEFUN([LKSCTP_CHECK_TYPE], [{
+++AC_DEFUN([LKSCTP_CHECK_TYPE], [
++ AC_CHECK_TYPE([$1],
++ 	AC_DEFINE([$2], 1,
++ 		  [Define if $1 is present.])
++@@ -22,10 +22,10 @@ AC_CHECK_TYPE([$1],
++ #ifdef HAVE_LINUX_SCTP_H
++ # include <linux/sctp.h>
++ #endif
++-])}])
+++])])
++ 
++ #   Probes if a struct has a given member
++-AC_DEFUN([LKSCTP_CHECK_MEMBER], [{
+++AC_DEFUN([LKSCTP_CHECK_MEMBER], [
++ AC_CHECK_MEMBER([$1],
++ 	AC_DEFINE([$2], 1,
++ 		  [Define if $1 is present.])
++@@ -41,10 +41,10 @@ AC_CHECK_MEMBER([$1],
++ #ifdef HAVE_LINUX_SCTP_H
++ # include <linux/sctp.h>
++ #endif
++-])}])
+++])])
++ 
++ #   Probes if a declaration is present
++-AC_DEFUN([LKSCTP_CHECK_DECL], [{
+++AC_DEFUN([LKSCTP_CHECK_DECL], [
++ AC_CHECK_DECL([$1],
++ 	AC_DEFINE([$2], 1,
++ 		  [Define if $1 is present.])
++@@ -60,4 +60,4 @@ AC_CHECK_DECL([$1],
++ #ifdef HAVE_LINUX_SCTP_H
++ # include <linux/sctp.h>
++ #endif
++-])}])
+++])])
++-- 
++2.27.0
++
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb
+index 1e2c644b4..f481ffee1 100644
+--- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb
+@@ -15,6 +15,7 @@ LK_REL = "1.0.18"
+ 
+ SRC_URI = " \
+     git://github.com/sctp/lksctp-tools.git \
++    file://0001-m4-sctp.m4-make-conpatible-to-autoconf-2.70.patch \
+     file://run-ptest \
+     file://v4test.sh \
+     file://v6test.sh \
+-- 
+2.29.2
+
