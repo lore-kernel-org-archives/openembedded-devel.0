@@ -1,17 +1,17 @@
-Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.53])
- by mx.groups.io with SMTP id smtpd.web08.8304.1612533801037966599
+Received: from NAM02-BL2-obe.outbound.protection.outlook.com (NAM02-BL2-obe.outbound.protection.outlook.com [40.107.75.85])
+ by mx.groups.io with SMTP id smtpd.web11.8433.1612533811108496151
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Feb 2021 06:03:21 -0800
+ Fri, 05 Feb 2021 06:03:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Tep6qn/x;
- spf=pass (domain: windriver.com, ip: 40.107.75.53, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=kux9VSk1;
+ spf=pass (domain: windriver.com, ip: 40.107.75.85, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=FcCUBdVt/Obh9CGxO8GO688YcSejDrOhrKSGk/82L8jV3Ti6UQq++YdgELyVlp1RMMzasksMVSMeaTZv1bMPOneq7GRRnhSHdSj4ZryCaq+jX9jVZMWyZyRhNaoxKZJikx87SE5NeF1yfV9V4OStK0OtHWZpLdzX2f8sfm+ALapPNGVxLWE6frwzqnkv5Cyy/crzJIjEfKFYtBN0Um6DJ9e7nkRo9P0XbaENoYwL1HyUNoGGiII5XQ5Bq38zDIziZRnaRUaToRjofT0jZsjY89v+8uZZtngAR6PXx6dcPLJhIBRO3t3wXcjNS+/rz/X7vYMUg/TYd7Uor6K0iAsQSA==
+ b=iwpZh7EpkBnO4fSIYGHqsFsUXFCc63PIjMEZLfRPYmF1fcTg6gYepxXPPYGoMSW8s5fZn/R616FrBa1x7z2/dAfHBpwkruX9al0TxZQmDHMOg+JRZyuPZRsyKtubZoOpg//jNxJmHV75Y/2JjPJuuBQkY25HUydczfT+Gir4qbbPPO5iw84t/USpOZyXRiClzwekz/Sq1mT5gyFPRl2KPhNxQv1wFtldgykVhFjcYhQXm6zKZSjXbChSLwvJZxMeRKsitawastNSwW/2Qozgs5s8FO6nsQvSnMDkUUmjVgC5z8dNadz/Meh0IsrGF2PyFDkxMEhk3L1Xjzq3KYHz7w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3xg+vU0BgaYd4x8Xnw9PO+Y1MW6PB+I61kwAVkhxSXY=;
- b=XjGAjjbEjAPI+xMi17lPdFX1B9DMzapmBCEfARJqZMhE1gllJvDlIS5gzPVjGyso+gFOWX83w/Z+TEQ0q5qGMrKnh/wLtiuEJFhBro9BVjAJ1LKExyDAx5CNIsbqMo3OIkF50B312BoiWseZ422kBxijJ5IYr/j5zXPHtHwD0MORivp0u+ynbEybOYJAihD1bzhNhSILCOjmQUADfugQwwhL9vTemU0NFnDGkhwo9ZzOFoKtL9LUC32wFMu9cdf6B5nshIYeB58NJ/W0Nc7xH/v+G3qvp4hFjHieD4E/umqFridonO2B69lwPcaeOqpdLoiLyA8jEnepfo65O7cgvg==
+ bh=NELchAv0Ic66A3iO4wOUe90yr5l4LRz9PblXg4l4zAg=;
+ b=kvKgW41ASxYQtCBubHkSdl7kTeXFFUr85X4/T9GZomgO0M7oV+Kljs+Yr5bUt7YowIQBIKaVh/akG55vMV7XI+g9wO75dpIuRfr5QqHnwEmtqwEn92rKXB127VqXDbh9fIcXP0xGxrciRUAGu88jw3DLY98OQ2MxN+JVgJ87xWo4va7iPfSm+nIdfK2tTu9jk8sgJDifbA3y77wVOH7fPU3wAVRNdVza27U0/OxcR4t68xc0bzXa0aJlK5YTxZOlVl3GQc4/E21DgzbbVZ5xjwhP0r5+8Sp8E1waajHvayon0G2NVB8kSDLDt2WI5iXyF/K36F8VK3iS5ZtCKCI/Aw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,97 +19,97 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3xg+vU0BgaYd4x8Xnw9PO+Y1MW6PB+I61kwAVkhxSXY=;
- b=Tep6qn/xt5Eorbv311MbDlBvxl5HnP0sUHHmIKVLJo0WZxQw2SDGyPvTZ1roWXWj3gZ9mon3KJBYF10n7/vQ4S84iwiwJK0EyzJR/RRP+EG9cqUTYOLgM+IOzq+b6D9S8EgzXsTKLTnKuQVHHo8tDGGtylKgcdCSiwDUERLJfxw=
+ bh=NELchAv0Ic66A3iO4wOUe90yr5l4LRz9PblXg4l4zAg=;
+ b=kux9VSk1sB+3j8+W2jHURF7MkDS9BQT+L0GzVM/201pZpA/zp0CIH1QCy8+PUYeeDo5leRPsQpdiyw2FdlvaGUUVFsJ7MelynTKBUgfpjeLZcKQ+T/xhjWoYR0VpqcFgtjfVz2f0SloVXvyaiNc5szGPWs7neYaPYu2pfbVi/qM=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (10.255.163.77) by
  SJ0PR11MB4830.namprd11.prod.outlook.com (20.182.113.200) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3825.17; Fri, 5 Feb 2021 14:03:19 +0000
+ 15.20.3825.17; Fri, 5 Feb 2021 14:03:29 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3825.020; Fri, 5 Feb 2021
- 14:03:19 +0000
-Subject: Re: [oe] [meta-python][PATCH 2/5] python3-pytest-html: Upgrade 2.1.1 -> 3.1.1
+ 14:03:29 +0000
+Subject: Re: [oe] [meta-python][PATCH 3/5] python3-graphviz: Upgrade 0.14.2 -> 0.16
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20210203153822.25077-1-leon.anavi@konsulko.com>
- <20210203153822.25077-2-leon.anavi@konsulko.com>
+ <20210203153822.25077-3-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <a1dafd14-7325-c008-a3ef-08485f979ca5@windriver.com>
-Date: Fri, 5 Feb 2021 09:03:16 -0500
+Message-ID: <7a0ce463-f0fe-78cd-0ded-8ec2c20d0843@windriver.com>
+Date: Fri, 5 Feb 2021 09:03:27 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.7.0
-In-Reply-To: <20210203153822.25077-2-leon.anavi@konsulko.com>
+In-Reply-To: <20210203153822.25077-3-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BN9PR03CA0564.namprd03.prod.outlook.com
- (2603:10b6:408:138::29) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: BN9PR03CA0556.namprd03.prod.outlook.com
+ (2603:10b6:408:138::21) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BN9PR03CA0564.namprd03.prod.outlook.com (2603:10b6:408:138::29) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.21 via Frontend Transport; Fri, 5 Feb 2021 14:03:19 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BN9PR03CA0556.namprd03.prod.outlook.com (2603:10b6:408:138::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.23 via Frontend Transport; Fri, 5 Feb 2021 14:03:29 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 6e5d8518-82e1-4ee0-9539-08d8c9decac7
+X-MS-Office365-Filtering-Correlation-Id: 25c921c9-3c52-4e39-7e50-08d8c9ded0cf
 X-MS-TrafficTypeDiagnostic: SJ0PR11MB4830:
 X-Microsoft-Antispam-PRVS: 
-	<SJ0PR11MB483061675E1964BD388E14229FB29@SJ0PR11MB4830.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:5797;
+	<SJ0PR11MB48308D6EFF0F37297AD27CFA9FB29@SJ0PR11MB4830.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:5236;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	F3kxjetHFzv7/LZMUvKmRWCL0HuODyCj7R40w+up9aKy7WMQskz8ibO10b6+YThX/p8pAQPm0/+NIVT6CIN7Y2Fd1qyKB851jJfzQnp6Fvz+MjzcZNjaGXuMw3pfU5cIVcYMF3FGU+5JSt21LJ2fXteQI6ABCjBYSp+/wYzHOaQUQ6V99RChNa6Y+oh1tJdxtGdtXdw3fwyiwnix//vpgYqDl3UkomlARf9CLNec0Bq9wQ6Y1eJdPC2P5DMl1HfyrdBTKHPd9NKTXCVcJzoky4oCOkumPhEe0mV7ldVO0n+PyFwR0mXWolZro3uGp1nCWlrkx/q1OLGMTKuiSSsENLtQi99HKLJvE9lI13MFRXCBkLI0DPSLLUc7Kx6Z3+ZIEB1yr4iEGaVRoEldmHqwH0zjcIQQN/90j/BltNhQkFOwDyT9/sS3wx1jUSud0J0ZuKFlj9ioOAY1dVf34TqjGhIGXkUacZwtiVgcnFIi4ODVlQU4Grx4lpRwa9MU9FBOg8q+XrLg6HynFhTOfHJNFZlXSM0oiC7i0M26mdilj5OSd2eVZ5V4tP46EC+mt0xnlUs2LEcsIzjJZiqSoE2sPmuumIa+7U+WEHG3GrXHg+TfLxfiJQRqYxL4cQ8NUOkAAwtAO4YgHDFePQZysHSq6TADMhCVcgwbrRh5zbCLktrNxQQTTVz5EKGsF6WZR5XG
+	+xJhDix19EqAy9zOcRObvE2wMtqAbCw6NKVB3n6bqK/s/ieOb3WJ3QEJbTwccOo6nVINq1KUZOAvS7FoNLT5+JlidZ/TkMlnr4DGFVsgo7u3alQrwvAxYizRX9t4EzrPlvReq3fip7Go3crfFCWhmx+Gn0xm5CqSZ3SZRTJDv9YEq7qIEDsZsvdn6Pc+kyb0N27GSV7Vdkup4hOObUS6gS5Hdd3aVB4mIhzV+zB5b76p87EokOMPD06yAAXfYKE8w4U0f5Vpgpq7mOtpDFEO+S1FHXMnHT45DsJbDJYXSVRJ35BAvLPMamHL95s2nHtf3kIkpOD1PJjlvOa8iWByniwzKrFFK1+gbwiAFwC08XAg0+tGXoBnUrfQifT+jyDusLF7rO4isCd5Qn6JlxGumNv705qxWMYE0SsDJFP1GJWcabn0ybeGExVrdLB5eqm3fDUHOSXtBk3eat5tkAvyK4rmPlOjfsftmTFnQD+tsb8A4JOaXzro6O9WvthxOfZqzx4l8fK5ndka5L4VpP1YGZobB4vz/E8v470qr5sEAe6QH918CeD01S5WP3FAJhpKeD+QjaGrJFbdK9cQzGqsS99TbX9fRdUOJbvBqz0TWuyn1OOHP3P2rpijhVFy2IlWrcRGOkZssciJD1AMq8r/m/PEwgrczROrfQffo/jnubpoOvJtieNZsoAQLYGIf/uC
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(396003)(366004)(136003)(376002)(346002)(86362001)(6486002)(83380400001)(6666004)(44832011)(8676002)(16576012)(316002)(36756003)(66946007)(53546011)(5660300002)(8936002)(478600001)(31696002)(2906002)(66476007)(166002)(66556008)(26005)(31686004)(186003)(52116002)(2616005)(33964004)(16526019)(966005)(956004)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(396003)(366004)(136003)(376002)(346002)(86362001)(6486002)(83380400001)(44832011)(8676002)(16576012)(316002)(36756003)(66946007)(53546011)(5660300002)(8936002)(478600001)(31696002)(2906002)(66476007)(166002)(66556008)(26005)(31686004)(186003)(52116002)(2616005)(33964004)(16526019)(966005)(956004)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?akFNYThLaU9CRTcrVGtVRGxFaVRONEgwMlFMamZzT3BPdGl4aWl4elBpWEk0?=
- =?utf-8?B?QnB1ZW5MY1AzUk5wWFNqMmdocFBwZDhLUGRHbkJHZnFCNWFQUHVrQngwQTd0?=
- =?utf-8?B?Ni9IeGZQR2Ria2t5ajU1N0JWYWdHd3ptbVM0WDhoUFJ2b0dYN1RiazdtV09N?=
- =?utf-8?B?UlZCcXRDQmJrbmhqaDBsSWdZa2ZvamhJR2wyaG1ZNzhtKzRUMmhqWXB5Q1ZI?=
- =?utf-8?B?MTlBMVhlQWNGRVZYOEg5dDkrK1h5bVg4RXdzbkl6eGVkcUVIZ1ZYK05GcHBL?=
- =?utf-8?B?UzdWbU1pQU5QejMxNXVydVJ1MjY5UmZJY2F3MmxSUUxXZ2RDak5SY081cWxi?=
- =?utf-8?B?MVZYUFZzM0plZ2hWQWxvUFo1L2hkYnRrQTF4aTZ2THFNaXpmazhQaDY5TFFD?=
- =?utf-8?B?M0lHQThnK2ZkVTRLcTZLcEx6RkRIOExaODNLazJKR09vbC9CcDVxMDQ4cHo4?=
- =?utf-8?B?UVFqL1VNMlZFWUZ4eVpOV2xCYVNyVmVwR0E2Wi9jcFhJYzZvVU1rMXJ1bzd6?=
- =?utf-8?B?dEV6Yzc3cytHK0hLenphYTRLQmU0RXNUd3czcHBWRVJjd2xTRFczcTlSVHVj?=
- =?utf-8?B?WWdjaEU5RFlaVFVFVk5seUp5cFdwVGYrMEdYUHBIYzBiOUtUVGJPNzY4TkdU?=
- =?utf-8?B?eWdCMGx1bjdVdGN6VGRWeUhibnQ1QWNrd2dqOVN2NGpOOXZKRUxqWVl2WGwr?=
- =?utf-8?B?ZDAwczVHc1E3RU9lNkRnMFQ5enBzMHU5Q3dvR2FFZi9wN01WbGkwaDk0VWpR?=
- =?utf-8?B?NjhJTWtNUEN5QnRJOUJieTlQdDlDM3pyQXlMZk8zdHVJOHFiWXBZa2ZHSy9y?=
- =?utf-8?B?dktQWUpKcTY1cUNOSFg3OTY2VmVDbXRLYmlCeU5nWGRRY2wyMkwvVXhOTHZr?=
- =?utf-8?B?V296WkZjRGp2bTlJQzVJZmJKaUlHY1h1Z3h1TFZQWEtsQlAwZnZkQWZjV254?=
- =?utf-8?B?WFJJL1gvNHR5SHJUL2N0dUxnTTlGWEFzUTlaNldQZEFSUFB2VnJuZXk0a1Z1?=
- =?utf-8?B?b3U2M1c2aW4zSjdJVUN2ZE80N09YbWtiRFJ0WXNiMENoSXl6b1VFcG5UZWll?=
- =?utf-8?B?eThmUkowb3h4VTdNNURyRVdmbXBwbTRyVXVBTGZnbkFZWTN6RWxhSll0OEd5?=
- =?utf-8?B?YitNRUo4bzdyRGVQSCtBM2o1NHVZNm9kSUhEMGhsNkJjcXlQSHdqRmdGdW9F?=
- =?utf-8?B?eGE3Ym1FV2k4VVdZQXIxcTU2NW5IQnE3VmtZeVNGeHVQWDcraERQVUJEY081?=
- =?utf-8?B?K3h2eVZwTGZiYzFZd1Z4aFZzK0tra0wzNWx5amlTclRkeENWc1JhUmhLanhO?=
- =?utf-8?B?UEhzMUNjbC9VbUVCakdoSDZaVzdvYXN5UVJRQjRLOEtBOCthT3JHdkNUNjF6?=
- =?utf-8?B?V0RkLytqRDJzMVcyZnRnSmg3eWZ4SHVVNGFoYWFZbENFYmYrRWRRVnQ0Mlov?=
- =?utf-8?B?dFZoVFBBNDhGT0laSGNockFmSlYwcW9BTzJia3hQaGY0Qm9iV00yeFVxWkZp?=
- =?utf-8?B?Ty9MT1BERWlVWXVOZDZJdFN3RXdPTDgvMVIzWVFWT3JaZmV5R1kvNGFYeTJC?=
- =?utf-8?B?bWhwekJteUtWZlM4bFR5VnJvTHpRUzFaa2h2T2NFdDIySVhkMWEwV3U1US80?=
- =?utf-8?B?WE5yUDRYeE1reTY3UFphRzZSdUt4SkxSNFZNNXpSSUJXVjFYYWI5OG9jVjBk?=
- =?utf-8?B?dUN6L0drTkdubWM0NWZHbkVVRUdYdzFkM015djVDaURGNzFiTlVDa1pDelZE?=
- =?utf-8?Q?3vYO+1nMOYytb1wmIOxpUfwS0eUrC2ju5KStH0z?=
+	=?utf-8?B?VC9MZHV6U3NTRVUwK2c2RlVaMFgrY2ZGMjNJa2g2SVVqODBRK0xEdWRnd3cr?=
+ =?utf-8?B?UFovQ3d6NnBNVjZVMHJsdnpRSlZzYWJVamN3NVBxVGt0alJHRFZNbEJSTWY5?=
+ =?utf-8?B?Skw5Z2owK0FTR0ozMGZiUEJmVWJyV3VHd3l5WVhVYU1mc0M0M1lXTnRDNlFR?=
+ =?utf-8?B?bzA3ZHUxQzMzRmdpYm5HYi9sY3VhYldyT2liSFJPcVpER2pVMWs0dDVFanJi?=
+ =?utf-8?B?bEQrWTR0VGVwOUw5YS9DZXM0N2s3NjVBSGhVZG5Da2c2NUNxV2xjOTl3RlAv?=
+ =?utf-8?B?cWNrSjZweGFZMzJVcUs4Y0dyd0hiT0dUM3Uyc2E0OENvL3BhVnhmbVp5RTFZ?=
+ =?utf-8?B?WjIrOUJqbUJvR3RDMmdQc1hBc1NrZXZVdmlYYkY3OTd4VS9EVWVxVnAwdHU5?=
+ =?utf-8?B?U3hoWGJ0UGRBd2hiNzYrSitpTnpMNWxtRDFCeVJhNVJ3SlJ2bmUvTTA5MUs1?=
+ =?utf-8?B?NnVMWWN5RVJ4NFZvSXNHRDJYQVlGYmxxbVpBOG0vSE5UYUJrbThkakswbENW?=
+ =?utf-8?B?SEdvVWtUa3VtdlVPMWV0VVU1YmFxMi9MS05QZmJEUVpkMmtpTEZrbVNrck4x?=
+ =?utf-8?B?RThRei9kUTR0QUxvamgxa01Ra1U1Szl6Q05RQVpVYlM3NndON05YSE4rTGN6?=
+ =?utf-8?B?ZW0yVVB5WWdQQVR5Y2NxL0hzVWlUQzdCOTEwaEtzU2ZkYlFCSVRBMC9pY2pV?=
+ =?utf-8?B?d2pnckdRYnBrYWcydVFtL0FJZG5mSUFZZ3F0bFVvb2RKUGhaZ09JcnVyZDVD?=
+ =?utf-8?B?WnRiOWt5WkorYVRiUG5aMTFjQnU1Y2RYT1JYdW0rTWFEcDI3UUliT1RCcUtS?=
+ =?utf-8?B?enA1TDY0SEhOc2FEMzdtTTZVUUVsdEtOT3dvUGROclBDTWtFRnBENnBDMEdM?=
+ =?utf-8?B?NUIyUmU3ZUFWMU9EUVNUVmxPRnd6dHlKbTNodEgyUTU2bS9xRUxLby9sVk1z?=
+ =?utf-8?B?STdNcytEV21CMHNQai9nRVVweWxMSjNINHdFS2pxb0hJUTJuNllYZWhNb3I4?=
+ =?utf-8?B?STd6TUQ1dFVnelVvcHZkMFd1VkZ4KzVVZ21GNStoRHp2cWJWS3hQS0gwQjdo?=
+ =?utf-8?B?NzlnT3ROUFpueU5uUFJDSnhRMk1hR2ZwblZzVTlIeUR0b3RndDFneFNNamZT?=
+ =?utf-8?B?eXZqd29wYUxIZ1BTdFlEY3hzWVhhMFhlTC9YU2dMR0Q1U21VSWgvSEM4NWhu?=
+ =?utf-8?B?WlFKbHlkMk96MGIwU3dsTDl3MjJTbE9LZmFIbkxzNnN0QjNJbVJTMGptMll5?=
+ =?utf-8?B?R003NkRFV3hNZTN2aStNd1lHNHg3U2ZNVHZXNzM5WUNyVThTVTEyV0JBbVA2?=
+ =?utf-8?B?OHovbTh4TnpCSDVGUjRFc2E2TnY4QTNoMTdQbkNEZFpXSG5hV00zQUllWThQ?=
+ =?utf-8?B?UWY2R2tlMlRGbkpKZytyd2htWUVQc3crREpQYWNWQ1RPSUY3TGh3Z2t3WGFx?=
+ =?utf-8?B?NVp0VnVWNCt3VlZnQklHQTV4bWhpQnNTbWdBUWpkN2srRUtoR3JWRDJIUnAw?=
+ =?utf-8?B?VDZCeTc1U05hbXQwSFB6cTU5VmlBdFQzV3FHZkMxL3daVlA5UUJJUkpFR2Rn?=
+ =?utf-8?B?ZGR3T2gyZVlnZzVqQ01SWW5qMjhNYXVDWis2WFBOK1pGaGdJRTBwYlpGcGdG?=
+ =?utf-8?B?Q1E1SWU3NitPcVlDeW53UlV1Kzh1aEtKdEU3NTZOTXBlZ1VMTlFsSE83TGpX?=
+ =?utf-8?B?ZFYwNzZ6MGZNTndwTW4xN2JpcmZvTG1KMnRnaEhmM0l0UFpBU09wcHI2d2Zm?=
+ =?utf-8?Q?66r6xMrXK8vVDSG8Oty7Y77U7PK6uQb/MoIllao?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6e5d8518-82e1-4ee0-9539-08d8c9decac7
+X-MS-Exchange-CrossTenant-Network-Message-Id: 25c921c9-3c52-4e39-7e50-08d8c9ded0cf
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2021 14:03:19.6054
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2021 14:03:29.8045
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: uzmzWF3uJGKm8rHlw+hZ9BmMH0wBVZp8l+t55tAPgo5hMSB0LqqljYA4Fkll7yaY46J6Utv8Rr8tSK6dzov31aFzupIWpZCwpCUgbAe83dI=
+X-MS-Exchange-CrossTenant-UserPrincipalName: ztMSEfz48giQGwefu0tXr98ZGRz+w5nO3/lJcGEIh4uQfOo9y6VoguvHIj2HOnd1TFXwRDD84WAc5+2kjbL55dqbYOSDa6aJA4w+Y3BDCVY=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB4830
 Content-Type: multipart/alternative;
- boundary="------------28063C017BA09590D2FE1935"
+ boundary="------------82361722D248F0ED8CF508C5"
 Content-Language: en-US
 
---------------28063C017BA09590D2FE1935
+--------------82361722D248F0ED8CF508C5
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -117,84 +117,41 @@ Content-Transfer-Encoding: 7bit
 On 2021-02-03 10:38 a.m., Leon Anavi wrote:
 > [Please note: This e-mail is from an EXTERNAL e-mail address]
 >
-> Upgrade to release 3.1.1:
+> Upgrade to release 0.16:
 >
-> - Fix issue with reporting of missing CSS files
-> - Stop attaching test reruns to final test report entries
-> - Allow for report duration formatting
-> - Respect --capture=no, --show-capture=no, and -s pytest flags
-> - Make the Results table Links column sortable
-> - Fix issue with missing image or video in extras
-> - Fix attribute name for compatibility with pytest-xdist 2
-> - Post process HTML generation to allow teardown to appear in the
->    HTML output
->
-> License-Update: Following recent changes to README.rst, just use
-> LICENSE downloaded from PyPI.
+> - Add ``.unflatten()`` method to ``Graph``, ``Digraph``, and
+>    ``Source``. Add standalone ``unflatten()``.
+> - Make ``Source.__str__()`` return the ``.source`` instead of the
+>    ``repr()`` (like ``Graph`` and ``Digraph``).
+> - Render with ``dot -K<engine> ...`` instead of ``<engine> ...``
+>    internally.
+> - Add documentation hint to archived upstream version for Windows.
+> - Re-render most documentation graphs with Graphviz 2.44.1.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/python3-pytest-html_2.1.1.bb       | 24 -------------------
->   .../python/python3-pytest-html_3.1.1.bb       | 18 ++++++++++++++
->   2 files changed, 18 insertions(+), 24 deletions(-)
->   delete mode 100644 meta-python/recipes-devtools/python/python3-pytest-html_2.1.1.bb
->   create mode 100644 meta-python/recipes-devtools/python/python3-pytest-html_3.1.1.bb
+>   .../{python3-graphviz_0.14.2.bb => python3-graphviz_0.16.bb}   | 3 +--
+>   1 file changed, 1 insertion(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-graphviz_0.14.2.bb => python3-graphviz_0.16.bb} (70%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-pytest-html_2.1.1.bb b/meta-python/recipes-devtools/python/python3-pytest-html_2.1.1.bb
-> deleted file mode 100644
-> index 27b768155..000000000
-> --- a/meta-python/recipes-devtools/python/python3-pytest-html_2.1.1.bb
-> +++ /dev/null
-> @@ -1,24 +0,0 @@
-> -DESCRIPTION = "pytest plugin for generating html reports from test results"
-> -DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
-> -
-> -LICENSE = "MPL-2.0"
-> -LIC_FILES_CHKSUM = "file://../pytest-html.LICENSE;md5=5d425c8f3157dbf212db2ec53d9e5132"
-> -
-> -# Per README.rst the license statement is fetched from
-> -# https://raw.githubusercontent.com/davehunt/pytest-html/master/LICENSE
-> -SRC_URI += "https://raw.githubusercontent.com/davehunt/pytest-html/master/LICENSE;name=license;downloadfilename=pytest-html.LICENSE"
-> -SRC_URI[license.md5sum] = "5d425c8f3157dbf212db2ec53d9e5132"
-> -SRC_URI[license.sha256sum] = "2bfdca60adf803108d4c7f009000bea76ad00e621e163197881b0eaae91b530e"
-> -
-> -SRC_URI[sha256sum] = "6a4ac391e105e391208e3eb9bd294a60dd336447fd8e1acddff3a6de7f4e57c5"
-> -
-> -
-> -PYPI_PACKAGE = "pytest-html"
-> -
-> -inherit pypi setuptools3
-> -
-> -RDEPENDS_${PN} += " \
-> -    ${PYTHON_PN}-pytest \
-> -"
-> -
-> -BBCLASSEXTEND = "native nativesdk"
-> diff --git a/meta-python/recipes-devtools/python/python3-pytest-html_3.1.1.bb b/meta-python/recipes-devtools/python/python3-pytest-html_3.1.1.bb
-> new file mode 100644
-> index 000000000..bd543d2f0
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-pytest-html_3.1.1.bb
-> @@ -0,0 +1,18 @@
-> +DESCRIPTION = "pytest plugin for generating html reports from test results"
-> +DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
-> +
-> +LICENSE = "MPL-2.0"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=5d425c8f3157dbf212db2ec53d9e5132"
-> +
-> +SRC_URI[sha256sum] = "3ee1cf319c913d19fe53aeb0bc400e7b0bc2dbeb477553733db1dad12eb75ee3"
-> +
-> +
-> +PYPI_PACKAGE = "pytest-html"
-> +
-> +inherit pypi setuptools3
-> +
-> +RDEPENDS_${PN} += " \
-> +    ${PYTHON_PN}-pytest \
-> +"
-> +
-> +BBCLASSEXTEND = "native nativesdk"
+> diff --git a/meta-python/recipes-devtools/python/python3-graphviz_0.14.2.bb b/meta-python/recipes-devtools/python/python3-graphviz_0.16.bb
+> similarity index 70%
+> rename from meta-python/recipes-devtools/python/python3-graphviz_0.14.2.bb
+> rename to meta-python/recipes-devtools/python/python3-graphviz_0.16.bb
+> index 0de4c8f40..1af657098 100644
+> --- a/meta-python/recipes-devtools/python/python3-graphviz_0.14.2.bb
+> +++ b/meta-python/recipes-devtools/python/python3-graphviz_0.16.bb
+> @@ -3,8 +3,7 @@ HOMEPAGE = "https://graphviz.readthedocs.io/en/stable/"
+>   LICENSE = "MIT"
+>   LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f7831c564aeff14e68aa4ff7a93dc89f"
+>
+> -SRC_URI[md5sum] = "7123efabb68270f579525df74bf8b0c9"
+> -SRC_URI[sha256sum] = "92b7637ece63c77e3d39221ae1f4df98e9256cb449e9860c598335b34496d195"
+> +SRC_URI[sha256sum] = "d2d25af1c199cad567ce4806f0449cb74eb30cf451fd7597251e1da099ac6e57"
+>
+>   inherit pypi setuptools3
+>
 > --
 > 2.17.1
 >
@@ -202,7 +159,7 @@ Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > 
 >
 
---------------28063C017BA09590D2FE1935
+--------------82361722D248F0ED8CF508C5
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -215,90 +172,47 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2021-02-03 10:38 a.m., Leon Anavi
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210203153822.25077-2-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210203153822.25077-3-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">[Please note: This e-mail is from an EXTERNAL e-mail address]
 
-Upgrade to release 3.1.1:
+Upgrade to release 0.16:
 
-- Fix issue with reporting of missing CSS files
-- Stop attaching test reruns to final test report entries
-- Allow for report duration formatting
-- Respect --capture=no, --show-capture=no, and -s pytest flags
-- Make the Results table Links column sortable
-- Fix issue with missing image or video in extras
-- Fix attribute name for compatibility with pytest-xdist 2
-- Post process HTML generation to allow teardown to appear in the
-  HTML output
-
-License-Update: Following recent changes to README.rst, just use
-LICENSE downloaded from PyPI.
+- Add ``.unflatten()`` method to ``Graph``, ``Digraph``, and
+  ``Source``. Add standalone ``unflatten()``.
+- Make ``Source.__str__()`` return the ``.source`` instead of the
+  ``repr()`` (like ``Graph`` and ``Digraph``).
+- Render with ``dot -K&lt;engine&gt; ...`` instead of ``&lt;engine&gt; ...``
+  internally.
+- Add documentation hint to archived upstream version for Windows.
+- Re-render most documentation graphs with Graphviz 2.44.1.
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210203153822.25077-2-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210203153822.25077-3-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/python3-pytest-html_2.1.1.bb       | 24 -------------------
- .../python/python3-pytest-html_3.1.1.bb       | 18 ++++++++++++++
- 2 files changed, 18 insertions(+), 24 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-pytest-html_2.1.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-pytest-html_3.1.1.bb
+ .../{python3-graphviz_0.14.2.bb =&gt; python3-graphviz_0.16.bb}   | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-graphviz_0.14.2.bb =&gt; python3-graphviz_0.16.bb} (70%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-html_2.1.1.bb b/meta-python/recipes-devtools/python/python3-pytest-html_2.1.1.bb
-deleted file mode 100644
-index 27b768155..000000000
---- a/meta-python/recipes-devtools/python/python3-pytest-html_2.1.1.bb
-+++ /dev/null
-@@ -1,24 +0,0 @@
--DESCRIPTION = &quot;pytest plugin for generating html reports from test results&quot;
--DEPENDS += &quot;${PYTHON_PN}-setuptools-scm-native&quot;
--
--LICENSE = &quot;MPL-2.0&quot;
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://../pytest-html.LICENSE;md5=5d425c8f3157dbf212db2ec53d9e5132">&quot;file://../pytest-html.LICENSE;md5=5d425c8f3157dbf212db2ec53d9e5132&quot;</a>
--
--# Per README.rst the license statement is fetched from
--# <a class="moz-txt-link-freetext" href="https://raw.githubusercontent.com/davehunt/pytest-html/master/LICENSE">https://raw.githubusercontent.com/davehunt/pytest-html/master/LICENSE</a>
--SRC_URI += <a class="moz-txt-link-rfc2396E" href="https://raw.githubusercontent.com/davehunt/pytest-html/master/LICENSE;name=license;downloadfilename=pytest-html.LICENSE">&quot;https://raw.githubusercontent.com/davehunt/pytest-html/master/LICENSE;name=license;downloadfilename=pytest-html.LICENSE&quot;</a>
--SRC_URI[license.md5sum] = &quot;5d425c8f3157dbf212db2ec53d9e5132&quot;
--SRC_URI[license.sha256sum] = &quot;2bfdca60adf803108d4c7f009000bea76ad00e621e163197881b0eaae91b530e&quot;
--
--SRC_URI[sha256sum] = &quot;6a4ac391e105e391208e3eb9bd294a60dd336447fd8e1acddff3a6de7f4e57c5&quot;
--
--
--PYPI_PACKAGE = &quot;pytest-html&quot;
--
--inherit pypi setuptools3
--
--RDEPENDS_${PN} += &quot; \
--    ${PYTHON_PN}-pytest \
--&quot;
--
--BBCLASSEXTEND = &quot;native nativesdk&quot;
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-html_3.1.1.bb b/meta-python/recipes-devtools/python/python3-pytest-html_3.1.1.bb
-new file mode 100644
-index 000000000..bd543d2f0
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pytest-html_3.1.1.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = &quot;pytest plugin for generating html reports from test results&quot;
-+DEPENDS += &quot;${PYTHON_PN}-setuptools-scm-native&quot;
-+
-+LICENSE = &quot;MPL-2.0&quot;
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=5d425c8f3157dbf212db2ec53d9e5132">&quot;file://LICENSE;md5=5d425c8f3157dbf212db2ec53d9e5132&quot;</a>
-+
-+SRC_URI[sha256sum] = &quot;3ee1cf319c913d19fe53aeb0bc400e7b0bc2dbeb477553733db1dad12eb75ee3&quot;
-+
-+
-+PYPI_PACKAGE = &quot;pytest-html&quot;
-+
-+inherit pypi setuptools3
-+
-+RDEPENDS_${PN} += &quot; \
-+    ${PYTHON_PN}-pytest \
-+&quot;
-+
-+BBCLASSEXTEND = &quot;native nativesdk&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-graphviz_0.14.2.bb b/meta-python/recipes-devtools/python/python3-graphviz_0.16.bb
+similarity index 70%
+rename from meta-python/recipes-devtools/python/python3-graphviz_0.14.2.bb
+rename to meta-python/recipes-devtools/python/python3-graphviz_0.16.bb
+index 0de4c8f40..1af657098 100644
+--- a/meta-python/recipes-devtools/python/python3-graphviz_0.14.2.bb
++++ b/meta-python/recipes-devtools/python/python3-graphviz_0.16.bb
+@@ -3,8 +3,7 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://graphviz.readthedocs.io/en/stable/">&quot;https://graphviz.readthedocs.io/en/stable/&quot;</a>
+ LICENSE = &quot;MIT&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=f7831c564aeff14e68aa4ff7a93dc89f">&quot;file://LICENSE.txt;md5=f7831c564aeff14e68aa4ff7a93dc89f&quot;</a>
+
+-SRC_URI[md5sum] = &quot;7123efabb68270f579525df74bf8b0c9&quot;
+-SRC_URI[sha256sum] = &quot;92b7637ece63c77e3d39221ae1f4df98e9256cb449e9860c598335b34496d195&quot;
++SRC_URI[sha256sum] = &quot;d2d25af1c199cad567ce4806f0449cb74eb30cf451fd7597251e1da099ac6e57&quot;
+
+ inherit pypi setuptools3
+
 --
 2.17.1
 
@@ -313,4 +227,4 @@ index 000000000..bd543d2f0
   </body>
 </html>
 
---------------28063C017BA09590D2FE1935--
+--------------82361722D248F0ED8CF508C5--
