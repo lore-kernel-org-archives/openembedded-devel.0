@@ -1,17 +1,17 @@
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.70])
- by mx.groups.io with SMTP id smtpd.web11.5015.1612508503594202208
+Received: from NAM04-BN8-obe.outbound.protection.outlook.com (NAM04-BN8-obe.outbound.protection.outlook.com [40.107.100.52])
+ by mx.groups.io with SMTP id smtpd.web12.5109.1612509801020742053
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Feb 2021 23:01:44 -0800
+ Thu, 04 Feb 2021 23:23:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=NQt7QMUB;
- spf=pass (domain: windriver.com, ip: 40.107.243.70, mailfrom: mingli.yu@windriver.com)
+ dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=F9UWStVK;
+ spf=pass (domain: windriver.com, ip: 40.107.100.52, mailfrom: hongxu.jia@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AJMQfcccI25AePAHc1EV+FocyJfYmpLW8Rc/unObMtZMSJ9pa6GomUHxpqlqGfT+755cULCTuz+f916Z8+vdXixkYIbOJJKLmfmCZUeCYSlOf3KvIn2cZmfKbfuF/7FxBNegWXTChDpYiwJso5ZhX3vHvf7qmbBnMYvpjcIZwP5rBPdJkYqvjd9VmmUdSLfD9wQcC88RRN5J6GHkPfmFWMSXzYprXiLfoKsVUmN2TdQnb5RYiEor4SjpH6ZEx0/JDjTtepveErfu28s+KSeHML2/OPDX5tI4cV6z6/vMzkO75zhvrUvKqGWDWSQ3m5ihnUUmw4sp4NO+JHxbLdjeZA==
+ b=GJt14l2QRskdd1n5eFeQt61JoR/kAJLiEXwXfaHGFhxpz3ps7Wfgb04i+AjhjuWb2BSJIq39HYexQ1lpNmDrTKV6VxZAbqAp+hdpZKISdW5T4jYv1ejFggFVKygrBvn/SKOruBkVn8EWqmLtOCHcpgOV5zVtsRxrzFb38cmIySEut5lxN6ugdOzKyL00w2kBviC78SKhwCSTs++EtPOdB1eIdLRMAN1qOSajCfMk+vTsSrBLs7+KveS3HAreaawNrFqGTgQXoSv9PbmzmQWHtFW4+WxsmJNgSEQNcA1BPHiy4stCc1vfjpqidJcipWwswooiU4rfS3Xmf5ju9KjjHQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kRoCk0AC00BYSPFw9zWBaOs/BrZSIAXH/ddF5kLxn+4=;
- b=NysutB45qBzELfYt4EiKqgBa69bqhFYVjjptgrqx1gLtXo69gL1iBgWg8IjgqDqm4Zs4JrpsJ8Wu/ncX6w7/q3FUmSCjQlVQEGsLAc5BlRYbjeyAIjQPLwrFs7fELt3iA3cX2yYXiqTnwnXEiHpsD7QmT5Il9jHz7+ynE4wjOQs5kJKr/OShOnnSstruUxIiAoz24I60HorNRpUgULa40f6wF4i29crNRvtc222j1L3w+fkXpcHTr/diGAzazO6KsOL4c9JoCZVYoDJzIAKF9uz1MXi+WqFUHnci3H2EWsw02UKZfmiByudcKBosc+d8KhLSL2+XUAjMZ13memWiWQ==
+ bh=N+wt+4JoPpurGFXnyK9FQJlBUEXeiVUkksuhMBOSlow=;
+ b=gSpdhMqAI28kKTUIdJWwmXrp3xz/DL0j4tvBcXbQP3cvpWag1ofplflW1DUKcdp6l/xYufd0+mihUkPWFFQ6Bu160wtEDhzOcT0GfrTABerziIn3OOAJDpH6kIgxreBDVy0f3ZDdK93RjTYCBH2QS3zhFhZKzWoflrUB5BREapJdcGo54ldBMK/UN75pGvzUYJvxIed6fh68Q6mff5b1771meMCnwk7q/Fptouh7lKJhy/z3QunEmw9K6+lOfquF513kuR4zoCWieO+TY6QDEq4cAo3pL2ejdgPA6GliWlIW3X7XcErRopKgSQsd2T8XWPmsQbO1oFEXInXj/bdRoQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,140 +19,105 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kRoCk0AC00BYSPFw9zWBaOs/BrZSIAXH/ddF5kLxn+4=;
- b=NQt7QMUBSkKc/QihRJyXQnmMUoirA9AZ0Re7AaI/woZu0pmVPwHbc2LRKHLlAoWe2HhS7hm4KyKGobmTLvpTP8KQJbWvp4K4clGY6J3FyvYat1tWGpYubDN7X3Kpvu9phJdcMcIo66S1NjuF8g/QajX4V7nci4FyAJyaFAoCjPA=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from CO1PR11MB5009.namprd11.prod.outlook.com (2603:10b6:303:9e::11)
- by CO1PR11MB4849.namprd11.prod.outlook.com (2603:10b6:303:90::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.17; Fri, 5 Feb
- 2021 07:01:42 +0000
-Received: from CO1PR11MB5009.namprd11.prod.outlook.com
- ([fe80::45:697c:a699:df64]) by CO1PR11MB5009.namprd11.prod.outlook.com
- ([fe80::45:697c:a699:df64%7]) with mapi id 15.20.3825.017; Fri, 5 Feb 2021
- 07:01:42 +0000
-From: "Yu, Mingli" <mingli.yu@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] netsnmp: remove --with-openssl=PATH configure option
-Date: Fri,  5 Feb 2021 15:01:22 +0800
-Message-ID: <20210205070122.13262-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.29.2
+ bh=N+wt+4JoPpurGFXnyK9FQJlBUEXeiVUkksuhMBOSlow=;
+ b=F9UWStVKt+WfvOOmP3Pc2GGBHYN4Gm3J2Mk7h+xpcdn6FeUfEdtI5eM47XaYva9g0SYxSDpQ3CykUqUlmOyvPS9IRDXPzfzXy2IVbFr6nS/sd1juzgMyBdT+s+X6XQw79997FKC48ya7FU6Ti97AnXNi7ghovXbhsgD9maNMSrw=
+Authentication-Results: gmail.com; dkim=none (message not signed)
+ header.d=none;gmail.com; dmarc=none action=none header.from=windriver.com;
+Received: from DM6PR11MB4380.namprd11.prod.outlook.com (52.132.248.84) by
+ DM5PR11MB1948.namprd11.prod.outlook.com (10.175.91.21) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3805.16; Fri, 5 Feb 2021 07:23:19 +0000
+Received: from DM6PR11MB4380.namprd11.prod.outlook.com
+ ([fe80::a500:2ae3:a6c4:bc13]) by DM6PR11MB4380.namprd11.prod.outlook.com
+ ([fe80::a500:2ae3:a6c4:bc13%4]) with mapi id 15.20.3825.020; Fri, 5 Feb 2021
+ 07:23:19 +0000
+From: "hongxu" <hongxu.jia@windriver.com>
+To: raj.khem@gmail.com
+CC: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH] python3-pykwalify: correct runtime depends
+Date: Fri,  5 Feb 2021 15:23:05 +0800
+Message-ID: <20210205072305.6252-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.27.0
 X-Originating-IP: [60.247.85.82]
-X-ClientProxiedBy: YTXPR0101CA0026.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00::39) To CO1PR11MB5009.namprd11.prod.outlook.com
- (2603:10b6:303:9e::11)
-Return-Path: mingli.yu@windriver.com
+X-ClientProxiedBy: HK2PR03CA0059.apcprd03.prod.outlook.com
+ (2603:1096:202:17::29) To DM6PR11MB4380.namprd11.prod.outlook.com
+ (2603:10b6:5:14e::20)
+Return-Path: hongxu.jia@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from pek-lpg-core2.corp.ad.wrs.com (60.247.85.82) by YTXPR0101CA0026.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::39) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.19 via Frontend Transport; Fri, 5 Feb 2021 07:01:39 +0000
+Received: from pek-lpggp1.wrs.com (60.247.85.82) by HK2PR03CA0059.apcprd03.prod.outlook.com (2603:1096:202:17::29) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3846.11 via Frontend Transport; Fri, 5 Feb 2021 07:23:17 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 419d72d0-36bc-45a6-8d3d-08d8c9a3e3df
-X-MS-TrafficTypeDiagnostic: CO1PR11MB4849:
+X-MS-Office365-Filtering-Correlation-Id: 01ac7513-0cbb-40ff-9f6c-08d8c9a6e98a
+X-MS-TrafficTypeDiagnostic: DM5PR11MB1948:
 X-Microsoft-Antispam-PRVS: 
-	<CO1PR11MB484904478DBFDDB5ECFF7C78F1B29@CO1PR11MB4849.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
+	<DM5PR11MB1948AA91AFC943915C650C8E94B29@DM5PR11MB1948.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1013;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	ZfvGGBpvQQtclAqRg9+QZGnG6WE7aFmdCH/hXkmCSu40u6IsEHxrljQi46j6MJ/wwWCD874xNv61dyZhhu906H6Qu/qNXbAZasEXXhzZbUZudD+QmQkIXlM5YASltjF/kg/MeA4B03IQYJt/9+NLp+MA+dWH3DwtgHvhaLcGocjWfkmX/vyf3jvaDRLmNIdyOEvTQqprWHE/UzHWa+xGYn8c/lKz7MdRzXdjmWnK8tnVqC8eoDd+n9cBxuv0Ftd0KVgY5apxL8KN/PJUZJexaix9gfJB/Oshzd6hiqEx/59wgrB4o27/xS5PMqvSVsvn0p/F20zsc2ccxf00iQUo+nuClBbeKLNcXPPeEiJ/hmcQQCLOkw4iZJPelfrMKBXZL+BMA9Sqi2Y1fWpnmtBDrJ6H9NKPHLFJ0K+xux6Hu8lcDyH1ZIVX3wD+Ph7LpV5YAudaIwubOFlyqJKw8lFJDou4267YV+9aCdPuYUUqaStJq+8ZG7Z/n0tUJaid0xAgKQF3/+hQVbTkY7SEA7jpfA==
+	cLCecFlphrZsyOx75OGewwOxYwS27xP3eWLlLT5gb2lpJL1zfOYefzLjNWgV/gt4+IqZjJ8ddn2FS656A4W2jQyZqk3iWDpGUcHBxAmNWsdtbSBh6YQWhtcplEGCfS29rySyBNZnmf7YS6udfChRciWsCGh9FfaUGdC1AUvcFiqvw1sXlHa2FRqRvJf5clmfpwczvMopAdij5nNPVfy7y/ptYFBYGra4A1tfCNW086PXPpnpkMJTrOx0QCDJOdXt49Vy++kHNefnGNcbIc77ocGLVJ6U5ZrF72cW1QHi96bENOAUKmZYU+uT5+yZAJW8N9iE2QVopuqeSl5cJwogcxVxA1CxVdcjcBPc//L8rDVSx9/xg3i9pMuI6dvLh6EkHaJokU9DaN8JJyNoVUOCRffGkfRiIeUsrZbO5QDuTMeAu2SwdoEfQlyVg5HsTeDxDFoFe8rrfdzCdjRhg/v76Fz3XcNEiwq8wa2ipaIUdDBnyNVIGvpm3+B5rpRYdybVal0Yabh8KtO5JQhR3I8UmQ==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB5009.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(366004)(376002)(39850400004)(396003)(136003)(6486002)(6666004)(6916009)(8676002)(9686003)(6506007)(26005)(83380400001)(316002)(186003)(16526019)(2906002)(66476007)(478600001)(5660300002)(1076003)(86362001)(8936002)(36756003)(52116002)(6512007)(66556008)(2616005)(956004)(66946007);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB4380.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(136003)(376002)(396003)(39850400004)(346002)(66946007)(66556008)(83380400001)(66476007)(1076003)(36756003)(478600001)(8936002)(44832011)(16526019)(6486002)(186003)(2906002)(316002)(6666004)(6506007)(86362001)(6916009)(2616005)(26005)(8676002)(5660300002)(956004)(4744005)(52116002)(6512007)(4326008);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?DKaPODpg6QYQ1fxlFsDTLcSwStLNMiKeVmmstJU8lmc3POBslpb9tqEyEsm5?=
- =?us-ascii?Q?eH/K+3Y+GxVpsmvDtsjXDJpRXL4WU8v3pj9IrwDr3eAro1TnLTZBu5hlUpY7?=
- =?us-ascii?Q?wZQvnTZ+rAA/6ulC8TJFCcJfO658KWf1aH1vwesIeSwAFINkjllZtHeGGmLw?=
- =?us-ascii?Q?W0vn0fVpEQEeFtlUY6J4Y4Qb7KSp72RNZIUsOdQA42cjqQF9ZHj1uCeAe5UG?=
- =?us-ascii?Q?NNJ5YePUpGCv8tC0bsiIv5uP1JoT62EI1qnqsW0OsPzELvWLsEmxAS5mM2sJ?=
- =?us-ascii?Q?AL0yxj0EoLKuFx8tf7ITds2CtRYD9HGCci0VTVjyOKyEbSXXUuzk3lJ037mj?=
- =?us-ascii?Q?to0SLiP4Lzo4iwqW0QpQD9egKDbkzWxGLpK3RbFVzpxxLtk1ITcvTF3AsLS9?=
- =?us-ascii?Q?q43EOM72qy++M68Q8Xg/PkHc2UriMt7G292jIsASI3hp0tSmPfm/77/OQUMZ?=
- =?us-ascii?Q?zCs8xlRz3HKgY1uNzFFWoK+OeGqKh/2CLi+BynqNoasn7Hi+WtDokiMLP6fb?=
- =?us-ascii?Q?1JtVe+9p26eMwUnQlron6iXaLeta8N/T4oum2PYW6XQ/qeP5s+eGePn2Pv8a?=
- =?us-ascii?Q?fXTUa0NTR5Fo8q1ZK64vWpb/EX1ffdpy0mVMlq1G1PnRYmU0soJVlO5iYFGF?=
- =?us-ascii?Q?374sqyPk06sSiWxNqn+DtCxKgpiUuFgO4wOd2WWLcXYwvAxPiPxPZ5XePN6k?=
- =?us-ascii?Q?G0I62OWjT80MfhxKxGFtmuWO4wsO046Zh91yg33ReXa677cNL+36vtdJo80F?=
- =?us-ascii?Q?ym0jTok7jYToLmjh3Mo8LPn7C3+P/aaBzyiqbHzu41Mdf3lsuFfqoS0bsB+X?=
- =?us-ascii?Q?h7bDdJxaQX9XKPr57U/NAfjpr5NwZ6tAggRMb1P81uXbG9Jk+uZ4pnZizWIc?=
- =?us-ascii?Q?g2xmorW+g0WYyGXqBejiPCJ3kwpMD01jahXAqhum7tBE9cIbpwi1jXDUpW5n?=
- =?us-ascii?Q?9My/t4rKN8YyoN+ItWLz/FaguQwKuJD0W5o/GDENekk/XPXesa9k8BZqBvui?=
- =?us-ascii?Q?CwxvsTxTZZJaWCkFI0w7q8Ids4amgPORdYGfgeBt6hiUK/f8XB6FcDYqoXDb?=
- =?us-ascii?Q?1/uWN3idqyafjd/gdKq7gHtlmx77FX+yfSEUw7+1lKRzf6Luio06VXve8r7/?=
- =?us-ascii?Q?1DaTNRoMthpOM+iaNi96oQ6Zl5dbgmfa7T2ZKdIIREPr3ovGOvvVCZNbKZGr?=
- =?us-ascii?Q?WittxCKDHgVCxkoQ/Pe5BSduAAZE+Cwj/TjcXdZFZ6OLpqRphPdxFyULz7sI?=
- =?us-ascii?Q?fQ7LrM7Ty8njH7wRPjIm8eokdzMsHXDCEUscp/yLqUsU1xeXRJWi8HkB4luQ?=
- =?us-ascii?Q?N6oTu11MpZdLJle6DsZV8BHA?=
+	=?us-ascii?Q?4AsWR0EtGSXtBQojChK7w2RHRKS7Y5KXJh8aoBmKghLnbSh+StA+VehSGV9j?=
+ =?us-ascii?Q?BpWp4K1Qc/WUA9nUeG0ZqG77ZC6IxF8PDsbAWYpT5EQ8eKbQFYu64X6c8ZT/?=
+ =?us-ascii?Q?hzTuPcSsesbk7o5xsGvOKFPK3TnUnCuwwLgOl4zhYOJ7oqH42bMEDwrtMgzV?=
+ =?us-ascii?Q?/9QXK8mVIl9ABf1AfuBt6znNADlKmFqrp/ttaqcxl41hrHZp4sJSBpliiQRY?=
+ =?us-ascii?Q?0GuaOyiSRz4IJUVtWhGYfbmPrU6Zmwlm4r57gEnptqWcqpqyAGe88B0PnQgw?=
+ =?us-ascii?Q?0O2Tsha2XjcAiScTYte+F/3SezFwgoqlZN5rq5PPB/dI22+LjhC+1qP/FERG?=
+ =?us-ascii?Q?ITW9QcXGuom1XHqY0u0f6JE5g2V8QD7toqLPF8r9eQ4LQMlxubl4g4HYIHIc?=
+ =?us-ascii?Q?3V6GfpHjMXvtBXrPPoX6ygHtnBjMonK1DULDnC6xrvyIRvwukvynJk2DPIIz?=
+ =?us-ascii?Q?ee9X9ATimH24WUQrF0MYHtZa4gOm6j52UXTx2Gf0rhZJPoCkOB9SqQzZAIvN?=
+ =?us-ascii?Q?tLpyaeHth/WouMBUFh7Hi8TB6SLR4Zzk9CO3FM2tqxc6mfJiWZKRIzDjWcgs?=
+ =?us-ascii?Q?XSaC20lRjNCmIBGO5ZCnBEQeVvkr3rZpTtzm6yes2/aQAPdELPTjd8h30LRd?=
+ =?us-ascii?Q?5DL+67wqrMLgAgXK4INHQd1IJUaT3YuxrAt+Jqr8bZeY8UAA7EfjvzwLaFyY?=
+ =?us-ascii?Q?PqC7zOk+0rOEtzkzHVSB6s5bXS+WwXp4K5iuMaZ1nM95czv86+OT1XGz4+i5?=
+ =?us-ascii?Q?dvAnHaCGPn4OLA3e4ZNArLIyYjWi7Mt4PlGKUlxwFzmi3yNJqJ7pto1esIDL?=
+ =?us-ascii?Q?RlFXxxujwS/f7n2wYcnsWmOMaPSeFlSLG5g61cNK8z99TFmOt6qpzemd87Xh?=
+ =?us-ascii?Q?H+dhiQTbef9S8SGW3HydHS5dYcuNdrCSqrjCZVddnRNqBYJe7qKCRNjIPCAI?=
+ =?us-ascii?Q?waJ5GWG9Vsu3I7XqFae9q7KRKJ8iBmVnGB+kqHRYX7jcqkZegcG6fL65ypD4?=
+ =?us-ascii?Q?stzqxj4LO2ZHMiaJodbQB8ZnkZgVIcO+MYjBIlAIxGTOJqDivpY7BCZUAN9U?=
+ =?us-ascii?Q?a495j8x2TUP8CgstT9wnaeCEMN+gCJeqCenDb8uCxn7k0IZd8bkWFncdIYLR?=
+ =?us-ascii?Q?e1og99ZzoVC352jRIzcKGS+1nGQOh3m9puOaoGxLTLaGcKAOoIAeyK1yK2Rt?=
+ =?us-ascii?Q?6pkniK6XNz8q/HwwR0vupwweMHE62L5EN0BE1DG8l8QxsTViQ51eBZuVuLeu?=
+ =?us-ascii?Q?BxVCzvDGiu/8mX6bn+6eL1K99mePMXxjfqVxfVv9m6bgN96iXK74rxgP/zDd?=
+ =?us-ascii?Q?Lb8mf3bW0rN/HcO2hnP4WNip?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 419d72d0-36bc-45a6-8d3d-08d8c9a3e3df
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB5009.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 01ac7513-0cbb-40ff-9f6c-08d8c9a6e98a
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB4380.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2021 07:01:42.2204
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2021 07:23:19.6113
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GtEd264prF71qSY4PpAgFv58EfQsbeK2WDGxDqp3PpALV0J9g0f+xzvHYfN4mIkNM4iR0VosgC/1UWbO/IGSCQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR11MB4849
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8iG9tl4EmplM6y9+TenLJcBe+X2y1QelP/k1rUbdI63oD1G+r+GC8D+gjMr6yx+uyykf+Mco3EM36AVFhsXRwGSjp7WHsqXm5yT3GnAhkn0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB1948
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Since upgrade pykwalify from 1.7.0 -> 1.8.0, the ruamel.yaml is now
+the default and preffered yaml parser, correct runtime depends
 
-The openssl already added in DEPENDS and the openssl related library
-will be in recipe-sysroot. So it's meanlingless to add the configure
-option "--with-openssl=3D${STAGING_EXECPREFIXDIR}" as the below help messag=
-e.
- $ cd /prj/net-snmp-5.9/
- $ ./configure --help
- [snip]
- --with-openssl=3DPATH             Look for openssl in PATH/lib,
-                                  or PATH may be "internal" to build with
-                                  minimal copied OpenSSL code for USM only
- [snip]
-
-And there is also a side effect after add the above openssl configuration
-as the build path is added for NSC_LDFLAGS in /usr/bin/net-snmp-config.
-NSC_LDFLAGS=3D"-L/prj/tmp/work/corei7-64-wrs-linux/net-snmp/5.9-r0/recipe-s=
-ysroot/usr/lib64 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -Wl,-z,relr=
-o,-z,now"
-
-To improve reproducibility for netsnmp as below.
- $ sed -i -e 's@${STAGING_DIR_HOST}@@g' -i ${D}${bindir}/net-snmp-config
-
-The NSC_LDFLAGS in net-snmp-config will be changed to below:
-NSC_LDFLAGS=3D"-L/usr/lib64 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed =
--Wl,-z,relro,-z,now"
-
-But it will result in other packages which depend on net-snmp such as
-corosync, quagga and etc uses the build host library and introduce
-below do_configure error.
-ERROR: QA Issue: This autoconf log indicates errors, it looked at host incl=
-ude and/or library paths while determining system capabilities.
-Rerun configure task after fixing this. [configure-unsafe]
-
-So remove the useless configuration to fix the issue.
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb | 1 -
- 1 file changed, 1 deletion(-)
+ meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb b/m=
-eta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb
-index 051e168f0..d9040c164 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb
-@@ -58,7 +58,6 @@ EXTRA_OECONF =3D "--enable-shared \
-                 --with-install-prefix=3D${D} \
-                 --with-persistent-directory=3D${localstatedir}/lib/net-snm=
-p \
-                 ${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', '--wi=
-th-endianness=3Dlittle', '--with-endianness=3Dbig', d)} \
--                --with-openssl=3D${STAGING_EXECPREFIXDIR} \
-                 --with-mib-modules=3D'${MIB_MODULES}' \
+diff --git a/meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb=
+ b/meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb
+index aa14cdd4b..4d4d2b79c 100644
+--- a/meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb
+@@ -13,7 +13,7 @@ inherit setuptools3 pypi
+ RDEPENDS_${PN} =3D "\
+     ${PYTHON_PN}-docopt \
+     ${PYTHON_PN}-dateutil \
+-    ${PYTHON_PN}-pyyaml \
++    ${PYTHON_PN}-ruamel-yaml \
  "
 =20
+ BBCLASSEXTEND =3D "native nativesdk"
 --=20
-2.29.2
+2.27.0
 
