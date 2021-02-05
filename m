@@ -1,157 +1,207 @@
 Received: from EUR03-VE1-obe.outbound.protection.outlook.com (EUR03-VE1-obe.outbound.protection.outlook.com [40.107.5.81])
- by mx.groups.io with SMTP id smtpd.web09.5045.1612511271438281530
+ by mx.groups.io with SMTP id smtpd.web12.5277.1612511322028454359
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Feb 2021 23:47:53 -0800
+ Thu, 04 Feb 2021 23:48:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@skidata.com header.s=selector1 header.b=HOJzCzeA;
+ dkim=pass header.i=@skidata.com header.s=selector1 header.b=NSGKnpBt;
  spf=pass (domain: skidata.com, ip: 40.107.5.81, mailfrom: richard.leitner@skidata.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TL/TgaxYAfCKVVu6hNciOVJdOs5vSABALeQEwk2KoWxEaW6F0k0gVRAbUVNH0fCWk8ae4Z/NKLvpTwCUwjCJ/HL4FMPxEGAx264qsT1D27uZ/5AtneYxxvlaWYvWHs5hKpbxMlVBBofPKtUHpNE68fa38bgIuxYYBMpMXWLFNoJ9ym9ZU4eWeg9q6A/pFHGAIc8PKnHYNx4fCjqsogTEDNCedQ+TifOn5ZMORRd66ykd9NnN5Y/0TtX3tvL3fxC7gOxWeuxv8ShV6pHA6Z1pBF1f4v4o4URV4R1D/lnGqZFUmlCNxC+/G7mRYG8n0vzc9/E9zDa5vR3sNAlpv0QF0g==
+ b=axoYyUxALt+22WHJ0e/qfuQza9janCCV1SBUr2bImEQOABSHcnZ9j5wPmJrPI8MEZTBn6g4PCXybJprcKLygtpRycmIwdmXCHH2gBEKIMSNpcuMfRz41CYsQxicaIkAY2G9nt5JyIb0zUkHe/y6vXPCxJRFHJMT87Rr1YrgI8k76KYwJtB6Rw8hK7ZhHHhWHcdc39rya36GgjCdKtpDilMLF/Hw8spnwyJu3tOhYMityrU8spJHndDz3xdQG3Em1CT1t2K0HvZQOggui6/K1XQb5UGh+McZeHjmur4UNhRzkTe61ecGxvF59maHes1kw7wQKI0agt31j4Yg2xR7oDQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4I/HPcrBVpA28VBQrzGwxWlAooNC6bcZHwtJa79Vvak=;
- b=WR4PdFroXm1mbLVyKl5a7rHQpGIoNQ452h4bjMgR6bNKBHWrIudeM6JO1rLR/ZqtaLqQQhQnmu12bz8orHSieccrkUO4SPmn7DpbnWqsmqJdbnxMnaouiqSYWKznG246Wfpo/py4CFEyjXr2kfQvVQPSr0CJwtR3cAUIvlilN8dsBROfi2zCzjV81eqTHrEu279bUhh9Qv25xFkpP0KdPhWUTtWiGzM5BjBa72gARibtvhy0IJEwpq5ftZ/WrrCsDAE6SebgzpDa94PjOXVV0F9P2dE1Y7XAJo5bvwuY/8PokhPO3wRV8yCSTYBrHdNTyokhTLh0egxErA8O0Jt7xQ==
+ bh=+yaNUdET8JnciUL3Y563FpxzsZnGV85KrCoUbCvqxNY=;
+ b=cwVwHbcVHc+/VRtt+3W8ZXIXni2B5PMQW/CxrylBZO5nmu8DMXcaTtk2ZRyiYqNXh85slL3ZcR1bw5z4wUn/1wd/vpW0JKwb/Z3cYAA66LPIPPgWDP/DX/NUnS7+2yjn6M28NLLEdXiOE4Xxf/Org0CftxaAJyxNtbGp7myYrMst7d49GkpllrHi+VaN7okKOCrIE4FhQ9SynR5GaOHaF5ayNAg9YbLWTXcH7CAi4IPSPYS8wHHV2cwwynH+iI/KoPa2wrTAUHRhsmVrvHvH5fjsltUBgNR4up5DdpYTzsqDWUkgvwgdON+mjDV53ZczGH4fInklJsneHtBHuUgK+g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=skidata.com; dmarc=pass action=none header.from=skidata.com;
  dkim=pass header.d=skidata.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=skidata.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4I/HPcrBVpA28VBQrzGwxWlAooNC6bcZHwtJa79Vvak=;
- b=HOJzCzeAwhTJjYq7yBOHgLEmbHTTe1mBgpr5ZlNDW1MAzR9Ahj9dZcFoR1ogVG2cqmEqu9bc6BfGkqfdKMAfkhxlzcdajJHPwzixxyWVNg0QHS7jib3uR5uV/qB8Vo7DN62+lhl2g/cLjlwrJUqt3ral7iiSnsmslW5VaCcPtUY=
-Authentication-Results: bmw.de; dkim=none (message not signed)
- header.d=none;bmw.de; dmarc=none action=none header.from=skidata.com;
+ bh=+yaNUdET8JnciUL3Y563FpxzsZnGV85KrCoUbCvqxNY=;
+ b=NSGKnpBtUhB3wDU7yqVHWDE1+0CSP1ODwARumxxPcEzoATK+iXRxC+Z2EE0W63QewMZN0TU54uIxcnJg53Qs0GnL6d3v7t8gqEN8CpWmD/RIjrBlehfP7jQEynZvF74wHeZG4ajieSh8lQtISym4+Cgdjap6XbairYanZwhd7zc=
+Authentication-Results: taitradio.com; dkim=none (message not signed)
+ header.d=none;taitradio.com; dmarc=none action=none header.from=skidata.com;
 Received: from VI1PR01MB5007.eurprd01.prod.exchangelabs.com
  (2603:10a6:803:9d::19) by VI1PR01MB6496.eurprd01.prod.exchangelabs.com
  (2603:10a6:800:155::20) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.17; Fri, 5 Feb
- 2021 07:47:48 +0000
+ 2021 07:48:39 +0000
 Received: from VI1PR01MB5007.eurprd01.prod.exchangelabs.com
  ([fe80::5064:aac6:7226:7221]) by VI1PR01MB5007.eurprd01.prod.exchangelabs.com
  ([fe80::5064:aac6:7226:7221%7]) with mapi id 15.20.3805.024; Fri, 5 Feb 2021
- 07:47:48 +0000
-Date: Fri, 5 Feb 2021 08:47:41 +0100
+ 07:48:37 +0000
+Date: Fri, 5 Feb 2021 08:48:35 +0100
 From: "Richard Leitner" <richard.leitner@skidata.com>
-To: Michael Ho <Michael.Ho@bmw.de>
-CC: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-java][PATCH] openjdk-8-cross.inc: exclude BB_NUMBER_THREADS from sstate hash
-Message-ID: <YBz4HRpw6ZBjzN/g@brokenbit>
-References: <1611911961-96454-1-git-send-email-michael.ho@bmw.de>
-In-Reply-To: <1611911961-96454-1-git-send-email-michael.ho@bmw.de>
+To: douglas.royds@taitradio.com
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [meta-java][PATCH] classpath-native and friends: inherit native last
+Message-ID: <YBz4U2+5CbOcUaWx@brokenbit>
+References: <20210205035846.344799-1-douglas.royds@taitradio.com>
+In-Reply-To: <20210205035846.344799-1-douglas.royds@taitradio.com>
 X-Originating-IP: [83.215.125.121]
-X-ClientProxiedBy: AM0PR02CA0216.eurprd02.prod.outlook.com
- (2603:10a6:20b:28f::23) To VI1PR01MB5007.eurprd01.prod.exchangelabs.com
+X-ClientProxiedBy: AM4PR0701CA0034.eurprd07.prod.outlook.com
+ (2603:10a6:200:42::44) To VI1PR01MB5007.eurprd01.prod.exchangelabs.com
  (2603:10a6:803:9d::19)
 Return-Path: richard.leitner@skidata.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from brokenbit (83.215.125.121) by AM0PR02CA0216.eurprd02.prod.outlook.com (2603:10a6:20b:28f::23) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.19 via Frontend Transport; Fri, 5 Feb 2021 07:47:48 +0000
+Received: from brokenbit (83.215.125.121) by AM4PR0701CA0034.eurprd07.prod.outlook.com (2603:10a6:200:42::44) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3846.11 via Frontend Transport; Fri, 5 Feb 2021 07:48:37 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: b7f1b2a4-bd5c-43b3-de43-08d8c9aa554f
+X-MS-Office365-Filtering-Correlation-Id: a8d324c7-0d88-4ae8-3809-08d8c9aa7299
 X-MS-TrafficTypeDiagnostic: VI1PR01MB6496:
 X-Microsoft-Antispam-PRVS: 
-	<VI1PR01MB6496B3D38B6E84656754836AF0B29@VI1PR01MB6496.eurprd01.prod.exchangelabs.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:4303;
+	<VI1PR01MB64963BA1800A825A848B1A3CF0B29@VI1PR01MB6496.eurprd01.prod.exchangelabs.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:3173;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	PONa+V27cdKk5KKLgZLztHAqRmbYeBMMNMCBioAS24S+RhIzG2ovswqSrPX1njG3Tke2kh+Z59rdl3+CGG37fFKjaVwdb4IvoAvT5D+tVjjX1hahRk4eCkdE8c9A3WIL9XWorkNV/xNmN0Paltm23RcgRflDbMdWv8IrzCFG9BEMpZUfa8Y7gD9Yz6TJNkFNEOBmOADQ1kCRvBbR032hMZoC5AJiZZKQFT5Ckif/06hjxdDYeG6wH+X0opyoGuBY7brIJ8PbFT7H6qawKxuk3CWe7IzN/Jr5gQiCagDFy5v2QPoQzmPxRk8n37CEYkbNUvln3Cwai/HGDNnYgtDSJkDOOB8OwiS0CkgbJXZoFfwdPlBRvtGgfGyEYPbVVXp1qiKTNeP9gdXz6FAPsz5nD3ztShKbFPCK5yrOlDnS3hZj2+snZPGj8Y0QhGs9U+dMCxjmCOToWRoq+prgMh3STaHlmk9LxOhMISRLyNHbPo8i45kI0Ho6yiEHpAuLKea/b0jXEuF3IqbtkISTmpREjGveZbALC7qL0/BzmcBwXl4bNUY0AAmqjbeUXsNCRLG4zNFUobkEFe43JjVloIBsYDqPVqX8d8y5/O5BWVnMITFvJX7bOWOAqjxn+f5k0xgYIzcgBnwrEDHbfG/eKGKtBA==
+	uyCj2ZF/VngOs0n8rxpbW+LuDAYC4/m17TtnKoPekGS7N0jtxAo/gCd1CrUqcAOz/dQw/25OFSWy6voFzlOL8PL+UAMDXpuePLRCLYmzZxx/wJMQBMRnXAZWGq9BN+DOOs3a7RZQw96K4mbsXQJ16q69HtyDwn0N78uBmOWP56cPt6JunH6RgMv7HDY/rntxKNNML2F1JRxXrMfm896PaZGbr/XV35Z5OQNoUhhXg5cwyLwCUH2qBczlVAVXCjG+2Q2PzSoafZP7cbFMq2aHqMlAylae7/wWX9QC7FgZWY0VjbA50meL6rcZyIKKs0l8FdfAsaP4J71P5+Bssp2EcgEMIpPbzwRV1FcctWRcOYZ5QxWPEI/gRZKTDua0nFdwKB89idou2LgLZC/LIpCp+rsRxO98huBg0lBAYQ4T4YjMkO6I4BBWNtzT90F7sYIYoUq8UWsrfejpW601xt8h2Oxl15pipElrUn3tWV6cIqizPwzrs0A6trnobpvFzTSNWkXLijKLLjKsXm01ArMUsqnoFR0ONdN/c+WTrIQEuh+doaII58Td/MZ4sLx0/5n3
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR01MB5007.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(136003)(376002)(366004)(346002)(39850400004)(396003)(66476007)(66556008)(6916009)(8676002)(4326008)(5660300002)(6496006)(9576002)(2906002)(66946007)(52116002)(44832011)(86362001)(186003)(9686003)(15974865002)(956004)(316002)(55016002)(6666004)(33716001)(26005)(16526019)(83380400001)(8936002)(966005)(478600001)(66574015)(18886075002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR01MB5007.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(136003)(376002)(366004)(346002)(39850400004)(396003)(66476007)(66556008)(6916009)(8676002)(4326008)(5660300002)(6496006)(9576002)(2906002)(66946007)(52116002)(44832011)(86362001)(186003)(9686003)(956004)(316002)(55016002)(33716001)(26005)(16526019)(83380400001)(8936002)(478600001)(67856001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?w2D6OpI5kXRicRDP8bxy6whWGb1mp6P7TFoaBXjQ7PAqoCwWi1vc74Swpe+C?=
- =?us-ascii?Q?2ya2Ec+L+wbOsZGwGRjp50q1PlXJrqj3NRVdyw7W1GMG+qDSvUnH/Ol7Q6K+?=
- =?us-ascii?Q?hLiWKrlZnS9aHMH4fGCJjpawePp81KWwMEjnxgoP8xFn3deCG2WLB2aShxZV?=
- =?us-ascii?Q?BowFOITssBk7Ko2mDoPcgqML2QylTBvkBW+g8U/s80OGyeTLHo2VbdH3TfAU?=
- =?us-ascii?Q?0nVJrkshoElxK4ET1b46PSzZQSRQsaHiZ0WYiodh9JL6UhbWm304prw59TDq?=
- =?us-ascii?Q?tKNqn/2bI5tuYJNx3b/wtyZiMOwBQimq75N3YO2nsk1htDNRnC166pMPaSZN?=
- =?us-ascii?Q?ggsOlyr8BOExWXZgHlOm6rzrraHE0+0a6C2qRIjNdGwTKdSYmY/hPfu5sBAf?=
- =?us-ascii?Q?A3RkOffHSzml4VGbJEDDF6Vj0iSwODkFnNv54qdofATEEREa/sGM3EqjBEHo?=
- =?us-ascii?Q?foZPIvzeZx/m8HmjU6RdY4KNbGk02Q5kVn+xDvifbTDZH1mbJLKDRZUq0KqH?=
- =?us-ascii?Q?eduM3kQcwz1SkeSkj7KOwkIO+C/XM2M7FwiomSckrHxWpNk0KHRVsfiByhKB?=
- =?us-ascii?Q?toRStc2Oa7si+vlb6p1X+G1R7n+QrvcczfPWsp5ymLTCjKeSrZNXonWean9Z?=
- =?us-ascii?Q?rRVXFMP6FaABv0q6eaVU5MWdwgweYYOHvES2pR4gyq/YroBrQD+0eXi15jdA?=
- =?us-ascii?Q?XxSjQz0YKj8JMvUeAk8/vl3ig8Uzv4kDQvcughxzsvrY2HxI2TXCcfT7hU25?=
- =?us-ascii?Q?Yg3fu4lZRIjs/jZ4K88Zvw9oe9Se8TGxMun5/6YjtivSEi9uAZEcGlT/Ivyu?=
- =?us-ascii?Q?yKggahmRQePtIlnaTRHLWhBv///YAkp80+P4xoBcU7UkVgMWbioWUr1ISthQ?=
- =?us-ascii?Q?Y08h67RCsyYe09k5Iyr4UciDxSBH0/CPOQlDpeuADD+RhPu9cl9PdTnngGl3?=
- =?us-ascii?Q?UENC6Pk7JLGfIV9BRk4yYeeggbZhWBh3RvZ5deAoSM5B+FVCewbTQcjJwOM/?=
- =?us-ascii?Q?DYrVLgokbHyXiksLfrduL1pZQG5Zi8d/5hMO9TTX+R0EdV02SP9bYGry48ji?=
- =?us-ascii?Q?+UjLfvW3JlQEOHlN2tHo8AZcusdAQVIXBU8i4K7ib0ijIheNitRYitlf2S+W?=
- =?us-ascii?Q?bcZmuijLGTOjUAkKvJIEsWDR4pZyStMVC+I0BhukA3eOpWKdecfJkNGXbuk6?=
- =?us-ascii?Q?j5Hu7/YP/cKEt2abTVOlcrs2ObdpydeDcM8pt3Tffjvt8zKZVfoQzASYWtTv?=
- =?us-ascii?Q?M8TRguO1dUUKXL5i/tvCL+AEc4Pzerh2NzrDQNr1zgJVrTSUyTtYHLtDoig5?=
- =?us-ascii?Q?3Qjd+mRN73acrsjyF3LUwaeE?=
+	=?us-ascii?Q?qhEgZYuqXuyVamn4hzJCgFuorX+04c/i8nbUnMpApyS5CC5yVGjV7PQkIwrx?=
+ =?us-ascii?Q?5qIEra3+B/5SzBZDWJey8E3bwP+hJcrUhCfSbvG8iLxk1F1lU+XkW+Uf6foU?=
+ =?us-ascii?Q?M8IkQNRk060i3mM6iArbm0O8eClM8r9t39e9hOhf30xd4kzjrZ3SN04kqrAd?=
+ =?us-ascii?Q?LuTUurK/tEIuhTnVkQpgkqSd3hO/N66Ku8fFl3n8oF6RKm5oUAXAR3E3Z5ah?=
+ =?us-ascii?Q?zy5r5nMXKZJh0t4MPaDZQNvPSD7br2dOs/cTcxTPAgTFMHZuHEo18hhenuNE?=
+ =?us-ascii?Q?5i8wQz3SgJzA0YG4Yb1syC+KKhDgBs+5CYDGwP/uZAWhJzh0eWlPJMCSwCLQ?=
+ =?us-ascii?Q?g4eH8rRRKVTjw16vp85lSHnVmMtGAedECSbvtGRH5Zzdr7EnB9FOACD2W0Dw?=
+ =?us-ascii?Q?8xoy1M/L2FBuZ4M20IztYkourkqglWeuwwdyp/ReR7ast0vvKcRtC+SM0FgK?=
+ =?us-ascii?Q?/8uhNwPYyWXIOL8wf/MV/GhpNfhuhefXiT0jqK4dNFWxSFgNPwnObbZCdHgU?=
+ =?us-ascii?Q?c3wCKp9x6Hk9afs+GgaS6y1aNnmF6wEs5TRt6JW1eZoWl+eOlH2EIor4bxBo?=
+ =?us-ascii?Q?WNDIFLobXOOzXTdr1vJVtu3UdSrq4DqwjFh13/ZYxXnQVWlaJvsoslgngH4h?=
+ =?us-ascii?Q?xbbe0rNHBq+Gd90fbu4fwpmynvtS8wp2etjN5LiQBUSXZJ3ygbT+ngKhnYOx?=
+ =?us-ascii?Q?6i1t79775PgK/ZkBmVXnhbpjU+JVbCUUf+XjaSeu2u9Fz0kLe7gCZDORIqas?=
+ =?us-ascii?Q?CFGZ7vcsL75WqlAQapi7zkxD91SroFXWFhrEPb6Es+CHp0XkxvLAdu2Vhpwe?=
+ =?us-ascii?Q?XnHOkMQuXDl6JlKukzL+XeniqGYebuPjpp/4Gv/ws56LGolv4jAIDm8FzY7O?=
+ =?us-ascii?Q?k8+TZA5Tfh25Hwgv0ZdLnB9dpTGoWRiMzA59bc8yuqLAZ/haEdDBairMNpP2?=
+ =?us-ascii?Q?773E3GGsO0fP/xOLxKEYGs5q/cy5R7z/gcloGDwG9JbrIjczXks7bmmkovqp?=
+ =?us-ascii?Q?zqZzNB6/KnMvuem7075c55E42fWAbXPN86lIuvynsQZs61l6vS26rXsbhbaf?=
+ =?us-ascii?Q?P618lMnBiNTB/xMUSyk2HBHxXbCquxDj/N7NOs9L7T6Q4fCbTmxjrJEslv+s?=
+ =?us-ascii?Q?G3WnVt7urh0R6WnEWCMKELuufP+s4HQadzYpTOJvE9ykldVeZiXHiI6GSP1A?=
+ =?us-ascii?Q?QOy1EFI3ccyuelPPtnF5UsmRh/9KP6+A/jIGZT/aImHbt7m81NZVFeacgHQC?=
+ =?us-ascii?Q?WlOZgTLqwfYRXk5D7WB34ZSjg7tGY/4ROdg8WPeSSHV+G9cpGPGS7Hekxm3Y?=
+ =?us-ascii?Q?VFxX6OYHcbh/werEOhEE8sQR?=
 X-OriginatorOrg: skidata.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b7f1b2a4-bd5c-43b3-de43-08d8c9aa554f
+X-MS-Exchange-CrossTenant-Network-Message-Id: a8d324c7-0d88-4ae8-3809-08d8c9aa7299
 X-MS-Exchange-CrossTenant-AuthSource: VI1PR01MB5007.eurprd01.prod.exchangelabs.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2021 07:47:48.7375
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2021 07:48:37.8611
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3d52ce8f-cef6-4b27-bace-cf9989cf3973
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8WqbSEJEsVQvwxnOd8x75KxNjSPuWB2m5bC5/4PHKVILKoXdNElCBG6RXZzZUb1MrpA2fcDgf0j2FcgtorzUcP/+ZGmPjcGPDtm3KZ9s1A8=
+X-MS-Exchange-CrossTenant-UserPrincipalName: c9LNw/gB969k/g1zJBuJJheZlQ1QLZXTppGtBcwIZZxcxgJIuHNhJU6snH93KKffZOpBab3f1GkHjliXDpeyq7WmEEk8CyQVeUAnmce7apU=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR01MB6496
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-Hi Michael,
+Hi Douglas,
 thanks for you patch!
 
 I will review/test it in the comming days and give feedback!
 
 regards;rl
 
-On Fri, Jan 29, 2021 at 10:19:21AM +0100, Michael Ho wrote:
-> From: Michael Ho <Michael.Ho@bmw.de>
->=20
-> The sstate-cache for openjre is not shareable across multiple machines
-> because the parallelisation configuration of Bitbake is being embedded
-> into the sstate hash of openjre.
->=20
-> Exclude BB_NUMBER_THREADS from the do_install sstate hashing to avoid
-> this issue.
->=20
-> Signed-off-by: Michael Ho <Michael.Ho@bmw.de>
+On Fri, Feb 05, 2021 at 04:58:46PM +1300, Douglas via lists.openembedded.org wrote:
+> Fixes QA Issue: classpath-native: native/nativesdk class is not inherited last
+> 
+> Signed-off-by: Douglas Royds <douglas.royds@taitradio.com>
 > ---
->  recipes-core/openjdk/openjdk-8-cross.inc | 2 ++
->  1 file changed, 2 insertions(+)
->=20
-> diff --git a/recipes-core/openjdk/openjdk-8-cross.inc b/recipes-core/ope=
-njdk/openjdk-8-cross.inc
-> index 9f68d08..25d971f 100644
-> --- a/recipes-core/openjdk/openjdk-8-cross.inc
-> +++ b/recipes-core/openjdk/openjdk-8-cross.inc
-> @@ -99,6 +99,8 @@ do_install_append() {
->      fi
->  }
+>  recipes-core/cacao/cacao-initial-native_0.98.bb  | 2 +-
+>  recipes-core/classpath/classpath-native.inc      | 2 +-
+>  recipes-core/ecj/libecj-bootstrap.inc            | 2 +-
+>  recipes-core/icedtea/icedtea7-native.inc         | 3 ++-
+>  recipes-core/jamvm/jamvm-initial-native_1.4.5.bb | 2 +-
+>  recipes-core/openjdk/openjdk-8-native.inc        | 4 ++--
+>  6 files changed, 8 insertions(+), 7 deletions(-)
+> 
+> diff --git a/recipes-core/cacao/cacao-initial-native_0.98.bb b/recipes-core/cacao/cacao-initial-native_0.98.bb
+> index 8125e88..a43d3f4 100644
+> --- a/recipes-core/cacao/cacao-initial-native_0.98.bb
+> +++ b/recipes-core/cacao/cacao-initial-native_0.98.bb
+> @@ -6,7 +6,7 @@ SECTION  = "interpreters"
 >  
-> +do_install[vardepsexclude] +=3D "BB_NUMBER_THREADS"
+>  PROVIDES = "virtual/java-initial-native"
+>  
+> -inherit native autotools-brokensep
+> +inherit autotools-brokensep native
+>  
+>  DEPENDS = "zlib-native libtool-native fastjar-native classpath-initial-native jikes-initial-native"
+>  
+> diff --git a/recipes-core/classpath/classpath-native.inc b/recipes-core/classpath/classpath-native.inc
+> index b1de458..c81e064 100644
+> --- a/recipes-core/classpath/classpath-native.inc
+> +++ b/recipes-core/classpath/classpath-native.inc
+> @@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=af0004801732bc4b20d90f351cf80510"
+>  
+>  DEPENDS = "fastjar-native zip-native"
+>  
+> -inherit autotools native gettext
+> +inherit autotools gettext native
+>  
+>  SRC_URI = "${GNU_MIRROR}/classpath/classpath-${PV}.tar.gz"
+>  
+> diff --git a/recipes-core/ecj/libecj-bootstrap.inc b/recipes-core/ecj/libecj-bootstrap.inc
+> index 04425f4..8f84fd0 100644
+> --- a/recipes-core/ecj/libecj-bootstrap.inc
+> +++ b/recipes-core/ecj/libecj-bootstrap.inc
+> @@ -9,7 +9,7 @@ DEPENDS = "classpath-initial-native fastjar-native jikes-initial-native virtual/
+>  
+>  INC_PR = "r5"
+>  
+> -inherit native java
+> +inherit java native
+>  
+>  S = "${WORKDIR}"
+>  
+> diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
+> index 5351fe1..f53715f 100644
+> --- a/recipes-core/icedtea/icedtea7-native.inc
+> +++ b/recipes-core/icedtea/icedtea7-native.inc
+> @@ -36,9 +36,10 @@ CFLAGS_append = " ${@oe.utils.conditional('HOST_COMPILER_MAJOR', '9', '-Wno-erro
+>  # Explicitly pass -fcommon since GCC 10 defaults to -fno-common for C sources
+>  CFLAGS_append = " -fcommon"
+>  
+> -inherit native java autotools pkgconfig
+> +inherit java autotools pkgconfig
+>  inherit openjdk-build-helper
+>  inherit python3native
+> +inherit native
+>  
+>  JAVA_HOME[unexport] = "1"
+>  
+> diff --git a/recipes-core/jamvm/jamvm-initial-native_1.4.5.bb b/recipes-core/jamvm/jamvm-initial-native_1.4.5.bb
+> index bf005db..1f5921f 100644
+> --- a/recipes-core/jamvm/jamvm-initial-native_1.4.5.bb
+> +++ b/recipes-core/jamvm/jamvm-initial-native_1.4.5.bb
+> @@ -20,7 +20,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/jamvm/jamvm-${PV}.tar.gz \
+>  # This uses 32 bit arm, so force the instruction set to arm, not thumb
+>  ARM_INSTRUCTION_SET = "arm"
+>  
+> -inherit native autotools pkgconfig
+> +inherit autotools pkgconfig native
+>  
+>  # libdir must be modified so that jamvm-initial and -native
+>  # do not interfere
+> diff --git a/recipes-core/openjdk/openjdk-8-native.inc b/recipes-core/openjdk/openjdk-8-native.inc
+> index 92d9473..3282257 100644
+> --- a/recipes-core/openjdk/openjdk-8-native.inc
+> +++ b/recipes-core/openjdk/openjdk-8-native.inc
+> @@ -32,10 +32,10 @@ EXTRA_OECONF_append = "\
+>  "
+>  # --with-boot-jdk=${WORKDIR}/fake-jdk
+>  
+> -inherit native
+> -
+>  require openjdk-8-common.inc
+>  
+> +inherit native
 > +
->  export MAKE_VERBOSE =3D "y"
->  export MFLAGS=3D"${@jdk_make_options(d)} MAKE_VERBOSE=3Dy QUIETLY=3D VE=
-RBOSE=3D-s LOG_LEVEL=3Dtrace STRIP_POLICY=3Dno_strip"
->  
-> --=20
-> 2.7.4
->=20
-
->=20
->=20
->=20
-
-
---=20
-Richard Leitner
-Hardware R&D / Senior Embedded Linux Engineer
-
-SKIDATA
-We change the world of welcoming people
-
-SKIDATA GmbH
-Untersbergstra=DFe 40 | 5083 Gr=F6dig/Salzburg | Austria
-[t] +43-6246-888-4245 | [m] +43-664-88616370
-[e] richard.leitner@skidata.com | [w] www.skidata.com
+>  CFLAGS_append = " ${@jdk_cpp_options(d)}"
+>  CPPFLAGS_append = "${@jdk_cpp_options(d)}"
+>  CXXFLAGS_append = " ${@jdk_cpp_options(d)}"
+> -- 
+> 2.25.1
+> 
