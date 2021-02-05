@@ -1,123 +1,491 @@
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com (NAM04-BN8-obe.outbound.protection.outlook.com [40.107.100.52])
- by mx.groups.io with SMTP id smtpd.web12.5109.1612509801020742053
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.web12.5261.1612511182936398548
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Feb 2021 23:23:21 -0800
+ Thu, 04 Feb 2021 23:46:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=F9UWStVK;
- spf=pass (domain: windriver.com, ip: 40.107.100.52, mailfrom: hongxu.jia@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GJt14l2QRskdd1n5eFeQt61JoR/kAJLiEXwXfaHGFhxpz3ps7Wfgb04i+AjhjuWb2BSJIq39HYexQ1lpNmDrTKV6VxZAbqAp+hdpZKISdW5T4jYv1ejFggFVKygrBvn/SKOruBkVn8EWqmLtOCHcpgOV5zVtsRxrzFb38cmIySEut5lxN6ugdOzKyL00w2kBviC78SKhwCSTs++EtPOdB1eIdLRMAN1qOSajCfMk+vTsSrBLs7+KveS3HAreaawNrFqGTgQXoSv9PbmzmQWHtFW4+WxsmJNgSEQNcA1BPHiy4stCc1vfjpqidJcipWwswooiU4rfS3Xmf5ju9KjjHQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N+wt+4JoPpurGFXnyK9FQJlBUEXeiVUkksuhMBOSlow=;
- b=gSpdhMqAI28kKTUIdJWwmXrp3xz/DL0j4tvBcXbQP3cvpWag1ofplflW1DUKcdp6l/xYufd0+mihUkPWFFQ6Bu160wtEDhzOcT0GfrTABerziIn3OOAJDpH6kIgxreBDVy0f3ZDdK93RjTYCBH2QS3zhFhZKzWoflrUB5BREapJdcGo54ldBMK/UN75pGvzUYJvxIed6fh68Q6mff5b1771meMCnwk7q/Fptouh7lKJhy/z3QunEmw9K6+lOfquF513kuR4zoCWieO+TY6QDEq4cAo3pL2ejdgPA6GliWlIW3X7XcErRopKgSQsd2T8XWPmsQbO1oFEXInXj/bdRoQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=QXZcpyQe;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id nm1so3173750pjb.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Feb 2021 23:46:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N+wt+4JoPpurGFXnyK9FQJlBUEXeiVUkksuhMBOSlow=;
- b=F9UWStVKt+WfvOOmP3Pc2GGBHYN4Gm3J2Mk7h+xpcdn6FeUfEdtI5eM47XaYva9g0SYxSDpQ3CykUqUlmOyvPS9IRDXPzfzXy2IVbFr6nS/sd1juzgMyBdT+s+X6XQw79997FKC48ya7FU6Ti97AnXNi7ghovXbhsgD9maNMSrw=
-Authentication-Results: gmail.com; dkim=none (message not signed)
- header.d=none;gmail.com; dmarc=none action=none header.from=windriver.com;
-Received: from DM6PR11MB4380.namprd11.prod.outlook.com (52.132.248.84) by
- DM5PR11MB1948.namprd11.prod.outlook.com (10.175.91.21) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3805.16; Fri, 5 Feb 2021 07:23:19 +0000
-Received: from DM6PR11MB4380.namprd11.prod.outlook.com
- ([fe80::a500:2ae3:a6c4:bc13]) by DM6PR11MB4380.namprd11.prod.outlook.com
- ([fe80::a500:2ae3:a6c4:bc13%4]) with mapi id 15.20.3825.020; Fri, 5 Feb 2021
- 07:23:19 +0000
-From: "hongxu" <hongxu.jia@windriver.com>
-To: raj.khem@gmail.com
-CC: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH] python3-pykwalify: correct runtime depends
-Date: Fri,  5 Feb 2021 15:23:05 +0800
-Message-ID: <20210205072305.6252-1-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.27.0
-X-Originating-IP: [60.247.85.82]
-X-ClientProxiedBy: HK2PR03CA0059.apcprd03.prod.outlook.com
- (2603:1096:202:17::29) To DM6PR11MB4380.namprd11.prod.outlook.com
- (2603:10b6:5:14e::20)
-Return-Path: hongxu.jia@windriver.com
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ljBR1+T5GjZTdMNlldONSscOwwE79z7JRlICcb9ecQI=;
+        b=QXZcpyQeNOnvvROmm4C3FbUpBfl0CCbC06+xvc9GO82JjAypauoDOJXG90gx7szL69
+         AjFt9N7S3DOcU3Rs1XJC3FexE4lQR861oC1F190lRNg9MNkJy7pe11y7O5ZZXJxj9AzP
+         iu3859y1qTAVKOxCAF3/r8NRHx/X+2oPqjfDCXmNaxgTqlAAdwGh0XQYMb4Z7XNU7dpx
+         iMuPiY1OorDTyW5e29WByVoUiYu9skX1cQjjOuxMRIl9ym3eUsMQfnfTqNsKNoD+NvpE
+         MrbK0adxA6xw2CaOznR4i7uEIOxoqj2goayZi0PZJAxKmii0rjxmULCCYLoy+7/vfwE6
+         f5fg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ljBR1+T5GjZTdMNlldONSscOwwE79z7JRlICcb9ecQI=;
+        b=ocPGD4JuUF5tfinv4TfOv59jasn48fXuqy3NFomTISVyTnxF7WOCrnp+1TfnrdlcE/
+         2fJQVOAc4N6nbP1wcFZ54wMxjr1bxqawsvo4EVJ3Oy74O5jD0ioOmylX+jHI/m+PSPad
+         ZwOP3FwUMjCgyic/OlMFy3soLB+LlwMsO2PAHHFX0458FqZ4SQfA9otah+9ipuVdp1Lz
+         h4GWKzf2d1rWzdwWmZAIcIABkgGhTupxdcLAdIGu9X/lenU5mYkw/Y88+sLO0NtckKJH
+         Dz/ydc9PfCSVO1JRBkZeaDnnrRgc7AS/E0Qxy1zGWenDwlz178wKsZ8aJ2JVEP7aLS91
+         k/xQ==
+X-Gm-Message-State: AOAM530nsd8GkqYymA3tExFOyLl9VYFlBmBC5pqre+hP5r3s2kTJjWbt
+	vbmND7yoeusy1ysZwNN8uQQ2gGBapVrmcw==
+X-Google-Smtp-Source: ABdhPJxGccU0LcE7HN1B/f7PsSe1U/0+LV7+1qKtYV8VGCGKKs4gCKDywG86wJdaOYKYoRjRq+6Khw==
+X-Received: by 2002:a17:90b:3787:: with SMTP id mz7mr2890877pjb.96.1612511181509;
+        Thu, 04 Feb 2021 23:46:21 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::d188])
+        by smtp.gmail.com with ESMTPSA id s13sm3317423pgq.40.2021.02.04.23.46.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 04 Feb 2021 23:46:21 -0800 (PST)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Andrea Adami <andrea.adami@gmail.com>
+Subject: [meta-initramfs][PATCH 1/2] klibc: Upgrade to 2.0.8 release
+Date: Thu,  4 Feb 2021 23:46:17 -0800
+Message-Id: <20210205074618.53017-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.30.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from pek-lpggp1.wrs.com (60.247.85.82) by HK2PR03CA0059.apcprd03.prod.outlook.com (2603:1096:202:17::29) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3846.11 via Frontend Transport; Fri, 5 Feb 2021 07:23:17 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 01ac7513-0cbb-40ff-9f6c-08d8c9a6e98a
-X-MS-TrafficTypeDiagnostic: DM5PR11MB1948:
-X-Microsoft-Antispam-PRVS: 
-	<DM5PR11MB1948AA91AFC943915C650C8E94B29@DM5PR11MB1948.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1013;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	cLCecFlphrZsyOx75OGewwOxYwS27xP3eWLlLT5gb2lpJL1zfOYefzLjNWgV/gt4+IqZjJ8ddn2FS656A4W2jQyZqk3iWDpGUcHBxAmNWsdtbSBh6YQWhtcplEGCfS29rySyBNZnmf7YS6udfChRciWsCGh9FfaUGdC1AUvcFiqvw1sXlHa2FRqRvJf5clmfpwczvMopAdij5nNPVfy7y/ptYFBYGra4A1tfCNW086PXPpnpkMJTrOx0QCDJOdXt49Vy++kHNefnGNcbIc77ocGLVJ6U5ZrF72cW1QHi96bENOAUKmZYU+uT5+yZAJW8N9iE2QVopuqeSl5cJwogcxVxA1CxVdcjcBPc//L8rDVSx9/xg3i9pMuI6dvLh6EkHaJokU9DaN8JJyNoVUOCRffGkfRiIeUsrZbO5QDuTMeAu2SwdoEfQlyVg5HsTeDxDFoFe8rrfdzCdjRhg/v76Fz3XcNEiwq8wa2ipaIUdDBnyNVIGvpm3+B5rpRYdybVal0Yabh8KtO5JQhR3I8UmQ==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB4380.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(136003)(376002)(396003)(39850400004)(346002)(66946007)(66556008)(83380400001)(66476007)(1076003)(36756003)(478600001)(8936002)(44832011)(16526019)(6486002)(186003)(2906002)(316002)(6666004)(6506007)(86362001)(6916009)(2616005)(26005)(8676002)(5660300002)(956004)(4744005)(52116002)(6512007)(4326008);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?4AsWR0EtGSXtBQojChK7w2RHRKS7Y5KXJh8aoBmKghLnbSh+StA+VehSGV9j?=
- =?us-ascii?Q?BpWp4K1Qc/WUA9nUeG0ZqG77ZC6IxF8PDsbAWYpT5EQ8eKbQFYu64X6c8ZT/?=
- =?us-ascii?Q?hzTuPcSsesbk7o5xsGvOKFPK3TnUnCuwwLgOl4zhYOJ7oqH42bMEDwrtMgzV?=
- =?us-ascii?Q?/9QXK8mVIl9ABf1AfuBt6znNADlKmFqrp/ttaqcxl41hrHZp4sJSBpliiQRY?=
- =?us-ascii?Q?0GuaOyiSRz4IJUVtWhGYfbmPrU6Zmwlm4r57gEnptqWcqpqyAGe88B0PnQgw?=
- =?us-ascii?Q?0O2Tsha2XjcAiScTYte+F/3SezFwgoqlZN5rq5PPB/dI22+LjhC+1qP/FERG?=
- =?us-ascii?Q?ITW9QcXGuom1XHqY0u0f6JE5g2V8QD7toqLPF8r9eQ4LQMlxubl4g4HYIHIc?=
- =?us-ascii?Q?3V6GfpHjMXvtBXrPPoX6ygHtnBjMonK1DULDnC6xrvyIRvwukvynJk2DPIIz?=
- =?us-ascii?Q?ee9X9ATimH24WUQrF0MYHtZa4gOm6j52UXTx2Gf0rhZJPoCkOB9SqQzZAIvN?=
- =?us-ascii?Q?tLpyaeHth/WouMBUFh7Hi8TB6SLR4Zzk9CO3FM2tqxc6mfJiWZKRIzDjWcgs?=
- =?us-ascii?Q?XSaC20lRjNCmIBGO5ZCnBEQeVvkr3rZpTtzm6yes2/aQAPdELPTjd8h30LRd?=
- =?us-ascii?Q?5DL+67wqrMLgAgXK4INHQd1IJUaT3YuxrAt+Jqr8bZeY8UAA7EfjvzwLaFyY?=
- =?us-ascii?Q?PqC7zOk+0rOEtzkzHVSB6s5bXS+WwXp4K5iuMaZ1nM95czv86+OT1XGz4+i5?=
- =?us-ascii?Q?dvAnHaCGPn4OLA3e4ZNArLIyYjWi7Mt4PlGKUlxwFzmi3yNJqJ7pto1esIDL?=
- =?us-ascii?Q?RlFXxxujwS/f7n2wYcnsWmOMaPSeFlSLG5g61cNK8z99TFmOt6qpzemd87Xh?=
- =?us-ascii?Q?H+dhiQTbef9S8SGW3HydHS5dYcuNdrCSqrjCZVddnRNqBYJe7qKCRNjIPCAI?=
- =?us-ascii?Q?waJ5GWG9Vsu3I7XqFae9q7KRKJ8iBmVnGB+kqHRYX7jcqkZegcG6fL65ypD4?=
- =?us-ascii?Q?stzqxj4LO2ZHMiaJodbQB8ZnkZgVIcO+MYjBIlAIxGTOJqDivpY7BCZUAN9U?=
- =?us-ascii?Q?a495j8x2TUP8CgstT9wnaeCEMN+gCJeqCenDb8uCxn7k0IZd8bkWFncdIYLR?=
- =?us-ascii?Q?e1og99ZzoVC352jRIzcKGS+1nGQOh3m9puOaoGxLTLaGcKAOoIAeyK1yK2Rt?=
- =?us-ascii?Q?6pkniK6XNz8q/HwwR0vupwweMHE62L5EN0BE1DG8l8QxsTViQ51eBZuVuLeu?=
- =?us-ascii?Q?BxVCzvDGiu/8mX6bn+6eL1K99mePMXxjfqVxfVv9m6bgN96iXK74rxgP/zDd?=
- =?us-ascii?Q?Lb8mf3bW0rN/HcO2hnP4WNip?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 01ac7513-0cbb-40ff-9f6c-08d8c9a6e98a
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB4380.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2021 07:23:19.6113
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8iG9tl4EmplM6y9+TenLJcBe+X2y1QelP/k1rUbdI63oD1G+r+GC8D+gjMr6yx+uyykf+Mco3EM36AVFhsXRwGSjp7WHsqXm5yT3GnAhkn0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB1948
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-Since upgrade pykwalify from 1.7.0 -> 1.8.0, the ruamel.yaml is now
-the default and preffered yaml parser, correct runtime depends
+Adjust klcc to work with clang
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...-ulocked_-fgets-fread-fwrite-aliases.patch | 49 -------------------
+ ...-path-to-compiler-headers-via-isyste.patch | 28 -----------
+ ...-print-libgcc-file-name-instead-of-p.patch | 28 -----------
+ ...o-not-set-a-fallback-march-and-mtune.patch |  2 -
+ ...libc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch |  6 +--
+ .../0001-klibc-add-getrandom-syscall.patch    |  7 +--
+ ...bc_2.0.4-add-kexec_file_load-syscall.patch |  7 +--
+ .../klibc/files/cross-clang.patch             | 24 +++++++++
+ .../klcc-cross-accept-clang-options.patch     | 14 +++++-
+ .../klibc/files/use-env-for-perl.patch        |  2 -
+ ...lcc-cross_2.0.7.bb => klcc-cross_2.0.8.bb} |  0
+ ...s_2.0.7.bb => klibc-static-utils_2.0.8.bb} |  0
+ ...bc-utils_2.0.7.bb => klibc-utils_2.0.8.bb} |  0
+ .../recipes-devtools/klibc/klibc.inc          |  8 +--
+ .../klibc/{klibc_2.0.7.bb => klibc_2.0.8.bb}  |  0
+ ...011-purgatory-Makefile-adapt-to-klcc.patch | 10 ++--
+ .../kexec-tools-klibc/include_next.patch      | 22 +++++++++
+ .../kexec/kexec-tools-klibc_git.bb            |  4 +-
+ 18 files changed, 72 insertions(+), 139 deletions(-)
+ delete mode 100644 meta-initramfs/recipes-devtools/klibc/files/0001-Define-ulocked_-fgets-fread-fwrite-aliases.patch
+ delete mode 100644 meta-initramfs/recipes-devtools/klibc/files/0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch
+ delete mode 100644 meta-initramfs/recipes-devtools/klibc/files/0001-Kbuild.klibc-Use-print-libgcc-file-name-instead-of-p.patch
+ create mode 100644 meta-initramfs/recipes-devtools/klibc/files/cross-clang.patch
+ rename meta-initramfs/recipes-devtools/klibc/{klcc-cross_2.0.7.bb => klcc-cross_2.0.8.bb} (100%)
+ rename meta-initramfs/recipes-devtools/klibc/{klibc-static-utils_2.0.7.bb => klibc-static-utils_2.0.8.bb} (100%)
+ rename meta-initramfs/recipes-devtools/klibc/{klibc-utils_2.0.7.bb => klibc-utils_2.0.8.bb} (100%)
+ rename meta-initramfs/recipes-devtools/klibc/{klibc_2.0.7.bb => klibc_2.0.8.bb} (100%)
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/include_next.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb=
- b/meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb
-index aa14cdd4b..4d4d2b79c 100644
---- a/meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb
-@@ -13,7 +13,7 @@ inherit setuptools3 pypi
- RDEPENDS_${PN} =3D "\
-     ${PYTHON_PN}-docopt \
-     ${PYTHON_PN}-dateutil \
--    ${PYTHON_PN}-pyyaml \
-+    ${PYTHON_PN}-ruamel-yaml \
- "
-=20
- BBCLASSEXTEND =3D "native nativesdk"
---=20
-2.27.0
+diff --git a/meta-initramfs/recipes-devtools/klibc/files/0001-Define-ulocked_-fgets-fread-fwrite-aliases.patch b/meta-initramfs/recipes-devtools/klibc/files/0001-Define-ulocked_-fgets-fread-fwrite-aliases.patch
+deleted file mode 100644
+index eee144dc4a..0000000000
+--- a/meta-initramfs/recipes-devtools/klibc/files/0001-Define-ulocked_-fgets-fread-fwrite-aliases.patch
++++ /dev/null
+@@ -1,49 +0,0 @@
+-From 241f423a015279cb29b7ad1a34386ef1c32007fc Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sun, 9 Dec 2018 16:47:16 -0800
+-Subject: [PATCH] Define ulocked_{fgets|fread|fwrite} aliases
+-
+-latest clang converts the normal calls to the unlocked variant
+-equivalents
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-Cc: Andrea Adami <andrea.adami@gmail.com>
+----
+- usr/klibc/fgets.c   | 2 ++
+- usr/klibc/fread2.c  | 2 ++
+- usr/klibc/fwrite2.c | 2 ++
+- 3 files changed, 6 insertions(+)
+-
+-diff --git a/usr/klibc/fgets.c b/usr/klibc/fgets.c
+-index dbf742c6..2e9fcb65 100644
+---- a/usr/klibc/fgets.c
+-+++ b/usr/klibc/fgets.c
+-@@ -25,3 +25,5 @@ char *fgets(char *s, int n, FILE *f)
+- 
+- 	return s;
+- }
+-+char *fgets_unlocked(char *s, int n, FILE *f)
+-+  __alias("fgets");
+-diff --git a/usr/klibc/fread2.c b/usr/klibc/fread2.c
+-index 7dca56b1..5c234766 100644
+---- a/usr/klibc/fread2.c
+-+++ b/usr/klibc/fread2.c
+-@@ -11,3 +11,5 @@ size_t fread(void *ptr, size_t size, size_t nmemb, FILE * f)
+- {
+- 	return _fread(ptr, size * nmemb, f) / size;
+- }
+-+size_t fread_unlocked(void *ptr, size_t size, size_t nmemb, FILE *f)
+-+  __alias("fread");
+-diff --git a/usr/klibc/fwrite2.c b/usr/klibc/fwrite2.c
+-index cebc017c..3e0bb57d 100644
+---- a/usr/klibc/fwrite2.c
+-+++ b/usr/klibc/fwrite2.c
+-@@ -11,3 +11,5 @@ size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE * f)
+- {
+- 	return _fwrite(ptr, size * nmemb, f) / size;
+- }
+-+size_t fwrite_unlocked(void *ptr, size_t size, size_t nmemb, FILE *f)
+-+  __alias("fwrite");
+--- 
+-2.19.2
+-
+diff --git a/meta-initramfs/recipes-devtools/klibc/files/0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch b/meta-initramfs/recipes-devtools/klibc/files/0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch
+deleted file mode 100644
+index 181dcfb6de..0000000000
+--- a/meta-initramfs/recipes-devtools/klibc/files/0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-From 4b4147b76518d31a88fb2c58cdbf2236e159a25c Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 8 Sep 2017 23:10:54 -0700
+-Subject: [PATCH] Kbuild.klibc: Add path to compiler headers via -isystem
+-
+-We need to include this path so it can find compiler headers e.g.
+-stdarg.h which is called from wrapper stdarg.h using include_next
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-
+----
+- scripts/Kbuild.klibc | 3 ++-
+- 1 file changed, 2 insertions(+), 1 deletion(-)
+-
+-diff --git a/scripts/Kbuild.klibc b/scripts/Kbuild.klibc
+-index 101f86f..1d5cdc4 100644
+---- a/scripts/Kbuild.klibc
+-+++ b/scripts/Kbuild.klibc
+-@@ -105,7 +105,8 @@ KLIBCOBJCOPY     := $(OBJCOPY)
+- KLIBCOBJDUMP     := $(OBJDUMP)
+- 
+- # klibc include paths
+--KLIBCCPPFLAGS    := -nostdinc -iwithprefix include \
+-+KLIBCCPPFLAGS    := -nostdinc -iwithprefix include      \
+-+		    -isystem $(shell $(CC) -print-file-name=include) \
+- 		    -I$(KLIBCINC)/arch/$(KLIBCARCHDIR)	\
+-                     -I$(KLIBCINC)/bits$(KLIBCBITSIZE)	\
+- 		    -I$(KLIBCOBJ)/../include		\
+diff --git a/meta-initramfs/recipes-devtools/klibc/files/0001-Kbuild.klibc-Use-print-libgcc-file-name-instead-of-p.patch b/meta-initramfs/recipes-devtools/klibc/files/0001-Kbuild.klibc-Use-print-libgcc-file-name-instead-of-p.patch
+deleted file mode 100644
+index 1ba05a811e..0000000000
+--- a/meta-initramfs/recipes-devtools/klibc/files/0001-Kbuild.klibc-Use-print-libgcc-file-name-instead-of-p.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-From b6185401fc3daa7fa8ba2b84db3e4da3b94a9867 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 26 Jul 2017 16:13:16 -0700
+-Subject: [PATCH] Kbuild.klibc: Use -print-libgcc-file-name instead of
+- --print-libgcc
+-
+--print-libgcc-file-name works with clang and gcc unlike --print-libgcc
+-which is gcc specific
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-
+----
+- scripts/Kbuild.klibc | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/scripts/Kbuild.klibc b/scripts/Kbuild.klibc
+-index f500d53..101f86f 100644
+---- a/scripts/Kbuild.klibc
+-+++ b/scripts/Kbuild.klibc
+-@@ -128,7 +128,7 @@ KLIBCCFLAGS      += $(KLIBCCPPFLAGS) $(KLIBCREQFLAGS) $(KLIBCARCHREQFLAGS)  \
+- KLIBCAFLAGS      += -D__ASSEMBLY__ $(KLIBCCFLAGS)
+- KLIBCSTRIPFLAGS  += --strip-all -R .comment -R .note
+- 
+--KLIBCLIBGCC_DEF  := $(shell $(KLIBCCC) $(KLIBCCFLAGS) --print-libgcc)
+-+KLIBCLIBGCC_DEF  := $(shell $(KLIBCCC) $(KLIBCCFLAGS) -print-libgcc-file-name)
+- KLIBCLIBGCC	 ?= $(KLIBCLIBGCC_DEF)
+- KLIBCCRT0        := $(KLIBCOBJ)/arch/$(KLIBCARCHDIR)/crt0.o
+- KLIBCLIBC        := $(KLIBCOBJ)/libc.a
+diff --git a/meta-initramfs/recipes-devtools/klibc/files/0001-arm-Do-not-set-a-fallback-march-and-mtune.patch b/meta-initramfs/recipes-devtools/klibc/files/0001-arm-Do-not-set-a-fallback-march-and-mtune.patch
+index fcf4f891a4..ea14c49f0d 100644
+--- a/meta-initramfs/recipes-devtools/klibc/files/0001-arm-Do-not-set-a-fallback-march-and-mtune.patch
++++ b/meta-initramfs/recipes-devtools/klibc/files/0001-arm-Do-not-set-a-fallback-march-and-mtune.patch
+@@ -14,8 +14,6 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  usr/klibc/arch/arm/MCONFIG | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+-diff --git a/usr/klibc/arch/arm/MCONFIG b/usr/klibc/arch/arm/MCONFIG
+-index 303c6ac..48d2685 100644
+ --- a/usr/klibc/arch/arm/MCONFIG
+ +++ b/usr/klibc/arch/arm/MCONFIG
+ @@ -10,7 +10,7 @@
+diff --git a/meta-initramfs/recipes-devtools/klibc/files/0001-klibc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch b/meta-initramfs/recipes-devtools/klibc/files/0001-klibc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch
+index 94818e3669..15b5144e44 100644
+--- a/meta-initramfs/recipes-devtools/klibc/files/0001-klibc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch
++++ b/meta-initramfs/recipes-devtools/klibc/files/0001-klibc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch
+@@ -12,11 +12,9 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  usr/klibc/Kbuild | 3 ++-
+  1 file changed, 2 insertions(+), 1 deletion(-)
+ 
+-diff --git a/usr/klibc/Kbuild b/usr/klibc/Kbuild
+-index 98caf2e9..b34521e0 100644
+ --- a/usr/klibc/Kbuild
+ +++ b/usr/klibc/Kbuild
+-@@ -168,7 +168,8 @@ $(SOHASH): $(SOLIB) $(SOLIB).hash
++@@ -183,7 +183,8 @@ $(SOHASH): $(SOLIB) $(SOLIB).hash
+  targets += interp.o
+  
+  quiet_cmd_interp = BUILD   $@
+@@ -25,4 +23,4 @@ index 98caf2e9..b34521e0 100644
+ +                             -D__ASSEMBLY__     \
+                               -DLIBDIR=\"$(SHLIBDIR)\"         \
+  			     -DSOHASH=\"$(SOLIBHASH)\" \
+- 			     -c -o $@ $<
++                              $(KLIBCSTACKFLAGS) \
+diff --git a/meta-initramfs/recipes-devtools/klibc/files/0001-klibc-add-getrandom-syscall.patch b/meta-initramfs/recipes-devtools/klibc/files/0001-klibc-add-getrandom-syscall.patch
+index 0768f6d514..f096486d0b 100644
+--- a/meta-initramfs/recipes-devtools/klibc/files/0001-klibc-add-getrandom-syscall.patch
++++ b/meta-initramfs/recipes-devtools/klibc/files/0001-klibc-add-getrandom-syscall.patch
+@@ -10,11 +10,9 @@ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+  usr/klibc/SYSCALLS.def | 1 +
+  1 file changed, 1 insertion(+)
+ 
+-diff --git a/usr/klibc/SYSCALLS.def b/usr/klibc/SYSCALLS.def
+-index 6b3bf4c..d4184ba 100644
+ --- a/usr/klibc/SYSCALLS.def
+ +++ b/usr/klibc/SYSCALLS.def
+-@@ -274,6 +274,7 @@ int syslog::klogctl(int, char *, int);
++@@ -275,6 +275,7 @@ int syslog::klogctl(int, char *, int);
+  int sysinfo(struct sysinfo *);
+  long kexec_load(void *, unsigned long, struct kexec_segment *, unsigned long);
+  <x86_64,ppc64,s390x> long kexec_file_load(int, int, unsigned long, const char *, unsigned long);
+@@ -22,6 +20,3 @@ index 6b3bf4c..d4184ba 100644
+  
+  /*
+   * Low-level I/O (generally architecture-specific);
+--- 
+-2.7.4
+-
+diff --git a/meta-initramfs/recipes-devtools/klibc/files/0001-klibc_2.0.4-add-kexec_file_load-syscall.patch b/meta-initramfs/recipes-devtools/klibc/files/0001-klibc_2.0.4-add-kexec_file_load-syscall.patch
+index 3d8d987c43..b03fb91265 100644
+--- a/meta-initramfs/recipes-devtools/klibc/files/0001-klibc_2.0.4-add-kexec_file_load-syscall.patch
++++ b/meta-initramfs/recipes-devtools/klibc/files/0001-klibc_2.0.4-add-kexec_file_load-syscall.patch
+@@ -10,11 +10,9 @@ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+  usr/klibc/SYSCALLS.def | 1 +
+  1 file changed, 1 insertion(+)
+ 
+-diff --git a/usr/klibc/SYSCALLS.def b/usr/klibc/SYSCALLS.def
+-index c56e8f9..6b3bf4c 100644
+ --- a/usr/klibc/SYSCALLS.def
+ +++ b/usr/klibc/SYSCALLS.def
+-@@ -273,6 +273,7 @@ int reboot::__reboot(int, int, int, void *);
++@@ -274,6 +274,7 @@ int reboot::__reboot(int, int, int, void
+  int syslog::klogctl(int, char *, int);
+  int sysinfo(struct sysinfo *);
+  long kexec_load(void *, unsigned long, struct kexec_segment *, unsigned long);
+@@ -22,6 +20,3 @@ index c56e8f9..6b3bf4c 100644
+  
+  /*
+   * Low-level I/O (generally architecture-specific);
+--- 
+-2.7.4
+-
+diff --git a/meta-initramfs/recipes-devtools/klibc/files/cross-clang.patch b/meta-initramfs/recipes-devtools/klibc/files/cross-clang.patch
+new file mode 100644
+index 0000000000..69799c5c76
+--- /dev/null
++++ b/meta-initramfs/recipes-devtools/klibc/files/cross-clang.patch
+@@ -0,0 +1,24 @@
++--- a/scripts/Kbuild.klibc
+++++ b/scripts/Kbuild.klibc
++@@ -113,10 +113,8 @@ KLIBCCPPFLAGS    := -nostdinc -iwithpref
++                     -I$(KLIBCINC)/arch/$(KLIBCARCHDIR)	\
++                     -I$(KLIBCINC)/bits$(KLIBCBITSIZE)	\
++                     -I$(KLIBCOBJ)/../include		\
++-                    -I$(KLIBCINC)
++-ifeq ($(cc-name),clang)
++-KLIBCCPPFLAGS    += -I$(shell $(KLIBCCC) $(KLIBCCFLAGS) --print-file-name=include)
++-endif
+++                    -I$(KLIBCINC) \
+++                    -I$(shell $(KLIBCCC) $(KLIBCCFLAGS) --print-file-name=include)
++ 
++ # kernel include paths
++ KLIBCKERNELSRC	 ?= $(srctree)
++@@ -137,7 +135,7 @@ KLIBCCFLAGS      += $(KLIBCCPPFLAGS) $(K
++ KLIBCAFLAGS      += -D__ASSEMBLY__ $(KLIBCCFLAGS)
++ KLIBCSTRIPFLAGS  += --strip-all -R .comment -R .note
++ 
++-KLIBCLIBGCC_DEF  := $(shell $(KLIBCCC) $(KLIBCCFLAGS) $(if $(filter gcc,$(cc-name)),--print-libgcc,--print-libgcc-file-name))
+++KLIBCLIBGCC_DEF  := $(shell $(KLIBCCC) $(KLIBCCFLAGS) --print-libgcc-file-name)
++ KLIBCLIBGCC      ?= $(KLIBCLIBGCC_DEF)
++ KLIBCCRT0        := $(KLIBCOBJ)/arch/$(KLIBCARCHDIR)/crt0.o
++ KLIBCLIBC        := $(KLIBCOBJ)/libc.a
+diff --git a/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch b/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch
+index 3b7031e981..56905a5159 100644
+--- a/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch
++++ b/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch
+@@ -5,10 +5,22 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ 
+ --- a/klcc/klcc.in
+ +++ b/klcc/klcc.in
+-@@ -207,6 +207,12 @@ while ( defined($a = shift(@ARGV)) ) {
++@@ -207,6 +207,24 @@ while ( defined($a = shift(@ARGV)) ) {
+      } elsif ( $a =~ /^--([sysroot=])(.*)$/ ) {
+  	# Override gcc encoded sysroot
+  	push(@ccopt, $a);
+++    } elsif ( $a eq '-nostartfiles' ) {
+++        # Allow clang options
+++        push(@ccopt, $a);
+++    } elsif ( $a eq '-nostdlib' ) {
+++        # Allow clang options
+++        push(@ccopt, $a);
+++    } elsif ( $a eq '-nodefaultlibs' ) {
+++        # Allow clang options
+++        push(@ccopt, $a);
+++    } elsif ( $a eq '-no-pie' ) {
+++        # Allow clang options
+++        push(@ccopt, $a);
+ +    } elsif ( $a eq '-no-integrated-as' ) {
+ +	# Allow clang options
+ +	push(@ccopt, $a);
+diff --git a/meta-initramfs/recipes-devtools/klibc/files/use-env-for-perl.patch b/meta-initramfs/recipes-devtools/klibc/files/use-env-for-perl.patch
+index eac128cc09..5973824885 100644
+--- a/meta-initramfs/recipes-devtools/klibc/files/use-env-for-perl.patch
++++ b/meta-initramfs/recipes-devtools/klibc/files/use-env-for-perl.patch
+@@ -10,8 +10,6 @@ that /usr/bin/env perl will always return ours (if it has been built).
+ 
+ Signed-off-by: Tom Rini <tom_rini@mentor.com>
+ 
+-Index: klibc-1.5.20/klcc/makeklcc.pl
+-===================================================================
+ --- a/klcc/makeklcc.pl
+ +++ b/klcc/makeklcc.pl
+ @@ -26,7 +26,7 @@ sub pathsearch($) {
+diff --git a/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.7.bb b/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.8.bb
+similarity index 100%
+rename from meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.7.bb
+rename to meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.8.bb
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-static-utils_2.0.7.bb b/meta-initramfs/recipes-devtools/klibc/klibc-static-utils_2.0.8.bb
+similarity index 100%
+rename from meta-initramfs/recipes-devtools/klibc/klibc-static-utils_2.0.7.bb
+rename to meta-initramfs/recipes-devtools/klibc/klibc-static-utils_2.0.8.bb
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.7.bb b/meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.8.bb
+similarity index 100%
+rename from meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.7.bb
+rename to meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.8.bb
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index 243107e9ae..6e8ec0fd56 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -15,13 +15,11 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/libs/klibc/2.0/klibc-${PV}.tar.xz \
+            file://0001-include-linux-sysinfo.h-directly.patch \
+            file://0001-mkfifo-Implement-mkfifo.patch \
+            file://0001-always-use-bfd-linker.patch \
+-           file://0001-Kbuild.klibc-Use-print-libgcc-file-name-instead-of-p.patch \
+-           file://0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch \
+            file://0001-arm-Do-not-set-a-fallback-march-and-mtune.patch \
+            file://0001-klibc_2.0.4-add-kexec_file_load-syscall.patch \
+            file://0001-klibc-add-getrandom-syscall.patch \
+            file://0001-klibc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch \
+-           file://0001-Define-ulocked_-fgets-fread-fwrite-aliases.patch \
++           file://cross-clang.patch \
+            "
+ 
+ ARMPATCHES ?= ""
+@@ -29,9 +27,7 @@ ARMPATCHES ?= ""
+ ARMPATCHES_arm = " \
+                   file://armv4-fix-v4bx.patch \
+                  "
+-
+-SRC_URI[md5sum] = "712f8bc1a069e03d92584b7f5380c521"
+-SRC_URI[sha256sum] = "abef2637ca823485d9c90ce9512e2b08a65047ec4da204635eeaef95a41a9122"
++SRC_URI[sha256sum] = "4e48f1398cfe3ce0b6df55ce6e70acf54fc8488e3aea3fb3610ee1622d9cb436"
+ 
+ S = "${WORKDIR}/klibc-${PV}"
+ 
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc_2.0.7.bb b/meta-initramfs/recipes-devtools/klibc/klibc_2.0.8.bb
+similarity index 100%
+rename from meta-initramfs/recipes-devtools/klibc/klibc_2.0.7.bb
+rename to meta-initramfs/recipes-devtools/klibc/klibc_2.0.8.bb
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0011-purgatory-Makefile-adapt-to-klcc.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0011-purgatory-Makefile-adapt-to-klcc.patch
+index 5bbb178bc6..07fa841ccc 100644
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0011-purgatory-Makefile-adapt-to-klcc.patch
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0011-purgatory-Makefile-adapt-to-klcc.patch
+@@ -10,11 +10,9 @@ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+  purgatory/Makefile | 6 +++---
+  1 file changed, 3 insertions(+), 3 deletions(-)
+ 
+-diff --git a/purgatory/Makefile b/purgatory/Makefile
+-index 49ce80a..1542b3a 100644
+ --- a/purgatory/Makefile
+ +++ b/purgatory/Makefile
+-@@ -47,7 +47,7 @@ purgatory/sha256.o: $(srcdir)/util_lib/sha256.c
++@@ -47,7 +47,7 @@ purgatory/sha256.o: $(srcdir)/util_lib/s
+  $(PURGATORY): CC=$(TARGET_CC)
+  $(PURGATORY): CFLAGS+=$(PURGATORY_EXTRA_CFLAGS) \
+  		      $($(ARCH)_PURGATORY_EXTRA_CFLAGS) \
+@@ -23,14 +21,14 @@ index 49ce80a..1542b3a 100644
+  		      -fno-zero-initialized-in-bss \
+  		      -fno-PIC -fno-PIE -fno-stack-protector
+  
+-@@ -59,8 +59,8 @@ $(PURGATORY): CPPFLAGS=$($(ARCH)_PURGATORY_EXTRA_CFLAGS) \
++@@ -59,8 +59,8 @@ $(PURGATORY): CPPFLAGS=$($(ARCH)_PURGATO
+  			-Iinclude \
+  			-I$(shell $(CC) -print-file-name=include)
+  $(PURGATORY): LDFLAGS=$($(ARCH)_PURGATORY_EXTRA_CFLAGS)\
+ -			-Wl,--no-undefined -nostartfiles -nostdlib \
+ -			-nodefaultlibs -e purgatory_start -r \
+-+			-Wl,--no-undefined -Wl,-no-pie -Wl,-nostartfiles -Wl,-nostdlib \
+-+			-Wl,-nodefaultlibs -Wl,--entry=purgatory_start -Wl,-r \
+++			-Wl,--no-undefined -no-pie -nostartfiles -nostdlib \
+++			-nodefaultlibs -Wl,--entry=purgatory_start -Wl,-r \
+  			-Wl,-Map=$(PURGATORY_MAP)
+  
+  $(PURGATORY): $(PURGATORY_OBJS)
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/include_next.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/include_next.patch
+new file mode 100644
+index 0000000000..d4fbd1436f
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/include_next.patch
+@@ -0,0 +1,22 @@
++--- a/kexec/Makefile
+++++ b/kexec/Makefile
++@@ -110,7 +110,7 @@ $(KEXEC): $(KEXEC_OBJS) $(UTIL_LIB)
++ 	@$(MKDIR) -p $(@D)
++ 	$(LINK.o) -o $@ $^ $(CFLAGS) $(LIBS)
++ 
++-$(KEXEC): CPPFLAGS+=-I$(srcdir)/kexec/arch/$(ARCH)/include
+++$(KEXEC): CPPFLAGS+=-I$(srcdir)/kexec/arch/$(ARCH)/include -I$(shell $(CC) -print-file-name=include)
++ 
++ kexec/fs2dt.o: CPPFLAGS+=$($(ARCH)_FS2DT_INCLUDE)
++ 
++--- a/Makefile.in
+++++ b/Makefile.in
++@@ -46,7 +46,7 @@ TARGET_CFLAGS	= @TARGET_CFLAGS@
++ # Base compiler flags. These are extended by the subcomponent-Makefiles
++ # where necessary.
++ CPPFLAGS	= @CPPFLAGS@ -I$(srcdir)/include -I$(srcdir)/util_lib/include \
++-			-Iinclude/ $($(ARCH)_CPPFLAGS)
+++			-Iinclude/ $($(ARCH)_CPPFLAGS) -I$(shell $(CC) -print-file-name=include)
++ CFLAGS		= @CFLAGS@ -static -fno-strict-aliasing -Wall -Wstrict-prototypes
++ PURGATORY_EXTRA_CFLAGS = @PURGATORY_EXTRA_CFLAGS@
++ ASFLAGS		= @ASFLAGS@ $($(ARCH)_ASFLAGS)
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
+index d28cfc90f2..c49b24f52f 100644
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
+@@ -32,7 +32,9 @@ KLIBC_PATCHES += " \
+             file://0013-sha256.h-avoid-inclusion-of-sys-types.h.patch \
+             file://0014-add-if_nameindex-from-musl.patch \
+             file://0015-vmcore-dmesg-fix-warning.patch \
+-            file://klibc-reboot.patch"
++            file://klibc-reboot.patch \
++            file://include_next.patch \
++            "
+ 
+ WARNING_FIXES = ""
+ FROM_OE_CORE = "file://arm_crashdump-fix-buffer-align.patch \
+-- 
+2.30.0
 
