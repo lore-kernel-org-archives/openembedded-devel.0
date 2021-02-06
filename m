@@ -1,157 +1,112 @@
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.50])
- by mx.groups.io with SMTP id smtpd.web08.141.1612568576125012667
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web09.1885.1612579212292587311
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Feb 2021 15:42:56 -0800
+ Fri, 05 Feb 2021 18:40:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=bFxWdbgx;
- spf=pass (domain: windriver.com, ip: 40.107.223.50, mailfrom: randy.macleod@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=eBlUIQFk/wMufs3D1ezwogetBfKrke/ibGmrPpLUxUTzA/ek75wDqAPDI02UmV+/YlX4bEZecfoczxDqe5wO7jjamYZhOZuAbgJqMrGgqBIeMC84uBTC9XG2059a7cd5ixHikAGlNw4nU5DQgDo1k4HOfms6Nfhqg8O0Tt29d61OIxiiy/TzTpPIVJ15yRS/M0+8umzu1d8ieclhsqf9rpIdYHLHbZ7GX8q+l+3a+S//qO+lCCOh27sWxjzE16JQ8pgYTc3fPVea2fI3VSjKEoYO1YJNSi/J4iHcIMoQx4xT7gH1AKnWK3KOSNdFjxQavY86X6VjyQ2l1H9UFVVhpw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bsbJZmu/XDb0o2DydbdXxbp8AXeMbwHjdvsV2NkXJFU=;
- b=CZoktSYEpIN/Cb1eM8+77MIGdQgHzASd6wmQgV90CZvPbSp9cZ7zRfuxh1g97NcgMb1Mb+MLZ5Pm+t1nft5eCRMKT+Cjq5UKmaMH13UEPAYErzWd7ADWsptCrsADssphXmTIneiT80h0+T6z+j0DyNWQMq35iNWbqHNAyuD4JiRT1r8IeuuK7YvyyNTKNFrUdxuohF5HM9n+AW9OASD44Vr8IYcAXwpuDL/DC5tBwgAkgtFBx/YwkCsogygfxeCws9eVTwnXUFHutzEpoJl/n7GN7WGCs0OfahxPbv7swdyf5YyCGxp4WLzIV1wqeMVynzTarzRQpxT/r9b71XL4bw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=bd8tOcPs;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id fa16so4191326pjb.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Feb 2021 18:40:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bsbJZmu/XDb0o2DydbdXxbp8AXeMbwHjdvsV2NkXJFU=;
- b=bFxWdbgxS7lh92JP4lsSrJhsT6RSaSwivpJTcwSxxk6I5P/p/p1cjxnqGOcGNuiQ39EyJG4k6r/2Bg5M5IEYq0e/E3PJKyqW3Wlf1s/ZNkImqKbV54wsjH0QDteki/YH2sGQViI+h/LUEUidL+Fxh6bpuxTNALc1ZKQnQ2KWRMw=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from DM6PR11MB3994.namprd11.prod.outlook.com (2603:10b6:5:193::19)
- by DM6PR11MB3067.namprd11.prod.outlook.com (2603:10b6:5:6a::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.20; Fri, 5 Feb
- 2021 23:42:55 +0000
-Received: from DM6PR11MB3994.namprd11.prod.outlook.com
- ([fe80::8e2:471a:7b63:1a0e]) by DM6PR11MB3994.namprd11.prod.outlook.com
- ([fe80::8e2:471a:7b63:1a0e%7]) with mapi id 15.20.3805.024; Fri, 5 Feb 2021
- 23:42:54 +0000
-Subject: Re: [oe] Help with dealing with autoconf uprev affected packages?
-To: Yi Fan Yu <yifan.yu@windriver.com>, Khem Raj <raj.khem@gmail.com>
-Cc: Andrey Zhizhikin <andrey.z@gmail.com>, hongxu <hongxu.jia@windriver.com>,
- "Chen, Qi" <qi.chen@windriver.com>, Ross Burton <ross@burtonini.com>,
- "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-References: <8f242d61-4dea-070a-217d-657e2204a807@windriver.com>
- <CAAnfSTsku9yTFYKCMVkmKq=77V8XGgq9pdO5n_PPb_ttHWnd3w@mail.gmail.com>
- <3aeac6ad-c5cc-dba9-2c3e-6caaad82aa2d@windriver.com>
- <5a73bb02-18ae-a7ea-c55b-d650db4d97a1@windriver.com>
- <CAHtQpK7P8JbrKCS-xMmgUu-rEUW1wbgJau+_93O9eP_+wgM_LQ@mail.gmail.com>
- <c6849b7a-5dc0-ced2-b6d0-a0e6f9ec72f6@windriver.com>
- <CAMKF1soXQNO8Jx_iHN+3rGam6qNJ1SsUyPXZgHv=F7NyGgwpOQ@mail.gmail.com>
- <CAMKF1sr-fsVGdCegDri4Vy7cJK8AZ18M6X8E76XThfi7C34KLQ@mail.gmail.com>
- <86f09202-225b-ceee-ebfd-1f4ad3be20c1@windriver.com>
-From: "Randy MacLeod" <randy.macleod@windriver.com>
-Message-ID: <c925fe41-3563-e817-b525-011c82111b58@windriver.com>
-Date: Fri, 5 Feb 2021 18:42:50 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.1
-In-Reply-To: <86f09202-225b-ceee-ebfd-1f4ad3be20c1@windriver.com>
-X-Originating-IP: [198.48.226.187]
-X-ClientProxiedBy: BY3PR04CA0017.namprd04.prod.outlook.com
- (2603:10b6:a03:217::22) To DM6PR11MB3994.namprd11.prod.outlook.com
- (2603:10b6:5:193::19)
-Return-Path: randy.macleod@windriver.com
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=oRQv/p55HLbIqLs3acK4CEJ890aC92Fuzrz2KtiYHGI=;
+        b=bd8tOcPsWWsRPzWwN4x1++MUurKkf3B22Czyox14Y99aqdMcRbS0jKnJ7lP8B9EA5x
+         4hfVdMA8zEPz/1JVGHASIqg116YAz6EkhMEVtB44KtLd0TNv1KiDWArkLSOmflb2JoJQ
+         Egi/cbtsNJVLB5f0N3m+pGVLunBotmAeYSqFqEUpVi1cBM2OVjo27ZEUAwJQUnn6q0Na
+         aTYkLHq2YrqQBaygvinvyAxV+mEFPRVpKAoqrsZ75aL0QzgDyqz3PI90wLgubf+gb94h
+         pUc3sbRqaj6t96xJOhUslbWj4Ab3mUBHAO7zJqz2Bl3q1sSkJufxqfVfyfwBfkP/J+dP
+         VStw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=oRQv/p55HLbIqLs3acK4CEJ890aC92Fuzrz2KtiYHGI=;
+        b=thyeaiDMd+eGr/5mNcb+DjDM2sIB/zedmiz4f7bQL/cJE3Xs80EBdDGJd5DCz+Udmv
+         5WFtxhIxCMO5WzsxwEtk2eFDGCR3HekAotx5vUvkZaKVHIAnZM7s9tiVMRe0/e3ugKVZ
+         905hOVUvG+YSxpjB14BVADJGVX81AyNJARSbA05rZrsvSM2HV739uX0JB/hfpmUdTDPf
+         K15rwaFk8gsaQgi7c/0uCRcS46aAoNYtG5LyT1uG1JyVqDAa98KU0eNj6Aa9dpSdn5FB
+         JfkMiKKPrzbPu3VHmU3yGSUexY/oyB6451FA5HPiWXVAOUn3oP3sr3WpdW5IYrXjQV7Y
+         hxUA==
+X-Gm-Message-State: AOAM532XlVrkIpuBi0/aI8A4h4PzVvEOzPAggrwctxexTMVfqRZ1xhZC
+	8AJBJFhGbM+E2idDp7PNOsdk/peQBu7tDw==
+X-Google-Smtp-Source: ABdhPJymPoHgb3UFQeILwZmrpRPP81xFdQDnhnZ86NM4QuV9ecXAoWXXe9nkRYSFMv9oJxf9A7BZsw==
+X-Received: by 2002:a17:90b:350b:: with SMTP id ls11mr6808114pjb.166.1612579211355;
+        Fri, 05 Feb 2021 18:40:11 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::d188])
+        by smtp.gmail.com with ESMTPSA id b17sm11328946pfp.167.2021.02.05.18.40.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 05 Feb 2021 18:40:10 -0800 (PST)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] libstatgrab: Fix build with autoconf 2.70+
+Date: Fri,  5 Feb 2021 18:40:08 -0800
+Message-Id: <20210206024008.827594-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.30.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [172.25.44.2] (198.48.226.187) by BY3PR04CA0017.namprd04.prod.outlook.com (2603:10b6:a03:217::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.20 via Frontend Transport; Fri, 5 Feb 2021 23:42:53 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 5f97d35f-3410-46b9-846e-08d8ca2fc25b
-X-MS-TrafficTypeDiagnostic: DM6PR11MB3067:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<DM6PR11MB3067CEEAA05C7E8BB287BCB7F8B29@DM6PR11MB3067.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:5516;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	4QSvtaSeFvrGEZsrhIkr7iHDpAGMJi8Xq2v1t4xtmn9u4bMQaUJcEl1ZTHSliHHaf/o6AjVj6OmiTxA6TjPqjLKHXoN9Z36/yWBx4TA/0/KbES6NRqpW2ptvmIyxb1GaszYtTzJjIWwtWWq7k14tam+mlHq6p50jAG+GZbgzcWmN+S5T0zkFdQKRjautqAx6/wc0VQD83cd/cjNp+pZXZmXy51O3gaZ8F+GcZFtfDW0wXC0w3Ht5wP4QGWr7NnYMYhuIsRMKa2bPYuX+Gr4gkqwD90kk0g9O/r4OwgsX+slhR3vtzSnF9XgMrfpzL9RHpk02jcb1WmJDg4dQPixv27ZWuJ3N/oQxtocK2EsF2veA8k9EpZbDW5+m+P77fLZjo3VwOcjTFyCBdFiCqFT5KbzCJYpfbbmJyGVLyBXxqT5I+GuRT4/t7rbmKNNHNdUaHxXwItH9wIOMiKelYlIA/PBQjzEpMEfGDd+0i39ePcwQgxTB0BsEGJa15TOQPsb30pcwEXw/oSl2ZBouCm2kSu079JRlXMYlSycZ/FzTHNGrbGEEoNASuhnrmpfqMJQIrO4zv2VgBP3+dWNe4ltH0LXMmQc2mVadp2/SAlnWKhQAuCaRR3HrqvI3eldTLuEXrCD8eHHCGyu/ALzJOvtRI8x9qVaO56qogDxCkYvoVBoQzUhfH8CU30PDxvO2Mu3s
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3994.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(346002)(366004)(39850400004)(136003)(376002)(6486002)(2906002)(31686004)(4326008)(478600001)(2616005)(956004)(8936002)(86362001)(31696002)(66946007)(5660300002)(52116002)(966005)(36756003)(83380400001)(54906003)(26005)(8676002)(53546011)(66556008)(66476007)(110136005)(316002)(186003)(16526019)(16576012)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	P07PV2woHO90yZgNpXjEydgW3gYTFjHQKOnrkrGUwt4GJL/wm8sYQ7vB/3pM+/+aIj8X2uI8kT5T2+HM/sUBStaUJKujpAws+jUL3fSntmnIoOTedLxZi+mVVIN9UyGEnVjaLae8SPk3glGO4mtBuHnc7sbNYhvJWY8gdz4z7vlBYs67IW+XeL9S2lrZwsqUBKJG/ob4mYE6vKTTB7AfGNkLboIJwHdaBqPioxmAcYXi9fCQ6ZnmwM0u/6NmPLv2TSf0UeCXrtc0OkvtK4m6cxzHHBPQ8ds+OoZ++3twLMk3T39XCx2V7e+djfGK7hAPwp0vNOLHCTzsIGrLs1VCt94GcjjASUQZv+0hRK1cl5HE/ZIBUCbLEOmi5Sf7EUYPIukzbzPnvi0fbbdRxq6dp6nZ5PWPu+MvBTYSNN4CyDfpH87HQf9mU7RGLCoZA1KXhj6cw1VDoUN5s3jUf2vqjohSUAS9apzFCWkyzgsOdThi7lMAFTAFLNlyCpMWzy95pNDLPO3Z7tf/ieLrc/E/rUa4pF7hZ/DbT3K9YmANqsaJKQwC0UTf6vvSoQT1NLjWG3RtJ/2EMMitKkCOvAfWVGGiBoh748v9fD0rf3Qhe/RmbsrLAOcCuz1hsxoyrYRLMzX1rkbktxj6ZPluua+Dm8aHl4MMnL97J9nrPC626B+ZpuCsaaweZvcBAjtABmGDij1/7VSQsXoFNKdJxRoI+t5q/ivDfFddGLRdx38njurLElUqBHnodQDfsJ+C9/n5
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5f97d35f-3410-46b9-846e-08d8ca2fc25b
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3994.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2021 23:42:54.8015
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: i64kCgjGHe/o9kf4hXcmTTJPyrbrj9QzyneOdjdPomYQd8GpPVl2w484+LaMwLVFnip9vh63jtuZ1HLBE1chsRvw2lntvreTeafCqwgjgeU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB3067
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-CA
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 2021-02-05 9:46 a.m., Yi Fan Yu wrote:
-> libmcrypt still uses autoconf 2.59. last release seems to date from 2007
-> 
-> https://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.5.8/
-> 
-> its not going to be a piece of cake...
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...re.ac-Do-not-use-single-line-comment.patch | 33 +++++++++++++++++++
+ .../libstatgrab/libstatgrab_0.92.bb           |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/libstatgrab/libstatgrab/0001-configure.ac-Do-not-use-single-line-comment.patch
 
-Yi Fan will be sending patches to meta-oe and meta-virt
-to blacklist libmcrypt, nagios-nsca, maybe hiptopvm
-and change the configuration for php:
-http://layers.openembedded.org/layerindex/branch/master/recipes/?q=depends%3Alibmcrypt
-
-He has also sent a postgresql patch and might wrestle with
-freeradius unless someone gets there first...
-
-Hongxu, aren't you working this weekend due to the
-upcoming Chinese New Year holiday? If you want to do
-freeradius, just go ahead and send a patch.
-
-../Randy
-
-> 
-> On 2/4/21 10:26 PM, Khem Raj wrote:
->> [Please note: This e-mail is from an EXTERNAL e-mail address]
->>
->> We are now left with 15 odd packages
->>
->> https://errors.yoctoproject.org/Errors/Build/116395/
->>
->> On Thu, Feb 4, 2021 at 1:47 PM Khem Raj<raj.khem@gmail.com>  wrote:
->>> here is latest list
->>>
->>> https://errors.yoctoproject.org/Errors/Build/116365/
->>>
->>> Just look at the do_configure failures for filtering to autotools issues only.
->>>
->>> On Thu, Feb 4, 2021 at 1:09 PM Yi Fan Yu<yifan.yu@windriver.com>  wrote:
->>>> Andrey,
->>>>
->>>> i am working on this now.
->>>>
->>>> since you already submitted iperf3, i'll focus on
->>>>
->>>> libmcrypt.
->>>>
->>>> i'll test and build both of them once i figure out libmcrypt.
->>>>
->>>>
->>>> On 2/4/21 5:45 AM, Andrey Zhizhikin wrote:
->>>>>>> - iperf3 - YiFan
->>>>> I just sent a patch for this one:
->>>>> https://lists.openembedded.org/g/openembedded-devel/message/89274
->>>>>
->>>>> YiFan, can you please have a look at it to see if it fits?
->>>>>
->>>>>
->>>>> 
->>>>>
-
-
+diff --git a/meta-oe/recipes-extended/libstatgrab/libstatgrab/0001-configure.ac-Do-not-use-single-line-comment.patch b/meta-oe/recipes-extended/libstatgrab/libstatgrab/0001-configure.ac-Do-not-use-single-line-comment.patch
+new file mode 100644
+index 0000000000..46493bb9e7
+--- /dev/null
++++ b/meta-oe/recipes-extended/libstatgrab/libstatgrab/0001-configure.ac-Do-not-use-single-line-comment.patch
+@@ -0,0 +1,33 @@
++From a8502c5a7e336f1e5068f9dd3bdb359d787f9bdc Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 5 Feb 2021 18:35:12 -0800
++Subject: [PATCH] configure.ac: Do not use single line comment
++
++autoconf 2.70+ does not like it and regenerating configure script fails
++
++| ../libstatgrab-0.92/configure: line 7818: syntax error near unexpected token `ac_fn_check_decl'
++| ../libstatgrab-0.92/configure: line 7818: `fi ac_fn_check_decl "$LINENO" "__sun" "ac_cv_have_decl___sun" "$ac_includes_default" "$ac_c_undeclared_builtin_options" "CFLAGS"'
++
++Upstream-Status: Submitted [https://github.com/libstatgrab/libstatgrab/pull/128]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ configure.ac | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index 99518f8..74e7f0f 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -100,7 +100,8 @@ AC_TYPE_UNSIGNED_LONG_LONG_INT
++ 
++ dnl Check for extra flags to enable some kind of behavior
++ AC_CHECK_DECL([_AIX],[ac_cv_need_minus_d_linux_source_compat="yes"; ac_cv_need_minus_d_all_source="yes"])
++-AC_CHECK_DECL([__linux],[ac_cv_need_minus_d_gnu_source="yes"]) dnl probably required by kfreebsd, too?
+++dnl probably required by kfreebsd, too?
+++AC_CHECK_DECL([__linux],[ac_cv_need_minus_d_gnu_source="yes"])
++ AC_CHECK_DECL([__sun],[ac_cv_need_minus_d_extensions="yes"; ac_cv_need_minus_d_posix_pthread_semantics="yes"])
++ AC_CHECK_DECL([__hpux],[ac_cv_need_minus_d_hpux_source="yes"])
++ 
++-- 
++2.30.0
++
+diff --git a/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb b/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb
+index 27fe0e2c40..a47d3bf000 100644
+--- a/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb
++++ b/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb
+@@ -10,6 +10,7 @@ PACKAGES_prepend = "statgrab statgrab-dbg saidar saidar-dbg ${PN}-mrtg "
+ 
+ # don't use the git tag unless docbooc2x is available to build the manpages
+ SRC_URI = "https://github.com/libstatgrab/libstatgrab/releases/download/LIBSTATGRAB_0_92/libstatgrab-0.92.tar.gz \
++           file://0001-configure.ac-Do-not-use-single-line-comment.patch \
+           "
+ SRC_URI[md5sum] = "5362b2ddbec54b3901e7d70c22cda249"
+ SRC_URI[sha256sum] = "5bf1906aff9ffc3eeacf32567270f4d819055d8386d98b9c8c05519012d5a196"
 -- 
-# Randy MacLeod
-# Wind River Linux
+2.30.0
+
