@@ -1,148 +1,103 @@
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web12.13897.1612653434559729681
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.web08.13912.1612653435472057406
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Feb 2021 15:17:14 -0800
+ Sat, 06 Feb 2021 15:17:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=jYzVpf8F;
- spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id x9so5521439plb.5
-        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Feb 2021 15:17:14 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=bzzO2Mdm;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f178.google.com with SMTP id d13so5532212plg.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Feb 2021 15:17:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=Qoyr4huhHoT9xTWJ6MNGqHONHHM5fchsVftEg03uz/Y=;
-        b=jYzVpf8FyocllpvjsI/0ndcB1gMRnMvvtfdgGl8IZ9JUrcbyJ7LTa9BpRdNxzBoxWB
-         1GXqknXOgHwmKpVYXT4ZZCb67phj2AZK9YTMj/uRfEsNeNoXVQUvit85KYQamo+vFh51
-         uYJdy859SW/lGnyNRmwHOpzVz42q1qWUQjZmMdtwZ79gSJX+r+tbL4m3O7v4dFwZzl3a
-         yClHrBWhoR9dqBdCsKUtjmPYC5Qwpv9Bl4kPFWBc+Ny5vmvT9eVDbO1/7WN6XxoK1rdg
-         FXOsFYkTT0kuape6zKXMINiyMp82pP3TvDzJ5XqQFlrJokEyi6vTzq3OTw+3H9znO6sL
-         XWig==
+        bh=P8G2jf3+MYwHVZwBZ6naT76C1hk9WRlKfWE2fnn10AM=;
+        b=bzzO2MdmAJ/41H8zZoiUMWXQaPWUG+AgIa+/llpcjyiELy8gQ0POnuqv+nSPJV5DVy
+         4lJh+moyMmqV+PgazpfAO8OVZrsB0mq2R+lWOLCeDMTvv70hD5qhCtk5SgGT2tZt+pJa
+         6WI3WqUYgqI2Ej4sz7LtV5B/6dgsUF4i9vc9oQY1HwMNg6uF/iUwHhZLAfXmM4HMsstR
+         wQsQNMHS2SxX4q93K8SWuzFM9hlqFuG2DR8rpuNw+wY56Hpm8rsO2adTYc6i0yVXloSp
+         TlFBCDPgT/W7c4nVw+/6ewoHrH17tyErpykmEvUnMGQG1/xqXlkQbOK01+s6Ozt2shWx
+         xrjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=Qoyr4huhHoT9xTWJ6MNGqHONHHM5fchsVftEg03uz/Y=;
-        b=Vt0NXtsIOb7zuT5JP8ju0sdFEfU48W6t4DPIfr+cLN45O+7gWc2Ctl9ikFvXMBP7ld
-         yRNCevBiGoItIDYX16KLdPUWJK70haZ4w+QTtKAST3TkfSuro7Jgzf5choL0jsmxsffH
-         9LJZG9tIAwEhUkUORjmDOzqF/OzmrFXRmrjvlqjxNUo+1KAiEK6sZcllOuuF68c47W3s
-         5nllYNl1LxgvGW+F2zB6QOjMNSN+cT8KMbB7OVKU6XNfFpws2p3c90mYi2nhPZAdmJTl
-         irDJsGyMgIOezVSiB/XLP+cHtlrsldFCBKnPYzz/kf96m8r/nCxmO/V0hgjwLYOUGCM/
-         2Bew==
-X-Gm-Message-State: AOAM532jxCBRyU3q7jyY5cyi12+xUREWzo8jF2v5MnfQbsKVxtmGioew
-	xGOF+ogZEEbJglLjL+f7/ai3LsM9Xwh8NQ==
-X-Google-Smtp-Source: ABdhPJycww9CG7dVIDk68tCc1MKpaRsor5j4jhT2Vye6dlbjRu79C9Oudqgsm2ti3Lx163CQtdAP8g==
-X-Received: by 2002:a17:90b:4ad2:: with SMTP id mh18mr10022701pjb.137.1612653433902;
-        Sat, 06 Feb 2021 15:17:13 -0800 (PST)
+        bh=P8G2jf3+MYwHVZwBZ6naT76C1hk9WRlKfWE2fnn10AM=;
+        b=FHpQ+kbpZ3e+rwJ2qrVPr9Oi+PkAicZu1ikwdd0W/323RKgBR/xVwYNH4yHKIfC/yU
+         zVijwmrpLWGCCfzjKR0IlYSptw73xhyCQwucHhImC1NMICEKB4/WFIm5QcUhj2KDkNaa
+         ZANNsrjo04sATU9n1o3mKGTWA5JMNOolbfZsqsDyQqxqFeodvtrlO15pvuWanVVGnKfo
+         7YqdV+zfOHJeRd7oqJUFJ8Jjym915CpjIF+8aPOsxTWNcCLL7ONHTRdXWQjmsKp58UFh
+         W4CrQDmMiz6bMdRekmLK2M4gYO/9ZV1gIaxfPeh6my3hcfNFaqiB7nSOR80YujdYxWq4
+         yBSA==
+X-Gm-Message-State: AOAM532ymNaeTDBOaMcxxx7x7RNMBfRWPMvIPJFQyrBIEBCnpGdj5Sjj
+	qa7XYXFqkV5QONxNaRlRxvnqnjJPULyI9w==
+X-Google-Smtp-Source: ABdhPJzKC5bUqO4yU+lfCGez9YbQ3SzrNQ9NKUw3NQ2EBoTdfeXmBhS7L9zYBoQ70qZwzeEtpjYk4g==
+X-Received: by 2002:a17:902:ecc1:b029:e1:93ab:1e7b with SMTP id a1-20020a170902ecc1b02900e193ab1e7bmr7591630plh.61.1612653434886;
+        Sat, 06 Feb 2021 15:17:14 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:c5c4:f80e:4f44:b02e])
-        by smtp.gmail.com with ESMTPSA id b65sm14331882pfg.3.2021.02.06.15.17.13
+        by smtp.gmail.com with ESMTPSA id b65sm14331882pfg.3.2021.02.06.15.17.14
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 06 Feb 2021 15:17:13 -0800 (PST)
+        Sat, 06 Feb 2021 15:17:14 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgargh 04/10] iscsi-initiator-utils: upgrade 2.1.2 -> 2.1.3
-Date: Sat,  6 Feb 2021 15:17:00 -0800
-Message-Id: <46ea93dc423140e63257e69ff3da5aea0b72f8be.1612652802.git.akuster808@gmail.com>
+Subject: [gatesgargh 05/10] sip3: simplify recipe
+Date: Sat,  6 Feb 2021 15:17:01 -0800
+Message-Id: <ba3c1dcf19ee018963471015b2e8b30ef9830d35.1612652802.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1612652802.git.akuster808@gmail.com>
 References: <cover.1612652802.git.akuster808@gmail.com>
 
-From: zangrc <zangrc.fnst@cn.fujitsu.com>
+From: "S. Lockwood-Childs" <sjl@vctlabs.com>
 
-0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch
-Removed since this is included in 2.1.3
+The custom configure block can be shared between target
+and native if you just configure the sysroot option accordingly
+and use STAGING_INCDIR to locate the python headers to build
+against.
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 46e30569e3b3d0cc66ce05e9accd759f37705feb)
-[Bug fix only update. Includes several CVE fixes.
-CVE-2020-17437
-CVE-2020-17438
-CVE-2020-13987
-CVE-2020-13988 ]
+(cherry picked from commit 5fe362171c7f3426fced0c7889facec397c9cc5e)
+Signed-off-by: Steve Sakoman <steve@sakoman.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...Compare-with-max-int-instead-of-max-.patch | 48 -------------------
- ....1.2.bb => iscsi-initiator-utils_2.1.3.bb} |  3 +-
- 2 files changed, 1 insertion(+), 50 deletions(-)
- delete mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch
- rename meta-networking/recipes-daemons/iscsi-initiator-utils/{iscsi-initiator-utils_2.1.2.bb => iscsi-initiator-utils_2.1.3.bb} (96%)
+ meta-oe/recipes-devtools/sip/sip3_4.19.23.bb | 17 +++++------------
+ 1 file changed, 5 insertions(+), 12 deletions(-)
 
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch
-deleted file mode 100644
-index c71f01299b..0000000000
---- a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch
-+++ /dev/null
-@@ -1,48 +0,0 @@
--From 7bdaa32c80bb7d37668c1ff6d88bb02428459a0f Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 21 Oct 2020 09:11:20 -0700
--Subject: [PATCH] libopeniscsiusr: Compare with max int instead of max long
--
--This compares value member of int_list_tbl struct which is of unsigned
--int type.
--
--struct int_list_tbl {
--const char *name;
--unsigned int value;
--};
--
--Clang compiler reports this comparison when
---Wtautological-constant-out-of-range-compare is enabled
--
--| idbm.c:1042:2: error: result of comparison of constant 18446744073709551615 with expression of type 'unsigned int' is always true [-Werror,-Wtautological-constant-out-of-range-compare]
--|         _rec_int_list(SESSION_CHAP_ALGS, recs, node, session.auth.chap_algs,
--|         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--| idbm.c:263:23: note: expanded from macro '_rec_int_list'
--|                 if (_org->_name[_i] != ~0UL) { \
--|                     ~~~~~~~~~~~~~~~ ^  ~~~~
--
--Since max value for int can be less than unsinged long e.g. on LP64 its
--better to use UINT_MAX here
--
--Upstream-Status: Submitted [https://github.com/open-iscsi/open-iscsi/pull/227]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- libopeniscsiusr/idbm.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/libopeniscsiusr/idbm.c b/libopeniscsiusr/idbm.c
--index 7bc2381..060196f 100644
----- a/libopeniscsiusr/idbm.c
--+++ b/libopeniscsiusr/idbm.c
--@@ -260,7 +260,7 @@ do {\
-- 	_recs[_n].type = TYPE_INT_LIST; \
-- 	_strncpy(_recs[_n].name, _key, NAME_MAXVAL); \
-- 	for (unsigned int _i = 0; _i < ARRAY_LEN(_org->_name); _i++) { \
---		if (_org->_name[_i] != ~0UL) { \
--+		if (_org->_name[_i] != UINT_MAX) { \
-- 			for (unsigned int _j = 0; _j < ARRAY_LEN(_tbl); _j++) { \
-- 				if (_tbl[_j].value == _org->_name[_i]) { \
-- 					strcat(_recs[_n].value, _tbl[_j].name); \
---- 
--2.29.0
--
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.2.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.3.bb
-similarity index 96%
-rename from meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.2.bb
-rename to meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.3.bb
-index dfcd4ee3cb..4a9cf9db40 100644
---- a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.2.bb
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.3.bb
-@@ -12,11 +12,10 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)
+diff --git a/meta-oe/recipes-devtools/sip/sip3_4.19.23.bb b/meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
+index 320755b844..ae8df5055a 100644
+--- a/meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
++++ b/meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
+@@ -19,24 +19,17 @@ PACKAGES += "python3-sip3"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ BBCLASSEXTEND = "native"
  
--SRCREV ?= "802688debcd88c48edabe86deb7e7ed47ebadc26"
-+SRCREV ?= "34e3ffb194f6fa3028c0eb2ff57e7db2d1026771"
+-do_configure_prepend_class-target() {
+-    echo "py_platform = linux" > sip.cfg
+-    echo "py_inc_dir = %(sysroot)/${includedir}/python%(py_major).%(py_minor)${PYTHON_ABI}" >> sip.cfg
+-    echo "sip_bin_dir = ${D}/${bindir}" >> sip.cfg
+-    echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
+-    echo "sip_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> sip.cfg
+-    echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
+-    ${PYTHON} configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot ${STAGING_DIR_HOST} CC="${CC}" CXX="${CXX}" LINK="${CXX}" STRIP="" LINK_SHLIB="${CXX}" CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" LFLAGS="${LDFLAGS}"
+-}
++CONFIGURE_SYSROOT = "${STAGING_DIR_HOST}"
++CONFIGURE_SYSROOT_class-native = "${STAGING_DIR_NATIVE}"
  
- SRC_URI = "git://github.com/open-iscsi/open-iscsi \
-            file://0001-Makefile-Do-not-set-Werror.patch \
--           file://0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch \
-            file://initd.debian \
-            file://99_iscsi-initiator-utils \
-            file://iscsi-initiator \
+-do_configure_prepend_class-native() {
++do_configure_prepend() {
+     echo "py_platform = linux" > sip.cfg
+-    echo "py_inc_dir = ${includedir}/python%(py_major).%(py_minor)${PYTHON_ABI}" >> sip.cfg
++    echo "py_inc_dir = ${STAGING_INCDIR}/python%(py_major).%(py_minor)${PYTHON_ABI}" >> sip.cfg
+     echo "sip_bin_dir = ${D}/${bindir}" >> sip.cfg
+     echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
+     echo "sip_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> sip.cfg
+     echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
+-    ${PYTHON} configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot=${STAGING_DIR_NATIVE}
++    ${PYTHON} configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot ${CONFIGURE_SYSROOT} CC="${CC}" CXX="${CXX}" LINK="${CXX}" STRIP="" LINK_SHLIB="${CXX}" CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" LFLAGS="${LDFLAGS}"
+ }
+ 
+ do_install() {
 -- 
 2.17.1
 
