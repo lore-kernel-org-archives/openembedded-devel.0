@@ -1,76 +1,76 @@
-Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com [209.85.167.65])
- by mx.groups.io with SMTP id smtpd.web12.12992.1612649175830922502
+Received: from mail-lf1-f66.google.com (mail-lf1-f66.google.com [209.85.167.66])
+ by mx.groups.io with SMTP id smtpd.web09.12954.1612649449883544098
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Feb 2021 14:06:16 -0800
+ Sat, 06 Feb 2021 14:10:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=f/sC3Xw8;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.65, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f65.google.com with SMTP id h12so16143427lfp.9
-        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Feb 2021 14:06:15 -0800 (PST)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=Uh3sOBDz;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.66, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f66.google.com with SMTP id h7so16199949lfc.6
+        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Feb 2021 14:10:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=l7Ux4YWveWo11WX3HVJhdbZv7VGY7U07TA8TVma+oTY=;
-        b=f/sC3Xw8AlPP9laLnTfbuS6sdHJzWTrnnNRwQvxa8t7LzByvu0hvsop0l5Yos4RBfA
-         1r/r7FtbZDBOSBTfRYwwoOi0zbilOw0ukUz+HuShvbdDJ98Hd7A03kViyg1OuTm/5ZlZ
-         lOLhUlxE1kt9lnl1CfgQg6z3liUGZ3ATW1jok/HR1rsoVpyHWYxKXEGN74ZwyeBmWURy
-         ix2SgpXaQkrpI0dRovCsWlhpWgpPsN/xEVdUTlWpXvZMzK1CINObgb20aUdOdgWA7XbH
-         EDl1a9OrD8OftDacHw8R7d9Mc8lOXeD/Gcsw+u76r+vdm4OiRRPy0oRyk7IPnbyFAAq4
-         wjCg==
+        bh=IvCnNPgB18FaJ5KYtB+wIpSWoD/porhVcVpAwc6sAow=;
+        b=Uh3sOBDzyJBpWgFRQGcYuo3yZDKxrSwbAvax+xgWFTJQF2Im4OlyX+ivfnCkzHjIAc
+         e6jVYqiPBf5XYPT+plR/uHq8TrN1InMHhsoZtfiKjbcROVB72oYtUgbqdC1VZxpj8p4h
+         60ehamM2JJgwH1b5pThnISVsFYuafDjVQ1cUqbaAZIbJLLFuaRFvLGnWaoIGmjXOUUrV
+         IyQt7BDRIPDHOgpQAN9GWqnL1866zbJ1azzVV/bncfyZkTFV8xC6O/pC0ByQ5ZYjdokj
+         ul9KvuFsPVhqGtvT+gY4ZFoBHYe40Biogf4JkdxfBAxwxp3ij8v3jQqQCaunB6uRndWT
+         hz+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=l7Ux4YWveWo11WX3HVJhdbZv7VGY7U07TA8TVma+oTY=;
-        b=b59H9KPmp+6+uUJKu4BvjIRiHK6kW+flH/1VbCfFwO6DkH4kJzqxYpmNiVgr9HSXr2
-         b2jkk6jicPwM6IBeG5/+bVb5t4s94rvNw/2biUh7Xy/u5OhoMzuHBI+eeeMdWKN+KLQw
-         sBByCmKESyJl7dsozTCnUWM3renpAcmvAeJ5Pu6t5hjx+Ts+gDQn1XmTWhey9HX5Ac96
-         mJdTr1kgdWO0RDXrjlKqTIVSPaEJezyNpIPIhR+SMCPqRDB5hvEk9YYhMuU1fRyGtflo
-         kAD4EUmafsvhb/0WiRGprbXw98oSP6N9sVPFRyggPBHKFPaSkIkMygaKNYF+M0gWnoMy
-         0iFg==
-X-Gm-Message-State: AOAM532j4o7as7k1J3x3TsP1XYfl8PADPxY//qUymMwSrsojwwi2CoRI
-	ivbUtlxOXhY4dO3zwwwcBIzQC2KUDnKtkmdN
-X-Google-Smtp-Source: ABdhPJzVIWTavv7e4P96hbcWpy8fJavmXyUXpa6MvRmY0CIrE7G5uEhwphV+9dIOp5h7oaSGYGQBNw==
-X-Received: by 2002:a05:6512:31d3:: with SMTP id j19mr6135954lfe.495.1612649173390;
-        Sat, 06 Feb 2021 14:06:13 -0800 (PST)
+        bh=IvCnNPgB18FaJ5KYtB+wIpSWoD/porhVcVpAwc6sAow=;
+        b=CtIZ4UPT28ypfNO9y3JRnN1nT/j4Xp5PxpPSOTvVaqlVKrKOh0E1jA5y84Z9of7a6n
+         vIVFaFdEhOGFZ2+C/idfBmEMux2Fcc53UmKDPPUGF3HHGjbDNmws3BtevOKE3C6eR11B
+         JsToQ4nudKE3WiBEHpYOnzA1JsksH33CfeySQBS+oic7pTvwm8jte5uuJU6+vQGSAR8U
+         AaT7p1ttyIg4MC2zFdmfRFQNlJxZQqn21NwLzxny7SP8a2eoprk3FO+olL9JlRZYzrmR
+         jLrKHisD5nrRYW344GK5+GIbQ/2tgUN6HSOfxKAk3uyGd8yV0X41J+MtcVs24hMwacaH
+         pr9g==
+X-Gm-Message-State: AOAM530ujPGwD0BODiTiWlKjDuWxL+obazZZWdguIWC4QWmEmy5iGrrv
+	EPkG5AuEUTs0espDLQByrUuN2TazU2/6YlTS
+X-Google-Smtp-Source: ABdhPJwnSo69zTmpeCe7D61yA0DRp72Q0xIkmc2QBASQgvKB7aBRSsG7BX6eoMti9Fx63k5Ev6ByRg==
+X-Received: by 2002:ac2:5e81:: with SMTP id b1mr6152127lfq.473.1612649447913;
+        Sat, 06 Feb 2021 14:10:47 -0800 (PST)
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id x14sm1448688lfg.165.2021.02.06.14.06.12
+        by smtp.gmail.com with ESMTPSA id w16sm1452877lfq.181.2021.02.06.14.10.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 06 Feb 2021 14:06:12 -0800 (PST)
+        Sat, 06 Feb 2021 14:10:47 -0800 (PST)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-networking][PATCH] atftp: update to 0.7.4
-Date: Sat,  6 Feb 2021 23:06:07 +0100
-Message-Id: <20210206220607.3969325-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-networking][PATCH] kronosnet: update 1.20
+Date: Sat,  6 Feb 2021 23:10:45 +0100
+Message-Id: <20210206221045.4045058-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../recipes-daemons/atftp/{atftp_0.7.2.bb => atftp_0.7.4.bb}    | 2 +-
+ .../kronosnet/{kronosnet_1.18.bb => kronosnet_1.20.bb}          | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-daemons/atftp/{atftp_0.7.2.bb => atftp_0.7.4.bb} (97%)
+ rename meta-networking/recipes-extended/kronosnet/{kronosnet_1.18.bb => kronosnet_1.20.bb} (96%)
 
-diff --git a/meta-networking/recipes-daemons/atftp/atftp_0.7.2.bb b/meta-networking/recipes-daemons/atftp/atftp_0.7.4.bb
-similarity index 97%
-rename from meta-networking/recipes-daemons/atftp/atftp_0.7.2.bb
-rename to meta-networking/recipes-daemons/atftp/atftp_0.7.4.bb
-index ff9084dbf..76a9e144e 100644
---- a/meta-networking/recipes-daemons/atftp/atftp_0.7.2.bb
-+++ b/meta-networking/recipes-daemons/atftp/atftp_0.7.4.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://packages.debian.org/atftp"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-networking/recipes-extended/kronosnet/kronosnet_1.18.bb b/meta-networking/recipes-extended/kronosnet/kronosnet_1.20.bb
+similarity index 96%
+rename from meta-networking/recipes-extended/kronosnet/kronosnet_1.18.bb
+rename to meta-networking/recipes-extended/kronosnet/kronosnet_1.20.bb
+index 7b1dfc241..a468a9ab6 100644
+--- a/meta-networking/recipes-extended/kronosnet/kronosnet_1.18.bb
++++ b/meta-networking/recipes-extended/kronosnet/kronosnet_1.20.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING.applications;md5=751419260aa954499f7abaabaa88
+ SECTION = "libs"
+ DEPENDS = "doxygen-native libqb-native libxml2-native bzip2 libqb libxml2 libnl lksctp-tools lz4 lzo openssl nss xz zlib zstd"
  
--SRCREV = "52b71f0831dcbde508bd3a961d84abb80a62480f"
-+SRCREV = "e56e8845f1070e89a4a6e509396b681688d03793"
+-SRCREV = "e1f3d4fb4906a26bf155a0e3fff2b6cb02be4dd2"
++SRCREV = "b8d18c8360fd39cb04748e8bc1ee26de4afa4cbd"
+ SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1"
  
- SRC_URI = "git://git.code.sf.net/p/atftp/code \
-            file://atftpd.init \
+ UPSTREAM_CHECK_URI = "https://github.com/kronosnet/kronosnet/releases"
 -- 
 2.25.1
 
