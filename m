@@ -1,250 +1,83 @@
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
- by mx.groups.io with SMTP id smtpd.web11.9251.1612632454384117120
+Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com [209.85.208.196])
+ by mx.groups.io with SMTP id smtpd.web12.9445.1612633320192436066
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Feb 2021 09:27:34 -0800
+ Sat, 06 Feb 2021 09:42:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=YOBlfqYl;
- spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f182.google.com with SMTP id g3so5205674plp.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Feb 2021 09:27:34 -0800 (PST)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=TqAnU1wJ;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.196, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f196.google.com with SMTP id c18so11174275ljd.9
+        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Feb 2021 09:41:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
+        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=1I4YcatVQPh3BmwuQddE+9zcVrvO9Jbxe0pzAtIkTAE=;
-        b=YOBlfqYlEYtGAereh9jx1Uu2vqXYnqlpM3LOMQePjp1k5VhSdqwxabGowaTfWLoMwn
-         UioDvj3EqB1eUyo318In68UOhjPkkixIVeupT0jNg6KhsJ2exb3r9SSqT2N9SpBbxEM1
-         cUb5Ai/7DIpoQWQ0H7Ig1U/c3f97f0J+fA7w8n6Splzq1xHS/j/oHDz4ozQw0UXn3cG9
-         MGZb8cPbuFA8qdPBl7sBgb/HXNJk5cmv/+bKdmxi+Q+TeSkayvg8hbv8BrXyTpe6XYQw
-         bDffzp57jYm5URiOGV9z8lyeyId89e3qCwI+itSwdlJXvDkW8wYE8S6hnbSnk6VV0Zad
-         4y6Q==
+        bh=8aPBu83CfOsRH8JSODEtEMIt3lV6tIGYdhiaA5Zyzgw=;
+        b=TqAnU1wJHYymxKqcY00IoDD7HwTIOwPcsLwN5/vHGpvgeYQxdjnKLq9TR2eLoZ1u8X
+         txoydExiGdpqIo2bKQlut7Jw7fAbkrER+D3/r/xi6ePHyioAE2M516CJhwqvz6/V3hic
+         FqubxMqQi7Z03j+IxB0gXVPTdIQGTN2xiGXZXLEq3hWXtrna0P94Ouag56YpswYY2/J8
+         tEpphoNcsQcbcG3r2z/Ejzp/qZOfyg6eeFDU+A96UyeXVoyaNVLKeug9CldCTCBt6ovv
+         jNj5b0jvpV7JvpnKetSicn1UhqbkOMRRBvtJAyMUdGk2+ljecKxOo+kB3viotD7louSW
+         2YSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=1I4YcatVQPh3BmwuQddE+9zcVrvO9Jbxe0pzAtIkTAE=;
-        b=C9kyNaKsx2042440DZobtQXHJGPfO/QmLeGRJS4+2q+RNA16phtYzfwn49TqI4XOiQ
-         YbrejMKscf9HFLRnVGzFSK713S2VTqdD4kRWQ2/K0/deRsGw+tjli3r0mAuc0HbBG9jv
-         FjcKkMfrmGx6MJTwc4MJgHm4IroQ28ghF85mwq1jvfboN9u5UzIMnK+ua1tnjr10PtOj
-         dSwFSCqfeqr76KRNFYhv/d0d0f80+NRqN5dQZQ06mYIoJCcAEwVbfTomKfFUBQYmqCOt
-         yWMTpGeH1RDw62iK/x+O8z/PFI7eZhQoBviKJlRtG5fh25pvDgM+jdstC/8xrd8ERgnu
-         oKBw==
-X-Gm-Message-State: AOAM530fVKSi9MDiH72EY6RkCKePTBPTIVrOJ2XbdlZ97SwDIK2jM22k
-	iXC8HEuSrAxoCtXhMXUj2GAKzFcJ5CYDVQ==
-X-Google-Smtp-Source: ABdhPJxORYD3ZeRZ/Z0W2G+D2R0Tke5mTRn0gf+qm3vqdKN5Wus4UCB6B+BY8F0puCLvvTy2hHBXdw==
-X-Received: by 2002:a17:902:bb90:b029:df:bdbb:be99 with SMTP id m16-20020a170902bb90b02900dfbdbbbe99mr9030682pls.52.1612632453388;
-        Sat, 06 Feb 2021 09:27:33 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::d188])
-        by smtp.gmail.com with ESMTPSA id c84sm1815807pfb.16.2021.02.06.09.27.32
+        bh=8aPBu83CfOsRH8JSODEtEMIt3lV6tIGYdhiaA5Zyzgw=;
+        b=Ht242hbWHK+InlepSq2n92TvhxXEcq08KYfJcr6lbAJUhZlPZljneyDG4tQUpkKyju
+         TDXg5s9ZJzf3cRAFfCEvKcr073RRW9GFmM89UgHE/ziI4e2hhgT41EcM1NXX8qDQxn9S
+         8ESN5b4yeaxg+53/L14t75LrT7vO15NVbZ4CSj0t8PEYj3NtY6SEPPizn59HXaOMTCt0
+         572uIivqC++AMR+d/7jGV5c5X4P56bYj3IQ6DmBb87dCJJdcDxXFyUkGqp2df7c11teD
+         tcKDCGnREf1FoSV7+7FKKTINT4m5d0RkYPuh45ENE81XV33+s2IneGCwFWd2WIxtlnf5
+         mvmg==
+X-Gm-Message-State: AOAM532qQ6/X+lSjbIInsGC3ROJD6kPnufSIuC1OxYQmVwkMSaQ6xUEV
+	XZH3Xzru4uIthQGtMVQd5hBjSfLI5+mzBSLy
+X-Google-Smtp-Source: ABdhPJzVmQmZ44dwidq/ROHOq3GhsI5r3PhIP5HIXstFcj0XvUkybwPuNSq57tgmpTlQJJs1ZxdXew==
+X-Received: by 2002:a2e:7218:: with SMTP id n24mr5716238ljc.458.1612633317930;
+        Sat, 06 Feb 2021 09:41:57 -0800 (PST)
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
+        by smtp.gmail.com with ESMTPSA id u6sm1374604lji.92.2021.02.06.09.41.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 06 Feb 2021 09:27:32 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
+        Sat, 06 Feb 2021 09:41:57 -0800 (PST)
+From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] glm: Upgrade to 0.9.9.8
-Date: Sat,  6 Feb 2021 09:27:30 -0800
-Message-Id: <20210206172730.4113445-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.0
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-oe] cereal: update to 1.3.0
+Date: Sat,  6 Feb 2021 18:41:55 +0100
+Message-Id: <20210206174155.2670243-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Drop patch which is already applied in this release
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- ...t-float-conversion-warnings-with-cla.patch | 158 ------------------
- .../glm/{glm_0.9.9.6.bb => glm_0.9.9.8.bb}    |   3 +-
- 2 files changed, 1 insertion(+), 160 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/glm/glm/0001-Fix-Wimplicit-int-float-conversion-warnings-with-cla.patch
- rename meta-oe/recipes-graphics/glm/{glm_0.9.9.6.bb => glm_0.9.9.8.bb} (91%)
+ .../cereal/{cereal_1.0.bb => cereal_1.3.0.bb}                 | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/cereal/{cereal_1.0.bb => cereal_1.3.0.bb} (92%)
 
-diff --git a/meta-oe/recipes-graphics/glm/glm/0001-Fix-Wimplicit-int-float-conversion-warnings-with-cla.patch b/meta-oe/recipes-graphics/glm/glm/0001-Fix-Wimplicit-int-float-conversion-warnings-with-cla.patch
-deleted file mode 100644
-index 2eb50a5a3a..0000000000
---- a/meta-oe/recipes-graphics/glm/glm/0001-Fix-Wimplicit-int-float-conversion-warnings-with-cla.patch
-+++ /dev/null
-@@ -1,158 +0,0 @@
--From 461861cd2e34294830b121db834c05ff39424f6f Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 27 Dec 2019 18:42:51 -0800
--Subject: [PATCH] Fix Wimplicit-int-float-conversion warnings with clang 10+
--
--This is a new warning in clang which will be available in clang 10
--onwards
--
--Fixes
--error: implicit conversion from 'const int' to 'float' may lose precision [-Werror,-Wimplicit-int-float-conversion]
--
--Upstream-Status: Submitted [https://github.com/g-truc/glm/pull/986]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- glm/gtx/scalar_multiplication.hpp  |  2 +-
-- test/gtx/gtx_fast_trigonometry.cpp | 32 +++++++++++++++---------------
-- 2 files changed, 17 insertions(+), 17 deletions(-)
--
--diff --git a/glm/gtx/scalar_multiplication.hpp b/glm/gtx/scalar_multiplication.hpp
--index f391f8de..496ba193 100644
----- a/glm/gtx/scalar_multiplication.hpp
--+++ b/glm/gtx/scalar_multiplication.hpp
--@@ -54,7 +54,7 @@ namespace glm
-- 	template<typename T> \
-- 	return_type_scalar_multiplication<T, Vec> \
-- 	operator/(Vec lh, T const& s){ \
---		return lh *= 1.0f / s; \
--+		return lh *= 1.0f / static_cast<float>(s); \
-- 	}
-- 
-- GLM_IMPLEMENT_SCAL_MULT(vec2)
--diff --git a/test/gtx/gtx_fast_trigonometry.cpp b/test/gtx/gtx_fast_trigonometry.cpp
--index f3bf17bf..f3c4e957 100644
----- a/test/gtx/gtx_fast_trigonometry.cpp
--+++ b/test/gtx/gtx_fast_trigonometry.cpp
--@@ -239,12 +239,12 @@ namespace taylorCos
-- 		std::vector<glm::vec4> Results;
-- 		Results.resize(Samples);
-- 
---		float Steps = (End - Begin) / Samples;
--+		float Steps = (End - Begin) / float(Samples);
-- 
-- 		std::clock_t const TimeStampBegin = std::clock();
-- 
-- 		for(std::size_t i = 0; i < Samples; ++i)
---			Results[i] = fastCosNew(AngleShift + glm::vec4(Begin + Steps * i));
--+			Results[i] = fastCosNew(AngleShift + glm::vec4(Begin + Steps * float(i)));
-- 
-- 		std::clock_t const TimeStampEnd = std::clock();
-- 
--@@ -280,12 +280,12 @@ namespace taylorCos
-- 		std::vector<glm::vec4> Results;
-- 		Results.resize(Samples);
-- 
---		float Steps = (End - Begin) / Samples;
--+		float Steps = (End - Begin) / float(Samples);
-- 
-- 		std::clock_t const TimeStampBegin = std::clock();
-- 
-- 		for(std::size_t i = 0; i < Samples; ++i)
---			Results[i] = taylorCos::fastCosDeterminisctic(AngleShift + glm::vec4(Begin + Steps * i));
--+			Results[i] = taylorCos::fastCosDeterminisctic(AngleShift + glm::vec4(Begin + Steps * float(i)));
-- 
-- 		std::clock_t const TimeStampEnd = std::clock();
-- 
--@@ -327,12 +327,12 @@ namespace taylorCos
-- 		std::vector<glm::vec4> Results;
-- 		Results.resize(Samples);
-- 
---		float Steps = (End - Begin) / Samples;
--+		float Steps = (End - Begin) / float(Samples);
-- 
-- 		std::clock_t const TimeStampBegin = std::clock();
-- 
-- 		for(std::size_t i = 0; i < Samples; ++i)
---			Results[i] = taylorCos::fastRefCos(AngleShift + glm::vec4(Begin + Steps * i));
--+			Results[i] = taylorCos::fastRefCos(AngleShift + glm::vec4(Begin + Steps * float(i)));
-- 
-- 		std::clock_t const TimeStampEnd = std::clock();
-- 
--@@ -349,12 +349,12 @@ namespace taylorCos
-- 		std::vector<glm::vec4> Results;
-- 		Results.resize(Samples);
-- 
---		float Steps = (End - Begin) / Samples;
--+		float Steps = (End - Begin) / float(Samples);
-- 
-- 		std::clock_t const TimeStampBegin = std::clock();
-- 
-- 		for(std::size_t i = 0; i < Samples; ++i)
---			Results[i] = glm::fastCos(AngleShift + glm::vec4(Begin + Steps * i));
--+			Results[i] = glm::fastCos(AngleShift + glm::vec4(Begin + Steps * float(i)));
-- 
-- 		std::clock_t const TimeStampEnd = std::clock();
-- 
--@@ -371,12 +371,12 @@ namespace taylorCos
-- 		std::vector<glm::vec4> Results;
-- 		Results.resize(Samples);
-- 
---		float Steps = (End - Begin) / Samples;
--+		float Steps = (End - Begin) / float(Samples);
-- 
-- 		std::clock_t const TimeStampBegin = std::clock();
-- 
-- 		for(std::size_t i = 0; i < Samples; ++i)
---			Results[i] = glm::cos(AngleShift + glm::vec4(Begin + Steps * i));
--+			Results[i] = glm::cos(AngleShift + glm::vec4(Begin + Steps * float(i)));
-- 
-- 		std::clock_t const TimeStampEnd = std::clock();
-- 
--@@ -466,12 +466,12 @@ namespace taylor2
-- 		std::vector<float> Results;
-- 		Results.resize(Samples);
-- 
---		float Steps = (End - Begin) / Samples;
--+		float Steps = (End - Begin) / float(Samples);
-- 
-- 		std::clock_t const TimeStampBegin = std::clock();
-- 
-- 		for(std::size_t i = 0; i < Samples; ++i)
---			Results[i] = taylorCosA(AngleShift.x + Begin + Steps * i);
--+			Results[i] = taylorCosA(AngleShift.x + Begin + Steps * float(i));
-- 
-- 		std::clock_t const TimeStampEnd = std::clock();
-- 
--@@ -488,12 +488,12 @@ namespace taylor2
-- 		std::vector<float> Results;
-- 		Results.resize(Samples);
-- 
---		float Steps = (End - Begin) / Samples;
--+		float Steps = (End - Begin) / float(Samples);
-- 
-- 		std::clock_t const TimeStampBegin = std::clock();
-- 
-- 		for(std::size_t i = 0; i < Samples; ++i)
---			Results[i] = taylorCosB(AngleShift.x + Begin + Steps * i);
--+			Results[i] = taylorCosB(AngleShift.x + Begin + Steps * float(i));
-- 
-- 		std::clock_t const TimeStampEnd = std::clock();
-- 
--@@ -510,12 +510,12 @@ namespace taylor2
-- 		std::vector<float> Results;
-- 		Results.resize(Samples);
-- 
---		float Steps = (End - Begin) / Samples;
--+		float Steps = (End - Begin) / float(Samples);
-- 
-- 		std::clock_t const TimeStampBegin = std::clock();
-- 
-- 		for(std::size_t i = 0; i < Samples; ++i)
---			Results[i] = taylorCosC(AngleShift.x + Begin + Steps * i);
--+			Results[i] = taylorCosC(AngleShift.x + Begin + Steps * float(i));
-- 
-- 		std::clock_t const TimeStampEnd = std::clock();
-- 
---- 
--2.24.1
--
-diff --git a/meta-oe/recipes-graphics/glm/glm_0.9.9.6.bb b/meta-oe/recipes-graphics/glm/glm_0.9.9.8.bb
-similarity index 91%
-rename from meta-oe/recipes-graphics/glm/glm_0.9.9.6.bb
-rename to meta-oe/recipes-graphics/glm/glm_0.9.9.8.bb
-index e2f4dbebc5..bd3d834567 100644
---- a/meta-oe/recipes-graphics/glm/glm_0.9.9.6.bb
-+++ b/meta-oe/recipes-graphics/glm/glm_0.9.9.8.bb
-@@ -10,13 +10,12 @@ LIC_FILES_CHKSUM = "file://copying.txt;md5=4a735e33f271f57404fda17e80085411"
- 
- SRC_URI = " \
-     git://github.com/g-truc/glm;branch=master \
--    file://0001-Fix-Wimplicit-int-float-conversion-warnings-with-cla.patch \
-     file://glmConfig.cmake.in \
-     file://glmConfigVersion.cmake.in \
-     file://glm.pc.in \
-     file://glmTargets.cmake \
+diff --git a/meta-oe/recipes-devtools/cereal/cereal_1.0.bb b/meta-oe/recipes-devtools/cereal/cereal_1.3.0.bb
+similarity index 92%
+rename from meta-oe/recipes-devtools/cereal/cereal_1.0.bb
+rename to meta-oe/recipes-devtools/cereal/cereal_1.3.0.bb
+index dd3dc189d..a4b7f3432 100644
+--- a/meta-oe/recipes-devtools/cereal/cereal_1.0.bb
++++ b/meta-oe/recipes-devtools/cereal/cereal_1.3.0.bb
+@@ -18,7 +18,7 @@ SRC_URI = " \
+     file://0001-add-license-files-for-components-of-cereal.patch \
  "
--SRCREV = "4db8f89aace8f04c839b606e15b39fb8383ec732"
-+SRCREV = "bf71a834948186f4097caa076cd2663c69a10e1e"
  
- S = "${WORKDIR}/git"
+-SRCREV = "48fda3f0a6b58f9a9278ec15c15e7b7c3dceeceb"
++SRCREV = "02eace19a99ce3cd564ca4e379753d69af08c2c8"
  
+ EXTRA_OECMAKE += "\
+     -DCEREAL_INSTALL=TRUE \
+@@ -32,5 +32,5 @@ PROVIDES += "${PN}-dev"
+ FILES_${PN}-dev = " \
+     ${includedir} \
+     ${libdir} \
++    ${datadir}/cmake \
+ "
+-
 -- 
-2.30.0
+2.25.1
 
