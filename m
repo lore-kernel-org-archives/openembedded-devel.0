@@ -1,80 +1,83 @@
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web12.13898.1612653438161939245
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
+ by mx.groups.io with SMTP id smtpd.web11.13704.1612653439029061279
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Feb 2021 15:17:18 -0800
+ Sat, 06 Feb 2021 15:17:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=W49gRiBO;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id k22so1142629pll.6
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=FHchcdQU;
+ spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f182.google.com with SMTP id d26so5707167pfn.5
         for <openembedded-devel@lists.openembedded.org>; Sat, 06 Feb 2021 15:17:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=Mu11dPHWCCjmnha3Uv9U8mpnGxhSAudvWTZzGIdQLyU=;
-        b=W49gRiBOQ0Uz+Wap71yujGnBixedXAz2MPn/wWmr8kOtvzhwDYbqn43BUFm1IL4nVZ
-         nZpM/PiqxMnzVLhDwOcYxxiBrl/LX6s8vLjC6KoZjc2CmLPNIlo3A4UF3rGMtixvXaaz
-         jnAFC4CLYO8UNSKs0dt8/m1gijK4w8W5VNo972dodRk2OYkW2L2EfOJHUZSj214mJq9Q
-         ngUGAP/Vrl5EdS/y7CFjqwC8qLSO6NofZsVlVwraMJgahPBCxcNUz57rXuKWn2ajAzHb
-         4hujHdUJZSyTlFM9fqvoexm1daPfo2wDWBV9/MSvH7/hpt3dJwQhnvSSVL5m+IZr0R0U
-         iSzA==
+        h=from:to:subject:date:message-id:in-reply-to:references;
+        bh=Zbz5lqDrLY7Nkfz/rbDcbcZ8YzpAw3bx+T/785DIfj0=;
+        b=FHchcdQU5AN0el/XEQXsLb2CzJra5QrPPi2UXTzKgbe0P4v9jSBcyfNFHrzMhOHOYL
+         1sTrWBkG3fYBCCOWWoyw0ZqdT76LJQPYDXrognUJkeA0+vpmzP+Imx9ajU80yJHwBs/J
+         /zc3ylV2yxnqGcKME+CowFGQIP3TjipDpxpO3GPh6Ers7TrG7GW39Pk+u0V3ytneBBiK
+         LiF1Y2ervjahOaxnH7/X/NHdWfLyWfvQo0SD4KP/0Qj1zteDFNpm4JPea53CTKzFTdlu
+         Wu7fgEvjnpQ6NXumcnei/cCgb3wXXZ1vMBOmgaFML8/FhCiFQTFRrdTnZqlV1cniZAP7
+         48+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=Mu11dPHWCCjmnha3Uv9U8mpnGxhSAudvWTZzGIdQLyU=;
-        b=CZET5AlGQgxFCqWC8p500KdYDwN6ORFfM+VhNMtelpqj+LPzXNfS+98fqze4srwA9L
-         2mwxZe6ITlfOszRtIGr1R+b9uUsqtM4CryOiKtNQsz7PW9xHc+JPi5SJWKzx18xKn+G8
-         maN8THQ6DYDh8V7NUK8U/9NyGlBtfcURaATTU3sCxSDTxsUmH6XqIi72fAX2HkBjmj4s
-         vdfxH0OqxtF4nfvBqnNAMu1JcWDEU4Z+HSNenEQz9fdz7QuQ8p1ZDaPyEpWgOriwTV+t
-         +1ThucD8vru9uhRA+3R4AlqQKAk0LgZL8zNknjfF5mKweAbclt6kE9b/xL0QO0JAr/Q5
-         pFlQ==
-X-Gm-Message-State: AOAM532tgU+gXdDu2vvVoBt4jD44jcX5WMQQz6jCBqj1BlcZAdFaq2LY
-	Ix3ksbt6OlS3IiMsosZtpw5qlGze7ahhRA==
-X-Google-Smtp-Source: ABdhPJycHKJTAxfnZXoVjj6ywQJKEcVwpxwt7Wlg159suUWuG0QW7rAMGf5rV8XnpF26ivukc9B6Og==
-X-Received: by 2002:a17:90a:8d09:: with SMTP id c9mr10438241pjo.92.1612653437635;
-        Sat, 06 Feb 2021 15:17:17 -0800 (PST)
+         :references;
+        bh=Zbz5lqDrLY7Nkfz/rbDcbcZ8YzpAw3bx+T/785DIfj0=;
+        b=hb5HUqj1s6+4uKR5Cgpk31g0QswYnlDg2v5YjTi3C9qcBb/Fdj5TI2ez9DCCm29TNC
+         rC+8O/WuJnlCq1LacoyITL/Bwz16/EB/rNZSqIutoAl34HRXAyxcLrTyTYCMQqFBWHUe
+         z/bOW14WQBCjGLM6odHE9xLR8PtRroc9+Sj0QAEZX/nOirkfgd7jPJxys9QdspojxfUo
+         VXacy4fzr1DOt7S3DhwDIxoBrBAhevEnqMg52ikavkODXtabi8ra7Jqy+FYyJi2FoXtI
+         ksvZfwodTp+Xkm3tuK7HI8kSloP+bw+aiEN0hQZo5ndGurTpQhGzBiW6Y+nb7hqxCMxo
+         FCPw==
+X-Gm-Message-State: AOAM531httYjzgYKp7ljZlYbpin5TJ7WxiIvke9wXru/xhiSZ8T6WETB
+	AvPU9ARhkcS8v71tU61fPMW5tg8uV6H2Ug==
+X-Google-Smtp-Source: ABdhPJwfXQJGU2FyzLXWuAnElTiarwE16fUBSclgIpB0hdirHxaOt50D8tDUx9NxSn+5nbCh/Eu0/w==
+X-Received: by 2002:a65:55c4:: with SMTP id k4mr11301722pgs.435.1612653438426;
+        Sat, 06 Feb 2021 15:17:18 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:c5c4:f80e:4f44:b02e])
-        by smtp.gmail.com with ESMTPSA id b65sm14331882pfg.3.2021.02.06.15.17.16
+        by smtp.gmail.com with ESMTPSA id b65sm14331882pfg.3.2021.02.06.15.17.17
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 06 Feb 2021 15:17:17 -0800 (PST)
+        Sat, 06 Feb 2021 15:17:18 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgargh 08/10] zram: fix sourcing of zram parameters
-Date: Sat,  6 Feb 2021 15:17:04 -0800
-Message-Id: <bdb79efaba481b2d9807eab59df04fb67e5277dd.1612652802.git.akuster808@gmail.com>
+Subject: [gatesgargh 09/10] openldap: upgrade 2.4.51 -> 2.4.56
+Date: Sat,  6 Feb 2021 15:17:05 -0800
+Message-Id: <e615c6fceff7275d93e462f4cd4a14cc55b2d656.1612652802.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1612652802.git.akuster808@gmail.com>
 References: <cover.1612652802.git.akuster808@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-From: Søren Andersen <san@skov.dk>
+From: zangrc <zangrc.fnst@cn.fujitsu.com>
 
-Signed-off-by: Søren Andersen <san@skov.dk>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 3c8ad9192c1c9f4323bdc7ff28456f11db689adb)
-Signed-off-by: Ulrich Ölmann <u.oelmann@pengutronix.de>
+(cherry picked from commit 768345053e83623e286ce3140756036e75c023bc)
+[Maintenance update only]
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-extended/zram/zram/zram-swap-init | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../openldap/{openldap_2.4.51.bb => openldap_2.4.56.bb}       | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/openldap/{openldap_2.4.51.bb => openldap_2.4.56.bb} (98%)
 
-diff --git a/meta-oe/recipes-extended/zram/zram/zram-swap-init b/meta-oe/recipes-extended/zram/zram/zram-swap-init
-index 0643dbca23..ccc3aafe3a 100755
---- a/meta-oe/recipes-extended/zram/zram/zram-swap-init
-+++ b/meta-oe/recipes-extended/zram/zram/zram-swap-init
-@@ -14,7 +14,7 @@ fi
- ZRAM_SIZE_PERCENT=100
- ZRAM_ALGORITHM=lz4
+diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.51.bb b/meta-oe/recipes-support/openldap/openldap_2.4.56.bb
+similarity index 98%
+rename from meta-oe/recipes-support/openldap/openldap_2.4.51.bb
+rename to meta-oe/recipes-support/openldap/openldap_2.4.56.bb
+index d2c5746080..4c0f179cb0 100644
+--- a/meta-oe/recipes-support/openldap/openldap_2.4.51.bb
++++ b/meta-oe/recipes-support/openldap/openldap_2.4.56.bb
+@@ -25,8 +25,8 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
+     file://remove-user-host-pwd-from-version.patch \
+ "
  
--[ -f /etc/default/zram ] && ./etc/default/zram || true
-+[ -f /etc/default/zram ] && . /etc/default/zram || true
+-SRC_URI[md5sum] = "0d2025896cf1c17af7304ecc57ec9531"
+-SRC_URI[sha256sum] = "f490775ea4c6506b7210ee55a102c8f4aacfe9d1c8eaa633c7316d33a714be62"
++SRC_URI[md5sum] = "82a7dcf7aeaf95fdad16017c0ed9983a"
++SRC_URI[sha256sum] = "25520e0363c93f3bcb89802a4aa3db33046206039436e0c7c9262db5a61115e0"
  
- memtotal=$(grep MemTotal /proc/meminfo | awk ' { print $2 } ')
- memzram=$(($memtotal*${ZRAM_SIZE_PERCENT}/100))
+ DEPENDS = "util-linux groff-native"
+ 
 -- 
 2.17.1
 
