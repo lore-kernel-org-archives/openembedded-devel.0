@@ -1,76 +1,76 @@
-Received: from mail-lf1-f66.google.com (mail-lf1-f66.google.com [209.85.167.66])
- by mx.groups.io with SMTP id smtpd.web09.12954.1612649449883544098
+Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com [209.85.167.65])
+ by mx.groups.io with SMTP id smtpd.web11.12948.1612649550637216069
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Feb 2021 14:10:50 -0800
+ Sat, 06 Feb 2021 14:12:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=Uh3sOBDz;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.66, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f66.google.com with SMTP id h7so16199949lfc.6
-        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Feb 2021 14:10:49 -0800 (PST)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=hetrpY4q;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.65, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f65.google.com with SMTP id q12so16129051lfo.12
+        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Feb 2021 14:12:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=IvCnNPgB18FaJ5KYtB+wIpSWoD/porhVcVpAwc6sAow=;
-        b=Uh3sOBDzyJBpWgFRQGcYuo3yZDKxrSwbAvax+xgWFTJQF2Im4OlyX+ivfnCkzHjIAc
-         e6jVYqiPBf5XYPT+plR/uHq8TrN1InMHhsoZtfiKjbcROVB72oYtUgbqdC1VZxpj8p4h
-         60ehamM2JJgwH1b5pThnISVsFYuafDjVQ1cUqbaAZIbJLLFuaRFvLGnWaoIGmjXOUUrV
-         IyQt7BDRIPDHOgpQAN9GWqnL1866zbJ1azzVV/bncfyZkTFV8xC6O/pC0ByQ5ZYjdokj
-         ul9KvuFsPVhqGtvT+gY4ZFoBHYe40Biogf4JkdxfBAxwxp3ij8v3jQqQCaunB6uRndWT
-         hz+g==
+        bh=JKNh9c2oyN2wEVdgPaSGw8NwdrZwo7F+L5iFrDsVZA4=;
+        b=hetrpY4q5DwvMVGHSe82s8qBxJmca7PcDAr/a1suR2wN4sSx0KPBV8H4mK8XgD2Ye9
+         FEWXxzYvtKqiAppvvq3sQ9ojeCc9+83hqFyaHl/7TSTKmO8mU/bOox0Ql3PByy0RnGVI
+         LgjFURiPPoEMifioPEl5T6aljv0R8c8qNgL4aagPFKceOSeULvNgwNUUAT9HdBgFNW4u
+         DgOKl25SMv37F2ahfbjpD3/ziFzs7yMZ5QyYG5Nl777ZVkLsw+e5vGF8RB8fADvw7QAJ
+         7vBo8tvabs+qIFWRUnZVgKtmmor6blpLysOR5z5m2V1hSDA1AhIHsWk6kTVQaxq05p2/
+         gipg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=IvCnNPgB18FaJ5KYtB+wIpSWoD/porhVcVpAwc6sAow=;
-        b=CtIZ4UPT28ypfNO9y3JRnN1nT/j4Xp5PxpPSOTvVaqlVKrKOh0E1jA5y84Z9of7a6n
-         vIVFaFdEhOGFZ2+C/idfBmEMux2Fcc53UmKDPPUGF3HHGjbDNmws3BtevOKE3C6eR11B
-         JsToQ4nudKE3WiBEHpYOnzA1JsksH33CfeySQBS+oic7pTvwm8jte5uuJU6+vQGSAR8U
-         AaT7p1ttyIg4MC2zFdmfRFQNlJxZQqn21NwLzxny7SP8a2eoprk3FO+olL9JlRZYzrmR
-         jLrKHisD5nrRYW344GK5+GIbQ/2tgUN6HSOfxKAk3uyGd8yV0X41J+MtcVs24hMwacaH
-         pr9g==
-X-Gm-Message-State: AOAM530ujPGwD0BODiTiWlKjDuWxL+obazZZWdguIWC4QWmEmy5iGrrv
-	EPkG5AuEUTs0espDLQByrUuN2TazU2/6YlTS
-X-Google-Smtp-Source: ABdhPJwnSo69zTmpeCe7D61yA0DRp72Q0xIkmc2QBASQgvKB7aBRSsG7BX6eoMti9Fx63k5Ev6ByRg==
-X-Received: by 2002:ac2:5e81:: with SMTP id b1mr6152127lfq.473.1612649447913;
-        Sat, 06 Feb 2021 14:10:47 -0800 (PST)
+        bh=JKNh9c2oyN2wEVdgPaSGw8NwdrZwo7F+L5iFrDsVZA4=;
+        b=KThax2O60Hl5lCdNmHaUeAf6YKj0swPgvR4AZ/oOcws5Fc9VRGL7SVe0DMjFC/a2C7
+         rYbO4rw1sc3Ybc8BX9O5D7Tw4Y+42EHvCwsnkc6+itDvlzvo1HkzXSfLg10IT3r3U5fY
+         ODNgfndy05l1M6Sfwpyw7hGMpddU1PgrU76Mi9g/k0LN7Vk/HnYYIR8XHcqy371i7iyT
+         fr96n5Gtr1GoEjxPyPnd9ZvCjhQF5wpHne7uXo9mLV7pFebxH9l8mnXGt1A4UjaMtTwr
+         Flionze+rf+hnJRkO3aPYIfNBUDUlU3oeioU+ws6gCJhq2zYUQSf9sHscEesmzWPpiH0
+         6bQA==
+X-Gm-Message-State: AOAM530oRxtcUJaRAfuTtaYrXqeHAyHy0OLKJGMOq1IbQC+BLzkN6h0V
+	InYbD/CUrkclO1jqAKTcY0v4P/HuJZDIR/Wk
+X-Google-Smtp-Source: ABdhPJwmp7aqWfh5ffqGJ5JlKie4zKrX3VSkIclBkIjkrrv+xJjmjF+0zTklNK6IVhmcUcLT3fGFiQ==
+X-Received: by 2002:a19:6d0a:: with SMTP id i10mr6110261lfc.367.1612649548469;
+        Sat, 06 Feb 2021 14:12:28 -0800 (PST)
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id w16sm1452877lfq.181.2021.02.06.14.10.47
+        by smtp.gmail.com with ESMTPSA id o11sm1451289lfu.157.2021.02.06.14.12.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 06 Feb 2021 14:10:47 -0800 (PST)
+        Sat, 06 Feb 2021 14:12:28 -0800 (PST)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-networking][PATCH] kronosnet: update 1.20
-Date: Sat,  6 Feb 2021 23:10:45 +0100
-Message-Id: <20210206221045.4045058-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-networking][PATCH] ipset: update to 7.10
+Date: Sat,  6 Feb 2021 23:12:26 +0100
+Message-Id: <20210206221226.4052790-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../kronosnet/{kronosnet_1.18.bb => kronosnet_1.20.bb}          | 2 +-
+ .../recipes-filter/ipset/{ipset_7.9.bb => ipset_7.10.bb}        | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-extended/kronosnet/{kronosnet_1.18.bb => kronosnet_1.20.bb} (96%)
+ rename meta-networking/recipes-filter/ipset/{ipset_7.9.bb => ipset_7.10.bb} (87%)
 
-diff --git a/meta-networking/recipes-extended/kronosnet/kronosnet_1.18.bb b/meta-networking/recipes-extended/kronosnet/kronosnet_1.20.bb
-similarity index 96%
-rename from meta-networking/recipes-extended/kronosnet/kronosnet_1.18.bb
-rename to meta-networking/recipes-extended/kronosnet/kronosnet_1.20.bb
-index 7b1dfc241..a468a9ab6 100644
---- a/meta-networking/recipes-extended/kronosnet/kronosnet_1.18.bb
-+++ b/meta-networking/recipes-extended/kronosnet/kronosnet_1.20.bb
-@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING.applications;md5=751419260aa954499f7abaabaa88
- SECTION = "libs"
- DEPENDS = "doxygen-native libqb-native libxml2-native bzip2 libqb libxml2 libnl lksctp-tools lz4 lzo openssl nss xz zlib zstd"
+diff --git a/meta-networking/recipes-filter/ipset/ipset_7.9.bb b/meta-networking/recipes-filter/ipset/ipset_7.10.bb
+similarity index 87%
+rename from meta-networking/recipes-filter/ipset/ipset_7.9.bb
+rename to meta-networking/recipes-filter/ipset/ipset_7.10.bb
+index 00b98ede5..b724233ba 100644
+--- a/meta-networking/recipes-filter/ipset/ipset_7.9.bb
++++ b/meta-networking/recipes-filter/ipset/ipset_7.10.bb
+@@ -10,7 +10,7 @@ SECTION = "base"
+ DEPENDS = "libtool libmnl"
  
--SRCREV = "e1f3d4fb4906a26bf155a0e3fff2b6cb02be4dd2"
-+SRCREV = "b8d18c8360fd39cb04748e8bc1ee26de4afa4cbd"
- SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1"
+ SRC_URI = "http://ftp.netfilter.org/pub/ipset/${BP}.tar.bz2"
+-SRC_URI[sha256sum] = "b75c13689eddf1d95b396840a69dc04fd7ae4112b10b70594bc0405df7b9b30a"
++SRC_URI[sha256sum] = "b24906ba43e2fe322bd41863476761d749a4bddf5ce4c2265ba04b03bc7e9cf6"
  
- UPSTREAM_CHECK_URI = "https://github.com/kronosnet/kronosnet/releases"
+ inherit autotools pkgconfig module-base
+ 
 -- 
 2.25.1
 
