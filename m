@@ -1,109 +1,148 @@
 Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web10.13758.1612653433614588646
+ by mx.groups.io with SMTP id smtpd.web12.13897.1612653434559729681
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Feb 2021 15:17:13 -0800
+ Sat, 06 Feb 2021 15:17:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=bnAqPE1K;
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=jYzVpf8F;
  spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id u15so5535804plf.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Feb 2021 15:17:13 -0800 (PST)
+Received: by mail-pl1-f172.google.com with SMTP id x9so5521439plb.5
+        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Feb 2021 15:17:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=K4G3tgUKGR9aiqW21t6dYCu0SXay/oalN1lnc1qJzk8=;
-        b=bnAqPE1Ktor1GPyNkkBeb9chbNpBOdVEsdTXc7B0G3WlMjJB4NqfdPWalW2nnrnwRB
-         M5R02O/d76LCz+etIrF5O+9mNl9gM5jRGj6aoWtq2nNRnuAK9jM4KANXKno/fED1vSe/
-         KJvy/DJU9IQygv2r0OWKRef1sp1bpA8q9gpj2G+ApjqQKS/CslWkJrmmmUiAI2WpTUmf
-         VKH0r/cSq2mSYUTluuqXd7zxLFJA2PNOpRVKdkqmatRYrt1+Fx1RjI7Uw5JI5RCf1Ujw
-         ZgKU8QduIvPBz9X6/+uA3UUxSOXVKChUXDRszDIAmatZ9LsvZqTUoeGWU9NJj+Tg/jld
-         U8mw==
+        bh=Qoyr4huhHoT9xTWJ6MNGqHONHHM5fchsVftEg03uz/Y=;
+        b=jYzVpf8FyocllpvjsI/0ndcB1gMRnMvvtfdgGl8IZ9JUrcbyJ7LTa9BpRdNxzBoxWB
+         1GXqknXOgHwmKpVYXT4ZZCb67phj2AZK9YTMj/uRfEsNeNoXVQUvit85KYQamo+vFh51
+         uYJdy859SW/lGnyNRmwHOpzVz42q1qWUQjZmMdtwZ79gSJX+r+tbL4m3O7v4dFwZzl3a
+         yClHrBWhoR9dqBdCsKUtjmPYC5Qwpv9Bl4kPFWBc+Ny5vmvT9eVDbO1/7WN6XxoK1rdg
+         FXOsFYkTT0kuape6zKXMINiyMp82pP3TvDzJ5XqQFlrJokEyi6vTzq3OTw+3H9znO6sL
+         XWig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=K4G3tgUKGR9aiqW21t6dYCu0SXay/oalN1lnc1qJzk8=;
-        b=NvXYecX+1iBsvBAVYy4Ai9FwEp4c8Z9oCbwC3CkrafW5I+1UhLSUBJ+LHbK99niV+/
-         nR8Ow073igT41F2WUlvVW3qt8pEsW1F6ysrrEPp7T8lLamlYBntxh7u/KeZpAbzGxFwi
-         AYYIPpFWawGgxfDDDOsGDR37GfOYRbHiLFzfTGlYu4fV54yoCxK0stfB2r68d313BiZd
-         HeFhYpkbAMFJ7+uP+smZbCv7jW14mZETy3rC7gaWXe/ttIFB2TKQN1yLgFRoHS5fUtA7
-         tvbzXRjNs8lTTHiCmoaI2xkcvq7HGkQpVp7tDzvjsENPY57j5yIuO09s+xqazdDMj+cX
-         /cLA==
-X-Gm-Message-State: AOAM530Ej+GBk3/u6Hp4DfppD38pW+DcSs0ZKupxKlBQjdayVdMjNSN6
-	X/HvG8x/GhXl1nEtP87k0FVp1lIaXGn98A==
-X-Google-Smtp-Source: ABdhPJyanu55RUhqk5EB10hlUSnS00eJaLVUQxrQuW3JlQdnFzn74kBqxna+EpAz0rCBQ2gI5TDP8g==
-X-Received: by 2002:a17:90a:c006:: with SMTP id p6mr4898601pjt.18.1612653432904;
-        Sat, 06 Feb 2021 15:17:12 -0800 (PST)
+        bh=Qoyr4huhHoT9xTWJ6MNGqHONHHM5fchsVftEg03uz/Y=;
+        b=Vt0NXtsIOb7zuT5JP8ju0sdFEfU48W6t4DPIfr+cLN45O+7gWc2Ctl9ikFvXMBP7ld
+         yRNCevBiGoItIDYX16KLdPUWJK70haZ4w+QTtKAST3TkfSuro7Jgzf5choL0jsmxsffH
+         9LJZG9tIAwEhUkUORjmDOzqF/OzmrFXRmrjvlqjxNUo+1KAiEK6sZcllOuuF68c47W3s
+         5nllYNl1LxgvGW+F2zB6QOjMNSN+cT8KMbB7OVKU6XNfFpws2p3c90mYi2nhPZAdmJTl
+         irDJsGyMgIOezVSiB/XLP+cHtlrsldFCBKnPYzz/kf96m8r/nCxmO/V0hgjwLYOUGCM/
+         2Bew==
+X-Gm-Message-State: AOAM532jxCBRyU3q7jyY5cyi12+xUREWzo8jF2v5MnfQbsKVxtmGioew
+	xGOF+ogZEEbJglLjL+f7/ai3LsM9Xwh8NQ==
+X-Google-Smtp-Source: ABdhPJycww9CG7dVIDk68tCc1MKpaRsor5j4jhT2Vye6dlbjRu79C9Oudqgsm2ti3Lx163CQtdAP8g==
+X-Received: by 2002:a17:90b:4ad2:: with SMTP id mh18mr10022701pjb.137.1612653433902;
+        Sat, 06 Feb 2021 15:17:13 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:c5c4:f80e:4f44:b02e])
-        by smtp.gmail.com with ESMTPSA id b65sm14331882pfg.3.2021.02.06.15.17.12
+        by smtp.gmail.com with ESMTPSA id b65sm14331882pfg.3.2021.02.06.15.17.13
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 06 Feb 2021 15:17:12 -0800 (PST)
+        Sat, 06 Feb 2021 15:17:13 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgargh 03/10] xmlsec1: Fix configure QA error caused by host lookup path
-Date: Sat,  6 Feb 2021 15:16:59 -0800
-Message-Id: <027407dfdc5a9cdab33eb4abc5fd0da350093e84.1612652802.git.akuster808@gmail.com>
+Subject: [gatesgargh 04/10] iscsi-initiator-utils: upgrade 2.1.2 -> 2.1.3
+Date: Sat,  6 Feb 2021 15:17:00 -0800
+Message-Id: <46ea93dc423140e63257e69ff3da5aea0b72f8be.1612652802.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1612652802.git.akuster808@gmail.com>
 References: <cover.1612652802.git.akuster808@gmail.com>
 
-From: Anatol Belski <anbelski@linux.microsoft.com>
+From: zangrc <zangrc.fnst@cn.fujitsu.com>
 
-The configure script contains hardcoded lookup paths to /usr and other
-paths that might interfere with the host. These are overwritten with the
-staging dir locations for Poky compatibility.
+0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch
+Removed since this is included in 2.1.3
 
-Signed-off-by: Anatol Belski <anbelski@linux.microsoft.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 74b66d1911118bac53033f77ba6d3923f4809d5a)
+(cherry picked from commit 46e30569e3b3d0cc66ce05e9accd759f37705feb)
+[Bug fix only update. Includes several CVE fixes.
+CVE-2020-17437
+CVE-2020-17438
+CVE-2020-13987
+CVE-2020-13988 ]
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../xmlsec1/ensure-search-path-non-host.patch | 22 +++++++++++++++++++
- .../recipes-support/xmlsec1/xmlsec1_1.2.30.bb |  1 +
- 2 files changed, 23 insertions(+)
- create mode 100644 meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch
+ ...Compare-with-max-int-instead-of-max-.patch | 48 -------------------
+ ....1.2.bb => iscsi-initiator-utils_2.1.3.bb} |  3 +-
+ 2 files changed, 1 insertion(+), 50 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch
+ rename meta-networking/recipes-daemons/iscsi-initiator-utils/{iscsi-initiator-utils_2.1.2.bb => iscsi-initiator-utils_2.1.3.bb} (96%)
 
-diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch b/meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch
-new file mode 100644
-index 0000000000..a5a298af0d
---- /dev/null
-+++ b/meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch
-@@ -0,0 +1,22 @@
-+xmlsec1: Fix configure QA error caused by host lookup path
-+
-+ERROR: mc:my-sdk:xmlsec1-1.2.30-r0 do_configure: QA Issue: This autoconf log indicates errors, it looked at host include and/or library paths while determining system capabilities.
-+
-+It will eventually arise after the configure QA as the configure script should only look at the staging sysroot dir, not at the host.
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+Signed-off-by: Anatol Belski <anbelski@linux.microsoft.com>
-+
-+--- a/configure.ac.orig   2021-01-13 14:37:42.254991177 +0000
-++++ b/configure.ac        2021-01-13 14:40:56.546269330 +0000
-+@@ -250,8 +250,8 @@
-+ dnl ==========================================================================
-+ dnl Common installation locations
-+ dnl ==========================================================================
-+-COMMON_INCLUDE_DIR="/usr/include /usr/local/include"
-+-COMMON_LIB_DIR="/usr/lib /usr/lib64 /usr/local/lib"
-++COMMON_INCLUDE_DIR="${STAGING_INCDIR}"
-++COMMON_LIB_DIR="${STAGING_LIBDIR}"
-+ case $host in
-+     i*86-*-linux-gnu)   COMMON_LIB_DIR="$COMMON_LIB_DIR /usr/lib/i386-linux-gnu" ;;
-+     x86_64-*-linux-gnu) COMMON_LIB_DIR="$COMMON_LIB_DIR /usr/lib/x86_64-linux-gnu" ;;
-diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.30.bb b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.30.bb
-index 93b0d6a67f..2a74d18899 100644
---- a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.30.bb
-+++ b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.30.bb
-@@ -19,6 +19,7 @@ SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
-     file://xmlsec1-examples-allow-build-in-separate-dir.patch \
-     file://0001-nss-nspr-fix-for-multilib.patch \
-     file://run-ptest \
-+    file://ensure-search-path-non-host.patch \
-     "
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch
+deleted file mode 100644
+index c71f01299b..0000000000
+--- a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch
++++ /dev/null
+@@ -1,48 +0,0 @@
+-From 7bdaa32c80bb7d37668c1ff6d88bb02428459a0f Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 21 Oct 2020 09:11:20 -0700
+-Subject: [PATCH] libopeniscsiusr: Compare with max int instead of max long
+-
+-This compares value member of int_list_tbl struct which is of unsigned
+-int type.
+-
+-struct int_list_tbl {
+-const char *name;
+-unsigned int value;
+-};
+-
+-Clang compiler reports this comparison when
+--Wtautological-constant-out-of-range-compare is enabled
+-
+-| idbm.c:1042:2: error: result of comparison of constant 18446744073709551615 with expression of type 'unsigned int' is always true [-Werror,-Wtautological-constant-out-of-range-compare]
+-|         _rec_int_list(SESSION_CHAP_ALGS, recs, node, session.auth.chap_algs,
+-|         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-| idbm.c:263:23: note: expanded from macro '_rec_int_list'
+-|                 if (_org->_name[_i] != ~0UL) { \
+-|                     ~~~~~~~~~~~~~~~ ^  ~~~~
+-
+-Since max value for int can be less than unsinged long e.g. on LP64 its
+-better to use UINT_MAX here
+-
+-Upstream-Status: Submitted [https://github.com/open-iscsi/open-iscsi/pull/227]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- libopeniscsiusr/idbm.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/libopeniscsiusr/idbm.c b/libopeniscsiusr/idbm.c
+-index 7bc2381..060196f 100644
+---- a/libopeniscsiusr/idbm.c
+-+++ b/libopeniscsiusr/idbm.c
+-@@ -260,7 +260,7 @@ do {\
+- 	_recs[_n].type = TYPE_INT_LIST; \
+- 	_strncpy(_recs[_n].name, _key, NAME_MAXVAL); \
+- 	for (unsigned int _i = 0; _i < ARRAY_LEN(_org->_name); _i++) { \
+--		if (_org->_name[_i] != ~0UL) { \
+-+		if (_org->_name[_i] != UINT_MAX) { \
+- 			for (unsigned int _j = 0; _j < ARRAY_LEN(_tbl); _j++) { \
+- 				if (_tbl[_j].value == _org->_name[_i]) { \
+- 					strcat(_recs[_n].value, _tbl[_j].name); \
+--- 
+-2.29.0
+-
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.2.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.3.bb
+similarity index 96%
+rename from meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.2.bb
+rename to meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.3.bb
+index dfcd4ee3cb..4a9cf9db40 100644
+--- a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.2.bb
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.3.bb
+@@ -12,11 +12,10 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)
  
- SRC_URI[md5sum] = "b66ec21e0a0ac331afb4b1bc5c9ef966"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+-SRCREV ?= "802688debcd88c48edabe86deb7e7ed47ebadc26"
++SRCREV ?= "34e3ffb194f6fa3028c0eb2ff57e7db2d1026771"
+ 
+ SRC_URI = "git://github.com/open-iscsi/open-iscsi \
+            file://0001-Makefile-Do-not-set-Werror.patch \
+-           file://0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch \
+            file://initd.debian \
+            file://99_iscsi-initiator-utils \
+            file://iscsi-initiator \
 -- 
 2.17.1
 
