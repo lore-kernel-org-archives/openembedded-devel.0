@@ -1,115 +1,80 @@
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web10.24529.1612725019143868849
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.web12.24605.1612725020047284831
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Feb 2021 11:10:19 -0800
+ Sun, 07 Feb 2021 11:10:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=b8JJ79QY;
- spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id lw17so8370713pjb.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Feb 2021 11:10:19 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=cTCqnWPy;
+ spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f172.google.com with SMTP id t25so8856187pga.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Feb 2021 11:10:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=O+Ymr/8+GYxEI2d0iKgTesN2TU0Hz6zw+1aRn7T8seg=;
-        b=b8JJ79QY0+Cd2uOPB/ODt/5v5jmTQe0RcMxrQl2H0NMH0NPwhlHT3g+dJpGuTGoqlx
-         eGAQgDxNPjCZxsfXww9US+TsiTXOFAL8MPsZXjN7jnyA/Ny5xYvjUr0QPuc9IW+0FFuG
-         rKdkmajImaz1DjHzv5YwbQCwhjl/QuWsQd6+q612FWuQnk8jhsQ5jZ8KXRfd9NdIRmDw
-         jE9/B3Bv/rUkSL7z2HJlRLgAeILgKOPO6hKVUGM+EsT+H4SIy4XlKhr0ENTzGksZ1Qh3
-         3NhBBh8vBRVvaEsn795M29T1lCqVVlfDWT0e6rJNz3231mXLkFTbDC9Qeg4Hbmhm+lZy
-         yrIw==
+        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+         :content-transfer-encoding;
+        bh=Mu11dPHWCCjmnha3Uv9U8mpnGxhSAudvWTZzGIdQLyU=;
+        b=cTCqnWPyRcy5C9MnQtbEER6ySCFcqTAHC8KJ/4fz3S4khNwqcZsfvJSNJ3ywcm6u34
+         Pg4KskCqc3K+8Voimyya98NyuHUZg4Au2zv1INnFlZLhWST5dBiZsDvs7LLpPnUh0/Ip
+         Vyh1jb3RyrnsGqul1B7ERHFPf4PJsPYB0uBGFv4BVQvEkCPyIujCAmcndtqkn/pdFaNF
+         h/uiVfowpGWnMMc+N2eev4r0dONDGmRSIpKdaWRcfrImUzesDLG6LnCQ8qdmgfbJ0a58
+         72rVjLp4+aRgPO+LBgzG1RzK0pUcLgjunRcTes+3PB6QWIy+093JBuMWSwOfOqesyRFl
+         rTcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=O+Ymr/8+GYxEI2d0iKgTesN2TU0Hz6zw+1aRn7T8seg=;
-        b=Ky8pcy7dvWwVA+EbW2nAN3K/hPvliQmnKY+hj2BItagdwJbTJx2GSxWXmexa/SYIb/
-         VND1wSD3XD3bYiQ5/U0/ZhdlhASVin/Wx2DAaGVYl+oWmHXIePvd9q2ZcoMctZv6AOEP
-         nVHj61LvZclmNBEWJRu9Tcfg8zgYMwsxSMqmug2ktVLezQM9ajdzScHsH30ZxuqSAnkO
-         ZkPmx0wTHhXJWqNmmhvzcdFgZINGQv+wrGdUylF2Cg+tuvG187GxNewWqdqiFafYbt4A
-         SZf9XU43m+skkwMk483SeIFCH6qpUUQ656dkTbKGgpKwBoXphl56WobTtglVeVdbncxI
-         4oCw==
-X-Gm-Message-State: AOAM531o/rX2L2gfLpmN2z+IYuGAvg3PhnqhdTFKxAxB8bbPh4N/x1NG
-	pXR9gvJQ8uF3Z4hLl9iEevkrgm5hfu3NrQ==
-X-Google-Smtp-Source: ABdhPJzoWUZErTa39V4lT8K/maJc1thV37dVba4yueFT1n2FwdO115h50Ktgysr/sr+MBiky3/MVhw==
-X-Received: by 2002:a17:90a:fa2:: with SMTP id 31mr13171091pjz.57.1612725018540;
-        Sun, 07 Feb 2021 11:10:18 -0800 (PST)
+         :references:mime-version:content-transfer-encoding;
+        bh=Mu11dPHWCCjmnha3Uv9U8mpnGxhSAudvWTZzGIdQLyU=;
+        b=hs1LKXNRFGHYp8WE4pPICsWkz/gSistU+g2l1zZswuq0lMNPNUADZfxL227d6sSBjE
+         mOno4TeZ9gRNFytsZW0eDUwQlwH1Jqh4DIX2sUceiXcEd5qtFkqmlbKFRCaws2Kn69SI
+         HLjrQZiF7IqFiRz8+D4Xi8lpp7wDVc6zDh3zVBCjONFnsjwueWUmmuwWlu71COTzBQy7
+         E3qVWgQijLeXRNov7mGhVsKFFtQkoYhBrLPzoPuXBHK3HjrVnivC/tE4Ki5hl5zRyd9x
+         ZkRD3TcK8MbFyydqJCxqq1VXe7O+fl3NKw4587sI7yS43wXiJRWfeGmyCuJitBaXG9Oc
+         ZeKg==
+X-Gm-Message-State: AOAM532vU3JYcjX3p+1qI9ybscEJc8Zv2GO7U7d9c9nHplOFXItZcuFs
+	ww1jjV1bEs402p+KyPclqyclv8tl1hu58A==
+X-Google-Smtp-Source: ABdhPJxzqhIVKQhuII8pplWNA2VW8rAghxKY/cgyVxY2/4ssRLv0Z3TkbGSqi6H8NKm1U8QlUrWkqw==
+X-Received: by 2002:a63:f447:: with SMTP id p7mr13629873pgk.243.1612725019479;
+        Sun, 07 Feb 2021 11:10:19 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:1d07:684d:b210:7d14])
-        by smtp.gmail.com with ESMTPSA id 123sm16371911pfd.91.2021.02.07.11.10.17
+        by smtp.gmail.com with ESMTPSA id 123sm16371911pfd.91.2021.02.07.11.10.18
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 Feb 2021 11:10:18 -0800 (PST)
+        Sun, 07 Feb 2021 11:10:19 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 07/10] giflib: apply patch for CVE-2019-15133 and set CVE_PRODUCT
-Date: Sun,  7 Feb 2021 11:10:05 -0800
-Message-Id: <4e6de3045c96fce9516311ba42911e209a1b84ba.1612724878.git.akuster808@gmail.com>
+Subject: [gatesgarth 08/10] zram: fix sourcing of zram parameters
+Date: Sun,  7 Feb 2021 11:10:06 -0800
+Message-Id: <bdb79efaba481b2d9807eab59df04fb67e5277dd.1612724878.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1612724878.git.akuster808@gmail.com>
 References: <cover.1612724878.git.akuster808@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Mikko Rapeli <mikko.rapeli@bmw.de>
+From: Søren Andersen <san@skov.dk>
 
-Backport upstream patch for CVE-2019-15133.
-Set CVE_PRODUCT to "giflib_project:giflib" which is used
-in NVD. https://nvd.nist.gov/vuln/detail/CVE-2019-15133
-
-Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
+Signed-off-by: Søren Andersen <san@skov.dk>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+(cherry picked from commit 3c8ad9192c1c9f4323bdc7ff28456f11db689adb)
+Signed-off-by: Ulrich Ölmann <u.oelmann@pengutronix.de>
 ---
- .../giflib/files/CVE-2019-15133.patch         | 23 +++++++++++++++++++
- .../recipes-devtools/giflib/giflib_5.1.4.bb   |  7 +++++-
- 2 files changed, 29 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
+ meta-oe/recipes-extended/zram/zram/zram-swap-init | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch b/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
-new file mode 100644
-index 0000000000..9957be82f3
---- /dev/null
-+++ b/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
-@@ -0,0 +1,23 @@
-+From 799eb6a3af8a3dd81e2429bf11a72a57e541f908 Mon Sep 17 00:00:00 2001
-+From: "Eric S. Raymond" <esr@thyrsus.com>
-+Date: Sun, 17 Mar 2019 12:37:21 -0400
-+Subject: [PATCH] Address SF bug #119: MemorySanitizer: FPE on unknown address
-+
-+---
-+ dgif_lib.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+Upstream-status: Backport [https://sourceforge.net/p/giflib/code/ci/799eb6a3af8a3dd81e2429bf11a72a57e541f908/]
-+CVE: CVE-2019-15133
-+
-+--- a/lib/dgif_lib.c	2021-01-13 19:28:18.923493586 +0100
-++++ b/lib/dgif_lib.c	2021-01-13 19:28:55.245863085 +0100
-+@@ -1099,7 +1099,7 @@ DGifSlurp(GifFileType *GifFile)
-+ 
-+               sp = &GifFile->SavedImages[GifFile->ImageCount - 1];
-+               /* Allocate memory for the image */
-+-              if (sp->ImageDesc.Width < 0 && sp->ImageDesc.Height < 0 &&
-++              if (sp->ImageDesc.Width <= 0 && sp->ImageDesc.Height <= 0 &&
-+                       sp->ImageDesc.Width > (INT_MAX / sp->ImageDesc.Height)) {
-+                   return GIF_ERROR;
-+               }
-diff --git a/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb b/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
-index 21fa352cdc..1871bab46e 100644
---- a/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
-+++ b/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
-@@ -3,7 +3,12 @@ SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=ae11c61b04b2917be39b11f78d71519a"
+diff --git a/meta-oe/recipes-extended/zram/zram/zram-swap-init b/meta-oe/recipes-extended/zram/zram/zram-swap-init
+index 0643dbca23..ccc3aafe3a 100755
+--- a/meta-oe/recipes-extended/zram/zram/zram-swap-init
++++ b/meta-oe/recipes-extended/zram/zram/zram-swap-init
+@@ -14,7 +14,7 @@ fi
+ ZRAM_SIZE_PERCENT=100
+ ZRAM_ALGORITHM=lz4
  
--SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2"
-+SRC_URI = " \
-+    ${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2 \
-+    file://CVE-2019-15133.patch \
-+"
-+
-+CVE_PRODUCT = "giflib_project:giflib"
+-[ -f /etc/default/zram ] && ./etc/default/zram || true
++[ -f /etc/default/zram ] && . /etc/default/zram || true
  
- inherit autotools
- 
+ memtotal=$(grep MemTotal /proc/meminfo | awk ' { print $2 } ')
+ memzram=$(($memtotal*${ZRAM_SIZE_PERCENT}/100))
 -- 
 2.17.1
 
