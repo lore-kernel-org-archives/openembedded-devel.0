@@ -1,100 +1,74 @@
 Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.15136.1612661189316084823
+ by mx.groups.io with SMTP id smtpd.web09.15059.1612661256392048047
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Feb 2021 17:26:29 -0800
+ Sat, 06 Feb 2021 17:27:36 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
 X-IronPort-AV: E=Sophos;i="5.81,158,1610380800"; 
-   d="scan'208";a="104284687"
+   d="scan'208";a="104284706"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 07 Feb 2021 09:26:22 +0800
+  by heian.cn.fujitsu.com with ESMTP; 07 Feb 2021 09:27:35 +0800
 Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 4E3E24CE6033
-	for <openembedded-devel@lists.openembedded.org>; Sun,  7 Feb 2021 09:26:16 +0800 (CST)
+	by cn.fujitsu.com (Postfix) with ESMTP id 69FC84CE6033
+	for <openembedded-devel@lists.openembedded.org>; Sun,  7 Feb 2021 09:27:31 +0800 (CST)
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Sun, 7 Feb 2021 09:26:17 +0800
+ (TLS) id 15.0.1497.2; Sun, 7 Feb 2021 09:27:33 +0800
 From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] gensio: upgrade 2.2.0 -> 2.2.3
-Date: Sun, 7 Feb 2021 21:26:14 +0800
-Message-ID: <1612704374-4499-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+Subject: [oe] [meta-perl] [PATCH] libnet-ldap-perl: upgrade 0.67 -> 0.68
+Date: Sun, 7 Feb 2021 21:27:30 +0800
+Message-ID: <1612704450-4621-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
 X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: 4E3E24CE6033.A1B3E
+X-yoursite-MailScanner-ID: 69FC84CE6033.A135D
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
 Content-Type: text/plain
 
-0001-Modify-parameter-of-function-sctp_gensio_alloc.patch
-Removed since this is included in 2.2.3
+0.68 -- Sun Jan  3 17:58:18 CET 2021
+
+Enhancements
+* Control/NoOp.pm: new
+* Control/Subentries.pm: new
+* Constant.pm: add tags to allow exporting groups of constants
+* Constant.pm: add Active Directory Control & Extension OIDs
+* Constant.pm: add references to perl-ldap's modules
+
+Bug Fixes
+* META.json: update author & bugtracker
+* Control/*.pm: typo & grammar fixes
+* Control/Relax.pm: slight rephrasing
+* FAQ.pod: fix spelling/grammar error
+* Changes: fix typo
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- ...ameter-of-function-sctp_gensio_alloc.patch | 29 -------------------
- .../{gensio_2.2.0.bb => gensio_2.2.3.bb}      |  5 ++--
- 2 files changed, 2 insertions(+), 32 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/gensio/gensio/0001-Modify-parameter-of-function-sctp_gensio_alloc.patch
- rename meta-oe/recipes-connectivity/gensio/{gensio_2.2.0.bb => gensio_2.2.3.bb} (79%)
+ .../{libnet-ldap-perl_0.67.bb => libnet-ldap-perl_0.68.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-perl/recipes-perl/libnet/{libnet-ldap-perl_0.67.bb => libnet-ldap-perl_0.68.bb} (88%)
 
-diff --git a/meta-oe/recipes-connectivity/gensio/gensio/0001-Modify-parameter-of-function-sctp_gensio_alloc.patch b/meta-oe/recipes-connectivity/gensio/gensio/0001-Modify-parameter-of-function-sctp_gensio_alloc.patch
-deleted file mode 100644
-index 22a452508..000000000
---- a/meta-oe/recipes-connectivity/gensio/gensio/0001-Modify-parameter-of-function-sctp_gensio_alloc.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--From b94eff3461e4fb99cd761d6858e8ed94cb6c5412 Mon Sep 17 00:00:00 2001
--From: Wang Mingyu <wangmy@cn.fujitsu.com>
--Date: Tue, 8 Dec 2020 11:58:06 +0900
--Subject: [PATCH] 0001-Modify-parameter-of-function-sctp_gensio_alloc.patch
--
--parameter type of declearation is const, definition should also be
--const.
--
--Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
-----
-- lib/gensio_sctp.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/lib/gensio_sctp.c b/lib/gensio_sctp.c
--index bd9437f..4278ff8 100644
----- a/lib/gensio_sctp.c
--+++ b/lib/gensio_sctp.c
--@@ -1092,7 +1092,7 @@ str_to_sctp_gensio_accepter(const char *str, const char * const args[],
-- #else
-- 
-- int
---sctp_gensio_alloc(struct gensio_addr *iai, const char * const args[],
--+sctp_gensio_alloc(const struct gensio_addr *iai, const char * const args[],
-- 		  struct gensio_os_funcs *o,
-- 		  gensio_event cb, void *user_data,
-- 		  struct gensio **new_gensio)
---- 
--2.25.1
--
-diff --git a/meta-oe/recipes-connectivity/gensio/gensio_2.2.0.bb b/meta-oe/recipes-connectivity/gensio/gensio_2.2.3.bb
-similarity index 79%
-rename from meta-oe/recipes-connectivity/gensio/gensio_2.2.0.bb
-rename to meta-oe/recipes-connectivity/gensio/gensio_2.2.3.bb
-index 424e176ca..89d454989 100644
---- a/meta-oe/recipes-connectivity/gensio/gensio_2.2.0.bb
-+++ b/meta-oe/recipes-connectivity/gensio/gensio_2.2.3.bb
-@@ -5,10 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=a0fd36908af843bcee10cb6dfc47fa67 \
-                     file://COPYING;md5=bae3019b4c6dc4138c217864bd04331f \
-                     "
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.67.bb b/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.68.bb
+similarity index 88%
+rename from meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.67.bb
+rename to meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.68.bb
+index 57b5fbf89..595160744 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.67.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.68.bb
+@@ -11,8 +11,8 @@ LIC_FILES_CHKSUM = "file://README;beginline=3;endline=5;md5=4d6588c2fa0d38ae162f
  
--SRCREV = "4ec19138aa968dea34e4bc4e022c1ad7ed4c43c0"
-+SRCREV = "88fe56696b19ffff3e16be1d46d062e835879740"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/M/MA/MARSCHAP/perl-ldap-${PV}.tar.gz"
  
--SRC_URI = "git://github.com/cminyard/gensio;protocol=https \
--           file://0001-Modify-parameter-of-function-sctp_gensio_alloc.patch"
-+SRC_URI = "git://github.com/cminyard/gensio;protocol=https;branch=2.2.x"
+-SRC_URI[md5sum] = "a949a2bab07b44cc043b965485fe493a"
+-SRC_URI[sha256sum] = "19a2f7f7959fe23d16367475772c325109f8604d2949e34b96dddb2dfa031170"
++SRC_URI[md5sum] = "d091ed00302f0276069bca9df9478744"
++SRC_URI[sha256sum] = "e2f389fe3e7a9e4b61488692919ad723b98f3b479b5288f610daa8c27995b351"
  
- S = "${WORKDIR}/git"
+ S = "${WORKDIR}/perl-ldap-${PV}"
  
 -- 
 2.25.1
