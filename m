@@ -1,94 +1,103 @@
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web11.13705.1612653440167419945
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web10.15136.1612661189316084823
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Feb 2021 15:17:20 -0800
+ Sat, 06 Feb 2021 17:26:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=U8Y16F7r;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id d2so6036819pjs.4
-        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Feb 2021 15:17:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=H2WMZBIiCsIhSwxroWBCwuhgh2Vbc+Rzy8gCiQVXnFs=;
-        b=U8Y16F7rYUD2py9bmjPw8lscvAloZVCusmqh8WPP6JSKDqtZy5b+aeiaptBcqD6sou
-         U+VS9i9nbeVJJpntBlnfuH0gmd5F70ZLZSPHjoSQwPtFU0BwEKI6QqbfUkCMESl2eE5J
-         rceQ8gqCK9xwC6iCn4frgyq5oyRXPnuJnFXH5uK1YAsC4dVRoCtwMyfsXRY8deTR5VWr
-         JRBcwIGpnTkAgjJ/mCZ52FYzJ2T9/eum0gU+Lu7E3WD2JXxAsI4vgm0Dea4ZqNsgXvY9
-         4d3yqeBEemM0/oiC4i8NVTinI99QiiX45N7+YC0v7GlhBhFflI68icVO9ErG3zfSKgSd
-         u3pw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=H2WMZBIiCsIhSwxroWBCwuhgh2Vbc+Rzy8gCiQVXnFs=;
-        b=fmvGZOwo/8ZVKuWRMzLHoqqhrFZS8ND/1E6N6r3qYUa26PZ4/5R3AW2XoOhYcoog2M
-         xYPfZRD7jm+coxkTpxk2154/IE/Gc+uY4bwvpG96l1K4hVVDsVXJO7iEuxKLNpDo8pGi
-         0kC/N3Q41EBvWzPEZcTRIMRb3WjyGGgRhsWi9zRD6cpCTvmHjZ5MuFW7cvqS5tyz/8Hi
-         HWIE4J0uSGyOweHIY71V8k62NJttpJTDN9VZexHJGmU3n1kTQ6Nd0MjQxLLpPlMt9qGx
-         KYuOympseBPObNC8H/urH2P4eCBPzZyQX5E0OzphyrHTZISwvMbNqJxwquoQOcI1z4Vj
-         9qag==
-X-Gm-Message-State: AOAM531BJFDImE9u9TngwcqjJ3s2+btuvBxzz85UB1C+NoYLeD7rO5Ek
-	SuE5oelkQ9KA2sVSnu/1gZohvNBrIzMPmw==
-X-Google-Smtp-Source: ABdhPJz3CN8Eqa6/Er6oKw/qVz1GzSu0xAOlPFnb4QCWbatcYKjc3YGuhfuI9ZUU2Q+YVWBE3enhUA==
-X-Received: by 2002:a17:90a:5513:: with SMTP id b19mr10199536pji.99.1612653439418;
-        Sat, 06 Feb 2021 15:17:19 -0800 (PST)
-Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:c5c4:f80e:4f44:b02e])
-        by smtp.gmail.com with ESMTPSA id b65sm14331882pfg.3.2021.02.06.15.17.18
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 06 Feb 2021 15:17:19 -0800 (PST)
-From: "akuster" <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgargh 10/10] openldap: upgrade 2.4.56 -> 2.4.57
-Date: Sat,  6 Feb 2021 15:17:06 -0800
-Message-Id: <cef93b7b00e620d90a610112ee574fa60b691cf8.1612652802.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1612652802.git.akuster808@gmail.com>
-References: <cover.1612652802.git.akuster808@gmail.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.81,158,1610380800"; 
+   d="scan'208";a="104284687"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 07 Feb 2021 09:26:22 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id 4E3E24CE6033
+	for <openembedded-devel@lists.openembedded.org>; Sun,  7 Feb 2021 09:26:16 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Sun, 7 Feb 2021 09:26:17 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-oe] [PATCH] gensio: upgrade 2.2.0 -> 2.2.3
+Date: Sun, 7 Feb 2021 21:26:14 +0800
+Message-ID: <1612704374-4499-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: 4E3E24CE6033.A1B3E
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-From: zhengruoqin <zhengrq.fnst@cn.fujitsu.com>
+0001-Modify-parameter-of-function-sctp_gensio_alloc.patch
+Removed since this is included in 2.2.3
 
--License-Update: Copyright year updated to 2021.
-
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 0282b8ce6a5a5f082a37cb0863b3e62ad8e56a5a)
-[Maintance update only]
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../openldap/{openldap_2.4.56.bb => openldap_2.4.57.bb}     | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/openldap/{openldap_2.4.56.bb => openldap_2.4.57.bb} (97%)
+ ...ameter-of-function-sctp_gensio_alloc.patch | 29 -------------------
+ .../{gensio_2.2.0.bb => gensio_2.2.3.bb}      |  5 ++--
+ 2 files changed, 2 insertions(+), 32 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/gensio/gensio/0001-Modify-parameter-of-function-sctp_gensio_alloc.patch
+ rename meta-oe/recipes-connectivity/gensio/{gensio_2.2.0.bb => gensio_2.2.3.bb} (79%)
 
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.56.bb b/meta-oe/recipes-support/openldap/openldap_2.4.57.bb
-similarity index 97%
-rename from meta-oe/recipes-support/openldap/openldap_2.4.56.bb
-rename to meta-oe/recipes-support/openldap/openldap_2.4.57.bb
-index 4c0f179cb0..a282523a3c 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.56.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.57.bb
-@@ -7,7 +7,7 @@ HOMEPAGE = "http://www.OpenLDAP.org/license.html"
- # basically BSD.  opensource.org does not record this license
- # at present (so it is apparently not OSI certified).
- LICENSE = "OpenLDAP"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=5391b559d23a2237bdb21e7a62dae7c3 \
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=b6dea6c170362fc46381fe3690c722cb \
-                     file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972 \
+diff --git a/meta-oe/recipes-connectivity/gensio/gensio/0001-Modify-parameter-of-function-sctp_gensio_alloc.patch b/meta-oe/recipes-connectivity/gensio/gensio/0001-Modify-parameter-of-function-sctp_gensio_alloc.patch
+deleted file mode 100644
+index 22a452508..000000000
+--- a/meta-oe/recipes-connectivity/gensio/gensio/0001-Modify-parameter-of-function-sctp_gensio_alloc.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From b94eff3461e4fb99cd761d6858e8ed94cb6c5412 Mon Sep 17 00:00:00 2001
+-From: Wang Mingyu <wangmy@cn.fujitsu.com>
+-Date: Tue, 8 Dec 2020 11:58:06 +0900
+-Subject: [PATCH] 0001-Modify-parameter-of-function-sctp_gensio_alloc.patch
+-
+-parameter type of declearation is const, definition should also be
+-const.
+-
+-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+----
+- lib/gensio_sctp.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/lib/gensio_sctp.c b/lib/gensio_sctp.c
+-index bd9437f..4278ff8 100644
+---- a/lib/gensio_sctp.c
+-+++ b/lib/gensio_sctp.c
+-@@ -1092,7 +1092,7 @@ str_to_sctp_gensio_accepter(const char *str, const char * const args[],
+- #else
+- 
+- int
+--sctp_gensio_alloc(struct gensio_addr *iai, const char * const args[],
+-+sctp_gensio_alloc(const struct gensio_addr *iai, const char * const args[],
+- 		  struct gensio_os_funcs *o,
+- 		  gensio_event cb, void *user_data,
+- 		  struct gensio **new_gensio)
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-connectivity/gensio/gensio_2.2.0.bb b/meta-oe/recipes-connectivity/gensio/gensio_2.2.3.bb
+similarity index 79%
+rename from meta-oe/recipes-connectivity/gensio/gensio_2.2.0.bb
+rename to meta-oe/recipes-connectivity/gensio/gensio_2.2.3.bb
+index 424e176ca..89d454989 100644
+--- a/meta-oe/recipes-connectivity/gensio/gensio_2.2.0.bb
++++ b/meta-oe/recipes-connectivity/gensio/gensio_2.2.3.bb
+@@ -5,10 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=a0fd36908af843bcee10cb6dfc47fa67 \
+                     file://COPYING;md5=bae3019b4c6dc4138c217864bd04331f \
                      "
- SECTION = "libs"
-@@ -25,8 +25,8 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
-     file://remove-user-host-pwd-from-version.patch \
- "
  
--SRC_URI[md5sum] = "82a7dcf7aeaf95fdad16017c0ed9983a"
--SRC_URI[sha256sum] = "25520e0363c93f3bcb89802a4aa3db33046206039436e0c7c9262db5a61115e0"
-+SRC_URI[md5sum] = "e3349456c3a66e5e6155be7ddc3f042c"
-+SRC_URI[sha256sum] = "c7ba47e1e6ecb5b436f3d43281df57abeffa99262141aec822628bc220f6b45a"
+-SRCREV = "4ec19138aa968dea34e4bc4e022c1ad7ed4c43c0"
++SRCREV = "88fe56696b19ffff3e16be1d46d062e835879740"
  
- DEPENDS = "util-linux groff-native"
+-SRC_URI = "git://github.com/cminyard/gensio;protocol=https \
+-           file://0001-Modify-parameter-of-function-sctp_gensio_alloc.patch"
++SRC_URI = "git://github.com/cminyard/gensio;protocol=https;branch=2.2.x"
+ 
+ S = "${WORKDIR}/git"
  
 -- 
-2.17.1
+2.25.1
+
+
 
