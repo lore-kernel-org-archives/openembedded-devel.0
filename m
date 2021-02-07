@@ -1,81 +1,114 @@
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web08.24654.1612725018172192213
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.web10.24529.1612725019143868849
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Feb 2021 11:10:18 -0800
+ Sun, 07 Feb 2021 11:10:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dbkDonEI;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id u15so6681152plf.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Feb 2021 11:10:18 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=b8JJ79QY;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f42.google.com with SMTP id lw17so8370713pjb.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Feb 2021 11:10:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=joe1kNENLFLiKrk4JUrG8+UYWKuqLAeuSf3I0p/ao+I=;
-        b=dbkDonEId7LEDcJRYv/cFNNwDtY3Fsr3KqOyasP1NPX+K67AJJxKiHHZ/ldUQ1Dv+L
-         XyxWC1DzCiiy5R+y23EgsM60yXRlCjcQTBmF1BDVv4xdj0p4434+n5+Owxi8efzqgAl+
-         BXtUNohxSOUbRYayoj/0KstrUPirbycB56/C/HawEahD0qXL8CMDLvrW/pZN/H4NYkMC
-         lypgX9p+tx64JqNWxKkiWQcPRKfcd5GzJ22tpTdGf16UoGY4Mo/2xbHVa5sGM40NYy4a
-         4kLaB9Velbp3qb7kVxXW4hFzLlMl4Zo1NwBJNGJb8GagAajPFandSb+nDOI88q8Ek1NR
-         9wKQ==
+        bh=O+Ymr/8+GYxEI2d0iKgTesN2TU0Hz6zw+1aRn7T8seg=;
+        b=b8JJ79QY0+Cd2uOPB/ODt/5v5jmTQe0RcMxrQl2H0NMH0NPwhlHT3g+dJpGuTGoqlx
+         eGAQgDxNPjCZxsfXww9US+TsiTXOFAL8MPsZXjN7jnyA/Ny5xYvjUr0QPuc9IW+0FFuG
+         rKdkmajImaz1DjHzv5YwbQCwhjl/QuWsQd6+q612FWuQnk8jhsQ5jZ8KXRfd9NdIRmDw
+         jE9/B3Bv/rUkSL7z2HJlRLgAeILgKOPO6hKVUGM+EsT+H4SIy4XlKhr0ENTzGksZ1Qh3
+         3NhBBh8vBRVvaEsn795M29T1lCqVVlfDWT0e6rJNz3231mXLkFTbDC9Qeg4Hbmhm+lZy
+         yrIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=joe1kNENLFLiKrk4JUrG8+UYWKuqLAeuSf3I0p/ao+I=;
-        b=BolFYuPuDjaazAtTTE5qpLkJFzO/CHK/DYu2ny2SY5gdBSTJh2oa0FHQi8ZA7c1392
-         9TZkAew3aZHI1KFH0HqR2ap6MQwYuAlQiFd+xkC2UXWDGTj8mFMMvHfrc7vujxKtgI7P
-         VoBSM9IcOktQRvWnEq/Lx/3NC87lNyf6DZO7XwMcf6EbvQoVgRD0fJEHPcz00ldaMli0
-         o2buKHiGz79nHQXWlh4Ojs/zo4YB3HXnn+YEsvPtJJ1DGkl/kmEsCwS9eJ445kYyPPlL
-         dcUdSHpUZZ3+WN9/aO5dLmr94zlKUSPqLbJuEuXngwiAS8uosa9mpKSSIvqxh+xvyJnE
-         BN1w==
-X-Gm-Message-State: AOAM531FzRR+f99xbVL6ET3yM6fYQdgU6s3eivqCdmYY5I8bX2VB1rwf
-	Io3eh/7TenmbXUcK7nt5Gs5G663iQf0q3A==
-X-Google-Smtp-Source: ABdhPJy7GlWyFuUXn6QSNgHlAr+JQj6YYk7m93/dDGueW5zvTHPfoVwGM9Kgrb3rX/JPHikIRCtCGQ==
-X-Received: by 2002:a17:90a:fe89:: with SMTP id co9mr13663757pjb.83.1612725017624;
-        Sun, 07 Feb 2021 11:10:17 -0800 (PST)
+        bh=O+Ymr/8+GYxEI2d0iKgTesN2TU0Hz6zw+1aRn7T8seg=;
+        b=Ky8pcy7dvWwVA+EbW2nAN3K/hPvliQmnKY+hj2BItagdwJbTJx2GSxWXmexa/SYIb/
+         VND1wSD3XD3bYiQ5/U0/ZhdlhASVin/Wx2DAaGVYl+oWmHXIePvd9q2ZcoMctZv6AOEP
+         nVHj61LvZclmNBEWJRu9Tcfg8zgYMwsxSMqmug2ktVLezQM9ajdzScHsH30ZxuqSAnkO
+         ZkPmx0wTHhXJWqNmmhvzcdFgZINGQv+wrGdUylF2Cg+tuvG187GxNewWqdqiFafYbt4A
+         SZf9XU43m+skkwMk483SeIFCH6qpUUQ656dkTbKGgpKwBoXphl56WobTtglVeVdbncxI
+         4oCw==
+X-Gm-Message-State: AOAM531o/rX2L2gfLpmN2z+IYuGAvg3PhnqhdTFKxAxB8bbPh4N/x1NG
+	pXR9gvJQ8uF3Z4hLl9iEevkrgm5hfu3NrQ==
+X-Google-Smtp-Source: ABdhPJzoWUZErTa39V4lT8K/maJc1thV37dVba4yueFT1n2FwdO115h50Ktgysr/sr+MBiky3/MVhw==
+X-Received: by 2002:a17:90a:fa2:: with SMTP id 31mr13171091pjz.57.1612725018540;
+        Sun, 07 Feb 2021 11:10:18 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:1d07:684d:b210:7d14])
-        by smtp.gmail.com with ESMTPSA id 123sm16371911pfd.91.2021.02.07.11.10.16
+        by smtp.gmail.com with ESMTPSA id 123sm16371911pfd.91.2021.02.07.11.10.17
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 Feb 2021 11:10:17 -0800 (PST)
+        Sun, 07 Feb 2021 11:10:18 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 06/10] flatbuffers: whitelist CVE-2020-35864
-Date: Sun,  7 Feb 2021 11:10:04 -0800
-Message-Id: <b5b2f97772780bea9fe10d358dab0807ffc6b1ad.1612724878.git.akuster808@gmail.com>
+Subject: [gatesgarth 07/10] giflib: apply patch for CVE-2019-15133 and set CVE_PRODUCT
+Date: Sun,  7 Feb 2021 11:10:05 -0800
+Message-Id: <4e6de3045c96fce9516311ba42911e209a1b84ba.1612724878.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1612724878.git.akuster808@gmail.com>
 References: <cover.1612724878.git.akuster808@gmail.com>
 
 From: Mikko Rapeli <mikko.rapeli@bmw.de>
 
-CVE-2020-35864 is for the rust crate for flatbuffers, not
-flatbuffers itself.
-
-https://security-tracker.debian.org/tracker/CVE-2020-35864
-
-"NOT-FOR-US: flatbuffers rust crate"
+Backport upstream patch for CVE-2019-15133.
+Set CVE_PRODUCT to "giflib_project:giflib" which is used
+in NVD. https://nvd.nist.gov/vuln/detail/CVE-2019-15133
 
 Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../giflib/files/CVE-2019-15133.patch         | 23 +++++++++++++++++++
+ .../recipes-devtools/giflib/giflib_5.1.4.bb   |  7 +++++-
+ 2 files changed, 29 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
 
-diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb
-index 1abfc8819d..65f7beec40 100644
---- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb
-+++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb
-@@ -14,6 +14,8 @@ SRCREV = "6df40a2471737b27271bdd9b900ab5f3aec746c7"
- 
- SRC_URI = "git://github.com/google/flatbuffers.git"
- 
-+CVE_CHECK_WHITELIST += "CVE-2020-35864"
+diff --git a/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch b/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
+new file mode 100644
+index 0000000000..9957be82f3
+--- /dev/null
++++ b/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
+@@ -0,0 +1,23 @@
++From 799eb6a3af8a3dd81e2429bf11a72a57e541f908 Mon Sep 17 00:00:00 2001
++From: "Eric S. Raymond" <esr@thyrsus.com>
++Date: Sun, 17 Mar 2019 12:37:21 -0400
++Subject: [PATCH] Address SF bug #119: MemorySanitizer: FPE on unknown address
 +
- CXXFLAGS += "-fPIC"
- BUILD_CXXFLAGS += "-fPIC"
++---
++ dgif_lib.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++Upstream-status: Backport [https://sourceforge.net/p/giflib/code/ci/799eb6a3af8a3dd81e2429bf11a72a57e541f908/]
++CVE: CVE-2019-15133
++
++--- a/lib/dgif_lib.c	2021-01-13 19:28:18.923493586 +0100
+++++ b/lib/dgif_lib.c	2021-01-13 19:28:55.245863085 +0100
++@@ -1099,7 +1099,7 @@ DGifSlurp(GifFileType *GifFile)
++ 
++               sp = &GifFile->SavedImages[GifFile->ImageCount - 1];
++               /* Allocate memory for the image */
++-              if (sp->ImageDesc.Width < 0 && sp->ImageDesc.Height < 0 &&
+++              if (sp->ImageDesc.Width <= 0 && sp->ImageDesc.Height <= 0 &&
++                       sp->ImageDesc.Width > (INT_MAX / sp->ImageDesc.Height)) {
++                   return GIF_ERROR;
++               }
+diff --git a/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb b/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
+index 21fa352cdc..1871bab46e 100644
+--- a/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
++++ b/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
+@@ -3,7 +3,12 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=ae11c61b04b2917be39b11f78d71519a"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2"
++SRC_URI = " \
++    ${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2 \
++    file://CVE-2019-15133.patch \
++"
++
++CVE_PRODUCT = "giflib_project:giflib"
+ 
+ inherit autotools
  
 -- 
 2.17.1
