@@ -1,135 +1,188 @@
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
- by mx.groups.io with SMTP id smtpd.web11.17705.1612685618560670862
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.41])
+ by mx.groups.io with SMTP id smtpd.web12.17907.1612685729407376513
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Feb 2021 00:13:38 -0800
+ Sun, 07 Feb 2021 00:15:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=nF6sxktz;
- spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f174.google.com with SMTP id g15so8261714pgu.9
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Feb 2021 00:13:38 -0800 (PST)
+ dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Imh1vocz;
+ spf=pass (domain: windriver.com, ip: 40.107.93.41, mailfrom: hongxu.jia@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=B1UwD7uE3ZocB0ahZFZ8UBqA1q+c5lP27HuN6yeJL4cRVKFw31zNiiAb6L75IljMaCcqR8KTpAfZUKXGcHq0qjQlDzFy1qE6thyfRhcwxS8Rhop0A3zRN/qBbZa9GoM8QtgoGD4RyP+QLcIkG2Axxcrju+ETqU39Y5b7vcYkAcbl+NDtVgFyP3ekYFv4qmfHWsMMBs8O75ivRey5plno75gTBNmC4U43Y6oosllpwZS57mVEn8Oieq9dC5wBH1F3F/SLSeFN8UNbcX5+H1znQu8e6aCneq6AesfG/xkJfSBxLOGkQFqOB3Yhi1lzAD8C9KjCB97TzbVLsCSFNjzIIA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TcoDzdH3topereyjRwH0xdmwFR59uk606hF7kEy2Yqw=;
+ b=TaY1kRK7fP4BsnekrHiMggUDNep4rLnN9QlZLMvyvtQgyfbr0fMFxQ9MltE8yodrxThoNzC16C9lgAz1vSAEht+GYvAtJ5pR5IzpjPFsr5jsaUIIV+JGriXBdwArlGiC+v+Waoh4AEzQ1FCWCNjWLGthK9G2ZRibOAGRvwjmRuXIIeTBZZ8p4UuZPxue1s7gnKXY5uPNmHKG84ezgdoJ5fOBTlIrM9DZdfjYXOqM8ltbZd9gnktgeVC+AvclImOt2sVe2kw132Jd++sIfbVL9EMLb0rH+PT2W4AhFSjCdPEvoAXEPzpt2sLx0LIJ5pVya2OyR/femez46o1TKO/VHQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=+9TrWYLeDFOCP6ED6tcDUNtWpUPHbqW/d82zUOhhMac=;
-        b=nF6sxktzErV+1D6d5aM0ilZydPilqZ/ykpSKBv4Nl5y48E9XAbokdpjj9EQkD1Lq8q
-         3AkiMeDcJggw68a+8V1mvk1lk1p8pSZN6iuJKKiJX6xkcPGOc8MPA0pr3WvPB4VIpzms
-         R8mntpq0VLHiOfCEA/cElQRDW1ExU0RZCyVyhOBFSfXX3HMtB41jgOpxvS2bxkHZaURJ
-         l0+apAELrEeNEs2D1psk6uFxxoOe0qZjip9YpGZSVM8FovQsWJse/AZIADjQXIi2jjm1
-         jy04na0U7vpGBL2FvnGrJHixxo61IQCHN5xHxTe/t1WUUshwn+fhtwfoLRcN4Qga91Cj
-         PcOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=+9TrWYLeDFOCP6ED6tcDUNtWpUPHbqW/d82zUOhhMac=;
-        b=NealpOJglXtuWbplTpA71aMB+8abMVNq2ICBztZc5OJQhM0v7uIDrG9k5PrgckTc5u
-         04OJNUVKsH8D1v5lCHx3nWpLmT+/HZFc8Clmll+JJO1gjuBzzTUKvSRda0HU51ZFKwk4
-         4FHc4onttMSz8R7c/gJVi2PF3nIp5cV9lCkggPQYbvEVfeU5msHzQxKgyJI6X0VKWbaU
-         zDUOnCyPKrUnpfLapQBmS2UQIIdzMPCDri6QiHbVgvV5vIvH3YHJy9UaF+hnhBe5omdX
-         WKwoFjXxsmZMfLZOM+MFEoJQ/9Rjdiw/ymdJj4ceTelgM+lSJJ6ovrAUPlJrAbxxVbxh
-         uOIw==
-X-Gm-Message-State: AOAM532tllUTWaJwZ7CqZJpszsDz27ZSOvPX0apBvA4Z+32jhZyp6U5N
-	3wmRx7GaUPustYqVXta/Mxuf5gjHXLGXcQ==
-X-Google-Smtp-Source: ABdhPJyK0cGnOiSyiMcVVQz4bvFx0RUPlNUX66Qrzs6pDfmFYHn+IjTa+3pfMRXW+wwhKGIGHv2W5w==
-X-Received: by 2002:a62:7dc4:0:b029:1ba:765:3af with SMTP id y187-20020a627dc40000b02901ba076503afmr12415172pfc.78.1612685617556;
-        Sun, 07 Feb 2021 00:13:37 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::d188])
-        by smtp.gmail.com with ESMTPSA id y8sm6254527pfe.36.2021.02.07.00.13.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 Feb 2021 00:13:37 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Andrea Adami <andrea.adami@gmail.com>
-Subject: [meta-initramfs][PATCH] klibc: Fix x86_64 build with binutils 2.36+
-Date: Sun,  7 Feb 2021 00:13:34 -0800
-Message-Id: <20210207081334.268419-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.0
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TcoDzdH3topereyjRwH0xdmwFR59uk606hF7kEy2Yqw=;
+ b=Imh1vocznMWeUHea9PFv91V/T4oO1LXiFg6+5p5FQVMeVX7CKnhGSfVP4CZ9lI2Ovfkz4baycX9bx3LCFob/ohr81QlHZGRpDnwG9ClqtsfyBG81BOyv3NKlyFEVTn3OTSYPMnuSGl5klJPn/jMwoIprjHIu66XAVsylgSGk59k=
+Authentication-Results: gmail.com; dkim=none (message not signed)
+ header.d=none;gmail.com; dmarc=none action=none header.from=windriver.com;
+Received: from DM6PR11MB4380.namprd11.prod.outlook.com (2603:10b6:5:14e::20)
+ by DM5PR11MB1771.namprd11.prod.outlook.com (2603:10b6:3:113::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.29; Sun, 7 Feb
+ 2021 08:15:28 +0000
+Received: from DM6PR11MB4380.namprd11.prod.outlook.com
+ ([fe80::a500:2ae3:a6c4:bc13]) by DM6PR11MB4380.namprd11.prod.outlook.com
+ ([fe80::a500:2ae3:a6c4:bc13%4]) with mapi id 15.20.3825.020; Sun, 7 Feb 2021
+ 08:15:28 +0000
+From: "hongxu" <hongxu.jia@windriver.com>
+To: raj.khem@gmail.com
+CC: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH V2] freeradius: fix build failure with autoconf 2.71
+Date: Sun,  7 Feb 2021 16:15:11 +0800
+Message-ID: <20210207081511.19888-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.27.0
+In-Reply-To: <166169060B501337.30502@lists.openembedded.org>
+References: <166169060B501337.30502@lists.openembedded.org>
+X-Originating-IP: [60.247.85.82]
+X-ClientProxiedBy: HK2PR02CA0173.apcprd02.prod.outlook.com
+ (2603:1096:201:1f::33) To DM6PR11MB4380.namprd11.prod.outlook.com
+ (2603:10b6:5:14e::20)
+Return-Path: hongxu.jia@windriver.com
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from pek-lpggp1.wrs.com (60.247.85.82) by HK2PR02CA0173.apcprd02.prod.outlook.com (2603:1096:201:1f::33) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.19 via Frontend Transport; Sun, 7 Feb 2021 08:15:23 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 68ed96f1-194a-49a0-5571-08d8cb408538
+X-MS-TrafficTypeDiagnostic: DM5PR11MB1771:
+X-Microsoft-Antispam-PRVS: 
+	<DM5PR11MB1771CC85C3050B407332CAC394B09@DM5PR11MB1771.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2000;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	nzJohKTesYo9ALhqoqa08ZKsDG6nLKeUk+DhAIdet+SX+360gjvK8q1lx6zJCKZLWVDhlxRU8cfEtUfTjNFyyZDVQHZyiw5m8rkK+KYm0pC3Nop0TF5HrhLwwBXP5YD4afsmvJSGjAXFTtgH0IgzPHn163ya7X4J4JWnreMpZ6bKyUq45ZdQxalasH8ZJiWv26mpfRT1itTwaEqVwk4zQScdnzEsYR/4CZkxrYrP/RvL5up6m1CUrmp7OPe+rt4VVvUYOxSAGBZtE6n2a9kab+8BbWuougAymowle18ti9j87Zo7zv2fyh99jfco67lx7SrVZu/YYOM7fuys5Ce/DazcNHc+b3SHqCHU1kMWlV+8pYNUilN2f+bUeBto+FG6o0BR+U0/H+CiL8kTsVZPuQmUj5dkL994BOeE3tQXpXwj5TEK+qI64FZ8+LFXc6/sKss7hlysMs5u0IzMg+U7DeMXxx6TTnBzT3E++EDaC4nEUfQyAeyKSdHBNX0sbUTnn7HpXZcBMQEa1PMQGXqkXA==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB4380.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(366004)(39840400004)(396003)(346002)(136003)(4326008)(83380400001)(66556008)(5660300002)(6486002)(2616005)(956004)(66946007)(66476007)(44832011)(6666004)(8676002)(316002)(6512007)(6916009)(86362001)(52116002)(2906002)(1076003)(478600001)(6506007)(8936002)(26005)(186003)(16526019)(36756003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	=?us-ascii?Q?DG22aevT/CYBVyPYWshEKRrfw55/DNu4mNYqbx/ddwHYY4q9VEnxS85i1vq2?=
+ =?us-ascii?Q?b0bJ8rGmC0DNEma0RBwKk9axiLhACbVsvmZiHj7zgIzVuiEghrmzL+BEJNPd?=
+ =?us-ascii?Q?4YQy5QvxSn4+zquk2dS79I4lJ9rLHYApxozxv4IfGVSi8z6nMs5znVMbDXxV?=
+ =?us-ascii?Q?or2UzAZ85l+Z2lAaHXrogMtsqXkbuzwr+7Sis/LGX7G9Lgdhhf5T17tn4qMx?=
+ =?us-ascii?Q?QiKXKOT8ugrATmN5yLUKhP8G7jjInSlaOC2jTixh2HfxNCeLuUfZgthKaZax?=
+ =?us-ascii?Q?v2ebNoOdWvXo3qDQ9bVuzw0+/yUnUXysBAXqUnAjghlh80TM0iqoNe4fHR1V?=
+ =?us-ascii?Q?iBbhA6GZKTMj6BqVwTZ7XXvjOqUfahjCwQjU/HeSC/BtMWFXQvbArPUu6IVW?=
+ =?us-ascii?Q?Bqwp7PQ7MRlQyiU+f7iwEXrOFLc2ydJhxgqJsZyXHvKHFt+U799lTPvNMg21?=
+ =?us-ascii?Q?dmwC2gLCzgx5KYTPX3OjdROVoyCji/rqizotK2h1GvE3BBsVPyKBvufhV3pn?=
+ =?us-ascii?Q?/mlTh7VVADJzuVeo8HAYKaR6xl+Ggh63vINVyMK91fDRplOSt2U7bEUzpT6O?=
+ =?us-ascii?Q?iFvnrAH6W91HonP8R8+ekaHcLRs2fMssQbX/5KVEcUFmP+adODE4kBm4bh06?=
+ =?us-ascii?Q?juz/F5zBFVF25609vziYIPatC4VQj1gcvxW9G0dOIeUlQZY5eUdSOfgO+0U9?=
+ =?us-ascii?Q?wvQQoz0F8SDi2caSWURmcPhm2cMd2q4+uV68KiPPFF365K0zfUb7OuOXpkm/?=
+ =?us-ascii?Q?EN+SY6F6CRMzVb5sMD6P2q664FIWeownGbAoi4RgWvZSSAilpSRerhZaQC3I?=
+ =?us-ascii?Q?aff+C93vO9LyMyuuI04Gxv6eh9efx6inZhUTNSiO9f1+sb17OQOcwCxttoV7?=
+ =?us-ascii?Q?icksvIItT9jyuBL/QW4Fc+0jOzdiiaY2nByKVFCd3MwKr0gF78j2cUUwdTtr?=
+ =?us-ascii?Q?20A4OdZRGyGZf5TMp0EQ1EMihfKs4oVe01gwaWn/I9YZQtp7Ltfd70B96CEI?=
+ =?us-ascii?Q?9yr77sDsSageRqVeI4zqtSkS68HK06AFKqbH6AQaHNcoDBo4rKNax45bzrPQ?=
+ =?us-ascii?Q?SXu31Uh0WB3BR0AVKi2YX2b3GjtkTxcsD/n279kkodQmnDbcdTNNn1aPHrjm?=
+ =?us-ascii?Q?CCR82Std+UwGkQw+xZVs9flbE7YYhorJ75g8F3HeIGMhzm7CDY2ScCR494KW?=
+ =?us-ascii?Q?lGeXsRLWpjpiuriosX7qKO81yztwLMyuVJ8Oev0jepdJ7DtP0Mod6/gi5Tlp?=
+ =?us-ascii?Q?EZHKugyzy3cnBg+pS4OIe30O8lF1tDlBG1bwSanXbU5m2pz1CLQR5RdU4g1o?=
+ =?us-ascii?Q?7uaiBdSTXrMxVUXrI/CGAjxl?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 68ed96f1-194a-49a0-5571-08d8cb408538
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB4380.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Feb 2021 08:15:28.1981
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: L9DlO9l0FKxekQc0xzWEq7wsOwajGY280pQvxn+H/0SpdiB3R0YMtnl/+BHTYqlJyr2gDYFAOc9i0JqdG6ouUhGkCobMYvjjUiHoDR1XEIY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB1771
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-this patch is already on klibc mailing list
+While using autoconf 2.71, the AM_MISSING_PROG caused unexpected error:
+...
+configure.ac: error: required file 'missing' not found
+...
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andrea Adami <andrea.adami@gmail.com>
+Since these tools were explicitly added by autotools bbclass,
+remove the testing to workaround the error with autoconf 2.7
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- ...d-for-overlapping-sections-in-binary.patch | 52 +++++++++++++++++++
- .../recipes-devtools/klibc/klibc.inc          |  1 +
- 2 files changed, 53 insertions(+)
- create mode 100644 meta-initramfs/recipes-devtools/klibc/files/0001-workaround-for-overlapping-sections-in-binary.patch
+ ...1-workaround-error-with-autoconf-2.7.patch | 42 +++++++++++++++++++
+ .../freeradius/freeradius_3.0.20.bb           |  1 +
+ 2 files changed, 43 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0=
+001-workaround-error-with-autoconf-2.7.patch
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/files/0001-workaround-for-overlapping-sections-in-binary.patch b/meta-initramfs/recipes-devtools/klibc/files/0001-workaround-for-overlapping-sections-in-binary.patch
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/0001-wor=
+karound-error-with-autoconf-2.7.patch b/meta-networking/recipes-connectivit=
+y/freeradius/files/0001-workaround-error-with-autoconf-2.7.patch
 new file mode 100644
-index 0000000000..8ccfe447ee
+index 000000000..80c571df9
 --- /dev/null
-+++ b/meta-initramfs/recipes-devtools/klibc/files/0001-workaround-for-overlapping-sections-in-binary.patch
-@@ -0,0 +1,52 @@
-+From 911130ce429cbf6a92d0fbd17f0ff638ec941df2 Mon Sep 17 00:00:00 2001
-+From: Petr Ovtchenkov <ptr@void-ptr.info>
-+Date: Sun, 7 Feb 2021 00:04:36 -0800
-+Subject: [PATCH] workaround for overlapping sections in binary
++++ b/meta-networking/recipes-connectivity/freeradius/files/0001-workaround=
+-error-with-autoconf-2.7.patch
+@@ -0,0 +1,42 @@
++From 3b4ba29c7c5800df87eecd65214244619e01162b Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Sun, 7 Feb 2021 16:02:36 +0800
++Subject: [PATCH] workaround error with autoconf 2.7
 +
-+Problem: binary (typesize.bin) created from object file (typesize.o)
-+with 'objcopy -O binary ... '. But typesize.o has relocatable objects that all
-+copied with offset 0. This will lead to overlapping sections in binary.
-+By fortunate syscalls.pl check magic bytes and ring the bell.
++While using autoconf 2.7, the AM_MISSING_PROG caused unexpected error:
++...
++configure.ac: error: required file 'missing' not found
++...
 +
-+This is naive workaround: skip .note.gnu.property section that overlap
-+.rodata section.
++Since these tools were explicitly added by autotools bbclass,
++remove the testing to workaround the error with autoconf 2.7
 +
-+This not a bug of objcopy, https://sourceware.org/bugzilla/show_bug.cgi?id=27314
++Upstream-Status: Inappropriate [oe specific]
 +
-+Related commit:
-+
-+  commit de6f630e6be90d6d32d8bf2fed3f856b0c32f7ba
-+  Author: H. Peter Anvin <hpa at zytor.com>
-+  Date:   Sat Jun 10 11:15:19 2006 -0700
-+
-+      [klibc] Detect the sizes of various types, and make available to sysstub.ph.
-+
-+      This additional code effectively queries the C compiler for the sizes of
-+      various types, and makes an associative array %typesize available to
-+      sysstub.ph.  This is currently not used, but it's expected that some
-+      architectures, e.g. s390, will need this to determine which registers
-+      go where, and how many registers are needed.
-+
-+Upstream-Status: Submitted [https://lists.zytor.com/archives/klibc/2021-February/004583.html]
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 +---
-+ usr/klibc/syscalls/Kbuild | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ configure.ac | 8 --------
++ 1 file changed, 8 deletions(-)
 +
-+diff --git a/usr/klibc/syscalls/Kbuild b/usr/klibc/syscalls/Kbuild
-+index 2430b9b4..754d028e 100644
-+--- a/usr/klibc/syscalls/Kbuild
-++++ b/usr/klibc/syscalls/Kbuild
-+@@ -71,7 +71,7 @@ $(obj)/typesize.c: $(srctree)/$(KLIBCSRC)/syscalls.pl $(obj)/SYSCALLS.i     \
-+ 
-+ # Convert typesize.o to typesize.bin
-+ quiet_cmd_mkbin = OBJCOPY $@
-+-      cmd_mkbin = $(KLIBCOBJCOPY) -O binary $< $@
-++      cmd_mkbin = $(KLIBCOBJCOPY) -O binary --remove-section .note.gnu.property $< $@
-+ 
-+ $(obj)/typesize.bin: $(obj)/typesize.o FORCE
-+ 	$(call if_changed,mkbin)
-+-- 
-+2.30.0
++diff --git a/configure.ac b/configure.ac
++index 609efb104b..2d761cf62c 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -693,14 +693,6 @@ fi
++=20
++ AC_PATH_PROG(RUSERS, rusers, /usr/bin/rusers)
++=20
++-dnl #
++-dnl #  FIXME This is truly gross.
++-dnl #
++-missing_dir=3D`cd $ac_aux_dir && pwd`
++-AM_MISSING_PROG(ACLOCAL, aclocal, $missing_dir)
++-AM_MISSING_PROG(AUTOCONF, autoconf, $missing_dir)
++-AM_MISSING_PROG(AUTOHEADER, autoheader, $missing_dir)
++-
++ AC_PATH_PROG(LOCATE,locate)
++ AC_PATH_PROG(DIRNAME,dirname)
++ AC_PATH_PROG(GREP,grep)
++--=20
++2.27.0
 +
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index 6e8ec0fd56..41147eb2da 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-@@ -20,6 +20,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/libs/klibc/2.0/klibc-${PV}.tar.xz \
-            file://0001-klibc-add-getrandom-syscall.patch \
-            file://0001-klibc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch \
-            file://cross-clang.patch \
-+           file://0001-workaround-for-overlapping-sections-in-binary.patch \
-            "
- 
- ARMPATCHES ?= ""
--- 
-2.30.0
+diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0=
+.20.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.=
+bb
+index 2c39c4c44..608d66b1b 100644
+--- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb
++++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb
+@@ -29,6 +29,7 @@ SRC_URI =3D "git://github.com/FreeRADIUS/freeradius-serve=
+r.git;branch=3Dv3.0.x;lfs=3D0
+     file://0001-rlm_python3-add-PY_INC_DIR-in-search-dir.patch \
+     file://0001-raddb-certs-Makefile-fix-the-existed-certificate-err.patch=
+ \
+     file://0001-raddb-certs-Makefile-fix-the-occasional-verification.patch=
+ \
++    file://0001-workaround-error-with-autoconf-2.7.patch \
+     file://radiusd.service \
+     file://radiusd-volatiles.conf \
+ "
+--=20
+2.27.0
 
