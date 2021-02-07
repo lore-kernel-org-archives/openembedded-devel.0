@@ -1,59 +1,58 @@
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.web08.19515.1612700973635767237
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.web12.20902.1612709170920103983
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Feb 2021 04:29:33 -0800
+ Sun, 07 Feb 2021 06:46:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=DzhJYhO/;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id 190so10166819wmz.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Feb 2021 04:29:33 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=I+4IJM+Y;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f47.google.com with SMTP id j11so10329273wmi.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Feb 2021 06:46:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=C3A08DHxyfWnHGufrxPcuzKJnjbYop4E9crk0tiDXdI=;
-        b=DzhJYhO/iJUGXzYU1NouRu8v1J/0S9XoAi1Thc3Y09okpq9Kmc6d6aLOg3+MVuTMKb
-         F2Xq80XP3pMWmlcHavwrkD8yZTFJTAQpC1yagYq3FLDhwktQglhg3J2ct18jG4W8eEWQ
-         HQHJcldUDYnF0ny3sBk4zKgtG2EviXWRL5LJ04x2t65bZGX1nCVwyBEkFOFkiW4xnuV7
-         FZDlrLFJzWkQEJZd57rEKDA+FW/CC94LwbHZSLLu9aMCxvEDQvgTo6dSfzFhSPLQU12o
-         swXs6zQ4KwHw2d8c+M3AVWA5pbRcdFgQ/g6AyTgkDMUcOZskH12MyGw6nHHpZ1bMsqzQ
-         742A==
+        bh=oWpgalNEemBV+f5iykqoTYAG/Vj6vOsIgN01p01cx1A=;
+        b=I+4IJM+YQNTk/MUcj9rfDOqZHLPplZfWUqJ7nfVNNhQcLQTHjgCwum3NuI4z0WG8sT
+         ZdgSn2ufnnKToFPgSjSw/FbcIu9X3EGFI+1oTI72+RK7Qxcwv66GuXP1VJFB27TRsn53
+         CqXTX/gbpiBo2LsEL+Mrr3VBJfUG1BHBr8ewbSWuMKQymJ5gTKu2PeP9TeiO03U7JI1s
+         M4SchYecrlcsArLPH6+x9H+69+AwiblVSK5bb58FkiX9uNPvPqLbQMdFnZ+6EP8qizlz
+         m6oQcTmRPL1sSwYjR8H1f4dzNgi88d1isgKiyEpU/YyT6ROTGTIoy0NBrFJAl1GWoJ0a
+         xcCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=C3A08DHxyfWnHGufrxPcuzKJnjbYop4E9crk0tiDXdI=;
-        b=JvZcpfuNQ7KefoElcn2o3VEEBDYOGS4TwEnPSfCPbxrfVDZnA5YkXGMEJYtaS1G7AC
-         IHwsjA7zNnt7oXM/XwvbEjvfJRHm1UHWJR37R3zdiEkM75Enj19clLf9jIRKFHLFRyNd
-         Qf5VA6vCstb9Cb1lcvVg5aNfNrrxyAPHNiK+7Sp79wNtF6hh/VRISe7CVDWhu/7WATo/
-         0hnRyjLbLwuoI5GwdG9peUAqFToE78+DwJjWQgAjzPnHyEMEw14IgCXb57z35T7rF1pM
-         rmvM9p/lqifZDS4mRKzPzfuTRxd7cTMvcQYJXCRZhOZb+/+dZosdiSoJXkb6Hc5XstJe
-         QJSA==
-X-Gm-Message-State: AOAM531myru1vb4+j63PyPIb8oQo+tbAgTH777x6wp1NevTxli37WAb9
-	StHDHfgty69tu3J39QhZD3NEUZ5RkXg06w==
-X-Google-Smtp-Source: ABdhPJwC90dQLfL0WZBx7Oc9+OG9cKk6hjFa6iDl8Hjy5WwmrTos+e9gg+Zz5PYwdm9kWUQ79ysv1w==
-X-Received: by 2002:a05:600c:35ce:: with SMTP id r14mr10930691wmq.136.1612700970841;
-        Sun, 07 Feb 2021 04:29:30 -0800 (PST)
+        bh=oWpgalNEemBV+f5iykqoTYAG/Vj6vOsIgN01p01cx1A=;
+        b=iv3wS0G0YW23X0kZW1k1hn1kN2cURfULuRY7VLIxGSRXgRQthqLTyFZ5pb7mUp2q9u
+         YGhTCcvBARX458cfjymRkwKl9bxHa43Jgk8bgtGa6T2wDie1thimYqECU7A2IBlSSyt0
+         g8+M3hrcq3lmmVB6CSp5Jj2gtO7ggk2EGdj2SltNlnMQ2lAgv31T6jzPkW1iUJrUjhGc
+         JHu4JXmeubgDh8Wlla4VIbDIxJc194H25N73YRD7IQz3uGc3ti/1OS0WqTWSgo1gnbOx
+         uiivu59LIkotlVUzycDDw+vq7SP3hRRXNgAHzD4WFHiBxq2/X0xPP7Zv740s0AJFSkNW
+         yGXA==
+X-Gm-Message-State: AOAM533Yi1+uaP0e2ulJwUMP4M5IYpxNU/Mb++qRAV9loLMd7LfVzh9B
+	UET4zypq1+rkol5fdZtG71guvqNHHc0INw==
+X-Google-Smtp-Source: ABdhPJysFOqfBeaPgK5FFG5E4CtFlnQaf4li2TxJwIMJmTzCxq2+drWeGtLKVmJWJA81SqDF/rThww==
+X-Received: by 2002:a1c:b156:: with SMTP id a83mr2861121wmf.11.1612709169226;
+        Sun, 07 Feb 2021 06:46:09 -0800 (PST)
 Return-Path: <martin.jansa@gmail.com>
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id j17sm15157575wmc.28.2021.02.07.04.29.29
+        by smtp.gmail.com with ESMTPSA id f6sm14831018wmq.33.2021.02.07.06.46.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 Feb 2021 04:29:29 -0800 (PST)
+        Sun, 07 Feb 2021 06:46:08 -0800 (PST)
 From: "Martin Jansa" <Martin.Jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [dunfell][PATCH] graphviz: use git fetcher instead of gitlab archives
-Date: Sun,  7 Feb 2021 13:29:27 +0100
-Message-Id: <20210207122927.3586198-1-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 1/2] graphviz: drop unused SRCREV and outdated comment
+Date: Sun,  7 Feb 2021 15:46:04 +0100
+Message-Id: <20210207144605.3784078-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-* fixes:
-  graphviz-2.40.1-r0 do_package_qa: QA Issue: graphviz: SRC_URI uses unstable GitHub/GitLab archives, convert recipe to use git protocol [src-uri-bad]
+* the SRCREV isn't used as we don't use git fetcher here and comment
+  doesn't make sense anymore as we're fetching versioned tarball now after:
 
-* it's already fixed in gatesgarth and newer with new version from:
   commit 985be3901e79c9e45cd5d23774e3cfdaab476b44
   Author: Khem Raj <raj.khem@gmail.com>
   Date:   Mon Nov 2 18:33:34 2020 -0800
@@ -66,14 +65,14 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../graphviz/graphviz_2.40.1.bb                | 18 +++++++-----------
- 1 file changed, 7 insertions(+), 11 deletions(-)
+ meta-oe/recipes-graphics/graphviz/graphviz_2.44.1.bb | 7 -------
+ 1 file changed, 7 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb b/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb
-index 12ecb99091..d393ae2a1c 100644
---- a/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb
-+++ b/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb
-@@ -19,13 +19,12 @@ DEPENDS_append_class-target = " ${BPN}-native"
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_2.44.1.bb b/meta-oe/recipes-graphics/graphviz/graphviz_2.44.1.bb
+index bc46a11d3a..8fe837b75c 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz_2.44.1.bb
++++ b/meta-oe/recipes-graphics/graphviz/graphviz_2.44.1.bb
+@@ -20,13 +20,6 @@ DEPENDS_append_class-nativesdk = " ${BPN}-native"
  
  inherit autotools-brokensep pkgconfig gettext
  
@@ -83,28 +82,10 @@ index 12ecb99091..d393ae2a1c 100644
 -# get checksum errors. Fedora people seem to expect same so they use a versioned
 -# source - see https://src.fedoraproject.org/cgit/rpms/graphviz.git/tree/graphviz.spec
 -
--SRC_URI = "https://gitlab.com/graphviz/graphviz/-/archive/stable_release_${PV}/graphviz-stable_release_${PV}.tar.gz \
-+# it was already moved from github.com/ellson/graphviz to https://gitlab.com/graphviz/graphviz/
-+# but the later doesn't have stable_release_2.40.1 tag (anymore?), but it has corresponding commit:
-+# https://github.com/ellson/MOTHBALLED-graphviz/releases/tag/stable_release_2.40.1
-+# https://gitlab.com/graphviz/graphviz/-/commit/67cd2e5121379a38e0801cc05cce5033f8a2a609
-+SRCREV = "67cd2e5121379a38e0801cc05cce5033f8a2a609"
-+SRC_URI = "git://gitlab.com/${BPN}/${BPN}.git \
+-SRCREV = "771bc4dbff3e6f358fa75cdc7774a413ccacad51"
+ SRC_URI = "https://www2.graphviz.org/Packages/stable/portable_source/${BP}.tar.gz \
             file://0001-plugin-pango-Include-freetype-headers-explicitly.patch \
  "
- # Use native mkdefs
-@@ -33,10 +32,7 @@ SRC_URI_append_class-target = "\
-            file://0001-Use-native-mkdefs.patch \
-            file://0001-Set-use_tcl-to-be-empty-string-if-tcl-is-disabled.patch \
- "
--SRC_URI[md5sum] = "2acf30ca8e6cc8b001b0334db65fd072"
--SRC_URI[sha256sum] = "e6c3f8dbfde1c4523055403927bef29f97f9fc12715c1042b5dcf648a2c1c62a"
--
--S = "${WORKDIR}/${BPN}-stable_release_${PV}"
-+S = "${WORKDIR}/git"
- 
- EXTRA_OECONF_class-target = "\
-                 --with-expatincludedir=${STAGING_INCDIR} \
 -- 
 2.27.0
 
