@@ -1,138 +1,175 @@
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.80])
- by mx.groups.io with SMTP id smtpd.web10.18320.1612690757846155485
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
+ by mx.groups.io with SMTP id smtpd.web09.18816.1612696502231739660
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Feb 2021 01:39:19 -0800
+ Sun, 07 Feb 2021 03:15:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Hlod3JVD;
- spf=pass (domain: windriver.com, ip: 40.107.244.80, mailfrom: hongxu.jia@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=MP5O8bzc3D1YF1h924MbNWvgFy0XufZrZ1qNfGrxMWJVJKNFw9+zix6zyfl5WZTDhdVodgGB7z9tDwK2y/FWGPRTRrq1LC+huWBMFHmJMfxUDCYg8MxiS08c57REAbZ9n25Ye7fVD5EPFrYV9C6FegL15VhWM6dSMILy1WoZp7jUWkmk0X6JtUDk2R8vjXO9JpR8j10ZfVjnYJXaV/qvNVyVqn8F7KrLaYTrnvdzg/QCv53gFwoRNIr17nny/AGOE+b9JNjyxjP7FjJXB7T25/OUSHAuw9Ld7r17nYmsHRpa6ilBd/XESQnLBfR5cpGbt/yZXdLlV+UJfzv5ME1nAQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=C0A9ohJmEJqaE2jWXt/UyKqRTsIP2r5ISm4sk23K+fc=;
- b=gRav5VpcLmbTXfQFxUWzNWZy5NSQOlTTobsWxiYPZ4Q5fgUj7as6ZWvsPnjkcGYwHyNPfzUjuwSftKSBm/EUKTSZebBok8RNaPxBkQGfeGh3HkI/xDsfcFi+SkQvZG0ndy/DMy/IkyyoLzJ6gbUmuTKKwyvWRtU1ONrL41ApGKJQwCq6DBB+BQGY6xYwj67SMilLaoT/cNCfot6qZcPJUM/8cimAPJjYtfM77H7LFFhie2Hb7PcvojKetrBZ8NQwbgLzPT29U+F78rYpnpPQiAkr59PJEfC7qNXy3Ns4ouHL2eZSB2gMC++Cf4cjWg3dosJ1X1YroEbz2Go1DqQW2A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=JeMrGmHP;
+ spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f48.google.com with SMTP id t5so14737036eds.12;
+        Sun, 07 Feb 2021 03:15:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=C0A9ohJmEJqaE2jWXt/UyKqRTsIP2r5ISm4sk23K+fc=;
- b=Hlod3JVDTPFcRRp0KWKdP4cKm9XjzEpTyLaNHm7+6UKrvGi3rrN7kDjwQ1KvZDsdeTHChbGh9l5H9oWB5Li/Ck/IF6VSA61EvtM51A88z/MEO6ZpUazBqie5W2VkEGO90iSz9FOj0hao1QLw1qaZwbQvWwYVZcHi0/Vswx+h3g8=
-Authentication-Results: gmail.com; dkim=none (message not signed)
- header.d=none;gmail.com; dmarc=none action=none header.from=windriver.com;
-Received: from DM6PR11MB4380.namprd11.prod.outlook.com (2603:10b6:5:14e::20)
- by DM5PR11MB1770.namprd11.prod.outlook.com (2603:10b6:3:10d::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.30; Sun, 7 Feb
- 2021 09:39:14 +0000
-Received: from DM6PR11MB4380.namprd11.prod.outlook.com
- ([fe80::a500:2ae3:a6c4:bc13]) by DM6PR11MB4380.namprd11.prod.outlook.com
- ([fe80::a500:2ae3:a6c4:bc13%4]) with mapi id 15.20.3825.020; Sun, 7 Feb 2021
- 09:39:13 +0000
-From: "hongxu" <hongxu.jia@windriver.com>
-To: raj.khem@gmail.com
-CC: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH V2] openldap: fix build failure with autoconf 2.71
-Date: Sun,  7 Feb 2021 17:38:59 +0800
-Message-ID: <20210207093859.35756-1-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <1660CF0D66423C8D.32361@lists.openembedded.org>
-References: <1660CF0D66423C8D.32361@lists.openembedded.org>
-X-Originating-IP: [60.247.85.82]
-X-ClientProxiedBy: HK2PR02CA0160.apcprd02.prod.outlook.com
- (2603:1096:201:1f::20) To DM6PR11MB4380.namprd11.prod.outlook.com
- (2603:10b6:5:14e::20)
-Return-Path: hongxu.jia@windriver.com
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=U2oriLcbV8tzcafj4UFImGXtGK2gT9xn52hJtjOBLog=;
+        b=JeMrGmHPY2ln2uqKTR5G3ysJTm+FvnCu02q9DDWFrk4bhHwNje+ndIi7akayf/DpPX
+         8UMTk8ELxpvx0R74ep1Cb1bM1cyJARb9YdTcB9sChWp1oz3T6nXGG/jwJ0OebW9q12PU
+         hErqInBS9H5cTtrnoC5w9rIUBsaDnOitRyNrAEeGS/Asfo1MLDflz0Q+vRBRcMsORRiW
+         SFGNnRGKa7INyw9xXmfPJXqait3bqnErpDyZg65qG5wbXf2CVamLyBSe4Eehp0tdaA4D
+         yvqGW4yq+eFQvmsM/AqP2+K4UuApY+ykQE2warcjUlKgSxpvzP3I2pqoqLizCqfDRjP8
+         rm7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=U2oriLcbV8tzcafj4UFImGXtGK2gT9xn52hJtjOBLog=;
+        b=Dac0DygZkuOTaw6+8LEEwR49w3MaECoREYcpr34iKD1rTrX3m9pRLq7CLxd+P/O3mF
+         pa4KPDPPyIGyfIdonT3C6peoQDWKDWz/5WbGXiycqGj6yH5NCislRAk04CUW4GsjSv8r
+         0xQ4LREzSl+lHTpLSh4pP6sOUnxzbfDAlycnl0Sl1VNQ+WJuteN2yarmGaw3fhXPXi/t
+         PxBnC1LtATRfb3kUfhZKHETu9LwNwkfDy1YGLub5Er6htjw/e1ctDzTbV2SyXrHWtpnL
+         LAvxvO8/BIzXEhrD3ANE3tT8GpEjzkJbVpRO9CB02OoKqGfr8HPw3+L6wK/va+WvcjGA
+         ideQ==
+X-Gm-Message-State: AOAM531LDzhCvnfksaTQErjNpVdMohciQEplDYdAy3WwdWNCuQGq+w3P
+	HzJ2LqOv4Z/AXdStVuehpAeAljcNLAYZwpcOdqo=
+X-Google-Smtp-Source: ABdhPJz8bVvgDF+eqEWMyW0lOAj7UtJHg+zQ8E0GdNDOOrpbEc7YVyqWiZoDB/+zkIs4XKbumIC/K6RxyHfTsEe+ewE=
+X-Received: by 2002:a05:6402:5193:: with SMTP id q19mr12238517edd.264.1612696500575;
+ Sun, 07 Feb 2021 03:15:00 -0800 (PST)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from pek-lpggp1.wrs.com (60.247.85.82) by HK2PR02CA0160.apcprd02.prod.outlook.com (2603:1096:201:1f::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.19 via Frontend Transport; Sun, 7 Feb 2021 09:39:12 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 445597aa-a7b3-4b2d-5dc3-08d8cb4c3aa7
-X-MS-TrafficTypeDiagnostic: DM5PR11MB1770:
-X-Microsoft-Antispam-PRVS: 
-	<DM5PR11MB177078A74206617329751AC594B09@DM5PR11MB1770.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:5516;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	o4dZixvLpbvRUONgVj0haKk8P8ep5iR5g1U0nhZxMGjW5g26k/s5eruY0+EjzRTPUQSiNwSMMxqBIarqsMIqaUFIdRTiBKjdms0WKZYJpoEiX/8xvDhTUWEiR4e949Lh5ZBrGiFYV8qxnh/YG5KUtXZgRcdiqUb4NHpHIeorY2rER+ZVHeoYZ5MVuuZPqpeyvZzAofzQH/6ntiXLRQeJXvolxDOPGnoFOg+LwqAZ0lQFtrQdfqBkuU6DQv9Th05ukJRd477kFeJaQoLNCYS0FKfCGf4psS62RPluUez2NsJBLvQipgxlgPzdWyby32S9EfJcjBY5XFO9bXCl3kR83OGgjW3V26ATO17BsVtObG4PGwbrfJcWrW8FmZ65yxanCg8thNtQwrMGnX9NQ3gWGa/cRKi8yy74D04S3UlNuh9Uv+orJi2BUXp6neTctkc5i6cyZXZQANKes6RkZDN7AfaS6SpDOcp3fqIpmOFbgk6GVDeBtTXY1OR47wIvkq5b6NdblXYbinIGDZTtQi64tw==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB4380.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39830400003)(376002)(396003)(366004)(346002)(136003)(6486002)(8936002)(36756003)(6916009)(44832011)(86362001)(2906002)(16526019)(52116002)(1076003)(8676002)(186003)(26005)(6666004)(316002)(478600001)(83380400001)(66476007)(66946007)(66556008)(5660300002)(6506007)(6512007)(956004)(2616005)(4326008);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?c9UWpP8F+B7pUHQP8T+7BZ1Q7/9MJ1RceAjpSteAu6my3tvSxULBbTSQ3sN9?=
- =?us-ascii?Q?4E9medArFRWDACBpY63mYuT2Yb8zQh3MKbCKaPYLzR2MGSMbMHG7FoP6wB0n?=
- =?us-ascii?Q?e7v11s+Qy2D2W6JY0jSekKdN7igFoeCte+8iLPs4S8lehofYN1WJYtkT1i29?=
- =?us-ascii?Q?VCiKwW+cYLnRckoV6q9aCoPvRuNlyw7vMnCk32R6ePf5eY+tlUnyI9xY/Q0L?=
- =?us-ascii?Q?/j6Asz1clry7CPe50eSbxloAHIrsaVp0wdKOZkt0s5Jg4lmHHORVLdO7bg2P?=
- =?us-ascii?Q?TaWz8LY/5FmNegXJa3sy8k0iTlxSj7wRD0HgWoBFsBRSVOC024xXmfzF/g/J?=
- =?us-ascii?Q?+C5Xz7GbrB5WdCiDW/2DQrI6b1C575EtdYDHqyEZh7Ges+hacqg5wugTyoP3?=
- =?us-ascii?Q?fDUnu7iuirgZXOf2Tltb9lB3XtO6qS3fcG3SXWQnVytsr6Ajp61Zh61AThDu?=
- =?us-ascii?Q?J9IXSkjGWTKqF6gvyeFxg0S+M6dZQJ+38CNfPXJcW8V/x4mf9pYy/n9PYRip?=
- =?us-ascii?Q?Qv3bQja4zCVFecu74r56tKV4RKujim1GU7CliLDXDfQjg7ch1S+co+C26cMV?=
- =?us-ascii?Q?rLa2axC7weXQyldP7BDb2OFQPcDAX2slsi3H7TNe3KmIP5wQlTeeqynRSYxj?=
- =?us-ascii?Q?ygOeRAmULctvotmgmDuJQzJQtXgG78A6AZD3TxVfBGa/Mo8c/7hWTcFuJUFh?=
- =?us-ascii?Q?N4clFXggGZtItEe8VWtZGy/xx/N8V3XG5s/wNZOBeq+lzWWIkjhxW5rlNAdh?=
- =?us-ascii?Q?KzVsW+sdxzHrT/IOQTUL5ZBN3hOusxposrmgVAq7u6t+2hZj5rP2aanjaoaR?=
- =?us-ascii?Q?nuDOEQrMO/bruPJF4l6yYvgOPuodoZZx8ysZbpNfAFAyYjSXrtFLvv1Grx65?=
- =?us-ascii?Q?BP2mT1SxzaQjF/moQDk9W/ERDYzUxvMJKCtdbgbef9b0TueIOcEMwLKuIWXF?=
- =?us-ascii?Q?1gMd6UqYErgBLqzHUrYQUXuF6XN5T0q/Ei3GEGaKjaLSvBBss5NrZJw4wBki?=
- =?us-ascii?Q?CsO48snDxHO1nvfDRDkgSGMYqI97nW5wtqUuzuL1C6dCUi3Ne3Q/8OQXUz3f?=
- =?us-ascii?Q?CuBlFoyu6iGUvnGRzzx+Ts4wmZLYZWllcoxbUZxVnlelp2Bf3nK3y95wfHu6?=
- =?us-ascii?Q?KSVuxUy8eINJ5Tmka5eNuBM9lODlgZGIL8PKaTDLBJXwy04xblCyBjo8zJ8g?=
- =?us-ascii?Q?kzTU9AUWUaoAvYXpT/rvw47AcxQCHueco0pLBsyfVFHTManiUo1kaWsadDvi?=
- =?us-ascii?Q?cOoZi0ewoMJWqfKqFc2nPaaz4ILR+ZVgAK7ndgG81WnfO/siYEcltaus2H42?=
- =?us-ascii?Q?26oAUxx/1dqE5WhbpNZY5KHD?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 445597aa-a7b3-4b2d-5dc3-08d8cb4c3aa7
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB4380.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Feb 2021 09:39:13.9102
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ch4enjcxzZQsLaesBtiti8gmV03sj+sGceusmaUcxYdY+g6Z39+9Yv5JR3s9w929U3eRVoURy6Mvpzg79z6SeambjRY66Dvgfn4NaZfKA2Y=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB1770
+References: <17b543581ffb421b812323891405dcfb@XBOX03.axis.com>
+ <CA+chaQc0anOg2E=o1ouEca-QJDGqKxDoXm6aPVXzsc8TELW3zA@mail.gmail.com>
+ <d9185d19-1f09-a1b6-2926-f54309190b24@gmail.com> <16614BA6A53B3779.25597@lists.openembedded.org>
+In-Reply-To: <16614BA6A53B3779.25597@lists.openembedded.org>
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+Date: Sun, 7 Feb 2021 12:14:49 +0100
+Message-ID: <CA+chaQdbZwyBTbyctEh_y8x_p=txiwqy8gjmkwDrh6rqX_ztng@mail.gmail.com>
+Subject: Re: [oe] [bitbake-devel] Backport changes for _PYTHON_SYSCONFIGDATA_NAME to Gatesgarth and Dunfell
+To: Martin Jansa <Martin.Jansa@gmail.com>
+Cc: akuster808 <akuster808@gmail.com>, Peter Kjellerstedt <peter.kjellerstedt@axis.com>, 
+	Steve Sakoman <steve@sakoman.com>, "Mittal, Anuj" <anuj.mittal@intel.com>, 
+	"OE Core (openembedded-core@lists.openembedded.org)" <openembedded-core@lists.openembedded.org>, 
+	"OE Development (openembedded-devel@lists.openembedded.org)" <openembedded-devel@lists.openembedded.org>, 
+	"BitBake Development (bitbake-devel@lists.openembedded.org)" <bitbake-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="0000000000000c233605babd2af0"
+
+--0000000000000c233605babd2af0
+Content-Type: text/plain; charset="UTF-8"
+
+On Sun, Feb 7, 2021 at 12:15 AM Martin Jansa via lists.openembedded.org
+<Martin.Jansa=gmail.com@lists.openembedded.org> wrote:
+
+> On Sat, Jan 16, 2021 at 6:52 PM akuster808 <akuster808@gmail.com> wrote:
+>
+>>
+>>
+>> On 1/16/21 9:44 AM, Martin Jansa wrote:
+>> > Aren't the missing spaces in appends fixes also needed for meta-oe
+>> > recipes?
+>>
+>>
+>> >
+>> > I think at least top 5 commits from:
+>> >
+>> https://git.openembedded.org/meta-openembedded/log/?qt=grep&q=space.*append
+>> > were also follow-up from these changes in oe-core.
+>> >
+>> Do you mean something beyond the meta-openembedded commits mentioned
+>> near the bottom of the email?
+>>
+>
+> Yes I mean these 5 commits at least.
+>
+
+50bbf80abf python3-pykwalify: Do not unset _PYTHON_SYSCONFIGDATA_NAME
+6b3e3bdaf8 python-grpcio-tools: Add missing space for append
+
+The first one is just an additional cleanup, but without the 2nd one and
+with the cherry-picks from the first e-mail applied you would get:
+ERROR: Nothing PROVIDES 'python3python3-grpcio' (but
+meta-oe/meta-python/recipes-devtools/python/python3-grpcio-tools_1.14.1.bb
+DEPENDS on or otherwise requires it). Close matches:
+  python-grpcio
+  python3-grpcio
+
+my world build is still running..
+
+
+> with c99bb790 DEPENDS variable doesn't end with a space, so the missing
+> leading space in these appends (which was fine until now because of
+> trailing space from DEPENDS set in bbclass) is now causing wrong dependency
+> (should be easily reproducible with the patches backported, just by parsing
+> the recipes).
+>
+>
+>> I need clarity so I can open an issue in gitlab for tracking purposes as
+>> I am sure I will forget this
+>>
+>
+> we're using gitlab?
+>
+> 
+>
+>
+
+--0000000000000c233605babd2af0
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
 
-The do_configure failed with autoconf 2.71
-...
-configure: error: cannot find required auxiliary files: compile missing
-...
+<div dir=3D"ltr"><div dir=3D"ltr">On Sun, Feb 7, 2021 at 12:15 AM Martin Ja=
+nsa via <a href=3D"http://lists.openembedded.org">lists.openembedded.org</a=
+> &lt;Martin.Jansa=3D<a href=3D"mailto:gmail.com@lists.openembedded.org">gm=
+ail.com@lists.openembedded.org</a>&gt; wrote:<br></div><div class=3D"gmail_=
+quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;=
+border-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><=
+div dir=3D"ltr">On Sat, Jan 16, 2021 at 6:52 PM akuster808 &lt;<a href=3D"m=
+ailto:akuster808@gmail.com" target=3D"_blank">akuster808@gmail.com</a>&gt; =
+wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote=
+" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
+padding-left:1ex"><br>
+<br>
+On 1/16/21 9:44 AM, Martin Jansa wrote:<br>
+&gt; Aren&#39;t the missing spaces in appends fixes also needed for meta-o=
+e<br>
+&gt; recipes?<br>
+<br>
+<br>
+&gt;<br>
+&gt; I think at least top 5 commits from:<br>
+&gt; <a href=3D"https://git.openembedded.org/meta-openembedded/log/?qt=3Dg=
+rep&amp;q=3Dspace.*append" rel=3D"noreferrer" target=3D"_blank">https://git=
+.openembedded.org/meta-openembedded/log/?qt=3Dgrep&amp;q=3Dspace.*append</a=
+><br>
+&gt; were also follow-up from these changes in oe-core.<br>
+&gt;<br>
+Do you mean something beyond the meta-openembedded commits mentioned<br>
+near the bottom of the email?<br></blockquote><div><br></div><div>Yes I me=
+an these 5 commits at least.</div></div></div></blockquote><div><br></div><=
+div>50bbf80abf python3-pykwalify: Do not unset _PYTHON_SYSCONFIGDATA_NAME</=
+div>6b3e3bdaf8 python-grpcio-tools: Add missing space for append</div><div =
+class=3D"gmail_quote"><br></div><div class=3D"gmail_quote">The first one is=
+ just an additional cleanup, but without the 2nd one and with the cherry-pi=
+cks from the first e-mail applied you would get:</div><div class=3D"gmail_q=
+uote">ERROR: Nothing PROVIDES &#39;python3python3-grpcio&#39; (but meta-oe/=
+meta-python/recipes-devtools/python/<a href=3D"http://python3-grpcio-tools_=
+1.14.1.bb">python3-grpcio-tools_1.14.1.bb</a> DEPENDS on or otherwise requi=
+res it). Close matches:<br>=C2=A0 python-grpcio<br>=C2=A0 python3-grpcio<br=
+></div><div class=3D"gmail_quote"><br></div><div class=3D"gmail_quote">my w=
+orld build is still running..</div><div class=3D"gmail_quote"><br><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
+solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div class=3D"gma=
+il_quote"><div><br></div><div>with c99bb790 DEPENDS variable doesn&#39;t en=
+d with a space, so the missing leading space in these appends (which was fi=
+ne until now because of trailing space from DEPENDS set in bbclass) is now =
+causing wrong dependency (should be easily reproducible with the patches ba=
+ckported, just by parsing the recipes).</div><div>=C2=A0</div><blockquote c=
+lass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px soli=
+d rgb(204,204,204);padding-left:1ex">
+I need clarity so I can open an issue in gitlab for tracking purposes as<b=
+r>
+I am sure I will forget this<br></blockquote><div><br></div><div>we&#39;re=
+ using gitlab?=C2=A0</div></div></div>
+<br>
+<br>
+<br>
+</blockquote></div></div>
 
-Run libtoolize with option --install to copy missing auxiliary files
-and manually copy the others could workaround the failure
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- meta-oe/recipes-support/openldap/openldap_2.4.57.bb | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.57.bb b/meta-oe/=
-recipes-support/openldap/openldap_2.4.57.bb
-index a282523a3..b2a766614 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.57.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.57.bb
-@@ -151,10 +151,12 @@ CPPFLAGS_append =3D " -D_GNU_SOURCE -DURANDOM_DEVICE=
-=3D\'/dev/urandom\' -fPIC"
- LDFLAGS_append =3D " -pthread"
-=20
- do_configure() {
--    cp ${STAGING_DATADIR_NATIVE}/libtool/build-aux/ltmain.sh ${S}/build
-     rm -f ${S}/libtool
-     aclocal
--    libtoolize --force --copy
-+    libtoolize --force --copy --install
-+    for f in compile missing; do
-+        cp ${STAGING_DATADIR_NATIVE}/libtool/build-aux/$f ${S}/build
-+    done
-     gnu-configize
-     autoconf
-     oe_runconf
---=20
-2.27.0
-
+--0000000000000c233605babd2af0--
