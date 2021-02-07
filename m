@@ -1,79 +1,83 @@
-Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com [209.85.222.180])
- by mx.groups.io with SMTP id smtpd.web08.17270.1612677032977981370
+Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com [209.85.222.181])
+ by mx.groups.io with SMTP id smtpd.web11.17044.1612677106046545170
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Feb 2021 21:50:33 -0800
+ Sat, 06 Feb 2021 21:51:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=qA1SEUXI;
- spf=pass (domain: gmail.com, ip: 209.85.222.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f180.google.com with SMTP id 19so1155153qkc.13
-        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Feb 2021 21:50:32 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=pEu6hEcP;
+ spf=pass (domain: gmail.com, ip: 209.85.222.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f181.google.com with SMTP id r77so11285143qka.12
+        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Feb 2021 21:51:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=/fVzGGNi9DuNwpNQKGNoEVL0tHR0pMGo5hRNsQYrmm0=;
-        b=qA1SEUXI7DCOYETINr2kVLMgYv1cXVTzpoqbsmxPB07j2gW9884XjQpz6GQUzZUTxZ
-         UhP9KGmt55mlvBArToWGlf6t7VH9SEoHSFqX+wsU90nD7tdF6/Z2TFrFgM1i1pdTX2RE
-         yo5NEbfMATbbXXxtx8UBQps6RZEkHeFwUf03wHKNJVjh8bq+5Rx7Ocnt/rRwE1crVVZ0
-         Vg+9DaSaVcGCFQ0sOfq0/l7rY7OjyVtmtdTpBkYc3dFmcsF62iGdn5bcGRMwJ1mFsDNy
-         tS3arwPMysX97r8KB0sxZZy+p1syxYXDnDblROX/SU5gA4454cIfFffd5njQYfwgvTcE
-         4BwQ==
+        bh=dbBI7gCjJFgVYemkmf570UC1FggxOBkG6VPGopZ++kE=;
+        b=pEu6hEcPPUxwytz3ZsszBO7kJ4HW0zRNtYH0BAuvtB0MPeqIZLU8HCE+2S1FTsFjKq
+         Qko5yCrxvF2/3FU0jcfH2Ec4mIXCZFCYWE+naJdd9ekXgNAY5shq+CNd4RbVQFJ9byfi
+         O3/tJdaYWEiiPyhB0FgXDOY+E67IJqfr9zX8brh0uwUm6ab0iLVMavs5emIRS3IPw3gf
+         XQGeaP3CRJ0YADB1BzZ9EOC4uc+E3vLgJ7Sfe6jV+aacl8/9Dvs3wv9yL8GT62+vZUjB
+         BIpwWgSXYS+lMcvz9YGqsm6Yh0WHV9PkgPAkVOPMYoyYyabjj3HwOxIoypia/9m+XOxa
+         RCcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=/fVzGGNi9DuNwpNQKGNoEVL0tHR0pMGo5hRNsQYrmm0=;
-        b=eGO9SMBzAx4oq6t/od6pZ5SZlgDMSq5/vZyLIEEyXx1GqEW19QeZPQaaL413LxSnz2
-         zOZbNqJKvQaxIyu1r3CGXQmyCz0gI/lO5WluNjlKIcABh2dmJwwoqp+mgxKMyil3Bzr7
-         iEAfgDrAMmI3je3fkTuUP31Akw1YQVT/7b9RaVqxmX0uhJH6WSOiJkvuT8QNh5mCnCdu
-         hNO/X4KsoVOPeUwgVEh0eTASXy4ki+PlwEcBQgEZxvR73pDGTF11Sjbbcjh7nIm+XxQV
-         LRuhZ0KdlzRF+hboiONVWqLXrduVT65zq7xqwPdHq3RZm13iEDVg+OdBgekh8hKh3v9B
-         k9jQ==
-X-Gm-Message-State: AOAM531/GVZxWrgAm5R9/QMF9W5OOJPryn1ieWAVyMPTl21BGuBZgOCZ
-	qWy1KSaaPe9T4u25z15+W7kMGoLOxv93AnqElaCFu0hHX3w13A==
-X-Google-Smtp-Source: ABdhPJxt21uH2yErP8EbHNEE4LL8BtIk7QeedydhOka/2RMpNfDdo0hzAKdAIelxMC0cE8E/mygcbB8rzyRIV7BGJAE=
-X-Received: by 2002:a37:a70b:: with SMTP id q11mr11388761qke.474.1612677031966;
- Sat, 06 Feb 2021 21:50:31 -0800 (PST)
+        bh=dbBI7gCjJFgVYemkmf570UC1FggxOBkG6VPGopZ++kE=;
+        b=dB6TUtkfD7dC816FvT5oyTU9JVmVxl4SsBv87ylwI1jGnR21xM1wWuqrg/V0Bdl51G
+         /5/O1g8zkKXUzeR8oKeFv83Esj6eeHKeUGAU+0LSXfW6r4cJYwjePQGhpfGJkyYm/7ii
+         /VYDPV9SCNidUyZ9fXLZQsNCI/G1Qy+LjLOiDBd+FJsOPzFQ57sqLZfpPiSshDdpHgX4
+         PQJo362r7y9qQJKvxYv4i6vuNCM473fFyLAI421ysINAMKrS54Oyk22RGXUico+BfbJI
+         l3afbwvy7iMbNXGLE9K+Xy0ARwCUoLosAWe5uwsIWAGA24aaTH+5Q9z2K9r5M+gJyCc0
+         7Wfw==
+X-Gm-Message-State: AOAM531oDFdSEq/YW00bBThK6Bja6E0TpktEIs+LJqlpua2oMG/+eHlQ
+	uISMU+Lc4M8V0LqLTHR5n61ME3ObQQKpi4utJQ9vLnGyqqjMDA==
+X-Google-Smtp-Source: ABdhPJwOQ+4ZFiNeaR0BkKM9rx6WyXV5AnTlwxS/5ToHUZMAow9xw4aCAnRwxNbziwU3kop8Rjr7mYxuMLfPdqp2hi4=
+X-Received: by 2002:a37:7047:: with SMTP id l68mr11022438qkc.337.1612677105232;
+ Sat, 06 Feb 2021 21:51:45 -0800 (PST)
 MIME-Version: 1.0
-References: <20210206220607.3969325-1-open.source@oleksandr-kravchuk.com>
-In-Reply-To: <20210206220607.3969325-1-open.source@oleksandr-kravchuk.com>
+References: <20210203185803.1413539-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20210203185803.1413539-1-open.source@oleksandr-kravchuk.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sat, 6 Feb 2021 21:50:02 -0800
-Message-ID: <CAMKF1srrzpWHxGuj+i--YRPuvJ92bcjeeyVqOFpRBAqbMA4=rQ@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] atftp: update to 0.7.4
+Date: Sat, 6 Feb 2021 21:51:17 -0800
+Message-ID: <CAMKF1soVGECSRd9+x8sZWGq=9Qeoqn6=Zx_sW4yD8dGrOUkqkg@mail.gmail.com>
+Subject: Re: [oe] [PATCH][meta-oe] iwd: update to 1.11
 To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-fails to patch on musl
+fails to build
 
-https://errors.yoctoproject.org/Errors/Details/569674/
+https://errors.yoctoproject.org/Errors/Details/569682/
 
-On Sat, Feb 6, 2021 at 2:06 PM Oleksandr Kravchuk
+On Wed, Feb 3, 2021 at 10:58 AM Oleksandr Kravchuk
 <open.source@oleksandr-kravchuk.com> wrote:
+>
+> Changelog:
+> - Add support for ACD client for static configuration
+> - Add support for intelligent scan of all frequencies
 >
 > Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 > ---
->  .../recipes-daemons/atftp/{atftp_0.7.2.bb => atftp_0.7.4.bb}    | 2 +-
+>  meta-oe/recipes-connectivity/iwd/{iwd_1.10.bb => iwd_1.11.bb} | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-networking/recipes-daemons/atftp/{atftp_0.7.2.bb => atftp_0.7.4.bb} (97%)
+>  rename meta-oe/recipes-connectivity/iwd/{iwd_1.10.bb => iwd_1.11.bb} (96%)
 >
-> diff --git a/meta-networking/recipes-daemons/atftp/atftp_0.7.2.bb b/meta-networking/recipes-daemons/atftp/atftp_0.7.4.bb
-> similarity index 97%
-> rename from meta-networking/recipes-daemons/atftp/atftp_0.7.2.bb
-> rename to meta-networking/recipes-daemons/atftp/atftp_0.7.4.bb
-> index ff9084dbf..76a9e144e 100644
-> --- a/meta-networking/recipes-daemons/atftp/atftp_0.7.2.bb
-> +++ b/meta-networking/recipes-daemons/atftp/atftp_0.7.4.bb
-> @@ -4,7 +4,7 @@ HOMEPAGE = "http://packages.debian.org/atftp"
->  LICENSE = "GPLv2"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=94d55d512a9ba36caa9b7df079bae19f"
+> diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.10.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.11.bb
+> similarity index 96%
+> rename from meta-oe/recipes-connectivity/iwd/iwd_1.10.bb
+> rename to meta-oe/recipes-connectivity/iwd/iwd_1.11.bb
+> index b2495348f..f4a237e03 100644
+> --- a/meta-oe/recipes-connectivity/iwd/iwd_1.10.bb
+> +++ b/meta-oe/recipes-connectivity/iwd/iwd_1.11.bb
+> @@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
+>  DEPENDS = "ell"
 >
-> -SRCREV = "52b71f0831dcbde508bd3a961d84abb80a62480f"
-> +SRCREV = "e56e8845f1070e89a4a6e509396b681688d03793"
+>  SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
+> -SRCREV = "d8dc5a9bd19c5b98d8692801d3cf4e8af495930a"
+> +SRCREV = "355c2df97e1adfdaee4a67c1705bd76202384687"
+>  S = "${WORKDIR}/git"
 >
->  SRC_URI = "git://git.code.sf.net/p/atftp/code \
->             file://atftpd.init \
+>  inherit autotools manpages pkgconfig python3native systemd
 > --
 > 2.25.1
 >
