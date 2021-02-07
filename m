@@ -1,175 +1,110 @@
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
- by mx.groups.io with SMTP id smtpd.web09.18816.1612696502231739660
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.web08.19515.1612700973635767237
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Feb 2021 03:15:03 -0800
+ Sun, 07 Feb 2021 04:29:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=JeMrGmHP;
- spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f48.google.com with SMTP id t5so14737036eds.12;
-        Sun, 07 Feb 2021 03:15:02 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=DzhJYhO/;
+ spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f52.google.com with SMTP id 190so10166819wmz.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Feb 2021 04:29:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=U2oriLcbV8tzcafj4UFImGXtGK2gT9xn52hJtjOBLog=;
-        b=JeMrGmHPY2ln2uqKTR5G3ysJTm+FvnCu02q9DDWFrk4bhHwNje+ndIi7akayf/DpPX
-         8UMTk8ELxpvx0R74ep1Cb1bM1cyJARb9YdTcB9sChWp1oz3T6nXGG/jwJ0OebW9q12PU
-         hErqInBS9H5cTtrnoC5w9rIUBsaDnOitRyNrAEeGS/Asfo1MLDflz0Q+vRBRcMsORRiW
-         SFGNnRGKa7INyw9xXmfPJXqait3bqnErpDyZg65qG5wbXf2CVamLyBSe4Eehp0tdaA4D
-         yvqGW4yq+eFQvmsM/AqP2+K4UuApY+ykQE2warcjUlKgSxpvzP3I2pqoqLizCqfDRjP8
-         rm7g==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=C3A08DHxyfWnHGufrxPcuzKJnjbYop4E9crk0tiDXdI=;
+        b=DzhJYhO/iJUGXzYU1NouRu8v1J/0S9XoAi1Thc3Y09okpq9Kmc6d6aLOg3+MVuTMKb
+         F2Xq80XP3pMWmlcHavwrkD8yZTFJTAQpC1yagYq3FLDhwktQglhg3J2ct18jG4W8eEWQ
+         HQHJcldUDYnF0ny3sBk4zKgtG2EviXWRL5LJ04x2t65bZGX1nCVwyBEkFOFkiW4xnuV7
+         FZDlrLFJzWkQEJZd57rEKDA+FW/CC94LwbHZSLLu9aMCxvEDQvgTo6dSfzFhSPLQU12o
+         swXs6zQ4KwHw2d8c+M3AVWA5pbRcdFgQ/g6AyTgkDMUcOZskH12MyGw6nHHpZ1bMsqzQ
+         742A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=U2oriLcbV8tzcafj4UFImGXtGK2gT9xn52hJtjOBLog=;
-        b=Dac0DygZkuOTaw6+8LEEwR49w3MaECoREYcpr34iKD1rTrX3m9pRLq7CLxd+P/O3mF
-         pa4KPDPPyIGyfIdonT3C6peoQDWKDWz/5WbGXiycqGj6yH5NCislRAk04CUW4GsjSv8r
-         0xQ4LREzSl+lHTpLSh4pP6sOUnxzbfDAlycnl0Sl1VNQ+WJuteN2yarmGaw3fhXPXi/t
-         PxBnC1LtATRfb3kUfhZKHETu9LwNwkfDy1YGLub5Er6htjw/e1ctDzTbV2SyXrHWtpnL
-         LAvxvO8/BIzXEhrD3ANE3tT8GpEjzkJbVpRO9CB02OoKqGfr8HPw3+L6wK/va+WvcjGA
-         ideQ==
-X-Gm-Message-State: AOAM531LDzhCvnfksaTQErjNpVdMohciQEplDYdAy3WwdWNCuQGq+w3P
-	HzJ2LqOv4Z/AXdStVuehpAeAljcNLAYZwpcOdqo=
-X-Google-Smtp-Source: ABdhPJz8bVvgDF+eqEWMyW0lOAj7UtJHg+zQ8E0GdNDOOrpbEc7YVyqWiZoDB/+zkIs4XKbumIC/K6RxyHfTsEe+ewE=
-X-Received: by 2002:a05:6402:5193:: with SMTP id q19mr12238517edd.264.1612696500575;
- Sun, 07 Feb 2021 03:15:00 -0800 (PST)
-MIME-Version: 1.0
-References: <17b543581ffb421b812323891405dcfb@XBOX03.axis.com>
- <CA+chaQc0anOg2E=o1ouEca-QJDGqKxDoXm6aPVXzsc8TELW3zA@mail.gmail.com>
- <d9185d19-1f09-a1b6-2926-f54309190b24@gmail.com> <16614BA6A53B3779.25597@lists.openembedded.org>
-In-Reply-To: <16614BA6A53B3779.25597@lists.openembedded.org>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=C3A08DHxyfWnHGufrxPcuzKJnjbYop4E9crk0tiDXdI=;
+        b=JvZcpfuNQ7KefoElcn2o3VEEBDYOGS4TwEnPSfCPbxrfVDZnA5YkXGMEJYtaS1G7AC
+         IHwsjA7zNnt7oXM/XwvbEjvfJRHm1UHWJR37R3zdiEkM75Enj19clLf9jIRKFHLFRyNd
+         Qf5VA6vCstb9Cb1lcvVg5aNfNrrxyAPHNiK+7Sp79wNtF6hh/VRISe7CVDWhu/7WATo/
+         0hnRyjLbLwuoI5GwdG9peUAqFToE78+DwJjWQgAjzPnHyEMEw14IgCXb57z35T7rF1pM
+         rmvM9p/lqifZDS4mRKzPzfuTRxd7cTMvcQYJXCRZhOZb+/+dZosdiSoJXkb6Hc5XstJe
+         QJSA==
+X-Gm-Message-State: AOAM531myru1vb4+j63PyPIb8oQo+tbAgTH777x6wp1NevTxli37WAb9
+	StHDHfgty69tu3J39QhZD3NEUZ5RkXg06w==
+X-Google-Smtp-Source: ABdhPJwC90dQLfL0WZBx7Oc9+OG9cKk6hjFa6iDl8Hjy5WwmrTos+e9gg+Zz5PYwdm9kWUQ79ysv1w==
+X-Received: by 2002:a05:600c:35ce:: with SMTP id r14mr10930691wmq.136.1612700970841;
+        Sun, 07 Feb 2021 04:29:30 -0800 (PST)
+Return-Path: <martin.jansa@gmail.com>
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id j17sm15157575wmc.28.2021.02.07.04.29.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 07 Feb 2021 04:29:29 -0800 (PST)
 From: "Martin Jansa" <Martin.Jansa@gmail.com>
-Date: Sun, 7 Feb 2021 12:14:49 +0100
-Message-ID: <CA+chaQdbZwyBTbyctEh_y8x_p=txiwqy8gjmkwDrh6rqX_ztng@mail.gmail.com>
-Subject: Re: [oe] [bitbake-devel] Backport changes for _PYTHON_SYSCONFIGDATA_NAME to Gatesgarth and Dunfell
-To: Martin Jansa <Martin.Jansa@gmail.com>
-Cc: akuster808 <akuster808@gmail.com>, Peter Kjellerstedt <peter.kjellerstedt@axis.com>, 
-	Steve Sakoman <steve@sakoman.com>, "Mittal, Anuj" <anuj.mittal@intel.com>, 
-	"OE Core (openembedded-core@lists.openembedded.org)" <openembedded-core@lists.openembedded.org>, 
-	"OE Development (openembedded-devel@lists.openembedded.org)" <openembedded-devel@lists.openembedded.org>, 
-	"BitBake Development (bitbake-devel@lists.openembedded.org)" <bitbake-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="0000000000000c233605babd2af0"
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [dunfell][PATCH] graphviz: use git fetcher instead of gitlab archives
+Date: Sun,  7 Feb 2021 13:29:27 +0100
+Message-Id: <20210207122927.3586198-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.27.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
---0000000000000c233605babd2af0
-Content-Type: text/plain; charset="UTF-8"
+* fixes:
+  graphviz-2.40.1-r0 do_package_qa: QA Issue: graphviz: SRC_URI uses unstable GitHub/GitLab archives, convert recipe to use git protocol [src-uri-bad]
 
-On Sun, Feb 7, 2021 at 12:15 AM Martin Jansa via lists.openembedded.org
-<Martin.Jansa=gmail.com@lists.openembedded.org> wrote:
+* it's already fixed in gatesgarth and newer with new version from:
+  commit 985be3901e79c9e45cd5d23774e3cfdaab476b44
+  Author: Khem Raj <raj.khem@gmail.com>
+  Date:   Mon Nov 2 18:33:34 2020 -0800
 
-> On Sat, Jan 16, 2021 at 6:52 PM akuster808 <akuster808@gmail.com> wrote:
->
->>
->>
->> On 1/16/21 9:44 AM, Martin Jansa wrote:
->> > Aren't the missing spaces in appends fixes also needed for meta-oe
->> > recipes?
->>
->>
->> >
->> > I think at least top 5 commits from:
->> >
->> https://git.openembedded.org/meta-openembedded/log/?qt=grep&q=space.*append
->> > were also follow-up from these changes in oe-core.
->> >
->> Do you mean something beyond the meta-openembedded commits mentioned
->> near the bottom of the email?
->>
->
-> Yes I mean these 5 commits at least.
->
+    graphviz: Upgrade to 2.44.1 release
 
-50bbf80abf python3-pykwalify: Do not unset _PYTHON_SYSCONFIGDATA_NAME
-6b3e3bdaf8 python-grpcio-tools: Add missing space for append
+    - Refresh patches to apply on new sources
+    - Switch away from gitlab archives
+    - Bypass pdf documentation generation
 
-The first one is just an additional cleanup, but without the 2nd one and
-with the cherry-picks from the first e-mail applied you would get:
-ERROR: Nothing PROVIDES 'python3python3-grpcio' (but
-meta-oe/meta-python/recipes-devtools/python/python3-grpcio-tools_1.14.1.bb
-DEPENDS on or otherwise requires it). Close matches:
-  python-grpcio
-  python3-grpcio
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../graphviz/graphviz_2.40.1.bb                | 18 +++++++-----------
+ 1 file changed, 7 insertions(+), 11 deletions(-)
 
-my world build is still running..
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb b/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb
+index 12ecb99091..d393ae2a1c 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb
++++ b/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb
+@@ -19,13 +19,12 @@ DEPENDS_append_class-target = " ${BPN}-native"
+ 
+ inherit autotools-brokensep pkgconfig gettext
+ 
+-# The source tarball suggested at
+-# https://graphviz.gitlab.io/_pages/Download/Download_source.html has no
+-# version in its name. So once graphviz is updgraded, only first time users will
+-# get checksum errors. Fedora people seem to expect same so they use a versioned
+-# source - see https://src.fedoraproject.org/cgit/rpms/graphviz.git/tree/graphviz.spec
+-
+-SRC_URI = "https://gitlab.com/graphviz/graphviz/-/archive/stable_release_${PV}/graphviz-stable_release_${PV}.tar.gz \
++# it was already moved from github.com/ellson/graphviz to https://gitlab.com/graphviz/graphviz/
++# but the later doesn't have stable_release_2.40.1 tag (anymore?), but it has corresponding commit:
++# https://github.com/ellson/MOTHBALLED-graphviz/releases/tag/stable_release_2.40.1
++# https://gitlab.com/graphviz/graphviz/-/commit/67cd2e5121379a38e0801cc05cce5033f8a2a609
++SRCREV = "67cd2e5121379a38e0801cc05cce5033f8a2a609"
++SRC_URI = "git://gitlab.com/${BPN}/${BPN}.git \
+            file://0001-plugin-pango-Include-freetype-headers-explicitly.patch \
+ "
+ # Use native mkdefs
+@@ -33,10 +32,7 @@ SRC_URI_append_class-target = "\
+            file://0001-Use-native-mkdefs.patch \
+            file://0001-Set-use_tcl-to-be-empty-string-if-tcl-is-disabled.patch \
+ "
+-SRC_URI[md5sum] = "2acf30ca8e6cc8b001b0334db65fd072"
+-SRC_URI[sha256sum] = "e6c3f8dbfde1c4523055403927bef29f97f9fc12715c1042b5dcf648a2c1c62a"
+-
+-S = "${WORKDIR}/${BPN}-stable_release_${PV}"
++S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF_class-target = "\
+                 --with-expatincludedir=${STAGING_INCDIR} \
+-- 
+2.27.0
 
-
-> with c99bb790 DEPENDS variable doesn't end with a space, so the missing
-> leading space in these appends (which was fine until now because of
-> trailing space from DEPENDS set in bbclass) is now causing wrong dependency
-> (should be easily reproducible with the patches backported, just by parsing
-> the recipes).
->
->
->> I need clarity so I can open an issue in gitlab for tracking purposes as
->> I am sure I will forget this
->>
->
-> we're using gitlab?
->
-> 
->
->
-
---0000000000000c233605babd2af0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">On Sun, Feb 7, 2021 at 12:15 AM Martin Ja=
-nsa via <a href=3D"http://lists.openembedded.org">lists.openembedded.org</a=
-> &lt;Martin.Jansa=3D<a href=3D"mailto:gmail.com@lists.openembedded.org">gm=
-ail.com@lists.openembedded.org</a>&gt; wrote:<br></div><div class=3D"gmail_=
-quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;=
-border-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><=
-div dir=3D"ltr">On Sat, Jan 16, 2021 at 6:52 PM akuster808 &lt;<a href=3D"m=
-ailto:akuster808@gmail.com" target=3D"_blank">akuster808@gmail.com</a>&gt; =
-wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote=
-" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
-padding-left:1ex"><br>
-<br>
-On 1/16/21 9:44 AM, Martin Jansa wrote:<br>
-&gt; Aren&#39;t the missing spaces in appends fixes also needed for meta-o=
-e<br>
-&gt; recipes?<br>
-<br>
-<br>
-&gt;<br>
-&gt; I think at least top 5 commits from:<br>
-&gt; <a href=3D"https://git.openembedded.org/meta-openembedded/log/?qt=3Dg=
-rep&amp;q=3Dspace.*append" rel=3D"noreferrer" target=3D"_blank">https://git=
-.openembedded.org/meta-openembedded/log/?qt=3Dgrep&amp;q=3Dspace.*append</a=
-><br>
-&gt; were also follow-up from these changes in oe-core.<br>
-&gt;<br>
-Do you mean something beyond the meta-openembedded commits mentioned<br>
-near the bottom of the email?<br></blockquote><div><br></div><div>Yes I me=
-an these 5 commits at least.</div></div></div></blockquote><div><br></div><=
-div>50bbf80abf python3-pykwalify: Do not unset _PYTHON_SYSCONFIGDATA_NAME</=
-div>6b3e3bdaf8 python-grpcio-tools: Add missing space for append</div><div =
-class=3D"gmail_quote"><br></div><div class=3D"gmail_quote">The first one is=
- just an additional cleanup, but without the 2nd one and with the cherry-pi=
-cks from the first e-mail applied you would get:</div><div class=3D"gmail_q=
-uote">ERROR: Nothing PROVIDES &#39;python3python3-grpcio&#39; (but meta-oe/=
-meta-python/recipes-devtools/python/<a href=3D"http://python3-grpcio-tools_=
-1.14.1.bb">python3-grpcio-tools_1.14.1.bb</a> DEPENDS on or otherwise requi=
-res it). Close matches:<br>=C2=A0 python-grpcio<br>=C2=A0 python3-grpcio<br=
-></div><div class=3D"gmail_quote"><br></div><div class=3D"gmail_quote">my w=
-orld build is still running..</div><div class=3D"gmail_quote"><br><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
-solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div class=3D"gma=
-il_quote"><div><br></div><div>with c99bb790 DEPENDS variable doesn&#39;t en=
-d with a space, so the missing leading space in these appends (which was fi=
-ne until now because of trailing space from DEPENDS set in bbclass) is now =
-causing wrong dependency (should be easily reproducible with the patches ba=
-ckported, just by parsing the recipes).</div><div>=C2=A0</div><blockquote c=
-lass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px soli=
-d rgb(204,204,204);padding-left:1ex">
-I need clarity so I can open an issue in gitlab for tracking purposes as<b=
-r>
-I am sure I will forget this<br></blockquote><div><br></div><div>we&#39;re=
- using gitlab?=C2=A0</div></div></div>
-<br>
-<br>
-<br>
-</blockquote></div></div>
-
---0000000000000c233605babd2af0--
