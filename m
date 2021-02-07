@@ -1,190 +1,109 @@
-Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com [209.85.167.67])
- by mx.groups.io with SMTP id smtpd.web11.23588.1612720953917206073
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.web12.24603.1612725012543313703
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Feb 2021 10:02:34 -0800
+ Sun, 07 Feb 2021 11:10:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=PJN0TDdE;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.67, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f67.google.com with SMTP id b2so18840579lfq.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Feb 2021 10:02:33 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZZ/VHQd4;
+ spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f182.google.com with SMTP id t11so5154459pgu.8
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Feb 2021 11:10:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=Vlt81QezqAo1TFNdQMTdG8w3zntXzqOXOjyuXc3sOo8=;
-        b=PJN0TDdE92Mcv4XTFZQ8JRtEU+icgrY+THkY/F2kHUH/npYRts2Q6uz2GBV+tK435H
-         bb+OxCx/UmdgD0ZE8MZX/l+OhX3oSlLqc3EIk/Eb7R9WWvmyKDwBmFgH6MUnFHPS1t1K
-         n9kjwLTeIWRg7U4pzQoD5zAe4xJZPpLGEcY7oSL0wamAZYJvCjJaTrVsqs9BzEShZUgP
-         zU+1AvHVUOHQ8Xcg4I66CGwislBXzlfKx96rlLj5eiKPulVuqti6Qu3vAtvCS9q5ExLo
-         FlR0qDzVIdyKDcAUoOc4JGqUs16PCvll09cZXfKWYr6JimsD5piaudwpkDGmD1Oo2+96
-         iSAQ==
+        bh=31d1T3Wu1KuAXS9zyxAWdkX9280LcrsqF0s0i6LAFpk=;
+        b=ZZ/VHQd4+IiOFpX9eIkAa0m5TVRl/JVud+YyY05Tfg4mMLFlkCgkxQ+3UoTPqkOGW0
+         ygTmTv+SQDy7zOx9ze3xd8x9VB6u7lt/EIaOsLWYEkmXuwWg6VbIkSiOObZmNzUvB9Yj
+         /pKdVlVqxz/wVEsEGKfw5eedEdQBpD0gPQLI1uTNVgqGQ5uhho0e+xHIun82Bqt4xtMP
+         ZVvYfSP1TRohQA4MxVcZm7dmPC11LcrUTfLUfFArWt7z5leUbZ0jXaz9STdPmyp5dTx6
+         NapcsnloiuC8UfjsYeiBX2juWonqHeGNd6w0VZUCTco3YWNwEYHkzqaSdhTqlLHBE1zv
+         Vqeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=Vlt81QezqAo1TFNdQMTdG8w3zntXzqOXOjyuXc3sOo8=;
-        b=pO7sN3mPfToAk6IO5WQb4zkl9uTJGhzPZG2JqINRf/7nE6psWcoTqh/28MyKJwd2vY
-         NA6ss+PL6K6/euPe1C/QzaAu/7h+goG65RxvDlXnRQFKcEpLohQT0fWqkCZMlhXMAsWF
-         LkHrwHhOzbXDHP8+oDi0qACJCDyCTu0mgfUkLL3xl131N5PuvEmHZRN9zuc1ua/kgGLq
-         l4JucDu5Uz+Ky6lLVoqpHIkrQqaZOEzGvMng0FAAfA7hVJyXX3UfyRMpVyOFTxs7L2dm
-         Ow1WEfVHXjOMFj1UiHNI8shVQMt6019dZWuV0Qpyq0uoFuEgF/Ywd/Xsf1NEnxAKhq6s
-         aMeQ==
-X-Gm-Message-State: AOAM530/duQL02CdaXD6XUZ85LtTJ+VO2oCva6z6HunC5kMpKEfwQZKh
-	0hlmdv8MCwgtA9RmqeYtDoNi+5hqxs8BWJX0
-X-Google-Smtp-Source: ABdhPJzJAEsnDn6PcmVSTqPoWAOlFSroP65wzqu/hw9tnDXD2R1nC48+sAmM/PoRsfzFkkGWO3VhcQ==
-X-Received: by 2002:a19:a41a:: with SMTP id q26mr2847631lfc.194.1612720951589;
-        Sun, 07 Feb 2021 10:02:31 -0800 (PST)
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id h19sm1668970ljc.56.2021.02.07.10.02.30
+        bh=31d1T3Wu1KuAXS9zyxAWdkX9280LcrsqF0s0i6LAFpk=;
+        b=YakO6LiE7X329kxr20PrtOso1BeeU46c32ChlXSnuY3FerPL4mZG12tQnVTMRh+5mt
+         veJwjvjR+5a8ItQ1nHAkLPJhYZG7gGxuFFdw4bPs44mBKu2HGZ0vEXaHX/IOzIfu+VnW
+         6oGlwi7k8i3zMLOBZpfqvX7qv0y6ISC+gpgsiFlHQ8So2D1NALGZ1oMmBG1DkgSE765k
+         Bq/NgquHC2mySFY+f+RNnMWUI7WoO+WKvcdqrlJWovBHJsVPmthWmqIao2N/rVKsabCs
+         CN0Z9lvXIlV9lGv2j8MKqW0hvnv4gvpTxzjCmWSfl4XT5ZQZVibZc6O+8fsXuKgVkKal
+         Yowg==
+X-Gm-Message-State: AOAM532Ta1xhw2qkenv8yr4kO3tkMbg6il6hD3Im6yNEZPWEx2daRq/D
+	/p16z+9FYeY876GNizZBLc91mMRJv9QIgA==
+X-Google-Smtp-Source: ABdhPJz/9SRSFWmTMrVlWA1zb3eI+hfBKnjnmDzy8j9bZMhUzcYb11Y32lLyfERxdmP8Awi12khc1Q==
+X-Received: by 2002:aa7:8f13:0:b029:1bd:f965:66d8 with SMTP id x19-20020aa78f130000b02901bdf96566d8mr13971534pfr.80.1612725011730;
+        Sun, 07 Feb 2021 11:10:11 -0800 (PST)
+Return-Path: <akuster808@gmail.com>
+Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:1d07:684d:b210:7d14])
+        by smtp.gmail.com with ESMTPSA id 123sm16371911pfd.91.2021.02.07.11.10.10
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 Feb 2021 10:02:30 -0800 (PST)
-From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
+        Sun, 07 Feb 2021 11:10:11 -0800 (PST)
+From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-networking][PATCH v2] atftp: update to 0.7.4
-Date: Sun,  7 Feb 2021 18:57:58 +0100
-Message-Id: <20210207175758.71521-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+Subject: [gatesgarth 00/10] Patch review Feb 7
+Date: Sun,  7 Feb 2021 11:09:58 -0800
+Message-Id: <cover.1612724878.git.akuster808@gmail.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Removed upstreamed patches.
+Next Gatesgarth series.
+Please have comments/feedback by Wednesday.
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- ...fix-musl-compile-add-missing-defines.patch | 45 -------------------
- ...d.h-fix-musl-compile-missing-include.patch | 43 ------------------
- .../atftp/{atftp_0.7.2.bb => atftp_0.7.4.bb}  |  5 +--
- 3 files changed, 1 insertion(+), 92 deletions(-)
- delete mode 100644 meta-networking/recipes-daemons/atftp/atftp/0001-argz.h-fix-musl-compile-add-missing-defines.patch
- delete mode 100644 meta-networking/recipes-daemons/atftp/atftp/0002-tftp.h-tftpd.h-fix-musl-compile-missing-include.patch
- rename meta-networking/recipes-daemons/atftp/{atftp_0.7.2.bb => atftp_0.7.4.bb} (84%)
+The following changes since commit 6ff4bd4f345b4e8030b9197d13097308df521576:
 
-diff --git a/meta-networking/recipes-daemons/atftp/atftp/0001-argz.h-fix-musl-compile-add-missing-defines.patch b/meta-networking/recipes-daemons/atftp/atftp/0001-argz.h-fix-musl-compile-add-missing-defines.patch
-deleted file mode 100644
-index cfa8a7325..000000000
---- a/meta-networking/recipes-daemons/atftp/atftp/0001-argz.h-fix-musl-compile-add-missing-defines.patch
-+++ /dev/null
-@@ -1,45 +0,0 @@
--From 543e67919f5cacf309ac88ab091331e41af4224b Mon Sep 17 00:00:00 2001
--From: Peter Seiderer <ps.report@gmx.net>
--Date: Thu, 16 Apr 2015 22:41:57 +0200
--Subject: [PATCH] argz.h: fix musl compile (add missing defines)
--
--Upstream-Status: Pending
--
--Add __THROW, __BEGIN_DECLS, __END_DECLS and __attribute_pure__ defines.
--
--Signed-off-by: Peter Seiderer <ps.report@gmx.net>
--Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
-----
-- argz.h | 16 ++++++++++++++++
-- 1 file changed, 16 insertions(+)
--
--diff --git a/argz.h b/argz.h
--index 582be55..bdf9f62 100644
----- a/argz.h
--+++ b/argz.h
--@@ -48,6 +48,22 @@
-- # define __const const
-- #endif
-- 
--+#ifndef __THROW
--+# define __THROW
--+#endif
--+
--+#ifndef __BEGIN_DECLS
--+# define __BEGIN_DECLS
--+#endif
--+
--+#ifndef __END_DECLS
--+# define __END_DECLS
--+#endif
--+
--+#ifndef __attribute_pure__
--+# define __attribute_pure__
--+#endif
--+
-- #ifndef __error_t_defined
-- typedef int error_t;
-- #endif
---- 
--2.1.4
--
-diff --git a/meta-networking/recipes-daemons/atftp/atftp/0002-tftp.h-tftpd.h-fix-musl-compile-missing-include.patch b/meta-networking/recipes-daemons/atftp/atftp/0002-tftp.h-tftpd.h-fix-musl-compile-missing-include.patch
-deleted file mode 100644
-index 093054ce8..000000000
---- a/meta-networking/recipes-daemons/atftp/atftp/0002-tftp.h-tftpd.h-fix-musl-compile-missing-include.patch
-+++ /dev/null
-@@ -1,43 +0,0 @@
--From 77e399899d9d7297d23c321811b628febdf0fd92 Mon Sep 17 00:00:00 2001
--From: Peter Seiderer <ps.report@gmx.net>
--Date: Thu, 16 Apr 2015 22:43:49 +0200
--Subject: [PATCH] tftp.h/tftpd.h: fix musl compile (missing include)
--
--Upstream-Status: Pending
--
--Add sys/types.h include for u_char typedef.
--
--Signed-off-by: Peter Seiderer <ps.report@gmx.net>
--Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
-----
-- tftp.h  | 1 +
-- tftpd.h | 1 +
-- 2 files changed, 2 insertions(+)
--
--diff --git a/tftp.h b/tftp.h
--index 12bd6aa..32a3f63 100644
----- a/tftp.h
--+++ b/tftp.h
--@@ -19,6 +19,7 @@
-- 
-- #include <sys/time.h>
-- #include <sys/times.h>
--+#include <sys/types.h>
-- #include "tftp_def.h"
-- #include "config.h"
-- 
--diff --git a/tftpd.h b/tftpd.h
--index 945065e..60d3a49 100644
----- a/tftpd.h
--+++ b/tftpd.h
--@@ -20,6 +20,7 @@
-- #include <pthread.h>
-- #include <arpa/tftp.h>
-- #include <arpa/inet.h>
--+#include <sys/types.h>
-- #include "tftp_io.h"
-- 
-- /*
---- 
--2.1.4
--
-diff --git a/meta-networking/recipes-daemons/atftp/atftp_0.7.2.bb b/meta-networking/recipes-daemons/atftp/atftp_0.7.4.bb
-similarity index 84%
-rename from meta-networking/recipes-daemons/atftp/atftp_0.7.2.bb
-rename to meta-networking/recipes-daemons/atftp/atftp_0.7.4.bb
-index ff9084dbf..936fc723f 100644
---- a/meta-networking/recipes-daemons/atftp/atftp_0.7.2.bb
-+++ b/meta-networking/recipes-daemons/atftp/atftp_0.7.4.bb
-@@ -4,15 +4,12 @@ HOMEPAGE = "http://packages.debian.org/atftp"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
--SRCREV = "52b71f0831dcbde508bd3a961d84abb80a62480f"
-+SRCREV = "e56e8845f1070e89a4a6e509396b681688d03793"
- 
- SRC_URI = "git://git.code.sf.net/p/atftp/code \
-            file://atftpd.init \
-            file://atftpd.service \
- "
--SRC_URI_append_libc-musl = " file://0001-argz.h-fix-musl-compile-add-missing-defines.patch \
--                             file://0002-tftp.h-tftpd.h-fix-musl-compile-missing-include.patch \
--                           "
- 
- S = "${WORKDIR}/git"
- 
+  postgresql: Update to 12.5 (2021-01-18 08:20:58 -0800)
+
+are available in the Git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib stable/gatesgarth-nut
+  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/gatesgarth-nut
+
+Anatol Belski (1):
+  xmlsec1: Fix configure QA error caused by host lookup path
+
+Dmitry Baryshkov (2):
+  xterm: install xterm and uxterm desktop files
+  xterm: provide virtual/x-terminal-emulator
+
+Mikko Rapeli (2):
+  flatbuffers: whitelist CVE-2020-35864
+  giflib: apply patch for CVE-2019-15133 and set CVE_PRODUCT
+
+S. Lockwood-Childs (1):
+  sip3: simplify recipe
+
+Søren Andersen (1):
+  zram: fix sourcing of zram parameters
+
+zangrc (2):
+  iscsi-initiator-utils: upgrade 2.1.2 -> 2.1.3
+  openldap: upgrade 2.4.51 -> 2.4.56
+
+zhengruoqin (1):
+  openldap: upgrade 2.4.56 -> 2.4.57
+
+ ...Compare-with-max-int-instead-of-max-.patch | 48 -------------------
+ ....1.2.bb => iscsi-initiator-utils_2.1.3.bb} |  3 +-
+ .../flatbuffers/flatbuffers_1.12.0.bb         |  2 +
+ .../giflib/files/CVE-2019-15133.patch         | 23 +++++++++
+ .../recipes-devtools/giflib/giflib_5.1.4.bb   |  7 ++-
+ meta-oe/recipes-devtools/sip/sip3_4.19.23.bb  | 17 ++-----
+ .../recipes-extended/zram/zram/zram-swap-init |  2 +-
+ .../recipes-graphics/xorg-app/xterm_353.bb    | 16 ++++++-
+ ...{openldap_2.4.51.bb => openldap_2.4.57.bb} |  6 +--
+ .../xmlsec1/ensure-search-path-non-host.patch | 22 +++++++++
+ .../recipes-support/xmlsec1/xmlsec1_1.2.30.bb |  1 +
+ 11 files changed, 78 insertions(+), 69 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-libopeniscsiusr-Compare-with-max-int-instead-of-max-.patch
+ rename meta-networking/recipes-daemons/iscsi-initiator-utils/{iscsi-initiator-utils_2.1.2.bb => iscsi-initiator-utils_2.1.3.bb} (96%)
+ create mode 100644 meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
+ rename meta-oe/recipes-support/openldap/{openldap_2.4.51.bb => openldap_2.4.57.bb} (97%)
+ create mode 100644 meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch
+
 -- 
-2.25.1
+2.17.1
 
