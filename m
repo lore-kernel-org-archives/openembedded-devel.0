@@ -1,81 +1,96 @@
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web08.30937.1612755843683260778
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.web10.30990.1612757590703602834
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Feb 2021 19:44:03 -0800
+ Sun, 07 Feb 2021 20:13:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=TbvezI1I;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id e12so7093941pls.4
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Feb 2021 19:44:03 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=gITMie/3;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id my11so8740005pjb.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Feb 2021 20:13:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=7z8adPAx52XhNrVzHeY//gLAdOAbJLmWbm51k+0F7Gg=;
-        b=TbvezI1IPz0JWRcqaqD7tnIxq3IEZG8jeo6ifMsmRcSVOgxYOxPQ+lsH8rgZHFhGjX
-         w5pK21AYoiUR6tgDybnenxxAkW9uQ6A0my4sNQhMRckSpueZFjQ/zbFaJP9jYTxFOb/L
-         JBcj9h+ySRF5lqvRHLH8J4I/RVjmsC1kkcQbW+qbwk06a0Vu3Q6aLYUewvCDxVABW82s
-         QRpA1WwtVIxAAdIFv+hYDvnfqlRx2lsxOxVuIlCZ36HsuO/23Ogq2BLQb38A/LxRlGAw
-         F8iwEeN7yCyqrAy3EDOjweJn+4jse29nOsURETI4jalZgzBT1RUuNYeTocpe7zYHt6Am
-         fU6Q==
+        bh=NJbmydcIEXBzmOcASbDtoYBujeyT4fOckCoopoEpeZw=;
+        b=gITMie/3CNgf6xecBhrYRoL/ji3dIPEZ6cqaS30XXtLj8UnFAZ9J9TZ9a3t2XYARcW
+         Tw1BuhbY/Ul+FnDTIoCzHYnlWOzFNRRekKusJA2vIZHMO5fegwUEC8ZE8nchjH2GR2sX
+         +Q/ek45/v3o+wBW+7qcI6N7hJFxSx+jWCyZdryE9h+ycu41ldzI62RqBXiCIfzy7ojS7
+         GvpSb6brk71ONWvkk6UjJxlgi1dXUGw8BQpY8b1FJBb+Hdz/H8ZCk7iW/HItLdNKzTNA
+         TrRtzCL4e7wghi6C+56oIErPSSGVb+noMFwuTPzxwKfaJ8p4mv3C6WPgYVc88D+r/YwN
+         AwDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=7z8adPAx52XhNrVzHeY//gLAdOAbJLmWbm51k+0F7Gg=;
-        b=qdOQaqo5/7AIsI8RQ4Rc4taaev9At5BwpfFHUnqzbVqX/vTiREynad0kpIjdf/6t2P
-         73g6dU9Z+NIEmy0STQHsjcW4+2jHHi1sYxlFK1+vt5cPBWio50sneRygh/S8fWSUGOdN
-         euOujwM6iHIjffqC/l+BanbkVHPHiTrJYZYQ1wqHKf70rFMIQlh986hs3owgUKO6/HzJ
-         /FbgYHGcayznRemu4WR6ufgkscJeFfl0YV2EKYEGASESsRRO/MMGqQA6XY0ID9Ksf+xn
-         ybBZyBjiGWfv52scnXaP7wSxU2mXfm8RpgoaHQmj7CPdpOl6/exhXum/4bOY3n1cuHUT
-         nMwQ==
-X-Gm-Message-State: AOAM53342QxPS2inkI2ekgOoBwoR7gQMPWzII/qu1akNjKOEAarvmDB8
-	DeoITalsxMA95OaWq5VstfiJXu2m1T6SuA==
-X-Google-Smtp-Source: ABdhPJzVvja1ZAlBFAwRGS0k994W6PezDHpcfVYbiUlDsH+rTihmsEuDiqNLPwlol3J6l/X2AYj0oA==
-X-Received: by 2002:a17:902:47:b029:de:c58e:8257 with SMTP id 65-20020a1709020047b02900dec58e8257mr14714747pla.61.1612755842893;
-        Sun, 07 Feb 2021 19:44:02 -0800 (PST)
+        bh=NJbmydcIEXBzmOcASbDtoYBujeyT4fOckCoopoEpeZw=;
+        b=oDESfXA9mpKsHqJhC2C49CZeHzSfQYo6ohWwGJYwYsXJq9ul8arsTQbcvHGqfG4SUw
+         0w+nKnGgHAX1OjjzsJGszg2CYu33MkIqUNwrC3LNTJ/My39cYaQKJhYvZx8JX3HLvAs9
+         pLComtPxQ/X3rlRvQuAIVNJlb/PbrRmyhw96SwEXJMnIE3D5pBLzOmoKZdvjBRCEHmbr
+         Pe629aBUyxtTMuTdftt2Zjp7tNpw2v7F23l6yOv5KFEapAy+601eiHlclVzkkymKVvlo
+         96+ckOYnEtlD3E8tSUhKWKkz5+gRXINh1p3W9KFV7F4TpSNjvu5q8njFGe3yB+GgiGSr
+         d8tw==
+X-Gm-Message-State: AOAM531ebRaOodbr0F/67F/N6pYmh82KjfNO0/F9QK3HvFCynoBj2jcw
+	DXG4a7jDtZfosGZslUpY2AuFpUctSH3aCg==
+X-Google-Smtp-Source: ABdhPJz+V1zG0i9mkNBSQQjzXSP7ZU5/JTHwdLhIcW072bhgPsI6FcPSo340spC2HgUzJwd/xYUuxA==
+X-Received: by 2002:a17:90a:a097:: with SMTP id r23mr15344057pjp.22.1612757589916;
+        Sun, 07 Feb 2021 20:13:09 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::d188])
-        by smtp.gmail.com with ESMTPSA id j9sm13878757pjn.32.2021.02.07.19.44.01
+        by smtp.gmail.com with ESMTPSA id h1sm17999136pgj.59.2021.02.07.20.13.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 Feb 2021 19:44:02 -0800 (PST)
+        Sun, 07 Feb 2021 20:13:09 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] openldap: Fix build with autoconf 2.70+
-Date: Sun,  7 Feb 2021 19:44:00 -0800
-Message-Id: <20210208034400.3252225-1-raj.khem@gmail.com>
+Subject: [PATCH] transmission: Fix build with autotools 2.70+
+Date: Sun,  7 Feb 2021 20:13:07 -0800
+Message-Id: <20210208041307.3279036-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.30.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-New autoconf is stricter about aux files therefore bring them from
-libtool native as they can not go missing anymore
+Eventually when 3.1 is released autotools is replaced with cmake as per
+[1], so we will have to migrate to cmake
+
+[1] https://github.com/transmission/transmission/issues/1573
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/openldap/openldap_2.4.57.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ .../transmission/transmission_git.bb                   | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.57.bb b/meta-oe/recipes-support/openldap/openldap_2.4.57.bb
-index a282523a3c..7c04600670 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.57.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.57.bb
-@@ -151,11 +151,13 @@ CPPFLAGS_append = " -D_GNU_SOURCE -DURANDOM_DEVICE=\'/dev/urandom\' -fPIC"
- LDFLAGS_append = " -pthread"
+diff --git a/meta-oe/recipes-connectivity/transmission/transmission_git.bb b/meta-oe/recipes-connectivity/transmission/transmission_git.bb
+index 297185de72..57267a8de8 100644
+--- a/meta-oe/recipes-connectivity/transmission/transmission_git.bb
++++ b/meta-oe/recipes-connectivity/transmission/transmission_git.bb
+@@ -18,7 +18,7 @@ PV = "3.00"
  
- do_configure() {
--    cp ${STAGING_DATADIR_NATIVE}/libtool/build-aux/ltmain.sh ${S}/build
-     rm -f ${S}/libtool
-     aclocal
-     libtoolize --force --copy
-     gnu-configize
-+    cp ${STAGING_DATADIR_NATIVE}/libtool/build-aux/ltmain.sh ${S}/build
-+    cp ${STAGING_DATADIR_NATIVE}/libtool/build-aux/missing ${S}/build
-+    cp ${STAGING_DATADIR_NATIVE}/libtool/build-aux/compile ${S}/build
-     autoconf
-     oe_runconf
+ S = "${WORKDIR}/git"
+ 
+-inherit autotools gettext update-rc.d systemd mime-xdg
++inherit autotools-brokensep gettext update-rc.d systemd mime-xdg
+ 
+ PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', '', d)} \
+                  ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
+@@ -33,12 +33,16 @@ TRANSMISSION_GROUP ??= "root"
+ 
+ # Configure aborts with:
+ # config.status: error: po/Makefile.in.in was not created by intltoolize.
+-B = "${S}"
+-do_configure_prepend() {
++do_configure() {
+ 	sed -i /AM_GLIB_GNU_GETTEXT/d ${S}/configure.ac
+ 	cd ${S}
+ 	./update-version-h.sh
+ 	intltoolize --copy --force --automake
++        aclocal
++        libtoolize --automake --copy --force
++        autoconf
++        automake -a
++        oe_runconf
  }
+ 
+ do_install_append() {
 -- 
 2.30.0
 
