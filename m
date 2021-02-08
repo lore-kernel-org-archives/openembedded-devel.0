@@ -1,102 +1,131 @@
-Received: from alln-iport-3.cisco.com (alln-iport-3.cisco.com [173.37.142.90])
- by mx.groups.io with SMTP id smtpd.web11.160.1612804101157653903
+Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com [209.85.222.177])
+ by mx.groups.io with SMTP id smtpd.web11.380.1612809926205364987
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Feb 2021 09:08:21 -0800
+ Mon, 08 Feb 2021 10:45:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@cisco.com header.s=iport header.b=eoqkuhzN;
- spf=pass (domain: cisco.com, ip: 173.37.142.90, mailfrom: oobitots@cisco.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=cisco.com; i=@cisco.com; l=2616; q=dns/txt; s=iport;
-  t=1612804101; x=1614013701;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=Qm8lMK06KofHVhU+XaQfpLYtTJTxLfPVI8Wr5ChI9IQ=;
-  b=eoqkuhzN7VkmHYPD6upvEPjpqJSVPn6npVihYJTaB9XZSnFqvn1b3Bex
-   7gAp5a9BqZ1rWu20DbufrbBE6K7HhKi0gx0vt4mFcIS3/yxAHL5oVfncc
-   Zr7d5wZr9JgYAxOfkwxMvRFwwEOJe+8ujQHhyAzjQXqvAM1JoXGAaDOTJ
-   0=;
-X-IronPort-AV: E=Sophos;i="5.81,162,1610409600"; 
-   d="scan'208";a="642397082"
-Received: from alln-core-7.cisco.com ([173.36.13.140])
-  by alln-iport-3.cisco.com with ESMTP/TLS/DHE-RSA-SEED-SHA; 08 Feb 2021 17:08:20 +0000
-Received: from sjc-ads-8148.cisco.com (sjc-ads-8148.cisco.com [171.68.208.186])
-	by alln-core-7.cisco.com (8.15.2/8.15.2) with ESMTPS id 118H8Jme002842
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Mon, 8 Feb 2021 17:08:20 GMT
-Received: by sjc-ads-8148.cisco.com (Postfix, from userid 500841)
-	id 7CF71CC1251; Mon,  8 Feb 2021 09:08:19 -0800 (PST)
-From: "Oleksiy Obitotskyy" <oobitots@cisco.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Oleksiy Obitotskyy <oobitots@cisco.com>
-Subject: [meta-oe][PATCH] libhugetlbfs: improve reproducibility
-Date: Mon,  8 Feb 2021 09:08:17 -0800
-Message-Id: <20210208170817.16112-1-oobitots@cisco.com>
-X-Mailer: git-send-email 2.26.2.Cisco
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=jl/1KZef;
+ spf=pass (domain: gmail.com, ip: 209.85.222.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f177.google.com with SMTP id t63so15517605qkc.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Feb 2021 10:45:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=FH3FQvBxcYKfCjLJ2UwGT/hPfxINvKnWpM9130OY36I=;
+        b=jl/1KZefR6AvIpGCjzoISIzR1ZZa9dbOI7NMUxdPXet6p58N+i4XCVOp20h/XPC9qd
+         ZCMfkSbWHu5qqc6bNugjZBbw4euSO0Qh+/IF7cjbEQp+IgTgONGBIgIs0EOugabRs78U
+         y6asKmAXUv4ww++F1cDgZ9F7jKGuKhMr52eyxIx7TI8kjOExEahxYH7lpf7mnnJ1v3mc
+         3NRR09MAIsUvOOJFfIfr4StXANlsFq+qebsBL3I5TV83Sglx0LfSY9HsaQM8dDp7x/t6
+         ViUdFcRZ5o9eV270gox01gNw4r+rANMMTObfrESSTvqdb65Pdk/lmzgWIr/lEinBCKQv
+         3NDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=FH3FQvBxcYKfCjLJ2UwGT/hPfxINvKnWpM9130OY36I=;
+        b=I0Xf9hwLUK8Y5qncwP5cu3GAV0aSYxC7moe15CJzY6ozgbNvoPq2+50kPf3SKvANtk
+         LAT8ftsoshr5nOKrFP1REs2r+/y/CEbqPNswak1IIsKHzSdLFKtNvk5khNDp0ypM32i3
+         ibUO6lI8S4EdWT47e/iRr3sV4khQTsOygVZQL3revRP/rPk6P7XRvP/DVlxA7Yt1k1bK
+         J6IImdNdhu8/j7z30oKDUZMY2RUi5DcL7sdEalQUMnZmi5jIOYxhj9pVlq16Wbtue1L5
+         5XJRT8wJ7V6Mh5LJD3ke3vdjfS5FWH2zKn19vESlNI1ivbgQuGhXNDH1Q6TE5smmokec
+         34UQ==
+X-Gm-Message-State: AOAM5335Pk9W4//9sEgX0/QODo4RkETwN1fvcbwTRBKV2DgQueqs8o2G
+	So4KUX5AXULaXG2b1vZnzt2PfG5/eu7R1Q2HlFQ=
+X-Google-Smtp-Source: ABdhPJyVws2A5NM67wmTyATSW5Y60OGWEQQDcyYrrCSiXgYvm0k8yD1mtv0TxiOPSyHQ+Nz9My3twDIKg0Bgv7aN+3k=
+X-Received: by 2002:a37:7047:: with SMTP id l68mr17377742qkc.337.1612809925203;
+ Mon, 08 Feb 2021 10:45:25 -0800 (PST)
 MIME-Version: 1.0
-X-Outbound-SMTP-Client: 171.68.208.186, sjc-ads-8148.cisco.com
-X-Outbound-Node: alln-core-7.cisco.com
-Content-Transfer-Encoding: 8bit
+References: <8f242d61-4dea-070a-217d-657e2204a807@windriver.com>
+ <CAAnfSTsku9yTFYKCMVkmKq=77V8XGgq9pdO5n_PPb_ttHWnd3w@mail.gmail.com>
+ <3aeac6ad-c5cc-dba9-2c3e-6caaad82aa2d@windriver.com> <5a73bb02-18ae-a7ea-c55b-d650db4d97a1@windriver.com>
+ <CAHtQpK7P8JbrKCS-xMmgUu-rEUW1wbgJau+_93O9eP_+wgM_LQ@mail.gmail.com>
+ <c6849b7a-5dc0-ced2-b6d0-a0e6f9ec72f6@windriver.com> <CAMKF1soXQNO8Jx_iHN+3rGam6qNJ1SsUyPXZgHv=F7NyGgwpOQ@mail.gmail.com>
+ <CAMKF1sr-fsVGdCegDri4Vy7cJK8AZ18M6X8E76XThfi7C34KLQ@mail.gmail.com>
+ <86f09202-225b-ceee-ebfd-1f4ad3be20c1@windriver.com> <c925fe41-3563-e817-b525-011c82111b58@windriver.com>
+In-Reply-To: <c925fe41-3563-e817-b525-011c82111b58@windriver.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Mon, 8 Feb 2021 10:44:58 -0800
+Message-ID: <CAMKF1sqK3=ue0VEVPPX9Pz6=nJfTBPRZb8V-j8DaQF4Ar0Ccug@mail.gmail.com>
+Subject: Re: [oe] Help with dealing with autoconf uprev affected packages?
+To: Randy MacLeod <randy.macleod@windriver.com>
+Cc: Yi Fan Yu <yifan.yu@windriver.com>, Andrey Zhizhikin <andrey.z@gmail.com>, 
+	hongxu <hongxu.jia@windriver.com>, "Chen, Qi" <qi.chen@windriver.com>, 
+	Ross Burton <ross@burtonini.com>, 
+	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-CPPFLAGS was overrided for tests, so we
-missing DEBUG_PREFIX_MAP and got absolute
-path in binary.
+it seems things are getting  in shape we have first clean build for
+meta-openembedded with autotools 2.70+
 
-Signed-off-by: Oleksiy Obitotskyy <oobitots@cisco.com>
----
- ...Append-CPPFLAGS-rather-then-override.patch | 31 +++++++++++++++++++
- .../libhugetlbfs/libhugetlbfs_git.bb          |  1 +
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0001-tests-makefile-Append-CPPFLAGS-rather-then-override.patch
+http://jenkins.nas-admin.org/view/OE/job/oe_world_qemuarm/2286/console
 
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-tests-makefile-Append-CPPFLAGS-rather-then-override.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-tests-makefile-Append-CPPFLAGS-rather-then-override.patch
-new file mode 100644
-index 000000000..78a4cb0fc
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-tests-makefile-Append-CPPFLAGS-rather-then-override.patch
-@@ -0,0 +1,31 @@
-+From b6dba773491bbb7b4664dacdd87a12af860f1bd8 Mon Sep 17 00:00:00 2001
-+From: Oleksiy Obitotskyy <oobitots@cisco.com>
-+Date: Thu, 28 Jan 2021 05:43:33 -0800
-+Subject: [PATCH] tests/makefile: Append CPPFLAGS rather then override
-+
-+CPPFLAGS overrided and we could miss some options needed.
-+
-+Upstream-Status: Submitted
-+Signed-off-by: Oleksiy Obitotskyy <oobitots@cisco.com>
-+---
-+ tests/Makefile | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/tests/Makefile b/tests/Makefile
-+index 0ca3716..d262932 100644
-+--- a/tests/Makefile
-++++ b/tests/Makefile
-+@@ -33,8 +33,8 @@ HELPERS = get_hugetlbfs_path compare_kvers
-+ HELPER_LIBS = libheapshrink.so
-+ BADTOOLCHAIN = bad-toolchain.sh
-+ 
-+-CFLAGS = -O2 -Wall -g
-+-CPPFLAGS = -I..
-++CFLAGS += -O2 -Wall -g
-++CPPFLAGS += -I..
-+ STATIC_LIBHUGE = -Wl,--whole-archive -lhugetlbfs -Wl,--no-whole-archive
-+ STATIC_LDLIBS = -Wl,--no-as-needed -lpthread
-+ LDLIBS = $(STATIC_LDLIBS) -ldl -lhugetlbfs_privutils
-+-- 
-+2.26.2.Cisco
-+
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-index 2f07c938b..fa63316b0 100644
---- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-@@ -26,6 +26,7 @@ SRC_URI = " \
-     file://0006-include-limits.h-for-PATH_MAX.patch \
-     file://0001-huge_page_setup_helper-use-python3-interpreter.patch \
-     file://0001-Revert-ld.hugetlbfs-fix-Ttext-segment-argument-on-AA.patch \
-+    file://0001-tests-makefile-Append-CPPFLAGS-rather-then-override.patch \
- "
- 
- UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
--- 
-2.26.2.Cisco
+Latest master-next has all the changes, so please give it a shot.
 
+Thanks to everyone who chimed in with help in fixing the recipes.
+
+On Fri, Feb 5, 2021 at 3:42 PM Randy MacLeod
+<randy.macleod@windriver.com> wrote:
+>
+> On 2021-02-05 9:46 a.m., Yi Fan Yu wrote:
+> > libmcrypt still uses autoconf 2.59. last release seems to date from 2007
+> >
+> > https://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.5.8/
+> >
+> > its not going to be a piece of cake...
+>
+> Yi Fan will be sending patches to meta-oe and meta-virt
+> to blacklist libmcrypt, nagios-nsca, maybe hiptopvm
+> and change the configuration for php:
+> http://layers.openembedded.org/layerindex/branch/master/recipes/?q=depends%3Alibmcrypt
+>
+> He has also sent a postgresql patch and might wrestle with
+> freeradius unless someone gets there first...
+>
+> Hongxu, aren't you working this weekend due to the
+> upcoming Chinese New Year holiday? If you want to do
+> freeradius, just go ahead and send a patch.
+>
+> ../Randy
+>
+> >
+> > On 2/4/21 10:26 PM, Khem Raj wrote:
+> >> [Please note: This e-mail is from an EXTERNAL e-mail address]
+> >>
+> >> We are now left with 15 odd packages
+> >>
+> >> https://errors.yoctoproject.org/Errors/Build/116395/
+> >>
+> >> On Thu, Feb 4, 2021 at 1:47 PM Khem Raj<raj.khem@gmail.com>  wrote:
+> >>> here is latest list
+> >>>
+> >>> https://errors.yoctoproject.org/Errors/Build/116365/
+> >>>
+> >>> Just look at the do_configure failures for filtering to autotools issues only.
+> >>>
+> >>> On Thu, Feb 4, 2021 at 1:09 PM Yi Fan Yu<yifan.yu@windriver.com>  wrote:
+> >>>> Andrey,
+> >>>>
+> >>>> i am working on this now.
+> >>>>
+> >>>> since you already submitted iperf3, i'll focus on
+> >>>>
+> >>>> libmcrypt.
+> >>>>
+> >>>> i'll test and build both of them once i figure out libmcrypt.
+> >>>>
+> >>>>
+> >>>> On 2/4/21 5:45 AM, Andrey Zhizhikin wrote:
+> >>>>>>> - iperf3 - YiFan
+> >>>>> I just sent a patch for this one:
+> >>>>> https://lists.openembedded.org/g/openembedded-devel/message/89274
+> >>>>>
+> >>>>> YiFan, can you please have a look at it to see if it fits?
+> >>>>>
+> >>>>>
+> >>>>> 
+> >>>>>
+>
+>
+> --
+> # Randy MacLeod
+> # Wind River Linux
