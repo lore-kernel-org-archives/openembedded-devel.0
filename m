@@ -1,80 +1,81 @@
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
- by mx.groups.io with SMTP id smtpd.web09.27015.1612734903729191195
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
+ by mx.groups.io with SMTP id smtpd.web12.28541.1612742476752706342
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Feb 2021 13:55:03 -0800
+ Sun, 07 Feb 2021 16:01:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=G/gwAYsZ;
- spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f169.google.com with SMTP id x23so6971818pfn.6
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Feb 2021 13:55:03 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=lPOuH2pb;
+ spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f178.google.com with SMTP id z21so9109403pgj.4
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Feb 2021 16:01:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=MnVmNM/3vssWIvIjIo5TQdn1NRmo3fVSBowVjlpYUGI=;
-        b=G/gwAYsZ8YsErTP0NCz2SWes4Cmr5O2yoE0Kee7egu7xg54/3srubSx9x0i1YZ6k5S
-         5DcnJCoK3zcQC5EwUa/dyTd5V+u7iz2o5pZdMffYZRv/OvB9DZSi4WEt5Nxt6McNucFC
-         GLUm99Nri+uxVWLA1CNVXe2AlzQJn7kq+HyMcXjttx/+1/t433Tfv2aTc4aXnTsq8SkO
-         Rcj/VssHJ+OrU6E5TQ6RK+aBMk7ycum1Jx0CXq1GxiKqStVFHSmAum9faY8/PYI7w2L1
-         sk6dgmcJLmhKAIdBcV9ITlTYm0TnaCkoYko0qdvoOL78i4s9ZXEQcYjxh7IhWBCg6XSH
-         pZfw==
+        bh=idc1XBv6CGp2vW/cfUy42OJEkl9atrQ1AWQZsHLl8DU=;
+        b=lPOuH2pb73bxavnaAllNNRsUH7n4ofnsbvvXQGekvNphyCLQfuI4JCBJ/S8BGnsZ1f
+         4HhA586ClKW6Kd6JRJiygy0Zxvc2LviVDkMHpTeg5k6rPNs5nMlJsK7KuJ4YvkX0iMbl
+         /ZZwpKYOFIfAxVp1bb0G69k9qXFW+dWgCISKZJTAe5BnJadh3VFyPZabdQFmpxd6S4Jl
+         VmamDcbQK5y4p80sBjOOGCeXDBlzVs5KcLf5blWOr9KpqiJzFCJ/h9OJtxu4GLXTjHgS
+         WQy04TYW0krj/9eIq078sXWHpPjEaWJBaDYau9VzqUQuIXSMRyxRqFJb3mryabXgUxh3
+         OnxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=MnVmNM/3vssWIvIjIo5TQdn1NRmo3fVSBowVjlpYUGI=;
-        b=CULyaDYD0S+JaeluvpDYeP+/29pc0Qm3EQsPXkL9WaL4S90JhK9s00+Pi+ENlaftDt
-         oNIa2M9H+U6acVY7YKciyym2OGgV29dBN6f1GQXgUlkvIMFPKuIWBdWh2r05beXR4ODu
-         SEf4rlCv6cchlZYcXqF6wUf8KinYK8gGJhSXIyGh29DUwoIrW4sM34pA5gapBpgN76jb
-         sKQP85/punOLp7paRNOrLQFgto4Tfke6cdT131ICvq+Uk3yXA5rRFPyOarpKySgKx/KD
-         I4eLrf+97pmOSCKTlWjLXW72Jg/jSodr/1FBireCwCPHTRh9RZbuG7cClctHamaPOb3C
-         SvQw==
-X-Gm-Message-State: AOAM532svKeeir8rGuYctlZ8JaM3ChD+VZBsaldE7oX0U8HS6Sb+qvfj
-	nDg/OKPwOEvDOeaS6wb7pH4qCSZWMc8yzQ==
-X-Google-Smtp-Source: ABdhPJyNpeodhiwejCXQr7cjbyuzRSV+TcDOtimUi0XYnq7CMvcy4eLJ9b31Tzx6WeHBHW1Us8NeMA==
-X-Received: by 2002:a63:fc1c:: with SMTP id j28mr4758695pgi.281.1612734902757;
-        Sun, 07 Feb 2021 13:55:02 -0800 (PST)
+        bh=idc1XBv6CGp2vW/cfUy42OJEkl9atrQ1AWQZsHLl8DU=;
+        b=UHJ/JKU9rfVhe61FwZZNOYPUjnC06Yp0nqTWEsglrWmuruYF75LUds5ozM/rKO2Ffq
+         BAtufpQOvjGZlmtomwzQfcVVsPzZfNekdD3ozMYULK/I6gNZnVpZW4RkeAJW/Uh31VQZ
+         4LZg0n+lhBgV44oQXjfEMEYkVohlaa8/5rcLZIOUor2os2JonajqKgycllfx6kylSFXM
+         NiRGvmrN/pkMDOhwD8X8gfg73WAFQgeNQd/Bp24l3FodvJuwN7XRKk2FdbOQ63ougoEu
+         wvLKfz9UDWc3R1gWvP3Ai3Zmmq86+G87VCuQC5JxalFby6MmyCBdJsOJ0eSonScOpnS2
+         /D7g==
+X-Gm-Message-State: AOAM531SW99onCb8vgT2qfqvDc0pqeocBE6AY+ds1m+FcLFxaxmgH8+G
+	o/ylQmFFmWowndKJ4460m4cxDQln9BOATw==
+X-Google-Smtp-Source: ABdhPJxkF6+4lkPeZMQXbMlGjjJgE+5+pL2wM6YrAXxxGR1cuJRLJlTZR0/FoBhQ786JJB9zgMxB8w==
+X-Received: by 2002:a63:2352:: with SMTP id u18mr15016016pgm.385.1612742475853;
+        Sun, 07 Feb 2021 16:01:15 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::d188])
-        by smtp.gmail.com with ESMTPSA id z16sm16805145pgj.51.2021.02.07.13.55.01
+        by smtp.gmail.com with ESMTPSA id ch5sm14304740pjb.14.2021.02.07.16.01.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 Feb 2021 13:55:02 -0800 (PST)
+        Sun, 07 Feb 2021 16:01:15 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] pavucontrol: Depend on libxml-parser-perl-native
-Date: Sun,  7 Feb 2021 13:54:59 -0800
-Message-Id: <20210207215459.442793-1-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>,
+	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Subject: [meta-multimedia][PATCH] libsrtp: Copy ar-lib from automake
+Date: Sun,  7 Feb 2021 16:01:13 -0800
+Message-Id: <20210208000113.1095577-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.30.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Also use native perl instead of build host perl
-
-Fixes
-checking for XML::Parser... configure: error: XML::Parser perl module is required for intltool
+since libsrtp does not run automake, it does not get to add missing
+files e.g. ar-lib macro file which is needed during autoreconf,
+therefore copy this file from native automake to use here
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-multimedia/recipes-support/libsrtp/libsrtp_2.3.0.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb
-index 51d7e2a2ed..6c07eff764 100644
---- a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb
-+++ b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb
-@@ -8,9 +8,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
- # AM_GLIB_GNU_GETTEXT macro in configure.ac. That macro is deprecated, so the
- # glib-2.0-native dependency may go away at some point (something to keep in
- # mind when doing version upgrades).
--DEPENDS = "intltool-native glib-2.0-native gtkmm3 libcanberra pulseaudio"
-+DEPENDS = "libxml-parser-perl-native intltool-native glib-2.0-native gtkmm3 libcanberra pulseaudio"
+diff --git a/meta-multimedia/recipes-support/libsrtp/libsrtp_2.3.0.bb b/meta-multimedia/recipes-support/libsrtp/libsrtp_2.3.0.bb
+index 6f349e9c81..9d4c305fc7 100644
+--- a/meta-multimedia/recipes-support/libsrtp/libsrtp_2.3.0.bb
++++ b/meta-multimedia/recipes-support/libsrtp/libsrtp_2.3.0.bb
+@@ -12,6 +12,9 @@ SRC_URI = "git://github.com/cisco/libsrtp.git"
+ inherit autotools pkgconfig
  
--inherit autotools features_check
-+inherit autotools features_check perlnative
+ EXTRA_OEMAKE += "shared_library"
+-EXTRA_AUTORECONF += "--exclude=automake"
++
++do_configure_prepend() {
++    cp ${STAGING_DATADIR_NATIVE}/automake-*/ar-lib ${S}
++}
  
- REQUIRED_DISTRO_FEATURES = "x11"
- 
+ ALLOW_EMPTY_${PN} = "1"
 -- 
 2.30.0
 
