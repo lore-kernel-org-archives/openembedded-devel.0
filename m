@@ -1,17 +1,17 @@
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.46])
- by mx.groups.io with SMTP id smtpd.web11.10474.1612879406650807498
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.79])
+ by mx.groups.io with SMTP id smtpd.web08.10427.1612879417494123482
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Feb 2021 06:03:26 -0800
+ Tue, 09 Feb 2021 06:03:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=HVLwomwN;
- spf=pass (domain: windriver.com, ip: 40.107.243.46, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=GlGkjR3s;
+ spf=pass (domain: windriver.com, ip: 40.107.243.79, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JG+95XdC5+4jrO8oyYM0ixjRjb4j3prz26NHV7EPLBmRv7pofNIZe2/4yLfgjyEifChJVqDgD77Z6vwq2LEwlS5cp2zsB4F/e/DCSMCoveX0tbc2PfVJYSeEuk2c3E4WtApcDoyC4JeaYrtMoV2oCQ5/0/jl7kr9ZWVd8HqLMx8/UlKpGaWUQD17j9/D0KEAXNXMy/AMpVg93F1Q963ILs+r4CyTjKRzgf5EsuKehHzgy6gOQ6vBWp1xBjPBYi7EOSo1ovUsY0bUysNvacKiasBpdXzOBnkxkCj5/W46T21rQCwY2Dzf0377KKULxkESCZzT4wiJaPpkX+AynthKaw==
+ b=EQsriTbTgo6lp4QJuHqxWg1oiMxYk1oyvM8Z/Xo19jWrwEkOLc5H0KKYtYKXbnYraoV4o6DDmAAtYyNpk+My9fUs5kzTUljsQDRvCk1D5JYss6AlC9B79iY37jouARIXdV7C96PmodsC2qjX4p2U5U7lZuukPBNNNOHfzkTlyNN4C46CJNk3kObZQ6Kv7qKU/MAs2wbCj+adYUDEmPvei3XFelM+mHCTHH/A340P20ImiMuGBkGKj/IlaFIBYZZTYev9eG1ApzCUF2M8GgIPb+6Q61nSTO3dgFaeoWPr5vYCqq/yKIuO6svoyVq11sq6ylVQIAIx6DbkJG82cl+bWA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LvGHQai297M50cMRs8cFrGX8Rw2PsT4p/nZ4hmPCE1U=;
- b=V92tgS12WmnrCO0O28adiVUo3yeF+4RsAdpn8eXacIGeDVE1ixwCkfvCYEfM9LVYLhrXqpbNboVYZXk0QLN3iYtg+3mDWe/Gllp7jkONfs/l7NBnubrayCtHHjGXKZC7MQYVOsnB5f4UZD2Gaa//PZFEWvEd7TylrLrRxWY5aUqlw4Y14A5Soksu7dhJSmIne15+8pcpIlBazY59QavEPf+fRrH9IKlODDQWM3pKnK/BQo/COdeWnQvG+tWE4YN09IDMBMZV39awGwVnBwb5NlOHqcuLejXPaVACEy4iKzEYrsu9ZtlPWHcaiXLzatdVa49kkvvqB3kSBYIaoGqXwQ==
+ bh=OdLXC3HPSQczd0D8deEmfftB8v2pWoYkMWRtV28M508=;
+ b=FD4utsDSz7dArvx5wpRlWWXlwhEq7UqGPrN/MBYHeyyJzG7yUGqEBMhH9TZ+JMQg1dtjXQ18rptN/6ZDAExDQwWtmxJvaVBQ7ZOAJcFbw5gYs+ma/CAINRyj/GwtvXQYTrbwvgs74M3af/ESBdEIyCosU0DXtyOW4YUGXPrZdVvis2RtSRh4n7j5ApOI0OMDV0CU79FsjF+gpGq8yJC3NYhaJyix1DhqY4+gOauXX26Myf5iIw3JTprN1HOMjzfHUGf0PnW9KOmDI/bCi+hDJjrx850yBjjPSN5HmdoUEsuIapMTbIBqLNkNCQ/R5obDcSanrzno6myxBMqsrhZJTQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LvGHQai297M50cMRs8cFrGX8Rw2PsT4p/nZ4hmPCE1U=;
- b=HVLwomwNWbzrx6mTROehpnCi+XVhDTC3rgiKFAb+VKe+HQjb/nTTAtTHebb2f9PVLTftdsdqXlgF1Lh6uxhYt+/n9trQlybgiTI0xEHtMzUqCYOXG1R2JoRQt2/c9JAyrFnYzUxclHPF0ScL3Nv2hffUHFrwe/gZSUZMrR9lKvk=
+ bh=OdLXC3HPSQczd0D8deEmfftB8v2pWoYkMWRtV28M508=;
+ b=GlGkjR3s0b6fYQ84M0rHCnKu1N9pw1KcgWg3oJ9n0PtkAijKzvhW9EJ6TricL3aSLYTevDrwFdQCx062a8Mnlfso9olV8qEJhHbpqSMR+53jOCAugG+PuAiuR9/mfHEq3zdNY3mzdjnV+jEWveVUkWSvYRl9la1ZM7pJOoR8PwE=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,98 +28,107 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by SJ0PR11MB5165.namprd11.prod.outlook.com (2603:10b6:a03:2ad::16) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.20; Tue, 9 Feb
- 2021 14:03:25 +0000
+ 2021 14:03:36 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3825.030; Tue, 9 Feb 2021
- 14:03:25 +0000
-Subject: Re: [oe] [meta-python][PATCH] python3-aws-iot-device-sdk-python: update to 1.4.9
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>,
+ 14:03:36 +0000
+Subject: Re: [oe] [meta-python] [PATCH] python3-periphery: upgrade 2.1.0 -> 2.2.0
+To: zhengruoqin <zhengrq.fnst@cn.fujitsu.com>,
  openembedded-devel@lists.openembedded.org
-References: <20210206230435.4106978-1-open.source@oleksandr-kravchuk.com>
+References: <1612766198-76789-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <e1d64056-59ab-b8e2-ff73-9dfe9d2cb728@windriver.com>
-Date: Tue, 9 Feb 2021 09:03:22 -0500
+Message-ID: <6bea170f-05b7-0547-58c6-e76904193932@windriver.com>
+Date: Tue, 9 Feb 2021 09:03:34 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.7.0
-In-Reply-To: <20210206230435.4106978-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <1612766198-76789-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BN6PR16CA0047.namprd16.prod.outlook.com
- (2603:10b6:405:14::33) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: BN6PR16CA0040.namprd16.prod.outlook.com
+ (2603:10b6:405:14::26) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BN6PR16CA0047.namprd16.prod.outlook.com (2603:10b6:405:14::33) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3846.25 via Frontend Transport; Tue, 9 Feb 2021 14:03:24 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BN6PR16CA0040.namprd16.prod.outlook.com (2603:10b6:405:14::26) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3846.25 via Frontend Transport; Tue, 9 Feb 2021 14:03:35 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 0dacc8df-3fbc-45dd-43d6-08d8cd0377bb
+X-MS-Office365-Filtering-Correlation-Id: 14416774-d253-447a-324e-08d8cd037e81
 X-MS-TrafficTypeDiagnostic: SJ0PR11MB5165:
 X-Microsoft-Antispam-PRVS: 
-	<SJ0PR11MB5165E9396DA73AEC555191B19F8E9@SJ0PR11MB5165.namprd11.prod.outlook.com>
+	<SJ0PR11MB5165D30397BF1FC1AD10E5039F8E9@SJ0PR11MB5165.namprd11.prod.outlook.com>
 X-MS-Oob-TLC-OOBClassifiers: OLM:538;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	73qvpRP7io5+Oj50YB0TkFPXw8DxJQ/ena1mLg3Mxwhj+KRnA9pnsQFgPnJUVheK2yJZUwShLA1yM6vOZnAfLBcbwR1WaxQI3PHodxxFF7H3rxRdUTSRWhPR1E1895l/vf4h0jWjxwAMfmg+xttE+Hj19IlJES97U6W83b9qioqFa5Tx/v+vvKrORVhapc8BbeBI0hogUby/OQmA0G0hbDb6fl1rOu3pUpoMWHVYIZ1cZTln/WJMUi37ByX4WO/IfiaS0Q+2mGI/PWtXS0CaZyXFdq+aI8V0O8NnOhuspLnrrfmWk7VGcErtynXlc1M10ic7KzMyh2dzQw3dnHI0lBFMr43UpAjN042do5lR6sRAjEztChkvHXBLOPhztT1cYikNW7G8pVAUP5aqmWW0iRFzG6l3+JCKiWMxMGNsSXgtJUG7Pm58LcsTGRDByEpufrN0DtLns8/mJ250PkM7NzlDF2oNYt2SJTvo3usXFcavCKoG8k1+Y42l3CPuMLSz2FRNujoiHFxlw4h57c0+F1XLXRymJlnbpTDz/tC34TzFnUWztBiTWpdSDD+Ubd6FkRYo0gX7INSOFww5/XD06BtkwL/QScCyLDeKIFT3qbsOzcqIHgIjRz2yQ5foOUpe5U58BJrOdvuS0c8lUKPyQ2yR02Fg/6m8WdZgAsVTkgh7RarDT6uf7RU8dbN17h31
+	83Z7sGcpj0saN8ytqMOy76u/EGaYliUSKndqJamD1oHKqrJjZXcymMWPfRVoCGnzo823JC9XespHRBRN8zrAWiWJqpjrh70zcj7dABarZfAPcJM1CaKMtyAZXX+brTBBAOOSZKzDbKe4AVSU8YbfDfpUaNFP+9QBGcD0ROzbtJdTjCRMTMDVSjLl5dbCcdDNlmGcGswtOXd4eBsbdyo0hIh2EpBgXbkjHMHJ3ujH9xFdphfmtV2U2rGthig0SS6TGfCGDQwlDZd2SqNKcifga92jGgP1gBAgWWRlHBrFhfF9Qw776mSm5qFNE5+kDt3+ir+SxCMGn0Q2o6mGIM32CXv9iliwxaMHHnbwMa5udGwte8lNayxhsY0j/UC0g33XtY6TdtBncXHa1ReCrb3eYPWK8WLWpsQPTIrjc5tzsG20VFN0Kz3n0GFSmAVGUNZOBLRgK36ssiDSPklB3Z2Gc4yqAzdl2dlfqQ6ynPHua1EPBM5MNC/wuCnO5MZsIY3+P7MHQShPrOAJ/IXk6MIdx69oSicVzR2RPYtIWZ3P/PfSiHpOqyMoY7Gak9QodlUeg7kIe2vaV6ruKFtHZ+ObWqog9W64CHYK0UR3bMw6uI4H8XQWEBrfujnqjfweOqHKtbzQYosKR/Jgz8ZXkhORYLSm8z97iF3N6M/ZYy94/8aXNXmQCp9/no+IYIAD8efb
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(136003)(396003)(39850400004)(376002)(346002)(36756003)(186003)(16526019)(31686004)(956004)(44832011)(166002)(86362001)(15650500001)(66556008)(66476007)(66946007)(2906002)(83380400001)(6486002)(316002)(5660300002)(16576012)(26005)(33964004)(966005)(2616005)(52116002)(8676002)(31696002)(478600001)(8936002)(53546011)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(136003)(396003)(39850400004)(376002)(346002)(36756003)(186003)(16526019)(31686004)(956004)(44832011)(166002)(86362001)(66556008)(66476007)(66946007)(2906002)(83380400001)(6486002)(316002)(5660300002)(16576012)(26005)(33964004)(966005)(2616005)(52116002)(8676002)(31696002)(478600001)(8936002)(53546011)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	hbrUsNfUO1s38q59LCpQYRnaXMHOnqVr3YMn+MfNmOdvsq0gCAKBz5zoDRXkgsqCepzavUrCfKOaVpGEBJKey4oel6XzfLyqc/UkPZlVhECFTJ5XjlCk4+FDKxBk7jfKnfHmvbsXi9TYGR3+gZL3ihQMy10jIqSRWHUmhxGB2qk21AlU7QftguAwkUV+0FEs3QTJZ86gxSa8GDDrPJQdFcveDQn5EgDLhIAkxSEian7X5LqZu32+R4EmqFMNVNJNM3b3D4nTAvfLgkG1m+7qDjKnDRYltUBITL5DxTETBVCEejTxZ3xKp28Et/Iqc6vFQOwcQel90W0YfU3r6LvmJc5PwaWhVdBME2/yh7LT2vjbApKvxP+lkqQ0sGH4YjU6T6QMEzI4INuaRlcf4HydnwvOsRC6npX94N8P01xvE0KGejDIIoqjKEXqieYY8UahuYMeg1p91Zn3EYYtV2CDVVS4J73o8c/n5tXkSA/qK/qR9TY58A9eJfHtI6rBuFa1Kv8f+EKaHMb/MWJKwPa1bi90KexHpsRmzGiQz8lct+HnXJuR5hke9hqza5vD4WUX3pulYE52KzuZKvv0/MQuBFGiH90rd3fDFNx2xBE6CUp/nHWvV+KT8ki4H4H5g79lo2wOCI7TSipwzmn7t2aSvw7rkjhKTkJqK8F1ntCj/ITgP8v2rkyrbQEYyMGIkux7o6kQhobfVjLnJwP69R99ZMIJCNQz/kuzsAViF1SFKVAakUGD7nxjnZnC7pA1Jop3
+	2+XYRph86nMGf3gm8Q0SxqBOzSHH51WZKZZeXWqJSnYfh4VcF6QBFFx277TwU0iCwApBMDxNlNpP/DS5o8ofNQSEhTg8nn02JOH15yVPoJiKBzYTvAyIOj/93OAWgIM/ZPWsTXWZBy0LpuD1gKPv052WTbEmioSQhPpsKV36go0FpNt/WmaP7zyCLfl6m2NsvShp2Z+S8PtfKruTb99aJhuvWDkvo4SHf46OT4bfF5esHtz7W3aImKQmhQgbDVCRBqnqolyMHOXRKzz7N4pBigkHa5l1JQiBw3AbLOLQllmwFNCjWSr6JCg4dd3GeAgPq21YJBMTUlzpUzhnRaRWNhu3qfI3k4w+5UcM5y8rncO+K2pBinv/YOMAK/ndFcOAFBDKNkYAvCPR8iCGdz+drCVEKPWui1+JyhTxzrkVuEiQZ2AMDG5BiNcugP3N8bMVGXwkW75q5yXB3iMPJO+nJU5afJ2tpuIuvBeNu5iedmYUxk26iHWc2Y4Hw8yi4kdX0BoZ6mDPRw26ifcppovvrvpt6kpjI2B57/utBKe9w1WRr6MAGdANNeAkCYcl0hIsqLiHzk1iLJyuNjISfJhbyMr/S4feAIFqf0/4/180EHbyaHAKSVG+aNH8XVte//CRFff7A20OTF9LxeJtk2MHmviqD4MOck3x7iIAw/XhfHmIZRENYkf+O52yS4tz1r/kH/dwS9WYmTC0eD3O3rlU+szWEPeJBGiPjRwAO45jM7yIxpB3rv38GXK8p4P14e3F
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0dacc8df-3fbc-45dd-43d6-08d8cd0377bb
+X-MS-Exchange-CrossTenant-Network-Message-Id: 14416774-d253-447a-324e-08d8cd037e81
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Feb 2021 14:03:25.2151
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Feb 2021 14:03:36.5596
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fkO0YUVr31d79CoOQYeiS/V69/UTEDr5am6KuxPOQGiCd/BtUgY3OaaXKEGjNiBScYjyrvSKB95zurfJzDNkBGl5JGX03UyxyChHGbevoJs=
+X-MS-Exchange-CrossTenant-UserPrincipalName: XBlwgPQlx6Fp+HEdulc/aET2WevsdlUT8AjElJ/KW+poTHIjIeb1my4eQKnUNL1tqHjaFYMG9bOXsFQG72gb2u1EI2DzP+IzVfNvGMXls8U=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB5165
 Content-Type: multipart/alternative;
- boundary="------------79E73F39358DC823E428AAD9"
+ boundary="------------1C489421FA1E2CDCE29FDE6E"
 Content-Language: en-US
 
---------------79E73F39358DC823E428AAD9
+--------------1C489421FA1E2CDCE29FDE6E
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 2021-02-06 6:04 p.m., Oleksandr Kravchuk wrote:
+On 2021-02-08 1:36 a.m., zhengruoqin wrote:
 > [Please note: This e-mail is from an EXTERNAL e-mail address]
 >
-> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...hon_1.4.8.bb => python3-aws-iot-device-sdk-python_1.4.9.bb} | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-aws-iot-device-sdk-python_1.4.8.bb => python3-aws-iot-device-sdk-python_1.4.9.bb} (89%)
+>   ...hon3-periphery_2.1.0.bb => python3-periphery_2.2.0.bb} | 8 +++++---
+>   1 file changed, 5 insertions(+), 3 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-periphery_2.1.0.bb => python3-periphery_2.2.0.bb} (58%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.8.bb b/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.9.bb
-> similarity index 89%
-> rename from meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.8.bb
-> rename to meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.9.bb
-> index f763067cf..5408c5aa8 100644
-> --- a/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.8.bb
-> +++ b/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.9.bb
-> @@ -7,8 +7,7 @@ LIC_FILES_CHKSUM = "\
->       file://AWSIoTPythonSDK/core/protocol/paho/client.py;endline=14;md5=5a3c8a1a4bb71bd934f450ecff972ad9 \
->   "
+> diff --git a/meta-python/recipes-devtools/python/python3-periphery_2.1.0.bb b/meta-python/recipes-devtools/python/python3-periphery_2.2.0.bb
+> similarity index 58%
+> rename from meta-python/recipes-devtools/python/python3-periphery_2.1.0.bb
+> rename to meta-python/recipes-devtools/python/python3-periphery_2.2.0.bb
+> index 3cd9004df..a01071151 100644
+> --- a/meta-python/recipes-devtools/python/python3-periphery_2.1.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-periphery_2.2.0.bb
+> @@ -4,11 +4,13 @@ LICENSE = "MIT"
 >
-> -SRC_URI[md5sum] = "d05596f02774ea39517765c5dced874a"
-> -SRC_URI[sha256sum] = "bcd68cb7fdb044dbd5e5d3a02c311b25717c0376168e7c992982130f19c51b03"
-> +SRC_URI[sha256sum] = "84b440c5929f33da1cd204f3ad0ea891e208637dd63de9fb039ed7d49d78c303"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=fea92e2e010ccb151792c29fadc2db7b"
+>
+> -SRC_URI[md5sum] = "27cdd7e026438067a238fb04ed5766a3"
+> -SRC_URI[sha256sum] = "57baa82e6bc59b67747317d16ad0cf9626826e8d43233af13bce924660500bd6"
+> +SRC_URI[md5sum] = "0a5b866443edab0dab62cea56ed96f1e"
+> +SRC_URI[sha256sum] = "391e5bdfe2511aa7369002d4861df795dbb2889426b1b2cc1e6c9d85939da4dd"
 >
 >   inherit pypi setuptools3
 >
+>   PYPI_PACKAGE = "python-periphery"
+>
+> -RDEPENDS_${PN} += "${PYTHON_PN}-mmap"
+> +RDEPENDS_${PN} += "${PYTHON_PN}-mmap \
+> +               ${PYTHON_PN}-ctypes \
+> +               ${PYTHON_PN}-fcntl"
 > --
 > 2.25.1
+>
+>
 >
 >
 > 
 >
 
---------------79E73F39358DC823E428AAD9
+--------------1C489421FA1E2CDCE29FDE6E
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -129,41 +138,50 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 2021-02-06 6:04 p.m., Oleksandr
-      Kravchuk wrote:<br>
+    <div class="moz-cite-prefix">On 2021-02-08 1:36 a.m., zhengruoqin
+      wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210206230435.4106978-1-open.source@oleksandr-kravchuk.com">
+    <blockquote type="cite" cite="mid:1612766198-76789-1-git-send-email-zhengrq.fnst@cn.fujitsu.com">
       <pre class="moz-quote-pre" wrap="">[Please note: This e-mail is from an EXTERNAL e-mail address]
 
-Signed-off-by: Oleksandr Kravchuk <a class="moz-txt-link-rfc2396E" href="mailto:open.source@oleksandr-kravchuk.com">&lt;open.source@oleksandr-kravchuk.com&gt;</a></pre>
+Signed-off-by: Zheng Ruoqin <a class="moz-txt-link-rfc2396E" href="mailto:zhengrq.fnst@cn.fujitsu.com">&lt;zhengrq.fnst@cn.fujitsu.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210206230435.4106978-1-open.source@oleksandr-kravchuk.com">
+    <blockquote type="cite" cite="mid:1612766198-76789-1-git-send-email-zhengrq.fnst@cn.fujitsu.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...hon_1.4.8.bb =&gt; python3-aws-iot-device-sdk-python_1.4.9.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-aws-iot-device-sdk-python_1.4.8.bb =&gt; python3-aws-iot-device-sdk-python_1.4.9.bb} (89%)
+ ...hon3-periphery_2.1.0.bb =&gt; python3-periphery_2.2.0.bb} | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-periphery_2.1.0.bb =&gt; python3-periphery_2.2.0.bb} (58%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.8.bb b/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.9.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.8.bb
-rename to meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.9.bb
-index f763067cf..5408c5aa8 100644
---- a/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.8.bb
-+++ b/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.9.bb
-@@ -7,8 +7,7 @@ LIC_FILES_CHKSUM = &quot;\
-     <a class="moz-txt-link-freetext" href="file://AWSIoTPythonSDK/core/protocol/paho/client.py;endline=14;md5=5a3c8a1a4bb71bd934f450ecff972ad9">file://AWSIoTPythonSDK/core/protocol/paho/client.py;endline=14;md5=5a3c8a1a4bb71bd934f450ecff972ad9</a> \
- &quot;
+diff --git a/meta-python/recipes-devtools/python/python3-periphery_2.1.0.bb b/meta-python/recipes-devtools/python/python3-periphery_2.2.0.bb
+similarity index 58%
+rename from meta-python/recipes-devtools/python/python3-periphery_2.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-periphery_2.2.0.bb
+index 3cd9004df..a01071151 100644
+--- a/meta-python/recipes-devtools/python/python3-periphery_2.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-periphery_2.2.0.bb
+@@ -4,11 +4,13 @@ LICENSE = &quot;MIT&quot;
 
--SRC_URI[md5sum] = &quot;d05596f02774ea39517765c5dced874a&quot;
--SRC_URI[sha256sum] = &quot;bcd68cb7fdb044dbd5e5d3a02c311b25717c0376168e7c992982130f19c51b03&quot;
-+SRC_URI[sha256sum] = &quot;84b440c5929f33da1cd204f3ad0ea891e208637dd63de9fb039ed7d49d78c303&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=fea92e2e010ccb151792c29fadc2db7b">&quot;file://LICENSE;md5=fea92e2e010ccb151792c29fadc2db7b&quot;</a>
+
+-SRC_URI[md5sum] = &quot;27cdd7e026438067a238fb04ed5766a3&quot;
+-SRC_URI[sha256sum] = &quot;57baa82e6bc59b67747317d16ad0cf9626826e8d43233af13bce924660500bd6&quot;
++SRC_URI[md5sum] = &quot;0a5b866443edab0dab62cea56ed96f1e&quot;
++SRC_URI[sha256sum] = &quot;391e5bdfe2511aa7369002d4861df795dbb2889426b1b2cc1e6c9d85939da4dd&quot;
 
  inherit pypi setuptools3
 
+ PYPI_PACKAGE = &quot;python-periphery&quot;
+
+-RDEPENDS_${PN} += &quot;${PYTHON_PN}-mmap&quot;
++RDEPENDS_${PN} += &quot;${PYTHON_PN}-mmap \
++               ${PYTHON_PN}-ctypes \
++               ${PYTHON_PN}-fcntl&quot;
 --
 2.25.1
+
+
 
 </pre>
       <br>
@@ -176,4 +194,4 @@ index f763067cf..5408c5aa8 100644
   </body>
 </html>
 
---------------79E73F39358DC823E428AAD9--
+--------------1C489421FA1E2CDCE29FDE6E--
