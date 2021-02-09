@@ -1,83 +1,69 @@
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
- by mx.groups.io with SMTP id smtpd.web09.7839.1612860874895768604
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web10.9216.1612871577917136399
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Feb 2021 00:54:35 -0800
+ Tue, 09 Feb 2021 03:52:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: hongxu.jia@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 1198sAfs027281
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 9 Feb 2021 00:54:16 -0800 (PST)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2106.2; Tue, 9 Feb 2021 00:54:15 -0800
-Received: from ala-lpggp7.wrs.com (147.11.105.171) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2106.2 via Frontend Transport; Tue, 9 Feb 2021 00:54:15 -0800
-From: "hongxu" <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-CC: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][PATCH V2] ndpi: fix autoconf-2.71 compatibility
-Date: Tue, 9 Feb 2021 00:54:15 -0800
-Message-ID: <20210209085415.74712-1-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <CAMKF1soca2eHtfmMNkQ2LXBjaEVoN67zMXv=pn7WoXZ4jfsfzA@mail.gmail.com>
-References: <CAMKF1soca2eHtfmMNkQ2LXBjaEVoN67zMXv=pn7WoXZ4jfsfzA@mail.gmail.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=vCVwN2Ry;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id u143so5522611pfc.7
+        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Feb 2021 03:52:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=oWLCWjbNwDdSP9oWD7rCux5vUvh+2iM0anNv4ji7bDc=;
+        b=vCVwN2Ry8bGJbkq41luulLudKF24HYS1Q0sbbgWN2cmylVF78p1oadqjG8VmpUDsyy
+         hMenE78YHcnoYIo64nVF1xe3kKlQ0j3uvd6ArWubgORJGSwwE4mBfnugYa132DKVpspf
+         wwiiI+MdBrwtYPX3CIOe2QZ48+W41MuViP7ehsJYA8x28HWRBS/Pe1pxu2zCLDJKtOoe
+         IvdzbNcyDtNc1iPBg0rSN8+YDj2w1ASfCI+RGidhdmnCQvmRDVO/tSBzShjwtjgBRmKK
+         AaPNYuH//BCogySMnpR+omdswOmXweDFFZ8r6EXhAoU+bEo0Bj7jtmwbvAoeIewgWfbm
+         79aw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=oWLCWjbNwDdSP9oWD7rCux5vUvh+2iM0anNv4ji7bDc=;
+        b=aa/jhVSDpQac0eOSB7EsqDoD+LLXlUrGFV6PjVb2k+b+4IkO0Y0cdumKjZNQ8xo0Bc
+         IVYhBc0ayer8ix3wZ/PDaz4p/emP3fJITUFMbTTr+lBFKkoGaw1xA2tI7MlVOuDuPyfl
+         QRUZAG1ll69lhfX5AS+Y2ri+4xyiZ29G82jOfLdThO4ckeMT9dFylg0zyx0bkAkkNfA8
+         BTvMxzRnZciWWcIuy9SAsa+MdEA8Stu1TvXnGMDLhs68MdcNgXO68o0DoWoPry8qstIU
+         cCaEyf0x4LoMGy0ZIo6GP/VF/SZEyZ941xWHCMIBjQ9ZMQxkdg5sXpBP+r2kv/TRbC2p
+         zu0g==
+X-Gm-Message-State: AOAM531f4oIeVvbXMkgBvpQ3yKGy1t6tApR0+6eW5Dak9gV8wj8irHXM
+	HoFyleCkcxR0OkBvS8wL914ckHE+yxzC/9OTqq0=
+X-Google-Smtp-Source: ABdhPJxurHqLQwX7AcmJlxlTEe2dLL996sXsAoGbaIOrZALyfHmcPkXfx6dRWNocienZB8Qywy19K/KOhJ1x01TaVMM=
+X-Received: by 2002:a65:5283:: with SMTP id y3mr21280567pgp.174.1612871577336;
+ Tue, 09 Feb 2021 03:52:57 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+References: <20210209082652.89531-1-kai.kang@windriver.com>
+In-Reply-To: <20210209082652.89531-1-kai.kang@windriver.com>
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+Date: Tue, 9 Feb 2021 12:52:45 +0100
+Message-ID: <CALbNGRRM3ZiFbXFEmo5w1XHtTMaqfYCFN35vMWsu126kGuheog@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/2] lxdm: support to change user password
+To: kai <kai.kang@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-While DEBUG_BUILD != 1, Yocto adds option _FORTIFY_SOURCE to CPP and CC [1],
-since _FORTIFY_SOURCE requires -O1 or higher, if no -O1 or higher then
-results in a compiler warning.
+On Tue, Feb 9, 2021 at 9:27 AM kai <kai.kang@windriver.com> wrote:
+>
+> From: Kai Kang <kai.kang@windriver.com>
+>
+> Update lxdm to support change user password when the password expired.
+> It also add a label to show useful information to tell user that 'Authentication
+> failed' or 'password expired' etc.
+>
+> It only work with distro feature 'pam'.
+>
+> Signed-off-by: Kai Kang <kai.kang@windriver.com>
 
-The configure.ac of ndpi uses macro AC_PROG_CC to test toolchain, since
-CPPFLAGS does not have the option -O<level> [1], while building with autoconf
-2.71+, the toolchain test will report a warning.
+Hi Kai,
 
-The configure.ac of ndpi uses macro AC_LANG_WERROR to treat the warning as
-error. Then it broke the build
-...
-|configure: error: C preprocessor "i686-wrs-linux-gcc -E --sysroot=tmp-glibc/
-work/core2-32-wrs-linux/ndpi/3.4-r0/recipe-sysroot  -m32 -march=core2
--mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong -D_FORTIFY_SOURCE=2
--Wformat -Wformat-security -Werror=format-security" fails sanity check
-...
+* I'm impressed
+* Seems you are still looking for a dm and yes the gdm issue you
+reported is still on my list but first I'd like to have more rust to
+de-rotten gnome...
 
-The SELECTED_OPTIMIZATION contains option -O<level>, add SELECTED_OPTIMIZATION
-to CPPFLAGS to could fix the issue
+Cheers,
 
-[1] The definition of CPP and CC and XXXFLAGS in bitbake.conf
-[snip]
-export CPP = "${HOST_PREFIX}gcc -E${TOOLCHAIN_OPTIONS} ${HOST_CC_ARCH}"
-export CC = "${CCACHE}${HOST_PREFIX}gcc ${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}"
-...
-export CFLAGS = "${TARGET_CFLAGS}"
-TARGET_CFLAGS = "${TARGET_CPPFLAGS} ${SELECTED_OPTIMIZATION}"
-...
-export CPPFLAGS = "${TARGET_CPPFLAGS}"
-TARGET_CPPFLAGS = ""
-[snip]
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- meta-networking/recipes-support/ntopng/ndpi_3.4.bb | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/meta-networking/recipes-support/ntopng/ndpi_3.4.bb b/meta-networking/recipes-support/ntopng/ndpi_3.4.bb
-index 1e4153779..22e4d8e9a 100644
---- a/meta-networking/recipes-support/ntopng/ndpi_3.4.bb
-+++ b/meta-networking/recipes-support/ntopng/ndpi_3.4.bb
-@@ -17,6 +17,8 @@ S = "${WORKDIR}/git"
- 
- inherit autotools-brokensep pkgconfig
- 
-+CPPFLAGS += "${SELECTED_OPTIMIZATION}"
-+
- do_configure_prepend() {
-     ${S}/autogen.sh
- }
--- 
-2.29.2
-
+Andreas
