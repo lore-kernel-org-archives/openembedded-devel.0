@@ -1,55 +1,78 @@
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.web11.795.1612994425644763717
+Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com [209.85.208.195])
+ by mx.groups.io with SMTP id smtpd.web10.789.1612994436093412059
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Feb 2021 14:00:25 -0800
+ Wed, 10 Feb 2021 14:00:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=VNp1Ffor;
- spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id b8so1971358plh.12
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Feb 2021 14:00:25 -0800 (PST)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=fBkPFz1d;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.195, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f195.google.com with SMTP id a17so4962571ljq.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Feb 2021 14:00:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=2MheBDTpkz5yWq1YWjXpa2rgOreL15sjJw4tX8kS+ks=;
-        b=VNp1FforLi8MH4IC7IhmFaz7j58e7fmApjtA4gmYX+zP7JR7xCXNUv88y80FRPHSa9
-         cjLjppkGzFZT/5KImnZSMOgf7htc75mBFbMNGW8ObkHEHFA+2TwqiseN1aYg5jMsNmJz
-         zDjUN7BAjK8voHZds7sS2ovUsqzQCGk0us0RH1jlv7Oz4pGmT2t1TJTgeEtNwZroFMq+
-         I1ZFPzP1LGe6dwQJfifP7jNsgJd9yISh8C308ykbdTkMHsZKs4rcCtE20Eb+0pTqFpEe
-         U1Z+XDKesYsK5TV7UCUOCoy7zBuX4SQR5zeAmbq3M4oFgeYTSYrJI1EmuJItjUY8ntMr
-         0kvQ==
+        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=qLcR5ja16Mv75yi+Xbd9OI7JrbuHMsRXFDr8Dr8kpCk=;
+        b=fBkPFz1dVCwrErLn9djBkxWkyeB0ZaBFRNh9xoIAJvV/mIWvbVJf1Ltszfvkf1629X
+         iyElLh2ZeQYcKfejHZS8Nn36zsSGMb9bHwDKmIUJL9xA1ZMwG9AzZdCJu3oprmWcZ2vH
+         T8ljbckr0FO0GCVRZJmv4yvjbRYPvqTY2QXMraKGoXWdCumYHMn9JQ2EncH+gytCNEnA
+         4NNmnQ9pRfa5o5bmWvE9cN//nDDUHIeQPce2mkeESNaumIqB9gqqls7sg+kjkCCnHM7a
+         P9lEcvrbBbvkCK78Edj0lTWyT6FT+FiKGfmJ63QQhe8j/aNsKrzv/4haWaoTb6v3Fnyz
+         rh0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=2MheBDTpkz5yWq1YWjXpa2rgOreL15sjJw4tX8kS+ks=;
-        b=Ew8T0Ma2FGw4wDricxNkJUVyffzxZpD1yDjV2Lb3IC9739Owi0uoSbqbSO3TcjoEqh
-         znKmnurQBS5BNjpJ2mpbnxhMx4XxksDBKZfH9uTHMoVr+QjZTqPTm8ikl3E330khc4Aa
-         a31gcpSy9RYAqo5PhKPYLLtVaTQ/f2ba9Xq5nmn+9IIprNu7SuhpeUHXw+/d2+ViOqjO
-         nO7YlzasykPcrC38tHfsASTHQERFxrqaszmW3Z+Myz4g0/dD9x3xl2NpwBZrH2QR3re7
-         oXMfg9OV6Eam/2Nx8bOL2nOI1O5sNnUCIEIKZGedBfQvZVVT9Oy81V5DJzBE7SxjTo2z
-         SNuA==
-X-Gm-Message-State: AOAM530mZnqpwR+qB9FiddV9PgDD/wtXPvcMYVEWKwFU0MSuUOiAyLES
-	uieHqce30SLv5U+1Ikj+V7tcED9/EJlhz+2F8W0=
-X-Google-Smtp-Source: ABdhPJxapDhzpgeVJKiFR2o7jXXEEfIgIAeZZ2QyUE65kFS/498yYce104L0p03hDo52wmlZGbu0aCyaoruWPsH0ifM=
-X-Received: by 2002:a17:90a:ec05:: with SMTP id l5mr909257pjy.161.1612994425058;
- Wed, 10 Feb 2021 14:00:25 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=qLcR5ja16Mv75yi+Xbd9OI7JrbuHMsRXFDr8Dr8kpCk=;
+        b=Uh0/G4Cy5GWw5bZ+KFuDG5wR8WsfmP2jiE9aZ67OlydPhx4k2wj9BfFiUV4f2sUaWr
+         r9Jz2Xgy9OEYL9rI8K7WTIzabOOkAU9fH+8pP0B/re+AGn5ECMLlotoL0hbpCGrIrh8R
+         XSoQSZmMTbm1KoAaft9h+1utvSCH3LFY0lW/6fEU2JKddqbrydZlxY0MrNZz5ZhNGllc
+         G1r9w9MfzfL451RIogSApm18+iNu0DGG2loDf8UrFe08h+iA+Jbcf48CBI6bk8yKLxSe
+         UqCBIz6S6RrzqVD/xbYTRnri2BhU9xMhuBz33wxeTPTB9YGODywMxxZ3ogadvVMiPEzC
+         ENIw==
+X-Gm-Message-State: AOAM531PNm+N76upu0vxA3I/d1Zj5dntPWCF/VB9sz08r/gXrs0kYLPL
+	P8ObYGfwq22SKHndF5pmJ0WWmmSL9Iu2fm65
+X-Google-Smtp-Source: ABdhPJzL1c7y+VYYx2s7aNh+pE+6o4LomGUfqWg72mxo6m0+v+ZNrajsjk0coFprSFkS2zSfmqT/Zw==
+X-Received: by 2002:a2e:700f:: with SMTP id l15mr3237983ljc.14.1612994433825;
+        Wed, 10 Feb 2021 14:00:33 -0800 (PST)
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
+        by smtp.gmail.com with ESMTPSA id z5sm670655ljn.7.2021.02.10.14.00.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 10 Feb 2021 14:00:33 -0800 (PST)
+From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-oe][PATCH] iqrencode: update to 4.1.1
+Date: Wed, 10 Feb 2021 23:00:31 +0100
+Message-Id: <20210210220031.1660908-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20210210205538.690009-1-schnitzeltony@gmail.com>
- <20210210205538.690009-9-schnitzeltony@gmail.com> <CAMKF1sphEKtJVdO7Ns7FDsniK6mDzKojjpFcTVmA_C4-AEzKJA@mail.gmail.com>
-In-Reply-To: <CAMKF1sphEKtJVdO7Ns7FDsniK6mDzKojjpFcTVmA_C4-AEzKJA@mail.gmail.com>
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-Date: Wed, 10 Feb 2021 23:00:13 +0100
-Message-ID: <CALbNGRQEtAhFyHmnSZo6npBP=gg1Ky-AVAH2TV3VikA1CJRpYA@mail.gmail.com>
-Subject: Re: [oe] [PATCH 09/13] glibmm4: Initial add 2.68.0
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Wed, Feb 10, 2021 at 10:17 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> Can you add the newly added recipes to testing packagegroup as well ?
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ .../qrencode/{qrencode_git.bb => qrencode_4.1.1.bb}            | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/qrencode/{qrencode_git.bb => qrencode_4.1.1.bb} (83%)
 
-Will do tomorrow
+diff --git a/meta-oe/recipes-graphics/qrencode/qrencode_git.bb b/meta-oe/recipes-graphics/qrencode/qrencode_4.1.1.bb
+similarity index 83%
+rename from meta-oe/recipes-graphics/qrencode/qrencode_git.bb
+rename to meta-oe/recipes-graphics/qrencode/qrencode_4.1.1.bb
+index 108c339bf..3eb23dc0f 100644
+--- a/meta-oe/recipes-graphics/qrencode/qrencode_git.bb
++++ b/meta-oe/recipes-graphics/qrencode/qrencode_4.1.1.bb
+@@ -4,9 +4,8 @@ HOMEPAGE = "http://fukuchi.org/works/qrencode/"
+ SECTION = "libs"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+-PV = "4.0.1+git${SRCPV}"
+ 
+-SRCREV = "7c83deb8f562ae6013fea4c3e65278df93f98fb7"
++SRCREV = "715e29fd4cd71b6e452ae0f4e36d917b43122ce8"
+ SRC_URI = "git://github.com/fukuchi/libqrencode.git"
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.25.1
 
-Andreas
