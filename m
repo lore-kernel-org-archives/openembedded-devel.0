@@ -1,98 +1,92 @@
-Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com [209.85.219.51])
- by mx.groups.io with SMTP id smtpd.web10.9444.1612979972152496095
+Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com [209.85.167.67])
+ by mx.groups.io with SMTP id smtpd.web08.10972.1612985335540963098
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Feb 2021 09:59:32 -0800
+ Wed, 10 Feb 2021 11:28:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=mrjhc02Q;
- spf=pass (domain: gmail.com, ip: 209.85.219.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f51.google.com with SMTP id l11so1278334qvt.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Feb 2021 09:59:32 -0800 (PST)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=BY0ROtwA;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.67, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f67.google.com with SMTP id m22so4596039lfg.5
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Feb 2021 11:28:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=/nioO80vjbokuzRdJbH/p+2NI4Ssk+/bpNR+ADAXU/E=;
-        b=mrjhc02QMIJ7HixKrQvuntgcIUCz5betexDMy5CZRex/bYKGBNfXsGfMWMsv116jIa
-         Z5h3Z2oIzb5TfHYu6BmZKXmtxrGnkbwGcVUXKBg6xsFqOWEWL3GNnmkT38BOqS/SWOdw
-         D8u+8RaVjwqcFST00uUpdusELXjnUXfc1cC/D3WfKFJyozYqe18NsIwRVXzI2fhrP87B
-         keA+Uuzq/9ZNIVmetli29FOVEobbgyq/Ri7D3WDt/AMUCQHusPtDMkrnx99zhFT/Iqlg
-         PK27/JdtW8fGDQP3JoXRsEoloysH3NWY8r8vNwviODPHWvWuqPsmSiuUDRxhk1Xayy6v
-         QcQQ==
+        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=PpV2B/V2lkE/httHg0Oes8Rqu9blgBb9YRnZhQm6vC4=;
+        b=BY0ROtwAdJ2Pc8AtNbY7W5PJlP2ckXnLz7ozGSjPSgareRESFEj+Hk9tGxse5Eubtg
+         O3nV5g/TkYrid6x8JGUp+1f4r5m+QMsmTzdsMmDYdc3zJM3qmHusMeVSzel8d4ORuOWy
+         1y8LkGsHzJix8cHzHtYlRjLUdomHerfE6oXBFo1HQ22CPkd2yGGI6VO0LbHTmg+oo0RD
+         4/ZCrfWdrv0KX/WTjDGjpDKwKFXasYhAce/c/LwcKTQmasDC8sKjImZk5rgMhRh39AK3
+         UCXZsog+1/GHsexZ2IghGGEnMIHmOs/wsvJXAIytsxLTIT1TtajKvabpUgPIbauKiRZQ
+         vWEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=/nioO80vjbokuzRdJbH/p+2NI4Ssk+/bpNR+ADAXU/E=;
-        b=BuSZ2fSPIyUYmZk7YDNwBJX7O1Q9H5E4V1y7KWEGtOiZ8Q8LEfpHWnPcSV0fOvHBHL
-         hs1u6v2xW1LDrLxBgPpIPFpHUvcaDwPWEDF4D/yUC6ICSzblxLBcWcZ2pBbxejTk5tCJ
-         lgDlhTPSa+Q6NRMve7RxNE/LWeGmJVCXXr2ohDdOEa7q8mtW96PEEs72tsaH1EPLui+1
-         Vk3gZz1oyuxcmI55WccR2LbJ5WZPcSOls1g2n4rIc63vmqQbi+ienuImJu2A6O4zgSfr
-         ITRtTZ5gOot++HI2MV4ZJAfJy0Leun0v2q5RqedEqbHqVPO/zsk2tNjZidE/C5HuhXVs
-         83Iw==
-X-Gm-Message-State: AOAM533mttt+ETSZVaXiObxOo/IMHRYFmRe84AWQHfPBZoPmFL8PmKTq
-	woKizadXC9Gts9ipy3DriOC0+HeZUhd+QfZnUSE=
-X-Google-Smtp-Source: ABdhPJxv9DYzeu6fG3uVeWh2TxWQUK6gc96hMTYvtr0D+7xUGZp6gf2n81iS6hiRRGEbOHbjbfUM3n+IczKyls5IR2A=
-X-Received: by 2002:a0c:a8d3:: with SMTP id h19mr3752015qvc.21.1612979971218;
- Wed, 10 Feb 2021 09:59:31 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=PpV2B/V2lkE/httHg0Oes8Rqu9blgBb9YRnZhQm6vC4=;
+        b=RGtwoXtoOIIkmQqp7RPlUc6ych+a+vGDGLQRyz5I1mYqrtDBls5SHTVn/XYOAweXRW
+         tOsXgtlXbrA6qfJCp1x8wsAPdt5iqqDsiL0ujfa2cfhe58Ov2J+0nfVDlNjUigRwRNNv
+         O6BeLd3lKf9JD8mGrFFOdYia8/2ukByv/ngCmJxSZ0qstjTTw1A7WyTk/4yFK0nQTs/6
+         SYJoNXT89cf12USVht5+z/S89j1XPbGtNVlPguAE0My18EYuuJSaVrj7bIG7qpB0rK0t
+         p+arzpAaKMQsln13Ex2cc1l+NSDPT7MDo6BlmZMFakBgUB8NOfHlyD2CvQBUBqXCmgQH
+         i17A==
+X-Gm-Message-State: AOAM531lm2khbFXDZwVoUpfJraaGqRGW1gwVtjO1Dmc3r2bhkTBJeaiq
+	cEEcbUYZ8wcJx/COsODF8BQ9ADXV+YHpKf3I
+X-Google-Smtp-Source: ABdhPJyJz+Sv8yiLz/PL5lXpicl7tRRtIKOhVy/k+WgU40BpL+PvAD3IV6G03nhRzwCHIImNdjmbgQ==
+X-Received: by 2002:a19:e007:: with SMTP id x7mr2633803lfg.280.1612985333263;
+        Wed, 10 Feb 2021 11:28:53 -0800 (PST)
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
+        by smtp.gmail.com with ESMTPSA id w13sm435858lfu.299.2021.02.10.11.28.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 10 Feb 2021 11:28:52 -0800 (PST)
+From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-networking][PATCH] fetchmail: udpate to 6.4.16
+Date: Wed, 10 Feb 2021 20:28:50 +0100
+Message-Id: <20210210192850.1461260-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20210210142126.21906-1-brgl@bgdev.pl>
-In-Reply-To: <20210210142126.21906-1-brgl@bgdev.pl>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Wed, 10 Feb 2021 09:59:04 -0800
-Message-ID: <CAMKF1sp_VTG+7mv4ZcqErPb5E9ZU2jSBnp_PV-PgtHnEpa6PPA@mail.gmail.com>
-Subject: Re: [meta-python][PATCH] pydbus_manager: new package
-To: Bartosz Golaszewski <brgl@bgdev.pl>
-Cc: Armin Kuster <akuster808@gmail.com>, Tim moto-timo Orling <TicoTimo@gmail.com>, 
-	Derek Straka <derek@asterius.io>, Trevor Gamblin <trevor.gamblin@windriver.com>, 
-	openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Wed, Feb 10, 2021 at 6:21 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
->
-> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
->
-> pydbus is a popular (and probably the most 'pythonic') implementation
-> of DBus for python but unfortunately it doesn't implement the
-> ObjectManager interface. This project is an extension providing this
-> functionality.
->
-> The reason for having this as a separate project is simple: pydbus seems
-> to no longer be actively maintained so it's hard to make it part of the
-> original codebase.
->
-> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> ---
->  .../python/python3-pydbus-manager_git.bb            | 13 +++++++++++++
+License-Update: copyright years.
 
-Please add it to packagergroup-meta-python as well
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ .../{fetchmail_6.4.4.bb => fetchmail_6.4.16.bb}        | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+ rename meta-networking/recipes-support/fetchmail/{fetchmail_6.4.4.bb => fetchmail_6.4.16.bb} (50%)
 
->  1 file changed, 13 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python3-pydbus-ma=
-nager_git.bb
->
-> diff --git a/meta-python/recipes-devtools/python/python3-pydbus-manager_g=
-it.bb b/meta-python/recipes-devtools/python/python3-pydbus-manager_git.bb
-> new file mode 100644
-> index 000000000..ae9e42160
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-pydbus-manager_git.bb
-> @@ -0,0 +1,13 @@
-> +SUMMARY =3D "DBus.ObjectManager implementation for pydbus"
-> +AUTHOR =3D "S=C3=A9bastien Corne"
-> +
-> +LICENSE =3D "WTFPL"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D0fd5bb1dae91ba145745db55870be=
-6a7"
-> +
-> +inherit setuptools3
-> +
-> +SRC_URI =3D "git://github.com/seebz/pydbus-manager.git"
-> +SRCREV =3D "6b576b969cbda50521dca62a7df929167207f9fc"
-> +PV =3D "git${SRCPV}"
-> +
-> +S =3D "${WORKDIR}/git"
-> --
-> 2.29.1
->
+diff --git a/meta-networking/recipes-support/fetchmail/fetchmail_6.4.4.bb b/meta-networking/recipes-support/fetchmail/fetchmail_6.4.16.bb
+similarity index 50%
+rename from meta-networking/recipes-support/fetchmail/fetchmail_6.4.4.bb
+rename to meta-networking/recipes-support/fetchmail/fetchmail_6.4.16.bb
+index efab0c808..71163c8d9 100644
+--- a/meta-networking/recipes-support/fetchmail/fetchmail_6.4.4.bb
++++ b/meta-networking/recipes-support/fetchmail/fetchmail_6.4.16.bb
+@@ -1,16 +1,18 @@
+ SUMMARY = "Fetchmail retrieves mail from remote mail servers and forwards it via SMTP"
+ HOMEPAGE = "http://www.fetchmail.info/"
+-DESCRIPTION = "Fetchmail is a full-featured, robust, well-documented remote-mail retrieval and forwarding utility intended to be used over on-demand TCP/IP links (such as SLIP or PPP connections). It supports every remote-mail protocol now in use on the Internet: POP2, POP3, RPOP, APOP, KPOP, all flavors of IMAP, ETRN, and ODMR. It can even support IPv6 and IPSEC."
++DESCRIPTION = "Fetchmail is a full-featured, robust, well-documented remote-mail retrieval \
++and forwarding utility intended to be used over on-demand TCP/IP links (such as SLIP or PPP \
++connections). It supports every remote-mail protocol now in use on the Internet: POP2, POP3, \
++RPOP, APOP, KPOP, all flavors of IMAP, ETRN, and ODMR. It can even support IPv6 and IPSEC."
+ SECTION = "mail"
+ LICENSE = "GPLv2 & MIT"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=ca53985c1fd053ae0bffffaa89ed49f1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=06a8d16599e1d0b131390bec01fb571c"
+ 
+ DEPENDS = "openssl"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz \
+            "
+-SRC_URI[md5sum] = "53d52179c8bf8e2f57489538b49bfda9"
+-SRC_URI[sha256sum] = "511b60daabf7543a01de06af07c8772290c6807cd53c42a8504960e978f3abea"
++SRC_URI[sha256sum] = "044b9a0ac03afbae7744979defe3e2e32e39141bca68fd0c8deda2ed40884fb9"
+ 
+ inherit autotools gettext python3-dir python3native
+ 
+-- 
+2.25.1
+
