@@ -1,78 +1,55 @@
-Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com [209.85.167.67])
- by mx.groups.io with SMTP id smtpd.web08.733.1612994061048580151
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
+ by mx.groups.io with SMTP id smtpd.web11.795.1612994425644763717
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Feb 2021 13:54:21 -0800
+ Wed, 10 Feb 2021 14:00:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=DBGj9ezA;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.67, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f67.google.com with SMTP id m22so5205174lfg.5
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Feb 2021 13:54:20 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=VNp1Ffor;
+ spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-pl1-f174.google.com with SMTP id b8so1971358plh.12
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Feb 2021 14:00:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=6OBEjOyvoSu4tOgAXVuTczJSwmWAHlQl7jQsOIQOQRE=;
-        b=DBGj9ezAGCT6HS7fV2VVeYf512J0dw+XvHIW6TUrnkzbSHrJ8MeQsuD0Eayr/wfjRl
-         /LtEQhwZhSCVxlRqUY5pQPvLNiB3VhG7mcKcCy8TOjLssZ1OhhGrDJx356wrUbcK0XY+
-         7RlTGe163mntkowV3m13ePYVbfhtrwXKRGSTnV64WvqgqNqdAjF+wyyxR787p7xJvZ3U
-         iejVo74l7EDHt5qPep67cjeRU7A5kBJD7hMftXPumsOkVYyRdA48rwIM3fbQjmulIyQx
-         kNwjzSDbxQnHgIo3pTDMcPwK08QHKP4kKBBbMOTl0jUxxLt8PDw25FAWyrzx5CfjVmXJ
-         qIlQ==
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=2MheBDTpkz5yWq1YWjXpa2rgOreL15sjJw4tX8kS+ks=;
+        b=VNp1FforLi8MH4IC7IhmFaz7j58e7fmApjtA4gmYX+zP7JR7xCXNUv88y80FRPHSa9
+         cjLjppkGzFZT/5KImnZSMOgf7htc75mBFbMNGW8ObkHEHFA+2TwqiseN1aYg5jMsNmJz
+         zDjUN7BAjK8voHZds7sS2ovUsqzQCGk0us0RH1jlv7Oz4pGmT2t1TJTgeEtNwZroFMq+
+         I1ZFPzP1LGe6dwQJfifP7jNsgJd9yISh8C308ykbdTkMHsZKs4rcCtE20Eb+0pTqFpEe
+         U1Z+XDKesYsK5TV7UCUOCoy7zBuX4SQR5zeAmbq3M4oFgeYTSYrJI1EmuJItjUY8ntMr
+         0kvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=6OBEjOyvoSu4tOgAXVuTczJSwmWAHlQl7jQsOIQOQRE=;
-        b=QMDv884vaobVK8xinEUUyH6uQFY1XSDgiAjc8eDeEaNUmTgkmbksaDsGjBJfkLM6Su
-         8z3XI3/pgVUAtm1EJdHzjEzLA/eNy25eTuszyLrsJEDv7aqxhc3u5H6c00ajem96FdlP
-         77OcsqmCNce9d5Y4IxZf06l62DlXeBuUjfyBaZrNDZcEhgf6YAXMYtctvdvZnD9Jkam8
-         1LaHJEEs6DdUazrsLEHGRile4vEFA3IiNsCwrOE7a6Thb4qCOroqnPERQadg6az0LIrF
-         T2ZSiUjW+0eZwA5mTt4RJkvMDxIOUOQWrtS/H1bRlROlqxjwTv6XU6anngb3V+nav+rx
-         nnoA==
-X-Gm-Message-State: AOAM530PuVOiWgnu5N1C/ICz4O/Yb0khH5uGfPMuMR42/chgGe999WZp
-	IPsjf2hEA7D1eMDBCaOaGMHVSKrWAvMwqpHm
-X-Google-Smtp-Source: ABdhPJyT4Tc5KueqzE+Jk49K5UCNbTuSPbJkr7GwzQbJ+8zdoW2DCtxqDFVAAsMKIztRdgs/jTI6DA==
-X-Received: by 2002:ac2:5ed0:: with SMTP id d16mr2692813lfq.644.1612994058551;
-        Wed, 10 Feb 2021 13:54:18 -0800 (PST)
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id p24sm464207lfc.12.2021.02.10.13.54.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Feb 2021 13:54:17 -0800 (PST)
-From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-oe][PATCH] libconfig add UPSTREAM_CHECK_URI
-Date: Wed, 10 Feb 2021 22:54:15 +0100
-Message-Id: <20210210215415.1656286-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=2MheBDTpkz5yWq1YWjXpa2rgOreL15sjJw4tX8kS+ks=;
+        b=Ew8T0Ma2FGw4wDricxNkJUVyffzxZpD1yDjV2Lb3IC9739Owi0uoSbqbSO3TcjoEqh
+         znKmnurQBS5BNjpJ2mpbnxhMx4XxksDBKZfH9uTHMoVr+QjZTqPTm8ikl3E330khc4Aa
+         a31gcpSy9RYAqo5PhKPYLLtVaTQ/f2ba9Xq5nmn+9IIprNu7SuhpeUHXw+/d2+ViOqjO
+         nO7YlzasykPcrC38tHfsASTHQERFxrqaszmW3Z+Myz4g0/dD9x3xl2NpwBZrH2QR3re7
+         oXMfg9OV6Eam/2Nx8bOL2nOI1O5sNnUCIEIKZGedBfQvZVVT9Oy81V5DJzBE7SxjTo2z
+         SNuA==
+X-Gm-Message-State: AOAM530mZnqpwR+qB9FiddV9PgDD/wtXPvcMYVEWKwFU0MSuUOiAyLES
+	uieHqce30SLv5U+1Ikj+V7tcED9/EJlhz+2F8W0=
+X-Google-Smtp-Source: ABdhPJxapDhzpgeVJKiFR2o7jXXEEfIgIAeZZ2QyUE65kFS/498yYce104L0p03hDo52wmlZGbu0aCyaoruWPsH0ifM=
+X-Received: by 2002:a17:90a:ec05:: with SMTP id l5mr909257pjy.161.1612994425058;
+ Wed, 10 Feb 2021 14:00:25 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210210205538.690009-1-schnitzeltony@gmail.com>
+ <20210210205538.690009-9-schnitzeltony@gmail.com> <CAMKF1sphEKtJVdO7Ns7FDsniK6mDzKojjpFcTVmA_C4-AEzKJA@mail.gmail.com>
+In-Reply-To: <CAMKF1sphEKtJVdO7Ns7FDsniK6mDzKojjpFcTVmA_C4-AEzKJA@mail.gmail.com>
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+Date: Wed, 10 Feb 2021 23:00:13 +0100
+Message-ID: <CALbNGRQEtAhFyHmnSZo6npBP=gg1Ky-AVAH2TV3VikA1CJRpYA@mail.gmail.com>
+Subject: Re: [oe] [PATCH 09/13] glibmm4: Initial add 2.68.0
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+On Wed, Feb 10, 2021 at 10:17 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> Can you add the newly added recipes to testing packagegroup as well ?
 
-diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb b/meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb
-index 70ea82eb9..a4a258145 100644
---- a/meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb
-+++ b/meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb
-@@ -9,6 +9,9 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
- 
- SRC_URI = "https://hyperrealm.github.io/libconfig/dist/libconfig-${PV}.tar.gz"
- 
-+UPSTREAM_CHECK_URI = "https://github.com/hyperrealm/libconfig/releases"
-+UPSTREAM_CHECK_REGEX = "Version (?P<pver>\d+(\.\d+)+)"
-+
- inherit autotools-brokensep pkgconfig
- 
- SRC_URI[md5sum] = "6bd98ee3a6e6b9126c82c916d7a9e690"
-@@ -16,4 +19,3 @@ SRC_URI[sha256sum] = "7c3c7a9c73ff3302084386e96f903eb62ce06953bb1666235fac74363a
- 
- PACKAGE_BEFORE_PN = "${PN}++"
- FILES_${PN}++ = "${libdir}/${BPN}++*${SOLIBS}"
--
--- 
-2.25.1
+Will do tomorrow
 
+Andreas
