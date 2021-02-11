@@ -1,100 +1,96 @@
-Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com [209.85.160.170])
- by mx.groups.io with SMTP id smtpd.web11.213.1613066280378536470
+Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com [209.85.160.177])
+ by mx.groups.io with SMTP id smtpd.web11.166.1613067732961989854
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Feb 2021 09:58:00 -0800
+ Thu, 11 Feb 2021 10:22:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=uiAJWYj+;
- spf=pass (domain: gmail.com, ip: 209.85.160.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f170.google.com with SMTP id w20so4821210qta.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Feb 2021 09:58:00 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=NB/lPxgl;
+ spf=pass (domain: gmail.com, ip: 209.85.160.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f177.google.com with SMTP id d3so4834772qtr.10
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Feb 2021 10:22:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=0rt8h4Ks0NWAY++7SwU0L4V6RXzG+xZwicCiMhbo5TI=;
-        b=uiAJWYj+F8/UAuAw7Kavntu8q7O+aDbIvNjpOjRmT+pI5HLfwcI41AOjECp75TtOti
-         q+P+yBReanwT4DxPqXL9vaefIR0BErkguMwOfKzfHZuFnVrVwaAxwhs8p0YAB2sfBHRN
-         94W7i8GUeYQFaO4OcR/7Dq8+UxulmIoIP4TjKsff2TB4251Sw9ldE9t+AyCwLR0dmMzh
-         SyHKAlcN/vPnLcUERxQbsDRgcOqbXUzUyfhENsTZrhkICc85eKxwEHW3ju/Pik5ZYGRQ
-         0iq/qZpl6IGu74dmoCiMXEfW0agoMkxa0cTC2qGIGlaOSHLNX9dqty8ZjP+ZGEBJ7Ckf
-         Z0jA==
+         :cc:content-transfer-encoding;
+        bh=EgpYYO9mnBCIfItAARz6lboz7FuBSag8PwbxGmFi4lg=;
+        b=NB/lPxglvHIZ02Wmkg1W6xWmL8gFAqNBlWAGy7sFZ1+nhPa9J9DsTAaZmrdeNlNVkG
+         mgyrFS3cOK+que/OslmNENeKdqER256nJv0f4xRaPQBY2vW4tPgs8tWZzWguKVBIdOiD
+         vtBLLqapuOAmsgwhdmDJQLE34/pIW+WhqEw9o2T9ik+w+t1xV1n+DqhxDqHpbUS9n5GV
+         5XKkZ3CXel19x60P+rL7xfeI69ettTFu9sRsfra4uksvosDEb5Byxn2nskEZ7DlOQa+d
+         8481MuXMWHLMhcCQZ0+RTO/q6Tp9dn4iVys9ZXLv5uYvdjYMkZRPzjxXRylEuUTuA7LW
+         T08A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=0rt8h4Ks0NWAY++7SwU0L4V6RXzG+xZwicCiMhbo5TI=;
-        b=E7j4Ql/Y8J8YtT6n3yuFFwFyvSYxlzZhsO3LL6gjdEuKrrfqcy8NJ/V2yoZmwqFp8P
-         KjlFNEHXCyykQ5tpmpW2oxtPNf77e3g56xc9/VQ5CDVJ6xkdWr+G4V8RGiF4GumTSZbY
-         eMAsM7VbH3m8lVkn6Zpha3bkZhOkrcitnKQwGLu7PIg/n1a2cC3H4utUbc9NTjpXn56g
-         edthWFiw/y13e205AQU+2jeSpJOL6EBchvahtC52Sy4XrRxg5+BOq7P+53MaZ5/8x+1d
-         VkenUwJ++3jOAdhJFg72/MwCvowiPcKdY3L00HQDf/TKwTcI/Hzd2qkP1jA5IN4yqVVE
-         QZ7Q==
-X-Gm-Message-State: AOAM5314r8lJNAOImODQQCmWZWwjzKiPHdY+IuR6j5BGi5xG5uTJQo00
-	F/NJ59lqJlzawohUk0uGvOomUxqmRZVlgK2Nb4W4PZCYVOiIOA==
-X-Google-Smtp-Source: ABdhPJwx7zq+FXSTFUxzvWVOvZLPogZmioTZGVhasqK8QXO0jzOzLViRM/+BTI4ZqrNz3PFRX9E0Mwf3AFFlnudUweI=
-X-Received: by 2002:ac8:4b49:: with SMTP id e9mr8533562qts.80.1613066279461;
- Thu, 11 Feb 2021 09:57:59 -0800 (PST)
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=EgpYYO9mnBCIfItAARz6lboz7FuBSag8PwbxGmFi4lg=;
+        b=WjLaELyCI0vIUtW5gI1xkIL02YkoYIdziH6yQTWPCr2V2tvePvKcL1q4yN1u5ODgtO
+         QZmjTb/u9U3hCxbMNE363zBeLt5YHAAwM+95VUOA297P370O9oNKNkPz12MF0jLSdMW+
+         /OSXIxodSmpmdFE0fmgY4fChcdrPsUbtdYZuzQmw/rZ0meUgtXz7yy1uzOBAjkFGG+4S
+         Zh1EIChCfsTjXtxjnRzUGGbdi+xFvDQKtQaVtJL1nWMPbfw/wIqDH/LC8hSkO4OoL5n6
+         E9Aeerr3HbUEbpLUhdtxXI37UgoLI0rit/VlULbaSa+L0DGGYvq47AKHzY2oA5cCEtYs
+         FtDA==
+X-Gm-Message-State: AOAM531TBod1qDqFSE5MGgfotJBukHBR2vHyYpE02Ji0CYjSB2h7vHbN
+	ZKj2SzJr1lOJM1mSv3NbyrmLlBc5Cd1igfGGq5Y=
+X-Google-Smtp-Source: ABdhPJwgNf0zSHy3v54CB0o4glz/WILz74ael+DjP1gbAxdY6q7TqnNWogxIufXKNX+JpBmeiPWtqWp5Nee/NX7xjgU=
+X-Received: by 2002:ac8:4b49:: with SMTP id e9mr8635787qts.80.1613067732033;
+ Thu, 11 Feb 2021 10:22:12 -0800 (PST)
 MIME-Version: 1.0
-References: <20210211000457.1922320-1-open.source@oleksandr-kravchuk.com>
-In-Reply-To: <20210211000457.1922320-1-open.source@oleksandr-kravchuk.com>
+References: <20210210205538.690009-1-schnitzeltony@gmail.com> <20210210205538.690009-10-schnitzeltony@gmail.com>
+In-Reply-To: <20210210205538.690009-10-schnitzeltony@gmail.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 11 Feb 2021 09:57:33 -0800
-Message-ID: <CAMKF1srM16PXSqQV4eCeat0WyH3a6-s9i6FY7NTyGAFOpsXu8Q@mail.gmail.com>
-Subject: Re: [oe] [meta-python[PATCH] python3-idna: update to 3.1
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Date: Thu, 11 Feb 2021 10:21:45 -0800
+Message-ID: <CAMKF1spfx3ecwpsXT2QxeZEidy2svTwMmUQ2+g0Lb0G2245doA@mail.gmail.com>
+Subject: Re: [oe] [PATCH 10/13] cairomm4: initial add 1.16.0
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-NOTE: Runtime target '${PYTHON_PN}-codecs' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['${PYTHON_PN}-codecs']
-NOTE: Runtime target 'python3-idna' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['python3-idna',
-'${PYTHON_PN}-codecs']
+this fails with clang https://errors.yoctoproject.org/Errors/Details/570344=
+/
+it seems to be finding libboost_unit_test_framework.a on build host,
+which is not expected
+I wonder if you can reproduce this error when you install boost on
+your build host.
 
-On Wed, Feb 10, 2021 at 4:05 PM Oleksandr Kravchuk
-<open.source@oleksandr-kravchuk.com> wrote:
+On Wed, Feb 10, 2021 at 12:56 PM Andreas M=C3=BCller <schnitzeltony@gmail.=
+com> wrote:
 >
-> License-Update: copyright years.
->
-> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
 > ---
->  meta-python/recipes-devtools/python/python3-idna_2.10.bb     | 2 --
->  .../python/{python-idna.inc => python3-idna_3.1.bb}          | 5 ++---
->  2 files changed, 2 insertions(+), 5 deletions(-)
->  delete mode 100644 meta-python/recipes-devtools/python/python3-idna_2.10.bb
->  rename meta-python/recipes-devtools/python/{python-idna.inc => python3-idna_3.1.bb} (60%)
+>  .../recipes-graphics/cairo/cairomm4_1.16.0.bb    | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
+>  create mode 100644 meta-oe/recipes-graphics/cairo/cairomm4_1.16.0.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-idna_2.10.bb b/meta-python/recipes-devtools/python/python3-idna_2.10.bb
-> deleted file mode 100644
-> index a08ca714a..000000000
-> --- a/meta-python/recipes-devtools/python/python3-idna_2.10.bb
-> +++ /dev/null
-> @@ -1,2 +0,0 @@
-> -inherit pypi setuptools3
-> -require python-idna.inc
-> diff --git a/meta-python/recipes-devtools/python/python-idna.inc b/meta-python/recipes-devtools/python/python3-idna_3.1.bb
-> similarity index 60%
-> rename from meta-python/recipes-devtools/python/python-idna.inc
-> rename to meta-python/recipes-devtools/python/python3-idna_3.1.bb
-> index 4968f1072..0b64bb2ee 100644
-> --- a/meta-python/recipes-devtools/python/python-idna.inc
-> +++ b/meta-python/recipes-devtools/python/python3-idna_3.1.bb
-> @@ -1,10 +1,9 @@
->  SUMMARY = "Internationalised Domain Names in Applications"
->  HOMEPAGE = "https://github.com/kjd/idna"
->  LICENSE = "BSD-3-Clause & Python-2.0 & Unicode"
-> -LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=cf36c8682cc154d2d4aa57bd6246b9a1"
-> +LIC_FILES_CHKSUM = "file://LICENSE.md;md5=239668a7c6066d9e0c5382e9c8c6c0e1"
->
-> -SRC_URI[md5sum] = "7a910c706db30d758f377db2762c0f9a"
-> -SRC_URI[sha256sum] = "b307872f855b18632ce0c21c5e45be78c0ea7ae4c15c828c20788b26921eb3f6"
-> +SRC_URI[sha256sum] = "c5b02147e01ea9920e6b0a3f1f7bb833612d507592c837a6c49552768f4054e1"
->
->  RDEPENDS_${PN}_class-target = "\
->      ${PYTHON_PN}-codecs \
+> diff --git a/meta-oe/recipes-graphics/cairo/cairomm4_1.16.0.bb b/meta-oe=
+/recipes-graphics/cairo/cairomm4_1.16.0.bb
+> new file mode 100644
+> index 000000000..561962da4
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/cairo/cairomm4_1.16.0.bb
+> @@ -0,0 +1,16 @@
+> +SUMMARY =3D "C++ bindings for Cairo graphics library"
+> +
+> +LICENSE =3D "LGPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc46bda00ffbb0ba1dac22f8d087f=
+54d9"
+> +
+> +inherit meson
+> +
+> +BPN =3D "cairomm"
+> +
+> +DEPENDS =3D "cairo libsigc++-3"
+> +
+> +SRC_URI =3D "https://www.cairographics.org/releases/${BPN}-${PV}.tar.xz=
+"
+> +SRC_URI[sha256sum] =3D "7e881492c5f9f546688c31160deb742c166fc4c68b6b8eb=
+9920c00a0f0f144f9"
+> +
+> +FILES_${PN}-dev +=3D "${libdir}/cairomm-*/"
+> +
 > --
-> 2.25.1
+> 2.26.2
 >
 >
-> 
+>=20
 >
