@@ -1,144 +1,100 @@
-Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com [209.85.222.177])
- by mx.groups.io with SMTP id smtpd.web09.193.1613066165563772988
+Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com [209.85.160.170])
+ by mx.groups.io with SMTP id smtpd.web11.213.1613066280378536470
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Feb 2021 09:56:05 -0800
+ Thu, 11 Feb 2021 09:58:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Cc8rE0Mp;
- spf=pass (domain: gmail.com, ip: 209.85.222.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f177.google.com with SMTP id h8so6053018qkk.6
-        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Feb 2021 09:56:05 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=uiAJWYj+;
+ spf=pass (domain: gmail.com, ip: 209.85.160.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f170.google.com with SMTP id w20so4821210qta.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Feb 2021 09:58:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=SKG2HKXB00IoAGtUbZzq2+HkD5EsgHwHf/2wq2I95p4=;
-        b=Cc8rE0Mp9MQVNLiiO9nQIGduF5T6Hys8Qryxpm+R+YsQVb1qFw2Nvgw1J/1oLtuAl8
-         Ndv/eVpc3+8HsqJGjzveL7G5Si/8MopUHjbejO1gH/6UlFun5T0pvSQjF0MAL5dyD83g
-         kw1jEaGX6vd9WmbMS5nJY2VVeLuipt2en7PK1gfGP1uKhOZ9gD/mwOZcACb/8eRm1xhP
-         gks14zMb0paW6HlAMGiuAXgMo82nfMLrk9jbIOcCpWVleK5iGyIHKGfaEfXIUCueW4oC
-         wOt6yvnuq1LO8T+Ze8JA+ydVn2/ryCNhhoyav+yOWOYaiqBT0yWPMwXyf4lfpEcXxiPZ
-         DjNA==
+         :cc;
+        bh=0rt8h4Ks0NWAY++7SwU0L4V6RXzG+xZwicCiMhbo5TI=;
+        b=uiAJWYj+F8/UAuAw7Kavntu8q7O+aDbIvNjpOjRmT+pI5HLfwcI41AOjECp75TtOti
+         q+P+yBReanwT4DxPqXL9vaefIR0BErkguMwOfKzfHZuFnVrVwaAxwhs8p0YAB2sfBHRN
+         94W7i8GUeYQFaO4OcR/7Dq8+UxulmIoIP4TjKsff2TB4251Sw9ldE9t+AyCwLR0dmMzh
+         SyHKAlcN/vPnLcUERxQbsDRgcOqbXUzUyfhENsTZrhkICc85eKxwEHW3ju/Pik5ZYGRQ
+         0iq/qZpl6IGu74dmoCiMXEfW0agoMkxa0cTC2qGIGlaOSHLNX9dqty8ZjP+ZGEBJ7Ckf
+         Z0jA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=SKG2HKXB00IoAGtUbZzq2+HkD5EsgHwHf/2wq2I95p4=;
-        b=f2uXaYKPj0AiNL68+huLF43JPvZQpV6Ti2Ezza0ugAfEYrFHU7pE3aaUrDVHtI9XLb
-         v2QznD7GOTrdcI5rNhhWabxu9U+Q/gQReh2bWS16qY8v+5Fg4fSJLIhCgfW4D9gdFpWw
-         V0UWggzfEfETzQBzppYlRwhsidsZuCSAFvzxds9cLzmlAlPfdeLagF/iqi9V/eUhkROw
-         DvNTwEEk8bInc/tlQWud6+4uGt8nfIL7rHeajc5AVkV9JkCXrSsk/by/keJ8g7oGqgow
-         xFgbHQdiyCaRMhBSLWRIL2+hgu/8phLo4CUA/h4Bg0TyHBxgnSUkLreB0ai1K/oCYoD6
-         PlkA==
-X-Gm-Message-State: AOAM532O2QYZlc0eLr5cGBDPY7zKDtb6+SsApumQzgORrmVcHOTbUbDY
-	Zb3oCPTA7Z2kw2Frj9D29gEuoNBWfwjePtHZzfE=
-X-Google-Smtp-Source: ABdhPJx7jU007FJ3ZzxX6I2yfNgeH8xIz2nDtru4ifBWQbYsrvbSf8CaTphQkaii1hHMq5diz7l11aU6W+gA/vJh5Us=
-X-Received: by 2002:a37:7047:: with SMTP id l68mr9156579qkc.337.1613066164553;
- Thu, 11 Feb 2021 09:56:04 -0800 (PST)
+         :message-id:subject:to:cc;
+        bh=0rt8h4Ks0NWAY++7SwU0L4V6RXzG+xZwicCiMhbo5TI=;
+        b=E7j4Ql/Y8J8YtT6n3yuFFwFyvSYxlzZhsO3LL6gjdEuKrrfqcy8NJ/V2yoZmwqFp8P
+         KjlFNEHXCyykQ5tpmpW2oxtPNf77e3g56xc9/VQ5CDVJ6xkdWr+G4V8RGiF4GumTSZbY
+         eMAsM7VbH3m8lVkn6Zpha3bkZhOkrcitnKQwGLu7PIg/n1a2cC3H4utUbc9NTjpXn56g
+         edthWFiw/y13e205AQU+2jeSpJOL6EBchvahtC52Sy4XrRxg5+BOq7P+53MaZ5/8x+1d
+         VkenUwJ++3jOAdhJFg72/MwCvowiPcKdY3L00HQDf/TKwTcI/Hzd2qkP1jA5IN4yqVVE
+         QZ7Q==
+X-Gm-Message-State: AOAM5314r8lJNAOImODQQCmWZWwjzKiPHdY+IuR6j5BGi5xG5uTJQo00
+	F/NJ59lqJlzawohUk0uGvOomUxqmRZVlgK2Nb4W4PZCYVOiIOA==
+X-Google-Smtp-Source: ABdhPJwx7zq+FXSTFUxzvWVOvZLPogZmioTZGVhasqK8QXO0jzOzLViRM/+BTI4ZqrNz3PFRX9E0Mwf3AFFlnudUweI=
+X-Received: by 2002:ac8:4b49:: with SMTP id e9mr8533562qts.80.1613066279461;
+ Thu, 11 Feb 2021 09:57:59 -0800 (PST)
 MIME-Version: 1.0
-References: <20210210205538.690009-1-schnitzeltony@gmail.com> <20210210205538.690009-11-schnitzeltony@gmail.com>
-In-Reply-To: <20210210205538.690009-11-schnitzeltony@gmail.com>
+References: <20210211000457.1922320-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20210211000457.1922320-1-open.source@oleksandr-kravchuk.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 11 Feb 2021 09:55:38 -0800
-Message-ID: <CAMKF1sqGuHhzuro8mekwmJbEAjPMRUuYKcUVz6OPTN18xDsvFA@mail.gmail.com>
-Subject: Re: [oe] [PATCH 11/13] pangomm4: initial add 2.48.0
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 11 Feb 2021 09:57:33 -0800
+Message-ID: <CAMKF1srM16PXSqQV4eCeat0WyH3a6-s9i6FY7NTyGAFOpsXu8Q@mail.gmail.com>
+Subject: Re: [oe] [meta-python[PATCH] python3-idna: update to 3.1
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-seeing
+NOTE: Runtime target '${PYTHON_PN}-codecs' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['${PYTHON_PN}-codecs']
+NOTE: Runtime target 'python3-idna' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['python3-idna',
+'${PYTHON_PN}-codecs']
 
-ERROR: Nothing PROVIDES 'glibmm3' (but
-/mnt/b/yoe/master/sources/meta-openembedded/meta-oe/recipes-gnome/atk/atkm=
-m4_2.36.0.bb,
-/mnt/b/yoe/master/sources/meta-openembedded/meta-oe/recipes-graphics/pango=
-/pangomm4_2.48.0.bb
-DEPENDS on or otherwise requires it). Close matches:
-  glibmm
-  glibmm4
-  libmms
-ERROR: Nothing PROVIDES 'cairomm3' (but
-/mnt/b/yoe/master/sources/meta-openembedded/meta-oe/recipes-graphics/pango=
-/pangomm4_2.48.0.bb
-DEPENDS on or otherwise requires it). Close matches:
-  cairo
-  cairomm
-  cairomm4
-ERROR: Nothing RPROVIDES 'atkmm4' (but
-/mnt/b/yoe/master/sources/meta-openembedded/meta-oe/recipes-gnome/atk/atkm=
-m4_2.36.0.bb
-RDEPENDS on or otherwise requires it)
-No eligible RPROVIDERs exist for 'atkmm4'
-NOTE: Runtime target 'atkmm4' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['atkmm4']
-ERROR: Nothing RPROVIDES 'atkmm4-dev' (but
-/mnt/b/yoe/master/sources/meta-openembedded/meta-oe/recipes-gnome/atk/atkm=
-m4_2.36.0.bb
-RDEPENDS on or otherwise requires it)
-No eligible RPROVIDERs exist for 'atkmm4-dev'
-NOTE: Runtime target 'atkmm4-dev' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['atkmm4-dev']
-ERROR: Nothing RPROVIDES 'pangomm4' (but
-/mnt/b/yoe/master/sources/meta-openembedded/meta-oe/recipes-graphics/pango=
-/pangomm4_2.48.0.bb
-RDEPENDS on or otherwise requires it)
-No eligible RPROVIDERs exist for 'pangomm4'
-NOTE: Runtime target 'pangomm4' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['pangomm4']
-ERROR: Nothing RPROVIDES 'pangomm4-dev' (but
-/mnt/b/yoe/master/sources/meta-openembedded/meta-oe/recipes-graphics/pango=
-/pangomm4_2.48.0.bb
-RDEPENDS on or otherwise requires it)
-No eligible RPROVIDERs exist for 'pangomm4-dev'
-
-On Wed, Feb 10, 2021 at 12:56 PM Andreas M=C3=BCller <schnitzeltony@gmail.=
-com> wrote:
+On Wed, Feb 10, 2021 at 4:05 PM Oleksandr Kravchuk
+<open.source@oleksandr-kravchuk.com> wrote:
 >
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> License-Update: copyright years.
+>
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 > ---
->  .../recipes-graphics/pango/pangomm4_2.48.0.bb | 24 +++++++++++++++++++
->  1 file changed, 24 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/pango/pangomm4_2.48.0.bb
+>  meta-python/recipes-devtools/python/python3-idna_2.10.bb     | 2 --
+>  .../python/{python-idna.inc => python3-idna_3.1.bb}          | 5 ++---
+>  2 files changed, 2 insertions(+), 5 deletions(-)
+>  delete mode 100644 meta-python/recipes-devtools/python/python3-idna_2.10.bb
+>  rename meta-python/recipes-devtools/python/{python-idna.inc => python3-idna_3.1.bb} (60%)
 >
-> diff --git a/meta-oe/recipes-graphics/pango/pangomm4_2.48.0.bb b/meta-oe=
-/recipes-graphics/pango/pangomm4_2.48.0.bb
-> new file mode 100644
-> index 000000000..9ecbeb25b
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/pango/pangomm4_2.48.0.bb
-> @@ -0,0 +1,24 @@
-> +SUMMARY =3D "C++ bindings for the pango library"
-> +SECTION =3D "libs"
-> +LICENSE =3D "LGPLv2.1 & GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd8045f3b8f929c1cb29a1e3fd737=
-b499 \
-> +                    file://COPYING.tools;md5=3D751419260aa954499f7abaab=
-aa882bbe"
-> +
-> +DEPENDS =3D "mm-common cairomm3 glibmm3 pango"
-> +
-> +BPN =3D "pangomm"
-> +
-> +SHRT_VER =3D "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split(=
-'.')[1]}"
-> +
-> +SRC_URI =3D "http://ftp.gnome.org/pub/GNOME/sources/pangomm/${SHRT_VER}=
-/pangomm-${PV}.tar.xz"
-> +SRC_URI[sha256sum] =3D "9e0ed474c33f8c2002ca9e2b61ca0d1f3d8e409e09e99f4=
-d8c19eeafccf55b78"
-> +
-> +inherit features_check meson pkgconfig
-> +
-> +REQUIRED_DISTRO_FEATURES =3D "x11"
-> +
-> +EXTRA_OECONF =3D " --disable-documentation "
-> +
-> +FILES_${PN} =3D "${libdir}/lib*.so.*"
-> +FILES_${PN}-dev +=3D "${libdir}/*/include/ ${libdir}/pangomm-*/"
-> +
+> diff --git a/meta-python/recipes-devtools/python/python3-idna_2.10.bb b/meta-python/recipes-devtools/python/python3-idna_2.10.bb
+> deleted file mode 100644
+> index a08ca714a..000000000
+> --- a/meta-python/recipes-devtools/python/python3-idna_2.10.bb
+> +++ /dev/null
+> @@ -1,2 +0,0 @@
+> -inherit pypi setuptools3
+> -require python-idna.inc
+> diff --git a/meta-python/recipes-devtools/python/python-idna.inc b/meta-python/recipes-devtools/python/python3-idna_3.1.bb
+> similarity index 60%
+> rename from meta-python/recipes-devtools/python/python-idna.inc
+> rename to meta-python/recipes-devtools/python/python3-idna_3.1.bb
+> index 4968f1072..0b64bb2ee 100644
+> --- a/meta-python/recipes-devtools/python/python-idna.inc
+> +++ b/meta-python/recipes-devtools/python/python3-idna_3.1.bb
+> @@ -1,10 +1,9 @@
+>  SUMMARY = "Internationalised Domain Names in Applications"
+>  HOMEPAGE = "https://github.com/kjd/idna"
+>  LICENSE = "BSD-3-Clause & Python-2.0 & Unicode"
+> -LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=cf36c8682cc154d2d4aa57bd6246b9a1"
+> +LIC_FILES_CHKSUM = "file://LICENSE.md;md5=239668a7c6066d9e0c5382e9c8c6c0e1"
+>
+> -SRC_URI[md5sum] = "7a910c706db30d758f377db2762c0f9a"
+> -SRC_URI[sha256sum] = "b307872f855b18632ce0c21c5e45be78c0ea7ae4c15c828c20788b26921eb3f6"
+> +SRC_URI[sha256sum] = "c5b02147e01ea9920e6b0a3f1f7bb833612d507592c837a6c49552768f4054e1"
+>
+>  RDEPENDS_${PN}_class-target = "\
+>      ${PYTHON_PN}-codecs \
 > --
-> 2.26.2
+> 2.25.1
 >
 >
->=20
+> 
 >
