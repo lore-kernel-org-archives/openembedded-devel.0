@@ -1,99 +1,85 @@
-Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com [209.85.208.195])
- by mx.groups.io with SMTP id smtpd.web11.376.1613068482054944684
+Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com [209.85.167.65])
+ by mx.groups.io with SMTP id smtpd.web09.488.1613069065918651710
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Feb 2021 10:34:43 -0800
+ Thu, 11 Feb 2021 10:44:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=qLXZE+An;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.195, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f195.google.com with SMTP id v6so3924347ljh.9
-        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Feb 2021 10:34:41 -0800 (PST)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=v79Wzioo;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.65, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f65.google.com with SMTP id p21so9530937lfu.11
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Feb 2021 10:44:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=ZJ7eLZbjm/XHFMa5NhRKz4NXUQqgpRetmVR875HdNSc=;
-        b=qLXZE+AnIv2hvg0oGQu0w8BZ8B6fbRH1Vy8TCv9wcaZcXi3pwhQWaSCBjzkDLTHxhJ
-         vWxKwyn6EWebGA+xUClEkR+2QxfjFHJ2GDFhQR/o6n7SbF8kDOAmPpMzxFI5L4ZAWGF3
-         KdfuwaaFaoKid4cv0eaqBX4mhl9UyTEUseSw0UvsBwPefkpnz5aiv22GMjMnBZ42zfp6
-         78G3co6Hk7FMS01u3YECRxBGkogSBamOMN/qsb7Vgjah29Hxb8CTr/ZfHdoRe4Ued/oz
-         Bf66m3NlZ++lbZHB2CAlIeI+LjzRRkSrDl7T5n/lS+C2ezPWiN8sReFgAVu6klbewKxk
-         edew==
+        bh=lEgtpc2U3/+tal8hgVBQu6zrT4INKT3z09mRvpfblTE=;
+        b=v79WzioocBPdJLvjFn6tqBQawieXRtVj6nwkUvrsbWXXq/utHJVMtCeCoyBkay1seK
+         zibKAByF+WsAeqMvN2yy0Jv0TrrrSK6sJcDYF6hXK3108UC0xi9E2b9/yyhsdARv/mu2
+         7qY41zxmmz3TXdBnN4GdZ893/9WpOWwmQvcF5ldD2VJ8wvZkMHI9XSqdfs1H6vmrJNVA
+         E5JT1um9FA08X+Z3XhuMWJjBZWr3IYD7P6fCTX0/T1egP9xg++ioQ3Ej+Q6QFYGn/7m4
+         M1U8fNF0HlSPE6uAL/IWDDHZDcUzncXkvEJhrdqVGXrcgPdbpIdyUH0+DduZt17tZuQm
+         SM1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=ZJ7eLZbjm/XHFMa5NhRKz4NXUQqgpRetmVR875HdNSc=;
-        b=nvPMDwuNbxI19Gmy4d0Wxfn51sNrST0cbyYKRMNkK3OD9/uspWdfyRfgqOq2IJ0L3c
-         +E8PnBaVcDGZdykSLTzji0zwHPXygPeML0m+k4eJgzVYFo5EeixBjHBvlD7xOuw6v2Br
-         wG6pMBkStVkoeVfLIIlXlzZUHXmZEGccBigy4dzXLHEY968elAEJRQFiuq+YhGY/ALj1
-         SHg7xUI9LS7b49vINc++jAN6nSMQgTri7qUuO5zNk9ZhmTr9BlmP3EqDnvb+Wxlk7xyh
-         2+v5iQgHrgrGVSl+Uu80dK9POKbJXgg+HbjGMF9mHSFLl03pzK2Hahs+P2Tz2kd19RaL
-         CUEg==
-X-Gm-Message-State: AOAM533uR/cIXck4SMYol985CKedbmjkB7SZdfjeJN2QEWUiMhQJV3Qi
-	8oP6yByosKS1bHlB+GibK7i9zmSkNwf2ZWa5
-X-Google-Smtp-Source: ABdhPJxn3P/ho2qMnjHKvKXkpW2OFYsL0PkiNPBZ8BQEUd3F+SKKeENbzVcySuc3/DUi+vVvGNj+4Q==
-X-Received: by 2002:a2e:9710:: with SMTP id r16mr5940391lji.358.1613068479611;
-        Thu, 11 Feb 2021 10:34:39 -0800 (PST)
+        bh=lEgtpc2U3/+tal8hgVBQu6zrT4INKT3z09mRvpfblTE=;
+        b=qHpi7rSIc5B9InX9WLcrUcB3a1w1597sBOITAh9hvZI6cATlXeV83jzkbWOkGYdjM4
+         Y0xL07KVItt2ODnKRk7mtN3Shm+KpITx8v422WpTxJt3wqvA7kaMKXl1H/YVFJ2s44GJ
+         rlRvfHe8Wu+5E+UdPRzBDqlm0jszI8Ojnv17380PxNOqkO2wijV52rPPtwDE05yYyoe1
+         87OsTnRWvxzrm1NbkunC7Ka6j8F9GobW/goXBzOTVmsqmyr+UpBXl0xDo3mtiFH2SdYK
+         g725ePMoTuuFT6Nh9ClauQo0yy+HPzmaEI7tbYgdlb1EqOZ3ZQsNffRFYhoDIn2C9b7f
+         U/5Q==
+X-Gm-Message-State: AOAM533YUdTFe2EXBbzUBNjQdtLFgj6Sqo9v68/jIVstygNc7Eew4FY3
+	8chiWP5uFtC53Tim71LRdwOV9MOvdhDIXMJM
+X-Google-Smtp-Source: ABdhPJzoI0SoxY8ndaDNrOlGOWRd7th8z0Bb9cIpq9WT4ovGPPm2KUJIZaY75bMaUTAyCn3Pd9cTDg==
+X-Received: by 2002:a19:6a17:: with SMTP id u23mr4731282lfu.21.1613069063609;
+        Thu, 11 Feb 2021 10:44:23 -0800 (PST)
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id h5sm998447ljj.136.2021.02.11.10.34.38
+        by smtp.gmail.com with ESMTPSA id d10sm996950lji.17.2021.02.11.10.44.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 Feb 2021 10:34:38 -0800 (PST)
+        Thu, 11 Feb 2021 10:44:23 -0800 (PST)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python[PATCH v2] python3-idna: update to 3.1
-Date: Thu, 11 Feb 2021 19:34:37 +0100
-Message-Id: <20210211183437.2215328-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-oe][PATCH] ceres-solver: update to 2.0.0
+Date: Thu, 11 Feb 2021 19:44:15 +0100
+Message-Id: <20210211184415.2232107-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-License-Update: copyright years.
+License-Update: license of subcomponent was added:
+https://github.com/ceres-solver/ceres-solver/commits/master/LICENSE
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- meta-python/recipes-devtools/python/python3-idna_2.10.bb   | 2 --
- .../python/{python-idna.inc => python3-idna_3.1.bb}        | 7 ++++---
- 2 files changed, 4 insertions(+), 5 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-idna_2.10.bb
- rename meta-python/recipes-devtools/python/{python-idna.inc => python3-idna_3.1.bb} (60%)
+ .../{ceres-solver_1.14.0.bb => ceres-solver_2.0.0.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/ceres-solver/{ceres-solver_1.14.0.bb => ceres-solver_2.0.0.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-idna_2.10.bb b/meta-python/recipes-devtools/python/python3-idna_2.10.bb
-deleted file mode 100644
-index a08ca714ac..0000000000
---- a/meta-python/recipes-devtools/python/python3-idna_2.10.bb
-+++ /dev/null
-@@ -1,2 +0,0 @@
--inherit pypi setuptools3
--require python-idna.inc
-diff --git a/meta-python/recipes-devtools/python/python-idna.inc b/meta-python/recipes-devtools/python/python3-idna_3.1.bb
-similarity index 60%
-rename from meta-python/recipes-devtools/python/python-idna.inc
-rename to meta-python/recipes-devtools/python/python3-idna_3.1.bb
-index 4968f10726..fab5445954 100644
---- a/meta-python/recipes-devtools/python/python-idna.inc
-+++ b/meta-python/recipes-devtools/python/python3-idna_3.1.bb
-@@ -1,15 +1,16 @@
- SUMMARY = "Internationalised Domain Names in Applications"
- HOMEPAGE = "https://github.com/kjd/idna"
- LICENSE = "BSD-3-Clause & Python-2.0 & Unicode"
--LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=cf36c8682cc154d2d4aa57bd6246b9a1"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=239668a7c6066d9e0c5382e9c8c6c0e1"
+diff --git a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.0.bb b/meta-oe/recipes-support/ceres-solver/ceres-solver_2.0.0.bb
+similarity index 92%
+rename from meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.0.bb
+rename to meta-oe/recipes-support/ceres-solver/ceres-solver_2.0.0.bb
+index ac463038a..28d0868c4 100644
+--- a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.0.bb
++++ b/meta-oe/recipes-support/ceres-solver/ceres-solver_2.0.0.bb
+@@ -2,12 +2,12 @@ DESCRIPTION = "Ceres Solver is an open source C++ library for modeling and solvi
+ AUTHOR = "Sameer Agarwal and Keir Mierle and Others"
+ HOMEPAGE = "http://ceres-solver.org/"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=35e00f0c4c96a0820a03e0b31e6416be"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=bb761279816b72be19d7ce646e4e2a14"
  
--SRC_URI[md5sum] = "7a910c706db30d758f377db2762c0f9a"
--SRC_URI[sha256sum] = "b307872f855b18632ce0c21c5e45be78c0ea7ae4c15c828c20788b26921eb3f6"
-+SRC_URI[sha256sum] = "c5b02147e01ea9920e6b0a3f1f7bb833612d507592c837a6c49552768f4054e1"
+ DEPENDS = "libeigen glog"
  
- RDEPENDS_${PN}_class-target = "\
-     ${PYTHON_PN}-codecs \
- "
+ SRC_URI = "git://github.com/ceres-solver/ceres-solver.git"
+-SRCREV = "facb199f3eda902360f9e1d5271372b7e54febe1"
++SRCREV = "399cda773035d99eaf1f4a129a666b3c4df9d1b1"
  
-+inherit pypi setuptools3
-+
- # Remove bundled egg-info
- do_compile_prepend() {
-     rm -rf ${S}/idna.egg-info
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.25.1
 
