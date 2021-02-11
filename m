@@ -1,96 +1,99 @@
-Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com [209.85.160.177])
- by mx.groups.io with SMTP id smtpd.web11.166.1613067732961989854
+Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com [209.85.208.195])
+ by mx.groups.io with SMTP id smtpd.web11.376.1613068482054944684
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Feb 2021 10:22:13 -0800
+ Thu, 11 Feb 2021 10:34:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=NB/lPxgl;
- spf=pass (domain: gmail.com, ip: 209.85.160.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f177.google.com with SMTP id d3so4834772qtr.10
-        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Feb 2021 10:22:12 -0800 (PST)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=qLXZE+An;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.195, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f195.google.com with SMTP id v6so3924347ljh.9
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Feb 2021 10:34:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=EgpYYO9mnBCIfItAARz6lboz7FuBSag8PwbxGmFi4lg=;
-        b=NB/lPxglvHIZ02Wmkg1W6xWmL8gFAqNBlWAGy7sFZ1+nhPa9J9DsTAaZmrdeNlNVkG
-         mgyrFS3cOK+que/OslmNENeKdqER256nJv0f4xRaPQBY2vW4tPgs8tWZzWguKVBIdOiD
-         vtBLLqapuOAmsgwhdmDJQLE34/pIW+WhqEw9o2T9ik+w+t1xV1n+DqhxDqHpbUS9n5GV
-         5XKkZ3CXel19x60P+rL7xfeI69ettTFu9sRsfra4uksvosDEb5Byxn2nskEZ7DlOQa+d
-         8481MuXMWHLMhcCQZ0+RTO/q6Tp9dn4iVys9ZXLv5uYvdjYMkZRPzjxXRylEuUTuA7LW
-         T08A==
+        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ZJ7eLZbjm/XHFMa5NhRKz4NXUQqgpRetmVR875HdNSc=;
+        b=qLXZE+AnIv2hvg0oGQu0w8BZ8B6fbRH1Vy8TCv9wcaZcXi3pwhQWaSCBjzkDLTHxhJ
+         vWxKwyn6EWebGA+xUClEkR+2QxfjFHJ2GDFhQR/o6n7SbF8kDOAmPpMzxFI5L4ZAWGF3
+         KdfuwaaFaoKid4cv0eaqBX4mhl9UyTEUseSw0UvsBwPefkpnz5aiv22GMjMnBZ42zfp6
+         78G3co6Hk7FMS01u3YECRxBGkogSBamOMN/qsb7Vgjah29Hxb8CTr/ZfHdoRe4Ued/oz
+         Bf66m3NlZ++lbZHB2CAlIeI+LjzRRkSrDl7T5n/lS+C2ezPWiN8sReFgAVu6klbewKxk
+         edew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=EgpYYO9mnBCIfItAARz6lboz7FuBSag8PwbxGmFi4lg=;
-        b=WjLaELyCI0vIUtW5gI1xkIL02YkoYIdziH6yQTWPCr2V2tvePvKcL1q4yN1u5ODgtO
-         QZmjTb/u9U3hCxbMNE363zBeLt5YHAAwM+95VUOA297P370O9oNKNkPz12MF0jLSdMW+
-         /OSXIxodSmpmdFE0fmgY4fChcdrPsUbtdYZuzQmw/rZ0meUgtXz7yy1uzOBAjkFGG+4S
-         Zh1EIChCfsTjXtxjnRzUGGbdi+xFvDQKtQaVtJL1nWMPbfw/wIqDH/LC8hSkO4OoL5n6
-         E9Aeerr3HbUEbpLUhdtxXI37UgoLI0rit/VlULbaSa+L0DGGYvq47AKHzY2oA5cCEtYs
-         FtDA==
-X-Gm-Message-State: AOAM531TBod1qDqFSE5MGgfotJBukHBR2vHyYpE02Ji0CYjSB2h7vHbN
-	ZKj2SzJr1lOJM1mSv3NbyrmLlBc5Cd1igfGGq5Y=
-X-Google-Smtp-Source: ABdhPJwgNf0zSHy3v54CB0o4glz/WILz74ael+DjP1gbAxdY6q7TqnNWogxIufXKNX+JpBmeiPWtqWp5Nee/NX7xjgU=
-X-Received: by 2002:ac8:4b49:: with SMTP id e9mr8635787qts.80.1613067732033;
- Thu, 11 Feb 2021 10:22:12 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ZJ7eLZbjm/XHFMa5NhRKz4NXUQqgpRetmVR875HdNSc=;
+        b=nvPMDwuNbxI19Gmy4d0Wxfn51sNrST0cbyYKRMNkK3OD9/uspWdfyRfgqOq2IJ0L3c
+         +E8PnBaVcDGZdykSLTzji0zwHPXygPeML0m+k4eJgzVYFo5EeixBjHBvlD7xOuw6v2Br
+         wG6pMBkStVkoeVfLIIlXlzZUHXmZEGccBigy4dzXLHEY968elAEJRQFiuq+YhGY/ALj1
+         SHg7xUI9LS7b49vINc++jAN6nSMQgTri7qUuO5zNk9ZhmTr9BlmP3EqDnvb+Wxlk7xyh
+         2+v5iQgHrgrGVSl+Uu80dK9POKbJXgg+HbjGMF9mHSFLl03pzK2Hahs+P2Tz2kd19RaL
+         CUEg==
+X-Gm-Message-State: AOAM533uR/cIXck4SMYol985CKedbmjkB7SZdfjeJN2QEWUiMhQJV3Qi
+	8oP6yByosKS1bHlB+GibK7i9zmSkNwf2ZWa5
+X-Google-Smtp-Source: ABdhPJxn3P/ho2qMnjHKvKXkpW2OFYsL0PkiNPBZ8BQEUd3F+SKKeENbzVcySuc3/DUi+vVvGNj+4Q==
+X-Received: by 2002:a2e:9710:: with SMTP id r16mr5940391lji.358.1613068479611;
+        Thu, 11 Feb 2021 10:34:39 -0800 (PST)
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
+        by smtp.gmail.com with ESMTPSA id h5sm998447ljj.136.2021.02.11.10.34.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 11 Feb 2021 10:34:38 -0800 (PST)
+From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-python[PATCH v2] python3-idna: update to 3.1
+Date: Thu, 11 Feb 2021 19:34:37 +0100
+Message-Id: <20210211183437.2215328-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20210210205538.690009-1-schnitzeltony@gmail.com> <20210210205538.690009-10-schnitzeltony@gmail.com>
-In-Reply-To: <20210210205538.690009-10-schnitzeltony@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 11 Feb 2021 10:21:45 -0800
-Message-ID: <CAMKF1spfx3ecwpsXT2QxeZEidy2svTwMmUQ2+g0Lb0G2245doA@mail.gmail.com>
-Subject: Re: [oe] [PATCH 10/13] cairomm4: initial add 1.16.0
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-this fails with clang https://errors.yoctoproject.org/Errors/Details/570344=
-/
-it seems to be finding libboost_unit_test_framework.a on build host,
-which is not expected
-I wonder if you can reproduce this error when you install boost on
-your build host.
+License-Update: copyright years.
 
-On Wed, Feb 10, 2021 at 12:56 PM Andreas M=C3=BCller <schnitzeltony@gmail.=
-com> wrote:
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> ---
->  .../recipes-graphics/cairo/cairomm4_1.16.0.bb    | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/cairo/cairomm4_1.16.0.bb
->
-> diff --git a/meta-oe/recipes-graphics/cairo/cairomm4_1.16.0.bb b/meta-oe=
-/recipes-graphics/cairo/cairomm4_1.16.0.bb
-> new file mode 100644
-> index 000000000..561962da4
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/cairo/cairomm4_1.16.0.bb
-> @@ -0,0 +1,16 @@
-> +SUMMARY =3D "C++ bindings for Cairo graphics library"
-> +
-> +LICENSE =3D "LGPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc46bda00ffbb0ba1dac22f8d087f=
-54d9"
-> +
-> +inherit meson
-> +
-> +BPN =3D "cairomm"
-> +
-> +DEPENDS =3D "cairo libsigc++-3"
-> +
-> +SRC_URI =3D "https://www.cairographics.org/releases/${BPN}-${PV}.tar.xz=
-"
-> +SRC_URI[sha256sum] =3D "7e881492c5f9f546688c31160deb742c166fc4c68b6b8eb=
-9920c00a0f0f144f9"
-> +
-> +FILES_${PN}-dev +=3D "${libdir}/cairomm-*/"
-> +
-> --
-> 2.26.2
->
->
->=20
->
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ meta-python/recipes-devtools/python/python3-idna_2.10.bb   | 2 --
+ .../python/{python-idna.inc => python3-idna_3.1.bb}        | 7 ++++---
+ 2 files changed, 4 insertions(+), 5 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-idna_2.10.bb
+ rename meta-python/recipes-devtools/python/{python-idna.inc => python3-idna_3.1.bb} (60%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-idna_2.10.bb b/meta-python/recipes-devtools/python/python3-idna_2.10.bb
+deleted file mode 100644
+index a08ca714ac..0000000000
+--- a/meta-python/recipes-devtools/python/python3-idna_2.10.bb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-inherit pypi setuptools3
+-require python-idna.inc
+diff --git a/meta-python/recipes-devtools/python/python-idna.inc b/meta-python/recipes-devtools/python/python3-idna_3.1.bb
+similarity index 60%
+rename from meta-python/recipes-devtools/python/python-idna.inc
+rename to meta-python/recipes-devtools/python/python3-idna_3.1.bb
+index 4968f10726..fab5445954 100644
+--- a/meta-python/recipes-devtools/python/python-idna.inc
++++ b/meta-python/recipes-devtools/python/python3-idna_3.1.bb
+@@ -1,15 +1,16 @@
+ SUMMARY = "Internationalised Domain Names in Applications"
+ HOMEPAGE = "https://github.com/kjd/idna"
+ LICENSE = "BSD-3-Clause & Python-2.0 & Unicode"
+-LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=cf36c8682cc154d2d4aa57bd6246b9a1"
++LIC_FILES_CHKSUM = "file://LICENSE.md;md5=239668a7c6066d9e0c5382e9c8c6c0e1"
+ 
+-SRC_URI[md5sum] = "7a910c706db30d758f377db2762c0f9a"
+-SRC_URI[sha256sum] = "b307872f855b18632ce0c21c5e45be78c0ea7ae4c15c828c20788b26921eb3f6"
++SRC_URI[sha256sum] = "c5b02147e01ea9920e6b0a3f1f7bb833612d507592c837a6c49552768f4054e1"
+ 
+ RDEPENDS_${PN}_class-target = "\
+     ${PYTHON_PN}-codecs \
+ "
+ 
++inherit pypi setuptools3
++
+ # Remove bundled egg-info
+ do_compile_prepend() {
+     rm -rf ${S}/idna.egg-info
+-- 
+2.25.1
+
