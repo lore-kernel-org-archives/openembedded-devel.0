@@ -1,76 +1,112 @@
-Received: from mail-lf1-f66.google.com (mail-lf1-f66.google.com [209.85.167.66])
- by mx.groups.io with SMTP id smtpd.web08.1671.1613001928717529963
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.web11.6360.1613036433158902628
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Feb 2021 16:05:29 -0800
+ Thu, 11 Feb 2021 01:40:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=KXflzkDC;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.66, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f66.google.com with SMTP id d3so5566760lfg.10
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Feb 2021 16:05:28 -0800 (PST)
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=eKclEP1n;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.54, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f54.google.com with SMTP id o10so5634410wmc.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Feb 2021 01:40:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=GYYVgdm39ojc6F0KDRYBsrbMz9jBaEX0z7nCCUEkMIo=;
-        b=KXflzkDCGyTnLZ9hzTXUXklt2bvwLnEPcAaK6kT7Ae5A795r6n5G7mjD/Sv7hv5pSp
-         +/9zE9mg3duAvdPxnPWYw1YwgHg8KIMPjQQo0Id48Hwjsn14baaY1sVueuLGnHX/NlLL
-         e8rjfXhkpE1F+Bf1SGS2nhj0CROeNaH0j0kJNtV2f3+ps0OGijyESBkrTuQmcZSK5skM
-         V54MoqI7sjJlvPL0micbmnH6Enls0C1MgRvjzfetDsY+vEusNErNMcq14KmBXW1dkdu5
-         FN6wQTJBzHBC8kcRatJuPFU5xSIfv8Hac5dKvs5hZyvCgizj2FE7TZDmA9doMGduKtZk
-         jyvg==
+        bh=2HafgMk2+xGhTjyE/8L2GK4eBjRWI0ynxOfdzXJJNJA=;
+        b=eKclEP1n2z8tgF59F5bWxJMD5DCVFXlRi7vEPo/flqB0rTqBUIaB62Kq2ZJctKTCfc
+         Ud4VgyIZqEvgo/cBVMuqSVftqwXM1idQCxMNlLA/uAC/xydVFb2UAv7gKzm5aYGIpezj
+         /DbQLZbLoUSLwVCmho5oN2TfoGEtPDIVBSoRnQ8sybAQKxsOPQKPLJk5jZd4FarGj86w
+         C8vyk/jMhHn+mWUVO2ZVX5f85vTkkUO12Iwt3Ebh0ysxdMETHX+Sxds3nN4uWe6U8laT
+         0amBjU7icwnN+rXd/d7UZdgtUIGDYO0PV+Z1FO1vu56bflTcPu/uDbZ1WQ4M+p4b76Dk
+         X9iA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=GYYVgdm39ojc6F0KDRYBsrbMz9jBaEX0z7nCCUEkMIo=;
-        b=TJbgnQicxGoO1aWe7Y7L0a6OvyHmSHqy++NRK3GABHhd8TYebO9gpjxbHet5QX7mrk
-         UGplVFPsKZmwH7lG2pdKZUYdrgEoDzlNpzVgnSbJUS4zHhcnC7UTDbYBzYAZtI6Fb5qb
-         3tz06bnBkFtseRgV5MLm89tbRMbwcOpG9FQY+lHZNq8JXR7tn2aSaPNwGSkl4X/zEA5R
-         8c6PbEMjfi6LWReBs6qN3eUyV6QBmMjur6ki/1nZuMEdXt61TK8dEq1K27mBDJ/DRSJc
-         WRhSwzZUF/Kg+FZIA0NTPyfTliS+A7Sa3EPlm0lvRg09yVRTEC/GYPpVbyn9YRofnpAB
-         DQJg==
-X-Gm-Message-State: AOAM530ULKGE6iHdgdzWd2JGK9qIhsm1PPXXzdgsQ+OSC/Nh9x8VChi0
-	Y22HDANPATxhppGpijY5K3eT0fZYCdbxMin7
-X-Google-Smtp-Source: ABdhPJxVe09/yuQ4W3wnpJhg58pJxMMarN4evJHRZkS/GO9rMP980VJVSaUYM+D+juIhlpxhdGwGfQ==
-X-Received: by 2002:a05:6512:3184:: with SMTP id i4mr3035164lfe.314.1613001926532;
-        Wed, 10 Feb 2021 16:05:26 -0800 (PST)
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id c78sm487051lfd.120.2021.02.10.16.05.25
+        bh=2HafgMk2+xGhTjyE/8L2GK4eBjRWI0ynxOfdzXJJNJA=;
+        b=jBlBqChEWnPES576LLc6guj7LS9r/0UWPtTd3Y83ZYquhEaPd2FONgUOoSwiaTttYM
+         IcsjgoIZkPUTCEpzVqFX1pml0FszoYirbx5IN8FRClTh0ydaoAA8yy1yPKrUe/GrNCpF
+         CVclOiCarVARpXzKtEzjMRO7ImP1+LsfbKZauQHYkF4JWyA0yIDDnyXygM3yZ8NKdZRr
+         IaCkxg6trm4GRFpWNdQ8JMQrJsepNOOgIoE4Y+gYhIqZYZlS6v/h8+Rc2bZaqjVqPebO
+         Kve4If2ABWegxiTjAmLv7Ue51qPFQyv79ivhzZgtHl7M80EL83+xjXtWiCqoOGyqld5e
+         av6w==
+X-Gm-Message-State: AOAM530ZZkB8CEoM5vJkEmYQJLLAzBuxSMVNI3yH8sMj6fdii7YW6+sj
+	GVDb3JcWBUsJ0C3q8VbcDHPwzA==
+X-Google-Smtp-Source: ABdhPJxFfJs3SOBYggpiHDKlW2aUb+nZiljY3Evs822r8DLG64Cy3Mpb39BlOKh2iEDDMn7/59WcSA==
+X-Received: by 2002:a1c:dfd6:: with SMTP id w205mr4297936wmg.90.1613036431625;
+        Thu, 11 Feb 2021 01:40:31 -0800 (PST)
+Return-Path: <brgl@bgdev.pl>
+Received: from debian-brgl.home (amarseille-656-1-4-167.w90-8.abo.wanadoo.fr. [90.8.158.167])
+        by smtp.gmail.com with ESMTPSA id t197sm28262640wmt.3.2021.02.11.01.40.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Feb 2021 16:05:26 -0800 (PST)
-From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python[PATCH] python3-pykickstart: update to 3.32
-Date: Thu, 11 Feb 2021 01:05:24 +0100
-Message-Id: <20210211000524.1922826-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+        Thu, 11 Feb 2021 01:40:31 -0800 (PST)
+From: "Bartosz Golaszewski" <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Armin Kuster <akuster808@gmail.com>,
+	Tim moto-timo Orling <TicoTimo@gmail.com>,
+	Derek Straka <derek@asterius.io>,
+	Trevor Gamblin <trevor.gamblin@windriver.com>
+Cc: openembedded-devel@lists.openembedded.org,
+	Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: [meta-python][PATCH v2] pydbus_manager: new package
+Date: Thu, 11 Feb 2021 10:40:29 +0100
+Message-Id: <20210211094029.8113-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.29.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- ...{python3-pykickstart_3.26.bb => python3-pykickstart_3.32.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-extended/python-pykickstart/{python3-pykickstart_3.26.bb => python3-pykickstart_3.32.bb} (94%)
+From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-diff --git a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.26.bb b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.32.bb
-similarity index 94%
-rename from meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.26.bb
-rename to meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.32.bb
-index 7aeb5d6c9..62d2729dc 100644
---- a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.26.bb
-+++ b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.32.bb
-@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/rhinstaller/pykickstart.git;protocol=https;branch=ma
-            file://0003-comment-out-sections-shutdown-and-environment-in-gen.patch \
-            file://0004-load.py-retry-to-invoke-request-with-timeout.patch \
-            "
--SRCREV = "4c93e84c8798da511da1c05f1912d2f908f8f85f"
-+SRCREV = "c56a5fbdd4079b187b21787f072ccc83dc09c28c"
- 
- UPSTREAM_CHECK_GITTAGREGEX = "r(?P<pver>\d+(\.\d+)+(-\d+)*)"
- 
+pydbus is a popular (and probably the most 'pythonic') implementation
+of DBus for python but unfortunately it doesn't implement the
+ObjectManager interface. This project is an extension providing this
+functionality.
+
+The reason for having this as a separate project is simple: pydbus seems
+to no longer be actively maintained so it's hard to make it part of the
+original codebase.
+
+Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+---
+v1 -> v2:
+- add pydbus-manager to packagegroup-meta-python3
+
+ .../packagegroups/packagegroup-meta-python.bb       |  1 +
+ .../python/python3-pydbus-manager_git.bb            | 13 +++++++++++++
+ 2 files changed, 14 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pydbus-manager_git.bb
+
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index 8b267c9cb..e31b0b8b4 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -288,6 +288,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
+     python3-pycrypto \
+     python3-pycurl \
+     python3-pydbus \
++    python3-pydbus-manager \
+     python3-pydicti \
+     python3-pyephem \
+     python3-pyexpect \
+diff --git a/meta-python/recipes-devtools/python/python3-pydbus-manager_git.bb b/meta-python/recipes-devtools/python/python3-pydbus-manager_git.bb
+new file mode 100644
+index 000000000..ae9e42160
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pydbus-manager_git.bb
+@@ -0,0 +1,13 @@
++SUMMARY = "DBus.ObjectManager implementation for pydbus"
++AUTHOR = "Sébastien Corne"
++
++LICENSE = "WTFPL"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=0fd5bb1dae91ba145745db55870be6a7"
++
++inherit setuptools3
++
++SRC_URI = "git://github.com/seebz/pydbus-manager.git"
++SRCREV = "6b576b969cbda50521dca62a7df929167207f9fc"
++PV = "git${SRCPV}"
++
++S = "${WORKDIR}/git"
 -- 
-2.25.1
+2.29.1
 
