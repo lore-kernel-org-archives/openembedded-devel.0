@@ -1,76 +1,87 @@
-Received: from mail-lf1-f66.google.com (mail-lf1-f66.google.com [209.85.167.66])
- by mx.groups.io with SMTP id smtpd.web12.374.1613109242506245808
+Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com [209.85.208.194])
+ by mx.groups.io with SMTP id smtpd.web09.503.1613110633569858844
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Feb 2021 21:54:03 -0800
+ Thu, 11 Feb 2021 22:17:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=NMb6hfs4;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.66, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f66.google.com with SMTP id p21so11488797lfu.11
-        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Feb 2021 21:54:02 -0800 (PST)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=L+nWjD4H;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.194, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f194.google.com with SMTP id b16so10236475lji.13
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Feb 2021 22:17:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=UFTjINg/msj4myVOlNFJh5NNYI1oGGYREsmC5+D2z6s=;
-        b=NMb6hfs4Acn6B+C/tr3Un1prggnSKtOtSd8jbuEO6q7g9llFYyHXLTf+bOz03PZwnU
-         zWKFv3IXSvuT+Fj/SZUeD5V7IjaYN2bHyB3rTXEN5YSnMvzUN4uvrZnCjpzk/BdZONjq
-         IXcoM8GXy7wfqJrlnAFpRnklQJnvQ/P8kur70u5k8Dj3ynTSBs579SS37AaImFqO1nHE
-         sy0m01biHAwE2q4lrf7akZhaHdYGeKVVww67A6Y9DNM+dlsHZ7TbuUzd6iz2bPTyNDPV
-         3ooJPHu+YIh0MunB/MzhDNX5O8qdy2tKcfkbItnpkwS6JPgvAh0UVMrLuhEFXU5StJyo
-         ZCQg==
+        bh=hxLvObVFSE8R9wZpGYomwta+E9jWIdf515umy4UY98g=;
+        b=L+nWjD4HgiIVMuHUzu+6Vrx8sWBtTKjjlZVdZxm3XK2oukINsQlqy7USgCiVzM4bd5
+         eOjNpG2p/4ofFwOKZxLOd3QjG0I623urc+pQ9Bm/Yw9jj9fEPf0h6ICwZL5SZjjI+o0h
+         PZ3f384/KHPW9W16V29jl4ntxyXVj/cL3UPycI/xrE9RfseWaX80+VvjtHk3G9YIg9Za
+         350dubIhxzXRlFy92TIyi+d9sgP/JHQhMaQ/Vc2f/C9McQLK3TdEM/rLAUjZJlNyi+iH
+         pZWcJ+rShJv1U1OUXIHvYmjcPSFPymSy4LP4Nx3lM4SXhvXDjUhIDb9YLO48auyq/2sh
+         c8BQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=UFTjINg/msj4myVOlNFJh5NNYI1oGGYREsmC5+D2z6s=;
-        b=seAPjb/Wz6N4kEqeUHHBWCAsR0/930saq7E333g6L8HmPCa9C5P2mhC7/Usb2ljXfE
-         8uDHSSetPXW8L1DeMU9TnYUnrbEPhIl+vfo9yowiUOleUXKVeYAT1Mk757KIA3JECdLe
-         BWkSu0pceY0zzlU9W30qggNPTXrnpGHD+kKTvu3ajszl4BuuD/9aDiqlTj8+7VKmQMZY
-         6oLcl0ckSKjvXE6VwvY93k2RIp/3LfePITbMfNr3AnYRDFkM6XC18VAAvRcT5D17hpvH
-         g6duRr0Gcf1QVN0lqvzRfWnkhPy366h/GxYdGZ23KVsbNjpec5P5NBIjYB++2PfGY8f+
-         seIw==
-X-Gm-Message-State: AOAM531tx6J6+JlFLqQJs9Ar0a8ywycj3pLDQa5JAkXIW2fzqhYtOqkE
-	oTItyNN86oarW8ecnQa5sykHzBXjPcjqBtG+
-X-Google-Smtp-Source: ABdhPJyirogPBEPmQyai2igIQHBGy+VJFaAlXW85bjgl/RdLZVE4ld58BtiJKzjGXSmJYIOG4M3uHw==
-X-Received: by 2002:ac2:4114:: with SMTP id b20mr757016lfi.180.1613109240013;
-        Thu, 11 Feb 2021 21:54:00 -0800 (PST)
+        bh=hxLvObVFSE8R9wZpGYomwta+E9jWIdf515umy4UY98g=;
+        b=kZ08x4fJTRgLnRSM1Y1JzKAgZ8xeOYvLAyBygQ576hFRSg0YH2QKHLPX+zo/9/+jcu
+         PCEWd5bNuHZzWWxdND7yhmmEW48VG4jymdsfkoU7bXCFd4T0cZZrm/6Ce5UyfIusOWwC
+         u51e8u31Mxhp/YsOLm7SIHIU8COzXw3MbmELL+RXiZYlopp1VeKnmo3muDbsdQAUJHSv
+         aDmBw41ivF7SQIG1wEXZid0muqrmmwHLsJe0F3XFRZqoGGa+g9JDlpY2vfhp/EZDAEgp
+         fcUZOx04Vell048C5cEB3xh146HdEj+iyfcQ9nZMd+FCZrBOUSKa0Y2JSOhnph+ClQBs
+         xG4g==
+X-Gm-Message-State: AOAM532LoPpzToXekzhUq8dqKlsqUMIK4tdYcjR8lg4k3W4VgzEal73B
+	+mNrKPEDZ6KqqLrZkY5T4Ye5w2FvUt0NFoRo
+X-Google-Smtp-Source: ABdhPJyGjePorkTIdPqzwtQ/eHQZkYLMjOF77hiGopcRdSV0GGd5JL9J9OMPihQebd5ZNVSK4W4phw==
+X-Received: by 2002:a05:651c:1386:: with SMTP id k6mr335783ljb.51.1613110631387;
+        Thu, 11 Feb 2021 22:17:11 -0800 (PST)
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id b14sm864391lfi.164.2021.02.11.21.53.59
+        by smtp.gmail.com with ESMTPSA id o16sm798256lfi.194.2021.02.11.22.17.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 Feb 2021 21:53:59 -0800 (PST)
+        Thu, 11 Feb 2021 22:17:10 -0800 (PST)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-oe][PATCH] hexedit: update to 1.5
-Date: Fri, 12 Feb 2021 06:53:56 +0100
-Message-Id: <20210212055356.2398938-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-oe][PATCH] ttf-abyssinica: update to 2.000
+Date: Fri, 12 Feb 2021 07:17:08 +0100
+Message-Id: <20210212061708.2409723-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+License-Update: copyright years.
+
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../hexedit/{hexedit_1.4.2.bb => hexedit_1.5.bb}                | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/hexedit/{hexedit_1.4.2.bb => hexedit_1.5.bb} (89%)
+ .../{ttf-abyssinica_1.500.bb => ttf-abyssinica_2.000.bb}    | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-graphics/ttf-fonts/{ttf-abyssinica_1.500.bb => ttf-abyssinica_2.000.bb} (61%)
 
-diff --git a/meta-oe/recipes-extended/hexedit/hexedit_1.4.2.bb b/meta-oe/recipes-extended/hexedit/hexedit_1.5.bb
-similarity index 89%
-rename from meta-oe/recipes-extended/hexedit/hexedit_1.4.2.bb
-rename to meta-oe/recipes-extended/hexedit/hexedit_1.5.bb
-index 3e7fb2a07..3a7413d8a 100644
---- a/meta-oe/recipes-extended/hexedit/hexedit_1.4.2.bb
-+++ b/meta-oe/recipes-extended/hexedit/hexedit_1.5.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
- SRC_URI = "git://github.com/pixel/hexedit.git \
-     "
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-abyssinica_1.500.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-abyssinica_2.000.bb
+similarity index 61%
+rename from meta-oe/recipes-graphics/ttf-fonts/ttf-abyssinica_1.500.bb
+rename to meta-oe/recipes-graphics/ttf-fonts/ttf-abyssinica_2.000.bb
+index ce003e922..d3dd417dc 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-abyssinica_1.500.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-abyssinica_2.000.bb
+@@ -3,15 +3,13 @@ require ttf.inc
+ SUMMARY = "Ethiopia and Eritrea (Amharic) font - TTF Edition"
+ HOMEPAGE = "http://software.sil.org/abyssinica/"
+ LICENSE = "OFL-1.1"
+-LIC_FILES_CHKSUM = "file://OFL.txt;md5=1694c7fc245cdc85c9971db707928159"
++LIC_FILES_CHKSUM = "file://OFL.txt;md5=80cc8cdcdc3f8ce96957bbac946b70ae"
  
--SRCREV = "800e4b2e6280531a84fd23ee0b48e16baeb90878"
-+SRCREV = "baf45a289360a39a05253949fb9d1b50e4668d8a"
+ SRCNAME = "AbyssinicaSIL"
+ SRC_URI = "http://software.sil.org/downloads/r/abyssinica/${SRCNAME}-${PV}.zip"
+ S = "${WORKDIR}/${SRCNAME}-${PV}"
  
- S = "${WORKDIR}/git"
+-SRC_URI[md5sum] = "a3d943d18e303197c8d3d92d2de54d1e"
+-SRC_URI[sha256sum] = "e48a77d5ab8ee0b06464a5b29be70f292aa25dc1e73eb39ec933bd7fa47bbd86"
++SRC_URI[sha256sum] = "274204a53b30f64cca662d78c7199e3c0325ea95ad4109886b47af734c92d0f9"
  
+ FONT_PACKAGES = "${PN}"
+ FILES_${PN} = "${datadir}"
+-
 -- 
 2.25.1
 
