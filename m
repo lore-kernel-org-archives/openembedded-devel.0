@@ -1,23 +1,25 @@
 Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
- by mx.groups.io with SMTP id smtpd.web12.235.1613091526175881875
+ by mx.groups.io with SMTP id smtpd.web11.744.1613094389256207734
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Feb 2021 16:58:46 -0800
+ Thu, 11 Feb 2021 17:46:30 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: ejo@pengutronix.de)
 Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
 	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.92)
 	(envelope-from <ejo@pengutronix.de>)
-	id 1lAMnD-0004lt-Hq; Fri, 12 Feb 2021 01:58:43 +0100
+	id 1lANXP-0000sk-KC; Fri, 12 Feb 2021 02:46:27 +0100
 Received: from ejo by dude.hi.pengutronix.de with local (Exim 4.92)
 	(envelope-from <ejo@pengutronix.de>)
-	id 1lAMnB-0006ed-Pt; Fri, 12 Feb 2021 01:58:41 +0100
+	id 1lANXO-00013y-Nz; Fri, 12 Feb 2021 02:46:26 +0100
 From: =?UTF-8?B?RW5yaWNvIErDtnJucw==?= <ejo@pengutronix.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: ejo@pengutronix.de
-Subject: [meta-python][PATCH] python3-aiohttp: add missing RDEPENDS on python3-typing-extensions
-Date: Fri, 12 Feb 2021 01:58:41 +0100
-Message-Id: <20210212005841.25534-1-ejo@pengutronix.de>
+Cc: ejo@pengutronix.de,
+	uvv.mail@gmail.com,
+	akuster808@gmail.com
+Subject: [meta-python][dunfell][PATCH] python3-aiohttp: added missing RDEPENDs
+Date: Fri, 12 Feb 2021 02:46:26 +0100
+Message-Id: <20210212014626.4041-1-ejo@pengutronix.de>
 X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
 X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::7
@@ -26,27 +28,36 @@ X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to f
 X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
 Content-Transfer-Encoding: 8bit
 
-Since aiohttp PR #5078 was backported to 3.7 release
-(https://github.com/aio-libs/aiohttp/pull/5079), aiohttp depends on
-'typing_extensions' python module [1], provided by python3-typing-extensions
-package in meta-python.
+From: Vyacheslav Yurkov <uvv.mail@gmail.com>
 
-[1] https://github.com/aio-libs/aiohttp/blob/v3.7.2/setup.py#L74
+aiohttp implicitly RDEPENDs on html, json, and socketserver modules,
+which are part of python3 recipe. They can't be properly imported if
+they are missing from RDEPENDS
 
+Signed-off-by: Vyacheslav Yurkov <uvv.mail@gmail.com>
+Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry-picked from commit 8e7c57bd8f8250251e54fcbe149dc81743c0e30a)
 Signed-off-by: Enrico Jorns <ejo@pengutronix.de>
 ---
- meta-python/recipes-devtools/python/python3-aiohttp_3.7.3.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-python/recipes-devtools/python/python3-aiohttp_3.6.2.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.7.3.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.7.3.bb
-index bccbd4b0e..5d62e0676 100644
---- a/meta-python/recipes-devtools/python/python3-aiohttp_3.7.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.7.3.bb
-@@ -18,5 +18,6 @@ RDEPENDS_${PN} = "\
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.6.2.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.6.2.bb
+index 121447cdb..24eb021de 100644
+--- a/meta-python/recipes-devtools/python/python3-aiohttp_3.6.2.bb
++++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.6.2.bb
+@@ -13,9 +13,11 @@ RDEPENDS_${PN} = "\
+     ${PYTHON_PN}-async-timeout \
+     ${PYTHON_PN}-attrs \
+     ${PYTHON_PN}-chardet \
++    ${PYTHON_PN}-html \
+     ${PYTHON_PN}-idna-ssl \
++    ${PYTHON_PN}-json \
      ${PYTHON_PN}-misc \
      ${PYTHON_PN}-multidict \
-     ${PYTHON_PN}-netserver \
-+    ${PYTHON_PN}-typing-extensions \
+-    ${PYTHON_PN}-typing \
++    ${PYTHON_PN}-netserver \
      ${PYTHON_PN}-yarl \
  "
 -- 
