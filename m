@@ -1,81 +1,86 @@
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
- by mx.groups.io with SMTP id smtpd.web11.25704.1613351626858372005
+Received: from mail.kapsi.fi (mail.kapsi.fi [91.232.154.25])
+ by mx.groups.io with SMTP id smtpd.web08.28785.1613377808943634741
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Feb 2021 17:13:46 -0800
+ Mon, 15 Feb 2021 00:30:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=M0yAXiTU;
- spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f181.google.com with SMTP id o38so3319886pgm.9
-        for <openembedded-devel@lists.openembedded.org>; Sun, 14 Feb 2021 17:13:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=VVKzKAcSGsK3Tf4jNtBwUPNeEswaLyTk0u1LErLy8oE=;
-        b=M0yAXiTUE5OPFoC8YPsT0XPIynyMaztYunEUOAFLzMj4pdf4FsOGBQGltI2X9jtg9G
-         Wtz79IIETqZH+CgbygnaiRdWP26lacu7jbXodQ1Vi2qIxRXWTfaJMNEsitFV1tltEtza
-         XbCosdKpG1QFTutyTL6Aq9cibpd7o9NKL01hFi5+jKFdj48g3XvWzeXbYPV6fqeeNV4J
-         Go3uGdb3msFbO19+knBRpbEdkH++IelTOLyic0PdWHtiTHYXOYDYlKIxOqTjDEDEqTwk
-         X6P32FVY2VCbhGBb2eTV4XP2ul3qHqEPCnsW/wiUSk0l1dk93OXqcxDeK1ZVsTJPLnHv
-         Qlsw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=VVKzKAcSGsK3Tf4jNtBwUPNeEswaLyTk0u1LErLy8oE=;
-        b=C4/Xcsfp0EtiA2BSlMaivI6loIAKvk3vj8rMWn5xaLpoAOttxaX4INWbObnFw0BbPU
-         GiG4nLAcsMC8cFFbcxF/N1HsQ3BSHJ4mUkURANkmK1+nsGb9MlrSwsUicm5hpoq2ehRB
-         wkmdLH+konPxvcYzLD9SNs7vorsFBK1gSb4csigT9p1f8F7yBlZ7QRgcjy+qaku0bdz1
-         OdIPhbAaDPvdEq3r/xHk6scNdM0Z9FldexT2/+8llr3+Ejtn1NhGZl1yS0/1E4WMWZWd
-         MnmhGJ9nuFduilwb1aC+p8p6JEzy1EHJ1JxGQzFMdOCfbCiVxBvHW19zQcbd7Fu6enCd
-         7zXw==
-X-Gm-Message-State: AOAM530XeEt24rScXs2x/X+kknkB1OHW8zz+XiNRlT2NUQJhugCS8zVw
-	WP3lmpakVvzZx/l6/rK4eJQl8PlDZbNBHw==
-X-Google-Smtp-Source: ABdhPJxu3+tGGJldLu50XAZKNYcfZ/qxw3QlHnW5872ehz2Mw3p2FmbYiCYZrF7YfQTXj1WyCEM2EQ==
-X-Received: by 2002:a63:4623:: with SMTP id t35mr12637398pga.294.1613351626191;
-        Sun, 14 Feb 2021 17:13:46 -0800 (PST)
-Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:c8b8:7fc5:a225:bb8d])
-        by smtp.gmail.com with ESMTPSA id t1sm16077998pfl.194.2021.02.14.17.13.45
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 14 Feb 2021 17:13:45 -0800 (PST)
-From: "akuster" <akuster808@gmail.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: lakka.kapsi.fi, ip: 91.232.154.25, mailfrom: mcfrisk@lakka.kapsi.fi)
+Received: from kapsi.fi ([2001:67c:1be8::11] helo=lakka.kapsi.fi)
+	by mail.kapsi.fi with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.89)
+	(envelope-from <mcfrisk@lakka.kapsi.fi>)
+	id 1lBZGd-0000O4-3w; Mon, 15 Feb 2021 10:30:04 +0200
+Received: from mcfrisk by lakka.kapsi.fi with local (Exim 4.92)
+	(envelope-from <mcfrisk@lakka.kapsi.fi>)
+	id 1lBZGc-0004ZY-VD; Mon, 15 Feb 2021 10:30:02 +0200
+From: "Mikko Rapeli" <mikko.rapeli@bmw.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 15/15] postgresql: Inherit python3targetconfig
-Date: Sun, 14 Feb 2021 17:13:29 -0800
-Message-Id: <572d4148267c6ff1b43dd3498020349cb0aa77c7.1613349480.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1613349480.git.akuster808@gmail.com>
-References: <cover.1613349480.git.akuster808@gmail.com>
+Cc: Mikko Rapeli <mikko.rapeli@bmw.de>,
+	Richard Purdie <richard.purdie@linuxfoundation.org>,
+	Steve Sakoman <steve@sakoman.com>
+Subject: [meta-python2][dunfell][master][PATCH] python: Avoid installing test data into recipe-sysroot
+Date: Mon, 15 Feb 2021 10:29:50 +0200
+Message-Id: <20210215082950.16241-1-mikko.rapeli@bmw.de>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+X-Rspam-Score: 2.3 (++)
+X-Rspam-Report: Action: no action
+ Symbol: RCVD_TLS_LAST(0.00)
+ Symbol: ARC_NA(0.00)
+ Symbol: DMARC_POLICY_SOFTFAIL(0.10)
+ Symbol: FROM_HAS_DN(0.00)
+ Symbol: RCPT_COUNT_THREE(0.00)
+ Symbol: R_MISSING_CHARSET(2.50)
+ Symbol: TO_MATCH_ENVRCPT_ALL(0.00)
+ Symbol: MIME_GOOD(-0.10)
+ Symbol: BROKEN_CONTENT_TYPE(1.50)
+ Symbol: TO_DN_SOME(0.00)
+ Symbol: MID_CONTAINS_FROM(1.00)
+ Symbol: R_SPF_NA(0.00)
+ Symbol: FORGED_SENDER(0.30)
+ Symbol: R_DKIM_NA(0.00)
+ Symbol: MIME_TRACE(0.00)
+ Symbol: ASN(0.00)
+ Symbol: FROM_NEQ_ENVFROM(0.00)
+ Symbol: BAYES_HAM(-3.00)
+ Symbol: RCVD_COUNT_TWO(0.00)
+ Message-ID: 20210215082950.16241-1-mikko.rapeli@bmw.de
+X-SA-Exim-Connect-IP: 2001:67c:1be8::11
+X-SA-Exim-Mail-From: mcfrisk@lakka.kapsi.fi
+X-SA-Exim-Scanned: No (on mail.kapsi.fi); SAEximRunCond expanded to false
+Content-Transfer-Encoding: 8bit
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
 
-it now ends up searching native python shared libraries and tries to
-link with it and fails on non-host architectures
+There are several thousand files in the test directory which we don't need.
+Adding these for the native and target sysroots is a crazy amount of files
+to be throwing around needlessly. Delete the files from the sysroot side
+of things to tidy up the sysroots and improve performance.
 
-recipe-sysroot-native/usr/lib/libpython3.9.so: file not recognized: file format not recognized
-collect2: error: ld returned 1 exit status
+(From OE-Core rev: f73ac290617e89b80e10dc700c0e90efddc8e1b2)
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit c499aaeef80b5af8d20521658449c4148f3d0806)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+(cherry picked from commit f6bced03011ad1663d68b0322a2f8aeb4d836646)
+Signed-off-by: Steve Sakoman <steve@sakoman.com>
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
 ---
- meta-oe/recipes-dbs/postgresql/postgresql.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-devtools/python/python_2.7.18.bb | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
-index 826bcc1e1c..09c6a3ca9d 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
-@@ -36,7 +36,7 @@ LEAD_SONAME = "libpq.so"
- # LDFLAGS for shared libraries
- export LDFLAGS_SL = "${LDFLAGS}"
- 
--inherit autotools pkgconfig perlnative python3native useradd update-rc.d systemd gettext cpan-base
-+inherit autotools pkgconfig perlnative python3native python3targetconfig useradd update-rc.d systemd gettext cpan-base
- 
- CFLAGS += "-I${STAGING_INCDIR}/${PYTHON_DIR} -I${STAGING_INCDIR}/tcl8.6"
- 
+diff --git a/recipes-devtools/python/python_2.7.18.bb b/recipes-devtools/python/python_2.7.18.bb
+index bca2910d..6cbcffe8 100644
+--- a/recipes-devtools/python/python_2.7.18.bb
++++ b/recipes-devtools/python/python_2.7.18.bb
+@@ -258,3 +258,9 @@ addtask do_create_manifest
+ # Make sure we have native python ready when we create a new manifest
+ do_create_manifest[depends] += "${PN}:do_prepare_recipe_sysroot"
+ do_create_manifest[depends] += "${PN}:do_patch"
++
++# Python's tests contain large numbers of files we don't need in the recipe sysroots
++SYSROOT_PREPROCESS_FUNCS += " py_sysroot_cleanup"
++py_sysroot_cleanup () {
++       rm -rf ${SYSROOT_DESTDIR}${libdir}/python${PYTHON_MAJMIN}/test
++}
 -- 
-2.17.1
+2.20.1
 
