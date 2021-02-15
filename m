@@ -1,128 +1,99 @@
 Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.web10.25550.1613351616093428894
+ by mx.groups.io with SMTP id smtpd.web09.25508.1613351616651895671
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 14 Feb 2021 17:13:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=X4OrNjyU;
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Jd7lBnBQ;
  spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f171.google.com with SMTP id q20so3220184pfu.8
+Received: by mail-pf1-f171.google.com with SMTP id t29so3211212pfg.11
         for <openembedded-devel@lists.openembedded.org>; Sun, 14 Feb 2021 17:13:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id;
-        bh=1UVDWe0wPYRGJEuP+Yp0TI4vK9CWgXsVNySqAE/bdgk=;
-        b=X4OrNjyUyiw40cNfVIK1CxVco9+SdI1CAAOR6grzj8R88LdwVQwE+782inGrdf7+Is
-         vVOfXLTTxEoyLNcQ6/b2e06/PYAFwarAixk9YuUMwWEVRMxZi9J5hBgvHrwFbrtVdHm+
-         14V58KCUyAAvSEwKqx3mq25vwnWit34fiMW510D+k4FuAini78E+9RycVbr+T9TiM2ju
-         eJX9e+k1bAfjZzKUH8fhs8D9HjhXcy10IQSjs69N2ZNwrpePtUS8sW2blZGqCJ6/bo0T
-         6Lz2nzbhzdVZbWzSPVleecp4/4M+S5Sr4h3w7PFse5Tjw3TSOBc8nd5DLHcspGADK5SZ
-         vIkw==
+        h=from:to:subject:date:message-id:in-reply-to:references;
+        bh=BvlUXj1F0iOxlAXU/gI6DG0wcRmck2Ij2H6qiZ/5Y+8=;
+        b=Jd7lBnBQju6v0BBthjHz+JLPwoBbz+2UmjHXQUZCwnX6Y2xDXJRib2ZuHkCkpa3hng
+         U4eWDgJYT5PJ3h2ArqNmOgTx6Ezn5v65AKJfeY8PksDLjFebJhFzKiAsRDj/EHffL0Cy
+         NfgmlmNgnu2Ijbsc/+ZYtmY/C7RVXVJIEzcEpOrKi83leSlZazalcDsZyvY2fNsovwhe
+         YuShbjUgkp7sz4qdYJ3qbzbDAEYfpaEan4Kn6LsZCGnhWYklM7x4esFRcjHXbAtHiEEx
+         YnT3D6WSzxVeFfbL746GpUbXy/s5Cb7m5YPT1fKORS2cjXFjq+OK3VPIYu/Xz109Kce3
+         Uavg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id;
-        bh=1UVDWe0wPYRGJEuP+Yp0TI4vK9CWgXsVNySqAE/bdgk=;
-        b=IAqbLRmkP8e+JCkJQvcl1Yc5fXyrCDjIXmKNV5NEkDVi/JX2QSgd8flM6bWvmHct3g
-         dFxQUOMlVPNo1n7kvLQm3qKp6J8drmqsTURRE4cLqyeOZdZo2EP+RxT2VSLSoBbj9qzZ
-         DNz+abMoQ45vt8ptK691jNu5OC2g7hYajH6SN8B1dHrOLPcIqKmdc6NSHs+3IENRzxZC
-         Qx1W1s6gn49iT8vsz4tAc0cn7PS3uxX4ndabMlnM2eX5GWNVMUblnpP2d0485lC/purs
-         gWFpxeiUUW0yVlZnc8YRGehdhS95GS57UA91ayAnNE59bXpRTh3SxVUYWNGUp3vRF678
-         Hv4Q==
-X-Gm-Message-State: AOAM530xaQXI7dXwZtT8+gUQm7sM8/+aNWyzm1eRK8a15gObwomH9AKG
-	JZnuDcSJGwuMgA6GnCXNkuMyW51hplgVGg==
-X-Google-Smtp-Source: ABdhPJzwtZ0ugnCg8mEktmjI4pwnnX39IwbrvvP6QkC6wd7EdmnE4Cyj4Hz9z3ZdFR5vRzya3fsC4g==
-X-Received: by 2002:aa7:8758:0:b029:1ec:a12f:354 with SMTP id g24-20020aa787580000b02901eca12f0354mr1862463pfo.79.1613351615331;
-        Sun, 14 Feb 2021 17:13:35 -0800 (PST)
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+         :references;
+        bh=BvlUXj1F0iOxlAXU/gI6DG0wcRmck2Ij2H6qiZ/5Y+8=;
+        b=TVroOCiwTzbe0gcY9yp0gkaXNPN03S5/g//vDIDiarxULSkZgkFj0Xue5hksrsB6X/
+         zBkWdaIxTkU3D8a7Du7NCvL87HGzltUc1P9eLEXs0wmMM2varCUM9KUpEVreDCoZiT2f
+         KpFNyRIf6oj78dBBXR01pCKYxORI5UpVYkHKsDNRlDZ+TJgVLIEL68UYMuYnVYNOpht7
+         aTv4AL16KIYWE64ruq6bllcUHciwN+OY8d2x7wGBQYaP8/f9toPYHVqn8q0lpldjZx7/
+         4do8GQGHRqgHnm1wu19yZwT/zexNrjs7MZ1ngguN9EwGCqfy82zWeBlpZJnL5fdflyCg
+         rB9A==
+X-Gm-Message-State: AOAM532wJoJCgv1HOMeuxo06xvqeqHx5X2Emv4R0ejEvePMUwx9ak9OP
+	TU6ktHqiF+y9shvtxKXKQpRWWdTy8ZC7iA==
+X-Google-Smtp-Source: ABdhPJzv4t+BjBAOrTRA4IWcEvHOUQ9Enbj1AKTf2tp7u0BxW/Sg83HYZ8QcxcoPC2xGc8mjrhXjEg==
+X-Received: by 2002:a62:5250:0:b029:1d6:a566:39f3 with SMTP id g77-20020a6252500000b02901d6a56639f3mr13111775pfb.19.1613351616098;
+        Sun, 14 Feb 2021 17:13:36 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:c8b8:7fc5:a225:bb8d])
-        by smtp.gmail.com with ESMTPSA id t1sm16077998pfl.194.2021.02.14.17.13.33
+        by smtp.gmail.com with ESMTPSA id t1sm16077998pfl.194.2021.02.14.17.13.35
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 14 Feb 2021 17:13:34 -0800 (PST)
+        Sun, 14 Feb 2021 17:13:35 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 00/15] Patch review Feb 14th
-Date: Sun, 14 Feb 2021 17:13:14 -0800
-Message-Id: <cover.1613349480.git.akuster808@gmail.com>
+Subject: [gatesgarth 01/15] enca: Fix SRC_URI
+Date: Sun, 14 Feb 2021 17:13:15 -0800
+Message-Id: <11875c1f470710b45469726d38ef57753108c3e0.1613349480.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1613349480.git.akuster808@gmail.com>
+References: <cover.1613349480.git.akuster808@gmail.com>
 
-Next set for Gatesgarth.
-Please have feedback by Tuesday.
+From: akuster <akuster808@gmail.com>
 
-The following changes since commit cef93b7b00e620d90a610112ee574fa60b691cf8:
+The project appears to have moved.
+Update HOMEPAGE and SRC_URI. bz2 is not available, use gz
+Update HASH accordingly.
 
-  openldap: upgrade 2.4.56 -> 2.4.57 (2021-02-02 10:18:22 -0800)
+Fixes:
+WARNING: enca-1.9-r0 do_fetch: Failed to fetch URL http://www.sourcefiles.org/Networking/Tools/Miscellanenous/enca-1.9.tar.bz2, attempting MIRRORS if available
 
-are available in the Git repository at:
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 460077d30ffedca4c794f60cd0f21404fc1736d7)
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-oe/recipes-support/enca/enca_1.9.bb | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-  git://git.openembedded.org/meta-openembedded-contrib stable/gatesgarth-nut
-  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/gatesgarth-nut
-
-Armin Kuster (1):
-  lua: update to 5.3.6
-
-Kai Kang (1):
-  mariadb: add package config zstd
-
-Khem Raj (5):
-  mariadb: Fix build on 32bit arches with 64bit time_t
-  gedit: Inherit python3targetconfig
-  openipmi: Inherit python3targetconfig
-  libplist: Inherit python3targetconfig
-  postgresql: Inherit python3targetconfig
-
-Mario Schuknecht (1):
-  dnsmasq: Fix systemd service
-
-Martin Jansa (1):
-  wireguard-module: remove PKG assignment
-
-Mingli Yu (1):
-  mariadb: upgrade to 10.5.8
-
-Qi.Chen@windriver.com (1):
-  minifi-cpp: set PSEUDO_CONSIDER_PATHS
-
-Shlomi Vaknin (1):
-  python3-sh: remove python3-tests from RDEPENDS
-
-Wang Mingyu (1):
-  dnsmasq: upgrade 2.82 -> 2.84
-
-akuster (1):
-  enca: Fix SRC_URI
-
-changqing.li@windriver.com (1):
-  celt051: update SRC_URI
-
- .../recipes-gnome/gedit/gedit_3.36.2.bb       |  2 +-
- .../wireguard-module_1.0.20200908.bb          |  7 ----
- .../recipes-support/celt051/celt051_git.bb    |  2 +-
- .../recipes-support/dnsmasq/dnsmasq/lua.patch |  9 +++--
- .../recipes-support/dnsmasq/dnsmasq_2.82.bb   |  8 ----
- .../recipes-support/dnsmasq/dnsmasq_2.84.bb   |  8 ++++
- .../dnsmasq/files/dnsmasq-resolvconf.service  |  2 +-
- .../openipmi/openipmi_2.0.29.bb               |  2 +-
- ...ive_10.5.6.bb => mariadb-native_10.5.8.bb} |  0
- meta-oe/recipes-dbs/mysql/mariadb.inc         |  5 ++-
- ...fine-__NR_futex-if-it-does-not-exist.patch | 37 ++++++++++++++++++
- ...ktrace-t.c-make-the-test-conditional.patch | 38 +++++++++++++++++++
- .../mysql/mariadb/c11_atomics.patch           | 14 +++----
- .../{mariadb_10.5.6.bb => mariadb_10.5.8.bb}  |  0
- meta-oe/recipes-dbs/postgresql/postgresql.inc |  2 +-
- .../lua/{lua_5.3.5.bb => lua_5.3.6.bb}        |  6 +--
- .../libimobiledevice/libplist_2.2.0.bb        |  2 +-
- .../minifi-cpp/minifi-cpp_0.7.0.bb            |  1 +
- meta-oe/recipes-support/enca/enca_1.9.bb      |  7 ++--
- .../python/python3-sh_1.14.1.bb               |  1 -
- 20 files changed, 112 insertions(+), 41 deletions(-)
- delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.82.bb
- create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.84.bb
- rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.5.6.bb => mariadb-native_10.5.8.bb} (100%)
- create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch
- create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-stacktrace-t.c-make-the-test-conditional.patch
- rename meta-oe/recipes-dbs/mysql/{mariadb_10.5.6.bb => mariadb_10.5.8.bb} (100%)
- rename meta-oe/recipes-devtools/lua/{lua_5.3.5.bb => lua_5.3.6.bb} (92%)
-
+diff --git a/meta-oe/recipes-support/enca/enca_1.9.bb b/meta-oe/recipes-support/enca/enca_1.9.bb
+index bf19843b2f..b0ba3aedef 100644
+--- a/meta-oe/recipes-support/enca/enca_1.9.bb
++++ b/meta-oe/recipes-support/enca/enca_1.9.bb
+@@ -1,21 +1,20 @@
+ SUMMARY = "Enca is an Extremely Naive Charset Analyser"
+ SECTION = "libs"
+-HOMEPAGE = "http://trific.ath.cx/software/enca/"
++HOMEPAGE = "https://cihar.com/software/enca/"
+ 
+ DEPENDS += "gettext-native"
+ 
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=24b9569831c46d4818450b55282476b4"
+ 
+-SRC_URI = "http://www.sourcefiles.org/Networking/Tools/Miscellanenous/enca-${PV}.tar.bz2 \
++SRC_URI = "https://dl.cihar.com/enca/enca-${PV}.tar.gz \
+     file://configure-hack.patch \
+     file://dont-run-tests.patch \
+     file://configure-remove-dumbness.patch \
+     file://makefile-remove-tools.patch \
+     file://libenca-003-iconv.patch "
+ 
+-SRC_URI[md5sum] = "b3581e28d68d452286fb0bfe58bed3b3"
+-SRC_URI[sha256sum] = "02acfef2b24a9c842612da49338138311f909f1cd33933520c07b8b26c410f4d"
++SRC_URI[sha256sum] = "75a38ed23bac37cc12166cc5edc8335c3af862adc202f84823d3aef3e2208e47"
+ 
+ inherit autotools
+ 
 -- 
 2.17.1
 
