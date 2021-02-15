@@ -1,81 +1,79 @@
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
- by mx.groups.io with SMTP id smtpd.web08.25704.1613351618300635156
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
+ by mx.groups.io with SMTP id smtpd.web08.25705.1613351618902639521
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Feb 2021 17:13:38 -0800
+ Sun, 14 Feb 2021 17:13:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Dvf0O8ky;
- spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f176.google.com with SMTP id a4so1747002pgc.11
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=dGh3yB/l;
+ spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f182.google.com with SMTP id j12so3205968pfj.12
         for <openembedded-devel@lists.openembedded.org>; Sun, 14 Feb 2021 17:13:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=fXc3JL78WgbKbZ7pwF2nkBA8jFeTIHoSf1vuME/ALuo=;
-        b=Dvf0O8kyEE2URSIZSxl3WwQ1knN6tZnnzXkFrfkEdN+Y3Q4HYA1RNWCGBIZUv4l0u+
-         I74f6U9MWf24X1zrYDVb4tEcK5keMRS7QLAX5GUjtRPN5FKnLPJf3EchrP8i7GZ7mV31
-         8mT9PGU0HT7yFtPL6kV3soqyGxsAeIU0fgGFCWbnbUmn/JAj09LfPlfI9xCecuz5FBxu
-         2FeJDpB8Uxk6j0YBY1AMClBJ0fu4Gi+roIk1o8YxwMBP8hsfGIkwtouLl/+pZPPRNTkM
-         ivVezjWTwNz5gQnRoKjmAaMZssv0EVPbe2s7GAbpDuM+HEa6Y8MnlO31u2SfHlw1ImVK
-         Q8FA==
+        bh=23neqUXoxuQ8mobAJ9jgTUQcnTJHA9VtisLp8n7X1JE=;
+        b=dGh3yB/lY52fZ6M1CUbVt44tkgrsUl6966AulTK+l/tqzgz+34BCz4gAHD1JM0GsV3
+         l1GVPgIRmnaRrk+Y+DywaRVL7wvWAWToFNmbI0ycGINYKxFUgbSrUt28rq5v/Z52ZRgM
+         KOx9uV64ZrxTfHI8p4Wi109bHj36xnsupCRVMpIUZRdbFdPi0z4Eo73FxAms1YfZwW/9
+         i3LkNnPjonpkwf03bnvNaS+h4ir4Huk+z0MzLqCKFtw1RG+lUPmGoGsCS/3Bys3qzC4o
+         65WlD3csv4wbUM1E3Tu8kUR1ALlBXows1S6VScy+3jvLs0vRw1mocF0Kg7qSYxUkbb9/
+         bpOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=fXc3JL78WgbKbZ7pwF2nkBA8jFeTIHoSf1vuME/ALuo=;
-        b=ujWo+Mo16WEhrKkc/rnIBSxn/jqU6704nNkkrcNChXfN4R9AhZd2gf1O8BKq7Yi4Ut
-         HQ7Qe+oNq3vfjQi1Kyz2ww+Txzit/4cwXFhc8DNi/Mi1LhzwEtCGsP9aJJzF+PcC0Tzz
-         3KmjYoPAev6aguihUQPsR1UgBgrSfljlDpE1BXOGHdguOMTms5vjy91S7WK4v7VJwCYf
-         kdkiMPoZnYjGK3X+FcrdSdMytd/ZfkrvuuRDGfYLEZKU+7voqo2Nw4B6plmm8eRF6icB
-         UmmFLKpIidLtuPgXRFBpMVThXY16SAM5Pr2VuEYKRaLkDgOT5BOgCP3UEqEx+wEqFRQ+
-         ZWVQ==
-X-Gm-Message-State: AOAM533/qfML0TWyYrwpdhLwbZ0y5K37Wezi2Tj0x3lxVTyBQSnCroZp
-	A0aibrZGlLjyeYJ/7uNJrc58YPFdiljhCA==
-X-Google-Smtp-Source: ABdhPJzaoLb/wIt5+3ATd8rxCTxxX/JdaZSaVHKgCkvNjXjeuceRqHAHdcNSlWWjJNlOziYu7QkaTg==
-X-Received: by 2002:a62:8342:0:b029:1eb:5024:6f1b with SMTP id h63-20020a6283420000b02901eb50246f1bmr7206707pfe.49.1613351617652;
-        Sun, 14 Feb 2021 17:13:37 -0800 (PST)
+        bh=23neqUXoxuQ8mobAJ9jgTUQcnTJHA9VtisLp8n7X1JE=;
+        b=pfObOHX+BWc3KB+nkUw3s4zgSoOhM6WUmjmst2KwzeLYzcydE8y6uc2jmd3JaSfOHd
+         YzezMwfvkU1HNRJ5beh+8k5n9Rqsv0J6o8hR1Lc7HFP1kjaKKiEIn6OpkCVpBc6Cd+6k
+         AYq+uRYElL0rgUciaAvX+3t67A07D8zEAIWXKenH8VvqaKZdteDys2vPnPifLwdW5U9P
+         tpGGG/3dxytE8dT6OzejTelzYdnYQIyXGWZBe/f/3hFHvRAth0bbcCeelBhQ9u9MX6JR
+         NrK7iJboP3F57LP4wxdVU2tDqbWQ4n5Jrrtu2NTMzeJorQ1OuLq91slKmsB76RKW0rFT
+         wcAg==
+X-Gm-Message-State: AOAM530weClmcK50nyehXyE/eRZOomlIcmkKtVVRE0gjpV/3fkAw7FQS
+	A3c3tsng6fGt89aFoWMschFbLMZaFDCG1g==
+X-Google-Smtp-Source: ABdhPJxEnmK52jZHtzGC4KiN5DDxuGnhXD0qVFZWyjEwqKjvc+1H26oDAaN/IxVScg/u/x0bw8+HOA==
+X-Received: by 2002:a63:af1b:: with SMTP id w27mr12647605pge.162.1613351618371;
+        Sun, 14 Feb 2021 17:13:38 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:c8b8:7fc5:a225:bb8d])
         by smtp.gmail.com with ESMTPSA id t1sm16077998pfl.194.2021.02.14.17.13.37
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 14 Feb 2021 17:13:37 -0800 (PST)
+        Sun, 14 Feb 2021 17:13:38 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 03/15] python3-sh: remove python3-tests from RDEPENDS
-Date: Sun, 14 Feb 2021 17:13:17 -0800
-Message-Id: <57d742a83b1062f99fe73b379e57949bb727a02d.1613349480.git.akuster808@gmail.com>
+Subject: [gatesgarth 04/15] celt051: update SRC_URI
+Date: Sun, 14 Feb 2021 17:13:18 -0800
+Message-Id: <1de0f4c33b92b9bbd885044df505154c177db59e.1613349480.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1613349480.git.akuster808@gmail.com>
 References: <cover.1613349480.git.akuster808@gmail.com>
 
-From: Shlomi Vaknin <shlomi.39sd@gmail.com>
+From: "changqing.li@windriver.com" <changqing.li@windriver.com>
 
-python3-tests installs the unit tests of python
-as well as stuff that no one should care about
-in its rootfs. Thus, it is not a runtime dependency
-of python3-sh.
+original SRC_URI is not valid now, offical CELT repository
+moved to gitlab
 
-Signed-off-by: Shlomi Vaknin <shlomi.39sd@gmail.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 2ed25eb4efecb23b47556e63cb9290945c3dea59)
+(cherry picked from commit 5450c958bf66afd560fd8dff5b432ea71f10165c)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-sh_1.14.1.bb | 1 -
- 1 file changed, 1 deletion(-)
+ meta-networking/recipes-support/celt051/celt051_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-sh_1.14.1.bb b/meta-python/recipes-devtools/python/python3-sh_1.14.1.bb
-index c7b50c21a4..89d5008e98 100644
---- a/meta-python/recipes-devtools/python/python3-sh_1.14.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-sh_1.14.1.bb
-@@ -18,7 +18,6 @@ RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-resource \
-     ${PYTHON_PN}-shell \
-     ${PYTHON_PN}-terminal \
--    ${PYTHON_PN}-tests \
-     ${PYTHON_PN}-threading \
-     ${PYTHON_PN}-unixadmin \
- "
+diff --git a/meta-networking/recipes-support/celt051/celt051_git.bb b/meta-networking/recipes-support/celt051/celt051_git.bb
+index 12b9124f74..c3e4cbbe6d 100644
+--- a/meta-networking/recipes-support/celt051/celt051_git.bb
++++ b/meta-networking/recipes-support/celt051/celt051_git.bb
+@@ -16,7 +16,7 @@ PV = "0.5.1.3+git${SRCPV}"
+ 
+ SRCREV = "5555aae843f57241d005e330b9cb65602d56db0f"
+ 
+-SRC_URI = "git://git.xiph.org/celt.git;branch=compat-v0.5.1;protocol=https \
++SRC_URI = "git://gitlab.xiph.org/xiph/celt.git;branch=compat-v0.5.1;protocol=https \
+            file://0001-configure.ac-make-tools-support-optional.patch \
+            file://0001-tests-Include-entcode.c-into-test-sources-to-provide.patch \
+            "
 -- 
 2.17.1
 
