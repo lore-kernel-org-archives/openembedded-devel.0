@@ -1,79 +1,81 @@
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web08.25705.1613351618902639521
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web11.25700.1613351619811902368
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 14 Feb 2021 17:13:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dGh3yB/l;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id j12so3205968pfj.12
-        for <openembedded-devel@lists.openembedded.org>; Sun, 14 Feb 2021 17:13:38 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=YSqL/sLc;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id t2so2932867pjq.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 14 Feb 2021 17:13:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=23neqUXoxuQ8mobAJ9jgTUQcnTJHA9VtisLp8n7X1JE=;
-        b=dGh3yB/lY52fZ6M1CUbVt44tkgrsUl6966AulTK+l/tqzgz+34BCz4gAHD1JM0GsV3
-         l1GVPgIRmnaRrk+Y+DywaRVL7wvWAWToFNmbI0ycGINYKxFUgbSrUt28rq5v/Z52ZRgM
-         KOx9uV64ZrxTfHI8p4Wi109bHj36xnsupCRVMpIUZRdbFdPi0z4Eo73FxAms1YfZwW/9
-         i3LkNnPjonpkwf03bnvNaS+h4ir4Huk+z0MzLqCKFtw1RG+lUPmGoGsCS/3Bys3qzC4o
-         65WlD3csv4wbUM1E3Tu8kUR1ALlBXows1S6VScy+3jvLs0vRw1mocF0Kg7qSYxUkbb9/
-         bpOA==
+        bh=6rz0+kEXNKvtjv47a0Q46VgNyXp5oP5bQdytrD1tPYE=;
+        b=YSqL/sLcYAnLi9Oh8Bh3J2GrIT7zzxbtU4jKn3XhUOowLRG967LUzVhdmcrvxbXrQj
+         SDuZ8dEvpbqY3WHwVY3NVmRU3KmJ9GnZx5R665SC/+wa7Dmni2/QdNk6pf8dLEbZvDkI
+         IJMHm46qEAFcAzPMgkbkJrucHi8rfJw+857EHiQVhhh6sFpkrc7VYo9kKGGlGnQP5Aff
+         MJMq8wGhSmBp2awJVM72sQeM/kHIY37Oamb7fLR7AUtVMbWSTXKZGHGTBKOpFCeUuy1C
+         pwtf/LPbUpRUiI8B+TZfsqfC87QxKaw12CiMjDgyxhCaGlfSQQAoY+JtcFj5hCiyuaBO
+         sCAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=23neqUXoxuQ8mobAJ9jgTUQcnTJHA9VtisLp8n7X1JE=;
-        b=pfObOHX+BWc3KB+nkUw3s4zgSoOhM6WUmjmst2KwzeLYzcydE8y6uc2jmd3JaSfOHd
-         YzezMwfvkU1HNRJ5beh+8k5n9Rqsv0J6o8hR1Lc7HFP1kjaKKiEIn6OpkCVpBc6Cd+6k
-         AYq+uRYElL0rgUciaAvX+3t67A07D8zEAIWXKenH8VvqaKZdteDys2vPnPifLwdW5U9P
-         tpGGG/3dxytE8dT6OzejTelzYdnYQIyXGWZBe/f/3hFHvRAth0bbcCeelBhQ9u9MX6JR
-         NrK7iJboP3F57LP4wxdVU2tDqbWQ4n5Jrrtu2NTMzeJorQ1OuLq91slKmsB76RKW0rFT
-         wcAg==
-X-Gm-Message-State: AOAM530weClmcK50nyehXyE/eRZOomlIcmkKtVVRE0gjpV/3fkAw7FQS
-	A3c3tsng6fGt89aFoWMschFbLMZaFDCG1g==
-X-Google-Smtp-Source: ABdhPJxEnmK52jZHtzGC4KiN5DDxuGnhXD0qVFZWyjEwqKjvc+1H26oDAaN/IxVScg/u/x0bw8+HOA==
-X-Received: by 2002:a63:af1b:: with SMTP id w27mr12647605pge.162.1613351618371;
-        Sun, 14 Feb 2021 17:13:38 -0800 (PST)
+        bh=6rz0+kEXNKvtjv47a0Q46VgNyXp5oP5bQdytrD1tPYE=;
+        b=UWw4PtGsInv4WlOGbBnLYVYvc1j9qu33d+iG/NOFCD9IM43dhGdZpUtAWRCwonq7g+
+         ODNn8Czv/m+M4C1oaTemXGU5y+Mw5NMYo3McEZS39hBQfgJniIuYOqs+HkpVlr9evePO
+         +8aF3DXZEmxsVrSEwtFt7LoJrRwmg+1UOPDpednUDw6MCUPpUEScISOU6gfo6A6lQguJ
+         Es4ZThvbiFIi8PujCnFC13K6aph9SrCIz31wZQ+l/CFkns1Xh1wjzOLMWShvDqmGTdO+
+         A1PpnXaCFe/6bZ7lE2R9XvbP8i2dlaz7OEVSC38NqHtyO8b50799BBFu+9jDi96cV9ue
+         Ea8w==
+X-Gm-Message-State: AOAM532vfY84J9qsxagjn+FgfbAEm6VgwuNBZ8+EzVz2n25clycijYVm
+	nL6Mxeju7vPuvW2Tg1AcZF27jvVNhLHAeA==
+X-Google-Smtp-Source: ABdhPJxOXMrncpdUvJXeu8cG85ccYxpX81Eu17PT0gnIt7hVDNj/FuHYRMZDTOt9Fmm3lw5EqcSY9w==
+X-Received: by 2002:a17:90b:4ac8:: with SMTP id mh8mr13704826pjb.38.1613351619072;
+        Sun, 14 Feb 2021 17:13:39 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:c8b8:7fc5:a225:bb8d])
-        by smtp.gmail.com with ESMTPSA id t1sm16077998pfl.194.2021.02.14.17.13.37
+        by smtp.gmail.com with ESMTPSA id t1sm16077998pfl.194.2021.02.14.17.13.38
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sun, 14 Feb 2021 17:13:38 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 04/15] celt051: update SRC_URI
-Date: Sun, 14 Feb 2021 17:13:18 -0800
-Message-Id: <1de0f4c33b92b9bbd885044df505154c177db59e.1613349480.git.akuster808@gmail.com>
+Subject: [gatesgarth 05/15] dnsmasq: Fix systemd service
+Date: Sun, 14 Feb 2021 17:13:19 -0800
+Message-Id: <83842c9150fdead52dc7b0913ffac32677720f98.1613349480.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1613349480.git.akuster808@gmail.com>
 References: <cover.1613349480.git.akuster808@gmail.com>
 
-From: "changqing.li@windriver.com" <changqing.li@windriver.com>
+From: Mario Schuknecht <mario.schuknecht@dresearch-fe.de>
 
-original SRC_URI is not valid now, offical CELT repository
-moved to gitlab
+Systemd service file option 'ExecStopPre' is warned and ignored by
+systemd. By replacing 'ExecStopPre' with 'ExecStop', the intended
+behavior is realized. The 'ExecStop' commands are executed one after the
+other.
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Mario Schuknecht <mario.schuknecht@dresearch-fe.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 5450c958bf66afd560fd8dff5b432ea71f10165c)
+(cherry picked from commit 55c94cb3196f53d0c1c76bbd74136d1b5d51802d)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-support/celt051/celt051_git.bb | 2 +-
+ .../recipes-support/dnsmasq/files/dnsmasq-resolvconf.service    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/celt051/celt051_git.bb b/meta-networking/recipes-support/celt051/celt051_git.bb
-index 12b9124f74..c3e4cbbe6d 100644
---- a/meta-networking/recipes-support/celt051/celt051_git.bb
-+++ b/meta-networking/recipes-support/celt051/celt051_git.bb
-@@ -16,7 +16,7 @@ PV = "0.5.1.3+git${SRCPV}"
+diff --git a/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf.service b/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf.service
+index 2980f7def6..ef2f3f7e41 100644
+--- a/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf.service
++++ b/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf.service
+@@ -8,7 +8,7 @@ PIDFile=/run/dnsmasq.pid
+ ExecStartPre=/usr/bin/dnsmasq --test
+ ExecStart=/usr/bin/dnsmasq -x /run/dnsmasq.pid -7 /etc/dnsmasq.d --local-service
+ ExecStartPost=/usr/bin/dnsmasq-resolvconf-helper start
+-ExecStopPre=/usr/bin/dnsmasq-resolvconf-helper stop
++ExecStop=/usr/bin/dnsmasq-resolvconf-helper stop
+ ExecStop=/bin/kill $MAINPID
+ ExecReload=/bin/kill -HUP $MAINPID
  
- SRCREV = "5555aae843f57241d005e330b9cb65602d56db0f"
- 
--SRC_URI = "git://git.xiph.org/celt.git;branch=compat-v0.5.1;protocol=https \
-+SRC_URI = "git://gitlab.xiph.org/xiph/celt.git;branch=compat-v0.5.1;protocol=https \
-            file://0001-configure.ac-make-tools-support-optional.patch \
-            file://0001-tests-Include-entcode.c-into-test-sources-to-provide.patch \
-            "
 -- 
 2.17.1
 
