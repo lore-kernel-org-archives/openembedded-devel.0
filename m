@@ -1,144 +1,89 @@
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
- by mx.groups.io with SMTP id smtpd.web09.2368.1613440708134624639
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web09.2370.1613440708886841671
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 15 Feb 2021 17:58:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=S1RNU6fK;
- spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f174.google.com with SMTP id o63so5280051pgo.6
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=iqR3VvVf;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id a24so4658955plm.11
         for <openembedded-devel@lists.openembedded.org>; Mon, 15 Feb 2021 17:58:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=FnXi2Dnm6KRS/004aqlaGqgRidUtthhDs6/DkuQagCk=;
-        b=S1RNU6fK14o3JWPaHxID0QGf616FjBc7uiIQDyOIkwDlSXkYlTFmdC9oN9jm8TSQRK
-         8mc/gSylQg9OruKH1TpyM6Viz1to1agiK+y2+xwLA4igGqMyWFX9kH0tWJ+CIFhpYtMQ
-         9+jhsHHuAyGV2DWHEwOXa3p4ZBkj1d3UXY9yIBkhMrSlWX0PVJlb+CKoNetFfTNRP1HS
-         p5a5ZHYHGjrNxUWnDyX+uiRmAhpIO1qwcp7IFLuEmtjyWk2GWz1+H0Rn48IhbuCDupah
-         FvoroOnovH6q9YF/eyjaRcvZpvLGWBz+Ir/umXzC9Eoh2QRdI6ePS+3lmCT0Lu3/WSAf
-         91xw==
+        bh=bZ03gWI1c6PI+x6rNmmPikHiLPCJG5hnjNldY1FZmwE=;
+        b=iqR3VvVf3+THDtNMsBckqS3iNYqMXSggqt+VX5J6nXbk9y4i1oGoflfJtmAdUtG/64
+         Fj1c8XgJZ1w3qbWr0PylE/RzYMsEDOnOh9vHBbiAE5jg4SSfCZ7eU1Z/6NQH1Y+7WZHF
+         mPVyVIQNRbUyEVigsQZoXnLKNJXhevYu9WdWywTpBUSAw1V4lL8HsGu41RC/VXwN0Ebq
+         8cYYOZCpjuz5hTHUa+KbYb/2ul+zS/tqkpwqm6RGqRDWIM/D+9tfAg1g7GKfxsnRbvcR
+         Jt8UCakQAC4Gy8c6v54gAfEXlGa2O/F/0qcSsXTmw+6Zl1KU6IcFQq1mzVqTseCOb5WN
+         dEWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=FnXi2Dnm6KRS/004aqlaGqgRidUtthhDs6/DkuQagCk=;
-        b=NGqloCTBG3G6LPxmhPK0M3QIr+EvcrH4MCi5/CQO5DphEBYCZKjot1iV6yKO9+qdke
-         KXfE83p0tYbYMQV3e72N6Eov07pWt7i1Fn0a6UC83F9B7dfCEW/M9ihPUfCYnzi6ksaz
-         EyEaw9w3AFY56mnSGVC6WG6AFN4rhzp2D2uBnl4fzc7vIjTMaNTcLkvQrC355tZNhRiW
-         IzmTxytj3nWMureD3RKhbEWyDat4Oqc2V98xVUFTvljPRFHzqNW8OBGNJQmgP3snwGXf
-         qVF1M9lRQ4dWp4F82s7BbOBwE5GIFCD+1LbQw7FbZyMrPFRUoKj54XKd4dlz5oF0ygSH
-         +GwA==
-X-Gm-Message-State: AOAM531x/u7129bo6OTo6LtBQ1DL6HYCNVOnzxBNcBz7Lx7ugAzPJrvu
-	RH5NywTWnHaUGm7wXf5zlYz2xhiwfqWXHw==
-X-Google-Smtp-Source: ABdhPJzElZR+VG4Pv6/dXbNdXc36dCzDoVg8Y7VIeGVC3+ILxmTReho6sscd660wMdadxU7PDgV4tQ==
-X-Received: by 2002:a62:3246:0:b029:1d5:db64:4b06 with SMTP id y67-20020a6232460000b02901d5db644b06mr17767979pfy.64.1613440707545;
-        Mon, 15 Feb 2021 17:58:27 -0800 (PST)
+        bh=bZ03gWI1c6PI+x6rNmmPikHiLPCJG5hnjNldY1FZmwE=;
+        b=pGsYQZhClx4kNTPuN1QdcnwGjrfU6QprU3adhfhKObT/VxIZ8MJ8C6RSmso8hLjzf6
+         spCidE74o2EbcfWBYBJJdPI4a4oN/LLOkCMW5qzIbuP+5EAbWsSCYmuks9lobnUjJCPs
+         Wzxuj3lWD/B2KfkPVqJsiwVxL/0h4scfA14XIkKRgzgvFAzQSdEeJfZN5CDkDT4mlwqe
+         dofwL1jzWL1XawgJA1vFyBOoxLJAZdtut9626kqlPjVgROI/5XiiQwnwj8RPxu7PQpgB
+         J3zDM9oxg6hZSxRjphPwcqmlb4mGmUOTpFA7vzx+u0JAL0baBwGx78bsind8fdKfoXzL
+         vFfA==
+X-Gm-Message-State: AOAM531tKhI/HG61iW/e6CRUwT22LqauLcq6HJLDSDEXF56ba7Fc8sq4
+	VuK2nM2LrWJ55Z5h11LNk0fKemeqc64lSw==
+X-Google-Smtp-Source: ABdhPJxbBXyjs4aMy0YmcL7QtO9R8zCSZco9Zx5dHctUhYZsGaI3xyCyTfsGDP1Ma/lR6dlw7eUJiw==
+X-Received: by 2002:a17:90a:a08a:: with SMTP id r10mr1699713pjp.133.1613440708380;
+        Mon, 15 Feb 2021 17:58:28 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:3567:4d62:c82e:b7f7])
-        by smtp.gmail.com with ESMTPSA id c24sm19756159pfo.209.2021.02.15.17.58.26
+        by smtp.gmail.com with ESMTPSA id c24sm19756159pfo.209.2021.02.15.17.58.27
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Feb 2021 17:58:27 -0800 (PST)
+        Mon, 15 Feb 2021 17:58:28 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 05/11] python-urllib3/python3-urllib3: fix CVE-2020-7212
-Date: Mon, 15 Feb 2021 17:58:13 -0800
-Message-Id: <55f71e0a18f3fcea14b4ee6ac526cf391632a7f6.1613440394.git.akuster808@gmail.com>
+Subject: [dunfell 06/11] wireguard-module: remove PKG assignment
+Date: Mon, 15 Feb 2021 17:58:14 -0800
+Message-Id: <38836bb67436336b9e504769c30f8cf84082da6f.1613440394.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1613440394.git.akuster808@gmail.com>
 References: <cover.1613440394.git.akuster808@gmail.com>
 
-From: Haiqing Bai <Haiqing.Bai@windriver.com>
+From: Martin Jansa <Martin.Jansa@gmail.com>
 
-Optimize _encode_invalid_chars for a denial of service (CPU consumption)
+* it's not clear why it was added in first place and it's causing issues since:
+  "package: get_package_mapping: avoid dependency mapping if renamed package provides original name"
+  commit in oe-core as discussed in:
+  https://lists.openembedded.org/g/openembedded-core/message/143672
+  https://github.com/openembedded/meta-openembedded/issues/285
 
-CVE: CVE-2020-7212
-
-Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 304f660f880bdf7dd5c51695875ab0a73aaed8b2)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
-Signed-off-by: Harpritkaur Bhandari <Harpritkaur.Bhandari@kpit.com>
-[Add CVE: CVE-2020-7212 to the patch itself]
+(cherry picked from commit f9502868169715ee4945f5d8bef7c845dbb7b9e0)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../python3-urllib3/CVE-2020-7212.patch       | 55 +++++++++++++++++++
- .../python/python3-urllib3_1.25.7.bb          |  2 +
- 2 files changed, 57 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.patch
+ .../wireguard/wireguard-module_1.0.20200401.bb             | 7 -------
+ 1 file changed, 7 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.patch b/meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.patch
-new file mode 100644
-index 0000000000..df234e442b
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.patch
-@@ -0,0 +1,55 @@
-+From aff951b7a41eb5b958b32c49eaa00da02adc9c2d Mon Sep 17 00:00:00 2001
-+From: Quentin Pradet <quentin.pradet@gmail.com>
-+Date: Tue, 21 Jan 2020 22:32:56 +0400
-+Subject: [PATCH] Optimize _encode_invalid_chars (#1787)
-+
-+Co-authored-by: Seth Michael Larson <sethmichaellarson@gmail.com>
-+
-+Upstream-Status: Backport
-+[from git://github.com/urllib3/urllib3.git commit:a2697e7c6b]
-+CVE: CVE-2020-7212
-+Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
-+---
-+ src/urllib3/util/url.py | 15 ++++++---------
-+ 1 file changed, 6 insertions(+), 9 deletions(-)
-+
-+diff --git a/src/urllib3/util/url.py b/src/urllib3/util/url.py
-+index 9675f74..e353937 100644
-+--- a/src/urllib3/util/url.py
-++++ b/src/urllib3/util/url.py
-+@@ -216,18 +216,15 @@ def _encode_invalid_chars(component, allowed_chars, encoding="utf-8"):
-+
-+     component = six.ensure_text(component)
-+
-++    # Normalize existing percent-encoded bytes.
-+     # Try to see if the component we're encoding is already percent-encoded
-+     # so we can skip all '%' characters but still encode all others.
-+-    percent_encodings = PERCENT_RE.findall(component)
-+-
-+-    # Normalize existing percent-encoded bytes.
-+-    for enc in percent_encodings:
-+-        if not enc.isupper():
-+-            component = component.replace(enc, enc.upper())
-++    component, percent_encodings = PERCENT_RE.subn(
-++        lambda match: match.group(0).upper(), component
-++    )
-+
-+     uri_bytes = component.encode("utf-8", "surrogatepass")
-+-    is_percent_encoded = len(percent_encodings) == uri_bytes.count(b"%")
-+-
-++    is_percent_encoded = percent_encodings == uri_bytes.count(b"%")
-+     encoded_component = bytearray()
-+
-+     for i in range(0, len(uri_bytes)):
-+@@ -237,7 +234,7 @@ def _encode_invalid_chars(component, allowed_chars, encoding="utf-8"):
-+         if (is_percent_encoded and byte == b"%") or (
-+             byte_ord < 128 and byte.decode() in allowed_chars
-+         ):
-+-            encoded_component.extend(byte)
-++            encoded_component += byte
-+             continue
-+         encoded_component.extend(b"%" + (hex(byte_ord)[2:].encode().zfill(2).upper()))
-+
-+--
-+2.23.0
-+
-diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb
-index 34c15b6c24..8d987a1f30 100644
---- a/meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb
-@@ -8,6 +8,8 @@ SRC_URI[sha256sum] = "f3c5fd51747d450d4dcf6f923c81f78f811aab8205fda64b0aba34a4e4
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
+index 45324c02a1..e8891c4428 100644
+--- a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
++++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
+@@ -22,13 +22,6 @@ MAKE_TARGETS = "module"
+ RRECOMMENDS_${PN} = "kernel-module-xt-hashlimit"
+ MODULE_NAME = "wireguard"
  
- inherit pypi setuptools3
- 
-+SRC_URI += "file://CVE-2020-7212.patch"
-+
- RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-certifi \
-     ${PYTHON_PN}-cryptography \
+-# Kernel module packages MUST begin with 'kernel-module-', otherwise
+-# multilib image generation can fail.
+-#
+-# The following line is only necessary if the recipe name does not begin
+-# with kernel-module-.
+-PKG_${PN} = "kernel-module-${MODULE_NAME}"
+-
+ module_do_install() {
+     install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/${MODULE_NAME}
+     install -m 0644 ${MODULE_NAME}.ko \
 -- 
 2.17.1
 
