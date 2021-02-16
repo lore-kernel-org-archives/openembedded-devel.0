@@ -1,89 +1,99 @@
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web09.2370.1613440708886841671
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.web10.2322.1613440709619158280
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Feb 2021 17:58:28 -0800
+ Mon, 15 Feb 2021 17:58:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=iqR3VvVf;
- spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id a24so4658955plm.11
-        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Feb 2021 17:58:28 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=IWaDuKO/;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id k22so4672331pll.6
+        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Feb 2021 17:58:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=bZ03gWI1c6PI+x6rNmmPikHiLPCJG5hnjNldY1FZmwE=;
-        b=iqR3VvVf3+THDtNMsBckqS3iNYqMXSggqt+VX5J6nXbk9y4i1oGoflfJtmAdUtG/64
-         Fj1c8XgJZ1w3qbWr0PylE/RzYMsEDOnOh9vHBbiAE5jg4SSfCZ7eU1Z/6NQH1Y+7WZHF
-         mPVyVIQNRbUyEVigsQZoXnLKNJXhevYu9WdWywTpBUSAw1V4lL8HsGu41RC/VXwN0Ebq
-         8cYYOZCpjuz5hTHUa+KbYb/2ul+zS/tqkpwqm6RGqRDWIM/D+9tfAg1g7GKfxsnRbvcR
-         Jt8UCakQAC4Gy8c6v54gAfEXlGa2O/F/0qcSsXTmw+6Zl1KU6IcFQq1mzVqTseCOb5WN
-         dEWQ==
+        bh=BvlUXj1F0iOxlAXU/gI6DG0wcRmck2Ij2H6qiZ/5Y+8=;
+        b=IWaDuKO/nuhQ9LT93tJFg9dg+nyi6pbmZfd11YL2NKVlSQtgVlqDcA8ufXsmV2HsEI
+         56M5VzeRMVFoSW7cBRhLJa+cPmFWAlYzJ90C8VwVUlWlFPLc+c1gYPvfLzu98OX6YZ6n
+         /zVm2LxeF1h94SvtBtRPVV+9j4rNF2GE0b/79AmuGzlRXMZhc5ir2tCXuUq5n0k/xjkG
+         on7rtNMlSF91MFFlfbNUvKgoOj67vcVwiTD5Fd03VlzK+HRG48cFGevkjLdM13b6z75j
+         wWYRFOVgvLMAVfMAc9lstw/vU+ZG/BouGMqhQ7srDd9/00DF6l2GJkG2qaV/jrLbmx4q
+         qHgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=bZ03gWI1c6PI+x6rNmmPikHiLPCJG5hnjNldY1FZmwE=;
-        b=pGsYQZhClx4kNTPuN1QdcnwGjrfU6QprU3adhfhKObT/VxIZ8MJ8C6RSmso8hLjzf6
-         spCidE74o2EbcfWBYBJJdPI4a4oN/LLOkCMW5qzIbuP+5EAbWsSCYmuks9lobnUjJCPs
-         Wzxuj3lWD/B2KfkPVqJsiwVxL/0h4scfA14XIkKRgzgvFAzQSdEeJfZN5CDkDT4mlwqe
-         dofwL1jzWL1XawgJA1vFyBOoxLJAZdtut9626kqlPjVgROI/5XiiQwnwj8RPxu7PQpgB
-         J3zDM9oxg6hZSxRjphPwcqmlb4mGmUOTpFA7vzx+u0JAL0baBwGx78bsind8fdKfoXzL
-         vFfA==
-X-Gm-Message-State: AOAM531tKhI/HG61iW/e6CRUwT22LqauLcq6HJLDSDEXF56ba7Fc8sq4
-	VuK2nM2LrWJ55Z5h11LNk0fKemeqc64lSw==
-X-Google-Smtp-Source: ABdhPJxbBXyjs4aMy0YmcL7QtO9R8zCSZco9Zx5dHctUhYZsGaI3xyCyTfsGDP1Ma/lR6dlw7eUJiw==
-X-Received: by 2002:a17:90a:a08a:: with SMTP id r10mr1699713pjp.133.1613440708380;
-        Mon, 15 Feb 2021 17:58:28 -0800 (PST)
+        bh=BvlUXj1F0iOxlAXU/gI6DG0wcRmck2Ij2H6qiZ/5Y+8=;
+        b=L2EOag8Mr0Nx1SwtBz0vj4DO7aEggEGD0YlQuFXAjJO19FGjf6QBzzm4LQPvx3hvBy
+         d+7Gxke/+9agrxtZrYUwJ1sF0lo3KTrD2xz9UgOMJo5slyYjNAJTPYMU0Vx1Dp8tENkj
+         n8d1N6VQJOMuOfDMIRRJQFHqtjHJP5400R3/M5a6Xuguv3RoLzSnw+Y3QEyrpSOKFxdZ
+         Z0M/Ux2HDWs1pzK72mlNmlCCnHxgp1ma5u/BQoJCVof4XeRMdV8SrZEAo43KgAGZwrYO
+         7+OQPfTG5vA3eA4eMjlQUhPuWO3dffRDLYPztJYHukbqoW5AUfRnKnXY//PXzMBLDtYq
+         QT4Q==
+X-Gm-Message-State: AOAM531qMYTgGNyG6+ei40JPqh1DRuCarMyh9KWikdKwP/CiAK4PkohT
+	7ssBi7qsL8cjbSXDpHpVhSo1Mo5llAQDkA==
+X-Google-Smtp-Source: ABdhPJwq3DWA2v3KxhlOx8MlR+Gegf7nwVRMUn0/vDbllYHD3EKUq2oj5p9ow9QgnO8uo8T6++pS5g==
+X-Received: by 2002:a17:90b:1090:: with SMTP id gj16mr1643286pjb.63.1613440709087;
+        Mon, 15 Feb 2021 17:58:29 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:3567:4d62:c82e:b7f7])
-        by smtp.gmail.com with ESMTPSA id c24sm19756159pfo.209.2021.02.15.17.58.27
+        by smtp.gmail.com with ESMTPSA id c24sm19756159pfo.209.2021.02.15.17.58.28
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Mon, 15 Feb 2021 17:58:28 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 06/11] wireguard-module: remove PKG assignment
-Date: Mon, 15 Feb 2021 17:58:14 -0800
-Message-Id: <38836bb67436336b9e504769c30f8cf84082da6f.1613440394.git.akuster808@gmail.com>
+Subject: [dunfell 07/11] enca: Fix SRC_URI
+Date: Mon, 15 Feb 2021 17:58:15 -0800
+Message-Id: <a9befa4413656dc94d57a5738cff8242d4468457.1613440394.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1613440394.git.akuster808@gmail.com>
 References: <cover.1613440394.git.akuster808@gmail.com>
 
-From: Martin Jansa <Martin.Jansa@gmail.com>
+From: akuster <akuster808@gmail.com>
 
-* it's not clear why it was added in first place and it's causing issues since:
-  "package: get_package_mapping: avoid dependency mapping if renamed package provides original name"
-  commit in oe-core as discussed in:
-  https://lists.openembedded.org/g/openembedded-core/message/143672
-  https://github.com/openembedded/meta-openembedded/issues/285
+The project appears to have moved.
+Update HOMEPAGE and SRC_URI. bz2 is not available, use gz
+Update HASH accordingly.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 304f660f880bdf7dd5c51695875ab0a73aaed8b2)
+Fixes:
+WARNING: enca-1.9-r0 do_fetch: Failed to fetch URL http://www.sourcefiles.org/Networking/Tools/Miscellanenous/enca-1.9.tar.bz2, attempting MIRRORS if available
+
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
-(cherry picked from commit f9502868169715ee4945f5d8bef7c845dbb7b9e0)
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 460077d30ffedca4c794f60cd0f21404fc1736d7)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../wireguard/wireguard-module_1.0.20200401.bb             | 7 -------
- 1 file changed, 7 deletions(-)
+ meta-oe/recipes-support/enca/enca_1.9.bb | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
-index 45324c02a1..e8891c4428 100644
---- a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
-+++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
-@@ -22,13 +22,6 @@ MAKE_TARGETS = "module"
- RRECOMMENDS_${PN} = "kernel-module-xt-hashlimit"
- MODULE_NAME = "wireguard"
+diff --git a/meta-oe/recipes-support/enca/enca_1.9.bb b/meta-oe/recipes-support/enca/enca_1.9.bb
+index bf19843b2f..b0ba3aedef 100644
+--- a/meta-oe/recipes-support/enca/enca_1.9.bb
++++ b/meta-oe/recipes-support/enca/enca_1.9.bb
+@@ -1,21 +1,20 @@
+ SUMMARY = "Enca is an Extremely Naive Charset Analyser"
+ SECTION = "libs"
+-HOMEPAGE = "http://trific.ath.cx/software/enca/"
++HOMEPAGE = "https://cihar.com/software/enca/"
  
--# Kernel module packages MUST begin with 'kernel-module-', otherwise
--# multilib image generation can fail.
--#
--# The following line is only necessary if the recipe name does not begin
--# with kernel-module-.
--PKG_${PN} = "kernel-module-${MODULE_NAME}"
--
- module_do_install() {
-     install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/${MODULE_NAME}
-     install -m 0644 ${MODULE_NAME}.ko \
+ DEPENDS += "gettext-native"
+ 
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=24b9569831c46d4818450b55282476b4"
+ 
+-SRC_URI = "http://www.sourcefiles.org/Networking/Tools/Miscellanenous/enca-${PV}.tar.bz2 \
++SRC_URI = "https://dl.cihar.com/enca/enca-${PV}.tar.gz \
+     file://configure-hack.patch \
+     file://dont-run-tests.patch \
+     file://configure-remove-dumbness.patch \
+     file://makefile-remove-tools.patch \
+     file://libenca-003-iconv.patch "
+ 
+-SRC_URI[md5sum] = "b3581e28d68d452286fb0bfe58bed3b3"
+-SRC_URI[sha256sum] = "02acfef2b24a9c842612da49338138311f909f1cd33933520c07b8b26c410f4d"
++SRC_URI[sha256sum] = "75a38ed23bac37cc12166cc5edc8335c3af862adc202f84823d3aef3e2208e47"
+ 
+ inherit autotools
+ 
 -- 
 2.17.1
 
