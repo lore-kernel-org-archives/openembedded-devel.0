@@ -1,81 +1,81 @@
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.web10.2325.1613440711071933178
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.web12.2366.1613440711890293464
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 15 Feb 2021 17:58:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gpBYAzL9;
- spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id r2so4661368plr.10
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=uiTS/DuN;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f173.google.com with SMTP id z7so4673905plk.7
         for <openembedded-devel@lists.openembedded.org>; Mon, 15 Feb 2021 17:58:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=MAlFVmm4oDMqRHWFKQJmRkwtBVEKvWRvDHGnWgRIbNo=;
-        b=gpBYAzL9ENKk6yo+zJvMvRSbDnGJX3/wAyQwvbPqkuDLk3W8A2DrqUIwAo/12l1OG+
-         J5uN8EKvtT8JpK4/kNFhaxFUr8NCM63cbajHm8lNyXEoH5XDA+/jOdJi6NZ6kBx1oEFq
-         NQxRqMa3n1a/NtH8Uqpg3ud8wH5ci93qEjvk3dx5Ih7fvUZH4JOIx5w4YI7UVIpgpmA7
-         gSglps58ERVzmUMqmjI2JiUIiupo8gNgPn/vbeZK0PNO0HCW6LAmbVVIy8mPyj0yFztN
-         2J6FTNaoHV10n678KT7JTRs7IWitwSiG8PMhT5OXT/dj1QnJAQAFei8d2WV5/IZCFQoM
-         cIXQ==
+        bh=9N82Tz4toSi9H3b03pSn3brxyzUmx6uuRx+LYrHoZ1I=;
+        b=uiTS/DuNvO0h6LJVA92jTwrv9bUQLt0aHkw4VAjK7hA+YWni9oblEYkRTQfD+BqKYi
+         boamR0dG1P1togIHQnaFBdxv5sSeicK8C3zYdNkUDCHu5BF4PjblL/ho52GloYDHZqQr
+         a2rkqLTTkD6Sc4qLDA9RC+1Wqx8CC4RQyP4rpSklqAAY7ZTQjbG0jhlVWKnzdRrPXX6H
+         oGTyfNGGNN2EysyEihIL+wGvudaM+6N7msSfftDYuOvFBFzUhAgxHrN/q5MSjD7UyfeF
+         lkA7jKggbyuJbRW9fJMrzu8+u7lWxSnA6Eyz2VsjlYH6LCDdxuDNcLzLK4+UhE8TgenD
+         RpWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=MAlFVmm4oDMqRHWFKQJmRkwtBVEKvWRvDHGnWgRIbNo=;
-        b=KDAeMnc4Ga2ymDCv++MyA05P9xL0IGmysnQ6WKTPiIpV54omq3cpm0PWntMGW3w7Bg
-         6luNfS/XoxDDiCes6EfdOPff5WRngUKQu8ElbnbIfNgX6lJCII/3M5L+PlRAowT8kWG/
-         bRZTnd1jRhAtSF9ytLQgB4k0Dpdqnh9JtV2nE5jQRJEOZBXMu3dWbc8ygOcym8nkx1V3
-         gCzIG95Si+VWnv/IvfWmqdsjQ1j70R8ZHo9xu49UHKROBgA3nThVAIAw3OjBWBMMBcgi
-         9koaPukdY+MDIg94oSL4EwM+lgzkJ1o9W3CWwEY0DxuoGua8eDFlwxPb9aKjLYRD5sg0
-         U6UA==
-X-Gm-Message-State: AOAM530c4p+fadioDkzU5LLEmjKFpE7khhXpcnN+3I4uMiwNiqZkyb2N
-	vKrRpIchaczvE8EVVVSollFIGSGtwBOwwQ==
-X-Google-Smtp-Source: ABdhPJyPS1LJt2cyFPdsUhYKoJtUH3hFU73U+Pef1dg9ovbO5cUIbAYWwZkrp29q6+byOfnF9Y3Njw==
-X-Received: by 2002:a17:90b:3507:: with SMTP id ls7mr1728126pjb.208.1613440710517;
-        Mon, 15 Feb 2021 17:58:30 -0800 (PST)
+        bh=9N82Tz4toSi9H3b03pSn3brxyzUmx6uuRx+LYrHoZ1I=;
+        b=Z+eqv/76R5+ewxUakxeM3hzJhkVhqciWX1uAGmiyy7WR4cAO/QaakJ/WL+jxXw1ibc
+         z/epCFucCmYG99FTRJIloZRYBl7H2XeYTFBq/KtWCO5Dg2pgvYlDEt8Tj5o5uBkOo/Fp
+         JiHwV7x4BiVGP4F6L3PHRjBfHnKHvlr0tBJG/zYfPkPA/ghIvl23LJ9/n8P1U62DUQbD
+         svdzmj1x5oKZHdarc5JBiVFJaaV5PUOrIUwA4IHV0fvi+qfcXhOmIzg9Qdnwkm5aWdFY
+         KOlxPRfgHKpsZa93/NySRetdEfrHMKuDu3KvGUICfaSQ6BlTr+C7GXXkcbvNPB/JkTbC
+         aS/w==
+X-Gm-Message-State: AOAM533oobZ2rVGm73Qkal2Jcx4dNbYfhwhsSnZlPG6cEhjz1xqVsaqG
+	0sn+JcAPnnsc7VyrXdtadb2w5zdQ/lNiGQ==
+X-Google-Smtp-Source: ABdhPJzvuOwN1kt3oRZkZ626DLV53ALq66WeTEYX+sdqk2zYimXeaIAMYVuR/bCunQ7cjBPpYX1f+A==
+X-Received: by 2002:a17:90a:420c:: with SMTP id o12mr1723803pjg.193.1613440711321;
+        Mon, 15 Feb 2021 17:58:31 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:3567:4d62:c82e:b7f7])
-        by smtp.gmail.com with ESMTPSA id c24sm19756159pfo.209.2021.02.15.17.58.29
+        by smtp.gmail.com with ESMTPSA id c24sm19756159pfo.209.2021.02.15.17.58.30
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Feb 2021 17:58:29 -0800 (PST)
+        Mon, 15 Feb 2021 17:58:31 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 08/11] meta-oe/README: add Ubuntu prerequisite information
-Date: Mon, 15 Feb 2021 17:58:16 -0800
-Message-Id: <ee04df8c6965d8cb30db9c8f430e11e4519bf529.1613440394.git.akuster808@gmail.com>
+Subject: [dunfell 09/11] celt051: update SRC_URI
+Date: Mon, 15 Feb 2021 17:58:17 -0800
+Message-Id: <e43045dd0529ba275890994981f3bca88382a9a0.1613440394.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1613440394.git.akuster808@gmail.com>
 References: <cover.1613440394.git.akuster808@gmail.com>
 
-From: akuster <akuster808@gmail.com>
+From: "changqing.li@windriver.com" <changqing.li@windriver.com>
 
-When building on Ubuntu 20.04, luajit needs 32bit support
-so install 'gcc-multilib'
+original SRC_URI is not valid now, offical CELT repository
+moved to gitlab
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 973fe410d238e0c361f8bc4d9ba7915464217e22)
-[Minor fixup for Dunfell]
+(cherry picked from commit 5450c958bf66afd560fd8dff5b432ea71f10165c)
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+(cherry picked from commit 1de0f4c33b92b9bbd885044df505154c177db59e)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/README | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-networking/recipes-support/celt051/celt051_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/README b/meta-oe/README
-index f5a4bda065..972c830356 100644
---- a/meta-oe/README
-+++ b/meta-oe/README
-@@ -14,6 +14,9 @@ e.g. on archlinux based distributions install prerequisites like below
+diff --git a/meta-networking/recipes-support/celt051/celt051_git.bb b/meta-networking/recipes-support/celt051/celt051_git.bb
+index 12b9124f74..c3e4cbbe6d 100644
+--- a/meta-networking/recipes-support/celt051/celt051_git.bb
++++ b/meta-networking/recipes-support/celt051/celt051_git.bb
+@@ -16,7 +16,7 @@ PV = "0.5.1.3+git${SRCPV}"
  
- pacman -S lib32-gcc-libs lib32-glibc
+ SRCREV = "5555aae843f57241d005e330b9cb65602d56db0f"
  
-+Ubuntu
-+sudo apt-get install gcc-multilib
-+
- Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe][dunfell]' in the subject'
- 
- When sending single patches, please use something like:
+-SRC_URI = "git://git.xiph.org/celt.git;branch=compat-v0.5.1;protocol=https \
++SRC_URI = "git://gitlab.xiph.org/xiph/celt.git;branch=compat-v0.5.1;protocol=https \
+            file://0001-configure.ac-make-tools-support-optional.patch \
+            file://0001-tests-Include-entcode.c-into-test-sources-to-provide.patch \
+            "
 -- 
 2.17.1
 
