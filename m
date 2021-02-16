@@ -1,114 +1,123 @@
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web10.2319.1613440706612773772
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web10.2320.1613440707445689429
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Feb 2021 17:58:26 -0800
+ Mon, 15 Feb 2021 17:58:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Dv+f+zBA;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id cl8so4772036pjb.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Feb 2021 17:58:26 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=hXfgY92x;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id e9so4680932plh.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Feb 2021 17:58:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=2PODdBf67AL+khBQ/0KY0F66H9VTTF5XFgzthkzQz2U=;
-        b=Dv+f+zBAzfVwVNcrbnqVD3le16XOXRSKQx2RX3T8wmiSdRGkr0N6P9hxJ7+WKV/53q
-         wjEh1GhjwyzWxEFM2i8E0RP616ZwG2woOpdewsHeRXjQOV/w+41rDDfyj8JTwlRtYXgh
-         voci29mxD3kWtJNiRcvsCOBZ+/GCYs0XePUy2XV5C2z2YS3S3XK9RHAP4DdPhEBtTH8i
-         bNZkIpX3DYLyZcGU5pcFTPIP8Wli5DxP9REMnj8idAkV7Pr5uCavdsuAkzEBesR80Osg
-         yV9o5UWlU+DNRIir2/klmz3TTY+4CXr5dZl9sFmZGHSKQ6zq0I4tXwZjFLz+OzfINC4v
-         TGgg==
+        bh=xspJv2DosZ9Dlqc22qAy5Wwt9gWfYdBqc6LHirmSnNk=;
+        b=hXfgY92xRk9cAiX4DOJunpPLjqZF0PGgR3dlLQovv4v2sndb+Yj6RFITDtaaCkcbwP
+         6JJED6wXNKEyYdUAu6cUgD/IMZD1a52sb5lYrVWSm0THQg6ryp6FhFYe0x7OnH21IXgG
+         GL7cYZ0VDFUphoTtTcMxKeShSY+YT7kSbGic852IG0Dv6QGnUCYvRyk8yEQuZwuUdvHp
+         kXIRUq4Cvce8UV7urfiIEMk3+JbIAGMyrSjti5w+7zYaVE8il+PjTNkCfp/QmLCkMTo4
+         U0BAWPhR0X68epRLcqSoH3jQ9/2oISkThD+yGhF4urZRALLurNbZVGtzR2+o3qGbCqOy
+         UMzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=2PODdBf67AL+khBQ/0KY0F66H9VTTF5XFgzthkzQz2U=;
-        b=ixr4GUCfaYiI+VlG5wxVAao+oSh2xnSHrpCODhUSYGu7KENSou6Kj3VaH/A2Gu1fy6
-         W/XyhBG56u6z+NUw4zrSrscq3yRmU81qsmkeUyhm09tCDGutCP7251A8AHsMeA0W+HOu
-         gPPAY8yeciHabycq5PZSXdH+Moun1qaqy6UJ8YZTM23Qjz7OSSR4i8tMw+ChOZ0fE+Cg
-         PjuiiRquXcFLgH/A8LDCXchCS9E11C1BVz2RZQeC3gpHAnL9GdWbQEQIuZRM6xNqj1Cl
-         BIWiWc8r1YdCBUTZpkwj1xMpqi90yFv/9C1R808uK24DwKouQm8QeuNPU3IoVIR86tfo
-         z+mQ==
-X-Gm-Message-State: AOAM531ms3kcvP6QhBhHT+AmJdA28ds1h2SAVEOXM9Z/mFems8zZNah/
-	6NRPGtm4o5zFK5jg4//U+cO7fEx8aAshAQ==
-X-Google-Smtp-Source: ABdhPJwcHDcbKbXC2YF8MAHMwSG5KaBrmIfHDDhBDrQuFNkbzo4wz4UZPogHpMOSzm4MC260Dkf0bg==
-X-Received: by 2002:a17:90b:4c10:: with SMTP id na16mr1701371pjb.49.1613440706076;
+        bh=xspJv2DosZ9Dlqc22qAy5Wwt9gWfYdBqc6LHirmSnNk=;
+        b=KaVe86ehnp42G4JGPmaDLdsC+ZoeLl21Zh3Vu/U+4FFN0s0b5WcjVIMCSz8ehbYX8p
+         A2uSXW9H1O7XgboasbBPO+sYTIB1SS8aTqnz8UGx3QCwkgKdtcFbwYf2cOHUVa06sjQt
+         82qu9Ivoqo4YVli6tVARdvEi0Gn1nWhhcexMwO+KqFByDmbPBUK9WOXjj/coyQ3iPWiU
+         EO88j1X6BBu5ZbCxDM4feUf5a1FKLoe/XsobJ7VvXpqZ/fPQonL2SBHcrzJNZwg0w8IR
+         6p2L9fkMZP+Nt/aA1FV8Cmt47yorU/dbz4varEiV2Awx7maubbqMMLAEwL8tzw6QA9bB
+         DsLw==
+X-Gm-Message-State: AOAM532AZHPXPrLmn/W2hb+F6sFT1mdnSrOqmnkBoDaENP2o90FKB++u
+	eZkvKF5zVXB9EG7REoHfRm5dMBN30Ql20g==
+X-Google-Smtp-Source: ABdhPJxDKgf3KXB9tfAhqgaT59kY++U5YsHCRqYRxBL4+5R+IE4P3xXzQ0ZR4WrDBdlDvCpPa41HIA==
+X-Received: by 2002:a17:90a:a88e:: with SMTP id h14mr1719779pjq.59.1613440706809;
         Mon, 15 Feb 2021 17:58:26 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:3567:4d62:c82e:b7f7])
-        by smtp.gmail.com with ESMTPSA id c24sm19756159pfo.209.2021.02.15.17.58.25
+        by smtp.gmail.com with ESMTPSA id c24sm19756159pfo.209.2021.02.15.17.58.26
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Feb 2021 17:58:25 -0800 (PST)
+        Mon, 15 Feb 2021 17:58:26 -0800 (PST)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 03/11] openldap: upgrade 2.4.56 -> 2.4.57
-Date: Mon, 15 Feb 2021 17:58:11 -0800
-Message-Id: <9d6e064bb0384a3731e235769d5c78be08d5de42.1613440394.git.akuster808@gmail.com>
+Subject: [dunfell 04/11] libuv: fix CVE-2020-8252
+Date: Mon, 15 Feb 2021 17:58:12 -0800
+Message-Id: <b1de50b2fcbe43cf10508cece48f229e18009cd0.1613440394.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1613440394.git.akuster808@gmail.com>
 References: <cover.1613440394.git.akuster808@gmail.com>
 
-From: zhengruoqin <zhengrq.fnst@cn.fujitsu.com>
+From: Andrej Kozemcak <andrej.kozemcak@siemens.com>
 
-Source: meta-openembedded
-MR: 108384, 108398, 108412, 108426, 108440, 108454, 108468, 108482, 108496, 108510
-Type: Security Fix
-Disposition: Backport from https://git.openembedded.org/meta-openembedded/commit/meta-oe/recipes-support/openldap?id=0282b8ce6a5a5f082a37cb0863b3e62ad8e56a5a
-ChangeID: 0282b8ce6a5a5f082a37cb0863b3e62ad8e56a5a
-Description:
-
--License-Update: Copyright year updated to 2021.
-
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 0282b8ce6a5a5f082a37cb0863b3e62ad8e56a5a)
-[Maintance update only]
+Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
-(cherry picked from commit cef93b7b00e620d90a610112ee574fa60b691cf8)
-[Fixes CVE:
-CVE-2020-36221
-CVE-2020-36222
-CVE-2020-36223
-CVE-2020-36224
-CVE-2020-36225
-CVE-2020-36226
-CVE-2020-36227
-CVE-2020-36228
-CVE-2020-36229
-CVE-2020-36230
-
-Signed-off-by: Armin Kuster <akuster@mvista.com>
 ---
- .../openldap/{openldap_2.4.56.bb => openldap_2.4.57.bb}     | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/openldap/{openldap_2.4.56.bb => openldap_2.4.57.bb} (97%)
+ .../libuv/libuv/CVE-2020-8252.patch           | 41 +++++++++++++++++++
+ .../libuv/libuv_1.36.0.bb                     |  3 +-
+ 2 files changed, 43 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-connectivity/libuv/libuv/CVE-2020-8252.patch
 
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.56.bb b/meta-oe/recipes-support/openldap/openldap_2.4.57.bb
-similarity index 97%
-rename from meta-oe/recipes-support/openldap/openldap_2.4.56.bb
-rename to meta-oe/recipes-support/openldap/openldap_2.4.57.bb
-index 4c0f179cb0..a282523a3c 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.56.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.57.bb
-@@ -7,7 +7,7 @@ HOMEPAGE = "http://www.OpenLDAP.org/license.html"
- # basically BSD.  opensource.org does not record this license
- # at present (so it is apparently not OSI certified).
- LICENSE = "OpenLDAP"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=5391b559d23a2237bdb21e7a62dae7c3 \
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=b6dea6c170362fc46381fe3690c722cb \
-                     file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972 \
-                     "
- SECTION = "libs"
-@@ -25,8 +25,8 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
-     file://remove-user-host-pwd-from-version.patch \
- "
+diff --git a/meta-oe/recipes-connectivity/libuv/libuv/CVE-2020-8252.patch b/meta-oe/recipes-connectivity/libuv/libuv/CVE-2020-8252.patch
+new file mode 100644
+index 0000000000..dd99b44873
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/libuv/libuv/CVE-2020-8252.patch
+@@ -0,0 +1,41 @@
++From 0e6e8620496dff0eb285589ef1e37a7f407f3ddd Mon Sep 17 00:00:00 2001
++From: Ben Noordhuis <info@bnoordhuis.nl>
++Date: Mon, 24 Aug 2020 11:42:27 +0200
++Subject: [PATCH] unix: don't use _POSIX_PATH_MAX
++
++Libuv was using _POSIX_PATH_MAX wrong. Bug introduced in commit b56d279b
++("unix: do not require PATH_MAX to be defined") from September 2018.
++
++_POSIX_PATH_MAX is the minimum max path size guaranteed by POSIX, not
++the actual max path size of the system libuv runs on. _POSIX_PATH_MAX
++is always 256, the real max is often much bigger.
++
++This commit fixes buffer overruns when processing very long paths in
++uv_fs_readlink() and uv_fs_realpath() because libuv was not allocating
++enough memory to store the result.
++
++Fixes: https://github.com/libuv/libuv/issues/2965
++PR-URL: https://github.com/libuv/libuv/pull/2966
++
++Upstream-Status: Backport [https://github.com/libuv/libuv/commit/0e6e8620496dff0eb285589ef1e37a7f407f3ddd]
++CVE: CVE-2020-8252
++Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
++---
++ src/unix/internal.h | 4 +---
++ 1 file changed, 1 insertion(+), 3 deletions(-)
++
++diff --git a/src/unix/internal.h b/src/unix/internal.h
++index 30711673e0..9d3c2297f8 100644
++--- a/src/unix/internal.h
+++++ b/src/unix/internal.h
++@@ -62,9 +62,7 @@
++ # include <AvailabilityMacros.h>
++ #endif
++ 
++-#if defined(_POSIX_PATH_MAX)
++-# define UV__PATH_MAX _POSIX_PATH_MAX
++-#elif defined(PATH_MAX)
+++#if defined(PATH_MAX)
++ # define UV__PATH_MAX PATH_MAX
++ #else
++ # define UV__PATH_MAX 8192
+diff --git a/meta-oe/recipes-connectivity/libuv/libuv_1.36.0.bb b/meta-oe/recipes-connectivity/libuv/libuv_1.36.0.bb
+index deeaa2b15c..7577207318 100644
+--- a/meta-oe/recipes-connectivity/libuv/libuv_1.36.0.bb
++++ b/meta-oe/recipes-connectivity/libuv/libuv_1.36.0.bb
+@@ -5,7 +5,8 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a68902a430e32200263d182d44924d47"
  
--SRC_URI[md5sum] = "82a7dcf7aeaf95fdad16017c0ed9983a"
--SRC_URI[sha256sum] = "25520e0363c93f3bcb89802a4aa3db33046206039436e0c7c9262db5a61115e0"
-+SRC_URI[md5sum] = "e3349456c3a66e5e6155be7ddc3f042c"
-+SRC_URI[sha256sum] = "c7ba47e1e6ecb5b436f3d43281df57abeffa99262141aec822628bc220f6b45a"
+ SRCREV = "533b738838ad8407032e14b6772b29ef9af63cfa"
+-SRC_URI = "git://github.com/libuv/libuv;branch=v1.x"
++SRC_URI = "git://github.com/libuv/libuv;branch=v1.x \
++           file://CVE-2020-8252.patch"
  
- DEPENDS = "util-linux groff-native"
+ S = "${WORKDIR}/git"
  
 -- 
 2.17.1
