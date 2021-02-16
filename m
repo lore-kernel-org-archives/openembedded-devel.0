@@ -1,17 +1,17 @@
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.70])
- by mx.groups.io with SMTP id smtpd.web10.7255.1613480208677065632
+Received: from NAM04-SN1-obe.outbound.protection.outlook.com (NAM04-SN1-obe.outbound.protection.outlook.com [40.107.70.88])
+ by mx.groups.io with SMTP id smtpd.web09.7293.1613480221383664390
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Feb 2021 04:56:48 -0800
+ Tue, 16 Feb 2021 04:57:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=apOOig1/;
- spf=pass (domain: windriver.com, ip: 40.107.223.70, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=jqPIV8be;
+ spf=pass (domain: windriver.com, ip: 40.107.70.88, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=N0VMMI1/Z2Ow/wNRXwjbLGkGZjAwEtMBAGdA7XuMMKlfgCcN6R2Hpw8cZpWgI9rUYmO5tb1u+WE8eVWR6zZe/TI2q2kSUvj74vUzDKUiJC7SQw7zY3nLjVPSCgMGEJkOoUaR/RaSmiNtugnrqDkklm4XZyp+DvMgke0WuLGlmkeJA4Pc99YHtZ6T9BVu40EUN2QwJQdy2jnzWE9E+DpIFOl7nijINTef13VW68giImultLry1v+uQqtMVVn05fhCIwY+QbOPqEZ7UcjuklXBAKs0JpReHEm75R6BCmJ+N+nzKSaROFKtr3vWJXAX+8jbNHevZ5hLFeuHJI/DUXVnJQ==
+ b=iJj3LSczNPm8UwbNZCeWKr4Mio4O1IMyowXdnb7NOTUO6Q0SsI2aiDZD41+UcWxG9K7WtGBIneeOxukMY2kJI1PR718nl1GKpZz/4z3rqXTUp9ghhM5bK9uESprdVyx7ZVQjba3up7kXPe6PepB40LOMOGNYlFVnsM8JIeMxPf/9P6QOk3IS2xT9xmZV1sXLdSE9vgKHFLqASKlJJPQJgCt/m2oelD35F6y6VBkD475gGeYRguGastv2okv7vozQhAjoZKmOrdRDGrMhgsiuC1WlgDlJ+vWMshDht+9FYeiTk+/IH0e7RJU0scMRQbcT2mMmTwvdzlbarsETPFgqcw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GOEF/tFeGlJvagTcJGtaHuBPayRMLuWkM3aotNsF0yM=;
- b=G+5iTCYmV0/1ejArD+cxiusbOXkwR9K0i29rn2Io0+/D9BHBEjbrWzUR5D5fiidH2bF4cup8EFegsiiy3uEJAnRtAhPnIapoFZhcXkIHf8DtRfaLUkohLZ2kyoikcG5uvmCPyA0BvzKaO0FH+20LsUJ2Vx9RyZsOXY8bdq9xCkN17c5vMzH4ofB6CE96hBTTCblwTDNDJyBkOFTjkXpS4Qit8ISEiFV/kyeYxfJepFatIFFUFP8JIoCLb+rJhfZTaeoy+2kkOTR4kFqP33JAkUYILOCW07n0Uv9bFUP5XTFp0XmysJgC5nmtl3khBJ2QUZSmJ2WTydfGkPOjawDWAQ==
+ bh=LmRQMqnEx3W/Tqa/NOzdlphP6Zh6TFbTC0ZfnZQuu/o=;
+ b=Ml7jfhTMluCMygNuFkzw+ygh8njsdbAELYHZkeGuocEXH0QRIz/4dQwENmXmi/KUsFS/DQ3n5pupd81IgMy+mPWSlH97v0rwLuZ2nH1Wy2M+b9GU7d3WG24E1RmsRH0lT4NUApLap2bcYT+kT22pME69RlJimdoa3NYTklZCAdBTjCfMsiX0e1jpA0sUiMXTNFRw7QXRgm/w6/kr9qDvsdYR2zRtf/sc8f8kWLhgzCX8+c49E0PH3PmQtVKK+ilmvR8VJ8Uka/xbo0Poe368M+/4H37ParbrGY2TPYHHtqqkNSpDzZfPVVXM2wI8GY0Kfwi8lTk8uIsrs5SVvnF1wQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,97 +19,97 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GOEF/tFeGlJvagTcJGtaHuBPayRMLuWkM3aotNsF0yM=;
- b=apOOig1/yBa5UVgkkxCZN+FV0HbM6guH8VKp6ZbNqxCKJTYa6zJ2n5GRBnWJqjlcuoXPL1tfazz/hjzuvXallPGrBR4I46mhNTIiOrP1V3xPMAPdSS4RP+OTlsisVSlg6AEP9mdiL5tcM7z4PRLcJ9JF+f2TVbGPr2MMTWfAIps=
+ bh=LmRQMqnEx3W/Tqa/NOzdlphP6Zh6TFbTC0ZfnZQuu/o=;
+ b=jqPIV8beRIRJ5XFUWvzNaO9t/HG4qR7rX4j+LZHMJj02YclzqARq+PmbqGlCDXDmJZ/+1EOnOKRuE1jA3hHQH5Q7UlBUoyJTn3VqHsWVDBndvros07pZduhopBMxMzSOOJnCtmNF0CBiJXb4JjvT0g0YgucxZ8eCAxaxg+iurpw=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BYAPR11MB3061.namprd11.prod.outlook.com (2603:10b6:a03:83::21) with
+ by BY5PR11MB4418.namprd11.prod.outlook.com (2603:10b6:a03:1cc::15) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3846.25; Tue, 16 Feb
- 2021 12:56:47 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3846.27; Tue, 16 Feb
+ 2021 12:57:00 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3846.042; Tue, 16 Feb 2021
- 12:56:47 +0000
-Subject: Re: [oe] [meta-python[PATCH] python3-protobuf: update to 3.14.0
+ 12:57:00 +0000
+Subject: Re: [oe] [meta-python[PATCH] python3-pykickstart: update to 3.32
 To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>,
  openembedded-devel@lists.openembedded.org
-References: <20210211000517.1922669-1-open.source@oleksandr-kravchuk.com>
+References: <20210211000524.1922826-1-open.source@oleksandr-kravchuk.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <5e9116bb-2417-33f0-3276-1d604e2d1eda@windriver.com>
-Date: Tue, 16 Feb 2021 07:56:44 -0500
+Message-ID: <39b20d8d-ba6d-425e-6e2a-77991ab7bc8a@windriver.com>
+Date: Tue, 16 Feb 2021 07:56:57 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.7.0
-In-Reply-To: <20210211000517.1922669-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20210211000524.1922826-1-open.source@oleksandr-kravchuk.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BL0PR05CA0018.namprd05.prod.outlook.com
- (2603:10b6:208:91::28) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: BL0PR05CA0017.namprd05.prod.outlook.com
+ (2603:10b6:208:91::27) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BL0PR05CA0018.namprd05.prod.outlook.com (2603:10b6:208:91::28) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3868.11 via Frontend Transport; Tue, 16 Feb 2021 12:56:46 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BL0PR05CA0017.namprd05.prod.outlook.com (2603:10b6:208:91::27) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3868.12 via Frontend Transport; Tue, 16 Feb 2021 12:56:59 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 63ab4620-12fc-4371-3860-08d8d27a51c9
-X-MS-TrafficTypeDiagnostic: BYAPR11MB3061:
+X-MS-Office365-Filtering-Correlation-Id: d6fd9215-268c-4f7d-15b5-08d8d27a592a
+X-MS-TrafficTypeDiagnostic: BY5PR11MB4418:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB3061DB9DD6DE65EF59BF39039F879@BYAPR11MB3061.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2331;
+	<BY5PR11MB441819C8BB5B6D181CC04EAD9F879@BY5PR11MB4418.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:538;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	yoosKSdDscjgxWbqM8aB5ohQ766C1Vst9PqIyFagcy39WF5nv5VBbr4tfRfhpq7CjrPAbImrweoesC92aKwQurrB50Di076oPVMwpVQLX6jcw4zSuqzdbvv9lUicHNgr6zW7vM04BYm/8y2D3mwU0JSr69S2g3h3xpSf4D5xbGPhURKUCNJYOcuT5+BC9twfeyl0hDtlivduv2uPPlZqSMS6ChZp/NsIHgbzL6Go8nrOtoQ4Rmmn+vxqC+wHkni1RM0XmK5mZgjPJ+zeaFVC67jTsu0NNGVsfEaV5AVICxXUZZYFb8+7tyuAA4iPZo/IqUKOvqDRccAljTGz51ndw0d1cw2/EeynDC0PeplPU7/APS8SFxcdGIY2p8ZLpROJV3qFX2/qtyrFLAwjn9nseC1muuut1fsZi8yRyW9R3nmwACry2D1V7vNwGvEbsiC9Cdy29lOPJL/m1HPT5qZCvsryXQDpZo2Kc1/43orPb6QSeA2bHwj61UvIxe46fDVQkslOyr21l6W5/XPATAKT2Q1zptNI9OFoQ3I7YT7tk1wxm9JoOYTfQ7i3PlqviWUEh1SaP9f2KV1An1tLE5DRbxlG2dzoqR1nauAYiURbiHvVfuyR7AOkoGNYOssXnV1338ScJr1/z57ZJfu/YA9O8CBZH4u5q0g6vbr9HEKOtPyoNcT2eqTjb+grU5MhH0GM
+	gn+Q+pgZcgX+DKPoz/ECami8j7L+EojjxtQgiNh9Zl/7MlhhmevvcQMCty/Dgc//uUDZubQfnCb28/hpMpjdtqYduGKH4iVk3Xqt5wJ47hjgMApi7Ff2fZ56h/4aSr8gUiMHMXB5QDu+rj3YbsueQuCW0UhIeCAN3WeF2hHUuVPLY6Rc1ZAwbvNO8bFawUiXS+d486+FZjjMGdyr2sr+4gkce4C9tYRzTWybh9OujpFacl75TTCECz2jDa5rLf3WrA4iU0jkZpnNd+NrJjNTtAERHdE2gO8hgxcN8vcZq70wHcQYd88zG1gYw9+zfTmnu5Vn97VnCFnIRQLui54S+sPmj89Mqw8dhxd5nglqntysQPjAa1DbNiR2WZT+3oRH5EW6QYZX+VaX0awhVuZS9JV6EsdYwHLlk/sKLFBtsFhT4PSuE2YlwBDHSEierNsV6CnGRKnw+jIMUERrv3AvPZxpRclX6so7TTPGNNAtab9gpFo8MxGfMCQvZXenZjLll8OQY0NKWteLWJg8Mrc7ABaS2gEu9OZkJao2ptLPW+8mWuFEHeNhmCvAHDS1EVraBaifvObpvVbYM4y2jHOlQtEs2JKZ2egW/FhVKRRtpT8vWy2/7VWuSpjGB7c6lPCKMQdaJqSXgMIw9BVbvgWy0ukiqPjRXeW2Hm8YUzM4D3DbkLehVDXDb9DumVcCgUoy
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(396003)(366004)(346002)(136003)(39850400004)(2616005)(956004)(8676002)(8936002)(166002)(86362001)(44832011)(478600001)(33964004)(16526019)(53546011)(316002)(966005)(26005)(186003)(83380400001)(16576012)(31696002)(36756003)(52116002)(31686004)(2906002)(66946007)(66476007)(6486002)(66556008)(5660300002)(15650500001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(346002)(376002)(396003)(39850400004)(366004)(83380400001)(44832011)(2906002)(2616005)(186003)(478600001)(86362001)(33964004)(53546011)(31696002)(6486002)(52116002)(36756003)(31686004)(16526019)(8676002)(316002)(16576012)(8936002)(66556008)(66476007)(166002)(26005)(66946007)(966005)(5660300002)(956004)(15650500001)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?MXBVa1JGMllIUDRIM0hxZ3lTN3k0RXZxL0R3Rm5JMkRTcnU5ZkdVb2xBNHhW?=
- =?utf-8?B?bVdrMG9EZTRuMUphalZCMmJMTWxDM2VhSTZLeEdiZWsraE00bUtXK2V4bzV5?=
- =?utf-8?B?bWRXS1BjRUNIWEdNeitMelhac3FRVlk5Y0tVVlN3OHcyR01pUGY0QVF6bkUv?=
- =?utf-8?B?RXJ3UUh6QnQzUG5ad3NFNFFmNFl5N2ZJT1NKR1JTVlY1NWVZcW9IWjJFbVlr?=
- =?utf-8?B?OUg0TERadUMvVHZGRFVYU1d5QXRyRTJjTk9xdDNNU3hWL0lyb2tKS2piMjNL?=
- =?utf-8?B?RmIyNkVQcEN5WU8wY0c3MnYvR2w0QXZUVVdKcURYaUw2a1FMZURUMXNlL0RD?=
- =?utf-8?B?TjJ5QnVCeFJsYUZGYVgyQlV2ZVRFWEtwOGN6ajZ0ZXp5ckxCckg0eUU2cnpY?=
- =?utf-8?B?TXc4NjVnNDV5L3g2RmlBb2szNldEQVlYYVh3QmFuZXdEVkxFeDB1NC9tZ1Fs?=
- =?utf-8?B?cXNFT0l3b2RJeW8xblBlTXJrVGZrWFFrY2ZURHNDTW1pQmRleTl2dzVtOURG?=
- =?utf-8?B?RUxTRHVTdXFCa2w2ZkNrR3dueDhrakdBQXJyMHNiTUpJYW9JUlVXUXh4NTVO?=
- =?utf-8?B?U1pxaldzcTU5YmR2Vm9hdVVRQ0VhYmF6ZjBDaHVFbUZ3ZXdpOG05VURET2dQ?=
- =?utf-8?B?cHQyZ2RZVmEwQ2YwRUZ3ZUVDYkU2YkZlMm5BZXp6V2tRZWNnaFJjQ1Y0MTd1?=
- =?utf-8?B?b2Q0K2tYSTRySjJwSGQ0Zi9xTkdQQUozNDhhVi83U2UrUjlDbHJmbk1iTzFG?=
- =?utf-8?B?ekJ5MjQvL2NzMERtMGtpempOaEx1ZFhNVjhHRkVRMUUrY1JuemFhak9rZEZN?=
- =?utf-8?B?NEs2Q2MwTkU0M1lFTjhIK1NFSFRETXVSV1RSZk1WZjdiaitUNmdFdjNGZUJz?=
- =?utf-8?B?ZTY5cEJ0NUZuWnRTbGFuVHBiaEQvb01Ua0U3dG5rRW5YNFBXcGJtbWR2Lzg0?=
- =?utf-8?B?Ylg3cTh2OWd4UVdUNlI4YkY3N1Z4VEpLNzZoTWVlaVBubWlzQkVjL1JtZWJs?=
- =?utf-8?B?TDhlSWJPUnZwZFl3Vm42YlU2VnJ0eGxYV3BONFZWN3h2NC9kRVA1LzR3all2?=
- =?utf-8?B?WEJ1TXlhTlRNQk5BSGdFekJmQWVrbWlRKzFSNFJ5MGdqZFprWmhEeEJzK2Z2?=
- =?utf-8?B?MndmQU9QWFM4OGRVYUdhdDkrY1V0d2FXRERXWUpsSUlhdDVVZGVLQUdONkhv?=
- =?utf-8?B?b2czRXhZSjVMWjh4WCtZN1pkNVMvRWdlUVF4ckFOSGFQSU5UcU9Fc0dyT1Bx?=
- =?utf-8?B?Z0NvZUdkUDlhaEF4UUtUYTZvSUg0Uko4ZUgwemw3VURLbXgxMTN5RDg4dHVV?=
- =?utf-8?B?bkszbVBUcFNSUjNadlBIRnJRWDJqWFFjUVlVYnVIbS9EVDZzRTJGZTBmaytk?=
- =?utf-8?B?RFZoVElxS0xlK3lyYXo1TkFZUS9LOXhFeDBLeGhmTXA1U2FvS1ZHTXU5Ykc1?=
- =?utf-8?B?Ull3a3RRODNEZlIya1dPSkRMN0h4b2cvRFBrS2Vpa2RwRXI3QS9Eb0hXZ0ZK?=
- =?utf-8?B?Y0ZBUzZqVzB4M1JLMm1Rc05tQTVHOFBISWxPV2VaZGJaaDNBT2diWENtcFU5?=
- =?utf-8?B?S2hqc1lCYXRBMDVFTUFNY0pZMFB0cTBKZ3MrZGs1OFBsdUtxR2JLbndxUE9Q?=
- =?utf-8?B?OGN4RUI5RDh3c1UzNU82UW9pV255bitwa2hCT0JuMTBRVmN5azNKbEhodFJI?=
- =?utf-8?B?TTM4Z1IxVWhCQkxWeElIYVdCR0hTK0xKbDRkdVdyMHdhRm94YmxKSGxGUDQy?=
- =?utf-8?Q?85RpiZ8y8cy+TBIbjHr910xYQ066aeupMTg/vPD?=
+	=?utf-8?B?VjJTVUZpb2ZGd0FNbkFlcjI0OUI1c0RnUHE3SkdoMG1zVWI1Rnc2UVhSbk5M?=
+ =?utf-8?B?WkFtVk9JaUEwRkJTcGpBMEQ3RFV4UVl4dEgwemlCM3ViNHlpd0tYZy9wMWYy?=
+ =?utf-8?B?bVJ6bEk5cTFNdmZjaFlrcHJRZmk0bXRTNk1PdGsxaGU3RVlHYUdXZ1RVMWFX?=
+ =?utf-8?B?WlYxdHV0Uk0wcG1YSVZDbGFiZnhITVN4N3JnN0haUmtlY21UZjNLNlBwVm51?=
+ =?utf-8?B?SnRZMzhoaDZnQnFxbGhlcU1jYzhzY0pxYUExN3RiR290cmFscEFtc3ZjRGs0?=
+ =?utf-8?B?WDFNUWkvNk4zQ0NVaTlTcHo2ZU5DYlNrR212SGs4ZnF2Vm81TWRKWjlxVk5a?=
+ =?utf-8?B?RnRlczNSaXpkd2VUOVB0bnVXdSs0NTljcEFuRzE4UWUwQWZQbkZzQWdJQnp3?=
+ =?utf-8?B?aWpKWjFaUCt4N3hPVEpRbXQ4aEExdnBUZk9UMXdZWUk5dHlEWGZnekkvelhH?=
+ =?utf-8?B?cy9VWXQ2L2VKVytBVElVWTh4RGxycFh5MHU5VGZHMGJJM1UwcnhrdDQ1WmlK?=
+ =?utf-8?B?MWYzaDdGc29Gb0cray8vM01VNDRWVEtuVjJIUy8xUUl2OEVJdkU4NzgvUkc0?=
+ =?utf-8?B?Q1JvZ0g3eWZjakp0aG5lSTNTczdtUHNPajRsOW1lek8vcGlhQUI5dnBZclNx?=
+ =?utf-8?B?UjR3dU16OXI4SUNwQnhBSGdnbTBkSUlWcytmNEJzZlhYbjIzczIxNnNtZ1hn?=
+ =?utf-8?B?WVV2TzYrV1lwa3N4bGdQYVlNOEYwNzg5M2pqNHJBbmR6Umhic3RmLzFBbTNh?=
+ =?utf-8?B?bkpHbkRqeG9maC9VQXlRdmYyRzBLZmJMVDZyL0hTQklLS2FvMmlUcmF0TCtI?=
+ =?utf-8?B?eDI2OStuQzRhZkZWYXFWdjFUMDM1UFB3ejlZVVRvV0gyUXlKWHJ0bUQ3RDFj?=
+ =?utf-8?B?Yk15VGdzU0xiSjZqa2RpSzMvcTE0K3lxTTZBT2FsdVo3NFpPS3d0YTFVd0Y4?=
+ =?utf-8?B?cmdNUFEzRVVIOVBUbWwvbUJWd3Q3MzJaT0VEK0VFVmtOZVhnZkNmdlNYRk5C?=
+ =?utf-8?B?SzFXeXU4LytsZU5lYlBONURZa1N4dDNwSFkyLzdsYzhpdE1ScXZwdDFKM2Vl?=
+ =?utf-8?B?bVhreVhMUFl0YWE1VXZpTkZZbm8rdGs5dDV2bCtod3RuRzVJKzRSTFVaWnBz?=
+ =?utf-8?B?UlozS3dPYUlYK3F2bkQ2NExydm00U3J1eUxnSnV2OFdkR2hTMnFKdlR0eG1w?=
+ =?utf-8?B?akdWTytDdCtJUlB4a2FBcUpwWmkyRVpNYUJiOE9MRWpaZGNlQkhmZVBBMnZx?=
+ =?utf-8?B?RDRyejJXWEhqVDVpRlcxRlZialVnVGVQc1NRWndxR0RsTGZ0L0tUb25yZUpq?=
+ =?utf-8?B?WFhqejVzZFJETmx2akx5bGl3OVFhQjlVaDJDOGs4Yk0wbFZaUGw3dzh6ZXBF?=
+ =?utf-8?B?Yyt4RHZ5YkdzaTlJNHBteVg4UnBLN3JtdGdSOXo2dnN0ZW9aWEpDejd3MzNW?=
+ =?utf-8?B?ajVsUHh4RDRQd2c0Q1FZVHM1cGhoSDBQRUtaMi8xMUNyZGZQaXBaOHVqTDBC?=
+ =?utf-8?B?dDErblZycHp5clpsRVp0SGlzT3g2UWI0REF5Tml2MUxIVlptMmJiQUtsRHlF?=
+ =?utf-8?B?VXN2NkhLTmhyWFBJdGt3V28yWVB1VU9xZUN6b0tDdEtxK3pUM2xrQWpuREhv?=
+ =?utf-8?B?TmNGNHdxMm9od3lIY1JISkdPVEFHbi9HMVRQU0FSOE82aXhGWVI3MzFGd01P?=
+ =?utf-8?B?aVpudXZvUGIvRHdjQ0U0U2xzRFhSdnd4YVZuVkZ5Y2Y0NXdoSHUxL1JLeWhh?=
+ =?utf-8?Q?8fT40fixw+7lXd58wyDsG3iJ9fvsoWUklgF+DJU?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 63ab4620-12fc-4371-3860-08d8d27a51c9
+X-MS-Exchange-CrossTenant-Network-Message-Id: d6fd9215-268c-4f7d-15b5-08d8d27a592a
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Feb 2021 12:56:47.4828
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Feb 2021 12:56:59.8887
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: OdZmLcaZioBMPa6i8QeRqYeVfDRPy4Zr7t0eGkIJnyxAYDjGmpDyXoZtYSyr9tSuBbdpMd/L56khIgMhw6ByVEC76Nnp4IExDNOcBMs/05g=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3061
+X-MS-Exchange-CrossTenant-UserPrincipalName: e1Q9sDfKJNxO03Iyc6Pp/O33V9cq6zYhB0YT7PJFLiT/jFA693mckPHQ0w/f02IQcmaFe7MVA55fHckvvWz486WYXDqFLefPADbePbScty4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4418
 Content-Type: multipart/alternative;
- boundary="------------DE676F862C85E341031C99F9"
+ boundary="------------FF4A3A929DAA5286233742D8"
 Content-Language: en-US
 
---------------DE676F862C85E341031C99F9
+--------------FF4A3A929DAA5286233742D8
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -120,27 +120,26 @@ On 2021-02-10 7:05 p.m., Oleksandr Kravchuk wrote:
 > Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../{python3-protobuf_3.12.2.bb => python3-protobuf_3.14.0.bb} | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-protobuf_3.12.2.bb => python3-protobuf_3.14.0.bb} (87%)
+>   ...{python3-pykickstart_3.26.bb => python3-pykickstart_3.32.bb} | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>   rename meta-python/recipes-extended/python-pykickstart/{python3-pykickstart_3.26.bb => python3-pykickstart_3.32.bb} (94%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-protobuf_3.12.2.bb b/meta-python/recipes-devtools/python/python3-protobuf_3.14.0.bb
-> similarity index 87%
-> rename from meta-python/recipes-devtools/python/python3-protobuf_3.12.2.bb
-> rename to meta-python/recipes-devtools/python/python3-protobuf_3.14.0.bb
-> index 03d0b0c60..3cf850d1f 100644
-> --- a/meta-python/recipes-devtools/python/python3-protobuf_3.12.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-protobuf_3.14.0.bb
-> @@ -7,8 +7,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=19e8f490f9526b1de8
+> diff --git a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.26.bb b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.32.bb
+> similarity index 94%
+> rename from meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.26.bb
+> rename to meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.32.bb
+> index 7aeb5d6c9..62d2729dc 100644
+> --- a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.26.bb
+> +++ b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.32.bb
+> @@ -18,7 +18,7 @@ SRC_URI = "git://github.com/rhinstaller/pykickstart.git;protocol=https;branch=ma
+>              file://0003-comment-out-sections-shutdown-and-environment-in-gen.patch \
+>              file://0004-load.py-retry-to-invoke-request-with-timeout.patch \
+>              "
+> -SRCREV = "4c93e84c8798da511da1c05f1912d2f908f8f85f"
+> +SRCREV = "c56a5fbdd4079b187b21787f072ccc83dc09c28c"
 >
->   inherit pypi setuptools3
+>   UPSTREAM_CHECK_GITTAGREGEX = "r(?P<pver>\d+(\.\d+)+(-\d+)*)"
 >
-> -SRC_URI[md5sum] = "b4336acee38ebe915b6e72fe8c5bce7b"
-> -SRC_URI[sha256sum] = "49ef8ab4c27812a89a76fa894fe7a08f42f2147078392c0dee51d4a444ef6df5"
-> +SRC_URI[sha256sum] = "1d63eb389347293d8915fb47bee0951c7b5dab522a4a60118b9a18f33e21f8ce"
->
->   # http://errors.yoctoproject.org/Errors/Details/184715/
->   # Can't find required file: ../src/google/protobuf/descriptor.proto
 > --
 > 2.25.1
 >
@@ -148,7 +147,7 @@ Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > 
 >
 
---------------DE676F862C85E341031C99F9
+--------------FF4A3A929DAA5286233742D8
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -161,36 +160,35 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2021-02-10 7:05 p.m., Oleksandr
       Kravchuk wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210211000517.1922669-1-open.source@oleksandr-kravchuk.com">
+    <blockquote type="cite" cite="mid:20210211000524.1922826-1-open.source@oleksandr-kravchuk.com">
       <pre class="moz-quote-pre" wrap="">[Please note: This e-mail is from an EXTERNAL e-mail address]
 
 Signed-off-by: Oleksandr Kravchuk <a class="moz-txt-link-rfc2396E" href="mailto:open.source@oleksandr-kravchuk.com">&lt;open.source@oleksandr-kravchuk.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210211000517.1922669-1-open.source@oleksandr-kravchuk.com">
+    <blockquote type="cite" cite="mid:20210211000524.1922826-1-open.source@oleksandr-kravchuk.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../{python3-protobuf_3.12.2.bb =&gt; python3-protobuf_3.14.0.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-protobuf_3.12.2.bb =&gt; python3-protobuf_3.14.0.bb} (87%)
+ ...{python3-pykickstart_3.26.bb =&gt; python3-pykickstart_3.32.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-extended/python-pykickstart/{python3-pykickstart_3.26.bb =&gt; python3-pykickstart_3.32.bb} (94%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-protobuf_3.12.2.bb b/meta-python/recipes-devtools/python/python3-protobuf_3.14.0.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-protobuf_3.12.2.bb
-rename to meta-python/recipes-devtools/python/python3-protobuf_3.14.0.bb
-index 03d0b0c60..3cf850d1f 100644
---- a/meta-python/recipes-devtools/python/python3-protobuf_3.12.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-protobuf_3.14.0.bb
-@@ -7,8 +7,7 @@ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://PKG-INFO;beginline=8;endline=8;md5=19e8f490f9526b1de8inheritpypisetuptools3-SRC_URI[md5sum]=">&quot;file://PKG-INFO;beginline=8;endline=8;md5=19e8f490f9526b1de8
+diff --git a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.26.bb b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.32.bb
+similarity index 94%
+rename from meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.26.bb
+rename to meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.32.bb
+index 7aeb5d6c9..62d2729dc 100644
+--- a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.26.bb
++++ b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.32.bb
+@@ -18,7 +18,7 @@ SRC_URI = &quot;git://github.com/rhinstaller/pykickstart.git;protocol=https;branch=ma
+            <a class="moz-txt-link-freetext" href="file://0003-comment-out-sections-shutdown-and-environment-in-gen.patch">file://0003-comment-out-sections-shutdown-and-environment-in-gen.patch</a> \
+            <a class="moz-txt-link-freetext" href="file://0004-load.py-retry-to-invoke-request-with-timeout.patch">file://0004-load.py-retry-to-invoke-request-with-timeout.patch</a> \
+            &quot;
+-SRCREV = &quot;4c93e84c8798da511da1c05f1912d2f908f8f85f&quot;
++SRCREV = &quot;c56a5fbdd4079b187b21787f072ccc83dc09c28c&quot;
 
- inherit pypi setuptools3
+ UPSTREAM_CHECK_GITTAGREGEX = &quot;r(?P&lt;pver&gt;\d+(\.\d+)+(-\d+)*)&quot;
 
--SRC_URI[md5sum] = &quot;</a>b4336acee38ebe915b6e72fe8c5bce7b&quot;
--SRC_URI[sha256sum] = &quot;49ef8ab4c27812a89a76fa894fe7a08f42f2147078392c0dee51d4a444ef6df5&quot;
-+SRC_URI[sha256sum] = &quot;1d63eb389347293d8915fb47bee0951c7b5dab522a4a60118b9a18f33e21f8ce&quot;
-
- # <a class="moz-txt-link-freetext" href="http://errors.yoctoproject.org/Errors/Details/184715/">http://errors.yoctoproject.org/Errors/Details/184715/</a>
- # Can't find required file: ../src/google/protobuf/descriptor.proto
 --
 2.25.1
 
@@ -205,4 +203,4 @@ index 03d0b0c60..3cf850d1f 100644
   </body>
 </html>
 
---------------DE676F862C85E341031C99F9--
+--------------FF4A3A929DAA5286233742D8--
