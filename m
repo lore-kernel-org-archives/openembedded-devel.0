@@ -1,65 +1,75 @@
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web08.6307.1613561456869755885
+Received: from mail-lj1-f182.google.com (mail-lj1-f182.google.com [209.85.208.182])
+ by mx.groups.io with SMTP id smtpd.web10.7839.1613570975501504674
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Feb 2021 03:30:57 -0800
+ Wed, 17 Feb 2021 06:09:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7F135106F
-	for <openembedded-devel@lists.openembedded.org>; Wed, 17 Feb 2021 03:30:56 -0800 (PST)
-Received: from oss-tx204.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id F3A163F73B
-	for <openembedded-devel@lists.openembedded.org>; Wed, 17 Feb 2021 03:30:55 -0800 (PST)
-From: "Ross Burton" <ross@burtonini.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH][meta-python v2] python3-intelhex: add recipe for the intelhex package
-Date: Wed, 17 Feb 2021 11:30:53 +0000
-Message-Id: <20210217113053.1690364-1-ross.burton@arm.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=vKOTwJFg;
+ spf=pass (domain: gmail.com, ip: 209.85.208.182, mailfrom: liu.ming50@gmail.com)
+Received: by mail-lj1-f182.google.com with SMTP id r23so16292483ljh.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Feb 2021 06:09:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=6X+jQnKIatZqQX5nZXfAooUCpEvbG5EGKxqC9euhuxM=;
+        b=vKOTwJFgAcRCX1gntV5sYBo11tMC2BDyO3DMRqRJhpNDqaGBKgJpLS21O3lAtdTwij
+         is0TYJeJfjHxOJunJsbQjHaL3WmKUoqJE3f6sdyAL6E/Tj7wQsKAcEA5ZRqq7KmTEbfi
+         8fery7WHnpbcrK7KgI5xJdS8qCvOq7A+CRQBL0LCxw3jpjzwlgV/nUZBD3eWR0EQ7zoI
+         p33IMSSLt6/6Yv+y0Y2coi1A9FXGuEBxPo7KflEHbzSr2TmoS0xMb6PJlZIpJjlkgMoD
+         1SFmSS0fOD7d56Tsz2JZtM/OneflRGrd9E7Pgr6GCEqaWDsT7idopotqYTt8pD0BUbxM
+         GXUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=6X+jQnKIatZqQX5nZXfAooUCpEvbG5EGKxqC9euhuxM=;
+        b=nk0prAptG2CVfikUuMmPQJVBSMJFGhrxdBSSSV1WWT9izApQiHfFfimFeGJiEEWnQR
+         Ufqocwa90ogillMwUJJISTqtPiQBs8LYDAO09/6FX1gzoa1Qfle/kOxPYJnaD/wZRfkz
+         iOGu/R0Ujq8SBd4rTfwQ16QZ2FC4YGAng/g46dT079VCC2UoFyeUFtw2kMso5ssH/FYV
+         BVP4FRfgobcGVVYzVd9jAXuy/dL6rCyAzdmiUvPVUivno0qX+C4WrT9LeCMJ6p3HpcwK
+         wfbHodGQwefJ8UeRAZ5WdOyKHBWrL+6F4Gq/b7LK4rbsZfhFJe/0C9wN/ZW353tyg9dd
+         RZOA==
+X-Gm-Message-State: AOAM5322xV6HixzZFHHlthqxCEuHQP4YasHab3azYO0luOuJdxfSyzSt
+	WuNAQN9SAuDMrfHoTS/V4D8=
+X-Google-Smtp-Source: ABdhPJw1uNi2Tj0G3fip1KT2wtIMRDPNNLWnzOns8mZ9zDgUXqnV53z1WbZNBHpr5hueLhWxjpX7vQ==
+X-Received: by 2002:a2e:8803:: with SMTP id x3mr14481816ljh.173.1613570973299;
+        Wed, 17 Feb 2021 06:09:33 -0800 (PST)
+Return-Path: <liu.ming50@gmail.com>
+Received: from localhost.localdomain ([90.129.215.157])
+        by smtp.gmail.com with ESMTPSA id q26sm253363lfc.254.2021.02.17.06.09.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 17 Feb 2021 06:09:32 -0800 (PST)
+From: "Ming Liu" <liu.ming50@gmail.com>
+To: yocto@lists.yoctoproject.org,
+	openembedded-devel@lists.openembedded.org
+Cc: akuster808@gmail.com,
+	sergio.prado@toradex.com,
+	Ming Liu <liu.ming50@gmail.com>
+Subject: [meta-security] [PATCH 0/5] Some fixes for IMA/EVM
+Date: Wed, 17 Feb 2021 15:09:24 +0100
+Message-Id: <20210217140929.987752-1-liu.ming50@gmail.com>
+X-Mailer: git-send-email 2.29.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Ross Burton <ross.burton@arm.com>
----
- .../packagegroups/packagegroup-meta-python.bb          |  1 +
- .../recipes-devtools/python/python3-intelhex_2.3.0.bb  | 10 ++++++++++
- 2 files changed, 11 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-intelhex_=
-2.3.0.bb
+From: Ming Liu <liu.ming50@gmail.com>
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-pyt=
-hon.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.=
-bb
-index e31b0b8b40..635dee1942 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -170,6 +170,7 @@ RDEPENDS_packagegroup-meta-python3 =3D "\
-     python3-imageio \
-     python3-incremental \
-     python3-inflection \
-+    python3-intelhex \
-     python3-intervals \
-     python3-ipaddress \
-     python3-ipy \
-diff --git a/meta-python/recipes-devtools/python/python3-intelhex_2.3.0.b=
-b b/meta-python/recipes-devtools/python/python3-intelhex_2.3.0.bb
-new file mode 100644
-index 0000000000..befcb34780
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-intelhex_2.3.0.bb
-@@ -0,0 +1,10 @@
-+SUMMARY =3D "Python library for Intel HEX files manipulations"
-+LICENSE =3D "BSD-3-Clause"
-+LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D4eba844696655c3eae07aca8e=
-3a94772"
-+
-+SRC_URI[sha256sum] =3D "892b7361a719f4945237da8ccf754e9513db32f562885278=
-5aea108dcd250093"
-+
-+inherit pypi setuptools3
-+
-+BBCLASSEXTEND =3D "native nativesdk"
-+
---=20
-2.25.1
+Ming Liu (5):
+  ima-evm-utils: set native REQUIRED_DISTRO_FEATURES to empty
+  initramfs-framework-ima: fix a wrong path
+  meta: refactor IMA/EVM sign rootfs
+  initramfs-framework-ima: let ima_enabled return 0
+  ima-evm-rootfs.bbclass: avoid generating /etc/fstab for wic
+
+ meta-integrity/README.md                      |  4 ++-
+ meta-integrity/classes/ima-evm-rootfs.bbclass | 33 +++++++++----------
+ .../initrdscripts/initramfs-framework-ima.bb  |  2 +-
+ .../initrdscripts/initramfs-framework-ima/ima |  3 +-
+ .../ima-evm-keys/ima-evm-keys_1.0.bb          | 16 +++++++++
+ .../ima-evm-utils/ima-evm-utils_git.bb        |  1 +
+ 6 files changed, 38 insertions(+), 21 deletions(-)
+ create mode 100644 meta-integrity/recipes-security/ima-evm-keys/ima-evm-keys_1.0.bb
+
+-- 
+2.29.0
 
