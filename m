@@ -1,330 +1,125 @@
-Received: from alln-iport-2.cisco.com (alln-iport-2.cisco.com [173.37.142.89])
- by mx.groups.io with SMTP id smtpd.web10.8305.1613572885483682911
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.web11.14371.1613593776420296161
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Feb 2021 06:41:25 -0800
+ Wed, 17 Feb 2021 12:29:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@cisco.com header.s=iport header.b=LeyGGXQn;
- spf=pass (domain: cisco.com, ip: 173.37.142.89, mailfrom: oobitots@cisco.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=cisco.com; i=@cisco.com; l=10693; q=dns/txt;
-  s=iport; t=1613572885; x=1614782485;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=bCBjH/ghauQ34tIczZi3YmaSTaNsOGe9jwSE75MPWFM=;
-  b=LeyGGXQnl075HrhXWDaT1H7gyxZIlxuBdawff0qKqle0XYCHisloQww8
-   eRXmbHS5HyJr5y4vgVqttKU1hRcU6SgPdKM3U8sAx7cE3Bja7pFX7FKjr
-   zPx+7WQfgw752Z2cK090XgrLN9HbrI/9BesYUqwursN0LHpVVZPfW/3RG
-   g=;
-X-IronPort-AV: E=Sophos;i="5.81,184,1610409600"; 
-   d="scan'208";a="671963597"
-Received: from alln-core-9.cisco.com ([173.36.13.129])
-  by alln-iport-2.cisco.com with ESMTP/TLS/DHE-RSA-SEED-SHA; 17 Feb 2021 14:41:24 +0000
-Received: from sjc-ads-8148.cisco.com (sjc-ads-8148.cisco.com [171.68.208.186])
-	by alln-core-9.cisco.com (8.15.2/8.15.2) with ESMTPS id 11HEfO8u017878
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Wed, 17 Feb 2021 14:41:24 GMT
-Received: by sjc-ads-8148.cisco.com (Postfix, from userid 500841)
-	id DAE9CCC1251; Wed, 17 Feb 2021 06:41:23 -0800 (PST)
-From: "Oleksiy Obitotskyy" <oobitots@cisco.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=TlP+krzj;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id z9so2402467pjl.5
+        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Feb 2021 12:29:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=szSV9vDlzNZS5okyyV7E++5/2Vkhpk/dQrqZarSOueQ=;
+        b=TlP+krzjQWPlhvaU2kOCaVAG8VMYF7spqQEOsCmRjdGwZp2zGGit1hJUa8UgMj5JvA
+         7Og6WnTZRnRfkUPUrUwVudU4yO7YrURDkod61ji+Ry9Hz2se9ebgjyS4n+Vbg6krLieW
+         Qdzc9ancbkvbTp6LyJkz9HzPV0IWqOq7uBg9QwfgbD/wH9VuKqtZZfaqgs7XkdmEficA
+         Zzcoa3fTh8/WHyj+nQ7gRFfsH9cur5NQR3fUpRw1mCPZrGEiH7hnWd1koLP1B6s8V9hv
+         7MUkKcmawQGnWOvwz2SgfCZ1Qle3yBg5Ay6nfGSDkctX+IThviph0eSsQY3QhxLayakC
+         v9UA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=szSV9vDlzNZS5okyyV7E++5/2Vkhpk/dQrqZarSOueQ=;
+        b=q2iyTaW6l62ILISZt/zE6MPF0/b0W+6wGlbguUYVrw3WIAGWtEn9acwePWIGHnuoVO
+         O5PgWble+IVVpyQFYgjU+Xw8e9g5KSbAzjxf2r2VNW5CiL+TY6KbU+UfSW9NL53zoNto
+         AesUcpX3NjDCbLkwcVmlhj0vcENeq00u/yHsPT4FUcWnL0SMLBGapl/LQlYHoxHSYXj0
+         XuPdSKSoAqUfaQs7XQWYBLgYAiAtRTlU/a7Hh+y+80PXXLTqZEUOAAWCi9hVNzXgLHHn
+         YtKFZnVDGs4NhGLhuyyHm3xGXHyULDviQmiTc2nSJwJAJ+fHKJ/ZJOSv80nLqGWQxx5a
+         dn2A==
+X-Gm-Message-State: AOAM530H+/qh66CfOEXA6CSkIKve1gnDTge+oz2Ve953hO+5P+RgLAwU
+	XL6yf60DC3uxitPI/SkRUzrCeTPDd1c=
+X-Google-Smtp-Source: ABdhPJxRT5gATpbcUF7UYFKYiVR7GReRRfVXX4s9sqm9U+KtksJHSvcQM1eWNIjgcs4cwNHaGcoVGA==
+X-Received: by 2002:a17:902:e812:b029:e3:9877:7c38 with SMTP id u18-20020a170902e812b02900e398777c38mr779096plg.49.1613593775318;
+        Wed, 17 Feb 2021 12:29:35 -0800 (PST)
+Return-Path: <akuster808@gmail.com>
+Received: from hilo.hsdl.ca.comcast.net (c-67-181-203-136.hsd1.ca.comcast.net. [67.181.203.136])
+        by smtp.gmail.com with ESMTPSA id x4sm3156035pfm.64.2021.02.17.12.29.34
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 17 Feb 2021 12:29:34 -0800 (PST)
+From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Oleksiy Obitotskyy <oobitots@cisco.com>
-Subject: [meta-oe][PATCH] wireshark-src: improve reproducibility
-Date: Wed, 17 Feb 2021 06:41:21 -0800
-Message-Id: <20210217144121.38364-1-oobitots@cisco.com>
-X-Mailer: git-send-email 2.26.2.Cisco
+Subject: [meta-oe][PATCH] softhsm: update to 2.6.1 and align
+Date: Wed, 17 Feb 2021 20:29:33 +0000
+Message-Id: <20210217202933.2291762-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Outbound-SMTP-Client: 171.68.208.186, sjc-ads-8148.cisco.com
-X-Outbound-Node: alln-core-9.cisco.com
 Content-Transfer-Encoding: 8bit
 
-What was done:
-- add --noline option to flex, --no-line to bison
-  and -l to lemon generators to prevent
-  adding #line directives with absolute path.
-- eliminate absolute source path in python code generator
-  and use baseline instead.
+meta-security has this pkg to but newer. Move from meta-sec to meta-oe
+minor cleanups.
 
-Signed-off-by: Oleksiy Obitotskyy <oobitots@cisco.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...ireshark-src-improve-reproducibility.patch | 44 +++++++++++
- .../0002-flex-Remove-line-directives.patch    | 46 +++++++++++
- .../0003-bison-Remove-line-directives.patch   | 59 ++++++++++++++
- .../0004-lemon-Remove-line-directives.patch   | 77 +++++++++++++++++++
- .../wireshark/wireshark_3.4.3.bb              |  7 ++
- 5 files changed, 233 insertions(+)
- create mode 100644 meta-networking/recipes-support/wireshark/files/0001-wireshark-src-improve-reproducibility.patch
- create mode 100644 meta-networking/recipes-support/wireshark/files/0002-flex-Remove-line-directives.patch
- create mode 100644 meta-networking/recipes-support/wireshark/files/0003-bison-Remove-line-directives.patch
- create mode 100644 meta-networking/recipes-support/wireshark/files/0004-lemon-Remove-line-directives.patch
+ .../recipes-security/softhsm/softhsm_2.6.1.bb | 30 +++++++++++++++++++
+ .../recipes-security/softhsm/softhsm_git.bb   | 18 -----------
+ 2 files changed, 30 insertions(+), 18 deletions(-)
+ create mode 100644 meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb
+ delete mode 100644 meta-oe/recipes-security/softhsm/softhsm_git.bb
 
-diff --git a/meta-networking/recipes-support/wireshark/files/0001-wireshark-src-improve-reproducibility.patch b/meta-networking/recipes-support/wireshark/files/0001-wireshark-src-improve-reproducibility.patch
+diff --git a/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb b/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb
 new file mode 100644
-index 000000000..0b83ca4ae
+index 000000000..aa91ab37f
 --- /dev/null
-+++ b/meta-networking/recipes-support/wireshark/files/0001-wireshark-src-improve-reproducibility.patch
-@@ -0,0 +1,44 @@
-+From 0a9ab056ce7582033a21d6bc541ece520bf2b0b6 Mon Sep 17 00:00:00 2001
-+From: Oleksiy Obitotskyy <oobitots@cisco.com>
-+Date: Thu, 26 Nov 2020 05:38:31 -0800
-+Subject: [PATCH] wireshark-src: improve reproducibility
++++ b/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb
+@@ -0,0 +1,30 @@
++SUMMARY = "PKCS#11 HSM/Token Emulator"
++HOMEPAGE = "https://www.opendnssec.org/softhsm/"
++LICENSE = "BSD-2-Clause & ISC"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=ef3f77a3507c3d91e75b9f2bdaee4210"
 +
-+Cut absolute path for filename in generated code
-+comments.
++DEPENDS = "sqlite3"
 +
-+Upstream-Status: Pending
-+Signed-off-by: Oleksiy Obitotskyy <oobitots@cisco.com>
-+---
-+ tools/make-plugin-reg.py | 2 +-
-+ tools/ncp2222.py         | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
++SRC_URI = "https://dist.opendnssec.org/source/softhsm-2.6.1.tar.gz"
++SRC_URI[sha256sum] = "61249473054bcd1811519ef9a989a880a7bdcc36d317c9c25457fc614df475f2"
 +
-+diff --git a/tools/make-plugin-reg.py b/tools/make-plugin-reg.py
-+index 66b4656..c52b3fc 100755
-+--- a/tools/make-plugin-reg.py
-++++ b/tools/make-plugin-reg.py
-+@@ -28,7 +28,7 @@ preamble = """\
-+  *
-+  * Generated automatically from %s.
-+  */
-+-""" % (sys.argv[0])
-++""" % (os.path.basename(sys.argv[0]))
-+ 
-+ # Create the proper list of filenames
-+ filenames = []
-+diff --git a/tools/ncp2222.py b/tools/ncp2222.py
-+index 1dea4ec..dc376e3 100755
-+--- a/tools/ncp2222.py
-++++ b/tools/ncp2222.py
-+@@ -5858,7 +5858,7 @@ def produce_code():
-+ 
-+     print("/*")
-+     print(" * Do not modify this file. Changes will be overwritten.")
-+-    print(" * Generated automatically from %s" % (sys.argv[0]))
-++    print(" * Generated automatically from %s" % (os.path.basename(sys.argv[0])))
-+     print(" */\n")
-+ 
-+     print("""
-+-- 
-+2.26.2.Cisco
++inherit autotools pkgconfig siteinfo
 +
-diff --git a/meta-networking/recipes-support/wireshark/files/0002-flex-Remove-line-directives.patch b/meta-networking/recipes-support/wireshark/files/0002-flex-Remove-line-directives.patch
-new file mode 100644
-index 000000000..069b5793d
---- /dev/null
-+++ b/meta-networking/recipes-support/wireshark/files/0002-flex-Remove-line-directives.patch
-@@ -0,0 +1,46 @@
-+From 3e571e24c730f747d18ed02ba7451e9e00480fc7 Mon Sep 17 00:00:00 2001
-+From: Oleksiy Obitotskyy <oobitots@cisco.com>
-+Date: Thu, 26 Nov 2020 12:00:43 -0800
-+Subject: [PATCH] flex: Remove #line directives
++EXTRA_OECONF += " --with-sqlite3=${STAGING_DIR_HOST}/usr"
++EXTRA_OECONF += "${@oe.utils.conditional('SITEINFO_BITS', '64', ' --enable-64bit', '', d)}"
 +
-+Append --noline option to flex to not
-+generate #line directives with absolute file patch.
++PACKAGECONFIG ?= "ecc eddsa pk11 openssl"
 +
-+Upstream-Status: Pending
-+Signed-off-by: Oleksiy Obitotskyy <oobitots@cisco.com>
-+---
-+ cmake/modules/FindLEX.cmake | 18 +++++++++++++-----
-+ 1 file changed, 13 insertions(+), 5 deletions(-)
++PACKAGECONFIG[npm] = ",--disable-non-paged-memory"
++PACKAGECONFIG[ecc] = "--enable-ecc,--disable-ecc"
++PACKAGECONFIG[gost] = "--enable-gost,--disable-gost"
++PACKAGECONFIG[eddsa] = "--enable-eddsa, --disable-eddsa"
++PACKAGECONFIG[fips] = "--enable-fips, --disable-fips"
++PACKAGECONFIG[notvisable] = "--disable-visibility"
++PACKAGECONFIG[openssl] = "--with-openssl=${STAGING_DIR_HOST}/usr --with-crypto-backend=openssl, --without-openssl, openssl, openssl"
++PACKAGECONFIG[botan] = "--with-botan=${STAGING_DIR_HOST}/usr --with-crypto-backend=botan, --without-botan, botan"
++PACKAGECONFIG[migrate] = "--with-migrate"
++PACKAGECONFIG[pk11] = "--enable-p11-kit --with-p11-kit==${STAGING_DIR_HOST}/usr, --without-p11-kit, p11-kit, p11-kit"
 +
-+diff --git a/cmake/modules/FindLEX.cmake b/cmake/modules/FindLEX.cmake
-+index 0008bc4..ec68f84 100644
-+--- a/cmake/modules/FindLEX.cmake
-++++ b/cmake/modules/FindLEX.cmake
-+@@ -32,11 +32,19 @@ MACRO(ADD_LEX_FILES _source _generated)
-+       SET(_outc ${CMAKE_CURRENT_BINARY_DIR}/${_basename}.c)
-+       SET(_outh ${CMAKE_CURRENT_BINARY_DIR}/${_basename}_lex.h)
-+ 
-+-      ADD_CUSTOM_COMMAND(
-+-        OUTPUT ${_outc} ${_outh}
-+-        COMMAND ${LEX_EXECUTABLE} -o${_outc} --header-file=${_outh} ${_in}
-+-        DEPENDS ${_in}
-+-      )
-++      IF (DEFINED ENV{SOURCE_DATE_EPOCH})
-++        ADD_CUSTOM_COMMAND(
-++          OUTPUT ${_outc} ${_outh}
-++          COMMAND ${LEX_EXECUTABLE} --noline -o${_outc} --header-file=${_outh} ${_in}
-++          DEPENDS ${_in}
-++        )
-++      ELSE ()
-++        ADD_CUSTOM_COMMAND(
-++          OUTPUT ${_outc} ${_outh}
-++          COMMAND ${LEX_EXECUTABLE} -o${_outc} --header-file=${_outh} ${_in}
-++          DEPENDS ${_in}
-++        )
-++      ENDIF ()
-+       LIST(APPEND ${_source} ${_in})
-+       LIST(APPEND ${_generated} ${_outc})
-+       INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
-+-- 
-+2.26.2.Cisco
-+
-diff --git a/meta-networking/recipes-support/wireshark/files/0003-bison-Remove-line-directives.patch b/meta-networking/recipes-support/wireshark/files/0003-bison-Remove-line-directives.patch
-new file mode 100644
-index 000000000..824761a3d
---- /dev/null
-+++ b/meta-networking/recipes-support/wireshark/files/0003-bison-Remove-line-directives.patch
-@@ -0,0 +1,59 @@
-+From 42abf1d299fed8e00a189f6f9c55fb344e5bb775 Mon Sep 17 00:00:00 2001
-+From: Oleksiy Obitotskyy <oobitots@cisco.com>
-+Date: Wed, 27 Jan 2021 04:01:34 -0800
-+Subject: [PATCH] bison: Remove #line directives
-+
-+Append --no-lines option to bison to not
-+generate #line directives with absolute file path.
-+
-+Upstream-Status: Pending
-+Signed-off-by: Oleksiy Obitotskyy <oobitots@cisco.com>
-+---
-+ cmake/modules/FindYACC.cmake | 31 ++++++++++++++++++++++---------
-+ 1 file changed, 22 insertions(+), 9 deletions(-)
-+
-+diff --git a/cmake/modules/FindYACC.cmake b/cmake/modules/FindYACC.cmake
-+index c96f87b..54a73cb 100644
-+--- a/cmake/modules/FindYACC.cmake
-++++ b/cmake/modules/FindYACC.cmake
-+@@ -29,15 +29,28 @@ MACRO(ADD_YACC_FILES _source _generated)
-+ 
-+       SET(_out ${CMAKE_CURRENT_BINARY_DIR}/${_basename}.c)
-+ 
-+-      ADD_CUSTOM_COMMAND(
-+-         OUTPUT ${_out}
-+-         COMMAND ${YACC_EXECUTABLE}
-+-           -d
-+-           -p ${_basename}
-+-           -o${_out}
-+-           ${_in}
-+-         DEPENDS ${_in}
-+-      )
-++      IF (DEFINED ENV{SOURCE_DATE_EPOCH})
-++         ADD_CUSTOM_COMMAND(
-++            OUTPUT ${_out}
-++            COMMAND ${YACC_EXECUTABLE}
-++              --no-lines
-++              -d
-++              -p ${_basename}
-++              -o${_out}
-++              ${_in}
-++            DEPENDS ${_in}
-++         )
-++      ELSE ()
-++         ADD_CUSTOM_COMMAND(
-++            OUTPUT ${_out}
-++            COMMAND ${YACC_EXECUTABLE}
-++              -d
-++              -p ${_basename}
-++              -o${_out}
-++              ${_in}
-++            DEPENDS ${_in}
-++         )
-++      ENDIF ()
-+       LIST(APPEND ${_source} ${_in})
-+       LIST(APPEND ${_generated} ${_out})
-+    ENDFOREACH (_current_FILE)
-+-- 
-+2.26.2.Cisco
-+
-diff --git a/meta-networking/recipes-support/wireshark/files/0004-lemon-Remove-line-directives.patch b/meta-networking/recipes-support/wireshark/files/0004-lemon-Remove-line-directives.patch
-new file mode 100644
-index 000000000..c1a528f90
---- /dev/null
-+++ b/meta-networking/recipes-support/wireshark/files/0004-lemon-Remove-line-directives.patch
-@@ -0,0 +1,77 @@
-+From 17f05a8d02c589e4867906f70381e63e46a67870 Mon Sep 17 00:00:00 2001
-+From: Oleksiy Obitotskyy <oobitots@cisco.com>
-+Date: Wed, 27 Jan 2021 06:47:13 -0800
-+Subject: [PATCH] lemon: Remove #line directives
-+
-+In case of reproducible build remove #line
-+directives with extra option '-l'.
-+
-+Upstream-Status: Pending
-+Signed-off-by: Oleksiy Obitotskyy <oobitots@cisco.com>
-+---
-+ cmake/modules/UseLemon.cmake | 49 +++++++++++++++++++++++++-----------
-+ 1 file changed, 34 insertions(+), 15 deletions(-)
-+
-+diff --git a/cmake/modules/UseLemon.cmake b/cmake/modules/UseLemon.cmake
-+index 849ffc1..ca38ab7 100644
-+--- a/cmake/modules/UseLemon.cmake
-++++ b/cmake/modules/UseLemon.cmake
-+@@ -7,21 +7,40 @@ MACRO(ADD_LEMON_FILES _source _generated)
-+ 
-+       SET(_out ${CMAKE_CURRENT_BINARY_DIR}/${_basename})
-+ 
-+-      ADD_CUSTOM_COMMAND(
-+-         OUTPUT
-+-          ${_out}.c
-+-          # These files are generated as side-effect
-+-          ${_out}.h
-+-          ${_out}.out
-+-         COMMAND lemon
-+-           -T${_lemonpardir}/lempar.c
-+-           -d.
-+-           ${_in}
-+-         DEPENDS
-+-           ${_in}
-+-           lemon
-+-           ${_lemonpardir}/lempar.c
-+-      )
-++      IF (DEFINED ENV{SOURCE_DATE_EPOCH})
-++        ADD_CUSTOM_COMMAND(
-++          OUTPUT
-++            ${_out}.c
-++            # These files are generated as side-effect
-++            ${_out}.h
-++            ${_out}.out
-++          COMMAND lemon
-++            -l
-++            -T${_lemonpardir}/lempar.c
-++            -d.
-++            ${_in}
-++          DEPENDS
-++            ${_in}
-++            lemon
-++            ${_lemonpardir}/lempar.c
-++        )
-++      ELSE ()
-++        ADD_CUSTOM_COMMAND(
-++          OUTPUT
-++            ${_out}.c
-++            # These files are generated as side-effect
-++            ${_out}.h
-++            ${_out}.out
-++          COMMAND lemon
-++            -T${_lemonpardir}/lempar.c
-++            -d.
-++            ${_in}
-++          DEPENDS
-++            ${_in}
-++            lemon
-++            ${_lemonpardir}/lempar.c
-++        )
-++      ENDIF ()
-+ 
-+       LIST(APPEND ${_source} ${_in})
-+       LIST(APPEND ${_generated} ${_out}.c)
-+-- 
-+2.26.2.Cisco
-+
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.4.3.bb b/meta-networking/recipes-support/wireshark/wireshark_3.4.3.bb
-index 1c470d8bc..e730b18a0 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_3.4.3.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_3.4.3.bb
-@@ -10,6 +10,13 @@ DEPENDS_append_class-target = " wireshark-native chrpath-replacement-native "
- 
- SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz"
- 
-+SRC_URI += " \
-+    file://0001-wireshark-src-improve-reproducibility.patch \
-+    file://0002-flex-Remove-line-directives.patch \
-+    file://0003-bison-Remove-line-directives.patch \
-+    file://0004-lemon-Remove-line-directives.patch \
-+"
-+
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
- 
- SRC_URI[sha256sum] = "f467cc77f0fc73fce0b854cdbc292f132d4879fca69d417eccad5f967fbf262b"
++RDEPENDS_${PN} = "sqlite3"
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-security/softhsm/softhsm_git.bb b/meta-oe/recipes-security/softhsm/softhsm_git.bb
+deleted file mode 100644
+index 3236cb9a6..000000000
+--- a/meta-oe/recipes-security/softhsm/softhsm_git.bb
++++ /dev/null
+@@ -1,18 +0,0 @@
+-SUMMARY = "PKCS#11 HSM/Token Emulator"
+-HOMEPAGE = "https://www.opendnssec.org/softhsm/"
+-LICENSE = "BSD-2-Clause & ISC"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=ef3f77a3507c3d91e75b9f2bdaee4210"
+-DEPENDS = "openssl"
+-PV = "2.5.0"
+-
+-SRC_URI = "git://github.com/opendnssec/SoftHSMv2.git;branch=master"
+-SRCREV = "369df0383d101bc8952692c2a368ac8bc887d1b4"
+-
+-S = "${WORKDIR}/git"
+-
+-inherit autotools pkgconfig
+-
+-# EdDSA requires OpenSSL >= 1.1.1
+-EXTRA_OECONF = "--enable-eddsa --disable-gost"
+-
+-BBCLASSEXTEND = "native"
 -- 
-2.26.2.Cisco
+2.25.1
 
