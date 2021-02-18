@@ -1,208 +1,232 @@
-Received: from IND01-MA1-obe.outbound.protection.outlook.com (IND01-MA1-obe.outbound.protection.outlook.com [40.107.138.85])
- by mx.groups.io with SMTP id smtpd.web12.9411.1613489171501571837
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.87])
+ by mx.groups.io with SMTP id smtpd.web12.7408.1613657806451138969
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Feb 2021 07:26:12 -0800
+ Thu, 18 Feb 2021 06:16:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kpit.com header.s=selector1 header.b=cd5gVNVY;
- spf=pass (domain: kpit.com, ip: 40.107.138.85, mailfrom: rahul.taya@kpit.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=JOpZMe50;
+ spf=pass (domain: windriver.com, ip: 40.107.244.87, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=RveqsP1SkPtC7zHFuXif6aldDiupB2eCq/6PxyZsaDZDZAM+ISLh1AMYYkvfbOsI/Pf9IgsxLqYbS9cnxUkB/Z7cUvmwOQA/w7x2uhBO/5VFdYVX7/y0ZsEUJJNjve9vF6tPiEUa3osZ0gBpJxLhSAxVRYlqAD8xtgrWk8I2l7BOYZxxIDijwv0W/Cw/MXQ88PSAUL+B0mF2PL5I/TdZ2nXSzPnAKUa7YX2/RdluGMDcti7lAW9RHAKz1e5EWDIJgm5agnQsLvJYgTu6MyXLG3o9u31CLVZ8ia0z6fRfNQwaxjp9vqg6/F5WznW7L+awa1sSpaug144vzRiFnkvoFA==
+ b=AjmblQm5kUULNLwxTEhZzYIVGcesYZWbT1smILYlpdTnXHpY+oZ/blEIrcZpVCI60T0SdGkelWb3DHydkw/ceUiQZwnwmbzxWDlArzks/uzdPMo6LvU5qrEH0YiRrrULUJKEk1A/XNBIsTUTDtbCDxiGxPTrSHESjpwFJc+j0Z4HFxVCX6CbcW6hu8NVF0DogqihTcbEbZ7OyXaeTUBfEAvGrSMRGhnDaCuewPwBU6cx5p7NO7Ots1Cp7060ezVInskJrzonh0wAQ3B0kCgyKi8iQCmR1cGx1uEHmquY0srINGo9SUXWdHtjZmCv8th48No/iS963w0V+VGV00EeUA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=t0jjGmpSNsRuRKpV18Ysh8Kv+SNTi3MKyLEdLmO5/Es=;
- b=O35eIRe7ql1N6soYTTf2yTz7U8MRfstB2KZlFfOOJzmwBYvaVhi0nqjh42Nx6gwGeJhaLxqGa0IgM2ZiVKG3RtzXuDekt4fnUjnLDVEtCJ1W8HuYXV41MvUu6708w2hTnQLFjaFphJ4q9DcOPaMAeD2i7DwIfqQaOBvL1rRn+LrEjh8Odm+lQcgTRXsVaUEU8SF0n+89L+Lp25k2nBFbpKdZ7g6Sl00A+XRu4MnqQP/Rp4t9S5KHoDfVWyGjWTkoG1WPwc+gYcjtVd5MIlN8fz+Tht428eCpkIjhaRvtJRntFMDbZB4MfRoXQ54I3ESaJohLvw/fdDb/IoElu+1ooA==
+ bh=d6zlTcv2+Br9kwATF9MXDEeyZgQTFNQQrIFSuCy5B9o=;
+ b=NBhI3hgVUkMtZwBNsj/SQ9tzbktEh0RtSgbupo3HXdMMAuwQ1VWJ6oMh+0oK0aGWnt4dfzJfJMrYsZ1H5mLOccxjivImwbRKR/gPvYMjXs1Xb6024/DSyhblsxVLa/Nc+OIIExvXacL3aanW9bgYif63XPrAzUAR0oIxQK6SWX7QgDdF1HObqXm/fylPOqiMjervk4yPQAzHSgz5VBe0yHCbBPgzLYbz1TAhxweSF6VlKEELC63p8TvAmEHGYqsXFaNNNWDbBOCIZ0UbL/oNEyPZeS85R36KaUtYuvRY/MfFWYHRRK3Guwe3SCY3fwd7pj6aDV6rbLjZZ8cPn8w5BQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=kpit.com; dmarc=pass action=none header.from=kpit.com;
- dkim=pass header.d=kpit.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1;
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=t0jjGmpSNsRuRKpV18Ysh8Kv+SNTi3MKyLEdLmO5/Es=;
- b=cd5gVNVYWADqtt3dur/i2x0cqYu6GXFLBrurG9RAbQ9BAkqL3KAMjZWf1N+bC6qms8aIBXuzlY3S/LcOGpBO43kMdWlcyGapQ+kE2xkHKfqohD/ddM024m2ptePMDxyRgNi7ARyMohyXDbneaiEl9srLNBlmQpHnH/VAxUWXnk4=
+ bh=d6zlTcv2+Br9kwATF9MXDEeyZgQTFNQQrIFSuCy5B9o=;
+ b=JOpZMe50PosSOhkpymyBzz7a3eRapcpWUbG70y8M73nBEyH1jiqz1pzmi9dYG+FhZtYmIqq/+XCfUQNYbKGHVl1K41mOINH/T+6crRlcIBi2KpDDrF8xUgat+yMGkRwx1IIYVsziOBh5J9oL9ay7y6kvgHwq0S5kVo2J08pWhAo=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=kpit.com;
-Received: from BMXPR01MB3431.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:58::18)
- by BMXPR01MB4085.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:64::17) with
+ header.from=windriver.com;
+Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
+ by BY5PR11MB4353.namprd11.prod.outlook.com (2603:10b6:a03:1b9::17) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3846.36; Tue, 16 Feb
- 2021 15:26:06 +0000
-Received: from BMXPR01MB3431.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::5c87:1000:2e85:9ab7]) by BMXPR01MB3431.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::5c87:1000:2e85:9ab7%7]) with mapi id 15.20.3846.039; Tue, 16 Feb 2021
- 15:26:06 +0000
-From: "Rahul Taya" <Rahul.Taya@kpit.com>
-To: openembedded-devel@lists.openembedded.org,
-	raj.khem@gmail.com
-Cc: nisha.parrakat@kpit.com,
-	harpritkaur.bhandari@kpit.com,
-	Rahul Taya <Rahul.Taya@kpit.com>
-Subject: [meta-python2][dunfell][PATCH] python: Add fix for CVE-2019-20907
-Date: Tue, 16 Feb 2021 20:55:50 +0530
-Message-Id: <20210216152550.31025-1-Rahul.Taya@kpit.com>
-X-Mailer: git-send-email 2.17.1
-X-Originating-IP: [182.70.89.188]
-X-ClientProxiedBy: BM1PR0101CA0054.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:b00:19::16) To BMXPR01MB3431.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:b00:58::18)
-Return-Path: Rahul.Taya@kpit.com
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3868.27; Thu, 18 Feb
+ 2021 14:16:44 +0000
+Received: from BY5PR11MB3909.namprd11.prod.outlook.com
+ ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
+ ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3846.042; Thu, 18 Feb 2021
+ 14:16:44 +0000
+Subject: Re: [oe] [PATCH][meta-python v2] python3-intelhex: add recipe for the intelhex package
+To: Ross Burton <ross@burtonini.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20210217113053.1690364-1-ross.burton@arm.com>
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+Message-ID: <087ee7a9-98c6-5abf-b987-d7a80c36dcaa@windriver.com>
+Date: Thu, 18 Feb 2021 09:16:41 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.0
+In-Reply-To: <20210217113053.1690364-1-ross.burton@arm.com>
+X-Originating-IP: [174.115.236.231]
+X-ClientProxiedBy: SJ0PR03CA0215.namprd03.prod.outlook.com
+ (2603:10b6:a03:39f::10) To BY5PR11MB3909.namprd11.prod.outlook.com
+ (2603:10b6:a03:191::13)
+Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from localhost.localdomain (182.70.89.188) by BM1PR0101CA0054.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:19::16) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3846.26 via Frontend Transport; Tue, 16 Feb 2021 15:26:05 +0000
+Received: from [192.168.0.55] (174.115.236.231) by SJ0PR03CA0215.namprd03.prod.outlook.com (2603:10b6:a03:39f::10) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3868.27 via Frontend Transport; Thu, 18 Feb 2021 14:16:43 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: 99dc6538-2b4c-4d56-549b-08d8d28f2d7e
-X-MS-TrafficTypeDiagnostic: BMXPR01MB4085:
-X-MS-Exchange-Transport-Forked: True
+X-MS-Office365-Filtering-Correlation-Id: 0a364803-1d46-4df3-c9d0-08d8d417d1a2
+X-MS-TrafficTypeDiagnostic: BY5PR11MB4353:
 X-Microsoft-Antispam-PRVS: 
-	<BMXPR01MB408558E2A35ADECA9248CE95F2879@BMXPR01MB4085.INDPRD01.PROD.OUTLOOK.COM>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1850;
+	<BY5PR11MB4353C388963AC2DA155D6CF69F859@BY5PR11MB4353.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:854;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	4PaOVhoholEq8pTEOcmu3k4Gepht6C1zTgcOni05iB8CDV2Dv+nGi1i+ICRTJV6PT/SirGJ/xebUK4G7bnU9nfrlQsj6JTdzZi1aroJh3R5r2pBbP4XmN9lRCjKGuY0HgnX8RU2adFyOPAV0uurpoANQ2Ou5pLSgbzOj8GQxbHMXY0boUAtjQgWc42TrkdmQ5ue6bzbhYt4pe9CP+Cn/UbPHWAVUIcLwlCX5grtlKEaIdlXCSGi71hCPVGxEHHR5f/94Q+ono2H7RKtf5UWFn2hwwlUnzB6/1W82ve+AB+E7M2eGX5g0CfVLbJXhrHnmJPHMx0BdMtbIcnL5B3rtBkHt3l5laug9NVhu6C/5VlLsAEREP2Bc62uXrTT7Y23tATlMnC83uNZtZfA+yvgPHkX7DrMNdCITRMcMqGHS5OEB4VEFnfUzKQf4euCYvzq8qp67GN12MzYl6ogciaqldmHaXT0CEoPiYAKyDelWthTQp4JcgAaJ3SPerXcFWUWS6TDIT3AXBy2Xsd17XFq2LTzKfWwNN1LeZq0Hw7dl6vE02IggbEp9BpjnEmIq3dYKlAOhH/O54RAWTtajCX4nmMTifBSTC/J0CXU2hnTOdP483dqhz/lsRHKX6prLRNmUpSBIOL3swSl3ODngoMJzOBUzDo7bRPwc9vSyF0QHDPMYGFBJ20S+XmLgbV8tFSxG
+	c3XuwKpx6Up5hkPKbl4L8gZBAUA1k71dGJk6f0PlJrkBE+XGahZb24as9//oJuvGdp838htLOE+fwHbjzLUh7ryZBYfpjBP3Myn09BIRjoz6Nc7vxBk9hhQTw6g9MU4rpvPyJNIavWfSlxTbImIlWa73AHQ52JVakfQVcRrLl1v0zk5yAgsuh8k8JGWag0HegtufEtWHkKfZgQ230BbfIgPGbeVhzbgEgdXRAKvWW42AY0BySiw38naLu/ixTWStiK89nPclHtkddo9DYKf+amdu1liSk9jmwrC/zJdkQZ1f7vlYT1aH4pOWzuZDF+pLBUoNnvp6oOvwe4JuBW6TALe4hZ7R0Chm+j9tCCqje5DMb2TI2PgjTxZYzn0/fG8n5PaC5sJC84Iw5iljRUNb7y7qovoX66sEFETh8spgNs4WOmwE1FbKgxCNRi30yp5fMa6a1UgIAhgBS8GI1mYsZK0budo/0hIJE8FCPgQJHKPTt9IznM10NA/RH826AXWctaQHQMlNtj7GxnuMz3fgh2Q61nLxXx58XY3T5Z7cd7dUahH6fq6IeyDehFr1V5qdGy7jU7xqd+yOgVxRlTAXYWHNkd78DGMg9R0p8tDdnMb+AmgFalg5vDSfmf9/+d0jsIh4vf9IO1qxMb38vYAKtMdXNxpk/O+iaHoezXv17iHfQSPrABsX/N8wwTZpkOJN
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BMXPR01MB3431.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(39860400002)(396003)(136003)(376002)(346002)(366004)(6506007)(2616005)(966005)(16526019)(66946007)(478600001)(186003)(956004)(2906002)(6486002)(52116002)(66574015)(6512007)(8676002)(36756003)(83380400001)(66556008)(26005)(66476007)(8936002)(69590400012)(107886003)(1076003)(86362001)(4326008)(6666004)(316002)(5660300002)(120606002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(366004)(39850400004)(376002)(136003)(346002)(5660300002)(66476007)(956004)(2616005)(316002)(166002)(83380400001)(16526019)(186003)(66946007)(66556008)(44832011)(6486002)(86362001)(966005)(26005)(478600001)(8936002)(52116002)(31696002)(33964004)(36756003)(2906002)(31686004)(16576012)(53546011)(8676002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?RXAOC4SsyaMlk6xH5w7VDGNZD6Ndmf363Sk55eyINRGbrKc+OFAE1UktkwFn?=
- =?us-ascii?Q?1KQNOhjU1uAtXPkoZyh8iNbGIfzpVd/PsaI01Qa0mOSEqx3E6tE/yCjkQDPk?=
- =?us-ascii?Q?MR5klzv85l3KlQubjgNbfZN9/2nJ9AbNmXnBMGTFxZxEBtvywxJ0y677Vrrq?=
- =?us-ascii?Q?eX1Ma1kwtMJxxx9Dkh1ZpePL/AGt1T6+7KfBdH5563q4DcM+j1Pc+7I7646k?=
- =?us-ascii?Q?W9lGXLTSHenfWrINwSqgEL5hcSYF1yLV/knhuMnr2iDKSx1jw/hZmbRwfuZH?=
- =?us-ascii?Q?nC2cKQsTP9XZaxJzS/VqZ8At5H2cPDMQGFE9/FOgE1j36s7xVbK/oQ8yzDur?=
- =?us-ascii?Q?3GOzVsztSsyP+DGhjARhK3r+hFBS1EUoNC4xH/2Fo6yK6Zh3oGy8cq632cYI?=
- =?us-ascii?Q?FSo+R/Y2KiAvStRYYu5B3mzkRNf9LdGnPVYC3ZIqWHK5jtcLN9PNfpm7IzSd?=
- =?us-ascii?Q?3D03+0ikl8+TdM/da27ZuUxx9le4moZ2jMjQ1Kf8GdiKmgZpETKgddGZNYZN?=
- =?us-ascii?Q?XJ1kv3KcUwFmb1bWLfVjaDqXsq2MIPtvsVtIt3dmUmHEGebug1rzGBYZqgB3?=
- =?us-ascii?Q?7YCskz0cCxDmrLOcPhvumfDhwZ2mczcNxFJsBmiDkqLHkDXzRvkVB+fQLt7Z?=
- =?us-ascii?Q?QLQZDjgity/3K7TYdEyMbZwSfMVB2k8z4cA8D8ONzy8GKA+/f3mz63Es4TY9?=
- =?us-ascii?Q?6+8EtLnCVcJ+RKqa/jqEhcQF9dxZXx6rOCYx+UGwnoDNdNiZUztSIp2qJ1xP?=
- =?us-ascii?Q?nKspc/HukBRIyzo3s7VukRQnJTq1upic/kRDKqBlsyIGV8MaI6/opVGYGNcl?=
- =?us-ascii?Q?MM2RI+tcvyCK/+823TeQm+LX/vErkTmVSyDeqJOdrortR3aYkzuKRnExWaVP?=
- =?us-ascii?Q?z/GMCfgk4ILoaIFOfz15yfny6vkPQxGRkZZsrY+ft6muUbNWhCS2eEp6dEGY?=
- =?us-ascii?Q?9Lm1cVHg3uVXzUaNTiaKUTNi4oOreKJ5PtCbPA1M5dhE1xl9bYbdnZB+mS1M?=
- =?us-ascii?Q?JVq3t+jLJLiu6Lnr+Uo4QX039fRINcux748Y/ze8M+1FeL1S3FX/GKr1Cd0P?=
- =?us-ascii?Q?U56bJfw5M1hEEiOhiOU7XTlwgel/gNYihUMBa/KL2uFL1qk6QgZ7sTu7K8Fp?=
- =?us-ascii?Q?3+dNjJoUMQ81A3CnCMqR+fOJN7DD6f0pXr2DaxNSYVCKRg24wtfMURyCJyBC?=
- =?us-ascii?Q?6dtrdfrvdR/ifk2DC1eYd9cw4tY1rV7xDhGWRkxTZFx5I4cd2x5n41XhwoSE?=
- =?us-ascii?Q?/30W7jz/10H6XFQkwAf9wJpXeUi7vxjE8V52ISD1s8BoMbQdgTFrx4S7ghB7?=
- =?us-ascii?Q?0L1xsVyUbVmTVrl5GjH1GePG?=
-X-OriginatorOrg: kpit.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 99dc6538-2b4c-4d56-549b-08d8d28f2d7e
-X-MS-Exchange-CrossTenant-AuthSource: BMXPR01MB3431.INDPRD01.PROD.OUTLOOK.COM
+	=?utf-8?B?aTZnWU9oYWdvOW0rajNUTGpKd1B5NUJKMUthZlk0a2pXaXdYTXZVRmF4MGxv?=
+ =?utf-8?B?M0pOMzVkR3UxNTB4N3EyRW9XaUsxbzdDZkZWSWxheFlmd0RvSjRCNXhGbm5N?=
+ =?utf-8?B?U1cyeWdWeXcrOUxxRFNtOUpTRlFtL1IzaTJWWjUyQmlJUUw0WHRkTWtXdmxa?=
+ =?utf-8?B?VFNGVWs1K2JuVTg4Z1VLL29jekViTkwvUHRBMkRveUNGUjdOZWxMTU1ZU08z?=
+ =?utf-8?B?ZURxbCs3MXJ0MmNZSEIvcU1HSHVoeEx5cUZWN3l0bFdTRDJrT294by9yMlFP?=
+ =?utf-8?B?N0tFVjlpdDJhNTA1MFpxOU5WR3NvcWwyUGdXNDFEQjgwcTB5ZWRIcXFJSHRa?=
+ =?utf-8?B?alcwYTFyWVFqZnJVTnRrKzFpaGRMODlPMXpVaEsxUUlqRzJaV2MxNjlZQXF1?=
+ =?utf-8?B?UEpPVEcxd0wzNmcxVUpMRjBHM0lvYVZlRVErSzJOdkgwSEVrbXhKUS93ckl1?=
+ =?utf-8?B?NWRjSUxnNUg5ZnVKaE10UTdQM0k2c3p2UlNrZUN0VjMrZHF6Ui9xVjRzajh1?=
+ =?utf-8?B?aUUxTTBGdklTS0JkN0tLYVVBaTFKTHRGaHgxMFY5SGxkaWgyUlJMUEZIbmtq?=
+ =?utf-8?B?OVJsYUZLWFBDdXFMOHkwK0I2TjNRSGtJUHFLS0pjdk9NTEVEbVEyU1B2eEFy?=
+ =?utf-8?B?SVBkczMxbnhmQnIzeHgyN05XcTJxWXBER1F3bkx2Y1U1S3F6WFNqNFFiRHo2?=
+ =?utf-8?B?bWY5WVd6WUg2UEt3T215Wm0wUlNFaVlVTVhpckwyQmF1MVB0T0ptK2ZnUHFW?=
+ =?utf-8?B?cmNibStYeEZWUk02cytqY0tQdGdjUlRrMWJSaWFOOU5JUXFmNVIrUFJucEE3?=
+ =?utf-8?B?WTlaS3I5ZVFadmd6M0t6N3RFUENZUlUzTFZyZFdwWkFyRkk4VXpEdmh6Yyta?=
+ =?utf-8?B?N1IxczVtN0daUFkzdURDRDBQMWVhL3dIckIwRjNMN3p6YVJwUDEvWkVWSG1T?=
+ =?utf-8?B?QkR6aDlrK1VxektJbnY3ZkdNYXp0SC81aHFZSG1BQTl1WThDVmVVK1VUSVZr?=
+ =?utf-8?B?VVZvczRNY0lGNFNPLzFLcVgxMjR1WHViVmlzOGllN3hwMUpiYmp2UnlkUlh0?=
+ =?utf-8?B?QTZTOXIrSk5mdXcyTUs3K1M3VmFUOFkrSXA3VW9HMnZhZmI5YlFqMkFnTjNu?=
+ =?utf-8?B?czljWHE4ZFJKTlpmVHkyZ3JJdkF6R2QzSmlXb0JueTl3dHFPOVZLTUdCdTNT?=
+ =?utf-8?B?cEExU2dUcDA4QndVdm40MTVvSElzWmM5WEZvL1l3aTk4bVowSUlNcnc3Q2dx?=
+ =?utf-8?B?YXJUcllRT21UNDRacXM3c2pnNXdULytqR0kzZnZyMTZyNHFlSnNOaTY4YjVK?=
+ =?utf-8?B?bjM2dG5veHNJakROd2ltQi9LeHVaN2JRcnhKZ0ZSQmRJNzNvZ1poV3VJZVVp?=
+ =?utf-8?B?RnlXYS8zNVZGbVlkdGFCUzk0UlZYUmg1WjI1UjdKMi9Kbnd3dkxTVWw0VFlI?=
+ =?utf-8?B?b3BXbUpBNWZPS2g0NWprajkxNlZUUVFaTERzekRQaDBxQi8rQjl6bG1EV00v?=
+ =?utf-8?B?U29za2w0cHNNVEcyMWJ1a0tudXhKaXp2OGdkY0RUNEJZeStjeEppYUNxclZY?=
+ =?utf-8?B?L2RMaHU4Qi93RVZaZDViM3VXRE43WlVoUlF2YUxVTnNVWXZ4NVhiU1pnZUJK?=
+ =?utf-8?B?RHk4M0kyWmNSK1NmNllEUzMwWWdKWmxlMkVyclpJdVNIZC92ZklMTDVnZGNs?=
+ =?utf-8?B?cTN6TkZLNlBSUnNEWExyUTdEeUNKbHRqVzk4Mk50NGtIZFNWQkR3OFFGTzB3?=
+ =?utf-8?Q?Rbe1K6kgmYFpLQdFDVQyl99VcOtjQbjeHIS4Z6h?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0a364803-1d46-4df3-c9d0-08d8d417d1a2
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Feb 2021 15:26:06.0983
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Feb 2021 14:16:44.1356
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3539451e-b46e-4a26-a242-ff61502855c7
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: WGgndkZFwETSR61jkcieGY6+zhfMNpSLFe8ldaUFhpARs/d7ACs/Y5RK82qQoXUu1KRszSoMzjcojI57+knOVA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BMXPR01MB4085
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-CrossTenant-UserPrincipalName: 4wl51Pg98wG5gw6PDIUdcBNFe5amrEYLh/YPkU5FjUWc9hr3nArvcPZ8tSObUzlbokSowqFf3vmpm66SOvD3kl1d7lpzS83sshT4xXgo0UY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4353
+Content-Type: multipart/alternative;
+ boundary="------------8B22D1A732603CBB708463DC"
+Content-Language: en-US
 
-For python and python-native added patch to fix
-CVE-2019-20907
+--------------8B22D1A732603CBB708463DC
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Rahul Taya <Rahul.Taya@kpit.com>
+
+On 2021-02-17 6:30 a.m., Ross Burton wrote:
+> [Please note: This e-mail is from an EXTERNAL e-mail address]
+>
+> Signed-off-by: Ross Burton <ross.burton@arm.com>
+Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> ---
+>   .../packagegroups/packagegroup-meta-python.bb          |  1 +
+>   .../recipes-devtools/python/python3-intelhex_2.3.0.bb  | 10 ++++++++++
+>   2 files changed, 11 insertions(+)
+>   create mode 100644 meta-python/recipes-devtools/python/python3-intelhex_2.3.0.bb
+>
+> diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> index e31b0b8b40..635dee1942 100644
+> --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> @@ -170,6 +170,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
+>       python3-imageio \
+>       python3-incremental \
+>       python3-inflection \
+> +    python3-intelhex \
+>       python3-intervals \
+>       python3-ipaddress \
+>       python3-ipy \
+> diff --git a/meta-python/recipes-devtools/python/python3-intelhex_2.3.0.bb b/meta-python/recipes-devtools/python/python3-intelhex_2.3.0.bb
+> new file mode 100644
+> index 0000000000..befcb34780
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-intelhex_2.3.0.bb
+> @@ -0,0 +1,10 @@
+> +SUMMARY = "Python library for Intel HEX files manipulations"
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4eba844696655c3eae07aca8e3a94772"
+> +
+> +SRC_URI[sha256sum] = "892b7361a719f4945237da8ccf754e9513db32f5628852785aea108dcd250093"
+> +
+> +inherit pypi setuptools3
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> +
+> --
+> 2.25.1
+>
+>
+> 
+>
+
+--------------8B22D1A732603CBB708463DC
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 2021-02-17 6:30 a.m., Ross Burton
+      wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:20210217113053.1690364-1-ross.burton@arm.com">
+      <pre class="moz-quote-pre" wrap="">[Please note: This e-mail is from an EXTERNAL e-mail address]
+
+Signed-off-by: Ross Burton <a class="moz-txt-link-rfc2396E" href="mailto:ross.burton@arm.com">&lt;ross.burton@arm.com&gt;</a></pre>
+    </blockquote>
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
+    <blockquote type="cite" cite="mid:20210217113053.1690364-1-ross.burton@arm.com">
+      <pre class="moz-quote-pre" wrap="">
 ---
- recipes-devtools/python/python.inc            |  1 +
- .../python/python/CVE-2019-20907.patch        | 53 +++++++++++++++++++
- 2 files changed, 54 insertions(+)
- create mode 100644 recipes-devtools/python/python/CVE-2019-20907.patch
+ .../packagegroups/packagegroup-meta-python.bb          |  1 +
+ .../recipes-devtools/python/python3-intelhex_2.3.0.bb  | 10 ++++++++++
+ 2 files changed, 11 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-intelhex_2.3.0.bb
 
-diff --git a/recipes-devtools/python/python.inc b/recipes-devtools/python/p=
-ython.inc
-index a4ba0c5..4bf30ee 100644
---- a/recipes-devtools/python/python.inc
-+++ b/recipes-devtools/python/python.inc
-@@ -8,6 +8,7 @@ INC_PR =3D "r1"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D203a6dbc802ee896020a47161e75964=
-2"
-
- SRC_URI =3D "http://www.python.org/ftp/python/${PV}/Python-${PV}.tar.xz \
-+           file://CVE-2019-20907.patch \
-            "
-
- SRC_URI[sha256sum] =3D "b62c0e7937551d0cc02b8fd5cb0f544f9405bafc9a54d3808e=
-d4594812edef43"
-diff --git a/recipes-devtools/python/python/CVE-2019-20907.patch b/recipes-=
-devtools/python/python/CVE-2019-20907.patch
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index e31b0b8b40..635dee1942 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -170,6 +170,7 @@ RDEPENDS_packagegroup-meta-python3 = &quot;\
+     python3-imageio \
+     python3-incremental \
+     python3-inflection \
++    python3-intelhex \
+     python3-intervals \
+     python3-ipaddress \
+     python3-ipy \
+diff --git a/meta-python/recipes-devtools/python/python3-intelhex_2.3.0.bb b/meta-python/recipes-devtools/python/python3-intelhex_2.3.0.bb
 new file mode 100644
-index 0000000..4c24c53
+index 0000000000..befcb34780
 --- /dev/null
-+++ b/recipes-devtools/python/python/CVE-2019-20907.patch
-@@ -0,0 +1,53 @@
-+From f5481db4bebf9d53b79f29f960f4188af8ccdfde Mon Sep 17 00:00:00 2001
-+From: Rishi <rishi_devan@mail.com>
-+Date: Wed, 15 Jul 2020 13:51:00 +0200
-+Subject: [PATCH] bpo-39017: Avoid infinite loop in the tarfile module
-+ (GH-21454)
++++ b/meta-python/recipes-devtools/python/python3-intelhex_2.3.0.bb
+@@ -0,0 +1,10 @@
++SUMMARY = &quot;Python library for Intel HEX files manipulations&quot;
++LICENSE = &quot;BSD-3-Clause&quot;
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=4eba844696655c3eae07aca8e3a94772">&quot;file://LICENSE.txt;md5=4eba844696655c3eae07aca8e3a94772&quot;</a>
 +
-+Avoid infinite loop when reading specially crafted TAR files using the tar=
-file module
-+(CVE-2019-20907).
-+---
-+ Lib/tarfile.py                                    |   2 ++
-+ Lib/test/test_tarfile.py                          |   7 +++++++
-+ 2 files changed, 9 insertions(+)
++SRC_URI[sha256sum] = &quot;892b7361a719f4945237da8ccf754e9513db32f5628852785aea108dcd250093&quot;
 +
-+Upstream-Status: Backport[https://github.com/xzy3/cpython/commit/f5481db4b=
-ebf9d53b79f29f960f4188af8ccdfde.patch]
-+CVE: CVE-2019-20907
-+Link: https://github.com/xzy3/cpython/commit/f5481db4bebf9d53b79f29f960f41=
-88af8ccdfde.patch
-+Comment: Second hunk refreshed and from the original patch skipped changes=
- for files
-+Lib/test/recursion.tar and Misc/NEWS.d/next/Library/2020-07-12-22-16-58.bp=
-o-39017.x3Cg-9.rst
-+as these files are not present in our source code.
++inherit pypi setuptools3
 +
-+diff --git a/Lib/tarfile.py b/Lib/tarfile.py
-+index e2b60532f693d..6769066cabd6f 100755
-+--- a/Lib/tarfile.py
-++++ b/Lib/tarfile.py
-+@@ -1249,6 +1249,8 @@ def _proc_pax(self, tarfile):
++BBCLASSEXTEND = &quot;native nativesdk&quot;
 +
-+             length, keyword =3D match.groups()
-+             length =3D int(length)
-++            if length =3D=3D 0:
-++                raise InvalidHeaderError("invalid header")
-+             value =3D buf[match.end(2) + 1:match.start(1) + length - 1]
-+
-+             # Normally, we could just use "utf-8" as the encoding and "st=
-rict"
-+
-+
-+diff --git a/Lib/test/test_tarfile.py b/Lib/test/test_tarfile.py
-+index 89bd738..c61d02b 100644
-+--- a/Lib/test/test_tarfile.py
-++++ b/Lib/test/test_tarfile.py
-+@@ -321,6 +321,13 @@ class CommonReadTest(ReadTest):
-+                 with self.assertRaisesRegexp(tarfile.ReadError, "unexpect=
-ed end of data"):
-+                     tar.extractfile(t).read()
-+
-++    def test_length_zero_header(self):
-++        # bpo-39017 (CVE-2019-20907): reading a zero-length header should=
- fail
-++        # with an exception
-++        with self.assertRaisesRegex(tarfile.ReadError, "file could not be=
- opened successfully"):
-++            with tarfile.open(support.findfile('recursion.tar')) as tar:
-++                pass
-++
-+
-+ class MiscReadTest(CommonReadTest):
-+     taropen =3D tarfile.TarFile.taropen
 --
-2.17.1
+2.25.1
 
-This message contains information that may be privileged or confidential an=
-d is the property of the KPIT Technologies Ltd. It is intended only for the=
- person to whom it is addressed. If you are not the intended recipient, you=
- are not authorized to read, print, retain copy, disseminate, distribute, o=
-r use this message or any part thereof. If you receive this message in erro=
-r, please notify the sender immediately and delete all copies of this messa=
-ge. KPIT Technologies Ltd. does not accept any liability for virus infected=
- mails.
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+
+
+</pre>
+    </blockquote>
+  </body>
+</html>
+
+--------------8B22D1A732603CBB708463DC--
