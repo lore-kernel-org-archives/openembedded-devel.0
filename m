@@ -1,79 +1,76 @@
-Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com [209.85.208.193])
- by mx.groups.io with SMTP id smtpd.web10.19.1613761392157292708
+Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com [209.85.208.196])
+ by mx.groups.io with SMTP id smtpd.web08.353.1613771621758626074
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Feb 2021 11:03:12 -0800
+ Fri, 19 Feb 2021 13:53:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=jHmIw3cL;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.193, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f193.google.com with SMTP id a17so25792351ljq.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Feb 2021 11:03:11 -0800 (PST)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=biB+ZZib;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.196, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f196.google.com with SMTP id r23so29220608ljh.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Feb 2021 13:53:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=yk4Yhw1oVpM6RhEn706uvAqz70WtTU72nxjgF05CMLo=;
-        b=jHmIw3cLrAGzu7wBi1/MDs++M0iEuQEr5/hhlP9U3TeDIU5gz2DjIFcrbPYh0jJ4vR
-         8ZeAN0rKvEtlUaV8pX0RgC/LGhkQEFTg2nrQAClUDaX+UqEVS8Pi+eJGbvKst/waPOLQ
-         Y6Feyv6F6NOlNf1zVGsPb17m5GJJ4Tk2brhijZV0FbWp5OZHLn3q0k8sbhCvtbDRnMpQ
-         UTCCRHzd+2vLreWYnnU+whiBrQtOLKJxudUlAsYa0xukVujpfZWi3335JYpXghY7eg5L
-         M0UTECFdAsC5eqzhFkxqWMaObikdLelflRDhtev+olMIzXfGlQE/FHSGOK2XRvEthBt8
-         nDjw==
+        bh=ayCofgM8OJjcFjRFYNTDDOAj0jToqpXxK+vjLs3ZMBQ=;
+        b=biB+ZZibXtxPalFH0UFu1siwa/S6Sfd0G+/JaiVEBUcwt/8Bu44+ImrWJJE0GPWkZt
+         mQCxtkaXJgyvAyraTlkfstVgVFjD3oDJS9rPw50tQYh9af7mb2/tWzASoNxhmjhXzXan
+         oBx4wgmSO4WtI7GsX9u2MYD6c/ZC33cEfhOixL7Sx22ngY2XNLLCQV5VNkWYCWW3CjWd
+         FEZEFs/Gy7tzbJ66zekKnvZcA5nlkC+P1ULUbsiOZ089cQ5vOgOvfa7dRqda2mpf3LLg
+         /us1yp/CEYlxPQbbSrSLA5piusGPxcwhYIAZDCGT2bWyW921o/siyzQylRJvIY43pV+P
+         3i0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=yk4Yhw1oVpM6RhEn706uvAqz70WtTU72nxjgF05CMLo=;
-        b=YzeRg7fp3gNlHdZTk4Z2rOmmpAW1uDCIPAT27tDpTeTV9PrIAaDLOsFu6qGipawA2a
-         gYU+O42B0vlw7fUIYgQXtcW/H8+hLefr/3IDFJH+6YN823OuKSzO+SYfTJt1+SZqXFYS
-         hM20Z599bLW0iu2tHg0RxDQoeUhF87JW6zpqX4KqJz0kFL3vCoKrtplKBaFQxcIX0E7s
-         b9W6UKa/fEHMdDLc7Nyo8F5YyCQnGf3s57AQAzySfG9/um//heCD9i7VkRPAfrXGlSgd
-         NHbkbKaE9TZyX4B7lWUIsXd+t/nc78/C+89I9LSBVpsqMW+xW8++712Z9Gg7iu9Cbhxw
-         N2/Q==
-X-Gm-Message-State: AOAM532txQ8DkF34quxruNGjLOg8/cCzZ6j5+X7YlLcy0xCenfXgz6N+
-	axobaeVbzBWM2DkOUdk+tGGVUh1q/Ta0hgzC
-X-Google-Smtp-Source: ABdhPJwwzOblvH6ALFSQDN3dUpYtMP4ZDZQIpOSHrzJCev5KqpNDfHAfCucCfdWYBlc2tB9Ch4Odcw==
-X-Received: by 2002:a19:6916:: with SMTP id e22mr6100999lfc.421.1613761390074;
-        Fri, 19 Feb 2021 11:03:10 -0800 (PST)
+        bh=ayCofgM8OJjcFjRFYNTDDOAj0jToqpXxK+vjLs3ZMBQ=;
+        b=MesGARKzoDDkd7OCDmCmci6AIziaO9e3Wm0WUZzgQ1K9ApxLQDx2a/eMFWoXAMieu5
+         bV8i/5rT/R+d0d2dUUCJmy/w8TRCGK1WcmADtd6RuFhyuWmoEKs7qmbNKLDN4ESmtZIg
+         xRqNbS+reAOdQTdYpXtDg7hhnDAtaz4n2o2HPMdbsYTnySkixMeb+rP/5/JoE8XnF/iI
+         x14bupkrmr8NHp++HNl4Bu0k5TiBAStriGmuicYpt1weFNMpnuXj614yk1w+cwDB/e+G
+         Z+EekyZ4SoJaZ52XvcUIxniINjNTmb4s0Qy/xEy7Jj0MJ4G9XyulJDqFJPDkbw2eSod1
+         nP0g==
+X-Gm-Message-State: AOAM533nRv6xU9p9SEHliytTRVPpeHAmTdfWlRwJHq8oOLdWbAt9/EYc
+	hyasK02jfwgXkUyqLvoCDJQk944lg8wak2nP
+X-Google-Smtp-Source: ABdhPJxVpJ+zQFGRKeWD1u80IgqWDLCppmbiJug79PczOEkIGhNGPknoUxJ4lPDm31WDuFuCVOZwwQ==
+X-Received: by 2002:a05:6512:3619:: with SMTP id f25mr6641567lfs.651.1613771617146;
+        Fri, 19 Feb 2021 13:53:37 -0800 (PST)
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id g2sm1057983ljk.15.2021.02.19.11.02.27
+        by smtp.gmail.com with ESMTPSA id 199sm1091259ljf.118.2021.02.19.13.53.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 19 Feb 2021 11:02:46 -0800 (PST)
+        Fri, 19 Feb 2021 13:53:31 -0800 (PST)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-oe][PATCH] rocksdb: update to 6.15.5
-Date: Fri, 19 Feb 2021 20:02:25 +0100
-Message-Id: <20210219190225.1902908-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-python][PATCH] python3-xmlschema: update to 1.5.1
+Date: Fri, 19 Feb 2021 22:53:27 +0100
+Message-Id: <20210219215327.2367368-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../rocksdb/{rocksdb_git.bb => rocksdb_6.15.5.bb}            | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-dbs/rocksdb/{rocksdb_git.bb => rocksdb_6.15.5.bb} (94%)
+ .../{python3-xmlschema_1.4.2.bb => python3-xmlschema_1.5.1.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-xmlschema_1.4.2.bb => python3-xmlschema_1.5.1.bb} (83%)
 
-diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_6.15.5.bb
-similarity index 94%
-rename from meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-rename to meta-oe/recipes-dbs/rocksdb/rocksdb_6.15.5.bb
-index 117a16b9e..acef05b01 100644
---- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-+++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_6.15.5.bb
-@@ -6,9 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
-                     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
+diff --git a/meta-python/recipes-devtools/python/python3-xmlschema_1.4.2.bb b/meta-python/recipes-devtools/python/python3-xmlschema_1.5.1.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-xmlschema_1.4.2.bb
+rename to meta-python/recipes-devtools/python/python3-xmlschema_1.5.1.bb
+index 055a82d4c..bdb15971b 100644
+--- a/meta-python/recipes-devtools/python/python3-xmlschema_1.4.2.bb
++++ b/meta-python/recipes-devtools/python/python3-xmlschema_1.5.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/xmlschema"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=47489cb18c469474afeb259ed1d4832f"
  
--SRCREV = "f3e33549c151f30ac4eb7c22356c6d0331f37652"
--SRCBRANCH = "6.12.fb"
--PV = "6.12.7"
-+SRCREV = "abd4b1ff1504ae2a7ed6e60bc9c9797b880c33a5"
-+SRCBRANCH = "6.15.fb"
+-SRC_URI[sha256sum] = "f372005d08dfc231ce7f001c3a7a2c7f7ae138295349268bc551a9df3c700b82"
++SRC_URI[sha256sum] = "c4c72b457865f46394bb23525b4e233d6537d9e97b8c6144a6cda2d5ef0d6688"
  
- SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
-            file://0001-cmake-Add-check-for-atomic-support.patch \
+ PYPI_PACKAGE = "xmlschema"
+ inherit pypi setuptools3
 -- 
 2.25.1
 
