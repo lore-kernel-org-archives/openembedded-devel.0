@@ -1,77 +1,83 @@
-Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com [209.85.208.195])
- by mx.groups.io with SMTP id smtpd.web12.397.1613771776303705877
+Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com [209.85.208.196])
+ by mx.groups.io with SMTP id smtpd.web08.893.1613773880798821159
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Feb 2021 13:56:16 -0800
+ Fri, 19 Feb 2021 14:31:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=tyXmPa/7;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.195, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f195.google.com with SMTP id c8so29151662ljd.12
-        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Feb 2021 13:56:16 -0800 (PST)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=R4hEARwu;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.196, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f196.google.com with SMTP id o16so25233882ljj.11
+        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Feb 2021 14:31:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=Z6iOojpGK/oKYpyiGnLifyvmeT03LCqG6vi6mngZL+g=;
-        b=tyXmPa/7UOt9qFbJE88QUFucaZdLSptxASDQOSCxtHTccGqYDWZltdZ1DTVUQD8LVi
-         DcDguSehA5TFwoxdTBHIg9+ZQTVTr7eRJZiTj0Ty6DtXZEAa2XqzxVDOMqzzL8iEBP9n
-         EwzMUtz09aqsIjaPeckfgCdnlYGwwdT5gY1ByhIwbTjw8vrhvgI13svvZcj7RNW0mSlU
-         zWsmjeRHttS8ECzBsM+W/zL5rEvvrnJQA5va+YYhCRKiH/oGy9gtmq9/gpJSIgpoQg+l
-         ryKElzLCR0SEB0uAepI3Lykh1eEV73OvkPL9p9BwXTavrfaFQNXInNTm9icTMKaykdIB
-         +/Nw==
+        bh=ormE5zSpOI8NLdYGQ621P6sxaPWW4L1M5G8YwocxjHg=;
+        b=R4hEARwuv4GX5dB/yLI/KNtCKNTSfok7bmpjix6JTsrc21p4NXhE5NaiFpq3XnjZa9
+         DvN8Bi80sC/QStdUifXm55Xp5ya6H0ZHNmJQzBSrA+N9XG7If2mKP68Hr1rft+SiqJ0o
+         3o6KaSInh+RWqMxJPLDUvHHttmtb3ZVHeoM+UWPJk/LvenjqtQmlWLFRwZ021bLPyYVP
+         NR66sQATkCdkYpHWzj3ZTDvpV97UAizm5mF0FtwXeD2jxFtoIqokJfG+900248HqXQMi
+         pOe72Av5+tbZixxJQwdvnF78zev3O4oUUR9u7ouDgBB1iuGD7ntpD7AySwBrN/PB6hpt
+         vEXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=Z6iOojpGK/oKYpyiGnLifyvmeT03LCqG6vi6mngZL+g=;
-        b=h6Hkb0N6CD26CrUU1WHssHmB20drPILqynULsMH/bdhnRiI20Km+IPDKKcNGeeo6sD
-         AsqR/DLu74REPHazu3KvKnI49RdEOWWq6i3pKJoanX7CmUEQiE8nLr4bsDdDCn/TJuav
-         J5pNuAcAUq58xXjiLkI6RhRnx/r+FXZWOKLBoCACyI8pgzeM2kCETDLpBesvedVi6wW9
-         +DkexFRtJNryYkh5jd2LlwXOx95demaElkuePQAe4gGt0Dwswjr0XTZKovpnHp7/h9ij
-         uztQPv7xu/SAbApN7S/TXekdOvkcsans/PkJCzdchBQcxf1f9NwailmgfOW7J6zEuuFd
-         74Rg==
-X-Gm-Message-State: AOAM531vNSkskzrrBEymEkuR5ZQaXG0DYdxVgaAasjNTGVxs5nPT70f9
-	ld1KwoBEhjQLrAMXKJVQ8JeBaTNlF75qkDzS
-X-Google-Smtp-Source: ABdhPJzVJDMT/hZOh6+wjN2b0RRpTAfsPSwAGMa2q2PyS3XCuRDcj4S72ijsfcEkpBWeKfqhiBuiEQ==
-X-Received: by 2002:a2e:bc0c:: with SMTP id b12mr6938475ljf.201.1613771774358;
-        Fri, 19 Feb 2021 13:56:14 -0800 (PST)
+        bh=ormE5zSpOI8NLdYGQ621P6sxaPWW4L1M5G8YwocxjHg=;
+        b=g3tkgq13pIfYLrJjTMHpVlj8MCuZQDSDhOKf7v0tzwhY3ak0+6XuzA24A85LAdKAEz
+         0SnVGielFV1JN05QVjOalpMXtuIqoWdN+C1NLWdmhvjM4KrIwOCHBDsD6QZhBhFbJEXE
+         hTzx0r8fl4V8DrEIN4vT5Mv/04g8AKxtS7rw+Z0Bat51mE40jW5vB+Ofa4xrmcA5wxs2
+         Qo8Tl08Rz58EQgP7D4QMZzZnwg+P4SYA5+8QeCZIyUPu56km8lZ9sTujaXO1AKltYY74
+         Hfa5FNSueX7Tlz8UgPuJZHV5JlhZpr+ASlh3sbaM9QCKwEKh2oTMuzcDU57LgFviAvZz
+         /SAQ==
+X-Gm-Message-State: AOAM532TSAhdqrEb30OOl1RYDq/9ecTA+vL4uOW/R3ZjD9MF5KSDmvCI
+	WI7cCNSSzpO13Nt1wn4SqsBAQl99rFj/HVqc
+X-Google-Smtp-Source: ABdhPJywm/GVWQ/pFwFNynszMMaEnm8ALudZi08jZ84I15az+1QZATmYSkrmFiL0YygN3Cu3oMTduw==
+X-Received: by 2002:a2e:9b8b:: with SMTP id z11mr6948317lji.331.1613773878485;
+        Fri, 19 Feb 2021 14:31:18 -0800 (PST)
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id q4sm1037216lfn.199.2021.02.19.13.56.13
+        by smtp.gmail.com with ESMTPSA id c16sm1043848lfb.302.2021.02.19.14.31.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 19 Feb 2021 13:56:13 -0800 (PST)
+        Fri, 19 Feb 2021 14:31:18 -0800 (PST)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python][PATCH] python3-astroid: update to 2.5
-Date: Fri, 19 Feb 2021 22:56:11 +0100
-Message-Id: <20210219215611.2368885-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-multimedia][PATCH] ncmpc: update to 0.45
+Date: Fri, 19 Feb 2021 23:31:16 +0100
+Message-Id: <20210219223116.2499143-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../{python3-astroid_2.4.2.bb => python3-astroid_2.5.bb}       | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-astroid_2.4.2.bb => python3-astroid_2.5.bb} (84%)
+ .../musicpd/{ncmpc_0.38.bb => ncmpc_0.45.bb}                  | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+ rename meta-multimedia/recipes-multimedia/musicpd/{ncmpc_0.38.bb => ncmpc_0.45.bb} (94%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-astroid_2.4.2.bb b/meta-python/recipes-devtools/python/python3-astroid_2.5.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-astroid_2.4.2.bb
-rename to meta-python/recipes-devtools/python/python3-astroid_2.5.bb
-index 677cec7ac..f69d85015 100644
---- a/meta-python/recipes-devtools/python/python3-astroid_2.4.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-astroid_2.5.bb
-@@ -4,8 +4,7 @@ SECTION = "devel/python"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.38.bb b/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.45.bb
+similarity index 94%
+rename from meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.38.bb
+rename to meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.45.bb
+index ebf5d290b..c089b64ed 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.38.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.45.bb
+@@ -11,6 +11,8 @@ DEPENDS += " \
+     libmpdclient \
+ "
  
--SRC_URI[md5sum] = "b54e1325995d3a9abd84bac91d4d5867"
--SRC_URI[sha256sum] = "2f4078c2a41bf377eea06d71c9d2ba4eb8f6b1af2135bec27bbbb7d8f12bb703"
-+SRC_URI[sha256sum] = "b31c92f545517dcc452f284bc9c044050862fbe6d93d2b3de4a215a6b384bf0d"
++RDEPENDS_${PN} += "python3-core"
++
+ PACKAGECONFIG ??= "colors locale mouse nls regex help_screen library_screen search_screen song_screen key_screen lyrics_screen outputs_screen"
  
- inherit pypi setuptools3
- 
+ PACKAGECONFIG[colors] = "-Dcolors=true,-Dcolors=false"
+@@ -33,5 +35,5 @@ PACKAGECONFIG[chat_screen] = "-Dchat_screen=true,-Dchat_screen=false"
+ SRC_URI = " \
+     git://github.com/MusicPlayerDaemon/ncmpc \
+ "
+-SRCREV = "2c71add42152072c5e0490de2870315dfb3b71e1"
++SRCREV = "6780ec072f1d314f44ed77efdc58d03c6fbcc96b"
+ S = "${WORKDIR}/git"
 -- 
 2.25.1
 
