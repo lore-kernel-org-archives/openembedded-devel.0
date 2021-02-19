@@ -1,75 +1,66 @@
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web08.875.1613689058858859985
+Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+ by mx.groups.io with SMTP id smtpd.web09.3098.1613700130514286707
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Feb 2021 14:57:38 -0800
+ Thu, 18 Feb 2021 18:02:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=h277QnUP;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id b8so2113449plh.12
-        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Feb 2021 14:57:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Jglb1e0lTG2VFSLnSfar8tTCEXZ69LbmYU2CiD4s31s=;
-        b=h277QnUPBIuXnAZPV3O7Rh4jjVqmMxfKMqXVY3pJSPSPfx9W5M1gabbaxRcfZiFSe2
-         d0IQ9A9IqgeA0+E4SJN5gLNKw7YLz2Tu0RCynJ/iAjTKm9x4u07Ba8I8CfvuRX1AL+Fm
-         Zqh8kdKW/4jJ/ed5BLNzpe8CcaSmzxr1PJDQNaQlXd+wizQ0JdMm+4RctCsUB3THiJjv
-         6BfC+uJHG80l3tl3dlyJkfzwQMfPc930jVqPByflm3/JCWCjEWnFFxoq51FyqwWEK9U6
-         2GszetrYir513WWDeAducbAwuWi3vyAmv+fKa9A2oovF0lfVKQvkRwyfS4ix4lwFjs3Y
-         t18A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Jglb1e0lTG2VFSLnSfar8tTCEXZ69LbmYU2CiD4s31s=;
-        b=pxQTA82wh42duLIxGQJ+E9pz+8LZuw0ShNF/49Z9T1EaUoZTygPMFE7xwagHlo4QX2
-         qabZEIjHLLbhaUDl40ZCmbjkJp+7iGS3h6DeiZu846ASP5rPGNXUvrETk24ITYI0ENW5
-         o+PSeLDGeprtBjfbKz2Os++c3X/QvveRjw2Kbpf29+bk8Y2NUNpiAgtgqZ6KDhxwZ2wB
-         vNQdhX8lAv5F4qGGr1iFFrBV2KUZOZmTKze7OB/bAdOZ0C60gucOJ1YvSLjMgyBtRaRg
-         EucuxWXfeT5EVIzCHXjuROzmBZ1VxyGc2GJkIk1qrxugKu6GtHXWylWZ9VYGrW4C1MW6
-         OelA==
-X-Gm-Message-State: AOAM530Iobk2UlqaAkc+wg+KJbmwV66fiYlFak2v/+Ava+L3yowh5FrI
-	hD1mCGRq8XELg6iw+UWB7qpPnVTEpXK7gA==
-X-Google-Smtp-Source: ABdhPJzIvN2L0yLrp+wE068+Tg+O1Qg0wXgdmyvfZS/tFVHnIP0c/+AsJCKqOIkSkRhAL621i9lyBg==
-X-Received: by 2002:a17:90a:eacd:: with SMTP id ev13mr6008585pjb.85.1613689058195;
-        Thu, 18 Feb 2021 14:57:38 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::54b4])
-        by smtp.gmail.com with ESMTPSA id k128sm7187215pfd.137.2021.02.18.14.57.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 18 Feb 2021 14:57:37 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Subject: [meta-multimedia][PATCH] aom: Disable neon when not present in TUNE_FEATURES
-Date: Thu, 18 Feb 2021 14:57:35 -0800
-Message-Id: <20210218225735.1149143-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.1
+ dkim=missing; spf=pass (domain: intel.com, ip: 134.134.136.126, mailfrom: anuj.mittal@intel.com)
+IronPort-SDR: J/F6ynCAUWj+12qEhsP6XYwlK4MwYvbvigv8U22jlIbGREYdqjddRths2vAa7K+RiE+DLHkSCD
+ N+7BO9r/47Dg==
+X-IronPort-AV: E=McAfee;i="6000,8403,9899"; a="171386500"
+X-IronPort-AV: E=Sophos;i="5.81,187,1610438400"; 
+   d="scan'208";a="171386500"
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Feb 2021 18:02:09 -0800
+IronPort-SDR: uVBIj2Pr0de6zL7PwIC2UR+GbqAnAd13KoKJ4tIKjOcgI8ReBVi4mfzv4S3SEh+KLHkwEpdXQU
+ dd37FuWUyjWg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.81,187,1610438400"; 
+   d="scan'208";a="362769493"
+Received: from kmsmsx603.gar.corp.intel.com ([172.21.219.143])
+  by orsmga003.jf.intel.com with ESMTP; 18 Feb 2021 18:02:07 -0800
+Received: from pgsmsx601.gar.corp.intel.com (10.108.199.136) by
+ kmsmsx603.gar.corp.intel.com (172.21.219.143) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2106.2; Fri, 19 Feb 2021 10:02:06 +0800
+Received: from pgsmsx601.gar.corp.intel.com ([10.108.199.136]) by
+ pgsmsx601.gar.corp.intel.com ([10.108.199.136]) with mapi id 15.01.2106.002;
+ Fri, 19 Feb 2021 10:02:06 +0800
+From: "Anuj Mittal" <anuj.mittal@intel.com>
+To: "Rahul.Taya@kpit.com" <Rahul.Taya@kpit.com>, "raj.khem@gmail.com"
+	<raj.khem@gmail.com>, "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+CC: "nisha.parrakat@kpit.com" <nisha.parrakat@kpit.com>,
+	"harpritkaur.bhandari@kpit.com" <harpritkaur.bhandari@kpit.com>
+Subject: Re: [oe] [meta-python2][dunfell][PATCH] python: Add fix for CVE-2019-9674
+Thread-Topic: [oe] [meta-python2][dunfell][PATCH] python: Add fix for
+ CVE-2019-9674
+Thread-Index: AQHXBgDhr0HTZCzdoEyZ3I3fHBJt1KpeNFQA
+Date: Fri, 19 Feb 2021 02:02:06 +0000
+Message-ID: <35a621b6fbc2297e4ee7508aaaeaae60d67eb441.camel@intel.com>
+References: <20210216152349.30824-1-Rahul.Taya@kpit.com>
+In-Reply-To: <20210216152349.30824-1-Rahul.Taya@kpit.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.108.32.68]
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <FF9271CFD1416D40BB9F2A82250277D2@intel.com>
+Content-Transfer-Encoding: base64
 
-Some older arm32 cores are without neon units e.g. armv6 (rpi0 fame)
-therefore check for neon feature before enabling it
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andreas Müller <schnitzeltony@gmail.com>
----
- meta-multimedia/recipes-multimedia/aom/aom_2.0.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/meta-multimedia/recipes-multimedia/aom/aom_2.0.0.bb b/meta-multimedia/recipes-multimedia/aom/aom_2.0.0.bb
-index c5ad1f8062..41ade08791 100644
---- a/meta-multimedia/recipes-multimedia/aom/aom_2.0.0.bb
-+++ b/meta-multimedia/recipes-multimedia/aom/aom_2.0.0.bb
-@@ -18,3 +18,5 @@ DEPENDS = " yasm-native"
- EXTRA_OECMAKE = " -DBUILD_SHARED_LIBS=1 -DENABLE_TESTS=0 \
-                   -DPERL_EXECUTABLE=${HOSTTOOLS_DIR}/perl \
-                 "
-+
-+EXTRA_OECMAKE += "${@bb.utils.contains("TUNE_FEATURES","neon","-DENABLE_NEON=ON","-DENABLE_NEON=OFF",d)}"
--- 
-2.30.1
-
+T24gVHVlLCAyMDIxLTAyLTE2IGF0IDIwOjUzICswNTMwLCBSYWh1bCBUYXlhIHdyb3RlOg0KPiAr
+KiBicG8tMzYyNjA6IEFkZCBwaXRmYWxscyB0byB6aXBmaWxlIG1vZHVsZSBkb2N1bWVudGF0aW9u
+DQo+ICsNCj4gK1dlIHNhdyB2dWxuZXJhYmlsaXR5IHdhcm5pbmcgZGVzY3JpcHRpb24gKGluY2x1
+ZGluZyB6aXAgYm9tYikgaW4NCj4gRG9jL2xpYnJhcnkveG1sLnJzdCBmaWxlLg0KPiArVGhpcyBn
+YXZlIHVzIHRoZSBpZGVhIG9mIGRvY3VtZW50YXRpb24gaW1wcm92ZW1lbnQuDQo+ICsNCj4gK1Nv
+LCB3ZSBtb3ZlZCBhIGxpdHRsZSBiaXQgZm9yd2FyZCA6UA0KPiArQW5kIHRoZSBkb2MgcGF0Y2gg
+Y2FuIGJlIGZvdW5kIChwcikuDQo+ICsNCj4gKyogZml4IHRyYWlsaW5nIHdoaXRlc3BhY2UNCj4g
+Kw0KPiArKiDwn5Oc8J+kliBBZGRlZCBieSBibHVyYl9pdC4NCj4gKw0KPiArKiBSZWZvcm1hdCB0
+ZXh0IGZvciBjb25zaXN0ZW5jeS4NCj4gKw0KPiArVXBzdHJlYW0tU3RhdHVzOg0KPiBCYWNrcG9y
+dFsNCj4gaHR0cDovL2FyY2hpdmUudWJ1bnR1LmNvbS91YnVudHUvcG9vbC9tYWluL3AvcHl0aG9u
+My41L3B5dGhvbjMuNV8zLjUuMi0ydWJ1bnR1MH4xNi4wNC4xMi5kZWJpYW4udGFyLnh6DQo+IF0N
+Cg0KSXQgbG9va3MgbGlrZSB0aGlzIGlzIGp1c3QgYSBkb2N1bWVudGF0aW9uIGNoYW5nZSB0aGF0
+IGlzIGNoYW5naW5nIGENCmZpbGUgdGhhdCBJIGRvbid0IHRoaW5rIHdlIHBhY2thZ2UuIElzIHRo
+aXMgc29tZXRoaW5nIHRoYXQgd2Ugc2hvdWxkDQpjYXJlIGFib3V0Pw0KDQpUaGFua3MsDQoNCkFu
+dWoNCg0K
