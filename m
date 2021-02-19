@@ -1,70 +1,90 @@
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by mx.groups.io with SMTP id smtpd.web08.7811.1613739532361314035
+Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com [209.85.222.177])
+ by mx.groups.io with SMTP id smtpd.web12.11115.1613752470923879704
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Feb 2021 04:58:52 -0800
+ Fri, 19 Feb 2021 08:34:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linux.microsoft.com header.s=default header.b=NVJQkZZ5;
- spf=pass (domain: linux.microsoft.com, ip: 13.77.154.182, mailfrom: anbelski@linux.microsoft.com)
-Received: from anbelski-lsg-linux-yocto-1.irsgb21fvobu5fvmalxug44hib.xx.internal.cloudapp.net (unknown [52.247.218.173])
-	by linux.microsoft.com (Postfix) with ESMTPSA id 9D63520B6C40
-	for <openembedded-devel@lists.openembedded.org>; Fri, 19 Feb 2021 04:58:51 -0800 (PST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 9D63520B6C40
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1613739531;
-	bh=0hRwQ0nEMmn8X15f+TzAerkg8YOdycUw9wmOLrMOz0M=;
-	h=From:To:Subject:Date:From;
-	b=NVJQkZZ53l7DBNtIGvEP3lxPHRBEC5i7uvGz9tPVaTWCqhB/bH2IYcv1Y1Ar3QBHp
-	 Kji9aU3FMM89kBbieR3hEPhW4asIA9kWCnolmz/Q0Iuk1ttkDVvRDA+xoZr7+uUqMM
-	 cI6bFjBhQ8EwvQ2EqaUniKfGwIMp1BmBnJZ9dSxw=
-From: "Anatol Belski" <anbelski@linux.microsoft.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] abseil-cpp: Relax build requirements
-Date: Fri, 19 Feb 2021 12:58:45 +0000
-Message-Id: <20210219125845.29016-1-anbelski@linux.microsoft.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ave31S+X;
+ spf=pass (domain: gmail.com, ip: 209.85.222.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f177.google.com with SMTP id h8so6054706qkk.6
+        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Feb 2021 08:34:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=UdV1kzVR8rNVwuFRrz1vLXL3QRWK6jP/s1CrVHEHQ2s=;
+        b=ave31S+X5LA6uce8FItb3ow+XBW+pDhxoJcaIFWLe7jwtFUVtt/be0x+Zhkk/haYYz
+         Fw6DyagRF/S+cR+1wKRhm0v05sbPjYG/f6Yhie9WozY7RmbZKxNVEVNePEWxpPSGkON8
+         DCx7TalfjGgKGzsaIxgD67VQjnvtKjTnkhUClGGejE8Yp4d6Qoli2OgZjXdrNXk+j08M
+         lmNZbe55iqTtZ57v2GVhTQHlu/EkOmzHxvhXFrbMpnSoXFtMBNqijZuf98w30OxR8ZA4
+         CtlqocT/PF2pCZYiqZX/rs8im4CxOVvmG17F1E2JND9xF3zUDfpoYJWFHX3jux4gUEC/
+         ZLCw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=UdV1kzVR8rNVwuFRrz1vLXL3QRWK6jP/s1CrVHEHQ2s=;
+        b=X/1CpOKmW3HgT/nhmSHrVgPRgV4QXs9Bvjdrm0B7xpM7cxCPPq164rTZm3cMo9wVUx
+         plKpifo+g5WXWJoWggS8SV1R30EHknaIXwn2z+ipe4tXY3ewKOsDmTL4EK+/ORqyDU/r
+         7y4ViJqe00EJGtA8MwyOrkFmrqlq+k4e5vsXEkExyM8LvY9jcYNSVYJkNrTlXYwYQ5Hr
+         otDt5VuK3tzg6BImCzm8uOxAtkf+0aKIQv2b5tEUldMCKQrPzatPG3fILQKlMTeHqx32
+         ZHdWMfPg3E4PpfBQqTHHYa2NGErn+b8r22y5XCSjPAQ+rmiRtzkxr1tPVE2f3QKRmp8c
+         cOaA==
+X-Gm-Message-State: AOAM530BKcmqwZX4/lC8dvIZLl9HWPod3L6d1vsYS/oLPocPGZKBcfWt
+	Z+FFxkAohnKQPrYs/bALoahpjseYGKLQrpnQ2R4yFnLqX+4=
+X-Google-Smtp-Source: ABdhPJyek+KN1N9QkvOyzcjGNsob64AduqMSfUoT3vidTF7gnleR7uKOmLyvj/P4MdqAFTazatMOxELA6RoqYPlNniY=
+X-Received: by 2002:a37:e13:: with SMTP id 19mr10115139qko.119.1613752469848;
+ Fri, 19 Feb 2021 08:34:29 -0800 (PST)
+MIME-Version: 1.0
+References: <20210219085229.25707-1-yocto@bsorensen.net>
+In-Reply-To: <20210219085229.25707-1-yocto@bsorensen.net>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 19 Feb 2021 08:34:02 -0800
+Message-ID: <CAMKF1srC8Nej+pDK2nqepYBkqazBs4aFrSW+F8du2UXUy7D6eQ@mail.gmail.com>
+Subject: Re: [oe] "[meta-oe][PATCH] libgpiod: packageqa problem => static python lib to ${PN}-python-staticdev
+To: =?UTF-8?Q?Christian_B=2E_S=C3=B8rensen?= <yocto@bsorensen.net>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, chbs@prevas.dk
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-While better hardware acceleration is definitely advantageous, there is no
-hard requirement defined by the upstream. Removing this will allow
-builds targeting older hardware where DEFAULTTUNE can't be changed. If
-found useful, this can also be backported to lower branches.
+On Fri, Feb 19, 2021 at 12:52 AM Christian B. S=C3=B8rensen
+<yocto@bsorensen.net> wrote:
+>
+> Problem:
+> QA Issue: non -staticdev package contains static .a library
+>
+> Reason:
+> Both /usr/lib/python3.8/site-packages/gpiod.a and
+> /usr/lib/python3.8/site-packages/gpiod.so are in ${PN}-python.
+>
+> Signed-off-by: Christian Br=C3=A4uner S=C3=B8rensen <yocto@bsorensen.net=
+>
+> ---
+>  meta-oe/recipes-support/libgpiod/libgpiod_1.4.5.bb | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.5.bb b/meta-o=
+e/recipes-support/libgpiod/libgpiod_1.4.5.bb
+> index aec50e7e6..ab9639fc2 100644
+> --- a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.5.bb
+> +++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.5.bb
+> @@ -27,7 +27,8 @@ PACKAGES =3D+ "${PN}-tools libgpiodcxx"
+>  FILES_${PN}-tools =3D "${bindir}/*"
+>  FILES_libgpiodcxx =3D "${libdir}/libgpiodcxx.so.*"
+>
+> -PACKAGES =3D+ "${PN}-python"
+> -FILES_${PN}-python =3D "${PYTHON_SITEPACKAGES_DIR}"
+> +PACKAGES =3D+ "${PN}-python ${PN}-python-staticdev"
 
-Signed-off-by: Anatol Belski <anbelski@linux.microsoft.com>
----
- .../abseil-cpp/abseil-cpp_git.bb              | 24 -------------------
- 1 file changed, 24 deletions(-)
+why not put .a  file in ${PN}-staticdev
 
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-index cc7bf01d73..7d935d523b 100644
---- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-@@ -34,27 +34,3 @@ ALLOW_EMPTY_${PN} = "1"
- FILES_${PN} = "${libdir}/libabsl_*.so ${libdir}/cmake"
- FILES_${PN}-dev = "${includedir}"
- 
--python () {
--    arch = d.getVar("TARGET_ARCH")
--
--    if arch == "aarch64":
--        tunes = d.getVar("TUNE_FEATURES")
--        if not tunes:
--            raise bb.parse.SkipRecipe("%s-%s Needs support for crypto on armv8" % (pkgn, pkgv))
--            return
--        pkgn = d.getVar("PN")
--        pkgv = d.getVar("PV")
--        if "crypto" not in tunes:
--            raise bb.parse.SkipRecipe("%s-%s Needs support for crypto on armv8" % (pkgn, pkgv))
--
--    if arch == "x86_64":
--        tunes = d.getVar("TUNE_FEATURES")
--        if not tunes:
--           raise bb.parse.SkipRecipe("%s-%s Needs support for corei7 on x86_64" % (pkgn, pkgv))
--           return
--        pkgn = d.getVar("PN")
--        pkgv = d.getVar("PV")
--        if "corei7" not in tunes:
--            raise bb.parse.SkipRecipe("%s-%s Needs support for corei7 on x86_64" % (pkgn, pkgv))
--
--}
--- 
-2.17.1
-
+> +FILES_${PN}-python =3D "${PYTHON_SITEPACKAGES_DIR}/*.so"
+> +FILES_${PN}-python-staticdev =3D "${PYTHON_SITEPACKAGES_DIR}/*.a"
+>  RRECOMMENDS_PYTHON =3D "${@bb.utils.contains('PACKAGECONFIG', 'python3'=
+, '${PN}-python', '',d)}"
+>  RRECOMMENDS_${PN}-python +=3D "${RRECOMMENDS_PYTHON}"
+> --
+> 2.25.1
+>
+>
+>=20
+>
