@@ -1,48 +1,50 @@
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web12.9601.1613842790482641290
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.web08.9818.1613843937408501056
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 20 Feb 2021 09:39:50 -0800
+ Sat, 20 Feb 2021 09:58:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=DncJD0gA;
- spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id b145so3976908pfb.4
-        for <openembedded-devel@lists.openembedded.org>; Sat, 20 Feb 2021 09:39:50 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=m7lNoy2O;
+ spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f182.google.com with SMTP id t11so7450003pgu.8
+        for <openembedded-devel@lists.openembedded.org>; Sat, 20 Feb 2021 09:58:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=to:cc:from:subject:autocrypt:message-id:date:user-agent
-         :mime-version:content-transfer-encoding:content-language;
-        bh=Z+7sfQmK2xES4ydoqBLcgAIZAKotAgg5d+0nvJHp5Lg=;
-        b=DncJD0gA4yHlliklI5r4ykW5DcFmKqaoWaCEcOQZmoCwwquHk40rLdgLxtdy2x68GI
-         7GDGcfA9dYrcwrnddfuHkvwRoOlQPBq83ZScPKJWJhxG/rz4QiVAZnyUJTweBX8AOhvN
-         Ka3EYgKy9fERTtCI6Z52fThmwNRdYF7pebMJphouezZyAJ35li8FkcfiAN+lNXeNHbmP
-         RvWJFhdElEl1YqHrbDrH/o76a9uVVeTh7VfjjrwMeZqoDKKZcu/VflYO2YpJa8AlN9kD
-         YAZbPnMw6x9EJIFPcCLofVN74TR8NYPtckS4/gg1dfOPjDNWGlk493uPdFCmlWGDfD0E
-         IOKQ==
+        h=subject:to:references:from:autocrypt:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=X98DFxtTnce7e/6HS4HNowHi+m/1kh8L8XdKoh7oxOk=;
+        b=m7lNoy2OwESd0iTXn3efddqhiKEl9bDS16Ah8OtOsdwa2njGYoytIpmyH6Y056y2Ws
+         DLOHBf9X2TVjbHwhcWfFchfH/yYZS64qL1FHsjtmJD4Xl8T36NTlzeV0HX/mC9Carn//
+         pbfAvsP8LkAhBuPiJzURGM0/+HxW0ohxYMua8eYoaVF+qeSSzGX2ZiwlUb8oisKHRpIo
+         0akSUTDXkctaRWCV+pY6XRf/n+QComvfTNA2q62l09bRTmnsmJfPhg4knKsWiVAoPQ4q
+         fi85YIUJuh3bpdD0e0yjayXplfg7WTqzRUWAIDkIQLhExyjqDsJyffhjyRA5Mfk8TVT1
+         fysw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:to:cc:from:subject:autocrypt:message-id:date
-         :user-agent:mime-version:content-transfer-encoding:content-language;
-        bh=Z+7sfQmK2xES4ydoqBLcgAIZAKotAgg5d+0nvJHp5Lg=;
-        b=PKB248Scwtl2LG0A7G5LrG7mBCSvGZ/525+V9v+a93aKYW8bQMZ2DFwrZma2KtZkyL
-         yaTjoMWitp2sEN/P6OLWf7XX74EVaJAdR78hVXZr6/4kyPRrKQNuJLVa3icZ7/xSNxrl
-         +d5q06ShS4nhxSXsdTIz53vaWFqNecEvctUdpEjZHVauz8d3tJEgkVPA7gJ40pzwZP1K
-         +IqZwCPQrq0x/FKh6pG8yq2yGNdo6DvlDIxGdlWcyjKNpx7j38epN3nlN7EfhpTiR313
-         I14XTNDXxVpoIb9wsFR7OfycjiuYd5FULBFKIQOgO/0tT23ecKexcLPlUpkg/I+eTV1s
-         LZgQ==
-X-Gm-Message-State: AOAM531jRvcEU9QSe0DDNFCUCjTnJGJUx2I4vusu6kAK/O8o7LYQG1cJ
-	38QmXaOCCdYeIjjv7XHzlFs=
-X-Google-Smtp-Source: ABdhPJytb5DccluVrdC3Exx0DITo33gl6FFEf/j56FvWkLv9FITQoOroTsIpgvjhQryrSDrIK4ZMbQ==
-X-Received: by 2002:a63:c54c:: with SMTP id g12mr12910737pgd.449.1613842789864;
-        Sat, 20 Feb 2021 09:39:49 -0800 (PST)
+        h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
+         :date:user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=X98DFxtTnce7e/6HS4HNowHi+m/1kh8L8XdKoh7oxOk=;
+        b=qqnCqBFjnj75LH1j96PiItYibzG7/Y5jYuseGcYSarpOT3xqrXpj9lZijltSBkxwrU
+         dCfCHNDS1dpEtjQjB0Z8farKoLhnHu6g/04mAH0TWLN9m1jZmuHxto5Iyib76VKt2clP
+         rdlhROurFex+RgmRIxk64Bqs/0+eFierq57gjrZ1uRpUs0yILvDDy0d3RcYZdFklasGx
+         ZGTryirYD5S+KVcObsnRGrzMbRcag2ftlsSgBwGigzueWUHjNtovOYAdr5eNByEwSD1Z
+         jCxn5IdctDTqb4DHfcrVQc+Bwwc01b/UFh90kh1sK17mlnAIFLS32lyxltRJv3Vkfaja
+         iIkg==
+X-Gm-Message-State: AOAM533G7fcssC32W8ggUBgGE7oPfID6FPxTUpauOKKQGgD88AClNLi+
+	SOC2fD3LUP1lTg4Q83GGYeVqfLa1x5cZKQ==
+X-Google-Smtp-Source: ABdhPJyO3T4H+FgAUn1HZ3xdGDJSpuvUyFLw9hCja945O0ijTQPKps7q/yqbdCRzLmT1qEk70ZveYA==
+X-Received: by 2002:a63:4b21:: with SMTP id y33mr13296737pga.73.1613843936537;
+        Sat, 20 Feb 2021 09:58:56 -0800 (PST)
 Return-Path: <akuster808@gmail.com>
 Received: from ?IPv6:2601:202:4180:a5c0:70a2:885b:8c45:14d6? ([2601:202:4180:a5c0:70a2:885b:8c45:14d6])
-        by smtp.gmail.com with ESMTPSA id c11sm11964293pfl.52.2021.02.20.09.39.48
+        by smtp.gmail.com with ESMTPSA id js15sm4555965pjb.37.2021.02.20.09.58.55
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 20 Feb 2021 09:39:49 -0800 (PST)
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Khem Raj <raj.khem@gmail.com>
+        Sat, 20 Feb 2021 09:58:56 -0800 (PST)
+Subject: Re: [oe] [meta-oe][PATCH] tcpdump: update 4.9.3 -> 4.99.0
+To: Yi Fan Yu <yifan.yu@windriver.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20210220031725.10051-1-yifan.yu@windriver.com>
 From: "akuster" <akuster808@gmail.com>
-Subject: meta-openembedded gatesgarth merge request Feb 20th
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
  Jmd71vHMw+coBetWC3lk+IKjX815Ox0puYXQVRRtI+yMCgd6ib3oGxoQ8tCMwhf9c9/aKjaz
@@ -86,104 +88,386 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
  ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
  8CS2NxU=
-Message-ID: <f45abe8c-bd3d-3d8c-a46b-b4491d729f0f@gmail.com>
-Date: Sat, 20 Feb 2021 09:39:47 -0800
+Message-ID: <811a2c42-b427-7001-59e6-c0c31c3b02b3@gmail.com>
+Date: Sat, 20 Feb 2021 09:58:54 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
+In-Reply-To: <20210220031725.10051-1-yifan.yu@windriver.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
 
-The following changes since commit cef93b7b00e620d90a610112ee574fa60b691cf8:
 
-  openldap: upgrade 2.4.56 -> 2.4.57 (2021-02-02 10:18:22 -0800)
 
-are available in the Git repository at:
+On 2/19/21 7:17 PM, Yi Fan Yu wrote:
+> Removed patches:
+>     * avoid-absolute-path-when-searching-for-libdlpi.patch
+>     reason: this is a solaris specific patch,
+>             It no longer generates QA error.
+>
+>     * unnecessary-to-check-libpcap.patch
+>     reason: upstream changed the logic, a new patch was needed.
+>
+> New patch:
+>     * 0001-aclocal.m4-Skip-checking-for-pcap-config.patch
+>     reason: configure shouldn't look for pcap-config.
+>     upstream reference: cfc4c750a
+>
+> Modified patch:
+>     * add-ptest.patch
+>     reason: Makefile had slight change.
+>             new unrelated perl script was introduced,
+>             removed to make package QA happy.
+>
+> License:
+>     upstream removed some whitespace
+>
+> Ptest:
+>     binaries are now present in /usr/bin not /usr/sbin
+>         upstream commit: 95096be4f
+>     add perl libraries dependencies
+>
+>     tests passed: 571 (qemux86-64)
+>     tests failed: 0
 
-  https://git.openembedded.org/meta-openembedded gatesgarth-next
+Thanks for providing this additional information.  Great to see the
+ptest baseline.
 
-for you to fetch changes up to 945f062ff098dc9c8ba8d22c5eef88adec60730d:
-
-  meta-oe/README: add Ubuntu prerequisite information (2021-02-15
-08:19:35 -0800)
-
-----------------------------------------------------------------
-Armin Kuster (1):
-      lua: update to 5.3.6
-
-Kai Kang (1):
-      mariadb: add package config zstd
-
-Khem Raj (7):
-      mariadb: Fix build on 32bit arches with 64bit time_t
-      gedit: Inherit python3targetconfig
-      openipmi: Inherit python3targetconfig
-      libplist: Inherit python3targetconfig
-      postgresql: Inherit python3targetconfig
-      python-grpcio-tools: Add missing space for append
-      python3-pykwalify: Do not unset _PYTHON_SYSCONFIGDATA_NAME
-
-Mario Schuknecht (1):
-      dnsmasq: Fix systemd service
-
-Martin Jansa (1):
-      wireguard-module: remove PKG assignment
-
-Mingli Yu (1):
-      mariadb: upgrade to 10.5.8
-
-Qi.Chen@windriver.com (1):
-      minifi-cpp: set PSEUDO_CONSIDER_PATHS
-
-Shlomi Vaknin (1):
-      python3-sh: remove python3-tests from RDEPENDS
-
-Wang Mingyu (1):
-      dnsmasq: upgrade 2.82 -> 2.84
-
-akuster (2):
-      enca: Fix SRC_URI
-      meta-oe/README: add Ubuntu prerequisite information
-
-changqing.li@windriver.com (1):
-      celt051: update SRC_URI
-
- meta-gnome/recipes-gnome/gedit/gedit_3.36.2.bb     |  2 +-
- .../wireguard/wireguard-module_1.0.20200908.bb     |  7 ----
- .../recipes-support/celt051/celt051_git.bb         |  2 +-
- .../recipes-support/dnsmasq/dnsmasq/lua.patch      |  9 ++---
- .../recipes-support/dnsmasq/dnsmasq_2.82.bb        |  8 -----
- .../recipes-support/dnsmasq/dnsmasq_2.84.bb        |  8 +++++
- .../dnsmasq/files/dnsmasq-resolvconf.service       |  2 +-
- .../recipes-support/openipmi/openipmi_2.0.29.bb    |  2 +-
- meta-oe/README                                     |  3 ++
- ...b-native_10.5.6.bb => mariadb-native_10.5.8.bb} |  0
- meta-oe/recipes-dbs/mysql/mariadb.inc              |  5 ++-
- ...se-Define-__NR_futex-if-it-does-not-exist.patch | 37
-+++++++++++++++++++++
- ...-stacktrace-t.c-make-the-test-conditional.patch | 38
-++++++++++++++++++++++
- .../recipes-dbs/mysql/mariadb/c11_atomics.patch    | 14 ++++----
- .../mysql/{mariadb_10.5.6.bb => mariadb_10.5.8.bb} |  0
- meta-oe/recipes-dbs/postgresql/postgresql.inc      |  2 +-
- .../lua/{lua_5.3.5.bb => lua_5.3.6.bb}             |  6 ++--
- .../libimobiledevice/libplist_2.2.0.bb             |  2 +-
- .../minifi-cpp/minifi-cpp_0.7.0.bb                 |  1 +
- meta-oe/recipes-support/enca/enca_1.9.bb           |  7 ++--
- .../python/python-grpcio-tools.inc                 |  2 +-
- .../python/python3-pykwalify_1.7.0.bb              |  2 +-
- .../recipes-devtools/python/python3-sh_1.14.1.bb   |  1 -
- 23 files changed, 117 insertions(+), 43 deletions(-)
- delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.82.bb
- create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.84.bb
- rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.5.6.bb =>
-mariadb-native_10.5.8.bb} (100%)
- create mode 100644
-meta-oe/recipes-dbs/mysql/mariadb/0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch
- create mode 100644
-meta-oe/recipes-dbs/mysql/mariadb/0001-stacktrace-t.c-make-the-test-conditional.patch
- rename meta-oe/recipes-dbs/mysql/{mariadb_10.5.6.bb =>
-mariadb_10.5.8.bb} (100%)
- rename meta-oe/recipes-devtools/lua/{lua_5.3.5.bb => lua_5.3.6.bb} (92%)
+-armin
+>
+> Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+> ---
+>  ...ping-don-t-allocate-a-too-large-buff.patch | 70 -------------------
+>  ...cal.m4-Skip-checking-for-pcap-config.patch | 33 +++++++++
+>  .../tcpdump/tcpdump/add-ptest.patch           | 28 +++++---
+>  ...lute-path-when-searching-for-libdlpi.patch | 31 --------
+>  .../unnecessary-to-check-libpcap.patch        | 40 -----------
+>  .../{tcpdump_4.9.3.bb => tcpdump_4.99.0.bb}   | 23 +++---
+>  6 files changed, 67 insertions(+), 158 deletions(-)
+>  delete mode 100644 meta-networking/recipes-support/tcpdump/tcpdump/0001-PPP-When-un-escaping-don-t-allocate-a-too-large-buff.patch
+>  create mode 100644 meta-networking/recipes-support/tcpdump/tcpdump/0001-aclocal.m4-Skip-checking-for-pcap-config.patch
+>  delete mode 100644 meta-networking/recipes-support/tcpdump/tcpdump/avoid-absolute-path-when-searching-for-libdlpi.patch
+>  delete mode 100644 meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
+>  rename meta-networking/recipes-support/tcpdump/{tcpdump_4.9.3.bb => tcpdump_4.99.0.bb} (67%)
+>
+> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/0001-PPP-When-un-escaping-don-t-allocate-a-too-large-buff.patch b/meta-networking/recipes-support/tcpdump/tcpdump/0001-PPP-When-un-escaping-don-t-allocate-a-too-large-buff.patch
+> deleted file mode 100644
+> index 9b74e00c5..000000000
+> --- a/meta-networking/recipes-support/tcpdump/tcpdump/0001-PPP-When-un-escaping-don-t-allocate-a-too-large-buff.patch
+> +++ /dev/null
+> @@ -1,70 +0,0 @@
+> -From 32027e199368dad9508965aae8cd8de5b6ab5231 Mon Sep 17 00:00:00 2001
+> -From: Guy Harris <guy@alum.mit.edu>
+> -Date: Sat, 18 Apr 2020 14:04:59 -0700
+> -Subject: [PATCH] PPP: When un-escaping, don't allocate a too-large buffer.
+> -
+> -The buffer should be big enough to hold the captured data, but it
+> -doesn't need to be big enough to hold the entire on-the-network packet,
+> -if we haven't captured all of it.
+> -
+> -(backported from commit e4add0b010ed6f2180dcb05a13026242ed935334)
+> -
+> -Upstream-Status: Backport
+> -Signed-off-by: Stacy Gaikovaia <stacy.gaikovaia@windriver.com>
+> -
+> ----
+> - print-ppp.c | 18 ++++++++++++++----
+> - 1 file changed, 14 insertions(+), 4 deletions(-)
+> -
+> -diff --git a/print-ppp.c b/print-ppp.c
+> -index 89176172..33fb0341 100644
+> ---- a/print-ppp.c
+> -+++ b/print-ppp.c
+> -@@ -1367,19 +1367,29 @@ trunc:
+> - 	return 0;
+> - }
+> - 
+> -+/*
+> -+ * Un-escape RFC 1662 PPP in HDLC-like framing, with octet escapes.
+> -+ * The length argument is the on-the-wire length, not the captured
+> -+ * length; we can only un-escape the captured part.
+> -+ */
+> - static void
+> - ppp_hdlc(netdissect_options *ndo,
+> -          const u_char *p, int length)
+> - {
+> -+	u_int caplen = ndo->ndo_snapend - p;
+> - 	u_char *b, *t, c;
+> - 	const u_char *s;
+> --	int i, proto;
+> -+	u_int i;
+> -+	int proto;
+> - 	const void *se;
+> - 
+> -+	if (caplen == 0)
+> -+		return;
+> -+
+> -         if (length <= 0)
+> -                 return;
+> - 
+> --	b = (u_char *)malloc(length);
+> -+	b = (u_char *)malloc(caplen);
+> - 	if (b == NULL)
+> - 		return;
+> - 
+> -@@ -1388,10 +1398,10 @@ ppp_hdlc(netdissect_options *ndo,
+> - 	 * Do this so that we dont overwrite the original packet
+> - 	 * contents.
+> - 	 */
+> --	for (s = p, t = b, i = length; i > 0 && ND_TTEST(*s); i--) {
+> -+	for (s = p, t = b, i = caplen; i != 0; i--) {
+> - 		c = *s++;
+> - 		if (c == 0x7d) {
+> --			if (i <= 1 || !ND_TTEST(*s))
+> -+			if (i <= 1)
+> - 				break;
+> - 			i--;
+> - 			c = *s++ ^ 0x20;
+> --- 
+> -2.17.1
+> -
+> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/0001-aclocal.m4-Skip-checking-for-pcap-config.patch b/meta-networking/recipes-support/tcpdump/tcpdump/0001-aclocal.m4-Skip-checking-for-pcap-config.patch
+> new file mode 100644
+> index 000000000..bb56c4d4c
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/tcpdump/tcpdump/0001-aclocal.m4-Skip-checking-for-pcap-config.patch
+> @@ -0,0 +1,33 @@
+> +From 867bf5c9d0fb64e1b4e64cb13b983674c270a6bf Mon Sep 17 00:00:00 2001
+> +From: Yi Fan Yu <yifan.yu@windriver.com>
+> +Date: Fri, 19 Feb 2021 00:52:35 -0500
+> +Subject: [PATCH] aclocal.m4: Skip checking for pcap-config
+> +
+> +Bitbake triggers an configure error
+> +saying we should look for pkg-config instead.
+> +
+> +Upstream-Status: Inappropriate [OE-Specific]
+> +
+> +Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+> +---
+> + aclocal.m4 | 4 ++--
+> + 1 file changed, 2 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/aclocal.m4 b/aclocal.m4
+> +index bd4e27a5..136cb8ca 100644
+> +--- a/aclocal.m4
+> ++++ b/aclocal.m4
+> +@@ -584,8 +584,8 @@ AC_DEFUN(AC_LBL_LIBPCAP,
+> +             # No pkg-config
+> +             # Look for an installed pcap-config.
+> +             #
+> +-            AC_PATH_TOOL(PCAP_CONFIG, pcap-config)
+> +-            if test -n "$PCAP_CONFIG" ; then
+> ++            # AC_PATH_TOOL(PCAP_CONFIG, pcap-config)
+> ++            if false; then
+> +                 #
+> +                 # Found - use it to get the include flags for
+> +                 # libpcap and the flags to link with libpcap.
+> +-- 
+> +2.29.2
+> +
+> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch b/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
+> index f8ff354fe..c46de4b96 100644
+> --- a/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
+> +++ b/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
+> @@ -1,6 +1,6 @@
+> -From 8c9c728757f89ebe6c4019114b83a63c63596f69 Mon Sep 17 00:00:00 2001
+> -From: "Hongjun.Yang" <hongjun.yang@windriver.com>
+> -Date: Wed, 2 Oct 2019 16:57:06 -0400
+> +From 5f0f70192b0e20336e642b02ca9662ba2fef66cf Mon Sep 17 00:00:00 2001
+> +From: Yi Fan Yu <yifan.yu@windriver.com>
+> +Date: Fri, 19 Feb 2021 15:21:18 -0500
+>  Subject: [PATCH] Add ptest for tcpdump
+>  
+>  Upstream-Status: Pending
+> @@ -8,15 +8,21 @@ Upstream-Status: Pending
+>  Signed-off-by: Hongjun.Yang <hongjun.yang@windriver.com>
+>  Signed-off-by: Peiran Hong <peiran.hong@windriver.com>
+>  
+> +remove perl script not required by ptest causing QA problems
+> +
+> +reference upstream issue/commit:
+> +https://github.com/the-tcpdump-group/tcpdump/issues/26
+> +
+> +Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+>  ---
+> - Makefile.in | 10 +++++++++-
+> - 1 file changed, 9 insertions(+), 1 deletion(-)
+> + Makefile.in | 11 ++++++++++-
+> + 1 file changed, 10 insertions(+), 1 deletion(-)
+>  
+>  diff --git a/Makefile.in b/Makefile.in
+> -index 3b589184..7b10e38c 100644
+> +index ea1ef1d0..e7987bd8 100644
+>  --- a/Makefile.in
+>  +++ b/Makefile.in
+> -@@ -437,9 +437,17 @@ distclean:
+> +@@ -445,9 +445,18 @@ distclean:
+>   	    tests/failure-outputs.txt
+>   	rm -rf autom4te.cache tests/DIFF tests/NEW
+>   
+> @@ -24,14 +30,18 @@ index 3b589184..7b10e38c 100644
+>  +buildtest-TESTS: tcpdump
+>  +
+>  +runtest-PTEST:
+> -	(mkdir -p tests && SRCDIR=`cd ${srcdir}; pwd` && export SRCDIR && $$SRCDIR/tests/TESTrun.sh )
+> + 	$(srcdir)/tests/TESTrun
+>   
+>  +install-ptest:
+>  +	cp -r tests                     $(DESTDIR)
+> ++	rm $(DESTDIR)/tests/setkey2esp-secrets.pl
+>  +	cp -r config.h                  $(DESTDIR)
+>  +	install -m 0755 Makefile        $(DESTDIR)
+> -+	ln -sf /usr/sbin/tcpdump        $(DESTDIR)/tcpdump
+> ++	ln -s /usr/bin/tcpdump          $(DESTDIR)/tcpdump
+>  +
+>   extags: $(TAGFILES)
+>   	ctags $(TAGFILES)
+>   
+> +-- 
+> +2.29.2
+> +
+> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/avoid-absolute-path-when-searching-for-libdlpi.patch b/meta-networking/recipes-support/tcpdump/tcpdump/avoid-absolute-path-when-searching-for-libdlpi.patch
+> deleted file mode 100644
+> index 977ab95b7..000000000
+> --- a/meta-networking/recipes-support/tcpdump/tcpdump/avoid-absolute-path-when-searching-for-libdlpi.patch
+> +++ /dev/null
+> @@ -1,31 +0,0 @@
+> -From 02085028cdaf075943c27ebc02bb6de0289ec1d3 Mon Sep 17 00:00:00 2001
+> -From: Andre McCurdy <armccurdy@gmail.com>
+> -Date: Wed, 2 Oct 2019 16:43:48 -0400
+> -Subject: [PATCH] avoid absolute path when searching for libdlpi
+> -
+> -Let the build environment control library search paths.
+> -
+> -Upstream-Status: Inappropriate [OE specific]
+> -
+> -Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+> -Signed-off-by: Peiran Hong <peiran.hong@windriver.com>
+> ----
+> - configure.ac | 2 +-
+> - 1 file changed, 1 insertion(+), 1 deletion(-)
+> -
+> -diff --git a/configure.ac b/configure.ac
+> -index 3401a7a3..6a52485a 100644
+> ---- a/configure.ac
+> -+++ b/configure.ac
+> -@@ -528,7 +528,7 @@ don't.])
+> - fi
+> - 
+> - # libdlpi is needed for Solaris 11 and later.
+> --AC_CHECK_LIB(dlpi, dlpi_walk, LIBS="$LIBS -ldlpi" LDFLAGS="-L/lib $LDFLAGS", ,-L/lib)
+> -+AC_CHECK_LIB(dlpi, dlpi_walk, LIBS="$LIBS -ldlpi")
+> - 
+> - dnl
+> - dnl Check for "pcap_list_datalinks()", "pcap_set_datalink()",
+> --- 
+> -2.17.1
+> -
+> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch b/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
+> deleted file mode 100644
+> index 8793bf7a3..000000000
+> --- a/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
+> +++ /dev/null
+> @@ -1,40 +0,0 @@
+> -From dd023c133980fcc0cff5896e85377675e0571894 Mon Sep 17 00:00:00 2001
+> -From: Roy Li <rongqing.li@windriver.com>
+> -Date: Tue, 8 Jul 2014 13:20:47 +0800
+> -Subject: [PATCH] unnecessary to check libpcap
+> -
+> -since the check of libpcap did not consider the cross-compile, lead to the
+> -below error:
+> -	This autoconf log indicates errors, it looked at host include and/or
+> -	library paths while determining system capabilities.
+> -
+> -In fact, the libpcap has been added into the tcpdump's DEPENDS, not need to
+> -check if libpcap existed.
+> -
+> -Upstream-Status: Inappropriate [OE specific]
+> -
+> -Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> -Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+> -Signed-off-by: Peiran Hong <peiran.hong@windriver.com>
+> ----
+> - configure.ac | 4 +++-
+> - 1 file changed, 3 insertions(+), 1 deletion(-)
+> -
+> -diff --git a/configure.ac b/configure.ac
+> -index 56e2a624..3401a7a3 100644
+> ---- a/configure.ac
+> -+++ b/configure.ac
+> -@@ -404,7 +404,9 @@ dnl Some platforms may need -lnsl for getrpcbynumber.
+> - AC_SEARCH_LIBS(getrpcbynumber, nsl,
+> -     AC_DEFINE(HAVE_GETRPCBYNUMBER, 1, [define if you have getrpcbynumber()]))
+> - 
+> --AC_LBL_LIBPCAP(V_PCAPDEP, V_INCLS)
+> -+# Simplified (more cross compile friendly) check for libpcap. All we really
+> -+# need is to sanity check that libpcap is available and add -lpcap to LIBS.
+> -+AC_CHECK_LIB(pcap, pcap_compile, LIBS="$LIBS -lpcap")
+> - 
+> - #
+> - # Check for these after AC_LBL_LIBPCAP, so we link with the appropriate
+> --- 
+> -2.17.1
+> -
+> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.99.0.bb
+> similarity index 67%
+> rename from meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
+> rename to meta-networking/recipes-support/tcpdump/tcpdump_4.99.0.bb
+> index afcb4d508..66510b7fd 100644
+> --- a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
+> +++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.99.0.bb
+> @@ -2,26 +2,33 @@ SUMMARY = "A sophisticated network protocol analyzer"
+>  HOMEPAGE = "http://www.tcpdump.org/"
+>  SECTION = "net"
+>  LICENSE = "BSD-3-Clause"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=1d4b0366557951c84a94fabe3529f867"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=5eb289217c160e2920d2e35bddc36453"
+>  
+>  DEPENDS = "libpcap"
+>  
+>  RDEPENDS_${PN}-ptest += " make perl \
+>  	perl-module-file-basename \
+> +	perl-module-file-spec \
+> +	perl-module-file-spec-unix \
+> +	perl-module-file-path \
+> +	perl-module-file-glob \
+> +	perl-module-data-dumper \
+> +	perl-module-bytes \
+>  	perl-module-posix \
+> -	perl-module-carp"
+> +	perl-module-carp \
+> +	perl-module-cwd \
+> +    perl-module-constant \
+> +"
+>  
+>  SRC_URI = " \
+>      http://www.tcpdump.org/release/${BP}.tar.gz \
+> -    file://unnecessary-to-check-libpcap.patch \
+> -    file://avoid-absolute-path-when-searching-for-libdlpi.patch \
+>      file://add-ptest.patch \
+>      file://run-ptest \
+> -    file://0001-PPP-When-un-escaping-don-t-allocate-a-too-large-buff.patch \
+> +    file://0001-aclocal.m4-Skip-checking-for-pcap-config.patch \
+>  "
+>  
+> -SRC_URI[md5sum] = "a4ead41d371f91aa0a2287f589958bae"
+> -SRC_URI[sha256sum] = "2cd47cb3d460b6ff75f4a9940f594317ad456cfbf2bd2c8e5151e16559db6410"
+> +SRC_URI[md5sum] = "b10aa2f497def7283bc060f626879ce5"
+> +SRC_URI[sha256sum] = "8cf2f17a9528774a7b41060323be8b73f76024f7778f59c34efa65d49d80b842"
+>  
+>  UPSTREAM_CHECK_REGEX = "tcpdump-(?P<pver>\d+(\.(?!99)\d+)+)\.tar"
+>  
+> @@ -46,7 +53,7 @@ do_configure_prepend() {
+>  
+>  do_install_append() {
+>      # make install installs an unneeded extra copy of the tcpdump binary
+> -    rm -f ${D}${sbindir}/tcpdump.${PV}
+> +    rm ${D}${bindir}/tcpdump.${PV}
+>  }
+>  
+>  do_compile_ptest() {
+>
+> 
+>
 
