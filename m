@@ -1,81 +1,153 @@
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web09.10082.1613844201618442795
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
+ by mx.groups.io with SMTP id smtpd.web09.10538.1613846251339158830
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 20 Feb 2021 10:03:21 -0800
+ Sat, 20 Feb 2021 10:37:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=KY0eyJcg;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id f8so5180511plg.5
-        for <openembedded-devel@lists.openembedded.org>; Sat, 20 Feb 2021 10:03:21 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=g2hQY34d;
+ spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f176.google.com with SMTP id n10so7488968pgl.10
+        for <openembedded-devel@lists.openembedded.org>; Sat, 20 Feb 2021 10:37:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=zoc3oc3PxoVJ8EWTdC6S5W60wSiFSyiqEx6n8GF2zhY=;
-        b=KY0eyJcghzPviBFNTagap/yAln/j8PeS4UMPRV3U3lgMZiNvxfKHdlwpMEsURDKHQY
-         YOPjF6yS6OzaPxzGJFgSjQIDodoMzi0lrIN4dePKrtiUKROdChKqSR7uSjkjSWqRkAzZ
-         Y6HKPXTG82cU3GClrUvZOwMzCxvneIMGG5DYgCJXF2GbsdCU8kQ/uJ6C2KOCeCx+VOL/
-         5P9AxXvQ6mgnWm0UC792sPu6mJnntmbP5/n0xy0tFqFD+OcZzbXbv9fLt0VY2c1+Gs7A
-         /s5v135GScoEi0fxZUXr0IoENAsWbPOiQ8R3t7h3sqVJ8BIubWhm3tPZOEVW000r6jN/
-         jBTQ==
+        h=subject:to:references:from:organization:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=vWSQEfvwguDuYHw9zk98CoiS676QxwPUQgWN5F1Uj8U=;
+        b=g2hQY34d7dhrRPMmfcV02GWQZVj9goyIlz1H2Y/J4KqVNaMX4/Si/idkxAGRx72OPm
+         TLE9018w6eQoz+irVb+BP+nitedZCS+V2WodWtnS+eXE4S1+N4oO6xRnOm+CdQ2rl5WP
+         ve8iDPypwlpe5LoHGC9gpvosV5nTfKwlj/B+kjRMVIenK/Mc/1qFrEqyw9jcodvqjEc2
+         r5TvYNjnQz8IUw+fsrgds0jma/RgPhujPYMQWkdXAG84iNkN4rM6KHDcUdwg3/72qy3s
+         2Bv43PmlunQ9VUbifVjWKf765ccfVHqM96MF5vGQyjWTOIoxnt4rD7ts4cBKddW2KT/p
+         ZIaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=zoc3oc3PxoVJ8EWTdC6S5W60wSiFSyiqEx6n8GF2zhY=;
-        b=QTMzQ/O8gQ2MNPFwv5DxmQj0W4OJ3kW3mz+PwX/Catm3qovRSB+mheGHPIZm0x8XDS
-         gXa/APGFZ4tXU/3r4c5Eiu+pmRt0RH7s5rBTj7EmOylqyWB6hLpB7tMAbaA6IZ/0NUMH
-         E3HOCcAjlFGekLwavpPU/rlsWQUmk3nDEFSEVp2wsvp+ZsrLs2yt8T+xXqYRkHAh4a4a
-         gNuPtEhWraWOAWLdU/6TGnOHOOQMqaEijMsNffxIhC3jPhp5UnCDaxA5dZaJenI3UJgE
-         MwmyThhkhySmEBqcdfG+N3/T4Fcd8Ddko86bPC37CRCZmelqBv9FMl849yfGbAlC6YCA
-         ixjA==
-X-Gm-Message-State: AOAM532oZU8GomZn0X0At5B3P/mfhk3LKul/S9XETfsejeikRC4g3mFk
-	bP6+yvOD93zPznVwiJeiyYA7myfooEwsaQ==
-X-Google-Smtp-Source: ABdhPJwZDy8lxgersivGERYzJvkvwTN/uFjzENoch3AutwnQlXSUeci7sFkVlSsq1AweyZ/1TFTJ5w==
-X-Received: by 2002:a17:90b:110c:: with SMTP id gi12mr14890612pjb.48.1613844200963;
-        Sat, 20 Feb 2021 10:03:20 -0800 (PST)
-Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:70a2:885b:8c45:14d6])
-        by smtp.gmail.com with ESMTPSA id c17sm12106267pjq.17.2021.02.20.10.03.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 20 Feb 2021 10:03:20 -0800 (PST)
-From: "akuster" <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][dunfell][PATCH 5/5] python3-pykwalify: Do not unset _PYTHON_SYSCONFIGDATA_NAME
-Date: Sat, 20 Feb 2021 10:03:16 -0800
-Message-Id: <20210220180316.17789-5-akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210220180316.17789-1-akuster808@gmail.com>
-References: <20210220180316.17789-1-akuster808@gmail.com>
+        h=x-gm-message-state:subject:to:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=vWSQEfvwguDuYHw9zk98CoiS676QxwPUQgWN5F1Uj8U=;
+        b=dT8FoXJ97AnEBdQ2cvjZpF9EG8MTzj2eCFL+aV8dcsgxMo74sxo06+GXdMHjKCqXUU
+         SVAuaPd7BZTpRNE4CwYjFUXzgFmU4TwgndW06JxevzDIPGLJrAZCOs+8HbFKDdJtzbnS
+         6TAV/ziIzwHYXyMt004czIwlwh/mqB1lMJFGp4/yZkiduoQLm49PmTGnDyvLI9E3iThI
+         jhJ4HG28EwYwRNnywbZcGMgIIscmsaNsDe39/9iA9psWRD0ZUMg9I9OOVJXkftO29xnP
+         ql0HIQHQ29v/GmgJ5eCsV50PLTztPUwSYyNyTRXMWPlampNy0yO4AcZBAcKr63y0laOs
+         cGvQ==
+X-Gm-Message-State: AOAM532mSRCy+Z9htLOFUlAsT1z1MZVzYu0+jZsKK3d/SGan/ZtY6Cn9
+	4J0Fp5TDH+KghQ5ZVftQqlTpYbRzwVDzyg==
+X-Google-Smtp-Source: ABdhPJw1XkXuNt8vDk0cXaEAsDCOtAapzSQZSrZjTn5oZJ6hfrYy66K/uc+0ufDU1D0pTWjz3LWBbg==
+X-Received: by 2002:a62:503:0:b029:1c0:aed7:c88 with SMTP id 3-20020a6205030000b02901c0aed70c88mr14915093pff.76.1613846250586;
+        Sat, 20 Feb 2021 10:37:30 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:a0f0::7bdf? ([2601:646:9200:a0f0::7bdf])
+        by smtp.gmail.com with ESMTPSA id e17sm12283478pjh.39.2021.02.20.10.37.29
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 20 Feb 2021 10:37:30 -0800 (PST)
+Subject: Re: meta-openembedded gatesgarth merge request Feb 20th
+To: akuster808 <akuster808@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+References: <f45abe8c-bd3d-3d8c-a46b-b4491d729f0f@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <41fffeaa-cf2d-9c34-3658-f98066b18aac@gmail.com>
+Date: Sat, 20 Feb 2021 10:37:28 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.1
+MIME-Version: 1.0
+In-Reply-To: <f45abe8c-bd3d-3d8c-a46b-b4491d729f0f@gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-From: Khem Raj <raj.khem@gmail.com>
+Thanks Armin applied.
 
-its been shoved out of setuptools3 in oe-core now
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-(cherry picked from commit 50bbf80abf570d1d652ec2f4bc5878e939c688d3)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
-(cherry picked from commit fbe2e79ab0dd4e0b2fd6433d0cfe10d66c7c7181)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb b/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
-index 1bbde6986a..9251eccebe 100644
---- a/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pykwalify_1.7.0.bb
-@@ -10,8 +10,8 @@ SRC_URI[sha256sum] = "7e8b39c5a3a10bc176682b3bd9a7422c39ca247482df198b402e8015de
- SRC_URI += "file://0001-rule.py-fix-missing-comma.patch"
- 
- PYPI_PACKAGE = "pykwalify"
-+
- inherit setuptools3 pypi
--unset _PYTHON_SYSCONFIGDATA_NAME
- 
- RDEPENDS_${PN} = "\
-     ${PYTHON_PN}-dateutil \
--- 
-2.17.1
-
+On 2/20/21 9:39 AM, akuster808 wrote:
+> The following changes since commit cef93b7b00e620d90a610112ee574fa60b691cf8:
+> 
+>    openldap: upgrade 2.4.56 -> 2.4.57 (2021-02-02 10:18:22 -0800)
+> 
+> are available in the Git repository at:
+> 
+>    https://git.openembedded.org/meta-openembedded gatesgarth-next
+> 
+> for you to fetch changes up to 945f062ff098dc9c8ba8d22c5eef88adec60730d:
+> 
+>    meta-oe/README: add Ubuntu prerequisite information (2021-02-15
+> 08:19:35 -0800)
+> 
+> ----------------------------------------------------------------
+> Armin Kuster (1):
+>        lua: update to 5.3.6
+> 
+> Kai Kang (1):
+>        mariadb: add package config zstd
+> 
+> Khem Raj (7):
+>        mariadb: Fix build on 32bit arches with 64bit time_t
+>        gedit: Inherit python3targetconfig
+>        openipmi: Inherit python3targetconfig
+>        libplist: Inherit python3targetconfig
+>        postgresql: Inherit python3targetconfig
+>        python-grpcio-tools: Add missing space for append
+>        python3-pykwalify: Do not unset _PYTHON_SYSCONFIGDATA_NAME
+> 
+> Mario Schuknecht (1):
+>        dnsmasq: Fix systemd service
+> 
+> Martin Jansa (1):
+>        wireguard-module: remove PKG assignment
+> 
+> Mingli Yu (1):
+>        mariadb: upgrade to 10.5.8
+> 
+> Qi.Chen@windriver.com (1):
+>        minifi-cpp: set PSEUDO_CONSIDER_PATHS
+> 
+> Shlomi Vaknin (1):
+>        python3-sh: remove python3-tests from RDEPENDS
+> 
+> Wang Mingyu (1):
+>        dnsmasq: upgrade 2.82 -> 2.84
+> 
+> akuster (2):
+>        enca: Fix SRC_URI
+>        meta-oe/README: add Ubuntu prerequisite information
+> 
+> changqing.li@windriver.com (1):
+>        celt051: update SRC_URI
+> 
+>   meta-gnome/recipes-gnome/gedit/gedit_3.36.2.bb     |  2 +-
+>   .../wireguard/wireguard-module_1.0.20200908.bb     |  7 ----
+>   .../recipes-support/celt051/celt051_git.bb         |  2 +-
+>   .../recipes-support/dnsmasq/dnsmasq/lua.patch      |  9 ++---
+>   .../recipes-support/dnsmasq/dnsmasq_2.82.bb        |  8 -----
+>   .../recipes-support/dnsmasq/dnsmasq_2.84.bb        |  8 +++++
+>   .../dnsmasq/files/dnsmasq-resolvconf.service       |  2 +-
+>   .../recipes-support/openipmi/openipmi_2.0.29.bb    |  2 +-
+>   meta-oe/README                                     |  3 ++
+>   ...b-native_10.5.6.bb => mariadb-native_10.5.8.bb} |  0
+>   meta-oe/recipes-dbs/mysql/mariadb.inc              |  5 ++-
+>   ...se-Define-__NR_futex-if-it-does-not-exist.patch | 37
+> +++++++++++++++++++++
+>   ...-stacktrace-t.c-make-the-test-conditional.patch | 38
+> ++++++++++++++++++++++
+>   .../recipes-dbs/mysql/mariadb/c11_atomics.patch    | 14 ++++----
+>   .../mysql/{mariadb_10.5.6.bb => mariadb_10.5.8.bb} |  0
+>   meta-oe/recipes-dbs/postgresql/postgresql.inc      |  2 +-
+>   .../lua/{lua_5.3.5.bb => lua_5.3.6.bb}             |  6 ++--
+>   .../libimobiledevice/libplist_2.2.0.bb             |  2 +-
+>   .../minifi-cpp/minifi-cpp_0.7.0.bb                 |  1 +
+>   meta-oe/recipes-support/enca/enca_1.9.bb           |  7 ++--
+>   .../python/python-grpcio-tools.inc                 |  2 +-
+>   .../python/python3-pykwalify_1.7.0.bb              |  2 +-
+>   .../recipes-devtools/python/python3-sh_1.14.1.bb   |  1 -
+>   23 files changed, 117 insertions(+), 43 deletions(-)
+>   delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.82.bb
+>   create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.84.bb
+>   rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.5.6.bb =>
+> mariadb-native_10.5.8.bb} (100%)
+>   create mode 100644
+> meta-oe/recipes-dbs/mysql/mariadb/0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch
+>   create mode 100644
+> meta-oe/recipes-dbs/mysql/mariadb/0001-stacktrace-t.c-make-the-test-conditional.patch
+>   rename meta-oe/recipes-dbs/mysql/{mariadb_10.5.6.bb =>
+> mariadb_10.5.8.bb} (100%)
+>   rename meta-oe/recipes-devtools/lua/{lua_5.3.5.bb => lua_5.3.6.bb} (92%)
+> 
