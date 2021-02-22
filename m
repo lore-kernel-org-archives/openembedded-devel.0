@@ -1,191 +1,209 @@
-Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
- by mx.groups.io with SMTP id smtpd.web10.38048.1614013939785987502
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web09.38647.1614014128652743907
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Feb 2021 09:12:19 -0800
+ Mon, 22 Feb 2021 09:15:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=FirX66Q3;
- spf=pass (domain: gmail.com, ip: 209.85.216.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f46.google.com with SMTP id gm18so4203494pjb.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Feb 2021 09:12:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=zxRYiZEgsUIGXeQOsXqvecNj3Na2LE4tlT4aRof3dw8=;
-        b=FirX66Q3z1H3L0OPYcC0n1/ZQr1cPucPYUX/kbJ+zQmFnlHgxTLp2cUqn8FGLPOvoH
-         OMY9Q69WaD06Su7whnVsMuocE8tUlvWW5aXWOVolrJ7iL+qxHgKsRj4g8f0B3yr3lhMp
-         gI2z8x15XFuVEtc74lLIznfz5P6LMw2KRnc5zvK3U7KlvYifHdMEdxm5d7Rq1muqyGMQ
-         n2d8+XH0WKx+Ulba3ccKcqUBy9nNpkEmIn0AcXehjkBuaU/+4CnNLveP6akBUycLIes5
-         weND9jGMqDBEanmkGWyXgSYEUOfmy92yc8HWcGmJIcxn/nmMUHRXQBcugb9x1vcqzSkQ
-         a10w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=zxRYiZEgsUIGXeQOsXqvecNj3Na2LE4tlT4aRof3dw8=;
-        b=RwruD1zMNFvYjVE1rrKvktfGtnyiMz5lJuN2cEJU7rODvFp98bnIRV0tMrPwFqErW0
-         xwfUbsx8rA1SD7sX4qJmFzqRuxXhN+tsW+OmeR4c9n0i7Gn8i7ANguLe+416ECXSNMod
-         BgZxT//zwHFP65LCvQBegs8x+YD/nGjS6jadJ0iXBFXiaxMeifaibxxhpwzaG2BMkC1u
-         1/J/OSAzsXONCXO/q+Yaeq/5K3sJGPsPvM0IH98IuRlx2TbLbK3/gqYcqsClT8gmU90z
-         pz95Z6hKCxz6UiXsUkc5bPe+bu7grLK6eFtAD9NL+p1oaA11Ks7BWD0yCGzzd7kTcJhv
-         Um1g==
-X-Gm-Message-State: AOAM532YcL5X1tDoVA8latfzKF6Ci5ooit0xC3XAhxAhFeTumc7aweI4
-	NtZ1Nku3Wla2c/zQtI9//UEjLB85S4gU4w==
-X-Google-Smtp-Source: ABdhPJxlH98K+EjIozCGTi9Er9lxb9bXhoKYK0MT+8lla7uKgDh9+geuGAAujq96GpYgiOKHn/v/PA==
-X-Received: by 2002:a17:902:6ac5:b029:e3:2709:4c1f with SMTP id i5-20020a1709026ac5b02900e327094c1fmr23580600plt.19.1614013938883;
-        Mon, 22 Feb 2021 09:12:18 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0:db81:2f56:60e4:2c64])
-        by smtp.gmail.com with ESMTPSA id d16sm8844029pgb.12.2021.02.22.09.12.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 Feb 2021 09:12:18 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=53598 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1lEEnj-0000UX-M1; Mon, 22 Feb 2021 19:15:16 +0200
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] openldap: Refresh patches to remove fuzz
-Date: Mon, 22 Feb 2021 09:12:15 -0800
-Message-Id: <20210222171215.2765315-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.1
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH] python3-h5py: Upgrade 2.10.0 -> 3.1.0
+Date: Mon, 22 Feb 2021 19:15:10 +0200
+Message-Id: <20210222171510.17951-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
+X-OutGoing-Spam-Status: No, score=-0.2
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Fixes [patch-fuzz] QA errors
+Upgrade to release 3.1.0:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+- Fix using bytes as names for :meth:`~Group.create_dataset` and
+￼  :meth:`~Group.create_virtual_dataset`.
+- Fix writing data as a list to a dataset with a sub-array data
+  type.
+- Preserve endianess in Cython dataset Reader
+- If pytest is missing pytest-mpi then it will now fail
+  immediately with a clear warning message
+- Fix a test which was failing on big-endian systems
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-support/openldap/openldap/install-strip.patch | 6 +++---
- .../openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch | 6 +++---
- .../openldap/openldap/openldap-CVE-2015-3276.patch        | 7 +------
- .../openldap/openldap/openldap-m4-pthread.patch           | 8 ++++----
- .../openldap/remove-user-host-pwd-from-version.patch      | 5 -----
- .../recipes-support/openldap/openldap/use-urandom.patch   | 4 ++--
- 6 files changed, 13 insertions(+), 23 deletions(-)
+ .../0001-cross-compiling-support.patch        | 47 -------------------
+ .../0001-setup.py-Fix-numpy-version.patch     | 28 +++++++++++
+ ...1-setup_build.py-avoid-absolute-path.patch | 15 +++---
+ ...3-h5py_2.10.0.bb => python3-h5py_3.1.0.bb} |  5 +-
+ 4 files changed, 37 insertions(+), 58 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-h5py/0001-cross-compiling-support.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-h5py/0001-setup.py-Fix-numpy-version.patch
+ rename meta-python/recipes-devtools/python/{python3-h5py_2.10.0.bb => python3-h5py_3.1.0.bb} (78%)
 
-diff --git a/meta-oe/recipes-support/openldap/openldap/install-strip.patch b/meta-oe/recipes-support/openldap/openldap/install-strip.patch
-index 7c675962b6..b59db3939e 100644
---- a/meta-oe/recipes-support/openldap/openldap/install-strip.patch
-+++ b/meta-oe/recipes-support/openldap/openldap/install-strip.patch
-@@ -4,9 +4,9 @@
- 
- Upstream-Status: Pending
- 
----- openldap-2.2.24/.pc/install-strip.patch/build/top.mk	2005-01-20 09:00:55.000000000 -0800
--+++ openldap-2.2.24/build/top.mk	2005-04-16 13:48:20.536710376 -0700
--@@ -116,7 +116,7 @@
-+--- a/build/top.mk
-++++ b/build/top.mk
-+@@ -121,7 +121,7 @@ LTCOMPILE_MOD = $(LIBTOOL) $(LTONLY_MOD)
-  LTLINK_MOD = $(LIBTOOL) $(LTONLY_MOD) --mode=link \
-  	$(CC) $(LT_CFLAGS) $(LDFLAGS) $(LTFLAGS_MOD)
-  
-diff --git a/meta-oe/recipes-support/openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch b/meta-oe/recipes-support/openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch
-index 86d0767a47..91bcc0435e 100644
---- a/meta-oe/recipes-support/openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch
-+++ b/meta-oe/recipes-support/openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch
-@@ -4,9 +4,9 @@ Upstream-status: Pending
- 
- --
- 
----- openldap-2.4.28/configure.in.orig	2012-02-11 22:40:36.004360795 +0000
--+++ openldap-2.4.28/configure.in	2012-02-11 22:40:13.410986851 +0000
--@@ -1214,7 +1214,7 @@
-+--- a/configure.in
-++++ b/configure.in
-+@@ -1227,7 +1227,7 @@ if test $ol_link_tls = no ; then
-  				ol_with_tls=gnutls
-  				ol_link_tls=yes
-  
-diff --git a/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch b/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch
-index ce8b47ae4e..ab5c4de66a 100644
---- a/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch
-+++ b/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch
-@@ -19,11 +19,9 @@ Signed-off-by: Li Wang <li.wang@windriver.com>
-  libraries/libldap/tls_m.c |   27 ++++++++++++++++-----------
-  1 file changed, 16 insertions(+), 11 deletions(-)
- 
--diff --git a/libraries/libldap/tls_m.c b/libraries/libldap/tls_m.c
--index 9b101f9..e6f3051 100644
- --- a/libraries/libldap/tls_m.c
- +++ b/libraries/libldap/tls_m.c
--@@ -621,18 +621,23 @@ nss_parse_ciphers(const char *cipherstr, int cipher_list[ciphernum])
-+@@ -620,18 +620,23 @@ nss_parse_ciphers(const char *cipherstr,
-  			 */
-  			if (mask || strength || protocol) {
-  				for (i=0; i<ciphernum; i++) {
-@@ -58,6 +56,3 @@ index 9b101f9..e6f3051 100644
-  				}
-  			} else {
-  				for (i=0; i<ciphernum; i++) {
---- 
--1.7.9.5
+diff --git a/meta-python/recipes-devtools/python/python3-h5py/0001-cross-compiling-support.patch b/meta-python/recipes-devtools/python/python3-h5py/0001-cross-compiling-support.patch
+deleted file mode 100644
+index 8c0b914326..0000000000
+--- a/meta-python/recipes-devtools/python/python3-h5py/0001-cross-compiling-support.patch
++++ /dev/null
+@@ -1,47 +0,0 @@
+-From 364fd0906efa349ea44a761820408dcf6b2b8726 Mon Sep 17 00:00:00 2001
+-From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Tue, 29 Jan 2019 17:08:32 +0800
+-Subject: [PATCH] cross compiling support
 -
-diff --git a/meta-oe/recipes-support/openldap/openldap/openldap-m4-pthread.patch b/meta-oe/recipes-support/openldap/openldap/openldap-m4-pthread.patch
-index 38c0a5af2f..4d1fda96e4 100644
---- a/meta-oe/recipes-support/openldap/openldap/openldap-m4-pthread.patch
-+++ b/meta-oe/recipes-support/openldap/openldap/openldap-m4-pthread.patch
-@@ -1,8 +1,8 @@
- Upstream-Status: Pending
- 
----- openldap-2.3.11/build/openldap.m4.orig	2005-11-11 00:11:18.604322590 -0800
--+++ openldap-2.3.11/build/openldap.m4	2005-11-11 00:26:21.621145856 -0800
--@@ -788,7 +788,7 @@ AC_DEFUN([OL_PTHREAD_TEST_FUNCTION],[[
-+--- a/build/openldap.m4
-++++ b/build/openldap.m4
-+@@ -651,7 +651,7 @@ AC_DEFUN([OL_PTHREAD_TEST_FUNCTION],[[
-  ]])
-  
-  AC_DEFUN([OL_PTHREAD_TEST_PROGRAM],
-@@ -11,7 +11,7 @@ Upstream-Status: Pending
-  
-  int main(argc, argv)
-  	int argc;
--@@ -796,7 +796,7 @@ int main(argc, argv)
-+@@ -659,7 +659,7 @@ int main(argc, argv)
-  {
-  OL_PTHREAD_TEST_FUNCTION
-  }
-diff --git a/meta-oe/recipes-support/openldap/openldap/remove-user-host-pwd-from-version.patch b/meta-oe/recipes-support/openldap/openldap/remove-user-host-pwd-from-version.patch
-index 870fc98adf..7a1b5aaad7 100644
---- a/meta-oe/recipes-support/openldap/openldap/remove-user-host-pwd-from-version.patch
-+++ b/meta-oe/recipes-support/openldap/openldap/remove-user-host-pwd-from-version.patch
-@@ -12,8 +12,6 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
-  build/mkversion | 8 ++++++--
-  1 file changed, 6 insertions(+), 2 deletions(-)
- 
--diff --git a/build/mkversion b/build/mkversion
--index 4e35723..9fa3bee 100755
- --- a/build/mkversion
- +++ b/build/mkversion
- @@ -53,8 +53,12 @@ APPLICATION=$1
-@@ -39,6 +37,3 @@ index 4e35723..9fa3bee 100755
-  "\t$WHOWHERE\n";
-  
-  __EOF__
---- 
--2.7.4
+-Remove useless dirs
 -
-diff --git a/meta-oe/recipes-support/openldap/openldap/use-urandom.patch b/meta-oe/recipes-support/openldap/openldap/use-urandom.patch
-index e7b988fafd..96a03369a7 100644
---- a/meta-oe/recipes-support/openldap/openldap/use-urandom.patch
-+++ b/meta-oe/recipes-support/openldap/openldap/use-urandom.patch
-@@ -11,7 +11,7 @@ Signed-off-by: Joe Slater <jslater@windriver.com>
+-Upstream-Status: Inappropriate [oe specific]
+-
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+----
+- setup_build.py     | 4 ----
+- setup_configure.py | 2 +-
+- 2 files changed, 1 insertion(+), 5 deletions(-)
+-
+-diff --git a/setup_build.py b/setup_build.py
+-index c0e9a28c..ffd3bef7 100644
+---- a/setup_build.py
+-+++ b/setup_build.py
+-@@ -55,10 +55,6 @@ if sys.platform.startswith('win'):
+-         ('_HDF5USEDLL_', None),
+-         ('H5_BUILT_AS_DYNAMIC_LIB', None)
+-     ])
+--else:
+--    FALLBACK_PATHS['include_dirs'].extend(['/opt/local/include', '/usr/local/include'])
+--    FALLBACK_PATHS['library_dirs'].extend(['/opt/local/lib', '/usr/local/lib'])
+--
+- 
+- class h5py_build_ext(build_ext):
+- 
+-diff --git a/setup_configure.py b/setup_configure.py
+-index 5576775e..75f4141e 100644
+---- a/setup_configure.py
+-+++ b/setup_configure.py
+-@@ -206,7 +206,7 @@ def autodetect_version(hdf5_dir=None):
+-         default_path = 'libhdf5.so'
+-         regexp = re.compile(r'^libhdf5.so')
+- 
+--    libdirs = ['/usr/local/lib', '/opt/local/lib']
+-+    libdirs = []
+-     try:
+-         if pkgconfig.exists("hdf5"):
+-             libdirs.extend(pkgconfig.parse("hdf5")['library_dirs'])
+--- 
+-2.17.1
+-
+diff --git a/meta-python/recipes-devtools/python/python3-h5py/0001-setup.py-Fix-numpy-version.patch b/meta-python/recipes-devtools/python/python3-h5py/0001-setup.py-Fix-numpy-version.patch
+new file mode 100644
+index 0000000000..4881b023c8
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-h5py/0001-setup.py-Fix-numpy-version.patch
+@@ -0,0 +1,28 @@
++From e6c0d487fb5e6063305b8b3187896fbfe5720ed2 Mon Sep 17 00:00:00 2001
++From: Leon Anavi <leon.anavi@konsulko.com>
++Date: Mon, 22 Feb 2021 18:42:43 +0200
++Subject: [PATCH] setup.py: Fix numpy version
++
++Fix numpy version to ensure bitbake will find the pip package.
++
++Upstream-Status: Inappropriate [oe specific]
++
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
++
++---
++ setup.py | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/setup.py b/setup.py
++index 7dbe583..6602c97 100755
++--- a/setup.py
+++++ b/setup.py
++@@ -49,7 +49,7 @@ SETUP_REQUIRES = [
++     f"Cython >=0.29; python_version<'3.8'",
++     f"Cython >=0.29.14; python_version>='3.8'",
++ ] + [
++-    f"numpy =={np_min}; python_version{py_condition}"
+++    f"numpy >={np_min}; python_version{py_condition}"
++     for np_min, py_condition in NUMPY_MIN_VERSIONS
++ ]
++ 
+diff --git a/meta-python/recipes-devtools/python/python3-h5py/0001-setup_build.py-avoid-absolute-path.patch b/meta-python/recipes-devtools/python/python3-h5py/0001-setup_build.py-avoid-absolute-path.patch
+index da95ee7af5..d0c2ece19b 100644
+--- a/meta-python/recipes-devtools/python/python3-h5py/0001-setup_build.py-avoid-absolute-path.patch
++++ b/meta-python/recipes-devtools/python/python3-h5py/0001-setup_build.py-avoid-absolute-path.patch
+@@ -1,6 +1,6 @@
+-From b5d5a7efc7aaa2be830731001ed17c5b71bcefb1 Mon Sep 17 00:00:00 2001
++From 1a46082d0889a784037952c4da0cde3822849032 Mon Sep 17 00:00:00 2001
+ From: Mingli Yu <mingli.yu@windriver.com>
+-Date: Fri, 29 Jan 2021 02:33:06 +0000
++Date: Thu, 28 Jan 2021 18:44:10 -0800
+ Subject: [PATCH] setup_build.py: avoid absolute path
  
- --- a/configure.in
- +++ b/configure.in
--@@ -2142,8 +2142,8 @@ fi
-+@@ -2153,8 +2153,8 @@ fi
+ Prevent absolute path from ending up in the egg-info SOURCES.txt.
+@@ -8,15 +8,17 @@ Prevent absolute path from ending up in the egg-info SOURCES.txt.
+ Upstream-Status: Submitted [https://github.com/h5py/h5py/pull/1803]
+ 
+ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
++
+ ---
+  setup_build.py | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/setup_build.py b/setup_build.py
+-index ffd3bef..fb196c0 100644
++index 3c7c7ad..d824bdd 100644
+ --- a/setup_build.py
+ +++ b/setup_build.py
+-@@ -20,7 +20,7 @@ import api_gen
++@@ -21,7 +21,7 @@ from setup_configure import BuildConfig
   
-  dnl ----------------------------------------------------------------
-  dnl Check for entropy sources
-@@ -21,7 +21,7 @@ Signed-off-by: Joe Slater <jslater@windriver.com>
-  	if test -r /dev/urandom ; then
-  		dev="/dev/urandom";
-  	elif test -r /idev/urandom ; then
--@@ -2156,9 +2156,11 @@ if test $cross_compiling != yes && test 
-+@@ -2167,9 +2167,11 @@ if test $cross_compiling != yes && test
-  		dev="/idev/random";
-  	fi
   
+  def localpath(*args):
+@@ -24,7 +26,4 @@ index ffd3bef..fb196c0 100644
+ +    return op.join(*args)
+  
+  
+- MODULES =  ['defs','_errors','_objects','_proxy', 'h5fd', 'h5z',
+--- 
+-2.29.2
+-
++ MODULES = ['defs', '_errors', '_objects', '_proxy', 'h5fd', 'h5z',
+diff --git a/meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb b/meta-python/recipes-devtools/python/python3-h5py_3.1.0.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb
+rename to meta-python/recipes-devtools/python/python3-h5py_3.1.0.bb
+index b812b323fa..03ae4c9db4 100644
+--- a/meta-python/recipes-devtools/python/python3-h5py_2.10.0.bb
++++ b/meta-python/recipes-devtools/python/python3-h5py_3.1.0.bb
+@@ -4,12 +4,11 @@ SECTION = "devel/python"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=113251d71fb0384712c719b567261c5c"
+ 
+-SRC_URI[md5sum] = "504b595237409ab766fbbe568e60a080"
+-SRC_URI[sha256sum] = "84412798925dc870ffd7107f045d7659e60f5d46d1c70c700375248bf6bf512d"
++SRC_URI[sha256sum] = "1e2516f190652beedcb8c7acfa1c6fa92d99b42331cbef5e5c7ec2d65b0fc3c2"
+ 
+ SRC_URI_append = " \
+-           file://0001-cross-compiling-support.patch \
+            file://0001-setup_build.py-avoid-absolute-path.patch \
++           file://0001-setup.py-Fix-numpy-version.patch \
+           "
+ 
+ inherit pypi setuptools3
 -- 
-2.30.1
+2.17.1
 
