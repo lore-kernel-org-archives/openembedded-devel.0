@@ -1,66 +1,68 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web12.32050.1613979912149736231
+Received: from mailrelay3-2.pub.mailoutpod1-cph3.one.com (mailrelay3-2.pub.mailoutpod1-cph3.one.com [46.30.212.2])
+ by mx.groups.io with SMTP id smtpd.web08.32583.1613983036330079082
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 21 Feb 2021 23:45:12 -0800
+ Mon, 22 Feb 2021 00:37:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zhengrq.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.81,196,1610380800"; 
-   d="scan'208";a="104718678"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 22 Feb 2021 15:45:11 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id D1E0D4CE730C
-	for <openembedded-devel@lists.openembedded.org>; Mon, 22 Feb 2021 15:45:08 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
- G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Mon, 22 Feb 2021 15:45:09 +0800
-From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] postgresql: upgrade 13.1 -> 13.2
-Date: Mon, 22 Feb 2021 15:45:05 +0800
-Message-ID: <1613979905-44185-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@bsorensen.net header.s=20191106 header.b=IXr0zphI;
+ spf=none, err=permanent DNS error (domain: bsorensen.net, ip: 46.30.212.2, mailfrom: yocto@bsorensen.net)
+Received: from mailrelay1.pub.mailoutpod2-cph3.one.com (mailrelay1.pub.mailoutpod2-cph3.one.com [104.37.34.6])
+	by mailrelay3.pub.mailoutpod1-cph3.one.com (Halon) with ESMTPS
+	id 299b92d6-74e9-11eb-8cc9-d0431ea8bb03;
+	Mon, 22 Feb 2021 08:37:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bsorensen.net; s=20191106;
+	h=content-transfer-encoding:content-type:mime-version:message-id:date:subject:
+	 cc:to:from:from;
+	bh=4FnYfRVv/r6A3LsmTWuAE7vZsPoE14qSzTOxU2vf914=;
+	b=IXr0zphIVkht8pfxawwDsNI0SdgdTfTIx1MlXhXL2baJ8pC2XXXkTBDRklR9/7ZNvRAjpu90SSiCO
+	 sEl9LEmPs+0GWpO2jMqbxyaelepgfkYUGlWrjMCxlKSPTH5W1YHELcMJ4nVCRpv+tFQ6MXqbAaFaot
+	 +tM4m+cTLhhvZaOQbAnzINX52WQUbbQaoYDjsZyyUOTV6wMUqj/7PZSmjuY/2CakfzO+pesiGniSuY
+	 tSgxUvbfU4WP2U4hpcB7tKPlabVkfMC8QgmUJxPS9WdteR9evYj0lxWtOde552f/Px1Lil6WpJSxR8
+	 gMlLgr5hvTwz+hAwFgh9AYs8QhLrWAQ==
+X-HalOne-Info: /vSL2UdlFhowSDAh6RHi94MgkiwXdPGUNe7X+Fsy2Lu9yVd6hHIyZdRj1UXTkXtI
+ rCribYf5pseoXfb9mt/xFnLS6If335w3idc5hYHvld7p7o111+UQfecODAISRU1R
+X-HalOne-ID: 2878128c-74e9-11eb-82bc-bfe844bf1d4a
+Received: from pc.prevas.se (unknown [81.216.59.226])
+	by mailrelay1 (Halon) with ESMTPSA
+	id 2878128c-74e9-11eb-82bc-bfe844bf1d4a;
+	Mon, 22 Feb 2021 08:37:13 +0000 (UTC)
+From: =?UTF-8?B?Q2hyaXN0aWFuIEIuIFPDuHJlbnNlbg==?= <yocto@bsorensen.net>
+To: openembedded-devel@lists.openembedded.org
+Cc: chbs@prevas.dk,
+	=?UTF-8?q?Christian=20Br=C3=A4uner=20S=C3=B8rensen?= <yocto@bsorensen.net>
+Subject: [meta-oe][PATCH v2] libgpiod: packageqa problem => static python lib to ${PN}-staticdev
+Date: Mon, 22 Feb 2021 09:37:11 +0100
+Message-Id: <20210222083711.412474-1-yocto@bsorensen.net>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
- G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
-X-yoursite-MailScanner-ID: D1E0D4CE730C.A999A
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
--License-Update: Copyright year updated to 2021.
+Problem:
+QA Issue: non -staticdev package contains static .a library
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+Reason:
+Both /usr/lib/python3.8/site-packages/gpiod.a and
+/usr/lib/python3.8/site-packages/gpiod.so are in ${PN}-python.
+
+Signed-off-by: Christian Bräuner Sørensen <yocto@bsorensen.net>
 ---
- .../postgresql/{postgresql_13.1.bb => postgresql_13.2.bb}     | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-dbs/postgresql/{postgresql_13.1.bb => postgresql_13.2.bb} (59%)
+ meta-oe/recipes-support/libgpiod/libgpiod_1.4.5.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_13.1.bb b/meta-oe/recipes-dbs/postgresql/postgresql_13.2.bb
-similarity index 59%
-rename from meta-oe/recipes-dbs/postgresql/postgresql_13.1.bb
-rename to meta-oe/recipes-dbs/postgresql/postgresql_13.2.bb
-index f2a29a59d9..ca8a6c7cee 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql_13.1.bb
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql_13.2.bb
-@@ -1,6 +1,6 @@
- require postgresql.inc
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.5.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.5.bb
+index aec50e7e6..96ed3f18f 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.5.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.5.bb
+@@ -28,6 +28,7 @@ FILES_${PN}-tools = "${bindir}/*"
+ FILES_libgpiodcxx = "${libdir}/libgpiodcxx.so.*"
  
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=fc4ce21960f0c561460d750bc270d11f"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=255f15687738db8068fbe9b938c90217"
- 
- SRC_URI += "\
-    file://not-check-libperl.patch \
-@@ -9,4 +9,4 @@ SRC_URI += "\
-    file://0001-configure.in-bypass-autoconf-2.69-version-check.patch \
- "
- 
--SRC_URI[sha256sum] = "12345c83b89aa29808568977f5200d6da00f88a035517f925293355432ffe61f"
-+SRC_URI[sha256sum] = "5fd7fcd08db86f5b2aed28fcfaf9ae0aca8e9428561ac547764c2a2b0f41adfc"
+ PACKAGES =+ "${PN}-python"
+-FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}"
++FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}/*.so"
++FILES_${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/*.a"
+ RRECOMMENDS_PYTHON = "${@bb.utils.contains('PACKAGECONFIG', 'python3', '${PN}-python', '',d)}"
+ RRECOMMENDS_${PN}-python += "${RRECOMMENDS_PYTHON}"
 -- 
 2.25.1
-
-
 
