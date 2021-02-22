@@ -1,17 +1,17 @@
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.88])
- by mx.groups.io with SMTP id smtpd.web08.34860.1613999946588932922
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.85])
+ by mx.groups.io with SMTP id smtpd.web10.34362.1613999960505541139
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Feb 2021 05:19:07 -0800
+ Mon, 22 Feb 2021 05:19:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=hkTv2sqG;
- spf=pass (domain: windriver.com, ip: 40.107.92.88, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=k4K3YZj4;
+ spf=pass (domain: windriver.com, ip: 40.107.237.85, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=B9L3ZJjLbSGyzkiSRJszQbe0Ubx2LfJGdLajxqJNzARfAXIeipJXpnyqFKO0+AqVGKyDF8YlSLev+MDYzLBa/moVOvasJjQ4RlLUMUaoMM1JgtB58QMqRbhMwo6mpdzioPjR7nShMGV4G2x2ctgZG0XJAPL9H0fmM+w1QMdrlLZPfDXu4DdwoFtOJvigQkp11V6E6eGTzZcsqQQvR52bga4Rn0CwZYTBhmCGfdV26RQpl5MTE37gWE1au5X+I69SyqrlDCHo6nLZLmItW320YArKtqfuVNBix7lFckcUNkckgcaL0Ef32fmbOQad8X+sTyfMtF1EJgKK8BgtqlucOw==
+ b=KtBmpgnU6k101Ae+F7Aquj8NQRuvZZc+HIX5WnpD2dEbS4+g9mX47uXhgRBJx2hs1V54PNoWsh2cfQ0XZcdtJYoNafp7J0qaZ7V8NIXfgRaFpjhMS30oWZ40mvIq5YwNz/ODR8qyNgywjefVU992pvWsrx9AeOnxCOORfXtqoyPRIfwGCUVQislsseWI8uNnI9FRzqkVfWYaAefSFkG2FWn3dYIynxRULX2Xuon9JMXeV1qyrb1P7l6e2IdbvnopaGkoQJTc0wlfTJOJ+Zz0VP2pdB576DXlaFgwO84iWBaWapRPtVazjWbqnNO95jGP5eLpv8C+9Eo0SWpqJC6H/w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=f2gyfVK4NDmGtFb/9ppGSs/cjecCymFFgYovhCMm3zE=;
- b=l65b0MIBt8OKCeqwr9FOhOUMSouiU7YipQb4slo3OTtBDAUsfMGtMjvn7kmQc8Recvw/PnCaEutuMpIKzrilpEgrVNWcbnPi1cl+TVXGaLG5I6fRl+P4LsIUqJpIW9SDki5QQJwV8oQm/u5VOH5V7TMkLJdYwhML/y4Z1L8JiVgIJD+1C9OLvVQ8FId6duhAyqhE9AUcN7r9mtRTCcjB1xAgZsNlpYAtK+DtpOtlR4gS7NppRP4LIj/1PsqJWAXhoLGGnAxnnL7i+45k2Vfq2HsLayvJ4mFardLOZzJ8fnLJ8PkICDJMgPC8Sonelylu5oeg/yMQIKZ86jD2UNFPUg==
+ bh=P78CdWPYgYxjHjOhR7LF+xViQ2gPnpS945hpicz2l2k=;
+ b=atPBLrUCxWhLpPY9vy6YHa2CVgcycjh213FTcjdMhgA0JTnw3zYnFtgmbX/URW9UjchjP+MBCJR2i5S7WwbtPmS0+O/5FGJ5JbKK/c/BHZ22aV7YH7V3JpseQJnpyruljIA3SqrF8XN4hSkJYGZVALN4GsT+Q76YOt3BLfcjxw9HwHOAgNXEouwxHUgVEimilHo9HuniK2pIgfDNJROGmy9HYTFivKCK9uvryvXDqre4TxppRiUCMkvBsmhMVX/YKy8lT8o8GVYOCQRacBjFvq8vBn9CNPsolFvd8Kn2Wkh6JR5zZGhG3XB9h2itkz5hluhEHlDP1LPfJZBySP+L2Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=f2gyfVK4NDmGtFb/9ppGSs/cjecCymFFgYovhCMm3zE=;
- b=hkTv2sqG4yJwSIsOHAruIJfv1sBek19yUXiNvEe+vG2014tBDaST8DNQ1QSsQFTF9i9KOmpK3bnq+iKUdR6w9iDSz6JY3lvWxF5izuuo/8oJlh0hS9qFjkyljvIH06ZXiuc/aZG5+p6SKeL5KSdgSijomhN1PkoZWm/+ggZIb9E=
+ bh=P78CdWPYgYxjHjOhR7LF+xViQ2gPnpS945hpicz2l2k=;
+ b=k4K3YZj4euLmHP2Ekkm44bbmRnqqsnzTGkPrv/Bvv1qv9k/WK6rcNpk8sGXveqdI69c9tSq2De7IQDKIvVqs23quGA2gdvTg+LHLTHjAxgxKh0jw3UEKR9jzX5ISG9DMHqQnrYydyvtAaA73wORpzEsFY9bjKx3+CM9Zn2IhS0w=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,88 +28,88 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BY5PR11MB3893.namprd11.prod.outlook.com (2603:10b6:a03:183::26) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3846.29; Mon, 22 Feb
- 2021 13:19:05 +0000
+ 2021 13:19:19 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3868.032; Mon, 22 Feb 2021
- 13:19:05 +0000
-Subject: Re: [oe] [meta-python][PATCH] python3-periphery: update to 2.3.0
+ 13:19:19 +0000
+Subject: Re: [oe] [meta-python][PATCH] python3-cryptography-vectors: update to 3.4.6
 To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>,
  openembedded-devel@lists.openembedded.org
-References: <20210219215500.2368332-1-open.source@oleksandr-kravchuk.com>
+References: <20210219215522.2368477-1-open.source@oleksandr-kravchuk.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <efec4294-f003-0a4c-cd9d-4c46a7bd923e@windriver.com>
-Date: Mon, 22 Feb 2021 08:19:02 -0500
+Message-ID: <af46f2f6-4a66-d8e6-06a2-20bb13ccd8bf@windriver.com>
+Date: Mon, 22 Feb 2021 08:19:16 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.7.0
-In-Reply-To: <20210219215500.2368332-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20210219215522.2368477-1-open.source@oleksandr-kravchuk.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: MN2PR16CA0014.namprd16.prod.outlook.com
- (2603:10b6:208:134::27) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: BL1PR13CA0456.namprd13.prod.outlook.com
+ (2603:10b6:208:2c4::11) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by MN2PR16CA0014.namprd16.prod.outlook.com (2603:10b6:208:134::27) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3868.27 via Frontend Transport; Mon, 22 Feb 2021 13:19:04 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BL1PR13CA0456.namprd13.prod.outlook.com (2603:10b6:208:2c4::11) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.8 via Frontend Transport; Mon, 22 Feb 2021 13:19:18 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: ffdb6075-ae63-4411-10ca-08d8d7346d7b
+X-MS-Office365-Filtering-Correlation-Id: 83c62387-8d7f-419c-95a6-08d8d73475e5
 X-MS-TrafficTypeDiagnostic: BY5PR11MB3893:
 X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB3893C3205D18DF0A358C82699F819@BY5PR11MB3893.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:923;
+	<BY5PR11MB3893644BCFB789F8DBA2ACEA9F819@BY5PR11MB3893.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:538;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	ego4sEovRA/20Etu/7hAVxqCNezDTuk5A1ToAIn5KfgqoWWDqAkkjA3zbtmfEQBKg6DY20RCI3NGrGmlN/izJ0nIdN0lwlO1MLdIHhEykqpPsXLru3IPSnt97YdIlomHv9OBUz5u/kKcHjGQA3bVm+7pStu3gaSqDUwuVJZHykBpc3F1MpYIAnFtVEskku5c+dpwCWDxZlyIhlsJ+kRwAG6fDunpBNTp1HygU4SAI5kgsGlkWCXmyv2OR53xaUs6QN9ek0MuT0XWkDIs79dqXRnCVB1lcZbBvxzb3/01oCzXUw3noVhKzApaMKZmfjZyNg5aMgkUCN1rl7P1ajd8AYTtksRQLFE979ToYXu6Eb39sp+Lnxg5qXZMkHmRpDQob+tS6KFc6nJc21/MLlGAdxlJ8vauov6NfVnsU76khJFciKJq9INUIPF+YaCZA9vidcQeUHAZZRHp4md7vlmWt103EXFO7UeprWXkYNLjoDOFVWkjUZGZYnSBXY2BkWOa09jI1aprYZcIKWz0p4h8spqtmJDIVWnpqAk8KGA5ZVLeIJXx11xYQyK37znF6KkhjCjYThZSf4E6tgxfq8Y+LixstPi72eMZzgnPVVtOhyuie4NRP2YejFEzpdSHHAj4G5PlX5bMwpDv2x7hGMfZzMLhEH1d70j0EEMCn++wgKwfgpmF1GtdHF0JnPK+BIvf
+	iJFZ/MvlaLBv+M9zFnrJuvcNCmvOuRPv/fiytzLAcXk9D/2Q+HVGV+1QMkavwCt6CdThV8WUls7MwfWfZR3qMhAyOMzBLd5MN9NiMMet+wOaRhwvksyGIg0Wrch7myXaQLBvaX0t23xuYbGivEj09atgX6I4I3UEPPE5pB9DOcVkrPJNPoW3jphWKjX28Q9B7n1iLZjNxmqungqVUS8hgZcuWcexRQNpvh4oqLXsHpyEFWkTp1cH/HDySNF6wd4m8QggoXma6JlCUF/JdkB/QvJBZaH6D9O9qkYLwRwY7keYo2TY4kPMvqbIDTLCQhGXzlcvMbzPV43VLcgv6cq5UtAQglbd3EtWQRGWxvBJl3hRIf5GFocMpQwWB0DfS3p5dv1yzpYZCdxazzKe/0qdWHatq46PByOau4tvT/af7+ceQjfPGKWQSvv6M9iMDHAB8BQsDtmiR1bW4lUFT7t5bW84uCCbCpTqmQrkjPMc6Fuh910q7rVsK3osbImGYwU2r5unRS2eS5pTff4COAOYFbIo7seb6J6MoPsFMJligQXH7JWjN6pnIhZ8gHSoKLuBGlJRanlKc6/lrgKWUL8t/NOHAE/yr/u4QJ/p1Q0OII1fRUMNGPaRbqrT7bRpXS5FiAu65NORpmgMb4s/RkI9szlpg1bWNw2D2Qvd3761x8b1i72P1+VCtHiUiVaFa2fI
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(346002)(136003)(376002)(396003)(366004)(478600001)(186003)(36756003)(86362001)(31686004)(956004)(316002)(15650500001)(16526019)(6486002)(66556008)(66946007)(66476007)(16576012)(8936002)(44832011)(53546011)(2906002)(31696002)(8676002)(5660300002)(33964004)(166002)(2616005)(83380400001)(966005)(26005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?NllzVW5pU2czeTlLWHFRZ2tGeFNxbTBiUG8xa0RGa2Z6T1RDU1RyVnl5b0pU?=
- =?utf-8?B?d3lCUkFjZGhEK21MVkdlanJaNXZPazBtaXQ4ZnVBTE0vQ2NQZERFcXRGK0pr?=
- =?utf-8?B?ODBJL0tnVWR0UTJoRStnbmZCZyt3bDllajJ1UUdWRmYxbGE0aVFxSU0wM1Zp?=
- =?utf-8?B?R3BUTDlnS2RRMWVOMUwreXlBd0s1bXJFdWhmWUkvZFF0NXVNNGRVTFhUTWtF?=
- =?utf-8?B?TXBZUm1oK0d1VUVTNWh3b0RKQ21Zay9RbjQrYWczaTFYQ3ZzbCs4L21iVUZ4?=
- =?utf-8?B?ZDUyTlErRU5Jam1ibFkzcTVscGc2Q2lPdHJCL0dzVDlSTlgrOGdncHJlY3Bn?=
- =?utf-8?B?ajhjWVFuVWh2QUVlYjF6UE1NamFqQTczSkY5Y2FoTC9FTmtWQWZaU0lnNGRV?=
- =?utf-8?B?UWJLS2UzM1ByUjh4ZFo5aHlFeXFsV1JSQU04MGFzZ3ZiRWxkckUwQ0RSL3Ax?=
- =?utf-8?B?LzAxUjV6a3JzUW5BbmI4UlZhaXdOK2NXK2pCWWNMT0ZXNTFNOGRhZFB2REFM?=
- =?utf-8?B?V2l0Wkd6QlJPWXRETzZ5by9nbnpXY1Z1ZUE4MldLakFISUQ3K0tBSVN2S0k4?=
- =?utf-8?B?Q2NzYUlGRjVSWGMwemdKZDlpOUFRQ1FOYlBFeWdtLy9mSDFYeENzbzhMemdJ?=
- =?utf-8?B?VFFHK0hHTlI5YVkvRHFzUlFUWU9HOGo0YVAvbTFnVTZpMVNtSUZUeHJ2WmZ5?=
- =?utf-8?B?N21POUpyemhaUDNiWkpORXRBUDJ6YXN0N2p2Z2pnVk9yNnVad1JRSm8wUWx0?=
- =?utf-8?B?NEJrN3FFUjRLVUMwbkNRbWR2Wng3em0zcXl4TnRpUmNvNVRaNWtiaXRIOUdT?=
- =?utf-8?B?cXY0cjlDU200T01wWU1wTGh5Y2JIYzJLdlhsaCtlQnl1ZjVJU0N4TGpLZmZE?=
- =?utf-8?B?azJRU3RmUkRnd3lORVk0ckxjV1lmajh6MzF2RWJDRlU3K1Ntblc1MS82ZkVD?=
- =?utf-8?B?ekVOYlllUzRnbmk3WHVWb3YySFgrWjh3c1lNUmZ0WGNzb3VJc2hVdGVYY2E5?=
- =?utf-8?B?YndqYU0wYVVFZE5ZbFM0REM0cDY0WitYMTF5d1ZOQjVrSzIrRlIzS3NLNDFJ?=
- =?utf-8?B?Q01zb0pUeTJubkJjMVRIUHdzZnpLcGpCakx5a0VBU25Ncnc4MkxUMm9nSTBl?=
- =?utf-8?B?amZlbWp5MndXblo5cEtzNFZMT2MyQTNtNFc4bjRxUkUwWWtCc2JNN3c0dWJi?=
- =?utf-8?B?Rng2RkN2ZGQwKzFaZjF3azAvKzhqL0RHWWZGQndBaUVhYnJTd3FiNTF1eXJM?=
- =?utf-8?B?b0drcm5tYkNNYnN0cS9YNWc0U29mZDdGQ3d0QTdRTlNwaHdVYmxySng0QUNx?=
- =?utf-8?B?ZW0rdDN3TEFrWXI2YW1VVk9xbHZwNTZhN3IzSXkyak00VVgyME9QMGdMc0kr?=
- =?utf-8?B?ZG9seTdITldsWllrcDdZMXhCeUFHbFZzbWlWMWV6aHB2L0ovQUZhYkFpcGtp?=
- =?utf-8?B?ZjVWNDRsNUFqSTc3VjBsMStlTklvaEZseVlTbDg0aDdsMThVbC80RW1jcjFo?=
- =?utf-8?B?UUk2SXFmK0lVOElkRndSNk9mTGdvdWhXeGs0NlJaZXhoNVhNVjNweTRXdHp1?=
- =?utf-8?B?Wk9vY1hVSEZ2M2xDMWRtUzlYZUZIVUhlNDhSdXZ1bmlQUHpSVEE0WUV6R2VX?=
- =?utf-8?B?cmF0ckpKMUpYTXFtQVJadDZ1TVdMb1RmNkRQNk5mT25ReXVuUHFVK3c2RzRj?=
- =?utf-8?B?UENMRHN1NUtNalVTOHh4TE5pYlg3YmozK2tsbU1ldWJaZk9VU3VKcjVPSmwx?=
- =?utf-8?Q?SIu0aSbn88DfVnIhgvIE6saE6oSbPaP+nqUEFoq?=
+	=?utf-8?B?ekxkZ05ka0FtZmorMWFRK1dDSGt3Z2VTbURndVBqallkUXFNeHJ3bkgxcGxq?=
+ =?utf-8?B?THE5TE5zWnpZbmRKODJnL053QjdZMTBPM0IrenorT0ttZkdxVmo5VGkvODJ4?=
+ =?utf-8?B?VVIvZFlEK01IZ2pCZHkyV2RWTFd5M1ZTRWJzM1pPRmJsNk1TcGE1VWUyR2pk?=
+ =?utf-8?B?bmtFN0pNT1dEMUw1ZTR3cEJLeER6a3N0MkxjMlYxaXlTcUlzVHJxb09iOC84?=
+ =?utf-8?B?KzdjdWYxUFArR0JjUHQ0YzNpT0xYa2VDWWFlK3NSVnRicjFrbjY5OXVTaVVK?=
+ =?utf-8?B?QTNOUm5XMzJSSkR5SEdQdFRTcG92anZucm9EbDJzVHFXWkd1WmQySXRKd093?=
+ =?utf-8?B?Mm9QZ1pLV216emV3cUpobStkeXZiUlNIUGFzaTJkS1BHdG9PUWxTcHZrWFJO?=
+ =?utf-8?B?cjJQalA5S2o4RzhTNm9tYU9tRm1FWnJ3VDFnSnhtWk9ObXMrc1Z3UlRDTDFa?=
+ =?utf-8?B?S29BRjVRRU9HL3NvazFPa1I5WHdUU1FyUzdERGQvZkVRNTRGNEJVRGJHOEpi?=
+ =?utf-8?B?dytYWHRYclowOTZmNFJrWW1qYzBuaFMvbFhXMWtWVXRTODlLZ0ZweWVuWGFj?=
+ =?utf-8?B?eEFyUzRjcjRhaFo4ODBweEh1TVlrWDZ6d1YxTEcvZzVjY1BQcitKZHd3SHc3?=
+ =?utf-8?B?cm82ZzkvdkFKY1MyckVrNlMxUk5LbUFQOXNYbVZiNGVZRDBVakFrWVIrRVR1?=
+ =?utf-8?B?SVJya0NGMkRwaG96UWJPbUhucVpodGtqTytxa1ZrQkJLem9zNDBiYkMvUjB3?=
+ =?utf-8?B?eldmaHhTRmdpVDBYb001OFVXSHVPZmhDclc0OFM4S09RRXpVVnFsZ2pVK1Np?=
+ =?utf-8?B?b3JUQlBtRC9hRnZqelZIdFF4TU9ZeXRCWklWN092blFkS2Npd0srSVlKRkVY?=
+ =?utf-8?B?dWRRcGhMcVc2NjVLcDlUN0VzQ2ptR1VaNWpXMWtCcHRUajZqeTFyWGZsRGwy?=
+ =?utf-8?B?WFBBV29CVDl3UVRDYklTeFZ0QTF3em9uODlDWDRPVDM1RlNrbG1BNzZiczVq?=
+ =?utf-8?B?cVRFSklXMXUza3k1UnZucXZ2bUhGZWVRa1czRThSOW5sT3Q5bWg4Rmo3OWJQ?=
+ =?utf-8?B?U1BTK1g1d0tENVQ4c29ING5ua1dYZ2tUWFdUMGFiVGoxeUl1WWRvWEVEZXhU?=
+ =?utf-8?B?SjRNMy9RaFJTdXNCbTdtN1NFRThDSWZTZHBPR3pTcjkzRFVKZ0xRZmF3Zm15?=
+ =?utf-8?B?ZzhtNXJhbUF4OWZwV1ovMThMUFhsMFE0OWU1TDBRNWE1YUI5dXFIT3JsQ1Bj?=
+ =?utf-8?B?V0FaSTVCNGRpWWtqUlBUUFBRNFZRaU5FSTMrb2szYzg0ZkVoY0xGTTZNbUFE?=
+ =?utf-8?B?aW9CdmRibEdUTzZWS29XZkF5MzhxYmllY2tDd1BvNDQzU1NhcytwUGROTld1?=
+ =?utf-8?B?ckFNdS92WEFwTFdZRWpEaFJpNXdqUzg2UnlSa1dGYzJ6M08xS2pvK3BGVkxR?=
+ =?utf-8?B?eEF6amM0S211NElrU2EzQTZMd3cxR2pESnRUb0F0RGQzekU3ZmV2TzZWNlNM?=
+ =?utf-8?B?dXJMYW1NL2UxaG5hLzZUd2svNE1JR2JXNkprREVmanl3Qm53T29NTGdOeUFs?=
+ =?utf-8?B?TzArZGRKVFQ3emMxWFhtTTVTaDVjMEZENGViaHRZc1YzN3p3QWsyZUNvZmxB?=
+ =?utf-8?B?Y1MzZ1JOcTczUFMrNmJWL1R4S2FZWGptR0I1NFdKVUxLaXJTSk03aUNBYmNV?=
+ =?utf-8?B?eWVEa2tBMngxVnpGV291cWxzL3RYY2F5MXpzanZaWTVIa1VCNDVsTU1hMEdL?=
+ =?utf-8?Q?xyGaxYkO71mGRVCbI3TvPxaFwv3FyE4wlhW57Wy?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ffdb6075-ae63-4411-10ca-08d8d7346d7b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 83c62387-8d7f-419c-95a6-08d8d73475e5
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Feb 2021 13:19:05.0486
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Feb 2021 13:19:19.1125
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 38cNmgtEC07hUrJxzsW3nEU9t/LF14daXm+FFiSZioYMFTSp0/TQiddMDNyaU7cXJGt01Mss81G1v9mteWVJBLzpHoBc2F9IgiW8+j9cOWs=
+X-MS-Exchange-CrossTenant-UserPrincipalName: FTnn02n6ErbKdWkwcIeUgHVkwode0dy1a4SYwtESpOUojgITakMS3FycxErN5eqY9ua54OU7zgnCV2L8MoZBKGJb1CVjDmSepWFPoGE2Ots=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB3893
 Content-Type: multipart/alternative;
- boundary="------------C9F62A8F2C2F6B8903FECE2C"
+ boundary="------------818E4BAA77A29A7A999ADCC0"
 Content-Language: en-US
 
---------------C9F62A8F2C2F6B8903FECE2C
+--------------818E4BAA77A29A7A999ADCC0
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -117,34 +117,28 @@ Content-Transfer-Encoding: 7bit
 On 2021-02-19 4:55 p.m., Oleksandr Kravchuk wrote:
 > [Please note: This e-mail is from an EXTERNAL e-mail address]
 >
-> License-Update: copyright years.
->
 > Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...python3-periphery_2.2.0.bb => python3-periphery_2.3.0.bb} | 5 ++---
->   1 file changed, 2 insertions(+), 3 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-periphery_2.2.0.bb => python3-periphery_2.3.0.bb} (60%)
+>   ...y-vectors_3.3.1.bb => python3-cryptography-vectors_3.4.6.bb} | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>   rename meta-python/recipes-devtools/python/{python3-cryptography-vectors_3.3.1.bb => python3-cryptography-vectors_3.4.6.bb} (81%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-periphery_2.2.0.bb b/meta-python/recipes-devtools/python/python3-periphery_2.3.0.bb
-> similarity index 60%
-> rename from meta-python/recipes-devtools/python/python3-periphery_2.2.0.bb
-> rename to meta-python/recipes-devtools/python/python3-periphery_2.3.0.bb
-> index a01071151..9e3cbb43e 100644
-> --- a/meta-python/recipes-devtools/python/python3-periphery_2.2.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-periphery_2.3.0.bb
-> @@ -2,10 +2,9 @@ DESCRIPTION = "A pure Python 2/3 library for peripheral I/O (GPIO, LED, PWM, SPI
->   HOMEPAGE = "http://pythonhosted.org/python-periphery/"
->   LICENSE = "MIT"
+> diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.3.1.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.6.bb
+> similarity index 81%
+> rename from meta-python/recipes-devtools/python/python3-cryptography-vectors_3.3.1.bb
+> rename to meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.6.bb
+> index bcdbc6adb..b5f34daef 100644
+> --- a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.3.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.6.bb
+> @@ -4,7 +4,7 @@ SECTION = "devel/python"
+>   LICENSE = "Apache-2.0 | BSD"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
 >
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=fea92e2e010ccb151792c29fadc2db7b"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=fed1784a083509430580a913df680706"
+> -SRC_URI[sha256sum] = "03789c305dda8dccb4b8c9c019963a742469d88365abbc82e8e898ac478f5ca4"
+> +SRC_URI[sha256sum] = "e5f88a5fb03d60b4f20eed4920638b6a3ed32a363523a77086528d557a2c2da8"
 >
-> -SRC_URI[md5sum] = "0a5b866443edab0dab62cea56ed96f1e"
-> -SRC_URI[sha256sum] = "391e5bdfe2511aa7369002d4861df795dbb2889426b1b2cc1e6c9d85939da4dd"
-> +SRC_URI[sha256sum] = "8a8ec019d9b330a6a6f69a7de61d14b4c98b102d76359047c5ce0263e12246a6"
->
->   inherit pypi setuptools3
+>   PYPI_PACKAGE = "cryptography_vectors"
 >
 > --
 > 2.25.1
@@ -153,7 +147,7 @@ Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > 
 >
 
---------------C9F62A8F2C2F6B8903FECE2C
+--------------818E4BAA77A29A7A999ADCC0
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -166,40 +160,34 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2021-02-19 4:55 p.m., Oleksandr
       Kravchuk wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210219215500.2368332-1-open.source@oleksandr-kravchuk.com">
+    <blockquote type="cite" cite="mid:20210219215522.2368477-1-open.source@oleksandr-kravchuk.com">
       <pre class="moz-quote-pre" wrap="">[Please note: This e-mail is from an EXTERNAL e-mail address]
-
-License-Update: copyright years.
 
 Signed-off-by: Oleksandr Kravchuk <a class="moz-txt-link-rfc2396E" href="mailto:open.source@oleksandr-kravchuk.com">&lt;open.source@oleksandr-kravchuk.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210219215500.2368332-1-open.source@oleksandr-kravchuk.com">
+    <blockquote type="cite" cite="mid:20210219215522.2368477-1-open.source@oleksandr-kravchuk.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...python3-periphery_2.2.0.bb =&gt; python3-periphery_2.3.0.bb} | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-periphery_2.2.0.bb =&gt; python3-periphery_2.3.0.bb} (60%)
+ ...y-vectors_3.3.1.bb =&gt; python3-cryptography-vectors_3.4.6.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-cryptography-vectors_3.3.1.bb =&gt; python3-cryptography-vectors_3.4.6.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-periphery_2.2.0.bb b/meta-python/recipes-devtools/python/python3-periphery_2.3.0.bb
-similarity index 60%
-rename from meta-python/recipes-devtools/python/python3-periphery_2.2.0.bb
-rename to meta-python/recipes-devtools/python/python3-periphery_2.3.0.bb
-index a01071151..9e3cbb43e 100644
---- a/meta-python/recipes-devtools/python/python3-periphery_2.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-periphery_2.3.0.bb
-@@ -2,10 +2,9 @@ DESCRIPTION = &quot;A pure Python 2/3 library for peripheral I/O (GPIO, LED, PWM, SPI
- HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://pythonhosted.org/python-periphery/">&quot;http://pythonhosted.org/python-periphery/&quot;</a>
- LICENSE = &quot;MIT&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.3.1.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.6.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-cryptography-vectors_3.3.1.bb
+rename to meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.6.bb
+index bcdbc6adb..b5f34daef 100644
+--- a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.6.bb
+@@ -4,7 +4,7 @@ SECTION = &quot;devel/python&quot;
+ LICENSE = &quot;Apache-2.0 | BSD&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4">&quot;file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4&quot;</a>
 
--LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=fea92e2e010ccb151792c29fadc2db7b">&quot;file://LICENSE;md5=fea92e2e010ccb151792c29fadc2db7b&quot;</a>
-+LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=fed1784a083509430580a913df680706">&quot;file://LICENSE;md5=fed1784a083509430580a913df680706&quot;</a>
+-SRC_URI[sha256sum] = &quot;03789c305dda8dccb4b8c9c019963a742469d88365abbc82e8e898ac478f5ca4&quot;
++SRC_URI[sha256sum] = &quot;e5f88a5fb03d60b4f20eed4920638b6a3ed32a363523a77086528d557a2c2da8&quot;
 
--SRC_URI[md5sum] = &quot;0a5b866443edab0dab62cea56ed96f1e&quot;
--SRC_URI[sha256sum] = &quot;391e5bdfe2511aa7369002d4861df795dbb2889426b1b2cc1e6c9d85939da4dd&quot;
-+SRC_URI[sha256sum] = &quot;8a8ec019d9b330a6a6f69a7de61d14b4c98b102d76359047c5ce0263e12246a6&quot;
-
- inherit pypi setuptools3
+ PYPI_PACKAGE = &quot;cryptography_vectors&quot;
 
 --
 2.25.1
@@ -215,4 +203,4 @@ index a01071151..9e3cbb43e 100644
   </body>
 </html>
 
---------------C9F62A8F2C2F6B8903FECE2C--
+--------------818E4BAA77A29A7A999ADCC0--
