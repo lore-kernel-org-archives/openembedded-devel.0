@@ -1,88 +1,80 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.98.1614016254943678508
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.web12.1356.1614020659922508881
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Feb 2021 09:50:55 -0800
+ Mon, 22 Feb 2021 11:04:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=55530 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lEFMD-0008OK-5T; Mon, 22 Feb 2021 19:50:54 +0200
-From: "Leon Anavi" <leon.anavi@konsulko.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=hVqwisMN;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id gm18so192732pjb.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Feb 2021 11:04:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=np60tE/6K7Vw2oOGvZK80iGM9jwNPC29YEwA5jo1Myc=;
+        b=hVqwisMN+kvexvb/v6XA0F9vNxieT2q+tkrkasWuf0KNJ+V1YwJc94Fkk2wjmiFfHJ
+         u7GwiWlXuS7D+RrrjUpkYGBfpSui7WZPmYjlBrDUxQOmyDBJ4MgBgm65EZ1USqA0MNqQ
+         2mTySI4vOD53v17PKkPQMS8Tu2q1kN9h3A7uecmd714mpx0ECepokueCsga6J203y8+8
+         q1acyBB6YVpPUwNUYYrxwiAY5GhaBrNeliu7OUKci4BoqZ213qiTDR8QdKeG3jGqX6lr
+         yq+PhNJSM7NhpR26AHMx8UlDHzR0dulnVEfP1aTquLQ15Wlz01DU3cB457dd8Fjd1633
+         Zm5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=np60tE/6K7Vw2oOGvZK80iGM9jwNPC29YEwA5jo1Myc=;
+        b=Ub7ZCJeOD5MDOodJY9P/GPTIKf91KujGYEOdBQy1VUqvQOV/qr/kFZvkktWRRV8UGp
+         vwkEjJFYwOftCRKYLUSChM0YBvPU01MtVMjHYWABYH3VdkhYyEwbsobiLr22xSckPHz9
+         o/Qr+NJFTO4eV7SrQLfOf/F++VHIWdZv0KzKoRCTtDDjLkzIh57PpZ9IrYeIhXASEcKS
+         DYU4snI39chCQT1MNWBkNrXEL9w+kWLn/2O3JQUJXqrLZ9FP+DZAXAof7dgYvLs0N0fI
+         083FLQ4AV+CyV88kaJbQ4JnC0rwcVHHe9cFsXUJKPtO2QA9RPKdcyD7Was+2kG1W2qOU
+         C/zQ==
+X-Gm-Message-State: AOAM530Qs9Og8VIDPZC8fCu0c2MpPYoBx1D/hpAkdoZC3nlRLF4t9y/Q
+	ZFEM74mYaYr7sCiZxhJmSXkGkeQ254ZlKQ==
+X-Google-Smtp-Source: ABdhPJxTFnoJ4Rp4Nn4vHMMReZg1+rK2nd5OijKyRAi+ajcCdO/ZOh7UENup9SNUPAxnXeMUUARDVQ==
+X-Received: by 2002:a17:90a:654a:: with SMTP id f10mr24851106pjs.202.1614020659190;
+        Mon, 22 Feb 2021 11:04:19 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0:db81:2f56:60e4:2c64])
+        by smtp.gmail.com with ESMTPSA id u127sm19941416pfb.180.2021.02.22.11.04.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 22 Feb 2021 11:04:18 -0800 (PST)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-mpmath: Upgrade 1.1.0 -> 1.2.1
-Date: Mon, 22 Feb 2021 19:50:43 +0200
-Message-Id: <20210222175043.21231-5-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210222175043.21231-1-leon.anavi@konsulko.com>
-References: <20210222175043.21231-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] abseil-cpp: Remove libexecinfo band-aid for musl
+Date: Mon, 22 Feb 2021 11:04:17 -0800
+Message-Id: <20210222190417.3419444-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.30.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 1.2.1:
+abseil's cmake files can now detect execinfo's presence before depending
+on it, therefore no need to link with libexecinfo on musl now
 
-- Support @ operator for matrix multiplication
-- Add eta() implementing the Dedekind eta function
-- Optimized the python_trailing function
-- Implement unary plus for matrices
-- Improved calculation of gram_index
-- Fix a possible division by zero in shanks()
-- Fixed indexing errors in deHoog, Knight & Stokes inverse laplace
-  transform algorithm
-- Corrected branch cuts of the elliprj() function in some cases
-- Fix initialization of iv.matrix from non-interval matrix
-- Preserve function signatures in PrecisionManager
-- Implemented float and complex conversions for ivmpf
-- Fixed issue with scalar-matrix multiplication for interval
-  matrices
-- Fix estimation of quadrature error with multiple subintervals
-- Fixed a problem with the defun decorators
-- Fix eigenvalue sorting by absolute value
-
-License-Update: Alter the last clause to ensure that Github
-recognizes the LICENSE as BSD
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../{python3-mpmath_1.1.0.bb => python3-mpmath_1.2.1.bb}    | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-mpmath_1.1.0.bb => python3-mpmath_1.2.1.bb} (63%)
+ meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-mpmath_1.1.0.bb b/meta-python/recipes-devtools/python/python3-mpmath_1.2.1.bb
-similarity index 63%
-rename from meta-python/recipes-devtools/python/python3-mpmath_1.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-mpmath_1.2.1.bb
-index 7879a85cdd..51a7c05847 100644
---- a/meta-python/recipes-devtools/python/python3-mpmath_1.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-mpmath_1.2.1.bb
-@@ -4,13 +4,13 @@
- SUMMARY = "Python library for arbitrary-precision floating-point arithmetic"
- HOMEPAGE = "https://pypi.org/project/mpmath/"
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=efe9feb00df0b763941f2b1bbac7c402"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=71970bd3749eebe1bfef9f1efff5b37a"
+diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+index 7d935d523b..38c3dbc510 100644
+--- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
++++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+@@ -17,8 +17,6 @@ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH}         \
  
--SRC_URI[md5sum] = "acb1cdddf38e16084628065b174ddbfe"
--SRC_URI[sha256sum] = "fc17abe05fbab3382b61a123c398508183406fa132e0223874578e20946499f6"
-+SRC_URI[sha256sum] = "79ffb45cf9f4b101a807595bcb3e72e0396202e0b1d25d689134b48c4216a81a"
+ S = "${WORKDIR}/git"
  
- inherit pypi setuptools3
+-DEPENDS_append_libc-musl = " libexecinfo "
+-
+ ASNEEDED_class-native = ""
+ ASNEEDED_class-nativesdk = ""
  
-+DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
- RDEPENDS_${PN} += "python3-image"
+@@ -33,4 +31,3 @@ ALLOW_EMPTY_${PN} = "1"
  
- BBCLASSEXTEND = "native nativesdk"
+ FILES_${PN} = "${libdir}/libabsl_*.so ${libdir}/cmake"
+ FILES_${PN}-dev = "${includedir}"
+-
 -- 
-2.17.1
+2.30.1
 
