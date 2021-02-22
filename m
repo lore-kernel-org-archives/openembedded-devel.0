@@ -1,92 +1,154 @@
-Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
- by mx.groups.io with SMTP id smtpd.web08.38029.1614011772464136284
+Received: from rcdn-iport-4.cisco.com (rcdn-iport-4.cisco.com [173.37.86.75])
+ by mx.groups.io with SMTP id smtpd.web09.37990.1614012011865785671
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Feb 2021 08:36:12 -0800
+ Mon, 22 Feb 2021 08:40:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Q74oGBHl;
- spf=pass (domain: gmail.com, ip: 209.85.222.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f170.google.com with SMTP id t62so13153240qke.7
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Feb 2021 08:36:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=eDpG4XqlG/r+IZZ9z1vdJ2BbnYkXfMKVgin7+vuqHEE=;
-        b=Q74oGBHljRZxnyIFiAL3QPue2hAGHWKTC1g4QvkHaiTAzwjqJTkQBr35/JB73vjS8X
-         22UY+cm54mQn7fR+LqsJCQf5SPdU5qzeiFlEuJTwYC0dXoyP0AkeKZwj1t3jJJ2hKkhi
-         aPy+14FZhB7V8rRbxDtmZi5A0g8O4DqPwZuIa6mwYGTwuNmVkflHwhXkz9YnSKlKEPS0
-         yYIme6EHI/In3b0LwMBBiColHbmGXLA2+q339abREPsb9LfYI3BExzFQBNr9V6NB7lRF
-         KozBVv+0OBf0pvcpqoJd2pr4hQPb0aiUGBenxJuips1E5kUhJ8+WHH/eqU0179yseQVN
-         8Y0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=eDpG4XqlG/r+IZZ9z1vdJ2BbnYkXfMKVgin7+vuqHEE=;
-        b=OS9WPzCA/2gOHp4ZIRhaQjfl6445hvyFMfpa4t2T94bM2d+j2owiBq3HLlrAK/5ccP
-         dielk2VO8Wk/mDlxpFOGc6t3vd2srOVntxxZDv8QKY49wvXcLe1quLnzT/08fjQ+Qr3y
-         W57GWzGwi5C2KMHYixP/+BYIbnxQF+5p2BXevmC040+dAsUqaKIhEZvPaAkjkZZV983e
-         UrwDDp7UFSYUWQbRGpDOzDlgduY6G9ZqEgfGhqxbsdHv2aCEFk5V+cUHtlX+EY0IzO8p
-         9flbNZY6YeRs11UOHEipH5sg7egtsZuc/8T3f+DWDUOBvzMVLKreVm3ejpGkSvCX9Un1
-         zTsw==
-X-Gm-Message-State: AOAM531R4M7VsTF67lb5jsXWd1I66oNl1aOp6cjjaZXKs3LVkzHVEsKc
-	69X+bE+qN0XmvdPvzOKlDl1zNb+0R2SIO0PM9Kg=
-X-Google-Smtp-Source: ABdhPJxYzfGmZr3BTwzEHL0CGKgfAamVbXryWxQyeCFINXk4qFIy1Tx494kK5jO/QxpUKDUr6PgQ/wGb/TJxxqOmroo=
-X-Received: by 2002:a37:e13:: with SMTP id 19mr21669368qko.119.1614011771467;
- Mon, 22 Feb 2021 08:36:11 -0800 (PST)
+ dkim=fail reason="signature has expired" header.i=@cisco.com header.s=iport header.b=ZbnGhau+;
+ spf=pass (domain: cisco.com, ip: 173.37.86.75, mailfrom: oobitots@cisco.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=cisco.com; i=@cisco.com; l=4508; q=dns/txt; s=iport;
+  t=1614012011; x=1615221611;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=D5kF5r5WM9zHscT+/LHn/lIeIMkio+utkLY609HeJRs=;
+  b=ZbnGhau+MqCZfcS1dNWtopIel2YqBZQZNCFfwHB9tm45K8Z7iV7WD2ts
+   k+t4NCTMxOOZxtdiWwP//S0yGjeFmbgEHfwG6sw4ChkWesgSDaMLyILVy
+   lSMP8oBUV/5KTCt1IOD+/8WFivO0AXy8V51rhsWhBpiF41LXvIJoQG11u
+   o=;
+X-IronPort-AV: E=Sophos;i="5.81,197,1610409600"; 
+   d="scan'208";a="839726754"
+Received: from alln-core-12.cisco.com ([173.36.13.134])
+  by rcdn-iport-4.cisco.com with ESMTP/TLS/DHE-RSA-SEED-SHA; 22 Feb 2021 16:40:11 +0000
+Received: from sjc-ads-8148.cisco.com (sjc-ads-8148.cisco.com [171.68.208.186])
+	by alln-core-12.cisco.com (8.15.2/8.15.2) with ESMTPS id 11MGeAmG032744
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Mon, 22 Feb 2021 16:40:10 GMT
+Received: by sjc-ads-8148.cisco.com (Postfix, from userid 500841)
+	id 4DAE6CC1251; Mon, 22 Feb 2021 08:40:10 -0800 (PST)
+From: "Oleksiy Obitotskyy" <oobitots@cisco.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Oleksiy Obitotskyy <oobitots@cisco.com>
+Subject: [PATCH] smartmontools: Improve reproducibility
+Date: Mon, 22 Feb 2021 08:40:07 -0800
+Message-Id: <20210222164007.23254-1-oobitots@cisco.com>
+X-Mailer: git-send-email 2.26.2.Cisco
 MIME-Version: 1.0
-References: <1613979905-44185-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-In-Reply-To: <1613979905-44185-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Mon, 22 Feb 2021 08:35:45 -0800
-Message-ID: <CAMKF1sozuJefqk5nfeJXEJXzv1cF8zy07HKYSku_Ht7+tRZPBA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH] postgresql: upgrade 13.1 -> 13.2
-To: zhengruoqin <zhengrq.fnst@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+X-Outbound-SMTP-Client: 171.68.208.186, sjc-ads-8148.cisco.com
+X-Outbound-Node: alln-core-12.cisco.com
+Content-Transfer-Encoding: 8bit
 
-I am seeing
+Backport changes added to master smartmontools.
+https://github.com/smartmontools/smartmontools/commit/24838916b4c0e91f5c897d44fcdeedb22848f684
 
-postgresql-13.2: Patch log indicates that patches do not apply
-cleanly. [patch-fuzz]
+Signed-off-by: Oleksiy Obitotskyy <oobitots@cisco.com>
+---
+ ...Define-SOURCE_DATE_EPOCH-in-CPPFLAGS.patch | 84 +++++++++++++++++++
+ .../smartmontools/smartmontools_7.2.bb        |  1 +
+ 2 files changed, 85 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/smartmontools/files/0001-configure.ac-Define-SOURCE_DATE_EPOCH-in-CPPFLAGS.patch
 
-On Sun, Feb 21, 2021 at 11:45 PM zhengruoqin
-<zhengrq.fnst@cn.fujitsu.com> wrote:
->
-> -License-Update: Copyright year updated to 2021.
->
-> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> ---
->  .../postgresql/{postgresql_13.1.bb => postgresql_13.2.bb}     | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-dbs/postgresql/{postgresql_13.1.bb => postgresql_13.2.bb} (59%)
->
-> diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_13.1.bb b/meta-oe/recipes-dbs/postgresql/postgresql_13.2.bb
-> similarity index 59%
-> rename from meta-oe/recipes-dbs/postgresql/postgresql_13.1.bb
-> rename to meta-oe/recipes-dbs/postgresql/postgresql_13.2.bb
-> index f2a29a59d9..ca8a6c7cee 100644
-> --- a/meta-oe/recipes-dbs/postgresql/postgresql_13.1.bb
-> +++ b/meta-oe/recipes-dbs/postgresql/postgresql_13.2.bb
-> @@ -1,6 +1,6 @@
->  require postgresql.inc
->
-> -LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=fc4ce21960f0c561460d750bc270d11f"
-> +LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=255f15687738db8068fbe9b938c90217"
->
->  SRC_URI += "\
->     file://not-check-libperl.patch \
-> @@ -9,4 +9,4 @@ SRC_URI += "\
->     file://0001-configure.in-bypass-autoconf-2.69-version-check.patch \
->  "
->
-> -SRC_URI[sha256sum] = "12345c83b89aa29808568977f5200d6da00f88a035517f925293355432ffe61f"
-> +SRC_URI[sha256sum] = "5fd7fcd08db86f5b2aed28fcfaf9ae0aca8e9428561ac547764c2a2b0f41adfc"
-> --
-> 2.25.1
->
->
->
->
-> 
->
+diff --git a/meta-oe/recipes-extended/smartmontools/files/0001-configure.ac-Define-SOURCE_DATE_EPOCH-in-CPPFLAGS.patch b/meta-oe/recipes-extended/smartmontools/files/0001-configure.ac-Define-SOURCE_DATE_EPOCH-in-CPPFLAGS.patch
+new file mode 100644
+index 000000000..87c0e1458
+--- /dev/null
++++ b/meta-oe/recipes-extended/smartmontools/files/0001-configure.ac-Define-SOURCE_DATE_EPOCH-in-CPPFLAGS.patch
+@@ -0,0 +1,84 @@
++From b621a313e0bc67803abfba18e1ae15e7a8b9b59f Mon Sep 17 00:00:00 2001
++From: Oleksiy Obitotskyy <oobitots@cisco.com>
++Date: Mon, 22 Feb 2021 17:21:33 +0200
++Subject: [PATCH] smartmontools: Improve reproducibility
++
++Backport changes added to master smartmontools.
++https://github.com/smartmontools/smartmontools/commit/24838916b4c0e91f5c897d44fcdeedb22848f684
++
++Upstream-Status: Backported
++Signed-off-by: Oleksiy Obitotskyy <oobitots@cisco.com>
++---
++ ChangeLog    |  8 ++++++++
++ configure.ac | 12 ++++++++++++
++ utility.cpp  | 10 ++++++++++
++ 3 files changed, 30 insertions(+)
++
++diff --git a/ChangeLog b/ChangeLog
++index 39eac2d..6a3b4ee 100644
++--- a/ChangeLog
+++++ b/ChangeLog
++@@ -1,5 +1,13 @@
++ $Id: ChangeLog 5155 2020-12-30 16:49:18Z chrfranke $
++ 
+++2021-02-07  Christian Franke  <franke@computer.org>
+++
+++	Improve reproducibility if SOURCE_DATE_EPOCH if set (GH pull/89).
+++	configure.ac: Define SOURCE_DATE_EPOCH in CPPFLAGS.
+++	utility.cpp: Print SOURCE_DATE_EPOCH value if specified.
+++	Don't include configure arguments then.
+++	cppcheck.sh: Silence related 'ConfigurationNotChecked' message.
+++
++ 2020-12-30  Christian Franke  <franke@computer.org>
++ 
++ 	smartmontools 7.2
++diff --git a/configure.ac b/configure.ac
++index ee6f0e5..c37c9bc 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -61,6 +61,18 @@ case "${host}" in
++     ;;
++ esac
++ 
+++AC_MSG_CHECKING([whether reproducible build is selected (SOURCE_DATE_EPOCH)])
+++res=no
+++if test -n "$SOURCE_DATE_EPOCH"; then
+++  res=yes
+++  test -z "`echo "$SOURCE_DATE_EPOCH" | sed 's,[[0-9]]*,,'`" || res=error
+++fi
+++AC_MSG_RESULT([$res])
+++case $res in
+++  error) AC_MSG_ERROR([Malformed SOURCE_DATE_EPOCH]) ;;
+++  yes) CPPFLAGS="${CPPFLAGS}${CPPFLAGS:+ }-DSOURCE_DATE_EPOCH=$SOURCE_DATE_EPOCH" ;;
+++esac
+++
++ # Check for SVN.
++ AC_MSG_CHECKING([whether this is a build from SVN])
++ is_svn_build=no
++diff --git a/utility.cpp b/utility.cpp
++index 0483c6f..8ab38c9 100644
++--- a/utility.cpp
+++++ b/utility.cpp
++@@ -134,9 +134,19 @@ std::string format_version_info(const char * prog_name, bool full /*= false*/)
++ #endif
++                                                           "\n"
++     "smartmontools configure arguments:"
+++#ifdef SOURCE_DATE_EPOCH
+++                                      " [hidden in reproducible builds]\n"
+++    "reproducible build SOURCE_DATE_EPOCH: "
+++#endif
++   ;
+++#ifdef SOURCE_DATE_EPOCH
+++  char ts[32]; struct tm tmbuf;
+++  strftime(ts, sizeof(ts), "%Y-%m-%d %H:%M:%S", time_to_tm_local(&tmbuf, SOURCE_DATE_EPOCH));
+++  info += strprintf("%u (%s)", (unsigned)SOURCE_DATE_EPOCH, ts);
+++#else
++   info += (sizeof(SMARTMONTOOLS_CONFIGURE_ARGS) > 1 ?
++            SMARTMONTOOLS_CONFIGURE_ARGS : " [no arguments given]");
+++#endif
++   info += '\n';
++ 
++   return info;
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-extended/smartmontools/smartmontools_7.2.bb b/meta-oe/recipes-extended/smartmontools/smartmontools_7.2.bb
+index 3c01e589c..cd9793359 100644
+--- a/meta-oe/recipes-extended/smartmontools/smartmontools_7.2.bb
++++ b/meta-oe/recipes-extended/smartmontools/smartmontools_7.2.bb
+@@ -16,6 +16,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/smartmontools/smartmontools-${PV}.tar.gz \
+            file://initd.smartd \
+            file://smartmontools.default \
+            file://smartd.service \
++           file://0001-configure.ac-Define-SOURCE_DATE_EPOCH-in-CPPFLAGS.patch \
+            "
+ 
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'libcap-ng selinux', d)}"
+-- 
+2.25.1
+
