@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.96.1614016251637312363
+ by mx.groups.io with SMTP id smtpd.web11.115.1614016251840694106
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 22 Feb 2021 09:50:52 -0800
 Authentication-Results: mx.groups.io;
@@ -8,14 +8,16 @@ Received: from [78.130.197.211] (port=55530 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lEFM8-0008OK-Lw; Mon, 22 Feb 2021 19:50:50 +0200
+	id 1lEFMA-0008OK-17; Mon, 22 Feb 2021 19:50:50 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-transitions: Upgrade 0.8.6 -> 0.8.7
-Date: Mon, 22 Feb 2021 19:50:39 +0200
-Message-Id: <20210222175043.21231-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-tabulate: Upgrade 0.8.7 -> 0.8.9
+Date: Mon, 22 Feb 2021 19:50:40 +0200
+Message-Id: <20210222175043.21231-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210222175043.21231-1-leon.anavi@konsulko.com>
+References: <20210222175043.21231-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,44 +30,39 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.8.7:
+Upgrade to release 0.8.9:
 
-- State configuration dictionaries passed to HierarchicalMachine
-  can also use states as a keyword to define substates. If
-  children and states are present, only children will be
-  considered.
-- HierarchicalMachine with custom separator now adds is_state
-  partials for nested states (e.g. is_C.s3.a()) to models.
-- Use model_attribute consistently in AsyncMachine
-- Testing now treats most warnings as errors
-- As a consequence, pygraphviz.Agraph in diagrams_pygraphviz are
-  now copied by transitions since AGraph.copy as of version 1.6
-  does not close temporary files appropriately
-- HierarchicalMachine now checks whether state_cls, event_cls and
-  transition_cls have been subclassed from nested base classes
-  (e.g. NestedState) to prevent hard to debug inheritance errors
+- Bug fix: Revert support of decimal separators
+- Python 3.9 support, 3.10 ready
+- New formats: unsafehtml, latex_longtable, fancy_outline
+- Support lists of UserDicts as input
+- Support hyperlinks in terminal output
+- Improve testing on systems with proxies
+- Migrate to pytest
+- Various bug fixes and improvements
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ython3-transitions_0.8.6.bb => python3-transitions_0.8.7.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-transitions_0.8.6.bb => python3-transitions_0.8.7.bb} (73%)
+ .../{python3-tabulate_0.8.7.bb => python3-tabulate_0.8.9.bb}   | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-tabulate_0.8.7.bb => python3-tabulate_0.8.9.bb} (59%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-transitions_0.8.6.bb b/meta-python/recipes-devtools/python/python3-transitions_0.8.7.bb
-similarity index 73%
-rename from meta-python/recipes-devtools/python/python3-transitions_0.8.6.bb
-rename to meta-python/recipes-devtools/python/python3-transitions_0.8.7.bb
-index 701c82cda8..04a033742a 100644
---- a/meta-python/recipes-devtools/python/python3-transitions_0.8.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-transitions_0.8.7.bb
-@@ -4,6 +4,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=baac7be1f4c17620df74188e23da6d47"
+diff --git a/meta-python/recipes-devtools/python/python3-tabulate_0.8.7.bb b/meta-python/recipes-devtools/python/python3-tabulate_0.8.9.bb
+similarity index 59%
+rename from meta-python/recipes-devtools/python/python3-tabulate_0.8.7.bb
+rename to meta-python/recipes-devtools/python/python3-tabulate_0.8.9.bb
+index def35ff441..19261c3d1d 100644
+--- a/meta-python/recipes-devtools/python/python3-tabulate_0.8.7.bb
++++ b/meta-python/recipes-devtools/python/python3-tabulate_0.8.9.bb
+@@ -3,7 +3,6 @@ HOMEPAGE = "https://github.com/astanin/python-tabulate"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=fad5a39bdfe452b13775adda41023ba7"
+ 
+-SRC_URI[md5sum] = "a766c6eecfe3765821909c4ddf082b3b"
+-SRC_URI[sha256sum] = "db2723a20d04bcda8522165c73eea7c300eda74e0ce852d9022e0159d7895007"
++SRC_URI[sha256sum] = "eb1d13f25760052e8931f2ef80aaf6045a6cceb47514db8beab24cded16f13a7"
  
  inherit pypi setuptools3
- 
--SRC_URI[sha256sum] = "032e10113139852ffb3ecfa4c2a5138f87441d85c3d6ad9122bb4b0978180a8d"
-+SRC_URI[sha256sum] = "8c60ec0828cd037820726283cad5d4d77a5e31514e058b51250420e9873e9bc7"
- 
- RDEPENDS_${PN} += "python3-six"
 -- 
 2.17.1
 
