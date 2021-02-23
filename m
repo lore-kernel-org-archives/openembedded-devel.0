@@ -1,38 +1,38 @@
 Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com [66.111.4.27])
- by mx.groups.io with SMTP id smtpd.web08.3740.1614118283292293246
+ by mx.groups.io with SMTP id smtpd.web11.3973.1614118605378046505
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Feb 2021 14:11:23 -0800
+ Tue, 23 Feb 2021 14:16:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gherzan.com header.s=fm1 header.b=DS0SZ1Fk;
+ dkim=pass header.i=@gherzan.com header.s=fm1 header.b=F0fDba31;
  spf=pass (domain: gherzan.com, ip: 66.111.4.27, mailfrom: andrei@gherzan.com)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
-	by mailout.nyi.internal (Postfix) with ESMTP id 6BA495C00AF;
-	Tue, 23 Feb 2021 17:11:22 -0500 (EST)
-Received: from mailfrontend1 ([10.202.2.162])
-  by compute3.internal (MEProxy); Tue, 23 Feb 2021 17:11:22 -0500
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.42])
+	by mailout.nyi.internal (Postfix) with ESMTP id 87F0A5C00A8;
+	Tue, 23 Feb 2021 17:16:44 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute2.internal (MEProxy); Tue, 23 Feb 2021 17:16:44 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gherzan.com; h=
 	from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding; s=fm1; bh=HAQXaF8wfBNv0CffcfI614IJzW
-	e1WdaqNFoco7xnGDk=; b=DS0SZ1Fk3H7DgPQGhz4CvnVv8yJ8Cf5yg4nRJwwrGG
-	9ybvYZ2Xi82FMrzr9pvTWHtOXqTaBFYfWursf6cNTD6uspsdMgTe5A8VEuZ7iRuS
-	Eu8Hl9NWfJVi0xgbtgAPdkghNBzqQT3WSytkFACPMysRtMwLJZy2FbXmBxPbf0hA
-	0gZqAYnwJsMFoDbKBMlkrmWgs18xgRy+vhMQVR5hPpr5dxD/KQB5URRxu0xAe0XQ
-	reQatqGRaGfTjLjQdxCjWqyKT7oYFaYTq5MXogDqDYxmwd9bJeE8tkItQCq3XQit
-	/rRq4HtBawzCP+nCPAVVX58pcm4b8zKrjBtc7wk+7+UA==
+	:content-transfer-encoding; s=fm1; bh=cEGrNUcyT4ITBFiIIk7NQvWNSv
+	e/VEcQ4/cogNuCKw0=; b=F0fDba31hSYgsYrq64LROROUK34cUW1n05tVN4Sr1U
+	3BV+qN0sJbB5aXi0stO7QkJABphm6ZZv0UpYcXnzeOQU1rMWyGOV1v6fXjVDKdth
+	42WENgIHVPJ+J6B/nq+xvr4HINWpnGAKFFw+xWuAGSc627EPE7aBQKPuVErn4GJ2
+	1VJ0mv+ggIGlKhV/bXQuLQhV0FRiLashE6GgPzfkuFVhGuQXaffq+He/xVINaob3
+	fA2P26L4L0SGmdgf4NAmImbySWEqWpMPi4oBUoULbCJnP2k9qeDxyqJT9hI80NeQ
+	+wHZPt9/I1yNBsmFVKoZO/+fRV9HxzF3BJJ8BjKBeq5Q==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:content-transfer-encoding:date:from
 	:message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=HAQXaF8wfBNv0Cffc
-	fI614IJzWe1WdaqNFoco7xnGDk=; b=kOTNOX84eZPLGk1sCLPgL7MXuQsHAN8ln
-	eQuuUtv7oNeAnxT+xwss2dtYQ1wc5vMoPwrH+zoF3g30SeV/IEk9jGjK/cBzXsyc
-	71Vq0ynURrTHYyOjiytVtxcBLNLNZ1FZR/tVaVjIEFY5RQq3g3FNMEHhZMSnU0gG
-	1uUcPfLzmiaZyU4tDo2MMEDHf2+XQ8QarOJUcChdqesLPMf5cH1RRdEBAZcqtoBd
-	FSxEMZivWthtdpR+67QTvQRLvqAVWlnA5m5aWJh9Sd2QzwThFU0OXWQwS0wupflH
-	zo0QStg2aYlXFuhuUU2pLYdcjS7O5bdug1lrKm/zq3VZPYtUSdUCA==
-X-ME-Sender: <xms:iX01YB2Hn4-UZY5QyJJMiYRamnk_3i2InOjJVmcTWpAU23l-RNcI_A>
-    <xme:iX01YIGxAnfkOfvr4AOcKZCWmJVbeV8pu0X3SnxT4bNlFywRN6tyadbzGQASflrgh
-    4fnJI75McwPRdv2am4>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrkeehgdduheejucetufdoteggodetrfdotf
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=cEGrNUcyT4ITBFiII
+	k7NQvWNSve/VEcQ4/cogNuCKw0=; b=HKNKgU5i29t/oaMe37y2RRVeSWubZNcMW
+	bSmF5zzqoQzRL1Hrm+yWZ+tCTfQ2ZTJoAMIzw+lcpIlXMq+18JjGByqA3yw7RHNT
+	CpnnvtIIzJurzBue/jt3E/75+9ljpSivjkxqB3KV1HcsrnEdSg0le3SHU1n55EJr
+	vv52EL5Lkf++vMexNI93Wsi/M8e8QzQefGXbLPrDBo6OIsbhf0kn4ElDzlt4NzhZ
+	ziBd7wv73STE32u4aGLvfG+njl0IdL04+dM5Dq69qEPdOV0A4wRB8YHTn9CvNWlm
+	oI/3VIxpKQ4MTNil8KDC94AnPWokRR49YT72ad+Yx8Nl9T0I3E8YA==
+X-ME-Sender: <xms:y341YGU-W4TanDKJtclEoTzWjeEqCOV05_OHPaKixCZoElSTFj6RdQ>
+    <xme:y341YCxFTaTC3KuSx4G7KZmNBXQk4Get_yLiCJwd1zGLusSSsnD5mFMqNzOBlH5QV
+    DtzFLpI1pYxyyCzoc4>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrkeehgdduheekucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucenucfjughrpefhvffufffkofgggfestdekredtre
     dttdenucfhrhhomheptehnughrvghiucfihhgvrhiirghnuceorghnughrvghisehghhgv
@@ -40,19 +40,19 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrkeehgdduheejucetufdoteggod
     ethfeuffekgeeiiefgkefhheehjeeijeejudenucfkphepuddtledrudegiedrfeejrddu
     kedvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprg
     hnughrvghisehghhgvrhiirghnrdgtohhm
-X-ME-Proxy: <xmx:iX01YB7S64-kaAA73_9uiAypsmTZxsE3GL_MA-L_tU1U7xzkOOW71w>
-    <xmx:iX01YO3WuiJ-REELvFdg3LY-_IoVOz5EyI9tTVtdmvRWdaNMhMtBDA>
-    <xmx:iX01YEE1Zoto49O2zdPNhi2oV6rcjmRvxBYGTh1bkVQcz4it-amDhQ>
-    <xmx:in01YHwzATqjTJlIMwd1GRSbDKDsPxhWCsVDQn0D1CXKXzOJubGFHw>
+X-ME-Proxy: <xmx:y341YMNEdnUoqc1bYOMAbiwuvUxVhEhh_VHHCRr4Es6G5UIckPP-MQ>
+    <xmx:y341YL72rKxd57mqVjYEAf5r7eBB9u-rnK8Gn6uJ-4gcy-9r8Y3PSA>
+    <xmx:y341YFOuE8SSfaBMisu57dxgpvZyq7pyLzxTzvwPiYADB3v6z3qrUw>
+    <xmx:zH41YDpcjUdqE8ABs-qIsP_scpDHWN3QX3tv-XN_4UwPK-M1koANCw>
 Received: from qwirkle.internal (host109-146-37-182.range109-146.btcentralplus.com [109.146.37.182])
-	by mail.messagingengine.com (Postfix) with ESMTPA id 43A9524005A;
-	Tue, 23 Feb 2021 17:11:21 -0500 (EST)
+	by mail.messagingengine.com (Postfix) with ESMTPA id 8053F108005C;
+	Tue, 23 Feb 2021 17:16:43 -0500 (EST)
 From: "Andrei Gherzan" <andrei@gherzan.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Andrei Gherzan <andrei.gherzan@huawei.com>
-Subject: [meta-oe][PATCH] nss: Fix warnings generated by getcwd
-Date: Tue, 23 Feb 2021 22:11:08 +0000
-Message-Id: <20210223221108.3893408-1-andrei@gherzan.com>
+Subject: [meta-oe][PATCH v2] nss: Fix warnings generated by getcwd
+Date: Tue, 23 Feb 2021 22:16:37 +0000
+Message-Id: <20210223221637.3901832-1-andrei@gherzan.com>
 X-Mailer: git-send-email 2.30.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -73,33 +73,32 @@ properly allocated.
 
 Signed-off-by: Andrei Gherzan <andrei.gherzan@huawei.com>
 ---
- meta-oe/recipes-support/nss/nss_3.51.1.bb | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/nss/nss_3.60.1.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-index 3e3c3a3fd..0e127975b 100644
---- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-@@ -62,7 +62,6 @@ do_configure_prepend_libc-musl () {
- do_compile_prepend_class-native() {
-     export NSPR_INCLUDE_DIR=${STAGING_INCDIR_NATIVE}/nspr
-     export NSPR_LIB_DIR=${STAGING_LIBDIR_NATIVE}
--    export NSS_ENABLE_WERROR=0
- }
+diff --git a/meta-oe/recipes-support/nss/nss_3.60.1.bb b/meta-oe/recipes-support/nss/nss_3.60.1.bb
+index dc147efea..94ac7af43 100644
+--- a/meta-oe/recipes-support/nss/nss_3.60.1.bb
++++ b/meta-oe/recipes-support/nss/nss_3.60.1.bb
+@@ -68,7 +68,6 @@ do_compile_prepend_class-native() {
  
- do_compile_prepend_class-nativesdk() {
-@@ -81,6 +80,11 @@ do_compile() {
+ do_compile() {
+     export NSPR_INCLUDE_DIR=${STAGING_INCDIR}/nspr
+-    export NSS_ENABLE_WERROR=0
+ 
+     export CROSS_COMPILE=1
      export NATIVE_CC="${BUILD_CC}"
-     # Additional defines needed on Centos 7
+@@ -76,6 +75,10 @@ do_compile() {
      export NATIVE_FLAGS="${BUILD_CFLAGS} -DLINUX -Dlinux"
-+
+     export BUILD_OPT=1
+ 
 +    # POSIX.1-2001 states that the behaviour of getcwd() when passing a null
 +    # pointer as the buf argument, is unspecified.
 +    export NATIVE_FLAGS="${NATIVE_FLAGS} -DGETCWD_CANT_MALLOC"
 +
-     export BUILD_OPT=1
- 
      export FREEBL_NO_DEPEND=1
+     export FREEBL_LOWHASH=1
+ 
 -- 
 2.30.1
 
