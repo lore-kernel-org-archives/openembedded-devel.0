@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.11296.1614093753241998365
+ by mx.groups.io with SMTP id smtpd.web11.11231.1614093754171719354
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Feb 2021 07:22:33 -0800
+ Tue, 23 Feb 2021 07:22:34 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=56178 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lEZWA-00022z-AQ; Tue, 23 Feb 2021 17:22:32 +0200
+	id 1lEZWC-00022z-8l; Tue, 23 Feb 2021 17:22:33 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 04/10] python3-typeguard: Upgrade 2.11.0 -> 2.11.1
-Date: Tue, 23 Feb 2021 17:22:13 +0200
-Message-Id: <20210223152219.32129-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 05/10] python3-httplib2: Upgrade 0.18.1 -> 0.19.0
+Date: Tue, 23 Feb 2021 17:22:14 +0200
+Message-Id: <20210223152219.32129-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210223152219.32129-1-leon.anavi@konsulko.com>
 References: <20210223152219.32129-1-leon.anavi@konsulko.com>
@@ -30,32 +30,38 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.11.1:
+Upgrade to release 0.19.0:
 
-- Fixed compatibility with Python 3.10
+- auth: parse headers using pyparsing instead of regexp
+- auth: WSSE token needs to be string not bytes
+
+License-Update: Use file LICENSE instead of PKG-INFO
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-typeguard_2.11.0.bb => python3-typeguard_2.11.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-typeguard_2.11.0.bb => python3-typeguard_2.11.1.bb} (87%)
+ ...python3-httplib2_0.18.1.bb => python3-httplib2_0.19.0.bb} | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-httplib2_0.18.1.bb => python3-httplib2_0.19.0.bb} (52%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-typeguard_2.11.0.bb b/meta-python/recipes-devtools/python/python3-typeguard_2.11.1.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-typeguard_2.11.0.bb
-rename to meta-python/recipes-devtools/python/python3-typeguard_2.11.1.bb
-index 3c9cac86bb..640adf83b7 100644
---- a/meta-python/recipes-devtools/python/python3-typeguard_2.11.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-typeguard_2.11.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/typeguard/"
+diff --git a/meta-python/recipes-devtools/python/python3-httplib2_0.18.1.bb b/meta-python/recipes-devtools/python/python3-httplib2_0.19.0.bb
+similarity index 52%
+rename from meta-python/recipes-devtools/python/python3-httplib2_0.18.1.bb
+rename to meta-python/recipes-devtools/python/python3-httplib2_0.19.0.bb
+index 9c9b6c5b01..f720723a65 100644
+--- a/meta-python/recipes-devtools/python/python3-httplib2_0.18.1.bb
++++ b/meta-python/recipes-devtools/python/python3-httplib2_0.19.0.bb
+@@ -2,9 +2,8 @@ SUMMARY = "A comprehensive HTTP client library, httplib2 supports many features
+ HOMEPAGE = "https://github.com/httplib2/httplib2"
+ SECTION = "devel/python"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f0e423eea5c91e7aa21bdb70184b3e53"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=7e04d1303d64a7b62421751ecb490dc2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=56e5e931172b6164b62dc7c4aba6c8cf"
  
--SRC_URI[sha256sum] = "cc3b9c3466823e70b47af7bc43e481ef59ad37112ae71c448f0d3fe773db7567"
-+SRC_URI[sha256sum] = "33243c1cbfcb9736a06c6db22dd08876b5f297e6344aa272a2862c0f8e669f64"
+-SRC_URI[md5sum] = "0b331f96cdb2ae0e0342d4ea0f5f0502"
+-SRC_URI[sha256sum] = "8af66c1c52c7ffe1aa5dc4bcd7c769885254b0756e6e69f953c7f0ab49a70ba3"
++SRC_URI[sha256sum] = "e0d428dad43c72dbce7d163b7753ffc7a39c097e6788ef10f4198db69b92f08e"
  
- inherit pypi setuptools3 ptest
- 
+ inherit pypi setuptools3
 -- 
 2.17.1
 
