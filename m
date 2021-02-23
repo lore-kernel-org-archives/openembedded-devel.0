@@ -1,105 +1,123 @@
 Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com [66.111.4.27])
- by mx.groups.io with SMTP id smtpd.web10.3928.1614118680572680766
+ by mx.groups.io with SMTP id smtpd.web08.3980.1614119340536451753
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Feb 2021 14:18:00 -0800
+ Tue, 23 Feb 2021 14:29:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gherzan.com header.s=fm1 header.b=CVEKxy6R;
+ dkim=pass header.i=@gherzan.com header.s=fm1 header.b=c/Js4ZwH;
  spf=pass (domain: gherzan.com, ip: 66.111.4.27, mailfrom: andrei@gherzan.com)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
-	by mailout.nyi.internal (Postfix) with ESMTP id BDDE15C00A1;
-	Tue, 23 Feb 2021 17:17:59 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
-  by compute1.internal (MEProxy); Tue, 23 Feb 2021 17:17:59 -0500
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+	by mailout.nyi.internal (Postfix) with ESMTP id 9BFC35C0032;
+	Tue, 23 Feb 2021 17:28:59 -0500 (EST)
+Received: from imap4 ([10.202.2.54])
+  by compute3.internal (MEProxy); Tue, 23 Feb 2021 17:28:59 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gherzan.com; h=
-	from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding; s=fm1; bh=HAQXaF8wfBNv0CffcfI614IJzW
-	e1WdaqNFoco7xnGDk=; b=CVEKxy6R7Z8EEvF9mBJmlFCBAZVBcUzY+VagTlSymW
-	ZX53rT5zD4BrfVdn2tjmDF8611MS0wza/unif3ntVNl4d79zV+1tCeSYbCOxqkpp
-	/sLOhW0hCy3GmOIZmV7cXre8UeKKk21HoywOjiKDrGSyEhsnqPBlkhCqfAPayqAW
-	pa90Q8M1ioTgTd85TeT6XHBaJLBL8SayDth0Xj+F4SiliP/wKsDe1OfGJ9lyf8+k
-	7VpjxaJMe0Nh63PDH633l+r8bMhS42y8Y6Nv05zJyOL/m15UX54VrbXDMlvXTBTm
-	MwdlmsSrbsbIIyGiJ9UEsuXmuUUQSZkKXv7F/kQP3oYw==
+	mime-version:message-id:in-reply-to:references:date:from:to:cc
+	:subject:content-type; s=fm1; bh=uS4gRUIakBwx90OzHM3hdL08X3yJx7Y
+	Zvgkx9rB1K9Q=; b=c/Js4ZwHWsm4T720Kqb34figGAKKnnMPXsmsSnjA86bfoUM
+	o/R+8cPoRQ3bTwn85o8obQIC+Zt7JHsARljyGRyWToHjP71yLz7cZY5j3w9UvZDE
+	Pq+AydAApo8JachLqAdczLiMmPo3Kpk1eWnscs8Hgb29cMrza7QOklUea7TWdDr7
+	rOY68m4YJ7J5mCeFga88a2A+jFFF+Ja4/ssvW6p7d9/HPLV/evWaPUNEJhsUd5rm
+	inqZWAWc2VOEZPjLYTFEQvqShyBXlcdSnKrZyhh7qS1D6/GHf9dQb+vZVf3Rhv1c
+	Ve1RpCW+auUrbNHgQa04V5XCskjeCmoE0mQrBQg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-transfer-encoding:date:from
-	:message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=HAQXaF8wfBNv0Cffc
-	fI614IJzWe1WdaqNFoco7xnGDk=; b=tOtMv0NoGyYSt0i6buppRydOMHqq6XSYN
-	rWONWIjVZ9hOtKDGpP/86uT/t3TlEF/Yg3Pl+TRry9kctjf9uRcF8tTKMONpH0TY
-	dLu+9+PDkQpzmue//VZMSHwWySshGD1qLHxbHj7M1awoJSDdj2eDwXV+hlka1ecS
-	vyfAfL39iRb4SLBdj2WV/xpDIyqynkqVJvfPmScWl5xqrYjQB5j8my3ETrBFFuh6
-	wGbdwXS9PO9F/Ww5QJG3SL1r5JnitPyqLlADazTWJZjioyj4/AYk5/aUBxBbpBQ4
-	uEvorXaYqhP/X+hp1HClFRCiLvW7n/Tc3lOAPi2ne7BXJx0vKiSaw==
-X-ME-Sender: <xms:Fn81YGOx5UNR1H8Ybvh-9PRrtnXcZrqmf0gFIoEU1W0uNRsaz_yoZw>
-    <xme:Fn81YIq64J4eMF1Ll2atFtwxrHxgCPyWaRVQeajskJlS9vG95gS0xyrhO5EO_unKd
-    OzgyOWkioxuARcXWhg>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrkeehgdduheekucetufdoteggodetrfdotf
+	messagingengine.com; h=cc:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=uS4gRU
+	IakBwx90OzHM3hdL08X3yJx7YZvgkx9rB1K9Q=; b=b97drpABsoFs0FIqb7ryg6
+	pUzXqJ3XTb2/13WZtYpkex05K41/6qIPd7Oc9wtebfFndu2s/zsch1r9krFEghDI
+	Q9NzWEqf28PNM7/9HuVJCFRMwcrijdNRbjKJRmpLEazCjf57t/vV365xp7O5MB8v
+	Kj6MefnSODmYqrzrAB4wGui0oL072ghaHCAdI4BhUMRD29iF7zKlWJ8UBETIt1oY
+	n3wrXPR6pQmrVtXR7iJurAhqOudruJwF97zktFHZCzacu45+qFmitpRtfQBLAqPG
+	R1DPgz6r9jwUEy62alw0jeoibED1E5dRlszqz4a7Hye+f6ZN9JdSClNxneyTtQyg
+	==
+X-ME-Sender: <xms:q4E1YCz50RchFua_7q86EYHKboA8wbBVbfZ-rRHU_Oh3_7UcZdtEBg>
+    <xme:q4E1YOS7yu46v3jWOdC2w_R5nhKnwgetUqTZlTZYz72GJ9IJpd7Jlb76ueHSCcHzI
+    vWR8olJ7j9cOiANbes>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrkeehgdduiedtucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucenucfjughrpefhvffufffkofgggfestdekredtre
-    dttdenucfhrhhomheptehnughrvghiucfihhgvrhiirghnuceorghnughrvghisehghhgv
-    rhiirghnrdgtohhmqeenucggtffrrghtthgvrhhnpedvteeutdeutdfhvefggfeifeehve
-    ethfeuffekgeeiiefgkefhheehjeeijeejudenucfkphepuddtledrudegiedrfeejrddu
-    kedvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprg
-    hnughrvghisehghhgvrhiirghnrdgtohhm
-X-ME-Proxy: <xmx:Fn81YHHDQnn4MWulSeqvY__Ojnz_Qlrs7fXF_7gdfhMComdjyLPsVw>
-    <xmx:Fn81YNosHqsDlcMcrWNv5Awk3xJIRkBTCFCWYH83fKUITRrLtUOzeQ>
-    <xmx:Fn81YAbEksPxvOx-0oTa-mcq7eB_u6boD50Bl_GhPl65vkZFTucfrQ>
-    <xmx:F381YDect4XkKBnpaFmmfXTzTCcJtd1WwgTGP-1-4SFLo4drU5swow>
-Received: from qwirkle.internal (host109-146-37-182.range109-146.btcentralplus.com [109.146.37.182])
-	by mail.messagingengine.com (Postfix) with ESMTPA id 778261080064;
-	Tue, 23 Feb 2021 17:17:58 -0500 (EST)
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhepofgfggfkjghffffhvffutgesrgdtreerreerjeenucfhrhhomhepfdetnhgu
+    rhgvihcuifhhvghriigrnhdfuceorghnughrvghisehghhgvrhiirghnrdgtohhmqeenuc
+    ggtffrrghtthgvrhhnpedvkeeigefggfejieeffefhfeeihfefleelueevueetudehgfdu
+    tddukeetteejvdenucffohhmrghinhepohhpvghnvghmsggvugguvggurdhorhhgnecuve
+    hluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprghnughrvghi
+    sehghhgvrhiirghnrdgtohhm
+X-ME-Proxy: <xmx:q4E1YEUwsbbr_iv_iZRGOAyKYzHxzlOXKpb1TMoxmOLeSWujlLvbCA>
+    <xmx:q4E1YIj3TpWIELu9B1sJjLAcyrKsnQCsH6NoKpqPdow7dQfYUQN3kA>
+    <xmx:q4E1YEBZp-Im0VA7GawhVK5nuXOkc0ywLbAbKYHSvpfUOiK983Qa4Q>
+    <xmx:q4E1YPowGJc6HVitDh8zZ6sZ2wGXYQCbysDAuWVGnY5UKb-REQuijg>
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+	id 44B8A160792; Tue, 23 Feb 2021 17:28:59 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.5.0-alpha0-141-gf094924a34-fm-20210210.001-gf094924a
+Mime-Version: 1.0
+Message-Id: <d4d70993-600d-4d0b-ac57-07b74384ac27@www.fastmail.com>
+In-Reply-To: <7d202618-598a-4518-8b49-38cc054f0d8b@www.fastmail.com>
+References: <20210223162705.2595483-1-andrei@gherzan.com>
+ <20210223171242.csn2hwn6imsn4ega@jama>
+ <CAMKF1spNM_nxwEMFN3DXCG5O4rxK22VMMe6yZKm7zjmUWg4LSQ@mail.gmail.com>
+ <7536ac24-0016-45e2-9cfe-209b50633c8a@www.fastmail.com>
+ <20210223173002.aydz4xm65ylvgy4k@jama>
+ <7a1bf385-91e5-4076-bbee-b5d14b7c1e54@www.fastmail.com>
+ <4deb9ec4-605e-431f-95f7-1b6f9e948635@www.fastmail.com>
+ <CA+chaQch78dk=nF1Rj0znxRJ81a=cXbZpp-X_1RjZPwB1UEjOw@mail.gmail.com>
+ <7d202618-598a-4518-8b49-38cc054f0d8b@www.fastmail.com>
+Date: Tue, 23 Feb 2021 22:28:39 +0000
 From: "Andrei Gherzan" <andrei@gherzan.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Andrei Gherzan <andrei.gherzan@huawei.com>
-Subject: [meta-oe][dunfell][PATCH] nss: Fix warnings generated by getcwd
-Date: Tue, 23 Feb 2021 22:17:55 +0000
-Message-Id: <20210223221755.3903730-1-andrei@gherzan.com>
-X-Mailer: git-send-email 2.30.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+To: "Martin Jansa" <martin.jansa@gmail.com>
+Cc: "Khem Raj" <raj.khem@gmail.com>,
+ openembedded <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-oe][dunfell][PATCH] nss: Disable Werror across all recipe types
+Content-Type: multipart/alternative;
+ boundary=00f815fc5b184b4da2224f5e0672ce79
 
-From: Andrei Gherzan <andrei.gherzan@huawei.com>
+--00f815fc5b184b4da2224f5e0672ce79
+Content-Type: text/plain
 
-getcwd() conforms to POSIX.1-2001 which leaves the behaviour when the
-buf argument is NULL, undefined. This makes gcc 10+ throw the following
-warning:
+On Tue, 23 Feb 2021, at 21:39, Andrei Gherzan wrote:
+> On Tue, 23 Feb 2021, at 21:37, Martin Jansa wrote:
+>> OK, thanks for looking into that, I was assuming that native nsinstall is provided by nss-native dependency we have and wasn't aware that it's built for host as part of target build as well.
+> 
+> I should have known this before sending the patch. As a self-inflicted punishment, I'll push a proper fix as well but please go with this for now.
 
-argument 1 is null but the corresponding size argument 2 value is 4096
+I've pushed the fix for both master and dunfell. master has a v2 because that was initially the dunfell one but without the subject tag (missed it initially).
 
-Initially, this was fixed by disabling NSS_ENABLE_WERROR. This patch
-re-enables NSS_ENABLE_WERROR (by leaving it to its default value) and
-takes advantage of the existing functionality in nss that wraps the
-getcwd call into a function making sure that the buf argument is always
-properly allocated.
+master - https://lists.openembedded.org/g/openembedded-devel/message/89697
 
-Signed-off-by: Andrei Gherzan <andrei.gherzan@huawei.com>
----
- meta-oe/recipes-support/nss/nss_3.51.1.bb | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+dunfell - https://lists.openembedded.org/g/openembedded-devel/message/89698
 
-diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-index 3e3c3a3fd..0e127975b 100644
---- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-@@ -62,7 +62,6 @@ do_configure_prepend_libc-musl () {
- do_compile_prepend_class-native() {
-     export NSPR_INCLUDE_DIR=${STAGING_INCDIR_NATIVE}/nspr
-     export NSPR_LIB_DIR=${STAGING_LIBDIR_NATIVE}
--    export NSS_ENABLE_WERROR=0
- }
- 
- do_compile_prepend_class-nativesdk() {
-@@ -81,6 +80,11 @@ do_compile() {
-     export NATIVE_CC="${BUILD_CC}"
-     # Additional defines needed on Centos 7
-     export NATIVE_FLAGS="${BUILD_CFLAGS} -DLINUX -Dlinux"
-+
-+    # POSIX.1-2001 states that the behaviour of getcwd() when passing a null
-+    # pointer as the buf argument, is unspecified.
-+    export NATIVE_FLAGS="${NATIVE_FLAGS} -DGETCWD_CANT_MALLOC"
-+
-     export BUILD_OPT=1
- 
-     export FREEBL_NO_DEPEND=1
--- 
-2.30.1
+--
+Andrei
 
+
+--00f815fc5b184b4da2224f5e0672ce79
+Content-Type: text/html
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html><html><head><title></title><style type=3D"text/css">
+p.MsoNormal,p.MsoNoSpacing{margin:0}</style></head><body><div>On Tue, 23=
+ Feb 2021, at 21:39, Andrei Gherzan wrote:<br></div><blockquote type=3D"=
+cite" id=3D"qt" style=3D""><div>On Tue, 23 Feb 2021, at 21:37, Martin Ja=
+nsa wrote:<br></div><blockquote type=3D"cite" id=3D"qt-qt" style=3D""><d=
+iv dir=3D"ltr"><div>OK, thanks for looking into that, I was assuming tha=
+t native nsinstall is provided by nss-native dependency we have and wasn=
+'t aware that it's built for host as part of target build as well.<br></=
+div></div></blockquote><div><br></div><div>I should have known this befo=
+re sending the patch. As a self-inflicted punishment, I'll push a proper=
+ fix as well but please go with this for now.<br></div></blockquote><div=
+><br></div><div>I've pushed the fix for both master and dunfell. master =
+has a v2 because that was initially the dunfell one but without the subj=
+ect tag (missed it initially).<br></div><div><br></div><div><div class=3D=
+"attachment__body attachment__body--no_thumb"><div class=3D"post-message=
+ post-message--collapsed"><div style=3D"max-height:200px;" class=3D"post=
+-message__text-container"><p>master - <a class=3D"theme markdown__link" =
+href=3D"https://lists.openembedded.org/g/openembedded-devel/message/8969=
+7" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/g=
+/openembedded-devel/message/89697</a><br></p><div>dunfell - <a class=3D"=
+theme markdown__link" href=3D"https://lists.openembedded.org/g/openembed=
+ded-devel/message/89698" rel=3D"noreferrer" target=3D"_blank">https://li=
+sts.openembedded.org/g/openembedded-devel/message/89698</a><br></div><di=
+v><br></div><div>--<br></div><div>Andrei<br></div></div></div></div><div=
+ style=3D"clear:both;"><br></div></div><div><br></div></body></html>
+
+--00f815fc5b184b4da2224f5e0672ce79--
