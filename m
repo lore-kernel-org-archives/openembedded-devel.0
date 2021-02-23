@@ -1,80 +1,64 @@
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web12.1356.1614020659922508881
+Received: from mailrelay3-2.pub.mailoutpod1-cph3.one.com (mailrelay3-2.pub.mailoutpod1-cph3.one.com [46.30.212.2])
+ by mx.groups.io with SMTP id smtpd.web12.6468.1614061862280906252
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Feb 2021 11:04:20 -0800
+ Mon, 22 Feb 2021 22:31:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=hVqwisMN;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id gm18so192732pjb.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Feb 2021 11:04:19 -0800 (PST)
+ dkim=pass header.i=@bsorensen.net header.s=20191106 header.b=t7NZRZZf;
+ spf=none, err=permanent DNS error (domain: bsorensen.net, ip: 46.30.212.2, mailfrom: yocto@bsorensen.net)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=np60tE/6K7Vw2oOGvZK80iGM9jwNPC29YEwA5jo1Myc=;
-        b=hVqwisMN+kvexvb/v6XA0F9vNxieT2q+tkrkasWuf0KNJ+V1YwJc94Fkk2wjmiFfHJ
-         u7GwiWlXuS7D+RrrjUpkYGBfpSui7WZPmYjlBrDUxQOmyDBJ4MgBgm65EZ1USqA0MNqQ
-         2mTySI4vOD53v17PKkPQMS8Tu2q1kN9h3A7uecmd714mpx0ECepokueCsga6J203y8+8
-         q1acyBB6YVpPUwNUYYrxwiAY5GhaBrNeliu7OUKci4BoqZ213qiTDR8QdKeG3jGqX6lr
-         yq+PhNJSM7NhpR26AHMx8UlDHzR0dulnVEfP1aTquLQ15Wlz01DU3cB457dd8Fjd1633
-         Zm5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=np60tE/6K7Vw2oOGvZK80iGM9jwNPC29YEwA5jo1Myc=;
-        b=Ub7ZCJeOD5MDOodJY9P/GPTIKf91KujGYEOdBQy1VUqvQOV/qr/kFZvkktWRRV8UGp
-         vwkEjJFYwOftCRKYLUSChM0YBvPU01MtVMjHYWABYH3VdkhYyEwbsobiLr22xSckPHz9
-         o/Qr+NJFTO4eV7SrQLfOf/F++VHIWdZv0KzKoRCTtDDjLkzIh57PpZ9IrYeIhXASEcKS
-         DYU4snI39chCQT1MNWBkNrXEL9w+kWLn/2O3JQUJXqrLZ9FP+DZAXAof7dgYvLs0N0fI
-         083FLQ4AV+CyV88kaJbQ4JnC0rwcVHHe9cFsXUJKPtO2QA9RPKdcyD7Was+2kG1W2qOU
-         C/zQ==
-X-Gm-Message-State: AOAM530Qs9Og8VIDPZC8fCu0c2MpPYoBx1D/hpAkdoZC3nlRLF4t9y/Q
-	ZFEM74mYaYr7sCiZxhJmSXkGkeQ254ZlKQ==
-X-Google-Smtp-Source: ABdhPJxTFnoJ4Rp4Nn4vHMMReZg1+rK2nd5OijKyRAi+ajcCdO/ZOh7UENup9SNUPAxnXeMUUARDVQ==
-X-Received: by 2002:a17:90a:654a:: with SMTP id f10mr24851106pjs.202.1614020659190;
-        Mon, 22 Feb 2021 11:04:19 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0:db81:2f56:60e4:2c64])
-        by smtp.gmail.com with ESMTPSA id u127sm19941416pfb.180.2021.02.22.11.04.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 Feb 2021 11:04:18 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
+	d=bsorensen.net; s=20191106;
+	h=content-transfer-encoding:content-type:mime-version:message-id:date:subject:
+	 cc:to:from:from;
+	bh=dktT7bEZWa6NF7VzlU3tntsiU6cQBjbLFJi6RuPvzeo=;
+	b=t7NZRZZf1SATM2wxbwKfY2FrQCuXux0LzPIrqMDu6c3y6RzxUfaMVP8VZmk/iEh4zOpzh2b02w/dg
+	 /VpuBpCRB5xBSJfIAOzmA0ZnOTc1SITtwsxV+SI/vSTo+JOHaeTjSKnQbhCtqWOpS60zsUeQ9DaquV
+	 7WDfZrGZB70SR2KSbMa05vuToxcYkEpcEwHsCmi3uR8mEn0m+AuZU43wh22N6YL/8wZU4hpKByIvnI
+	 +z8E0LBM5Z1yZtqY0TRSC/wRUsUPFoz4isNnJbQ3qP3mGbbxxdI1XMj64OOAgg42QxYGWG9PCZObF+
+	 tXMB5YxxLt7DF/NVFI8UUJXK1sCCI6g==
+X-HalOne-Cookie: 21501288d36895376e69204beeab10074b8b9628
+X-HalOne-ID: b1545bfc-75a0-11eb-8ccc-d0431ea8bb03
+Received: from localhost.localdomain (unknown [85.191.185.161])
+	by mailrelay3.pub.mailoutpod1-cph3.one.com (Halon) with ESMTPSA
+	id b1545bfc-75a0-11eb-8ccc-d0431ea8bb03;
+	Tue, 23 Feb 2021 06:30:59 +0000 (UTC)
+From: =?UTF-8?B?Q2hyaXN0aWFuIEIuIFPDuHJlbnNlbg==?= <yocto@bsorensen.net>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] abseil-cpp: Remove libexecinfo band-aid for musl
-Date: Mon, 22 Feb 2021 11:04:17 -0800
-Message-Id: <20210222190417.3419444-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.1
+Cc: chbs@prevas.dk,
+	=?UTF-8?q?Christian=20Br=C3=A4uner=20S=C3=B8rensen?= <yocto@bsorensen.net>
+Subject: [meta-oe][PATCH v3] libgpiod: packageqa problem => static python lib to ${PN}-staticdev
+Date: Tue, 23 Feb 2021 07:30:58 +0100
+Message-Id: <20210223063058.6740-1-yocto@bsorensen.net>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-abseil's cmake files can now detect execinfo's presence before depending
-on it, therefore no need to link with libexecinfo on musl now
+Problem:
+QA Issue: non -staticdev package contains static .a library
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Reason:
+Both /usr/lib/python3.8/site-packages/gpiod.a and
+/usr/lib/python3.8/site-packages/gpiod.so are in ${PN}-python.
+
+Signed-off-by: Christian Bräuner Sørensen <yocto@bsorensen.net>
 ---
- meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb | 3 ---
- 1 file changed, 3 deletions(-)
+ meta-oe/recipes-support/libgpiod/libgpiod_1.6.2.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-index 7d935d523b..38c3dbc510 100644
---- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-@@ -17,8 +17,6 @@ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH}         \
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.2.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.2.bb
+index e6b6476e2..c6c262b70 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.2.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.2.bb
+@@ -31,7 +31,8 @@ FILES_${PN}-tools = "${bindir}/*"
+ FILES_libgpiodcxx = "${libdir}/libgpiodcxx.so.*"
  
- S = "${WORKDIR}/git"
+ PACKAGES =+ "${PN}-python"
+-FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}"
++FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}/*.so"
++FILES_${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/*.a"
+ RRECOMMENDS_PYTHON = "${@bb.utils.contains('PACKAGECONFIG', 'python3', '${PN}-python', '',d)}"
+ RRECOMMENDS_${PN}-python += "${RRECOMMENDS_PYTHON}"
  
--DEPENDS_append_libc-musl = " libexecinfo "
--
- ASNEEDED_class-native = ""
- ASNEEDED_class-nativesdk = ""
- 
-@@ -33,4 +31,3 @@ ALLOW_EMPTY_${PN} = "1"
- 
- FILES_${PN} = "${libdir}/libabsl_*.so ${libdir}/cmake"
- FILES_${PN}-dev = "${includedir}"
--
 -- 
-2.30.1
+2.25.1
 
