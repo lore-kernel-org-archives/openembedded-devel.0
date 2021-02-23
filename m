@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.11145.1614093748968465273
+ by mx.groups.io with SMTP id smtpd.web11.11229.1614093748963417583
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 23 Feb 2021 07:22:29 -0800
 Authentication-Results: mx.groups.io;
@@ -8,16 +8,14 @@ Received: from [78.130.197.211] (port=56178 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lEZW5-00022z-Pl; Tue, 23 Feb 2021 17:22:26 +0200
+	id 1lEZW4-00022z-R0; Tue, 23 Feb 2021 17:22:25 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 02/10] python3-pkgconfig: Upgrade 1.5.1 -> 1.5.2
-Date: Tue, 23 Feb 2021 17:22:11 +0200
-Message-Id: <20210223152219.32129-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 01/10] python3-prompt-toolkit: Upgrade 3.0.14 -> 3.0.16
+Date: Tue, 23 Feb 2021 17:22:10 +0200
+Message-Id: <20210223152219.32129-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210223152219.32129-1-leon.anavi@konsulko.com>
-References: <20210223152219.32129-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -30,34 +28,38 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.5.2:
+Upgrade to release 3.0.16:
 
-- Added Support for Linux On Power
-- Use poetry_core as build backend
+- Added ScrollablePane: a scrollable layout container.
+  This allows applications to build a layout, larger than the
+  terminal, with a vertical scroll bar. The vertical scrolling
+  will be done automatically when certain widgets receive the
+  focus.
+- Added DeduplicateCompleter and ConditionalCompleter.
+- Added deduplicate argument to merge_completers.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pkgconfig_1.5.1.bb => python3-pkgconfig_1.5.2.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pkgconfig_1.5.1.bb => python3-pkgconfig_1.5.2.bb} (72%)
+ ...rompt-toolkit_3.0.14.bb => python3-prompt-toolkit_3.0.16.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_3.0.14.bb => python3-prompt-toolkit_3.0.16.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pkgconfig_1.5.1.bb b/meta-python/recipes-devtools/python/python3-pkgconfig_1.5.2.bb
-similarity index 72%
-rename from meta-python/recipes-devtools/python/python3-pkgconfig_1.5.1.bb
-rename to meta-python/recipes-devtools/python/python3-pkgconfig_1.5.2.bb
-index 05ca3beecd..7a98ef2884 100644
---- a/meta-python/recipes-devtools/python/python3-pkgconfig_1.5.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pkgconfig_1.5.2.bb
-@@ -4,8 +4,7 @@ SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=faa7f82be8f220bff6156be4790344fc"
+diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.14.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.16.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.14.bb
+rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.16.bb
+index e5ad069d3c..2a377d6e64 100644
+--- a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.14.bb
++++ b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.16.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://python-prompt-toolkit.readthedocs.io/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f"
  
--SRC_URI[md5sum] = "9f9cdb224ec0a1e59efcc7cac4b91972"
--SRC_URI[sha256sum] = "97bfe3d981bab675d5ea3ef259045d7919c93897db7d3b59d4e8593cba8d354f"
-+SRC_URI[sha256sum] = "38d612488f0633755a2e7a8acab6c01d20d63dbc31af75e2a9ac98a6f638ca94"
+-SRC_URI[sha256sum] = "7e966747c18ececaec785699626b771c1ba8344c8d31759a1915d6b12fad6525"
++SRC_URI[sha256sum] = "0fa02fa80363844a4ab4b8d6891f62dd0645ba672723130423ca4037b80c1974"
  
- RDEPENDS_${PN} = "pkgconfig \
-                  ${PYTHON_PN}-shell \
+ inherit pypi setuptools3
+ 
 -- 
 2.17.1
 
