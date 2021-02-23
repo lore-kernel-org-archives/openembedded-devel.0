@@ -1,89 +1,105 @@
 Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com [66.111.4.27])
- by mx.groups.io with SMTP id smtpd.web10.3379.1614116402888661497
+ by mx.groups.io with SMTP id smtpd.web08.3740.1614118283292293246
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Feb 2021 13:40:03 -0800
+ Tue, 23 Feb 2021 14:11:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gherzan.com header.s=fm1 header.b=UssdRjeM;
+ dkim=pass header.i=@gherzan.com header.s=fm1 header.b=DS0SZ1Fk;
  spf=pass (domain: gherzan.com, ip: 66.111.4.27, mailfrom: andrei@gherzan.com)
 Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
-	by mailout.nyi.internal (Postfix) with ESMTP id 693475C00C3;
-	Tue, 23 Feb 2021 16:39:59 -0500 (EST)
-Received: from imap4 ([10.202.2.54])
-  by compute3.internal (MEProxy); Tue, 23 Feb 2021 16:39:59 -0500
+	by mailout.nyi.internal (Postfix) with ESMTP id 6BA495C00AF;
+	Tue, 23 Feb 2021 17:11:22 -0500 (EST)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute3.internal (MEProxy); Tue, 23 Feb 2021 17:11:22 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gherzan.com; h=
-	mime-version:message-id:in-reply-to:references:date:from:to:cc
-	:subject:content-type; s=fm1; bh=8rsiKtLT9ffR3KE1WT1P8oQFE6/kyVh
-	pSKEP3RjZvAk=; b=UssdRjeMxzmMoItOiLT6D7bXDpWdRsvFKsCON1o0pfBTjGo
-	sxm3Mr6SFnDFTQYHLX0j1klwYkdkPJELHohalRyYg27T24Nv84hn/Rwd827U6dO7
-	neIv30fo4H2dFsQt0lFWS31PJRCk4VNN+lCdqZi6mtbMc1a5tE0FHJQSS4LT8MGq
-	YgfQRrAKoPQ/V9Dy8VVkD7bxZx3LEs2Yr9y7O3NDIt0nAfyvxGmOwdrYBnjw2zWK
-	t3BhV2ZN9kT197SyZQh7ho7pEwiMI4/eePLa5mnC08pHUgs4Ko1UoOAhJzLWpg2f
-	CBLmcxDrmwlUzYAPhidZK22tTwF7wGpNNX8lHKg==
+	from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding; s=fm1; bh=HAQXaF8wfBNv0CffcfI614IJzW
+	e1WdaqNFoco7xnGDk=; b=DS0SZ1Fk3H7DgPQGhz4CvnVv8yJ8Cf5yg4nRJwwrGG
+	9ybvYZ2Xi82FMrzr9pvTWHtOXqTaBFYfWursf6cNTD6uspsdMgTe5A8VEuZ7iRuS
+	Eu8Hl9NWfJVi0xgbtgAPdkghNBzqQT3WSytkFACPMysRtMwLJZy2FbXmBxPbf0hA
+	0gZqAYnwJsMFoDbKBMlkrmWgs18xgRy+vhMQVR5hPpr5dxD/KQB5URRxu0xAe0XQ
+	reQatqGRaGfTjLjQdxCjWqyKT7oYFaYTq5MXogDqDYxmwd9bJeE8tkItQCq3XQit
+	/rRq4HtBawzCP+nCPAVVX58pcm4b8zKrjBtc7wk+7+UA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to:x-me-proxy
-	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=8rsiKt
-	LT9ffR3KE1WT1P8oQFE6/kyVhpSKEP3RjZvAk=; b=Y/jEX8G2cUKfhHKnsL1fHg
-	4rBC3MuhSLLE0qcwIgri5m8v6F3rIpS1SQgqXbyDqUpgA4BxlyimRw+0wN4orsrO
-	zXyC2k6EO8IRxbPGyRSsy6tAmihTdSxzLTHIkpRqRYywzwzBQpH6C9XRYjJF+NPL
-	kqbWyakDzOXAaNGdBsClfT0js48PwZyILmA44DYPT2Hlg6e0cErpssF9cTc0Mi2c
-	hSIBTF7vCRIX4SsO99oXoV1UPGIEQSTIMJ0Q6y3ULqWkW05EDXuBamASM4BoJAB3
-	XEQjAG/vt88O0AAfabVn3FknK0qEWukQnWyOMTHJR5M42P2k6zctQzr3s2YamspA
-	==
-X-ME-Sender: <xms:L3Y1YDgTUxThZis15wabABgXU99nOToIuXmDaUDtx_qyLsA1XfWWJQ>
-    <xme:L3Y1YACbOdpzj64L5E3TR9YjKfCv0LoWajEiPLCM-cHIs7z9RsSc_iOIFVot7gm9t
-    k84dgc7CHcIq7rpxrU>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrkeehgdduheduucetufdoteggodetrfdotf
+	messagingengine.com; h=cc:content-transfer-encoding:date:from
+	:message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=HAQXaF8wfBNv0Cffc
+	fI614IJzWe1WdaqNFoco7xnGDk=; b=kOTNOX84eZPLGk1sCLPgL7MXuQsHAN8ln
+	eQuuUtv7oNeAnxT+xwss2dtYQ1wc5vMoPwrH+zoF3g30SeV/IEk9jGjK/cBzXsyc
+	71Vq0ynURrTHYyOjiytVtxcBLNLNZ1FZR/tVaVjIEFY5RQq3g3FNMEHhZMSnU0gG
+	1uUcPfLzmiaZyU4tDo2MMEDHf2+XQ8QarOJUcChdqesLPMf5cH1RRdEBAZcqtoBd
+	FSxEMZivWthtdpR+67QTvQRLvqAVWlnA5m5aWJh9Sd2QzwThFU0OXWQwS0wupflH
+	zo0QStg2aYlXFuhuUU2pLYdcjS7O5bdug1lrKm/zq3VZPYtUSdUCA==
+X-ME-Sender: <xms:iX01YB2Hn4-UZY5QyJJMiYRamnk_3i2InOjJVmcTWpAU23l-RNcI_A>
+    <xme:iX01YIGxAnfkOfvr4AOcKZCWmJVbeV8pu0X3SnxT4bNlFywRN6tyadbzGQASflrgh
+    4fnJI75McwPRdv2am4>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrkeehgdduheejucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhepofgfggfkjghffffhvffutgesrgdtreerreerjeenucfhrhhomhepfdetnhgu
-    rhgvihcuifhhvghriigrnhdfuceorghnughrvghisehghhgvrhiirghnrdgtohhmqeenuc
-    ggtffrrghtthgvrhhnpeeufffhtdehudekffelhfdugffhleetudfghfejfeekvdfhgeet
-    keeuheevvefhueenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfh
-    hrohhmpegrnhgurhgvihesghhhvghriigrnhdrtghomh
-X-ME-Proxy: <xmx:L3Y1YDFXKYfqTVvOd-iMSQ5XOe_Xn688NmQ_4UVJ6GJPRt-Wq2i9zA>
-    <xmx:L3Y1YASS_9R1BpiKTT8WoCud2zzSTM9SuREEb5VRVe7nfPVB168hgg>
-    <xmx:L3Y1YAyI9J32NvKoKDDrsZ3dZJyjfy639Y4gPS-eMKJKJTV6KLvVtQ>
-    <xmx:L3Y1YGbJ3UrQi6cIHBgdNJn23shx93Aujb3pSryzj8mWsm2PBEVulQ>
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
-	id 0D2D4160792; Tue, 23 Feb 2021 16:39:59 -0500 (EST)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.5.0-alpha0-141-gf094924a34-fm-20210210.001-gf094924a
-Mime-Version: 1.0
-Message-Id: <7d202618-598a-4518-8b49-38cc054f0d8b@www.fastmail.com>
-In-Reply-To: 
- <CA+chaQch78dk=nF1Rj0znxRJ81a=cXbZpp-X_1RjZPwB1UEjOw@mail.gmail.com>
-References: <20210223162705.2595483-1-andrei@gherzan.com>
- <20210223171242.csn2hwn6imsn4ega@jama>
- <CAMKF1spNM_nxwEMFN3DXCG5O4rxK22VMMe6yZKm7zjmUWg4LSQ@mail.gmail.com>
- <7536ac24-0016-45e2-9cfe-209b50633c8a@www.fastmail.com>
- <20210223173002.aydz4xm65ylvgy4k@jama>
- <7a1bf385-91e5-4076-bbee-b5d14b7c1e54@www.fastmail.com>
- <4deb9ec4-605e-431f-95f7-1b6f9e948635@www.fastmail.com>
- <CA+chaQch78dk=nF1Rj0znxRJ81a=cXbZpp-X_1RjZPwB1UEjOw@mail.gmail.com>
-Date: Tue, 23 Feb 2021 21:39:40 +0000
+    uceurghilhhouhhtmecufedttdenucenucfjughrpefhvffufffkofgggfestdekredtre
+    dttdenucfhrhhomheptehnughrvghiucfihhgvrhiirghnuceorghnughrvghisehghhgv
+    rhiirghnrdgtohhmqeenucggtffrrghtthgvrhhnpedvteeutdeutdfhvefggfeifeehve
+    ethfeuffekgeeiiefgkefhheehjeeijeejudenucfkphepuddtledrudegiedrfeejrddu
+    kedvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprg
+    hnughrvghisehghhgvrhiirghnrdgtohhm
+X-ME-Proxy: <xmx:iX01YB7S64-kaAA73_9uiAypsmTZxsE3GL_MA-L_tU1U7xzkOOW71w>
+    <xmx:iX01YO3WuiJ-REELvFdg3LY-_IoVOz5EyI9tTVtdmvRWdaNMhMtBDA>
+    <xmx:iX01YEE1Zoto49O2zdPNhi2oV6rcjmRvxBYGTh1bkVQcz4it-amDhQ>
+    <xmx:in01YHwzATqjTJlIMwd1GRSbDKDsPxhWCsVDQn0D1CXKXzOJubGFHw>
+Received: from qwirkle.internal (host109-146-37-182.range109-146.btcentralplus.com [109.146.37.182])
+	by mail.messagingengine.com (Postfix) with ESMTPA id 43A9524005A;
+	Tue, 23 Feb 2021 17:11:21 -0500 (EST)
 From: "Andrei Gherzan" <andrei@gherzan.com>
-To: "Martin Jansa" <martin.jansa@gmail.com>
-Cc: "Khem Raj" <raj.khem@gmail.com>,
- openembedded <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe][dunfell][PATCH] nss: Disable Werror across all recipe types
-Content-Type: multipart/alternative;
- boundary=7021a27c026b492b9a51f61f35e98e14
+To: openembedded-devel@lists.openembedded.org
+Cc: Andrei Gherzan <andrei.gherzan@huawei.com>
+Subject: [meta-oe][PATCH] nss: Fix warnings generated by getcwd
+Date: Tue, 23 Feb 2021 22:11:08 +0000
+Message-Id: <20210223221108.3893408-1-andrei@gherzan.com>
+X-Mailer: git-send-email 2.30.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
---7021a27c026b492b9a51f61f35e98e14
-Content-Type: text/plain
+From: Andrei Gherzan <andrei.gherzan@huawei.com>
 
-On Tue, 23 Feb 2021, at 21:37, Martin Jansa wrote:
-> OK, thanks for looking into that, I was assuming that native nsinstall is provided by nss-native dependency we have and wasn't aware that it's built for host as part of target build as well.
+getcwd() conforms to POSIX.1-2001 which leaves the behaviour when the
+buf argument is NULL, undefined. This makes gcc 10+ throw the following
+warning:
 
-I should have known this before sending the patch. As a self-inflicted punishment, I'll push a proper fix as well but please go with this for now.
+argument 1 is null but the corresponding size argument 2 value is 4096
 
-Cheers,
-Andrei
+Initially, this was fixed by disabling NSS_ENABLE_WERROR. This patch
+re-enables NSS_ENABLE_WERROR (by leaving it to its default value) and
+takes advantage of the existing functionality in nss that wraps the
+getcwd call into a function making sure that the buf argument is always
+properly allocated.
 
---7021a27c026b492b9a51f61f35e98e14
-Content-Type: text/html
+Signed-off-by: Andrei Gherzan <andrei.gherzan@huawei.com>
+---
+ meta-oe/recipes-support/nss/nss_3.51.1.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-<!DOCTYPE html><html><head><title></title><style type="text/css">p.MsoNormal,p.MsoNoSpacing{margin:0}</style></head><body><div>On Tue, 23 Feb 2021, at 21:37, Martin Jansa wrote:<br></div><blockquote type="cite" id="qt" style=""><div dir="ltr"><div>OK, thanks for looking into that, I was assuming that native nsinstall is provided by nss-native dependency we have and wasn't aware that it's built for host as part of target build as well.<br></div></div></blockquote><div><br></div><div>I should have known this before sending the patch. As a self-inflicted punishment, I'll push a proper fix as well but please go with this for now.<br></div><div><br></div><div>Cheers,<br></div><div>Andrei<br></div></body></html>
+diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+index 3e3c3a3fd..0e127975b 100644
+--- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
++++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+@@ -62,7 +62,6 @@ do_configure_prepend_libc-musl () {
+ do_compile_prepend_class-native() {
+     export NSPR_INCLUDE_DIR=${STAGING_INCDIR_NATIVE}/nspr
+     export NSPR_LIB_DIR=${STAGING_LIBDIR_NATIVE}
+-    export NSS_ENABLE_WERROR=0
+ }
+ 
+ do_compile_prepend_class-nativesdk() {
+@@ -81,6 +80,11 @@ do_compile() {
+     export NATIVE_CC="${BUILD_CC}"
+     # Additional defines needed on Centos 7
+     export NATIVE_FLAGS="${BUILD_CFLAGS} -DLINUX -Dlinux"
++
++    # POSIX.1-2001 states that the behaviour of getcwd() when passing a null
++    # pointer as the buf argument, is unspecified.
++    export NATIVE_FLAGS="${NATIVE_FLAGS} -DGETCWD_CANT_MALLOC"
++
+     export BUILD_OPT=1
+ 
+     export FREEBL_NO_DEPEND=1
+-- 
+2.30.1
 
---7021a27c026b492b9a51f61f35e98e14--
