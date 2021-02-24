@@ -1,17 +1,17 @@
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.42])
- by mx.groups.io with SMTP id smtpd.web08.7862.1614178007547175018
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.69])
+ by mx.groups.io with SMTP id smtpd.web11.7891.1614178025171875250
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Feb 2021 06:46:47 -0800
+ Wed, 24 Feb 2021 06:47:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Aodk8tGE;
- spf=pass (domain: windriver.com, ip: 40.107.236.42, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=kpkcWQNI;
+ spf=pass (domain: windriver.com, ip: 40.107.92.69, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=QWFkQ2gE59HGUtWjiY1wObHNcBML6nQGoxAB187K9QMAuGWPr2LwtgqX+csq+5w3A9UeiZRCoRx/QR1RHLrhWXCjCj44NAuN0RaYPxnqCf7zlg6oV/C+c37lstDQL4/gfGbI8KIyKvESFIcXSuYIVW/XBdHjPnwRgCpINfpQ3/hn+PgoQSBQ3M3boxKARFxtl4SvxhdsSoQ4Mf9mvn/3l2+vAThMd/SWSju5dZQWMd3YUPYtPnFZ6Gw0LSXeJaMcURpvtKz4ZmV+lZ0sSy7sJH+HDdbOuISCvTfpuSuJVRB198MM9DwKLOd+LivfTrIXZAvbVB9w9PMOARzaoIQjXg==
+ b=U67vFv4YO7VXTh7qXWWHPm16OLSsTSVd+6Ws+BHevZ/02+nZ8NydFPOT53Pe5jdOd2WAc5flGktin4R+oefdY6yvAAjeEr3y7gcj+5dZozGjhjzCU7bv3SYg7bwsdR2QBO01W5tMXnyVzm2XHnv27ScL/FhIczxMeg3viRMRWe+rrPO/uisSzi1bvUKVZXt/CD2OFbS0kRhsCls1ByhCcz/PzPQir3IUDw562TbN0tEHItQVA5mANAh6Adsi9T692w2mtn8hbMR+OVqwJsm5/bRyti1vTJhbC2Ph72KGWhxt7+5EN5N1EF8AL95/HWG4ZNSKnkllFFXRwwWUJreIDA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BFPf5Z+u7bKkG5rN7THF9Bf+V8if/oP2bd21f8segas=;
- b=akI6uj/3xEx8RSi2Rk3cgNMKoONxtlWYgy/h7V9IzEnM6wMaixESZsg5yIugSzCUiYsihEi4XURvsFc+ac6gz/gmtyQHohIhKj7N60fiv1yYoEl2rNE9g/NHvIod/kRsLIGDPLZuH5gDjSHv3v5AXGhy03524X/IkP1sGXRsyoXW8lfbjJnP+hFVR6OcsZbyO+I/mu5DeC2OPMmHbpWGCgmA5HCxG/OePTR1f5dx4fFqOVkLj3utUqKqHxuwg6LC3FBctTiy8VSnHX3ZWU4H3TtfyTlz6uW2EuU81TtMKk1Hu9ncxAWFz1oqRf/reNtnHGHL6z2nxLD2ItgnQFVW0Q==
+ bh=polHiztlCgScYHRxi9rl0WhT1Z5Uyd4h8vq3jtMxfbw=;
+ b=NHR+Wu1rBTD7ljOzv6ynioKBKAubaatJ0G1vNN1NX4M+cG31OpzVd95hHpN1QESA+Y5bejOYBxFibB8AtOmmTKvOG+dm3w5ArVaMDvNZ5zgfkrg4XEroObAmeYdcKoX5cQSM9CNa2TkzICMMtS9Bl43Z3w9ysovWRcA8BgCk6A7b7u5unLM/+QX8hIV7Eh/2fx6yE72KbyD5WLagHet/LX+AOP2G2Yd7YiEMmiQclzgpm5l7OOTfs1FSX7FpvyY0dKcR3LKjdSVWYiY/Xpy/lM+PWicBxP2jcwK3TIgXZnDYJjlRJIfs0IWNAXScSbVlOToftTUX0yB+TLjQZ9tJXg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,98 +19,98 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BFPf5Z+u7bKkG5rN7THF9Bf+V8if/oP2bd21f8segas=;
- b=Aodk8tGEDE/6EfculGWu/F9r+WZHv3HBSucBavu/KMlhi1qkH+5rAHiMXjOv/RWRscM6t1cg01rsIuZklLX+8vPdBBHXhyPNSkTKMFZdTOToG7cd3wgYQOWgZWFv+dRd0fh5IV9QQtDZmmIguJo1poerlzBNnke+9Ze2CkaxyLo=
+ bh=polHiztlCgScYHRxi9rl0WhT1Z5Uyd4h8vq3jtMxfbw=;
+ b=kpkcWQNI69OnK58KyNy1TU8v0Y3/6wYTq/Rw8+SPxT423+qYkAmoWSXIuxdE7TQIqosDqkwiAXdU8To9xHA9xK3gfJRm4C5oe0ZkYuXPIOyBJswfYjjnhidcb32DGnuvvGhEup2ujf459G8GIp3MV9Vk/n+LuYtPYwRmxpDhsiQ=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by SJ0PR11MB4928.namprd11.prod.outlook.com (2603:10b6:a03:2d2::13) with
+ by BY5PR11MB4260.namprd11.prod.outlook.com (2603:10b6:a03:1ba::30) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3846.27; Wed, 24 Feb
- 2021 14:46:45 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3868.32; Wed, 24 Feb
+ 2021 14:47:03 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3868.032; Wed, 24 Feb 2021
- 14:46:45 +0000
-Subject: Re: [oe] [meta-python][PATCH 06/10] python3-autobahn: Upgrade 20.12.3 -> 21.2.1
+ 14:47:03 +0000
+Subject: Re: [oe] [meta-python][PATCH 07/10] python3-iso8601: Upgrade 0.1.13 -> 0.1.14
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20210223152219.32129-1-leon.anavi@konsulko.com>
- <20210223152219.32129-6-leon.anavi@konsulko.com>
+ <20210223152219.32129-7-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <6481f682-458c-2a81-2499-67fdce502cdc@windriver.com>
-Date: Wed, 24 Feb 2021 09:46:42 -0500
+Message-ID: <2418c81e-3e40-9df2-6086-318f8a1b9b71@windriver.com>
+Date: Wed, 24 Feb 2021 09:47:00 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.7.0
-In-Reply-To: <20210223152219.32129-6-leon.anavi@konsulko.com>
+In-Reply-To: <20210223152219.32129-7-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BL1PR13CA0296.namprd13.prod.outlook.com
- (2603:10b6:208:2bc::31) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: BL1PR13CA0285.namprd13.prod.outlook.com
+ (2603:10b6:208:2bc::20) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BL1PR13CA0296.namprd13.prod.outlook.com (2603:10b6:208:2bc::31) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.12 via Frontend Transport; Wed, 24 Feb 2021 14:46:44 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BL1PR13CA0285.namprd13.prod.outlook.com (2603:10b6:208:2bc::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.11 via Frontend Transport; Wed, 24 Feb 2021 14:47:02 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 28bbd0d3-f4ae-4e74-8e04-08d8d8d30195
-X-MS-TrafficTypeDiagnostic: SJ0PR11MB4928:
+X-MS-Office365-Filtering-Correlation-Id: 4d9e0db3-554a-44fc-e9ac-08d8d8d30c7c
+X-MS-TrafficTypeDiagnostic: BY5PR11MB4260:
 X-Microsoft-Antispam-PRVS: 
-	<SJ0PR11MB492805B8AD25CE280331757C9F9F9@SJ0PR11MB4928.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1169;
+	<BY5PR11MB426068C687F2C14E45EC4B209F9F9@BY5PR11MB4260.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:862;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	j5RXX7vCC0xKSSVLP/NQMxAZ7AAL6Cg33j+27TEKJNOVHmY/pZGgAlD4dQ920DjmFxgcroXvplYwsw06CWhyMwXdvuEcut8rdgII5QKunxjyiUHlwXmni2HMPeWW8I2pm3uWsxoFS7Yq5PmU9N0C7ZIhKIRJ/XxnOIjm941O8TRsnPMW/FimZAPu3vHJohHjE7rSttVFk1/4Bbt5tRJA5hB9TNjHeqL0NII3b96eJ58ZGhm/pOrcnPU1UJY/TX7FvRrWlayNw7plADYQTNNTG1xWotw2Fy2p3zzJBHKoFUtFrZp1j86VACOj1sEk8aau4ky3h9TOiVuV9mBTKxiT3UwhJUq3ch/s1N/Hxn6RLuD0igwVUXkuPrRH2NkYATRlE43cF6PRNthj6USjtaom3TYnUXGQTN02yLX4rmueXCFeSD1cmMGaK+aGZfcvAAzL2fFFjhPevbmgjGlAkxRfe2Z4Kfww8wE574OyM/EkTKDQE+VIhnq+RfS5I53oA5pNmWSoshbd/4ZVBTPSFFHedNzfLPHJ/9weJb906y7dTSod3ED4Fzv2yw4WPmE65G1mlpR682Ak2LTP6adw4tNHCsx+246+hqNJzg8vQf/F27OdDucP9eGxYtZbo+iuMbT6cQEgaDFCXs20D5If+YgATDDBFxgYYBRv4rE4wFVq1EhebfcHU1lA9zAwTrdmMbxc
+	sn9NLGqpIhqaM5WeNZqw/vISA+EvkgXXjZ8U+/uQ0SBfyRv+D5qhHe0g7fxyUdir3gcRP860dVSH0TwaAmGBoC+b/1mMbUKWZ5rOGHIqfUv6P/WKZmcuT6iAtoxxxQLmYK2waY8en4hPtvS3OT8SmvCM+HEO+FG9Qv6EWjg+79YwBULw4qpCgR1Bdd72O+fAP2p6TKAo22MSyAOTi0aG723nlN3WCy925HRO3nDBS31B05XiBOLoOpzpgVwr77gNzix9bUQXFNcszNGhxHY1bp8x0L2NEWrS4yTyztln8ePUUsN+1W8G+Cf+7ys9dmfjyo7kznAwSQel4A28VdK5DRd3d8IX04H5JDd/61jLW2bKa5nSIyy/X8DBD2nU8tFIfnOoAcz+OgdeLm7hDOrfLJfzYvBjbp4BXn7TzZyB6H4aWWM/lIZG9ksMjuAEhjy5Bb+yKjfnnsOKV8Az05mraICIo2rWP/y7lN//JDjjmMPB3b4SEkeo/ntV5RIES1H0miWQDkWHeUVtM3VZHHOadjOwHVlhrCtbSq3BYHuduCUMpvuM9kFAo3gcncLmwxloRxodYi9bjmGRrt/OW1W4CA7uK8LfT7M3SODeM+/4IkP+whxDURLfgPqka2EzTc/6V2BC3PAaT8i0+5JILxg3k6fOZn6eEChhxKLeA1ZCGjji7duRvupTPSO4RXg7rQMF
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(136003)(346002)(376002)(396003)(39830400003)(186003)(33964004)(8676002)(16526019)(16576012)(316002)(8936002)(53546011)(83380400001)(166002)(5660300002)(66574015)(31696002)(26005)(6486002)(66946007)(956004)(66556008)(66476007)(36756003)(2616005)(44832011)(2906002)(478600001)(31686004)(86362001)(966005)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(39850400004)(396003)(376002)(346002)(136003)(8676002)(6486002)(33964004)(8936002)(44832011)(2906002)(66476007)(966005)(36756003)(66946007)(31696002)(66556008)(31686004)(956004)(5660300002)(166002)(2616005)(53546011)(83380400001)(16576012)(316002)(16526019)(186003)(478600001)(26005)(86362001)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?OGlxWlBDem96MnU4K0RORG8rcTlPdk9DR2ZTYmt6MUlxTnB5aFFEYjFYa1R0?=
- =?utf-8?B?WTRtc25EU0JDeVcvL0RpS0pzSVdNSVZBR0Z4dG5lMkRmZ0Z2YitzSDJHQVVU?=
- =?utf-8?B?U2lWQTlKUEJPdnRZUThxY1BaVDI3bFRaNVVkU0JCVkViZHZYT0Fkem80RTFo?=
- =?utf-8?B?Q1RGZ3FaN0gxU2xYNmFjUmEzRXVqMjloaFlWYkFhclBSVmM3WitIa1NHVGRx?=
- =?utf-8?B?K08rNVdJWDlOMEM2V0dDMVh4bldrWThwaVNsRGxuYmFHeGUyNUIvdHdJZ0k3?=
- =?utf-8?B?c3VCekxubHp4cTk4UmN2QldyQzBOYlRPZUZBZUthQUt3UFo4VWZUVFNna0g3?=
- =?utf-8?B?bGZ0SmEwWGJEdUU2SGtaMFRibk5ERVhiTHpuRzB3bUNzKzVUY1RxWGFjdVFw?=
- =?utf-8?B?Mi9HNXNYUnk0NE8xSGROVlFJMmVyaDJRZDlIanlnTXNWaHBsSlRDcUJJNEdu?=
- =?utf-8?B?TmtwcW9iaDFwbGdSSUUvMEw4QVhoUUNCcE1zeEtNS3krUDlWMlNNSlpTNFJE?=
- =?utf-8?B?NWhsSWJTY3pBSVhPcnRnNFNRZ1haSXFFaVVDNzF1WFBhci9QMGx0N3Zra2Mw?=
- =?utf-8?B?MHQ5WHRLTXFSYVU1bDN5NnJRSEtVa1hKVm1XRWI5dEQ1WmZ0RWRIbEE4L0VI?=
- =?utf-8?B?Y3V3bFVubTlOOTZjS1l1ek1MTlhXQ2hDMzlvRW53elVwa3FJelVGNWx2V0ND?=
- =?utf-8?B?Y2F1MXVWdVFQWitPQVozNm1GNTgrODZnTkZVaFpOYlc5dDlKY3NvcnZBMFBn?=
- =?utf-8?B?Y2RHRGpBbWNEVUdHajRxRkhzQkNaWXlRbDlWOElsZWdhQXJGb1RVaGd2QlJz?=
- =?utf-8?B?RGo0dm9xRlAzUnM4ZjJDVDNKY2s1aWc4YWprRWsySlhldlhTNWwyRXRmQlBa?=
- =?utf-8?B?REhHbENSd2tEdG15ZSthRkRJNnFIRit1YjhxaEJZaHdVRjZ0Q05pcmgyc1Nq?=
- =?utf-8?B?eDVabVdDc0E1MTIyTnBPSFlaQ3AvT0dKK0VvQmJqeXRTL25hd3hFVHNrbTFB?=
- =?utf-8?B?SDU4OURqclo2OGZLeWtYZEIvckxURFl6RS9ObzlUY3NSeVlIMzdhSXlxajVO?=
- =?utf-8?B?ZytaWlFxVUJJOXo3TWRUSy9pcTRHQjJLdXVtSU5iZTM1RGRRUERjOXp1blpK?=
- =?utf-8?B?LzgzOU4wM3FKT2w2UmdGZWtaSGthR2ZKSlJwUmFMdW00SGIrUmszd3dMalIx?=
- =?utf-8?B?dUE4c1RaRHNUNzVXOS9aWS9wR0l0UGFvUmMyZDRBMDRaMURMYTlXd0R1WVVz?=
- =?utf-8?B?YVYwMFdNNEdKQ2NJa0dEVnVMTGQ0YmpDcUVuaW8rWDNkVDJMSTF2QUVJRm5V?=
- =?utf-8?B?UmtkZk1RbEdXTi8xNXY1N01rclBiRk15R0ZSR2ZyNzgyTk0zNWNDN1Vxcm1y?=
- =?utf-8?B?QTFpVFRnVFBNTWJKT3J1ZEhLUEtSdTZpeHdCZkZsZmE2TDNTbGZaN2E0b282?=
- =?utf-8?B?QVdFOXNMMUZaMzhDeUVQVkUvcjNRYVlGNUI3blBTV0JHZEplQXUwaTYzT3dx?=
- =?utf-8?B?eENsSlpVUWVsUStiQlhQUmtvKzB4cDBBV3dQVkJZNVlIQlNyYVd3Zktibjlz?=
- =?utf-8?B?UmNISWhDcHRrUDhQTmxnaEI1MlVpT1NFc1JsNXpQejJuczkyV0xvdlI1RmMw?=
- =?utf-8?B?SndwakxTc21BZ1pMMEJTTWNNcVlPclpITWZzQ0JVSjJvYlJ6VDB4Q2dxQkdy?=
- =?utf-8?B?Zndzc295U2d1R2hhQWkzWk00ak8wVVZQRk9HWXZjNzVQMmlWeElEY2FsUjZC?=
- =?utf-8?Q?t3UN1e7clYXTAeJV5daZcuRtDnSvT4MFaiGEtXj?=
+	=?utf-8?B?dzJFT1RCWHREaG5mOWxNcWRYTTlML3pyUnZaaUFPeEo4djdMaGJ1cGUrR3Jy?=
+ =?utf-8?B?ckQ5V0w0SHpTbi9JTFBmNmd1d2g5a09MMXRhRml4N2RDV3pCbGlZTXJzTVBU?=
+ =?utf-8?B?RlJJOGlRTENmZkNEVUJPOXJWcjhnZVpFRVhzQUhWK3cwQzNLNExIS2dkWW1v?=
+ =?utf-8?B?ejQ2a1B3WEs4MUhGY0ZIcnZ0aWo4ejQzRWFXL0ZaMHZqS2RTZ3diL3k5c0lh?=
+ =?utf-8?B?VThhRUpjRTQwQ1lKRGkvUnVUWUZtVXgrK1dDNDZaV0hXcXVrSVZGL2ZWT1Bo?=
+ =?utf-8?B?SGFESlhNZUNkVWcyY1cxMUczQWtyK2Fjb29DOUxvRHMyc2daOE5aTnp5blFu?=
+ =?utf-8?B?M293MkV5ZWE5d2o0RlVVS3FRV1QzcDIzZG9PeTIyUTNtczQ4b3dZTTcvdldy?=
+ =?utf-8?B?Skh4Ujd3M3hpUWlJZVBsTWN0VEdhTXRNVStwelVuMVdpbGtHL0RqQUdGQzRL?=
+ =?utf-8?B?a2doWkdvTTJ4aDRIZFc3ak01SXpmL2N3bkE0d21ub1VXVEVtNmJCYnpONitY?=
+ =?utf-8?B?cUplWEc3cVVxME9Fc1hxTzBXd1BGMDhkelIxenRZQktiSFB4UGF2MlNjRkhr?=
+ =?utf-8?B?SWwvczZ5N2NmaWRzbEdad2NNa2lnQXFWMzFocHdyWFhzL1o5ZWFnVnl5Y0sx?=
+ =?utf-8?B?NG0xYmQ4Rm4zekVQb1gwZUVPTzhlOWFnVGM1UVlXekRnTFFzckwvUDJLaDh4?=
+ =?utf-8?B?eEU5V3RxTVk4U1Jzd1YrOVpKUGdTL2hFckNpQmc4M3V3MHl2clNzdG5Rd3M4?=
+ =?utf-8?B?dWVKMysrYVIzSFI5L1JWcUdRMTgxZkxQUVNkUHNoWm00WEVaMEQxUnJtTWxD?=
+ =?utf-8?B?ZHNHQmpTdlVaNEpXUXRkY3pQOWxFbmMzY0xDWUdVSDg4WTZWZGhyRWtWYmd4?=
+ =?utf-8?B?aERUWTdKNWlKODMyUHZWZC9CRVZ6OXhEM2RZZFFobWlkTHUwUmNDME1wRFZw?=
+ =?utf-8?B?ckltVDNFT1BIaWxTTEg3eFlnN3JlbGZ5YnJXZUc1QlV3eFYxaFY1U3BzYUp5?=
+ =?utf-8?B?TVkxdTVacUxSU1pYY08xZm5HWUc1Y1hVOWZ1Z21kYTMzeDdnZzNqQnNOS1Yy?=
+ =?utf-8?B?akJyRmZhYS9HMEJ0VlZ4M1FSNTBBLzlYSVNaaGVvM1BuNTlWRTIyMStpblpX?=
+ =?utf-8?B?Tmk4OWpGdk44UDEybGxjWFZuRnlvbVAyc2JRKzkzTnlVK0pLTjRvS0tXUW1n?=
+ =?utf-8?B?MXUzejJPc2dzY1JBVVFFY3NPeXNlNkh1YTRJSGQzbURSMWYvdUtyTDBXMG1S?=
+ =?utf-8?B?N2pWbTZsa1JnYVQ1WmRTaUZTOTNpRWZNRFdUam5PY3cyMkRnQStydDI3YmFL?=
+ =?utf-8?B?Y1pmeTV5YndQV0JydXFYazlEVkV1NGRlSlIwZXhqei91VlY5YmFWbDZDb1U2?=
+ =?utf-8?B?enVWTnVFZmJ3WmlWL3hwYTVhN0pzY1ROY3oxMW9QRjlZWmlFZkNoUjUvdGdB?=
+ =?utf-8?B?QURIQlRXczZCZGJEY2Zhcnd5eFd1bmF2dFlJcE8rSm1Dd3ZSMmJTSG9IR1lq?=
+ =?utf-8?B?SWtpNG53dWtYc1RkNWlqT01tZVF0V3l5U3ozeFJERWpnSUIyOGNHNGxEVW9I?=
+ =?utf-8?B?cTlJelJoRTgzVXlmR0s5b3JPdkpHZ05FZjF5WE1NeG9mL25veGFEVVUybkpS?=
+ =?utf-8?B?MHpEWEFYaE5WSk1Fdjc2L0dHcHlwYmtaRkZpTHFabW5nUU1sRDczS3p6T0pW?=
+ =?utf-8?B?cXJPb1ZtNHZlTHpWL0FyWHdwTHRKWk9Wd1dJQjlYa0xiMFZ3bXNtNjFaRzdD?=
+ =?utf-8?Q?Vk3Zt5DsHB23nWTIUTMkrccWRm2H82f0rTuymgb?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 28bbd0d3-f4ae-4e74-8e04-08d8d8d30195
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4d9e0db3-554a-44fc-e9ac-08d8d8d30c7c
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2021 14:46:45.0372
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2021 14:47:03.3216
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fOLk/+Q9Dwt/6MRkXQtykWcIrpQty2/bIeTCyZOp26MOEMYBbQCEGTOsflsmixWtwIOVv+MP5LYNtvRSYaU48wZgBQiLWAFTaLzCVTJmqU0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB4928
+X-MS-Exchange-CrossTenant-UserPrincipalName: qsc64XFOASJuYTRmyFCXPGnwVumJ9ciR5iPu+CIc5L0amt3KKffBiKvL80jHniudmdkGj/yWBlqfNR5wWEeTjPZHa+cSabMh7eD8Yj9psu4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4260
 Content-Type: multipart/alternative;
- boundary="------------40EE8F2DAD326CAA25AA88F4"
+ boundary="------------D5C583EA915C48821C0CDF17"
 Content-Language: en-US
 
---------------40EE8F2DAD326CAA25AA88F4
+--------------D5C583EA915C48821C0CDF17
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -118,36 +118,38 @@ Content-Transfer-Encoding: 7bit
 On 2021-02-23 10:22 a.m., Leon Anavi wrote:
 > [Please note: This e-mail is from an EXTERNAL e-mail address]
 >
-> Upgrade to release 21.2.1:
+> Upgrade to release 0.1.14:
 >
-> - new: callback user component function "check_config" on
->    container/router components
-> - fix: support Docker images for ARM (32 bit and 64 bit)
-> - fix: bake Docker multi-arch images
-> - fix: PyPy3 CI
-> - new: enable autobahn client unit tests
+> - Add GitHub build actions for project
+> - Add project URLs in setup.py
+> - Update and fix README links
+> - Fix handling of README in setup.py (encoding fun in 3.5, 3.6
+>    and pypy3)
+> - Add Python 3.9 to test matrix
+> - Add type hints
+> - Derive ParseError from ValueError
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   ...{python3-autobahn_20.12.3.bb => python3-autobahn_21.2.1.bb} | 3 +--
+>   .../{python3-iso8601_0.1.13.bb => python3-iso8601_0.1.14.bb}   | 3 +--
 >   1 file changed, 1 insertion(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-autobahn_20.12.3.bb => python3-autobahn_21.2.1.bb} (80%)
+>   rename meta-python/recipes-devtools/python/{python3-iso8601_0.1.13.bb => python3-iso8601_0.1.14.bb} (69%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-autobahn_20.12.3.bb b/meta-python/recipes-devtools/python/python3-autobahn_21.2.1.bb
-> similarity index 80%
-> rename from meta-python/recipes-devtools/python/python3-autobahn_20.12.3.bb
-> rename to meta-python/recipes-devtools/python/python3-autobahn_21.2.1.bb
-> index 90958dff53..3af81d1dab 100644
-> --- a/meta-python/recipes-devtools/python/python3-autobahn_20.12.3.bb
-> +++ b/meta-python/recipes-devtools/python/python3-autobahn_21.2.1.bb
-> @@ -3,8 +3,7 @@ HOMEPAGE = "http://crossbar.io/autobahn"
+> diff --git a/meta-python/recipes-devtools/python/python3-iso8601_0.1.13.bb b/meta-python/recipes-devtools/python/python3-iso8601_0.1.14.bb
+> similarity index 69%
+> rename from meta-python/recipes-devtools/python/python3-iso8601_0.1.13.bb
+> rename to meta-python/recipes-devtools/python/python3-iso8601_0.1.14.bb
+> index 9e7494b3e0..c531fcc6d8 100644
+> --- a/meta-python/recipes-devtools/python/python3-iso8601_0.1.13.bb
+> +++ b/meta-python/recipes-devtools/python/python3-iso8601_0.1.14.bb
+> @@ -3,8 +3,7 @@ HOMEPAGE = "http://pyiso8601.readthedocs.org/"
 >   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=97c0bda20ad1d845c6369c0e47a1cd98"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=b05625f2336fa024e8d57e65c6595844"
 >
-> -SRC_URI[md5sum] = "0a465e218d904f63537092b155489468"
-> -SRC_URI[sha256sum] = "410a93e0e29882c8b5d5ab05d220b07609b886ef5f23c0b8d39153254ffd6895"
-> +SRC_URI[sha256sum] = "7e6b1bf95196b733978bab2d54a7ab8899c16ce11be369dc58422c07b7eea726"
+> -SRC_URI[md5sum] = "df6e924305fd799d90be63336b2ab8b3"
+> -SRC_URI[sha256sum] = "f7dec22af52025d4526be94cc1303c7d8f5379b746a3f54a8c8446384392eeb1"
+> +SRC_URI[sha256sum] = "8aafd56fa0290496c5edbb13c311f78fa3a241f0853540da09d9363eae3ebd79"
 >
 >   inherit pypi setuptools3
 >
@@ -158,7 +160,7 @@ Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > 
 >
 
---------------40EE8F2DAD326CAA25AA88F4
+--------------D5C583EA915C48821C0CDF17
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -171,42 +173,44 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2021-02-23 10:22 a.m., Leon Anavi
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210223152219.32129-6-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210223152219.32129-7-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">[Please note: This e-mail is from an EXTERNAL e-mail address]
 
-Upgrade to release 21.2.1:
+Upgrade to release 0.1.14:
 
-- new: callback user component function &quot;check_config&quot; on
-  container/router components
-- fix: support Docker images for ARM (32 bit and 64 bit)
-- fix: bake Docker multi-arch images
-- fix: PyPy3 CI
-- new: enable autobahn client unit tests
+- Add GitHub build actions for project
+- Add project URLs in setup.py
+- Update and fix README links
+- Fix handling of README in setup.py (encoding fun in 3.5, 3.6
+  and pypy3)
+- Add Python 3.9 to test matrix
+- Add type hints
+- Derive ParseError from ValueError
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210223152219.32129-6-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210223152219.32129-7-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- ...{python3-autobahn_20.12.3.bb =&gt; python3-autobahn_21.2.1.bb} | 3 +--
+ .../{python3-iso8601_0.1.13.bb =&gt; python3-iso8601_0.1.14.bb}   | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-autobahn_20.12.3.bb =&gt; python3-autobahn_21.2.1.bb} (80%)
+ rename meta-python/recipes-devtools/python/{python3-iso8601_0.1.13.bb =&gt; python3-iso8601_0.1.14.bb} (69%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-autobahn_20.12.3.bb b/meta-python/recipes-devtools/python/python3-autobahn_21.2.1.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-autobahn_20.12.3.bb
-rename to meta-python/recipes-devtools/python/python3-autobahn_21.2.1.bb
-index 90958dff53..3af81d1dab 100644
---- a/meta-python/recipes-devtools/python/python3-autobahn_20.12.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-autobahn_21.2.1.bb
-@@ -3,8 +3,7 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://crossbar.io/autobahn">&quot;http://crossbar.io/autobahn&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-iso8601_0.1.13.bb b/meta-python/recipes-devtools/python/python3-iso8601_0.1.14.bb
+similarity index 69%
+rename from meta-python/recipes-devtools/python/python3-iso8601_0.1.13.bb
+rename to meta-python/recipes-devtools/python/python3-iso8601_0.1.14.bb
+index 9e7494b3e0..c531fcc6d8 100644
+--- a/meta-python/recipes-devtools/python/python3-iso8601_0.1.13.bb
++++ b/meta-python/recipes-devtools/python/python3-iso8601_0.1.14.bb
+@@ -3,8 +3,7 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://pyiso8601.readthedocs.org/">&quot;http://pyiso8601.readthedocs.org/&quot;</a>
  LICENSE = &quot;MIT&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=97c0bda20ad1d845c6369c0e47a1cd98">&quot;file://LICENSE;md5=97c0bda20ad1d845c6369c0e47a1cd98&quot;</a>
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=b05625f2336fa024e8d57e65c6595844">&quot;file://LICENSE;md5=b05625f2336fa024e8d57e65c6595844&quot;</a>
 
--SRC_URI[md5sum] = &quot;0a465e218d904f63537092b155489468&quot;
--SRC_URI[sha256sum] = &quot;410a93e0e29882c8b5d5ab05d220b07609b886ef5f23c0b8d39153254ffd6895&quot;
-+SRC_URI[sha256sum] = &quot;7e6b1bf95196b733978bab2d54a7ab8899c16ce11be369dc58422c07b7eea726&quot;
+-SRC_URI[md5sum] = &quot;df6e924305fd799d90be63336b2ab8b3&quot;
+-SRC_URI[sha256sum] = &quot;f7dec22af52025d4526be94cc1303c7d8f5379b746a3f54a8c8446384392eeb1&quot;
++SRC_URI[sha256sum] = &quot;8aafd56fa0290496c5edbb13c311f78fa3a241f0853540da09d9363eae3ebd79&quot;
 
  inherit pypi setuptools3
 
@@ -224,4 +228,4 @@ index 90958dff53..3af81d1dab 100644
   </body>
 </html>
 
---------------40EE8F2DAD326CAA25AA88F4--
+--------------D5C583EA915C48821C0CDF17--
