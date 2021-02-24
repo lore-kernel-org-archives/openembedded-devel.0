@@ -1,82 +1,126 @@
-Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
- by mx.groups.io with SMTP id smtpd.web10.611.1614190191983021625
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web10.1054.1614192039778220054
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Feb 2021 10:09:52 -0800
+ Wed, 24 Feb 2021 10:40:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=an0fC7JP;
- spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f179.google.com with SMTP id g4so1999472pgj.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Feb 2021 10:09:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=NvMLTw43KHPh2r6kk9Lg+ccu4LQ+hpu0Cyw9/jhF3FU=;
-        b=an0fC7JPvmu8Vx1VsqsSCuOVv9XTyfOT5JL8yPCm0Zz4FhzwyoIdJzt/GP7iFd+TH2
-         iaTqFzGTn7sp2OpzT4SoWYdRgS9XDyNQd3X9eU1dQc+uY0Uuy7GEk4ZPlS8nl7Lu6rss
-         lKFb4e+WdWU07AvxkWR7z0gTTF6mtKzMfeT3ULKjAnhB8PpwhMZDX5RfMbdZn5HvqPmJ
-         7j9YwDkYUIyWcf47T8erp4ZulzS3f6jbgzvX/DmfUsHkSSeDawnzB28cQM3UtmDuiTIS
-         7tNKS3/VEAulm9vL5MDnLowSB4uVASQtz/2rYLFyRvNearrdxNBJSL3GVJfZEIXkNbHJ
-         zRqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=NvMLTw43KHPh2r6kk9Lg+ccu4LQ+hpu0Cyw9/jhF3FU=;
-        b=BlZWUXtjx/TXpTZ8M1MhiSg5jZlr8XJ5DUQW9WMk7l842ydpKe16G9aGzkkmSF261u
-         L6P2uLaGzPIuVi9qv746LAICy2YEAHq7v/CHyaMswGgaOmvlzZhp8VTsZc867W1NDQPo
-         cYJlEeMJx6LbZpekfCMCc6/hFGAEgYA7CDlCxYx4bP06W0Xr0gxv+IIPxeu9x3RF7VBa
-         DEThfnWNtg/JWVJsxXVle/UWtq+pSqMogg1p9QExZMcUPxCVHyyQjGA+6UfaCyaSReo5
-         jQtVeiLoARR2gO3FsOidw2a9lWznztiarkzpG6ivZiWk0d3BGFnUgVAx9atuLuUcVTvG
-         1tWQ==
-X-Gm-Message-State: AOAM5327K8gpIkGVZWxSNUwhRxe6ELQ3o+ABIAxLaf1sWIqh4WyVQbYn
-	tfrEnaqk/SYqLZeVuLdM2nFJb53meUolKg==
-X-Google-Smtp-Source: ABdhPJxidqou5EvDhuK7R71FhmmHk4g+lerbmZQuV5jDqVgOjbpMxJgS5H5IOclIgtTxezTuhwDAQQ==
-X-Received: by 2002:a63:1c13:: with SMTP id c19mr29062655pgc.359.1614190191069;
-        Wed, 24 Feb 2021 10:09:51 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::e641])
-        by smtp.gmail.com with ESMTPSA id w187sm3326169pgb.52.2021.02.24.10.09.50
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Feb 2021 10:09:50 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=57288 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1lEz5R-0000Ak-39; Wed, 24 Feb 2021 20:40:38 +0200
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] influxdb: Generate checksums for term module
-Date: Wed, 24 Feb 2021 10:09:48 -0800
-Message-Id: <20210224180948.620602-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python2][PATCH] python-pygobject: Add version 2.28.7
+Date: Wed, 24 Feb 2021 20:40:28 +0200
+Message-Id: <20210224184028.28355-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-go 1.16 does no longer regenrate them with go list command
-intentionally, Therefore add the replacement repo checksums to
-go.sum
+Add version 2.28.7 without GI for backward compatibility with
+legacy systems, for example LibreELEC Settings add-on for Kodi.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...rm-module-for-mips-ispeed-ospeed-termios-abs.patch | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ ...ct-0001-add-PYTHON_INCLUDES-override.patch | 32 ++++++++++++++++
+ .../python/python-pygobject_2.28.7.bb         | 38 +++++++++++++++++++
+ 2 files changed, 70 insertions(+)
+ create mode 100644 recipes-devtools/python/python-pygobject/pygobject-0001-add-PYTHON_INCLUDES-override.patch
+ create mode 100644 recipes-devtools/python/python-pygobject_2.28.7.bb
 
-diff --git a/meta-oe/recipes-dbs/influxdb/influxdb/0001-patch-term-module-for-mips-ispeed-ospeed-termios-abs.patch b/meta-oe/recipes-dbs/influxdb/influxdb/0001-patch-term-module-for-mips-ispeed-ospeed-termios-abs.patch
-index 3cb2090d19..6e87b9d91e 100644
---- a/meta-oe/recipes-dbs/influxdb/influxdb/0001-patch-term-module-for-mips-ispeed-ospeed-termios-abs.patch
-+++ b/meta-oe/recipes-dbs/influxdb/influxdb/0001-patch-term-module-for-mips-ispeed-ospeed-termios-abs.patch
-@@ -18,3 +18,14 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  )
- +
- +replace github.com/pkg/term => github.com/kraj/term v0.0.0-20210111231523-7c42fcb0e627
-+--- a/go.sum
-++++ b/go.sum
-+@@ -215,6 +215,8 @@ github.com/kr/pretty v0.1.0/go.mod h1:dA
-+ github.com/kr/pty v1.1.1/go.mod h1:pFQYn66WHrOpPYNljwOMqo10TkYh1fy3cYio2l3bCsQ=
-+ github.com/kr/text v0.1.0 h1:45sCR5RtlFHMR4UwH9sdQ5TC8v0qDQCHnXt+kaKSTVE=
-+ github.com/kr/text v0.1.0/go.mod h1:4Jbv+DJW3UT/LiOwJeYQe1efqtUx/iVham/4vfdArNI=
-++github.com/kraj/term v0.0.0-20210111231523-7c42fcb0e627 h1:3/XXm86KqrOZEJvEmFlzl3NTFA99n5Pd/cSXl60LmuA=
-++github.com/kraj/term v0.0.0-20210111231523-7c42fcb0e627/go.mod h1:BYR4E+NOQrH+NhXE71KuBNmyR1lQ+yDvP+O3IIHO5bM=
-+ github.com/lib/pq v1.0.0 h1:X5PMW56eZitiTeO7tKzZxFCSpbFZJtkMMooicw2us9A=
-+ github.com/lib/pq v1.0.0/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
-+ github.com/mattn/go-colorable v0.0.9 h1:UVL0vNpWh04HeJXV0KLcaT7r06gOH2l4OW6ddYRUIY4=
+diff --git a/recipes-devtools/python/python-pygobject/pygobject-0001-add-PYTHON_INCLUDES-override.patch b/recipes-devtools/python/python-pygobject/pygobject-0001-add-PYTHON_INCLUDES-override.patch
+new file mode 100644
+index 0000000..d883f60
+--- /dev/null
++++ b/recipes-devtools/python/python-pygobject/pygobject-0001-add-PYTHON_INCLUDES-override.patch
+@@ -0,0 +1,32 @@
++[PATCH] m4/python.m4: add PYTHON_INCLUDES override for cross compilation
++
++As the configure script mixes up host/target python. Equivalent to the
++similar code in dbus-python.
++
++Signed-off-by: Peter Korsgaard <peter@korsgaard.com>
++---
++ m4/python.m4 |    4 ++++
++ 1 file changed, 4 insertions(+)
++
++Index: python-gobject-2.28.6/m4/python.m4
++===================================================================
++--- python-gobject-2.28.6.orig/m4/python.m4
+++++ python-gobject-2.28.6/m4/python.m4
++@@ -43,6 +43,9 @@
++ [AC_REQUIRE([AM_PATH_PYTHON])
++ AC_MSG_CHECKING(for headers required to compile python extensions)
++ dnl deduce PYTHON_INCLUDES
+++if test "${PYTHON_INCLUDES+set}" = set; then
+++  AC_MSG_NOTICE([PYTHON_INCLUDES overridden to: $PYTHON_INCLUDES])
+++else
++ py_prefix=`$PYTHON -c "import sys; sys.stdout.write(sys.prefix)"`
++ py_exec_prefix=`$PYTHON -c "import sys; sys.stdout.write(sys.exec_prefix)"`
++ PYTHON_CONFIG=`which $PYTHON`-config
++@@ -54,6 +57,7 @@
++   PYTHON_INCLUDES="$PYTHON_INCLUDES -I${py_exec_prefix}/include/python${PYTHON_VERSION}"
++ fi
++ fi
+++fi
++ AC_SUBST(PYTHON_INCLUDES)
++ dnl check if the headers exist:
++ save_CPPFLAGS="$CPPFLAGS"
+diff --git a/recipes-devtools/python/python-pygobject_2.28.7.bb b/recipes-devtools/python/python-pygobject_2.28.7.bb
+new file mode 100644
+index 0000000..c373328
+--- /dev/null
++++ b/recipes-devtools/python/python-pygobject_2.28.7.bb
+@@ -0,0 +1,38 @@
++DESCRIPTION = "Python GObject bindings"
++SECTION = "devel/python"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=a916467b91076e631dd8edb7424769c7"
++
++DEPENDS = "python-pygobject-native glib-2.0"
++PR = "ml0"
++
++inherit gnomebase autotools distutils-base pkgconfig
++
++SRCNAME="pygobject"
++SRC_URI = " \
++	http://ftp.gnome.org/pub/GNOME/sources/${SRCNAME}/${@gnome_verdir("${PV}")}/${SRCNAME}-${PV}.tar.xz \
++	file://pygobject-0001-add-PYTHON_INCLUDES-override.patch \
++"
++SRC_URI[md5sum] = "ae48b60c690c4aa894e69e0c97802745"
++SRC_URI[sha256sum] = "bb9d25a3442ca7511385a7c01b057492095c263784ef31231ffe589d83a96a5a"
++S = "${WORKDIR}/pygobject-${PV}"
++
++FILESPATH = "${FILE_DIRNAME}/python-pygobject:${FILE_DIRNAME}/files"
++
++# necessary to let the call for python-config succeed
++export BUILD_SYS
++export HOST_SYS
++export STAGING_INCDIR
++export STAGING_LIBDIR
++
++PACKAGES += "${PN}-lib"
++
++RDEPENDS_${PN} += "python-textutils"
++
++FILES_${PN} = "${libdir}/python*"
++FILES_${PN}-lib = "${libdir}/lib*.so.*"
++FILES_${PN}-dev += "${bindir} ${datadir}"
++FILES_${PN}-dbg += "${libdir}/.debug"
++
++BBCLASSEXTEND = "native"
++PACKAGECONFIG_class-native = ""
 -- 
-2.30.1
+2.17.1
 
