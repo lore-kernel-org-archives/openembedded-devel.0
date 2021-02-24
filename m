@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.5732.1614165925688262498
+ by mx.groups.io with SMTP id smtpd.web08.5619.1614165926246452162
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 24 Feb 2021 03:25:26 -0800
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=56972 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lEsID-000137-GK; Wed, 24 Feb 2021 13:25:24 +0200
+	id 1lEsIG-000137-LG; Wed, 24 Feb 2021 13:25:25 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-pymisp: Upgrade 2.4.137.3 -> 2.4.138
-Date: Wed, 24 Feb 2021 13:25:11 +0200
-Message-Id: <20210224112512.31406-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-pytest-runner: Upgrade 5.2 -> 5.3.0
+Date: Wed, 24 Feb 2021 13:25:12 +0200
+Message-Id: <20210224112512.31406-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210224112512.31406-1-leon.anavi@konsulko.com>
 References: <20210224112512.31406-1-leon.anavi@konsulko.com>
@@ -30,40 +30,38 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.4.138:
+Upgrade to release 5.3.0:
 
-- Bump version
-- Bump deps
+- Require Python 3.6 or later
+- Refreshed package metadata
+
+License-Update: License remains MIT
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-pymisp_2.4.137.3.bb => python3-pymisp_2.4.138.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.137.3.bb => python3-pymisp_2.4.138.bb} (82%)
+ ...3-pytest-runner_5.2.bb => python3-pytest-runner_5.3.0.bb} | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pytest-runner_5.2.bb => python3-pytest-runner_5.3.0.bb} (61%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.137.3.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.138.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.137.3.bb
-rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.138.bb
-index e363729fd8..eb7bea8348 100644
---- a/meta-python/recipes-devtools/python/python3-pymisp_2.4.137.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymisp_2.4.138.bb
-@@ -4,7 +4,7 @@ LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-runner_5.2.bb b/meta-python/recipes-devtools/python/python3-pytest-runner_5.3.0.bb
+similarity index 61%
+rename from meta-python/recipes-devtools/python/python3-pytest-runner_5.2.bb
+rename to meta-python/recipes-devtools/python/python3-pytest-runner_5.3.0.bb
+index d00cd48739..35f6c6c0a0 100644
+--- a/meta-python/recipes-devtools/python/python3-pytest-runner_5.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pytest-runner_5.3.0.bb
+@@ -1,9 +1,8 @@
+ SUMMARY = "Invoke py.test as distutils command with dependency resolution"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=a33f38bbf47d48c70fe0d40e5f77498e"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=7a7126e068206290f3fe9f8d6c713ea6"
  
- SRC_URI = "git://github.com/MISP/PyMISP.git;protocol=https;branch=main"
--SRCREV = "f675e2096182532bb5870e4f773476b2d8065986"
-+SRCREV = "9316420dc028a1ffc541986fc08793e669f2165e"
- S = "${WORKDIR}/git"
+-SRC_URI[md5sum] = "e5f66b8e8e87f62c59631c35c919d321"
+-SRC_URI[sha256sum] = "96c7e73ead7b93e388c5d614770d2bae6526efd997757d3543fe17b557a0942b"
++SRC_URI[sha256sum] = "ca3f58ff4957e8be6c54c55d575b235725cbbcf4dc0d5091c29c6444cfc8a5fe"
  
- inherit setuptools3
-@@ -18,5 +18,5 @@ RDEPENDS_${PN} += " \
- "
+ inherit pypi setuptools3
  
- # Fixes: python3-pymisp requires /bin/bash, but no
--# providers found in RDEPENDS_python3-pymisp? [file-rdep
-+# providers found in RDEPENDS_python3-pymisp? [file-rdep]
- RDEPENDS_${PN} += "bash"
 -- 
 2.17.1
 
