@@ -1,123 +1,176 @@
-Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com [66.111.4.27])
- by mx.groups.io with SMTP id smtpd.web08.3980.1614119340536451753
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.web08.2820.1614140778509196396
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Feb 2021 14:29:00 -0800
+ Tue, 23 Feb 2021 20:26:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gherzan.com header.s=fm1 header.b=c/Js4ZwH;
- spf=pass (domain: gherzan.com, ip: 66.111.4.27, mailfrom: andrei@gherzan.com)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
-	by mailout.nyi.internal (Postfix) with ESMTP id 9BFC35C0032;
-	Tue, 23 Feb 2021 17:28:59 -0500 (EST)
-Received: from imap4 ([10.202.2.54])
-  by compute3.internal (MEProxy); Tue, 23 Feb 2021 17:28:59 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gherzan.com; h=
-	mime-version:message-id:in-reply-to:references:date:from:to:cc
-	:subject:content-type; s=fm1; bh=uS4gRUIakBwx90OzHM3hdL08X3yJx7Y
-	Zvgkx9rB1K9Q=; b=c/Js4ZwHWsm4T720Kqb34figGAKKnnMPXsmsSnjA86bfoUM
-	o/R+8cPoRQ3bTwn85o8obQIC+Zt7JHsARljyGRyWToHjP71yLz7cZY5j3w9UvZDE
-	Pq+AydAApo8JachLqAdczLiMmPo3Kpk1eWnscs8Hgb29cMrza7QOklUea7TWdDr7
-	rOY68m4YJ7J5mCeFga88a2A+jFFF+Ja4/ssvW6p7d9/HPLV/evWaPUNEJhsUd5rm
-	inqZWAWc2VOEZPjLYTFEQvqShyBXlcdSnKrZyhh7qS1D6/GHf9dQb+vZVf3Rhv1c
-	Ve1RpCW+auUrbNHgQa04V5XCskjeCmoE0mQrBQg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to:x-me-proxy
-	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=uS4gRU
-	IakBwx90OzHM3hdL08X3yJx7YZvgkx9rB1K9Q=; b=b97drpABsoFs0FIqb7ryg6
-	pUzXqJ3XTb2/13WZtYpkex05K41/6qIPd7Oc9wtebfFndu2s/zsch1r9krFEghDI
-	Q9NzWEqf28PNM7/9HuVJCFRMwcrijdNRbjKJRmpLEazCjf57t/vV365xp7O5MB8v
-	Kj6MefnSODmYqrzrAB4wGui0oL072ghaHCAdI4BhUMRD29iF7zKlWJ8UBETIt1oY
-	n3wrXPR6pQmrVtXR7iJurAhqOudruJwF97zktFHZCzacu45+qFmitpRtfQBLAqPG
-	R1DPgz6r9jwUEy62alw0jeoibED1E5dRlszqz4a7Hye+f6ZN9JdSClNxneyTtQyg
-	==
-X-ME-Sender: <xms:q4E1YCz50RchFua_7q86EYHKboA8wbBVbfZ-rRHU_Oh3_7UcZdtEBg>
-    <xme:q4E1YOS7yu46v3jWOdC2w_R5nhKnwgetUqTZlTZYz72GJ9IJpd7Jlb76ueHSCcHzI
-    vWR8olJ7j9cOiANbes>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrkeehgdduiedtucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhepofgfggfkjghffffhvffutgesrgdtreerreerjeenucfhrhhomhepfdetnhgu
-    rhgvihcuifhhvghriigrnhdfuceorghnughrvghisehghhgvrhiirghnrdgtohhmqeenuc
-    ggtffrrghtthgvrhhnpedvkeeigefggfejieeffefhfeeihfefleelueevueetudehgfdu
-    tddukeetteejvdenucffohhmrghinhepohhpvghnvghmsggvugguvggurdhorhhgnecuve
-    hluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprghnughrvghi
-    sehghhgvrhiirghnrdgtohhm
-X-ME-Proxy: <xmx:q4E1YEUwsbbr_iv_iZRGOAyKYzHxzlOXKpb1TMoxmOLeSWujlLvbCA>
-    <xmx:q4E1YIj3TpWIELu9B1sJjLAcyrKsnQCsH6NoKpqPdow7dQfYUQN3kA>
-    <xmx:q4E1YEBZp-Im0VA7GawhVK5nuXOkc0ywLbAbKYHSvpfUOiK983Qa4Q>
-    <xmx:q4E1YPowGJc6HVitDh8zZ6sZ2wGXYQCbysDAuWVGnY5UKb-REQuijg>
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
-	id 44B8A160792; Tue, 23 Feb 2021 17:28:59 -0500 (EST)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.5.0-alpha0-141-gf094924a34-fm-20210210.001-gf094924a
-Mime-Version: 1.0
-Message-Id: <d4d70993-600d-4d0b-ac57-07b74384ac27@www.fastmail.com>
-In-Reply-To: <7d202618-598a-4518-8b49-38cc054f0d8b@www.fastmail.com>
-References: <20210223162705.2595483-1-andrei@gherzan.com>
- <20210223171242.csn2hwn6imsn4ega@jama>
- <CAMKF1spNM_nxwEMFN3DXCG5O4rxK22VMMe6yZKm7zjmUWg4LSQ@mail.gmail.com>
- <7536ac24-0016-45e2-9cfe-209b50633c8a@www.fastmail.com>
- <20210223173002.aydz4xm65ylvgy4k@jama>
- <7a1bf385-91e5-4076-bbee-b5d14b7c1e54@www.fastmail.com>
- <4deb9ec4-605e-431f-95f7-1b6f9e948635@www.fastmail.com>
- <CA+chaQch78dk=nF1Rj0znxRJ81a=cXbZpp-X_1RjZPwB1UEjOw@mail.gmail.com>
- <7d202618-598a-4518-8b49-38cc054f0d8b@www.fastmail.com>
-Date: Tue, 23 Feb 2021 22:28:39 +0000
-From: "Andrei Gherzan" <andrei@gherzan.com>
-To: "Martin Jansa" <martin.jansa@gmail.com>
-Cc: "Khem Raj" <raj.khem@gmail.com>,
- openembedded <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe][dunfell][PATCH] nss: Disable Werror across all recipe types
-Content-Type: multipart/alternative;
- boundary=00f815fc5b184b4da2224f5e0672ce79
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ha45IKb6;
+ spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f169.google.com with SMTP id j12so483864pfj.12
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Feb 2021 20:26:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=to:from:subject:autocrypt:message-id:date:user-agent:mime-version
+         :content-transfer-encoding:content-language;
+        bh=eg7TdgHQ9RQYVchscgwZphFLr+HT9NaMDMutMwq/5HI=;
+        b=ha45IKb6akwR0P5O9O9WBBL4XvQHv5wXrYmSqtteD56Vw+W39OdnQEFDaR8oQYBsrp
+         Di/qXBD/heXzD31qQWiuRDmzqSsdpv4+ldaIti3dPCDl78c36hm3j5X7AIv8Kn/WgJxV
+         4tkrvlli7NCMuljmYhVlbbXJKS8OSEnPvQOZkNqLJQiW4BzSTqpb4z9Zd2IlduYrF1lx
+         mn7E34FRIhgT1fXi9WENhGamF7beCus4Rw2mOfHIuVdVA9Mu+vqyRMpoKLiZvjB+8S4A
+         HT224lbW/NNYvMMuYkxKhpj3DZ2z1LmU47KLGaQwvDWeTK8DskShMGYGVMDJQn4dKVrH
+         BhSg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:to:from:subject:autocrypt:message-id:date
+         :user-agent:mime-version:content-transfer-encoding:content-language;
+        bh=eg7TdgHQ9RQYVchscgwZphFLr+HT9NaMDMutMwq/5HI=;
+        b=flRDUPu26TtLEz64NmWXqjocgcFdXgWnh1pdpmZbkMgmwvUd3xSOxx1/zBQaYlfG69
+         quttLQDKXkaAMnBc42VsQbsTjvMfkyuN/ePkkzCAkOBBk4CAZfvb8BDvMQpAwXaFBMCJ
+         mN9N0TAIQtsDe/GzsQimuzVQHEjKPILPKTX71d7OC4AmpQW4HuXD1KUrMuuhV4qlNrhm
+         FDkdrrpigbY2zCy+JCWUtrS6T/9uWRkHUkWzE1qEKXZWj81LuW44DXKWe8fFP98yvLEF
+         OpUmfkDZmOxc3GxFrmV3cyB+buI/O796WORWmM3L9iqDTGhcUwclFALLPPExKSl13s78
+         /1Bw==
+X-Gm-Message-State: AOAM531A5lz9viPzliMYc/lnJGhCkwjVDc261HE8t/kZRPc/07oL3O1z
+	yzv+JzSj56Fk85tMUX0lcKE=
+X-Google-Smtp-Source: ABdhPJwnPEtr0v4yfyuofggpdW8U+YYzLZ1dEcPed7VL8nRSW/JYq/XZFkIxG1xL0vtb2o73T+adIA==
+X-Received: by 2002:aa7:848b:0:b029:1ed:5cb9:9e61 with SMTP id u11-20020aa7848b0000b02901ed5cb99e61mr20682010pfn.41.1614140777854;
+        Tue, 23 Feb 2021 20:26:17 -0800 (PST)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:8cb5:e0e1:ba5f:6619? ([2601:202:4180:a5c0:8cb5:e0e1:ba5f:6619])
+        by smtp.gmail.com with ESMTPSA id c4sm796227pfo.32.2021.02.23.20.26.17
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 23 Feb 2021 20:26:17 -0800 (PST)
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+ Khem Raj <raj.khem@gmail.com>
+From: "akuster" <akuster808@gmail.com>
+Subject: dunfell merge request Feb 23rd
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+ 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
+ 8CS2NxU=
+Message-ID: <3516026c-5f35-a4c0-5c7c-bf7dc87922c2@gmail.com>
+Date: Tue, 23 Feb 2021 20:26:16 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
---00f815fc5b184b4da2224f5e0672ce79
-Content-Type: text/plain
+The following changes since commit de37512b25c1f8c6bb6ab2b3782ac0fe01443483:
 
-On Tue, 23 Feb 2021, at 21:39, Andrei Gherzan wrote:
-> On Tue, 23 Feb 2021, at 21:37, Martin Jansa wrote:
->> OK, thanks for looking into that, I was assuming that native nsinstall is provided by nss-native dependency we have and wasn't aware that it's built for host as part of target build as well.
-> 
-> I should have known this before sending the patch. As a self-inflicted punishment, I'll push a proper fix as well but please go with this for now.
+  gpsd: mark CLEANBROKEN (2021-01-31 09:42:35 -0800)
 
-I've pushed the fix for both master and dunfell. master has a v2 because that was initially the dunfell one but without the subject tag (missed it initially).
+are available in the Git repository at:
 
-master - https://lists.openembedded.org/g/openembedded-devel/message/89697
+  https://git.openembedded.org/meta-openembedded dunfell-next
 
-dunfell - https://lists.openembedded.org/g/openembedded-devel/message/89698
+for you to fetch changes up to 346681e7bf9c78008a845fc89031be4fd4ceb3a1:
 
---
-Andrei
+  python3-pykwalify: Do not unset _PYTHON_SYSCONFIGDATA_NAME (2021-02-19
+07:17:12 -0800)
 
+----------------------------------------------------------------
+Andrej Kozemcak (1):
+      libuv: fix CVE-2020-8252
 
---00f815fc5b184b4da2224f5e0672ce79
-Content-Type: text/html
-Content-Transfer-Encoding: quoted-printable
+Haiqing Bai (1):
+      python-urllib3/python3-urllib3: fix CVE-2020-7212
 
-<!DOCTYPE html><html><head><title></title><style type=3D"text/css">
-p.MsoNormal,p.MsoNoSpacing{margin:0}</style></head><body><div>On Tue, 23=
- Feb 2021, at 21:39, Andrei Gherzan wrote:<br></div><blockquote type=3D"=
-cite" id=3D"qt" style=3D""><div>On Tue, 23 Feb 2021, at 21:37, Martin Ja=
-nsa wrote:<br></div><blockquote type=3D"cite" id=3D"qt-qt" style=3D""><d=
-iv dir=3D"ltr"><div>OK, thanks for looking into that, I was assuming tha=
-t native nsinstall is provided by nss-native dependency we have and wasn=
-'t aware that it's built for host as part of target build as well.<br></=
-div></div></blockquote><div><br></div><div>I should have known this befo=
-re sending the patch. As a self-inflicted punishment, I'll push a proper=
- fix as well but please go with this for now.<br></div></blockquote><div=
-><br></div><div>I've pushed the fix for both master and dunfell. master =
-has a v2 because that was initially the dunfell one but without the subj=
-ect tag (missed it initially).<br></div><div><br></div><div><div class=3D=
-"attachment__body attachment__body--no_thumb"><div class=3D"post-message=
- post-message--collapsed"><div style=3D"max-height:200px;" class=3D"post=
--message__text-container"><p>master - <a class=3D"theme markdown__link" =
-href=3D"https://lists.openembedded.org/g/openembedded-devel/message/8969=
-7" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/g=
-/openembedded-devel/message/89697</a><br></p><div>dunfell - <a class=3D"=
-theme markdown__link" href=3D"https://lists.openembedded.org/g/openembed=
-ded-devel/message/89698" rel=3D"noreferrer" target=3D"_blank">https://li=
-sts.openembedded.org/g/openembedded-devel/message/89698</a><br></div><di=
-v><br></div><div>--<br></div><div>Andrei<br></div></div></div></div><div=
- style=3D"clear:both;"><br></div></div><div><br></div></body></html>
+Khem Raj (6):
+      python-grpcio-tools: Add missing space for append
+      gedit: Inherit python3targetconfig
+      openipmi: Inherit python3targetconfig
+      libplist: Inherit python3targetconfig
+      postgresql: Inherit python3targetconfig
+      python3-pykwalify: Do not unset _PYTHON_SYSCONFIGDATA_NAME
 
---00f815fc5b184b4da2224f5e0672ce79--
+Mario Schuknecht (1):
+      dnsmasq: Fix systemd service
+
+Martin Jansa (2):
+      wireguard-module: remove PKG assignment
+      graphviz: use git fetcher instead of gitlab archives
+
+Vyacheslav Yurkov (1):
+      python3-aiohttp: added missing RDEPENDs
+
+Zang Ruochen (1):
+      openldap: upgrade 2.4.50 -> 2.4.51
+
+akuster (2):
+      enca: Fix SRC_URI
+      meta-oe/README: add Ubuntu prerequisite information
+
+changqing.li@windriver.com (1):
+      celt051: update SRC_URI
+
+zangrc (1):
+      openldap: upgrade 2.4.51 -> 2.4.56
+
+zhengruoqin (1):
+      openldap: upgrade 2.4.56 -> 2.4.57
+
+ meta-gnome/recipes-gnome/gedit/gedit_3.34.1.bb     |  2 +-
+ .../wireguard/wireguard-module_1.0.20200401.bb     |  7 ---
+ .../recipes-support/celt051/celt051_git.bb         |  2 +-
+ .../dnsmasq/files/dnsmasq-resolvconf.service       |  2 +-
+ .../recipes-support/openipmi/openipmi_2.0.29.bb    |  2 +-
+ meta-oe/README                                     |  3 ++
+ .../libuv/libuv/CVE-2020-8252.patch                | 41 ++++++++++++++++
+ meta-oe/recipes-connectivity/libuv/libuv_1.36.0.bb |  3 +-
+ meta-oe/recipes-dbs/postgresql/postgresql.inc      |  2 +-
+ .../libimobiledevice/libplist_2.1.0.bb             |  2 +-
+ .../recipes-graphics/graphviz/graphviz_2.40.1.bb   | 18 +++----
+ meta-oe/recipes-support/enca/enca_1.9.bb           |  7 ++-
+ .../{openldap_2.4.50.bb => openldap_2.4.57.bb}     |  6 +--
+ .../python/python-grpcio-tools.inc                 |  2 +-
+ .../python/python3-aiohttp_3.6.2.bb                |  4 +-
+ .../python/python3-pykwalify_1.7.0.bb              |  2 +-
+ .../python/python3-urllib3/CVE-2020-7212.patch     | 55
+++++++++++++++++++++++
+ .../python/python3-urllib3_1.25.7.bb               |  2 +
+ 18 files changed, 127 insertions(+), 35 deletions(-)
+ create mode 100644
+meta-oe/recipes-connectivity/libuv/libuv/CVE-2020-8252.patch
+ rename meta-oe/recipes-support/openldap/{openldap_2.4.50.bb =>
+openldap_2.4.57.bb} (97%)
+
