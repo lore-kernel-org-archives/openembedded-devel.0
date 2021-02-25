@@ -1,797 +1,133 @@
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
- by mx.groups.io with SMTP id smtpd.web12.137.1614272606483242483
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com (EUR04-HE1-obe.outbound.protection.outlook.com [40.107.7.58])
+ by mx.groups.io with SMTP id smtpd.web12.117.1614288075649251488
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Feb 2021 09:03:27 -0800
+ Thu, 25 Feb 2021 13:21:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=tuhd+zO0;
- spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f45.google.com with SMTP id d8so10074662ejc.4
-        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Feb 2021 09:03:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=4q5T9X2c183+kAOWPprGFLzaMG5X5eNBGvlRkyaQuyI=;
-        b=tuhd+zO0FUq6bd/UU6uDKoFIQj8ifDuWHK9V7PO5WS+iHBtRhDz+X+gPecmu0F+tR2
-         vzQhmNVylVk0CZ4u6SuYDH5Cal6D2XtLL8FCJAzKKMy21Pg80M4iFpDu3kklciA4abU7
-         lUDdJBtzY8jAzOebEwC84rpkbfFZofBhV4BAWjrRVUnXMhixlkeCMiNR1F0n5i9cLOnK
-         WuKehJFbVkW1zsMOMg99jXYiuB6JxJh4ucLccYQql8N7xLX4Z0o7tGjJrHXnYidwcp5O
-         abdv7BPDWJ3U+6741NpnHBrXR6SMDyucaBMQlfngbDLXse08E46bGBDS14SxZGP6PGa/
-         katw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=4q5T9X2c183+kAOWPprGFLzaMG5X5eNBGvlRkyaQuyI=;
-        b=nC4KYC+AJ8Gufwtjjc+xyGhU+CLtkwEIp0eOxhiLYpIEq443I9oYpkhOUR5GVCbZuy
-         9T98MiuqjBgLP4xMdZjTEJn5hwAk683RjXElrKBXX4e2l2rvP0cyamSHwHRKhr/6/L5o
-         RM+UXGUMjTQV7URLWGzrvdSy/dLJRGpJYzaLVtYFzWhxBMuotVjbwj7fkdybhlduq5t6
-         Xna/OeG1hypnXwEP95WWN+5EJbBEaxOTcs4TNELhlYO9nMJuxAX2TPSm3DkeDL/PWl1J
-         oGlkmmQSMqqv0aLMglLf348J/YH+r2csa84hmxQ4H6RQOIld8rvzqf4g9pMcUeeN41mJ
-         Y2bA==
-X-Gm-Message-State: AOAM5334Mn+gD8oVT+2kLZFms7siIcnh5nusaN5Q1Ky/rhziMYpk+iyS
-	Ii8qQ8yR6DS7B/apZp4tlrx8QjFnRe04TJPiVi0=
-X-Google-Smtp-Source: ABdhPJweANkVydboRcFAwlZgxxJiiAlFFiYlSW+DyJ1WsDHOwHvawsRjc+exdlsf5zafNk+mARW6pq5z/O2iPRysmH4=
-X-Received: by 2002:a17:906:4349:: with SMTP id z9mr3523083ejm.471.1614272604865;
- Thu, 25 Feb 2021 09:03:24 -0800 (PST)
+ dkim=pass header.i=@spinetix.com header.s=selector2 header.b=sQ/Jonkr;
+ spf=pass (domain: spinetix.com, ip: 40.107.7.58, mailfrom: diego.santacruz@spinetix.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=O9+rfY5voJdEUnn1k3TwY+Ehv+aqfaC5IixMo1y3ydLa10RRWL8KbQGaB/enjZPxI7ZDyqkXRQIJ4IaB0IsPOPFfqk0Y2Olz7zwc/wIwixyLcxXTtcnbcF/iKM3ckmtX2PbjAqXoclnAV81XeDzry9wqcEaxX2Uix/AnVqngHCupijdrp5lGFPParUSSbBOIpzJbrCJWILqrESnBCTmi6gVEgsqEUL5+kE4C1AF7mWJqm452ubIInCnGeDPGvSIg1+p71Xw8HHkIj85D4sVl/43zcrj9k9+xO6zElvj49veeayrdpL/WMIHNtbw9/fAuuJmBCa36zkIqa+UOxVWoRg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8951fo5yWavKBmPApCvdCbzhTJ5xsGMcv/Dl29hMgZA=;
+ b=e9tvmOEN1fc1EH/c8jV3pqXRmDZ1amVA/CDcDADAIzrh4o9Pkm1MXIg/qT24u/cicFdDO5hjBSW3ZyiP6+Qg8hQWsUq+P/BFfHujBVCmRyzOjjoJY71VsmU4Sub/Y+KEV7biK5hsE230vNU1QIMaCkVGpOdJOwBSVoTo5gRg0tUFiTYZlk4Xn8hWKNkDVoH4/nc9tg81/7Y34kUKue16J68EbJ95S4Sh8YspdTQVALilCPUlwZ/5hKTncYzs5VOxjnurfIBIkdWREjWjRpwHm4HR0iirxLpJ6hOycPa4ddi77CGIdUvu1rAnyyk1b4c8ACB5w6PWYKafzPy5Sr7sQA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=spinetix.com; dmarc=pass action=none header.from=spinetix.com;
+ dkim=pass header.d=spinetix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=spinetix.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8951fo5yWavKBmPApCvdCbzhTJ5xsGMcv/Dl29hMgZA=;
+ b=sQ/Jonkrp3KZL1cOYOBsXtYq17JBDxv0jt3RvUqnQ3ulwDY8P3zphBHLL9BeWRdluHp6NKCYSkVswGOmy+xbyEtt/2MyKG+zEI6D1jZss8y7avHIwy8eGOldymTsODRvDVC1/PRIleSHHAA4cqFVl4rMssdH/fok0KaziHU+qSQ=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=spinetix.com;
+Received: from DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
+ (2603:10a6:6:e::19) by DB8PR01MB5676.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:10f::12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.19; Thu, 25 Feb
+ 2021 21:20:51 +0000
+Received: from DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
+ ([fe80::a979:e5e4:3b20:ba6b]) by
+ DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
+ ([fe80::a979:e5e4:3b20:ba6b%7]) with mapi id 15.20.3868.034; Thu, 25 Feb 2021
+ 21:20:51 +0000
+From: "Diego Santa Cruz" <diego.santacruz@spinetix.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Diego Santa Cruz <Diego.SantaCruz@spinetix.com>
+Subject: [meta-oe][PATCH] php: split out phpdbg into a separate package
+Date: Thu, 25 Feb 2021 22:20:21 +0100
+Message-Id: <20210225212021.15549-1-Diego.SantaCruz@spinetix.com>
+X-Mailer: git-send-email 2.18.4
+X-Originating-IP: [46.14.255.78]
+X-ClientProxiedBy: ZR0P278CA0133.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:40::12) To DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
+ (2603:10a6:6:e::19)
+Return-Path: Diego.SantaCruz@spinetix.com
 MIME-Version: 1.0
-References: <20210216152349.30824-1-Rahul.Taya@kpit.com> <CA+chaQfrVCttH0nb55=eiwJva=GT0NZyitkVEfaFyigVj+RC8A@mail.gmail.com>
- <BMXPR01MB34313989023828E45EBFAE7BF29E9@BMXPR01MB3431.INDPRD01.PROD.OUTLOOK.COM>
- <CA+chaQeuX0JXcWq1WhQEX9mkS67_-ZSpMhsJ-m0ow7JJ3boTgA@mail.gmail.com> <BMXPR01MB34313781E1537C2248D69382F29E9@BMXPR01MB3431.INDPRD01.PROD.OUTLOOK.COM>
-In-Reply-To: <BMXPR01MB34313781E1537C2248D69382F29E9@BMXPR01MB3431.INDPRD01.PROD.OUTLOOK.COM>
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-Date: Thu, 25 Feb 2021 18:03:13 +0100
-Message-ID: <CA+chaQe-654P3L1O0D35LsyTiFFgYxt3+o7-d23_x2pzfrUj2w@mail.gmail.com>
-Subject: Re: [oe] [meta-python2][dunfell][PATCH] python: Add fix for CVE-2019-9674
-To: Rahul Taya <Rahul.Taya@kpit.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="0000000000002f070705bc2c218e"
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from prefix.spinetix.local (46.14.255.78) by ZR0P278CA0133.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:40::12) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.19 via Frontend Transport; Thu, 25 Feb 2021 21:20:51 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 7ea60f61-9e54-41a2-96f2-08d8d9d33a62
+X-MS-TrafficTypeDiagnostic: DB8PR01MB5676:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: 
+	<DB8PR01MB5676CBE574FE5169688CC2BE889E9@DB8PR01MB5676.eurprd01.prod.exchangelabs.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:3044;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	OAdRyqL8rjLQc4ZJI6H8zP9ZLRL2bAYLlHJR6BVCzD9fJK9/uDiV2G8Jt4HSEU7Cn18cPuRF3nBkGTf5rbRyUsOZOkRKeMRkz+vOmrBTgT1laWvKh/8lFX/ZKnMwWUa6tyNIy30DgGPGeiNpZPJm0B4p120HXGPsTnrn6mc3cW0tJlb17DjMkLQOoZfvMz+1XF0utbW4WrOrOMqVJpMuNvhq0IUGt/RYuvjOT8191w6m679nuRoMrnFMABI7qCk5EmXjvy6jefMt6HGWqykZy+WGtD5WpY+NzthhOFluO+30MMVtVFeJi0fLRCWEVe0JFi8f2O8b/V6KslmYwWL4JD6YNapxX85O/RbSupVW6ItGxOsemxvqETYc2T6Ep14Yf1WVjz+sWGctxf3i4lXKQFSPkQc6CaMd0ZnYZvSeayzB3wIcMgjTXwM/fq2tUCzwID0SdBgtAMIXZSdcBz3m2bn7FEPi6qJ/voHf3q2/TlODCKRFB1Ull4D3b1uLlObmHjNUeqE0i+TkgJ5d/IyOMp7wLEKgmihQORm3yPqJ5NYwvjfPLMUNFR52EO1MtfWHLJLyS4F5/gKDdriLj1c65q+WAy1upAi6h/yes1uSUWNyS2fD1gvD7fFdWDC/O4gPNNNOrX0QfnSZq7a1bVSKtA==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB6PR0102MB2630.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(366004)(136003)(376002)(39830400003)(396003)(16526019)(6512007)(2616005)(4326008)(956004)(52116002)(6506007)(5660300002)(478600001)(107886003)(6486002)(2906002)(6666004)(186003)(36756003)(66476007)(26005)(316002)(66556008)(1076003)(66946007)(83380400001)(86362001)(8936002)(6916009)(8676002)(40753002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	=?us-ascii?Q?qp1DNxdfliNEvxMgh//yF6g6E+tJ23JZ1BcxhoULVnp7/QMRe9wnjnXiCPsK?=
+ =?us-ascii?Q?3/vqkqTqNykxI9nT9bx4kgcS+bciUIfOMSFLcAaHu3MnFWY1dky/dV61xZx9?=
+ =?us-ascii?Q?OnI4kC98YHamrtnvvziQQY8t5t0ESVk2Dh+rD1MN6tO0gTZ0rHjclRZDnHsF?=
+ =?us-ascii?Q?mILpFJ0yV8pq6fwNVRQ57jEtmULfFW/E4WyiWMcg7XftyJkeRU19VEiGNB55?=
+ =?us-ascii?Q?xbPAXU/Sr0HYHxWzdvtOmYfZIvxgPO1jhU6A/Y+QyjcDl9j4fD6wr18ZK1hC?=
+ =?us-ascii?Q?rIZfIWliZZBIaESijznS2QceWi7ZDJgU5aaPrzBxQfeBSv3gTVudF2GQhr8m?=
+ =?us-ascii?Q?ivARwUZyZlnSD15H0+e/oMiD69YPhCBQj+XIzqY9RcwJpO+caZcxJiZjjnUU?=
+ =?us-ascii?Q?/oF9htCqPmbjoSCAqEDuwViDUQis5bHo7+ugmtFEk4MELWKE+1Gt3WjaFGw5?=
+ =?us-ascii?Q?XZ67ohQjrh8VNg/uxwYzei3KkGLN5fevZA3fBjv+RyeyqBbhKNIdp5mdSapF?=
+ =?us-ascii?Q?F+6+T8zX+e2Hr2jd5fJkSWZLZWJv+Hbz2cFthUHMtRklbKTXWTB5lG+p4qm8?=
+ =?us-ascii?Q?6uRi70LJ6tdgUSHS6tLLmnpLRj4kG+slbXphq0fIwNkVl1PDfayKD/irHd9W?=
+ =?us-ascii?Q?0LTtG/l1BSdNrOkom5YwViS20k3/aSl2xyj3LwUDXeoNkQEYvn/5/i2UmhC+?=
+ =?us-ascii?Q?+naSdfozW9t3a4G8V2nADCB1+jonVcPqp08v0SvgOMz/Gouu+qrs2xnkp7/S?=
+ =?us-ascii?Q?Ug/K12pSiPaOqtVLvF2/sGv+Wi0b+Nx+pE9JZajeei4SwmjT43O7ql0CWxFm?=
+ =?us-ascii?Q?RXGQRTrxtOYdHy3sghlVFDsBUoSvG7/Zgk4nwdASx7t/TnbpwPd5Uq4H7B0j?=
+ =?us-ascii?Q?IxcZ3nT5IgJ9KgKFrWIYb6SM4LN3X6epk35TmH/xwhHH42lZC/P0jgifIY43?=
+ =?us-ascii?Q?JG7/Jyze4uAHxjfNBGTpomLBBeQSWYQN4Mw04zohtwhO+lM+aLqmYzH0caX+?=
+ =?us-ascii?Q?GueKBWOdXc4aDa55EfF2QbFJyQalPQrPA+A7ng+lVurPRm8H5fzNvt/QcRQ2?=
+ =?us-ascii?Q?9JInDGWJlE7M1BVE993HNLbsAOl0yE4JFTWShYgw7zsE8cjKcXr+YR4bVT4X?=
+ =?us-ascii?Q?3A4mm3YGr6zlzdECytFOiNTzeIuZzo6Zd2Pef5SHG9L1aldCV5CyXgh0mF5P?=
+ =?us-ascii?Q?cdCFRrGuMGieTEzNn8tMhsdrpF1w9cFLROw1A8oTniu861sYq4KuuNXGlFTu?=
+ =?us-ascii?Q?yHBf9SrRRBKgcNnqXRKAF9p3cVK33kE+4GtNfKuAA4yD4UC50KAD1XiloDS4?=
+ =?us-ascii?Q?KBYLpht+NoaS/09NRa/VliK4?=
+X-OriginatorOrg: spinetix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7ea60f61-9e54-41a2-96f2-08d8d9d33a62
+X-MS-Exchange-CrossTenant-AuthSource: DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2021 21:20:51.6060
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5f4034fa-ed2d-4840-a93f-acb1e9633b93
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: L0NlneL8CeVh5aW8Xa09B2cNMBp6p4scets8tYwFabs7S5qFXDtpxTadt8pFoK1SxE8b8mvA367gMUpPXEVs4SUC/VRtyv5Sgsx81HOdr7w=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR01MB5676
+Content-Type: text/plain
 
---0000000000002f070705bc2c218e
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Since PHP 7.0 the phpdbg debugger is built by default and gets shipped
+in the main php package, increasing its size by several MB; split it
+out into a php-phpdbg package, following Debian naming.
 
-Hi Rahul,
+Signed-off-by: Diego Santa Cruz <Diego.SantaCruz@spinetix.com>
+---
+ meta-oe/recipes-devtools/php/php_7.4.9.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-you probably don't have patch-fuzz in ERROR_QA and overlooked the warning
-generated by this QA check which is by default only in WARN_QA.
+diff --git a/meta-oe/recipes-devtools/php/php_7.4.9.bb b/meta-oe/recipes-devtools/php/php_7.4.9.bb
+index 25b813792..f8a8755b9 100644
+--- a/meta-oe/recipes-devtools/php/php_7.4.9.bb
++++ b/meta-oe/recipes-devtools/php/php_7.4.9.bb
+@@ -205,7 +205,7 @@ php_sysroot_preprocess () {
+ 
+ MODPHP_PACKAGE = "${@bb.utils.contains('PACKAGECONFIG', 'apache2', '${PN}-modphp', '', d)}"
+ 
+-PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 ${PN}-pear ${PN}-phar ${MODPHP_PACKAGE} ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}-opcache ${PN}"
++PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-phpdbg ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 ${PN}-pear ${PN}-phar ${MODPHP_PACKAGE} ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}-opcache ${PN}"
+ 
+ RDEPENDS_${PN} += "libgcc"
+ RDEPENDS_${PN}-pear = "${PN}"
+@@ -221,6 +221,7 @@ FILES_${PN}-dbg =+ "${bindir}/.debug \
+                     ${libexecdir}/apache2/modules/.debug"
+ FILES_${PN}-doc += "${PHP_LIBDIR}/php/doc"
+ FILES_${PN}-cli = "${bindir}/php"
++FILES_${PN}-phpdbg = "${bindir}/phpdbg"
+ FILES_${PN}-phar = "${bindir}/phar*"
+ FILES_${PN}-cgi = "${bindir}/php-cgi"
+ FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-fpm.service ${sysconfdir}/php-fpm.d/www.conf.default"
+-- 
+2.18.4
 
-Or you weren't testing it with master branch as the subject says it's for
-dunfell, but it the python version is the same in master and dunfell, so
-the warning should be triggered in both.
-
-On Thu, Feb 25, 2021 at 5:19 PM Rahul Taya <Rahul.Taya@kpit.com> wrote:
-
-> Hi Martin,
->
-> I have tested my changes before sending to you or ML i don=E2=80=99t kno=
-w why it
-> is failing now at your side.
->
-> Thanks and Regards,
-> Rahul
->
-> Get Outlook for iOS <https://aka.ms/o0ukef>
-> ------------------------------
-> *From:* Martin Jansa <martin.jansa@gmail.com>
-> *Sent:* Thursday, February 25, 2021 8:25:50 PM
-> *To:* Rahul Taya <Rahul.Taya@kpit.com>
-> *Cc:* openembedded-devel <openembedded-devel@lists.openembedded.org>
-> *Subject:* Re: [oe] [meta-python2][dunfell][PATCH] python: Add fix for
-> CVE-2019-9674
->
-> Hi,
->
-> normally you should fork meta-python2 and send a link to meta-python2
-> change I can cherry-pick, not the blob in otherwise empty repo.
->
-> But as I've said in previous reply, I've already manually applied your
-> change in meta-python2 master-next where it's now failing:
->
-> ERROR: python-native-2.7.18-r0 do_patch: Fuzz detected:
->
-> Applying patch CVE-2019-9674.patch
-> patching file Doc/library/zipfile.rst
-> Hunk #1 succeeded at 554 with fuzz 2 (offset -20 lines).
->
->
-> The context lines in the patches can be updated with devtool:
->
->     devtool modify python-native
->     devtool finish --force-patch-refresh python-native <layer_path>
->
-> Don't forget to review changes done by devtool!
->
-> ERROR: python-native-2.7.18-r0 do_patch: QA Issue: Patch log indicates t=
-hat patches do not apply cleanly. [patch-fuzz]
->
->
-> so I'll fix this as well, but next time please better test your changes =
-(nghttp2 patch also didn't apply, see my reply there, not sure if you have =
-fixed that in v2)
->
->
-> Regards,
->
->
->
->
-> On Thu, Feb 25, 2021 at 9:09 AM Rahul Taya <Rahul.Taya@kpit.com> wrote:
->
-> Hi Martin,
->
-> I removed the emoticons and uploaded the patch to my git repo pls access
-> below link:
->
-> https://github.com/Rahult9/upstream_patch/blob/main/CVE-2019-9674.patch
-> <https://apc01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fgit=
-hub.com%2FRahult9%2Fupstream_patch%2Fblob%2Fmain%2FCVE-2019-9674.patch&data=
-=
-=3D04%7C01%7CRahul.Taya%40kpit.com%7C041bfdaed11b41468d7508d8d99d7992%7C35=
-39451eb46e4a26a242ff61502855c7%7C0%7C0%7C637498617748074264%7CUnknown%7CTWF=
-pbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D=
-%7C1000&sdata=3DqndZUNjt2mXpJv6EukwdQCDEYFZkSUbV38AP%2FQrcG30%3D&reserved=
-=3D0>
->
->
-> Thanks and Regards,
-> Rahul Taya
-> ------------------------------
-> *From:* Martin Jansa <martin.jansa@gmail.com>
-> *Sent:* Thursday, February 18, 2021 10:58 PM
-> *To:* Rahul Taya <Rahul.Taya@kpit.com>
-> *Cc:* openembedded-devel <openembedded-devel@lists.openembedded.org>;
-> Khem Raj <raj.khem@gmail.com>; Nisha Parrakat <Nisha.Parrakat@kpit.com>;
-> Harpritkaur Bhandari <Harpritkaur.Bhandari@kpit.com>
-> *Subject:* Re: [oe] [meta-python2][dunfell][PATCH] python: Add fix for
-> CVE-2019-9674
->
-> "git am" doesn't like those emoticons in the .patch file..
->
-> git am ~/py2/cur/16136689*
-> error: cannot convert from 8bit to UTF-8
-> fatal: could not parse patch
->
-> either drop them or upload it to some git repo so I can cherry-pick it
-> from there.
->
-> On Thu, Feb 18, 2021 at 3:18 PM Rahul Taya <Rahul.Taya@kpit.com> wrote:
->
-> For python and python-native added patch to fix
-> CVE-2019-9674
->
-> Signed-off-by: Rahul Taya <Rahul.Taya@kpit.com>
-> ---
->  recipes-devtools/python/python.inc            |  1 +
->  .../python/python/CVE-2019-9674.patch         | 83 +++++++++++++++++++
->  2 files changed, 84 insertions(+)
->  create mode 100644 recipes-devtools/python/python/CVE-2019-9674.patch
->
-> diff --git a/recipes-devtools/python/python.inc
-> b/recipes-devtools/python/python.inc
-> index a4ba0c5..787f23e 100644
-> --- a/recipes-devtools/python/python.inc
-> +++ b/recipes-devtools/python/python.inc
-> @@ -8,6 +8,7 @@ INC_PR =3D "r1"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D203a6dbc802ee896020a47161e75=
-9642"
->
->  SRC_URI =3D "http://www.python.org/ftp/python/${PV}/Python-${PV}.tar.xz
-> <https://apc01.safelinks.protection.outlook.com/?url=3Dhttp%3A%2F%2Fwww.=
-python.org%2Fftp%2Fpython%2F%24%257BPV%257D%2FPython-%24%257BPV%257D.tar.xz=
-&data=3D04%7C01%7CRahul.Taya%40kpit.com%7C041bfdaed11b41468d7508d8d99d7992%=
-7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637498617748084260%7CUnknown%7=
-CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn=
-0%3D%7C1000&sdata=3DkHGRcUbtYiE80jPSXSA1OrX6EcDTe2PP0bpSBRFyDyo%3D&reserved=
-=
-=3D0>
-> \
-> +           file://CVE-2019-9674.patch \
->             "
->
->  SRC_URI[sha256sum] =3D
-> "b62c0e7937551d0cc02b8fd5cb0f544f9405bafc9a54d3808ed4594812edef43"
-> diff --git a/recipes-devtools/python/python/CVE-2019-9674.patch
-> b/recipes-devtools/python/python/CVE-2019-9674.patch
-> new file mode 100644
-> index 0000000..647d9da
-> --- /dev/null
-> +++ b/recipes-devtools/python/python/CVE-2019-9674.patch
-> @@ -0,0 +1,83 @@
-> +From 3ba51d587f6897a45301ce9126300c14fcd4eba2 Mon Sep 17 00:00:00 2001
-> +From: JunWei Song <sungboss2004@gmail.com>
-> +Date: Wed, 11 Sep 2019 23:04:12 +0800
-> +Subject: [PATCH] bpo-36260: Add pitfalls to zipfile module documentatio=
-n
-> + (#13378)
-> +MIME-Version: 1.0
-> +Content-Type: text/plain; charset=3DUTF-8
-> +Content-Transfer-Encoding: 8bit
-> +
-> +* bpo-36260: Add pitfalls to zipfile module documentation
-> +
-> +We saw vulnerability warning description (including zip bomb) in
-> Doc/library/xml.rst file.
-> +This gave us the idea of documentation improvement.
-> +
-> +So, we moved a little bit forward :P
-> +And the doc patch can be found (pr).
-> +
-> +* fix trailing whitespace
-> +
-> +* =F0=9F=93=9C=F0=9F=A4=96 Added by blurb_it.
-> +
-> +* Reformat text for consistency.
-> +
-> +Upstream-Status: Backport[
-> http://archive.ubuntu.com/ubuntu/pool/main/p/python3.5/python3.5_3.5.2-2=
-ubuntu0~16.04.12.debian.tar.xz
-> <https://apc01.safelinks.protection.outlook.com/?url=3Dhttp:%2F%2Farchiv=
-e.ubuntu.com%2Fubuntu%2Fpool%2Fmain%2Fp%2Fpython3.5%2Fpython3.5_3.5.2-2ubun=
-tu0~16.04.12.debian.tar.xz&data=3D04%7C01%7CRahul.Taya%40kpit.com%7C041bfda=
-ed11b41468d7508d8d99d7992%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C6374=
-98617748084260%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIi=
-LCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=3DhDH63L6ISEUTBzc6FJzKsTnt74tsv=
-DdAUijNSsrrT54%3D&reserved=3D0>
-> ]
-> +CVE: CVE-2019-9674
-> +Link:
-> http://archive.ubuntu.com/ubuntu/pool/main/p/python3.5/python3.5_3.5.2-2=
-ubuntu0~16.04.12.debian.tar.xz
-> <https://apc01.safelinks.protection.outlook.com/?url=3Dhttp:%2F%2Farchiv=
-e.ubuntu.com%2Fubuntu%2Fpool%2Fmain%2Fp%2Fpython3.5%2Fpython3.5_3.5.2-2ubun=
-tu0~16.04.12.debian.tar.xz&data=3D04%7C01%7CRahul.Taya%40kpit.com%7C041bfda=
-ed11b41468d7508d8d99d7992%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C6374=
-98617748094253%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIi=
-LCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=3DQM0y6ILLU8vDIBdLMC2vxuuJxStiY=
-C4M7ZKUIzvh2NM%3D&reserved=3D0>
-> +Comment: From the original patch skipped changes for file
-> +Misc/NEWS.d/next/Documentation/2019-06-04-09-29-00.bpo-36260.WrGuc-.rst
-> +as this file is not present in our source code.
-> +---
-> + Doc/library/zipfile.rst                       | 41 +++++++++++++++++++
-> + 1 files changed, 41 insertions(+)
-> +
-> +diff --git a/Doc/library/zipfile.rst b/Doc/library/zipfile.rst
-> +index b421ea5..2e0a91d 100644
-> +--- a/Doc/library/zipfile.rst
-> ++++ b/Doc/library/zipfile.rst
-> +@@ -574,4 +574,45 @@ Instances have the following attributes:
-> +
-> +    Size of the uncompressed file.
-> +
-> ++Decompression pitfalls
-> ++----------------------
-> ++
-> ++The extraction in zipfile module might fail due to some pitfalls liste=
-d
-> below.
-> ++
-> ++From file itself
-> ++~~~~~~~~~~~~~~~~
-> ++
-> ++Decompression may fail due to incorrect password / CRC checksum / ZIP
-> format or
-> ++unsupported compression method / decryption.
-> ++
-> ++File System limitations
-> ++~~~~~~~~~~~~~~~~~~~~~~~
-> ++
-> ++Exceeding limitations on different file systems can cause decompressio=
-n
-> failed.
-> ++Such as allowable characters in the directory entries, length of the
-> file name,
-> ++length of the pathname, size of a single file, and number of files, et=
-c.
-> ++
-> ++Resources limitations
-> ++~~~~~~~~~~~~~~~~~~~~~
-> ++
-> ++The lack of memory or disk volume would lead to decompression
-> ++failed. For example, decompression bombs (aka `ZIP bomb`_)
-> ++apply to zipfile library that can cause disk volume exhaustion.
-> ++
-> ++Interruption
-> ++~~~~~~~~~~~~
-> ++
-> ++Interruption during the decompression, such as pressing control-C or
-> killing the
-> ++decompression process may result in incomplete decompression of the
-> archive.
-> ++
-> ++Default behaviors of extraction
-> ++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> ++
-> ++Not knowing the default extraction behaviors
-> ++can cause unexpected decompression results.
-> ++For example, when extracting the same archive twice,
-> ++it overwrites files without asking.
-> ++
-> ++
-> ++.. _ZIP bomb: https://en.wikipedia.org/wiki/Zip_bomb
-> <https://apc01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fen.=
-wikipedia.org%2Fwiki%2FZip_bomb&data=3D04%7C01%7CRahul.Taya%40kpit.com%7C04=
-1bfdaed11b41468d7508d8d99d7992%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7=
-C637498617748104250%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2l=
-uMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=3D82Tp%2Fa2aYAafpAETzBuxKq=
-wKZjKo1kqGrfMLqqm3luo%3D&reserved=3D0>
-> + .. _PKZIP Application Note:
-> https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT
-> <https://apc01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fpkw=
-are.cachefly.net%2Fwebdocs%2Fcasestudies%2FAPPNOTE.TXT&data=3D04%7C01%7CRah=
-ul.Taya%40kpit.com%7C041bfdaed11b41468d7508d8d99d7992%7C3539451eb46e4a26a24=
-2ff61502855c7%7C0%7C0%7C637498617748104250%7CUnknown%7CTWFpbGZsb3d8eyJWIjoi=
-MC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=3DV=
-xtIgbD8ZIPw1x23s5QxHEeE51CEvglHimXAY6PytiQ%3D&reserved=3D0>
-> --
-> 2.17.1
->
-> This message contains information that may be privileged or confidential
-> and is the property of the KPIT Technologies Ltd. It is intended only fo=
-r
-> the person to whom it is addressed. If you are not the intended recipien=
-t,
-> you are not authorized to read, print, retain copy, disseminate,
-> distribute, or use this message or any part thereof. If you receive this
-> message in error, please notify the sender immediately and delete all
-> copies of this message. KPIT Technologies Ltd. does not accept any
-> liability for virus infected mails.
->
->=20
->
-> This message contains information that may be privileged or confidential
-> and is the property of the KPIT Technologies Ltd. It is intended only fo=
-r
-> the person to whom it is addressed. If you are not the intended recipien=
-t,
-> you are not authorized to read, print, retain copy, disseminate,
-> distribute, or use this message or any part thereof. If you receive this
-> message in error, please notify the sender immediately and delete all
-> copies of this message. KPIT Technologies Ltd. does not accept any
-> liability for virus infected mails.
->
-> This message contains information that may be privileged or confidential
-> and is the property of the KPIT Technologies Ltd. It is intended only fo=
-r
-> the person to whom it is addressed. If you are not the intended recipien=
-t,
-> you are not authorized to read, print, retain copy, disseminate,
-> distribute, or use this message or any part thereof. If you receive this
-> message in error, please notify the sender immediately and delete all
-> copies of this message. KPIT Technologies Ltd. does not accept any
-> liability for virus infected mails.
->
-
---0000000000002f070705bc2c218e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi Rahul,<div><br></div><div>you probably don&#39;t have p=
-atch-fuzz in ERROR_QA and overlooked the warning generated by this QA check=
- which is by default only in WARN_QA.</div><div><br></div><div>Or you weren=
-&#39;t testing it with master branch as the subject says it&#39;s for dunfe=
-ll, but it the python version is the same in master and dunfell, so the war=
-ning should be triggered in both.</div></div><br><div class=3D"gmail_quote"=
-><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Feb 25, 2021 at 5:19 PM Rahu=
-l Taya &lt;<a href=3D"mailto:Rahul.Taya@kpit.com">Rahul.Taya@kpit.com</a>&g=
-t; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0p=
-x 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-
-
-
-<div>
-<div>
-<div>
-<div dir=3D"ltr" style=3D"color:rgb(0,0,0);background-color:rgb(255,255,25=
-5)">
-Hi Martin,</div>
-<div dir=3D"ltr" style=3D"color:rgb(0,0,0);background-color:rgb(255,255,25=
-5)">
-<br>
-</div>
-<div dir=3D"ltr" style=3D"color:rgb(0,0,0);background-color:rgb(255,255,25=
-5)">
-I have tested my changes before sending to you or ML=C2=A0<span style=3D"f=
-ont-size:inherit">i don=E2=80=99t know why it is failing now at your side.<=
-/span></div>
-<div dir=3D"ltr" style=3D"color:rgb(0,0,0);background-color:rgb(255,255,25=
-5)">
-<span style=3D"font-size:inherit"><br>
-</span></div>
-<div dir=3D"ltr" style=3D"color:rgb(0,0,0);background-color:rgb(255,255,25=
-5)">
-Thanks and Regards,</div>
-<div dir=3D"ltr" style=3D"color:rgb(0,0,0);background-color:rgb(255,255,25=
-5)">
-Rahul</div>
-</div>
-<div><br>
-</div>
-<div>Get <a href=3D"https://aka.ms/o0ukef" target=3D"_blank">Outlook for i=
-OS</a></div>
-</div>
-<hr style=3D"display:inline-block;width:98%">
-<div id=3D"gmail-m_8535883728496035522divRplyFwdMsg" dir=3D"ltr"><font fac=
-e=3D"Calibri, sans-serif" style=3D"font-size:11pt" color=3D"#000000"><b>Fro=
-m:</b> Martin Jansa &lt;<a href=3D"mailto:martin.jansa@gmail.com" target=3D=
-"_blank">martin.jansa@gmail.com</a>&gt;<br>
-<b>Sent:</b> Thursday, February 25, 2021 8:25:50 PM<br>
-<b>To:</b> Rahul Taya &lt;<a href=3D"mailto:Rahul.Taya@kpit.com" target=3D=
-"_blank">Rahul.Taya@kpit.com</a>&gt;<br>
-<b>Cc:</b> openembedded-devel &lt;<a href=3D"mailto:openembedded-devel@lis=
-ts.openembedded.org" target=3D"_blank">openembedded-devel@lists.openembedde=
-d.org</a>&gt;<br>
-<b>Subject:</b> Re: [oe] [meta-python2][dunfell][PATCH] python: Add fix fo=
-r CVE-2019-9674</font>
-<div>=C2=A0</div>
-</div>
-<div>
-<div dir=3D"ltr">Hi,
-<div><br>
-</div>
-<div>normally you should fork meta-python2 and send a link to meta-python2=
- change I can cherry-pick, not the blob in otherwise empty repo.</div>
-<div><br>
-</div>
-<div>But as I&#39;ve said in previous reply, I&#39;ve already manually app=
-lied your change in meta-python2 master-next where it&#39;s now failing:</d=
-iv>
-<div><br>
-</div>
-<div>
-<pre style=3D"box-sizing:inherit;white-space:pre-wrap;margin-top:0px;margi=
-n-bottom:0px;color:rgb(51,51,51)">ERROR: python-native-2.7.18-r0 do_patch: =
-Fuzz detected:
-
-Applying patch CVE-2019-9674.patch
-patching file Doc/library/zipfile.rst
-Hunk #1 succeeded at 554 with fuzz 2 (offset -20 lines).
-
-
-The context lines in the patches can be updated with devtool:
-
-    devtool modify python-native
-    devtool finish --force-patch-refresh python-native &lt;layer_path&gt;
-
-Don&#39;t forget to review changes done by devtool!
-
-ERROR: python-native-2.7.18-r0 do_patch: QA Issue: Patch log indicates tha=
-t patches do not apply cleanly. [patch-fuzz]</pre>
-<pre style=3D"box-sizing:inherit;white-space:pre-wrap;margin-top:0px;margi=
-n-bottom:0px;color:rgb(51,51,51)"><br></pre>
-<pre style=3D"box-sizing:inherit;white-space:pre-wrap;margin-top:0px;margi=
-n-bottom:0px;color:rgb(51,51,51)">so I&#39;ll fix this as well, but next ti=
-me please better test your changes (nghttp2 patch also didn&#39;t apply, se=
-e my reply there, not sure if you have fixed that in v2)</pre>
-<pre style=3D"box-sizing:inherit;white-space:pre-wrap;margin-top:0px;margi=
-n-bottom:0px;color:rgb(51,51,51)"><br></pre>
-<pre style=3D"box-sizing:inherit;white-space:pre-wrap;margin-top:0px;margi=
-n-bottom:0px;color:rgb(51,51,51)">Regards,</pre>
-</div>
-<div></div>
-<div><br>
-</div>
-<div><br>
-</div>
-</div>
-<br>
-<div>
-<div dir=3D"ltr">On Thu, Feb 25, 2021 at 9:09 AM Rahul Taya &lt;<a href=3D=
-"mailto:Rahul.Taya@kpit.com" target=3D"_blank">Rahul.Taya@kpit.com</a>&gt; =
-wrote:<br>
-</div>
-<blockquote style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(20=
-4,204,204);padding-left:1ex">
-<div dir=3D"ltr">
-<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif;font-size:12p=
-t;color:rgb(0,0,0);background-color:rgb(255,255,255)">
-Hi Martin,</div>
-<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif;font-size:12p=
-t;color:rgb(0,0,0);background-color:rgb(255,255,255)">
-<br>
-</div>
-<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif;font-size:12p=
-t;color:rgb(0,0,0);background-color:rgb(255,255,255)">
-I removed the emoticons and uploaded the patch to my git repo pls access b=
-elow link:</div>
-<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif;font-size:12p=
-t;color:rgb(0,0,0);background-color:rgb(255,255,255)">
-<br>
-</div>
-<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif;font-size:12p=
-t;color:rgb(0,0,0);background-color:rgb(255,255,255)">
-<span title=3D"https://github.com/Rahult9/upstream_patch/blob/main/CVE-201=
-9-9674.patch"><span><a href=3D"https://apc01.safelinks.protection.outlook.c=
-om/?url=3Dhttps%3A%2F%2Fgithub.com%2FRahult9%2Fupstream_patch%2Fblob%2Fmain=
-%2FCVE-2019-9674.patch&amp;data=3D04%7C01%7CRahul.Taya%40kpit.com%7C041bfda=
-ed11b41468d7508d8d99d7992%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C6374=
-98617748074264%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIi=
-LCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=3DqndZUNjt2mXpJv6EukwdQCDEY=
-FZkSUbV38AP%2FQrcG30%3D&amp;reserved=3D0" id=3D"gmail-m_8535883728496035522=
-x_gmail-m_-2317439710916735757LPlnk" target=3D"_blank">https://github.com/R=
-ahult9/upstream_patch/blob/main/CVE-2019-9674.patch</a></span></span><br>
-</div>
-<div></div>
-<br>
-<div>
-<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif;font-size:12p=
-t;color:rgb(0,0,0)">
-<br>
-</div>
-<div id=3D"gmail-m_8535883728496035522x_gmail-m_-2317439710916735757Signat=
-ure">
-<div>
-<div></div>
-<div name=3D"x_divtagdefaultwrapper">
-<div><span style=3D"font-family:Calibri,Helvetica,sans-serif">Thanks and R=
-egards,</span></div>
-<div><span style=3D"font-family:Calibri,Helvetica,sans-serif">Rahul Taya</=
-span><br>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id=3D"gmail-m_8535883728496035522x_gmail-m_-2317439710916735757append=
-onsend"></div>
-<hr style=3D"display:inline-block;width:98%">
-<div id=3D"gmail-m_8535883728496035522x_gmail-m_-2317439710916735757divRpl=
-yFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" color=3D"#000000" s=
-tyle=3D"font-size:11pt"><b>From:</b> Martin Jansa &lt;<a href=3D"mailto:mar=
-tin.jansa@gmail.com" target=3D"_blank">martin.jansa@gmail.com</a>&gt;<br>
-<b>Sent:</b> Thursday, February 18, 2021 10:58 PM<br>
-<b>To:</b> Rahul Taya &lt;<a href=3D"mailto:Rahul.Taya@kpit.com" target=3D=
-"_blank">Rahul.Taya@kpit.com</a>&gt;<br>
-<b>Cc:</b> openembedded-devel &lt;<a href=3D"mailto:openembedded-devel@lis=
-ts.openembedded.org" target=3D"_blank">openembedded-devel@lists.openembedde=
-d.org</a>&gt;; Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D=
-"_blank">raj.khem@gmail.com</a>&gt;; Nisha Parrakat &lt;<a href=3D"mailto:N=
-isha.Parrakat@kpit.com" target=3D"_blank">Nisha.Parrakat@kpit.com</a>&gt;;
- Harpritkaur Bhandari &lt;<a href=3D"mailto:Harpritkaur.Bhandari@kpit.com"=
- target=3D"_blank">Harpritkaur.Bhandari@kpit.com</a>&gt;<br>
-<b>Subject:</b> Re: [oe] [meta-python2][dunfell][PATCH] python: Add fix fo=
-r CVE-2019-9674</font>
-<div>=C2=A0</div>
-</div>
-<div>
-<div dir=3D"ltr">&quot;git am&quot; doesn&#39;t like those emoticons in th=
-e .patch file..
-<div><br>
-</div>
-<div>git am ~/py2/cur/16136689*<br>
-error: cannot convert from 8bit to UTF-8<br>
-fatal: could not parse patch<br>
-</div>
-<div><br>
-</div>
-<div>either drop them or upload it to some git repo so I can cherry-pick i=
-t from there.</div>
-</div>
-<br>
-<div>
-<div dir=3D"ltr">On Thu, Feb 18, 2021 at 3:18 PM Rahul Taya &lt;<a href=3D=
-"mailto:Rahul.Taya@kpit.com" target=3D"_blank">Rahul.Taya@kpit.com</a>&gt; =
-wrote:<br>
-</div>
-<blockquote style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(20=
-4,204,204);padding-left:1ex">
-For python and python-native added patch to fix<br>
-CVE-2019-9674<br>
-<br>
-Signed-off-by: Rahul Taya &lt;<a href=3D"mailto:Rahul.Taya@kpit.com" targe=
-t=3D"_blank">Rahul.Taya@kpit.com</a>&gt;<br>
----<br>
-=C2=A0recipes-devtools/python/python.inc=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 |=C2=A0 1 +<br>
-=C2=A0.../python/python/CVE-2019-9674.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=
-=A0| 83 +++++++++++++++++++<br>
-=C2=A02 files changed, 84 insertions(+)<br>
-=C2=A0create mode 100644 recipes-devtools/python/python/CVE-2019-9674.patc=
-h<br>
-<br>
-diff --git a/recipes-devtools/python/python.inc b/recipes-devtools/python/=
-python.inc<br>
-index a4ba0c5..787f23e 100644<br>
---- a/recipes-devtools/python/python.inc<br>
-+++ b/recipes-devtools/python/python.inc<br>
-@@ -8,6 +8,7 @@ INC_PR =3D &quot;r1&quot;<br>
-=C2=A0LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D203a6dbc802ee896020a=
-47161e759642&quot;<br>
-<br>
-=C2=A0SRC_URI =3D &quot;<a href=3D"https://apc01.safelinks.protection.outl=
-ook.com/?url=3Dhttp%3A%2F%2Fwww.python.org%2Fftp%2Fpython%2F%24%257BPV%257D=
-%2FPython-%24%257BPV%257D.tar.xz&amp;data=3D04%7C01%7CRahul.Taya%40kpit.com=
-%7C041bfdaed11b41468d7508d8d99d7992%7C3539451eb46e4a26a242ff61502855c7%7C0%=
-7C0%7C637498617748084260%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIj=
-oiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=3DkHGRcUbtYiE80jP=
-SXSA1OrX6EcDTe2PP0bpSBRFyDyo%3D&amp;reserved=3D0" rel=3D"noreferrer" target=
-=
-=3D"_blank">http://www.python.org/ftp/python/${PV}/Python-${PV}.tar.xz</a>
- \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://CVE-2019-9674.patch \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
-<br>
-=C2=A0SRC_URI[sha256sum] =3D &quot;b62c0e7937551d0cc02b8fd5cb0f544f9405baf=
-c9a54d3808ed4594812edef43&quot;<br>
-diff --git a/recipes-devtools/python/python/CVE-2019-9674.patch b/recipes-=
-devtools/python/python/CVE-2019-9674.patch<br>
-new file mode 100644<br>
-index 0000000..647d9da<br>
---- /dev/null<br>
-+++ b/recipes-devtools/python/python/CVE-2019-9674.patch<br>
-@@ -0,0 +1,83 @@<br>
-+From 3ba51d587f6897a45301ce9126300c14fcd4eba2 Mon Sep 17 00:00:00 2001<br=
->
-+From: JunWei Song &lt;<a href=3D"mailto:sungboss2004@gmail.com" target=3D=
-"_blank">sungboss2004@gmail.com</a>&gt;<br>
-+Date: Wed, 11 Sep 2019 23:04:12 +0800<br>
-+Subject: [PATCH] bpo-36260: Add pitfalls to zipfile module documentation<=
-br>
-+ (#13378)<br>
-+MIME-Version: 1.0<br>
-+Content-Type: text/plain; charset=3DUTF-8<br>
-+Content-Transfer-Encoding: 8bit<br>
-+<br>
-+* bpo-36260: Add pitfalls to zipfile module documentation<br>
-+<br>
-+We saw vulnerability warning description (including zip bomb) in Doc/libr=
-ary/xml.rst file.<br>
-+This gave us the idea of documentation improvement.<br>
-+<br>
-+So, we moved a little bit forward :P<br>
-+And the doc patch can be found (pr).<br>
-+<br>
-+* fix trailing whitespace<br>
-+<br>
-+* =F0=9F=93=9C=F0=9F=A4=96 Added by blurb_it.<br>
-+<br>
-+* Reformat text for consistency.<br>
-+<br>
-+Upstream-Status: Backport[<a href=3D"https://apc01.safelinks.protection.o=
-utlook.com/?url=3Dhttp:%2F%2Farchive.ubuntu.com%2Fubuntu%2Fpool%2Fmain%2Fp%=
-2Fpython3.5%2Fpython3.5_3.5.2-2ubuntu0~16.04.12.debian.tar.xz&amp;data=3D04=
-%7C01%7CRahul.Taya%40kpit.com%7C041bfdaed11b41468d7508d8d99d7992%7C3539451e=
-b46e4a26a242ff61502855c7%7C0%7C0%7C637498617748084260%7CUnknown%7CTWFpbGZsb=
-3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C100=
-0&amp;sdata=3DhDH63L6ISEUTBzc6FJzKsTnt74tsvDdAUijNSsrrT54%3D&amp;reserved=
-=3D0" rel=3D"noreferrer" target=3D"_blank">http://archive.ubuntu.com/ubunt=
-u/pool/main/p/python3.5/python3.5_3.5.2-2ubuntu0~16.04.12.debian.tar.xz</a>=
-]<br>
-+CVE: CVE-2019-9674<br>
-+Link: <a href=3D"https://apc01.safelinks.protection.outlook.com/?url=3Dht=
-tp:%2F%2Farchive.ubuntu.com%2Fubuntu%2Fpool%2Fmain%2Fp%2Fpython3.5%2Fpython=
-3.5_3.5.2-2ubuntu0~16.04.12.debian.tar.xz&amp;data=3D04%7C01%7CRahul.Taya%4=
-0kpit.com%7C041bfdaed11b41468d7508d8d99d7992%7C3539451eb46e4a26a242ff615028=
-55c7%7C0%7C0%7C637498617748094253%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwM=
-DAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=3DQM0y6I=
-LLU8vDIBdLMC2vxuuJxStiYC4M7ZKUIzvh2NM%3D&amp;reserved=3D0" rel=3D"noreferre=
-r" target=3D"_blank">
-http://archive.ubuntu.com/ubuntu/pool/main/p/python3.5/python3.5_3.5.2-2ub=
-untu0~16.04.12.debian.tar.xz</a><br>
-+Comment: From the original patch skipped changes for file<br>
-+Misc/NEWS.d/next/Documentation/2019-06-04-09-29-00.bpo-36260.WrGuc-.rst<b=
-r>
-+as this file is not present in our source code.<br>
-+---<br>
-+ Doc/library/zipfile.rst=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 41 +++++++++++++++++++<br>
-+ 1 files changed, 41 insertions(+)<br>
-+<br>
-+diff --git a/Doc/library/zipfile.rst b/Doc/library/zipfile.rst<br>
-+index b421ea5..2e0a91d 100644<br>
-+--- a/Doc/library/zipfile.rst<br>
-++++ b/Doc/library/zipfile.rst<br>
-+@@ -574,4 +574,45 @@ Instances have the following attributes:<br>
-+<br>
-+=C2=A0 =C2=A0 Size of the uncompressed file.<br>
-+<br>
-++Decompression pitfalls<br>
-++----------------------<br>
-++<br>
-++The extraction in zipfile module might fail due to some pitfalls listed =
-below.<br>
-++<br>
-++From file itself<br>
-++~~~~~~~~~~~~~~~~<br>
-++<br>
-++Decompression may fail due to incorrect password / CRC checksum / ZIP fo=
-rmat or<br>
-++unsupported compression method / decryption.<br>
-++<br>
-++File System limitations<br>
-++~~~~~~~~~~~~~~~~~~~~~~~<br>
-++<br>
-++Exceeding limitations on different file systems can cause decompression =
-failed.<br>
-++Such as allowable characters in the directory entries, length of the fil=
-e name,<br>
-++length of the pathname, size of a single file, and number of files, etc.=
-<br>
-++<br>
-++Resources limitations<br>
-++~~~~~~~~~~~~~~~~~~~~~<br>
-++<br>
-++The lack of memory or disk volume would lead to decompression<br>
-++failed. For example, decompression bombs (aka `ZIP bomb`_)<br>
-++apply to zipfile library that can cause disk volume exhaustion.<br>
-++<br>
-++Interruption<br>
-++~~~~~~~~~~~~<br>
-++<br>
-++Interruption during the decompression, such as pressing control-C or kil=
-ling the<br>
-++decompression process may result in incomplete decompression of the arch=
-ive.<br>
-++<br>
-++Default behaviors of extraction<br>
-++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>
-++<br>
-++Not knowing the default extraction behaviors<br>
-++can cause unexpected decompression results.<br>
-++For example, when extracting the same archive twice,<br>
-++it overwrites files without asking.<br>
-++<br>
-++<br>
-++.. _ZIP bomb: <a href=3D"https://apc01.safelinks.protection.outlook.com/=
-?url=3Dhttps%3A%2F%2Fen.wikipedia.org%2Fwiki%2FZip_bomb&amp;data=3D04%7C01%=
-7CRahul.Taya%40kpit.com%7C041bfdaed11b41468d7508d8d99d7992%7C3539451eb46e4a=
-26a242ff61502855c7%7C0%7C0%7C637498617748104250%7CUnknown%7CTWFpbGZsb3d8eyJ=
-WIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;=
-sdata=3D82Tp%2Fa2aYAafpAETzBuxKqwKZjKo1kqGrfMLqqm3luo%3D&amp;reserved=3D0" =
-rel=3D"noreferrer" target=3D"_blank">
-https://en.wikipedia.org/wiki/Zip_bomb</a><br>
-+ .. _PKZIP Application Note: <a href=3D"https://apc01.safelinks.protectio=
-n.outlook.com/?url=3Dhttps%3A%2F%2Fpkware.cachefly.net%2Fwebdocs%2Fcasestud=
-ies%2FAPPNOTE.TXT&amp;data=3D04%7C01%7CRahul.Taya%40kpit.com%7C041bfdaed11b=
-41468d7508d8d99d7992%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637498617=
-748104250%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBT=
-iI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=3DVxtIgbD8ZIPw1x23s5QxHEeE51CEvg=
-lHimXAY6PytiQ%3D&amp;reserved=3D0" rel=3D"noreferrer" target=3D"_blank">
-https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT</a><br>
---<br>
-2.17.1<br>
-<br>
-This message contains information that may be privileged or confidential a=
-nd is the property of the KPIT Technologies Ltd. It is intended only for th=
-e person to whom it is addressed. If you are not the intended recipient, yo=
-u are not authorized to read, print,
- retain copy, disseminate, distribute, or use this message or any part the=
-reof. If you receive this message in error, please notify the sender immedi=
-ately and delete all copies of this message. KPIT Technologies Ltd. does no=
-t accept any liability for virus
- infected mails.<br>
-<br>
-<br>
-<br>
-</blockquote>
-</div>
-</div>
-This message contains information that may be privileged or confidential a=
-nd is the property of the KPIT Technologies Ltd. It is intended only for th=
-e person to whom it is addressed. If you are not the intended recipient, yo=
-u are not authorized to read, print,
- retain copy, disseminate, distribute, or use this message or any part the=
-reof. If you receive this message in error, please notify the sender immedi=
-ately and delete all copies of this message. KPIT Technologies Ltd. does no=
-t accept any liability for virus
- infected mails. </div>
-</blockquote>
-</div>
-</div>
-This message contains information that may be privileged or confidential a=
-nd is the property of the KPIT Technologies Ltd. It is intended only for th=
-e person to whom it is addressed. If you are not the intended recipient, yo=
-u are not authorized to read, print,
- retain copy, disseminate, distribute, or use this message or any part the=
-reof. If you receive this message in error, please notify the sender immedi=
-ately and delete all copies of this message. KPIT Technologies Ltd. does no=
-t accept any liability for virus
- infected mails.
-</div>
-
-</blockquote></div>
-
---0000000000002f070705bc2c218e--
