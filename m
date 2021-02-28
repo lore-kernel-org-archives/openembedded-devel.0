@@ -1,30 +1,30 @@
 Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web09.6904.1614522677260972316
+ by mx.groups.io with SMTP id smtpd.web10.6952.1614522701047624528
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Feb 2021 06:31:18 -0800
+ Sun, 28 Feb 2021 06:31:42 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
 X-IronPort-AV: E=Sophos;i="5.81,213,1610380800"; 
-   d="scan'208";a="104951495"
+   d="scan'208";a="104951502"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 28 Feb 2021 22:31:15 +0800
+  by heian.cn.fujitsu.com with ESMTP; 28 Feb 2021 22:31:39 +0800
 Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id E7D624CE72EE
-	for <openembedded-devel@lists.openembedded.org>; Sun, 28 Feb 2021 22:31:11 +0800 (CST)
+	by cn.fujitsu.com (Postfix) with ESMTP id 6E48D4CE77AA
+	for <openembedded-devel@lists.openembedded.org>; Sun, 28 Feb 2021 22:31:36 +0800 (CST)
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Sun, 28 Feb 2021 22:31:03 +0800
+ (TLS) id 15.0.1497.2; Sun, 28 Feb 2021 22:31:33 +0800
 From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] iwd: upgrade 1.11 -> 1.12
-Date: Sun, 28 Feb 2021 22:31:00 +0800
-Message-ID: <1614522660-90523-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] protobuf: upgrade 3.14.0 -> 3.15.2
+Date: Sun, 28 Feb 2021 22:31:29 +0800
+Message-ID: <1614522689-90579-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
 X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
  G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: E7D624CE72EE.A46CA
+X-yoursite-MailScanner-ID: 6E48D4CE77AA.A7DA1
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
@@ -32,72 +32,777 @@ Content-Type: text/plain
 
 From: Wang Mingyu <wangmy@cn.fujitsu.com>
 
-0001-crypto-Update-l_pkcs5_pbkdf2-call-after-rename.patch
-Removed since this is included in 1.12.
+0001-fix-m4-pthread-update.patch
+Removed since this is included in 3.15.2.
 
 Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- ...ate-l_pkcs5_pbkdf2-call-after-rename.patch | 31 -------------------
- .../iwd/{iwd_1.11.bb => iwd_1.12.bb}          |  3 +-
- 2 files changed, 1 insertion(+), 33 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/iwd/iwd/0001-crypto-Update-l_pkcs5_pbkdf2-call-after-rename.patch
- rename meta-oe/recipes-connectivity/iwd/{iwd_1.11.bb => iwd_1.12.bb} (92%)
+ .../protobuf/0001-fix-m4-pthread-update.patch | 731 ------------------
+ ...{protobuf_3.14.0.bb => protobuf_3.15.2.bb} |   3 +-
+ 2 files changed, 1 insertion(+), 733 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/protobuf/protobuf/0001-fix-m4-pthread-update.patch
+ rename meta-oe/recipes-devtools/protobuf/{protobuf_3.14.0.bb => protobuf_3.15.2.bb} (96%)
 
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd/0001-crypto-Update-l_pkcs5_pbkdf2-call-after-rename.patch b/meta-oe/recipes-connectivity/iwd/iwd/0001-crypto-Update-l_pkcs5_pbkdf2-call-after-rename.patch
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-fix-m4-pthread-update.patch b/meta-oe/recipes-devtools/protobuf/protobuf/0001-fix-m4-pthread-update.patch
 deleted file mode 100644
-index ab55b48b75..0000000000
---- a/meta-oe/recipes-connectivity/iwd/iwd/0001-crypto-Update-l_pkcs5_pbkdf2-call-after-rename.patch
+index 7e4aa103a2..0000000000
+--- a/meta-oe/recipes-devtools/protobuf/protobuf/0001-fix-m4-pthread-update.patch
 +++ /dev/null
-@@ -1,31 +0,0 @@
--From 9389f472bc724abb6c6a8db696efb132215783cc Mon Sep 17 00:00:00 2001
--From: Andrew Zaborowski <andrew.zaborowski@intel.com>
--Date: Thu, 24 Dec 2020 00:22:15 +0100
--Subject: [PATCH] crypto: Update l_pkcs5_pbkdf2 call after rename
+@@ -1,731 +0,0 @@
+-From 8cfb4284b4e8b2893bd30e9c764d45f288e71efb Mon Sep 17 00:00:00 2001
+-From: Adam Cozzette <acozzette@google.com>
+-Date: Fri, 20 Nov 2020 16:36:56 -0800
+-Subject: [PATCH] Updated ax_pthread.m4 to its most recent upstream version
 -
+-This should fix #8059.
+-
+-Upstream-Status: Backport [471317f03adc09a0436670c31d58264b3bef6561]
+-Signed-off-by: Adrian Herrera <adrian.herrera@arm.com>
+-Expected version: v4.0.0+
 ----
--Upstream-Status: Backport [https://git.kernel.org/pub/scm/network/wireless/iwd.git/commit/?id=9ef3d51f8724c9b9f9fd4d4fffcc730f4bb1c806]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
+- m4/ax_pthread.m4 | 614 ++++++++++++++++++++++++-----------------------
+- 1 file changed, 318 insertions(+), 296 deletions(-)
 -
-- src/crypto.c | 5 +++--
-- 1 file changed, 3 insertions(+), 2 deletions(-)
--
--diff --git a/src/crypto.c b/src/crypto.c
--index f5f8e24d..563f17ce 100644
----- a/src/crypto.c
--+++ b/src/crypto.c
--@@ -552,8 +552,9 @@ int crypto_psk_from_passphrase(const char *passphrase,
-- 	if (ssid_len == 0 || ssid_len > 32)
-- 		return -ERANGE;
+-diff --git a/m4/ax_pthread.m4 b/m4/ax_pthread.m4
+-index d218d1af73..1598d077ff 100644
+---- a/m4/ax_pthread.m4
+-+++ b/m4/ax_pthread.m4
+-@@ -1,5 +1,5 @@
+- # ===========================================================================
+--#        http://www.gnu.org/software/autoconf-archive/ax_pthread.html
+-+#        https://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- # ===========================================================================
+- #
+- # SYNOPSIS
+-@@ -55,6 +55,7 @@
+- #
+- #   Copyright (c) 2008 Steven G. Johnson <stevenj@alum.mit.edu>
+- #   Copyright (c) 2011 Daniel Richard G. <skunk@iSKUNK.ORG>
+-+#   Copyright (c) 2019 Marc Stevens <marc.stevens@cwi.nl>
+- #
+- #   This program is free software: you can redistribute it and/or modify it
+- #   under the terms of the GNU General Public License as published by the
+-@@ -67,7 +68,7 @@
+- #   Public License for more details.
+- #
+- #   You should have received a copy of the GNU General Public License along
+--#   with this program. If not, see <http://www.gnu.org/licenses/>.
+-+#   with this program. If not, see <https://www.gnu.org/licenses/>.
+- #
+- #   As a special exception, the respective Autoconf Macro's copyright owner
+- #   gives unlimited permission to copy, distribute and modify the configure
+-@@ -82,7 +83,7 @@
+- #   modified version of the Autoconf Macro, you may extend this special
+- #   exception to the GPL to apply to your modified version as well.
 - 
---	result = l_pkcs5_pbkdf2(L_CHECKSUM_SHA1, passphrase, ssid, ssid_len,
---				4096, psk, sizeof(psk));
--+	result = l_cert_pkcs5_pbkdf2(L_CHECKSUM_SHA1, passphrase,
--+					ssid, ssid_len, 4096,
--+					psk, sizeof(psk));
-- 	if (!result)
-- 		return -ENOKEY;
+--#serial 22
+-+#serial 27
 - 
---- 
--2.30.0
--
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.11.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.12.bb
-similarity index 92%
-rename from meta-oe/recipes-connectivity/iwd/iwd_1.11.bb
-rename to meta-oe/recipes-connectivity/iwd/iwd_1.12.bb
-index 2205b72fff..ccdc65ac6c 100644
---- a/meta-oe/recipes-connectivity/iwd/iwd_1.11.bb
-+++ b/meta-oe/recipes-connectivity/iwd/iwd_1.12.bb
-@@ -6,9 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
- DEPENDS = "ell"
+- AU_ALIAS([ACX_PTHREAD], [AX_PTHREAD])
+- AC_DEFUN([AX_PTHREAD], [
+-@@ -100,22 +101,22 @@ ax_pthread_ok=no
+- # etcetera environment variables, and if threads linking works using
+- # them:
+- if test "x$PTHREAD_CFLAGS$PTHREAD_LIBS" != "x"; then
+--	ax_pthread_save_CC="$CC"
+--	ax_pthread_save_CFLAGS="$CFLAGS"
+--	ax_pthread_save_LIBS="$LIBS"
+--	AS_IF([test "x$PTHREAD_CC" != "x"], [CC="$PTHREAD_CC"])
+--	CFLAGS="$CFLAGS $PTHREAD_CFLAGS"
+--	LIBS="$PTHREAD_LIBS $LIBS"
+--	AC_MSG_CHECKING([for pthread_join using $CC $PTHREAD_CFLAGS $PTHREAD_LIBS])
+--	AC_LINK_IFELSE([AC_LANG_CALL([], [pthread_join])], [ax_pthread_ok=yes])
+--	AC_MSG_RESULT([$ax_pthread_ok])
+--	if test "x$ax_pthread_ok" = "xno"; then
+--		PTHREAD_LIBS=""
+--		PTHREAD_CFLAGS=""
+--	fi
+--	CC="$ax_pthread_save_CC"
+--	CFLAGS="$ax_pthread_save_CFLAGS"
+--	LIBS="$ax_pthread_save_LIBS"
+-+        ax_pthread_save_CC="$CC"
+-+        ax_pthread_save_CFLAGS="$CFLAGS"
+-+        ax_pthread_save_LIBS="$LIBS"
+-+        AS_IF([test "x$PTHREAD_CC" != "x"], [CC="$PTHREAD_CC"])
+-+        CFLAGS="$CFLAGS $PTHREAD_CFLAGS"
+-+        LIBS="$PTHREAD_LIBS $LIBS"
+-+        AC_MSG_CHECKING([for pthread_join using $CC $PTHREAD_CFLAGS $PTHREAD_LIBS])
+-+        AC_LINK_IFELSE([AC_LANG_CALL([], [pthread_join])], [ax_pthread_ok=yes])
+-+        AC_MSG_RESULT([$ax_pthread_ok])
+-+        if test "x$ax_pthread_ok" = "xno"; then
+-+                PTHREAD_LIBS=""
+-+                PTHREAD_CFLAGS=""
+-+        fi
+-+        CC="$ax_pthread_save_CC"
+-+        CFLAGS="$ax_pthread_save_CFLAGS"
+-+        LIBS="$ax_pthread_save_LIBS"
+- fi
+- 
+- # We must check for the threads library under a number of different
+-@@ -123,10 +124,12 @@ fi
+- # (e.g. DEC) have both -lpthread and -lpthreads, where one of the
+- # libraries is broken (non-POSIX).
+- 
+--# Create a list of thread flags to try.  Items starting with a "-" are
+--# C compiler flags, and other items are library names, except for "none"
+--# which indicates that we try without any flags at all, and "pthread-config"
+--# which is a program returning the flags for the Pth emulation library.
+-+# Create a list of thread flags to try. Items with a "," contain both
+-+# C compiler flags (before ",") and linker flags (after ","). Other items
+-+# starting with a "-" are C compiler flags, and remaining items are
+-+# library names, except for "none" which indicates that we try without
+-+# any flags at all, and "pthread-config" which is a program returning
+-+# the flags for the Pth emulation library.
+- 
+- ax_pthread_flags="pthreads none -Kthread -pthread -pthreads -mthreads pthread --thread-safe -mt pthread-config"
+- 
+-@@ -152,319 +155,338 @@ ax_pthread_flags="pthreads none -Kthread -pthread -pthreads -mthreads pthread --
+- 
+- case $host_os in
+- 
+--	freebsd*)
+-+        freebsd*)
+- 
+--	# -kthread: FreeBSD kernel threads (preferred to -pthread since SMP-able)
+--	# lthread: LinuxThreads port on FreeBSD (also preferred to -pthread)
+-+        # -kthread: FreeBSD kernel threads (preferred to -pthread since SMP-able)
+-+        # lthread: LinuxThreads port on FreeBSD (also preferred to -pthread)
+- 
+--	ax_pthread_flags="-kthread lthread $ax_pthread_flags"
+--	;;
+-+        ax_pthread_flags="-kthread lthread $ax_pthread_flags"
+-+        ;;
+- 
+--	hpux*)
+-+        hpux*)
+- 
+--	# From the cc(1) man page: "[-mt] Sets various -D flags to enable
+--	# multi-threading and also sets -lpthread."
+-+        # From the cc(1) man page: "[-mt] Sets various -D flags to enable
+-+        # multi-threading and also sets -lpthread."
+- 
+--	ax_pthread_flags="-mt -pthread pthread $ax_pthread_flags"
+--	;;
+-+        ax_pthread_flags="-mt -pthread pthread $ax_pthread_flags"
+-+        ;;
+- 
+--	openedition*)
+-+        openedition*)
+- 
+--	# IBM z/OS requires a feature-test macro to be defined in order to
+--	# enable POSIX threads at all, so give the user a hint if this is
+--	# not set. (We don't define these ourselves, as they can affect
+--	# other portions of the system API in unpredictable ways.)
+-+        # IBM z/OS requires a feature-test macro to be defined in order to
+-+        # enable POSIX threads at all, so give the user a hint if this is
+-+        # not set. (We don't define these ourselves, as they can affect
+-+        # other portions of the system API in unpredictable ways.)
+- 
+--	AC_EGREP_CPP([AX_PTHREAD_ZOS_MISSING],
+--	    [
+--#	     if !defined(_OPEN_THREADS) && !defined(_UNIX03_THREADS)
+--	     AX_PTHREAD_ZOS_MISSING
+--#	     endif
+--	    ],
+--	    [AC_MSG_WARN([IBM z/OS requires -D_OPEN_THREADS or -D_UNIX03_THREADS to enable pthreads support.])])
+--	;;
+-+        AC_EGREP_CPP([AX_PTHREAD_ZOS_MISSING],
+-+            [
+-+#            if !defined(_OPEN_THREADS) && !defined(_UNIX03_THREADS)
+-+             AX_PTHREAD_ZOS_MISSING
+-+#            endif
+-+            ],
+-+            [AC_MSG_WARN([IBM z/OS requires -D_OPEN_THREADS or -D_UNIX03_THREADS to enable pthreads support.])])
+-+        ;;
+- 
+--	solaris*)
+-+        solaris*)
+- 
+--	# On Solaris (at least, for some versions), libc contains stubbed
+--	# (non-functional) versions of the pthreads routines, so link-based
+--	# tests will erroneously succeed. (N.B.: The stubs are missing
+--	# pthread_cleanup_push, or rather a function called by this macro,
+--	# so we could check for that, but who knows whether they'll stub
+--	# that too in a future libc.)  So we'll check first for the
+--	# standard Solaris way of linking pthreads (-mt -lpthread).
+-+        # On Solaris (at least, for some versions), libc contains stubbed
+-+        # (non-functional) versions of the pthreads routines, so link-based
+-+        # tests will erroneously succeed. (N.B.: The stubs are missing
+-+        # pthread_cleanup_push, or rather a function called by this macro,
+-+        # so we could check for that, but who knows whether they'll stub
+-+        # that too in a future libc.)  So we'll check first for the
+-+        # standard Solaris way of linking pthreads (-mt -lpthread).
+- 
+--	ax_pthread_flags="-mt,pthread pthread $ax_pthread_flags"
+--	;;
+-+        ax_pthread_flags="-mt,-lpthread pthread $ax_pthread_flags"
+-+        ;;
+- esac
+- 
+-+# Are we compiling with Clang?
+-+
+-+AC_CACHE_CHECK([whether $CC is Clang],
+-+    [ax_cv_PTHREAD_CLANG],
+-+    [ax_cv_PTHREAD_CLANG=no
+-+     # Note that Autoconf sets GCC=yes for Clang as well as GCC
+-+     if test "x$GCC" = "xyes"; then
+-+        AC_EGREP_CPP([AX_PTHREAD_CC_IS_CLANG],
+-+            [/* Note: Clang 2.7 lacks __clang_[a-z]+__ */
+-+#            if defined(__clang__) && defined(__llvm__)
+-+             AX_PTHREAD_CC_IS_CLANG
+-+#            endif
+-+            ],
+-+            [ax_cv_PTHREAD_CLANG=yes])
+-+     fi
+-+    ])
+-+ax_pthread_clang="$ax_cv_PTHREAD_CLANG"
+-+
+-+
+- # GCC generally uses -pthread, or -pthreads on some platforms (e.g. SPARC)
+- 
+-+# Note that for GCC and Clang -pthread generally implies -lpthread,
+-+# except when -nostdlib is passed.
+-+# This is problematic using libtool to build C++ shared libraries with pthread:
+-+# [1] https://gcc.gnu.org/bugzilla/show_bug.cgi?id=25460
+-+# [2] https://bugzilla.redhat.com/show_bug.cgi?id=661333
+-+# [3] https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=468555
+-+# To solve this, first try -pthread together with -lpthread for GCC
+-+
+- AS_IF([test "x$GCC" = "xyes"],
+--      [ax_pthread_flags="-pthread -pthreads $ax_pthread_flags"])
+-+      [ax_pthread_flags="-pthread,-lpthread -pthread -pthreads $ax_pthread_flags"])
+-+
+-+# Clang takes -pthread (never supported any other flag), but we'll try with -lpthread first
+-+
+-+AS_IF([test "x$ax_pthread_clang" = "xyes"],
+-+      [ax_pthread_flags="-pthread,-lpthread -pthread"])
+-+
+- 
+- # The presence of a feature test macro requesting re-entrant function
+- # definitions is, on some systems, a strong hint that pthreads support is
+- # correctly enabled
+- 
+- case $host_os in
+--	darwin* | hpux* | linux* | osf* | solaris*)
+--	ax_pthread_check_macro="_REENTRANT"
+--	;;
+-+        darwin* | hpux* | linux* | osf* | solaris*)
+-+        ax_pthread_check_macro="_REENTRANT"
+-+        ;;
+- 
+--	aix* | freebsd*)
+--	ax_pthread_check_macro="_THREAD_SAFE"
+--	;;
+-+        aix*)
+-+        ax_pthread_check_macro="_THREAD_SAFE"
+-+        ;;
+- 
+--	*)
+--	ax_pthread_check_macro="--"
+--	;;
+-+        *)
+-+        ax_pthread_check_macro="--"
+-+        ;;
+- esac
+- AS_IF([test "x$ax_pthread_check_macro" = "x--"],
+-       [ax_pthread_check_cond=0],
+-       [ax_pthread_check_cond="!defined($ax_pthread_check_macro)"])
+- 
+--# Are we compiling with Clang?
+- 
+--AC_CACHE_CHECK([whether $CC is Clang],
+--    [ax_cv_PTHREAD_CLANG],
+--    [ax_cv_PTHREAD_CLANG=no
+--     # Note that Autoconf sets GCC=yes for Clang as well as GCC
+--     if test "x$GCC" = "xyes"; then
+--	AC_EGREP_CPP([AX_PTHREAD_CC_IS_CLANG],
+--	    [/* Note: Clang 2.7 lacks __clang_[a-z]+__ */
+--#	     if defined(__clang__) && defined(__llvm__)
+--	     AX_PTHREAD_CC_IS_CLANG
+--#	     endif
+--	    ],
+--	    [ax_cv_PTHREAD_CLANG=yes])
+--     fi
+--    ])
+--ax_pthread_clang="$ax_cv_PTHREAD_CLANG"
+-+if test "x$ax_pthread_ok" = "xno"; then
+-+for ax_pthread_try_flag in $ax_pthread_flags; do
+-+
+-+        case $ax_pthread_try_flag in
+-+                none)
+-+                AC_MSG_CHECKING([whether pthreads work without any flags])
+-+                ;;
+-+
+-+                *,*)
+-+                PTHREAD_CFLAGS=`echo $ax_pthread_try_flag | sed "s/^\(.*\),\(.*\)$/\1/"`
+-+                PTHREAD_LIBS=`echo $ax_pthread_try_flag | sed "s/^\(.*\),\(.*\)$/\2/"`
+-+                AC_MSG_CHECKING([whether pthreads work with "$PTHREAD_CFLAGS" and "$PTHREAD_LIBS"])
+-+                ;;
+-+
+-+                -*)
+-+                AC_MSG_CHECKING([whether pthreads work with $ax_pthread_try_flag])
+-+                PTHREAD_CFLAGS="$ax_pthread_try_flag"
+-+                ;;
+-+
+-+                pthread-config)
+-+                AC_CHECK_PROG([ax_pthread_config], [pthread-config], [yes], [no])
+-+                AS_IF([test "x$ax_pthread_config" = "xno"], [continue])
+-+                PTHREAD_CFLAGS="`pthread-config --cflags`"
+-+                PTHREAD_LIBS="`pthread-config --ldflags` `pthread-config --libs`"
+-+                ;;
+-+
+-+                *)
+-+                AC_MSG_CHECKING([for the pthreads library -l$ax_pthread_try_flag])
+-+                PTHREAD_LIBS="-l$ax_pthread_try_flag"
+-+                ;;
+-+        esac
+-+
+-+        ax_pthread_save_CFLAGS="$CFLAGS"
+-+        ax_pthread_save_LIBS="$LIBS"
+-+        CFLAGS="$CFLAGS $PTHREAD_CFLAGS"
+-+        LIBS="$PTHREAD_LIBS $LIBS"
+-+
+-+        # Check for various functions.  We must include pthread.h,
+-+        # since some functions may be macros.  (On the Sequent, we
+-+        # need a special flag -Kthread to make this header compile.)
+-+        # We check for pthread_join because it is in -lpthread on IRIX
+-+        # while pthread_create is in libc.  We check for pthread_attr_init
+-+        # due to DEC craziness with -lpthreads.  We check for
+-+        # pthread_cleanup_push because it is one of the few pthread
+-+        # functions on Solaris that doesn't have a non-functional libc stub.
+-+        # We try pthread_create on general principles.
+-+
+-+        AC_LINK_IFELSE([AC_LANG_PROGRAM([#include <pthread.h>
+-+#                       if $ax_pthread_check_cond
+-+#                        error "$ax_pthread_check_macro must be defined"
+-+#                       endif
+-+                        static void *some_global = NULL;
+-+                        static void routine(void *a)
+-+                          {
+-+                             /* To avoid any unused-parameter or
+-+                                unused-but-set-parameter warning.  */
+-+                             some_global = a;
+-+                          }
+-+                        static void *start_routine(void *a) { return a; }],
+-+                       [pthread_t th; pthread_attr_t attr;
+-+                        pthread_create(&th, 0, start_routine, 0);
+-+                        pthread_join(th, 0);
+-+                        pthread_attr_init(&attr);
+-+                        pthread_cleanup_push(routine, 0);
+-+                        pthread_cleanup_pop(0) /* ; */])],
+-+            [ax_pthread_ok=yes],
+-+            [])
+-+
+-+        CFLAGS="$ax_pthread_save_CFLAGS"
+-+        LIBS="$ax_pthread_save_LIBS"
+-+
+-+        AC_MSG_RESULT([$ax_pthread_ok])
+-+        AS_IF([test "x$ax_pthread_ok" = "xyes"], [break])
+-+
+-+        PTHREAD_LIBS=""
+-+        PTHREAD_CFLAGS=""
+-+done
+-+fi
+- 
+--ax_pthread_clang_warning=no
+- 
+- # Clang needs special handling, because older versions handle the -pthread
+- # option in a rather... idiosyncratic way
+- 
+- if test "x$ax_pthread_clang" = "xyes"; then
+- 
+--	# Clang takes -pthread; it has never supported any other flag
+--
+--	# (Note 1: This will need to be revisited if a system that Clang
+--	# supports has POSIX threads in a separate library.  This tends not
+--	# to be the way of modern systems, but it's conceivable.)
+--
+--	# (Note 2: On some systems, notably Darwin, -pthread is not needed
+--	# to get POSIX threads support; the API is always present and
+--	# active.  We could reasonably leave PTHREAD_CFLAGS empty.  But
+--	# -pthread does define _REENTRANT, and while the Darwin headers
+--	# ignore this macro, third-party headers might not.)
+--
+--	PTHREAD_CFLAGS="-pthread"
+--	PTHREAD_LIBS=
+--
+--	ax_pthread_ok=yes
+--
+--	# However, older versions of Clang make a point of warning the user
+--	# that, in an invocation where only linking and no compilation is
+--	# taking place, the -pthread option has no effect ("argument unused
+--	# during compilation").  They expect -pthread to be passed in only
+--	# when source code is being compiled.
+--	#
+--	# Problem is, this is at odds with the way Automake and most other
+--	# C build frameworks function, which is that the same flags used in
+--	# compilation (CFLAGS) are also used in linking.  Many systems
+--	# supported by AX_PTHREAD require exactly this for POSIX threads
+--	# support, and in fact it is often not straightforward to specify a
+--	# flag that is used only in the compilation phase and not in
+--	# linking.  Such a scenario is extremely rare in practice.
+--	#
+--	# Even though use of the -pthread flag in linking would only print
+--	# a warning, this can be a nuisance for well-run software projects
+--	# that build with -Werror.  So if the active version of Clang has
+--	# this misfeature, we search for an option to squash it.
+--
+--	AC_CACHE_CHECK([whether Clang needs flag to prevent "argument unused" warning when linking with -pthread],
+--	    [ax_cv_PTHREAD_CLANG_NO_WARN_FLAG],
+--	    [ax_cv_PTHREAD_CLANG_NO_WARN_FLAG=unknown
+--	     # Create an alternate version of $ac_link that compiles and
+--	     # links in two steps (.c -> .o, .o -> exe) instead of one
+--	     # (.c -> exe), because the warning occurs only in the second
+--	     # step
+--	     ax_pthread_save_ac_link="$ac_link"
+--	     ax_pthread_sed='s/conftest\.\$ac_ext/conftest.$ac_objext/g'
+--	     ax_pthread_link_step=`$as_echo "$ac_link" | sed "$ax_pthread_sed"`
+--	     ax_pthread_2step_ac_link="($ac_compile) && (echo ==== >&5) && ($ax_pthread_link_step)"
+--	     ax_pthread_save_CFLAGS="$CFLAGS"
+--	     for ax_pthread_try in '' -Qunused-arguments -Wno-unused-command-line-argument unknown; do
+--		AS_IF([test "x$ax_pthread_try" = "xunknown"], [break])
+--		CFLAGS="-Werror -Wunknown-warning-option $ax_pthread_try -pthread $ax_pthread_save_CFLAGS"
+--		ac_link="$ax_pthread_save_ac_link"
+--		AC_LINK_IFELSE([AC_LANG_SOURCE([[int main(void){return 0;}]])],
+--		    [ac_link="$ax_pthread_2step_ac_link"
+--		     AC_LINK_IFELSE([AC_LANG_SOURCE([[int main(void){return 0;}]])],
+--			 [break])
+--		    ])
+--	     done
+--	     ac_link="$ax_pthread_save_ac_link"
+--	     CFLAGS="$ax_pthread_save_CFLAGS"
+--	     AS_IF([test "x$ax_pthread_try" = "x"], [ax_pthread_try=no])
+--	     ax_cv_PTHREAD_CLANG_NO_WARN_FLAG="$ax_pthread_try"
+--	    ])
+--
+--	case "$ax_cv_PTHREAD_CLANG_NO_WARN_FLAG" in
+--		no | unknown) ;;
+--		*) PTHREAD_CFLAGS="$ax_cv_PTHREAD_CLANG_NO_WARN_FLAG $PTHREAD_CFLAGS" ;;
+--	esac
+-+        # Clang takes -pthread; it has never supported any other flag
+-+
+-+        # (Note 1: This will need to be revisited if a system that Clang
+-+        # supports has POSIX threads in a separate library.  This tends not
+-+        # to be the way of modern systems, but it's conceivable.)
+-+
+-+        # (Note 2: On some systems, notably Darwin, -pthread is not needed
+-+        # to get POSIX threads support; the API is always present and
+-+        # active.  We could reasonably leave PTHREAD_CFLAGS empty.  But
+-+        # -pthread does define _REENTRANT, and while the Darwin headers
+-+        # ignore this macro, third-party headers might not.)
+-+
+-+        # However, older versions of Clang make a point of warning the user
+-+        # that, in an invocation where only linking and no compilation is
+-+        # taking place, the -pthread option has no effect ("argument unused
+-+        # during compilation").  They expect -pthread to be passed in only
+-+        # when source code is being compiled.
+-+        #
+-+        # Problem is, this is at odds with the way Automake and most other
+-+        # C build frameworks function, which is that the same flags used in
+-+        # compilation (CFLAGS) are also used in linking.  Many systems
+-+        # supported by AX_PTHREAD require exactly this for POSIX threads
+-+        # support, and in fact it is often not straightforward to specify a
+-+        # flag that is used only in the compilation phase and not in
+-+        # linking.  Such a scenario is extremely rare in practice.
+-+        #
+-+        # Even though use of the -pthread flag in linking would only print
+-+        # a warning, this can be a nuisance for well-run software projects
+-+        # that build with -Werror.  So if the active version of Clang has
+-+        # this misfeature, we search for an option to squash it.
+-+
+-+        AC_CACHE_CHECK([whether Clang needs flag to prevent "argument unused" warning when linking with -pthread],
+-+            [ax_cv_PTHREAD_CLANG_NO_WARN_FLAG],
+-+            [ax_cv_PTHREAD_CLANG_NO_WARN_FLAG=unknown
+-+             # Create an alternate version of $ac_link that compiles and
+-+             # links in two steps (.c -> .o, .o -> exe) instead of one
+-+             # (.c -> exe), because the warning occurs only in the second
+-+             # step
+-+             ax_pthread_save_ac_link="$ac_link"
+-+             ax_pthread_sed='s/conftest\.\$ac_ext/conftest.$ac_objext/g'
+-+             ax_pthread_link_step=`$as_echo "$ac_link" | sed "$ax_pthread_sed"`
+-+             ax_pthread_2step_ac_link="($ac_compile) && (echo ==== >&5) && ($ax_pthread_link_step)"
+-+             ax_pthread_save_CFLAGS="$CFLAGS"
+-+             for ax_pthread_try in '' -Qunused-arguments -Wno-unused-command-line-argument unknown; do
+-+                AS_IF([test "x$ax_pthread_try" = "xunknown"], [break])
+-+                CFLAGS="-Werror -Wunknown-warning-option $ax_pthread_try -pthread $ax_pthread_save_CFLAGS"
+-+                ac_link="$ax_pthread_save_ac_link"
+-+                AC_LINK_IFELSE([AC_LANG_SOURCE([[int main(void){return 0;}]])],
+-+                    [ac_link="$ax_pthread_2step_ac_link"
+-+                     AC_LINK_IFELSE([AC_LANG_SOURCE([[int main(void){return 0;}]])],
+-+                         [break])
+-+                    ])
+-+             done
+-+             ac_link="$ax_pthread_save_ac_link"
+-+             CFLAGS="$ax_pthread_save_CFLAGS"
+-+             AS_IF([test "x$ax_pthread_try" = "x"], [ax_pthread_try=no])
+-+             ax_cv_PTHREAD_CLANG_NO_WARN_FLAG="$ax_pthread_try"
+-+            ])
+-+
+-+        case "$ax_cv_PTHREAD_CLANG_NO_WARN_FLAG" in
+-+                no | unknown) ;;
+-+                *) PTHREAD_CFLAGS="$ax_cv_PTHREAD_CLANG_NO_WARN_FLAG $PTHREAD_CFLAGS" ;;
+-+        esac
+- 
+- fi # $ax_pthread_clang = yes
+- 
+--if test "x$ax_pthread_ok" = "xno"; then
+--for ax_pthread_try_flag in $ax_pthread_flags; do
+- 
+--	case $ax_pthread_try_flag in
+--		none)
+--		AC_MSG_CHECKING([whether pthreads work without any flags])
+--		;;
+--
+--		-mt,pthread)
+--		AC_MSG_CHECKING([whether pthreads work with -mt -lpthread])
+--		PTHREAD_CFLAGS="-mt"
+--		PTHREAD_LIBS="-lpthread"
+--		;;
+--
+--		-*)
+--		AC_MSG_CHECKING([whether pthreads work with $ax_pthread_try_flag])
+--		PTHREAD_CFLAGS="$ax_pthread_try_flag"
+--		;;
+--
+--		pthread-config)
+--		AC_CHECK_PROG([ax_pthread_config], [pthread-config], [yes], [no])
+--		AS_IF([test "x$ax_pthread_config" = "xno"], [continue])
+--		PTHREAD_CFLAGS="`pthread-config --cflags`"
+--		PTHREAD_LIBS="`pthread-config --ldflags` `pthread-config --libs`"
+--		;;
+--
+--		*)
+--		AC_MSG_CHECKING([for the pthreads library -l$ax_pthread_try_flag])
+--		PTHREAD_LIBS="-l$ax_pthread_try_flag"
+--		;;
+--	esac
+--
+--	ax_pthread_save_CFLAGS="$CFLAGS"
+--	ax_pthread_save_LIBS="$LIBS"
+--	CFLAGS="$CFLAGS $PTHREAD_CFLAGS"
+--	LIBS="$PTHREAD_LIBS $LIBS"
+--
+--	# Check for various functions.  We must include pthread.h,
+--	# since some functions may be macros.  (On the Sequent, we
+--	# need a special flag -Kthread to make this header compile.)
+--	# We check for pthread_join because it is in -lpthread on IRIX
+--	# while pthread_create is in libc.  We check for pthread_attr_init
+--	# due to DEC craziness with -lpthreads.  We check for
+--	# pthread_cleanup_push because it is one of the few pthread
+--	# functions on Solaris that doesn't have a non-functional libc stub.
+--	# We try pthread_create on general principles.
+--
+--	AC_LINK_IFELSE([AC_LANG_PROGRAM([#include <pthread.h>
+--#			if $ax_pthread_check_cond
+--#			 error "$ax_pthread_check_macro must be defined"
+--#			endif
+--			static void routine(void *a) { a = 0; }
+--			static void *start_routine(void *a) { return a; }],
+--		       [pthread_t th; pthread_attr_t attr;
+--			pthread_create(&th, 0, start_routine, 0);
+--			pthread_join(th, 0);
+--			pthread_attr_init(&attr);
+--			pthread_cleanup_push(routine, 0);
+--			pthread_cleanup_pop(0) /* ; */])],
+--	    [ax_pthread_ok=yes],
+--	    [])
+--
+--	CFLAGS="$ax_pthread_save_CFLAGS"
+--	LIBS="$ax_pthread_save_LIBS"
+--
+--	AC_MSG_RESULT([$ax_pthread_ok])
+--	AS_IF([test "x$ax_pthread_ok" = "xyes"], [break])
+--
+--	PTHREAD_LIBS=""
+--	PTHREAD_CFLAGS=""
+--done
+--fi
+- 
+- # Various other checks:
+- if test "x$ax_pthread_ok" = "xyes"; then
+--	ax_pthread_save_CFLAGS="$CFLAGS"
+--	ax_pthread_save_LIBS="$LIBS"
+--	CFLAGS="$CFLAGS $PTHREAD_CFLAGS"
+--	LIBS="$PTHREAD_LIBS $LIBS"
+--
+--	# Detect AIX lossage: JOINABLE attribute is called UNDETACHED.
+--	AC_CACHE_CHECK([for joinable pthread attribute],
+--	    [ax_cv_PTHREAD_JOINABLE_ATTR],
+--	    [ax_cv_PTHREAD_JOINABLE_ATTR=unknown
+--	     for ax_pthread_attr in PTHREAD_CREATE_JOINABLE PTHREAD_CREATE_UNDETACHED; do
+--		 AC_LINK_IFELSE([AC_LANG_PROGRAM([#include <pthread.h>],
+--						 [int attr = $ax_pthread_attr; return attr /* ; */])],
+--				[ax_cv_PTHREAD_JOINABLE_ATTR=$ax_pthread_attr; break],
+--				[])
+--	     done
+--	    ])
+--	AS_IF([test "x$ax_cv_PTHREAD_JOINABLE_ATTR" != "xunknown" && \
+--	       test "x$ax_cv_PTHREAD_JOINABLE_ATTR" != "xPTHREAD_CREATE_JOINABLE" && \
+--	       test "x$ax_pthread_joinable_attr_defined" != "xyes"],
+--	      [AC_DEFINE_UNQUOTED([PTHREAD_CREATE_JOINABLE],
+--				  [$ax_cv_PTHREAD_JOINABLE_ATTR],
+--				  [Define to necessary symbol if this constant
+--				   uses a non-standard name on your system.])
+--	       ax_pthread_joinable_attr_defined=yes
+--	      ])
+--
+--	AC_CACHE_CHECK([whether more special flags are required for pthreads],
+--	    [ax_cv_PTHREAD_SPECIAL_FLAGS],
+--	    [ax_cv_PTHREAD_SPECIAL_FLAGS=no
+--	     case $host_os in
+--	     solaris*)
+--	     ax_cv_PTHREAD_SPECIAL_FLAGS="-D_POSIX_PTHREAD_SEMANTICS"
+--	     ;;
+--	     esac
+--	    ])
+--	AS_IF([test "x$ax_cv_PTHREAD_SPECIAL_FLAGS" != "xno" && \
+--	       test "x$ax_pthread_special_flags_added" != "xyes"],
+--	      [PTHREAD_CFLAGS="$ax_cv_PTHREAD_SPECIAL_FLAGS $PTHREAD_CFLAGS"
+--	       ax_pthread_special_flags_added=yes])
+--
+--	AC_CACHE_CHECK([for PTHREAD_PRIO_INHERIT],
+--	    [ax_cv_PTHREAD_PRIO_INHERIT],
+--	    [AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <pthread.h>]],
+--					     [[int i = PTHREAD_PRIO_INHERIT;]])],
+--			    [ax_cv_PTHREAD_PRIO_INHERIT=yes],
+--			    [ax_cv_PTHREAD_PRIO_INHERIT=no])
+--	    ])
+--	AS_IF([test "x$ax_cv_PTHREAD_PRIO_INHERIT" = "xyes" && \
+--	       test "x$ax_pthread_prio_inherit_defined" != "xyes"],
+--	      [AC_DEFINE([HAVE_PTHREAD_PRIO_INHERIT], [1], [Have PTHREAD_PRIO_INHERIT.])
+--	       ax_pthread_prio_inherit_defined=yes
+--	      ])
+--
+--	CFLAGS="$ax_pthread_save_CFLAGS"
+--	LIBS="$ax_pthread_save_LIBS"
+--
+--	# More AIX lossage: compile with *_r variant
+--	if test "x$GCC" != "xyes"; then
+--	    case $host_os in
+--		aix*)
+--		AS_CASE(["x/$CC"],
+--		    [x*/c89|x*/c89_128|x*/c99|x*/c99_128|x*/cc|x*/cc128|x*/xlc|x*/xlc_v6|x*/xlc128|x*/xlc128_v6],
+--		    [#handle absolute path differently from PATH based program lookup
+--		     AS_CASE(["x$CC"],
+--			 [x/*],
+--			 [AS_IF([AS_EXECUTABLE_P([${CC}_r])],[PTHREAD_CC="${CC}_r"])],
+--			 [AC_CHECK_PROGS([PTHREAD_CC],[${CC}_r],[$CC])])])
+--		;;
+--	    esac
+--	fi
+-+        ax_pthread_save_CFLAGS="$CFLAGS"
+-+        ax_pthread_save_LIBS="$LIBS"
+-+        CFLAGS="$CFLAGS $PTHREAD_CFLAGS"
+-+        LIBS="$PTHREAD_LIBS $LIBS"
+-+
+-+        # Detect AIX lossage: JOINABLE attribute is called UNDETACHED.
+-+        AC_CACHE_CHECK([for joinable pthread attribute],
+-+            [ax_cv_PTHREAD_JOINABLE_ATTR],
+-+            [ax_cv_PTHREAD_JOINABLE_ATTR=unknown
+-+             for ax_pthread_attr in PTHREAD_CREATE_JOINABLE PTHREAD_CREATE_UNDETACHED; do
+-+                 AC_LINK_IFELSE([AC_LANG_PROGRAM([#include <pthread.h>],
+-+                                                 [int attr = $ax_pthread_attr; return attr /* ; */])],
+-+                                [ax_cv_PTHREAD_JOINABLE_ATTR=$ax_pthread_attr; break],
+-+                                [])
+-+             done
+-+            ])
+-+        AS_IF([test "x$ax_cv_PTHREAD_JOINABLE_ATTR" != "xunknown" && \
+-+               test "x$ax_cv_PTHREAD_JOINABLE_ATTR" != "xPTHREAD_CREATE_JOINABLE" && \
+-+               test "x$ax_pthread_joinable_attr_defined" != "xyes"],
+-+              [AC_DEFINE_UNQUOTED([PTHREAD_CREATE_JOINABLE],
+-+                                  [$ax_cv_PTHREAD_JOINABLE_ATTR],
+-+                                  [Define to necessary symbol if this constant
+-+                                   uses a non-standard name on your system.])
+-+               ax_pthread_joinable_attr_defined=yes
+-+              ])
+-+
+-+        AC_CACHE_CHECK([whether more special flags are required for pthreads],
+-+            [ax_cv_PTHREAD_SPECIAL_FLAGS],
+-+            [ax_cv_PTHREAD_SPECIAL_FLAGS=no
+-+             case $host_os in
+-+             solaris*)
+-+             ax_cv_PTHREAD_SPECIAL_FLAGS="-D_POSIX_PTHREAD_SEMANTICS"
+-+             ;;
+-+             esac
+-+            ])
+-+        AS_IF([test "x$ax_cv_PTHREAD_SPECIAL_FLAGS" != "xno" && \
+-+               test "x$ax_pthread_special_flags_added" != "xyes"],
+-+              [PTHREAD_CFLAGS="$ax_cv_PTHREAD_SPECIAL_FLAGS $PTHREAD_CFLAGS"
+-+               ax_pthread_special_flags_added=yes])
+-+
+-+        AC_CACHE_CHECK([for PTHREAD_PRIO_INHERIT],
+-+            [ax_cv_PTHREAD_PRIO_INHERIT],
+-+            [AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <pthread.h>]],
+-+                                             [[int i = PTHREAD_PRIO_INHERIT;
+-+                                               return i;]])],
+-+                            [ax_cv_PTHREAD_PRIO_INHERIT=yes],
+-+                            [ax_cv_PTHREAD_PRIO_INHERIT=no])
+-+            ])
+-+        AS_IF([test "x$ax_cv_PTHREAD_PRIO_INHERIT" = "xyes" && \
+-+               test "x$ax_pthread_prio_inherit_defined" != "xyes"],
+-+              [AC_DEFINE([HAVE_PTHREAD_PRIO_INHERIT], [1], [Have PTHREAD_PRIO_INHERIT.])
+-+               ax_pthread_prio_inherit_defined=yes
+-+              ])
+-+
+-+        CFLAGS="$ax_pthread_save_CFLAGS"
+-+        LIBS="$ax_pthread_save_LIBS"
+-+
+-+        # More AIX lossage: compile with *_r variant
+-+        if test "x$GCC" != "xyes"; then
+-+            case $host_os in
+-+                aix*)
+-+                AS_CASE(["x/$CC"],
+-+                    [x*/c89|x*/c89_128|x*/c99|x*/c99_128|x*/cc|x*/cc128|x*/xlc|x*/xlc_v6|x*/xlc128|x*/xlc128_v6],
+-+                    [#handle absolute path differently from PATH based program lookup
+-+                     AS_CASE(["x$CC"],
+-+                         [x/*],
+-+                         [AS_IF([AS_EXECUTABLE_P([${CC}_r])],[PTHREAD_CC="${CC}_r"])],
+-+                         [AC_CHECK_PROGS([PTHREAD_CC],[${CC}_r],[$CC])])])
+-+                ;;
+-+            esac
+-+        fi
+- fi
+- 
+- test -n "$PTHREAD_CC" || PTHREAD_CC="$CC"
+-@@ -475,11 +497,11 @@ AC_SUBST([PTHREAD_CC])
+- 
+- # Finally, execute ACTION-IF-FOUND/ACTION-IF-NOT-FOUND:
+- if test "x$ax_pthread_ok" = "xyes"; then
+--	ifelse([$1],,[AC_DEFINE([HAVE_PTHREAD],[1],[Define if you have POSIX threads libraries and header files.])],[$1])
+--	:
+-+        ifelse([$1],,[AC_DEFINE([HAVE_PTHREAD],[1],[Define if you have POSIX threads libraries and header files.])],[$1])
+-+        :
+- else
+--	ax_pthread_ok=no
+--	$2
+-+        ax_pthread_ok=no
+-+        $2
+- fi
+- AC_LANG_POP
+- ])dnl AX_PTHREAD
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.14.0.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.15.2.bb
+similarity index 96%
+rename from meta-oe/recipes-devtools/protobuf/protobuf_3.14.0.bb
+rename to meta-oe/recipes-devtools/protobuf/protobuf_3.15.2.bb
+index 00f1e99d35..0392f9339b 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_3.14.0.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.15.2.bb
+@@ -10,14 +10,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
+ DEPENDS = "zlib"
+ DEPENDS_append_class-target = " protobuf-native"
  
- SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git \
--           file://0001-crypto-Update-l_pkcs5_pbkdf2-call-after-rename.patch \
-           "
--SRCREV = "355c2df97e1adfdaee4a67c1705bd76202384687"
-+SRCREV = "bde3e0f6e3364e9c884b6b93a944d8138345b8e5"
+-SRCREV = "2514f0bd7da7e2af1bed4c5d1b84f031c4d12c10"
++SRCREV = "d7e943b8d2bc444a8c770644e73d090b486f8b37"
+ 
+ SRC_URI = "git://github.com/protocolbuffers/protobuf.git \
+            file://run-ptest \
+            file://0001-protobuf-fix-configure-error.patch \
+            file://0001-Makefile.am-include-descriptor.cc-when-building-libp.patch \
+            file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
+-           file://0001-fix-m4-pthread-update.patch \
+ "
  S = "${WORKDIR}/git"
  
- inherit autotools manpages pkgconfig python3native systemd
 -- 
 2.25.1
 
