@@ -1,17 +1,17 @@
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.86])
- by mx.groups.io with SMTP id smtpd.web09.1012.1614620925225638058
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.75])
+ by mx.groups.io with SMTP id smtpd.web11.1038.1614620935536562992
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Mar 2021 09:48:45 -0800
+ Mon, 01 Mar 2021 09:48:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=IQ1oO/KR;
- spf=pass (domain: windriver.com, ip: 40.107.244.86, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=nVM48fMh;
+ spf=pass (domain: windriver.com, ip: 40.107.243.75, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=eNWV71XTbQq9t+QyGVCZ697VgJlrTa+f38ZHFiuuOKdWLpq7FNKQXc/dKLRMLvbHc84faif0meemvkEDjrnyPABXnldjRbJaKJJHNemZD35Nz5GLHRsFB095fyLZONmN4su+vem787c6dzDtYLObVVablMibF/tGe2kNLCAzqf+r2RsI7ZX34gMuFS8+k/eJnzUML0BlxkKAGrjDTz0sUpskgJh0AHqz1RCB6mcxTP89iurAx0N4hSIpA4kk5KXtcQR1qJcKo8z21kXYvsckCn8wLIrOAVPGn4RQmgU1zIdZbeG+KIvwQmDnvl03nkhrf9MXZO+HpDFLspVF/QU2DA==
+ b=n9sEjiC7YyTYo7+CHqUPazrHceuyz+ApOGWW2FLG/a5k9V06+HULR0bR1s12EeEuH/MyD1toFw0TPWL8nlm3yxBtD2ehNztu8yUqKgd8IGXmYYrBm0jab39WX6w629WgQZ5T17Dh6pVWMkEdQoirTGibFOYaPJ0iwarEIsN2T4l++9XDSzon41TvZq8uy5/184r/9BpD89E6GfeP0NwLXDVP/LuV1gKHTiZSAHrQFg6zRXiW8eGVV/x71UGD1arwkgUJ5fC60tjArG0mSP50QJlCzlPDJJaxDkb6dXfiauDM0wfzhjbOpDx2WEkpNFHdwquJPaUeEQMU9fEQcpH4Ig==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=r8fRCai6MJ3uY0nzyj8MluDT0ll8NA7ZZaLM15pD/Io=;
- b=gN/rqdHH9iMERG9ylsNcEMUrlHKNAUNMABkIKZcyeh3qmdjAaau3Uar4boo6ZLMCn984SjiQRtVPKNPSbeDndMzBdHnrNwtN1erjnKkpz91h0MmfBx7DOWsLANzUSZvfSrH0WC/DatTljihrW2/3j8l7fhpYkVq5PjeIwn8AE98fzpijEa8CZvKmt79Qe348BHdPU4ekczNoX1PbwE9MUwADwY6O18RyyHnH8tc5z6gFFKjfBl3nYEnTS3iPVsxDXgA5GoD5UqrhghiiNLJOES+n6PwIcteJ4X6hYbkHO9vPLY12r4ejQ5K+LNrxqh1kx3oWJMdXJ6vpX3N1814FnA==
+ bh=7rp8kWkgnkmXI8LxO+HV1Ox4m17OFlJeFNuvyC7zMFU=;
+ b=ZbbHIk4uMA6wwIMXrfOCRzfxEYgm8eV4mNDNc1PlCNfEYwBfXg2HQ7bMiR/DA3nkGazaUS9pPFC/U6PG8J9XoW/ASctG3X9/CKPkzAcarERF76CK1yEPMWJNKcBS6ZpfjR8FQK3YTH80KYXm9z9P72efIc3kCp5wyU4MITgzfQKRCSSiGE1J8FgGuW3rkGTmJ4wlK5XD3vcP/JD7aknnPYX+RIl0rB/7jN17p/DVgn8XpsOIWZoyMS6ve9XFtrpUsz5UyQb2n9OMwjWIw5WtqBFaf2F1X/WuH7MU72PjOjH8CTR+He1Bk2t/wvcnlQ+xrvhC0d3zonEspgdURbliLQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=r8fRCai6MJ3uY0nzyj8MluDT0ll8NA7ZZaLM15pD/Io=;
- b=IQ1oO/KRKyHaxsU92THeMn05B0HEsqZOnk5YblLF8RnLRDp5uTATl9OU2NPRm10sFRfpK+3jXSPWx+jEoJ1JzO3W51VC+6Km2DKkpVgMPurPpADvxvk10ULhJXOw+KnZxLvTmdnatHRyiuD7cODDHYy4SNzq6XaiJhlv76xObsQ=
+ bh=7rp8kWkgnkmXI8LxO+HV1Ox4m17OFlJeFNuvyC7zMFU=;
+ b=nVM48fMhDDS0ckz6+xC//5baz+n3nOf1XmRjeHUdlAvz+8LBu6ysVAmGp3qnQp5ovXwCZUnqvD7YmUounGH3Vszhk2L6aCpCw5orkFzqgkAeETaB8gptC5Kz4Z2yUeXya3DXV+wmh7RlHcTXTMW6m3FWy96OyBGmc1KHMkn4InA=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,90 +28,90 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BYAPR11MB3670.namprd11.prod.outlook.com (2603:10b6:a03:f8::11) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.28; Mon, 1 Mar
- 2021 17:48:43 +0000
+ 2021 17:48:54 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3890.028; Mon, 1 Mar 2021
- 17:48:43 +0000
-Subject: Re: [oe] [meta-python][PATCH 2/5] python3-pandas: Upgrade 1.2.1 -> 1.2.2
+ 17:48:54 +0000
+Subject: Re: [oe] [meta-python][PATCH 3/5] python3-cffi: Upgrade 1.14.4 -> 1.14.5
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20210224112512.31406-1-leon.anavi@konsulko.com>
- <20210224112512.31406-2-leon.anavi@konsulko.com>
+ <20210224112512.31406-3-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <54206819-e292-b808-8b52-13b4a28a2f34@windriver.com>
-Date: Mon, 1 Mar 2021 12:48:40 -0500
+Message-ID: <df503502-bc63-cdda-2427-9302711f3565@windriver.com>
+Date: Mon, 1 Mar 2021 12:48:51 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.7.0
-In-Reply-To: <20210224112512.31406-2-leon.anavi@konsulko.com>
+In-Reply-To: <20210224112512.31406-3-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: MN2PR15CA0051.namprd15.prod.outlook.com
- (2603:10b6:208:237::20) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: MN2PR15CA0054.namprd15.prod.outlook.com
+ (2603:10b6:208:237::23) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by MN2PR15CA0051.namprd15.prod.outlook.com (2603:10b6:208:237::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.19 via Frontend Transport; Mon, 1 Mar 2021 17:48:42 +0000
+Received: from [192.168.0.55] (174.115.236.231) by MN2PR15CA0054.namprd15.prod.outlook.com (2603:10b6:208:237::23) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.19 via Frontend Transport; Mon, 1 Mar 2021 17:48:53 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 6333e0af-a79f-493d-9453-08d8dcda418b
+X-MS-Office365-Filtering-Correlation-Id: 32a25b83-be1a-4d13-dedb-08d8dcda47ba
 X-MS-TrafficTypeDiagnostic: BYAPR11MB3670:
-X-MS-Exchange-MinimumUrlDomainAge: pydata.org#3363
+X-MS-Exchange-MinimumUrlDomainAge: openembedded.org#6614
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB36702A19D98A6038E2968BD69F9A9@BYAPR11MB3670.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:6430;
+	<BYAPR11MB3670D3E167FD00056B7E4E4B9F9A9@BYAPR11MB3670.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1169;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	7fRgZrlyBjsVeXUh1tyP7YXSSmbgD3NfTfalO1NXJVD5VPieAn9MTKbJNIXbUPis9y2PQKKpmG0gzBha5pkTKP9TAm4USOoBPA2rxs8LPAWAGQ7LKov3IMa5DtsgukirogzQXXygMTrYsnAyKp8aHcLtbu7xlDMP95kX4R3FOrjhubvoqDs3O5N+zgOpH9Cxya95P/PYkgd1arCEpAr+DOWL/kffhl0vJFsceguMB+6ZxKy87Z8bpwxRwA2RH1bOn5zavsxFPd4qnN7L8iQru2yPtQFqpSEZtlaBnmET6PLAJOajRWn3MgANx4+2ivZLLVusopgwGpnHQAU9WZ9Pl70sQPeePw28a7JFVRWrDseJ26P75PmrWHslF9v6689+fi8LDOJosnydmxQEICAW74PXYvko9pKPPRZEA5wLK4tDxRZzUrMohJKMgduP66RyFVvGzQPhDAyAOzv8D/dC7+nsmmNjxilK9tXLfl9qPVQoKan0kIMlOX+E+jDEIerrV+XNGTpdtFv8s3GX7R/MP/JrhbdCwK4NqkC9Xlmfi/ZyYoi+q1dMx4e5Rz3v3R9KcugCV7W07nyvJFadP55twCILELNaKopaITqTwQAtxUKAAReS9Zxy3E4LJAYTrBAnu6F2uq+L0lQh+RjfaLWX+inDvlEDoUT+eA9tUQhybkdVy8FDW3TGf9JvhRUucjeg
+	oe90e++ukY6JKqWeNWnjF1Ttj7ZVeABGfM4GlSMZojV6g3XW8AYfP8JHwzhWZDCgrOgQf0LeM+gkqPUrKPkzBJ7hbOZ9MhKehnf035EWMDiTbD8QWRqB23hl4z6ob3l43N8ww+ZV5JRxd6v1L9TTUpaQPKoEoCoL4uOPX694FvrAJT1aqBP7AbFHedAFvpDKxh7G4BEFjfwgOK1ztzwdZnoHQU6CrWKafVdA9kfzmDPNc3qBbYu8aXfeanoCCkg5zbOqo1mefdfqfrSIG4tMLJBBaeafCwlg5S1GogMBpiRxYDMp7Ndf9X0pZ7tykqEcpGDbQs/7WWLph1mqsBuVaeyxRv2S5WGBZyw200dt/Na6O7HNNLZh2/dw9ZmJ3AcvKz0/AXb0h0noh1FfqhwkRji407yMEDhghgrMjD7/BFF2AWgO1CPi7/TDSH/ojrHLWAoiclcX4ZDmMqKSRI3eGYKKz8MMDFKx39a0ioF9jNs5MiR7iqxUTHNtZHP7/fTcNw349PgjM0WRhrMrmc+btpeer+65333EszElqhNxlg4nJLH9Eg3b4QtpowFkGzdQ7kmTGb2yoJEd6QlxwbHIJCZKIY2mnw0PCePFR9eZnTnsuGn3ZxbQ2GDV1oy5OW5DTglrH7hudBF94H8AZm7c+IZmvbKjX76gTdy+MOmwxWN7C5a3mNIwoORztSSWRquo
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(396003)(346002)(39840400004)(136003)(366004)(966005)(2906002)(8936002)(16576012)(166002)(31696002)(478600001)(86362001)(8676002)(31686004)(44832011)(5660300002)(316002)(36756003)(26005)(66556008)(66946007)(66476007)(33964004)(2616005)(186003)(956004)(16526019)(83380400001)(6486002)(53546011)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(39850400004)(396003)(346002)(136003)(366004)(966005)(2906002)(8936002)(16576012)(166002)(31696002)(478600001)(86362001)(8676002)(31686004)(44832011)(5660300002)(316002)(36756003)(26005)(66556008)(66946007)(66476007)(33964004)(2616005)(186003)(956004)(16526019)(83380400001)(6486002)(53546011)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?d01aM1FFT1oybktaMWd3S3lKcDRjaUxQeGUxMklLaCthVkFVQjEzeGpTRlhz?=
- =?utf-8?B?ekE0ZHJTaW5RSEt6OTVzOENRSzZvTU44YUdjOWFuWExTcXZjWDQ5MnhHY3lv?=
- =?utf-8?B?cTlQYmpjdFh1Qm1RZUpsQ0pYVmJVWkxBdUhqWE94RnZhcTBnL2UzQkVPWjJH?=
- =?utf-8?B?ZW1ON0lxaHJNd2tZSDgxV3dqRVlqWUxSV1ZtVzR2YjJoR3pBUXRwYTRnSzJp?=
- =?utf-8?B?eVIxbUVySXBnUk90LzlnQUt1YThwT21FMTZNT3BhVHVRY2F2RzlKM1ZOTEpk?=
- =?utf-8?B?SS85K1VERkJlMldwa3hlTDRZV0c4Z2YxbUtJaTJVNS9UQ25ZZmtOekdpYnV2?=
- =?utf-8?B?aHN5S2hWSkV5S3ZoN0xHczljRkFQMjh1SVNvTGFCZUZwNEh6ZnlqM1kvM0dn?=
- =?utf-8?B?WGVGZi8yL1pGLzZNWGVjT04rdFJlSDZaNVJTQmFMQmMrQ3BlU2FsK1hqU25M?=
- =?utf-8?B?MlpJbk1tVnlxUjEvZkM0R1VINDVlck96dmtkdG00U05nS24vZExFTTVNTDQ1?=
- =?utf-8?B?RXpDZXlUUUl1bFhyamxGOFNBSzNlaUhCTk1hU045TmwyWmN4aEFpT1VpYk5K?=
- =?utf-8?B?Uzk0SmEyem56U3NnemJjcXdNN1Y3eHZ4N1phY01iUkNJWDhneTBiOERFZU15?=
- =?utf-8?B?N1l0b2U2VlJNNFUxRVYrNmNXK3JpMU1nQjBtcHVSVCtxM0VLV0s3cjk5R1Nh?=
- =?utf-8?B?ZERyQ2JWNnBDdUZ5dHd5YXZ5TlhVK3BiTUN6cDRLSmczdno1YmgwYjZNa1hB?=
- =?utf-8?B?T3lJN09sTndDNENLSWJkVE9KMEQ1OERoZE1kUUVzMkNxeVEwbkVKaGw4QkFE?=
- =?utf-8?B?OEZTRTVrZUxEdjdzNGNOOWs1SWlva1BHVXcvejQrUHZFcDlsbVVmSXhEZStV?=
- =?utf-8?B?Q1JZZU5VR0tXVzc3YkF6aDFYVi9RTm4ySEYxcUZmcXZiQjZub0xTazRteG00?=
- =?utf-8?B?QnZCc1hPS2c0RUp1V2NMdDRubE8xVUJjSi9FY1AzUDYyQkJvaVRXSkZnbUlv?=
- =?utf-8?B?MnpNVEdqb0dNc3o2alRKVUttWGRlWkcvVUdwbTlnVUF6Z2g1Tm1OOGF2VUdU?=
- =?utf-8?B?K0gxc2xBTjB1VUFsdTRUWkZtQzEyUUZpQ3RHQWcxZHBsUEJXYnNTRDhRMzZz?=
- =?utf-8?B?Vm1sbnpPTnM5K0lUdmZGR2h5RTg1REUySEg3bU9IWGxIbUZWay9lUFNKVTVx?=
- =?utf-8?B?eEd5dDBiMTBMVFZWeGdBeHh4SjdiSERmMkplbUZKNzJSWHYwU3FNMHp3Tmdw?=
- =?utf-8?B?Q09jNjF5NEZabWpMWkljSGhWdDFwMjFhRFZMMnMyWjlHNVU4dGpSRWFLMUYz?=
- =?utf-8?B?TW05aHpweC9Pd0xxTERMdkR4U1JpZzRIbE9JZUNvSk1aWG5jODMvUEorK3JB?=
- =?utf-8?B?aXhKSVRUM2lPdEkyMHFFK1Rmd3hVcTdzdUFmUnAwRXpuOWdjQ0I1VlRtMGNt?=
- =?utf-8?B?cHVyUlZUOHdVZXYreHBpU05sRnFEdS9JZ3FTKzk4bGxjR3pUaEx3SS9oWTJF?=
- =?utf-8?B?MTVFVjh1MUNQbEg2VkRzY29iNFN0QVhKTGlmMkdmd25MNkdSUm13SGIwWGx5?=
- =?utf-8?B?bi9KaHVPWGhnVUJzVzh1dm5sSlU1YlNhc3Y3L0hvQVNUSWkvc1lBTk5YRC93?=
- =?utf-8?B?SkZrVHplWDExazRCRFAvbnc1LzM4Vkl1MUF3OVM4bEpnazFyQVgvRGVjVmdB?=
- =?utf-8?B?cFdweGJHMHRPcFk3WUtwZXlLbWhXSnoyYzZTdmxnSmFKSFFpS2w1TURvamUw?=
- =?utf-8?Q?w/SeGaGrORp6r5k5zbe00cdJvbhIrjUuouPGgpX?=
+	=?utf-8?B?RGtLenQvczU2d3ZheHlNZDZnYUNKeitMVTJxQkwvOEZNNHdUbzhycG5qRnQx?=
+ =?utf-8?B?VXZxZkdQYVlOSWFESGQ3cjV2MjRjaTRhU1Yxa0NaZGxkYkFIcnFkQlM3b0ky?=
+ =?utf-8?B?eStsbTdxQnF6ZUgyNmlNWVJ5TjJoMldKV0g2Q1JPalV2eGd4dE0wbnY1eURw?=
+ =?utf-8?B?bVZJWnRQRWU1YzZSU1dWUkpQWDVoSzRhYnV6NmZHaTdFWkY1eWkwSktPdDBM?=
+ =?utf-8?B?SDY3NjlsaUh0cm9kSFh1YUFGMFQwYlJxZUFmN29INUY4cEx1T0lUVTdXZGxy?=
+ =?utf-8?B?b0w5bEFpSk1IbDYzd3FJcGRNcTFGMVBKNWNoTk01c1lVY2lxTS93Q256UWx4?=
+ =?utf-8?B?Ylk0dU9teEJoYWlXTi9tYmZFVWxOdWVJNnk5ZE5rb2dYTTRxK01RcHJNVzVR?=
+ =?utf-8?B?NC9rTm8yZ1lNUEtlOVB2YzVyRkZ0bGdwOU5FRDhvTnB5NElidzZzMmNQZmVY?=
+ =?utf-8?B?cjFtUks0Mjg0WDFwcHZLWnEwRG8zdVcvNGsyVVpoaE15V0tNd0s4MUgyaGRq?=
+ =?utf-8?B?aWhuc0xlSnoySUo3WVl5WlFPbndsRXRPZmlVK3F3emtzYWZmcnlkTVBpazk5?=
+ =?utf-8?B?U21LY2kxdzJidXUrVkV3UDZ1SVoxTWVLRHZOc0pSeVhMbFZyUXBlVWhmalB3?=
+ =?utf-8?B?YzM1L2M2TStYN2RqbVRzUmhtaXhMblBnb1BhRFFhdlVNbWF4bTV3TzQzcC9j?=
+ =?utf-8?B?YkovNEpsQ1c3bmc3SzlKRGdlbTRmaTJJZFU3RHllcExERzBWczlwUk5wWUY0?=
+ =?utf-8?B?RDZiMzFYdFRGRUIyczdGQkk0SXhRUDBjbDNjYXducGUvdHFaYjlieEw1aFgw?=
+ =?utf-8?B?Ri8xUk9WZUpBMHR2YldaTmlMNDQwSjgzUzF0dXpEc3l0c0hELzZqYWVWcDlK?=
+ =?utf-8?B?eDlpLzUrNGk4QngyYzFpUlhZTjNrc0RyNzhoKzQwNmRjR2tnaTg5Z0l5MEsw?=
+ =?utf-8?B?K1BYclRjSlRSTTRJNzF0REx1QnVYN2V3UVZOc2NPak9GMzlqZnJmc3E5eWNu?=
+ =?utf-8?B?Vi94bVhXVkd6WmdNYkROY3MxKzRmakN6OFlOT3F2LzZkY1o5aTVyUVF1QXhU?=
+ =?utf-8?B?VUVFZDJUdUJsbE56U05lNTAwUjYxOENoQjc0MWV5dTlkdGJjZzFRbzV5OXd3?=
+ =?utf-8?B?TUk4ZEh6b294b01vL1Eyc2x5MjZobE9wOXlpZCt3bktVSlI5THJheDdYV21N?=
+ =?utf-8?B?Uk9nVDBubElmaDVFVVRtSjZUKzBWOGt6QWV5elJwcWNvUWNybmdwM0YrUVBw?=
+ =?utf-8?B?bFVrcnNiNHlsUnFUeC9oSmpKanlkRUVlYmxjWjZDY3M1b1diWnJkNmZ5dmRL?=
+ =?utf-8?B?N0ZnZklYZlFGdlJxZXdoWFRqb2ovaGRaREZMZDZFMFBKQ1BqbTlZSkhRREhV?=
+ =?utf-8?B?WUtmZmM4Q1FxSDhmMzVoejFMQk9BUGdnOTVVeDMyVDFNN3hpMlVBeDMvWVdC?=
+ =?utf-8?B?RlF2VnI5M1F5eC9FL1ArOW4vZ1NiTEtPT3NZTjBUcytORXNublpXWG1EKzE4?=
+ =?utf-8?B?MXE0Skx0L3RNWkN4M3F3ZnhxSWFuTGI4RWRuU0d5aG9tMG03ZHdzRGphQ25I?=
+ =?utf-8?B?aWN0NEtPOHI4aFdoQzczVVJMREZHVHdRNTQ2MzMwQngzbXN0L1RlYXRFbHZK?=
+ =?utf-8?B?SFp1ekVqaWZJR0JoSGxMK1hmSFN5V1JkbGduUDdReHhpelJvanpOWXpNN2sy?=
+ =?utf-8?B?WjZWMENnbmNnekp0Z2IzcExObllmR2xzRDF2cEVseGk4dUkrNDQzNTRyU1RH?=
+ =?utf-8?Q?TFz7yYuZfRNAUVTpuiTiq5zLqyeguA6+Ym/Q1wv?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6333e0af-a79f-493d-9453-08d8dcda418b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 32a25b83-be1a-4d13-dedb-08d8dcda47ba
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Mar 2021 17:48:43.7061
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Mar 2021 17:48:54.2002
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: SUDAR6FRYtiSeP8L8aykKRF4bZKzXcWbX2s/3xMFDRzsKc2MOxCAOKmxG3HrDWDwcYn5jFLhD6gcmhKjoNCykX5qKX3sg60U3AHkSpXFSCM=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 5YYUMC74MYnFvC7PA9M68sOYOEaqIPX7oERe6Ymfja7n4ctqhDXEGZeJ0oshCjeKd8zeftnNpuxUSs8f5f/PzLvhsbydDfm3k+iBlvlezxw=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3670
 Content-Type: multipart/alternative;
- boundary="------------3B9F2BE0F477D53BCAA20135"
+ boundary="------------152A62AD5804CFEEA1783C86"
 Content-Language: en-US
 
---------------3B9F2BE0F477D53BCAA20135
+--------------152A62AD5804CFEEA1783C86
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -119,65 +119,31 @@ Content-Transfer-Encoding: 7bit
 On 2021-02-24 6:25 a.m., Leon Anavi wrote:
 > [Please note: This e-mail is from an EXTERNAL e-mail address]
 >
-> Upgrade to release 1.2.2:
+> Upgrade to release 1.14.5:
 >
-> - Fixed regression in read_excel() that caused it to raise
->    AttributeError when checking version of older xlrd versions
-> - Fixed regression in DataFrame constructor reordering element
->    when construction from datetime ndarray with dtype not
->    "datetime64[ns]"
-> - Fixed regression in DataFrame.astype() and Series.astype()
->    not casting to bytes dtype
-> - Fixed regression in to_pickle() failing to create bz2/xz
->    compressed pickle files with protocol=5
-> - Fixed regression in pandas.testing.assert_series_equal() and
->    pandas.testing.assert_frame_equal() always raising
->    AssertionError when comparing extension dtypes
-> - Fixed regression in to_csv() opening codecs.StreamWriter in
->    binary mode instead of in text mode and ignoring user-provided
->    mode
-> - Fixed regression in Categorical.astype() casting to incorrect
->    dtype when np.int32 is passed to dtype argument
-> - Fixed regression in to_excel() creating corrupt files when
->    appending (mode="a") to an existing file
-> - Fixed regression in DataFrame.transform() failing in case of an
->    empty DataFrame or Series
-> - Fixed regression in groupby() or resample() when aggregating an
->    all-NaN or numeric object dtype column
-> - Fixed regression in Rolling.count() where the min_periods
->    argument would be set to 0 after the operation
-> - Fixed regression in read_excel() that incorrectly raised when
->    the argument io was a non-path and non-buffer and the engine
->    argument was specified
-> - pandas.read_excel() error message when a specified sheetname
->    does not exist is now uniform across engines
-> - Fixed bug in pandas.read_excel() producing incorrect results
->    when the engine openpyxl is used and the excel file is missing
->    or has incorrect dimension information; the fix requires
->    openpyxl >= 3.0.0, prior versions may still fail
-> - Fixed bug in pandas.read_excel() sometimes producing a DataFrame
->    with trailing rows of np.nan when the engine openpyxl is used
+> - Source fix for old gcc version
+> - This and future releases should include wheels on more platforms
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-pandas_1.2.1.bb => python3-pandas_1.2.2.bb} | 2 +-
+>   .../python/{python3-cffi_1.14.4.bb => python3-cffi_1.14.5.bb}   | 2 +-
 >   1 file changed, 1 insertion(+), 1 deletion(-)
->   rename meta-python/recipes-devtools/python/{python3-pandas_1.2.1.bb => python3-pandas_1.2.2.bb} (88%)
+>   rename meta-python/recipes-devtools/python/{python3-cffi_1.14.4.bb => python3-cffi_1.14.5.bb} (83%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-pandas_1.2.1.bb b/meta-python/recipes-devtools/python/python3-pandas_1.2.2.bb
-> similarity index 88%
-> rename from meta-python/recipes-devtools/python/python3-pandas_1.2.1.bb
-> rename to meta-python/recipes-devtools/python/python3-pandas_1.2.2.bb
-> index ae8a55f847..7529237866 100644
-> --- a/meta-python/recipes-devtools/python/python3-pandas_1.2.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pandas_1.2.2.bb
-> @@ -6,7 +6,7 @@ HOMEPAGE = "http://pandas.pydata.org/"
->   LICENSE = "BSD-3-Clause"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=c2a8f987b2ce77c368c6b3e1b5b10774"
+> diff --git a/meta-python/recipes-devtools/python/python3-cffi_1.14.4.bb b/meta-python/recipes-devtools/python/python3-cffi_1.14.5.bb
+> similarity index 83%
+> rename from meta-python/recipes-devtools/python/python3-cffi_1.14.4.bb
+> rename to meta-python/recipes-devtools/python/python3-cffi_1.14.5.bb
+> index 45962c6ce8..16928f0dbc 100644
+> --- a/meta-python/recipes-devtools/python/python3-cffi_1.14.4.bb
+> +++ b/meta-python/recipes-devtools/python/python3-cffi_1.14.5.bb
+> @@ -4,7 +4,7 @@ LICENSE = "MIT"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
+>   DEPENDS += "libffi ${PYTHON_PN}-pycparser"
 >
-> -SRC_URI[sha256sum] = "5527c5475d955c0bc9689c56865aaa2a7b13c504d6c44f0aadbf57b565af5ebd"
-> +SRC_URI[sha256sum] = "14ed84b463e9b84c8ff9308a79b04bf591ae3122a376ee0f62c68a1bd917a773"
+> -SRC_URI[sha256sum] = "1a465cbe98a7fd391d47dce4b8f7e5b921e6cd805ef421d04f5f66ba8f06086c"
+> +SRC_URI[sha256sum] = "fd78e5fee591709f32ef6edb9a015b4aa1a5022598e36227500c8f4e02328d9c"
 >
 >   inherit pypi setuptools3
 >
@@ -188,7 +154,7 @@ Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > 
 >
 
---------------3B9F2BE0F477D53BCAA20135
+--------------152A62AD5804CFEEA1783C86
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -201,71 +167,37 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2021-02-24 6:25 a.m., Leon Anavi
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210224112512.31406-2-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210224112512.31406-3-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">[Please note: This e-mail is from an EXTERNAL e-mail address]
 
-Upgrade to release 1.2.2:
+Upgrade to release 1.14.5:
 
-- Fixed regression in read_excel() that caused it to raise
-  AttributeError when checking version of older xlrd versions
-- Fixed regression in DataFrame constructor reordering element
-  when construction from datetime ndarray with dtype not
-  &quot;datetime64[ns]&quot;
-- Fixed regression in DataFrame.astype() and Series.astype()
-  not casting to bytes dtype
-- Fixed regression in to_pickle() failing to create bz2/xz
-  compressed pickle files with protocol=5
-- Fixed regression in pandas.testing.assert_series_equal() and
-  pandas.testing.assert_frame_equal() always raising
-  AssertionError when comparing extension dtypes
-- Fixed regression in to_csv() opening codecs.StreamWriter in
-  binary mode instead of in text mode and ignoring user-provided
-  mode
-- Fixed regression in Categorical.astype() casting to incorrect
-  dtype when np.int32 is passed to dtype argument
-- Fixed regression in to_excel() creating corrupt files when
-  appending (mode=&quot;a&quot;) to an existing file
-- Fixed regression in DataFrame.transform() failing in case of an
-  empty DataFrame or Series
-- Fixed regression in groupby() or resample() when aggregating an
-  all-NaN or numeric object dtype column
-- Fixed regression in Rolling.count() where the min_periods
-  argument would be set to 0 after the operation
-- Fixed regression in read_excel() that incorrectly raised when
-  the argument io was a non-path and non-buffer and the engine
-  argument was specified
-- pandas.read_excel() error message when a specified sheetname
-  does not exist is now uniform across engines
-- Fixed bug in pandas.read_excel() producing incorrect results
-  when the engine openpyxl is used and the excel file is missing
-  or has incorrect dimension information; the fix requires
-  openpyxl &gt;= 3.0.0, prior versions may still fail
-- Fixed bug in pandas.read_excel() sometimes producing a DataFrame
-  with trailing rows of np.nan when the engine openpyxl is used
+- Source fix for old gcc version
+- This and future releases should include wheels on more platforms
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210224112512.31406-2-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210224112512.31406-3-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-pandas_1.2.1.bb =&gt; python3-pandas_1.2.2.bb} | 2 +-
+ .../python/{python3-cffi_1.14.4.bb =&gt; python3-cffi_1.14.5.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pandas_1.2.1.bb =&gt; python3-pandas_1.2.2.bb} (88%)
+ rename meta-python/recipes-devtools/python/{python3-cffi_1.14.4.bb =&gt; python3-cffi_1.14.5.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pandas_1.2.1.bb b/meta-python/recipes-devtools/python/python3-pandas_1.2.2.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-pandas_1.2.1.bb
-rename to meta-python/recipes-devtools/python/python3-pandas_1.2.2.bb
-index ae8a55f847..7529237866 100644
---- a/meta-python/recipes-devtools/python/python3-pandas_1.2.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pandas_1.2.2.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://pandas.pydata.org/">&quot;http://pandas.pydata.org/&quot;</a>
- LICENSE = &quot;BSD-3-Clause&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=c2a8f987b2ce77c368c6b3e1b5b10774">&quot;file://LICENSE;md5=c2a8f987b2ce77c368c6b3e1b5b10774&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-cffi_1.14.4.bb b/meta-python/recipes-devtools/python/python3-cffi_1.14.5.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-cffi_1.14.4.bb
+rename to meta-python/recipes-devtools/python/python3-cffi_1.14.5.bb
+index 45962c6ce8..16928f0dbc 100644
+--- a/meta-python/recipes-devtools/python/python3-cffi_1.14.4.bb
++++ b/meta-python/recipes-devtools/python/python3-cffi_1.14.5.bb
+@@ -4,7 +4,7 @@ LICENSE = &quot;MIT&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf">&quot;file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf&quot;</a>
+ DEPENDS += &quot;libffi ${PYTHON_PN}-pycparser&quot;
 
--SRC_URI[sha256sum] = &quot;5527c5475d955c0bc9689c56865aaa2a7b13c504d6c44f0aadbf57b565af5ebd&quot;
-+SRC_URI[sha256sum] = &quot;14ed84b463e9b84c8ff9308a79b04bf591ae3122a376ee0f62c68a1bd917a773&quot;
+-SRC_URI[sha256sum] = &quot;1a465cbe98a7fd391d47dce4b8f7e5b921e6cd805ef421d04f5f66ba8f06086c&quot;
++SRC_URI[sha256sum] = &quot;fd78e5fee591709f32ef6edb9a015b4aa1a5022598e36227500c8f4e02328d9c&quot;
 
  inherit pypi setuptools3
 
@@ -283,4 +215,4 @@ index ae8a55f847..7529237866 100644
   </body>
 </html>
 
---------------3B9F2BE0F477D53BCAA20135--
+--------------152A62AD5804CFEEA1783C86--
