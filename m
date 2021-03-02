@@ -1,115 +1,124 @@
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.web08.1648.1614723354335691694
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+ by mx.groups.io with SMTP id smtpd.web10.155.1614728871603638233
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Mar 2021 14:15:54 -0800
+ Tue, 02 Mar 2021 15:47:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=EgAE9IA4;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id i14so2860283pjz.4
-        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Mar 2021 14:15:49 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=m8A8CNGd;
+ spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f178.google.com with SMTP id 18so61179pfo.6
+        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Mar 2021 15:47:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=TubTDY/WUZW7xrIzGve8WGlpyWMi+7uafXsBSuQSQio=;
-        b=EgAE9IA4wJ0T7tLyohX9Afs+3rqQ6XFfnp8/F7js4G7RUIPZnZMZSNcNjmBuJ1+Pgg
-         JZsA8mRKYt19QFaRAlXIXpM4KDcoczhMRzcVZlftl+yER16jhMoavvMbCnMXI4MwTni7
-         5CzFMQ2UiY/FC9uR/S8h0cygOSQ1vkl/dEtIPlOw8ZzlzhhtUIknCrWte0+9M5uFyF4W
-         NzAMeVlHqM1PcSNaXtXOxO5iZl2T1A4TmG4czFiZnHpr78EGZPv3PR2wmcnyXog86K7T
-         3iJnYC6uM4+n/dU7x7E0BV0gH3TBB+B3zWPifA7DrLEGKQJ4etoiXTcbF4T8Me6jyrHQ
-         Xf9A==
+        bh=d+guXHAiQQaMOiDenvWhG2Y4jEkMz5IUs7lBEA80H8k=;
+        b=m8A8CNGd8kfUCQ7xd/Yu1kn0WAyrtjrtQZF9PaBRGPm1Bq7q95bi8Zw3V6ieP/T/Zw
+         9tgsJljrYlq8N09JA+buDXCElGJULPklt0TCHZDghKRazL2Cx/c4tXI4SMTpUhtzagP5
+         joX3fOb/noN/jZSnOlEB6WFtHYB/I0FBFlcVUo2OifUdUfaVRapuMQYuUxBTvsfipRxB
+         wqG2VaYz9BWC3Qd5HCnw/MdDc0AhPU+SSNXBHyzguFDB2Sf+1Z11YbfoqN2XzzrzpL8e
+         BiamWsvJerIX0xGVB5naZUEvsvGo1EKv51rAK5tOuMGM8OmYjnmK+cs1mmgnXsU2OB6/
+         /lsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=TubTDY/WUZW7xrIzGve8WGlpyWMi+7uafXsBSuQSQio=;
-        b=h+c0wIEjPsUb4ZeXAwMYcKeTdyMMsrzBPQJVMfXAGEdyJyLiOyyEEns/4o1FXTMalD
-         erQXiQKVi5agFeyLt1YSymgBCTwiXXqTp0auxtKJ01p0uZTtnfDk7k6oPmlLbpoEm3cA
-         0gwT6yoSKP3+yKsRgSDWad9z1Rg9T/iTUeySx83CeujWGkrxNYEx51bJR24Qk1/gAMzI
-         PR9jg0QaZc0ZMjxrepqb/FhYS4hdOACoXR13CtqHfyZlKEdBQH/sXtQMhLeFrGWiJz+s
-         RnuRMReG/KQr5SvK2GbgI3FPY+si7QRPsLgzMaqqxppLz8FLf9K1RWbSGfKVkELLeXOj
-         f/4w==
-X-Gm-Message-State: AOAM531TBR7lUKoTjaz4XK3BxBIEtdnfp1u8Sxj8GQXiVV4yL+3NDoDs
-	fBqSvPoLb82/46QsSJRyZvWCNAlzL/zj7g==
-X-Google-Smtp-Source: ABdhPJx6+cFyrS4PWSowgG0A7J2NPUaZCKXSIbnvA/LUXtEZWlkR/KrIWVOeHzH3RRQX45fo5NHUJQ==
-X-Received: by 2002:a17:902:ee0b:b029:e4:8ef6:5d1e with SMTP id z11-20020a170902ee0bb02900e48ef65d1emr91619plb.78.1614723348228;
-        Tue, 02 Mar 2021 14:15:48 -0800 (PST)
+        bh=d+guXHAiQQaMOiDenvWhG2Y4jEkMz5IUs7lBEA80H8k=;
+        b=stvsdYJWpn8dbH3iXo1I8Q/QPOFz2NJBTmgZuBgc7uHzyNFJjPQufZNZtyPd34Jh9u
+         ybwW2UNObx+EIe7u5WCRicLae2bMuCqgSBm0UCXHP4w/r4VY3vqD8xv+jWk2DTw20I9V
+         plefARBQxZiS2HKw/LhD5xGiqOj9BHxvY1p7vFMOXdXTQRsXNAVp6oc0y5946eBqQLFg
+         G7rsBpA+0xF1XrDBufN9EkZNDWoSD1gr/HlJRK9XJTqKiTqHneljPP+AV4kiKfPtcVoD
+         5M67LH4GQRUKO4eS8zUvJC6lwBPjabIiDl/RUGH4Ey42eSlAOyd12Ly8T5zS1U5VPRTD
+         nxZg==
+X-Gm-Message-State: AOAM532jeyod9h/ktISdWMQpnEk3GAr7JJ7SO8A6CA3fggi5FfVdDx9R
+	M3IS/ksG7f1HSz8/kO1A/gR1KUlPX8RhcQ==
+X-Google-Smtp-Source: ABdhPJzA4J0aMEjsyF3t9lRsSl5t+6gi5rK52Rhj6Wg9S2EeGBHTijAkRSmzFPYSzJszg9m+f34/6w==
+X-Received: by 2002:a62:e413:0:b029:1ee:2b3:488a with SMTP id r19-20020a62e4130000b02901ee02b3488amr21704371pfh.58.1614728870553;
+        Tue, 02 Mar 2021 15:47:50 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b3bf])
-        by smtp.gmail.com with ESMTPSA id i13sm21295617pfe.46.2021.03.02.14.15.47
+        by smtp.gmail.com with ESMTPSA id b187sm20152243pgc.23.2021.03.02.15.47.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Mar 2021 14:15:47 -0800 (PST)
+        Tue, 02 Mar 2021 15:47:50 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>,
 	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Subject: [meta-gnome][PATCH] nautilus: Drop use of volatile
-Date: Tue,  2 Mar 2021 14:15:45 -0800
-Message-Id: <20210302221545.1499097-1-raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH] vlc: Fix build with gcc 11
+Date: Tue,  2 Mar 2021 15:47:47 -0800
+Message-Id: <20210302234747.1871081-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.30.1
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-volatile qualifier has been dropped in gcc11
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Cc: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../nautilus/0001-Drop-use-of-volatile.patch  | 32 +++++++++++++++++++
- .../recipes-gnome/nautilus/nautilus_3.36.3.bb |  1 +
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/nautilus/nautilus/0001-Drop-use-of-volatile.patch
+ .../vlc/vlc/0001-include-limits-header.patch  | 43 +++++++++++++++++++
+ .../recipes-multimedia/vlc/vlc_3.0.12.bb      |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/0001-include-limits-header.patch
 
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus/0001-Drop-use-of-volatile.patch b/meta-gnome/recipes-gnome/nautilus/nautilus/0001-Drop-use-of-volatile.patch
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0001-include-limits-header.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0001-include-limits-header.patch
 new file mode 100644
-index 0000000000..46831429d0
+index 0000000000..e1383c826c
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus/0001-Drop-use-of-volatile.patch
-@@ -0,0 +1,32 @@
-+From 9ab5acb902a38b420592931ec9e46ccd0624035a Mon Sep 17 00:00:00 2001
-+From: Ondrej Holy <oholy@redhat.com>
-+Date: Wed, 13 Jan 2021 13:22:58 +0100
-+Subject: [PATCH] Drop use of volatile
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc/0001-include-limits-header.patch
+@@ -0,0 +1,43 @@
++From 1068c7451855c3f9acde9af265b5a790073b1641 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 2 Mar 2021 14:28:27 -0800
++Subject: [PATCH] include <limits> header
 +
-+The `fedora rawhide` CI job currently fails because of usage of the
-+`volatile` qualifier. Let's drop the `volatile` qualifier as it doesn't
-+help anyway. It was dropped in GLib as well, see:
-+https://gitlab.gnome.org/GNOME/glib/-/merge_requests/1719
++Fixes
++SegmentInformation.cpp:397:49: error: '::max' has not been declared; d
++id you mean 'std::max'?
 +
-+Fixes: https://gitlab.gnome.org/GNOME/nautilus/-/issues/1741
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+Upstream-Status: Backport [https://github.com/GNOME/nautilus/commit/9b733dd9df9d6d9805c56749d05ada15a7560ef4]
-+ src/nautilus-enum-types.c.template | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ modules/demux/adaptive/playlist/SegmentInformation.cpp | 1 +
++ modules/demux/hls/playlist/Parser.cpp                  | 1 +
++ 2 files changed, 2 insertions(+)
 +
-+diff --git a/src/nautilus-enum-types.c.template b/src/nautilus-enum-types.c.template
-+index 00155ca..9d8ac83 100644
-+--- a/src/nautilus-enum-types.c.template
-++++ b/src/nautilus-enum-types.c.template
-+@@ -13,7 +13,7 @@
-+ GType
-+ @enum_name@_get_type (void)
-+ {
-+-    static volatile GType type_once = 0;
-++    static GType type_once = 0;
++diff --git a/modules/demux/adaptive/playlist/SegmentInformation.cpp b/modules/demux/adaptive/playlist/SegmentInformation.cpp
++index 344e155..8eeb054 100644
++--- a/modules/demux/adaptive/playlist/SegmentInformation.cpp
+++++ b/modules/demux/adaptive/playlist/SegmentInformation.cpp
++@@ -34,6 +34,7 @@
 + 
-+     if (g_once_init_enter (&type_once))
-+     {
++ #include <algorithm>
++ #include <cassert>
+++#include <limits>
++ 
++ using namespace adaptive::playlist;
++ 
++diff --git a/modules/demux/hls/playlist/Parser.cpp b/modules/demux/hls/playlist/Parser.cpp
++index 67110e4..7439699 100644
++--- a/modules/demux/hls/playlist/Parser.cpp
+++++ b/modules/demux/hls/playlist/Parser.cpp
++@@ -42,6 +42,7 @@
++ #include <map>
++ #include <cctype>
++ #include <algorithm>
+++#include <limits>
++ 
++ using namespace adaptive;
++ using namespace adaptive::playlist;
 +-- 
 +2.30.1
 +
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_3.36.3.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_3.36.3.bb
-index fc9ab379d8..cf138d9739 100644
---- a/meta-gnome/recipes-gnome/nautilus/nautilus_3.36.3.bb
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus_3.36.3.bb
-@@ -17,6 +17,7 @@ DEPENDS = " \
- 
- inherit gnomebase gsettings gobject-introspection gtk-doc gettext features_check upstream-version-is-even mime-xdg
- 
-+SRC_URI += "file://0001-Drop-use-of-volatile.patch"
- SRC_URI[archive.md5sum] = "c3c8dbb90d8eeed6c127aa568e131395"
- SRC_URI[archive.sha256sum] = "b6cafc7ab1e70a64383de391b6097fcccbf36b208f8502d8c46423224fd30ef8"
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.12.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.12.bb
+index 046c059fb4..c0074aabb5 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.12.bb
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.12.bb
+@@ -25,6 +25,7 @@ SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz \
+            file://0003-fix-luaL-checkint.patch \
+            file://0004-Use-packageconfig-to-detect-mmal-support.patch \
+            file://0005-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch \
++           file://0001-include-limits-header.patch \
+ "
+ SRC_URI[sha256sum] = "eff458f38a92126094f44f2263c2bf2c7cdef271b48192d0fe7b1726388cf879"
  
 -- 
 2.30.1
