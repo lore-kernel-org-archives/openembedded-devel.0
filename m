@@ -1,203 +1,95 @@
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
- by mx.groups.io with SMTP id smtpd.web10.372.1614701177062473211
+Received: from wout4-smtp.messagingengine.com (wout4-smtp.messagingengine.com [64.147.123.20])
+ by mx.groups.io with SMTP id smtpd.web12.875.1614703075914647869
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Mar 2021 08:06:17 -0800
+ Tue, 02 Mar 2021 08:37:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ASLI/js4;
- spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: peron.clem@gmail.com)
-Received: by mail-ej1-f43.google.com with SMTP id dx17so8670733ejb.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Mar 2021 08:06:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=IQ2GwlOUVTgQlc+mqyMKVvncVCurhynO9JHNk5+RPeE=;
-        b=ASLI/js4CDRPxcZY6KpQRo0QJAWbyxE08043MgniisMz6OY9uzRBiNjM0BxIYDP2Hj
-         79bUcR4xb6XPD7k5WNejHAhxFwf2WZTU2W0P/GA8ZOYK8dsexU1XVD1XnYvMLh2iM3zV
-         Y1CpV9CVQHST55Ck95QJTTCQweRl4wFlIRPKZaeSO1jUnLSaSltgTcWNsKPVBLWL1kJW
-         9uR/PGQGGCGX68Cxjal9y7XSF81rVx9u3NJvaNdZYaD7Vr2g5wUK/vPGRtLUILHiYfHr
-         EDfSsjMrbYOyoFToPISpq6Np6V6xeyOQPoRyuKKNayqMB7g8TqIu0Rl9l68ttvxlKOji
-         kl2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=IQ2GwlOUVTgQlc+mqyMKVvncVCurhynO9JHNk5+RPeE=;
-        b=OhF+Y+gSCNh93XNL5OqWeP6Lok5OwkOOFuejZ+mCjoOONGa3vTAU0JwXXWtQkW87gg
-         QSTRxU4IqLgBz6QJNJ2wFWMs8OuaIQ+uNJL64k9yOv8p4TeCfIxGlCD6FsmkIOT0oNr3
-         o8Q46pseoqe9HzmiJyegkbgUvIw40tLFEoNof4ZjW+uIyIy8bq/0MCmFJPY1DKzzadKp
-         RPG6X8tXImGwE42d3F/7EUTCtlNJBjfgozLwRyz99LjM/3C7q7folIloRRDodXSBI6N9
-         MrxEU1H65wyV0rXDJ+gwWjZM0bAlwqwYcbbqjzT0mqN2aopBHLr+KlmOORaQk3p4K8eO
-         Eg/w==
-X-Gm-Message-State: AOAM533uuzEI1bPqEBXJRJ8dsy2/yJhU+/EOzWrHtEd6LIwEN0JosJP4
-	JV2x7On4QMK/mdfOSfwvPYtX2Hphh75K4Yn04+A=
-X-Google-Smtp-Source: ABdhPJyya2wPEHa03mMLAZENqUCPjFy2MJFeyQFXGIWq/kXhTqxEEurBGJl+z4N2shVuf6w2hoHRcwL9kLN10Dr96b8=
-X-Received: by 2002:a17:906:a44:: with SMTP id x4mr21300727ejf.101.1614701175266;
- Tue, 02 Mar 2021 08:06:15 -0800 (PST)
+ dkim=pass header.i=@gherzan.com header.s=fm1 header.b=aDtHJP2T;
+ spf=pass (domain: gherzan.com, ip: 64.147.123.20, mailfrom: andrei@gherzan.com)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+	by mailout.west.internal (Postfix) with ESMTP id F15FE15EF;
+	Tue,  2 Mar 2021 11:37:54 -0500 (EST)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute3.internal (MEProxy); Tue, 02 Mar 2021 11:37:55 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gherzan.com; h=
+	from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding; s=fm1; bh=AektYAnIA+NVy
+	qCtoFF1psOA1aR6PbtvftqTDKGww7A=; b=aDtHJP2T01kiQPtlIyu6DDJ2EcxrA
+	yqcdHNkLnRzMwRQMEb20+XwGPARxQQjeosT8mi/+CFwsG8YuOrpQjNwvx8y9bKKz
+	oGhCsnQdh1Nf+oijRu/bNqjLd2SYhYxW2VV7bcIRKmdh5SEnTBYwq6AffsC61ICI
+	WdQmGr3yTTkmzJwHmqD0IKej/Z4NCI2G4sYMQFOsEYEinm9epvhzfUNUMJR2dAZV
+	97Pl83Ia42hffP6zgJMHsOCERHnQbeMZ21E1+b4QlLU+3ybolebJJnQ+yJLmZjI6
+	DkM6wEEFLiBNTSoayJjVLCZc+cPg2D7DHUsY/Wy48Py5jpk7mEk9+GfdQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:content-transfer-encoding:date:from
+	:in-reply-to:message-id:mime-version:references:subject:to
+	:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+	fm2; bh=AektYAnIA+NVyqCtoFF1psOA1aR6PbtvftqTDKGww7A=; b=MtHqjV7H
+	dAxS2CuD+hvW6iuqto+zaH/q3Mes63iCAWa8LTqdjTYj836jcJ5pHglosL2QUpkC
+	2V/NCpPig7DNk2wk1gykt3cl4vWVp9sHjsko9UYAk6q9mNKIzeAtZQthksvAkWyb
+	4TNRBtJJMUVegRyDCO4yWfkhzoVD0BaY9cdSkE9jcUftdePyVV3q4qc1tDoqAtMP
+	dAYFFxfggc1kyoWH6UBeGVdabOKKjD0CvPRhSLi0j9nPoYAV4QZMtZ/fHoOtKLx+
+	Me2OVzmNc7DS2kN30xNsa1lhPAUjGdUGu1RRYgrJ6mhCabUJSd+ZcbThiwEW8UGh
+	UGkHDGHtwq15zg==
+X-ME-Sender: <xms:4mk-YOPJ7nsW22HwjPaNQaG8CsnmTRfZmjPP6g_fjf8zEOoqx3aeGQ>
+    <xme:4mk-YO9SdMHQWIfDE1mxTw-U12MR0GP7bxvgLTMxIQX7mguPeF05U5ZYPk640PJK1
+    yHj90bSO6Mjr0HqfAE>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledruddttddgkeelucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucenucfjughrpefhvffufffkofgjfhgggfestdekre
+    dtredttdenucfhrhhomheptehnughrvghiucfihhgvrhiirghnuceorghnughrvghisehg
+    hhgvrhiirghnrdgtohhmqeenucggtffrrghtthgvrhhnpefhfeejudefheeiffffheekue
+    fgteeuueffkeefjeduudevueekuedvhfefleevheenucffohhmrghinhepphihphhirdho
+    rhhgnecukfhppedutdelrddugeeirdefjedrudekvdenucevlhhushhtvghrufhiiigvpe
+    dtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegrnhgurhgvihesghhhvghriigrnhdrtgho
+    mh
+X-ME-Proxy: <xmx:4mk-YOqK0__Lg3OagJK4xxoL_yq7dA1-zgAAo4D5eTCcJap1SVlcEg>
+    <xmx:4mk-YA5XvZhUqt0Up4ScHVafzrFVY5ZlRM2oudkvDNox-1pUdudvMg>
+    <xmx:4mk-YOORZ0txzBPdhosz4fMkOHi2-AdaX4YE6pK9vrPAEcweN3WZXQ>
+    <xmx:4mk-YNAY7uyCOfS3uPfGJGOBF0A6gcj0i-T5KvWsdFunRBESw1X3fA>
+Received: from qwirkle.internal (host109-146-37-182.range109-146.btcentralplus.com [109.146.37.182])
+	by mail.messagingengine.com (Postfix) with ESMTPA id 2456324005B;
+	Tue,  2 Mar 2021 11:37:54 -0500 (EST)
+From: "Andrei Gherzan" <andrei@gherzan.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Andrei Gherzan <andrei.gherzan@huawei.com>
+Subject: [meta-python][PATCH 2/2] python3-aiohue: Integrate the SONOS control HomeAssistant module
+Date: Tue,  2 Mar 2021 16:37:42 +0000
+Message-Id: <20210302163742.2047086-2-andrei@gherzan.com>
+X-Mailer: git-send-email 2.30.1
+In-Reply-To: <20210302163742.2047086-1-andrei@gherzan.com>
+References: <20210302163742.2047086-1-andrei@gherzan.com>
 MIME-Version: 1.0
-References: <20210219123955.26446-1-anbelski@linux.microsoft.com>
- <CAJiuCcexC-KBndWSa=D++zQNFtxu0zYm9oSs_VLzov5QrOtNLA@mail.gmail.com> <4696f493-ee53-f4c5-7172-272ed8271be5@linux.microsoft.com>
-In-Reply-To: <4696f493-ee53-f4c5-7172-272ed8271be5@linux.microsoft.com>
-From: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
-Date: Tue, 2 Mar 2021 17:06:04 +0100
-Message-ID: <CAJiuCcd4bvctA_JjL6bx6z+zhwsGiy1QPR9tyzgaB6spLwqPQQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] grpc: Upgrade 1.24.3 -> 1.35.0
-To: Anatol Belski <anbelski@linux.microsoft.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Hi Anatol
+From: Andrei Gherzan <andrei.gherzan@huawei.com>
 
-On Tue, 2 Mar 2021 at 14:32, Anatol Belski <anbelski@linux.microsoft.com> w=
-rote:
->
-> Hi Cl=C3=A9ment,
->
-> Thanks for the question.
->
-> On 2/22/2021 5:49 PM, Cl=C3=A9ment P=C3=A9ron wrote:
-> > Hi Anatol,
-> >
-> >
-> > On Fri, 19 Feb 2021 at 13:40, Anatol Belski
-> > <anbelski@linux.microsoft.com> wrote:
-> >> This is a really huge jump in versions, but this package has been not
-> >> upgraded for quite some time. The previous patches are not necessary
-> >> anymore, they're integrated upstream.
-> > This version of gRPC generate a new CMake gRPCTargets.cmake
-> > recipe-sysroot/usr/lib/cmake/grpc/gRPCTargets.cmake
-> >
-> > This generate an error in my build:
-> > Because this CMake declare a
-> > recipe-sysroot/usr/bin/grpc_cpp_plugin
-> >
-> > but this file does not exist.  Possible reasons include:
-> > |
-> > |   * The file was deleted, renamed, or moved to another location.
-> > |
-> > |   * An install or uninstall procedure did not complete successfully.
-> > |
-> > |   * The installation package was faulty and contained
-> >
-> > In my project i'm using the CMake example from gRPC
-> > https://github.com/grpc/grpc/blob/master/examples/cpp/cmake/common.cmak=
-e#L114
-> >
-> > This error is triggered by:
-> > find_package(gRPC 1.35.0 CONFIG REQUIRED)
-> >
-> > FYI My recipes depends on grpc and grpc-native
-> > PACKAGECONFIG[grpc] =3D "-DCONFIG_GRPC=3DON,-DCONFIG_GRPC=3DOFF,grpc gr=
-pc-native"
-> >
-> > Do you have an example of a gRPC recipe?
->
-> I don't use this feature from the grpc package, only linking against the
-> libs. However I don't see why this should be an issue, as all the
-> *.cmake files are packaged. I see that in the RPMs but also in a recipe
-> of a dependent packgae like this
+Signed-off-by: Andrei Gherzan <andrei.gherzan@huawei.com>
+---
+ recipes-devtools/python/python3-pysonos_0.0.40.bb | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 recipes-devtools/python/python3-pysonos_0.0.40.bb
 
-Yes the cmake file is found but not the grpc_cpp_plugin.
+diff --git a/recipes-devtools/python/python3-pysonos_0.0.40.bb b/recipes-devtools/python/python3-pysonos_0.0.40.bb
+new file mode 100644
+index 000000000..dbfa0dff5
+--- /dev/null
++++ b/recipes-devtools/python/python3-pysonos_0.0.40.bb
+@@ -0,0 +1,15 @@
++DESCRIPTION = "A SoCo fork with fixes for Home Assistant "
++HOMEPAGE = "https://pypi.org/project/pysonos/"
++SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=07b0e2ca9ac77cd65cd4edf2e13367ea"
++
++SRC_URI[sha256sum] = "3fed94dffbca5807d39d000d1415fe8d7dfc1032ba92a33d0b577eb2e98a81f3"
++
++inherit pypi setuptools3
++
++RDEPENDS_${PN} += "\
++	${PYTHON_PN}-ifaddr \
++	${PYTHON_PN}-requests \
++	${PYTHON_PN}-xmltodict \
++	"
+-- 
+2.30.1
 
-This is due to cmake looking for the grpc_cpp_plugin in the target
-sysroot instead of the native/host sysroot.
-
->
-> $ ls -l ./tmp/work/*/*/*/recipe-sysroot/usr/lib/cmake/grpc/*.cmake
->
-> Or use recipe-sysroot-native depending on the consuming recipe.
->
-> Just a wild guess here - does your recipe put 'grpc' into DEPENDS or
-> RDEPENDS, etc.
-
-In my recipe I put 'grpc' and 'grpc-native' into DEPENDS using PACKAGECONFI=
-G
-PACKAGECONFIG[grpc] =3D "-DCONFIG_GRPC=3DON,-DCONFIG_GRPC=3DOFF,grpc grpc-n=
-ative"
-
-> Also, do you inherit cmake in your recipe?
-Yes i am indeed inheriting cmake and also systemd in my recipe
-
-> It seems to me
-> that it's more about how to use cmake files in  a recipe, as the
-> particularly mentioned files are packaged and pulled in a consuming recip=
-e.
-
-When I look in the files packaged the cmake file is indeed here.
-The issue is coming from the gRPCTargets.cmake (https://pastebin.com/bZay7c=
-ew)
-Line 159:
-# Create imported target gRPC::grpc_cpp_plugin
-add_executable(gRPC::grpc_cpp_plugin IMPORTED)
-
-gRPC is trying to add the grpc_cpp_plugin for the Target which is not
-present in the final package.
-dpkg -c ./build/tmp/deploy/ipk/aarch64/grpc_1.35.0-r0_aarch64.ipk
-drwxr-xr-x root/root         0 2021-02-22 17:43 ./usr/
-drwxr-xr-x root/root         0 2021-02-22 17:43 ./usr/lib/
-lrwxrwxrwx root/root         0 2021-02-22 17:43
-./usr/lib/libaddress_sorting.so.14 -> libaddress_sorting.so.14.0.0
--rwxr-xr-x root/root     10000 2021-02-22 17:43
-./usr/lib/libaddress_sorting.so.14.0.0
-lrwxrwxrwx root/root         0 2021-02-22 17:43 ./usr/lib/libgpr.so.14
--> libgpr.so.14.0.0
--rwxr-xr-x root/root     59616 2021-02-22 17:43 ./usr/lib/libgpr.so.14.0.0
-lrwxrwxrwx root/root         0 2021-02-22 17:43
-./usr/lib/libgrpc++.so.1 -> libgrpc++.so.1.35.0
--rwxr-xr-x root/root    501680 2021-02-22 17:43 ./usr/lib/libgrpc++.so.1.35=
-.0
-lrwxrwxrwx root/root         0 2021-02-22 17:43
-./usr/lib/libgrpc++_alts.so.1 -> libgrpc++_alts.so.1.35.0
--rwxr-xr-x root/root     22368 2021-02-22 17:43
-./usr/lib/libgrpc++_alts.so.1.35.0
-lrwxrwxrwx root/root         0 2021-02-22 17:43
-./usr/lib/libgrpc++_error_details.so.1 ->
-libgrpc++_error_details.so.1.35.0
--rwxr-xr-x root/root     34896 2021-02-22 17:43
-./usr/lib/libgrpc++_error_details.so.1.35.0
-lrwxrwxrwx root/root         0 2021-02-22 17:43
-./usr/lib/libgrpc++_reflection.so.1 -> libgrpc++_reflection.so.1.35.0
--rwxr-xr-x root/root    284960 2021-02-22 17:43
-./usr/lib/libgrpc++_reflection.so.1.35.0
-lrwxrwxrwx root/root         0 2021-02-22 17:43
-./usr/lib/libgrpc++_unsecure.so.1 -> libgrpc++_unsecure.so.1.35.0
--rwxr-xr-x root/root    415672 2021-02-22 17:43
-./usr/lib/libgrpc++_unsecure.so.1.35.0
-lrwxrwxrwx root/root         0 2021-02-22 17:43
-./usr/lib/libgrpc.so.14 -> libgrpc.so.14.0.0
--rwxr-xr-x root/root   3505864 2021-02-22 17:43 ./usr/lib/libgrpc.so.14.0.0
-lrwxrwxrwx root/root         0 2021-02-22 17:43
-./usr/lib/libgrpc_plugin_support.so.1 ->
-libgrpc_plugin_support.so.1.35.0
--rwxr-xr-x root/root    440528 2021-02-22 17:43
-./usr/lib/libgrpc_plugin_support.so.1.35.0
-lrwxrwxrwx root/root         0 2021-02-22 17:43
-./usr/lib/libgrpc_unsecure.so.14 -> libgrpc_unsecure.so.14.0.0
--rwxr-xr-x root/root   1939384 2021-02-22 17:43
-./usr/lib/libgrpc_unsecure.so.14.0.0
-lrwxrwxrwx root/root         0 2021-02-22 17:43
-./usr/lib/libgrpcpp_channelz.so.1 -> libgrpcpp_channelz.so.1.35.0
--rwxr-xr-x root/root    617784 2021-02-22 17:43
-./usr/lib/libgrpcpp_channelz.so.1.35.0
-lrwxrwxrwx root/root         0 2021-02-22 17:43 ./usr/lib/libupb.so.14
--> libupb.so.14.0.0
--rwxr-xr-x root/root    141768 2021-02-22 17:43 ./usr/lib/libupb.so.14.0.0
-drwxr-xr-x root/root         0 2021-02-22 17:43 ./usr/share/
-drwxr-xr-x root/root         0 2021-02-22 17:43 ./usr/share/grpc/
--rw-r--r-- root/root    263903 2021-02-22 17:38 ./usr/share/grpc/roots.pem
-
-Regards,
-Clement
-
-
->
-> Regards
->
-> Anatol
->
->
->
->
->
->
