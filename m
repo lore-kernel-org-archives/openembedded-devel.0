@@ -1,115 +1,70 @@
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web12.4724.1614661814400748126
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web10.5472.1614671259700623980
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Mar 2021 21:10:14 -0800
+ Mon, 01 Mar 2021 23:47:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=eirbTgmY;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id k22so11330097pll.6
-        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Mar 2021 21:10:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=rTfMuSKmHirktFQ0kY9POZGhjBKNgEPaN7KUXCQ8fhU=;
-        b=eirbTgmYaN/4kzv+qHyiYBscEjZC89h0Pys3AHZExke+dvA+mqfwWtXJ8FsZS69UT2
-         sAEqUqBJYLyaKdfjSyklqEjVsq1AG0GApFBPZ5Y0cI5GOcgVO8WZ5scVuAw3LSoTJTo9
-         lHqkkDyhM835YLm03NutjCPHRJ22UL6gCXzImJB4DIWKeYkbpsBZdzs10TrTM/acWjcN
-         7/5sB4MP7lU5CBCkRmhnxrirV9qqQofwEXV7GddGD5/gw0Gt9OTlzSf2FyhnDpkwoLF6
-         7+Em2tbv5ojaRA4X8KBhfkRmXvaGAdbo91cSdYaLj8rHKG7trKVMrjKX+/wQzDvnD7hI
-         37Dw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=rTfMuSKmHirktFQ0kY9POZGhjBKNgEPaN7KUXCQ8fhU=;
-        b=uRtdiK4/NRH6xQE5qZLq+9wUrSdRwWUdKuBKtF7VQfXnVB7kLFN+vPrT2R/RkJBY/S
-         NJUQAZCUb2+Ue561Q0Y8pFQxSEj/15kB6UeJ6qffB7PQiFsTjagfvssHwKsz6nCeVwVk
-         nCbrlqOMlpRTqJPRhrgdY339aVO3320aqAz8Sn4iVAOJGuhP4HGDAB6C9ozSV5G4ITAX
-         s7QHVvwZUEdPXekaxq3uvAYTyOBIugdGFHeqgxwrwkvKzzFMWUkNCzhOemQN97ekxbn/
-         XdEVglw75QEZw6gm5YDDj4RqKHW2rTl1VTPGuqb83RgymKvuATbQSU5baH2HN15R+cPg
-         /r+w==
-X-Gm-Message-State: AOAM530uvYbabX6HvGaaZbropeTPD5qGpQK4e9ZHu3kulAniqNS33lQ4
-	ac49WYGrNeVfJDM8U5xInsM8obQrpaMO9g==
-X-Google-Smtp-Source: ABdhPJwkeDD4yR+RGHOf/XoJMiRPRvgQA8dDMbGucjlEvh+Ws9u2Z1Rnd55of9oHCMANtT0T/+1Syg==
-X-Received: by 2002:a17:90a:8b02:: with SMTP id y2mr2448128pjn.111.1614661813492;
-        Mon, 01 Mar 2021 21:10:13 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b3bf])
-        by smtp.gmail.com with ESMTPSA id p190sm4470195pga.78.2021.03.01.21.10.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Mar 2021 21:10:13 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 3/3] mbedtls: Fix gcc11 stringop-overflow warning
-Date: Mon,  1 Mar 2021 21:10:09 -0800
-Message-Id: <20210302051009.292001-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.1
-In-Reply-To: <20210302051009.292001-1-raj.khem@gmail.com>
-References: <20210302051009.292001-1-raj.khem@gmail.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zhengrq.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.81,216,1610380800"; 
+   d="scan'208";a="105016255"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 02 Mar 2021 15:47:37 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id 8FA9E4CE7C1F
+	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Mar 2021 15:47:36 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Tue, 2 Mar 2021 15:47:30 +0800
+From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-oe][PATCH] Fix do_package error when enable multilib.
+Date: Tue, 2 Mar 2021 15:47:27 +0800
+Message-ID: <1614671247-67782-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
+X-yoursite-MailScanner-ID: 8FA9E4CE7C1F.A9F12
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ERROR: grpc-1.35.0-r0 do_package: QA Issue: grpc: Files/directories were installed but not shipped in any package:
+  /usr/lib
+  /usr/lib/pkgconfig
+  /usr/lib/pkgconfig/grpc.pc
+  /usr/lib/pkgconfig/grpc_unsecure.pc
+  /usr/lib/pkgconfig/grpc++.pc
+  /usr/lib/pkgconfig/gpr.pc
+  /usr/lib/pkgconfig/grpc++_unsecure.pc
+Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+grpc: 7 installed and not shipped files. [installed-vs-shipped]
+ERROR: grpc-1.35.0-r0 do_package: Fatal QA errors found, failing task.
+
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- ...sl_tls-Increase-size-of-padbuf-to-64.patch | 34 +++++++++++++++++++
- .../mbedtls/mbedtls_2.25.0.bb                 |  1 +
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-ssl_tls-Increase-size-of-padbuf-to-64.patch
+ meta-oe/recipes-devtools/grpc/grpc_1.35.0.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-ssl_tls-Increase-size-of-padbuf-to-64.patch b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-ssl_tls-Increase-size-of-padbuf-to-64.patch
-new file mode 100644
-index 0000000000..f3ba04f51f
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-ssl_tls-Increase-size-of-padbuf-to-64.patch
-@@ -0,0 +1,34 @@
-+From c3d7321d59e959b357a7d3d69782d9105f3d04aa Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 1 Mar 2021 21:04:57 -0800
-+Subject: [PATCH] ssl_tls: Increase size of padbuf to 64
-+
-+This fixes warnings with gcc11
-+
-+git/library/ssl_tls.c: In function 'ssl_calc_finished_tls_sha384':
-+git/library/ssl_tls.c:3267:5: error: 'mbedtls_sha512_finish_ret' accessing 64 bytes in a region of size 48 [-Werror=stringop-overflow=]
-+ 3267 |     finish( &sha512, padbuf );
-+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~
-+git/library/ssl_tls.c:3267:5: note: referencing argument 2 of type 'unsigned char *'
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ library/ssl_tls.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/library/ssl_tls.c b/library/ssl_tls.c
-+index a1a5859f0..4c98a4104 100644
-+--- a/library/ssl_tls.c
-++++ b/library/ssl_tls.c
-+@@ -3205,7 +3205,7 @@ static void ssl_calc_finished_tls_sha384(
-+ {
-+     int len = 12;
-+     const char *sender;
-+-    unsigned char padbuf[48];
-++    unsigned char padbuf[64];
-+ #if defined(MBEDTLS_USE_PSA_CRYPTO)
-+     size_t hash_size;
-+     psa_hash_operation_t sha384_psa = PSA_HASH_OPERATION_INIT;
-+-- 
-+2.30.1
-+
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.25.0.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.25.0.bb
-index 27c1b209dc..481e7ea949 100644
---- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.25.0.bb
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.25.0.bb
-@@ -25,6 +25,7 @@ SECTION = "libs"
- S = "${WORKDIR}/git"
- SRCREV = "1c54b5410fd48d6bcada97e30cac417c5c7eea67"
- SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=development"
-+SRC_URI += "file://0001-ssl_tls-Increase-size-of-padbuf-to-64.patch"
+diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.35.0.bb b/meta-oe/recipes-devtools/grpc/grpc_1.35.0.bb
+index 5097b2b1b..363e2b468 100644
+--- a/meta-oe/recipes-devtools/grpc/grpc_1.35.0.bb
++++ b/meta-oe/recipes-devtools/grpc/grpc_1.35.0.bb
+@@ -35,6 +35,11 @@ EXTRA_OECMAKE = " \
+     -DgRPC_INSTALL_CMAKEDIR=${baselib}/cmake/${BPN} \
+     "
  
- inherit cmake
- 
++do_configure_prepend() {
++    sed -i -e "s#lib/pkgconfig/#${baselib}/pkgconfig/#g" ${S}/CMakeLists.txt
++}
++
++
+ do_configure_prepend_mipsarch() {
+     sed -i -e "s/set(_gRPC_ALLTARGETS_LIBRARIES \${CMAKE_DL_LIBS} rt m pthread)/set(_gRPC_ALLTARGETS_LIBRARIES \${CMAKE_DL_LIBS} atomic rt m pthread)/g" ${S}/CMakeLists.txt
+ }
 -- 
-2.30.1
+2.25.1
+
+
 
