@@ -1,202 +1,151 @@
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
- by mx.groups.io with SMTP id smtpd.web10.7828.1614688887324189373
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+ by mx.groups.io with SMTP id smtpd.web09.7743.1614688968612378887
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Mar 2021 04:41:28 -0800
+ Tue, 02 Mar 2021 04:42:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: uol@pengutronix.de)
-Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
-	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <uol@pengutronix.de>)
-	id 1lH4L6-0004fF-Ps; Tue, 02 Mar 2021 13:41:24 +0100
-Received: from uol by dude.hi.pengutronix.de with local (Exim 4.92)
-	(envelope-from <uol@pengutronix.de>)
-	id 1lH4L6-0004Wj-GH; Tue, 02 Mar 2021 13:41:24 +0100
-From: "Ulrich ?lmann" <u.oelmann@pengutronix.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Ulrich=20=C3=96lmann?= <u.oelmann@pengutronix.de>
-Subject: [meta-oe][PATCH] v4l-utils: update to 1.20.0
-Date: Tue,  2 Mar 2021 13:41:20 +0100
-Message-Id: <20210302124120.17357-1-u.oelmann@pengutronix.de>
-X-Mailer: git-send-email 2.29.2
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=CfXzjKzZ;
+ spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f47.google.com with SMTP id mj10so14877257ejb.5
+        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Mar 2021 04:42:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=sMFV08hekdbEwG7jP+yEsfwlMQcqH0rTmaNwYWffr/I=;
+        b=CfXzjKzZxYUtlTcGtV7hc3XIxzy8hhqLu0pnWoGsuNmZ3E68K19anBytytliXU7Sz5
+         KIFW7ApBy4Tm6VxhpSDXCM3Qmd+ER2ZLt56ffMj691Q1hP/NSen4r2erxLN7X5ql2qIH
+         pitAocHUV1xvfI9RKCZIYiWkO9Z2hLBhw6D2puxqRnaqaF8UHvVw4LOEDddt3GCkt0Jc
+         O7lU1/2NDYbjXrUQJ0J6C/x8T9Ysjmchi+W4wtI0J52adNzlrXWw30QWzZB6Tc4H90cR
+         8JfIc62+tubdFLf3wUrM7Y6S3IbWOGecJ2JmqRooC18YPdThH/NNoGDdOHWnRUQ4qV3P
+         TiuQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=sMFV08hekdbEwG7jP+yEsfwlMQcqH0rTmaNwYWffr/I=;
+        b=D9yPtK4E1Tj6cwN0bPlfCQZccKqNdxMjAdsnixwMjZtuK+4SFMq8ycaHkPg0t0W0uz
+         STEMPEI5f+B225eoDCe+uTOTiAvUs+NnNB6HOxgxt6MDnx1+AHqW8XlUR6NHVXkz0kBs
+         93XjWvgRbYq0jd5HL/7p73P/pglgthW+WNMBeBm60vOoop2z02YKmZmlGcXjHl6lig/A
+         svyzBUYO9DBL3jW3qrKPzuq1Q1q1mEPwdti+84DUOTZvu+X7N5Q+ZWXIEZ1wU+1ENRBA
+         vreVPxncJoQVVxq9N3RVuF8ESn+fkUFF/z0J5invW6423nYa0+BDBc35ZLNJgFQ4ePZm
+         bg6A==
+X-Gm-Message-State: AOAM531I1KrpcUwKr+qb2PHIEm/5/9j8RF6pNHa40/8TNNVf1LL/YcmY
+	aWMjx5vyUp2qRYENa70MeHZ7QKd8Rj6Vz5fJu+Q=
+X-Google-Smtp-Source: ABdhPJx+oH+B1kX8mYuAfCvlyHMEDpAqlTbYxAePxj112BMBNtac/3HAdROAdzIQv5ModIDicchT4krQzYMntV918A8=
+X-Received: by 2002:a17:906:5902:: with SMTP id h2mr20252811ejq.137.1614688967046;
+ Tue, 02 Mar 2021 04:42:47 -0800 (PST)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::7
-X-SA-Exim-Mail-From: uol@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20210302123934.1585766-1-andrei@gherzan.com>
+In-Reply-To: <20210302123934.1585766-1-andrei@gherzan.com>
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+Date: Tue, 2 Mar 2021 13:42:35 +0100
+Message-ID: <CA+chaQehnu+R80nbkGnaUgTt1_YiXuea4xnOBhMYoV_9cwoFMg@mail.gmail.com>
+Subject: Re: [oe] [meta-python][dunfell][PATCH] python-grpcio-tools: Fix DEPENDS append to grpcio module
+To: Andrei Gherzan <andrei@gherzan.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Andrei Gherzan <andrei.gherzan@huawei.com>
+Content-Type: multipart/alternative; boundary="0000000000004db7fd05bc8d12ff"
 
-Add new buildtime configuration options, update context of two patches and
-remove two patches as there are fixes [1]-[3] found upstream in the meantime.
+--0000000000004db7fd05bc8d12ff
+Content-Type: text/plain; charset="UTF-8"
 
-[1] 38f4ce74275a ("keytable: use input_event properly")
-[2] 8b7e6ce9367f ("keytable: add compatibility for input_event_sec")
-[3] 976a2f681b4e ("keymap.h needs sys/types.h and argp.h with musl")
+This was already fixed in:
+https://git.openembedded.org/meta-openembedded/commit/?h=dunfell&id=7fbe300c6d3b7e116dd7a56e16f85ff78d8f522c
 
-Signed-off-by: Ulrich Ölmann <u.oelmann@pengutronix.de>
----
- ...k-mc_nextgen_test-with-libargp-if-ne.patch |  2 +-
- ...fine-error_t-and-include-sys-types.h.patch | 45 -------------------
- ...ld-on-32bit-arches-with-64bit-time_t.patch | 41 -----------------
- .../v4l-utils/0007-Do-not-use-getsubopt.patch |  2 +-
- ...4l-utils_1.18.1.bb => v4l-utils_1.20.0.bb} | 10 ++---
- 5 files changed, 7 insertions(+), 93 deletions(-)
- delete mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0005-Define-error_t-and-include-sys-types.h.patch
- delete mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0006-Fix-build-on-32bit-arches-with-64bit-time_t.patch
- rename meta-oe/recipes-multimedia/v4l2apps/{v4l-utils_1.18.1.bb => v4l-utils_1.20.0.bb} (86%)
+On Tue, Mar 2, 2021 at 1:40 PM Andrei Gherzan <andrei@gherzan.com> wrote:
 
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0002-contrib-test-Link-mc_nextgen_test-with-libargp-if-ne.patch b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0002-contrib-test-Link-mc_nextgen_test-with-libargp-if-ne.patch
-index 8033fcacf200..a849d465c7bc 100644
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0002-contrib-test-Link-mc_nextgen_test-with-libargp-if-ne.patch
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0002-contrib-test-Link-mc_nextgen_test-with-libargp-if-ne.patch
-@@ -14,7 +14,7 @@ diff --git a/contrib/test/Makefile.am b/contrib/test/Makefile.am
- index 0188fe2..dac07f3 100644
- --- a/contrib/test/Makefile.am
- +++ b/contrib/test/Makefile.am
--@@ -40,7 +40,7 @@ sdlcam_CFLAGS = -I../.. $(SDL2_CFLAGS)
-+@@ -42,7 +42,7 @@ sdlcam_CFLAGS = -I../.. $(SDL2_CFLAGS)
-  sdlcam_LDADD = ../../lib/libv4l2/libv4l2.la  ../../lib/libv4lconvert/libv4lconvert.la
-  
-  mc_nextgen_test_CFLAGS = $(LIBUDEV_CFLAGS)
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0005-Define-error_t-and-include-sys-types.h.patch b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0005-Define-error_t-and-include-sys-types.h.patch
-deleted file mode 100644
-index 57948add6ed4..000000000000
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0005-Define-error_t-and-include-sys-types.h.patch
-+++ /dev/null
-@@ -1,45 +0,0 @@
--From 137ce23ae677b11e5483ef810751edae7bf96bb9 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 30 Nov 2019 18:40:06 -0800
--Subject: [PATCH] Define error_t and include sys/types.h
--
--Fix 'unknown type name' for error_t and u_int32_t.
--u_int32_t is defined in sys/type.h
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- utils/ir-ctl/keymap.h   | 4 ++++
-- utils/keytable/keymap.h | 5 +++++
-- 2 files changed, 9 insertions(+)
--
--diff --git a/utils/ir-ctl/keymap.h b/utils/ir-ctl/keymap.h
--index f2b2963..1f8a3f8 100644
----- a/utils/ir-ctl/keymap.h
--+++ b/utils/ir-ctl/keymap.h
--@@ -2,6 +2,10 @@
-- #ifndef __KEYMAP_H
-- #define __KEYMAP_H
-- 
--+#include <sys/types.h>
--+#ifndef error_t
--+typedef int error_t;
--+#endif
-- struct keymap {
-- 	struct keymap *next;
-- 	char *name;
--diff --git a/utils/keytable/keymap.h b/utils/keytable/keymap.h
--index f2b2963..345d55d 100644
----- a/utils/keytable/keymap.h
--+++ b/utils/keytable/keymap.h
--@@ -2,6 +2,11 @@
-- #ifndef __KEYMAP_H
-- #define __KEYMAP_H
-- 
--+#include <sys/types.h>
--+#ifndef error_t
--+typedef int error_t;
--+#endif
--+
-- struct keymap {
-- 	struct keymap *next;
-- 	char *name;
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0006-Fix-build-on-32bit-arches-with-64bit-time_t.patch b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0006-Fix-build-on-32bit-arches-with-64bit-time_t.patch
-deleted file mode 100644
-index a8926762edd2..000000000000
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0006-Fix-build-on-32bit-arches-with-64bit-time_t.patch
-+++ /dev/null
-@@ -1,41 +0,0 @@
--From b213da2d5fcc93cd24fc880c71c717d8e2ce2968 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 30 Nov 2019 18:43:21 -0800
--Subject: [PATCH] Fix build on 32bit arches with 64bit time_t
--
--time element is deprecated on new input_event structure in kernel's
--input.h [1]
--
--[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit?id=152194fe9c3f
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- utils/keytable/keytable.c | 7 ++++++-
-- 1 file changed, 6 insertions(+), 1 deletion(-)
--
--diff --git a/utils/keytable/keytable.c b/utils/keytable/keytable.c
--index 6cb0217..59ff1ee 100644
----- a/utils/keytable/keytable.c
--+++ b/utils/keytable/keytable.c
--@@ -53,6 +53,11 @@
-- 
-- # define N_(string) string
-- 
--+#ifndef input_event_sec
--+#define input_event_sec time.tv_sec
--+#define input_event_usec time.tv_usec
--+#endif
--+
-- struct input_keymap_entry_v2 {
-- #define KEYMAP_BY_INDEX	(1 << 0)
-- 	u_int8_t  flags;
--@@ -1533,7 +1538,7 @@ static void test_event(struct rc_device *rc_dev, int fd)
-- 
-- 		for (i = 0; i < rd / sizeof(struct input_event); i++) {
-- 			printf(_("%ld.%06ld: event type %s(0x%02x)"),
---				ev[i].time.tv_sec, ev[i].time.tv_usec,
--+				ev[i].input_event_sec, ev[i].input_event_usec,
-- 				get_event_name(events_type, ev[i].type), ev[i].type);
-- 
-- 			switch (ev[i].type) {
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0007-Do-not-use-getsubopt.patch b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0007-Do-not-use-getsubopt.patch
-index ac704c72dcac..e3ce45d1673e 100644
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0007-Do-not-use-getsubopt.patch
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0007-Do-not-use-getsubopt.patch
-@@ -20,7 +20,7 @@ diff --git a/utils/v4l2-ctl/v4l2-ctl-common.cpp b/utils/v4l2-ctl/v4l2-ctl-common
- index 651917e..cea57b7 100644
- --- a/utils/v4l2-ctl/v4l2-ctl-common.cpp
- +++ b/utils/v4l2-ctl/v4l2-ctl-common.cpp
--@@ -782,15 +782,17 @@ static bool parse_subset(char *optarg)
-+@@ -785,15 +785,17 @@ static bool parse_subset(char *optarg)
-  
-  static bool parse_next_subopt(char **subs, char **value)
-  {
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.18.1.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.20.0.bb
-similarity index 86%
-rename from meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.18.1.bb
-rename to meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.20.0.bb
-index 193335deaace..7d9664622042 100644
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.18.1.bb
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.20.0.bb
-@@ -20,14 +20,14 @@ SRC_URI = "http://linuxtv.org/downloads/v4l-utils/v4l-utils-${PV}.tar.bz2 \
-            file://mediactl-pkgconfig.patch \
-            file://export-mediactl-headers.patch \
-            file://0002-contrib-test-Link-mc_nextgen_test-with-libargp-if-ne.patch \
--           file://0005-Define-error_t-and-include-sys-types.h.patch \
--           file://0006-Fix-build-on-32bit-arches-with-64bit-time_t.patch \
-            file://0007-Do-not-use-getsubopt.patch \
-            "
--SRC_URI[md5sum] = "ff2dd75970683be9a301ed949b3372b3"
--SRC_URI[sha256sum] = "25fc42253722401f8742f04dc50a444dfa9b75378e7d09b55035bcbb44c5f342"
-+SRC_URI[md5sum] = "46f9e2c0b2fdccd009da2f7e1aa87894"
-+SRC_URI[sha256sum] = "956118713f7ccb405c55c7088a6a2490c32d54300dd9a30d8d5008c28d3726f7"
- 
--EXTRA_OECONF = "--disable-qv4l2 --enable-shared --with-udevdir=${base_libdir}/udev"
-+EXTRA_OECONF = "--disable-qv4l2 --enable-shared --with-udevdir=${base_libdir}/udev \
-+                --disable-v4l2-compliance-32 --disable-v4l2-ctl-32 \
-+                --with-systemdsystemunitdir=${systemd_system_unitdir}"
- 
- VIRTUAL-RUNTIME_ir-keytable-keymaps ?= "rc-keymaps"
- 
--- 
-2.29.2
+> From: Andrei Gherzan <andrei.gherzan@huawei.com>
+>
+> There was a missing whitespace leading to errors like:
+>
+> ERROR: Nothing PROVIDES 'python3python3-grpcio' (but
+> [...]/meta-openembedded/meta-python/recipes-devtools/python/
+> python3-grpcio-tools_1.14.1.bb
+> DEPENDS on
+> or otherwise requires it). Close matches:
+>   python3-grpcio
+>
+> Signed-off-by: Andrei Gherzan <andrei.gherzan@huawei.com>
+> ---
+>  meta-python/recipes-devtools/python/python-grpcio-tools.inc | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-python/recipes-devtools/python/python-grpcio-tools.inc
+> b/meta-python/recipes-devtools/python/python-grpcio-tools.inc
+> index 1a15c48de..a3d34cf46 100644
+> --- a/meta-python/recipes-devtools/python/python-grpcio-tools.inc
+> +++ b/meta-python/recipes-devtools/python/python-grpcio-tools.inc
+> @@ -2,7 +2,7 @@ DESCRIPTION = "Google gRPC tools"
+>  HOMEPAGE = "http://www.grpc.io/"
+>  SECTION = "devel/python"
+>
+> -DEPENDS_append = "${PYTHON_PN}-grpcio"
+> +DEPENDS += "${PYTHON_PN}-grpcio"
+>  RDEPENDS_${PN} = "${PYTHON_PN}-grpcio"
+>
+>  LICENSE = "Apache-2.0"
+> --
+> 2.30.1
+>
+>
+> 
+>
+>
 
+--0000000000004db7fd05bc8d12ff
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">This was already fixed in:<div><a href=3D"https://git.open=
+embedded.org/meta-openembedded/commit/?h=3Ddunfell&amp;id=3D7fbe300c6d3b7e1=
+16dd7a56e16f85ff78d8f522c">https://git.openembedded.org/meta-openembedded/c=
+ommit/?h=3Ddunfell&amp;id=3D7fbe300c6d3b7e116dd7a56e16f85ff78d8f522c</a><br=
+></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail=
+_attr">On Tue, Mar 2, 2021 at 1:40 PM Andrei Gherzan &lt;<a href=3D"mailto:=
+andrei@gherzan.com">andrei@gherzan.com</a>&gt; wrote:<br></div><blockquote =
+class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
+id rgb(204,204,204);padding-left:1ex">From: Andrei Gherzan &lt;<a href=3D"m=
+ailto:andrei.gherzan@huawei.com" target=3D"_blank">andrei.gherzan@huawei.co=
+m</a>&gt;<br>
+<br>
+There was a missing whitespace leading to errors like:<br>
+<br>
+ERROR: Nothing PROVIDES &#39;python3python3-grpcio&#39; (but<br>
+[...]/meta-openembedded/meta-python/recipes-devtools/python/<a href=3D"htt=
+p://python3-grpcio-tools_1.14.1.bb" rel=3D"noreferrer" target=3D"_blank">py=
+thon3-grpcio-tools_1.14.1.bb</a><br>
+DEPENDS on<br>
+or otherwise requires it). Close matches:<br>
+=C2=A0 python3-grpcio<br>
+<br>
+Signed-off-by: Andrei Gherzan &lt;<a href=3D"mailto:andrei.gherzan@huawei.=
+com" target=3D"_blank">andrei.gherzan@huawei.com</a>&gt;<br>
+---<br>
+=C2=A0meta-python/recipes-devtools/python/python-grpcio-tools.inc | 2 +-<b=
+r>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+<br>
+diff --git a/meta-python/recipes-devtools/python/python-grpcio-tools.inc b=
+/meta-python/recipes-devtools/python/python-grpcio-tools.inc<br>
+index 1a15c48de..a3d34cf46 100644<br>
+--- a/meta-python/recipes-devtools/python/python-grpcio-tools.inc<br>
++++ b/meta-python/recipes-devtools/python/python-grpcio-tools.inc<br>
+@@ -2,7 +2,7 @@ DESCRIPTION =3D &quot;Google gRPC tools&quot;<br>
+=C2=A0HOMEPAGE =3D &quot;<a href=3D"http://www.grpc.io/" rel=3D"noreferrer=
+" target=3D"_blank">http://www.grpc.io/</a>&quot;<br>
+=C2=A0SECTION =3D &quot;devel/python&quot;<br>
+<br>
+-DEPENDS_append =3D &quot;${PYTHON_PN}-grpcio&quot;<br>
++DEPENDS +=3D &quot;${PYTHON_PN}-grpcio&quot;<br>
+=C2=A0RDEPENDS_${PN} =3D &quot;${PYTHON_PN}-grpcio&quot;<br>
+<br>
+=C2=A0LICENSE =3D &quot;Apache-2.0&quot;<br>
+-- <br>
+2.30.1<br>
+<br>
+<br>
+<br>
+<br>
+</blockquote></div>
+
+--0000000000004db7fd05bc8d12ff--
