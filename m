@@ -1,333 +1,365 @@
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web08.4507.1614661813149284850
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
+ by mx.groups.io with SMTP id smtpd.web09.4478.1614661813873843256
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 01 Mar 2021 21:10:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gpNVcSCY;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id u12so1143159pjr.2
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=mGJ7Ulen;
+ spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f171.google.com with SMTP id t25so13101777pga.2
         for <openembedded-devel@lists.openembedded.org>; Mon, 01 Mar 2021 21:10:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=WBan/J0y5KnjIM0qEKJLNefUYNOSH+zclQ4eLJb2rlM=;
-        b=gpNVcSCY8kTais14fpx0ANbAWC3GZYc77usEUczL7aC0LyinvUXtrVZMj+CSoCU3Po
-         Aybome3UjTM+4Z0DLj0zWIF26AoJZFwqPKhiwyf8EodxbhNaH+HPzwW+BuEUNHOHUGmG
-         Kcwy966NQPnz1o6qWmyuhDMQ6kA4jlUrCjy79sxHeW5ICC2USQwLCqjQzEfY1eQlkIuD
-         J4splF9qkP8Z+TyBZ6DVncPfs4i+pRQpCEoH1LWUJT427L3KnBtJPL943/5ykLnvDH69
-         UF7/CDtaFzv1U5rlBoPMiIItE9GXkrTrx8O2iIbkWZLQDSOCrgu44WyWHhMXQ4mdCrQX
-         N3PA==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=O6Lkl0Ic68+CuB4lnj09i+ExUQqU6wybZ2gADMXdmd0=;
+        b=mGJ7Ulenv9Cu/Pqn3D7oHdtxp3pE8XXa5SbK4S2OAhcZ8N+ASNRqk20axiBDRa728n
+         hNCX3m2VchPKxuuOI7NO3mejH7j5ne2AeHF4/yI1rkHAQhHfD0OgRIMNKEjYI9jnCgka
+         eh0ONWjm+n5YRZhzY7A8j84bjFQ84OOhs5JFlFMPAPpSonhFQLe+qnQe+CPt+XJAONKD
+         sTqwm7QW/iuJwCHV+5pVhyz1/veQZmpfkNet9FRPfVeZf8a6jtLhTKYlxIwxskyEiFJ/
+         uNsqWewcsGZ/+cjZUDT3is/hbRwin7x0sgOUOev48Uiou9VTVsJlVatxgCisgGmKso6Z
+         +hmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=WBan/J0y5KnjIM0qEKJLNefUYNOSH+zclQ4eLJb2rlM=;
-        b=lDH2DjOAGup2ujB5cZcsHw2sQaD8BJGB/T1ENWo7+CAOMq3XCxfY+5Z8ijb+KDGe51
-         fPCGl6U0ITjmzIfnsOMXMRucgG3j3z6pkpG4VQYhe1FfV3vVK/jfj5+lZOehFMdLZdAo
-         vkOY9nKXAxqygUEwc07pnxpL4KncWv1RJ9L4KVE/DI3CUyGBrF0ocH5v9ElL7bn+aJ5I
-         f4DE+B+jFLKJt3nt1KEhtrDWOeRVUQnVl5bSz2Kt/wtAE8nbAbnQ24s59aI+DFJ1GPwP
-         SW5aDU1Jd0Q/HNUoqBqEnVoB3KZAXZDHSN1NaqGYM6WYWTqx3x8QqQ6ScA3noOzYZGQu
-         +eoA==
-X-Gm-Message-State: AOAM533+d6g9a7iMKXFGBVi5NSUohe7N2IYu7JHToMi2UKasJ47ZeuEp
-	9TeeRKL+ehWENV6lmuqdVUwaCdeB94KZmg==
-X-Google-Smtp-Source: ABdhPJy3hfa1Welu+FxzZA49ArCSdRAbCbGqgJEn8KCP4GjoQw50WsQjOtDf8+b445c3HiY7VDEbJQ==
-X-Received: by 2002:a17:90a:9f43:: with SMTP id q3mr2539170pjv.50.1614661812089;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=O6Lkl0Ic68+CuB4lnj09i+ExUQqU6wybZ2gADMXdmd0=;
+        b=TyVhgTiEev7CTVuajx8/eQLuzvYYAVCT0eBroqW8q7vXhbGFrqFz5WfYJzR/FZEZRE
+         tpM67hzSI4X1KWSB0CVCyIqlsRuE18lnjhFGcRuFX9LL8sXenTwMGyJSKw4O4uNRxO0s
+         gt/i/xjm3elORBc3MGFNklPU7gNl+Hz2NJazxO5yagYytJrIg15yCP84zEHtVn7lqScR
+         d1/bagQUdknMkvZJckmGeJzdrsdgXVjeuawsZ58u0c0qUlEY8R+b68mIgJ1ecNd+fhps
+         6uQ2cK/9uZHt0A2VmnNAVy2qQcxO2pJqL+kud45PxjH4J/p+LNRY92KnYKuIi3Xwk8uA
+         m2LA==
+X-Gm-Message-State: AOAM532gWmtYDFWBXZUSJNNogVqMw71YwgpOJxSVHK60qv0ulcYdWr4s
+	JBCDC0FZKIf2iRWOrL5g2Dryyod1QZrzCQ==
+X-Google-Smtp-Source: ABdhPJyYp2zeYngsodTJGDgk/6TF3z6Ps2MaGZdDOdVhmYvhlgmRLAkAXAtj/VJXYxzWuglgbyectA==
+X-Received: by 2002:aa7:9636:0:b029:1ee:50e3:31dc with SMTP id r22-20020aa796360000b02901ee50e331dcmr1745421pfg.21.1614661812818;
         Mon, 01 Mar 2021 21:10:12 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b3bf])
-        by smtp.gmail.com with ESMTPSA id p190sm4470195pga.78.2021.03.01.21.10.11
+        by smtp.gmail.com with ESMTPSA id p190sm4470195pga.78.2021.03.01.21.10.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Mar 2021 21:10:11 -0800 (PST)
+        Mon, 01 Mar 2021 21:10:12 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>,
-	Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
-Subject: [meta-oe][PATCH 1/3] glog: Upgrade to 0.4.0
-Date: Mon,  1 Mar 2021 21:10:07 -0800
-Message-Id: <20210302051009.292001-1-raj.khem@gmail.com>
+	Max Kellermann <max.kellermann@gmail.com>,
+	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Subject: [meta-multimedia][PATCH 2/3] mpd: Upgrade to 0.22 series
+Date: Mon,  1 Mar 2021 21:10:08 -0800
+Message-Id: <20210302051009.292001-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.30.1
+In-Reply-To: <20210302051009.292001-1-raj.khem@gmail.com>
+References: <20210302051009.292001-1-raj.khem@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Drop upstreamed patch
+Drop the gcc10 patches the problem is fixed in newer versions
+Migrate to use meson build system
+Drop libwrap packageconfig, its dropped upstream too
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+Cc: Max Kellermann <max.kellermann@gmail.com>
+Cc: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...001-Find-Libunwind-during-configure.patch} | 40 +++++------
- ...Rework-CMake-glog-VERSION-management.patch | 71 -------------------
- .../glog/0003-installation-path-fix.patch     | 65 -----------------
- .../glog/{glog_0.3.5.bb => glog_0.4.0.bb}     |  6 +-
- 4 files changed, 21 insertions(+), 161 deletions(-)
- rename meta-oe/recipes-support/glog/glog/{0002-Find-Libunwind-during-configure.patch => 0001-Find-Libunwind-during-configure.patch} (79%)
- delete mode 100644 meta-oe/recipes-support/glog/glog/0001-Rework-CMake-glog-VERSION-management.patch
- delete mode 100644 meta-oe/recipes-support/glog/glog/0003-installation-path-fix.patch
- rename meta-oe/recipes-support/glog/{glog_0.3.5.bb => glog_0.4.0.bb} (80%)
+ ...ingBuffer-Include-cstddef-for-size_t.patch |  27 -----
+ ...-Include-stdexcept-for-runtime_error.patch |  38 -------
+ .../recipes-multimedia/musicpd/mpd_0.20.22.bb | 103 ------------------
+ .../recipes-multimedia/musicpd/mpd_0.22.6.bb  |  96 ++++++++++++++++
+ 4 files changed, 96 insertions(+), 168 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-multimedia/musicpd/mpd/0001-StringBuffer-Include-cstddef-for-size_t.patch
+ delete mode 100644 meta-multimedia/recipes-multimedia/musicpd/mpd/0002-Include-stdexcept-for-runtime_error.patch
+ delete mode 100644 meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
+ create mode 100644 meta-multimedia/recipes-multimedia/musicpd/mpd_0.22.6.bb
 
-diff --git a/meta-oe/recipes-support/glog/glog/0002-Find-Libunwind-during-configure.patch b/meta-oe/recipes-support/glog/glog/0001-Find-Libunwind-during-configure.patch
-similarity index 79%
-rename from meta-oe/recipes-support/glog/glog/0002-Find-Libunwind-during-configure.patch
-rename to meta-oe/recipes-support/glog/glog/0001-Find-Libunwind-during-configure.patch
-index 15cf67fd2e..577007a62e 100644
---- a/meta-oe/recipes-support/glog/glog/0002-Find-Libunwind-during-configure.patch
-+++ b/meta-oe/recipes-support/glog/glog/0001-Find-Libunwind-during-configure.patch
-@@ -1,6 +1,5 @@
--diff -uNr a/cmake/FindLibunwind.cmake b/cmake/FindLibunwind.cmake
----- a/cmake/FindLibunwind.cmake	1970-01-01 01:00:00.000000000 +0100
--+++ b/cmake/FindLibunwind.cmake	2018-11-20 15:53:48.799078114 +0100
-+--- /dev/null
-++++ b/cmake/FindLibunwind.cmake
- @@ -0,0 +1,54 @@
- +# - Try to find libunwind
- +# Once done this will define
-@@ -56,10 +55,9 @@ diff -uNr a/cmake/FindLibunwind.cmake b/cmake/FindLibunwind.cmake
- +else()
- +    message("Can't find libunwind library")
- +endif()
--diff -uNr a/CMakeLists.txt b/CMakeLists.txt
----- a/CMakeLists.txt	2018-11-20 15:49:07.576278417 +0100
--+++ b/CMakeLists.txt	2018-11-20 15:49:32.106819928 +0100
--@@ -58,7 +58,6 @@
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -64,7 +64,6 @@ check_include_file (dlfcn.h HAVE_DLFCN_H
-  check_include_file (execinfo.h HAVE_EXECINFO_H)
-  check_include_file (glob.h HAVE_GLOB_H)
-  check_include_file (inttypes.h HAVE_INTTYPES_H)
-@@ -67,27 +65,28 @@ diff -uNr a/CMakeLists.txt b/CMakeLists.txt
-  check_include_file (memory.h HAVE_MEMORY_H)
-  check_include_file (pwd.h HAVE_PWD_H)
-  check_include_file (stdint.h HAVE_STDINT_H)
--@@ -74,7 +73,6 @@
-+@@ -80,7 +79,6 @@ check_include_file (syscall.h HAVE_SYSCA
-  check_include_file (syslog.h HAVE_SYSLOG_H)
-  check_include_file (ucontext.h HAVE_UCONTEXT_H)
-  check_include_file (unistd.h HAVE_UNISTD_H)
- -check_include_file (unwind.h HAVE_UNWIND_H)
-+ check_include_file (pwd.h HAVE_PWD_H)
-  
-  check_include_file_cxx ("ext/hash_map" HAVE_EXT_HASH_MAP)
-- check_include_file_cxx ("ext/hash_set" HAVE_EXT_HASH_SET)
--@@ -109,10 +107,7 @@
-+@@ -116,11 +114,9 @@ check_cxx_compiler_flag (-Wunnamed-type-
-  # snprintf as an inline function
-  check_symbol_exists (snprintf stdio.h HAVE_SNPRINTF)
-  
- -check_library_exists (unwind get_static_proc_name "" HAVE_LIB_UNWIND)
---
-+ check_library_exists (dbghelp UnDecorateSymbolName "" HAVE_DBGHELP)
-+ 
- -find_library (UNWIND_LIBRARY NAMES unwind DOC "unwind library")
- -mark_as_advanced (UNWIND_LIBRARY)
- +find_package(Libunwind)
-  
-  check_c_source_compiles ("
-  #include <stdlib.h>
--@@ -376,9 +371,9 @@
-+@@ -471,9 +467,9 @@ add_library(glog::glog ALIAS glog)
-  
-  set_target_properties (glog PROPERTIES POSITION_INDEPENDENT_CODE ON)
-  
-@@ -98,20 +97,19 @@ diff -uNr a/CMakeLists.txt b/CMakeLists.txt
- +  target_link_libraries (glog PUBLIC unwind)
- +endif (Libunwind_FOUND)
-  
-- if (HAVE_PTHREAD)
--   target_link_libraries (glog PUBLIC ${CMAKE_THREAD_LIBS_INIT})
--@@ -571,6 +566,7 @@
-+ if (HAVE_DBGHELP)
-+    target_link_libraries (glog PUBLIC dbghelp)
-+@@ -678,6 +674,7 @@ export (PACKAGE glog)
-  install (FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/glog-config.cmake
-    ${CMAKE_CURRENT_BINARY_DIR}/glog-config-version.cmake
- +  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/FindLibunwind.cmake
--   DESTINATION lib/cmake/glog)
-+   DESTINATION ${_glog_CMake_INSTALLDIR})
-  
-- install (EXPORT glog-targets NAMESPACE glog:: DESTINATION lib/cmake/glog)
--diff -uNr a/glog-config.cmake.in b/glog-config.cmake.in
----- a/glog-config.cmake.in	2018-11-20 15:49:07.576278417 +0100
--+++ b/glog-config.cmake.in	2018-11-20 15:52:32.330418489 +0100
--@@ -4,4 +4,6 @@
-+ install (EXPORT glog-targets NAMESPACE glog:: DESTINATION
-+--- a/glog-config.cmake.in
-++++ b/glog-config.cmake.in
-+@@ -8,4 +8,6 @@ include (CMakeFindDependencyMacro)
-  
-  @gflags_DEPENDENCY@
-  
-diff --git a/meta-oe/recipes-support/glog/glog/0001-Rework-CMake-glog-VERSION-management.patch b/meta-oe/recipes-support/glog/glog/0001-Rework-CMake-glog-VERSION-management.patch
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd/0001-StringBuffer-Include-cstddef-for-size_t.patch b/meta-multimedia/recipes-multimedia/musicpd/mpd/0001-StringBuffer-Include-cstddef-for-size_t.patch
 deleted file mode 100644
-index f41a6c9724..0000000000
---- a/meta-oe/recipes-support/glog/glog/0001-Rework-CMake-glog-VERSION-management.patch
+index 1d869aa833..0000000000
+--- a/meta-multimedia/recipes-multimedia/musicpd/mpd/0001-StringBuffer-Include-cstddef-for-size_t.patch
 +++ /dev/null
-@@ -1,71 +0,0 @@
--From 4ea11e0d7c0575316a6ccc07a931164ca29c3d2f Mon Sep 17 00:00:00 2001
--From: Corentin Le Molgat <corentinl@google.com>
--Date: Mon, 29 Jan 2018 14:59:08 +0100
--Subject: [PATCH] Rework CMake glog VERSION management.
+@@ -1,27 +0,0 @@
+-From c14877071f14b218835f7fb034dea11bd1ba56f5 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 25 Dec 2019 09:40:16 -0800
+-Subject: [PATCH] StringBuffer: Include cstddef for size_t
 -
--- Use of Project version properties instead of custom variables
--- fix missmatch between VERSION (build version) and SOVERSION (API version)
--src: https://cmake.org/cmake/help/latest/prop_tgt/VERSION.html#prop_tgt:VERSION
+-Fixes
+-a.cpp:3:1: error: 'size_t' does not name a type
+-    3 | size_t s;
+-      | ^~~~~~
+-a.cpp:2:1: note: 'size_t' is defined in header '<cstddef>'; did you forget to '#include <cstddef>'?
 -
--Upstream-Status: Backport [https://github.com/google/glog/commit/6b6e38a7d53fe01f42ce34384cf4ba4c50e8cb65]
--Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+-Upstream-Status: Submitted [https://github.com/MusicPlayerDaemon/MPD/pull/697]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- CMakeLists.txt | 23 ++++++++---------------
-- 1 file changed, 8 insertions(+), 15 deletions(-)
+- src/util/StringBuffer.hxx | 1 +
+- 1 file changed, 1 insertion(+)
 -
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 7415eab..fb4e408 100644
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -8,23 +8,16 @@ if (POLICY CMP0063)
--   cmake_policy (SET CMP0063 NEW)
-- endif (POLICY CMP0063)
+---- a/src/util/StringBuffer.hxx
+-+++ b/src/util/StringBuffer.hxx
+-@@ -31,6 +31,7 @@
+- #define STRING_BUFFER_HPP
 - 
---project (google-glog)
--+project(glog VERSION 0.3.5 LANGUAGES C CXX)
+- #include <array>
+-+#include <cstddef>
 - 
-- enable_testing ()
-- 
---set (GLOG_MAJOR_VERSION 0)
---set (GLOG_MINOR_VERSION 3)
---set (GLOG_PATCH_VERSION 5)
---
---set (GLOG_VERSION
---  ${GLOG_MAJOR_VERSION}.${GLOG_MINOR_VERSION}.${GLOG_PATCH_VERSION})
---
-- set (CPACK_PACKAGE_NAME glog)
-- set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "")
---set (CPACK_PACKAGE_VERSION_MAJOR ${GLOG_MAJOR_VERSION})
---set (CPACK_PACKAGE_VERSION_MINOR ${GLOG_MINOR_VERSION})
---set (CPACK_PACKAGE_VERSION_PATCH ${GLOG_PATCH_VERSION})
---set (CPACK_PACKAGE_VERSION ${GLOG_VERSION})
--+set (CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
--+set (CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
--+set (CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
--+set (CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
-- 
-- option (WITH_GFLAGS "Use gflags" ON)
-- option (WITH_THREADS "Enable multithreading support" ON)
--@@ -406,8 +399,8 @@ if (gflags_FOUND)
--   endif (NOT BUILD_SHARED_LIBS)
-- endif (gflags_FOUND)
-- 
---set_target_properties (glog PROPERTIES VERSION ${GLOG_MAJOR_VERSION})
---set_target_properties (glog PROPERTIES SOVERSION ${GLOG_VERSION})
--+set_target_properties (glog PROPERTIES VERSION ${PROJECT_VERSION})
--+set_target_properties (glog PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
-- 
-- if (WIN32)
--   target_compile_definitions (glog PUBLIC GLOG_NO_ABBREVIATED_SEVERITIES)
--@@ -570,7 +563,7 @@ configure_package_config_file (glog-config.cmake.in
--   NO_CHECK_REQUIRED_COMPONENTS_MACRO)
-- 
-- write_basic_package_version_file (glog-config-version.cmake VERSION
---  ${GLOG_VERSION} COMPATIBILITY SameMajorVersion)
--+  ${PROJECT_VERSION} COMPATIBILITY SameMajorVersion)
-- 
-- export (TARGETS glog NAMESPACE glog:: FILE glog-targets.cmake)
-- export (PACKAGE glog)
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-support/glog/glog/0003-installation-path-fix.patch b/meta-oe/recipes-support/glog/glog/0003-installation-path-fix.patch
+- /**
+-  * A statically allocated string buffer.
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd/0002-Include-stdexcept-for-runtime_error.patch b/meta-multimedia/recipes-multimedia/musicpd/mpd/0002-Include-stdexcept-for-runtime_error.patch
 deleted file mode 100644
-index 641f70cb24..0000000000
---- a/meta-oe/recipes-support/glog/glog/0003-installation-path-fix.patch
+index 1f11867191..0000000000
+--- a/meta-multimedia/recipes-multimedia/musicpd/mpd/0002-Include-stdexcept-for-runtime_error.patch
 +++ /dev/null
-@@ -1,65 +0,0 @@
--diff -uNr a/CMakeLists.txt b/CMakeLists.txt
----- a/CMakeLists.txt	2018-12-05 12:55:59.630792054 +0100
--+++ b/CMakeLists.txt	2018-12-05 13:00:22.922269200 +0100
--@@ -403,10 +403,15 @@
+@@ -1,38 +0,0 @@
+-From 06f78ced45f6622a2e02cd09e6a2c0c22a98b89e Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 25 Dec 2019 09:41:55 -0800
+-Subject: [PATCH 2/2] Include <stdexcept> for runtime_error
+-
+-Fixes
+-
+-../git/src/LocateUri.cxx:65:14: error: 'runtime_error' is not a member of 'std'
+-   65 |   throw std::runtime_error("Unsupported URI scheme");
+-      |              ^~~~~~~~~~~~~
+-
+-Upstream-Status: Inappropriate [ Fixed differently upstream ]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/LocateUri.cxx      | 1 +
+- src/pcm/PcmConvert.cxx | 1 +
+- 2 files changed, 2 insertions(+)
+-
+---- a/src/LocateUri.cxx
+-+++ b/src/LocateUri.cxx
+-@@ -17,6 +17,7 @@
+-  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+-  */
 - 
-- set_target_properties (glog PROPERTIES PUBLIC_HEADER "${GLOG_PUBLIC_H}")
+-+#include <stdexcept>
+- #include "config.h"
+- #include "LocateUri.hxx"
+- #include "client/Client.hxx"
+---- a/src/pcm/PcmConvert.cxx
+-+++ b/src/pcm/PcmConvert.cxx
+-@@ -17,6 +17,7 @@
+-  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+-  */
 - 
--+set (_glog_CMake_BINDIR ${CMAKE_INSTALL_BINDIR})
--+set (_glog_CMake_INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR})
--+set (_glog_CMake_LIBDIR ${CMAKE_INSTALL_LIBDIR})
--+set (_glog_CMake_INSTALLDIR ${_glog_CMake_LIBDIR}/cmake/glog)
--+
-- target_include_directories (glog BEFORE PUBLIC
--   "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>"
--   "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>"
---  "$<INSTALL_INTERFACE:include>"
--+  "$<INSTALL_INTERFACE:${_glog_CMake_INCLUDE_DIR}>"
--   PRIVATE ${CMAKE_CURRENT_BINARY_DIR}
--   PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
-- 
--@@ -543,10 +548,10 @@
-- 
-- install (TARGETS glog
--   EXPORT glog-targets
---  RUNTIME DESTINATION bin
---  PUBLIC_HEADER DESTINATION include/glog
---  LIBRARY DESTINATION lib
---  ARCHIVE DESTINATION lib)
--+  RUNTIME DESTINATION ${_glog_CMake_BINDIR}
--+  PUBLIC_HEADER DESTINATION ${_glog_CMake_INCLUDE_DIR}/glog
--+  LIBRARY DESTINATION ${_glog_CMake_LIBDIR}
--+  ARCHIVE DESTINATION ${_glog_CMake_LIBDIR})
-- 
-- if (gflags_FOUND)
--   set (gflags_DEPENDENCY "find_dependency (gflags ${gflags_VERSION})")
--@@ -554,7 +559,7 @@
-- 
-- configure_package_config_file (glog-config.cmake.in
--   ${CMAKE_CURRENT_BINARY_DIR}/glog-config.cmake
---  INSTALL_DESTINATION lib/cmake/glog
--+  INSTALL_DESTINATION ${_glog_CMake_INSTALLDIR}
--   NO_CHECK_REQUIRED_COMPONENTS_MACRO)
-- 
-- write_basic_package_version_file (glog-config-version.cmake VERSION
--@@ -567,6 +572,7 @@
--   ${CMAKE_CURRENT_BINARY_DIR}/glog-config.cmake
--   ${CMAKE_CURRENT_BINARY_DIR}/glog-config-version.cmake
--   ${CMAKE_CURRENT_SOURCE_DIR}/cmake/FindLibunwind.cmake
---  DESTINATION lib/cmake/glog)
--+  DESTINATION ${_glog_CMake_INSTALLDIR})
-- 
---install (EXPORT glog-targets NAMESPACE glog:: DESTINATION lib/cmake/glog)
--+install (EXPORT glog-targets NAMESPACE glog:: DESTINATION
--+  ${_glog_CMake_INSTALLDIR})
--diff -uNr a/glog-config.cmake.in b/glog-config.cmake.in
----- a/glog-config.cmake.in	2018-12-05 12:55:59.630792054 +0100
--+++ b/glog-config.cmake.in	2018-12-05 13:05:19.547196843 +0100
--@@ -4,6 +4,7 @@
-- 
-- @gflags_DEPENDENCY@
-- 
--+list (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
-- find_dependency (Libunwind)
-- 
-- include ("${CMAKE_CURRENT_LIST_DIR}/glog-targets.cmake")
-diff --git a/meta-oe/recipes-support/glog/glog_0.3.5.bb b/meta-oe/recipes-support/glog/glog_0.4.0.bb
-similarity index 80%
-rename from meta-oe/recipes-support/glog/glog_0.3.5.bb
-rename to meta-oe/recipes-support/glog/glog_0.4.0.bb
-index 56bf515544..8dc84e4125 100644
---- a/meta-oe/recipes-support/glog/glog_0.3.5.bb
-+++ b/meta-oe/recipes-support/glog/glog_0.4.0.bb
-@@ -8,12 +8,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=dc9db360e0bbd4e46672f3fd91dd6c4b"
- 
- SRC_URI = " \
-     git://github.com/google/glog.git;nobranch=1 \
--    file://0001-Rework-CMake-glog-VERSION-management.patch \
--    file://0002-Find-Libunwind-during-configure.patch \
--    file://0003-installation-path-fix.patch \
-+    file://0001-Find-Libunwind-during-configure.patch \
- "
- 
--SRCREV = "a6a166db069520dbbd653c97c2e5b12e08a8bb26"
-+SRCREV = "96a2f23dca4cc7180821ca5f32e526314395d26a"
- 
- S = "${WORKDIR}/git"
- 
+-+#include <stdexcept>
+- #include "config.h"
+- #include "PcmConvert.hxx"
+- #include "ConfiguredResampler.hxx"
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
+deleted file mode 100644
+index b214672c62..0000000000
+--- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
++++ /dev/null
+@@ -1,103 +0,0 @@
+-SUMMARY = "Music Player Daemon"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+-
+-LICENSE_FLAGS = "${@bb.utils.contains_any('PACKAGECONFIG', ['ffmpeg', 'aac'], 'commercial', '', d)}"
+-
+-HOMEPAGE ="http://www.musicpd.org"
+-
+-inherit autotools useradd systemd pkgconfig
+-
+-DEPENDS += " \
+-    curl \
+-    sqlite3 \
+-    ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)} \
+-    yajl \
+-    boost \
+-    icu \
+-    dbus \
+-    expat \
+-"
+-
+-SRC_URI = " \
+-    git://github.com/MusicPlayerDaemon/MPD;branch=v0.20.x \
+-    file://mpd.conf.in \
+-    file://0001-StringBuffer-Include-cstddef-for-size_t.patch \
+-    file://0002-Include-stdexcept-for-runtime_error.patch \
+-"
+-SRCREV = "9274bc15bc41bbe490fde847f8422468cc20375d"
+-S = "${WORKDIR}/git"
+-
+-EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
+-
+-PACKAGECONFIG ??= "aac alsa ao bzip2 daemon ffmpeg fifo flac fluidsynth iso9660 jack libsamplerate libwrap httpd mms mpg123 modplug sndfile upnp openal opus oss recorder vorbis wavpack zlib"
+-
+-PACKAGECONFIG[aac] = "--enable-aac,--disable-aac,faad2"
+-PACKAGECONFIG[alsa] = "--enable-alsa,--disable-alsa,alsa-lib"
+-PACKAGECONFIG[ao] = "--enable-ao,--disable-ao,libao"
+-PACKAGECONFIG[audiofile] = "--enable-audiofile,--disable-audiofile,audiofile"
+-PACKAGECONFIG[bzip2] = "--enable-bzip2,--disable-bzip2,bzip2"
+-PACKAGECONFIG[cdioparanoia] = "--enable-cdio-paranoia,--disable-cdio-paranoia,libcdio-paranoia"
+-PACKAGECONFIG[daemon] = "--enable-daemon,--disable-daemon"
+-PACKAGECONFIG[ffmpeg] = "--enable-ffmpeg,--disable-ffmpeg,ffmpeg"
+-PACKAGECONFIG[fifo] = "--enable-fifo,--disable-fifo"
+-PACKAGECONFIG[flac] = "--enable-flac,--disable-flac,flac"
+-PACKAGECONFIG[fluidsynth] = "--enable-fluidsynth,--disable-fluidsynth,fluidsynth"
+-PACKAGECONFIG[httpd] = "--enable-httpd-output,--disable-httpd-output"
+-PACKAGECONFIG[id3tag] = "--enable-id3,--disable-id3,libid3tag"
+-PACKAGECONFIG[iso9660] = "--enable-iso9660,--disable-iso9660,libcdio"
+-PACKAGECONFIG[jack] = "--enable-jack,--disable-jack,jack"
+-PACKAGECONFIG[lame] = "--enable-lame-encoder,--disable-lame-encoder,lame"
+-PACKAGECONFIG[libsamplerate] = "--enable-lsr,--disable-lsr,libsamplerate0"
+-PACKAGECONFIG[libwrap] = "--enable-libwrap,--disable-libwrap,tcp-wrappers"
+-PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
+-PACKAGECONFIG[mms] = "--enable-mms,--disable-mms,libmms"
+-PACKAGECONFIG[modplug] = "--enable-modplug,--disable-modplug,libmodplug"
+-PACKAGECONFIG[mpg123] = "--enable-mpg123,--disable-mpg123,mpg123"
+-PACKAGECONFIG[openal] = "--enable-openal,--disable-openal,openal-soft"
+-PACKAGECONFIG[opus] = "--enable-opus,--disable-opus,libopus libogg"
+-PACKAGECONFIG[oss] = "--enable-oss,--disable-oss,"
+-PACKAGECONFIG[recorder] = "--enable-recorder-output,--disable-recorder-output"
+-PACKAGECONFIG[smb] = "--enable-smbclient,--disable-smbclient,samba"
+-PACKAGECONFIG[sndfile] = "--enable-sndfile,--disable-sndfile,libsndfile1"
+-PACKAGECONFIG[upnp] = "--enable-upnp,--disable-upnp,libupnp"
+-PACKAGECONFIG[vorbis] = "--enable-vorbis,--disable-vorbis,libvorbis libogg"
+-PACKAGECONFIG[wavpack] = "--enable-wavpack,--disable-wavpack,wavpack"
+-PACKAGECONFIG[zlib] = "--enable-zlib,--disable-zlib,zlib"
+-
+-do_configure_prepend() {
+-    sed -i -e 's|libsystemd-daemon|libsystemd|' ${S}/configure.ac
+-}
+-
+-do_install_append() {
+-    install -o mpd -d \
+-        ${D}/${localstatedir}/lib/mpd \
+-        ${D}/${localstatedir}/lib/mpd/playlists
+-    install -m775 -o mpd -g mpd -d \
+-        ${D}/${localstatedir}/lib/mpd/music
+-
+-    install -d ${D}/${sysconfdir}
+-    install -m 644 ${WORKDIR}/mpd.conf.in ${D}/${sysconfdir}/mpd.conf
+-    sed -i \
+-        -e 's|%music_directory%|${localstatedir}/lib/mpd/music|' \
+-        -e 's|%playlist_directory%|${localstatedir}/lib/mpd/playlists|' \
+-        -e 's|%db_file%|${localstatedir}/lib/mpd/mpd.db|' \
+-        -e 's|%log_file%|${localstatedir}/log/mpd.log|' \
+-        -e 's|%state_file%|${localstatedir}/lib/mpd/state|' \
+-        ${D}/${sysconfdir}/mpd.conf
+-
+-    # we don't need the icon
+-    rm -rf ${D}${datadir}/icons
+-}
+-
+-RPROVIDES_${PN} += "${PN}-systemd"
+-RREPLACES_${PN} += "${PN}-systemd"
+-RCONFLICTS_${PN} += "${PN}-systemd"
+-SYSTEMD_SERVICE_${PN} = "mpd.socket"
+-
+-USERADD_PACKAGES = "${PN}"
+-USERADD_PARAM_${PN} = " \
+-    --system --no-create-home \
+-    --home ${localstatedir}/lib/mpd \
+-    --groups audio \
+-    --user-group mpd"
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.22.6.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.22.6.bb
+new file mode 100644
+index 0000000000..5a9593b61f
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.22.6.bb
+@@ -0,0 +1,96 @@
++SUMMARY = "Music Player Daemon"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
++
++LICENSE_FLAGS = "${@bb.utils.contains_any('PACKAGECONFIG', ['ffmpeg', 'aac'], 'commercial', '', d)}"
++
++HOMEPAGE ="http://www.musicpd.org"
++
++inherit meson useradd systemd pkgconfig
++
++DEPENDS += " \
++    curl \
++    sqlite3 \
++    ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)} \
++    yajl \
++    boost \
++    icu \
++    dbus \
++    expat \
++"
++
++SRC_URI = " \
++    git://github.com/MusicPlayerDaemon/MPD;branch=v0.22.x \
++    file://mpd.conf.in \
++"
++SRCREV = "938728820b11d4544a071994fe3c63c6ab710e8e"
++S = "${WORKDIR}/git"
++
++EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd=enabled -Dsystemd_system_unit_dir=${systemd_unitdir}/system/', '-Dsystemd=disabled', d)}"
++
++PACKAGECONFIG ??= "aac alsa ao bzip2 daemon ffmpeg fifo flac fluidsynth iso9660 jack libsamplerate httpd mms mpg123 modplug sndfile upnp openal opus oss recorder vorbis wavpack zlib"
++
++PACKAGECONFIG[aac] = "-Dfaad=enabled,-Dfaad=disabled,faad2"
++PACKAGECONFIG[alsa] = "-Dalsa=enabled,-Dalsa=disabled,alsa-lib"
++PACKAGECONFIG[ao] = "-Dao=enabled,-Dao=disabled,libao"
++PACKAGECONFIG[audiofile] = "-Daudiofile=enabled,-Daudiofile=disabled,audiofile"
++PACKAGECONFIG[bzip2] = "-Dbzip2=enabled,-Dbzip2=disabled,bzip2"
++PACKAGECONFIG[cdioparanoia] = "-Dcdio_paranoia=enabled,-Dcdio_paranoia=disabled,libcdio-paranoia"
++PACKAGECONFIG[daemon] = "-Ddaemon=true,-Ddaemon=false"
++PACKAGECONFIG[ffmpeg] = "-Dffmpeg=enabled,-Dffmpeg=disabled,ffmpeg"
++PACKAGECONFIG[fifo] = "-Dfifo=true,-Dfifo=false"
++PACKAGECONFIG[flac] = "-Dflac=enabled,-Dflac=disabled,flac"
++PACKAGECONFIG[fluidsynth] = "-Dfluidsynth=enabled,-Dfluidsynth=disabled,fluidsynth"
++PACKAGECONFIG[httpd] = "-Dhttpd=true,-Dhttpd=false"
++PACKAGECONFIG[id3tag] = "-Did3tag=enabled,-Did3tag=disabled,libid3tag"
++PACKAGECONFIG[iso9660] = "-Diso9660=enabled,-Diso9660=disabled,libcdio"
++PACKAGECONFIG[jack] = "-Djack=enabled,-Djack=disabled,jack"
++PACKAGECONFIG[lame] = "-Dlame=enabled,-Dlame=disabled,lame"
++PACKAGECONFIG[libsamplerate] = "-Dlibsamplerate=enabled,-Dlibsamplerate=disabled,libsamplerate0"
++PACKAGECONFIG[mad] = "-Dmad=enabled,-Dmad=disabled,libmad"
++PACKAGECONFIG[mms] = "-Dmms=enabled,-Dmms=disabled,libmms"
++PACKAGECONFIG[modplug] = "-Dmodplug=enabled,-Dmodplug=disabled,libmodplug"
++PACKAGECONFIG[mpg123] = "-Dmpg123=enabled,-Dmpg123=disabled,mpg123"
++PACKAGECONFIG[openal] = "-Dopenal=enabled,-Dopenal=disabled,openal-soft"
++PACKAGECONFIG[opus] = "-Dopus=enabled,-Dopus=disabled,libopus libogg"
++PACKAGECONFIG[oss] = "-Doss=enabled,-Doss=disabled,"
++PACKAGECONFIG[recorder] = "-Drecorder=true,-Drecorder=false"
++PACKAGECONFIG[smb] = "-Dsmbclient=enabled,-Dsmbclient=disabled,samba"
++PACKAGECONFIG[sndfile] = "-Dsndfile=enabled,-Dsndfile=disabled,libsndfile1"
++PACKAGECONFIG[upnp] = "-Dupnp=enabled,-Dupnp=disabled,libupnp"
++PACKAGECONFIG[vorbis] = "-Dvorbis=enabled,-Dvorbis=disabled,libvorbis libogg"
++PACKAGECONFIG[wavpack] = "-Dwavpack=enabled,-Dwavpack=disabled,wavpack"
++PACKAGECONFIG[zlib] = "-Dzlib=enabled,-Dzlib=disabled,zlib"
++
++do_install_append() {
++    install -o mpd -d \
++        ${D}/${localstatedir}/lib/mpd \
++        ${D}/${localstatedir}/lib/mpd/playlists
++    install -m775 -o mpd -g mpd -d \
++        ${D}/${localstatedir}/lib/mpd/music
++
++    install -d ${D}/${sysconfdir}
++    install -m 644 ${WORKDIR}/mpd.conf.in ${D}/${sysconfdir}/mpd.conf
++    sed -i \
++        -e 's|%music_directory%|${localstatedir}/lib/mpd/music|' \
++        -e 's|%playlist_directory%|${localstatedir}/lib/mpd/playlists|' \
++        -e 's|%db_file%|${localstatedir}/lib/mpd/mpd.db|' \
++        -e 's|%log_file%|${localstatedir}/log/mpd.log|' \
++        -e 's|%state_file%|${localstatedir}/lib/mpd/state|' \
++        ${D}/${sysconfdir}/mpd.conf
++
++    # we don't need the icon
++    rm -rf ${D}${datadir}/icons
++}
++
++RPROVIDES_${PN} += "${PN}-systemd"
++RREPLACES_${PN} += "${PN}-systemd"
++RCONFLICTS_${PN} += "${PN}-systemd"
++SYSTEMD_SERVICE_${PN} = "mpd.socket"
++
++USERADD_PACKAGES = "${PN}"
++USERADD_PARAM_${PN} = " \
++    --system --no-create-home \
++    --home ${localstatedir}/lib/mpd \
++    --groups audio \
++    --user-group mpd"
 -- 
 2.30.1
 
