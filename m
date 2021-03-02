@@ -1,186 +1,203 @@
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
- by mx.groups.io with SMTP id smtpd.web09.9411.1614696574215199028
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
+ by mx.groups.io with SMTP id smtpd.web10.372.1614701177062473211
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Mar 2021 06:49:34 -0800
+ Tue, 02 Mar 2021 08:06:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: hongxu.jia@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 122EnGoJ017722
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 2 Mar 2021 06:49:16 -0800 (PST)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2106.2; Tue, 2 Mar 2021 06:49:16 -0800
-Received: from ala-lpggp7.wrs.com (147.11.105.171) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2106.2 via Frontend Transport; Tue, 2 Mar 2021 06:49:16 -0800
-From: "hongxu" <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-CC: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] lvm2/libdevmapper: 2.03.06 -> 2.03.11
-Date: Tue, 2 Mar 2021 06:49:15 -0800
-Message-ID: <20210302144915.63848-1-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.29.2
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ASLI/js4;
+ spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: peron.clem@gmail.com)
+Received: by mail-ej1-f43.google.com with SMTP id dx17so8670733ejb.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Mar 2021 08:06:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=IQ2GwlOUVTgQlc+mqyMKVvncVCurhynO9JHNk5+RPeE=;
+        b=ASLI/js4CDRPxcZY6KpQRo0QJAWbyxE08043MgniisMz6OY9uzRBiNjM0BxIYDP2Hj
+         79bUcR4xb6XPD7k5WNejHAhxFwf2WZTU2W0P/GA8ZOYK8dsexU1XVD1XnYvMLh2iM3zV
+         Y1CpV9CVQHST55Ck95QJTTCQweRl4wFlIRPKZaeSO1jUnLSaSltgTcWNsKPVBLWL1kJW
+         9uR/PGQGGCGX68Cxjal9y7XSF81rVx9u3NJvaNdZYaD7Vr2g5wUK/vPGRtLUILHiYfHr
+         EDfSsjMrbYOyoFToPISpq6Np6V6xeyOQPoRyuKKNayqMB7g8TqIu0Rl9l68ttvxlKOji
+         kl2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=IQ2GwlOUVTgQlc+mqyMKVvncVCurhynO9JHNk5+RPeE=;
+        b=OhF+Y+gSCNh93XNL5OqWeP6Lok5OwkOOFuejZ+mCjoOONGa3vTAU0JwXXWtQkW87gg
+         QSTRxU4IqLgBz6QJNJ2wFWMs8OuaIQ+uNJL64k9yOv8p4TeCfIxGlCD6FsmkIOT0oNr3
+         o8Q46pseoqe9HzmiJyegkbgUvIw40tLFEoNof4ZjW+uIyIy8bq/0MCmFJPY1DKzzadKp
+         RPG6X8tXImGwE42d3F/7EUTCtlNJBjfgozLwRyz99LjM/3C7q7folIloRRDodXSBI6N9
+         MrxEU1H65wyV0rXDJ+gwWjZM0bAlwqwYcbbqjzT0mqN2aopBHLr+KlmOORaQk3p4K8eO
+         Eg/w==
+X-Gm-Message-State: AOAM533uuzEI1bPqEBXJRJ8dsy2/yJhU+/EOzWrHtEd6LIwEN0JosJP4
+	JV2x7On4QMK/mdfOSfwvPYtX2Hphh75K4Yn04+A=
+X-Google-Smtp-Source: ABdhPJyya2wPEHa03mMLAZENqUCPjFy2MJFeyQFXGIWq/kXhTqxEEurBGJl+z4N2shVuf6w2hoHRcwL9kLN10Dr96b8=
+X-Received: by 2002:a17:906:a44:: with SMTP id x4mr21300727ejf.101.1614701175266;
+ Tue, 02 Mar 2021 08:06:15 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+References: <20210219123955.26446-1-anbelski@linux.microsoft.com>
+ <CAJiuCcexC-KBndWSa=D++zQNFtxu0zYm9oSs_VLzov5QrOtNLA@mail.gmail.com> <4696f493-ee53-f4c5-7172-272ed8271be5@linux.microsoft.com>
+In-Reply-To: <4696f493-ee53-f4c5-7172-272ed8271be5@linux.microsoft.com>
+From: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
+Date: Tue, 2 Mar 2021 17:06:04 +0100
+Message-ID: <CAJiuCcd4bvctA_JjL6bx6z+zhwsGiy1QPR9tyzgaB6spLwqPQQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] grpc: Upgrade 1.24.3 -> 1.35.0
+To: Anatol Belski <anbelski@linux.microsoft.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Drop backport patch:
-- 0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch
+Hi Anatol
 
-Refresh:
-- 0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch
+On Tue, 2 Mar 2021 at 14:32, Anatol Belski <anbelski@linux.microsoft.com> w=
+rote:
+>
+> Hi Cl=C3=A9ment,
+>
+> Thanks for the question.
+>
+> On 2/22/2021 5:49 PM, Cl=C3=A9ment P=C3=A9ron wrote:
+> > Hi Anatol,
+> >
+> >
+> > On Fri, 19 Feb 2021 at 13:40, Anatol Belski
+> > <anbelski@linux.microsoft.com> wrote:
+> >> This is a really huge jump in versions, but this package has been not
+> >> upgraded for quite some time. The previous patches are not necessary
+> >> anymore, they're integrated upstream.
+> > This version of gRPC generate a new CMake gRPCTargets.cmake
+> > recipe-sysroot/usr/lib/cmake/grpc/gRPCTargets.cmake
+> >
+> > This generate an error in my build:
+> > Because this CMake declare a
+> > recipe-sysroot/usr/bin/grpc_cpp_plugin
+> >
+> > but this file does not exist.  Possible reasons include:
+> > |
+> > |   * The file was deleted, renamed, or moved to another location.
+> > |
+> > |   * An install or uninstall procedure did not complete successfully.
+> > |
+> > |   * The installation package was faulty and contained
+> >
+> > In my project i'm using the CMake example from gRPC
+> > https://github.com/grpc/grpc/blob/master/examples/cpp/cmake/common.cmak=
+e#L114
+> >
+> > This error is triggered by:
+> > find_package(gRPC 1.35.0 CONFIG REQUIRED)
+> >
+> > FYI My recipes depends on grpc and grpc-native
+> > PACKAGECONFIG[grpc] =3D "-DCONFIG_GRPC=3DON,-DCONFIG_GRPC=3DOFF,grpc gr=
+pc-native"
+> >
+> > Do you have an example of a gRPC recipe?
+>
+> I don't use this feature from the grpc package, only linking against the
+> libs. However I don't see why this should be an issue, as all the
+> *.cmake files are packaged. I see that in the RPMs but also in a recipe
+> of a dependent packgae like this
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- ...per_2.03.06.bb => libdevmapper_2.03.11.bb} |  0
- meta-oe/recipes-support/lvm2/lvm2.inc         |  2 +-
- ...led-No-medium-found-will-print-out-i.patch | 32 -------------------
- ...findmnt-bin-lsblk-bin-sort-not-found.patch | 20 ++++++------
- .../lvm2/{lvm2_2.03.06.bb => lvm2_2.03.11.bb} |  1 -
- 5 files changed, 11 insertions(+), 44 deletions(-)
- rename meta-oe/recipes-support/lvm2/{libdevmapper_2.03.06.bb => libdevmapper_2.03.11.bb} (100%)
- delete mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch
- rename meta-oe/recipes-support/lvm2/{lvm2_2.03.06.bb => lvm2_2.03.11.bb} (97%)
+Yes the cmake file is found but not the grpc_cpp_plugin.
 
-diff --git a/meta-oe/recipes-support/lvm2/libdevmapper_2.03.06.bb b/meta-oe/recipes-support/lvm2/libdevmapper_2.03.11.bb
-similarity index 100%
-rename from meta-oe/recipes-support/lvm2/libdevmapper_2.03.06.bb
-rename to meta-oe/recipes-support/lvm2/libdevmapper_2.03.11.bb
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index 11ee7ca8b..6618e21f3 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -18,7 +18,7 @@ SRC_URI = "git://sourceware.org/git/lvm2.git;branch=main \
-            file://reproducible-build.patch \
-            "
- 
--SRCREV = "b9391b1b9f0b73303fa21f8f92574d17ce4c2b02"
-+SRCREV = "3e8bd8d1bd70691f09a170785836aeb4f83154e6"
- S = "${WORKDIR}/git"
- 
- inherit autotools-brokensep pkgconfig systemd license
-diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch
-deleted file mode 100644
-index 24d5b1b48..000000000
---- a/meta-oe/recipes-support/lvm2/lvm2/0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From 93c93e3b85492e58f9451841e6079d00c497efa4 Mon Sep 17 00:00:00 2001
--From: Jiping Ma <jiping.ma2@windriver.com>
--Date: Mon, 25 Feb 2019 13:29:12 +0800
--Subject: [PATCH] "/dev/hdc: open failed: No medium found" will print out in
-- lvmdiskscan.
--
--commit [57bb46c5e7f8] introduce this issue.
--"/dev/hdc: open failed: No medium found" will be print out
--after run lvmdiskscan. change dev_open_readonly()
--to dev_open_readonly_quiet() in fuction _dev_get_size_dev().
--
--Signed-off-by: Jiping Ma <jiping.ma2@windriver.com>
-----
-- lib/device/dev-io.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/lib/device/dev-io.c b/lib/device/dev-io.c
--index dc95131..81a66b0 100644
----- a/lib/device/dev-io.c
--+++ b/lib/device/dev-io.c
--@@ -338,7 +338,7 @@ static int _dev_get_size_dev(struct device *dev, uint64_t *size)
-- 	}
-- 
-- 	if (fd <= 0) {
---		if (!dev_open_readonly(dev))
--+		if (!dev_open_readonly_quiet(dev))
-- 			return_0;
-- 		fd = dev_fd(dev);
-- 		do_close = 1;
---- 
--1.9.1
--
-diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch
-index 16de8c0a1..34e0620a1 100644
---- a/meta-oe/recipes-support/lvm2/lvm2/0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch
-+++ b/meta-oe/recipes-support/lvm2/lvm2/0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch
-@@ -1,6 +1,6 @@
--From 27b56cb6b5dfc75ea8ddb395dc9ef41fb7a09c93 Mon Sep 17 00:00:00 2001
-+From ddf36613f3408ce42f15b03b4e9c6ad8478b97f8 Mon Sep 17 00:00:00 2001
- From: Hongxu Jia <hongxu.jia@windriver.com>
--Date: Mon, 2 Sep 2019 23:04:50 -0400
-+Date: Tue, 2 Mar 2021 01:33:05 -0800
- Subject: [PATCH] fix command /bin/findmnt, /bin/lsblk, /bin/sort not found
- 
- In oe-core (util-linux and coreutils), the commands locates in
-@@ -15,10 +15,10 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-  2 files changed, 7 insertions(+), 3 deletions(-)
- 
- diff --git a/configure.ac b/configure.ac
--index d1431e2..54e5a7b 100644
-+index 4811d4a3d..137b31a82 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -1495,6 +1495,8 @@ fi
-+@@ -1611,6 +1611,8 @@ fi
-  
-  SYSCONFDIR="$(eval echo $(eval echo $sysconfdir))"
-  
-@@ -27,7 +27,7 @@ index d1431e2..54e5a7b 100644
-  SBINDIR="$(eval echo $(eval echo $sbindir))"
-  LVM_PATH="$SBINDIR/lvm"
-  AC_DEFINE_UNQUOTED(LVM_PATH, ["$LVM_PATH"], [Path to lvm binary.])
--@@ -1721,6 +1723,7 @@ AC_SUBST(SACKPT_CFLAGS)
-+@@ -1829,6 +1831,7 @@ AC_SUBST(SACKPT_CFLAGS)
-  AC_SUBST(SACKPT_LIBS)
-  AC_SUBST(SALCK_CFLAGS)
-  AC_SUBST(SALCK_LIBS)
-@@ -36,10 +36,10 @@ index d1431e2..54e5a7b 100644
-  AC_SUBST(SELINUX_LIBS)
-  AC_SUBST(SELINUX_PC)
- diff --git a/scripts/blkdeactivate.sh.in b/scripts/blkdeactivate.sh.in
--index a4b8a8f..3db4226 100644
-+index 7c517b87b..7ef1bb766 100644
- --- a/scripts/blkdeactivate.sh.in
- +++ b/scripts/blkdeactivate.sh.in
--@@ -41,13 +41,14 @@ UMOUNT="/bin/umount"
-+@@ -42,13 +42,14 @@ VDO="/bin/vdo"
-  
-  sbindir="@SBINDIR@"
-  DMSETUP="$sbindir/dmsetup"
-@@ -55,9 +55,9 @@ index a4b8a8f..3db4226 100644
-  	FINDMNT_READ="read -r mnt"
-  fi
-  DMSETUP_OPTS=""
--@@ -55,10 +56,10 @@ LVM_OPTS=""
-- MDADM_OPTS=""
-+@@ -57,10 +58,10 @@ MDADM_OPTS=""
-  MPATHD_OPTS=""
-+ VDO_OPTS=""
-  
- -LSBLK="/bin/lsblk -r --noheadings -o TYPE,KNAME,NAME,MOUNTPOINT"
- +LSBLK="$bindir/lsblk -r --noheadings -o TYPE,KNAME,NAME,MOUNTPOINT"
-@@ -69,5 +69,5 @@ index a4b8a8f..3db4226 100644
-  # Do not show tool errors by default (only done/skipping summary
-  # message provided by this script) and no verbose mode by default.
- -- 
--2.8.1
-+2.29.2
- 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.03.06.bb b/meta-oe/recipes-support/lvm2/lvm2_2.03.11.bb
-similarity index 97%
-rename from meta-oe/recipes-support/lvm2/lvm2_2.03.06.bb
-rename to meta-oe/recipes-support/lvm2/lvm2_2.03.11.bb
-index bc86810ec..7f3f000e0 100644
---- a/meta-oe/recipes-support/lvm2/lvm2_2.03.06.bb
-+++ b/meta-oe/recipes-support/lvm2/lvm2_2.03.11.bb
-@@ -1,7 +1,6 @@
- require lvm2.inc
- 
- SRC_URI += " \
--            file://0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch \
-             file://0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch \
-            "
- 
--- 
-2.29.2
+This is due to cmake looking for the grpc_cpp_plugin in the target
+sysroot instead of the native/host sysroot.
 
+>
+> $ ls -l ./tmp/work/*/*/*/recipe-sysroot/usr/lib/cmake/grpc/*.cmake
+>
+> Or use recipe-sysroot-native depending on the consuming recipe.
+>
+> Just a wild guess here - does your recipe put 'grpc' into DEPENDS or
+> RDEPENDS, etc.
+
+In my recipe I put 'grpc' and 'grpc-native' into DEPENDS using PACKAGECONFI=
+G
+PACKAGECONFIG[grpc] =3D "-DCONFIG_GRPC=3DON,-DCONFIG_GRPC=3DOFF,grpc grpc-n=
+ative"
+
+> Also, do you inherit cmake in your recipe?
+Yes i am indeed inheriting cmake and also systemd in my recipe
+
+> It seems to me
+> that it's more about how to use cmake files in  a recipe, as the
+> particularly mentioned files are packaged and pulled in a consuming recip=
+e.
+
+When I look in the files packaged the cmake file is indeed here.
+The issue is coming from the gRPCTargets.cmake (https://pastebin.com/bZay7c=
+ew)
+Line 159:
+# Create imported target gRPC::grpc_cpp_plugin
+add_executable(gRPC::grpc_cpp_plugin IMPORTED)
+
+gRPC is trying to add the grpc_cpp_plugin for the Target which is not
+present in the final package.
+dpkg -c ./build/tmp/deploy/ipk/aarch64/grpc_1.35.0-r0_aarch64.ipk
+drwxr-xr-x root/root         0 2021-02-22 17:43 ./usr/
+drwxr-xr-x root/root         0 2021-02-22 17:43 ./usr/lib/
+lrwxrwxrwx root/root         0 2021-02-22 17:43
+./usr/lib/libaddress_sorting.so.14 -> libaddress_sorting.so.14.0.0
+-rwxr-xr-x root/root     10000 2021-02-22 17:43
+./usr/lib/libaddress_sorting.so.14.0.0
+lrwxrwxrwx root/root         0 2021-02-22 17:43 ./usr/lib/libgpr.so.14
+-> libgpr.so.14.0.0
+-rwxr-xr-x root/root     59616 2021-02-22 17:43 ./usr/lib/libgpr.so.14.0.0
+lrwxrwxrwx root/root         0 2021-02-22 17:43
+./usr/lib/libgrpc++.so.1 -> libgrpc++.so.1.35.0
+-rwxr-xr-x root/root    501680 2021-02-22 17:43 ./usr/lib/libgrpc++.so.1.35=
+.0
+lrwxrwxrwx root/root         0 2021-02-22 17:43
+./usr/lib/libgrpc++_alts.so.1 -> libgrpc++_alts.so.1.35.0
+-rwxr-xr-x root/root     22368 2021-02-22 17:43
+./usr/lib/libgrpc++_alts.so.1.35.0
+lrwxrwxrwx root/root         0 2021-02-22 17:43
+./usr/lib/libgrpc++_error_details.so.1 ->
+libgrpc++_error_details.so.1.35.0
+-rwxr-xr-x root/root     34896 2021-02-22 17:43
+./usr/lib/libgrpc++_error_details.so.1.35.0
+lrwxrwxrwx root/root         0 2021-02-22 17:43
+./usr/lib/libgrpc++_reflection.so.1 -> libgrpc++_reflection.so.1.35.0
+-rwxr-xr-x root/root    284960 2021-02-22 17:43
+./usr/lib/libgrpc++_reflection.so.1.35.0
+lrwxrwxrwx root/root         0 2021-02-22 17:43
+./usr/lib/libgrpc++_unsecure.so.1 -> libgrpc++_unsecure.so.1.35.0
+-rwxr-xr-x root/root    415672 2021-02-22 17:43
+./usr/lib/libgrpc++_unsecure.so.1.35.0
+lrwxrwxrwx root/root         0 2021-02-22 17:43
+./usr/lib/libgrpc.so.14 -> libgrpc.so.14.0.0
+-rwxr-xr-x root/root   3505864 2021-02-22 17:43 ./usr/lib/libgrpc.so.14.0.0
+lrwxrwxrwx root/root         0 2021-02-22 17:43
+./usr/lib/libgrpc_plugin_support.so.1 ->
+libgrpc_plugin_support.so.1.35.0
+-rwxr-xr-x root/root    440528 2021-02-22 17:43
+./usr/lib/libgrpc_plugin_support.so.1.35.0
+lrwxrwxrwx root/root         0 2021-02-22 17:43
+./usr/lib/libgrpc_unsecure.so.14 -> libgrpc_unsecure.so.14.0.0
+-rwxr-xr-x root/root   1939384 2021-02-22 17:43
+./usr/lib/libgrpc_unsecure.so.14.0.0
+lrwxrwxrwx root/root         0 2021-02-22 17:43
+./usr/lib/libgrpcpp_channelz.so.1 -> libgrpcpp_channelz.so.1.35.0
+-rwxr-xr-x root/root    617784 2021-02-22 17:43
+./usr/lib/libgrpcpp_channelz.so.1.35.0
+lrwxrwxrwx root/root         0 2021-02-22 17:43 ./usr/lib/libupb.so.14
+-> libupb.so.14.0.0
+-rwxr-xr-x root/root    141768 2021-02-22 17:43 ./usr/lib/libupb.so.14.0.0
+drwxr-xr-x root/root         0 2021-02-22 17:43 ./usr/share/
+drwxr-xr-x root/root         0 2021-02-22 17:43 ./usr/share/grpc/
+-rw-r--r-- root/root    263903 2021-02-22 17:38 ./usr/share/grpc/roots.pem
+
+Regards,
+Clement
+
+
+>
+> Regards
+>
+> Anatol
+>
+>
+>
+>
+>
+>
