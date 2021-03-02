@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.6934.1614683808799696749
+ by mx.groups.io with SMTP id smtpd.web12.7184.1614683808631716700
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 02 Mar 2021 03:16:49 -0800
 Authentication-Results: mx.groups.io;
@@ -8,17 +8,15 @@ Received: from [78.130.197.211] (port=34880 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lH31D-0001BU-0p; Tue, 02 Mar 2021 13:16:47 +0200
+	id 1lH31C-0001BU-As; Tue, 02 Mar 2021 13:16:46 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-elementpath: Upgrade 2.1.4 -> 2.2.0
-Date: Tue,  2 Mar 2021 13:16:40 +0200
-Message-Id: <20210302111640.18581-2-leon.anavi@konsulko.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH 1/2] packagegroup-meta-python: Add python3-semantic-version
+Date: Tue,  2 Mar 2021 13:16:39 +0200
+Message-Id: <20210302111640.18581-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210302111640.18581-1-leon.anavi@konsulko.com>
-References: <20210302111640.18581-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=-1.0
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,35 +28,25 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.2.0:
+From: Khem Raj <raj.khem@gmail.com>
 
-- Optimize TDOP parser's tokenizer
-- Resolve ambiguities with operators and statements that are also
-  names
-- Merge with XPath 3.0/3.1 develop (to be completed)
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ython3-elementpath_2.1.4.bb => python3-elementpath_2.2.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-elementpath_2.1.4.bb => python3-elementpath_2.2.0.bb} (82%)
+ .../recipes-core/packagegroups/packagegroup-meta-python.bb       | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-elementpath_2.1.4.bb b/meta-python/recipes-devtools/python/python3-elementpath_2.2.0.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-elementpath_2.1.4.bb
-rename to meta-python/recipes-devtools/python/python3-elementpath_2.2.0.bb
-index 10aa17d381..d1383c049c 100644
---- a/meta-python/recipes-devtools/python/python3-elementpath_2.1.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-elementpath_2.2.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/elementpath"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5dbb7fb7d72da3921202dd7b995d3ecf"
- 
--SRC_URI[sha256sum] = "326643aca7beff0864d022cd591736b8550a70fccafd67a89198166baed1c2c4"
-+SRC_URI[sha256sum] = "3bbd0e9dcaf9ab7b2080fd4b457d67f166f7c4d1ece7348425195729059b427c"
- 
- PYPI_PACKAGE = "elementpath"
- inherit pypi setuptools3
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index 635dee1942..d22656eb15 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -361,6 +361,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
+     python3-scrypt \
+     python3-sdnotify \
+     python3-semver \
++    python3-semantic-version \
+     python3-send2trash \
+     python3-sentry-sdk \
+     python3-serpent \
 -- 
 2.17.1
 
