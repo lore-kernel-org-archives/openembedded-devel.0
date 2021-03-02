@@ -1,95 +1,156 @@
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.web08.60.1614709157946646755
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+ by mx.groups.io with SMTP id smtpd.web11.29.1614709366717787812
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Mar 2021 10:19:18 -0800
+ Tue, 02 Mar 2021 10:22:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=WoXLoP7s;
- spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f173.google.com with SMTP id j12so14324111pfj.12
-        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Mar 2021 10:19:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:organization:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=ccyKX9kmOZbkyMUO1AvDIRNyn1GsCS98aCm0ZPX9ArE=;
-        b=WoXLoP7s5lZga6oE2ANJ2tv+RTFR4JPxDtyvYgS5TuJpcvzo+3/hFE54R26iw9h4FX
-         9hIeskHLY8v989raj5EfXI0e72gM4rAqQmIAI9guFJqvI+e2QMEZNOoWqyHO64guJbNL
-         3bf0spMZ8vnJHXZJmgrdOIQ8ekrmEHSc4DA20GZjohwGik82ss6gWxDdLs1R6Ps0mSc1
-         zUiPruTXIiNbLYWx8wt+sLjbjPm6DUNihyCWS+Nq9QQ1K2xO1yEbfK+DJ8FJaoeeLOHU
-         YzVeBctwmbNzxynZvJDn4WQKkZtokQEpsYJV5tETqBDQQJiTB3xjLDbLhxlAhb7b1So0
-         f3Yg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=ccyKX9kmOZbkyMUO1AvDIRNyn1GsCS98aCm0ZPX9ArE=;
-        b=AT3g9aLhkC4fljGryMd977SmxJ3VJ45YC8To65SowduMwI8pWdsIKTe9m5ZbfffVX8
-         /laUGFYayBZ115YDSIaMM9cZsrXmV2ov2OYtxm92mVVJJ0KfJlY3dIAkk8X6K7zBnv2v
-         H5Ytn+OAnN3GPtBs0MaN+mqKbCYWR8QEwZum8Cp1cl4LDo/TdjMCmURloHKpAhq+J2mi
-         VQh0dNBRMKqq/46BvRjZbWuhtznVvbttnOBVj+QvXHniBzyeBOMIKtj8ArG3RmpDIqC+
-         +Omxqzc9BkGFVpLEmA191kjwEpwjkiP/G2yXq25keY0RmKguUFMoJvlBQkD9r1f16jcV
-         /3ew==
-X-Gm-Message-State: AOAM532aUm+7IM8s1a1sbJRVwSRZCXFVRdOpTIvJS1lioERlse6HbXD5
-	bB6Mw4Zb73S94h7Zuda/Gs8=
-X-Google-Smtp-Source: ABdhPJx4HQI41LnJj8jb4Grcsd89Jm91CVZNQ3/miQZydsC8o0b23NfL2oSyjprPu/LzOHTb3sBeTg==
-X-Received: by 2002:a63:fd01:: with SMTP id d1mr18555656pgh.319.1614709157324;
-        Tue, 02 Mar 2021 10:19:17 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:a0f0:8991:b66:15e2:cd87? ([2601:646:9200:a0f0:8991:b66:15e2:cd87])
-        by smtp.gmail.com with ESMTPSA id 2sm21142162pfi.116.2021.03.02.10.19.16
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 02 Mar 2021 10:19:16 -0800 (PST)
-Subject: Re: [oe] [meta-python][PATCH 1/2] python3-aiohue: Integrate the hue control python module
-To: Andrei Gherzan <andrei@gherzan.com>,
- openembedded-devel@lists.openembedded.org
-Cc: Andrei Gherzan <andrei.gherzan@huawei.com>
-References: <20210302163742.2047086-1-andrei@gherzan.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <ee5bbb54-298a-bd09-7215-0951a1b6ab37@gmail.com>
-Date: Tue, 2 Mar 2021 10:19:15 -0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:78.0)
- Gecko/20100101 Thunderbird/78.8.0
+ dkim=fail reason="body hash did not verify" header.i=@linux.microsoft.com header.s=default header.b=gfd+Q60j;
+ spf=pass (domain: linux.microsoft.com, ip: 13.77.154.182, mailfrom: anbelski@linux.microsoft.com)
+Received: from [192.168.178.23] (i59F7A1E8.versanet.de [89.247.161.232])
+	by linux.microsoft.com (Postfix) with ESMTPSA id 80A2C20B83EA;
+	Tue,  2 Mar 2021 10:22:44 -0800 (PST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 80A2C20B83EA
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+	s=default; t=1614709365;
+	bh=Chag5GZZdoh2Ior6pkwaZezIwWwijdIk9u9B/QEl8lc=;
+	h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
+	b=gfd+Q60jm+L4TvxrzemMHzb3biVch76GmmMsfMaN7S9a/KEwxIhsPFamre1YcusaZ
+	 PwPGgrOMFoKXGKFQ8GNsWbz2B2PFG39YlqTR17nhax7m3EWMSqEEWp4jmamCyfZqD+
+	 HrUXb+ZxCTvRuNVvGvKD0iqkXB3XUjZlpGa3CuMQ=
+Subject: Re: [oe] [meta-oe][PATCH] grpc: Upgrade 1.24.3 -> 1.35.0
+To: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <20210219123955.26446-1-anbelski@linux.microsoft.com>
+ <CAJiuCcexC-KBndWSa=D++zQNFtxu0zYm9oSs_VLzov5QrOtNLA@mail.gmail.com>
+ <4696f493-ee53-f4c5-7172-272ed8271be5@linux.microsoft.com>
+ <CAJiuCcd4bvctA_JjL6bx6z+zhwsGiy1QPR9tyzgaB6spLwqPQQ@mail.gmail.com>
+From: "Anatol Belski" <anbelski@linux.microsoft.com>
+Message-ID: <2543ce50-034e-a21f-2c60-95596e5b7595@linux.microsoft.com>
+Date: Tue, 2 Mar 2021 19:22:41 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-In-Reply-To: <20210302163742.2047086-1-andrei@gherzan.com>
+In-Reply-To: <CAJiuCcd4bvctA_JjL6bx6z+zhwsGiy1QPR9tyzgaB6spLwqPQQ@mail.gmail.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-can you send a followup to add these new packages to 
-packagegroup-meta-python as well ?
 
-On 3/2/21 8:37 AM, Andrei Gherzan wrote:
-> From: Andrei Gherzan <andrei.gherzan@huawei.com>
-> 
-> Signed-off-by: Andrei Gherzan <andrei.gherzan@huawei.com>
-> ---
->   recipes-devtools/python/python3-aiohue_2.2.0.bb | 12 ++++++++++++
->   1 file changed, 12 insertions(+)
->   create mode 100644 recipes-devtools/python/python3-aiohue_2.2.0.bb
-> 
-> diff --git a/recipes-devtools/python/python3-aiohue_2.2.0.bb b/recipes-devtools/python/python3-aiohue_2.2.0.bb
-> new file mode 100644
-> index 000000000..a2a7363f6
-> --- /dev/null
-> +++ b/recipes-devtools/python/python3-aiohue_2.2.0.bb
-> @@ -0,0 +1,12 @@
-> +DESCRIPTION = "Asynchronous library to control Philips Hue"
-> +HOMEPAGE = "https://pypi.org/project/aiohue/"
-> +SECTION = "devel/python"
-> +LICENSE = "Apache-2.0"
-> +# No license file available but the license is specified in PKG-INFO and setup.py.
-> +LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=7145f7cdd263359b62d342a02f005515"
-> +
-> +SRC_URI[sha256sum] = "35696d04d6eb0328b7031ea3c0a3cfe5d83dfcf62f920522e4767d165c6bc529"
-> +
-> +inherit pypi setuptools3
-> +
-> +RDEPENDS_${PN} += "${PYTHON_PN}-aiohttp"
-> 
-> 
-> 
-> 
-> 
+On 3/2/2021 5:06 PM, Cl=C3=A9ment P=C3=A9ron wrote:
+>> I don't use this feature from the grpc package, only linking against t=
+he
+>> libs. However I don't see why this should be an issue, as all the
+>> *.cmake files are packaged. I see that in the RPMs but also in a recip=
+e
+>> of a dependent packgae like this
+> Yes the cmake file is found but not the grpc_cpp_plugin.
+>
+> This is due to cmake looking for the grpc_cpp_plugin in the target
+> sysroot instead of the native/host sysroot.
+>
+>> $ ls -l ./tmp/work/*/*/*/recipe-sysroot/usr/lib/cmake/grpc/*.cmake
+>>
+>> Or use recipe-sysroot-native depending on the consuming recipe.
+>>
+>> Just a wild guess here - does your recipe put 'grpc' into DEPENDS or
+>> RDEPENDS, etc.
+> In my recipe I put 'grpc' and 'grpc-native' into DEPENDS using PACKAGEC=
+ONFIG
+> PACKAGECONFIG[grpc] =3D "-DCONFIG_GRPC=3DON,-DCONFIG_GRPC=3DOFF,grpc gr=
+pc-native"
+>
+>> Also, do you inherit cmake in your recipe?
+> Yes i am indeed inheriting cmake and also systemd in my recipe
+>
+>> It seems to me
+>> that it's more about how to use cmake files in  a recipe, as the
+>> particularly mentioned files are packaged and pulled in a consuming re=
+cipe.
+> When I look in the files packaged the cmake file is indeed here.
+> The issue is coming from the gRPCTargets.cmake (https://pastebin.com/bZ=
+ay7cew)
+> Line 159:
+> # Create imported target gRPC::grpc_cpp_plugin
+> add_executable(gRPC::grpc_cpp_plugin IMPORTED)
+>
+> gRPC is trying to add the grpc_cpp_plugin for the Target which is not
+> present in the final package.
+> dpkg -c ./build/tmp/deploy/ipk/aarch64/grpc_1.35.0-r0_aarch64.ipk
+> drwxr-xr-x root/root         0 2021-02-22 17:43 ./usr/
+> drwxr-xr-x root/root         0 2021-02-22 17:43 ./usr/lib/
+> lrwxrwxrwx root/root         0 2021-02-22 17:43
+> ./usr/lib/libaddress_sorting.so.14 -> libaddress_sorting.so.14.0.0
+> -rwxr-xr-x root/root     10000 2021-02-22 17:43
+> ./usr/lib/libaddress_sorting.so.14.0.0
+> lrwxrwxrwx root/root         0 2021-02-22 17:43 ./usr/lib/libgpr.so.14
+> -> libgpr.so.14.0.0
+> -rwxr-xr-x root/root     59616 2021-02-22 17:43 ./usr/lib/libgpr.so.14.=
+0.0
+> lrwxrwxrwx root/root         0 2021-02-22 17:43
+> ./usr/lib/libgrpc++.so.1 -> libgrpc++.so.1.35.0
+> -rwxr-xr-x root/root    501680 2021-02-22 17:43 ./usr/lib/libgrpc++.so.=
+1.35.0
+> lrwxrwxrwx root/root         0 2021-02-22 17:43
+> ./usr/lib/libgrpc++_alts.so.1 -> libgrpc++_alts.so.1.35.0
+> -rwxr-xr-x root/root     22368 2021-02-22 17:43
+> ./usr/lib/libgrpc++_alts.so.1.35.0
+> lrwxrwxrwx root/root         0 2021-02-22 17:43
+> ./usr/lib/libgrpc++_error_details.so.1 ->
+> libgrpc++_error_details.so.1.35.0
+> -rwxr-xr-x root/root     34896 2021-02-22 17:43
+> ./usr/lib/libgrpc++_error_details.so.1.35.0
+> lrwxrwxrwx root/root         0 2021-02-22 17:43
+> ./usr/lib/libgrpc++_reflection.so.1 -> libgrpc++_reflection.so.1.35.0
+> -rwxr-xr-x root/root    284960 2021-02-22 17:43
+> ./usr/lib/libgrpc++_reflection.so.1.35.0
+> lrwxrwxrwx root/root         0 2021-02-22 17:43
+> ./usr/lib/libgrpc++_unsecure.so.1 -> libgrpc++_unsecure.so.1.35.0
+> -rwxr-xr-x root/root    415672 2021-02-22 17:43
+> ./usr/lib/libgrpc++_unsecure.so.1.35.0
+> lrwxrwxrwx root/root         0 2021-02-22 17:43
+> ./usr/lib/libgrpc.so.14 -> libgrpc.so.14.0.0
+> -rwxr-xr-x root/root   3505864 2021-02-22 17:43 ./usr/lib/libgrpc.so.14=
+.0.0
+> lrwxrwxrwx root/root         0 2021-02-22 17:43
+> ./usr/lib/libgrpc_plugin_support.so.1 ->
+> libgrpc_plugin_support.so.1.35.0
+> -rwxr-xr-x root/root    440528 2021-02-22 17:43
+> ./usr/lib/libgrpc_plugin_support.so.1.35.0
+> lrwxrwxrwx root/root         0 2021-02-22 17:43
+> ./usr/lib/libgrpc_unsecure.so.14 -> libgrpc_unsecure.so.14.0.0
+> -rwxr-xr-x root/root   1939384 2021-02-22 17:43
+> ./usr/lib/libgrpc_unsecure.so.14.0.0
+> lrwxrwxrwx root/root         0 2021-02-22 17:43
+> ./usr/lib/libgrpcpp_channelz.so.1 -> libgrpcpp_channelz.so.1.35.0
+> -rwxr-xr-x root/root    617784 2021-02-22 17:43
+> ./usr/lib/libgrpcpp_channelz.so.1.35.0
+> lrwxrwxrwx root/root         0 2021-02-22 17:43 ./usr/lib/libupb.so.14
+> -> libupb.so.14.0.0
+> -rwxr-xr-x root/root    141768 2021-02-22 17:43 ./usr/lib/libupb.so.14.=
+0.0
+> drwxr-xr-x root/root         0 2021-02-22 17:43 ./usr/share/
+> drwxr-xr-x root/root         0 2021-02-22 17:43 ./usr/share/grpc/
+> -rw-r--r-- root/root    263903 2021-02-22 17:38 ./usr/share/grpc/roots.=
+pem
+
+The bins are packaged into -dev. In the rpm version, i see it packaged
+
+$ rpm -qlp ./tmp/deploy/rpm/aarch64/grpc-dev-1.35.0-r0.aarch64.rpm |=20
+grep grpc_cpp_plugin
+/usr/bin/grpc_cpp_plugin
+
+And same way they're to see
+
+ =C2=A0ls -l ./tmp/work/*/*/*/recipe-sysroot-native/usr/bin/*grpc*
+
+The executables seem only be useful for dev and thus only as native. At=20
+this point it seems it's about going deep into debugging your recipe, as=20
+seems there's no solution laying on the surface.
+
+Regards
+
+Anatol
+
+
+
+
+
