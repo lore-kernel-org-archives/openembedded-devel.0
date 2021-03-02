@@ -1,126 +1,115 @@
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web11.624.1614719012462827918
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web08.1648.1614723354335691694
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Mar 2021 13:03:32 -0800
+ Tue, 02 Mar 2021 14:15:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=PNGaGGIP;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id e3so10633460pfj.6
-        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Mar 2021 13:03:32 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=EgAE9IA4;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id i14so2860283pjz.4
+        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Mar 2021 14:15:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=zBTx1VPJ+9f0Qsb0j8m+8EYByN3l+rCJ3Gm/Tbec3+w=;
-        b=PNGaGGIP7aknv3nlEIXJs8Dkqbxl/Bzb/ZNf0ifDbR3JsN0u6drk1qSjUNyoB7Vup+
-         PIOhK2gIiJkW1BBopg+xvMzvFREC62U53umfpvera9bMXmxmwGAQwZ2g76mVE4mZKimP
-         B9a3pf7aGGEAPQSS9xNYgZkJzFqAYqaRiLWytKZoF5C/W9veo7bHwuQlm1DpfFvxTH/7
-         V0icHQOOJlunKzPnGZG4JHzveyFL5Nx7cs/A06bS7llogQ0y1POn/9Zlip6qTCoI85PC
-         i/c8hbNVPtwzYrfCUxjlQgBibJcH6H6vJxbKl6xJLIkzDHCVfQoNBfJNAfOj5HLll/xi
-         P0Iw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=TubTDY/WUZW7xrIzGve8WGlpyWMi+7uafXsBSuQSQio=;
+        b=EgAE9IA4wJ0T7tLyohX9Afs+3rqQ6XFfnp8/F7js4G7RUIPZnZMZSNcNjmBuJ1+Pgg
+         JZsA8mRKYt19QFaRAlXIXpM4KDcoczhMRzcVZlftl+yER16jhMoavvMbCnMXI4MwTni7
+         5CzFMQ2UiY/FC9uR/S8h0cygOSQ1vkl/dEtIPlOw8ZzlzhhtUIknCrWte0+9M5uFyF4W
+         NzAMeVlHqM1PcSNaXtXOxO5iZl2T1A4TmG4czFiZnHpr78EGZPv3PR2wmcnyXog86K7T
+         3iJnYC6uM4+n/dU7x7E0BV0gH3TBB+B3zWPifA7DrLEGKQJ4etoiXTcbF4T8Me6jyrHQ
+         Xf9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=zBTx1VPJ+9f0Qsb0j8m+8EYByN3l+rCJ3Gm/Tbec3+w=;
-        b=tmuxhlyKNs4HHsWpoUNV7xllApA3H7YTj/yjFWkAnEIk2wCJ404/xhMiBB3aZ4e1hP
-         aW7sHQk1ayg7o5vu1hoUs5rj7XV3XMBEQPk2X7gnoFh5qdp7pjWjULN/8OC8cCOKKPBU
-         OtrwyG99Gg0Hbzo/IKLRUy53Z2a9koEAVaIz6AQwvZwiF4UtJvqisIncQzgGD5Yy6OdS
-         b2bQa9ifSsLcRlU8lkfCvOVqntfJQFg3NChHq7gnLBn8S5jtRjCCE9EYfrpwmLPyIwwa
-         Pp9Fsgc/IT+k0WNiF/CqduIyl5BzRbexEw6nYPcPJ0lYYbxqVrXx5xzeRbjyTBjh7u7U
-         As1A==
-X-Gm-Message-State: AOAM530nZRolQQeZG18l5JdhZaSLsoaFvQrk5OCKq6OdIA6wgxRvN/sQ
-	70N6m8v8V0fRQ9sD+NUyjHw1ocDd7JLIow==
-X-Google-Smtp-Source: ABdhPJzu5Acr5oAvpHEryx4YviwgUROfrI8Gl7K10ubdRiF/LHP5IFlZzFq4p1CuDB5oG7FlmEkpgA==
-X-Received: by 2002:a62:43:0:b029:1cd:2de2:5a24 with SMTP id 64-20020a6200430000b02901cd2de25a24mr4839571pfa.27.1614719011709;
-        Tue, 02 Mar 2021 13:03:31 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=TubTDY/WUZW7xrIzGve8WGlpyWMi+7uafXsBSuQSQio=;
+        b=h+c0wIEjPsUb4ZeXAwMYcKeTdyMMsrzBPQJVMfXAGEdyJyLiOyyEEns/4o1FXTMalD
+         erQXiQKVi5agFeyLt1YSymgBCTwiXXqTp0auxtKJ01p0uZTtnfDk7k6oPmlLbpoEm3cA
+         0gwT6yoSKP3+yKsRgSDWad9z1Rg9T/iTUeySx83CeujWGkrxNYEx51bJR24Qk1/gAMzI
+         PR9jg0QaZc0ZMjxrepqb/FhYS4hdOACoXR13CtqHfyZlKEdBQH/sXtQMhLeFrGWiJz+s
+         RnuRMReG/KQr5SvK2GbgI3FPY+si7QRPsLgzMaqqxppLz8FLf9K1RWbSGfKVkELLeXOj
+         f/4w==
+X-Gm-Message-State: AOAM531TBR7lUKoTjaz4XK3BxBIEtdnfp1u8Sxj8GQXiVV4yL+3NDoDs
+	fBqSvPoLb82/46QsSJRyZvWCNAlzL/zj7g==
+X-Google-Smtp-Source: ABdhPJx6+cFyrS4PWSowgG0A7J2NPUaZCKXSIbnvA/LUXtEZWlkR/KrIWVOeHzH3RRQX45fo5NHUJQ==
+X-Received: by 2002:a17:902:ee0b:b029:e4:8ef6:5d1e with SMTP id z11-20020a170902ee0bb02900e48ef65d1emr91619plb.78.1614723348228;
+        Tue, 02 Mar 2021 14:15:48 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b3bf])
-        by smtp.gmail.com with ESMTPSA id z137sm23455607pfc.172.2021.03.02.13.03.30
+        by smtp.gmail.com with ESMTPSA id i13sm21295617pfe.46.2021.03.02.14.15.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Mar 2021 13:03:31 -0800 (PST)
+        Tue, 02 Mar 2021 14:15:47 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>,
 	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Subject: [meta-multimedia][PATCH 2/2] gerbera: Update to 1.7.0
-Date: Tue,  2 Mar 2021 13:03:27 -0800
-Message-Id: <20210302210327.1143245-2-raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH] nautilus: Drop use of volatile
+Date: Tue,  2 Mar 2021 14:15:45 -0800
+Message-Id: <20210302221545.1499097-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.30.1
-In-Reply-To: <20210302210327.1143245-1-raj.khem@gmail.com>
-References: <20210302210327.1143245-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Fix build with gcc11
+volatile qualifier has been dropped in gcc11
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Cc: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../0001-include-optional-header.patch        | 32 +++++++++++++++++++
- .../{gerbera_1.6.0.bb => gerbera_1.7.0.bb}    |  5 +--
- 2 files changed, 35 insertions(+), 2 deletions(-)
- create mode 100644 meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-include-optional-header.patch
- rename meta-multimedia/recipes-multimedia/gerbera/{gerbera_1.6.0.bb => gerbera_1.7.0.bb} (88%)
+ .../nautilus/0001-Drop-use-of-volatile.patch  | 32 +++++++++++++++++++
+ .../recipes-gnome/nautilus/nautilus_3.36.3.bb |  1 +
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/nautilus/nautilus/0001-Drop-use-of-volatile.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-include-optional-header.patch b/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-include-optional-header.patch
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus/0001-Drop-use-of-volatile.patch b/meta-gnome/recipes-gnome/nautilus/nautilus/0001-Drop-use-of-volatile.patch
 new file mode 100644
-index 0000000000..f3197f937b
+index 0000000000..46831429d0
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-include-optional-header.patch
++++ b/meta-gnome/recipes-gnome/nautilus/nautilus/0001-Drop-use-of-volatile.patch
 @@ -0,0 +1,32 @@
-+From 5719ed8ce9ba60beb9c1670b49296b1c66430dc2 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 2 Mar 2021 12:57:37 -0800
-+Subject: [PATCH] include <optional> header
++From 9ab5acb902a38b420592931ec9e46ccd0624035a Mon Sep 17 00:00:00 2001
++From: Ondrej Holy <oholy@redhat.com>
++Date: Wed, 13 Jan 2021 13:22:58 +0100
++Subject: [PATCH] Drop use of volatile
 +
-+Fixes build with gcc11
-+/src/util/tools.h:165:6: error: 'optional' in na
-+mespace 'std' does not name a template type
-+|   165 | std::optional<std::vector<std::byte>> readBinaryFile(const fs::path& path);
-+|       |      ^~~~~~~~
++The `fedora rawhide` CI job currently fails because of usage of the
++`volatile` qualifier. Let's drop the `volatile` qualifier as it doesn't
++help anyway. It was dropped in GLib as well, see:
++https://gitlab.gnome.org/GNOME/glib/-/merge_requests/1719
 +
-+Upstream-Status: Submitted [https://github.com/gerbera/gerbera/pull/1273]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Fixes: https://gitlab.gnome.org/GNOME/nautilus/-/issues/1741
 +---
-+ src/util/tools.h | 1 +
-+ 1 file changed, 1 insertion(+)
++Upstream-Status: Backport [https://github.com/GNOME/nautilus/commit/9b733dd9df9d6d9805c56749d05ada15a7560ef4]
++ src/nautilus-enum-types.c.template | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/util/tools.h b/src/util/tools.h
-+index 3a4064e9..e5142966 100644
-+--- a/src/util/tools.h
-++++ b/src/util/tools.h
-+@@ -37,6 +37,7 @@
-+ #include <sstream>
-+ #include <string>
-+ #include <unordered_set>
-++#include <optional>
-+ #include <vector>
-+ namespace fs = std::filesystem;
++diff --git a/src/nautilus-enum-types.c.template b/src/nautilus-enum-types.c.template
++index 00155ca..9d8ac83 100644
++--- a/src/nautilus-enum-types.c.template
+++++ b/src/nautilus-enum-types.c.template
++@@ -13,7 +13,7 @@
++ GType
++ @enum_name@_get_type (void)
++ {
++-    static volatile GType type_once = 0;
+++    static GType type_once = 0;
 + 
++     if (g_once_init_enter (&type_once))
++     {
 +-- 
 +2.30.1
 +
-diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera_1.6.0.bb b/meta-multimedia/recipes-multimedia/gerbera/gerbera_1.7.0.bb
-similarity index 88%
-rename from meta-multimedia/recipes-multimedia/gerbera/gerbera_1.6.0.bb
-rename to meta-multimedia/recipes-multimedia/gerbera/gerbera_1.7.0.bb
-index 7f26741832..d4242aa062 100644
---- a/meta-multimedia/recipes-multimedia/gerbera/gerbera_1.6.0.bb
-+++ b/meta-multimedia/recipes-multimedia/gerbera/gerbera_1.7.0.bb
-@@ -4,9 +4,10 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=25cdec9afe3f1f26212ead6bd2f7fac8"
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_3.36.3.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_3.36.3.bb
+index fc9ab379d8..cf138d9739 100644
+--- a/meta-gnome/recipes-gnome/nautilus/nautilus_3.36.3.bb
++++ b/meta-gnome/recipes-gnome/nautilus/nautilus_3.36.3.bb
+@@ -17,6 +17,7 @@ DEPENDS = " \
  
- SRC_URI = "git://github.com/v00d00/gerbera.git;protocol=https \
--"
-+           file://0001-include-optional-header.patch \
-+          "
+ inherit gnomebase gsettings gobject-introspection gtk-doc gettext features_check upstream-version-is-even mime-xdg
  
--SRCREV = "b219e22f09e346dd048f614a01ca2cbc55edd940"
-+SRCREV = "7bc33b98994411e1748d3b3fa9a8424c49e236d6"
- 
- S = "${WORKDIR}/git"
++SRC_URI += "file://0001-Drop-use-of-volatile.patch"
+ SRC_URI[archive.md5sum] = "c3c8dbb90d8eeed6c127aa568e131395"
+ SRC_URI[archive.sha256sum] = "b6cafc7ab1e70a64383de391b6097fcccbf36b208f8502d8c46423224fd30ef8"
  
 -- 
 2.30.1
