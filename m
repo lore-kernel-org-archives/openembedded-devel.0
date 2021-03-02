@@ -1,70 +1,139 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.5472.1614671259700623980
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web12.7099.1614683178342507534
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Mar 2021 23:47:40 -0800
+ Tue, 02 Mar 2021 03:06:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zhengrq.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.81,216,1610380800"; 
-   d="scan'208";a="105016255"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 02 Mar 2021 15:47:37 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 8FA9E4CE7C1F
-	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Mar 2021 15:47:36 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
- G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Tue, 2 Mar 2021 15:47:30 +0800
-From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe][PATCH] Fix do_package error when enable multilib.
-Date: Tue, 2 Mar 2021 15:47:27 +0800
-Message-ID: <1614671247-67782-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
- G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
-X-yoursite-MailScanner-ID: 8FA9E4CE7C1F.A9F12
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=34872 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1lH2r0-0004OA-8Q; Tue, 02 Mar 2021 13:06:15 +0200
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH] python3-twisted: Upgrade 20.3.0 -> 21.2.0
+Date: Tue,  2 Mar 2021 13:06:06 +0200
+Message-Id: <20210302110606.18503-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-ERROR: grpc-1.35.0-r0 do_package: QA Issue: grpc: Files/directories were installed but not shipped in any package:
-  /usr/lib
-  /usr/lib/pkgconfig
-  /usr/lib/pkgconfig/grpc.pc
-  /usr/lib/pkgconfig/grpc_unsecure.pc
-  /usr/lib/pkgconfig/grpc++.pc
-  /usr/lib/pkgconfig/gpr.pc
-  /usr/lib/pkgconfig/grpc++_unsecure.pc
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-grpc: 7 installed and not shipped files. [installed-vs-shipped]
-ERROR: grpc-1.35.0-r0 do_package: Fatal QA errors found, failing task.
+Upgrade to release 21.2.0:
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+- The enableSessions argument to twisted.internet.ssl.CertificateOptions
+  now actually enables/disables OpenSSL's session cache. Also, due
+  to session-related bugs, it defaults to False.
+- twisted.internet.defer.inlineCallbacks and ensureDeferred will
+  now associate a contextvars.Context with the coroutines they run,
+  meaning that ContextVar objects will maintain their value within
+  the same coroutine, similarly to asyncio Tasks. This functionality
+  requires Python 3.7+, or the contextvars PyPI backport to be
+  installed for Python 3.5-3.6.
+- twisted.internet.defer.Deferred.fromCoroutine has been added.
+  This is similar to the existing ensureDeferred function, but is
+  named more consistently inside Twisted and does not pass through
+  Deferreds.
+- trial now allows the @unittest.skipIf decorator to specify that
+  an entire test class should be skipped.
+- The twisted.python.deprecate.deprecatedKeywordParameter decorator
+  can be used to mark a keyword paramater of a function or method
+  as deprecated.
+- Projects using Twisted can now perform type checking against a
+  Twisted installation, for example using mypy.
+- twisted.python.util.InsensitiveDict now fully implements
+  MutableMapping.
+- Python 3.8 is now tested and supported.
+- Support a coroutine function in twisted.internet.task.react.
+- PyPy 3.7 is now tested and supported.
+- twisted.web.twcgi.CGIProcessProtocol.processEnded(...) now
+  handles an already-finished request, for example when
+  request.connectionLost(...) was called previously.
+- Twisted's dependency on PyHamcrest has been moved from the base
+  package to the new "test" extra. Consequently the test extra
+  must be installed for Twisted's test suite to pass.
+- Fixed serialization of timedelta, date, and time objects in
+  twisted.spread.
+- twisted.internet.asyncioreactor.AsyncioSelectorReactor now raises
+  an exception if instantiated with an event loop which is not
+  compatible with asyncio.SelectorEventLoop. This fixes the
+  AsyncioSelectorReactor in Python 3.8+ on Windows, where in bp-34687
+  the default Windows asyncio event loop was changed to
+  ProactorEventLoop. Applications that use AsyncioSelectorReactor
+  on Windows with Python 3.8+ must call
+  asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+  before instantiating and running AsyncioSelectorReactor.
+- twisted.internet.process.registerReapProcessHandler and
+  ._BaseProcess.reapProcess will no longer raise a TypeError when
+  processing a None PID
+- INotify will close its file descriptor if a directory is
+  automatically removed by twisted from the watchlist because it's
+  deleted, avoiding orphaned filedescriptors.
+- DelayedCall.reset() is now working properly with asyncioreactor.
+- AsyncioSelectorReactor.seconds() now correctly returns an epoch
+  time.
+- The _connDone parameter has been removed from
+  twisted.internet.abstract.FileDescriptor.loseConnection()'s
+  signature in order to match the signature in the base class
+  twisted.internet._newtls.ConnectionMixin loseConnection().
+- The Gtk3 reactor now runs on Wayland-only sessions
+- Descriptive error messages from twisted.internet.error are now
+  present when running with 'python -OO'.
+- Comparator methods such as eq() now always return NotImplemented
+  for uncomparable types.
+- When installing Twisted it now requires a minimum Python 3.5.4
+  version to match the version used with automated testing. This
+  is the minimum Python version that we know that Twisted works
+  with.
+
+License-Update: Add contributors and update year.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-devtools/grpc/grpc_1.35.0.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ ...python3-twisted_20.3.0.bb => python3-twisted_21.2.0.bb} | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-twisted_20.3.0.bb => python3-twisted_21.2.0.bb} (98%)
 
-diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.35.0.bb b/meta-oe/recipes-devtools/grpc/grpc_1.35.0.bb
-index 5097b2b1b..363e2b468 100644
---- a/meta-oe/recipes-devtools/grpc/grpc_1.35.0.bb
-+++ b/meta-oe/recipes-devtools/grpc/grpc_1.35.0.bb
-@@ -35,6 +35,11 @@ EXTRA_OECMAKE = " \
-     -DgRPC_INSTALL_CMAKEDIR=${baselib}/cmake/${BPN} \
-     "
+diff --git a/meta-python/recipes-devtools/python/python3-twisted_20.3.0.bb b/meta-python/recipes-devtools/python/python3-twisted_21.2.0.bb
+similarity index 98%
+rename from meta-python/recipes-devtools/python/python3-twisted_20.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-twisted_21.2.0.bb
+index 697725fd71..e0f1a8ca6e 100644
+--- a/meta-python/recipes-devtools/python/python3-twisted_20.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-twisted_21.2.0.bb
+@@ -5,13 +5,11 @@ HOMEPAGE = "http://www.twistedmatrix.com"
  
-+do_configure_prepend() {
-+    sed -i -e "s#lib/pkgconfig/#${baselib}/pkgconfig/#g" ${S}/CMakeLists.txt
-+}
-+
-+
- do_configure_prepend_mipsarch() {
-     sed -i -e "s/set(_gRPC_ALLTARGETS_LIBRARIES \${CMAKE_DL_LIBS} rt m pthread)/set(_gRPC_ALLTARGETS_LIBRARIES \${CMAKE_DL_LIBS} atomic rt m pthread)/g" ${S}/CMakeLists.txt
- }
+ #twisted/topfiles/NEWS:655: - Relicensed: Now under the MIT license, rather than LGPL.
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=27ac6d9597237e7e76282edd7a40cd68"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=e33c411c0b86b1f3ca299091ed51ca31"
+ 
+-SRC_URI[sha256sum] = "d72c55b5d56e176563b91d11952d13b01af8725c623e498db5507b6614fc1e10"
+-SRC_URI[md5sum] = "fc16d575730db7d0cddd09fc35af3eea"
++SRC_URI[sha256sum] = "77544a8945cf69b98d2946689bbe0c75de7d145cdf11f391dd487eae8fc95a12"
+ 
+ PYPI_PACKAGE = "Twisted"
+-PYPI_PACKAGE_EXT = "tar.bz2"
+ 
+ inherit pypi setuptools3
+ 
+@@ -201,6 +199,7 @@ ${libdir}/${PYTHON_DIR}/site-packages/Twisted*egg-info \
+ ${libdir}/${PYTHON_DIR}/site-packages/twisted/logger/ \
+ ${libdir}/${PYTHON_DIR}/site-packages/twisted/_threads/ \
+ ${libdir}/${PYTHON_DIR}/site-packages/twisted/positioning/ \
++${libdir}/${PYTHON_DIR}/site-packages/twisted/py.typed \
+ "
+ 
+ FILES_${PN}-mail = " \
 -- 
-2.25.1
-
-
+2.17.1
 
