@@ -1,99 +1,186 @@
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by mx.groups.io with SMTP id smtpd.web11.8304.1614691953240774689
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by mx.groups.io with SMTP id smtpd.web09.9411.1614696574215199028
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Mar 2021 05:32:33 -0800
+ Tue, 02 Mar 2021 06:49:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@linux.microsoft.com header.s=default header.b=H5eX+obl;
- spf=pass (domain: linux.microsoft.com, ip: 13.77.154.182, mailfrom: anbelski@linux.microsoft.com)
-Received: from [192.168.178.23] (i59F7A1E8.versanet.de [89.247.161.232])
-	by linux.microsoft.com (Postfix) with ESMTPSA id EE3C020B83EA;
-	Tue,  2 Mar 2021 05:32:31 -0800 (PST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com EE3C020B83EA
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1614691952;
-	bh=AKLS1Cu8wvAkMzL0OeGZyEQfvr/BznfHuoGXj9nydLg=;
-	h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
-	b=H5eX+oblZZFZiz3Besy/AC08bhKNtsttW7rw3BtA7QBxPfi7FOapQ8VZl2zGlkiQr
-	 HMdMeB/CEYPiRxocbQheMu+i4MPHPOn7hC5iumJrJexHfDFR7+3egLGGpjObwj2GK2
-	 T14KY+817yJwRXjHRPvHC6SBrxkzCQ23q4l53zg8=
-Subject: Re: [oe] [meta-oe][PATCH] grpc: Upgrade 1.24.3 -> 1.35.0
-To: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-References: <20210219123955.26446-1-anbelski@linux.microsoft.com>
- <CAJiuCcexC-KBndWSa=D++zQNFtxu0zYm9oSs_VLzov5QrOtNLA@mail.gmail.com>
-From: "Anatol Belski" <anbelski@linux.microsoft.com>
-Message-ID: <4696f493-ee53-f4c5-7172-272ed8271be5@linux.microsoft.com>
-Date: Tue, 2 Mar 2021 14:32:17 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: hongxu.jia@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 122EnGoJ017722
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 2 Mar 2021 06:49:16 -0800 (PST)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2106.2; Tue, 2 Mar 2021 06:49:16 -0800
+Received: from ala-lpggp7.wrs.com (147.11.105.171) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2106.2 via Frontend Transport; Tue, 2 Mar 2021 06:49:16 -0800
+From: "hongxu" <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+CC: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] lvm2/libdevmapper: 2.03.06 -> 2.03.11
+Date: Tue, 2 Mar 2021 06:49:15 -0800
+Message-ID: <20210302144915.63848-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-In-Reply-To: <CAJiuCcexC-KBndWSa=D++zQNFtxu0zYm9oSs_VLzov5QrOtNLA@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Hi Cl=C3=A9ment,
+Drop backport patch:
+- 0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch
 
-Thanks for the question.
+Refresh:
+- 0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch
 
-On 2/22/2021 5:49 PM, Cl=C3=A9ment P=C3=A9ron wrote:
-> Hi Anatol,
->
->
-> On Fri, 19 Feb 2021 at 13:40, Anatol Belski
-> <anbelski@linux.microsoft.com> wrote:
->> This is a really huge jump in versions, but this package has been not
->> upgraded for quite some time. The previous patches are not necessary
->> anymore, they're integrated upstream.
-> This version of gRPC generate a new CMake gRPCTargets.cmake
-> recipe-sysroot/usr/lib/cmake/grpc/gRPCTargets.cmake
->
-> This generate an error in my build:
-> Because this CMake declare a
-> recipe-sysroot/usr/bin/grpc_cpp_plugin
->
-> but this file does not exist.  Possible reasons include:
-> |
-> |   * The file was deleted, renamed, or moved to another location.
-> |
-> |   * An install or uninstall procedure did not complete successfully.
-> |
-> |   * The installation package was faulty and contained
->
-> In my project i'm using the CMake example from gRPC
-> https://github.com/grpc/grpc/blob/master/examples/cpp/cmake/common.cmak=
-e#L114
->
-> This error is triggered by:
-> find_package(gRPC 1.35.0 CONFIG REQUIRED)
->
-> FYI My recipes depends on grpc and grpc-native
-> PACKAGECONFIG[grpc] =3D "-DCONFIG_GRPC=3DON,-DCONFIG_GRPC=3DOFF,grpc gr=
-pc-native"
->
-> Do you have an example of a gRPC recipe?
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ ...per_2.03.06.bb => libdevmapper_2.03.11.bb} |  0
+ meta-oe/recipes-support/lvm2/lvm2.inc         |  2 +-
+ ...led-No-medium-found-will-print-out-i.patch | 32 -------------------
+ ...findmnt-bin-lsblk-bin-sort-not-found.patch | 20 ++++++------
+ .../lvm2/{lvm2_2.03.06.bb => lvm2_2.03.11.bb} |  1 -
+ 5 files changed, 11 insertions(+), 44 deletions(-)
+ rename meta-oe/recipes-support/lvm2/{libdevmapper_2.03.06.bb => libdevmapper_2.03.11.bb} (100%)
+ delete mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch
+ rename meta-oe/recipes-support/lvm2/{lvm2_2.03.06.bb => lvm2_2.03.11.bb} (97%)
 
-I don't use this feature from the grpc package, only linking against the=20
-libs. However I don't see why this should be an issue, as all the=20
-*.cmake files are packaged. I see that in the RPMs but also in a recipe=20
-of a dependent packgae like this
-
-$ ls -l ./tmp/work/*/*/*/recipe-sysroot/usr/lib/cmake/grpc/*.cmake
-
-Or use recipe-sysroot-native depending on the consuming recipe.
-
-Just a wild guess here - does your recipe put 'grpc' into DEPENDS or=20
-RDEPENDS, etc. Also, do you inherit cmake in your recipe? It seems to me=20
-that it's more about how to use cmake files in=C2=A0 a recipe, as the=20
-particularly mentioned files are packaged and pulled in a consuming recip=
-e.
-
-Regards
-
-Anatol
-
-
-
-
-
+diff --git a/meta-oe/recipes-support/lvm2/libdevmapper_2.03.06.bb b/meta-oe/recipes-support/lvm2/libdevmapper_2.03.11.bb
+similarity index 100%
+rename from meta-oe/recipes-support/lvm2/libdevmapper_2.03.06.bb
+rename to meta-oe/recipes-support/lvm2/libdevmapper_2.03.11.bb
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index 11ee7ca8b..6618e21f3 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -18,7 +18,7 @@ SRC_URI = "git://sourceware.org/git/lvm2.git;branch=main \
+            file://reproducible-build.patch \
+            "
+ 
+-SRCREV = "b9391b1b9f0b73303fa21f8f92574d17ce4c2b02"
++SRCREV = "3e8bd8d1bd70691f09a170785836aeb4f83154e6"
+ S = "${WORKDIR}/git"
+ 
+ inherit autotools-brokensep pkgconfig systemd license
+diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch
+deleted file mode 100644
+index 24d5b1b48..000000000
+--- a/meta-oe/recipes-support/lvm2/lvm2/0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From 93c93e3b85492e58f9451841e6079d00c497efa4 Mon Sep 17 00:00:00 2001
+-From: Jiping Ma <jiping.ma2@windriver.com>
+-Date: Mon, 25 Feb 2019 13:29:12 +0800
+-Subject: [PATCH] "/dev/hdc: open failed: No medium found" will print out in
+- lvmdiskscan.
+-
+-commit [57bb46c5e7f8] introduce this issue.
+-"/dev/hdc: open failed: No medium found" will be print out
+-after run lvmdiskscan. change dev_open_readonly()
+-to dev_open_readonly_quiet() in fuction _dev_get_size_dev().
+-
+-Signed-off-by: Jiping Ma <jiping.ma2@windriver.com>
+----
+- lib/device/dev-io.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/lib/device/dev-io.c b/lib/device/dev-io.c
+-index dc95131..81a66b0 100644
+---- a/lib/device/dev-io.c
+-+++ b/lib/device/dev-io.c
+-@@ -338,7 +338,7 @@ static int _dev_get_size_dev(struct device *dev, uint64_t *size)
+- 	}
+- 
+- 	if (fd <= 0) {
+--		if (!dev_open_readonly(dev))
+-+		if (!dev_open_readonly_quiet(dev))
+- 			return_0;
+- 		fd = dev_fd(dev);
+- 		do_close = 1;
+--- 
+-1.9.1
+-
+diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch
+index 16de8c0a1..34e0620a1 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2/0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch
++++ b/meta-oe/recipes-support/lvm2/lvm2/0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch
+@@ -1,6 +1,6 @@
+-From 27b56cb6b5dfc75ea8ddb395dc9ef41fb7a09c93 Mon Sep 17 00:00:00 2001
++From ddf36613f3408ce42f15b03b4e9c6ad8478b97f8 Mon Sep 17 00:00:00 2001
+ From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Mon, 2 Sep 2019 23:04:50 -0400
++Date: Tue, 2 Mar 2021 01:33:05 -0800
+ Subject: [PATCH] fix command /bin/findmnt, /bin/lsblk, /bin/sort not found
+ 
+ In oe-core (util-linux and coreutils), the commands locates in
+@@ -15,10 +15,10 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+  2 files changed, 7 insertions(+), 3 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index d1431e2..54e5a7b 100644
++index 4811d4a3d..137b31a82 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -1495,6 +1495,8 @@ fi
++@@ -1611,6 +1611,8 @@ fi
+  
+  SYSCONFDIR="$(eval echo $(eval echo $sysconfdir))"
+  
+@@ -27,7 +27,7 @@ index d1431e2..54e5a7b 100644
+  SBINDIR="$(eval echo $(eval echo $sbindir))"
+  LVM_PATH="$SBINDIR/lvm"
+  AC_DEFINE_UNQUOTED(LVM_PATH, ["$LVM_PATH"], [Path to lvm binary.])
+-@@ -1721,6 +1723,7 @@ AC_SUBST(SACKPT_CFLAGS)
++@@ -1829,6 +1831,7 @@ AC_SUBST(SACKPT_CFLAGS)
+  AC_SUBST(SACKPT_LIBS)
+  AC_SUBST(SALCK_CFLAGS)
+  AC_SUBST(SALCK_LIBS)
+@@ -36,10 +36,10 @@ index d1431e2..54e5a7b 100644
+  AC_SUBST(SELINUX_LIBS)
+  AC_SUBST(SELINUX_PC)
+ diff --git a/scripts/blkdeactivate.sh.in b/scripts/blkdeactivate.sh.in
+-index a4b8a8f..3db4226 100644
++index 7c517b87b..7ef1bb766 100644
+ --- a/scripts/blkdeactivate.sh.in
+ +++ b/scripts/blkdeactivate.sh.in
+-@@ -41,13 +41,14 @@ UMOUNT="/bin/umount"
++@@ -42,13 +42,14 @@ VDO="/bin/vdo"
+  
+  sbindir="@SBINDIR@"
+  DMSETUP="$sbindir/dmsetup"
+@@ -55,9 +55,9 @@ index a4b8a8f..3db4226 100644
+  	FINDMNT_READ="read -r mnt"
+  fi
+  DMSETUP_OPTS=""
+-@@ -55,10 +56,10 @@ LVM_OPTS=""
+- MDADM_OPTS=""
++@@ -57,10 +58,10 @@ MDADM_OPTS=""
+  MPATHD_OPTS=""
++ VDO_OPTS=""
+  
+ -LSBLK="/bin/lsblk -r --noheadings -o TYPE,KNAME,NAME,MOUNTPOINT"
+ +LSBLK="$bindir/lsblk -r --noheadings -o TYPE,KNAME,NAME,MOUNTPOINT"
+@@ -69,5 +69,5 @@ index a4b8a8f..3db4226 100644
+  # Do not show tool errors by default (only done/skipping summary
+  # message provided by this script) and no verbose mode by default.
+ -- 
+-2.8.1
++2.29.2
+ 
+diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.03.06.bb b/meta-oe/recipes-support/lvm2/lvm2_2.03.11.bb
+similarity index 97%
+rename from meta-oe/recipes-support/lvm2/lvm2_2.03.06.bb
+rename to meta-oe/recipes-support/lvm2/lvm2_2.03.11.bb
+index bc86810ec..7f3f000e0 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2_2.03.06.bb
++++ b/meta-oe/recipes-support/lvm2/lvm2_2.03.11.bb
+@@ -1,7 +1,6 @@
+ require lvm2.inc
+ 
+ SRC_URI += " \
+-            file://0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch \
+             file://0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch \
+            "
+ 
+-- 
+2.29.2
 
