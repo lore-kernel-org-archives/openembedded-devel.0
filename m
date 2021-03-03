@@ -1,182 +1,112 @@
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web09.7933.1614784115294858125
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+ by mx.groups.io with SMTP id smtpd.web10.7937.1614784117034299338
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Mar 2021 07:08:35 -0800
+ Wed, 03 Mar 2021 07:08:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=PLSA18Nu;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id 201so16486782pfw.5
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Mar 2021 07:08:35 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=a+bXW5gE;
+ spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f175.google.com with SMTP id h4so16529449pgf.13
+        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Mar 2021 07:08:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=OEDvyJ1YXbBlXN+urXpuugFFPLp0BsST4ddsxfKdCz8=;
-        b=PLSA18Nu/g6Xb/cr09k9bOxxSbx88O1XpoudWqqorDgMZ5MNYRwoz2O4byqf+XjEqk
-         cW0cNvCgf9A3SgBldILpEoU9015vw7ZbRXpVv11tIqBR8NmltyL5qYyd2FPFGcLapFD8
-         fqJqm0mPahQL26N86sOQ+/fUjvlXFLlOrHD+zDYmlxaipnq3qZphUiXl9igTgmxBwz7k
-         4GbONkEhyY1jVM/uFPThSUQziqCXG65SMHBtBqrqgyQDUNmC/2zg+ET8aixRycQanbIg
-         eMx2tXHhVL317f8duqGWmqzc8wbfZf1DOS41hi24LeOekP8eMcYE55Y/31eBTI/HoXXF
-         pcug==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=+yzrIZthCTm+mnkvCmEuwQbWNQZxltKhsryZodULeGQ=;
+        b=a+bXW5gEcHr+eDeZZ2jMvKGH38ZdF8XoQca62jICI3H9l6bX5ZbyBvAeEqQlFn/GKd
+         F7lcJY7ZvfmqcUNwof3dbuNmLAY43QcL3LJpsXZQCQlYZ+KeWVA+j3DdO+VtumBvCVFT
+         eCcu+7XLJqFM7QNVh+ISt55rQLQPYon/VwLiHoPE/cn7Cfuq+OJzqpTIrjJCbn3u7aRP
+         2p6rpSpWB0QjQU++Ynsy1AVZQKoJKmn84t8tSR72NAy3npcbWR01EQVP+6zL0gSQbIP4
+         GVZxqR+iRliETg9TFZjVNLzggOOwc52eDGjAd7XnSv79ZEjLUKLPgkaVbd+ll+HaNAel
+         cP/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=OEDvyJ1YXbBlXN+urXpuugFFPLp0BsST4ddsxfKdCz8=;
-        b=W6SSm7+Xu3BfUvynSjBKWGE+XUaqcbimKe6hJzyv22F9Vk7zn+LgEWZJ2PmPFQaOnm
-         5VSiXGMMWrIkNvVrdhxK0/Bk0b6HTDm7K8dbya5Q1TFgC3Lm/tI8o/TSfbkCO/P+Merq
-         KgpsIh7ZrLQSgtzfBl9DOxrY7OMdeEKvFDpv8sPj67Wj6NuYzcqcKwIv6yKKCvQCtZaw
-         ylnIO8f/GFuTZpJejvKk1+Odt7wXeKZGu0nvIqtXxEW7UFCnR95qk2LImLWiGpxuaKYf
-         N/I9yCMQqDxMV4kJLYon1p6vjBrWWR210aoL3+Xf8n3yERqz4i1S2S2yT6F0v3DYl6V/
-         EgQQ==
-X-Gm-Message-State: AOAM532vRCyY10E7ME/M/bGJUGehPOcSxWs1KElVv1HMcq6RsW1AyFCD
-	wAwgFL0mjDjEuM0GbaFFTQaEMGVTrRfIMQ==
-X-Google-Smtp-Source: ABdhPJxB8w9whA2RJKmI8yAGJyF1NhE4vryj+pDc2b2PGs0EU1Rz4S9sl9Dnx88G+F6sWQvLBE+w3g==
-X-Received: by 2002:a63:fa50:: with SMTP id g16mr24229224pgk.86.1614784114349;
-        Wed, 03 Mar 2021 07:08:34 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=+yzrIZthCTm+mnkvCmEuwQbWNQZxltKhsryZodULeGQ=;
+        b=dD36QFQH4sbqvM8k8RBoLFX7ZjwRHSNPU9QIHWXPEBifgWwtvs91k+MvLJFMjrDOlj
+         pv0Th+h4RobVFJGELz6fTUnwbO4LW6NHm5mGg8iZ9GLGvBWigf8hiaw71pUKmitc7DwL
+         5kdpM9lx3OYRrHBUJGbZX75bkjQUribAy3sPIf0Jvcw0MjdRRFrzdoyvs16PYRRueX7U
+         V/FvWCQdyqomB1AFbGfOzmDVrrkwaENApym/uPMXGoeNAaizZDlgFiF5XxG+C9zrq2qp
+         nFpHDLDERGIBG3fuY5TpEsR88WjEZLJmcZBlT0/0tYiM9P7KBJq6PukGF2LmpfRFSwh7
+         xbvQ==
+X-Gm-Message-State: AOAM533sKOHNwO5QPtH8GmVMOIkmVWNMTYBC4s8FkaGTujRNt8s3/GpE
+	KeJ5cYdY4uWn7MvjBckTn5s3vcdk3D+F4A==
+X-Google-Smtp-Source: ABdhPJzkDM4rn1L2Dsl34Sk9KODA8+DFVWfpi13opygjXTyHeKC4fDtwIJK31cmHriq9x1ywj6kblg==
+X-Received: by 2002:a63:2164:: with SMTP id s36mr23717209pgm.268.1614784115325;
+        Wed, 03 Mar 2021 07:08:35 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b3bf])
-        by smtp.gmail.com with ESMTPSA id k16sm17806347pfp.161.2021.03.03.07.08.33
+        by smtp.gmail.com with ESMTPSA id k16sm17806347pfp.161.2021.03.03.07.08.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 Mar 2021 07:08:33 -0800 (PST)
+        Wed, 03 Mar 2021 07:08:34 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>,
 	Jose Quaresma <quaresma.jose@gmail.com>,
 	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Subject: [meta-multimedia][PATCH v2 1/2] mpich: Upgrade to 3.4.1
-Date: Wed,  3 Mar 2021 07:08:29 -0800
-Message-Id: <20210303150830.2471319-1-raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH v2 2/2] srt: Backport fix for missing <limits> header
+Date: Wed,  3 Mar 2021 07:08:30 -0800
+Message-Id: <20210303150830.2471319-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.30.1
+In-Reply-To: <20210303150830.2471319-1-raj.khem@gmail.com>
+References: <20210303150830.2471319-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-
-Add fixes to work with/with-out X
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Cc: Jose Quaresma <quaresma.jose@gmail.com>
 Cc: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-oe/recipes-devtools/mpich/mpich_3.2.bb   | 47 ----------------
- meta-oe/recipes-devtools/mpich/mpich_3.4.1.bb | 54 +++++++++++++++++++
- 2 files changed, 54 insertions(+), 47 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/mpich/mpich_3.2.bb
- create mode 100644 meta-oe/recipes-devtools/mpich/mpich_3.4.1.bb
+ ...001-core-Fix-build-with-GCC-11.-1806.patch | 26 +++++++++++++++++++
+ .../recipes-support/srt/srt_1.4.2.bb          |  1 +
+ 2 files changed, 27 insertions(+)
+ create mode 100644 meta-multimedia/recipes-support/srt/srt/0001-core-Fix-build-with-GCC-11.-1806.patch
 
-diff --git a/meta-oe/recipes-devtools/mpich/mpich_3.2.bb b/meta-oe/recipes-devtools/mpich/mpich_3.2.bb
-deleted file mode 100644
-index 51b313cef4..0000000000
---- a/meta-oe/recipes-devtools/mpich/mpich_3.2.bb
-+++ /dev/null
-@@ -1,47 +0,0 @@
--SUMMARY = "Message Passing Interface (MPI) implementation"
--HOMEPAGE = "http://www.mpich.org/"
--SECTION = "devel"
--
--LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=2106f0435056f3dd9349747a766e5816"
--
--SRC_URI = " \
--    http://www.mpich.org/static/downloads/${PV}/mpich-${PV}.tar.gz \
--"
--
--SRC_URI[md5sum] = "f414cfa77099cd1fa1a5ae4e22db508a"
--SRC_URI[sha256sum] = "0778679a6b693d7b7caff37ff9d2856dc2bfc51318bf8373859bfa74253da3dc"
--
--RDEPENDS_${PN} += "bash perl libxml2"
--S = "${WORKDIR}/${BP}"
--
--EXTRA_OECONF = "--enable-debuginfo \
--    --enable-fast \
--    --enable-shared  \
--    --with-pm=gforker  \
--    --disable-rpath \
--    --disable-f77 \
--    --disable-fc \
--    --disable-fortran \
--    --disable-cxx \
--    BASH_SHELL='${USRBINPATH}/env bash' \
--    PERL='${USRBINPATH}/env perl' \
--"
--
--inherit autotools-brokensep gettext
--
--do_configure_prepend() {
--    for d in confdb test/mpi/confdb src/openpa/confdb src/pm/hydra/confdb src/pm/hydra/tools/topo/hwloc/hwloc/config src/pm/hydra/mpl/confdb src/mpl/confdb src/mpi/romio/confdb;  do
--        install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}/$d
--        install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}/$d
--    done
--
--    autoreconf --verbose --install --force -I . -I confdb/ -I maint/
--    oe_runconf
--    exit
--}
--
--do_install_append() {
--    sed -i 's,${S}/,,g' ${D}/${libdir}/libmpi.la
--    sed -i 's,${DEBUG_PREFIX_MAP},,g' ${D}/${libdir}/pkgconfig/mpich.pc
--}
-diff --git a/meta-oe/recipes-devtools/mpich/mpich_3.4.1.bb b/meta-oe/recipes-devtools/mpich/mpich_3.4.1.bb
+diff --git a/meta-multimedia/recipes-support/srt/srt/0001-core-Fix-build-with-GCC-11.-1806.patch b/meta-multimedia/recipes-support/srt/srt/0001-core-Fix-build-with-GCC-11.-1806.patch
 new file mode 100644
-index 0000000000..77e080c8b8
+index 0000000000..0cb6943ccb
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/mpich/mpich_3.4.1.bb
-@@ -0,0 +1,54 @@
-+SUMMARY = "Message Passing Interface (MPI) implementation"
-+HOMEPAGE = "http://www.mpich.org/"
-+SECTION = "devel"
++++ b/meta-multimedia/recipes-support/srt/srt/0001-core-Fix-build-with-GCC-11.-1806.patch
+@@ -0,0 +1,26 @@
++From f1b35cbf5b9b42b031e9b119e4c802b5f744468c Mon Sep 17 00:00:00 2001
++From: Christophe Giboudeaux <krop@users.noreply.github.com>
++Date: Wed, 10 Feb 2021 12:42:45 +0000
++Subject: [PATCH] [core] Fix build with GCC 11. (#1806)
 +
-+LICENSE = "BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=bd4d7ab13df98988b1ca2a4e01c8c163"
++The 'limits' header must be included explicitly.
++---
++Upstream-Status: Backport [https://github.com/haivision/srt/commit/f1b35cbf5b9b42b031e9b119e4c802b5f744468c]
++ srtcore/sync.h | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+SRC_URI = "http://www.mpich.org/static/downloads/${PV}/mpich-${PV}.tar.gz"
-+SRC_URI[sha256sum] = "8836939804ef6d492bcee7d54abafd6477d2beca247157d92688654d13779727"
++diff --git a/srtcore/sync.h b/srtcore/sync.h
++index 59c125a7..9f01ca91 100644
++--- a/srtcore/sync.h
+++++ b/srtcore/sync.h
++@@ -15,6 +15,7 @@
++ //#define ENABLE_CXX17
++ 
++ #include <cstdlib>
+++#include <limits>
++ #ifdef ENABLE_STDCXX_SYNC
++ #include <chrono>
++ #include <thread>
++-- 
++2.30.1
 +
-+RDEPENDS_${PN} += "bash perl libxml2"
-+
-+EXTRA_OECONF = "--enable-debuginfo \
-+    --enable-fast \
-+    --enable-shared  \
-+    --with-pm=gforker  \
-+    --disable-rpath \
-+    --disable-f77 \
-+    --disable-fc \
-+    --disable-fortran \
-+    --disable-cxx \
-+    BASH_SHELL='${USRBINPATH}/env bash' \
-+    PERL='${USRBINPATH}/env perl' \
-+    --with-device=ch3:nemesis \
-+    --with-rdmacm=no \
-+    --disable-numa \
-+"
-+
-+PACKAGECONFIG += " \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
-+"
-+PACKAGECONFIG[x11] = "--with-x --x-includes=${STAGING_INCDIR} --x-libraries=${STAGING_LIBDIR},--without-x,virtual/libx11"
-+
-+inherit autotools gettext pkgconfig
-+
-+do_configure() {
-+    for d in confdb test/mpi test/mpi/confdb src/pm/hydra/confdb \
-+        src/pm/hydra/tools/topo/hwloc/hwloc/config src/pm/hydra/mpl/confdb \
-+        modules/yaksa/m4 modules/json-c modules/ucx test/mpi/dtpools/confdb \
-+        src/mpl/confdb src/mpi/romio/confdb;  do
-+        install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}/$d
-+        install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}/$d
-+    done
-+#    cd ${S}
-+#    autoupdate
-+#    autoreconf --verbose --install --force
-+#    cd ${B}
-+    oe_runconf
-+}
-+
-+do_install_append() {
-+    sed -i 's,${S}/,,g' ${D}/${libdir}/libmpi.la
-+    sed -i 's,${DEBUG_PREFIX_MAP},,g' ${D}/${libdir}/pkgconfig/mpich.pc
-+}
+diff --git a/meta-multimedia/recipes-support/srt/srt_1.4.2.bb b/meta-multimedia/recipes-support/srt/srt_1.4.2.bb
+index 567ea68edf..f7dfda28f1 100644
+--- a/meta-multimedia/recipes-support/srt/srt_1.4.2.bb
++++ b/meta-multimedia/recipes-support/srt/srt_1.4.2.bb
+@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=815ca599c9df247a0c7f619bab123dad"
+ SRCREV = "50b7af06f3a0a456c172b4cb3aceafa8a5cc0036"
+ SRC_URI = "git://github.com/Haivision/srt;protocol=https \
+            file://0001-don-t-install-srt-ffplay.patch \
++           file://0001-core-Fix-build-with-GCC-11.-1806.patch \
+            "
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ S = "${WORKDIR}/git"
 -- 
 2.30.1
 
