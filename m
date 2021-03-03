@@ -1,84 +1,77 @@
 Received: from wout2-smtp.messagingengine.com (wout2-smtp.messagingengine.com [64.147.123.25])
- by mx.groups.io with SMTP id smtpd.web12.6521.1614778389621935827
+ by mx.groups.io with SMTP id smtpd.web08.6563.1614778651658433729
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Mar 2021 05:33:09 -0800
+ Wed, 03 Mar 2021 05:37:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gherzan.com header.s=fm1 header.b=MBp9qLw6;
+ dkim=pass header.i=@gherzan.com header.s=fm1 header.b=NWnHa9Zy;
  spf=pass (domain: gherzan.com, ip: 64.147.123.25, mailfrom: andrei@gherzan.com)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.42])
-	by mailout.west.internal (Postfix) with ESMTP id D2CC817E8;
-	Wed,  3 Mar 2021 08:33:08 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
-  by compute2.internal (MEProxy); Wed, 03 Mar 2021 08:33:09 -0500
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+	by mailout.west.internal (Postfix) with ESMTP id 6D94117F0;
+	Wed,  3 Mar 2021 08:37:30 -0500 (EST)
+Received: from imap4 ([10.202.2.54])
+  by compute3.internal (MEProxy); Wed, 03 Mar 2021 08:37:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gherzan.com; h=
-	from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding; s=fm1; bh=Na46qRNHa94eT
-	6nWAWpHHW3KXs+gwjKZh9ypWy7dYxY=; b=MBp9qLw6qR+zs5QKOnjiYnYiLlVMB
-	S4HJlSrIbyB6TfSEtjMTkeJyV4BExJ3nfFDRqwRTQPkiQj2wJPoCbQg+a6NlzaXc
-	Q5taTNN8edggqNSafQfZt/aEusv8vUYPTcn3anqPAfRkYFmLZvYRT4iEzMgRXI6n
-	To4CJHRHwPV/yx54OXPq8P92FJhJ4muvoxDFfOiTZtRh2OEsnRxurLoEx5OZQFsW
-	KxXcc0mEV8ZyjJC6zgLkWRMf4dl+3IrdA8nZzsJs/TqHDVsBFB+nvN/sbdLXRbD7
-	U0h1B8Xg0tD705m44ry+UGVEqw7H/trQ4mlyVj5BY3EX51nxvhhnIESfQ==
+	mime-version:message-id:in-reply-to:references:date:from:to:cc
+	:subject:content-type; s=fm1; bh=favyjUayc0wJ1Eqy5Ar9IPh2Hy4p2gC
+	Zs7APSr8N+RQ=; b=NWnHa9Zyf+YkSYMpqyzbeXhefxWdpCajMWdpTSw953lN2PN
+	XO4IyIsLg+iRhKLAb49yWMzf1eTtpg4ji4bdoV7YiQWm52EeCA8OoULj1+JA3xGo
+	AK9rbG5twkbVEBSYcLl2awJe7THP5fhCF8u3tQch1xLT0tNK7cgqwqzFvoG6macd
+	aLqLYhw5ec2+BEfQpZLRlAfr3mFnG22Xj8pBlKNIEGH85jHM+AhJub5OWQieyjD1
+	VQ7+W0VlRSX3g+6JG22VjnVZEeF2ai4JV0sMNBg3v861OnMUvUdqH6E5KjdFe/Kx
+	6Z/L2RN9NGzyuxaFQTQxvTKquzRn6Snm+U3yPQg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-transfer-encoding:date:from
-	:in-reply-to:message-id:mime-version:references:subject:to
-	:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm2; bh=Na46qRNHa94eT6nWAWpHHW3KXs+gwjKZh9ypWy7dYxY=; b=T3PdMBm/
-	OlDybF5WRk5YU+0BowVA+6bzhZw/WJPXCNPNnhy0K+mBwLbg1adGSaRM57E9+sds
-	76sDzAkjA99H1kcC2nVQOKxYQndLQ7jDPTdC3oU3f87DGG2kZqq7s57ncjg9Y9fA
-	Mjo713WX0FvznpWJq2NAkj8J7Ir5QHMV/CX4O3TGSu8OG6Q2qcyEPfwYmpcOYwUC
-	HiM0i00g5ws7j0ImVDxfeEdjrDhYbCS8w8l+KpkeKwE2+oQoYdTHKyfj+dgVTSez
-	5v3krW9UiwrfLsRxH2uF7GKHkysoiNJp0eBl48BbreE3rMDzRcTqh18baArgCmel
-	Xh+ejO4XlJ39zQ==
-X-ME-Sender: <xms:FJA_YB3a8WeQeM9ZuY-NoZTU1PMbJxE5JEBMVMT5gr4jGFQGmlO-Tw>
-    <xme:FJA_YBufQKDw-S57G3afoxIQGJu0Jq4erZjRIU9zg-ftde9yD3JsYySNbtrCn5urw
-    B7YlKDT_SqyP4ASG1M>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledruddtvddgheegucetufdoteggodetrfdotf
+	messagingengine.com; h=cc:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=favyjU
+	ayc0wJ1Eqy5Ar9IPh2Hy4p2gCZs7APSr8N+RQ=; b=Tu1fyftSOYsGn0Wqq9pBec
+	nbrGYUPv76HlX7jhhBLqu79rkwPRWwb0TVDG+1z0cv4N+h8biT+Pe+EFSLqB65fv
+	JqyktdmsyByKNAyT0FjeOh2AAZEBXlqL5rebGi1Mzmy4hx27BowmK0VY3SF4D26x
+	vHwUdeQlqwR2rd395D4KdTbJggj3XV/CL+ldJYC+N0jG8GRS3GCQ+Y87b0ax/3V+
+	YNbE1uKLL9Bmlxzu63W9ZjwVTeg/OC0ZMvW+W9lb+xE4k5Rs8t8elxQcFsk3Lgom
+	qCQRzxdMydusNgz9g7gmCqWc88cbHsaz7KZfeScJnFKon7g6D8ftOkzO7bdACr5w
+	==
+X-ME-Sender: <xms:GZE_YFy5POKiO4GGAoUFDC-lID8LngHdOHIG3WMbIzr0Q-fkNn8eyA>
+    <xme:GZE_YFSwKdPk_LCn2N1tMZzQNbM6QuKb9e_fnXkZbQH1TxrWD-6qLHMGSEh6In1nG
+    PtmVkfggCb1EZyeZsc>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledruddtvddgheehucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhephffvufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpeetnhgurhgv
-    ihcuifhhvghriigrnhcuoegrnhgurhgvihesghhhvghriigrnhdrtghomheqnecuggftrf
-    grthhtvghrnhepleeliefhvedvvdejgfeuueekgeffieevhffgleduhfdugeegffdutdel
-    feeugeeunecuffhomhgrihhnpehgihhthhhusgdrtghomhenucfkphepuddtledrudegie
-    drfeejrddukedvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhf
-    rhhomheprghnughrvghisehghhgvrhiirghnrdgtohhm
-X-ME-Proxy: <xmx:FJA_YB74KxO8AuVrUd0CkgJmuhrGeuHdGkqGAQ01bnRJltAEoBWcZg>
-    <xmx:FJA_YCKhyZ4T-IDonuuKEH9yR4yqszWxdIa94apJDWdiRaeep61f9Q>
-    <xmx:FJA_YB6rwLIKL8Qt22w58NGfhOzKH9mKZmwOAz1EZZ8v_Q6IHZgWQQ>
-    <xmx:FJA_YF6P4KbvNCsjI1tA7qp6CST8LtFig6I9VdNqffi8si9vbLFJLw>
-Received: from qwirkle.internal (host109-146-37-182.range109-146.btcentralplus.com [109.146.37.182])
-	by mail.messagingengine.com (Postfix) with ESMTPA id C9A3B1080054;
-	Wed,  3 Mar 2021 08:33:07 -0500 (EST)
+    cujfgurhepofgfggfkjghffffhvffutgesthdtredtreerjeenucfhrhhomhepfdetnhgu
+    rhgvihcuifhhvghriigrnhdfuceorghnughrvghisehghhgvrhiirghnrdgtohhmqeenuc
+    ggtffrrghtthgvrhhnpeeiffeitdfhheffjeejhffhfeejhfffkedtvedukedvieeiveet
+    ffefkeeuheejfeenucffohhmrghinhepohhpvghnvghmsggvugguvggurdhorhhgnecuve
+    hluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprghnughrvghi
+    sehghhgvrhiirghnrdgtohhm
+X-ME-Proxy: <xmx:GZE_YPXj-7mY1YqfjRnJB1nZmFsbdPy9kyd4jwOzZLDIGAu2kqjUKw>
+    <xmx:GZE_YHiZzV808Z2P4UeMg8qYlfCi3v5g1mQwMGSh0jHY-TSGB7_OPA>
+    <xmx:GZE_YHDsT0n-jkvyQQ9k1W8qEaBvNmeqHhzXddi5K8f904gSvkWgNw>
+    <xmx:GpE_YKqqw7GdQmDLAJky6IhkgJJtQjlDTvbcbghkVX7T7_JpkVBAvA>
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+	id 7E7171600A6; Wed,  3 Mar 2021 08:37:29 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.5.0-alpha0-206-g078a48fda5-fm-20210226.001-g078a48fd
+Mime-Version: 1.0
+Message-Id: <55af1e8e-8b1c-4d06-98c6-28cd018400b6@www.fastmail.com>
+In-Reply-To: <ee5bbb54-298a-bd09-7215-0951a1b6ab37@gmail.com>
+References: <20210302163742.2047086-1-andrei@gherzan.com>
+ <ee5bbb54-298a-bd09-7215-0951a1b6ab37@gmail.com>
+Date: Wed, 03 Mar 2021 13:37:09 +0000
 From: "Andrei Gherzan" <andrei@gherzan.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Andrei Gherzan <andrei@gherzan.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH v2 6/6] python3-mccabe: Fix HOMEPAGE
-Date: Wed,  3 Mar 2021 13:32:41 +0000
-Message-Id: <20210303133241.29781-6-andrei@gherzan.com>
-X-Mailer: git-send-email 2.30.1
-In-Reply-To: <20210303133241.29781-1-andrei@gherzan.com>
-References: <20210303133241.29781-1-andrei@gherzan.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+To: "Khem Raj" <raj.khem@gmail.com>,
+ openembedded <openembedded-devel@lists.openembedded.org>
+Cc: "Andrei Gherzan" <andrei.gherzan@huawei.com>
+Subject: Re: [oe] [meta-python][PATCH 1/2] python3-aiohue: Integrate the hue control python module
+Content-Type: text/plain
 
-Signed-off-by: Andrei Gherzan <andrei@gherzan.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-python/recipes-devtools/python/python3-mccabe_0.6.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Tue, 2 Mar 2021, at 18:19, Khem Raj wrote:
+> can you send a followup to add these new packages to 
+> packagegroup-meta-python as well ?
 
-diff --git a/meta-python/recipes-devtools/python/python3-mccabe_0.6.1.bb b/meta-python/recipes-devtools/python/python3-mccabe_0.6.1.bb
-index 63a9e35ac..b366f0430 100644
---- a/meta-python/recipes-devtools/python/python3-mccabe_0.6.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-mccabe_0.6.1.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "McCabe checker, plugin for flake8"
--HOMEPAGE = "https://github.com/dreamhost/cliff"
-+HOMEPAGE = "https://github.com/PyCQA/mccabe"
- SECTION = "devel/python"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a489dc62bacbdad3335c0f160a974f0f"
--- 
-2.30.1
+Sure, it is now part of a v2 including all the 6 patches I've sent. https://lists.openembedded.org/g/openembedded-devel/message/89832
 
+I have:
+* fixed a typo in git log of https://lists.openembedded.org/g/openembedded-devel/message/89807
+* added commit to include the new modules in packagegroup-meta-python
+* consolidated all 6 patches as part of the same series (hopefully making things a bit easier)
+
+Andrei
