@@ -1,195 +1,296 @@
-Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
- by mx.groups.io with SMTP id smtpd.web10.7961.1614784202339699048
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+ by mx.groups.io with SMTP id smtpd.web12.8194.1614785248278331817
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Mar 2021 07:10:02 -0800
+ Wed, 03 Mar 2021 07:27:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=EH65Fdam;
- spf=pass (domain: gmail.com, ip: 209.85.222.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f178.google.com with SMTP id q85so24239247qke.8
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Mar 2021 07:10:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=iPNFJVqPn+Gou3T45zXU/knxQx5Ds3fGd1xqJVd0Q3A=;
-        b=EH65Fdam/FS0KKT8CgeRTpLLaiaVPZKfhmHIlkouAV7LsQNkp9qrjDn8u+wmb+rWkQ
-         GO3jSbMJ1p4VYQubLG9Cnzpncj28OGMkCMu/M3DsMLAF/8wezvylg7CQeqLy92XQRUel
-         3gc2JteEYmoRAUP2ZuJ/aCRt1jvtqqvAyth/Q8AAmyrA+xkZywXfGXEq6t9L38iS7jF9
-         SYlVL7PsErAjd76ltinjT+PVMjp0ibnM/X0/OMHlGhlrb8HM/Tz2B3DogzWPsAnu7ded
-         Mxn4oBtDxPU4kbGXhYtYwgrS5/ZWaT6BorAGFEwRBYacLlOfHSlHWTeKdgvDT+/EUmjV
-         bAJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=iPNFJVqPn+Gou3T45zXU/knxQx5Ds3fGd1xqJVd0Q3A=;
-        b=DQL371gjtQn6R2b17Q6IixlslpGNSP5ujOo8cV12h2pcSTC0NsggWqM7z62BiD99rn
-         j+a1+s+ETPXFHCxaAbR1dafx52rcz0gZSiUn+mFWXxt0P/w6aml0MZLi/9aVFftKf+Ce
-         y03y9bp8Y8UDmA0rSq0210ac5xjolK/1XiOzxqGMdXx/2s84hi0OsGda/b36BjClzCyv
-         bcuI8amB3qVPt8UrV9bUjShO2wq2h1cBtA65yNy8+nEymwIZJ3ZVBkY2Z7hcmfnLVuQ7
-         pF9H+49a8bVygcUi2jD2u8rHpwJDE8quloJn5ult1JvIvKTZ6k1lZ8Opg+LGimJ5BRte
-         YVOw==
-X-Gm-Message-State: AOAM531N22AVobD3c2qDH0YOus1peH+d6qOm1hZhyZ+NXSeRZz44MUOk
-	xXjDR7wf/0utm+MeGHgpfKWdz5w/1JbgMrOM9+Y=
-X-Google-Smtp-Source: ABdhPJwRP2Mi7YklTFQB+o4ob/28h2sYvJmWtQTO8//WHgRrKj8kH9c2p+KfOQzbpE0ZrBGLZ9qc9tGhD2Xu4UxPRII=
-X-Received: by 2002:a37:a350:: with SMTP id m77mr24459952qke.146.1614784199172;
- Wed, 03 Mar 2021 07:09:59 -0800 (PST)
+ dkim=fail reason="body hash did not verify" header.i=@linux.microsoft.com header.s=default header.b=e7o3aqgP;
+ spf=pass (domain: linux.microsoft.com, ip: 13.77.154.182, mailfrom: anbelski@linux.microsoft.com)
+Received: from [192.168.178.23] (i59F773FD.versanet.de [89.247.115.253])
+	by linux.microsoft.com (Postfix) with ESMTPSA id 896EB20B83EA;
+	Wed,  3 Mar 2021 07:27:26 -0800 (PST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 896EB20B83EA
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+	s=default; t=1614785247;
+	bh=TtLISjX4Gs3l3T9OeXA12gNYxfL4LwibKlTX8O4Nb2U=;
+	h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
+	b=e7o3aqgP8Iv6FA+vrEh4cXB3fiHeHReAUqtcS7us3JfLfS3W63qA9S4nL51E4tQZR
+	 8ptWWJ8/87cH5JUUN6ey2tiUgX0/KbJapnX9px+6Y1OWRmu1ThB1GDXtvbbGROKK+u
+	 +7YcLqfwjHgkWQ6a6xc12QNj5g+sINfz4KEujlrM=
+Subject: Re: [oe] [meta-oe][PATCH] grpc: Upgrade 1.24.3 -> 1.35.0
+To: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>,
+ Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <20210219123955.26446-1-anbelski@linux.microsoft.com>
+ <CAJiuCcexC-KBndWSa=D++zQNFtxu0zYm9oSs_VLzov5QrOtNLA@mail.gmail.com>
+ <4696f493-ee53-f4c5-7172-272ed8271be5@linux.microsoft.com>
+ <CAJiuCcd4bvctA_JjL6bx6z+zhwsGiy1QPR9tyzgaB6spLwqPQQ@mail.gmail.com>
+ <2543ce50-034e-a21f-2c60-95596e5b7595@linux.microsoft.com>
+ <885244a0-e750-4527-3475-edbabd2bc46f@herbrechtsmeier.net>
+ <CAJiuCceOvVCRXzKgrzez3NX4i96KK9jjcRteJOCR0eR3jTkFzg@mail.gmail.com>
+From: "Anatol Belski" <anbelski@linux.microsoft.com>
+Message-ID: <bb4b50d2-cfe8-f704-a462-ba7d59de3764@linux.microsoft.com>
+Date: Wed, 3 Mar 2021 16:26:53 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-References: <20210302200930.544487-1-raj.khem@gmail.com> <CANPvuRn3v_r0DNGbnVG3uwFACLZR3FARE8uowUCzMD2b2JO2nA@mail.gmail.com>
-In-Reply-To: <CANPvuRn3v_r0DNGbnVG3uwFACLZR3FARE8uowUCzMD2b2JO2nA@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Wed, 3 Mar 2021 07:09:31 -0800
-Message-ID: <CAMKF1srLqT-FBW=YGTr8X8X8MwnM1rG4EM=3XA_n+V+SrxdwqA@mail.gmail.com>
-Subject: Re: [meta-multimedia][PATCH] srt: Backport fix for missing <limits> header
-To: Jose Quaresma <quaresma.jose@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	=?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <CAJiuCceOvVCRXzKgrzez3NX4i96KK9jjcRteJOCR0eR3jTkFzg@mail.gmail.com>
+Content-Type: multipart/alternative;
+ boundary="------------591F4EEB3B465B64F6B4CFC5"
+Content-Language: en-US
+
+--------------591F4EEB3B465B64F6B4CFC5
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 3, 2021 at 5:39 AM Jose Quaresma <quaresma.jose@gmail.com> wrot=
-e:
->
-> Hi Khem,
->
-> Khem Raj <raj.khem@gmail.com> escreveu no dia ter=C3=A7a, 2/03/2021 =C3=
-=A0(s) 20:09:
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> Cc: Jose Quaresma <quaresma.jose@gmail.com>
->> Cc: Andreas M=C3=BCller <schnitzeltony@gmail.com>
->> ---
->>  ...001-core-Fix-build-with-GCC-11.-1806.patch | 26 +++++++++++
->>  .../recipes-support/srt/srt_1.4.2.bb          |  1 +
->>  meta-oe/recipes-devtools/mpich/mpich_3.4.1.bb | 46 +++++++++++++++++++
->
->
-> I thinks that mpich needs to go in another patch.
->
+Hi,
 
-indeed. I have messed a squash. Sent v2
+On 3/2/2021 8:13 PM, Cl=C3=A9ment P=C3=A9ron wrote:
+> Hi Stefan,
+>
+> Le mar. 2 mars 2021 =C3=A0 19:38, Stefan Herbrechtsmeier=20
+> <stefan@herbrechtsmeier.net <mailto:stefan@herbrechtsmeier.net>> a =C3=A9=
+crit=C2=A0:
+>
+>     Hi,
+>
+>     Am 02.03.21 um 19:22 schrieb Anatol Belski:
+>     >
+>     > On 3/2/2021 5:06 PM, Cl=C3=A9ment P=C3=A9ron wrote:
+>     >>> I don't use this feature from the grpc package, only linking
+>     against the
+>     >>> libs. However I don't see why this should be an issue, as all t=
+he
+>     >>> *.cmake files are packaged. I see that in the RPMs but also in
+>     a recipe
+>     >>> of a dependent packgae like this
+>     >> Yes the cmake file is found but not the grpc_cpp_plugin.
+>     >>
+>     >> This is due to cmake looking for the grpc_cpp_plugin in the targ=
+et
+>     >> sysroot instead of the native/host sysroot.
+>     >>
+>     >>> $ ls -l ./tmp/work/*/*/*/recipe-sysroot/usr/lib/cmake/grpc/*.cm=
+ake
+>     >>>
+>     >>> Or use recipe-sysroot-native depending on the consuming recipe.
+>     >>>
+>     >>> Just a wild guess here - does your recipe put 'grpc' into
+>     DEPENDS or
+>     >>> RDEPENDS, etc.
+>     >> In my recipe I put 'grpc' and 'grpc-native' into DEPENDS using
+>     >> PACKAGECONFIG
+>     >> PACKAGECONFIG[grpc] =3D "-DCONFIG_GRPC=3DON,-DCONFIG_GRPC=3DOFF,=
+grpc
+>     >> grpc-native"
+>     >>
+>     >>> Also, do you inherit cmake in your recipe?
+>     >> Yes i am indeed inheriting cmake and also systemd in my recipe
+>     >>
+>     >>> It seems to me
+>     >>> that it's more about how to use cmake files in=C2=A0 a recipe, =
+as the
+>     >>> particularly mentioned files are packaged and pulled in a
+>     consuming
+>     >>> recipe.
+>     >> When I look in the files packaged the cmake file is indeed here.
+>     >> The issue is coming from the gRPCTargets.cmake
+>     >> (https://pastebin.com/bZay7cew)
+>     >> Line 159:
+>     >> # Create imported target gRPC::grpc_cpp_plugin
+>     >> add_executable(gRPC::grpc_cpp_plugin IMPORTED)
+>     >>
+>
+>     [snip]
+>
+>     > The executables seem only be useful for dev and thus only as
+>     native. At
+>     > this point it seems it's about going deep into debugging your
+>     recipe, as
+>     > seems there's no solution laying on the surface.
+>
+>     This is a knowing issue and I have try to fix grpc but yocto is not=
+ a
+>     platform grpc officially support:
+>     https://github.com/grpc/grpc/pull/22498
+>
+>
+thanks for chiming in, Stefan. So this is a known issue and upstream has=20
+refused the patch.
 
->>  3 files changed, 73 insertions(+)
->>  create mode 100644 meta-multimedia/recipes-support/srt/srt/0001-core-Fi=
-x-build-with-GCC-11.-1806.patch
->>  create mode 100644 meta-oe/recipes-devtools/mpich/mpich_3.4.1.bb
->>
->> diff --git a/meta-multimedia/recipes-support/srt/srt/0001-core-Fix-build=
--with-GCC-11.-1806.patch b/meta-multimedia/recipes-support/srt/srt/0001-cor=
-e-Fix-build-with-GCC-11.-1806.patch
->> new file mode 100644
->> index 0000000000..0cb6943ccb
->> --- /dev/null
->> +++ b/meta-multimedia/recipes-support/srt/srt/0001-core-Fix-build-with-G=
-CC-11.-1806.patch
->> @@ -0,0 +1,26 @@
->> +From f1b35cbf5b9b42b031e9b119e4c802b5f744468c Mon Sep 17 00:00:00 2001
->> +From: Christophe Giboudeaux <krop@users.noreply.github.com>
->> +Date: Wed, 10 Feb 2021 12:42:45 +0000
->> +Subject: [PATCH] [core] Fix build with GCC 11. (#1806)
->> +
->> +The 'limits' header must be included explicitly.
->> +---
->> +Upstream-Status: Backport [https://github.com/haivision/srt/commit/f1b3=
-5cbf5b9b42b031e9b119e4c802b5f744468c]
->> + srtcore/sync.h | 1 +
->> + 1 file changed, 1 insertion(+)
->> +
->> +diff --git a/srtcore/sync.h b/srtcore/sync.h
->> +index 59c125a7..9f01ca91 100644
->> +--- a/srtcore/sync.h
->> ++++ b/srtcore/sync.h
->> +@@ -15,6 +15,7 @@
->> + //#define ENABLE_CXX17
->> +
->> + #include <cstdlib>
->> ++#include <limits>
->> + #ifdef ENABLE_STDCXX_SYNC
->> + #include <chrono>
->> + #include <thread>
->> +--
->> +2.30.1
->> +
->> diff --git a/meta-multimedia/recipes-support/srt/srt_1.4.2.bb b/meta-mul=
-timedia/recipes-support/srt/srt_1.4.2.bb
->> index 567ea68edf..f7dfda28f1 100644
->> --- a/meta-multimedia/recipes-support/srt/srt_1.4.2.bb
->> +++ b/meta-multimedia/recipes-support/srt/srt_1.4.2.bb
->> @@ -9,6 +9,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D815ca599c9df2=
-47a0c7f619bab123dad"
->>  SRCREV =3D "50b7af06f3a0a456c172b4cb3aceafa8a5cc0036"
->>  SRC_URI =3D "git://github.com/Haivision/srt;protocol=3Dhttps \
->>             file://0001-don-t-install-srt-ffplay.patch \
->> +           file://0001-core-Fix-build-with-GCC-11.-1806.patch \
->>             "
->>  UPSTREAM_CHECK_GITTAGREGEX =3D "v(?P<pver>\d+(\.\d+)+)"
->>  S =3D "${WORKDIR}/git"
->> diff --git a/meta-oe/recipes-devtools/mpich/mpich_3.4.1.bb b/meta-oe/rec=
-ipes-devtools/mpich/mpich_3.4.1.bb
->> new file mode 100644
->> index 0000000000..e5f36a5140
->> --- /dev/null
->> +++ b/meta-oe/recipes-devtools/mpich/mpich_3.4.1.bb
->> @@ -0,0 +1,46 @@
->> +SUMMARY =3D "Message Passing Interface (MPI) implementation"
->> +HOMEPAGE =3D "http://www.mpich.org/"
->> +SECTION =3D "devel"
->> +
->> +LICENSE =3D "BSD-2-Clause"
->> +LIC_FILES_CHKSUM =3D "file://COPYRIGHT;md5=3Dbd4d7ab13df98988b1ca2a4e01=
-c8c163"
->> +
->> +SRC_URI =3D "http://www.mpich.org/static/downloads/${PV}/mpich-${PV}.ta=
-r.gz"
->> +SRC_URI[sha256sum] =3D "8836939804ef6d492bcee7d54abafd6477d2beca247157d=
-92688654d13779727"
->> +
->> +RDEPENDS_${PN} +=3D "bash perl libxml2"
->> +
->> +EXTRA_OECONF =3D "--enable-debuginfo \
->> +    --enable-fast \
->> +    --enable-shared  \
->> +    --with-pm=3Dgforker  \
->> +    --disable-rpath \
->> +    --disable-f77 \
->> +    --disable-fc \
->> +    --disable-fortran \
->> +    --disable-cxx \
->> +    --with-device=3Dch4:ucx \
->> +    --disable-numa \
->> +"
->> +
->> +inherit autotools gettext pkgconfig
->> +
->> +do_configure() {
->> +    for d in confdb test/mpi test/mpi/confdb src/pm/hydra/confdb \
->> +        src/pm/hydra/tools/topo/hwloc/hwloc/config src/pm/hydra/mpl/con=
-fdb \
->> +        modules/yaksa/m4 modules/json-c modules/ucx test/mpi/dtpools/co=
-nfdb \
->> +        src/mpl/confdb src/mpi/romio/confdb;  do
->> +        install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.gue=
-ss ${S}/$d
->> +        install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub=
- ${S}/$d
->> +    done
->> +    cd ${S}
->> +    autoupdate
->> +    autoreconf --verbose --install --force
->> +    cd ${B}
->> +    oe_runconf
->> +}
->> +
->> +do_install_append() {
->> +    sed -i 's,${S}/,,g' ${D}/${libdir}/libmpi.la
->> +    sed -i 's,${DEBUG_PREFIX_MAP},,g' ${D}/${libdir}/pkgconfig/mpich.pc
->> +}
->> --
->> 2.30.1
->>
+> his patch makes sense to me
 >
+> Can't we include it in meta-oe ?
 >
-> --
-> Best regards,
+> I will apply it locally anyway.
+
+Cl=C3=A9ment, is it so far confirmed that your issue is fixed by teh patc=
+h?
+
+I could note from my side, that carrying a patch to CMake scripts in=20
+general is a pain, as the syntax is not very patch friendly. For GRPC -=20
+the CMake script is also huge. But also, i've no use for the pattern so=20
+couldn't tell how urgent this scenario would be.
+
+
+Thanks
+
+Anatol
+
+
+
+
+
+
+--------------591F4EEB3B465B64F6B4CFC5
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+  <head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF=
+-8">
+  </head>
+  <body>
+    <p>Hi,</p>
+    On 3/2/2021 8:13 PM, Cl=C3=A9ment P=C3=A9ron wrote:<br>
+    <blockquote type=3D"cite"
+cite=3D"mid:CAJiuCceOvVCRXzKgrzez3NX4i96KK9jjcRteJOCR0eR3jTkFzg@mail.gmai=
+l.com">
+      <meta http-equiv=3D"content-type" content=3D"text/html; charset=3DU=
+TF-8">
+      <div dir=3D"auto">
+        <div>Hi Stefan,<br>
+          <br>
+          <div class=3D"gmail_quote">
+            <div dir=3D"ltr" class=3D"gmail_attr">Le mar. 2 mars 2021 =C3=
+=A0
+              19:38, Stefan Herbrechtsmeier &lt;<a
+                href=3D"mailto:stefan@herbrechtsmeier.net"
+                moz-do-not-send=3D"true">stefan@herbrechtsmeier.net</a>&g=
+t;
+              a =C3=A9crit=C2=A0:<br>
+            </div>
+            <blockquote class=3D"gmail_quote" style=3D"margin:0 0 0
+              .8ex;border-left:1px #ccc solid;padding-left:1ex">Hi,<br>
+              <br>
+              Am 02.03.21 um 19:22 schrieb Anatol Belski:<br>
+              &gt; <br>
+              &gt; On 3/2/2021 5:06 PM, Cl=C3=A9ment P=C3=A9ron wrote:<br=
 >
-> Jos=C3=A9 Quaresma
+              &gt;&gt;&gt; I don't use this feature from the grpc
+              package, only linking against the<br>
+              &gt;&gt;&gt; libs. However I don't see why this should be
+              an issue, as all the<br>
+              &gt;&gt;&gt; *.cmake files are packaged. I see that in the
+              RPMs but also in a recipe<br>
+              &gt;&gt;&gt; of a dependent packgae like this<br>
+              &gt;&gt; Yes the cmake file is found but not the
+              grpc_cpp_plugin.<br>
+              &gt;&gt;<br>
+              &gt;&gt; This is due to cmake looking for the
+              grpc_cpp_plugin in the target<br>
+              &gt;&gt; sysroot instead of the native/host sysroot.<br>
+              &gt;&gt;<br>
+              &gt;&gt;&gt; $ ls -l
+              ./tmp/work/*/*/*/recipe-sysroot/usr/lib/cmake/grpc/*.cmake<=
+br>
+              &gt;&gt;&gt;<br>
+              &gt;&gt;&gt; Or use recipe-sysroot-native depending on the
+              consuming recipe.<br>
+              &gt;&gt;&gt;<br>
+              &gt;&gt;&gt; Just a wild guess here - does your recipe put
+              'grpc' into DEPENDS or<br>
+              &gt;&gt;&gt; RDEPENDS, etc.<br>
+              &gt;&gt; In my recipe I put 'grpc' and 'grpc-native' into
+              DEPENDS using <br>
+              &gt;&gt; PACKAGECONFIG<br>
+              &gt;&gt; PACKAGECONFIG[grpc] =3D
+              "-DCONFIG_GRPC=3DON,-DCONFIG_GRPC=3DOFF,grpc <br>
+              &gt;&gt; grpc-native"<br>
+              &gt;&gt;<br>
+              &gt;&gt;&gt; Also, do you inherit cmake in your recipe?<br>
+              &gt;&gt; Yes i am indeed inheriting cmake and also systemd
+              in my recipe<br>
+              &gt;&gt;<br>
+              &gt;&gt;&gt; It seems to me<br>
+              &gt;&gt;&gt; that it's more about how to use cmake files
+              in=C2=A0 a recipe, as the<br>
+              &gt;&gt;&gt; particularly mentioned files are packaged and
+              pulled in a consuming <br>
+              &gt;&gt;&gt; recipe.<br>
+              &gt;&gt; When I look in the files packaged the cmake file
+              is indeed here.<br>
+              &gt;&gt; The issue is coming from the gRPCTargets.cmake <br=
+>
+              &gt;&gt; (<a href=3D"https://pastebin.com/bZay7cew"
+                rel=3D"noreferrer noreferrer" target=3D"_blank"
+                moz-do-not-send=3D"true">https://pastebin.com/bZay7cew</a=
+>)<br>
+              &gt;&gt; Line 159:<br>
+              &gt;&gt; # Create imported target gRPC::grpc_cpp_plugin<br>
+              &gt;&gt; add_executable(gRPC::grpc_cpp_plugin IMPORTED)<br>
+              &gt;&gt;<br>
+              <br>
+              [snip]<br>
+              <br>
+              &gt; The executables seem only be useful for dev and thus
+              only as native. At <br>
+              &gt; this point it seems it's about going deep into
+              debugging your recipe, as <br>
+              &gt; seems there's no solution laying on the surface.<br>
+              <br>
+              This is a knowing issue and I have try to fix grpc but
+              yocto is not a <br>
+              platform grpc officially support:<br>
+              <a href=3D"https://github.com/grpc/grpc/pull/22498"
+                rel=3D"noreferrer noreferrer" target=3D"_blank"
+                moz-do-not-send=3D"true">https://github.com/grpc/grpc/pul=
+l/22498</a></blockquote>
+          </div>
+        </div>
+        <div dir=3D"auto"><br>
+        </div>
+      </div>
+    </blockquote>
+    <p>thanks for chiming in, Stefan. So this is a known issue and
+      upstream has refused the patch.</p>
+    <blockquote type=3D"cite"
+cite=3D"mid:CAJiuCceOvVCRXzKgrzez3NX4i96KK9jjcRteJOCR0eR3jTkFzg@mail.gmai=
+l.com">
+      <div dir=3D"auto">
+        <div dir=3D"auto">his patch makes sense to me</div>
+        <div dir=3D"auto"><br>
+        </div>
+        <div dir=3D"auto">Can't we include it in meta-oe ?=C2=A0</div>
+        <div dir=3D"auto"><br>
+        </div>
+        <div dir=3D"auto">I will apply it locally anyway.</div>
+      </div>
+    </blockquote>
+    <p>Cl=C3=A9ment, is it so far confirmed that your issue is fixed by t=
+eh
+      patch?
+    </p>
+    <p>I could note from my side, that carrying a patch to CMake scripts
+      in general is a pain, as the syntax is not very patch friendly.
+      For GRPC - the CMake script is also huge. But also, i've no use
+      for the pattern so couldn't tell how urgent this scenario would
+      be. <br>
+    </p>
+    <p><br>
+    </p>
+    <p>Thanks</p>
+    <p>Anatol<br>
+    </p>
+    <p><br>
+    </p>
+    <p><br>
+    </p>
+    <p><br>
+    </p>
+    <p><br>
+    </p>
+  </body>
+</html>
+
+--------------591F4EEB3B465B64F6B4CFC5--
