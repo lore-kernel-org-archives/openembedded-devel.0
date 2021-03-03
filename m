@@ -1,110 +1,78 @@
-Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
- by mx.groups.io with SMTP id smtpd.web12.2372.1614805197848643826
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
+ by mx.groups.io with SMTP id smtpd.web08.2386.1614805288698480742
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Mar 2021 12:59:57 -0800
+ Wed, 03 Mar 2021 13:01:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=FCgaO+Pk;
- spf=pass (domain: gmail.com, ip: 209.85.216.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f46.google.com with SMTP id i14so4958774pjz.4
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Mar 2021 12:59:57 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Nnl2sCoZ;
+ spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-pf1-f172.google.com with SMTP id l7so12954494pfd.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Mar 2021 13:01:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=YtDfGArJmvG1V3w0G5r1vksqo3QKBemfUIikgchakkc=;
-        b=FCgaO+PknYEUurrDbuMV3XkuthPMC0xUQFJ3e5BOPvfsc3E5hd+d2MlEyENK+xLB2i
-         /UHVBiIqC6IyFn9bm7HF5ard7QdA7RiXQmcUafZ2eQ2KD3dwgnHueOAxWO5JjM+Lww4f
-         +TlWVNisg4E9mPu8j6xgQvVXZbJ6JtWd0i3RQ6B8P0fLEiYogrNJxQkETxynO4i811yZ
-         +FwbA0te4EAAVdGajvjuuNFDeBYX+k2zArN2+dIEYdYoZu9D1Jqa84xb9kWOS6PyQNs4
-         m5UyK6taLhUYRp9PHpnOqTYVW9Lu75pfuTPX4sVimsnPey9dNwz1prKt7rdUPZfYWJGx
-         i60w==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=6OuyijXmXkxfoKFiBvR6njH2VqqhQ4DAsNXLf0MOeGg=;
+        b=Nnl2sCoZLApjSskTUrsLMWldPgmDz0pbI2iQcvKSAEXXPn2aBzLhE+ZUOEn/t9m13i
+         +3ZmdjEezPqrNhBGkJIEP8s/FpHHdUmJMqvICewWrqHkPvDvCUlKpxgs1C7aF22fOzna
+         rVtp72P/sJwxx0y2NIJI6L93xCbkws2USBpBfzgc/TT9Wb6sdkxZBbD1B1547G7cX3f2
+         tSDvmPLg7NTT1BFaObEdfcGHgvBR7QxpmViy6GEI5mdtEKgtDpmNFxYqMFdd5qKZvQRf
+         vJyMNdk3EiSBF09j2nE9krQ9VJI3x4GVQWFseqq3KJzf0J2hyOGeQlINiT9Nk0a98dvH
+         e0yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=YtDfGArJmvG1V3w0G5r1vksqo3QKBemfUIikgchakkc=;
-        b=rAoM/Nrz1OO9yjeqDCN/sliE9XZYpVTGbdYBV1DseP6bE1RLeEmOL/zxNvop1pDc8r
-         gBu9HV0IcJxWZJ3IVDMG7H0Mbmjc/Dm0UxAlQ1hQtA72R+oaKNAZyDLPujZQHAlXKZtb
-         pVG70ZS4p1trr5ADOagsM79VoHkaTIhfegGu9FMWfmc3ICrF6c6pUKrJ8cVHI6tjOaEr
-         j7Vys/PAnxhCpNO6yU4H59H1GRZ2LoaEHlKUmxCZGEIf/W5ki0jDClJEnKmek90Ch0dK
-         kSnQb2zD0gBuQ/FCeDX7EXXBx6+AV4YX+tVNGprW8s4X6UtApmRUTYL8gqswGyuLDQDi
-         CQDg==
-X-Gm-Message-State: AOAM533Lxgem0ipUoQoA9ngQ2zgMO4uHb3+lli8xwyr506ENkusgqLL4
-	E54qig9JBlGmarp5loxNPStxRMCpbG+G3g==
-X-Google-Smtp-Source: ABdhPJw70LGIPyZBxiq3/yW/9tOHX4xyOhRK02Dw5XfEKuMpwZ3oNHCPojKp7wc5RDnSL7aN3nL6uQ==
-X-Received: by 2002:a17:90b:809:: with SMTP id bk9mr922266pjb.83.1614805197009;
-        Wed, 03 Mar 2021 12:59:57 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b3bf])
-        by smtp.gmail.com with ESMTPSA id c29sm24228266pgb.58.2021.03.03.12.59.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 Mar 2021 12:59:56 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] mongodb: Include <optional> c++ header
-Date: Wed,  3 Mar 2021 12:59:54 -0800
-Message-Id: <20210303205954.2901536-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=6OuyijXmXkxfoKFiBvR6njH2VqqhQ4DAsNXLf0MOeGg=;
+        b=rhPxeJ1a3G1hW/9vuXsrg4ZsKYG1T3WAW8W1gpXKJAxYTO95V3QHiIYmuF7ONPt/Gp
+         f5S7TDqoszUwTQGxmW2ufH17mxTVVYcdOdT1LlQBk++UL252tAJZp5e03yG9pRIu6ztp
+         AYw7XJdt+bLZFYrKsvKcJ/weNhYQ2zu96x6l7Cs1PH4dJbpy5/+ysUtBnK+REIQzUiH6
+         Jx3zwbaL2LlO1op1wLdH1gV18Z92XHcnNNJhp2l5KCkfHF28zquDurY/kI68rEm/Lmg/
+         14rRn8UKBJvgc0Xx7bkYnc+Hmhc3UPCA6LoKGjYqSSO0fxYs+jYMe2tUAPQTlg2+3tHN
+         zacw==
+X-Gm-Message-State: AOAM531oRGc6FYjLpviND8H85wlzQEOtCQb3m96peMnOuTMcErlGkcwU
+	3IlwxUzJaWHVLF9cTQMG2WlhyaZ8tEVnvl5INQ4=
+X-Google-Smtp-Source: ABdhPJyGw3S7JXvxkDOnRrcwLUZVmrHfeBVVo5pI1Mxilg+JODfnxDlptyZGwWVZf+JOXjzV0LKA6ByUQKqStbtM0Xg=
+X-Received: by 2002:a62:aa0a:0:b029:1ef:fe5:b172 with SMTP id
+ e10-20020a62aa0a0000b02901ef0fe5b172mr694987pff.9.1614805288157; Wed, 03 Mar
+ 2021 13:01:28 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210303114130.2317817-1-crg7475@mailbox.org>
+In-Reply-To: <20210303114130.2317817-1-crg7475@mailbox.org>
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+Date: Wed, 3 Mar 2021 22:01:16 +0100
+Message-ID: <CALbNGRT-L+khTL5277KAjfqwCdQ66yH-o6tcw35=0cr_CKzttQ@mail.gmail.com>
+Subject: Re: [oe] [meta-multimedia][PATCH 1/2] pipewire: Move to meta-multimedia
+To: Carlos Rafael Giani <crg7475@mailbox.org>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	quentin.schulz@streamunlimited.com, 
+	George Kiagiadakis <george.kiagiadakis@collabora.com>
+Content-Type: text/plain; charset="UTF-8"
 
-Fixes build with gcc11
+On Wed, Mar 3, 2021 at 12:41 PM Carlos Rafael Giani via
+lists.openembedded.org <crg7475=mailbox.org@lists.openembedded.org>
+wrote:
+>
+> Signed-off-by: Carlos Rafael Giani <crg7475@mailbox.org>
+> ---
+>  .../recipes-multimedia/pipewire/pipewire-0.2_git.bb               | 0
+>  .../recipes-multimedia/pipewire/pipewire_git.bb                   | 0
+>  2 files changed, 0 insertions(+), 0 deletions(-)
+>  rename {meta-oe => meta-multimedia}/recipes-multimedia/pipewire/pipewire-0.2_git.bb (100%)
+>  rename {meta-oe => meta-multimedia}/recipes-multimedia/pipewire/pipewire_git.bb (100%)
+>
+> diff --git a/meta-oe/recipes-multimedia/pipewire/pipewire-0.2_git.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire-0.2_git.bb
+> similarity index 100%
+> rename from meta-oe/recipes-multimedia/pipewire/pipewire-0.2_git.bb
+> rename to meta-multimedia/recipes-multimedia/pipewire/pipewire-0.2_git.bb
+> diff --git a/meta-oe/recipes-multimedia/pipewire/pipewire_git.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_git.bb
+> similarity index 100%
+> rename from meta-oe/recipes-multimedia/pipewire/pipewire_git.bb
+> rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_git.bb
+> --
+> 2.25.1
+>
+To be honest: I'd prefer the other way: Add it to oe-core (of course
+not this old version). Haven't found the time to check more on details
+but it is a drop in replacement for at least pulseaudio and jack.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../0001-include-needed-c-header.patch        | 29 +++++++++++++++++++
- .../recipes-dbs/mongodb/mongodb_git.bb        |  1 +
- 2 files changed, 30 insertions(+)
- create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-include-needed-c-header.patch
-
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-include-needed-c-header.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-include-needed-c-header.patch
-new file mode 100644
-index 0000000000..581c2390ec
---- /dev/null
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-include-needed-c-header.patch
-@@ -0,0 +1,29 @@
-+From 383b1dda4800c2514cb31446cd7478692d7d26cf Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 3 Mar 2021 12:43:16 -0800
-+Subject: [PATCH] include needed c++ header
-+
-+Fixes
-+plan_stats.h:214:10: error: 'optional' in namespace 'std' does not name a template type
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/mongo/db/exec/plan_stats.h | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/src/mongo/db/exec/plan_stats.h b/src/mongo/db/exec/plan_stats.h
-+index ea75f673b8..0cc9b4636d 100644
-+--- a/src/mongo/db/exec/plan_stats.h
-++++ b/src/mongo/db/exec/plan_stats.h
-+@@ -31,6 +31,7 @@
-+ 
-+ #include <cstdint>
-+ #include <cstdlib>
-++#include <optional>
-+ #include <string>
-+ #include <vector>
-+ 
-+-- 
-+2.30.1
-+
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-index a153498480..d0c4eba7ee 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-@@ -27,6 +27,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4 \
-            file://1296.patch \
-            file://0001-Fix-compilation-with-fno-common.patch \
-            file://0001-stacktrace-Define-ARCH_BITS-for-x86.patch \
-+           file://0001-include-needed-c-header.patch \
-            "
- SRC_URI_append_libc-musl ="\
-            file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
--- 
-2.30.1
-
+Andreas
