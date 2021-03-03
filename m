@@ -1,160 +1,199 @@
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.71])
- by mx.groups.io with SMTP id smtpd.web08.2082.1614741509928631639
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
+ by mx.groups.io with SMTP id smtpd.web09.2667.1614745014220441761
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Mar 2021 19:18:30 -0800
+ Tue, 02 Mar 2021 20:16:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=M6vPgIJN;
- spf=pass (domain: windriver.com, ip: 40.107.244.71, mailfrom: mingli.yu@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZmjIFax1iPjomHj0IlvHBDQQ4T2WvYMs+RZaPGcyH1TSK7Fibe014mWgCDuCU+ym3E18bXvjjSyJl3Rxg9hRYUUbOXEt/KOcsngcJm4CGAX53CL763HrLEPr8rnL4gTP8xTfXcTzCpVwiBcFMF/bcFMXWTKzKjjaj0hFsQTQ5sUywI2sLS+6UuwSDxHGdeMGCPbf65+cXB331bRJnkx9ER4hAM/fFyPFjVcDgfzBUpvOMzlxNvW+nD+EbnDZhKAQ5lTTwikzQ44/bPtwGlf9UZ379bg7PJJIUEl1i9il6cywY6Y6LTBvxxlMecOSU5bVbYH41hraeed1rssWmM3MLg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QiErAUiS/tYH3paitdp/Bg0aihGotUswkMd2WMLY0lo=;
- b=l+VgATILZ222kqEaDntkKBZZFhXBukdApr4L2fmuZOpoOrOCzbG4svvRtDoWYVxaJvAAGuSBVh3y/5LSyfc+wBAXG18I+33aojcuXAJzM3lWz8Se+xg5kLh0nVVsR+MP/IbEDi1JbehFi/XsTFO1kUsSMdFQyUPqv3FqIJT653VpNUG8dV4aRdqnlsjfqwQ2UyWYcB1dApAWBj3CSFtrlE9m8wApBzYlC7FnGU2G9osXmoU3zoOUp5BN9UAgqy5Phfo48upsJhxa2mJghVl4rKZb02FWzB1Eils348TeM4ij5GqBhHxweAOKF++0UhvOc0wu+5+J7PscQxR2yivjgw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=EahLYfTi;
+ spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f171.google.com with SMTP id p21so15362888pgl.12
+        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Mar 2021 20:16:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QiErAUiS/tYH3paitdp/Bg0aihGotUswkMd2WMLY0lo=;
- b=M6vPgIJNdihA55NVHU9+cacwLLPULnAxE8g05mfa7KW6c0C2+Mh37moya5JuEppvpkCmtHiIgm/RwiYSt8zPnArDQ52apE7XMW65VzlqPQ49IK3Ggum+JsqfFoxawy99QXv1EEwjEF90+wxBRpeqwp4PNJPfmccTw93m5ixGtPE=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from CO1PR11MB5009.namprd11.prod.outlook.com (2603:10b6:303:9e::11)
- by MWHPR11MB2000.namprd11.prod.outlook.com (2603:10b6:300:2b::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.19; Wed, 3 Mar
- 2021 03:18:28 +0000
-Received: from CO1PR11MB5009.namprd11.prod.outlook.com
- ([fe80::45:697c:a699:df64]) by CO1PR11MB5009.namprd11.prod.outlook.com
- ([fe80::45:697c:a699:df64%7]) with mapi id 15.20.3912.017; Wed, 3 Mar 2021
- 03:18:28 +0000
-From: "Yu, Mingli" <mingli.yu@windriver.com>
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=iTQEaTCNGWJqTIR4+sQ7vFgZPNYXnuZBwGtlB3QDRIs=;
+        b=EahLYfTiFP6U/gsNR7k/Jf6VJ7gh03a06CJQOzVFEsq32vPiGbbOQIDQUCOtu93oGF
+         Coe1SGDI823Ahh+F1WWvhjaM2lKoq+zm+NZ26CUs7JMEh/29us8pEKoddsdSOQh2p+Xz
+         CPzV8fdDlCKEfKlg04QLWgSK8/VZ46qmdXCw38CSUZ9jhdC71UgxJUif0Jk2fRudouSg
+         zSlMNLmlnJlYUvlxYpyagdPLs7LhFo04ZdRSHbIFG9rhyPN0/UHUjmmo7uJcmaKms22N
+         PBb+72B5FsSZyGbOriYjhAs/tAWf4wZu6Mmi2bWPJLYJTs7Uu6sEBqClgUHoeDEyCkkc
+         MM/A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=iTQEaTCNGWJqTIR4+sQ7vFgZPNYXnuZBwGtlB3QDRIs=;
+        b=gg4G5unqUPHoF9Ppfr+kM5w2AI+M+MIGEp8/ne3TcWZesT0jY+luMHxFkPh42QH6Aq
+         tCm6RttRhY8h9wjwntyMMTksKFyha9aiXaW2IjrkNYD3S9YTpNdbUjsbnrXRJBAsJc4Q
+         mWQMjz5WvSaWBLiylm0lHLC+6rw49qRL/RL5s+0FKaeRXJHxufyqsK/Eph12Dn3ND2yK
+         AiyI2utcKDcasdILd1zFeWV1ij8lfuaYfOakzIXMRkUnygTt1S309cgLQfIzQ8Bfs5eT
+         ggmCjqZcz00vQpFx4uB12qxQ5SQNi+3mjYiNcYFwbm+wXs5Ifh45z5cAr/OWZBix+YGa
+         VUpQ==
+X-Gm-Message-State: AOAM532X9Ifs6Zt57F5QSOZBLQmOuigxJNT6XC8UKUgwXxfz2Ad9nQSh
+	V146N4vYde9z2/Xkg1jaOoUgDBUpRhtx5g==
+X-Google-Smtp-Source: ABdhPJxF86WHDVrFV106hyfbj5792zX/PpsUW3SVj6/lmC2DFTrQJaUYGaExg0Gf/mELH51xgHkstQ==
+X-Received: by 2002:aa7:940a:0:b029:1ee:39f8:766b with SMTP id x10-20020aa7940a0000b02901ee39f8766bmr6376229pfo.29.1614745013055;
+        Tue, 02 Mar 2021 20:16:53 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b3bf])
+        by smtp.gmail.com with ESMTPSA id m9sm4824631pjl.4.2021.03.02.20.16.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 02 Mar 2021 20:16:52 -0800 (PST)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] mcelog: Upgrade to 175
-Date: Wed,  3 Mar 2021 11:18:10 +0800
-Message-Id: <20210303031810.665-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
-X-Originating-IP: [60.247.85.82]
-X-ClientProxiedBy: HK0PR03CA0117.apcprd03.prod.outlook.com
- (2603:1096:203:b0::33) To CO1PR11MB5009.namprd11.prod.outlook.com
- (2603:10b6:303:9e::11)
-Return-Path: mingli.yu@windriver.com
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 1/4] squid: Include <limits> for using std::numeric_limits
+Date: Tue,  2 Mar 2021 20:16:47 -0800
+Message-Id: <20210303041650.2457462-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.30.1
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from pek-lpg-core2.corp.ad.wrs.com (60.247.85.82) by HK0PR03CA0117.apcprd03.prod.outlook.com (2603:1096:203:b0::33) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.20 via Frontend Transport; Wed, 3 Mar 2021 03:18:27 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 6b2cfd8f-81a3-492d-aa7f-08d8ddf303c6
-X-MS-TrafficTypeDiagnostic: MWHPR11MB2000:
-X-Microsoft-Antispam-PRVS: 
-	<MWHPR11MB20000D17B1B3FF2E92A914EBF1989@MWHPR11MB2000.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	XU2dRMIDwtxiJAX5I9BiDLV4xxbzEjJOsFp4kh6qWcSr5ArRgs29fdoggAnJaMLTtVA3HuOtbf0lLP5NY/jE2Qp9Zom3xFFDs5tJBqthZWEwdOQxpH/0ChhnAKfK7x4ixpKn60MJ4BKHkkQQxoQiZpIi1YdYE4uS7veCKCCep73FqHHFYR5Qmg0knOV3Tpz8GtN2qZ4UFMg6rBL21H1J9Ypz81VWkDscAlXROMdx494Wuy0ZUcFNgZkN+omQuUSFmFlLM+ugMUYR6gER6PbW3jTnVgXHd6G4TQHtSpa39JQbuWcU1GyOWfDITWlUBGARFizmMnyzvF1W3HUn9tZuXRwAjbwok57x2clzjuww0JHirzb20ca7Mqo3ghbv0etxZhneNu7Nze20LRctz5yBkEOzCpfCgVRGqL4YAIKnuFd2uxPVRADVE5fIenoMSSUH7zMDllyLO3rX0kJzPS2t4zkMxnaJaOKdTGYNDyGYw+qSqfr0iCUJQIW/W87ezFGyAkM6f1rtuVodCbU2GOESCg==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB5009.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(366004)(346002)(376002)(396003)(136003)(66476007)(66556008)(2906002)(1076003)(6506007)(6666004)(5660300002)(478600001)(26005)(6512007)(9686003)(66946007)(16526019)(86362001)(316002)(6916009)(36756003)(83380400001)(8936002)(52116002)(6486002)(8676002)(2616005)(956004)(186003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?p4BJRqi5cOPQhgZO5nVK5afIF2dmlbvxBQWUvdxc1jkdnQAQDs/Qde9yAOxV?=
- =?us-ascii?Q?1ePYNrgT8ZcFYCEqOrUX9m8vLuif7dyiZvh+4m4wKqVsBiwVh/cqfI4YMqH4?=
- =?us-ascii?Q?JfHTWPndVX/Q4YtKEffIQAmh/mZc6PAWpximNpxybJ3JhE3r9LEeHnv4qmQl?=
- =?us-ascii?Q?LliHKFYkBV/dvVmeK5sc2naaxAYF6TzFnHKOZiRJpOvPzOaOoS8YzUQ4+BNu?=
- =?us-ascii?Q?YU6r8WXEy1AqQtsoDlSIWtbkOa3OtElyxQacHhP3Qsj0Gu1igWhQCaIVjecE?=
- =?us-ascii?Q?kAM2rkU2lOItUtZGuq+M23HD3KFJrb/USDckK6rFxY2bIUUpRCLJDnDU9vde?=
- =?us-ascii?Q?fb0SKEnZjFUexU+FmZCDz1mjQ3sFyqyET1mdy6v4AXVR7kZsUDfDgIE2IwvP?=
- =?us-ascii?Q?4leIW8dyA4lZ6g02gjSrilmSTmCPsM0/aZtkzO058s+78MgAtSf4rCDtyHdn?=
- =?us-ascii?Q?Z0HpFJ5ibEFRQovyQ0YZdMxmlTTx6eOvv6y/T06NOJ56b6HantceY3jZdLJI?=
- =?us-ascii?Q?1VrVgk2OH6qGUMI0g/vcGkzyYSf0zh+F+T358i8a9/fBAmNjbPVJCecCPXCz?=
- =?us-ascii?Q?nPTFFRLMdMcv2ZdO3nbbb8uIhBtV4CNUq93K+c43sXRfUSf7ssszl2RogJDz?=
- =?us-ascii?Q?4Mss3e7nbqZ+E9qbXUb2PeQMMFQfQtkLWNey45c9c22fn/NICrLaxGeM6HRc?=
- =?us-ascii?Q?otQN+uohdHLL1cw8sJ7zweFpGdwhsHbyKB60IoiDribzGR6r51JZpM8dL02Q?=
- =?us-ascii?Q?tWZgD9Oh59cRaQjRv4itRbTmA8uk79/lwkcdk5rkv4DMURR7eiw3vyGLZT84?=
- =?us-ascii?Q?TckDQ4moPw5UmOcLueoSwXgY9LieXXCqNCvVhJJNph0I1dt0NJD+BEgOyzIS?=
- =?us-ascii?Q?KMkcQVXicg6IH2s0aWvSGHHFZ7m+S+tTy6cyFGHuubFV6noHCSMtL9VVfTs5?=
- =?us-ascii?Q?ZJ9FNauxQpinA80mEHYtgZvJ0eMsog1KDjPoK9UuA8MbUpWSWrKNApcaqbxI?=
- =?us-ascii?Q?fMMgQunKXUg6iVVZnNCZ5uCvaXmpvE2ItYjJj8XfYqBaFBUccm4jIhC5YBii?=
- =?us-ascii?Q?TndcQ5Wm1gK8qp4ivd4vpY585N2jlB0ukzI//1JbKLo59qA4qH8ybMYE07gF?=
- =?us-ascii?Q?5rzXM2PWf61xl1GZthA2bxp1A0OyIbZdxBrCIJD9H4MqxuPeeGiP8BP25mAm?=
- =?us-ascii?Q?IP41zfRfuy5p6GTU/LvF5tgDkE3jwYg0Wq1avYTT25ezB+CosQqugjKt3SPN?=
- =?us-ascii?Q?JESN1tIw9oIUVMTZPDdYXqMrcbUwNBXAmf718m5Q7job4k2jMhE5/Z+WidGo?=
- =?us-ascii?Q?QoVpTCyG30CLKVnGn2wLuL0q?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6b2cfd8f-81a3-492d-aa7f-08d8ddf303c6
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB5009.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2021 03:18:28.5447
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: JOS8h6GIvTKUhJhUuE/tAI3FkQ5ua/3BZZ5rvoh3rSJR14k9Go5YA6eDb2hfIW9RChWKe2Av0U9ES/CkDl9KSA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR11MB2000
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-From: Mingli Yu <mingli.yu@windriver.com>
-
-Rebase 0001-test-avoid-the-pfa-test-hang.patch to the new version.
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../mcelog/0001-test-avoid-the-pfa-test-hang.patch | 14 +++++++-------
- .../mcelog/{mcelog_170.bb => mcelog_175.bb}        |  2 +-
- 2 files changed, 8 insertions(+), 8 deletions(-)
- rename meta-oe/recipes-support/mcelog/{mcelog_170.bb => mcelog_175.bb} (95%)
+ ...0001-Fix-build-on-Fedora-Rawhide-772.patch | 105 ++++++++++++++++++
+ .../squid/{squid_4.13.bb => squid_4.14.bb}    |   6 +-
+ 2 files changed, 108 insertions(+), 3 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/squid/files/0001-Fix-build-on-Fedora-Rawhide-772.patch
+ rename meta-networking/recipes-daemons/squid/{squid_4.13.bb => squid_4.14.bb} (95%)
 
-diff --git a/meta-oe/recipes-support/mcelog/mcelog/0001-test-avoid-the-pfa-test-hang.patch b/meta-oe/recipes-support/mcelog/mcelog/0001-test-avoid-the-pfa-test-hang.patch
-index 83c29a651..03bcc451d 100644
---- a/meta-oe/recipes-support/mcelog/mcelog/0001-test-avoid-the-pfa-test-hang.patch
-+++ b/meta-oe/recipes-support/mcelog/mcelog/0001-test-avoid-the-pfa-test-hang.patch
-@@ -1,6 +1,6 @@
--From 139177715a2d66ccd3e099be5d9d4dc86db30055 Mon Sep 17 00:00:00 2001
-+From 3765b3a4cabf76f55c1c126ac64780a8c117d1d9 Mon Sep 17 00:00:00 2001
- From: Mingli Yu <mingli.yu@windriver.com>
--Date: Tue, 12 Jan 2021 03:05:38 +0000
-+Date: Tue, 12 Jan 2021 10:30:13 +0800
- Subject: [PATCH] test: avoid the pfa test hang
- 
- Per [1], the pfa test needs to install page-types and the pfa test
-@@ -18,13 +18,13 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  1 file changed, 3 insertions(+)
- 
- diff --git a/tests/test b/tests/test
--index 9623f4a..7c552a9 100755
-+index 020ae2b..320f57f 100755
- --- a/tests/test
- +++ b/tests/test
--@@ -45,6 +45,9 @@ for conf in `ls *.conf`
-- do
-- 	log=`echo $conf | sed "s/conf/log/g"`
-- 	./inject $conf
-+@@ -47,6 +47,9 @@ do
-+ 	# Inject mce records and run mcelog in parallel.
-+ 	# So that the mce records can be consumed by mcelog in time (avoid mce record overflow).
-+ 	./inject $conf &
- +	if [ "$1" = "pfa" ] ; then
- +		which page-types > /dev/null 2>&1 || continue
- +	fi
-diff --git a/meta-oe/recipes-support/mcelog/mcelog_170.bb b/meta-oe/recipes-support/mcelog/mcelog_175.bb
+diff --git a/meta-networking/recipes-daemons/squid/files/0001-Fix-build-on-Fedora-Rawhide-772.patch b/meta-networking/recipes-daemons/squid/files/0001-Fix-build-on-Fedora-Rawhide-772.patch
+new file mode 100644
+index 0000000000..28a410c26f
+--- /dev/null
++++ b/meta-networking/recipes-daemons/squid/files/0001-Fix-build-on-Fedora-Rawhide-772.patch
+@@ -0,0 +1,105 @@
++From 1f8b5f0e1cc27634a7310be4c9674112f919d974 Mon Sep 17 00:00:00 2001
++From: uhliarik <luhliari@redhat.com>
++Date: Thu, 18 Feb 2021 01:08:40 +0000
++Subject: [PATCH] Fix build on Fedora Rawhide (#772)
++
++* add SYSTEMD_LIBS to all binaries using client_side.cc, fixing linking
++* add `<limits>` to all sources using std::numeric_limits, fixing gcc-11
++  builds
++---
++Upstream-Status: Backport [https://github.com/kraj/squid/commit/1f8b5f0e1cc27634a7310be4c9674112f919d974]
++ src/Makefile.am               | 4 ++++
++ src/ip/QosConfig.cc           | 1 +
++ src/ipc/mem/PageStack.cc      | 1 +
++ src/proxyp/Parser.cc          | 1 +
++ src/security/ServerOptions.cc | 2 ++
++ src/ssl/helper.cc             | 2 ++
++ 6 files changed, 11 insertions(+)
++
++--- a/src/Makefile.am
+++++ b/src/Makefile.am
++@@ -2320,6 +2320,7 @@ tests_test_http_range_LDADD = \
++ 	$(SSLLIB) \
++ 	$(KRB5LIBS) \
++ 	$(LIBCPPUNIT_LIBS) \
+++	$(SYSTEMD_LIBS) \
++ 	$(COMPAT_LIB) \
++ 	$(XTRA_LIBS)
++ tests_test_http_range_LDFLAGS = $(LIBADD_DL)
++@@ -2624,6 +2625,7 @@ tests_testHttpRequest_LDADD = \
++ 	$(SSLLIB) \
++ 	$(KRB5LIBS) \
++ 	$(LIBCPPUNIT_LIBS) \
+++	$(SYSTEMD_LIBS) \
++ 	$(COMPAT_LIB) \
++ 	$(XTRA_LIBS)
++ tests_testHttpRequest_LDFLAGS = $(LIBADD_DL)
++@@ -3487,6 +3489,7 @@ tests_testURL_LDADD = \
++ 	$(SSLLIB) \
++ 	$(KRB5LIBS) \
++ 	$(LIBCPPUNIT_LIBS) \
+++	$(SYSTEMD_LIBS) \
++ 	$(COMPAT_LIB) \
++ 	$(XTRA_LIBS)
++ tests_testURL_LDFLAGS = $(LIBADD_DL)
++@@ -3646,6 +3649,7 @@ nodist_tests_testYesNoNone_SOURCES = \
++ tests_testYesNoNone_LDADD= \
++ 	base/libbase.la \
++ 	$(LIBCPPUNIT_LIBS) \
+++	$(SYSTEMD_LIBS) \
++ 	$(COMPAT_LIB) \
++ 	$(XTRA_LIBS)
++ tests_testYesNoNone_LDFLAGS = $(LIBADD_DL)
++--- a/src/ip/QosConfig.cc
+++++ b/src/ip/QosConfig.cc
++@@ -21,6 +21,7 @@
++ #include "Parsing.h"
++ 
++ #include <cerrno>
+++#include <limits>
++ 
++ CBDATA_CLASS_INIT(acl_tos);
++ 
++--- a/src/ipc/mem/PageStack.cc
+++++ b/src/ipc/mem/PageStack.cc
++@@ -14,6 +14,7 @@
++ #include "Debug.h"
++ #include "ipc/mem/Page.h"
++ #include "ipc/mem/PageStack.h"
+++#include <limits>
++ 
++ /// used to mark a stack slot available for storing free page offsets
++ const Ipc::Mem::PageStack::Value Writable = 0;
++--- a/src/security/ServerOptions.cc
+++++ b/src/security/ServerOptions.cc
++@@ -24,6 +24,8 @@
++ #endif
++ #endif
++ 
+++#include <limits>
+++
++ Security::ServerOptions &
++ Security::ServerOptions::operator =(const Security::ServerOptions &old) {
++     if (this != &old) {
++--- a/src/ssl/helper.cc
+++++ b/src/ssl/helper.cc
++@@ -19,6 +19,8 @@
++ #include "ssl/helper.h"
++ #include "wordlist.h"
++ 
+++#include <limits>
+++
++ Ssl::CertValidationHelper::LruCache *Ssl::CertValidationHelper::HelperCache = nullptr;
++ 
++ #if USE_SSL_CRTD
++--- a/src/acl/ConnMark.cc
+++++ b/src/acl/ConnMark.cc
++@@ -16,6 +16,8 @@
++ #include "http/Stream.h"
++ #include "sbuf/Stream.h"
++ 
+++#include <limits>
+++
++ bool
++ Acl::ConnMark::empty() const
++ {
+diff --git a/meta-networking/recipes-daemons/squid/squid_4.13.bb b/meta-networking/recipes-daemons/squid/squid_4.14.bb
 similarity index 95%
-rename from meta-oe/recipes-support/mcelog/mcelog_170.bb
-rename to meta-oe/recipes-support/mcelog/mcelog_175.bb
-index f3e018d4a..ae810eff8 100644
---- a/meta-oe/recipes-support/mcelog/mcelog_170.bb
-+++ b/meta-oe/recipes-support/mcelog/mcelog_175.bb
-@@ -10,7 +10,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git;protocol=http;
-     file://run-ptest \
- "
+rename from meta-networking/recipes-daemons/squid/squid_4.13.bb
+rename to meta-networking/recipes-daemons/squid/squid_4.14.bb
+index 873d09344d..6d154c87e0 100644
+--- a/meta-networking/recipes-daemons/squid/squid_4.13.bb
++++ b/meta-networking/recipes-daemons/squid/squid_4.14.bb
+@@ -24,15 +24,15 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2
+            file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch \
+            file://0001-tools.cc-fixed-unused-result-warning.patch \
+            file://0001-splay.cc-fix-bind-is-not-a-member-of-std.patch \
++           file://0001-Fix-build-on-Fedora-Rawhide-772.patch \
+            "
  
--SRCREV = "391abaac9bdff385934b18134789bcc98b0adeb7"
-+SRCREV = "7b776a8c005b60572f49797e81287540f99fff1f"
+ SRC_URI_remove_toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
  
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://README.md;md5=74bb47b9a68850cb398665cf78b31de6"
+-SRC_URI[md5sum] = "31e524a416715d6bfef30e072d2ca076"
+-SRC_URI[sha256sum] = "d09d3c31e3a7d158bda75501e763bd1cd3c3a99f5af6781ec1fd30eed2f771ed"
++SRC_URI[sha256sum] = "4ad08884f065f8e1dac166aa13db6a872cde419a1717dff4c82c2c5337ee5756"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+-                    file://errors/COPYRIGHT;md5=4c3268f394af77fbbf541875cef96a6c \
++                    file://errors/COPYRIGHT;md5=0e03cd976052c45697ad5d96e7dff8dc \
+                     "
+ DEPENDS = "libtool krb5 openldap db cyrus-sasl"
+ 
 -- 
-2.17.1
+2.30.1
 
