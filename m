@@ -1,61 +1,82 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.3909.1614846605984342609
+Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
+ by mx.groups.io with SMTP id smtpd.web10.4013.1614847738433416684
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Mar 2021 00:30:06 -0800
+ Thu, 04 Mar 2021 00:48:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.81,222,1610380800"; 
-   d="scan'208";a="105152089"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 04 Mar 2021 16:30:04 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id DDB7F4CE9E4B
-	for <openembedded-devel@lists.openembedded.org>; Thu,  4 Mar 2021 16:30:03 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 4 Mar 2021 16:30:04 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] mailcap: upgrade 2.1.49 -> 2.1.52
-Date: Thu, 4 Mar 2021 16:30:02 +0800
-Message-ID: <1614846602-104869-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=rnLtagI3;
+ spf=pass (domain: gmail.com, ip: 209.85.222.171, mailfrom: wesley.lindauer@gmail.com)
+Received: by mail-qk1-f171.google.com with SMTP id 130so12347626qkh.11
+        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Mar 2021 00:48:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=H7jc6pI6/85BO9rkllXnVvgUdVcRS2/OdUi0ewF1Gc0=;
+        b=rnLtagI3u7PAJfxXbXEc6N28yCdxsjSF8ELQb/Dog0kG5/Ck7P0ukJ02Qld0ZoTNz8
+         1TE1IvmC8+LRi5qkThoEb6k6ikYiU1oRn44cP7qYJ0GyjxOD6x4fDYqBukOjNINw5Gkm
+         v871d30gjFza4vdBdyiaP2KBA1mUldFZgEA3GuEe/fune7S61dCzB++bzUTP6w4naxKd
+         SJLRHiFTVd260RDvIBKuPluBynubVuCJua3ds7ZFMZbAwYSxbztZXM9LrJghf1bZRHA4
+         nk+a1kP4thLJjjUzWWkEMPSlUlHl3H0DYc3HFxPkSbu/35nYZOGtBbHZkt1Bjnku9knb
+         62rA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=H7jc6pI6/85BO9rkllXnVvgUdVcRS2/OdUi0ewF1Gc0=;
+        b=gppuEOCmh/wkU7BEpenKn/3fRbzc5/cIXvJeN44kUuhZTM3nSV6pShk+KBBoM+cTJz
+         h43DAkKDdhCNjhU9SQa/WeTqtODbwCwsKvEAsSyIouYcOc7qlAOZUp1TD04pvkvLNokM
+         qulDuVAhbZqrjBYIXGbm/oeG43Msq2Xzfuu/2nmkLpTakX1g8h+tSSqLoAkq9en4NK0m
+         0MboCJdyS5O4mGcAmW0UN92/vPwUPnnvRFMFzT78TM77MiacRGD8WMqr6koA73DLDaBw
+         XL65erft/KrCJkLx13G9S+/oDMyjLPd+JI2CoJAOagfvFigTT+pPnh7R3vRWXeheEZtA
+         EHmg==
+X-Gm-Message-State: AOAM5326eUNIx6NzadbVfBCyd9IvEJc23xJB9vvjiBXkjVkC6IAChfCa
+	6GQGONOhkJItJan87dM2eQrpsTO2kXY=
+X-Google-Smtp-Source: ABdhPJxXOdyDjhUWfZbseBueW4hYS/YE2krEwal9UFH5gxhaNtKl82e3iOm661am5cgnf7UBzVeWFg==
+X-Received: by 2002:ae9:dcc4:: with SMTP id q187mr2932772qkf.5.1614847737417;
+        Thu, 04 Mar 2021 00:48:57 -0800 (PST)
+Return-Path: <wesley.lindauer@gmail.com>
+Received: from nova.wlindauer.baselinux.net (cpe-65-24-166-29.columbus.res.rr.com. [65.24.166.29])
+        by smtp.gmail.com with ESMTPSA id g2sm19038245qkd.124.2021.03.04.00.48.56
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 04 Mar 2021 00:48:57 -0800 (PST)
+From: "Wes Lindauer" <wesley.lindauer@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Wes Lindauer <wesley.lindauer@gmail.com>
+Subject: [meta-java][PATCH] ecj: exclude BB_NUMBER_THREADS from sstate hash
+Date: Thu,  4 Mar 2021 03:47:56 -0500
+Message-Id: <20210304084756.43481-1-wesley.lindauer@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: DDB7F4CE9E4B.A636F
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+From: Wes Lindauer <wesley.lindauer@gmail.com>
+
+The sstate-cache for libecj-bootstrap is not shareable across multiple
+machines because the parallelisation configuration of Bitbake is being
+embedded into the sstate hash of libecj-bootstrap.
+
+Exclude BB_NUMBER_THREADS from the do_compile sstate hashing to avoid
+this issue.
+
+Commit message adapted from a5257d41f32812bc9426183cc8d2b6f07617b0d5.
+
+Signed-off-by: Wes Lindauer <wesley.lindauer@gmail.com>
 ---
- .../mailcap/{mailcap_2.1.49.bb => mailcap_2.1.52.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/mailcap/{mailcap_2.1.49.bb => mailcap_2.1.52.bb} (89%)
+ recipes-core/ecj/libecj-bootstrap.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/mailcap/mailcap_2.1.49.bb b/meta-oe/recipes-support/mailcap/mailcap_2.1.52.bb
-similarity index 89%
-rename from meta-oe/recipes-support/mailcap/mailcap_2.1.49.bb
-rename to meta-oe/recipes-support/mailcap/mailcap_2.1.52.bb
-index 537c458747..69e1788e94 100644
---- a/meta-oe/recipes-support/mailcap/mailcap_2.1.49.bb
-+++ b/meta-oe/recipes-support/mailcap/mailcap_2.1.52.bb
-@@ -18,8 +18,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8dce08227d135cfda1f19d4c0c6689de"
+diff --git a/recipes-core/ecj/libecj-bootstrap.inc b/recipes-core/ecj/libecj-bootstrap.inc
+index 8f84fd0..2f3cc97 100644
+--- a/recipes-core/ecj/libecj-bootstrap.inc
++++ b/recipes-core/ecj/libecj-bootstrap.inc
+@@ -54,6 +54,7 @@ do_compile() {
  
- SRC_URI = "https://releases.pagure.org/${BPN}/${BP}.tar.xz"
+   fastjar -c -C build . -f ${JAR}
+ }
++do_compile[vardepsexclude] += "BB_NUMBER_THREADS"
  
--SRC_URI[md5sum] = "d5701a1a541383c0eda328f4a6518751"
--SRC_URI[sha256sum] = "f7381516bc1a937348efd1d0e14618e0a2afc5d59fe821dd248632d5601b59b5"
-+SRC_URI[md5sum] = "3d1a14a80bb85564c323562670f1c01f"
-+SRC_URI[sha256sum] = "e6f615ec2ffe705522075d960744534c443ece66acfb34fada38d567d8823639"
- 
- inherit update-alternatives
- 
+ do_install() {
+   oe_jarinstall ${JAR} ecj-bootstrap.jar
 -- 
-2.25.1
-
-
+2.21.3
 
