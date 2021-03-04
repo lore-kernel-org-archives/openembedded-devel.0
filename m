@@ -1,77 +1,98 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.6007.1614863170344279109
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ by mx.groups.io with SMTP id smtpd.web08.6052.1614863565052623592
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Mar 2021 05:06:10 -0800
+ Thu, 04 Mar 2021 05:12:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=34576 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lHng8-0000xG-Ru; Thu, 04 Mar 2021 15:06:09 +0200
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-pandas: Upgrade 1.2.2 -> 1.2.3
-Date: Thu,  4 Mar 2021 15:05:54 +0200
-Message-Id: <20210304130554.32308-5-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210304130554.32308-1-leon.anavi@konsulko.com>
-References: <20210304130554.32308-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=fail reason="body hash did not verify" header.i=@mailbox.org header.s=mail20150812 header.b=CTHUw7nC;
+ spf=pass (domain: mailbox.org, ip: 80.241.56.151, mailfrom: crg7475@mailbox.org)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [IPv6:2001:67c:2050:105:465:1:2:0])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4DrrrV6x0MzQlX9;
+	Thu,  4 Mar 2021 14:12:42 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=mailbox.org; h=
+	content-language:content-transfer-encoding:content-type
+	:content-type:in-reply-to:mime-version:date:date:message-id:from
+	:from:references:subject:subject:received; s=mail20150812; t=
+	1614863559; bh=lQjwQvihd4mf7D7w9T/aO2j7vsC86ePWGtV367OcHeA=; b=C
+	THUw7nCT6+guggo8kLBxIbYZftsut7y4NoRo8+FS5AACKcVYXWa0os/LH/6YviQQ
+	5Cdzh3pJXlb6zGObHjr621gkcxkOPJcNDY6Jk/c6fmtLOL+R+wJqtHf3eRlqPwQt
+	Zh7/GjAzSS8VA47F4C/l4IU7hJKuh1VTgdXDLufca1BS5+kMLeQOH2RFv1rBwor/
+	xHWqAncJGIfxeso3ZrlS44S9cw04asXGITobtGd7Nz4yYDJfU+70Vig4RfsTEdF0
+	Z0G/Kljatkabdx0putJvme/qQaD8n2Ku/lpyyV4d21Es9m2Hg/jz7zq77xG3K+vs
+	oPy3sT/jlcRMrFHZiFHWg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1614863561;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=zXoMoNRKhFkeISnndFyfTMMrxNHllDC0uQtwx9tclK8=;
+	b=OXYSNGXNuMEkdkSctwcR3TiRkGcb1QS63vqTK7s/A71FBMryz5GWvdtNnrM8Yh2SQvaHAe
+	VKoMQ8bC4LHXT3HXXCKMgtrIxo1uP/FVmg/uU3vT9Lz1fQktA6bFn1d/c+AD/3hFeWx0U6
+	kkpDxnl00Xs0ML7GlF2vJAACPWv49uPnT/ShkSWV+XpcUKeqXGvKJPn0O+pTu5z3HHyfbb
+	hNyP6mmAyIbmu0De7HRuOmT+dCR0O3/6lg/vkoEBCfs4gUXBkcfVsaHBvS1rSTspjiPTqc
+	tURjFOTJa5HGxZf28OkwIEsBEXCd7465NDix9JcuvkLMk/PXlRgBgG8IFLJkhA==
+X-Virus-Scanned: amavisd-new at heinlein-support.de
+Received: from smtp2.mailbox.org ([80.241.60.241])
+	by spamfilter05.heinlein-hosting.de (spamfilter05.heinlein-hosting.de [80.241.56.123]) (amavisd-new, port 10030)
+	with ESMTP id incIua0GsCXu; Thu,  4 Mar 2021 14:12:39 +0100 (CET)
+Subject: Re: [oe] [meta-multimedia][PATCH 1/2] pipewire: Move to meta-multimedia
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+ quentin.schulz@streamunlimited.com,
+ George Kiagiadakis <george.kiagiadakis@collabora.com>
+References: <20210303114130.2317817-1-crg7475@mailbox.org>
+ <CALbNGRT-L+khTL5277KAjfqwCdQ66yH-o6tcw35=0cr_CKzttQ@mail.gmail.com>
+From: "Carlos Rafael Giani" <crg7475@mailbox.org>
+Message-ID: <74063b8d-88e6-6c98-e2d2-7a640f7ebea4@mailbox.org>
+Date: Thu, 4 Mar 2021 14:12:38 +0100
+MIME-Version: 1.0
+In-Reply-To: <CALbNGRT-L+khTL5277KAjfqwCdQ66yH-o6tcw35=0cr_CKzttQ@mail.gmail.com>
+X-MBO-SPAM-Probability: 
+X-Rspamd-Score: -4.89 / 15.00 / 15.00
+X-Rspamd-Queue-Id: E4AF717BA
+X-Rspamd-UID: 9d69f8
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-Upgrade to release 1.2.3:
+Well, fine by me, though I'd like to ask others as well what they think=20
+about moving this to oe-core?
 
-- Fixed regression in to_excel() raising KeyError when giving
-  duplicate columns with columns attribute
-- Fixed regression in nullable integer unary ops propagating mask
-  on assignment
-- Fixed regression in DataFrame.__setitem__() not aligning
-  DataFrame on right-hand side for boolean indexer
-- Fixed regression in to_json() failing to use compression with
-  URL-like paths that are internally opened in binary mode or with
-  user-provided file objects that are opened in binary mode
-- Fixed regression in Series.sort_index() and DataFrame.sort_index(),
-  which exited with an ungraceful error when having kwarg
-  ascending=None passed. Passing ascending=None is still considered
-  invalid, and the improved error message suggests a proper usage
-  (ascending must be a boolean or a list-like of boolean)
-- Fixed regression in DataFrame.transform() and Series.transform()
-  giving incorrect column labels when passed a dictionary with a
-  mix of list and non-list values
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../python/{python3-pandas_1.2.2.bb => python3-pandas_1.2.3.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pandas_1.2.2.bb => python3-pandas_1.2.3.bb} (88%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-pandas_1.2.2.bb b/meta-python/recipes-devtools/python/python3-pandas_1.2.3.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-pandas_1.2.2.bb
-rename to meta-python/recipes-devtools/python/python3-pandas_1.2.3.bb
-index 7529237866..8c36c21bb9 100644
---- a/meta-python/recipes-devtools/python/python3-pandas_1.2.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pandas_1.2.3.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "http://pandas.pydata.org/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c2a8f987b2ce77c368c6b3e1b5b10774"
- 
--SRC_URI[sha256sum] = "14ed84b463e9b84c8ff9308a79b04bf591ae3122a376ee0f62c68a1bd917a773"
-+SRC_URI[sha256sum] = "df6f10b85aef7a5bb25259ad651ad1cc1d6bb09000595cab47e718cbac250b1d"
- 
- inherit pypi setuptools3
- 
--- 
-2.17.1
-
+On 03.03.21 22:01, Andreas M=C3=BCller wrote:
+> On Wed, Mar 3, 2021 at 12:41 PM Carlos Rafael Giani via
+> lists.openembedded.org <crg7475=3Dmailbox.org@lists.openembedded.org>
+> wrote:
+>> Signed-off-by: Carlos Rafael Giani <crg7475@mailbox.org>
+>> ---
+>>   .../recipes-multimedia/pipewire/pipewire-0.2_git.bb               | =
+0
+>>   .../recipes-multimedia/pipewire/pipewire_git.bb                   | =
+0
+>>   2 files changed, 0 insertions(+), 0 deletions(-)
+>>   rename {meta-oe =3D> meta-multimedia}/recipes-multimedia/pipewire/pi=
+pewire-0.2_git.bb (100%)
+>>   rename {meta-oe =3D> meta-multimedia}/recipes-multimedia/pipewire/pi=
+pewire_git.bb (100%)
+>>
+>> diff --git a/meta-oe/recipes-multimedia/pipewire/pipewire-0.2_git.bb b=
+/meta-multimedia/recipes-multimedia/pipewire/pipewire-0.2_git.bb
+>> similarity index 100%
+>> rename from meta-oe/recipes-multimedia/pipewire/pipewire-0.2_git.bb
+>> rename to meta-multimedia/recipes-multimedia/pipewire/pipewire-0.2_git=
+.bb
+>> diff --git a/meta-oe/recipes-multimedia/pipewire/pipewire_git.bb b/met=
+a-multimedia/recipes-multimedia/pipewire/pipewire_git.bb
+>> similarity index 100%
+>> rename from meta-oe/recipes-multimedia/pipewire/pipewire_git.bb
+>> rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_git.bb
+>> --
+>> 2.25.1
+>>
+> To be honest: I'd prefer the other way: Add it to oe-core (of course
+> not this old version). Haven't found the time to check more on details
+> but it is a drop in replacement for at least pulseaudio and jack.
+>
+> Andreas
