@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.6005.1614863169312521636
+ by mx.groups.io with SMTP id smtpd.web09.6006.1614863169578294886
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 04 Mar 2021 05:06:09 -0800
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=34576 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lHng8-0000xG-9n; Thu, 04 Mar 2021 15:06:08 +0200
+	id 1lHng7-0000xG-Ov; Thu, 04 Mar 2021 15:06:08 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-portion: Upgrade 2.1.4 -> 2.1.5
-Date: Thu,  4 Mar 2021 15:05:53 +0200
-Message-Id: <20210304130554.32308-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-astroid: Upgrade 2.5 -> 2.5.1
+Date: Thu,  4 Mar 2021 15:05:52 +0200
+Message-Id: <20210304130554.32308-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210304130554.32308-1-leon.anavi@konsulko.com>
 References: <20210304130554.32308-1-leon.anavi@konsulko.com>
@@ -30,33 +30,36 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.1.5:
+Upgrade to release 2.5.1:
 
-- Getting items from an Interval using a slice does no longer
-  return a list but an Interval instance.
-- Intervals are properly pretty-printed by pandas.
+- The ``context.path`` is reverted to a set because otherwise it
+  leads to false positives for non `numpy` functions.
+- Don't transform dataclass ClassVars
+- Improve typing.TypedDict inference
+- Fix the `Duplicates found in MROs` false positive.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-portion_2.1.4.bb => python3-portion_2.1.5.bb}      | 2 +-
+ .../python/{python3-astroid_2.5.bb => python3-astroid_2.5.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-portion_2.1.4.bb => python3-portion_2.1.5.bb} (77%)
+ rename meta-python/recipes-devtools/python/{python3-astroid_2.5.bb => python3-astroid_2.5.1.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-portion_2.1.4.bb b/meta-python/recipes-devtools/python/python3-portion_2.1.5.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-portion_2.1.4.bb
-rename to meta-python/recipes-devtools/python/python3-portion_2.1.5.bb
-index d08d3e7255..0fa107c33e 100644
---- a/meta-python/recipes-devtools/python/python3-portion_2.1.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-portion_2.1.5.bb
-@@ -7,6 +7,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=05f1e16a8e59ce3e9a979e881816c2ab"
+diff --git a/meta-python/recipes-devtools/python/python3-astroid_2.5.bb b/meta-python/recipes-devtools/python/python3-astroid_2.5.1.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-astroid_2.5.bb
+rename to meta-python/recipes-devtools/python/python3-astroid_2.5.1.bb
+index f69d85015c..84315767d3 100644
+--- a/meta-python/recipes-devtools/python/python3-astroid_2.5.bb
++++ b/meta-python/recipes-devtools/python/python3-astroid_2.5.1.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "LGPL-2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ 
+-SRC_URI[sha256sum] = "b31c92f545517dcc452f284bc9c044050862fbe6d93d2b3de4a215a6b384bf0d"
++SRC_URI[sha256sum] = "cfc35498ee64017be059ceffab0a25bedf7548ab76f2bea691c5565896e7128d"
  
  inherit pypi setuptools3
  
--SRC_URI[sha256sum] = "58b2792e6e9837a2d55a97d459b940c90fb08b5fba774f524e9359727c80e7b4"
-+SRC_URI[sha256sum] = "ed62fd1450336026f55c7d40b92b7159efd81d1420c778dd1b592bb634b14b4c"
- 
- BBCLASSEXTEND = "native"
 -- 
 2.17.1
 
