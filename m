@@ -1,75 +1,61 @@
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
- by mx.groups.io with SMTP id smtpd.web12.3491.1614843091636626235
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web09.3931.1614846537852349158
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Mar 2021 23:31:31 -0800
+ Thu, 04 Mar 2021 00:28:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=op+kMVG5;
- spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f170.google.com with SMTP id n10so18328104pgl.10
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Mar 2021 23:31:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=S8iUhWdnwoiJ5lJ9cN2bzbpl/dkwJ0TCxQL49pM9F1Q=;
-        b=op+kMVG55dweMIjUZqIWypcc2bAfGgp415saTbKQkHhhkZQSdiqYkrlEHgUdgb7nq0
-         QjMGiMgwiWHXQmj1cOcbRePugrsDPWLRVG9LxUwjSt9ME9HAq9yHF0Cqv2J7IfPZ4ikx
-         qTGoVXOo2ksf753CORn5v2ozLsfGVnQaVSM9HvvA3MDtsw06c7NGTJWAsY0R5ittxQ+a
-         jRQudL4HBJgckkpMCh+WAVqkKFoRaOZC7DvT5M0ybD8Bq1eeUS0e3LatBoWUQnsDMxQg
-         Sj/zrh8lv+uIxKUuosukccgQj/4al5gFi2/BKq5ETI7MA6dtJBuJhaOIrAXhU6FIepd/
-         bvoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=S8iUhWdnwoiJ5lJ9cN2bzbpl/dkwJ0TCxQL49pM9F1Q=;
-        b=Lz8ZD+LgG6+jSFTy42nhc//pzpxfJL2BGHVfwc+NiBd/woaJN3o8OB4cdafNTgRNyl
-         LeXPXhd49Tj2c6P6skDWCMDZ/un/xHWPZN17WrIfMw7cyY1f4E5AzDfWQEj03DbbQiEx
-         iMqJe/rovOrV4GHspbxmzsPazAayyhrWzuDhKfLK44CTNOPrWUQQZpKQ9thzKnidJnbM
-         7GyAZky18BovJ8PdhknxKmm8bI9ca2PFBeclBu6b+pUCxnQNZSSeUIvEVZveWg/AQmH8
-         +iPS24serXFfp3OHLudHUmCJtvvgrHP32S2N5Ta8/EX70sOKVWQ7A2PPPo7JaU3cArH3
-         MtlQ==
-X-Gm-Message-State: AOAM532cQony91jycbNhglER51D2rEgUms51dEYw2EVO41W9gC2icWFU
-	EEHPVPliW4IKeeicJR9iAdjsWfMj6aXT0w==
-X-Google-Smtp-Source: ABdhPJx8OedRjYLnUilib2tpj+bisrtryYDpLyvr8JEy50oIanaPAigmOXTGExjBkbR8lvSv+myZTw==
-X-Received: by 2002:a63:ff21:: with SMTP id k33mr2509164pgi.379.1614843090788;
-        Wed, 03 Mar 2021 23:31:30 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b3bf])
-        by smtp.gmail.com with ESMTPSA id d16sm23906492pgb.12.2021.03.03.23.31.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 Mar 2021 23:31:30 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] abseil-cpp: Ask for C++14 std explicitly
-Date: Wed,  3 Mar 2021 23:31:28 -0800
-Message-Id: <20210304073128.3329889-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.1
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.81,222,1610380800"; 
+   d="scan'208";a="105151997"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 04 Mar 2021 16:28:55 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id 9D22C4CE92FD
+	for <openembedded-devel@lists.openembedded.org>; Thu,  4 Mar 2021 16:28:54 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Thu, 4 Mar 2021 16:28:54 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-networking] [PATCH] openvpn: upgrade 2.5.0 -> 2.5.1
+Date: Thu, 4 Mar 2021 16:28:53 +0800
+Message-ID: <1614846533-104573-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: 9D22C4CE92FD.A567A
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-Newer gcc ( gcc11 ) will be defaulting to c++17 and abseil currently
-needs work to get working with c++17, so pin to c++14 untill upstream
-gets it working with c++17
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../openvpn/{openvpn_2.5.0.bb => openvpn_2.5.1.bb}            | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/openvpn/{openvpn_2.5.0.bb => openvpn_2.5.1.bb} (95%)
 
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-index 38c3dbc510..9557c9345e 100644
---- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-@@ -24,6 +24,7 @@ inherit cmake
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.5.0.bb b/meta-networking/recipes-support/openvpn/openvpn_2.5.1.bb
+similarity index 95%
+rename from meta-networking/recipes-support/openvpn/openvpn_2.5.0.bb
+rename to meta-networking/recipes-support/openvpn/openvpn_2.5.1.bb
+index 3dc25bacd2..6aa7b17be6 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.5.0.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.5.1.bb
+@@ -14,8 +14,8 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
  
- EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON \
-                  -DBUILD_TESTING=OFF    \
-+                 -DCMAKE_CXX_STANDARD=14 \
-                 "
+ UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
  
- BBCLASSEXTEND = "native nativesdk"
+-SRC_URI[md5sum] = "2d42d3c2fff942bfe9eefa41cfd6f123"
+-SRC_URI[sha256sum] = "87ef9f5d42c1193fec2ebd86757229b5ae4f295504968392375155adeda83b56"
++SRC_URI[md5sum] = "b1c279e89d97849d5fcde31d76812f04"
++SRC_URI[sha256sum] = "e9582b8e9457994bd8d50012be82c23b2f465da51460c9b2360a81da0f4e06e6"
+ 
+ SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
+ SYSTEMD_AUTO_ENABLE = "disable"
 -- 
-2.30.1
+2.25.1
+
+
 
