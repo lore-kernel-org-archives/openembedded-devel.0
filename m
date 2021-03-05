@@ -1,119 +1,97 @@
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
- by mx.groups.io with SMTP id smtpd.web09.14742.1614962909024009195
+Received: from wout3-smtp.messagingengine.com (wout3-smtp.messagingengine.com [64.147.123.19])
+ by mx.groups.io with SMTP id smtpd.web09.104.1614963603814705957
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Mar 2021 08:48:29 -0800
+ Fri, 05 Mar 2021 09:00:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dGg/tqU7;
- spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f175.google.com with SMTP id d12so2495787pfo.7
-        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Mar 2021 08:48:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=0tv0A3Wwrt7Z92m6yKKB0Bbpin0EEXuisDMUZ0ZTibc=;
-        b=dGg/tqU7TQX7FDNfUhRjkyq0yq3Y/jQtPaVmeKGaURb1OnYsq5mnrFYBX+I2Z/H2UH
-         1lSBQuO0WH7yQ+4LeDE9p3OHGohZ5wwwCwYRUDPfymn3IbMSkd9yP6dR3HPBF2QyIE0k
-         WpyANnSULRPMQP2nuFWMEfmE4WI5WlW4BxZ0W56oIbVLUzb4DmXrJXFY/UblGfQUtYEB
-         YFEPSrCXFQjMw3gkkL9hU2BjnJswaokY8+FuWk8+2C+h0Wt1KhDxxzt9FDkPc4sZNvWZ
-         1dCAPLsJA3vfOrMYrWkmJcGtVKxGhffMebp/VtOeZsA+7rSn0UA6WU7to9rXTAvYbcD9
-         +azg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=0tv0A3Wwrt7Z92m6yKKB0Bbpin0EEXuisDMUZ0ZTibc=;
-        b=ji/SI/ee1dZEYbimcUsNs2oNDN6rsEXxPwASKkBzSTskveImZjGc6Pc3YBx/cRRmm7
-         t0TAYTUTAlAYYIgV59+7AntDXngoXzXBSp5rUqS+QG6aAaBRu8n1nJMr32KjP9gcIgRb
-         z60p8NFpfeLA46Eeks/ndy4AAosOIVAbxXvpcVhjkU0AYg2ROXpurmwTxqjoVB2/IvqJ
-         rdyN2jy9/mEx0jWfg/W7smDNJQt7UeVtEx1ddXt37kRB3Ew/tIYMDzd/uSmaSh0K6GQp
-         DcvwcVyePzHMccBOLfgyi3KYeOTUPnyGFQ4sMTisUXyDCad+PhLCZAEse6ETm9ErVG3Q
-         GEtQ==
-X-Gm-Message-State: AOAM5336CT72UrEGc8JaKKlq/J/N/ty2hWyrDfaATrU6rWxGVkOPcB2h
-	glpLztv2cVGa2Tb4ChOwEQAsUGTrJ+LTDQ==
-X-Google-Smtp-Source: ABdhPJxsAxyfzpLuKU6vHVWfMlt1PdodlTbJJylpJY1MexoxMIqKOj956wthoUP1FQOQcBZpywafCQ==
-X-Received: by 2002:a63:1021:: with SMTP id f33mr9520249pgl.409.1614962908392;
-        Fri, 05 Mar 2021 08:48:28 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b3bf])
-        by smtp.gmail.com with ESMTPSA id z12sm2653587pjz.16.2021.03.05.08.48.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 05 Mar 2021 08:48:28 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Sam Van Den Berge <sam.van.den.berge@telenet.be>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] libiio: fix build when python bindings are enabled
-Date: Fri,  5 Mar 2021 08:48:25 -0800
-Message-Id: <20210305164825.4056544-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ dkim=pass header.i=@gherzan.com header.s=fm1 header.b=NbRN69mx;
+ spf=pass (domain: gherzan.com, ip: 64.147.123.19, mailfrom: andrei@gherzan.com)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+	by mailout.west.internal (Postfix) with ESMTP id BA39C2AC0;
+	Fri,  5 Mar 2021 12:00:02 -0500 (EST)
+Received: from imap4 ([10.202.2.54])
+  by compute3.internal (MEProxy); Fri, 05 Mar 2021 12:00:03 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gherzan.com; h=
+	mime-version:message-id:in-reply-to:references:date:from:to:cc
+	:subject:content-type; s=fm1; bh=aGjgjsYxl1d/+2tZAQAymEOBkWv847f
+	IUDXn6e2yOZ4=; b=NbRN69mxEYfjon39TI9sKNxcwfrc/i8Zr49iBaoC9OzNz8y
+	9THhrbtB4Z5ftkRWNFpksIm3U0bVjP58hFIM95aiK/7zkMJabZ87ag2ODXUKoZFi
+	r2nCQjOWPbqZkRdWlSjCV5JYpiwG0x0QfTVq9BZCTOfSd2VOsJAau4ajHYtZnM50
+	5/nKjtqywJNmFgkyK6fADvaNdO6C5ANBsz/3gE+bNVwh4NzTxZ7LOoqkwZ22n1YG
+	1xjTDsusuP08ET4j7partiwFj3fQTHeIshbsJtB+ankCWS9iAmJZRMm+iZciXE/K
+	tHkJN19pDqIEi8x7CbHZQrbIpjRV+n2pCEmZtNQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=aGjgjs
+	Yxl1d/+2tZAQAymEOBkWv847fIUDXn6e2yOZ4=; b=AcRT4Vn3LWX76TBmgneilh
+	gIum2PRus/vz2VsgTPU1jaKS9ldwW+PWrwe/2Q/cSV/5zIWM6e3Q7fe877DqF5Fl
+	QwjgbqiAI2HxbWMWZvvnkg+CifuPa1gyN6sScqATi0ZdpJaIGYJ/RykLLcaZIg+y
+	a5y2KzM//AKm2eC7RK54gI3z6rQNxmtkqI2b+BtWSykGEIE6lPkZumANeuZ4SU9/
+	lv4ZNvyUIzfcYBfKNzgNkosRq6kuaoPOBX4ty4HhtwwcguUROWDVNV+u3dlBj55z
+	kgQ1o7Cf/AkPeBq0JfGeCKS+uOwmI2rvaVl8gW16cjQpTHQAPshJGy4l8pRFMIoA
+	==
+X-ME-Sender: <xms:kGNCYDf6hYXj9fUe5Nk2TiWHH1SYhwDwY5HO8V5WxaI2PITXZiSVYg>
+    <xme:kGNCYJMPg90Kciujoccc1H5DPnlrteupjT9nPKsve1bdDycHUyoBvRYb1bM05I9qy
+    YNfr8ynRaz3jhjhcp4>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledruddtiedgkeekucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhepofgfggfkjghffffhvffutgesthdtredtreerjeenucfhrhhomhepfdetnhgu
+    rhgvihcuifhhvghriigrnhdfuceorghnughrvghisehghhgvrhiirghnrdgtohhmqeenuc
+    ggtffrrghtthgvrhhnpeelgfffvddtjeeivdehleefleejfffgleeffeeguefhvdevkeef
+    ueeuleefveeutdenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfh
+    hrohhmpegrnhgurhgvihesghhhvghriigrnhdrtghomh
+X-ME-Proxy: <xmx:kGNCYMgLsN2D-QcZs_zxymp8FP0thoJwCfz0iM6sgTEZdMMcSLYicQ>
+    <xmx:kGNCYE8gzh8QGogs2r0uX41OM_Jr4Mb1cO_1XsxdXrq83wJxu4nCMg>
+    <xmx:kGNCYPt_4kLJbcv6O4a7_clTNDsdpcvAITui0uafvT7411hKLbqWWQ>
+    <xmx:kmNCYIVGZff0jbIxECkNO2WWXyqxVcO5L-4o_wNt6w3ne3BM-nmu3g>
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+	id E770D1601DA; Fri,  5 Mar 2021 12:00:00 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.5.0-alpha0-206-g078a48fda5-fm-20210226.001-g078a48fd
+Mime-Version: 1.0
+Message-Id: <2f912603-581b-43a2-8adb-064e3fa16202@www.fastmail.com>
+In-Reply-To: <6550b85f-4da4-d245-0ce0-3fb13866b143@gmail.com>
+References: <20210303133241.29781-1-andrei@gherzan.com>
+ <20210303133241.29781-3-andrei@gherzan.com>
+ <074a21a4-17bf-6024-d3a7-d9d44c43cc95@windriver.com>
+ <b6a0e026-da05-4c5b-b768-a3aaf96a36d1@www.fastmail.com>
+ <6550b85f-4da4-d245-0ce0-3fb13866b143@gmail.com>
+Date: Fri, 05 Mar 2021 16:59:42 +0000
+From: "Andrei Gherzan" <andrei@gherzan.com>
+To: "Khem Raj" <raj.khem@gmail.com>,
+ "Trevor Gamblin" <trevor.gamblin@windriver.com>,
+ openembedded <openembedded-devel@lists.openembedded.org>
+Cc: "Andrei Gherzan" <andrei.gherzan@huawei.com>
+Subject: Re: [oe] [meta-python][PATCH v2 3/6] python3-aiohue: Integrate the hue control python module
+Content-Type: text/plain
 
-From: Sam Van Den Berge <sam.van.den.berge@telenet.be>
+On Fri, 5 Mar 2021, at 16:46, Khem Raj wrote:
+> 
+> 
+> On 3/5/21 8:04 AM, Andrei Gherzan wrote:
+> > On Fri, 5 Mar 2021, at 14:21, Trevor Gamblin wrote:
+> >>
+> >>
+> >> On 2021-03-03 8:32 a.m., Andrei Gherzan wrote:
+> >>> [Please note: This e-mail is from an EXTERNAL e-mail address]
+> >>>
+> >>> From: Andrei Gherzan<andrei.gherzan@huawei.com>  <mailto:andrei.gherzan@huawei.com>
+> >>>
+> >>> Signed-off-by: Andrei Gherzan<andrei.gherzan@huawei.com>  <mailto:andrei.gherzan@huawei.com>
+> >>
+> >> The path here looks off. The recipe is at 
+> >> recipes-devtools/python/python3-aiohue_2.2.0.bb when it should be at 
+> >> meta-python/recipes-devtools/python/python3-aiohue_2.2.0.bb. Can you 
+> >> submit a v3 with the path fixed? Please check any other recipes you 
+> >> have added.
+> >>
+> > For a second I was just confused of how could this have happened. But 
+> > the explanation was simple (git am from another layer that doesn't have 
+> > multiple layers at its root). Send v3.
+> 
+> yeah its a problem with monolithic trees where layers are fudged. 
+> something like git submodules can give you best of both worlds where you 
+> have monolithic view but preserves layers as well.
 
-See https://github.com/openembedded/meta-openembedded/issues/248
-
-Signed-off-by: Sam Van Den Berge <sam.van.den.berge@telenet.be>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-support/libiio/libiio_git.bb | 26 +++++++++++++++++---
- 1 file changed, 23 insertions(+), 3 deletions(-)
-
-diff --git a/meta-oe/recipes-support/libiio/libiio_git.bb b/meta-oe/recipes-support/libiio/libiio_git.bb
-index b308bde171..00c016db44 100644
---- a/meta-oe/recipes-support/libiio/libiio_git.bb
-+++ b/meta-oe/recipes-support/libiio/libiio_git.bb
-@@ -12,13 +12,15 @@ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
- 
- S = "${WORKDIR}/git"
- 
--inherit cmake python3native systemd
-+DISTUTILS_SETUP_PATH ?= "${B}/bindings/python/"
- 
- DEPENDS = " \
-     flex-native bison-native libaio \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)} \
- "
- 
-+inherit cmake python3native systemd setuptools3
-+
- EXTRA_OECMAKE = " \
-     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-     -DUDEV_RULES_INSTALL_DIR=${nonarch_base_libdir}/udev/rules.d \
-@@ -31,8 +33,6 @@ PACKAGECONFIG[usb_backend] = "-DWITH_USB_BACKEND=ON,-DWITH_USB_BACKEND=OFF,libus
- PACKAGECONFIG[network_backend] = "-DWITH_NETWORK_BACKEND=ON,-DWITH_NETWORK_BACKEND=OFF,libxml2"
- PACKAGECONFIG[libiio-python3] = "-DPYTHON_BINDINGS=ON,-DPYTHON_BINDINGS=OFF"
- 
--inherit ${@bb.utils.contains('PACKAGECONFIG', 'libiio-python3', 'distutils3-base', '', d)}
--
- PACKAGES =+ "${PN}-iiod ${PN}-tests ${PN}-${PYTHON_PN}"
- 
- RDEPENDS_${PN}-${PYTHON_PN} = "${PN} ${PYTHON_PN}-ctypes ${PYTHON_PN}-stringold"
-@@ -46,3 +46,23 @@ FILES_${PN}-${PYTHON_PN} = "${PYTHON_SITEPACKAGES_DIR}"
- 
- SYSTEMD_PACKAGES = "${PN}-iiod"
- SYSTEMD_SERVICE_${PN}-iiod = "iiod.service"
-+
-+# Explicitly define do_configure, do_compile and do_install because both cmake and setuptools3 have
-+# EXPORT_FUNCTIONS do_configure do_compile do_install
-+do_configure() {
-+    cmake_do_configure
-+}
-+
-+do_compile() {
-+    if ${@bb.utils.contains('PACKAGECONFIG', 'libiio-python3', 'true', 'false', d)}; then
-+        distutils3_do_compile
-+    fi
-+    cmake_do_compile
-+}
-+
-+do_install() {
-+    if ${@bb.utils.contains('PACKAGECONFIG', 'libiio-python3', 'true', 'false', d)}; then
-+        distutils3_do_install
-+    fi
-+    cmake_do_install
-+}
--- 
-2.30.1
-
+If the layers stay in the same scope (like meta-oe) I don't mind the monolithic approach as you don't have to deal with the aggregation in that case. 
