@@ -1,28 +1,26 @@
 Received: from mail.desaster-games.net (mail.desaster-games.net [176.9.84.136])
- by mx.groups.io with SMTP id smtpd.web09.13861.1614959512218139215
+ by mx.groups.io with SMTP id smtpd.web10.13865.1614959512220543184
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 05 Mar 2021 07:51:53 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: iodoru.org, ip: 176.9.84.136, mailfrom: jubalh@iodoru.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mail.desaster-games.net (Postfix) with ESMTP id F230A1700C;
-	Fri,  5 Mar 2021 16:51:47 +0100 (CET)
+	by mail.desaster-games.net (Postfix) with ESMTP id D2ED51700B;
+	Fri,  5 Mar 2021 16:51:46 +0100 (CET)
 X-Virus-Scanned: Amavis at mail.desaster-games.com
 Received: from mail.desaster-games.net ([127.0.0.1])
 	by localhost (mail.desaster-games.net [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 70mKVtGDU2Tr; Fri,  5 Mar 2021 16:51:34 +0100 (CET)
+	with ESMTP id 27Bvp3qF95jD; Fri,  5 Mar 2021 16:51:33 +0100 (CET)
 Received: from ymir.suse.de (nat1.nue.suse.com [195.135.221.27])
-	by mail.desaster-games.net (Postfix) with ESMTPSA id 8235117009;
-	Fri,  5 Mar 2021 16:51:34 +0100 (CET)
+	by mail.desaster-games.net (Postfix) with ESMTPSA id 383A217007;
+	Fri,  5 Mar 2021 16:51:33 +0100 (CET)
 From: "Michael Vetter" <jubalh@iodoru.org>
 To: openembedded-devel@lists.openembedded.org
 Cc: Michael Vetter <jubalh@iodoru.org>
-Subject: [meta-oe][PATCH] jasper: upgrade 2.0.25 -> 2.0.26
-Date: Fri,  5 Mar 2021 16:51:35 +0100
-Message-Id: <20210305155135.29965-2-jubalh@iodoru.org>
+Subject: [PATCH 1/1] jasper: upgrade 2.0.25 -> 2.0.26
+Date: Fri,  5 Mar 2021 16:51:34 +0100
+Message-Id: <20210305155135.29965-1-jubalh@iodoru.org>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210305155135.29965-1-jubalh@iodoru.org>
-References: <20210305155135.29965-1-jubalh@iodoru.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 
