@@ -1,132 +1,89 @@
-Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com [209.85.222.182])
- by mx.groups.io with SMTP id smtpd.web08.2255.1614890706894476296
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.web09.9632.1614936842351369302
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Mar 2021 12:45:07 -0800
+ Fri, 05 Mar 2021 01:34:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20150623.gappssmtp.com header.s=20150623 header.b=lsTo5vfZ;
- spf=pass (domain: ossystems.com.br, ip: 209.85.222.182, mailfrom: fabio.berton@ossystems.com.br)
-Received: by mail-qk1-f182.google.com with SMTP id d20so28354086qkc.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Mar 2021 12:45:06 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=IPsPZlUS;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: peron.clem@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id m7so839642wmq.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Mar 2021 01:34:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-        h=from:to:subject:date:message-id:mime-version:organization
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=Y7EL1KoiJtIXBEH4TJezRd2s7IlrH+TqbP7+qp9f0Ek=;
-        b=lsTo5vfZ45CniDzU4HQQgwXCXeAXjucQ6RmR/oqGmNtBIwAO3VUNen2gQdcQAgZ8NH
-         jwTZ07S4tXJjDAQfrozUIZXS871A2AXhUg2f+U//uEUOnaru9Np4O0jKbJOXr0oJl49C
-         wjHb6OjwZKM2bSmFl+kGw88cMkiLBONNnY7pkKiL/pWnSBbc2oM2k/6/+JiIqBdxm9vH
-         AaIf1HjP9Sb/lOlUwlSWG70eNJxZt3guolAAIsglRX5VtGWQgn8i4OKtMSRm+QdzM3QL
-         bjdURbbzySj5bOoMCpAKlRotFFb7Gqt0e1jKMHAuGjbp/MLN0wE3/FiahB3fNN8KRmik
-         pBxg==
+        bh=nCh86RvAUCEChvCm7NsA3U3rv5F9PTh6vGTZ/q2gLF4=;
+        b=IPsPZlUS18o4TMdn/W1BNT6CJwnJdVrA/dEZsU7yqkyC1DKlhNj/v2iWjsXEqfWkZk
+         d6UmXgU80Lrjz12jHk5NbMfR6oEUJ8WAKWu2a67dkta8fKFxGpDgXPIBWcPBXPAZsgeS
+         fbYhMSQUSD6C2tsD9B/1usSInFvhSXwodiUE5ENgCeWoEfY5LCUAw1KIZtUK6RTP3ae7
+         V5e9F52IynM/TJUI78IO5X+gveFkffqNGLEvnaV1Cq6/7CXsc8ulO7+PxiHZrEl3E8pj
+         mFcdaO2o4qxgabMH5TcT2RtMInApBL/pK7W7py87/nzLQd9i13OL3ecaAkYzjwNerTIE
+         Lrxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :organization:content-transfer-encoding;
-        bh=Y7EL1KoiJtIXBEH4TJezRd2s7IlrH+TqbP7+qp9f0Ek=;
-        b=QQXYjWXpDNofUC+QOB0R7e8tKEHnK/sWl0/kdMCrwgJ5RIeg0vIyzMioLzsgICnkQA
-         XMMrk5t6z2xHqd4EGIDImHFbvR7NWu+UQ2VNL5GqIXryqa0rXTaOvEND1JTa0ITi8pcw
-         CgIZEiD/7x+epfDF5TyrQ8sSAtdDNY+uQHYslFjj8cwCRd8cpBaONiD4G17sm68ENqdX
-         FUUv6I0Cg0hSx7WP+Y3rT5srQboLqfO46bGH+gQsIBLSvLCGD71yev9Ir5GVLA650kKW
-         VjlZJ/FZhwDNTW2cygiSOHp4eMCNo7moPF4qNxY7JEgzUnQKLrNLfZoxXf+YX8/jQXnO
-         wuNA==
-X-Gm-Message-State: AOAM530ra8wOSE941s2SSYqDSfBFQL9f+THZUoXQ8J0Ai0AR4LrRXj7j
-	d56X6rRN2T7jnbUWortmAC2IGhrhlRKHziec
-X-Google-Smtp-Source: ABdhPJxdlHm3mZAZaQQiMhzlm73r6W3xrFjPdhq/aRgWYj85vTJnrty6cRB/n3RybVZ3ZsFE84NT4A==
-X-Received: by 2002:a37:8544:: with SMTP id h65mr5846827qkd.200.1614890705536;
-        Thu, 04 Mar 2021 12:45:05 -0800 (PST)
-Return-Path: <fabio.berton@ossystems.com.br>
-Received: from pikachu.lab.ossystems (200-180-244-11.user3p.brasiltelecom.net.br. [200.180.244.11])
-        by smtp.gmail.com with ESMTPSA id u13sm463862qtq.87.2021.03.04.12.45.03
-        for <openembedded-devel@lists.openembedded.org>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=nCh86RvAUCEChvCm7NsA3U3rv5F9PTh6vGTZ/q2gLF4=;
+        b=R2Qnjsi8edHHjapPphP8L1v2GIqxHlgXkJoymnhPdjeAUzEgUQUVA+cNQxx+ELGifq
+         Ttqzki8IibdNTwc+iiW3nPr3NBM46flJLSQJ7BesYmphtPUvQ8daK/f1/jPV6J2asWas
+         9cBbq6HNV9LtAcl+56lf7prpLqLY/1GLLBV/kaThkx7Ma1foexx2p5SOsX9HTJGVWxSQ
+         nN1V/UOI8TJNs0hk+6a4gC/7u0YFZkqbu094E+pkoLc3+EDAWING3dDrI8dFhQjPdt9Y
+         P0bCMWzNj94YafKSdyJAuYMJPGgYMEIm3qbBtnsQalHergAfKsPsbDEALDEaQd5nd/Bi
+         GG/g==
+X-Gm-Message-State: AOAM533/r6Fej940Wr76tlWGoa94x17vUO8FVQB3jF3a6tdA4/YTl9x4
+	E/Vb6GeUirDlWeuus8ZRyautKOyEn9D9UQ==
+X-Google-Smtp-Source: ABdhPJwanMLyOqnbaU3CIfLcUFxnHfqo8Nz1tAaymIKWrlZqqRoHySclWIY9kvBgM4Axy/nOTwQ6NA==
+X-Received: by 2002:a7b:cf18:: with SMTP id l24mr129403wmg.182.1614936840576;
+        Fri, 05 Mar 2021 01:34:00 -0800 (PST)
+Return-Path: <peron.clem@gmail.com>
+Received: from clement-Latitude-7490.numericable.fr (245.241.245.213.rev.sfr.net. [213.245.241.245])
+        by smtp.gmail.com with ESMTPSA id x25sm3751631wmj.14.2021.03.05.01.34.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 04 Mar 2021 12:45:04 -0800 (PST)
-From: "Fabio Berton" <fabio.berton@ossystems.com.br>
+        Fri, 05 Mar 2021 01:34:00 -0800 (PST)
+From: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH] python3-requests: Support idna version 3.1
-Date: Thu,  4 Mar 2021 17:45:01 -0300
-Message-Id: <20210304204501.3467547-1-fabio.berton@ossystems.com.br>
-X-Mailer: git-send-email 2.29.2
+Cc: Anatol Belski <anbelski@linux.microsoft.com>,
+	Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>,
+	=?UTF-8?q?Cl=C3=A9ment=20P=C3=A9ron?= <peron.clem@gmail.com>
+Subject: [PATCH] grpc: move grpc plugins to a new grpc-compiler package
+Date: Fri,  5 Mar 2021 10:33:57 +0100
+Message-Id: <20210305093357.1450900-1-peron.clem@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Organization: O.S. Systems Software LTDA.
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Change idna required version to use python3-idna recipe that currently
-is on version 3.1.
+Like it's done for protobuf and flatbuffers move the binaries produce
+by gRPC to a grpc-compiler package.
 
-Without this change python-request doesn't work as the idna version
-doesn't match the required versions. When bump python-request recipe,
-verify if the upstream project bumped the idna version and drop this
-patch.
+This is more explicit and keep coherency with protobuf and flatbuffers.
 
-As this recipe was tested with python3-idna_3.1 don't allow higher
-versions.
-
-Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+Signed-off-by: Clément Péron <peron.clem@gmail.com>
 ---
- .../setup.py-Support-idna-version-3.1.patch   | 40 +++++++++++++++++++
- .../python/python3-requests_2.25.1.bb         |  2 +
- 2 files changed, 42 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-requests/setup.py-Support-idna-version-3.1.patch
+ meta-oe/recipes-devtools/grpc/grpc_1.36.1.bb | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-requests/setup.py-Support-idna-version-3.1.patch b/meta-python/recipes-devtools/python/python3-requests/setup.py-Support-idna-version-3.1.patch
-new file mode 100644
-index 000000000..26332249d
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-requests/setup.py-Support-idna-version-3.1.patch
-@@ -0,0 +1,40 @@
-+From fc45beed40a86c8fc38fc430765c1c5d2c9961c2 Mon Sep 17 00:00:00 2001
-+From: Fabio Berton <fabio.berton@ossystems.com.br>
-+Date: Thu, 4 Mar 2021 09:26:48 -0300
-+Subject: [PATCH] setup.py: Support idna version 3.1
-+Organization: O.S. Systems Software LTDA.
-+
-+Change idna required version to use python3-idna recipe that currently
-+is on version 3.1.
-+
-+Without this change python-request doesn't work as the idna version
-+doesn't match the required versions. When bump python-request recipe,
-+verify if the upstream project bumped the idna version and drop this
-+patch.
-+
-+As this recipe was tested with python3-idna_3.1 don't allow higher
-+versions.
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
-+---
-+ setup.py | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/setup.py b/setup.py
-+index 7ba4b2a2..9d3b973e 100755
-+--- a/setup.py
-++++ b/setup.py
-+@@ -43,7 +43,7 @@ packages = ['requests']
-+ 
-+ requires = [
-+     'chardet>=3.0.2,<5',
-+-    'idna>=2.5,<3',
-++    'idna>=2.5,<3.2',
-+     'urllib3>=1.21.1,<1.27',
-+     'certifi>=2017.4.17'
-+ 
-+-- 
-+2.30.1
-+
-diff --git a/meta-python/recipes-devtools/python/python3-requests_2.25.1.bb b/meta-python/recipes-devtools/python/python3-requests_2.25.1.bb
-index 6af836543..cea8fd517 100644
---- a/meta-python/recipes-devtools/python/python3-requests_2.25.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-requests_2.25.1.bb
-@@ -3,6 +3,8 @@ HOMEPAGE = "http://python-requests.org"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
+diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.36.1.bb b/meta-oe/recipes-devtools/grpc/grpc_1.36.1.bb
+index 358ec80e8770..eb137bef52ce 100644
+--- a/meta-oe/recipes-devtools/grpc/grpc_1.36.1.bb
++++ b/meta-oe/recipes-devtools/grpc/grpc_1.36.1.bb
+@@ -10,6 +10,11 @@ DEPENDS = "c-ares protobuf protobuf-native protobuf-c protobuf-c-native openssl
+ DEPENDS_append_class-target = " googletest grpc-native "
+ DEPENDS_append_class-nativesdk = " grpc-native "
  
-+SRC_URI += "file://setup.py-Support-idna-version-3.1.patch"
++PACKAGE_BEFORE_PN = "${PN}-compiler"
 +
- SRC_URI[sha256sum] = "27973dd4a904a4f13b263a19c866c13b92a39ed1c964655f025f3f8d3d75b804"
++RDEPENDS_${PN}-compiler = "${PN}"
++RDEPENDS_${PN}-dev += "${PN}-compiler"
++
+ S = "${WORKDIR}/git"
+ SRCREV_grpc = "3b7f86e3516746c5f0db1947e0d65e94159bcb12"
+ BRANCH = "v1.36.x"
+@@ -72,4 +77,4 @@ BBCLASSEXTEND = "native nativesdk"
  
- inherit pypi setuptools3
+ SYSROOT_DIRS_BLACKLIST_append_class-target = " ${baselib}/cmake/grpc"
+ 
+-FILES_${PN}-dev += "${bindir}"
++FILES_${PN}-compiler += "${bindir}"
 -- 
-2.29.2
+2.25.1
 
