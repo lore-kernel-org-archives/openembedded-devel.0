@@ -1,84 +1,100 @@
 Received: from wout3-smtp.messagingengine.com (wout3-smtp.messagingengine.com [64.147.123.19])
- by mx.groups.io with SMTP id smtpd.web10.14028.1614960194117639327
+ by mx.groups.io with SMTP id smtpd.web12.14127.1614960313857465722
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Mar 2021 08:03:14 -0800
+ Fri, 05 Mar 2021 08:05:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gherzan.com header.s=fm1 header.b=pHQi2/cx;
+ dkim=pass header.i=@gherzan.com header.s=fm1 header.b=A/WZy7xD;
  spf=pass (domain: gherzan.com, ip: 64.147.123.19, mailfrom: andrei@gherzan.com)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.42])
-	by mailout.west.internal (Postfix) with ESMTP id 806012A37;
-	Fri,  5 Mar 2021 11:03:13 -0500 (EST)
-Received: from mailfrontend1 ([10.202.2.162])
-  by compute2.internal (MEProxy); Fri, 05 Mar 2021 11:03:13 -0500
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+	by mailout.west.internal (Postfix) with ESMTP id AA13C2A38;
+	Fri,  5 Mar 2021 11:05:12 -0500 (EST)
+Received: from imap4 ([10.202.2.54])
+  by compute3.internal (MEProxy); Fri, 05 Mar 2021 11:05:12 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gherzan.com; h=
-	from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding; s=fm1; bh=Na46qRNHa94eT
-	6nWAWpHHW3KXs+gwjKZh9ypWy7dYxY=; b=pHQi2/cxRAqNb+HjvX4LtqNG9c6lc
-	SkO+ft/NiJWv+6lr0+RZgnx8jF3sbx5yvJWgyO4bCsDMsCO2DIz+sRp9QqHXIA6Q
-	pTvqYUpLXiyX3Z34ZX4znPbUBDWG6OJuNo9jXhWqgCiT9soKVjTYWYCn7YMeNHfO
-	o2TZgm8TaoCf5w6teRGYKPk2Qh9nyAjsTGvKyeaKPqDgLqSDZVXS5kVyI3nHoVTo
-	szawVwCZ3Qs83PKFeMPSL5TZUD8wEhmfzjeHEaqirN8XhKI+thRw4Psw7jjNdReC
-	DSU75N7wp3KkKv1gX6WpNhGDopIDk0UyIZXrjf5rGUE2yS7RdDOX08Opg==
+	mime-version:message-id:in-reply-to:references:date:from:to:cc
+	:subject:content-type; s=fm1; bh=/DsXpcH1LKDmyL5+9IDOF1wLyDNm2Lw
+	MQ+hZgfh5eXs=; b=A/WZy7xDbIYJdE6DIqUdi44G6hIqyTCQmXYapVo+t7JpYKW
+	hTLiYr3RfeEVtWhiVEkeuJpLrvvuVxaQnl15NJvi15aPHS+MtmzVhzC6vOrAMpYn
+	VbPQZ59an268QJvtkfFyiE2E38CvHwbfKrDiipVhZgKXHW5BpYhXlNbYe2uoo5s7
+	fvkgzEM1UZO27J/rKRQrAamRScYm5Y/bjWJNtGnVOvHXOxYgHbdax/7s2hG4ggPK
+	d2mI7S5CSWD2scNhcJfudYapCGRs8VdHEWBl8wx3kpR/eo1UsF6FGTZG0kc+YzSl
+	sbXcxX+ZhzlVLxlLFI5MC7TLckSJMlXx8YkaW8w==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-transfer-encoding:date:from
-	:in-reply-to:message-id:mime-version:references:subject:to
-	:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm2; bh=Na46qRNHa94eT6nWAWpHHW3KXs+gwjKZh9ypWy7dYxY=; b=sXp1Y22y
-	TuHVWps40oFfw8c5RXxorinbPNVd2zohXr9A3ATgupCfTCqrJQ1JH4ClPFxKwpNF
-	lUJLuePR7EwGWon05R/cBrCl15YyYUYTLUIf2FggN1wHtNWQ2iTY9CawZxBMrIwY
-	E8ByYdg1FQpJGgGO+TVyCKy+qygdHPDXIuf4z8BslZFDO3eBL2u2zA9YALCgbmHK
-	Zt/RzpUSJEZh4555H06LjEf9pCfW+8U0FVoN1ZAccJxZmo2jFBla0TwoyHbN+Nhj
-	5RnmY0VRfcr6amKhhzp8hDnG472PfOBVy8CKSUb7D0tTr36AhQ5m49ovS6RiD0gb
-	DTdqg/PtCBhM1g==
-X-ME-Sender: <xms:QFZCYONyqUUaGAjXGLx62ZYzwADUhvJ_KuIE502YqyORhPTLhB77gQ>
-    <xme:QFZCYD-d0AyKCKywMCJUqTZeO_JpPKWwzVf05IzOSGAlIzoAh9ez0bJSIYtyd8MtI
-    VqA6Oasf0rWa2Y8pCA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledruddtiedgjeejucetufdoteggodetrfdotf
+	messagingengine.com; h=cc:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=/DsXpc
+	H1LKDmyL5+9IDOF1wLyDNm2LwMQ+hZgfh5eXs=; b=vx926YZzrJNIlIAr41nBqL
+	TUPR7coL0x8ggfaJ4phhIqrwKaVoqHXgkibRUJ0qGXT8lv2wrQDlmoEM95R5b7Rl
+	AjJEP2TetztNaT8mGPfuM3aCHhKXECCS+EEihCOj9aqLLCyc0RyIXsIBlUHnjRdU
+	fntOx3GCrPco7GFTaaULWRlvJ5pDLcuf97A/Nyaui38wpu6xM8L3y69XjwcZUIFM
+	3AtqlRxN44Rw+DserjbMrHnAXN6DkJJha7fsirApZNueVTi+bFZp4AzCiX8ibeUq
+	a5d6w1FZAmgCzdwLEkQZVXtY+3Nii4J9DwJ6wtIuK5/4rmInqvsPG65uf5LsRvtA
+	==
+X-ME-Sender: <xms:t1ZCYHx7P8bSxZ7LJWXdkp0rYbSZfZkbidrOdajnWsD79cXlvYmZug>
+    <xme:t1ZCYPQXPxgmHn0WrUGB8lQcVs_fDSi0felnUgt39jRxIsOVBNHRHZf92tXxRaKi-
+    WSp83c0mtRj2vGhdxs>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledruddtiedgjeekucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhephffvufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpeetnhgurhgv
-    ihcuifhhvghriigrnhcuoegrnhgurhgvihesghhhvghriigrnhdrtghomheqnecuggftrf
-    grthhtvghrnhepleeliefhvedvvdejgfeuueekgeffieevhffgleduhfdugeegffdutdel
-    feeugeeunecuffhomhgrihhnpehgihhthhhusgdrtghomhenucfkphepuddtledrudegie
-    drfeejrddukedvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhf
-    rhhomheprghnughrvghisehghhgvrhiirghnrdgtohhm
-X-ME-Proxy: <xmx:QFZCYKSbF-jQkocIfmCy7me_uip9V9jB6RXs1UOhoazwQjtByXxggA>
-    <xmx:QFZCYNmqMpT5aOdwE-XmNGIu4UxoqFMya_QJJgrKfxGfASSpgQ4VMw>
-    <xmx:QFZCYCTqXvpVdQHsfJe3kRv-MXyVEy7dBFet2h1c1AkMObvEp5GjpQ>
-    <xmx:QFZCYK0sHbfzGHboANZ-whtIRHKDnAGdyxDzMlmzKznPZEdYEhnJOA>
-Received: from qwirkle.internal (host109-146-37-182.range109-146.btcentralplus.com [109.146.37.182])
-	by mail.messagingengine.com (Postfix) with ESMTPA id 34B7D240064;
-	Fri,  5 Mar 2021 11:03:12 -0500 (EST)
+    cujfgurhepofgfggfkjghffffhvffutgesrgdtreerreerjeenucfhrhhomhepfdetnhgu
+    rhgvihcuifhhvghriigrnhdfuceorghnughrvghisehghhgvrhiirghnrdgtohhmqeenuc
+    ggtffrrghtthgvrhhnpeeufffhtdehudekffelhfdugffhleetudfghfejfeekvdfhgeet
+    keeuheevvefhueenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfh
+    hrohhmpegrnhgurhgvihesghhhvghriigrnhdrtghomh
+X-ME-Proxy: <xmx:t1ZCYBXDsqaa404SdByIbUVn_p63Xvmq-dAWYt0DYaGab_Q9OgukRQ>
+    <xmx:t1ZCYBhaoedDfW-XQvRJxwMtAIEwosBc7rEVXAejt9niT2AE_OzrJg>
+    <xmx:t1ZCYJCwCLE1UPQHBnexOkI_3cPMYPo59UD1LQfUkg4To_AVtsTSoA>
+    <xmx:uFZCYMpNi-lMOBSJfbpE2TAJ_6hHJuIibr9ktyKYR0iGvKQmQLyjXQ>
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+	id 8EBC5160060; Fri,  5 Mar 2021 11:05:11 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.5.0-alpha0-206-g078a48fda5-fm-20210226.001-g078a48fd
+Mime-Version: 1.0
+Message-Id: <b6a0e026-da05-4c5b-b768-a3aaf96a36d1@www.fastmail.com>
+In-Reply-To: <074a21a4-17bf-6024-d3a7-d9d44c43cc95@windriver.com>
+References: <20210303133241.29781-1-andrei@gherzan.com>
+ <20210303133241.29781-3-andrei@gherzan.com>
+ <074a21a4-17bf-6024-d3a7-d9d44c43cc95@windriver.com>
+Date: Fri, 05 Mar 2021 16:04:53 +0000
 From: "Andrei Gherzan" <andrei@gherzan.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: andrei@gherzan.com,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH v3 6/6] python3-mccabe: Fix HOMEPAGE
-Date: Fri,  5 Mar 2021 16:02:56 +0000
-Message-Id: <20210305160256.3333334-6-andrei@gherzan.com>
-X-Mailer: git-send-email 2.30.1
-In-Reply-To: <20210305160256.3333334-1-andrei@gherzan.com>
-References: <20210305160256.3333334-1-andrei@gherzan.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+To: "Trevor Gamblin" <trevor.gamblin@windriver.com>,
+ openembedded <openembedded-devel@lists.openembedded.org>
+Cc: "Andrei Gherzan" <andrei.gherzan@huawei.com>
+Subject: Re: [oe] [meta-python][PATCH v2 3/6] python3-aiohue: Integrate the hue control python module
+Content-Type: multipart/alternative;
+ boundary=87c9a3e886514077b9dd0b0251d3986b
 
-Signed-off-by: Andrei Gherzan <andrei@gherzan.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+--87c9a3e886514077b9dd0b0251d3986b
+Content-Type: text/plain
+
+On Fri, 5 Mar 2021, at 14:21, Trevor Gamblin wrote:
+> 
+
+> On 2021-03-03 8:32 a.m., Andrei Gherzan wrote:
+>> [Please note: This e-mail is from an EXTERNAL e-mail address]
+
+From: Andrei Gherzan <andrei.gherzan@huawei.com>
+
+Signed-off-by: Andrei Gherzan <andrei.gherzan@huawei.com>
+> The path here looks off. The recipe is at recipes-devtools/python/python3-aiohue_2.2.0.bb when it should be at meta-python/recipes-devtools/python/python3-aiohue_2.2.0.bb. Can you submit a v3 with the path fixed? Please check any other recipes you have added.
+
+For a second I was just confused of how could this have happened. But the explanation was simple (git am from another layer that doesn't have multiple layers at its root). Send v3.
+
 ---
- meta-python/recipes-devtools/python/python3-mccabe_0.6.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Andrei
 
-diff --git a/meta-python/recipes-devtools/python/python3-mccabe_0.6.1.bb b/meta-python/recipes-devtools/python/python3-mccabe_0.6.1.bb
-index 63a9e35ac..b366f0430 100644
---- a/meta-python/recipes-devtools/python/python3-mccabe_0.6.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-mccabe_0.6.1.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "McCabe checker, plugin for flake8"
--HOMEPAGE = "https://github.com/dreamhost/cliff"
-+HOMEPAGE = "https://github.com/PyCQA/mccabe"
- SECTION = "devel/python"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a489dc62bacbdad3335c0f160a974f0f"
--- 
-2.30.1
+--87c9a3e886514077b9dd0b0251d3986b
+Content-Type: text/html
 
+<!DOCTYPE html><html><head><title></title><style type="text/css">p.MsoNormal,p.MsoNoSpacing{margin:0}</style></head><body><div>On Fri, 5 Mar 2021, at 14:21, Trevor Gamblin wrote:<br></div><blockquote type="cite" id="qt" style=""><p><br></p><div class="qt-moz-cite-prefix">On 2021-03-03 8:32 a.m., Andrei Gherzan
+      wrote:<br></div><blockquote type="cite" cite="mid:20210303133241.29781-3-andrei@gherzan.com"><pre class="qt-moz-quote-pre">[Please note: This e-mail is from an EXTERNAL e-mail address]
+
+From: Andrei Gherzan <a class="qt-moz-txt-link-rfc2396E" href="mailto:andrei.gherzan@huawei.com">&lt;andrei.gherzan@huawei.com&gt;</a>
+
+Signed-off-by: Andrei Gherzan <a class="qt-moz-txt-link-rfc2396E" href="mailto:andrei.gherzan@huawei.com">&lt;andrei.gherzan@huawei.com&gt;</a><br></pre></blockquote><p>The path here looks off. The recipe is at
+      recipes-devtools/python/python3-aiohue_2.2.0.bb when it should be
+      at meta-python/recipes-devtools/python/python3-aiohue_2.2.0.bb.
+      Can you submit a v3 with the path fixed? Please check any other
+      recipes you have added.<br></p></blockquote><div>For a second I was just confused of how could this have happened. But the explanation was simple (git am from another layer that doesn't have multiple layers at its root). Send v3.<br></div><div><br></div><div>---<br></div><div>Andrei<br></div></body></html>
+
+--87c9a3e886514077b9dd0b0251d3986b--
