@@ -1,100 +1,96 @@
-Received: from wout3-smtp.messagingengine.com (wout3-smtp.messagingengine.com [64.147.123.19])
- by mx.groups.io with SMTP id smtpd.web12.14127.1614960313857465722
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.web11.14806.1614962789741404109
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Mar 2021 08:05:13 -0800
+ Fri, 05 Mar 2021 08:46:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gherzan.com header.s=fm1 header.b=A/WZy7xD;
- spf=pass (domain: gherzan.com, ip: 64.147.123.19, mailfrom: andrei@gherzan.com)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
-	by mailout.west.internal (Postfix) with ESMTP id AA13C2A38;
-	Fri,  5 Mar 2021 11:05:12 -0500 (EST)
-Received: from imap4 ([10.202.2.54])
-  by compute3.internal (MEProxy); Fri, 05 Mar 2021 11:05:12 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gherzan.com; h=
-	mime-version:message-id:in-reply-to:references:date:from:to:cc
-	:subject:content-type; s=fm1; bh=/DsXpcH1LKDmyL5+9IDOF1wLyDNm2Lw
-	MQ+hZgfh5eXs=; b=A/WZy7xDbIYJdE6DIqUdi44G6hIqyTCQmXYapVo+t7JpYKW
-	hTLiYr3RfeEVtWhiVEkeuJpLrvvuVxaQnl15NJvi15aPHS+MtmzVhzC6vOrAMpYn
-	VbPQZ59an268QJvtkfFyiE2E38CvHwbfKrDiipVhZgKXHW5BpYhXlNbYe2uoo5s7
-	fvkgzEM1UZO27J/rKRQrAamRScYm5Y/bjWJNtGnVOvHXOxYgHbdax/7s2hG4ggPK
-	d2mI7S5CSWD2scNhcJfudYapCGRs8VdHEWBl8wx3kpR/eo1UsF6FGTZG0kc+YzSl
-	sbXcxX+ZhzlVLxlLFI5MC7TLckSJMlXx8YkaW8w==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to:x-me-proxy
-	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=/DsXpc
-	H1LKDmyL5+9IDOF1wLyDNm2LwMQ+hZgfh5eXs=; b=vx926YZzrJNIlIAr41nBqL
-	TUPR7coL0x8ggfaJ4phhIqrwKaVoqHXgkibRUJ0qGXT8lv2wrQDlmoEM95R5b7Rl
-	AjJEP2TetztNaT8mGPfuM3aCHhKXECCS+EEihCOj9aqLLCyc0RyIXsIBlUHnjRdU
-	fntOx3GCrPco7GFTaaULWRlvJ5pDLcuf97A/Nyaui38wpu6xM8L3y69XjwcZUIFM
-	3AtqlRxN44Rw+DserjbMrHnAXN6DkJJha7fsirApZNueVTi+bFZp4AzCiX8ibeUq
-	a5d6w1FZAmgCzdwLEkQZVXtY+3Nii4J9DwJ6wtIuK5/4rmInqvsPG65uf5LsRvtA
-	==
-X-ME-Sender: <xms:t1ZCYHx7P8bSxZ7LJWXdkp0rYbSZfZkbidrOdajnWsD79cXlvYmZug>
-    <xme:t1ZCYPQXPxgmHn0WrUGB8lQcVs_fDSi0felnUgt39jRxIsOVBNHRHZf92tXxRaKi-
-    WSp83c0mtRj2vGhdxs>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledruddtiedgjeekucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhepofgfggfkjghffffhvffutgesrgdtreerreerjeenucfhrhhomhepfdetnhgu
-    rhgvihcuifhhvghriigrnhdfuceorghnughrvghisehghhgvrhiirghnrdgtohhmqeenuc
-    ggtffrrghtthgvrhhnpeeufffhtdehudekffelhfdugffhleetudfghfejfeekvdfhgeet
-    keeuheevvefhueenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfh
-    hrohhmpegrnhgurhgvihesghhhvghriigrnhdrtghomh
-X-ME-Proxy: <xmx:t1ZCYBXDsqaa404SdByIbUVn_p63Xvmq-dAWYt0DYaGab_Q9OgukRQ>
-    <xmx:t1ZCYBhaoedDfW-XQvRJxwMtAIEwosBc7rEVXAejt9niT2AE_OzrJg>
-    <xmx:t1ZCYJCwCLE1UPQHBnexOkI_3cPMYPo59UD1LQfUkg4To_AVtsTSoA>
-    <xmx:uFZCYMpNi-lMOBSJfbpE2TAJ_6hHJuIibr9ktyKYR0iGvKQmQLyjXQ>
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
-	id 8EBC5160060; Fri,  5 Mar 2021 11:05:11 -0500 (EST)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.5.0-alpha0-206-g078a48fda5-fm-20210226.001-g078a48fd
-Mime-Version: 1.0
-Message-Id: <b6a0e026-da05-4c5b-b768-a3aaf96a36d1@www.fastmail.com>
-In-Reply-To: <074a21a4-17bf-6024-d3a7-d9d44c43cc95@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=gwZnSrQQ;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id d11so1677478plo.8
+        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Mar 2021 08:46:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=ByqKHm9FXfjjy4z427LSPgxilXTNEPxB3dXuPdfQrGQ=;
+        b=gwZnSrQQcilKCj9Oh2HBGXLj5OwAlgFZN9YjenSwJDA4HbZeqvyMZlYmGYWL4WQ0cr
+         /8M3yoR5ESgz3z64Hbt0B5mO2X74vJpYoJukBFyIbIbP/O0J0tGpzZxKpmP15WKmkGTO
+         zV/XJ0eLSPrZ+AFEuIjqyojESEMAN72vlIlhxAwK/frx4xPPYnQjikRRAQGWojTKl8mD
+         91D1NAhDPKFBcf6eDaom87IwHxmpVBpcPLEO2xr+5cOjfwsWO/y5/KxXJn9UMoS8QxMZ
+         F1c+WUF6FCsJfLkAuTr24nvsZDILYT7jShfEwqdUGm/WNF8vGV31gEj7+IhSKQL8UR4P
+         8iBw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=ByqKHm9FXfjjy4z427LSPgxilXTNEPxB3dXuPdfQrGQ=;
+        b=tvpupSd+tK0IszUWt2kWGVnmGoQ5CXQEFqg34HmEy2+BRVGMpHJzWK9JwUFVvyDW6I
+         4OiXxKosMc+URuyr82rEOOUuxHuGkh1nJ6qWCd/HdShD9/wfHYzxDmb1OHuar+8TJWDI
+         jGv0RmLuSyE3aczkEMaHEGInmYIFZCbfqJA12ujycwo8+tcRwXRCbjE83BrQtVyrBDu9
+         4ih475EBVp4+aPtau/OCncmitFd3GkSwOOp+gPbIDPhI9PGu+368MWVqCYi/8VOLid8Q
+         /jtlaMpiL8ubJfjwDi+WUZbWv4Lk2puZl/fUw0UJtGM5nUQ89+Cyt8e/9n7VlgoVurfg
+         aMZw==
+X-Gm-Message-State: AOAM5336whujU4aBM0PMGUKZrmYfVYo8VaRd+qXfrj6YdAeLGTQeHUYa
+	ntVg9Rtv0TCNCFfUox41mjA=
+X-Google-Smtp-Source: ABdhPJwLKZxe/EYQR0UIl+/SY9saWNG/ZEv8oOHwE1ZsIsIJPUC3U/t6hT80TkbFnHE1GXYz4RLoXA==
+X-Received: by 2002:a17:90b:a0d:: with SMTP id gg13mr10842218pjb.29.1614962788954;
+        Fri, 05 Mar 2021 08:46:28 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:a0f0::b3bf? ([2601:646:9200:a0f0::b3bf])
+        by smtp.gmail.com with ESMTPSA id 138sm3062255pfv.192.2021.03.05.08.46.28
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 05 Mar 2021 08:46:28 -0800 (PST)
+Subject: Re: [oe] [meta-python][PATCH v2 3/6] python3-aiohue: Integrate the hue control python module
+To: Andrei Gherzan <andrei@gherzan.com>,
+ Trevor Gamblin <trevor.gamblin@windriver.com>,
+ openembedded <openembedded-devel@lists.openembedded.org>
+Cc: Andrei Gherzan <andrei.gherzan@huawei.com>
 References: <20210303133241.29781-1-andrei@gherzan.com>
  <20210303133241.29781-3-andrei@gherzan.com>
  <074a21a4-17bf-6024-d3a7-d9d44c43cc95@windriver.com>
-Date: Fri, 05 Mar 2021 16:04:53 +0000
-From: "Andrei Gherzan" <andrei@gherzan.com>
-To: "Trevor Gamblin" <trevor.gamblin@windriver.com>,
- openembedded <openembedded-devel@lists.openembedded.org>
-Cc: "Andrei Gherzan" <andrei.gherzan@huawei.com>
-Subject: Re: [oe] [meta-python][PATCH v2 3/6] python3-aiohue: Integrate the hue control python module
-Content-Type: multipart/alternative;
- boundary=87c9a3e886514077b9dd0b0251d3986b
+ <b6a0e026-da05-4c5b-b768-a3aaf96a36d1@www.fastmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Message-ID: <6550b85f-4da4-d245-0ce0-3fb13866b143@gmail.com>
+Date: Fri, 5 Mar 2021 08:46:27 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.0
+MIME-Version: 1.0
+In-Reply-To: <b6a0e026-da05-4c5b-b768-a3aaf96a36d1@www.fastmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
---87c9a3e886514077b9dd0b0251d3986b
-Content-Type: text/plain
 
-On Fri, 5 Mar 2021, at 14:21, Trevor Gamblin wrote:
+
+On 3/5/21 8:04 AM, Andrei Gherzan wrote:
+> On Fri, 5 Mar 2021, at 14:21, Trevor Gamblin wrote:
+>>
+>>
+>> On 2021-03-03 8:32 a.m., Andrei Gherzan wrote:
+>>> [Please note: This e-mail is from an EXTERNAL e-mail address]
+>>>
+>>> From: Andrei Gherzan<andrei.gherzan@huawei.com>  <mailto:andrei.gherzan@huawei.com>
+>>>
+>>> Signed-off-by: Andrei Gherzan<andrei.gherzan@huawei.com>  <mailto:andrei.gherzan@huawei.com>
+>>
+>> The path here looks off. The recipe is at 
+>> recipes-devtools/python/python3-aiohue_2.2.0.bb when it should be at 
+>> meta-python/recipes-devtools/python/python3-aiohue_2.2.0.bb. Can you 
+>> submit a v3 with the path fixed? Please check any other recipes you 
+>> have added.
+>>
+> For a second I was just confused of how could this have happened. But 
+> the explanation was simple (git am from another layer that doesn't have 
+> multiple layers at its root). Send v3.
+
+yeah its a problem with monolithic trees where layers are fudged. 
+something like git submodules can give you best of both worlds where you 
+have monolithic view but preserves layers as well.
+
 > 
-
-> On 2021-03-03 8:32 a.m., Andrei Gherzan wrote:
->> [Please note: This e-mail is from an EXTERNAL e-mail address]
-
-From: Andrei Gherzan <andrei.gherzan@huawei.com>
-
-Signed-off-by: Andrei Gherzan <andrei.gherzan@huawei.com>
-> The path here looks off. The recipe is at recipes-devtools/python/python3-aiohue_2.2.0.bb when it should be at meta-python/recipes-devtools/python/python3-aiohue_2.2.0.bb. Can you submit a v3 with the path fixed? Please check any other recipes you have added.
-
-For a second I was just confused of how could this have happened. But the explanation was simple (git am from another layer that doesn't have multiple layers at its root). Send v3.
-
----
-Andrei
-
---87c9a3e886514077b9dd0b0251d3986b
-Content-Type: text/html
-
-<!DOCTYPE html><html><head><title></title><style type="text/css">p.MsoNormal,p.MsoNoSpacing{margin:0}</style></head><body><div>On Fri, 5 Mar 2021, at 14:21, Trevor Gamblin wrote:<br></div><blockquote type="cite" id="qt" style=""><p><br></p><div class="qt-moz-cite-prefix">On 2021-03-03 8:32 a.m., Andrei Gherzan
-      wrote:<br></div><blockquote type="cite" cite="mid:20210303133241.29781-3-andrei@gherzan.com"><pre class="qt-moz-quote-pre">[Please note: This e-mail is from an EXTERNAL e-mail address]
-
-From: Andrei Gherzan <a class="qt-moz-txt-link-rfc2396E" href="mailto:andrei.gherzan@huawei.com">&lt;andrei.gherzan@huawei.com&gt;</a>
-
-Signed-off-by: Andrei Gherzan <a class="qt-moz-txt-link-rfc2396E" href="mailto:andrei.gherzan@huawei.com">&lt;andrei.gherzan@huawei.com&gt;</a><br></pre></blockquote><p>The path here looks off. The recipe is at
-      recipes-devtools/python/python3-aiohue_2.2.0.bb when it should be
-      at meta-python/recipes-devtools/python/python3-aiohue_2.2.0.bb.
-      Can you submit a v3 with the path fixed? Please check any other
-      recipes you have added.<br></p></blockquote><div>For a second I was just confused of how could this have happened. But the explanation was simple (git am from another layer that doesn't have multiple layers at its root). Send v3.<br></div><div><br></div><div>---<br></div><div>Andrei<br></div></body></html>
-
---87c9a3e886514077b9dd0b0251d3986b--
+> ---
+> Andrei
+> 
+> 
+> 
+> 
