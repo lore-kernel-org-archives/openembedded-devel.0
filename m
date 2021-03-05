@@ -1,115 +1,91 @@
-Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
- by mx.groups.io with SMTP id smtpd.web09.1577.1614975758754262636
+Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com [209.85.222.177])
+ by mx.groups.io with SMTP id smtpd.web12.1608.1614976184202198242
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Mar 2021 12:22:38 -0800
+ Fri, 05 Mar 2021 12:29:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=pGhz39Q8;
- spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f172.google.com with SMTP id h4so2121472pgf.13
-        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Mar 2021 12:22:38 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=BROyMmFL;
+ spf=pass (domain: gmail.com, ip: 209.85.222.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f177.google.com with SMTP id z128so3281743qkc.12
+        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Mar 2021 12:29:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=kp4/aiasKf91JtEsRnf7NTIA023sP+2HY/U5iavcLXs=;
-        b=pGhz39Q84DipwMXpUPM94r3cmEsZoq23rmzLyHQtgKOe8wqY6BXfL6v5a9irGQ5v/X
-         8UpRNH9Td52AF3Unn5kGpGPQ0cJGIo4Nl5TuFWMRsLQvcv5Df0HOzBO8j3pluw9tR/g7
-         5dFq58+T8M3egki92rKKlJenZixO80GAxfZ2q7vZ7F3HJu3WPr2jUG5Yziy5nR9OPFyx
-         s4lpt/QZ45htc52IYxV9994bnFYYOhBMU4qH3Cx8zyOeNTCYzoovdv5yrDp8+krRcCXL
-         kLb3HIATg78wIRcxQIMx6Jh40c8XSgmvhp3dqPLC18LgruKqarEkgHBHLuMicK0x3s8J
-         LvLQ==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=AaP+pmrKye5xXnJ11k1ckeTE0uI1/4sU9wa621ulfxw=;
+        b=BROyMmFLclmNrnQ8iGvG/KLhGR5ozc9ssnHF2jMvvGCP6pxWzaC0NzACd1HJX90U6j
+         4ZJZ6SSLh6FCULZnveI7TFW7ZXc4vVvJNuEhyDmmHI7bm+9KGQvcbti0zbvR3IJr73ou
+         luMxs8ej/U+lmDHwoh8vqeRQeKEJh1W2FYuRvycKz+jUgfBy4U11MnXGF3KvX49HJapt
+         PostZ/1APBN1GYH3xspTStgGtEcB2BsrlFCW0BmTm8qUdKdYWbUawx4sYP+tslz2FDCP
+         NTbJP570e06DxN0gkgzlcr1/5bi/Wva3a13GcnLZ1BeZtyKRk8jeFuK5XBv1j4dmF/rD
+         63+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=kp4/aiasKf91JtEsRnf7NTIA023sP+2HY/U5iavcLXs=;
-        b=oxdvqYyEYudon6AjKJevL3KxB/vcysq15FhIIplSfwEPthsc7DTdwO1Dpoe+2sJvri
-         RBP9cMgkJhqnPr/Dz0gWmQh7U4wrzGGnOGtMABuME5iJ9HIDmeqPbFi5jHyT2lztdMJK
-         ZUw8nxbY54W6I6Pu2XM0YHzbblLhf/2Vu7dymvfUgrzQUOpY/4S6zxqBhoOcqeKaW9rS
-         vLo7V7jJYri1cMajhqHCsqKYySVHc5Cqvs7B0B8ndWC064gRdNhCLBi282mc77h5hbEQ
-         oQl4yq/OO3zU77PUBQp0Jv9Urc26pCFpUKplFu3lVSE3hBu52qun63DytR6fSZi1Z7aC
-         K9eg==
-X-Gm-Message-State: AOAM531HdNNk4FYsuuOqOISNErRBLnFBtY7TdYWXNqdnAtRQ5TVnZGJq
-	yIkdI6yrkkywquzJGk30HawUh0Dv/jLdRQ==
-X-Google-Smtp-Source: ABdhPJyky6PHTBTkNbCSPwTG6124kJJiR4AfA7qT0+nDOCZM4jk9FBLPF1YnUBkyfAjyOazofIceYg==
-X-Received: by 2002:a63:2f03:: with SMTP id v3mr10174946pgv.408.1614975757937;
-        Fri, 05 Mar 2021 12:22:37 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b3bf])
-        by smtp.gmail.com with ESMTPSA id c6sm3340218pfc.94.2021.03.05.12.22.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 05 Mar 2021 12:22:37 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] open-vm-tools: Do not use volatile qualifier
-Date: Fri,  5 Mar 2021 12:22:34 -0800
-Message-Id: <20210305202234.139391-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.1
-In-Reply-To: <20210305202234.139391-1-raj.khem@gmail.com>
-References: <20210305202234.139391-1-raj.khem@gmail.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=AaP+pmrKye5xXnJ11k1ckeTE0uI1/4sU9wa621ulfxw=;
+        b=sWC/c6S+Yl8Am17sHJnoHqC5YBepfmGfQhpgn+VxE5OUbrh58gKgGb1OAz2c3R+N2F
+         tQgGDUTmNX2rGgRFKHJjBB+M4NtimQS7ORYfbUUbGqiusMCKzWxjX9f58EQ/4qO/HYBp
+         Pfwb+7AzYsjXYBIvHMOfyXxDys1B9XTbHfEG8ibaVnFHVWu0R0Pp1z/lQFVCVn4cTYiw
+         opOjONxx2iaVc4pafBMFhKO8X7KaYQEZayO6cbJaruTLSIzXJJbAFx2K0Cpifj7F1qZ+
+         3ZrFjZ9yxNBy7gIgaf6yf4Qr25aG+ifY67nrBKNug/+pCGewnPEN6wCwE+4mhXRuDY16
+         hVZQ==
+X-Gm-Message-State: AOAM530k3WZ3+XMhdx8HXXyCk0p5LUIFLSHiUji2MhkaAm+N4wCT5WJG
+	KtGMopTWgHB/gefy4SxJJvkqyUyuSt6MfLPxY3U=
+X-Google-Smtp-Source: ABdhPJwrWe71uWan2MIVllt9RES5CBv8gFPQA3Ou+e76TUSr/n+ds6cfHLrAixBEYfgkNlXL7jCfDTfCt0/nuYefbkk=
+X-Received: by 2002:a05:620a:124f:: with SMTP id a15mr10716151qkl.125.1614976183234;
+ Fri, 05 Mar 2021 12:29:43 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210305160256.3333334-1-andrei@gherzan.com>
+In-Reply-To: <20210305160256.3333334-1-andrei@gherzan.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 5 Mar 2021 12:29:17 -0800
+Message-ID: <CAMKF1srsrFhBwXVAwtrR=MUajm2zeHbS77f8ZyG8n5dNAtS5bw@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH v3 1/6] python3-ifaddr: Integrate a dependency of pysonos
+To: Andrei Gherzan <andrei@gherzan.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Andrei Gherzan <andrei.gherzan@huawei.com>
+Content-Type: text/plain; charset="UTF-8"
 
-gcc 11 has started to error on it
+I am seeing fetch checksum mismatched on AB see
+https://errors.yoctoproject.org/Errors/Details/573554/
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...0001-pollGtk-Drop-volatile-qualifier.patch | 32 +++++++++++++++++++
- .../open-vm-tools/open-vm-tools_11.0.1.bb     |  1 +
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-pollGtk-Drop-volatile-qualifier.patch
+then I manually downloaded the file and checksummed it,
 
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-pollGtk-Drop-volatile-qualifier.patch b/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-pollGtk-Drop-volatile-qualifier.patch
-new file mode 100644
-index 0000000000..adc6571f7e
---- /dev/null
-+++ b/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-pollGtk-Drop-volatile-qualifier.patch
-@@ -0,0 +1,32 @@
-+From 7bd280f3cc07208760759c98bbfbac3f9d28f77c Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 5 Mar 2021 08:58:29 -0800
-+Subject: [PATCH] pollGtk: Drop volatile qualifier
-+
-+glib-2.0 has changed the function interfaces as well and do not expect
-+it to be volatile. GCC 11 complains about it
-+
-+glib/gatomic.h:112:5: error: argument 2 of '__atomic_load' discards 'volatile' qualifier [-Werror=incompatible-pointer-types]
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ open-vm-tools/lib/pollGtk/pollGtk.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/open-vm-tools/lib/pollGtk/pollGtk.c b/open-vm-tools/lib/pollGtk/pollGtk.c
-+index 6d95bf01..a941e7a7 100644
-+--- a/open-vm-tools/lib/pollGtk/pollGtk.c
-++++ b/open-vm-tools/lib/pollGtk/pollGtk.c
-+@@ -1473,7 +1473,7 @@ PollGtkBasicCallback(gpointer data) // IN: The eventEntry
-+ void
-+ Poll_InitGtk(void)
-+ {
-+-   static volatile gsize inited = 0;
-++   static gsize inited = 0;
-+ 
-+    static const PollImpl gtkImpl =
-+    {
-+-- 
-+2.30.1
-+
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb b/meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
-index 34a81d21f0..69ef6056d7 100644
---- a/meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
-+++ b/meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
-@@ -43,6 +43,7 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https \
-     file://0002-hgfsServerLinux-Consider-64bit-time_t-possibility.patch;patchdir=.. \
-     file://0001-utilBacktrace-Ignore-Warray-bounds.patch;patchdir=.. \
-     file://0001-hgfsmounter-Makefile.am-support-usrmerge.patch;patchdir=.. \
-+    file://0001-pollGtk-Drop-volatile-qualifier.patch;patchdir=.. \
- "
- 
- SRCREV = "d3edfd142a81096f9f58aff17d84219b457f4987"
--- 
-2.30.1
+% sha256sum ifaddr-0.1.7.tar.gz
+1f9e8a6ca6f16db5a37d3356f07b6e52344f6f9f7e806d618537731669eb1a94
+ifaddr-0.1.7.tar.gz
 
+so builder on AB seems to be right, perhaps we need a v4
+
+On Fri, Mar 5, 2021 at 8:03 AM Andrei Gherzan <andrei@gherzan.com> wrote:
+>
+> From: Andrei Gherzan <andrei.gherzan@huawei.com>
+>
+> Signed-off-by: Andrei Gherzan <andrei.gherzan@huawei.com>
+> ---
+>  .../recipes-devtools/python/python3-ifaddr_0.1.7.bb    | 10 ++++++++++
+>  1 file changed, 10 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-ifaddr_0.1.7.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-ifaddr_0.1.7.bb b/meta-python/recipes-devtools/python/python3-ifaddr_0.1.7.bb
+> new file mode 100644
+> index 000000000..cd7cd2803
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-ifaddr_0.1.7.bb
+> @@ -0,0 +1,10 @@
+> +DESCRIPTION = "Cross-platform network interface and IP address enumeration \
+> +library"
+> +HOMEPAGE = "https://pypi.org/project/ifaddr/"
+> +LICENSE = "MIT"
+> +
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+> +
+> +SRC_URI[sha256sum] = "d3a63a039c82b08a1171b003eafa62c6f128aa4eaa1ce7a55a9401b48f9ad926"
+> +
+> +inherit pypi setuptools3
+> --
+> 2.30.1
+>
+>
+> 
+>
