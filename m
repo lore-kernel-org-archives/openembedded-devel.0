@@ -1,134 +1,465 @@
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.63])
- by mx.groups.io with SMTP id smtpd.web12.3709.1615004422577694124
+Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com [209.85.167.172])
+ by mx.groups.io with SMTP id smtpd.web11.6053.1615028804115834524
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Mar 2021 20:20:23 -0800
+ Sat, 06 Mar 2021 03:06:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=nmsOkLd5;
- spf=pass (domain: windriver.com, ip: 40.107.93.63, mailfrom: yifan.yu@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=CxDycPYJ/tiytmKYLN/8BWFLBT4S7HRlIlDiNb0jXGajANT/s6PN8PbdAenqY/dH0dLdwxYivKxK+FFXFBNW8QFGoH9clUsd/u1bgbMHF3q/ukBYSumtXEjFkX4MVNFNOSf+3p8UlJrl13FVOR16ecI8loO9utXRoszmyfHIDu0KI82vuZ2lkPe4Dvh1AGK0RZMMp5c7H+kXOHqDGEO3yI2eJzUF4Qm6GPpO3//uRPte7NnbzCPYRJcLrXjk+e+Pr9RmwMjQLXX5NP2L9aLWN65BNhfer6uJQZTazOgwxmH5dv2KVVaZ2N6l3ZOvB9abUUXS+vFn1H8Zic/EcDLFBw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=POQamevuHQ6hOfcOQ7pKZKdqJmuJEF9YchsMSrYoGLI=;
- b=krYmJ9PiF25QBxyTB0Hndbd5V5SwvQvfxJUXVT4/oi4wWK+ltTEVpvK2Qk14jeoIPZF0eJ0jq8MlyZIEJ08hTIHTK1DI79HUDnj1yh1c1NfZhdXCFyELUb1qMTwDQQOCD8NeZWpsmW7UbPTEStQfcMo8RfIuKaraPp78as6dZTD2k/7GlXHl3Fh9WYfy09xyGKB5VVWj6p/FZ9VO0/4HVVovvuSswZYXMhQ3pZnIkRBADwYEAWMetd/VEVxah0pR/xRdaQPqkwclrod0QJ4FKfEesZhYoH5ckU6LOzmdwpI+oyPQZJxCq2QK4EhoePy2bnzI5WLU8sio29j3Nzmj7Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=uCKhvczX;
+ spf=pass (domain: gmail.com, ip: 209.85.167.172, mailfrom: h4nn35.work@gmail.com)
+Received: by mail-oi1-f172.google.com with SMTP id d20so5552372oiw.10
+        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Mar 2021 03:06:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=POQamevuHQ6hOfcOQ7pKZKdqJmuJEF9YchsMSrYoGLI=;
- b=nmsOkLd57KWQzODhV8x2v5h4DQ8m2CrMv+AE2jM5S0yrrBeWuG6D2q9rDEbaW1mYbCnUE4MIA/3mbT1mSwXaZQHCMCKwSqJXdZkedXgU5RD/bNbH0hq0iIPk/EuUnDsYJSKbrkkKgt0/+amvNJGi3CbrHJRoMiyA6OJk3K9MQic=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from SA0PR11MB4719.namprd11.prod.outlook.com (2603:10b6:806:95::17)
- by SN6PR11MB3165.namprd11.prod.outlook.com (2603:10b6:805:c0::33) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3912.17; Sat, 6 Mar
- 2021 04:20:20 +0000
-Received: from SA0PR11MB4719.namprd11.prod.outlook.com
- ([fe80::24e6:c5dd:a024:807f]) by SA0PR11MB4719.namprd11.prod.outlook.com
- ([fe80::24e6:c5dd:a024:807f%8]) with mapi id 15.20.3912.026; Sat, 6 Mar 2021
- 04:20:20 +0000
-From: "Yi Fan Yu" <yifan.yu@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] librelp: update 1.6.0 -> 1.10.0
-Date: Fri,  5 Mar 2021 23:20:04 -0500
-Message-ID: <20210306042004.29620-1-yifan.yu@windriver.com>
-X-Mailer: git-send-email 2.29.2
-X-Originating-IP: [128.224.252.2]
-X-ClientProxiedBy: MN2PR18CA0002.namprd18.prod.outlook.com
- (2603:10b6:208:23c::7) To SA0PR11MB4719.namprd11.prod.outlook.com
- (2603:10b6:806:95::17)
-Return-Path: yifan.yu@windriver.com
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=DjzQVDceKpnhVN4RuynWLolTojnv+srlIFsrQNDIyVM=;
+        b=uCKhvczXVK4IwxC/uVgcyOmH5ctKc8+Wx9uiAjRSLMH6JmmXQFaE57Y4mub+LRDWBV
+         s/45t5+ZUBXxIFNlgAandoZL4gOPomdZWFcaxnWqjDDtMNf00RJm1vZUIj3uRWznU4BF
+         onc9zWQZMatDhQLpEEGkR+drqKem+FFhb7fRqI1w9uLNne1JrW1g8N/Ke4/GsSkzDA24
+         IQO7g91xHYR4+eW2GjWkW1aDwIM4+NiURGIv1uJr1gPLVOuypKSxN1/a2RWrrhuuRpC1
+         jOZldiGULyXtRITSoVjvgEhmd4XzCvaKQMW5GwX+87eoA2Yyg7kXVdy76bAdXJz7pY95
+         Hnbw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=DjzQVDceKpnhVN4RuynWLolTojnv+srlIFsrQNDIyVM=;
+        b=KftsMvtFf1kAOUuW4VFwK5KGZjafSdUW+S3Y4fr6xh+BhBbU9uBH0tqKr6W7B1hJaD
+         5r6cXOuLgUMk4yHuoKw/18Gmcv0D9mIaYagDxrlNoxsS2GprVnojxYAsk/14Qba/pnGe
+         CO1EuKz3i8lgQ0C5a31vl1SLBS893lmGOsk2VxVQgBvQ1jaVXTMRtTBbpMMH6lUHaMoy
+         zZmrEFyLxPEnSHPtkD4NBfxzhoUp7o0mXxqyUEHles7p+sEwEDoVM3F0PH3GBFlouD5N
+         3diaFzVRJxK87tEK3SYsbSQtT4CccAechjswYLj0nMY7k1J9HYhla3T4ecBic2SJb+9K
+         Rbhg==
+X-Gm-Message-State: AOAM533fQ97k3o/ENbJuPFPpBEECAW5OYc2jBh9+m1VfXt0cizZOr3Qq
+	usPE2UyQ27nFuHz4XD/0R3WSS7ztSPypI+kCBRqkvuY=
+X-Google-Smtp-Source: ABdhPJxDm7j8cM1482KC26pwgC31+rrOu0J5ru9ERh5tHly+zf47ODdlDTojIpfhDIPkQDBLnO8VP5PdCE1hvfMl7lM=
+X-Received: by 2002:aca:31d7:: with SMTP id x206mr6384812oix.178.1615028802899;
+ Sat, 06 Mar 2021 03:06:42 -0800 (PST)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from yow-lpggp3.wrs.com (128.224.252.2) by MN2PR18CA0002.namprd18.prod.outlook.com (2603:10b6:208:23c::7) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3912.17 via Frontend Transport; Sat, 6 Mar 2021 04:20:19 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: db0953b9-c8bf-41f3-555e-08d8e0572708
-X-MS-TrafficTypeDiagnostic: SN6PR11MB3165:
-X-Microsoft-Antispam-PRVS: 
-	<SN6PR11MB3165E01F70266A3F443B84B980959@SN6PR11MB3165.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1002;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	BJYKaZo1bQmhRRDov1GziWe7A+oYf2KQI4fYDRRN/uBKU72jqixTBO5YJK5uq4x3wtCQd2+HSQ3crV/LaGoYEO4l0ajK5Kc6DC0WnxEx6TOC6V2qKUTjQYbd0eSs0XKc5d1Bmg3n4CTWQp6AMEiNFBIwZCaCwh3XI0TzrJXoPVTSUe1/GB9K3Xh+l82WBQBuT51f1z0xztslLXzpSY1hgRS38cnxiKhxgmkuv7N9lMnAeZu8N35uPipxrWB0ZcT0Qjp4HrMdp6wRhtpRoB8AveyX7wuZrAccy649qsJYxvXHh/yRtPYWiZA6BZ74K4Wo4bfB8ASm4n0CKhzQnTaPiHEqjsIMFFv7rQXEKFlrz3GfMlFE5duVldpMMCXHEK9nGgadAOTnr4yqv211xDj1eGNAet01bUU3k5Yov9m6ERMskEDH+IsirOtYP0S50SHvs169mTc9kTt4XnflIh7QR7gSgLzs3w/G82YMOaK6HjkUCwsHCk1DGvzVbdeUyXgGOVH9PWvhaG71NtHHpkhoGQ==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA0PR11MB4719.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(39850400004)(346002)(366004)(376002)(136003)(26005)(1076003)(2616005)(8936002)(316002)(2906002)(5660300002)(6512007)(16526019)(86362001)(52116002)(186003)(66946007)(36756003)(6506007)(83380400001)(66556008)(66476007)(6916009)(6666004)(8676002)(478600001)(956004)(6486002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?tK4Xiv1p7Tn5KGqifRh9/P705fPBnkEQVlr5JM3JA7VhewJO9HRtTYKKn22A?=
- =?us-ascii?Q?z9VoesmR5NQ8ZjSwj8kw1lwvKkQTz9fT8uo4L8D/uT/gCX8/m5cvn0sapXFc?=
- =?us-ascii?Q?W7P5iMIdbHQV8WUuFjF8/li0vnpoMNjHDtda64nzkeCDJSnjzSaUWMKko0VL?=
- =?us-ascii?Q?L9XNftN7YIbT4zhk5R1A/1ldvg27slWqzX1SOzLreMckqoIn0ij9HPAysy5f?=
- =?us-ascii?Q?XQimd/wvuryi2LPwVVlUk5221xy+ewco+zb6JNiVE5mMKA7eVVEQB777sJRx?=
- =?us-ascii?Q?YvWQuqUlAhf2tfdhWvaRAUutcy/SbMp5Sgc1K6DWvbrkMYWAB/hwNHwGijQK?=
- =?us-ascii?Q?JyOHMBH4F9OrFkhVOzCfJkQcttuJKHXM0JKBXtp1Jja5MjpzQymEZCaXtEcl?=
- =?us-ascii?Q?GwCWa9on/dIZWqiNXF/M3APrdWRM4YT7UN7aO3YlevpaTCaLGpkD7iB8NCoK?=
- =?us-ascii?Q?Ykpj0pv9XBzzKowxJquZjVgOuyMZPQ1Jyhadpe4Fe36PeNAK+DhStaGMx8A+?=
- =?us-ascii?Q?ZDmfO7FD2p1JBJkfaWtORF6OJ+98ezeZgpvzsIVS4FjNLbxmmqlRNI3IepsU?=
- =?us-ascii?Q?l1XuWrWiFqd8t0CHFD4hnlYY27iQzUFR7Ju4m1+wbgUqd5D/4KPklr7KXMNS?=
- =?us-ascii?Q?zOoQ+EpaPyFE9KFRD5ApEy9iL9mUZpGLHi6icwO3x2YrsmWsBcMXcc1llM8H?=
- =?us-ascii?Q?PGsWH6RJNLPpYoV2EdjVMrIvLx+0zkkLLuu1yn26R2VNrLy179vvyLfQJRb5?=
- =?us-ascii?Q?kiLHl0gaKoX8Syrw5kDtpKRaXRkzR7CeFTss3HZOODghMXx4jxn5JJl9k0qi?=
- =?us-ascii?Q?l1P2TlhvMiDCsarZjff6VDD5tVi6Bs4IsdlMeqWSMZNHEyhRHNDwoJrtJY8G?=
- =?us-ascii?Q?vdh9XpGyUOY+eXmPDQv3zE/yQOF1kOReI/KEPqRZw6BrFf37HifpezQ/eq0L?=
- =?us-ascii?Q?V9BcRd/r+/DFKQYy+j8r+wU7Na0OiDS2cmRgv+B7nChscVYw0iAQYt1KftyS?=
- =?us-ascii?Q?d2AY8WymyjLhd0D0i0Ju+CdOSfFZRJuGlCm+B0GsbyaLFml/M8Qz3ylIeRBh?=
- =?us-ascii?Q?ZuQpF/Yr6jEDZkO1rSma+FCX2727Lu1NQIsxlmvW188vtYlibr7aFSweUAlS?=
- =?us-ascii?Q?YkAxSxVVn/qgv2lUKcwmqM8Hd8hFAft3qDIOM0wkDwNov+iBUL64yao3aySW?=
- =?us-ascii?Q?+51bi1bkvGp1uGhcV86zJUdIRugKmPhlzB0wEgk5aNn05c8OoyAzpzP5wi0D?=
- =?us-ascii?Q?EmDaJdtHiWh3/A6mVEUwMqR3eES/KfPTuQsqzvUh9k7iXsD9SrgL8xdSHOYx?=
- =?us-ascii?Q?9BGydsLS+DOC+b56WCLcBP2K?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: db0953b9-c8bf-41f3-555e-08d8e0572708
-X-MS-Exchange-CrossTenant-AuthSource: SA0PR11MB4719.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Mar 2021 04:20:20.1205
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dgGK8AqHCq9bnmVGYUq6Q1dcjXdkt0afozdNvPkVfwtaNz+oIIAEVNY97BRvnDoMP/AozLH+Hh86Av5aUM+pGg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR11MB3165
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
+References: <20210303114130.2317817-1-crg7475@mailbox.org> <20210303114130.2317817-2-crg7475@mailbox.org>
+ <CAHvQdo3=+geB3pheET1Oi5vtR_5v5bK0wW5MZW55Ju4AaMygzQ@mail.gmail.com> <da6aeef2-7bc1-3574-430e-b9cafcc440d2@mailbox.org>
+In-Reply-To: <da6aeef2-7bc1-3574-430e-b9cafcc440d2@mailbox.org>
+From: "Johannes Pointner" <h4nn35.work@gmail.com>
+Date: Sat, 6 Mar 2021 12:06:31 +0100
+Message-ID: <CAHvQdo3=HDEjMoeq6rjOzMpM5EPR0gMDu+u-5PhMip1-oBo=hQ@mail.gmail.com>
+Subject: Re: [oe] [meta-multimedia][PATCH 2/2] pipewire: Rework 0.3 recipe and upgrade to 0.3.22
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Now pulling from the stable branch
+On Thu, Mar 4, 2021 at 5:51 PM Carlos Rafael Giani via
+lists.openembedded.org <crg7475=mailbox.org@lists.openembedded.org>
+wrote:
+>
+> Version 0.3.23 just came out. I'd rather upgrade the recipe to that one, and if others here are OK with it, migrate it to oe-core.
 
-Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
----
- .../rsyslog/{librelp_1.6.0.bb =3D> librelp_1.10.0.bb}           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-extended/rsyslog/{librelp_1.6.0.bb =3D> librelp_1.1=
-0.0.bb} (70%)
+That's even better.
+Cheers,
+Hannes
 
-diff --git a/meta-oe/recipes-extended/rsyslog/librelp_1.6.0.bb b/meta-oe/re=
-cipes-extended/rsyslog/librelp_1.10.0.bb
-similarity index 70%
-rename from meta-oe/recipes-extended/rsyslog/librelp_1.6.0.bb
-rename to meta-oe/recipes-extended/rsyslog/librelp_1.10.0.bb
-index f3933f930..6a1f88093 100644
---- a/meta-oe/recipes-extended/rsyslog/librelp_1.6.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/librelp_1.10.0.bb
-@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D1fb9c10ed9fd68=
-26757615455ca893a9"
-=20
- DEPENDS =3D "gmp nettle libidn zlib gnutls openssl"
-=20
--SRC_URI =3D "git://github.com/rsyslog/librelp.git;protocol=3Dhttps \
-+SRC_URI =3D "git://github.com/rsyslog/librelp.git;protocol=3Dhttps;branch=
-=3Dstable \
- "
-=20
--SRCREV =3D "fe366f3770320cbe76bac7e84b26a48491d14531"
-+SRCREV =3D "9e749453d51d602d8159717f8a7c27971dcb4c6c"
-=20
- S =3D "${WORKDIR}/git"
-=20
---=20
-2.29.2
-
+>
+> On 03.03.21 20:22, Johannes Pointner wrote:
+>
+> Hello Carlos,
+>
+> On Wed, Mar 3, 2021 at 12:41 PM Carlos Rafael Giani via
+> lists.openembedded.org <crg7475=mailbox.org@lists.openembedded.org>
+> wrote:
+>
+> * Use a versioned recipe instead of _git
+> * Add more packageconfigs: alsa, docs, sdl2, sndfile, v4l2,
+>   pipewire-alsa, pipewire-jack
+> * Split SPA and module packages dynamically to generate one package for
+>   each SPA plugin and for each module
+> * Split pipewire library, shim PulseAudio daemon, main tools & SPA tools,
+>   pipewire-alsa, pipewire-jack, ALSA card profiles, GStreamer plugin,
+>   and example session manager into separate packages
+> * Set up a "pipewire" user and group to run the PipeWire daemon with that
+>   user instead of root
+>
+> Could you please add the patch that fixes a crash of the pipewire-media-session:
+> https://bugzilla.redhat.com/show_bug.cgi?id=1931043
+> https://gitlab.freedesktop.org/pipewire/pipewire/-/commit/3673265ae20d7b59e89cad6c5238c232796731b2
+>
+> Thx,
+> Hannes
+>
+> Signed-off-by: Carlos Rafael Giani <crg7475@mailbox.org>
+> ---
+>  .../pipewire/pipewire_0.3.22.bb               | 273 ++++++++++++++++++
+>  .../pipewire/pipewire_git.bb                  |  77 -----
+>  2 files changed, 273 insertions(+), 77 deletions(-)
+>  create mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.22.bb
+>  delete mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire_git.bb
+>
+> diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.22.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.22.bb
+> new file mode 100644
+> index 000000000..b54be7f89
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.22.bb
+> @@ -0,0 +1,273 @@
+> +SUMMARY = "Multimedia processing server for Linux"
+> +DESCRIPTION = "Linux server for handling and routing audio and video streams between applications and multimedia I/O devices"
+> +HOMEPAGE = "https://pipewire.org/"
+> +BUGTRACKER  = "https://gitlab.freedesktop.org/pipewire/pipewire/issues"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = " \
+> +    file://LICENSE;md5=e2c0b7d86d04e716a3c4c9ab34260e69 \
+> +    file://COPYING;md5=97be96ca4fab23e9657ffa590b931c1a \
+> +"
+> +SECTION = "multimedia"
+> +
+> +DEPENDS = "dbus"
+> +
+> +SRCREV = "22d563720a7f6ba7bdf59950f8c14488d80dfa95"
+> +SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +inherit meson pkgconfig systemd manpages gettext useradd
+> +
+> +USERADD_PACKAGES = "${PN}"
+> +
+> +GROUPADD_PARAM_${PN} = "--system pipewire"
+> +
+> +USERADD_PARAM_${PN} = "--system --home / --no-create-home \
+> +                       --comment 'PipeWire multimedia daemon' \
+> +                       --gid pipewire --groups audio,video \
+> +                       pipewire"
+> +
+> +# For "EVL", look up https://evlproject.org/ . It involves
+> +# a specially prepared kernel, and is currently unavailable
+> +# in Yocto.
+> +# FFmpeg and Vulkan aren't really supported - at the current
+> +# stage (version 0.3.22), these are just experiments, not
+> +# actual features.
+> +# libcamera support currently does not build successfully.
+> +# systemd user service files are disabled because per-user
+> +# PipeWire instances aren't really something that makes
+> +# much sense in an embedded environment. A system-wide
+> +# instance does.
+> +EXTRA_OEMESON += " \
+> +    -Daudiotestsrc=true \
+> +    -Devl=false \
+> +    -Dsystemd-user-service=false \
+> +    -Dtests=false \
+> +    -Dudevrulesdir=${nonarch_base_libdir}/udev/rules.d/ \
+> +    -Dvideotestsrc=true \
+> +    -Dffmpeg=false \
+> +    -Dvulkan=false \
+> +    -Dlibcamera=false \
+> +"
+> +
+> +PACKAGECONFIG ??= "\
+> +    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)} \
+> +    ${@bb.utils.filter('DISTRO_FEATURES', 'alsa systemd', d)} \
+> +    gstreamer jack v4l2 \
+> +"
+> +
+> +# "jack" and "pipewire-jack" packageconfigs cannot be both enabled,
+> +# since "jack" imports libjack, and "pipewire-jack" generates
+> +# libjack.so* files, thus colliding with the libpack package. This
+> +# is why these two are marked in their respective packageconfigs
+> +# as being in conflict.
+> +
+> +PACKAGECONFIG[alsa] = "-Dalsa=true,-Dalsa=false,alsa-lib udev"
+> +PACKAGECONFIG[bluez] = "-Dbluez5=true,-Dbluez5=false,bluez5 sbc"
+> +PACKAGECONFIG[docs] = "-Ddocs=true,-Ddocs=false,doxygen"
+> +PACKAGECONFIG[gstreamer] = "-Dgstreamer=true,-Dgstreamer=false,glib-2.0 gstreamer1.0 gstreamer1.0-plugins-base"
+> +PACKAGECONFIG[jack] = "-Djack=true,-Djack=false,jack,,,pipewire-jack"
+> +PACKAGECONFIG[manpages] = "-Dman=true,-Dman=false,libxml-parser-perl-native"
+> +PACKAGECONFIG[sdl2] = "-Dsdl2=enabled,-Dsdl2=disabled,virtual/libsdl2"
+> +PACKAGECONFIG[sndfile] = "-Dsndfile=enabled,-Dsndfile=disabled,libsndfile1"
+> +PACKAGECONFIG[systemd] = "-Dsystemd=true -Dsystemd-system-service=true ,-Dsystemd=false -Dsystemd-system-service=false,systemd"
+> +PACKAGECONFIG[v4l2] = "-Dv4l2=true,-Dv4l2=false,udev"
+> +PACKAGECONFIG[pipewire-alsa] = "-Dpipewire-alsa=true,-Dpipewire-alsa=false,alsa-lib"
+> +PACKAGECONFIG[pipewire-jack] = "-Dpipewire-jack=true -Dlibjack-path=${libdir}/${PW_MODULE_SUBDIR}/jack,-Dpipewire-jack=false,jack,,,jack"
+> +
+> +PACKAGESPLITFUNCS_prepend = " split_dynamic_packages "
+> +PACKAGESPLITFUNCS_append = " set_dynamic_metapkg_rdepends "
+> +
+> +SPA_SUBDIR = "spa-0.2"
+> +PW_MODULE_SUBDIR = "pipewire-0.3"
+> +
+> +remove_unused_installed_files() {
+> +    # jack.conf is used by pipewire-jack (not the JACK SPA plugin).
+> +    # Remove it if pipewire-jack is not built to avoid creating the
+> +    # pipewire-jack package.
+> +    if ${@bb.utils.contains('PACKAGECONFIG', 'pipewire-jack', 'false', 'true', d)}; then
+> +        rm -f "${D}${sysconfdir}/pipewire/jack.conf"
+> +    fi
+> +}
+> +
+> +do_install[postfuncs] += "remove_unused_installed_files"
+> +
+> +python split_dynamic_packages () {
+> +    # Create packages for each SPA plugin. These plugins are located
+> +    # in individual subdirectories, so a recursive search is needed.
+> +    spa_libdir = d.expand('${libdir}/${SPA_SUBDIR}')
+> +    do_split_packages(d, spa_libdir, r'^libspa-(.*)\.so$', d.expand('${PN}-spa-plugins-%s'), 'PipeWire SPA plugin for %s', extra_depends='', recursive=True)
+> +
+> +    # Create packages for each PipeWire module.
+> +    pw_module_libdir = d.expand('${libdir}/${PW_MODULE_SUBDIR}')
+> +    do_split_packages(d, pw_module_libdir, r'^libpipewire-module-(.*)\.so$', d.expand('${PN}-modules-%s'), 'PipeWire %s module', extra_depends='', recursive=False)
+> +}
+> +
+> +python set_dynamic_metapkg_rdepends () {
+> +    import os
+> +    import oe.utils
+> +
+> +    # Go through all generated SPA plugin and PipeWire module packages
+> +    # (excluding the main package and the -meta package itself) and
+> +    # add them to the -meta package as RDEPENDS.
+> +
+> +    base_pn = d.getVar('PN')
+> +
+> +    spa_pn = base_pn + '-spa-plugins'
+> +    spa_metapkg =  spa_pn + '-meta'
+> +
+> +    pw_module_pn = base_pn + '-modules'
+> +    pw_module_metapkg =  pw_module_pn + '-meta'
+> +
+> +    d.setVar('ALLOW_EMPTY_' + spa_metapkg, "1")
+> +    d.setVar('FILES_' + spa_metapkg, "")
+> +
+> +    d.setVar('ALLOW_EMPTY_' + pw_module_metapkg, "1")
+> +    d.setVar('FILES_' + pw_module_metapkg, "")
+> +
+> +    blacklist = [ spa_pn, spa_metapkg, pw_module_pn, pw_module_metapkg ]
+> +    spa_metapkg_rdepends = []
+> +    pw_module_metapkg_rdepends = []
+> +    pkgdest = d.getVar('PKGDEST')
+> +
+> +    for pkg in oe.utils.packages_filter_out_system(d):
+> +        if pkg in blacklist:
+> +            continue
+> +
+> +        is_spa_pkg = pkg.startswith(spa_pn)
+> +        is_pw_module_pkg = pkg.startswith(pw_module_pn)
+> +        if not is_spa_pkg and not is_pw_module_pkg:
+> +            continue
+> +
+> +        if pkg in spa_metapkg_rdepends or pkg in pw_module_metapkg_rdepends:
+> +            continue
+> +
+> +        # See if the package is empty by looking at the contents of its
+> +        # PKGDEST subdirectory. If this subdirectory is empty, then then
+> +        # package is empty as well. Empty packages do not get added to
+> +        # the meta package's RDEPENDS.
+> +        pkgdir = os.path.join(pkgdest, pkg)
+> +        if os.path.exists(pkgdir):
+> +            dir_contents = os.listdir(pkgdir) or []
+> +        else:
+> +            dir_contents = []
+> +        is_empty = len(dir_contents) == 0
+> +        if not is_empty:
+> +            if is_spa_pkg:
+> +                spa_metapkg_rdepends.append(pkg)
+> +            if is_pw_module_pkg:
+> +                pw_module_metapkg_rdepends.append(pkg)
+> +
+> +    d.setVar('RDEPENDS_' + spa_metapkg, ' '.join(spa_metapkg_rdepends))
+> +    d.setVar('DESCRIPTION_' + spa_metapkg, spa_pn + ' meta package')
+> +
+> +    d.setVar('RDEPENDS_' + pw_module_metapkg, ' '.join(pw_module_metapkg_rdepends))
+> +    d.setVar('DESCRIPTION_' + pw_module_metapkg, pw_module_pn + ' meta package')
+> +}
+> +
+> +PACKAGES =+ "\
+> +    libpipewire \
+> +    ${PN}-tools \
+> +    ${PN}-pulse \
+> +    ${PN}-alsa \
+> +    ${PN}-jack \
+> +    ${PN}-media-session \
+> +    ${PN}-spa-plugins \
+> +    ${PN}-spa-plugins-meta \
+> +    ${PN}-spa-tools \
+> +    ${PN}-modules \
+> +    ${PN}-modules-meta \
+> +    ${PN}-alsa-card-profile \
+> +    gstreamer1.0-pipewire \
+> +"
+> +
+> +PACKAGES_DYNAMIC = "^${PN}-spa-plugins.* ^${PN}-modules.*"
+> +
+> +SYSTEMD_SERVICE_${PN} = "pipewire.service"
+> +CONFFILES_${PN} += "${sysconfdir}/pipewire/pipewire.conf"
+> +FILES_${PN} = " \
+> +    ${sysconfdir}/pipewire/pipewire.conf \
+> +    ${systemd_user_unitdir}/pipewire.* \
+> +    ${bindir}/pipewire \
+> +"
+> +
+> +FILES_${PN}-dev += " \
+> +    ${libdir}/${PW_MODULE_SUBDIR}/jack/libjack*.so \
+> +"
+> +
+> +CONFFILES_libpipewire += "${sysconfdir}/pipewire/client.conf"
+> +FILES_libpipewire = " \
+> +    ${sysconfdir}/pipewire/client.conf \
+> +    ${libdir}/libpipewire-*.so.* \
+> +"
+> +# Add the bare minimum modules and plugins required to be able
+> +# to use libpipewire. Without these, it is essentially unusable.
+> +RDEPENDS_libpipewire += " \
+> +    ${PN}-modules-client-node \
+> +    ${PN}-modules-protocol-native \
+> +    ${PN}-spa-plugins-support \
+> +"
+> +
+> +FILES_${PN}-tools = " \
+> +    ${bindir}/pw-* \
+> +"
+> +
+> +# This is a shim daemon that is intended to be used as a
+> +# drop-in PulseAudio replacement, providing a pulseaudio-compatible
+> +# socket that can be used by applications that use libpulse.
+> +CONFFILES_${PN}-pulse += "${sysconfdir}/pipewire/pipewire-pulse.conf"
+> +FILES_${PN}-pulse = " \
+> +    ${sysconfdir}/pipewire/pipewire-pulse.conf \
+> +    ${systemd_user_unitdir}/pipewire-pulse.* \
+> +    ${bindir}/pipewire-pulse \
+> +"
+> +RDEPENDS_${PN}-pulse += " \
+> +    ${PN}-modules-protocol-pulse \
+> +"
+> +
+> +# alsa plugin to redirect audio to pipewire
+> +FILES_${PN}-alsa = "\
+> +    ${libdir}/alsa-lib/* \
+> +    ${datadir}/alsa/alsa.conf.d/* \
+> +"
+> +
+> +# jack drop-in libraries to redirect audio to pipewire
+> +CONFFILES_${PN}-jack = "${sysconfdir}/pipewire/jack.conf"
+> +FILES_${PN}-jack = "\
+> +    ${sysconfdir}/pipewire/jack.conf \
+> +    ${libdir}/${PW_MODULE_SUBDIR}/jack/libjack*.so.* \
+> +"
+> +
+> +# Example session manager. Not intended for use in production.
+> +CONFFILES_${PN}-media-session = "${sysconfdir}/pipewire/media-session.d/*"
+> +FILES_${PN}-media-session = " \
+> +    ${bindir}/pipewire-media-session \
+> +    ${sysconfdir}/pipewire/media-session.d/* \
+> +"
+> +RPROVIDES_${PN}-media-session = "virtual/pipewire-sessionmanager"
+> +
+> +# Dynamic packages (see set_dynamic_metapkg_rdepends).
+> +FILES_${PN}-spa-plugins = ""
+> +RRECOMMENDS_${PN}-spa-plugins += "${PN}-spa-plugins-meta"
+> +
+> +FILES_${PN}-spa-tools = " \
+> +    ${bindir}/spa-* \
+> +"
+> +
+> +# Dynamic packages (see set_dynamic_metapkg_rdepends).
+> +FILES_${PN}-modules = ""
+> +RRECOMMENDS_${PN}-modules += "${PN}-modules-meta"
+> +
+> +CONFFILES_${PN}-modules-rtkit = "${sysconfdir}/pipewire/client-rt.conf"
+> +FILES_${PN}-modules-rtkit += " \
+> +    ${sysconfdir}/pipewire/client-rt.conf \
+> +    "
+> +
+> +FILES_${PN}-alsa-card-profile = " \
+> +    ${datadir}/alsa-card-profile/* \
+> +    ${nonarch_base_libdir}/udev/rules.d/90-pipewire-alsa.rules \
+> +"
+> +
+> +FILES_gstreamer1.0-pipewire = " \
+> +    ${libdir}/gstreamer-1.0/* \
+> +"
+> diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_git.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_git.bb
+> deleted file mode 100644
+> index 173b695e1..000000000
+> --- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_git.bb
+> +++ /dev/null
+> @@ -1,77 +0,0 @@
+> -SUMMARY = "Multimedia processing server for Linux"
+> -AUTHOR = "Wim Taymans <wtaymans@redhat.com>"
+> -HOMEPAGE = "https://pipewire.org"
+> -SECTION = "multimedia"
+> -LICENSE = "MIT"
+> -LIC_FILES_CHKSUM = " \
+> -    file://LICENSE;md5=e2c0b7d86d04e716a3c4c9ab34260e69 \
+> -    file://COPYING;md5=97be96ca4fab23e9657ffa590b931c1a \
+> -"
+> -DEPENDS = "alsa-lib dbus udev"
+> -SRCREV = "74a1632f0720886d5b3b6c23ee8fcd6c03ca7aac"
+> -PV = "0.3.1"
+> -
+> -SRC_URI = "git://github.com/PipeWire/pipewire"
+> -
+> -S = "${WORKDIR}/git"
+> -
+> -inherit meson pkgconfig systemd manpages
+> -
+> -PACKAGECONFIG ??= "\
+> -    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)} \
+> -    ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio systemd vulkan', d)} \
+> -    jack gstreamer \
+> -"
+> -
+> -PACKAGECONFIG[bluez] = "-Dbluez5=true,-Dbluez5=false,bluez5 sbc"
+> -PACKAGECONFIG[jack] = "-Djack=true,-Djack=false,jack"
+> -PACKAGECONFIG[gstreamer] = "-Dgstreamer=true,-Dgstreamer=false,glib-2.0 gstreamer1.0 gstreamer1.0-plugins-base"
+> -PACKAGECONFIG[manpages] = "-Dman=true,-Dman=false,libxml-parser-perl-native"
+> -PACKAGECONFIG[pulseaudio] = "-Dpipewire-pulseaudio=true,-Dpipewire-pulseaudio=false,pulseaudio"
+> -PACKAGECONFIG[systemd] = "-Dsystemd=true,-Dsystemd=false,systemd"
+> -PACKAGECONFIG[vulkan] = "-Dvulkan=true,-Dvulkan=false,vulkan-loader"
+> -
+> -LDFLAGS_append_mipsarch = " -latomic"
+> -LDFLAGS_append_x86 = " -latomic"
+> -LDFLAGS_append_riscv32 = " -latomic"
+> -
+> -PACKAGES =+ "\
+> -    ${PN}-spa-plugins \
+> -    ${PN}-alsa \
+> -    ${PN}-config \
+> -    gstreamer1.0-${PN} \
+> -    lib${PN} \
+> -    lib${PN}-modules \
+> -    lib${PN}-jack \
+> -"
+> -
+> -RDEPENDS_lib${PN} += "lib${PN}-modules ${PN}-spa-plugins"
+> -
+> -FILES_${PN} = "\
+> -    ${sysconfdir}/pipewire/pipewire.conf \
+> -    ${bindir}/pw-* \
+> -    ${bindir}/pipewire* \
+> -    ${systemd_user_unitdir}/* \
+> -"
+> -FILES_lib${PN} = "\
+> -    ${libdir}/libpipewire-*.so.* \
+> -    ${libdir}/libjack-*.so.* \
+> -    ${libdir}/libpulse-*.so.* \
+> -"
+> -FILES_lib${PN}-modules = "\
+> -    ${libdir}/pipewire-*/* \
+> -"
+> -FILES_${PN}-spa-plugins = "\
+> -    ${bindir}/spa-* \
+> -    ${libdir}/spa-*/* \
+> -"
+> -FILES_${PN}-alsa = "\
+> -    ${libdir}/alsa-lib/* \
+> -"
+> -FILES_gstreamer1.0-${PN} = "\
+> -    ${libdir}/gstreamer-1.0/* \
+> -"
+> -
+> -CONFFILES_${PN} = "\
+> -    ${sysconfdir}/pipewire/pipewire.conf \
+> -"
+> --
+> 2.25.1
+>
+>
+>
+>
+>
+>
+>
+>
+> 
+>
