@@ -1,76 +1,608 @@
-Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com [209.85.208.178])
- by mx.groups.io with SMTP id smtpd.web10.8744.1615044957166534096
+Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
+ by mx.groups.io with SMTP id smtpd.web09.9925.1615049708401067679
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Mar 2021 07:35:57 -0800
+ Sat, 06 Mar 2021 08:55:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=1V8eMytK;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.178, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f178.google.com with SMTP id k12so8424202ljg.9
-        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Mar 2021 07:35:56 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=i7jwrOKn;
+ spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f174.google.com with SMTP id h4so3510751pgf.13
+        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Mar 2021 08:55:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+        d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=oDQx0ZBXmaXyXUqJM95jT1C/OvqP5wdt7W5QVu1CmyY=;
-        b=1V8eMytKBEV0jzOEpFqgB1tv596ZFC6yzHWPVufKEvSfH1xfH+i15d2NVr0al/ICnq
-         QOeEcGtH6DOyswre39/60M0pVJz6GTFKx9kLSZHx7oFyL9rEHvooHUWh75icbn7AW5zR
-         8608qJ4XfR56J2ubyW13yMT5iqdM3T7/yYnEmbG1X32SvsmSqp1fK8wmV72lFYI6f3ox
-         9sJgr0vQbfXFaMwCFPIIuBA1g+eiF7oBGry/z2SJtE18Ln2d0p+Iar/2dJ+Sf4LDdfiq
-         kerRoMYLhDv2T57SjnxSmGRhiFYwOn4rP8ooZf1spiOpaxrmc75WWYUBah6oZP7R4FKb
-         xMAg==
+        bh=ocR9vAc0NaSnWbDs/HUgcgFiUBvEMjkhT2UlJnJdp4I=;
+        b=i7jwrOKnZtNn40uLRXWyBZlz7Rrx7EXPuWfb/gitAxsTp0RZPT/j2KSbor6mE0ro2a
+         zx6slfAMikiiikhMlX8iSHhwDELMtOHzzaqMEyu/fYt9M5ezU5M+ElwpIQ2ci+byHsru
+         4rAjJHH/11m7Hy6zNLTeUXM7DxpgN9cWoKUD11coARQ/cpIK+SWukCOFRkJ0RcIVzzeB
+         KtI/x76N3YLfz7gc47LQ0KrPT2wN2TSrCK06SwckXm+x6yV6k63CillyTUfm73crEjOM
+         cAF4xPNPjDA9gruf+d/yt1XlzseYYja4r7W27Povg9sBC1NqgYpoaljQYNFxVZ6SqsZJ
+         cNkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=oDQx0ZBXmaXyXUqJM95jT1C/OvqP5wdt7W5QVu1CmyY=;
-        b=ukucd7wXSRHJK9T1JRB6u5Mje2X4uwM2bjbd41RfeylD6aAX18ONnOcPPdqq3wyxaO
-         nMssFdPouYuL5lMZPQSP0Ai9RPSOQ+li1qH9b7JIt1z+q7WLkbI9m6UKOsxpst2ZkwAf
-         MeD2KKSE+WU5EtjklWpaoeFTmV1Md/zerqdI8rV2LFQXxSXlErAx4ylH4ghrdm/gqKNc
-         kejC85elR1+ONtfBj7ThA51/5qNMnDSW2IPf8Gg3ziHArELK4ffusL9hZpOycEO+IM4P
-         EWD05qbdkINmCy8FigVlqI8y+Y6yLMyRGWFtexMtaq4khzb13QgF73uSFyly4d4KvSfl
-         6iFw==
-X-Gm-Message-State: AOAM533RKwtAYkyCQdGzZWQIlob3DGRhGXcH6v6SRrsdobHa9s3LVpHr
-	+81k+RDJxqqFsODTS+g2enY+aolMzZ32rFoo
-X-Google-Smtp-Source: ABdhPJzAIGl2YtSlrbUbvFuYSw9p3QBHp7K7le9e/quu81OCUmDuyC0fCZhnVXwlJquDNeqv4A4wMw==
-X-Received: by 2002:a05:651c:1033:: with SMTP id w19mr8427507ljm.191.1615044954789;
-        Sat, 06 Mar 2021 07:35:54 -0800 (PST)
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id a1sm699049lfd.31.2021.03.06.07.35.53
+        bh=ocR9vAc0NaSnWbDs/HUgcgFiUBvEMjkhT2UlJnJdp4I=;
+        b=pAhG8ckYhCKCr3xwlfTMNKA1I5DlCkeZIflJMuc6Xt4OX+3kQKSCCwx3fWKnpLlx4D
+         3BLGxs8eVVyPk5rtvFIRKyAwEy8yWKF2HlexQTSkQdamhRC2147elHwBMujy2HgbMEIp
+         /vMhYBRmxLtfj1d4ZSLM17rWOIi2oGr0HQBVMfOg+vnXE2wFafe5otMa0FettsX+IISw
+         rG5lyMra7pZ0PKxmIBR64eKrSa5gldZCwtLVf57pLDUZ6PkIkrwvRbP3fU1sRdSczS51
+         h/jj8kNMNkRlTo8cXc7lxYnsleWv5BxAMIlTnRMPyAAoksZy7TlA1Oa/DrqNqwF1cC7j
+         48Wg==
+X-Gm-Message-State: AOAM533+kWSUvtdCKl1kosIeroq6uHo8/2YmM0XYWKV/AGEsO1ZUgwkS
+	fpjZPlJEsKl3C4TuhdyyWL6SyxxAvTRGyA==
+X-Google-Smtp-Source: ABdhPJy6rDyOjgiKPWBZVSzsbM28RIokU33oATanksRKQ0Z3hwPZ/Nh4eE42tYHWiHcXDHBlIlwdXg==
+X-Received: by 2002:a62:b416:0:b029:1e4:fb5a:55bb with SMTP id h22-20020a62b4160000b02901e4fb5a55bbmr13652347pfn.80.1615049706999;
+        Sat, 06 Mar 2021 08:55:06 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::e641])
+        by smtp.gmail.com with ESMTPSA id a9sm5628316pjq.17.2021.03.06.08.55.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 06 Mar 2021 07:35:54 -0800 (PST)
-From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
+        Sat, 06 Mar 2021 08:55:06 -0800 (PST)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-networking][PATCH] ipset: update to 7.11
-Date: Sat,  6 Mar 2021 16:31:31 +0100
-Message-Id: <20210306153131.833285-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Khem Raj <raj.khem@gmail.com>,
+	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Subject: [meta-gnome][PATCH] dconf-editor: Fix build with vala 0.50.4
+Date: Sat,  6 Mar 2021 08:55:04 -0800
+Message-Id: <20210306165504.817101-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.30.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- .../recipes-filter/ipset/{ipset_7.10.bb => ipset_7.11.bb}       | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-filter/ipset/{ipset_7.10.bb => ipset_7.11.bb} (87%)
+Backport
+https://gitlab.gnome.org/GNOME/dconf-editor/-/merge_requests/17
 
-diff --git a/meta-networking/recipes-filter/ipset/ipset_7.10.bb b/meta-networking/recipes-filter/ipset/ipset_7.11.bb
-similarity index 87%
-rename from meta-networking/recipes-filter/ipset/ipset_7.10.bb
-rename to meta-networking/recipes-filter/ipset/ipset_7.11.bb
-index b724233ba..693aa9031 100644
---- a/meta-networking/recipes-filter/ipset/ipset_7.10.bb
-+++ b/meta-networking/recipes-filter/ipset/ipset_7.11.bb
-@@ -10,7 +10,7 @@ SECTION = "base"
- DEPENDS = "libtool libmnl"
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Andreas Müller <schnitzeltony@gmail.com>
+---
+ ...lter-or-try-to-write-GtkChild-fields.patch | 522 ++++++++++++++++++
+ .../dconf/dconf-editor_3.38.2.bb              |   2 +
+ 2 files changed, 524 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/dconf/dconf-editor/0001-Don-t-alter-or-try-to-write-GtkChild-fields.patch
+
+diff --git a/meta-gnome/recipes-gnome/dconf/dconf-editor/0001-Don-t-alter-or-try-to-write-GtkChild-fields.patch b/meta-gnome/recipes-gnome/dconf/dconf-editor/0001-Don-t-alter-or-try-to-write-GtkChild-fields.patch
+new file mode 100644
+index 0000000000..7c83ae3397
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/dconf/dconf-editor/0001-Don-t-alter-or-try-to-write-GtkChild-fields.patch
+@@ -0,0 +1,522 @@
++From ba4a39b74067b73c9bed64dad7be3d53e837dd8d Mon Sep 17 00:00:00 2001
++From: Rico Tzschichholz <ricotz@ubuntu.com>
++Date: Sat, 16 Jan 2021 13:26:32 +0100
++Subject: [PATCH] Don't alter or try to write GtkChild fields
++
++See https://gitlab.gnome.org/GNOME/vala/issues/1121
++
++Upstream-Status: Backport [https://github.com/GNOME/dconf-editor/commit/9272e9fb6867e71426bfd0aa5edce5ec39cf0ad4]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ editor/bookmarks-headerbar.vala  |  4 +--
++ editor/bookmarks-list.vala       |  4 +--
++ editor/bookmarks.vala            | 12 +++----
++ editor/delayed-setting-view.vala | 54 ++++++++++++++++----------------
++ editor/overlayed-list.vala       | 38 +++++++++++-----------
++ editor/pathentry.vala            | 24 +++++++-------
++ editor/registry-list.vala        |  6 ++--
++ editor/registry-search.vala      |  6 ++--
++ editor/registry-view.vala        |  2 +-
++ 9 files changed, 75 insertions(+), 75 deletions(-)
++
++diff --git a/editor/bookmarks-headerbar.vala b/editor/bookmarks-headerbar.vala
++index 54848a5..0522c37 100644
++--- a/editor/bookmarks-headerbar.vala
+++++ b/editor/bookmarks-headerbar.vala
++@@ -24,7 +24,7 @@ private abstract class BookmarksHeaderBar : BrowserHeaderBar, AdaptativeWidget
++         install_action_entries ();
++ 
++         add_bookmarks_revealer              (out bookmarks_revealer,
++-                                             out bookmarks_button,              ref center_box);
+++                                             out bookmarks_button,              center_box);
++         connect_bookmarks_signals ();
++         add_bookmarks_controller            (out bookmarks_controller,          ref this);
++ 
++@@ -58,7 +58,7 @@ private abstract class BookmarksHeaderBar : BrowserHeaderBar, AdaptativeWidget
++     private Bookmarks           bookmarks_button;
++     private BookmarksController bookmarks_controller;
++ 
++-    private static void add_bookmarks_revealer (out Revealer bookmarks_revealer, out Bookmarks bookmarks_button, ref Box center_box)
+++    private static void add_bookmarks_revealer (out Revealer bookmarks_revealer, out Bookmarks bookmarks_button, Box center_box)
++     {
++         bookmarks_revealer = new Revealer ();
++         bookmarks_revealer.transition_type = RevealerTransitionType.SLIDE_LEFT;
++diff --git a/editor/bookmarks-list.vala b/editor/bookmarks-list.vala
++index 393973b..c9280d5 100644
++--- a/editor/bookmarks-list.vala
+++++ b/editor/bookmarks-list.vala
++@@ -146,10 +146,10 @@ private class BookmarksList : OverlayedList
++ 
++     internal bool create_bookmark_rows (Variant bookmarks_variant)
++     {
++-        _create_bookmark_rows (bookmarks_variant, view_mode, ref main_list_store, ref main_list_box, ref bookmarks_hashtable);
+++        _create_bookmark_rows (bookmarks_variant, view_mode, ref main_list_store, main_list_box, ref bookmarks_hashtable);
++         return n_items == 0;
++     }
++-    private static void _create_bookmark_rows (Variant bookmarks_variant, bool view_mode, ref GLib.ListStore main_list_store, ref ListBox main_list_box, ref HashTable<string, Bookmark> bookmarks_hashtable)
+++    private static void _create_bookmark_rows (Variant bookmarks_variant, bool view_mode, ref GLib.ListStore main_list_store, ListBox main_list_box, ref HashTable<string, Bookmark> bookmarks_hashtable)
++     {
++         string saved_bookmark_name = "";
++         ListBoxRow? selected_row = main_list_box.get_selected_row ();
++diff --git a/editor/bookmarks.vala b/editor/bookmarks.vala
++index 153af10..d8cea7c 100644
++--- a/editor/bookmarks.vala
+++++ b/editor/bookmarks.vala
++@@ -84,7 +84,7 @@ private class Bookmarks : MenuButton
++ 
++     construct
++     {
++-        update_switch_label (ViewType.SEARCH, ViewType.FOLDER, ref switch_label); // init text with "Bookmark this Location"
+++        update_switch_label (ViewType.SEARCH, ViewType.FOLDER, switch_label); // init text with "Bookmark this Location"
++ 
++         install_action_entries ();
++ 
++@@ -184,7 +184,7 @@ private class Bookmarks : MenuButton
++ 
++     internal void set_path (ViewType type, string path)
++     {
++-        update_switch_label (current_type, type, ref switch_label);
+++        update_switch_label (current_type, type, switch_label);
++ 
++         current_path = path;
++         current_type = type;
++@@ -392,7 +392,7 @@ private class Bookmarks : MenuButton
++     * * Bookmarks management
++     \*/
++ 
++-    private static void update_switch_label (ViewType old_type, ViewType new_type, ref Label switch_label)
+++    private static void update_switch_label (ViewType old_type, ViewType new_type, Label switch_label)
++     {
++         if (new_type == ViewType.SEARCH && old_type != ViewType.SEARCH)
++             switch_label.label = bookmark_this_search_text;
++@@ -414,18 +414,18 @@ private class Bookmarks : MenuButton
++         {
++             if (bookmarks_icon.icon_name != "starred-symbolic")
++                 bookmarks_icon.icon_name = "starred-symbolic";
++-            update_switch_state (true, ref bookmarked_switch);
+++            update_switch_state (true, bookmarked_switch);
++             bookmarked_switch.set_detailed_action_name ("bookmarks.unbookmark(" + variant.print (true) + ")");
++         }
++         else
++         {
++             if (bookmarks_icon.icon_name != "non-starred-symbolic")
++                 bookmarks_icon.icon_name = "non-starred-symbolic";
++-            update_switch_state (false, ref bookmarked_switch);
+++            update_switch_state (false, bookmarked_switch);
++             bookmarked_switch.set_detailed_action_name ("bookmarks.bookmark(" + variant.print (true) + ")");
++         }
++     }
++-    private static void update_switch_state (bool bookmarked, ref Switch bookmarked_switch)
+++    private static void update_switch_state (bool bookmarked, Switch bookmarked_switch)
++     {
++         if (bookmarked == bookmarked_switch.active)
++             return;
++diff --git a/editor/delayed-setting-view.vala b/editor/delayed-setting-view.vala
++index add6852..b1f774c 100644
++--- a/editor/delayed-setting-view.vala
+++++ b/editor/delayed-setting-view.vala
++@@ -41,24 +41,24 @@ private class DelayedSettingView : OverlayedListRow
++         {
++             // at row creation, key is never ghost
++             _update_dconf_key_current_value (key_value,
++-                                         ref key_value_label,
++-                                         ref key_value_default);
+++                                             key_value_label,
+++                                             key_value_default);
++ 
++             _update_dconf_key_planned_value (cool_planned_value,
++-                                         ref planned_value_label,
++-                                         ref planned_value_default);
+++                                             planned_value_label,
+++                                             planned_value_default);
++         }
++         else
++         {
++             _update_gsettings_key_current_value (key_value,
++                                                  has_schema_and_is_default,
++-                                             ref key_value_label,
++-                                             ref key_value_default);
+++                                                 key_value_label,
+++                                                 key_value_default);
++ 
++             _update_gsettings_key_planned_value (cool_planned_value,
++                                                  (!) cool_default_value,
++-                                             ref planned_value_label,
++-                                             ref planned_value_default);
+++                                                 planned_value_label,
+++                                                 planned_value_default);
++         }
++     }
++ 
++@@ -74,23 +74,23 @@ private class DelayedSettingView : OverlayedListRow
++ 
++     private static inline void _update_gsettings_key_planned_value (string? cool_planned_value,
++                                                                     string  cool_default_value,
++-                                                                ref Label   planned_value_label,
++-                                                                ref Label   planned_value_default)
+++                                                                    Label   planned_value_label,
+++                                                                    Label   planned_value_default)
++     {
++         bool is_default = cool_planned_value == null;
++         planned_value_label.label = is_default ? cool_default_value : (!) cool_planned_value;
++-        update_value_default_label (is_default, ref planned_value_default);
+++        update_value_default_label (is_default, planned_value_default);
++     }
++ 
++     private static inline void _update_dconf_key_planned_value (string? cool_planned_value,
++-                                                            ref Label   planned_value_label,
++-                                                            ref Label   planned_value_default)
+++                                                                Label   planned_value_label,
+++                                                                Label   planned_value_default)
++     {
++         if (cool_planned_value == null)
++-            update_labels_dconf_key_erased (ref planned_value_label, ref planned_value_default);
+++            update_labels_dconf_key_erased (planned_value_label, planned_value_default);
++         else
++             update_labels_dconf_key_values ((!) cool_planned_value,
++-                                            ref planned_value_label, ref planned_value_default);
+++                                            planned_value_label, planned_value_default);
++     }
++ 
++     /*\
++@@ -99,37 +99,37 @@ private class DelayedSettingView : OverlayedListRow
++ 
++     internal void update_gsettings_key_current_value (Variant key_value, bool is_default)
++     {
++-        _update_gsettings_key_current_value (key_value, is_default, ref key_value_label, ref key_value_default);
+++        _update_gsettings_key_current_value (key_value, is_default, key_value_label, key_value_default);
++     }
++     private static void _update_gsettings_key_current_value (Variant key_value,
++                                                              bool    is_default,
++-                                                         ref Label   key_value_label,
++-                                                         ref Label   key_value_default)
+++                                                             Label   key_value_label,
+++                                                             Label   key_value_default)
++     {
++         key_value_label.label = Key.cool_text_value_from_variant (key_value);
++-        update_value_default_label (is_default, ref key_value_default);
+++        update_value_default_label (is_default, key_value_default);
++     }
++ 
++     internal void update_dconf_key_current_value (Variant? key_value_or_null)
++     {
++-        _update_dconf_key_current_value (key_value_or_null, ref key_value_label, ref key_value_default);
+++        _update_dconf_key_current_value (key_value_or_null, key_value_label, key_value_default);
++     }
++     private static void _update_dconf_key_current_value (Variant? key_value_or_null,
++-                                                     ref Label    key_value_label,
++-                                                     ref Label    key_value_default)
+++                                                         Label    key_value_label,
+++                                                         Label    key_value_default)
++     {
++         if (key_value_or_null == null)
++-            update_labels_dconf_key_erased (ref key_value_label, ref key_value_default);
+++            update_labels_dconf_key_erased (key_value_label, key_value_default);
++         else
++             update_labels_dconf_key_values (Key.cool_text_value_from_variant ((!) key_value_or_null),
++-                                            ref key_value_label, ref key_value_default);
+++                                            key_value_label, key_value_default);
++     }
++ 
++     /*\
++     * * common utilities
++     \*/
++ 
++-    private static void update_labels_dconf_key_erased (ref Label value_label, ref Label value_default)
+++    private static void update_labels_dconf_key_erased (Label value_label, Label value_default)
++     {
++         value_label.visible = false;
++         /* Translators: displayed in the list of pending changes (could be an in-window panel, or in the popover of the bottom bar); for dconf keys */
++@@ -137,14 +137,14 @@ private class DelayedSettingView : OverlayedListRow
++         value_default.visible = true;
++     }
++ 
++-    private static void update_labels_dconf_key_values (string key_value, ref Label value_label, ref Label value_default)
+++    private static void update_labels_dconf_key_values (string key_value, Label value_label, Label value_default)
++     {
++         value_default.visible = false;
++         value_label.label = key_value;  // TODO move Key.cool_text_value_from_variant here?
++         value_label.visible = true;
++     }
++ 
++-    private static void update_value_default_label (bool is_default, ref Label value_default)
+++    private static void update_value_default_label (bool is_default, Label value_default)
++     {
++         if (is_default)
++             /* Translators: displayed in the list of pending changes (could be an in-window panel, or in the popover of the bottom bar); for gsettings keys */
++diff --git a/editor/overlayed-list.vala b/editor/overlayed-list.vala
++index 8b0ec51..bcdfc3a 100644
++--- a/editor/overlayed-list.vala
+++++ b/editor/overlayed-list.vala
++@@ -89,11 +89,11 @@ private abstract class OverlayedList : Overlay, AdaptativeWidget
++     internal void set_window_size (AdaptativeWidget.WindowSize new_size)
++     {
++         if (!AdaptativeWidget.WindowSize.is_extra_thin (new_size) && AdaptativeWidget.WindowSize.is_extra_flat (new_size))
++-            set_horizontal (ref main_context, ref edit_mode_box);
+++            set_horizontal (ref main_context, edit_mode_box);
++         else
++-            set_vertical (ref main_context, ref edit_mode_box);
+++            set_vertical (ref main_context, edit_mode_box);
++     }
++-    private static inline void set_horizontal (ref StyleContext main_context, ref Box edit_mode_box)
+++    private static inline void set_horizontal (ref StyleContext main_context, Box edit_mode_box)
++     {
++         main_context.remove_class ("vertical");
++         edit_mode_box.halign = Align.END;
++@@ -102,7 +102,7 @@ private abstract class OverlayedList : Overlay, AdaptativeWidget
++         edit_mode_box.width_request = 160;
++         main_context.add_class ("horizontal");
++     }
++-    private static inline void set_vertical (ref StyleContext main_context, ref Box edit_mode_box)
+++    private static inline void set_vertical (ref StyleContext main_context, Box edit_mode_box)
++     {
++         main_context.remove_class ("horizontal");
++         edit_mode_box.halign = Align.CENTER;
++@@ -118,9 +118,9 @@ private abstract class OverlayedList : Overlay, AdaptativeWidget
++ 
++     internal bool next_match ()
++     {
++-        return _next_match (ref main_list_box);
+++        return _next_match (main_list_box);
++     }
++-    private static inline bool _next_match (ref ListBox main_list_box)
+++    private static inline bool _next_match (ListBox main_list_box)
++     {
++         ListBoxRow? row = main_list_box.get_selected_row ();    // TODO multiple rows and focus-only lists
++         if (row == null)
++@@ -130,7 +130,7 @@ private abstract class OverlayedList : Overlay, AdaptativeWidget
++ 
++         if (row == null)
++         {
++-            _scroll_bottom (ref main_list_box);
+++            _scroll_bottom (main_list_box);
++             return false;
++         }
++         main_list_box.select_row ((!) row);
++@@ -140,9 +140,9 @@ private abstract class OverlayedList : Overlay, AdaptativeWidget
++ 
++     internal bool previous_match ()
++     {
++-        return _previous_match (ref main_list_box);
+++        return _previous_match (main_list_box);
++     }
++-    private static inline bool _previous_match (ref ListBox main_list_box)
+++    private static inline bool _previous_match (ListBox main_list_box)
++     {
++         uint n_items = main_list_box.get_children ().length ();  // FIXME OverlayedList.n_items is unreliable
++         if (n_items == 0)
++@@ -189,9 +189,9 @@ private abstract class OverlayedList : Overlay, AdaptativeWidget
++ 
++     protected int [] get_selected_rows_indices ()
++     {
++-        return _get_selected_rows_indices (ref main_list_box);
+++        return _get_selected_rows_indices (main_list_box);
++     }
++-    private static inline int [] _get_selected_rows_indices (ref ListBox main_list_box)
+++    private static inline int [] _get_selected_rows_indices (ListBox main_list_box)
++     {
++         int [] indices = new int [0];
++         main_list_box.selected_foreach ((_list_box, selected_row) => {
++@@ -205,9 +205,9 @@ private abstract class OverlayedList : Overlay, AdaptativeWidget
++ 
++     protected void scroll_top ()
++     {
++-        _scroll_top (ref main_list_box);
+++        _scroll_top (main_list_box);
++     }
++-    private static inline void _scroll_top (ref ListBox main_list_box)
+++    private static inline void _scroll_top (ListBox main_list_box)
++     {
++         Adjustment adjustment = main_list_box.get_adjustment ();
++         adjustment.set_value (adjustment.get_lower ());
++@@ -215,9 +215,9 @@ private abstract class OverlayedList : Overlay, AdaptativeWidget
++ 
++     protected void scroll_bottom ()
++     {
++-        _scroll_bottom (ref main_list_box);
+++        _scroll_bottom (main_list_box);
++     }
++-    private static inline void _scroll_bottom (ref ListBox main_list_box)
+++    private static inline void _scroll_bottom (ListBox main_list_box)
++     {
++         Adjustment adjustment = main_list_box.get_adjustment ();
++         adjustment.set_value (adjustment.get_upper ());
++@@ -225,9 +225,9 @@ private abstract class OverlayedList : Overlay, AdaptativeWidget
++ 
++     internal bool handle_copy_text (out string copy_text)
++     {
++-        return _handle_copy_text (out copy_text, ref main_list_box);
+++        return _handle_copy_text (out copy_text, main_list_box);
++     }
++-    private static inline bool _handle_copy_text (out string copy_text, ref ListBox main_list_box)
+++    private static inline bool _handle_copy_text (out string copy_text, ListBox main_list_box)
++     {
++         List<weak ListBoxRow> selected_rows = main_list_box.get_selected_rows ();
++         OverlayedListRow row;
++@@ -283,9 +283,9 @@ private abstract class OverlayedList : Overlay, AdaptativeWidget
++ 
++     internal SelectionState get_selection_state ()
++     {
++-        return _get_selection_state (ref main_list_box, ref main_list_store);
+++        return _get_selection_state (main_list_box, ref main_list_store);
++     }
++-    private static inline SelectionState _get_selection_state (ref ListBox main_list_box, ref GLib.ListStore main_list_store)
+++    private static inline SelectionState _get_selection_state (ListBox main_list_box, ref GLib.ListStore main_list_store)
++     {
++         List<weak ListBoxRow> selected_rows = main_list_box.get_selected_rows ();
++         uint n_selected_rows = selected_rows.length ();
++diff --git a/editor/pathentry.vala b/editor/pathentry.vala
++index 5000b21..5c7efc5 100644
++--- a/editor/pathentry.vala
+++++ b/editor/pathentry.vala
++@@ -133,9 +133,9 @@ private class PathEntry : Box, AdaptativeWidget
++ 
++     internal void entry_grab_focus_without_selecting ()
++     {
++-        _entry_grab_focus_without_selecting (ref search_entry);
+++        _entry_grab_focus_without_selecting (search_entry);
++     }
++-    private static void _entry_grab_focus_without_selecting (ref BrowserEntry search_entry)
+++    private static void _entry_grab_focus_without_selecting (BrowserEntry search_entry)
++     {
++         if (search_entry.text_length != 0)
++         {
++@@ -172,36 +172,36 @@ private class PathEntry : Box, AdaptativeWidget
++         requires (search_changed_handler != 0)
++     {
++         SignalHandler.block (search_entry, search_changed_handler);
++-        _prepare (mode, nullable_search, ref current_path, ref search_entry);
+++        _prepare (mode, nullable_search, ref current_path, search_entry);
++         SignalHandler.unblock (search_entry, search_changed_handler);
++     }
++ 
++     private static inline void _prepare (SearchMode   mode,
++                                          string?      nullable_search,
++                                      ref string       current_path,
++-                                     ref BrowserEntry search_entry)
+++                                         BrowserEntry search_entry)
++     {
++         string search;
++         switch (mode)
++         {
++             case SearchMode.EDIT_PATH_MOVE_END:
++                 search = nullable_search == null ? current_path : (!) nullable_search;
++-                _prepare_move_end (ref search, ref search_entry);
+++                _prepare_move_end (ref search, search_entry);
++                 return;
++ 
++             case SearchMode.EDIT_PATH_SELECT_ALL:
++                 search = nullable_search == null ? current_path : (!) nullable_search;
++-                _prepare_search (ref search, ref search_entry);
+++                _prepare_search (ref search, search_entry);
++                 return;
++ 
++             case SearchMode.EDIT_PATH_SELECT_LAST_WORD:
++                 search = current_path;
++-                _prepare_select_last_word (ref search, ref search_entry);
+++                _prepare_select_last_word (ref search, search_entry);
++                 return;
++ 
++             case SearchMode.SEARCH:
++                 search = "";
++-                _prepare_search (ref search, ref search_entry);
+++                _prepare_search (ref search, search_entry);
++                 return;
++ 
++             case SearchMode.UNCLEAR:
++@@ -210,19 +210,19 @@ private class PathEntry : Box, AdaptativeWidget
++         }
++     }
++ 
++-    private static inline void _prepare_move_end (ref string text, ref BrowserEntry search_entry)
+++    private static inline void _prepare_move_end (ref string text, BrowserEntry search_entry)
++     {
++         search_entry.text = text;
++-        _entry_grab_focus_without_selecting (ref search_entry);
+++        _entry_grab_focus_without_selecting (search_entry);
++     }
++ 
++-    private static inline void _prepare_search (ref string text, ref BrowserEntry search_entry)
+++    private static inline void _prepare_search (ref string text, BrowserEntry search_entry)
++     {
++         search_entry.text = text;
++         search_entry.grab_focus ();
++     }
++ 
++-    private static inline void _prepare_select_last_word (ref string current_path, ref BrowserEntry search_entry)
+++    private static inline void _prepare_select_last_word (ref string current_path, BrowserEntry search_entry)
++     {
++         search_entry.move_cursor (MovementStep.DISPLAY_LINE_ENDS, -1, false);
++         search_entry.text = current_path;
++diff --git a/editor/registry-list.vala b/editor/registry-list.vala
++index 74b7f99..54aa6fa 100644
++--- a/editor/registry-list.vala
+++++ b/editor/registry-list.vala
++@@ -291,9 +291,9 @@ private abstract class RegistryList : Grid, BrowsableView, AdaptativeWidget
++ 
++     internal bool handle_copy_text (out string copy_text) // can compile with "private", but is public 1/2
++     {
++-        return _handle_copy_text (out copy_text, ref key_list_box);
+++        return _handle_copy_text (out copy_text, key_list_box);
++     }
++-    private bool _handle_copy_text (out string copy_text, ref ListBox key_list_box)
+++    private bool _handle_copy_text (out string copy_text, ListBox key_list_box)
++     {
++         ListBoxRow? selected_row = (ListBoxRow?) key_list_box.get_selected_row ();
++         if (selected_row == null)
++@@ -1138,7 +1138,7 @@ private abstract class RegistryList : Grid, BrowsableView, AdaptativeWidget
++     * * headers
++     \*/
++ 
++-    protected static bool is_first_row (int row_index, ref unowned ListBoxRow? before)
+++    protected static bool is_first_row (int row_index, ListBoxRow? before)
++     {
++         bool is_first_row = row_index == 0;
++         if (is_first_row != (before == null))
++diff --git a/editor/registry-search.vala b/editor/registry-search.vala
++index 220583f..eb8e6f2 100644
++--- a/editor/registry-search.vala
+++++ b/editor/registry-search.vala
++@@ -48,7 +48,7 @@ private class RegistrySearch : RegistryList
++ 
++     internal bool handle_alt_copy_text (out string copy_text)
++     {
++-        return _handle_alt_copy_text (out copy_text, ref key_list_box);
+++        return _handle_alt_copy_text (out copy_text, key_list_box);
++     }
++ 
++     internal void clean ()
++@@ -145,7 +145,7 @@ private class RegistrySearch : RegistryList
++     * * Keyboard calls
++     \*/
++ 
++-    private static bool _handle_alt_copy_text (out string copy_text, ref ListBox key_list_box)
+++    private static bool _handle_alt_copy_text (out string copy_text, ListBox key_list_box)
++     {
++         ListBoxRow? selected_row = key_list_box.get_selected_row ();
++         if (selected_row == null)
++@@ -521,7 +521,7 @@ private class RegistrySearch : RegistryList
++     private void update_row_header (ListBoxRow row, ListBoxRow? before)
++     {
++         int row_index = row.get_index ();
++-        if (is_first_row (row_index, ref before))
+++        if (is_first_row (row_index, before))
++             return;
++ 
++         if (search_is_path_search)
++diff --git a/editor/registry-view.vala b/editor/registry-view.vala
++index e0ff379..7d9eb1f 100644
++--- a/editor/registry-view.vala
+++++ b/editor/registry-view.vala
++@@ -114,7 +114,7 @@ private class RegistryView : RegistryList
++ 
++     private void update_row_header (ListBoxRow row, ListBoxRow? before)
++     {
++-        if (is_first_row (row.get_index (), ref before))
+++        if (is_first_row (row.get_index (), before))
++             return;
++         update_row_header_with_context (row, (!) before, modifications_handler.model, /* local search header */ false);
++     }
++-- 
++2.30.1
++
+diff --git a/meta-gnome/recipes-gnome/dconf/dconf-editor_3.38.2.bb b/meta-gnome/recipes-gnome/dconf/dconf-editor_3.38.2.bb
+index 02e604f0c0..776558ebf3 100644
+--- a/meta-gnome/recipes-gnome/dconf/dconf-editor_3.38.2.bb
++++ b/meta-gnome/recipes-gnome/dconf/dconf-editor_3.38.2.bb
+@@ -8,6 +8,8 @@ DEPENDS = "dconf gtk+3"
  
- SRC_URI = "http://ftp.netfilter.org/pub/ipset/${BP}.tar.bz2"
--SRC_URI[sha256sum] = "b24906ba43e2fe322bd41863476761d749a4bddf5ce4c2265ba04b03bc7e9cf6"
-+SRC_URI[sha256sum] = "3151baad30f1d9e317b2ab4f2f5aa7a9f7b4dc11fcf8fe73acd0dc0b5dbabf7d"
+ inherit gnomebase vala gettext gsettings bash-completion
  
- inherit autotools pkgconfig module-base
++SRC_URI += "file://0001-Don-t-alter-or-try-to-write-GtkChild-fields.patch"
++
+ SRC_URI[archive.sha256sum] = "1253dad87e6213fbf313ff9ec9dc4358aa1b10261f28072c1dc0e0997b92f835"
  
+ FILES_${PN} += " \
 -- 
-2.25.1
+2.30.1
 
