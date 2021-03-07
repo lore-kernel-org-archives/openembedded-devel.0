@@ -1,136 +1,98 @@
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
- by mx.groups.io with SMTP id smtpd.web08.17004.1615085930180063603
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.web10.17956.1615095818773689323
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Mar 2021 18:58:50 -0800
+ Sat, 06 Mar 2021 21:43:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: randy.macleod@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 1272wixI011682
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Sat, 6 Mar 2021 18:58:44 -0800 (PST)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2106.2; Sat, 6 Mar 2021 18:58:33 -0800
-Received: from vme.wrs.com (172.25.44.2) by ala-exchng01.corp.ad.wrs.com
- (147.11.82.252) with Microsoft SMTP Server id 15.1.2106.2 via Frontend
- Transport; Sat, 6 Mar 2021 18:58:33 -0800
-From: "Randy MacLeod" <randy.macleod@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH 2/2] zabbix: upgrade 4.4.6 -> 5.2.5
-Date: Sat, 6 Mar 2021 21:58:27 -0500
-Message-ID: <20210307025827.137764-2-Randy.MacLeod@windriver.com>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20210307025827.137764-1-Randy.MacLeod@windriver.com>
-References: <20210307025827.137764-1-Randy.MacLeod@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=L9UlYFlp;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id mz6-20020a17090b3786b02900c16cb41d63so1343333pjb.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Mar 2021 21:43:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=GSTObxbNm1/cd0PX733/GRjZhn+4Y9u1zEmqiKWpw5s=;
+        b=L9UlYFlpfVXnD0OPMA0ZWsHAg0Uyu1xdzd7t9HsMQkiyQGWduVIc3bZ0mduk3my3KO
+         PuaOkQFnOaS1+GGKZjdGxKzutmAVHN9z0JuFh/zFUuFfUTcPGfSK83vZIWDl7TDOmifA
+         MqRtP+gNPb/fM5YsSHwLPvZLUKdg08OWmYhLONJCCLC3t3XMwv0qTb7/mSUoh/m8hwmh
+         qfBROlH6Qm3kmkiN5/t5HnwlzH3YWCHw0GUxF8dmnlA//WKm5CdeVlMBZEoS1nXsmm27
+         OeO/+yFXIFw3NvebCHIpO9Y6V7aiHy3lpNbch2Zp4coHu6AcgIufTG4UrQDuXkiEscNm
+         bNHA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=GSTObxbNm1/cd0PX733/GRjZhn+4Y9u1zEmqiKWpw5s=;
+        b=N7nRzltXeketcoTadN5JkS4HSTddTqjX3RqssJqKi9exjWmBm64lMcWsho5il9c4+2
+         8H054Mn3rRoBWn70DgCQsqlyMAfYMW/RfqpSXNWqUsfhhsRzZ2tQ7K8vCn1HkCKv0Qnz
+         SJG2sDu5tpeBqDEmKgaIsiI2ZFNv2DvxHuShpmGLlrFhAlHtUwEh+8zA5XtloLvTA4Lv
+         wWGWlRRgxlEvbFlv3odmvpAzn6mrksUolPdoIpxkxTcvhBN07FGfOQJAJmezYxSWNHtA
+         bauPBxgVx4nSsVQDznn/DvUgHqU10Lhei2LH49VV0/c0Cm20+dI4HHec7fnA8o0Xz0UX
+         57Gw==
+X-Gm-Message-State: AOAM533gY28wmFvRXCRMbt5AW00izEcgpZ0dzqY1kNxXaYfowBxo8sMv
+	Qo+f2MHxa5XM0Y1kqKe/puuM8mlWnVXm6w==
+X-Google-Smtp-Source: ABdhPJwzHa4QiJD3Gwl2Tq+XspdredUE3H4OGo1x7BnyP5EtHMn52ZGnJb75S8RC28fbnSQMfLQnDg==
+X-Received: by 2002:a17:90a:c201:: with SMTP id e1mr18246629pjt.30.1615095817929;
+        Sat, 06 Mar 2021 21:43:37 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::e641])
+        by smtp.gmail.com with ESMTPSA id e185sm6796810pfe.117.2021.03.06.21.43.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 06 Mar 2021 21:43:37 -0800 (PST)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [PATCH v2 1/3] libbacktrace: Add recipe
+Date: Sat,  6 Mar 2021 21:43:32 -0800
+Message-Id: <20210307054335.2332899-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.30.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-Drop CVE patch that is not needed for 5.2.5. Add Upstream-Status: tag
-for the configure patch which specifies the kernel version.
-Specify the recipe specific sysroot path to avoid:
-   QA Issue: ... [configure-unsafe]
-for libpcre and iconv.
-
-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../zabbix/zabbix/0001-Fix-configure.ac.patch |  2 ++
- .../zabbix/zabbix/CVE-2020-15803.patch        | 36 -------------------
- .../{zabbix_4.4.6.bb => zabbix_5.2.5.bb}      | 10 +++---
- 3 files changed, 7 insertions(+), 41 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2020-15803.patch
- rename meta-oe/recipes-connectivity/zabbix/{zabbix_4.4.6.bb => zabbix_5.2.5.bb} (89%)
+v2: Compile with -fPIC and exclude for riscv since it needs libunwind
 
-diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix/0001-Fix-configure.ac.patch b/meta-oe/recipes-connectivity/zabbix/zabbix/0001-Fix-configure.ac.patch
-index af14a1a56..97339d3ff 100644
---- a/meta-oe/recipes-connectivity/zabbix/zabbix/0001-Fix-configure.ac.patch
-+++ b/meta-oe/recipes-connectivity/zabbix/zabbix/0001-Fix-configure.ac.patch
-@@ -1,5 +1,7 @@
- uname can not get version of kernel correctly while cross compile
- 
-+Upstream-Status: Inappropriate [configuration]
+ .../libbacktrace/libbacktrace_git.bb          | 30 +++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/libbacktrace/libbacktrace_git.bb
+
+diff --git a/meta-oe/recipes-extended/libbacktrace/libbacktrace_git.bb b/meta-oe/recipes-extended/libbacktrace/libbacktrace_git.bb
+new file mode 100644
+index 0000000000..1f3cb97c13
+--- /dev/null
++++ b/meta-oe/recipes-extended/libbacktrace/libbacktrace_git.bb
+@@ -0,0 +1,30 @@
++# Copyright (C) 2021 Khem Raj <raj.khem@gmail.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
 +
- Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
- ---
-  configure.ac | 2 +-
-diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2020-15803.patch b/meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2020-15803.patch
-deleted file mode 100644
-index 2eec4bf32..000000000
---- a/meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2020-15803.patch
-+++ /dev/null
-@@ -1,36 +0,0 @@
--From 4943334fd9bf7dffd49f9e86251ad40b3efe2135 Mon Sep 17 00:00:00 2001
--From: Wang Mingyu <wangmy@cn.fujitsu.com>
--Date: Fri, 11 Dec 2020 17:02:20 +0900
--Subject: [PATCH] Fix bug for CVE-2020-15803
--
--Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
-----
-- frontends/php/include/classes/html/CIFrame.php | 7 +++++++
-- 1 file changed, 7 insertions(+)
--
--diff --git a/frontends/php/include/classes/html/CIFrame.php b/frontends/php/include/classes/html/CIFrame.php
--index 32220cd..70f2ab5 100644
----- a/frontends/php/include/classes/html/CIFrame.php
--+++ b/frontends/php/include/classes/html/CIFrame.php
--@@ -29,6 +29,7 @@ class CIFrame extends CTag {
-- 		$this->setHeight($height);
-- 		$this->setScrolling($scrolling);
-- 		$this->setId($id);
--+		$this->setSandbox();
-- 	}
-- 
-- 	public function setSrc($value = null) {
--@@ -69,4 +70,10 @@ class CIFrame extends CTag {
-- 		$this->setAttribute('scrolling', $value);
-- 		return $this;
-- 	}
--+
--+	private function setSandbox() {
--+		if (ZBX_IFRAME_SANDBOX !== false) {
--+			$this->setAttribute('sandbox', ZBX_IFRAME_SANDBOX);
--+		}
--+	}
-- }
---- 
--2.25.1
--
-diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_4.4.6.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_5.2.5.bb
-similarity index 89%
-rename from meta-oe/recipes-connectivity/zabbix/zabbix_4.4.6.bb
-rename to meta-oe/recipes-connectivity/zabbix/zabbix_5.2.5.bb
-index 98a31879c..2bbfec9dc 100644
---- a/meta-oe/recipes-connectivity/zabbix/zabbix_4.4.6.bb
-+++ b/meta-oe/recipes-connectivity/zabbix/zabbix_5.2.5.bb
-@@ -23,14 +23,13 @@ DEPENDS  = "libevent libpcre openldap virtual/libiconv zlib"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--SRC_URI = "http://jaist.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/${PV}/${BPN}-${PV}.tar.gz \
-+SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/5.2/${BPN}-${PV}.tar.gz \
-     file://0001-Fix-configure.ac.patch \
-     file://zabbix-agent.service \
--    file://CVE-2020-15803.patch \
- "
- 
--SRC_URI[md5sum] = "e666539220be93b1af38e40f5fbb1f79"
--SRC_URI[sha256sum] = "22bb28e667424ad4688f47732853f4241df0e78a7607727b043d704ba726ae0e"
-+SRC_URI[md5sum] = "e90822716c5c241890f6fed1588b5451"
-+SRC_URI[sha256sum] = "ce0d9745a8b9154e87d6906edd0fce7b7ec298acd34a0543ea53d1a5f2f14bc5"
- 
- inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
- 
-@@ -58,7 +57,8 @@ EXTRA_OECONF = " \
-     --with-zlib \
-     --with-libpthread \
-     --with-libevent \
--    --with-libpcre \
-+    --with-libpcre=${STAGING_EXECPREFIXDIR} \
-+    --with-iconv=${STAGING_EXECPREFIXDIR} \
- "
- CFLAGS_append = " -lldap -llber -pthread"
- 
++SUMMARY = "A C library that may be linked into a C/C++ program to produce symbolic backtraces"
++HOMEPAGE = "https://github.com/ianlancetaylor/libbacktrace"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=24b5b3feec63c4be0975e1fea5100440"
++
++DEPENDS += "libunwind"
++
++SRC_URI = "git://github.com/ianlancetaylor/libbacktrace;protocol=https"
++
++PV = "1.0+git${SRCPV}"
++SRCREV = "4f57c999716847e45505b3df170150876b545088"
++
++S = "${WORKDIR}/git"
++
++inherit autotools
++
++EXTR_OECONF += "--with-system-libunwind"
++
++CFLAGS += "-fPIC"
++
++do_configure() {
++    oe_runconf
++}
++
++# libunwind does not support RISCV yet
++COMPATIBLE_HOST_riscv64 = "null"
++COMPATIBLE_HOST_riscv32 = "null"
 -- 
-2.27.0
+2.30.1
 
