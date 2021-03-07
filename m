@@ -1,108 +1,90 @@
-Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
- by mx.groups.io with SMTP id smtpd.web10.24320.1615139365983526178
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+ by mx.groups.io with SMTP id smtpd.web10.27976.1615156501445592531
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Mar 2021 09:49:26 -0800
+ Sun, 07 Mar 2021 14:35:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=cyqcLsAF;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.48, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f48.google.com with SMTP id x4so9072338lfu.7
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Mar 2021 09:49:25 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=NfBvqSrd;
+ spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f50.google.com with SMTP id p7so5057122eju.6
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Mar 2021 14:35:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=xH8b3RCo3uVxIVYQFGdPTrKHhV7nZKh0gznslFOox2A=;
-        b=cyqcLsAF328gPtXWgcdfkSSbwG3OjQYw422dYV195FRNrUjvYZpLZNzpbce6WDX6DI
-         tfw/uycaC1fbYeRI0dg1kX3FM0mMt2nAnCiuk0hjygP1FMrKj0JlolfEepOAsNV2hTs8
-         O/H6VFZgrNdkJEkUmuMHTutcDPSaORlAhAK0wKG29cJ8XB9w7NApqzgJU6I6GoyfWy/H
-         eQOCAQpjY5nD0wZ6ulMG0SF9+Ta5tkjATEPu0FYO3oLLxjQDWck3zTb6WCdny3TFe+d9
-         h7NOC8yII7QzfCuILqnJ8Pr4JrF6QJvobN5M4DEg3d5vSFl0KWXTC0Y2zyb9n9eO8uVo
-         iItw==
+        bh=bDBNTs/U1mEtank3TgCQ77D4ME6zKBlSRBzhrXYKeNM=;
+        b=NfBvqSrdMKF/BeBM71It0VZsZW+XRQAsdHDheph7vkeS7aUbCrct6IHo905hRf6Mwk
+         WinW8wEibPHYTONnTwIDphSZi+9F5IdQIC5grEtyqzervPs2lY+UfWndqKVX0VDhBuPH
+         4OtDo3wg6qTe8uok+u0Np2K2sZ9viME5AVXVJN/9gNK3/tteJ0LsT7wzjSbKfA8AxRBe
+         YxBF0BqxgDDLM9ObC4t++6lTHpvODykRnl3nBbkFMMeFpBA9m4gTktE248TK2Y3OctAU
+         HuS+W2nij49AUcPeUjCuoZ5qL27EPFoGqm591mFyo6YtOG9hVd0UOvLiWqkhfLN0uPKR
+         e1ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=xH8b3RCo3uVxIVYQFGdPTrKHhV7nZKh0gznslFOox2A=;
-        b=UH3Bdx7NB1un5ZyPkQgYrWg5P+cO6xzAdleuJb7K9NTOthRK5KV1qQQtwDS422lWL6
-         7JuNxvhfpUepUHtrkiMOPQzj7bL/4KnVntBsOotfzxaoXumFt7mGw1N8Op0I1VXyx3DO
-         dCf46ecMq72sorSFsL2SI3RcxQEbaFtFvJ5ztHWRlZPDuuvsBfy/adyN461DVBmZAoHv
-         ekaWXDEC7yylcCm2DHsyheSAkt4efuUuV7AN7kDtUXuLb51JxZSKI+wXcGR/Dqek/IgH
-         skqqGPVd4QexIZOJ3E960oocHjXEIWc9tSgIrIdNL5QDaOzRufThjvqisUgTkV0nBN3S
-         qhag==
-X-Gm-Message-State: AOAM531BYm/7Y/Ix3WFWj7Gn5ytRBso59HwEZNlPQEjDAeHThaMggqlQ
-	0zJCOzielHZEmEhzRKFdSNIslZGXpCdk5nTe
-X-Google-Smtp-Source: ABdhPJy6/mHAgYs7Jx5CAGTJLAYpsD70ipB8wKhIc+p2r2sXrZwEMXiN7SFucysJW9Y0mzq0cJ0DzA==
-X-Received: by 2002:ac2:490b:: with SMTP id n11mr11628428lfi.491.1615139363520;
-        Sun, 07 Mar 2021 09:49:23 -0800 (PST)
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id b31sm1158519ljf.38.2021.03.07.09.49.22
+        bh=bDBNTs/U1mEtank3TgCQ77D4ME6zKBlSRBzhrXYKeNM=;
+        b=SWWSUd/TY+Nn1ZBDHyGDfXIDFIfpsMSd2fgXV6ePlEnLMcr4CHhkUblmnjo8aQSplF
+         K0fMJqkyk8IJzulg4/Lsx+AKSpS9IgHNZNBTJ20spPxncOjPoF7DsGXuwQohHIDZhJ0s
+         j8m6N/gCk5zxNRQGkZY7rPcNQYZdneP41EPqVSff5sWrc1a+cZHjPSkg/pS6xoNy0/5h
+         sq7Wi8KgAD8lVjzHNKZsHsnzY2DvNFir5LX/Vvjry30Q2aBljUav+XxfO9f4cBed77+6
+         /xJPxtx2u3wVoAzjEQyL0FCHG1a33BkohmO6OD9m8ZTOMDGnnYL24OYSzvG9rJrJgR+M
+         plrg==
+X-Gm-Message-State: AOAM531mztRrZUdNMEWhj/J3q1MhifQBOPNMgkUFcFhZmL9uom8/7CUV
+	8sZGdZkJsb73kqkQ0Oehh9ft9IE+8jk=
+X-Google-Smtp-Source: ABdhPJzoeNvdEa+LC7x39kRvW8K+WfDvbpW5JRQufHUYUYoKOg2mRX5F/JigZDf44oMAM67CQqTNdQ==
+X-Received: by 2002:a17:906:2c44:: with SMTP id f4mr251966ejh.508.1615156499706;
+        Sun, 07 Mar 2021 14:34:59 -0800 (PST)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from superandy.speedport.ip (p200300f07f3c4e6849043cb4c496f775.dip0.t-ipconnect.de. [2003:f0:7f3c:4e68:4904:3cb4:c496:f775])
+        by smtp.gmail.com with ESMTPSA id mc2sm5501399ejb.115.2021.03.07.14.34.58
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 Mar 2021 09:49:23 -0800 (PST)
-From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
+        Sun, 07 Mar 2021 14:34:59 -0800 (PST)
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-oe][PATCH] libinih: bump to latest revision
-Date: Sun,  7 Mar 2021 18:49:21 +0100
-Message-Id: <20210307174921.1072640-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+Subject: [PATCH 1/9] udisks2: upgrade 2.9.1 -> 2.9.2 / replace '_git' by version in recipe-name
+Date: Sun,  7 Mar 2021 23:34:40 +0100
+Message-Id: <20210307223448.1063315-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Has patch upstreamed.
+This is a bugfix release, notable changes include:
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+* the /etc/fstab "noauto" mount option is now reflected in the org.freedesktop.UDisks2.Block.HintAuto property
+* security: the recursive org.freedesktop.UDisks2.Filesystem.TakeOwnership() method call is now less prone to race conditions
+* (e)MMC block devices are now always marked as non-removable and non-ejectable
+* missing /etc/crypttab is now handled gracefully when adding or removing entries
+* loop device setup fixes for recent kernels
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...header-files-without-prefix-dir-inih.patch | 24 -------------------
- meta-oe/recipes-support/inih/libinih_git.bb   |  3 +--
- 2 files changed, 1 insertion(+), 26 deletions(-)
- delete mode 100644 meta-oe/recipes-support/inih/files/0001-include-install-header-files-without-prefix-dir-inih.patch
+ .../udisks/{udisks2_git.bb => udisks2_2.9.2.bb}            | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-support/udisks/{udisks2_git.bb => udisks2_2.9.2.bb} (89%)
 
-diff --git a/meta-oe/recipes-support/inih/files/0001-include-install-header-files-without-prefix-dir-inih.patch b/meta-oe/recipes-support/inih/files/0001-include-install-header-files-without-prefix-dir-inih.patch
-deleted file mode 100644
-index fb7b85cfd..000000000
---- a/meta-oe/recipes-support/inih/files/0001-include-install-header-files-without-prefix-dir-inih.patch
-+++ /dev/null
-@@ -1,24 +0,0 @@
--include: install header files without prefix dir inih
--
--The other flavor of inih which adapted by Fedora and Ubuntu installs
--header files to /usr/include directly. And xfsprogs 5.10.0 also checks
--ini.h without extra search path and fails. So install header files
--without prefix dir inih.
--
--Upstream-Status: Submitted [https://github.com/OSSystems/inih/pull/4]
--
--Signed-off-by: Kai Kang <kai.kang@windriver.com>
-----
-- include/CMakeLists.txt | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/include/CMakeLists.txt b/include/CMakeLists.txt
--index 7a46ee7..4a9033f 100644
----- a/include/CMakeLists.txt
--+++ b/include/CMakeLists.txt
--@@ -1 +1 @@
---install(FILES ini.h INIReader.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/inih)
--+install(FILES ini.h INIReader.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-support/inih/libinih_git.bb b/meta-oe/recipes-support/inih/libinih_git.bb
-index 5beb29281..80bec1bf4 100644
---- a/meta-oe/recipes-support/inih/libinih_git.bb
-+++ b/meta-oe/recipes-support/inih/libinih_git.bb
-@@ -8,9 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=dae28cbf28207425e0d0b3eb835f4bde"
- PR = "r3"
+diff --git a/meta-oe/recipes-support/udisks/udisks2_git.bb b/meta-oe/recipes-support/udisks/udisks2_2.9.2.bb
+similarity index 89%
+rename from meta-oe/recipes-support/udisks/udisks2_git.bb
+rename to meta-oe/recipes-support/udisks/udisks2_2.9.2.bb
+index 196198c52..f9e127438 100644
+--- a/meta-oe/recipes-support/udisks/udisks2_git.bb
++++ b/meta-oe/recipes-support/udisks/udisks2_2.9.2.bb
+@@ -17,11 +17,8 @@ DEPENDS += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
  
- # The github repository provides a cmake and pkg-config integration
--SRCREV = "c858aff8c31fa63ef4d1e0176c10e5928cde9a23"
-+SRCREV = "0e635abc80127d2f05b8175a141f5e243861855d"
- SRC_URI = "git://github.com/OSSystems/inih.git \
--           file://0001-include-install-header-files-without-prefix-dir-inih.patch \
-            "
+ RDEPENDS_${PN} = "acl"
  
- UPSTREAM_CHECK_COMMITS = "1"
+-SRC_URI = " \
+-    git://github.com/storaged-project/udisks.git;branch=master \
+-"
+-PV = "2.9.1"
+-SRCREV = "95444ab6bf2b8d8c205b540dded4029fcb15f91b"
++SRC_URI = "git://github.com/storaged-project/udisks.git;branch=master"
++SRCREV = "da6d9480fefeb0ffdf8a84626b5096827d8d7030"
+ S = "${WORKDIR}/git"
+ 
+ CVE_PRODUCT = "udisks"
 -- 
-2.25.1
+2.26.2
 
