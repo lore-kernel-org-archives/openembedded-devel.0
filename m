@@ -1,50 +1,50 @@
-Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
- by mx.groups.io with SMTP id smtpd.web10.27981.1615156504614710274
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web10.27982.1615156505208495469
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Mar 2021 14:35:04 -0800
+ Sun, 07 Mar 2021 14:35:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=LgZ0mcSI;
- spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f52.google.com with SMTP id p7so5057275eju.6
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=vgSfWpMd;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id ci14so16434921ejc.7
         for <openembedded-devel@lists.openembedded.org>; Sun, 07 Mar 2021 14:35:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=A06BDYCmzpkdeTzKSXHX9c47pIRn3ovQUTj2eLzllKk=;
-        b=LgZ0mcSI9mOPF/wiArp5bjWOW7axSR/0FJdZOrr2XlsfkbUHLJ/djYv7c1ql1iUdff
-         tw8gyYC6XpUuWLY2D+DbT7xUMNwrmIEygVAUIl8GFbaKn8vgaZyfJBy3jMFUXUebsSx6
-         3hlRNOCc9e7ehrmJAdVJ4756MfZfS86YuA7OeY6gccrjlIglHFcPNX74H9S6oBABFxuj
-         UvlzU1SxXmi4gy0mW5WGq6UXAhXqDWu7CqOs5TYOsTVYXUoyEC2zy4/8oW9PFOay6Hl4
-         SGT3OvgQoh6aFanbRWPjOmgK0pLDM54pSTXG3tlfvsoTEE2Um6ILugo/0CRuhUWdm6i5
-         oK8Q==
+        bh=WL4RoJMyEQmey9QnhQwlqGU575fuW3e4SFSXRHi8Hy8=;
+        b=vgSfWpMdHMdFyc3Jo/VgxcIeTIxJT5PSS7E2PBv0yRAr6KO2KrYIUJDbQA61KvwDhZ
+         1FtoX7elBo6LMLm5O0CQQrbT1PTzduJAFoN9FSg6od+ZlsMHRjZWJBkkqRz4pUEhCPYB
+         EvrGrvr7hJG/2RMOVjqMVj7pIftfzm+lBWhZ6qQEo8FU04AIwIxZaoLcNCJ40P8637FO
+         XEzp2ilqWbDpnt6IXgNUdQx2aLxMDxAPlx0HpVh7HaDOBFBXWRpfrUuPpd32bm9xgzin
+         anJz7EDonBeVXTmEdifXhM4nDnWrLPN99QQTcS9iYIt2D5nJ8eUSaenq6YK2AaS0I63L
+         qW1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=A06BDYCmzpkdeTzKSXHX9c47pIRn3ovQUTj2eLzllKk=;
-        b=luQYF0E2Q6TWHy5f0d6P8HWNY8/xlQHVGIvuvSwAnZSwJsDIqRWBD8ER3R+v3/VesZ
-         jE2TtJGczzp1orLZhZxWFvcpZIqPcrqWWwIqTgV+MAJK0nh7bc5qXCauaKIGBgonlNGG
-         uv6hE6mHif1iRyTYqBV2MD/xPT9lM0PnU/dwnvnAL5VWuKEGe1bNhFK7vxj4bX66jA/u
-         ViMMTBc+3zPfsSkjppwGFNmeFssTFxazomQ0zAkajWEvI6rCpeS4HHNrvDKeu4qrkpOb
-         T2IbF6I+htiNb/giR+4j+HBtokLUM1LTGkgTaegv7XGRlutG76H4gjzvGDQpQoOhIqtD
-         rGvg==
-X-Gm-Message-State: AOAM532yvnblXXtJMvolssjqvSVi+3cIuXhZ9297JMO7t9FJ+1TZX8FM
-	OAUSXTs8caS/oW+eXJozO4N0k2MlkrE=
-X-Google-Smtp-Source: ABdhPJys14Y8i4OgvvvXtomKjidt7r0x/yY9os/Uim2OrTeTSYV93RXAEc4dMZDkrHmYfLZsr26cZw==
-X-Received: by 2002:a17:906:bd2:: with SMTP id y18mr12405549ejg.482.1615156503171;
+        bh=WL4RoJMyEQmey9QnhQwlqGU575fuW3e4SFSXRHi8Hy8=;
+        b=fLO3iZ8m7kpMDxpDldWoomGTzU0jh+Dn/pVSPCENc8iOPgfIAroikiJc3oU7HQCXte
+         dwBMjtI5B+Wg1b4yrXvjcBONk8zIBC2wHZwre2IWEn7rV+fmBboKCdJ5gP1cXO6UBP+F
+         34YY9br5DhgJ58ND82CZmvlSccDLtuYXwMJZXJJaGVR1aKHSqRfxySfaD0jLkTgHDb1N
+         5m2hhv6eYWhGnpVzXSxUdmWBZ8MhxdWsbWZ/saKRaGg6tc4kReMO3wVjntxBdWPHtU2G
+         8rsBB/s91bzU34HqueAOicQU1tg1SzHqWqUBW1fs+H5B+hYK3o6ZHPK2MXa48avFURg7
+         RIpw==
+X-Gm-Message-State: AOAM5318yPRCrhKlwgfSgfnFPM+ZZ1wH53aFyhPUIfqkl2JKcktGw1hP
+	m8xP0SDpdTn7b4Le4p8LWa6K5L5XtdE=
+X-Google-Smtp-Source: ABdhPJwegYd1W6riPsKCoReJyGlVJjlq0nayJYSMQwbbwek3ic/b4HplUXoMadTbGT0O/wtur0ikLQ==
+X-Received: by 2002:a17:906:1fd2:: with SMTP id e18mr12680014ejt.49.1615156503855;
         Sun, 07 Mar 2021 14:35:03 -0800 (PST)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f3c4e6849043cb4c496f775.dip0.t-ipconnect.de. [2003:f0:7f3c:4e68:4904:3cb4:c496:f775])
-        by smtp.gmail.com with ESMTPSA id mc2sm5501399ejb.115.2021.03.07.14.35.02
+        by smtp.gmail.com with ESMTPSA id mc2sm5501399ejb.115.2021.03.07.14.35.03
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 Mar 2021 14:35:02 -0800 (PST)
+        Sun, 07 Mar 2021 14:35:03 -0800 (PST)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 6/9] mousepad: upgrade 0.5.2 -> 0.5.3
-Date: Sun,  7 Mar 2021 23:34:45 +0100
-Message-Id: <20210307223448.1063315-6-schnitzeltony@gmail.com>
+Subject: [PATCH 7/9] xfce4-panel-profiles: 1.0.12 -> 1.0.13
+Date: Sun,  7 Mar 2021 23:34:46 +0100
+Message-Id: <20210307223448.1063315-7-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210307223448.1063315-1-schnitzeltony@gmail.com>
 References: <20210307223448.1063315-1-schnitzeltony@gmail.com>
@@ -52,42 +52,113 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Release notes for 0.5.3
-=======================
-- Appearance Changes:
-  - Use old style menu alignment (#97, !77)
+Although not mentioned below and obstacles in the way,
+0001-Makefile.in.in-remove-bashisms.patch made it upstream [1].
 
-- Bug Fixes:
-  - Add a keybinding to reset font size
-  - Fix inverted return value of scroll event handler
-  - Various small improvements regarding accels
-  - Block the right signal handler for tooltip updates
-  - A clarification about action groups
+Release notes for 1.0.13
+========================
+New Features:
+- Add Cupertino layout (#7)
+- Add Redmond 7 layout (#8)
+- Add Xfce 4.16 layout
 
-- Translation Updates
+General:
+- Updated existing templates to support Xfce 4.16
+- Makefile.in.in: remove bashisms
+- Enabled exporting Whisker menu configuration (#11)
+
+Updated translations
+
+[1] https://gitlab.xfce.org/apps/xfce4-panel-profiles/-/commit/1565fe5f450732a82a76b828610fc935501584d0
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../mousepad/{mousepad_0.5.2.bb => mousepad_0.5.3.bb}           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-apps/mousepad/{mousepad_0.5.2.bb => mousepad_0.5.3.bb} (80%)
+ .../0001-Makefile.in.in-remove-bashisms.patch | 56 -------------------
+ ...0.12.bb => xfce4-panel-profiles_1.0.13.bb} |  3 +-
+ 2 files changed, 1 insertion(+), 58 deletions(-)
+ delete mode 100644 meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles/0001-Makefile.in.in-remove-bashisms.patch
+ rename meta-xfce/recipes-apps/xfce4-panel-profiles/{xfce4-panel-profiles_1.0.12.bb => xfce4-panel-profiles_1.0.13.bb} (83%)
 
-diff --git a/meta-xfce/recipes-apps/mousepad/mousepad_0.5.2.bb b/meta-xfce/recipes-apps/mousepad/mousepad_0.5.3.bb
-similarity index 80%
-rename from meta-xfce/recipes-apps/mousepad/mousepad_0.5.2.bb
-rename to meta-xfce/recipes-apps/mousepad/mousepad_0.5.3.bb
-index a7e96851a..1fba67914 100644
---- a/meta-xfce/recipes-apps/mousepad/mousepad_0.5.2.bb
-+++ b/meta-xfce/recipes-apps/mousepad/mousepad_0.5.3.bb
-@@ -7,7 +7,7 @@ DEPENDS = "gtk+3 gtksourceview3 xfconf xfce4-dev-tools-native"
+diff --git a/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles/0001-Makefile.in.in-remove-bashisms.patch b/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles/0001-Makefile.in.in-remove-bashisms.patch
+deleted file mode 100644
+index 9738f1a8c..000000000
+--- a/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles/0001-Makefile.in.in-remove-bashisms.patch
++++ /dev/null
+@@ -1,56 +0,0 @@
+-Makefile.in.in: remove bashisms
+-
+-The brace expansion is bash specific and fails with dash.
+-
+-Upstream-Status: Pending [No permission to folk repo and create pull request]
+-
+-https://gitlab.xfce.org/apps/xfce4-panel-profiles
+-
+-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+----
+- Makefile.in.in | 15 ++++++++++++----
+- 1 file changed, 11 insertions(+), 4 deletions(-)
+-
+-diff --git a/Makefile.in.in b/Makefile.in.in
+-index 73338f4..e08b218 100644
+---- a/Makefile.in.in
+-+++ b/Makefile.in.in
+-@@ -73,8 +73,11 @@ install: all xfce4-panel-profiles.1
+- 
+- 	install -d $(DESTDIR)/$(MANDIR)/man1
+- 	install xfce4-panel-profiles.1 $(DESTDIR)/$(MANDIR)/man1
+--	
+--	install -d $(DESTDIR)/$(PREFIX)/share/icons/hicolor/{128x128,48x48,16x16,scalable}/apps
+-+
+-+	install -d $(DESTDIR)/$(PREFIX)/share/icons/hicolor/128x128/apps
+-+	install -d $(DESTDIR)/$(PREFIX)/share/icons/hicolor/48x48/apps
+-+	install -d $(DESTDIR)/$(PREFIX)/share/icons/hicolor/16x16/apps
+-+	install -d $(DESTDIR)/$(PREFIX)/share/icons/hicolor/scalable/apps
+- 	install data/icons/128x128/org.xfce.PanelProfiles.png $(DESTDIR)/$(PREFIX)/share/icons/hicolor/128x128/apps
+- 	install data/icons/48x48/org.xfce.PanelProfiles.png $(DESTDIR)/$(PREFIX)/share/icons/hicolor/48x48/apps
+- 	install data/icons/16x16/org.xfce.PanelProfiles.png $(DESTDIR)/$(PREFIX)/share/icons/hicolor/16x16/apps
+-@@ -86,7 +89,9 @@ uninstall:
+- 	rm -rf $(DESTDIR)/$(DOCDIR)
+- 	# FIXME: Uninstall locales
+- 	rm -f $(DESTDIR)/$(PREFIX)/bin/$(APPNAME)
+--	rm -rf $(DESTDIR)/$(PREFIX)/share/icons/hicolor/{128x128,48x48,16x16}/apps/org.xfce.PanelProfiles.png
+-+	rm -rf $(DESTDIR)/$(PREFIX)/share/icons/hicolor/128x128/apps
+-+	rm -rf $(DESTDIR)/$(PREFIX)/share/icons/hicolor/48x48/apps
+-+	rm -rf $(DESTDIR)/$(PREFIX)/share/icons/hicolor/16x16/apps
+- 	rm -rf $(DESTDIR)/$(PREFIX)/share/icons/hicolor/scalable/apps/org.xfce.PanelProfiles.svg
+- 
+- distcheck: all
+-@@ -106,7 +112,9 @@ clean:
+- 	rm -f bin/$(APPNAME)
+- 	rm -f data/metainfo/org.xfce.PanelProfiles.appdata.xml
+- 	rm -f data/layouts/*.tar.bz2
+--	rm -f data/icons/{128x128,48x48,16x16}/org.xfce.panelprofiles.png
+-+	rm -f data/icons/128x128/org.xfce.panelprofiles.png
+-+	rm -f data/icons/48x48/org.xfce.panelprofiles.png
+-+	rm -f data/icons/16x16/org.xfce.panelprofiles.png
+- 	rm -f data/icons/scalable/org.xfce.panelprofiles.svg
+- 	rm -f org.xfce.PanelProfiles.desktop
+- 	rm -f Makefile.in
+--- 
+-2.25.1
+-
+diff --git a/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.12.bb b/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.13.bb
+similarity index 83%
+rename from meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.12.bb
+rename to meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.13.bb
+index 34162d3cc..bb9e50e1e 100644
+--- a/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.12.bb
++++ b/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.13.bb
+@@ -11,9 +11,8 @@ DEPENDS += "intltool-native"
  
- inherit xfce-app gsettings mime-xdg
+ SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/1.0/${BP}.tar.bz2 \
+            file://not-create-link-to-locale.patch \
+-           file://0001-Makefile.in.in-remove-bashisms.patch \
+            "
+-SRC_URI[sha256sum] = "246e459d2d2f3f524968440ed7fddb2a891567ebc05f10a800f7f5821b3452a7"
++SRC_URI[sha256sum] = "bc387c13f94109422dc72b0fcb919b0dc11619ba589d03e492252b0d2513b170"
  
--SRC_URI[sha256sum] = "30adc5631a4e551df7b3e17ddc1d10e9980080f96518dedccc32170cb18efb8e"
-+SRC_URI[sha256sum] = "e7208bb9e96a1525d3358a64f9cdd165005078e84e81984a953a2a03491fcaa8"
- 
- FILES_${PN} += " \
-     ${datadir}/glib-2.0/schemas \
+ do_configure() {
+     # special configure - no autotools...
 -- 
 2.26.2
 
