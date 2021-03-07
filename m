@@ -1,103 +1,141 @@
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
- by mx.groups.io with SMTP id smtpd.web11.18205.1615095819420233760
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.web12.18012.1615095820300388534
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Mar 2021 21:43:39 -0800
+ Sat, 06 Mar 2021 21:43:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=TyHIfOj+;
- spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f177.google.com with SMTP id y67so5112207pfb.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Mar 2021 21:43:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=sDB8K0P2;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f178.google.com with SMTP id a24so3338151plm.11
+        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Mar 2021 21:43:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=CxNUpnFBMfB/KH6BMMsEFyibvi7DF0aMlvDtRLQsthA=;
-        b=TyHIfOj+xy7uucjWfHptElRWady+YFrFJ5W8HRUS2bOaiKI3zFwePghJizUDx1bYJP
-         B3YAVsMMdmZQqo44yjNNO76MfK8XVPp6qejGPI43D6hHaJNoHw66NKlqKTc1sS7xtZMZ
-         3MLmIAkMCjJG+T/3d9im4mD9F0dxwB8Byrf3Ur7awUkC6OCUh40r9UaSpxDi1bkiTu4b
-         coM8rMeTHFyMbiX0HsiTkrBZomkoEu4RpMZYEhXtTuaGcwFYAIFB7stiSNuUbVZaM2nY
-         5hLH+6okArAL24ik2G5COhPkD7oxYIAytEaRUXwWjXzLZX8teum3H3Y/fceZCCqSfPZy
-         qd9g==
+        bh=pypHz8huwssZfFHcrfpHZO8v8EMIaPS6tDROQMmv4Cc=;
+        b=sDB8K0P2imH5yv+HeiY9IUB7F1c7vbB73yARYeNhGpc6TtVkJgEwycW0WT1LG4SDPd
+         8ivsMGW0kwREte0HIru79ATcJuTJ8rInq4r28HgVOFXycI49SGWEccDjPRtsi4SLaKXA
+         BMx9qklntC9GmCPDggUcIWuK1sJq6gk2+5JSMn9OA5wGu6UzxPudkkg8ikohZc5D5QH5
+         QhJMBtOw+JhKTX/fUimrvBlh1ENtwHcduLzraoMjwIqZbBVoqvWVEsvSv2gbqpUJs/ZG
+         MEcioqPrSNbIbSMEa2d6HPHEUiyT17vqLGbrlh2EQv1mxJd3XIcu72co84vcAyCJjavU
+         vNvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=CxNUpnFBMfB/KH6BMMsEFyibvi7DF0aMlvDtRLQsthA=;
-        b=Oljx+eTFgxw94pZtw1plup75IsJH1UPKQvZZl2HlIjdBtJ2SLsVYoZYx/uzJt5MVYB
-         6H88RkQoOFHilTJDiE0MTcMVLjjRlmYj+qfgiDWWIK7dlHoaKJnY084JTNe9t12gz4ze
-         JkmvTscluisleMBUpRzKv+Xx9O6ZVKmTWTAyjkJKT7JX6cfgieDvOW4Y0HB4mQwymQfk
-         v0o5Zcz26ohQ8MQndc/I4/Py3Awaq34zsjbtN9Dl0o7wiwDH4woMpAZnoxsMEsOA6zBp
-         fIIttbe7mZ/IKT3zaaWYQ/vKbilJcq0Y40HfmzrFtj0/j3E09TSFZidhUiLtc5DQlP/g
-         MxVg==
-X-Gm-Message-State: AOAM533z8QuZMEHBikts8LUxrfhsqNYmTHXegDLRLqqvTXQPxWYERBlU
-	dlzJGn5dNDYosNm6/oHS53QpPYFO1l9P/w==
-X-Google-Smtp-Source: ABdhPJxG6JTZ2wu1fRGPJ3zG1XbeIVKr5YhALhV0jaifKnuWMROPlZvHw7STn1mZTLnUaGB06I2MFQ==
-X-Received: by 2002:a63:461d:: with SMTP id t29mr15183261pga.192.1615095818778;
-        Sat, 06 Mar 2021 21:43:38 -0800 (PST)
+        bh=pypHz8huwssZfFHcrfpHZO8v8EMIaPS6tDROQMmv4Cc=;
+        b=DwuTeFOrsNvS3gat3StKy06U1QKslMypRWsRBKVy3vyvmSdoS9F1mQaAMwtEar2ZNX
+         hAL9Ylci6ZP1eIFyHmii4nDt2ZqWmzTLb+Cp/2ZRJjLt5amV8uYQrIj/Koq3LnAFCmRh
+         apN9GMJApBMVe/xGWLgbPYTiVCfKCsJG6i28HuNp/PpV2nPBVxuIzH1ei3kMhlgrMNpo
+         ACI6kLU9KaTAt+mPQfm6gxrNTIhBCYF6S8Wyb7EVtS9Bir8BoXYSuXl10hRR0uHsC7Ti
+         RlkiRrjyS6Kw9I57ThNIqvW+/IGCJkeH9ohRBPrAZ/joLJ5gB6xcDHrqyEA9tqImsO2b
+         tcRw==
+X-Gm-Message-State: AOAM531613NJMNcP0FTmwWDoJa965Cl/Ck47WGziggQEcUYWeXywBa4o
+	nVM+8U75fAro6UuZtZvVxykQgEjGwx3xkA==
+X-Google-Smtp-Source: ABdhPJykLVLoBM25h/7gMaqG6NR4C8X80krPHDq4GeylZADkd4DulH0MHqRN0sJMla/1lzAkqX2jwQ==
+X-Received: by 2002:a17:90a:aa8b:: with SMTP id l11mr19121112pjq.225.1615095819470;
+        Sat, 06 Mar 2021 21:43:39 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::e641])
         by smtp.gmail.com with ESMTPSA id e185sm6796810pfe.117.2021.03.06.21.43.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 06 Mar 2021 21:43:38 -0800 (PST)
+        Sat, 06 Mar 2021 21:43:39 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Colin McAllister <colinmca242@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH] python3-gpsd-py3: Added recipe
-Date: Sat,  6 Mar 2021 21:43:33 -0800
-Message-Id: <20210307054335.2332899-2-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [PATCH v2 2/3] libleak: Add recipe
+Date: Sat,  6 Mar 2021 21:43:34 -0800
+Message-Id: <20210307054335.2332899-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.30.1
 In-Reply-To: <20210307054335.2332899-1-raj.khem@gmail.com>
 References: <20210307054335.2332899-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Colin McAllister <colinmca242@gmail.com>
-
-Create Python3 recipe for gpsd-py3.
-
-Signed-off-by: Colin McAllister <colinmca242@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../packagegroups/packagegroup-meta-python.bb    |  1 +
- .../python/python3-gpsd-py3_0.3.0.bb             | 16 ++++++++++++++++
- 2 files changed, 17 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-gpsd-py3_0.3.0.bb
+v2: Exclude on riscv
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index c1271d09dc..4512f839f4 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -144,6 +144,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-gmqtt \
-     python3-gnupg \
-     python3-google-api-python-client \
-+    python3-gpsd-py3 \
-     python3-graphviz \
-     python3-greenlet \
-     python3-greenstalk \
-diff --git a/meta-python/recipes-devtools/python/python3-gpsd-py3_0.3.0.bb b/meta-python/recipes-devtools/python/python3-gpsd-py3_0.3.0.bb
+ .../0001-respect-environment-variables.patch  | 25 ++++++++++++
+ .../recipes-extended/libleak/libleak_git.bb   | 38 +++++++++++++++++++
+ 2 files changed, 63 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/libleak/libleak/0001-respect-environment-variables.patch
+ create mode 100644 meta-oe/recipes-extended/libleak/libleak_git.bb
+
+diff --git a/meta-oe/recipes-extended/libleak/libleak/0001-respect-environment-variables.patch b/meta-oe/recipes-extended/libleak/libleak/0001-respect-environment-variables.patch
 new file mode 100644
-index 0000000000..35485ba7c4
+index 0000000000..bbdfa3c960
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-gpsd-py3_0.3.0.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "This is a library for polling gpsd in Python3"
-+HOMEPAGE = "https://github.com/MartijnBraam/gpsd-py3"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://setup.py;beginline=10;endline=10;md5=c2d9994c57f0444e39f1dab19af50254"
-+SRC_URI[md5sum] = "041ce56e8879e2104b4d54c8119cd529"
-+SRC_URI[sha256sum] = "2908d3bd78dfb6720ecfe22f97e139b5a4a198f38df3a77215cf644a33513192"
++++ b/meta-oe/recipes-extended/libleak/libleak/0001-respect-environment-variables.patch
+@@ -0,0 +1,25 @@
++From ea3f11a7846ad27926c6eacc0534914f4873504f Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 5 Mar 2021 19:30:09 -0800
++Subject: [PATCH] respect environment variables
 +
-+PYPI_PACKAGE = "gpsd-py3"
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ Makefile | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
 +
-+inherit pypi setuptools3
++diff --git a/Makefile b/Makefile
++index 1d70f17..c7e726e 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -1,5 +1,5 @@
++-CFLAGS = -g -O2 -Wall -fPIC -Ilibwuya
++-LDFLAGS = -Llibwuya
+++CFLAGS += -g -O2 -Wall -fPIC -Ilibwuya
+++LDFLAGS += -Llibwuya
++ 
++ libleak.so: libleak.o
++ 	CFLAGS='-fPIC' make -C libwuya
++-- 
++2.30.1
 +
-+CLEANBROKEN = "1"
+diff --git a/meta-oe/recipes-extended/libleak/libleak_git.bb b/meta-oe/recipes-extended/libleak/libleak_git.bb
+new file mode 100644
+index 0000000000..309553c909
+--- /dev/null
++++ b/meta-oe/recipes-extended/libleak/libleak_git.bb
+@@ -0,0 +1,38 @@
++# Copyright (C) 2021 Khem Raj <raj.khem@gmail.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
 +
-+RDEPENDS_${PN} += " \
-+    python3 \
-+"
++SUMMARY = "libleak detects memory leak by hooking memory functions (e.g. malloc) by LD_PRELOAD"
++HOMEPAGE = "https://github.com/WuBingzheng/libleak"
++LICENSE = "GPL-2.0"
++LIC_FILES_CHKSUM = "file://README.md;beginline=18;endline=21;md5=de4f705f12cdedbe452b2c3524572b03"
++
++DEPENDS += "libbacktrace"
++
++SRC_URI = "gitsm://github.com/WuBingzheng/libleak;protocol=https \
++           file://0001-respect-environment-variables.patch \
++          "
++
++PV = "1.0+git${SRCPV}"
++SRCREV = "ea2bb608ae25701692269a37d39d77e966b887ac"
++
++S = "${WORKDIR}/git"
++
++do_configure () {
++	:
++}
++
++do_compile () {
++	oe_runmake
++}
++
++do_install () {
++	install -Dm 0755 ${B}/libleak.so ${D}${libdir}/libleak.so
++}
++
++FILES_SOLIBSDEV = ""
++
++FILES_${PN} += "${libdir}/libleak.so"
++
++# libunwind does not support RISCV yet
++COMPATIBLE_HOST_riscv64 = "null"
++COMPATIBLE_HOST_riscv32 = "null"
 -- 
 2.30.1
 
