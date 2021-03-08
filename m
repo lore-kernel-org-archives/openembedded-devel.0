@@ -1,17 +1,17 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.69])
- by mx.groups.io with SMTP id smtpd.web11.36319.1615212258005841509
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.87])
+ by mx.groups.io with SMTP id smtpd.web10.35754.1615212272324196139
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Mar 2021 06:04:18 -0800
+ Mon, 08 Mar 2021 06:04:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=pygTtS+x;
- spf=pass (domain: windriver.com, ip: 40.107.237.69, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=dY8EMjoG;
+ spf=pass (domain: windriver.com, ip: 40.107.237.87, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=K79QvoRNoVwgUpE6zGlUdwPEvuUzor4BuvRPIO8udrZSdbQ2xO3AmlBgsG12fdh6e3xdV2oIyOAwMgTskmiNtkWI6FwTuEFFNJDzdhAXUlkaXDGB3B9NwTK3bpi0JpUjcDfvW2gyr1W2cnv0BL/7kr93kR7A04+a2q9hdSFHvQcFUz3VbcXRGl/00Dm7c2n06MUmuaZ5Nbxmyr2QBIhZ/d/uh+bWoaUXEB6gK/+xWqn2CKeXGUPuK92Sup8hfKnko6p434csjEQqLvcCphW0RH/MKoOEhL219pomYLJbU3kw4gV9D3nZ7LgT85gFDek2JoI8mOtVxyw1DrUvmsUIlA==
+ b=RZxoyMjt8zVY/y4wTN800fQcaB/ApyUg/NHfFSPlApuXzIVT55n2uRaVFfF7q0Hc6R4FM1xt1KfR30LoABIWRYjQjp0GBOVs2cWvdfJDdbVFgXZ4/DSqQrfKd3d+4RXBTpbAX0C/1iqNjQXJF/psQ36Ojd9gchpCMj6IKpFuPRAFjuyHXahRUTjFQE/j3VT90zHUbMzdiBJFCQaK/Xb8iDbrKMM1h/4fXqKLhgylTBcRqsfYPR5e7UDAz8EB04AYjgmri751IdGJJPugpV5SjeM59/oS/vUtK/7U5hIXd/yuWpOsi2rCJ7heB5n9PhIj+hW7QIRGkg+fmgKsJeJOwA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1HBAD4ZM1A35vvVh7C5uZK8ty6A7CnZH1j52Bf8Rx8Q=;
- b=d01upYmx9QsIHI/eJYumf/E4FiEhvOdl+d00547hDV1FXcpXFDbBD/MKZAFTszYuZANw7YAsjhj5jM+xHtEh9lH9QNALuilOzzhJKeudO2WPw5XLhyvB4asAaXiudPp2uGq/eTT2P0nTLamiVJcvRIuKduDqKCRn8lJsApahGYPROGwdP3ZkN9D1gjAH15n2LtXRR5S6lfBWZnj38vnX7MSPyrIDfGnngDp/Wy4V5yU3MICcAGHtGXdN0vi7VZf/2Ke0H6Z9hp7fhk3GueLCGIhC3k92heeh6cAdLxy4CYfRbWc0neFTCn/QMcg5o2+MDWaHQg0pySwf5RFvZYG2uQ==
+ bh=3u9A7QGfKTnsvPqO8AeZ48tEQSVXCiNIZUNkgsGUxpE=;
+ b=RXt5EtCOllphDrGAMQNZxLmBotH9m5Ohy7lJw0rqrj2p9ycOFzFzXQeJH08Y5TMUUkW36+xsBjrcjyoiqXc9fSZqLDpZhsr8FA2oGdTqxy3Tkdp657edvpGQUMGoUO8rVn1cFvt9Re/EoT1ZYRPUqoDwCBgyT/wZ89tkCF4HjLCHtecFWS5rhKZEiidOES2R+vvYtLqVC/TjbfF5yZ7h7bhtnc5rENkqYAJWdXPhP/EkhGA+UgjFTTGuhhh8AmFEzhEP04FstH7KpCeMP3YaZ5IRtqJWD29qqfPKTqoByWRTmJC25+2lmZvOB3yBif2C+N67//5pBLkqowMi9eymGQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,156 +19,190 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1HBAD4ZM1A35vvVh7C5uZK8ty6A7CnZH1j52Bf8Rx8Q=;
- b=pygTtS+xIymQdBaXQI8g73abFg0MnS7ZTm1L+yTccK6kFQbmjVNRaVIoqXjO0+6b9ayS3Xes4Gs/LiRGAEWF2X9/EEfQE+hvdpd8WkFcSIqyKeDSFQcfq/gPeKqomirPV1GshDsuaTERCyZLyVa9cTQKab+veb2BC4R/sW+IVZc=
+ bh=3u9A7QGfKTnsvPqO8AeZ48tEQSVXCiNIZUNkgsGUxpE=;
+ b=dY8EMjoGwv+ACGZ2YFgAgKTJPpBF4GarIlX8jEgFQ7QrMpswZUd9h5oQ4pXrBj+DbNSte9qptmSMdlQWdWosxccXUmyFlGAEAWF+c8I18lS0MmsCOVp87S0tkCoJQBm7YfzDGbttomv5sTfVwqkLLMzBtViXgANRZXE7k6P3rZ0=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BY5PR11MB4103.namprd11.prod.outlook.com (2603:10b6:a03:18c::29) with
+ by BYAPR11MB3256.namprd11.prod.outlook.com (2603:10b6:a03:76::19) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3912.26; Mon, 8 Mar
- 2021 14:04:16 +0000
+ 2021 14:04:29 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3890.037; Mon, 8 Mar 2021
- 14:04:16 +0000
-Subject: Re: [oe] [meta-python][PATCH 5/5] python3-pandas: Upgrade 1.2.2 -> 1.2.3
-To: Leon Anavi <leon.anavi@konsulko.com>,
+ 14:04:29 +0000
+Subject: Re: [oe] [meta-python][PATCH] python3-requests: Support idna version 3.1
+To: Fabio Berton <fabio.berton@ossystems.com.br>,
  openembedded-devel@lists.openembedded.org
-References: <20210304130554.32308-1-leon.anavi@konsulko.com>
- <20210304130554.32308-5-leon.anavi@konsulko.com>
+References: <20210304204501.3467547-1-fabio.berton@ossystems.com.br>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <805bb555-8043-12f0-c2b6-5a32eb33043c@windriver.com>
-Date: Mon, 8 Mar 2021 09:04:13 -0500
+Message-ID: <e814f509-862a-0440-2de0-50511e2bdf6a@windriver.com>
+Date: Mon, 8 Mar 2021 09:04:25 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.0
-In-Reply-To: <20210304130554.32308-5-leon.anavi@konsulko.com>
+In-Reply-To: <20210304204501.3467547-1-fabio.berton@ossystems.com.br>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BN9PR03CA0723.namprd03.prod.outlook.com
- (2603:10b6:408:110::8) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: BN9PR03CA0735.namprd03.prod.outlook.com
+ (2603:10b6:408:110::20) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BN9PR03CA0723.namprd03.prod.outlook.com (2603:10b6:408:110::8) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3912.17 via Frontend Transport; Mon, 8 Mar 2021 14:04:15 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BN9PR03CA0735.namprd03.prod.outlook.com (2603:10b6:408:110::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3912.17 via Frontend Transport; Mon, 8 Mar 2021 14:04:28 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 094e3435-e577-477f-01bb-08d8e23b0f65
-X-MS-TrafficTypeDiagnostic: BY5PR11MB4103:
+X-MS-Office365-Filtering-Correlation-Id: e6851a57-46a2-454e-d8a2-08d8e23b16e9
+X-MS-TrafficTypeDiagnostic: BYAPR11MB3256:
 X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB4103BA7E7907FA5C1F3F7CE19F939@BY5PR11MB4103.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:4502;
+	<BYAPR11MB32563BFA8AD0E9D02476B45F9F939@BYAPR11MB3256.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:6790;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	29CZHa19Ha8NAdkIhgQJQQDAWJoG6V4UmcFuvBSGB2S1fF2bDhLYbqe8igV8NaSV2asMBx+lxOeGttGIbPLE1TYuPVeQzCGTICWi8pbEYnXiatUvEq8LRA2/7j3QvlTtLkM/Yx3EMgF2IF0Ftzx50FYaBuy4FV/xR1/G6ljRPk9qrzwp7F7ops8U+7e+BXJEOuR+DNxS21gGK4c2cLwqg08uu/xdcC2Ci2gN4x1ODPs4Ezdb6uJzwK/aeuqM7D5akA3Lw1zvqtS01RbM2cwYZFZXLSRgNXFcKJ0/gThv4dqXTmdJZ3GYEQ3T4RPsB+/Rua1irL54UTdmUx+5OdV6rfm3FuUjf4KxN4oWchJ63KM6inGIUMgik6NjE6WdMBQRm2b6s+O8Hd1ZcxSZBrp+qAht0s6Xns88vKAxKQJxbgpPJjI3W/c/gTtbyzoRNuvTE2DloLlsqA2aiA5+aubDErJ/RUMnvPJRAWznaAZ9Vp8vUiYWl4hoSzQjUL/Y2tdI00c9rwwlq+jnkkg5cV5XfWVljS4rMjAAuv32HUK5pxCMCHrYHKvJY4P3sbCJvgE+XdzKaSAbtTIoMjR/k3aXQ95yv59AzB7BqQtms8ikVOSh93SP8Sm51TmkcCQteBMWcYwMDUWVw/VmjdyeWzJQAm8ucAYOYn7CLcB41OzaKz8Gl3qUfOJMAcD3SIDTLSx0
+	wQJ/LdwzlXCJx87slqMqQPjFJO7J5T/Zdzzh7/fCHKkj3yEALUx51EhXg8px7RaTWGpmcQQqwQiIlHNAQLnZXhDBsBN3WzTGWkjlrJp6PlmATQLhNxO7ZgO/4vTg4MEwZdP78weBesaAVsgCPzdOdp4tOttTNbZFupJPuHibK6VUS1MAlGAWznlZxRC/equp4HPiJeQO/qdTgGOskkd42MmKyvkdME4V3GruxT5TuF88ZcmSew8iIF/EA4kwZAWY2wBDvtN4f2N4NaZSSe0W/8bktHubJoItL9unh2YAQZ2trkA9n1TLpRZHLZUiNIlpmD/V9e7KCqSatNCXv7fPV2nxKOVbcOX5JEZIWGL4SejDaBUoGjs6StBezO/r4q3Zl9V0HUtJuR/QPtbBSfERu2IblkAcb/KMpzUjSUpIttFfI3TTr67QDKh2RnZZyOv/pfBEFHo54RxINJ96rM7jsrsY28zyPZV86jTuzsE0YPZmX66COpDjgacrYjYUX6PcSPvc3PkJkwuBK1BMQmwwG4oiPsHtSb1rQ1kzAY0t1j+JvXzlfMDgO2cW7DKnVSLPf9gYwfwuZDrU2B8iGFM5a/jvheI5Pj8OVBu1xaN/5v5VGOUzR4MEgZue9HT64NwYVBIOsSXn0NOJfoS5Hk1udvLe4FGseqIO51cxbxPNKiRKWH7gT9OfDJErf+5oRr3J
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(366004)(376002)(346002)(136003)(396003)(44832011)(66476007)(2906002)(83380400001)(16526019)(26005)(66556008)(36756003)(31686004)(86362001)(31696002)(16576012)(8676002)(6486002)(8936002)(956004)(478600001)(53546011)(316002)(2616005)(33964004)(166002)(66946007)(186003)(966005)(5660300002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(346002)(396003)(376002)(366004)(39850400004)(83380400001)(66946007)(2906002)(66476007)(66556008)(966005)(166002)(6486002)(53546011)(16576012)(31686004)(5660300002)(316002)(16526019)(6666004)(478600001)(186003)(33964004)(36756003)(8936002)(86362001)(8676002)(44832011)(26005)(956004)(2616005)(31696002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?cmlHam9YeUV2K2FXbDRNekNNUkxOcWVoS25mY1hnTXo2SSttMTV2UHU5dVV3?=
- =?utf-8?B?UUpXbWJxSlBXU1lGZHluWUF1WEhWU2I5Z3lIN2tNdEhsbmM4L0NzbFdVWnJT?=
- =?utf-8?B?RFFRRWh0Y2lpRGdjWVN1bGdtVjVSbEtFd0lCSEJ4WFVPUVllcVNJcFNZNk9z?=
- =?utf-8?B?MXAxV1ZCczllTnV6WlREUUxSMFJzejM3Um5wTkg2SzNUdlVyRm9jSUFIdGRx?=
- =?utf-8?B?ckdJY3VYLzhsNm9udnc5dGlLZldMdTZ3bFQwWmFIS3VMUnU1dERrQVE4c0ZS?=
- =?utf-8?B?eTZnK2x2ZDhUS2RkQ1U1VGV1eWhKRkwwTXpGVVBEd2ZBMGppMTZ2cmpEOUlh?=
- =?utf-8?B?c1BhdTJlRUloSytrOFVxVFg4MXJPYTN0a0tDL3U4bUdqeGpWRUhnSnNXTlFT?=
- =?utf-8?B?UEVXN09HVTJaWm1PeHpKSnYzbndIMDYyektwd2FPcXh5RDlyMHBiakZRaU9W?=
- =?utf-8?B?NThDNVMrVDdFSjAyaHY4VFkwVG85dHVjeUFYeE1kcHNtTU9aRzhCc0FlK0x1?=
- =?utf-8?B?dW1sR21iMWR6YysvbW5aUklSQkpZS2U2Q0ZucjJsY2V1UlFSYXQzNWs1eHVM?=
- =?utf-8?B?anVkM0tKdTgxTm1Sa2xRNVEzNHlQcG9jQVhKVTBaNEJYMUo4ZFhnenFJTHdo?=
- =?utf-8?B?dkZiangvU3VDMnNkckJYWXIvMDFMZ0JIWjhJVFJPR2M0bTdYbnhJNFNvSEdh?=
- =?utf-8?B?d000c1FvdmtzUXhoc1dSeEFTZG9RVDUvNUhxbDdLMUl0ZjdvY1hTdVZvUEx4?=
- =?utf-8?B?dGI2cCtmck9CTFZ4bWRDSjdMeTd3dFNxYVhxNHpYdDdkNmVMaHkvL01DdXdo?=
- =?utf-8?B?V1pINkVUOTNscDZFYlVqU0ZxZExOMDRrU1VEMmlFVFFrc2R6RUN2Q3F1Q3dp?=
- =?utf-8?B?RmNuVGR5QUxOQTNVc1J4SUYrQ1k3UFUvMnJ0cmtTOHhIblF0ZmdMZkQ3VHlq?=
- =?utf-8?B?ajlDMGRFeUhDczFHcFRaNSt1SGtHKzVEbU1DdUlqVElaNlhZazdBbmRSUXQw?=
- =?utf-8?B?Ynk3ZUlDWmxMNUs3bno1SWZFcW5qako1MkpWcGpoRTlteUZucitJQTBBWDhH?=
- =?utf-8?B?Wks5U1p3NzZQNDdLRWRIZHFxcmNRNkFCWWMwbzN1dmtYZkJCa3ppSVVGVjB5?=
- =?utf-8?B?TnVTT0JDeVdKRm4wZUtYVW9mZC8yMCtsdUY5RU42d2pVM2sxTXpQQW8vaEJz?=
- =?utf-8?B?alVTVi9zSy9yeEJTVENoaWVJRUhHZ1BoVldBTnBzOG9BVVA1ZlVrdlFNYlhu?=
- =?utf-8?B?dlRtaDgrMkZpRUptSi92K2ZMMmlreWRNTXh6VHJ0T3RwbDk2dnRXcjMvb1I0?=
- =?utf-8?B?R29KTGxwOFJyVDc1SU9YUlBRazVHWXIrUHVkRXBGTFBEQVBzYWxUS2RmODg1?=
- =?utf-8?B?WFdDcStzWEU4YXlqWEloQWxkWFBIMjhUeDJEd09PV1pxNmxDbUo1M1hIaDNE?=
- =?utf-8?B?SkMxWGNoRHpTT2RIR3ViYkIveGFwSzhrVFdOeUFySlNaRmo0ZjdXOEZ3NDZv?=
- =?utf-8?B?RitmY1FNVUY1dHlraUMwWUtYc0xJc0VJUDBUR0dLbjVLL3AvK2FRbS9LZkdi?=
- =?utf-8?B?bUpVSyt5cHRmNUxYbFlWYWZsdk5ZQnhCU0JyZm1CYXFMRHFmb21CQVc0c1Iw?=
- =?utf-8?B?UklLM1RnK3VaazVOcUJNay82eS9sOWYwcnNyb3hzd2ZqbHpvaHQ0Yk1EK3d0?=
- =?utf-8?B?T01RQzBDRmh0TkRybUl0azBFYkRhSlEvbjUrVWxwemZPS3ZtQ3RnbTFlRHV1?=
- =?utf-8?Q?/knjowuPCan/p+sBw+vbQndG1k/z7ZIOAtdrDFl?=
+	=?utf-8?B?N1hKMnEwZEZjdmRMSjArZXNjb3U0L1VMWC9YcUg0TUV0WEkweXlLbmJRWVRV?=
+ =?utf-8?B?dHpBYlBiK3pmUzhRc0tRcWRGM29hamt3blNzZGg3a2luSnJadnhNc3FuZWFv?=
+ =?utf-8?B?aHZDaFFuM1l3dEJTcXdzaTRIZDRheVlOaWVqVEhmaUdOUzgzK1JmUjlYTEg0?=
+ =?utf-8?B?aW0zNngxWW9acFlCL1JYOGF4SGlIQityNlNaV0hkMmZIRkVvTkM3dHVmc3cx?=
+ =?utf-8?B?VW0vbm5BUE1PZitBYmZ2K2FZSzdvd3orY1pHUWJWUlZxeE1mZmp1dkVneFZF?=
+ =?utf-8?B?RFlxb2ZFT081OU9xMjZMYzE3cWJNWlJIcEJUeWRGQ2ZUV0QwOG5Cbk9pNW5x?=
+ =?utf-8?B?amRYWDhDdlJoYWplcnJVcks4OFBDemxwN2dNVDQrMENrZFJxYXl6UWwxYzV1?=
+ =?utf-8?B?dkg4NU9IUU80ZWpXTDNIRE1lRmFZZjJZREtUTFBPcHZWcWkvNGhycjN2Y0NQ?=
+ =?utf-8?B?WWVtSXlKUmtoVG1HNEt2Q2d5RHNKbHZ1TEN5RWdlSXRDMG5vdjVaTXN5R2hj?=
+ =?utf-8?B?QzVOWW9ZaHY5TUYzdEdhSTdMUkQyQ0x0V0ZyNnZUVXVQYlhZV0djUUNLVk85?=
+ =?utf-8?B?RlpIKzBDMU5aL3BVc24xRXBGQnNlcElBaGRJVFRRZHJONjhoUkhwYnFBNEZ3?=
+ =?utf-8?B?M3lSdFRQUlRhZFZ6VWp5bzNkNVZZTXdKMVFRK2pUZ3RPOVRTT1RISFhxdlFW?=
+ =?utf-8?B?b3FzSGJqZHpaTnRHY2VnOWxlcVFSOTNOcDFIQ01iMlFEaHFNS3BmeEZCa3RK?=
+ =?utf-8?B?dnNleGExTFYydVJzV3VOcldiUXRHOVk4c0FlU2xkQit2VE83YXNHYkh5QmVM?=
+ =?utf-8?B?T3FXMGNZcG1XaTlNNDBpN2E0Y3Rqekp6b2FienlxSzFuWVJocW1IRC92VnUv?=
+ =?utf-8?B?UnJtR0wzd0RiSlJreTRibm9IV3ZmeUxFYStRTElWdnpwZCs4OGJ4VDhHYkxQ?=
+ =?utf-8?B?bVBQMzZ5SXdNc0pRNFpqNUpoTGFJQkpMNkJmVkxnQzEvdTZsMWVldmF3OU5C?=
+ =?utf-8?B?eDJEVGJxM2JEeFJZamYzMC8rZ1E4L2dtbzZuNCt3TEI4ZnU1TXF3NFdFT3Uy?=
+ =?utf-8?B?T1lRUjVsN2R1bnA5ZzBqdVIzdHZkcXlTdkJMZjc3R1NLRFk5Z0cvK1RBVHov?=
+ =?utf-8?B?K25RY1VhTWFUZS9nK3Y2ZDIzZkwwb1hkM1VPR1pkZHh4Qi9yWGJicGIvSmhr?=
+ =?utf-8?B?cWMrc28rcW5tdTY4M1l5Vnp1VWZjY2VxYmFTc3NXdG0wU043WHdjTGNXcmQv?=
+ =?utf-8?B?QkJ0ODg5Y0xJRkRmcmw0MEs0MmZ4azhQZElaci9udmFIQmJDbW9SVDAzSHJt?=
+ =?utf-8?B?WU9oWGEyQm1CbEc0THJNY3hnU3dqT3E2aktUTGZUbERhNWRlbnBudEoyRWFs?=
+ =?utf-8?B?eVJpV09Tclp3YUR6ZjFGUDNSdjExUFZhaVBSQXFJeWJRK09xcWpYS0I4UmF5?=
+ =?utf-8?B?cFphUmx3clhuWlBwbHNKbVE4aStmSDM2WlQzS2NDLytGMS85Rkl0L3JyeENP?=
+ =?utf-8?B?eWtjMFhNdi9FL1pmRG4wL21mVDBJOHQrelhxWjNRaHNLUGxGZzlBZjdVQW9J?=
+ =?utf-8?B?MDhndmJDRWIyYjdQNC9sTnczWW5COVdnSVBBYjM2N1RjcGRCZys2a1hFdFFD?=
+ =?utf-8?B?YjBtWnNUdDcwNm1uQTA1NDhRN1pkUW13UlRsR0Qyb1g1aTJ2S0l1Z1NyN0Y3?=
+ =?utf-8?B?dXpBYUxLZ01GcW1hUzdYMW1mUDV2aTloemRuY1drbXdoaFBCbVNHOG8wKzBJ?=
+ =?utf-8?Q?h7iRPTjMzwU0RUuUXRJHDz3Zn4bfz8+MirNlzKf?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 094e3435-e577-477f-01bb-08d8e23b0f65
+X-MS-Exchange-CrossTenant-Network-Message-Id: e6851a57-46a2-454e-d8a2-08d8e23b16e9
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Mar 2021 14:04:16.4249
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Mar 2021 14:04:29.2354
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dfNqluBxbVLPmuomi85R2I2d1CJ8r+6x9dlmJsyzZzY+LhTBHbB6DNUfrQadsKpSrxLjTNWP8Clqz/hJVLGeHhA0I+iDznVbk8THNRxkKSY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4103
+X-MS-Exchange-CrossTenant-UserPrincipalName: YSO9eOrqBQaOziPX8w9AkI3zhWCRyLCD0ylWaEDHitLX2dcqFoezbaNCLHXA0hGs9o2ek9+13/YbWCLrxd4xdQLmInw4G2P7IjUt3rQbaAY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3256
 Content-Type: multipart/alternative;
- boundary="------------C2A1016244C44C8B0B0A7036"
+ boundary="------------F93D2E95E285CA1216082681"
 Content-Language: en-US
 
---------------C2A1016244C44C8B0B0A7036
+--------------F93D2E95E285CA1216082681
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 2021-03-04 8:05 a.m., Leon Anavi wrote:
+On 2021-03-04 3:45 p.m., Fabio Berton wrote:
 > [Please note: This e-mail is from an EXTERNAL e-mail address]
 >
-> Upgrade to release 1.2.3:
+> Change idna required version to use python3-idna recipe that currently
+> is on version 3.1.
 >
-> - Fixed regression in to_excel() raising KeyError when giving
->    duplicate columns with columns attribute
-> - Fixed regression in nullable integer unary ops propagating mask
->    on assignment
-> - Fixed regression in DataFrame.__setitem__() not aligning
->    DataFrame on right-hand side for boolean indexer
-> - Fixed regression in to_json() failing to use compression with
->    URL-like paths that are internally opened in binary mode or with
->    user-provided file objects that are opened in binary mode
-> - Fixed regression in Series.sort_index() and DataFrame.sort_index(),
->    which exited with an ungraceful error when having kwarg
->    ascending=None passed. Passing ascending=None is still considered
->    invalid, and the improved error message suggests a proper usage
->    (ascending must be a boolean or a list-like of boolean)
-> - Fixed regression in DataFrame.transform() and Series.transform()
->    giving incorrect column labels when passed a dictionary with a
->    mix of list and non-list values
+> Without this change python-request doesn't work as the idna version
+> doesn't match the required versions. When bump python-request recipe,
+> verify if the upstream project bumped the idna version and drop this
+> patch.
 >
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> As this recipe was tested with python3-idna_3.1 don't allow higher
+> versions.
+>
+> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-pandas_1.2.2.bb => python3-pandas_1.2.3.bb} | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->   rename meta-python/recipes-devtools/python/{python3-pandas_1.2.2.bb => python3-pandas_1.2.3.bb} (88%)
+>   .../setup.py-Support-idna-version-3.1.patch   | 40 +++++++++++++++++++
+>   .../python/python3-requests_2.25.1.bb         |  2 +
+>   2 files changed, 42 insertions(+)
+>   create mode 100644 meta-python/recipes-devtools/python/python3-requests/setup.py-Support-idna-version-3.1.patch
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-pandas_1.2.2.bb b/meta-python/recipes-devtools/python/python3-pandas_1.2.3.bb
-> similarity index 88%
-> rename from meta-python/recipes-devtools/python/python3-pandas_1.2.2.bb
-> rename to meta-python/recipes-devtools/python/python3-pandas_1.2.3.bb
-> index 7529237866..8c36c21bb9 100644
-> --- a/meta-python/recipes-devtools/python/python3-pandas_1.2.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pandas_1.2.3.bb
-> @@ -6,7 +6,7 @@ HOMEPAGE = "http://pandas.pydata.org/"
->   LICENSE = "BSD-3-Clause"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=c2a8f987b2ce77c368c6b3e1b5b10774"
+> diff --git a/meta-python/recipes-devtools/python/python3-requests/setup.py-Support-idna-version-3.1.patch b/meta-python/recipes-devtools/python/python3-requests/setup.py-Support-idna-version-3.1.patch
+> new file mode 100644
+> index 000000000..26332249d
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-requests/setup.py-Support-idna-version-3.1.patch
+> @@ -0,0 +1,40 @@
+> +From fc45beed40a86c8fc38fc430765c1c5d2c9961c2 Mon Sep 17 00:00:00 2001
+> +From: Fabio Berton <fabio.berton@ossystems.com.br>
+> +Date: Thu, 4 Mar 2021 09:26:48 -0300
+> +Subject: [PATCH] setup.py: Support idna version 3.1
+> +Organization: O.S. Systems Software LTDA.
+> +
+> +Change idna required version to use python3-idna recipe that currently
+> +is on version 3.1.
+> +
+> +Without this change python-request doesn't work as the idna version
+> +doesn't match the required versions. When bump python-request recipe,
+> +verify if the upstream project bumped the idna version and drop this
+> +patch.
+> +
+> +As this recipe was tested with python3-idna_3.1 don't allow higher
+> +versions.
+> +
+> +Upstream-Status: Inappropriate [embedded specific]
+> +
+> +Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+> +---
+> + setup.py | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/setup.py b/setup.py
+> +index 7ba4b2a2..9d3b973e 100755
+> +--- a/setup.py
+> ++++ b/setup.py
+> +@@ -43,7 +43,7 @@ packages = ['requests']
+> +
+> + requires = [
+> +     'chardet>=3.0.2,<5',
+> +-    'idna>=2.5,<3',
+> ++    'idna>=2.5,<3.2',
+> +     'urllib3>=1.21.1,<1.27',
+> +     'certifi>=2017.4.17'
+> +
+> +--
+> +2.30.1
+> +
+> diff --git a/meta-python/recipes-devtools/python/python3-requests_2.25.1.bb b/meta-python/recipes-devtools/python/python3-requests_2.25.1.bb
+> index 6af836543..cea8fd517 100644
+> --- a/meta-python/recipes-devtools/python/python3-requests_2.25.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-requests_2.25.1.bb
+> @@ -3,6 +3,8 @@ HOMEPAGE = "http://python-requests.org"
+>   LICENSE = "Apache-2.0"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 >
-> -SRC_URI[sha256sum] = "14ed84b463e9b84c8ff9308a79b04bf591ae3122a376ee0f62c68a1bd917a773"
-> +SRC_URI[sha256sum] = "df6f10b85aef7a5bb25259ad651ad1cc1d6bb09000595cab47e718cbac250b1d"
+> +SRC_URI += "file://setup.py-Support-idna-version-3.1.patch"
+> +
+>   SRC_URI[sha256sum] = "27973dd4a904a4f13b263a19c866c13b92a39ed1c964655f025f3f8d3d75b804"
 >
 >   inherit pypi setuptools3
->
 > --
-> 2.17.1
+> 2.29.2
 >
 >
 > 
 >
 
---------------C2A1016244C44C8B0B0A7036
+--------------F93D2E95E285CA1216082681
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -178,60 +212,95 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 2021-03-04 8:05 a.m., Leon Anavi
+    <div class="moz-cite-prefix">On 2021-03-04 3:45 p.m., Fabio Berton
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210304130554.32308-5-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210304204501.3467547-1-fabio.berton@ossystems.com.br">
       <pre class="moz-quote-pre" wrap="">[Please note: This e-mail is from an EXTERNAL e-mail address]
 
-Upgrade to release 1.2.3:
+Change idna required version to use python3-idna recipe that currently
+is on version 3.1.
 
-- Fixed regression in to_excel() raising KeyError when giving
-  duplicate columns with columns attribute
-- Fixed regression in nullable integer unary ops propagating mask
-  on assignment
-- Fixed regression in DataFrame.__setitem__() not aligning
-  DataFrame on right-hand side for boolean indexer
-- Fixed regression in to_json() failing to use compression with
-  URL-like paths that are internally opened in binary mode or with
-  user-provided file objects that are opened in binary mode
-- Fixed regression in Series.sort_index() and DataFrame.sort_index(),
-  which exited with an ungraceful error when having kwarg
-  ascending=None passed. Passing ascending=None is still considered
-  invalid, and the improved error message suggests a proper usage
-  (ascending must be a boolean or a list-like of boolean)
-- Fixed regression in DataFrame.transform() and Series.transform()
-  giving incorrect column labels when passed a dictionary with a
-  mix of list and non-list values
+Without this change python-request doesn't work as the idna version
+doesn't match the required versions. When bump python-request recipe,
+verify if the upstream project bumped the idna version and drop this
+patch.
 
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+As this recipe was tested with python3-idna_3.1 don't allow higher
+versions.
+
+Signed-off-by: Fabio Berton <a class="moz-txt-link-rfc2396E" href="mailto:fabio.berton@ossystems.com.br">&lt;fabio.berton@ossystems.com.br&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210304130554.32308-5-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210304204501.3467547-1-fabio.berton@ossystems.com.br">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-pandas_1.2.2.bb =&gt; python3-pandas_1.2.3.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pandas_1.2.2.bb =&gt; python3-pandas_1.2.3.bb} (88%)
+ .../setup.py-Support-idna-version-3.1.patch   | 40 +++++++++++++++++++
+ .../python/python3-requests_2.25.1.bb         |  2 +
+ 2 files changed, 42 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-requests/setup.py-Support-idna-version-3.1.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-pandas_1.2.2.bb b/meta-python/recipes-devtools/python/python3-pandas_1.2.3.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-pandas_1.2.2.bb
-rename to meta-python/recipes-devtools/python/python3-pandas_1.2.3.bb
-index 7529237866..8c36c21bb9 100644
---- a/meta-python/recipes-devtools/python/python3-pandas_1.2.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pandas_1.2.3.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://pandas.pydata.org/">&quot;http://pandas.pydata.org/&quot;</a>
- LICENSE = &quot;BSD-3-Clause&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=c2a8f987b2ce77c368c6b3e1b5b10774">&quot;file://LICENSE;md5=c2a8f987b2ce77c368c6b3e1b5b10774&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-requests/setup.py-Support-idna-version-3.1.patch b/meta-python/recipes-devtools/python/python3-requests/setup.py-Support-idna-version-3.1.patch
+new file mode 100644
+index 000000000..26332249d
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-requests/setup.py-Support-idna-version-3.1.patch
+@@ -0,0 +1,40 @@
++From fc45beed40a86c8fc38fc430765c1c5d2c9961c2 Mon Sep 17 00:00:00 2001
++From: Fabio Berton <a class="moz-txt-link-rfc2396E" href="mailto:fabio.berton@ossystems.com.br">&lt;fabio.berton@ossystems.com.br&gt;</a>
++Date: Thu, 4 Mar 2021 09:26:48 -0300
++Subject: [PATCH] setup.py: Support idna version 3.1
++Organization: O.S. Systems Software LTDA.
++
++Change idna required version to use python3-idna recipe that currently
++is on version 3.1.
++
++Without this change python-request doesn't work as the idna version
++doesn't match the required versions. When bump python-request recipe,
++verify if the upstream project bumped the idna version and drop this
++patch.
++
++As this recipe was tested with python3-idna_3.1 don't allow higher
++versions.
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Fabio Berton <a class="moz-txt-link-rfc2396E" href="mailto:fabio.berton@ossystems.com.br">&lt;fabio.berton@ossystems.com.br&gt;</a>
++---
++ setup.py | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/setup.py b/setup.py
++index 7ba4b2a2..9d3b973e 100755
++--- a/setup.py
+++++ b/setup.py
++@@ -43,7 +43,7 @@ packages = ['requests']
++
++ requires = [
++     'chardet&gt;=3.0.2,&lt;5',
++-    'idna&gt;=2.5,&lt;3',
+++    'idna&gt;=2.5,&lt;3.2',
++     'urllib3&gt;=1.21.1,&lt;1.27',
++     'certifi&gt;=2017.4.17'
++
++--
++2.30.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-requests_2.25.1.bb b/meta-python/recipes-devtools/python/python3-requests_2.25.1.bb
+index 6af836543..cea8fd517 100644
+--- a/meta-python/recipes-devtools/python/python3-requests_2.25.1.bb
++++ b/meta-python/recipes-devtools/python/python3-requests_2.25.1.bb
+@@ -3,6 +3,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://python-requests.org">&quot;http://python-requests.org&quot;</a>
+ LICENSE = &quot;Apache-2.0&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658">&quot;file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658&quot;</a>
 
--SRC_URI[sha256sum] = &quot;14ed84b463e9b84c8ff9308a79b04bf591ae3122a376ee0f62c68a1bd917a773&quot;
-+SRC_URI[sha256sum] = &quot;df6f10b85aef7a5bb25259ad651ad1cc1d6bb09000595cab47e718cbac250b1d&quot;
++SRC_URI += <a class="moz-txt-link-rfc2396E" href="file://setup.py-Support-idna-version-3.1.patch">&quot;file://setup.py-Support-idna-version-3.1.patch&quot;</a>
++
+ SRC_URI[sha256sum] = &quot;27973dd4a904a4f13b263a19c866c13b92a39ed1c964655f025f3f8d3d75b804&quot;
 
  inherit pypi setuptools3
-
 --
-2.17.1
+2.29.2
 
 </pre>
       <br>
@@ -244,4 +313,4 @@ index 7529237866..8c36c21bb9 100644
   </body>
 </html>
 
---------------C2A1016244C44C8B0B0A7036--
+--------------F93D2E95E285CA1216082681--
