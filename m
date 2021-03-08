@@ -1,82 +1,87 @@
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.web08.1623.1615231368992354065
+Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com [209.85.160.170])
+ by mx.groups.io with SMTP id smtpd.web08.3025.1615236904457175466
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Mar 2021 11:22:49 -0800
+ Mon, 08 Mar 2021 12:55:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=MExhThmb;
- spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id c16so5364488ply.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Mar 2021 11:22:48 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=nWM3bRBp;
+ spf=pass (domain: gmail.com, ip: 209.85.160.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f170.google.com with SMTP id w6so8636337qti.6
+        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Mar 2021 12:55:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=WhGl0urCSDXIW8hFOkS4u16hLDtuSJsA/i+yCUZ9vR0=;
-        b=MExhThmbKsMFzgaLBNtGUjCQ2v1Dk+XQkd58yg7nfYr+emVl0NZitIoIQJZWI4ggVK
-         MrJFB1WXouNSuvWh/rgSzdJYgg1nK9mj+IbfPj0GOLSXJQ20wmUqaaF9LrlvzcsY7viI
-         ozLzAnLaTESfBDmAu+0TISx1yfvKHCWuWO85ak71Srm9uDIy9qsal4obgRwW3xkLp2x/
-         0xu1qlawL5fXU85FH6+uKGeoFQBOXCJO3gzFLnTLCOPm+/PYbY6B54nIAyBgLVGFFxuo
-         ec3aQ3b+4HFepoZGJ9iwm9DmKn3rknEq610cRkSbSnnJQb9YGcycn6ymEeLwOZ2tnouD
-         +7OQ==
+        bh=0KMRwPwKM0tnSgAHSLmFaSnlSyT+A2G0nTUQ1PummTM=;
+        b=nWM3bRBpdeq1jPnLKhb2r2cHXlUnR9DGea+2zfD5yZNDi8H/75w1Uaq8AfSDgX+Btk
+         2XnVhTU1I46aXLvvwkRaD1g+SVnC/uDXoto2u3rtY8D6YHiMD4WcWFVJTP+9VzfLHqPd
+         ufZfHnxXR5FqbxiQE4mbOT2VYMfKLL7EyIgVSTybK31CkL1BrBtVgX4mM+u6SzGeQtBe
+         9Q1dP31Tt4FryvhWmYfaOj0UiVyReq/1OoeTegaH/yiPSq5O5rCraSIkbiHdPhEq50sz
+         ZK6lNKhHDZKpGNW592hmblqrFe+kbVzQcj8K/hCEDV1f7imWQxQO9p1eDvTXU8G83ykq
+         TAlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=WhGl0urCSDXIW8hFOkS4u16hLDtuSJsA/i+yCUZ9vR0=;
-        b=BFkCOGuwrz6ZzE4xgaWIKvtg0fODPzJHdQE1ygRweKGdg3ZMoA5nDWPAHJ2IOU+A41
-         vUgNhTscKAN4AgLgr8mxIe3C36JoskVSpWC3GSlEujmPDzKSq0//lBI8XBTS7NK7WqWL
-         sgfXele54xjKL3wvLSOsS9zqLWGyKpCaTh6VVoi3eVpeBoD/qzMYckvRj0yit9RFQBwO
-         9+PyyrlttRAyL5G9Gm++XxmGfbZnz/XUmnxl6MfDctMerIj4pYGFR0thUfmwkhqXbQgv
-         HFbMOz1OhijoX80vBFm6N50QqRnhIm4cs6+DXpAEY3gNYuoJQZVrnrxt4RA34x2ktBbQ
-         GOtg==
-X-Gm-Message-State: AOAM5303CdcOZ4V0rqBMMeqFA5oCYnxiFexGGocpAqwnR+FlWcicGN2y
-	gmBMt7jw/6DBTn/+3GSa1aHnuW4qTVMuS2MF+e+LfZdw
-X-Google-Smtp-Source: ABdhPJz+7+nWnOHD8QWDScC+bQYR8/o1FkmrUEVj7LQ0SfVq51o9KjXzxlno8hlW33gi18S8FNqRk4NQIPVCnEh7mgg=
-X-Received: by 2002:a17:90a:a414:: with SMTP id y20mr402066pjp.77.1615231368301;
- Mon, 08 Mar 2021 11:22:48 -0800 (PST)
+        bh=0KMRwPwKM0tnSgAHSLmFaSnlSyT+A2G0nTUQ1PummTM=;
+        b=Mhw744ZLlIfv5Ib92rD2fE12W3gjY0FhsZgzu6gPL7gUJfrF16Ps79eRBV6TDmz1wZ
+         oMUxmIOFEhVKfhVYsqgHDMCJJhigoaaYudiiWpyMUkWbstIgAHwG6xpajYVtjcI3bCUW
+         Y0al48uBU7a3ZhPd7gs6zjQPmD2eW+gN0KYIOKmTmFLuccouaEUIH97Bx7bOyK3OkMf5
+         r6YWWShD0hHlrJs5o4Q97WJj/KtHhHjybCuHVYPMncxYeMBRQ6qO5Kxl3iaWFmiYVW4j
+         w6VwCsyNLhJgkKBaEk0LbjYoeuJCK37tivU/+iFfmEEwLsV1apBQCpKyt5JrGsRe3S4o
+         9K/w==
+X-Gm-Message-State: AOAM530/0AwmFg+jYcIaiqPmXbFNM5chePOwNInBJaVfVKtU+Nfv7ofN
+	UQ7oTZSqUR1fWbZ36QrFI7gBocWzzCcIYn9MGtE=
+X-Google-Smtp-Source: ABdhPJwpokpChafYoZnTdNs42dVU6kyV0e7WHux3cqeiPOMP8yI3V8Sd2019MWDfIBLwTTi2CGHF1Mxx4OsPNQL/B+Y=
+X-Received: by 2002:ac8:4f52:: with SMTP id i18mr22390479qtw.82.1615236903389;
+ Mon, 08 Mar 2021 12:55:03 -0800 (PST)
 MIME-Version: 1.0
-References: <20210308135318.1651724-1-dwagenknecht@emlix.com>
-In-Reply-To: <20210308135318.1651724-1-dwagenknecht@emlix.com>
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-Date: Mon, 8 Mar 2021 20:22:36 +0100
-Message-ID: <CALbNGRS=1CtvfApuUURtrt1CEiGjW9GD+1P0qey+cwtEGh2p0w@mail.gmail.com>
-Subject: Re: [oe] [meta-gnome][PATCH] gnome-keyring: set file capabilities in pkg_postinst
-To: Daniel Wagenknecht <dwagenknecht@emlix.com>
+References: <20210305190859.32217-1-JPEWhacker@gmail.com>
+In-Reply-To: <20210305190859.32217-1-JPEWhacker@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Mon, 8 Mar 2021 12:54:37 -0800
+Message-ID: <CAMKF1sraAE4Y69=vnfnvhXoFRk=sHiOgyU+Ck3C12m1=FN_mFA@mail.gmail.com>
+Subject: Re: [oe][meta-oe][PATCH] classes: Add Android sparse image class
+To: Joshua Watt <JPEWhacker@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Mar 8, 2021 at 2:55 PM Daniel Wagenknecht
-<dwagenknecht@emlix.com> wrote:
+On Fri, Mar 5, 2021 at 11:09 AM Joshua Watt <JPEWhacker@gmail.com> wrote:
 >
-> file capabilities need to be set on gnome-keyring-daemon. This is now
-> possible using pkg_postinst function on the build host. Previous
-> workarounds are not needed anymore.
->
-> Signed-off-by: Daniel Wagenknecht <dwagenknecht@emlix.com>
+> Adds a class to create sparse image files using the Android tools
 > ---
->  .../recipes-gnome/gnome-keyring/gnome-keyring_3.34.0.bb   | 8 +++-----
->  1 file changed, 3 insertions(+), 5 deletions(-)
+>  meta-oe/classes/image_types_simg.bbclass | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
+>  create mode 100644 meta-oe/classes/image_types_simg.bbclass
 >
-> diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.34.0.bb b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.34.0.bb
-> index 52c254b28..be6d922bc 100644
-> --- a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.34.0.bb
-> +++ b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.34.0.bb
-> @@ -43,9 +43,7 @@ FILES_${PN} += " \
->      ${libdir}/pkcs11/gnome-keyring-pkcs11.so \
->  "
->
-> -# fix | gnome-keyring-daemon: insufficient process capabilities, unsecure memory might get used
-^ Please leave this part of the comment - it is still valid and
-explaining why setcap is necessary
-> -# This does not make it through pseudo so perform on-target - sigh
-> -pkg_postinst_ontarget_${PN} () {
-> -    setcap cap_ipc_lock+ep `which gnome-keyring-daemon`
-> +pkg_postinst_${PN} () {
-> +    setcap cap_ipc_lock+ep $D/${bindir}/gnome-keyring-daemon
->  }
-> -RDEPENDS_${PN} += "libcap-bin"
-> +PACKAGE_WRITE_DEPS += "libcap-native"
-> --
-Cheers
+> diff --git a/meta-oe/classes/image_types_simg.bbclass b/meta-oe/classes/image_types_simg.bbclass
+> new file mode 100644
+> index 000000000..a53fafe5e
+> --- /dev/null
+> +++ b/meta-oe/classes/image_types_simg.bbclass
+> @@ -0,0 +1,16 @@
+> +inherit image_types
+> +
+> +CONVERSIONTYPES += "simg"
 
-Andreas
+I wonder if the name could be made sparse-img ?
+simg might indicate, signed image too.
+
+> +CONVERSION_CMD_simg() {
+> +    in="${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}"
+> +    out="${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}.simg"
+> +    case "${type}" in
+> +        ext*)
+> +            ext2simg "$in" "$out"
+> +            ;;
+> +        *)
+> +            img2simg "$in" "$out"
+> +            ;;
+> +    esac
+> +}
+> +CONVERSION_DEPENDS_simg = "android-tools-native"
+> --
+> 2.30.0
+>
+>
+> 
+>
