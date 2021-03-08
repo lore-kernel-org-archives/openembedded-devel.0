@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.38495.1615220304694361615
+ by mx.groups.io with SMTP id smtpd.web10.38024.1615220305388157974
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 08 Mar 2021 08:18:25 -0800
 Authentication-Results: mx.groups.io;
@@ -8,14 +8,16 @@ Received: from [78.130.197.211] (port=35290 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lJIaH-0005d6-Cn; Mon, 08 Mar 2021 18:18:18 +0200
+	id 1lJIaJ-0005d6-MR; Mon, 08 Mar 2021 18:18:20 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-ruamel-yaml: Upgrade 0.16.12 -> 0.16.13
-Date: Mon,  8 Mar 2021 18:18:06 +0200
-Message-Id: <20210308161810.21582-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-huey: Upgrade 2.3.0 -> 2.3.1
+Date: Mon,  8 Mar 2021 18:18:08 +0200
+Message-Id: <20210308161810.21582-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210308161810.21582-1-leon.anavi@konsulko.com>
+References: <20210308161810.21582-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,49 +30,37 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.16.13:
+Upgrade to release 2.3.1:
 
-- fix: could not update() CommentedMap with keyword arguments
-- fix: unable to dump mutated TimeStamp objects
-- fix: unable to addd comment without starting space
-- fix: recursive call to walk_tree not preserving all params
-- a None value in a flow-style sequence is now dumped as `null`
-  instead of `!!null ''`
-
-License-Update: Update year
+- Add SIGNAL_INTERRUPTED to signal when a task is interrupted when
+  a consumer exits abruptly.
+- Use the Huey.create_consumer() API within the Django management
+  command, to allow Django users to customize the creation of the
+  Consumer instance.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ruamel-yaml_0.16.12.bb => python3-ruamel-yaml_0.16.13.bb} | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-ruamel-yaml_0.16.12.bb => python3-ruamel-yaml_0.16.13.bb} (63%)
+ .../python/{python3-huey_2.3.0.bb => python3-huey_2.3.1.bb}    | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-huey_2.3.0.bb => python3-huey_2.3.1.bb} (59%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.13.bb
-similarity index 63%
-rename from meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb
-rename to meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.13.bb
-index 7593ce7f5..39795b784 100644
---- a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.12.bb
-+++ b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.16.13.bb
-@@ -2,7 +2,7 @@ SUMMARY = "YAML parser/emitter that supports roundtrip preservation of comments,
- AUTHOR = "Anthon van der Neut"
+diff --git a/meta-python/recipes-devtools/python/python3-huey_2.3.0.bb b/meta-python/recipes-devtools/python/python3-huey_2.3.1.bb
+similarity index 59%
+rename from meta-python/recipes-devtools/python/python3-huey_2.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-huey_2.3.1.bb
+index f70a349fd..d8141c8e8 100644
+--- a/meta-python/recipes-devtools/python/python3-huey_2.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-huey_2.3.1.bb
+@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5cac039fcc82f01141cc170b48f315d4"
  
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=60afc0a1bb0501c0c555cabe78bba022"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=fa0a51dfb461e2f803969e0f3fa71dfe"
+ PYPI_PACKAGE = "huey"
  
- PYPI_PACKAGE = "ruamel.yaml"
+-SRC_URI[md5sum] = "aa9f2a8f54cb68c62690c5e28589f49c"
+-SRC_URI[sha256sum] = "76978840a875607cd77c283c4ebf3ea5071b2ec06a1ac428d63be0d88f1e7070"
++SRC_URI[sha256sum] = "de9b6d0fd59794378fe05813d302be68038044ef3b68274b84ca8d285e20f803"
  
-@@ -10,8 +10,7 @@ inherit pypi setuptools3
+ inherit pypi setuptools3
  
- BBCLASSEXTEND = "native nativesdk"
- 
--SRC_URI[md5sum] = "c7e4b216d9554d80be42011b448b7c61"
--SRC_URI[sha256sum] = "076cc0bc34f1966d920a49f18b52b6ad559fbe656a0748e3535cf7b3f29ebf9e"
-+SRC_URI[sha256sum] = "bb48c514222702878759a05af96f4b7ecdba9b33cd4efcf25c86b882cef3a942"
- 
- do_install_prepend() {
-     export RUAMEL_NO_PIP_INSTALL_CHECK=1
 -- 
 2.17.1
 
