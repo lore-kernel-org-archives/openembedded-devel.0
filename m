@@ -1,17 +1,17 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.87])
- by mx.groups.io with SMTP id smtpd.web09.36049.1615212196716602331
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.70])
+ by mx.groups.io with SMTP id smtpd.web10.35738.1615212221870782693
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Mar 2021 06:03:17 -0800
+ Mon, 08 Mar 2021 06:03:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=PLz0Ttou;
- spf=pass (domain: windriver.com, ip: 40.107.237.87, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Q7eoQFOz;
+ spf=pass (domain: windriver.com, ip: 40.107.237.70, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=nTsB8/9W4WeyFjMPM9YPhBSXD3N2alxSEi2jWu5j0nftT0DPtpFC/V2VA6RWSx2xCg672UE6gtpGMHsbp8EAea1oJ7AK+wKL8q/25dslD/E6wBrBToTVVm4VE/K61/7cEsOQubW65ktrdSpo3LoMEwqWCks79y4wf+eXb3rmhhdntUmQ9vG7fxXS0udqOuySUTjgA3/VtQnuwcG43LDQ3zZaMoFRTg7HwCM8Xy4a0ymCR6OonR3eE26eDx2KTDehfN0uiBnYG8uuNg2EizZVnUAyXO5qwhzI9zx8q7YHWP4nb1EXbj4hK0dACrouRrIOc9njW3Fp9TfXi50VLiI7zQ==
+ b=NtnmgvhAfxmmj4KpqBN0Bh5i49z1zbsThBYnp6F2KhL92Ztjt4vjbLhyyWo4luTHofjNNiBjpMlI469AMtVVpOukRDpSPAC15pU/vYS+rb/LMT16b9sWTioIJr0W4Tr/eVxlyCo7L2ecZZAMcbWXsqYOi44qQRz20khYnL0ppfeqYzBc725XURAbSVCGMkN2GSSYnw+DKIDF2la1dnXyfbMv9u+GQtkSY0310uX+TSYzMdoBh0Vf9EOBdJ9rfwYJ82x/H3noEl3LZ8agjh5xzEGBq/x5T6n8RHBmnSsZNNJr6fk38ABdZF90ydpH6d8ylu7gzwGc18ns0X80mWiqlg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vvxMutjXoedWHeFJkzyYWoDtHHTzjVpOXqrn/1QXdjA=;
- b=fnxbHRKgWbxp4hJG6opih965nNzfBDCM1Gw6JVDKvBWO3rpA8E4cQpl+rz41Vg6ilZblwFFvR4dmCw9PsT6721lCBim/LwIwDR8glwmqkoj2m3abEaP4IK2knuxQvoFEj5vrouUn6/ig3u7IApOxCodbcukWxKjsQBYPp5X6uwvqfv7WPsESyBZVTtKhsiirdwZmJPtrmyJbnVswGPWIuQymCO4gEBxbuH4wXeXNbhw5k9z2wc4DO4kbDk3TmFnbn7tLvO3n0nlGX7rJx+cjR5epQTRcAKjv8ibC+YcUVcTQWTQpTx6SbKJ5sSD0CyPswot1Jog8Uqzix7zqK0mETg==
+ bh=0LrDvKIM6YZvtCgcPw7cly1VjnW3z/s+/sUAq9ZMDFo=;
+ b=SFoE3VWSulCDnLhueqYybfccEGTmjV1tXvZlL1oi1mJ+PZWLjKGi8QD3VS/aX1HxixQEC+eK/XYfdiSAsSFqGUKc6/tCx3MzU8FRjQfCB9kuH/NfcGUK1C59lrYHrLcetN7ZPUUtZm81Y78Q+oSy0KyY+Rvd/sULac846Nl7c1ZdPO2LLbDo5womMKBUUOjWGEYKA8jwAmtTJrh+Y86JrmDSRxAYu2kXfywizcjZgIZXPFuFkqFqCe2Ijz1Mo4NHN37nymCP0EYSX0YCOnN+Fvx7Thn/beNI8Kp6lEP0qLybfcHKbpMHhUE8eEpAPrwmP3Tp7ZE0KUd5XB3e1uu9Uw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vvxMutjXoedWHeFJkzyYWoDtHHTzjVpOXqrn/1QXdjA=;
- b=PLz0TtouSW1PXlvHws02q2TvxH1bc1OCcnmBVhAmY3NsKonwYEzH5YhSnUzcWzY1AMazLsEgI7ct7U/EsAKS7KXtWO4XkkDRRMIYgqsYSexPJdIdPjHc9jbY3DEHOJx+Gr81LsKBPixDQJDt2nHTWY683wRS/Qc9XGLoXXZCDlA=
+ bh=0LrDvKIM6YZvtCgcPw7cly1VjnW3z/s+/sUAq9ZMDFo=;
+ b=Q7eoQFOz3oTGnTP4ggtmHNfUMrDQtAGZqy4stol60D5m4yxq5UvUbPxgIeTLIJ/Gb1ryhtbf2+wpn4F/UMWzIY2aXilE4uLg3NfPycudD58M4WsHPny0BZ8C1/FUXIUwmlG/6MtQLKLf2qolSkoMa+K9ig7pM+ezSfa+tB+cTuo=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,150 +28,177 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BY5PR11MB4103.namprd11.prod.outlook.com (2603:10b6:a03:18c::29) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3912.26; Mon, 8 Mar
- 2021 14:03:10 +0000
+ 2021 14:03:20 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3890.037; Mon, 8 Mar 2021
- 14:03:10 +0000
-Subject: Re: [oe] [meta-python][PATCH] python3-grpcio: Upgrade to 1.36.1
+ 14:03:20 +0000
+Subject: Re: [oe] [meta-python][PATCH] python3-grpcio: Fix build on mips and musl
 To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-References: <20210303203016.2832532-1-raj.khem@gmail.com>
+References: <20210304044148.2032330-1-raj.khem@gmail.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <9c94c2d6-19c1-fb72-2070-b522fbb921b9@windriver.com>
-Date: Mon, 8 Mar 2021 09:03:07 -0500
+Message-ID: <7926ae18-41b3-6201-7046-7d03259890c5@windriver.com>
+Date: Mon, 8 Mar 2021 09:03:17 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.0
-In-Reply-To: <20210303203016.2832532-1-raj.khem@gmail.com>
+In-Reply-To: <20210304044148.2032330-1-raj.khem@gmail.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BL0PR03CA0029.namprd03.prod.outlook.com
- (2603:10b6:208:2d::42) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: BL0PR03CA0003.namprd03.prod.outlook.com
+ (2603:10b6:208:2d::16) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BL0PR03CA0029.namprd03.prod.outlook.com (2603:10b6:208:2d::42) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3912.17 via Frontend Transport; Mon, 8 Mar 2021 14:03:09 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BL0PR03CA0003.namprd03.prod.outlook.com (2603:10b6:208:2d::16) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3912.17 via Frontend Transport; Mon, 8 Mar 2021 14:03:19 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: ceafdce8-5a01-4f44-c301-08d8e23ae7da
+X-MS-Office365-Filtering-Correlation-Id: cbc299b6-2d48-4bbd-d36d-08d8e23aede0
 X-MS-TrafficTypeDiagnostic: BY5PR11MB4103:
 X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB4103A525860F28FFDFD80F309F939@BY5PR11MB4103.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1751;
+	<BY5PR11MB4103D1EE360B8266776FD7359F939@BY5PR11MB4103.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	Qk1rVETQF8W0dA1q60ty4bM3Ptp5lpbJ4f94iA8VSKfpRmXlmq3drZ2xwByOo6QUqGc1hTkuIBgA9U54KpwBRl3+2DkfH35wp8yu1BsJhXIR7l2XneYyHGyzs8QdA2+yMid8vIMdQoq9kUFc0H+hMQGhGKNuEvD6N2HAnnQJVXbfI6dYs2T/w64xZuoy5wYpbdUXwzTcPjyAAYwQy70c3L58QJsyG8BRCdMcuotp8aM+FGxTaCMSfjnGkhmzscL43Nii6DZXvCN19/hgKjJkAM6Zva1sTaetaz+96Vsdt9QKLMFpgIWf+GuGSK/0um58x1txNeSFusr5VLBKu9N4uhUHSIm57DiouUkMMr3Kiz7XtqsMOvlH/XuSsml/sPGmwxpbhtm/65MLrUmGveI4anAcj1ffc8XxE+8GtElnafJS5fOMcc4Pu5UGMWjqyLxvTeVfZqdEn8lSk5YayY++4V78/iylhRzWVj2wc2CrZt7wt5Txbvz27Dnrp1064MAM6Uj8+Xmt2TtwSK+oawQgQJIRgClrvwae6yBPDIHjTkJCpfLKsKGVeGe9a5oVc3xIYXNrwzvdFMY9ZrBkgjmGrKqqvvdCvuTvauZU66+kI4oRR4jEg/deX1wXg+pFmh9gqpjTSu1Bq0Gwhb/BiO5afKL4A4Wd3FS1E/GvbXp30/f+e0x0kI0VqFSURAWKIiuX
+	RNUx2yBkISC10bzDWwbl921gxWpEJ7Fq+7Oihe2GJGfoqP8CjOHrqBkaF8AvJKwY/nn1UUJ0zGjJ2YJ2AcnW/k8F7rKEKO2NJV/0/nzN/KkSPJPdv1rKUFxkveV+2/zp0HwllL9SUyPPBD2hMHnnInyHhIdKMCGsj8LBf3+ITTnpdbhoYD4rLXW7YA8pAczUNJIoSLIPgS0H5PlD+sgy3eOe9ESKcvoGebsZcf9DfttOuMPl9Evrdh97M0FsTOcxQDBDL1gEb9DBIC635o4kzBUiJw8iDo88xqnlWObsvREZsFtNU47rhHeg/KgX09RFRM6kkzk/RrF0ZktYYytUCspqQGA4Fp8i8t8pUBtQgE6RPLA97xBMPgqLZ7pZ8nBG+ivtbgYFI+yf2a93diGqdqknyLq5xMzFNOzaoatL8yz7zuHwSbrvMQaC02GbCiyCrhtkiE2atijfIG7PU8hiWYpp/OcsaKsHij3oiZGCaHFvRPqQdsX1PtHLvvH05TrJIzTXK77tKT8hZ9AMhNxA4VDkPmkbQjgSyoY5TCu3sqWMY4yt88woa0Lgt58hsiW7nhHaorGCIKgwoEUa5RM9+uApPBBun/ZiUuMXEnBF7txKvww6lPhRN2mwHseq+XHJhP+nJVkhHBk/9nZHXW/7zPyj2BpH5hOn2pAYn4WK0wtU0XPDc89Ybyg+mlz+XPBr
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(366004)(376002)(346002)(136003)(396003)(44832011)(66476007)(2906002)(83380400001)(16526019)(26005)(66556008)(36756003)(31686004)(86362001)(31696002)(16576012)(8676002)(6486002)(8936002)(956004)(478600001)(53546011)(316002)(2616005)(33964004)(166002)(66946007)(186003)(966005)(5660300002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?WE5VMEoyOHpSQ2I1dmdTdi96bVFXek9Vd01idGR1cXVVZWtyWmZVZjVTMjJ3?=
- =?utf-8?B?TEtlYzZISVp2cnJqczE5M0QrTHJuNDZJUjZydkFLT0dFSExyd0YvWjMvb1Q2?=
- =?utf-8?B?M3dWRUJ1K2luZVFNQWdPdVM5MWdab2tkU3BXWVJtT0cyQVYwT3J1NUlNNE1a?=
- =?utf-8?B?bkVQL2plY0JTUkVCaVNiaTBFMjQxR0hRK291TytMWlZiY2planNEVFdJd01z?=
- =?utf-8?B?blhpYkNzWkpNUmQyWnVSbXd4aGNIZTNiTDNMMElNSXdtSTJ6NExlQVFhem9F?=
- =?utf-8?B?bitrRmRkTG9xdG1wTy9WR3N4SU5RekxZMlVQTkc3VWRidzhIYWZRblZCamdE?=
- =?utf-8?B?eTZ0ZGJWZFdBYXA0cURwelliOTFpL2UvRGdPSEZlNUExT0dZWEVLWE5EckJP?=
- =?utf-8?B?Z2d3K0RpdmhpaUtycEJubThrcHJ3NFMyQUJkaVYxTFZ3dmZ4YWJlNXFVayt4?=
- =?utf-8?B?cHZ5K05Mb1FFWWJyL3BWbkRsSHBZYXJWVk9iYllwdmZoa2lGZWZoNWxHeXEv?=
- =?utf-8?B?eE1xTUZYQlNmZkwwSy94L2pjVlpNV24vaUl0MGNCbEtpelY0dThDSlhGTEc5?=
- =?utf-8?B?TTBsbk5ISGNNdlNZTWlTVmZ2NlBYcHlLb3NDdy9Ebk8zV2kxbENUVlFubStN?=
- =?utf-8?B?Ull1SkpzUkZvU2xuYmdCNURsZjZDbnhsODhjcnNBaHV3S0RWeVJGMVIydVpq?=
- =?utf-8?B?WUlsaVJPUzNXTFQweUZTUU0rcU1TMzZ2cEFNNnRrdXJEcFc1dTN1V1l0SHox?=
- =?utf-8?B?eFd4RVkrT0tMWmJtN01idVRSKzFaK3VvRWRsQzVhRVhxRWxlVlZ0WkFLTUU0?=
- =?utf-8?B?VWplVjdvNldTYlVEWWc3TUdrcTA0ZnJRUW5UL2FsMmVKa0MvNkhwUEFFMWFx?=
- =?utf-8?B?K0dqMk1USUl6M0MvQndaUEd3a0tqbnRFemRqaDUwcVVDZjNoS0FZcTVaeVNk?=
- =?utf-8?B?QWJ6amx2bkxWU0J1WE5MYy93L0NNWll3MGlEQXBsRHBHSWNJUTlMWkVpMVJP?=
- =?utf-8?B?cm11MGdPdzJ6NGY0b3VxMjQ1WnR1U081blR1SUltajNMN21yUzE0ZHZpRzBK?=
- =?utf-8?B?WEo2amg2VHNDdmRyeDd6REE4UVNxcWs0Q0pPMVliVDhIUlhCZEtUeHNvQUVi?=
- =?utf-8?B?L0h5Z2ZJMW8vd3NvNVJJaTk0Z2xPZUQ4NE9wU0orYXcyWjdPanVRejJzMlFs?=
- =?utf-8?B?S2JUVlVSRzhsZmpLNk95ZHFpanpjZ0ltbllQdWRzV3VXWVc2a0FkZlFsZWc4?=
- =?utf-8?B?VExDbVkvRlliMVJVb2c1ZlM0WXdyUkNidjNLU1VJbVJDREgwVWp2R0lJRWFQ?=
- =?utf-8?B?bnBITEZXb1l5Zkw5bnpXbGh3UWgydzA0anFwUTZRKzlqaTdzNVN3bDk0Mnlo?=
- =?utf-8?B?NDQxa3R6eXNZQnRIY0xVSmVCRDVaNmFZTDBEb1RiaVloZ0NRSThZYnBLZ3pM?=
- =?utf-8?B?VWxvY29EWWx6Q1ZIQzdnaThRaHNRb0pEUzJMWEZoUE00djdpVWcxMzVEakxs?=
- =?utf-8?B?SXlxZ0drVXF6NkFNcHdjTlN4SEZhRnhWdVhIdDB4SFA2Z25raUladDFSMjJr?=
- =?utf-8?B?dWRCV3RuTmUwWHVIb1dJVG9qanM5Z3NSU2FwYU9tbnVxUlVHRm9KZUxxQjJx?=
- =?utf-8?B?Skl1ekxNaEpqMjB5NGFlay96Rks0QVlRbWhDUWpITERoV3ptMUhaTWtrbUw4?=
- =?utf-8?B?aGFtWW9LU1JTci9lMEw0Yy9HdThIS3E2MnR5Rld0SVdYblpNL2R3VzZsdE1R?=
- =?utf-8?Q?cito0dMm8siIKrnas5iZTHXrCHB2CVYEPiXEvPt?=
+	=?utf-8?B?NklLYVQrWkJMRzUvNDhVVFF0R29ObXpBb2tsbzhRdTZVQi9vNndIekdPeXgv?=
+ =?utf-8?B?QklzZjdmQUpVYTZBaVFJcDFKRy9OaE1WaHNDY2pSSWJxeC9yMWlBZzMrK0lU?=
+ =?utf-8?B?YTBkZ3lQQVBVaFlIMml1RWJDVi8xUmRoelZJbkI3U3hDT2toRWdNZHJ6d2VR?=
+ =?utf-8?B?Z2ZXT0JMWW1mSVQwSTVlMG8vdW9ORE43TEozdUFDRUJNR0pXYjlxbzZsWFFZ?=
+ =?utf-8?B?ZFhodVQwS2gwbGhjelRxb29saENGV3dsSkJSQ3k1M0hTckpSalIzWUdHa21S?=
+ =?utf-8?B?UkovY01aK0h1MEVJRVJ3SWh4eG56Zy9OZ2h1VHBiWHZPbFA1YkhPb0p6bHBi?=
+ =?utf-8?B?YTRrbkRkYTVHS09lSnBRQUNZTzFuMjZQWHNDMjdsdUJYNmpsSHBsendZQ01m?=
+ =?utf-8?B?VEVGZjBtbldJVnhDUVhOZkJMMnNEa2k1VUtTSUFNRWoxbVVENzQxWDZOQStR?=
+ =?utf-8?B?U0s1c3FIRHJaNDh4R3FZbGp2RUpaanpjTnpnZlFtdEZhbThwSHdrOG9tYXNT?=
+ =?utf-8?B?VHdaQ0pZcDhPMGVvc3NWMlRzTGRBU0UrSUprYUNJaEpOc1FNakJuaUNGU1F5?=
+ =?utf-8?B?dHVJc2wxRHFLcEEwWnJiZ2Y4eVRHL0Y4T1NTdlAxc0hVb0l0eFI4d0tOZ3dq?=
+ =?utf-8?B?OHVmaU50dElvbVcyN2FXTDYwMXVPYUVPa3pad0J2K05nQ09EZHRITU9NdGx2?=
+ =?utf-8?B?L3YyQjJHM3g0T1JvNXhMeHJDYkRQUkxRTWpZS08yWVVSeHlUNHhTM0ZacXlC?=
+ =?utf-8?B?QWttL2d0dWlpK1RXQzcyeklVQ1FFRmxmZmJ0UDRWY2tYVG9MbVhKa3poVzVO?=
+ =?utf-8?B?Z1NrK1RIRXVabGllTzlTS1hvZGU4Z2JqUzlyVEc4TTRPTXNsbnVTaXNJc2VS?=
+ =?utf-8?B?K2h2VWZOVDZOeDlNMG1aZWFEai9vZ2RoWkxTNitzTlVZYXpzUDlLN1pOam9X?=
+ =?utf-8?B?Ukw4Y290Yk4xa0dVSzU4SGdVallid0JqS1c5Kzk4T2luMGpicTVMWWxZcDhk?=
+ =?utf-8?B?QXlHQ2FpMFROS3QyVmZKR1dhcUJ3aUJuOVM5M2xUcFRVbTB1ajZtUStQRVp3?=
+ =?utf-8?B?L1RmZHhIS0ozbVA2akQ0c2FDOFkrdmN2V21qV25uKzA2YWhiWGFlT0R1NHNs?=
+ =?utf-8?B?MmNVUm1wR1ZyQ2VQTVJudVFsNEVXMDJUR3A4bExHTGRhV0hEMTJDK3R5c1BB?=
+ =?utf-8?B?czV4VFdPY21GUE92bTUvcG9pazd0TTQ4MzFXN0tvRDlXWkJCTE9JY3dLMms1?=
+ =?utf-8?B?MXF0eU9jUFdTL0FLY0hsNS9aSkh1MzJjcGRIaEZxd0kvOHRJakt4RDMwak9X?=
+ =?utf-8?B?Zk1DbThhanZyRXNnaDA1WXJiQ0hWVGgwcHRHWjJDS2JGbVlDN0RKY3FrU0hV?=
+ =?utf-8?B?bkZ5b0FMd0piSkYyYVMyVkNaejJlSlhXWFFIdXFHMVZCOXVidkNLbXJsSFdY?=
+ =?utf-8?B?ZmNrYncrMis3WTE5YU5KYlRzK2d5R1BQRElTQ3ZLVHpxU0hsT1BnYllYRXJH?=
+ =?utf-8?B?RkJGZzVXRFFiS3BkckRYdHk0aWE1NXRFYTA1QVNYeDQzM2xhNXV1QXZqbmNL?=
+ =?utf-8?B?SlJwblcyZjBTd3c4eDE4RTltMmM3ZEhvOVo2WXBWNTVrM0o1NCs2MGJiTDdq?=
+ =?utf-8?B?dk1rQWRRSFJuSVVDNEVuQ3JXTFZ6NnEyb2RmQ1NXQW92WGJNSmZ3dmpHRExF?=
+ =?utf-8?B?aFNjNWNxUVpGNHkwWElJLzJqd1ZQdXZQSnBPSlNsSkROR0pDNGlDSVlkNTMr?=
+ =?utf-8?Q?cbXhRO6t0eCmQcuaAbCdFwxWVLkH45v4lx3ye6x?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ceafdce8-5a01-4f44-c301-08d8e23ae7da
+X-MS-Exchange-CrossTenant-Network-Message-Id: cbc299b6-2d48-4bbd-d36d-08d8e23aede0
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Mar 2021 14:03:10.0448
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Mar 2021 14:03:20.1958
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: l29ksfu9YtSA9zBhWJATZgZovolbFntvGuzhi1yMAivSN8RbS51UVpk5hnPgqe7j3U6PucFr9pKgV96b2EST8bgyDeG7sZzTZbJTirmWieQ=
+X-MS-Exchange-CrossTenant-UserPrincipalName: mTFNiwij9TrQ9aIs2mNZ0hJFBE42fl36Cuxg3kEbNnSFftAGn1FsnfF2TazD1aH0v34djCO6vhrvG+0tnQpl1UfPOl1UTJPS2dsISTD/Tkk=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB4103
 Content-Type: multipart/alternative;
- boundary="------------E7B8C6D77EA2AEE3DA813F58"
+ boundary="------------52C4CE239B345AF32285BAD4"
 Content-Language: en-US
 
---------------E7B8C6D77EA2AEE3DA813F58
+--------------52C4CE239B345AF32285BAD4
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 2021-03-03 3:30 p.m., Khem Raj wrote:
+On 2021-03-03 11:41 p.m., Khem Raj wrote:
 > [Please note: This e-mail is from an EXTERNAL e-mail address]
->
-> Release notes are here [1]
->
-> See the differences after 1.35.0 upwards
->
-> [1] https://github.com/grpc/grpc/releases
 >
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/python3-grpcio/ppc-boringssl-support.patch           | 2 +-
->   .../python/python3-grpcio/riscv64_support.patch                 | 2 +-
->   .../{python3-grpcio_1.35.0.bb => python3-grpcio_1.36.1.bb}      | 2 +-
->   3 files changed, 3 insertions(+), 3 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-grpcio_1.35.0.bb => python3-grpcio_1.36.1.bb} (93%)
+>   .../0001-absl-always-use-asm-sgidefs.h.patch  | 33 +++++++++++++++++++
+>   .../python3-grpcio/mips_bigendian.patch       | 15 +++++++++
+>   .../python/python3-grpcio_1.36.1.bb           |  2 ++
+>   3 files changed, 50 insertions(+)
+>   create mode 100644 meta-python/recipes-devtools/python/python3-grpcio/0001-absl-always-use-asm-sgidefs.h.patch
+>   create mode 100644 meta-python/recipes-devtools/python/python3-grpcio/mips_bigendian.patch
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-grpcio/ppc-boringssl-support.patch b/meta-python/recipes-devtools/python/python3-grpcio/ppc-boringssl-support.patch
-> index dadd3da85e..5c9be443d8 100644
-> --- a/meta-python/recipes-devtools/python/python3-grpcio/ppc-boringssl-support.patch
-> +++ b/meta-python/recipes-devtools/python/python3-grpcio/ppc-boringssl-support.patch
-> @@ -12,6 +12,6 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
->   +#elif (defined(__PPC__) || defined(__powerpc__))
->   +#define OPENSSL_32_BIT
->   +#define OPENSSL_PPC
-> - #elif defined(__mips__) && !defined(__LP64__)
-> + #elif defined(__MIPSEL__) && !defined(__LP64__)
->    #define OPENSSL_32_BIT
->    #define OPENSSL_MIPS
-> diff --git a/meta-python/recipes-devtools/python/python3-grpcio/riscv64_support.patch b/meta-python/recipes-devtools/python/python3-grpcio/riscv64_support.patch
-> index 7e071ae1e6..350c67deaf 100644
-> --- a/meta-python/recipes-devtools/python/python3-grpcio/riscv64_support.patch
-> +++ b/meta-python/recipes-devtools/python/python3-grpcio/riscv64_support.patch
-> @@ -5,7 +5,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
->   --- a/third_party/boringssl-with-bazel/src/include/openssl/base.h
->   +++ b/third_party/boringssl-with-bazel/src/include/openssl/base.h
->   @@ -108,6 +108,14 @@ extern "C" {
-> - #elif defined(__mips__) && defined(__LP64__)
-> + #elif defined(__MIPSEL__) && defined(__LP64__)
->    #define OPENSSL_64_BIT
->    #define OPENSSL_MIPS64
->   +#elif defined(__riscv)
-> diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.35.0.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
-> similarity index 93%
-> rename from meta-python/recipes-devtools/python/python3-grpcio_1.35.0.bb
-> rename to meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
-> index 2c137f6ce7..d374b54b34 100644
-> --- a/meta-python/recipes-devtools/python/python3-grpcio_1.35.0.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-grpcio/0001-absl-always-use-asm-sgidefs.h.patch b/meta-python/recipes-devtools/python/python3-grpcio/0001-absl-always-use-asm-sgidefs.h.patch
+> new file mode 100644
+> index 0000000000..be516ca508
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-grpcio/0001-absl-always-use-asm-sgidefs.h.patch
+> @@ -0,0 +1,33 @@
+> +From 8f21fdfb83b0fa844a9f1f03a86a9ca46642d85e Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Thu, 9 Apr 2020 13:06:27 -0700
+> +Subject: [PATCH 1/2] absl: always use <asm/sgidefs.h>
+> +
+> +Fixes mips/musl build, since sgidefs.h is not present on all C libraries
+> +but on linux asm/sgidefs.h is there and contains same definitions, using
+> +that makes it portable.
+> +
+> +Upstream-Status: Pending
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + third_party/abseil-cpp/absl/base/internal/direct_mmap.h | 6 +-----
+> + 1 file changed, 1 insertion(+), 5 deletions(-)
+> +
+> +--- a/third_party/abseil-cpp/absl/base/internal/direct_mmap.h
+> ++++ b/third_party/abseil-cpp/absl/base/internal/direct_mmap.h
+> +@@ -41,13 +41,9 @@
+> +
+> + #ifdef __mips__
+> + // Include definitions of the ABI currently in use.
+> +-#ifdef __BIONIC__
+> +-// Android doesn't have sgidefs.h, but does have asm/sgidefs.h, which has the
+> ++// bionic/musl C libs don't have sgidefs.h, but do have asm/sgidefs.h, which has the
+> + // definitions we need.
+> + #include <asm/sgidefs.h>
+> +-#else
+> +-#include <sgidefs.h>
+> +-#endif  // __BIONIC__
+> + #endif  // __mips__
+> +
+> + // SYS_mmap and SYS_munmap are not defined in Android.
+> diff --git a/meta-python/recipes-devtools/python/python3-grpcio/mips_bigendian.patch b/meta-python/recipes-devtools/python/python3-grpcio/mips_bigendian.patch
+> new file mode 100644
+> index 0000000000..343f25a46e
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-grpcio/mips_bigendian.patch
+> @@ -0,0 +1,15 @@
+> +--- a/third_party/boringssl-with-bazel/src/include/openssl/base.h
+> ++++ b/third_party/boringssl-with-bazel/src/include/openssl/base.h
+> +@@ -102,10 +102,10 @@ extern "C" {
+> + #elif (defined(__PPC__) || defined(__powerpc__))
+> + #define OPENSSL_32_BIT
+> + #define OPENSSL_PPC
+> +-#elif defined(__MIPSEL__) && !defined(__LP64__)
+> ++#elif defined(__mips__) && !defined(__LP64__)
+> + #define OPENSSL_32_BIT
+> + #define OPENSSL_MIPS
+> +-#elif defined(__MIPSEL__) && defined(__LP64__)
+> ++#elif defined(__mips__) && defined(__LP64__)
+> + #define OPENSSL_64_BIT
+> + #define OPENSSL_MIPS64
+> + #elif defined(__riscv)
+> diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
+> index d374b54b34..3d875bf4ba 100644
+> --- a/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
 > +++ b/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
-> @@ -11,7 +11,7 @@ SRC_URI_append_class-target = " file://ppc-boringssl-support.patch \
+> @@ -10,6 +10,8 @@ SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch"
+>   SRC_URI_append_class-target = " file://ppc-boringssl-support.patch \
 >                                   file://riscv64_support.patch \
 >                                   file://boring_ssl.patch \
+> +                                file://mips_bigendian.patch \
+> +                                file://0001-absl-always-use-asm-sgidefs.h.patch \
 >   "
-> -SRC_URI[sha256sum] = "7bd0ebbb14dde78bf66a1162efd29d3393e4e943952e2f339757aa48a184645c"
-> +SRC_URI[sha256sum] = "a66ea59b20f3669df0f0c6a3bd57b985e5b2d1dcf3e4c29819bb8dc232d0fd38"
+>   SRC_URI[sha256sum] = "a66ea59b20f3669df0f0c6a3bd57b985e5b2d1dcf3e4c29819bb8dc232d0fd38"
 >
->   RDEPENDS_${PN} = "${PYTHON_PN}-protobuf \
->                     ${PYTHON_PN}-setuptools \
 > --
 > 2.30.1
 >
@@ -179,7 +206,7 @@ Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > 
 >
 
---------------E7B8C6D77EA2AEE3DA813F58
+--------------52C4CE239B345AF32285BAD4
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -189,71 +216,98 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 2021-03-03 3:30 p.m., Khem Raj
+    <div class="moz-cite-prefix">On 2021-03-03 11:41 p.m., Khem Raj
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210303203016.2832532-1-raj.khem@gmail.com">
+    <blockquote type="cite" cite="mid:20210304044148.2032330-1-raj.khem@gmail.com">
       <pre class="moz-quote-pre" wrap="">[Please note: This e-mail is from an EXTERNAL e-mail address]
-
-Release notes are here [1]
-
-See the differences after 1.35.0 upwards
-
-[1] <a class="moz-txt-link-freetext" href="https://github.com/grpc/grpc/releases">https://github.com/grpc/grpc/releases</a>
 
 Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210303203016.2832532-1-raj.khem@gmail.com">
+    <blockquote type="cite" cite="mid:20210304044148.2032330-1-raj.khem@gmail.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/python3-grpcio/ppc-boringssl-support.patch           | 2 +-
- .../python/python3-grpcio/riscv64_support.patch                 | 2 +-
- .../{python3-grpcio_1.35.0.bb =&gt; python3-grpcio_1.36.1.bb}      | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-grpcio_1.35.0.bb =&gt; python3-grpcio_1.36.1.bb} (93%)
+ .../0001-absl-always-use-asm-sgidefs.h.patch  | 33 +++++++++++++++++++
+ .../python3-grpcio/mips_bigendian.patch       | 15 +++++++++
+ .../python/python3-grpcio_1.36.1.bb           |  2 ++
+ 3 files changed, 50 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-grpcio/0001-absl-always-use-asm-sgidefs.h.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-grpcio/mips_bigendian.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio/ppc-boringssl-support.patch b/meta-python/recipes-devtools/python/python3-grpcio/ppc-boringssl-support.patch
-index dadd3da85e..5c9be443d8 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio/ppc-boringssl-support.patch
-+++ b/meta-python/recipes-devtools/python/python3-grpcio/ppc-boringssl-support.patch
-@@ -12,6 +12,6 @@ Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a>
- +#elif (defined(__PPC__) || defined(__powerpc__))
- +#define OPENSSL_32_BIT
- +#define OPENSSL_PPC
-- #elif defined(__mips__) &amp;&amp; !defined(__LP64__)
-+ #elif defined(__MIPSEL__) &amp;&amp; !defined(__LP64__)
-  #define OPENSSL_32_BIT
-  #define OPENSSL_MIPS
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio/riscv64_support.patch b/meta-python/recipes-devtools/python/python3-grpcio/riscv64_support.patch
-index 7e071ae1e6..350c67deaf 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio/riscv64_support.patch
-+++ b/meta-python/recipes-devtools/python/python3-grpcio/riscv64_support.patch
-@@ -5,7 +5,7 @@ Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a>
- --- a/third_party/boringssl-with-bazel/src/include/openssl/base.h
- +++ b/third_party/boringssl-with-bazel/src/include/openssl/base.h
- @@ -108,6 +108,14 @@ extern &quot;C&quot; {
-- #elif defined(__mips__) &amp;&amp; defined(__LP64__)
-+ #elif defined(__MIPSEL__) &amp;&amp; defined(__LP64__)
-  #define OPENSSL_64_BIT
-  #define OPENSSL_MIPS64
- +#elif defined(__riscv)
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.35.0.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
-similarity index 93%
-rename from meta-python/recipes-devtools/python/python3-grpcio_1.35.0.bb
-rename to meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
-index 2c137f6ce7..d374b54b34 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio_1.35.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio/0001-absl-always-use-asm-sgidefs.h.patch b/meta-python/recipes-devtools/python/python3-grpcio/0001-absl-always-use-asm-sgidefs.h.patch
+new file mode 100644
+index 0000000000..be516ca508
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-grpcio/0001-absl-always-use-asm-sgidefs.h.patch
+@@ -0,0 +1,33 @@
++From 8f21fdfb83b0fa844a9f1f03a86a9ca46642d85e Mon Sep 17 00:00:00 2001
++From: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a>
++Date: Thu, 9 Apr 2020 13:06:27 -0700
++Subject: [PATCH 1/2] absl: always use &lt;asm/sgidefs.h&gt;
++
++Fixes mips/musl build, since sgidefs.h is not present on all C libraries
++but on linux asm/sgidefs.h is there and contains same definitions, using
++that makes it portable.
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a>
++---
++ third_party/abseil-cpp/absl/base/internal/direct_mmap.h | 6 +-----
++ 1 file changed, 1 insertion(+), 5 deletions(-)
++
++--- a/third_party/abseil-cpp/absl/base/internal/direct_mmap.h
+++++ b/third_party/abseil-cpp/absl/base/internal/direct_mmap.h
++@@ -41,13 +41,9 @@
++
++ #ifdef __mips__
++ // Include definitions of the ABI currently in use.
++-#ifdef __BIONIC__
++-// Android doesn't have sgidefs.h, but does have asm/sgidefs.h, which has the
+++// bionic/musl C libs don't have sgidefs.h, but do have asm/sgidefs.h, which has the
++ // definitions we need.
++ #include &lt;asm/sgidefs.h&gt;
++-#else
++-#include &lt;sgidefs.h&gt;
++-#endif  // __BIONIC__
++ #endif  // __mips__
++
++ // SYS_mmap and SYS_munmap are not defined in Android.
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio/mips_bigendian.patch b/meta-python/recipes-devtools/python/python3-grpcio/mips_bigendian.patch
+new file mode 100644
+index 0000000000..343f25a46e
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-grpcio/mips_bigendian.patch
+@@ -0,0 +1,15 @@
++--- a/third_party/boringssl-with-bazel/src/include/openssl/base.h
+++++ b/third_party/boringssl-with-bazel/src/include/openssl/base.h
++@@ -102,10 +102,10 @@ extern &quot;C&quot; {
++ #elif (defined(__PPC__) || defined(__powerpc__))
++ #define OPENSSL_32_BIT
++ #define OPENSSL_PPC
++-#elif defined(__MIPSEL__) &amp;&amp; !defined(__LP64__)
+++#elif defined(__mips__) &amp;&amp; !defined(__LP64__)
++ #define OPENSSL_32_BIT
++ #define OPENSSL_MIPS
++-#elif defined(__MIPSEL__) &amp;&amp; defined(__LP64__)
+++#elif defined(__mips__) &amp;&amp; defined(__LP64__)
++ #define OPENSSL_64_BIT
++ #define OPENSSL_MIPS64
++ #elif defined(__riscv)
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
+index d374b54b34..3d875bf4ba 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
 +++ b/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
-@@ -11,7 +11,7 @@ SRC_URI_append_class-target = <a class="moz-txt-link-rfc2396E" href="file://ppc-boringssl-support.patch\file://riscv64_support.patch\file://boring_ssl.patch\">&quot; file://ppc-boringssl-support.patch \
+@@ -10,6 +10,8 @@ SRC_URI += <a class="moz-txt-link-rfc2396E" href="file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch">&quot;file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch&quot;</a>
+ SRC_URI_append_class-target = <a class="moz-txt-link-rfc2396E" href="file://ppc-boringssl-support.patch\file://riscv64_support.patch\file://boring_ssl.patch\+file://mips_bigendian.patch\+file://0001-absl-always-use-asm-sgidefs.h.patch\">&quot; file://ppc-boringssl-support.patch \
                                  file://riscv64_support.patch \
                                  file://boring_ssl.patch \
++                                file://mips_bigendian.patch \
++                                file://0001-absl-always-use-asm-sgidefs.h.patch \
  &quot;</a>
--SRC_URI[sha256sum] = &quot;7bd0ebbb14dde78bf66a1162efd29d3393e4e943952e2f339757aa48a184645c&quot;
-+SRC_URI[sha256sum] = &quot;a66ea59b20f3669df0f0c6a3bd57b985e5b2d1dcf3e4c29819bb8dc232d0fd38&quot;
+ SRC_URI[sha256sum] = &quot;a66ea59b20f3669df0f0c6a3bd57b985e5b2d1dcf3e4c29819bb8dc232d0fd38&quot;
 
- RDEPENDS_${PN} = &quot;${PYTHON_PN}-protobuf \
-                   ${PYTHON_PN}-setuptools \
 --
 2.30.1
 
@@ -268,4 +322,4 @@ index 2c137f6ce7..d374b54b34 100644
   </body>
 </html>
 
---------------E7B8C6D77EA2AEE3DA813F58--
+--------------52C4CE239B345AF32285BAD4--
