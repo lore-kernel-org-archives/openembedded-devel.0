@@ -1,85 +1,82 @@
 Received: from wout1-smtp.messagingengine.com (wout1-smtp.messagingengine.com [64.147.123.24])
- by mx.groups.io with SMTP id smtpd.web11.12999.1615312106859704501
+ by mx.groups.io with SMTP id smtpd.web09.12981.1615312228850946376
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Mar 2021 09:48:26 -0800
+ Tue, 09 Mar 2021 09:50:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gherzan.com header.s=fm1 header.b=P2QB7jfu;
+ dkim=pass header.i=@gherzan.com header.s=fm1 header.b=eElvl796;
  spf=pass (domain: gherzan.com, ip: 64.147.123.24, mailfrom: andrei@gherzan.com)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.42])
-	by mailout.west.internal (Postfix) with ESMTP id 314C9559;
-	Tue,  9 Mar 2021 12:48:26 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
-  by compute2.internal (MEProxy); Tue, 09 Mar 2021 12:48:26 -0500
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+	by mailout.west.internal (Postfix) with ESMTP id C46EB10F7;
+	Tue,  9 Mar 2021 12:50:27 -0500 (EST)
+Received: from imap4 ([10.202.2.54])
+  by compute3.internal (MEProxy); Tue, 09 Mar 2021 12:50:28 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gherzan.com; h=
-	from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding; s=fm1; bh=h9/UhY47TTcCh
-	2579TN6HtShCydI0havdtzpPrM1E58=; b=P2QB7jfuj69RYGoOX1ziUXllo/8gU
-	Mt8qY+iFOoXaCmEqO3Fn9FXFaPu1Lkz8DCapRzx4LEI/5Z8+oVbVsy5OGtVWpPWU
-	RWYIyZRU+JwqIX8Vs8qmP5VE3z+Z4LKzfDXlnfVeibw0beBlSsGmw9RqzSDWZt5n
-	NGX+BOxtISYTpMmQ0+FVf1T6VvpKGnsFeFiC0YKq/6aTgQ26ag2V+79BFAqonlTK
-	x2x0ulCznyyeHe1TTzOCWcoLzX4DOJMniJB4ZE4OV2008DmmUC53Q/HvY6hFbDtu
-	HeVhyUwkqVXTbCK7tgrl+WFiS6MumXm3HNTno+jsjxKZibq2ihF7ga5tw==
+	mime-version:message-id:in-reply-to:references:date:from:to:cc
+	:subject:content-type; s=fm1; bh=qVPGDT6wbxzyftyjE9HIvxQHlkh7/wf
+	otl++15uOpvE=; b=eElvl796oUKQC3Ol38HgCaSXPtwbXe+n3SKxRO8mVJJA4tf
+	LZbXRSZGZg9KvasOrHUKGHG20DacpQHcLPlq6i9zvZfcaw2htreVliFvS6sQLci+
+	+di8wso1WJ2ETlQEBMjIehOuJEzfIoxPFX5EWjy/DBDtUt7kCJwOWi5h3MiGrf+p
+	6muQCumIccx1nw8Z6L3Dy6dp44i0wIselEA60VuaQr0Ru3QeMoJ+zdVbPeoEQZkx
+	Wpr3P7yfCckhNY+HfWYvJfFUrSI5IXrJGWEOWXIBg6Jfk7PwtqigvneM7AqwX7i8
+	8DAIpxgzzZHy546jnJeLUba6ZprzrY/CK5eB9cA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-transfer-encoding:date:from
-	:in-reply-to:message-id:mime-version:references:subject:to
-	:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm2; bh=h9/UhY47TTcCh2579TN6HtShCydI0havdtzpPrM1E58=; b=fTnQrYzu
-	qXjVzJAD/RrFdp1hcFzY75xEZhGzaVo35ILBojTxrukgcF+zXn5yey1WyVIWF1jB
-	F77guOtYunBZcbEHyx8wpgZSpxI2EMUnA8jTAPqD9EYe3bZu+yQD8OHS3YCFcWs6
-	mkM4RvEIOs0NOnFymKRSBqHjLrCyxnkhpbf2b7xrX4VE0ieW1MFnTui/dDUyiXKS
-	Gx1ZBGxvDaByG8Mi1wqzOo0jstE5Hgl72oVjwsrUNi/QMbHDHDe2v5RRq1AUXRz5
-	lkBE1vo72N89obyhYuqYZvyeTOlGVpZagWyLuUalEeqhl0zdopuwu9EpvVdIUsRI
-	mOtzsA01JiVb/A==
-X-ME-Sender: <xms:6bRHYJWwTrDgtLbYP9iIX6MPvTQ52a8ZS5HqPkkBUrCoiKvjkCgy2Q>
-    <xme:6bRHYBOGOrvG5ZH32yV9OgWVDxraZMlsYJfLcjg20iQDOAwJZWGDCY0i8vDbFkB_0
-    eAVeqBpJPT9qg3DYzk>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrudduiedguddthecutefuodetggdotefrod
+	messagingengine.com; h=cc:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=qVPGDT
+	6wbxzyftyjE9HIvxQHlkh7/wfotl++15uOpvE=; b=oJk9VNgmdPsqVHbNXe6kr9
+	u+nQwNfAVTUSHCBEAxn+ecZ2LnqqYa5wHjIXAEeh4R1pvbpIICBW0pEnz+6uy2Nj
+	Jb3bQuXfP05+2dP8JTIAOFHZP5IV30EUr5KDMOBWhvWyBXfLGYh0SJ61Sp+F8v9j
+	O5HyW/GSngZsFZYN5fvNz4NRRq7W8XRUWGG3U11MiyC7BV+e6znaZFwDsmHEiBT3
+	wfrIoJOnGGxqg3NdW/Vf0bBudtdj3cHKisUuEAmSx3VIQEt1Y9GgvruQoKCA7HcJ
+	Zq628jjAun+DQV01jNcMi0nWe4jYJpblYF9kbSLhX9dct/gJDJJk26ErrymDmrmw
+	==
+X-ME-Sender: <xms:YrVHYPYC7VqQ0f8VTRo9xcF1rMHJ2bRh_tRWhwYz_WYpQp4Hi-qXGQ>
+    <xme:YrVHYOZiUf6-EyrKBNKh_yhDgZtY7gC11Fvy--sJKDFyzVdHv77jX8FH4HjvSSaYi
+    dITO9HR-lE4voTwTNA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrudduiedguddtiecutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
-    necuuegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffojghfggfgsedtke
-    ertdertddtnecuhfhrohhmpeetnhgurhgvihcuifhhvghriigrnhcuoegrnhgurhgvihes
-    ghhhvghriigrnhdrtghomheqnecuggftrfgrthhtvghrnhepleeliefhvedvvdejgfeuue
-    ekgeffieevhffgleduhfdugeegffdutdelfeeugeeunecuffhomhgrihhnpehgihhthhhu
-    sgdrtghomhenucfkphepuddtledrudegiedrfeejrddukedvnecuvehluhhsthgvrhfuih
-    iivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprghnughrvghisehghhgvrhiirghn
-    rdgtohhm
-X-ME-Proxy: <xmx:6bRHYFkvrXUOwL5Btb0st9AFUrDcM4B7zco5Z4ARDqcybAtCc-_q9A>
-    <xmx:6bRHYEUEFe7fSYaaCu2ES9xBmfl4eDOm2rcxkkUf4vh0Fx1RaIb9VQ>
-    <xmx:6bRHYEJ2dsyxhP6_g1pw74YeDjdz0H3mYhxz9fhS58ftuKAy0k1WEg>
-    <xmx:6bRHYCO7_k9SOvaBRItYtKHMxp3fGgObP0NZCGLuf9SetM0svcY_yw>
-Received: from qwirkle.internal (host109-146-37-182.range109-146.btcentralplus.com [109.146.37.182])
-	by mail.messagingengine.com (Postfix) with ESMTPA id 3F2A81080059;
-	Tue,  9 Mar 2021 12:48:25 -0500 (EST)
+    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+    enucfjughrpefofgggkfgjfhffhffvufgtsehttdertderreejnecuhfhrohhmpedftehn
+    ughrvghiucfihhgvrhiirghnfdcuoegrnhgurhgvihesghhhvghriigrnhdrtghomheqne
+    cuggftrfgrthhtvghrnhepkeffvdfhgfegvedugfffleelgeelhfdtjeeuhfevteeiheei
+    lefgffevkeefgedvnecuffhomhgrihhnpeihohgtthhophhrohhjvggtthdrohhrghenuc
+    evlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegrnhgurhgv
+    ihesghhhvghriigrnhdrtghomh
+X-ME-Proxy: <xmx:YrVHYB8Y6v7BAE5Q-gdY4nXVqL_r-rjhGJXos-BLb1gQtaDJvBMhjw>
+    <xmx:YrVHYFqLzz6ZVo1oKcKvb2PDpsxninmAvHhvCL3-OJ_a2i5P1eY0NQ>
+    <xmx:YrVHYKr1zPSTmpJRPa-k3yPEzKeKT0nnVOt9NWUJ7-zRzchxH7t-hA>
+    <xmx:Y7VHYBR68CbJWXyaYbYWF79yVW_3ZZ910k4loY9NDQNdrRaop-SnJg>
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+	id DC186160082; Tue,  9 Mar 2021 12:50:26 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.5.0-alpha0-206-g078a48fda5-fm-20210226.001-g078a48fd
+Mime-Version: 1.0
+Message-Id: <a51e0676-0874-44f6-821b-6342ff9dc430@www.fastmail.com>
+In-Reply-To: 
+ <CAMKF1srsrFhBwXVAwtrR=MUajm2zeHbS77f8ZyG8n5dNAtS5bw@mail.gmail.com>
+References: <20210305160256.3333334-1-andrei@gherzan.com>
+ <CAMKF1srsrFhBwXVAwtrR=MUajm2zeHbS77f8ZyG8n5dNAtS5bw@mail.gmail.com>
+Date: Tue, 09 Mar 2021 17:50:04 +0000
 From: "Andrei Gherzan" <andrei@gherzan.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: andrei@gherzan.com,
-	Andrei Gherzan <andrei.gherzan@huawei.com>
-Subject: [meta-python v4][PATCH 6/6] python3-mccabe: Fix HOMEPAGE
-Date: Tue,  9 Mar 2021 17:47:28 +0000
-Message-Id: <20210309174728.207503-6-andrei@gherzan.com>
-X-Mailer: git-send-email 2.30.1
-In-Reply-To: <20210309174728.207503-1-andrei@gherzan.com>
-References: <20210309174728.207503-1-andrei@gherzan.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+To: "Khem Raj" <raj.khem@gmail.com>
+Cc: openembedded <openembedded-devel@lists.openembedded.org>,
+ "Andrei Gherzan" <andrei.gherzan@huawei.com>
+Subject: Re: [oe] [meta-python][PATCH v3 1/6] python3-ifaddr: Integrate a dependency of pysonos
+Content-Type: text/plain
 
-From: Andrei Gherzan <andrei.gherzan@huawei.com>
+On Fri, 5 Mar 2021, at 20:29, Khem Raj wrote:
+> I am seeing fetch checksum mismatched on AB see
+> https://errors.yoctoproject.org/Errors/Details/573554/
+> 
+> then I manually downloaded the file and checksummed it,
+> 
+> % sha256sum ifaddr-0.1.7.tar.gz
+> 1f9e8a6ca6f16db5a37d3356f07b6e52344f6f9f7e806d618537731669eb1a94
+> ifaddr-0.1.7.tar.gz
+> 
+> so builder on AB seems to be right, perhaps we need a v4
 
-Signed-off-by: Andrei Gherzan <andrei.gherzan@huawei.com>
+Sent v4. It picked another recipe in my testing so I didn't catch this.
+
 ---
- meta-python/recipes-devtools/python/python3-mccabe_0.6.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-python/recipes-devtools/python/python3-mccabe_0.6.1.bb b/meta-python/recipes-devtools/python/python3-mccabe_0.6.1.bb
-index 63a9e35ac..b366f0430 100644
---- a/meta-python/recipes-devtools/python/python3-mccabe_0.6.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-mccabe_0.6.1.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "McCabe checker, plugin for flake8"
--HOMEPAGE = "https://github.com/dreamhost/cliff"
-+HOMEPAGE = "https://github.com/PyCQA/mccabe"
- SECTION = "devel/python"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a489dc62bacbdad3335c0f160a974f0f"
--- 
-2.30.1
-
+Andrei
