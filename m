@@ -1,125 +1,81 @@
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.web10.1827.1615249450810666243
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.5])
+ by mx.groups.io with SMTP id smtpd.web10.2324.1615251799508555422
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Mar 2021 16:24:10 -0800
+ Mon, 08 Mar 2021 17:03:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=AL0fbk8U;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id mz6-20020a17090b3786b02900c16cb41d63so4142349pjb.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Mar 2021 16:24:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=hXqvNx2VFpxPtzottROAGcc4gRXJNp6Hpr3yMlBXyoo=;
-        b=AL0fbk8UrG463GKkjvL4r826ICc/yRo5sN3VDepODgbHqVKORTi+v1DpA2wT9anfDo
-         /x8EvYAtp7+kEVGRXXvN2i4ne8sghX6nW1YimNXiPz8XEHJLjyZRY/d41mfZcLNkECrx
-         3gDg2z2F7g6aGSrl1qSpH8I19GVUCWZ1yITeYvGE1gOm+HscPegqCRBneaZfxHRbbU3v
-         mBy4oMBm1R+D6gTGYFYm231mBlMA1Mn1hsrKMBEKZIjPDIwouJZfQ701GPZYi+qiDRw2
-         nY7jlcjHCQaaFKcNPYBE6k8Tu5btjh51lp5FjNmIrDqEN7d/zpuwj5cX/jKA+Tv8C3MM
-         sMSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=hXqvNx2VFpxPtzottROAGcc4gRXJNp6Hpr3yMlBXyoo=;
-        b=g9IcUGckNGVVyKKJ2PyZihsRrzKInH2DNCFtgTiyBE92u77Q7x9dBO5IXwWaJUm17f
-         k1o48T576PAvfjE2OIetlR06XpTcBTeZtnzY1l+avKnq0DbpUVnJwKS7qDPSPS01H01F
-         gKIkCMp1CtLF00s4FRx0YI/eHEhZKgUyBfAvVeHc4TF2Yh5Q7p2ZmApnmk8pi7GpN5Bz
-         wUwryGVkaJtO8fL9vpGhSFN88dCfpcoid7drnu5LctVeoouC952QgTRLseiAHlVUFhHz
-         lO1iUmIMqh3uUtfEY5d8GL9F+pUgL/p2He0Ucc6MDZEIAiv8wo4CZ5x5924yPPamQa+H
-         1gFw==
-X-Gm-Message-State: AOAM531b7zFYHbewBvPNpsAw+pSoZWTPrxQanp0jygiWuvTkEsyFVhCZ
-	c3VzZT7TiSTtpoq3yDwgKBAbwBJdwTg/YQ==
-X-Google-Smtp-Source: ABdhPJxZo90TweklOdIJG9BGmTzvWea+Hpcep6FVC3f2is7s9oWHWJofT/OdHDwNt9H2Gp/8jmpNyQ==
-X-Received: by 2002:a17:902:8ec9:b029:e6:f8c:c3d1 with SMTP id x9-20020a1709028ec9b02900e60f8cc3d1mr10918760plo.42.1615249450090;
-        Mon, 08 Mar 2021 16:24:10 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::e641])
-        by smtp.gmail.com with ESMTPSA id s200sm11316618pfs.53.2021.03.08.16.24.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 08 Mar 2021 16:24:09 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] glog: Link with libexecinfo on musl
-Date: Mon,  8 Mar 2021 16:24:06 -0800
-Message-Id: <20210309002406.2947396-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.1
-In-Reply-To: <20210309002406.2947396-1-raj.khem@gmail.com>
-References: <20210309002406.2947396-1-raj.khem@gmail.com>
+ dkim=missing; spf=pass (domain: fujitsu.com, ip: 195.245.230.5, mailfrom: zhengrq.fnst@fujitsu.com)
+Return-Path: <zhengrq.fnst@fujitsu.com>
+Received: from [100.112.192.143] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-5.bemta.az-a.eu-west-1.aws.symcld.net id CD/14-42970-459C6406; Tue, 09 Mar 2021 01:03:16 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupgkeJIrShJLcpLzFFi42Kxs+EI1Q056ZZ
+  gsGGJhsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnF8iWnBKc6KHbcPsjQwnuXoYuTiEBLYzCTR
+  MG8vI4Szm1Hi8IapLF2MnBxsAgYS+89eYAexRQT0JZbO3sMMYgsLuEnc/XyQCcRmEVCR+PZkP
+  1g9r4CXxLvGS2D1EgIKElMevmeGiAtKnJz5BKyGWUBC4uCLF0BxDqAaRYnZ0+UhzCqJIzPVJj
+  DyzELSMAtJwwJGplWM5klFmekZJbmJmTm6hgYGuoaGRrqGlka6JiZ6iVW6iXqppbrlqcUluoZ
+  6ieXFesWVuck5KXp5qSWbGIEBlFJwQGcH489XH/QOMUpyMCmJ8sq2uiUI8SXlp1RmJBZnxBeV
+  5qQWH2KU4eBQkuA9fxwoJ1iUmp5akZaZAwxmmLQEB4+SCK/iUaA0b3FBYm5xZjpE6hSjopQ47
+  9wTQAkBkERGaR5cGyyCLjHKSgnzMjIwMAjxFKQW5WaWoMq/YhTnYFQS5v0Hsp0nM68EbvoroM
+  VMQIsVDMAWlyQipKQamDKWdLtMCvRYeZV337IgTjOPZdMk3XkczNiu31ZtsCpWEHeR2sol5ee
+  wdlFa2KRgw48SRkdUfT4c2xmztPnNKgFlgY1ilvasFiysctW7A0XmbdZIWbTz0GwZvZmvTZ3n
+  bErvvsG77Bbzuevp8bMyRFjYLxr5az1id1x54rp6dLeph1tP3bZG+XOmm7VvsnoKrda1k2Ez+
+  8vsGXUkLeX2x4f9Vld013r9iZ9wJf79QZY49murept3JOz/Er75YHH99DlTTSrObDv8wNXC3k
+  nCZGdEptGCGP3In0/LnCbz53Kafs/cuM3c6+kv3aMeTqKSVzQMrC5oGxhbrtQJ/2Z3becPuXf
+  sV1a4TV+ju1hAiaU4I9FQi7moOBEAwq6QNhsDAAA=
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-19.tower-267.messagelabs.com!1615251796!1547624!1
+X-Originating-IP: [62.60.8.85]
+X-SYMC-ESS-Client-Auth: outbound-route-from=fail
+X-StarScan-Received: 
+X-StarScan-Version: 9.60.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 24273 invoked from network); 9 Mar 2021 01:03:16 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-19.tower-267.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 9 Mar 2021 01:03:16 -0000
+Received: from r01ukexcasm214.r01.fujitsu.local (ex2k13_214.fs.fujitsu.com [10.182.185.116])
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 129137cp004467
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 9 Mar 2021 01:03:16 GMT
+Received: from localhost.localdomain (10.167.225.35) by
+ r01ukexcasm214.r01.fujitsu.local (10.182.185.116) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Tue, 9 Mar 2021 01:03:06 +0000
+From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH] [oe] [meta-oe] [PATCH] uthash: upgrade 2.2.0 -> 2.3.0
+Date: Tue, 9 Mar 2021 18:02:58 +0800
+Message-ID: <1615284178-3454-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
+ r01ukexcasm214.r01.fujitsu.local (10.182.185.116)
+Content-Type: text/plain
 
-some platforms e.g. riscv do not yet have libunwind ported so use
-libexecinfo instead
+-License-Update: Copyright year updated to 2021.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- .../glog/glog/libexecinfo.patch               | 29 +++++++++++++++++++
- meta-oe/recipes-support/glog/glog_0.4.0.bb    |  4 +++
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-oe/recipes-support/glog/glog/libexecinfo.patch
+ .../uthash/{uthash_2.2.0.bb => uthash_2.3.0.bb}               | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/uthash/{uthash_2.2.0.bb => uthash_2.3.0.bb} (90%)
 
-diff --git a/meta-oe/recipes-support/glog/glog/libexecinfo.patch b/meta-oe/recipes-support/glog/glog/libexecinfo.patch
-new file mode 100644
-index 0000000000..ae46d3274f
---- /dev/null
-+++ b/meta-oe/recipes-support/glog/glog/libexecinfo.patch
-@@ -0,0 +1,29 @@
-+Link libexecinfo if its found, this is needed for musl based systems
-+
-+Fixes
-+ld: libglog.so.0.4.0: undefined reference to `backtrace'
-+| collect2: error: ld returned 1 exit status
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -115,6 +115,7 @@ check_cxx_compiler_flag (-Wunnamed-type-
-+ check_symbol_exists (snprintf stdio.h HAVE_SNPRINTF)
-+ 
-+ check_library_exists (dbghelp UnDecorateSymbolName "" HAVE_DBGHELP)
-++check_library_exists (execinfo backtrace "" HAVE_EXECINFO)
-+ 
-+ find_package(Libunwind)
-+ 
-+@@ -471,6 +472,10 @@ if (Libunwind_FOUND)
-+   target_link_libraries (glog PUBLIC unwind)
-+ endif (Libunwind_FOUND)
-+ 
-++if (HAVE_EXECINFO)
-++  target_link_libraries (glog PUBLIC execinfo)
-++endif (HAVE_EXECINFO)
-++
-+ if (HAVE_DBGHELP)
-+    target_link_libraries (glog PUBLIC dbghelp)
-+ endif (HAVE_DBGHELP)
-diff --git a/meta-oe/recipes-support/glog/glog_0.4.0.bb b/meta-oe/recipes-support/glog/glog_0.4.0.bb
-index 8dc84e4125..6b101ef676 100644
---- a/meta-oe/recipes-support/glog/glog_0.4.0.bb
-+++ b/meta-oe/recipes-support/glog/glog_0.4.0.bb
-@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=dc9db360e0bbd4e46672f3fd91dd6c4b"
- SRC_URI = " \
-     git://github.com/google/glog.git;nobranch=1 \
-     file://0001-Find-Libunwind-during-configure.patch \
-+    file://libexecinfo.patch \
- "
+diff --git a/meta-oe/recipes-support/uthash/uthash_2.2.0.bb b/meta-oe/recipes-support/uthash/uthash_2.3.0.bb
+similarity index 90%
+rename from meta-oe/recipes-support/uthash/uthash_2.2.0.bb
+rename to meta-oe/recipes-support/uthash/uthash_2.3.0.bb
+index 4ec7bc2f5e..ca8a3c0bb1 100644
+--- a/meta-oe/recipes-support/uthash/uthash_2.2.0.bb
++++ b/meta-oe/recipes-support/uthash/uthash_2.3.0.bb
+@@ -8,8 +8,8 @@ DESCRIPTION = " uthash-dev provides a hash table implementation using C preproce
+ HOMEPAGE = "https://troydhanson.github.io/uthash/"
+ SECTION = "base"
+ LICENSE = "BSD-1-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=6891c324eb59289db33bac74d4cbb0d4"
+-SRCREV = "66e2668795d0aaf4977523f828e548470a680c33"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=736712b5904dd42f8678df7172bc5f2b"
++SRCREV = "e493aa90a2833b4655927598f169c31cfcdf7861"
  
- SRCREV = "96a2f23dca4cc7180821ca5f32e526314395d26a"
-@@ -20,8 +21,11 @@ inherit cmake
- PACKAGECONFIG ?= "shared unwind"
- PACKAGECONFIG_remove_riscv64 = "unwind"
- PACKAGECONFIG_remove_riscv32 = "unwind"
-+PACKAGECONFIG_append_libc-musl_riscv64 = " execinfo"
-+PACKAGECONFIG_append_libc-musl_riscv32 = " execinfo"
- 
- PACKAGECONFIG[unwind] = "-DWITH_UNWIND=ON,-DWITH_UNWIND=OFF,libunwind,libunwind"
-+PACKAGECONFIG[execinfo] = ",,libexecinfo"
- PACKAGECONFIG[shared] = "-DBUILD_SHARED_LIBS=ON,-DBUILD_SHARED_LIBS=OFF,,"
- 
- do_configure_append() {
+ SRC_URI = "\
+     git://github.com/troydhanson/${BPN}.git \
 -- 
-2.30.1
+2.25.1
 
