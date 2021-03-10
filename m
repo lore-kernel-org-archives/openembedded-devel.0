@@ -1,223 +1,165 @@
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [40.107.236.64])
- by mx.groups.io with SMTP id smtpd.web12.11738.1615394841795397331
+Received: from EUR03-DB5-obe.outbound.protection.outlook.com (EUR03-DB5-obe.outbound.protection.outlook.com [40.107.4.72])
+ by mx.groups.io with SMTP id smtpd.web12.725.1615398016273223558
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Mar 2021 08:47:22 -0800
+ Wed, 10 Mar 2021 09:40:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=flgZngBw;
- spf=pass (domain: windriver.com, ip: 40.107.236.64, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@spinetix.com header.s=selector2 header.b=S94sP7+H;
+ spf=pass (domain: spinetix.com, ip: 40.107.4.72, mailfrom: diego.santacruz@spinetix.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jI16x5jenCmx1GdTK7tpOcUWcqf2RZOZxcqQjc6V7VoGU/rZteSXlo9xWa41VdaLyZQKQAYMH7Qs2O+as5FZEtFP9zTSUHcZkV4WfzyOtBaLKeEWONH1NoLUoFlOmuyc1LtzuWV/obNkSd1bDmR1SWtwicphslOkH7x0qs5J0bxY1SdKQifiOOWHQoQ8E6h84kL3HfOQ576peQL1OnEjjWxbLEZi7+KnTU/FgqqpEuHjRfXyYvrj20neAq8R4zIJfF5bN+OKl/uagWCV7Lnt+4jJXkbXcEp/ad1r7rhakZp9ZDIHcWjklIVqdlFnxjKP345lhXoRHsurGnJNkskHnA==
+ b=cLKAsi83dN3RlBZ9dKypIKhYH1/GjyxE4NYSOG7s+d/QAlr/jEI26hjxIPY7ND+X2LXEU8jvhLLrk9iIFJqtiWnV2RS7JWTIiHgpGxVRyQa286X9jE9c4ziqsndOaZmvtWqdpzDD/3yXE2a82wVpPGYD9GNO12SvN3+bZrZZqTjKQK/qaFPUFOFZHkROHlk1AoNwp7/duQEkM7FTe/7RWc+fg1rfg94cNi5XrgvFohaBLBOEvXpP6lIuo0e+hyoRa9wowDr2kNMkjMCtDe5mjjUkVzq8w8kbRlm3iY2k0r/H5m9VghCGONKlJfFU7v7KSnVvLIkBy4Xd1C9qW3zNog==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uJPcc/6hf76O9ffYxutqTw1kUkkugWERWmrQrDEu6tA=;
- b=cWqfWQ7ZZ1t73cQIGs0XiCGajqckTinzwPsKyR7U6ckJAry4h7vx3L8YpArn1xLwGAMzGnfclriI8c7Z9yZY1fmxktEM5l3ERXxxlTfHglLGTJoF2cnRs67GC6xwRt7h/tyjBBwf6MH3SHq+ihQFlknSy6bZgAsqpijxyf8HuVg8GKqs+caMzYistXVp4krHV3vLh87kcNZoEbVZLbd267e1R7b0tUvLqj3m3X2iSNS+8VdmmMU/3lmOyJ3wmSqaM9fqYBKdXxmmVWeUhHc1MytyRF89HZIlSWXZFixaZZTLzR62KATrJZS30mvhQna+MGhUnLED3085bgDjHoDJPw==
+ bh=4OpCbrM0tOehF+10/6xqaFjTUzl292ehx+YW8hRt9Jk=;
+ b=AbcEf+za/V4gIVSJIsP0MXqUjifDy2UfVzG/0X26MqYxRCzF+Udcx3yYgxLw9D97D9sCNks9nVGE1woZjvdrbmhnp7N+nRVz/WnkBBFDA0dLehwyUPrdyXH96KNL3wJkGxxOOlYgu2SDSj2j8txpVXxb6XdYIaOTWPwdIdqXLdFU4lswMBqoX9UZmsZGW+v37x/j6IcGVpeVPXOh7WYluFBfnycKGWFEiK5kpCIROvnVXOQ4iGtKkqKyRUhlPSws7oOOC4bM0Ci1SaL8h0w72nFIgtxAoFsn55n9gGELK3jkbgQF2/0HQvBql2mQkTaBGk8tmqrbkPXC+IQAmodo3g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
+ smtp.mailfrom=spinetix.com; dmarc=pass action=none header.from=spinetix.com;
+ dkim=pass header.d=spinetix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=spinetix.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uJPcc/6hf76O9ffYxutqTw1kUkkugWERWmrQrDEu6tA=;
- b=flgZngBwJaDTTuzuBdywTZDR6Nzb6PWzk/S2dtKAn1sax3plTl43qJMxuBH1kVeWAKzwved/dnLgfO4gitbT7Bo2VvwFIxaOOqIdlPDQOH41TgN74tjPWooLC5MJ75UGYHg6fvfoOBsebs3usYiC2AtTn5EL8BO3UJI0dRaiXvY=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BYAPR11MB2680.namprd11.prod.outlook.com (2603:10b6:a02:c9::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.23; Wed, 10 Mar
- 2021 16:47:19 +0000
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3912.029; Wed, 10 Mar 2021
- 16:47:19 +0000
-Subject: Re: [oe] [meta-python][PATCH] python3-pillow: 8.1.0 -> 8.1.2
-To: kai <kai.kang@windriver.com>, openembedded-devel@lists.openembedded.org
-References: <20210309035611.23351-1-kai.kang@windriver.com>
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <ea4c00f8-30a7-c54d-f720-4c7784e8dd5a@windriver.com>
-Date: Wed, 10 Mar 2021 11:47:17 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.0
-In-Reply-To: <20210309035611.23351-1-kai.kang@windriver.com>
-X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BN6PR1701CA0014.namprd17.prod.outlook.com
- (2603:10b6:405:15::24) To BY5PR11MB3909.namprd11.prod.outlook.com
- (2603:10b6:a03:191::13)
-Return-Path: trevor.gamblin@windriver.com
+ bh=4OpCbrM0tOehF+10/6xqaFjTUzl292ehx+YW8hRt9Jk=;
+ b=S94sP7+H3v0NZUFX4yT6a1ZF7c2hGqjrURfFbHDZoRhT4z1HuMzocNGT+hJF5zaDqtQisbHe9GIYZQxDXdKCQvGE84nvihH8CALN8VX1N1HLSlQcjKs2Xu4bEhdm49FA7H51TtGXZauRVoEMnA8u/kZktE+gh0MSRhVUjuQaMiI=
+Received: from DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
+ (2603:10a6:6:e::19) by DB9PR01MB7307.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:219::19) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3912.19; Wed, 10 Mar
+ 2021 17:40:13 +0000
+Received: from DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
+ ([fe80::a979:e5e4:3b20:ba6b]) by
+ DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
+ ([fe80::a979:e5e4:3b20:ba6b%7]) with mapi id 15.20.3890.039; Wed, 10 Mar 2021
+ 17:40:12 +0000
+From: "Diego Santa Cruz" <diego.santacruz@spinetix.com>
+To: "changqing.li@windriver.com" <changqing.li@windriver.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-oe][PATCH] php: update RDEPENDS
+Thread-Topic: [oe] [meta-oe][PATCH] php: update RDEPENDS
+Thread-Index: AQHXFUfTDzShVwzmrUi3Rwq04ePfBKp9fAHQ
+Date: Wed, 10 Mar 2021 17:40:12 +0000
+Message-ID: 
+ <DB6PR0102MB2630AB1E1DED39FD81AF91B788919@DB6PR0102MB2630.eurprd01.prod.exchangelabs.com>
+References: <20210310005331.23711-1-changqing.li@windriver.com>
+In-Reply-To: <20210310005331.23711-1-changqing.li@windriver.com>
+Accept-Language: en-GB, fr-CH, fr-FR, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: windriver.com; dkim=none (message not signed)
+ header.d=none;windriver.com; dmarc=none action=none header.from=spinetix.com;
+x-originating-ip: [46.14.255.78]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 50ddc42e-d9a2-4f8d-f2b1-08d8e3eb8f00
+x-ms-traffictypediagnostic: DB9PR01MB7307:
+x-microsoft-antispam-prvs: 
+ <DB9PR01MB730776F64B376FF98A741CFA88919@DB9PR01MB7307.eurprd01.prod.exchangelabs.com>
+x-ms-oob-tlc-oobclassifiers: OLM:949;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ lLf14g5rOqKmLerRQBaWUa24zgPIi+JBnu1mvbEpwsp66YKXXFQjLZekjN3JIbdqnEfUa82AruKynTkKQHVO3XSJDbIM2bZwJW05W/gjSsH+uf/693jpmWgxqiPxQiBFJQhqAJ2WHei7XS+8YuovzDV3Wee3J8uUuQFtnt8vZyZJbbIBY1CebZ42ZKbYsemBbdglFYDHI2JL6osigCSFSc579nzUcadDh+kFmjDuapSxki7N3s//vQL7ahrqdZoPa3Ka4upDTiCSkN/d2W/ZV0PCJOv7iR/uZDsaw0r74jzoR3wqNkh/wOwhhYJqKEmtclKl06AADfxK94/lfqVbjXcHWzFR8tqbLHcD2IcQEmxYV2mb0jf2/Ga2LcoxUa5nDpcCiSvTCazUs7O9+lPnJBEb5chcumdQ13OfB07P9KeYhNduSdGKVR7NpP9Z79lq5f9jdS2fvA5H20QOj1mo9JgXQEwWOaf0veaGVYxF4pxX8YEOQtaRhSeN4KopVKgu9OoPaiku/alwqvJ3P7B41w==
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB6PR0102MB2630.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(376002)(136003)(39830400003)(366004)(396003)(71200400001)(15650500001)(76116006)(6506007)(5660300002)(316002)(8676002)(2906002)(26005)(83380400001)(7696005)(33656002)(86362001)(66476007)(478600001)(66946007)(8936002)(55016002)(66446008)(64756008)(66556008)(186003)(110136005)(53546011)(52536014)(9686003);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata: 
+ =?us-ascii?Q?iL0Ui0/Tjvdeis7+OwbWH63IKJCwljzWc4Nh9tLLt8vOp8XKics7CcoFlaJI?=
+ =?us-ascii?Q?U7pUMuAR/EYS32UOxutAi4VP/wXNwxVNEhIX0vgMSvOD99psHrx2vjDid8//?=
+ =?us-ascii?Q?0+mp8x/bOH47CD6Ea0Qrk98vELrwUSdsGaLXv0D29eb5ufliyMgD5NIB3o6f?=
+ =?us-ascii?Q?Q5Zek1Uq/ZhBwuNizbuL3yWSo151L5Hov9dSkAHCtBcpKQxPwzMdGTT42ZNk?=
+ =?us-ascii?Q?duGLLctvFX1r55oWGvsZ2ynPuaNft9CYbGyrwVMGqCsDA49MHJX/y9uO+GEw?=
+ =?us-ascii?Q?i3ZS05vdopMYtDXzWXSj1ZxjKkK7T291UiRnhIetXXpn5JbS5GLIZOUvSZvM?=
+ =?us-ascii?Q?cptehvoND38lkoGWMNIzsOCOdFjq8z7caJ06GQxYFJf4l44pBKDSV9qtYys3?=
+ =?us-ascii?Q?7qKhlp4guWb9NSG4zsYn/JJOIsryQLQgseZUjGTsuyxjikJGF285nm2iaOfd?=
+ =?us-ascii?Q?gnLc2V5j3Nhl/NLXE6GKyhAkL8+2QuHeVozpgoFNMpPcS8btosOo7iSLHyNw?=
+ =?us-ascii?Q?3BGTNfGDqzuS3nw4m38tK8+7sAVGe+gq1Ylk/yjlOE/D5BUOq/FQODZsN6NB?=
+ =?us-ascii?Q?ilRBkaeuFyTdWj+fz3UyQHOEsuJTPdp1Dx/nox9yFp5nj9uU6gfBVyklUkNf?=
+ =?us-ascii?Q?IOUZiua7PgMJ2S4wVxQg4bMcfzE4CR9UyTsOosOX5B6o5UNh8qSfuJMXsr6U?=
+ =?us-ascii?Q?2FerqXqcBKCatZhkdg4+GKU3V54SBMi3KabmH6lwH3hnELoWVMNg8YHunH2u?=
+ =?us-ascii?Q?1qk4FF4QLyVGiy1vffP5DAPV83p3GtJvJyGlX1pqWFQ6is2FEtQuMoAkRZyC?=
+ =?us-ascii?Q?LxSC6LafZAxMqPQzDt44KZV0vn7sgMxfH57gnLgpv0sLzPdP+oejcZ2c2ax8?=
+ =?us-ascii?Q?yXnPU4GSFD05dQme2F9oIJT1ktVGIk+c/KXsWt2PDTocwxrd/TFgxN4HJTia?=
+ =?us-ascii?Q?0wHDYfqtWR5EFZqcVcJnBeODOm7zS7ALGr4JJLxF8cULSwxct7d0UIeKJ+nT?=
+ =?us-ascii?Q?2p1x3V+GBKolUApLQ2hL0TedQHVaEWm8T+MdDunkO9Nv0UD540/epVFRQp8j?=
+ =?us-ascii?Q?DTgE4YKYpygL+e8m0plUgSjaet45vHxHEoHq8CIUXWpjbDvCwLVJzfDAYJQB?=
+ =?us-ascii?Q?P/0hyNLTX26WZjviwPkujDbQ6hqkeP8jELO767UcAVjNNAqsle/LaoSaI4bG?=
+ =?us-ascii?Q?MkxFbxIPGMwwoh8rq+NzXZ/i+6tX2Yc8/8m04trLl5sUt1Lmm8yGaOzyZD9J?=
+ =?us-ascii?Q?2LBu5WKDiz6YrkOL3Rs1MGwZ3M1fj2zvf7WByA9MYFZxlHvrGbT6oNqJlOIH?=
+ =?us-ascii?Q?i1LAQkyse8JC8gGzgRgHWsX+?=
+x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BN6PR1701CA0014.namprd17.prod.outlook.com (2603:10b6:405:15::24) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3912.26 via Frontend Transport; Wed, 10 Mar 2021 16:47:19 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: b63cc5e8-ba8d-4d90-41f6-08d8e3e42b7a
-X-MS-TrafficTypeDiagnostic: BYAPR11MB2680:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB2680B51C0B830CE7D12123169F919@BYAPR11MB2680.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:369;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	BvxSxWMcfCKJMRCYctghvtph48YVYtZf7HE721p3e3wuFioQ4L5sVCKin/+70ajHAFpNOupByDdMGDOUyhiB+bOFpU287w8oxRakyTtU2H00HjBW5WW1PLwTHFpAXdZ8+7S/0ZK3WNvir8/8p7u3mJlQ5MYVBcquXTTP+LZxJbiw21fENjEizEcVKTBtmLcnaeISDrfAYsurrCvFniPhZj1HnBEvmMkIc4uDV5dLe4M9ShZfsJ35NoscHWobi7w6ABXDl5KnBjMZ+Q4XhgNvB8WlvtZMDZz+QZcdNu2g2+2UIoWwKDKsTpRU2rWtqVfKOsFgUXsI/QUgXJa8qrmd98XIwhvyQkKj+5d6Zk7MJ6mmvY7SUzhZms0bu11KELOn9LDa277V1N8AwGxp+19NfNrGQOg5B1DC50Dkf4O1jZZUKqqF2gRA5eLs/nOgkzriQTh8Xs4SbArA6t7SxH2cqsEpEwnRSPzvnj+NqSkz5jpOLsAZ/qSVXup0a4ouXEemPCLpaLYFwUsw6UB/6G1MtXuhlWI7zrCwvHN/xHscTw84nrB/QeGbWX2aYc+Syfk5Q10GPBX0A0W0vyWCFThzVbBtGJDKE70wT2K4myhAUQV79y5lUPE8Dj7xIsljLXiBKLwhNMs28V7KKaRSJgqckZrsQM3dMrFNigGO1k6m4Fh5Pt489FiXSpSFOk+q4Nnc
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(346002)(396003)(376002)(39850400004)(136003)(66556008)(66476007)(966005)(186003)(5660300002)(2906002)(8676002)(166002)(6486002)(8936002)(66946007)(53546011)(33964004)(316002)(16576012)(86362001)(31696002)(16526019)(31686004)(478600001)(83380400001)(956004)(2616005)(36756003)(26005)(44832011)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?V3VZM3JVV3JHb0ZZQjZPakR6NElYYStSWnBSYWZ1S0UxN3UvTzlxUzNHL2dK?=
- =?utf-8?B?VDgxNUdkYlBLRVJKWmE3WUUrVDI1T2JhSkkvVzNLcERvMWZVQXRNYThVNzdz?=
- =?utf-8?B?OTJmV0E2VEFJQ1JhVk9BRDdCM0thVnFTVWJRM0JaWUIvdFFQV2VxQVEzU0Nj?=
- =?utf-8?B?MVdHZFlFbVdER2hyV0dtS05SRTMxTFprNlJiZXZjcGQ1NmFpQktSbEJFRnZX?=
- =?utf-8?B?SkRaaU1XU21sOU03SFdHZitwdHBEYitUbFIwK0pLSXpmNHc1VW9lTjJYckQ2?=
- =?utf-8?B?aXpJZW9jTzA0bWQwWjJYenhNNUNoa0hscWRxcG0xN200dW93NWVLVkloLzQz?=
- =?utf-8?B?TElFRjF5cGhJV1VJTGx2aFl3NlA0eUFWS1ZkMEdXcVZ3OFhQV204V0RCTE1V?=
- =?utf-8?B?SlRpTmRTYzFjY3ZFanpJSzNoS0UzWUJmR2hrOEEzSFdjOXNVeGdrNi85SkdI?=
- =?utf-8?B?aTRGdElFSGhEUExoaHFLT1NrNGhtQ3AvSnNCYndQSDNHeEYydkw4ZGhNUXFJ?=
- =?utf-8?B?cEdJOVVhWWlsemNWT1JQWlZwd1dSVmRGdkNLNmFaUzI2Mk1GUHBjTGpQc291?=
- =?utf-8?B?Zjc4NFdRRDV3OTdhYmpTMDhJZEJ4WSt5VmE0aDhXVXBtOUNRby8wcW54Um50?=
- =?utf-8?B?ZEkxUW1tQUZZUXVaNFhCdHdIQ0o4dThUSmM1cVFrd0tRblpoaXJnM1N0MnhH?=
- =?utf-8?B?dHc0aHN1MWR2RkdoSk9QUzhHdGdvWmJVQ2FlNkhWUWdTTHFHZ0JEa3JlNm41?=
- =?utf-8?B?Y1VDV05DOVpDWU5jQUczbGFVUjBSNUYwU2J2UFdTR2pZNDJ3ZDZIZ3d2VFo4?=
- =?utf-8?B?UWlORUNZb0FHYVpQOXdqTVE5OU1HVlp5dlpPdXJyR2tEbGVVUVFraXRrbFdF?=
- =?utf-8?B?RWtSR0J3ZGFyQmJ6elZha1pNbXdlcVhuK0Eya3IzVzJVT1pXb3pIbEp2M1NJ?=
- =?utf-8?B?TFpNakVIMUV0c0RQcGd2dnl4YXNvdGY0dVRGV2FDYnBTUDRRa0lkTlJUU2Rj?=
- =?utf-8?B?Mk5yaGVvQnNYeklCMkZrV0pHMTl4cUkxVG54ZytFUjZ0YW5ZTXh4b1ZOL2Jz?=
- =?utf-8?B?QXl5cXAxakZsb1NHd2pJa0ZXdXRXbDdQY1lGY1hCWk1vSXBwTHdBaTQ1b0Nq?=
- =?utf-8?B?QUJFU3pEbEVsbjV2dlhnOVM0SllUQmNOdDlVWUtFQk01V1N4ZVk2ZHh0TGN4?=
- =?utf-8?B?TnBWcTJZM25CeFNTMTd5YzdndDRNWmQ1eHNVUmt6NlBpZGJrbU83OVF3N1V2?=
- =?utf-8?B?VU1mSTJVT2IyTkRGSk9wcGtoWk00NU5qUzlSVWZMeW00WU02SUVRU2pJQXJS?=
- =?utf-8?B?OWZhTnVxNFliQ01ydnd5ZDJZMm51bXlkM3YrNnVtUkpxYnBqditxVDRwUlVC?=
- =?utf-8?B?MlBac0o1NUtVMG9vRTJGMWN2eUlvREtVa2V2akJSM1dQRWdEL3pJNGlaNmJM?=
- =?utf-8?B?emZPbWtmcVk5Vzh3aUU1bTlrdjh1RG9wVDFQZlVZUWdKTzl6azI0WXRkdzlI?=
- =?utf-8?B?TDg0NnpqVWVoMVBUeHEvOXAzNGRsMU92WWJhZi9RWFg3QmFTNll6cWlXaXdr?=
- =?utf-8?B?SEViMzFSQXdIYVZtQ0s0UEV2bVh6ckJiVVAwVUlaYmI2WUIwb1F1cUs4ZUls?=
- =?utf-8?B?WVVXcCtxZmJEbC83VG50VmtrQjBXbnJFN09XQXY2VWxweThzeUE3aGIzcXR0?=
- =?utf-8?B?VHMzYi81UG5LYkRmR0s4Yzc5ZURiTndLZ091VlAxdVh6TjRVV0NvaDgzWjJn?=
- =?utf-8?Q?VkKkatzcy8AidjkT01dPy2r9wK9RoWEWv0pAb4m?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b63cc5e8-ba8d-4d90-41f6-08d8e3e42b7a
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
+X-OriginatorOrg: spinetix.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Mar 2021 16:47:19.6894
+X-MS-Exchange-CrossTenant-AuthSource: DB6PR0102MB2630.eurprd01.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 50ddc42e-d9a2-4f8d-f2b1-08d8e3eb8f00
+X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Mar 2021 17:40:12.7619
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: XO4tKk/TpMSHQsWk/BTDnQr0Wus8dIDwNq4mO8XK91v6Y4oY62OJzyBGiJnLabjpJ8zeMU5obGGlwIM6+Iz4iG45J7HXSPbmhyd1G59U1iE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2680
-Content-Type: multipart/alternative;
- boundary="------------765A54A1B332CE88A16EE2FB"
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 5f4034fa-ed2d-4840-a93f-acb1e9633b93
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 9KhykudcOAMc64r64RAvsO1NyL8Wm4Y6u1nYC/kNvGMScNTQSafIk8dQGsuAGb41jYNKdFCzwqIaWEnJWA6a9eN1InTvEtBCF7NWt4BWeIY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR01MB7307
 Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
---------------765A54A1B332CE88A16EE2FB
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-
-On 2021-03-08 10:56 p.m., kai wrote:
-> From: Kai Kang <kai.kang@windriver.com>
->
-> 8.1.2 fixes:
-> * CVE-2021-27921
-> * CVE-2021-27922
-> * CVE-2021-27923
->
-> 8.1.1 fixes:
-> * CVE-2021-25289
-> * CVE-2021-25290
-> * CVE-2021-25291
-> * CVE-2021-25292
-> * CVE-2021-25293
->
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> -----Original Message-----
+> From: openembedded-devel@lists.openembedded.org <openembedded-
+> devel@lists.openembedded.org> On Behalf Of Changqing Li via
+> lists.openembedded.org
+> Sent: 10 March 2021 01:54
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-oe][PATCH] php: update RDEPENDS
+>=20
+> From: Changqing Li <changqing.li@windriver.com>
+>=20
+> Since commit c4ffcaa2[php: split out phpdbg into a separate package], pac=
+kage
+> php is empty, remove it from RDEPENDS to avoid error:
+> nothing provides php needed by php-cli-7.4.9-r0.corei7_64
+>=20
+> Signed-off-by: Changqing Li <changqing.li@windriver.com>
 > ---
->   .../python/{python3-pillow_8.1.0.bb => python3-pillow_8.1.2.bb} | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->   rename meta-python/recipes-devtools/python/{python3-pillow_8.1.0.bb => python3-pillow_8.1.2.bb} (93%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-pillow_8.1.0.bb b/meta-python/recipes-devtools/python/python3-pillow_8.1.2.bb
-> similarity index 93%
-> rename from meta-python/recipes-devtools/python/python3-pillow_8.1.0.bb
-> rename to meta-python/recipes-devtools/python/python3-pillow_8.1.2.bb
-> index 63974590c..a1b4f9059 100644
-> --- a/meta-python/recipes-devtools/python/python3-pillow_8.1.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pillow_8.1.2.bb
-> @@ -9,7 +9,7 @@ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=8.1.x \
->              file://0001-support-cross-compiling.patch \
->              file://0001-explicitly-set-compile-options.patch \
->   "
-> -SRCREV ?= "fcc42e0d344146ee9d265d1f43c094ce5a0ec4cf"
-> +SRCREV ?= "88bd672dafad68b419ea29bef941dfa17f941038"
->   
->   inherit setuptools3
->   
->
-> 
->
+>  meta-oe/recipes-devtools/php/php_7.4.9.bb | 5 +----
+>  1 file changed, 1 insertion(+), 4 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-devtools/php/php_7.4.9.bb b/meta-oe/recipes-
+> devtools/php/php_7.4.9.bb
+> index f8a8755b9..d6df998f3 100644
+> --- a/meta-oe/recipes-devtools/php/php_7.4.9.bb
+> +++ b/meta-oe/recipes-devtools/php/php_7.4.9.bb
+> @@ -208,11 +208,8 @@ MODPHP_PACKAGE =3D
+> "${@bb.utils.contains('PACKAGECONFIG', 'apache2', '${PN}-modphp  PACKAGES
+> =3D "${PN}-dbg ${PN}-cli ${PN}-phpdbg ${PN}-cgi ${PN}-fpm ${PN}-fpm-apach=
+e2
+> ${PN}-pear ${PN}-phar ${MODPHP_PACKAGE} ${PN}-dev ${PN}-staticdev ${PN}-
+> doc ${PN}-opcache ${PN}"
+>=20
+>  RDEPENDS_${PN} +=3D "libgcc"
+> -RDEPENDS_${PN}-pear =3D "${PN}"
+>  RDEPENDS_${PN}-phar =3D "${PN}-cli"
+> -RDEPENDS_${PN}-cli =3D "${PN}"
+> -RDEPENDS_${PN}-modphp =3D "${PN} apache2"
+> -RDEPENDS_${PN}-opcache =3D "${PN}"
+> +RDEPENDS_${PN}-modphp =3D "apache2"
 
---------------765A54A1B332CE88A16EE2FB
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
+I do not think this is the correct fix. In many situations php.ini files fr=
+om a bbappend will be part of the php package (that is my case and why I di=
+d not notice the above problem when I split phpdbg), are common to various =
+SAPIs. I do not know why the current recipe does not install a php.ini file=
+ though, I thought it did. Probably the best solution is to just allow php =
+to be an empty package with the following (it will make life easier for bba=
+ppends that need to ship a php.ini).
 
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 2021-03-08 10:56 p.m., kai wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:20210309035611.23351-1-kai.kang@windriver.com">
-      <pre class="moz-quote-pre" wrap="">From: Kai Kang <a class="moz-txt-link-rfc2396E" href="mailto:kai.kang@windriver.com">&lt;kai.kang@windriver.com&gt;</a>
+ALLOW_EMPTY_${PN} =3D "1"
 
-8.1.2 fixes:
-* CVE-2021-27921
-* CVE-2021-27922
-* CVE-2021-27923
+>=20
+>  INITSCRIPT_PACKAGES =3D "${PN}-fpm"
+>  inherit update-rc.d
+> --
+> 2.17.1
 
-8.1.1 fixes:
-* CVE-2021-25289
-* CVE-2021-25290
-* CVE-2021-25291
-* CVE-2021-25292
-* CVE-2021-25293
-
-Signed-off-by: Kai Kang <a class="moz-txt-link-rfc2396E" href="mailto:kai.kang@windriver.com">&lt;kai.kang@windriver.com&gt;</a></pre>
-    </blockquote>
-    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210309035611.23351-1-kai.kang@windriver.com">
-      <pre class="moz-quote-pre" wrap="">
----
- .../python/{python3-pillow_8.1.0.bb =&gt; python3-pillow_8.1.2.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pillow_8.1.0.bb =&gt; python3-pillow_8.1.2.bb} (93%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-pillow_8.1.0.bb b/meta-python/recipes-devtools/python/python3-pillow_8.1.2.bb
-similarity index 93%
-rename from meta-python/recipes-devtools/python/python3-pillow_8.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-pillow_8.1.2.bb
-index 63974590c..a1b4f9059 100644
---- a/meta-python/recipes-devtools/python/python3-pillow_8.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pillow_8.1.2.bb
-@@ -9,7 +9,7 @@ SRC_URI = &quot;git://github.com/python-pillow/Pillow.git;branch=8.1.x \
-            <a class="moz-txt-link-freetext" href="file://0001-support-cross-compiling.patch">file://0001-support-cross-compiling.patch</a> \
-            <a class="moz-txt-link-freetext" href="file://0001-explicitly-set-compile-options.patch">file://0001-explicitly-set-compile-options.patch</a> \
- &quot;
--SRCREV ?= &quot;fcc42e0d344146ee9d265d1f43c094ce5a0ec4cf&quot;
-+SRCREV ?= &quot;88bd672dafad68b419ea29bef941dfa17f941038&quot;
- 
- inherit setuptools3
- 
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
+--=20
+Diego Santa Cruz, PhD
+Technology Architect
+spinetix.com
 
 
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------765A54A1B332CE88A16EE2FB--
