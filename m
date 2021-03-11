@@ -1,183 +1,77 @@
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by mx.groups.io with SMTP id smtpd.web12.1107.1615492495896899746
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
+ by mx.groups.io with SMTP id smtpd.web08.480.1615503584759087824
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Mar 2021 11:54:56 -0800
+ Thu, 11 Mar 2021 14:59:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@linux.microsoft.com header.s=default header.b=m293nnyI;
- spf=pass (domain: linux.microsoft.com, ip: 13.77.154.182, mailfrom: alhe@linux.microsoft.com)
-Received: from alsamon-xub.lan (cpe-68-201-52-49.elp.res.rr.com [68.201.52.49])
-	by linux.microsoft.com (Postfix) with ESMTPSA id 9E04B20B39C5;
-	Thu, 11 Mar 2021 11:54:54 -0800 (PST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 9E04B20B39C5
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1615492495;
-	bh=FrXMZyYO0HnAws8Kim2+d3a54W1Ahvs0FrmsAmBVPNk=;
-	h=From:To:Cc:Subject:Date:From;
-	b=m293nnyIY3b7O7gjtRSYvgNeu+xMHX08zM03VC/i7B1oR6WgQJkvjdu90mNmB4LOk
-	 X7p3MmIZ5OduL2VlOiDS0x1bwiu8ecxiN9Z6DONJ2AHqQd/imzC0ddy51j9rJZl/v5
-	 NALjf8qVNLEsoPiOYhgjOEzMNy5uXeuvc1wbYezA=
-From: "Alejandro Hernandez Samaniego" <alhe@linux.microsoft.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=q60VTByC;
+ spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f171.google.com with SMTP id p21so14615978pgl.12
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Mar 2021 14:59:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=g7SVw65gp/vmdax0dEw16E1vWHXusut4nd2LexB9dsc=;
+        b=q60VTByC4Lktt0gOpr0QgadMFzaq+QWNFyD9YukGRB4RF96wqk13RgAYWUCiIilNJI
+         Z+ixQlf843VUTL1Zv3zRf1HeuHZFB3FKGuFSpqDk5dQ3ux/oZrjZ1yYlbYrBikTJPThW
+         lXPzGzkBZ7/ZdtTfo/NXjZqiws1ZC2zFzD6MEUmD4L9iIzs5OCY7WiIC6qGA3ZrSho63
+         C53ksqsH0wvPo0L98rnJ10cn+rC5koeL784xY8tHGj/67ajEDnGNJ2OZ83phjQ4kVQTj
+         3R1Ox2/hjxizEwPLP+z2zeWPdIr7kUadeX3s2c7WEH2uyCNssMGu6KfH954HBLIhlYb7
+         fPaQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=g7SVw65gp/vmdax0dEw16E1vWHXusut4nd2LexB9dsc=;
+        b=MffzhBl5TYupeTfma88G+nOwlhDxrf4cOZ8tGVkuVh1DVHOZk8xKMKntuwAYBBEQHG
+         1tn5+Dz7nA8zwRkUynniseT0BSXw+OG4YsEFBqGyygvTt45fu5Yg4PH/ZF5l0p8CKZMS
+         Bh59xKuW5TjjeCY6GYfS0no5UFb3k4iB+J2bT8aF+v/ekZLkybhbxUk6h2Mckst5zYMS
+         u6gLBI7NbaCYFSVyky8ymGSsZwmUaMxlNATg6avXWTOAhv5Dea9pTmPL9cHMLpnqyejV
+         +yv09zzKQ8AxpNO0qPDGpo5tLPOwspG9cEhJ6/Uy8RbG9pFMpOx+VKk0FjWLcWFuqVa4
+         r34A==
+X-Gm-Message-State: AOAM533GWj4qaeqSdZLe7i0ghQQPj8w2LxRPdxVS0wGnSuqqJcW7tXG6
+	LXzbGCM2BXe78fOagX+3Hw0iKGJt2mqwGg==
+X-Google-Smtp-Source: ABdhPJx6rXN+CU2wEB7SK06pOOPC7lfTOsQapX+Sknyux3plD7Nna5qGN6WlFT1hM6VB5TTNh3mzAw==
+X-Received: by 2002:aa7:942d:0:b029:1f2:cbc6:8491 with SMTP id y13-20020aa7942d0000b02901f2cbc68491mr9656029pfo.53.1615503583891;
+        Thu, 11 Mar 2021 14:59:43 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::c2dd])
+        by smtp.gmail.com with ESMTPSA id d11sm3516396pfd.43.2021.03.11.14.59.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 11 Mar 2021 14:59:43 -0800 (PST)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Alejandro Hernandez Samaniego <alhe@linux.microsoft.com>
-Subject: [PATCH] c-ares: Upgrade to 1.17.1
-Date: Thu, 11 Mar 2021 12:54:44 -0700
-Message-Id: <20210311195444.2891760-1-alhe@linux.microsoft.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Matteo Croce <mcroce@microsoft.com>
+Subject: [meta-oe][PATCH] libbpf: Depend on virtual/kernel:do_shared_workdir
+Date: Thu, 11 Mar 2021 14:59:41 -0800
+Message-Id: <20210311225941.2419765-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-From: Alejandro Hernandez Samaniego <alhe@linux.microsoft.com>
+its checking for .config values which means we need to stage kernel
+sources before executing do_compile
 
-Fixes CVE-2020-8277 [1]
-[1] https://nvd.nist.gov/vuln/detail/CVE-2020-8277
-
-Signed-off-by: Alejandro Enedino Hernandez Samaniego <alhe@linux.microsof=
-t.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Matteo Croce <mcroce@microsoft.com>
 ---
- ...rror-mv-libcares.pc.cmakein-to-libcar.patch | 10 ++++------
- .../c-ares/cmake-install-libcares.pc.patch     | 18 ++++++++----------
- .../{c-ares_1.16.1.bb =3D> c-ares_1.17.1.bb}     |  4 ++--
- 3 files changed, 14 insertions(+), 18 deletions(-)
- rename meta-oe/recipes-support/c-ares/{c-ares_1.16.1.bb =3D> c-ares_1.17=
-.1.bb} (89%)
+ meta-oe/recipes-kernel/libbpf/libbpf_0.3.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/c-ares/c-ares/0001-fix-configure-err=
-or-mv-libcares.pc.cmakein-to-libcar.patch b/meta-oe/recipes-support/c-are=
-s/c-ares/0001-fix-configure-error-mv-libcares.pc.cmakein-to-libcar.patch
-index 8f15f8424..f593045ee 100644
---- a/meta-oe/recipes-support/c-ares/c-ares/0001-fix-configure-error-mv-l=
-ibcares.pc.cmakein-to-libcar.patch
-+++ b/meta-oe/recipes-support/c-ares/c-ares/0001-fix-configure-error-mv-l=
-ibcares.pc.cmakein-to-libcar.patch
-@@ -1,19 +1,20 @@
--From f2f1e134bf5d9d0789942848e03006af8d926cf8 Mon Sep 17 00:00:00 2001
-+From 2c3e1b4f8768297c59e63e85addf821d922821d9 Mon Sep 17 00:00:00 2001
- From: Wang Mingyu <wangmy@cn.fujitsu.com>
- Date: Tue, 17 Mar 2020 12:53:35 +0800
- Subject: [PATCH] fix configure error : mv libcares.pc.cmakein to
-  libcares.pc.cmake
-=20
- Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+diff --git a/meta-oe/recipes-kernel/libbpf/libbpf_0.3.bb b/meta-oe/recipes-kernel/libbpf/libbpf_0.3.bb
+index 8b548d0b58..57e8376b5e 100644
+--- a/meta-oe/recipes-kernel/libbpf/libbpf_0.3.bb
++++ b/meta-oe/recipes-kernel/libbpf/libbpf_0.3.bb
+@@ -10,6 +10,8 @@ LIC_FILES_CHKSUM = "file://../LICENSE.LPGL-2.1;md5=b370887980db5dd40659b50909238
+ 
+ DEPENDS = "zlib elfutils"
+ 
++do_compile[depends] += "virtual/kernel:do_shared_workdir"
 +
- ---
-  CMakeLists.txt | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
-=20
- diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 3a5878d..c2e5740 100644
-+index d963d13..facd49f 100644
- --- a/CMakeLists.txt
- +++ b/CMakeLists.txt
--@@ -563,7 +563,7 @@ IF (CARES_STATIC)
-+@@ -560,7 +560,7 @@ IF (CARES_STATIC)
-  ENDIF()
- =20
-  # Write ares_config.h configuration file.  This is used only for the bu=
-ild.
-@@ -22,6 +23,3 @@ index 3a5878d..c2e5740 100644
- =20
- =20
- =20
----=20
--2.17.1
--
-diff --git a/meta-oe/recipes-support/c-ares/c-ares/cmake-install-libcares=
-.pc.patch b/meta-oe/recipes-support/c-ares/c-ares/cmake-install-libcares.=
-pc.patch
-index 0eb7e4bbb..3219be23c 100644
---- a/meta-oe/recipes-support/c-ares/c-ares/cmake-install-libcares.pc.pat=
-ch
-+++ b/meta-oe/recipes-support/c-ares/c-ares/cmake-install-libcares.pc.pat=
-ch
-@@ -1,4 +1,4 @@
--From 12414304245cce6ef0e8b9547949be5109845353 Mon Sep 17 00:00:00 2001
-+From d399ee2b00e0797e3edc1b6f4c0214b407d26574 Mon Sep 17 00:00:00 2001
- From: Changqing Li <changqing.li@windriver.com>
- Date: Tue, 24 Jul 2018 13:33:33 +0800
- Subject: [PATCH] cmake: Install libcares.pc
-@@ -11,12 +11,13 @@ Signed-off-by: Alexey Firago <alexey_firago@mentor.co=
-m>
- update to 1.14.0, fix patch warning
-=20
- Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+
- ---
-  CMakeLists.txt | 28 +++++++++++++++++++++++-----
-  1 file changed, 23 insertions(+), 5 deletions(-)
-=20
- diff --git a/CMakeLists.txt b/CMakeLists.txt
--index fd123e1..3a5878d 100644
-+index 08c0247..d963d13 100644
- --- a/CMakeLists.txt
- +++ b/CMakeLists.txt
- @@ -214,22 +214,25 @@ ADD_DEFINITIONS(${SYSFLAGS})
-@@ -50,9 +51,9 @@ index fd123e1..3a5878d 100644
- =20
-  # When checking for symbols, we need to make sure we set the proper
-  # headers, libraries, and definitions for the detection to work properl=
-y
--@@ -554,6 +557,15 @@ CONFIGURE_FILE (ares_build.h.cmake ${PROJECT_BINARY=
-_DIR}/ares_build.h)
-- # Write ares_config.h configuration file.  This is used only for the bu=
-ild.
-- CONFIGURE_FILE (ares_config.h.cmake ${PROJECT_BINARY_DIR}/ares_config.h=
-)
-+@@ -551,6 +554,15 @@ ENDIF()
-+ # Record toplevel CMakeLists.txt path
-+ set(CARES_TOPLEVEL_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
- =20
- +# Pass required CFLAGS to pkg-config in case of static library
- +IF (CARES_STATIC)
-@@ -66,10 +67,10 @@ index fd123e1..3a5878d 100644
- =20
-  # TRANSFORM_MAKEFILE_INC
-  #
--@@ -728,6 +740,12 @@ IF (CARES_INSTALL)
-- 	INSTALL (FILES "${CMAKE_CURRENT_BINARY_DIR}/libcares.pc" COMPONENT Dev=
-el DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
-+@@ -625,6 +637,12 @@ IF (CARES_INSTALL)
-  ENDIF ()
- =20
-+=20
- +# pkg-config file
- +IF (CARES_INSTALL)
- +       SET (PKGCONFIG_INSTALL_DIR "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
-@@ -79,6 +80,3 @@ index fd123e1..3a5878d 100644
-  # Legacy chain-building variables (provided for compatibility with old =
-code).
-  # Don't use these, external code should be updated to refer to the alia=
-ses directly (e.g., Cares::cares).
-  SET (CARES_FOUND 1 CACHE INTERNAL "CARES LIBRARY FOUND")
----=20
--2.17.1
--
-diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb b/meta-oe/re=
-cipes-support/c-ares/c-ares_1.17.1.bb
-similarity index 89%
-rename from meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb
-rename to meta-oe/recipes-support/c-ares/c-ares_1.17.1.bb
-index 67dd70180..7861abe59 100644
---- a/meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb
-+++ b/meta-oe/recipes-support/c-ares/c-ares_1.17.1.bb
-@@ -5,14 +5,14 @@ SECTION =3D "libs"
- LICENSE =3D "MIT"
- LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3Dfb997454c8d62aa6a47f07a8cd=
-48b006"
-=20
--PV =3D "1.16.0+gitr${SRCPV}"
-+PV =3D "1.17.1+gitr${SRCPV}"
-=20
- SRC_URI =3D "\
-     git://github.com/c-ares/c-ares.git \
-     file://cmake-install-libcares.pc.patch \
-     file://0001-fix-configure-error-mv-libcares.pc.cmakein-to-libcar.pat=
-ch \
- "
--SRCREV =3D "74a1426ba60e2cd7977e53a22ef839c87415066e"
-+SRCREV =3D "39c73b503d9ef70a58ad1f4a4643f15b01407c66"
-=20
- UPSTREAM_CHECK_GITTAGREGEX =3D "cares-(?P<pver>\d+_(\d_?)+)"
-=20
---=20
-2.25.1
+ SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https"
+ SRCREV = "051a4009f94d5633a8f734ca4235f0a78ee90469"
+ 
+-- 
+2.30.2
 
