@@ -1,78 +1,86 @@
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
- by mx.groups.io with SMTP id smtpd.web11.1181.1615569010350912464
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+ by mx.groups.io with SMTP id smtpd.web11.414.1615572502619576413
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Mar 2021 09:10:10 -0800
+ Fri, 12 Mar 2021 10:08:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=Pz4jhLMF;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.53, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f53.google.com with SMTP id v9so46915856lfa.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Mar 2021 09:10:10 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=iIh954Ne;
+ spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: luca.boccassi@gmail.com)
+Received: by mail-wr1-f49.google.com with SMTP id 61so2269124wrm.12
+        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Mar 2021 10:08:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=E7RKwidgec/BFmUXtUkGULMR8TKciJBcMMbxT61VIXQ=;
-        b=Pz4jhLMFPueb+1tfiVyhau4Lp5uOV665sszHMwt5O3hVXf3YWJ1ZCQv0L2RRKlTafV
-         fuJP2LWt5o21Uj2nLERZx8dFxaXzYniCwxUEN3fKLgWfwMRSCHJYzkpJc32dk96heNwN
-         sM1IiaonDbea0s4nWa13tFogaBKVmFpRLiis/5kw5Is9rPFXcjv6oV+bwPnXa/O1N/08
-         9WqzWHMndx19JZ6jPrwQlcrkaa9pHOJyOJTquUJ1RfbOqcICaa/mfcpPg2Uoeh9KBrgH
-         xYuzXbwP+X71rlrqs2fpsVoWjr05ySoVkTZYOFr1tHlqQhHpUaX1SnElPw8aS1s5TJFY
-         0L+Q==
+        bh=kASeKgI/buWUCTStGytWAKDWBcOgyghvRMNW4HUIOn4=;
+        b=iIh954NexZtyQeIOyiqxo0JhzcZZ+Uwe1/nk3RRLuODELx30IZuIC91muptL6XjiIe
+         XeTASztyIBkrtaGC0CaUEl0jsdgD9eOWoQItQUkr6y9JV+f1TmZ+FNUIu8CO+fLMYYv6
+         QmgMstjFkNkUJp8Z4j7K1W2T67Ins4Jwk9MLSvT0Kxsce9Zvr5lnytn8NCjDpRHtNkuu
+         OAWlUHMU9Gjz2349EB+HK4BW1CgG4ATEnXjtldFC7g1cvpyExjQwjmbzGgqO3Qj+zeCF
+         3d11+IW/yW4B00kZytN7Xgu6r5+ftyb0CBcjreVJmfv+aqzSnJ/UUIHphcT5a5A3neWA
+         pBMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=E7RKwidgec/BFmUXtUkGULMR8TKciJBcMMbxT61VIXQ=;
-        b=AQGCpss+YvbcteheyUFyfXvzFkyejzG4HsiLgqG3q87sr4I6O5artiYL/Q1mE7D57c
-         KtulZFoyssFVFdKhhUPmfOv/qbOBBoWDtjCyYncKC9NBR5Xj7TFmsAZcCIAuh2aqTAo7
-         JLpcz9iVfvCR8uIBRWVOt/iCvA3avK4no6WpiomEUTNYoE9F8CvtyG3Rn6C+IgtbUjvH
-         JSztxLXA7kOCwgorHHgBy92o9dh3J+pNkIJHHcLWxPYmRaafavhUQPHHVg3T1B1qRny4
-         C5ksYYSVIwekFmPDNIbgt7VL+vIboYEeUo6rRwOeeZulkOeT9OqCiNvFZn2ZrlBZotmD
-         79Ww==
-X-Gm-Message-State: AOAM530VQUltln4M/B9gpzaCL+19IQsSOojbZNatfrSDwBZtnR+3Yo5f
-	+pcJoRSkByaFWez1zw2yX/tJfohiN46Hv+C4
-X-Google-Smtp-Source: ABdhPJy0A+BL9MgbMh1zI8fm8/3v33F3Kf5l5oS0ylInr8fGEp9cA/nmsdRdFwNpW8O9LoDvcp4xLA==
-X-Received: by 2002:a05:6512:304a:: with SMTP id b10mr113175lfb.399.1615569008308;
-        Fri, 12 Mar 2021 09:10:08 -0800 (PST)
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-        by smtp.gmail.com with ESMTPSA id k18sm1753606lfm.88.2021.03.12.09.10.00
+        bh=kASeKgI/buWUCTStGytWAKDWBcOgyghvRMNW4HUIOn4=;
+        b=JTlXOoj78K1JgJsBL1Wb+Y7MQhi8ctt28q3A6UVHjCXXtvvjIblMBJSqnglRWmImS7
+         /n7zKbYk07UbpOuthQ+UeQuRfknIESVHv8erjCAtc3lRKqojGleJvi3tGES0qaaGf7Dp
+         QyA78dkOPIOH8cH73jQvSWw3S8Q/52FbUA2J0SNniPzcAzdvq8Cj+9YEfHhzFIEJ2hRJ
+         ZgpoXiyU8iMyxx3SDBh5au4ot6Sk7+3nuLwSAefoIvxeB9IyJVI1xjOUZ1teGbJ2k7yF
+         KPoPYffoqOLRrIfyymGLR9WEiyVZBFX+CWjFBWTKA56XIdylFMAKbMR0aOO59eix0BVd
+         fzuQ==
+X-Gm-Message-State: AOAM533u3QV6NtxHV572EU1GVnxr+WbFdPSicw+dFQj5I2vBZlLNT++S
+	6U7abOlcwH7cK7Jp//aSABbOoJ9Fu0M=
+X-Google-Smtp-Source: ABdhPJzRjhzT/i27WLIwgP/iBKxqFkauSqNFvYc2tuBKzxtSlH/QNUvhnKedAvVJg5yPsV8e9X1hZQ==
+X-Received: by 2002:a5d:5411:: with SMTP id g17mr15413634wrv.194.1615572500668;
+        Fri, 12 Mar 2021 10:08:20 -0800 (PST)
+Return-Path: <luca.boccassi@gmail.com>
+Received: from localhost ([88.98.246.218])
+        by smtp.gmail.com with ESMTPSA id j4sm2783777wmo.10.2021.03.12.10.08.19
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 12 Mar 2021 09:10:04 -0800 (PST)
-From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
+        Fri, 12 Mar 2021 10:08:19 -0800 (PST)
+From: "Luca Bocassi" <luca.boccassi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python][PATCH] python3-robotframework: update to 4.0
-Date: Fri, 12 Mar 2021 18:09:52 +0100
-Message-Id: <20210312170952.567998-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+Subject: [meta-oe][PATCH] cryptsetup: depend on new util-linux-uuid to break cycle
+Date: Fri, 12 Mar 2021 18:08:17 +0000
+Message-Id: <20210312180817.905756-1-luca.boccassi@gmail.com>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- ...-robotframework_3.2.2.bb => python3-robotframework_4.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-robotframework_3.2.2.bb => python3-robotframework_4.0.bb} (86%)
+From: Luca Boccassi <luca.boccassi@microsoft.com>
 
-diff --git a/meta-python/recipes-devtools/python/python3-robotframework_3.2.2.bb b/meta-python/recipes-devtools/python/python3-robotframework_4.0.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-robotframework_3.2.2.bb
-rename to meta-python/recipes-devtools/python/python3-robotframework_4.0.bb
-index 10f031c7b..6cb8643bd 100644
---- a/meta-python/recipes-devtools/python/python3-robotframework_3.2.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-robotframework_4.0.bb
-@@ -12,8 +12,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
- inherit pypi setuptools3
+The util-linux recipe in Poky has been split, and libuuid is separate now:
+
+http://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?id=d42487bf52310d095178e480b7ddec2666471009
+
+This allows to build util-linux with cryptsetup, for native dm-verity
+support.
+The main cryptsetup build needs libuuid and not the full util-linux, so
+switch the build-dependency over, thus allowing users to enable the
+cryptsetup util-linux's PACKAGECONFIG.
+The libblkid dependency is handled individually by the crypsetup's
+PACKAGECONFIG option.
+
+Signed-off-by: Luca Boccassi <luca.boccassi@microsoft.com>
+---
+ meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.4.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.4.bb
+index b9a6b7179..f53bd8523 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.4.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.4.bb
+@@ -13,7 +13,7 @@ DEPENDS = " \
+     json-c \
+     libdevmapper \
+     popt \
+-    util-linux \
++    util-linux-uuid \
+ "
  
- PYPI_PACKAGE_EXT = "zip"
--SRC_URI[md5sum] = "ac6b77c223821856e8ac077acf5a7c1d"
--SRC_URI[sha256sum] = "a0786a916d0572bd9d6afe26e95c6021e3df5dcafa0ece6b302e36366e58c24e"
-+
-+SRC_URI[sha256sum] = "a02a6f4af3b0830e4396058694c333cb63eb47f50acf6723be34f0f7a4d73ad7"
- 
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-shell \
+ RDEPENDS_${PN} = " \
 -- 
-2.25.1
+2.29.2
 
