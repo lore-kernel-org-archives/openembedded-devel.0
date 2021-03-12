@@ -1,63 +1,76 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.435.1615566391258449638
+Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
+ by mx.groups.io with SMTP id smtpd.web10.1164.1615568943867604476
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Mar 2021 08:26:31 -0800
+ Fri, 12 Mar 2021 09:09:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=36668 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lKkcM-0007yZ-1F; Fri, 12 Mar 2021 18:26:30 +0200
-From: "Leon Anavi" <leon.anavi@konsulko.com>
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=0yLV0+Q/;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.45, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f45.google.com with SMTP id q25so46865627lfc.8
+        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Mar 2021 09:09:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=LJwZefknSAHk8l+4882bbP6FxZrPC1PVxa6HxgJkRUI=;
+        b=0yLV0+Q/ObP7hOq616TQVLLL8Oq7YRWlRlpPvYEb9UcRV35ZszV+mZ4WijetbiaOXA
+         4k0Z6krsGz6fcjnws74PHi/wMo4GW+OWlLsDevuALSPqSuswKtxK+stmfnboB3D0V1uA
+         54EqjTQ9Gm8UEscPY/hdr5uZKel/c/YcWVCr9Orn1Y6gKBJfWRU2KwlPQHI+kMAnE1p/
+         c/ybPEcpq+uA2aDHDLr5gs2QQW+Hbm8YYdVby6i4ZnBf7J+fs6ddw51cksBUOSc7xTSJ
+         ewlEA9nbqACKzeUkjf+40fRAO8tCfAoj6e6tm9PTeBscqXwmER154IYtInr09erFSoVB
+         lyiQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=LJwZefknSAHk8l+4882bbP6FxZrPC1PVxa6HxgJkRUI=;
+        b=gfv4DA85hhPvfB5Wi4U74Uwo6SMwgKaxAnshVIBlgK/Wxj3beZweoSaYgHfd3d708y
+         3ACjyHsgvuauU7TsEfhN2iU6g2V1W0P/zCJZvvGiXLxsFBtXc7JU3ymznDtT8vQfZ1Ly
+         fyIljUUsuSqFFo5+EgC5zmiz5QTWjGO6AeDobOxFoLRxFYND/4BM+1FKo/GZ/qZw0YgR
+         Hn3KQ6GH4UxKpC6GB3oqjvn8LWuZPUXs9PIbZBk0JB272KqN41WyGKAAOTB+SG7vz+Zd
+         n74zSmIY4LRVXrl0IkJmkgMPFZOXDgD4S7DPIM2+iATWG16isTBg0wACm6X4f9GJqBqG
+         9gbg==
+X-Gm-Message-State: AOAM532Q4Z4xa370lH6aiRXzgRqbM+Cu+nFNSVYfrnRsCaHzhLJQ9yJN
+	yBo/pRlJCY4uQ3NQkGGYMJ6PdXPWY3kiJaMk
+X-Google-Smtp-Source: ABdhPJwb+vM9Ts+FpUStaebgmTABlMcbu9PN6yV6US2Iota5xlfmXoCODonUkuLo42q78573YcDwVg==
+X-Received: by 2002:a19:6c6:: with SMTP id 189mr142531lfg.426.1615568941650;
+        Fri, 12 Mar 2021 09:09:01 -0800 (PST)
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
+        by smtp.gmail.com with ESMTPSA id j28sm1753353lfh.156.2021.03.12.09.08.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 12 Mar 2021 09:08:51 -0800 (PST)
+From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-prompt-toolkit: Upgrade 3.0.16 -> 3.0.17
-Date: Fri, 12 Mar 2021 18:26:00 +0200
-Message-Id: <20210312162600.8335-5-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210312162600.8335-1-leon.anavi@konsulko.com>
-References: <20210312162600.8335-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-python][PATCH] python3-waitress: update to 2.0.0
+Date: Fri, 12 Mar 2021 18:08:28 +0100
+Message-Id: <20210312170828.567455-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 3.0.17:
-
-- Accept `style` parameter in `print_container` utility.
-- On Windows, handle Control-Delete.
-- Avoid leaking file descriptors in SSH server.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- ...rompt-toolkit_3.0.16.bb => python3-prompt-toolkit_3.0.17.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_3.0.16.bb => python3-prompt-toolkit_3.0.17.bb} (86%)
+ .../{python3-waitress_1.4.4.bb => python3-waitress_2.0.0.bb}   | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-waitress_1.4.4.bb => python3-waitress_2.0.0.bb} (71%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.16.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.17.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.16.bb
-rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.17.bb
-index 2a377d6e6..699e6028b 100644
---- a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.16.bb
-+++ b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.17.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://python-prompt-toolkit.readthedocs.io/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f"
+diff --git a/meta-python/recipes-devtools/python/python3-waitress_1.4.4.bb b/meta-python/recipes-devtools/python/python3-waitress_2.0.0.bb
+similarity index 71%
+rename from meta-python/recipes-devtools/python/python3-waitress_1.4.4.bb
+rename to meta-python/recipes-devtools/python/python3-waitress_2.0.0.bb
+index 3e207de4f..490dcee6c 100644
+--- a/meta-python/recipes-devtools/python/python3-waitress_1.4.4.bb
++++ b/meta-python/recipes-devtools/python/python3-waitress_2.0.0.bb
+@@ -6,7 +6,6 @@ SECTION = "devel/python"
+ LICENSE = "ZPL-2.1"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=78ccb3640dc841e1baecb3e27a6966b2"
  
--SRC_URI[sha256sum] = "0fa02fa80363844a4ab4b8d6891f62dd0645ba672723130423ca4037b80c1974"
-+SRC_URI[sha256sum] = "9397a7162cf45449147ad6042fa37983a081b8a73363a5253dd4072666333137"
+-SRC_URI[md5sum] = "079c3c4902b1cb5d0a917276ee70f1df"
+-SRC_URI[sha256sum] = "1bb436508a7487ac6cb097ae7a7fe5413aefca610550baf58f0940e51ecfb261"
++SRC_URI[sha256sum] = "69e1f242c7f80273490d3403c3976f3ac3b26e289856936d1f620ed48f321897"
  
- inherit pypi setuptools3
- 
+ inherit setuptools3 pypi
 -- 
-2.17.1
+2.25.1
 
