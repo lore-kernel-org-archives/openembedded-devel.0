@@ -1,77 +1,75 @@
-Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
- by mx.groups.io with SMTP id smtpd.web08.4883.1615531004108665540
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.114])
+ by mx.groups.io with SMTP id smtpd.web12.5222.1615533439754333814
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Mar 2021 22:36:44 -0800
+ Thu, 11 Mar 2021 23:17:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=FVM+1G6d;
- spf=pass (domain: gmail.com, ip: 209.85.222.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f170.google.com with SMTP id t4so23347305qkp.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Mar 2021 22:36:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=h0Y1Bia6nrhHFLZTg9eqmTIrMIDOW2+Q7GnOPQONYak=;
-        b=FVM+1G6d98lDT3I8+9Sd6dktAkv7iHseMVfXsGIkvGPU2xM1tekYg8JsRN8s2itlz/
-         nJdad2s08y8idXrEWI/MpvGcrBFxIxDCN/jyfCMgPl4snWJJU1XwTZxdojFkiAjbZN24
-         UpkaPANo11H1KJ3aiVvNfwU2vU0QyF80xqI5D1dPvHXtq0nNPf53+7H+ndHOI7X1f70p
-         fsvduXavwfyZA7kqfoCsvUbwc17iHiz2I0pN9kRq5Jby/scTnIuw7IqIHeti2sG+k+/y
-         GH1gPRKp5xBJqI9ldsMZOqZxGR5YFPhURX3oPfD4wSOkYa8syp+hYm6hroS+9Gz5b3yU
-         R6Lw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=h0Y1Bia6nrhHFLZTg9eqmTIrMIDOW2+Q7GnOPQONYak=;
-        b=tGxs/bPSjNuHE00h2NHoCkr9PsJLAYozd3Z2Eiv/pi480rcmvIixMYVck3eqtth4RQ
-         +lW8EhWDDa8DXf7oK4ihWbE3mhlYNw4unnTDHB24Wk5jkFM3zEyWof1Mpoe+LeKb5Dsp
-         uAEDyt5ZNEf7snfV0SbUTiG1A+RyvdGMid4SGUt4nWwtdY4aMUjzYvuZtp7n3//8oPBU
-         pcEeLRjilC+SwCE9wpoXo5zG5caGvlhpWFxtAHoLvxkOjB6fBnGTIc3h/Qt5538O8WTp
-         uvtmva4U+6RfqN9ojxNZ+DflfRbie+yxUhSEJl8F5SFYnyBQyq63FEgQcu2FbnGeFfHR
-         c7EQ==
-X-Gm-Message-State: AOAM533sjHT8/O18o836/hf+lPjZjPN74pgWDKDeGMgJg35Fm+TiFvHy
-	DfyzOSCX2a07VYknlNVeyV4I+GM2tG88lDSTHUU=
-X-Google-Smtp-Source: ABdhPJzTlxUiXvS2wWD96DRujsh0KU57ls7hpMTPq20z8PmyF2DWekmSihcBW5TC20dhrxQYawjrAwwejsHRnGUfmwM=
-X-Received: by 2002:a37:8ec4:: with SMTP id q187mr11259946qkd.381.1615531003225;
- Thu, 11 Mar 2021 22:36:43 -0800 (PST)
+ dkim=missing; spf=pass (domain: fujitsu.com, ip: 85.158.142.114, mailfrom: wangmy@fujitsu.com)
+Return-Path: <wangmy@fujitsu.com>
+Received: from [100.113.5.248] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta.az-b.eu-central-1.aws.symcld.net id 0E/EC-23163-C751B406; Fri, 12 Mar 2021 07:17:16 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprGIsWRWlGSWpSXmKPExsViZ8MxRbdG1Dv
+  B4PdXUYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeP17V7Wgma2iinfvBsY17B2MXJyCAnMZJLY
+  tNGzi5ELyD7OKDG5uZUNJMEmoCnRu2ULI4gtIqAvsXT2HmYQm1lAXeLSuhYWEFtYwELiz2KIG
+  hYBVYlZE98wgdi8Ai4Su45eA6uXEFCQmPLwPTNEXFDi5MwnLBBzJCQOvngBVaMoMftyMwuEXS
+  mxZ/ND1gmMvLOQtMxC0rKAkWkVo0VSUWZ6RkluYmaOrqGBga6hobGuGZCll1ilm6SXWqqbnJp
+  XUpQIlNRLLC/WK67MTc5J0ctLLdnECAyulEI2rh2MT19/0DvEKMnBpCTKG8TsnSDEl5SfUpmR
+  WJwRX1Sak1p8iFGGg0NJgtdPGCgnWJSanlqRlpkDDHSYtAQHj5IIr6EIUJq3uCAxtzgzHSJ1i
+  lFRSpz3BUhCACSRUZoH1waLrkuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHnDQKbwZOaVwE
+  1/BbSYCWixl6oXyOKSRISUVANT0/mZTpJfNE7N4YhwCTVqW1+9V5oz/f0yuVmTjDR2TLrrFz4
+  /rcVZuDxDd3ehgsqH7esL8i6VzdlnmLjrZ1qbwVv543m367I/tZsy9cm9YbFdsGTpmsbFDrt+
+  TN62qI1PIbz7yheRQ3o7yqblfy1OPF62RivbZNbJJ3e3uM//Kv9P7833dUGpShv6Ff+IzevK9
+  7yZo2jUJKb0vpjh4xx/u2K26hRdrpy2hQ+MO8Sk4ip/T60NM//zTUqgYeuM1sVt2hI7Jl5Q2s
+  HgLsRZtm56c6Hu6ub37/o2ng7UkF67c6LSrN0/uG9rpyeci3KetX/Wu22PDO/rsHzdFnKt+5f
+  RwvtvXzyV92I7bfH+1aY1SizFGYmGWsxFxYkAKEZ43CkDAAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-4.tower-248.messagelabs.com!1615533435!1570915!1
+X-Originating-IP: [62.60.8.148]
+X-SYMC-ESS-Client-Auth: outbound-route-from=fail
+X-StarScan-Received: 
+X-StarScan-Version: 9.60.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 11320 invoked from network); 12 Mar 2021 07:17:16 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-4.tower-248.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 12 Mar 2021 07:17:16 -0000
+Received: from r01ukexcasm111.r01.fujitsu.local ([10.183.43.167])
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 12C7H9JC003554
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 12 Mar 2021 07:17:15 GMT
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ R01UKEXCASM111.r01.fujitsu.local (10.183.43.167) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Fri, 12 Mar 2021 07:17:07 +0000
+From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@cn.fujitsu.com>
+Subject: [PATCH v2] czmq: Conflict resolution for sha1.h
+Date: Fri, 12 Mar 2021 15:16:59 +0800
+Message-ID: <1615533419-8467-1-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <1615523098-8089-1-git-send-email-wangmy@cn.fujitsu.com>
-In-Reply-To: <1615523098-8089-1-git-send-email-wangmy@cn.fujitsu.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 11 Mar 2021 22:36:17 -0800
-Message-ID: <CAMKF1sqgwtV3zkVRVq0KuQbhsERzJLxdjtOwLgHRZ1H3sHtPLA@mail.gmail.com>
-Subject: Re: [oe] [PATCH] czmq: Conflict resolution for sha1.h
-To: Wang Mingyu <wangmy@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
+ R01UKEXCASM111.r01.fujitsu.local (10.183.43.167)
+Content-Type: text/plain
 
-On Thu, Mar 11, 2021 at 8:25 PM Wang Mingyu <wangmy@cn.fujitsu.com> wrote:
->
-> libmd(oe-core) also uses the doc 'sha1.h', so package it in own subdirs of czmq.
->
-> Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
-> ---
->  meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb | 4 ++++
->  1 file changed, 4 insertions(+)
->
-> diff --git a/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb b/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb
-> index e742d2a1c4..56b688cad1 100644
-> --- a/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb
-> +++ b/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb
-> @@ -30,3 +30,7 @@ PACKAGECONFIG[systemd] = ",-DCMAKE_DISABLE_FIND_PACKAGE_systemd=TRUE,systemd"
->
->  BBCLASSEXTEND = "nativesdk"
->
-> +do_install_append() {
-> +        mkdir -p ${D}/${includedir}/${PV}
-> +        mv ${D}/${includedir}/sha1.h ${D}/${includedir}/${PV}/.
+libmd(oe-core) also uses the doc 'sha1.h', so package it in own subdirs of czmq.
 
-It should be BPN
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+---
+ meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-> +}
-> --
-> 2.25.1
->
->
-> 
->
+diff --git a/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb b/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb
+index e742d2a1c4..e6a4bc4c42 100644
+--- a/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb
++++ b/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb
+@@ -30,3 +30,7 @@ PACKAGECONFIG[systemd] = ",-DCMAKE_DISABLE_FIND_PACKAGE_systemd=TRUE,systemd"
+ 
+ BBCLASSEXTEND = "nativesdk"
+ 
++do_install_append() {
++        mkdir -p ${D}/${includedir}/${BPN}
++        mv ${D}/${includedir}/sha1.h ${D}/${includedir}/${BPN}/.
++}
+-- 
+2.25.1
+
