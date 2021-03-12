@@ -1,85 +1,54 @@
-Received: from mail-qv1-f46.google.com (mail-qv1-f46.google.com [209.85.219.46])
- by mx.groups.io with SMTP id smtpd.web10.1518.1615508327445618677
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web12.3557.1615519083724600859
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Mar 2021 16:18:47 -0800
+ Thu, 11 Mar 2021 19:18:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=CLhNFML0;
- spf=pass (domain: gmail.com, ip: 209.85.219.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f46.google.com with SMTP id by2so3479186qvb.11
-        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Mar 2021 16:18:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=g1HXFQvI8Y1EzX0gMzkydbV4lnIqK5AA26QsC1bqa/Q=;
-        b=CLhNFML0fDyby08DftBuheCnUHhw7wo9clFkkGX3wvcbZqknm0gdsI4YyMFgdTey1F
-         iH6QRBT8N1iMNIxDy39A3McTA/9SzYhKth1TJ1fCWZSnNvlqgM5sky62l45LcdMFBJax
-         YOWY/MMUjsAO/E+taeJmRYjBbh2qA0B8ekeS+5GmLL2Tt60EVpzncmtQWD4XgyIgw+Cn
-         TH4+wXuG+EsC6pCPSMTyAn8h1/DMcZZiL9/dULfDSAyW2yKbIEa9U6BCeIG0u3tIahg3
-         PH0WKUWkpfXr3T7bE7ivD07eEGleG1P/hpNZB9ISP6W6/zKgViDlfp/qmqnJfH2x0Efv
-         jYvA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=g1HXFQvI8Y1EzX0gMzkydbV4lnIqK5AA26QsC1bqa/Q=;
-        b=a6hxhzIyHGHClVOm13Bpd4LJRONkRwJAHn4hD9uvSvsbc6smGv++2JjQKOGNj8Nm49
-         baS6NBeUE4cfy+jfX9G+8Yvo4DB8aK3+1rApHhkLZxbOoW9hCwmw0ZXFBbFwRuzFjTUy
-         n/Mu0hIveOtSl0Pay/wwtFuxudVPPz6pAGKrjZlRky0VuUXauaw70gTkJQmhyBv1eGwZ
-         Ykv22EGUfT8ONAP/T9XUMGQE5P3EUBllVkRPO5dBw/EsdFrP2IbA3qHITqb1lhvbiNTU
-         tTuhDIvOMruflnspVZztlv1Dt7aCiNwd1DIuanBWMVwcdfGRoO0mJpZmcE0HpaaXUJSO
-         speA==
-X-Gm-Message-State: AOAM531xwZvE2kPLnTk4sV2Pt5nuZMZmhjE2STsSNnb2qJ2aysd5OwPp
-	2/KQ6nPdK984zZ6JyWueXWkUBHLzWuIel23RCM0=
-X-Google-Smtp-Source: ABdhPJzkxxolbzn3SU8TxhPmjxPzsGC62RU4jDQ5R5+UcfS8M8w9wRlUScMCPtGivIYIYtGm6jtE64pQo4jDlnc6HcE=
-X-Received: by 2002:a05:6214:1c47:: with SMTP id if7mr10205082qvb.50.1615508326537;
- Thu, 11 Mar 2021 16:18:46 -0800 (PST)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: mingli.yu@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 12C3Hqac029574
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 11 Mar 2021 19:17:57 -0800 (PST)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2106.2; Thu, 11 Mar 2021 19:17:45 -0800
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2106.2 via Frontend Transport; Thu, 11 Mar 2021 19:17:44 -0800
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-networking][PATCH] quagga: Update SRC_URI
+Date: Fri, 12 Mar 2021 11:17:43 +0800
+Message-ID: <20210312031743.33629-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-References: <1615507926-7525-1-git-send-email-wangmy@cn.fujitsu.com>
-In-Reply-To: <1615507926-7525-1-git-send-email-wangmy@cn.fujitsu.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 11 Mar 2021 16:18:20 -0800
-Message-ID: <CAMKF1srwmviXc6fe60180wP1Yb8qqK5ZVk6NM3g7NX-hu2+r5A@mail.gmail.com>
-Subject: Re: [oe] [PATCH] czmq: use update-alternatives for sha1.h
-To: Wang Mingyu <wangmy@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Thu, Mar 11, 2021 at 4:12 PM Wang Mingyu <wangmy@cn.fujitsu.com> wrote:
->
-> libmd also uses the doc 'sha1.h'.
->
-> libmd has a priority of 100.
->
-> Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
-> ---
->  meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb | 5 +++++
->  1 file changed, 5 insertions(+)
->
-> diff --git a/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb b/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb
-> index e742d2a1c4..bd40fb92f7 100644
-> --- a/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb
-> +++ b/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb
-> @@ -30,3 +30,8 @@ PACKAGECONFIG[systemd] = ",-DCMAKE_DISABLE_FIND_PACKAGE_systemd=TRUE,systemd"
->
->  BBCLASSEXTEND = "nativesdk"
->
-> +inherit update-alternatives
-> +
-> +ALTERNATIVE_PRIORITY = "60"
-> +ALTERNATIVE_${PN}-doc = "sha1.h"
-> +ALTERNATIVE_LINK_NAME[sha1.h] = "${includedir}/sha1.h"
+From: Mingli Yu <mingli.yu@windriver.com>
 
-usually update-alternative mechanism is for executables, for
-development files and libs, its better to package them in there own
-subdirs
-e.g. this file could live as ${includedir}/czmq/sha1.h and of course
-adjust the apps using them to detect right header via pkgconfig or
-some such mechanism
+Update the SRC_URI as the previous is unaccessible to fix the below
+warning:
+WARNING: quagga-1.2.4-r0 do_fetch: Failed to fetch URL https://download.savannah.gnu.org/releases/quagga/quagga-1.2.4.tar.gz;, attemptin MIRRORS if available
 
-> --
-> 2.25.1
->
->
-> 
->
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ meta-networking/recipes-protocols/quagga/quagga.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
+index 6df72427b..3b7a425bb 100644
+--- a/meta-networking/recipes-protocols/quagga/quagga.inc
++++ b/meta-networking/recipes-protocols/quagga/quagga.inc
+@@ -20,7 +20,7 @@ SNMP_CONF="${@bb.utils.contains('DISTRO_FEATURES', 'snmp', '--enable-snmp', '',
+ # the "ip" command from busybox is not sufficient (flush by protocol flushes all routes)
+ RDEPENDS_${PN} += "iproute2"
+ 
+-SRC_URI = "${SAVANNAH_GNU_MIRROR}/quagga/quagga-${PV}.tar.gz; \
++SRC_URI = "https://github.com/Quagga/quagga/releases/download/quagga-${PV}/quagga-${PV}.tar.gz \
+            file://quagga.init \
+            file://quagga.default \
+            file://watchquagga.init \
+-- 
+2.29.2
+
