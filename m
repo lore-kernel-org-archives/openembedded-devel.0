@@ -1,72 +1,94 @@
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web10.460.1615581483987825594
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
+ by mx.groups.io with SMTP id smtpd.web08.498.1615581783786948627
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Mar 2021 12:38:04 -0800
+ Fri, 12 Mar 2021 12:43:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=icGN/UUE;
- spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id kr3-20020a17090b4903b02900c096fc01deso11626034pjb.4
-        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Mar 2021 12:38:03 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=EQyAlD4q;
+ spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f45.google.com with SMTP id cl21-20020a17090af695b02900c61ac0f0e9so5330976pjb.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Mar 2021 12:43:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=1EA9suSW+6CovCZDLRiKyym0A4eMG/rHH0jMnHkyrAs=;
-        b=icGN/UUE/mapGqItTACKFC08QHG3MXSlj8h3+BnkLnUi7moSuXDlaMN9AzJpb/qO/Y
-         ipW+Vnh5vUpxrQBFanc6WxJ22IeFuTu23xIne76LnFqN4GQbCY+3NiThwAYkYnpMMPLK
-         FWmHaz29K/l25DLz1CF4LACXl/8olJ/o4unBd/a9ads+WLDvG964SGfU9pZ2k2y9OJdN
-         rbSztJUrc2pfbg3/uapjEWMX82cCOHECXUbFa5uu/DjWaSEo+eZFAQJLZ9HXzFYb3X2t
-         sDxyWvDXUIqJeGAz+Sb+ObrIsLgUIP5wZClkvwrUEhevdvGRW28zW1hlh/DOtk2un/7N
-         ntCQ==
+        h=subject:to:references:from:organization:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=KoLdgBOY0u/FUa7pdxSMfYMkL8Gx0x/97DvwiO+YFm8=;
+        b=EQyAlD4qpVx8J606qnzWSjPZOpQbx9iQNR4zPVf6x2cNF+wGFHyS0aylzWHUAgRgy5
+         7JG0oyOUF+4Qo1aQ/eKXr2u0D0ksOH7w718lJQtBCi9tedOt4FvWRlPQYyZ4hKbuzxxB
+         2XoZQGMka3xPAVz7cbGjIUH0vaZSuQ+l7KGbjhxX/0Lu4YVbPj1uPicpTN6ECSN3i3Mw
+         BhTiIy9BFtl87CnuKD0UqqdmoKN/0Q9FV23mTUS4xE0DJY4Zf3R1hnVfwK/mWNe49vOS
+         TpzsnEXbusnZsZ/oeH/hIeAagc7SuSbHdLUJwFmxmaRE40hh+8ZBsxmuxjI3wAvQStla
+         ZE9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=1EA9suSW+6CovCZDLRiKyym0A4eMG/rHH0jMnHkyrAs=;
-        b=W5lUEX87BFrAlQNKE4B2yLgPXzakoaZNRvWH35hb7iNOpGodveKn8jjjUzTiTk66xA
-         Rya48YKEFvOSMKozOB+pKxFz6p5d7lPLFdJgpRIQzjyY18tj6uV/izuK2PJgZX0rWXfj
-         MS7GZPBuI9WyJetvWDIM1GEXn2GtnGYzfvoj/ZC/51lOUJN1qaskEP8oV+TxxPQcw+G3
-         LzAPHp/rfarJ2ctnSI4CT5hc9/GaK5NK8/tM/RhCIwpCs79eEFYPuAnOV94a4F8ZCPi4
-         RVUpBkDf58L+ekKgdBWXMCio9oYNj5SCBL5Dps/Rih4AQ+F0F9OJrLC1hTIGhaFmlyM5
-         LtOw==
-X-Gm-Message-State: AOAM532VN+OAKY5UoySNJOzmC+O0TrHZPj7SmQLPlHKQARaszYaLVA7Z
-	oVhu+psf+o/MHRQHwdZUrpeUFpI8c0y1Bg==
-X-Google-Smtp-Source: ABdhPJy9kwskwIJr53zUgn39o06ssUvG6fWNYpiWCFW+l+8+A3JT/Zt2pTVz+CNLIO/vzQ1jHuIWmw==
-X-Received: by 2002:a17:903:2301:b029:e4:700b:6d91 with SMTP id d1-20020a1709032301b02900e4700b6d91mr297966plh.19.1615581483305;
-        Fri, 12 Mar 2021 12:38:03 -0800 (PST)
+        h=x-gm-message-state:subject:to:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=KoLdgBOY0u/FUa7pdxSMfYMkL8Gx0x/97DvwiO+YFm8=;
+        b=Nzf1BVn3JCH+94b5a3mh4LQvHkc/7C4ocCoRK6wOKgXsxIJVK2Hdgm2Vq/FDIXfOGd
+         tMiyuw7jk7m6TXEI1gWHmrqaFZlMjmHyPtCJA7LCbPUxepcjcdxlQ5uY0Hvg+GFQ+y98
+         OK6fTRFHoYh/hXf4Qv/K2TWT1bipyEw3Rtwn9dKQNjqjal9ZoQPawNIF543RZ6kNSN1o
+         YbTsj642O8QrjM/jqU6b4MvRPbPgF8rumfUijTvR8nMKIjouHQWnKPBTHQOwZjG9Ix9a
+         LVaxVuxh00Qll+MiOYjTsGSnNBm1At95U9rACpZv6zzWUR80MeDxXQfsrHyq2gjUJYBr
+         bECw==
+X-Gm-Message-State: AOAM533YkrakOVy65aX10EMfHyMdmydrWVi7/jm5pBx5rXKSzxlXUPNA
+	JkKLJaXJbyw9gvNeKOIZKPNonOp8D1Rz8Q==
+X-Google-Smtp-Source: ABdhPJzMiJ7+BjGZVawUrycRImWAE2a1VzrnvrcjOQ/k5P7lBR/oQINt9aclk3yn8zqRrR8DD05sOA==
+X-Received: by 2002:a17:902:8601:b029:e6:7b87:8add with SMTP id f1-20020a1709028601b02900e67b878addmr317024plo.3.1615581783112;
+        Fri, 12 Mar 2021 12:43:03 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::c2dd])
-        by smtp.gmail.com with ESMTPSA id a21sm6214354pfk.83.2021.03.12.12.38.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 12 Mar 2021 12:38:02 -0800 (PST)
+Received: from ?IPv6:2601:646:9200:a0f0:9c7e:15b:d723:6fd9? ([2601:646:9200:a0f0:9c7e:15b:d723:6fd9])
+        by smtp.gmail.com with ESMTPSA id d24sm6514302pfn.54.2021.03.12.12.43.02
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 12 Mar 2021 12:43:02 -0800 (PST)
+Subject: Re: [oe] [PATCH] [OE-devel] [meta-openembedded] quagga: fix do_fetch warning
+To: Stefan Ghinea <stefan.ghinea@windriver.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20210312181432.14324-1-stefan.ghinea@windriver.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] libhugetlbfs: Fix ARCH setting for ppc64 LE
-Date: Fri, 12 Mar 2021 12:38:00 -0800
-Message-Id: <20210312203800.323387-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.2
+Organization: HIMVIS LLC
+Message-ID: <2c7758c0-ad20-d5f0-5ef1-f8dd2677b055@gmail.com>
+Date: Fri, 12 Mar 2021 12:43:01 -0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:78.0)
+ Gecko/20100101 Thunderbird/78.8.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20210312181432.14324-1-stefan.ghinea@windriver.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-index fa63316b02..aa9eb02b34 100644
---- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-@@ -39,7 +39,7 @@ LIBARGS = "LIB32=${baselib} LIB64=${baselib}"
- LIBHUGETLBFS_ARCH = "${TARGET_ARCH}"
- LIBHUGETLBFS_ARCH_powerpc = "ppc"
- LIBHUGETLBFS_ARCH_powerpc64 = "ppc64"
--LIBHUGETLBFS_ARCH_powerpc64le = "ppc64"
-+LIBHUGETLBFS_ARCH_powerpc64le = "ppc64le"
- EXTRA_OEMAKE = "'ARCH=${LIBHUGETLBFS_ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}' ${LIBARGS} BUILDTYPE=NATIVEONLY V=2"
- PARALLEL_MAKE = ""
- CFLAGS += "-fexpensive-optimizations -frename-registers -fomit-frame-pointer -g0"
--- 
-2.30.2
 
+On 3/12/21 10:14 AM, Stefan Ghinea wrote:
+> WARNING: quagga-1.2.4-r0 do_fetch: Failed to fetch URL
+> https://download.savannah.gnu.org/releases/quagga/quagga-1.2.4.tar.gz;,
+> attempting MIRRORS if available
+> 
+
+
+thanks for the submission, there is a patch fixing this already staged 
+in master-next. please check that out and see if it fixes the issue you 
+are seeing
+
+> Signed-off-by: Stefan Ghinea <stefan.ghinea@windriver.com>
+> ---
+>   meta-networking/recipes-protocols/quagga/quagga.inc | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
+> index 6df72427b..6680fec01 100644
+> --- a/meta-networking/recipes-protocols/quagga/quagga.inc
+> +++ b/meta-networking/recipes-protocols/quagga/quagga.inc
+> @@ -20,7 +20,7 @@ SNMP_CONF="${@bb.utils.contains('DISTRO_FEATURES', 'snmp', '--enable-snmp', '',
+>   # the "ip" command from busybox is not sufficient (flush by protocol flushes all routes)
+>   RDEPENDS_${PN} += "iproute2"
+>   
+> -SRC_URI = "${SAVANNAH_GNU_MIRROR}/quagga/quagga-${PV}.tar.gz; \
+> +SRC_URI = "https://github.com/Quagga/quagga/releases/download/${BP}/${BP}.tar.gz; \
+>              file://quagga.init \
+>              file://quagga.default \
+>              file://watchquagga.init \
+> 
+> 
+> 
+> 
+> 
