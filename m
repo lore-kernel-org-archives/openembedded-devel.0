@@ -1,54 +1,75 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web12.3557.1615519083724600859
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.3])
+ by mx.groups.io with SMTP id smtpd.web08.4073.1615523117205217939
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Mar 2021 19:18:03 -0800
+ Thu, 11 Mar 2021 20:25:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: mingli.yu@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 12C3Hqac029574
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 11 Mar 2021 19:17:57 -0800 (PST)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2106.2; Thu, 11 Mar 2021 19:17:45 -0800
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2106.2 via Frontend Transport; Thu, 11 Mar 2021 19:17:44 -0800
-From: "Yu, Mingli" <mingli.yu@windriver.com>
+ dkim=missing; spf=pass (domain: fujitsu.com, ip: 195.245.230.3, mailfrom: wangmy@fujitsu.com)
+Return-Path: <wangmy@fujitsu.com>
+Received: from [100.112.193.211] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta.az-a.eu-west-1.aws.symcld.net id 96/38-24644-A2DEA406; Fri, 12 Mar 2021 04:25:14 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprGIsWRWlGSWpSXmKPExsViZ8MRoqv11iv
+  B4MQWXYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePz+cOMBY1sFfu+eDQwrmLtYuTiEBKYySRx
+  pHEuO4RznFHi18F3LF2MnBxsApoSvVu2MILYIgL6Ektn72EGsZkF1CUurWsBqxEWMJVYfv4AG
+  4jNIqAqMenCeSYQm1fARWL5tfVg9RICChJTHr5nhogLSpyc+YQFYo6ExMEXL6BqFCVmX25mgb
+  ArJfZsfsg6gZF3FpKWWUhaFjAyrWI0TyrKTM8oyU3MzNE1NDDQNTQ00jW0NNI1MdFLrNJN1Es
+  t1S1PLS7RNdRLLC/WK67MTc5J0ctLLdnECAyulIIDOjsYf776oHeIUZKDSUmUV2qlV4IQX1J+
+  SmVGYnFGfFFpTmrxIUYZDg4lCV7mN0A5waLU9NSKtMwcYKDDpCU4eJREeN+/AkrzFhck5hZnp
+  kOkTjEqSonzaoL0CYAkMkrz4Npg0XWJUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjBvy2ugKT
+  yZeSVw018BLWYCWuylCra4JBEhJdXAtIeHeZ9QoM1qd/HFl5a92nQo9c7aoKlZvJt0tqQJH9f
+  4u/QgT83ZZbtf5Cx+5PvilqjkFOm7R68/z5jGdTx6db76uxQu7TV73njWnwzKPtDStjrY7JKq
+  86OS2hV6O7cL/ZOct6GmYNLe33YR3s1zNK5kRW1PjkmLbWWwvOMf+/BxZkHgni2tdiYOf3XnC
+  CQlcs8OXJV9bpo974ea2T8TDu2b6ZP+25ej7UjBQa5Fxlu/flnKc2NSUMbh2c4bG46m/J/JeF
+  PxyO8VUfwXJ5TZJqhnTBa9tFq9qtwm2uhF/HK7JJ39P6JqF9U9fuS2ccaDuQqs29KvHO6PdzX
+  70hTW3/lGM3FGbEUhR9lvgdKaHCWW4oxEQy3mouJEACwvhVopAwAA
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-33.tower-271.messagelabs.com!1615523114!1654507!1
+X-Originating-IP: [62.60.8.84]
+X-SYMC-ESS-Client-Auth: outbound-route-from=fail
+X-StarScan-Received: 
+X-StarScan-Version: 9.60.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 5849 invoked from network); 12 Mar 2021 04:25:14 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-33.tower-271.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 12 Mar 2021 04:25:14 -0000
+Received: from r01ukexcasm111.r01.fujitsu.local ([10.183.43.167])
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 12C4P8EC020495
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 12 Mar 2021 04:25:14 GMT
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ R01UKEXCASM111.r01.fujitsu.local (10.183.43.167) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Fri, 12 Mar 2021 04:25:06 +0000
+From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][PATCH] quagga: Update SRC_URI
-Date: Fri, 12 Mar 2021 11:17:43 +0800
-Message-ID: <20210312031743.33629-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.29.2
+CC: Wang Mingyu <wangmy@cn.fujitsu.com>
+Subject: [PATCH] czmq: Conflict resolution for sha1.h
+Date: Fri, 12 Mar 2021 12:24:58 +0800
+Message-ID: <1615523098-8089-1-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
+ R01UKEXCASM111.r01.fujitsu.local (10.183.43.167)
 Content-Type: text/plain
 
-From: Mingli Yu <mingli.yu@windriver.com>
+libmd(oe-core) also uses the doc 'sha1.h', so package it in own subdirs of czmq.
 
-Update the SRC_URI as the previous is unaccessible to fix the below
-warning:
-WARNING: quagga-1.2.4-r0 do_fetch: Failed to fetch URL https://download.savannah.gnu.org/releases/quagga/quagga-1.2.4.tar.gz;, attemptin MIRRORS if available
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- meta-networking/recipes-protocols/quagga/quagga.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
-index 6df72427b..3b7a425bb 100644
---- a/meta-networking/recipes-protocols/quagga/quagga.inc
-+++ b/meta-networking/recipes-protocols/quagga/quagga.inc
-@@ -20,7 +20,7 @@ SNMP_CONF="${@bb.utils.contains('DISTRO_FEATURES', 'snmp', '--enable-snmp', '',
- # the "ip" command from busybox is not sufficient (flush by protocol flushes all routes)
- RDEPENDS_${PN} += "iproute2"
+diff --git a/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb b/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb
+index e742d2a1c4..56b688cad1 100644
+--- a/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb
++++ b/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb
+@@ -30,3 +30,7 @@ PACKAGECONFIG[systemd] = ",-DCMAKE_DISABLE_FIND_PACKAGE_systemd=TRUE,systemd"
  
--SRC_URI = "${SAVANNAH_GNU_MIRROR}/quagga/quagga-${PV}.tar.gz; \
-+SRC_URI = "https://github.com/Quagga/quagga/releases/download/quagga-${PV}/quagga-${PV}.tar.gz \
-            file://quagga.init \
-            file://quagga.default \
-            file://watchquagga.init \
+ BBCLASSEXTEND = "nativesdk"
+ 
++do_install_append() {
++        mkdir -p ${D}/${includedir}/${PV}
++        mv ${D}/${includedir}/sha1.h ${D}/${includedir}/${PV}/.
++}
 -- 
-2.29.2
+2.25.1
 
