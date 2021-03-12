@@ -1,107 +1,77 @@
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web12.4996.1615530864000514917
+Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
+ by mx.groups.io with SMTP id smtpd.web08.4883.1615531004108665540
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Mar 2021 22:34:24 -0800
+ Thu, 11 Mar 2021 22:36:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ehhRJPhW;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id s21so1195769pfm.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Mar 2021 22:34:23 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=FVM+1G6d;
+ spf=pass (domain: gmail.com, ip: 209.85.222.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f170.google.com with SMTP id t4so23347305qkp.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Mar 2021 22:36:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=94lCod575KZuAgusb/4kbUufykpaNK/KsUHBOCD3zJ4=;
-        b=ehhRJPhWGsK/hb1umfxHvGPaA6kbXm31x/Kul2D2onOEPz+qLhzN65ftkJykB7saAT
-         9V3BlwPJ11VEoMSVt52Du5kXY/7VlOcLwY9gNPS2dF8OXDCVe+pPPc+X/w1KXntrGqwA
-         ag3wxAQXGuBMfdMgCO6er5naIqu2eK3ZKtLFWul+ywxjK1a48CcwFgsCw/jLBHiGSxmD
-         ckcy3u4o4Q5mSpG2ET+wBqRDtisBvITJZH+BXZqsnDP7aGCNB0I9h0h0tCVkwIYX2uY8
-         ywcCDS2MwFS9D+bBHRgb1nlddpMcdjm6Xun1dK7xqAFbJZye4Z6Dz4LEkaipAfXn0obJ
-         Ckbw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=h0Y1Bia6nrhHFLZTg9eqmTIrMIDOW2+Q7GnOPQONYak=;
+        b=FVM+1G6d98lDT3I8+9Sd6dktAkv7iHseMVfXsGIkvGPU2xM1tekYg8JsRN8s2itlz/
+         nJdad2s08y8idXrEWI/MpvGcrBFxIxDCN/jyfCMgPl4snWJJU1XwTZxdojFkiAjbZN24
+         UpkaPANo11H1KJ3aiVvNfwU2vU0QyF80xqI5D1dPvHXtq0nNPf53+7H+ndHOI7X1f70p
+         fsvduXavwfyZA7kqfoCsvUbwc17iHiz2I0pN9kRq5Jby/scTnIuw7IqIHeti2sG+k+/y
+         GH1gPRKp5xBJqI9ldsMZOqZxGR5YFPhURX3oPfD4wSOkYa8syp+hYm6hroS+9Gz5b3yU
+         R6Lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=94lCod575KZuAgusb/4kbUufykpaNK/KsUHBOCD3zJ4=;
-        b=TJYfQJH+lojShU4TSJPdiJTyIUXhnqB0NjchQbqDp0Lsf+O1Gs53U+LGiFugL2NKFf
-         dAYVdAL11Mc3N+al5oblhrtpRu9u3sfeVtVZ9Zk44wT9gMYrpLe/zAy6P5VMWS9yoRlM
-         YXDCHMYjgB8po3o44WuwGvfSANnePZ8Jq8K75eC6/dt9xV8J/AIwYY5dxIzmGIkVKkI9
-         964yTt2mKCr30d2ZVCaqA0+4TBrx74udzB1NoDKDIXjg6gms3BBzEHDsPRPJYf3qkR87
-         b1O+0cHOMGcsLmqb+OTrZnA82lzYT7Nk8Hz7oKYENfM9KsEX4nioLRuzSx+hzvAMxY+S
-         susA==
-X-Gm-Message-State: AOAM533tQBc4Y73TPMK5eGzwVzgfVIXfBs69JWxXe2KLJWtlX8gQ2k66
-	QdirhV2MXV2FJ6cm9BYRZpUwiZI23r3zlQ==
-X-Google-Smtp-Source: ABdhPJx2Fu13xpXiv09dS0zsLaYgtzARbk6QKzgZ4rr+EBh+Hpy1lsB8swJMuJVWrK48iIUUnAVlQA==
-X-Received: by 2002:a63:6642:: with SMTP id a63mr10248429pgc.333.1615530862831;
-        Thu, 11 Mar 2021 22:34:22 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::c2dd])
-        by smtp.gmail.com with ESMTPSA id y8sm4545473pfe.36.2021.03.11.22.34.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 Mar 2021 22:34:22 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] waf-cross-answers: Add powerpc64le version
-Date: Thu, 11 Mar 2021 22:34:20 -0800
-Message-Id: <20210312063420.1572257-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.2
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=h0Y1Bia6nrhHFLZTg9eqmTIrMIDOW2+Q7GnOPQONYak=;
+        b=tGxs/bPSjNuHE00h2NHoCkr9PsJLAYozd3Z2Eiv/pi480rcmvIixMYVck3eqtth4RQ
+         +lW8EhWDDa8DXf7oK4ihWbE3mhlYNw4unnTDHB24Wk5jkFM3zEyWof1Mpoe+LeKb5Dsp
+         uAEDyt5ZNEf7snfV0SbUTiG1A+RyvdGMid4SGUt4nWwtdY4aMUjzYvuZtp7n3//8oPBU
+         pcEeLRjilC+SwCE9wpoXo5zG5caGvlhpWFxtAHoLvxkOjB6fBnGTIc3h/Qt5538O8WTp
+         uvtmva4U+6RfqN9ojxNZ+DflfRbie+yxUhSEJl8F5SFYnyBQyq63FEgQcu2FbnGeFfHR
+         c7EQ==
+X-Gm-Message-State: AOAM533sjHT8/O18o836/hf+lPjZjPN74pgWDKDeGMgJg35Fm+TiFvHy
+	DfyzOSCX2a07VYknlNVeyV4I+GM2tG88lDSTHUU=
+X-Google-Smtp-Source: ABdhPJzTlxUiXvS2wWD96DRujsh0KU57ls7hpMTPq20z8PmyF2DWekmSihcBW5TC20dhrxQYawjrAwwejsHRnGUfmwM=
+X-Received: by 2002:a37:8ec4:: with SMTP id q187mr11259946qkd.381.1615531003225;
+ Thu, 11 Mar 2021 22:36:43 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <1615523098-8089-1-git-send-email-wangmy@cn.fujitsu.com>
+In-Reply-To: <1615523098-8089-1-git-send-email-wangmy@cn.fujitsu.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 11 Mar 2021 22:36:17 -0800
+Message-ID: <CAMKF1sqgwtV3zkVRVq0KuQbhsERzJLxdjtOwLgHRZ1H3sHtPLA@mail.gmail.com>
+Subject: Re: [oe] [PATCH] czmq: Conflict resolution for sha1.h
+To: Wang Mingyu <wangmy@cn.fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../cross-answers-powerpc64le.txt             | 41 +++++++++++++++++++
- 1 file changed, 41 insertions(+)
- create mode 100644 meta-networking/files/waf-cross-answers/cross-answers-powerpc64le.txt
+On Thu, Mar 11, 2021 at 8:25 PM Wang Mingyu <wangmy@cn.fujitsu.com> wrote:
+>
+> libmd(oe-core) also uses the doc 'sha1.h', so package it in own subdirs of czmq.
+>
+> Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+> ---
+>  meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb b/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb
+> index e742d2a1c4..56b688cad1 100644
+> --- a/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb
+> +++ b/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb
+> @@ -30,3 +30,7 @@ PACKAGECONFIG[systemd] = ",-DCMAKE_DISABLE_FIND_PACKAGE_systemd=TRUE,systemd"
+>
+>  BBCLASSEXTEND = "nativesdk"
+>
+> +do_install_append() {
+> +        mkdir -p ${D}/${includedir}/${PV}
+> +        mv ${D}/${includedir}/sha1.h ${D}/${includedir}/${PV}/.
 
-diff --git a/meta-networking/files/waf-cross-answers/cross-answers-powerpc64le.txt b/meta-networking/files/waf-cross-answers/cross-answers-powerpc64le.txt
-new file mode 100644
-index 0000000000..7a443cc015
---- /dev/null
-+++ b/meta-networking/files/waf-cross-answers/cross-answers-powerpc64le.txt
-@@ -0,0 +1,41 @@
-+Checking uname sysname type: "Linux"
-+Checking uname version type: "# Wed May 20 10:34:39 UTC 2015"
-+Checking simple C program: "hello world"
-+rpath library support: OK
-+-Wl,--version-script support: OK
-+Checking getconf LFS_CFLAGS: NO
-+Checking correct behavior of strtoll: NO
-+Checking for working strptime: OK
-+Checking for C99 vsnprintf: "1"
-+Checking for HAVE_SHARED_MMAP: OK
-+Checking for HAVE_MREMAP: OK
-+Checking for HAVE_SECURE_MKSTEMP: OK
-+Checking for HAVE_IFACE_GETIFADDRS: NO
-+Checking for HAVE_IFACE_IFCONF: NO
-+Checking for HAVE_IFACE_IFREQ: NO
-+Checking for large file support without additional flags: OK
-+Checking for HAVE_INCOHERENT_MMAP: NO
-+Checking value of NSIG: "65"
-+Checking value of _NSIG: "65"
-+Checking value of SIGRTMAX: "64"
-+Checking value of SIGRTMIN: "34"
-+Checking whether the WRFILE -keytab is supported: OK
-+Checking for kernel change notify support: OK
-+Checking for Linux kernel oplocks: OK
-+Checking for kernel share modes: OK
-+Checking whether POSIX capabilities are available: OK
-+Checking if can we convert from CP850 to UCS-2LE: (255, "")
-+Checking if can we convert from IBM850 to UCS-2LE: (255, "")
-+Checking if can we convert from UTF-8 to UCS-2LE: OK
-+vfs_fileid checking for statfs() and struct statfs.f_fsid: OK
-+Checking whether we can use Linux thread-specific credentials: OK
-+Checking whether fcntl locking is available: OK
-+Checking for the maximum value of the 'time_t' type: OK
-+Checking whether the realpath function allows a NULL argument: OK
-+Checking for ftruncate extend: OK
-+getcwd takes a NULL argument: OK
-+Checking for small off_t: NO
-+Checking whether blkcnt_t is 32 bit: NO
-+Checking whether blkcnt_t is 64 bit: OK
-+Checking whether fcntl lock supports open file description locks: OK
-+Checking for a 64-bit host to support lmdb: OK
--- 
-2.30.2
+It should be BPN
 
+> +}
+> --
+> 2.25.1
+>
+>
+> 
+>
