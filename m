@@ -1,160 +1,238 @@
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.71])
- by mx.groups.io with SMTP id smtpd.web10.4781.1615672514885024274
+Received: from mail-vs1-f45.google.com (mail-vs1-f45.google.com [209.85.217.45])
+ by mx.groups.io with SMTP id smtpd.web09.5303.1615675038030129007
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Mar 2021 13:55:15 -0800
+ Sat, 13 Mar 2021 14:37:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=b4/jMgRW;
- spf=pass (domain: windriver.com, ip: 40.107.223.71, mailfrom: randy.macleod@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=czACwZxYpZQViT50TpuPFP1ML9joA3jmkxipV0IBIMBZG8DypnSd6k1N82sA/VKFsdlwfx2jFIqH5D5albB8j0ClYs3GPZl34jt1eCSrr0C+p+sdr7AQ6xuC9gsXNhY8BbomL/MAoWHgmG5maxVPlg204qp48SOPa+0UxeCb2SLI8CiPda2F4qWC1BM7s5I/jgY1LZhBjvjKd+7COUrHG0jezYUWJQM3yPyj3tZr1b4inl05ONWCWFPFvdF91jnkUai5LcFFtR+H7DJLacc3bdFXWE/dpo+Jl7nDbOaXpBzgtv+e8fIbsiL4EbQAnIOY8KhhJQ/PeVfOgroKqudY2Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=InSy4c1VhMuQ13DjoXq1iKycEojFfWXBHboomU5jc3E=;
- b=dqF9lT6Szxmc49PJJHlzeZ1wXltzFglBc27pfPiPAd8fynsNEHEJ5TO6bPXJJj6K53yn7xHOSGprd4VnVz/9VG1+RNiHM2pN4WVDjk6vjsVMLsTxZNl72CHuj8JPAeN5M+SP4Q9r15XabSqAXknTcDCB1SormJCmEU3RGpqRxAVEYkKklv4ir6lyyLlbqYXMf6x3QTsJXwkxRyP9+vyasbNBX1A8iLoofvuDPAkiZOgz5ooWx1aH+oZgqEuq2fRIWLbT+4CgqwmGO6V/sn3uPncJd9cj3RwGOmhYVORo9Fj8C7bR01fAiDpByJLs54mQNyFnnmdlP98W8iKNiH9Buw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=R80XQ1pJ;
+ spf=pass (domain: gmail.com, ip: 209.85.217.45, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-vs1-f45.google.com with SMTP id l27so14461609vsj.4
+        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Mar 2021 14:37:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=InSy4c1VhMuQ13DjoXq1iKycEojFfWXBHboomU5jc3E=;
- b=b4/jMgRWvUd6j2mQxCdGMJ+u851Zrq0QjuCTiUrN4wJVEpQMlYY1H4OBc/JCGgU0f5m21OHLhlIXTNS29ql4e9ljdduDYpJUIyfsDUZobY/LijGbIRe19zuqDzRsdseofUyDhsApFkdLZQpzlaYl8WHPd3gWJbR5342F1iheDOw=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from DM6PR11MB3994.namprd11.prod.outlook.com (2603:10b6:5:193::19)
- by DM6PR11MB3707.namprd11.prod.outlook.com (2603:10b6:5:144::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3933.32; Sat, 13 Mar
- 2021 21:55:12 +0000
-Received: from DM6PR11MB3994.namprd11.prod.outlook.com
- ([fe80::f17d:2de1:291f:80a9]) by DM6PR11MB3994.namprd11.prod.outlook.com
- ([fe80::f17d:2de1:291f:80a9%4]) with mapi id 15.20.3912.031; Sat, 13 Mar 2021
- 21:55:12 +0000
-Subject: Re: [oe] [PATCH 2/2] xterm: upgrade 362 -> 366
-To: openembedded-devel@lists.openembedded.org
-References: <20210313213415.396489-1-Randy.MacLeod@windriver.com>
- <166C0478E3069EA0.31886@lists.openembedded.org>
-From: "Randy MacLeod" <randy.macleod@windriver.com>
-Message-ID: <627f550c-32a8-96ef-59d3-0826d31d8c0d@windriver.com>
-Date: Sat, 13 Mar 2021 16:55:09 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.1
-In-Reply-To: <166C0478E3069EA0.31886@lists.openembedded.org>
-X-Originating-IP: [198.48.226.187]
-X-ClientProxiedBy: BYAPR11CA0061.namprd11.prod.outlook.com
- (2603:10b6:a03:80::38) To DM6PR11MB3994.namprd11.prod.outlook.com
- (2603:10b6:5:193::19)
-Return-Path: randy.macleod@windriver.com
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Ep9HKIlVUAFAdzNzGuQBgMoZcIx1ltxHZVGKufhv05k=;
+        b=R80XQ1pJ/qlS0kUrMhzDmQtDdbPT+4eeSEp0Z/A8+edld0dG24pXa/vfX8Ukm+V41q
+         voQUUtcH31vlvJjOwSbx3kYriDkbfhKG7EP/ngrk8xhaSGh52GNYjQww0xuhdSC3yaLd
+         Wu6xuXlqIoUBsnm7mpO6ldvJKVLUQ5ZwkJ+F2wKStBpfua3HbBAxvzS9jPMNEs619gUc
+         7ERlUhT/Dig5iJWPbQcsT5P0IEKdho34z5CZZn1IYt8PFTIjeDat1JzbOz8fl+LCaq4+
+         TSUA49GM94HxjRCTi/Z5GjYR413OZUjyqVEW2UrBTg7O+nCPYn9hOuIDoV1kc+B/fpem
+         vNjg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Ep9HKIlVUAFAdzNzGuQBgMoZcIx1ltxHZVGKufhv05k=;
+        b=WeD6GFiy2I0Z420U5dl7VYSyLV7jXrvYwXYjkn7bpkWVBMOnIOi9drP0R1gRhSlOyf
+         SfDDaEHulvH0IGiHzKKkqivLskw0+7Ehsw7IvWN8QyWm5bFr5yB498PY5VqTnbgsL/Ug
+         /1wHt7pKMo9+M9R5IpyXzj5dYVEtftBcsIKeUxOCKoVzdQZQ7hEAI1dKSSe5cTJxlgSl
+         bJQHHkSKVUgMO8I3yXLKcLuuaqFtqKyeWkmSmkqS2TYtM9Xp+w4GSP79rfQTHiC8/nJC
+         G+OlwdX2e/5Mo54gKOVFnakFpJVtEb0W6ks+NMkMBZxPFQQBjM3HTK8l9MaVCF4zcNFy
+         lWMw==
+X-Gm-Message-State: AOAM531nn9YUjNCrGnkwKQ6oaJbE5EU1RpMNjeSkpfluWgILw+RbpupC
+	q1wBQIZ30qwdVjr50JT/58h0dVdMTPB+hegmKtc=
+X-Google-Smtp-Source: ABdhPJwKJXcd3+PiuG8+kdcMJD6RGYycSfWaqjw4RWN6r5WKeyR2vGa2gL3+8jzlKR9yG91yhdkfaGAGVlkZlRWZXpc=
+X-Received: by 2002:a05:6102:74a:: with SMTP id v10mr1951836vsg.20.1615675037025;
+ Sat, 13 Mar 2021 14:37:17 -0800 (PST)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [172.25.44.2] (198.48.226.187) by BYAPR11CA0061.namprd11.prod.outlook.com (2603:10b6:a03:80::38) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3933.32 via Frontend Transport; Sat, 13 Mar 2021 21:55:11 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 9a8dbc43-d72f-454b-825a-08d8e66aad2d
-X-MS-TrafficTypeDiagnostic: DM6PR11MB3707:
-X-Microsoft-Antispam-PRVS: 
-	<DM6PR11MB37078F4F80CF77E96F88F2AEF86E9@DM6PR11MB3707.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:854;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	Y3P44MlZwOjcGF5nB+VSHTIJxaaTOGPiZ1m493mBN28ewxndvLleJlsyiBpfHoL0ys0tJO8hvl2qcBDXzWBMbyY7bci5hsfJgPbZtTdg9kHuFlHVyhr6AilQyFowl2fNzYvhM8kG7j5UTkAWEwiTaz5eCNsxMsu21JjIgE9fvRdJap87iE0tBf7lVjzEFNHVcnE5BzjoYXY6CQ+WevzoyqLKYb+cyUNOwYvUNBEsLSTsdaArJ/bHH+JlrD084M7GFWUPQLpZrOjp3n6Xv8C3/wZ0Gil2b2wx11kyemxybjvRGNGTftiica18b6eN1flqljhVAbrvyZPJWR/hEpiWDds2oDBsuiD/HCKhz/GSnoTT+IksgYEYtqbRyrWk843iKu+e7nD+LxlW7iYK887XqVmVH3CPRbnABw49ZV0OPK0W427khjTzcfS5KxIiV1Lfajv7odeBN3kA74IrgMi8/vAWUt1PTbERtUPUFu2c5c7wO0RMPSijET/++FsdESsfQMqp3crQYPB94kVpBGRsbHpDnRK+f/FPJ3vtdq4QRRu7xCW0n0xYOyfcKIk4PbvTQDONlvcy5UqRiQ1eJUEJzhYSe52goWQpI27gByufQZnYvc0HiuKllgktHWTlxoOKII1qYmCaPLtEyDgVkN5yXg==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3994.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(366004)(39830400003)(376002)(136003)(396003)(31696002)(8676002)(86362001)(956004)(2616005)(16576012)(186003)(2906002)(26005)(8936002)(31686004)(16526019)(52116002)(6916009)(66556008)(66476007)(36756003)(83380400001)(66946007)(478600001)(4744005)(6486002)(5660300002)(316002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?eFdVekhvcjJ6NnlTK3RQMG4yMDFzcjI4c2E5OHdOY2hIamptSmlxcmxDL2JZ?=
- =?utf-8?B?bGx4bkczbzBxUWVxUnZXNUh1SGRVdFlVcXBQNTdZMGZOd1Y3Rkc0d0Y3Q1VQ?=
- =?utf-8?B?MlF3emJQTllSeWlQTk5YaVQzR1hFdWFydnp3OFZBMUQwYm1kUitIMmZVVnQv?=
- =?utf-8?B?dk1WY3VKZXM3NjRXc2VrbUc2L3BESkFYaGJBMWxYWkN3KzA1dHJleHVvMDhE?=
- =?utf-8?B?bk80WVdxcnl2M3pCeUpVdkdvMnZ6SjdvZFBHL010N3RrRnYzYkp1cGVUTFNT?=
- =?utf-8?B?OGtxZ0p6TkFpNk1EMVFJcVIyQ3RrL01RSmNpUS8za2J0ZGVDYllxWlE4VFF3?=
- =?utf-8?B?ays1eW4yQklHZkNwcUF6ZGtFK092cW5iS1pNZEsvclA3MUlYbDd3Y1QyTjRv?=
- =?utf-8?B?Y0I1QnlPWWN6NkdQQmkzbkpBd0hRMVVkSVIwQjJuS1RaNTc4VGdlQ0NGVXhi?=
- =?utf-8?B?U2tvMGpvSDlrN2pBOUhkT2RYSkVpUHd5QW5JV1F1aGJ5akZrM1R5RGxWR3pJ?=
- =?utf-8?B?bHVxeHYxWE1Nb3hEblpxcjM0OTdONUM5TVFhY2tNSGpSVmRIMGR0UVVKNndz?=
- =?utf-8?B?bDZIZHFrb1hwK0dubHR4c3VQT0RDSG9IK1FkSmlPUC9ZbTEvQkpUNUtRSUd0?=
- =?utf-8?B?Q3d0MGx5M1JnZk5xRUtvT2tKZlQvdk5WREdtUWEwSUc2K3Q0eUlpQWV4OEk5?=
- =?utf-8?B?VlNqV0wrUm93OGxQRzM4bkJ1eGx6REg3U2Y1NDNnQ1pLc2ZoSm9OVWRJNlVw?=
- =?utf-8?B?T2p6R1A5bVlDckRrTmk1djMzOGd3MElLenJxZ0R4WFRQQW1qQy91czlRSGt2?=
- =?utf-8?B?WkRIMnRXbHFCNStFZ2xJalAxUE9QT0VpN0hoVkVoVmtMNUJnVmhMUXhDM1pI?=
- =?utf-8?B?azE0K25iYVkrYkJzZW1DbGdMUDlyeG1vVzNkYXZBQ29YNklEM2V0amt4MEhv?=
- =?utf-8?B?LzRUU2lBZnIvcktVQUIwVU1IR0pyNXpoY1NxTUhBZkhDZHk2OG90NnEvUURV?=
- =?utf-8?B?MUdSM2NWVWpxcURsNGx3U3JQZnR3R2FXSzFmSGhONEQ3QmpmNkZWTVFBVW4w?=
- =?utf-8?B?QkVHT2FJZnlRcWNrcjVGdkxGaTk4a0tvVGtONmQyTDdPMm5CWkRsajMxTUNK?=
- =?utf-8?B?SHUzaEVhUTdLdE9aSmtBdlJvTHpGMmpWMnUrdFY1ZUl3ZXNzR2F4ejFEckhZ?=
- =?utf-8?B?ZUZUbmRtUWJhbU91aFJSZ3QxQmVFNlAzNTZHSzVCRGpIN2ZFVU1yS3dXZVpl?=
- =?utf-8?B?c3U2YVFQUTl0ekdZZkNXSkhFZEgyTGFHQU53MFJ5dDMwUTQ3ZUxhdlZwZkFt?=
- =?utf-8?B?S21QUWNib2JieDVYRzlsUm1kTllBWno3Z3IzZlNIbEkzSm10dVNrMHNOa1hk?=
- =?utf-8?B?Ty8xbERZdUUvZ2tHSmUxWWpkVkdTV2dDenFKTmNFZE5VRmxJYjdiQ2tsOWNq?=
- =?utf-8?B?Ry9DdW1wdE44eCs5NGJkMlZTTEg3NWU1NHlBbHg0MGNpRStuQUszd1UxSno3?=
- =?utf-8?B?YjJLOG5FZ1VCWHZhZFhDK3JvY3JFa0pmVjE5aS9mdWN4aTd3SXp4ZDlBMUE0?=
- =?utf-8?B?STBBN0hpeHdPNUFUTnNTdnA2cUVHM1p6TTR0Wkl4VTA5R2I1UE4rTjQyNm1H?=
- =?utf-8?B?SXdreTRtbGtNRjdNcE9YUVlPYkdkanc2VWxHMFFrQnFIUEl1Qzk3azZHc3Zj?=
- =?utf-8?B?RFhzUDRnQ2JnMUwyZnF2T0pTcmNXamp4VUx4VmlEV0JTVnVHVW9CYzM3TFVl?=
- =?utf-8?Q?vb0uPXE+MmVgiPNb+VAeEZFWBawujsk3XKJWOs5?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9a8dbc43-d72f-454b-825a-08d8e66aad2d
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3994.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Mar 2021 21:55:12.0127
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: mnagcqoUKeJ/ApGEz1jFw06vvL7J1FxvJz4/pGV7t3xqNWQz6zkoAPVefT5JEFAGoeNFJHTDGIXPawhvsoc2wOePLQwiSPLDY6TQgsj07f4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB3707
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-CA
-Content-Transfer-Encoding: 7bit
+References: <20210313213415.396489-1-Randy.MacLeod@windriver.com>
+In-Reply-To: <20210313213415.396489-1-Randy.MacLeod@windriver.com>
+From: "Alexander Kanavin" <alex.kanavin@gmail.com>
+Date: Sat, 13 Mar 2021 23:37:05 +0100
+Message-ID: <CANNYZj9hdSLBmqsTSg0wW0Lb54QHyw1ms16TzQfafQeeU-OURw@mail.gmail.com>
+Subject: Re: [oe] [PATCH 1/2] zstd: upgrade 1.4.8 -> 1.4.9
+To: Randy MacLeod <randy.macleod@windriver.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000a78a0f05bd72a8a2"
 
-BUILDALL-QEMU LOG FOR xterm
-START TIME: 2021-03-13_11:26:07
-HOSTNAME: ala-lpggp3
-HOST OS: Ubuntu 18.04.3 LTS
-HOST KERNEL: 5.4.0-62-generic
-===============
-BUILD RESULTS:
-[glibc]
-PASS: qemuarmv5
-PASS: qemumips
-PASS: qemux86-64
-PASS: qemuarm64
-PASS: qemumips64
-PASS: qemuarm
-PASS: qemuppc
-PASS: qemuriscv64
-PASS: qemux86
-[musl]
-PASS: qemuarmv5
-PASS: qemumips
-PASS: qemux86-64
-PASS: qemuarm64
-PASS: qemumips64
-PASS: qemuarm
-PASS: qemuppc
-PASS: qemuriscv64
-PASS: qemux86
-===============
-PASSED: 18
-FAILED: 0
+--000000000000a78a0f05bd72a8a2
+Content-Type: text/plain; charset="UTF-8"
 
+Zstd has been added to oe-core I think? Somehow it wasn't removed from
+meta-oe :-/
 
+Alex
 
-root@qemux86-64:~# xterm -h | head
-XTerm(366) usage:
-     xterm [-options ...] [-e command args]
+On Sat, 13 Mar 2021 at 22:34, Randy MacLeod <randy.macleod@windriver.com>
+wrote:
 
-where options include:
-     -/+132                       turn on/off 80/132 column switching
-     -C                           intercept console messages
-     -Sccn                        slave mode on "ttycc", file descriptor "n"
-     -T string                    title name for window
-     -/+ah                        turn on/off always highlight
-     -/+ai                        turn off/on active icon
-root@qemux86-64:~#
+> Drop backported patch.
+>
+> CHANGELOG:
+>
+> v1.4.9  (Mar 1, 2021)
+> bug: Use `umask()` to Constrain Created File Permissions (#2495,
+> @felixhandte)
+> bug: Make Simple Single-Pass Functions Ignore Advanced Parameters (#2498,
+> @terrelln)
+> api: Add (De)Compression Tracing Functionality (#2482, @terrelln)
+> api: Support References to Multiple DDicts (#2446, @senhuang42)
+> api: Add Function to Generate Skippable Frame (#2439, @senhuang42)
+> perf: New Algorithms for the Long Distance Matcher (#2483, @mpu)
+> perf: Performance Improvements for Long Distance Matcher (#2464, @mpu)
+> perf: Don't Shrink Window Log when Streaming with a Dictionary (#2451,
+> @terrelln)
+> cli: Fix `--output-dir-mirror`'s Rejection of `..`-Containing Paths
+> (#2512, @felixhandte)
+> cli: Allow Input From Console When `-f`/`--force` is Passed (#2466,
+> @felixhandte)
+> cli: Improve Help Message (#2500, @senhuang42)
+> tests: Remove Flaky Tests (#2455, #2486, #2445, @Cyan4973)
+> tests: Correctly Invoke md5 Utility on NetBSD (#2492, @niacat)
+> tests: Avoid Using `stat -c` on NetBSD (#2513, @felixhandte)
+> build: Zstd CLI Can Now be Linked to Dynamic `libzstd` (#2457, #2454
+> @Cyan4973)
+> build: Hide and Avoid Using Static-Only Symbols (#2501, #2504, @skitt)
+> build: CMake: Enable Only C for lib/ and programs/ Projects (#2498,
+> @concatime)
+> build: CMake: Use `configure_file()` to Create the `.pc` File (#2462,
+> @lazka)
+> build: Fix Fuzzer Compiler Detection & Update UBSAN Flags (#2503,
+> @terrelln)
+> build: Add Guards for `_LARGEFILE_SOURCE` and `_LARGEFILE64_SOURCE`
+> (#2444, @indygreg)
+> build: Improve `zlibwrapper` Makefile (#2437, @Cyan4973)
+> contrib: Add `recover_directory` Program (#2473, @terrelln)
+> doc: Change License Year to 2021 (#2452 & #2465, @terrelln & @senhuang42)
+> doc: Fix Typos (#2459, @ThomasWaldmann)
+>
+> Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+> ---
+>  meta-oe/recipes-extended/zstd/{zstd_1.4.5.bb => zstd_1.4.9.bb} | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
+>  rename meta-oe/recipes-extended/zstd/{zstd_1.4.5.bb => zstd_1.4.9.bb}
+> (91%)
+>
+> diff --git a/meta-oe/recipes-extended/zstd/zstd_1.4.5.bb
+> b/meta-oe/recipes-extended/zstd/zstd_1.4.9.bb
+> similarity index 91%
+> rename from meta-oe/recipes-extended/zstd/zstd_1.4.5.bb
+> rename to meta-oe/recipes-extended/zstd/zstd_1.4.9.bb
+> index d0cc625aa..0063a31be 100644
+> --- a/meta-oe/recipes-extended/zstd/zstd_1.4.5.bb
+> +++ b/meta-oe/recipes-extended/zstd/zstd_1.4.9.bb
+> @@ -12,10 +12,9 @@ LIC_FILES_CHKSUM =
+> "file://LICENSE;md5=c7f0b161edbe52f5f345a3d1311d0b32 \
+>  inherit lib_package
+>
+>  SRC_URI = "git://github.com/facebook/zstd.git;nobranch=1 \
+> -           file://0001-Fix-legacy-build-after-2103.patch \
+>             "
+>
+> -SRCREV = "b706286adbba780006a47ef92df0ad7a785666b6"
+> +SRCREV = "e4558ffd1dc49399faf4ee5d85abed4386b4dcf5"
+>  UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+>
+>  S = "${WORKDIR}/git"
+> --
+> 2.27.0
+>
+>
+> 
+>
+>
 
--- 
-# Randy MacLeod
-# Wind River Linux
+--000000000000a78a0f05bd72a8a2
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Zstd has been added to oe-core I think? Somehow it wa=
+sn&#39;t removed from meta-oe :-/<br></div><div><br></div><div>Alex<br></di=
+v></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr=
+">On Sat, 13 Mar 2021 at 22:34, Randy MacLeod &lt;<a href=3D"mailto:randy.m=
+acleod@windriver.com">randy.macleod@windriver.com</a>&gt; wrote:<br></div><=
+blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-l=
+eft:1px solid rgb(204,204,204);padding-left:1ex">Drop backported patch.<br>
+<br>
+CHANGELOG:<br>
+<br>
+v1.4.9=C2=A0 (Mar 1, 2021)<br>
+bug: Use `umask()` to Constrain Created File Permissions (#2495, @felixhan=
+dte)<br>
+bug: Make Simple Single-Pass Functions Ignore Advanced Parameters (#2498, =
+@terrelln)<br>
+api: Add (De)Compression Tracing Functionality (#2482, @terrelln)<br>
+api: Support References to Multiple DDicts (#2446, @senhuang42)<br>
+api: Add Function to Generate Skippable Frame (#2439, @senhuang42)<br>
+perf: New Algorithms for the Long Distance Matcher (#2483, @mpu)<br>
+perf: Performance Improvements for Long Distance Matcher (#2464, @mpu)<br>
+perf: Don&#39;t Shrink Window Log when Streaming with a Dictionary (#2451,=
+ @terrelln)<br>
+cli: Fix `--output-dir-mirror`&#39;s Rejection of `..`-Containing Paths (#=
+2512, @felixhandte)<br>
+cli: Allow Input From Console When `-f`/`--force` is Passed (#2466, @felix=
+handte)<br>
+cli: Improve Help Message (#2500, @senhuang42)<br>
+tests: Remove Flaky Tests (#2455, #2486, #2445, @Cyan4973)<br>
+tests: Correctly Invoke md5 Utility on NetBSD (#2492, @niacat)<br>
+tests: Avoid Using `stat -c` on NetBSD (#2513, @felixhandte)<br>
+build: Zstd CLI Can Now be Linked to Dynamic `libzstd` (#2457, #2454 @Cyan=
+4973)<br>
+build: Hide and Avoid Using Static-Only Symbols (#2501, #2504, @skitt)<br>
+build: CMake: Enable Only C for lib/ and programs/ Projects (#2498, @conca=
+time)<br>
+build: CMake: Use `configure_file()` to Create the `.pc` File (#2462, @laz=
+ka)<br>
+build: Fix Fuzzer Compiler Detection &amp; Update UBSAN Flags (#2503, @ter=
+relln)<br>
+build: Add Guards for `_LARGEFILE_SOURCE` and `_LARGEFILE64_SOURCE` (#2444=
+, @indygreg)<br>
+build: Improve `zlibwrapper` Makefile (#2437, @Cyan4973)<br>
+contrib: Add `recover_directory` Program (#2473, @terrelln)<br>
+doc: Change License Year to 2021 (#2452 &amp; #2465, @terrelln &amp; @senh=
+uang42)<br>
+doc: Fix Typos (#2459, @ThomasWaldmann)<br>
+<br>
+Signed-off-by: Randy MacLeod &lt;<a href=3D"mailto:Randy.MacLeod@windriver=
+.com" target=3D"_blank">Randy.MacLeod@windriver.com</a>&gt;<br>
+---<br>
+=C2=A0meta-oe/recipes-extended/zstd/{<a href=3D"http://zstd_1.4.5.bb" rel=
+=3D"noreferrer" target=3D"_blank">zstd_1.4.5.bb</a> =3D&gt; <a href=3D"htt=
+p://zstd_1.4.9.bb" rel=3D"noreferrer" target=3D"_blank">zstd_1.4.9.bb</a>} =
+| 3 +--<br>
+=C2=A01 file changed, 1 insertion(+), 2 deletions(-)<br>
+=C2=A0rename meta-oe/recipes-extended/zstd/{<a href=3D"http://zstd_1.4.5.b=
+b" rel=3D"noreferrer" target=3D"_blank">zstd_1.4.5.bb</a> =3D&gt; <a href=
+=3D"http://zstd_1.4.9.bb" rel=3D"noreferrer" target=3D"_blank">zstd_1.4.9.=
+bb</a>} (91%)<br>
+<br>
+diff --git a/meta-oe/recipes-extended/zstd/<a href=3D"http://zstd_1.4.5.bb=
+" rel=3D"noreferrer" target=3D"_blank">zstd_1.4.5.bb</a> b/meta-oe/recipes-=
+extended/zstd/<a href=3D"http://zstd_1.4.9.bb" rel=3D"noreferrer" target=3D=
+"_blank">zstd_1.4.9.bb</a><br>
+similarity index 91%<br>
+rename from meta-oe/recipes-extended/zstd/<a href=3D"http://zstd_1.4.5.bb"=
+ rel=3D"noreferrer" target=3D"_blank">zstd_1.4.5.bb</a><br>
+rename to meta-oe/recipes-extended/zstd/<a href=3D"http://zstd_1.4.9.bb" r=
+el=3D"noreferrer" target=3D"_blank">zstd_1.4.9.bb</a><br>
+index d0cc625aa..0063a31be 100644<br>
+--- a/meta-oe/recipes-extended/zstd/<a href=3D"http://zstd_1.4.5.bb" rel=
+=3D"noreferrer" target=3D"_blank">zstd_1.4.5.bb</a><br>
++++ b/meta-oe/recipes-extended/zstd/<a href=3D"http://zstd_1.4.9.bb" rel=
+=3D"noreferrer" target=3D"_blank">zstd_1.4.9.bb</a><br>
+@@ -12,10 +12,9 @@ LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Dc7f0b16=
+1edbe52f5f345a3d1311d0b32 \<br>
+=C2=A0inherit lib_package<br>
+<br>
+=C2=A0SRC_URI =3D &quot;git://<a href=3D"http://github.com/facebook/zstd.g=
+it;nobranch=3D1" rel=3D"noreferrer" target=3D"_blank">github.com/facebook/z=
+std.git;nobranch=3D1</a> \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-Fix-legacy-build-aft=
+er-2103.patch \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
+<br>
+-SRCREV =3D &quot;b706286adbba780006a47ef92df0ad7a785666b6&quot;<br>
++SRCREV =3D &quot;e4558ffd1dc49399faf4ee5d85abed4386b4dcf5&quot;<br>
+=C2=A0UPSTREAM_CHECK_GITTAGREGEX =3D &quot;v(?P&lt;pver&gt;\d+(\.\d+)+)&qu=
+ot;<br>
+<br>
+=C2=A0S =3D &quot;${WORKDIR}/git&quot;<br>
+-- <br>
+2.27.0<br>
+<br>
+<br>
+<br>
+<br>
+</blockquote></div>
+
+--000000000000a78a0f05bd72a8a2--
