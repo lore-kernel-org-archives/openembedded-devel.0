@@ -1,97 +1,85 @@
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web11.3152.1615664225181495046
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web08.4511.1615671281886005841
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Mar 2021 11:37:05 -0800
+ Sat, 13 Mar 2021 13:34:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=g1yTtUu0;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id gb6so6799732pjb.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Mar 2021 11:37:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=8GssiFZC6RivbxPXGUdu/WpmtOKRMLASA9BZ5CkATJA=;
-        b=g1yTtUu0aOVlaC76OAf+ukl5ISH0pPA/8sqN7mclxMmUbrTZMdRWHeQNU2gpby5U0Q
-         W/nyPF2tR17ojAxxGZ1NeQEC0cyjpdpURABfV05KvokMJifyAHh3z4ysRi27xoJy+gxV
-         KNzXpH3sokNEAUfQn/L+Y/MFtWl4+Q+TCiZgB+J9ZcPh96gtV8cI/S3qTOKD0qF/r0ih
-         NVFYh5nZcIxBO2lwaL771q7yMP6rUEwfhfS4RBAITaMcn+bQDynoz0NaR7uYZd83Jmeb
-         68DJslwqoxIJ9T5WbJxkHpbDI2/WfOlDIcnNfyyMKQ2P2q8DE/XlXIID2DprcWLWvf1U
-         BtkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=8GssiFZC6RivbxPXGUdu/WpmtOKRMLASA9BZ5CkATJA=;
-        b=f3fVFoDpUqC+pzl5bbqXMvUoRP3lXdUkz4k8dbCgwVhpbo0aEHrGfwj+NFcQuuTrvs
-         zMwzK0Wy/PVBXVCLp4YlJAKnByHsLmMaJT6LGPOqi3EB7fkyy2tdudR42ueY0mhsPps2
-         lVO8mcMkBpQ+UJUV6q4kf+VnAGVy8RmESozNYGarWzJLfSH7LFgbvKx/hM6mWQw4E+7N
-         njrgut3LggVnMXfcIA2wXeCrDWH2+k0WnfxsH0yPwoOMJerdldpqHdDQfCXSGwguxT6D
-         WoM9zlBuOREQLRXRdSJWiuPqybxFelEgH4Yefs93AINh2WQhrodghEbfR+5QeAyQ0UkG
-         XtsA==
-X-Gm-Message-State: AOAM5328YsHAkXkTv2JZ/twO7zKFsef+5buq5nzEM/662rY6ScKLzLP8
-	UW8wZY3ObNKGJ3dYXYz0xiC6ALX9fEZ+Jw==
-X-Google-Smtp-Source: ABdhPJwdK+r25UifS5rvlr17vVqfRhcCK8ipw6UJcRaQFDztsdY/JNJwDZACN7GMpAQ+Y3Hmgq1+pw==
-X-Received: by 2002:a17:90a:8908:: with SMTP id u8mr4800629pjn.135.1615664224474;
-        Sat, 13 Mar 2021 11:37:04 -0800 (PST)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::c2dd])
-        by smtp.gmail.com with ESMTPSA id c72sm9135522pfb.165.2021.03.13.11.37.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 13 Mar 2021 11:37:04 -0800 (PST)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] mongodb: Fix build on ppc64le
-Date: Sat, 13 Mar 2021 11:37:01 -0800
-Message-Id: <20210313193701.511004-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.2
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: randy.macleod@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 12DLYOs9026220
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Sat, 13 Mar 2021 13:34:32 -0800 (PST)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2106.2; Sat, 13 Mar 2021 13:34:16 -0800
+Received: from vme.wrs.com (172.25.44.2) by ala-exchng01.corp.ad.wrs.com
+ (147.11.82.252) with Microsoft SMTP Server id 15.1.2106.2 via Frontend
+ Transport; Sat, 13 Mar 2021 13:34:15 -0800
+From: "Randy MacLeod" <randy.macleod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH 1/2] zstd: upgrade 1.4.8 -> 1.4.9
+Date: Sat, 13 Mar 2021 16:34:14 -0500
+Message-ID: <20210313213415.396489-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Drop backported patch.
+
+CHANGELOG:
+
+v1.4.9  (Mar 1, 2021)
+bug: Use `umask()` to Constrain Created File Permissions (#2495, @felixhandte)
+bug: Make Simple Single-Pass Functions Ignore Advanced Parameters (#2498, @terrelln)
+api: Add (De)Compression Tracing Functionality (#2482, @terrelln)
+api: Support References to Multiple DDicts (#2446, @senhuang42)
+api: Add Function to Generate Skippable Frame (#2439, @senhuang42)
+perf: New Algorithms for the Long Distance Matcher (#2483, @mpu)
+perf: Performance Improvements for Long Distance Matcher (#2464, @mpu)
+perf: Don't Shrink Window Log when Streaming with a Dictionary (#2451, @terrelln)
+cli: Fix `--output-dir-mirror`'s Rejection of `..`-Containing Paths (#2512, @felixhandte)
+cli: Allow Input From Console When `-f`/`--force` is Passed (#2466, @felixhandte)
+cli: Improve Help Message (#2500, @senhuang42)
+tests: Remove Flaky Tests (#2455, #2486, #2445, @Cyan4973)
+tests: Correctly Invoke md5 Utility on NetBSD (#2492, @niacat)
+tests: Avoid Using `stat -c` on NetBSD (#2513, @felixhandte)
+build: Zstd CLI Can Now be Linked to Dynamic `libzstd` (#2457, #2454 @Cyan4973)
+build: Hide and Avoid Using Static-Only Symbols (#2501, #2504, @skitt)
+build: CMake: Enable Only C for lib/ and programs/ Projects (#2498, @concatime)
+build: CMake: Use `configure_file()` to Create the `.pc` File (#2462, @lazka)
+build: Fix Fuzzer Compiler Detection & Update UBSAN Flags (#2503, @terrelln)
+build: Add Guards for `_LARGEFILE_SOURCE` and `_LARGEFILE64_SOURCE` (#2444, @indygreg)
+build: Improve `zlibwrapper` Makefile (#2437, @Cyan4973)
+contrib: Add `recover_directory` Program (#2473, @terrelln)
+doc: Change License Year to 2021 (#2452 & #2465, @terrelln & @senhuang42)
+doc: Fix Typos (#2459, @ThomasWaldmann)
+
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
 ---
- .../mongodb/mongodb/ppc64_ARCH_BITS.patch      | 18 ++++++++++++++++++
- .../recipes-dbs/mongodb/mongodb_git.bb         |  1 +
- 2 files changed, 19 insertions(+)
- create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/ppc64_ARCH_BITS.patch
+ meta-oe/recipes-extended/zstd/{zstd_1.4.5.bb => zstd_1.4.9.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-extended/zstd/{zstd_1.4.5.bb => zstd_1.4.9.bb} (91%)
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/ppc64_ARCH_BITS.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/ppc64_ARCH_BITS.patch
-new file mode 100644
-index 0000000000..471d5629a1
---- /dev/null
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/ppc64_ARCH_BITS.patch
-@@ -0,0 +1,18 @@
-+Subject: [PATCH] stacktrace: Define ARCH_BITS for ppc64
-+
-+src/mongo/util/stacktrace_somap.cpp:89:2: error: #error Unknown target architecture.
-+stacktrace_somap.cpp:92:33: error: 'ELFCLASSARCH_BITS' was not declared in this scope
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+--- a/src/mongo/util/stacktrace_somap.cpp
-++++ b/src/mongo/util/stacktrace_somap.cpp
-+@@ -81,7 +81,7 @@ void addUnameToSoMap(BSONObjBuilder* soM
-+ 
-+ #if defined(__ELF_NATIVE_CLASS)  // determine ARCH_BITS
-+ #define ARCH_BITS __ELF_NATIVE_CLASS
-+-#elif defined(__x86_64__) || defined(__aarch64__)
-++#elif defined(__x86_64__) || defined(__aarch64__)  || defined(__powerpc64__)
-+ #define ARCH_BITS 64
-+ #elif defined(__i386__) || defined(__arm__)
-+ #define ARCH_BITS 32
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-index 3214918db8..b78255a049 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-@@ -29,6 +29,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4 \
-            file://0001-stacktrace-Define-ARCH_BITS-for-x86.patch \
-            file://0001-include-needed-c-header.patch \
-            file://disable_runtime_check.patch \
-+           file://ppc64_ARCH_BITS.patch \
+diff --git a/meta-oe/recipes-extended/zstd/zstd_1.4.5.bb b/meta-oe/recipes-extended/zstd/zstd_1.4.9.bb
+similarity index 91%
+rename from meta-oe/recipes-extended/zstd/zstd_1.4.5.bb
+rename to meta-oe/recipes-extended/zstd/zstd_1.4.9.bb
+index d0cc625aa..0063a31be 100644
+--- a/meta-oe/recipes-extended/zstd/zstd_1.4.5.bb
++++ b/meta-oe/recipes-extended/zstd/zstd_1.4.9.bb
+@@ -12,10 +12,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c7f0b161edbe52f5f345a3d1311d0b32 \
+ inherit lib_package
+ 
+ SRC_URI = "git://github.com/facebook/zstd.git;nobranch=1 \
+-           file://0001-Fix-legacy-build-after-2103.patch \
             "
- SRC_URI_append_libc-musl ="\
-            file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
+ 
+-SRCREV = "b706286adbba780006a47ef92df0ad7a785666b6"
++SRCREV = "e4558ffd1dc49399faf4ee5d85abed4386b4dcf5"
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ 
+ S = "${WORKDIR}/git"
 -- 
-2.30.2
+2.27.0
 
