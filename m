@@ -1,173 +1,104 @@
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web10.2319.1615660250799937235
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
+ by mx.groups.io with SMTP id smtpd.web09.2255.1615660251633903753
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Mar 2021 10:30:50 -0800
+ Sat, 13 Mar 2021 10:30:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Y4Wezn/T;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id lr1-20020a17090b4b81b02900ea0a3f38c1so563150pjb.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Mar 2021 10:30:50 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=J4BkowZU;
+ spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f169.google.com with SMTP id p21so17950629pgl.12
+        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Mar 2021 10:30:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=+0DbDrX+/gklLn6GcsMKCPPEjp4x+cerZBYT+HXOZjg=;
-        b=Y4Wezn/Th1tZQEPa4eaVpnlOyt2eyJMQrdYTnix/3qFOgdNoKbRLUKTHso8FB3BzXB
-         7PSG7XKwDAKFInKcD/sMZKYJri4RxjGz6XodBgbwAuZAQ7xlEUVK/MXgBdGESqTJWc3L
-         uQLwtcFcSQxlf6TlV7F9C2c6BtK0/hL3fEyZyo9SEG7pcWuAvlh+q6v/o6w6Y3DPsDup
-         xPKi0Snta1w6fcNPW2aDbCuGarqbt8XSOd9vON4neor4Nq2RtN5EX7eeApLWiol4wReJ
-         fb0XPCKu29jVyCZnKAl22i0m+Xjx6hedsq5pGuZEjABaTGZfsZMpmjdewIMnxauSC11o
-         5BVg==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=2snidSZwYOnxGfP2YORn1XgMRbHzgedlYxvGgHBMf+8=;
+        b=J4BkowZU6EkFLx/8M3zxiiMGvoLaeyhVhNuSRB/cf2rX5roWde7qoxQkjMB5XBmww8
+         hNBZE6BhiPd8fTHp/E24PZEmEWH08+o4fdFT607mFBrlaY3NDjqpuwD+PQagdBY3dS6T
+         +n62JgS5zcrDXhM06VXjy1E4xTE5xeGovJHCHp3jZZwePiDmRqbcwuSg8drQ6RD0mbT2
+         yjzk6ItKAZXhUSID1J4Wv1LaMfof+NSu+PulqOTsMpw7tu1i5OPMFhUTS6h8E10aYZPQ
+         3eFj6GHK9sxmjQ+F95Z9WWrkStEXe31L6XJToNAYnw7bo7bIcsJP0UbnlpRKxXRQ+H9r
+         murA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=+0DbDrX+/gklLn6GcsMKCPPEjp4x+cerZBYT+HXOZjg=;
-        b=o+ql+/vMzFtHLjQjIb5VSmUmrFGzPXaMPrD/F8f8Is/rSFFr7SKUbFYa5aUiJveCpj
-         2coqJfKKgdo/GVzgdBDof24Hd09HgeTzASj9TKYWcoJA0oytnStS0gQdbkX0lyOySh5x
-         9EaN4Fz4poJJPPpD/x6zenyv98SxmmfycH74VaNZp3mfIfcu2GPmoP8KJ3rULpGOhlM4
-         JPndJgHJZlPOUTf7eKxbBLwOkkzNKShgVflSw//bcOxTyriYR3l5CSfHFpu06GMKmDXK
-         GsscZF9oQ9qvcUTfwKaRSxFuYtTnHH9ITJFArmky8oW34VWy4ntBgKZjUagInf2E7FT4
-         v+bQ==
-X-Gm-Message-State: AOAM531hU5VswRcl6qGradYg/9p0iNlKbD9WJTH/J+LFUgHIDg/NiG2K
-	cOngvLgC1aHRJ/fMQZG4vUC1l8T04N4Xow==
-X-Google-Smtp-Source: ABdhPJwjD8raebyuad+G/+jnNDJKoqw73pgmG0m46kozo8oI2sCaPvXfUs1QGjnthh+rJRir7XJFDg==
-X-Received: by 2002:a17:90a:1696:: with SMTP id o22mr4671722pja.0.1615660249997;
-        Sat, 13 Mar 2021 10:30:49 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=2snidSZwYOnxGfP2YORn1XgMRbHzgedlYxvGgHBMf+8=;
+        b=Na3nWgmUwWextYwO8TXQzcqvDq0J+g3IGUFwX8DGR6nRuO3dwqHifATvmITDcqeqNP
+         XlSpHo2e+v37/Y2nkfxMEabTUjBund3oDgKSxfGgn8ZnooHSVplquQ9/RKiMkJBJoWY4
+         VY1dBPgqTGhLpvQQFiXZKYJ8aKWiGZoZ6gE9OKiC8DoD+c3hB6+YjpkaV3cZFYF6QkJF
+         nW0q71hxv9UBt4h3PKRJYcc/R5GUO7uCssfB3Vfk3/18VjrAYF/tZrfF/B6z5nOeDHcn
+         SdIW0X668ly/JQaZniA+QJglIslCi4kN09o/lGZGK5jnF5yQcuqweRPYl2Cb+8SDcXjz
+         s2JQ==
+X-Gm-Message-State: AOAM531Ys69/FVrIcKpYgHfqzGsKaUFTA7Iu+21qzuhYxjIgsQTUv5dF
+	qdSxG50AYABnvvjVwr3LtGXNRCvEQMGxtw==
+X-Google-Smtp-Source: ABdhPJxqhOaH3yY2ej030nPapHWeEoIpbNPZjHxfG1d/upG8wowBCqONETD617N82C6avAHZkhne0g==
+X-Received: by 2002:aa7:991a:0:b029:201:b736:c556 with SMTP id z26-20020aa7991a0000b0290201b736c556mr3731608pff.8.1615660250781;
+        Sat, 13 Mar 2021 10:30:50 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::c2dd])
-        by smtp.gmail.com with ESMTPSA id y7sm5915317pja.25.2021.03.13.10.30.49
+        by smtp.gmail.com with ESMTPSA id y7sm5915317pja.25.2021.03.13.10.30.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 13 Mar 2021 10:30:49 -0800 (PST)
+        Sat, 13 Mar 2021 10:30:50 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/2] abseil-cpp: Fix build on musl and ppc64
-Date: Sat, 13 Mar 2021 10:30:46 -0800
-Message-Id: <20210313183047.402000-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 2/2] python3-grpcio,python3-grpcio-tools: Enable build on ppc64/glibc
+Date: Sat, 13 Mar 2021 10:30:47 -0800
+Message-Id: <20210313183047.402000-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20210313183047.402000-1-raj.khem@gmail.com>
+References: <20210313183047.402000-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+We can compile abseil-cpp now for ppc64
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../abseil-cpp/abseil-ppc-fixes.patch         | 94 +++++++++++++++++++
- .../abseil-cpp/abseil-cpp_git.bb              |  1 +
- 2 files changed, 95 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/abseil-ppc-fixes.patch
+ .../recipes-core/packagegroups/packagegroup-meta-python.bb    | 2 +-
+ .../recipes-devtools/python/python3-grpcio-tools_1.35.0.bb    | 4 ++--
+ meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb  | 4 ++--
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/abseil-ppc-fixes.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/abseil-ppc-fixes.patch
-new file mode 100644
-index 0000000000..ee0c25473b
---- /dev/null
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/abseil-ppc-fixes.patch
-@@ -0,0 +1,94 @@
-+An all-in-one patch that fixes several issues:
-+
-+1) UnscaledCycleClock not fully implemented for ppc*-musl (disabled on musl)
-+2) powerpc stacktrace implementation only works on glibc (disabled on musl)
-+3) powerpc stacktrace implementation has ppc64 assumptions (fixed)
-+4) examine_stack.cpp makes glibc assumptions on powerpc (fixed)
-+
-+Sourced from void linux
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+--- a/absl/base/internal/unscaledcycleclock.cc
-++++ b/absl/base/internal/unscaledcycleclock.cc
-+@@ -20,7 +20,7 @@
-+ #include <intrin.h>
-+ #endif
-+ 
-+-#if defined(__powerpc__) || defined(__ppc__)
-++#if (defined(__powerpc__) || defined(__ppc__)) && defined(__GLIBC__)
-+ #ifdef __GLIBC__
-+ #include <sys/platform/ppc.h>
-+ #elif defined(__FreeBSD__)
-+@@ -59,7 +59,7 @@ double UnscaledCycleClock::Frequency() {
-+   return base_internal::NominalCPUFrequency();
-+ }
-+ 
-+-#elif defined(__powerpc__) || defined(__ppc__)
-++#elif (defined(__powerpc__) || defined(__ppc__)) && defined(__GLIBC__)
-+ 
-+ int64_t UnscaledCycleClock::Now() {
-+ #ifdef __GLIBC__
-+--- a/absl/base/internal/unscaledcycleclock.h
-++++ b/absl/base/internal/unscaledcycleclock.h
-+@@ -46,7 +46,7 @@
-+ 
-+ // The following platforms have an implementation of a hardware counter.
-+ #if defined(__i386__) || defined(__x86_64__) || defined(__aarch64__) || \
-+-  defined(__powerpc__) || defined(__ppc__) || \
-++  ((defined(__powerpc__) || defined(__ppc__)) && defined(__GLIBC__)) || \
-+   defined(_M_IX86) || defined(_M_X64)
-+ #define ABSL_HAVE_UNSCALED_CYCLECLOCK_IMPLEMENTATION 1
-+ #else
-+--- a/absl/debugging/internal/examine_stack.cc
-++++ b/absl/debugging/internal/examine_stack.cc
-+@@ -27,6 +27,10 @@
-+ #include <csignal>
-+ #include <cstdio>
-+ 
-++#if defined(__powerpc__)
-++#include <asm/ptrace.h>
-++#endif
-++
-+ #include "absl/base/attributes.h"
-+ #include "absl/base/internal/raw_logging.h"
-+ #include "absl/base/macros.h"
-+@@ -55,8 +59,10 @@ void* GetProgramCounter(void* vuc) {
-+     return reinterpret_cast<void*>(context->uc_mcontext.pc);
-+ #elif defined(__powerpc64__)
-+     return reinterpret_cast<void*>(context->uc_mcontext.gp_regs[32]);
-+-#elif defined(__powerpc__)
-++#elif defined(__powerpc__) && defined(__GLIBC__)
-+     return reinterpret_cast<void*>(context->uc_mcontext.regs->nip);
-++#elif defined(__powerpc__)
-++    return reinterpret_cast<void*>(((struct pt_regs *)context->uc_regs)->nip);
-+ #elif defined(__riscv)
-+     return reinterpret_cast<void*>(context->uc_mcontext.__gregs[REG_PC]);
-+ #elif defined(__s390__) && !defined(__s390x__)
-+--- a/absl/debugging/internal/stacktrace_config.h
-++++ b/absl/debugging/internal/stacktrace_config.h
-+@@ -64,7 +64,7 @@
-+ #elif defined(__i386__) || defined(__x86_64__)
-+ #define ABSL_STACKTRACE_INL_HEADER \
-+   "absl/debugging/internal/stacktrace_x86-inl.inc"
-+-#elif defined(__ppc__) || defined(__PPC__)
-++#elif (defined(__ppc__) || defined(__PPC__)) && defined(__GLIBC__)
-+ #define ABSL_STACKTRACE_INL_HEADER \
-+   "absl/debugging/internal/stacktrace_powerpc-inl.inc"
-+ #elif defined(__aarch64__)
-+--- a/absl/debugging/internal/stacktrace_powerpc-inl.inc
-++++ b/absl/debugging/internal/stacktrace_powerpc-inl.inc
-+@@ -130,8 +130,13 @@ static void **NextStackFrame(void **old_
-+         StacktracePowerPCGetLR(new_sp) == kernel_sigtramp_rt64_address) {
-+       const ucontext_t* signal_context =
-+           reinterpret_cast<const ucontext_t*>(uc);
-++#if defined(__powerpc64__)
-+       void **const sp_before_signal =
-+           reinterpret_cast<void**>(signal_context->uc_mcontext.gp_regs[PT_R1]);
-++#else
-++      void **const sp_before_signal =
-++          reinterpret_cast<void**>(signal_context->uc_mcontext.uc_regs->gregs[PT_R1]);
-++#endif
-+       // Check that alleged sp before signal is nonnull and is reasonably
-+       // aligned.
-+       if (sp_before_signal != nullptr &&
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-index 6a1a029566..b944b3c15e 100644
---- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-@@ -13,6 +13,7 @@ BRANCH = "lts_2020_09_23"
- SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH}         \
-            file://0001-absl-always-use-asm-sgidefs.h.patch             \
-            file://0002-Remove-maes-option-from-cross-compilation.patch \
-+           file://file://abseil-ppc-fixes.patch \
-           "
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index df4fcc8826..c6ac19a225 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -449,7 +449,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
+     python3-zopeinterface \
+     telepathy-python3 \
+ "
+-RDEPENDS_packagegroup-meta-python3_remove_powerpc64le = "python3-grpcio python3-grpcio-tools"
++RDEPENDS_packagegroup-meta-python3_remove_libc-musl_powerpc64le = "python3-grpcio python3-grpcio-tools"
  
- S = "${WORKDIR}/git"
+ RDEPENDS_packagegroup-meta-python3-ptest = "\
+     python3-cryptography-ptest \
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.35.0.bb b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.35.0.bb
+index 475b4e6063..6758429aef 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.35.0.bb
++++ b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.35.0.bb
+@@ -17,6 +17,6 @@ RDEPENDS_${PN} = "${PYTHON_PN}-grpcio"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+ 
+-# Needs python3-grpcio which does not build for ppc64le
+-COMPATIBLE_HOST_powerpc64le = "null"
++# Needs abseil-cpp which does not build for ppc64le/musl
++COMPATIBLE_HOST_libc-musl_powerpc64le = "null"
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
+index fa030b99e2..13cef537e2 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
++++ b/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
+@@ -44,6 +44,6 @@ BBCLASSEXTEND = "native nativesdk"
+ 
+ CCACHE_DISABLE = "1"
+ 
+-# abseil-cpp/absl/base/internal/unscaledcycleclock.cc:100:2: error: #error Must implement UnscaledCycleClock::Frequency()
+-COMPATIBLE_HOST_powerpc64le = "null"
++# needs vdso support
++COMPATIBLE_HOST_libc-musl_powerpc64le = "null"
+ 
 -- 
 2.30.2
 
