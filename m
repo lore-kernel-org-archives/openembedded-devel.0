@@ -1,130 +1,97 @@
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
- by mx.groups.io with SMTP id smtpd.web10.2601.1615661519809302803
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web11.3152.1615664225181495046
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Mar 2021 10:51:59 -0800
+ Sat, 13 Mar 2021 11:37:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=XC7qktwI;
- spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f172.google.com with SMTP id x21so2745551pfa.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Mar 2021 10:51:59 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=g1yTtUu0;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id gb6so6799732pjb.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Mar 2021 11:37:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=fd1SQ5qKv2RDP4qX/tl6IUm2rhu/j9xcvmIrF+oICPU=;
-        b=XC7qktwIAqU/5467R/Nm8Fd83eAOQFcIxT4KAHAfNl6gf2zXhOfexvOSaD+M5uZZ96
-         pVvwTAVEghLtqQKHyJnSZMQmkblIeuSiw3X8JdkDjtEPFXzvlOQvsvk47PtlMf+lmIl/
-         gzTtjlVHLjokLO6wFIrMBTpsBq8RFkkn5yg3LUBq9RSShycHcg1VQG3fymyUr5Bl+V31
-         bkD9HWWTYOXYQtx21bUmzmF+LubcOnSCOZcPwLV0AJMKaPvcvDEDVFfU+0Y12RIOqMaA
-         HcTU+eSH8Jp/+As36rRyVJL2Ua5yxmjuQ3ohmghy4AitQ7Haw5Ub85JbiUC2WqNhFk+c
-         MQsA==
+        bh=8GssiFZC6RivbxPXGUdu/WpmtOKRMLASA9BZ5CkATJA=;
+        b=g1yTtUu0aOVlaC76OAf+ukl5ISH0pPA/8sqN7mclxMmUbrTZMdRWHeQNU2gpby5U0Q
+         W/nyPF2tR17ojAxxGZ1NeQEC0cyjpdpURABfV05KvokMJifyAHh3z4ysRi27xoJy+gxV
+         KNzXpH3sokNEAUfQn/L+Y/MFtWl4+Q+TCiZgB+J9ZcPh96gtV8cI/S3qTOKD0qF/r0ih
+         NVFYh5nZcIxBO2lwaL771q7yMP6rUEwfhfS4RBAITaMcn+bQDynoz0NaR7uYZd83Jmeb
+         68DJslwqoxIJ9T5WbJxkHpbDI2/WfOlDIcnNfyyMKQ2P2q8DE/XlXIID2DprcWLWvf1U
+         BtkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=fd1SQ5qKv2RDP4qX/tl6IUm2rhu/j9xcvmIrF+oICPU=;
-        b=XB5f/Jbs7iAPhHtw5nKN8zsWn58EjEYzND2lvO33LixMmaslsRIwzbdjkgMK1DEDio
-         Cbxy0X4LxqPsOCx8lvD4/OddSLeJnJNLhmnzOR+c5A9yieFpwjnvS120t+CBtr+foFEg
-         Wf1VZs1Cpj7JrshRkfSicg1JVPErr6zln7kgSXIg24EslhiqKjio0cm2q/r39nu9IlaD
-         qwkb4cvHT/Fz55gfs5M9wdP/UeEAwlOoL2mcP+5aAUNykjUTKPjql+LxUHRlH2x1tpyD
-         YpgmZ4+SPRhnPsVnlUIZkXMYu1KjDVKnT3zV2Nj3fHo6CUZpSOXk/mXAldFXLFqOIITL
-         Rrqg==
-X-Gm-Message-State: AOAM533OL+/Z+r6P/sosntxT/BEpNwyn+aqNKDQjknklEtl7K7wqf8yt
-	Lsy9M7u/99lBjsGXsVS7RY3knII1cD+VLQ==
-X-Google-Smtp-Source: ABdhPJy2YuenYMjn9Ngtz+U1JJFtRCIb0uOJ6QqsScxzIwKIZfDoBt2GoBRA9JnKSkpM4LNXrirPWQ==
-X-Received: by 2002:a62:bd05:0:b029:1ab:6d2:5edf with SMTP id a5-20020a62bd050000b02901ab06d25edfmr3785801pff.32.1615661519021;
-        Sat, 13 Mar 2021 10:51:59 -0800 (PST)
+        bh=8GssiFZC6RivbxPXGUdu/WpmtOKRMLASA9BZ5CkATJA=;
+        b=f3fVFoDpUqC+pzl5bbqXMvUoRP3lXdUkz4k8dbCgwVhpbo0aEHrGfwj+NFcQuuTrvs
+         zMwzK0Wy/PVBXVCLp4YlJAKnByHsLmMaJT6LGPOqi3EB7fkyy2tdudR42ueY0mhsPps2
+         lVO8mcMkBpQ+UJUV6q4kf+VnAGVy8RmESozNYGarWzJLfSH7LFgbvKx/hM6mWQw4E+7N
+         njrgut3LggVnMXfcIA2wXeCrDWH2+k0WnfxsH0yPwoOMJerdldpqHdDQfCXSGwguxT6D
+         WoM9zlBuOREQLRXRdSJWiuPqybxFelEgH4Yefs93AINh2WQhrodghEbfR+5QeAyQ0UkG
+         XtsA==
+X-Gm-Message-State: AOAM5328YsHAkXkTv2JZ/twO7zKFsef+5buq5nzEM/662rY6ScKLzLP8
+	UW8wZY3ObNKGJ3dYXYz0xiC6ALX9fEZ+Jw==
+X-Google-Smtp-Source: ABdhPJwdK+r25UifS5rvlr17vVqfRhcCK8ipw6UJcRaQFDztsdY/JNJwDZACN7GMpAQ+Y3Hmgq1+pw==
+X-Received: by 2002:a17:90a:8908:: with SMTP id u8mr4800629pjn.135.1615664224474;
+        Sat, 13 Mar 2021 11:37:04 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::c2dd])
-        by smtp.gmail.com with ESMTPSA id y9sm6047021pja.50.2021.03.13.10.51.58
+        by smtp.gmail.com with ESMTPSA id c72sm9135522pfb.165.2021.03.13.11.37.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 13 Mar 2021 10:51:58 -0800 (PST)
+        Sat, 13 Mar 2021 11:37:04 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] mariadb: Fix build on musl/ppc
-Date: Sat, 13 Mar 2021 10:51:56 -0800
-Message-Id: <20210313185156.452218-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] mongodb: Fix build on ppc64le
+Date: Sat, 13 Mar 2021 11:37:01 -0800
+Message-Id: <20210313193701.511004-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-dbs/mysql/mariadb.inc         |  2 +
- .../mysql/mariadb/ppc-remove-glibc-dep.patch  | 50 +++++++++++++++++++
- 2 files changed, 52 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
+ .../mongodb/mongodb/ppc64_ARCH_BITS.patch      | 18 ++++++++++++++++++
+ .../recipes-dbs/mongodb/mongodb_git.bb         |  1 +
+ 2 files changed, 19 insertions(+)
+ create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/ppc64_ARCH_BITS.patch
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 27eede6c30..1fbcb71427 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -22,6 +22,8 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
-            file://0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch \
-            file://0001-stacktrace-t.c-make-the-test-conditional.patch \
-           "
-+SRC_URI_append_libc-musl = " file://ppc-remove-glibc-dep.patch"
-+
- SRC_URI[sha256sum] = "eb4824f6f2c532cd3fc6a6bce7bf78ea7c6b949f8bdd07656b2c84344e757be8"
- 
- UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch b/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/ppc64_ARCH_BITS.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/ppc64_ARCH_BITS.patch
 new file mode 100644
-index 0000000000..1ca86bcca2
+index 0000000000..471d5629a1
 --- /dev/null
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
-@@ -0,0 +1,50 @@
-+Remove glibc specific function dependencies
++++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/ppc64_ARCH_BITS.patch
+@@ -0,0 +1,18 @@
++Subject: [PATCH] stacktrace: Define ARCH_BITS for ppc64
 +
-+Sourced from: https://git.alpinelinux.org/aports/tree/main/mariadb/ppc-remove-glibc-dep.patch
++src/mongo/util/stacktrace_somap.cpp:89:2: error: #error Unknown target architecture.
++stacktrace_somap.cpp:92:33: error: 'ELFCLASSARCH_BITS' was not declared in this scope
++
++Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+--- a/include/my_cpu.h
-++++ b/include/my_cpu.h
-+@@ -24,17 +24,16 @@
-+ */
++--- a/src/mongo/util/stacktrace_somap.cpp
+++++ b/src/mongo/util/stacktrace_somap.cpp
++@@ -81,7 +81,7 @@ void addUnameToSoMap(BSONObjBuilder* soM
 + 
-+ #ifdef _ARCH_PWR8
-+-#include <sys/platform/ppc.h>
-+ /* Very low priority */
-+-#define HMT_very_low() __ppc_set_ppr_very_low()
-++#define HMT_very_low() asm volatile("or 31,31,31")
-+ /* Low priority */
-+-#define HMT_low() __ppc_set_ppr_low()
-++#define HMT_low() asm volatile ("or 1,1,1")
-+ /* Medium low priority */
-+-#define HMT_medium_low() __ppc_set_ppr_med_low()
-++#define HMT_medium_low() asm volatile ("or 6,6,6")
-+ /* Medium priority */
-+-#define HMT_medium() __ppc_set_ppr_med()
-++#define HMT_medium() asm volatile ("or 2,2,2")
-+ /* Medium high priority */
-+-#define HMT_medium_high() __ppc_set_ppr_med_high()
-++#define HMT_medium_high() asm volatile("or 5,5,5")
-+ /* High priority */
-+ #define HMT_high() asm volatile("or 3,3,3")
-+ #else
-+@@ -81,7 +80,7 @@ static inline void MY_RELAX_CPU(void)
-+   __asm__ __volatile__ ("pause");
-+ #endif
-+ #elif defined(_ARCH_PWR8)
-+-  __ppc_get_timebase();
-++  __builtin_ppc_get_timebase();
-+ #elif defined __GNUC__ && (defined __arm__ || defined __aarch64__)
-+   /* Mainly, prevent the compiler from optimizing away delay loops */
-+   __asm__ __volatile__ ("":::"memory");
-+--- a/storage/tokudb/PerconaFT/portability/toku_time.h
-++++ b/storage/tokudb/PerconaFT/portability/toku_time.h
-+@@ -124,7 +124,7 @@ static inline tokutime_t toku_time_now(v
-+     __asm __volatile__ ("mrs %[rt], cntvct_el0" : [rt] "=r" (result));
-+     return result;
-+ #elif defined(__powerpc__)
-+-    return __ppc_get_timebase();
-++    return __builtin_ppc_get_timebase();
-+ #else
-+ #error No timer implementation for this platform
-+ #endif
++ #if defined(__ELF_NATIVE_CLASS)  // determine ARCH_BITS
++ #define ARCH_BITS __ELF_NATIVE_CLASS
++-#elif defined(__x86_64__) || defined(__aarch64__)
+++#elif defined(__x86_64__) || defined(__aarch64__)  || defined(__powerpc64__)
++ #define ARCH_BITS 64
++ #elif defined(__i386__) || defined(__arm__)
++ #define ARCH_BITS 32
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
+index 3214918db8..b78255a049 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
+@@ -29,6 +29,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4 \
+            file://0001-stacktrace-Define-ARCH_BITS-for-x86.patch \
+            file://0001-include-needed-c-header.patch \
+            file://disable_runtime_check.patch \
++           file://ppc64_ARCH_BITS.patch \
+            "
+ SRC_URI_append_libc-musl ="\
+            file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
 -- 
 2.30.2
 
