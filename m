@@ -1,96 +1,91 @@
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web12.3687.1615708032555892014
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.web12.3718.1615708489312867340
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Mar 2021 23:47:12 -0800
+ Sat, 13 Mar 2021 23:54:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=V4ZlhUVm;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id z5so13838091plg.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Mar 2021 23:47:12 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=cJC16Gu6;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id cl21-20020a17090af695b02900c61ac0f0e9so753564pjb.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Mar 2021 23:54:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=dCRtw8kVDH/ZwBkC7T3lRJjv7FHTSPeClXT4YMuKRF0=;
-        b=V4ZlhUVmE0K0zGwVU68C28WMGKgwq64JwSS43hasqJiTlU4fiFIn67LMkkxsTQhCdG
-         EEvOcEeI7GWy69rSkuhifOI9FAMUWA51lzvvmKbmu6EQlEX3lZKzfltUippRwoevntah
-         uwv01q2QmR+UURddxDMt7u3D2bRESpYOGKDRoHayw+HCm9M/zID+nRLTTO4japD+6C10
-         /tBA8ZZX8DeOuLHGzUATdL/Xf+6BiqWI9y6GvW/8Ka/VR3pAHE5C8GKSKwjaULHPqgkP
-         jzieSSi2oruRuSMgwlbPCCCqOMd7ubD+owyWPfCZ7FMhMRWmEc/1np+WOACGBM7f0u1z
-         v4hw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=YWeOdkqEoKz4ik6eK5wxd4W9e6cghafDOw2HrdZcvr8=;
+        b=cJC16Gu6AU9SHFp31KYvOKuCbMc/9flQXoYXZLScR6TgEyYhmUwBpCLMUM5YQaNw9+
+         Y8wXsC2s5lCL8F3OTyIxU3mWw6vvVGHypGfZMxlcFoqQecReUv3mKIzzQNpPBJO+SRuD
+         6wXHL9ZYDHS3H5tHumWA5PZYwrQHBp7/FiepJEdRwa+4UYYIOu2jWcxrFQupwpbRKhDX
+         pbjsn9IiaVJM4kTpsqcuQose2Hn8ZcWbSeZvQk28vv3KayQNWV6XDObhOJ1NpFlEqXZs
+         f7L2aRiGeK8K2JEqVt6ycEFjEcTjaBAkqc7LvhRXHkJMV8XT1ZJnAUHFptKU6ADtcgxS
+         g3Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=dCRtw8kVDH/ZwBkC7T3lRJjv7FHTSPeClXT4YMuKRF0=;
-        b=ufbq26blcBiWLUyTRNMvSCT4lWR0tQ2OEnz/EX4K5MbLZZh3WnGH2vahqhp90uwPgQ
-         Md7s5PgQEy0znd0UTnftjuvw9fA2idq+MOCrIswEaOUbn3OM7GOpENkl+DT1WibnblKX
-         HHp9HUFwN8Py2M7cG6AF5LHkSCfh2n3+2HgnAx3UfsYC/rZosJilE2E6ItbcwtHlCgMe
-         DSPbaM9z3U44AvR88IUToFm8sBhYYr4y0G31GRJKEioYmEo8IgCUyO2+Upv+m1LJvwJg
-         mtW+hz54sQSD37QQieCgDCQyiCuU5hbE6HW3q+ib1ynlg/7wkxbRzaMgj4Qtjg1ctTj9
-         SqkQ==
-X-Gm-Message-State: AOAM532y7khdufTHyq+k/qty63XVdVqz1OtdE3xSbexMEDn2BKnCSrih
-	kKG0u14Jazt00kFcL9ENgMG4tIYu3Zvgmw==
-X-Google-Smtp-Source: ABdhPJyAUiKxY5KIqqlpxH8Jc2cIOHGUrvv/VqAABq4V4wnt0ceodN3oCVLCgu7zza+o7Dw1SfbwCw==
-X-Received: by 2002:a17:90a:7e4:: with SMTP id m91mr6651964pjm.46.1615708031447;
-        Sat, 13 Mar 2021 23:47:11 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=YWeOdkqEoKz4ik6eK5wxd4W9e6cghafDOw2HrdZcvr8=;
+        b=f46huM5XAUMDtOyPA4/BOzEVkR17I7kguQygn7Imy9v7pvOR6eD+Gd7oWnF8poGSjH
+         FSprk5SMYSVnSOfXKzutFOo3ZYQiO5R+AZt9N+Pj/ZpRQARxv1KygACY9c0jsq/b6dWt
+         2W9D1oUxu6Pxd6I91YTk2uFY3vdjLuC+gb58V1WTaxnAl3RTRipjma3tR5mj3RKzHQZ+
+         SlLiDkfztw9RkwMMc1EVR55GhXCMuHqxOeJJRkRYeZjMBdfcnqf6cdqyYdwWC98Kcbw7
+         8unoQFFUqongi5d+P/1B9MGO/gZMUDYTXsB+vW+KjZHuLefHDU1DxCWJly5A1z+/nx1K
+         3nvw==
+X-Gm-Message-State: AOAM530tQp7cdoaDQ4dXUJNSlwiJyZWhXyAL0Ag+hgNkCMHEcXPLbTpg
+	iyI03PcLu/KAFfBoWEzmzLsuxpa+9/UHkw==
+X-Google-Smtp-Source: ABdhPJxJUFvUqpdw4qGnqFea+AzC8R3USoJLVg3KsLpPwnerZq5Iwg9DxGMUGG+KNHvw2T0+nsj3Nw==
+X-Received: by 2002:a17:90b:e08:: with SMTP id ge8mr6774398pjb.130.1615708488634;
+        Sat, 13 Mar 2021 23:54:48 -0800 (PST)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::c2dd])
-        by smtp.gmail.com with ESMTPSA id mz11sm7100630pjb.6.2021.03.13.23.47.10
+        by smtp.gmail.com with ESMTPSA id p3sm9421362pgl.88.2021.03.13.23.54.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 13 Mar 2021 23:47:11 -0800 (PST)
+        Sat, 13 Mar 2021 23:54:48 -0800 (PST)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-initramfs][PATCH 3/3] kexec-tools-klibc: Use SITEINFO_BITS to construct includepath
-Date: Sat, 13 Mar 2021 23:47:07 -0800
-Message-Id: <20210314074707.302060-3-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] breakpad: Exclude for ppc64
+Date: Sat, 13 Mar 2021 23:54:46 -0800
+Message-Id: <20210314075446.307360-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210314074707.302060-1-raj.khem@gmail.com>
-References: <20210314074707.302060-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This helps getting rid of per arch overrides
+It does not build, errors out like
+../git/src/client/linux/dump_writer_common/raw_context_cpu.h:48:2: error: #error "This code has not been ported to your platform yet."
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-kernel/kexec/kexec-tools-klibc_git.bb | 15 +++------------
- 1 file changed, 3 insertions(+), 12 deletions(-)
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 4 ++--
+ meta-oe/recipes-devtools/breakpad/breakpad_git.bb          | 2 ++
+ 2 files changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
-index c49b24f52f..656162fb1a 100644
---- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
-+++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
-@@ -10,7 +10,7 @@ PV = "2.0.18+git${SRCPV}"
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 34f3c8c898..88cb949253 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -300,8 +300,8 @@ RDEPENDS_packagegroup-meta-oe-devtools_remove_mipsarch = "concurrencykit lshw pl
+ RDEPENDS_packagegroup-meta-oe-devtools_remove_mips64 = "luajit nodejs"
+ RDEPENDS_packagegroup-meta-oe-devtools_remove_mips64el = "luajit nodejs"
+ RDEPENDS_packagegroup-meta-oe-devtools_remove_powerpc = "android-tools breakpad lshw luajit uftrace"
+-RDEPENDS_packagegroup-meta-oe-devtools_remove_powerpc64 = "android-tools lshw luajit ply uftrace"
+-RDEPENDS_packagegroup-meta-oe-devtools_remove_powerpc64le = "android-tools lshw luajit ply uftrace"
++RDEPENDS_packagegroup-meta-oe-devtools_remove_powerpc64 = "android-tools breakpad lshw luajit ply uftrace"
++RDEPENDS_packagegroup-meta-oe-devtools_remove_powerpc64le = "android-tools breakpad lshw luajit ply uftrace"
+ RDEPENDS_packagegroup-meta-oe-devtools_remove_riscv64 = "breakpad concurrencykit heaptrack lshw ltrace luajit nodejs ply uftrace"
+ RDEPENDS_packagegroup-meta-oe-devtools_remove_riscv32 = "breakpad concurrencykit heaptrack lshw ltrace luajit nodejs ply uftrace"
+ RDEPENDS_packagegroup-meta-oe-devtools_remove_aarch64 = "${@bb.utils.contains("TUNE_FEATURES", "crypto", "", "abseil-cpp", d)} concurrencykit"
+diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
+index eb2b038dad..c4a8e92abb 100644
+--- a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
++++ b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
+@@ -47,6 +47,8 @@ S = "${WORKDIR}/git"
+ CXXFLAGS += "-D_GNU_SOURCE"
  
- DEPENDS = "zlib xz"
+ COMPATIBLE_HOST_powerpc = "null"
++COMPATIBLE_HOST_powerpc64 = "null"
++COMPATIBLE_HOST_powerpc64le = "null"
+ COMPATIBLE_HOST_riscv64 = "null"
+ COMPATIBLE_HOST_riscv32 = "null"
  
--inherit klibc autotools
-+inherit klibc autotools siteinfo
- 
- SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git"
- SRCREV = "5750980cdbbc33ef75bfba6660295b932376ce15"
-@@ -66,17 +66,8 @@ EXTRA_OECONF += "--without-zlib --without-lzma --without-xen"
- 
- # fix purgatory/printf.c:2:10: fatal error: limits.h: No such file or directory
- # fix include/limits.h:42:10: fatal error: bitsize/limits.h: No such file or directory
--COMMON_CFLAGS += "-O2 -I${STAGING_DIR_HOST}${libdir}/klibc/include -I${S}/purgatory/include"
--CFLAGS_x86_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
--CFLAGS_x86-64_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits64"
--CFLAGS_arm_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
--CFLAGS_aarch64_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits64"
--CFLAGS_mips_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
--CFLAGS_mipsel_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
--CFLAGS_mips64_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits64"
--CFLAGS_mips64el_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits64"
--CFLAGS_powerpc_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
--
-+CFLAGS += "-O2 -I${STAGING_DIR_HOST}${libdir}/klibc/include -I${S}/purgatory/include \
-+           -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits${SITEINFO_BITS}"
- 
- do_compile_prepend() {
-     # Remove the prepackaged config.h from the source tree as it overrides
 -- 
 2.30.2
 
