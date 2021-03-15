@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.5988.1615798062882080585
+ by mx.groups.io with SMTP id smtpd.web09.6002.1615798064030831177
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Mar 2021 01:47:43 -0700
+ Mon, 15 Mar 2021 01:47:44 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=34076 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lLisx-0004Tf-Tb; Mon, 15 Mar 2021 10:47:42 +0200
+	id 1lLit4-0004Tf-4s; Mon, 15 Mar 2021 10:47:43 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 02/10] python3-jsonpatch: Upgrade 1.31 -> 1.32
-Date: Mon, 15 Mar 2021 10:47:19 +0200
-Message-Id: <20210315084727.26812-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 03/10] python3-jsonpointer: Upgrade 2.0 -> 2.1
+Date: Mon, 15 Mar 2021 10:47:20 +0200
+Message-Id: <20210315084727.26812-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210315084727.26812-1-leon.anavi@konsulko.com>
 References: <20210315084727.26812-1-leon.anavi@konsulko.com>
@@ -30,30 +30,30 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.32:
+Upgrade to release 2.1:
 
-- take_index causing 'move' of incorrect values due to bad
-  True==1 comparison
+- Support Python 3.8 and 3.9
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-jsonpatch_1.31.bb => python3-jsonpatch_1.32.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-jsonpatch_1.31.bb => python3-jsonpatch_1.32.bb} (81%)
+ .../{python3-jsonpointer_2.0.bb => python3-jsonpointer_2.1.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-jsonpointer_2.0.bb => python3-jsonpointer_2.1.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-jsonpatch_1.31.bb b/meta-python/recipes-devtools/python/python3-jsonpatch_1.32.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-jsonpatch_1.31.bb
-rename to meta-python/recipes-devtools/python/python3-jsonpatch_1.32.bb
-index aa3dc8360..0c8624036 100644
---- a/meta-python/recipes-devtools/python/python3-jsonpatch_1.31.bb
-+++ b/meta-python/recipes-devtools/python/python3-jsonpatch_1.32.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
+diff --git a/meta-python/recipes-devtools/python/python3-jsonpointer_2.0.bb b/meta-python/recipes-devtools/python/python3-jsonpointer_2.1.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-jsonpointer_2.0.bb
+rename to meta-python/recipes-devtools/python/python3-jsonpointer_2.1.bb
+index 68bfe9716..a4cc05c94 100644
+--- a/meta-python/recipes-devtools/python/python3-jsonpointer_2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-jsonpointer_2.1.bb
+@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=32b15c843b7a329130f4e266a281ebb3"
  
- inherit pypi setuptools3
+ inherit pypi ptest setuptools3
  
--SRC_URI[sha256sum] = "ae6f3686fc71b53a278a9fdeb91afdc0e523e2f8f8a82cb2f04af90413a8eacb"
-+SRC_URI[sha256sum] = "b6ddfe6c3db30d81a96aaeceb6baf916094ffa23d7dd5fa2c13e13f8b6e600c2"
+-SRC_URI[md5sum] = "741b98d0e693b08b5e44e0a9da5a7bb7"
+-SRC_URI[sha256sum] = "c192ba86648e05fdae4f08a17ec25180a9aef5008d973407b581798a83975362"
++SRC_URI[sha256sum] = "5a34b698db1eb79ceac454159d3f7c12a451a91f6334a4f638454327b7a89962"
  
  RDEPENDS_${PN} += " \
      ${PYTHON_PN}-json \
