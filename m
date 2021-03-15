@@ -1,121 +1,130 @@
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.web10.10541.1615823287363008917
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by mx.groups.io with SMTP id smtpd.web08.10881.1615823737988548233
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Mar 2021 08:48:07 -0700
+ Mon, 15 Mar 2021 08:55:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Hua0MmeB;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id kr3-20020a17090b4903b02900c096fc01deso14998193pjb.4
-        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Mar 2021 08:48:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:organization:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=MDK7un3WVXAAjAGYWcR2nI5xtY/3+rybnJPT7EguRs0=;
-        b=Hua0MmeBAy5qIpncuYsl9alwLyxzEd34o0+koz4Lsqn8YEddKkN6ELMyS658hZC0im
-         DqnCflJBcwOG0vmLrPUjYOCwwyoG2NOnx231pVhrLBLeUTNzUFAwouVsb+ymtLuK6AoF
-         jCI3tnX9x7ZKEW7mfx84FaPHo6kAcmKP0Yiu2NExF3j0MXt01HvprEftaXi379MVlP1n
-         IXW+yLv7OZqyntiPudM1wg9pyfxbpRyTWKoRmyJaU6TEs1Jbarabcu7ywaiL7Y2cKZ7X
-         6AnAz3E0fG45/nt3Vo8x3zqFM3LGurpOuYh8qsAsHzQPVoZKjnXKkQ3JhrQW9uUyitFc
-         39ig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=MDK7un3WVXAAjAGYWcR2nI5xtY/3+rybnJPT7EguRs0=;
-        b=Npp5OhaDGCL6MHQ0A367+UE19TfvKd+TGizRNNyv+ctp6L0ICTJf+AVHcePvBPQQEl
-         cKFJvrNKPNb5f/REFtvDgJrx+UfI+/6PSj0ZsP1/7clswY0XSco5YP+y3LqlL4Tb1M+K
-         o08O2ef8+6K73gfRZ8k4sSBURJt9lO49fZjGSjwLfID/7Sq3PSc+4zKsOlX/4j/sEkQE
-         3OINV9i2G2NAGIsUgirDok6TGblG7jGBbgGnNa/yCdHJNI4ghKhhtTGkPCHL4xi04GTs
-         nASsc4jZFb+6eG6qVU0658to2wQH64ToZV8LWX+LFf0XKrAHF11e9k/nu7g1kV7z+Sx1
-         /zsg==
-X-Gm-Message-State: AOAM533EuQ7B+0kCUt0qTK5vwtUrnByLTEIjNB3gGA6t5xe2EN7MbYna
-	7WSKGvOR+RokcZcJXDdOdeU=
-X-Google-Smtp-Source: ABdhPJztUFS1uxR1K16vceP1mmbw9AFUnwACfzbe4B6Sa6zhLGVIveJEwS/+hnw1aCKVKBcY8yTyxQ==
-X-Received: by 2002:a17:90a:f010:: with SMTP id bt16mr13655487pjb.116.1615823286741;
-        Mon, 15 Mar 2021 08:48:06 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:a0f0:144a:f681:e1b1:a9ac? ([2601:646:9200:a0f0:144a:f681:e1b1:a9ac])
-        by smtp.gmail.com with ESMTPSA id q14sm7172080pff.94.2021.03.15.08.48.05
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 15 Mar 2021 08:48:06 -0700 (PDT)
-Subject: Re: [meta-oe][dunfell PATCH] thin-provisioning-tools: switch branch from master to main
-To: "Bajjuri, Praneeth" <praneeth@ti.com>
-Cc: Changqing Li <changqing.li@windriver.com>,
- openembedded-devel@lists.openembedded.org,
- Denys Dmytriyenko <denis@denix.org>
-References: <20210315011408.6604-1-praneeth@ti.com>
- <938d2927-7eb0-c273-d4a2-6adacb09ecb8@ti.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <0ad669ca-d9e5-bd46-74f3-13e01f7d6e37@gmail.com>
-Date: Mon, 15 Mar 2021 08:48:04 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:78.0)
- Gecko/20100101 Thunderbird/78.8.0
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: randy.macleod@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 12FFtTcx026090
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 15 Mar 2021 08:55:30 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2106.2; Mon, 15 Mar 2021 08:55:28 -0700
+Received: from vme.wrs.com (172.25.44.2) by ala-exchng01.corp.ad.wrs.com
+ (147.11.82.252) with Microsoft SMTP Server id 15.1.2106.2 via Frontend
+ Transport; Mon, 15 Mar 2021 08:55:28 -0700
+From: "Randy MacLeod" <randy.macleod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] tclap: upgrade 1.2.2 -> 1.4.0
+Date: Mon, 15 Mar 2021 11:55:28 -0400
+Message-ID: <20210315155528.1471897-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-In-Reply-To: <938d2927-7eb0-c273-d4a2-6adacb09ecb8@ti.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-I think yes, this should help dunfell if backported.
+Project switched from autotools to CMake so drop the Makefile.am patch.
+The COPYING file copyright years were updated. Add description.
 
-On 3/15/21 8:45 AM, Bajjuri, Praneeth wrote:
-> 
-> 
-> On 3/14/2021 8:14 PM, praneeth@ti.com wrote:
->> From: Changqing Li <changqing.li@windriver.com>
-> 
-> Have observed build errors like the below
-> 
-> DEBUG: Mirror fetch failure for url 
-> git://github.com/jthornber/thin-provisioning-tools;protocol=https 
-> (original url: git://github.com/jthornber/thin-provisioning-tools)
-> DEBUG: Fetcher failure: Unable to find revision 
-> 5e5409f48b5403d2c6dffd9919b35ad77d6fb7b4 in branch master even from 
-> upstream
-> ERROR: Fetcher failure: Unable to find revision 
-> 5e5409f48b5403d2c6dffd9919b35ad77d6fb7b4 in branch master even from 
-> upstream
-> ERROR: Fetcher failure for URL: 
-> 'git://github.com/jthornber/thin-provisioning-tools'. Unable to fetch 
-> URL from any source.
-> 
-> and looked like the switching branch to main was missing on dunfell branch.
-> 
-> Please advise if this is the right fix.
-> 
-> 
->>
->> Signed-off-by: Changqing Li <changqing.li@windriver.com>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> [cherry pick commit 260809cffdaad4fcd42b0977090f2c467a5474ef to dunfell]
->> Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
->> ---
->>   .../thin-provisioning-tools/thin-provisioning-tools_0.8.5.bb    | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git 
->> a/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.8.5.bb 
->> b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.8.5.bb 
->>
->> index 9f89bac22..3f82734ac 100644
->> --- 
->> a/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.8.5.bb 
->>
->> +++ 
->> b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.8.5.bb 
->>
->> @@ -7,7 +7,7 @@ SECTION = "devel"
->>   LIC_FILES_CHKSUM = 
->> "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
->>   S = "${WORKDIR}/git"
->> -SRC_URI = "git://github.com/jthornber/thin-provisioning-tools \
->> +SRC_URI = 
->> "git://github.com/jthornber/thin-provisioning-tools;branch=main \
->>              file://0001-do-not-strip-pdata_tools-at-do_install.patch \
->>              file://use-sh-on-path.patch \
->>   "
->>
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+---
+ .../tclap/Makefile.am-disable-docs.patch      | 31 -------------------
+ meta-oe/recipes-devtools/tclap/tclap_1.2.2.bb | 16 ----------
+ meta-oe/recipes-devtools/tclap/tclap_1.4.0.bb | 22 +++++++++++++
+ 3 files changed, 22 insertions(+), 47 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/tclap/tclap/Makefile.am-disable-docs.patch
+ delete mode 100644 meta-oe/recipes-devtools/tclap/tclap_1.2.2.bb
+ create mode 100644 meta-oe/recipes-devtools/tclap/tclap_1.4.0.bb
+
+diff --git a/meta-oe/recipes-devtools/tclap/tclap/Makefile.am-disable-docs.patch b/meta-oe/recipes-devtools/tclap/tclap/Makefile.am-disable-docs.patch
+deleted file mode 100644
+index 358cbefdd..000000000
+--- a/meta-oe/recipes-devtools/tclap/tclap/Makefile.am-disable-docs.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From c209ed0e7ffca32fe3714bad9cc54bdb00c286bb Mon Sep 17 00:00:00 2001
+-From: Ting Liu <b28495@freescale.com>
+-Date: Mon, 15 Apr 2013 16:28:37 +0800
+-Subject: [PATCH] Makefile.am: disable docs
+-
+-Upstream-Status: Inappropriate [OE specific]
+-
+-docs need some generating tool (for example, doxygen) from host which may
+-be not available. Disable it to avoid build issue.
+-
+-Signed-off-by: Ting Liu <b28495@freescale.com>
+----
+- Makefile.am |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/Makefile.am b/Makefile.am
+-index 0a6ebc9..6b42f41 100644
+---- a/Makefile.am
+-+++ b/Makefile.am
+-@@ -1,7 +1,7 @@
+- 
+- ACLOCAL_AMFLAGS = -I config
+- 
+--SUBDIRS = include examples docs tests msc config
+-+SUBDIRS = include examples tests msc config
+- 
+- pkgconfigdir = $(libdir)/pkgconfig
+- pkgconfig_DATA = $(PACKAGE).pc
+--- 
+-1.7.5
+-
+diff --git a/meta-oe/recipes-devtools/tclap/tclap_1.2.2.bb b/meta-oe/recipes-devtools/tclap/tclap_1.2.2.bb
+deleted file mode 100644
+index bba8d5c21..000000000
+--- a/meta-oe/recipes-devtools/tclap/tclap_1.2.2.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-SUMMARY = "Templatized C++ Command Line Parser"
+-HOMEPAGE = "http://tclap.sourceforge.net/"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=0ca8b9c5c5445cfa7af7e78fd27e60ed"
+-
+-SRCREV = "ec3ddcfe41b0544a4551a57439b6b3682fe31479"
+-SRC_URI = "git://git.code.sf.net/p/tclap/code;branch=1.2 \
+-    file://Makefile.am-disable-docs.patch \
+-"
+-
+-S = "${WORKDIR}/git"
+-inherit autotools
+-
+-ALLOW_EMPTY_${PN} = "1"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-devtools/tclap/tclap_1.4.0.bb b/meta-oe/recipes-devtools/tclap/tclap_1.4.0.bb
+new file mode 100644
+index 000000000..13f66e47d
+--- /dev/null
++++ b/meta-oe/recipes-devtools/tclap/tclap_1.4.0.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "Templatized C++ Command Line Parser"
++HOMEPAGE = "http://tclap.sourceforge.net/"
++DESCRIPTION = "TCLAP is a small, flexible library that provides a simple interface \
++for defining and accessing command line arguments. It was intially inspired by the \
++user friendly CLAP libary. The difference is that this library is templatized, so \
++the argument class is type independent. Type independence avoids identical-except-for-type \
++objects, such as IntArg, FloatArg, and StringArg. While the library is not strictly \
++compliant with the GNU or POSIX standards, it is close. \
++"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=5c64b2e8cc50917b2744a90950faa7cd"
++
++SRCREV = "799a8b1f99818e39fee19d0601030770af1221e1"
++SRC_URI = "git://git.code.sf.net/p/tclap/code;branch=1.4 \
++"
++
++S = "${WORKDIR}/git"
++inherit cmake
++
++ALLOW_EMPTY_${PN} = "1"
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.27.0
+
