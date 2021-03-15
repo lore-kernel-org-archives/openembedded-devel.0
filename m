@@ -1,17 +1,17 @@
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.86])
- by mx.groups.io with SMTP id smtpd.web10.8079.1615813375910991579
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.77])
+ by mx.groups.io with SMTP id smtpd.web10.8088.1615813393155072145
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Mar 2021 06:02:56 -0700
+ Mon, 15 Mar 2021 06:03:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=H28KK7yq;
- spf=pass (domain: windriver.com, ip: 40.107.244.86, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=UhApzICG;
+ spf=pass (domain: windriver.com, ip: 40.107.244.77, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GrJjUjRCqG836CjybhOB01YcPWPzY0JYoSZsSoYfGIFzvP6bu7eIZ4kdNk1vkmer38ZcKqcjLCPAy112pl0s4L8G1YrF1UypDMHND2axocrV8u9cYOh0QfLo+O8Br5nERKIhoARC43hDDL3Zlv7XlTv6X1b0tVsD3soH4mfbWTFJydXLzGpNVffSIDcGe3433BKAU8TJtoqOpEaneqqE2EzRMvgahOAIAFLRzVvBVpedwQnlvhcNEfVdg1rs9lbQytZoVN0cGQTD8TeCYm8Tq3jzumOqgescDxdxBBm5XogU5/t2oXIqw9hfzYtme0jHkRpoIi0mY16ASWmDWJjbEQ==
+ b=Ag90FXQsWSIqSGRPHUjV4D5Et75i+5sUzvX6ZvdEoC2XmiXYnAopeNnqsipY/0dFmlpibG5vmENqEVm8eVjPbvhwArr19yhtl6Oc145fnn9ejbOeD9Qp9XtbP1tLu77r06ByZZma/sDJONUpxtBpIH6IjujBNfW5wzddofu1/Qwz1JDVF1b6+pdsYs43qi9E2IIEMIY6bnY4PoF0dbgTHTEZoHCXj2vg0aQO6ggXs24Gck3LCaRRUbBcF+tBJpAMivuIgQBELEJ11YAzjjDEQW+rwQtiFc+bLGfjvNxuL5tWtdZEMuHQDrvh2ltIBfUnZEPsvh0YhpRotsZmfTGuuw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GXBWr0pf8VDD6tC28OCvuYcuvVbdqLlkpUW/n9SGpAE=;
- b=WgEld+NwKJgm5kT11e5QducubKTvJI7oXsbQZEyinXmB+leo1HU+3LHK7dpFZhtRV47g0lJLj8fqkHPsXPcEBDV1dtcv/LwhACc4b8df3iq/XBuxN8HVFOv7E8nyuxrfoOvcS7l/wgxGkLNFQwbezV/rpxkEpiL2Nei9DM6fPuZtzJeBlc9aAMWYebT8z9rCePSnS70RmYQs2bPccSSsv7Rm0eedxOA+ofNEuHLGIeYGrr6f95dj3g93JL0xp+B3tSjWvdtBIybN8pkfDXhTawXWVjF74Z0AaytEWK9/W2MFwM0IKYHMq8roWt6eRCUjbnqFOPBJTJC2IXdKMRPi7A==
+ bh=WN8qo7CNB/x/ub6ReVnh0c9nm4Ma6Dnf32neMlRDfow=;
+ b=iNfU1dXW+JZb+3EJ5GTVQkoQj2eQR/n0DikopyKIO5e9BN4WS9WlYvLFtIeU3+CmGEptO0IjWDXCkhOSSPNJu4KyMP8a8j6Uj1azHHHIbotqONmZ/kySrcskI+regELoX8t6VCsQDXO497KiAoih5GqiGvwZV6NiepIzDzEviE0fLhyhr6F/HTCoFzB/1BEtXj/pGTd+tZMd0ee2M4sZxe3B9FPoe6aGHWMtOmnOphizXfOhIyoRUxXunJIiEU/DcP8wFnuUx4tIOQxKBWBaaIPMBycMp33ANBpKLBM0p2eXMdAh1pZ9FNH837sbTviaJKCqDrgr6NFD9koBsW0Fmg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GXBWr0pf8VDD6tC28OCvuYcuvVbdqLlkpUW/n9SGpAE=;
- b=H28KK7yqvNFmZe9IvVAc8QKKED9Sm+P/67dhT7ZSbSgWFPBbMsJhfJUxYiHSwR8aoYM81ctu8rBTOv+azk3FgKalRNHIxoBfxQBzilYaKnTnw+weXa/x3dWiwT8YVdFszdzAD7/Io5QTJIc+AmPYZpD17Vo41LDw/gWMU7Oa8hU=
+ bh=WN8qo7CNB/x/ub6ReVnh0c9nm4Ma6Dnf32neMlRDfow=;
+ b=UhApzICGlSYEjfD5gmeoDvc8vdoXTUR5nhynqC7R6AS+bNxx9fghJG47sAls/mDPYFxz4EXD6J6sbZ0FVq3HciC2mz2KWDFPVi1XyVp+g7cJeGBgR6wFpPaKIj8K8q069BjN4S5S1UWr52PHXBB7RAciWglFrADB/KJl5eyKFV0=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,149 +28,127 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BYAPR11MB2901.namprd11.prod.outlook.com (2603:10b6:a03:91::23) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3933.32; Mon, 15 Mar
- 2021 13:02:54 +0000
+ 2021 13:03:11 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3933.032; Mon, 15 Mar 2021
- 13:02:54 +0000
-Subject: Re: [oe] [meta-python][PATCH v2] python3-grpcio,python3-grpcio-tools: Disable for ppc64le
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-References: <20210312074700.1984018-1-raj.khem@gmail.com>
- <20210312074700.1984018-2-raj.khem@gmail.com>
+ 13:03:11 +0000
+Subject: Re: [oe] [meta-python][PATCH] python3-sentry-sdk: update to 1.0.0
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20210312170915.567739-1-open.source@oleksandr-kravchuk.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <1066a50e-3df0-436d-b3d7-1228f209550f@windriver.com>
-Date: Mon, 15 Mar 2021 09:02:51 -0400
+Message-ID: <e88a22db-c2ea-e66d-350b-1a0a995a0034@windriver.com>
+Date: Mon, 15 Mar 2021 09:03:09 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.0
-In-Reply-To: <20210312074700.1984018-2-raj.khem@gmail.com>
+In-Reply-To: <20210312170915.567739-1-open.source@oleksandr-kravchuk.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BN0PR02CA0026.namprd02.prod.outlook.com
- (2603:10b6:408:e4::31) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: BN0PR02CA0012.namprd02.prod.outlook.com
+ (2603:10b6:408:e4::17) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BN0PR02CA0026.namprd02.prod.outlook.com (2603:10b6:408:e4::31) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3933.32 via Frontend Transport; Mon, 15 Mar 2021 13:02:53 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BN0PR02CA0012.namprd02.prod.outlook.com (2603:10b6:408:e4::17) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3933.32 via Frontend Transport; Mon, 15 Mar 2021 13:03:11 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: f1aa0baf-989c-468c-93b0-08d8e7b2a5b3
+X-MS-Office365-Filtering-Correlation-Id: ac8cffb5-6047-4974-4d52-08d8e7b2aff7
 X-MS-TrafficTypeDiagnostic: BYAPR11MB2901:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB29011904641F7E4B8A66A2209F6C9@BYAPR11MB2901.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2043;
+	<BYAPR11MB290191BDD79CE4DA3DDC4D839F6C9@BYAPR11MB2901.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:538;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	KM1fKXdd7Gu3tnIx+xsLIrV2OAjBFGORpjEzhMYQw44kH/WE7Rf+NpbsDxRW0Ap3Tt0VHcMbvSqQJY5R25h1XjWC+4RtvwueRgzHkj4GObtTsLM4P6E7a3SiB1A45gtB676On78i0NRE31ADH/HDw9u9hjfIc7zDCo8OOH+iXrqYqVx5x7sYu8oHtTS5Nq/njlO6Y7W0hIaI6Dq3RdzN3KdJn95dLMAPUSoCiTnp6dHYqKZ+t7b8KkKNRziV/46/qGju3PC/FwtO5MD5YxG+ALZbrW+10sdJkJbbUAt+0WEm7b5d/u3pIJzxCQjsp8d2I0kQyYZdCzUPChKTJkh5AdR6S9n/CWfjiZRVZBI9IcVlyGu6+dXMhZpVx+gJ0u/IBJXbvD0JUNghutLi/+WtTMysjQ8Qmb7Ap8f8/Dh3JjrivO8cx8HO8ticujOOBmB7EtreV9OkfHd+SOdTOL1pdKRTEaiJoctLLRo2fdKVMCg2M7VavXgsCkzNE+eF3EHlyfPWsdzApGSewXPj1b3R+LeEP1CnQhxtO6VUZQTGRxE3g3Wl+Xke5TPUxxAVJrjnd8LxWsd2UGgxe27baenwMy/oK28gFSIttWZpew/wNve2MjyzmZVduH1TOWr8CypNR71p48FQAMiz1fdJZcxeoG/cffrQ0EUdw586S3d5+ZcC7fjFJqBRXFAKV7CWr31D7USDrjyIgxdopG0KdJdEzxOUPTWM5AjQTTuCxXQRgzc=
+	PBnlxEa9XqogtxgJUNRY876mOWOSxRo/GgGb6MCS/Ujvfo5JdVI0DyYazWeN/3uAAYw38XQGgnDb2EbNkY5fHrpPg/m7FvwChL3sKrhzVZLKzXEVq1VTBdmzTd10n7R94vQnLLOlhUiu1aPGvurGO8jikxMBL2erilzh7p9VW8aIFoEmU6wT3gGmfXeW85c+3DBLqhhkOs+8NR8huKPRpFGHRACyUfv9mR9Dbd5RN8eSTFkgPmF9Nk/6gdLwQHy3dQq33ZitEfAnBXZZK907hq7pAIhyklEh7WKzS865G/M1gRlwb5hbx6oEXX4FAzlb7X8ki3m6BXu5KnlIQun+H7IVSq0wQgZNH56FkK32shSR56MSjZ134wD9+cL6FFCHIBIjS9Ai7cMGeMCU8+ayFf2gojc0lzBUk9G3m8TnDbYKWVwyEERvGEfNZtgToXOIGeKQFh82I9m1INmOTSg3Dl04N6/zSSQSAKjadfGalhfin+wD95keZxfVaSmTuNkgqgRs9J5wOnHJIoWunY4ebcMq6AFe6fvkU+G92OU7qNfMZlZjTI2vqW6mBIJQYgE3lCsgIM9K/lc/OYL1r8Yj5gdBuJKcNT0RD0edbXOVNz5VpeWg1pDWP0Ex2wmyKK5N0y0f+L6DNPi6o9SM6jRi3756yxqPTHkkZOoqjGb3W1TsDSfG3dTfi56UhQ9O/kcLSETpYlOMtWWIH8Q16fYSiGoSC8UriwOM74yPPe3fIc0=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(346002)(376002)(136003)(366004)(396003)(26005)(36756003)(2616005)(8676002)(166002)(956004)(16576012)(186003)(966005)(31686004)(16526019)(478600001)(86362001)(83380400001)(66476007)(8936002)(66556008)(53546011)(5660300002)(33964004)(6486002)(2906002)(31696002)(44832011)(316002)(66946007)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(346002)(376002)(136003)(366004)(396003)(26005)(36756003)(2616005)(8676002)(166002)(956004)(16576012)(186003)(15650500001)(966005)(31686004)(16526019)(478600001)(86362001)(83380400001)(66476007)(8936002)(66556008)(53546011)(5660300002)(33964004)(6486002)(2906002)(31696002)(44832011)(316002)(66946007)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?U3RjeFUrZkVLaGN6c0ljcTIzUk00OW53Qjd5S2xoQ1Z1REU0YS9RRGIwb2hU?=
- =?utf-8?B?Nko0NVhic29WMEhCNUFmZ3hqYnJ6WFhoMDIxSEljQkxuanRKOG9KcEc0eWp6?=
- =?utf-8?B?cTRvenZ4TVRpZ3ZjOEhKQml3eDhadTJHT3I2Z0pZRnZCa2l1ZnNhNE9yNFBN?=
- =?utf-8?B?NEpKRUJJZnFTWitOQ1dGZ3N4MVhzZ1FVeGc5Mi9RcnRWMHl1ZDdUSytUSHlR?=
- =?utf-8?B?ay8wVll5UjdaUy80VW1nanVQenZxTzV4NkNuWks5SGF1cTF0clR2RUpyZFRY?=
- =?utf-8?B?aU5CeG9FMTJWTUtRQitIaTBJNkRDN25sNTVuUGVhYXYwVTd1VFRwdnZObk8x?=
- =?utf-8?B?b0g4Y1l0WU1wdm5HeXozSmllZGlXUWI0T0svUzVxVFFaNmZBdXVWL0xqenll?=
- =?utf-8?B?eS9FdnFFWnFERjRMa1kxWi9qRFRXVUhlZUpRSHVNZTF2YjZhaVFYRVo1TVN4?=
- =?utf-8?B?bWtEaDJJN3BmL3prQWZWK3VKVmthNlp3aUNSVDNiMU4xWUVvQVBNN0lkeDkr?=
- =?utf-8?B?RUQrYmNBVFdpc28rN3ZhQTFzdW5MWEJXSWNRakx4dEY2Qjc1dUYxMitrVUlD?=
- =?utf-8?B?eWFIVkJxKzBBVWFjY0gyQ24rMHhUSFlsUXdvbnUvMFFVQTFhRjBmQUp0TlVv?=
- =?utf-8?B?V0syN0hkUzM4UlZyZ0F6RGF0Z0dXclZ2c1Uyc2dUb3J6SEVVdmNHOUJMV05h?=
- =?utf-8?B?Y1hGSGI5RVZtSXBjay9PSHU3ZkZOT0puVkhyNkFVbDFsZUhRY0hLQ1NXZlJO?=
- =?utf-8?B?TEhORHY2ZmlUTFo1WG9QNkF0cUhFTldiY1VpR0MvTjdKc3JwTS96amJsa1I5?=
- =?utf-8?B?SHhPUnc2WnlMOXYrbnFVbWxmbGZ0bHhLTmZZOXdocktPMEZ2bWFHU0FjQWdO?=
- =?utf-8?B?R2oydmpvUTVwMGtTaXlGeWdxL0p5RnFpaWpGdG1OVVlncjVlOUl5Y2NOdTlX?=
- =?utf-8?B?N0htZ3FQTi9yS284MjY3KzYxWkRwNDB5czd0dlJyckFjK3FURWxrRHJxYjFO?=
- =?utf-8?B?dEhVR3FFYmU3b3JWQmFZWmc1ckFNcTdKNVZiRm8xQmZNcS90K3AraFplYlYx?=
- =?utf-8?B?bENvS2RaN1NkcmNNc1RyWENtOGhieVBJSkRvaWlLaWdwQXlnRHNrd2JidGdz?=
- =?utf-8?B?aWg0OWxaUkw4NGhBci9CaENKTXE4a1dJY3dQbVdWejN3ZXRSbEhZREw1eTFu?=
- =?utf-8?B?S1VEMDN0SEZyUnl1ZkpQWUsrR2ZPUGR3OVlTUWdLYmhrWWdUYTArYWh1L1B2?=
- =?utf-8?B?SGJER0pqT0JXK1hXcW1nTFdNMThRdWUrQTROOWtvZE1zT3ZxcmxkQ1pJK2FK?=
- =?utf-8?B?bzEyTVRFdVFpYTU4RUVXSUNaOXlJZkVoVnl3ZmtzaUN2LzNwazRTZ1FDU3d2?=
- =?utf-8?B?SVZNeW9sWldMd0dIbWYxbXA0cE1MVXhUdlFJV1Q5QW9WTHBCa3BQRmk3UzRn?=
- =?utf-8?B?blNqdHVhSkJrYitGTTJQVFhJSFlac3JwWEVTMlkxN3VCQmx4dVpicW56SStk?=
- =?utf-8?B?Ty9nS0tScXpuOGdDaWhZa3EyWE5iNjhkcHR6ZkE1YldvajAwZ3p2MndoZW5r?=
- =?utf-8?B?UVhaR05JSGtMeFJhUDIxaVhTbFZ0a2x5SGV2V0FWa0c4SHE0eHBoRzJVaHEz?=
- =?utf-8?B?cS94eWd6R0ZyUStRbHArckdmS1ZSd085WkF5Vm1rMGQ3VnJkRDRsL1RKN1Ey?=
- =?utf-8?B?bzNWcUVOMTl4NERMdzM0MlgwQkF5Umh4R0VvTWIrZkRTNWVGZnJ3RGsvMkk3?=
- =?utf-8?Q?4WQpwMxnomyzgQTNii0OXw/Iuvo3hcC2dqIzuWt?=
+	=?utf-8?B?bllVYWVwUjlLUHEwWDFIeHA2eW9iZldQaTExR2pLMkxGMU9BZC85SG1oR1BG?=
+ =?utf-8?B?dHFwSmsvdXBtOTVESWFRa202NksrMFpleHFQTHJ2eVJhdVJFdDhWR2ZJaDg4?=
+ =?utf-8?B?QlFwU2QxRG5WYmt6NXZFWVdOVXc2V1RSZ1o3QWhCdDdwcWNTdUtzYmc2aXVi?=
+ =?utf-8?B?VXZxcEkraDhrRmRTSjZScjMwSVNOelAyYytvKzVGcUpKaXRNdUt5VnBSb0g3?=
+ =?utf-8?B?cjE4VXlCSVRCVXJPaXMxSG5qcFZ4czl4L09LeDJwQkkrTjRlMlVMbno2RGFz?=
+ =?utf-8?B?MHlSKzdMblgrTEpEMWUzNnlBdUt4c2UwbjRQaDg3YlFvSFRPTGNyUnNhcElP?=
+ =?utf-8?B?UFgyYjlYRUU5VU5yZEtuUkprL2YvREtLYjJlR3NCQU54V2l1eDUzKzVFZSs1?=
+ =?utf-8?B?NUFvVytIcHVTb3Y1NEdpdWMreFRqQVBkRDVZU1cwTkE3MTFFMWNFcTRQRWJ0?=
+ =?utf-8?B?VjRtK0xBMmVFem5Uc2FrWG43cS9ocm5mMWpqYWEwbTJnNXcwMElNRVJ2RTJB?=
+ =?utf-8?B?V2JqckY1dzVHbk9aQWtld09BRHpPSm5FQ0d0amhqWHRGNERRcFg2Yit3VW5R?=
+ =?utf-8?B?KzhlSFJmSWNvcmx5WkR0TkFQN0NCUEViKzJFV09Oc2VwVVNFT1RnTEhHQTY4?=
+ =?utf-8?B?OFFldmtsc3RBNjRqNTdtdUdnenBZcDVpYWd5bzZ5OHVDeGltcmZqWkJCcHB2?=
+ =?utf-8?B?aVBvWjE1VHFyZFYveG50QjRyWFQ1V1JuRks0NGY3eG9mNnZoUnVVai91VElu?=
+ =?utf-8?B?K244dFRCRUJIN2JmQVJ0SktNdHNpaDdoN1FKSkFrVW11aEdJaTM0WWVkVDdW?=
+ =?utf-8?B?YXg1aUVXSnFqZjlkQkRqdTJNU1JrMnJOUTBXbzJ5U1NhcVdRakd2VVFjUFRT?=
+ =?utf-8?B?TEtDSWtSN2hvSjNtZDJzNEhwckZQMjlIdFBmclZza3ZOdjFCSDEyYjdMRHlZ?=
+ =?utf-8?B?SE5Zejl0dTlxdGhZV1dHTmZoMjdoc0FqK0JOVFZJMnBVYmh0TDloS05VV1Bo?=
+ =?utf-8?B?UjdncTZkODh2UzhDZS9lUWhKLytDVko3UGtMQVpIMUIxSllNbHJiYkRubXkz?=
+ =?utf-8?B?T1VQTUVNdEtMbXdRUDFKNzhVcGRSajVndit6VlBjV29Ddi9EblJZZnNEVmUy?=
+ =?utf-8?B?ejh4VW1KSjQ5UWlWSUhkTXQrR0NoM05GamYrV0VDUWYwcHdESXloTjhWMWpJ?=
+ =?utf-8?B?V21ScDJaWFVSUUFndFJUeVFnWG5jZFlldG55TUNLWDIvWWIyelVkeXJzZm5M?=
+ =?utf-8?B?dTMvWjRjK1lrckNNWENpdUd6LzltTWhZWHpCTXVwZlVYVzZzWGxhSDBnVjJH?=
+ =?utf-8?B?bXpRVmRGckVxOS9LZ3I3Szd3SU1PbmRDVFdvVWp0VEQrZ2diR05Cd1hjekpj?=
+ =?utf-8?B?YWNic0I0c1BnZ3JOWnFSNmZCa1p1dGJTdmhOZ1krVXBMTDlqT2M1TkEvdVF0?=
+ =?utf-8?B?TXFYOGNiellwK0o0MlRDY2pOZCtSKzFCdmVOV3QxT2V0Y1dSeHRxRm0zQ21x?=
+ =?utf-8?B?bkloRnZmeU5FcG5sUjBCdlR1QmRONjYwVEQxaFNQWnRUdGhMQnJ6cCs0ZSt4?=
+ =?utf-8?B?ZWdqMlhVQ1VXNkpSby9IYmEwYWJYN3FKZHRydERnZEpkcG1EY2w5ZEJUWWx4?=
+ =?utf-8?B?a2o4OUFLWUVlTkRXZHdlL3BmZ1o1ZGdrMVdsNDhDd2l6aVFNbnVDdVUrV3Mr?=
+ =?utf-8?B?RjFtL1JCRVBrbGhLSDZDOUhwN0YzbUlrMDM2T2ZZc05peS9zQjc2MFhLcHha?=
+ =?utf-8?Q?5rQTPbc6UyuwfBHB9U+HrgtGB9sE6i4uMeNBNG0?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f1aa0baf-989c-468c-93b0-08d8e7b2a5b3
+X-MS-Exchange-CrossTenant-Network-Message-Id: ac8cffb5-6047-4974-4d52-08d8e7b2aff7
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Mar 2021 13:02:54.5588
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Mar 2021 13:03:11.7039
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: mtud9SQkqJwiDOhDJUcRqn3bipXwuI+PQt9/GonxIpSu3i1NEana4X8P7nzk9j4y3YoNsQY4eWbUwD6gLRmMtlUkbZ2iw0OLPoBu0XjpLO0=
+X-MS-Exchange-CrossTenant-UserPrincipalName: MPOViy+7mlTlWG8Zwo3rAHILzfapSaN8UwsdupnYNasieVFbtA/TdmaVppdwKLjuwtqMGXqITrX2ZGvBieTN0J+Cam+n1HFzjTRVCq4AFPU=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2901
 Content-Type: multipart/alternative;
- boundary="------------589F339300F788915BB291F6"
+ boundary="------------F869424AEA7D715773C110E0"
 Content-Language: en-US
 
---------------589F339300F788915BB291F6
+--------------F869424AEA7D715773C110E0
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
-On 2021-03-12 2:47 a.m., Khem Raj wrote:
+On 2021-03-12 12:09 p.m., Oleksandr Kravchuk wrote:
 > [Please note: This e-mail is from an EXTERNAL e-mail address]
 >
-> abseil-cpp does not have support for ppc64le yet
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../recipes-core/packagegroups/packagegroup-meta-python.bb    | 1 +
->   .../recipes-devtools/python/python3-grpcio-tools_1.35.0.bb    | 4 ++++
->   meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb  | 4 ++++
->   3 files changed, 9 insertions(+)
+>   ...ython3-sentry-sdk_0.20.3.bb => python3-sentry-sdk_1.0.0.bb} | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+>   rename meta-python/recipes-devtools/python/{python3-sentry-sdk_0.20.3.bb => python3-sentry-sdk_1.0.0.bb} (80%)
 >
-> diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-> index 4512f839f4..df4fcc8826 100644
-> --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-> +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-> @@ -449,6 +449,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
->       python3-zopeinterface \
->       telepathy-python3 \
->   "
-> +RDEPENDS_packagegroup-meta-python3_remove_powerpc64le = "python3-grpcio python3-grpcio-tools"
+> diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.20.3.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.0.0.bb
+> similarity index 80%
+> rename from meta-python/recipes-devtools/python/python3-sentry-sdk_0.20.3.bb
+> rename to meta-python/recipes-devtools/python/python3-sentry-sdk_1.0.0.bb
+> index 13ba1e6fa..22b9f55dd 100644
+> --- a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.20.3.bb
+> +++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.0.0.bb
+> @@ -5,7 +5,8 @@ HOMEPAGE = "https://github.com/getsentry/sentry-python"
+>   LICENSE = "BSD-2-Clause"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341"
 >
->   RDEPENDS_packagegroup-meta-python3-ptest = "\
->       python3-cryptography-ptest \
-> diff --git a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.35.0.bb b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.35.0.bb
-> index 12b00cfa3f..475b4e6063 100644
-> --- a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.35.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.35.0.bb
-> @@ -16,3 +16,7 @@ SRC_URI[sha256sum] = "9e2a41cba9c5a20ae299d0fdd377fe231434fa04cbfbfb3807293c6ec1
->   RDEPENDS_${PN} = "${PYTHON_PN}-grpcio"
+> -SRC_URI[sha256sum] = "4ae8d1ced6c67f1c8ea51d82a16721c166c489b76876c9f2c202b8a50334b237"
+> +SRC_URI[sha256sum] = "71de00c9711926816f750bc0f57ef2abbcb1bfbdf5378c601df7ec978f44857a"
 >
->   BBCLASSEXTEND = "native nativesdk"
+>   PYPI_PACKAGE = "sentry-sdk"
 > +
-> +# Needs python3-grpcio which does not build for ppc64le
-> +COMPATIBLE_HOST_powerpc64le = "null"
-> +
-> diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
-> index 3d875bf4ba..fa030b99e2 100644
-> --- a/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
-> @@ -43,3 +43,7 @@ CLEANBROKEN = "1"
->   BBCLASSEXTEND = "native nativesdk"
->
->   CCACHE_DISABLE = "1"
-> +
-> +# abseil-cpp/absl/base/internal/unscaledcycleclock.cc:100:2: error: #error Must implement UnscaledCycleClock::Frequency()
-> +COMPATIBLE_HOST_powerpc64le = "null"
-> +
+>   inherit pypi setuptools3
 > --
-> 2.30.2
+> 2.25.1
 >
 >
 > 
 >
 
---------------589F339300F788915BB291F6
+--------------F869424AEA7D715773C110E0
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -180,63 +158,41 @@ Content-Transfer-Encoding: 7bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 2021-03-12 2:47 a.m., Khem Raj
-      wrote:<br>
+    <div class="moz-cite-prefix">On 2021-03-12 12:09 p.m., Oleksandr
+      Kravchuk wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210312074700.1984018-2-raj.khem@gmail.com">
+    <blockquote type="cite" cite="mid:20210312170915.567739-1-open.source@oleksandr-kravchuk.com">
       <pre class="moz-quote-pre" wrap="">[Please note: This e-mail is from an EXTERNAL e-mail address]
 
-abseil-cpp does not have support for ppc64le yet
-
-Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a></pre>
+Signed-off-by: Oleksandr Kravchuk <a class="moz-txt-link-rfc2396E" href="mailto:open.source@oleksandr-kravchuk.com">&lt;open.source@oleksandr-kravchuk.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210312074700.1984018-2-raj.khem@gmail.com">
+    <blockquote type="cite" cite="mid:20210312170915.567739-1-open.source@oleksandr-kravchuk.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../recipes-core/packagegroups/packagegroup-meta-python.bb    | 1 +
- .../recipes-devtools/python/python3-grpcio-tools_1.35.0.bb    | 4 ++++
- meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb  | 4 ++++
- 3 files changed, 9 insertions(+)
+ ...ython3-sentry-sdk_0.20.3.bb =&gt; python3-sentry-sdk_1.0.0.bb} | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-sentry-sdk_0.20.3.bb =&gt; python3-sentry-sdk_1.0.0.bb} (80%)
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index 4512f839f4..df4fcc8826 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -449,6 +449,7 @@ RDEPENDS_packagegroup-meta-python3 = &quot;\
-     python3-zopeinterface \
-     telepathy-python3 \
- &quot;
-+RDEPENDS_packagegroup-meta-python3_remove_powerpc64le = &quot;python3-grpcio python3-grpcio-tools&quot;
+diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.20.3.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.0.0.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-sentry-sdk_0.20.3.bb
+rename to meta-python/recipes-devtools/python/python3-sentry-sdk_1.0.0.bb
+index 13ba1e6fa..22b9f55dd 100644
+--- a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.20.3.bb
++++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.0.0.bb
+@@ -5,7 +5,8 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/getsentry/sentry-python">&quot;https://github.com/getsentry/sentry-python&quot;</a>
+ LICENSE = &quot;BSD-2-Clause&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341">&quot;file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341&quot;</a>
 
- RDEPENDS_packagegroup-meta-python3-ptest = &quot;\
-     python3-cryptography-ptest \
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.35.0.bb b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.35.0.bb
-index 12b00cfa3f..475b4e6063 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.35.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.35.0.bb
-@@ -16,3 +16,7 @@ SRC_URI[sha256sum] = &quot;9e2a41cba9c5a20ae299d0fdd377fe231434fa04cbfbfb3807293c6ec1
- RDEPENDS_${PN} = &quot;${PYTHON_PN}-grpcio&quot;
+-SRC_URI[sha256sum] = &quot;4ae8d1ced6c67f1c8ea51d82a16721c166c489b76876c9f2c202b8a50334b237&quot;
++SRC_URI[sha256sum] = &quot;71de00c9711926816f750bc0f57ef2abbcb1bfbdf5378c601df7ec978f44857a&quot;
 
- BBCLASSEXTEND = &quot;native nativesdk&quot;
+ PYPI_PACKAGE = &quot;sentry-sdk&quot;
 +
-+# Needs python3-grpcio which does not build for ppc64le
-+COMPATIBLE_HOST_powerpc64le = &quot;null&quot;
-+
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
-index 3d875bf4ba..fa030b99e2 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio_1.36.1.bb
-@@ -43,3 +43,7 @@ CLEANBROKEN = &quot;1&quot;
- BBCLASSEXTEND = &quot;native nativesdk&quot;
-
- CCACHE_DISABLE = &quot;1&quot;
-+
-+# abseil-cpp/absl/base/internal/unscaledcycleclock.cc:100:2: error: #error Must implement UnscaledCycleClock::Frequency()
-+COMPATIBLE_HOST_powerpc64le = &quot;null&quot;
-+
+ inherit pypi setuptools3
 --
-2.30.2
+2.25.1
 
 </pre>
       <br>
@@ -249,4 +205,4 @@ index 3d875bf4ba..fa030b99e2 100644
   </body>
 </html>
 
---------------589F339300F788915BB291F6--
+--------------F869424AEA7D715773C110E0--
