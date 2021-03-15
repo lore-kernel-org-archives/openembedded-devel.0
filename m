@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.5941.1615798065051500454
+ by mx.groups.io with SMTP id smtpd.web11.5989.1615798065884155023
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Mar 2021 01:47:45 -0700
+ Mon, 15 Mar 2021 01:47:46 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=34076 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lLit5-0004Tf-9X; Mon, 15 Mar 2021 10:47:44 +0200
+	id 1lLit6-0004Tf-7c; Mon, 15 Mar 2021 10:47:45 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 04/10] python3-configargparse: Upgrade 1.3 -> 1.4
-Date: Mon, 15 Mar 2021 10:47:21 +0200
-Message-Id: <20210315084727.26812-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 05/10] python3-luma-core: Upgrade 2.2.0 -> 2.3.1
+Date: Mon, 15 Mar 2021 10:47:22 +0200
+Message-Id: <20210315084727.26812-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210315084727.26812-1-leon.anavi@konsulko.com>
 References: <20210315084727.26812-1-leon.anavi@konsulko.com>
@@ -30,31 +30,39 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.4:
+Upgrade to release 2.3.1:
 
-- Allow nearly all characters in a keyword
+- Add Github publish action
+- Cleanup only GPIO pins used rather than all
+
+License-Update: Update year
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...hon3-configargparse_1.3.bb => python3-configargparse_1.4.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-configargparse_1.3.bb => python3-configargparse_1.4.bb} (85%)
+ ...{python3-luma-core_2.2.0.bb => python3-luma-core_2.3.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-luma-core_2.2.0.bb => python3-luma-core_2.3.1.bb} (68%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-configargparse_1.3.bb b/meta-python/recipes-devtools/python/python3-configargparse_1.4.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-configargparse_1.3.bb
-rename to meta-python/recipes-devtools/python/python3-configargparse_1.4.bb
-index aac58de37..393f13874 100644
---- a/meta-python/recipes-devtools/python/python3-configargparse_1.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-configargparse_1.4.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/bw2/ConfigArgParse"
+diff --git a/meta-python/recipes-devtools/python/python3-luma-core_2.2.0.bb b/meta-python/recipes-devtools/python/python3-luma-core_2.3.1.bb
+similarity index 68%
+rename from meta-python/recipes-devtools/python/python3-luma-core_2.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-luma-core_2.3.1.bb
+index b181e0986..47efe8a72 100644
+--- a/meta-python/recipes-devtools/python/python3-luma-core_2.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-luma-core_2.3.1.bb
+@@ -2,11 +2,11 @@ SUMMARY = "A component library to support SBC display drivers"
+ DESCRIPTION = "A component library to support SBC display drivers"
+ HOMEPAGE = "https://github.com/rm-hull/luma.core"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=da746463714cc35999ed9a42339f2943"
+-LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=db07e3d471938ea7d7fd2135f88ac9a1"
++LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=3b1d500f5911ec7522f1f790d616e0ee"
  
--SRC_URI[sha256sum] = "0428b975ab6c48bb101ccb732e1b5cb616296e28268e032aa806f32b647a1cc1"
-+SRC_URI[sha256sum] = "abef9ff44fb0091f0e3bb2ee7e5b26a02b5b62d45408a5272a9bd461f5b59b4b"
+ inherit pypi setuptools3
  
- PYPI_PACKAGE = "ConfigArgParse"
+-SRC_URI[sha256sum] = "62a24518d3aa084d75206a19056eb8aa71b5a3d0c159d2e95b388cb3150a7b1c"
++SRC_URI[sha256sum] = "f293f5fff8946eea62af3a5d5d7da55c37d2b64aac6c9c90180a385da9f7d003"
+ 
+ CLEANBROKEN = "1"
  
 -- 
 2.17.1
