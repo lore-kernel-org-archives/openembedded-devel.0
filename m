@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.5942.1615798069727791131
+ by mx.groups.io with SMTP id smtpd.web08.5995.1615798070568961777
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 15 Mar 2021 01:47:50 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=34076 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lLitA-0004Tf-4Y; Mon, 15 Mar 2021 10:47:48 +0200
+	id 1lLitA-0004Tf-W8; Mon, 15 Mar 2021 10:47:49 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 09/10] python3-pyflakes: Upgrade 2.2.0 -> 2.3.0
-Date: Mon, 15 Mar 2021 10:47:26 +0200
-Message-Id: <20210315084727.26812-9-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 10/10] python3-autobahn: Upgrade 21.2.2 -> 21.3.1
+Date: Mon, 15 Mar 2021 10:47:27 +0200
+Message-Id: <20210315084727.26812-10-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210315084727.26812-1-leon.anavi@konsulko.com>
 References: <20210315084727.26812-1-leon.anavi@konsulko.com>
@@ -30,39 +30,29 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.3.0:
+Upgrade to release 21.3.1:
 
-- Recognize tuple concatenation in __all__ export definitions
-- Better support use of annotation-only assignments when using
-  from __future__ import annotations
-- Recognize special-case typing for Annotated
-- Fix undefined name __qualname__ in class scope
-- Recognize special-cased typing for TypeVar
-- Errors for undefined exports in __all__ are shown in a
-  deterministic order
-- Fix false positives in certain typing constructs (TypeVar,
-  NamedTuple, TypedDict, cast)
+- fix: Twisted v21.2.0 breaks Crossbar.io
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pyflakes_2.2.0.bb => python3-pyflakes_2.3.0.bb}   | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pyflakes_2.2.0.bb => python3-pyflakes_2.3.0.bb} (71%)
+ .../{python3-autobahn_21.2.2.bb => python3-autobahn_21.3.1.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-autobahn_21.2.2.bb => python3-autobahn_21.3.1.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyflakes_2.2.0.bb b/meta-python/recipes-devtools/python/python3-pyflakes_2.3.0.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python3-pyflakes_2.2.0.bb
-rename to meta-python/recipes-devtools/python/python3-pyflakes_2.3.0.bb
-index 911cf4ec3..0c8956728 100644
---- a/meta-python/recipes-devtools/python/python3-pyflakes_2.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyflakes_2.3.0.bb
-@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/dreamhost/cliff"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=690c2d09203dc9e07c4083fc45ea981f"
+diff --git a/meta-python/recipes-devtools/python/python3-autobahn_21.2.2.bb b/meta-python/recipes-devtools/python/python3-autobahn_21.3.1.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-autobahn_21.2.2.bb
+rename to meta-python/recipes-devtools/python/python3-autobahn_21.3.1.bb
+index cc3773fc5..daa66ec1a 100644
+--- a/meta-python/recipes-devtools/python/python3-autobahn_21.2.2.bb
++++ b/meta-python/recipes-devtools/python/python3-autobahn_21.3.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://crossbar.io/autobahn"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=97c0bda20ad1d845c6369c0e47a1cd98"
  
--SRC_URI[md5sum] = "48b1c29732ca810a70cba0e6d0531169"
--SRC_URI[sha256sum] = "35b2d75ee967ea93b55750aa9edbbf72813e06a66ba54438df2cfac9e3c27fc8"
-+SRC_URI[sha256sum] = "e59fd8e750e588358f1b8885e5a4751203a0516e0ee6d34811089ac294c8806f"
+-SRC_URI[sha256sum] = "bf7a9d302a34d0f719d43c57f65ca1f2f5c982dd6ea0c11e1e190ef6f43710fe"
++SRC_URI[sha256sum] = "e126c1f583e872fb59e79d36977cfa1f2d0a8a79f90ae31f406faae7664b8e03"
  
  inherit pypi setuptools3
  
