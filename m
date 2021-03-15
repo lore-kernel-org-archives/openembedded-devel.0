@@ -1,219 +1,232 @@
-Received: from IND01-MA1-obe.outbound.protection.outlook.com (IND01-MA1-obe.outbound.protection.outlook.com [40.107.138.47])
- by mx.groups.io with SMTP id smtpd.web10.6352.1615801752462722031
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.60])
+ by mx.groups.io with SMTP id smtpd.web08.8186.1615813250536578019
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Mar 2021 02:49:13 -0700
+ Mon, 15 Mar 2021 06:00:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kpit.com header.s=selector1 header.b=tPK6qzlC;
- spf=pass (domain: kpit.com, ip: 40.107.138.47, mailfrom: neetika.singh@kpit.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=pAlzNAfp;
+ spf=pass (domain: windriver.com, ip: 40.107.243.60, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=DVnBmaziLkhiaBEX3+2gQxgN/M+IZz7CoAYt3k+UvM11MVZyB1bhAGmmoNgL6r50iD8qCYUMZilgUp6JLXvm5DaEHjTi6cogebwYykRU9JpQivLoRgdY0MMyG5XwLmNDg682xmnS2fAsiH3UMpzy1mRKB68KFI3gblD3shho0zow1luHRZRkzQP7J7XlMpq85l1Ow3AlL/SYnilyiX6P0FPZvK2hxSPJGCuICaxUkIKHD8Vpbc9DCCCjwInXMNuH20lYE4qD6A3tzHUX0HEvQ5wmxTs8jDA47w6Y0MTxSjRuP2lDwXeOHKFPPLxQmHu5fypbkaJLj9W0dUoxg0M07w==
+ b=bHKTMHdOm4piIEWP0KPTwJ1VX9nFWWdn+CToSFXrhDHx2X389g4jTE6EuPo+ZR4D/oQixATR87DOWATW64I8a1jfV0lorYXdjADtaUsY39KjlI5daDb5ytPX3Eax3SklvR3fzwJj+V4ahOmxUoHB+533lpB76kUG7cg0Tcirui4VQBTypt6B7aLOwpIMEZWMaobhLfvtlAI6Va01Pfutas+UKwimSGOYwKQJrWecfrPiRYkpEf0b88A6YAmdASMslGQQDgKSgLR+VVfUTKKXSvuhprRuz8j3n5KmVNnEdGPhxugMzlZq9mIxdq3qe256a6XfEFn2q0iN5T5FjK1R2w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FOxi/CfhagG3gDNX4e+D53xjRfNoGZutNJd8ZybE1Oc=;
- b=WruK/E1dzrzNCeJHwN02QlHSC8mxQlzRtob8oAZ72iflabdNkw5y3MXzhk276EtCmMPjx2Zb65U6XLbLJmX18dWsnWLPBnWsRNTr+Q8n445/JKOpj+1w+mKoi7etFbvap1Dx/4ipU/tLdPajkKkRpTEEryPK1EMTfwCpLngnvA6hbmwQC/UNBX7ceWwRG8mdI7sxWHungjp/psumrOC027ph0XqF9KM+UMGQxr8Bbql9mOTBaad0zBbQHjVgO1/7js3UsBQx+gt/bk1fKXKMsnFahYlfZuMZ5bmDevTzU3iB4cY9i4FcSCQ4DfKkHHEARJXzoqZm0Ck57HRG8ohxcA==
+ bh=c28oXPGES4TOuospvJVNCzfQmFZB39n/D418kbISVic=;
+ b=IyXXxTb9wZ5anaHl+RTZ18OjsGnzGkiyAmN9lIi0QVzdBCZthjryu0qNRIjTsKlmUcw95qdN54keU+AzpJYZQwrxM8euA3WyZajODaxdHcso2YXI7xguiUNyInDiuPd4V+A8yrrANQHoc4Y4ldaRVH/vwjoVRUKVM1j6c6udqaihCU4XvkcaXLZyIF8pfKeAzV4SGP/FJkPeVH2DDwjTm+MiszvFiNBh9umRRBkhlNZYopZiTbo3sKNtGKhLRSvFzJcr4S0CUKnp9+4CoQHYcse/kbqs4NnbN2aZaYoZqlSLIJZnin6S3lQKR5u8ySPebQuWFjKWx1P/X9YSuEN0lQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=kpit.com; dmarc=pass action=none header.from=kpit.com;
- dkim=pass header.d=kpit.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1;
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FOxi/CfhagG3gDNX4e+D53xjRfNoGZutNJd8ZybE1Oc=;
- b=tPK6qzlCM/mPnOIoXAq/Hmk1e/so4q8lyGAhiGpqJ8s89UYntZPJPxNLXRmK8Z8aE6XtEIsWBwYK6Prc+P9cJVElswT6Nz+h63j9fSviJIV1p99toDRUR9ZChdi3tbW8GewXjOSi4ZrVKKZ0/ra1o6NEUJpVSgfapoWAzPu5U6Y=
+ bh=c28oXPGES4TOuospvJVNCzfQmFZB39n/D418kbISVic=;
+ b=pAlzNAfptXh6zt0s4h/s2sJxLLthAd+aOzP6clRY3mA7i8VBvudj+tboXSznmWqPSpoxC2peKMirbGcM3qIC+pdb06MQodjfAwQ0w8MrsEfywmLKXfE1qvUPt72yKxTPN2Ndegqn54d1zJIaYZrGtA+omFVuWs1k8QUGGaDPJY0=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=kpit.com;
-Received: from BMXPR01MB2358.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:31::19)
- by BMXPR01MB0792.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:f::21) with
+ header.from=windriver.com;
+Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
+ by BYAPR11MB2901.namprd11.prod.outlook.com (2603:10b6:a03:91::23) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3933.32; Mon, 15 Mar
- 2021 09:49:00 +0000
-Received: from BMXPR01MB2358.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::a05c:dcaa:1ba4:f108]) by BMXPR01MB2358.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::a05c:dcaa:1ba4:f108%6]) with mapi id 15.20.3933.032; Mon, 15 Mar 2021
- 09:49:00 +0000
-From: "Neetika.Singh" <Neetika.Singh@kpit.com>
-To: openembedded-devel@lists.openembedded.org,
-	raj.khem@gmail.com
-Cc: nisha.parrakat@kpit.com,
-	"Aditya.Tayade" <Aditya.Tayade@kpit.com>
-Subject: [meta-oe][gatesgarth][PATCH] neon: Add ptest
-Date: Mon, 15 Mar 2021 15:18:49 +0530
-Message-Id: <1615801729-8060-1-git-send-email-Neetika.Singh@kpit.com>
-X-Mailer: git-send-email 2.7.4
-X-Originating-IP: [2409:4053:2e08:e196:1de6:446:aaba:25ee]
-X-ClientProxiedBy: PN1PR01CA0080.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c00:1::20) To BMXPR01MB2358.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:b00:31::19)
-Return-Path: Neetika.Singh@kpit.com
+ 2021 13:00:49 +0000
+Received: from BY5PR11MB3909.namprd11.prod.outlook.com
+ ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
+ ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3933.032; Mon, 15 Mar 2021
+ 13:00:48 +0000
+Subject: Re: [oe] [meta-python][PATCH 1/5] python3-waitress: Upgrade 1.4.4 -> 2.0.0
+To: Leon Anavi <leon.anavi@konsulko.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20210312162600.8335-1-leon.anavi@konsulko.com>
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+Message-ID: <8d5ece02-2acf-caf1-d950-f59f1fdefcab@windriver.com>
+Date: Mon, 15 Mar 2021 09:00:45 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.0
+In-Reply-To: <20210312162600.8335-1-leon.anavi@konsulko.com>
+X-Originating-IP: [174.115.236.231]
+X-ClientProxiedBy: BN9PR03CA0362.namprd03.prod.outlook.com
+ (2603:10b6:408:f7::7) To BY5PR11MB3909.namprd11.prod.outlook.com
+ (2603:10b6:a03:191::13)
+Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from localhost.localdomain (2409:4053:2e08:e196:1de6:446:aaba:25ee) by PN1PR01CA0080.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c00:1::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.20.3933.32 via Frontend Transport; Mon, 15 Mar 2021 09:48:59 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BN9PR03CA0362.namprd03.prod.outlook.com (2603:10b6:408:f7::7) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3933.32 via Frontend Transport; Mon, 15 Mar 2021 13:00:48 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: 349041f2-b6da-41b4-9de8-08d8e7978ef2
-X-MS-TrafficTypeDiagnostic: BMXPR01MB0792:
-X-MS-Exchange-Transport-Forked: True
+X-MS-Office365-Filtering-Correlation-Id: fbdbcd4a-587a-40fa-9765-08d8e7b25aad
+X-MS-TrafficTypeDiagnostic: BYAPR11MB2901:
 X-Microsoft-Antispam-PRVS: 
-	<BMXPR01MB0792B8EBE2B9B48D4E4AD06E9F6C9@BMXPR01MB0792.INDPRD01.PROD.OUTLOOK.COM>
-X-MS-Oob-TLC-OOBClassifiers: OLM:3513;
+	<BYAPR11MB2901EF10C1BE994CB74CFAEB9F6C9@BYAPR11MB2901.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	iwRRL7o6pWVkohGOglXJZ6N16NXpSSfpuxXG4iIRHniQxcApKCuFgtTZVAFb5184cMTjcnjgYNKxUbhH1TGncJW7yGhDnmXGDRZT/e2Id2bJgetVLWyaGG/GoaeDJs42tCc6eHz/oZw5toJvSdtqamn6Q3lyf08NFnWnThDGRUNli3ld5rv38WS/OE0MuM+2vgGsg2v/KwD1J2SOkd4XXPpnl3OwsMM59UHPQ2W8dCkAoafxis6btDFCx5x+Qum7veg8fs+tYJVFaTOAdGtMm6Z0z6Z8ldfy1FEqQn+VVPQVsM6toXKJo3e3lL9PdLtmXsFUh3q+Pt35kK5wvB295oXC8qbdzbumbttOuc22xEeA3fiKxGVUuClX3iIkIhXBKo0JMQCWkpUoqHisUln28yieu8eP6TTZBYdXyNQTFq1mmSHT5LfC9LpWDmfr6hL3Wa70CsFCULM7QSDvu2f0QzwOpQzwCv9PleaZ2z0uYAMQD8uKlRNgKXtGQse4uykFUa2IwVVNYxyVZI/d6qw+j7R4BVYX6cUClLXfdAMzSPrFn4+y0dSmKA3aD66kfVkoYC7ujdzR6j3o2pyySYoi2zIKXJP9ZIroeJqpGqLV43VRmMZ7A3ojwLmXmZ4XbZ3S
+	WBOgh2BOI70o4zWCttrBImZOm9Job9TZdiw/DM2Os3jHQxlySfUpNFIMWjEcqslModWCnP1BCjAo6DArUBTh3pcN9iLhmPgvA+kpa5W+9hL/9gdrai4FTGUwWLda2Z7QvWHFxEDHXIH7qbKIe2RSpOVYdPYHq4EfvjME2m3vXH+YDZ2oYLhzN/yQtpyncYvV69eUT9CZLPWRBxKX04gQQEyfvjan/uE+aTnE3p2HYlRXahd/gSO0ISFkd4uMzdHsw5+knZmZJ82kr2B4C8x0B5DsY8Opv6sXMTTFahg8LHN2FvkiTj3y6tIsWW+9vjlUZM+s6/tfiy6hhWOAg4CB7pwpokl/WRvQ5WZLKDVTGKlhZSeJHNH0Vef4z+Rr3be9wG/qFA1BcRnxCSoFBCjtjtuChsHB7q0S6stGWjOeDXfOqHZy/qKsZUD/6awzvB1CBez+naJlJ0JcLDv8Q//gqRmkiIbtWYEi9mdmuC9Z7j6Ht4CHse58ndRs3d00iNwOFH9uvCYXJ2qKUYlxsj4+rcRAPwr7MkhfhY4Eb8AWEtqgFHHUfN2tzcF24Mm1k8dil2ARNrOUBnQd/f3XD9WKcJ4vx9prgabbhrVMSzHUwqWTyz7TAxDeh/Cf8T9dnd/VexZBy5efC/W7OJLF6WLMjtJwYefKWaDOp0munULXjyNOOBZ+PI3HWXL5w3w9ib9x0nFqu/rvlXQ6Z5mtAkAluzVl3J4tMszMCATA7qGpocc=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BMXPR01MB2358.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(376002)(346002)(366004)(396003)(136003)(478600001)(36756003)(6506007)(69590400012)(316002)(66574015)(66946007)(83380400001)(4326008)(66476007)(107886003)(6486002)(66556008)(16526019)(8936002)(5660300002)(6666004)(86362001)(2616005)(52116002)(8676002)(2906002)(6512007)(186003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(376002)(136003)(39840400004)(366004)(396003)(26005)(36756003)(2616005)(8676002)(166002)(956004)(16576012)(186003)(966005)(31686004)(16526019)(478600001)(86362001)(83380400001)(66476007)(8936002)(66556008)(53546011)(5660300002)(33964004)(6486002)(2906002)(6666004)(31696002)(44832011)(316002)(66946007)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?gVLUvsCJdxaVfBgmcJDGiw80upb/DPvLPvAohfWku3sZ6sB+3cI5TtFd/l6b?=
- =?us-ascii?Q?LwjIGGSxJHYXCnJtPYylwSaDDCSSIb+Hb8PEtiSqmZdeHPwFaxCoDi4imjg8?=
- =?us-ascii?Q?XPiwZ0cOO4vRkYUzV86zkiaGgDITtsJQQcF/WjLB5S34X2VSUHJGAGb7j4uc?=
- =?us-ascii?Q?Sg12n6oud9NfgBUN4u+7bE832V5isqL4ZeXHMhS1E1GLooHJwmixG52Lm8xR?=
- =?us-ascii?Q?0pUKYqEwnnm5c+pkuLbCcaClaheEBKbOmPWiVW0MhFvfpwCN059Hqkh+8ktC?=
- =?us-ascii?Q?sCXEtJ/8ajbm+A2/jPjYHqIy5Zm89HInqaDEeausqj0uw6aPYGd8DXjiphkG?=
- =?us-ascii?Q?KYiODQ+pBIlVB5zmtJ0CIpKh3NmW1gbKuRr9dtJoWqQBpzZLk5XAFxqFA6P7?=
- =?us-ascii?Q?rZ24LGZkeu4jmok0fTh2D+AJn3toL9cTqgmCMHwz4h0WKVysJiu9RWSYMQou?=
- =?us-ascii?Q?36GRT9Oc3R8xoxWttuKJP81oeDDKzUSA6Q3tgif1VI+zL55kimIezbVribDX?=
- =?us-ascii?Q?ZqNiSxC8mJudZ9iJh5WVLumIzBv1BgWoEe2O2+3jf6R6y9M6HfMafdyQfGfw?=
- =?us-ascii?Q?iowy1KTKLZ1magxnpytu0KlzahEKdR93pkKQNbvtLJJo0E5/E7Crf6ZZCJbH?=
- =?us-ascii?Q?zWV8Cvb8oZZhDkjkVsUc8Oru6Tu/lzOS3TaKqZAiJ0qBmFZB2kR3xpa1u06Y?=
- =?us-ascii?Q?5e/uJyFAjRMxQ8ca5ZiqSpCdxgGdOxc2fkGTjyalo3asEn62S5kluZV4WXDD?=
- =?us-ascii?Q?E9WjxRT0cBULBLhaUJQy20UZ7wILvKU9iOpj51TFlroqxHHnpujaYSVNL5a1?=
- =?us-ascii?Q?MnqvdTq5FUGMaCYT/z4M4fqaPRAvFg5MPigJ9gO8GORjNfo/6QhejPFPU5Qs?=
- =?us-ascii?Q?52UwRBl2FNLCQ27N7WIqsn6Tg1sp+uDEbXEzouhs/C/nQ4DUNmE388DLhFZG?=
- =?us-ascii?Q?wd6ZPfM3PgeyRDGYCwK2Z/JCxVG4ZZYMVwENqMBhOISQWex4Cc47eXOzF4Pm?=
- =?us-ascii?Q?szuHesCrWlpomLRy9JWvqf/l1jfNbsYaoYMwHMwsVlq1thk19N9wPg5bOgMy?=
- =?us-ascii?Q?TgpSBFyBVlhmZFoBpq2Pq/Ilc7iZHKP7l9ooh96An/AkdmwgoCeiCoWTjPQ5?=
- =?us-ascii?Q?o8jziOurWC7d8jlhH+rbs6A3zLYi6a3v6hV6GnUrgpvkWmty3+WKBnAttYeL?=
- =?us-ascii?Q?sGTbynzhIVQEVoq0OsFdxJhUQORcaI3h/lEaO64tGb+J2lNsaz0h3574otq5?=
- =?us-ascii?Q?tTcnJcTSsLruuDpEqTHDrF+gqE8otEOWDgz32/hPSE1CoKGGoUTdztOAwGrY?=
- =?us-ascii?Q?1jEa0XnyYralh7V0Gkw8qbqOuzSWw2CAF2I7d5Tv4T06LTfkEZPnTQw08pDo?=
- =?us-ascii?Q?7whkIEEh3WXKjy4B/alHq/jvTxOg?=
-X-OriginatorOrg: kpit.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 349041f2-b6da-41b4-9de8-08d8e7978ef2
-X-MS-Exchange-CrossTenant-AuthSource: BMXPR01MB2358.INDPRD01.PROD.OUTLOOK.COM
+	=?utf-8?B?bk0wQTE0akgybCtlL0s2UUJ5Z3NmbVlIQnM2THNMei9QamRnNmdPRXN3UkJ5?=
+ =?utf-8?B?MGRDZkxGSG1hOEloblZWdHdhbHNxbjNDUXdEWW1KTENEbyszd09GeE4wMXJn?=
+ =?utf-8?B?b09aUjgwanE1T3lCWE9Qb1Y5Q1Z3bEtGbU9wZWQyRi8wQS83RFpqZ3E5NFR6?=
+ =?utf-8?B?UVFza1VLNnVUZXQrN1pmOUw4eDlaMUE3QWxmc1pVQTF6UWF5SklNc3NVOUdn?=
+ =?utf-8?B?Yzl0N3E4TDdldktiMERrNXJ2OCtKVGRZcHhjYWNtUWsxOEFiSUJmK2VvYWhm?=
+ =?utf-8?B?SWc1WTc2VVFtS3d0WEdFZkFweGswZ2xFWVVYUXB3TU0ydkZkSEx6YXduK2ZM?=
+ =?utf-8?B?dm52NU52V2hSOU12cEZFS3hCcW44bm5qczhvKzlNTnM2OXlHOUFKY1M2NW15?=
+ =?utf-8?B?WnJCNFB2N1JYYXM1eUZQdGtXSjNQUEJCV1d2aEhLVS9wcGJPNGhMT3YreG9w?=
+ =?utf-8?B?RVJzK1c2S3Fxa2k2MW1MNjd2MHllZWp0b3JWeHJBbVMySUMxNGh6QVlhQzhN?=
+ =?utf-8?B?ZnpJN2UzV3RXVkVTRmVZc1dqU2dJOXhYTXZmcUFUaXJaVklVS3cwbmduSjFV?=
+ =?utf-8?B?Wkxab2pBeWk3NHhyMi9ybGZPUUc1VENKUzlVdGJXWS96b3M4RXUydHJBeWJ3?=
+ =?utf-8?B?WU1NQ3RKeTZLZ0hnYVowRWRLZ083Ly9oUVkrQWUrbHd1a2pvemthd0xXdnA3?=
+ =?utf-8?B?Q2xrL2hNV0ZmbHlWVVBLS0E1Mk1zV2VJQTU0b2FsWGxKdE1ONStzS1V2NlRD?=
+ =?utf-8?B?STRycEdxcS9MR1p5bWN0Y3pDTk50NXU0YitqKzM1ekgrelRwanhQTU5LSEFB?=
+ =?utf-8?B?ZmRZdVpMQm1jY3NQcEF5OUFGbzFHZWlabWUrQ0NkUlhuQUNERmVVM1lUUmJp?=
+ =?utf-8?B?MEo1WkxIbERCbWpBWVk0OTFXT2NyNk5oaUN6cXY4VWh1MTgzYjBmUCtNRnU3?=
+ =?utf-8?B?M2Z2aTN3WXNjZ0ZvbkdGeEEwY0NMVTBmUzlQZE5GanFFVysrZ0MvVUxab0U2?=
+ =?utf-8?B?QW1wRDZobW1HQk1MbWxiblpJOXBLQnk0QzJVUTlXY21JeGFrYjZSMUlnWkxs?=
+ =?utf-8?B?a2R5c3YyZFA1c0pLSDV3ZndIN2lyTStaTndCN2pjUEsrUEsxbWF1VUpEaVBW?=
+ =?utf-8?B?NTh0V01KZ1hUTE9UZXFCNUNLRVYxT2o0Tm1oRHp6Mzc4L1IzcmxuZG1ZcDkv?=
+ =?utf-8?B?ZzcydEZudWVZZG9ldmoxeVJqYXVHYTBnOUordjA1c1ByMTdjR2RnS3lsdjBQ?=
+ =?utf-8?B?M1VPQU5UM1RTbVhuaEFhaHNHRXNFT290UVhLWW43bGtmRkZ6eDIzMEsyaHAw?=
+ =?utf-8?B?TTc5YUc0T2pNdzZ0S0VUeDBsd0NubVIwcnJTVnIyUG1NNlZSbXRMeUNDZnc1?=
+ =?utf-8?B?eHQvUVNHNHhIR2Y4eVRCWlQ3dk5yYklMUi9GWm5rV2VWdEM1UTlLZkw5NW5E?=
+ =?utf-8?B?eXlUYlFLT2pLWkZlSjcyRy9hNXNvOUJYVkJRZklHdUx6MWp3VDFreGFITDNU?=
+ =?utf-8?B?VXEyQktpRGRYai9mbjV3Qzgyd2lZZ0M3ck85dW51ckV5bERXTmxwaGlpU09V?=
+ =?utf-8?B?ZUV5Nkpvb3Bpc2FEVXJZQUhUbjB4Tk9sVmhseW9VcC9aZFdHbjI4d0lFWTZ0?=
+ =?utf-8?B?S0NjZDF6dm5KcmIzUVlLTTZFelp2QlJPMXp5Ty9VeXZkNkpsSExZckRnMzNB?=
+ =?utf-8?B?Q1FydDZBT3ZydzFRVUZkZkNWVXBLRmpSWTFqN3RFVU8rZXNxaUI5cDZZd1F3?=
+ =?utf-8?Q?hwKc2sQ8UDHEosG1W3LFYV3Wgz1YGusb0EiQ5e4?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: fbdbcd4a-587a-40fa-9765-08d8e7b25aad
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Mar 2021 09:49:00.3844
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Mar 2021 13:00:48.6794
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3539451e-b46e-4a26-a242-ff61502855c7
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GVAu3LrTJklEXQEBLowBtrp9taeVBniQ83bg7JTcjkZ+9E44mndgxPWyQjzlmy20iFQH/7ng6pvOzkpRX+seAw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BMXPR01MB0792
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-CrossTenant-UserPrincipalName: xEMbdUobA6SlU87CW5JvQiesE3TmYvyMew3ABWPLnjG4oHSVIwWrL8HLRYSgQAfAP+qMXDGRNuWH68rwgCBwQYAjcPUEN1EuG65ocrdUKI0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2901
+Content-Type: multipart/alternative;
+ boundary="------------9B6AC762FB1A69107D8005F9"
+Content-Language: en-US
 
-From: "Aditya.Tayade" <Aditya.Tayade@kpit.com>
+--------------9B6AC762FB1A69107D8005F9
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Reused below test suites from neon source package:
-BASIC_TESTS:
-auth
-basic
-request
-session
-socket
-string-tests
-stubs
-uri-tests
-util-tests
 
-DAV_TESTS:
-acl3744
-lock
-oldacl
-props
-xml
-xmlreq
+On 2021-03-12 11:25 a.m., Leon Anavi wrote:
+> [Please note: This e-mail is from an EXTERNAL e-mail address]
+>
+> Upgrade to release 2.0.0:
+>
+> - Fix a crash on startup when listening to multiple interfaces.
+> - Waitress no longer attempts to guess at what the server_name
+>    should be for a listen socket, instead it always use a new
+>    adjustment/argument named server_name.
+> - Allow tasks to notice if the client disconnected.
+> - Drop Python 2.7 and 3.5 support
+> - The server now issues warning output when it there are enough
+>    open connections (controlled by "connection_limit"), that it is
+>    no longer accepting new connections. This situation was
+>    previously difficult to diagnose.
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> ---
+>   .../{python3-waitress_1.4.4.bb => python3-waitress_2.0.0.bb}   | 3 +--
+>   1 file changed, 1 insertion(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-waitress_1.4.4.bb => python3-waitress_2.0.0.bb} (71%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-waitress_1.4.4.bb b/meta-python/recipes-devtools/python/python3-waitress_2.0.0.bb
+> similarity index 71%
+> rename from meta-python/recipes-devtools/python/python3-waitress_1.4.4.bb
+> rename to meta-python/recipes-devtools/python/python3-waitress_2.0.0.bb
+> index 3e207de4f..490dcee6c 100644
+> --- a/meta-python/recipes-devtools/python/python3-waitress_1.4.4.bb
+> +++ b/meta-python/recipes-devtools/python/python3-waitress_2.0.0.bb
+> @@ -6,7 +6,6 @@ SECTION = "devel/python"
+>   LICENSE = "ZPL-2.1"
+>   LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=78ccb3640dc841e1baecb3e27a6966b2"
+>
+> -SRC_URI[md5sum] = "079c3c4902b1cb5d0a917276ee70f1df"
+> -SRC_URI[sha256sum] = "1bb436508a7487ac6cb097ae7a7fe5413aefca610550baf58f0940e51ecfb261"
+> +SRC_URI[sha256sum] = "69e1f242c7f80273490d3403c3976f3ac3b26e289856936d1f620ed48f321897"
+>
+>   inherit setuptools3 pypi
+> --
+> 2.17.1
+>
+>
+> 
+>
 
-Overall execution time of above test suite is approximately 15sec.
+--------------9B6AC762FB1A69107D8005F9
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Neetika.Singh <Neetika.Singh@kpit.com>
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 2021-03-12 11:25 a.m., Leon Anavi
+      wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:20210312162600.8335-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">[Please note: This e-mail is from an EXTERNAL e-mail address]
+
+Upgrade to release 2.0.0:
+
+- Fix a crash on startup when listening to multiple interfaces.
+- Waitress no longer attempts to guess at what the server_name
+  should be for a listen socket, instead it always use a new
+  adjustment/argument named server_name.
+- Allow tasks to notice if the client disconnected.
+- Drop Python 2.7 and 3.5 support
+- The server now issues warning output when it there are enough
+  open connections (controlled by &quot;connection_limit&quot;), that it is
+  no longer accepting new connections. This situation was
+  previously difficult to diagnose.
+
+Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
+    </blockquote>
+    Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a><br>
+    <blockquote type="cite" cite="mid:20210312162600.8335-1-leon.anavi@konsulko.com">
+      <pre class="moz-quote-pre" wrap="">
 ---
- meta-oe/recipes-support/neon/neon/run-ptest | 25 +++++++++++++++++++++++++
- meta-oe/recipes-support/neon/neon_0.30.2.bb | 15 ++++++++++++++-
- 2 files changed, 39 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/neon/neon/run-ptest
+ .../{python3-waitress_1.4.4.bb =&gt; python3-waitress_2.0.0.bb}   | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-waitress_1.4.4.bb =&gt; python3-waitress_2.0.0.bb} (71%)
 
-diff --git a/meta-oe/recipes-support/neon/neon/run-ptest b/meta-oe/recipes-=
-support/neon/neon/run-ptest
-new file mode 100644
-index 0000000..602084a
---- /dev/null
-+++ b/meta-oe/recipes-support/neon/neon/run-ptest
-@@ -0,0 +1,25 @@
-+#!/bin/sh
-+
-+set -eux
-+
-+rm -f debug.log child.log
-+
-+ulimit -c unlimited
-+ulimit -t 120
-+
-+cd test
-+echo foobar > foobar.txt
-+
-+BASIC_TESTS=3D"auth basic redirect request session socket string-tests \
-+             stubs uri-tests util-tests"
-+DAV_TESTS=3D"acl3744 lock oldacl props xml xmlreq"
-+for t in $BASIC_TESTS $DAV_TESTS
-+do
-+    echo "Running $t..."
-+    if "./$t"
-+    then
-+        echo "PASS:$t"
-+    else
-+        echo "FAIL:$t"
-+    fi
-+done
-diff --git a/meta-oe/recipes-support/neon/neon_0.30.2.bb b/meta-oe/recipes-=
-support/neon/neon_0.30.2.bb
-index 00b79f6..7feec41 100644
---- a/meta-oe/recipes-support/neon/neon_0.30.2.bb
-+++ b/meta-oe/recipes-support/neon/neon_0.30.2.bb
-@@ -7,12 +7,13 @@ LIC_FILES_CHKSUM =3D "file://src/COPYING.LIB;md5=3Df30a97=
-16ef3762e3467a2f62bf790f0a
+diff --git a/meta-python/recipes-devtools/python/python3-waitress_1.4.4.bb b/meta-python/recipes-devtools/python/python3-waitress_2.0.0.bb
+similarity index 71%
+rename from meta-python/recipes-devtools/python/python3-waitress_1.4.4.bb
+rename to meta-python/recipes-devtools/python/python3-waitress_2.0.0.bb
+index 3e207de4f..490dcee6c 100644
+--- a/meta-python/recipes-devtools/python/python3-waitress_1.4.4.bb
++++ b/meta-python/recipes-devtools/python/python3-waitress_2.0.0.bb
+@@ -6,7 +6,6 @@ SECTION = &quot;devel/python&quot;
+ LICENSE = &quot;ZPL-2.1&quot;
+ LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=78ccb3640dc841e1baecb3e27a6966b2">&quot;file://LICENSE.txt;md5=78ccb3640dc841e1baecb3e27a6966b2&quot;</a>
 
- SRC_URI =3D "${DEBIAN_MIRROR}/main/n/neon27/neon27_${PV}.orig.tar.gz \
-            file://pkgconfig.patch \
-+           file://run-ptest \
-           "
+-SRC_URI[md5sum] = &quot;079c3c4902b1cb5d0a917276ee70f1df&quot;
+-SRC_URI[sha256sum] = &quot;1bb436508a7487ac6cb097ae7a7fe5413aefca610550baf58f0940e51ecfb261&quot;
++SRC_URI[sha256sum] = &quot;69e1f242c7f80273490d3403c3976f3ac3b26e289856936d1f620ed48f321897&quot;
 
- SRC_URI[md5sum] =3D "e28d77bf14032d7f5046b3930704ef41"
- SRC_URI[sha256sum] =3D "db0bd8cdec329b48f53a6f00199c92d5ba40b0f015b153718d=
-1b15d3d967fbca"
-
--inherit autotools binconfig-disabled lib_package pkgconfig
-+inherit autotools binconfig-disabled lib_package pkgconfig ptest
-
- # Enable gnutls or openssl, not both
- PACKAGECONFIG ?=3D "expat gnutls libproxy webdav zlib"
-@@ -33,6 +34,18 @@ do_compile_append() {
-     oe_runmake -C test
- }
-
-+do_install_ptest(){
-+    BASIC_TESTS=3D"auth basic redirect request session socket string-tests=
- \
-+                 stubs uri-tests util-tests"
-+    DAV_TESTS=3D"acl3744 lock oldacl props xml xmlreq"
-+    mkdir "${D}${PTEST_PATH}/test"
-+    for i in ${BASIC_TESTS} ${DAV_TESTS}
-+    do
-+        install -m 0755 "${B}/test/${i}" \
-+        "${D}${PTEST_PATH}/test"
-+    done
-+}
-+
- BINCONFIG =3D "${bindir}/neon-config"
-
- BBCLASSEXTEND =3D "native"
+ inherit setuptools3 pypi
 --
-2.7.4
+2.17.1
 
-This message contains information that may be privileged or confidential an=
-d is the property of the KPIT Technologies Ltd. It is intended only for the=
- person to whom it is addressed. If you are not the intended recipient, you=
- are not authorized to read, print, retain copy, disseminate, distribute, o=
-r use this message or any part thereof. If you receive this message in erro=
-r, please notify the sender immediately and delete all copies of this messa=
-ge. KPIT Technologies Ltd. does not accept any liability for virus infected=
- mails.
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+
+
+</pre>
+    </blockquote>
+  </body>
+</html>
+
+--------------9B6AC762FB1A69107D8005F9--
