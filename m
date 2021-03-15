@@ -1,130 +1,112 @@
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
- by mx.groups.io with SMTP id smtpd.web08.10881.1615823737988548233
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web12.11092.1615825006620522587
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Mar 2021 08:55:38 -0700
+ Mon, 15 Mar 2021 09:16:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: randy.macleod@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 12FFtTcx026090
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 15 Mar 2021 08:55:30 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2106.2; Mon, 15 Mar 2021 08:55:28 -0700
-Received: from vme.wrs.com (172.25.44.2) by ala-exchng01.corp.ad.wrs.com
- (147.11.82.252) with Microsoft SMTP Server id 15.1.2106.2 via Frontend
- Transport; Mon, 15 Mar 2021 08:55:28 -0700
-From: "Randy MacLeod" <randy.macleod@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] tclap: upgrade 1.2.2 -> 1.4.0
-Date: Mon, 15 Mar 2021 11:55:28 -0400
-Message-ID: <20210315155528.1471897-1-Randy.MacLeod@windriver.com>
-X-Mailer: git-send-email 2.27.0
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id C97BA40BFF;
+	Mon, 15 Mar 2021 16:16:45 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id rj0rsCxqTFlR; Mon, 15 Mar 2021 16:16:45 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8FF5640A77;
+	Mon, 15 Mar 2021 16:16:41 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 55904174543; Mon, 15 Mar 2021 12:16:41 -0400 (EDT)
+Date: Mon, 15 Mar 2021 12:16:41 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: Armin Kuster <akuster808@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>, "Bajjuri, Praneeth" <praneeth@ti.com>,
+	Changqing Li <changqing.li@windriver.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][dunfell PATCH] thin-provisioning-tools: switch branch from master to main
+Message-ID: <20210315161641.GL4892@denix.org>
+References: <20210315011408.6604-1-praneeth@ti.com>
+ <938d2927-7eb0-c273-d4a2-6adacb09ecb8@ti.com>
+ <0ad669ca-d9e5-bd46-74f3-13e01f7d6e37@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+In-Reply-To: <0ad669ca-d9e5-bd46-74f3-13e01f7d6e37@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Project switched from autotools to CMake so drop the Makefile.am patch.
-The COPYING file copyright years were updated. Add description.
+Armin,
 
-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
----
- .../tclap/Makefile.am-disable-docs.patch      | 31 -------------------
- meta-oe/recipes-devtools/tclap/tclap_1.2.2.bb | 16 ----------
- meta-oe/recipes-devtools/tclap/tclap_1.4.0.bb | 22 +++++++++++++
- 3 files changed, 22 insertions(+), 47 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/tclap/tclap/Makefile.am-disable-docs.patch
- delete mode 100644 meta-oe/recipes-devtools/tclap/tclap_1.2.2.bb
- create mode 100644 meta-oe/recipes-devtools/tclap/tclap_1.4.0.bb
+Could you please merge this backport to dunfell ASAP, as GitHub branch=20
+renaming broke dunfell builds. Thanks a lot!
 
-diff --git a/meta-oe/recipes-devtools/tclap/tclap/Makefile.am-disable-docs.patch b/meta-oe/recipes-devtools/tclap/tclap/Makefile.am-disable-docs.patch
-deleted file mode 100644
-index 358cbefdd..000000000
---- a/meta-oe/recipes-devtools/tclap/tclap/Makefile.am-disable-docs.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From c209ed0e7ffca32fe3714bad9cc54bdb00c286bb Mon Sep 17 00:00:00 2001
--From: Ting Liu <b28495@freescale.com>
--Date: Mon, 15 Apr 2013 16:28:37 +0800
--Subject: [PATCH] Makefile.am: disable docs
--
--Upstream-Status: Inappropriate [OE specific]
--
--docs need some generating tool (for example, doxygen) from host which may
--be not available. Disable it to avoid build issue.
--
--Signed-off-by: Ting Liu <b28495@freescale.com>
-----
-- Makefile.am |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
--
--diff --git a/Makefile.am b/Makefile.am
--index 0a6ebc9..6b42f41 100644
----- a/Makefile.am
--+++ b/Makefile.am
--@@ -1,7 +1,7 @@
-- 
-- ACLOCAL_AMFLAGS = -I config
-- 
---SUBDIRS = include examples docs tests msc config
--+SUBDIRS = include examples tests msc config
-- 
-- pkgconfigdir = $(libdir)/pkgconfig
-- pkgconfig_DATA = $(PACKAGE).pc
---- 
--1.7.5
--
-diff --git a/meta-oe/recipes-devtools/tclap/tclap_1.2.2.bb b/meta-oe/recipes-devtools/tclap/tclap_1.2.2.bb
-deleted file mode 100644
-index bba8d5c21..000000000
---- a/meta-oe/recipes-devtools/tclap/tclap_1.2.2.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--SUMMARY = "Templatized C++ Command Line Parser"
--HOMEPAGE = "http://tclap.sourceforge.net/"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://COPYING;md5=0ca8b9c5c5445cfa7af7e78fd27e60ed"
--
--SRCREV = "ec3ddcfe41b0544a4551a57439b6b3682fe31479"
--SRC_URI = "git://git.code.sf.net/p/tclap/code;branch=1.2 \
--    file://Makefile.am-disable-docs.patch \
--"
--
--S = "${WORKDIR}/git"
--inherit autotools
--
--ALLOW_EMPTY_${PN} = "1"
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-oe/recipes-devtools/tclap/tclap_1.4.0.bb b/meta-oe/recipes-devtools/tclap/tclap_1.4.0.bb
-new file mode 100644
-index 000000000..13f66e47d
---- /dev/null
-+++ b/meta-oe/recipes-devtools/tclap/tclap_1.4.0.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "Templatized C++ Command Line Parser"
-+HOMEPAGE = "http://tclap.sourceforge.net/"
-+DESCRIPTION = "TCLAP is a small, flexible library that provides a simple interface \
-+for defining and accessing command line arguments. It was intially inspired by the \
-+user friendly CLAP libary. The difference is that this library is templatized, so \
-+the argument class is type independent. Type independence avoids identical-except-for-type \
-+objects, such as IntArg, FloatArg, and StringArg. While the library is not strictly \
-+compliant with the GNU or POSIX standards, it is close. \
-+"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=5c64b2e8cc50917b2744a90950faa7cd"
-+
-+SRCREV = "799a8b1f99818e39fee19d0601030770af1221e1"
-+SRC_URI = "git://git.code.sf.net/p/tclap/code;branch=1.4 \
-+"
-+
-+S = "${WORKDIR}/git"
-+inherit cmake
-+
-+ALLOW_EMPTY_${PN} = "1"
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.27.0
+--=20
+Denys
 
+
+On Mon, Mar 15, 2021 at 08:48:04AM -0700, Khem Raj wrote:
+> I think yes, this should help dunfell if backported.
+>=20
+> On 3/15/21 8:45 AM, Bajjuri, Praneeth wrote:
+> >
+> >
+> >On 3/14/2021 8:14 PM, praneeth@ti.com wrote:
+> >>From: Changqing Li <changqing.li@windriver.com>
+> >
+> >Have observed build errors like the below
+> >
+> >DEBUG: Mirror fetch failure for url
+> >git://github.com/jthornber/thin-provisioning-tools;protocol=3Dhttps
+> >(original url: git://github.com/jthornber/thin-provisioning-tools)
+> >DEBUG: Fetcher failure: Unable to find revision
+> >5e5409f48b5403d2c6dffd9919b35ad77d6fb7b4 in branch master even
+> >from upstream
+> >ERROR: Fetcher failure: Unable to find revision
+> >5e5409f48b5403d2c6dffd9919b35ad77d6fb7b4 in branch master even
+> >from upstream
+> >ERROR: Fetcher failure for URL:
+> >'git://github.com/jthornber/thin-provisioning-tools'. Unable to
+> >fetch URL from any source.
+> >
+> >and looked like the switching branch to main was missing on dunfell br=
+anch.
+> >
+> >Please advise if this is the right fix.
+> >
+> >
+> >>
+> >>Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> >>Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> >>[cherry pick commit 260809cffdaad4fcd42b0977090f2c467a5474ef to dunfe=
+ll]
+> >>Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+> >>---
+> >>=A0 .../thin-provisioning-tools/thin-provisioning-tools_0.8.5.bb=A0=A0=
+=A0 | 2 +-
+> >>=A0 1 file changed, 1 insertion(+), 1 deletion(-)
+> >>
+> >>diff --git a/meta-oe/recipes-support/thin-provisioning-tools/thin-pro=
+visioning-tools_0.8.5.bb b/meta-oe/recipes-support/thin-provisioning-tool=
+s/thin-provisioning-tools_0.8.5.bb
+> >>
+> >>index 9f89bac22..3f82734ac 100644
+> >>--- a/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioni=
+ng-tools_0.8.5.bb
+> >>
+> >>+++ b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioni=
+ng-tools_0.8.5.bb
+> >>
+> >>@@ -7,7 +7,7 @@ SECTION =3D "devel"
+> >>=A0 LIC_FILES_CHKSUM =3D
+> >>"file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae504"
+> >>=A0 S =3D "${WORKDIR}/git"
+> >>-SRC_URI =3D "git://github.com/jthornber/thin-provisioning-tools \
+> >>+SRC_URI =3D
+> >>"git://github.com/jthornber/thin-provisioning-tools;branch=3Dmain
+> >>\
+> >>=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 file://0001-do-not-strip-pdata_t=
+ools-at-do_install.patch \
+> >>=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 file://use-sh-on-path.patch \
+> >>=A0 "
+> >>
+>=20
