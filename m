@@ -1,17 +1,17 @@
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.60])
- by mx.groups.io with SMTP id smtpd.web09.8274.1615813259194006244
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.46])
+ by mx.groups.io with SMTP id smtpd.web08.8191.1615813274194531365
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Mar 2021 06:00:59 -0700
+ Mon, 15 Mar 2021 06:01:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=mrKgfnor;
- spf=pass (domain: windriver.com, ip: 40.107.244.60, mailfrom: trevor.gamblin@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=R2RJ52CL;
+ spf=pass (domain: windriver.com, ip: 40.107.243.46, mailfrom: trevor.gamblin@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kCex8EB6EGIkD8ksmM47RHS+jqR6or33o6CrfHS86nkkVrEjCMkASNpcc43ESiHiL5KoIIACrlZ8KgHa3jpikHTgl0O4Is3o81VRHZK7eATXVel/0LoMzNL/pi5UAXvIGAOpw15XPCxCM+TuXQcw1aN1jgjeZhWJyP9eavJ/3+jO6T75JQosTRBsqPIorxpen9x20Rsydf1t4ymJgs+qrkdkGasz7MDidZ3MT5wlMsYxEee+hSLlPheu71/lgP+5ICHyExrejrZDKe4oJd3rot/U85q4/FwjJx/FIX/lTAiglqxJU9ACHtkol9zq7z8vtBsyQ++8wzkm3RUGjRKMAw==
+ b=TO+rrJZkVzjr0hp8u0+MRstX5SNO99kjLM8NCE92nnMzTRk7Z7/9EZ2psGBvv6vt/uDG6/hO8WlN+5Wt0j8ZW0WwQNjYZeJx4Xgwp1czUxr/GyQgheJymg05IfbRhTmokvszc0svm7k0eG7nPZN/uIO9SVqVlbEMBowSDy3YSciTRalfthCtqMntufP/HsO72mBq2FTdNC6R8gBJcy02/G0kwD24n6PzP2nE6hn/t6ZDW4AitiQ2gwnqVqgIFkrFnUeRJ3ZsqfhRw0Y4HFFbsFETgF+oRCjGQVT0RRBwRU+/HovniX4f+zSlb/FBrJ0M7UbSBDh/qj67quvOKelFNw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IBG1FccAfIsFpDcfbl0tkLBYx+v67mCQo1jtiEAX1s4=;
- b=UY0/G0WaSEMKf1GS1NXUFzwJ8q/scaYyh/aFRW/cA6vWt8hfBatbvnmq/DoV0BaPIOu2H8P6JOS/l1C84uGWAd2sTKcASVwgY1caXV7zJ8HKL+M1FSjI64nojQCT9qUqk4ip1iErVAe/Vy/OMq1tvEuJAXfywUsa/E2GIY7f/4btf+DnMhWfuK3fFMVkINx6SrlZpeJiahZl+jNyJYOo3mkSfvnBM+Xr+32Y2GNCSIT6RFFe52+g9K/ldH/BcdqUWfJfC+T5uTRQFPAp/0EK4wFH2HbqNeHNlyjZ3U5QfBDYy3r1v+Fr6q7gvV56RpdMG6UrZaXyBmYNIdFu6dyQWg==
+ bh=vJxXS10I638hnDxHMQFxnKafs2pa9kyDWPmFl5GidJU=;
+ b=nWhg8IEtfZlHZK4l63nGXn75H8Xzn9D0LE/2w1klQICtFb8TPkSo+zq0oQY0ZXGzdaLsSjkTPjRYmlOuoXDtAAS6P5csJJuW9V9MoW0FcNN0Te0QueSQ48vfRE1xExMt6zujf1EW7/XhMhxcervAg1Jd7o7frKv1R3BN8/dbLehJWZKoEiboNhuPDT5luZhiGI7lNUnjKwN2etmo9c6DilK42QLtMhiTYMiyBOxOgsvKTTxp/LkBxBtwqqyk8T5nLSSfcjXBerzoHnmOxQl7cpb0cqHEyne9LcMgY4Y6qA98vDbM7CB9KuepcU2DtmQk5hHs+bIEOYprPOoHE2ahdw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,8 +19,8 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IBG1FccAfIsFpDcfbl0tkLBYx+v67mCQo1jtiEAX1s4=;
- b=mrKgfnore/681sAVdpk8A8Wq1OXvpMIPqsJ7GR7l8NQljPxemWyrchfzyaV8KA3JRC4rwURTQmDzC7DR0bJbl0lg0guhSwXnX1I4mqZ8A07MBIb1y4DxcYZTRH4M2pMnGQvapRp//tgMk7YbD2zPJdoyV6lsLuPdnb+Y6WbT2ZU=
+ bh=vJxXS10I638hnDxHMQFxnKafs2pa9kyDWPmFl5GidJU=;
+ b=R2RJ52CLPz0CDy469Icyqo1m0wyKaSlZjaI0yEsqphlB9O3k582jDuNSu7j7hmav7Jia7jdDgUq2CK/a9knjPNsfTfWg+2AEdBWULsN0M1gewjlztKZEYUnkQ1icT5ncm2yDRStsqD1DbMORKwHIqv4EbwMNjeEAqFvQMgigofE=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
@@ -28,89 +28,89 @@ Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
  by BYAPR11MB2901.namprd11.prod.outlook.com (2603:10b6:a03:91::23) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3933.32; Mon, 15 Mar
- 2021 13:00:57 +0000
+ 2021 13:01:12 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::68f7:ac3d:b5c2:3447%7]) with mapi id 15.20.3933.032; Mon, 15 Mar 2021
- 13:00:57 +0000
-Subject: Re: [oe] [meta-python][PATCH 2/5] python3-pako: Upgrade 0.3.0 -> 0.3.1
+ 13:01:12 +0000
+Subject: Re: [oe] [meta-python][PATCH 3/5] python3-pyscaffold: Upgrade 3.3.1 -> 4.0
 To: Leon Anavi <leon.anavi@konsulko.com>,
  openembedded-devel@lists.openembedded.org
 References: <20210312162600.8335-1-leon.anavi@konsulko.com>
- <20210312162600.8335-2-leon.anavi@konsulko.com>
+ <20210312162600.8335-3-leon.anavi@konsulko.com>
 From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-Message-ID: <3db2d908-6405-75ff-188f-c1062449d171@windriver.com>
-Date: Mon, 15 Mar 2021 09:00:55 -0400
+Message-ID: <09689b41-7ff8-bf34-729a-070ee84307b1@windriver.com>
+Date: Mon, 15 Mar 2021 09:01:08 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.0
-In-Reply-To: <20210312162600.8335-2-leon.anavi@konsulko.com>
+In-Reply-To: <20210312162600.8335-3-leon.anavi@konsulko.com>
 X-Originating-IP: [174.115.236.231]
-X-ClientProxiedBy: BN9PR03CA0384.namprd03.prod.outlook.com
- (2603:10b6:408:f7::29) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: BN9PR03CA0362.namprd03.prod.outlook.com
+ (2603:10b6:408:f7::7) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 Return-Path: trevor.gamblin@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.0.55] (174.115.236.231) by BN9PR03CA0384.namprd03.prod.outlook.com (2603:10b6:408:f7::29) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3933.32 via Frontend Transport; Mon, 15 Mar 2021 13:00:57 +0000
+Received: from [192.168.0.55] (174.115.236.231) by BN9PR03CA0362.namprd03.prod.outlook.com (2603:10b6:408:f7::7) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3933.32 via Frontend Transport; Mon, 15 Mar 2021 13:01:11 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 2b62235a-7a8f-4df0-047b-08d8e7b2601b
+X-MS-Office365-Filtering-Correlation-Id: 9312e784-3ae3-4680-b9af-08d8e7b268f2
 X-MS-TrafficTypeDiagnostic: BYAPR11MB2901:
 X-Microsoft-Antispam-PRVS: 
-	<BYAPR11MB2901E3578A425CF51AAEBE229F6C9@BYAPR11MB2901.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1002;
+	<BYAPR11MB290148C0C27BA1305BD1F0FA9F6C9@BYAPR11MB2901.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1107;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	6xlM2ZjKWh3ulsMpz0luH47++7xVJ7xgzmIUiVMCIaJxdoc02d5iN23DJjQ+IAryHF6imvvtx6/92yqi5svLhQsosHyMGkJizKB7+lWk1p0sfCCoJbBB1QDhegvKJHJs7vOKXIdyIM3bjjMADaVScvILNYzkowhtgwWa0QYk7dZNoJqhjijfCjksZTvCH37AnJa/Y8Ttjuo5Y+1xEBmsW+6fVmAuSG2rpYxCZlh7K818m0VfIeLVvoBgV1LuYUqvts3pnlQ2vwJWGlEKXU37pgQgbMLcGDooELHTjHTYnR1N6ul4Ls1jBP+sV6oCUSKZDzGEkCuU1s1FAVWYgOL3Tq184XKSalcswbZ7XkkJ5VS4KKYHHjlr1z5H2HYLxRp2lN1HWoPsaHOG1UNt3D4HwESKQTQk7sX4wJRtH0dgOfNtAzMSoTlyEuFn/WDnTHQOrZVETDHDeWjiQQY2h+4g54AorwZ/g6IKNo/SMe9Q5VTQRtttYS0NjFn/urmSjQyEx60S9H7Z3vQMQuGdpuILVs4EZ8s708+NdHK6JA7nuNbLhMlxGWGBHuIhWTFOykymYqsa/58DfAyegfzmHXUnS/35aAzVWhV2O7AFt6fHjszrEFUwG+vhKiwxfJU8knF+Lmn4R/gEEBr09WopT9maAA3OvXmuLNJbsiTeV446Kl0BkE2S3ja4S1e9LA5sDRky8Y95NUlJgFFmuKFCGPsd1eaS8YDGAO0dJCs+djSOpks=
+	J9LTAkkeA8OT0+kbZ9yU1uxpFs6d1faejRzmBcTjUTU2mfy4yg9Wht2F+RCAtrX2N0AAgaYPNKG30AkZqrOViUdHuzegq46JMmyFRCsTF4tjd5P3Iggf1olAU1ZoUFeL/Z0wFjVtT2W6hG18Y6WJ9clyBysrmFPbJfUhWKZq3Li9ZZD1V+E0gekg07IRsZD5hPYoiikRH35caFOoLSqESHVfpBi/3+JPdpwDZ3EiWUVTx304ouVFLnt5zovX7flBf+G3FNs/yqiIJV+rZXaFFJSYxMBw76yw1a/B+XLdLuxIq/Gf83NN/hIA4yYqtmOpW1G08KCFSSy49zY/b1IpXd8fmJWJ3NgX4v+jWAfyVy9PjhhLAJZNZLv8iNoMjWQZdceovRb2zfVkmfRwbMOibU88bJLrrQ7GdK7LGKhIV6luOJJjO6nD6vr+YKM0PrriXUtWQgqs6kC9vXAjMj5IEaBnjeIU3iDeZWfeoGMJH9ZnJk7pmt4LIuLidz4qAqzaZ+8txISAdsURNgWwwX1LHSAGejEQxJ6qQMROjURPEsgFXPKlvUKpAFiLSUhikpM0JKPESRIKYlvSA4APiToi24nOi9J+B30MuNtEnJTdBHyHebv3Q2ADHDoDEEwDLGhqe7yyzwWaVm/vdqUQsDdyqmpMvyMyiVgPaZnWxOIxYajYnVe1W7pwosF4pbyn67j/2WYoBmmbgWD/hh/tEmOpjgKfkywbabTBRuWtlQFO0Ac=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(376002)(136003)(39840400004)(366004)(396003)(26005)(36756003)(2616005)(8676002)(166002)(956004)(16576012)(186003)(966005)(31686004)(16526019)(478600001)(86362001)(83380400001)(66476007)(8936002)(66556008)(53546011)(5660300002)(33964004)(6486002)(2906002)(31696002)(44832011)(316002)(66946007)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(376002)(136003)(39840400004)(366004)(396003)(26005)(36756003)(2616005)(8676002)(166002)(956004)(16576012)(186003)(966005)(31686004)(16526019)(478600001)(86362001)(83380400001)(66476007)(8936002)(66556008)(53546011)(5660300002)(33964004)(6486002)(2906002)(6666004)(31696002)(44832011)(316002)(66946007)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?MWd2L3pROHovcDhkZWxscTQxUGpTNGZGancvNS9JeHUvRDNtU094SHc0TVAw?=
- =?utf-8?B?Mk5SV09mQkFxZnRxNWdzNWpRYk8zNmxsL1IreFlwL2RRSDE5UTNwOTEvZHEw?=
- =?utf-8?B?RUNYYlF0WllQVlNCNXc5dE9BQ1ltenNrVElpdk9kS0g3bWhwd2xiaEoxbkNm?=
- =?utf-8?B?a2V0SE9FbWdETW9sWFI0b2t1TlFtMVdBUURndmg5Mkhhbmd1WVlJcHlQbWVh?=
- =?utf-8?B?eStuNjNIcE5mR2VHQTB0QytTRitlRUg3SnVGSU55eFk0L1FNMFFGYWRsUFJ1?=
- =?utf-8?B?UGFjS1V0SWhrNHE3bG44Q1NZbERPNVVIZnJGSmRvQWoxRDJXYmhGcmdlTWY3?=
- =?utf-8?B?OGF4U0FOTjQzd1dLQnZFTE5CRE1yMGJVOFlJMWZwK1dCZWtpMm5QWUhwV2I1?=
- =?utf-8?B?ODF4OVpoai9hcEpmSWJOczI1RUFNRzhJNHZUZHJ1MHdMc3hnS2pFVDhzRnRj?=
- =?utf-8?B?Tmt6dlIvc2xxNzZaREZVd0pYejlLVVFEQ1hOME9SKzg0ejdaOW9WVTI1b2Vh?=
- =?utf-8?B?ZlJCMWNsbXphckRiVnZyOUxmMU5XMUVWS3kvdjhhbUZpOXdGSW5xMGE4Rzk1?=
- =?utf-8?B?Wk1YZU0rRE1ZdnBrQ1I1OXphSS9ISUtLMzdOZVFOS0tMbGtkanZ2MVZvN2g0?=
- =?utf-8?B?ejJvY2xqZU1YSm5RMTVvWHY1OGo0eVJZdGkwT1cwRXJVcUlDRDNwQVVwMTFD?=
- =?utf-8?B?TWVNUEpzYU5RY3lHbUU5YXV2bnpuU1J2dmlYZDUzZlJTRXNlenBuaFBNSjVB?=
- =?utf-8?B?NXB1MllDaUIyYyszWkg5RUVUTnlRSE01dVpySXZRZzg1SU01TUVaOUJhRG82?=
- =?utf-8?B?KzgrZkJYODFqWnc4NmZTMGg1M0tvNWovNlhwUkVMMHMxSHpnY2E4b25kR29p?=
- =?utf-8?B?YnhaelJJS0xZTTNHM1JvalEvOHF5TWtDT3pUelJNM2tOSVYzRHR6anZ6MzBv?=
- =?utf-8?B?alYrZHAxOVNBOXNJNEdwZHRTclhZRTBpdUt1K2dTdVFrZVF0c0NBNEtSeXp3?=
- =?utf-8?B?V2FWcXNuOEozWUJaS0pDalpRbURFbjFsV2lsaXNKY1B3RnJOL1FzVUU2VGZr?=
- =?utf-8?B?SDNKME1TWC9WWWp5R29EczR5OFVVUXEyS2t1d3puWVpjU0V1a0JDdmMzNXpW?=
- =?utf-8?B?eUh6bUl6bk5tL3dseFVYTCtlODV6TTdYL29mRGk3TllERVl5L2g5SjZrcHBU?=
- =?utf-8?B?Z3pnUGYzdFRtVXNPNkhqOExYQ0NCc0JDclA4bXhrTXZZcThwZzFoTWk3c0VR?=
- =?utf-8?B?d1BhQnB6TldiM1hPOXZ6cG9uSGtHdzBJeEExTzhka1JhYlZXNnBiWGM5MzNh?=
- =?utf-8?B?Z3Nmd1lsdDltYWExUWVJTTVVQXdmNlZqcTN6b1ppbkxiVTV1bE5lNGlCZ0Vy?=
- =?utf-8?B?ZWsyZk45YnVKMytYRVRmYkt2N2d6ZnBDNTNpbUpIc1hiTlRJWHNHcG8rNkk0?=
- =?utf-8?B?VktBQ2ZIUG5IRkFuQm54KzNLdjh6L0RvODRvQ3h4dzFmaitzaG9oNVhKQnBp?=
- =?utf-8?B?T0hxeDkyM29GMmQzV1pQZ2pTOFJMcGJwTFl3R0Z3UmVwbEFXb3VEemNGaGxi?=
- =?utf-8?B?S2Jad2NzQzdUQTNhbUlDMnBocE9XUzhmVm4vR1E1SnNJQzBpakp3OUFZSWcz?=
- =?utf-8?B?TFVzR3Z1WEFrWlkyeWx2cUFyblZXMjBEWXp0ajA3RWI2K1RZTUgyTWt0YXdn?=
- =?utf-8?B?enhxRlAyanpaT1pVdXZOZ2RaMjhSWlg2MVlvRThMRHA5enZZaEx2SGtveUlo?=
- =?utf-8?Q?p5Je2XnB6MJ6ZpwzJyOxosmJtbXp8oAjX9UyqfA?=
+	=?utf-8?B?dFpzYURTS3hGRVE1V0hjMXRlYkJFbWVncVFRdGt5WlJENmdFSldwVlBtRFU0?=
+ =?utf-8?B?L0EwN2xScGdNZzRtUmIrVTVSalgzbVViK1VkYnNHckMrcVhsazZqWkhNZnZI?=
+ =?utf-8?B?Nmh1a2IyalE3bDROVlFLbDJUNlJyQ1J0c3B4NlBZWldCZGRvNWpmT2taNWxG?=
+ =?utf-8?B?aFdSWFd6d3dTeW1USEZzNGRNT0RDVmpyR2RTb1ZPeUV5U1BmZzNJMGJVV2dP?=
+ =?utf-8?B?K3JzZjBVZmlNWHpTNUVVelVYV3RwM2thbnhIZHJpeVVXZHhRaEZmbi9zVFd3?=
+ =?utf-8?B?dmk0MUxkNitNVEJFSEtjVkpuU2ZHRHdBNHJWVHkwWCsxZGxSbVQrc3lFaURS?=
+ =?utf-8?B?dVBVb1dwR1BqMXRvQkFzWm4wM2xuVmVKRERMakgxT2ptRExoS05GdmZqcjF4?=
+ =?utf-8?B?UkIxaHg4SFRhR3NYdk1TdlY3WWMxLzJzbEN0dm83K0hNczNzZk5rSVFpaG1X?=
+ =?utf-8?B?aFhuZUVJOEVLVEd4OVFpQ3dZTGFvcVdKU0wzTVQ4d3ZCOHkxeVRrUlFQcWhl?=
+ =?utf-8?B?aUlCaFRXajQ2MHZXTGxMK0FpZzZMaHV5dDFwOVMvd3pabFk1TFVkdlpRcjg4?=
+ =?utf-8?B?L0dXL2VKcXdNQ2lnSTBTNHhBa2lKSjRBTEFESWJUVlhpN3NGWStMRWRkWWJs?=
+ =?utf-8?B?Rk1vdC9nZjhCWDFHdGpRSUFHM28yYVhvdTJlR2h4M1BZOFhJOTVlVVNibkZM?=
+ =?utf-8?B?Yng2cit6SHhoN3VTSzZaUXRwMlhMQjFrRG1sMU5kTEw5UHpVdmplNzl2YjJN?=
+ =?utf-8?B?dFBuMk5ncmFCN2RpWjdRZWd2cEFqbElHdHYzaThVTVRhakMxNGh0cDJvK1Yv?=
+ =?utf-8?B?VDh1RmtPc0o5OW1ZNmxWUGNhbDlINExvQld2UDRBV1k2cDZ6Sm5VMGZCTzAz?=
+ =?utf-8?B?d3lWODBkMElGWHlUdWxyM1NUdTRHSzc4bXo5Vjk0Wkxic2NrKzhFQkpaMGx6?=
+ =?utf-8?B?dEMwWU9ST2FmaTMxci9jbmFycHN1bXVDbzl6YjhLZk5LS3pSMlhxUDVCajlW?=
+ =?utf-8?B?a0R0Z3U5clRkQnNoNDJORUp6NVhKOFpMY3g1dklrSjN3Y3dlcThiSUJiSXQr?=
+ =?utf-8?B?T2hNTTFOanExZkEvRk4rN2ZIeGZBcUcvaWw1cytDT1NxTlFRSHMrNUxSTUlC?=
+ =?utf-8?B?VVI4Z3NRNzZVQXFPTHpLYkRVeXJlT3E4OFdHU2dRNTl5OHBBR0N0U3NHenpF?=
+ =?utf-8?B?cE56S3VWK1BXTmNLVUloalNaMTBWcmp0UzdicTBWcHp0VE5lRnlsNWoyQnpG?=
+ =?utf-8?B?Y09TcjBnZGFrV21rclU4Nkk3Z0xxYTE5czdZMFNKNWpNZmltQnN2KytmUDBm?=
+ =?utf-8?B?RVFBOFpqUFFSREhLL29XamY1NVBZcCtWa01ZOWFyWXd2aVJXZjJ1TURrMnZH?=
+ =?utf-8?B?V05UUzhzV0JobnNUSzB2VXJvYWdSN0g2UGRxUTN0N0RPeHlSWG44SzhENFdu?=
+ =?utf-8?B?c3pYTTZCRy9TdkdLUG92MVRrRXBwMFRBYUhjOFBFdTFJbjBlbXAyR1RTSEU0?=
+ =?utf-8?B?cGxOWU5uVFUvVnZMdDNSRHZ5SWhTMkxrNkRFLzRBZUpJS3J3dmdlTlFBN1hr?=
+ =?utf-8?B?TnRIV0llOWFJdjBnUGE5OStJOElnd2RTWHQyRDVnY0NLWXBLdGVLQ3RDZ1dK?=
+ =?utf-8?B?dGMxWHgvdS81dm9oMC82WVdzejhnZmVCYjRQMDRqTDB1NERrS25xdWlPdjZl?=
+ =?utf-8?B?ZWtYMUd5NlB6NC9WTlRQZlBZb0F0ZDNFeEhzRU11eWdCR2RKMDBQQUE5Rmhs?=
+ =?utf-8?Q?R0jJpV05Otn5gq5vsr+nULFEyfXri95oAkCcPFJ?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2b62235a-7a8f-4df0-047b-08d8e7b2601b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9312e784-3ae3-4680-b9af-08d8e7b268f2
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Mar 2021 13:00:57.7832
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Mar 2021 13:01:12.7495
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +nnU+Q93SNuk/8UF0/3yDbhheZ55JTRLdkt6Nd9SyYOUdRa4YgTi9To9h/ojGu07N096D2wp0pAQ9khS6GBFZM2kwgHlmPilvlPyW+jIFUU=
+X-MS-Exchange-CrossTenant-UserPrincipalName: xrF+XncZ0tqlKxbfnvl4Xem0OtopvNTDW8OjT5c4fJE6WEzYR3JvcjSLXZgh2vot6nLbyaWXzEYd+7oZWKk/0VabMF+OFlUXfcr9yvXwHrI=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2901
 Content-Type: multipart/alternative;
- boundary="------------793186A2E1D73FF067C444F3"
+ boundary="------------025021094D9D0B0FF584298F"
 Content-Language: en-US
 
---------------793186A2E1D73FF067C444F3
+--------------025021094D9D0B0FF584298F
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -118,34 +118,83 @@ Content-Transfer-Encoding: 7bit
 On 2021-03-12 11:25 a.m., Leon Anavi wrote:
 > [Please note: This e-mail is from an EXTERNAL e-mail address]
 >
-> Upgrade to release 0.3.1:
+> Upgrade to release 4.0:
 >
-> - Adds an optional no-confirm flag particularly for use in
->    non-interactive setups.
+> - Cookiecutter, Django and Travis extensions extracted to their
+>    own repositories
+> - Support for Python 3.4 and 3.5 dropped
+> - Dropped deprecated requirements.txt file
+> - Added support for global configuration (avoid retyping common
+>    putup's options)
+> - PyScaffold is no longer a build-time dependency, it just
+>    generates the project structure
+> - Removed contrib subpackage, vendorized packages are now runtime
+>    dependencies
+> - setuptools_scm is included by default in setup.cfg, setup.py and
+>    pyproject.toml
+> - API changed to use pyscaffold.operations instead of integer
+>    flags
+> - Allow string.Template and callable as file contents in project
+>    structure
+> - Extract file system functions from utils.py into file_system.py
+> - Extract identification/naming functions from utils.py into
+>    identification.py
+> - Extract action related functions from api/__init__.py to
+>    actions.py
+> - helpers.{modify,ensure,reject} moved to structure.py
+> - helpers.{register,unregister} moved to actions.py
+> - New extension for automatically creating virtual environments
+>    (--venv)
+> - Added instructions to use pip-tools to docs
+> - pre-commit extension now attempts to install hooks automatically
+> - A nice message is now displayed when PyScaffold finishes running
+>    (actions.report_done)
+> - Removed mutually exclusive argparse groups for extensions
+> - Progressive type annotations adopted in the code base together
+>    with mypy linting
+> - Simplified isort config
+> - pyproject.toml and isolated builds adopted by default
+> - Added comment to setup.cfg template instructing about extra links
+> - Generate tox.ini by default
+> - Replace pkg_resources with importlib.{metadata,resources} and
+>    packaging
+> - Adopt PEP 420 for namespaces
+> - Adopt SPDX identifiers for the license field in setup.cfg
+> - Removed deprecated log.configure_logger
+> - Add links to issues and pull requests to changelog
+> - Add an experimental --interactive mode (inspired by git rebase -i)
+> - Reorganise the FAQ (including version questions previously in
+>    Features)
+> - Updated setuptools and setuptools_scm dependencies to minimal
+>    versions 46.1 and 5, respectively
+> - Adopted no-guess-dev version scheme from setuptools_scm
+>    (semantically all stays the same, but non-tag commits are now
+>    versioned LAST_TAG.post1.devN instead of LAST_TAG.post0.devN)
+> - Fix problem of not showing detailed log with --verbose if error
+>    happens when loading extensions
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->   .../python/{python3-pako_0.3.0.bb => python3-pako_0.3.1.bb}     | 2 +-
+>   .../{python3-pyscaffold_3.3.1.bb => python3-pyscaffold_4.0.bb}  | 2 +-
 >   1 file changed, 1 insertion(+), 1 deletion(-)
->   rename meta-python/recipes-devtools/python/{python3-pako_0.3.0.bb => python3-pako_0.3.1.bb} (75%)
+>   rename meta-python/recipes-devtools/python/{python3-pyscaffold_3.3.1.bb => python3-pyscaffold_4.0.bb} (85%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-pako_0.3.0.bb b/meta-python/recipes-devtools/python/python3-pako_0.3.1.bb
-> similarity index 75%
-> rename from meta-python/recipes-devtools/python/python3-pako_0.3.0.bb
-> rename to meta-python/recipes-devtools/python/python3-pako_0.3.1.bb
-> index 3eacd0bdd..1930d866e 100644
-> --- a/meta-python/recipes-devtools/python/python3-pako_0.3.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pako_0.3.1.bb
-> @@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/MycroftAI/pako"
->   LICENSE = "Apache-2.0"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
+> diff --git a/meta-python/recipes-devtools/python/python3-pyscaffold_3.3.1.bb b/meta-python/recipes-devtools/python/python3-pyscaffold_4.0.bb
+> similarity index 85%
+> rename from meta-python/recipes-devtools/python/python3-pyscaffold_3.3.1.bb
+> rename to meta-python/recipes-devtools/python/python3-pyscaffold_4.0.bb
+> index 9bebcedd3..1ad33c10d 100644
+> --- a/meta-python/recipes-devtools/python/python3-pyscaffold_3.3.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pyscaffold_4.0.bb
+> @@ -12,6 +12,6 @@ inherit pypi setuptools3
 >
-> -SRC_URI[sha256sum] = "eabd1c121d6701069d1a10132f197ee2b5f4e75a3d68a93b07f69214ab0ff9c7"
-> +SRC_URI[sha256sum] = "c033a073bb818ca336ae1fccba2655bd60dfe77744f85d4517abd3160d72231f"
+>   PYPI_PACKAGE = "PyScaffold"
 >
->   inherit pypi setuptools3
+> -SRC_URI[sha256sum] = "1c3a2b76e60319b6ffc2a8b54e240382109c6241576bf0a47ea476c7194f6a69"
+> +SRC_URI[sha256sum] = "7012ae5f9c95b910a39a099824104dc888beb932de86b07514882f3511bc6c74"
 >
+>   BBCLASSEXTEND = "native nativesdk"
 > --
 > 2.17.1
 >
@@ -153,7 +202,7 @@ Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > 
 >
 
---------------793186A2E1D73FF067C444F3
+--------------025021094D9D0B0FF584298F
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -166,40 +215,89 @@ Content-Transfer-Encoding: 7bit
     <div class="moz-cite-prefix">On 2021-03-12 11:25 a.m., Leon Anavi
       wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:20210312162600.8335-2-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210312162600.8335-3-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">[Please note: This e-mail is from an EXTERNAL e-mail address]
 
-Upgrade to release 0.3.1:
+Upgrade to release 4.0:
 
-- Adds an optional no-confirm flag particularly for use in
-  non-interactive setups.
+- Cookiecutter, Django and Travis extensions extracted to their
+  own repositories
+- Support for Python 3.4 and 3.5 dropped
+- Dropped deprecated requirements.txt file
+- Added support for global configuration (avoid retyping common
+  putup's options)
+- PyScaffold is no longer a build-time dependency, it just
+  generates the project structure
+- Removed contrib subpackage, vendorized packages are now runtime
+  dependencies
+- setuptools_scm is included by default in setup.cfg, setup.py and
+  pyproject.toml
+- API changed to use pyscaffold.operations instead of integer
+  flags
+- Allow string.Template and callable as file contents in project
+  structure
+- Extract file system functions from utils.py into file_system.py
+- Extract identification/naming functions from utils.py into
+  identification.py
+- Extract action related functions from api/__init__.py to
+  actions.py
+- helpers.{modify,ensure,reject} moved to structure.py
+- helpers.{register,unregister} moved to actions.py
+- New extension for automatically creating virtual environments
+  (--venv)
+- Added instructions to use pip-tools to docs
+- pre-commit extension now attempts to install hooks automatically
+- A nice message is now displayed when PyScaffold finishes running
+  (actions.report_done)
+- Removed mutually exclusive argparse groups for extensions
+- Progressive type annotations adopted in the code base together
+  with mypy linting
+- Simplified isort config
+- pyproject.toml and isolated builds adopted by default
+- Added comment to setup.cfg template instructing about extra links
+- Generate tox.ini by default
+- Replace pkg_resources with importlib.{metadata,resources} and
+  packaging
+- Adopt PEP 420 for namespaces
+- Adopt SPDX identifiers for the license field in setup.cfg
+- Removed deprecated log.configure_logger
+- Add links to issues and pull requests to changelog
+- Add an experimental --interactive mode (inspired by git rebase -i)
+- Reorganise the FAQ (including version questions previously in
+  Features)
+- Updated setuptools and setuptools_scm dependencies to minimal
+  versions 46.1 and 5, respectively
+- Adopted no-guess-dev version scheme from setuptools_scm
+  (semantically all stays the same, but non-tag commits are now
+  versioned LAST_TAG.post1.devN instead of LAST_TAG.post0.devN)
+- Fix problem of not showing detailed log with --verbose if error
+  happens when loading extensions
 
 Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a></pre>
     </blockquote>
     Acked-by: Trevor Gamblin <a class="moz-txt-link-rfc2396E" href="mailto:trevor.gamblin@windriver.com">&lt;trevor.gamblin@windriver.com&gt;</a>
-    <blockquote type="cite" cite="mid:20210312162600.8335-2-leon.anavi@konsulko.com">
+    <blockquote type="cite" cite="mid:20210312162600.8335-3-leon.anavi@konsulko.com">
       <pre class="moz-quote-pre" wrap="">
 ---
- .../python/{python3-pako_0.3.0.bb =&gt; python3-pako_0.3.1.bb}     | 2 +-
+ .../{python3-pyscaffold_3.3.1.bb =&gt; python3-pyscaffold_4.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pako_0.3.0.bb =&gt; python3-pako_0.3.1.bb} (75%)
+ rename meta-python/recipes-devtools/python/{python3-pyscaffold_3.3.1.bb =&gt; python3-pyscaffold_4.0.bb} (85%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pako_0.3.0.bb b/meta-python/recipes-devtools/python/python3-pako_0.3.1.bb
-similarity index 75%
-rename from meta-python/recipes-devtools/python/python3-pako_0.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-pako_0.3.1.bb
-index 3eacd0bdd..1930d866e 100644
---- a/meta-python/recipes-devtools/python/python3-pako_0.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pako_0.3.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://github.com/MycroftAI/pako">&quot;https://github.com/MycroftAI/pako&quot;</a>
- LICENSE = &quot;Apache-2.0&quot;
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa">&quot;file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa&quot;</a>
+diff --git a/meta-python/recipes-devtools/python/python3-pyscaffold_3.3.1.bb b/meta-python/recipes-devtools/python/python3-pyscaffold_4.0.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-pyscaffold_3.3.1.bb
+rename to meta-python/recipes-devtools/python/python3-pyscaffold_4.0.bb
+index 9bebcedd3..1ad33c10d 100644
+--- a/meta-python/recipes-devtools/python/python3-pyscaffold_3.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pyscaffold_4.0.bb
+@@ -12,6 +12,6 @@ inherit pypi setuptools3
 
--SRC_URI[sha256sum] = &quot;eabd1c121d6701069d1a10132f197ee2b5f4e75a3d68a93b07f69214ab0ff9c7&quot;
-+SRC_URI[sha256sum] = &quot;c033a073bb818ca336ae1fccba2655bd60dfe77744f85d4517abd3160d72231f&quot;
+ PYPI_PACKAGE = &quot;PyScaffold&quot;
 
- inherit pypi setuptools3
+-SRC_URI[sha256sum] = &quot;1c3a2b76e60319b6ffc2a8b54e240382109c6241576bf0a47ea476c7194f6a69&quot;
++SRC_URI[sha256sum] = &quot;7012ae5f9c95b910a39a099824104dc888beb932de86b07514882f3511bc6c74&quot;
 
+ BBCLASSEXTEND = &quot;native nativesdk&quot;
 --
 2.17.1
 
@@ -214,4 +312,4 @@ index 3eacd0bdd..1930d866e 100644
   </body>
 </html>
 
---------------793186A2E1D73FF067C444F3--
+--------------025021094D9D0B0FF584298F--
