@@ -1,118 +1,81 @@
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web11.676.1615908911919443547
+Received: from esa1.hgst.iphmx.com (esa1.hgst.iphmx.com [68.232.141.245])
+ by mx.groups.io with SMTP id smtpd.web11.681.1615908924841469826
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Mar 2021 08:35:12 -0700
+ Tue, 16 Mar 2021 08:35:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=AGJI+W5H;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id f8so3611617plg.10
-        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Mar 2021 08:35:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=OTO2W7UORIVAKQM0stQYJK3oA6ByZql0A8oc3IpUap8=;
-        b=AGJI+W5HnHVLvueoLNIkilPjaKpryuVU1NESoacE78xvQBLF3j/doFZjs1A9OKn5wi
-         FWWZbMAejAsZGILPS1to2lWy1llVH8kOPwon4U7ZJ9FcVbYOiy6be0MeH3dk5R76q4A3
-         UUf8s/Iz8Q5RXHzKyJWlL5q61V01ugyL/ChAp1Gs2xElu1ePz8He6NnPGWBZrwTu9LoX
-         mHf6lbiAKkKSxw0b+JLQ0Rkgyl9jC6L9sgVRBvqJ5/OueOZitsMT3yF3UubO2Eawm1Ac
-         GOvhtq+Zb3kBHLez7OfQDiR4TjrWo7ig2kTxlUodd+0NfcuauHtEOrKNwqdQzS6y9oXX
-         3Zvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=OTO2W7UORIVAKQM0stQYJK3oA6ByZql0A8oc3IpUap8=;
-        b=BrJMMiiGlZGixbE9CVCKJN+mksYtFxP6sx8GuBwFC6d8tJUSo4yl11q1/znuNKk5Yv
-         30lbcho8ojxIL9xWlFdvkbXcMyP6fYgGa4XLxgHupFG28j+4bhgj3rAkLrqDmAlB7+M3
-         W5jdQuDuXHZnmRXQkv96NKRV5I0WIPjTPhTNttGqeJj7delaVE1gTjg1UTOV3V28NhKo
-         TSkQ07LPhyoDMLYNeby4IbQoKl0x4I1PMpJIkhrWv9jMU17yDge6MqPWIWWb9Cy/n/Kr
-         o7AOixi03v57bYgoHwb+Kgl8W2kVNERmQ8Kson0z2Uj0G80pEouMV3iVM9XrbUg83W0U
-         SFEQ==
-X-Gm-Message-State: AOAM531yRk61UDILL48p3cFqgo/I6y/yDONtUZcrnGGKAPokahHdDUGX
-	V1JWu9f23L2M3rMI7xSqGtuh4Crydy5MDQ==
-X-Google-Smtp-Source: ABdhPJxFiFW2XZcgnyqrWp5z+87CyyWUSzodHrhiWFRklJ7oR6PJCWiD43DADGrFFFIPRNdHiizg9A==
-X-Received: by 2002:a17:902:ecc4:b029:e6:1a9f:3397 with SMTP id a4-20020a170902ecc4b02900e61a9f3397mr11464plh.9.1615908910622;
-        Tue, 16 Mar 2021 08:35:10 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::c2dd])
-        by smtp.gmail.com with ESMTPSA id na8sm3215779pjb.2.2021.03.16.08.35.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 16 Mar 2021 08:35:09 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+ dkim=pass header.i=@wdc.com header.s=dkim.wdc.com header.b=L4URCqLW;
+ spf=pass (domain: wdc.com, ip: 68.232.141.245, mailfrom: prvs=7026ea0ff=alistair.francis@wdc.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+  t=1615908924; x=1647444924;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=HBlYWM6MPqEXgJG+KqAbsgbOzwnfoZD5/3x1XPkcPIk=;
+  b=L4URCqLWHKPmIl5LAT1GcIbHdHVckk5Et3AFqX11NlAm6RrVYrGIw2WM
+   HFCGsVJilZTVJdHQjR+Q4qnr1MnZAjh8JA8fv70o+otc9gH5ZGRj0B3fN
+   +I8lO3zMbmyHf7jlvd6RgKMI/ZlGYJiZYODjPCunxYP91tnnGfZ50mHfi
+   rpQwcRYoU7UIF58ul/dijWfeD4BJn/U1ahbYwE//8UxbMr0cYONMwY72/
+   zr4OM7wZ6cGuuWHCAEcdo8Sibgs/gUQ12FEuvmjKvf+TrhxkHShs2u6bc
+   YiyQrJpkJJkk4XHXvtje743isZ6NLEh60JPc6zO/kxDt8c5HB7+XbHFvu
+   Q==;
+IronPort-SDR: bgEEvrhWilsj8pNSj07Ws6hr0pTcvftypwwR8B0AFa6nlB9TSdjz30nsJCUPDECCvPPGqSwoEY
+ 4WfRpYBJQ+WuQs//RueH7g8nmxe2WtmLdcOD2sciDEWGfePGEPuW4Aakk8lwYVQ06u1rByXMZA
+ UpmMtPEiSMkCFZM2AsXSCUDFzfk9aUFnpZk2VvDL6ZFOlVooRgpzBGE5CP0EtJVNk7bq8M/IGn
+ WlUmtZdp/TRLuu7b/OgEuAWEIr/N2wBb4yvF0VzS3RbFk1fRUALEA0wlbOtLXNn4rh9M+mIPvy
+ l7A=
+X-IronPort-AV: E=Sophos;i="5.81,251,1610380800"; 
+   d="scan'208";a="272992911"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com) ([199.255.45.14])
+  by ob1.hgst.iphmx.com with ESMTP; 16 Mar 2021 23:35:23 +0800
+IronPort-SDR: mgZ5ff0mRx+Bw6O/SPANrPpffpQHveNpmtmTDxHP5gAr53S9XBy7aV36tOv4I8N1ZKj3Yl458b
+ HhTRscmCA8yUIL/6gIQ8jRLO8qLcaUD7yU4G8GLLrHJg368O77tmFQ/CtCidwVuRYqNbpyI188
+ obuEj60veyBtvQkwI05xyicbalV2PEJY8QRZYiOwaGWSCZvkkkFIptC/deU0yyq61lXX6MRcTG
+ tDXoJP24dlBpn9pQK4wlKrY1c9DQrtSxRST5fl9ktMcCsJqTcxDay9SYoaUvIQs1rBDzBYzgfg
+ Rpp9k+l4KYzJahk+nIY4G5wa
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Mar 2021 08:17:44 -0700
+IronPort-SDR: XYcdr3bzfbXPg+1zLPFnu7iMtlahXuYm8reBMAtm47hC9A3Yl2BjyCekgdgOxd+MEcs53FfBGI
+ xPRV7dPXtXEvOEM99SWIrrHJ6dcTycb7voGUIkAp5nO/ZYTfa7ta6HI/OFdGHNBisar60WzHxH
+ N8llvGq6sY9xOHPOVTaggr+mp/eNmRQ4QcoiNSgJjezYFFWVmopNMdtRb2MvpXVF5gfFfscNfR
+ oRonKb3NZDWEdQKtfVRAreztP3LX3wI/nwpgwBOEJXhG9C7seVh9ZwIuUyJOOBRk1X/efDEpSg
+ PYs=
+WDCIronportException: Internal
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO risc6-mainframe.int.fusionio.com) ([10.196.157.248])
+  by uls-op-cesaip01.wdc.com with ESMTP; 16 Mar 2021 08:35:24 -0700
+From: "Alistair Francis" <alistair.francis@wdc.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Devon Pringle <devon.pringle@digi.com>,
-	Leon Anavi <leon.anavi@konsulko.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH v3] python3-pastedeploy: Add recipe
-Date: Tue, 16 Mar 2021 08:35:07 -0700
-Message-Id: <20210316153507.3426404-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.30.2
+Cc: alistair23@gmail.com,
+	Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH] openocd: Enable configuration jtag_vpi
+Date: Tue, 16 Mar 2021 08:35:21 -0700
+Message-Id: <20210316153521.1697408-1-alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.30.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Devon Pringle <devon.pringle@digi.com>
+Enable the configure time jtag_vpi feature. This
+feature (http://www.openocd.org/doc/html/Debug-Adapter-Hardware.html)
+allows OpenOCD to connect to JTAG VPI server interface, which is used in
+system verilog simulation models.
 
-Add release 2.1.1:
-
-- Added setuptools as an explicit dependency. This has always been
-  required but now that more environments are becoming capable of
-  operating without it being installed, we now need to ensure it's
-  available.
-- pytest-runner removed, use tox to run tests.
-
-License-Update: Use license file from PyPI tarball.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
-v3: Merge the upgrade and add recipe patches
-    Fix License Checksum
+ meta-oe/recipes-devtools/openocd/openocd_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- .../packagegroups/packagegroup-meta-python.bb |  1 +
- .../python/python3-pastedeploy_2.1.1.bb       | 21 +++++++++++++++++++
- 2 files changed, 22 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pastedeploy_2.1.1.bb
-
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index c6ac19a225..2748c50591 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -251,6 +251,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-parse-type \
-     python3-parso \
-     python3-passlib \
-+    python3-pastedeploy \
-     python3-pathtools3 \
-     python3-pep8 \
-     python3-periphery \
-diff --git a/meta-python/recipes-devtools/python/python3-pastedeploy_2.1.1.bb b/meta-python/recipes-devtools/python/python3-pastedeploy_2.1.1.bb
-new file mode 100644
-index 0000000000..47508e2223
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pastedeploy_2.1.1.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "Load, configure, and compose WSGI applications and servers"
-+HOMEPAGE = "https://pylonsproject.org/"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://license.txt;md5=1798f29d55080c60365e6283cb49779c"
-+
-+inherit pypi
-+PYPI_PACKAGE = "PasteDeploy"
-+
-+SRC_URI[sha256sum] = "6dead6ab9823a85d585ef27f878bc647f787edb9ca8da0716aa9f1261b464817"
-+
-+S = "${WORKDIR}/PasteDeploy-${PV}"
-+
-+inherit setuptools3
-+
-+# Uncomment this line to enable all the optional features.
-+#PACKAGECONFIG ?= "paste docs"
-+PACKAGECONFIG[paste] = ",,,python3-paste"
-+PACKAGECONFIG[docs] = ",,,python3-sphinx python3-pylons-sphinx-themes"
-+
-+DEPENDS= "python3 python3-setuptools-scm-native python3-pytest-runner-native"
-+RDEPENDS_${PN} += "python3-core  python3-misc python3-netclient python3-pkgutil python3-setuptools python3-threading python3-core"
+diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+index 05e06a25d..c4349fbc3 100644
+--- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
++++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+@@ -24,7 +24,7 @@ inherit pkgconfig autotools-brokensep gettext
+ 
+ BBCLASSEXTEND += "native nativesdk"
+ 
+-EXTRA_OECONF = "--enable-ftdi --disable-doxygen-html --disable-werror"
++EXTRA_OECONF = "--enable-ftdi --enable-jtag_vpi --disable-doxygen-html --disable-werror"
+ 
+ do_configure() {
+     ./bootstrap nosubmodule
 -- 
-2.30.2
+2.30.1
 
