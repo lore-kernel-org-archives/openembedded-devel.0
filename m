@@ -1,80 +1,92 @@
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.web10.1577.1615997619482969279
+Received: from dent.vctlabs.com (dent.vctlabs.com [207.154.65.135])
+ by mx.groups.io with SMTP id smtpd.web12.1296.1616021885101100380
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Mar 2021 09:13:39 -0700
+ Wed, 17 Mar 2021 15:58:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=TtvMvUnq;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: luca.boccassi@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id a132-20020a1c668a0000b029010f141fe7c2so1481360wmc.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Mar 2021 09:13:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3X8IqiTkrRk4EElVWETuXbn3Nj6i3t/mX6J+XxJk4cg=;
-        b=TtvMvUnq+scw70coc7R2vaLOhvbJFkA8RtIV+sRpBgyDqKPeAcNWb3vUriPFDS7d/r
-         8jOZxJNHg57+2BJc4jdbPFmUdKF9Hr3bGMMvgUWFP4ENgGs2Le/JA9KKxVqfT2UWsvUv
-         69cUzXG046c8PCk0FbIP70OPRIzmULueh/8+ma2oZAr3iXPTxHLABBP1hvfNh1Qwx6ed
-         YbYuGs/y6373ZHhEPAhWvjhNYXw/z0QltXlaxPDCqvy8aEaHXRiQAc2EVwiRfGnmDbBG
-         HGi/1zF4zmGVNDlu9cBulgn8YKZb4TF2cWj4jjRA8pBfivKRzsRKrd/gWCexITOQOmsj
-         whxQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3X8IqiTkrRk4EElVWETuXbn3Nj6i3t/mX6J+XxJk4cg=;
-        b=txez8UfME8xdFvFpylvgtLRhsFyvWQGJD3jy6xlha15L8gm8OlV4DNPeB1E2ddwZCR
-         fYJZ8a6ADLGHQrZgkzw/bzrdjmFfPyyBIPGq3JNn1vMNrgniQqF3wr1tuq3XRas2TQzY
-         cFw19IZQg4CwDMBKamQXWCRa4JyjdpdYAh5H0C06KO6bHTqozrG3r3AAycesEGCoNiPU
-         FLMcwJLahVcMqBCB/4I+yUbXWjjH4C7dubQlTdQX9HO/ChSaRTf9EzIZn4locaVhd1qf
-         EDmDCZHytR9Hb7DX12Q/8ALPHMILRcFHA1979JFJez1GNCGREQHAWCJv91GIvNKCxxwl
-         fK3w==
-X-Gm-Message-State: AOAM533P4HIcZaIkVIErQMa5YI0ar4dY2OIkMbZPP860SKGBy3X9RRQy
-	cR3bas1Dz10YiGE+rvDEmaOWPvy3st1w1g==
-X-Google-Smtp-Source: ABdhPJzrOkWKYn8v/QP6O/CmkjZDVzxBfoHntj7I/DvdzWAD6o+aFoD/CMQSpNxr4wt0XTe7lL9Nqg==
-X-Received: by 2002:a1c:4e12:: with SMTP id g18mr4299372wmh.56.1615997617546;
-        Wed, 17 Mar 2021 09:13:37 -0700 (PDT)
-Return-Path: <luca.boccassi@gmail.com>
-Received: from localhost ([88.98.246.218])
-        by smtp.gmail.com with ESMTPSA id p18sm5816032wrs.68.2021.03.17.09.13.36
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 17 Mar 2021 09:13:37 -0700 (PDT)
-From: "Luca Bocassi" <luca.boccassi@gmail.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: vctlabs.com, ip: 207.154.65.135, mailfrom: sjl@vctlabs.com)
+Received: by dent.vctlabs.com (Postfix, from userid 1000)
+	id 0335C28039B; Wed, 17 Mar 2021 15:58:02 -0700 (PDT)
+Date: Wed, 17 Mar 2021 15:58:02 -0700
+From: "S. Lockwood-Childs" <sjl@vctlabs.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] dbus-broker: upgrade 27 -> 28
-Date: Wed, 17 Mar 2021 16:13:35 +0000
-Message-Id: <20210317161335.1680086-1-luca.boccassi@gmail.com>
-X-Mailer: git-send-email 2.29.2
+Subject: [meta-java][PATCH] openjdk-8: use relative path to build-aux in configure.ac
+Message-ID: <20210317225802.logo2goqzs4f5na3@vctlabs.com>
+Mail-Followup-To: "S. Lockwood-Childs" <sjl@vctlabs.com>,
+	openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: NeoMutt/20170113 (1.7.2)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-From: Luca Boccassi <luca.boccassi@microsoft.com>
+This autoconf error has been present a long time, though it used to be non-fatal:
 
-See full changelog https://github.com/bus1/dbus-broker/releases/tag/v28
+  autoreconf: configure.ac: creating directory $TOPDIR/common/autoconf/build-aux
+  autoreconf: error: cannot create $TOPDIR/common/autoconf/build-aux: No such file or directory
 
-Signed-off-by: Luca Boccassi <luca.boccassi@microsoft.com>
+Recently it started leading to a second fatal error:
+
+  Error in tempfile() using template $TOPDIR/common/autoconf/build-aux/XXXXXXXXXX:
+         Parent directory ($TOPDIR/common/autoconf/build-aux/) does not exist
+
+Fix by patching configure.ac to take into account that bitbake is
+calling autoreconf directly from its parent directory rather than
+the top level of source.
+
+Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
 ---
- .../recipes-core/dbus/{dbus-broker_27.bb => dbus-broker_28.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-core/dbus/{dbus-broker_27.bb => dbus-broker_28.bb} (92%)
+ .../openjdk/openjdk-8-release-common.inc      |  1 +
+ .../0014-autoconf-fix-build-aux-path.patch    | 30 +++++++++++++++++++
+ 2 files changed, 31 insertions(+)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/0014-autoconf-fix-build-aux-path.patch
 
-diff --git a/meta-oe/recipes-core/dbus/dbus-broker_27.bb b/meta-oe/recipes-core/dbus/dbus-broker_28.bb
-similarity index 92%
-rename from meta-oe/recipes-core/dbus/dbus-broker_27.bb
-rename to meta-oe/recipes-core/dbus/dbus-broker_28.bb
-index e64632bc5..a35f5c64c 100644
---- a/meta-oe/recipes-core/dbus/dbus-broker_27.bb
-+++ b/meta-oe/recipes-core/dbus/dbus-broker_28.bb
-@@ -7,7 +7,7 @@ LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=7b486c2338d225a1405d979ed2c15ce8"
- 
- SRC_URI = "https://github.com/bus1/dbus-broker/releases/download/v${PV}/dbus-broker-${PV}.tar.xz"
--SRC_URI[sha256sum] = "15787bb694f128fcbd437841877a2ee0f6c6fef9e428276a35b8524cf52da342"
-+SRC_URI[sha256sum] = "abb8b54434faeeb6bf59a70ebf0732e851a50bd922995ba5928e8c28c18b05ea"
- 
- UPSTREAM_CHECK_URI = "https://github.com/bus1/${BPN}/releases"
- 
+diff --git a/recipes-core/openjdk/openjdk-8-release-common.inc b/recipes-core/openjdk/openjdk-8-release-common.inc
+index a3747cf..db6a4ab 100644
+--- a/recipes-core/openjdk/openjdk-8-release-common.inc
++++ b/recipes-core/openjdk/openjdk-8-release-common.inc
+@@ -10,6 +10,7 @@ PATCHES_URI = "\
+     file://0009-prevent-debuginfo-in-favour-of-openembedded-package-.patch \
+     file://0010-autoconf-remove-shell-variables-from-autoheader.patch \
+     file://0013-autoconf-remove-Werror.patch \
++    file://0014-autoconf-fix-build-aux-path.patch \
+     ${HOTSPOT_UB_PATCH} \
+     file://2001-jdk-comparison-between-pointer-and-integer.patch \
+     file://2002-jdk-Allow-using-a-system-installed-libjpeg.patch \
+diff --git a/recipes-core/openjdk/patches-openjdk-8/0014-autoconf-fix-build-aux-path.patch b/recipes-core/openjdk/patches-openjdk-8/0014-autoconf-fix-build-aux-path.patch
+new file mode 100644
+index 0000000..45dbcd8
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/0014-autoconf-fix-build-aux-path.patch
+@@ -0,0 +1,30 @@
++From 2246166945819a68d1c9facd1698c9ef430611a6 Mon Sep 17 00:00:00 2001
++From: "S. Lockwood-Childs" <sjl@vctlabs.com>
++Date: Wed, 17 Mar 2021 15:21:54 -0700
++Subject: [PATCH] autoconf: fix build-aux path
++
++Unlike the upstream build wrapper script, bitbake recipe calls
++autoconf directly from common/autoreconf directory. Adjust the
++path to build-aux directory accordingly.
++
++Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
++---
++ common/autoconf/configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/common/autoconf/configure.ac b/common/autoconf/configure.ac
++index 67a230591f..00f3b0ef7e 100644
++--- a/common/autoconf/configure.ac
+++++ b/common/autoconf/configure.ac
++@@ -33,7 +33,7 @@
++ AC_PREREQ([2.69])
++ AC_INIT(OpenJDK, jdk8, build-dev@openjdk.java.net,,http://openjdk.java.net)
++ 
++-AC_CONFIG_AUX_DIR([$TOPDIR/common/autoconf/build-aux])
+++AC_CONFIG_AUX_DIR([build-aux])
++ m4_include([build-aux/pkg.m4])
++ 
++ # Include these first...
++-- 
++2.17.1
++
 -- 
-2.29.2
+2.20.1
 
