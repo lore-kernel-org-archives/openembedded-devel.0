@@ -1,120 +1,131 @@
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.web08.5655.1616050138535394539
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web12.5844.1616052426856186304
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Mar 2021 23:48:58 -0700
+ Thu, 18 Mar 2021 00:27:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=vY5U9Dzy;
- spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id t18so2402724pjs.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Mar 2021 23:48:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=s5K9NNNz;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id w11so842508ply.6
+        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Mar 2021 00:27:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=UCYf9dFwh1QyNQ8zhOGVVwU9hoCC6gIWICQuCeCvi7k=;
-        b=vY5U9DzykKdFxpaw9Elsg+DCf6BV3mtAYjqCtrDTaImXMANdL/WaDEOKYddVsQ83ln
-         1V89HNAOqZuKGq9dyfxZ5CGt9w7P+QjRzp03YDHRP1M8bVEt5tW6amItLYfp+BnPSdVl
-         c6WKuZxsu6iI9lRbqSuclRI5h8WzmOOQrsxPIcXxJvVsX48R9qHNjh3/vbB8WPhp1Q/R
-         0v/x+FeydqVpSgCwBhq1+/S6PHIUr9mBuoip/ea3jPueyP8I8mHOinwS1Mfgjth0pQog
-         UPcSHjy0wJ8m3gWxwZmRA1lPX3/Gqabzr+DmPUeYnnoApxIrUWyo1SRNQwLlv1beyY+X
-         rqbw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=K0NHEq43bn3sR/s7Gl8ep8svID4/IXsTAil+LMLf880=;
+        b=s5K9NNNzJ2brTSRPF1w0culvUCZFUhU3z+C9A3QYaLyFKbXqWRXAAaz6PFVB8bMYnO
+         myoBK+o/sGW66y+L1vHR6w0QI8Z0Sw3ZFZIUJlskAnjyZyS7Y853lK8rDrYY3GLG5YZH
+         mO45gAK+pqcLX9dGLsYfXWExuhi/gA4Zs0i+xjwaVrp6b1FmlQBBKGdw6tgVzKhqCJ8i
+         aAfvVfhfNlCskhutsvrjLvJwh+KuqmpQEQo2c03y8/bdjTVVK2uzeVEG7d2OTOi78YjU
+         tE0b+3zuv1Jg1M0ijW+iXiNyEBTQll5UJJG+yRGsN+ve8Me5nHwcMemJSguh33yfB11U
+         Oi2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=UCYf9dFwh1QyNQ8zhOGVVwU9hoCC6gIWICQuCeCvi7k=;
-        b=qxTaHc82pgYgprece5x3cQ4Inx4Mit5GGHrM+9kjGt8k69aHeXsehkjqBgloJTdyOt
-         SmG+E+Qle09RCtmmSuk4SZhdEDvMwLGwWZL/NLp6mcf4BzdvoDUhi+Dw4tr7cwdg8UTL
-         EOig8zG8IwDWha8UAIYymreXfDXvRGJo1IcDCW5f9fVStr83R5qQ3muBR/v4vqrhCfSw
-         DBDNxN+a51nqp79I0glDlhsOJWWUyDR27dLGBotFllHq5+BXOYSC5g4JnQb9wVI0SbTr
-         zvZtMwgd+n838ovu5Cvug0OWw8rhYLYWVc0rKRB2XmzzZMl5m/oDY5wo6gGWmewVZ5uH
-         GF+w==
-X-Gm-Message-State: AOAM530HwoYYLaqFAd+qmmKoZ7teICSqrYAWwKv/qn0n6vSaUCqbdbDv
-	F8L9YUQoFAw4+j/2W3IwJufvbzNaIIzHDw==
-X-Google-Smtp-Source: ABdhPJyRw9/kHcvknWMp4Wq383VlOj7uMZ5q8eWKAIgWbouf8CN5YEl0U6JVaNzO+JHtWxKZRIT+sQ==
-X-Received: by 2002:a17:90a:9f4a:: with SMTP id q10mr2770275pjv.129.1616050137764;
-        Wed, 17 Mar 2021 23:48:57 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=K0NHEq43bn3sR/s7Gl8ep8svID4/IXsTAil+LMLf880=;
+        b=CYVUXHAn07X5Lv5+6K6pkqGjon1ReKVbjpIR2lu7GsNxhsdiVheLekw+Hgp4DsSQ6m
+         DLQ0S4c/kuNG6XO5JrkUT1sBA7+Q7z8+sTIb0s1bbcQxCIHpy8dBO/berRsexNKx0zX5
+         TjdefEUZm7xjA8s4bP5IVd6vKMdMZrBOiW4WGygDEeHR6MHQqQuWmnuSn9iO4SJqZkov
+         atHJcGGXHMOJmQymesH3Eg08XIUGivfGAkFIGcd2XUWZw9aXQ0F+3fOZyRtHXwSLq3Dj
+         cxTpwnbcxoZCByBWY2eQGgKqndOy6X8rqcD1C/nJbwDY7Ec1oPkT7Tx5l0NKjacXyBXU
+         GDiA==
+X-Gm-Message-State: AOAM531eu9Gyiv/Q8RlkP461RhQQ1LpSdFL9WYdXpovUpDCHZ8xzWHYI
+	+LgrQBhFtwJue71fQO8FWsVrFqhv5RGKhw==
+X-Google-Smtp-Source: ABdhPJwh6+Z+s7t+uzFDhLeVZRYVuE1bU08KctVeHyROxnp47WVrUUd8ltOrcI4+ofeq10Zhf8F/+A==
+X-Received: by 2002:a17:90a:f403:: with SMTP id ch3mr2908833pjb.126.1616052425753;
+        Thu, 18 Mar 2021 00:27:05 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b117])
-        by smtp.gmail.com with ESMTPSA id 76sm1135867pfw.156.2021.03.17.23.48.56
+        by smtp.gmail.com with ESMTPSA id e21sm1090383pgv.74.2021.03.18.00.27.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 17 Mar 2021 23:48:57 -0700 (PDT)
+        Thu, 18 Mar 2021 00:27:05 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 3/3] python3-werkzeug: Delete recipe for 1.0.0
-Date: Wed, 17 Mar 2021 23:48:53 -0700
-Message-Id: <20210318064853.1268-3-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] oprofile: Remove Deprecated Exception Specifications from C++17
+Date: Thu, 18 Mar 2021 00:27:03 -0700
+Message-Id: <20210318072703.1372800-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.31.0
-In-Reply-To: <20210318064853.1268-1-raj.khem@gmail.com>
-References: <20210318064853.1268-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-1.0.1 is already in
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../python/python3-werkzeug_1.0.0.bb          | 50 -------------------
- 1 file changed, 50 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-werkzeug_1.0.0.bb
+ meta-oe/recipes-kernel/oprofile/oprofile.inc  |  1 +
+ ...d-Exception-Specifications-from-C-17.patch | 41 +++++++++++++++++++
+ .../recipes-kernel/oprofile/oprofile_1.3.0.bb |  2 +-
+ 3 files changed, 43 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-kernel/oprofile/oprofile/0001-Remove-Deprecated-Exception-Specifications-from-C-17.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_1.0.0.bb b/meta-python/recipes-devtools/python/python3-werkzeug_1.0.0.bb
-deleted file mode 100644
-index 3e4374ed4b..0000000000
---- a/meta-python/recipes-devtools/python/python3-werkzeug_1.0.0.bb
-+++ /dev/null
-@@ -1,50 +0,0 @@
--SUMMARY = "The Swiss Army knife of Python web development"
--DESCRIPTION = "\
--Werkzeug started as simple collection of various utilities for WSGI \
--applications and has become one of the most advanced WSGI utility modules. \
--It includes a powerful debugger, full featured request and response objects, \
--HTTP utilities to handle entity tags, cache control headers, HTTP dates, \
--cookie handling, file uploads, a powerful URL routing system and a bunch \
--of community contributed addon modules."
--HOMEPAGE = "http://werkzeug.pocoo.org/"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462"
+diff --git a/meta-oe/recipes-kernel/oprofile/oprofile.inc b/meta-oe/recipes-kernel/oprofile/oprofile.inc
+index 0863a8fd36..f1eec0b292 100644
+--- a/meta-oe/recipes-kernel/oprofile/oprofile.inc
++++ b/meta-oe/recipes-kernel/oprofile/oprofile.inc
+@@ -27,6 +27,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz \
+            file://0001-replace-sym_iterator-0-with-sym_iterator.patch \
+            file://0001-Use-new-bfd-APIs-from-2.34.patch \
+            file://include_limits.patch \
++           file://0001-Remove-Deprecated-Exception-Specifications-from-C-17.patch \
+ "
+ UPSTREAM_CHECK_REGEX = "oprofile-(?P<pver>\d+(\.\d+)+)/"
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/oprofile/files/oprofile/"
+diff --git a/meta-oe/recipes-kernel/oprofile/oprofile/0001-Remove-Deprecated-Exception-Specifications-from-C-17.patch b/meta-oe/recipes-kernel/oprofile/oprofile/0001-Remove-Deprecated-Exception-Specifications-from-C-17.patch
+new file mode 100644
+index 0000000000..a5e6c49851
+--- /dev/null
++++ b/meta-oe/recipes-kernel/oprofile/oprofile/0001-Remove-Deprecated-Exception-Specifications-from-C-17.patch
+@@ -0,0 +1,41 @@
++From 3a37e25a100170cd806ba14d13ec782864b7cacf Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 18 Mar 2021 00:24:02 -0700
++Subject: [PATCH] Remove Deprecated Exception Specifications from C++17
++
++../../../oprofile-1.3.0/libutil++/tests/utility_tests.cpp:24:33: error: ISO C++17 does not allow dynamic exception specifications
++   24 | void* operator new(size_t size) throw(bad_alloc)
++      |                                 ^~~~~
++../../../oprofile-1.3.0/libutil++/tests/utility_tests.cpp:30:35: error: ISO C++17 does not allow dynamic exception specifications
++   30 | void* operator new[](size_t size) throw(bad_alloc)
++      |                                   ^~~~~
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ libutil++/tests/utility_tests.cpp | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/libutil++/tests/utility_tests.cpp b/libutil++/tests/utility_tests.cpp
++index 3955fd0..2f8286f 100644
++--- a/libutil++/tests/utility_tests.cpp
+++++ b/libutil++/tests/utility_tests.cpp
++@@ -21,13 +21,13 @@ using namespace std;
++ static int nb_new;
++ static int nb_new_array;
++ 
++-void* operator new(size_t size) throw(bad_alloc)
+++void* operator new(size_t size)
++ {
++ 	nb_new++;
++ 	return malloc(size);
++ }
++ 
++-void* operator new[](size_t size) throw(bad_alloc)
+++void* operator new[](size_t size)
++ {
++ 	nb_new_array++;
++ 	return malloc(size);
++-- 
++2.31.0
++
+diff --git a/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb b/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
+index 8242a835f4..41b754f1fd 100644
+--- a/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
++++ b/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
+@@ -10,4 +10,4 @@ SRC_URI[md5sum] = "bd998df5521ebedae31e71cd3fb6200b"
+ SRC_URI[sha256sum] = "95ded8bde1ec39922f0af015981a67aec63e025a501e4dc04cd65d38f73647e6"
+ 
+ S = "${WORKDIR}/oprofile-${PV}"
 -
--SRC_URI[md5sum] = "305f75c4a88c96dcdc5654bf2d01bc05"
--SRC_URI[sha256sum] = "169ba8a33788476292d04186ab33b01d6add475033dfc07215e6d219cc077096"
--
--PYPI_PACKAGE = "Werkzeug"
--
--inherit pypi setuptools3
--
--CLEANBROKEN = "1"
--
--PACKAGES =+ "${PN}-tests"
--FILES_${PN}-tests+= " \
--    ${PYTHON_SITEPACKAGES_DIR}/werkzeug/test* \
--    ${PYTHON_SITEPACKAGES_DIR}/werkzeug/__pycache__/test* \
--    ${PYTHON_SITEPACKAGES_DIR}/werkzeug/contrib/test* \
--    ${PYTHON_SITEPACKAGES_DIR}/werkzeug/contrib/__pycache__/test* \
--"
--
--RDEPENDS_${PN} += " \
--    ${PYTHON_PN}-datetime \
--    ${PYTHON_PN}-difflib \
--    ${PYTHON_PN}-email \
--    ${PYTHON_PN}-html \
--    ${PYTHON_PN}-io \
--    ${PYTHON_PN}-json \
--    ${PYTHON_PN}-misc \
--    ${PYTHON_PN}-netclient \
--    ${PYTHON_PN}-netserver \
--    ${PYTHON_PN}-numbers \
--    ${PYTHON_PN}-pkgutil \
--    ${PYTHON_PN}-pprint \
--    ${PYTHON_PN}-threading \
--    ${PYTHON_PN}-unixadmin \
--"
--
--RDEPENDS_${PN}-tests = " \
--    ${PN} \
--    ${PYTHON_PN}-unittest \
--"
++TOOLCHAIN = "gcc"
 -- 
 2.31.0
 
