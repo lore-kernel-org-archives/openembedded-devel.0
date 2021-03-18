@@ -1,48 +1,49 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.65])
- by mx.groups.io with SMTP id smtpd.web09.6508.1616058518417331731
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.116])
+ by mx.groups.io with SMTP id smtpd.web12.6459.1616058532913080241
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Mar 2021 02:08:38 -0700
+ Thu, 18 Mar 2021 02:08:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: fujitsu.com, ip: 195.245.230.65, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=missing; spf=pass (domain: fujitsu.com, ip: 85.158.142.116, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
-Received: from [100.112.196.73] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-b.eu-west-1.aws.symcld.net id 7F/80-49021-49813506; Thu, 18 Mar 2021 09:08:36 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+EI1Z0iEZx
-  g0HBfzOLi4aXMDowe5zauYAxgjGLNzEvKr0hgzfh+ZDNbwWvOiqsvelkbGJs5uxi5OIQEtjBJ
-  bJu6iRXCOcEo8eXzeqYuRk4ONgF9iYb3r5hBbBEge+nsPWC2sICnxNzZ91lAbBYBVYnpbatYQ
-  WxeoPj1dWfBeiUEFCSmPHzPDBEXlDg58wlYPbOAhMTBFy+YIWoUJbbvPAMU5wCyqySOzFSbwM
-  gzC0nHLCQdCxiZVjFaJBVlpmeU5CZm5ugaGhjoGhoa6RpamukaGRrrJVbpJumlluqWpxaX6Br
-  qJZYX6xVX5ibnpOjlpZZsYgSGUUrBkas7GLvffNA7xCjJwaQkyvuXPzhBiC8pP6UyI7E4I76o
-  NCe1+BCjDAeHkgSvmThQTrAoNT21Ii0zBxjSMGkJDh4lEd5skDRvcUFibnFmOkTqFKOilDjvS
-  TGghABIIqM0D64NFkeXGGWlhHkZGRgYhHgKUotyM0tQ5V8xinMwKgnzVoOM58nMK4Gb/gpoMR
-  PQ4gj+IJDFJYkIKakGpjbno1Jf+Y94/PTtL9z4syfLuCmydV+xvO15qekCR6X+TZm9UP7Vc2m
-  1412nuo1CPzxcLjjV9XV+mUfU9AdMrJutD55tYBLjqI572vK31WJFuTrDtDlvytV9Z8icSQg/
-  le3hopS/z+5Epo+jYePmQHHTyQf3fFlTu+JwnoFDECdT+5mV+/743NE5W/Du5DPTUwXp19hCZ
-  KplOPet/8AQyL3wKae4rcWT/jbX0uWLY17uvnNroq2al3aOpZrs2qny/g+YV62tXyNRXPSLNT
-  G9Y4bl2drjE/443o61ryn4UxJ5u3fFrKbTs3i59LdYCWtMf91REmHyfHHl/Ksz5l1b3LuLlSO
-  Xu3W+kvSj+YfrlViKMxINtZiLihMBSYVxNx4DAAA=
+Received: from [100.113.6.176] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-5.bemta.az-b.eu-central-1.aws.symcld.net id EC/9F-33844-3A813506; Thu, 18 Mar 2021 09:08:51 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrEIsWRWlGSWpSXmKPExsViZ8MRqrtIIjj
+  B4OkmK4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWP6hhamgv/sFd3nPzE1MC5g72Lk4hAS2MIk
+  cfXATEYI5wSjxNcVa4EcTg42AX2JhvevmEFsESB76ew9YLawgIfE4e1nwWpYBFQl1nZ2soLYv
+  AKeEi9/HACzJQQUJKY8fM8MEReUODnzCQuIzSwgIXHwxQtmiBpFie07zwDFOYDsKokjM9UmMP
+  LMQtIxC0nHAkamVYyWSUWZ6RkluYmZObqGBga6hobGuua6RsaGeolVukl6qaW6yal5JUWJQFm
+  9xPJiveLK3OScFL281JJNjMBASilkf76DcdWbD3qHGCU5mJREef/yBycI8SXlp1RmJBZnxBeV
+  5qQWH2KU4eBQkuA1EwfKCRalpqdWpGXmAIMaJi3BwaMkwpsNkuYtLkjMLc5Mh0idYgzneLN2y
+  SJmjrdgsu3eXSDZDiZnLji4mpljFpi8334ISD4AkUIsefl5qVLivCfFgMYJgIzLKM2DWwaL2k
+  uMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHmrQY7iycwrgbvpFdC5TEDnRvAHgZxbkoiQkmp
+  gWhKeqRM9u9qa2yhR5Mdx+TOhNxO5XS79c1+zPNvvW3PM+qLnm45tUzphcG/Dyv/Lrz7J3rB5
+  xrrXq/ZkfPF69PzKsubT/13/Fi0Smxd7j6Mx/HVrc/PXVE8Hi8WP206vPxO/8eqhF4ar9myc0
+  Z4u8f1un1JyRpPwHP/VTc0eohmdpplWFZ+sHs5MCrlzVfnb/RvrXJTSJe9zHnh4cVuAtZLJGq
+  G0409eF6ddOvpR4OWKdz2rN2b9nniJs+Ong/BRnVk7L5dOtVQ7ZvD10dqbnSWXo31P50t7bj8
+  +SbZu4T9BFY5rPp5TfHkTBc5432lV2OV9J9rh5dV+Oa6SHUK3pawCHwZwMsq2J9V08t+bc1CJ
+  pTgj0VCLuag4EQD0M8kKVQMAAA==
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-46.tower-287.messagelabs.com!1616058515!16285!1
+X-Msg-Ref: server-20.tower-245.messagelabs.com!1616058530!2595639!1
 X-Originating-IP: [62.60.8.85]
 X-SYMC-ESS-Client-Auth: outbound-route-from=fail
 X-StarScan-Received: 
 X-StarScan-Version: 9.60.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 29030 invoked from network); 18 Mar 2021 09:08:36 -0000
+Received: (qmail 18224 invoked from network); 18 Mar 2021 09:08:50 -0000
 Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-46.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 18 Mar 2021 09:08:36 -0000
+  by server-20.tower-245.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 18 Mar 2021 09:08:50 -0000
 Received: from r01ukexcasm214.r01.fujitsu.local (ex2k13_214.fs.fujitsu.com [10.182.185.116])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 12I98ZpP026153
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 12I98oOJ026290
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 18 Mar 2021 09:08:35 GMT
+	for <openembedded-devel@lists.openembedded.org>; Thu, 18 Mar 2021 09:08:50 GMT
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  r01ukexcasm214.r01.fujitsu.local (10.182.185.116) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 18 Mar 2021 09:08:34 +0000
+ (TLS) id 15.0.1497.2; Thu, 18 Mar 2021 09:08:48 +0000
 From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-networking] [PATCH] mosquitto: upgrade 2.0.8 -> 2.0.9
-Date: Fri, 19 Mar 2021 05:08:28 +0800
-Message-ID: <1616101708-4737-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] nbdkit: upgrade 1.25.3 -> 1.25.4
+Date: Fri, 19 Mar 2021 05:08:42 +0800
+Message-ID: <1616101722-4799-1-git-send-email-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -52,27 +53,25 @@ Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../mosquitto/{mosquitto_2.0.8.bb => mosquitto_2.0.9.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.8.bb => mosquitto_2.0.9.bb} (95%)
+ .../nbdkit/{nbdkit_1.25.3.bb => nbdkit_1.25.4.bb}               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/nbdkit/{nbdkit_1.25.3.bb => nbdkit_1.25.4.bb} (95%)
 
-diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.8.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.9.bb
+diff --git a/meta-networking/recipes-support/nbdkit/nbdkit_1.25.3.bb b/meta-networking/recipes-support/nbdkit/nbdkit_1.25.4.bb
 similarity index 95%
-rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.8.bb
-rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.9.bb
-index 03a829fc87..97a380117e 100644
---- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.8.bb
-+++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.9.bb
-@@ -19,8 +19,8 @@ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
-            file://1571.patch \
+rename from meta-networking/recipes-support/nbdkit/nbdkit_1.25.3.bb
+rename to meta-networking/recipes-support/nbdkit/nbdkit_1.25.4.bb
+index cc41e0ee53..37f6a8b76b 100644
+--- a/meta-networking/recipes-support/nbdkit/nbdkit_1.25.3.bb
++++ b/meta-networking/recipes-support/nbdkit/nbdkit_1.25.4.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f9dcc2d8acdde215fa4bd6ac12bb14f0"
+ SRC_URI = "git://github.com/libguestfs/nbdkit.git;protocol=https \
  "
  
--SRC_URI[md5sum] = "542c30f32c4473b7c50dc2e4a1424cf6"
--SRC_URI[sha256sum] = "b15da8fc4edcb91d554e1259e220ea0173ef639ceaa4b465e06feb7e125b84bf"
-+SRC_URI[md5sum] = "b77cee4ee6f0d32ca8816a58167e8b1d"
-+SRC_URI[sha256sum] = "1b8553ef64a1cf5e4f4cfbe098330ae612adccd3d37f35b2db6f6fab501b01d4"
+-SRCREV = "1476b82f7e10deedf88364f26186f5945c3d4702"
++SRCREV = "7b04baeb1858fa04f5f4e0d6f2d23bef706e80da"
  
- inherit systemd update-rc.d useradd cmake
+ S = "${WORKDIR}/git"
  
 -- 
 2.25.1
