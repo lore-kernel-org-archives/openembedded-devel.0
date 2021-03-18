@@ -1,84 +1,74 @@
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web12.5638.1616050136631431721
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+ by mx.groups.io with SMTP id smtpd.web09.5663.1616050137244529341
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Mar 2021 23:48:56 -0700
+ Wed, 17 Mar 2021 23:48:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=JybjC+m+;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id g10so797497plt.8
-        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Mar 2021 23:48:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=JNOMtlip;
+ spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f175.google.com with SMTP id q11so796901pld.11
+        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Mar 2021 23:48:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=L3UP51mlFDMvxWFepLe9fQ9xTs1hwsghrxEfaOnP6tM=;
-        b=JybjC+m+EF7U2vgE7fPRk/s2w9+UTS27ORzPdK3zmfF8j2Be6e7kNqL7DVhIV/RRHe
-         djeaKXx6VDGkMy/D5MgYoh1XcVejgk7ZKidAiPDhC+9+ilfADLVlB3h28og1GIMLjM9J
-         +fjO2DqVTjdkZqx5iIUC5QGhJwDWDVe+Uw58m5UZJeUETzjCgSn8Uboxy9rWNoGPjQZ7
-         1STV+WJGWph9Oj5nSsGoqOBexWm+MfBQ3oZKay79cT9+eCRHsuXO6/n/vD1qpLKMxkv+
-         A+T3CK8fGzA3KArptQ/XaRWEaKLi8hK6gv1bHvZX6250rA74Kbvw31ar4tk8i+CF7GgJ
-         57BQ==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=8eOPKoPu7QCNF6+p7yYNvsO9DNMOtYcYgn6K8G7x014=;
+        b=JNOMtlipV07oCspsJ3bi4o/bZ2U4tKDHEmkw1q6V2iEkgCYs4mrnP4/WfvONBMjYIg
+         eDojIY4qY6W2OEIRPFA4jIVpDBKtwoHObk2vZ0adk+yPrVM74XGdU2ZEeBzyqLEr+puV
+         7SlxtPmSMgcWjpir+qyobd5WLC3YYblFU63IAXN+S4Gv2g7MOAxCIxdP4pr4sLWOu0U8
+         E5snXqoE7p8mKlzvFj1yhuWcc0mbs1cNOAoaJ/DKyMu+m9qXKPQWv3xuo+zI1AUup8eI
+         9RFVDx0tl5Uk5KHg/3Lj89cfV31ccxfA3cmUtkfAoZdAzADu+NmPWoyI0wmXWVbB/H+C
+         RdAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=L3UP51mlFDMvxWFepLe9fQ9xTs1hwsghrxEfaOnP6tM=;
-        b=rJ01neuJI9Fh9g3i8e9dJxJec8/m2UG1FfnGxzFyez9DMDUvqLFA3yWzrhX2PsmhBN
-         +Aec1I2FfIKXgg0x38+XMKVMGHRXNCH/nOjECtdV2A1pgjsz0XBYkH8GRi3FQBktj4/F
-         VTg4uuq9/QJV2mcYRGBwpQf8VQcGzusxsbm0cnNstz/Q+3LkF6MBrjLomqC0Txp8OC17
-         r4qb1bLE2Cj5LMID0G/HZ8ivWaAjU1adQQgTUjOnemzH+X4myfXavfixSX3RdR86LFi2
-         8bMhLQ7FTP/YVvcSONEafDLMQl1aQCsgSN8we1AOElrzrCBFztFKYoVctSwlDGn/zFmA
-         +Yxw==
-X-Gm-Message-State: AOAM5322/CbDZz6TNOaVTIhCBIeOtqVHPERxvZA/VHGlq3Y5ndMdVGMS
-	+HBOJrXF471w8CF+7A15SC0/WLx1MAPb+g==
-X-Google-Smtp-Source: ABdhPJyEdHOLAWtMXtlDcur156O1yi7BwVJNH5WYXM5l4V31bhCHxFbvwJ4VashxHVp8Bf/GCPQ3NQ==
-X-Received: by 2002:a17:90a:987:: with SMTP id 7mr2785531pjo.61.1616050135509;
-        Wed, 17 Mar 2021 23:48:55 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=8eOPKoPu7QCNF6+p7yYNvsO9DNMOtYcYgn6K8G7x014=;
+        b=XObZX+2EZxYNlVxmlVHO0Y2Ixd/LPd8uBJ2UPZNVWLDKWEkt9lpDfWiR3ccDstk7+z
+         Y85cAfUgQXAt0p+DGTW81jE2HIISs/Bgw2r8655tz/dhErNOyv7xJRBMdXZq1E75iKA3
+         j7O37tAi8yCpYWB6dYQdpH+LuzKjXSy/lW/BMm77VL2b+SsZ5Hs7FNGiJwXFrDpfHGf6
+         wiAyQ8U+Q+Gk/iNch9ADX/vPbxwZjELELOjpsDOkSj1Ee1CEA2SqQtMucNAZX7alqE+n
+         vRbIE1P83ermKQjAe/m4eYXSk3wV8JR+SkBYMEz+xpuWzSP5VcfHTGBaKdCuHG4j1nAB
+         ehIw==
+X-Gm-Message-State: AOAM532yWwNHDvLhaMTj93vs3V2YBrK88ncEWN0ell/PldfvqO3+RfaX
+	E0/c+9wdNzV7hr0OkvQHw2sOfnOtEEaeMA==
+X-Google-Smtp-Source: ABdhPJwZzKJ+b2mYfB0y4D3o5g925BhYGsN17Z2eNh7SNYc4y5HXDQT1fpuQak+tEVpAQmgNhyWEOw==
+X-Received: by 2002:a17:902:e806:b029:e5:cb85:dc4d with SMTP id u6-20020a170902e806b02900e5cb85dc4dmr8333569plg.11.1616050136589;
+        Wed, 17 Mar 2021 23:48:56 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b117])
-        by smtp.gmail.com with ESMTPSA id 76sm1135867pfw.156.2021.03.17.23.48.54
+        by smtp.gmail.com with ESMTPSA id 76sm1135867pfw.156.2021.03.17.23.48.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 17 Mar 2021 23:48:55 -0700 (PDT)
+        Wed, 17 Mar 2021 23:48:56 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 1/3] python3-spidev: Remove recipe for 3.2
-Date: Wed, 17 Mar 2021 23:48:51 -0700
-Message-Id: <20210318064853.1268-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 2/3] python3-werkzeug: Clarify BSD license type
+Date: Wed, 17 Mar 2021 23:48:52 -0700
+Message-Id: <20210318064853.1268-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.31.0
+In-Reply-To: <20210318064853.1268-1-raj.khem@gmail.com>
+References: <20210318064853.1268-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-3.5 is already there
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../python/python3-spidev_3.2.bb                 | 16 ----------------
- 1 file changed, 16 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-spidev_3.2.bb
+ meta-python/recipes-devtools/python/python3-werkzeug_1.0.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-spidev_3.2.bb b/meta-python/recipes-devtools/python/python3-spidev_3.2.bb
-deleted file mode 100644
-index 65679594d3..0000000000
---- a/meta-python/recipes-devtools/python/python3-spidev_3.2.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--SUMMARY = "Python bindings for Linux SPI access through spidev"
--DESCRIPTION = "This project contains a python module for interfacing with SPI\
--devices from user space via the spidev linux kernel driver.\
--This is a modified version of the code originally found\
--[here](http://elk.informatik.fh-augsburg.de/da/da-49/trees/pyap7k/lang/py-spi)\
--All code is GPLv2 licensed unless explicitly stated otherwise."
--HOMEPAGE = "http://github.com/doceme/py-spidev"
--SECTION = "devel/python"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://LICENSE.md;md5=54bdb9022ebb75ab68399cdaab97da60"
--SRCNAME = "spidev"
--
--SRC_URI[md5sum] = "f601676f1bb48b9aa3b3897f95216365"
--SRC_URI[sha256sum] = "09d2b5122f0dd79910713a11f9a0020f71537224bf829916def4fffc0ea59456"
--
--inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_1.0.1.bb b/meta-python/recipes-devtools/python/python3-werkzeug_1.0.1.bb
+index 58735c1c02..8af0fef60c 100644
+--- a/meta-python/recipes-devtools/python/python3-werkzeug_1.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-werkzeug_1.0.1.bb
+@@ -7,7 +7,7 @@ HTTP utilities to handle entity tags, cache control headers, HTTP dates, \
+ cookie handling, file uploads, a powerful URL routing system and a bunch \
+ of community contributed addon modules."
+ HOMEPAGE = "http://werkzeug.pocoo.org/"
+-LICENSE = "BSD"
++LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462"
+ 
+ PYPI_PACKAGE = "Werkzeug"
 -- 
 2.31.0
 
