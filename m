@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.98.1616173997222527134
+ by mx.groups.io with SMTP id smtpd.web10.101.1616173997499786207
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 19 Mar 2021 10:13:17 -0700
 Authentication-Results: mx.groups.io;
@@ -8,14 +8,16 @@ Received: from [78.130.197.211] (port=37638 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lNIgS-0002xc-Eg; Fri, 19 Mar 2021 19:13:14 +0200
+	id 1lNIgU-0002xc-Vh; Fri, 19 Mar 2021 19:13:15 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/3] python3-soupsieve: Upgrade 2.2 -> 2.2.1
-Date: Fri, 19 Mar 2021 19:13:02 +0200
-Message-Id: <20210319171304.28090-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-urllib3: Upgrade 1.26.3 -> 1.26.4
+Date: Fri, 19 Mar 2021 19:13:04 +0200
+Message-Id: <20210319171304.28090-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210319171304.28090-1-leon.anavi@konsulko.com>
+References: <20210319171304.28090-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,31 +30,33 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.2.1:
+Upgrade to release 1.26.4:
 
-- Fix an issue with namespaces when one of the keys is self.
+- Changed behavior of the default SSLContext when connecting to
+  HTTPS proxy during HTTPS requests. The default SSLContext now
+  sets check_hostname=True.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-soupsieve_2.2.bb => python3-soupsieve_2.2.1.bb}    | 2 +-
+ .../{python3-urllib3_1.26.3.bb => python3-urllib3_1.26.4.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-soupsieve_2.2.bb => python3-soupsieve_2.2.1.bb} (85%)
+ rename meta-python/recipes-devtools/python/{python3-urllib3_1.26.3.bb => python3-urllib3_1.26.4.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-soupsieve_2.2.bb b/meta-python/recipes-devtools/python/python3-soupsieve_2.2.1.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-soupsieve_2.2.bb
-rename to meta-python/recipes-devtools/python/python3-soupsieve_2.2.1.bb
-index 9507f60d7..93ef04f14 100644
---- a/meta-python/recipes-devtools/python/python3-soupsieve_2.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-soupsieve_2.2.1.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/facelessuser/soupsieve"
+diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.26.3.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.26.4.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-urllib3_1.26.3.bb
+rename to meta-python/recipes-devtools/python/python3-urllib3_1.26.4.bb
+index 739cf24f5..0a31fb1e2 100644
+--- a/meta-python/recipes-devtools/python/python3-urllib3_1.26.3.bb
++++ b/meta-python/recipes-devtools/python/python3-urllib3_1.26.4.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=33c3a77def9b3ad83e01c65bdcc1af67"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c2823cb995439c984fd62a973d79815c"
  
--SRC_URI[sha256sum] = "407fa1e8eb3458d1b5614df51d9651a1180ea5fedf07feb46e45d7e25e6d6cdd"
-+SRC_URI[sha256sum] = "052774848f448cf19c7e959adf5566904d525f33a3f8b6ba6f6f8f26ec7de0cc"
+-SRC_URI[sha256sum] = "de3eedaad74a2683334e282005cd8d7f22f4d55fa690a2a1020a416cb0a47e73"
++SRC_URI[sha256sum] = "e7b021f7241115872f92f43c6508082facffbd1c048e3c6e2bb9c2a157e28937"
  
- inherit pypi setuptools3 ptest
+ inherit pypi setuptools3
  
 -- 
 2.17.1
