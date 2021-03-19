@@ -1,117 +1,95 @@
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web08.3395.1616141914676344115
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
+ by mx.groups.io with SMTP id smtpd.web09.4654.1616151621490930575
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Mar 2021 01:18:34 -0700
+ Fri, 19 Mar 2021 04:00:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=PbRDFxhA;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id q6-20020a17090a4306b02900c42a012202so4465038pjg.5
-        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Mar 2021 01:18:34 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=fqeMZ+ar;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.218.45, mailfrom: brgl@bgdev.pl)
+Received: by mail-ej1-f45.google.com with SMTP id l4so8970785ejc.10
+        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Mar 2021 04:00:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=INcaeuvwury6xRq2BzbKccIw+4UJhLJNRyhkpazMhmU=;
-        b=PbRDFxhA/TRDXmx8/IYf5BOa1P+6+OZKTI5lifOA1UgvKtjZ5V7qpxSv+AngPwjAaK
-         NiL5EMmsz/IHmQRKJSthYK4GZ9Yfy8iaA6mYAsO52JJkzTZzGg3hL1KXcAXLOzEUFS9h
-         +aVzBtzKs0VcNZYJuoswijlMMCUs0Ad9qpFzA4AARR2UI4WiNEf67OJHiVEuERmYj/2b
-         idDpayjtauhyTVbytadD8HvVG0Q9RAUYMbnBgsAp3xmGliTkCBmyfCIV4XvxJzC91GnZ
-         BBoCNwSIwB52afPoTISQqIZVLC0C/4dIBAa2JAHCHvC5k7BuiPYQOdUz8LFMj9M7PbKr
-         H1og==
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Si36t3M2dDQAiOb/3pwqJb3PVMnKwEKKwENH7EQVnas=;
+        b=fqeMZ+arw2IYq7zva58F4yoWfUHWXRjSU3lA2CH0c7iq+TkWT8wkIE/ibFWpXA0eXE
+         694gAfwny5Yh/28fkklv1KNxrURQ6E89INAVpANEgBZIGOpq6BT3UPsF2H9Dr/69bW+Y
+         5fTytyRtEvLTu8X/0qhhNL/Yi32xTGjWaB6vz/s+nNClsDRW/6gwI0cYb6tSNPw0sntW
+         4FsrqJGFcwtmMIfE5NhKw95yR1m3u0sQRBDPF4Vks3d/pBLPWY/xpnTK9NeyzhWNsqA8
+         Ayo1X+C7es4Yj5zWJ8i2nPtEc09yJU1Nf6flaZlXz9ohfhQ17acw7XktbPtA0+4YxDET
+         mdmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=INcaeuvwury6xRq2BzbKccIw+4UJhLJNRyhkpazMhmU=;
-        b=IUglFOnFLCOWS45JazdX+GWdWWFls2t4EN9KvYVuYpXC7/50dTR9EtdEueOWZlmG1C
-         1KCwMTH2MjoW5owJ6TMXSg2hf4Ij+GRxC4YRDvaHcRCnxI/GULaTKI0bUiVD1tX7d6yZ
-         PNEoWtgSj9I3QXNXvUuuAWysZ0EZY2uPbNZqym3ByvhiGvdp5SDwecH+4xdYmOvUzGng
-         EmP6/PKyXw5Zp3qGpAM1MAVxftT14JuaI7dT4Pcn545E173xUZ4kixsgN9q6bySDIA1f
-         wtZ6nH5/WAfcL3pRJzQr9km11TCr/O4JSOILr8Mov8W358V3beX+hEQoHh5ChWTUnCEW
-         u3NQ==
-X-Gm-Message-State: AOAM532yQfCGgHtcdrsjpl2nWK9OQ0zFFCIhf6ZCGcLB+CG6iwZSlxOn
-	obHYtKuKs7RJXQVPWOhIBBr+De1BloDWaA==
-X-Google-Smtp-Source: ABdhPJwb7ZW7ARazpecAZZidKmJqopsmAxyf/5dMdjZNQiUIXRG/sfVwu8uWBzj/g0Nq/7gDG01+dA==
-X-Received: by 2002:a17:902:da91:b029:e5:e7cf:d737 with SMTP id j17-20020a170902da91b02900e5e7cfd737mr13343216plx.24.1616141913682;
-        Fri, 19 Mar 2021 01:18:33 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b117])
-        by smtp.gmail.com with ESMTPSA id u79sm4044974pfc.207.2021.03.19.01.18.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 19 Mar 2021 01:18:33 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] vboxguestdrivers: Add __divmoddi4 builtin support
-Date: Fri, 19 Mar 2021 01:18:31 -0700
-Message-Id: <20210319081831.2979642-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Si36t3M2dDQAiOb/3pwqJb3PVMnKwEKKwENH7EQVnas=;
+        b=tgxFjtsjf+kRrcOoeWBkmjCcJ0MKZC8YQ+9eW+yVopLtJrkMirRTYBREau/DVq24NB
+         3nZPhn7oQJ8QAPZbFQZ8VW99yqvRf7tN5GFCSmfiuVLZFtfTMQeBSvquOVG4BUSqVzaA
+         e2pLI3VVOh9oE9uDMgVhmM1pG8PTxV4I6m/aYAuz9S01ekiB6aCGQ/FGgnNAJOQZf3Ei
+         pRKPowL+Z/w7BPeYUkpDM4YRB43XsHjMwY8o+536wolK+Qpp9h0JsndQAIIBNUy1jpwz
+         RduBCkQza4qSDGJvA2X776Nj6m+js4/o/eHFxctHPD9/fUycfAE9HPlP7ta+1LrAncom
+         R5SA==
+X-Gm-Message-State: AOAM533aQ6P5VKTtEkBOsQty/kFOapV6Igg3C5R8CW7pyBtrSRs0oZzC
+	zWJRIr5YBr67wdabpS+4aZz6uiwPcIHi/Jy0ESj1zQ==
+X-Google-Smtp-Source: ABdhPJx51Ub9nFLlFH60+EQaKlP7ipIAkKJc0W/oXxprBDf+0ZWk3GfreN13EQLaWGJnWdki81agFDVEmN3umbbMcjk=
+X-Received: by 2002:a17:906:2404:: with SMTP id z4mr3573928eja.14.1616151617421;
+ Fri, 19 Mar 2021 04:00:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CAMRc=McUB0dbu=GoQz_mrt0=V3=iYawp=WJi6Z5-_fW3i4dLPQ@mail.gmail.com>
+ <20210318174457.gm2no6omtd6qgzma@apollo.localdomain> <CAMRc=Mc8WCeCobNeS6=qyHQH43UO3mf-hG1YHUAFCyrTeANn4g@mail.gmail.com>
+ <CAMKF1soMR6uXiqHZhk-fZo3FFo3r1mH4i8HPJ5EXbJn3rKsXTQ@mail.gmail.com>
+In-Reply-To: <CAMKF1soMR6uXiqHZhk-fZo3FFo3r1mH4i8HPJ5EXbJn3rKsXTQ@mail.gmail.com>
+From: "Bartosz Golaszewski" <brgl@bgdev.pl>
+Date: Fri, 19 Mar 2021 12:00:06 +0100
+Message-ID: <CAMRc=MdmXCB0i+x=LHcVJ3GMaWxomsJwfe1TbnsDFNUkgNg7yQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] mpv can't find x11 components
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Trevor Woerner <twoerner@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 
-gcc 11 needs it on i686
+On Thu, Mar 18, 2021 at 9:26 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+>
+>
+> On Thursday, March 18, 2021, Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+>>
+>> On Thu, Mar 18, 2021 at 6:45 PM Khem Raj <raj.khem@gmail.com> wrote:
+>> >
+>> > On Thu, Mar 18, 2021 at 11:47:30AM +0100, Bartosz Golaszewski wrote:
+>> > > I'm trying to add mpv to an image using the minimal-x-session. The
+>> > > build fails with the following error at do_configure():
+>> > >
+>> > > | Checking for X11
+>> > >      : no ('x11 >= 1.0.0 xscrnsaver >= 1.0.0 xext >= 1.0.0 xinerama >=
+>> > > 1.0.0 xrandr >= 1.2.0' not found)
+>> > > | You manually enabled the feature 'x11', but the autodetection check failed.
+>> > >
+>> > > If I build the core-image-x11 image, mpv builds just fine so I assume
+>> > > I'm missing something in my custom image (or rather some dependency
+>> > > isn't pulled in by the recipe).
+>> > >
+>> > > Any idea on what could be missing?
+>> > >
+>> >
+>> > do you have x11 in DISTRO_FEATURES looking at config.log file might
+>> > reveal more on missing dependencies.
+>> >
+>>
+>> Yes I do. It looks like the build is looking for
+>> /recipe-sysroot/usr/lib/pkgconfig/xrandr.pc (provided by
+>> libxrandr-dev) and it finds it on current master but not on dunfell
+>> that I'm using.
+>>
+>> It doesn't look right, does it? Shouldn't it look in
+>> recipe-sysroot-native for any such development files?
+>
+>
+> Yeah sometime with-x option is needed to let it find in right sysroot otherwise autoconf has mind of its own at times and pokes at build host
+>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../vboxguestdrivers/add__divmoddi4.patch     | 36 +++++++++++++++++++
- .../vboxguestdrivers_6.1.18.bb                |  1 +
- 2 files changed, 37 insertions(+)
- create mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/add__divmoddi4.patch
+I haven't made myself clear - the xrandr.pc file is not there on
+dunfell but it is present on master. Looks like libxrandr-dev isn't
+pulled in on dunfell but is on master.
 
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/add__divmoddi4.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/add__divmoddi4.patch
-new file mode 100644
-index 0000000000..8dd30a20ef
---- /dev/null
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/add__divmoddi4.patch
-@@ -0,0 +1,36 @@
-+add __divmoddi4 builtin
-+
-+GCC 11 will generate it in code
-+
-+void foo(unsigned char *u8Second, unsigned int *u32Nanosecond, long long timeSpec)
-+{
-+    long long i64Div;
-+    int i32Div;
-+    int i32Rem;
-+    i64Div = timeSpec;
-+    i32Rem = (int)(i64Div % 1000000000);
-+    i64Div /= 1000000000;
-+    *u32Nanosecond = i32Rem;
-+    i32Rem = (int)(i64Div % 60);
-+    *u8Second = i32Rem;
-+}
-+
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+--- a/src/VBox/Runtime/common/math/gcc/divdi3.c
-++++ b/src/VBox/Runtime/common/math/gcc/divdi3.c
-+@@ -68,3 +68,12 @@ __divdi3(a, b)
-+ 		uq = - uq;
-+ 	return uq;
-+ }
-++
-++quad_t
-++__divmoddi4(quad_t a, quad_t b, quad_t* rem)
-++{
-++	quad_t d = __divdi3(a,b);
-++	*rem = a - (d*b);
-++	return d;
-++}
-++
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.18.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.18.bb
-index d620e9893f..1def1a3115 100644
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.18.bb
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.18.bb
-@@ -14,6 +14,7 @@ VBOX_NAME = "VirtualBox-${PV}"
- SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
-     file://Makefile.utils \
-     file://kernel-5.10.patch \
-+    file://add__divmoddi4.patch \
- "
- SRC_URI[md5sum] = "c61001386eb3822ab8f06d688a82e84b"
- SRC_URI[sha256sum] = "108d42b9b391b7a332a33df1662cf7b0e9d9a80f3079d16288d8b9487f427d40"
--- 
-2.31.0
-
+Bart
