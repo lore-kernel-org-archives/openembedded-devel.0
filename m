@@ -1,225 +1,180 @@
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web08.437.1616175364846064758
- for <Openembedded-devel@lists.openembedded.org>;
- Fri, 19 Mar 2021 10:36:04 -0700
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
+ by mx.groups.io with SMTP id smtpd.web11.1366.1616178824540750575
+ for <openembedded-devel@lists.openembedded.org>;
+ Fri, 19 Mar 2021 11:33:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=HoVjTNWW;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id a22-20020a17090aa516b02900c1215e9b33so7058085pjq.5
-        for <Openembedded-devel@lists.openembedded.org>; Fri, 19 Mar 2021 10:36:04 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=oYSU0bGk;
+ spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f45.google.com with SMTP id j6-20020a17090adc86b02900cbfe6f2c96so5290590pjv.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Mar 2021 11:33:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=z/HxXkSbGh1Ln+01V6vHPTFeJQncaU9eDzsnuDScAfs=;
-        b=HoVjTNWWd4HsnhMSnnQinf31BQR5NwF58DS7lNcqsFOJEVWK71Ul4nnkPmM5+D3JLF
-         9y9gftEUlM0OcnwePji5MvhVA49Aj1j5Wzl7cbHPcZLKU1XyG84uZn7Kale7BdcSTgQI
-         /39TRF3+nHKXA6wElx14gcrChSAapCZ+PxP9NfKQpx+inTuW9SocIAq+7ObdOe6ee9Jx
-         1oOpmBcXB4RG637ltKxeXvsMI1sefvmwzMjpd1Fam+6nKWwro1T5GV+DVtsT6gC6X/b1
-         cXNAoa4DGWm1ZWOWqp8nuaDDp8+6hXu8Bm8dBigYmnfA6HwLH0keh59fmUSvYhwTb2FB
-         PYWg==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=DP64Uvu7nwr4UhjWvFIMwL7gTnb7q77YKw8glsZHywQ=;
+        b=oYSU0bGkdVEiE1HQfFqq1C/ZVmcaqgAV4Sg+bosYVgLrq3skLA4vTGvmr43K8LRWO9
+         9dixdo+9KYdmhPVSb5xHtpe+z8EqiMS/yoF9hl/yzAyhzBInwrDZ9zLlNSpU/X6HCzSm
+         /OA+OCyybZkUaZfJqXikFCYReChUdlF5+Y/3iTK1qRdgUjkfa7RHquCtNhZtsAhgikSA
+         /JUVgJiF0psK8TbyvIn2hnpSP34ea3aIWjnOx+sEyY/8auz1++K+LSrcXo5n5PtYtElC
+         0P84eb9RQ0cITzRuvgmLfB/XHVlIszW+ZRzrk3NtMyabdifdGEy7CNfSCaQpdtJdZ0Vy
+         zzCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=z/HxXkSbGh1Ln+01V6vHPTFeJQncaU9eDzsnuDScAfs=;
-        b=CdCaNMgd5v0Henl/kvAiRZH7KSffVqfZ/ZycZ8x0QM3bTsnGaoIveisc+SJ/o4/aC5
-         UtbkCgrZvEBDyIkjexG8g6r/5Cim6HKjNMW0w3Tbis83YhNPuaeRc3HpS+oxs1mLw751
-         T2xwLbg0212NRi33p2GfMxX+22JzRzFcPfj8LRDmU2PDkvxmpQYQc0mXgpPKPLl6MInd
-         ARZFsZ1V/7Dj4WYnHqVBj1SCAMkb7XeAE6qAm31uqhhnvf+gqBqNt6+PBclDmpggwZeo
-         eRdrCUHwexDwxXY6/g9eNR2iHfHj6hZASeYpALPhOtE0hQKg1IPxknsduzMfR00KUsW5
-         wm4Q==
-X-Gm-Message-State: AOAM530o8YFAtsfO/q6ucjqLodud2JFRbymX+b2MHDsFKKn3BUKGtNS4
-	fIkXuRrKgg1xIyAVPSi8tOA=
-X-Google-Smtp-Source: ABdhPJwLK5HUQFxykhDprLzIDy5C/E3T3bl47w0OcDtesqygi7HUQGnLHCK1LZZ2q0jldjBvWMHuDA==
-X-Received: by 2002:a17:902:c382:b029:e4:33bb:8a3f with SMTP id g2-20020a170902c382b02900e433bb8a3fmr15578123plg.9.1616175364131;
-        Fri, 19 Mar 2021 10:36:04 -0700 (PDT)
+        bh=DP64Uvu7nwr4UhjWvFIMwL7gTnb7q77YKw8glsZHywQ=;
+        b=DfhW7pElzd0F1Q5f0s5HpxrNYWpqJEyNpaqRJT/53GoE3qTccqX9q8WwVgBSRdHT2b
+         PncKfZbf8IIZs0DTXK/vDjhxBj6sRoWj+2NlYmW2iKWlyQEbEqmPsxeNF6Uud6idZA9u
+         JOOi4KTB7lC3Mi4JReF4S0HXDzamuBZWaDJhpCNs99VU8g9tdXiHpNGNRM8Kt/A/AJ8L
+         ZbrYWMgqH1cbGAICPMi8yZBeofnipfWWyL/2dmAqic4b96vmYFBDIHvy/qXEnnJFUMx6
+         STmmLmcieZvDollgyeJjeLQS36toMU80wHr3R0t7cSLbZ5kQv2BcIUpikbVffcOyl+TQ
+         0spw==
+X-Gm-Message-State: AOAM5314rbZKP6kELuxWjFCT+8IZZd5wuqWAR7lMAaMN06IMMQ7vfwGs
+	+RKhvBFnRa1Ehm3jIxY3FtYuj1g2vWJQQA==
+X-Google-Smtp-Source: ABdhPJxGR2FKM/+dp27BmKRhmhs8WVG2R7zz21zs5b2yIT0eWSoz3b2DrCzWpWdREtgQmKU/qH+RTw==
+X-Received: by 2002:a17:902:47:b029:e6:cc11:8210 with SMTP id 65-20020a1709020047b02900e6cc118210mr12280244pla.20.1616178823575;
+        Fri, 19 Mar 2021 11:33:43 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:a0f0::b117? ([2601:646:9200:a0f0::b117])
-        by smtp.gmail.com with ESMTPSA id j22sm5322131pjz.3.2021.03.19.10.36.03
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 19 Mar 2021 10:36:03 -0700 (PDT)
-Subject: Re: [meta-networking][meta-oe][master][dunfell][PATCH] mdns: Whitelisted CVE-2007-0613 for mdns
-To: Sana Kazi <Sana.Kazi@kpit.com>,
- "Openembedded-devel@lists.openembedded.org"
- <Openembedded-devel@lists.openembedded.org>
-Cc: Harpritkaur Bhandari <Harpritkaur.Bhandari@kpit.com>,
- Nisha Parrakat <Nisha.Parrakat@kpit.com>
-References: <20210309063513.10410-1-Sana.Kazi@kpit.com>
- <BMXPR01MB3221CE7ACA0211ED19B9164399689@BMXPR01MB3221.INDPRD01.PROD.OUTLOOK.COM>
- <c9489c74-f9c3-976a-c1e6-645afe9c2f4a@gmail.com>
- <BMXPR01MB322133C4D35B77124D00104699689@BMXPR01MB3221.INDPRD01.PROD.OUTLOOK.COM>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b117])
+        by smtp.gmail.com with ESMTPSA id f20sm6378216pfa.10.2021.03.19.11.33.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 19 Mar 2021 11:33:43 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
-Message-ID: <6988d70c-149a-3d51-8bea-480cbb1110b1@gmail.com>
-Date: Fri, 19 Mar 2021 10:36:02 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/2] links-x11,links: Upgrade to 2.22
+Date: Fri, 19 Mar 2021 11:33:40 -0700
+Message-Id: <20210319183341.1308949-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.31.0
 MIME-Version: 1.0
-In-Reply-To: <BMXPR01MB322133C4D35B77124D00104699689@BMXPR01MB3221.INDPRD01.PROD.OUTLOOK.COM>
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
+Remove devtool added comment
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-support/links/links-x11_2.20.2.bb | 53 -------------------
+ .../recipes-support/links/links-x11_2.22.bb   | 29 ++++++++++
+ .../links/{links_2.21.bb => links_2.22.bb}    |  8 +--
+ 3 files changed, 33 insertions(+), 57 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/links/links-x11_2.20.2.bb
+ create mode 100644 meta-oe/recipes-support/links/links-x11_2.22.bb
+ rename meta-oe/recipes-support/links/{links_2.21.bb => links_2.22.bb} (68%)
 
-On 3/19/21 10:16 AM, Sana Kazi wrote:
-> Hi,
-> 
-> It is merged in dunfell but not yet in master. Are you planning to merge 
-> it in master?
-> 
+diff --git a/meta-oe/recipes-support/links/links-x11_2.20.2.bb b/meta-oe/recipes-support/links/links-x11_2.20.2.bb
+deleted file mode 100644
+index 645fe3b264..0000000000
+--- a/meta-oe/recipes-support/links/links-x11_2.20.2.bb
++++ /dev/null
+@@ -1,53 +0,0 @@
+-# FIXME: the LIC_FILES_CHKSUM values have been updated by 'devtool upgrade'.
+-# The following is the difference between the old and the new license text.
+-# Please update the LICENSE value if needed, and summarize the changes in
+-# the commit message via 'License-Update:' tag.
+-# (example: 'License-Update: copyright years updated.')
+-#
+-# The changes:
+-#
+-# --- COPYING
+-# +++ COPYING
+-# @@ -293,7 +293,7 @@
+-#      <one line to give the program's name and a brief idea of what it does.>
+-#      Copyright (C) <year>  <name of author>
+-#  
+-# -    on, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USAThis program is free software; you can redistribute it and/or modify
+-# +    This program is free software; you can redistribute it and/or modify
+-#      it under the terms of the GNU General Public License as published by
+-#      the Free Software Foundation; either version 2 of the License, or
+-#      (at your option) any later version.
+-# 
+-#
+-
+-require links.inc
+-
+-DEPENDS += "virtual/libx11"
+-RCONFLICTS_${PN} = "links"
+-
+-inherit features_check
+-# depends on virtual/libx11
+-REQUIRED_DISTRO_FEATURES = "x11"
+-
+-SRC_URI += " file://links2.desktop \
+-             http://www.xora.org.uk/oe/links2.png;name=icon"
+-
+-S = "${WORKDIR}/links-${PV}"
+-
+-EXTRA_OECONF = "--enable-graphics \
+-                --with-ssl=${STAGING_LIBDIR}/.. --with-libjpeg \
+-                --without-libtiff --without-svgalib --without-fb \
+-                --without-directfb --without-pmshell --without-atheos \
+-                --with-x --without-gpm"
+-
+-do_install_append() {
+-    install -d ${D}/${datadir}/applications
+-    install -m 0644 ${WORKDIR}/links2.desktop ${D}/${datadir}/applications
+-    install -d ${D}/${datadir}/pixmaps
+-    install -m 0644 ${WORKDIR}/links2.png ${D}/${datadir}/pixmaps
+-}
+-
+-SRC_URI[md5sum] = "ee39e612249440d0497535d0dafc3c0e"
+-SRC_URI[sha256sum] = "4b4f07d0e6261118d1365a5a5bfa31e1eafdbd280cfae6f0e9eedfea51a2f424"
+-SRC_URI[icon.md5sum] = "477e8787927c634614bac01b44355a33"
+-SRC_URI[icon.sha256sum] = "eddcd8b8c8698aa621d1a453943892d77b72ed492e0d14e0dbac5c6a57e52f47"
+diff --git a/meta-oe/recipes-support/links/links-x11_2.22.bb b/meta-oe/recipes-support/links/links-x11_2.22.bb
+new file mode 100644
+index 0000000000..563984c0eb
+--- /dev/null
++++ b/meta-oe/recipes-support/links/links-x11_2.22.bb
+@@ -0,0 +1,29 @@
++require links.inc
++
++DEPENDS += "virtual/libx11"
++RCONFLICTS_${PN} = "links"
++
++inherit features_check
++# depends on virtual/libx11
++REQUIRED_DISTRO_FEATURES = "x11"
++
++SRC_URI += " file://links2.desktop \
++             http://www.xora.org.uk/oe/links2.png;name=icon"
++
++SRC_URI[sha256sum] = "0364986b3a7f1e8e3171bea362b53f71e1dd3360a8842d66fdc65580ebc2084d"
++SRC_URI[icon.sha256sum] = "eddcd8b8c8698aa621d1a453943892d77b72ed492e0d14e0dbac5c6a57e52f47"
++
++S = "${WORKDIR}/links-${PV}"
++
++EXTRA_OECONF = "--enable-graphics \
++                --with-ssl=${STAGING_LIBDIR}/.. --with-libjpeg \
++                --without-libtiff --without-svgalib --without-fb \
++                --without-directfb --without-pmshell --without-atheos \
++                --with-x --without-gpm"
++
++do_install_append() {
++    install -d ${D}/${datadir}/applications
++    install -m 0644 ${WORKDIR}/links2.desktop ${D}/${datadir}/applications
++    install -d ${D}/${datadir}/pixmaps
++    install -m 0644 ${WORKDIR}/links2.png ${D}/${datadir}/pixmaps
++}
+diff --git a/meta-oe/recipes-support/links/links_2.21.bb b/meta-oe/recipes-support/links/links_2.22.bb
+similarity index 68%
+rename from meta-oe/recipes-support/links/links_2.21.bb
+rename to meta-oe/recipes-support/links/links_2.22.bb
+index b6048c1d38..b738ce8bff 100644
+--- a/meta-oe/recipes-support/links/links_2.21.bb
++++ b/meta-oe/recipes-support/links/links_2.22.bb
+@@ -8,8 +8,8 @@ EXTRA_OECONF = "--enable-graphics \
+                 --without-libtiff --without-svgalib --with-fb \
+                 --without-directfb --without-pmshell --without-atheos \
+                 --without-x"
+-
+-SRC_URI[md5sum] = "b88a46733d6932442ed8a6b751aac6b4"
+-SRC_URI[sha256sum] = "285eed8591c7781ec26213df82786665aaa1b9286782e8a7a1a7e2a6e1630d63"
+-SRC_URI[icon.md5sum] = "477e8787927c634614bac01b44355a33"
++SRC_URI[sha256sum] = "0364986b3a7f1e8e3171bea362b53f71e1dd3360a8842d66fdc65580ebc2084d"
+ SRC_URI[icon.sha256sum] = "eddcd8b8c8698aa621d1a453943892d77b72ed492e0d14e0dbac5c6a57e52f47"
++
++TOOLCHAIN = "gcc"
++LDFLAGS += "-fuse-ld=gold"
+-- 
+2.31.0
 
-Please update you copies isnt it this one
-https://git.openembedded.org/meta-openembedded/commit/?id=f37e5423da984b7dc721d52f04673d3afc0879a1
-
-> Thanks & Regards,
-> 
-> Sana Kazi
->   KPIT Technologies Limited
-> 
-> 
-> 
-> ------------------------------------------------------------------------
-> *From:* Khem Raj <raj.khem@gmail.com>
-> *Sent:* Friday, March 19, 2021 10:11 PM
-> *To:* Sana Kazi <Sana.Kazi@kpit.com>; 
-> Openembedded-devel@lists.openembedded.org 
-> <Openembedded-devel@lists.openembedded.org>
-> *Subject:* Re: [meta-networking][meta-oe][master][dunfell][PATCH] mdns: 
-> Whitelisted CVE-2007-0613 for mdns
-> Hello Sana
-> 
-> It was in latest pull from Armin which was merged today
-> it should be in already in dunfell now. Let us know if not.
-> 
-> On 3/19/21 6:31 AM, Sana Kazi wrote:
->> Hi Team,
->> 
->> Could you please review below patch to be upstreamed for mdns
->> 
->> 
->> Thanks & Regards,
->> 
->> Sana Kazi
->>   KPIT Technologies Limited
->> 
->> 
->> 
->> ------------------------------------------------------------------------
->> *From:* Sana Kazi <Sana.Kazi@kpit.com>
->> *Sent:* Tuesday, March 9, 2021 12:06 PM
->> *To:* Openembedded-devel@lists.openembedded.org 
->> <Openembedded-devel@lists.openembedded.org>; raj.khem@gmail.com 
->> <raj.khem@gmail.com>
->> *Cc:* Nisha Parrakat <Nisha.Parrakat@kpit.com>; Aditya Tayade 
->> <Aditya.Tayade@kpit.com>; Harpritkaur Bhandari 
->> <Harpritkaur.Bhandari@kpit.com>
->> *Subject:* [meta-networking][meta-oe][master][dunfell][PATCH] mdns: 
->> Whitelisted CVE-2007-0613 for mdns
->> CVE-2007-0613 is not applicable as it only affects Apple products
->> i.e. ichat,mdnsresponder, instant message framework and MacOS.
->> Also, https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.exploit-db.com%2Fexploits%2F3230&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742865584%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=zEEydQaidbnLPHjwC8eq4k%2Fb%2FThn53dRfqsUwy5KU%2FE%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.exploit-db.com%2Fexploits%2F3230&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742865584%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=zEEydQaidbnLPHjwC8eq4k%2Fb%2FThn53dRfqsUwy5KU%2FE%3D&amp;reserved=0> 
-> 
->> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.exploit-db.com%2Fexploits%2F3230&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742865584%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=zEEydQaidbnLPHjwC8eq4k%2Fb%2FThn53dRfqsUwy5KU%2FE%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.exploit-db.com%2Fexploits%2F3230&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742865584%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=zEEydQaidbnLPHjwC8eq4k%2Fb%2FThn53dRfqsUwy5KU%2FE%3D&amp;reserved=0>> 
-> shows the part of code
->> affected by CVE-2007-0613 which is not preset in upstream source code.
->> Hence, CVE-2007-0613 does not affect other Yocto implementations and
->> is not reported for other distros can be marked whitelisted.
->> Links:
->> https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvulmon.com%2Fvulnerabilitydetails%3Fqid%3DCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=eAkjsIawSp2YHJL3bqORC%2B%2FRdxYVRKFIJ998sPA%2B%2FZ4%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvulmon.com%2Fvulnerabilitydetails%3Fqid%3DCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=eAkjsIawSp2YHJL3bqORC%2B%2FRdxYVRKFIJ998sPA%2B%2FZ4%3D&amp;reserved=0> 
-> 
->> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvulmon.com%2Fvulnerabilitydetails%3Fqid%3DCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=eAkjsIawSp2YHJL3bqORC%2B%2FRdxYVRKFIJ998sPA%2B%2FZ4%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvulmon.com%2Fvulnerabilitydetails%3Fqid%3DCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=eAkjsIawSp2YHJL3bqORC%2B%2FRdxYVRKFIJ998sPA%2B%2FZ4%3D&amp;reserved=0>>
->> https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.incibe-cert.es%2Fen%2Fearly-warning%2Fvulnerabilities%2Fcve-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=5qInEtds3j9aCQPBzoNNgwnjrpkNc%2BlkDXmk2gvoHOA%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.incibe-cert.es%2Fen%2Fearly-warning%2Fvulnerabilities%2Fcve-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=5qInEtds3j9aCQPBzoNNgwnjrpkNc%2BlkDXmk2gvoHOA%3D&amp;reserved=0> 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.incibe-cert.es%2Fen%2Fearly-warning%2Fvulnerabilities%2Fcve-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=5qInEtds3j9aCQPBzoNNgwnjrpkNc%2BlkDXmk2gvoHOA%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.incibe-cert.es%2Fen%2Fearly-warning%2Fvulnerabilities%2Fcve-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=5qInEtds3j9aCQPBzoNNgwnjrpkNc%2BlkDXmk2gvoHOA%3D&amp;reserved=0>>
->> https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fsecurity-tracker.debian.org%2Ftracker%2FCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=QW82iXTsR0a1LvT5gIku8EJux9cOlpzzGCVIOCa1FFQ%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fsecurity-tracker.debian.org%2Ftracker%2FCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=QW82iXTsR0a1LvT5gIku8EJux9cOlpzzGCVIOCa1FFQ%3D&amp;reserved=0> 
-> 
->> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fsecurity-tracker.debian.org%2Ftracker%2FCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=QW82iXTsR0a1LvT5gIku8EJux9cOlpzzGCVIOCa1FFQ%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fsecurity-tracker.debian.org%2Ftracker%2FCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=QW82iXTsR0a1LvT5gIku8EJux9cOlpzzGCVIOCa1FFQ%3D&amp;reserved=0>>
->> https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fubuntu.com%2Fsecurity%2FCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=FMQ7vLzfqsCYHu7p9B4JSH1abFYkWeWQOk3yMuB%2BnQ0%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fubuntu.com%2Fsecurity%2FCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=FMQ7vLzfqsCYHu7p9B4JSH1abFYkWeWQOk3yMuB%2BnQ0%3D&amp;reserved=0> 
-> 
->> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fubuntu.com%2Fsecurity%2FCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=FMQ7vLzfqsCYHu7p9B4JSH1abFYkWeWQOk3yMuB%2BnQ0%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fubuntu.com%2Fsecurity%2FCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=FMQ7vLzfqsCYHu7p9B4JSH1abFYkWeWQOk3yMuB%2BnQ0%3D&amp;reserved=0>>
->> https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvulmon.com%2Fvulnerabilitydetails%3Fqid%3DCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=eAkjsIawSp2YHJL3bqORC%2B%2FRdxYVRKFIJ998sPA%2B%2FZ4%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvulmon.com%2Fvulnerabilitydetails%3Fqid%3DCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=eAkjsIawSp2YHJL3bqORC%2B%2FRdxYVRKFIJ998sPA%2B%2FZ4%3D&amp;reserved=0> 
-> 
->> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvulmon.com%2Fvulnerabilitydetails%3Fqid%3DCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=eAkjsIawSp2YHJL3bqORC%2B%2FRdxYVRKFIJ998sPA%2B%2FZ4%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvulmon.com%2Fvulnerabilitydetails%3Fqid%3DCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=eAkjsIawSp2YHJL3bqORC%2B%2FRdxYVRKFIJ998sPA%2B%2FZ4%3D&amp;reserved=0>>
->> ---
->>   .../recipes-protocols/mdns/mdns_1310.40.42.bb       | 13 +++++++++++++
->>   1 file changed, 13 insertions(+)
->> 
->> diff --git a/meta-networking/recipes-protocols/mdns/mdns_1310.40.42.bb 
->> b/meta-networking/recipes-protocols/mdns/mdns_1310.40.42.bb
->> index 445ed87e4..60bc26bf1 100644
->> --- a/meta-networking/recipes-protocols/mdns/mdns_1310.40.42.bb
->> +++ b/meta-networking/recipes-protocols/mdns/mdns_1310.40.42.bb
->> @@ -27,6 +27,19 @@ SRC_URI[sha256sum] = 
->> "bea29e1616cd56ccb8f88c0fad2bcdc4031f4deb2d899c793e2f27a838
->> 
->>   CVE_PRODUCT = "apple:mdnsresponder"
->> 
->> +# CVE-2007-0613 is not applicable as it only affects Apple products
->> +# i.e. ichat,mdnsresponder, instant message framework and MacOS.
->> +# Also, https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.exploit-db.com%2Fexploits%2F3230&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=7RyM%2BxWeWU864nFuczXCD5AfylR3G0mL17Yeh5Nodgo%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.exploit-db.com%2Fexploits%2F3230&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=7RyM%2BxWeWU864nFuczXCD5AfylR3G0mL17Yeh5Nodgo%3D&amp;reserved=0> 
-> 
->> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.exploit-db.com%2Fexploits%2F3230&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=7RyM%2BxWeWU864nFuczXCD5AfylR3G0mL17Yeh5Nodgo%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.exploit-db.com%2Fexploits%2F3230&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=7RyM%2BxWeWU864nFuczXCD5AfylR3G0mL17Yeh5Nodgo%3D&amp;reserved=0>> 
-> shows the part of code
->> +# affected by CVE-2007-0613 which is not preset in upstream source code.
->> +# Hence, CVE-2007-0613 does not affect other Yocto implementations and
->> +# is not reported for other distros can be marked whitelisted.
->> +# Links:
->> +# https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvulmon.com%2Fvulnerabilitydetails%3Fqid%3DCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=eAkjsIawSp2YHJL3bqORC%2B%2FRdxYVRKFIJ998sPA%2B%2FZ4%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvulmon.com%2Fvulnerabilitydetails%3Fqid%3DCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742875586%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=eAkjsIawSp2YHJL3bqORC%2B%2FRdxYVRKFIJ998sPA%2B%2FZ4%3D&amp;reserved=0> 
-> 
->> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvulmon.com%2Fvulnerabilitydetails%3Fqid%3DCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742885578%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=fh4GpdLsYilHYJgEcMicpxx7wSuX%2BrCe6rxosiIHs%2B0%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvulmon.com%2Fvulnerabilitydetails%3Fqid%3DCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742885578%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=fh4GpdLsYilHYJgEcMicpxx7wSuX%2BrCe6rxosiIHs%2B0%3D&amp;reserved=0>>
->> +# 
->> https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.incibe-cert.es%2Fen%2Fearly-warning%2Fvulnerabilities%2Fcve-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742885578%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=HE4%2FBCOYYIwDEuyNr3P0NZMhAJQm7V9BrxVkYDtKmEk%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.incibe-cert.es%2Fen%2Fearly-warning%2Fvulnerabilities%2Fcve-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742885578%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=HE4%2FBCOYYIwDEuyNr3P0NZMhAJQm7V9BrxVkYDtKmEk%3D&amp;reserved=0> 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.incibe-cert.es%2Fen%2Fearly-warning%2Fvulnerabilities%2Fcve-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742885578%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=HE4%2FBCOYYIwDEuyNr3P0NZMhAJQm7V9BrxVkYDtKmEk%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.incibe-cert.es%2Fen%2Fearly-warning%2Fvulnerabilities%2Fcve-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742885578%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=HE4%2FBCOYYIwDEuyNr3P0NZMhAJQm7V9BrxVkYDtKmEk%3D&amp;reserved=0>>
->> +# https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fsecurity-tracker.debian.org%2Ftracker%2FCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742885578%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=qAwcUbbb0SGYvixtamLooD4aqCM27Y%2BHhl7K26lHPCg%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fsecurity-tracker.debian.org%2Ftracker%2FCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742885578%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=qAwcUbbb0SGYvixtamLooD4aqCM27Y%2BHhl7K26lHPCg%3D&amp;reserved=0> 
-> 
->> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fsecurity-tracker.debian.org%2Ftracker%2FCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742885578%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=qAwcUbbb0SGYvixtamLooD4aqCM27Y%2BHhl7K26lHPCg%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fsecurity-tracker.debian.org%2Ftracker%2FCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742885578%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=qAwcUbbb0SGYvixtamLooD4aqCM27Y%2BHhl7K26lHPCg%3D&amp;reserved=0>>
->> +# https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvulmon.com%2Fvulnerabilitydetails%3Fqid%3DCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742885578%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=fh4GpdLsYilHYJgEcMicpxx7wSuX%2BrCe6rxosiIHs%2B0%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvulmon.com%2Fvulnerabilitydetails%3Fqid%3DCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742885578%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=fh4GpdLsYilHYJgEcMicpxx7wSuX%2BrCe6rxosiIHs%2B0%3D&amp;reserved=0> 
-> 
->> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvulmon.com%2Fvulnerabilitydetails%3Fqid%3DCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742885578%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=fh4GpdLsYilHYJgEcMicpxx7wSuX%2BrCe6rxosiIHs%2B0%3D&amp;reserved=0 
-> <https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvulmon.com%2Fvulnerabilitydetails%3Fqid%3DCVE-2007-0613&amp;data=04%7C01%7CSana.Kazi%40kpit.com%7Ca14a00000eb0436f8fb708d8eaf5caef%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C637517688742885578%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=fh4GpdLsYilHYJgEcMicpxx7wSuX%2BrCe6rxosiIHs%2B0%3D&amp;reserved=0>>
->> +CVE_CHECK_WHITELIST += "CVE-2007-0613"
->> +
->>   PARALLEL_MAKE = ""
->> 
->>   S = "${WORKDIR}/mDNSResponder-${PV}/mDNSPosix"
->> -- 
->> 2.17.1
->> 
->> This message contains information that may be privileged or confidential 
->> and is the property of the KPIT Technologies Ltd. It is intended only 
->> for the person to whom it is addressed. If you are not the intended 
->> recipient, you are not authorized to read, print, retain copy, 
->> disseminate, distribute, or use this message or any part thereof. If you 
->> receive this message in error, please notify the sender immediately and 
->> delete all copies of this message. KPIT Technologies Ltd. does not 
->> accept any liability for virus infected mails.
-> This message contains information that may be privileged or confidential 
-> and is the property of the KPIT Technologies Ltd. It is intended only 
-> for the person to whom it is addressed. If you are not the intended 
-> recipient, you are not authorized to read, print, retain copy, 
-> disseminate, distribute, or use this message or any part thereof. If you 
-> receive this message in error, please notify the sender immediately and 
-> delete all copies of this message. KPIT Technologies Ltd. does not 
-> accept any liability for virus infected mails.
