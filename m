@@ -1,44 +1,44 @@
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.web09.9366.1616275427145126039
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.web10.9313.1616275427960799529
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 20 Mar 2021 14:23:47 -0700
+ Sat, 20 Mar 2021 14:23:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=1DJzEmui;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.52, mailfrom: brgl@bgdev.pl)
-Received: by mail-wm1-f52.google.com with SMTP id u5-20020a7bcb050000b029010e9316b9d5so7070977wmj.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 20 Mar 2021 14:23:46 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=0Qanag+u;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.51, mailfrom: brgl@bgdev.pl)
+Received: by mail-wr1-f51.google.com with SMTP id o16so12683200wrn.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 20 Mar 2021 14:23:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=rIYUsGT8AO1jro8CYNNdTgTYO290SA5Ij1qMrut0+Ko=;
-        b=1DJzEmuiSFu3okmHvkExXC7NIs5IpfTxyMSgPCBu3xeZv9aX6XpYfN5blffHt+8ZEm
-         wPyU5Qv06cgDSJH8udlGcrR2AzE6TsUQz4ORl1ZizqOgCNUdctUQQSkqdAEpSz0YjimB
-         tnM4rBBC9jhRppAVzuCfZeExe1R2V2DVVOfr/EJf1/W65xVGo6VilEMTUepbXugkCaLs
-         npalffAtSswOTvp6hILjOAlVMQUVpBenv22wRJCFJJKJvbb6prxaTuglwmEIf3yq9UkX
-         iuBSWyDxWMU61l9ilbz6vgcwBQOxppBv9ZrtBujS/iFL90Lw7oSHtucMtlxb6GV7Sb6t
-         FJBw==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=joQIhy/GzFQWarcZLmMYVeu3s/bTVTgd8EMdsvNSyZE=;
+        b=0Qanag+ucvdyXvrdC1SOQGWKT20eXaDMuJa6mTAfaUIjkbtvmyz3Mf7SFT5K87dQ7P
+         IQBQgBW8lm3voqwCNjajbUrIexnPd+ossW4J3veE/FsGp20yuJ7nTJkIos4P8WLY/OdJ
+         LvFp/kpop6tt4rOsX0/sdv8JA7AaQqvVXifIuPKNsNBXOudAi2Fqf5CH32i6LaWuwgbq
+         AUzaCHoX0LhKsXU35yiw3Mc+I58fob2uqPYWOtR5WLLsTVnEZkJHMP8+jOjbdvBQS5x1
+         3KRLZV9fvUQf3w8P4jNtwH3DHCOwIoVuHmFV/fK5ZllMmw0tKPh96jCCOKRoS8FyzLLX
+         AO8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=rIYUsGT8AO1jro8CYNNdTgTYO290SA5Ij1qMrut0+Ko=;
-        b=B7Fek7b37CUGYq3cQJlyUCMIGFxTMcwCTGwtHeRH7YDSg2KNw2SFt+TvHudcUez809
-         sPlMFuEiDW0236qOZkaoQ5sXl0YWvhYfwaIn8w99kC9AGjD4DL1t7w+tWiLbTYWm+SQU
-         pVzn+HEPjhDnLONNBz+2E4+n44LGVGUFmmardPHn66QjbFUA4nZf/CS4xu+bIwc4H2nX
-         3Fvi+Noj9Aaus48oM+wD3iy/vh3hnpHGyLKK1fnMGc1LWhGVcpimDW00IuChSOU/pZjJ
-         duJBRzsoGqPUH6DEUnWo4mtPJ8WpixJoXftjCjwzu1Mv6xPc11gKRLdjpEACxZyyrqSD
-         Hxug==
-X-Gm-Message-State: AOAM530FmFVrkrjjtTUqP/JDoFZaypuBo27G7faFr7fZ0aciDv6OOTGK
-	w4uZhPtrP4AudPYq2X6rq5bfPw==
-X-Google-Smtp-Source: ABdhPJyvh00MtdP1hZK8nzwh1RNuX+8uXVS0eHkhniPMW6HhQikmtPEz4U7RmnPHp1AaQn0eVvUfFA==
-X-Received: by 2002:a05:600c:35c1:: with SMTP id r1mr9101002wmq.60.1616275425258;
-        Sat, 20 Mar 2021 14:23:45 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=joQIhy/GzFQWarcZLmMYVeu3s/bTVTgd8EMdsvNSyZE=;
+        b=OfAVZRZ32FbeGPrVnyaPA+HibJiBaW/t/A/GmiyF7a3vQ/dpV52Ukb6HXxpK9PmGFF
+         rLFjPQWceaXwLiqt+fQSTrfhD8b1c5hwQdIyza70YjHmo8UnhDFJ+7RUnaQPu6Pno8+e
+         dNshGEwRAk7sbka27hUfTtD47Ui3G7WBhY8iAQBUaoYTHrmNAJaIPY520hXP7KHj4N2r
+         sYkH8wPqonAjjx0jPT0RbPRUt52apA3bWaGndlSsfRGDCvW47FUArnnV1ibH2SRNwOpw
+         wEjYGK+mtDpTfTLIICPRSX0sgACUYLFXMo6j6lPDlHCUruYK6/jPef74Eq9NeDV00qXe
+         6obw==
+X-Gm-Message-State: AOAM5310+QC7p9QCM8Un+iAyviycSAlc9VeWWnaCRAhvW78d/GN2JLvo
+	SOPdJs4A1QSfqi+I2teUz5Sx1w==
+X-Google-Smtp-Source: ABdhPJys4CmGJfpzJ8lge54ZloMeknuVn9tKjHXS4Gjjz3TXlWxzM7S1pgIEp/wH17gfIyu5dyyRvw==
+X-Received: by 2002:a5d:6ca6:: with SMTP id a6mr10622215wra.179.1616275426521;
+        Sat, 20 Mar 2021 14:23:46 -0700 (PDT)
 Return-Path: <brgl@bgdev.pl>
 Received: from debian-brgl.home (lfbn-nic-1-149-6.w2-15.abo.wanadoo.fr. [2.15.231.6])
-        by smtp.gmail.com with ESMTPSA id p17sm11308962wmq.47.2021.03.20.14.23.44
+        by smtp.gmail.com with ESMTPSA id p17sm11308962wmq.47.2021.03.20.14.23.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 20 Mar 2021 14:23:44 -0700 (PDT)
+        Sat, 20 Mar 2021 14:23:46 -0700 (PDT)
 From: "Bartosz Golaszewski" <brgl@bgdev.pl>
 To: Khem Raj <raj.khem@gmail.com>,
 	Armin Kuster <akuster808@gmail.com>,
@@ -46,38 +46,55 @@ To: Khem Raj <raj.khem@gmail.com>,
 	Derek Straka <derek@asterius.io>,
 	Trevor Gamblin <trevor.gamblin@windriver.com>
 Cc: openembedded-devel@lists.openembedded.org,
-	Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [meta-python][PATCH 0/4] python3-wpa-supplicant: fix a problem with importing the cli submodule
-Date: Sat, 20 Mar 2021 22:23:05 +0100
-Message-Id: <20210320212309.11310-1-brgl@bgdev.pl>
+	Bartosz Golaszewski <brgl@bgdev.pl>
+Subject: [meta-python][PATCH 1/4] python3-txdbus: new package
+Date: Sat, 20 Mar 2021 22:23:06 +0100
+Message-Id: <20210320212309.11310-2-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.30.1
+In-Reply-To: <20210320212309.11310-1-brgl@bgdev.pl>
+References: <20210320212309.11310-1-brgl@bgdev.pl>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Add a recipe for python3-txdbus: a native Python implementation of the
+DBus protocol for Twisted applications.
 
-It's currently impossible to import the cli submodule from wpa-supplicant.
-This series addresses the issue by:
-  - adding a recipe for a missing dependency
-  - adding runtime dependencies to the recipe
-  - fixing a problem with an outdated API used in the module
-
-The last patch is just cosmetic.
-
-Bartosz Golaszewski (4):
-  python3-txdbus: new package
-  python3-wpa-supplicant: add runtime dependencies
-  python3-wpa-supplicant: fix importing the cli submodule
-  python3-wpa-supplicant: replace DESCRIPTION with SUMMARY
-
- .../packagegroups/packagegroup-meta-python.bb |   1 +
- .../python/python3-txdbus_1.1.2.bb            |  11 ++
- ...ond-argument-from-click.argument-dec.patch | 127 ++++++++++++++++++
- .../python/python3-wpa-supplicant_0.2.bb      |   6 +-
- 4 files changed, 144 insertions(+), 1 deletion(-)
+Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
+---
+ .../packagegroups/packagegroup-meta-python.bb         |  1 +
+ .../recipes-devtools/python/python3-txdbus_1.1.2.bb   | 11 +++++++++++
+ 2 files changed, 12 insertions(+)
  create mode 100644 meta-python/recipes-devtools/python/python3-txdbus_1.1.2.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-wpa-supplicant/0001-cli-drop-the-second-argument-from-click.argument-dec.patch
 
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index 45d370c77..c5ebb661c 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -411,6 +411,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
+     python3-twitter \
+     python3-twofish \
+     python3-txaio \
++    python3-txdbus \
+     python3-txws \
+     python3-typed-ast \
+     python3-typeguard \
+diff --git a/meta-python/recipes-devtools/python/python3-txdbus_1.1.2.bb b/meta-python/recipes-devtools/python/python3-txdbus_1.1.2.bb
+new file mode 100644
+index 000000000..f521a9a68
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-txdbus_1.1.2.bb
+@@ -0,0 +1,11 @@
++SUMMARY = "A native Python implementation of the DBus protocol for Twisted applications."
++AUTHOR = "Tom Cocagne"
++HOMEPAGE = "https://pypi.org/project/txdbus/"
++SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://README.rst;beginline=32;endline=32;md5=2141358b0bce85fc45216ba91735ad50"
++
++SRC_URI[md5sum] = "d397357dee78750385f92ca9c6c1f063"
++SRC_URI[sha256sum] = "8375a5fb68a12054f0def91af800c821fb2232949337756ed975f88d8ea2bc97"
++
++inherit pypi setuptools3
 -- 
 2.30.1
 
