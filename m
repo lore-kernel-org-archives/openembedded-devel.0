@@ -1,112 +1,83 @@
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
- by mx.groups.io with SMTP id smtpd.web08.6139.1616259354497806916
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.web09.9366.1616275427145126039
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 20 Mar 2021 09:55:54 -0700
+ Sat, 20 Mar 2021 14:23:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=l89IiaOC;
- spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f175.google.com with SMTP id v2so5798660pgk.11
-        for <openembedded-devel@lists.openembedded.org>; Sat, 20 Mar 2021 09:55:54 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=1DJzEmui;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.52, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f52.google.com with SMTP id u5-20020a7bcb050000b029010e9316b9d5so7070977wmj.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 20 Mar 2021 14:23:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=M+dOMny1OKx54zcHqYp5bJWLLA2q53P5qY7e3kzlq58=;
-        b=l89IiaOCkYMcZlz57BZsB5vWV3rJmWAOViRLW30EokavbN44ETWUAio4voM7T3oUka
-         FMgRiI2PMNR0A0qSAA/nt2ZiY2ihg3+uVzjf6tuElUKj7ZjPQBzS3GlJRUZ8qUhGfcbU
-         lKlUBKVi/bT+WH1MFRU3qgjkACQQ5yyFC95GW0yJk6WL6McxDxWtpK/XcnFpElTRoWJ3
-         KBE+2fB+/t8LQ6WCInkMj6pMzjyTszgh4xNwzxX2uTqNHooP07Jwe2guf3/tBN2bfjBi
-         VRG0wzr8fLIWPJ3waNije/bJcyXJDgO5wUc1BBGTTnuE1C/shrmIOxPy1EuaRCGdDjLf
-         4p+g==
+        bh=rIYUsGT8AO1jro8CYNNdTgTYO290SA5Ij1qMrut0+Ko=;
+        b=1DJzEmuiSFu3okmHvkExXC7NIs5IpfTxyMSgPCBu3xeZv9aX6XpYfN5blffHt+8ZEm
+         wPyU5Qv06cgDSJH8udlGcrR2AzE6TsUQz4ORl1ZizqOgCNUdctUQQSkqdAEpSz0YjimB
+         tnM4rBBC9jhRppAVzuCfZeExe1R2V2DVVOfr/EJf1/W65xVGo6VilEMTUepbXugkCaLs
+         npalffAtSswOTvp6hILjOAlVMQUVpBenv22wRJCFJJKJvbb6prxaTuglwmEIf3yq9UkX
+         iuBSWyDxWMU61l9ilbz6vgcwBQOxppBv9ZrtBujS/iFL90Lw7oSHtucMtlxb6GV7Sb6t
+         FJBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=M+dOMny1OKx54zcHqYp5bJWLLA2q53P5qY7e3kzlq58=;
-        b=Qr/U3wRO5HKDkXKE88VC2PUjg2n3UnA0dcV4z/0tNmg/Fekw+BkvgWNDWJ45i3Ng5L
-         CjNdUYjxw2wfAPvcOhQeMICK4Ad62t2cwX0t6mBmCMh9cI7gkyc7dIMRhr0f+I8soKyC
-         Af8Cctnlf+ufjttd/jVaIJazmk80bYoLfVkv+9fJNRMqqVjs4fjpfgR8VkMp8Wk1kgKN
-         NQ083Y7pmPQxUlScvWYFsUCrGE5PEJByo6OQGOL/dl7sH9NgIBXrk/Vy39dPHwNLZ9VP
-         5NOuk2HHVw8L1rkx3FU97poyBG6JTbtJPEteodhgHfCtp+FDTZWASs9lT7odeZxulu41
-         M0Rw==
-X-Gm-Message-State: AOAM530lO6wbzZ/xt7m9F3b5EoZ8Ua3n8/PStiCPZG7zz/C9+HTZAaoI
-	aoT/E0VhpH39ug9fU1DHvuCeqyQAZrlo3w==
-X-Google-Smtp-Source: ABdhPJx44AlkZMpv3ExdvC77TbHfk5gYf+HzMCyROSV1pp9aZj8tl5EvMNrMkhnFbM2cZOQU4B8HPw==
-X-Received: by 2002:aa7:9e43:0:b029:1f3:a2b3:d9fd with SMTP id z3-20020aa79e430000b02901f3a2b3d9fdmr14640411pfq.74.1616259353585;
-        Sat, 20 Mar 2021 09:55:53 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b117])
-        by smtp.gmail.com with ESMTPSA id y17sm9106874pju.50.2021.03.20.09.55.52
+        bh=rIYUsGT8AO1jro8CYNNdTgTYO290SA5Ij1qMrut0+Ko=;
+        b=B7Fek7b37CUGYq3cQJlyUCMIGFxTMcwCTGwtHeRH7YDSg2KNw2SFt+TvHudcUez809
+         sPlMFuEiDW0236qOZkaoQ5sXl0YWvhYfwaIn8w99kC9AGjD4DL1t7w+tWiLbTYWm+SQU
+         pVzn+HEPjhDnLONNBz+2E4+n44LGVGUFmmardPHn66QjbFUA4nZf/CS4xu+bIwc4H2nX
+         3Fvi+Noj9Aaus48oM+wD3iy/vh3hnpHGyLKK1fnMGc1LWhGVcpimDW00IuChSOU/pZjJ
+         duJBRzsoGqPUH6DEUnWo4mtPJ8WpixJoXftjCjwzu1Mv6xPc11gKRLdjpEACxZyyrqSD
+         Hxug==
+X-Gm-Message-State: AOAM530FmFVrkrjjtTUqP/JDoFZaypuBo27G7faFr7fZ0aciDv6OOTGK
+	w4uZhPtrP4AudPYq2X6rq5bfPw==
+X-Google-Smtp-Source: ABdhPJyvh00MtdP1hZK8nzwh1RNuX+8uXVS0eHkhniPMW6HhQikmtPEz4U7RmnPHp1AaQn0eVvUfFA==
+X-Received: by 2002:a05:600c:35c1:: with SMTP id r1mr9101002wmq.60.1616275425258;
+        Sat, 20 Mar 2021 14:23:45 -0700 (PDT)
+Return-Path: <brgl@bgdev.pl>
+Received: from debian-brgl.home (lfbn-nic-1-149-6.w2-15.abo.wanadoo.fr. [2.15.231.6])
+        by smtp.gmail.com with ESMTPSA id p17sm11308962wmq.47.2021.03.20.14.23.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 20 Mar 2021 09:55:53 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Subject: [meta-gnome][PATCH] gsound: Use () instead of {} for makefile variable in gsound_play_VALAFLAGS
-Date: Sat, 20 Mar 2021 09:55:50 -0700
-Message-Id: <20210320165550.3815276-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.0
+        Sat, 20 Mar 2021 14:23:44 -0700 (PDT)
+From: "Bartosz Golaszewski" <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Armin Kuster <akuster808@gmail.com>,
+	Tim moto-timo Orling <TicoTimo@gmail.com>,
+	Derek Straka <derek@asterius.io>,
+	Trevor Gamblin <trevor.gamblin@windriver.com>
+Cc: openembedded-devel@lists.openembedded.org,
+	Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: [meta-python][PATCH 0/4] python3-wpa-supplicant: fix a problem with importing the cli submodule
+Date: Sat, 20 Mar 2021 22:23:05 +0100
+Message-Id: <20210320212309.11310-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.30.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Fixes build with latest perl/autoconf
+From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andreas Müller <schnitzeltony@gmail.com>
----
- .../gsound/gsound/0001-Set-vapidir.patch      | 28 +++++++++++++++++++
- .../recipes-gnome/gsound/gsound_1.0.2.bb      |  2 ++
- 2 files changed, 30 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gsound/gsound/0001-Set-vapidir.patch
+It's currently impossible to import the cli submodule from wpa-supplicant.
+This series addresses the issue by:
+  - adding a recipe for a missing dependency
+  - adding runtime dependencies to the recipe
+  - fixing a problem with an outdated API used in the module
 
-diff --git a/meta-gnome/recipes-gnome/gsound/gsound/0001-Set-vapidir.patch b/meta-gnome/recipes-gnome/gsound/gsound/0001-Set-vapidir.patch
-new file mode 100644
-index 0000000000..ffccfd56f2
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gsound/gsound/0001-Set-vapidir.patch
-@@ -0,0 +1,28 @@
-+From 0a790273aca3ba07dfa6d2f61e3aaa7157c1a3bb Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 20 Mar 2021 09:22:18 -0700
-+Subject: [PATCH] Set vapidir
-+
-+Use parentheses instead of braces, it makes automake and perl happy
-+newer perl does not like ${} for VALAFLAGS
-+
-+Unescaped left brace in regex is deprecated here (and will be fatal in Perl 5.30), passed through in regex; marked by <-- HERE in m/^${ <-- HERE abs_top_builddir}/gsound$/ at TOPDIR/build/tmp/work/mips32r2-yoe-linux/gsound/1.0.2-r0/recipe-sysroot-native/usr/bin/automake line 5759.
-+autoreconf: error: automake failed with exit status: 255
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ tools/Makefile.am | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+--- a/tools/Makefile.am
-++++ b/tools/Makefile.am
-+@@ -8,7 +8,7 @@ bin_PROGRAMS = gsound-play
-+ gsound_play_SOURCES = gsound-play.vala
-+ 
-+ gsound_play_VALAFLAGS = \
-+-    --vapidir ${abs_top_builddir}/gsound \
-++    --vapidir $(abs_top_builddir)/gsound \
-+     --pkg gsound \
-+     ${NULL}
-+ 
-diff --git a/meta-gnome/recipes-gnome/gsound/gsound_1.0.2.bb b/meta-gnome/recipes-gnome/gsound/gsound_1.0.2.bb
-index e4478e14a3..65ee1e1c12 100644
---- a/meta-gnome/recipes-gnome/gsound/gsound_1.0.2.bb
-+++ b/meta-gnome/recipes-gnome/gsound/gsound_1.0.2.bb
-@@ -9,5 +9,7 @@ DEPENDS = " \
- 
- inherit gnomebase gettext gobject-introspection vala
- 
-+SRC_URI += "file://0001-Set-vapidir.patch"
-+
- SRC_URI[archive.md5sum] = "c26fd21c21b9ef6533a202a73fab21db"
- SRC_URI[archive.sha256sum] = "bba8ff30eea815037e53bee727bbd5f0b6a2e74d452a7711b819a7c444e78e53"
+The last patch is just cosmetic.
+
+Bartosz Golaszewski (4):
+  python3-txdbus: new package
+  python3-wpa-supplicant: add runtime dependencies
+  python3-wpa-supplicant: fix importing the cli submodule
+  python3-wpa-supplicant: replace DESCRIPTION with SUMMARY
+
+ .../packagegroups/packagegroup-meta-python.bb |   1 +
+ .../python/python3-txdbus_1.1.2.bb            |  11 ++
+ ...ond-argument-from-click.argument-dec.patch | 127 ++++++++++++++++++
+ .../python/python3-wpa-supplicant_0.2.bb      |   6 +-
+ 4 files changed, 144 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-txdbus_1.1.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-wpa-supplicant/0001-cli-drop-the-second-argument-from-click.argument-dec.patch
+
 -- 
-2.31.0
+2.30.1
 
