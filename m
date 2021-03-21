@@ -1,134 +1,271 @@
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
- by mx.groups.io with SMTP id smtpd.web11.3974.1616316028531797562
- for <openembedded-devel@lists.openembedded.org>;
- Sun, 21 Mar 2021 01:40:28 -0700
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ix1VgvfT;
- spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f48.google.com with SMTP id y6so15705854eds.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 21 Mar 2021 01:40:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=B4RO8yerxPdnT5e+ZQ/yklo3F7VaJzNUHG9KsFGmTJY=;
-        b=Ix1VgvfTN+0msLrFNynHIn2fpZJAoQqztMMZ1sfwwP+JXEXX6nf1wKFo7JPPb7IhCl
-         VWgaLWZPJr8umzQ3mo6csryVZWgZz3kvTeZdKdlqD9o6txFcUGVN/NHwg3wuqsAWdLJg
-         MoCpe5fwSw5muGhkL+iPs/N0OWMoh7t8Fw1l/b6bDx6bAWd+Xe70StY1HhXkwAV7d4Jx
-         6ZtKKY4Eht5wKq4KU6UiPWsYHyTJhnLC/bloPvnZag3CydAfdcTjYxA4hBjpaADd7phX
-         iGWEXdeRGqN0ZzfO5A+J8ulFP12ZDaUsIJwRqldctFlg4BlWUilIM5L1bl6offMj5iNW
-         +b0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=B4RO8yerxPdnT5e+ZQ/yklo3F7VaJzNUHG9KsFGmTJY=;
-        b=sfDr96aODgff3lot/XZS0JD+sPIotEMan5ufmvuEJ2ROvKaQFx4u1r02l2w2Tu3Qpf
-         huD/AoyF0jDtE4cQG3EpV9biNAagzHZS43MCheBBsgHFYdSEg0qNACdINivqEN1eGiHZ
-         R0A6S/HMLqfA/fAEcndYaYpkj+FhUYJshNl5ezMhejolik/BZOL+YOm12Mm5MIBrcI9j
-         /kzJVHrOOGnSKrARRa5Zk6yBy1vaIWnAvHZK3oB9Pn9bWC5uc3nvcxyUiaZFLX/xI51c
-         kfk5EFSo4+IRYJCLCVM2OkofE8D7qa9dAl3poinKhUVsFK2xce4/sE6T9esB2XeJiq7t
-         rWJA==
-X-Gm-Message-State: AOAM531qP/z/nYvHo44VOiciLybzGU/kc42BS3Pf9fYo1QF1EiTxQr3m
-	wb55EjE3eeDRgTwb5cWo0SdzUYQmW84=
-X-Google-Smtp-Source: ABdhPJzr1RvbVx6Bzp5DMEIsIU0Szf0L1nddLCs2kIffXEde+udK1gGrp5m61rC5aHzyghWNCc+jTw==
-X-Received: by 2002:a05:6402:2215:: with SMTP id cq21mr19922023edb.281.1616316026870;
-        Sun, 21 Mar 2021 01:40:26 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id c20sm6732308eja.22.2021.03.21.01.40.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 21 Mar 2021 01:40:26 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: Re: [meta-java][PATCH] openjdk-8: use relative path to build-aux in configure.ac
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-python2][PATCH] bandit.bbclass: drop
-Date: Sun, 21 Mar 2021 09:40:24 +0100
-Message-Id: <20210321084024.5281-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.30.2
+From: konstantin.kletschke@inside-m2m.de
+X-Originating-Location: Heinsberg, North Rhine-Westphalia, DE (94.31.101.76)
+X-Originating-Platform: Mac Safari 14.1
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Sun, 21 Mar 2021 02:50:20 -0700
+References: <10715.1616102384809166671@lists.openembedded.org>
+In-Reply-To: <10715.1616102384809166671@lists.openembedded.org>
+Message-ID: <16632.1616320220450473506@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="KU3DRi6Yeprp1YN18FwA"
 
-* the identical bbclass is in meta-openembedded/meta-python layer, it depends
-  on python3-bandit-native and isn't inherited by default, anyone who wants to
-  use it can add meta-python layer
+--KU3DRi6Yeprp1YN18FwA
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- classes/bandit.bbclass | 63 ------------------------------------------
- 1 file changed, 63 deletions(-)
- delete mode 100644 classes/bandit.bbclass
+I incorporated two patches into my local meta-java layer. Then openjre-14 b=
+uilds also!
 
-diff --git a/classes/bandit.bbclass b/classes/bandit.bbclass
-deleted file mode 100644
-index dc1041e..0000000
---- a/classes/bandit.bbclass
-+++ /dev/null
-@@ -1,63 +0,0 @@
--# Class to scan Python code for security issues, using Bandit.
--#
--# $ bitbake python-foo -c bandit
--#
--# Writes the report to $DEPLOY_DIR/bandit/python-foo.html.
--# No output if no issues found, a warning if issues found.
--#
--# https://github.com/PyCQA/bandit
--
--# Default location of sources, based on standard distutils
--BANDIT_SOURCE ?= "${S}/build"
--
--# The report format to use.
--# https://bandit.readthedocs.io/en/latest/formatters/index.html
--BANDIT_FORMAT ?= "html"
--
--# Whether a scan should be done every time the recipe is built.
--#
--# By default the scanning needs to be done explicitly, but by setting BANDIT_AUTO
--# to 1 the scan will be done whenever the recipe it built.  Note that you
--# shouldn't set BANDIT_AUTO to 1 globally as it will then try to scan every
--# recipe, including non-Python recipes, causing circular loops.
--BANDIT_AUTO ?= "0"
--
--# Whether Bandit finding issues results in a warning (0) or an error (1).
--BANDIT_FATAL ?= "0"
--
--do_bandit[depends] = "python3-bandit-native:do_populate_sysroot"
--python do_bandit() {
--    import os, subprocess
--    try:
--        report = d.expand("${DEPLOY_DIR}/bandit/${PN}-${PV}.${BANDIT_FORMAT}")
--        os.makedirs(os.path.dirname(report), exist_ok=True)
--
--        args = ("bandit",
--                "--format", d.getVar("BANDIT_FORMAT"),
--                "--output", report,
--                "-ll",
--                "--recursive", d.getVar("BANDIT_SOURCE"))
--        subprocess.check_output(args, stderr=subprocess.STDOUT)
--        bb.note("Bandit found no issues (report written to %s)" % report)
--    except subprocess.CalledProcessError as e:
--        if e.returncode == 1:
--            if oe.types.boolean(d.getVar("BANDIT_FATAL")):
--                bb.error("Bandit found issues (report written to %s)" % report)
--            else:
--                bb.warn("Bandit found issues (report written to %s)" % report)
--        else:
--            bb.error("Bandit failed:\n" + e.output.decode("utf-8"))
--}
--
--python() {
--    before = "do_build"
--    after = "do_compile"
--
--    if oe.types.boolean(d.getVar("BANDIT_AUTO")):
--        bb.build.addtask("do_bandit", before, after, d)
--    else:
--        bb.build.addtask("do_bandit", None, after, d)
--}
--
--# TODO: store report in sstate
--# TODO: a way to pass extra args or .bandit file, basically control -ll
--- 
-2.30.2
+*diff --git a/recipes-core/openjdk/openjdk-14-common.inc b/recipes-core/op=
+enjdk/openjdk-14-common.inc*
 
+*index 36451b8..df99626 100644*
+
+*--- a/recipes-core/openjdk/openjdk-14-common.inc*
+
+*+++ b/recipes-core/openjdk/openjdk-14-common.inc*
+
+@@ -30,6 +30,8 @@ SRC_URI =3D "\
+
+https://hg.openjdk.java.net/jdk-updates/jdk14u/archive/jdk-${PV}-ga.tar.bz=
+2;name=3Djdk \
+
+file://0001-make-autoconf-remove-hard-dependency-on-cups.patch \
+
+file://0002-make-autoconf-toolchain-remove-invalid-compiler-chec.patch \
+
++=C2=A0 =C2=A0 file://0066-autoconf-fix-build-aux-path.patch \
+
++=C2=A0 =C2=A0 file://0067-sysctl-path-fix.patch \
+
+"
+
+*cat patches-openjdk-14/0066-autoconf-fix-build-aux-path.patch*
+
+diff --color -Nur jdk14u-jdk-14.0.1-ga.ORIG/make/autoconf/configure.ac jdk=
+14u-jdk-14.0.1-ga/make/autoconf/configure.ac
+
+--- jdk14u-jdk-14.0.1-ga.ORIG/make/autoconf/configure.ac 2020-03-05 13:10:=
+05.000000000 +0100
+
++++ jdk14u-jdk-14.0.1-ga/make/autoconf/configure.ac 2021-03-20 15:59:41.98=
+5648025 +0100
+
+@@ -33,7 +33,7 @@
+
+AC_PREREQ([2.69])
+
+AC_INIT(OpenJDK, openjdk, build-dev@openjdk.java.net,,http://openjdk.java.=
+net)
+
+-AC_CONFIG_AUX_DIR([$TOPDIR/make/autoconf/build-aux])
+
++AC_CONFIG_AUX_DIR([build-aux])
+
+m4_include([build-aux/pkg.m4])
+
+# Include these first...
+
+*cat patches-openjdk-14/0067-sysctl-path-fix.patch*
+
+diff --color -Nur jdk14u-jdk-14.0.1-ga.ORIG/src/jdk.incubator.jpackage/uni=
+x/native/libapplauncher/PosixPlatform.cpp jdk14u-jdk-14.0.1-ga/src/jdk.incu=
+bator.jpackage/unix/native/libapplauncher/PosixPlatform.cpp
+
+--- jdk14u-jdk-14.0.1-ga.ORIG/src/jdk.incubator.jpackage/unix/native/libap=
+plauncher/PosixPlatform.cpp 2020-03-05 13:10:05.000000000 +0100
+
++++ jdk14u-jdk-14.0.1-ga/src/jdk.incubator.jpackage/unix/native/libapplaun=
+cher/PosixPlatform.cpp 2021-03-20 19:15:37.959412799 +0100
+
+@@ -33,7 +33,7 @@
+
+#include <stdbool.h>
+
+#include <sys/types.h>
+
+#include <unistd.h>
+
+-#include <sys/sysctl.h>
+
++#include <linux/sysctl.h>
+
+#include <sys/file.h>
+
+#include <sys/stat.h>
+
+#include <sys/wait.h>
+
+--KU3DRi6Yeprp1YN18FwA
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+I incorporated two patches into my local meta-java layer. Then openjre-14 b=
+uilds also!<br /><br />
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;"><strong>diff --git a/recipes-core/=
+openjdk/openjdk-14-common.inc b/recipes-core/openjdk/openjdk-14-common.inc<=
+/strong></span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;"><strong>index 36451b8..df99626 100=
+644</strong></span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;"><strong>--- a/recipes-core/openjdk=
+/openjdk-14-common.inc</strong></span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;"><strong>+++ b/recipes-core/openjdk=
+/openjdk-14-common.inc</strong></span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #2eaebb;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">@@ -30,6 +30,8 @@</span><span styl=
+e=3D"font-variant-ligatures: no-common-ligatures; color: #000000;"> SRC_URI=
+ =3D "\</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">&nbsp;&nbsp; &nbsp; https://hg.ope=
+njdk.java.net/jdk-updates/jdk14u/archive/jdk-${PV}-ga.tar.bz2;name=3Djdk \<=
+/span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">&nbsp;&nbsp; &nbsp; file://0001-ma=
+ke-autoconf-remove-hard-dependency-on-cups.patch \</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">&nbsp;&nbsp; &nbsp; file://0002-ma=
+ke-autoconf-toolchain-remove-invalid-compiler-chec.patch \</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #2fb41d;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">+&nbsp; &nbsp; file://0066-autocon=
+f-fix-build-aux-path.patch \</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #2fb41d;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">+&nbsp; &nbsp; file://0067-sysctl-=
+path-fix.patch \</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">&nbsp;&nbsp; &nbsp; "<br /><br /><=
+br /><br /></span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;"><strong>cat patches-openjdk-14/006=
+6-autoconf-fix-build-aux-path.patch</strong>&nbsp;</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">diff --color -Nur jdk14u-jdk-14.0.=
+1-ga.ORIG/make/autoconf/configure.ac jdk14u-jdk-14.0.1-ga/make/autoconf/con=
+figure.ac</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">--- jdk14u-jdk-14.0.1-ga.ORIG/make=
+/autoconf/configure.ac<span class=3D"Apple-tab-span" style=3D"white-space: =
+pre;"> </span>2020-03-05 13:10:05.000000000 +0100</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">+++ jdk14u-jdk-14.0.1-ga/make/auto=
+conf/configure.ac<span class=3D"Apple-tab-span" style=3D"white-space: pre;"=
+> </span>2021-03-20 15:59:41.985648025 +0100</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">@@ -33,7 +33,7 @@</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">&nbsp;AC_PREREQ([2.69])</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">&nbsp;AC_INIT(OpenJDK, openjdk, bu=
+ild-dev@openjdk.java.net,,http://openjdk.java.net)</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000; min-height: 13px;"><s=
+pan style=3D"font-variant-ligatures: no-common-ligatures;">&nbsp;</span></p=
+>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">-AC_CONFIG_AUX_DIR([$TOPDIR/make/a=
+utoconf/build-aux])</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">+AC_CONFIG_AUX_DIR([build-aux])</s=
+pan></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">&nbsp;m4_include([build-aux/pkg.m4=
+])</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000; min-height: 13px;"><s=
+pan style=3D"font-variant-ligatures: no-common-ligatures;">&nbsp;</span></p=
+>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;">&nbsp;</p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">&nbsp;# Include these first...</sp=
+an></p>
+<div><span style=3D"font-variant-ligatures: no-common-ligatures;"><span st=
+yle=3D"font-variant-ligatures: no-common-ligatures;"><br /><br /></span></s=
+pan>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><strong><span style=
+=3D"font-variant-ligatures: no-common-ligatures;">cat patches-openjdk-14/0=
+067-sysctl-path-fix.patch&nbsp;</span></strong></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">diff --color -Nur jdk14u-jdk-14.0.=
+1-ga.ORIG/src/jdk.incubator.jpackage/unix/native/libapplauncher/PosixPlatfo=
+rm.cpp jdk14u-jdk-14.0.1-ga/src/jdk.incubator.jpackage/unix/native/libappla=
+uncher/PosixPlatform.cpp</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">--- jdk14u-jdk-14.0.1-ga.ORIG/src/=
+jdk.incubator.jpackage/unix/native/libapplauncher/PosixPlatform.cpp<span cl=
+ass=3D"Apple-tab-span" style=3D"white-space: pre;"> </span>2020-03-05 13:10=
+:05.000000000 +0100</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">+++ jdk14u-jdk-14.0.1-ga/src/jdk.i=
+ncubator.jpackage/unix/native/libapplauncher/PosixPlatform.cpp<span class=
+=3D"Apple-tab-span" style=3D"white-space: pre;"> </span>2021-03-20 19:15:3=
+7.959412799 +0100</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">@@ -33,7 +33,7 @@</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">&nbsp;#include &lt;stdbool.h&gt;</=
+span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">&nbsp;#include &lt;sys/types.h&gt;=
+</span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">&nbsp;#include &lt;unistd.h&gt;</s=
+pan></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">-#include &lt;sys/sysctl.h&gt;</sp=
+an></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">+#include &lt;linux/sysctl.h&gt;</=
+span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">&nbsp;#include &lt;sys/file.h&gt;<=
+/span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">&nbsp;#include &lt;sys/stat.h&gt;<=
+/span></p>
+<p style=3D"margin-bottom: 0px; font-stretch: normal; font-size: 11px; lin=
+e-height: normal; font-family: Menlo; color: #000000;"><span style=3D"font-=
+variant-ligatures: no-common-ligatures;">&nbsp;#include &lt;sys/wait.h&gt;<=
+/span></p>
+</div>
+
+--KU3DRi6Yeprp1YN18FwA--
