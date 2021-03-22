@@ -1,219 +1,286 @@
-Received: from EUR02-HE1-obe.outbound.protection.outlook.com (EUR02-HE1-obe.outbound.protection.outlook.com [40.107.1.86])
- by mx.groups.io with SMTP id smtpd.web08.11394.1616414036890012173
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com (EUR05-DB8-obe.outbound.protection.outlook.com [40.107.20.44])
+ by mx.groups.io with SMTP id smtpd.web08.11657.1616415325011171669
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Mar 2021 04:53:58 -0700
+ Mon, 22 Mar 2021 05:15:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@skidata.com header.s=selector1 header.b=geVyeas6;
- spf=pass (domain: skidata.com, ip: 40.107.1.86, mailfrom: richard.leitner@skidata.com)
+ dkim=pass header.i=@topicbv.onmicrosoft.com header.s=selector2-topicbv-onmicrosoft-com header.b=cirUPIhx;
+ spf=pass (domain: topicproducts.com, ip: 40.107.20.44, mailfrom: mike.looijmans@topicproducts.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=topicbv.onmicrosoft.com; s=selector2-topicbv-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3rAu1H9v4IGvSR7TAaI5w2hNzdxVSonUXq+TVa9VAtY=;
+ b=cirUPIhxbIos3ty7HZwua2IFJqS6KEKdsCYLcCBq6jR9kv71ajdl5sEL+DPyKc0VjNdGUFUFtSvcCQLF5o1HHOE1TcC12eTtqZX9wjsqkSdocQX6uTsbQHeG/0F0Jyz+0a3vY9WG3ceIUWO+bIxLXcrDXBbWqTSC078eQOfaRls=
+Received: from DB6PR1001CA0021.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:4:b7::31)
+ by AM0PR04MB4451.eurprd04.prod.outlook.com (2603:10a6:208:74::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3955.18; Mon, 22 Mar
+ 2021 12:15:21 +0000
+Received: from DB5EUR01FT030.eop-EUR01.prod.protection.outlook.com
+ (2603:10a6:4:b7:cafe::3a) by DB6PR1001CA0021.outlook.office365.com
+ (2603:10a6:4:b7::31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3955.18 via Frontend
+ Transport; Mon, 22 Mar 2021 12:15:21 +0000
+X-MS-Exchange-Authentication-Results: spf=temperror (sender IP is
+ 40.68.112.65) smtp.mailfrom=topicproducts.com; lists.openembedded.org;
+ dkim=none (message not signed) header.d=none;lists.openembedded.org;
+ dmarc=none action=none header.from=topic.nl;
+Received-SPF: TempError (protection.outlook.com: error in processing during
+ lookup of topicproducts.com: DNS Timeout)
+Received: from westeu12-emailsignatures-cloud.codetwo.com (40.68.112.65) by
+ DB5EUR01FT030.mail.protection.outlook.com (10.152.4.254) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3955.18 via Frontend Transport; Mon, 22 Mar 2021 12:15:19 +0000
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com (104.47.17.168) by westeu12-emailsignatures-cloud.codetwo.com with CodeTwo SMTP Server (TLS12) via SMTP; Mon, 22 Mar 2021 12:15:18 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TQwC4K02d3gIdiQJniJ4L0JTbSqLtbTaerCuzY8vj79Ku0nDaUZBUef7z+PTZRsfSqWojZnBAF76IKgxhR7mMUvnTWsNtVTr4nAIJQD8jxn9ZZmmK8r88H9v+YbcxgsieUTRf4oxvX1raEyRFZHpyx5fb1E8gNMdaBAUhjm7ors8FKRjwgNK9YVPWqkp1gxILNYb/2uYw3OKEJmt24gwgp9Z2JXyxtzMraL33fOQZhbHsvpNwZAmmRsjTGnK2IEFkdcnNrhaZSO7QH925a0yQdhTinV8GqjFX5tC3P53EXP4f0IP1y6kOhfiF+Lx2wCMELEY7trO5XUvgpfY9XW4MQ==
+ b=NUNzXCgHFaeM+PZvJ28Kd3uTHmmlHyHyTxksSnsPlUCjbEzLnzuskA3VvT1qU4ZTFYxld972ZMNsVuJZcNIZZnLZYxTgZqQKUcval0/HaiKjYAmop7nuXyEeTEyWrd+dgHc971ChpulpYMz+o1hqF4XQqWphxCaCCJW3Mty4XNQKB0/BpPvV8LRfOmO2NJci+PBFfRb0f/F3vVHZIl2MCzQh5gL5cbV3pX5hs8lScJEM9vAVNOca5NgMmS9kdiJYHCNqotSOomO8MKY+EkWHLNcf2qL7jTLgZ2jHJ8GIYorDOu0/0LbtRbroSazpMXkOdbASndJw5KuGm1K0ZXj2Yg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=i9mYHbAHqFmtwkQ4k0H3vRFsRlYxraxo51sZaCcWEmU=;
- b=PaYRfmfgMEMS2pwhvFeQP++dlYByDkVAf7a9LfMNus4Cl7mNEZtotXty0ymviH2KKX1Mw0N4czebX1KaqUvN5CP5j/1yfhsSV1mAJD4vNMA5EtQ7nCGJNsj4A7f0yg40QBWmblBmrMC5cPfCNMYDRrX/29koY9oDOHfIfvUUdddqC+TBYFXnr70Dg0Iq4WwzrcLCO9N+1hhTHKKJFxDq7i8hgzC1IDfALUxfBk68QgrHhb42i3JBZLfUuH1J0hRIHTTc5BGsfTTqmxH3tIRQniIHpD3Ea4OtxfaBxS3C9LgdpqTHxJP2K4lKqE0RvMXgojETY2uHy00+uDMP+o7sYQ==
+ bh=IZdOroWXTpRoowdtTGlZVkKcaDP25hZ0QNp1R55tB5U=;
+ b=WccsyaR7uldiNCh73PG7HbNanT2uA8d6HCBiauxCpp6mfb9JgnT0xbAgFJSjHHcUlCllnnZdPg2dN/SwnMrk18XESms6jCAO/K3Cf31GGEU2j9JGyxovUmqksnZ6vOKe7WHcAEvy4eL8qaIJeb2H1dWuNusCDgaIuqP5bNCDqxa2M8cnLwb1dmjmFdkSAGUnVU+OX+LGIJGq8ih1jv+KhRMf04zkcsWQgBAcnveCJvgvAvyH+zoMnqYaFbQqHG2WNkhv+BaLHeAJ75+EMxNnEUAyg025BS8eOOECPS0s/L5hov3Rwo3y/f8nf891ZMLca7divqfKVARShLtAcABQIg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=skidata.com; dmarc=pass action=none header.from=skidata.com;
- dkim=pass header.d=skidata.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=skidata.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=i9mYHbAHqFmtwkQ4k0H3vRFsRlYxraxo51sZaCcWEmU=;
- b=geVyeas61RiKxuWidLU/KdYN2ars0fJQEuaNhmJDbQR70waoG0MhnjEAc3yB5n74KRj2b5S/Q7hB2dVZFsomTKmeB2PQX6S2QdKM6qE2zse/D0Z2Jv9eKbYmg1c+1iPM9O3RUdrWGd/vkbRjLCJfCyer0WJDyEgVx83cwmZoKe0=
-Authentication-Results: topic.nl; dkim=none (message not signed)
- header.d=none;topic.nl; dmarc=none action=none header.from=skidata.com;
-Received: from VI1PR01MB5007.eurprd01.prod.exchangelabs.com
- (2603:10a6:803:9d::19) by VI1PR0101MB2575.eurprd01.prod.exchangelabs.com
- (2603:10a6:800:5a::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3955.23; Mon, 22 Mar
- 2021 11:53:53 +0000
-Received: from VI1PR01MB5007.eurprd01.prod.exchangelabs.com
- ([fe80::2983:c1a5:e792:b3cb]) by VI1PR01MB5007.eurprd01.prod.exchangelabs.com
- ([fe80::2983:c1a5:e792:b3cb%5]) with mapi id 15.20.3955.025; Mon, 22 Mar 2021
- 11:53:53 +0000
-Date: Mon, 22 Mar 2021 12:53:48 +0100
-From: "Richard Leitner" <richard.leitner@skidata.com>
-To: Mike Looijmans <mike.looijmans@topic.nl>
-CC: openembedded-devel@lists.openembedded.org
+ smtp.mailfrom=topicproducts.com; dmarc=pass action=none header.from=topic.nl;
+ dkim=pass header.d=topic.nl; arc=none
+Authentication-Results-Original: lists.openembedded.org; dkim=none (message
+ not signed) header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=topic.nl;
+Received: from DB8PR04MB6523.eurprd04.prod.outlook.com (2603:10a6:10:10f::26)
+ by DB8PR04MB6922.eurprd04.prod.outlook.com (2603:10a6:10:11f::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3955.18; Mon, 22 Mar
+ 2021 12:15:15 +0000
+Received: from DB8PR04MB6523.eurprd04.prod.outlook.com
+ ([fe80::38d2:189b:f7da:b988]) by DB8PR04MB6523.eurprd04.prod.outlook.com
+ ([fe80::38d2:189b:f7da:b988%7]) with mapi id 15.20.3955.025; Mon, 22 Mar 2021
+ 12:15:15 +0000
 Subject: Re: [oe] [meta-java] openjre8 fails to compile on aarch64
-Message-ID: <YFiFTHaVZUBoq7uW@brokenbit>
+To: Richard Leitner <richard.leitner@skidata.com>
+CC: openembedded-devel@lists.openembedded.org
 References: <1b153bce-a66a-45ee-a5c6-963ea6fb1c82.949ef384-8293-46b8-903f-40a477c056ae.75f5ae13-2f0a-42dd-b164-bf1c3f2c0c91@emailsignatures365.codetwo.com>
  <1b153bce-a66a-45ee-a5c6-963ea6fb1c82.0d2bd5fa-15cc-4b27-b94e-83614f9e5b38.74969f47-fd5f-43b1-b5f3-843bc6e03141@emailsignatures365.codetwo.com>
- <d441a15b-11a2-294e-9430-c93a48283fc1@topic.nl>
-In-Reply-To: <d441a15b-11a2-294e-9430-c93a48283fc1@topic.nl>
-X-Originating-IP: [83.215.125.121]
-X-ClientProxiedBy: AM0PR04CA0063.eurprd04.prod.outlook.com
- (2603:10a6:208:1::40) To VI1PR01MB5007.eurprd01.prod.exchangelabs.com
- (2603:10a6:803:9d::19)
-Return-Path: richard.leitner@skidata.com
+ <d441a15b-11a2-294e-9430-c93a48283fc1@topic.nl> <YFiFTHaVZUBoq7uW@brokenbit>
+From: "Mike Looijmans" <mike.looijmans@topic.nl>
+Organization: Topic
+Message-ID: <a0a46ea3-769d-bc32-479b-160b10b882ab@topic.nl>
+Date: Mon, 22 Mar 2021 13:15:14 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+In-Reply-To: <YFiFTHaVZUBoq7uW@brokenbit>
+X-Originating-IP: [83.128.90.119]
+X-ClientProxiedBy: AM0PR02CA0023.eurprd02.prod.outlook.com
+ (2603:10a6:208:3e::36) To DB8PR04MB6523.eurprd04.prod.outlook.com
+ (2603:10a6:10:10f::26)
+Return-Path: mike.looijmans@topicproducts.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from brokenbit (83.215.125.121) by AM0PR04CA0063.eurprd04.prod.outlook.com (2603:10a6:208:1::40) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3955.18 via Frontend Transport; Mon, 22 Mar 2021 11:53:52 +0000
+Received: from [192.168.1.130] (83.128.90.119) by AM0PR02CA0023.eurprd02.prod.outlook.com (2603:10a6:208:3e::36) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3955.22 via Frontend Transport; Mon, 22 Mar 2021 12:15:14 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 81c8b12c-ea7c-4724-0450-08d8ed292a0f
-X-MS-TrafficTypeDiagnostic: VI1PR0101MB2575:
+X-MS-Office365-Filtering-Correlation-Id: 1991ab30-2fba-4db1-b56a-08d8ed2c2909
+X-MS-TrafficTypeDiagnostic: DB8PR04MB6922:|AM0PR04MB4451:
 X-Microsoft-Antispam-PRVS: 
-	<VI1PR0101MB2575B8AB32163B1D22FA51D7F0659@VI1PR0101MB2575.eurprd01.prod.exchangelabs.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
+	<AM0PR04MB44516B444906BCA0DFF40A3196659@AM0PR04MB4451.eurprd04.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:6790;OLM:6790;
 X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: 
+ 72VMpV6QH4bfaGTIczWA6i4mLfkKG0gi0+7wNrPkyqZzbNk+9m2JD6vHE39SXdIT/VXAN2b8oJRd7PmgnCjHKR1/mK6MOSzEZia6cSRlG8FBafcqqtHpIL0oK31IijwXQNnwW6MaEa8Y0z9GQh1Y7LHVjBeUXcHH3jeRfw8ajX98hq3rvQR4rweE9Zi6A4tGM1QJ9CUfeZxoTwsknLPWDBEwNbp0Oy3Q7+cv5uqANMlvozgF9YY91uZz6iBtsApOZoEBApVw5i7ly+CukU1HpA/1cu33A+osgIqSmbA+CxAoTeKrei0SceJW21y1uHON9qj/UzCaxdgSd1zbNptn0cqRar7Kwslzy/MkOeAIDJz4M+oJDcZfbL+xhgvNMElRBpRjvSe/VtgSbfgMEGMwavoBjJlQgTzRye9LgfwydspfZR1/s2PyPpHYTEl+oTRnbTzoR7HoRx7/9deQ/kvFeBbXHNLHrNeucnAk3Za+0DjSeZul6aKXTnlbufo8fnUT6W7m6EjEqtIjbwSG4awqCahEzW173C06wtiCJqIYxKc80JAQSuc3TvfxT7ASegQzakIJ2l5b29jOkulgmkqCRqykgQ9DdN6zHGyZt1/tRkuD4GxtLcGTcSTrN7rIzaTeFmikbfHwSLDinngLiUurMjS0/S7B3NAhyrxUF+HksIa/nCHEVA24MaJlgoTJIPNMv23vmDtM+8gZ4vTSZ36UyiOFWsgVKm6TjNSS4N8QquSJkPL3wBoyPTWmB/MYqEsuENqFPXQwtqMq0kq8mtfpTZnhdPrHIY4gyx4BTpPIR+k=
+X-Forefront-Antispam-Report-Untrusted: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB8PR04MB6523.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(376002)(366004)(346002)(136003)(396003)(39840400004)(956004)(66556008)(316002)(44832011)(66476007)(83170400001)(66946007)(8676002)(31686004)(83380400001)(8936002)(2906002)(16576012)(2616005)(15974865002)(31696002)(4326008)(52116002)(36756003)(26005)(53546011)(16526019)(6916009)(478600001)(6486002)(5660300002)(38100700001)(42882007)(36916002)(186003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: =?us-ascii?Q?rKU4wEVTnvVES4KusZ6ZZAPZQJJ+oYldQCqi48Ad88YEh9+2Hz40EaVMitpf?=
+ =?us-ascii?Q?RSHUyqvzwSC6NB2gmAcc2mGzX5I/v2VgHr6aKvK4f/u8k1Ax9BgtkCUl4m5d?=
+ =?us-ascii?Q?Ifa57doKW6u1QngUwTmaieVS3172YSHXNwefaIvtXfrC2WS5RBkn1QWzx9Wu?=
+ =?us-ascii?Q?llgey9tK7QKtezoGfBfs6m1TgETsnI/Kk5xr7iLW2LNKGxi21Zjla4Mf1kKy?=
+ =?us-ascii?Q?5npacBUFZ/acm4RDqtLMk71aPnljyNQ4dP3vJpmlfB+zV7q3WewwCF+ySblE?=
+ =?us-ascii?Q?gGJPzYmuUd1v9KgwkUkNfKdDRyucyw6WZyL8MJo/XGcHDXa0y0grDvp/i45d?=
+ =?us-ascii?Q?YKe1+a151p8k84pNO3+dkOe/lkOwBLJi9Sletriv/eTBln4Q78PcX09wEnqZ?=
+ =?us-ascii?Q?Jw94DQgi6ecPmUT4FRhUkXMzwpoSGTTGANGY/F4Ib80skVucJa9HmP5qdxn/?=
+ =?us-ascii?Q?l20xo70ZyEdN/cqWCcSLNZzqRSzP3VxrmC0vwK4w0LjfCuYPXxRwVqesm7ak?=
+ =?us-ascii?Q?j+TqZid9W8M1yWqnVvDio5wP2POF6+OSh06LFGNkS8jMM2yQRfAUWrgxYaO7?=
+ =?us-ascii?Q?a/B5UALPqhK+BgDRPEFUwyJjb/K/Ve0xYYY6XXVTXFYqXRKvbxWgiErEUOU9?=
+ =?us-ascii?Q?tDELBs3HqZuytzOEQjTRKhL0F2vY5gQCdc6CWnR+AJtktNZ+bVU7/P4H+H/a?=
+ =?us-ascii?Q?CPd5i1c043lq1auPZZ+/+7I6RA0o5IVU1FEbjplbM5E2V9kmQC1frB5+Gy2O?=
+ =?us-ascii?Q?CHfjBm5XacFzF9laaJx+uyCzV31ASLyUSkTW6W8RjRKhX+gOIOx/9I/eZ8j6?=
+ =?us-ascii?Q?Y4OE3ruNOowNhko9KlEelAmCS84laN8VKDxjWwtPBOVxgB9+kW6RKztHIjy7?=
+ =?us-ascii?Q?suOMBlZl42H+JwVVnVDF0j1QP6oLYTAUTbt9KLSxNhMzzUKfOndQZU4YnSZc?=
+ =?us-ascii?Q?fbDH48DKN8K6grEAhYwvtSVU/TF3iw3JEOSm4BeVQW0fAXE5GSjBzhds9e9O?=
+ =?us-ascii?Q?AMM1GBgJSMBWclzBYq/lOFIoNWsx5RsyF5VwR29IC+xThnhVTuTbNL7EYcc8?=
+ =?us-ascii?Q?hyDnuk7pUkPnuQVlYx6WrvOrZvzKdH2x2JbtIt+BF1O04ifBDNk0ggDk+ZwF?=
+ =?us-ascii?Q?UvjPPTxe3FIQNlyBEiSWKYQY6LsafWX3DuEcCvu6wyAwFjSg6HOuCKutgvo2?=
+ =?us-ascii?Q?o0U8E24Mu7zVFMzeHanlbWLatpvFuRO/MqMqoFSEVj4aUIZPhXjZCokl8k9p?=
+ =?us-ascii?Q?nl+kIEf6l/enMu6zOaPxMhPQfmIhCGoSCS+qo9ktp73TrGS0KUhOBfN74NQO?=
+ =?us-ascii?Q?MJsnxJhY8Qp2p7x4PN+RvQ4t?=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR04MB6922
+X-CodeTwo-MessageID: 9840a3d3-5838-47c7-89cb-85eb061a6044.20210322121518@westeu12-emailsignatures-cloud.codetwo.com
+X-CodeTwoProcessed: true
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
+ DB5EUR01FT030.eop-EUR01.prod.protection.outlook.com
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 
+	65408def-7c20-4635-b48e-08d8ed2c264d
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	t3RpBheyCxCzlDg3q0URwByml9/ZxbJzi6IkFFNlWGeLxfDICpz1CtDjFiF1c0FIqYWhh7JYYC0wDIgS6YWDuVtoj5/wlAjg88RMBAPIohAcxnvgO2P6N7QKA9KqmM4TqKZ/VfH6zMwmD6u0Ku8zE17u72Kdq9kej1IT5TmsZeepRb75ZF5wEvRyVGdsbpHMZEjqv1X9ek91O01wi5IuKk7sIGH7D/sCoTM6RfhB76Pc1Kekto0Z+sRTm54R7Dr9xJK2iB7WvRXc6cPoCw3Fhf2nLM8tc77OvInrd92Y93uwwI/xhj6N9sY5RuRTMXNi+w5EDtLAey49swG+g5yTqoOLYvz7JoNR/SID/+I+Dqp4UePmkOMe1H0BTdOIiY4O/kwVocWSEVUKEEJPZuJ9K83heB7cy+Vi8FL3WMKU/rUVrdtMnG+pYAzJmwq1BMyXAlO1a47NO7ZsGBupGxruZF+es7IdAF7x11CV82NH+sX9FgFcdky8EZ3Ruuj1zZ4wReVxS58UCCw9a0knpilBnKdlhraJNFzzWCgQ4JWFoT1DA+Z2rE0ucUClberk3FsM9ZwI9oa+TSz1Dd/Z0lcXxYzJxU0vK0rSOK8cHTWNCSkOVAA4pqRdHv8dpZ+eTbhwjX7TBwzYOGbWXQfMY8YzyTsvyUj612AwQEZtLd8vWRHVrf5cz8T5RVFittvBpd3BizRHftKSm7HIqvK5IEzhbmHlu2h/qSO8ziZx9EPJoKlyyR0zttdHm6IzKMuoTMXi
+	AeerWXydJdMF1P+iW6nyYw9TIGVHwxwr1IckcMdo5MGtKh5qs6QNiQmsmmebSbZfcXykmt++QKLDoybxlGh1BCR/O9nu78SHBG81+Xa69mLo9TiQN+eRROOBvLd0IUXAGmhkYssD1OutNJDp+Nwo99C5ybdTZWnBSA462cEHURIQ4YFY9tOJxelpEHUHiNY3YHr6dKDc9jyWjOh3dXokYyxagwYZKojh9hSZpZ1G42M16zlPRl5AQNS0LzTr4cN9gj9Zg0urmE7fnWkRpTU4KzNvDgrwGY07irVMplOznYdHKegWHTW8uiABpn46qA5u2coDd8zKD8dLfEjQEMnvOkSSN/VqmTI8xd+XorjYPvkB70IwJciB6EmCrESFgV8s3C4AW3+j1o2OIvJKOHn0jlJuJr3PZQKF12NBg3D4jGbpu6UMfHF6iJWr2tR9pUQ39pYjyPlDlBdsb4D7txWObLK+aCfr/e57qxJ9M3/vB8d93TMr84mcPIb6/DpFtf13aBr1o5NENcDh++QkeDWgMrsPX2tlTPY89mj96jHdhJZJrAzPW5djrauKvNkM47Jz/+bstxHzwrhnwLPLMXYV7tZYRVDoWmMGwoJ1SzNaSTCarYF8H4N5mNAe0YEu4zLsamG4wRPtF79i/jwgOlJwqjnu2TFHjZ00BulEl4FN1gmHU6MmCA90P307EjYbm4DaXoZkfjmvEDCaBXM1AWLTFyT2Wbax4Kt+mFyIs7SInj6GRr5hxeK2HcRPyKs/EvH4vfI0yuAtTxQ7KhAwI6DZ1Doz/9Ebtn2CfeE8f6GvwYQ=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR01MB5007.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(39850400004)(136003)(376002)(346002)(396003)(366004)(66476007)(66556008)(186003)(16526019)(66946007)(4326008)(316002)(86362001)(26005)(83380400001)(15974865002)(44832011)(38100700001)(956004)(6666004)(478600001)(33716001)(9576002)(2906002)(5660300002)(55016002)(9686003)(8936002)(52116002)(6496006)(8676002)(6916009);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?lsZNYirqse8t48+QcDUxP59mKzx1O/7Eb16OS46+KqcAduu+mcecRQJjQ5Ss?=
- =?us-ascii?Q?kvAmaWQgYK5S4gM1ROrzTV31Scu+5nweCfOLixGRzpCYGbX2Hpo8i2BgBvsH?=
- =?us-ascii?Q?oimMGM+u25GVNNN2k06PBJVUcNwmY5tPf34/nwzqV1JWnHIeOznTJ3N+VsMT?=
- =?us-ascii?Q?ilTmh/Ctc5/IjVcgy0UYoVaWZ6HkMJxIN7SUShlKoIBIEfGbNeZPDhXtYwP6?=
- =?us-ascii?Q?t44ZXk6Ew2c7h7ddHzgEal2rnmHJdAtHV7aMQiwf2gPP9kvEOeiDmGWH1mD+?=
- =?us-ascii?Q?JdjfDxNOdgLp5tMMoz5hk4mhTAtrGnAfqD36eS0j1EmDQdVIRO5dOXWqE/ps?=
- =?us-ascii?Q?FsJrJaBWnzDwKtS8oYXs6uMfshlqRJ6ArsSOUsejy5EM2kLOyc7y/kdp63GK?=
- =?us-ascii?Q?y5hDehy1dVfcO5fu+mb4aq07eEA3jFvUYE+m+Y8JaWQaQvHVsAJRkThzoyXs?=
- =?us-ascii?Q?VJIjkCjlTsga4A9PNKUiEdUl2gVP+pt4N7hXRvJS4y4fD8dhe1MN6YoJ85wf?=
- =?us-ascii?Q?gwtUIjK6j/WOJ93KTaPqUYsMkFICkFSyfRq5TyLzkPZPVAmF4Nd6KJ4k/Kph?=
- =?us-ascii?Q?auqMgTvEp4oOinniX1oMVE+42QsCQcrXvgavK+N4c5Nntm89rCYS/GN+o3ID?=
- =?us-ascii?Q?Be2qppMzcoeb3OgAsCfjJTOOWJaAHbHetaiZtz57tykHHxGBzN2R8LW11f2J?=
- =?us-ascii?Q?IQXPxzX1I3q9fpUAm6SIHA6aqzxOHpXqldoHAnSxZw4jRgIaXaf6+NngViSt?=
- =?us-ascii?Q?aHcFU+/pUt+r6ICP4wjkSdqXmpnnI5epwPeDsUov0cnGKHYY2vcPCg12hWdY?=
- =?us-ascii?Q?K8YarIy1y+f20lYuD9KMtlC+ehjpkINUzobXgq3tl/RIWDPegNEz4eAKeGgs?=
- =?us-ascii?Q?MAjqzz6hZamqP4HMlXrKgEhYpIZ/3wvdlhY0ATxkosJ3p4HWzXnhP528W3Nn?=
- =?us-ascii?Q?5SkwbX4BpOr6FTMPvy502HpvslIWA8sCF66yi7Lg8WAs+p4V2XJus7AnjXsc?=
- =?us-ascii?Q?nZacVDsgDH6SLqrRE579KSLqck3PFpHD2V0kamimFNR2zwrlJQkicef8YJWV?=
- =?us-ascii?Q?YKa8bIXfSxtCa6uPbJYhj7mU0vHpchwz/2NuDgsgruhR5advk+FAnQeK5TxF?=
- =?us-ascii?Q?D1LSAjYhje1leFRIG+tTuCwavKSJt6gDlapOXiT2sqDphT9vIphNgs4q79PL?=
- =?us-ascii?Q?qkMezRtgVTOTEjBVD9g/emRHOtJyyQvYNFGB1TKtceYXvLYnILpz/72v3Lzg?=
- =?us-ascii?Q?H4d61es2VcKOAgmbdZo84GE3Zf7WtYer2pN5Tg5wxIThvl0o5KPEuoKyDMDn?=
- =?us-ascii?Q?xRUibcWo2uzzoM4BmP4+JgX+?=
-X-OriginatorOrg: skidata.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 81c8b12c-ea7c-4724-0450-08d8ed292a0f
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR01MB5007.eurprd01.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Mar 2021 11:53:53.0083
+	CIP:40.68.112.65;CTRY:NL;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:westeu12-emailsignatures-cloud.codetwo.com;PTR:westeu12-emailsignatures-cloud.codetwo.com;CAT:NONE;SFS:(136003)(396003)(346002)(39840400004)(376002)(36840700001)(46966006)(47076005)(63350400001)(2906002)(356005)(6916009)(956004)(16576012)(316002)(2616005)(31686004)(42882007)(478600001)(83170400001)(8676002)(336012)(7596003)(36756003)(36860700001)(7636003)(8936002)(4326008)(15974865002)(53546011)(186003)(16526019)(70586007)(31696002)(83380400001)(44832011)(70206006)(5660300002)(82310400003)(6486002)(26005)(36916002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-OriginatorOrg: topic.nl
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Mar 2021 12:15:19.5167
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3d52ce8f-cef6-4b27-bace-cf9989cf3973
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: uJe4Dm2nOIVIWU0pWedmtig9EhaGLHaeKtTWuCX3o00KrSONVbUMpDOwXmPuPD98MCJu0QkiutGhBHKQqbmBaz0P4RYRdk6odtZNFIxlECs=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0101MB2575
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1991ab30-2fba-4db1-b56a-08d8ed2c2909
+X-MS-Exchange-CrossTenant-Id: 449607a5-3517-482d-8d16-41dd868cbda3
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=449607a5-3517-482d-8d16-41dd868cbda3;Ip=[40.68.112.65];Helo=[westeu12-emailsignatures-cloud.codetwo.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DB5EUR01FT030.eop-EUR01.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB4451
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: quoted-printable
+Content-Language: en-US
 
-Hi Mike,
+Both "gatesgarth".
 
-which meta-java and oe-core branch are you using?
+Issue seems to be that the build host (Ubuntu 18) has gcc 7 and the one=20
+used for cross-compiling is much newer. Apparently there's something=20
+wrong in the makefile that it uses host compiler flags for the build=20
+compiler.
 
-regards;rl
 
-On Mon, Mar 22, 2021 at 10:43:53AM +0100, Mike Looijmans wrote:
-> I cannot get openjre8 to compile. Any ideas what the real issue is?
->=20
-> Compile for 32-bit ARM is okay, but building for aarch64 fails:
->=20
-> ...
-> | g++: error: unrecognized command line option =E2=80=98-fmacro-prefix-ma=
-p=3D/.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0=3D/usr/sr=
-c/debug/openjre-8/272-r0=E2=80=99
-> | g++: error: unrecognized command line option =E2=80=98-fmacro-prefix-ma=
-p=3D/.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0=3D/usr/sr=
-c/debug/openjre-8/272-r0=E2=80=99
-> | /.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0/jdk8u-she=
-nandoah-aarch64-shenandoah-jdk8u272-b10/hotspot/make/linux/makefiles/adlc.m=
-ake:228:
-> recipe for target '../generated/adfiles/output_c.o' failed
-> | make[6]: *** [../generated/adfiles/output_c.o] Error 1
-> | /.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0/jdk8u-she=
-nandoah-aarch64-shenandoah-jdk8u272-b10/hotspot/make/linux/makefiles/adlc.m=
-ake:228:
-> recipe for target '../generated/adfiles/main.o' failed
-> | make[6]: *** [../generated/adfiles/main.o] Error 1
-> | g++: error: unrecognized command line option =E2=80=98-fmacro-prefix-ma=
-p=3D/.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0=3D/usr/sr=
-c/debug/openjre-8/272-r0=E2=80=99
-> | /.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0/jdk8u-she=
-nandoah-aarch64-shenandoah-jdk8u272-b10/hotspot/make/linux/makefiles/adlc.m=
-ake:228:
-> recipe for target '../generated/adfiles/output_h.o' failed
-> | make[6]: *** [../generated/adfiles/output_h.o] Error 1
-> | make[5]: *** [ad_stuff] Error 2
-> | /.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0/jdk8u-she=
-nandoah-aarch64-shenandoah-jdk8u272-b10/hotspot/make/linux/makefiles/top.ma=
-ke:91:
-> recipe for target 'ad_stuff' failed
-> | /.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0/jdk8u-she=
-nandoah-aarch64-shenandoah-jdk8u272-b10/hotspot/make/linux/Makefile:284:
-> recipe for target 'product' failed
-> | make[4]: *** [product] Error 2
-> | Makefile:230: recipe for target 'generic_build2' failed
-> | make[3]: *** [generic_build2] Error 2
-> | make[2]: *** [product] Error 2
-> | Makefile:177: recipe for target 'product' failed
-> | HotspotWrapper.gmk:44: recipe for target '/.../build/tmp-glibc/work/cor=
-texa72-oe-linux/openjre-8/272-r0/build/hotspot/_hotspot.timestamp'
-> failed
-> | make[1]: *** [/.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/27=
-2-r0/build/hotspot/_hotspot.timestamp]
-> Error 2
-> | /.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0/jdk8u-she=
-nandoah-aarch64-shenandoah-jdk8u272-b10//make/Main.gmk:109:
-> recipe for target 'hotspot-only' failed
-> | make: *** [hotspot-only] Error 2
-> | WARNING: /.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0/=
-temp/run.do_compile.9267:189
-> exit 1 from 'exit 1'
-> | WARNING: Backtrace (BB generated script):
-> | =C2=A0=C2=A0=C2=A0 #1: bbfatal_log, /.../build/tmp-glibc/work/cortexa72=
--oe-linux/openjre-8/272-r0/temp/run.do_compile.9267,
-> line 189
-> | =C2=A0=C2=A0=C2=A0 #2: die, /.../build/tmp-glibc/work/cortexa72-oe-linu=
-x/openjre-8/272-r0/temp/run.do_compile.9267,
-> line 179
-> | =C2=A0=C2=A0=C2=A0 #3: oe_runmake, /.../build/tmp-glibc/work/cortexa72-=
-oe-linux/openjre-8/272-r0/temp/run.do_compile.9267,
-> line 168
-> | =C2=A0=C2=A0=C2=A0 #4: autotools_do_compile, /.../build/tmp-glibc/work/=
-cortexa72-oe-linux/openjre-8/272-r0/temp/run.do_compile.9267,
-> line 163
-> | =C2=A0=C2=A0=C2=A0 #5: do_compile, /.../build/tmp-glibc/work/cortexa72-=
-oe-linux/openjre-8/272-r0/temp/run.do_compile.9267,
-> line 158
-> | =C2=A0=C2=A0=C2=A0 #6: main, /.../build/tmp-glibc/work/cortexa72-oe-lin=
+
+
+Met vriendelijke groet / kind regards,=0A=
+=0A=
+Mike Looijmans=0A=
+System Expert=0A=
+=0A=
+=0A=
+TOPIC Embedded Products B.V.=0A=
+Materiaalweg 4, 5681 RJ Best=0A=
+The Netherlands=0A=
+=0A=
+T: +31 (0) 499 33 69 69=0A=
+E: mike.looijmans@topicproducts.com=0A=
+W: www.topic.nl=0A=
+=0A=
+Please consider the environment before printing this e-mail=0A=
+On 22-03-2021 12:53, Richard Leitner wrote:
+> Hi Mike,
+>
+> which meta-java and oe-core branch are you using?
+>
+> regards;rl
+>
+> On Mon, Mar 22, 2021 at 10:43:53AM +0100, Mike Looijmans wrote:
+>> I cannot get openjre8 to compile. Any ideas what the real issue is?
+>>
+>> Compile for 32-bit ARM is okay, but building for aarch64 fails:
+>>
+>> ...
+>> | g++: error: unrecognized command line option =E2=80=98-fmacro-prefix-m=
+ap=3D/.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0=3D/usr/s=
+rc/debug/openjre-8/272-r0=E2=80=99
+>> | g++: error: unrecognized command line option =E2=80=98-fmacro-prefix-m=
+ap=3D/.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0=3D/usr/s=
+rc/debug/openjre-8/272-r0=E2=80=99
+>> | /.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0/jdk8u-sh=
+enandoah-aarch64-shenandoah-jdk8u272-b10/hotspot/make/linux/makefiles/adlc.=
+make:228:
+>> recipe for target '../generated/adfiles/output_c.o' failed
+>> | make[6]: *** [../generated/adfiles/output_c.o] Error 1
+>> | /.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0/jdk8u-sh=
+enandoah-aarch64-shenandoah-jdk8u272-b10/hotspot/make/linux/makefiles/adlc.=
+make:228:
+>> recipe for target '../generated/adfiles/main.o' failed
+>> | make[6]: *** [../generated/adfiles/main.o] Error 1
+>> | g++: error: unrecognized command line option =E2=80=98-fmacro-prefix-m=
+ap=3D/.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0=3D/usr/s=
+rc/debug/openjre-8/272-r0=E2=80=99
+>> | /.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0/jdk8u-sh=
+enandoah-aarch64-shenandoah-jdk8u272-b10/hotspot/make/linux/makefiles/adlc.=
+make:228:
+>> recipe for target '../generated/adfiles/output_h.o' failed
+>> | make[6]: *** [../generated/adfiles/output_h.o] Error 1
+>> | make[5]: *** [ad_stuff] Error 2
+>> | /.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0/jdk8u-sh=
+enandoah-aarch64-shenandoah-jdk8u272-b10/hotspot/make/linux/makefiles/top.m=
+ake:91:
+>> recipe for target 'ad_stuff' failed
+>> | /.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0/jdk8u-sh=
+enandoah-aarch64-shenandoah-jdk8u272-b10/hotspot/make/linux/Makefile:284:
+>> recipe for target 'product' failed
+>> | make[4]: *** [product] Error 2
+>> | Makefile:230: recipe for target 'generic_build2' failed
+>> | make[3]: *** [generic_build2] Error 2
+>> | make[2]: *** [product] Error 2
+>> | Makefile:177: recipe for target 'product' failed
+>> | HotspotWrapper.gmk:44: recipe for target '/.../build/tmp-glibc/work/co=
+rtexa72-oe-linux/openjre-8/272-r0/build/hotspot/_hotspot.timestamp'
+>> failed
+>> | make[1]: *** [/.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/2=
+72-r0/build/hotspot/_hotspot.timestamp]
+>> Error 2
+>> | /.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0/jdk8u-sh=
+enandoah-aarch64-shenandoah-jdk8u272-b10//make/Main.gmk:109:
+>> recipe for target 'hotspot-only' failed
+>> | make: *** [hotspot-only] Error 2
+>> | WARNING: /.../build/tmp-glibc/work/cortexa72-oe-linux/openjre-8/272-r0=
+/temp/run.do_compile.9267:189
+>> exit 1 from 'exit 1'
+>> | WARNING: Backtrace (BB generated script):
+>> | =C2=A0=C2=A0=C2=A0 #1: bbfatal_log, /.../build/tmp-glibc/work/cortexa7=
+2-oe-linux/openjre-8/272-r0/temp/run.do_compile.9267,
+>> line 189
+>> | =C2=A0=C2=A0=C2=A0 #2: die, /.../build/tmp-glibc/work/cortexa72-oe-lin=
 ux/openjre-8/272-r0/temp/run.do_compile.9267,
-> line 202
-> |
-> | Backtrace (metadata-relative locations):
-> | =C2=A0=C2=A0=C2=A0 #1: bbfatal_log, /.../oe-core/meta/classes/logging.b=
-bclass, line 72
-> | =C2=A0=C2=A0=C2=A0 #2: die, /.../oe-core/meta/classes/base.bbclass, lin=
-e 56
-> | =C2=A0=C2=A0=C2=A0 #3: oe_runmake, /.../oe-core/meta/classes/base.bbcla=
-ss, line 65
-> | =C2=A0=C2=A0=C2=A0 #4: autotools_do_compile, /.../oe-core/meta/classes/=
-autotools.bbclass,
-> line 243
-> | =C2=A0=C2=A0=C2=A0 #5: do_compile, autogenerated, line 2
-> ERROR: Task
-> (/.../meta-java/recipes-core/openjdk/openjre-8_272.bb:do_compile) failed
-> with exit code '1'
->=20
-> --=20
-> Mike Looijmans
->=20
->=20
-> Met vriendelijke groet / kind regards,
->=20
-> Mike Looijmans
-> System Expert
->=20
->=20
-> TOPIC Embedded Products B.V.
-> Materiaalweg 4, 5681 RJ Best
-> The Netherlands
->=20
-> T: +31 (0) 499 33 69 69
-> E: mike.looijmans@topicproducts.com
-> W: www.topic.nl
->=20
-> Please consider the environment before printing this e-mail
+>> line 179
+>> | =C2=A0=C2=A0=C2=A0 #3: oe_runmake, /.../build/tmp-glibc/work/cortexa72=
+-oe-linux/openjre-8/272-r0/temp/run.do_compile.9267,
+>> line 168
+>> | =C2=A0=C2=A0=C2=A0 #4: autotools_do_compile, /.../build/tmp-glibc/work=
+/cortexa72-oe-linux/openjre-8/272-r0/temp/run.do_compile.9267,
+>> line 163
+>> | =C2=A0=C2=A0=C2=A0 #5: do_compile, /.../build/tmp-glibc/work/cortexa72=
+-oe-linux/openjre-8/272-r0/temp/run.do_compile.9267,
+>> line 158
+>> | =C2=A0=C2=A0=C2=A0 #6: main, /.../build/tmp-glibc/work/cortexa72-oe-li=
+nux/openjre-8/272-r0/temp/run.do_compile.9267,
+>> line 202
+>> |
+>> | Backtrace (metadata-relative locations):
+>> | =C2=A0=C2=A0=C2=A0 #1: bbfatal_log, /.../oe-core/meta/classes/logging.=
+bbclass, line 72
+>> | =C2=A0=C2=A0=C2=A0 #2: die, /.../oe-core/meta/classes/base.bbclass, li=
+ne 56
+>> | =C2=A0=C2=A0=C2=A0 #3: oe_runmake, /.../oe-core/meta/classes/base.bbcl=
+ass, line 65
+>> | =C2=A0=C2=A0=C2=A0 #4: autotools_do_compile, /.../oe-core/meta/classes=
+/autotools.bbclass,
+>> line 243
+>> | =C2=A0=C2=A0=C2=A0 #5: do_compile, autogenerated, line 2
+>> ERROR: Task
+>> (/.../meta-java/recipes-core/openjdk/openjre-8_272.bb:do_compile) failed
+>> with exit code '1'
+>>
+>> --=20
+>> Mike Looijmans
+>>
+>>
+>> Met vriendelijke groet / kind regards,
+>>
+>> Mike Looijmans
+>> System Expert
+>>
+>>
+>> TOPIC Embedded Products B.V.
+>> Materiaalweg 4, 5681 RJ Best
+>> The Netherlands
+>>
+>> T: +31 (0) 499 33 69 69
+>> E: mike.looijmans@topicproducts.com
+>> W: www.topic.nl
+>>
+>> Please consider the environment before printing this e-mail
+
+
+--=20
+Mike Looijmans
 
