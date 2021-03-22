@@ -1,85 +1,82 @@
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.web11.534.1616451732907186440
+Received: from wout5-smtp.messagingengine.com (wout5-smtp.messagingengine.com [64.147.123.21])
+ by mx.groups.io with SMTP id smtpd.web09.666.1616452291400267100
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Mar 2021 15:22:13 -0700
+ Mon, 22 Mar 2021 15:31:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Wa8Blv9/;
- spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f180.google.com with SMTP id f10so2656612pgl.9
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Mar 2021 15:22:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=rZE2FGALtnlESnWgzl00UH2Z60FpPh6Y0En2lrAdkGM=;
-        b=Wa8Blv9/n3DWYhLFrJUd19CYnDVN2Bj3N1CE4ojJkDbD89mBlGw+De8f3FNx/sFZnt
-         gr9a+htNRKBzvgoZ2J9GDc3AlrLDKcoxRtReSMCdkQeild2ZqXCntodT5sjxNxhhiVHN
-         UVardaGROfWtPBsLijP+1++K6BwkiVz4+efHPmAEDGRJNZuIh7CzV8iWL3B85V7NQw4Y
-         ImEkBfvA/D18Mi3t8zjHYiqHP3PKqxRVR47tS/dLBBt4Qq+GD+84uDPXiGRECr593ynM
-         5iF5oTEjfBQLpma/IoRFrI1fMHws43LO4dFKcuw7gQmDlFfxpaqfvKKIva6k+jjN9Yaz
-         XI0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=rZE2FGALtnlESnWgzl00UH2Z60FpPh6Y0En2lrAdkGM=;
-        b=ML8PhRlQ7+hzCX8YQT+nWzRxozDFWfwVayzDK0IeGyTz6UHaH1Zn6DnvISst9G1uPr
-         hAxCy/15hWoXLf3g+8lT79gsn/lTZzqlRPO20fMktFFY8Fap5QVKg2+xYrBKGv/1lLvB
-         GS+jTntGuz2/yz8w/VAtJc9ygeqxyDQmEtzDRWRfdNdsGlRFJ9Ko+U2xtW7RqTyfkCl8
-         zvDUF7zgkIt0qe6gU2Ng8BAmLdQ8AtnIzmIxSer5jtCUM0Qb54OiWdZTbQg4a4+1l1tU
-         iXD/FQSyQA5K3mYxJ6mKyAULxc1GcPEgNAhAeeXTpNTdEE7PjGjkesoF4IO98GGjjuNP
-         hSqQ==
-X-Gm-Message-State: AOAM530A9wU4e69+iaQQWStowdWHDtgZ2+pC30zFuYr1NIAiAEmYrjNx
-	64s2SbWNnIc+0tr6l6grWknEjbnUzdQScg==
-X-Google-Smtp-Source: ABdhPJxsSiLTYpZ08UnUm1pz4H9lEu89a+CvGAgRW/6xnUaO94E2ihb0gHujFjwVDUDRckVzjiRddQ==
-X-Received: by 2002:a17:902:b781:b029:e4:545d:77 with SMTP id e1-20020a170902b781b02900e4545d0077mr1822539pls.59.1616451731964;
-        Mon, 22 Mar 2021 15:22:11 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::4578])
-        by smtp.gmail.com with ESMTPSA id x19sm14988771pfc.152.2021.03.22.15.22.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 Mar 2021 15:22:11 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Andrew Jeffery <andrew@aj.id.au>
-Subject: [meta-python][PATCH] python3-hexdump: Move cleanup_hexfile into install_append
-Date: Mon, 22 Mar 2021 15:22:09 -0700
-Message-Id: <20210322222209.3952420-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ dkim=pass header.i=@aj.id.au header.s=fm2 header.b=vmUOBO9J;
+ spf=pass (domain: aj.id.au, ip: 64.147.123.21, mailfrom: andrew@aj.id.au)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+	by mailout.west.internal (Postfix) with ESMTP id 090C38E1;
+	Mon, 22 Mar 2021 18:31:27 -0400 (EDT)
+Received: from imap2 ([10.202.2.52])
+  by compute3.internal (MEProxy); Mon, 22 Mar 2021 18:31:28 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aj.id.au; h=
+	mime-version:message-id:in-reply-to:references:date:from:to
+	:subject:content-type; s=fm2; bh=6qJmfmDR6hvbWW4+YOoXVW+jYOkZTwM
+	kgZHYjmXCye4=; b=vmUOBO9J8qzFt6+1kTU1zHkP2+YCBYZc3fSw+F/MzMkXfPt
+	nDknsGWEoTcIGds+4i+QjuO40CAPGHfAPeNGhvjmvKhALv0uvv33x4z+elJNPL5n
+	eqEzVwmK3cJ46jumksO2C4akYF8D0LXsG+Tct5WASeSRNiCr/WcUUFPBbYZJfI0J
+	hJMisoPftlZAWpn1qSXloKi6d7fBGV0yUIZb8Mb+cTy8BhTMRcBWJHC0IUOwDuH+
+	KvN6QgnKXFg6pwQmDC1gOEyl3tMQrqvQpyRRqQnflj9AIdHkvM1v6vQfQwcUimeo
+	FMmz2sTDYeWdz5mC5yyAosZt8jmOV680GMMpaPQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=6qJmfm
+	DR6hvbWW4+YOoXVW+jYOkZTwMkgZHYjmXCye4=; b=DuY37ORsJvZYOsF4aqaO4N
+	Dphe5DtViTs8SuzuAhUOK773w8FfNMc+KDr0/fV66RGkR7WaM18GoAGyYzNT0Xsa
+	RJUhXn0uDoHVjW/Lud0lHy8gFMqAMzFeV13VpNx5NcBjl3VYCWujm6kD0d0EsWRK
+	5zR6KCBICSeAykYZcHHVGMjKGlpdDdzk95xtGXqPHTHErpdQhS7xblJrfayP8DJy
+	/DI/RYubJbc3IYkkPjzj22mrXZGYbiCrwMBXQ6BGAeY/YAgo1lhgEhhKIIEjFp4Z
+	9Vv8lGT+GcyjRoaNiUOXdGMZMpAvTCinQKhjB+8qk6DBhtEIRvXbWlzQ71MxRDvQ
+	==
+X-ME-Sender: <xms:vhpZYHsH6C5zImpvOEZ3lDCLxCyZ5hE2gRe22qPulIBxeireTPtQIA>
+    <xme:vhpZYIfN3UbsaEtO1t1Uby_SKjpPbf9_paLwj-sIzBnwIXGubHeJJkUU32szMb6e5
+    4UqXwaZLX1Xsq7T6Q>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrudeggedgudeivdcutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+    enucfjughrpefofgggkfgjfhffhffvufgtsehttdertderreejnecuhfhrohhmpedftehn
+    ughrvgifucflvghffhgvrhihfdcuoegrnhgurhgvfiesrghjrdhiugdrrghuqeenucggtf
+    frrghtthgvrhhnpedutddtkeeugeegvddttdeukeeiuddtgfeuuddtfeeiueetfeeileet
+    tedvtdfhieenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhroh
+    hmpegrnhgurhgvfiesrghjrdhiugdrrghu
+X-ME-Proxy: <xmx:vhpZYKwk7PSVbVs_UEnIZnC0eJ_MpeM8WD9XhAm7pWU_11TqYPR9HQ>
+    <xmx:vhpZYGOR8azV3WaCCzasZoqf99JNz0zI7IaXiHt7FE20SojCikzM2A>
+    <xmx:vhpZYH-dAclVca8imfrvpF580HyuPd23oaGIUaXeEsSaKSLCcGWbDA>
+    <xmx:vxpZYEKKheL_cC1iO8MqWk8pn7ibGCm9ad24sSNzJET2O_m9s-KLhw>
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+	id D553CA00073; Mon, 22 Mar 2021 18:31:26 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.5.0-alpha0-271-g88286cf463-fm-20210318.001-g88286cf4
+Mime-Version: 1.0
+Message-Id: <63d1bd63-9190-44fe-9348-d8e66d928eab@www.fastmail.com>
+In-Reply-To: <20210322222209.3952420-1-raj.khem@gmail.com>
+References: <20210322222209.3952420-1-raj.khem@gmail.com>
+Date: Tue, 23 Mar 2021 09:01:06 +1030
+From: "Andrew Jeffery" <andrew@aj.id.au>
+To: "Khem Raj" <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-python][PATCH] python3-hexdump: Move cleanup_hexfile into install_append
+Content-Type: text/plain
 
-This fixes error seen during staging phase
-run.sysroot_stage_all.902827: line 182: cd: TOPDIR/build/tmpfs/work/core2-32-yoe-linux-musl/python3-hexdump/3.3-r0/image/usr/share: No such file or directory
 
-this happens because D is being altered outside pseudo's context, and
-alterning D is done after do_install ends so its likely going to race as
-well with subsequent functions and change pseudo context too
 
-Fixes occasionally seen build failures on autobuilders
+On Tue, 23 Mar 2021, at 08:52, Khem Raj wrote:
+> This fixes error seen during staging phase
+> run.sysroot_stage_all.902827: line 182: cd: 
+> TOPDIR/build/tmpfs/work/core2-32-yoe-linux-musl/python3-hexdump/3.3-r0/image/usr/share: No such file or directory
+> 
+> this happens because D is being altered outside pseudo's context, and
+> alterning D is done after do_install ends so its likely going to race as
+> well with subsequent functions and change pseudo context too
+> 
+> Fixes occasionally seen build failures on autobuilders
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Cc: Andrew Jeffery <andrew@aj.id.au>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andrew Jeffery <andrew@aj.id.au>
----
- meta-python/recipes-devtools/python/python3-hexdump_3.3.bb | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+Ah, interesting.
 
-diff --git a/meta-python/recipes-devtools/python/python3-hexdump_3.3.bb b/meta-python/recipes-devtools/python/python3-hexdump_3.3.bb
-index cb04e17dfd..5325048039 100644
---- a/meta-python/recipes-devtools/python/python3-hexdump_3.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-hexdump_3.3.bb
-@@ -19,9 +19,7 @@ S = "${WORKDIR}"
- 
- BBCLASSEXTEND = "native nativesdk"
- 
--do_cleanup_hexfile() {
-+do_install_append() {
-     rm ${D}${datadir}/data/hexfile.bin
-     rmdir ${D}${datadir}/data ${D}${datadir}
- }
--
--addtask cleanup_hexfile before do_package after do_install
--- 
-2.31.0
+Thanks Khem.
 
+Acked-by: Andrew Jeffery <andrew@aj.id.au>
