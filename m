@@ -1,82 +1,55 @@
-Received: from wout5-smtp.messagingengine.com (wout5-smtp.messagingengine.com [64.147.123.21])
- by mx.groups.io with SMTP id smtpd.web09.666.1616452291400267100
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by mx.groups.io with SMTP id smtpd.web11.3432.1616466291252311212
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Mar 2021 15:31:31 -0700
+ Mon, 22 Mar 2021 19:24:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@aj.id.au header.s=fm2 header.b=vmUOBO9J;
- spf=pass (domain: aj.id.au, ip: 64.147.123.21, mailfrom: andrew@aj.id.au)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
-	by mailout.west.internal (Postfix) with ESMTP id 090C38E1;
-	Mon, 22 Mar 2021 18:31:27 -0400 (EDT)
-Received: from imap2 ([10.202.2.52])
-  by compute3.internal (MEProxy); Mon, 22 Mar 2021 18:31:28 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aj.id.au; h=
-	mime-version:message-id:in-reply-to:references:date:from:to
-	:subject:content-type; s=fm2; bh=6qJmfmDR6hvbWW4+YOoXVW+jYOkZTwM
-	kgZHYjmXCye4=; b=vmUOBO9J8qzFt6+1kTU1zHkP2+YCBYZc3fSw+F/MzMkXfPt
-	nDknsGWEoTcIGds+4i+QjuO40CAPGHfAPeNGhvjmvKhALv0uvv33x4z+elJNPL5n
-	eqEzVwmK3cJ46jumksO2C4akYF8D0LXsG+Tct5WASeSRNiCr/WcUUFPBbYZJfI0J
-	hJMisoPftlZAWpn1qSXloKi6d7fBGV0yUIZb8Mb+cTy8BhTMRcBWJHC0IUOwDuH+
-	KvN6QgnKXFg6pwQmDC1gOEyl3tMQrqvQpyRRqQnflj9AIdHkvM1v6vQfQwcUimeo
-	FMmz2sTDYeWdz5mC5yyAosZt8jmOV680GMMpaPQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to:x-me-proxy
-	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=6qJmfm
-	DR6hvbWW4+YOoXVW+jYOkZTwMkgZHYjmXCye4=; b=DuY37ORsJvZYOsF4aqaO4N
-	Dphe5DtViTs8SuzuAhUOK773w8FfNMc+KDr0/fV66RGkR7WaM18GoAGyYzNT0Xsa
-	RJUhXn0uDoHVjW/Lud0lHy8gFMqAMzFeV13VpNx5NcBjl3VYCWujm6kD0d0EsWRK
-	5zR6KCBICSeAykYZcHHVGMjKGlpdDdzk95xtGXqPHTHErpdQhS7xblJrfayP8DJy
-	/DI/RYubJbc3IYkkPjzj22mrXZGYbiCrwMBXQ6BGAeY/YAgo1lhgEhhKIIEjFp4Z
-	9Vv8lGT+GcyjRoaNiUOXdGMZMpAvTCinQKhjB+8qk6DBhtEIRvXbWlzQ71MxRDvQ
-	==
-X-ME-Sender: <xms:vhpZYHsH6C5zImpvOEZ3lDCLxCyZ5hE2gRe22qPulIBxeireTPtQIA>
-    <xme:vhpZYIfN3UbsaEtO1t1Uby_SKjpPbf9_paLwj-sIzBnwIXGubHeJJkUU32szMb6e5
-    4UqXwaZLX1Xsq7T6Q>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrudeggedgudeivdcutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
-    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-    enucfjughrpefofgggkfgjfhffhffvufgtsehttdertderreejnecuhfhrohhmpedftehn
-    ughrvgifucflvghffhgvrhihfdcuoegrnhgurhgvfiesrghjrdhiugdrrghuqeenucggtf
-    frrghtthgvrhhnpedutddtkeeugeegvddttdeukeeiuddtgfeuuddtfeeiueetfeeileet
-    tedvtdfhieenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhroh
-    hmpegrnhgurhgvfiesrghjrdhiugdrrghu
-X-ME-Proxy: <xmx:vhpZYKwk7PSVbVs_UEnIZnC0eJ_MpeM8WD9XhAm7pWU_11TqYPR9HQ>
-    <xmx:vhpZYGOR8azV3WaCCzasZoqf99JNz0zI7IaXiHt7FE20SojCikzM2A>
-    <xmx:vhpZYH-dAclVca8imfrvpF580HyuPd23oaGIUaXeEsSaKSLCcGWbDA>
-    <xmx:vxpZYEKKheL_cC1iO8MqWk8pn7ibGCm9ad24sSNzJET2O_m9s-KLhw>
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
-	id D553CA00073; Mon, 22 Mar 2021 18:31:26 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.5.0-alpha0-271-g88286cf463-fm-20210318.001-g88286cf4
-Mime-Version: 1.0
-Message-Id: <63d1bd63-9190-44fe-9348-d8e66d928eab@www.fastmail.com>
-In-Reply-To: <20210322222209.3952420-1-raj.khem@gmail.com>
-References: <20210322222209.3952420-1-raj.khem@gmail.com>
-Date: Tue, 23 Mar 2021 09:01:06 +1030
-From: "Andrew Jeffery" <andrew@aj.id.au>
-To: "Khem Raj" <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-python][PATCH] python3-hexdump: Move cleanup_hexfile into install_append
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: changqing.li@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 12N2Ogba004956
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 22 Mar 2021 19:24:48 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2106.2; Mon, 22 Mar 2021 19:24:43 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2106.2 via Frontend Transport; Mon, 22 Mar 2021 19:24:42 -0700
+From: "Changqing Li" <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] openldap: upgrade 2.4.57 -> 2.4.58
+Date: Tue, 23 Mar 2021 10:24:41 +0800
+Message-ID: <20210323022441.5580-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
 Content-Type: text/plain
 
+From: Changqing Li <changqing.li@windriver.com>
 
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ .../openldap/{openldap_2.4.57.bb => openldap_2.4.58.bb}       | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/openldap/{openldap_2.4.57.bb => openldap_2.4.58.bb} (98%)
 
-On Tue, 23 Mar 2021, at 08:52, Khem Raj wrote:
-> This fixes error seen during staging phase
-> run.sysroot_stage_all.902827: line 182: cd: 
-> TOPDIR/build/tmpfs/work/core2-32-yoe-linux-musl/python3-hexdump/3.3-r0/image/usr/share: No such file or directory
-> 
-> this happens because D is being altered outside pseudo's context, and
-> alterning D is done after do_install ends so its likely going to race as
-> well with subsequent functions and change pseudo context too
-> 
-> Fixes occasionally seen build failures on autobuilders
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Cc: Andrew Jeffery <andrew@aj.id.au>
+diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.57.bb b/meta-oe/recipes-support/openldap/openldap_2.4.58.bb
+similarity index 98%
+rename from meta-oe/recipes-support/openldap/openldap_2.4.57.bb
+rename to meta-oe/recipes-support/openldap/openldap_2.4.58.bb
+index 7c0460067..c5274aa39 100644
+--- a/meta-oe/recipes-support/openldap/openldap_2.4.57.bb
++++ b/meta-oe/recipes-support/openldap/openldap_2.4.58.bb
+@@ -25,8 +25,8 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
+     file://remove-user-host-pwd-from-version.patch \
+ "
+ 
+-SRC_URI[md5sum] = "e3349456c3a66e5e6155be7ddc3f042c"
+-SRC_URI[sha256sum] = "c7ba47e1e6ecb5b436f3d43281df57abeffa99262141aec822628bc220f6b45a"
++SRC_URI[md5sum] = "c203d735ba69976e5b28dc39006f29b5"
++SRC_URI[sha256sum] = "57b59254be15d0bf6a9ab3d514c1c05777b02123291533134a87c94468f8f47b"
+ 
+ DEPENDS = "util-linux groff-native"
+ 
+-- 
+2.17.1
 
-Ah, interesting.
-
-Thanks Khem.
-
-Acked-by: Andrew Jeffery <andrew@aj.id.au>
