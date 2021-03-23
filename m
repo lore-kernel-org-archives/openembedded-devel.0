@@ -1,85 +1,92 @@
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.web09.51.1616519489150597888
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web09.868.1616533953715629544
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Mar 2021 10:11:29 -0700
+ Tue, 23 Mar 2021 14:12:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="unable to parse pub key" header.i=@blade-group.com header.s=google header.b=ZClFwS8B;
- spf=pass (domain: blade-group.com, ip: 209.85.128.54, mailfrom: yann.dirson@blade-group.com)
-Received: by mail-wm1-f54.google.com with SMTP id z6-20020a1c4c060000b029010f13694ba2so11250387wmf.5
-        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Mar 2021 10:11:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=KJNf615v;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id q6-20020a17090a4306b02900c42a012202so81108pjg.5
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Mar 2021 14:12:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=blade-group.com; s=google;
+        d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=nIAMy6Q9iaAKUf6Xebx98+PTlurbdVPp2a/jg5QY/VM=;
-        b=ZClFwS8BKDYFxIL3Y/0BgfHLc2GMYN+da18xIWdvfXyW/OSu35QzF3UkaI8NENL4KF
-         4Znaj0y/pxl4U1jxHL2Wr2bKuxPqsOsISAIiE0jGp9fcGF55SLAgBL8P+eoGjsKRVtPx
-         V+Zfx5kKd3PdMZYabtIMkOfBHPAbJCZmZ6UvAbZon+fm0JTPVYfxFAiFG10aqPW98FRU
-         6srE8wjMICyd9D0pJr+cwrtp6Sr/nel8cM4JU/bJ5grnD9GaTsceFWS0Z6Z6xmR2jiPm
-         AbqD4yckeftggBu3owCkkPtICq5N9knUwXkJrasaoCfT2OiEeboYa/mcvUNjpUWoq/Rp
-         qBOw==
+        bh=kyGyuMNOnM3i8egNST6Vf43mX8Pm6RZq7Qp6hWOif6g=;
+        b=KJNf615vttVfIy7LQIe/Y8rVtoHGT6yfCf4rkE2bu9bYNwNZmRlOHjiPtOUCAJ5c5L
+         Nt12KIE3N0fqGbikkWBqAhPbg6AeZsaeSxLB76TnOG5EOMjzR07lS8aYT4jTfcx90sRN
+         fQFHoITj5rmB9mMQUvvSGD7N94pV6ueWvyVHoUtRQ6l4af4tP40vArS0gfRBwM/yq8K4
+         DuiXhlKndlDcLfgwOvn3ryLaZHOkXEqgOdLJSf59rfMwe8A3JKJMmQlW+k1Abw5mkrU4
+         rMtzucauwpw0y4DKgHpr2nXqdJFX5uu9ejpSGEkYAXmHzkzNCjEsxfJALqCfXBSBkgoe
+         RiIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=nIAMy6Q9iaAKUf6Xebx98+PTlurbdVPp2a/jg5QY/VM=;
-        b=d8Fr+k6KIXD8tgU2+5GV2EhzIwlfNOCsclwxngh4z4Hs0U+Hxxz7OqsSIEq1gp9rTr
-         toHIdhXJOc27xUo6BNkDJn1N+9mUeopbnOCjNj6IAeaxLdVPWy2f7+IdCq8zyHJCeuxJ
-         B1VcS+TIuIs8NzV5dIaC0hA6jZgN8deqJdBX8dhi8heLfbqE0xQPPJsH1lvrRsrO4A1/
-         o3UgB0+qW2NJIhhsYt2YNUw/1OzJMFlsiq+ABCaNwb8r6p9OtL2jUyHunBOfo1ogd+Mn
-         L7FdiEJsg8rYPzF2rNoB1CdAO7P4hEotDeEsG2JSwkb6k9mpdRj8h79ObOCFbXTMre/s
-         PeRQ==
-X-Gm-Message-State: AOAM5316anmZQyUXRTktU3bS9VQd+oJ2qk9qzXC6TgtZfaZQwOVCPoFk
-	MVmv3qEi9RyD/42NrwzlYjRHl+tLiXFxIQ==
-X-Google-Smtp-Source: ABdhPJwfbs/ofJ3B/OoxYGpqvheDmPjfSftRaVQb/RUm4cDrzkb9YeoseAMPWezcC7s4m6v0cPckRQ==
-X-Received: by 2002:a05:600c:252:: with SMTP id 18mr4206757wmj.67.1616519487576;
-        Tue, 23 Mar 2021 10:11:27 -0700 (PDT)
-Return-Path: <yann.dirson@blade-group.com>
-Received: from blanquette.lan ([88.120.44.86])
-        by smtp.gmail.com with ESMTPSA id s9sm3517805wmh.31.2021.03.23.10.11.26
+        bh=kyGyuMNOnM3i8egNST6Vf43mX8Pm6RZq7Qp6hWOif6g=;
+        b=ICx/f0xas9czJih3zg2LoXqqaKBfgDZdGgFwZjz6SuBQ6l5n3cvKnhjfS+7kB3p6mZ
+         45rgB3svb7mdTqhZPTDYqjkN3trGZfO33F4zP3d6A0aosuFZOqaLFCvOEiNse2CyCREv
+         Xekf9Gki0H5FGxV3EoHr1nT/CoBgswKKEbBUrEqRayWhLLPiqoB6+6tPaWx/jukiBqAI
+         mVSVUb3zw+rUg+L8SwcBmO+DaZmr62Wn8FfVPbFIyJubUMXEYFfvbgotOiM4gvr1wN5F
+         ThcSxS2+pw9OYnhWjzcy77epJNyDpv8Ec3ltTC0+sl1ysff4/JpObgZdQDX2CASd9SuB
+         oi9Q==
+X-Gm-Message-State: AOAM533Sy6mVmR5aeh9WPX07UBFtXClw0p/gYTQx/CdDHlvlUkwewk35
+	7s0GA5HfmfplmY7KG8lpa0FU5mWNS4UtPQ==
+X-Google-Smtp-Source: ABdhPJzxofXIEAKpertig9fbiCBDwV/9HY/S44jTZAsMLbURnfssgbQjannr4RA/OwQLEi8yqBCGYA==
+X-Received: by 2002:a17:90a:4d81:: with SMTP id m1mr52800pjh.143.1616533952883;
+        Tue, 23 Mar 2021 14:12:32 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::4578])
+        by smtp.gmail.com with ESMTPSA id i13sm128228pgi.3.2021.03.23.14.12.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Mar 2021 10:11:26 -0700 (PDT)
-From: "Yann Dirson" <yann.dirson@blade-group.com>
-X-Google-Original-From: yann@blade-group.com
+        Tue, 23 Mar 2021 14:12:32 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yann Dirson <yann@blade-group.com>
-Subject: [meta-oe][patch] mpv: remove explicit LICENSE_FLAGS
-Date: Tue, 23 Mar 2021 18:11:07 +0100
-Message-Id: <20210323171107.812146-1-yann@blade-group.com>
-X-Mailer: git-send-email 2.30.2
+Cc: Peace Lee <iipeace5@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] guider: Upgrade 3.9.7 -> 3.9.8
+Date: Tue, 23 Mar 2021 14:12:30 -0700
+Message-Id: <20210323211230.1639990-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.31.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Yann Dirson <yann@blade-group.com>
+From: Peace Lee <iipeace5@gmail.com>
 
-This flag does not describe the mpv package, but ffmpeg instead.
-It gets in the way of using finer-grained LICENSE_FLAGS in ffmpeg.
+Upgrade to release 3.9.8
 
-It is above all not needed, the real problem is even more clear without it:
-
- ffmpeg was skipped: because it has a restricted license 'commercial'. Which is not whitelisted i  LICENSE_FLAGS_WHITELIST
- ERROR: Required build target 'mpv' has no buildable providers.
- Missing or unbuildable dependency chain was: ['mpv', 'ffmpeg']
-
-Signed-off-by: Yann Dirson <yann@blade-group.com>
+Signed-off-by: Peace Lee <iipeace5@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb | 3 ---
- 1 file changed, 3 deletions(-)
+ .../guider/{guider_3.9.7.bb => guider_3.9.8.bb}             | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-devtools/guider/{guider_3.9.7.bb => guider_3.9.8.bb} (78%)
 
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb
-index e04925d0f..6a3fd9715 100644
---- a/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb
-+++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb
-@@ -12,9 +12,6 @@ DEPENDS += " \
+diff --git a/meta-oe/recipes-devtools/guider/guider_3.9.7.bb b/meta-oe/recipes-devtools/guider/guider_3.9.8.bb
+similarity index 78%
+rename from meta-oe/recipes-devtools/guider/guider_3.9.7.bb
+rename to meta-oe/recipes-devtools/guider/guider_3.9.8.bb
+index 88fad936ba..91693d8626 100644
+--- a/meta-oe/recipes-devtools/guider/guider_3.9.7.bb
++++ b/meta-oe/recipes-devtools/guider/guider_3.9.8.bb
+@@ -1,4 +1,4 @@
+-SUMMARY = "runtime performance analyzer"
++SUMMARY = "performance analyzer"
+ HOMEPAGE = "https://github.com/iipeace/guider"
+ BUGTRACKER = "https://github.com/iipeace/guider/issues"
+ AUTHOR = "Peace Lee <ipeace5@gmail.com>"
+@@ -6,10 +6,10 @@ AUTHOR = "Peace Lee <ipeace5@gmail.com>"
  LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=91f1cb870c1cc2d31351a4d2595441cb"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=2c1c00f9d3ed9e24fa69b932b7e7aff2"
  
--# While this item does not require it, it depends on ffmpeg which does
--LICENSE_FLAGS = "commercial"
--
- SRCREV_mpv = "70b991749df389bcc0a4e145b5687233a03b4ed7"
- SRC_URI = " \
-     git://github.com/mpv-player/mpv;name=mpv \
+-PV = "3.9.7+git${SRCPV}"
++PV = "3.9.8+git${SRCPV}"
+ 
+ SRC_URI = "git://github.com/iipeace/${BPN}"
+-SRCREV = "459b5189a46023fc98e19888b196bdc2674022fd"
++SRCREV = "f2e6d84ffa341728daf0cc2ba2736d58008ea9f1"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.30.2
+2.31.0
 
