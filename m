@@ -1,131 +1,85 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.220.1616517238883114037
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.web09.51.1616519489150597888
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Mar 2021 09:33:59 -0700
+ Tue, 23 Mar 2021 10:11:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=60894 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lOjya-0000KS-4r; Tue, 23 Mar 2021 18:33:56 +0200
-From: "Leon Anavi" <leon.anavi@konsulko.com>
+ dkim=fail reason="unable to parse pub key" header.i=@blade-group.com header.s=google header.b=ZClFwS8B;
+ spf=pass (domain: blade-group.com, ip: 209.85.128.54, mailfrom: yann.dirson@blade-group.com)
+Received: by mail-wm1-f54.google.com with SMTP id z6-20020a1c4c060000b029010f13694ba2so11250387wmf.5
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Mar 2021 10:11:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=blade-group.com; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=nIAMy6Q9iaAKUf6Xebx98+PTlurbdVPp2a/jg5QY/VM=;
+        b=ZClFwS8BKDYFxIL3Y/0BgfHLc2GMYN+da18xIWdvfXyW/OSu35QzF3UkaI8NENL4KF
+         4Znaj0y/pxl4U1jxHL2Wr2bKuxPqsOsISAIiE0jGp9fcGF55SLAgBL8P+eoGjsKRVtPx
+         V+Zfx5kKd3PdMZYabtIMkOfBHPAbJCZmZ6UvAbZon+fm0JTPVYfxFAiFG10aqPW98FRU
+         6srE8wjMICyd9D0pJr+cwrtp6Sr/nel8cM4JU/bJ5grnD9GaTsceFWS0Z6Z6xmR2jiPm
+         AbqD4yckeftggBu3owCkkPtICq5N9knUwXkJrasaoCfT2OiEeboYa/mcvUNjpUWoq/Rp
+         qBOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=nIAMy6Q9iaAKUf6Xebx98+PTlurbdVPp2a/jg5QY/VM=;
+        b=d8Fr+k6KIXD8tgU2+5GV2EhzIwlfNOCsclwxngh4z4Hs0U+Hxxz7OqsSIEq1gp9rTr
+         toHIdhXJOc27xUo6BNkDJn1N+9mUeopbnOCjNj6IAeaxLdVPWy2f7+IdCq8zyHJCeuxJ
+         B1VcS+TIuIs8NzV5dIaC0hA6jZgN8deqJdBX8dhi8heLfbqE0xQPPJsH1lvrRsrO4A1/
+         o3UgB0+qW2NJIhhsYt2YNUw/1OzJMFlsiq+ABCaNwb8r6p9OtL2jUyHunBOfo1ogd+Mn
+         L7FdiEJsg8rYPzF2rNoB1CdAO7P4hEotDeEsG2JSwkb6k9mpdRj8h79ObOCFbXTMre/s
+         PeRQ==
+X-Gm-Message-State: AOAM5316anmZQyUXRTktU3bS9VQd+oJ2qk9qzXC6TgtZfaZQwOVCPoFk
+	MVmv3qEi9RyD/42NrwzlYjRHl+tLiXFxIQ==
+X-Google-Smtp-Source: ABdhPJwfbs/ofJ3B/OoxYGpqvheDmPjfSftRaVQb/RUm4cDrzkb9YeoseAMPWezcC7s4m6v0cPckRQ==
+X-Received: by 2002:a05:600c:252:: with SMTP id 18mr4206757wmj.67.1616519487576;
+        Tue, 23 Mar 2021 10:11:27 -0700 (PDT)
+Return-Path: <yann.dirson@blade-group.com>
+Received: from blanquette.lan ([88.120.44.86])
+        by smtp.gmail.com with ESMTPSA id s9sm3517805wmh.31.2021.03.23.10.11.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 23 Mar 2021 10:11:26 -0700 (PDT)
+From: "Yann Dirson" <yann.dirson@blade-group.com>
+X-Google-Original-From: yann@blade-group.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 10/10] python3-sqlalchemy: Upgrade 1.3.23 -> 1.4.2
-Date: Tue, 23 Mar 2021 18:33:17 +0200
-Message-Id: <20210323163317.26664-10-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210323163317.26664-1-leon.anavi@konsulko.com>
-References: <20210323163317.26664-1-leon.anavi@konsulko.com>
+Cc: Yann Dirson <yann@blade-group.com>
+Subject: [meta-oe][patch] mpv: remove explicit LICENSE_FLAGS
+Date: Tue, 23 Mar 2021 18:11:07 +0100
+Message-Id: <20210323171107.812146-1-yann@blade-group.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Upgrade to release 1.4.2:
+From: Yann Dirson <yann@blade-group.com>
 
-orm:
+This flag does not describe the mpv package, but ffmpeg instead.
+It gets in the way of using finer-grained LICENSE_FLAGS in ffmpeg.
 
-- Added support for the declared_attr object to work in the
-  context of dataclass fields.
-- Fixed issue in new ORM dataclasses functionality where
-  dataclass fields on an abstract base or mixin that contained
-  column or other mapping constructs would not be mapped if they
-  also included a “default” key within the dataclasses.field()
-  object.
-- Fixed regression where the Query.selectable accessor, which
-  is a synonym for Query.__clause_element__(), got removed, it's
-  now restored.
-- Fixed regression where use of an unnamed SQL expression
-  such as a SQL function would raise a column targeting error if
-  the query itself were using joinedload for an entity and was
-  also being wrapped in a subquery by the joinedload eager
-  loading process.
-- Fixed regression where the Query.filter_by() method would
-  fail to locate the correct source entity if the Query.join()
-  method had been used targeting an entity without any kind of
-  ON clause.
-- Fixed regression where the SQL compilation of a Function would
-  not work correctly if the object had been "annotated", which is
-  an internal memoization process used mostly by the ORM. In
-  particular it could affect ORM lazy loads which make greater use
-  of this feature in 1.4.
-- Fixed regression where the ConcreteBase would fail to map at all
-  when a mapped column name overlapped with the discriminator
-  column name, producing an assertion error. The use case here did
-  not function correctly in 1.3 as the polymorphic union would
-  produce a query that ignored the discriminator column entirely,
-  while emitting duplicate column warnings. As 1.4's architecture
-  cannot easily reproduce this essentially broken behavior of 1.3
-  at the select() level right now, the use case now raises an
-  informative error message instructing the user to use the
-  .ConcreteBase._concrete_discriminator_name attribute to resolve
-  the conflict. To assist with this configuration,
-  .ConcreteBase._concrete_discriminator_name may be placed on the
-  base class only where it will be automatically used by
-  subclasses; previously this was not the case.
+It is above all not needed, the real problem is even more clear without it:
 
-engine:
+ ffmpeg was skipped: because it has a restricted license 'commercial'. Which is not whitelisted i  LICENSE_FLAGS_WHITELIST
+ ERROR: Required build target 'mpv' has no buildable providers.
+ Missing or unbuildable dependency chain was: ['mpv', 'ffmpeg']
 
-- Restored top level import for sqlalchemy.engine.reflection. This
-  ensures that the base Inspector class is properly registered so
-  that inspect() works for third party dialects that don't
-  otherwise import this package.
-
-sql:
-
-- Fixed issue where using a func that includes dotted packagenames
-  would fail to be cacheable by the SQL caching system due to a
-  Python list of names that needed to be a tuple.
-- Fixed regression in the case() construct, where the "dictionary"
-  form of argument specification failed to work correctly if it
-  were passed positionally, rather than as a "whens" keyword
-  argument.
-
-mypy:
-
-- Fixed issue in MyPy extension which crashed on detecting the
-  type of a Column if the type were given with a module prefix
-  like sa.Integer().
-
-postgresql:
-
-- Rename the column name used by a reflection query that used a
-  reserved word in some postgresql compatible databases.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Yann Dirson <yann@blade-group.com>
 ---
- ...python3-sqlalchemy_1.3.23.bb => python3-sqlalchemy_1.4.2.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-sqlalchemy_1.3.23.bb => python3-sqlalchemy_1.4.2.bb} (85%)
+ meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.23.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.2.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.23.bb
-rename to meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.2.bb
-index d962ea7d9..00ab6cc77 100644
---- a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.3.23.bb
-+++ b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.2.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.sqlalchemy.org/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3359ed561ac16aaa25b6c6eff84df595"
+diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb
+index e04925d0f..6a3fd9715 100644
+--- a/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb
++++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb
+@@ -12,9 +12,6 @@ DEPENDS += " \
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=91f1cb870c1cc2d31351a4d2595441cb"
  
--SRC_URI[sha256sum] = "6fca33672578666f657c131552c4ef8979c1606e494f78cd5199742dfb26918b"
-+SRC_URI[sha256sum] = "6a8e4c2e65028933a6dc8643c8f5a4f295a367131195b3c708634925cb3e8ec1"
- 
- PYPI_PACKAGE = "SQLAlchemy"
- inherit pypi setuptools3
+-# While this item does not require it, it depends on ffmpeg which does
+-LICENSE_FLAGS = "commercial"
+-
+ SRCREV_mpv = "70b991749df389bcc0a4e145b5687233a03b4ed7"
+ SRC_URI = " \
+     git://github.com/mpv-player/mpv;name=mpv \
 -- 
-2.17.1
+2.30.2
 
