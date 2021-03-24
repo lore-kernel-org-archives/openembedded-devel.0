@@ -1,137 +1,119 @@
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web12.4009.1616582795227363028
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.4832.1616587779978191607
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Mar 2021 03:46:35 -0700
+ Wed, 24 Mar 2021 05:09:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Dh2ZatlI;
- spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f51.google.com with SMTP id u9so32042382ejj.7
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Mar 2021 03:46:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=aXKWQwvZmLD0CXQAYDWoZjbmEoNgNG9V3xOpUgB64Uc=;
-        b=Dh2ZatlIN5KP2o/9mYaMZJHVSWqz29pDaEk1bObUcjwzzw0U0yzV5qlJKXB8moVMxI
-         B4YbKC16iFKItKLwVQMk/5pMTqGMcX6SKDxnOKvE0TTmilq6WTRZziZwXKphFwkWeAEw
-         w1BD+9O0BiZvR+AsgJDZzCU0Wa1t+QtFkiSJGKCOO9mT8tPdbaZ4hyAFiRwiUfyrIFuU
-         +2NyU1jIINw/jVMLzaTbLJcK9KX8JBaM7M4HHF1JLrI/b3tI2PGig72jPW8HDGl26oG8
-         qzVdRdz51rDeJ+dYW5mUq6FN+k8LbJKHRh1YoJDqdmVXryRucSjOFxBJPAB3FPyVkQGb
-         fQNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=aXKWQwvZmLD0CXQAYDWoZjbmEoNgNG9V3xOpUgB64Uc=;
-        b=X3Zfr4WBHxZzEsNLab1y24GTgtGNj5QVsEHCyQQ0feyCSgRAsDyq6Em6Jh5190CoQP
-         yU5rtfYUP0z476Tf0dJRcjqZN6W22G6oVejP/XfSnsvY5+AW1L/so9pewKA1lSVlyga3
-         OtJQjgkg7d+Ek8Sln71J3qkqApjogJGO48GgmhEVFWktweoow9r8swabED0UWwIYO5K8
-         SGa7odj7gCwNMvZS4zdKxXtLG2jW5ESsIeMugR6H5T0TQXqtD8iTHYLweFmiKFhp8/dr
-         iuKKkK8MupWScVvKHFymsJVUNU5CKPjHH4TIKDLBjCcxX+UovGf787vVXaluCYqh94cs
-         /cGw==
-X-Gm-Message-State: AOAM531BlTHTye5GkaGum5MaKa5YkbFB5BXWJcdiF86tGzSEfR4vZcuS
-	etJu3p1gzziv228NI762+o02GYP5w0w=
-X-Google-Smtp-Source: ABdhPJxrx5AYXI2TqBtIbO9bcnrErOC1wN7fdHo8vOxs+irEk8+g5nc4TNjAVgajf6w2VCpDRaXJ0g==
-X-Received: by 2002:a17:906:5d12:: with SMTP id g18mr2900492ejt.246.1616582793419;
-        Wed, 24 Mar 2021 03:46:33 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id a22sm724813ejr.89.2021.03.24.03.46.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Mar 2021 03:46:32 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=49130 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1lP2KO-0006zK-Pm; Wed, 24 Mar 2021 14:09:37 +0200
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peace Lee <iipeace5@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [dunfell][PATCH] guider: Upgrade to 3.9.7
-Date: Wed, 24 Mar 2021 11:46:29 +0100
-Message-Id: <20210324104629.3484418-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.30.2
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCHv2] python3-scrypt: Upgrade 0.8.6 -> 0.8.17
+Date: Wed, 24 Mar 2021 14:09:30 +0200
+Message-Id: <20210324120930.24792-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-From: Peace Lee <iipeace5@gmail.com>
+Upgrade to release 0.8.17 and inherit dos2unix to resolve issues
+due to different line endings:
 
-Signed-off-by: Peace Lee <iipeace5@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+- Add_dll_directory for python 3.8 on windows, as
+  importlib.util.find_spec does not search all paths anymore
+- Add additional test vector from RFC
+- Fix missing import
+- Fix imp deprecation warning
+- Improve build for conda forge
+- Add SCRYPT_WINDOWS_LINK_LEGACY_OPENSSL environment variable,
+  when set, openssl 1.0.2 is linked
+- Fix build for conda feedstock
+- Fix typo
+- Use the static libcrypto_static for windows and openssl 1.1.1
+- Setup.py for windows improved, works with openssl 1.0.2 and 1.1.1
+- Setup.py for windows fixed
+
+License-Update: Update years
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/guider/guider_3.9.6.bb   | 39 -------------------
- .../recipes-devtools/guider/guider_3.9.7.bb   | 19 +++++++++
- 2 files changed, 19 insertions(+), 39 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/guider/guider_3.9.6.bb
- create mode 100644 meta-oe/recipes-devtools/guider/guider_3.9.7.bb
+ .../python/python3-scrypt_0.8.17.bb           | 23 ++++++++++++++++++
+ .../python/python3-scrypt_0.8.6.bb            | 24 -------------------
+ 2 files changed, 23 insertions(+), 24 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-scrypt_0.8.17.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-scrypt_0.8.6.bb
 
-diff --git a/meta-oe/recipes-devtools/guider/guider_3.9.6.bb b/meta-oe/recipes-devtools/guider/guider_3.9.6.bb
-deleted file mode 100644
-index f059002161..0000000000
---- a/meta-oe/recipes-devtools/guider/guider_3.9.6.bb
-+++ /dev/null
-@@ -1,39 +0,0 @@
--SUMMARY = "runtime performance analyzer"
--HOMEPAGE = "https://github.com/iipeace/guider"
--BUGTRACKER = "https://github.com/iipeace/guider/issues"
--AUTHOR = "Peace Lee <ipeace5@gmail.com>"
--
--LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=2c1c00f9d3ed9e24fa69b932b7e7aff2"
--
--PV = "3.9.6+git${SRCPV}"
--PR = "r0"
--
--SRC_URI = "git://github.com/iipeace/${BPN}"
--#SRCREV = "${AUTOREV}"
--SRCREV = "fef25c41efb9bde0614ea477d0b90bd9565ae0b4"
--
--S = "${WORKDIR}/git"
--R = "${RECIPE_SYSROOT}"
--
--inherit ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "distutils", "", d)}
--
--GUIDER_OBJ = "guider.pyc"
--GUIDER_SCRIPT = "guider"
--
--do_install() {
--    python ${S}/setup.py install
--
--    install -d ${D}${bindir}
--    install -v -m 0755 ${STAGING_BINDIR_NATIVE}/${GUIDER_SCRIPT} ${D}${bindir}/${GUIDER_SCRIPT}
--
--    install -d ${D}${datadir}/${BPN}
--    install -v -m 0755 ${STAGING_LIBDIR_NATIVE}/python${PYTHON_BASEVERSION}/site-packages/${BPN}/${GUIDER_OBJ} ${D}${datadir}/${BPN}/${GUIDER_OBJ}
--}
--
--RDEPENDS_${PN} = "python-ctypes python-shell \
--                  python-json python-subprocess"
--python() {
--    if 'meta-python2' not in d.getVar('BBFILE_COLLECTIONS').split():
--        raise bb.parse.SkipRecipe('Requires meta-python2 to be present.')
--}
-diff --git a/meta-oe/recipes-devtools/guider/guider_3.9.7.bb b/meta-oe/recipes-devtools/guider/guider_3.9.7.bb
+diff --git a/meta-python/recipes-devtools/python/python3-scrypt_0.8.17.bb b/meta-python/recipes-devtools/python/python3-scrypt_0.8.17.bb
 new file mode 100644
-index 0000000000..2b799fd5e4
+index 000000000..bcd58914a
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/guider/guider_3.9.7.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "runtime performance analyzer"
-+HOMEPAGE = "https://github.com/iipeace/guider"
-+BUGTRACKER = "https://github.com/iipeace/guider/issues"
-+AUTHOR = "Peace Lee <ipeace5@gmail.com>"
++++ b/meta-python/recipes-devtools/python/python3-scrypt_0.8.17.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION = "Bindings for the scrypt key derivation function library"
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=2ddf47d0ff1849bce3257ccbc1fd275c"
++HOMEPAGE="https://github.com/holgern/py-scrypt"
 +
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=2c1c00f9d3ed9e24fa69b932b7e7aff2"
++SRC_URI += "file://0001-py-scrypt-remove-the-hard-coded-include-paths.patch"
 +
-+PV = "3.9.7+git${SRCPV}"
++SRC_URI[sha256sum] = "25b5075f2238be93af1cd574540a5ea01b8547f9b678aa72d22fce22577475ec"
 +
-+SRC_URI = "git://github.com/iipeace/${BPN}"
-+SRCREV = "c87269d6d4669d12c99a2a7b9b07c39a5dd24ac6"
++inherit pypi ptest setuptools3 dos2unix
 +
-+S = "${WORKDIR}/git"
++SRC_URI += " \
++    file://run-ptest \
++"
 +
-+inherit setuptools3
++RDEPENDS_${PN}-ptest += " \
++    ${PYTHON_PN}-pytest \
++"
 +
-+RDEPENDS_${PN} = "python3 python3-core \
-+        python3-ctypes python3-shell python3-json"
++do_install_ptest() {
++    install -d ${D}${PTEST_PATH}/tests
++    cp -rf ${S}/scrypt/tests/* ${D}${PTEST_PATH}/tests/
++}
+diff --git a/meta-python/recipes-devtools/python/python3-scrypt_0.8.6.bb b/meta-python/recipes-devtools/python/python3-scrypt_0.8.6.bb
+deleted file mode 100644
+index 7588fc54b..000000000
+--- a/meta-python/recipes-devtools/python/python3-scrypt_0.8.6.bb
++++ /dev/null
+@@ -1,24 +0,0 @@
+-DESCRIPTION = "Bindings for the scrypt key derivation function library"
+-LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=168ff75417f75a83e63c8875292d44dc"
+-HOMEPAGE="https://bitbucket.org/mhallin/py-scrypt/overview"
+-
+-SRC_URI += "file://0001-py-scrypt-remove-the-hard-coded-include-paths.patch"
+-
+-SRC_URI[md5sum] = "ae8e3263aa31b040c1f9c7f1e1843a56"
+-SRC_URI[sha256sum] = "f8239b2d47fa1d40bc27efd231dc7083695d10c1c2ac51a99380360741e0362d"
+-
+-inherit pypi ptest setuptools3
+-
+-SRC_URI += " \
+-    file://run-ptest \
+-"
+-
+-RDEPENDS_${PN}-ptest += " \
+-    ${PYTHON_PN}-pytest \
+-"
+-
+-do_install_ptest() {
+-    install -d ${D}${PTEST_PATH}/tests
+-    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+-}
 -- 
-2.30.2
+2.17.1
 
