@@ -1,190 +1,96 @@
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web08.1216.1616604448127932769
+Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
+ by mx.groups.io with SMTP id smtpd.web09.1237.1616604473089821146
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Mar 2021 09:47:28 -0700
+ Wed, 24 Mar 2021 09:47:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=u61+FLIg;
- spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f51.google.com with SMTP id kt15so24539093ejb.12
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Mar 2021 09:47:27 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=OS6aOs0W;
+ spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f41.google.com with SMTP id e7so28336263edu.10
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Mar 2021 09:47:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=cEcDbo12CuFggOz7Ktsjd+O5lowhWNAZga36JOmoZko=;
-        b=u61+FLIgecWy/IyRM+7mj/+uPxc585fYkZdYd7OT2c4ms0r0EJYZIzi3evWUVlJ+4P
-         goDLNnPRhsGr8w40zIeonWl3bbIBwy0FBJPHZc+up500y5ONSV+okKjZrX0EY76deVDa
-         DbvwAjIxmMsvksVpFogh8oDEiL2cQygYVEa/OTNYqNKl1tthg6oRa/8qz9Bha/C9AgC+
-         RTbkXBYWSd/iqlI+K8M4mO8kHcQbo81oY5mBLrGiawgPwhBXh3IsBzttw3ZhNgVz+L5H
-         Dmufi8UFVASQoJRxSt/QW7n0CNuZr4OEBCeE34vDh1RQ1nCjThHUf1T7K5x0iJn4JBSD
-         3BUA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=3XT02vPkF2dJJYR9456o0vJVEZvJpBQLYzCFbk+Xj8o=;
+        b=OS6aOs0W2UNr6ZyRfZ0+B1MPytXX6rVF9BvZKWLCw8Q0Pi14dBxv1/8f07efM6v/IE
+         XZ6B7tVsNhLJu2RvBz2Hno50PJnWBF/5V9OUrM94vYFHY50Oh3NDNoMl2UmMtyLWm5CU
+         a5fdIVqGKlgDBs5pZKH3ct+5nue8laQ6E2R8DooBvjbnk6rnruFDPANjTW+es1pc3WkO
+         pwavSH3szKdt5mdJTopAuo6bjiOzIkcaN/IyAStiURF43DvbPdBQAsZ/JtoIFj8DVvDQ
+         Ln1peHDxUBhherHmvbxQ2Jr6FRyGGk96wG9kYPPpzNqmEAf12Lb2SuEjpRSZwd8Fucn3
+         WIpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=cEcDbo12CuFggOz7Ktsjd+O5lowhWNAZga36JOmoZko=;
-        b=T0NNX5mHh+pykgw2gZaQE8XQRgeCE2wAXL6J+yyJPdKwP9518n1Iv2BApzoZ6+6Jej
-         x/CcdlJrN0xCy0QOgqZfdom7xskb/95Ru51hLSwkvgGEjJo1S2HH5H2fSYwlbSx85zFF
-         zHhYAcHYD1J2+5gVJa2i5DBJzb2vdx2DJp3xozX4t8om6I0z3YXgB9NJgrDBDOzZ9p23
-         P0YouJwwVihGKvM5sY5aPSF6Z44o2e0xqyE8DZHQEDzrNAaV2xIrK8jH2C4qfdigp+In
-         M/bx07UKE/HH1iE274CPJ3iLEuETvQpxCMas+8L6xeDTEbjOXmXEFYeueBsfVeWMC+H/
-         +2+Q==
-X-Gm-Message-State: AOAM5302eH/CwpGgoHk4yskztAyKEzSycEHF6BTsY7ikJgpPLevgPSWk
-	OOJqG3Ovn0uCD1rVOIHyTvWvKlbuMCY=
-X-Google-Smtp-Source: ABdhPJy0vOO4LO2SeXdoW3v+tIjFvtI5+jJuF2/PuuzLaYre8XT6FvaOJH2+DA5tJVJQPrb19UlqXA==
-X-Received: by 2002:a17:906:9386:: with SMTP id l6mr4616985ejx.455.1616604446578;
-        Wed, 24 Mar 2021 09:47:26 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=3XT02vPkF2dJJYR9456o0vJVEZvJpBQLYzCFbk+Xj8o=;
+        b=E7QzMfFyrH5COPR+EPHcTgiZZHYsGdbLzJ3DjF1E8NwDvZ3y48eplPnGTknWgRi4mm
+         gtCwnI6IWBDDgcf0wdblPxfET5upuhxrbCYrT6vw0+orVR9kXs16GvmNsUb68ewYg0J+
+         mx+pINtJceYMelYDeqHE2PRyHO/FjNrhuVEc+353vkBwojoiM5EsabR/2JhG2J43NpBr
+         OJVQtGKTN0Jncz28FKF6xn8eN1hRHC/QtnxVZHnVtIUJgHjHdcZx88GzwOnk/7bFzt09
+         wcO545sS2H0KYD6vlDf+XQ/oHYwqlSoM6StgP0nrwirhpm2smAEcvoanfqfoEHJ4K9xc
+         PNIg==
+X-Gm-Message-State: AOAM530Ftr522TKv+2GHYlL8LfAi3Rtya/1AlNdMeghTXJ3ioUa4I+nx
+	IjrhWB5wSmH3xP1H3sbj6kbCzGnnZjs=
+X-Google-Smtp-Source: ABdhPJy+RgIlPqqxAt4iQR3glFX/EYxBEHfUapEGZxHsWaWG+OdYuee2IOz+GKOC2ghPR1eTr/utCQ==
+X-Received: by 2002:a05:6402:170f:: with SMTP id y15mr4441049edu.127.1616604471510;
+        Wed, 24 Mar 2021 09:47:51 -0700 (PDT)
 Return-Path: <martin.jansa@gmail.com>
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id r5sm1422567eds.49.2021.03.24.09.47.26
+        by smtp.gmail.com with ESMTPSA id m9sm1188987ejo.65.2021.03.24.09.47.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Mar 2021 09:47:26 -0700 (PDT)
+        Wed, 24 Mar 2021 09:47:51 -0700 (PDT)
 From: "Martin Jansa" <Martin.Jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][gatesgarth][PATCH 3/3] packagegroup-meta-oe: move the packages depending on meta-python2 to separate packages
-Date: Wed, 24 Mar 2021 17:47:22 +0100
-Message-Id: <20210324164722.390705-3-Martin.Jansa@gmail.com>
+Subject: [meta-oe][dunfell][PATCH 1/4] ceres-solver: prevent fetching git hook during do_configure
+Date: Wed, 24 Mar 2021 17:47:46 +0100
+Message-Id: <20210324164749.390872-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210324164722.390705-1-Martin.Jansa@gmail.com>
-References: <20210324164722.390705-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+* today I've found 2 jenkins jobs stuck way too long sitting in this do_configure
+  Bitbake still alive (5000s)
+  Bitbake still alive (10000s)
+  Bitbake still alive (15000s)
+  Bitbake still alive (20000s)
+  Bitbake still alive (25000s)
+  Bitbake still alive (30000s)
+  ... manually killed, the CMake ...
+  ERROR: ceres-solver-1.14.0-r0 do_configure: Execution of 'ceres-solver/1.14.0-r0/temp/run.do_configure.39438' failed with exit code 143:
+  ...
+  | -- Detected Ceres being used as a git submodule, adding commit hook for Gerrit to: ceres-solver/1.14.0-r0/git/.git
+  | ceres-solver/1.14.0-r0/temp/run.do_configure.39438: line 213: 39485 Terminated              cmake -G 'Ninja' -DCMAKE_MAKE_PROGRAM=ninja ...
+
+  I've seen it with dunfell and gatesgarth, but master has the same
+  ADD_GERRIT_COMMIT_HOOK function (just in newer ceres-solver release),
+  so probably needs the same.
+
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../packagegroups/packagegroup-meta-oe.bb     | 29 ++++++++++++++++---
- 1 file changed, 25 insertions(+), 4 deletions(-)
+ .../recipes-support/ceres-solver/ceres-solver_1.14.0.bb   | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index e252c0850b..1921884a69 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -8,12 +8,15 @@ PACKAGES = "\
-     packagegroup-meta-oe \
-     packagegroup-meta-oe-benchmarks \
-     packagegroup-meta-oe-connectivity \
-+    packagegroup-meta-oe-connectivity-python2 \
-     packagegroup-meta-oe-core \
-     packagegroup-meta-oe-crypto \
-     packagegroup-meta-oe-bsp \
-     packagegroup-meta-oe-dbs \
-+    packagegroup-meta-oe-dbs-python2 \
-     packagegroup-meta-oe-devtools \
-     packagegroup-meta-oe-extended \
-+    packagegroup-meta-oe-extended-python2 \
-     packagegroup-meta-oe-kernel \
-     packagegroup-meta-oe-multimedia \
-     packagegroup-meta-oe-navigation \
-@@ -21,6 +24,7 @@ PACKAGES = "\
-     packagegroup-meta-oe-shells \
-     packagegroup-meta-oe-security \
-     packagegroup-meta-oe-support \
-+    packagegroup-meta-oe-support-python2 \
-     packagegroup-meta-oe-test \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "packagegroup-meta-oe-gnome", "", d)} \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "packagegroup-meta-oe-graphics", "", d)} \
-@@ -32,11 +36,14 @@ RDEPENDS_packagegroup-meta-oe = "\
-     packagegroup-meta-oe-benchmarks \
-     packagegroup-meta-oe-bsp \
-     packagegroup-meta-oe-connectivity \
-+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "packagegroup-meta-oe-connectivity-python2", "", d)} \
-     packagegroup-meta-oe-core \
-     packagegroup-meta-oe-crypto \
-     packagegroup-meta-oe-dbs \
-+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "packagegroup-meta-oe-dbs-python2", "", d)} \
-     packagegroup-meta-oe-devtools \
-     packagegroup-meta-oe-extended \
-+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "packagegroup-meta-oe-extended-python2", "", d)} \
-     packagegroup-meta-oe-kernel \
-     packagegroup-meta-oe-multimedia \
-     packagegroup-meta-oe-navigation \
-@@ -44,6 +51,7 @@ RDEPENDS_packagegroup-meta-oe = "\
-     packagegroup-meta-oe-security \
-     packagegroup-meta-oe-shells \
-     packagegroup-meta-oe-support \
-+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "packagegroup-meta-oe-support-python2", "", d)} \
-     packagegroup-meta-oe-test \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "packagegroup-meta-oe-gnome", "", d)} \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "packagegroup-meta-oe-graphics", "", d)} \
-@@ -144,7 +152,6 @@ RDEPENDS_packagegroup-meta-oe-connectivity ="\
-     ser2net \
-     smstools3 \
-     telepathy-glib \
--    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "telepathy-idle", "", d)} \
-     thrift \
-     usbmuxd \
-     wifi-test-suite \
-@@ -155,6 +162,10 @@ RDEPENDS_packagegroup-meta-oe-connectivity ="\
+diff --git a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.0.bb b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.0.bb
+index ac463038aa..105610be5a 100644
+--- a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.0.bb
++++ b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.0.bb
+@@ -13,6 +13,14 @@ S = "${WORKDIR}/git"
  
- RDEPENDS_packagegroup-meta-oe-connectivity_append_libc-glibc = " wvstreams wvdial"
+ inherit cmake
  
-+RDEPENDS_packagegroup-meta-oe-connectivity-python2 = "\
-+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "telepathy-idle", "", d)} \
-+"
++do_configure_prepend() {
++    # otherwise https://github.com/ceres-solver/ceres-solver/blob/0b748597889f460764f6c980a00c6f502caa3875/cmake/AddGerritCommitHook.cmake#L68
++    # will try to fetch https://ceres-solver-review.googlesource.com/tools/hooks/commit-msg durind do_configure
++    # which sometimes gets stuck (as there is no TIMEOUT set in DOWNLOAD)
++    # and we really don't need Gerrit's Change-Id tags when just building this
++    touch ${S}/.git/hooks/commit-msg
++}
 +
- # dracut needs dracut
- RDEPENDS_packagegroup-meta-oe-core = "\
-     ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "dbus-broker", "", d)} \
-@@ -197,7 +208,6 @@ RDEPENDS_packagegroup-meta-oe-dbs ="\
-     leveldb \
-     libdbi \
-     mariadb \
--    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "mysql-python", "", d)} \
-     postgresql \
-     psqlodbc \
-     rocksdb \
-@@ -205,6 +215,10 @@ RDEPENDS_packagegroup-meta-oe-dbs ="\
-     sqlite \
- "
- 
-+RDEPENDS_packagegroup-meta-oe-dbs-python2 ="\
-+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "mysql-python", "", d)} \
-+"
-+
- RDEPENDS_packagegroup-meta-oe-devtools ="\
-     abseil-cpp \
-     apitrace \
-@@ -341,7 +355,6 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
-      jansson \
-      nana \
-      nicstat \
--     ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "openlmi-tools", "", d)} \
-      ${@bb.utils.contains("DISTRO_FEATURES", "pam", "openwsman", "", d)} \
-      p7zip \
-      isomd5sum \
-@@ -418,6 +431,10 @@ RDEPENDS_packagegroup-meta-oe-extended_remove_powerpc64le = "upm mraa"
- RDEPENDS_packagegroup-meta-oe-extended_remove_riscv64 = "upm mraa sysdig tiptop"
- RDEPENDS_packagegroup-meta-oe-extended_remove_riscv32 = "upm mraa sysdig tiptop"
- 
-+RDEPENDS_packagegroup-meta-oe-extended-python2 ="\
-+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "openlmi-tools", "", d)} \
-+"
-+
- RDEPENDS_packagegroup-meta-oe-gnome ="\
-     atkmm \
-     gcab \
-@@ -789,7 +806,6 @@ RDEPENDS_packagegroup-meta-oe-support ="\
-     libusbg \
-     libutempter \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "links-x11", "links", d)} \
--    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "lio-utils", "", d)} \
-     log4c \
-     log4cpp \
-     nspr \
-@@ -883,6 +899,11 @@ RDEPENDS_packagegroup-meta-oe-support_append_armv7ve = " ne10"
- RDEPENDS_packagegroup-meta-oe-support_append_aarch64 = " ne10"
- RDEPENDS_packagegroup-meta-oe-support_append_x86 = " mcelog mce-inject mce-test open-vm-tools vboxguestdrivers"
- RDEPENDS_packagegroup-meta-oe-support_append_x86-64 = " mcelog mce-inject mce-test open-vm-tools vboxguestdrivers"
-+
-+RDEPENDS_packagegroup-meta-oe-support-python2 ="\
-+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "lio-utils", "", d)} \
-+"
-+
- RDEPENDS_packagegroup-meta-oe-support_remove_arm ="numactl"
- RDEPENDS_packagegroup-meta-oe-support_remove_mipsarch = "gperftools"
- RDEPENDS_packagegroup-meta-oe-support_remove_riscv64 = "gperftools uim"
+ # We don't want path to eigen3 in ceres-solver RSS to be
+ # used by components which use CeresConfig.cmake from their
+ # own RSS
 -- 
 2.30.2
 
