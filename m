@@ -1,352 +1,131 @@
-Received: from IND01-MA1-obe.outbound.protection.outlook.com (IND01-MA1-obe.outbound.protection.outlook.com [40.107.138.45])
- by mx.groups.io with SMTP id smtpd.web09.27.1616606263799093508
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web09.48.1616606341997481041
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Mar 2021 10:17:44 -0700
+ Wed, 24 Mar 2021 10:19:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kpit.com header.s=selector1 header.b=Y1I2lrpV;
- spf=pass (domain: kpit.com, ip: 40.107.138.45, mailfrom: neetika.singh@kpit.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fIOlEcrxJc8T1XqWfB0TKJ5yDoausfa005B1Kw2Ck/3fEV1uckXhQM/zu6Yl3+gtV7YB8eRXYeFhCcN67Gnp1JtlJgt2IJr7A/RGjG+SREtt3qe5qP0MH2uHOEmCab/UWeXyJPcrMLaVL6dM5tLDuD1PWfD/igQtiWIol83A4L+ptefUATNc2r5F6WVE/CRdscxHccvICJH8HOPw9hc0TLcJOCaGuNyY9T87ppAJXQ+SDTDZ1qwuLmgRGDcIKG9zIIgS+B4TPWKs6s/6bHQ0Z+aQTKSo2eyn9zO9OAayvz9N5DPsP0nprr7bGc6HHhH1SNuu/ZOFAFCxeNflYS+gSQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3xBGO6A2IYI+cTxLurS8Xvojng/gbwKioNeKlk5yJtU=;
- b=VYDh5ta6vSlwAkHT396FCXINoKyQrK5AKcseFG481pCXVDWqABRHeIWVO1uEbGDWqQZiGJTJWTaOZ2T9Gk+60Gy5w8N7oSbzeMZIVTBCML4o3JHpXRL0uQ0+eksVDYzVP15dmhHL6Qi5HnH0h9/WXDbtaGUcN3ZIBid6vwAMCCeaN6tc4IOq5UqB/YlgJ1+2xrLIL/UX8tiZDjKgAwwtGa+fhoBFNcDobMUCYK0aa719yDHBA6ihVRYrAtOqmeWAbJkMpjuWc+u3cRLGG/bRT9CiFMabPX9Ljd8uazfQ2Rj/BcDmTESktj1UMrfQ23KownjE/Di+LhvG/kG+Nec9FA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=kpit.com; dmarc=pass action=none header.from=kpit.com;
- dkim=pass header.d=kpit.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3xBGO6A2IYI+cTxLurS8Xvojng/gbwKioNeKlk5yJtU=;
- b=Y1I2lrpV0KzpAWhMJXBzyIOGLG7wE+Ww9eomBAQOgBX/eALt5VURrmfDWohe13+AGNo4vPB8Drm+E4syQQzp8RgezkotaC60+iI9SWB1nGn3e4wzlwGDRzSlu1CQBwyxUw165jXpWlcOSeogEqN6nf1kpcG6W1z/S9WuKDVRSmY=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=kpit.com;
-Received: from BMXPR01MB2358.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:31::19)
- by BM1PR01MB2721.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:4d::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3955.18; Wed, 24 Mar
- 2021 17:17:37 +0000
-Received: from BMXPR01MB2358.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::a05c:dcaa:1ba4:f108]) by BMXPR01MB2358.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::a05c:dcaa:1ba4:f108%6]) with mapi id 15.20.3955.027; Wed, 24 Mar 2021
- 17:17:37 +0000
-From: "Neetika.Singh" <Neetika.Singh@kpit.com>
-To: openembedded-devel@lists.openembedded.org,
-	raj.khem@gmail.com
-Cc: nisha.parrakat@kpit.com,
-	"Neetika.Singh" <Neetika.Singh@partner.bmw.de>
-Subject: [meta-oe][master][PATCH] libcroco: Add fix for CVE-2020-12825
-Date: Wed, 24 Mar 2021 22:47:24 +0530
-Message-Id: <1616606244-17079-1-git-send-email-Neetika.Singh@kpit.com>
-X-Mailer: git-send-email 2.7.4
-X-Originating-IP: [117.222.183.78]
-X-ClientProxiedBy: PN2PR01CA0026.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c01:25::31) To BMXPR01MB2358.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:b00:31::19)
-Return-Path: Neetika.Singh@kpit.com
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=WJ50UW8i;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id j6-20020a17090adc86b02900cbfe6f2c96so1575911pjv.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Mar 2021 10:19:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:organization:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=6A2YtboNqoWVyOOeSVbMZHLEl13ZBe15xwYIYJTtHlg=;
+        b=WJ50UW8iHfYT1e0ha+x7uZLkqvuvFun3/KjCMuDuzeG+IkRrvapFRwscvuBCpnR+ud
+         b9ndWh3v++3fKMeBDhCVUzT+h2FhDvWWwP5zKZoya26/YGqyLgjSiBD+oXZrEKWqsw0s
+         sTQusy1nYTSKzcscDxaBVGugePFzUrdvNZGI44UVlnRaN9XwN8rLZ7rdK6LOsfwxK6Nf
+         fe4mX6xxzrh8FV8fRWlgLOcVb5qiSNuWHm54GiwEdxNHrTUhTN0QEnEy4t3CJcMbLbOB
+         Bt58K92bhkWWgCwZXbcNqoDo93yx7Ac/vWUZAvVBdPKGfPiey8fcxNyUUnk55hLgGXrr
+         8Bzg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=6A2YtboNqoWVyOOeSVbMZHLEl13ZBe15xwYIYJTtHlg=;
+        b=ZFw6nJ+s+Wg72AGSwDyWjL5kv083MO5/263qUnbi2LDQ1dOeVRLLm3eNgeU7+SsUKZ
+         EwYjO0YwfGghdoMj9XIqUMmmR1JyG9oRsY5hl/ZB4GrFs5FmbZHAk4TNoHDu1fVmfVed
+         TS26xjATn6jqaixeDXR2niX3WjbCcQxOU5bWpJtg7Kac9log3AEgSvzM8xLU7JqPB3zu
+         ARDrwtS+qqItgY/LTNUSRRtvoTHjebmEpMQiggrR6QMshst0F5OmPoZy1o7PUlLPMDpo
+         CxqmQsuF0Oy9W4880jtFkt5k8TQDgTN6IdervtnsU86zGF5EJxV0XhYtOU5VDXUKSxpi
+         d/Vw==
+X-Gm-Message-State: AOAM5302uIOfvg4/56uqJA/35r+awavUnnVipFOm7FEUTu2NfvVvE2dJ
+	sU8Eqt1WJd+HYrajwmeWF7g=
+X-Google-Smtp-Source: ABdhPJzPcqyZdEvXqFmXuPtQCJ8yUhuIyr1kxQ0hqSYPsBLpHe74+cblH29X4PSofi/6Hedn4w1cOg==
+X-Received: by 2002:a17:902:da91:b029:e5:e7cf:d737 with SMTP id j17-20020a170902da91b02900e5e7cfd737mr4599975plx.24.1616606341289;
+        Wed, 24 Mar 2021 10:19:01 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:a0f0:2da1:1afd:1712:ea8b? ([2601:646:9200:a0f0:2da1:1afd:1712:ea8b])
+        by smtp.gmail.com with ESMTPSA id x4sm3062635pfn.134.2021.03.24.10.19.00
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 24 Mar 2021 10:19:00 -0700 (PDT)
+Subject: Re: [oe] [meta-oe][PATCH] guider: Upgrade 3.9.7 -> 3.9.8
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+ Peace Lee <iipeace5@gmail.com>
+References: <20210323211230.1639990-1-raj.khem@gmail.com>
+ <CA+chaQfR+Fp2B10=fLT9rDpMVgUb6nxe_xcE47eAMWJYC_q4WA@mail.gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <ed275b86-aa59-efa3-68f8-46a920092d85@gmail.com>
+Date: Wed, 24 Mar 2021 10:18:59 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:78.0)
+ Gecko/20100101 Thunderbird/78.8.1
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from localhost.localdomain (117.222.183.78) by PN2PR01CA0026.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:25::31) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.20.3977.25 via Frontend Transport; Wed, 24 Mar 2021 17:17:36 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: e6a83944-c0b4-4954-e4ad-08d8eee8b8ad
-X-MS-TrafficTypeDiagnostic: BM1PR01MB2721:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<BM1PR01MB2721976EB6A3251D4A4770979F639@BM1PR01MB2721.INDPRD01.PROD.OUTLOOK.COM>
-X-MS-Oob-TLC-OOBClassifiers: OLM:741;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	4Px/cw4PkZKRyu5d/Xgt2ti1BntuFFYa0NWIYKvbWLJNV4MsZ25MR3Bo0FhDWhfdTpR3tOLewdshZTYaPR4vm2hrUCy1JyL9tq6iFrOQ5AWH9EQSlMbsyclZ8MbYoWBelV7OyHLEUO2VAnUN1+oS6qUIUTydLp5v5Wo8+eWkcIOH8cusbD4RiiHxm355oAo3ZFEVEPYQF+IvRt7LcKH8VK+6bPtUvez4GCJNvT4Dm+8LZgmz8n32GEEZM3aXBQA6I26dQALyIGmSEEg93FD//dO2N3ZksXlPdMCcQpPmd1cqlFuunCkVWBeOju0uUmKnbNqI2Fwj/sjl1PkbYvIruyOshfjYXsC3/1OmbyT8BfY77ThdYq1TM/8optQoxa+zj/zyRyFTE01pSr5w3IimB949+qSZpk1rSkFb8d9mDzbrDyfPmGqdWiJrAm5uMGgx22e+6sgmuimbbqO/Qju922Y3uyXC3SvygDlebX5qHCcdJo5R6TGihwpJ6UptXfUydc8tTsMhCcXuCDBR+sB2dgeT2TCFwOTR5kLpVwT90QmIwiDbWL00hxbKYvHz9ugL/yCTff+52/M9ar0TPkoPUKfwvyo3yaP06T9WamQ6hRoVeKJeM/EewHCfGmtu+qjLomNDooJG3Pk+ejrXLoyxkLKkLQ8zq7rYjC+4jYJaHJA0kWMrhxFz3jLxk4lX3+JChS5h+vwx3lBw4TB/gYGw9a/dIH3Sqw3pPCdB0hR9g0hGLs9EyRMpM7aG9qzgErBSMoGAoxL8bf3P1zIXToqG4w==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BMXPR01MB2358.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(366004)(136003)(396003)(346002)(376002)(39850400004)(36756003)(66556008)(6486002)(66574015)(8936002)(66946007)(66476007)(6506007)(8676002)(186003)(26005)(6512007)(16526019)(6666004)(2906002)(316002)(52116002)(38100700001)(86362001)(4326008)(478600001)(5660300002)(69590400012)(956004)(83380400001)(2616005)(966005);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?COjw2c7DBfmvVu3ENU4IR64I92AnLv7reKK0t3erD6qBbv4v8gc+PX+RaRIH?=
- =?us-ascii?Q?5Yu2a88aEpNDTpqlWknjvQJPlp9JKm4qDdhRczBzQPN7aAGzViq/0/meXsQM?=
- =?us-ascii?Q?mAp4Fi4lNLEGqRo7L8jkxMDe6+/ojm0nboVzleSqGXI6YlQ3vddV+9qBUbrR?=
- =?us-ascii?Q?hXg/88IhFvtQXZEoAUWqUU8/TpMqVuIaxh5l4P8bXunECHisZ14kYfDhT48Q?=
- =?us-ascii?Q?0XWY7WBtPvaFWqfDr3xTomtzyQzGbpmTK4EQ2JkJqANgHQ3P/8G0hnK7x59i?=
- =?us-ascii?Q?Beu61IWKtyqFSZWvgkbix9HWI0TuQe2Y0NJskHxhSmqJ7faDrXljvb6XfepV?=
- =?us-ascii?Q?k6fA5+g+CgjTH3q04lan33zKh2v9LtkWuOopOaz/Lm05pImM5T8iByWHMHQO?=
- =?us-ascii?Q?7MQQlXkle8M0qaY9MgCLhuWhsmN5bQ+VQRPJ+zIQ7o2oDUoaAlzWzB/9gVwp?=
- =?us-ascii?Q?SQx8xD0OjYcKYMGkS680zVor59v3bFHSO83xmaEFN8zoyWR1PlDeZhroY0Gw?=
- =?us-ascii?Q?C2zs8q9qEVk87zDT8VECMMFpSYYIlCp5Ib7qgZHdfzx56lGlFf5pxw5TDwmW?=
- =?us-ascii?Q?yFItGccTwuc7MhL9cVJcvDjXyU+SnWfZvezG6GcrgpGWvjnb7YghT4BXDUp7?=
- =?us-ascii?Q?W/V3StU1hpzWNigrL254YqYaIM+SY9mPiUULPqNUDxqbcBEzY/ANmIoZlhRq?=
- =?us-ascii?Q?FfSZJtsmU+YGHdjQS1u/SFMWjKs9IRYBzXMJJBxmd/alNEFC898p1EyUv1lc?=
- =?us-ascii?Q?vBR8HgwLwIBowUgLcuLOUyyBPEmAzNoLciJAxhDEg98YLbOdcj8Vln3+wOhr?=
- =?us-ascii?Q?4RV5y9WGkuyw3EO5WzSqlXgXOP77s9/trKXq/iITKa36/lmQNa1wbJaD6kwK?=
- =?us-ascii?Q?wsNsEApd/FjL8cbCYC0VY4VG9zDyw1VX8qFt0FGt1LiVfT6SucjAi6kH8R+j?=
- =?us-ascii?Q?GMOR1hiDA50tEyWKIRNBNfR/ljuN49sDDfWJt0k8Ha836J/VO/RzTh2kyf9C?=
- =?us-ascii?Q?BS69ljc0B/18nHw8x+B/pb4eHOQo5vMWq1OGaUlSVTUBJx3GWb7/RD093pl8?=
- =?us-ascii?Q?UJka9ScTdBuCihCpkvBuA3Doematw+spPlfm3XhDEhtnr8RxvlZEGKFbqLbM?=
- =?us-ascii?Q?o/EfIqhYnayTn1BtJSOnTH4qIzKNJHlZDeBVB3ifIC4hvyuxABqObQupaMdK?=
- =?us-ascii?Q?fICdIDIqhATNh+oPKr8Z45rVbvSVlSGJo/KYE9eqtO+iMhFufgwjMhhV2UO7?=
- =?us-ascii?Q?JZhlfTGtgo3kqA9IYcKnogaQi2tyz4spZNEONl6cIj/ALlLrjLMsUmiqd7ec?=
- =?us-ascii?Q?SSGCMZ4J5GrOTCt/OfIHLT39?=
-X-OriginatorOrg: kpit.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e6a83944-c0b4-4954-e4ad-08d8eee8b8ad
-X-MS-Exchange-CrossTenant-AuthSource: BMXPR01MB2358.INDPRD01.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Mar 2021 17:17:37.3591
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3539451e-b46e-4a26-a242-ff61502855c7
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LojLRSAYkpQZ5nl/u2KhfPQT0+s7fZ3jvoJviaIRHHhso9osjfxYiWetszKPzgqqKzgkVR02Er5r3J7Mc+9C3A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BM1PR01MB2721
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <CA+chaQfR+Fp2B10=fLT9rDpMVgUb6nxe_xcE47eAMWJYC_q4WA@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 
-From: "Neetika.Singh" <Neetika.Singh@partner.bmw.de>
+sad but true
 
-Added refreshed patch for CVE issue CVE-2020-12825
-Link: https://gitlab.com/inkscape/inkscape/-/commit/203d62efefe6f79080863dd=
-a61593003b4c31f25
-
-Signed-off-by: Neetika.Singh <Neetika.Singh@kpit.com>
----
- .../libcroco/libcroco/CVE-2020-12825.patch         | 190 +++++++++++++++++=
-++++
- meta/recipes-support/libcroco/libcroco_0.6.13.bb   |   2 +
- 2 files changed, 192 insertions(+)
- create mode 100644 meta/recipes-support/libcroco/libcroco/CVE-2020-12825.p=
-atch
-
-diff --git a/meta/recipes-support/libcroco/libcroco/CVE-2020-12825.patch b/=
-meta/recipes-support/libcroco/libcroco/CVE-2020-12825.patch
-new file mode 100644
-index 0000000..f6c6a55
---- /dev/null
-+++ b/meta/recipes-support/libcroco/libcroco/CVE-2020-12825.patch
-@@ -0,0 +1,190 @@
-+From 203d62efefe6f79080863dda61593003b4c31f25 Mon Sep 17 00:00:00 2001
-+From: Michael Catanzaro <mcatanzaro@gnome.org>
-+Date: Thu, 13 Aug 2020 20:03:05 -0500
-+Subject: [PATCH] libcroco parser: limit recursion in block and any product=
-ions
-+
-+If we don't have any limits, we can recurse forever and overflow the
-+stack.
-+
-+This is for CVE-2020-12825: Stack overflow in cr_parser_parse_any_core
-+in cr-parser.c.
-+
-+Bug: https://gitlab.gnome.org/Archive/libcroco/-/issues/8
-+Patch from https://gitlab.gnome.org/Archive/libcroco/-/merge_requests/5
-+
-+CVE: CVE-2020-12825
-+Upstream Status: Backport [https://gitlab.com/inkscape/inkscape/-/commit/2=
-03d62efefe6f79080863dda61593003b4c31f25.patch]
-+---
-+ src/cr-parser.c | 44 ++++++++++++++++++++-----------
-+ 1 file changed, 29 insertions(+), 15 deletions(-)
-+
-+diff --git a/src/cr-parser.c b/src/cr-parser.c
-+index d85e71f0fc..cd7b6ebd4a 100644
-+--- a/src/cr-parser.c
-++++ b/src/cr-parser.c
-+@@ -136,6 +136,8 @@ struct _CRParserPriv {
-+
-+ #define CHARS_TAB_SIZE 12
-+
-++#define RECURSIVE_CALLERS_LIMIT 100
-++
-+ /**
-+  * IS_NUM:
-+  *@a_char: the char to test.
-+@@ -343,9 +345,11 @@ static enum CRStatus cr_parser_parse_selector_core (C=
-RParser * a_this);
-+
-+ static enum CRStatus cr_parser_parse_declaration_core (CRParser * a_this)=
-;
-+
-+-static enum CRStatus cr_parser_parse_any_core (CRParser * a_this);
-++static enum CRStatus cr_parser_parse_any_core (CRParser * a_this,
-++                                               guint      n_calls);
-+
-+-static enum CRStatus cr_parser_parse_block_core (CRParser * a_this);
-++static enum CRStatus cr_parser_parse_block_core (CRParser * a_this,
-++                                                 guint      n_calls);
-+
-+ static enum CRStatus cr_parser_parse_value_core (CRParser * a_this);
-+
-+@@ -783,7 +787,7 @@ cr_parser_parse_atrule_core (CRParser * a_this)
-+         cr_parser_try_to_skip_spaces_and_comments (a_this);
-+
-+         do {
-+-                status =3D cr_parser_parse_any_core (a_this);
-++                status =3D cr_parser_parse_any_core (a_this, 0);
-+         } while (status =3D=3D CR_OK);
-+
-+         status =3D cr_tknzr_get_next_token (PRIVATE (a_this)->tknzr,
-+@@ -794,7 +798,7 @@ cr_parser_parse_atrule_core (CRParser * a_this)
-+                 cr_tknzr_unget_token (PRIVATE (a_this)->tknzr,
-+                                       token);
-+                 token =3D NULL;
-+-                status =3D cr_parser_parse_block_core (a_this);
-++                status =3D cr_parser_parse_block_core (a_this, 0);
-+                 CHECK_PARSING_STATUS (status,
-+                                       FALSE);
-+                 goto done;
-+@@ -929,11 +933,11 @@ cr_parser_parse_selector_core (CRParser * a_this)
-+
-+         RECORD_INITIAL_POS (a_this, &init_pos);
-+
-+-        status =3D cr_parser_parse_any_core (a_this);
-++        status =3D cr_parser_parse_any_core (a_this, 0);
-+         CHECK_PARSING_STATUS (status, FALSE);
-+
-+         do {
-+-                status =3D cr_parser_parse_any_core (a_this);
-++                status =3D cr_parser_parse_any_core (a_this, 0);
-+
-+         } while (status =3D=3D CR_OK);
-+
-+@@ -955,10 +959,12 @@ cr_parser_parse_selector_core (CRParser * a_this)
-+  *in chapter 4.1 of the css2 spec.
-+  *block ::=3D '{' S* [ any | block | ATKEYWORD S* | ';' ]* '}' S*;
-+  *@param a_this the current instance of #CRParser.
-++ *@param n_calls used to limit recursion depth
-+  *FIXME: code this function.
-+  */
-+ static enum CRStatus
-+-cr_parser_parse_block_core (CRParser * a_this)
-++cr_parser_parse_block_core (CRParser * a_this,
-++                            guint      n_calls)
-+ {
-+         CRToken *token =3D NULL;
-+         CRInputPos init_pos;
-+@@ -966,6 +972,9 @@ cr_parser_parse_block_core (CRParser * a_this)
-+
-+         g_return_val_if_fail (a_this && PRIVATE (a_this), CR_BAD_PARAM_ER=
-ROR);
-+
-++        if (n_calls > RECURSIVE_CALLERS_LIMIT)
-++                return CR_ERROR;
-++
-+         RECORD_INITIAL_POS (a_this, &init_pos);
-+
-+         status =3D cr_tknzr_get_next_token (PRIVATE (a_this)->tknzr, &tok=
-en);
-+@@ -995,13 +1004,13 @@ cr_parser_parse_block_core (CRParser * a_this)
-+         } else if (token->type =3D=3D CBO_TK) {
-+                 cr_tknzr_unget_token (PRIVATE (a_this)->tknzr, token);
-+                 token =3D NULL;
-+-                status =3D cr_parser_parse_block_core (a_this);
-++                status =3D cr_parser_parse_block_core (a_this, n_calls + =
-1);
-+                 CHECK_PARSING_STATUS (status, FALSE);
-+                 goto parse_block_content;
-+         } else {
-+                 cr_tknzr_unget_token (PRIVATE (a_this)->tknzr, token);
-+                 token =3D NULL;
-+-                status =3D cr_parser_parse_any_core (a_this);
-++                status =3D cr_parser_parse_any_core (a_this, n_calls + 1)=
-;
-+                 CHECK_PARSING_STATUS (status, FALSE);
-+                 goto parse_block_content;
-+         }
-+@@ -1108,7 +1117,7 @@ cr_parser_parse_value_core (CRParser * a_this)
-+                 status =3D cr_tknzr_unget_token (PRIVATE (a_this)->tknzr,
-+                                                token);
-+                 token =3D NULL;
-+-                status =3D cr_parser_parse_block_core (a_this);
-++                status =3D cr_parser_parse_block_core (a_this, 0);
-+                 CHECK_PARSING_STATUS (status, FALSE);
-+                 ref++;
-+                 goto continue_parsing;
-+@@ -1122,7 +1131,7 @@ cr_parser_parse_value_core (CRParser * a_this)
-+                 status =3D cr_tknzr_unget_token (PRIVATE (a_this)->tknzr,
-+                                                token);
-+                 token =3D NULL;
-+-                status =3D cr_parser_parse_any_core (a_this);
-++                status =3D cr_parser_parse_any_core (a_this, 0);
-+                 if (status =3D=3D CR_OK) {
-+                         ref++;
-+                         goto continue_parsing;
-+@@ -1162,10 +1162,12 @@
-+  *        | FUNCTION | DASHMATCH | '(' any* ')' | '[' any* ']' ] S*;
-+  *
-+  *@param a_this the current instance of #CRParser.
-++ *@param n_calls used to limit recursion depth
-+  *@return CR_OK upon successfull completion, an error code otherwise.
-+  */
-+ static enum CRStatus
-+-cr_parser_parse_any_core (CRParser * a_this)
-++cr_parser_parse_any_core (CRParser * a_this,
-++                          guint      n_calls)
-+ {
-+         CRToken *token1 =3D NULL,
-+                 *token2 =3D NULL;
-+@@ -1173,6 +1184,9 @@ cr_parser_parse_any_core (CRParser * a_this)
-+
-+         g_return_val_if_fail (a_this, CR_BAD_PARAM_ERROR);
-+
-++        if (n_calls > RECURSIVE_CALLERS_LIMIT)
-++                return CR_ERROR;
-++
-+         RECORD_INITIAL_POS (a_this, &init_pos);
-+
-+         status =3D cr_tknzr_get_next_token (PRIVATE (a_this)->tknzr, &tok=
-en1);
-+@@ -1211,7 +1225,7 @@ cr_parser_parse_any_core (CRParser * a_this)
-+                  *We consider parameter as being an "any*" production.
-+                  */
-+                 do {
-+-                        status =3D cr_parser_parse_any_core (a_this);
-++                        status =3D cr_parser_parse_any_core (a_this, n_ca=
-lls + 1);
-+                 } while (status =3D=3D CR_OK);
-+
-+                 ENSURE_PARSING_COND (status =3D=3D CR_PARSING_ERROR);
-+@@ -1236,7 +1250,7 @@ cr_parser_parse_any_core (CRParser * a_this)
-+                 }
-+
-+                 do {
-+-                        status =3D cr_parser_parse_any_core (a_this);
-++                        status =3D cr_parser_parse_any_core (a_this, n_ca=
-lls + 1);
-+                 } while (status =3D=3D CR_OK);
-+
-+                 ENSURE_PARSING_COND (status =3D=3D CR_PARSING_ERROR);
-+@@ -1264,7 +1278,7 @@ cr_parser_parse_any_core (CRParser * a_this)
-+                 }
-+
-+                 do {
-+-                        status =3D cr_parser_parse_any_core (a_this);
-++                        status =3D cr_parser_parse_any_core (a_this, n_ca=
-lls + 1);
-+                 } while (status =3D=3D CR_OK);
-+
-+                 ENSURE_PARSING_COND (status =3D=3D CR_PARSING_ERROR);
-+--
-+GitLab
-diff --git a/meta/recipes-support/libcroco/libcroco_0.6.13.bb b/meta/recipe=
-s-support/libcroco/libcroco_0.6.13.bb
-index 66ee647..2f61f87 100644
---- a/meta/recipes-support/libcroco/libcroco_0.6.13.bb
-+++ b/meta/recipes-support/libcroco/libcroco_0.6.13.bb
-@@ -19,6 +19,8 @@ BINCONFIG =3D "${bindir}/croco-0.6-config"
-
- inherit gnomebase gtk-doc binconfig-disabled
-
-+SRC_URI +=3D "file://CVE-2020-12825.patch"
-+
- SRC_URI[archive.md5sum] =3D "c80c5a8385011a0260dce6bd0da93dce"
- SRC_URI[archive.sha256sum] =3D "767ec234ae7aa684695b3a735548224888132e063f=
-92db585759b422570621d4"
-
---
-2.7.4
-
-This message contains information that may be privileged or confidential an=
-d is the property of the KPIT Technologies Ltd. It is intended only for the=
- person to whom it is addressed. If you are not the intended recipient, you=
- are not authorized to read, print, retain copy, disseminate, distribute, o=
-r use this message or any part thereof. If you receive this message in erro=
-r, please notify the sender immediately and delete all copies of this messa=
-ge. KPIT Technologies Ltd. does not accept any liability for virus infected=
- mails.
+On 3/24/21 9:42 AM, Martin Jansa wrote:
+> The PR on github changed SRCREV couple times (while calling it 3.9.8 
+> whole time) and the currently latest version on github says
+> 
+> SRCREV = "bab995ce718b58d4b5fee594771884dea238d70a"
+> 
+> On Tue, Mar 23, 2021 at 10:12 PM Khem Raj <raj.khem@gmail.com 
+> <mailto:raj.khem@gmail.com>> wrote:
+> 
+>     From: Peace Lee <iipeace5@gmail.com <mailto:iipeace5@gmail.com>>
+> 
+>     Upgrade to release 3.9.8
+> 
+>     Signed-off-by: Peace Lee <iipeace5@gmail.com
+>     <mailto:iipeace5@gmail.com>>
+>     Signed-off-by: Khem Raj <raj.khem@gmail.com <mailto:raj.khem@gmail.com>>
+>     ---
+>       .../guider/{guider_3.9.7.bb <http://guider_3.9.7.bb> =>
+>     guider_3.9.8.bb <http://guider_3.9.8.bb>}             | 6 +++---
+>       1 file changed, 3 insertions(+), 3 deletions(-)
+>       rename meta-oe/recipes-devtools/guider/{guider_3.9.7.bb
+>     <http://guider_3.9.7.bb> => guider_3.9.8.bb
+>     <http://guider_3.9.8.bb>} (78%)
+> 
+>     diff --git a/meta-oe/recipes-devtools/guider/guider_3.9.7.bb
+>     <http://guider_3.9.7.bb>
+>     b/meta-oe/recipes-devtools/guider/guider_3.9.8.bb
+>     <http://guider_3.9.8.bb>
+>     similarity index 78%
+>     rename from meta-oe/recipes-devtools/guider/guider_3.9.7.bb
+>     <http://guider_3.9.7.bb>
+>     rename to meta-oe/recipes-devtools/guider/guider_3.9.8.bb
+>     <http://guider_3.9.8.bb>
+>     index 88fad936ba..91693d8626 100644
+>     --- a/meta-oe/recipes-devtools/guider/guider_3.9.7.bb
+>     <http://guider_3.9.7.bb>
+>     +++ b/meta-oe/recipes-devtools/guider/guider_3.9.8.bb
+>     <http://guider_3.9.8.bb>
+>     @@ -1,4 +1,4 @@
+>     -SUMMARY = "runtime performance analyzer"
+>     +SUMMARY = "performance analyzer"
+>       HOMEPAGE = "https://github.com/iipeace/guider
+>     <https://github.com/iipeace/guider>"
+>       BUGTRACKER = "https://github.com/iipeace/guider/issues
+>     <https://github.com/iipeace/guider/issues>"
+>       AUTHOR = "Peace Lee <ipeace5@gmail.com <mailto:ipeace5@gmail.com>>"
+>     @@ -6,10 +6,10 @@ AUTHOR = "Peace Lee <ipeace5@gmail.com
+>     <mailto:ipeace5@gmail.com>>"
+>       LICENSE = "GPLv2+"
+>       LIC_FILES_CHKSUM =
+>     "file://LICENSE;md5=2c1c00f9d3ed9e24fa69b932b7e7aff2"
+> 
+>     -PV = "3.9.7+git${SRCPV}"
+>     +PV = "3.9.8+git${SRCPV}"
+> 
+>       SRC_URI = "git://github.com/iipeace/${BPN}
+>     <http://github.com/iipeace/$%7BBPN%7D>"
+>     -SRCREV = "459b5189a46023fc98e19888b196bdc2674022fd"
+>     +SRCREV = "f2e6d84ffa341728daf0cc2ba2736d58008ea9f1"
+> 
+>       S = "${WORKDIR}/git"
+> 
+>     -- 
+>     2.31.0
+> 
+> 
+>     
+> 
