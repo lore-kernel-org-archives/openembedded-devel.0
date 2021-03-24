@@ -1,91 +1,91 @@
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
- by mx.groups.io with SMTP id smtpd.web12.4898.1616588051021522027
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web10.299.1616600832994437333
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Mar 2021 05:14:11 -0700
+ Wed, 24 Mar 2021 08:47:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=cpFUUprh;
- spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f46.google.com with SMTP id h13so27346963eds.5
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Mar 2021 05:14:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=T+F3LkC8;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id m11so475877pfc.11
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Mar 2021 08:47:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=NlWyr4FXgI7DNZjEttY7uogP4nHgsFWDgvvSEDL8gVQ=;
-        b=cpFUUprhqugUHzQxrCoNzhp3asNwfnjngogI73JEm0lp60RyXZiK67s/UEZX75da51
-         8T6ermF+vb4Mm7hYK3zWSiUzmLVOX9SBaXwlMvgwYLg3e7J9aDP+yADdppTFgQT19ekv
-         YXzpzeHPO4LTXn2Plhu8+exVMMu4p76YGWgOAfpb+XaOVjXRshUZ8JuiSJcJnLdDfNvu
-         0wKGzVb/kAxir0/5i7muaTt/mTrJ+yl4krzSFkfwbh/OYUskISv7iYyP+DbstBBTrM6H
-         r1sgbC/2c+yu/e8ykeL2g6vPNnChFdAr3QiVDGxbwlmhK0xRX1W/gOzcoWsM0espEvPh
-         SzKQ==
+        h=subject:to:cc:references:from:organization:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=7phmlaOi4Gx1BOcwvlrtKSFtgTg7/z1tn7CVk2+hRes=;
+        b=T+F3LkC8NrgpISAL/l0wTe8oDrmBEpxGbcmoCH7UBdlAa6gN/jVTyj56CcVwaoEXzf
+         h3m36gvSxrEC9GnS8xQ2iTg+KkrCk2bL4JuSZ72oG0rNj397H6NFtHw5wBc09nbHDLPL
+         FmjR+zFfuKrUHT8slWchd7VlXdB8IniFX544PGleRPnGv7wEjQ5phgjBGj+iAFRFV0DT
+         umZFJmXAvtpll0LejtZnaDodfmtbXGwA6CptPYlqMQhLkqOm3OSZMNFOMJIiylAhEk1d
+         BImlyyd3X7yVZd/sy6UtfYXl1nipf3TKIiNeUjKyppr6YNP2zg5bN2BryjCMc6PVS1F3
+         k8qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=NlWyr4FXgI7DNZjEttY7uogP4nHgsFWDgvvSEDL8gVQ=;
-        b=WdXpETa9PeTXG9PVTAP6ucLvpelMvEZiT1colSajM46BdsaxEBXRQPcuhsZEAsoJuB
-         sMXLpJzs/vWxoxIjgfu99dN0v1i/gTA9E7wPlViRDAT9dcdEBSR9xOuiIlNcR5MqsGRA
-         7zvUB2W0q1nWmOKFIE3IQPd3tBBnRoYnj/+rWAbi4EgXc0dcgotxUNekSmA2lqE4D9SK
-         FnA+HxikSHARMOut3/fOAXdJGCmD/+eHSuto1kqbTBurnoaAv7L6EKQxn/60wJH+ZEex
-         eFp86DD7Y0IffghJpCIid78AWWDYrGVlANFCA3fD88PFBE4yCLdwPJ+bsPX2XXvJSWP4
-         S5SQ==
-X-Gm-Message-State: AOAM530s+Uv6GjPNpx4VY78rQG64Eg2pXiw9rT3qVKVlAUYWalht3z3o
-	8cdJS/d0UP37sQlobOhJn+scDTVXm+KCDH3+L8E=
-X-Google-Smtp-Source: ABdhPJzeBQvgr83SZZYuCz4BTHJ7Z6ZPTrozV6YcPk7layMPUUmpUUcXfsEjE5bdPJowAfMoZbrjAwu23621f45FOP8=
-X-Received: by 2002:a50:ec0e:: with SMTP id g14mr3150887edr.264.1616588049376;
- Wed, 24 Mar 2021 05:14:09 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210219125845.29016-1-anbelski@linux.microsoft.com> <166670501E1BA6E4.11921@lists.openembedded.org>
-In-Reply-To: <166670501E1BA6E4.11921@lists.openembedded.org>
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-Date: Wed, 24 Mar 2021 13:13:58 +0100
-Message-ID: <CA+chaQeNoPZANexNTBE2EdWBQyiV+pGvsMrEO5HQrT0g3ena+g@mail.gmail.com>
+        h=x-gm-message-state:subject:to:cc:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=7phmlaOi4Gx1BOcwvlrtKSFtgTg7/z1tn7CVk2+hRes=;
+        b=niEdnn2WJGAn7zySSt+QABAnDk356cYvSuDABt6EAJSJhi0ktgUqg4t4z2EkiWv0qu
+         4urxPGJeKbIEv08QLCneXttrpSuaoROBG2CsvJqn7vKfUTTLxBot/0bjrcsYTZ1/mNcC
+         jHtvSnY1C4IEIzoVunH0ApvCOKLyRKl7CBUDLnRgHJVW/cH5iuY/OgjESjKiNqWCKgDD
+         c7dyk6PZciHQYEYaHq/yip/9a1dMbNnbGgAjxxA9d1QNHnk3uOU+8w1AEtOzZfuvU0nz
+         bVrL45Zkmf21Lzjq7zb4bEOn0REa7+ZrCjps6ho90rIyLCwribnk+8KHmif8UJsksyiP
+         TQ5A==
+X-Gm-Message-State: AOAM532gAr93a22Vqg/EFJB8l8agyaARir0Kfjeu8TURzqF8SM8LO5y+
+	zJxf9yeQpjIfOmGLKNTbG7F2kphSnqqLTA==
+X-Google-Smtp-Source: ABdhPJxAWVu71wYynua7+GMhjm1qQRhRnL6pOt4oqqCYPYScMjzEW8oBZWBjAxZF/rrah4697UGlvg==
+X-Received: by 2002:aa7:956d:0:b029:1f1:5ba6:2a58 with SMTP id x13-20020aa7956d0000b02901f15ba62a58mr3820142pfq.63.1616600832086;
+        Wed, 24 Mar 2021 08:47:12 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:a0f0::e7f0? ([2601:646:9200:a0f0::e7f0])
+        by smtp.gmail.com with ESMTPSA id h13sm2815243pjv.52.2021.03.24.08.47.11
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 24 Mar 2021 08:47:11 -0700 (PDT)
 Subject: Re: [oe] [meta-oe][PATCH] abseil-cpp: Relax build requirements
 To: Martin Jansa <Martin.Jansa@gmail.com>
-Cc: Anatol Belski <anbelski@linux.microsoft.com>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="0000000000006e685405be473ce7"
+Cc: Anatol Belski <anbelski@linux.microsoft.com>,
+ openembedded-devel <openembedded-devel@lists.openembedded.org>
+References: <20210219125845.29016-1-anbelski@linux.microsoft.com>
+ <166670501E1BA6E4.11921@lists.openembedded.org>
+ <CA+chaQeNoPZANexNTBE2EdWBQyiV+pGvsMrEO5HQrT0g3ena+g@mail.gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <a0d78d2c-1abb-b6cc-3abd-6f00be404457@gmail.com>
+Date: Wed, 24 Mar 2021 08:47:08 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
+MIME-Version: 1.0
+In-Reply-To: <CA+chaQeNoPZANexNTBE2EdWBQyiV+pGvsMrEO5HQrT0g3ena+g@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
---0000000000006e685405be473ce7
-Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Feb 23, 2021 at 6:23 PM Martin Jansa via lists.openembedded.org
-<Martin.Jansa=gmail.com@lists.openembedded.org> wrote:
 
-> You should remove abseil-cpp from the _remove in the packagegroup as well,
-> see:
->
-> meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb:RDEPENDS_packagegroup-meta-oe-devtools_remove_aarch64
-> = "${@bb.utils.contains("TUNE_FEATURES", "crypto", "", "abseil-cpp", d)}
-> concurrencykit"
-> meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb:RDEPENDS_packagegroup-meta-oe-devtools_remove_x86-64
-> = "${@bb.utils.contains("TUNE_FEATURES", "corei7", "", "abseil-cpp", d)}"
->
-> Please send follow-up patch.
->
+On 3/24/21 5:13 AM, Martin Jansa wrote:
+> On Tue, Feb 23, 2021 at 6:23 PM Martin Jansa via lists.openembedded.org 
+> <http://lists.openembedded.org> 
+> <Martin.Jansa=gmail.com@lists.openembedded.org 
+> <mailto:gmail.com@lists.openembedded.org>> wrote:
+> 
+>     You should remove abseil-cpp from the _remove in the packagegroup as
+>     well, see:
+> 
+>     meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb:RDEPENDS_packagegroup-meta-oe-devtools_remove_aarch64
+>     = "${@bb.utils.contains("TUNE_FEATURES", "crypto", "", "abseil-cpp",
+>     d)} concurrencykit"
+>     meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb:RDEPENDS_packagegroup-meta-oe-devtools_remove_x86-64
+>     = "${@bb.utils.contains("TUNE_FEATURES", "corei7", "", "abseil-cpp",
+>     d)}"
+> 
+>     Please send follow-up patch.
+> 
+> 
+> Still no follow-up patch, I'll send it myself.
+> 
 
-Still no follow-up patch, I'll send it myself.
+Thanks Martin
 
---0000000000006e685405be473ce7
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">On Tue, Feb 23, 2021 at 6:23 PM Martin Ja=
-nsa via <a href=3D"http://lists.openembedded.org">lists.openembedded.org</a=
-> &lt;Martin.Jansa=3D<a href=3D"mailto:gmail.com@lists.openembedded.org">gm=
-ail.com@lists.openembedded.org</a>&gt; wrote:<br></div><div class=3D"gmail_=
-quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;=
-border-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr">Y=
-ou should remove abseil-cpp from the _remove in the packagegroup as well, s=
-ee:<div><br><div>meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb=
-:RDEPENDS_packagegroup-meta-oe-devtools_remove_aarch64 =3D &quot;${@bb.util=
-s.contains(&quot;TUNE_FEATURES&quot;, &quot;crypto&quot;, &quot;&quot;, &qu=
-ot;abseil-cpp&quot;, d)} concurrencykit&quot;<br>meta-oe/recipes-core/packa=
-gegroups/packagegroup-meta-oe.bb:RDEPENDS_packagegroup-meta-oe-devtools_rem=
-ove_x86-64 =3D &quot;${@bb.utils.contains(&quot;TUNE_FEATURES&quot;, &quot;=
-corei7&quot;, &quot;&quot;, &quot;abseil-cpp&quot;, d)}&quot;<br></div></di=
-v><div><br></div><div>Please send follow-up patch.</div></div></blockquote>=
-<div><br></div><div>Still no follow-up patch, I&#39;ll send it myself.</div=
-></div></div>
-
---0000000000006e685405be473ce7--
+> 
+> 
+> 
