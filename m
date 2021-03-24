@@ -1,191 +1,166 @@
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
- by mx.groups.io with SMTP id smtpd.web09.1152.1616604152558782853
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web12.1138.1616604237026805657
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Mar 2021 09:42:32 -0700
+ Wed, 24 Mar 2021 09:43:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=T4xSP3VF;
- spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f54.google.com with SMTP id u5so33991053ejn.8
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Mar 2021 09:42:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=QM9Kag3Z;
+ spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f51.google.com with SMTP id e7so28322320edu.10
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Mar 2021 09:43:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=Zp7/C3k1Ag2huXiXSleN/4jrPiQaRLbBYUPg523UBRI=;
-        b=T4xSP3VFIrP9rQjXNsLGbQG9rfhXZ+JXjYOMJYNk4b2c0ACclFWMp2LYsDLG+2k1nq
-         AUZMgrRDyPNHTVX+/kMS+O4MccWcQaWzEILhn2dpVDrhWkHEFyimtVUkTMgDl1XeMA+A
-         P8cLOoYLtSJLPe2fDzOcmnzKPoLTrMTTrTcmorHKXqSnk3MFpege/mg+m7piOUyHIf2o
-         cjlFiXZMZxRKgf/0wyuGY/zPuFJN5JcRxL1yEs2/1TDbOhUKVwF6eq6br3HsuQU7nPK9
-         EL9tzRR2gazl/ut74f+xigaIPV0TeQ6eWvylNYYGb4eGI4rxSn7jaRt4OyKQvU2wS24i
-         CRsA==
+        h=from:date:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=2PzrL5BCC8JTqrzhVdQfLSg6CxjPMVDaUVyhabe4kOc=;
+        b=QM9Kag3ZzSE4/NDw4PcI5ZFN5haPK9fB02zCCOqzoJSX4IWyaq99Wg3pc9UiLh8/aq
+         Dxk5KnxGhOdrKJUS/BIP0I9MI9QOzQWNixdHW3gi0UqJwhUS1a6b23oENnbBHM7p0cjI
+         mj7apXp7Ci3nd2mt9F+8Skar40rYmOoBkK1E7EZYeIItesep+zh06WQ/Mi8TBBrwb1Qx
+         OM534+UQWgdnJDn07lmjpievHfEreZcEo+C6yDH0tCAAS7EhOgOm3jHl/HPClIuDL5Xr
+         SXDr2PZ3lMfVcoz4EZPxwLXaV4WtzYZIc6IIYrhTQEX61JRihkTLFX8bxrJe1TTrC1Qq
+         P1vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=Zp7/C3k1Ag2huXiXSleN/4jrPiQaRLbBYUPg523UBRI=;
-        b=C4NfxplJdRimrDLL9zf2AkN/HvL8CHJvrcu9BF+EsF5rm0RfE38gVjar9NDuK7PHTN
-         wnfZzpKqOBq1JB/s8XrKRjhhWJW/9AZY0bq7b7jBEjoyVbDpz0Lmz9xcwKwLXQCf+m1z
-         P5rbcBE4z2N7RSAWlDKIu1A20EVnFl4aIlya1TK7oTDdh6sj1zVNw2+8AIQViYoIHqw9
-         uD5MvJgIk0hZgrQh1RaMiKISOOobOTOEjZ4NJ9mZJRd+hSR1YksHuVMLST6Kar48NH0G
-         AY1ewHaTalV1HSGoEFCtu+A2vAQIXGVaOfahGKKJZWrF9TCm4SoiN4bRoh52WDed4FUV
-         G62Q==
-X-Gm-Message-State: AOAM533bMOgxs6cggRgZ+OyrUcTdw5FgufX98w6wlWlcymRs+/OQPsaN
-	lNIVd2hLjdLBEVVsSRDRCRBscCZXG5kt5eyec6g=
-X-Google-Smtp-Source: ABdhPJxGdlNUdBRS1iBqiaMmtFTqAAQzyJjG/eK1PxTCBXQidOo3+5es21U4JMteIQfS2+M+6HtClpaPShrVhWJk5Xc=
-X-Received: by 2002:a17:906:aada:: with SMTP id kt26mr4547863ejb.137.1616604150769;
- Wed, 24 Mar 2021 09:42:30 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210323211230.1639990-1-raj.khem@gmail.com>
-In-Reply-To: <20210323211230.1639990-1-raj.khem@gmail.com>
+        h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=2PzrL5BCC8JTqrzhVdQfLSg6CxjPMVDaUVyhabe4kOc=;
+        b=KAeoKYdXED3nFOF1xifCuSOxYqRCrDek3JnpYMxjkHlOr/6HkGTSMr0nrfAQcWNeRy
+         lRuOSazNDY3kzKFBwhzQ681jXk+aQm9uxUs153Bqq95ye/Rb4KEJiOSF6lXSSNZ2O0ag
+         oYefKIYM8jc6jwT4xA/z5M52gCNA7Gwg8JJdaDJSM3xNlLFQ+C6qUMx19TpmLPgJDaO8
+         BtbhBeJIYT8UP7QkMKa6ZIoUJvwfsEpqHM2msACdfEXMPt2lug+1VvSJBz6mcomHvCrP
+         x4QO1YVoXA3zAdhAaj39ipAXgfJC4Ct97dOWLecTRHChu/rjfThc/bD3jImFqCgaz3YJ
+         Qm4g==
+X-Gm-Message-State: AOAM531fer7Xunhmf6K5uY/Ogo7OhLxvZhWEDHsJi4mJfLgBfJCxHGSa
+	r1esWQyZrC4TS6hU+wtks4I=
+X-Google-Smtp-Source: ABdhPJwoBPxratomvJsirS2Jc2gVtpv3Fk616hncAyhDn1rWlpc6QY3v6weA8V85UPV02eL/LYc5og==
+X-Received: by 2002:a05:6402:1350:: with SMTP id y16mr4385017edw.309.1616604235358;
+        Wed, 24 Mar 2021 09:43:55 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id p19sm1402447edr.57.2021.03.24.09.43.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 24 Mar 2021 09:43:54 -0700 (PDT)
 From: "Martin Jansa" <Martin.Jansa@gmail.com>
-Date: Wed, 24 Mar 2021 17:42:19 +0100
-Message-ID: <CA+chaQfR+Fp2B10=fLT9rDpMVgUb6nxe_xcE47eAMWJYC_q4WA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] guider: Upgrade 3.9.7 -> 3.9.8
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 24 Mar 2021 17:43:54 +0100
 To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
 	Peace Lee <iipeace5@gmail.com>
-Content-Type: multipart/alternative; boundary="00000000000026304b05be4afc32"
+Subject: Re: [dunfell][PATCH] guider: Upgrade to 3.9.7
+Message-ID: <20210324164354.fqgz6s65jfpotd5k@jama>
+References: <20210324104629.3484418-1-Martin.Jansa@gmail.com>
+ <CAMKF1sonuwqAgSp-QzLq9eC879q9weuUgr6_NxLNDUiAs+waOQ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1sonuwqAgSp-QzLq9eC879q9weuUgr6_NxLNDUiAs+waOQ@mail.gmail.com>
+X-Groupsio-MsgNum: 90307
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="rte5l2f5l6e6lmog"
+Content-Disposition: inline
 
---00000000000026304b05be4afc32
-Content-Type: text/plain; charset="UTF-8"
+--rte5l2f5l6e6lmog
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-The PR on github changed SRCREV couple times (while calling it 3.9.8 whole
-time) and the currently latest version on github says
+On Wed, Mar 24, 2021 at 08:54:47AM -0700, Khem Raj wrote:
+> there is v2 in master-next which I will send once builds are done.
 
-SRCREV = "bab995ce718b58d4b5fee594771884dea238d70a"
+This is for 3.9.7 (because that's where it switched from python2 to
+python3) not 3.9.8 targetting master now.
 
-On Tue, Mar 23, 2021 at 10:12 PM Khem Raj <raj.khem@gmail.com> wrote:
+> On Wed, Mar 24, 2021 at 3:46 AM Martin Jansa <martin.jansa@gmail.com> wrote:
+> >
+> > From: Peace Lee <iipeace5@gmail.com>
+> >
+> > Signed-off-by: Peace Lee <iipeace5@gmail.com>
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ---
+> >  .../recipes-devtools/guider/guider_3.9.6.bb   | 39 -------------------
+> >  .../recipes-devtools/guider/guider_3.9.7.bb   | 19 +++++++++
+> >  2 files changed, 19 insertions(+), 39 deletions(-)
+> >  delete mode 100644 meta-oe/recipes-devtools/guider/guider_3.9.6.bb
+> >  create mode 100644 meta-oe/recipes-devtools/guider/guider_3.9.7.bb
+> >
+> > diff --git a/meta-oe/recipes-devtools/guider/guider_3.9.6.bb b/meta-oe/recipes-devtools/guider/guider_3.9.6.bb
+> > deleted file mode 100644
+> > index f059002161..0000000000
+> > --- a/meta-oe/recipes-devtools/guider/guider_3.9.6.bb
+> > +++ /dev/null
+> > @@ -1,39 +0,0 @@
+> > -SUMMARY = "runtime performance analyzer"
+> > -HOMEPAGE = "https://github.com/iipeace/guider"
+> > -BUGTRACKER = "https://github.com/iipeace/guider/issues"
+> > -AUTHOR = "Peace Lee <ipeace5@gmail.com>"
+> > -
+> > -LICENSE = "GPLv2+"
+> > -LIC_FILES_CHKSUM = "file://LICENSE;md5=2c1c00f9d3ed9e24fa69b932b7e7aff2"
+> > -
+> > -PV = "3.9.6+git${SRCPV}"
+> > -PR = "r0"
+> > -
+> > -SRC_URI = "git://github.com/iipeace/${BPN}"
+> > -#SRCREV = "${AUTOREV}"
+> > -SRCREV = "fef25c41efb9bde0614ea477d0b90bd9565ae0b4"
+> > -
+> > -S = "${WORKDIR}/git"
+> > -R = "${RECIPE_SYSROOT}"
+> > -
+> > -inherit ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "distutils", "", d)}
+> > -
+> > -GUIDER_OBJ = "guider.pyc"
+> > -GUIDER_SCRIPT = "guider"
+> > -
+> > -do_install() {
+> > -    python ${S}/setup.py install
+> > -
+> > -    install -d ${D}${bindir}
+> > -    install -v -m 0755 ${STAGING_BINDIR_NATIVE}/${GUIDER_SCRIPT} ${D}${bindir}/${GUIDER_SCRIPT}
+> > -
+> > -    install -d ${D}${datadir}/${BPN}
+> > -    install -v -m 0755 ${STAGING_LIBDIR_NATIVE}/python${PYTHON_BASEVERSION}/site-packages/${BPN}/${GUIDER_OBJ} ${D}${datadir}/${BPN}/${GUIDER_OBJ}
+> > -}
+> > -
+> > -RDEPENDS_${PN} = "python-ctypes python-shell \
+> > -                  python-json python-subprocess"
+> > -python() {
+> > -    if 'meta-python2' not in d.getVar('BBFILE_COLLECTIONS').split():
+> > -        raise bb.parse.SkipRecipe('Requires meta-python2 to be present.')
+> > -}
+> > diff --git a/meta-oe/recipes-devtools/guider/guider_3.9.7.bb b/meta-oe/recipes-devtools/guider/guider_3.9.7.bb
+> > new file mode 100644
+> > index 0000000000..2b799fd5e4
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-devtools/guider/guider_3.9.7.bb
+> > @@ -0,0 +1,19 @@
+> > +SUMMARY = "runtime performance analyzer"
+> > +HOMEPAGE = "https://github.com/iipeace/guider"
+> > +BUGTRACKER = "https://github.com/iipeace/guider/issues"
+> > +AUTHOR = "Peace Lee <ipeace5@gmail.com>"
+> > +
+> > +LICENSE = "GPLv2+"
+> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=2c1c00f9d3ed9e24fa69b932b7e7aff2"
+> > +
+> > +PV = "3.9.7+git${SRCPV}"
+> > +
+> > +SRC_URI = "git://github.com/iipeace/${BPN}"
+> > +SRCREV = "c87269d6d4669d12c99a2a7b9b07c39a5dd24ac6"
+> > +
+> > +S = "${WORKDIR}/git"
+> > +
+> > +inherit setuptools3
+> > +
+> > +RDEPENDS_${PN} = "python3 python3-core \
+> > +        python3-ctypes python3-shell python3-json"
+> > --
+> > 2.30.2
+> >
 
-> From: Peace Lee <iipeace5@gmail.com>
->
-> Upgrade to release 3.9.8
->
-> Signed-off-by: Peace Lee <iipeace5@gmail.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../guider/{guider_3.9.7.bb => guider_3.9.8.bb}             | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->  rename meta-oe/recipes-devtools/guider/{guider_3.9.7.bb =>
-> guider_3.9.8.bb} (78%)
->
-> diff --git a/meta-oe/recipes-devtools/guider/guider_3.9.7.bb
-> b/meta-oe/recipes-devtools/guider/guider_3.9.8.bb
-> similarity index 78%
-> rename from meta-oe/recipes-devtools/guider/guider_3.9.7.bb
-> rename to meta-oe/recipes-devtools/guider/guider_3.9.8.bb
-> index 88fad936ba..91693d8626 100644
-> --- a/meta-oe/recipes-devtools/guider/guider_3.9.7.bb
-> +++ b/meta-oe/recipes-devtools/guider/guider_3.9.8.bb
-> @@ -1,4 +1,4 @@
-> -SUMMARY = "runtime performance analyzer"
-> +SUMMARY = "performance analyzer"
->  HOMEPAGE = "https://github.com/iipeace/guider"
->  BUGTRACKER = "https://github.com/iipeace/guider/issues"
->  AUTHOR = "Peace Lee <ipeace5@gmail.com>"
-> @@ -6,10 +6,10 @@ AUTHOR = "Peace Lee <ipeace5@gmail.com>"
->  LICENSE = "GPLv2+"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=2c1c00f9d3ed9e24fa69b932b7e7aff2"
->
-> -PV = "3.9.7+git${SRCPV}"
-> +PV = "3.9.8+git${SRCPV}"
->
->  SRC_URI = "git://github.com/iipeace/${BPN}
-> <http://github.com/iipeace/$%7BBPN%7D>"
-> -SRCREV = "459b5189a46023fc98e19888b196bdc2674022fd"
-> +SRCREV = "f2e6d84ffa341728daf0cc2ba2736d58008ea9f1"
->
->  S = "${WORKDIR}/git"
->
-> --
-> 2.31.0
->
->
-> 
->
->
+--rte5l2f5l6e6lmog
+Content-Type: application/pgp-signature; name="signature.asc"
 
---00000000000026304b05be4afc32
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNATURE-----
 
-<div dir=3D"ltr"><div dir=3D"ltr">The PR on github changed SRCREV couple ti=
-mes (while calling it 3.9.8 whole time) and the currently latest version on=
- github says<div><br></div><div>SRCREV =3D &quot;bab995ce718b58d4b5fee59477=
-1884dea238d70a&quot;</div></div></div><br><div class=3D"gmail_quote"><div d=
-ir=3D"ltr" class=3D"gmail_attr">On Tue, Mar 23, 2021 at 10:12 PM Khem Raj &=
-lt;<a href=3D"mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt; wrote:<=
-br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
-x;border-left:1px solid rgb(204,204,204);padding-left:1ex">From: Peace Lee =
-&lt;<a href=3D"mailto:iipeace5@gmail.com" target=3D"_blank">iipeace5@gmail.=
-com</a>&gt;<br>
-<br>
-Upgrade to release 3.9.8<br>
-<br>
-Signed-off-by: Peace Lee &lt;<a href=3D"mailto:iipeace5@gmail.com" target=
-=3D"_blank">iipeace5@gmail.com</a>&gt;<br>
-Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=
-=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
----<br>
-=C2=A0.../guider/{<a href=3D"http://guider_3.9.7.bb" rel=3D"noreferrer" ta=
-rget=3D"_blank">guider_3.9.7.bb</a> =3D&gt; <a href=3D"http://guider_3.9.8.=
-bb" rel=3D"noreferrer" target=3D"_blank">guider_3.9.8.bb</a>}=C2=A0 =C2=A0 =
-=
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 6 +++---<br>
-=C2=A01 file changed, 3 insertions(+), 3 deletions(-)<br>
-=C2=A0rename meta-oe/recipes-devtools/guider/{<a href=3D"http://guider_3.9=
-.7.bb" rel=3D"noreferrer" target=3D"_blank">guider_3.9.7.bb</a> =3D&gt; <a =
-href=3D"http://guider_3.9.8.bb" rel=3D"noreferrer" target=3D"_blank">guider=
-_3.9.8.bb</a>} (78%)<br>
-<br>
-diff --git a/meta-oe/recipes-devtools/guider/<a href=3D"http://guider_3.9.=
-7.bb" rel=3D"noreferrer" target=3D"_blank">guider_3.9.7.bb</a> b/meta-oe/re=
-cipes-devtools/guider/<a href=3D"http://guider_3.9.8.bb" rel=3D"noreferrer"=
- target=3D"_blank">guider_3.9.8.bb</a><br>
-similarity index 78%<br>
-rename from meta-oe/recipes-devtools/guider/<a href=3D"http://guider_3.9.7=
-.bb" rel=3D"noreferrer" target=3D"_blank">guider_3.9.7.bb</a><br>
-rename to meta-oe/recipes-devtools/guider/<a href=3D"http://guider_3.9.8.b=
-b" rel=3D"noreferrer" target=3D"_blank">guider_3.9.8.bb</a><br>
-index 88fad936ba..91693d8626 100644<br>
---- a/meta-oe/recipes-devtools/guider/<a href=3D"http://guider_3.9.7.bb" r=
-el=3D"noreferrer" target=3D"_blank">guider_3.9.7.bb</a><br>
-+++ b/meta-oe/recipes-devtools/guider/<a href=3D"http://guider_3.9.8.bb" r=
-el=3D"noreferrer" target=3D"_blank">guider_3.9.8.bb</a><br>
-@@ -1,4 +1,4 @@<br>
--SUMMARY =3D &quot;runtime performance analyzer&quot;<br>
-+SUMMARY =3D &quot;performance analyzer&quot;<br>
-=C2=A0HOMEPAGE =3D &quot;<a href=3D"https://github.com/iipeace/guider" rel=
-=
-=3D"noreferrer" target=3D"_blank">https://github.com/iipeace/guider</a>&qu=
-ot;<br>
-=C2=A0BUGTRACKER =3D &quot;<a href=3D"https://github.com/iipeace/guider/is=
-sues" rel=3D"noreferrer" target=3D"_blank">https://github.com/iipeace/guide=
-r/issues</a>&quot;<br>
-=C2=A0AUTHOR =3D &quot;Peace Lee &lt;<a href=3D"mailto:ipeace5@gmail.com" =
-target=3D"_blank">ipeace5@gmail.com</a>&gt;&quot;<br>
-@@ -6,10 +6,10 @@ AUTHOR =3D &quot;Peace Lee &lt;<a href=3D"mailto:ipeace5=
-@gmail.com" target=3D"_blank">ipeace5@gmail.com</a>&gt;&quot;<br>
-=C2=A0LICENSE =3D &quot;GPLv2+&quot;<br>
-=C2=A0LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D2c1c00f9d3ed9e24fa69=
-b932b7e7aff2&quot;<br>
-<br>
--PV =3D &quot;3.9.7+git${SRCPV}&quot;<br>
-+PV =3D &quot;3.9.8+git${SRCPV}&quot;<br>
-<br>
-=C2=A0SRC_URI =3D &quot;git://<a href=3D"http://github.com/iipeace/$%7BBPN=
-%7D" rel=3D"noreferrer" target=3D"_blank">github.com/iipeace/${BPN}</a>&quo=
-t;<br>
--SRCREV =3D &quot;459b5189a46023fc98e19888b196bdc2674022fd&quot;<br>
-+SRCREV =3D &quot;f2e6d84ffa341728daf0cc2ba2736d58008ea9f1&quot;<br>
-<br>
-=C2=A0S =3D &quot;${WORKDIR}/git&quot;<br>
-<br>
--- <br>
-2.31.0<br>
-<br>
-<br>
-<br>
-<br>
-</blockquote></div>
+iF0EABECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCYFtsSAAKCRA3VSO3ZXaA
+HJLmAJ0U/FRRi1W5w3/s0sbC9nfHtece7wCfY8rrhqu9nG1v5fzJszOIxjMNbN4=
+=6ELi
+-----END PGP SIGNATURE-----
 
---00000000000026304b05be4afc32--
+--rte5l2f5l6e6lmog--
