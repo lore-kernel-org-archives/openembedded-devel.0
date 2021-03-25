@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.8072.1616679288598854072
+ by mx.groups.io with SMTP id smtpd.web08.8133.1616679289198667895
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 25 Mar 2021 06:34:49 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=38494 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lPQ8M-0007lW-9e; Thu, 25 Mar 2021 15:34:47 +0200
+	id 1lPQ8N-0007lW-8Z; Thu, 25 Mar 2021 15:34:48 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 03/11] python3-pytest-helpers-namespace: Upgrade 2019.1.8 -> 2021.3.24
-Date: Thu, 25 Mar 2021 15:34:28 +0200
-Message-Id: <20210325133436.18328-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 04/11] python3-elementpath: Upgrade 2.2.0 -> 2.2.1
+Date: Thu, 25 Mar 2021 15:34:29 +0200
+Message-Id: <20210325133436.18328-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210325133436.18328-1-leon.anavi@konsulko.com>
 References: <20210325133436.18328-1-leon.anavi@konsulko.com>
@@ -30,48 +30,33 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2021.3.24:
+Upgrade to release 2.2.1:
 
-- Switched project to a src layout.
-- Switched project to a declarative setuptools approach
-- Added support to check if a helper has been registered
-
-License-Update: Fix year in the license file
+- Add function signatures at token registration
+- Some fixes to XPath tokens and more XPath 3.0 implementations
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...b => python3-pytest-helpers-namespace_2021.3.24.bb} | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pytest-helpers-namespace_2019.1.8.bb => python3-pytest-helpers-namespace_2021.3.24.bb} (64%)
+ ...ython3-elementpath_2.2.0.bb => python3-elementpath_2.2.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-elementpath_2.2.0.bb => python3-elementpath_2.2.1.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2019.1.8.bb b/meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2021.3.24.bb
-similarity index 64%
-rename from meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2019.1.8.bb
-rename to meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2021.3.24.bb
-index b3aced4f6..9211ac394 100644
---- a/meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2019.1.8.bb
-+++ b/meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2021.3.24.bb
-@@ -2,13 +2,17 @@ DESCRIPTION = "This plugin does not provide any helpers to pytest, it does, howe
- HOMEPAGE = "https://github.com/saltstack/pytest-helpers-namespace"
- SECTION = "devel/python"
- LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=cc99508c43d9d14fd51c7fac622ffd23"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=440a4cdb311cd7ad181efb4cba06d562"
+diff --git a/meta-python/recipes-devtools/python/python3-elementpath_2.2.0.bb b/meta-python/recipes-devtools/python/python3-elementpath_2.2.1.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-elementpath_2.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-elementpath_2.2.1.bb
+index d1383c049..b0a733968 100644
+--- a/meta-python/recipes-devtools/python/python3-elementpath_2.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-elementpath_2.2.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/elementpath"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5dbb7fb7d72da3921202dd7b995d3ecf"
  
--SRC_URI[md5sum] = "04ec1d8750f9b154e782a47cf8b30736"
--SRC_URI[sha256sum] = "4eff23a19f92410c0166f6dffbfa8901d3e14a80e97d70cd08428b6d597771ce"
-+SRC_URI[sha256sum] = "188df5a7c52390fa27d6cd2f18e74d64a2ef0b9fb6e12f15fdf5a95f4813d25f"
+-SRC_URI[sha256sum] = "3bbd0e9dcaf9ab7b2080fd4b457d67f166f7c4d1ece7348425195729059b427c"
++SRC_URI[sha256sum] = "c7b996c5624926f329f4379fbcffd5787629e08b2f8d7159d23525e9243ba637"
  
+ PYPI_PACKAGE = "elementpath"
  inherit pypi setuptools3
- 
-+DEPENDS += "\
-+    ${PYTHON_PN}-wheel-native \
-+    ${PYTHON_PN}-pip-native \
-+"
-+
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-pytest \
- "
 -- 
 2.17.1
 
