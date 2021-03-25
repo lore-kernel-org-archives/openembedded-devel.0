@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.7914.1616679290821257798
+ by mx.groups.io with SMTP id smtpd.web10.8130.1616679291704684096
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Mar 2021 06:34:51 -0700
+ Thu, 25 Mar 2021 06:34:52 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=38494 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lPQ8P-0007lW-Lr; Thu, 25 Mar 2021 15:34:50 +0200
+	id 1lPQ8Q-0007lW-EB; Thu, 25 Mar 2021 15:34:51 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 06/11] python3-rfc3339-validator: Upgrade 0.1.2 -> 0.1.3
-Date: Thu, 25 Mar 2021 15:34:31 +0200
-Message-Id: <20210325133436.18328-6-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 07/11] python3-pyflakes: Upgrade 2.3.0 -> 2.3.1
+Date: Thu, 25 Mar 2021 15:34:32 +0200
+Message-Id: <20210325133436.18328-7-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210325133436.18328-1-leon.anavi@konsulko.com>
 References: <20210325133436.18328-1-leon.anavi@konsulko.com>
@@ -30,32 +30,32 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.1.3:
+Upgrade to release 2.3.1:
 
-- Add missing test requirements to setup.py
+- Allow passing tox positional arguments to unittest
+- Annotations no longer redefine names
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...9-validator_0.1.2.bb => python3-rfc3339-validator_0.1.3.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-rfc3339-validator_0.1.2.bb => python3-rfc3339-validator_0.1.3.bb} (76%)
+ .../{python3-pyflakes_2.3.0.bb => python3-pyflakes_2.3.1.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pyflakes_2.3.0.bb => python3-pyflakes_2.3.1.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.2.bb b/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.3.bb
-similarity index 76%
-rename from meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.2.bb
-rename to meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.3.bb
-index e226e11b7..a07a09447 100644
---- a/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.3.bb
-@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a21b13b5a996f08f7e0b088aa38ce9c6"
+diff --git a/meta-python/recipes-devtools/python/python3-pyflakes_2.3.0.bb b/meta-python/recipes-devtools/python/python3-pyflakes_2.3.1.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-pyflakes_2.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-pyflakes_2.3.1.bb
+index 0c8956728..69680ddcb 100644
+--- a/meta-python/recipes-devtools/python/python3-pyflakes_2.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pyflakes_2.3.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/dreamhost/cliff"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=690c2d09203dc9e07c4083fc45ea981f"
  
- FILESEXTRAPATHS_prepend := "${THISDIR}/python-rfc3339-validator:"
+-SRC_URI[sha256sum] = "e59fd8e750e588358f1b8885e5a4751203a0516e0ee6d34811089ac294c8806f"
++SRC_URI[sha256sum] = "f5bc8ecabc05bb9d291eb5203d6810b49040f6ff446a756326104746cc00c1db"
  
--SRC_URI[md5sum] = "2c233007189d5ef21046cb2afac51a96"
--SRC_URI[sha256sum] = "c9659c3183488a1875c4d327c9873d9e92c54cdcd69dfbfae7546ad8b27baf9a"
-+SRC_URI[sha256sum] = "7a578aa0740e9ee2b48356fe1f347139190c4c72e27f303b3617054efd15df32"
- 
- PYPI_PACKAGE = "rfc3339_validator"
+ inherit pypi setuptools3
  
 -- 
 2.17.1
