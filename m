@@ -1,86 +1,88 @@
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web12.405.1616693139509860003
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web10.382.1616693140443278940
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Mar 2021 10:25:39 -0700
+ Thu, 25 Mar 2021 10:25:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Y3oeRy+B;
- spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f49.google.com with SMTP id l4so4201780ejc.10
-        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Mar 2021 10:25:39 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=FKGHp0Eq;
+ spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f51.google.com with SMTP id a7so4247007ejs.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Mar 2021 10:25:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=xXHN4GLvfD7UbI5qP/gsgnp0fOvzw1opf/4vY/LERuc=;
-        b=Y3oeRy+BexQRxeY7GmOjDbeUtngakNGwentNlEs2DtmCLz/8rwBHOMoLkqgowW0GRO
-         JikAaFOzYkHEpkOxa8TXYfnSDua6hpFfmWeDp0iaPxN69gknZyiK175AGF+RWbYJDONM
-         4TBHHOBFR0i8HLAXVs34JJmKm8l1mK38+5gz6GWohN6Q//BBm1PY696r6fSeg63hBMHP
-         8lVybB8moSS8Vzb/Xp2mZyaTcZlsECSBbpYSb1g6OF9FNK3m3VDKuEwPpazwz9fEjC1E
-         uvycPOGsz7+BeD86sPTz/bW3ya85/IfsxafW+9PEuDUFd4IoXEFeWKXhk9p5CJ4OuCkS
-         RYxg==
+        bh=QAhPaIkXYKAlSa+HVxbeY644/yk8QjvuekdYCBQWx4I=;
+        b=FKGHp0Eq5HiHNqcQvDDIuWD/TIFKfla1kO8Bo74k3nqNrONlj/t9ZIUbwrprm6G4FU
+         /NNjo3JnB9jE00LRNlFtBntit6dCTo8zA3g1xkBQf9+Br+CFk162xbauHZJlBfNzuRDT
+         T1gzjnVoJrCSpBaU/ycY+bkV7mZ3vnEf4jR4w9hNqzdqbxW33VXZ3cADRLjLWLll3nJI
+         krqhrk5hlz01BnQkt1b6C/2+Wmrr6zbpQp2arxZMJ+/sE41Aq9M6wyn8iXwOYf+dPDV2
+         VvuoGaOflAdywgL4CCTYcm5X0sVqcka15r9+u6vDOva2uai4Nk/84fqxnZb02jkMG8Ml
+         9+yQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=xXHN4GLvfD7UbI5qP/gsgnp0fOvzw1opf/4vY/LERuc=;
-        b=emp/2bVzkeGoy9W5JKOGsB/4lD9zwl/bQ7XqWaiTkfPMntw9Ea/2iRnqs5BYQv/ZZM
-         olMjePcHSFHq2I4zIvNABny/9K8OZTrVswPzMX/Xa8SYPYZocX7xGfdSw6I+Wta9rKEj
-         HNH557gTW7CQroB5YACeC41ovplrxe4vjibp/PA/V5Al/y0mS4ETHk+qA4tMWSDLoa4L
-         iXd43Oo+fEK6ouHI7WZx0QH9wRiBUX7UbZgWry1Fn7SQw/k8dr5QPDw8NmLXn+ViyB9f
-         4elb/iUuDDqk3cW4alFxrhcM6qODs7U+LNwwgTi1y09DdQ9l5vrtoUm6tTazC0UdZcRN
-         tN+A==
-X-Gm-Message-State: AOAM531qCw+vbfSIuRvJ9p8D4qUg4CGvOHS6YdGClg0C/Esy9snpcpAz
-	pLPEImsR2O493QaWTDj3n5VAjUVPayI=
-X-Google-Smtp-Source: ABdhPJxo1YJOCF8hWeu0wyEgPt7AL7fjMpodyYxvBA52o2JCuTV6flZZl+1Bc+1pGE3iKzgJ1k66vg==
-X-Received: by 2002:a17:906:da0e:: with SMTP id fi14mr11017386ejb.188.1616693138029;
+        bh=QAhPaIkXYKAlSa+HVxbeY644/yk8QjvuekdYCBQWx4I=;
+        b=b1ArMhMvCANl1OF8esXpEci4OSse6IgqZsNMEqleitVTSK93+lAqICgGO0m6udQnu5
+         2s0Nz/qtCkqmGDJ2ds9FNGGCAw02C6RpOU3bX8LBZ0gw0k1/0qRyh+pZyZykdi3pb50h
+         lIbTmkdHRBHYPk+CoXcr+fJi2J75nkc2k3G0kveIO2gFC4L35DouN9d7x/j0/AI3cmyK
+         DEg6mKGSz8OiG5tGpF94rRFg7bMihBLDVcJG2NdwZhYkZ9ab/CmnLI6emh+zg9toLI42
+         96DkFcX48G0XwARy/Q5DV304BJivGDYDwuTlLuAwK9XtEGD+1FgvpVRFsJqTUugplyNj
+         RDZQ==
+X-Gm-Message-State: AOAM5336cb9eDC1uvFgxyP3vpaW8X0hypg+8C94E0dcFpjzD8gfLghv4
+	EnZjN1GuF4rbbL9Zca+oILptlFq138Y=
+X-Google-Smtp-Source: ABdhPJyhuhLcQ2NG8g6MjNrn19rD6wQFN2vNIijHSLWpbSeK378eHBK9HG70LONDdcRTRFtp3+bCWw==
+X-Received: by 2002:a17:906:4dce:: with SMTP id f14mr10471554ejw.349.1616693138976;
         Thu, 25 Mar 2021 10:25:38 -0700 (PDT)
 Return-Path: <martin.jansa@gmail.com>
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id x4sm2826539edd.58.2021.03.25.10.25.37
+        by smtp.gmail.com with ESMTPSA id jx22sm2684293ejc.105.2021.03.25.10.25.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Mar 2021 10:25:37 -0700 (PDT)
+        Thu, 25 Mar 2021 10:25:38 -0700 (PDT)
 From: "Martin Jansa" <Martin.Jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] packagegroup-meta-{oe,multimedia}: move pipewire to the right packagegroup
-Date: Thu, 25 Mar 2021 18:25:31 +0100
-Message-Id: <20210325172532.1099941-3-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH] conf/layer.conf: include .bbappend files in BBFILES_DYNAMIC
+Date: Thu, 25 Mar 2021 18:25:32 +0100
+Message-Id: <20210325172532.1099941-4-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210325172532.1099941-1-Martin.Jansa@gmail.com>
 References: <20210325172532.1099941-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-* it's in meta-multimedia not meta-oe layers
+* so that the following files are actually read:
+  meta-oe/dynamic-layers/perl-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
+  meta-oe/dynamic-layers/gnome-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
+  meta-oe/dynamic-layers/meta-python/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
+  meta-oe/dynamic-layers/networking-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../packagegroups/packagegroup-meta-multimedia.bb                | 1 +
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb       | 1 -
- 2 files changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/conf/layer.conf | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-index c4be1b5ce9..350c14b264 100644
---- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-+++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-@@ -53,6 +53,7 @@ RDEPENDS_packagegroup-meta-multimedia = "\
-     bigbuckbunny-720p \
-     tearsofsteel-1080p \
-     schroedinger \
-+    pipewire \
-     projucer \
-     libcamera \
-     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libde265 openh264", "", d)} \
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 2b79b3d8b5..42087ce4e0 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -670,7 +670,6 @@ RDEPENDS_packagegroup-meta-oe-multimedia ="\
-     libvpx \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xsp", "", d)} \
-     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "mpv", "", d)} \
--    pipewire \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pavucontrol", "", d)} \
-     libopusenc \
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index bfba7e7b11..d3aeaba3d9 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -26,10 +26,14 @@ BBFILE_PRIORITY_openembedded-layer = "6"
+ # only activates content when identified layers are present,
+ # to ensure yocto compatibility check pass
+ BBFILES_DYNAMIC += " \
+-meta-python:${LAYERDIR}/dynamic-layers/meta-python/recipes-*/*/*.bb \
+-networking-layer:${LAYERDIR}/dynamic-layers/networking-layer/recipes-*/*/*.bb \
+-gnome-layer:${LAYERDIR}/dynamic-layers/gnome-layer/recipes-*/*/*.bb \
+-perl-layer:${LAYERDIR}/dynamic-layers/perl-layer/recipes-*/*/*.bb \
++    meta-python:${LAYERDIR}/dynamic-layers/meta-python/recipes-*/*/*.bb \
++    meta-python:${LAYERDIR}/dynamic-layers/meta-python/recipes-*/*/*.bbappend \
++    networking-layer:${LAYERDIR}/dynamic-layers/networking-layer/recipes-*/*/*.bb \
++    networking-layer:${LAYERDIR}/dynamic-layers/networking-layer/recipes-*/*/*.bbappend \
++    gnome-layer:${LAYERDIR}/dynamic-layers/gnome-layer/recipes-*/*/*.bb \
++    gnome-layer:${LAYERDIR}/dynamic-layers/gnome-layer/recipes-*/*/*.bbappend \
++    perl-layer:${LAYERDIR}/dynamic-layers/perl-layer/recipes-*/*/*.bb \
++    perl-layer:${LAYERDIR}/dynamic-layers/perl-layer/recipes-*/*/*.bbappend \
  "
+ 
+ # This should only be incremented on significant changes that will
