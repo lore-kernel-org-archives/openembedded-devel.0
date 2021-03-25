@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.8130.1616679291704684096
+ by mx.groups.io with SMTP id smtpd.web10.8131.1616679292291547864
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 25 Mar 2021 06:34:52 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=38494 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lPQ8Q-0007lW-EB; Thu, 25 Mar 2021 15:34:51 +0200
+	id 1lPQ8R-0007lW-AZ; Thu, 25 Mar 2021 15:34:51 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 07/11] python3-pyflakes: Upgrade 2.3.0 -> 2.3.1
-Date: Thu, 25 Mar 2021 15:34:32 +0200
-Message-Id: <20210325133436.18328-7-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 08/11] python3-pint: Upgrade 0.16.1 -> 0.17
+Date: Thu, 25 Mar 2021 15:34:33 +0200
+Message-Id: <20210325133436.18328-8-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210325133436.18328-1-leon.anavi@konsulko.com>
 References: <20210325133436.18328-1-leon.anavi@konsulko.com>
@@ -30,32 +30,51 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.3.1:
+Upgrade to release 0.17:
 
-- Allow passing tox positional arguments to unittest
-- Annotations no longer redefine names
+- Add the Wh unit for battery capacity measurements
+- Fix issue with reducable dimensionless units when using power
+  (Quantity**ndarray)
+- Fix comparisons between Quantities and Measurements.
+- UnitsContainer returns false if other is str and cannnot be
+  parsed
+- Fix numpy.linalg.solve unit output.
+- Support numpy.lib.stride_tricks.sliding_window_view.
+- NEP29 Support docs.
+- Move all tests to pytest.
+- Fix to __pow__ and __ipow__
+- Migrate to Github Actions.
+- Update linter to use pre-commit.
+- Quantity comparisons now ensure other is Quantity.
+- Add sign function compatibility.
+- Fix scalar to ndarray tolist.
+- Fix tolist function with scalar ndarray.
+- Corrected typos and dacstrings
+- Implements a first benchmark suite in airspeed velocity (asv).
+- Power for pseudo-dimensionless units.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pyflakes_2.3.0.bb => python3-pyflakes_2.3.1.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pyflakes_2.3.0.bb => python3-pyflakes_2.3.1.bb} (80%)
+ .../python/{python3-pint_0.16.1.bb => python3-pint_0.17.bb}    | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pint_0.16.1.bb => python3-pint_0.17.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyflakes_2.3.0.bb b/meta-python/recipes-devtools/python/python3-pyflakes_2.3.1.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-pyflakes_2.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-pyflakes_2.3.1.bb
-index 0c8956728..69680ddcb 100644
---- a/meta-python/recipes-devtools/python/python3-pyflakes_2.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyflakes_2.3.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/dreamhost/cliff"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=690c2d09203dc9e07c4083fc45ea981f"
+diff --git a/meta-python/recipes-devtools/python/python3-pint_0.16.1.bb b/meta-python/recipes-devtools/python/python3-pint_0.17.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-pint_0.16.1.bb
+rename to meta-python/recipes-devtools/python/python3-pint_0.17.bb
+index d96659592..9a474901e 100644
+--- a/meta-python/recipes-devtools/python/python3-pint_0.16.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pint_0.17.bb
+@@ -10,8 +10,7 @@ PYPI_PACKAGE := "Pint"
  
--SRC_URI[sha256sum] = "e59fd8e750e588358f1b8885e5a4751203a0516e0ee6d34811089ac294c8806f"
-+SRC_URI[sha256sum] = "f5bc8ecabc05bb9d291eb5203d6810b49040f6ff446a756326104746cc00c1db"
+ inherit pypi ptest setuptools3
  
- inherit pypi setuptools3
+-SRC_URI[md5sum] = "d4a7bbdf505dee964eb1e5e6e7f80c34"
+-SRC_URI[sha256sum] = "d43a2e9ae003164978b60fdf8cd920d8581e1a5991df8dded29b00f4850ec83a"
++SRC_URI[sha256sum] = "f4d0caa713239e6847a7c6eefe2427358566451fe56497d533f21fb590a3f313"
+ 
+ DEPENDS += "python3-setuptools-scm-native"
  
 -- 
 2.17.1
