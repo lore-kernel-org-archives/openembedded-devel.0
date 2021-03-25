@@ -1,250 +1,86 @@
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
- by mx.groups.io with SMTP id smtpd.web11.378.1616693138825705670
+Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
+ by mx.groups.io with SMTP id smtpd.web12.405.1616693139509860003
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 25 Mar 2021 10:25:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=U6aSTEoD;
- spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f44.google.com with SMTP id b7so4252458ejv.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Mar 2021 10:25:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Y3oeRy+B;
+ spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f49.google.com with SMTP id l4so4201780ejc.10
+        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Mar 2021 10:25:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=FtwtdQ6nRKo80qRWWjUtuCeQMb7iZkd1LmQR4kFfCY4=;
-        b=U6aSTEoDF2s10CDUR179RMJ52rczW5JMFKZYkwYa/xslxAoTbuTLVw3K5AWRmU898L
-         K9AbWgXkDV9qgPMs85Ti+rPqPZOdOgKrgxhZJsSUg/I4jYDFSzuKDTIYbHAhcTqeWuFS
-         uGp+4X4phojuvEcEXaTafrZjvI8ZxCFKUmR6it/FoweHzbVu0FF8eGMx88hMIVRdQDsb
-         Hoi5fa/mRtvwxUH5+/ys82FcPuW+PNoSiCwsCpJ29tQN40TPy0JEZiv/4lP4uHqNIHDJ
-         it1gWanmMaG5StaPJyV7K9b1F9XVUSuDMcKjkXG02p+uHVdSc/Wzz6XwSYw1W2wsAtjC
-         Qyqg==
+        bh=xXHN4GLvfD7UbI5qP/gsgnp0fOvzw1opf/4vY/LERuc=;
+        b=Y3oeRy+BexQRxeY7GmOjDbeUtngakNGwentNlEs2DtmCLz/8rwBHOMoLkqgowW0GRO
+         JikAaFOzYkHEpkOxa8TXYfnSDua6hpFfmWeDp0iaPxN69gknZyiK175AGF+RWbYJDONM
+         4TBHHOBFR0i8HLAXVs34JJmKm8l1mK38+5gz6GWohN6Q//BBm1PY696r6fSeg63hBMHP
+         8lVybB8moSS8Vzb/Xp2mZyaTcZlsECSBbpYSb1g6OF9FNK3m3VDKuEwPpazwz9fEjC1E
+         uvycPOGsz7+BeD86sPTz/bW3ya85/IfsxafW+9PEuDUFd4IoXEFeWKXhk9p5CJ4OuCkS
+         RYxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=FtwtdQ6nRKo80qRWWjUtuCeQMb7iZkd1LmQR4kFfCY4=;
-        b=kbFS/kXUar7NeximapKGMzl+qVDJeuCK/IvQTEYeG3Cht6U1sKqmScdlq7UQ89RLzN
-         agBtdEWwTwhwlZye5nkjqoq7fgmsUZhTUxKUxhFlK/zaxco35EUEVKYgDy8KFkl2sGcA
-         oeyqpWi2ZwwKMlgTA/uDsKYuojoLhmlL5MKAAEhtVDUnSoKqNygCJ9KDaxH2RGT4qb3Z
-         Q/SjgC9ZKkSL67n+O57bGGQDqSvuA0HuFnRyzr2w2oBj3ZZlIM0CMiaT+kXtndKvCm1g
-         ou151yIhZRS2I5/M/RtB3Fu9YPBqJ+jcHIxXLrstNClS5YkEJSKgvro+uUErCpxXliht
-         XbPw==
-X-Gm-Message-State: AOAM5307tYrH1A8nRyffev6hdflbK/0s4gFpJzSjEfYI5+2TrrqC9GZh
-	6UoaGeyH14D+XGlzerRqkPjiKwSrfP4=
-X-Google-Smtp-Source: ABdhPJygHlyrC4ALKX1GP6G9piI4knbnisoZgCGZA1ubuy321nOFf/Dftj2UJ9YdEKYNRs1aaEdLXQ==
-X-Received: by 2002:a17:906:7194:: with SMTP id h20mr10655419ejk.154.1616693137184;
-        Thu, 25 Mar 2021 10:25:37 -0700 (PDT)
+        bh=xXHN4GLvfD7UbI5qP/gsgnp0fOvzw1opf/4vY/LERuc=;
+        b=emp/2bVzkeGoy9W5JKOGsB/4lD9zwl/bQ7XqWaiTkfPMntw9Ea/2iRnqs5BYQv/ZZM
+         olMjePcHSFHq2I4zIvNABny/9K8OZTrVswPzMX/Xa8SYPYZocX7xGfdSw6I+Wta9rKEj
+         HNH557gTW7CQroB5YACeC41ovplrxe4vjibp/PA/V5Al/y0mS4ETHk+qA4tMWSDLoa4L
+         iXd43Oo+fEK6ouHI7WZx0QH9wRiBUX7UbZgWry1Fn7SQw/k8dr5QPDw8NmLXn+ViyB9f
+         4elb/iUuDDqk3cW4alFxrhcM6qODs7U+LNwwgTi1y09DdQ9l5vrtoUm6tTazC0UdZcRN
+         tN+A==
+X-Gm-Message-State: AOAM531qCw+vbfSIuRvJ9p8D4qUg4CGvOHS6YdGClg0C/Esy9snpcpAz
+	pLPEImsR2O493QaWTDj3n5VAjUVPayI=
+X-Google-Smtp-Source: ABdhPJxo1YJOCF8hWeu0wyEgPt7AL7fjMpodyYxvBA52o2JCuTV6flZZl+1Bc+1pGE3iKzgJ1k66vg==
+X-Received: by 2002:a17:906:da0e:: with SMTP id fi14mr11017386ejb.188.1616693138029;
+        Thu, 25 Mar 2021 10:25:38 -0700 (PDT)
 Return-Path: <martin.jansa@gmail.com>
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id h8sm2925260ede.25.2021.03.25.10.25.36
+        by smtp.gmail.com with ESMTPSA id x4sm2826539edd.58.2021.03.25.10.25.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Mar 2021 10:25:36 -0700 (PDT)
+        Thu, 25 Mar 2021 10:25:37 -0700 (PDT)
 From: "Martin Jansa" <Martin.Jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] open-vm-tools: move to meta-networking
-Date: Thu, 25 Mar 2021 18:25:30 +0100
-Message-Id: <20210325172532.1099941-2-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH] packagegroup-meta-{oe,multimedia}: move pipewire to the right packagegroup
+Date: Thu, 25 Mar 2021 18:25:31 +0100
+Message-Id: <20210325172532.1099941-3-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210325172532.1099941-1-Martin.Jansa@gmail.com>
 References: <20210325172532.1099941-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-* and make it skipped only when meta-filesystem is missing as well
-
-* depends on libdnet from meta-networking and nothing in meta-oe depends on open-vm-tools
-
-* update packagegroup-meta-oe to match this, without either of these layers packagegroup-meta-oe is currently failing with:
-
-  ERROR: Nothing RPROVIDES 'open-vm-tools' (but meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb RDEPENDS on or otherwise requires it)
-  open-vm-tools was skipped: Requires meta-networking and meta-filesystems to be present.
-  NOTE: Runtime target 'open-vm-tools' is unbuildable, removing...
-  Missing or unbuildable dependency chain was: ['open-vm-tools']
-  ERROR: Required build target 'packagegroup-meta-oe' has no buildable providers.
-  Missing or unbuildable dependency chain was: ['packagegroup-meta-oe', 'open-vm-tools']
+* it's in meta-multimedia not meta-oe layers
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...itHub-Issue-367.-Remove-references-to-deprecated-G_.patch | 0
- ...ake-HgfsConvertFromNtTimeNsec-aware-of-64-bit-time_.patch | 0
- .../0001-configure.ac-don-t-use-dnet-config.patch            | 0
- .../0001-hgfsmounter-Makefile.am-support-usrmerge.patch      | 0
- .../open-vm-tools/0001-pollGtk-Drop-volatile-qualifier.patch | 0
- .../0001-utilBacktrace-Ignore-Warray-bounds.patch            | 0
- .../open-vm-tools/0002-add-include-sys-sysmacros.h.patch     | 0
- ...2-hgfsServerLinux-Consider-64bit-time_t-possibility.patch | 0
- .../0003-Use-configure-test-for-struct-timespec.patch        | 0
- .../0004-Fix-definition-of-ALLPERMS-and-ACCESSPERMS.patch    | 0
- ...se-configure-to-test-for-feature-instead-of-platfor.patch | 0
- .../0006-Use-configure-test-for-sys-stat.h-include.patch     | 0
- .../0007-Fix-subdir-objects-configure-error.patch            | 0
- .../0008-include-poll.h-instead-of-sys-poll.h.patch          | 0
- .../open-vm-tools/0009-Rename-poll.h-to-vm_poll.h.patch      | 0
- ...0010-use-posix-strerror_r-unless-on-gnu-libc-system.patch | 0
- .../0011-Use-uintmax_t-for-handling-rlim_t.patch             | 0
- .../0012-Use-off64_t-instead-of-__off64_t.patch              | 0
- .../0013-misc-Do-not-print-NULL-string-into-logs.patch       | 0
- .../recipes-support/open-vm-tools/open-vm-tools/tools.conf   | 0
- .../open-vm-tools/open-vm-tools/vmtoolsd.init                | 0
- .../open-vm-tools/open-vm-tools/vmtoolsd.service             | 0
- .../recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb    | 5 ++---
- .../recipes-core/packagegroups/packagegroup-meta-oe.bbappend | 3 +++
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb   | 4 ++--
- 25 files changed, 7 insertions(+), 5 deletions(-)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0001-Make-HgfsConvertFromNtTimeNsec-aware-of-64-bit-time_.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0001-configure.ac-don-t-use-dnet-config.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0001-hgfsmounter-Makefile.am-support-usrmerge.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0001-pollGtk-Drop-volatile-qualifier.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0001-utilBacktrace-Ignore-Warray-bounds.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0002-add-include-sys-sysmacros.h.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0002-hgfsServerLinux-Consider-64bit-time_t-possibility.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0003-Use-configure-test-for-struct-timespec.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0004-Fix-definition-of-ALLPERMS-and-ACCESSPERMS.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0005-Use-configure-to-test-for-feature-instead-of-platfor.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0006-Use-configure-test-for-sys-stat.h-include.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0007-Fix-subdir-objects-configure-error.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0008-include-poll.h-instead-of-sys-poll.h.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0009-Rename-poll.h-to-vm_poll.h.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0010-use-posix-strerror_r-unless-on-gnu-libc-system.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0011-Use-uintmax_t-for-handling-rlim_t.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0012-Use-off64_t-instead-of-__off64_t.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/0013-misc-Do-not-print-NULL-string-into-logs.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/tools.conf (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/vmtoolsd.init (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools/vmtoolsd.service (100%)
- rename {meta-oe => meta-networking}/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb (95%)
+ .../packagegroups/packagegroup-meta-multimedia.bb                | 1 +
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb       | 1 -
+ 2 files changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-Make-HgfsConvertFromNtTimeNsec-aware-of-64-bit-time_.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-Make-HgfsConvertFromNtTimeNsec-aware-of-64-bit-time_.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-Make-HgfsConvertFromNtTimeNsec-aware-of-64-bit-time_.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-Make-HgfsConvertFromNtTimeNsec-aware-of-64-bit-time_.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-configure.ac-don-t-use-dnet-config.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-configure.ac-don-t-use-dnet-config.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-configure.ac-don-t-use-dnet-config.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-configure.ac-don-t-use-dnet-config.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-hgfsmounter-Makefile.am-support-usrmerge.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-hgfsmounter-Makefile.am-support-usrmerge.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-hgfsmounter-Makefile.am-support-usrmerge.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-hgfsmounter-Makefile.am-support-usrmerge.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-pollGtk-Drop-volatile-qualifier.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-pollGtk-Drop-volatile-qualifier.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-pollGtk-Drop-volatile-qualifier.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-pollGtk-Drop-volatile-qualifier.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-utilBacktrace-Ignore-Warray-bounds.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-utilBacktrace-Ignore-Warray-bounds.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-utilBacktrace-Ignore-Warray-bounds.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-utilBacktrace-Ignore-Warray-bounds.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0002-add-include-sys-sysmacros.h.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0002-add-include-sys-sysmacros.h.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0002-add-include-sys-sysmacros.h.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0002-add-include-sys-sysmacros.h.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0002-hgfsServerLinux-Consider-64bit-time_t-possibility.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0002-hgfsServerLinux-Consider-64bit-time_t-possibility.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0002-hgfsServerLinux-Consider-64bit-time_t-possibility.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0002-hgfsServerLinux-Consider-64bit-time_t-possibility.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0003-Use-configure-test-for-struct-timespec.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0003-Use-configure-test-for-struct-timespec.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0003-Use-configure-test-for-struct-timespec.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0003-Use-configure-test-for-struct-timespec.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0004-Fix-definition-of-ALLPERMS-and-ACCESSPERMS.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0004-Fix-definition-of-ALLPERMS-and-ACCESSPERMS.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0004-Fix-definition-of-ALLPERMS-and-ACCESSPERMS.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0004-Fix-definition-of-ALLPERMS-and-ACCESSPERMS.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0005-Use-configure-to-test-for-feature-instead-of-platfor.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0005-Use-configure-to-test-for-feature-instead-of-platfor.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0005-Use-configure-to-test-for-feature-instead-of-platfor.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0005-Use-configure-to-test-for-feature-instead-of-platfor.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0006-Use-configure-test-for-sys-stat.h-include.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0006-Use-configure-test-for-sys-stat.h-include.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0006-Use-configure-test-for-sys-stat.h-include.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0006-Use-configure-test-for-sys-stat.h-include.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0007-Fix-subdir-objects-configure-error.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0007-Fix-subdir-objects-configure-error.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0007-Fix-subdir-objects-configure-error.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0007-Fix-subdir-objects-configure-error.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0008-include-poll.h-instead-of-sys-poll.h.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0008-include-poll.h-instead-of-sys-poll.h.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0008-include-poll.h-instead-of-sys-poll.h.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0008-include-poll.h-instead-of-sys-poll.h.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0009-Rename-poll.h-to-vm_poll.h.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0009-Rename-poll.h-to-vm_poll.h.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0009-Rename-poll.h-to-vm_poll.h.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0009-Rename-poll.h-to-vm_poll.h.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0010-use-posix-strerror_r-unless-on-gnu-libc-system.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0010-use-posix-strerror_r-unless-on-gnu-libc-system.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0010-use-posix-strerror_r-unless-on-gnu-libc-system.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0010-use-posix-strerror_r-unless-on-gnu-libc-system.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0011-Use-uintmax_t-for-handling-rlim_t.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0011-Use-uintmax_t-for-handling-rlim_t.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0011-Use-uintmax_t-for-handling-rlim_t.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0011-Use-uintmax_t-for-handling-rlim_t.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0012-Use-off64_t-instead-of-__off64_t.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0012-Use-off64_t-instead-of-__off64_t.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0012-Use-off64_t-instead-of-__off64_t.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0012-Use-off64_t-instead-of-__off64_t.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0013-misc-Do-not-print-NULL-string-into-logs.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0013-misc-Do-not-print-NULL-string-into-logs.patch
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/0013-misc-Do-not-print-NULL-string-into-logs.patch
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/0013-misc-Do-not-print-NULL-string-into-logs.patch
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/tools.conf b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/tools.conf
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/tools.conf
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/tools.conf
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/vmtoolsd.init b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/vmtoolsd.init
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/vmtoolsd.init
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/vmtoolsd.init
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/vmtoolsd.service b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/vmtoolsd.service
-similarity index 100%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools/vmtoolsd.service
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools/vmtoolsd.service
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
-similarity index 95%
-rename from meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
-rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
-index 69ef6056d7..832fab1eac 100644
---- a/meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
-+++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
-@@ -111,7 +111,6 @@ INITSCRIPT_NAME_${PN} = "vmtoolsd"
- INITSCRIPT_PARAMS_${PN} = "start 90 2 3 4 5 . stop 60 0 1 6 ."
- 
- python() {
--    if 'networking-layer' not in d.getVar('BBFILE_COLLECTIONS').split() or \
--        'filesystems-layer' not in d.getVar('BBFILE_COLLECTIONS').split():
--        raise bb.parse.SkipRecipe('Requires meta-networking and meta-filesystems to be present.')
-+    if 'filesystems-layer' not in d.getVar('BBFILE_COLLECTIONS').split():
-+        raise bb.parse.SkipRecipe('Requires meta-filesystems to be present to provide fuse.')
- }
-diff --git a/meta-oe/dynamic-layers/networking-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend b/meta-oe/dynamic-layers/networking-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
-index b39a4d68ff..09c478eb10 100644
---- a/meta-oe/dynamic-layers/networking-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
-+++ b/meta-oe/dynamic-layers/networking-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
-@@ -1,3 +1,6 @@
- RDEPENDS_packagegroup-meta-oe-devtools += "\
-     valijson \
- "
-+
-+RDEPENDS_packagegroup-meta-oe-support_append_x86 = "${@bb.utils.contains('BBFILE_COLLECTIONS', 'filesystems-layer', ' open-vm-tools', '', d)}"
-+RDEPENDS_packagegroup-meta-oe-support_append_x86-64 = "${@bb.utils.contains('BBFILE_COLLECTIONS', 'filesystems-layer', ' open-vm-tools', '', d)}"
+diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+index c4be1b5ce9..350c14b264 100644
+--- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
++++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+@@ -53,6 +53,7 @@ RDEPENDS_packagegroup-meta-multimedia = "\
+     bigbuckbunny-720p \
+     tearsofsteel-1080p \
+     schroedinger \
++    pipewire \
+     projucer \
+     libcamera \
+     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libde265 openh264", "", d)} \
 diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 4bf1402ac4..2b79b3d8b5 100644
+index 2b79b3d8b5..42087ce4e0 100644
 --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
 +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -912,8 +912,8 @@ RDEPENDS_packagegroup-meta-oe-support ="\
- RDEPENDS_packagegroup-meta-oe-support_append_armv7a = " ne10"
- RDEPENDS_packagegroup-meta-oe-support_append_armv7ve = " ne10"
- RDEPENDS_packagegroup-meta-oe-support_append_aarch64 = " ne10"
--RDEPENDS_packagegroup-meta-oe-support_append_x86 = " mcelog mce-inject mce-test open-vm-tools vboxguestdrivers"
--RDEPENDS_packagegroup-meta-oe-support_append_x86-64 = " mcelog mce-inject mce-test open-vm-tools vboxguestdrivers"
-+RDEPENDS_packagegroup-meta-oe-support_append_x86 = " mcelog mce-inject mce-test vboxguestdrivers"
-+RDEPENDS_packagegroup-meta-oe-support_append_x86-64 = " mcelog mce-inject mce-test vboxguestdrivers"
- 
- RDEPENDS_packagegroup-meta-oe-support-python2 ="\
-     ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', 'lio-utils', '', d), "", d)} \
+@@ -670,7 +670,6 @@ RDEPENDS_packagegroup-meta-oe-multimedia ="\
+     libvpx \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xsp", "", d)} \
+     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "mpv", "", d)} \
+-    pipewire \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pavucontrol", "", d)} \
+     libopusenc \
+ "
