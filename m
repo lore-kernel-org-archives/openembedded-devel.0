@@ -1,21 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.8128.1616679287934626398
+ by mx.groups.io with SMTP id smtpd.web11.8072.1616679288598854072
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Mar 2021 06:34:48 -0700
+ Thu, 25 Mar 2021 06:34:49 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=38494 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lPQ8I-0007lW-LU; Thu, 25 Mar 2021 15:34:45 +0200
+	id 1lPQ8M-0007lW-9e; Thu, 25 Mar 2021 15:34:47 +0200
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 01/11] python3-configshell-fb: Upgrade 1.1.28 -> 1.1.29
-Date: Thu, 25 Mar 2021 15:34:26 +0200
-Message-Id: <20210325133436.18328-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 03/11] python3-pytest-helpers-namespace: Upgrade 2019.1.8 -> 2021.3.24
+Date: Thu, 25 Mar 2021 15:34:28 +0200
+Message-Id: <20210325133436.18328-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210325133436.18328-1-leon.anavi@konsulko.com>
+References: <20210325133436.18328-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,33 +30,48 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.1.29:
+Upgrade to release 2021.3.24:
 
-- setup.py: specify a version range for pyparsing
-- Don't warn if prefs file doesn't exist
+- Switched project to a src layout.
+- Switched project to a declarative setuptools approach
+- Added support to check if a helper has been registered
+
+License-Update: Fix year in the license file
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...onfigshell-fb_1.1.28.bb => python3-configshell-fb_1.1.29.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-configshell-fb_1.1.28.bb => python3-configshell-fb_1.1.29.bb} (91%)
+ ...b => python3-pytest-helpers-namespace_2021.3.24.bb} | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pytest-helpers-namespace_2019.1.8.bb => python3-pytest-helpers-namespace_2021.3.24.bb} (64%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-configshell-fb_1.1.28.bb b/meta-python/recipes-devtools/python/python3-configshell-fb_1.1.29.bb
-similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-configshell-fb_1.1.28.bb
-rename to meta-python/recipes-devtools/python/python3-configshell-fb_1.1.29.bb
-index 2d9ec079a..70e67a1a7 100644
---- a/meta-python/recipes-devtools/python/python3-configshell-fb_1.1.28.bb
-+++ b/meta-python/recipes-devtools/python/python3-configshell-fb_1.1.29.bb
-@@ -7,7 +7,7 @@ LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=1dece7821bf3fd70fe1309eaa37d52a2"
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2019.1.8.bb b/meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2021.3.24.bb
+similarity index 64%
+rename from meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2019.1.8.bb
+rename to meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2021.3.24.bb
+index b3aced4f6..9211ac394 100644
+--- a/meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2019.1.8.bb
++++ b/meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2021.3.24.bb
+@@ -2,13 +2,17 @@ DESCRIPTION = "This plugin does not provide any helpers to pytest, it does, howe
+ HOMEPAGE = "https://github.com/saltstack/pytest-helpers-namespace"
+ SECTION = "devel/python"
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=cc99508c43d9d14fd51c7fac622ffd23"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=440a4cdb311cd7ad181efb4cba06d562"
  
- SRC_URI = "git://github.com/open-iscsi/configshell-fb.git;protocol=https;branch=master"
--SRCREV = "da8f0cef114e7343a7ae96ff1db7c8c574f819be"
-+SRCREV = "d74a33b69f688ed9b8b28033835303604639d4eb"
+-SRC_URI[md5sum] = "04ec1d8750f9b154e782a47cf8b30736"
+-SRC_URI[sha256sum] = "4eff23a19f92410c0166f6dffbfa8901d3e14a80e97d70cd08428b6d597771ce"
++SRC_URI[sha256sum] = "188df5a7c52390fa27d6cd2f18e74d64a2ef0b9fb6e12f15fdf5a95f4813d25f"
  
- S = "${WORKDIR}/git"
+ inherit pypi setuptools3
  
++DEPENDS += "\
++    ${PYTHON_PN}-wheel-native \
++    ${PYTHON_PN}-pip-native \
++"
++
+ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-pytest \
+ "
 -- 
 2.17.1
 
