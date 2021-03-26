@@ -1,90 +1,98 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [])
- by mx.groups.io with SMTP id smtpd.web08.9137.1616742770474929310
+Received: from rcdn-iport-8.cisco.com (rcdn-iport-8.cisco.com [173.37.86.79])
+ by mx.groups.io with SMTP id smtpd.web10.10847.1616755550278787306
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Mar 2021 00:12:55 -0700
+ Fri, 26 Mar 2021 03:45:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=iUrIrh9v;
- spf=neutral (domain: fujitsu.com, ip: <nil>, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1616742775; i=@fujitsu.com;
-	bh=bI+8qLLXS+yCSNgY6oJiDnGD72rzjQvbBoz0Gxia09M=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=iUrIrh9vq3cYpavu+RMpGBvl144gFMNOLsbf9h/DGt0e+GFjch+iemkr7jKX+RL5M
-	 6brcrTasvPqRbMz/YxLBaT6TkUZJ8+7eKUmDSerqFYOmTeQK8wFAtV2jyI+jovcEe7
-	 zU89YmrCPBSyhxqt2plX4lQ0SlitPy1mulH4YZbRJy934lgWD2xa3oQrV/hVwpK5F4
-	 +HAJ4aip5JiGbgi+3i/NLGI7v335rK53FhRcP8XetJRG2mduZ1vNsPSwBMWi6Gwz8f
-	 taWsViqTSj9f9A1E1NWYAmlEys+r0oALaSgFg2LupNo89EBq1gk68GEeWe6fw9ZPSY
-	 O3NZtF37zb9TQ==
-Received: from [100.113.1.157] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-a.eu-central-1.aws.symcld.net id F3/7E-03420-6798D506; Fri, 26 Mar 2021 07:12:54 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYqlvWGZt
-  gsGe+tsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmtH/5ClrwT7OijdXWpgbGJ9xdDFycQgJbGGS
-  mLGriRHCOcEocW71GfYuRk4ONgEdiY4X3SwgtoiAvsTS2XuYQWxhgUCJsy8usXYxcnCwCKhKX
-  DxuDhLmFXCXePW7hxHElhBQkJjy8D0zRFxQ4uTMJ2BjmAUkJA6+eMEMUaMosX3nGRaQMRICVR
-  JHZqpNYOSZhaRjFpKOBYxMqxgtk4oy0zNKchMzc3QNDQx0DQ2NdQ11jYzN9BKrdBP1Ukt1k1P
-  zSooSgbJ6ieXFesWVuck5KXp5qSWbGIFhlFLI+GYH49fXH/QOMUpyMCmJ8h46EZMgxJeUn1KZ
-  kVicEV9UmpNafIhRhoNDSYK3uyM2QUiwKDU9tSItMwcY0jBpCQ4eJRHefy1Aad7igsTc4sx0i
-  NQpRkUpcd4okD4BkERGaR5cGyyOLjHKSgnzMjIwMAjxFKQW5WaWoMq/YhTnYFQS5v3ZDjSFJz
-  OvBG76K6DFTECLN/6IBFlckoiQkmpgms1U2OO10dRvD1fUzqlWusEr+8uXFMm1Lk5bIuK+ZgE
-  /91ZTnv8bNN+lz1uwoTVr9ymZT1VCtVauXua/llw0mjbrhuGG46t375N47bGwawWTjqQr00u3
-  bZ1xLgaMu/rFDvU+1lmvfufnp7r1QkoGWsse3fziayxU6fKyVbnwpI6AYkrzXt4e7dYZXRrTb
-  u07HvQ5c9XxuONemy5FtDrnsSs+SXELNl12ePHB5D+xIk8adzaxNGy84udQobdnvj1z6wOLmq
-  vLppScqXW969YgqPfm7Mn5WxJNP00vrNL0eJs6i+fC0sBDEWobTXn7S+v9HEynfihlqPnHkvz
-  suUin+8EAhZ2OEvOS4h37FCcosRRnJBpqMRcVJwIAST1Gxx4DAAA=
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-17.tower-228.messagelabs.com!1616742774!112288!1
-X-Originating-IP: [62.60.8.149]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.60.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 31944 invoked from network); 26 Mar 2021 07:12:54 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-17.tower-228.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 26 Mar 2021 07:12:54 -0000
-Received: from r01ukexcasm214.r01.fujitsu.local (ex2k13_214.fs.fujitsu.com [10.182.185.116])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 12Q7CsNV017916
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 26 Mar 2021 07:12:54 GMT
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- r01ukexcasm214.r01.fujitsu.local (10.182.185.116) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 26 Mar 2021 07:12:52 +0000
-From: "zangrc" <zangrc.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-zopeinterface: upgrade 5.2.0 -> 5.3.0
-Date: Fri, 26 Mar 2021 15:12:46 +0800
-Message-ID: <1616742766-29899-1-git-send-email-zangrc.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@cisco.com header.s=iport header.b=jxp6R/GH;
+ spf=pass (domain: cisco.com, ip: 173.37.86.79, mailfrom: dzagorui@cisco.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=cisco.com; i=@cisco.com; l=2300; q=dns/txt; s=iport;
+  t=1616755550; x=1617965150;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=sFip7Ngk2XIECpU5LM6mld3t2zhlWhHK4+04eZ/RLt4=;
+  b=jxp6R/GHiOCAiTIcl4PiTdTZNNVSLx94KxhE0gyPYkJn+z77vgGmlBdd
+   1l106Hy1W/6LUh++WIkspgyjFp39hByeiIlZLO4qwN3tzu0XUlzPl2FIe
+   m20c64R6B0DK6txnKUEMHM6ouNa8HRsIc+QNoxigGPy+23gAYAceW4FmP
+   w=;
+IronPort-HdrOrdr: =?us-ascii?q?A9a23=3Ay9Olp6uvPSHCre6X0KXHcTXl7skD7tV00z?=
+ =?us-ascii?q?AX/kB9WHVpW+afkN2jm+le6AT9jywfVGpltdeLPqSBRn20z+8W3aA9NaqvNT?=
+ =?us-ascii?q?OJhEKGN4dnhLGO/xTFOwnTstFQzr1hda8WMqySMXFfgdzh6Ae1V/YsqePnzI?=
+ =?us-ascii?q?mSie3Tz2hgQGhRAskKhTtRMBqREUF9WWB9aqYRKZz03KZ6jgvlXXwWa8ihb0?=
+ =?us-ascii?q?NkY8Hz4/vWiZnhfRkKQzkg5QXmt0LN1JfKVz6FwxwZTzRDhY0HzFGAuQn46q?=
+ =?us-ascii?q?K/2svLryPh6w=3D=3D?=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: =?us-ascii?q?A0ClAwAFul1g/5RdJa1aglmCK3ZWATk?=
+ =?us-ascii?q?xsG+BfAsBAQENAQEkEAQBAYZSAiU0CQ4CAwEBDAEBBQEBAQIBBgRxhWENhn0?=
+ =?us-ascii?q?BdF9EgnABgweqSoIphViDQ4FEgTmIXYRmJhyBSUKEbIUNhSkEgkeBD02BWp8?=
+ =?us-ascii?q?AnB+DEIlZknoPIoUFn0u0EYN/AgQGBQIWgVQ6gVkzGggbFYMkCUcZDZBpgQy?=
+ =?us-ascii?q?LEiEDLwI2AgYKAQEDCYduAQE?=
+X-IronPort-AV: E=Sophos;i="5.81,280,1610409600"; 
+   d="scan'208";a="876869861"
+Received: from rcdn-core-12.cisco.com ([173.37.93.148])
+  by rcdn-iport-8.cisco.com with ESMTP/TLS/DHE-RSA-SEED-SHA; 26 Mar 2021 10:45:48 +0000
+Received: from sjc-ads-9103.cisco.com (sjc-ads-9103.cisco.com [10.30.208.113])
+	by rcdn-core-12.cisco.com (8.15.2/8.15.2) with ESMTPS id 12QAjmjO031772
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 26 Mar 2021 10:45:48 GMT
+Received: by sjc-ads-9103.cisco.com (Postfix, from userid 487941)
+	id EFC24CC1251; Fri, 26 Mar 2021 03:45:47 -0700 (PDT)
+From: "Denys Zagorui -X (dzagorui - GLOBALLOGIC INC@Cisco)" <dzagorui@cisco.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH v3] bpftool: remove recipe from blacklist
+Date: Fri, 26 Mar 2021 03:45:47 -0700
+Message-Id: <20210326104547.90765-1-dzagorui@cisco.com>
+X-Mailer: git-send-email 2.26.2.Cisco
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
- r01ukexcasm214.r01.fujitsu.local (10.182.185.116)
-Content-Type: text/plain
+X-Outbound-SMTP-Client: 10.30.208.113, sjc-ads-9103.cisco.com
+X-Outbound-Node: rcdn-core-12.cisco.com
+Content-Transfer-Encoding: 8bit
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+Have not seen build issues for 5.4 and 5.10
+x86-64 kernels so allow to build it
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Denys Zagorui <dzagorui@cisco.com>
 ---
- ...n3-zopeinterface_5.2.0.bb => python3-zopeinterface_5.3.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-zopeinterface_5.2.0.bb => python3-zopeinterface_5.3.0.bb} (89%)
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 4 ++--
+ meta-oe/recipes-kernel/bpftool/bpftool.bb                  | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-zopeinterface_5.2.0.bb b/meta-python/recipes-devtools/python/python3-zopeinterface_5.3.0.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-zopeinterface_5.2.0.bb
-rename to meta-python/recipes-devtools/python/python3-zopeinterface_5.3.0.bb
-index 48bb80d57..5da5a88b9 100644
---- a/meta-python/recipes-devtools/python/python3-zopeinterface_5.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-zopeinterface_5.3.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e54fd776274c1b7423
- PYPI_PACKAGE = "zope.interface"
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index c717d45e5..6f7e6fc74 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -608,12 +608,12 @@ RDEPENDS_packagegroup-meta-oe-kernel ="\
+     trace-cmd \
+ "
+ RDEPENDS_packagegroup-meta-oe-kernel_append_x86 = " intel-speed-select ipmiutil pm-graph turbostat"
+-RDEPENDS_packagegroup-meta-oe-kernel_append_x86-64 = " intel-speed-select ipmiutil kpatch pm-graph turbostat"
++RDEPENDS_packagegroup-meta-oe-kernel_append_x86-64 = " intel-speed-select ipmiutil kpatch pm-graph turbostat bpftool"
+ RDEPENDS_packagegroup-meta-oe-kernel_append_poerpc64 = " libpfm4"
  
- inherit pypi setuptools3
--SRC_URI[sha256sum] = "8251f06a77985a2729a8bdbefbae79ee78567dddc3acbd499b87e705ca59fe24"
-+SRC_URI[sha256sum] = "b18a855f8504743e0a2d8b75d008c7720d44e4c76687e13f959e35d9a13eb397"
+ # Kernel-selftest does not build with 5.8 and its exluded from build too so until its fixed remove it
+ RDEPENDS_packagegroup-meta-oe-kernel_remove = "kernel-selftest"
+-RDEPENDS_packagegroup-meta-oe-kernel_remove_libc-musl = "crash intel-speed-select kernel-selftest minicoredumper turbostat"
++RDEPENDS_packagegroup-meta-oe-kernel_remove_libc-musl = "bpftool crash intel-speed-select kernel-selftest minicoredumper turbostat"
  
- PACKAGES =. "${PN}-test "
+ RDEPENDS_packagegroup-meta-oe-kernel_remove_mipsarch = "makedumpfile"
+ RDEPENDS_packagegroup-meta-oe-kernel_remove_mips64 = "crash"
+diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+index 1758430bc..15143a90b 100644
+--- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
++++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+@@ -15,6 +15,7 @@ SECURITY_CFLAGS = ""
  
+ do_configure[depends] += "virtual/kernel:do_shared_workdir"
+ 
++COMPATIBLE_HOST = "(x86_64).*-linux"
+ COMPATIBLE_HOST_libc-musl = 'null'
+ 
+ do_compile() {
+@@ -32,4 +33,3 @@ python do_package_prepend() {
+ }
+ 
+ B = "${WORKDIR}/${BPN}-${PV}"
+-PNBLACKLIST[bpftool] ?= "Needs forward porting to kernel 5.2+"
 -- 
-2.25.1
+2.26.2.Cisco
 
