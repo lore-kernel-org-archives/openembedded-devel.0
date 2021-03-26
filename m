@@ -1,49 +1,48 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.2])
- by mx.groups.io with SMTP id smtpd.web12.6847.1616723592469066030
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web12.6851.1616723619455495120
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Mar 2021 18:53:12 -0700
+ Thu, 25 Mar 2021 18:53:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: zhengrq.fnst@fujitsu.com)
+ dkim=missing; spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: zhengrq.fnst@fujitsu.com)
 Return-Path: <zhengrq.fnst@fujitsu.com>
-Received: from [100.112.193.211] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-west-1.aws.symcld.net id 0A/89-53635-68E3D506; Fri, 26 Mar 2021 01:53:10 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrLIsWRWlGSWpSXmKPExsViZ8MRqttmF5t
-  gMOczn8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvFzyna2ghfsFZv+/GRvYGxl72Lk4hAS2MIk
-  MW/XDLYuRk4gZw+jxLRlgSA2m4CBxP6zF9hBbBEBfYmls/cwg9jCAnYSX3csYeli5OBgEVCVe
-  L5QBiTMK+At8fnmIrASCQEFiSkP3zNDxAUlTs58wgJiMwtISBx88YIZpFVCQFFi9nR5CLNK4s
-  hMtQmMPLOQNMxC0rCAkWkVo3lSUWZ6RkluYmaOrqGBga6hoZGuoaWRromJXmKVbqJeaqlueWp
-  xia6hXmJ5sV5xZW5yTopeXmrJJkZg+KQUHNDZwfjz1Qe9Q4ySHExKoryHTsQkCPEl5adUZiQW
-  Z8QXleakFh9ilOHgUJLgfW0bmyAkWJSanlqRlpkDDGWYtAQHj5II7w+QNG9xQWJucWY6ROoUY
-  zjHm7VLFjFzvAWTbffuAsl2MDlzwcHVzByzwOT99kNA8gGIFGLJy89LlRLnLQQZJwAyLqM0D2
-  4ZLFYvMcpKCfMyMjAwCPEUpBblZpagyr9iFOdgVBLmtQKZwpOZVwJ30yugc5mAzt34IxLk3JJ
-  EhJRUA5N0dt5KLa5nzH51XGd/tL75nzml2KnKacr/HQzLGP47LpjD0b91JvuVV1elnJcGPexm
-  +x4kXB3Rryc5eT/j3xV7Pkn+L+M3ja3Pmuu3XOMm1+MOi61iwqUGB8W5du+Kq5T8XXDZilHp2
-  cG2aYEJzVVCbtZHzrzY6VW+b9qja1WKyrntzTviRbzX5ge9yLIzVPfesPPlteK93E8qVcXmB/
-  q9YLYr7lktM4VxI6Pyz8JZEyIsdicmBh5mlPr+6DhDw8ennRFps3J5e/LfzmblfxLNPrtRdOP
-  Xol8vjtjUC3+8N7npi9KZzOr1/dGXbufvfZf2xeOzd+ZZi0KdGI3/s7usnxrtc9X/lbFDfkH/
-  TiWW4oxEQy3mouJEABTsk8ZQAwAA
+Received: from [100.113.0.194] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-a.eu-central-1.aws.symcld.net id DA/D0-07430-0AE3D506; Fri, 26 Mar 2021 01:53:36 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupikeJIrShJLcpLzFFi42Kxs+EI0V1gF5t
+  gMHe6osXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnHz62amgvkcFRNX3WduYDzC3sXIxSEksIVJ
+  ouPcKTYIZw+jxLPTLcxdjJwcbAIGEvvPXmAHsUUE9CWWzt4DFhcWcJDo+jqDFcRmEVCVOLn0M
+  pjNK+AtsfXFbhYQW0JAQWLKw/fMEHFBiZMzn4DFmQUkJA6+eAEU5wCqUZSYPV0ewqySODJTbQ
+  IjzywkDbOQNCxgZFrFaJFUlJmeUZKbmJmja2hgoGtoaKxrpGtqqJdYpZuol1qqm5yaV1KUCJT
+  USywv1iuuzE3OSdHLSy3ZxAgMopRCJuMdjNdef9A7xCjJwaQkynvoREyCEF9SfkplRmJxRnxR
+  aU5q8SFGGQ4OJQne17axCUKCRanpqRVpmTnAgIZJS3DwKInw/gBJ8xYXJOYWZ6ZDpE4xKkqJ8
+  xaCJARAEhmleXBtsCi6xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmY1wpkCk9mXgnc9FdAi5
+  mAFm/8EQmyuCQRISXVwFR0YIrFPg3b9a6/30r9rr7q6CF7Zv3s2E/nZRiNvNc7TN1dd5fpv/B
+  rJ2+7VxVKAX6Cxvr6kacjbmfOO/JuYvsSN53sRV9MjZs/idQuetRvL31ngcmfORsKHDNcyhzs
+  j5SVpu759tN/58pIrZjepav/8k/vXp7Pvmxr0GSnm7e33l0rratxJ3z78UgR1/pM+ajlrytyf
+  7vFKFlOKPrf03B2C8/h9P0ub0KFA96JRlWvj7qzbtmXC28LBJv4DKZqf8iVPfuVZ+HFtNff3+
+  74lvqueofiEq8TjloOPlpZxxskthz/sqW75Hpl7pxLx1bF/56a1m71a9WLZffm+5fvMlY0iBF
+  XXZr/a/lDjn6+SyJKLMUZiYZazEXFiQA7hvoBHQMAAA==
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-33.tower-265.messagelabs.com!1616723589!755999!1
-X-Originating-IP: [62.60.8.85]
+X-Msg-Ref: server-17.tower-232.messagelabs.com!1616723615!89665!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=fail
 X-StarScan-Received: 
 X-StarScan-Version: 9.60.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 17991 invoked from network); 26 Mar 2021 01:53:10 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-33.tower-265.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 26 Mar 2021 01:53:10 -0000
+Received: (qmail 300 invoked from network); 26 Mar 2021 01:53:36 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-17.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 26 Mar 2021 01:53:36 -0000
 Received: from r01ukexcasm214.r01.fujitsu.local (ex2k13_214.fs.fujitsu.com [10.182.185.116])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 12Q1r9GO004973
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 12Q1rZ6t021775
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 26 Mar 2021 01:53:09 GMT
+	for <openembedded-devel@lists.openembedded.org>; Fri, 26 Mar 2021 01:53:35 GMT
 Received: from localhost.localdomain (10.167.225.35) by
  r01ukexcasm214.r01.fujitsu.local (10.182.185.116) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 26 Mar 2021 01:53:08 +0000
+ (TLS) id 15.0.1497.2; Fri, 26 Mar 2021 01:53:34 +0000
 From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] grpc: upgrade 1.36.3 -> 1.36.4
-Date: Fri, 26 Mar 2021 18:24:46 +0800
-Message-ID: <1616754286-67807-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libgee: upgrade 0.20.3 -> 0.20.4
+Date: Fri, 26 Mar 2021 18:25:15 +0800
+Message-ID: <1616754315-67852-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.35]
@@ -53,26 +52,25 @@ Content-Type: text/plain
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- .../recipes-devtools/grpc/{grpc_1.36.3.bb => grpc_1.36.4.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/grpc/{grpc_1.36.3.bb => grpc_1.36.4.bb} (98%)
+ .../libgee/{libgee_0.20.3.bb => libgee_0.20.4.bb}             | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/libgee/{libgee_0.20.3.bb => libgee_0.20.4.bb} (77%)
 
-diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.36.3.bb b/meta-oe/recipes-devtools/grpc/grpc_1.36.4.bb
-similarity index 98%
-rename from meta-oe/recipes-devtools/grpc/grpc_1.36.3.bb
-rename to meta-oe/recipes-devtools/grpc/grpc_1.36.4.bb
-index 738d5e10b..03de4997b 100644
---- a/meta-oe/recipes-devtools/grpc/grpc_1.36.3.bb
-+++ b/meta-oe/recipes-devtools/grpc/grpc_1.36.4.bb
-@@ -16,7 +16,7 @@ RDEPENDS_${PN}-compiler = "${PN}"
- RDEPENDS_${PN}-dev += "${PN}-compiler"
+diff --git a/meta-oe/recipes-devtools/libgee/libgee_0.20.3.bb b/meta-oe/recipes-devtools/libgee/libgee_0.20.4.bb
+similarity index 77%
+rename from meta-oe/recipes-devtools/libgee/libgee_0.20.3.bb
+rename to meta-oe/recipes-devtools/libgee/libgee_0.20.4.bb
+index 576eff6d5..832254a00 100644
+--- a/meta-oe/recipes-devtools/libgee/libgee_0.20.3.bb
++++ b/meta-oe/recipes-devtools/libgee/libgee_0.20.4.bb
+@@ -18,5 +18,5 @@ do_configure_prepend() {
+     done
+ }
  
- S = "${WORKDIR}/git"
--SRCREV_grpc = "ce05bf557ced2d311bad8ee520f9f8088f715bd8"
-+SRCREV_grpc = "3e53dbe8213137d2c731ecd4d88ebd2948941d75"
- BRANCH = "v1.36.x"
- SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
-            "
+-SRC_URI[archive.md5sum] = "e574b3952b93d219b5ec7c74c5892c33"
+-SRC_URI[archive.sha256sum] = "d0b5edefc88cbca5f1709d19fa62aef490922c6577a14ac4e7b085507911a5de"
++SRC_URI[archive.md5sum] = "4d7d6f1f8054f1b3466c752ac2e50946"
++SRC_URI[archive.sha256sum] = "524c1bf390f9cdda4fbd9a47b269980dc64ab5280f0801b53bc69d782c72de0e"
 -- 
 2.25.1
 
