@@ -1,75 +1,93 @@
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
- by mx.groups.io with SMTP id smtpd.web12.6521.1616721774669517599
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.web12.6522.1616721775726789552
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Mar 2021 18:22:54 -0700
+ Thu, 25 Mar 2021 18:22:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ESiCSdny;
- spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f47.google.com with SMTP id x7-20020a17090a2b07b02900c0ea793940so3466436pjc.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Mar 2021 18:22:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=kwtYo1h8;
+ spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f172.google.com with SMTP id i22so3528230pgl.4
+        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Mar 2021 18:22:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=1531SP2nBMVWg9wsxjjoBSB6EB8ZhfuhRBNho8UEdwQ=;
-        b=ESiCSdnyYieOsMQ3/IyA9LRQl6izx6RYUnaijyUCgPNke8oqHNmUkjZ3/9W8NE6Qu/
-         XF9H/63lGGS+q12JFlnu2N89tIi0+jtTgrIeILF6HH3cj8scqBRuOk4V7hHe9JMqhxUs
-         boUNc+fLsCmjnYPgPsjvNIXxBTf2eVf1wmphK/YrW5jIV/jUNnebLhRJlZGgIpycierS
-         3LrZiKN17QyiU9RXCgCOAA+Y51jE2aXgE0Si+9nnz+Vq/yIwEeZ2FwuTcs4V8XwFwVbT
-         jmpt9Imz5WxBwT2Wlcu5MmU+r9Vrxarazer9UiWqcAQg3yqTCxdFm5tMXF52hqk3uGXO
-         zPtA==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=VpzRCn5MesXejR0bwF98w9b30JPnEcCV78B7YUT84mA=;
+        b=kwtYo1h8bqFkItcOcq10d82XUvykN8WQiQZeduhUN8wpxmN4hxkQaBdAZOvOhJDjc3
+         mcIIsGJkNj+GB6xvhPMt1sFi2hOYqwwfbnQzLjllVDl5oed1l4A6qzrBy16/wJNb2NDn
+         Tt5MKe3UzIgXLMq/DqVaXRGcbMGD6HkqFDWUsAOwK+cDMyGKBZnY6F+pTojo7d6dZkDy
+         TKPwQThRlJ9N7SDJxtLDc65Fvua0cLa8eAeZac5B1h/4jdBU8SEJuQ/g1qv8FX0VbZH+
+         aAklTs5VOseC+5LFkxk8s7IvlhwOzzqGuq63GM69jjc6N/3swjwvZOwf8nobgcjWgJKq
+         dsoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=1531SP2nBMVWg9wsxjjoBSB6EB8ZhfuhRBNho8UEdwQ=;
-        b=b9uxSmQInYbGUHqCGWkucVmVngecsUNz7Gk8f92Hu9isz7l+QflhWGyJ1n1O2eXFq4
-         mESVgRRtIWdr9LMTSTEnApHZNlv7aBNpqOkRlhQ2rzx7ThqUZ9ia351Wl3gaGm5QhGFy
-         mfwLtVqQFK7V/b3Zho7h3z4vtio0Offrt7VpRymnqsnJPkngW4HqX0hChLiQuJZIXeIh
-         wFLE7tEUSnSqFKz/jHfMb8e/9eFCM9KnrXZITydqPd676Voj011CKMcphlVZ20MKouTS
-         zp4wcZwD4gcoUmoBPgLbZY3wiXX8g5xxpXc+Cd646Z3+HWbTDbc1KRU2UZKAjNnImtf/
-         O1eA==
-X-Gm-Message-State: AOAM531vRUeueW6EFUg8cNOk5nO8DdSxLJj1HhiHDzepDQPkbGWjhQf0
-	QnB9H0qZqoyLurhlkJmtsvvhvRX9ZCCHkg==
-X-Google-Smtp-Source: ABdhPJy78eSLeWgzOAV0veToMHzuBckhmZ5gckp4RD/bhSfj2qTaO6AquElO6fac54wbbfy8+dX2tw==
-X-Received: by 2002:a17:902:8303:b029:e6:4ef3:4f17 with SMTP id bd3-20020a1709028303b02900e64ef34f17mr12742359plb.22.1616721773967;
-        Thu, 25 Mar 2021 18:22:53 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=VpzRCn5MesXejR0bwF98w9b30JPnEcCV78B7YUT84mA=;
+        b=Mszrg/PeotopKYOWbwuEkcmGQGlr3vnqDjAtRDhYt8hEM4QnO4wOo+2mKaqXn91X5n
+         ioizSsyqppY3adYzQcrJmRjUYv22ZCWaOmWksf9/6qut0PcoflOyY1eNwKR77stQK/RQ
+         qpClxzrSyQPqP+AkTKY1i3EL6sRp75r9AHQ6RrWOgi/abcSHWA3qF3+RCYd4hBakRkmi
+         JMwTr8g3PVLi+2Ovo1GfhD3Obm8z5Na3vIg2QYhXPpX1Zl91Ws+BWR6KIQjmy62IKwYF
+         nY6R7WrYQUFfSLQX4tJ3z2DIfw3sLDs3Lv8S5V4m+Ww51ndUjiJSqJlX4Mec0Kym+u0v
+         Aw/w==
+X-Gm-Message-State: AOAM530vWPU8D3CL5HlqqvE/N2DOv7l+y38mQ+cYh2Al1kE1RvsKW8wi
+	JDta3kzckju2RnVwFv2Jx35udXZe8XFkHw==
+X-Google-Smtp-Source: ABdhPJxUxt3pcycM0vPbGhrWzvT0dVekUpq8UUEQY/epngEw1L+DwagEp2xgClVkEShM2yT4D/lOVA==
+X-Received: by 2002:a62:6045:0:b029:20c:b6a6:6077 with SMTP id u66-20020a6260450000b029020cb6a66077mr10486927pfb.51.1616721774804;
+        Thu, 25 Mar 2021 18:22:54 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::aebb])
-        by smtp.gmail.com with ESMTPSA id q10sm6472873pgs.44.2021.03.25.18.22.53
+        by smtp.gmail.com with ESMTPSA id q10sm6472873pgs.44.2021.03.25.18.22.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Mar 2021 18:22:53 -0700 (PDT)
+        Thu, 25 Mar 2021 18:22:54 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Subject: [meta-gnome][PATCH 1/4] tracker-miners: Check for commercial license to enable ffmpeg
-Date: Thu, 25 Mar 2021 18:22:48 -0700
-Message-Id: <20210326012251.1063470-1-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH 2/4] mpd: Check for commercial in LICENSE_FLAGS_WHITELIST
+Date: Thu, 25 Mar 2021 18:22:49 -0700
+Message-Id: <20210326012251.1063470-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.31.0
+In-Reply-To: <20210326012251.1063470-1-raj.khem@gmail.com>
+References: <20210326012251.1063470-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andreas Müller <schnitzeltony@gmail.com>
----
- meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.5.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+aac and ffmpeg could be enabled only if they have been whitelisted by
+user
 
-diff --git a/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.5.bb b/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.5.bb
-index 097bcdb6f1..07fa10a0e2 100644
---- a/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.5.bb
-+++ b/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.5.bb
-@@ -23,7 +23,7 @@ REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
- UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-multimedia/musicpd/mpd_0.22.6.bb          | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.22.6.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.22.6.bb
+index e91bb5d978..b1fa96e1be 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.22.6.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.22.6.bb
+@@ -2,8 +2,6 @@ SUMMARY = "Music Player Daemon"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
  
- PACKAGECONFIG ??= " \
--    ffmpeg \
-+    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "ffmpeg", "", d)} \
-     flac \
-     gexiv2 \
-     gstreamer \
+-LICENSE_FLAGS = "${@bb.utils.contains_any('PACKAGECONFIG', ['ffmpeg', 'aac'], 'commercial', '', d)}"
+-
+ HOMEPAGE ="http://www.musicpd.org"
+ 
+ inherit meson useradd systemd pkgconfig
+@@ -28,7 +26,14 @@ S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMESON += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd=enabled -Dsystemd_system_unit_dir=${systemd_system_unitdir} -Dsystemd_user_unit_dir=${systemd_system_unitdir}', '-Dsystemd=disabled', d)}"
+ 
+-PACKAGECONFIG ??= "aac alsa ao bzip2 daemon ffmpeg fifo flac fluidsynth iso9660 jack libsamplerate httpd mms mpg123 modplug sndfile upnp openal opus oss recorder vorbis wavpack zlib"
++PACKAGECONFIG ??= "${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "aac", "", d)} \
++                   alsa ao bzip2 daemon \
++                   ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "ffmpeg aac", "", d)} \
++                   fifo flac fluidsynth iso9660 \
++                   jack libsamplerate httpd \
++                   mms mpg123 modplug sndfile \
++                   upnp openal opus oss recorder \
++                   vorbis wavpack zlib"
+ 
+ PACKAGECONFIG[aac] = "-Dfaad=enabled,-Dfaad=disabled,faad2"
+ PACKAGECONFIG[alsa] = "-Dalsa=enabled,-Dalsa=disabled,alsa-lib"
 -- 
 2.31.0
 
