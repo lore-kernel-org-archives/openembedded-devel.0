@@ -1,75 +1,74 @@
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.web08.11513.1616958614062793545
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.web10.11400.1616958817177780614
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Mar 2021 12:10:14 -0700
+ Sun, 28 Mar 2021 12:13:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=D5xMkYCH;
- spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f49.google.com with SMTP id x7-20020a17090a2b07b02900c0ea793940so6657408pjc.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Mar 2021 12:10:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Xn9pUucx;
+ spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f179.google.com with SMTP id c204so8474110pfc.4
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Mar 2021 12:13:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=c+JjXXdeKaR6Nf1O2M5aYBCgl+/wxOb3UV7VihQaDFE=;
-        b=D5xMkYCH4GyFtXrUYPUWFZyYZbp1ysAu8Rw5j0C82KjnyiD1TCT5qVHznFv+zasEDx
-         F7lwttkiw1J+vBDToFKNbNODY7UP9uN9AS7HFuVzzqC1TqlUgq1z9ldAhwIM/bz0MM1L
-         wpejKqRkOLXvVMOyhwcBJnlqvIMEZpFHOkksZtmCxSC+BiBgTk9hk6vgdjgg9E/SMQQg
-         MJ6Q7pNdXgltn5ZDCwPXw4tGHolwOyknHpQidDvITJK2aBTX45ZrEimgwPfEX7Tuea6h
-         h5R9NGJGFNFSuS5itTHFmpECqTMyjQjFwpxU0Y4EDvRXcPk3MWXvZe4juwGqns82aUzj
-         VWQA==
+        bh=D1hHNSRdklVpqmp6Pv+97O/uxivm5rkNwEWHsQthZXg=;
+        b=Xn9pUucx44ZbCvpR4SPeONvCazgZSDBe/eZBJcO/weQ1q277jaGWbhxlWRTnbOPlRB
+         FGsX2JOM9ebOLBx6txvGVTHyqszo3oecghjvOtbFVZiJowADt8DvNcY1/RgjBnssXQ7W
+         /ptTV1Sm/K0/aSqE9rJ3QlOeWyveeNmrSXMByubtt/oUVzRkZv9O+DaGZ6mDXPLKTH+k
+         btEh8OqgZacudzLMI5L2v+iaFQMP/Vik4x8bSZbpfecw8/xDnDxD3VSxkHzCGsdq7DDg
+         H5VGcq34s3sEyGU6XdaTOtx3Nr32TlQQtCqKImmCwjAFtBLXrm/OXrHr5SM3Se98uMWy
+         e1Zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=c+JjXXdeKaR6Nf1O2M5aYBCgl+/wxOb3UV7VihQaDFE=;
-        b=lBTxBvT08vK242AYnzUxg3V0Ah/KAZHS19GnqAJFEwjmATDcdQt+16FqNCG/IoVT3k
-         fW37n9TAcnD5PPzYOCoi6lXwXoJw5OqzoFDROGVnsPBS77ZL9Yn7qnfVzRgm0DQ8+yd3
-         qPps6jc/NsOFYKbzs7YvGZz81PO3Z9aJoPHyaBVb7x4FsBRXeNaX+QjvV6C13jtJ5GEI
-         CysJ+L9r1+TjV77BiboKuAEMaAFrUMid/DR9f1uqYKKcIirJlQQLjs16dC9NdqEs0m+T
-         KKjCEzGIv1iZwMJMvJQ/JGgoTrIbT6RziQYazrkpyFQCfMk6a8qMcUkbSnMsQLMxWI/H
-         clLw==
-X-Gm-Message-State: AOAM530TtXs4mbBoSgK9Xb+UMK1FQTW+FoAxleFkhEZ3/9V67PTafoQ0
-	1i66GM5mE/B+eqsBu/gkj67WVJ39jzlvrQ==
-X-Google-Smtp-Source: ABdhPJzZsHDsaoFZ1tXsh1MGWXKU7m6qarcY9ShcsBDsEErjVekDWG7joFl6HkkE0c7O26XOgAxO2A==
-X-Received: by 2002:a17:90a:fa89:: with SMTP id cu9mr23992861pjb.204.1616958613431;
-        Sun, 28 Mar 2021 12:10:13 -0700 (PDT)
+        bh=D1hHNSRdklVpqmp6Pv+97O/uxivm5rkNwEWHsQthZXg=;
+        b=LR1+dP/KJGKaCXkAt4Wdd/p+rNAtTtD7KH0D8tOL6BWuPHizhWCryy9hCM7944CfoC
+         JtCfUzXq7O+FZYyXhzjUKjfLmAv4EgDTZ8IcVcC1x/ZjKJ2L7GwOyALixCmYicTK3RAw
+         ab4RrsQu+c0ympLhn4Nyb80k7IqhJ2fcq+xcnoYeKntXvddsqAHENq89+dsa44Qv89C0
+         Q0IsguCMegG1pIf9+CnqbnzSeiveiGUy4auXoDZvEEOaz9B5MWgUONUn/wwlnm0zlUys
+         VfoejEwJyExTkD72gBT8WztJtaw92XXtLtRhBErGUlJ9WuaA3wU5CMiEs5RbLYHxHymi
+         +aAw==
+X-Gm-Message-State: AOAM533KH/Z28tiBulHo+hDtfKsiTl7/97zo9KXzhBliNDNz8uH7237S
+	rDtGUWUVovja6jjZxa/ocxhFuKNTeuaJwQ==
+X-Google-Smtp-Source: ABdhPJyBOF4rrWT085BVXp5pYpo1sRFaMAouWphGdCLb/N3fhYWDNp32jnkmvS8tA1lpBqtH0qMikQ==
+X-Received: by 2002:a62:b403:0:b029:20c:cbd5:5be1 with SMTP id h3-20020a62b4030000b029020ccbd55be1mr22498525pfn.53.1616958816407;
+        Sun, 28 Mar 2021 12:13:36 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ae20])
-        by smtp.gmail.com with ESMTPSA id y7sm15481385pfq.70.2021.03.28.12.10.12
+        by smtp.gmail.com with ESMTPSA id k22sm4625765pfa.93.2021.03.28.12.13.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Mar 2021 12:10:13 -0700 (PDT)
+        Sun, 28 Mar 2021 12:13:36 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Persian Prince <persianpros@yahoo.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] tinymembench: Correct PV
-Date: Sun, 28 Mar 2021 12:10:11 -0700
-Message-Id: <20210328191011.29293-1-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH] gimp: Disable vector iconn on rv32/musl
+Date: Sun, 28 Mar 2021 12:13:33 -0700
+Message-Id: <20210328191333.30723-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Persian Prince <persianpros@yahoo.com>
+qemu crashes during build
+| make[3]: *** [Makefile:2395: 24/gimp-channel-alpha.svg] Segmentation fault (core dumped)
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb b/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
-index 2ce10f9c44..0607da834b 100644
---- a/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
-+++ b/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/ssvb/tinymembench/wiki"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://main.c;endline=22;md5=879b9bbb60851454885b5fa47eb6b345"
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb b/meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb
+index 2d75d6011e..aa5112add6 100644
+--- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb
++++ b/meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb
+@@ -54,6 +54,7 @@ EXTRA_OECONF = "--disable-python \
+                 --without-wmf"
  
--PV = "0.4.0+git${SRCPV}"
-+PV = "0.4.9+git${SRCPV}"
+ EXTRA_OECONF_append_libc-musl_mipsarch = " --disable-vector-icons"
++EXTRA_OECONF_append_libc-musl_riscv32 = " --disable-vector-icons"
+ EXTRA_OECONF_append_arm = " --disable-vector-icons"
  
- SRCREV = "a2cf6d7e382e3aea1eb39173174d9fa28cad15f3"
- SRC_URI = "git://github.com/ssvb/tinymembench.git \
+ do_configure_append() {
 -- 
 2.31.1
 
