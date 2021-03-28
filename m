@@ -1,45 +1,45 @@
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
- by mx.groups.io with SMTP id smtpd.web09.13833.1616970632765182478
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
+ by mx.groups.io with SMTP id smtpd.web09.13865.1616970805542866208
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Mar 2021 15:30:32 -0700
+ Sun, 28 Mar 2021 15:33:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=B8dL6PP0;
- spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f50.google.com with SMTP id x7-20020a17090a2b07b02900c0ea793940so6787716pjc.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Mar 2021 15:30:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=d3fdDL9h;
+ spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f176.google.com with SMTP id h25so8242279pgm.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Mar 2021 15:33:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:cc:references:from:autocrypt:message-id:date:user-agent
          :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=wgMn2hmvyUDpRFMXEJqG9DoTJnujorkwfz7hpfI6vZs=;
-        b=B8dL6PP0RYXE9Us+eyg+LlRAXKI3/ktM0/Ee6IUYeA3bAs6YeKdamc75hfxgiz7S2k
-         kR+f0XIx/9uxte6vEeWx2gPaFf3MyqPjK/cy+8HRNK9Q7uul4+74j/I2weOHmtKhD5Tp
-         qLNUk7Xm1XBiA9JmSXCB/xdfMG3U8hZRr5cbg0lID97k0iPc3Od3Pn4S4GmPLn+Ugndu
-         lYNahYTogBfdjC58JClMOJz5DdBHniscKbKA0u5aEX9mYkrOL+CbzNbQbCOUXn1Ofcg6
-         FJlvx8RZ3wPTdSiXUWIQldFAsDtl4dm2MLN2qUNqkmcYY8T/Pw8qkM9j3LiukL+h8swb
-         sMqA==
+        bh=NUoh1E2rMrY7HkRy3CN/QruV3hSFjStMIrPgjgJ71Bw=;
+        b=d3fdDL9hKiKtd++jgCigqeoOWJZ/HMMFMBOVqZ/a17OSOafxeczK5qpxmf38tubebA
+         y7piYJU5eRPhc8O/vbz9X9y0+1ICsy3gSVYtyvz56cM+6inVWARfX7/TkgWxvVCXkJmU
+         nfah9VMHtce0awy2zhuVOF7mM7tybs1jhS+Uz2ZOhBWetXyePqZWzwgE8gCEg40MvUw8
+         pMhrQR3zMZXGkF2F+y6aaqN4UZaiU6eHA7BXgaldbgh+ZST2FHKVvYNFautNshbUkFXn
+         zf2/ZrtNDdSv+8FErHClM4pCW9hE2U7mmlrgIOnz0w8HNB0JLl4Ne6BleVuE5PKVr+1J
+         yU/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:cc:references:from:autocrypt
          :message-id:date:user-agent:mime-version:in-reply-to
          :content-transfer-encoding:content-language;
-        bh=wgMn2hmvyUDpRFMXEJqG9DoTJnujorkwfz7hpfI6vZs=;
-        b=kXAh+NhVAAGzD4VcHf0fV7zFJ6y/75BMLJOCq2NF16zXinZnFTrzjuVlhKF2mbSYXg
-         CkhOqkbKVHO3kUX+7oIsm8NT6Ul2KJft7cifijq7i7KZfChVhrDg9gjcPrcIb8GDiiZx
-         Wcb3PAaeisTlV6EIb9HGCbF3N4cHBfWfNgtCeYuIRnV3HPKUe1e0oJX0eyqdFCCnpTP1
-         LrOjna4qpKjQPPsOw8+oMROlT5fFN8VFzTjOQsTZ8PcS4XhvKQOoq1tKH0zd1WgJD4Ox
-         9lywMDegK1v4pDMY/w3YLj9jGjk4v6J5UnetKtha3hCZxUoEYSG1FJiNtZknBrLj3BP9
-         Gu3Q==
-X-Gm-Message-State: AOAM532Rr44ueUQJ2v94t8qemz9h+XNNeaRsOPI0Xi16xfk16RKoH2Vw
-	y08jIcffWDqx1qIn7+b+/RJxsn+txnM=
-X-Google-Smtp-Source: ABdhPJzjXZngb8jzA3tjXEfcH9g05FRSgVmEwnOs0GKN+Tog2OTvfT+THrzPHUHI8a6IAwdWdtUeeQ==
-X-Received: by 2002:a17:902:fe0d:b029:e5:ffb8:1c28 with SMTP id g13-20020a170902fe0db02900e5ffb81c28mr25530278plj.62.1616970632024;
-        Sun, 28 Mar 2021 15:30:32 -0700 (PDT)
+        bh=NUoh1E2rMrY7HkRy3CN/QruV3hSFjStMIrPgjgJ71Bw=;
+        b=EV73L8kJrzEHdeq+eoz1fl879mjo0DP4Q7PnmYAIIn0TLxlxvR321ShU9SUreUAvoz
+         mU/6pX/PB1qJAj6L54lkiSsX0gO0U4l5usFQZQapMjf4hnK0cFK++QiWaQY6pHsHi5mJ
+         /VPIwzh+YYBrrpxyFlW6m0Wkyqt1KzCEbMdKfcTHgLMfO8Bh9fcFzs8qd6uqJy4G4n1A
+         ojSymR2LwGCLKxR+L8pVNgwtQSbVjfMTR4wAdRA4jx6824vk4nQfC93RpiHJXd/N+vN6
+         E50eF0niGSv+qx1hMqr922LoTYVUQLWAav18BqnCA/nmTjn8Dv93vti3fkUMvZ8sH0DY
+         JVaA==
+X-Gm-Message-State: AOAM532Fv8eL+zx1HGDdi3Ko3hcJ2TXENcs5bBiYbv7CyaIyLcEgT6dW
+	Gmt8HqYoEdgLpAOpe2q6X/hSPpMqCns=
+X-Google-Smtp-Source: ABdhPJwN/GhwtPxXzOmTF7KtWJC0CmtCd2OiyxP2jnUjiTtHOcw5ChgRO5ZgE2HauwOZKx6Bzs5wqw==
+X-Received: by 2002:a65:5a0a:: with SMTP id y10mr21585707pgs.285.1616970804884;
+        Sun, 28 Mar 2021 15:33:24 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from ?IPv6:2601:202:4180:a5c0:c0c2:69a9:845:6a4c? ([2601:202:4180:a5c0:c0c2:69a9:845:6a4c])
-        by smtp.gmail.com with ESMTPSA id u2sm14013510pgf.93.2021.03.28.15.30.31
+        by smtp.gmail.com with ESMTPSA id bg16sm13677415pjb.43.2021.03.28.15.33.24
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 28 Mar 2021 15:30:31 -0700 (PDT)
+        Sun, 28 Mar 2021 15:33:24 -0700 (PDT)
 Subject: Re: [oe] [PATCH] cryptsetup: DEPEND on renamed util-linux-libuuid
 To: Khem Raj <raj.khem@gmail.com>
 Cc: Luca Boccassi <luca.boccassi@microsoft.com>,
@@ -91,8 +91,8 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
  ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
  8CS2NxU=
-Message-ID: <78523e8e-f833-85d8-bade-6051de21329a@gmail.com>
-Date: Sun, 28 Mar 2021 15:30:30 -0700
+Message-ID: <11b6b0e1-4dc1-15db-8120-beda50f61d43@gmail.com>
+Date: Sun, 28 Mar 2021 15:33:23 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
@@ -118,11 +118,10 @@ On 3/28/21 2:59 PM, Khem Raj wrote:
 >
 > Please update oe-core to the push that went in today
 
-As an RDEPENDS including "util-linux-libuuid" make sense but there is no
-recipe called "util-linux-libuuid" to use as a DEPENDS.
+ok. i just say the push from 65 minutes ago.  I am not that up to date.
+that should fix things..
 
-Am I missing something?
-
+thanks
 -armin
 >
 >
