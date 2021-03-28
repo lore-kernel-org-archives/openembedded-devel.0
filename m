@@ -1,190 +1,138 @@
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.web09.13894.1616970988578630460
+Received: from outbound-ip24a.ess.barracuda.com (outbound-ip24a.ess.barracuda.com [209.222.82.206])
+ by mx.groups.io with SMTP id smtpd.web08.14530.1616973995398229867
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Mar 2021 15:36:28 -0700
+ Sun, 28 Mar 2021 16:26:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=L/dYVEo0;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id c17so8645109pfn.6
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Mar 2021 15:36:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:autocrypt:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=R4MhY8orzS7vRS2gngfjZ6jUrE16Vv6s37mMfhute0s=;
-        b=L/dYVEo0Gg5q+S5iaYU4nst/2ZJDH/oPQUAKiNMINVgPA7SY5TFJGa9Va4LoUMAFPt
-         POyJQuJqDAipSAUV0kaz0iFp/boZBQk0aiXyfwwvNbOnA34D4WKmEqBsbwCNPcPf6AU9
-         9O6O8t6Ymzn75dR4IeNreyqgKaG+Xld6OCbb1DAObACOpAwHGPo6QOMJ4qcLQQ9eg3zW
-         3PY2w5f1sL1mzAOmYa44u6+lTxwUvPBkv6JQhL8yB8KqouGtx9oi8lyvgDV3elLbNgbI
-         /qNs28NIQF7Xnja1PkKJpp7aVWyq0eaQdXT0tkCTVuPxope+u/i2X5LyBJMNnXaXr1bs
-         30bA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:autocrypt
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-transfer-encoding:content-language;
-        bh=R4MhY8orzS7vRS2gngfjZ6jUrE16Vv6s37mMfhute0s=;
-        b=M0EIGo6INCPAxWh8wm1FecHzOSDK2Tbf/N+DnIk30RlaTOm4yFxOzETOdnBiLFv3yr
-         jq3cd7T9VTxZwdnRCq1etnq8JzxiEQbTtaMqHzY0SRMNt76eIl2eMwH24XZ6xHqMBeX2
-         Uxxo96enN5D/NSv1zMwzoLvK/YuzJuRzdrMvLGR0eko8H46clZ/PVegxGR1b9mPFhliB
-         q7oK0WBvsN+rlqCC+ob/Wjv5RxwQMrP/Dwqz//xlur8XDbk1Px1erMYp721inJcjUVaC
-         pDVvXcoXR13ZN4TgwM8smfxem7B0auCF4t3alpsWLWyxvSBV+/gO0TEZUtQCOXb21/sP
-         KBPg==
-X-Gm-Message-State: AOAM533rArgTmfYWYVJeWTLfvsFcQYg197rbw7Z5mZxMyoeXyK7vPjmt
-	GvnSDFbwQQEMc7O+CzOcJ6SchqJa/PM=
-X-Google-Smtp-Source: ABdhPJxv8EQ5anoD8cSQ2UFS5YCMjyy6bwB+yXprELHUrFq/T3mBjGSH3azHSjAWE2g8MjVkwzOVoA==
-X-Received: by 2002:a63:f11:: with SMTP id e17mr21702517pgl.296.1616970987989;
-        Sun, 28 Mar 2021 15:36:27 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0:c0c2:69a9:845:6a4c? ([2601:202:4180:a5c0:c0c2:69a9:845:6a4c])
-        by smtp.gmail.com with ESMTPSA id k64sm14810805pgk.23.2021.03.28.15.36.27
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 28 Mar 2021 15:36:27 -0700 (PDT)
-Subject: Re: [oe] [PATCH] cryptsetup: DEPEND on renamed util-linux-libuuid
-To: Khem Raj <raj.khem@gmail.com>
-Cc: Luca Boccassi <luca.boccassi@microsoft.com>,
- openembeded-devel <openembedded-devel@lists.openembedded.org>
-References: <20210325070600.1335182-1-raj.khem@gmail.com>
- <bcac6cd8-ea83-8512-59af-2fe95e4726a8@gmail.com>
- <CAMKF1sr07Z1dx4decfUZp7jBizp61PAcjbKhaOS+4U6CH7BqyQ@mail.gmail.com>
- <78523e8e-f833-85d8-bade-6051de21329a@gmail.com>
- <CAMKF1spTGCTv7m2vtLEnK3FpQDkWe0otqekjuTTu6AKnMfqH5w@mail.gmail.com>
-From: "akuster" <akuster808@gmail.com>
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
- 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
- 8CS2NxU=
-Message-ID: <842eeef6-d4fd-84d0-ece3-edd423b1e000@gmail.com>
-Date: Sun, 28 Mar 2021 15:36:26 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ dkim=pass header.i=@digi.com header.s=selector1 header.b=Q6z4BWer;
+ spf=pass (domain: digi.com, ip: 209.222.82.206, mailfrom: ben.gampe@digi.com)
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com (mail-sn1nam02lp2057.outbound.protection.outlook.com [104.47.36.57]) by mx-outbound42-72.us-east-2c.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Sun, 28 Mar 2021 23:26:33 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=E24fctzwzYE1LW3PF9vyeUUNfHdi1UZMsIUDJU/HpPV5KcVvZ9RFoJuzMysiIPA4d5WhEyXyNU9eC3NDd+jGbXd1OwpFsVTKvDyqtBAvO1IfLW5+ZSzohmCjhlaHbw6XvTiWLmfJHPKBUyX8sJuzvFD3rFET7uSq9nijXIEkacr7Hmpx8KseeO0AnwtaSawQdTbYLMgxMBzte4Oc2ueM7Lqfe6QmxcdUVBvhTv0L6cX4MGqf5FL0Zd2ZYzEWVTmAEgbOf5CHNktNPelmqfa9wOZM9e9MCMnVwuLBdiCJhEvzFmthqjVbHtktMeozEg9Iq87oV4K8V4hoJP+9chewFA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/bgN4RXpsPPnQaMdY1KgwE8D/sxGN4O/PlevrVMqQoI=;
+ b=I9XAJyr6JqDEE9reFjbM4SAriZnb/nTriU2oZbx+DugafgG/CSpoPh90UcLf8s3FVK/nnVz4Y65t7YDDHKmMZxZFMoHvqHzY4Nl7ADj4xNrCSClIjfTJQXeFuotUTgYy0RMJkYLmOKcD8lEfEykdQ261jmoUjqh0vNBv+mP78LhD8yKwbOQlsUg1fjHRVFnXUPTr0Vz5S0NJMMwCTrmDcTwA3ztnjm7yX3gfthnFofCB2APfkyVU3yEj5qc4H8KHYsJBStqqq/9/pylAitY5UfZ3ADlRdJR+04mnf0t+LTxAktYavdF8AK2dzUyxHXLaX1YzDGW4VoLz4G348D83nw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=digi.com; dmarc=pass action=none header.from=digi.com;
+ dkim=pass header.d=digi.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=digi.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/bgN4RXpsPPnQaMdY1KgwE8D/sxGN4O/PlevrVMqQoI=;
+ b=Q6z4BWer4rqML1k6bTs0CPw9mI/Mm3ImeGKWjg3rxZSG8prRAgebM10cnxxgqveTKGZu6OJZhmWii1cU+qsQ1KpPQbWilDLG5bpdexI1QVwwsHAH+Wd2AoQSjgAlRsjZRHZzJJjuJ0bQG4sJHMYbsNAR37euCVKB2xz4fER5I7E=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=digi.com;
+Received: from BYAPR10MB3320.namprd10.prod.outlook.com (2603:10b6:a03:15b::21)
+ by BYAPR10MB2807.namprd10.prod.outlook.com (2603:10b6:a03:8e::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.24; Sun, 28 Mar
+ 2021 23:26:31 +0000
+Received: from BYAPR10MB3320.namprd10.prod.outlook.com
+ ([fe80::3cd7:c100:494e:cecc]) by BYAPR10MB3320.namprd10.prod.outlook.com
+ ([fe80::3cd7:c100:494e:cecc%7]) with mapi id 15.20.3977.033; Sun, 28 Mar 2021
+ 23:26:31 +0000
+From: "Ben Gampe" <bgampe@digi.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Ben Gampe <bgampe@digi.com>
+Subject: [meta-python][PATCH] python3-httptools: new package
+Date: Mon, 29 Mar 2021 09:25:16 +1000
+Message-Id: <20210328232516.2563896-1-bgampe@digi.com>
+X-Mailer: git-send-email 2.25.1
+X-Originating-IP: [60.241.24.90]
+X-ClientProxiedBy: SYCPR01CA0033.ausprd01.prod.outlook.com
+ (2603:10c6:10:e::21) To BYAPR10MB3320.namprd10.prod.outlook.com
+ (2603:10b6:a03:15b::21)
+Return-Path: bgampe@digi.com
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1spTGCTv7m2vtLEnK3FpQDkWe0otqekjuTTu6AKnMfqH5w@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from beng-dev-laptop.beng.bne.opengear.com (60.241.24.90) by SYCPR01CA0033.ausprd01.prod.outlook.com (2603:10c6:10:e::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.25 via Frontend Transport; Sun, 28 Mar 2021 23:26:30 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 874516c0-8c7b-4fb5-ed68-08d8f240eb00
+X-MS-TrafficTypeDiagnostic: BYAPR10MB2807:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: 
+	<BYAPR10MB2807BAC5B8E9174A26107ACC8F7F9@BYAPR10MB2807.namprd10.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:660;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	46t7Tk1aNlaXrUPJnA1391+rp85ILnv2aoXJOdqKPZ+SG60tcwTfyB26mmxmo4qEMBN1NvHJigc8IKFQYdVHxLZ4ysS644E9OZFm78U0f05vA3LbTpfOZfDLGi0n5ozfY88kILuVeH0p2RGm5CqV7hMfy8vjDWtmAWts3T+WJzN3bQd0fhf7D5kJ5V/PXT+gVLnDCVQVRw4RKo0PoBIremBiwSCJ34cO9XizB2ZdRspo573t07fitbQ5kh0l4D59Gezf+gkFFRy7RFiaoe6Du2bGd95kwncsI5a41lNdjBCFOODYyJ3FxARGf6WraDzbl2iqDvxQgEvTBT6cSe1Lli0Vr7kS9lGMXWgI1rUYtC5NDw+3/XZni4iV9Hc6R9Ormn27pNfjHs7QxwfFjFtp4CBwyVgtyeebRvxchcl575DouyT9MuqjK5rEWbTyeyiE6uwPEttCTCncLnjybFxvM48kTdjChBkwpVwBf98yw37PPxWR2pV402G63hw614cq091Hl0CBq5DPgjMkOqveMKLEHyPNSbLYQsiP9sYOqdbW315/z138zSSuuSomTTEcK4XKO30JvD6PIilvIjEHmlPvgztEUqGVAgi3enq1Tn4TJyKoQcZf9wgYt5O6EX1TmEp061M6EfIefNhcbJDsrT/yB+F+MVXKFfOZIXzfyIM63TnfScqVNlGA8VLEEHFW9/D5og1xkz+M02KGy9WiPbluaEDr7YLocPy8UpSds+M=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR10MB3320.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(136003)(396003)(376002)(346002)(39840400004)(478600001)(4326008)(26005)(6666004)(6512007)(107886003)(38100700001)(2906002)(16526019)(186003)(8936002)(6916009)(316002)(6506007)(52116002)(36756003)(4744005)(1076003)(5660300002)(8676002)(6486002)(2616005)(66946007)(956004)(66556008)(66476007);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData: 
+	=?us-ascii?Q?jXIV9uW6EecoEzz42yOlx2K8zmnd+Pg/Y650b6G/vxIbjn1EibDmgqMGzUHk?=
+ =?us-ascii?Q?VCi5M2Ihz9A6eTN/rlaEnUrJHgDmkhfNuW97ibpl9WDjh81HYvENGUMmx1OG?=
+ =?us-ascii?Q?81VGoys/eLsYnQexxjPktxiEtSijbnXB9H/2Tc0qcpJOTjX7R3w1NXAiRpMu?=
+ =?us-ascii?Q?ClkjBVHSBSBYlBXxIyNna1aK8Ocf8Gox3P+ag0W2x5dJ37Hku9ZAoAiKKjsK?=
+ =?us-ascii?Q?0ih6VD8+JryW/Z+Sgv1pSkr8TT/6hMuw2MjMLCC8Dg/4vErM6h0w4bIcTWH2?=
+ =?us-ascii?Q?+CSMCaTg5J5R+Y8vSIY5NNmt9oRiz1xyeulk552ML38JXCnc/t7BIntbepKt?=
+ =?us-ascii?Q?0DTDiuGogGFl2yEJcEXe90zMCo1CXIaNaU/jAG5q/1Ez/9t/NvXOYcI9ogEr?=
+ =?us-ascii?Q?/35OFbx6cumd+j9BGgJjLvXUgYVRETZPSvnawri6+bglzvCRaUHbUnWnClY+?=
+ =?us-ascii?Q?Wc4OYKbvcgSoWuJ4mWv/tqMNQQWYrDU3l7ZS+HHcmM3d12WZOw03b4dr1iyl?=
+ =?us-ascii?Q?ks6kCztzqw1dpRHvgdKFCanSGPdXZWI9Ze3n0hYxoa2M0q+t2dPdhxlfggAv?=
+ =?us-ascii?Q?DYNGHPOJmm00HrZM1xOw0ktkggTQ5X9jbsj0I5tkDwkZRJKrJod5PTdUtYIz?=
+ =?us-ascii?Q?kaa3d4dkqDW8XEBHghJQTTyWgXFcdNooyL0lOtLOrsybUoM+ZQvwZkev4NNr?=
+ =?us-ascii?Q?vgyg8BNI7ZOZ4IapnhWIBJjInzn5ZFS0jBNPmAVsvaA60O9VufuA95NoCNx+?=
+ =?us-ascii?Q?iwu/4C43yqH1XcrFKvwoxeu2Pj9Aj4Qfi014N+xe9xmFpdiOizx7SiNtvEil?=
+ =?us-ascii?Q?7YADU1b46gPFS38jdsLn6rr/J/61E8Gg0kgLc32Dgi7pj6lVKtUIV2TScG8E?=
+ =?us-ascii?Q?51jLd0fgYDEW56dChnpSBhLr6SEWXpda3mtpC//eqPsZ/bqRUPVLckO2ADQP?=
+ =?us-ascii?Q?TG+99V1+japJd5fm56mX7eHeHVZ9lhFNYFo8RNMiwGxSPzqpzHfY9E1uvrsi?=
+ =?us-ascii?Q?S56MLAsY92VndsHcflhFYqwHlNBzpa1XGEFHKtvGKKD3rHQzWUlwtcga24WZ?=
+ =?us-ascii?Q?Ac+KRLDesjcSsPjpXUM2oapPPv3abJ+5oNkwwNeooEZobX8k+Npx9QMSDoNy?=
+ =?us-ascii?Q?PaGKhm4SNJGQ+/zQQLoArqWAO5f15zQyu9zdtaUp0NWsxBISnSfMZKG3CXlr?=
+ =?us-ascii?Q?mUGkVTC1dQ/y4hvHertw3Cy/jXc+aLesrub6PwqZFiYiUCURvbHak1f+ceFE?=
+ =?us-ascii?Q?EIOa3i1FpezZ4mp3FqW/SpNgmg4dH55LZWii2QSVjznhtaenlRL1UBYdyiyp?=
+ =?us-ascii?Q?nVbK8pPzZ7/ut9r+bsxiWygL?=
+X-OriginatorOrg: digi.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 874516c0-8c7b-4fb5-ed68-08d8f240eb00
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR10MB3320.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Mar 2021 23:26:31.0948
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: abb4cdb7-1b7e-483e-a143-7ebfd1184b9e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: wW++5X/cYw34d5jQLxpZOq20Nid8FfekaJ0HTM4G4fGtY9vMM6H9hVb/wsuuJwE6
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR10MB2807
+X-BESS-ID: 1616973993-110824-5432-11788-1
+X-BESS-VER: 2019.1_20210325.2126
+X-BESS-Apparent-Source-IP: 104.47.36.57
+X-BESS-Outbound-Spam-Score: 0.50
+X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.231162 [from 
+	cloudscan19-201.us-east-2b.ess.aws.cudaops.com]
+	Rule breakdown below
+	 pts rule name              description
+	---- ---------------------- --------------------------------
+	0.00 MSGID_FROM_MTA_HEADER  META: Message-Id was added by a relay 
+	0.50 BSF_RULE7568M          META: Custom Rule 7568M 
+	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
+X-BESS-Outbound-Spam-Status: SCORE=0.50 using account:ESS112744 scores of KILL_LEVEL=7.0 tests=MSGID_FROM_MTA_HEADER, BSF_RULE7568M, BSF_BESS_OUTBOUND
+X-BESS-BRTS-Status: 1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
+Add recipe for python3-httptools: a collection of framework
+independent HTTP protocol utils
+---
+ .../recipes-devtools/python/python3-httptools_0.1.1.bb    | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-httptools_0.1.1.bb
 
-
-On 3/28/21 3:33 PM, Khem Raj wrote:
-> On Sun, Mar 28, 2021 at 3:30 PM akuster808 <akuster808@gmail.com> wrote:
->>
->>
->> On 3/28/21 2:59 PM, Khem Raj wrote:
->>>
->>> On Sun, Mar 28, 2021 at 2:10 PM akuster808 <akuster808@gmail.com
->>> <mailto:akuster808@gmail.com>> wrote:
->>>
->>>     I am seeing a build failure with this change after updating both core
->>>     and meta-oe to latest as of today.
->>>
->>>
->>>     bitbake cryptsetup
->>>
->>>
->>> Please update oe-core to the push that went in today
->> As an RDEPENDS including "util-linux-libuuid" make sense but there is no
->> recipe called "util-linux-libuuid" to use as a DEPENDS.
->>
->> Am I missing something?
-> see https://git.openembedded.org/openembedded-core/commit/?id=65efd76198ad805060fe28714765cd423fa748dc
-
-yeah, just saw it . thanks
-
--armin
->> -armin
->>>
->>>
->>>     ERROR: Nothing PROVIDES 'util-linux-libuuid' (but
->>>     /home/build/releases/master/meta-openembedded/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
->>>     <http://cryptsetup_2.3.5.bb>
->>>     DEPENDS on or otherwise requires it). Close matches:
->>>       util-linux
->>>       util-linux-uuid
->>>       util-linux-uuid RPROVIDES util-linux-libuuid
->>>       util-linux-uuid-native
->>>     ERROR: Required build target 'cryptsetup' has no buildable providers.
->>>     Missing or unbuildable dependency chain was: ['cryptsetup',
->>>     'util-linux-libuuid']
->>>
->>>     The recipe in core is not  util-linux-libuuid, its util-linux-uuid.
->>>
->>>     Do I need to cleanup any thing?
->>>
->>>     -armin
->>>
->>>     On 3/25/21 12:06 AM, Khem Raj wrote:
->>>     > OE-core recipe is called util-linux-libuuid now
->>>     >
->>>     > Signed-off-by: Khem Raj <raj.khem@gmail.com
->>>     <mailto:raj.khem@gmail.com>>
->>>     > Cc: Luca Boccassi <luca.boccassi@microsoft.com
->>>     <mailto:luca.boccassi@microsoft.com>>
->>>     > ---
->>>     >  meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
->>>     <http://cryptsetup_2.3.5.bb> | 2 +-
->>>     >  1 file changed, 1 insertion(+), 1 deletion(-)
->>>     >
->>>     > diff --git
->>>     a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
->>>     <http://cryptsetup_2.3.5.bb>
->>>     b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
->>>     <http://cryptsetup_2.3.5.bb>
->>>     > index 5faaada4b7..0da9a26e83 100644
->>>     > --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
->>>     <http://cryptsetup_2.3.5.bb>
->>>     > +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
->>>     <http://cryptsetup_2.3.5.bb>
->>>     > @@ -13,7 +13,7 @@ DEPENDS = " \
->>>     >      json-c \
->>>     >      libdevmapper \
->>>     >      popt \
->>>     > -    util-linux-uuid \
->>>     > +    util-linux-libuuid \
->>>     >  "
->>>     >
->>>     >  RDEPENDS_${PN} = " \
->>>     >
->>>     > 
->>>     >
->>>
+diff --git a/meta-python/recipes-devtools/python/python3-httptools_0.1.1.bb b/meta-python/recipes-devtools/python/python3-httptools_0.1.1.bb
+new file mode 100644
+index 000000000..164a32d64
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-httptools_0.1.1.bb
+@@ -0,0 +1,8 @@
++SUMMARY = "A collection of framework independent HTTP protocol utils"
++HOMEPAGE = "https://github.com/MagicStack/httptools"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=0a2d82955bf3facdf04cb882655e840e"
++
++inherit pypi setuptools3
++
++SRC_URI[sha256sum] = "41b573cf33f64a8f8f3400d0a7faf48e1888582b6f6e02b82b9bd4f0bf7497ce"
+-- 
+2.25.1
 
