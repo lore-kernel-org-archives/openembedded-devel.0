@@ -1,149 +1,188 @@
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.web09.12848.1616965859677184807
+Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
+ by mx.groups.io with SMTP id smtpd.web12.13581.1616968810101256493
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Mar 2021 14:10:59 -0700
+ Sun, 28 Mar 2021 15:00:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=k+D8DjnK;
- spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id e14so3437529plj.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Mar 2021 14:10:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=MgTNatq0;
+ spf=pass (domain: gmail.com, ip: 209.85.160.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f178.google.com with SMTP id 1so7468279qtb.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Mar 2021 15:00:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:autocrypt:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=HmIqCMkVkEz5FSQKYRAXLNU1k4/e7T4k4+jNI/WmuXk=;
-        b=k+D8DjnKXgcdiwS2nbBEYDyuhc+agXP9fv96gpudKW3WT/1dOvkpX4sZBVAct/l3xU
-         1vDBDe6zg9tqXRRxjr5NsbQgej+HXKoqjgzle3Q4XKB6r1mmCvBVfHxbP1J6sVPjrTly
-         v0qMGOE5lfK3BP1MBIMpmN/47RT+lA2h9MpELAQ72pH3MMuN9GgOOsA0YBulemHFEMZD
-         KBR3f/V21k0T/0GxvQVYVEcKkuctk/2rwmMHZuA3ak6u3foViic0dDsjf8YXcHJLUCB1
-         Lfv6Mf4EFobBiEBPLq5f5tb1vBLNJTqbHHXaRE0V/qX83TdrqUkaMCKuj1rru/PASWkt
-         Gx4w==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=CN1JdLnxFISRCv18k036x/JvjoBQ+dgEChtS+jyCP50=;
+        b=MgTNatq0zavY10p0or4e6wYXW/7+H78/Pj7DVMtkQoAD90vGBT8JQJ0J/PT5F98TXm
+         MA3cVEqqEtGzwARLDUIbESgoQJULZsQAhanYmapzRNq/AI59deSHrwIiH0okX7+u4nqH
+         gs3VKF4um0lvUEZ82lbawWvEpzeots0XFtw01WfbjpMRrhHmMtV/H1/ogRhCGroTG+dR
+         8dc25rHXS9ua7pZwZqSKtDm07t/UwfieosbRF+yc1sh5cG0y8A0YQXGn5RpxWdju8rob
+         Jf/ABrTAq0Km4cFK9K9Ts2w0+UvSUGKY1lRzno8+/V9dN6Hz8+lH4Vbo5MreS1vY2OYm
+         ckcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:autocrypt
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-transfer-encoding:content-language;
-        bh=HmIqCMkVkEz5FSQKYRAXLNU1k4/e7T4k4+jNI/WmuXk=;
-        b=Nmhm3Dnkw49goa+oroxAdAKeqye7Ckzb3CtsuVWbYbkHsrCm1L/u0XSfH+pFamZiJS
-         p7kYWMjDP0gd8vH1saPYdeThDxjKFa50O4LJctqwOh+0ytih+4c4EZ0iOn7raMwHmyGo
-         e/u25qEQGrNxoSw17vEou1hRIEqIG6R9oLae3a2YXa4BwGp/exNU2xC4Qedx2gl7QKSR
-         rGXZL02KjYAUzTOX/ayzanH9kz9i7Sb/mbXuVMRakj0e2783VhD4PMfJnQ12iinVBgQ+
-         CFLdK+QinBYyztqzeRWMe6pzeKxVPyK8efmpABcXA1tbzTSnHtFLXcC0KwHZLed+3A3x
-         2s+g==
-X-Gm-Message-State: AOAM533CGEDj9/12/lApHeDPlxhJPPNZ4W5MUEa40Jc3D3swtbrWLMk/
-	NtEpkkiRuErVIou34QMf2DU=
-X-Google-Smtp-Source: ABdhPJw3P+wjyO4Eeobqdzd5jCePp6peKcJFaGK3gC9lfv8INQMV6DUE85nT8KHzTUYJrnNhax+AZQ==
-X-Received: by 2002:a17:902:b602:b029:e6:cabb:10b9 with SMTP id b2-20020a170902b602b02900e6cabb10b9mr25241665pls.47.1616965859221;
-        Sun, 28 Mar 2021 14:10:59 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0:c0c2:69a9:845:6a4c? ([2601:202:4180:a5c0:c0c2:69a9:845:6a4c])
-        by smtp.gmail.com with ESMTPSA id v27sm15619520pfi.89.2021.03.28.14.10.58
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 28 Mar 2021 14:10:58 -0700 (PDT)
-Subject: Re: [oe] [PATCH] cryptsetup: DEPEND on renamed util-linux-libuuid
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-Cc: Luca Boccassi <luca.boccassi@microsoft.com>
-References: <20210325070600.1335182-1-raj.khem@gmail.com>
-From: "akuster" <akuster808@gmail.com>
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
- 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
- 8CS2NxU=
-Message-ID: <bcac6cd8-ea83-8512-59af-2fe95e4726a8@gmail.com>
-Date: Sun, 28 Mar 2021 14:10:57 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=CN1JdLnxFISRCv18k036x/JvjoBQ+dgEChtS+jyCP50=;
+        b=dmLwvH1BcdioKPipMiLHlWerMVxEVRwmdBesU2WN+oynNjt1CdAIi31kFXNI2/KukS
+         HzerEihEOC1ztw1diEfWBaYAU+rdrnj8IPAs76FGoWqmMYV2jx6vSMBQRFJd6HBoUtJp
+         CqmZBRhIadMP+xRNyDIlHM8yAFt82Z4E214lE7JWB9/u1Bj0DNDVABwsAa8v66oy7Az9
+         vleqvMLCxt6iDVM2oWfd7u/s7CiLPSVKhepFb+KQix6lEwSOrBIr0J/NFp+duIFcUVlh
+         Z908ea5fE0AH1sNSxy9KuoVSY/Kd1HAZEC5hbmjwH9wHZhp1znwZirHc3q2Kc/tRdP+S
+         0q2g==
+X-Gm-Message-State: AOAM532mPvIQlFI/eKJenrLtpkBR6AqUumkMiJOtKsrny/QvZXHl4H6Z
+	u+eJq4SgTD06Y11ZZM00q6cwaXTnyLZ28OUpng0=
+X-Google-Smtp-Source: ABdhPJyWMMBMb3XgBTcsbo9h9XemDqRmUjaPvc+r68Sgm6nZ2xyibu3OFxWjXm80sXVOTp6Dct+rIQPKN91mtJK8Ut4=
+X-Received: by 2002:ac8:7dce:: with SMTP id c14mr20401489qte.82.1616968809155;
+ Sun, 28 Mar 2021 15:00:09 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20210325070600.1335182-1-raj.khem@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+References: <20210325070600.1335182-1-raj.khem@gmail.com> <bcac6cd8-ea83-8512-59af-2fe95e4726a8@gmail.com>
+In-Reply-To: <bcac6cd8-ea83-8512-59af-2fe95e4726a8@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Sun, 28 Mar 2021 14:59:58 -0700
+Message-ID: <CAMKF1sr07Z1dx4decfUZp7jBizp61PAcjbKhaOS+4U6CH7BqyQ@mail.gmail.com>
+Subject: Re: [oe] [PATCH] cryptsetup: DEPEND on renamed util-linux-libuuid
+To: akuster808 <akuster808@gmail.com>
+Cc: Luca Boccassi <luca.boccassi@microsoft.com>, openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000007b8ea505be9fe332"
 
-I am seeing a build failure with this change after updating both core
-and meta-oe to latest as of today.
+--0000000000007b8ea505be9fe332
+Content-Type: text/plain; charset="UTF-8"
 
+On Sun, Mar 28, 2021 at 2:10 PM akuster808 <akuster808@gmail.com> wrote:
 
-bitbake cryptsetup
-
-ERROR: Nothing PROVIDES 'util-linux-libuuid' (but
-/home/build/releases/master/meta-openembedded/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
-DEPENDS on or otherwise requires it). Close matches:
-  util-linux
-  util-linux-uuid
-  util-linux-uuid RPROVIDES util-linux-libuuid
-  util-linux-uuid-native
-ERROR: Required build target 'cryptsetup' has no buildable providers.
-Missing or unbuildable dependency chain was: ['cryptsetup',
-'util-linux-libuuid']
-
-The recipe in core is not  util-linux-libuuid, its util-linux-uuid.
-
-Do I need to cleanup any thing?
-
--armin
-
-On 3/25/21 12:06 AM, Khem Raj wrote:
-> OE-core recipe is called util-linux-libuuid now
+> I am seeing a build failure with this change after updating both core
+> and meta-oe to latest as of today.
 >
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Cc: Luca Boccassi <luca.boccassi@microsoft.com>
-> ---
->  meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
-> index 5faaada4b7..0da9a26e83 100644
-> --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
-> +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
-> @@ -13,7 +13,7 @@ DEPENDS = " \
->      json-c \
->      libdevmapper \
->      popt \
-> -    util-linux-uuid \
-> +    util-linux-libuuid \
->  "
->  
->  RDEPENDS_${PN} = " \
+> bitbake cryptsetup
+
+
+Please update oe-core to the push that went in today
+
 >
-> 
+>
+> ERROR: Nothing PROVIDES 'util-linux-libuuid' (but
+>
+> /home/build/releases/master/meta-openembedded/meta-oe/recipes-crypto/cryptsetup/
+> cryptsetup_2.3.5.bb
+> DEPENDS on or otherwise requires it). Close matches:
+>   util-linux
+>   util-linux-uuid
+>   util-linux-uuid RPROVIDES util-linux-libuuid
+>   util-linux-uuid-native
+> ERROR: Required build target 'cryptsetup' has no buildable providers.
+> Missing or unbuildable dependency chain was: ['cryptsetup',
+> 'util-linux-libuuid']
+>
+> The recipe in core is not  util-linux-libuuid, its util-linux-uuid.
+>
+> Do I need to cleanup any thing?
+>
+> -armin
+>
+> On 3/25/21 12:06 AM, Khem Raj wrote:
+> > OE-core recipe is called util-linux-libuuid now
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > Cc: Luca Boccassi <luca.boccassi@microsoft.com>
+> > ---
+> >  meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
+> b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
+> > index 5faaada4b7..0da9a26e83 100644
+> > --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
+> > +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
+> > @@ -13,7 +13,7 @@ DEPENDS = " \
+> >      json-c \
+> >      libdevmapper \
+> >      popt \
+> > -    util-linux-uuid \
+> > +    util-linux-libuuid \
+> >  "
+> >
+> >  RDEPENDS_${PN} = " \
+> >
+> > 
+> >
+>
 >
 
+--0000000000007b8ea505be9fe332
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Sun, Mar 28, 2021 at 2:10 PM akuster808 &lt;<a href=3D"=
+mailto:akuster808@gmail.com">akuster808@gmail.com</a>&gt; wrote:<br></div><=
+blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px=
+ #ccc solid;padding-left:1ex">I am seeing a build failure with this change =
+after updating both core<br>
+and meta-oe to latest as of today.<br>
+<br>
+<br>
+bitbake cryptsetup</blockquote><div dir=3D"auto"><br></div><div dir=3D"aut=
+o">Please update oe-core to the push that went in today=C2=A0</div><blockqu=
+ote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc s=
+olid;padding-left:1ex" dir=3D"auto"><br>
+<br>
+ERROR: Nothing PROVIDES &#39;util-linux-libuuid&#39; (but<br>
+/home/build/releases/master/meta-openembedded/meta-oe/recipes-crypto/crypt=
+setup/<a href=3D"http://cryptsetup_2.3.5.bb" rel=3D"noreferrer" target=3D"_=
+blank">cryptsetup_2.3.5.bb</a><br>
+DEPENDS on or otherwise requires it). Close matches:<br>
+=C2=A0 util-linux<br>
+=C2=A0 util-linux-uuid<br>
+=C2=A0 util-linux-uuid RPROVIDES util-linux-libuuid<br>
+=C2=A0 util-linux-uuid-native<br>
+ERROR: Required build target &#39;cryptsetup&#39; has no buildable provide=
+rs.<br>
+Missing or unbuildable dependency chain was: [&#39;cryptsetup&#39;,<br>
+&#39;util-linux-libuuid&#39;]<br>
+<br>
+The recipe in core is not=C2=A0 util-linux-libuuid, its util-linux-uuid.<b=
+r>
+<br>
+Do I need to cleanup any thing?<br>
+<br>
+-armin<br>
+<br>
+On 3/25/21 12:06 AM, Khem Raj wrote:<br>
+&gt; OE-core recipe is called util-linux-libuuid now<br>
+&gt;<br>
+&gt; Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" tar=
+get=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
+&gt; Cc: Luca Boccassi &lt;<a href=3D"mailto:luca.boccassi@microsoft.com" =
+target=3D"_blank">luca.boccassi@microsoft.com</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 meta-oe/recipes-crypto/cryptsetup/<a href=3D"http://cryptsetup_=
+2.3.5.bb" rel=3D"noreferrer" target=3D"_blank">cryptsetup_2.3.5.bb</a> | 2 =
++-<br>
+&gt;=C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)<br>
+&gt;<br>
+&gt; diff --git a/meta-oe/recipes-crypto/cryptsetup/<a href=3D"http://cryp=
+tsetup_2.3.5.bb" rel=3D"noreferrer" target=3D"_blank">cryptsetup_2.3.5.bb</=
+a> b/meta-oe/recipes-crypto/cryptsetup/<a href=3D"http://cryptsetup_2.3.5.b=
+b" rel=3D"noreferrer" target=3D"_blank">cryptsetup_2.3.5.bb</a><br>
+&gt; index 5faaada4b7..0da9a26e83 100644<br>
+&gt; --- a/meta-oe/recipes-crypto/cryptsetup/<a href=3D"http://cryptsetup_=
+2.3.5.bb" rel=3D"noreferrer" target=3D"_blank">cryptsetup_2.3.5.bb</a><br>
+&gt; +++ b/meta-oe/recipes-crypto/cryptsetup/<a href=3D"http://cryptsetup_=
+2.3.5.bb" rel=3D"noreferrer" target=3D"_blank">cryptsetup_2.3.5.bb</a><br>
+&gt; @@ -13,7 +13,7 @@ DEPENDS =3D &quot; \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 json-c \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 libdevmapper \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 popt \<br>
+&gt; -=C2=A0 =C2=A0 util-linux-uuid \<br>
+&gt; +=C2=A0 =C2=A0 util-linux-libuuid \<br>
+&gt;=C2=A0 &quot;<br>
+&gt;=C2=A0 <br>
+&gt;=C2=A0 RDEPENDS_${PN} =3D &quot; \<br>
+&gt;<br>
+&gt; <br>
+&gt;<br>
+<br>
+</blockquote></div></div>
+
+--0000000000007b8ea505be9fe332--
