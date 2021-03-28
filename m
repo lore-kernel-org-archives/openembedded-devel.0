@@ -1,263 +1,149 @@
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web10.11814.1616960969726878995
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
+ by mx.groups.io with SMTP id smtpd.web09.12848.1616965859677184807
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Mar 2021 12:49:29 -0700
+ Sun, 28 Mar 2021 14:10:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=hKq6vgr7;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id l1so3380215plg.12
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Mar 2021 12:49:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=k+D8DjnK;
+ spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f174.google.com with SMTP id e14so3437529plj.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Mar 2021 14:10:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Qstzv64bMQeKQ2b0TH3qN5mP2ik7OfOuAYB96bUvYRs=;
-        b=hKq6vgr70+X8NuhZ/o9LoxSC3clLt6X4WYEddVaasXY4JXWJuStRVvtLZ0WIsVUGjd
-         uj4dF1p3dzvHAMJMg82uQza4iHP/BiUqwSVwTVorq1kwhJGxSQqQfK5rwy9Wf431eXQq
-         vHb+7L1q5gAj2GLzsts/tvonk1C9LWzKaKyUPwpkupMVHvm8ghuzFZrU7sbsR9f+lsub
-         IZPmUS0vZ8ByNrLllswcw1GD48VQz4c6eMOjZoeQUjA0HN0cONaXE9qIxdNp6L9617Ae
-         JA3/52apYIjD3pDqJXiDK67xyjg/+50Xtb69vYOQGg3quAYONH7yl2avQYbCq6QbXkuR
-         GKaQ==
+        h=subject:to:cc:references:from:autocrypt:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=HmIqCMkVkEz5FSQKYRAXLNU1k4/e7T4k4+jNI/WmuXk=;
+        b=k+D8DjnKXgcdiwS2nbBEYDyuhc+agXP9fv96gpudKW3WT/1dOvkpX4sZBVAct/l3xU
+         1vDBDe6zg9tqXRRxjr5NsbQgej+HXKoqjgzle3Q4XKB6r1mmCvBVfHxbP1J6sVPjrTly
+         v0qMGOE5lfK3BP1MBIMpmN/47RT+lA2h9MpELAQ72pH3MMuN9GgOOsA0YBulemHFEMZD
+         KBR3f/V21k0T/0GxvQVYVEcKkuctk/2rwmMHZuA3ak6u3foViic0dDsjf8YXcHJLUCB1
+         Lfv6Mf4EFobBiEBPLq5f5tb1vBLNJTqbHHXaRE0V/qX83TdrqUkaMCKuj1rru/PASWkt
+         Gx4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Qstzv64bMQeKQ2b0TH3qN5mP2ik7OfOuAYB96bUvYRs=;
-        b=VqgsYY8c+6QwmW75uKW+OEWx3eolhSwLTGZWsLI/O79Lwr+8UpGuUnJxvPhsLL+E1X
-         nN1FWUKzEtj83wlu7TkqLuNkurD385xM5ggvUJHre4HC9QT2D0ov5EdvYaH6UHmc3zAB
-         f22gOJjHgoaRj6/xgQAkMhD2GW+SW6FPT13+9bT8ccmATgjRSRh41yEqE2JbKBFUccbl
-         Lo7GsWV4qRbOqUJWfDD2hDBVlHLOG+c+MlyJxEDVWsdWB/HO6Y7L7WEACAo0GoHke6hu
-         8O38Yq3hRETxI3eYJ/9XBhsSUEyxaV8Y4X0kn2Ty/HyCvamCTsF72njHAqSCkIyykaZM
-         Rd6w==
-X-Gm-Message-State: AOAM5305EBgLDPeml6lSLLLHYNzc140D700mejeDxi2ucH6MGEGsioSD
-	fSheCNBtzsr4XrzTQqlnzDLTsiakvERS5w==
-X-Google-Smtp-Source: ABdhPJxgpDWjiQ/21E82Uqht4kLbn1yMec713X8DFWuK+qC8z3ndV6+mSI2Hblvf8HcPczHdFfWJ/w==
-X-Received: by 2002:a17:90b:10a:: with SMTP id p10mr23214697pjz.148.1616960968877;
-        Sun, 28 Mar 2021 12:49:28 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ae20])
-        by smtp.gmail.com with ESMTPSA id x7sm15525056pfp.23.2021.03.28.12.49.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Mar 2021 12:49:28 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH] libcamera: Update the patch to upstreamed one
-Date: Sun, 28 Mar 2021 12:49:26 -0700
-Message-Id: <20210328194926.784584-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
+        h=x-gm-message-state:subject:to:cc:references:from:autocrypt
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-transfer-encoding:content-language;
+        bh=HmIqCMkVkEz5FSQKYRAXLNU1k4/e7T4k4+jNI/WmuXk=;
+        b=Nmhm3Dnkw49goa+oroxAdAKeqye7Ckzb3CtsuVWbYbkHsrCm1L/u0XSfH+pFamZiJS
+         p7kYWMjDP0gd8vH1saPYdeThDxjKFa50O4LJctqwOh+0ytih+4c4EZ0iOn7raMwHmyGo
+         e/u25qEQGrNxoSw17vEou1hRIEqIG6R9oLae3a2YXa4BwGp/exNU2xC4Qedx2gl7QKSR
+         rGXZL02KjYAUzTOX/ayzanH9kz9i7Sb/mbXuVMRakj0e2783VhD4PMfJnQ12iinVBgQ+
+         CFLdK+QinBYyztqzeRWMe6pzeKxVPyK8efmpABcXA1tbzTSnHtFLXcC0KwHZLed+3A3x
+         2s+g==
+X-Gm-Message-State: AOAM533CGEDj9/12/lApHeDPlxhJPPNZ4W5MUEa40Jc3D3swtbrWLMk/
+	NtEpkkiRuErVIou34QMf2DU=
+X-Google-Smtp-Source: ABdhPJw3P+wjyO4Eeobqdzd5jCePp6peKcJFaGK3gC9lfv8INQMV6DUE85nT8KHzTUYJrnNhax+AZQ==
+X-Received: by 2002:a17:902:b602:b029:e6:cabb:10b9 with SMTP id b2-20020a170902b602b02900e6cabb10b9mr25241665pls.47.1616965859221;
+        Sun, 28 Mar 2021 14:10:59 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:c0c2:69a9:845:6a4c? ([2601:202:4180:a5c0:c0c2:69a9:845:6a4c])
+        by smtp.gmail.com with ESMTPSA id v27sm15619520pfi.89.2021.03.28.14.10.58
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 28 Mar 2021 14:10:58 -0700 (PDT)
+Subject: Re: [oe] [PATCH] cryptsetup: DEPEND on renamed util-linux-libuuid
+To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
+Cc: Luca Boccassi <luca.boccassi@microsoft.com>
+References: <20210325070600.1335182-1-raj.khem@gmail.com>
+From: "akuster" <akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+ xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
+ Jmd71vHMw+coBetWC3lk+IKjX815Ox0puYXQVRRtI+yMCgd6ib3oGxoQ8tCMwhf9c9/aKjaz
+ mP97lWgGHbiEVsDpjzmMZGlJ6pDVZzxykkJExKaosE46AcA8KvfhRQg5zRyYBtinzs8Zu8AP
+ aquZVHNXxPwjKPaSEEYqQjFeiNgFTavV+AhM2dmPmGUWCX9RZisrqA4slGwEB0srMdFf12Zg
+ mD35Y9jZ80qpu5LPtJCFcsaAlebqR+dg36pIpiRR+olhN1wmC6LYP1vw6uMEYBjkTa2Rnb6+
+ C4FDzCJD4UCrUvLMNeTW810DY0bjMMj3SfmSGSfQUssaaaTXCVlLGuGxyCr/kza1rHaXMKum
+ Ek4EFj1fyn7AfkSLEHfJfY4sO1tpgigvs4eD/4ZSQEXSu/TjVvyKx4EvUbhlGMRyH2CPwD/H
+ 7DFF8tcVtJvCwUUW+zKtjxjSSLrhniNMXAOQJZ6CdaqCe4OyJQT5aRdr+FWbBRjpaRCCf5nf
+ dTc88NMU9PrBT3vu0QJ5WNPO6MJpnb+d8iMNLZAz8tv8JMm2l+sMcNKSJ6lhX8peoBsfMVqc
+ FgiykEO0fUt7DCbUYR5tLjM/3E5tHvTjMooVJyOxoufVLYtTtQARAQABzSFha3VzdGVyODA4
+ IDxha3VzdGVyODA4QGdtYWlsLmNvbT7CwX0EEwEIACcFAlnlUP4CGyMFCQlmAYAFCwkIBwIG
+ FQgJCgsCBBYCAwECHgECF4AACgkQ7ou0mfRW5/kuhRAAlR2FTq5572jrX5nnPR7AqI2bvSVb
+ vqGLlvv739WhghvagbC+tu05QguopAhWW1/DcHK2+QtfIoC9UZrSW4RaO0CCo5sPjqK7l1KT
+ ngWX/rGjF6xTF2QN0U/btcpMyVN2CNtVLwsDF9e+GHKoUcnFkP+JP8vHGokN9k6E/c97hLaL
+ IJPeKl8LZXc2Efk+MaW1NXkfDJdcp/p+voajbihSQO6OZ/o+x9d2I3ZybKfTZ71+ek5Hxzjz
+ g6KkMOI7KJjlmBlrQFAtVbS+CFAKrwkYznE6ggkcmGv3N7DeUBTUR78hf+EZEAM+ajeLMtrG
+ rXE00pIb+gLGYPZxba5pCdQ+qWUW38qi9UnIRPm6fq7Ypx1r6XwJvbgCOkhbxo3D4YUdyC0b
+ FE9lgrg8htbc9in4j2+hVI6ALswNjLprzXdzdKrd+T3Egx36o3Z/qrYsW2o5/A5sVvvASVKi
+ wRPuEKhEhfmiHUPLvuKqhMoymHaz3fg5D2Q8G0gSDkLgeEpAjiWqf4+AGLx+MSDai7DSOsmI
+ t61kWxs7cFTB32UrB/TDoVNn3Fm88ZFQpA/bngikE9jgEm045mSY86fNlbFj2mcCd0Ha1i1n
+ aYc97RpgfjNMWyHDVHOGrNg/hJjkGa5RsAXkfyBwltHRw0Hj4urUQ3rr8um8PLe43SezPwXA
+ oRoyDxDOwU0EWeVQ/gEQALNHwj5VSPdnvXy1RXUuH+rclMx4x8zaqDyY0YqHfA7b/d8Y0VAt
+ Y6YpzDeFTwD8A0Wfb7kZ2mlDIE6ODCB71uT/E3C6b+FiiN+lgzslznjUW+9l8ddDhRrC8HMG
+ 37vrXF5h++PTXUKEKUlkDib1w093tu3mlJXUvIAzl8CEHkptF6Br0L9XxFwuWoNUfjT9IorQ
+ 0SVIhvq5PhVAITXUD5fD7/N8B4TYegmHFRo1UaaKSnSHwlJJkzKpeWOH8QTYrP0RHxX86Obv
+ IZuwbAo3F3oojcvLJt9NxWnbEmEALkleklLZnukgu7q5Wp1VDwhUbMFTLb6qmnBa/Xi30uOk
+ 0l1TMHDbeQswvQDOZBAMukSRqyBetKxQ3iTfZ/3z1ubQRcVDbVlMDScSHQq0LK3F9yMOMM/6
+ 0QPqJjl13xn/+Bn7WJiAIXXwzAV7uo6i0khFfjDtCDQ40aeffqOLxp1yMLkc3EKJGcQ5F6O2
+ ycEf4QXCYUbMXjxB0EJB8y7z+xOi5Mmd/pPlVmZ2gQK84NAL90p7n7jRlyf3gOUY+JOl4c5e
+ UFiIhOzmuqNrvPOiZ02GXh6SGUU5y7IgSoIKvXSFgHAn2OG/tcspBmkyv6IuNVpmbmEgYn4I
+ Rnt40UXVQkxTh0dENFhk2cjunMYozV/OqYCgmZLFSeJd8kAo4yn+yOtNABEBAAHCwWUEGAEI
+ AA8FAlnlUP4CGwwFCQlmAYAACgkQ7ou0mfRW5/nNcg//R63cbOS6zLtvdnPub3Ssp1Ft8Wmv
+ mni+kccuNApuDV7d63QckYxjAfUv2zYMLpbh87gVbLyCq9ASn552EbfRhTvHdk44CgbHBVcI
+ ZBEdZWgRR5ViJakQSYHpP2e5AGNFnx9gSIuRTaa5rvZM+4xeoZ2vJiq93TtaYPr7UFNfK+c4
+ vv4C66lkt9l95/I10eSc3RqbOKZW47emlg4X3ygEoB9k2lPrpspyf6sUuSEi0WrlSxoLAr6p
+ JG8rTUErYNeXe6JCdL31odDx1Dh5sdKIj2RicUYZNilxu9f1M7jZwf2ra1FGAlKj2ybqmgpZ
+ EFteaiCinEYsvDyZyOiWHjAFI+RZIPQQL3AnVp4l7wYD3r9hnqYPww0slyMDcb9262RoFkHq
+ dDwxPYarrNjWUpOzxB6bFxOgNRdCTgvQl8Ftk8a/yXB6vHeUSm1vPFCBxQPZytyfOLhEWm0J
+ /mkVL0Z6iRK3p1LKnpLYCS4/esL2u7RrhPyCs2SsL58YcQF/g+PpeT9geZ+oyZ/4IQ+TWJoU
+ PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
+ ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
+ 8CS2NxU=
+Message-ID: <bcac6cd8-ea83-8512-59af-2fe95e4726a8@gmail.com>
+Date: Sun, 28 Mar 2021 14:10:57 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20210325070600.1335182-1-raj.khem@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...o-variable-to-avoid-range-loop-warni.patch | 155 +++++++++++++-----
- 1 file changed, 117 insertions(+), 38 deletions(-)
+I am seeing a build failure with this change after updating both core
+and meta-oe to latest as of today.
 
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-uv=
-cvideo-Use-auto-variable-to-avoid-range-loop-warni.patch b/meta-multimedia/=
-recipes-multimedia/libcamera/libcamera/0001-uvcvideo-Use-auto-variable-to-a=
-void-range-loop-warni.patch
-index 4ca412c695..86e469bf7e 100644
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-uvcvideo-=
-Use-auto-variable-to-avoid-range-loop-warni.patch
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-uvcvideo-=
-Use-auto-variable-to-avoid-range-loop-warni.patch
-@@ -1,38 +1,117 @@
--From 767267ef69c001870d41caf9c60dd7fec89b0a13 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 3 Mar 2021 15:11:46 -0800
--Subject: [PATCH] uvcvideo: Use auto variable to avoid range loop warnings
--
--With c++17 loop range bases are defined where copy is obvious since
--iterator returns a copy and not reference, gcc11 will emit a warning
--about this
--
--uvcvideo.cpp:432:33: error: loop variable 'name' of type 'const string&' {=
-aka 'const std::__cxx11::basic_string<cha
--r>&'} binds to a temporary constructed from type 'const char* const' [-Wer=
-ror=3Drange-loop-construct]
--|   432 |         for (const std::string &name : { "idVendor", "idProduct"=
- }) {
--|       |                                 ^~~~
--
--Therefore making it explicit is better
--
--Upstream-Status: Submitted [https://lists.libcamera.org/pipermail/libcamer=
-a-devel/2021-March/017966.html]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/libcamera/pipeline/uvcvideo/uvcvideo.cpp | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/src/libcamera/pipeline/uvcvideo/uvcvideo.cpp b/src/libcamera/=
-pipeline/uvcvideo/uvcvideo.cpp
--index 031f96e2..ef23ece7 100644
----- a/src/libcamera/pipeline/uvcvideo/uvcvideo.cpp
--+++ b/src/libcamera/pipeline/uvcvideo/uvcvideo.cpp
--@@ -429,7 +429,7 @@ std::string PipelineHandlerUVC::generateId(const UVCCa=
-meraData *data)
--=20
-- 	/* Creata a device ID from the USB devices vendor and product ID. */
-- 	std::string deviceId;
---	for (const std::string &name : { "idVendor", "idProduct" }) {
--+	for (const auto name : { "idVendor", "idProduct" }) {
-- 		std::ifstream file(path + "/../" + name);
--=20
-- 		if (!file.is_open())
----=20
--2.30.1
--
-+Delivered-To: raj.khem@gmail.com=0D
-+Received: by 2002:a05:620a:20d3:0:0:0:0 with SMTP id f19csp2716715qka;=0D
-+        Sat, 27 Mar 2021 19:58:30 -0700 (PDT)=0D
-+X-Google-Smtp-Source: ABdhPJwyDnjZqZmFqHVShb/5/RoVkJ4Avv5bcnyuo85vIRR2vJDQ=
-F+QBZpQpEWHgx5GuEuwLVSC+=0D
-+X-Received: by 2002:a05:6512:22d0:: with SMTP id g16mr12125441lfu.650.1616=
-900310724;=0D
-+        Sat, 27 Mar 2021 19:58:30 -0700 (PDT)=0D
-+ARC-Seal: i=3D1; a=3Drsa-sha256; t=3D1616900310; cv=3Dnone;=0D
-+        d=3Dgoogle.com; s=3Darc-20160816;=0D
-+        b=3DbZlu68tossyE2YcGkt0HzIhqTUroWDT/EgJvAiQBgZ6bPzMJ+wjwWp3LzViqOx=
-iRPQ=0D
-+         r0cFyme7CJ9YRf2TLmpjGuv2RPQ+EkrtFdlB7i65nhDrwvBoxt78vF2tUoDgVLL1Y=
-rU9=0D
-+         wKgHPtBjtDcDveOXKQJH2j5HRwiBjCXlPRBhlSxV8kJPBj//dRaKm0MsxfiW/IgyN=
-1tZ=0D
-+         FFxfe4Lk1Awm8ZKAklhdKMly3MFA6IbnjwNcN/84a0R/0+PLu9X8XIR6+CnrfqSgW=
-OBx=0D
-+         zsV8p3HuVQTpX7Hhnkiz7PYudHsJJ/7KXeXTP6s9NNnZGu9A6U/E6VOob5BSm9DDI=
-A5z=0D
-+         4AnA=3D=3D=0D
-+ARC-Message-Signature: i=3D1; a=3Drsa-sha256; c=3Drelaxed/relaxed; d=3Dgoo=
-gle.com; s=3Darc-20160816;=0D
-+        h=3Dcontent-transfer-encoding:mime-version:message-id:date:subject=
-:cc=0D
-+         :to:from:dkim-signature;=0D
-+        bh=3DfbAn+wsNks5BGTY34H4T90NDFJaNV4nnt9vc9DBFaWQ=3D;=0D
-+        b=3DmLZNiQR/CdgcVTAc7OQmK0ZYTVpofG/EOqTIi2NYIYFhanWhatYY9Hx2xwxIp6=
-kQ5R=0D
-+         n0uXh5tLth6aPYD09z3YcXYasEIszBKwoNUFjRA85lFm3d5/J2S1wC5rBy25QeCDO=
-g57=0D
-+         QdzYrTBX2QGRHGQKauEnX5FLDTT+I53sPa87TyvxUKBS+lTAbJig70KfmL7FJIEWT=
-1ZI=0D
-+         CZKCErYFlQTGNnwM0CYVXyHv54D2tA25veHQIJN8KK+XObNWuAY3rYpqKoUpOP4vp=
-SPi=0D
-+         MXJWAV4L6NZEShWvwJiC4Zdy2xFzXASX27CAKIsX6T5Rub03grVTg6WVt9bChK1x5=
-jeg=0D
-+         A2Yw=3D=3D=0D
-+ARC-Authentication-Results: i=3D1; mx.google.com;=0D
-+       dkim=3Dpass (test mode) header.i=3D@ideasonboard.com header.s=3Dmai=
-l header.b=3DMniKswyT;=0D
-+       spf=3Dpass (google.com: domain of laurent.pinchart@ideasonboard.com=
- designates 213.167.242.64 as permitted sender) smtp.mailfrom=3Dlaurent.pin=
-chart@ideasonboard.com=0D
-+Return-Path: <laurent.pinchart@ideasonboard.com>=0D
-+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com. [213.=
-167.242.64])=0D
-+        by mx.google.com with ESMTPS id v18si12339470ljj.208.2021.03.27.19=
-.58.30=0D
-+        for <raj.khem@gmail.com>=0D
-+        (version=3DTLS1_3 cipher=3DTLS_AES_256_GCM_SHA384 bits=3D256/256);=
-=0D
-+        Sat, 27 Mar 2021 19:58:30 -0700 (PDT)=0D
-+Received-SPF: pass (google.com: domain of laurent.pinchart@ideasonboard.co=
-m designates 213.167.242.64 as permitted sender) client-ip=3D213.167.242.64=
-;=0D
-+Authentication-Results: mx.google.com;=0D
-+       dkim=3Dpass (test mode) header.i=3D@ideasonboard.com header.s=3Dmai=
-l header.b=3DMniKswyT;=0D
-+       spf=3Dpass (google.com: domain of laurent.pinchart@ideasonboard.com=
- designates 213.167.242.64 as permitted sender) smtp.mailfrom=3Dlaurent.pin=
-chart@ideasonboard.com=0D
-+Received: from pendragon.lan (62-78-145-57.bb.dnainternet.fi [62.78.145.57=
-])=0D
-+	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 11F12332;=0D
-+	Sun, 28 Mar 2021 04:58:28 +0200 (CEST)=0D
-+DKIM-Signature: v=3D1; a=3Drsa-sha256; c=3Drelaxed/simple; d=3Dideasonboar=
-d.com;=0D
-+	s=3Dmail; t=3D1616900309;=0D
-+	bh=3DBwCg4h9N9fJysbMT1Yjbazbp7zTImD9mkWJSjCKzCmg=3D;=0D
-+	h=3DFrom:To:Cc:Subject:Date:From;=0D
-+	b=3DMniKswyT+aUtPgeMFeLqW6cRMFsPRN4W1XtVDA6pqI0QTSSx5koEuzSfEybjs6Qbp=0D
-+	 ZdQar1r5nBIRCg9uq85YoLKoFeT7WN4PrwnRYPwaYGAFHfV44rDrq4RBe3VOIb+85W=0D
-+	 tKn4HEzjlFelrImVbeymBsgpVhITveSVH1MdYRsE=3D=0D
-+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>=0D
-+To: libcamera-devel@lists.libcamera.org=0D
-+Cc: Khem Raj <raj.khem@gmail.com>=0D
-+Subject: [PATCH v2] libcamera: pipeline: uvcvideo: Avoid reference to temp=
-orary object=0D
-+Date: Sun, 28 Mar 2021 05:57:41 +0300=0D
-+Message-Id: <20210328025741.30246-1-laurent.pinchart@ideasonboard.com>=0D
-+X-Mailer: git-send-email 2.28.1=0D
-+MIME-Version: 1.0=0D
-+Content-Transfer-Encoding: 8bit=0D
-+=0D
-+From: Khem Raj <raj.khem@gmail.com>=0D
-+=0D
-+A range-based for loop whose range expression is an array of char=0D
-+pointers and range variable declaration is a const reference to a=0D
-+std::string creates a temporary string from the char pointer and binds=0D
-+the range variable reference to it. This creates a const reference to a=0D
-+temporary, which is valid in C++, and extends the lifetime of the=0D
-+temporary to the lifetime of the reference.=0D
-+=0D
-+However, lifetime extension in range-based for loops is considered as a=0D
-+sign of a potential issue, as a temporary is created for every=0D
-+iteration, which can be costly, and the usage of a reference in the=0D
-+range declaration doesn't make it obvious that the code isn't simply=0D
-+binding a reference to an existing object. gcc 11, with the=0D
-+-Wrange-loop-construct option, flags this:=0D
-+=0D
-+uvcvideo.cpp:432:33: error: loop variable 'name' of type 'const string&' {=
-aka 'const std::__cxx11::basic_string<cha=0D
-+r>&'} binds to a temporary constructed from type 'const char* const' [-Wer=
-ror=3Drange-loop-construct]=0D
-+|   432 |         for (const std::string &name : { "idVendor", "idProduct"=
- }) {=0D
-+|       |                                 ^~~~=0D
-+=0D
-+To please the compiler, make the range variable a const char *. This may=0D
-+bring a tiny performance improvement, as the name is only used once, in=0D
-+a location where the compiler can use=0D
-+=0D
-+	operator+(const std::string &, const char *)=0D
-+=0D
-+instead of=0D
-+=0D
-+	operator+(const std::string &, const std::string &)=0D
-+=0D
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>=0D
-+Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>=0D
-+=0D
-+Use a const char * type instead of auto, and update the commit message=0D
-+accordingly.=0D
-+=0D
-+Signed-off-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>=0D
-+---=0D
-+ src/libcamera/pipeline/uvcvideo/uvcvideo.cpp | 2 +-=0D
-+ 1 file changed, 1 insertion(+), 1 deletion(-)=0D
-+=0D
-+diff --git a/src/libcamera/pipeline/uvcvideo/uvcvideo.cpp b/src/libcamera/=
-pipeline/uvcvideo/uvcvideo.cpp=0D
-+index 031f96e28449..b6c6ade5ebaf 100644=0D
-+--- a/src/libcamera/pipeline/uvcvideo/uvcvideo.cpp=0D
-++++ b/src/libcamera/pipeline/uvcvideo/uvcvideo.cpp=0D
-+@@ -429,7 +429,7 @@ std::string PipelineHandlerUVC::generateId(const UVCCa=
-meraData *data)=0D
-+ =0D
-+ 	/* Creata a device ID from the USB devices vendor and product ID. */=0D
-+ 	std::string deviceId;=0D
-+-	for (const std::string &name : { "idVendor", "idProduct" }) {=0D
-++	for (const char *name : { "idVendor", "idProduct" }) {=0D
-+ 		std::ifstream file(path + "/../" + name);=0D
-+ =0D
-+ 		if (!file.is_open())=0D
-+-- =0D
-+Regards,=0D
-+=0D
-+Laurent Pinchart=0D
-+=0D
---=20
-2.31.1
+
+bitbake cryptsetup
+
+ERROR: Nothing PROVIDES 'util-linux-libuuid' (but
+/home/build/releases/master/meta-openembedded/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
+DEPENDS on or otherwise requires it). Close matches:
+  util-linux
+  util-linux-uuid
+  util-linux-uuid RPROVIDES util-linux-libuuid
+  util-linux-uuid-native
+ERROR: Required build target 'cryptsetup' has no buildable providers.
+Missing or unbuildable dependency chain was: ['cryptsetup',
+'util-linux-libuuid']
+
+The recipe in core is not  util-linux-libuuid, its util-linux-uuid.
+
+Do I need to cleanup any thing?
+
+-armin
+
+On 3/25/21 12:06 AM, Khem Raj wrote:
+> OE-core recipe is called util-linux-libuuid now
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Cc: Luca Boccassi <luca.boccassi@microsoft.com>
+> ---
+>  meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
+> index 5faaada4b7..0da9a26e83 100644
+> --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
+> +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
+> @@ -13,7 +13,7 @@ DEPENDS = " \
+>      json-c \
+>      libdevmapper \
+>      popt \
+> -    util-linux-uuid \
+> +    util-linux-libuuid \
+>  "
+>  
+>  RDEPENDS_${PN} = " \
+>
+> 
+>
 
