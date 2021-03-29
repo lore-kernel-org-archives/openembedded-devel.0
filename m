@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.19127.1617009638770142372
+ by mx.groups.io with SMTP id smtpd.web11.19131.1617009639381351026
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 29 Mar 2021 02:20:39 -0700
 Authentication-Results: mx.groups.io;
@@ -8,16 +8,17 @@ Received: from [78.130.197.211] (port=43130 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lQo4a-0002Gp-DB; Mon, 29 Mar 2021 12:20:37 +0300
+	id 1lQo4b-0002Gp-9S; Mon, 29 Mar 2021 12:20:37 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/7] python3-djangorestframework: Upgrade 3.12.3 -> 3.12.4
-Date: Mon, 29 Mar 2021 12:20:22 +0300
-Message-Id: <20210329092024.11922-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 6/7] python3-ipython: Upgrade 7.21.0 -> 7.22.0
+Date: Mon, 29 Mar 2021 12:20:23 +0300
+Message-Id: <20210329092024.11922-6-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210329092024.11922-1-leon.anavi@konsulko.com>
 References: <20210329092024.11922-1-leon.anavi@konsulko.com>
+MIME-Version: 1.0
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -29,34 +30,40 @@ X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 3.12.4:
+Upgrade to release 7.22.0:
 
-- Revert use of deque instead of list for tracking throttling
-  .history. Due to incompatibility with DjangoRedis cache backend.
+- Fix some sys.excepthook shenanigan when embedding with qt,
+  recommended if you – for example – use napari
+- Fix bug when using the new ipdb %context magic
+- Couples of deprecation cleanup
+- Update for new dpast.com api if you use the %pastbin magic
+- Remove support for numpy before 1.16
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ramework_3.12.3.bb => python3-djangorestframework_3.12.4.bb} | 2 +-
+ .../{python3-ipython_7.21.0.bb => python3-ipython_7.22.0.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-djangorestframework_3.12.3.bb => python3-djangorestframework_3.12.4.bb} (80%)
+ rename meta-python/recipes-devtools/python/{python3-ipython_7.21.0.bb => python3-ipython_7.22.0.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-djangorestframework_3.12.3.bb b/meta-python/recipes-devtools/python/python3-djangorestframework_3.12.4.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-djangorestframework_3.12.3.bb
-rename to meta-python/recipes-devtools/python/python3-djangorestframework_3.12.4.bb
-index a75d3f18c..417e36721 100644
---- a/meta-python/recipes-devtools/python/python3-djangorestframework_3.12.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-djangorestframework_3.12.4.bb
-@@ -5,7 +5,7 @@ HOMEPAGE = "https://pypi.python.org/pypi/djangorestframework"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=7879a5a716147a784f7e524c9cf103c1"
+diff --git a/meta-python/recipes-devtools/python/python3-ipython_7.21.0.bb b/meta-python/recipes-devtools/python/python3-ipython_7.22.0.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-ipython_7.21.0.bb
+rename to meta-python/recipes-devtools/python/python3-ipython_7.22.0.bb
+index 31ea244e3..7bc0d1d00 100644
+--- a/meta-python/recipes-devtools/python/python3-ipython_7.21.0.bb
++++ b/meta-python/recipes-devtools/python/python3-ipython_7.22.0.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
  
--SRC_URI[sha256sum] = "2fbbd5c28a1aaa1ad0b721b29e916797fc9aba9f9b3e7619da11c674880fc7aa"
-+SRC_URI[sha256sum] = "f747949a8ddac876e879190df194b925c177cdeb725a099db1460872f7c0a7f2"
+ PYPI_PACKAGE = "ipython"
  
- PYPI_PACKAGE = "djangorestframework"
+-SRC_URI[sha256sum] = "04323f72d5b85b606330b6d7e2dc8d2683ad46c3905e955aa96ecc7a99388e70"
++SRC_URI[sha256sum] = "9c900332d4c5a6de534b4befeeb7de44ad0cc42e8327fa41b7685abde58cec74"
  
+ RDEPENDS_${PN} = "\
+     ${PYTHON_PN}-setuptools \
 -- 
 2.17.1
 
