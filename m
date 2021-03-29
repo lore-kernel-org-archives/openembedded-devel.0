@@ -1,75 +1,82 @@
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
- by mx.groups.io with SMTP id smtpd.web11.22645.1617028625664600194
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.web09.364.1617039291353751014
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Mar 2021 07:37:06 -0700
+ Mon, 29 Mar 2021 10:34:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denx.de, ip: 212.18.0.9, mailfrom: marex@denx.de)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
-	by mail-out.m-online.net (Postfix) with ESMTP id 4F8FXH4Y9xz1qtQH;
-	Mon, 29 Mar 2021 16:37:03 +0200 (CEST)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
-	by mail.m-online.net (Postfix) with ESMTP id 4F8FXH4LXxz1r1ML;
-	Mon, 29 Mar 2021 16:37:03 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
-	by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new, port 10024)
-	with ESMTP id ARow2cF94wKa; Mon, 29 Mar 2021 16:37:02 +0200 (CEST)
-X-Auth-Info: Au6ao/W/6gO/iRYd83Yaas7PxaWH6411uZPgwU1YocY=
-Received: from [IPv6:::1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mail.mnet-online.de (Postfix) with ESMTPSA;
-	Mon, 29 Mar 2021 16:37:02 +0200 (CEST)
-Subject: Re: [meta-oe][dunfell][PATCH] freerdp: Add missing libxkbcommon WL dependency
-To: akuster808 <akuster808@gmail.com>,
- openembedded-devel@lists.openembedded.org
-References: <20201204234722.20315-1-marex@denx.de>
- <df600449-0f38-223a-e91a-c2f9bb6bd51e@denx.de>
- <760ce487-ef1b-3022-bfc4-36a68d13d25b@denx.de>
- <73b914d2-c05d-4b81-99a5-9ef406b9dc73@gmail.com>
-From: "Marek Vasut" <marex@denx.de>
-Message-ID: <ff8feee7-0cb5-a321-34cf-f14610e116e8@denx.de>
-Date: Mon, 29 Mar 2021 16:37:02 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.9.0
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=nVujei+T;
+ spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: peron.clem@gmail.com)
+Received: by mail-wr1-f48.google.com with SMTP id c8so13656359wrq.11
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Mar 2021 10:34:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=FrzZsql95r6iujv4hAixE7/9k8lU5V3EW974t5WCxxU=;
+        b=nVujei+TiwaEPutRxP2MHPoLX8j+M9gNNS1t8BGPoyUfNbQl2WU1UqwTGDR1GKKD4V
+         qSF94P7wvFr+PU0KhZ0L2W8il6g4Je97Q0gC8JMABla8BTVEHyEbCHlo8s8A1v8ozB/P
+         w1jnxfztO2qHKJQ2ayu6w6g89SZzLBrVEdMsrMBYkgmB76v/+aOssfA22o3AeejAPo8k
+         /8t6VEtjHXsywzPSMzQiOaCRUqX4mGzC8roBw9EdSv7iIk5mhvA4nbESuvBS9iyXBrPg
+         KJftHg4KvwBTUPVkcnmbcDUaJxZoGd2a3jvyDAgRj9f8EiqPF6L+2rOiK83bmpXyuPa8
+         cITw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=FrzZsql95r6iujv4hAixE7/9k8lU5V3EW974t5WCxxU=;
+        b=kfNMNowALEqGKM5ZXwCb0tw/eL9DPpS34/YR7gTMPHeA+39UCbTM37vU07j/82MEKr
+         R5q2MenGsi4IoxnQteHoAENp0B2OfkZYnzi+ebnBEHS2/9gfQ9s4GV1RGLN4ej5fI4yM
+         SEoXo6+V0f5NB0XvikLCuzaGzmd0pD6T+M8szeW5fKHE8c5pvToNw6cPKg8oG9UyGIxl
+         yeuu1owyVk3Upo5QJsZ9qSw5m6VX1w09irlnaFbdjL7sTZBBzA3s70gUS9q1/nnclv2+
+         uXUCAFHH4PBfIczAsNYH1vWATaAaROTvpSum3SGKVLh7YH6MXHhmi3jvH/XmsRbvcD28
+         86CA==
+X-Gm-Message-State: AOAM531AD9S6Ak5vPse/Pchxa/H2mEvVsJDjhFe5EYZBrKpZXHBi3CYC
+	HVgNZoRKM9zEUGiaHjgOaKQYUpz24si6zg==
+X-Google-Smtp-Source: ABdhPJx4+zlQisKZBiXX2Pv4TlweVrDDZRzMv4mv20/UcMpZLtBx1QtiV5vWKik6+yBqMmUSwT3syg==
+X-Received: by 2002:a5d:50c7:: with SMTP id f7mr30382512wrt.18.1617039289534;
+        Mon, 29 Mar 2021 10:34:49 -0700 (PDT)
+Return-Path: <peron.clem@gmail.com>
+Received: from localhost.localdomain (2a01cb0003ba9b00a5c6a66723ed8fd3.ipv6.abo.wanadoo.fr. [2a01:cb00:3ba:9b00:a5c6:a667:23ed:8fd3])
+        by smtp.gmail.com with ESMTPSA id l1sm30357113wrv.87.2021.03.29.10.34.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 29 Mar 2021 10:34:49 -0700 (PDT)
+From: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: =?UTF-8?q?Cl=C3=A9ment=20P=C3=A9ron?= <peron.clem@gmail.com>
+Subject: [PATCH] nodejs: 12.20.2 -> 12.21.0
+Date: Mon, 29 Mar 2021 19:34:36 +0200
+Message-Id: <20210329173436.201230-1-peron.clem@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <73b914d2-c05d-4b81-99a5-9ef406b9dc73@gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 3/29/21 7:14 AM, akuster808 wrote:
-[...]
->>>> diff --git a/meta-oe/recipes-support/freerdp/freerdp_git.bb
->>>> b/meta-oe/recipes-support/freerdp/freerdp_git.bb
->>>> index 7cafbb799..82ef561fb 100644
->>>> --- a/meta-oe/recipes-support/freerdp/freerdp_git.bb
->>>> +++ b/meta-oe/recipes-support/freerdp/freerdp_git.bb
->>>> @@ -40,7 +40,7 @@ PACKAGECONFIG ??=3D " \
->>>>  =C2=A0 X11_DEPS =3D "virtual/libx11 libxinerama libxext libxcursor =
-libxv
->>>> libxi libxrender libxfixes libxdamage libxrandr libxkbfile"
->>>>  =C2=A0 PACKAGECONFIG[x11] =3D "-DWITH_X11=3DON -DWITH_XINERAMA=3DON
->>>> -DWITH_XEXT=3DON -DWITH_XCURSOR=3DON -DWITH_XV=3DON -DWITH_XI=3DON
->>>> -DWITH_XRENDER=3DON -DWITH_XFIXES=3DON -DWITH_XDAMAGE=3DON
->>>> -DWITH_XRANDR=3DON -DWITH_XKBFILE=3DON,-DWITH_X11=3DOFF,${X11_DEPS}"
->>>> -PACKAGECONFIG[wayland] =3D
->>>> "-DWITH_WAYLAND=3DON,-DWITH_WAYLAND=3DOFF,wayland wayland-native"
->>>> +PACKAGECONFIG[wayland] =3D
->>>> "-DWITH_WAYLAND=3DON,-DWITH_WAYLAND=3DOFF,wayland wayland-native
->>>> libxkbcommon"
->>>>  =C2=A0 PACKAGECONFIG[directfb] =3D
->>>> "-DWITH_DIRECTFB=3DON,-DWITH_DIRECTFB=3DOFF,directfb"
->>>>  =C2=A0 PACKAGECONFIG[pam] =3D "-DWITH_PAM=3DON,-DWITH_PAM=3DOFF,lib=
-pam"
->>>>  =C2=A0 PACKAGECONFIG[pulseaudio] =3D
->>>> "-DWITH_PULSEAUDIO=3DON,-DWITH_PULSEAUDIO=3DOFF,pulseaudio"
->>>>
->>>
->>> +CC Armin, would be nice to have this picked up.
->>
->> Any news on this ?
->=20
-> its in the queue
+Fixes :
+ - CVE-2021-22883
+ - CVE-2021-22884
+ - CVE-2021-23840
 
-Thanks
+Signed-off-by: Clément Péron <peron.clem@gmail.com>
+---
+ .../nodejs/{nodejs_12.20.2.bb => nodejs_12.21.0.bb}             | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_12.20.2.bb => nodejs_12.21.0.bb} (98%)
+
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_12.20.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_12.21.0.bb
+similarity index 98%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_12.20.2.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_12.21.0.bb
+index 209d09caa9f4..3a2822c38d10 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_12.20.2.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_12.21.0.bb
+@@ -26,7 +26,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+ SRC_URI_append_class-target = " \
+            file://0002-Using-native-binaries.patch \
+            "
+-SRC_URI[sha256sum] = "961ad600f0706c396390ebc7767fb01d5e3792a5022dc2e7774796756eec6d3c"
++SRC_URI[sha256sum] = "052f37ace6f569b513b5a1154b2a45d3c4d8b07d7d7c807b79f1566db61e979d"
+ 
+ S = "${WORKDIR}/node-v${PV}"
+ 
+-- 
+2.25.1
+
