@@ -1,145 +1,138 @@
-Received: from outbound-ip23b.ess.barracuda.com (outbound-ip23b.ess.barracuda.com [209.222.82.220])
- by mx.groups.io with SMTP id smtpd.web09.14956.1616976745094473110
+Received: from outbound-ip24b.ess.barracuda.com (outbound-ip24b.ess.barracuda.com [209.222.82.221])
+ by mx.groups.io with SMTP id smtpd.web11.15121.1616977316421159438
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Mar 2021 17:12:25 -0700
+ Sun, 28 Mar 2021 17:21:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@digi.com header.s=selector1 header.b=W4caSBfP;
- spf=pass (domain: digi.com, ip: 209.222.82.220, mailfrom: ben.gampe@digi.com)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com (mail-co1nam11lp2171.outbound.protection.outlook.com [104.47.56.171]) by mx-outbound23-158.us-east-2b.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Mon, 29 Mar 2021 00:12:22 +0000
+ dkim=pass header.i=@digi.com header.s=selector1 header.b=BmObU8Q1;
+ spf=pass (domain: digi.com, ip: 209.222.82.221, mailfrom: ben.gampe@digi.com)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (mail-bn8nam11lp2170.outbound.protection.outlook.com [104.47.58.170]) by mx-outbound42-231.us-east-2c.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Mon, 29 Mar 2021 00:21:54 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=X7j//zHjsqOzizrByCG6eE7HJl58G9+Eh30g/PHNkJ5/VNzR9n9XpGycq6WnJSprgEIGvjx9P2z5s33mBv49Miox2xz6r3+fWcnTtTVtZ2HltEHe4X5Z5iGdgsNmxZpNi1kX+XZTZqOOZdFSkk4JPq1VXuK10lrif0czcd39TIqEMMExs9Au2YFjCU6p+3vQWchM+5hyP+X/z1ZtkxfJa03VKl2xvkfQf+qJFMhH/xwVkP0f/ZdytY1wfOX7P1VX3eHG8KVN0C4n4zYGGDw1DFzp9zrKxTlJQdOW5mPdiLrbuy5/vTgFQXEaM1Gb4WiPxI9dTLN8cDKygoApHRq5Mw==
+ b=obR0OXkcy8BoC8IllR5L/IIT1pqdCqc1aK9YsQI0MkdQGuhVLW5L7RuF7fcFcDCyeYZkmkpgCVCggSchf4cdz8qnJAHXpZPe3464iUQ6il7UhP8XkCR8UnCwjVFEmVXrAnlbAKfPdRnXJcJjyIR3AIyykKWwbwRnCtYM7ZfLkNxQYjLAFkLwQKw6gyKGZzhIYRAbnacBuce3UBQXwAawwuhaQoRpdX9EO3/Ku6NoYYBjUx0YtSSVAQ6tsHazZkzcvWOgSMgD/d7ro9krLcyZkWgHep+7Cl9CfLO9dno+d852TnYEy7dBXNHdgazByN9tMr/uOKbH0Bx6JE9BJqLVtQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=35IVLv6FfHAnoLxfJQyALh96ahmXND2W8x9cnMnhBZ4=;
- b=OOdJ01gaLj+Mk3eNx7vGTAeRPzHpmUyOecI5v8sBAU+DVUw/xHB+H9VOgYrbkEugE9H8ET2+V2sSLQ/nypq1htKhDiKHhZlpF61v/gRMVCYX5UVkGoH/Gq3uMKBzJY1RI7jruKPim0aPJ2wKRKxAtLltTgezQ7w6/AtwN+y0MDRHDYVuJgqg5rHAGWVX7ZH+8uhXHEDdxtq00y++zZiUPDdguqLIvldCjMIbMKD11LhbLqg13NIY7XIXe3SuzTiMn4i8RrIAzInKUisSWFiwV8Mnem4emOLdm0n+49KAZek4wcloou8JBqyycz6OBVfYy8vqtgQMk2vL/gaOCAUkAg==
+ bh=xUc+SIzsz74kF1XVnpXrlUZ6xe8xX2sL4C/De2lK768=;
+ b=oepisT5qc+INIsJbTEfMQhxd4OsIlzkhHUSgOJnBs2mWsRMbK2uai5DXjKggWkEZ/yE1MsNq5gc4HnOq6ihhYhRdXhKbAyEsxnIbSDMdj0YvQAW+19SK19w+QYqV3HPARSj4eIy7YonSq5XThL+/3O7zJSodNN/0Q3sQNGDAFa1LEEJnI3HC7o0f1Vo36op+W7JcmzT+8tMhEz2hRCLD8bfY2NZbREeUAw46RPjH1eWCJre8MXX37vANwnKkvShh+IRniKlISROjE3dW3bg+dgtl+VQvhFB4BsOLI0QTd1kbZf6V6iXzrpAFupdk8VcSBN1Oz6+fwX3muOUzseHoVQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=digi.com; dmarc=pass action=none header.from=digi.com;
  dkim=pass header.d=digi.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=digi.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=35IVLv6FfHAnoLxfJQyALh96ahmXND2W8x9cnMnhBZ4=;
- b=W4caSBfPPa9H2enj/Q5dv2bjCKOHTYGVYWUjtPtykro/Y2lUokhTPLuUk3pePdaz+t08emMCF7oObl4i2zS5q/76Fz68TAmFCwCub00csE+gFTfxnf0m5DpzqlHClEQpIn0OVbY0wtA393sW75FQnBi2OA1FHhQhKmLfCaHl7wQ=
+ bh=xUc+SIzsz74kF1XVnpXrlUZ6xe8xX2sL4C/De2lK768=;
+ b=BmObU8Q1YUXcJ4iW/++Xj6dbkaa1uHGE8th6sARXr/sd4jk+D3DNbWdqFV8GeVbtIGvemWbDazOIEvakNBqSZgCtaBGPTZR8wEW6Bf0JyXDcYhS6njjF52wKyUMgRQ0+jKbLhFTzDiTYnIsfjw03p5y5BXw1TcnTHOFXz7uE2N8=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=digi.com;
 Received: from BYAPR10MB3320.namprd10.prod.outlook.com (2603:10b6:a03:15b::21)
- by BY5PR10MB4244.namprd10.prod.outlook.com (2603:10b6:a03:207::14) with
+ by BYAPR10MB3365.namprd10.prod.outlook.com (2603:10b6:a03:15a::22) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.26; Mon, 29 Mar
- 2021 00:12:21 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.24; Mon, 29 Mar
+ 2021 00:21:53 +0000
 Received: from BYAPR10MB3320.namprd10.prod.outlook.com
  ([fe80::3cd7:c100:494e:cecc]) by BYAPR10MB3320.namprd10.prod.outlook.com
  ([fe80::3cd7:c100:494e:cecc%7]) with mapi id 15.20.3977.033; Mon, 29 Mar 2021
- 00:12:21 +0000
+ 00:21:52 +0000
 From: "Ben Gampe" <bgampe@digi.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Ben Gampe <bgampe@digi.com>
-Subject: [meta-python][PATCH] python3-uvicorn: new package
-Date: Mon, 29 Mar 2021 10:11:48 +1000
-Message-Id: <20210329001148.2569630-1-bgampe@digi.com>
+Subject: [meta-python][PATCH 1/3] python3-starlette: new package
+Date: Mon, 29 Mar 2021 10:21:06 +1000
+Message-Id: <20210329002108.2571300-1-bgampe@digi.com>
 X-Mailer: git-send-email 2.25.1
 X-Originating-IP: [60.241.24.90]
-X-ClientProxiedBy: SY3PR01CA0135.ausprd01.prod.outlook.com
- (2603:10c6:0:1b::20) To BYAPR10MB3320.namprd10.prod.outlook.com
+X-ClientProxiedBy: SYBPR01CA0177.ausprd01.prod.outlook.com
+ (2603:10c6:10:52::21) To BYAPR10MB3320.namprd10.prod.outlook.com
  (2603:10b6:a03:15b::21)
 Return-Path: bgampe@digi.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from beng-dev-laptop.beng.bne.opengear.com (60.241.24.90) by SY3PR01CA0135.ausprd01.prod.outlook.com (2603:10c6:0:1b::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.26 via Frontend Transport; Mon, 29 Mar 2021 00:12:20 +0000
+Received: from beng-dev-laptop.beng.bne.opengear.com (60.241.24.90) by SYBPR01CA0177.ausprd01.prod.outlook.com (2603:10c6:10:52::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.24 via Frontend Transport; Mon, 29 Mar 2021 00:21:51 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 05561815-b715-45fa-c3ec-08d8f2475234
-X-MS-TrafficTypeDiagnostic: BY5PR10MB4244:
+X-MS-Office365-Filtering-Correlation-Id: 08b73373-f5e9-4a26-7313-08d8f248a6eb
+X-MS-TrafficTypeDiagnostic: BYAPR10MB3365:
 X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<BY5PR10MB42443F0104EE2007B7D587F68F7E9@BY5PR10MB4244.namprd10.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2331;
+	<BYAPR10MB336514EE9A8B8D11AB84C9D28F7E9@BYAPR10MB3365.namprd10.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1186;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	dPDFGw70ooU7baNtvj2u+YQzPBaF1PUhBKjjb/2WTa6/oaL+tsGpwpA4u1qKZ6Z4uRQ1iYvaJGJZwh5dy5lpiysyYxfy+vxmubc08NMvxBMpPJXw2BWJp1EpFPiHqQLqZVWr0RblIy83Gp/ofKutg38TAcvosddNpYdYAMdNlUeSuGHJ9Rhg6zrkrgiL39zfhG/G9Wf02nHhYjJgcJg8ifT8YhcK2hjIgm1u2QrGLJ+ImqHl9xbeX3EKUCwk+E9lkd/f5gTxC3fd2rCEYFmgNDcbbIJTzTgmEJSR/OP5qgEq0cYmngflR1Y85oVqvIADOmX5SQ55MJRHuQ3weHjfFrjP05sdei9cXYM84OIJDLveSwjKOdXgbpzWqIZetgNa8p2s0ID00V6Pdhkhy14RmUf+zWm8LYC8wtHgRygzmTMXIhhWg/9Fc/fGxUNBBPY3eCaFBBfBmb3tZOTHplNWu2VvS+hW/FTI2vqQmGrgEvCDpmPv87afJJrJt+1Jfx6cUHnbGDJrzN9QS4btehVjLhn+i+5ozBG2mm4q5hRFS7g4WckCyMVLf17N33Blp1/IgyUk6Lk7hm53tHSOtzI8cC9hTFqf0R0Cb9wSbMPzMoaecmoSncY6XNOaAozkL4kwc86GFr1MhxU8kt6sNYJHQatsG7wxFth/ExrKE9u6jPV4/f1bsClPuWErFLUKFeCoAwkZvgIq6qy/VDNNTfq31SOh/On0/e8gQ4tAUuNo1Hw=
+	SMifY4zWuk0tbeW35BBr1fZHw49BDyvxpm3jQOwgN4sg8/3/FdZHPKYrW08Wh0Xfck5OKKs8k2bKdWwRrMABOp4oYG2k3By31x79wcf8mXkBkv7an46emxHmR7xYGsRZCWYXMevISdFz7eh6tKiWcjt4i0MZc/OqcTkNpVsoyPaHbGaou05gcURzGy2R1alHt9UtiiLYZ7cSbjSHK58t/r2S8juNZRt7J27PO9GTfu7iD7MpVA73Ua1K8i5X9hZUSN7VYLwTYbpovhlvNln3sWqFJBiRAlMXHUqN5Hvnk0qzLSzLOx7pO3Z2uCFtX5BrdLSlvgAHqp5nI+tOPm8SrtGMl446JOCJiSRWauLkro6F6VC0c22p2/yeryj28zUzZYfjENPOQH6OvCTOcPSPmx5D5xraIzNrHhdlVovWVOZwbWCEpjhyNnkbOpVAQnuqETvYpygkttD7EK+ooU7WpsuSrmNqaTVWgKP2m7Qv8Byk06XR4t/YbOxxmI5JUlQ3XWUxinTphHFlmqePZlhsv0WO1RdifNHhtsyOIuzUbqIesFTUBrLwPmb+NgD8MLsAU57hTwpxbnFIvi5dGO3ZCch4DkIndqt0x0hxtfciedGwjGq8qDMci8jX4umib+LLBp6CSsppPFu9x2FO5Uc1DjxrA1qh3WoyfyLqit/XBYrZAo6If7qfGd0C42pBRrP9s6ATq5dIMGojLBEdYdSaJUXeu2+6bDAcoZNyh9gAfsI=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR10MB3320.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(396003)(39840400004)(136003)(346002)(366004)(107886003)(5660300002)(8936002)(6512007)(66946007)(4326008)(2616005)(2906002)(1076003)(478600001)(38100700001)(186003)(6666004)(4744005)(316002)(956004)(26005)(8676002)(6506007)(66476007)(36756003)(6916009)(66556008)(16526019)(52116002)(6486002);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR10MB3320.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(346002)(136003)(39840400004)(366004)(376002)(6506007)(36756003)(8936002)(66946007)(956004)(5660300002)(66476007)(66556008)(4744005)(1076003)(6916009)(478600001)(16526019)(316002)(186003)(6666004)(4326008)(6512007)(26005)(38100700001)(8676002)(2906002)(107886003)(52116002)(6486002)(2616005);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?KeAh2eTUoduuOC+i5vNjSpQqDp+hQoVQfNO5VWmLGevE3s/K7OUt0xOerrra?=
- =?us-ascii?Q?oU+32C1GHITvi66VwhToAc9nUtYs0OZVVcjDaaKCTHF23bdhwvUTr/CVfMql?=
- =?us-ascii?Q?C5JeIujlqBOjzcXuLpHxN3S94Noh36A2DzmiFuAHoScWnlsV+5NsSa+tgbsT?=
- =?us-ascii?Q?IF3nmTp9p1yfoWmyUdR22sFR/hF63eKIHtWl3lpyTZyXEh8/XWRwwQMRTjOq?=
- =?us-ascii?Q?ZSGApeq0jhaZkP6ybj713eJyIkdiaI1SVcgu1/VWsOHwrwCzSoo023CdD1BZ?=
- =?us-ascii?Q?nEXpi29kyjO1GLwsQKxPCFCd6tfcPwYAIZuQXFLj9rNEG+flJkTeK90q1loq?=
- =?us-ascii?Q?KMF96ywNaIF7Zj7D6kHt9i9DDBjR5hmQrmhFBheeTEJaI0jp1Wk9i/eVIaCW?=
- =?us-ascii?Q?wZYBUO7HQECBsSbs9gCHNER3goiyQxYIZbtXLJeT4T3ZgBIjhUDyUFqGyMcG?=
- =?us-ascii?Q?g+xCJvtcNctOgdh5NZGwIdGUQXblbT7fpBGyfTfRHZs/PyDF6kgkgqsh8JLu?=
- =?us-ascii?Q?bTzsIxgfGKcF390w4rhgLvmcGABnJmpTF47V8iDbqvC/UdEipoWoOIV1Yyq1?=
- =?us-ascii?Q?/oN/gSqS1bku+YpYAgUuvPKcZCxo+2F7XznhiFSWeuFY1/fDgMCltxVKXtW9?=
- =?us-ascii?Q?saHGNNbgUOp0b9JVvFM9gBHUJhpgnngJPa/a2pAEQU9J6HQkG5V4q1ZJkAel?=
- =?us-ascii?Q?scSTQUEWlLeOnRqzxQtT+X1eiR12GV0m5FQewbFaMSFVqJbdLbfGwC9Z96tV?=
- =?us-ascii?Q?dsRlwfNDShx0UuGt0nvTo7QJrhag7zoJvfH1DHskj7g8dwJWQ65K9klqOv35?=
- =?us-ascii?Q?qF6ZflNW59PG26UNgeHDqJNCRh/GrJaxW9+P6VXBXQVOPJxLTzqFsT5wiRy/?=
- =?us-ascii?Q?uvJNogGDvVaCJydWgKKMdToq9k7AxAt36VR4pluaa1m0r21l4GBYP0zOrxj8?=
- =?us-ascii?Q?xo4f+wU8cJ8IyTnRwBw7RK4kFL0/2t1KKyKEPBzFsC5uwIbecBAO6Q4WITPD?=
- =?us-ascii?Q?+jDyxEowRCt7Rs2j7NbK3ap+dKPItIZ2AmirrwL/KJXmGhVQ95atTJKBNUP3?=
- =?us-ascii?Q?XB2YICmGDosXYxOJIJOAMQaPgFkZS/4mwVNhJ2WbFG+FMbTMzahgZs+73DuB?=
- =?us-ascii?Q?HLalsIT2siktmMc3TakZtG0pm9ujscbm1MdFdWvwSUwbS2T+HpmYlmnmQEhJ?=
- =?us-ascii?Q?meU5rS/t7oSGYksbz3I9YVLKM3sCLDFciS+0jKVLFjkEV7ck0SxTH46mnx+4?=
- =?us-ascii?Q?2vzlKOh/+ncdeNXZZIYqyqPv1DYcVCtRUvCoWLjqP8wtR3/X8g2ZQ0hcn2HK?=
- =?us-ascii?Q?sj1salKX/T7nKOJ/6Uj3YL/h?=
+	=?us-ascii?Q?YANTTYMqHUzTLpnxBClsyCNrjV+W23m2lvYcvPbqQ78BVL/4HIBvA4xw/tRl?=
+ =?us-ascii?Q?RA5lqMrtMZA7ua+npOuhuNMCRE2nfF+cQ6Rx5alsbhnn8F5ZnaOfg1O2SeXQ?=
+ =?us-ascii?Q?bR81hQsAamOj8ItvhG5gDBnnYdgRCC9DOElG9p1lzWuGCn3FJahBpfp2Ag90?=
+ =?us-ascii?Q?MMYyNQWdiQMviH69cCF5OesqOacZgEvWGw3cEFa15tBY/Ani4p+9KolK5Y4k?=
+ =?us-ascii?Q?SJUClQ0KSBYXiC9VJ5GTaOQsQnj5iIFY7YjcVoO0CtEARgSRi8+n19LgELm/?=
+ =?us-ascii?Q?4b//utkHr12wQobX3gtd00cAdTkzdXrjdszc1rw+rr8afTQw2TTxehM2cqXd?=
+ =?us-ascii?Q?vtJh/d2YrRG5S/iIyzJEe8k9xBdXkrI05TX8KIOPPw7Ocmly6BiWd+LagtA3?=
+ =?us-ascii?Q?ZcmxysTO8pYzlq+6jfs9/eMzKw+14KICy6tL141G3ce1ReSgyei6ZiWJfoZw?=
+ =?us-ascii?Q?BO0MMHEvhAA1P8TLDDIU4pPvf0/DSPW8wJXfZpohNGB5PkYuHkphbZQGJCsA?=
+ =?us-ascii?Q?ll/O1Ixmp1A5aL6ZTPOz0iNazgvbMtG4cwty8li9UayOmclzAfZKhpbX64bA?=
+ =?us-ascii?Q?a4LJiTygj3DQGvK+isqFlXXPYHSbusxFTSXXmWulYl0d2LtOqOaeWxuMvV4E?=
+ =?us-ascii?Q?1noQi0vscwb2Vm7hmrlt6JdwU4c90cVsL3FxIcE8VkqR9l1b+5yQTUbDa/GT?=
+ =?us-ascii?Q?LC2c2MMoSRKB0pHl8kIb/q2LH5EJZupY67WM/SgR/3WitrfEVdStv2ZhhDGC?=
+ =?us-ascii?Q?wD7i7363jqh8dsfPy/9wQuiOkmYVkJL7d/omYYN7QjTCSkMdvsL4zy+Z5SM1?=
+ =?us-ascii?Q?AtmCN8nvc1MGneZ+JxawiBHVPhKEncIXUc8+12PprL5y3Nt4ymWkk1ochjjx?=
+ =?us-ascii?Q?BvGu4O9RKySHirShj6NoJPfiU7FT80B+f4vtkNIJExTzdERSqabkPQu751VD?=
+ =?us-ascii?Q?a4fcR2KvL6XzhwjhqQOgTqGsRmcHtHuUEgZAXZYLb3zCqTf4cEj/Ue45lpoi?=
+ =?us-ascii?Q?qlbk1fMcWzaEmcVDVDCzpUAK4goNs+lsOpklyqnoIX/A2KQCsA3ilRulVGPz?=
+ =?us-ascii?Q?cKyvK38BN4hWpjDAgDehfiN79/voBCE4DeMt8e0hEoia69wN9JDP/uqG2SDc?=
+ =?us-ascii?Q?tEecH9YWvAAZmOUrxqvGcbYMQAIUzaVGaUI0fhsmLhvmbPhlYLwO5U0jc3aC?=
+ =?us-ascii?Q?sZ07muJce4gs/tq5CsqZsgF2N+LjmJxMGUsROjwk5G3GdBqJZ8j12pUc9zwA?=
+ =?us-ascii?Q?1DV8W/kTRjkQ2ZbM4h6RCVpWpJs5wlr9XEMJgvgoZa3LxYchj/QK36iwrrkH?=
+ =?us-ascii?Q?odPg7f35vK5qW2wQb2yEy4sk?=
 X-OriginatorOrg: digi.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 05561815-b715-45fa-c3ec-08d8f2475234
+X-MS-Exchange-CrossTenant-Network-Message-Id: 08b73373-f5e9-4a26-7313-08d8f248a6eb
 X-MS-Exchange-CrossTenant-AuthSource: BYAPR10MB3320.namprd10.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Mar 2021 00:12:21.2022
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Mar 2021 00:21:52.8228
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: abb4cdb7-1b7e-483e-a143-7ebfd1184b9e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: NUnDnWU8i9ybDdiZga+GFYVPZL6xKmK4JOaZgmbimO1XTVD9Hj4/r3oew3Jkc3LA
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR10MB4244
-X-BESS-ID: 1616976742-106046-5373-10620-1
+X-MS-Exchange-CrossTenant-UserPrincipalName: RPs1RslU89bgcGKKPKwrABGv1rbj7roPGkKFdB2rpN047yBCPBUA82Sk5rRig9/7
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR10MB3365
+X-BESS-ID: 1616977314-110983-5607-12470-1
 X-BESS-VER: 2019.1_20210325.2126
-X-BESS-Apparent-Source-IP: 104.47.56.171
-X-BESS-Outbound-Spam-Score: 0.00
+X-BESS-Apparent-Source-IP: 104.47.58.170
+X-BESS-Outbound-Spam-Score: 0.50
 X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.231163 [from 
-	cloudscan22-252.us-east-2b.ess.aws.cudaops.com]
+	cloudscan21-159.us-east-2b.ess.aws.cudaops.com]
 	Rule breakdown below
 	 pts rule name              description
 	---- ---------------------- --------------------------------
 	0.00 MSGID_FROM_MTA_HEADER  META: Message-Id was added by a relay 
+	0.50 BSF_RULE7568M          META: Custom Rule 7568M 
 	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
-X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS112744 scores of KILL_LEVEL=7.0 tests=MSGID_FROM_MTA_HEADER, BSF_BESS_OUTBOUND
+X-BESS-Outbound-Spam-Status: SCORE=0.50 using account:ESS112744 scores of KILL_LEVEL=7.0 tests=MSGID_FROM_MTA_HEADER, BSF_RULE7568M, BSF_BESS_OUTBOUND
 X-BESS-BRTS-Status: 1
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Add recipe for python3-uvicorn: a lightning-fast ASGI server
+Add recipe for python3-starlette: the little ASGI library that
+shines
 ---
- .../python/python3-uvicorn_0.13.4.bb            | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-uvicorn_0.13.4.bb
+ .../recipes-devtools/python/python3-starlette_0.13.6.bb   | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-starlette_0.13.6.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-uvicorn_0.13.4.bb b/meta-python/recipes-devtools/python/python3-uvicorn_0.13.4.bb
+diff --git a/meta-python/recipes-devtools/python/python3-starlette_0.13.6.bb b/meta-python/recipes-devtools/python/python3-starlette_0.13.6.bb
 new file mode 100644
-index 000000000..e04dac0a1
+index 000000000..2e4b01b74
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-uvicorn_0.13.4.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "The lightning-fast ASGI server"
-+HOMEPAGE = "https://www.uvicorn.org/"
++++ b/meta-python/recipes-devtools/python/python3-starlette_0.13.6.bb
+@@ -0,0 +1,8 @@
++SUMMARY = "The little ASGI library that shines"
++HOMEPAGE = "https://www.starlette.io/"
 +LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=206119e27d6b034e7ce70d73063c82a8"
-+RDEPENDS_${PN} = "\
-+    python3-click \
-+    python3-h11 \
-+    python3-httptools \
-+    python3-typing \
-+    python3-uvloop \
-+    python3-websockets \
-+    python3-wsproto \
-+"
++LIC_FILES_CHKSUM = "file://LICENSE.md;md5=11e8c8dbfd5fa373c703de492140ff7a"
 +
 +inherit pypi setuptools3
 +
-+SRC_URI[sha256sum] = "3292251b3c7978e8e4a7868f4baf7f7f7bb7e40c759ecc125c37e99cdea34202"
++SRC_URI[sha256sum] = "ebe8ee08d9be96a3c9f31b2cb2a24dbdf845247b745664bd8a3f9bd0c977fdbc"
 -- 
 2.25.1
 
