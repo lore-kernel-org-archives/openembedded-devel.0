@@ -1,25 +1,25 @@
-Received: from outbound-ip23a.ess.barracuda.com (outbound-ip23a.ess.barracuda.com [209.222.82.205])
- by mx.groups.io with SMTP id smtpd.web08.15846.1616981629269520521
+Received: from outbound-ip24b.ess.barracuda.com (outbound-ip24b.ess.barracuda.com [209.222.82.221])
+ by mx.groups.io with SMTP id smtpd.web11.15830.1616981632939646880
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Mar 2021 18:33:49 -0700
+ Sun, 28 Mar 2021 18:33:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@digi.com header.s=selector1 header.b=AEv1tSy5;
- spf=pass (domain: digi.com, ip: 209.222.82.205, mailfrom: ben.gampe@digi.com)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (mail-mw2nam10lp2102.outbound.protection.outlook.com [104.47.55.102]) by mx-outbound11-146.us-east-2a.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Mon, 29 Mar 2021 01:33:47 +0000
+ dkim=pass header.i=@digi.com header.s=selector1 header.b=jzJwdasO;
+ spf=pass (domain: digi.com, ip: 209.222.82.221, mailfrom: ben.gampe@digi.com)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (mail-mw2nam10lp2101.outbound.protection.outlook.com [104.47.55.101]) by mx-outbound42-231.us-east-2c.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Mon, 29 Mar 2021 01:33:50 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mEKXE9K4trqrqWhxh6C8kUPJ9FBIo5W6TwYEp2U+D77NJxdKxjsYB8fr1tEG+QkxXdtlepPkaepyoldZwDs9W0Eugzv8hEOe84Xp8R2fdfTPbGQn4JFn8UkiI3oUWuGSdxvNKdaEMdxL/0kQSN50jHzx1XA+aqovHJj8TGCmB3cqM8mjhdmgMem8US3MuTrBMVBZwD4VagANxwhvPhJEsIiQy1tm8dD4LB5zdB5jpWuily6YIYPXPwzNnEWfvh+e1CX7UxwTbW6mUhmlg1pTNBZCM6OEWJZNceVe4S4m4o65rex9OKp87aaR5cuCU+AUkL5cVh61ezv8pbIgPYFViA==
+ b=Awi8q0bB9KiH73qF+wroaQ3zvHkS9icd3zforzm9zpPBcuvr7C9lQtkpVDYJ+4KLewWH1HVZjP3wNbgpZ19/P6bLXi/eEBWesYLqNCMHGLBY28vdYQOanoGiwWqVtqrQdosNzguqvZdrQKjZW8kTvZLWyX/TDenLD3MI0ViOUrGOYOo59pSHjHC+JTvcRyYveUVP1+GeJFuur0XhDhJDC7sULm/zQBvNQxr6JP4vxgoTnBgE8z8nvbuQxxmZaDgAknKl9c6Gwe6ehppY0KxqkbiEq/l+dg/6DqLv96l0lpKsNZ/cL2YltU439m52jnQ36hblOltERz7U+Qj7861NOw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GAK4YGY5GlSSvz82Gc5yjT3OFP+rAS0qey2EswHIqVA=;
- b=XG75vPp4TmtUtHWqIgH449rDranGVBxmOn7jvEOh4f47mdzgJaxZ3Lkyij7CHcTPUchK5qhggoqpdKJq/4xkEWrGVAHG7mLqg9f2Comj6Yy+JlKTWIkn7sbqWt7MYiz39ZJL/c70hORtJMuV3wwPFeeZ4dG9z5IYhiqzOCkRvrJwG+BPwSQBDY0A31+GI5T6he1GY53/gN5GC6Q3FMJ8CwgK9sOkA2Qo+riEafllwEMhpts9jpgVkJQAP4fc5339JP0abI/JInmcpWKEYzifsympsjvBYR1Kn893R0vBg1ciAiqzdJ2HI6fhF4NczVUyqeEFfRVviGA95qq6L2DT+A==
+ bh=M0blSMuI1Va8ajZJ1xqbqUAIBu5kxB4l6WNVvc81Yhc=;
+ b=ltD1QLK3V2hyMSm79KBBWGOgp6TIYejMWpsQ1Q45fu27Lm7Xnw2jI9spj9cDEYLhDT814/n5k42VmmoLTtLuZeUuXLVCPH80FZSaXpw7Mp5w99YegqHNfeoOaBOLPMwoAly8xZfL6xem6Bw0JiSoiHMcVU7RI06B3C+V9vez3A71usBuMINBHDFdEkXmV+7F5n1K+5hCvrSX0p3oGrL31zMLN9zVBhgzgE9fNCrOBxalf3/ageeuKnIm+cN/CxnId5jQkE9SjhUZFzdB4iYvq/qDRIm00VABU2POUoJuK390IgLQiYbaJDqiyNTrz6p2zXEjOsxiV3UW2RuA2JPRdw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=digi.com; dmarc=pass action=none header.from=digi.com;
  dkim=pass header.d=digi.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=digi.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GAK4YGY5GlSSvz82Gc5yjT3OFP+rAS0qey2EswHIqVA=;
- b=AEv1tSy5PtnhZcEcXkqJgUIHCluxS6FVoPTvivchs/DiJoL3/VmQaOhZFwEsRcCl7XzZ/Mf1dvvpgRzIm4qonOvJBmFpjEDdEZfFDQ7iAxGp4XKAMgWJCpQvGG6tMSsuCdGFAEynWuDC5o8KP/qx7ETvkCEnE9ixNbgAvtL/4Mg=
+ bh=M0blSMuI1Va8ajZJ1xqbqUAIBu5kxB4l6WNVvc81Yhc=;
+ b=jzJwdasOj+/tYavdXFDQKFocrmWJIy8q0fA757d9yFNOSPqUdNtdSGx3t9x54IY58uF7aHDOC0jvZlA12XGpVL+ZI/S7MD0CXL+89Ewm/cj7ndNts+tfUZv9NHjvZIDT/a/U7MgOTlEGSHE8P7cWIHDW30d2IDW8Jx6udt1lXfY=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=digi.com;
@@ -27,17 +27,17 @@ Received: from BYAPR10MB3320.namprd10.prod.outlook.com (2603:10b6:a03:15b::21)
  by BY5PR10MB4019.namprd10.prod.outlook.com (2603:10b6:a03:1fb::12) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.24; Mon, 29 Mar
- 2021 01:33:47 +0000
+ 2021 01:33:49 +0000
 Received: from BYAPR10MB3320.namprd10.prod.outlook.com
  ([fe80::3cd7:c100:494e:cecc]) by BYAPR10MB3320.namprd10.prod.outlook.com
  ([fe80::3cd7:c100:494e:cecc%7]) with mapi id 15.20.3977.033; Mon, 29 Mar 2021
- 01:33:47 +0000
+ 01:33:49 +0000
 From: "Ben Gampe" <bgampe@digi.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Ben Gampe <bgampe@digi.com>
-Subject: [meta-python][PATCH v2 2/3] python3-pydantic: new package
-Date: Mon, 29 Mar 2021 11:33:09 +1000
-Message-Id: <20210329013310.2582815-2-bgampe@digi.com>
+Subject: [meta-python][PATCH v2 3/3] python3-fastapi: new package
+Date: Mon, 29 Mar 2021 11:33:10 +1000
+Message-Id: <20210329013310.2582815-3-bgampe@digi.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210329013310.2582815-1-bgampe@digi.com>
 References: <20210329013310.2582815-1-bgampe@digi.com>
@@ -48,61 +48,61 @@ X-ClientProxiedBy: SY4P282CA0012.AUSP282.PROD.OUTLOOK.COM
 Return-Path: bgampe@digi.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from beng-dev-laptop.beng.bne.opengear.com (60.241.24.90) by SY4P282CA0012.AUSP282.PROD.OUTLOOK.COM (2603:10c6:10:a0::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.25 via Frontend Transport; Mon, 29 Mar 2021 01:33:46 +0000
+Received: from beng-dev-laptop.beng.bne.opengear.com (60.241.24.90) by SY4P282CA0012.AUSP282.PROD.OUTLOOK.COM (2603:10c6:10:a0::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.25 via Frontend Transport; Mon, 29 Mar 2021 01:33:48 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 4df94f30-d7c1-4650-33d6-08d8f252b274
+X-MS-Office365-Filtering-Correlation-Id: 0f531c5e-1522-4029-dd2c-08d8f252b422
 X-MS-TrafficTypeDiagnostic: BY5PR10MB4019:
 X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<BY5PR10MB4019EDF1FD8CFEFA4C7FE7618F7E9@BY5PR10MB4019.namprd10.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1079;
+	<BY5PR10MB40193DD9E65275C2256FEFCA8F7E9@BY5PR10MB4019.namprd10.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1850;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	vJ7LKvb7gHGUbLpD1i2UYHFl3sX2S8ovHOV1ZDGf48ssONJArOCXDCV36xN6aeFoJeXLIxOr0M9lhwpmpvc45CcxxInaNzZ6x1h5aH714QwJd1IswYli+MbSNORgA7x6u+asvcZXNGLwlchUsDKbAe/Qux6msFxqO6Bb//kGPCz1IPpkHNEu+lMGkag5HLY6KSjfrBGTmuJGEKw39IXz+1PzXq683pObWRQUxpdpThU/k+xxYM+3qpNq06m6rdbXevlJWZ+CPS1+C7Rk9/SvrjD2iHtlogS1fIs2EGWLFRidW40o/Drq5auT1knJQHF16D3tvMNlgVtYyGyqr1jQ0txbxWppR48PBPuhAHDUa/Xas5UvPpA7QDpGPhogwABPa7PMr3P+GS0G5/xBdqFoy+EJghJZG0xYZdkzKDqfqMJJmkugFxrDDsfNkXGZeyCxuAuVIg1Vvaxo5C6WgcZMeI1vjvs84Ba2/XBmsDTxf1Iy6JZoLU/dyWQctcOOflX1+ODZxG2VOLyrq5t4KGWhbc3TnJCLCAzpFIFqczBjYRqNkm48mjz8k/1GeOh0Q7Efe9UsT4IVT29goW2WQosbg9LnlXzxQTbozp/bpLLYX8f6x68Kp5xNUyvKRuCba9VIFz/yO+JCsM9jZMtSd6tmJikmsZ8pyqQ/pLNTD/T1BXtKiGDHhTxwBJt6NDYD9O+3NraWFithrNObxIUYejSTLu0oL1abErz72zRJjZ/CeZQ=
+	Fc7zLYiuMEa10yTri22PO3TKqDHSk8g78v/e19U717vPDSUyqYZVWB+S/I3UK7UYmvc2IrofM7XpisTmblc5WBZGpC+lI+Puz3znYm6gqv5AP82tqX4Pcg6D2BsVemrROqxX5vf3X6vhR70L1E6uv9wdVct4xwqTaU7meMmloksl+Rs3ltMXqcculOGDiAXnOpebqGT3S09sm++5OREzyhrUDxmGBbjHbXOLg6oJrVC52LuhwYC48NxFArlN8BVXDYvlZPQHzOSwkxYBpokCJgihY+0yav6deFSE6tjnazKItbJnrsO1nYsK6uc8rzrHiFykZDp0Q8fHnnZnWhPtaFSRfLYkLmQicQHADgZIi/Ur6ljBA4iQ4ztvbPfsxLCgcXFQveyTIdQINdLu/Gb9XzAreu+KzjmYm+LthUhCBgPbTLE16xrLiBY4GNx+wvmTZIhcqzGQqirCgM7BklgISEZXKEohLXn5ALTq6LymAQxSdrUYllk4CdW8clL7wfDJpjIDyg8z9vCp7WjqWUy0qdabMx5n0k45sCh3p0KfCT+/yCMNm3+ZePbRhrVYL3ELES1CT/5qj4XyRneV9jt02AIjx4CoiXl/UG4pwDceMAfncuOCrhjZ8TwS71E42YfkFFzWJe6RG5Vb5JGbfVNcg6Wy82qHdEjT4i4eOqtHsQngZwdX1ybLa6EPZU1oxOiwqCMcY1Wsixy/33ZW0URwbsajBJUll35qbtrnxFZd5Hg=
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR10MB3320.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(366004)(39840400004)(346002)(136003)(396003)(8936002)(478600001)(66556008)(2906002)(66476007)(66946007)(6666004)(6916009)(107886003)(186003)(6512007)(26005)(316002)(8676002)(38100700001)(4326008)(2616005)(6486002)(956004)(1076003)(6506007)(52116002)(5660300002)(36756003)(16526019);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?iWDqZK52YDc3hsplOUScMPj62V9iMZNnnwX5gmPLiO+J/cBsz9P9SOtto/eC?=
- =?us-ascii?Q?kx50cC+H5fjkuUJOdmnc1bZayguqjmCmKj9UpLAZOo1nXtNt3P6n1Fc9slhE?=
- =?us-ascii?Q?UciqnTUmBvwixWYit3cr3Rp+GTb1IvSyMHO+hsYKeSv3pOSONFNfRSexqKMM?=
- =?us-ascii?Q?Y0El0QsaSZALv3jALxcKyOu/Tkex1bdGUnBg+sPWa3oZ67ZckL1yTDNRQzMj?=
- =?us-ascii?Q?RTOzZSO1kwCM3n2QkFm/hIQgmqN3hbTfzeXa6fZOohgGLRqAZ6CrGhy+Mo7A?=
- =?us-ascii?Q?l/CO2/6PYcEIIM5ZfQvpr8mVi90D+D7/29J7pUmHn9ycOrbEGA0MLelZ/Psg?=
- =?us-ascii?Q?HCQn6E3NcpoGmx/T9uLGMo5n/ybuCQO/cIfBE3z0VUvjr/yl1OMQ41wwmKTF?=
- =?us-ascii?Q?jfx8MMFqiuC5jyct0H/7AcLT7yKxLWz01GUb0XFBVuV3txKn0NXG25avxedo?=
- =?us-ascii?Q?0iXZ8zBC3dFEuW/OFkfx58joXh+kEleUO9yEXyUI921M8qZ7ScY8LSS2CoSI?=
- =?us-ascii?Q?EWXLwvd/po3ppJ4M2jHZOcYCmcUKT13+Pm93V0fJe0u0oT7dDfAtAV6/htDT?=
- =?us-ascii?Q?ZgLYIvN+QjwU8Xc7kxOHgGxYq0ztax8JFOAFDX3B+h+N/TNHPjy0Kwpu7z9M?=
- =?us-ascii?Q?rDdR9p9r7q8vKF2de2UkizdM4OVAVgMY+CTKAdiu6Rbwb1R3QASUqEbtRYB+?=
- =?us-ascii?Q?BTQP8wYwogDxsHM5dOk9mBmZnjm5SjVaoYzB19jL8QLcfdwCrg9KvmLKkyv8?=
- =?us-ascii?Q?CDJfMOxwOjCJv5ryUQYefjrOVixmzxV5l8luOyjW58MXJOLHI2ze2cEGUNH4?=
- =?us-ascii?Q?l8CdaUQAm4sJ5FMdZlJ/t6rdIkt9DlywgmteGFcNq07swXTlbCkjjyj3rE+e?=
- =?us-ascii?Q?K2fBXUi1Vs+pTeAadJl4UgXHwIzFiHq3nkOM8Sr0L7Rd+eSEp5htR2Fn03WN?=
- =?us-ascii?Q?KSoAJ9X/uGfjSBL18bSFTU/zSHMAST830tbrjgjVKec1yi7/qWjeGexG0sf5?=
- =?us-ascii?Q?josNFjdfd1NM1VpXbALS3TFbpggqwQwAhXtmhlXSDB6b0WMFf1YBAM+X4mqC?=
- =?us-ascii?Q?s1zwFT3UQxnXa0aP13mUF+bWP06DeqndVb7VC1VL33H8+TEFBMTCYMuGcfj9?=
- =?us-ascii?Q?xL/rGMz0jbwMglirnp0b2J7UblT8C1EfcNSO/WKbWSPWBa0/iyP/ye1E4W01?=
- =?us-ascii?Q?jaJLXma9BzyxIwzu5bY38ev6UYNtukRR/9xRPTsC+tYZX7S9nJMRG4kG2Lcw?=
- =?us-ascii?Q?ZxN+RihyfBY72wYRolBRpmnHsU8qYrJSjeNbeiLj1fnPqHlP3KkD+5r6ua3y?=
- =?us-ascii?Q?tRMvmjrtoB/1iwQMiEBHAZG7?=
+	=?us-ascii?Q?KRXJAOZRGOqgI7BoPFG1SQDD38B02gFjEaQpoHN2IgaYvH36a+ilqfFD5hFA?=
+ =?us-ascii?Q?g+WqjtjbI1Qe0MWYaCKvkCGr2okoiqRDH2M+dgIHZYPPVP9feII7kBZs7Oos?=
+ =?us-ascii?Q?NKMdhyIh1RGYScNocWfciLtbXbdn5LgtyVo7u3mnGI2wy+3z62Z0OegCzCEh?=
+ =?us-ascii?Q?j6FJ4GuLq530t4XtFXxRWly/ancNrH+id6ndBcJCFJhP5OO01fCpKeINsCFz?=
+ =?us-ascii?Q?OMBJeTbDNLuMjoVzmzjTklg4F3Sj8JtUvz38sIpU/r2SyMdyj5Vs2NZC0MJe?=
+ =?us-ascii?Q?F06rqMf1igldn9i/jB0l1sq4wU8cDxbIaKqZhiuuel5MS7qma4YZgRAjMpPZ?=
+ =?us-ascii?Q?c8IkMP8HVmk4R+mFTEoPAMk2sP8ilIkmtABEsAqvCymyogoHn5AhGnTH1zvN?=
+ =?us-ascii?Q?GKgsKzbYzAEP1GrhwQUognxdOAAhRemDay/I4kZY8UcZV0B7O59rLDany0f/?=
+ =?us-ascii?Q?RalGvBAbQ6wgd3ldRLVi15oBVY2/jPr7V+vmGFU8Tbf3FOOlNQEVokSTA/XA?=
+ =?us-ascii?Q?CrKc200n58ecYGLlgD1c0/Eu79qoP/P/KlOpsPD/QsfWcyaMIIJ4OIrng2PR?=
+ =?us-ascii?Q?D/4eJZ5i1PbNJ7829+mqnmXd9pDVGD6BrBSv90T61DdrFRJpwOkYsyO/GUgj?=
+ =?us-ascii?Q?pBJV2JRGpO8kLaLjnmQKzgWfw3plA+0Ro4FR2ONuVO7mxfoT991anICzt2WL?=
+ =?us-ascii?Q?GHd0n3Zn1rF2Vji6RF7F8KGJoEZfb4iPuB/lcwzJJJJ3JmFzC3y0bKfL1ISF?=
+ =?us-ascii?Q?f8I0ACunvWwRu39hbrBNyNiiaFLZPNQKZjjjLLxmps5Xet0aO3yeQgbtGgmO?=
+ =?us-ascii?Q?Kmm0C9sZqGHPPf18V50OMqapDyHvJi+TrsBjuO7hnLabE/KONL01rm4+V7zL?=
+ =?us-ascii?Q?axkfeF6Ii1O9nEfLsyfpK+DBcPmuZwYO4MFRV/k2hfYEJ8l464siLgmWvSOi?=
+ =?us-ascii?Q?14m1GvyWPxRXBTbhr8448W6VNUL4GhtfgyjbPsxXM9fv2apH02Vp9UTKnfBI?=
+ =?us-ascii?Q?YDwFB/KWnXcySnEf3PHPwl8G44MMg/6R+AQR7A2S2DVzT+VTouKawcquKof3?=
+ =?us-ascii?Q?9cyp38vE8zymZDdXM5peO0+1eHINLRKfTmcX1dlbDwfR9ofmg1agdnA0MQ6N?=
+ =?us-ascii?Q?/KmExhi8qzWm5nI8n2zqi27W7PR6ldC4Y4S1bXaOIJzmJekL+P2EA/YOa7WU?=
+ =?us-ascii?Q?7waxyWLLfkIdDoBA5ts/G3K4fmIxStlAYdainxWq6RM0FsoZm97EQpvoB/HV?=
+ =?us-ascii?Q?3orLO+amD88j4Lkf73y3lbBIomtDbCykEufrwGC00T6rzcfEN+dpP1vGrYpi?=
+ =?us-ascii?Q?mLFnqMDa9hYXDZIG1yktmZFa?=
 X-OriginatorOrg: digi.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4df94f30-d7c1-4650-33d6-08d8f252b274
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0f531c5e-1522-4029-dd2c-08d8f252b422
 X-MS-Exchange-CrossTenant-AuthSource: BYAPR10MB3320.namprd10.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Mar 2021 01:33:46.9254
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Mar 2021 01:33:49.7358
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: abb4cdb7-1b7e-483e-a143-7ebfd1184b9e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: VKYKNBw3jFu+Vs6QzGHYPp48JCXYNVUVirqGWyb6La/BoRREz4nOZqNo61ZREuvR
+X-MS-Exchange-CrossTenant-UserPrincipalName: ekGpWqk6/KA5VPrCoNViOx/FVXLx/TaznwLXcTkWaAOpeyBU4kHQjW4uAQ9gud1m
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR10MB4019
-X-BESS-ID: 1616981627-102962-5413-25923-1
+X-BESS-ID: 1616981630-110983-5611-25402-1
 X-BESS-VER: 2019.1_20210325.2126
-X-BESS-Apparent-Source-IP: 104.47.55.102
+X-BESS-Apparent-Source-IP: 104.47.55.101
 X-BESS-Outbound-Spam-Score: 0.00
 X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.231164 [from 
-	cloudscan22-232.us-east-2b.ess.aws.cudaops.com]
+	cloudscan9-80.us-east-2a.ess.aws.cudaops.com]
 	Rule breakdown below
 	 pts rule name              description
 	---- ---------------------- --------------------------------
@@ -113,47 +113,47 @@ X-BESS-BRTS-Status: 1
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Add recipe for python3-pydantic: data validation and settings
-management using python 3.6 type hinting
+Add recipe for python3-fastapi: high performance, easy to learn,
+fast to code, ready for production
 
 Signed-off-by: Ben Gampe <bgampe@digi.com>
 ---
  .../packagegroups/packagegroup-meta-python.bb       |  1 +
- .../python/python3-pydantic_1.7.3.bb                | 13 +++++++++++++
+ .../python/python3-fastapi_0.63.0.bb                | 13 +++++++++++++
  2 files changed, 14 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pydantic_1.7.3.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-fastapi_0.63.0.bb
 
 diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index fd78ee0a2..c0132abaa 100644
+index c0132abaa..e9616a4a0 100644
 --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
 +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -498,6 +498,7 @@ RDEPENDS_packagegroup-meta-python3-ptest = "\
-     python3-prettytable-ptest \
-     python3-ptyprocess-ptest \
-     python3-pyasn1-modules-ptest \
-+    python3-pydantic \
-     python3-pyroute2-ptest \
-     python3-pyserial-ptest \
-     python3-pytoml-ptest \
-diff --git a/meta-python/recipes-devtools/python/python3-pydantic_1.7.3.bb b/meta-python/recipes-devtools/python/python3-pydantic_1.7.3.bb
+@@ -114,6 +114,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
+     python3-et-xmlfile \
+     python3-evdev \
+     python3-fann2 \
++    python3-fastapi \
+     python3-fasteners \
+     python3-fastnumbers \
+     python3-feedformatter \
+diff --git a/meta-python/recipes-devtools/python/python3-fastapi_0.63.0.bb b/meta-python/recipes-devtools/python/python3-fastapi_0.63.0.bb
 new file mode 100644
-index 000000000..87795ce09
+index 000000000..296d64c05
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pydantic_1.7.3.bb
++++ b/meta-python/recipes-devtools/python/python3-fastapi_0.63.0.bb
 @@ -0,0 +1,13 @@
-+SUMMARY = "Data validation and settings management using python 3.6 type hinting"
-+HOMEPAGE = "https://github.com/samuelcolvin/pydantic";
++SUMMARY = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
++HOMEPAGE = "https://fastapi.tiangolo.com/";
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=215ca7f54cdc98f95ee96c7511d64158"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=95792ff3fe8e11aa49ceb247e66e4810"
 +
 +RDEPENDS_${PN} += "\
-+    python3-image \
-+    python3-typing \
++    python3-pydantic \
++    python3-starlette \
 +"
 +
 +inherit pypi setuptools3
 +
-+SRC_URI[sha256sum] = "213125b7e9e64713d16d988d10997dabc6a1f73f3991e1ff8e35ebb1409c7dc9"
++SRC_URI[sha256sum] = "63c4592f5ef3edf30afa9a44fa7c6b7ccb20e0d3f68cd9eba07b44d552058dcb"
 -- 
 2.25.1
 
