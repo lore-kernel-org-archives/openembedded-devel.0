@@ -1,62 +1,73 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.20974.1617022368297806919
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+ by mx.groups.io with SMTP id smtpd.web11.21207.1617022654633938776
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Mar 2021 05:52:48 -0700
+ Mon, 29 Mar 2021 05:57:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=45152 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lQrNs-00036r-FD; Mon, 29 Mar 2021 15:52:45 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=FPXWE84Y;
+ spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: aj.bagwell@gmail.com)
+Received: by mail-ej1-f52.google.com with SMTP id w3so19311242ejc.4
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Mar 2021 05:57:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=2J9N5ehidav+EZgGv0n/hWmaLVAD6n41ZTD5IFVqu7w=;
+        b=FPXWE84YSXWYxoAavF9L7yklLW5CvkVO2tMzj4BI1sZtjV4a0+H55j3lt7H2dmUIws
+         L7efzT5H40X32It+NX1fT6zvBqk4nK2FuM4j4hSupX7We5q8OynGHPMZpAoQFJVu1bMd
+         swGSaqZQtdLbo6XUPkqVFMl+CR3YcG2VbQuIStMRKQG+sjHg4gZZ5c+ADY1zvp56cSDM
+         VPuc1HDyAc6wM1DIMIkC4Re8sU8cHDy4CQ+SA7wO5O1/OgU2VTDI5Kek/7pnLLukaM8b
+         0z8ladPb2fVtBNabRu9Oyd58aMjeCQw6gQNIgc9ucX3qBXZ40rPZXB8mIrcFpzg/zNOp
+         V+KA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=2J9N5ehidav+EZgGv0n/hWmaLVAD6n41ZTD5IFVqu7w=;
+        b=FzBExpI1i4nCuj9Kh+ku5S0hKAp3ULjm8goKScomBOX4Nvu3tJLTCc7TRSy0nUmios
+         r5RGdFs80D6jZQVMNscwnszGCjNdTys2NnmWG8nlJpAVs2nwDBT5Z+Ai02iQvLXVyhm2
+         l2JA3L1vHHu0GM/CEKv1F4BYXIg4fqk3KsfzN4mgfSawpcIDtYtlsDyFcvypHXoJ1UQI
+         QfkYAiGeKXBM6ayS+k9MXM4drm/geJ443ec7kxGKaKIQmvcAktuoL79lyjDHeaSI80Gp
+         cecWfefNMqomvBC1dIoqB3x8Z792OP2z1Bc+catfIKMXrHbbUtni1I88SiP8hCpPK4S3
+         jOaw==
+X-Gm-Message-State: AOAM530z/FRCBmDerID+XEci6IJ2Ba0iChg0xWy7pQZVeKMLyWPGCfxq
+	yEX2zAoqol8OgjmOvj2JXgOY9Pd0WQ8kcw==
+X-Google-Smtp-Source: ABdhPJyhhHY+1MwarSkWJLKkyabqPG5RA7/E2XuGs8S0Du3KyReH1EnWr4456kT9rTEMu8amJiDs7A==
+X-Received: by 2002:a17:906:1749:: with SMTP id d9mr22300371eje.12.1617022652957;
+        Mon, 29 Mar 2021 05:57:32 -0700 (PDT)
+Return-Path: <aj.bagwell@gmail.com>
+Received: from CMM-C02QQ1FRG8WL.localdomain (cpc159419-cmbg20-2-0-cust164.5-4.cable.virginm.net. [86.29.216.165])
+        by smtp.gmail.com with ESMTPSA id c17sm9369329edw.32.2021.03.29.05.57.32
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Mon, 29 Mar 2021 05:57:32 -0700 (PDT)
+From: "Anthony Bagwell" <aj.bagwell@gmail.com>
+X-Google-Original-From: AJ Bagwell <anthony.bagwell@hivehome.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH] python3-ruamel-yaml: Upgrade 0.17.0 -> 0.17.2
-Date: Mon, 29 Mar 2021 15:52:33 +0300
-Message-Id: <20210329125233.12605-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Cc: AJ Bagwell <anthony.bagwell@hivehome.com>
+Subject: [meta-java][PATCH] layer.conf: Mark as compatible with hardknott
+Date: Mon, 29 Mar 2021 13:57:15 +0100
+Message-Id: <20210329125715.57585-1-anthony.bagwell@hivehome.com>
+X-Mailer: git-send-email 2.24.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 0.17.2:
-
-- change -py2.py3-none-any.whl to -py3-none-any.whl, and remove
-  0.17.1
-- added 'Programming Language :: Python :: 3 :: Only', and
-  removing 0.17.0 from PyPI
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: AJ Bagwell <anthony.bagwell@hivehome.com>
 ---
- ...hon3-ruamel-yaml_0.17.0.bb => python3-ruamel-yaml_0.17.2.bb} | 2 +-
+ conf/layer.conf | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-ruamel-yaml_0.17.0.bb => python3-ruamel-yaml_0.17.2.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.0.bb b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.2.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.0.bb
-rename to meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.2.bb
-index fd99f8566..6f15d1e70 100644
---- a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.2.bb
-@@ -10,7 +10,7 @@ inherit pypi setuptools3
+diff --git a/conf/layer.conf b/conf/layer.conf
+index 6a98adb..7ef116d 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -7,7 +7,7 @@ BBFILES += "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/recipes*/*/*.bbappend"
+ BBFILE_COLLECTIONS += "meta-java"
+ BBFILE_PATTERN_meta-java := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_meta-java = "10"
+-LAYERSERIES_COMPAT_meta-java = "dunfell gatesgarth"
++LAYERSERIES_COMPAT_meta-java = "dunfell gatesgarth hardknott"
+ LAYERDEPENDS_meta-java += "openembedded-layer"
  
- BBCLASSEXTEND = "native nativesdk"
- 
--SRC_URI[sha256sum] = "3572505e63dd35b5dea62cd0386d03c4f2a53da29a3af09f428114cc85c564aa"
-+SRC_URI[sha256sum] = "8f1e15421668b9edf30ed02899f5f81aff9808a4271935776f61a99a569a13da"
- 
- do_install_prepend() {
-     export RUAMEL_NO_PIP_INSTALL_CHECK=1
+ LICENSE_PATH += "${LAYERDIR}/licenses"
 -- 
 2.17.1
 
