@@ -1,49 +1,50 @@
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web11.17402.1616993762885386621
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.web08.17525.1616994851165034228
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Mar 2021 21:56:03 -0700
+ Sun, 28 Mar 2021 22:14:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=a94r0GMZ;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id ay2so3821409plb.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Mar 2021 21:56:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=TUIENsRe;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f180.google.com with SMTP id l123so9109840pfl.8
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Mar 2021 22:14:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:references:from:autocrypt:message-id:date:user-agent
          :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=9whc5x36QqElE8/K77mf6YDXKGKlDaJdaIpGHD7X3ZU=;
-        b=a94r0GMZkbVQQvRpuSXr1UXjmVwl64v+0FPgkP3QiD2XaDrCCkLbNrXrbMHq5Ysphe
-         pyQ8Bnjwz1Bprcy2kzl1oYEDIikEpe/NZ/axbnutwOp++ZpL4nUmia0W6CC9LhtCteum
-         aS2KfG66FBtyEgtt5gRWHAqOelCdgvq3kt7dBsKBJ0q9ufUePvvTJsSFzzkpBNSMGa9f
-         75LlsvArybMSogcCMlghCF7l4VqpOugGq1/QrdUNnje56sO4z9S9jrybqaEjPwTXRbzz
-         xGhJj/SMkKhx1NvjSHemQZ2+G/Awap0HNuNUQB/17qHGRPnqbGSL6g8neslLtSt/uvj/
-         hL+w==
+        bh=hlbC45xF3LuZM7nupLtQGjmWmyE+l7HyHvqTeB++FYQ=;
+        b=TUIENsRejb788Et9nWGGSpV4Qh8Rw+VuQXda0RJuVSN6Np0U7TVEGKzHnbmLv/OzmD
+         f15fJ3r00H0fdCZryMZTTP2igRgbCO4fsAYclb5uKWTbSi2Yexyn2Hk3E0VirLDTLIBI
+         UCrG1gA7Ckf+GZ/sTFqjoyeWpeiu63NW0ZbwtB2VMXlINT1F4lehhX5x+gGuwCu1ANWl
+         GGgPrFsNTySG5twVK2a2odULw0xvPs7guICSJGz8oCGtAFfGPUt2WfgWmztP4YwLUPW3
+         tICHgnQnCyvfBqYeSHHMmjbanBMR1p7kIaucYq2wA3LlFru80B995vTPDg7CTzEbTQYt
+         dpRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
          :date:user-agent:mime-version:in-reply-to:content-transfer-encoding
          :content-language;
-        bh=9whc5x36QqElE8/K77mf6YDXKGKlDaJdaIpGHD7X3ZU=;
-        b=c6Q4j1AeR/SQ6z2PTaalpvDQ0WGZkMO72b5HGupkeR3Xg6hbfe1+xWeqVJhNdtcVk2
-         s76jJmNOGszDYEFBY4xPzajSp2hrlaA8cmkon//apIQkAGVeryQa7qt0Jk131wtULvyH
-         93G8pHWG2Em+hYRusIRgfZwNLggcEIG+ur4AQlT9QDXMDrqFSK1MUpO0+PKfpf8OMmkT
-         dQ5RjTZ5daK07ev51AbvM5jvta9u23PW/PEL/r4q1ipNaovJ+GqIRrkgrmNkH82L/bMn
-         Isp/hYleDIYrR3VtnrXhQO4uWysteyQ52T+Oq6wP5KOfDJdW1iWMtFkWgoVL9gdSFFgr
-         QuYw==
-X-Gm-Message-State: AOAM53137OLQjNBXdjhN5cET5vTcWX/B9AU+qY8lqj4DU5Ln3SFQfADF
-	8BhJxlsXU0JVGFjKFK9VtNzw5isGsDo=
-X-Google-Smtp-Source: ABdhPJxZDkvPce3MoVEu02qNk1GZDhEi6WNGHDc6+rICzurpYXtzCzmner/rQmwKyn7s0yp5pkBdow==
-X-Received: by 2002:a17:90a:4104:: with SMTP id u4mr24169396pjf.81.1616993761857;
-        Sun, 28 Mar 2021 21:56:01 -0700 (PDT)
+        bh=hlbC45xF3LuZM7nupLtQGjmWmyE+l7HyHvqTeB++FYQ=;
+        b=jxakntxJdcywq917S7/QnUo3N4mUCeFOstspulHD4xYgk1m7Yj8VkMq0zKAVyBYml4
+         c+Onyon4znl5PXuqK2ORNSWDtVk9e/Jkzyi+LGwvtlsV4jk/NOK4VtQMzHLwfbeiDO1f
+         ZlbiAifiz6mTZeuy7hLQSsNa7W2tfmGRRpHh3ULmuYljcv7NpRWQdV15w8MlsC6e0HvM
+         DvDTsmMtUcdQ1QWM+FLBwi9JwwGN9pX37uccW7HdZ8xzFYEwO4XO9VxOvUo84/YO9JA8
+         Kb7015slbvzBPneaId1rTjZzfCoMvUGSRWk1bUOBmK6vK5rIjym1jT5LoeAW/+yKIW2m
+         eHTA==
+X-Gm-Message-State: AOAM5317rCBYMtwe+OiX08r/Bfk679X4rdLBmwfcZyYz/xcm4CgqVWaR
+	ftcY4iHy50TflJOwBU9sJGn1MjlSsek=
+X-Google-Smtp-Source: ABdhPJwa4fyHf/4UW7H7BuVkn8XYxERAE1fnM55WB3Izy8TR5LSfiWRxw1lqgp2NqJRkWsttFxa/Jw==
+X-Received: by 2002:a62:2a07:0:b029:214:fd95:7f7 with SMTP id q7-20020a622a070000b0290214fd9507f7mr23910291pfq.60.1616994850370;
+        Sun, 28 Mar 2021 22:14:10 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from ?IPv6:2601:202:4180:a5c0:bd6f:140d:c71:b10c? ([2601:202:4180:a5c0:bd6f:140d:c71:b10c])
-        by smtp.gmail.com with ESMTPSA id 138sm16238681pfv.192.2021.03.28.21.56.00
-        for <openembedded-devel@lists.openembedded.org>
+        by smtp.gmail.com with ESMTPSA id z8sm14483219pjd.0.2021.03.28.22.14.09
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 28 Mar 2021 21:56:01 -0700 (PDT)
-Subject: Re: [oe] [meta-oe][gatesgarth][PATCH] libcroco: Add fix for CVE-2020-12825
-To: openembedded-devel@lists.openembedded.org
-References: <1616937261-30950-1-git-send-email-Neetika.Singh@kpit.com>
+        Sun, 28 Mar 2021 22:14:09 -0700 (PDT)
+Subject: Re: [meta-oe][dunfell][PATCH] freerdp: Add missing libxkbcommon WL dependency
+To: Marek Vasut <marex@denx.de>, openembedded-devel@lists.openembedded.org
+References: <20201204234722.20315-1-marex@denx.de>
+ <df600449-0f38-223a-e91a-c2f9bb6bd51e@denx.de>
+ <760ce487-ef1b-3022-bfc4-36a68d13d25b@denx.de>
 From: "akuster" <akuster808@gmail.com>
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
@@ -88,272 +89,57 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
  ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
  8CS2NxU=
-Message-ID: <5df2f296-3b7d-1dbf-98e6-2f8ef0423df4@gmail.com>
-Date: Sun, 28 Mar 2021 21:56:00 -0700
+Message-ID: <73b914d2-c05d-4b81-99a5-9ef406b9dc73@gmail.com>
+Date: Sun, 28 Mar 2021 22:14:09 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <1616937261-30950-1-git-send-email-Neetika.Singh@kpit.com>
+In-Reply-To: <760ce487-ef1b-3022-bfc4-36a68d13d25b@denx.de>
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
 
-hello,
 
 
-On 3/28/21 6:14 AM, Neetika.Singh wrote:
-> From: Neetika Singh <Neetika.Singh@kpit.com>
+On 3/27/21 5:47 PM, Marek Vasut wrote:
+> On 3/12/21 3:18 PM, Marek Vasut wrote:
+>> On 12/5/20 12:47 AM, Marek Vasut wrote:
+>>> The WL build depends on libxkbcommon, so add the dependency.
+>>>
+>>> Signed-off-by: Marek Vasut <marex@denx.de>
+>>> ---
+>>>   meta-oe/recipes-support/freerdp/freerdp_git.bb | 2 +-
+>>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/meta-oe/recipes-support/freerdp/freerdp_git.bb
+>>> b/meta-oe/recipes-support/freerdp/freerdp_git.bb
+>>> index 7cafbb799..82ef561fb 100644
+>>> --- a/meta-oe/recipes-support/freerdp/freerdp_git.bb
+>>> +++ b/meta-oe/recipes-support/freerdp/freerdp_git.bb
+>>> @@ -40,7 +40,7 @@ PACKAGECONFIG ??= " \
+>>>   X11_DEPS = "virtual/libx11 libxinerama libxext libxcursor libxv
+>>> libxi libxrender libxfixes libxdamage libxrandr libxkbfile"
+>>>   PACKAGECONFIG[x11] = "-DWITH_X11=ON -DWITH_XINERAMA=ON
+>>> -DWITH_XEXT=ON -DWITH_XCURSOR=ON -DWITH_XV=ON -DWITH_XI=ON
+>>> -DWITH_XRENDER=ON -DWITH_XFIXES=ON -DWITH_XDAMAGE=ON
+>>> -DWITH_XRANDR=ON -DWITH_XKBFILE=ON,-DWITH_X11=OFF,${X11_DEPS}"
+>>> -PACKAGECONFIG[wayland] =
+>>> "-DWITH_WAYLAND=ON,-DWITH_WAYLAND=OFF,wayland wayland-native"
+>>> +PACKAGECONFIG[wayland] =
+>>> "-DWITH_WAYLAND=ON,-DWITH_WAYLAND=OFF,wayland wayland-native
+>>> libxkbcommon"
+>>>   PACKAGECONFIG[directfb] =
+>>> "-DWITH_DIRECTFB=ON,-DWITH_DIRECTFB=OFF,directfb"
+>>>   PACKAGECONFIG[pam] = "-DWITH_PAM=ON,-DWITH_PAM=OFF,libpam"
+>>>   PACKAGECONFIG[pulseaudio] =
+>>> "-DWITH_PULSEAUDIO=ON,-DWITH_PULSEAUDIO=OFF,pulseaudio"
+>>>
+>>
+>> +CC Armin, would be nice to have this picked up.
 >
-> Added refreshed patch for CVE issue CVE-2020-12825
-> Link: https://gitlab.com/inkscape/inkscape/-/commit/203d62efefe6f79080863dda61593003b4c31f25
->
-> Signed-off-by: Neetika.Singh <Neetika.Singh@kpit.com>
-> ---
->  .../libcroco/libcroco/CVE-2020-12825.patch         | 190 +++++++++++++++++++++
->  meta/recipes-support/libcroco/libcroco_0.6.13.bb   |  22 +++
->  2 files changed, 212 insertions(+)
->  create mode 100644 meta/recipes-support/libcroco/libcroco/CVE-2020-12825.patch
->  create mode 100644 meta/recipes-support/libcroco/libcroco_0.6.13.bb
->
-> diff --git a/meta/recipes-support/libcroco/libcroco/CVE-2020-12825.patch b/meta/recipes-support/libcroco/libcroco/CVE-2020-12825.patch
-> new file mode 100644
-> index 0000000..f6c6a55
-> --- /dev/null
-> +++ b/meta/recipes-support/libcroco/libcroco/CVE-2020-12825.patch
-> @@ -0,0 +1,190 @@
-> +From 203d62efefe6f79080863dda61593003b4c31f25 Mon Sep 17 00:00:00 2001
-> +From: Michael Catanzaro <mcatanzaro@gnome.org>
-> +Date: Thu, 13 Aug 2020 20:03:05 -0500
-> +Subject: [PATCH] libcroco parser: limit recursion in block and any productions
-> +
-> +If we don't have any limits, we can recurse forever and overflow the
-> +stack.
-> +
-> +This is for CVE-2020-12825: Stack overflow in cr_parser_parse_any_core
-> +in cr-parser.c.
-> +
-> +Bug: https://gitlab.gnome.org/Archive/libcroco/-/issues/8
-> +Patch from https://gitlab.gnome.org/Archive/libcroco/-/merge_requests/5
-> +
-> +CVE: CVE-2020-12825
-> +Upstream Status: Backport [https://gitlab.com/inkscape/inkscape/-/commit/203d62efefe6f79080863dda61593003b4c31f25.patch]
+> Any news on this ?
 
+its in the queue
 
-Missing Signed-off-by in the patch itself.
-
-
-> +---
-> + src/cr-parser.c | 44 ++++++++++++++++++++-----------
-> + 1 file changed, 29 insertions(+), 15 deletions(-)
-> +
-> +diff --git a/src/cr-parser.c b/src/cr-parser.c
-> +index d85e71f0fc..cd7b6ebd4a 100644
-> +--- a/src/cr-parser.c
-> ++++ b/src/cr-parser.c
-> +@@ -136,6 +136,8 @@ struct _CRParserPriv {
-> +
-> + #define CHARS_TAB_SIZE 12
-> +
-> ++#define RECURSIVE_CALLERS_LIMIT 100
-> ++
-> + /**
-> +  * IS_NUM:
-> +  *@a_char: the char to test.
-> +@@ -343,9 +345,11 @@ static enum CRStatus cr_parser_parse_selector_core (CRParser * a_this);
-> +
-> + static enum CRStatus cr_parser_parse_declaration_core (CRParser * a_this);
-> +
-> +-static enum CRStatus cr_parser_parse_any_core (CRParser * a_this);
-> ++static enum CRStatus cr_parser_parse_any_core (CRParser * a_this,
-> ++                                               guint      n_calls);
-> +
-> +-static enum CRStatus cr_parser_parse_block_core (CRParser * a_this);
-> ++static enum CRStatus cr_parser_parse_block_core (CRParser * a_this,
-> ++                                                 guint      n_calls);
-> +
-> + static enum CRStatus cr_parser_parse_value_core (CRParser * a_this);
-> +
-> +@@ -783,7 +787,7 @@ cr_parser_parse_atrule_core (CRParser * a_this)
-> +         cr_parser_try_to_skip_spaces_and_comments (a_this);
-> +
-> +         do {
-> +-                status = cr_parser_parse_any_core (a_this);
-> ++                status = cr_parser_parse_any_core (a_this, 0);
-> +         } while (status == CR_OK);
-> +
-> +         status = cr_tknzr_get_next_token (PRIVATE (a_this)->tknzr,
-> +@@ -794,7 +798,7 @@ cr_parser_parse_atrule_core (CRParser * a_this)
-> +                 cr_tknzr_unget_token (PRIVATE (a_this)->tknzr,
-> +                                       token);
-> +                 token = NULL;
-> +-                status = cr_parser_parse_block_core (a_this);
-> ++                status = cr_parser_parse_block_core (a_this, 0);
-> +                 CHECK_PARSING_STATUS (status,
-> +                                       FALSE);
-> +                 goto done;
-> +@@ -929,11 +933,11 @@ cr_parser_parse_selector_core (CRParser * a_this)
-> +
-> +         RECORD_INITIAL_POS (a_this, &init_pos);
-> +
-> +-        status = cr_parser_parse_any_core (a_this);
-> ++        status = cr_parser_parse_any_core (a_this, 0);
-> +         CHECK_PARSING_STATUS (status, FALSE);
-> +
-> +         do {
-> +-                status = cr_parser_parse_any_core (a_this);
-> ++                status = cr_parser_parse_any_core (a_this, 0);
-> +
-> +         } while (status == CR_OK);
-> +
-> +@@ -955,10 +959,12 @@ cr_parser_parse_selector_core (CRParser * a_this)
-> +  *in chapter 4.1 of the css2 spec.
-> +  *block ::= '{' S* [ any | block | ATKEYWORD S* | ';' ]* '}' S*;
-> +  *@param a_this the current instance of #CRParser.
-> ++ *@param n_calls used to limit recursion depth
-> +  *FIXME: code this function.
-> +  */
-> + static enum CRStatus
-> +-cr_parser_parse_block_core (CRParser * a_this)
-> ++cr_parser_parse_block_core (CRParser * a_this,
-> ++                            guint      n_calls)
-> + {
-> +         CRToken *token = NULL;
-> +         CRInputPos init_pos;
-> +@@ -966,6 +972,9 @@ cr_parser_parse_block_core (CRParser * a_this)
-> +
-> +         g_return_val_if_fail (a_this && PRIVATE (a_this), CR_BAD_PARAM_ERROR);
-> +
-> ++        if (n_calls > RECURSIVE_CALLERS_LIMIT)
-> ++                return CR_ERROR;
-> ++
-> +         RECORD_INITIAL_POS (a_this, &init_pos);
-> +
-> +         status = cr_tknzr_get_next_token (PRIVATE (a_this)->tknzr, &token);
-> +@@ -995,13 +1004,13 @@ cr_parser_parse_block_core (CRParser * a_this)
-> +         } else if (token->type == CBO_TK) {
-> +                 cr_tknzr_unget_token (PRIVATE (a_this)->tknzr, token);
-> +                 token = NULL;
-> +-                status = cr_parser_parse_block_core (a_this);
-> ++                status = cr_parser_parse_block_core (a_this, n_calls + 1);
-> +                 CHECK_PARSING_STATUS (status, FALSE);
-> +                 goto parse_block_content;
-> +         } else {
-> +                 cr_tknzr_unget_token (PRIVATE (a_this)->tknzr, token);
-> +                 token = NULL;
-> +-                status = cr_parser_parse_any_core (a_this);
-> ++                status = cr_parser_parse_any_core (a_this, n_calls + 1);
-> +                 CHECK_PARSING_STATUS (status, FALSE);
-> +                 goto parse_block_content;
-> +         }
-> +@@ -1108,7 +1117,7 @@ cr_parser_parse_value_core (CRParser * a_this)
-> +                 status = cr_tknzr_unget_token (PRIVATE (a_this)->tknzr,
-> +                                                token);
-> +                 token = NULL;
-> +-                status = cr_parser_parse_block_core (a_this);
-> ++                status = cr_parser_parse_block_core (a_this, 0);
-> +                 CHECK_PARSING_STATUS (status, FALSE);
-> +                 ref++;
-> +                 goto continue_parsing;
-> +@@ -1122,7 +1131,7 @@ cr_parser_parse_value_core (CRParser * a_this)
-> +                 status = cr_tknzr_unget_token (PRIVATE (a_this)->tknzr,
-> +                                                token);
-> +                 token = NULL;
-> +-                status = cr_parser_parse_any_core (a_this);
-> ++                status = cr_parser_parse_any_core (a_this, 0);
-> +                 if (status == CR_OK) {
-> +                         ref++;
-> +                         goto continue_parsing;
-> +@@ -1162,10 +1162,12 @@
-> +  *        | FUNCTION | DASHMATCH | '(' any* ')' | '[' any* ']' ] S*;
-> +  *
-> +  *@param a_this the current instance of #CRParser.
-> ++ *@param n_calls used to limit recursion depth
-> +  *@return CR_OK upon successfull completion, an error code otherwise.
-> +  */
-> + static enum CRStatus
-> +-cr_parser_parse_any_core (CRParser * a_this)
-> ++cr_parser_parse_any_core (CRParser * a_this,
-> ++                          guint      n_calls)
-> + {
-> +         CRToken *token1 = NULL,
-> +                 *token2 = NULL;
-> +@@ -1173,6 +1184,9 @@ cr_parser_parse_any_core (CRParser * a_this)
-> +
-> +         g_return_val_if_fail (a_this, CR_BAD_PARAM_ERROR);
-> +
-> ++        if (n_calls > RECURSIVE_CALLERS_LIMIT)
-> ++                return CR_ERROR;
-> ++
-> +         RECORD_INITIAL_POS (a_this, &init_pos);
-> +
-> +         status = cr_tknzr_get_next_token (PRIVATE (a_this)->tknzr, &token1);
-> +@@ -1211,7 +1225,7 @@ cr_parser_parse_any_core (CRParser * a_this)
-> +                  *We consider parameter as being an "any*" production.
-> +                  */
-> +                 do {
-> +-                        status = cr_parser_parse_any_core (a_this);
-> ++                        status = cr_parser_parse_any_core (a_this, n_calls + 1);
-> +                 } while (status == CR_OK);
-> +
-> +                 ENSURE_PARSING_COND (status == CR_PARSING_ERROR);
-> +@@ -1236,7 +1250,7 @@ cr_parser_parse_any_core (CRParser * a_this)
-> +                 }
-> +
-> +                 do {
-> +-                        status = cr_parser_parse_any_core (a_this);
-> ++                        status = cr_parser_parse_any_core (a_this, n_calls + 1);
-> +                 } while (status == CR_OK);
-> +
-> +                 ENSURE_PARSING_COND (status == CR_PARSING_ERROR);
-> +@@ -1264,7 +1278,7 @@ cr_parser_parse_any_core (CRParser * a_this)
-> +                 }
-> +
-> +                 do {
-> +-                        status = cr_parser_parse_any_core (a_this);
-> ++                        status = cr_parser_parse_any_core (a_this, n_calls + 1);
-> +                 } while (status == CR_OK);
-> +
-> +                 ENSURE_PARSING_COND (status == CR_PARSING_ERROR);
-> +--
-> +GitLab
-> diff --git a/meta/recipes-support/libcroco/libcroco_0.6.13.bb b/meta/recipes-support/libcroco/libcroco_0.6.13.bb
-> new file mode 100644
-> index 0000000..fd5927e
-> --- /dev/null
-> +++ b/meta/recipes-support/libcroco/libcroco_0.6.13.bb
-This does not look right to me. Why is this a new recipe?
-
--armin
-
-
-> @@ -0,0 +1,22 @@
-> +SUMMARY = "Cascading Style Sheet (CSS) parsing and manipulation toolkit"
-> +HOMEPAGE = "http://www.gnome.org/"
-> +BUGTRACKER = "https://bugzilla.gnome.org/"
-> +
-> +LICENSE = "LGPLv2 & LGPLv2.1"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=55ca817ccb7d5b5b66355690e9abc605 \
-> +                    file://src/cr-rgb.c;endline=22;md5=31d5f0944d556c8589d04ea6055fcc66 \
-> +                    file://tests/cr-test-utils.c;endline=21;md5=2382c27934cae1d3792fcb17a6142c4e"
-> +
-> +SECTION = "x11/utils"
-> +DEPENDS = "glib-2.0 libxml2 zlib"
-> +BBCLASSEXTEND = "native nativesdk"
-> +EXTRA_OECONF += "--enable-Bsymbolic=auto"
-> +
-> +BINCONFIG = "${bindir}/croco-0.6-config"
-> +
-> +inherit gnomebase gtk-doc binconfig-disabled
-> +
-> +SRC_URI += "file://CVE-2020-12825.patch"
-> +
-> +SRC_URI[archive.md5sum] = "c80c5a8385011a0260dce6bd0da93dce"
-> +SRC_URI[archive.sha256sum] = "767ec234ae7aa684695b3a735548224888132e063f92db585759b422570621d4"
-> --
-> 2.7.4
->
-> This message contains information that may be privileged or confidential and is the property of the KPIT Technologies Ltd. It is intended only for the person to whom it is addressed. If you are not the intended recipient, you are not authorized to read, print, retain copy, disseminate, distribute, or use this message or any part thereof. If you receive this message in error, please notify the sender immediately and delete all copies of this message. KPIT Technologies Ltd. does not accept any liability for virus infected mails.
->
-> 
->
+thanks
 
