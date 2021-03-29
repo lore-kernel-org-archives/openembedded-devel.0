@@ -1,165 +1,156 @@
 Received: from outbound-ip24a.ess.barracuda.com (outbound-ip24a.ess.barracuda.com [209.222.82.206])
- by mx.groups.io with SMTP id smtpd.web08.17049.1616990813363893058
+ by mx.groups.io with SMTP id smtpd.web08.17057.1616990923458364414
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Mar 2021 21:06:53 -0700
+ Sun, 28 Mar 2021 21:08:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@digi.com header.s=selector1 header.b=h09SI35f;
+ dkim=pass header.i=@digi.com header.s=selector1 header.b=dsqKXalF;
  spf=pass (domain: digi.com, ip: 209.222.82.206, mailfrom: ben.gampe@digi.com)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (mail-bn7nam10lp2109.outbound.protection.outlook.com [104.47.70.109]) by mx-outbound8-202.us-east-2a.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Mon, 29 Mar 2021 04:06:38 +0000
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (mail-bn8nam12lp2171.outbound.protection.outlook.com [104.47.55.171]) by mx-outbound42-72.us-east-2c.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Mon, 29 Mar 2021 04:08:41 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AuSJyliP4XYLJy/qoMfAoRdCZHOhf9ZuoPs4cOgO6P1rQ9J/cIi4aR3FBAVSHkaKqQsrpm3k8BwbXRocuE9hlqI4qMsu2bKh+/luPhRWnEWmrP14RGWf4GTZY6a78Jdgc3xJ8urOztiOeHGJaxbUFwPjAV33vlBwh3N5ihvv7sTrAuASYAt/Iquz1vrXfKpS7lZnZdct7TKKw+xDKPO3iWGwU+PLoCr+Zsw9lg0H/gYCP0NE2QCi+3TUwByxNSsPobdZkpVn3CKZArwJ3tS93kVh3gCtme3PzTbXGQM1dki0dR8nobRJedXVaPGvWcAuG1NB1tXa6DOBpECKtAuwlg==
+ b=ab28pgZlJ56vNX5VNlRnmGrVQUonhfpHXQuqR6L+Ye2aBL+37FSWU39uj6+x8mMXKFsL++xlZAqDzeDZ+BBGM6ctdBq1kMRiEiCQYKnBaOc7m7gHRJ+ToQpJjwIjSCZEGq4SFU9l+MbhCrxs01ul1mEKxnFeF5aXkUqPFUEcDGs2yHpbxiaB8lzxiL2yA4/GuwX6UHoqKWcnyuSK9GabWHZha1PHLDZfsZxzT0knT4UUSAsTG//362i7gZOImN5H46YVZcQKOTa5Y9B/3jVFNhiqpcXPDKtfxi5w2/qFVSD5Z63ZjpRq9yotpDCbIxCeOjBbnzfknyGX1+DgQLzhDA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=chmblGDFis9ZqfqIOnuvSNRzK4HLSiZE+kEDUFEQT+g=;
- b=YSoQ/J9hrrgPzaXXtKBm7+gKwUvSs03n7ePS0osl9A7ggTdnILqyst1KRGHqMXdb/nQzX6nGQ/rNt/zXdPN3Is7iv5P52dxhxugUfY90BrjQosuNjQ64RO9aJgZcT0nrlYvh1/YD4+3DVlteL6K/Au8VYPytVsvubeqZfQ2K9BVxmCfdY0CQHSwMXr3D0AZH6jL0MoRqQgrabPBnq8jzcIO3z110cwtS2IKotlW4XhsBrDCBXlXyeDGBhh9HlkuqGa/Ixpj8aJiw1dwVwqyHCG0irDwkM0CcPGt5JnADx2pXIpcgimvO0d/BRVU1uaKB3MoOaaS2/+5J5thM4teLXA==
+ bh=BSy/53I90+xnr+stAkt868UyhvD1LgOms2Y54LGEt6U=;
+ b=bcG+OAPKVhxyNSoKpOO6EJ9Imp3Qka600Pis3Pn/YWPsNQwcDrEGZB/TfdnGcURv8HMEKzZMHQnHHa1Gs29/u7Ac7zH9tbpCdh5cIvWOPhUUij16KXnlculcGZJ3HVj4EPbPXK4lEkrPGXHIeCkACVD4WVO62+4LNEFScZdTPa/NcFr5B6EPomebor+88OZH50m4cnPSmIIEUEB60NyDXfe80KSUffXwYvYzq8qBMhWU3AP3FGjMx60VLhXCOnKrdWDqXUsp8NSLM/3nd0zIjzV7H6HpuDcRVMt9COg1KOI+2v/Bzl/KSCZFqYTfE7gXjvCRRfBQjuW/HSGECPCueg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=digi.com; dmarc=pass action=none header.from=digi.com;
  dkim=pass header.d=digi.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=digi.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=chmblGDFis9ZqfqIOnuvSNRzK4HLSiZE+kEDUFEQT+g=;
- b=h09SI35fi1dw3gWZ0sn4wBYYUmKhcq7Ym+ej39gJrZ5jvdUhkKMeOufWfU0fjAoNCHTJwGAs6rdTpLbrpnmdnRfWtrslq5+rBdwoAWTYH0Jf/FwuLyK2DugcwFH41IOvQdzeOXQ3RNBnw4jXMACreCYtnRN56jv92UL1HTrOQ4w=
+ bh=BSy/53I90+xnr+stAkt868UyhvD1LgOms2Y54LGEt6U=;
+ b=dsqKXalFsQlQhLJrlz3frlbrbvo72aR4JNliKH4w8ZBefxD0gCDmwEWWbSh7vIJbkjSZNslhYRtuD90a3Y15jE1XxbwSpS2ojkBVvAs5NCHKBD0ToZBMQhEZYcF/INHU5XKhhsM9ZTbbis2ORDqiPhjOptKpBEA+b24+fIpuY6w=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=digi.com;
 Received: from BYAPR10MB3320.namprd10.prod.outlook.com (2603:10b6:a03:15b::21)
- by SJ0PR10MB4543.namprd10.prod.outlook.com (2603:10b6:a03:2d9::17) with
+ by BYAPR10MB4102.namprd10.prod.outlook.com (2603:10b6:a03:129::26) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.33; Mon, 29 Mar
- 2021 04:06:10 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.29; Mon, 29 Mar
+ 2021 04:08:39 +0000
 Received: from BYAPR10MB3320.namprd10.prod.outlook.com
  ([fe80::3cd7:c100:494e:cecc]) by BYAPR10MB3320.namprd10.prod.outlook.com
  ([fe80::3cd7:c100:494e:cecc%7]) with mapi id 15.20.3977.033; Mon, 29 Mar 2021
- 04:06:10 +0000
+ 04:08:39 +0000
 From: "Ben Gampe" <bgampe@digi.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Ben Gampe <bgampe@digi.com>
-Subject: [meta-python][PATCH v3 5/5] python3-uvicorn: new package
-Date: Mon, 29 Mar 2021 14:04:39 +1000
-Message-Id: <20210329040439.2600056-5-bgampe@digi.com>
+Subject: [meta-python][PATCH v3 1/3] python3-starlette: new package
+Date: Mon, 29 Mar 2021 14:08:05 +1000
+Message-Id: <20210329040807.2600673-1-bgampe@digi.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210329040439.2600056-1-bgampe@digi.com>
-References: <20210329040439.2600056-1-bgampe@digi.com>
 X-Originating-IP: [49.197.127.171]
-X-ClientProxiedBy: SY6PR01CA0005.ausprd01.prod.outlook.com
- (2603:10c6:10:e8::10) To BYAPR10MB3320.namprd10.prod.outlook.com
+X-ClientProxiedBy: SY6PR01CA0088.ausprd01.prod.outlook.com
+ (2603:10c6:10:110::21) To BYAPR10MB3320.namprd10.prod.outlook.com
  (2603:10b6:a03:15b::21)
 Return-Path: bgampe@digi.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from beng-dev-laptop.beng.bne.opengear.com (49.197.127.171) by SY6PR01CA0005.ausprd01.prod.outlook.com (2603:10c6:10:e8::10) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.29 via Frontend Transport; Mon, 29 Mar 2021 04:06:09 +0000
+Received: from beng-dev-laptop.beng.bne.opengear.com (49.197.127.171) by SY6PR01CA0088.ausprd01.prod.outlook.com (2603:10c6:10:110::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.25 via Frontend Transport; Mon, 29 Mar 2021 04:08:38 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: b15154ed-a081-4574-96b5-08d8f267fc9b
-X-MS-TrafficTypeDiagnostic: SJ0PR10MB4543:
+X-MS-Office365-Filtering-Correlation-Id: 795ddc2b-514a-4ee9-b04c-08d8f2685568
+X-MS-TrafficTypeDiagnostic: BYAPR10MB4102:
 X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<SJ0PR10MB4543A007BD60AF0AE4EBBB778F7E9@SJ0PR10MB4543.namprd10.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1388;
+	<BYAPR10MB4102800B1DD9AD62C2DB76F88F7E9@BYAPR10MB4102.namprd10.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2733;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	sJzo5zijQluPsjUs87JJriV8BVz7kyIo+oU/pQq2xO9XksVDcRta2fqklJ43qvBeh+EOCk0s8HWhMuf5R+OdNJOZBaApy8JLvhPl3f1uj4r3JvqNpK//fzhmElvGCWRX7v5bu0FbldWHIIKEB9PfdqpAkGGpbShbBA1dg/qmcXYn774C74Sy/rnRn7MfboDxaraXTxS0qSFb//pxyyz45EjLl+rNPHVYbEmYGVwN/iUgOmPo8TFLSHgIeCk16Q7XImk26ik7eGo/jS8B3Kon0P53FEv6YUtk8IPFa7011gGDtM6bpvRnwUVzjW2PygPzOeedinpbyhwQpmipdDidlQWVCTzAjHArsy1K7cVfblrVDRvFiqnzcvd0sB3ACCNYtOcYPPXtpq4osxhCYxM9W9m2BSV+e6L+pFDdM3KZci5r2rqaUGqlAopgXGPRm8qxD5G/3pKJqmhS6b8PNaGUGQnHvdWihEwD6+FQdyxrLMVOsxSgbaKkvMJAyyP3RtUJxc9nHgc4K8j1dmhMW+UkQqV9s7/fbmiMzUof5RBo5zEvlYXZq22f0UGO6f6Ydd+NYjF4A8KkfWS3IAMwvnUPPUWbNVzm6fLo04p2YUAOqyZVU+rNT3fqhEt8GvPxDXa/3kei3NUeOGCiLBpxSOCTlVkNoB32gaDplL97Y4nXRzTqvwQV6uL+ID4Y25Dsu6UBwEh22E6tH1AyPfkSRcnnQkuQofA3NftE0lMR7541sEo=
+	OzPiYqDx3AFC1r1ORN2ENNvVWD0p5oBd6iUtDQrwX8D4V70a+K1r40O6KbA2cGaFL0ppLtk6sdfcGgX83Z26rOS0LhEX0ToxObdX85184+md9DK96hSTGiAI0g+T2oib2M0YIo/CcbbSG+d50aVgcBGzsXa3jeJC4wOM78mC8rPoPorx51mg9VdxrOVpuJEtwdv/9cX1mQoszl6FoGyBJdI0d7/Bcr6agHrcxq1pMBOyJvUeVeUr7MaWeUee5/oDwBGjLHMsrwBzjM2woOeStPANrrQ5TpFjJqSKsJg9dnbAm6noLslUQ9bTuVrAwIiglhIQ5LvMJPngFUi9wAAABeD8o8izI6Z8f1cD/G3ZJ3vztc1HlqX/wj1k+vRTjtA03vECezJdvL5uJSSEDZdDH+H4o4MG3A6ft83cIihbf+phwxgiPtpyIn13XPiub/HFzwta/+p6S3lK2uL3B0rzbg6xIBtRjjH8rqc3755vioiY9s2YPiu2WQVeJIL8klcUH8RkWs5lE07pFL1KnC/3S60zIQk7U5cXwDBfmcus1N4IAyCdFnfuOFS3q03KW2TFN8IV7cY8nNi3ew1PxqSXM43Zfv048egDRkXbSz8SyJiB504fF2jmTVqbvswMDVW0XE579JVDV1Q2KHtBZgjFN/y01o+ry9tEnZE87y6Otq4/CFKeBbmX9fkz/YgqRx46s8/JlYAy76waJcja0ipk0klUhZ3ySWs5rRuAx+3GUTw=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR10MB3320.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(346002)(396003)(136003)(366004)(39840400004)(66476007)(16526019)(186003)(66946007)(66556008)(4326008)(38100700001)(26005)(1076003)(36756003)(2906002)(8676002)(6666004)(478600001)(5660300002)(8936002)(6916009)(6486002)(52116002)(107886003)(316002)(6506007)(2616005)(956004)(6512007)(9686003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR10MB3320.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(39840400004)(136003)(346002)(366004)(396003)(5660300002)(6512007)(6486002)(6916009)(316002)(52116002)(2906002)(6506007)(8936002)(66476007)(38100700001)(66946007)(66556008)(36756003)(4326008)(956004)(186003)(16526019)(107886003)(1076003)(2616005)(9686003)(26005)(8676002)(6666004)(478600001);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?bFEfKZDkeBaqaDv49xRuQRRri+K2ktoLjX7PsSze9nGWxZs7K/WTS2mVgIKh?=
- =?us-ascii?Q?uT6aczGw69WFet4k4bLSlWkxeXPV9tKp6qyj0CH1fwA9thMwy6wHJUfbW8ls?=
- =?us-ascii?Q?fIY6KjGzRAsr5R0DPZKs3ktnapekxCDLu3HFMRGcHatoALfoP+KTn3IPLWy+?=
- =?us-ascii?Q?l/MLdmUUdwjDehl/BmQK/XshpT1BesD83eb2auu94GAbRL2LF2DBUwTMYTa+?=
- =?us-ascii?Q?Jm13zv2ipTdOLbUrzZWhyL8cyDR7UfRHJMlFw+HqOLlIuYq4O01G0Wvfc7NU?=
- =?us-ascii?Q?HxoDhvVKwEhQ4YVc9OlAfdfZPd4NkARSRDqa3SwoM0OahEJEjrW0eeJMlqAS?=
- =?us-ascii?Q?nH5DaoRmlIeCRaXjeMmCG7P4wIGRsq/kJA14l8KA/kaS26zFgSvewCfvw6mt?=
- =?us-ascii?Q?FM6xp9JBlXqnU3Bs0rcSYdcZFf8U4iz96C4CkWl6T+Vy3Gnp63n/Y7LZXZ8A?=
- =?us-ascii?Q?+KBfC7oyHktXgW5j4jKjD5UjUK8B5r5wL5t9JrKmNBNhRORLfgWEVavZ6CDj?=
- =?us-ascii?Q?OEvgNXgnr2kL6ZdQRhgGgKm8rJissVD4sHep3oXH+QG3VM5k8+AkZXYVwDhK?=
- =?us-ascii?Q?LzB7ll9uLkWHccQRJJupXXHRa+4mr+DAHkNPc5wC9yiF+RA85UQGHK9xuImn?=
- =?us-ascii?Q?hNUimZXbv6ryZP2/+sxwPsYlDYljNJQG9uuBtNbcNp2TBa7LVx3rEM5U4aW9?=
- =?us-ascii?Q?9IAWUoZuudcfXMGwUPsuoEVqePwR6vfjoDH8lmabk0i3pIBbfvkW+Zz25CHy?=
- =?us-ascii?Q?11qtkkIh9Wpr7k5t/WieAReHmYo8Nu+KzWhjwK9ZvUiJew2pd+WJy/vlvPKt?=
- =?us-ascii?Q?e2RB4RHuFEM6Tl/vDWPX+z6CysGbr+9lImWiMZ9qPonFnWEm2cqft+OnLJzX?=
- =?us-ascii?Q?X8l7bi7VcXAvDZfXJYcrghg08hvdBTfHWTBfVwFMcCvrwuIe2Q34LaA2fK0f?=
- =?us-ascii?Q?A0sbuBcfnw4r56an0FFCCAM8Qm15i6aqx0sOy++1fFK+i8xVb1XcqeNRRPnN?=
- =?us-ascii?Q?76f5t9B9PPAY20+dzKjMDS1BjR7T5rCr6it0fRUJ86oozml8ffz+M0htfYAA?=
- =?us-ascii?Q?Xb4z7ld7NIAnvfs5rFCnFyJI4PqfEoR/7WdR5s6Thbl+GGz0MYt5f1VImSlJ?=
- =?us-ascii?Q?umtSODgecprxFT5sYcsKEnpAv6aFZ6BxhcbCQEkuQ45kEF//NroBhjoycsWF?=
- =?us-ascii?Q?ybjYTD0FHngZ53k6yQH/DqqeZpemKrp6kw5oZQLMzFQwzu4jQ4sVJhsXx04v?=
- =?us-ascii?Q?bbUp/y69L8VAdPwZg3wHneg+GWG+Mjfbs/601PdX8Ga0lBSaheZiiJ+jndQi?=
- =?us-ascii?Q?fa9aD5alJkNHZTqZESMVlFqC?=
+	=?us-ascii?Q?mcrGil+O3Y4erHsdKe/XdShT1+g1s6GDEe1WHQtdXe/0aZXJgKdHmSrooBE4?=
+ =?us-ascii?Q?CWt+Bee1RX7GuWl5d629LON3ZT/nTbADaLZn+pkSefRY2DeWAsbmL7XoQC/n?=
+ =?us-ascii?Q?IA0UJsCJho/YkWo9BUE72eT3Mhl1h+Q6zSB0F7jIEznj+v7iLg3chhnlN1BF?=
+ =?us-ascii?Q?T+MM1b83YAy425jCWiLNKlyRoPSrDoNWMl9UAqoBllVoI8IuG0BUoqui6YEx?=
+ =?us-ascii?Q?vN59LT5Vqm3UsMLC+28IGxPzPsZ7Syh5vV0pYo3f7+rPZHBcaQ/khhloySAI?=
+ =?us-ascii?Q?/qrjfWurfaBE2bMvqUZC/CGWyJ9tG9EbptWbvfIUzOt4kNbV0l1x+vP0vSfg?=
+ =?us-ascii?Q?RvYEPdfodX/w3PJ/XItWZ+vIuTlfxoG41DgaBalPAF6DlS3IBnUL2Fne/GV1?=
+ =?us-ascii?Q?M6w9G9vkSkQSqeg8HMX4krxnmlTjUzQ7j8PiEMOBu9DnXL8TdBx/Mpqap9wb?=
+ =?us-ascii?Q?Zxrl2LLQCct39RUcS/gCQQRBlvMzjrpkXbrmBeVqUMsz2iEqRYu4nFpD0Htm?=
+ =?us-ascii?Q?HhKg0rQqUHUjRpanqD92dZ9WyoaDnaiOcoGoe6mzSenZCf7urL3fH5w1RVya?=
+ =?us-ascii?Q?8feUDtr/Ld4SUUElN/786NW7nuV0UxLuAAC9ADqMRX1i1tGmnvU1pLjFY7bT?=
+ =?us-ascii?Q?8HoWlDQGDoUQcrbruVMrxVEFt9iWoswxP3iR2N22l/rXvZOhs5nu9FKJWDk4?=
+ =?us-ascii?Q?Cf2zkgr8ChMkPzXICxIKy+GzMwfYv/HzR7tT5NqrOzN3EXNMz8M6GLhp23Rw?=
+ =?us-ascii?Q?n4KiiA9NX0bsK0BXS6zHomM5vfx2SXjJpVx2mkOJTG0t3VNFXk2s2kapYKag?=
+ =?us-ascii?Q?joe3OK6c0jG9vGJo0De31rzHF5ystMVZwqd0N8S7/OoihtnV9cxARwVyxE+a?=
+ =?us-ascii?Q?o5DZP02toOwZkUG/55wWS/5cYSX3F/9HwU2Wcxa1ZPDMbbLvlbQm/CCDJwQI?=
+ =?us-ascii?Q?YnzHiiYPwI5Nay6av1zCpGqN0OJzUH4kc7BI0Fk/eakG7A76zK9b0Qnon/uL?=
+ =?us-ascii?Q?NQBBv/AcAk6PmMQUs/WuIAQ3c39tBryF0LPhqFjaDS/kI9bXNiHE/dsJIgb/?=
+ =?us-ascii?Q?QLDInIokLHAU52y5jV6pCQ3HLyy8mTRzOYH9NerVTeIV2w8VdxtpsqKKsTrW?=
+ =?us-ascii?Q?2ZFK1F9j+8smFwZv2fDvB/cIk5k47F4E9cPvy/f/yv3V6JZ3YS2cUleUirp/?=
+ =?us-ascii?Q?BGhPT66A0ewuaA2LNrDX1jOOavvrNIDii8v1OhQX6N24uNU2w6W0ItYBD769?=
+ =?us-ascii?Q?/r6wR6bNCj3at3lbxgLSNlwP+5pEi8xbpwVMz/YShsq5kO+/I2pz/bChm2J1?=
+ =?us-ascii?Q?r2ijSV6Ffp6pzYTIRpw8XgNS?=
 X-OriginatorOrg: digi.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b15154ed-a081-4574-96b5-08d8f267fc9b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 795ddc2b-514a-4ee9-b04c-08d8f2685568
 X-MS-Exchange-CrossTenant-AuthSource: BYAPR10MB3320.namprd10.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Mar 2021 04:06:10.8202
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Mar 2021 04:08:39.8049
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: abb4cdb7-1b7e-483e-a143-7ebfd1184b9e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: QtNSBJAitOkUS/Z4owQwUFgsrnzKrjLwdR7g6yk2GRlPWS0dK2dQ4EfWOMaKtW3J
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB4543
-X-BESS-ID: 1616990750-102250-5772-63330-5
+X-MS-Exchange-CrossTenant-UserPrincipalName: 12q/qcOfK5qsMeFT5Bp66Np+NdM2vy1Yl1PKXTLiSZXn8cnhOaQbay/7fCraMYxA
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR10MB4102
+X-BESS-ID: 1616990921-110824-5438-61556-1
 X-BESS-VER: 2019.1_20210325.2126
-X-BESS-Apparent-Source-IP: 104.47.70.109
-X-BESS-Outbound-Spam-Score: 0.00
+X-BESS-Apparent-Source-IP: 104.47.55.171
+X-BESS-Outbound-Spam-Score: 0.50
 X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.231167 [from 
-	cloudscan22-95.us-east-2b.ess.aws.cudaops.com]
+	cloudscan22-232.us-east-2b.ess.aws.cudaops.com]
 	Rule breakdown below
 	 pts rule name              description
 	---- ---------------------- --------------------------------
 	0.00 MSGID_FROM_MTA_HEADER  META: Message-Id was added by a relay 
+	0.50 BSF_RULE7568M          META: Custom Rule 7568M 
 	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
 	0.00 NO_REAL_NAME           HEADER: From: does not include a real name 
-X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS112744 scores of KILL_LEVEL=7.0 tests=MSGID_FROM_MTA_HEADER, BSF_BESS_OUTBOUND, NO_REAL_NAME
+X-BESS-Outbound-Spam-Status: SCORE=0.50 using account:ESS112744 scores of KILL_LEVEL=7.0 tests=MSGID_FROM_MTA_HEADER, BSF_RULE7568M, BSF_BESS_OUTBOUND, NO_REAL_NAME
 X-BESS-BRTS-Status: 1
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
 From: Ben Gampe <bgampe@digi.com>
 
-Add recipe for python3-uvicorn: a lightning-fast ASGI server
+Add recipe for python3-starlette: the little ASGI library that
+shines
 
 Signed-off-by: Ben Gampe <bgampe@digi.com>
 ---
- .../packagegroups/packagegroup-meta-python.bb   |  1 +
- .../python/python3-uvicorn_0.13.4.bb            | 17 +++++++++++++++++
- 2 files changed, 18 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-uvicorn_0.13.4.bb
+ .../packagegroups/packagegroup-meta-python.bb             | 1 +
+ .../recipes-devtools/python/python3-starlette_0.13.6.bb   | 8 ++++++++
+ 2 files changed, 9 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-starlette_0.13.6.bb
 
 diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index bf270df46..45f93b6dd 100644
+index e84bf225e..fd78ee0a2 100644
 --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
 +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -427,6 +427,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-unidiff \
-     python3-uritemplate \
-     python3-urllib3 \
-+    python3-uvicorn \
-     python3-uvloop \
-     python3-vcversioner \
-     python3-versiontools \
-diff --git a/meta-python/recipes-devtools/python/python3-uvicorn_0.13.4.bb b/meta-python/recipes-devtools/python/python3-uvicorn_0.13.4.bb
+@@ -391,6 +391,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
+     python3-sqlalchemy \
+     python3-sqlparse \
+     python3-sqlsoup \
++    python3-starlette \
+     python3-stevedore \
+     python3-strict-rfc3339 \
+     python3-supervisor \
+diff --git a/meta-python/recipes-devtools/python/python3-starlette_0.13.6.bb b/meta-python/recipes-devtools/python/python3-starlette_0.13.6.bb
 new file mode 100644
-index 000000000..e04dac0a1
+index 000000000..2e4b01b74
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-uvicorn_0.13.4.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "The lightning-fast ASGI server"
-+HOMEPAGE = "https://www.uvicorn.org/"
++++ b/meta-python/recipes-devtools/python/python3-starlette_0.13.6.bb
+@@ -0,0 +1,8 @@
++SUMMARY = "The little ASGI library that shines"
++HOMEPAGE = "https://www.starlette.io/"
 +LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=206119e27d6b034e7ce70d73063c82a8"
-+RDEPENDS_${PN} = "\
-+    python3-click \
-+    python3-h11 \
-+    python3-httptools \
-+    python3-typing \
-+    python3-uvloop \
-+    python3-websockets \
-+    python3-wsproto \
-+"
++LIC_FILES_CHKSUM = "file://LICENSE.md;md5=11e8c8dbfd5fa373c703de492140ff7a"
 +
 +inherit pypi setuptools3
 +
-+SRC_URI[sha256sum] = "3292251b3c7978e8e4a7868f4baf7f7f7bb7e40c759ecc125c37e99cdea34202"
++SRC_URI[sha256sum] = "ebe8ee08d9be96a3c9f31b2cb2a24dbdf845247b745664bd8a3f9bd0c977fdbc"
 -- 
 2.25.1
 
