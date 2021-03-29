@@ -1,84 +1,144 @@
-Received: from rcdn-iport-5.cisco.com (rcdn-iport-5.cisco.com [173.37.86.76])
- by mx.groups.io with SMTP id smtpd.web12.2776.1617048647084095962
+Received: from cpanel8.indieserve.net (cpanel8.indieserve.net [199.212.143.3])
+ by mx.groups.io with SMTP id smtpd.web12.630.1617056147959980741
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Mar 2021 13:10:47 -0700
+ Mon, 29 Mar 2021 15:15:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@cisco.com header.s=iport header.b=KZ7P75XK;
- spf=pass (domain: cisco.com, ip: 173.37.86.76, mailfrom: dzagorui@cisco.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=cisco.com; i=@cisco.com; l=1139; q=dns/txt; s=iport;
-  t=1617048647; x=1618258247;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=zHNsZFRlNVR+BO0r43Jlf2f7ybti1Hw2goTuZoJmtdA=;
-  b=KZ7P75XKbp2h8y3SSlPQ+M2Sw0/RQwfb3u4oEJZRpcRC7FtXBsnjccGT
-   u3V0WPAnN7okmHra4Y6PmEuHbx3Wjw6L4RkdcetGh1dBzI+d+9gvSOl06
-   PlKLOYGSgoU0QzyupIYZsArPKroh3wHMm33TZ6TtCxx8WzB/V597JGa7g
-   s=;
-IronPort-HdrOrdr: =?us-ascii?q?A9a23=3AnGQMO6F85zIhUTWRpLqEcMeALOonbusQ8z?=
- =?us-ascii?q?AX/mp2TgFYddHdqtunm+4V2QSxpDEaXnwhnt7oAtjjfVrw/YN4iLN+AZ6MRw?=
- =?us-ascii?q?/j0VHEEKhHza/PhwLtADf/8Ok179YCT4FbBMfrBVZ3yeb2iTPYL/8azNOK8L?=
- =?us-ascii?q?+liI7lph8HJz1CUb1q7AtyF2+gfXFeeQ8uP/YEPavZwsJGoja6EE52Uu2LQl?=
- =?us-ascii?q?8YQuPEu9rH0LXhbBJuPW9C1CC+yRW19bX9Dx+Umi07bgoK67Ij/W/Z+jaJg5?=
- =?us-ascii?q?mejw=3D=3D?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: =?us-ascii?q?A0C+AwBGM2Jg/51dJa1aglmCK3ZWATk?=
- =?us-ascii?q?xsGqBfAsBAQENAQEgFAQBAYZUAiU0CQ4CAwEBDAEBBQEBAQIBBgRxhWENhn0?=
- =?us-ascii?q?BgVNEgnABgweqbIIphViDJoFEgTmIZIRmJhyBSUKBEoNahAeBBoUpBIJHgQ6?=
- =?us-ascii?q?BTLt7gxCJWZJ6DyKFBZ9LtBGDfwIEBgUCFoFUOoFZMxoIGxWDJAlHGQ2QaYt?=
- =?us-ascii?q?+QQMvOAIGCgEBAwmGXIJFAQE?=
-X-IronPort-AV: E=Sophos;i="5.81,288,1610409600"; 
-   d="scan'208";a="609118680"
-Received: from rcdn-core-6.cisco.com ([173.37.93.157])
-  by rcdn-iport-5.cisco.com with ESMTP/TLS/DHE-RSA-SEED-SHA; 29 Mar 2021 20:10:45 +0000
-Received: from sjc-ads-9103.cisco.com (sjc-ads-9103.cisco.com [10.30.208.113])
-	by rcdn-core-6.cisco.com (8.15.2/8.15.2) with ESMTPS id 12TKAjmu024992
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Mar 2021 20:10:45 GMT
-Received: by sjc-ads-9103.cisco.com (Postfix, from userid 487941)
-	id CD10BCC1251; Mon, 29 Mar 2021 13:10:44 -0700 (PDT)
-From: "Denys Zagorui -X (dzagorui - GLOBALLOGIC INC@Cisco)" <dzagorui@cisco.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] bpftool: improve reproducibility
-Date: Mon, 29 Mar 2021 20:10:44 +0000
-Message-Id: <20210329201044.63642-1-dzagorui@cisco.com>
-X-Mailer: git-send-email 2.23.1
+ dkim=missing; spf=pass (domain: crashcourse.ca, ip: 199.212.143.3, mailfrom: rpjday@crashcourse.ca)
+Received: from cpef81d0f814063-cmf81d0f814060.cpe.net.cable.rogers.com ([174.114.57.56]:53098 helo=fedora)
+	by cpanel8.indieserve.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.94)
+	(envelope-from <rpjday@crashcourse.ca>)
+	id 1lR0Aj-00CrJ9-NV
+	for openembedded-devel@lists.openembedded.org; Mon, 29 Mar 2021 18:15:46 -0400
+Date: Mon, 29 Mar 2021 18:15:43 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+To: OpenEmbedded Development mailing list <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH] packagegroups: delete superfluous "PROVIDES" lines
+Message-ID: <92f38f92-478f-d867-d8d-278f5a43248@crashcourse.ca>
 MIME-Version: 1.0
-X-Outbound-SMTP-Client: 10.30.208.113, sjc-ads-9103.cisco.com
-X-Outbound-Node: rcdn-core-6.cisco.com
-Content-Transfer-Encoding: 8bit
+X-OutGoing-Spam-Status: No, score=-0.2
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cpanel8.indieserve.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Get-Message-Sender-Via: cpanel8.indieserve.net: authenticated_id: rpjday+crashcourse.ca/only user confirmed/virtual account not confirmed
+X-Authenticated-Sender: cpanel8.indieserve.net: rpjday@crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Content-Type: text/plain; charset=US-ASCII
 
-Pass -f(debug|macro)-prefix-map through CC because libbpf
-build system overrides CFLAGS. Also remap STAGING_KERNEL_DIR
-because it is also stored in resulting executable
 
-Signed-off-by: Denys Zagorui <dzagorui@cisco.com>
+There is no need for PROVIDES lines in packagegroups, so delete them
+as has already been done in oe-core.
+
+Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+
 ---
- meta-oe/recipes-kernel/bpftool/bpftool.bb | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
-index 15143a90b..f0696db59 100644
---- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
-+++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
-@@ -9,7 +9,16 @@ inherit bash-completion kernelsrc kernel-arch
- 
- do_populate_lic[depends] += "virtual/kernel:do_patch"
- 
--EXTRA_OEMAKE = "V=1 -C ${S}/tools/bpf/bpftool O=${B} CROSS=${TARGET_PREFIX} CC="${CC}" LD="${LD}" AR=${AR} ARCH=${ARCH}"
-+EXTRA_OEMAKE = "\
-+    V=1 \
-+    -C ${S}/tools/bpf/bpftool \
-+    O=${B} \
-+    CROSS=${TARGET_PREFIX} \
-+    CC="${CC} ${DEBUG_PREFIX_MAP} -fdebug-prefix-map=${STAGING_KERNEL_DIR}=${KERNEL_SRC_PATH}" \
-+    LD="${LD}" \
-+    AR=${AR} \
-+    ARCH=${ARCH} \
-+"
- 
- SECURITY_CFLAGS = ""
- 
+diff --git a/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb b/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb
+index 8a8a8dbe2..c899e83bb 100644
+--- a/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb
++++ b/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb
+@@ -2,7 +2,6 @@ SUMMARY = "Meta-filesystem packagegroups"
+
+ inherit packagegroup
+
+-PROVIDES = "${PACKAGES}"
+ PACKAGES = ' \
+     packagegroup-meta-filesystems \
+     packagegroup-meta-filesystems-support \
+diff --git a/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb b/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
+index 2955baea2..97a60930a 100644
+--- a/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
++++ b/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
+@@ -2,7 +2,6 @@ SUMMARY = "Meta-initramfs packagegroups"
+
+ inherit packagegroup
+
+-PROVIDES = "${PACKAGES}"
+ PACKAGES = ' \
+     packagegroup-meta-initramfs \
+     packagegroup-meta-initramfs-devtools \
+diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+index c4be1b5ce..e2ef18262 100644
+--- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
++++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+@@ -2,7 +2,6 @@ SUMMARY = "Meta-multimedia packagegroups"
+
+ inherit packagegroup
+
+-PROVIDES = "${PACKAGES}"
+ PACKAGES = ' \
+     packagegroup-meta-multimedia \
+     packagegroup-meta-multimedia-connectivity \
+diff --git a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
+index 231d8d4da..48a7bc056 100644
+--- a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
++++ b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
+@@ -2,7 +2,6 @@ SUMMARY = "Meta-networking packagegroups"
+
+ inherit packagegroup
+
+-PROVIDES = "${PACKAGES}"
+ PACKAGES = ' \
+     packagegroup-meta-networking \
+     packagegroup-meta-networking-connectivity \
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index c717d45e5..c9ab261dd 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -3,7 +3,6 @@ SUMMARY = "Meta-oe ptest packagegroups"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ inherit packagegroup
+
+-PROVIDES = "${PACKAGES}"
+ PACKAGES = "\
+     packagegroup-meta-oe \
+     packagegroup-meta-oe-benchmarks \
+diff --git a/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb b/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb
+index 3fa56d439..e390e8bbd 100644
+--- a/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb
++++ b/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb
+@@ -2,7 +2,6 @@ SUMMARY = "Meta-perl packagegroup"
+
+ inherit packagegroup
+
+-PROVIDES = "${PACKAGES}"
+ PACKAGES = "\
+     packagegroup-meta-perl \
+     packagegroup-meta-perl-extended \
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index e84bf225e..adaffd1a7 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -2,7 +2,6 @@ SUMMARY = "Meta-python ptest packagegroups"
+
+ inherit packagegroup
+
+-PROVIDES = "${PACKAGES}"
+ PACKAGES = ' \
+     packagegroup-meta-python3 \
+ '
+diff --git a/meta-webserver/recipes-core/packagesgroups/packagegroup-meta-webserver.bb b/meta-webserver/recipes-core/packagesgroups/packagegroup-meta-webserver.bb
+index 2fa5bc4a9..d4e8aae54 100644
+--- a/meta-webserver/recipes-core/packagesgroups/packagegroup-meta-webserver.bb
++++ b/meta-webserver/recipes-core/packagesgroups/packagegroup-meta-webserver.bb
+@@ -2,7 +2,6 @@ SUMMARY = "Meta-webserver packagegroups"
+
+ inherit packagegroup
+
+-PROVIDES = "${PACKAGES}"
+ PACKAGES = ' \
+     packagegroup-meta-webserver \
+     packagegroup-meta-webserver-http \
+
 -- 
-2.23.1
 
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                         http://crashcourse.ca
+
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
