@@ -1,144 +1,61 @@
-Received: from cpanel8.indieserve.net (cpanel8.indieserve.net [199.212.143.3])
- by mx.groups.io with SMTP id smtpd.web12.630.1617056147959980741
+Received: from esa4.mentor.iphmx.com (esa4.mentor.iphmx.com [68.232.137.252])
+ by mx.groups.io with SMTP id smtpd.web11.1540.1617092031312229556
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Mar 2021 15:15:48 -0700
+ Tue, 30 Mar 2021 01:13:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: crashcourse.ca, ip: 199.212.143.3, mailfrom: rpjday@crashcourse.ca)
-Received: from cpef81d0f814063-cmf81d0f814060.cpe.net.cable.rogers.com ([174.114.57.56]:53098 helo=fedora)
-	by cpanel8.indieserve.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94)
-	(envelope-from <rpjday@crashcourse.ca>)
-	id 1lR0Aj-00CrJ9-NV
-	for openembedded-devel@lists.openembedded.org; Mon, 29 Mar 2021 18:15:46 -0400
-Date: Mon, 29 Mar 2021 18:15:43 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-To: OpenEmbedded Development mailing list <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH] packagegroups: delete superfluous "PROVIDES" lines
-Message-ID: <92f38f92-478f-d867-d8d-278f5a43248@crashcourse.ca>
+ dkim=missing; spf=pass (domain: mentor.com, ip: 68.232.137.252, mailfrom: awais_belal@mentor.com)
+IronPort-SDR: VJk9jLhg46/mbmphBH6GG3ZxQ0FMaTd9BfgrWrehL7j3tkDPbhkUGp7Vmf6+OD59MjKTwGdZSt
+ nwF+nvoKgX7TxPWVagzZvRqCd9+3OoxaFZedM93RBnjC4Zs+br3+nIbG71Ox8o0FprATCDgUzO
+ pDE41d+yaxsuBzjO1sR6MbabE1SscSuTUO6V8DeJ+y8TnrmNc1rC1uM7W9QhgP3WqVmoru4X01
+ 5SccTHicnO2kRe4j3tgojeJxhDFO6s65ZpjSbDfsaJlBvCRhoTyF1GdnkTwD0S97DOlUMA0JMv
+ wfo=
+X-IronPort-AV: E=Sophos;i="5.81,290,1610438400"; 
+   d="scan'208";a="59748147"
+Received: from orw-gwy-02-in.mentorg.com ([192.94.38.167])
+  by esa4.mentor.iphmx.com with ESMTP; 30 Mar 2021 00:13:49 -0800
+IronPort-SDR: kipGMENouSgU780qlRXi0PuMxO8M04qBKj+RafNGpInE+waApqO/8HrM0o/P+Lb3+/YmKXrFb0
+ 1qyFUnlor9FGY6nwerF2RjmiBtylFtf7LKaot2SbSfLrmEsMHkI6OaTEqid7PIKaBVlF/TABcG
+ 9tScBcebJM9m73BJ52ZNUtj8WCOaVuWujfOFd+Ordbh2qAFuFpr2I0zC4aCD5H5DaPgBO+ETg4
+ VqTqOtOnW8ipQKAeCEbU+WTpVaDpLFpYad700EmfzArP0+Hbuig1SY/txgygXqK8rTrZo6m1tc
+ b/k=
+From: "Awais Belal" <Awais_Belal@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-perl][PATCH] libnet-ssleay-perl: add rdep on perl-module-autoloader
+Date: Tue, 30 Mar 2021 13:13:27 +0500
+Message-ID: <20210330081327.2667-1-awais_belal@mentor.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-OutGoing-Spam-Status: No, score=-0.2
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cpanel8.indieserve.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Get-Message-Sender-Via: cpanel8.indieserve.net: authenticated_id: rpjday+crashcourse.ca/only user confirmed/virtual account not confirmed
-X-Authenticated-Sender: cpanel8.indieserve.net: rpjday@crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Content-Type: text/plain; charset=US-ASCII
+Return-Path: awais_belal@mentor.com
+X-Originating-IP: [137.202.0.90]
+X-ClientProxiedBy: svr-ies-mbx-01.mgc.mentorg.com (139.181.222.1) To
+ SVR-IES-MBX-03.mgc.mentorg.com (139.181.222.3)
+Content-Type: text/plain
 
+Without the autoloader module, doing a Net::SSLeay fails.
+The Net::SSLeay package also does an
 
-There is no need for PROVIDES lines in packagegroups, so delete them
-as has already been done in oe-core.
+use AutoLoader;
+Ref: https://github.com/rurban/Net-SSLeay/blob/master/lib/Net/SSLeay.pm#L26
 
-Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+so this is evident.
 
+Signed-off-by: Awais Belal <awais_belal@mentor.com>
 ---
+ meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb b/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb
-index 8a8a8dbe2..c899e83bb 100644
---- a/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb
-+++ b/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb
-@@ -2,7 +2,6 @@ SUMMARY = "Meta-filesystem packagegroups"
-
- inherit packagegroup
-
--PROVIDES = "${PACKAGES}"
- PACKAGES = ' \
-     packagegroup-meta-filesystems \
-     packagegroup-meta-filesystems-support \
-diff --git a/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb b/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
-index 2955baea2..97a60930a 100644
---- a/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
-+++ b/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
-@@ -2,7 +2,6 @@ SUMMARY = "Meta-initramfs packagegroups"
-
- inherit packagegroup
-
--PROVIDES = "${PACKAGES}"
- PACKAGES = ' \
-     packagegroup-meta-initramfs \
-     packagegroup-meta-initramfs-devtools \
-diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-index c4be1b5ce..e2ef18262 100644
---- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-+++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-@@ -2,7 +2,6 @@ SUMMARY = "Meta-multimedia packagegroups"
-
- inherit packagegroup
-
--PROVIDES = "${PACKAGES}"
- PACKAGES = ' \
-     packagegroup-meta-multimedia \
-     packagegroup-meta-multimedia-connectivity \
-diff --git a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
-index 231d8d4da..48a7bc056 100644
---- a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
-+++ b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
-@@ -2,7 +2,6 @@ SUMMARY = "Meta-networking packagegroups"
-
- inherit packagegroup
-
--PROVIDES = "${PACKAGES}"
- PACKAGES = ' \
-     packagegroup-meta-networking \
-     packagegroup-meta-networking-connectivity \
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index c717d45e5..c9ab261dd 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -3,7 +3,6 @@ SUMMARY = "Meta-oe ptest packagegroups"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- inherit packagegroup
-
--PROVIDES = "${PACKAGES}"
- PACKAGES = "\
-     packagegroup-meta-oe \
-     packagegroup-meta-oe-benchmarks \
-diff --git a/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb b/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb
-index 3fa56d439..e390e8bbd 100644
---- a/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb
-+++ b/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb
-@@ -2,7 +2,6 @@ SUMMARY = "Meta-perl packagegroup"
-
- inherit packagegroup
-
--PROVIDES = "${PACKAGES}"
- PACKAGES = "\
-     packagegroup-meta-perl \
-     packagegroup-meta-perl-extended \
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index e84bf225e..adaffd1a7 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -2,7 +2,6 @@ SUMMARY = "Meta-python ptest packagegroups"
-
- inherit packagegroup
-
--PROVIDES = "${PACKAGES}"
- PACKAGES = ' \
-     packagegroup-meta-python3 \
- '
-diff --git a/meta-webserver/recipes-core/packagesgroups/packagegroup-meta-webserver.bb b/meta-webserver/recipes-core/packagesgroups/packagegroup-meta-webserver.bb
-index 2fa5bc4a9..d4e8aae54 100644
---- a/meta-webserver/recipes-core/packagesgroups/packagegroup-meta-webserver.bb
-+++ b/meta-webserver/recipes-core/packagesgroups/packagegroup-meta-webserver.bb
-@@ -2,7 +2,6 @@ SUMMARY = "Meta-webserver packagegroups"
-
- inherit packagegroup
-
--PROVIDES = "${PACKAGES}"
- PACKAGES = ' \
-     packagegroup-meta-webserver \
-     packagegroup-meta-webserver-http \
-
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
+index 50ab5af3a..93a0687b2 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
+@@ -19,6 +19,7 @@ RDEPENDS_${PN} += "\
+     perl-module-extutils-makemaker \
+     perl-module-mime-base64 \
+     perl-module-socket \
++    perl-module-autoloader \
+     zlib \
+ "
+ 
 -- 
+2.17.1
 
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                         http://crashcourse.ca
-
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
