@@ -1,113 +1,125 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.411.1617140836573064976
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+ by mx.groups.io with SMTP id smtpd.web11.1097.1617143744561131763
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Mar 2021 14:47:17 -0700
+ Tue, 30 Mar 2021 15:35:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id D7A3540C16;
-	Tue, 30 Mar 2021 21:47:15 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id uK2FN6LBC4c4; Tue, 30 Mar 2021 21:47:15 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 93D4C407DA;
-	Tue, 30 Mar 2021 21:47:11 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 4FAA0174568; Tue, 30 Mar 2021 17:47:11 -0400 (EDT)
-Date: Tue, 30 Mar 2021 17:47:11 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: Martin Jansa <Martin.Jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
-	openembedded-commits@lists.openembedded.org,
-	Patches and discussions about the oe-core layer <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [oe-commits] [openembedded-core] 05/11: license.bbclass: Introduce AVAILABLE_LICENSES that lists all licenses
-Message-ID: <20210330214711.GC23013@denix.org>
-References: <158021229287.2205.655529513378933058@git.openembedded.org>
- <20200128115135.923C8232CB0@git.openembedded.org>
- <CA+chaQeLKzCdXyhPOoZJVxjWS7HG0kOwg3nt90xsJLz8Ov2VxA@mail.gmail.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=X1zmsDVZ;
+ spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f178.google.com with SMTP id 11so13110064pfn.9
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Mar 2021 15:35:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Bt1oP2TxqOyDPgGs5zyUkAc5W+fi/9Nxor/v5nZEulA=;
+        b=X1zmsDVZ+5bo/La2DqDHAJFW62I5OccXseLmkNj8G5+2lGIcmFifNlcFvLI935C9q5
+         wHeWkmPEF7kpVNDKUGWE3ugo6pdDe0nwgDfDL7RLk53gb4IEeosOqsFG2QuW5oZHmGA3
+         jkJyNift5Drq8tVQ0pjvicdkfgqFk+cgGVatUu8jz4/b07uuso0BcMo8aCwS91jLp2Ak
+         aW+8yZFnQRlkpeTDX+7WNDzR+Ihm0lh4Pj6z5MiAOXK9P99yRN8rRR0RlReAWBV3MiHN
+         RL6dTt/1MTBo6KQzSQtG+uFoyF8kb0LjJyUyR323io1CijLjlnC2Prx6HA1Mg8wKpIHe
+         c49Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Bt1oP2TxqOyDPgGs5zyUkAc5W+fi/9Nxor/v5nZEulA=;
+        b=nPpUMi5gBiFLO/qeEYxw3mg8qzgMA85KCa+ghsVKPQu+kqzHbxlGUK36DO6cj0US7N
+         s8bKA4+c7nyphmzQwOBRNNY5RhyAY6b29lis2t0FC5glzlAGusqqfExCOj50zlzdaj2f
+         plWfa3dpJH/OAK2XlSqUaFu6S78EPiyAuqDDbCfoBtuATYKabRy1K6UzfXeW6q2s6pO8
+         7brdDrL+xpYJ8ecugUd0+SrCvaucQXmHPYuCmi69rJ9Dg+aREGpDIISaB0jvWD3WsE6x
+         6xN1tdp44ZV3E/DP34ws+fRU453sBT1gFUhfg9egZzTIhCZBg0b8NLFKwEMXyttE+JXJ
+         yvqw==
+X-Gm-Message-State: AOAM532Ga/bdnwkYkjClcEFwavoa19oPDzYfmkWlRWu7ZooebBS4JdOm
+	xLNtI5PwAV1wpwFT0uPwgTd35XCwAHxPWQ==
+X-Google-Smtp-Source: ABdhPJzu/ArU84QhJw/iA2v39wK8cu4lr5hEQ9z6tyowfcu7KuEwDymlyHJNYjtW1rMH1Wr03oH8hQ==
+X-Received: by 2002:a63:614:: with SMTP id 20mr351015pgg.406.1617143743795;
+        Tue, 30 Mar 2021 15:35:43 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ae20])
+        by smtp.gmail.com with ESMTPSA id c21sm216686pgl.71.2021.03.30.15.35.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 30 Mar 2021 15:35:43 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Ross Burton <ross.burton@arm.com>
+Subject: [meta-oe][PATCH] flashrom: Add remaining RISCV support
+Date: Tue, 30 Mar 2021 15:35:40 -0700
+Message-Id: <20210330223540.3765539-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQeLKzCdXyhPOoZJVxjWS7HG0kOwg3nt90xsJLz8Ov2VxA@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Tue, Mar 30, 2021 at 10:46:19PM +0200, Martin Jansa wrote:
-> On Tue, Jan 28, 2020 at 12:52 PM <git@git.openembedded.org> wrote:
-> 
-> > This is an automated email from the git hooks/post-receive script.
-> >
-> > rpurdie pushed a commit to branch zeus
-> > in repository openembedded-core.
-> >
-> > commit 5ed714139f91eb03871e01b68a4370784071234d
-> > Author: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-> > AuthorDate: Wed Dec 11 17:48:13 2019 +0100
-> >
-> >     license.bbclass: Introduce AVAILABLE_LICENSES that lists all licenses
-> >
-> >     Previously, there was SRC_DISTRIBUTE_LICENSES, an undocumented
-> >     variable that contained a static list of licenses. It was used by
-> >     expand_wildcard_licenses() to expand any wildcards used in, e.g.,
-> >     INCOMPATIBLE_LICENSE. However, since this static list of licenses has
-> >     not been kept up-to-date, many licenses were missing, with the result
-> >     that if one tried to use any of those licenses with a wildcard, no
-> >     licenses would be found, effectively ignoring that they should be
-> >     marked as incompatible.
-> >
-> >     This introduces a new (documented) variable, AVAILABLE_LICENSES, that
-> >     is automatically updated to contain all licenses found in any
-> >     directories specified by ${COMMON_LICENSE_DIR} and ${LICENSE_PATH},
-> >     and uses it instead of SRC_DISTRIBUTE_LICENSES when expanding
-> >     wildcards.
-> >
-> >     Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-> >     Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-> >     (cherry picked from commit 8c9ef587fe499c612a878a1ab42092eb79b334ef)
-> >     Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
-> > ---
-> >  meta/classes/license.bbclass                     | 27
-> > ++++++++++++++++++++----
-> >  meta/conf/documentation.conf                     |  1 +
-> >  meta/lib/oeqa/selftest/cases/incompatible_lic.py |  6 +++---
-> >  3 files changed, 27 insertions(+), 7 deletions(-)
-> >
-> ...
-> 
-> > +def available_licenses(d):
-> > +    """
-> > +    Return the available licenses by searching the directories specified
-> > by
-> > +    COMMON_LICENSE_DIR and LICENSE_PATH.
-> > +    """
-> > +    lic_dirs = ((d.getVar('COMMON_LICENSE_DIR') or '') + ' ' +
-> > +                (d.getVar('LICENSE_PATH') or '')).split()
-> > +
-> > +    licenses = []
-> > +    for lic_dir in lic_dirs:
-> > +        licenses += os.listdir(lic_dir)
-> > +
-> > +    licenses = sorted(licenses)
-> > +    return licenses
-> > +
-> > +# Only determine the list of all available licenses once. This assumes
-> > that any
-> > +# additions to LICENSE_PATH have been done before this file is parsed.
-> > +AVAILABLE_LICENSES := "${@' '.join(available_licenses(d))}"
-> > +
-> >
-> 
-> FWIW this part no longer seems to work correctly, now running:
-> yocto-check-layer --dependency /OE/meta-openembedded/meta-oe/
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Ross Burton <ross.burton@arm.com>
+---
+ ...SCV-as-non-memory-mapped-I-O-archite.patch | 44 +++++++++++++++++++
+ meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb  |  1 +
+ 2 files changed, 45 insertions(+)
+ create mode 100644 meta-oe/recipes-bsp/flashrom/flashrom/0001-flashrom-Mark-RISCV-as-non-memory-mapped-I-O-archite.patch
 
-Was it ever fixed?
-https://lists.openembedded.org/g/openembedded-core/topic/72389694#141680
-
+diff --git a/meta-oe/recipes-bsp/flashrom/flashrom/0001-flashrom-Mark-RISCV-as-non-memory-mapped-I-O-archite.patch b/meta-oe/recipes-bsp/flashrom/flashrom/0001-flashrom-Mark-RISCV-as-non-memory-mapped-I-O-archite.patch
+new file mode 100644
+index 0000000000..e481c5a161
+--- /dev/null
++++ b/meta-oe/recipes-bsp/flashrom/flashrom/0001-flashrom-Mark-RISCV-as-non-memory-mapped-I-O-archite.patch
+@@ -0,0 +1,44 @@
++From 2c777126765b4095bf481d5cfe4a21470374d940 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 30 Mar 2021 15:12:09 -0700
++Subject: [PATCH] flashrom: Mark RISCV as non memory-mapped I/O architecture
++
++Upstream-Status: Submitted [https://review.coreboot.org/c/flashrom/+/51960]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Change-Id: I55c4e8529d36f0850dd56441c3fb8602c5d889fd
++---
++ Makefile   | 2 +-
++ hwaccess.h | 4 ++++
++ 2 files changed, 5 insertions(+), 1 deletion(-)
++
++diff --git a/Makefile b/Makefile
++index 6d37d55..203e04b 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -559,7 +559,7 @@ endif
++ # Disable all drivers needing raw access (memory, PCI, port I/O) on
++ # architectures with unknown raw access properties.
++ # Right now those architectures are alpha hppa m68k sh s390
++-ifneq ($(ARCH),$(filter $(ARCH),x86 mips ppc arm sparc arc))
+++ifneq ($(ARCH),$(filter $(ARCH),x86 mips ppc arm sparc arc riscv))
++ ifeq ($(CONFIG_RAYER_SPI), yes)
++ UNSUPPORTED_FEATURES += CONFIG_RAYER_SPI=yes
++ else
++diff --git a/hwaccess.h b/hwaccess.h
++index 5602c15..e79988a 100644
++--- a/hwaccess.h
+++++ b/hwaccess.h
++@@ -295,6 +295,10 @@ int libpayload_wrmsr(int addr, msr_t msr);
++ 
++ /* Non memory mapped I/O is not supported on ARC. */
++ 
+++#elif IS_RISCV
+++
+++/* Non memory mapped I/O is not supported on RISCV. */
+++
++ #else
++ 
++ #error Unknown architecture, please check if it supports PCI port IO.
++-- 
++2.31.1
++
+diff --git a/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb b/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
+index 4e0b2d4a8c..145a3cad02 100644
+--- a/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
++++ b/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ SRC_URI = "https://download.flashrom.org/releases/flashrom-v${PV}.tar.bz2 \
+            file://0001-typecast-enum-conversions-explicitly.patch \
+            file://meson-fixes.patch \
++           file://0001-flashrom-Mark-RISCV-as-non-memory-mapped-I-O-archite.patch \
+            "
+ SRC_URI[md5sum] = "7f8e4b87087eb12ecee0fcc5445b4956"
+ SRC_URI[sha256sum] = "e1f8d95881f5a4365dfe58776ce821dfcee0f138f75d0f44f8a3cd032d9ea42b"
 -- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+2.31.1
+
