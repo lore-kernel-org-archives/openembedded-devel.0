@@ -1,298 +1,269 @@
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web09.5503.1617115083675485408
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com (NAM04-MW2-obe.outbound.protection.outlook.com [40.107.101.51])
+ by mx.groups.io with SMTP id smtpd.web10.86.1617117073427435491
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Mar 2021 07:38:03 -0700
+ Tue, 30 Mar 2021 08:11:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=pqi5GXoM;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id o2so6270776plg.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Mar 2021 07:38:03 -0700 (PDT)
+ dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=iXi98K7Y;
+ spf=pass (domain: windriver.com, ip: 40.107.101.51, mailfrom: yifan.yu@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=VixNmmIaAzzueG5qscm5kRN8wspXpWjrw/j6THe44nIoWqn1lQXiycexGYTJmp93MhUsiQtYUiEjWw4aoS5kFqJrS12sSQdrprSoXcpaKY895AFeoyzfwo5LD3qu5uReC1NncFoCAgdKXyzt/DKhYZQXsh4IUoJeZtDTbyORM+zY1id/5EcV9Cg/8iZaMTQOZHZ9yOzdSwOFkR0uhRY8nGSljxfIAeLJafl1whynd/vblZ3lnwT0/iz/v8qvyDYwl1RL7O9RNZsU9xAn9jH3ZcWy8tdcCzxvMr9RTHWaDVEPFcXe1YBjY7hhwxlTkNC8uhQTjBeutUl7yz5B1zu5+A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zhQ1M4OhOq/q44X1pEO8pJfLPwRfgsVXo+w7lxgcXGw=;
+ b=QZj4XFdv0IEk7saDwkYzMobW39YrPzUeY5/kiQP2nkPUFieRkKBfquW77aI3Kw2b6GxALA7xzOYSX1bCOFAYDTTpCwlUCYlv6UhaMfLfat2OTKQ61Yc9R+xEk6XfVnnIgvZw1DZjMhz9aZ6C4XFhQuXqOWdqhUamIG+cLqzZQIQ5Z5QyFY/Y3oY3eld/p/zdk93IAHAIWBh3uToyD5czgyUTNch/agfF13lmU4uhhM0eISmtSZAhTLy0bWV6/2IVLKIDVu3yHvFHnBBcmNEHyS0zTw2EUq0+EtV/R4Dy11z5H3wapzYCX9DNUsirhetI6ofHIHw/ut7YeeA2suX8UQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:autocrypt:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=ydHE+uVj759we4YZ16xtxcupFdgF2sCYcCYzy7NcMnw=;
-        b=pqi5GXoMjHjdhxejfJuR7LNQngfzU8XHeu/cEuEK15M6KRANZMa+gSU5CcpovMJNeO
-         nRAHttl6uvuy6UsPZzv9JDiQ+TzwcTiwH9kOBdXaJSrYoA1+JMddzVEz1jxiyYdaeD6K
-         vSVNdp8OykzpijF0jKb9NMK/lSrHCctb2FiXoNTnL6f3bC2OICvBhW9DilJe03sZJIEt
-         o5FcMK2CaoePGzFyzcNwyKk002QRgyPX2WXGw/4lq66pgiLoVU0pp02sk3nMdwjztiOs
-         AK611Q1Ogrgrwz7lP3ec2TVitC+1Kg3tFhF6TJ+6x0gb8nlBuh9qihZqgI7MbRwwLsUj
-         ckAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:autocrypt
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-transfer-encoding:content-language;
-        bh=ydHE+uVj759we4YZ16xtxcupFdgF2sCYcCYzy7NcMnw=;
-        b=VCQZlWpmYA/xR0jJrGh7EWvfSefyGonzYcy8kmXXOLCKQQcXJVJ29llcs3pB8cW/DM
-         c+kpDehFCepZXWjCtUtmOD3wrc4S2ktnH3Cpra3c1ng5gA6hyfejEyfmDswQo0HPWsNu
-         zrADtzLzP8E1S4CKvlW59hk7rjhyqyOGrapY5nI19JexEpxpiXob7Gm3gAKhJ4/KZvq5
-         xqw7436/wiFC+qy7y6GJHfaRvzgisY6vNMtV4jjmC02yq6YjTFRJkdv7bI5GB1nL06z8
-         0Rcgt0UsxCyEnJXouCvrXt7mDKsl3g11O0VHeQ+hZBDgyk6HWckEP+0/0jAC+E2za3yE
-         vQ9g==
-X-Gm-Message-State: AOAM531o86fKul7apniCw/zczurwp+iM5jD0EO9m7NhbNMyXo4LIWknM
-	4VM5w2DuxEbnJV+EBFPLfsU=
-X-Google-Smtp-Source: ABdhPJxeEAPlbs7xs3qKNnfuitcV1BRsFEjjmwAi4PCzfxk4WE9VF0s/hpZxlMmVpUG79ZdU49dfvQ==
-X-Received: by 2002:a17:90a:bf91:: with SMTP id d17mr4577369pjs.138.1617115083145;
-        Tue, 30 Mar 2021 07:38:03 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0:20e0:2ff7:e997:1a04? ([2601:202:4180:a5c0:20e0:2ff7:e997:1a04])
-        by smtp.gmail.com with ESMTPSA id p22sm3022683pjg.39.2021.03.30.07.38.01
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 30 Mar 2021 07:38:01 -0700 (PDT)
-Subject: Re: [oe] [meta-oe][gatesgarth][PATCH 2/2] rapidjson: Remove unwanted patches
-To: Harpritkaur Bhandari <harpritkaur.bhandari@kpit.com>,
- "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>,
- "raj.khem@gmail.com" <raj.khem@gmail.com>
-Cc: Nisha Parrakat <Nisha.Parrakat@kpit.com>
-References: <1615790942-1428-1-git-send-email-Harpritkaur.Bhandari@kpit.com>
- <1615790942-1428-2-git-send-email-Harpritkaur.Bhandari@kpit.com>
- <PN2PR01MB4410D3ED5FE0F0AF900EA55CEF659@PN2PR01MB4410.INDPRD01.PROD.OUTLOOK.COM>
- <PN2PR01MB4410638FEC7DD1F273E6524EEF7D9@PN2PR01MB4410.INDPRD01.PROD.OUTLOOK.COM>
-From: "akuster" <akuster808@gmail.com>
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
- 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
- 8CS2NxU=
-Message-ID: <f3cac26a-dec4-0c33-7662-79b4818e4826@gmail.com>
-Date: Tue, 30 Mar 2021 07:38:00 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zhQ1M4OhOq/q44X1pEO8pJfLPwRfgsVXo+w7lxgcXGw=;
+ b=iXi98K7YMVrnPFbz5Xr1ydAbuGNnwn6bmwEa3pkM7pR2I8LHisbS4R03fTNHJZt4hGc9hSTU1DrzT2KhMgv7nN5l4zKDS+mJ/GHma+813Pzkc7K5wZmCGAr69HeoQAyI+Y8Woke6kcuSfDwzpo4lb5aYZpf9VRDQVwI0vD2Jnwg=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from SA0PR11MB4719.namprd11.prod.outlook.com (2603:10b6:806:95::17)
+ by SA0PR11MB4685.namprd11.prod.outlook.com (2603:10b6:806:9e::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.29; Tue, 30 Mar
+ 2021 15:11:11 +0000
+Received: from SA0PR11MB4719.namprd11.prod.outlook.com
+ ([fe80::24e6:c5dd:a024:807f]) by SA0PR11MB4719.namprd11.prod.outlook.com
+ ([fe80::24e6:c5dd:a024:807f%9]) with mapi id 15.20.3977.033; Tue, 30 Mar 2021
+ 15:11:10 +0000
+From: "Yi Fan Yu" <yifan.yu@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH v2] rsyslog: fix some of the ptests
+Date: Tue, 30 Mar 2021 11:10:51 -0400
+Message-ID: <20210330151051.32026-1-yifan.yu@windriver.com>
+X-Mailer: git-send-email 2.29.2
+In-Reply-To: <166FC59255639D18.19792@lists.openembedded.org>
+References: <166FC59255639D18.19792@lists.openembedded.org>
+X-Originating-IP: [128.224.252.2]
+X-ClientProxiedBy: MN2PR05CA0011.namprd05.prod.outlook.com
+ (2603:10b6:208:c0::24) To SA0PR11MB4719.namprd11.prod.outlook.com
+ (2603:10b6:806:95::17)
+Return-Path: yifan.yu@windriver.com
 MIME-Version: 1.0
-In-Reply-To: <PN2PR01MB4410638FEC7DD1F273E6524EEF7D9@PN2PR01MB4410.INDPRD01.PROD.OUTLOOK.COM>
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from yow-lpggp3.wrs.com (128.224.252.2) by MN2PR05CA0011.namprd05.prod.outlook.com (2603:10b6:208:c0::24) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3999.14 via Frontend Transport; Tue, 30 Mar 2021 15:11:10 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: ea2ceceb-7382-46ec-6790-08d8f38e0d4c
+X-MS-TrafficTypeDiagnostic: SA0PR11MB4685:
+X-Microsoft-Antispam-PRVS: 
+	<SA0PR11MB46851F7CD3CFEF865CD0FB7B807D9@SA0PR11MB4685.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:6430;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	Vg3FYwkQo3w+1mlzfWuS2fWe4CqxQa8ZFe03vG6QkwSa+vDz/IEU/ymBqZ2XWt0/IkYVnbf9a5PQOGXEXKuaF8dX1Jv+OgW5WugIiEn3m9Ny0WwP+ldHGL/ZQ3KfgEE7L71FekGqEa6KTWZZ6iNg8LgI3I1e30VhGJsVcwrRu1ZLDeJWZqfo+yotqGJWY2cGTEFJMS+/KwQGyBsDUQ4+bYCoAVW/lGMTXqVjS4KY7MGpgoQjse8FQk8IkAkAtW9bBR0JK6K/CkVYjMoQe0qwu/jE2hTz/eIZd8YIlMY89d5N+gvHb8l2/SZ6LROr2dJdy1dkJAE6QF2zHH0xy/7m/eYZzB67cIewmInjAElks4jqhyKQUD0hiVQ092AtNqJ1ASjaJlJI5yJ2Zv9Abn/koYKKOJUtiz6t8qAQgZGHs2bpCRGeVwtk9pJXt2YKy3XyCvz2bcJ9oDfdFutlFXBwofTGInjpD+IKVuTFX+0GOsnqIrNHhQbSwywSu3cS44G8ZmvsbgLKEw2SIeSLu+tUq2/f8aQmhyqicN2696h6+xViBeOiKDCUgRcIMRISOuZxweVuPYO5T5438LxL/4zJl6K9xrVO0PeFMyVGTpS6CWErWfv0AZUFX+xT7VjL/1G8FlkLWmQMdG+7Jduc3OokBCEe8upUl53rZF3tKqzvN1FY8D3v4RRzmqRDp7qOCVXW3CRgP3tm67AkrOHLdhS6DF26Kdf3d6F6c+FLoGY4M6k=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA0PR11MB4719.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(39830400003)(136003)(396003)(376002)(366004)(8676002)(316002)(956004)(2616005)(1076003)(6916009)(8936002)(478600001)(36756003)(66946007)(83380400001)(86362001)(186003)(38100700001)(6512007)(26005)(5660300002)(6666004)(52116002)(6486002)(2906002)(6506007)(66556008)(66476007)(16526019);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	=?us-ascii?Q?kaTZ48l97AeX0QgjqSCNIsnOWNyvO0BTlsypiEl2FlKkiv2dNmG5r2W3CnQv?=
+ =?us-ascii?Q?N4n03AtdzOZYAwEwRBbvBXzXrs5MVP42ZbXnJh+CDiQp38s+pdarWVS9J4Wq?=
+ =?us-ascii?Q?hHecwMIIcEXRnI0BIOFGc46+ARM+SrkqwgJJVfaokTZpbyfevqUXpSHnimaq?=
+ =?us-ascii?Q?jVxUfmpKcYa+ks8BOHD7rbTDIeWCvJrVzdB5yOLMHZqq0G4I5CUCCb5cM4yW?=
+ =?us-ascii?Q?bJkG4nR6qMPjtXt+a0GpljEwFCFiLI32WODeV63iQP/BiwOvSCiyKH14D2aQ?=
+ =?us-ascii?Q?gIBcmA4jvBO+CMKgf43S1z6f0zCcitm4cTxGozMTMd4h2xVMdHxpTnMWTd42?=
+ =?us-ascii?Q?UpD5uwzMwfyGh2h0RIe/HPzymHTX6Qq/chKD1BDtPl7LtilKy3v9cWSfocPi?=
+ =?us-ascii?Q?WbbwNRbMPDZxlyjWEJdmyBRsrIZ0e69D27Sy73Cy+kVsuVIUhQT892x8/wC6?=
+ =?us-ascii?Q?o8ZaWksszsAC5EvmXrsZPWD6aAtEf7qjG1YzTUqz3nCi1Vy9J+Toc/zjpQgP?=
+ =?us-ascii?Q?UPAOA7u9tcojImiLz1eNDuVyxN0Mz7NyKfLBZzoUOpIkuwhgYNWUNoA9uQRB?=
+ =?us-ascii?Q?Dyz0AREqu55FfJtcDokr5vC1q4DkMSpTLWz4OvZnqD09zzBLNOiRy/GX68t4?=
+ =?us-ascii?Q?+6U+gDm1C2wDqrMs9Qk0r2ki7hzgG3NdVGsjuDbjtCk/QVg2NyQKVARbnXJ6?=
+ =?us-ascii?Q?3zJXnQMKjVT+3pieo/LWJe8Dw3TfaJ2VeqXOKH2DWkFeDuEU66GPD+TKJ4G6?=
+ =?us-ascii?Q?cTz5GXDf4JM5MrdxX7rU5YwtlFmQi1xc6RmQY1apwbAbHPB5v3GJy3lIuwA9?=
+ =?us-ascii?Q?cCxzrHW6rbfrduqcrj6sPxZtcG+sAf10JvT9o3ckbw8dKBc6uzExfkjh3tcv?=
+ =?us-ascii?Q?+vT+HC7NO/Mk3koc7vXXMAFL89LNDBC9x9VnVs6MjPfpopUGZGZcMJkCfxWl?=
+ =?us-ascii?Q?SGq5BQX2E5DpsVJfETgyylD+2V0fp8CxUQHsfy71y+VWStf0M/sY+IYw0T9x?=
+ =?us-ascii?Q?NvkuTBqvC65Vs0QkKiSoLUj1CgJhJL3ep+FlFEbQ+pVJDP32w51kkeDsmfZu?=
+ =?us-ascii?Q?MaxSP+hH8x1FvVlilQlJtqrzjr+oauYiDhCdbwn8G47jpUvW+bbFBf7RJdTa?=
+ =?us-ascii?Q?tIJR1VDb1BBvQFNWguDGovVTkyjgx3XTNiZTAgu/xgn5zxJ2N57+WmHjDW54?=
+ =?us-ascii?Q?8JIc5xOeAtOUz2f/3c+7biqWKZWtsjZXSceF0Bmf4B1lFSXzba5/aKZAWmyF?=
+ =?us-ascii?Q?YGC1kQhkEE9GcI1BrDzJJGtvVbyxDmiR5Klb3Q1ep56IGH6oqnLPGVY6H0v8?=
+ =?us-ascii?Q?GgEHhb+aRhNrrtUSdDOtu5Qd?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ea2ceceb-7382-46ec-6790-08d8f38e0d4c
+X-MS-Exchange-CrossTenant-AuthSource: SA0PR11MB4719.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2021 15:11:10.8793
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: nlET4dAjtBnXGxrQohlCY+6VA/q0zl2WPvrVT+NM2ZfTnL5NqrvuDYqVt57aoomlJ+1L0Fgb88+jKNGUtPESUw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR11MB4685
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
+Run test as non-root 'tester'.
+Add more rdepends for ptest.
 
+Introduce a patch to skip checking for a libc header:
+    sys/inotify
 
-On 3/30/21 5:06 AM, Harpritkaur Bhandari wrote:
-> Hi,
->
-> Can you please confirm when this patch will get merged
-> in gatesgarth branch?
+Python scripts no longer called with ./script.
+Remove the need to add the correct shebang.
+Ptest results:
 
-I can not at this time. Its in my testing branch. I lost my one  build
-system last week and I use it to build both Gateharth and Dunfell.
-Things are backup for both.
+    8.2102.0
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+TOTAL: 424
+PASS:  417
+SKIP:  5
+XFAIL: 0
+FAIL:  2
+XPASS: 0
+ERROR: 0
 
-I hope to have thing sorted out by weeks end.
+Remaining failure related to relp:
+* imrelp-tls-cfgcmd
+* sndrcv_relp_tls-cfgcmd
 
--armin
->
-> Thanks,
-> Harprit Bhandari
->
-> ------------------------------------------------------------------------
-> *From:* Harpritkaur Bhandari <Harpritkaur.Bhandari@kpit.com>
-> *Sent:* 22 March 2021 12:37
-> *To:* openembedded-devel@lists.openembedded.org
-> <openembedded-devel@lists.openembedded.org>; raj.khem@gmail.com
-> <raj.khem@gmail.com>
-> *Cc:* Nisha Parrakat <Nisha.Parrakat@kpit.com>
-> *Subject:* Re: [meta-oe][gatesgarth][PATCH 2/2] rapidjson: Remove
-> unwanted patches
->  
-> Hi,
->
-> Can you please confirm when this patch will get merged in gatesgarth
-> branch.
->
-> Thanks,
-> Harprit Bhandari
->
-> ------------------------------------------------------------------------
-> *From:* Harpritkaur Bhandari <Harpritkaur.Bhandari@kpit.com>
-> *Sent:* 15 March 2021 12:19
-> *To:* openembedded-devel@lists.openembedded.org
-> <openembedded-devel@lists.openembedded.org>; raj.khem@gmail.com
-> <raj.khem@gmail.com>
-> *Cc:* Nisha Parrakat <Nisha.Parrakat@kpit.com>; Harpritkaur Bhandari
-> <Harpritkaur.Bhandari@kpit.com>
-> *Subject:* [meta-oe][gatesgarth][PATCH 2/2] rapidjson: Remove unwanted
-> patches
->  
-> From: Harpritkaur Bhandari <harpritkaur.bhandari@kpit.com>
->
-> rapidjson is upgraded to latest SRCREV so
-> removing the below patches which are not
-> applicable:
-> 1.0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch
-> 2.remove-march-native-from-CMAKE_CXX_FLAGS.patch
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> (cherry picked from commit 5aa127af2d3942c9b1dfcd768a8123513a26c53f)
-> Signed-off-by: Harpritkaur Bhandari <Harpritkaur.Bhandari@kpit.com>
-> ---
->  ...ve-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch | 36
-> -------------------
->  .../remove-march-native-from-CMAKE_CXX_FLAGS.patch | 40
-> ----------------------
->  2 files changed, 76 deletions(-)
->  delete mode 100644
-> meta-oe/recipes-devtools/rapidjson/rapidjson/0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch
->  delete mode 100644
-> meta-oe/recipes-devtools/rapidjson/rapidjson/remove-march-native-from-CMAKE_CXX_FLAGS.patch
->
-> diff --git
-> a/meta-oe/recipes-devtools/rapidjson/rapidjson/0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch
-> b/meta-oe/recipes-devtools/rapidjson/rapidjson/0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch
-> deleted file mode 100644
-> index 745f5d0..0000000
-> ---
-> a/meta-oe/recipes-devtools/rapidjson/rapidjson/0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch
-> +++ /dev/null
-> @@ -1,36 +0,0 @@
-> -From 8d272e53a4d1dc405e08ce2dd50159c58f4451e9 Mon Sep 17 00:00:00 2001
-> -From: Ruslan Bilovol <rbilovol@cisco.com>
-> -Date: Thu, 24 Jan 2019 18:11:39 +0200
-> -Subject: [PATCH] CMake: remove hardcoded CMAKECONFIG_INSTALL_DIR path
-> -
-> -Currently this path is hardcoded to lib/cmake.
-> -Some distributions have different library path (like lib64).
-> -So reuse LIB_INSTALL_DIR for that to make CMAKECONFIG_INSTALL_DIR
-> -configurable and usable in such distros.
-> -
-> -Upstream-Status: Backport
-> [https://github.com/Tencent/rapidjson/commit/8d272e53a4d1dc405e08ce2dd50159c58f4451e9]
-> -
-> -Signed-off-by: Ruslan Bilovol <rbilovol@cisco.com>
-> ----
-> - CMakeLists.txt | 4 ++--
-> - 1 file changed, 2 insertions(+), 2 deletions(-)
-> -
-> -diff --git a/CMakeLists.txt b/CMakeLists.txt
-> -index 7c60407..0275672 100644
-> ---- a/CMakeLists.txt
-> -+++ b/CMakeLists.txt
-> -@@ -199,9 +199,9 @@
-> CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}ConfigVersion.cmake.in
-> -     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
-> @ONLY)
-> -
-> - # ... for the install tree
-> --SET( CMAKECONFIG_INSTALL_DIR lib/cmake/${PROJECT_NAME} )
-> -+SET( CMAKECONFIG_INSTALL_DIR ${LIB_INSTALL_DIR}/cmake/${PROJECT_NAME} )
-> - FILE( RELATIVE_PATH REL_INCLUDE_DIR
-> --    "${CMAKE_INSTALL_PREFIX}/${CMAKECONFIG_INSTALL_DIR}"
-> -+    "${CMAKECONFIG_INSTALL_DIR}"
-> -     "${CMAKE_INSTALL_PREFIX}/include" )
-> -
-> - SET( ${PROJECT_NAME}_INCLUDE_DIR
-> "\${${PROJECT_NAME}_CMAKE_DIR}/${REL_INCLUDE_DIR}" )
-> ---
-> -1.9.1
-> -
-> diff --git
-> a/meta-oe/recipes-devtools/rapidjson/rapidjson/remove-march-native-from-CMAKE_CXX_FLAGS.patch
-> b/meta-oe/recipes-devtools/rapidjson/rapidjson/remove-march-native-from-CMAKE_CXX_FLAGS.patch
-> deleted file mode 100644
-> index cf3e16e..0000000
-> ---
-> a/meta-oe/recipes-devtools/rapidjson/rapidjson/remove-march-native-from-CMAKE_CXX_FLAGS.patch
-> +++ /dev/null
-> @@ -1,40 +0,0 @@
-> -From 827155e5e659b2a5065b00d701bc59b57feab2bf Mon Sep 17 00:00:00 2001
-> -From: Andre McCurdy <armccurdy@gmail.com>
-> -Date: Mon, 19 Dec 2016 01:37:11 -0800
-> -Subject: [PATCH] remove -march=native from CMAKE_CXX_FLAGS
-> -
-> -Not appropriate when cross compiling.
-> -
-> -Upstream-Status: Inappropriate [configuration]
-> -
-> -Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
-> ----
-> - CMakeLists.txt | 4 ++--
-> - 1 file changed, 2 insertions(+), 2 deletions(-)
-> -
-> -Index: git/CMakeLists.txt
-> -===================================================================
-> ---- git.orig/CMakeLists.txt
-> -+++ git/CMakeLists.txt
-> -@@ -51,10 +51,10 @@ endif(CCACHE_FOUND)
-> -
-> - if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-> -     if(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "powerpc" OR
-> ${CMAKE_SYSTEM_PROCESSOR} STREQUAL "ppc64" OR
-> ${CMAKE_SYSTEM_PROCESSOR} STREQUAL "ppc64le")
-> --      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mcpu=native")
-> -+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-> -     else()
-> -       #FIXME: x86 is -march=native, but doesn't mean every arch is
-> this option. To keep original project's compatibility, I leave this
-> except POWER.
-> --      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
-> -+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-> -     endif()
-> -     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
-> -     set(EXTRA_CXX_FLAGS -Weffc++ -Wswitch-default -Wfloat-equal
-> -Wconversion -Wsign-conversion)
-> -@@ -84,7 +84,7 @@ elseif (CMAKE_CXX_COMPILER_ID MATCHES "C
-> -       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mcpu=native")
-> -     else()
-> -       #FIXME: x86 is -march=native, but doesn't mean every arch is
-> this option. To keep original project's compatibility, I leave this
-> except POWER.
-> --      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
-> -+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-> -     endif()
-> -     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror
-> -Wno-missing-field-initializers")
-> -     set(EXTRA_CXX_FLAGS -Weffc++ -Wswitch-default -Wfloat-equal
-> -Wconversion -Wimplicit-fallthrough -Weverything)
-> -- 
-> 2.7.4
->
-> This message contains information that may be privileged or
-> confidential and is the property of the KPIT Technologies Ltd. It is
-> intended only for the person to whom it is addressed. If you are not
-> the intended recipient, you are not authorized to read, print, retain
-> copy, disseminate, distribute, or use this message or any part
-> thereof. If you receive this message in error, please notify the
-> sender immediately and delete all copies of this message. KPIT
-> Technologies Ltd. does not accept any liability for virus infected mails.
->
-> 
->
+the test expects an error "relp connect failed with return 10031",
+but the connection seems to be established and working.
+
+Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+---
+Changes for V2:
+
+Slightly reworked the commit msg
+Reapply 'disable check for inotify'
+
+ ...-tests-disable-the-check-for-inotify.patch | 46 +++++++++++++++++++
+ .../rsyslog/rsyslog/run-ptest                 |  6 ++-
+ .../rsyslog/rsyslog_8.2102.0.bb               | 15 +++---
+ 3 files changed, 60 insertions(+), 7 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/0001-tests-dis=
+able-the-check-for-inotify.patch
+
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/0001-tests-disable-th=
+e-check-for-inotify.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-t=
+ests-disable-the-check-for-inotify.patch
+new file mode 100644
+index 000000000..552172d39
+--- /dev/null
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-tests-disable-the-check=
+-for-inotify.patch
+@@ -0,0 +1,46 @@
++From 194e199ce08acc2192f6a63420ff24d9064666e5 Mon Sep 17 00:00:00 2001
++From: Yi Fan Yu <yifan.yu@windriver.com>
++Date: Sat, 27 Mar 2021 19:18:25 -0400
++Subject: [PATCH] tests: disable the check for inotify
++
++We don't need to check inotify.h.
++Assume it is present since it is part of the linux kernel
++since 2.6.13 [1].
++
++[1](https://kernelnewbies.org/Linux_2_6_13)
++
++(it would require installing the libc headers otherwise,
++ for the test  to detect /usr/include/sys/inotify.h.)
++
++Upstream-Status: Inappropriate[OE-specific]
++
++Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
++---
++ tests/diag.sh | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/tests/diag.sh b/tests/diag.sh
++index 6cd60ea88..7424f48c5 100755
++--- a/tests/diag.sh
+++++ b/tests/diag.sh
++@@ -2672,7 +2672,7 @@ case $1 in
++ 		fi
++ 		;;
++ 	'check-inotify') # Check for inotify/fen support=20
++-		if [ -n "$(find /usr/include -name 'inotify.h' -print -quit)" ]; then
+++		if true; then
++ 			echo [inotify mode]
++ 		elif [ -n "$(find /usr/include/sys/ -name 'port.h' -print -quit)" ]; th=
+en
++ 			grep -qF "PORT_SOURCE_FILE" < /usr/include/sys/port.h
++@@ -2687,7 +2687,7 @@ case $1 in
++ 		fi
++ 		;;
++ 	'check-inotify-only') # Check for ONLY inotify support=20
++-		if [ -n "$(find /usr/include -name 'inotify.h' -print -quit)" ]; then
+++		if true; then
++ 			echo [inotify mode]
++ 		else
++ 			echo [inotify not supported, skipping...]
++--=20
++2.29.2
++
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/run-ptest b/meta-oe/r=
+ecipes-extended/rsyslog/rsyslog/run-ptest
+index aa698d85c..efa9ba3ed 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog/run-ptest
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog/run-ptest
+@@ -5,4 +5,8 @@ set -o pipefail
+=20
+ SCRIPTPATH=3D"$( cd "$(dirname "$0")" ; pwd -P )"
+ cd ${SCRIPTPATH}
+-make -C tests -k check-TESTS
++useradd tester  || echo "user already exists"
++ln -sf /usr/sbin/logrotate /usr/bin/logrotate
++su tester -c "make -C tests -k check-TESTS"
++userdel tester
++rm -f /usr/bin/logrotate
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2102.0.bb b/meta-oe=
+/recipes-extended/rsyslog/rsyslog_8.2102.0.bb
+index 22059d140..921124024 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2102.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2102.0.bb
+@@ -24,6 +24,7 @@ SRC_URI =3D "http://www.rsyslog.com/download/files/downlo=
+ad/rsyslog/${BPN}-${PV}.t
+            file://rsyslog.service \
+            file://use-pkgconfig-to-check-libgcrypt.patch \
+            file://run-ptest \
++           file://0001-tests-disable-the-check-for-inotify.patch \
+ "
+=20
+ SRC_URI_append_libc-musl =3D " \
+@@ -80,11 +81,6 @@ PACKAGECONFIG[mail] =3D "--enable-mail,--disable-mail,,"
+ PACKAGECONFIG[valgrind] =3D ",--without-valgrind-testbench,valgrind,"
+ PACKAGECONFIG[imhttp] =3D "--enable-imhttp,--disable-imhttp,civetweb,"
+=20
+-do_configure_prepend() {
+-    sed -i -e 's|python |python3 |g' ${S}/tests/*.sh
+-    sed -i -e 's|/usr/bin/env python|/usr/bin/env python3|g' ${S}/tests/*.=
+py
+-    sed -i -e 's|/usr/bin/env python|/usr/bin/env python3|g' ${S}/tests/te=
+stsuites/*.py
+-}
+=20
+ TESTDIR =3D "tests"
+ do_compile_ptest() {
+@@ -97,6 +93,10 @@ do_install_ptest() {
+     cp -rf ${S}/${TESTDIR} ${D}${PTEST_PATH}
+     cp -rf ${B}/${TESTDIR} ${D}${PTEST_PATH}
+=20
++    # give permissions to all users
++    # some tests need to write to this directory as user 'daemon'
++    chmod 777 -R ${D}${PTEST_PATH}/tests
++
+     # do NOT need to rebuild Makefile itself
+     sed -i 's/^Makefile:.*$/Makefile:/' ${D}${PTEST_PATH}/${TESTDIR}/Makef=
+ile
+     # do NOT need to rebuild $(check_PROGRAMS)
+@@ -195,8 +195,11 @@ VALGRIND_libc-musl_powerpc64le =3D ''
+ VALGRIND_riscv64 =3D ""
+ VALGRIND_riscv32 =3D ""
+=20
++# util-linux: logger needs the -d option
+ RDEPENDS_${PN}-ptest +=3D "\
+   make diffutils gzip bash gawk coreutils procps \
+-  libgcc python3-core python3-io \
++  libgcc python3-core python3-io python3-json \
++  curl util-linux shadow \
+   "
++
+ RRECOMMENDS_${PN}-ptest +=3D "${TCLIBC}-dbg ${VALGRIND}"
+--=20
+2.29.2
 
