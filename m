@@ -1,82 +1,62 @@
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.web10.267.1617117710681785151
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+ by mx.groups.io with SMTP id smtpd.web09.1227.1617122429636241393
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Mar 2021 08:21:51 -0700
+ Tue, 30 Mar 2021 09:40:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: valentin.longchamp@gmail.com)
-Received: by mail-wr1-f50.google.com with SMTP id v11so16595670wro.7
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Mar 2021 08:21:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=rc39iQ/g;
+ spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: bjorn.lustig@gmail.com)
+Received: by mail-ej1-f54.google.com with SMTP id jy13so25841003ejc.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Mar 2021 09:40:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=89m4BM+ZOqyxmdOhcEiZSygLIZPuZwnpAMcpKNyi4pw=;
+        b=rc39iQ/grrayKhiYCQ7RBn4YeDIgctQwu0ZLxG4KJJCb7++cNoNmI5ROqjcb8Tg+ys
+         kWBkjFS1at9BIkBlVJb+2JKV7A6q7L+NVw/5fbu2CqNs/S687btbCh6SkOk+A/s3XCpG
+         wEMQAOByywXkSb/6vjXZE412LCrMaGP0L+9ItyrjYnBLP3DGiUM3+DMgjEniLqxXuuG1
+         rMO1AVrEiM6k+ndweTOl7vvqy63p27Yg3ftxKeOdTXLWcvbU42FzqzF3k5kS0gn+7JhY
+         S8UBwyiDp/dHYNE6/4d2XeUarkSTm3JSBZUOUCr21Ui9tBh5y7NP0XzvE9hQKx/hsPlw
+         UtCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=BhqmnTIL55rb/T1BCrEbjv9SXv50I5NanvjUvhKJHgg=;
-        b=rE7U4vCp50kOje3FULWpcbvU+NOtWqxp4bi2K1NY2fMeafxYQBfxVfP0WfUDfY0IDz
-         i/v2IV1KbS53Yv/+EHKyKFti5zQVyn2Asf8k2p53HV5d2QXBxldXJev9CEi5Rja8RSC4
-         s8akbp0uS1VwI5w0U/F85LvkWWAtHr631SYYa6j66p/wNaKNEFEJyvJWWdPnT7OcSEcq
-         Tu8N2ZaFvq9NH2xLxkDU5VcfKcIu6uwMRvh390fOEsfWpCTbf5Ch0TfZpDJiLrgCUpR8
-         TiRQBqXfiS3otEn09mN58SQUfqikLATleXqBaIQTjNeqSQg+SyfqIhwQuwvFTjGJorpy
-         gbmg==
-X-Gm-Message-State: AOAM530OOcNWkqqXhR289S/P5CCWcX1H2L+UzZrTmRLMGUejqxQq4exM
-	/EwczseIhuri6XtNxUGNc9iW0mMiHGyf0w==
-X-Google-Smtp-Source: ABdhPJwaJDsfND/iuLAbnTVizJL67HsTEVv0RZdsucl+u3Rer+Lp+Fm34IBumJ0nZj4a6urkwxpDFw==
-X-Received: by 2002:a5d:4688:: with SMTP id u8mr34466695wrq.39.1617117708962;
-        Tue, 30 Mar 2021 08:21:48 -0700 (PDT)
-Return-Path: <valentin.longchamp@gmail.com>
-Received: from localhost.localdomain (bbcs-95-88.pub.wingo.ch. [144.2.95.88])
-        by smtp.gmail.com with ESMTPSA id k12sm37107845wrx.7.2021.03.30.08.21.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Mar 2021 08:21:48 -0700 (PDT)
-From: "Valentin Longchamp" <valentin@longchamp.me>
-To: openembedded-devel@lists.openembedded.org
-Cc: Valentin Longchamp <valentin@longchamp.me>
-Subject: [meta-oe][PATCH] libssh: add gcrypt to PACKAGECONFIG
-Date: Tue, 30 Mar 2021 17:21:46 +0200
-Message-Id: <20210330152146.57055-1-valentin@longchamp.me>
-X-Mailer: git-send-email 2.27.0
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=89m4BM+ZOqyxmdOhcEiZSygLIZPuZwnpAMcpKNyi4pw=;
+        b=PFuS6VfczdxkTehrs4nnurx5vn7xWpcAxKFDUHepaHI2uniUDvwJWfzJKeCb8CiNpP
+         YtZTrYWypbG1bb+h3gwAKDDbIx9K4GKDPrraGFkbpumQ3buccVH4Zt7lh+aPgKW/4Ygm
+         LvNiYCMFvhieUICK4uh8H0xw3DvuxUTYolQEmTKVLCCyxC9b/W4sXXaYqOv7H6Nd86mU
+         gWyVk0NmNQ1+69O7ohbuaydmOK7wxFlWcZ7/xc3g5IHFiIQQ3MrKDXeckgeN8bNSDFZr
+         Y1cKqOlfft+bOVSI5iX/CsepUq3X33HWJ+KdsC/4HFn1SPDYkKY8kP+sQkPrW1w6DNWa
+         3Rfg==
+X-Gm-Message-State: AOAM533aRkae+DtQZLcz8NbnDi7Kdh4KbVq6iud87mlw+2Nvwhbz6mpX
+	EOWIbNHKrH7gBxgs0CxGfW2y6q+LHMr29J1v0Fyk0htHSX/y
+X-Google-Smtp-Source: ABdhPJwtmHO2FL0e9Zqk6jfEddgr7dgZe46LjRwqB1vPcIB9yBJTi4LRLr++Hh73JJbIo7HW5jfxkkhymM5/4oc5lkc=
+X-Received: by 2002:a17:906:a8a:: with SMTP id y10mr35093385ejf.288.1617122428332;
+ Tue, 30 Mar 2021 09:40:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: =?UTF-8?B?QmrDtnJuIEx1c3RpZw==?= <bjorn.lustig@gmail.com>
+Date: Tue, 30 Mar 2021 12:40:16 -0400
+Message-ID: <CAHq2DFhj===t_aXq=nV+N2P_4vxPY__O2LS9qKWk=g9KgSiqMw@mail.gmail.com>
+Subject: koreader recipe
+To: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000e62d3c05bec3a7c9"
 
-This would allow to build it without libgcrypt (relying instead on
-libcrypto).
+--000000000000e62d3c05bec3a7c9
+Content-Type: text/plain; charset="UTF-8"
 
-Enable it by default to keep the recipe behaving the same wihtout a
-configuration change.
+Hey OE devs,
 
-Signed-off-by: Valentin Longchamp <valentin@longchamp.me>
----
- meta-oe/recipes-support/libssh/libssh_0.8.9.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+By chance, has anyone already developed a recipe for koreader (
+https://github.com/koreader/koreader ) ?
 
-diff --git a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-index 39ed8a8fb..2aff2c878 100644
---- a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-+++ b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-@@ -4,7 +4,7 @@ SECTION = "libs"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=dabb4958b830e5df11d2b0ed8ea255a0"
- 
--DEPENDS = "zlib openssl libgcrypt"
-+DEPENDS = "zlib openssl"
- 
- SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=stable-0.8"
- SRCREV = "04685a74df9ce1db1bc116a83a0da78b4f4fa1f8"
-@@ -13,13 +13,13 @@ S = "${WORKDIR}/git"
- 
- inherit cmake
- 
--PACKAGECONFIG ??=""
-+PACKAGECONFIG ??= "gcrypt"
- PACKAGECONFIG[gssapi] = "-DWITH_GSSAPI=1, -DWITH_GSSAPI=0, krb5, "
-+PACKAGECONFIG[gcrypt] = "-DWITH_GCRYPT=1, -DWITH_GCRYPT=0, libgcrypt, "
- 
- ARM_INSTRUCTION_SET_armv5 = "arm"
- 
- EXTRA_OECMAKE = " \
--    -DWITH_GCRYPT=1 \
-     -DWITH_PCAP=1 \
-     -DWITH_SFTP=1 \
-     -DWITH_ZLIB=1 \
--- 
-2.27.0
+-bjorn
 
+--000000000000e62d3c05bec3a7c9
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hey OE devs,</div><div><br></div><div>By chance, has =
+anyone already developed a recipe for koreader ( <a href=3D"https://github.=
+com/koreader/koreader" target=3D"_blank">https://github.com/koreader/koread=
+er</a> ) ?</div><div><br></div><div>-bjorn<br></div><br></div>
+
+--000000000000e62d3c05bec3a7c9--
