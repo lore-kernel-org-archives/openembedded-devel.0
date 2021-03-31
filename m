@@ -1,212 +1,232 @@
-Received: from IND01-MA1-obe.outbound.protection.outlook.com (IND01-MA1-obe.outbound.protection.outlook.com [40.107.138.48])
- by mx.groups.io with SMTP id smtpd.web08.4343.1617182982434812875
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web08.7170.1617199899436258620
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 Mar 2021 02:29:43 -0700
+ Wed, 31 Mar 2021 07:11:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kpit.com header.s=selector1 header.b=dAKh57i3;
- spf=pass (domain: kpit.com, ip: 40.107.138.48, mailfrom: rahul.taya@kpit.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kZiVdnwz3RTaXWildROmH8U6k6vZ+YaXNFOu1WkcGYtmVtihAIC/IJrSOYPZNyRTwtfs+TuSVw0iql+H9QCm/JyWShiKCV58KxqLXqyWYApqA3pAg7rlaQ7MPB0YfOdqKP2ooWty5pvicas6PTc5uEGLV/qy9DjmY8MNN/Sf6PXmEaiTL/0/zJ6FoRDNpJCrbXxIZbNYS18of2T2jcCy69SsAOfgUtT2y/W/+jSY95NJW+cb14YFFL5SGtvifM8pB76j8Cvua6gGoLNCh+tIy0yhNiemEbBCaxHY/u3fmEQJWzXvjCeOcwP8yi97P4XhewiQRCc3jNTXpx65PTjQeQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Z6xyHjqPsYIDHmc01SQOoduhLzXDKVEvxJ5fvrco+N8=;
- b=cR/vn2q9oS4nWKN+XOdAQwJq8+X9MrddqASEUOnzVMB0XBrFq7Kcdz51LN5kx8mK2KVFLRvzmp27Ojv4jtXI1EvkdP6hSCevuD1GPLTmSNgiUe1wGURlef8B1VJs6fOE2OPVOehqmI/sC2u+yHKYMFKUvCgJRgxRAsKL2CC26iUcywTBeCIMVj7CNwt53OqlPoWzT/IU5ulMt7nY+XUPyVSSAkIR13cTu69MBef3PEXdn7Mkw/y99vmpuhfkxauQyV5wVOKJMVWYQuUTxiix6YqeLeBPr8O92r89n/9wBRLAhlrgfcKG0DbRokXeOV0B5psvjJsdJtmB3NQmkLGueg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=kpit.com; dmarc=pass action=none header.from=kpit.com;
- dkim=pass header.d=kpit.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Z6xyHjqPsYIDHmc01SQOoduhLzXDKVEvxJ5fvrco+N8=;
- b=dAKh57i365Oh0TWc9OH0Z2iOTv3YYbwFQSlCnTjr1Y2Pd47xAkoVU2fxY1j4xlQhO1N0T/sPX1HYRdkH1t6DrMLUOEForpECJMYkD1OsDCfmGFzEVqoVS67UwCBApMcsOl50qpis1+ZdtkxqXyvxAqxf88giwxNIQbZHUfUS9rw=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=kpit.com;
-Received: from BMXPR01MB3431.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:58::18)
- by BMXPR01MB4712.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b01:5::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.25; Wed, 31 Mar
- 2021 09:29:31 +0000
-Received: from BMXPR01MB3431.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::ac31:b2e2:fd3b:6890]) by BMXPR01MB3431.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::ac31:b2e2:fd3b:6890%7]) with mapi id 15.20.3999.027; Wed, 31 Mar 2021
- 09:29:31 +0000
-From: "Rahul Taya" <Rahul.Taya@kpit.com>
-To: openembedded-devel@lists.openembedded.org,
-	raj.khem@gmail.com
-Cc: nisha.parrakat@kpit.com,
-	harpritkaur.bhandari@kpit.com,
-	Rahul Taya <Rahul.Taya@kpit.com>
-Subject: [poky][dunfell][PATCH] qemu: Add fix for CVE-2020-13791
-Date: Wed, 31 Mar 2021 14:59:06 +0530
-Message-Id: <20210331092906.18788-1-Rahul.Taya@kpit.com>
-X-Mailer: git-send-email 2.17.1
-X-Originating-IP: [106.213.72.143]
-X-ClientProxiedBy: BMXPR01CA0024.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:b00:d::34) To BMXPR01MB3431.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:b00:58::18)
-Return-Path: Rahul.Taya@kpit.com
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=f4tkk4d1;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id f2-20020a17090a4a82b02900c67bf8dc69so1243836pjh.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 Mar 2021 07:11:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:organization:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=5lULTALtYek0Nj0SLl0gVteolVUUAa3hz5YQHnzfGcA=;
+        b=f4tkk4d1v1g7EvR3FH34ORYcI1g+1F7HNbcKO25AH51zxgOoLT5ipzOjMINdOTi01a
+         fGAy925LQYt3+UQtFMtd9TIgLhXH3A5aTk3k6qZZqPCBHjDtWyiO3PiKPmnRpfb5LsS/
+         MTUo/DuwHBDpKUol8tLPn59zpl9qne0r7AO0tijxuDLs6qBMG3ImBGUYhoeYU94grv4a
+         WsM1sFbU11LeIuP3CW6XgNnHuNZu7t8S8dDfkOOUF+wL4kKaeFUe9sVPdszPw0Y948Q+
+         5Z/qQdUWmPdj3hCjzB5WMpgl8wrcjEuPiMtV8qX8rmAIA01Qj1HvNFfjiPrtL3FkIeyS
+         iB9Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=5lULTALtYek0Nj0SLl0gVteolVUUAa3hz5YQHnzfGcA=;
+        b=OuFNtxvCB2tO5pUgoEo5TdTE0CVmvuJOXqAyb8uEw0iZF+HY6eZw2NsXURClmZxkZp
+         h9zzvWy8xrQ4BptSjh/GvGqpeY3Vamt2hkQ+NCIFjxWJ2VCqtrSXmYkYpo6nKn7JSrCV
+         ZVceL6PfCHXrA6xg3jYieDaemCcV2J5DahpGTgDKkzK5AX5JrJNrV5TW3WFdFnasQJto
+         xxcPgv60Rn2176bf4KFGGIOJSi4bpd5vY+CY+WL5Hm/mY4OOFrhiUOCbuEmLmuzt7CWq
+         /hgw6YGBF/hZRmuu5Q+NYqii3Gu4/Hhmd+WGGU/kdtFnKVNZ+n6Aw8WPkyFYL2xTos0L
+         bVMQ==
+X-Gm-Message-State: AOAM5303s5w5bWiQfZcUB9T4R+MdnK0yYMYgKEoPK6LimVsPPaStZ/Mi
+	h/in+W6UN5MHYSnwcyZtpnPgQAbGexoE9w==
+X-Google-Smtp-Source: ABdhPJwi15QBsjlZ5CzlIIi5Mk76SSLny9ED6QBd9YSykwzugLe629QAfuOIcs+X08hq1eJOnPeBEA==
+X-Received: by 2002:a17:90a:8913:: with SMTP id u19mr3666752pjn.59.1617199898275;
+        Wed, 31 Mar 2021 07:11:38 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:a0f0::7c4e? ([2601:646:9200:a0f0::7c4e])
+        by smtp.gmail.com with ESMTPSA id r22sm3064148pgu.81.2021.03.31.07.11.36
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 31 Mar 2021 07:11:37 -0700 (PDT)
+Subject: Re: [meta-oe][PATCH] debootstrap: 1.0.67 -> 1.0.123
+To: Hongxu Jia <hongxu.jia@windriver.com>
+Cc: openembedded-devel@lists.openembedded.org
+References: <20210331084552.1743345-1-hongxu.jia@windriver.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <d7c8cbd0-6b49-e3ed-636b-68a1eac320fd@gmail.com>
+Date: Wed, 31 Mar 2021 07:11:36 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.9.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from localhost.localdomain (106.213.72.143) by BMXPR01CA0024.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:d::34) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3999.27 via Frontend Transport; Wed, 31 Mar 2021 09:29:30 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: 2490e589-3076-463c-7a97-08d8f4277c80
-X-MS-TrafficTypeDiagnostic: BMXPR01MB4712:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<BMXPR01MB4712710EDD6652A3A8A9D1ACF27C9@BMXPR01MB4712.INDPRD01.PROD.OUTLOOK.COM>
-X-MS-Oob-TLC-OOBClassifiers: OLM:530;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	qi9urTp3KugkaAbE9K43QzKdzrxxgzEj+faJlgoCYruECd9ERsTLw8+VklCgkGUAR5ouCnPJxyBzbVvLaKHqRO7iqqR8dWia/ARVer3wmCRdFfHVoIxnU5srbfsRKRvng9H9aRW3ZNeSyV7oHES+2sx8jqUJQD+8LGzU6Qc+WvY5JQgrJiFMMwin8ynT5que6Q2PTQF677GePmJWPvW+AMex/7vNZaGtocvmJYfHzWctkkmiS+awUXOEhPNoNSbUT3+TUGif83zT/9M0ETagzr1/2pT6nI/t48SVAoEZ0NP4T8ftWEQBRFVJR50n95iRefMoGVpnYeFRYz2y+730p2pEzV5fP3Le0BzS3bkYq32Wjox6t/23z1cDkafuaPw8uMn5eqmsJa/AQhqNUmndE6q7tlmKc8dZVBwN774HvKMe6HvkY06DV5u63b7QWVsoM0cZe0uFlQF6k4Vr+N/GAK3gEn206FKGlFo+U3T2rCYQC5Ytkh597lwV7+ATkI6JLe40TkOGAeDvV/9VscpzQgK28zZV0JSPfdxjwvtTOFFCWEKuY/xT4HG0kLAzFpM7LhOrx0fgtvn74E2TMyf4uvlEJylOvrLEXtIunUwo1/H51poFROegm6y6phvr/FlwWoWAvXolMutiiOP1GJvl/FB7n+LrmeWVxn4a6Uf+CstYX1xMt3aC3p85EG8andQMbJzammc33lbrnX5+6WdUEhqA8hfqBc5OgZR0n/c5Bx0KYyUx/GzhJXTokh90ekJ2I2j9MPab6qSU+kJn5fykLlAj8ya4CD9Kbsg6QuSbs98=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BMXPR01MB3431.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(39860400002)(346002)(396003)(136003)(376002)(366004)(2906002)(38100700001)(66946007)(6506007)(36756003)(52116002)(66476007)(478600001)(4326008)(86362001)(1076003)(1006002)(6666004)(66556008)(107886003)(5660300002)(26005)(8676002)(956004)(2616005)(316002)(66574015)(83380400001)(186003)(6486002)(16526019)(6512007)(8936002)(473944003)(414714003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	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
-X-OriginatorOrg: kpit.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2490e589-3076-463c-7a97-08d8f4277c80
-X-MS-Exchange-CrossTenant-AuthSource: BMXPR01MB3431.INDPRD01.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2021 09:29:30.8238
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3539451e-b46e-4a26-a242-ff61502855c7
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: yxy84pK0TXF4CywktARC7Q9lQA2Sb/BHYn62mx6j07Msiv4IBkmnZA1WoxP9aVHmNBbWQLN6SPtGc75is/7p3w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BMXPR01MB4712
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20210331084552.1743345-1-hongxu.jia@windriver.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-From: Rahul Taya <Rahul.Taya@kpit.com>
 
-Added below patch to fix CVE-2020-13791.
 
-CVE-2020-13791.patch
+On 3/31/21 1:45 AM, Hongxu Jia wrote:
+> - Excise all devices.tar.gz code
+> 
+> - Use yocto vars to replace hardcoded dir to support native and nativesdk
+> 
+> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> ---
+>   ...-yocto-vars-to-replace-hardcoded-dir.patch |  39 ++++++++++++++++++
+>   .../debootstrap/debootstrap/devices.tar.gz    | Bin 767 -> 0 bytes
+>   .../debootstrap/debootstrap_1.0.123.bb        |  22 ++++++++++
+>   .../debootstrap/debootstrap_1.0.67.bb         |  35 ----------------
+>   4 files changed, 61 insertions(+), 35 deletions(-)
+>   create mode 100644 meta-oe/recipes-devtools/debootstrap/debootstrap/0001-user-yocto-vars-to-replace-hardcoded-dir.patch
+>   delete mode 100644 meta-oe/recipes-devtools/debootstrap/debootstrap/devices.tar.gz
+>   create mode 100644 meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.123.bb
+>   delete mode 100644 meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.67.bb
+> 
+> diff --git a/meta-oe/recipes-devtools/debootstrap/debootstrap/0001-user-yocto-vars-to-replace-hardcoded-dir.patch b/meta-oe/recipes-devtools/debootstrap/debootstrap/0001-user-yocto-vars-to-replace-hardcoded-dir.patch
+> new file mode 100644
+> index 000000000..77f45e1bf
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/debootstrap/debootstrap/0001-user-yocto-vars-to-replace-hardcoded-dir.patch
+> @@ -0,0 +1,39 @@
+> +From d780062d8d417bf2aefdf5f73c4b09a0eea4d097 Mon Sep 17 00:00:00 2001
+> +From: Hongxu Jia <hongxu.jia@windriver.com>
+> +Date: Wed, 31 Mar 2021 15:30:52 +0800
+> +Subject: [PATCH] user yocto vars to replace hardcoded dir
+> +
+> +Upstream-Status: Inappropriate [oe specific]
+> +
+> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> +---
+> + Makefile | 10 +++++-----
+> + 1 file changed, 5 insertions(+), 5 deletions(-)
+> +
+> +diff --git a/Makefile b/Makefile
+> +index 8516803..f183c7a 100644
+> +--- a/Makefile
+> ++++ b/Makefile
+> +@@ -5,14 +5,14 @@ all:
+> +
+> + clean:
+> +
+> +-DSDIR=$(DESTDIR)/usr/share/debootstrap
+> ++DSDIR=$(DESTDIR)${datadir}/debootstrap
+> + install:
+> + 	mkdir -p $(DSDIR)/scripts
+> +-	mkdir -p $(DESTDIR)/usr/sbin
+> ++	mkdir -p $(DESTDIR)${sbindir}
 
-Signed-off-by: Rahul Taya <Rahul.Taya@kpit.com>
----
- meta/recipes-devtools/qemu/qemu.inc           |  1 +
- .../qemu/qemu/CVE-2020-13791.patch            | 52 +++++++++++++++++++
- 2 files changed, 53 insertions(+)
- create mode 100644 meta/recipes-devtools/qemu/qemu/CVE-2020-13791.patch
 
-diff --git a/meta/recipes-devtools/qemu/qemu.inc b/meta/recipes-devtools/qe=
-mu/qemu.inc
-index 5e8d3e09ff..01c78f6577 100644
---- a/meta/recipes-devtools/qemu/qemu.inc
-+++ b/meta/recipes-devtools/qemu/qemu.inc
-@@ -54,6 +54,7 @@ SRC_URI =3D "https://download.qemu.org/${BPN}-${PV}.tar.x=
-z \
-           file://CVE-2020-24352.patch \
-           file://CVE-2020-25723.patch \
-           file://CVE-2021-20203.patch \
-+          file://CVE-2020-13791.patch \
-           "
- UPSTREAM_CHECK_REGEX =3D "qemu-(?P<pver>\d+(\.\d+)+)\.tar"
+I think using
 
-diff --git a/meta/recipes-devtools/qemu/qemu/CVE-2020-13791.patch b/meta/re=
-cipes-devtools/qemu/qemu/CVE-2020-13791.patch
-new file mode 100644
-index 0000000000..6582abce59
---- /dev/null
-+++ b/meta/recipes-devtools/qemu/qemu/CVE-2020-13791.patch
-@@ -0,0 +1,52 @@
-+From f7d6a635fa3b7797f9d072e280f065bf3cfcd24d Mon Sep 17 00:00:00 2001
-+From: Prasad J Pandit <pjp@fedoraproject.org>
-+Date: Thu, 4 Jun 2020 17:05:25 +0530
-+Subject: [PATCH] pci: assert configuration access is within bounds
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=3DUTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+While accessing PCI configuration bytes, assert that
-+'address + len' is within PCI configuration space.
-+
-+Generally it is within bounds. This is more of a defensive
-+assert, in case a buggy device was to send 'address' which
-+may go out of bounds.
-+
-+Suggested-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-+Signed-off-by: Prasad J Pandit <pjp@fedoraproject.org>
-+Message-Id: <20200604113525.58898-1-ppandit@redhat.com>
-+Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
-+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-+
-+CVE: CVE-2020-13791
-+Upstream-Status: Backport[https://github.com/qemu/qemu/commit/f7d6a635fa3b=
-7797f9d072e280f065bf3cfcd24d.patch]
-+Comment: No hunks refreshed and no warnings were seen while applying patch=
-.
-+Affected version: >=3D4.2.0 but patch already present in Master and Gatesg=
-arth branches.
-+Signed-off-by: Rahul Taya <Rahul.Taya@kpit.com>
-+---
-+ hw/pci/pci.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/hw/pci/pci.c b/hw/pci/pci.c
-+index 70c66965f56..7bf2ae6d92a 100644
-+--- a/hw/pci/pci.c
-++++ b/hw/pci/pci.c
-+@@ -1381,6 +1381,8 @@ uint32_t pci_default_read_config(PCIDevice *d,
-+ {
-+     uint32_t val =3D 0;
-+
-++    assert(address + len <=3D pci_config_size(d));
-++
-+     if (pci_is_express_downstream_port(d) &&
-+         ranges_overlap(address, len, d->exp.exp_cap + PCI_EXP_LNKSTA, 2))=
- {
-+         pcie_sync_bridge_lnk(d);
-+@@ -1394,6 +1396,8 @@ void pci_default_write_config(PCIDevice *d, uint32_t=
- addr, uint32_t val_in, int
-+     int i, was_irq_disabled =3D pci_irq_disabled(d);
-+     uint32_t val =3D val_in;
-+
-++    assert(addr + l <=3D pci_config_size(d));
-++
-+     for (i =3D 0; i < l; val >>=3D 8, ++i) {
-+         uint8_t wmask =3D d->wmask[addr + i];
-+         uint8_t w1cmask =3D d->w1cmask[addr + i];
---
-2.17.1
+sbindir ?= "/usr/sbin"
+$(DESTDIR)$(sbindir)
 
-This message contains information that may be privileged or confidential an=
-d is the property of the KPIT Technologies Ltd. It is intended only for the=
- person to whom it is addressed. If you are not the intended recipient, you=
- are not authorized to read, print, retain copy, disseminate, distribute, o=
-r use this message or any part thereof. If you receive this message in erro=
-r, please notify the sender immediately and delete all copies of this messa=
-ge. KPIT Technologies Ltd. does not accept any liability for virus infected=
- mails.
+here could make it upstreamable.
+
+> +
+> + 	cp -a scripts/* $(DSDIR)/scripts/
+> + 	install -o root -g root -m 0644 functions $(DSDIR)/
+> +
+> +-	sed 's/@VERSION@/$(VERSION)/g' debootstrap >$(DESTDIR)/usr/sbin/debootstrap
+> +-	chown root:root $(DESTDIR)/usr/sbin/debootstrap
+> +-	chmod 0755 $(DESTDIR)/usr/sbin/debootstrap
+> ++	sed 's/@VERSION@/$(VERSION)/g' debootstrap >$(DESTDIR)${sbindir}/debootstrap
+> ++	chown root:root $(DESTDIR)${sbindir}/debootstrap
+> ++	chmod 0755 $(DESTDIR)${sbindir}/debootstrap
+> +--
+> +2.27.0
+> +
+> diff --git a/meta-oe/recipes-devtools/debootstrap/debootstrap/devices.tar.gz b/meta-oe/recipes-devtools/debootstrap/debootstrap/devices.tar.gz
+> deleted file mode 100644
+> index 20eaba3ad22b1e47f6037dea2a0db73eb262ab25..0000000000000000000000000000000000000000
+> GIT binary patch
+> literal 0
+> HcmV?d00001
+> 
+> literal 767
+> zcmZwCeNfAB0LSqWmeAtza1IGwl2gu8?#%BF38A~LD<bo7h$gz-O%L*wNtiRbQnsk`
+> z(3pqn#&sTlp0iDMQABENY{##e)U{2&eLs%Bz5jXr{SHz33;x#M&souaLK7WS=$o3O
+> zXx$>ZsnQ25NgZhQuh6w=YnJPhSA_*FtCl6pGAj<PKe_LvYWpB{Z(CFF=|<g|kc_w7
+> z?`-GPXd&0V`I^2X#r|-cu)U#Y?zq5hM`kwW@BS8ZS^bh#b}cRRrnE%5cOGWy!e#!&
+> zo_Q|Y)^Blk6aQ|-GQOyuUOn~9A`}`d;uOb8k0lZJ7vOs#WB%p%Fz((I8j)YVl@8sB
+> z)oNd!Qi@SVS~kOpjVKXKZewGuBvbwZTy89NwU^*c*W9OXvZQxqw`I*dTI=(3`b1G5
+> z)5IAF_1DAnm>tjwtw&-whEU0bhh3G^$714fW_S;+>2E{qdMet5KqIYj-)Lh{ukV$_
+> zD-qv-6PR!mNf>EIju8bM+wUlXaeX>{w5fqC(vwYIM%YP3Nz{E|{P|jsdH%sk4P>d6
+> z99tZDjmGg>x;G+se=71kWJV?;eQaSbjz6~ywz=xO7g~sNLygAH)b_DMpIhQ>F2C92
+> z@^5pwT0UmVSF%J!UAN~K2h++Jn0TAmU^Ra>SRx?iNz?vkqmVH2CW<%&Xb>2vW)(Ul
+> z^f6INMqwv&Hq$aEo36eUfubL%Y9ta(Ynh#`rY^1O0Eac*A@wmAt-Wj}oy8WM!yyhs
+> zu40fd4Ox4-na6gfyw*XgcwG89Ot6k;)}}*LinC#_$RY=MFFN4Gofwq*NT-hpM&9RP
+> zpAP#fO_I0{JZeXnl!gb%sYKBgmHXh|8PfU4EWVCo)7==jgBQy&T1V$q+kL6!FnUF%
+> zo(j|^dWhAlDp_bW6aGm)^+riUD={L7BiiioTiyj&UE09`UmU1%V&#rLi34eKTF8|i
+> lg`pYfzz_{`no;0}G-+Dtic5)C{)_x|f?q~cv>;m`_yZJ@!>9lN
+> 
+> diff --git a/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.123.bb b/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.123.bb
+> new file mode 100644
+> index 000000000..7a8c220ed
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.123.bb
+> @@ -0,0 +1,22 @@
+> +SUMMARY = "Install a Debian system into a subdirectory"
+> +HOMEPAGE = "https://wiki.debian.org/Debootstrap"
+> +SECTION = "devel"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://debian/copyright;md5=1e68ced6e1689d4cd9dac75ff5225608"
+> +
+> +SRC_URI  = "\
+> +    http://http.debian.net/debian/pool/main/d/debootstrap/debootstrap_${PV}.tar.gz \
+> +    file://0001-user-yocto-vars-to-replace-hardcoded-dir.patch \
+> +"
+> +
+> +SRC_URI[md5sum] = "b959c7ac01839e9b96a733d27b19e59e"
+> +SRC_URI[sha256sum] = "5e5a8147ecdd6be0eea5ac4d6ed8192cc653e93f744dd3306c9b1cc51d6ca328"
+> +
+> +S = "${WORKDIR}/debootstrap"
+> +
+
+Add
+
+EXTRA_OEMAKE = "sbindir=${sbindir}"
+will ensure it gets overridden from env vars
+
+> +fakeroot do_install() {
+> +    oe_runmake 'DESTDIR=${D}' install
+> +    chown -R root:root ${D}${datadir}/debootstrap
+> +}
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> diff --git a/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.67.bb b/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.67.bb
+> deleted file mode 100644
+> index 8472aca6c..000000000
+> --- a/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.67.bb
+> +++ /dev/null
+> @@ -1,35 +0,0 @@
+> -SUMMARY = "Install a Debian system into a subdirectory"
+> -HOMEPAGE = "https://wiki.debian.org/Debootstrap"
+> -SECTION = "devel"
+> -LICENSE = "MIT"
+> -LIC_FILES_CHKSUM = "file://debian/copyright;md5=1e68ced6e1689d4cd9dac75ff5225608"
+> -
+> -inherit pkgconfig
+> -
+> -SRC_URI  = "\
+> -    http://http.debian.net/debian/pool/main/d/debootstrap/debootstrap_1.0.67.tar.gz \
+> -    file://devices.tar.gz;unpack=0 \
+> -"
+> -
+> -SRC_URI[md5sum] = "eacabfe2e45415af60b1d74c3a23418a"
+> -SRC_URI[sha256sum] = "0a12e0a2bbff185d47711a716b1f2734856100e8784361203e834fed0cffa51b"
+> -
+> -S = "${WORKDIR}/${BP}"
+> -
+> -# All Makefile does is creation of devices.tar.gz, which fails in OE build, we use
+> -# static devices.tar.gz as work around
+> -# | NOTE: make -j 8 -e MAKEFLAGS=
+> -# | rm -rf dev
+> -# | mkdir -p dev
+> -# | chown 0:0 dev
+> -# | chown: changing ownership of `dev': Operation not permitted
+> -# | make: *** [devices.tar.gz] Error 1
+> -# | WARNING: exit code 1 from a shell command.
+> -do_compile_prepend() {
+> -    cp ${WORKDIR}/devices.tar.gz ${B}
+> -}
+> -
+> -do_install() {
+> -    oe_runmake 'DESTDIR=${D}' install
+> -    chown -R root:root ${D}${datadir}/debootstrap
+> -}
+> 
