@@ -1,97 +1,119 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.115])
- by mx.groups.io with SMTP id smtpd.web10.3506.1617256549746189336
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.7080.1617280398888613875
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 Mar 2021 22:55:50 -0700
+ Thu, 01 Apr 2021 05:33:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=TcpDALU+;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.115, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1617256547; i=@fujitsu.com;
-	bh=t4SCSijCnl5ov9htpNUXgN8NEOCdAQnGbOkWHuV/FPo=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=TcpDALU+gy2YYTN0IozSGXwFR7//5nepCh35Otvz6foSHWGiAyusjhXdqePhTu8nQ
-	 3lVISpXUM491YwR/rRMelAtPFUDOSJ++Cn6emmmBPKnNt8op+Jbw+b6xi24hHeykVG
-	 zsEP/V+e4q0ivLC0v02AWZuct5paQB65PPLO35ORTIJY5wIIZ3tzlb9G8/NhuRKRmX
-	 8cqfvOoKPmdMvLTPDPWDdlf2uhARjiPrHI10nMXH8JDVAuQ2o79RHg6Ac1Tzt8leyq
-	 /p7J92i3FBXlFLHW87P3hUxjAC3Q77hL71Q3aAYA4uZwUv7ZCPE6rj2qMLEV6cg4kM
-	 H9PaAXIDV63pA==
-Received: from [100.113.7.82] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-b.eu-central-1.aws.symcld.net id D7/E1-44603-36065606; Thu, 01 Apr 2021 05:55:47 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprOIsWRWlGSWpSXmKPExsViZ8MxRTc5ITX
-  BYPoDEYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWNKfzd7wX6eioXHLzE2MK7g7mLk4hAS2Mok
-  8XPrDyYI5zijxMLXb4AcTg42AR2JjhfdLCC2iIC+xNLZe5hBbGEBG4mVD/ewdjFycLAIqEj82
-  FANEuYVcJNYtHArK4gtIaAgMeXhe2aIuKDEyZlPwMYwC0hIHHzxghmiRlFi+84zLBB2lcTZ2V
-  +YJjDyzELSMgtJywJGplWMFklFmekZJbmJmTm6hgYGuoaGxrpmuhbmeolVukl6qaW6yal5JUW
-  JQEm9xPJiveLK3OScFL281JJNjMAwSilkC9/BeOb1B71DjJIcTEqivFOmpSQI8SXlp1RmJBZn
-  xBeV5qQWH2KU4eBQkuBNj01NEBIsSk1PrUjLzAGGNExagoNHSYSXASTNW1yQmFucmQ6ROsWoy
-  3H5+rxFzEIsefl5qVLivDbxQEUCIEUZpXlwI2DxdYlRVkqYl5GBgUGIpyC1KDezBFX+FaM4B6
-  OSMK89yBSezLwSuE2vgI5gAjriyqNEkCNKEhFSUg1Mmjc33r742iDn+Drr43UHFlV6ah+/+2B
-  Gkv3uhEbee0026pJhxg6Ta36Inz4YX9RW0/R5ctYq4Yi5Py8z3vKfxrRcSilTYrEjG8+S7VVN
-  r+0OGa19c0XkO9O6EDZj+2OuszKP6S9Qe95VbLjqwrRPB6cvnsUuVpl79cR+1c6tXzyMj8b/O
-  mm2Jkptrptc6fN1hu/Ev0TVPjx/0n5TYOtcFW7La8r8+zJzn6mtczxkERAcK1Q/o6HDwTfNw6
-  uhtbyDuWb5X51oo3V9ST032kU7Mtp+aqaEztV+Wp2gUK8RnJcbPffA6fzHceL+9+dEXmH7xzo
-  lKDY4QMpMVMDx2LH644/42qWNvy7anLhT+rwSS3FGoqEWc1FxIgDPYn0kKgMAAA==
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-16.tower-238.messagelabs.com!1617256546!406412!1
-X-Originating-IP: [62.60.8.148]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.60.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 26518 invoked from network); 1 Apr 2021 05:55:47 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-16.tower-238.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 1 Apr 2021 05:55:47 -0000
-Received: from R01UKEXCASM223.r01.fujitsu.local (ex2k13_223.fs.fujitsu.com [10.182.185.121])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1315tkTY030298
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 1 Apr 2021 06:55:46 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 1 Apr 2021 06:55:45 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH v2] xterm: upgrade 366 -> 367
-Date: Fri, 2 Apr 2021 01:55:39 +0800
-Message-ID: <1617299739-4528-1-git-send-email-zangrc.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
-Content-Type: text/plain
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=60188 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1lRwVg-0001wN-1f; Thu, 01 Apr 2021 15:33:16 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH] python3-cryptography: Upgrade 3.3.1 -> 3.4.6
+Date: Thu,  1 Apr 2021 15:33:10 +0300
+Message-Id: <20210401123310.566-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
--License-Update: Copyright year updated to 2021.
+Upgrade to release 3.4.6:
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+- Updated Windows, macOS, and manylinux wheels to be compiled
+  with OpenSSL 1.1.1j.
+
+New versions of python3-cryptography depend on Rust. Temporary,
+the environment variable CRYPTOGRAPHY_DONT_BUILD_RUST has been set
+to disable Rust and to avoid dependency on addional layers such
+as meta-rust. Hopefully, in long-term with the introduction of
+Rust recipes in newer Yocto releases this will be fixed.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-graphics/xorg-app/{xterm_366.bb => xterm_367.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/xorg-app/{xterm_366.bb => xterm_367.bb} (89%)
+ .../python/python3-cryptography/h-test.patch  | 23 ++++++++++++++++---
+ ...3.3.1.bb => python3-cryptography_3.4.6.bb} |  7 +++++-
+ 2 files changed, 26 insertions(+), 4 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cryptography_3.3.1.bb => python3-cryptography_3.4.6.bb} (84%)
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_366.bb b/meta-oe/recipes-graphics/xorg-app/xterm_367.bb
-similarity index 89%
-rename from meta-oe/recipes-graphics/xorg-app/xterm_366.bb
-rename to meta-oe/recipes-graphics/xorg-app/xterm_367.bb
-index 969159bc5..e0d3dcec1 100644
---- a/meta-oe/recipes-graphics/xorg-app/xterm_366.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xterm_367.bb
-@@ -2,13 +2,13 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
- SUMMARY = "xterm is the standard terminal emulator for the X Window System"
- DEPENDS = "libxaw xorgproto libxext libxau libxinerama libxpm ncurses desktop-file-utils-native"
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography/h-test.patch b/meta-python/recipes-devtools/python/python3-cryptography/h-test.patch
+index 9f07c7380..0f257a5ed 100644
+--- a/meta-python/recipes-devtools/python/python3-cryptography/h-test.patch
++++ b/meta-python/recipes-devtools/python/python3-cryptography/h-test.patch
+@@ -1,10 +1,27 @@
++From 0707dc0701ea265cbf979d4a10457b29721bcaf7 Mon Sep 17 00:00:00 2001
++From: Leon Anavi <leon.anavi@konsulko.com>
++Date: Fri, 26 Feb 2021 12:58:22 +0200
++Subject: [PATCH] tests/hypothesis/__init__.py: Import pytest
++
++Import pytest.
++
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
++---
++ tests/hypothesis/__init__.py | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/tests/hypothesis/__init__.py b/tests/hypothesis/__init__.py
++index b5093362..d4c9b80b 100644
+ --- a/tests/hypothesis/__init__.py
+ +++ b/tests/hypothesis/__init__.py
+-@@ -3,3 +3,7 @@
++@@ -1,3 +1,7 @@
++ # This file is dual licensed under the terms of the Apache License, Version
++ # 2.0, and the BSD License. See the LICENSE file in the root of this repository
+  # for complete details.
+- 
+- from __future__ import absolute_import, division, print_function
+ +
+ +import pytest
+ +hypothesis = pytest.importorskip("hypothesis")
+ +
++-- 
++2.17.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography_3.3.1.bb b/meta-python/recipes-devtools/python/python3-cryptography_3.4.6.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-cryptography_3.3.1.bb
+rename to meta-python/recipes-devtools/python/python3-cryptography_3.4.6.bb
+index 79a7ac1bf..3978952ed 100644
+--- a/meta-python/recipes-devtools/python/python3-cryptography_3.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-cryptography_3.4.6.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=bf405a8056a6647e7d077b0e7bc36aba"
  
--LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=996b1ce0584c0747b17b57654cc81e8e"
-+LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=987de9787175385203a1ea2482246a17"
+ LDSHARED += "-pthread"
  
- SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz \
-            file://0001-Add-configure-time-check-for-setsid.patch \
-           "
+-SRC_URI[sha256sum] = "7e177e4bea2de937a584b13645cab32f25e3d96fc0bc4a4cf99c27dc77682be6"
++SRC_URI[sha256sum] = "2d32223e5b0ee02943f32b19245b61a62db83a882f0e76cc564e1cec60d48f87"
  
--SRC_URI[sha256sum] = "858b2885963fe97e712739066aadc1baeba2b33a0016303a7fec7d38bc73bf6e"
-+SRC_URI[sha256sum] = "27f1a8b1c756e269fd5684e60802b545f0be9b36b8b5d6bdbc840c6b000dc51f"
+ SRC_URI += " \
+     file://run-ptest \
+@@ -15,11 +15,16 @@ SRC_URI += " \
  
- PACKAGECONFIG ?= ""
- PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
+ inherit pypi setuptools3
+ 
++# Set the environment variable to disable Rust
++export CRYPTOGRAPHY_DONT_BUILD_RUST="1"
++
+ DEPENDS += " \
+     ${PYTHON_PN}-cffi \
+     ${PYTHON_PN}-cffi-native \
+     ${PYTHON_PN}-asn1crypto \
+     ${PYTHON_PN}-six \
++    ${PYTHON_PN}-semantic-version-native \
++    ${PYTHON_PN}-setuptools-rust-native \
+ "
+ 
+ RDEPENDS_${PN} += " \
 -- 
-2.25.1
+2.17.1
 
