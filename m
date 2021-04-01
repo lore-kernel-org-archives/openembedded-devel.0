@@ -1,59 +1,59 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.3])
- by mx.groups.io with SMTP id smtpd.web11.2184.1617244110856142694
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.2])
+ by mx.groups.io with SMTP id smtpd.web10.2117.1617244151343143630
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 Mar 2021 19:28:31 -0700
+ Wed, 31 Mar 2021 19:29:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=xmS4sau2;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.3, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=D/DyQr+3;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.2, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1617244109; i=@fujitsu.com;
-	bh=cznytIj4CuBt3Dj2dT5jH+b1VYXYlJVIpW6jg+GyltM=;
+	s=170520fj; t=1617244149; i=@fujitsu.com;
+	bh=unYWbNp3HUCzRU33MneVgRDYVPtwKQhJxrrfpGYKW6Q=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=xmS4sau2zIjwMjDgM6+e1FK3RVuMLnVeQzhHuyvMLqY30VWBgwGdgBBanQdadtPEc
-	 sbppEqfOueiFhm++XsdOIHKfj8y9IrgXiTBk3zcu35TrqUwwv5/n0klPzeqSfpGxO1
-	 H2bz1LcsxRxxY5XnioQyBRjLAIqvlOdbKRpCIfps4yP7cY+KFrhHlfWw/mois1VbmY
-	 +BqdNcYRkpsj+gFbicpYLj1S7xzbHRGjbNKZkxB8ynlIxFvLCMwklZZdWRNElr0mIZ
-	 vCF90hAYhCz2HPZUqocnRR+x1IgZGufDR/TBB2qcOXq0ERwIwogqjibai3L3gvNVr5
-	 W9n48i4+6b99w==
+	b=D/DyQr+3TGsaVce/FsBo8/igAbR9dxgmVUtxL2K+AvO6+sPV3fyHLErWRInvv7wMn
+	 Lwkk3ZL3gV7J6bTbkytl+u10NsWhmw46kBXoeUjVS6Hyzb+IjRjZ32qI6zUfDc6Y36
+	 CLC9mZl+6R2eRkJkJe9X1lRWZX3jFGo4QMDTNhrx0sTEE/JMzM+izIaZIR8nOejvne
+	 leqIE/AyX7rwvRowdTa1be4U0nl2v1Lw/GGcQZTDO0WyF88dgUeHzmeWhGsIl6Jder
+	 WveHEmX+pJ8qw6iWxVKsPwF2LeRh3QCNyW8rlP9c/SwOzaJbXlfOTM2mIpUYnIJk3V
+	 6haJ3HvJ0sD8A==
 Received: from [100.113.3.92] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-a.eu-central-1.aws.symcld.net id E6/E2-41911-CCF25606; Thu, 01 Apr 2021 02:28:28 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYqntGPzX
-  BYOJkHYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWP17+nMBZvYK7rOCjYw3mbrYuTiEBLYyiRx
-  q/UfM4RznFFi0+q/rF2MnBxsAjoSHS+6WUBsEQF9iaWz9zCD2MICVhJr7+1iB7FZBFQk9m78C
-  2bzCrhL/Gj5zQZiSwgoSEx5+J4ZIi4ocXLmE7A5zAISEgdfvGCGqFGU2L7zDAuEXSVxdvYXpg
-  mMPLOQtMxC0rKAkWkVo0VSUWZ6RkluYmaOrqGBga6hobGuka6poV5ilW6iXmqpbnJqXklRIlB
-  SL7G8WK+4Mjc5J0UvL7VkEyMwjFIKmYx3MF57/UHvEKMkB5OSKO+UaSkJQnxJ+SmVGYnFGfFF
-  pTmpxYcYZTg4lCR4XYCBKSRYlJqeWpGWmQMMaZi0BAePkgivjQZQmre4IDG3ODMdInWKUVFKn
-  JdLDyghAJLIKM2Da4PF0SVGWSlhXkYGBgYhnoLUotzMElT5V4ziHIxKwrwyIFN4MvNK4Ka/Al
-  rMBLT4yqNEkMUliQgpqQamBcd+PHA1/eW0otKCq97UdNbHr6esefTXf2062PSh0lBhps0vtpZ
-  T3MpVeb9uvbbJ7PXY2Bz1d9Y3R/HSljLhx9P2yli38L+Y0nD5ae6KE8vPseseuzpbelKlj5jX
-  MdN1U5UlK+OkbPZaro4WnVbZHW1a2ZTAvlPYpcaZIePOoTVZ0yTXH30wa+HMXIV+/52FV3xOT
-  +bIu8kv9C7ra/BiUWtbgeW/T2QqvL19cR3zvJ0OfX+3G5wSz/0lnubdb20sMnsvkxbTv5yyO5
-  uXruuYLuOq/cSb44TNdQu/uY69onOTlkYWtP/9eWpBRVc2+8vvZ0U3hjoblZ3rLvv7c5Hi/NX
-  3FpobfHkwmW2h1dtXSizFGYmGWsxFxYkAfwA10h4DAAA=
+	by server-2.bemta.az-a.eu-central-1.aws.symcld.net id F8/C7-55623-5FF25606; Thu, 01 Apr 2021 02:29:09 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprBIsWRWlGSWpSXmKPExsViZ8MRqvtFPzX
+  BYPs2a4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePBpuvsBT2cFf19f1kaGBdzdDFycQgJbGWS
+  2Ph7MhuEc5xR4vPaJqYuRk4ONgEdiY4X3SwgtoiAvsTS2XuYuxg5OIQFHCS+nkoGCbMIqEisv
+  /KLEcTmFXCXmLbsEiuILSGgIDHl4XtmiLigxMmZT8DGMAtISBx88YIZokZRYvvOMywQdpXE2d
+  lfmCYw8sxC0jILScsCRqZVjJZJRZnpGSW5iZk5uoYGBrqGhsa6xrqGliZ6iVW6iXqppbrJqXk
+  lRYlAWb3E8mK94src5JwUvbzUkk2MwEBKKWQ+tIPxyesPeocYJTmYlER5p0xLSRDiS8pPqcxI
+  LM6ILyrNSS0+xCjDwaEkwesCDE0hwaLU9NSKtMwcYFDDpCU4eJREeG00gNK8xQWJucWZ6RCpU
+  4y6HJevz1vELMSSl5+XKiXOy6UHVCQAUpRRmgc3AhZhlxhlpYR5GRkYGIR4ClKLcjNLUOVfMY
+  pzMCoJ80aBXMKTmVcCt+kV0BFMQEdceZQIckRJIkJKqoGJLSvCviDHsPn8yaD2xHvKVbziOg0
+  lb++HybRX7r0i1bRkw+P5OVpKJW0cSV0hwYpMwVblVQf+8feo9dytqZqz1WNlp7fqvCXuuc9n
+  zvmV1elfYrLQoj/okbSMwX+7Sb96lDcpP7v/ZFPT1SrJ6vp/qktO3vY/3y98Qai9dbVSMkP/M
+  6YVUvtjuX8/9ff7rsE242aqtGbuscIKEcX/qeZT5cU7+MotKxx+yxZ4K01hf7dsiXPl1vBlqx
+  Va3laKxny40jpfbXehgPx0/zcKT9awJyyPcp0r+XjxCf/Vn8XC04scNsjsLDvDuDbk0c0s3bv
+  Zp9c1rZdtuqfx9/V3ieiJBhJ7O/c+U519btFXayWW4oxEQy3mouJEAJGETZcrAwAA
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-31.tower-228.messagelabs.com!1617244108!437272!1
-X-Originating-IP: [62.60.8.149]
+X-Msg-Ref: server-2.tower-228.messagelabs.com!1617244148!437218!1
+X-Originating-IP: [62.60.8.85]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.60.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 16177 invoked from network); 1 Apr 2021 02:28:28 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-31.tower-228.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 1 Apr 2021 02:28:28 -0000
+Received: (qmail 23634 invoked from network); 1 Apr 2021 02:29:08 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-2.tower-228.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 1 Apr 2021 02:29:08 -0000
 Received: from R01UKEXCASM223.r01.fujitsu.local (ex2k13_223.fs.fujitsu.com [10.182.185.121])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1312SR8T026587
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1312T8sF006314
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 1 Apr 2021 03:28:28 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 1 Apr 2021 03:29:08 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 1 Apr 2021 03:28:26 +0100
+ (TLS) id 15.0.1497.2; Thu, 1 Apr 2021 03:29:06 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] fbgrab: upgrade 1.4 -> 1.5
-Date: Thu, 1 Apr 2021 10:28:20 +0800
-Message-ID: <1617244100-91881-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libxaw: upgrade 1.0.13 -> 1.0.14
+Date: Thu, 1 Apr 2021 10:29:00 +0800
+Message-ID: <1617244140-91947-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -63,26 +63,28 @@ Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../recipes-graphics/fbgrab/{fbgrab_1.4.bb => fbgrab_1.5.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-graphics/fbgrab/{fbgrab_1.4.bb => fbgrab_1.5.bb} (89%)
+ .../xorg-lib/{libxaw_1.0.13.bb => libxaw_1.0.14.bb}           | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-lib/{libxaw_1.0.13.bb => libxaw_1.0.14.bb} (83%)
 
-diff --git a/meta-oe/recipes-graphics/fbgrab/fbgrab_1.4.bb b/meta-oe/recipes-graphics/fbgrab/fbgrab_1.5.bb
-similarity index 89%
-rename from meta-oe/recipes-graphics/fbgrab/fbgrab_1.4.bb
-rename to meta-oe/recipes-graphics/fbgrab/fbgrab_1.5.bb
-index a1294b98a..419881d5c 100644
---- a/meta-oe/recipes-graphics/fbgrab/fbgrab_1.4.bb
-+++ b/meta-oe/recipes-graphics/fbgrab/fbgrab_1.5.bb
-@@ -6,7 +6,7 @@ SECTION = "console/utils"
- DEPENDS = "libpng zlib"
- SRC_URI = "git://github.com/GunnarMonell/fbgrab.git;protocol=https"
+diff --git a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.14.bb
+similarity index 83%
+rename from meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb
+rename to meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.14.bb
+index cb1ffcd8c..1783ee8fb 100644
+--- a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb
++++ b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.14.bb
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1c65719d42900bb81b83e8293c20a364"
+ PE = "1"
+ PR = "r2"
  
--SRCREV = "74373aafc0b496e67642562d86eac6b858a31f24"
-+SRCREV = "f43ce6d5ce48fb01360eaa7c4a92c2573a1d02f8"
- S = "${WORKDIR}/git"
+-SRC_URI[md5sum] = "e5e06eb14a608b58746bdd1c0bd7b8e3"
+-SRC_URI[sha256sum] = "8ef8067312571292ccc2bbe94c41109dcf022ea5a4ec71656a83d8cce9edb0cd"
++SRC_URI[md5sum] = "c1ce21c296bbf3da3e30cf651649563e"
++SRC_URI[sha256sum] = "76aef98ea3df92615faec28004b5ce4e5c6855e716fa16de40c32030722a6f8e"
  
- inherit autotools-brokensep
+ do_install_append () {
+     ln -sf libXaw6.so.6 ${D}${libdir}/libXaw.so.6
 -- 
 2.25.1
 
