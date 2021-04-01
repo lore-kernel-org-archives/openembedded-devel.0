@@ -1,90 +1,100 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.114])
- by mx.groups.io with SMTP id smtpd.web12.2149.1617244207232220241
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web11.2249.1617244600598253297
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 Mar 2021 19:30:07 -0700
+ Wed, 31 Mar 2021 19:36:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=TDhtdd/u;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.114, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1617244205; i=@fujitsu.com;
-	bh=rL0hMiCKvAW7nnOpwtAkMcHKbNGHVEfnOqf+2Bf0gUk=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=TDhtdd/unFgbhCKL7fGN/DhDTQUm1LOnt1GYsNVouuEOxqCxEdJlFFk2PeHb4KX2T
-	 Jpdg8PrB/ghC9lLBeApmRnDYQiZqUlbCinWdjr+yNpWoyLrZ4RzvHD7iPJ85iq6CLM
-	 dbijosEWtt0sb9rjk/0AbN9JV5pBDy52MAhtSDCTuqElM2Jvh/3xA/q7pXPxXLo/o+
-	 8K3H31OO7VyBP/DyXhbI2Rc4HRY/rMvozwYgYlgHwwBuStS5vJFdmsaREY2mWME+lk
-	 3W0MdRkzneZh4OSuYfsr3+VO4pNbpZmHkCfYJNdERl+kZUvZgmYZDglh/zY24NAG3e
-	 UoTcgsbYvdN3A==
-Received: from [100.113.6.195] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-b.eu-central-1.aws.symcld.net id EE/81-23163-D2035606; Thu, 01 Apr 2021 02:30:05 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupkkeJIrShJLcpLzFFi42Kxs+EI1dU1SE0
-  wuDCV0eLi4aXMDowe5zauYAxgjGLNzEvKr0hgzbj1mrtgDWdF+9PDjA2Mhzi6GDk5hAS2Mklc
-  3lfXxcgFZB9nlFj9YAcjSIJNQEei40U3C4gtIqAvsXT2HmYQW1jATuLVtH1sIDaLgIrEltvdQ
-  HEODl4Bd4m/70JBwhICChJTHr4HK+cVEJQ4OfMJ2BhmAQmJgy9eMEPUKEps33mGBcKukjg7+w
-  vTBEaeWUhaZiFpWcDItIrRIqkoMz2jJDcxM0fX0MBA19DQWNcMyNJLrNJN0kst1U1OzSspSgR
-  K6iWWF+sVV+Ym56To5aWWbGIEhlBKIRvXDsanrz/oHWKU5GBSEuWdMi0lQYgvKT+lMiOxOCO+
-  qDQntfgQowwHh5IEr4t+aoKQYFFqempFWmYOMJxh0hIcPEoivDYaQGne4oLE3OLMdIjUKUZFK
-  XFeLj2ghABIIqM0D64NFkOXGGWlhHkZGRgYhHgKUotyM0tQ5V8xinMwKgnzyoBM4cnMK4Gb/g
-  poMRPQ4iuPEkEWlyQipKQamKw3TV36r15hwt6/Jt08cavLHin3m9/837vdd+fOj+rTdpqbXw/
-  kexv0dEv4gSe7zTWFd8Vv+pJykmnj5MUxK2VFbx1T3dS8U26FWIZBg4VG0czrcy2nC899wBlw
-  ar9A3XcZj5wnP96/KxAx7NuUcv39qcIAQQEr97VXihW3T2PdyG1Rpv6bdU9NRFTAg+1dsW92X
-  HncwiPwySGRNaBmUeCML/NMNVy5c/bO+MOx5AtjRfvqZVHtnvfaLCymbLz38ltC6OYj4vvPHH
-  n4cclCddetJ0TvmGTO0M59H2eflmuYYLykZmnomU8R37kCFX+dil6d/H+LHjsPS5xC68fTU7e
-  Ht2zi4ZglLa4RGD316A8lluKMREMt5qLiRAAmTyFeHAMAAA==
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-11.tower-248.messagelabs.com!1617244204!47636!1
-X-Originating-IP: [62.60.8.85]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.60.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 32485 invoked from network); 1 Apr 2021 02:30:04 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-11.tower-248.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 1 Apr 2021 02:30:04 -0000
-Received: from R01UKEXCASM223.r01.fujitsu.local (ex2k13_223.fs.fujitsu.com [10.182.185.121])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1312U4uj006518
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 1 Apr 2021 03:30:04 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 1 Apr 2021 03:30:02 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] zabbix: upgrade 5.2.5 -> 5.2.6
-Date: Thu, 1 Apr 2021 10:29:56 +0800
-Message-ID: <1617244196-92121-1-git-send-email-zangrc.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Vg30r2QY;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id l123so371366pfl.8
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 Mar 2021 19:36:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:references:from:organization:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=r3TsmG21oBYYeg2Utd1Bviw+++JvbRXwQRXrsybAxkQ=;
+        b=Vg30r2QY98S/RjAjKNYHKoCbYwaCfxMVOlgJv6Iw+KzOAN8VhlYCaltrTgZruwkAZ1
+         m/b4ER+X0Kj5A86Ep9nh94ArntwXfl//ZmrQmG5WN5ATwiLO8z/hDHNNUOtCtSiSmwr1
+         GOR8J/SSTXqZD7GhCdBuTDDSm+BmUrB50oJTZvrtstP7qBGQS5dm+MhG2ElsnpdUPbng
+         hmEMOHDp1tDB2N+yEVldCmlDnSRUa5Bf9nevbzcZXQikrgWtGD6J2TuHgNX5ASlu+vdL
+         RcD/TVHEMGCjepOOwZ7GqaA84etqI3Dr4WhEly5lN04fXpd4x6ub+mXj9MxrO8c74dTF
+         HTpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=r3TsmG21oBYYeg2Utd1Bviw+++JvbRXwQRXrsybAxkQ=;
+        b=H6WD+AbYXIF2N1NosxFAVz80xEtNF2aT11KvBPkyLakKXhZvoKFqshk+dgyFROMFik
+         Xa6GXKWY2HgDoQjytpbXpAHX8UOLUnYJW6dpZwMM+IAVWDVZif9NaXdj1sXzr8z0TJZe
+         hrbM9nYgk0pLjRWiA4g68EBCtsx0vNjKYs/RhCSePuonqkPYUSJi5m5JrLa2tOR1oCvG
+         C69NEKl55sW8neyxluX8+Zvje4l79xUeBcKkLm/zlwimxCUXr06wblAKfka10uUzqGd7
+         TdqUDAet4JVBlEV+dVRrO1vTvEOmMqY/olXKmAd4OI22tnD8Rrkk+RXu9RCpJDSFZLvX
+         T+5A==
+X-Gm-Message-State: AOAM531mg//D4abSi0TRTkl7ZvwdZZXhyH6ApJCF00Fg54P3XOAxFy8L
+	cYzsxeZ6QboZ3p0bHSeQWw0rfZejgRk4YQ==
+X-Google-Smtp-Source: ABdhPJx7/qtnbJ4enuZOJPbC9uYTeRB90QHktJo+Kq9J0owyjmVbOwXcbMv6Rt6To6usGeydFlCPug==
+X-Received: by 2002:a65:4c43:: with SMTP id l3mr5583070pgr.327.1617244599817;
+        Wed, 31 Mar 2021 19:36:39 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:a0f0::7c4e? ([2601:646:9200:a0f0::7c4e])
+        by smtp.gmail.com with ESMTPSA id l3sm3286581pju.44.2021.03.31.19.36.39
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 31 Mar 2021 19:36:39 -0700 (PDT)
+Subject: Re: [oe] [meta-oe] [PATCH] xterm: upgrade 366 -> 367
+To: zangrc <zangrc.fnst@fujitsu.com>,
+ openembedded-devel@lists.openembedded.org
+References: <1617244170-92064-1-git-send-email-zangrc.fnst@fujitsu.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <f891025a-4233-4bac-d94e-55d9ce8284a4@gmail.com>
+Date: Wed, 31 Mar 2021 19:36:37 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.9.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
-Content-Type: text/plain
+In-Reply-To: <1617244170-92064-1-git-send-email-zangrc.fnst@fujitsu.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
----
- .../zabbix/{zabbix_5.2.5.bb => zabbix_5.2.6.bb}               | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/zabbix/{zabbix_5.2.5.bb => zabbix_5.2.6.bb} (95%)
 
-diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_5.2.5.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_5.2.6.bb
-similarity index 95%
-rename from meta-oe/recipes-connectivity/zabbix/zabbix_5.2.5.bb
-rename to meta-oe/recipes-connectivity/zabbix/zabbix_5.2.6.bb
-index 2bbfec9dc..37bb9a282 100644
---- a/meta-oe/recipes-connectivity/zabbix/zabbix_5.2.5.bb
-+++ b/meta-oe/recipes-connectivity/zabbix/zabbix_5.2.6.bb
-@@ -28,8 +28,8 @@ SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/5.2/${BPN}-${PV}.tar.gz
-     file://zabbix-agent.service \
- "
- 
--SRC_URI[md5sum] = "e90822716c5c241890f6fed1588b5451"
--SRC_URI[sha256sum] = "ce0d9745a8b9154e87d6906edd0fce7b7ec298acd34a0543ea53d1a5f2f14bc5"
-+SRC_URI[md5sum] = "31dab3535a1fa212f5724902727f6d4d"
-+SRC_URI[sha256sum] = "76cb704f2a04fbc87bb3eff44fa71339c355d467f7bbd8fb53f8927c760e1680"
- 
- inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
- 
--- 
-2.25.1
 
+On 3/31/21 7:29 PM, zangrc wrote:
+> Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+> ---
+>   .../recipes-graphics/xorg-app/{xterm_366.bb => xterm_367.bb}  | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-oe/recipes-graphics/xorg-app/{xterm_366.bb => xterm_367.bb} (89%)
+> 
+> diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_366.bb b/meta-oe/recipes-graphics/xorg-app/xterm_367.bb
+> similarity index 89%
+> rename from meta-oe/recipes-graphics/xorg-app/xterm_366.bb
+> rename to meta-oe/recipes-graphics/xorg-app/xterm_367.bb
+> index 969159bc5..e0d3dcec1 100644
+> --- a/meta-oe/recipes-graphics/xorg-app/xterm_366.bb
+> +++ b/meta-oe/recipes-graphics/xorg-app/xterm_367.bb
+> @@ -2,13 +2,13 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
+>   SUMMARY = "xterm is the standard terminal emulator for the X Window System"
+>   DEPENDS = "libxaw xorgproto libxext libxau libxinerama libxpm ncurses desktop-file-utils-native"
+>   
+> -LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=996b1ce0584c0747b17b57654cc81e8e"
+> +LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=987de9787175385203a1ea2482246a17"
+>  
+
+
+add a comment in commit msg explaining why above checksum changed.
+
+
+>   SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz \
+>              file://0001-Add-configure-time-check-for-setsid.patch \
+>             "
+>   
+> -SRC_URI[sha256sum] = "858b2885963fe97e712739066aadc1baeba2b33a0016303a7fec7d38bc73bf6e"
+> +SRC_URI[sha256sum] = "27f1a8b1c756e269fd5684e60802b545f0be9b36b8b5d6bdbc840c6b000dc51f"
+>   
+>   PACKAGECONFIG ?= ""
+>   PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
+> 
+> 
+> 
+> 
+> 
