@@ -1,100 +1,80 @@
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.web12.10587.1617328729555139247
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web12.10588.1617328730214989473
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Apr 2021 18:58:49 -0700
+ Thu, 01 Apr 2021 18:58:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=HEVHRT0V;
- spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f171.google.com with SMTP id s11so2720156pfm.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Apr 2021 18:58:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ql9ak69W;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id v10so2710171pfn.5
+        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Apr 2021 18:58:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=JLM/21Y7zR5kcxzj1JmwNlrT4PiQoK4Mi9ZDZvb4Z/c=;
-        b=HEVHRT0VUHd9vH9RRgzSl6suWa91CR+XLprv8aRwJ27j1hcLxm+l5XkDiU70qyIdaX
-         w8+zGObubkeM9AYQNk3dMbcWAoSY1OabIhx5z/wNyA6TO39GKR/xjLfZS/PXcAGkBGr8
-         +sM6Dfbw4hI5sroKFpkIRgX3Xk+IPaXChVbOltVP9e/vdFQ08Z6RE3L8dOzRlMhmR62S
-         1Qu00upiIbzKERltYDz369eBj+fa6B9jreWomKdZIEpNg5+bDydy2rcEIvWothqGLykX
-         JEXP0ZJRQx4S7jKQ0ZNQSP5nIbH1tnW1+e5gPLhb0uvFyh/w1LB23w+tgyK5nHj8NFIu
-         XEHQ==
+        bh=1f5U/xKQVwjAdVV+41sRfeoPhHofLADLlAqQiLgYUWQ=;
+        b=ql9ak69WKp9IFPuxWVYvw/EJ20+rUWgDkAbipIa/mSKHhn6aGUysr8VtKU53OAdrEZ
+         fOKWwiFxVAHP7BjI9fplW4sm5k7kPA7lmTXa0eR0waoJkTFzgAYfWSOWGTI2zJVsUKl8
+         u9zEmmoXsEEAbuYysRNuHNhwZgB4OUTfulcoqDKMoJEB1Hol8re+ERuhHov5w/hY+YkL
+         8zWpk0LVzooPemTfPc0KiGoU+SXWw7fo9h7Vtdxmy99qHTCcOcwM7kvYzZ3msgI2+eZb
+         iAh/xvjHs0tZN1DY/4ygZ6f66yBejfhphZUxZN9HhfwVwvld9qKnxWvcYPtqGZAvIQKJ
+         2a8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=JLM/21Y7zR5kcxzj1JmwNlrT4PiQoK4Mi9ZDZvb4Z/c=;
-        b=kt1xapNeKgCh+l2qbDi6+AFo5r15xufqahTClNf8DnozKZTkjf3X/KngtFMCLDSJ4f
-         meLIKQ5tQdjVN3mkGSIxuyTpt3w3rmIVigpVLQmQ8NE44u4ASnGCKUlT4KnlK7gNxb1M
-         vcInbT8Nc/fnDtG+g8FXFBRxWV6Hi/PRs8Mim76chvneSrSiIAreYAYe5ASli5zsbEdR
-         RBGnUZuQV29vRBbU46TTHZKcfNSRfIJ58eEyDBhGJrQJi/XIjm/U8xeO8KMivYMqLn1p
-         Xl8j8GbVri3oAkqaPrOUVEaI1TiP2XayK6EPUiRE007kILUzCjb764B2mpOi8+fUU6uk
-         7gNg==
-X-Gm-Message-State: AOAM533FpI/NbzEBX800pIGJBJPDxztuhzvG6t7GIlNLSYYuT4Ewt/x5
-	HDWSdDHBKljqmlzYf12q+zrUae+A7TQ=
-X-Google-Smtp-Source: ABdhPJwJz5PUg5CBFLLJ8WUrjqb+s/HWttpNneRErOvhECTBiZkPABHjBOPVwpomwzuF+TMPMxxFTQ==
-X-Received: by 2002:aa7:99c6:0:b029:1f5:c49d:dce7 with SMTP id v6-20020aa799c60000b02901f5c49ddce7mr9924600pfi.78.1617328728856;
-        Thu, 01 Apr 2021 18:58:48 -0700 (PDT)
+        bh=1f5U/xKQVwjAdVV+41sRfeoPhHofLADLlAqQiLgYUWQ=;
+        b=YGscVkc15KVZz6HfDzHIO0DCdmlaYyyWImoJrehcEvQ6IN/j9eFPOeSd+N10WV3UIw
+         uN+z4nWhaZC4CEPVn3cG42cSutTqX0d4yD47jPye3KFSOPkJB0nar48t6RY3Ysn19IUv
+         To6RiAVoKzatghOL+b/+mPKx746SItC8CR2cRh/6/xGFWnNcqF0PrbMglNIicK2qMUQl
+         qgUi63Ks37ckujOSILLrqrkYyonMBHNKN0ZO499SAAHJEtbeaFyepp7snkGigg3qXhWs
+         ZfX+EJ7mv6+mUWfLOSs9pjr7LBrDwK+g2yIKF52UWUYL+mg9zjfpYbuUPcMyMCl+W89m
+         ZTcQ==
+X-Gm-Message-State: AOAM532RKLPk3RvdXhq3DluQYx4euTxs7JzK44hkHnQvwoX6ReMZgkyK
+	UUHgYXdneJgAujB7KbpPZNpRDGtcvKw=
+X-Google-Smtp-Source: ABdhPJxOg3TzqXtzKFEyFLMkOut6YczqtOnd7hMRf+H4yc6AfJzu7TyTZLvgQ3U9InHW00rtGi4qmg==
+X-Received: by 2002:a62:1dcc:0:b029:209:7eef:b14e with SMTP id d195-20020a621dcc0000b02902097eefb14emr10183277pfd.3.1617328729649;
+        Thu, 01 Apr 2021 18:58:49 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:344e:3d2c:47a3:4e6b])
-        by smtp.gmail.com with ESMTPSA id x9sm707641pfd.158.2021.04.01.18.58.48
+        by smtp.gmail.com with ESMTPSA id x9sm707641pfd.158.2021.04.01.18.58.49
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Apr 2021 18:58:48 -0700 (PDT)
+        Thu, 01 Apr 2021 18:58:49 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 02/14] mdns: Whitelisted CVE-2007-0613 for mdns
-Date: Thu,  1 Apr 2021 18:58:30 -0700
-Message-Id: <fee2024d74e0262c3140f6ad004ce751a4915ec4.1617328609.git.akuster808@gmail.com>
+Subject: [gatesgarth 03/14] quagga: Update SRC_URI
+Date: Thu,  1 Apr 2021 18:58:31 -0700
+Message-Id: <f03e3e31be83281e0b1d47a8aa30da1cc94a5544.1617328609.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617328609.git.akuster808@gmail.com>
 References: <cover.1617328609.git.akuster808@gmail.com>
 
-From: Sana Kazi <Sana.Kazi@kpit.com>
+From: Mingli Yu <mingli.yu@windriver.com>
 
-CVE-2007-0613 is not applicable as it only affects Apple products
-i.e. ichat,mdnsresponder, instant message framework and MacOS.
-Also, https://www.exploit-db.com/exploits/3230 shows the part of code
-affected by CVE-2007-0613 which is not preset in upstream source code.
-Hence, CVE-2007-0613 does not affect other Yocto implementations and
-is not reported for other distros can be marked whitelisted.
-Links:
-https://vulmon.com/vulnerabilitydetails?qid=CVE-2007-0613
-https://www.incibe-cert.es/en/early-warning/vulnerabilities/cve-2007-0613
-https://security-tracker.debian.org/tracker/CVE-2007-0613
-https://ubuntu.com/security/CVE-2007-0613
-https://vulmon.com/vulnerabilitydetails?qid=CVE-2007-0613
+Update the SRC_URI as the previous is unaccessible to fix the below
+warning:
+WARNING: quagga-1.2.4-r0 do_fetch: Failed to fetch URL https://download.savannah.gnu.org/releases/quagga/quagga-1.2.4.tar.gz;, attemptin MIRRORS if available
 
-Signed-off-by: Sana Kazi <Sana.Kazi@kpit.com>
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit f37e5423da984b7dc721d52f04673d3afc0879a1)
+(cherry picked from commit a1e3dd6a31ed57fd280d486be8aa1be555010994)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-protocols/mdns/mdns_1096.40.7.bb        | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ meta-networking/recipes-protocols/quagga/quagga.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-protocols/mdns/mdns_1096.40.7.bb b/meta-networking/recipes-protocols/mdns/mdns_1096.40.7.bb
-index 086b408692f..d00c8bbfd9a 100644
---- a/meta-networking/recipes-protocols/mdns/mdns_1096.40.7.bb
-+++ b/meta-networking/recipes-protocols/mdns/mdns_1096.40.7.bb
-@@ -27,6 +27,19 @@ SRC_URI[sha256sum] = "b86f4816b4145915198e7c5bf0bc56dbbfd960e9a4518bb6486baa40cd
+diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
+index 6df72427b1d..3b7a425bbae 100644
+--- a/meta-networking/recipes-protocols/quagga/quagga.inc
++++ b/meta-networking/recipes-protocols/quagga/quagga.inc
+@@ -20,7 +20,7 @@ SNMP_CONF="${@bb.utils.contains('DISTRO_FEATURES', 'snmp', '--enable-snmp', '',
+ # the "ip" command from busybox is not sufficient (flush by protocol flushes all routes)
+ RDEPENDS_${PN} += "iproute2"
  
- CVE_PRODUCT = "apple:mdnsresponder"
- 
-+# CVE-2007-0613 is not applicable as it only affects Apple products
-+# i.e. ichat,mdnsresponder, instant message framework and MacOS.
-+# Also, https://www.exploit-db.com/exploits/3230 shows the part of code
-+# affected by CVE-2007-0613 which is not preset in upstream source code.
-+# Hence, CVE-2007-0613 does not affect other Yocto implementations and
-+# is not reported for other distros can be marked whitelisted.
-+# Links:
-+# https://vulmon.com/vulnerabilitydetails?qid=CVE-2007-0613
-+# https://www.incibe-cert.es/en/early-warning/vulnerabilities/cve-2007-0613
-+# https://security-tracker.debian.org/tracker/CVE-2007-0613
-+# https://vulmon.com/vulnerabilitydetails?qid=CVE-2007-0613
-+CVE_CHECK_WHITELIST += "CVE-2007-0613"
-+
- PARALLEL_MAKE = ""
- 
- S = "${WORKDIR}/mDNSResponder-${PV}/mDNSPosix"
+-SRC_URI = "${SAVANNAH_GNU_MIRROR}/quagga/quagga-${PV}.tar.gz; \
++SRC_URI = "https://github.com/Quagga/quagga/releases/download/quagga-${PV}/quagga-${PV}.tar.gz \
+            file://quagga.init \
+            file://quagga.default \
+            file://watchquagga.init \
 -- 
 2.17.1
 
