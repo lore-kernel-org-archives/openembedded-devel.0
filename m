@@ -1,208 +1,93 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web12.9297.1617321064226734309
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.4])
+ by mx.groups.io with SMTP id smtpd.web10.10397.1617328573626832347
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Apr 2021 16:51:05 -0700
+ Thu, 01 Apr 2021 18:56:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=mD1EAiA1;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: wangmy@fujitsu.com)
-Return-Path: <wangmy@fujitsu.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=j6anqUdY;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.4, mailfrom: zangrc.fnst@fujitsu.com)
+Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1617321061; i=@fujitsu.com;
-	bh=rnH5j3IbsBgCVyEt4OrzbWhKbNhMpuOykm1ZX/IeTQs=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=mD1EAiA1JfIp81U4aZ0XFMLGPjlOA0JlEWtyhCF7zQA48bAIZungLrtdGZuGwQWUy
-	 mhk9g+UKiIkKfdeCLjGWJkT5Or9MDsubUtBAdXSXp7Y/wmAb2oFG/FUmTq/Jm9J9AM
-	 vSqs2tTBKGArP+PXBZAzY71pmJrNx8+OH4S0leDg4Hl2cdKvVx8Ezko8C4514KIqTK
-	 NcxqlolcT5T97FLrz+vRSdtizSo9tEEVcP9V2TKrTcheiwvaDZW8GX0xivZcXKFtEt
-	 bkSJDTUIpWh0aXiIas2/65W8Cu9mma5cgJg6uniwiOrG1QT6iKzMnARPVqpjYWYc6f
-	 PtY/KiJhVpwrQ==
-Received: from [100.113.3.92] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-a.eu-central-1.aws.symcld.net id DA/BC-07430-46C56606; Thu, 01 Apr 2021 23:51:00 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrJIsWRWlGSWpSXmKPExsViZ8MRopsSk5Z
-  g0LNTweLi4aXMDowe5zauYAxgjGLNzEvKr0hgzfj6YQJzwR69iu8vnjM3MO7T7GLk5BAS2Mok
-  cXebcBcjF5B9nFFi3qo9bCAJNgE1iem3brCC2CIC+hJLZ+9hBrGZBVQkXvzuYQexhQUcJV517
-  gezWYDiz/b9BevlFXCS+PFgCguILSGgIDHl4XtmiLigxMmZT1gg5khIHHzxghmiRlFi9uVmqP
-  oqic4Px9kmMPLOQtIyC0nLAkamVYwWSUWZ6RkluYmZObqGBga6hobGuoa6poZ6iVW6iXqppbr
-  JqXklRYlASb3E8mK94src5JwUvbzUkk2MwPBKKWQ03sF48PUHvUOMkhxMSqK84oZpCUJ8Sfkp
-  lRmJxRnxRaU5qcWHGGU4OJQkeFdHAeUEi1LTUyvSMnOAoQ6TluDgURLhPQ2S5i0uSMwtzkyHS
-  J1iNObYeXrxImaOdz+BpBBLXn5eqpQ4r0o0UKkASGlGaR7cIFgMXmKUlRLmZWRgYBDiKUgtys
-  0sQZV/xSjOwagkzGsIMoUnM68Ebt8roFOYgE5xvZEKckpJIkJKqoHJLX3qyomHBM1LJjr8ESw
-  77HWAJ9xXdKffDk6OU9eWHH978ad/+sbHGw/OsNe1f3S+I2RNedPZA3H9bNm+K9k0sqWvJ5bd
-  nO3IcyFyjlvp5mjZdUx6B9ZNupoc/2Xq+/PzeG95fLecm63NeHdv5JOe/Aqb3eZ9nNKHUkMt9
-  DSsXuYE2DxxYFvMp1L3/Kew/fqFTA/WtPy3X9LmItU0lb2y/FjPdO43dxZecvjpccH7Yk1tjq
-  nu0dP7Jyecc6w3/aDm0ZT/6npW8KM7n+y6GyKbDPae3mPgvqFywSvlP5bRS0O3b1D12LfywbN
-  vmm+f1OXlvJURMqmK2rbb5f6EX9PckucvL32p07EoIYBnuUG9EktxRqKhFnNRcSIAhDXDZzwD
+	s=170520fj; t=1617328571; i=@fujitsu.com;
+	bh=sMnoC/Apz+ATXtwoBXczso+kfUglHdF3e2hN/VpquDQ=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=j6anqUdY8KiIcECcWEZThJv1X09oVaXNJAOxHg3oXDqQmL1GHYdmbXup1hzgkXolH
+	 71gRuxK0v7XpoR93T597Eh5zIYPeSYgLdFCX3163OsJRjRl0U+lFcGwwtZOyjss8cy
+	 P9tR7MW0prwH/rPQS/wzUPuGty21wYx1mffRMbBhS8j2t4MFMt8P9kHu247nGJNyQr
+	 9Hp2m2eEY7RBKc2yi6Z1qW6+Dn3Ik471njXlxGruT2RDnb5AwlFyMvVgglxDDWvmw2
+	 5rTB4n44hcmdMxK3RIuqXGVjtnR/KDHMFhqNGb9/ryFsJuwF4TNNUJd45vXKROAzSZ
+	 5fEyCj4CT+7mA==
+Received: from [100.112.193.211] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-4.bemta.az-a.eu-west-1.aws.symcld.net id 5A/16-14660-AB976606; Fri, 02 Apr 2021 01:56:10 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprLIsWRWlGSWpSXmKPExsViZ8MRqrurMi3
+  B4O1uFYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePl5lMsBQ85K55+7WZtYHzL0cXIxSEksJVJ
+  ovXsCzYI5zijxN85H5i7GDk52AR0JDpedLOA2CIC+hJLZ+8BiwsLOEvMnfgZzGYRUJH4+PstU
+  xcjBwevgJvE/vPRIGEJAQWJKQ/fg5XwCghKnJz5BGwMs4CExMEXL5ghahQltu88wwJhV0mcnf
+  2FaQIjzywkLbOQtCxgZFrFaJFUlJmeUZKbmJmja2hgoGtoaKRraGmka2RgopdYpZuol1qqW55
+  aXKJrqJdYXqxXXJmbnJOil5dasokRGEYpBQfO7GA89fqD3iFGSQ4mJVFeccO0BCG+pPyUyozE
+  4oz4otKc1OJDjDIcHEoSvE8rgHKCRanpqRVpmTnAkIZJS3DwKInwGhYBpXmLCxJzizPTIVKnG
+  I05Ll+ft4iZY/PcpYuYhVjy8vNSpcR5+0EmCYCUZpTmwQ2CxdolRlkpYV5GBgYGIZ6C1KLczB
+  JU+VeM4hyMSsK8nMDIFeLJzCuB2/cK6BQmoFNcb6SCnFKSiJCSamBaZvcopTtP11Lx0t07d02
+  Ofsl/3PrtMdP6LH+ef1Nz5jNvePV/8hK5qf3cPYd9f26z8M6ufXZdRWj+Dg2ms/3n67P61h8O
+  3Pdk3jq5gzLCEzL6gx6sbbC2EHTPu1An/2H/83UTTL7H9C62+dZ+yXVViVQE7/9M9m4h8TduE
+  T9OHg4/ellq4zPj0sYu1iU63ye1yx3iUU28orieqSn778GSuVv3V8mtTbNIv2G4/+jBFXW6Gu
+  ctj225NqNl5rF8/6R5SZs5+d0vWQVNuWXbZMPqYJz8X0v8tl9bhf5x/wpl61WqUwL3N5ndvr1
+  EWOT33WtrGc5OSlpjomm15Fn53z/Wa4rlK/9tfrT6k+UqlkvqSizFGYmGWsxFxYkAQc4wYjAD
   AAA=
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-26.tower-228.messagelabs.com!1617321059!519359!1
-X-Originating-IP: [62.60.8.84]
+X-Env-Sender: zangrc.fnst@fujitsu.com
+X-Msg-Ref: server-12.tower-271.messagelabs.com!1617328570!519880!1
+X-Originating-IP: [62.60.8.85]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.60.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 15996 invoked from network); 1 Apr 2021 23:51:00 -0000
-Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-26.tower-228.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 1 Apr 2021 23:51:00 -0000
+Received: (qmail 22972 invoked from network); 2 Apr 2021 01:56:10 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-12.tower-271.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 2 Apr 2021 01:56:10 -0000
 Received: from R01UKEXCASM223.r01.fujitsu.local (ex2k13_223.fs.fujitsu.com [10.182.185.121])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 131NoruX021525
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1321u46Y019258
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 2 Apr 2021 00:50:59 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
+	for <openembedded-devel@lists.openembedded.org>; Fri, 2 Apr 2021 02:56:10 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 2 Apr 2021 00:50:51 +0100
-From: "wangmy" <wangmy@fujitsu.com>
+ (TLS) id 15.0.1497.2; Fri, 2 Apr 2021 02:56:03 +0100
+From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] mariadb: upgrade 10.5.8 -> 10.5.9
-Date: Fri, 2 Apr 2021 07:50:42 +0800
-Message-ID: <1617321042-66190-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH v3] libxaw: upgrade 1.0.13 -> 1.0.14
+Date: Fri, 2 Apr 2021 09:55:54 +0800
+Message-ID: <1617328554-7656-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
 Content-Type: text/plain
 
-refresh c11_atomics.patch
-remove 0001-stacktrace-t.c-make-the-test-conditional.patch since it is
-included in 10.5.9
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- ...ive_10.5.8.bb => mariadb-native_10.5.9.bb} |  0
- meta-oe/recipes-dbs/mysql/mariadb.inc         |  3 +-
- ...ktrace-t.c-make-the-test-conditional.patch | 38 -------------------
- .../mysql/mariadb/c11_atomics.patch           | 16 ++++----
- .../{mariadb_10.5.8.bb => mariadb_10.5.9.bb}  |  0
- 5 files changed, 9 insertions(+), 48 deletions(-)
- rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.5.8.bb => mariadb-native_10.5.9.bb} (100%)
- delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-stacktrace-t.c-make-the-test-conditional.patch
- rename meta-oe/recipes-dbs/mysql/{mariadb_10.5.8.bb => mariadb_10.5.9.bb} (100%)
+ .../xorg-lib/{libxaw_1.0.13.bb => libxaw_1.0.14.bb}          | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-lib/{libxaw_1.0.13.bb => libxaw_1.0.14.bb} (82%)
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.8.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.9.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.5.8.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.5.9.bb
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 1fbcb71427..67cfa54f02 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -20,11 +20,10 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
-            file://fix-arm-atomic.patch \
-            file://0001-Fix-library-LZ4-lookup.patch \
-            file://0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch \
--           file://0001-stacktrace-t.c-make-the-test-conditional.patch \
-           "
- SRC_URI_append_libc-musl = " file://ppc-remove-glibc-dep.patch"
+diff --git a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.14.bb
+similarity index 82%
+rename from meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb
+rename to meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.14.bb
+index cb1ffcd8c..15f52d8d4 100644
+--- a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb
++++ b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.14.bb
+@@ -5,10 +5,9 @@ DEPENDS += "xorgproto virtual/libx11 libxext libxt libxmu libxpm libxau xmlto-na
+ LIC_FILES_CHKSUM = "file://COPYING;md5=1c65719d42900bb81b83e8293c20a364"
  
--SRC_URI[sha256sum] = "eb4824f6f2c532cd3fc6a6bce7bf78ea7c6b949f8bdd07656b2c84344e757be8"
-+SRC_URI[sha256sum] = "40ab19aeb8de141fdc188cf2251213c9e7351bee4d0cd29db704fae68d1068cf"
+ PE = "1"
+-PR = "r2"
  
- UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
+-SRC_URI[md5sum] = "e5e06eb14a608b58746bdd1c0bd7b8e3"
+-SRC_URI[sha256sum] = "8ef8067312571292ccc2bbe94c41109dcf022ea5a4ec71656a83d8cce9edb0cd"
++SRC_URI[md5sum] = "c1ce21c296bbf3da3e30cf651649563e"
++SRC_URI[sha256sum] = "76aef98ea3df92615faec28004b5ce4e5c6855e716fa16de40c32030722a6f8e"
  
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-stacktrace-t.c-make-the-test-conditional.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-stacktrace-t.c-make-the-test-conditional.patch
-deleted file mode 100644
-index d8f672d744..0000000000
---- a/meta-oe/recipes-dbs/mysql/mariadb/0001-stacktrace-t.c-make-the-test-conditional.patch
-+++ /dev/null
-@@ -1,38 +0,0 @@
--From 966cbeb309f867ff4ac8e7f4462be4780e421700 Mon Sep 17 00:00:00 2001
--From: Mingli Yu <mingli.yu@windriver.com>
--Date: Mon, 25 Jan 2021 19:01:06 -0800
--Subject: [PATCH] stacktrace-t.c: make the test conditional
--
--Fixes:
--/prj/tmp/work/cortexa57-poky-linux-musl/mariadb/10.5.8-r0/recipe-sysroot-native/usr/bin/aarch64-poky-linux-musl/../../libexec/aarch64-poky-linux-musl/gcc/aarch64-poky-linux-musl/10.2.0/ld.bfd: /usr/src/debug/mariadb/10.5.8-r0/mariadb-10.5.8/unittest/mysys/stacktrace-t.c:36: undefined reference to `my_safe_print_str'
--
--Upstream-Status: Submitted [https://jira.mariadb.org/browse/MDEV-24131]
--
--Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-----
-- unittest/mysys/stacktrace-t.c | 2 ++
-- 1 file changed, 2 insertions(+)
--
--diff --git a/unittest/mysys/stacktrace-t.c b/unittest/mysys/stacktrace-t.c
--index 8fa0db15b36..d8408f80d76 100644
----- a/unittest/mysys/stacktrace-t.c
--+++ b/unittest/mysys/stacktrace-t.c
--@@ -29,6 +29,7 @@ void test_my_safe_print_str()
--   memcpy(b_stack, "LEGAL", 6);
--   memcpy(b_bss, "LEGAL", 6);
-- 
--+#ifdef HAVE_STACKTRACE
-- #ifndef __SANITIZE_ADDRESS__
--   fprintf(stderr, "\n===== stack =====\n");
--   my_safe_print_str(b_stack, 65535);
--@@ -48,6 +49,7 @@ void test_my_safe_print_str()
--   fprintf(stderr, "\n===== (const char*) 1 =====\n");
--   my_safe_print_str((const char*)1, 5);
-- #endif /*__SANITIZE_ADDRESS__*/
--+#endif /*HAVE_STACKTRACE*/
-- 
--   free(b_heap);
-- 
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch b/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
-index 32c9818ab0..1c76ab3918 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
-@@ -17,10 +17,10 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  3 files changed, 27 insertions(+), 1 deletion(-)
- 
- diff --git a/configure.cmake b/configure.cmake
--index bb3ad43..2ff4f19 100644
-+index 4fc324a9..23a2ea91 100644
- --- a/configure.cmake
- +++ b/configure.cmake
--@@ -861,7 +861,25 @@ int main()
-+@@ -862,7 +862,25 @@ int main()
-    long long int *ptr= &var;
-    return (int)__atomic_load_n(ptr, __ATOMIC_SEQ_CST);
-  }"
-@@ -48,10 +48,10 @@ index bb3ad43..2ff4f19 100644
-  IF(WITH_VALGRIND)
-    SET(HAVE_valgrind 1)
- diff --git a/mysys/CMakeLists.txt b/mysys/CMakeLists.txt
--index 6a3a1ef..e306ae7 100644
-+index 6aab788f..91b9c393 100644
- --- a/mysys/CMakeLists.txt
- +++ b/mysys/CMakeLists.txt
--@@ -140,6 +140,10 @@ TARGET_LINK_LIBRARIES(mysys dbug strings ${ZLIB_LIBRARY}
-+@@ -154,6 +154,10 @@ TARGET_LINK_LIBRARIES(mysys dbug strings ${ZLIB_LIBRARY}
-   ${LIBNSL} ${LIBM} ${LIBRT} ${CMAKE_DL_LIBS} ${LIBSOCKET} ${LIBEXECINFO})
-  DTRACE_INSTRUMENT(mysys)
-  
-@@ -63,10 +63,10 @@ index 6a3a1ef..e306ae7 100644
-    TARGET_LINK_LIBRARIES(mysys bfd)  
-  ENDIF(HAVE_BFD_H)
- diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
--index 4978d01..883a930 100644
-+index b9cd418f..d42e5017 100644
- --- a/sql/CMakeLists.txt
- +++ b/sql/CMakeLists.txt
--@@ -220,6 +220,10 @@ ELSE()
-+@@ -222,6 +222,10 @@ ELSE()
-    SET(MYSQLD_SOURCE main.cc ${DTRACE_PROBES_ALL})
-  ENDIF()
-  
-@@ -74,9 +74,9 @@ index 4978d01..883a930 100644
- +  TARGET_LINK_LIBRARIES(sql atomic)
- +ENDIF()
- +
-- IF(MSVC)
-+ IF(MSVC OR CMAKE_SYSTEM_NAME MATCHES AIX)
-    SET(libs_to_export_symbols sql mysys dbug strings)
-    # Create shared library of already compiled object
- -- 
--2.17.1
-+2.25.1
- 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.5.8.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.5.9.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb_10.5.8.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb_10.5.9.bb
+ do_install_append () {
+     ln -sf libXaw6.so.6 ${D}${libdir}/libXaw.so.6
 -- 
 2.25.1
 
