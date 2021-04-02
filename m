@@ -1,62 +1,68 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.15475.1617366904471420122
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
+ by mx.groups.io with SMTP id smtpd.web10.20567.1617388297548329641
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 02 Apr 2021 05:35:04 -0700
+ Fri, 02 Apr 2021 11:31:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=52498 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lSJ0w-0004S7-L3; Fri, 02 Apr 2021 15:35:03 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-aiohttp: Upgrade 3.7.4 -> 3.7.4.post0
-Date: Fri,  2 Apr 2021 15:34:55 +0300
-Message-Id: <20210402123455.23702-5-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210402123455.23702-1-leon.anavi@konsulko.com>
-References: <20210402123455.23702-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=bBKp0dyu;
+ spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f181.google.com with SMTP id c17so4071289pfn.6
+        for <openembedded-devel@lists.openembedded.org>; Fri, 02 Apr 2021 11:31:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:references:from:organization:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=B4rZwxc5Si2jIK99VKbDFage5cpzO1+CAckkVmjUF5U=;
+        b=bBKp0dyuout7H2Zx1oYvafqn3C9PWjxK15fuL9t+WCz1ozQ33vZTiLesoOUBscfLmi
+         O0AROQXqkCuCuCWwx/uW6rx8KxUvOSWBQlTuJHTqvz0p2cjFUGmN2KUyMV4Xus4UOAa6
+         94lqAHcO0qqBnIz5DReLDpBIChI6b8M2dT/0pYuyLulZfG57GImd1iRFD9kxuvqeAS5E
+         Oucy5EFh3CC7GgjTBfnnYJ+KzJJrjMG5TYv1tNfebwImHu6koFimc51Yc36i3nsIfFCw
+         ttOyQCqH4vzdfU1t+w7f9K96t/7r1V+OclA7NC5BIN9lvLUYI8fIAr5ae8riMc3d+qNz
+         Jk/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=B4rZwxc5Si2jIK99VKbDFage5cpzO1+CAckkVmjUF5U=;
+        b=MTO1EjAgbWkGeT+Onjb02c5TL45zOvBxVp3zbJ7xD1ibXe//EP9//Ohr+UMcQ05zUk
+         8RSwv5JzHJNwfcyyL8krQYDGBKCZPuFW164t8c2+wCTfI/opsS+8ldoTNfky3l8QLFQx
+         hneMvnBbbZorAJtYF3e+zhyJklHV6ZIT870qbyQE3wwKyOS+oP1oLfGFx5B6IjXrEFg7
+         g9ii57Zy5q+t/3xfnkDLyt16toIP8zVP9wZDk2BqDkFv1FPqB9Ix6UykBscq0i0oyLd5
+         4E/KgeX+dHnIe8YrgolfSHqPVp8M6uNGT6dr7uCqEc+G1zrCPR+Ew/NkBuGokdwR01gf
+         Qn5Q==
+X-Gm-Message-State: AOAM531l0cOFFNn12swSnhDirvZPJJk43lHbG7r+QAknPl2XjnZzYvpU
+	XM6FkvzbXBx2jYNa/kqtBOlgJal0thoOVw==
+X-Google-Smtp-Source: ABdhPJzRTVfpl77cUNbIpW3qT3W4l2lZb+UM+B/eGo08W/3O0tCvX7Nz3+0qw//4zd+6CaLCGzQ9Lg==
+X-Received: by 2002:a63:5361:: with SMTP id t33mr12896124pgl.439.1617388296549;
+        Fri, 02 Apr 2021 11:31:36 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:a0f0:8564:e4a5:b7a6:9dee? ([2601:646:9200:a0f0:8564:e4a5:b7a6:9dee])
+        by smtp.gmail.com with ESMTPSA id e3sm8823569pfm.43.2021.04.02.11.31.35
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 02 Apr 2021 11:31:36 -0700 (PDT)
+Subject: Re: [oe] [meta-perl][PATCH] libnet-ssleay-perl: add rdep on perl-module-autoloader
+To: Awais Belal <Awais_Belal@mentor.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20210330081327.2667-1-awais_belal@mentor.com>
+ <31669.1617365102303250650@lists.openembedded.org>
+From: "Khem Raj" <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <5829492e-0562-cb01-9b48-bef601e7efed@gmail.com>
+Date: Fri, 2 Apr 2021 11:31:34 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.9.0
+MIME-Version: 1.0
+In-Reply-To: <31669.1617365102303250650@lists.openembedded.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-Upgrade to release 3.7.4.post0:
+always check in master-next if its there then it will land in master 
+shortly.
 
-- Bumped upper bound of the chardet runtime dependency to allow
-  their v4.0 version stream.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- ...{python3-aiohttp_3.7.4.bb => python3-aiohttp_3.7.4.post0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-aiohttp_3.7.4.bb => python3-aiohttp_3.7.4.post0.bb} (88%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.7.4.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.7.4.post0.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-aiohttp_3.7.4.bb
-rename to meta-python/recipes-devtools/python/python3-aiohttp_3.7.4.post0.bb
-index 63d678389..8bf129d30 100644
---- a/meta-python/recipes-devtools/python/python3-aiohttp_3.7.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.7.4.post0.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/aio-libs/aiohttp"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3bf3d48554bdca1ea7fdb48de378c2ca"
- 
--SRC_URI[sha256sum] = "5d84ecc73141d0a0d61ece0742bb7ff5751b0657dab8405f899d3ceb104cc7de"
-+SRC_URI[sha256sum] = "493d3299ebe5f5a7c66b9819eacdcfbbaaf1a8e84911ddffcdc48888497afecf"
- 
- PYPI_PACKAGE = "aiohttp"
- inherit setuptools3 pypi
--- 
-2.17.1
-
+On 4/2/21 5:05 AM, Awais Belal wrote:
+> ping!
+> 
+> 
+> 
+> 
