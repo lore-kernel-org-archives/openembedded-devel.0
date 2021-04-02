@@ -1,113 +1,130 @@
-Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
- by mx.groups.io with SMTP id smtpd.web11.13747.1617354191774558271
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web08.13570.1617354652647180959
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 02 Apr 2021 02:03:11 -0700
+ Fri, 02 Apr 2021 02:10:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=XyaZa7Ct;
- spf=pass (domain: gmail.com, ip: 209.85.160.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f178.google.com with SMTP id l6so3376640qtq.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 02 Apr 2021 02:03:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=5AbZF5tPzohdKkwK4P0VSKjzqcrw4NvYgWYo5AVQpbk=;
-        b=XyaZa7Ct91kKxs1k9dY/WCNhzejGNnDJ73/TZh/K2suy7zuKIH0nv3lROlRPrhzxNE
-         svfo7t2C5g2EUkrc7wJVLGeTHW36F/X6Mho/4cpuWEODEIn2EG+TBO5IdIvqUaoDLL0B
-         uA9TcVEZyRY1fx0UgiDOLDHetO0NQ/cWMbkpxiAqC4N0uQdomBLmainu1VcwsihLX3oB
-         t8H/wiEfUCCxuVygKoAoADgTNd6mFYdmwVSby+30+2RWzrRGvbpqIJRDazT7Cgf4XF2g
-         CIPMG6kdHkKuA1FdnOonTprB6iUvaQHJ+bzjiv+vHbVV6fD6Qh6aKqqH2GhABdU9De8t
-         wjLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=5AbZF5tPzohdKkwK4P0VSKjzqcrw4NvYgWYo5AVQpbk=;
-        b=IPwTXO8T0zS5gwJfY97h9h2eFzAC1X1xBLUkTSRESV4HW+dNm4tHu7YBPAyjLVL+ob
-         xyWl1Lo/nMOuttWo1cbTR3GMXM1ekdDlioq+y+pG462iGw9thASa82iNGHAZxXmtASq0
-         oXtRsTE/Q4+L2qQ2UW8T+v6IRgSHGdUTqsJzjrJK3z9kQ8bYLDf0OjbeqO6tQ5E47Se1
-         Lnul+iY4o3LUR01Z0Mt7Xq0m0X/o393M40pNXWFnVRApDa40g6nk7JiPmZx+PY2AUlOS
-         Kf+nIMjY0jrNpmi72HL5W/C6lVQJT5p+Ydfo6JRBBnyz2SnsyZG6hTM8HD0zNfEcnS2b
-         c99A==
-X-Gm-Message-State: AOAM531S2Q/5RdwYe66i+WUDS2SU/yEgJ7hD+DxWHPobvJFxzDFvTF14
-	aVGX98s/PvXQ/wwKFCLUaXueA2SBhv+shJp1YZc=
-X-Google-Smtp-Source: ABdhPJzdy05L+qduxxL9CVoeX5YHInRvQorjHh/ej+TQP4banX2qM/tmRYTSE3ymlq1LvACGFtfiqbaA0rTpdRsRNAE=
-X-Received: by 2002:ac8:7dce:: with SMTP id c14mr10699722qte.82.1617354190805;
- Fri, 02 Apr 2021 02:03:10 -0700 (PDT)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: mingli.yu@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 1329AUbQ013654
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 2 Apr 2021 02:10:46 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2106.2; Fri, 2 Apr 2021 02:10:35 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2106.2 via Frontend Transport; Fri, 2 Apr 2021 02:10:34 -0700
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-networking][PATCH] freeradius: Upgrade to 3.0.21
+Date: Fri, 2 Apr 2021 17:10:33 +0800
+Message-ID: <20210402091033.5930-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <1617299739-4528-1-git-send-email-zangrc.fnst@fujitsu.com>
-In-Reply-To: <1617299739-4528-1-git-send-email-zangrc.fnst@fujitsu.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Fri, 2 Apr 2021 02:02:44 -0700
-Message-ID: <CAMKF1spEAY_Tev+NagyU4AZnhO+a=fu1hGk4-omaBykSigH+tQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH v2] xterm: upgrade 366 -> 367
-To: zangrc <zangrc.fnst@fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
 
-patch needs to be refreshed
+From: Mingli Yu <mingli.yu@windriver.com>
 
-i see
+Drop one patch at the issue is already fixed in new version
+(307678b268 Fix rlm_python3 build)
 
-ERROR: xterm-367-r0 do_patch: Fuzz detected:
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ ...python3-add-PY_INC_DIR-in-search-dir.patch | 58 -------------------
+ ...eradius_3.0.20.bb => freeradius_3.0.21.bb} |  3 +-
+ 2 files changed, 1 insertion(+), 60 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/freeradius/files/0001-rlm_python3-add-PY_INC_DIR-in-search-dir.patch
+ rename meta-networking/recipes-connectivity/freeradius/{freeradius_3.0.20.bb => freeradius_3.0.21.bb} (98%)
 
-Applying patch 0001-Add-configure-time-check-for-setsid.patch
-patching file configure
-Hunk #1 succeeded at 5605 (offset 194 lines).
-patching file configure.in
-patching file main.c
-Hunk #1 succeeded at 2903 (offset 35 lines).
-Hunk #2 succeeded at 4074 (offset 34 lines).
-patching file xtermcfg.hin
-Hunk #1 succeeded at 95 with fuzz 1 (offset -1 lines).
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/0001-rlm_python3-add-PY_INC_DIR-in-search-dir.patch b/meta-networking/recipes-connectivity/freeradius/files/0001-rlm_python3-add-PY_INC_DIR-in-search-dir.patch
+deleted file mode 100644
+index d63023162..000000000
+--- a/meta-networking/recipes-connectivity/freeradius/files/0001-rlm_python3-add-PY_INC_DIR-in-search-dir.patch
++++ /dev/null
+@@ -1,58 +0,0 @@
+-From 733330888fff49e4d2b6c2121a6050fdd9f11a87 Mon Sep 17 00:00:00 2001
+-From: Yi Zhao <yi.zhao@windriver.com>
+-Date: Thu, 6 Feb 2020 09:32:04 +0800
+-Subject: [PATCH] rlm_python3: add PY_INC_DIR in search dir
+-
+-The configure option --with-rlm-python3-include-dir is used to set
+-PY_INC_DIR which is never used and it fails to find Python.h,
+-so add it into search dir to fix it.
+-
+-Also remove SMART_LIBS from mod_flags because it introduces rpath
+-to LDFALGS which causes a do_package_qa error:
+-
+-ERROR: freeradius-3.0.20-r0 do_package_qa: QA Issue: package freeradius-python contains bad RPATH
+-/buildarea/build/tmp/work/core2-64-poky-linux/freeradius/3.0.20-r0/recipe-sysroot-native/usr/lib/python3.8/config in file
+-/buildarea/build/tmp/work/core2-64-poky-linux/freeradius/3.0.20-r0/packages-split/freeradius-python/usr/lib/rlm_python3.so.0.0.0
+-package freeradius-python contains bad RPATH
+-/buildarea/build/tmp/work/core2-64-poky-linux/freeradius/3.0.20-r0/recipe-sysroot-native/usr/lib/python3.8/config in file
+-/buildarea/build/tmp/work/core2-64-poky-linux/freeradius/3.0.20-r0/packages-split/freeradius-python/usr/lib/rlm_python3.so.0.0.0 [rpaths]
+-
+-Upstream-Status: Inappropriate [OE specific]
+-
+-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+----
+- src/modules/rlm_python3/configure.ac | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/src/modules/rlm_python3/configure.ac b/src/modules/rlm_python3/configure.ac
+-index a00320f..adbdf19 100644
+---- a/src/modules/rlm_python3/configure.ac
+-+++ b/src/modules/rlm_python3/configure.ac
+-@@ -95,7 +95,7 @@ if test x$with_[]modname != xno; then
+- 
+- 		old_CFLAGS=$CFLAGS
+- 		CFLAGS="$CFLAGS $PY_CFLAGS"
+--		smart_try_dir="$PY_PREFIX/include/python$PY_SYS_VERSION"
+-+		smart_try_dir="$PY_PREFIX/include/python$PY_SYS_VERSION $PY_INC_DIR"
+- 		FR_SMART_CHECK_INCLUDE(Python.h)
+- 		CFLAGS=$old_CFLAGS
+- 
+-@@ -114,13 +114,13 @@ if test x$with_[]modname != xno; then
+- 
+- 		eval t=\${ac_cv_lib_${sm_lib_safe}_${sm_func_safe}}
+- 		if test "x$t" = "xyes"; then
+--			mod_ldflags="$PY_LIB_LOC $PY_EXTRA_LIBS $SMART_LIBS -lm"
+-+			mod_ldflags="$PY_LIB_LOC $PY_EXTRA_LIBS -lm"
+- 			targetname=modname
+- 		else
+- 			FR_SMART_CHECK_LIB(python${PY_SYS_VERSION}m, Py_Initialize)
+- 			eval t=\${ac_cv_lib_${sm_lib_safe}_${sm_func_safe}}
+- 			if test "x$t" = "xyes"; then
+--				mod_ldflags="$PY_LIB_LOC $PY_EXTRA_LIBS $SMART_LIBS -lm"
+-+				mod_ldflags="$PY_LIB_LOC $PY_EXTRA_LIBS -lm"
+- 				targetname=modname
+- 			else
+- 				targetname=
+--- 
+-2.7.4
+-
+diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
+similarity index 98%
+rename from meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb
+rename to meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
+index 608d66b1b..864a4e944 100644
+--- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb
++++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
+@@ -26,7 +26,6 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0
+     file://freeradius-fix-quoting-for-BUILT_WITH.patch \
+     file://freeradius-fix-error-for-expansion-of-macro.patch \
+     file://0001-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch \
+-    file://0001-rlm_python3-add-PY_INC_DIR-in-search-dir.patch \
+     file://0001-raddb-certs-Makefile-fix-the-existed-certificate-err.patch \
+     file://0001-raddb-certs-Makefile-fix-the-occasional-verification.patch \
+     file://0001-workaround-error-with-autoconf-2.7.patch \
+@@ -34,7 +33,7 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0
+     file://radiusd-volatiles.conf \
+ "
+ 
+-SRCREV = "d94c953ab9602a238433ba18533111b845fd8e9e"
++SRCREV = "af428abda249b2279ba0582180985a9f6f4a144a"
+ 
+ PARALLEL_MAKE = ""
+ 
+-- 
+2.17.1
 
-
-The context lines in the patches can be updated with devtool:
-
-    devtool modify xterm
-    devtool finish --force-patch-refresh xterm <layer_path>
-
-Don't forget to review changes done by devtool!
-
-ERROR: xterm-367-r0 do_patch: QA Issue: Patch log indicates that
-patches do not apply cleanly. [patch-fuzz]
-
-On Wed, Mar 31, 2021 at 10:55 PM zangrc <zangrc.fnst@fujitsu.com> wrote:
->
-> -License-Update: Copyright year updated to 2021.
->
-> Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
-> ---
->  .../recipes-graphics/xorg-app/{xterm_366.bb => xterm_367.bb}  | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-graphics/xorg-app/{xterm_366.bb => xterm_367.bb} (89%)
->
-> diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_366.bb b/meta-oe/recipes-graphics/xorg-app/xterm_367.bb
-> similarity index 89%
-> rename from meta-oe/recipes-graphics/xorg-app/xterm_366.bb
-> rename to meta-oe/recipes-graphics/xorg-app/xterm_367.bb
-> index 969159bc5..e0d3dcec1 100644
-> --- a/meta-oe/recipes-graphics/xorg-app/xterm_366.bb
-> +++ b/meta-oe/recipes-graphics/xorg-app/xterm_367.bb
-> @@ -2,13 +2,13 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
->  SUMMARY = "xterm is the standard terminal emulator for the X Window System"
->  DEPENDS = "libxaw xorgproto libxext libxau libxinerama libxpm ncurses desktop-file-utils-native"
->
-> -LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=996b1ce0584c0747b17b57654cc81e8e"
-> +LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=987de9787175385203a1ea2482246a17"
->
->  SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz \
->             file://0001-Add-configure-time-check-for-setsid.patch \
->            "
->
-> -SRC_URI[sha256sum] = "858b2885963fe97e712739066aadc1baeba2b33a0016303a7fec7d38bc73bf6e"
-> +SRC_URI[sha256sum] = "27f1a8b1c756e269fd5684e60802b545f0be9b36b8b5d6bdbc840c6b000dc51f"
->
->  PACKAGECONFIG ?= ""
->  PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
-> --
-> 2.25.1
->
->
-> 
->
