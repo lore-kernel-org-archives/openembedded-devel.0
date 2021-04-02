@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.15706.1617366902093650314
+ by mx.groups.io with SMTP id smtpd.web09.15688.1617366902684291574
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 02 Apr 2021 05:35:02 -0700
+ Fri, 02 Apr 2021 05:35:03 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=52498 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lSJ0u-0004S7-8H; Fri, 02 Apr 2021 15:35:01 +0300
+	id 1lSJ0v-0004S7-1y; Fri, 02 Apr 2021 15:35:01 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-typeguard: Upgrade 2.11.1 -> 2.12.0
-Date: Fri,  2 Apr 2021 15:34:52 +0300
-Message-Id: <20210402123455.23702-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-decorator: Upgrade 4.4.2 -> 5.0.1
+Date: Fri,  2 Apr 2021 15:34:53 +0300
+Message-Id: <20210402123455.23702-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210402123455.23702-1-leon.anavi@konsulko.com>
 References: <20210402123455.23702-1-leon.anavi@konsulko.com>
@@ -30,32 +30,35 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.12.0:
+Upgrade to release 5.0.1:
 
-- Added @typeguard_ignore decorator to exclude specific functions
-  and classes from runtime type checking
+- Dropped support for Python < 3.5 with a substantial
+  simplification of the code base. Ported CI from Travis to
+  GitHub.
+- Fixed setup.cfg and python_requires in setup.py
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-typeguard_2.11.1.bb => python3-typeguard_2.12.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-typeguard_2.11.1.bb => python3-typeguard_2.12.0.bb} (87%)
+ .../{python3-decorator_4.4.2.bb => python3-decorator_5.0.1.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-decorator_4.4.2.bb => python3-decorator_5.0.1.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-typeguard_2.11.1.bb b/meta-python/recipes-devtools/python/python3-typeguard_2.12.0.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-typeguard_2.11.1.bb
-rename to meta-python/recipes-devtools/python/python3-typeguard_2.12.0.bb
-index 640adf83b..148806e10 100644
---- a/meta-python/recipes-devtools/python/python3-typeguard_2.11.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-typeguard_2.12.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/typeguard/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f0e423eea5c91e7aa21bdb70184b3e53"
+diff --git a/meta-python/recipes-devtools/python/python3-decorator_4.4.2.bb b/meta-python/recipes-devtools/python/python3-decorator_5.0.1.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-decorator_4.4.2.bb
+rename to meta-python/recipes-devtools/python/python3-decorator_5.0.1.bb
+index 23d0cf218..e9d20379f 100644
+--- a/meta-python/recipes-devtools/python/python3-decorator_4.4.2.bb
++++ b/meta-python/recipes-devtools/python/python3-decorator_5.0.1.bb
+@@ -9,8 +9,7 @@ decorator, just because you can."
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=be2fd2007972bf96c08af3293d728b22"
  
--SRC_URI[sha256sum] = "33243c1cbfcb9736a06c6db22dd08876b5f297e6344aa272a2862c0f8e669f64"
-+SRC_URI[sha256sum] = "fca77fd4ccba63465b421cdbbab5a1a8e3994e6d6f18b45da2bb475c09f147ef"
+-SRC_URI[md5sum] = "d83c624cce93e6bdfab144821b526e1d"
+-SRC_URI[sha256sum] = "e3a62f0520172440ca0dcc823749319382e377f37f140a0b99ef45fecb84bfe7"
++SRC_URI[sha256sum] = "1e53162e016f317a61d93848f00e80e7109ca9ed06846c7f2930cf0ebede7c6c"
  
- inherit pypi setuptools3 ptest
+ inherit pypi setuptools3
  
 -- 
 2.17.1
