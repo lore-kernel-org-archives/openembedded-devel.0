@@ -1,79 +1,95 @@
-Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
- by mx.groups.io with SMTP id smtpd.web12.10590.1617328734052546895
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.web10.10419.1617328734644768514
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 01 Apr 2021 18:58:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=HCsH//F+;
- spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f178.google.com with SMTP id h25so2738689pgm.3
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=P+LIfyHZ;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id a22-20020a17090aa516b02900c1215e9b33so3961631pjq.5
         for <openembedded-devel@lists.openembedded.org>; Thu, 01 Apr 2021 18:58:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=W3mcUHp1sREStpUNzqiKM/YAi7e4zHB2Kd+w6jYSLXs=;
-        b=HCsH//F+WAmp/UeFQRv3F4hl++2CtzV8dkpBMJGmzFXEwvW9TLrL+yIw01DjzNs66+
-         4h2HvbOV/PouL/drGSrgjNo//u8XN32pirnVLcmYINkoUlB7W/NPiYYdeDNf0EVIvVnD
-         Hv7iDPJWHi5RYG2AlKFxJSdEzkbcDFw6f8MIOvHomvw+Zj2kLc3LIFxVQdMmYr5zn6rp
-         suMSV2AWu1PxQhEO+6BLSiEGjRUeflAsm6dFfPw8ijyrdXZNlUpmjKdDFm/gMhanv5Dr
-         ihY4kmJFtRnIwd+fwBcyCZPMdicw8+e5cVbXjVHxeaMzOT6cr9NNg59U4tUpA3GTYc5E
-         bxpA==
+        bh=+6KA69BAN/SGZY7Oy7ChNm7T1TBulLJcs25ClSSCZyA=;
+        b=P+LIfyHZoTaBjUaYfdwblNrwCrAeKuUi6MUF0omTyhKAv6jIz7ZRLjKsH4V7aLDbTp
+         hsMeg/vbH8Nccf83IhJ6NbqqhonWgqw7VvN/1EyepECjoqlg7/qMD86Grb4NDtr2FfGj
+         CoBz6QMBJcWrmniK/FOsQotPRQ6jqPiHxcySdBNwHp1d3+cY9wKAPmQ2h+06W+sEa9zE
+         zG24FF+4D40bXZF6Zd2nRyUv6aOwuj6qWZjhFVJBruFj724XLXk97RLH6Pw6EN2YydBK
+         yPz4hzHg7YXt6jCilEeTfs/XBXrS6ifY/6Yd2sMS8uj4RuHr3Ddvb0GB9+px7IoYhCnC
+         +X1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=W3mcUHp1sREStpUNzqiKM/YAi7e4zHB2Kd+w6jYSLXs=;
-        b=nZ56WC7J6wY6MUP70JovoaGqEhygUl8ymlaiD3s/CSFzqaMX2u/eG2vBSBktp3X4BK
-         396gruSPZ+Sg5WU1R3VnnSNdAVHjwNCwJoTIgXmORt2Fhl0YgujiRKZz3ub9rh0nXSvy
-         R1FEpNKcxDEE2z9Qxa3OOneHN8+8J5CwsbXOnSkZ6PyZ6TOCXAAJ9HAvUJ92jTSSy6Ak
-         jlbTcKu2tSi8mEuiZEn7y6hHLcYgTmOijx8nEALy7qX5487mS+VnbUQA2fsfh5ReT3oN
-         jDqmHWGDIB1v9Ml8dA8F/SCcPccjkhi5mxPOfEscwbIUbMH6vM/wXj+7p7iguT4fO4zF
-         8y0g==
-X-Gm-Message-State: AOAM531XzRa1zqi1xbAcf1mJ6EUbQ1xH4SUv++yyMm1mvDdW/2/iewYL
-	sbDZ7zird6bIwH9RuFthGv4MM26E5SI=
-X-Google-Smtp-Source: ABdhPJw1ZlzY0bjqU4+WMP9bm3Sk0Ck/xWMuVxwilbwTXDT+sXmBCs06o1SQrhEUzhvoAai2cPZJWA==
-X-Received: by 2002:a63:338e:: with SMTP id z136mr10023241pgz.115.1617328733359;
-        Thu, 01 Apr 2021 18:58:53 -0700 (PDT)
+        bh=+6KA69BAN/SGZY7Oy7ChNm7T1TBulLJcs25ClSSCZyA=;
+        b=hW2cVgwlKjO4dU/mm3VvVQdBMppC0oXBQzHu5s1HXicPHcybj9qWmdncgFGozJY7c3
+         QtZs0r646lCuClsoiZ10VY2PwqkRWczBzbrlDHifk8HiVjyLNitQLQ7QM02qtyQlMbU6
+         p0EYb0vrS+9d4qF4uwZXw+mw4tMVe9MR1xGN8/LheNmP0g+2jdlkGZKB4Pt1xQnb2Iy5
+         LWA4jJWmmWxPLeL7vG+MbM9QT/wDxEqNLAMfHbJDLnQ91OY83XvMCRx/NTln6UPsWklp
+         Zi6E7r2q1AT4//S2Yh2wrEezwE0C7VM8cIpDMIYbzOXcxSB2bpnFas8fjOlYO9zpZM2Q
+         5l+A==
+X-Gm-Message-State: AOAM530Ik/b9lkHwZw6D3rOXHe+hH1peGwpFTQbz4XT3auETZugNOJNq
+	iLTAgrryqBMnn0Vxnv+qcykOfQDGGE0=
+X-Google-Smtp-Source: ABdhPJw9Ykj5vT0LHfMkXwme7tPbRVUE4CnclMN6MmDTV3V47lfByn4b/k6kmTyy3unRT/xTOABshQ==
+X-Received: by 2002:a17:90b:2284:: with SMTP id kx4mr11241107pjb.96.1617328734002;
+        Thu, 01 Apr 2021 18:58:54 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:344e:3d2c:47a3:4e6b])
-        by smtp.gmail.com with ESMTPSA id x9sm707641pfd.158.2021.04.01.18.58.52
+        by smtp.gmail.com with ESMTPSA id x9sm707641pfd.158.2021.04.01.18.58.53
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Thu, 01 Apr 2021 18:58:53 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 07/14] netkit-telnet: Update SRC_URI
-Date: Thu,  1 Apr 2021 18:58:35 -0700
-Message-Id: <04e4adcae0fbd4f62a9884585de5dd8f787704c4.1617328609.git.akuster808@gmail.com>
+Subject: [gatesgarth 08/14] rapidjson: Upgrade SRCREV to latest
+Date: Thu,  1 Apr 2021 18:58:36 -0700
+Message-Id: <910ac74e68810e725a95ebc8f4b2b581295319df.1617328609.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617328609.git.akuster808@gmail.com>
 References: <cover.1617328609.git.akuster808@gmail.com>
 
-From: Mingli Yu <mingli.yu@windriver.com>
+From: Harpritkaur Bhandari <harpritkaur.bhandari@kpit.com>
 
-Fix the below do_fetch warning:
-WARNING: netkit-telnet-0.17-r0 do_fetch: Failed to fetch URL http://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-telnet-0.17.tar.gz, attempting MIRRORS if available
+Upgrade SRCREV to latest as it fixes the below issue:
+Running UndefinedBehaviorSanitizer on projects that use
+rapidjson triggers 'applying non-zero offset <NN> to null
+pointer' findings in 'internal/stack.h' which are hard
+to suppress by library users.
+Removed "0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch"
+as the changes are already incorporated in the latest
+codebase.
+As per abi-compliance-checker report the source compatibility
+and binary compatibility between previous SRCREV
+6a905f9311f82d306da77bd963ec5aa5da07da9c and current
+SRCREV 0ccdbf364c577803e2a751f5aededce935314313
+is 100% and this patch is already tested on 64bit
+ARM (aarch64) in a product with on target CI tests.
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit f555f9d34f93118bb4dbe1ae45ba0657c585ee4f)
+(cherry picked from commit 04d9ea0ba7ece968244bf049893dd5636675b76f)
+Signed-off-by: Harpritkaur Bhandari <Harpritkaur.Bhandari@kpit.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb          | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-index 08dd532b62d..c05d0fd6c6a 100644
---- a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-@@ -5,7 +5,7 @@ DEPENDS = "ncurses"
- LICENSE = "BSD-4-Clause"
- LIC_FILES_CHKSUM = "file://telnet/telnet.cc;beginline=2;endline=3;md5=780868e7b566313e70cb701560ca95ef"
+diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+index e3ed9c6a17d..5b5c8b25708 100644
+--- a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
++++ b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+@@ -4,10 +4,9 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://license.txt;md5=ba04aa8f65de1396a7e59d1d746c2125"
  
--SRC_URI = "http://ftp.linux.org.uk/pub/linux/Networking/netkit/${BP}.tar.gz \
-+SRC_URI = "${DEBIAN_MIRROR}/main/n/netkit-telnet/netkit-telnet_${PV}.orig.tar.gz \
-            file://To-aviod-buffer-overflow-in-telnet.patch \
-            file://Warning-fix-in-the-step-of-install.patch \
-            file://telnet-xinetd \
+-SRC_URI = "git://github.com/miloyip/rapidjson.git;nobranch=1 \
+-           file://0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch"
++SRC_URI = "git://github.com/miloyip/rapidjson.git;nobranch=1"
+ 
+-SRCREV = "6a905f9311f82d306da77bd963ec5aa5da07da9c"
++SRCREV = "0ccdbf364c577803e2a751f5aededce935314313"
+ 
+ PV = "1.1.0+git${SRCPV}"
+ 
 -- 
 2.17.1
 
