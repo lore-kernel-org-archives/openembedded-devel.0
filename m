@@ -1,154 +1,97 @@
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.web08.10602.1617328736320759897
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
+ by mx.groups.io with SMTP id smtpd.web11.10664.1617328737159163495
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Apr 2021 18:58:56 -0700
+ Thu, 01 Apr 2021 18:58:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=CoV0m/P3;
- spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id t18so2049832pjs.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Apr 2021 18:58:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=OMoSbW2i;
+ spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f175.google.com with SMTP id s11so2720314pfm.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Apr 2021 18:58:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=HGkPKXbjXe85mMhuQwB4iTR/VaA+cpSosTGO99ba+pU=;
-        b=CoV0m/P3thDE90fcalJaHArOMOTr8CIj2TFTBAuSptAN0JAhyEI/Xz91x6k75vCz47
-         JtZ8tcr66/DKcJRY8GZ+hyJ9ZKBeSnkThCwf54k9CvHYfqvBgwpeGdRkpBlI94gxkE96
-         i6edzmoOvtRsso04eYQl72vxpoTu1QkypgrMYhA3aKHPpBL+2II6cvalIp4x/O3nQ+kp
-         MSKC5lp5BpwHxSkv2QuZGm4a1eddptOv9qOIzXamEijS3rVBh72SanV8MrEZT8UZTEWa
-         +itDYG80PJQN217mx6jm8uZwr9EMJICqQ6JRLk+ze3bEwZPud6wcEHwM6wGxFXcAabA8
-         CXKg==
+        bh=ymVIt08BRhEE1ai6JFlS63Dgjq7AlSPeycHkRgbZ3GI=;
+        b=OMoSbW2isYr38iNPHy/0FanCUT72/Z6u87mspaPmQF0Yv/YtaenAPP7vuy99apEpbG
+         oQFiUYlZpqSC72CDBr7TJWVXK+mfj7dHSSNuGY5YKddUO4syRm11rxxQ9EFphlyOnZs3
+         1umX0VisjTU8ihGSAHNkpO89R3MZaZQpL/ZxfbwiiAjHdvj1WmSOrKzL9cw1XU6ds/gw
+         NTu+W2q3wIM6yLTtdj9iP/91Owt0/86OZcspdJmV4f6uqKK4tsFkiP6OdG5Qh0mrftzc
+         Tqa0mZahIeb37REna4uZfcYnmPgikNQeLD2cW6r7q9SmboZpz41rn97BuI0QhhBWS62t
+         oGhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=HGkPKXbjXe85mMhuQwB4iTR/VaA+cpSosTGO99ba+pU=;
-        b=i9tc7OT7Ojnng1J2U382kVE1MW7zIzS9B8Q9/b4nkAPG3uqGq3ee8WTw/r4j3s4A67
-         pI/ZWYEbV5VBmqIKxUZbOsC+lp1I89S4+J8Uva4zTtu67bzxHQ0s37+QMzryrJpy+ygD
-         FgyQ70krxGfURB9R43fQWeX7lbe0jrNEeH2hd2js3h1yKyhvqz5DJ+BK7xRmAjazG4vB
-         D8Qz25v2J+TsXEQcSjCseVNvelxQRVMcWzw2c3l20UhF2DFFNUWy0ruHCm+jzw3svKSj
-         5tMvb/eKAY3xqeDWcZPwu74/PmjxMjln5EFNHi1xf4VTCh+txQqkAZmhv8mK6UvJ+HgJ
-         8B1w==
-X-Gm-Message-State: AOAM532LTppCe9+Sa2L7BhZvBJl+Lheq7vbImoGhwpnMD8qf07wAA4Qz
-	IlFPyw6zSg55b1i3b2IztetOuIHPRm8=
-X-Google-Smtp-Source: ABdhPJw346fH9MmNFEbNqwebvWl0/V4bKExxJdYgbVrYRtRdf/MWJqSowI+hhAxycf5jvoakHw4jtQ==
-X-Received: by 2002:a17:90a:8c08:: with SMTP id a8mr11693092pjo.136.1617328735715;
-        Thu, 01 Apr 2021 18:58:55 -0700 (PDT)
+        bh=ymVIt08BRhEE1ai6JFlS63Dgjq7AlSPeycHkRgbZ3GI=;
+        b=Yrzo/v4bzGWUEfm9+fQ1fU6JX6FSbsiktDttuoQedGQbRRc7ntpFSL8JMoQeAaJ/x3
+         zi3CDz8ctKQ2riC1YilThn4rtpQ8naT52gZzLaP20lY7lrBvK/TSkVZUPKCAaT/TvUxG
+         RKi3/Z7L8KFmIUCyosIbjY0HAwlMGJTLANX9ILNPc1Uzr0EMtM853seHx1tu/kq0P1BF
+         iV1xDsVE4enm8g0hpZGqtLAu/vwRfy1YzAsCwQQPj/blw1M6uHCkH2Nip2Koh0hOt9NB
+         CEjGxC2O6o+dZa1FRvCN+cBpcrqHQkdvFIAlAFrq/m/0/eGIVzqUil0E07zeXgPvUNd5
+         JqpQ==
+X-Gm-Message-State: AOAM5310eHQIb7SzyZRyZhdD12EzaohSsi2jtaqz+TtPdz2oPRVhIvWh
+	veEZqjb0aems08hITl7/2sNQU19qvxA=
+X-Google-Smtp-Source: ABdhPJybnTpv6W5hc0lvjsQg1ubQrjplho7BrqyPEsJqz/fwZsdAQ4g+QmmL4IMjYhzPkmF2NLKciA==
+X-Received: by 2002:a62:7c17:0:b029:1f1:9ef7:163a with SMTP id x23-20020a627c170000b02901f19ef7163amr10063658pfc.51.1617328736511;
+        Thu, 01 Apr 2021 18:58:56 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:344e:3d2c:47a3:4e6b])
         by smtp.gmail.com with ESMTPSA id x9sm707641pfd.158.2021.04.01.18.58.55
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Apr 2021 18:58:55 -0700 (PDT)
+        Thu, 01 Apr 2021 18:58:56 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 10/14] neon: Add ptest
-Date: Thu,  1 Apr 2021 18:58:38 -0700
-Message-Id: <ac235c6ceebdc3bb55c2b8cd8e83c906da6523ff.1617328609.git.akuster808@gmail.com>
+Subject: [gatesgarth 11/14] ceres-solver: prevent fetching git hook during do_configure
+Date: Thu,  1 Apr 2021 18:58:39 -0700
+Message-Id: <fc9256806479e99cef9a89ee4a27d4c895ebaa8e.1617328609.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617328609.git.akuster808@gmail.com>
 References: <cover.1617328609.git.akuster808@gmail.com>
 
-From: "Aditya.Tayade" <Aditya.Tayade@kpit.com>
+From: Martin Jansa <Martin.Jansa@gmail.com>
 
-Reused below test suites from neon source package:
-BASIC_TESTS:
-auth
-basic
-request
-session
-socket
-string-tests
-stubs
-uri-tests
-util-tests
+* today I've found 2 jenkins jobs stuck way too long sitting in this do_configure
+  Bitbake still alive (5000s)
+  Bitbake still alive (10000s)
+  Bitbake still alive (15000s)
+  Bitbake still alive (20000s)
+  Bitbake still alive (25000s)
+  Bitbake still alive (30000s)
+  ... manually killed, the CMake ...
+  ERROR: ceres-solver-1.14.0-r0 do_configure: Execution of 'ceres-solver/1.14.0-r0/temp/run.do_configure.39438' failed with exit code 143:
+  ...
+  | -- Detected Ceres being used as a git submodule, adding commit hook for Gerrit to: ceres-solver/1.14.0-r0/git/.git
+  | ceres-solver/1.14.0-r0/temp/run.do_configure.39438: line 213: 39485 Terminated              cmake -G 'Ninja' -DCMAKE_MAKE_PROGRAM=ninja ...
 
-DAV_TESTS:
-acl3744
-lock
-oldacl
-props
-xml
-xmlreq
+  I've seen it with dunfell and gatesgarth, but master has the same
+  ADD_GERRIT_COMMIT_HOOK function (just in newer ceres-solver release),
+  so probably needs the same.
 
-Overall execution time of above test suite is approximately 15sec.
-
-Signed-off-by: Neetika.Singh <Neetika.Singh@kpit.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/neon/neon/run-ptest | 25 +++++++++++++++++++++
- meta-oe/recipes-support/neon/neon_0.30.2.bb | 15 ++++++++++++-
- 2 files changed, 39 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/neon/neon/run-ptest
+ .../recipes-support/ceres-solver/ceres-solver_1.14.0.bb   | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/meta-oe/recipes-support/neon/neon/run-ptest b/meta-oe/recipes-support/neon/neon/run-ptest
-new file mode 100644
-index 00000000000..602084a52c1
---- /dev/null
-+++ b/meta-oe/recipes-support/neon/neon/run-ptest
-@@ -0,0 +1,25 @@
-+#!/bin/sh
-+
-+set -eux
-+
-+rm -f debug.log child.log
-+
-+ulimit -c unlimited
-+ulimit -t 120
-+
-+cd test
-+echo foobar > foobar.txt
-+
-+BASIC_TESTS="auth basic redirect request session socket string-tests \
-+             stubs uri-tests util-tests"
-+DAV_TESTS="acl3744 lock oldacl props xml xmlreq"
-+for t in $BASIC_TESTS $DAV_TESTS
-+do
-+    echo "Running $t..."
-+    if "./$t"
-+    then
-+        echo "PASS:$t"
-+    else
-+        echo "FAIL:$t"
-+    fi
-+done
-diff --git a/meta-oe/recipes-support/neon/neon_0.30.2.bb b/meta-oe/recipes-support/neon/neon_0.30.2.bb
-index 00b79f6330b..7feec41d626 100644
---- a/meta-oe/recipes-support/neon/neon_0.30.2.bb
-+++ b/meta-oe/recipes-support/neon/neon_0.30.2.bb
-@@ -7,12 +7,13 @@ LIC_FILES_CHKSUM = "file://src/COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a
+diff --git a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.0.bb b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.0.bb
+index ac463038aac..105610be5aa 100644
+--- a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.0.bb
++++ b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.0.bb
+@@ -13,6 +13,14 @@ S = "${WORKDIR}/git"
  
- SRC_URI = "${DEBIAN_MIRROR}/main/n/neon27/neon27_${PV}.orig.tar.gz \
-            file://pkgconfig.patch \
-+           file://run-ptest \
-           "
+ inherit cmake
  
- SRC_URI[md5sum] = "e28d77bf14032d7f5046b3930704ef41"
- SRC_URI[sha256sum] = "db0bd8cdec329b48f53a6f00199c92d5ba40b0f015b153718d1b15d3d967fbca"
- 
--inherit autotools binconfig-disabled lib_package pkgconfig
-+inherit autotools binconfig-disabled lib_package pkgconfig ptest
- 
- # Enable gnutls or openssl, not both
- PACKAGECONFIG ?= "expat gnutls libproxy webdav zlib"
-@@ -33,6 +34,18 @@ do_compile_append() {
-     oe_runmake -C test
- }
- 
-+do_install_ptest(){
-+    BASIC_TESTS="auth basic redirect request session socket string-tests \
-+                 stubs uri-tests util-tests"
-+    DAV_TESTS="acl3744 lock oldacl props xml xmlreq"
-+    mkdir "${D}${PTEST_PATH}/test"
-+    for i in ${BASIC_TESTS} ${DAV_TESTS}
-+    do
-+        install -m 0755 "${B}/test/${i}" \
-+        "${D}${PTEST_PATH}/test"
-+    done
++do_configure_prepend() {
++    # otherwise https://github.com/ceres-solver/ceres-solver/blob/0b748597889f460764f6c980a00c6f502caa3875/cmake/AddGerritCommitHook.cmake#L68
++    # will try to fetch https://ceres-solver-review.googlesource.com/tools/hooks/commit-msg durind do_configure
++    # which sometimes gets stuck (as there is no TIMEOUT set in DOWNLOAD)
++    # and we really don't need Gerrit's Change-Id tags when just building this
++    touch ${S}/.git/hooks/commit-msg
 +}
 +
- BINCONFIG = "${bindir}/neon-config"
- 
- BBCLASSEXTEND = "native"
+ # We don't want path to eigen3 in ceres-solver RSS to be
+ # used by components which use CeresConfig.cmake from their
+ # own RSS
 -- 
 2.17.1
 
