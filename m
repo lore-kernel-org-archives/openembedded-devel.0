@@ -1,77 +1,92 @@
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
- by mx.groups.io with SMTP id smtpd.web10.34384.1617479834496352675
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
+ by mx.groups.io with SMTP id smtpd.web12.35208.1617484031400961433
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 03 Apr 2021 12:57:14 -0700
+ Sat, 03 Apr 2021 14:07:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=uKd1MrTn;
- spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f46.google.com with SMTP id f8so4642535edd.11
-        for <openembedded-devel@lists.openembedded.org>; Sat, 03 Apr 2021 12:57:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Rs9BLmt7;
+ spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f43.google.com with SMTP id a7so11812350ejs.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 03 Apr 2021 14:07:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=T3ZYYPb7MbCzK7PC4YzugAh+thWt95IP7d/JjM7rITw=;
-        b=uKd1MrTnULR1Vd34jibm4ikdCiZSlmhexD2looc7BANp1Uri+7Vdc80XPnmqNKfbJs
-         LCydo2nnSDbq2yj5KXu/jVgt54g7A+vxa0fzLo7aOje8JiDnLJHsIewmhcnzFuHyUne5
-         UvAk+t1V+pJq2UOr7PRY8r5pTyRyVh4AgEask4G0A/pmS+JsKBFmuQlOQLeGVCj8OyFT
-         r1dCs278P6U8qcepqHFjDXJJfsDifr9TxMqNr5osHJd6co1us9vWM1tMLBWtTpKL525K
-         KTmfX5xAQCG1GTcTC5OBCA9yEf48HHR4YVOjNO/B9BPZvuIDkyENUJmYXRP1JKSG8svC
-         2k7Q==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=TfZvONYVsPi41Q21ci1yhsKGb3s93yswN+bisIFLDwQ=;
+        b=Rs9BLmt7EcBmantc5ZyLZ2AgC7+1prMyF2qZNXfoCe4aPYne7Ucw0OuCSHs2eMPk4z
+         7AlmxZH4XO/WCiq7YTJK3LAAZJL2uBJYvl9QR7h5fWWnNC2IFKDA11xcZxC1YyKFpZLI
+         lh4unIKQiuxh5aYO9Ylt8k4EdLpQxC1XbO6tZgtG5OJc0FmDIU8INhtYpRuN9FXbApu9
+         wxUoskYKmQwNgEVKO7eFaIlCKaxalB1SIzq9e1S5ydV3QNXJQ+I7yig9AztVnclkBoFQ
+         QhLDBWPxJm537j4sRI3tZnEfYBcC4JmqPulcJ9HyIQ9t6Co2nu4c/Qk1rlg7pyNBSiCu
+         oIMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=T3ZYYPb7MbCzK7PC4YzugAh+thWt95IP7d/JjM7rITw=;
-        b=dmwNvz3gVKygQHPOBb8aiMlFGkaWXVMRXdQHy3Qb7hS9LTAn6AxFjZ2O78wSpxTSV1
-         Rlp6M25y/pXH6rzOJs1Obs/lr4vmZCimq+wM7fy/DUnsCwTBzybh1zSoJbPYHQgUIaLM
-         sy6WA0F0YLTV/nikelD8eohdEJ/z15h2AQDDHeilv7OoQihf4FEyXleqNlWOwBhTZJWr
-         JZs+gnvk9cId/5RCzEegSVqchSL11VYTSgqlAPHB9SXSiE4By8BkGo4Et45nVqsTRlS/
-         XH6ETsgFMf0F/ZuWpRW6YfqdXOGAxB/Hdhku3/P2ugEVjaTGFGeTnHLXzitXFxRHrG/h
-         UHZQ==
-X-Gm-Message-State: AOAM531dFc6c2t3JLWyTrdfmJRPh+66/3T0/Sc9ZBAAa1Dm4iv0f1skg
-	iRqH+jrnA9/BkoQbBVLCb+g7ogsVuZs=
-X-Google-Smtp-Source: ABdhPJy7vx7hcm3Da7RIoF2S1sbZAkyTpyxO9SRmUt1UbJy7rqK9jarTN4S/ubjeOZX+qK0JNDKfIA==
-X-Received: by 2002:a05:6402:510b:: with SMTP id m11mr22844609edd.103.1617479833109;
-        Sat, 03 Apr 2021 12:57:13 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=TfZvONYVsPi41Q21ci1yhsKGb3s93yswN+bisIFLDwQ=;
+        b=Ostqg/JDhhIPFe8dtqKQlpiLgxA4FoTMhE8ETX6HVViojGLbAteLjlWa6wH1jJdkv2
+         g5oMtlRlilkrGQBQxU3ZfAAo6gUjimkZDLC6Jg/Tq7mCRKRcvs7qsHtpqWy3D2AQKwtn
+         UcFUNBOgLoBpY0+4Yd51tH04ryaVtdoeBe3SDWDxwQIlQbl/TE0NXnm447WFMFBFomRl
+         mWQyQSVuUHAyR+qtv/04RhTWH+uM63A8zC6CeMDaeHxYt0U7l60htIY60nZH4PX0hdaS
+         hbvGtLc+gz0y9iXnLKLsZuO2nBYh6DT112gXXl7jeZ90rPFC7RZBygfXh6Nkt9Sz4bT/
+         EoMg==
+X-Gm-Message-State: AOAM533vi1oTYAvz/rRWFPekQMZNMSlYjdD1YBp+CiWvt6rmJqCX4Gag
+	xqeBLrQwHJcAAKm4y6UgL43R/gXom3k=
+X-Google-Smtp-Source: ABdhPJwuysbMBafaFhJo1178zU8Gu7gHVV2wtYHujwZTfKpKyc6K8+EcKuHN1yFZhrvUMdoGk1Pzlw==
+X-Received: by 2002:a17:906:4705:: with SMTP id y5mr20857818ejq.119.1617484029872;
+        Sat, 03 Apr 2021 14:07:09 -0700 (PDT)
 Return-Path: <martin.jansa@gmail.com>
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id k26sm5897561ejk.29.2021.04.03.12.57.12
+        by smtp.gmail.com with ESMTPSA id gb4sm5890028ejc.122.2021.04.03.14.07.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Apr 2021 12:57:12 -0700 (PDT)
+        Sat, 03 Apr 2021 14:07:09 -0700 (PDT)
 From: "Martin Jansa" <Martin.Jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/2] telepathy-glib: respect GI_DATA_ENABLED when enabling vala-bindings
-Date: Sat,  3 Apr 2021 21:57:10 +0200
-Message-Id: <20210403195710.1402036-2-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 1/2] packagegroup-meta-oe: include glfw, icewm, geis only with x11 in DISTRO_FEATURES
+Date: Sat,  3 Apr 2021 23:07:05 +0200
+Message-Id: <20210403210706.1427733-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210403195710.1402036-1-Martin.Jansa@gmail.com>
-References: <20210403195710.1402036-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+* and also opengl for glfw
+
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb   | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb b/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb
-index 2b05c61a0d..4d4e841f62 100644
---- a/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb
-+++ b/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb
-@@ -12,7 +12,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e413d83db6ee8f2c8e6055719096a48e"
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index eb6cb3592f..d5e5aa01cd 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -191,7 +191,7 @@ RDEPENDS_packagegroup-meta-oe-core = "\
+     usleep \
+     dbus-cxx \
+ "
+-RDEPENDS_packagegroup-meta-oe-core_append_libc-glibc = " glfw"
++RDEPENDS_packagegroup-meta-oe-core_append_libc-glibc = " ${@bb.utils.contains("DISTRO_FEATURES", "x11 opengl", "glfw", "", d)}"
+ RDEPENDS_packagegroup-meta-oe-core_remove_riscv64 = "safec"
+ RDEPENDS_packagegroup-meta-oe-core_remove_riscv32 = "safec"
  
- inherit autotools pkgconfig gettext gobject-introspection vala
- 
--EXTRA_OECONF = "--enable-vala-bindings"
-+# Respect GI_DATA_ENABLED value when enabling vala-bindings:
-+# configure: error: GObject-Introspection must be enabled for Vala bindings
-+EXTRA_OECONF = "${@bb.utils.contains('GI_DATA_ENABLED', 'True', '--enable-vala-bindings', '--disable-vala-bindings', d)}"
- 
- FILES_${PN} += "${datadir}/telepathy \
-                 ${datadir}/dbus-1"
+@@ -354,7 +354,7 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
+      libuio \
+      ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libwmf", "", d)} \
+      lprng \
+-     icewm \
++     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "icewm", "", d)} \
+      md5deep \
+      indent \
+      jansson \
+@@ -711,7 +711,6 @@ RDEPENDS_packagegroup-meta-oe-support ="\
+     ace-cloud-editor \
+     frame \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geis", "", d)} \
+-    geis \
+     grail \
+     asio \
+     augeas \
 -- 
 2.30.2
 
