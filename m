@@ -1,92 +1,92 @@
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web12.35286.1617484468516018331
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+ by mx.groups.io with SMTP id smtpd.web10.36385.1617491011280665230
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 03 Apr 2021 14:14:28 -0700
+ Sat, 03 Apr 2021 16:03:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=DJAbbsMA;
- spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f49.google.com with SMTP id ap14so11867795ejc.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 03 Apr 2021 14:14:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=j394u1DE;
+ spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f42.google.com with SMTP id b16so8930946eds.7
+        for <openembedded-devel@lists.openembedded.org>; Sat, 03 Apr 2021 16:03:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=827XEW5rJRr58Ee1vPGoWGyiO/EzhGsaMbvxc8W30IA=;
-        b=DJAbbsMApwJGIUpBhMO3kS5BcLqSEB0+SuHzIgpgW0jEgHRHed9HaiJEZHSpHKwjPx
-         GH9A8GCUDs8KmTXm5UlBhQcG9fKcZXKM1jPgr1Meblo+GpxpQN2Dn0ZjdEceJvD7nx3S
-         1CxTqrc3xiqRTHzcgRStzuJklI9LzLSrIAATZEqzihOUz8KKa8BhrJt4kg9bern0MR2q
-         kIndwrXZkfnMqadWZYa7qgdHGtL3mNgkgVaNEFxU3KHPK1sw/bmbYUKmcLBwYVYz9CpC
-         RL9TsvhbtgEnOQs+urIT+vGw4WdUBdSbhZPXVSy8hGwf/ZeHtSm59byZ8J64j4ObhGst
-         KWyg==
+        bh=OTu62MGaiDDjQw5xpFYVOhdRv5m0tje4azGVnwRZNU0=;
+        b=j394u1DECQ+/mCsJTfzQrMCAgDKno0/gfTOF3lQ2iW46XNxEDJZcu8xyzvHpGzE+6B
+         brczbPKUBoOQmSaSVtk56ceioDYvyHlFFK6JutHdpl8lltkPnMyy8Jr1VGsJYQydpq1m
+         fOMhJfXuFsthVTgWsjxM4HLXpMAOxqx1l36d4x0n+iHJTecSSZ3C/hxhtvdaCXMfehM1
+         BkIf+xlYcV06//TA2Gkru7SxQwB2LJ/gWZikWCk4IdyLcMqOM4QpILLhdp6OSSChCYlj
+         dFVXR1mD7r3bqBYARTBjX0RSMSj1Rud5i1AOWgGpzR9413EjKlbZtpdkHeov4JSZbjHI
+         Jbwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=827XEW5rJRr58Ee1vPGoWGyiO/EzhGsaMbvxc8W30IA=;
-        b=EtBL30p1fS9A95YhZvDeUxb9YUFzpi1ihu+Ipti7A5dPGIKr17weO9p5ThtK8vbOuc
-         X3I5C2EPemo0LLLh0COcHwjNezqSXQqTGhJeavevVUawqvpv0BbrhGnMF1dlMkNId7MZ
-         ImiVeFQbQvkCJPVnmuydM5JH1+4dCps69GEDMeJ64VneQI6sDxb+ueSTIXrNiFka5QaE
-         htPHJsr3rvvS+TrzzIaTxwOqco2WEj7Rt6aHpY5i7nrX0FYzfj9vDxFpYiinrL+APpTv
-         S2/Q5yy5kQlD5esXJztbNb2ZJZ0IhE6e2lQdpoNx+KmMjUXc03ix/S/hOgvTCrd8gHQx
-         Jwpg==
-X-Gm-Message-State: AOAM532rtuQbi4bLhyYNV2Qy8tM98rGTuTJKqUzEIzNXzqaQlCRokPqh
-	m57pl+uuRJ9iQdoMPeAYe3qfy8AUzHM=
-X-Google-Smtp-Source: ABdhPJx9023DvuyA/mMdhq44RrcfiyFXvbhUENzySfNThQXZnQWm3QK2GTWxiwNmaTDl6EWJuEtSoA==
-X-Received: by 2002:a17:906:565a:: with SMTP id v26mr21045860ejr.516.1617484466917;
-        Sat, 03 Apr 2021 14:14:26 -0700 (PDT)
+        bh=OTu62MGaiDDjQw5xpFYVOhdRv5m0tje4azGVnwRZNU0=;
+        b=U2RHj8OAFsBtqC7Hs+VDtRfsvXnOOBTIFS45VurdlJyW3KwVMUQGl8mNgwfdOn6te0
+         JHAJ/YZYk/DjodiMIghBwvmjW3JJ7n+LCSUSWdRB4rqkfTOae0EKDRf5o/jQnzMq9dO0
+         Hfm5NgeyUf3aRJCIldvf+z/qs5qC0A4wyb8iU2LEXCQJ3C66QZbPoglfLZj0onbBPGlO
+         LSIMDfhOhPJtJvkqabj8cOo0mi/vZaKBzzB/QPpzhxLsWbtERNCJAFfTXDpeZZomjDOz
+         dWGz3OshPn1vkSni3xtizWPn3ez2Nq13TYn6VkTL5us/IMsUZN2x5J/V/KKd9mq3tmIz
+         QCEw==
+X-Gm-Message-State: AOAM530L5Hu27eQw0lt/T8fbb2paflFVBTuIbyKl9EjBpKxsPiTX3dxX
+	aKo2WdCmQE4+OWPo+g5CtkMwNbu4bHU=
+X-Google-Smtp-Source: ABdhPJyW+sAlQvA625qYxxgo0tCSRlZU5U0D8QTuu4idsxJ+4fR4WjZk5JCKt7M7Lwk0OO0dA5oLZg==
+X-Received: by 2002:aa7:cf95:: with SMTP id z21mr22772818edx.76.1617491009698;
+        Sat, 03 Apr 2021 16:03:29 -0700 (PDT)
 Return-Path: <martin.jansa@gmail.com>
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id b22sm7405386edv.96.2021.04.03.14.14.26
+        by smtp.gmail.com with ESMTPSA id yk8sm6136124ejb.123.2021.04.03.16.03.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Apr 2021 14:14:26 -0700 (PDT)
+        Sat, 03 Apr 2021 16:03:29 -0700 (PDT)
 From: "Martin Jansa" <Martin.Jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][gatesgarth][PATCH] packagegroup-meta-oe: include glfw, icewm, geis only with x11 in DISTRO_FEATURES
-Date: Sat,  3 Apr 2021 23:14:24 +0200
-Message-Id: <20210403211424.1428211-1-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH] uml-utilities: fix installed-vs-shipped with usrmerge
+Date: Sun,  4 Apr 2021 01:03:27 +0200
+Message-Id: <20210403230327.1433909-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-* and also opengl for glfw
+* fixes:
+  ERROR: uml-utilities-20040406-r1 do_package: QA Issue: uml-utilities: Files/directories were installed but not shipped in any package:
+    /usr/lib/uml/port-helper
+  Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+  uml-utilities: 1 installed and not shipped files. [installed-vs-shipped]
+
+* pass LIB_DIR instead of using default value from Makefile:
+  $ grep LIB_DIR.*= tools/port-helper/Makefile
+  LIB_DIR ?= /usr/lib/uml
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 5 ++---
+ .../recipes-extended/uml-utilities/uml-utilities_20040406.bb | 5 ++---
  1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 1921884a69..caa55ffb57 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -190,7 +190,7 @@ RDEPENDS_packagegroup-meta-oe-core = "\
-     toybox \
-     usleep \
- "
--RDEPENDS_packagegroup-meta-oe-core_append_libc-glibc = " glfw"
-+RDEPENDS_packagegroup-meta-oe-core_append_libc-glibc = " ${@bb.utils.contains("DISTRO_FEATURES", "x11 opengl", "glfw", "", d)}"
- RDEPENDS_packagegroup-meta-oe-core_remove_riscv64 = "safec"
- RDEPENDS_packagegroup-meta-oe-core_remove_riscv32 = "safec"
+diff --git a/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb b/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
+index 8e00cb3ea4..f86b2b912e 100644
+--- a/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
++++ b/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
+@@ -18,15 +18,14 @@ S = "${WORKDIR}/tools"
+ inherit update-alternatives
  
-@@ -349,7 +349,7 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
-      libuio \
-      ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libwmf", "", d)} \
-      lprng \
--     icewm \
-+     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "icewm", "", d)} \
-      md5deep \
-      indent \
-      jansson \
-@@ -698,7 +698,6 @@ RDEPENDS_packagegroup-meta-oe-support ="\
-     ace-cloud-editor \
-     frame \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geis", "", d)} \
--    geis \
-     grail \
-     asio \
-     augeas \
+ do_compile() {
+-    oe_runmake
++    oe_runmake LIB_DIR=${libdir}/uml
+ }
+ 
+ do_install() {
+     oe_runmake install DESTDIR=${D}
+ }
+ 
+-FILES_${PN} += "${exec_prefix}${nonarch_base_libdir}"
+-FILES_${PN}-dbg += "${exec_prefix}${nonarch_base_libdir}/uml/.debug"
++FILES_${PN} += "${libdir}/uml"
+ 
+ ALTERNATIVE_${PN} = "tunctl"
+ ALTERNATIVE_LINK_NAME[tunctl] = "${bindir}/tunctl"
 -- 
 2.30.2
 
