@@ -1,157 +1,133 @@
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web10.34232.1617478925552775685
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+ by mx.groups.io with SMTP id smtpd.web12.34500.1617479833930012904
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 03 Apr 2021 12:42:05 -0700
+ Sat, 03 Apr 2021 12:57:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=kpui1jXo;
- spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id d8so3903844plh.11
-        for <openembedded-devel@lists.openembedded.org>; Sat, 03 Apr 2021 12:42:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=mSU4t7gJ;
+ spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f42.google.com with SMTP id b16so8668823eds.7
+        for <openembedded-devel@lists.openembedded.org>; Sat, 03 Apr 2021 12:57:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=qcXfrzgvngO+/HZmgby41585eXSj4QKM8TcgAGSO6o0=;
-        b=kpui1jXoVhmDg/o+9QQ0lp00zfgpHDeUFqSLew99RvgXgMOIkT4a6F9pq0ziKXrY9l
-         bmK8of8qL2wKIr2qVs0rjHPbDEJa2e2NzkDq7aP5jICWCDEdKMgYNSnRMvzAu0F3/kRY
-         HW/N5skrtl7Tns5ppJWEZLwG0oNuLCGauZQYmVch2tZ7GSeawNRtLg3ScLbD9ZBkPJ3w
-         p+9j65x/R6euKga186wfs/c8LE3StDmQ07D7vwfduvnKLkAGgvYOMLCaRwnqJ/bemivH
-         IZSLsD6UqIZwsfpHNeS5IJu1JwQAi0yfMTQOKtGzCixDqB8fXxhS4dAyMa4YbBDg71Wp
-         OgVQ==
+        bh=HJsNz9ttg6VmQOaE4jDLHP1m/KS0tWAm1GBCzf1sTEY=;
+        b=mSU4t7gJQF4G4Yh2KXK1o+EeMrKlbeb1+LSCyhfR2o3YuPvbBZF581d3gbVI+g7PIh
+         IYJ0nhJWkeoKbyl3v2BLUmpVpoOZLmrY8oATypFujbaf0kLxn7/dNrlCeUtAvAp0OJd8
+         9a138JAhZ1viZiaE1IUkuIDH6X1SFJz/EExQB/MtZ2TP+aXZFDf58e0cJ4qKLNr5o6J6
+         RG3UnsyNhQim0yS8X/kt2nDYUce0/0DuoO2ca8/Ts8PJB3ioX0nEzfftqyL46gk4Q/EU
+         DczWQckC/eG1qtUnPodAOhoNz4nw8eoK4gEvK9tqLrI4tCWftATODZ9iIFeSR1x9MItc
+         Jpow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=qcXfrzgvngO+/HZmgby41585eXSj4QKM8TcgAGSO6o0=;
-        b=kgoc+8fv+A7pqh9GAmjjdlNUAaJNPCo/CvbceVRcgcAOH8fHCk/7BxApdSPw5lYOsE
-         dkqMhj8ila2MHu3fqDh0D48pXUS4IbIIsNsti8tQb+blGMUea9a8/uwpezSbaI6EpkdM
-         RRj0SM0S73jeWMptoj+wwpxBsanqqF0D7+8LNXKsLQGyEbC/iZRYbCynsDofXf8JqEmz
-         IZf1JSo+3U9nEEIzudU6DzUPF2J4pbohhNeh/ovthJuyULwlU9jyCyA/fFrY4CgxQZCH
-         FGPfGf8lOsrWZ0pkLIcionf+GqdOWo6CdCX/wdfqNvkt7yNxf3gUwdBu+46okiIBvhqB
-         cZVw==
-X-Gm-Message-State: AOAM530QIr0oNEbaaqeouLnLZTFGHDlY7iUmEj/uPBicKF/AaI90gqVV
-	WHxR49ECrtplKjJJsQruDLWQfTXPxjJd/A==
-X-Google-Smtp-Source: ABdhPJx+Y5u27QTgYo7KA3r2aofF7xo2CdhWTBXt+CQ4rmi45QUYyHRILnUTFLHCwIu7UsAQhtZc9A==
-X-Received: by 2002:a17:90b:608:: with SMTP id gb8mr19372393pjb.121.1617478924769;
-        Sat, 03 Apr 2021 12:42:04 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::bc1b])
-        by smtp.gmail.com with ESMTPSA id n5sm11865562pfq.44.2021.04.03.12.42.03
+        bh=HJsNz9ttg6VmQOaE4jDLHP1m/KS0tWAm1GBCzf1sTEY=;
+        b=J/PtkvihV32LL7Obp83cW479Xsranb4bk/VLA/nrNQqM9E0e24vWLOaUrVUOP8Eybh
+         mml3E8EsbW8Je8E+0gjyd4s6R3dHtBrO8740hZtjjU7+mXVr0fg4aY0hP4nTRgOOOKzu
+         pYJvfSdf0nXmlnA5s4/TpPU01bqSwlDE5eijMr2NsS7QcHVKgRTscw//ITuAl/SHe37m
+         E1+hIGda4HZJjK/0tuLr6EvtUfnA8q7R+jytru24C1u21GhlyK6uZL8EFFuxZc7MAmDa
+         mvyhMWiveIUqBJb/IjIBxJwjs0gsI7SZ8ERf58zNwDf578chZSqnEF16R6WNLTIEh4wW
+         w3ag==
+X-Gm-Message-State: AOAM530YRQEahQkbOnK0feut1dt2kR4dS5jGMuzjEH/c6Cu186qNILc4
+	4Kid6eNNUnIEjR3ufUQZJvw9MtGAVMQ=
+X-Google-Smtp-Source: ABdhPJxDgILPBc7TMN+yAE3Q0H9vIp3iCsZRjU3YbsRzS+M7LT51oLepkRo+tjOosyj+FEZPXbevqw==
+X-Received: by 2002:a05:6402:c1:: with SMTP id i1mr22278561edu.315.1617479832388;
+        Sat, 03 Apr 2021 12:57:12 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id oy8sm5869986ejb.58.2021.04.03.12.57.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Apr 2021 12:42:04 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+        Sat, 03 Apr 2021 12:57:11 -0700 (PDT)
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] mariadb: Fix build on newer 32bit architectures
-Date: Sat,  3 Apr 2021 12:42:01 -0700
-Message-Id: <20210403194201.369722-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 1/2] phonet-utils: remove
+Date: Sat,  3 Apr 2021 21:57:09 +0200
+Message-Id: <20210403195710.1402036-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-newer 32bit arches e.g. RV32 and ARC do not have __NR_io_getevents
-syscall and have started of with 64bit time_t so there is no 32bit
-version
+* no update other than occassional build fix since 2011 when I've imported this
+* it's also failing with usrmerge:
+  ERROR: phonet-utils-0.0.0+gitrAUTOINC+4acfa720fd-r2 do_package_qa: QA Issue: phonet-utils package is not obeying usrmerge distro feature. /lib should be relocated to /usr. [usrmerge]
+  ERROR: phonet-utils-0.0.0+gitrAUTOINC+4acfa720fd-r2 do_package_qa: QA run found fatal errors. Please consider fixing them.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-dbs/mysql/mariadb.inc         |  2 +
- ...ck-if-syscall-exists-before-using-it.patch | 43 +++++++++++++++++++
- .../recipes-dbs/mysql/mariadb/sys_futex.patch | 22 ++++++++++
- 3 files changed, 67 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-aio_linux-Check-if-syscall-exists-before-using-it.patch
- create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/sys_futex.patch
+ .../0001-Include-limits.h-for-PATH_MAX.patch  | 25 -------------------
+ .../phonet-utils/phonet-utils_git.bb          | 15 -----------
+ .../packagegroups/packagegroup-meta-oe.bb     |  1 -
+ 3 files changed, 41 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/phonet-utils/phonet-utils/0001-Include-limits.h-for-PATH_MAX.patch
+ delete mode 100644 meta-oe/recipes-connectivity/phonet-utils/phonet-utils_git.bb
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 67cfa54f02..9833b28857 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -20,6 +20,8 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
-            file://fix-arm-atomic.patch \
-            file://0001-Fix-library-LZ4-lookup.patch \
-            file://0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch \
-+           file://0001-aio_linux-Check-if-syscall-exists-before-using-it.patch \
-+           file://sys_futex.patch \
-           "
- SRC_URI_append_libc-musl = " file://ppc-remove-glibc-dep.patch"
- 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-aio_linux-Check-if-syscall-exists-before-using-it.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-aio_linux-Check-if-syscall-exists-before-using-it.patch
-new file mode 100644
-index 0000000000..a2f7812c50
---- /dev/null
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-aio_linux-Check-if-syscall-exists-before-using-it.patch
-@@ -0,0 +1,43 @@
-+From 5d9a869a72420cf0bb08b6aa93e980df90bdcf2e Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 3 Apr 2021 12:02:36 -0700
-+Subject: [PATCH] aio_linux: Check if syscall exists before using it
-+
-+Return -ENOSYS if not implememented, fixes build on arches like RISCV32
-+Fixes
-+tpool/aio_linux.cc:63:20: error: '__NR_io_getevents' was not declared in this scope; did you mean 'io_getevents'?
-+   63 |   int ret= syscall(__NR_io_getevents, reinterpret_cast<long>(ctx),
-+      |                    ^~~~~~~~~~~~~~~~~
-+      |                    io_getevents
-+
-+Upstream-Staus: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ tpool/aio_linux.cc | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/tpool/aio_linux.cc b/tpool/aio_linux.cc
-+index d9aa8be2..d8a87a8f 100644
-+--- a/tpool/aio_linux.cc
-++++ b/tpool/aio_linux.cc
-+@@ -59,6 +59,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111 - 1301 USA*/
-+ */
-+ static int my_getevents(io_context_t ctx, long min_nr, long nr, io_event *ev)
-+ {
-++#ifdef __NR_io_getevents
-+   int saved_errno= errno;
-+   int ret= syscall(__NR_io_getevents, reinterpret_cast<long>(ctx),
-+                    min_nr, nr, ev, 0);
-+@@ -68,6 +69,9 @@ static int my_getevents(io_context_t ctx, long min_nr, long nr, io_event *ev)
-+     errno= saved_errno;
-+   }
-+   return ret;
-++#else
-++  return -ENOSYS;
-++#endif
-+ }
-+ #endif
-+ 
-+-- 
-+2.31.1
-+
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/sys_futex.patch b/meta-oe/recipes-dbs/mysql/mariadb/sys_futex.patch
-new file mode 100644
-index 0000000000..3277a3eee1
---- /dev/null
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/sys_futex.patch
-@@ -0,0 +1,22 @@
-+ Use SYS_futex for syscall
-+
-+glibc defines SYS_futex and on newer 32bit CPUs like RISCV-32, arc there
-+is no 32bit time_t therefore define SYS_futex in terms of SYS_futex_time64
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+--- a/storage/innobase/include/ib0mutex.h
-++++ b/storage/innobase/include/ib0mutex.h
-+@@ -150,6 +150,12 @@ private:
-+ #include <linux/futex.h>
-+ #include <sys/syscall.h>
-+ 
-++/** Newer 32bit CPUs eg. RISCV-32 are defaulting to 64bit time_t from get go and
-++ therefore do not define __NR_futex */
-++#if !defined(SYS_futex) && defined(SYS_futex_time64)
-++# define SYS_futex SYS_futex_time64
-++#endif
-++
-+ /** Mutex implementation that used the Linux futex. */
-+ template <template <typename> class Policy>
-+ struct TTASFutexMutex {
+diff --git a/meta-oe/recipes-connectivity/phonet-utils/phonet-utils/0001-Include-limits.h-for-PATH_MAX.patch b/meta-oe/recipes-connectivity/phonet-utils/phonet-utils/0001-Include-limits.h-for-PATH_MAX.patch
+deleted file mode 100644
+index 8bb7e5a188..0000000000
+--- a/meta-oe/recipes-connectivity/phonet-utils/phonet-utils/0001-Include-limits.h-for-PATH_MAX.patch
++++ /dev/null
+@@ -1,25 +0,0 @@
+-From f7ad9a4471cee2324f216a0d82ba8097ec746c56 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 15 Jul 2017 11:48:12 -0700
+-Subject: [PATCH] Include limits.h for PATH_MAX
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/pnstat.c | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/src/pnstat.c b/src/pnstat.c
+-index 661a5bc..76068e6 100644
+---- a/src/pnstat.c
+-+++ b/src/pnstat.c
+-@@ -35,6 +35,7 @@
+- #include <dirent.h>
+- #include <unistd.h>
+- #include <netinet/tcp.h>
+-+#include <limits.h>
+- 
+- struct fd
+- {
+--- 
+-2.13.3
+-
+diff --git a/meta-oe/recipes-connectivity/phonet-utils/phonet-utils_git.bb b/meta-oe/recipes-connectivity/phonet-utils/phonet-utils_git.bb
+deleted file mode 100644
+index 3c599950fe..0000000000
+--- a/meta-oe/recipes-connectivity/phonet-utils/phonet-utils_git.bb
++++ /dev/null
+@@ -1,15 +0,0 @@
+-SUMMARY = "This small package provides a few command line tools for Linux Phonet"
+-HOMEPAGE = ""
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+-SRC_URI = "git://gitorious.org/meego-cellular/phonet-utils.git;branch=master \
+-           file://0001-Include-limits.h-for-PATH_MAX.patch \
+-           "
+-PR = "r2"
+-S = "${WORKDIR}/git"
+-SRCREV = "4acfa720fd37d178a048fc2be17180137d4a70ea"
+-PV = "0.0.0+gitr${SRCPV}"
+-
+-inherit autotools-brokensep
+-
+-FILES_${PN} += "${base_libdir}/udev/rules.d/85-phonet-utils.rules"
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 4eb2e8c11c..eb6cb3592f 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -146,7 +146,6 @@ RDEPENDS_packagegroup-meta-oe-connectivity ="\
+     obexftp \
+     packagegroup-tools-bluetooth \
+     paho-mqtt-c \
+-    phonet-utils \
+     rabbitmq-c \
+     rfkill \
+     rtorrent \
 -- 
-2.31.1
+2.30.2
 
