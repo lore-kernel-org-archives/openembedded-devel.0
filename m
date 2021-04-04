@@ -1,113 +1,75 @@
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.web09.38984.1617506698104039225
+Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
+ by mx.groups.io with SMTP id smtpd.web09.41080.1617529423111077570
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 03 Apr 2021 20:24:58 -0700
+ Sun, 04 Apr 2021 02:43:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ETmNrLbd;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id ha17so4451385pjb.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 03 Apr 2021 20:24:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=g0aysCID;
+ spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f41.google.com with SMTP id l18so9672448edc.9
+        for <openembedded-devel@lists.openembedded.org>; Sun, 04 Apr 2021 02:43:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id;
-        bh=J/i/fTvhFSMC2MqtcSZ83WoOXc74m4EQ1iNbVTvF4cU=;
-        b=ETmNrLbdGKUmTh/2h+znI3D8rizqXfQBi6zLQeiCY5c7dsoQ/FwrNa74kQLiSXBmKU
-         Yu+PJ47i2RHXBfC6c/TFz8l7fVO+Vudw3M0zmg7JE7XPXNki7wukNrQLZKmmGC2+8jJW
-         zvfVuE78q0dWlY0V8WVkH7tXIEvQY+e4TBTJ93rvuFkEV0neWGywyRXACWCEom0TqAI7
-         32takWgE7tjdoJZNRNnauZnduRpGkBfPncl90Llbz760i2RAjMEMAxJ4Yrq2Xz69gj0e
-         9c+EH4nJbFqAUbFXZrXieqzOPdu6IhLF7wdAr/KKUm2dvcSVOnuTXYIN5qTrJXuWcRGQ
-         3qGA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=xRyFO20Q/afwmKirBbhGlZE9N5trxH6yNIqUQiFL/KQ=;
+        b=g0aysCIDLrJkQJXDBZ7sSs/EnQ9Gekt7jAhwYzuAw6qWpVA0Q0JnUX7qKgkm+AyktS
+         zvNGpRme3BH2nqiM16eazkhQKdGl9IAaKhhyokUrepVHshGpfTxfrmAEeJust6fPoeeh
+         IlXOaOoNnOg5HT9EVvXxD55fr7nVD+JJWUiM6rTb1OHxnc9rpAo3PGv/kyJ3oLoCugpK
+         7fEiWr/LwOLlyWa8s3ryfOhjEKq2CJzhZTZ1YuU6/JobhMHawqqfXuJ8WvLXNlCQXyEh
+         cG11u5DxLhkx7+FxqrMyMY8Yc0Y9WG/dyfxJo3HfhffPCk249rajA71NaNie5Db7Fjl3
+         3NWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id;
-        bh=J/i/fTvhFSMC2MqtcSZ83WoOXc74m4EQ1iNbVTvF4cU=;
-        b=lk807Dh+AlG5QpApR1yTeRNMiw2JBX+vaV8Vd7v8bteW7syfHkq/j24ttTUjZ9D/kK
-         PO4waKBWyZtkKwnpE/dMwWcTnv+4imoinQFHTkwy0Yr/RjgqTm/8TXK4MLPKG8Q6VYru
-         bvoO0h/VYa98J/IkXHfGJwjDFhqCHDKSNlR8UyTjVFbbKsaz5ERTIKgjLOWD4UcBSr+R
-         xvIit38omiYnY52dq0Du/XPgDYBujtbEkKKDVRrTzrtxCQiGo54q2RLpqUTF8MyAl9lX
-         q3tT5ZIBabmtw2k2awSLytaq7Klzfv1dgStQ8mNtPkJnWCcxVdSCYGezEC3IQYJ/fra0
-         q14w==
-X-Gm-Message-State: AOAM530VhUJR/RjecLG5sSqm0qv7jSltfCDJwulAfNnLoyJMSK+1KaPo
-	AAGbAFJWXd9bbddFbLLYLuaTGcQp7bk=
-X-Google-Smtp-Source: ABdhPJxD+41sasXsefEQRTOX3NFwafSWvH2Frbe1IDQpr5IPVIQmTIJamIIhKvPlBrxPkPzqEX2qvA==
-X-Received: by 2002:a17:90b:1643:: with SMTP id il3mr11018010pjb.2.1617506697323;
-        Sat, 03 Apr 2021 20:24:57 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:9025:25df:a21:bcfb])
-        by smtp.gmail.com with ESMTPSA id ot17sm11593682pjb.50.2021.04.03.20.24.56
-        for <openembedded-devel@lists.openembedded.org>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=xRyFO20Q/afwmKirBbhGlZE9N5trxH6yNIqUQiFL/KQ=;
+        b=jre4yN8bFBCg+9j8bRGuG2TLvRyTdVzpd7s5gzVOg2Zv9axpbF3VPn6miNw+EVfM++
+         cMfbolk6qIaRAydNtvfqOFFTLSimzFZZ2zawbJtLvzdJZefV2JZ06rQqXCu4X75Uoe+i
+         SpHOMUUVCpYNjyHFmbXd7tFwjrwzC3QkQJ+iB7RaQsynHSDqm+Y6fpDXrfiFloAFwn/j
+         jcvHOdUBFxJGGypIrqdSToadCigV5tpAbOJyi2jHifdJiEG8eVAqPTqPgyZuApMMhvNH
+         VKJgF+lU2ebbDlRIhc6h5s4vJRWnTYES4PX7UpVvCyj74JnWpODQFa5jxA/E9wp6VrZs
+         jOhA==
+X-Gm-Message-State: AOAM533cbZCKZXmPmFzw1cq1nxZbzQ0m45pUdXKIfs21KIMWZmqZ43xG
+	7dYqVQmdvA4c5af+sUNNN8kEXyf7QOk=
+X-Google-Smtp-Source: ABdhPJyrrVwr/iWvPBnRFb8IfqdzsLVbimxRWZ8W6U99S9xJHU1zFyTXzqs+xAxVVwmencCPQpI6hA==
+X-Received: by 2002:aa7:d759:: with SMTP id a25mr4450875eds.248.1617529421637;
+        Sun, 04 Apr 2021 02:43:41 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id g11sm8368163edw.37.2021.04.04.02.43.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Apr 2021 20:24:56 -0700 (PDT)
-From: "akuster" <akuster808@gmail.com>
+        Sun, 04 Apr 2021 02:43:41 -0700 (PDT)
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][dunfell][PATCH] wireguard: fix build issue with updated 5.4 kernel
-Date: Sat,  3 Apr 2021 20:24:55 -0700
-Message-Id: <20210404032455.22904-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
+Cc: Martin Jansa <Martin.Jansa@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][gatesgarth][PATCH] packagegroup-meta-multimedia: include projucer only with x11 in DISTRO_FEATURES
+Date: Sun,  4 Apr 2021 11:43:38 +0200
+Message-Id: <20210404094338.2062148-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.30.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
- error: static declaration of 'icmp_ndo_send' follows non-static declaration
- |   959 | static inline void icmp_ndo_send(struct sk_buff *skb_in, int type, int code, __be32 info)
- |       |                    ^~~~~~~~~~~~~
-
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...send-functions-were-backported-exten.patch | 32 +++++++++++++++++++
- .../wireguard-module_1.0.20200401.bb          |  3 +-
- 2 files changed, 34 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-kernel/wireguard/files/0001-compat-icmp_ndo_send-functions-were-backported-exten.patch
+ .../packagegroups/packagegroup-meta-multimedia.bb               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-kernel/wireguard/files/0001-compat-icmp_ndo_send-functions-were-backported-exten.patch b/meta-networking/recipes-kernel/wireguard/files/0001-compat-icmp_ndo_send-functions-were-backported-exten.patch
-new file mode 100644
-index 00000000000..f01cfe4e1c5
---- /dev/null
-+++ b/meta-networking/recipes-kernel/wireguard/files/0001-compat-icmp_ndo_send-functions-were-backported-exten.patch
-@@ -0,0 +1,32 @@
-+From 122f06bfd8fc7b06a0899fa9adc4ce8e06900d98 Mon Sep 17 00:00:00 2001
-+From: "Jason A. Donenfeld" <Jason@zx2c4.com>
-+Date: Sun, 7 Mar 2021 08:14:33 -0700
-+Subject: [PATCH] compat: icmp_ndo_send functions were backported extensively
-+
-+Signed-off-by: Jason A. Donenfeld <Jason@zx2c4.com>
-+
-+Upstream-Status: Backport
-+
-+Fixes build with 5.4.103 update.
-+/include/linux/icmpv6.h:56:6: note: previous declaration of 'icmpv6_ndo_send' was here
-+|    56 | void icmpv6_ndo_send(struct sk_buff *skb_in, u8 type, u8 code, __u32 info);
-+
-+Signed-of-by: Armin Kuster <akuster808@gmail.com>
-+
-+---
-+ src/compat/compat.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+Index: src/compat/compat.h
-+===================================================================
-+--- src.orig/compat/compat.h
-++++ src/compat/compat.h
-+@@ -946,7 +946,7 @@ static inline int skb_ensure_writable(st
-+ }
-+ #endif
-+ 
-+-#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 6, 0)
-++#if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 6, 0) && LINUX_VERSION_CODE >= KERNEL_VERSION(5, 5, 0)) || (LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 102) && LINUX_VERSION_CODE >= KERNEL_VERSION(4, 20, 0)) || (LINUX_VERSION_CODE < KERNEL_VERSION(4, 19, 178) && LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0)) || (LINUX_VERSION_CODE < KERNEL_VERSION(4, 14, 223) && LINUX_VERSION_CODE > KERNEL_VERSION(4, 10, 0)) || LINUX_VERSION_CODE < KERNEL_VERSION(4, 9, 259) || defined(ISRHEL8) || defined(ISUBUNTU1804)
-+ #if IS_ENABLED(CONFIG_NF_NAT)
-+ #include <linux/ip.h>
-+ #include <linux/icmpv6.h>
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
-index e8891c4428a..6ed988bafa2 100644
---- a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
-+++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
-@@ -3,7 +3,8 @@ require wireguard.inc
- SRCREV = "43f57dac7b8305024f83addc533c9eede6509129"
- 
- SRC_URI = "git://git.zx2c4.com/wireguard-linux-compat \
--           file://0001-compat-SYM_FUNC_-START-END-were-backported-to-5.4.patch"
-+           file://0001-compat-SYM_FUNC_-START-END-were-backported-to-5.4.patch \
-+           file://0001-compat-icmp_ndo_send-functions-were-backported-exten.patch "
- 
- inherit module kernel-module-split
- 
+diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+index b4f09cdf54..75d0a4a009 100644
+--- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
++++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+@@ -53,7 +53,7 @@ RDEPENDS_packagegroup-meta-multimedia = "\
+     bigbuckbunny-720p \
+     tearsofsteel-1080p \
+     schroedinger \
+-    projucer \
++    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "projucer", "", d)} \
+     libcamera \
+     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libde265 openh264", "", d)} \
+     vorbis-tools \
 -- 
-2.17.1
+2.30.2
 
