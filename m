@@ -1,92 +1,113 @@
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
- by mx.groups.io with SMTP id smtpd.web10.36385.1617491011280665230
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web09.38984.1617506698104039225
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 03 Apr 2021 16:03:31 -0700
+ Sat, 03 Apr 2021 20:24:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=j394u1DE;
- spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f42.google.com with SMTP id b16so8930946eds.7
-        for <openembedded-devel@lists.openembedded.org>; Sat, 03 Apr 2021 16:03:31 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ETmNrLbd;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id ha17so4451385pjb.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 03 Apr 2021 20:24:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=OTu62MGaiDDjQw5xpFYVOhdRv5m0tje4azGVnwRZNU0=;
-        b=j394u1DECQ+/mCsJTfzQrMCAgDKno0/gfTOF3lQ2iW46XNxEDJZcu8xyzvHpGzE+6B
-         brczbPKUBoOQmSaSVtk56ceioDYvyHlFFK6JutHdpl8lltkPnMyy8Jr1VGsJYQydpq1m
-         fOMhJfXuFsthVTgWsjxM4HLXpMAOxqx1l36d4x0n+iHJTecSSZ3C/hxhtvdaCXMfehM1
-         BkIf+xlYcV06//TA2Gkru7SxQwB2LJ/gWZikWCk4IdyLcMqOM4QpILLhdp6OSSChCYlj
-         dFVXR1mD7r3bqBYARTBjX0RSMSj1Rud5i1AOWgGpzR9413EjKlbZtpdkHeov4JSZbjHI
-         Jbwg==
+        h=from:to:subject:date:message-id;
+        bh=J/i/fTvhFSMC2MqtcSZ83WoOXc74m4EQ1iNbVTvF4cU=;
+        b=ETmNrLbdGKUmTh/2h+znI3D8rizqXfQBi6zLQeiCY5c7dsoQ/FwrNa74kQLiSXBmKU
+         Yu+PJ47i2RHXBfC6c/TFz8l7fVO+Vudw3M0zmg7JE7XPXNki7wukNrQLZKmmGC2+8jJW
+         zvfVuE78q0dWlY0V8WVkH7tXIEvQY+e4TBTJ93rvuFkEV0neWGywyRXACWCEom0TqAI7
+         32takWgE7tjdoJZNRNnauZnduRpGkBfPncl90Llbz760i2RAjMEMAxJ4Yrq2Xz69gj0e
+         9c+EH4nJbFqAUbFXZrXieqzOPdu6IhLF7wdAr/KKUm2dvcSVOnuTXYIN5qTrJXuWcRGQ
+         3qGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=OTu62MGaiDDjQw5xpFYVOhdRv5m0tje4azGVnwRZNU0=;
-        b=U2RHj8OAFsBtqC7Hs+VDtRfsvXnOOBTIFS45VurdlJyW3KwVMUQGl8mNgwfdOn6te0
-         JHAJ/YZYk/DjodiMIghBwvmjW3JJ7n+LCSUSWdRB4rqkfTOae0EKDRf5o/jQnzMq9dO0
-         Hfm5NgeyUf3aRJCIldvf+z/qs5qC0A4wyb8iU2LEXCQJ3C66QZbPoglfLZj0onbBPGlO
-         LSIMDfhOhPJtJvkqabj8cOo0mi/vZaKBzzB/QPpzhxLsWbtERNCJAFfTXDpeZZomjDOz
-         dWGz3OshPn1vkSni3xtizWPn3ez2Nq13TYn6VkTL5us/IMsUZN2x5J/V/KKd9mq3tmIz
-         QCEw==
-X-Gm-Message-State: AOAM530L5Hu27eQw0lt/T8fbb2paflFVBTuIbyKl9EjBpKxsPiTX3dxX
-	aKo2WdCmQE4+OWPo+g5CtkMwNbu4bHU=
-X-Google-Smtp-Source: ABdhPJyW+sAlQvA625qYxxgo0tCSRlZU5U0D8QTuu4idsxJ+4fR4WjZk5JCKt7M7Lwk0OO0dA5oLZg==
-X-Received: by 2002:aa7:cf95:: with SMTP id z21mr22772818edx.76.1617491009698;
-        Sat, 03 Apr 2021 16:03:29 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id yk8sm6136124ejb.123.2021.04.03.16.03.29
+        h=x-gm-message-state:from:to:subject:date:message-id;
+        bh=J/i/fTvhFSMC2MqtcSZ83WoOXc74m4EQ1iNbVTvF4cU=;
+        b=lk807Dh+AlG5QpApR1yTeRNMiw2JBX+vaV8Vd7v8bteW7syfHkq/j24ttTUjZ9D/kK
+         PO4waKBWyZtkKwnpE/dMwWcTnv+4imoinQFHTkwy0Yr/RjgqTm/8TXK4MLPKG8Q6VYru
+         bvoO0h/VYa98J/IkXHfGJwjDFhqCHDKSNlR8UyTjVFbbKsaz5ERTIKgjLOWD4UcBSr+R
+         xvIit38omiYnY52dq0Du/XPgDYBujtbEkKKDVRrTzrtxCQiGo54q2RLpqUTF8MyAl9lX
+         q3tT5ZIBabmtw2k2awSLytaq7Klzfv1dgStQ8mNtPkJnWCcxVdSCYGezEC3IQYJ/fra0
+         q14w==
+X-Gm-Message-State: AOAM530VhUJR/RjecLG5sSqm0qv7jSltfCDJwulAfNnLoyJMSK+1KaPo
+	AAGbAFJWXd9bbddFbLLYLuaTGcQp7bk=
+X-Google-Smtp-Source: ABdhPJxD+41sasXsefEQRTOX3NFwafSWvH2Frbe1IDQpr5IPVIQmTIJamIIhKvPlBrxPkPzqEX2qvA==
+X-Received: by 2002:a17:90b:1643:: with SMTP id il3mr11018010pjb.2.1617506697323;
+        Sat, 03 Apr 2021 20:24:57 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:9025:25df:a21:bcfb])
+        by smtp.gmail.com with ESMTPSA id ot17sm11593682pjb.50.2021.04.03.20.24.56
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Apr 2021 16:03:29 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+        Sat, 03 Apr 2021 20:24:56 -0700 (PDT)
+From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] uml-utilities: fix installed-vs-shipped with usrmerge
-Date: Sun,  4 Apr 2021 01:03:27 +0200
-Message-Id: <20210403230327.1433909-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.30.2
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: [meta-oe][dunfell][PATCH] wireguard: fix build issue with updated 5.4 kernel
+Date: Sat,  3 Apr 2021 20:24:55 -0700
+Message-Id: <20210404032455.22904-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.17.1
 
-* fixes:
-  ERROR: uml-utilities-20040406-r1 do_package: QA Issue: uml-utilities: Files/directories were installed but not shipped in any package:
-    /usr/lib/uml/port-helper
-  Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-  uml-utilities: 1 installed and not shipped files. [installed-vs-shipped]
+ error: static declaration of 'icmp_ndo_send' follows non-static declaration
+ |   959 | static inline void icmp_ndo_send(struct sk_buff *skb_in, int type, int code, __be32 info)
+ |       |                    ^~~~~~~~~~~~~
 
-* pass LIB_DIR instead of using default value from Makefile:
-  $ grep LIB_DIR.*= tools/port-helper/Makefile
-  LIB_DIR ?= /usr/lib/uml
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-extended/uml-utilities/uml-utilities_20040406.bb | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ ...send-functions-were-backported-exten.patch | 32 +++++++++++++++++++
+ .../wireguard-module_1.0.20200401.bb          |  3 +-
+ 2 files changed, 34 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-kernel/wireguard/files/0001-compat-icmp_ndo_send-functions-were-backported-exten.patch
 
-diff --git a/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb b/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
-index 8e00cb3ea4..f86b2b912e 100644
---- a/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
-+++ b/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
-@@ -18,15 +18,14 @@ S = "${WORKDIR}/tools"
- inherit update-alternatives
+diff --git a/meta-networking/recipes-kernel/wireguard/files/0001-compat-icmp_ndo_send-functions-were-backported-exten.patch b/meta-networking/recipes-kernel/wireguard/files/0001-compat-icmp_ndo_send-functions-were-backported-exten.patch
+new file mode 100644
+index 00000000000..f01cfe4e1c5
+--- /dev/null
++++ b/meta-networking/recipes-kernel/wireguard/files/0001-compat-icmp_ndo_send-functions-were-backported-exten.patch
+@@ -0,0 +1,32 @@
++From 122f06bfd8fc7b06a0899fa9adc4ce8e06900d98 Mon Sep 17 00:00:00 2001
++From: "Jason A. Donenfeld" <Jason@zx2c4.com>
++Date: Sun, 7 Mar 2021 08:14:33 -0700
++Subject: [PATCH] compat: icmp_ndo_send functions were backported extensively
++
++Signed-off-by: Jason A. Donenfeld <Jason@zx2c4.com>
++
++Upstream-Status: Backport
++
++Fixes build with 5.4.103 update.
++/include/linux/icmpv6.h:56:6: note: previous declaration of 'icmpv6_ndo_send' was here
++|    56 | void icmpv6_ndo_send(struct sk_buff *skb_in, u8 type, u8 code, __u32 info);
++
++Signed-of-by: Armin Kuster <akuster808@gmail.com>
++
++---
++ src/compat/compat.h | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++Index: src/compat/compat.h
++===================================================================
++--- src.orig/compat/compat.h
+++++ src/compat/compat.h
++@@ -946,7 +946,7 @@ static inline int skb_ensure_writable(st
++ }
++ #endif
++ 
++-#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 6, 0)
+++#if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 6, 0) && LINUX_VERSION_CODE >= KERNEL_VERSION(5, 5, 0)) || (LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 102) && LINUX_VERSION_CODE >= KERNEL_VERSION(4, 20, 0)) || (LINUX_VERSION_CODE < KERNEL_VERSION(4, 19, 178) && LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0)) || (LINUX_VERSION_CODE < KERNEL_VERSION(4, 14, 223) && LINUX_VERSION_CODE > KERNEL_VERSION(4, 10, 0)) || LINUX_VERSION_CODE < KERNEL_VERSION(4, 9, 259) || defined(ISRHEL8) || defined(ISUBUNTU1804)
++ #if IS_ENABLED(CONFIG_NF_NAT)
++ #include <linux/ip.h>
++ #include <linux/icmpv6.h>
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
+index e8891c4428a..6ed988bafa2 100644
+--- a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
++++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
+@@ -3,7 +3,8 @@ require wireguard.inc
+ SRCREV = "43f57dac7b8305024f83addc533c9eede6509129"
  
- do_compile() {
--    oe_runmake
-+    oe_runmake LIB_DIR=${libdir}/uml
- }
+ SRC_URI = "git://git.zx2c4.com/wireguard-linux-compat \
+-           file://0001-compat-SYM_FUNC_-START-END-were-backported-to-5.4.patch"
++           file://0001-compat-SYM_FUNC_-START-END-were-backported-to-5.4.patch \
++           file://0001-compat-icmp_ndo_send-functions-were-backported-exten.patch "
  
- do_install() {
-     oe_runmake install DESTDIR=${D}
- }
+ inherit module kernel-module-split
  
--FILES_${PN} += "${exec_prefix}${nonarch_base_libdir}"
--FILES_${PN}-dbg += "${exec_prefix}${nonarch_base_libdir}/uml/.debug"
-+FILES_${PN} += "${libdir}/uml"
- 
- ALTERNATIVE_${PN} = "tunctl"
- ALTERNATIVE_LINK_NAME[tunctl] = "${bindir}/tunctl"
 -- 
-2.30.2
+2.17.1
 
