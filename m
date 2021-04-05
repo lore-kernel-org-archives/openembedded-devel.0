@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.4084.1617626985197999994
+ by mx.groups.io with SMTP id smtpd.web11.4136.1617626986134025862
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Apr 2021 05:49:45 -0700
+ Mon, 05 Apr 2021 05:49:46 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=55456 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lTOfm-0005yF-5y; Mon, 05 Apr 2021 15:49:44 +0300
+	id 1lTOfo-0005yF-6u; Mon, 05 Apr 2021 15:49:45 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/5] python3-docutils: Upgrade 0.16 -> 0.17
-Date: Mon,  5 Apr 2021 15:49:31 +0300
-Message-Id: <20210405124933.8920-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/5] python3-bitarray: Upgrade 1.8.2 -> 1.9.0
+Date: Mon,  5 Apr 2021 15:49:32 +0300
+Message-Id: <20210405124933.8920-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210405124933.8920-1-leon.anavi@konsulko.com>
 References: <20210405124933.8920-1-leon.anavi@konsulko.com>
@@ -30,49 +30,34 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.17:
+Upgrade to release 1.9.0:
 
-- Installing with setup.py now requires setuptools. Alternatively,
-  install with pip.
-- The generic command line front end tool docutils-cli.py allows
-  the free selection of reader, parser, and writer components.
-- New, experimental wrapper to integrate the recommonmark Markdown
-  parser for use with Docutils.
-- pseudoxml-writer got a --detailled option for pretty printing
-  text nodes.
-- odf/odt-writer improved metadata handling.
-- HTML5 writer improvements.
-- LaTeX writer improvements.
-- Fixes in Arabic mappings and Korean translations.
-- directives: Prevent infinte inclusion loops.
-
-License-Update: Fix link to 2-Clause BSD license in COPYING.txt.
+- add shift operations (`<<`, `>>`, `<<=`, `>>=`)
+- add `bitarray.util.ba2base()` and `bitarray.util.base2ba()`
+- documentation and tests
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-docutils_0.16.bb => python3-docutils_0.17.bb}   | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-docutils_0.16.bb => python3-docutils_0.17.bb} (52%)
+ .../{python3-bitarray_1.8.2.bb => python3-bitarray_1.9.0.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-bitarray_1.8.2.bb => python3-bitarray_1.9.0.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-docutils_0.16.bb b/meta-python/recipes-devtools/python/python3-docutils_0.17.bb
-similarity index 52%
-rename from meta-python/recipes-devtools/python/python3-docutils_0.16.bb
-rename to meta-python/recipes-devtools/python/python3-docutils_0.17.bb
-index 44b7320cb..8605e93b5 100644
---- a/meta-python/recipes-devtools/python/python3-docutils_0.16.bb
-+++ b/meta-python/recipes-devtools/python/python3-docutils_0.17.bb
-@@ -2,9 +2,8 @@ SUMMARY = "Docutils is a modular system for processing documentation into useful
- HOMEPAGE = "https://pypi.org/project/docutils/"
- SECTION = "devel/python"
- LICENSE = "BSD-2-Clause & GPL-2.0 & Python-2.0"
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=7a4646907ab9083c826280b19e103106"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=836a1950177996968a49ff477a4a61c4"
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.8.2.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.9.0.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-bitarray_1.8.2.bb
+rename to meta-python/recipes-devtools/python/python3-bitarray_1.9.0.bb
+index 8fd4b6c31..12ac3d964 100644
+--- a/meta-python/recipes-devtools/python/python3-bitarray_1.8.2.bb
++++ b/meta-python/recipes-devtools/python/python3-bitarray_1.9.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+ LICENSE = "PSF"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
  
--SRC_URI[md5sum] = "9ccb6f332e23360f964de72c8ea5f0ed"
--SRC_URI[sha256sum] = "7d4e999cca74a52611773a42912088078363a30912e8822f7a3d38043b767573"
-+SRC_URI[sha256sum] = "e2ffeea817964356ba4470efba7c2f42b6b0de0b04e66378507e3e2504bbff4c"
+-SRC_URI[sha256sum] = "96136d9add2b9b3b73e1eb7538b8d12547ee82dc3fbd31addef829371ce2a1bd"
++SRC_URI[sha256sum] = "db00073387af7fe30852d96b04742a0cdbc7feaf3158558520ab7898b0435ee2"
  
- inherit pypi setuptools3
+ inherit setuptools3 pypi
+ 
 -- 
 2.17.1
 
