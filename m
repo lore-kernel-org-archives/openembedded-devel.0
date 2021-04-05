@@ -1,76 +1,100 @@
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.web08.468.1617594730965674679
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.web12.443.1617594731585706168
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 04 Apr 2021 20:52:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=nqDFMg2H;
- spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id d8so5045728plh.11
-        for <openembedded-devel@lists.openembedded.org>; Sun, 04 Apr 2021 20:52:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=m+xasH8w;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id il9-20020a17090b1649b0290114bcb0d6c2so7234344pjb.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 04 Apr 2021 20:52:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=PB0dvBzIJDyCzGVAGkhCra3giEV77E9PIjRMmRiPt/k=;
-        b=nqDFMg2HdzXOAexpV7zgmcf7jgY3e1LiT1xH2asGee+wKPlXy9N6PskBYnplsu8jD7
-         WYFqatWmGDZIdIkRgSBUrZv8SIG3RJoFWyM4HkbyEXiPaIoKf9lbiJLShIqNaTF6cJZe
-         o2hOiPf4MY3eon7Xed/ft2e8XuYHDUuGjQhEIdTigWbJ6FJSU5oSd5TMpus6XOKylnuv
-         TbzGddxD3e3yNsC2DdHR36FSYt9nZat+HjpaQr9bR6tMcmg0oEm80OSfUOpEDq9Z3p2V
-         2fkhpv+9wyqLN9zsReRmdueCqEeGWNaxEmJJMxe4Hm0B+1jt0tTmHRxOiLC3gFRaUyUs
-         M9/w==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=BZIJwuNiYUHO4CTXnsaHFhWN/6vZHu7dxq3SnErMjxQ=;
+        b=m+xasH8wPVpmZC7YN2fCbBrKUn8Y0WDhBwVawi/OWuydZHWOTUscVJivYPEqSryWrC
+         b2vOu3UQsVXcbgqP3SLKFgAUEuDQH/oBtMHWI58rv3DXH9fVfWIhbBUsQhCeRzYxXrrz
+         C2dhFeAsiH4U2hAxcCj6nGPE9BXQBAV2vCgZMZO0PZXzxZJuTU2uYR0C5o8rqZT0hYxT
+         4T/hObp799bxOHdzhaCjZ5zi33dWB9lVZ6uLI4bTPiEVllKIAO//O641OHJ7cOpO4N1I
+         bcDN+pbgfkusnBozjC9jgDiP6SarDpLcfsccETRr+rXTH+aTn+9IstTremV3R/4sRBvt
+         q/vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=PB0dvBzIJDyCzGVAGkhCra3giEV77E9PIjRMmRiPt/k=;
-        b=uHSI+mbHP/CzleiDuyBdPgZgg4gl7nVa85EH8YgyzW8QM8khz0rHU492nQJBlGtcbD
-         Bf5gtGAIDwEixyzDi+JwNyfjqM2ONe1K7eBKsH9CdVxNDGBona7HkJ9A3NmhxZSztZNa
-         QDNglhNX93ya/V/wUvjbe5KLniTJYpqeu73i/3nb0kjqsmTMDrZYY6dYCyNFC/q70TzA
-         L5q5aT0v5bs0kX25njFDo7yEt3t3GZvTwd5dC/oAiNrnsOqnzkYQrkLisvtdlvSgnr4r
-         ehsdCFsvAQRGNnbOeX7/n/tXolg33c50qgPPbUG/47ENyssfKrY1GxWtTK3Nixy6s+cE
-         0j8w==
-X-Gm-Message-State: AOAM531U5G9kZzzDDPtQhcQefds9G6QGeyucQXQZmGrPG6LRWsuHGvAv
-	cn/jLWTuvjSF1NqzDCj9X16Gol0g5c0TLQ==
-X-Google-Smtp-Source: ABdhPJw6ZmjS6Hr3FaYjcZNlPS/+/8WIPfYv97pxCVL6Z1AFWwNw81b9C2uOUmoq26l8vJiQP1RsGQ==
-X-Received: by 2002:a17:902:bb8e:b029:e6:3b2:5834 with SMTP id m14-20020a170902bb8eb02900e603b25834mr22636749pls.38.1617594730251;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=BZIJwuNiYUHO4CTXnsaHFhWN/6vZHu7dxq3SnErMjxQ=;
+        b=cjpBFmRuSmj2NcIzk4+adN5EDEnvJtSNpnOfugnXF7wwLyvFm54Irf3X1kBHQwEJJQ
+         /GxPFlnx9cPKc7BEF3qKEqiNwgW2uvVS0ZjR3/Ydq3P7X7oiOjrrCmd0JSSg62PGDJLB
+         WYfwXOK/G54YOxf7Ik/MFZ3tGV0QVO9H4R03hTdKgH076zsP3jw6h0H4HYq8beL2oAFg
+         Gf5W9+C6a/y/fgIZmwUJ/Ak7o7P0/BokNoZxkz3FypeLhAql4LLxdEQovQGzJYv02XUq
+         lhxvXS4Ezpr8t2VoZAEyf56hNSbkPs3pZHGItdu/R5lVFVaFOiLRsbmhO+V7ON5G/Cwq
+         mbpw==
+X-Gm-Message-State: AOAM533n09qZoSd7GCazCNh+L4RoyPU8M+/FBGBV9eQ5zPq4zGgbd38E
+	v4GpRYLuM0A5ItDswqxGl4esXmQ00zg4nA==
+X-Google-Smtp-Source: ABdhPJwet5BUDx93+xguCSwFH9Sf/XN8s4kXKdnna/+vb4J4Vue1dSgwbd4e3kDOp6Z1dsZEr3qsow==
+X-Received: by 2002:a17:90a:b909:: with SMTP id p9mr15661761pjr.230.1617594730910;
         Sun, 04 Apr 2021 20:52:10 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::bc1b])
-        by smtp.gmail.com with ESMTPSA id q19sm14443040pff.91.2021.04.04.20.52.09
+        by smtp.gmail.com with ESMTPSA id q19sm14443040pff.91.2021.04.04.20.52.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Apr 2021 20:52:09 -0700 (PDT)
+        Sun, 04 Apr 2021 20:52:10 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/2] iwd: Upgade to 1.13
-Date: Sun,  4 Apr 2021 20:52:06 -0700
-Message-Id: <20210405035207.196290-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/2] libmanette: Add recipe
+Date: Sun,  4 Apr 2021 20:52:07 -0700
+Message-Id: <20210405035207.196290-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20210405035207.196290-1-raj.khem@gmail.com>
+References: <20210405035207.196290-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+Its needed for gamepad support in webkit
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-connectivity/iwd/{iwd_1.12.bb => iwd_1.13.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/iwd/{iwd_1.12.bb => iwd_1.13.bb} (96%)
+ .../packagegroups/packagegroup-meta-oe.bb        |  2 +-
+ .../libmanette/libmanette_0.2.6.bb               | 16 ++++++++++++++++
+ 2 files changed, 17 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/libmanette/libmanette_0.2.6.bb
 
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.12.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.13.bb
-similarity index 96%
-rename from meta-oe/recipes-connectivity/iwd/iwd_1.12.bb
-rename to meta-oe/recipes-connectivity/iwd/iwd_1.13.bb
-index ccdc65ac6c..1654bc1a75 100644
---- a/meta-oe/recipes-connectivity/iwd/iwd_1.12.bb
-+++ b/meta-oe/recipes-connectivity/iwd/iwd_1.13.bb
-@@ -7,7 +7,7 @@ DEPENDS = "ell"
- 
- SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git \
-           "
--SRCREV = "bde3e0f6e3364e9c884b6b93a944d8138345b8e5"
-+SRCREV = "f80189d161b2e346458cc536785d55dc05845320"
- S = "${WORKDIR}/git"
- 
- inherit autotools manpages pkgconfig python3native systemd
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index a6513352c0..59908e2c0f 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -760,7 +760,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
+     ccid \
+     zchunk \
+     libgpiod \
+-    libgpiod \
++    libmanette \
+     ckermit \
+     libcereal \
+     daemontools \
+diff --git a/meta-oe/recipes-support/libmanette/libmanette_0.2.6.bb b/meta-oe/recipes-support/libmanette/libmanette_0.2.6.bb
+new file mode 100644
+index 0000000000..23ab348dcf
+--- /dev/null
++++ b/meta-oe/recipes-support/libmanette/libmanette_0.2.6.bb
+@@ -0,0 +1,16 @@
++# Copyright (C) 2021 Khem Raj <raj.khem@gmail.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
++SUMMARY = "The simple GObject game controller library"
++HOMEPAGE = "https://gnome.pages.gitlab.gnome.org/libmanette/"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
++
++DEPENDS = "libevdev libgudev"
++
++SRC_URI = "https://download.gnome.org/sources/libmanette/0.2/libmanette-${PV}.tar.xz"
++SRC_URI[sha256sum] = "63653259a821ec7d90d681e52e757e2219d462828c9d74b056a5f53267636bac"
++
++inherit meson pkgconfig gobject-introspection ptest vala
++
++FILES_${PN}-ptest =+ "${bindir}/manette-test"
++FILES_${PN}-dev =+ "${libdir}/girepository-1.0"
 -- 
 2.31.1
 
