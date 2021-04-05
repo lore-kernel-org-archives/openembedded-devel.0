@@ -1,21 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.3881.1617626983110079640
+ by mx.groups.io with SMTP id smtpd.web09.4086.1617626984172564773
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Apr 2021 05:49:43 -0700
+ Mon, 05 Apr 2021 05:49:44 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=55456 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lTOfi-0005yF-DX; Mon, 05 Apr 2021 15:49:40 +0300
+	id 1lTOfk-0005yF-BE; Mon, 05 Apr 2021 15:49:42 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-networkx: Upgrade 2.5 -> 2.5.1
-Date: Mon,  5 Apr 2021 15:49:29 +0300
-Message-Id: <20210405124933.8920-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-pysonos: Upgrade 0.0.40 -> 0.0.41
+Date: Mon,  5 Apr 2021 15:49:30 +0300
+Message-Id: <20210405124933.8920-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210405124933.8920-1-leon.anavi@konsulko.com>
+References: <20210405124933.8920-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,34 +30,29 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.5.1:
+Upgrade to release 0.0.41:
 
-- pagerank uses scipy by default now
-- New source argument to has_eulerian_path to look for path
-  starting at source
-- prefix_tree now uses a non-recursive algorithm. The original
-  recursive algorithm is still available via prefix_tree_recursive
+- Add events_asyncio events module
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-networkx_2.5.bb => python3-networkx_2.5.1.bb}     | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-networkx_2.5.bb => python3-networkx_2.5.1.bb} (70%)
+ .../{python3-pysonos_0.0.40.bb => python3-pysonos_0.0.41.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pysonos_0.0.40.bb => python3-pysonos_0.0.41.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-networkx_2.5.bb b/meta-python/recipes-devtools/python/python3-networkx_2.5.1.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-networkx_2.5.bb
-rename to meta-python/recipes-devtools/python/python3-networkx_2.5.1.bb
-index 70573828b..0b52cfd7e 100644
---- a/meta-python/recipes-devtools/python/python3-networkx_2.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-networkx_2.5.1.bb
-@@ -3,8 +3,7 @@ HOMEPAGE = "http://networkx.github.io/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a24ea029adac8935699bf69b2e38c728"
+diff --git a/meta-python/recipes-devtools/python/python3-pysonos_0.0.40.bb b/meta-python/recipes-devtools/python/python3-pysonos_0.0.41.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-pysonos_0.0.40.bb
+rename to meta-python/recipes-devtools/python/python3-pysonos_0.0.41.bb
+index dbfa0dff5..564d60ee4 100644
+--- a/meta-python/recipes-devtools/python/python3-pysonos_0.0.40.bb
++++ b/meta-python/recipes-devtools/python/python3-pysonos_0.0.41.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=07b0e2ca9ac77cd65cd4edf2e13367ea"
  
--SRC_URI[md5sum] = "21f25be1f4373e19153a9beca63346e7"
--SRC_URI[sha256sum] = "7978955423fbc9639c10498878be59caf99b44dc304c2286162fd24b458c1602"
-+SRC_URI[sha256sum] = "109cd585cac41297f71103c3c42ac6ef7379f29788eb54cb751be5a663bb235a"
+-SRC_URI[sha256sum] = "3fed94dffbca5807d39d000d1415fe8d7dfc1032ba92a33d0b577eb2e98a81f3"
++SRC_URI[sha256sum] = "08d17fee04cc8209b915e61407673ea843b55792a9301fbe86adb9cc69a67a54"
  
  inherit pypi setuptools3
  
