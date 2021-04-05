@@ -1,93 +1,64 @@
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.web09.488.1617594800905132416
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web10.3881.1617626983110079640
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Apr 2021 20:53:21 -0700
+ Mon, 05 Apr 2021 05:49:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=OytQdd7T;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id j25so7374384pfe.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 04 Apr 2021 20:53:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=1CyqWD39+ioacq45wWMidJf151MZR8mKaA5ZuYKwC/4=;
-        b=OytQdd7TaPhbL3ePwdjv5Hmau6TgP+FT/DoV2KeY/Zt0VzI8gb6zjIVU2s6XC9lKpe
-         3DMDj/P9hRW0Re66/7WIDC0yyhPPIcXftPC2rqtiSnvylP0H3TZc1kvTn0JfPRCX2t04
-         kn2MU+q3vq8I54idf4JcOrUVvY7waQfgnuGvTk4U4T4kX7IwQHCgGiVDhn0/a4vEb5T2
-         AOopdV2HqbhELsY8/aq4a3jF/j4Y3diBene3Ae0pwZNBaefkc6jbd+eXn5BGcnKFKbOn
-         ekfMpiItJsWT96ztTb86OVtZ/tO0DFESGUTGMqt9lcd6gjdZTwUYLeMV93c1IlmmrIvN
-         J83g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=1CyqWD39+ioacq45wWMidJf151MZR8mKaA5ZuYKwC/4=;
-        b=hVPYoTYW5W2KoRcqaE06zuXpqLunCMvMe9bEJjK7p1l4CHUuNbAr3+9l/JjTeJQhOl
-         zCiBhoYEh39o2oUwupc8kbcEBiu8BE6/97X5Xq9alOeyVjqIHOoqzMLPpKdbbfFWb3mw
-         3HsUhPFKVp60UjMBct7EN0s+G4UXoS34A7S/8wejoPAk/dhV522baBV3SKrTrZfdLNCs
-         SfgTvdCBQCfArOA/zcZJItRvKAn8smq4+pyFLRkwvcrZClgER1fCyIyTxe/efWpYWpvQ
-         0rl1ERE3tg0G964bofnD603i4xnt9ojqf0XdLsE55I1VfenUVwfDVYvp47GzF98bXX9G
-         H8OQ==
-X-Gm-Message-State: AOAM530FZmR0+WWp+N/033jXwq+n+1afIItZdomUocQBwvmvkGxXA+wj
-	0yjEJHb6WNf7jnWwihaO7uD13j1Rt7PMGw==
-X-Google-Smtp-Source: ABdhPJxwBgOqXDRDqXYt9LaLpTXp44b3vwdX/Mm0KeFpVrWE2ui90beCoNPpb9HasMYwL/vnBylr/g==
-X-Received: by 2002:a63:6f8a:: with SMTP id k132mr22126365pgc.59.1617594800099;
-        Sun, 04 Apr 2021 20:53:20 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::bc1b])
-        by smtp.gmail.com with ESMTPSA id s7sm13770265pjr.18.2021.04.04.20.53.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Apr 2021 20:53:19 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=55456 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1lTOfi-0005yF-DX; Mon, 05 Apr 2021 15:49:40 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: "hasan.men" <hasan.men@bosphorusiss.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] libcppkafka: Add initial recipe for cppkafka wrapper
-Date: Sun,  4 Apr 2021 20:53:17 -0700
-Message-Id: <20210405035317.196532-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210405035317.196532-1-raj.khem@gmail.com>
-References: <20210405035317.196532-1-raj.khem@gmail.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-networkx: Upgrade 2.5 -> 2.5.1
+Date: Mon,  5 Apr 2021 15:49:29 +0300
+Message-Id: <20210405124933.8920-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-From: "hasan.men" <hasan.men@bosphorusiss.com>
+Upgrade to release 2.5.1:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+- pagerank uses scipy by default now
+- New source argument to has_eulerian_path to look for path
+  starting at source
+- prefix_tree now uses a non-recursive algorithm. The original
+  recursive algorithm is still available via prefix_tree_recursive
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../libcppkafka/libcppkafka_git.bb            | 22 +++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 meta-oe/recipes-support/libcppkafka/libcppkafka_git.bb
+ .../{python3-networkx_2.5.bb => python3-networkx_2.5.1.bb}     | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-networkx_2.5.bb => python3-networkx_2.5.1.bb} (70%)
 
-diff --git a/meta-oe/recipes-support/libcppkafka/libcppkafka_git.bb b/meta-oe/recipes-support/libcppkafka/libcppkafka_git.bb
-new file mode 100644
-index 0000000000..6237638d3d
---- /dev/null
-+++ b/meta-oe/recipes-support/libcppkafka/libcppkafka_git.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "high level C++ wrapper for rdkafka"
-+DESCRIPTION = "cppkafka allows C++ applications to consume and produce messages using the Apache Kafka protocol."
-+HOMEPAGE = "https://github.com/mfontanini/cppkafka"
-+SECTION = "lib"
-+LICENSE = "BSD-2-Clause"
-+
-+LIC_FILES_CHKSUM = " \
-+file://LICENSE;md5=d8b4ca15d239dc1485ef495c8f1bcc72 \
-+"
-+
-+SRC_URI = "git://github.com/mfontanini/cppkafka;protocol=https"
-+SRCREV = "5e4b350806d561473138ce7a982e8f6cf2e77733"
-+
-+DEPENDS = "librdkafka boost chrpath-replacement-native"
-+
-+inherit cmake
-+
-+S = "${WORKDIR}/git"
-+
-+do_install_append(){
-+    chrpath -d ${D}${libdir}/libcppkafka.so.0.3.1
-+}
+diff --git a/meta-python/recipes-devtools/python/python3-networkx_2.5.bb b/meta-python/recipes-devtools/python/python3-networkx_2.5.1.bb
+similarity index 70%
+rename from meta-python/recipes-devtools/python/python3-networkx_2.5.bb
+rename to meta-python/recipes-devtools/python/python3-networkx_2.5.1.bb
+index 70573828b..0b52cfd7e 100644
+--- a/meta-python/recipes-devtools/python/python3-networkx_2.5.bb
++++ b/meta-python/recipes-devtools/python/python3-networkx_2.5.1.bb
+@@ -3,8 +3,7 @@ HOMEPAGE = "http://networkx.github.io/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a24ea029adac8935699bf69b2e38c728"
+ 
+-SRC_URI[md5sum] = "21f25be1f4373e19153a9beca63346e7"
+-SRC_URI[sha256sum] = "7978955423fbc9639c10498878be59caf99b44dc304c2286162fd24b458c1602"
++SRC_URI[sha256sum] = "109cd585cac41297f71103c3c42ac6ef7379f29788eb54cb751be5a663bb235a"
+ 
+ inherit pypi setuptools3
+ 
 -- 
-2.31.1
+2.17.1
 
