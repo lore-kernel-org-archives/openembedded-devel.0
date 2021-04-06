@@ -1,335 +1,151 @@
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
- by mx.groups.io with SMTP id smtpd.web11.2897.1617753141630441465
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.71])
+ by mx.groups.io with SMTP id smtpd.web10.14.1617753574502487485
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Apr 2021 16:52:22 -0700
+ Tue, 06 Apr 2021 16:59:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: randy.macleod@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 136NqK01002850
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 6 Apr 2021 16:52:20 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2106.2; Tue, 6 Apr 2021 16:52:19 -0700
-Received: from vme.wrs.com (172.25.44.2) by ala-exchng01.corp.ad.wrs.com
- (147.11.82.252) with Microsoft SMTP Server id 15.1.2106.2 via Frontend
- Transport; Tue, 6 Apr 2021 16:52:19 -0700
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=a4U9yaA6;
+ spf=pass (domain: windriver.com, ip: 40.107.223.71, mailfrom: randy.macleod@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=oBJQNKO7TICHUuon4uy0IqpQ6XbleuojqBA2AkxeTt33ZooaSSwzbhD/bSknzvtOMudb6f5NphkxoRsFS4EY1DaWh/bKL+ibL9dl0tUHicEkRC/B2LkeIQGUOmv8PPwu8cRWogG8yZ+uyGO+tlbhetkarmVFda4ka/pWSN6E7ZJgkG/QZv+T6jkYGS3n+quj/Iew7nXcGHlAEBBOz861BOOjmt2jbKtLLklAYO5NDieedbz2jwpzHWyQqYem0ufSmsv7yhL/bk7PGQKpzWgm3UgPosV7tVx0JVsDOn2vU5WqQTt7fIY+o3Y+G5t86tCGI/9jZ8bmHf59i8qzDt6Jqw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=d5VUfroKUQy3Wge5y8P8ZsZwiWTsHU7rfSiAmljkiLQ=;
+ b=HAT3B+k5EQ2HjkqD809KQVpIl91Osqr2zG3B7bm9DdsJXwt4VWZDolN20ptjbB+FdMymKnDsYlhHSOzMlecatYMsUZhdoiGWlyOBhPO2gXFoSli45CgMgNLatZWuHlciwb281GGcKUNLMSrPT/IlJ0Rqu+IU5BcGi0mBQ2WoUYjAum2//LT6e+7BqdtnkNQ8w5cJr3Zrj8tdsoyCb/mvRlRD8Kg7lL1jURYACVcsRh1I+JKqZceWpyhwPfByUuktgp/yqEDuESk62qX5Ckbxrk12HwdIacDbBF828ISgyI/3t1dAwRlLHVPzxm8akDg8T6ij9tJ/OIUY7gK/sPzqWQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=d5VUfroKUQy3Wge5y8P8ZsZwiWTsHU7rfSiAmljkiLQ=;
+ b=a4U9yaA6CpvlL1gL2jb90j7BqZ9OI/rhqxJeZTvMy4rDwsli+87y7Kt5CiJvW1PVyCoCMYnUdk7Jlhho1zbSBKpdLJ8KG+k0FFN/DzrhoTn4TWjZlFgnIIM9z4/LTsNiIFxDDacpksxRRhmWLFLoLN6Oe0Lbv9nnRUo9gMzYSfc=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from DM6PR11MB3994.namprd11.prod.outlook.com (2603:10b6:5:193::19)
+ by DM5PR11MB0027.namprd11.prod.outlook.com (2603:10b6:4:6b::33) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3999.32; Tue, 6 Apr
+ 2021 23:59:32 +0000
+Received: from DM6PR11MB3994.namprd11.prod.outlook.com
+ ([fe80::f17d:2de1:291f:80a9]) by DM6PR11MB3994.namprd11.prod.outlook.com
+ ([fe80::f17d:2de1:291f:80a9%4]) with mapi id 15.20.3999.032; Tue, 6 Apr 2021
+ 23:59:32 +0000
+Subject: Re: [oe] [PATCH] doxygen: Upgrade 1.8.20 -> 1.9.1
 From: "Randy MacLeod" <randy.macleod@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH] doxygen: Upgrade 1.8.20 -> 1.9.1
-Date: Tue, 6 Apr 2021 19:52:18 -0400
-Message-ID: <20210406235218.773980-1-Randy.MacLeod@windriver.com>
-X-Mailer: git-send-email 2.27.0
+To: openembedded-devel@lists.openembedded.org
+References: <167369E961644282.7917@lists.openembedded.org>
+Message-ID: <1377fa19-183d-293c-d3c8-9c9b11782c12@windriver.com>
+Date: Tue, 6 Apr 2021 19:59:28 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.1
+In-Reply-To: <167369E961644282.7917@lists.openembedded.org>
+X-Originating-IP: [198.48.226.187]
+X-ClientProxiedBy: BYAPR11CA0098.namprd11.prod.outlook.com
+ (2603:10b6:a03:f4::39) To DM6PR11MB3994.namprd11.prod.outlook.com
+ (2603:10b6:5:193::19)
+Return-Path: randy.macleod@windriver.com
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [172.25.44.2] (198.48.226.187) by BYAPR11CA0098.namprd11.prod.outlook.com (2603:10b6:a03:f4::39) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3999.29 via Frontend Transport; Tue, 6 Apr 2021 23:59:31 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 3140dbcb-119a-4064-3192-08d8f95805a0
+X-MS-TrafficTypeDiagnostic: DM5PR11MB0027:
+X-Microsoft-Antispam-PRVS: 
+	<DM5PR11MB00276EC5DE3C612246C41B22F8769@DM5PR11MB0027.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1728;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	OZCSlv4iEtAwROT2KsW7jL0SQmtdH+5lynUnieEpsanHuEa8W8QyCH01/h6HAX9p7zj/VO+jq5MGv13srYNjqutZQPYBvqB/Hh9SDMh5hIF6oZxsWqJOPT+KOaSxD6VsRL7PHDJtiujp1vXjMVbUMsSRwZosUSZqbjkQdAtkqUFQcna4X8B9NJYBlar64EWH/jrBZec9+HjiRoAvIY9aTTOrDeSeHCIjoT7xqB1WXUfnTGvTCTEDyx0337csO+quLyxrAHJD+chYywtjUAac8RmABfcWK+xIzSVUTcFzHTYQ/3O2lC71Hl0/oYW5uR1coQQ7efRoBOrBtcX0kvbcZ/oYhHpNOd3T9NiqlxS17wZUXhtdkmpBhvwHuUMevp8J7JQRt6KtNXnNslMJcPOkwsMISkzFy/Tfb+3DmKx54XdMhgfvuolZjc2HATuMyfHMZXffkwzIHh3/rjptPlm/GW5u8TvcpMzVckj1n2nWKdrpbR7wbD3cRt39m1ik2v7i1RMBmsCcNnlEZ+wn+3KZ2GacLjqieE3yYnyJ3qBrGnU4MDmuOSSOvhZ9ua1vI7IE3t2HKVtxWIc90sTxJfAzq2uq2kL8p+/kIgYHTWnj6M6vMeRQfYJGzpoVgMF2qgTviwVxwW/6BaqmizdT+DX0+kNtGXr1TRsGspPKc5drdFYsrXQPqpAwI+rupXEkrPw6NNUDYGmJYToMTUutXl5sbTsQ2AT/3xbk0LH9pO2bv1BWCwXZu7eoZyk9u8WP1rik
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3994.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(396003)(366004)(376002)(136003)(346002)(8936002)(66556008)(956004)(2616005)(31686004)(5660300002)(4744005)(86362001)(478600001)(16576012)(52116002)(38350700001)(26005)(36756003)(38100700001)(16526019)(31696002)(66476007)(8676002)(2906002)(316002)(6916009)(6666004)(66946007)(6486002)(186003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	=?utf-8?B?NnFXY2lzWm9qS3RzREVDUXp5blhHTXh6MDUyMDBaREJoenpiUkt4ZnpQSDBT?=
+ =?utf-8?B?bFpFOWhoanRzMEVjbkdZQjdoZDRkRm50bDhaR0hlSGZDQXlKR1REMHFyeE5z?=
+ =?utf-8?B?RCtQS0liS21vNGVKMFVjanA0VlF2U0xsdlgxNTBsbWtzTzdPcklzdXR1VXRD?=
+ =?utf-8?B?bjdGaXY4K0FCWmk4aXVsZ2h6Q0V5dkRhTWd3aHpQTXVaZThVSnlGaUZzOXBw?=
+ =?utf-8?B?Z3AveWF1SUhBK1RNSUFEUlllMW13alF5Y3lnbnNRQndmQU5GTUdob01UeDQv?=
+ =?utf-8?B?RnBVaGtFQWcyTXM1azA2VzUwSVJtcE95QXBrdjJZZ3BJb2QyTnh4T1BtZ1lY?=
+ =?utf-8?B?RjZxbVVJUGI4Sm1kcHBtU25aWHVFYVVxUHR1TEVCOUMvcllVWHl2M1ZmQlR1?=
+ =?utf-8?B?c3ltaFdXVE91NEppRzcxQktIS3VPVHRiTmc1QjZzODVEVS83S3h4ckNsOWMr?=
+ =?utf-8?B?UWQ4NFFoQndSMzN6QTVLVGd2V1ErWjYvMWNOWXZ6d3QzMlpWZlBFWTNvUTdq?=
+ =?utf-8?B?UDJnQXgwUFVUalk5OGVrb09zT2tjZ2s2aUtKY214ZjRqUXoyU2FERjF1TUJY?=
+ =?utf-8?B?MXQwSDZoOTZGSmx6MVhlU2ptYmpaajRlc0FieC9mWG1sUU5IUFN2UkNKRHJY?=
+ =?utf-8?B?Uk1GdVNvQkdENm1QSENMcjR6ZytWVXFlTmdRZEpGTy9LZFNaVWJDWlFkS2g0?=
+ =?utf-8?B?WG5wOTJOb2Q4YTBadWg4NHFBckNCemZ4aTdGNU5UT0d2bUIrcWRZOFFhK01Y?=
+ =?utf-8?B?RWt5YU1tbHJkdmcyRWdudDU2b1N3cmgxdjdMZTNkZzYvVzNJSWZPUHZCTnc4?=
+ =?utf-8?B?NlNmUjQvS2VTMFJXRW9MNERldUdHaFdZZHE2N0ZPbmtINVpGVjdXZE40ME1B?=
+ =?utf-8?B?MWwyWWxNVzVrdEVQd01hbWhQUlRYUmpJbll6UE1qaTlRM0tLSzJHN3FQTEpw?=
+ =?utf-8?B?dHpHTFlsbERVN3FmTDY2bms0Nmo2YmtGbHcyd291UWdXWmdjV0YzZTM4UzRo?=
+ =?utf-8?B?TjVHaWswVUFFN1Y1ODdaZ254M1Fkb28rdGZsTWwrVUVBZnNaVzRLSysvMUhk?=
+ =?utf-8?B?bEd5cU1sQXYrWVBXemNmQ0Q5SVRGNENXTW1mamRpcmxoUkVDUUd3NlVMaXVZ?=
+ =?utf-8?B?VmZ0U1lwRUUwMkF0ZlVHTWpEUTNqOGxuRUhQTS8vNmZ0WmFsd2JGSk9aMWpv?=
+ =?utf-8?B?Rjk1RnZ0NVRHQmdaenpGTmcwbWZkZ0pTbmZ1cGJHa29aRS80RVlBZm5PTVox?=
+ =?utf-8?B?ekMzRW5oMFhIOTJ6WnlEUTN2YTdkSUdRa2J4aWJyejQvclpFa2J0OU1KYVdM?=
+ =?utf-8?B?RERpRkZHcUxTb25LdDRqN0pUSGJHNUxoSmNHWkxHeWpWSkF3VmFWOXpiS29B?=
+ =?utf-8?B?NVpuZHBGOXRLUmNXY29NQmlvVk0vWVFqaE5jT3R6RDArcVVCaUY4Ni9jNTFx?=
+ =?utf-8?B?Z3JscTNVQU12UEtDMEZORFF2dWcwcklOSWhjNzREc1pOaG13cGlEUXIvZWFz?=
+ =?utf-8?B?ME5BTzdsMnFrOU1YWDQveGhLUngydGFUeWkrYzJubVBCRVpvSG9UTUpZZjg3?=
+ =?utf-8?B?bWNRUWxXUVhaeWQ4dlBpKzZPYnNYejRteEFpRjJkellGQ1RHWmd6SXBzNnZR?=
+ =?utf-8?B?Si9NV1c4a0ZnTUJsdStkR1hqbVE4UzNRaXprK2hVT3ZqZXA1TE5acVE3V0hh?=
+ =?utf-8?B?Y0hRajZsYSt0b1BjUk9oaXBQemQrb2RsZkt4SFFzYTZuS2RvUXZnUld1aUxV?=
+ =?utf-8?Q?55M/meIjei6vaeLvdUXHgCsh+vVrMtsTSEvaPbD?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3140dbcb-119a-4064-3192-08d8f95805a0
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3994.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Apr 2021 23:59:32.1267
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: u2Lzhr6hXMrSTMmu6Zb5WnC1e1GDXAdq0q4GdKHnWUG1f2W01U3gy4TgxxRHZO5+cCxhmU+0z4IikCJX6LHAkQrKUp1TPxlURsIZ3Mk918I=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB0027
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-CA
+Content-Transfer-Encoding: 7bit
 
-Refit and update patches.
+Build results haven't changed since 1.8.20
 
-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
----
- .../0001-build-don-t-look-for-Iconv.patch     |   9 +-
- .../doxygen-native-only-check-python3.patch   | 116 +++++++++---------
- .../{doxygen_1.8.20.bb => doxygen_1.9.1.bb}   |   3 +-
- 3 files changed, 61 insertions(+), 67 deletions(-)
- rename meta-oe/recipes-devtools/doxygen/{doxygen_1.8.20.bb => doxygen_1.9.1.bb} (79%)
+$ cat doxygen-buildall.log
+BUILDALL-QEMU LOG FOR doxygen
+START TIME: 2021-04-06_07:45:55
+HOSTNAME: ala-lpggp3
+HOST OS: Ubuntu 18.04.3 LTS
+HOST KERNEL: 5.4.0-67-generic
+===============
+BUILD RESULTS:
+[glibc]
+PASS: qemuriscv32
+PASS: qemuarmv5
+PASS: qemumips
+PASS: qemux86-64
+PASS: qemuarm64
+PASS: qemumips64
+PASS: qemuarm
+PASS: qemuppc
+PASS: qemuriscv64
+PASS: qemuppc64
+PASS: qemux86
+[musl]
+FAIL: qemuriscv32
+PASS: qemuarmv5
+PASS: qemumips
+PASS: qemux86-64
+PASS: qemuarm64
+PASS: qemumips64
+PASS: qemuarm
+PASS: qemuppc
+PASS: qemuriscv64
+FAIL: qemuppc64
+PASS: qemux86
+===============
+PASSED: 20
+FAILED: 2
 
-diff --git a/meta-oe/recipes-devtools/doxygen/doxygen/0001-build-don-t-look-for-Iconv.patch b/meta-oe/recipes-devtools/doxygen/doxygen/0001-build-don-t-look-for-Iconv.patch
-index c86dc1691..6906efd1c 100644
---- a/meta-oe/recipes-devtools/doxygen/doxygen/0001-build-don-t-look-for-Iconv.patch
-+++ b/meta-oe/recipes-devtools/doxygen/doxygen/0001-build-don-t-look-for-Iconv.patch
-@@ -8,6 +8,7 @@ native build but all modern systems supply it as part of the standard
- C library. We don't need this check in meta-openembedded.
- 
- Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
-+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
- 
- Upstream-status: Inappropriate
- - upstream doxygen must build on many architectures, this change is
-@@ -17,10 +18,10 @@ Upstream-status: Inappropriate
-  1 file changed, 4 deletions(-)
- 
- diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 45c2f2c1..22cf0144 100644
-+index 06b9696f..f30b46b8 100644
- --- a/CMakeLists.txt
- +++ b/CMakeLists.txt
--@@ -92,10 +92,6 @@ if (sqlite3)
-+@@ -117,10 +117,6 @@ if (sqlite3)
-    endif()
-  endif()
-  
-@@ -28,9 +29,9 @@ index 45c2f2c1..22cf0144 100644
- -include_directories(${ICONV_INCLUDE_DIR})
- -
- -
-- #set(DOXYDOCS ${CMAKE_SOURCE_DIR}/doc CACHE INTERNAL "Path to doxygen docs")
-+ #set(DOXYDOCS ${PROJECT_SOURCE_DIR}/doc CACHE INTERNAL "Path to doxygen docs")
-  set(DOXYDOCS ${PROJECT_BINARY_DIR}/doc)
-  set(ENV{DOXYGEN_DOCDIR} ${DOXYDOCS})
- -- 
--2.17.1
-+2.27.0
- 
-diff --git a/meta-oe/recipes-devtools/doxygen/doxygen/doxygen-native-only-check-python3.patch b/meta-oe/recipes-devtools/doxygen/doxygen/doxygen-native-only-check-python3.patch
-index 53f88885f..9d1a5a93d 100644
---- a/meta-oe/recipes-devtools/doxygen/doxygen/doxygen-native-only-check-python3.patch
-+++ b/meta-oe/recipes-devtools/doxygen/doxygen/doxygen-native-only-check-python3.patch
-@@ -1,4 +1,4 @@
--From aa833cf56c5cc2e87a1d91881eb2286beb34e417 Mon Sep 17 00:00:00 2001
-+From 7aeee92c752f8a4b2524ed6a41d60c1a3ca8bf2d Mon Sep 17 00:00:00 2001
- From: Leon Anavi <leon.anavi@konsulko.com>
- Date: Wed, 26 Aug 2020 10:52:10 +0300
- Subject: [PATCH] doxygen: Fix Python issues for doxygen-native
-@@ -32,25 +32,28 @@ result variable PYTHON_EXECUTABLE with Python3_EXECUTABLE.
- 
- This patch is only needded by doxygen-native.
- 
-+Updated to apply to release 1.9.1.
-+
- Upstream-Status: Inappropriate[oe specific]
- 
- Co-Authored-By: Kai Kang <kai.kang@windriver.com>
- Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
- ---
-  CMakeLists.txt                  |  2 +-
-  addon/doxywizard/CMakeLists.txt |  6 +++---
-  doc/CMakeLists.txt              |  6 +++---
-  examples/CMakeLists.txt         |  4 ++--
-  libmscgen/CMakeLists.txt        |  2 +-
-- src/CMakeLists.txt              | 12 ++++++------
-+ src/CMakeLists.txt              | 10 +++++-----
-  testing/CMakeLists.txt          |  4 ++--
-- 7 files changed, 18 insertions(+), 18 deletions(-)
-+ 7 files changed, 17 insertions(+), 17 deletions(-)
- 
- diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 35e6a0c2..9aaebbdf 100644
-+index f30b46b8..50f211c8 100644
- --- a/CMakeLists.txt
- +++ b/CMakeLists.txt
--@@ -100,7 +100,7 @@ else ()
-+@@ -101,7 +101,7 @@ else ()
-  endif ()
-  
-  find_program(DOT NAMES dot)
-@@ -60,50 +63,50 @@ index 35e6a0c2..9aaebbdf 100644
-  find_package(BISON REQUIRED)
-  if (BISON_VERSION VERSION_LESS 2.7)
- diff --git a/addon/doxywizard/CMakeLists.txt b/addon/doxywizard/CMakeLists.txt
--index 6aacd8b6..fa197e9e 100644
-+index a6f65f8d..d163aa5b 100644
- --- a/addon/doxywizard/CMakeLists.txt
- +++ b/addon/doxywizard/CMakeLists.txt
- @@ -58,7 +58,7 @@ set_source_files_properties(${GENERATED_SRC_WIZARD}/settings.h PROPERTIES GENERA
-  
-  # generate version.cpp
-  add_custom_command(
---    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/src/version.py ${VERSION} > ${GENERATED_SRC_WIZARD}/version.cpp
--+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/src/version.py ${VERSION} > ${GENERATED_SRC_WIZARD}/version.cpp
--     DEPENDS ${CMAKE_SOURCE_DIR}/VERSION ${CMAKE_SOURCE_DIR}/src/version.py
-+-    COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/src/version.py ${VERSION} > ${GENERATED_SRC_WIZARD}/version.cpp
-++    COMMAND ${Python3_EXECUTABLE} ${PROJECT_SOURCE_DIR}/src/version.py ${VERSION} > ${GENERATED_SRC_WIZARD}/version.cpp
-+     DEPENDS ${PROJECT_SOURCE_DIR}/VERSION ${PROJECT_SOURCE_DIR}/src/version.py
-      OUTPUT ${GENERATED_SRC_WIZARD}/version.cpp
-  )
- @@ -66,7 +66,7 @@ set_source_files_properties(${GENERATED_SRC_WIZARD}/version.cpp PROPERTIES GENER
-  
-  # generate configdoc.cpp
-  add_custom_command(
---COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/src/configgen.py -wiz ${CMAKE_SOURCE_DIR}/src/config.xml > ${GENERATED_SRC_WIZARD}/configdoc.cpp
--+COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/src/configgen.py -wiz ${CMAKE_SOURCE_DIR}/src/config.xml > ${GENERATED_SRC_WIZARD}/configdoc.cpp
-- OUTPUT ${GENERATED_SRC_WIZARD}/configdoc.cpp
-+-    COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/src/configgen.py -wiz ${PROJECT_SOURCE_DIR}/src/config.xml > ${GENERATED_SRC_WIZARD}/configdoc.cpp
-++    COMMAND ${Python3_EXECUTABLE} ${PROJECT_SOURCE_DIR}/src/configgen.py -wiz ${PROJECT_SOURCE_DIR}/src/config.xml > ${GENERATED_SRC_WIZARD}/configdoc.cpp
-+     DEPENDS  ${PROJECT_SOURCE_DIR}/src/configgen.py ${PROJECT_SOURCE_DIR}/src/config.xml
-+     OUTPUT ${GENERATED_SRC_WIZARD}/configdoc.cpp
-  )
-- set_source_files_properties(${GENERATED_SRC_WIZARD}/configdoc.cpp PROPERTIES GENERATED 1)
--@@ -74,7 +74,7 @@ set_source_files_properties(${GENERATED_SRC_WIZARD}/configdoc.cpp PROPERTIES GEN
-- set(LEX_FILES config_doxyw) 
-+@@ -75,7 +75,7 @@ set_source_files_properties(${GENERATED_SRC_WIZARD}/configdoc.cpp PROPERTIES GEN
-+ set(LEX_FILES config_doxyw)
-  foreach(lex_file ${LEX_FILES})
-      add_custom_command(
---	    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/src/scan_states.py ${CMAKE_SOURCE_DIR}/addon/doxywizard/${lex_file}.l > ${GENERATED_SRC_WIZARD}/${lex_file}.l.h
--+	    COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/src/scan_states.py ${CMAKE_SOURCE_DIR}/addon/doxywizard/${lex_file}.l > ${GENERATED_SRC_WIZARD}/${lex_file}.l.h
--         DEPENDS ${CMAKE_SOURCE_DIR}/src/scan_states.py ${CMAKE_SOURCE_DIR}/addon/doxywizard/${lex_file}.l
-- 	OUTPUT  ${GENERATED_SRC_WIZARD}/${lex_file}.l.h
-+-        COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/src/scan_states.py ${PROJECT_SOURCE_DIR}/addon/doxywizard/${lex_file}.l > ${GENERATED_SRC_WIZARD}/${lex_file}.l.h
-++        COMMAND ${Python3_EXECUTABLE} ${PROJECT_SOURCE_DIR}/src/scan_states.py ${PROJECT_SOURCE_DIR}/addon/doxywizard/${lex_file}.l > ${GENERATED_SRC_WIZARD}/${lex_file}.l.h
-+         DEPENDS ${PROJECT_SOURCE_DIR}/src/scan_states.py ${PROJECT_SOURCE_DIR}/addon/doxywizard/${lex_file}.l
-+         OUTPUT  ${GENERATED_SRC_WIZARD}/${lex_file}.l.h
-      )
- diff --git a/doc/CMakeLists.txt b/doc/CMakeLists.txt
--index a094c570..8a757c20 100644
-+index f2d177ed..22a4d602 100644
- --- a/doc/CMakeLists.txt
- +++ b/doc/CMakeLists.txt
--@@ -132,7 +132,7 @@ configure_file(${CMAKE_SOURCE_DIR}/doc/doxyindexer.1      ${PROJECT_BINARY_DIR}/
-+@@ -163,7 +163,7 @@ configure_file(${PROJECT_SOURCE_DIR}/doc/doxyindexer.1      ${PROJECT_BINARY_DIR
-  
-  # doc/language.doc (see tag Doxyfile:INPUT)
-  add_custom_command(
---        COMMAND ${PYTHON_EXECUTABLE} translator.py ${CMAKE_SOURCE_DIR}
--+        COMMAND ${Python3_EXECUTABLE} translator.py ${CMAKE_SOURCE_DIR}
--         DEPENDS ${CMAKE_SOURCE_DIR}/doc/maintainers.txt ${CMAKE_SOURCE_DIR}/doc/language.tpl ${PROJECT_BINARY_DIR}/doc/translator.py ${LANG_FILES}
-+-        COMMAND ${PYTHON_EXECUTABLE} translator.py ${PROJECT_SOURCE_DIR}
-++        COMMAND ${Python3_EXECUTABLE} translator.py ${PROJECT_SOURCE_DIR}
-+         DEPENDS ${PROJECT_SOURCE_DIR}/doc/maintainers.txt ${PROJECT_SOURCE_DIR}/doc/language.tpl ${PROJECT_BINARY_DIR}/doc/translator.py ${LANG_FILES}
-          OUTPUT language.doc
-          WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/doc
--@@ -141,7 +141,7 @@ set_source_files_properties(language.doc PROPERTIES GENERATED 1)
-+@@ -172,7 +172,7 @@ set_source_files_properties(language.doc PROPERTIES GENERATED 1)
-  
-  # doc/config.doc (see tag Doxyfile:INPUT)
-  add_custom_command(
-@@ -112,7 +115,7 @@ index a094c570..8a757c20 100644
-          DEPENDS ${TOP}/src/config.xml ${TOP}/src/configgen.py
-          OUTPUT config.doc
-          WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/doc/
--@@ -192,7 +192,7 @@ add_custom_target(docs_chm
-+@@ -223,7 +223,7 @@ add_custom_target(docs_chm
-      COMMAND ${CMAKE_COMMAND} -E echo "    for file in files:" >> ${PROJECT_BINARY_DIR}/chm/doxygen_manual_examples_chm.py
-      COMMAND ${CMAKE_COMMAND} -E echo "        if file.endswith('.html') or file.endswith('.png') or file.endswith('.css') or file.endswith('.gif'):" >> ${PROJECT_BINARY_DIR}/chm/doxygen_manual_examples_chm.py
-      COMMAND ${CMAKE_COMMAND} -E echo "            print(os.path.join(root, file))" >> ${PROJECT_BINARY_DIR}/chm/doxygen_manual_examples_chm.py
-@@ -122,42 +125,42 @@ index a094c570..8a757c20 100644
-      COMMAND ${CMAKE_COMMAND} -E rename ${PROJECT_BINARY_DIR}/chm/index.chm ${PROJECT_BINARY_DIR}/chm/doxygen_manual.chm
-          DEPENDS ${PROJECT_BINARY_DIR}/doc/language.doc ${PROJECT_BINARY_DIR}/doc/config.doc
- diff --git a/examples/CMakeLists.txt b/examples/CMakeLists.txt
--index 3f1c79b8..d5866ee1 100644
-+index 194b4271..248b8076 100644
- --- a/examples/CMakeLists.txt
- +++ b/examples/CMakeLists.txt
--@@ -51,7 +51,7 @@ foreach (f_inp  ${BASIC_EXAMPLES})
--         string(REGEX REPLACE ":.*" "" f ${f_inp})
--     add_custom_command(
-+@@ -54,7 +54,7 @@ foreach (f_inp  ${BASIC_EXAMPLES})
-+         COMMAND ${CMAKE_COMMAND} -E make_directory ${PROJECT_BINARY_DIR}/html/examples/${f}
-+         COMMAND ${CMAKE_COMMAND} -E make_directory ${PROJECT_BINARY_DIR}/latex/examples/${f}
-  	COMMAND ${EXECUTABLE_OUTPUT_PATH}/doxygen ${f}.cfg
---        COMMAND ${PYTHON_EXECUTABLE}  ${TOP}/examples/strip_example.py  < ${PROJECT_BINARY_DIR}/html/examples/${f}/latex/refman.tex > ${PROJECT_BINARY_DIR}/html/examples/${f}/latex/refman_doc.tex
--+        COMMAND ${Python3_EXECUTABLE}  ${TOP}/examples/strip_example.py  < ${PROJECT_BINARY_DIR}/html/examples/${f}/latex/refman.tex > ${PROJECT_BINARY_DIR}/html/examples/${f}/latex/refman_doc.tex
-+-        COMMAND ${PYTHON_EXECUTABLE}  ${TOP}/examples/strip_example.py  < ${PROJECT_BINARY_DIR}/latex/examples/${f}/latex/refman.tex > ${PROJECT_BINARY_DIR}/latex/examples/${f}/latex/refman_doc.tex
-++        COMMAND ${Python3_EXECUTABLE}  ${TOP}/examples/strip_example.py  < ${PROJECT_BINARY_DIR}/latex/examples/${f}/latex/refman.tex > ${PROJECT_BINARY_DIR}/latex/examples/${f}/latex/refman_doc.tex
-  	DEPENDS doxygen ${f}.${f_ext} ${f}.cfg ${TOP}/examples/strip_example.py
-- 	OUTPUT ${PROJECT_BINARY_DIR}/html/examples/${f}/html/index.html ${PROJECT_BINARY_DIR}/html/examples/${f}/latex/refman_doc.tex
-+ 	OUTPUT ${PROJECT_BINARY_DIR}/html/examples/${f}/html/index.html ${PROJECT_BINARY_DIR}/latex/examples/${f}/latex/refman_doc.tex
-      )
--@@ -68,7 +68,7 @@ add_custom_target(examples
-- if (DOT)
--   add_custom_command(
-+@@ -73,7 +73,7 @@ if (DOT)
-+         COMMAND ${CMAKE_COMMAND} -E make_directory ${PROJECT_BINARY_DIR}/html/examples/diagrams
-+         COMMAND ${CMAKE_COMMAND} -E make_directory ${PROJECT_BINARY_DIR}/latex/examples/diagrams
-  	COMMAND ${EXECUTABLE_OUTPUT_PATH}/doxygen diagrams.cfg
---        COMMAND ${PYTHON_EXECUTABLE}  ${TOP}/examples/strip_example.py  < ${PROJECT_BINARY_DIR}/html/examples/diagrams/latex/refman.tex > ${PROJECT_BINARY_DIR}/html/examples/diagrams/latex/refman_doc.tex
-+-        COMMAND ${PYTHON_EXECUTABLE}  ${TOP}/examples/strip_example.py  < ${PROJECT_BINARY_DIR}/latex/examples/diagrams/latex/refman.tex > ${PROJECT_BINARY_DIR}/latex/examples/diagrams/latex/refman_doc.tex
- +        COMMAND ${Python3_EXECUTABLE}  ${TOP}/examples/strip_example.py  < ${PROJECT_BINARY_DIR}/html/examples/diagrams/latex/refman.tex > ${PROJECT_BINARY_DIR}/html/examples/diagrams/latex/refman_doc.tex
-  	DEPENDS doxygen diagrams_a.h diagrams_b.h diagrams_c.h diagrams_d.h diagrams_e.h diagrams.cfg ${TOP}/examples/strip_example.py
-- 	OUTPUT ${PROJECT_BINARY_DIR}/html/examples/diagrams/html/index.html ${PROJECT_BINARY_DIR}/html/examples/diagrams/latex/refman_doc.tex
-+ 	OUTPUT ${PROJECT_BINARY_DIR}/html/examples/diagrams/html/index.html ${PROJECT_BINARY_DIR}/latex/examples/diagrams/latex/refman_doc.tex
-    )
- diff --git a/libmscgen/CMakeLists.txt b/libmscgen/CMakeLists.txt
--index 079fcfc8..e6d86f61 100644
-+index 0a239008..09849e2d 100644
- --- a/libmscgen/CMakeLists.txt
- +++ b/libmscgen/CMakeLists.txt
- @@ -7,7 +7,7 @@ include_directories(
-  set(LEX_FILES mscgen_lexer) 
-  foreach(lex_file ${LEX_FILES})
-      add_custom_command(
---        COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/src/scan_states.py ${CMAKE_SOURCE_DIR}/libmscgen/${lex_file}.l > ${GENERATED_SRC}/${lex_file}.l.h
--+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/src/scan_states.py ${CMAKE_SOURCE_DIR}/libmscgen/${lex_file}.l > ${GENERATED_SRC}/${lex_file}.l.h
--         DEPENDS ${CMAKE_SOURCE_DIR}/src/scan_states.py ${CMAKE_SOURCE_DIR}/libmscgen/${lex_file}.l
-+-        COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/src/scan_states.py ${PROJECT_SOURCE_DIR}/libmscgen/${lex_file}.l > ${GENERATED_SRC}/${lex_file}.l.h
-++        COMMAND ${Python3_EXECUTABLE} ${PROJECT_SOURCE_DIR}/src/scan_states.py ${PROJECT_SOURCE_DIR}/libmscgen/${lex_file}.l > ${GENERATED_SRC}/${lex_file}.l.h
-+         DEPENDS ${PROJECT_SOURCE_DIR}/src/scan_states.py ${PROJECT_SOURCE_DIR}/libmscgen/${lex_file}.l
-          OUTPUT  ${GENERATED_SRC}/${lex_file}.l.h
-      )
- diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
--index cb289116..356741ff 100644
-+index 5004a957..68e803f2 100644
- --- a/src/CMakeLists.txt
- +++ b/src/CMakeLists.txt
- @@ -39,7 +39,7 @@ set_source_files_properties(${GENERATED_SRC}/settings.h PROPERTIES GENERATED 1)
-@@ -191,21 +194,12 @@ index cb289116..356741ff 100644
-  # resources.cpp
-  add_custom_command(
-      COMMENT  "Generating ${GENERATED_SRC}/resources.cpp"
---    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/res2cc_cmd.py ${CMAKE_SOURCE_DIR}/templates ${GENERATED_SRC}/resources.cpp
--+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/res2cc_cmd.py ${CMAKE_SOURCE_DIR}/templates ${GENERATED_SRC}/resources.cpp
-+-    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/res2cc_cmd.py ${PROJECT_SOURCE_DIR}/templates ${GENERATED_SRC}/resources.cpp
-++    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/res2cc_cmd.py ${PROJECT_SOURCE_DIR}/templates ${GENERATED_SRC}/resources.cpp
-      DEPENDS ${RESOURCES} ${CMAKE_CURRENT_LIST_DIR}/res2cc_cmd.py
-      OUTPUT ${GENERATED_SRC}/resources.cpp
-  )
--@@ -102,7 +102,7 @@ set_source_files_properties(${GENERATED_SRC}/resources.cpp PROPERTIES GENERATED
-- 
-- # layout_default.xml
-- add_custom_command(
---    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/to_c_cmd.py < ${CMAKE_CURRENT_LIST_DIR}/layout_default.xml > ${GENERATED_SRC}/layout_default.xml.h
--+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/to_c_cmd.py < ${CMAKE_CURRENT_LIST_DIR}/layout_default.xml > ${GENERATED_SRC}/layout_default.xml.h
--     DEPENDS ${CMAKE_CURRENT_LIST_DIR}/layout_default.xml ${CMAKE_CURRENT_LIST_DIR}/to_c_cmd.py
--     OUTPUT  ${GENERATED_SRC}/layout_default.xml.h
-- )
--@@ -131,7 +131,7 @@ foreach(lex_file ${LEX_FILES})
-+@@ -124,7 +124,7 @@ foreach(lex_file ${LEX_FILES})
-      set(LEX_FILES_H ${LEX_FILES_H} " " ${GENERATED_SRC}/${lex_file}.l.h CACHE INTERNAL "Stores generated files")
-      set(LEX_FILES_CPP ${LEX_FILES_CPP} " " ${GENERATED_SRC}/${lex_file}.cpp CACHE INTERNAL "Stores generated files")
-      add_custom_command(
-@@ -215,15 +209,15 @@ index cb289116..356741ff 100644
-          OUTPUT  ${GENERATED_SRC}/${lex_file}.l.h
-      )
- diff --git a/testing/CMakeLists.txt b/testing/CMakeLists.txt
--index b354e78f..28d45e11 100644
-+index fd6912e9..0af1865b 100644
- --- a/testing/CMakeLists.txt
- +++ b/testing/CMakeLists.txt
- @@ -1,7 +1,7 @@
-  # run all tests sequentially (keep for backward compatibility)
-  add_custom_target(tests
-  	COMMENT "Running doxygen tests..."
---	COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/testing/runtests.py --doxygen ${PROJECT_BINARY_DIR}/bin/doxygen --inputdir ${CMAKE_SOURCE_DIR}/testing --outputdir ${PROJECT_BINARY_DIR}/testing
--+	COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/testing/runtests.py --doxygen ${PROJECT_BINARY_DIR}/bin/doxygen --inputdir ${CMAKE_SOURCE_DIR}/testing --outputdir ${PROJECT_BINARY_DIR}/testing
-+-	COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/testing/runtests.py --doxygen ${PROJECT_BINARY_DIR}/bin/doxygen --inputdir ${PROJECT_SOURCE_DIR}/testing --outputdir ${PROJECT_BINARY_DIR}/testing
-++	COMMAND ${Python3_EXECUTABLE} ${PROJECT_SOURCE_DIR}/testing/runtests.py --doxygen ${PROJECT_BINARY_DIR}/bin/doxygen --inputdir ${PROJECT_SOURCE_DIR}/testing --outputdir ${PROJECT_BINARY_DIR}/testing
-  	DEPENDS doxygen
-  )
-  
-@@ -231,10 +225,10 @@ index b354e78f..28d45e11 100644
-  	string(REGEX REPLACE "^.*/([0-9][0-9][0-9]*).*$" "\\1" TEST_ID "${TEST_FILE}")
-  	# add a test target for each test
-  	add_test(NAME ${TEST_NAME}
---		 COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/testing/runtests.py --id ${TEST_ID} --doxygen $<TARGET_FILE:doxygen> --inputdir ${CMAKE_SOURCE_DIR}/testing --outputdir ${PROJECT_BINARY_DIR}/testing
--+		 COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/testing/runtests.py --id ${TEST_ID} --doxygen $<TARGET_FILE:doxygen> --inputdir ${CMAKE_SOURCE_DIR}/testing --outputdir ${PROJECT_BINARY_DIR}/testing
-+-		 COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/testing/runtests.py --id ${TEST_ID} --doxygen $<TARGET_FILE:doxygen> --inputdir ${PROJECT_SOURCE_DIR}/testing --outputdir ${PROJECT_BINARY_DIR}/testing
-++		 COMMAND ${Python3_EXECUTABLE} ${PROJECT_SOURCE_DIR}/testing/runtests.py --id ${TEST_ID} --doxygen $<TARGET_FILE:doxygen> --inputdir ${PROJECT_SOURCE_DIR}/testing --outputdir ${PROJECT_BINARY_DIR}/testing
-  	)
-  endforeach()
- -- 
--2.17.1
-+2.27.0
- 
-diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.20.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.9.1.bb
-similarity index 79%
-rename from meta-oe/recipes-devtools/doxygen/doxygen_1.8.20.bb
-rename to meta-oe/recipes-devtools/doxygen/doxygen_1.9.1.bb
-index d4ac3b720..3370a1313 100644
---- a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.20.bb
-+++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.9.1.bb
-@@ -10,8 +10,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
-            file://0001-build-don-t-look-for-Iconv.patch \
- "
- SRC_URI_append_class-native = " file://doxygen-native-only-check-python3.patch"
--SRC_URI[md5sum] = "8729936a843232a66fe970ef65f3c3e4"
--SRC_URI[sha256sum] = "e0db6979286fd7ccd3a99af9f97397f2bae50532e4ecb312aa18862f8401ddec"
-+SRC_URI[sha256sum] = "67aeae1be4e1565519898f46f1f7092f1973cce8a767e93101ee0111717091d1"
- 
- inherit cmake python3native
- 
--- 
-2.27.0
+
+../Randy
 
