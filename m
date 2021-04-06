@@ -1,28 +1,28 @@
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
- by mx.groups.io with SMTP id smtpd.web12.8257.1617688200211509163
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+ by mx.groups.io with SMTP id smtpd.web11.8220.1617688604344717487
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Apr 2021 22:50:00 -0700
+ Mon, 05 Apr 2021 22:56:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: intel.com, ip: 134.134.136.100, mailfrom: kartikey.rameshbhai.parmar@intel.com)
-IronPort-SDR: 5cOnH2rBUqVyIhMdzligWpT7wRuN+/lbkfF5rBPN9CgHeKivnNVDt2WYa11poEJ6nrFyLz4XfC
- 0pcQOuH2E1ww==
-X-IronPort-AV: E=McAfee;i="6000,8403,9945"; a="256977269"
+ dkim=missing; spf=pass (domain: intel.com, ip: 192.55.52.93, mailfrom: kartikey.rameshbhai.parmar@intel.com)
+IronPort-SDR: 2IBmreTJfYH09OqdvBMPgfduN2j8rYMPqDPuyL2szHo3XmurgaHg12321av97UGrZlB1VQbK5w
+ ek3c7bPCYVHg==
+X-IronPort-AV: E=McAfee;i="6000,8403,9945"; a="189777885"
 X-IronPort-AV: E=Sophos;i="5.81,308,1610438400"; 
-   d="scan'208";a="256977269"
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Apr 2021 22:49:58 -0700
-IronPort-SDR: oQD3bdDWaM1WaVj3RD3j6IohK4aWCLnE/jCC9v9iKXJTLXBBBcjiD4u+iNwAVbmObdNsHVkePf
- ryxj3MqPqnKA==
+   d="scan'208";a="189777885"
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Apr 2021 22:56:43 -0700
+IronPort-SDR: PnPGf0d+D9KSgqebpD4tu+u2aHN+Skqo8M8FLBtxbxHbznfMpS0xnWqrvQfXGJvlSSOhmCPFYw
+ 2XfZJVkxF0MA==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="5.81,308,1610438400"; 
-   d="scan'208";a="612400069"
+   d="scan'208";a="396087365"
 Received: from ubuntu161tb.png.intel.com ([10.88.227.41])
-  by fmsmga005.fm.intel.com with ESMTP; 05 Apr 2021 22:49:58 -0700
+  by orsmga002.jf.intel.com with ESMTP; 05 Apr 2021 22:56:42 -0700
 From: "Kartikey Rameshbhai Parmar" <kartikey.rameshbhai.parmar@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] fluidsynth: update SRC_URI to remove non-existing 2.1.x branch
-Date: Tue,  6 Apr 2021 05:49:53 +0000
-Message-Id: <20210406054953.5183-1-kartikey.rameshbhai.parmar@intel.com>
+Subject: [meta-multimedia][hardknott][PATCH] fluidsynth: update SRC_URI to remove non-existing 2.1.x branch
+Date: Tue,  6 Apr 2021 05:56:38 +0000
+Message-Id: <20210406055638.5354-1-kartikey.rameshbhai.parmar@intel.com>
 X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -30,7 +30,7 @@ Content-Transfer-Encoding: 8bit
 From: Kartikey Rameshbhai Parmar <kartikey.rameshbhai.parmar@intel.com>
 
 Remove branch 2.1.x from SRC_URI as fluidsynth github removed the branch.
-The SRCREV is on master branch
+The SRCREV is on master branch.
 
 Signed-off-by: Kartikey Rameshbhai Parmar <kartikey.rameshbhai.parmar@intel.com>
 ---
