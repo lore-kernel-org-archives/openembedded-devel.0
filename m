@@ -1,79 +1,86 @@
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
- by mx.groups.io with SMTP id smtpd.web08.1344.1617734558313696086
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
+ by mx.groups.io with SMTP id smtpd.web09.1310.1617734558916130842
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Apr 2021 11:42:38 -0700
+ Tue, 06 Apr 2021 11:42:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=hGOCGihk;
- spf=pass (domain: gmail.com, ip: 209.85.218.42, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f42.google.com with SMTP id u21so23534355ejo.13
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=KPDjHTh1;
+ spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f52.google.com with SMTP id e7so17760838edu.10
         for <openembedded-devel@lists.openembedded.org>; Tue, 06 Apr 2021 11:42:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=kxMUZ1TbgKteWv1vijuhAmC81uDkI6Msi0X/7DD0MHU=;
-        b=hGOCGihkU6uURjkd7q//YDeQchbU7N+kSdV6Nj8kJgP00E0qR1QJDuGzW8NWxeusB1
-         /wfzem5v2rkxWge/5Xfsg6Z7ByrgUa+tkrcoAM3Qo/Mzf457nq7rhpdX0rHlnKMOg0gC
-         DUN7HpnF5oD+aj0dV+9QChoWRAX8dYekVyivekU5IE1GQKhPcKB1C8WoYvsBkHcDJCZH
-         /oq+lh+e3dtclfbIY9RdqwVOtVdqUf5OorlDbni5zDSksQpdh/oNTM0qDULXA3BruAVd
-         2dRcyDOKlFQxWmfWT8hh+HUwheCURzPG/y4EmnUarDyAewsKmgGHeddHvWz7SiWz7PLa
-         nKnA==
+        bh=voxINYApJGmUrD5p6reS8cDo6J3iqtS/vY1rp0Tla+A=;
+        b=KPDjHTh1a1kEf/WwaSNR6NkISh9fkgku00+dMoEIBtnzQ4L006RyG9TyOUDTOLp2Sy
+         PelTpDaYVaXYb5OQQiOt78PbKJBXx/epTK0MIagg/zwO1D5JZulYwfwiTtOD2vA2ryf3
+         +F31h3UF8m5gJKNnhHom31axtQVWCkggzDSPAm1cjZBvcQLQG1QJ2G3rHojzP9znbHOA
+         k+AcHzHbpZFLywOmdtQfeqtLY3jPTdh0Rnt+klDaT50dPHhqWuX+QvPUz/ZtEBABJO1G
+         Q/B8T1RTGk/VnKYOavoru7xTAW/DzBygP43SsKAIbCjrBLLQCBxBsqNG/fpaFVJAPUND
+         0Zqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=kxMUZ1TbgKteWv1vijuhAmC81uDkI6Msi0X/7DD0MHU=;
-        b=KyDlJdBDxqyWzUjUAVjDkxqWVSfFho4ZIHsAuoHze9IHwc1n7yxE8SVh7/gQnrFB+U
-         xaxFMqKPMGHgpOBCF44Fb2NQ4tj1ef7AH5/CsqEJk4xOtYny++/b/JtEKPCX9PSjvDhB
-         xhhSxn26J4a+RQJpoXdj/aUFTDC0gHMRWrPKAvfHibKb3514xXy7y9GJJD/vOEFQKEP8
-         3xENdm4PupOMOsFKEmvEfL9fEpYxDiNS4MdjpIeI5KSDwRMtLCmFF6LhFk2jKIv6cNHd
-         VjLly+os5vkVu8PlzLUmDhAdsTHLfAOY9xuKX6Svgoar7cTEEfSClxlcpEk+br0BSoqw
-         V6Hg==
-X-Gm-Message-State: AOAM532WKQZ1j96dZrepc94QvfK8IIu70EWbalMOKpNOwWF/HqhmB/T8
-	ePmpSTG+JPUvBSM5EfFsHPCYKwDH4Rg=
-X-Google-Smtp-Source: ABdhPJzAtXJ3bLmrqYkioiYK6hZGr97mHOX88nSPc8jk825AamZ9/9R4SV8iusOKtKs1DNoFPQNHqg==
-X-Received: by 2002:a17:906:ff46:: with SMTP id zo6mr1197091ejb.123.1617734556772;
-        Tue, 06 Apr 2021 11:42:36 -0700 (PDT)
+        bh=voxINYApJGmUrD5p6reS8cDo6J3iqtS/vY1rp0Tla+A=;
+        b=igJYNb+Q155zelvcMkGQqBWimMc26t+o+iccffrEH2OwS3Z7dd1gYOak/Wnr5xXEyw
+         6aV72FKyhlfmzWllna40KYyYSHBpVouk7vUajzSRhrn2411nmXYL04pmEOjnJE7JnfwF
+         uJ0yozQa1p4wkXIbFfTbpr3HFEP23WvnMvy+v8dOojxEcBw/7+PawnCRvQKCtlhR6g+h
+         eAuaQOSAq0uBsy9igpeqH3xIINa2t21RlkzmsmYXgS63AIL/ErtKQTb7ZIOPUmOPjCat
+         NX2zsG2k1Na5Tf1ajqWtIdGJNLxLlKDFE2ncW0/f8hscTS8AbbwmwSwIJSRz8+1KT8w1
+         u55g==
+X-Gm-Message-State: AOAM530VwZWxyI9BpUd2KLCLNCZuxAxN2DWyzdvGEX90+kRNJdub9QUW
+	h2olOtzl7hRDcyTbsKVci/AQA3XLgT4=
+X-Google-Smtp-Source: ABdhPJw/RKvkVqqW2oHDZXyzx94/xnC17rdXpsIXNlV9ylhw6QpCB38rnanmhMtQ6796Q9Vw1VxWog==
+X-Received: by 2002:aa7:c9c8:: with SMTP id i8mr39145398edt.193.1617734557542;
+        Tue, 06 Apr 2021 11:42:37 -0700 (PDT)
 Return-Path: <martin.jansa@gmail.com>
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id k26sm6248440ejc.23.2021.04.06.11.42.36
+        by smtp.gmail.com with ESMTPSA id a17sm11518415ejf.20.2021.04.06.11.42.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Apr 2021 11:42:36 -0700 (PDT)
+        Tue, 06 Apr 2021 11:42:37 -0700 (PDT)
 From: "Martin Jansa" <Martin.Jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][gatesgarth][PATCH 2/3] telepathy-glib: respect GI_DATA_ENABLED when enabling vala-bindings
-Date: Tue,  6 Apr 2021 20:42:32 +0200
-Message-Id: <20210406184233.1585138-2-Martin.Jansa@gmail.com>
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][gatesgarth][PATCH 3/3] libyui: switch to libyui-old repo which still has this SRCREV
+Date: Tue,  6 Apr 2021 20:42:33 +0200
+Message-Id: <20210406184233.1585138-3-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210406184233.1585138-1-Martin.Jansa@gmail.com>
 References: <20210406184233.1585138-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb   | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+* de9134007d2d029fe5809ce48f57fe218e6ffe16 doesn't exist in current repo:
+  libyui$ git branch -a --contains de9134007d2d029fe5809ce48f57fe218e6ffe16
+  error: no such commit de9134007d2d029fe5809ce48f57fe218e6ffe16
 
-diff --git a/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb b/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb
-index 2b05c61a0d..4d4e841f62 100644
---- a/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb
-+++ b/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb
-@@ -12,7 +12,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e413d83db6ee8f2c8e6055719096a48e"
+* there are no common commits in the new libyui repo, but luckily old
+  repo is kept as
+  https://github.com/libyui/libyui-old
+  similarly libyui-ncurses now contains only README about being obsolete in:
+  https://github.com/libyui/libyui-ncurses
+  but at least it wasn't rewritten to have the new content
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-graphics/libyui/libyui_3.10.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-graphics/libyui/libyui_3.10.0.bb b/meta-oe/recipes-graphics/libyui/libyui_3.10.0.bb
+index d7f529e313..286d3ac911 100644
+--- a/meta-oe/recipes-graphics/libyui/libyui_3.10.0.bb
++++ b/meta-oe/recipes-graphics/libyui/libyui_3.10.0.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING.gpl-3;md5=d32239bcb673463ab874e80d47fae504 \
+                     file://COPYING.lgpl-3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
+                    "
  
- inherit autotools pkgconfig gettext gobject-introspection vala
- 
--EXTRA_OECONF = "--enable-vala-bindings"
-+# Respect GI_DATA_ENABLED value when enabling vala-bindings:
-+# configure: error: GObject-Introspection must be enabled for Vala bindings
-+EXTRA_OECONF = "${@bb.utils.contains('GI_DATA_ENABLED', 'True', '--enable-vala-bindings', '--disable-vala-bindings', d)}"
- 
- FILES_${PN} += "${datadir}/telepathy \
-                 ${datadir}/dbus-1"
+-SRC_URI = "git://github.com/libyui/libyui.git \
++SRC_URI = "git://github.com/libyui/libyui-old.git \
+            file://0001-Fix-build-with-clang.patch \
+            file://0001-Use-relative-install-paths-for-CMake.patch \
+            "
 -- 
 2.30.2
 
