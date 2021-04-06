@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.11108.1617712425392209945
+ by mx.groups.io with SMTP id smtpd.web08.11159.1617712425446460614
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 06 Apr 2021 05:33:46 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=55444 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lTktm-0003tX-Ox; Tue, 06 Apr 2021 15:33:39 +0300
+	id 1lTktn-0003tX-IZ; Tue, 06 Apr 2021 15:33:40 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-pychromecast: Upgrade 9.1.1 -> 9.1.2
-Date: Tue,  6 Apr 2021 15:33:28 +0300
-Message-Id: <20210406123331.23266-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-decorator: Upgrade 5.0.1 -> 5.0.5
+Date: Tue,  6 Apr 2021 15:33:29 +0300
+Message-Id: <20210406123331.23266-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210406123331.23266-1-leon.anavi@konsulko.com>
 References: <20210406123331.23266-1-leon.anavi@konsulko.com>
@@ -30,32 +30,35 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 9.1.2:
+Upgrade to release 5.0.5:
 
-- Handle bad UUIDs from third-party Chromecasts
-- Reuse SSL context in host browser
+- Dropped support for Python < 3.5 with a substantial
+  simplification of the code base (now building a decorator does
+  not require calling "exec").
+- Added a way to mimic functools.wraps-generated decorators.
+- Ported the Continuous Integration from Travis to GitHub.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...hon3-pychromecast_9.1.1.bb => python3-pychromecast_9.1.2.bb} | 2 +-
+ .../{python3-decorator_5.0.1.bb => python3-decorator_5.0.5.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pychromecast_9.1.1.bb => python3-pychromecast_9.1.2.bb} (76%)
+ rename meta-python/recipes-devtools/python/{python3-decorator_5.0.1.bb => python3-decorator_5.0.5.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_9.1.1.bb b/meta-python/recipes-devtools/python/python3-pychromecast_9.1.2.bb
-similarity index 76%
-rename from meta-python/recipes-devtools/python/python3-pychromecast_9.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-pychromecast_9.1.2.bb
-index 3d0b84cf0..c392261ad 100644
---- a/meta-python/recipes-devtools/python/python3-pychromecast_9.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pychromecast_9.1.2.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
+diff --git a/meta-python/recipes-devtools/python/python3-decorator_5.0.1.bb b/meta-python/recipes-devtools/python/python3-decorator_5.0.5.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-decorator_5.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-decorator_5.0.5.bb
+index e9d20379f..47daba8a0 100644
+--- a/meta-python/recipes-devtools/python/python3-decorator_5.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-decorator_5.0.5.bb
+@@ -9,7 +9,7 @@ decorator, just because you can."
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=be2fd2007972bf96c08af3293d728b22"
  
--SRC_URI[sha256sum] = "ab9da1d2ef424b1fc755f6436f545a56056ec6de24075e93f369eac8eb821837"
-+SRC_URI[sha256sum] = "907656cea46d39d0e93ec815979578ef4fb6f655fd8bf4e88e6421fcd7824e85"
+-SRC_URI[sha256sum] = "1e53162e016f317a61d93848f00e80e7109ca9ed06846c7f2930cf0ebede7c6c"
++SRC_URI[sha256sum] = "acda948ffcfe4bd0c4a57834b74ad968b91925b8201b740ca9d46fb8c5c618ce"
  
- PYPI_PACKAGE = "PyChromecast"
+ inherit pypi setuptools3
  
 -- 
 2.17.1
