@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.11159.1617712425446460614
+ by mx.groups.io with SMTP id smtpd.web08.11160.1617712427183859504
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Apr 2021 05:33:46 -0700
+ Tue, 06 Apr 2021 05:33:47 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=55444 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lTktn-0003tX-IZ; Tue, 06 Apr 2021 15:33:40 +0300
+	id 1lTkto-0003tX-JX; Tue, 06 Apr 2021 15:33:41 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/5] python3-decorator: Upgrade 5.0.1 -> 5.0.5
-Date: Tue,  6 Apr 2021 15:33:29 +0300
-Message-Id: <20210406123331.23266-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-pyroute2: Upgrade 0.5.16 -> 0.5.17
+Date: Tue,  6 Apr 2021 15:33:31 +0300
+Message-Id: <20210406123331.23266-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210406123331.23266-1-leon.anavi@konsulko.com>
 References: <20210406123331.23266-1-leon.anavi@konsulko.com>
@@ -30,35 +30,33 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 5.0.5:
+Upgrade to release 0.5.17:
 
-- Dropped support for Python < 3.5 with a substantial
-  simplification of the code base (now building a decorator does
-  not require calling "exec").
-- Added a way to mimic functools.wraps-generated decorators.
-- Ported the Continuous Integration from Travis to GitHub.
+- license: aligned cli/ss2
+- ndb: del_ip() improvements
+- ndb: wait(timeout=...)
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-decorator_5.0.1.bb => python3-decorator_5.0.5.bb}  | 2 +-
+ .../{python3-pyroute2_0.5.16.bb => python3-pyroute2_0.5.17.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-decorator_5.0.1.bb => python3-decorator_5.0.5.bb} (86%)
+ rename meta-python/recipes-devtools/python/{python3-pyroute2_0.5.16.bb => python3-pyroute2_0.5.17.bb} (90%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-decorator_5.0.1.bb b/meta-python/recipes-devtools/python/python3-decorator_5.0.5.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-decorator_5.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-decorator_5.0.5.bb
-index e9d20379f..47daba8a0 100644
---- a/meta-python/recipes-devtools/python/python3-decorator_5.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-decorator_5.0.5.bb
-@@ -9,7 +9,7 @@ decorator, just because you can."
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=be2fd2007972bf96c08af3293d728b22"
+diff --git a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.16.bb b/meta-python/recipes-devtools/python/python3-pyroute2_0.5.17.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-pyroute2_0.5.16.bb
+rename to meta-python/recipes-devtools/python/python3-pyroute2_0.5.17.bb
+index fed0fc38f..1d3d5a253 100644
+--- a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.16.bb
++++ b/meta-python/recipes-devtools/python/python3-pyroute2_0.5.17.bb
+@@ -3,7 +3,7 @@ LICENSE = "GPLv2 & Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://LICENSE.Apache.v2;md5=34281e312165f843a2b7d1f114fe65ce"
  
--SRC_URI[sha256sum] = "1e53162e016f317a61d93848f00e80e7109ca9ed06846c7f2930cf0ebede7c6c"
-+SRC_URI[sha256sum] = "acda948ffcfe4bd0c4a57834b74ad968b91925b8201b740ca9d46fb8c5c618ce"
+-SRC_URI[sha256sum] = "fe681a2d008cac815b9f287250d69a333fbfc2b2d89c37d58798104057149989"
++SRC_URI[sha256sum] = "12d51066ea5628a6fa76fc244f301a8eea5d25d71a9d664016976edfa3889733"
  
- inherit pypi setuptools3
+ inherit setuptools3 pypi ptest
  
 -- 
 2.17.1
