@@ -1,86 +1,89 @@
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
- by mx.groups.io with SMTP id smtpd.web09.1310.1617734558916130842
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
+ by mx.groups.io with SMTP id smtpd.web08.1356.1617734611074752428
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Apr 2021 11:42:39 -0700
+ Tue, 06 Apr 2021 11:43:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=KPDjHTh1;
- spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f52.google.com with SMTP id e7so17760838edu.10
-        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Apr 2021 11:42:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=jL7s+sya;
+ spf=pass (domain: gmail.com, ip: 209.85.208.47, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f47.google.com with SMTP id p4so7518917edr.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Apr 2021 11:43:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=voxINYApJGmUrD5p6reS8cDo6J3iqtS/vY1rp0Tla+A=;
-        b=KPDjHTh1a1kEf/WwaSNR6NkISh9fkgku00+dMoEIBtnzQ4L006RyG9TyOUDTOLp2Sy
-         PelTpDaYVaXYb5OQQiOt78PbKJBXx/epTK0MIagg/zwO1D5JZulYwfwiTtOD2vA2ryf3
-         +F31h3UF8m5gJKNnhHom31axtQVWCkggzDSPAm1cjZBvcQLQG1QJ2G3rHojzP9znbHOA
-         k+AcHzHbpZFLywOmdtQfeqtLY3jPTdh0Rnt+klDaT50dPHhqWuX+QvPUz/ZtEBABJO1G
-         Q/B8T1RTGk/VnKYOavoru7xTAW/DzBygP43SsKAIbCjrBLLQCBxBsqNG/fpaFVJAPUND
-         0Zqg==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=MwkXQKblWkdldvsqXhy2cCV4fUXULnY+VaiDQ2pLGzo=;
+        b=jL7s+syauZRZ0CIrSNONsnvEUZTNJzq9D3v06fPJKrYdBWI4PyAz82Du65LZslQvLf
+         u3GCuwX5cql9sMtxygOW2QM6sotCeHYEDH/t/aSzHJ44HeJyRnPTuYNreOud5qW+4GjL
+         9KUBVaRaOmPgWWnqEgV7+0Oe/ek+blGkOiwIc6d/8V3NE4EqbHWm+uBBnkEJZcLP8dOf
+         R3y7KFDXd71VQWq3min+MsJOFoYtZDGObf0kgo37RrnKc86KgzKZijFzDICRskT7HIhw
+         FJFWgkRSgvxX837JJYEN6aNZnT3XPGUo5on+tCYYQGVtM+9PE7vFAGAMA5zqgiOajpdK
+         f5MA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=voxINYApJGmUrD5p6reS8cDo6J3iqtS/vY1rp0Tla+A=;
-        b=igJYNb+Q155zelvcMkGQqBWimMc26t+o+iccffrEH2OwS3Z7dd1gYOak/Wnr5xXEyw
-         6aV72FKyhlfmzWllna40KYyYSHBpVouk7vUajzSRhrn2411nmXYL04pmEOjnJE7JnfwF
-         uJ0yozQa1p4wkXIbFfTbpr3HFEP23WvnMvy+v8dOojxEcBw/7+PawnCRvQKCtlhR6g+h
-         eAuaQOSAq0uBsy9igpeqH3xIINa2t21RlkzmsmYXgS63AIL/ErtKQTb7ZIOPUmOPjCat
-         NX2zsG2k1Na5Tf1ajqWtIdGJNLxLlKDFE2ncW0/f8hscTS8AbbwmwSwIJSRz8+1KT8w1
-         u55g==
-X-Gm-Message-State: AOAM530VwZWxyI9BpUd2KLCLNCZuxAxN2DWyzdvGEX90+kRNJdub9QUW
-	h2olOtzl7hRDcyTbsKVci/AQA3XLgT4=
-X-Google-Smtp-Source: ABdhPJw/RKvkVqqW2oHDZXyzx94/xnC17rdXpsIXNlV9ylhw6QpCB38rnanmhMtQ6796Q9Vw1VxWog==
-X-Received: by 2002:aa7:c9c8:: with SMTP id i8mr39145398edt.193.1617734557542;
-        Tue, 06 Apr 2021 11:42:37 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=MwkXQKblWkdldvsqXhy2cCV4fUXULnY+VaiDQ2pLGzo=;
+        b=VCF7dlBFXhRMn6R8ogGbGPWSZ1EJVNF0fj1vlbNqb0uHePJ//mrycOR1zNkW8PBCnK
+         qWXZ76vOV6vzyHnBR4xVOJ0/YQ9ypkSdEmDaXCNS/Qp1KRawGLioLEmQipj7JbFtaSGg
+         KIB0jHXxRoX1kuKrkbnyPUDZZB+jQmlYetpXVIvMp3hYiPxgAREW+rx1XifsumtYhXk0
+         91jvQrUR9I9eCQ8VTL7IQjQGpSGE8Xo0Lu3hfq5Vs83Zefmo5hXygyOEP/5PafDUSQ7b
+         D9uUUXeGbsTQoGrCV/Xo5KmlEgnUXWwt0nnZqk/i6f2C+opgvzXnGMNdCw4v2XaNIpyK
+         qIXw==
+X-Gm-Message-State: AOAM532PHQjzp4EyjdnknxPCjlUI+SD5iJWh3BZ7KasuwZmSRd6hWcQj
+	wAv416TkY9oezJmZf/CmL2DbflOTVvY=
+X-Google-Smtp-Source: ABdhPJyFi8+WtD8AM9vwckb75YbnCGh2O/j0qAq5eSrO8iZPbd/ebM3bBnGqX7/I7KCiyEbUEhrwHQ==
+X-Received: by 2002:a50:f695:: with SMTP id d21mr84949edn.382.1617734609678;
+        Tue, 06 Apr 2021 11:43:29 -0700 (PDT)
 Return-Path: <martin.jansa@gmail.com>
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id a17sm11518415ejf.20.2021.04.06.11.42.37
+        by smtp.gmail.com with ESMTPSA id l1sm14374305edt.59.2021.04.06.11.43.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Apr 2021 11:42:37 -0700 (PDT)
+        Tue, 06 Apr 2021 11:43:29 -0700 (PDT)
 From: "Martin Jansa" <Martin.Jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][gatesgarth][PATCH 3/3] libyui: switch to libyui-old repo which still has this SRCREV
-Date: Tue,  6 Apr 2021 20:42:33 +0200
-Message-Id: <20210406184233.1585138-3-Martin.Jansa@gmail.com>
+Subject: [meta-oe][dunfell][PATCH 1/3] uml-utilities: fix installed-vs-shipped with usrmerge
+Date: Tue,  6 Apr 2021 20:43:25 +0200
+Message-Id: <20210406184327.1585452-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210406184233.1585138-1-Martin.Jansa@gmail.com>
-References: <20210406184233.1585138-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-* de9134007d2d029fe5809ce48f57fe218e6ffe16 doesn't exist in current repo:
-  libyui$ git branch -a --contains de9134007d2d029fe5809ce48f57fe218e6ffe16
-  error: no such commit de9134007d2d029fe5809ce48f57fe218e6ffe16
+* fixes:
+  ERROR: uml-utilities-20040406-r1 do_package: QA Issue: uml-utilities: Files/directories were installed but not shipped in any package:
+    /usr/lib/uml/port-helper
+  Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+  uml-utilities: 1 installed and not shipped files. [installed-vs-shipped]
 
-* there are no common commits in the new libyui repo, but luckily old
-  repo is kept as
-  https://github.com/libyui/libyui-old
-  similarly libyui-ncurses now contains only README about being obsolete in:
-  https://github.com/libyui/libyui-ncurses
-  but at least it wasn't rewritten to have the new content
+* pass LIB_DIR instead of using default value from Makefile:
+  $ grep LIB_DIR.*= tools/port-helper/Makefile
+  LIB_DIR ?= /usr/lib/uml
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-graphics/libyui/libyui_3.10.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-extended/uml-utilities/uml-utilities_20040406.bb | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/libyui/libyui_3.10.0.bb b/meta-oe/recipes-graphics/libyui/libyui_3.10.0.bb
-index d7f529e313..286d3ac911 100644
---- a/meta-oe/recipes-graphics/libyui/libyui_3.10.0.bb
-+++ b/meta-oe/recipes-graphics/libyui/libyui_3.10.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING.gpl-3;md5=d32239bcb673463ab874e80d47fae504 \
-                     file://COPYING.lgpl-3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
-                    "
+diff --git a/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb b/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
+index ed19d1e41a..de1fc3a1fe 100644
+--- a/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
++++ b/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
+@@ -16,12 +16,11 @@ PR = "r1"
+ S = "${WORKDIR}/tools"
  
--SRC_URI = "git://github.com/libyui/libyui.git \
-+SRC_URI = "git://github.com/libyui/libyui-old.git \
-            file://0001-Fix-build-with-clang.patch \
-            file://0001-Use-relative-install-paths-for-CMake.patch \
-            "
+ do_compile() {
+-    oe_runmake
++    oe_runmake LIB_DIR=${libdir}/uml
+ }
+ 
+ do_install() {
+     oe_runmake install DESTDIR=${D}
+ }
+ 
+-FILES_${PN} += "${exec_prefix}${nonarch_base_libdir}"
+-FILES_${PN}-dbg += "${exec_prefix}${nonarch_base_libdir}/uml/.debug"
++FILES_${PN} += "${libdir}/uml"
 -- 
 2.30.2
 
