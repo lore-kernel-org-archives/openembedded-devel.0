@@ -1,98 +1,75 @@
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web12.12915.1617719179446375646
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
+ by mx.groups.io with SMTP id smtpd.web11.1716.1617726785900040942
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Apr 2021 07:26:19 -0700
+ Tue, 06 Apr 2021 09:33:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=XmE0Oc7X;
- spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f51.google.com with SMTP id u21so22244268ejo.13
-        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Apr 2021 07:26:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=b1CN2R5m;
+ spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f45.google.com with SMTP id l4so22921011ejc.10
+        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Apr 2021 09:33:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=PfGX+cSVQRuSNrjizCoesQ4+VlG6oNAKWK4FDiVI8Wc=;
-        b=XmE0Oc7XvhlAqjR8NFGoRcd7zHh0RF+V6wagiR1Pd1yYCSzGr4WQduy8JEA8VWyQ7h
-         P7ySUXNyWY1HFUCYmhZwbo7HUC/hbhtMhnG8nqEZ83uC+knq0vSsHDvoVzK7zwi8ZB7y
-         blDLZAnqEBSq6R7m6+mjdD5zjYXPpC8JnCxNBLJYZGOKoPtdxskHjeR74KOWSub/CGiF
-         ZdrevepFIjw514f2iXBgv3BUPlUYOAlx3sDgMeatKycknEg9gQG3BdgLfrEGmPp6IZQ8
-         /1Pf7bED4vKpiokGe2W00he+ya7ccumyANgY6F//55W6xHILSGr7EBIA4AUB0W0wGnyo
-         i3Fg==
+        bh=NMh9z/7qxnOdCGGnQzGKoB8ZRardRBJlomX/S0LjwY8=;
+        b=b1CN2R5mVnLeocmKBi0bbKFdnXf4jUpKFYcW3o0SxCDBnAnoKmRTKVwKUEm1fCFGnD
+         2WJk3+MC2488q4Xd4DqZw5i5cozg6+KioKwKue+BUJYuDJCnlPnwZVi9hot5sz18FNP/
+         LFCxfQRd5dLJGmKdtwtQvIG3Zw8ac4kgWtj6yzDwV4Tu9ubya3qBvKs+mR4PKxKxRJAZ
+         eBSGi030YUjM2M8qkbNvp11h6n56UcahyzP36P+FUaEJ4Bcm06gU3py3mDZMr1KspCqR
+         hJweyO/gwHvJM0HjhLLIisgJ2agT+dpeIErAgpTR+wAg752peNnR4etPvdZNdzIYzhkY
+         xjoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=PfGX+cSVQRuSNrjizCoesQ4+VlG6oNAKWK4FDiVI8Wc=;
-        b=gNrSdwJbR3fCgkcCpOCZnpUTqFvqnxGddecrbblaGizjSao84NVo+u9FCtO16a2y5m
-         AKV8s0NhEW9ZxMxtezaQmuDqDDREE58j24tba3LnaB7E6asT83/LREbH2rJ7dF4B+IP7
-         i1zRj5dLiuMK2ZBK2jO8OyVegn1yOnOEC3qivFlerw1TjvN+lWQDEwi6ZFy5OiQNmbbp
-         ilXIGgA6PvJJu46Bd31vTFc3yZorcRNwkiQGnyoRN0evatad63TOeJ1meHdtVZe3KrPs
-         ojZYWpXdfHJiRMuj4tZlEmVMmR/2IemVYytHWw7PMeGzCo+6sJCP8zycnknTxQxpOvfq
-         Jo7w==
-X-Gm-Message-State: AOAM533NFOeaxj0qKwULmrKnk36KKR+71P1wU/mZNJx0vmIdIFoqhz/s
-	yHbN3Pt8GzpL1xyo0ZtvUbDIq+eYA/I=
-X-Google-Smtp-Source: ABdhPJz6tbD/lRwZ3p62fcvQbR2tQ9CMcnlhPAyX0lA9+phYGffp5EnI8/3qWIZU1D8JZUNuGXOm+w==
-X-Received: by 2002:a17:906:d04d:: with SMTP id bo13mr11394604ejb.157.1617719177954;
-        Tue, 06 Apr 2021 07:26:17 -0700 (PDT)
+        bh=NMh9z/7qxnOdCGGnQzGKoB8ZRardRBJlomX/S0LjwY8=;
+        b=p2fnh+vGDUNAhASGNTBkz9ijm7QM/7mnTmcuDm41Ad1O1xRU+TeF+llTDMBgKNByR3
+         Bv8agli4DT7k2A10yCbWVMhnfadP+ltlL6utjCsIN36HQftKWP7TE+RmJLHchgI4MTLN
+         JbyyvcQS6o3n4ZsEr2RLnVZGdvpoTiTAvNuRePP0GwTExF5fRK8b5P2o6YlNCpY+c2cW
+         Pp47P38PUsCud5j6SGHl0MVySWTAopAHGur+gtuhqKzcFpLWTXG+qlrgh4JbBbH3jHx8
+         qN39mxwBVdB2uedcDKXUYKMjlXKE723zex0VEv5OQymAzvtzFC9BPMLFoxXv1oKTc8Bh
+         S12Q==
+X-Gm-Message-State: AOAM5312ZHlV8hntHgO5Lck60Jga6Wt1J0OkP/+Cum7bY52+fPoEcUjm
+	4ocssT/VLYpWGn/7DNIanfcVR+Z6LbU=
+X-Google-Smtp-Source: ABdhPJzzUSAJ3UvlGHMz62UsIL6igRNV4M/ufjzgGr8R0DCEogLXN5mXoLikoH01diyFhiH/s93t9w==
+X-Received: by 2002:a17:906:5248:: with SMTP id y8mr34337897ejm.150.1617726784386;
+        Tue, 06 Apr 2021 09:33:04 -0700 (PDT)
 Return-Path: <martin.jansa@gmail.com>
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id rk11sm4710356ejb.60.2021.04.06.07.26.17
+        by smtp.gmail.com with ESMTPSA id p24sm14233254edt.5.2021.04.06.09.33.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Apr 2021 07:26:17 -0700 (PDT)
+        Tue, 06 Apr 2021 09:33:04 -0700 (PDT)
 From: "Martin Jansa" <Martin.Jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] libsmi: use /bin/sh instead of ${base_bindir}/sh to silence QA error with usrmerge
-Date: Tue,  6 Apr 2021 16:26:16 +0200
-Message-Id: <20210406142616.1494746-1-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH] android-tools: use PN instead of BPN in RDEPENDS
+Date: Tue,  6 Apr 2021 18:33:01 +0200
+Message-Id: <20210406163301.1500244-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-* with usrmerge ${base_bindir} is /usr/bin/sh and libsmi fails with:
-  ERROR: libsmi-0.5.0-r0 do_package_qa: QA Issue: /usr/bin/smistrip contained in package libsmi requires /usr/bin/sh, but no providers found in RDEPENDS_libsmi? [file-rdeps]
-  ERROR: libsmi-0.5.0-r0 do_package_qa: QA run found fatal errors. Please consider fixing them.
-
-* this is a bit strange as busybox does install /usr/bin/sh file:
-  ./1.33.0-r0.usrmerge/image/usr/bin/sh
-  ./1.33.0-r0.default/image/bin/sh
-
-  but also adds /bin/sh to RPROVIDES_${PN} for usrmerge in DISTRO_FEATURES:
-  RPROVIDES_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', '/bin/sh', '', d)}"
-  added in:
-  https://git.openembedded.org/openembedded-core/commit/?id=1f6c14939c8daa5e09103789c3ff5031cc888d16
-
-  and 1.33.0-r0.usrmerge/pkgdata/runtime/busybox:FILERPROVIDES_/usr/bin/busybox.nosuid_busybox
-  correctly contains /usr/bin/sh
-
-* adding runtime dependency on busybox as /usr/bin/sh provider would silence the QA warning
-  but people might not like adding busybox to their image
-
-* using /bin/sh silences the QA warning as well, because /bin/sh is explicitly ignored in file-rdeps insane.bbclass:
-  https://git.openembedded.org/openembedded-core/tree/meta/classes/insane.bbclass?id=1f6c14939c8daa5e09103789c3ff5031cc888d16#n907
-
-  if "file-rdeps" not in skip:
-    ignored_file_rdeps = set(['/bin/sh', '/usr/bin/env', 'rtld(GNU_HASH)'])
-
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-devtools/android-tools/android-tools_5.1.1.r37.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb b/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
-index 212b1e797c..ae76fade73 100644
---- a/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
-+++ b/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
-@@ -16,7 +16,7 @@ RDEPENDS_${PN} += "wget"
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+index d93a7f7239..e8992346b0 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
++++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+@@ -160,8 +160,8 @@ do_install() {
  
- inherit autotools
+ PACKAGES =+ "${PN}-fstools ${PN}-adbd"
  
--EXTRA_OECONF = "ac_cv_path_SH=${base_bindir}/sh ac_cv_path_WGET=${bindir}/wget ac_cv_path_AWK=${bindir}/awk"
-+EXTRA_OECONF = "ac_cv_path_SH=/bin/sh ac_cv_path_WGET=${bindir}/wget ac_cv_path_AWK=${bindir}/awk"
+-RDEPENDS_${BPN}-adbd = "${BPN}-conf"
+-RDEPENDS_${BPN}-fstools = "bash"
++RDEPENDS_${PN}-adbd = "${PN}-conf"
++RDEPENDS_${PN}-fstools = "bash"
  
- do_install_append () {
-     install -d ${D}${sysconfdir}
+ FILES_${PN}-adbd = "\
+     ${bindir}/adbd \
 -- 
 2.30.2
 
