@@ -1,82 +1,101 @@
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.web10.670.1617830622020316304
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.web09.467.1617833919954869375
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Apr 2021 14:23:42 -0700
+ Wed, 07 Apr 2021 15:18:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: valentin.longchamp@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id x15so10236624wrq.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Apr 2021 14:23:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=QrVlWONw;
+ spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wr1-f41.google.com with SMTP id u11so7121550wrp.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Apr 2021 15:18:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=qXuuG5OBfRjNa1NniOedK0/v9FygsBcxaCK9rSTnScM=;
+        b=QrVlWONwRMUP5MxQOJkAW8m7UcAyPvzEZNz85wJWWAh2nahH5uU+n1Xu6mzScCkRMP
+         N1fLnWxVkfww8KpiHO9FQEeq9M27erQHygzwuJj3eZzo0jHY8Iyx3vKHyZgKt1qCNICQ
+         j2S2W6EXsir+WZUjAM6Znjvexz9BhVTcx6mCy0e29eRRGdlDjHv5q+APJSOQabVe4yc6
+         K+L2UlWm3prbOAoZ0ktxEuODjl+a93alPPhb4pytT8EzYCiECso4MiXCJIOXGZg0H8jU
+         6ZRVliy2frl5ZyxPep4xrnOVQ3P3zbqcXF/sWzKRmdGvzbkSzrUfDY9w7Rv19T2arQiW
+         Kd6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=BhqmnTIL55rb/T1BCrEbjv9SXv50I5NanvjUvhKJHgg=;
-        b=najzWmiw2mo5PJnYzPf8qkwryCnyZDg7IBICsf88Wawg231Kd/kxrk9dMcUJhLTX8M
-         1GkKJkmoZ96WhdQsozRHmd19kp2aRlfLzDoKuqQSJzBtCaSFY/izEiL4XRqGCD459fwM
-         sFZgYKKpm/Il2zRYbtxl8RsEjgClL3fygU+CrOe7UHWX+2skS13FA04VJmMtOt9Dpd3D
-         0glQw3V/XrR8C0KK1z+T3dB7W01uhSldcrqEVOn+4HGZwcUGF6JZeheE5wQSTiXlMp8Q
-         eOBDkGZ5fjpqUOKj2Nx5zM4oYjLGI5GykVDPc8VYQKp8tB0ttOJBWaY3F00dvlHe2kRI
-         jlxA==
-X-Gm-Message-State: AOAM533rFqrRRJEGsUSjATDoBv3NHAPQoPZMYKCUk+x/I0yZgAT1XH9y
-	ZGAYSeFfXed3FLZ9WrI+TXoz7GGg2qjdlw==
-X-Google-Smtp-Source: ABdhPJxfUlFx0ENfIqfUW/QjZVIFYPL+3/mtimKawZjfJ+Zk4j4MPsHlv4Wr+SvGpgHNEmh4HiKJUg==
-X-Received: by 2002:a5d:4e01:: with SMTP id p1mr6617047wrt.128.1617830620250;
-        Wed, 07 Apr 2021 14:23:40 -0700 (PDT)
-Return-Path: <valentin.longchamp@gmail.com>
-Received: from localhost.localdomain (bbcs-95-88.pub.wingo.ch. [144.2.95.88])
-        by smtp.gmail.com with ESMTPSA id k3sm22643375wrc.67.2021.04.07.14.23.39
+        bh=qXuuG5OBfRjNa1NniOedK0/v9FygsBcxaCK9rSTnScM=;
+        b=MpwcaDTTEZ1z5k/Nb3T4NRKzdHlmnnawlvyXn289MYfzvQEk5tKgqsIdmjnd0LzoDS
+         an1WlsrRZlm5SSM8lICFtzZ+5Zlf4cNtNy5AzDnH1YugHzOhIMDzVxS4Saiu5WOw9tSo
+         beeoW2WE5aHlkph9IDfPXFVWOGUGl6JsNNPwq7AzirEyLeOOhalZULdXJa9mgyDhybqY
+         cb+1cG9mni0A1o2XNWK5DUXaKojk697WFUI5NlY8QS9cwnCGhwcIkeRdw8kJTW8RS67/
+         x4AHxWSKFNIvG2PjuaVrG94jDLeV7ZP24xM4GivJb97gXxxPyHcCGmsUruHLt76z2nsQ
+         oc/w==
+X-Gm-Message-State: AOAM531b63p7gPdhSNnIFG8s9dsEIvDHBVEXIsY0SXuMrummRJC+2thA
+	FheFFg2/jm3GNqO5X7bdyH8JIYiDr58=
+X-Google-Smtp-Source: ABdhPJzYmsjsQqX9dBdWA2W9pbmTZZxw2yYyC10mODTvFhCzfJCq8ZRKtnJzqtyal6u1SMSzpI14HA==
+X-Received: by 2002:a5d:4242:: with SMTP id s2mr6959425wrr.421.1617833918326;
+        Wed, 07 Apr 2021 15:18:38 -0700 (PDT)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from superandy.speedport.ip (p200300f07f1192521410777e3304dd72.dip0.t-ipconnect.de. [2003:f0:7f11:9252:1410:777e:3304:dd72])
+        by smtp.gmail.com with ESMTPSA id e9sm27462434wrv.92.2021.04.07.15.18.37
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Apr 2021 14:23:39 -0700 (PDT)
-From: "Valentin Longchamp" <valentin@longchamp.me>
+        Wed, 07 Apr 2021 15:18:37 -0700 (PDT)
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Valentin Longchamp <valentin@longchamp.me>
-Subject: [meta-oe][PATCH] libssh: add gcrypt to PACKAGECONFIG
-Date: Wed,  7 Apr 2021 23:23:37 +0200
-Message-Id: <20210407212337.2307476-1-valentin@longchamp.me>
-X-Mailer: git-send-email 2.27.0
+Subject: [PATCH 1/6] mousepad: upgrade 0.5.3 -> 0.5.4
+Date: Thu,  8 Apr 2021 00:18:23 +0200
+Message-Id: <20210407221829.606871-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This would allow to build it without libgcrypt (relying instead on
-libcrypto).
+Release notes for 0.5.4
+=======================
+- New Features:
+  - Add --line/-l and --column/-c number (#107, !83)
+  - Port to GtkSourceView 4 (#55, #80, !10)
 
-Enable it by default to keep the recipe behaving the same wihtout a
-configuration change.
+- Bug Fixes:
+  - Delay request to scroll to cursor for the correct active view
+  - Monitor hardlinks with glib 2.56.2 (#110, !82)
+  - Transfer encoding from remote to primary instance (#109)
+  - Prevent a crash when no language is found
+  - Make window require attention when opening new tabs (#106, #93, !81)
+  - Fix BOM array (!80)
+  - Correctly initialize toolbar style combo box (#103)
+  - Allow checking parent sources when looking up schema (#101)
+  - Fix missing parameter to "select-all" signal (!79)
 
-Signed-off-by: Valentin Longchamp <valentin@longchamp.me>
+- Translation Updates
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-oe/recipes-support/libssh/libssh_0.8.9.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ .../mousepad/{mousepad_0.5.3.bb => mousepad_0.5.4.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-apps/mousepad/{mousepad_0.5.3.bb => mousepad_0.5.4.bb} (67%)
 
-diff --git a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-index 39ed8a8fb..2aff2c878 100644
---- a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-+++ b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-@@ -4,7 +4,7 @@ SECTION = "libs"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=dabb4958b830e5df11d2b0ed8ea255a0"
+diff --git a/meta-xfce/recipes-apps/mousepad/mousepad_0.5.3.bb b/meta-xfce/recipes-apps/mousepad/mousepad_0.5.4.bb
+similarity index 67%
+rename from meta-xfce/recipes-apps/mousepad/mousepad_0.5.3.bb
+rename to meta-xfce/recipes-apps/mousepad/mousepad_0.5.4.bb
+index 1fba67914..7a2f12b1e 100644
+--- a/meta-xfce/recipes-apps/mousepad/mousepad_0.5.3.bb
++++ b/meta-xfce/recipes-apps/mousepad/mousepad_0.5.4.bb
+@@ -3,11 +3,11 @@ SECTION = "x11/application"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
  
--DEPENDS = "zlib openssl libgcrypt"
-+DEPENDS = "zlib openssl"
+-DEPENDS = "gtk+3 gtksourceview3 xfconf xfce4-dev-tools-native"
++DEPENDS = "gtk+3 gtksourceview4 xfconf xfce4-dev-tools-native"
  
- SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=stable-0.8"
- SRCREV = "04685a74df9ce1db1bc116a83a0da78b4f4fa1f8"
-@@ -13,13 +13,13 @@ S = "${WORKDIR}/git"
+ inherit xfce-app gsettings mime-xdg
  
- inherit cmake
+-SRC_URI[sha256sum] = "e7208bb9e96a1525d3358a64f9cdd165005078e84e81984a953a2a03491fcaa8"
++SRC_URI[sha256sum] = "d90f492e5d0cba5f5b3b0c1eb7fd7c1701aef57e3fa244d2c457e7f9b0a42aa1"
  
--PACKAGECONFIG ??=""
-+PACKAGECONFIG ??= "gcrypt"
- PACKAGECONFIG[gssapi] = "-DWITH_GSSAPI=1, -DWITH_GSSAPI=0, krb5, "
-+PACKAGECONFIG[gcrypt] = "-DWITH_GCRYPT=1, -DWITH_GCRYPT=0, libgcrypt, "
- 
- ARM_INSTRUCTION_SET_armv5 = "arm"
- 
- EXTRA_OECMAKE = " \
--    -DWITH_GCRYPT=1 \
-     -DWITH_PCAP=1 \
-     -DWITH_SFTP=1 \
-     -DWITH_ZLIB=1 \
+ FILES_${PN} += " \
+     ${datadir}/glib-2.0/schemas \
 -- 
-2.27.0
+2.26.2
 
