@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.8122.1617805957921969251
+ by mx.groups.io with SMTP id smtpd.web12.8039.1617805958475715811
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 07 Apr 2021 07:32:38 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=41274 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lU9EP-0007iS-I4; Wed, 07 Apr 2021 17:32:37 +0300
+	id 1lU9ET-0007iS-Ef; Wed, 07 Apr 2021 17:32:37 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/7] python3-django: Upgrade 3.1.7 -> 3.2
-Date: Wed,  7 Apr 2021 17:32:07 +0300
-Message-Id: <20210407143209.21813-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 6/7] python3-tqdm: Upgrade 4.59.0 -> 4.60.0
+Date: Wed,  7 Apr 2021 17:32:08 +0300
+Message-Id: <20210407143209.21813-6-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210407143209.21813-1-leon.anavi@konsulko.com>
 References: <20210407143209.21813-1-leon.anavi@konsulko.com>
@@ -30,44 +30,36 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.2:
+Upgrade to release 4.60.0:
 
-- Automatic AppConfig discovery
-- Customizing type of auto-created primary keys
-- Functional indexes
-- pymemcache support
-- New decorators for the admin site
-- Other minor new features
+- add contrib.logging helpers for redirecting to tqdm.write()
+- support delay in notebook
+- fix contrib.tmap, tzip not using tqdm_class
+- add notebook tests
+- updates & misc minor fixes for documentation
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-django_3.1.7.bb => python3-django_3.2.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-django_3.1.7.bb => python3-django_3.2.bb} (59%)
+ .../python/{python3-tqdm_4.59.0.bb => python3-tqdm_4.60.0.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-tqdm_4.59.0.bb => python3-tqdm_4.60.0.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-django_3.1.7.bb b/meta-python/recipes-devtools/python/python3-django_3.2.bb
-similarity index 59%
-rename from meta-python/recipes-devtools/python/python3-django_3.1.7.bb
-rename to meta-python/recipes-devtools/python/python3-django_3.2.bb
-index d22bd14e8..e147e2f9d 100644
---- a/meta-python/recipes-devtools/python/python3-django_3.1.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_3.2.bb
-@@ -1,7 +1,7 @@
- require python-django.inc
- inherit setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-tqdm_4.59.0.bb b/meta-python/recipes-devtools/python/python3-tqdm_4.60.0.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-tqdm_4.59.0.bb
+rename to meta-python/recipes-devtools/python/python3-tqdm_4.60.0.bb
+index 32e5cf053..e20ba779a 100644
+--- a/meta-python/recipes-devtools/python/python3-tqdm_4.59.0.bb
++++ b/meta-python/recipes-devtools/python/python3-tqdm_4.60.0.bb
+@@ -5,7 +5,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT & MPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=59e4271a933d33edfe60237db377a14b"
  
--SRC_URI[sha256sum] = "32ce792ee9b6a0cbbec340123e229ac9f765dff8c2a4ae9247a14b2ba3a365a7"
-+SRC_URI[sha256sum] = "21f0f9643722675976004eb683c55d33c05486f94506672df3d6a141546f389d"
+-SRC_URI[sha256sum] = "d666ae29164da3e517fcf125e41d4fe96e5bb375cd87ff9763f6b38b5592fe33"
++SRC_URI[sha256sum] = "ebdebdb95e3477ceea267decfc0784859aa3df3e27e22d23b83e9b272bf157ae"
  
- RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-sqlparse \
-@@ -9,5 +9,5 @@ RDEPENDS_${PN} += "\
+ inherit pypi setuptools3
  
- # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
- # default. To build the 3.x branch, 
--# PREFERRED_VERSION_python3-django = "3.1.7" can be added to local.conf
-+# PREFERRED_VERSION_python3-django = "3.2" can be added to local.conf
- DEFAULT_PREFERENCE = "-1"
 -- 
 2.17.1
 
