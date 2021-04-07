@@ -1,274 +1,373 @@
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web08.7355.1617803040170437277
+Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
+ by mx.groups.io with SMTP id smtpd.web11.8023.1617805582607327648
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Apr 2021 06:44:00 -0700
+ Wed, 07 Apr 2021 07:26:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=rgl0TTbw;
- spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f51.google.com with SMTP id e14so27722795ejz.11
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Apr 2021 06:43:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=X/lwlIXS;
+ spf=pass (domain: gmail.com, ip: 209.85.160.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f178.google.com with SMTP id f12so9295899qtf.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Apr 2021 07:26:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=rn1oM9l6m3W5GwfcuZvphlXaGjBj9BhR8Xf8vS++pDY=;
-        b=rgl0TTbw60jNhCkAyJN2sRAx/311ttLAzXg3Wd3qfcpVMZHyWyhh5C93llSOD1p2Ot
-         ShsOTnXL2zVtQ/JlP2eexJfRDuZA0kRcl4xTCZvykpy843wA+HtweH1i8DCYNox4mJHS
-         B99qpSFNgPpk1rnNLCm5thEuFGfRE5aUg3QzzGxj1yzuPHx+pVrfW1xlmIzqZAQ2ajme
-         RzURxq3HeLQsg1lyCgqriKb3Ptun98mE0Q/Mn5ea8QMP9pPii5xWcqLxRgkDpYRbQLEF
-         LZSHQAtMzjKDM1iI0o9xLGrUJZTnnXj+M4s5Do8x0JLgBndpmSXySIHNsYvksPfpafkf
-         WMIw==
+         :cc:content-transfer-encoding;
+        bh=8GKMDmvzZ2Pgq5Ty86tHKqz1+sl6WV+B7vxCQ+uZ3J4=;
+        b=X/lwlIXSb6Wx9YmewB+6SubcjHHy994fgbY4vWicjbIJCVg48SA3ZndhPgcVN1zJ9N
+         oS3odfNybJ9jqB+kF/0pXq3FQxl2tnYbG7TBfvhMhMfowPzY+ycvws8QcB9s07XZYvZh
+         EUobvidDBhbVknweGQA3h84xN04sud5H6/VO331HhZodpGGjsux9e9JJx0/mBkL34Bxm
+         B5e6h/LetToUdv1xncgUrezeKlLRm7rjTcQUhdRuPQsBUMvDT7RkCbCHSTfjHDMSD4Mt
+         U4q0BMuZaUjgrq7IDvVz7c1/CUoupBVG/mwot1Ae3LaqSrWI/yr1TlpWjPbhMeA3bAlW
+         0rvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=rn1oM9l6m3W5GwfcuZvphlXaGjBj9BhR8Xf8vS++pDY=;
-        b=bmvDqQ0s0zEEaqmQ9Oj36G8bCmlMovqt9E1ooVCUuzBc7HutZMTVmh+TmaMOLm9o96
-         1+1XwIF8SbJvUrOB/5NsilQxc5v1f5ttMsZ73VGwJKYBRF1Xn5lFzQlwh0ynrZu+81E4
-         rTmk1RuP+jfCXfpg3eb18IkiIbCrdHvoAcfhJYOaxP8zFE2vlZhWcJYi8pL+FOysTHgD
-         ZJNZVFmcOzKN3gGsr0+hfHyr4DFSvQFV6fBHX7VEm3k6ayVQy6qleT0FItc3GRA8TZI9
-         a4uqJUAbMe8wuED3Caxrx4lJKYVMbHA3nbzjI1yjxxaEHYjbs31aSXc5qMWJhO7I5YWU
-         lvEA==
-X-Gm-Message-State: AOAM530GboOZLYJ4PvEBATh+frpeZGsUQ5nX3vdgbZb3RzVB9bJs6i9I
-	io5nG12LGFI76PoCQ62J6g3XeORsohNVBsp+4qo=
-X-Google-Smtp-Source: ABdhPJz/sVk1dD+bwxh+4Qh+cG4RVMEol/2Yy/ytusuQL9HxhRzxkhA5PhZLTxnjM1VDLGFhVbyOkSM/RClbETYjSX4=
-X-Received: by 2002:a17:906:ce4e:: with SMTP id se14mr3998529ejb.54.1617803038435;
- Wed, 07 Apr 2021 06:43:58 -0700 (PDT)
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=8GKMDmvzZ2Pgq5Ty86tHKqz1+sl6WV+B7vxCQ+uZ3J4=;
+        b=goseUNdEzrRrR2XnwBTdC9hAowrr0txtSmQtNBey4T4YnfjSdS6wG2sMXl3C8bP/06
+         qFjaGvIj/hRWxqnaBF8c04bifv1sNxurI1uU3sKvT+sh0dYj4FxWmjjooKQOrzCxbn/M
+         STGSBJTIzhxTJ92eo6omxkRJqr3c+Ewggb/5+9V1/1833rWSltMROKca9rk6kmedncJw
+         rRkfbrqOEj+YXfgoL5rEiKvJNtSpfJFjiKZpXGaVPMZJdWo+f3M0JCVNrboBXGNlbl5E
+         /oJl7jlHuNg06IPTHVfikbnjxS5w8MRlRBydDrV7GdIqMsOuCMoHzyjnOw/OCf6qm3mf
+         VHog==
+X-Gm-Message-State: AOAM531F/BWLafK9qH7Zla79ItyQORG5DdS1buYjXMF1RVRWmtfGcNMe
+	Nya/AvvQfrfZnS9ZLT/IKgmGggB/AdN2/R+kPow=
+X-Google-Smtp-Source: ABdhPJxQ9m0GAYn8daRN/6Zc5nCI4BX7xD9Rp0gdOltCjCIENIahNW9GYwusQj5A8b/LgLhdFgbpq+Akc7O38si3dTI=
+X-Received: by 2002:ac8:5cc4:: with SMTP id s4mr2968046qta.214.1617805581397;
+ Wed, 07 Apr 2021 07:26:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210325161828.41393-1-dzagorui@cisco.com> <7f3a1c21-5425-c29b-ebc3-5c6363905b3c@gmail.com>
- <BY5PR11MB4024ED277A4D898134E1544DD9759@BY5PR11MB4024.namprd11.prod.outlook.com>
-In-Reply-To: <BY5PR11MB4024ED277A4D898134E1544DD9759@BY5PR11MB4024.namprd11.prod.outlook.com>
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-Date: Wed, 7 Apr 2021 15:43:47 +0200
-Message-ID: <CA+chaQc=LHcQQ8wJuVN-2yn8SAW2nf_VXQpcz3AR0Du6QDkBqA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2] bpftool: remove recipe from blacklist
-To: dzagorui@cisco.com
-Cc: Khem Raj <raj.khem@gmail.com>, 
-	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="0000000000006c35a005bf621f15"
-
---0000000000006c35a005bf621f15
+References: <20210407062210.5883-1-naveen.kumar.saini@intel.com>
+In-Reply-To: <20210407062210.5883-1-naveen.kumar.saini@intel.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Wed, 7 Apr 2021 07:25:54 -0700
+Message-ID: <CAMKF1srrwWUT0q-0q6zS+=bv5pLZc25zLuhROfd5CZpW4YUu=g@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] tbb: upgrade 2020.3 -> 2021.2.0
+To: Naveen Saini <naveen.kumar.saini@intel.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
-
-From: on your e-mails looks strange:
-
-From: "Denys Zagorui -X (dzagorui - GLOBALLOGIC INC@Cisco) via
-lists.openembedded.org" <dzagorui=cisco.com@lists.openembedded.org>
-
-So I guess git or something else parsed it incorrectly unfortunately.
-
-On Wed, Apr 7, 2021 at 3:32 PM Denys Zagorui -X (dzagorui - GLOBALLOGIC
-INC@Cisco) via lists.openembedded.org <dzagorui=
-cisco.com@lists.openembedded.org> wrote:
-
-> I've noticed that this patch
->
-> https://git.openembedded.org/meta-openembedded/commit/?h=hardknott&id=2179569945f07a8ad54b9015dc5fad4300cdbde9
-> and another patch
-> bpftool: improve reproducibility
-> https://git.openembedded.org/meta-openembedded/commit/?id=120de5e02ae4d48bb75e910caa2b7f4ae4b3d025
-> have strange author field
-> author  INC@Cisco) <INC@Cisco)>
-> I'm wondered how is that happened.
->
-> ________________________________________
-> From: Khem Raj <raj.khem@gmail.com>
-> Sent: 25 March 2021 20:12
-> To: Denys Zagorui -X (dzagorui - GLOBALLOGIC INC at Cisco);
-> openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH v2] bpftool: remove recipe from blacklist
->
->
->
-> On 3/25/21 9:18 AM, Denys Zagorui -X (dzagorui - GLOBALLOGIC INC@Cisco)
-> via lists.openembedded.org wrote:
-> > Have not seen build issues for 5.4 and 5.10
-> > x86-64 kernels so allow to build it
-> >
-> > Signed-off-by: Denys Zagorui <dzagorui@cisco.com>
-> > ---
-> >   meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 4 ++--
-> >   meta-oe/recipes-kernel/bpftool/bpftool.bb                  | 1 -
-> >   2 files changed, 2 insertions(+), 3 deletions(-)
-> >
-> > diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > index c717d45e5..6f7e6fc74 100644
-> > --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > @@ -608,12 +608,12 @@ RDEPENDS_packagegroup-meta-oe-kernel ="\
-> >       trace-cmd \
-> >   "
-> >   RDEPENDS_packagegroup-meta-oe-kernel_append_x86 = " intel-speed-select
-> ipmiutil pm-graph turbostat"
-> > -RDEPENDS_packagegroup-meta-oe-kernel_append_x86-64 = "
-> intel-speed-select ipmiutil kpatch pm-graph turbostat"
-> > +RDEPENDS_packagegroup-meta-oe-kernel_append_x86-64 = "
-> intel-speed-select ipmiutil kpatch pm-graph turbostat bpftool"
-> >   RDEPENDS_packagegroup-meta-oe-kernel_append_poerpc64 = " libpfm4"
-> >
-> >   # Kernel-selftest does not build with 5.8 and its exluded from build
-> too so until its fixed remove it
-> >   RDEPENDS_packagegroup-meta-oe-kernel_remove = "kernel-selftest"
-> > -RDEPENDS_packagegroup-meta-oe-kernel_remove_libc-musl = "crash
-> intel-speed-select kernel-selftest minicoredumper turbostat"
-> > +RDEPENDS_packagegroup-meta-oe-kernel_remove_libc-musl = "bpftool crash
-> intel-speed-select kernel-selftest minicoredumper turbostat"
-> >
-> >   RDEPENDS_packagegroup-meta-oe-kernel_remove_mipsarch = "makedumpfile"
-> >   RDEPENDS_packagegroup-meta-oe-kernel_remove_mips64 = "crash"
-> > diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb
-> b/meta-oe/recipes-kernel/bpftool/bpftool.bb
-> > index 1758430bc..e58bdd493 100644
-> > --- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
-> > +++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
-> > @@ -32,4 +32,3 @@ python do_package_prepend() {
-> >   }
-> >
-> >   B = "${WORKDIR}/${BPN}-${PV}"
-> > -PNBLACKLIST[bpftool] ?= "Needs forward porting to kernel 5.2+"
-> >
->
-> you need to set proper COMPATIBLE_HOST here too.
->
-> >
-> >
-> >
-> >
->
-> 
->
->
-
---0000000000006c35a005bf621f15
-Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">From: on your e-mails looks strange:<div><br></div><div>Fr=
-om: &quot;Denys Zagorui -X (dzagorui - GLOBALLOGIC INC@Cisco) via <a href=
-=3D"http://lists.openembedded.org">lists.openembedded.org</a>&quot; &lt;dz=
-agorui=3D<a href=3D"mailto:cisco.com@lists.openembedded.org">cisco.com@list=
-s.openembedded.org</a>&gt;<br></div><div><br></div><div>So I guess git or s=
-omething else parsed it incorrectly unfortunately.</div></div><br><div clas=
-s=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Apr 7, 2021=
- at 3:32 PM Denys Zagorui -X (dzagorui - GLOBALLOGIC INC@Cisco) via <a href=
-=
-=3D"http://lists.openembedded.org">lists.openembedded.org</a> &lt;dzagorui=
-=
-=3D<a href=3D"mailto:cisco.com@lists.openembedded.org">cisco.com@lists.ope=
-nembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" sty=
-le=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddi=
-ng-left:1ex">I&#39;ve noticed that this patch<br>
-<a href=3D"https://git.openembedded.org/meta-openembedded/commit/?h=3Dhard=
-knott&amp;id=3D2179569945f07a8ad54b9015dc5fad4300cdbde9" rel=3D"noreferrer"=
- target=3D"_blank">https://git.openembedded.org/meta-openembedded/commit/?h=
-=
-=3Dhardknott&amp;id=3D2179569945f07a8ad54b9015dc5fad4300cdbde9</a><br>
-and another patch<br>
-bpftool: improve reproducibility <a href=3D"https://git.openembedded.org/m=
-eta-openembedded/commit/?id=3D120de5e02ae4d48bb75e910caa2b7f4ae4b3d025" rel=
-=
-=3D"noreferrer" target=3D"_blank">https://git.openembedded.org/meta-openem=
-bedded/commit/?id=3D120de5e02ae4d48bb75e910caa2b7f4ae4b3d025</a><br>
-have strange author field<br>
-author=C2=A0 INC@Cisco) &lt;INC@Cisco)&gt;<br>
-I&#39;m wondered how is that happened.<br>
-<br>
-________________________________________<br>
-From: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank"=
->raj.khem@gmail.com</a>&gt;<br>
-Sent: 25 March 2021 20:12<br>
-To: Denys Zagorui -X (dzagorui - GLOBALLOGIC INC at Cisco); <a href=3D"mai=
-lto:openembedded-devel@lists.openembedded.org" target=3D"_blank">openembedd=
-ed-devel@lists.openembedded.org</a><br>
-Subject: Re: [oe] [meta-oe][PATCH v2] bpftool: remove recipe from blacklis=
-t<br>
-<br>
-<br>
-<br>
-On 3/25/21 9:18 AM, Denys Zagorui -X (dzagorui - GLOBALLOGIC INC@Cisco)<br=
->
-via <a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" target=3D=
-"_blank">lists.openembedded.org</a> wrote:<br>
-&gt; Have not seen build issues for 5.4 and 5.10<br>
-&gt; x86-64 kernels so allow to build it<br>
-&gt;<br>
-&gt; Signed-off-by: Denys Zagorui &lt;<a href=3D"mailto:dzagorui@cisco.com=
-" target=3D"_blank">dzagorui@cisco.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 =C2=A0meta-oe/recipes-core/packagegroups/<a href=3D"http://pack=
-agegroup-meta-oe.bb" rel=3D"noreferrer" target=3D"_blank">packagegroup-meta=
--oe.bb</a> | 4 ++--<br>
-&gt;=C2=A0 =C2=A0meta-oe/recipes-kernel/bpftool/<a href=3D"http://bpftool.=
-bb" rel=3D"noreferrer" target=3D"_blank">bpftool.bb</a>=C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 1 -<br>
-&gt;=C2=A0 =C2=A02 files changed, 2 insertions(+), 3 deletions(-)<br>
-&gt;<br>
-&gt; diff --git a/meta-oe/recipes-core/packagegroups/<a href=3D"http://pac=
-kagegroup-meta-oe.bb" rel=3D"noreferrer" target=3D"_blank">packagegroup-met=
-a-oe.bb</a> b/meta-oe/recipes-core/packagegroups/<a href=3D"http://packageg=
-roup-meta-oe.bb" rel=3D"noreferrer" target=3D"_blank">packagegroup-meta-oe.=
-bb</a><br>
-&gt; index c717d45e5..6f7e6fc74 100644<br>
-&gt; --- a/meta-oe/recipes-core/packagegroups/<a href=3D"http://packagegro=
-up-meta-oe.bb" rel=3D"noreferrer" target=3D"_blank">packagegroup-meta-oe.bb=
-</a><br>
-&gt; +++ b/meta-oe/recipes-core/packagegroups/<a href=3D"http://packagegro=
-up-meta-oe.bb" rel=3D"noreferrer" target=3D"_blank">packagegroup-meta-oe.bb=
-</a><br>
-&gt; @@ -608,12 +608,12 @@ RDEPENDS_packagegroup-meta-oe-kernel =3D&quot;\=
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0trace-cmd \<br>
-&gt;=C2=A0 =C2=A0&quot;<br>
-&gt;=C2=A0 =C2=A0RDEPENDS_packagegroup-meta-oe-kernel_append_x86 =3D &quot=
-; intel-speed-select ipmiutil pm-graph turbostat&quot;<br>
-&gt; -RDEPENDS_packagegroup-meta-oe-kernel_append_x86-64 =3D &quot; intel-=
-speed-select ipmiutil kpatch pm-graph turbostat&quot;<br>
-&gt; +RDEPENDS_packagegroup-meta-oe-kernel_append_x86-64 =3D &quot; intel-=
-speed-select ipmiutil kpatch pm-graph turbostat bpftool&quot;<br>
-&gt;=C2=A0 =C2=A0RDEPENDS_packagegroup-meta-oe-kernel_append_poerpc64 =3D =
-&quot; libpfm4&quot;<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0# Kernel-selftest does not build with 5.8 and its exluded=
- from build too so until its fixed remove it<br>
-&gt;=C2=A0 =C2=A0RDEPENDS_packagegroup-meta-oe-kernel_remove =3D &quot;ker=
-nel-selftest&quot;<br>
-&gt; -RDEPENDS_packagegroup-meta-oe-kernel_remove_libc-musl =3D &quot;cras=
-h intel-speed-select kernel-selftest minicoredumper turbostat&quot;<br>
-&gt; +RDEPENDS_packagegroup-meta-oe-kernel_remove_libc-musl =3D &quot;bpft=
-ool crash intel-speed-select kernel-selftest minicoredumper turbostat&quot;=
-<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0RDEPENDS_packagegroup-meta-oe-kernel_remove_mipsarch =3D =
-&quot;makedumpfile&quot;<br>
-&gt;=C2=A0 =C2=A0RDEPENDS_packagegroup-meta-oe-kernel_remove_mips64 =3D &q=
-uot;crash&quot;<br>
-&gt; diff --git a/meta-oe/recipes-kernel/bpftool/<a href=3D"http://bpftool=
-.bb" rel=3D"noreferrer" target=3D"_blank">bpftool.bb</a> b/meta-oe/recipes-=
-kernel/bpftool/<a href=3D"http://bpftool.bb" rel=3D"noreferrer" target=3D"_=
-blank">bpftool.bb</a><br>
-&gt; index 1758430bc..e58bdd493 100644<br>
-&gt; --- a/meta-oe/recipes-kernel/bpftool/<a href=3D"http://bpftool.bb" re=
-l=3D"noreferrer" target=3D"_blank">bpftool.bb</a><br>
-&gt; +++ b/meta-oe/recipes-kernel/bpftool/<a href=3D"http://bpftool.bb" re=
-l=3D"noreferrer" target=3D"_blank">bpftool.bb</a><br>
-&gt; @@ -32,4 +32,3 @@ python do_package_prepend() {<br>
-&gt;=C2=A0 =C2=A0}<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0B =3D &quot;${WORKDIR}/${BPN}-${PV}&quot;<br>
-&gt; -PNBLACKLIST[bpftool] ?=3D &quot;Needs forward porting to kernel 5.2+=
-&quot;<br>
-&gt;<br>
-<br>
-you need to set proper COMPATIBLE_HOST here too.<br>
-<br>
-&gt;<br>
-&gt;<br>
-&gt; <br>
-&gt;<br>
-<br>
-<br>
-<br>
-</blockquote></div>
+https://errors.yoctoproject.org/Errors/Details/575697/
 
---0000000000006c35a005bf621f15--
+opencv is looking for a tbb header which is not there
+
+On Tue, Apr 6, 2021 at 11:10 PM Naveen Saini
+<naveen.kumar.saini@intel.com> wrote:
+>
+> Switched to cmake build tool.
+>
+> Rebased some patches due to directory re-structuring.
+> Dropped patches, which are not required anymore.
+>
+> Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+> ---
+>  ...nfo-is-glibc-specific-API-mark-it-so.patch | 27 +++++++-------
+>  .../GLIBC-PREREQ-is-not-defined-on-musl.patch | 22 +++++++-----
+>  .../tbb/tbb/cross-compile.patch               | 35 -------------------
+>  .../tbb/tbb/improve-reproducibility.patch     | 30 ----------------
+>  meta-oe/recipes-support/tbb/tbb/tbb.pc        | 11 ------
+>  .../tbb/{tbb_2020.3.bb =3D> tbb_2021.2.0.bb}    | 35 ++++++------------=
+-
+>  6 files changed, 38 insertions(+), 122 deletions(-)
+>  delete mode 100644 meta-oe/recipes-support/tbb/tbb/cross-compile.patch
+>  delete mode 100644 meta-oe/recipes-support/tbb/tbb/improve-reproducibil=
+ity.patch
+>  delete mode 100644 meta-oe/recipes-support/tbb/tbb/tbb.pc
+>  rename meta-oe/recipes-support/tbb/{tbb_2020.3.bb =3D> tbb_2021.2.0.bb}=
+ (59%)
+>
+> diff --git a/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-spec=
+ific-API-mark-it-so.patch b/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-i=
+s-glibc-specific-API-mark-it-so.patch
+> index 7e66945fa..49325447e 100644
+> --- a/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-AP=
+I-mark-it-so.patch
+> +++ b/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-AP=
+I-mark-it-so.patch
+> @@ -1,22 +1,23 @@
+> -From 6b2b136caa68912d77ffe26143cd3da768b9ef80 Mon Sep 17 00:00:00 2001
+> -From: Khem Raj <raj.khem@gmail.com>
+> -Date: Sat, 3 Jun 2017 08:39:37 -0700
+> +From 52c1586bff0ecb418ac21d6678f8963d70959f04 Mon Sep 17 00:00:00 2001
+> +From: Naveen Saini <naveen.kumar.saini@intel.com>
+> +Date: Wed, 7 Apr 2021 11:14:13 +0800
+>  Subject: [PATCH] mallinfo() is glibc specific API mark it so
+>
+>  Helps compiling with musl
+>
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ----
+>  Upstream-Status: Pending
+>
+> - src/tbbmalloc/proxy.cpp | 2 ++
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+> +---
+> + src/tbbmalloc_proxy/proxy.cpp | 2 ++
+>   1 file changed, 2 insertions(+)
+>
+> -diff --git a/src/tbbmalloc/proxy.cpp b/src/tbbmalloc/proxy.cpp
+> -index 5ef279d..06c4872 100644
+> ---- a/src/tbbmalloc/proxy.cpp
+> -+++ b/src/tbbmalloc/proxy.cpp
+> -@@ -185,6 +185,7 @@ int mallopt(int /*param*/, int /*value*/) __THROW
+> +diff --git a/src/tbbmalloc_proxy/proxy.cpp b/src/tbbmalloc_proxy/proxy.=
+cpp
+> +index f9942bf1..fe0dad89 100644
+> +--- a/src/tbbmalloc_proxy/proxy.cpp
+> ++++ b/src/tbbmalloc_proxy/proxy.cpp
+> +@@ -253,6 +253,7 @@ int mallopt(int /*param*/, int /*value*/) __THROW
+>       return 1;
+>   }
+>
+> @@ -24,7 +25,7 @@ index 5ef279d..06c4872 100644
+>   struct mallinfo mallinfo() __THROW
+>   {
+>       struct mallinfo m;
+> -@@ -192,6 +193,7 @@ struct mallinfo mallinfo() __THROW
+> +@@ -260,6 +261,7 @@ struct mallinfo mallinfo() __THROW
+>
+>       return m;
+>   }
+> @@ -33,5 +34,5 @@ index 5ef279d..06c4872 100644
+>   #if __ANDROID__
+>   // Android doesn't have malloc_usable_size, provide it to be compatibl=
+e
+>  --
+> -2.13.0
+> +2.17.1
+>
+> diff --git a/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined=
+-on-musl.patch b/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-define=
+d-on-musl.patch
+> index 6f28f6f3a..fb10684cd 100644
+> --- a/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-mus=
+l.patch
+> +++ b/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-mus=
+l.patch
+> @@ -1,7 +1,7 @@
+> -From 27956d4c5fb615098231cebfb8eef11057639d3c Mon Sep 17 00:00:00 2001
+> -From: Fabrice Fontaine <fontaine.fabrice@gmail.com>
+> -Date: Sun, 8 Dec 2019 18:14:38 +0100
+> -Subject: [PATCH] src/tbbmalloc/proxy.cpp: __GLIBC_PREREQ is not defined=
+ on
+> +From 5cac8b5fffa4ebf5f0090456c9e0cbf43827242a Mon Sep 17 00:00:00 2001
+> +From: Naveen Saini <naveen.kumar.saini@intel.com>
+> +Date: Wed, 7 Apr 2021 11:32:52 +0800
+> +Subject: [PATCH] src/tbbmalloc/proxy.cpp: __GLIBC_PREREQ is not defined=
+ on
+>   musl
+>
+>  Do not call __GLIBC_PREREQ if it is not defined otherwise build will
+> @@ -12,14 +12,15 @@ Signed-off-by: Fabrice Fontaine <fontaine.fabrice@gm=
+ail.com>
+>  Upstream-Status: Submitted [https://github.com/oneapi-src/oneTBB/pull/2=
+03]
+>
+>  Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+> +Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+>  ---
+> - src/tbbmalloc/proxy.cpp | 6 ++++--
+> + src/tbbmalloc_proxy/proxy.cpp | 6 ++++--
+>   1 file changed, 4 insertions(+), 2 deletions(-)
+>
+> -diff --git a/src/tbbmalloc/proxy.cpp b/src/tbbmalloc/proxy.cpp
+> -index d96ae7a0..709ae839 100644
+> ---- a/src/tbbmalloc/proxy.cpp
+> -+++ b/src/tbbmalloc/proxy.cpp
+> +diff --git a/src/tbbmalloc_proxy/proxy.cpp b/src/tbbmalloc_proxy/proxy.=
+cpp
+> +index fe0dad89..93e68049 100644
+> +--- a/src/tbbmalloc_proxy/proxy.cpp
+> ++++ b/src/tbbmalloc_proxy/proxy.cpp
+>  @@ -24,7 +24,8 @@
+>   // of aligned_alloc as required by new C++ standard, this makes it har=
+d to
+>   // redefine aligned_alloc here. However, running on systems with new l=
+ibc
+> @@ -40,3 +41,6 @@ index d96ae7a0..709ae839 100644
+>   #endif // __linux__ && !__ANDROID__
+>
+>   #include "proxy.h"
+> +--
+> +2.17.1
+> +
+> diff --git a/meta-oe/recipes-support/tbb/tbb/cross-compile.patch b/meta-=
+oe/recipes-support/tbb/tbb/cross-compile.patch
+> deleted file mode 100644
+> index 36578543f..000000000
+> --- a/meta-oe/recipes-support/tbb/tbb/cross-compile.patch
+> +++ /dev/null
+> @@ -1,35 +0,0 @@
+> -Author: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+> -
+> -Upstream-Status: unsuitable
+> ----
+> -
+> -diff --git a/build/linux.clang.inc b/build/linux.clang.inc
+> -index fe9b5c98..b0dcd68b 100644
+> ---- a/build/linux.clang.inc
+> -+++ b/build/linux.clang.inc
+> -@@ -12,8 +12,8 @@
+> - # See the License for the specific language governing permissions and
+> - # limitations under the License.
+> -
+> --CPLUS ?=3D clang++
+> --CONLY ?=3D clang
+> -+CPLUS ?=3D $(CXX)
+> -+CONLY ?=3D $(CC)
+> - COMPILE_ONLY =3D -c -MMD
+> - PREPROC_ONLY =3D -E -x c++
+> - INCLUDE_KEY =3D -I
+> -diff --git a/build/linux.gcc.inc b/build/linux.gcc.inc
+> -index d820c15d..62c76afd 100644
+> ---- a/build/linux.gcc.inc
+> -+++ b/build/linux.gcc.inc
+> -@@ -12,8 +12,8 @@
+> - # See the License for the specific language governing permissions and
+> - # limitations under the License.
+> -
+> --CPLUS ?=3D g++
+> --CONLY ?=3D gcc
+> -+CPLUS ?=3D $(CXX)
+> -+CONLY ?=3D $(CC)
+> - COMPILE_ONLY =3D -c -MMD
+> - PREPROC_ONLY =3D -E -x c++
+> - INCLUDE_KEY =3D -I
+> diff --git a/meta-oe/recipes-support/tbb/tbb/improve-reproducibility.pat=
+ch b/meta-oe/recipes-support/tbb/tbb/improve-reproducibility.patch
+> deleted file mode 100644
+> index 91d10cb7a..000000000
+> --- a/meta-oe/recipes-support/tbb/tbb/improve-reproducibility.patch
+> +++ /dev/null
+> @@ -1,30 +0,0 @@
+> -From f56eeb18a07df139864a99e1967d450cc5c8c0bb Mon Sep 17 00:00:00 2001
+> -From: Lee Chee Yang <chee.yang.lee@intel.com>
+> -Date: Wed, 30 Sep 2020 16:18:35 +0800
+> -Subject: [PATCH] improve reproducibility
+> -
+> -remove the WORKDIR info from BUILD_COMMAND to improve reproducibility.
+> -also use SOURCE_DATE_EPOCH as DATETIME wherever possible.
+> -
+> -Upstream-Status: Inappropriate [sed WORKDIR does not applies to upstrea=
+m]
+> -Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
+> ----
+> - build/version_info_linux.sh | 4 +-
+> - 1 file changed, 2 insertion(+), 2 deletion(-)
+> -
+> -diff --git a/build/version_info_linux.sh b/build/version_info_linux.sh
+> -index 793cad11..ed6f4b2a 100644
+> ---- a/build/version_info_linux.sh
+> -+++ b/build/version_info_linux.sh
+> -@@ -25,6 +25,6 @@ echo '#N": BUILD_GCC'"\t\t"`g++ --version </dev/null =
+2>&1 | grep 'g++'`'" ENDL \
+> - echo '#N": BUILD_LIBC'"\t"`getconf GNU_LIBC_VERSION | grep glibc | sed=
+ -e 's/^glibc //'`'" ENDL \'
+> - echo '#N": BUILD_LD'"\t\t"`ld -v 2>&1 | grep 'version'`'" ENDL \'
+> - echo '#N": BUILD_TARGET'"\t$arch on $runtime"'" ENDL \'
+> --echo '#N": BUILD_COMMAND'"\t"$*'" ENDL \'
+> -+echo '#N": BUILD_COMMAND'"\t"$(echo $* | sed 's#'$WORKDIR'#/workdir#g'=
+)'" ENDL \'
+> - echo ""
+> --echo "#define __TBB_DATETIME \""`date -u`"\""
+> -+echo "#define __TBB_DATETIME \""`$(date -u -d "@$SOURCE_DATE_EPOCH"  2=
+>/dev/null || date -u -r "$SOURCE_DATE_EPOCH"  2>/dev/null || date -u )`"\"=
+"
+> ---
+> -2.25.1
+> -
+> diff --git a/meta-oe/recipes-support/tbb/tbb/tbb.pc b/meta-oe/recipes-su=
+pport/tbb/tbb/tbb.pc
+> deleted file mode 100644
+> index 4f9da1140..000000000
+> --- a/meta-oe/recipes-support/tbb/tbb/tbb.pc
+> +++ /dev/null
+> @@ -1,11 +0,0 @@
+> -prefix=3D/usr
+> -exec_prefix=3D${prefix}
+> -libdir=3D${exec_prefix}/lib
+> -includedir=3D${prefix}/include
+> -
+> -Name: Threading Building Blocks
+> -Description: Intel's parallelism library for C++
+> -URL: https://software.intel.com/en-us/tbb
+> -Version: 2020.2
+> -Libs: -L${libdir} -ltbb
+> -Cflags: -I${includedir}
+> diff --git a/meta-oe/recipes-support/tbb/tbb_2020.3.bb b/meta-oe/recipes=
+-support/tbb/tbb_2021.2.0.bb
+> similarity index 59%
+> rename from meta-oe/recipes-support/tbb/tbb_2020.3.bb
+> rename to meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+> index 8e0094b31..357fbba34 100644
+> --- a/meta-oe/recipes-support/tbb/tbb_2020.3.bb
+> +++ b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+> @@ -5,37 +5,24 @@ DESCRIPTION =3D "Parallelism library for C++ - runtime=
+ files \
+>      and threading mechanism for performance and scalability."
+>  HOMEPAGE =3D "https://software.intel.com/en-us/tbb"
+>  LICENSE =3D "Apache-2.0"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D86d3f3a95c324c9479bd8986968f=
+4327"
+> -BRANCH =3D "tbb_2020"
+> -SRCREV =3D "eca91f16d7490a8abfdee652dadf457ec820cc37"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D86d3f3a95c324c9479bd8986=
+968f4327"
+> +BRANCH =3D "onetbb_2021"
+> +SRCREV =3D "2dba2072869a189b9fdab3ffa431d3ea49059a19"
+>  SRC_URI =3D "git://github.com/oneapi-src/oneTBB.git;protocol=3Dhttps;br=
+anch=3D${BRANCH} \
+> -           file://cross-compile.patch \
+> -           file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch =
+\
+> -           file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
+> -           file://tbb.pc \
+> -           file://improve-reproducibility.patch \
+> +            file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch=
+ \
+> +            file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
+>  "
+>
+>  S =3D "${WORKDIR}/git"
+> -PE =3D "1"
+>
+> -COMPILER ?=3D "gcc"
+> -COMPILER_toolchain-clang =3D "clang"
+> +inherit cmake
+>
+> -do_compile() {
+> -    oe_runmake compiler=3D${COMPILER} arch=3D${HOST_ARCH}
+> -}
+> +# test build fails, error: 'mallinfo mallinfo()' is deprecated
+> +EXTRA_OECMAKE +=3D " \
+> +                    -DTBB_TEST=3DOFF \
+> +                    -DCMAKE_BUILD_TYPE=3DRelease \
+> +                "
+>
+> -do_install() {
+> -    install -d ${D}${includedir} ${D}${libdir}
+> -    rm ${S}/include/tbb/index.html -f
+> -    cp -R --no-dereference --preserve=3Dmode,links -v ${S}/include/tbb =
+${D}${includedir}
+> -    for f in ${B}/build/linux_*_release/lib*.so*
+> -    do
+> -        install -Dm 0755 $f ${D}${libdir}/
+> -    done
+> -    install -Dm 0644 ${WORKDIR}/tbb.pc ${D}${libdir}/pkgconfig/tbb.pc
+> -}
+>
+>  # fails with thumb enabled:
+>  # | arm-oe-linux-gnueabi-g++  -march=3Darmv7-a -mthumb -mthumb-interwor=
+k -mfloat-abi=3Dsoftfp -mfpu=3Dneon -mtune=3Dcortex-a9 -mcpu=3Dcortex-a9 -D=
+__ARM__ -D__LINUX_ARM_ARCH__=3D7 -funwind-tables -mvectorize-with-neon-quad=
+ -rdynamic --sysroot=3D/OE/sysroots/m14tv -c -MMD -DTBB_USE_DEBUG  -g -O0 -=
+DUSE_PTHREAD -fPIC -D__TBB_BUILD=3D1 -Wall -Wno-parentheses -Wno-non-virtua=
+l-dtor -O2 -pipe -g -feliminate-unused-debug-types -fpermissive -fvisibilit=
+y-inlines-hidden   -I../../src -I../../src/rml/include -I../../include ../.=
+./src/tbb/concurrent_queue.cpp
+> --
+> 2.17.1
+>
+>
+>=20
+>
