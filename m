@@ -1,101 +1,79 @@
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.web09.467.1617833919954869375
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+ by mx.groups.io with SMTP id smtpd.web10.420.1617833920471584374
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 07 Apr 2021 15:18:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=QrVlWONw;
- spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f41.google.com with SMTP id u11so7121550wrp.4
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Apr 2021 15:18:39 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Q+ayT660;
+ spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wr1-f46.google.com with SMTP id a4so2619517wrr.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Apr 2021 15:18:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
+        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=qXuuG5OBfRjNa1NniOedK0/v9FygsBcxaCK9rSTnScM=;
-        b=QrVlWONwRMUP5MxQOJkAW8m7UcAyPvzEZNz85wJWWAh2nahH5uU+n1Xu6mzScCkRMP
-         N1fLnWxVkfww8KpiHO9FQEeq9M27erQHygzwuJj3eZzo0jHY8Iyx3vKHyZgKt1qCNICQ
-         j2S2W6EXsir+WZUjAM6Znjvexz9BhVTcx6mCy0e29eRRGdlDjHv5q+APJSOQabVe4yc6
-         K+L2UlWm3prbOAoZ0ktxEuODjl+a93alPPhb4pytT8EzYCiECso4MiXCJIOXGZg0H8jU
-         6ZRVliy2frl5ZyxPep4xrnOVQ3P3zbqcXF/sWzKRmdGvzbkSzrUfDY9w7Rv19T2arQiW
-         Kd6w==
+        bh=8RAQw75fkWLIlub7HWdM4QzBmVm58qQ2aFjPZkXkG3o=;
+        b=Q+ayT660TFqAT/hWHs9DZc7XPgjuCr75La7KjckMZsipc4Eji5Ci6UDWroDRLcKC07
+         Tg5NCJp0BCnsrtgQjmHO9QavBVzv/d9Cy5kvGJjt2VjjzKd0lWxG7xy1xg5QoPu8zXLU
+         I1YBCdJW+iD97Urp1ZcN4RuaVGmfk9BnUbhC0oX5MYlobPcHchHSPZdRV2UOfbjwV5St
+         8jmWyTAA8GAJ5SrJVGvFzYVM5tptwYp6dWToYXNGxxVMCBCvnef1blNGsOoTWFF99LGU
+         7eRQcJkPM28Cbik1/UAErEKdg5hGluNKkSctCRYcgalA4vAffExiI+xZw0FXJmROR8ex
+         jdrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=qXuuG5OBfRjNa1NniOedK0/v9FygsBcxaCK9rSTnScM=;
-        b=MpwcaDTTEZ1z5k/Nb3T4NRKzdHlmnnawlvyXn289MYfzvQEk5tKgqsIdmjnd0LzoDS
-         an1WlsrRZlm5SSM8lICFtzZ+5Zlf4cNtNy5AzDnH1YugHzOhIMDzVxS4Saiu5WOw9tSo
-         beeoW2WE5aHlkph9IDfPXFVWOGUGl6JsNNPwq7AzirEyLeOOhalZULdXJa9mgyDhybqY
-         cb+1cG9mni0A1o2XNWK5DUXaKojk697WFUI5NlY8QS9cwnCGhwcIkeRdw8kJTW8RS67/
-         x4AHxWSKFNIvG2PjuaVrG94jDLeV7ZP24xM4GivJb97gXxxPyHcCGmsUruHLt76z2nsQ
-         oc/w==
-X-Gm-Message-State: AOAM531b63p7gPdhSNnIFG8s9dsEIvDHBVEXIsY0SXuMrummRJC+2thA
-	FheFFg2/jm3GNqO5X7bdyH8JIYiDr58=
-X-Google-Smtp-Source: ABdhPJzYmsjsQqX9dBdWA2W9pbmTZZxw2yYyC10mODTvFhCzfJCq8ZRKtnJzqtyal6u1SMSzpI14HA==
-X-Received: by 2002:a5d:4242:: with SMTP id s2mr6959425wrr.421.1617833918326;
-        Wed, 07 Apr 2021 15:18:38 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=8RAQw75fkWLIlub7HWdM4QzBmVm58qQ2aFjPZkXkG3o=;
+        b=n6rqkfakj83JxOm7dpoBI7jRrsoVhbLMe4/zPuQkRnv+H0N+IQodrG7BROrgi8Hd7f
+         QrG2GuOzJ6ooFEpKYieLxNWJk/EsRHFcJ8LBsOqu5EzUG//VpmcWV+sE9G+Vib7MLNIt
+         YbMbXYXLAY4x+LlifqncWiTwbwN6EB7uFvLePUDB2iKvviu4k28K2QogzZfedFmm9YSR
+         Oa0UHzz6SRJIxv6vx4xh/2XZx+0rU33bX7ZsKrf9aOJ6wOktNXcoMUsy7B1mDMDG6jT6
+         BkCjp2Hj+d8hX63N3W2fQwUsfJcapv+UvNFpMM/arGmIj+SUEEf0KfjI9F4BV36AqN6W
+         TOrA==
+X-Gm-Message-State: AOAM531Y6gMoKDlLFtU/SvHWTMjuIqW0FVAlhopMlcEL8hEkI/014S+B
+	w30zRQczxyFbUCG0OI6/WkFTmzkTRFw=
+X-Google-Smtp-Source: ABdhPJy3BBsso51cKB6k/07Ji6T1OhfWenQxIGhAUUor/DWhHqLrzbcI+O0Wko35HFH+Qsh6NOpN9A==
+X-Received: by 2002:adf:fb91:: with SMTP id a17mr7074567wrr.118.1617833919071;
+        Wed, 07 Apr 2021 15:18:39 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f1192521410777e3304dd72.dip0.t-ipconnect.de. [2003:f0:7f11:9252:1410:777e:3304:dd72])
-        by smtp.gmail.com with ESMTPSA id e9sm27462434wrv.92.2021.04.07.15.18.37
+        by smtp.gmail.com with ESMTPSA id e9sm27462434wrv.92.2021.04.07.15.18.38
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Apr 2021 15:18:37 -0700 (PDT)
+        Wed, 07 Apr 2021 15:18:38 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 1/6] mousepad: upgrade 0.5.3 -> 0.5.4
-Date: Thu,  8 Apr 2021 00:18:23 +0200
-Message-Id: <20210407221829.606871-1-schnitzeltony@gmail.com>
+Subject: [PATCH] networkmanager-openvpn: Fix packageing
+Date: Thu,  8 Apr 2021 00:18:24 +0200
+Message-Id: <20210407221829.606871-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210407221829.606871-1-schnitzeltony@gmail.com>
+References: <20210407221829.606871-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Release notes for 0.5.4
-=======================
-- New Features:
-  - Add --line/-l and --column/-c number (#107, !83)
-  - Port to GtkSourceView 4 (#55, #80, !10)
-
-- Bug Fixes:
-  - Delay request to scroll to cursor for the correct active view
-  - Monitor hardlinks with glib 2.56.2 (#110, !82)
-  - Transfer encoding from remote to primary instance (#109)
-  - Prevent a crash when no language is found
-  - Make window require attention when opening new tabs (#106, #93, !81)
-  - Fix BOM array (!80)
-  - Correctly initialize toolbar style combo box (#103)
-  - Allow checking parent sources when looking up schema (#101)
-  - Fix missing parameter to "select-all" signal (!79)
-
-- Translation Updates
+Recent upgrade introduced:
+| ERROR: networkmanager-openvpn-1.8.14-r0 do_package: QA Issue: networkmanager-openvpn: Files/directories were installed but not shipped in any package:
+|  /usr/share/metainfo
+|  /usr/share/metainfo/network-manager-openvpn.metainfo.xml
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../mousepad/{mousepad_0.5.3.bb => mousepad_0.5.4.bb}         | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-apps/mousepad/{mousepad_0.5.3.bb => mousepad_0.5.4.bb} (67%)
+ .../networkmanager/networkmanager-openvpn_1.8.14.bb              | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-xfce/recipes-apps/mousepad/mousepad_0.5.3.bb b/meta-xfce/recipes-apps/mousepad/mousepad_0.5.4.bb
-similarity index 67%
-rename from meta-xfce/recipes-apps/mousepad/mousepad_0.5.3.bb
-rename to meta-xfce/recipes-apps/mousepad/mousepad_0.5.4.bb
-index 1fba67914..7a2f12b1e 100644
---- a/meta-xfce/recipes-apps/mousepad/mousepad_0.5.3.bb
-+++ b/meta-xfce/recipes-apps/mousepad/mousepad_0.5.4.bb
-@@ -3,11 +3,11 @@ SECTION = "x11/application"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
--DEPENDS = "gtk+3 gtksourceview3 xfconf xfce4-dev-tools-native"
-+DEPENDS = "gtk+3 gtksourceview4 xfconf xfce4-dev-tools-native"
- 
- inherit xfce-app gsettings mime-xdg
- 
--SRC_URI[sha256sum] = "e7208bb9e96a1525d3358a64f9cdd165005078e84e81984a953a2a03491fcaa8"
-+SRC_URI[sha256sum] = "d90f492e5d0cba5f5b3b0c1eb7fd7c1701aef57e3fa244d2c457e7f9b0a42aa1"
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.14.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.14.bb
+index a1a61bed1..1f76d8ab5 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.14.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.14.bb
+@@ -38,6 +38,7 @@ USERADD_PARAM_${PN} = "--system nm-openvpn"
  
  FILES_${PN} += " \
-     ${datadir}/glib-2.0/schemas \
+     ${datadir}/dbus-1 \
++    ${datadir}/metainfo \
+     ${libdir}/NetworkManager/*.so \
+     ${nonarch_libdir}/NetworkManager/VPN/nm-openvpn-service.name \
+ "
 -- 
 2.26.2
 
