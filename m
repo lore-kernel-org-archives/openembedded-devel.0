@@ -1,132 +1,160 @@
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
- by mx.groups.io with SMTP id smtpd.web08.8323.1617806871815284524
+Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
+ by mx.groups.io with SMTP id smtpd.web11.9649.1617811525355018115
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Apr 2021 07:47:51 -0700
+ Wed, 07 Apr 2021 09:05:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ai2ba6qP;
- spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f177.google.com with SMTP id w10so7743703pgh.5
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Apr 2021 07:47:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=XElSsxwF;
+ spf=pass (domain: gmail.com, ip: 209.85.161.49, mailfrom: akuster808@gmail.com)
+Received: by mail-oo1-f49.google.com with SMTP id q127-20020a4a33850000b02901b646aa81b1so4656573ooq.8
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Apr 2021 09:05:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:references:from:organization:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=xlSLE8SIB9iB4w/GAv2yGUl18nlO58lz0A+VaZHkRCc=;
-        b=ai2ba6qPFZsqOZauiIQtT2fZqMZ2ZfFp2vSPwLmF3tzvTj53lvRjavbIaHv+208jp8
-         iPjtKYeFuSdgwQ6vhENxZ/oj/6k0jmGja4EhnQ8rUa5yrMoLOsQxe4nQ9ORo/BB5o+FM
-         fA+aUOXuKHorLqmPZRXy1ShIuarJWDYmgBfzjDp7FQ4pFqrxbL+3fo/s7ub2Sp29jElk
-         yQF/nOBeUULwsNcazyDb6j25Axivn80WFZMkdmUk6l1ODYzZFTF3L51Le6q5EJSgSyCu
-         PZirHg+5etEOGAfv5/O82QXSnrs6Bn+aXexeIxjrVGFiMkDHk2gOv3Tda566UNUVyG2s
-         PqqA==
+        h=to:from:subject:autocrypt:message-id:date:user-agent:mime-version
+         :content-transfer-encoding:content-language;
+        bh=xXkCJWF4QGYYlsmIfhZFuK5H2jGR0rjIWfd9NFpFzvY=;
+        b=XElSsxwFpzJNrNgVx2P96vA2ETjv8oXlsQVlIKMA0pmConPqbTTohuSiXPP9xxcES/
+         /Pp2l+7CKb4u3+f4fm4k+PtWGliMnAHesULPgOzTtIrxCkK5MlA63sNBHb+VV+kqhqje
+         Uw8RhC4hmKSjVHzEZOc8qZkwklOsesapZ/jl04XYzCCRedq1xP/bAt/xGLnVlpV4Wcts
+         TEUsIav7iY4XA2YZFnFMSiStxwGq32PfI9Sr3L7bCh+6iqzkG4rByvQSQ5REQPXG0XF6
+         uCXzxTuOr/yiWxrdFapFQgjU7i5V1k2/sMYledQ9rGiKHs6AmfLKizvF9GNt7AA88zib
+         k5FA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=xlSLE8SIB9iB4w/GAv2yGUl18nlO58lz0A+VaZHkRCc=;
-        b=pyrqiH0l9+TiOyKSDW1tN1gcdRFCexcg8AHWmwcJq1HDERxRVAzaPwSuTS1hijOUG3
-         uteCzUODuqPj8AdBJzLM/XfI0UWQCv8NZ8jxFbt0PRZsOeL+g2cwMg1E+O1pa1QciuAM
-         pFRqRsC0h6UueBA3F6698GlsBT99uK1tdAhvS9sEzr7yoOXbzsLvuyuEwqeQGZx6zqp8
-         ak480hxOxmvwnCe0jlIBWtvpC+E7eecpyEmeB3Jc+GgjNvkeqvLq+aj//JbnAt8jm2W2
-         ajZ80iDcXs6neFWq8eoA12zL+uZpCUgu+pl0b6umUcguWNOlwgKABXML5q73RACNoZUM
-         /mzQ==
-X-Gm-Message-State: AOAM533WW4pDj//5pI5eoibGhHLihVjC25cajxfRoxp4NwJo//aw6kkp
-	BMfaD/5RuOtC1MwSHFJUOBIb2aevPOgOsg==
-X-Google-Smtp-Source: ABdhPJzQG7StcYe0bXYN5a8RkzVutwouqB/IQ6cqFt3UFv2joRqVAzBLsYWriX57d+UrfYF8N8rd4A==
-X-Received: by 2002:a62:63c7:0:b029:225:7c19:a8f9 with SMTP id x190-20020a6263c70000b02902257c19a8f9mr3317677pfb.39.1617806871140;
-        Wed, 07 Apr 2021 07:47:51 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:a0f0::7c4e? ([2601:646:9200:a0f0::7c4e])
-        by smtp.gmail.com with ESMTPSA id f6sm15521066pgd.61.2021.04.07.07.47.50
+        h=x-gm-message-state:to:from:subject:autocrypt:message-id:date
+         :user-agent:mime-version:content-transfer-encoding:content-language;
+        bh=xXkCJWF4QGYYlsmIfhZFuK5H2jGR0rjIWfd9NFpFzvY=;
+        b=FtjlnvHU7vhL0KtVCwjvgi62SuOKbVvI1pHwM111gbh7kRgjIDEY7q6H01mrlP9uSP
+         pmHB89pX7e6nG190u+NRezPLdv4yVcMgLhBHuxUWoJhPf3E0UKIzL2bsGV2oYQq1+hnd
+         J6FYrlvwcuaNDUBAj+dNQp1J9awJ2rmYPDFOkbmBRSHzk6Sao5/d+QEaI7oiRstxmWvQ
+         sPWNgUESwfYDZbMXsgwKPjzLp2Lpg56yyq3z6+R+eHWAnJpK3NckcJJf1l+Fr+nNEUXQ
+         N3lP9MCGNjKpUDyxQFp3gQH19iM6qojTxGDjF44lUGDHc+7OHpvpWg5BEzYJNpT3v0/y
+         0sjw==
+X-Gm-Message-State: AOAM531jrGthqL2oWzyfAzKCy6M2++De/rr2y3nCCbYuc9aGFAEuiLZw
+	pZQo6KpgviZDXjstuYpg1mI=
+X-Google-Smtp-Source: ABdhPJy0bwpByrB64ftFTmm+f+zsisOfmEvhJ8T4ms8SkfPYf2syzQt/MojxOv2jwcgpHa+I9qtBPw==
+X-Received: by 2002:a4a:395d:: with SMTP id x29mr3570808oog.41.1617811524713;
+        Wed, 07 Apr 2021 09:05:24 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:d82f:cd1e:57b2:d04e? ([2601:202:4180:a5c0:d82f:cd1e:57b2:d04e])
+        by smtp.gmail.com with ESMTPSA id c2sm5367385otf.66.2021.04.07.09.05.23
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 07 Apr 2021 07:47:50 -0700 (PDT)
-Subject: Re: [oe] [meta-oe][PATCH v2] bpftool: remove recipe from blacklist
-To: "Denys Zagorui -X (dzagorui - GLOBALLOGIC INC at Cisco)"
- <dzagorui@cisco.com>,
- "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-References: <20210325161828.41393-1-dzagorui@cisco.com>
- <7f3a1c21-5425-c29b-ebc3-5c6363905b3c@gmail.com>
- <BY5PR11MB4024ED277A4D898134E1544DD9759@BY5PR11MB4024.namprd11.prod.outlook.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <ac355829-830d-8a36-b601-6b2ad63409d0@gmail.com>
-Date: Wed, 7 Apr 2021 07:47:48 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.9.0
+        Wed, 07 Apr 2021 09:05:24 -0700 (PDT)
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+ Khem Raj <raj.khem@gmail.com>
+From: "akuster" <akuster808@gmail.com>
+Subject: dunfell-next merge request April 7
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+ 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
+ 8CS2NxU=
+Message-ID: <c32216ce-79fe-5457-8ed4-844973a0c8e3@gmail.com>
+Date: Wed, 7 Apr 2021 09:05:23 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <BY5PR11MB4024ED277A4D898134E1544DD9759@BY5PR11MB4024.namprd11.prod.outlook.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
 
-some email agents change the email headers like this. We do have catch 
-for some and Its a pain to edit them manually, so ask your IT why its 
-happening for your emails. Otherwise send pull requests where this would 
-not happen
+The following changes since commit 389757a7494221fea1d8437e9a01c6e4fb4700af:
 
-On 4/7/21 6:32 AM, Denys Zagorui -X (dzagorui - GLOBALLOGIC INC at 
-Cisco) wrote:
-> I've noticed that this patch
-> https://git.openembedded.org/meta-openembedded/commit/?h=hardknott&id=2179569945f07a8ad54b9015dc5fad4300cdbde9
-> and another patch
-> bpftool: improve reproducibility https://git.openembedded.org/meta-openembedded/commit/?id=120de5e02ae4d48bb75e910caa2b7f4ae4b3d025
-> have strange author field
-> author  INC@Cisco) <INC@Cisco)>
-> I'm wondered how is that happened.
-> 
-> ________________________________________
-> From: Khem Raj <raj.khem@gmail.com>
-> Sent: 25 March 2021 20:12
-> To: Denys Zagorui -X (dzagorui - GLOBALLOGIC INC at Cisco); openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH v2] bpftool: remove recipe from blacklist
-> 
-> 
-> 
-> On 3/25/21 9:18 AM, Denys Zagorui -X (dzagorui - GLOBALLOGIC INC@Cisco)
-> via lists.openembedded.org wrote:
->> Have not seen build issues for 5.4 and 5.10
->> x86-64 kernels so allow to build it
->>
->> Signed-off-by: Denys Zagorui <dzagorui@cisco.com>
->> ---
->>    meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 4 ++--
->>    meta-oe/recipes-kernel/bpftool/bpftool.bb                  | 1 -
->>    2 files changed, 2 insertions(+), 3 deletions(-)
->>
->> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
->> index c717d45e5..6f7e6fc74 100644
->> --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
->> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
->> @@ -608,12 +608,12 @@ RDEPENDS_packagegroup-meta-oe-kernel ="\
->>        trace-cmd \
->>    "
->>    RDEPENDS_packagegroup-meta-oe-kernel_append_x86 = " intel-speed-select ipmiutil pm-graph turbostat"
->> -RDEPENDS_packagegroup-meta-oe-kernel_append_x86-64 = " intel-speed-select ipmiutil kpatch pm-graph turbostat"
->> +RDEPENDS_packagegroup-meta-oe-kernel_append_x86-64 = " intel-speed-select ipmiutil kpatch pm-graph turbostat bpftool"
->>    RDEPENDS_packagegroup-meta-oe-kernel_append_poerpc64 = " libpfm4"
->>
->>    # Kernel-selftest does not build with 5.8 and its exluded from build too so until its fixed remove it
->>    RDEPENDS_packagegroup-meta-oe-kernel_remove = "kernel-selftest"
->> -RDEPENDS_packagegroup-meta-oe-kernel_remove_libc-musl = "crash intel-speed-select kernel-selftest minicoredumper turbostat"
->> +RDEPENDS_packagegroup-meta-oe-kernel_remove_libc-musl = "bpftool crash intel-speed-select kernel-selftest minicoredumper turbostat"
->>
->>    RDEPENDS_packagegroup-meta-oe-kernel_remove_mipsarch = "makedumpfile"
->>    RDEPENDS_packagegroup-meta-oe-kernel_remove_mips64 = "crash"
->> diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
->> index 1758430bc..e58bdd493 100644
->> --- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
->> +++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
->> @@ -32,4 +32,3 @@ python do_package_prepend() {
->>    }
->>
->>    B = "${WORKDIR}/${BPN}-${PV}"
->> -PNBLACKLIST[bpftool] ?= "Needs forward porting to kernel 5.2+"
->>
-> 
-> you need to set proper COMPATIBLE_HOST here too.
-> 
->>
->>
->> 
->>
+  opencv: Security fixes (2021-03-16 08:40:07 -0700)
+
+are available in the Git repository at:
+
+  https://git.openembedded.org/meta-openembedded dunfell-next
+
+for you to fetch changes up to 430ef96fe65f62d8da995f446d5b9b093544f031:
+
+  wireguard: fix build issue with updated 5.4 kernel (2021-04-07
+08:55:15 -0700)
+
+----------------------------------------------------------------
+Aditya.Tayade (1):
+      neon: Add ptest
+
+Armin Kuster (1):
+      wireguard: fix build issue with updated 5.4 kernel
+
+Marek Vasut (1):
+      freerdp: Add missing libxkbcommon WL dependency
+
+Martin Jansa (5):
+      opencv: refresh patches with devtool to apply cleanly
+      ceres-solver: prevent fetching git hook during do_configure
+      packagegroup-meta-oe: include nodejs without meta-python2 conditional
+      packagegroup-meta-oe: move the packages depending on meta-python2
+to separate packages
+      packagegroup-meta-oe: add guider
+
+Peace Lee (2):
+      guider: Upgrade to 3.9.7
+      Update commit for version 3.9.7
+
+ ..._ndo_send-functions-were-backported-exten.patch |  32 +++++++
+ .../wireguard/wireguard-module_1.0.20200401.bb     |   3 +-
+ .../packagegroups/packagegroup-meta-oe.bb          |  37 ++++++--
+ meta-oe/recipes-devtools/guider/guider_3.9.6.bb    |  39 --------
+ meta-oe/recipes-devtools/guider/guider_3.9.7.bb    |  19 ++++
+ .../ceres-solver/ceres-solver_1.14.0.bb            |   8 ++
+ meta-oe/recipes-support/freerdp/freerdp_git.bb     |   2 +-
+ meta-oe/recipes-support/neon/neon/run-ptest        |  25 +++++
+ meta-oe/recipes-support/neon/neon_0.30.2.bb        |  15 ++-
+ ...01-3rdparty-ippicv-Use-pre-downloaded-ipp.patch |   4 +-
+ .../opencv/opencv/0001-Dont-use-isystem.patch      |   4 +-
+ ...-work-around-deprecated-ffmpeg-RAW-functi.patch |   4 +-
+ ...place-ipcp-unit-growth-with-ipa-cp-unit-g.patch |   9 +-
+ ...-ts-create-share-library-intead-of-static.patch |   4 +-
+ .../opencv/0003-To-fix-errors-as-following.patch   |   8 +-
+ .../opencv/opencv/CVE-2019-14491.patch             |  56 +++++------
+ .../opencv/opencv/CVE-2019-14493.patch             | 104
+++++++++++-----------
+ .../opencv/opencv/CVE-2019-15939.patch             |  20 ++--
+ .../opencv/opencv/CVE-2019-19624.patch             |  22 ++---
+ .../recipes-support/opencv/opencv/download.patch   |   9 ++
+ 20 files changed, 255 insertions(+), 169 deletions(-)
+ create mode 100644
+meta-networking/recipes-kernel/wireguard/files/0001-compat-icmp_ndo_send-functions-were-backported-exten.patch
+ delete mode 100644 meta-oe/recipes-devtools/guider/guider_3.9.6.bb
+ create mode 100644 meta-oe/recipes-devtools/guider/guider_3.9.7.bb
+ create mode 100644 meta-oe/recipes-support/neon/neon/run-ptest
+
