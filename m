@@ -1,111 +1,89 @@
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.web10.422.1617833924396814756
+Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com [209.85.219.51])
+ by mx.groups.io with SMTP id smtpd.web10.527.1617834398634158744
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Apr 2021 15:18:44 -0700
+ Wed, 07 Apr 2021 15:26:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Z1Ag8TSj;
- spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f53.google.com with SMTP id f6so13467118wrv.12
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Apr 2021 15:18:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=G7JSxrbb;
+ spf=pass (domain: gmail.com, ip: 209.85.219.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f51.google.com with SMTP id c9so2045817qvv.13
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Apr 2021 15:26:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=S0EHnCRE9xEFWLfIMhLmGvG4zixbVlmDtUQG/PaljUA=;
-        b=Z1Ag8TSjONXCBL92u5HYSGlxXhdGH4PMn9pisEpQf2bEJpbvPpYV8Kq3m+pczOjWNz
-         MqYWr9VQsQjLM/vvqRC9jBp+J6Ct+guZI37RMZOIiqWbsyY78VhXxpc2EcLTvbPjj0nQ
-         JKFeb7ZGPJcwzOwaKNQdi6JUTXJxGLdetdgFw4Ho9OX5n9pUPqKul3bRZLwLCLDyGJgh
-         kOq1TPeYvEwEaN+cG4eW19EMZUej1yCQVuAP75/sESWp657e1CBY2+5f+HhQ57cvghuI
-         CvOZQM6uQ6Q13NkYyTmPS9oKfee1Hx9zw3eRL7zyGPEu3Sjj2lwSdyL4/W4xA1iRS1JF
-         Lwjw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=d/73MVZz6PqflMN1fTgrN45lCioodcG995c2ZCmETfk=;
+        b=G7JSxrbbX/DjTkUiI+xyWBUj9/wNcbZr8fsBdPx0kA0qiBT9zliKgdlt6amYNY/+GI
+         nGmfKkXqhTOuupwZx9QuAQ+PnekolwSUzVULK+5rB+RQxV8h0r9ejTIcrl4gkFJ7S+KN
+         3NWzmamMwbkxROuX/MjvzHUyLWuQD77qaHDTy332McufqodStm9le1liG6PIqziFsz7L
+         D6jgUHhZJ/S0KO3WhHV55Tt8L+CZwkXkq0RPQwKl3PEBOjaXYRgJ4CJRL46hPssN4Cez
+         IGb7/stE0OcHwaFgmQqPWSD95lMfHtp8lZixEVz2vBUQ9rp5oc6Ihd9ETiha86i0crYb
+         1YBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=S0EHnCRE9xEFWLfIMhLmGvG4zixbVlmDtUQG/PaljUA=;
-        b=g30HZpBOpUTJrOxsbYU4AcKaIxIHlT0MlXesrxO1sIP11ZGBA4/mFL0CK/K/GOQ4vb
-         9h+Ild2FxDO+fNURYut20vJBYKP9Kfhq8NaxRRdoqK7TMhYPBiV3HCj5kXUnTRTWcSLr
-         qhM8pnllxSpiglM+usPYd93GKUMgP0MzxOMW8MtGE6Ak9dTZ51A+SW5KM4oVgxtwjSVR
-         3C9QITUnADN4kyOTjr5+cdh/MfXeyyX63uynD9knIFPBub1rQ0d6kp2yA/tigRBZZHec
-         0XF2O9mcpyFZf1SjDYNC7CvA2TdLG85onBh1USGcsUyrPYOE2HCjE8Ypv4XRppnjcknK
-         bLtw==
-X-Gm-Message-State: AOAM531hLa3Wm5LDm/UPbsPtHR/sAUutew8XE0P7nCEXBWU0aA3qoqS5
-	p+kKBMIaJ8DESyMBgtrq2pSSQxNBMF0=
-X-Google-Smtp-Source: ABdhPJzjIeQac7Y3QM35f8tYy4gIr67fJbWwbKvTL7sT0u3C4ekk5bktXU+wqdJGATN5JPRvGrE/3g==
-X-Received: by 2002:adf:e743:: with SMTP id c3mr3950740wrn.408.1617833923063;
-        Wed, 07 Apr 2021 15:18:43 -0700 (PDT)
-Return-Path: <schnitzeltony@gmail.com>
-Received: from superandy.speedport.ip (p200300f07f1192521410777e3304dd72.dip0.t-ipconnect.de. [2003:f0:7f11:9252:1410:777e:3304:dd72])
-        by smtp.gmail.com with ESMTPSA id e9sm27462434wrv.92.2021.04.07.15.18.42
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Apr 2021 15:18:42 -0700 (PDT)
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 6/6] poppler: upgrade 21.03.0 -> 21.04.0
-Date: Thu,  8 Apr 2021 00:18:29 +0200
-Message-Id: <20210407221829.606871-7-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210407221829.606871-1-schnitzeltony@gmail.com>
-References: <20210407221829.606871-1-schnitzeltony@gmail.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=d/73MVZz6PqflMN1fTgrN45lCioodcG995c2ZCmETfk=;
+        b=aPDev0OmGhDof5fKn8FYzGBnLnGkqVjowfeBa4XiGB4ub30wxvcHiXEadyG+e5Ln2i
+         CFti5taJkXKxt/0tsogDz1YpN0cNz6c5azdKILHOMUhlU6K4N2GyZ3IJyV0HtxOQV8TZ
+         N04/VjI1lL9SXOVob/GOQI+umslmA5zVxGBBdJr1aYPPtfTQll18W3l4N+p6dPSJFP4s
+         +vuLDHWsz+frkMZkCCG/cNHug9xMl57TUEzLVHvcNlEe5vRJyE1Jm85YbMKY3FwjZcwK
+         89hKjSuA77bDyky9vHS5o7UPo8+VYaz5uea5Vz14NkGT+szFz2tbDTFIZagernfv4vkE
+         550Q==
+X-Gm-Message-State: AOAM532UCF/KRDqWrgD8lA4NGK9FV6DJj9tBpBCRLKGlO232ucjbhcKg
+	XY3ZbTtPf4OiwLz1uNkU0aNC/aTs0zm0u4ME8RY=
+X-Google-Smtp-Source: ABdhPJxmGFe0bzPMMjQxXJS0TGqeU6NYxzDx8/RaQKRk/ZRnnfTXwCMqLNptTrKjBX2glWPJA44xVz89GlQJ8t8PGso=
+X-Received: by 2002:a0c:8148:: with SMTP id 66mr5836946qvc.55.1617834397671;
+ Wed, 07 Apr 2021 15:26:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20210407221829.606871-1-schnitzeltony@gmail.com> <20210407221829.606871-2-schnitzeltony@gmail.com>
+In-Reply-To: <20210407221829.606871-2-schnitzeltony@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Wed, 7 Apr 2021 15:26:11 -0700
+Message-ID: <CAMKF1soK2QREb8XkTanPJQ_bCOQRAGTeng5iiuf1_D_WUwfpwQ@mail.gmail.com>
+Subject: Re: [oe] [PATCH] networkmanager-openvpn: Fix packageing
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Release 21.04.0
-core:
- * Hide symbols by default
- * TextSelectionDumper: fix word order for RTL text
- * Fix rendering of text in some files. Issue #1052
- * Implement rendering of Masks of Image subtype. Issue #1058
- * Forms: fix unclicking standalone form buttons. Issue #1034
+On Wed, Apr 7, 2021 at 3:18 PM Andreas M=C3=BCller <schnitzeltony@gmail.com=
+> wrote:
+>
+> Recent upgrade introduced:
+> | ERROR: networkmanager-openvpn-1.8.14-r0 do_package: QA Issue: networkm=
+anager-openvpn: Files/directories were installed but not shipped in any pac=
+kage:
+> |  /usr/share/metainfo
+> |  /usr/share/metainfo/network-manager-openvpn.metainfo.xml
+>
 
-glib:
- * Expose more fields from MediaRendition in PopplerMedia
- * Use stock glib macro to define boxed type
- * Remove incorrecly used volatile from enum type registration code
+I wonder why my world build missed this. Is there any setting you are
+use where this is triggered.
 
-qt5:
- * Fix crash in files with malformed signatures
- * Fix memory leak when QImage constructor "fails"
-
-qt6:
- * Fix crash in files with malformed signatures
- * Fix memory leak when QImage constructor "fails"
-
-utils:
- * pdfsig: New paragraph for "-sign" in manpage
- * pdfimages: Do not assert in "too big images". Issue #1061
-
-build system:
- * Require cmake >= 3.10
- * Require Qt 5 >= 5.9
- * Require glib >= 2.56
- * Require gtk 3 >= 3.22
- * Require gdk-pixbuf >= 2.36
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- .../poppler/{poppler_21.03.0.bb => poppler_21.04.0.bb}          | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/poppler/{poppler_21.03.0.bb => poppler_21.04.0.bb} (96%)
-
-diff --git a/meta-oe/recipes-support/poppler/poppler_21.03.0.bb b/meta-oe/recipes-support/poppler/poppler_21.04.0.bb
-similarity index 96%
-rename from meta-oe/recipes-support/poppler/poppler_21.03.0.bb
-rename to meta-oe/recipes-support/poppler/poppler_21.04.0.bb
-index 52aa17021..de5f38036 100644
---- a/meta-oe/recipes-support/poppler/poppler_21.03.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_21.04.0.bb
-@@ -7,7 +7,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            file://0001-Do-not-overwrite-all-our-build-flags.patch \
-            file://basename-include.patch \
-            "
--SRC_URI[sha256sum] = "fd51ead4aac1d2f4684fa6e7b0ec06f0233ed21667e720a4e817e4455dd63d27"
-+SRC_URI[sha256sum] = "5e2219656c6bbd36154133fef2e12b7d0938464518827098b29a10b1697ea79c"
- 
- DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
- 
--- 
-2.26.2
-
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> ---
+>  .../networkmanager/networkmanager-openvpn_1.8.14.bb              | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-networking/recipes-connectivity/networkmanager/network=
+manager-openvpn_1.8.14.bb b/meta-networking/recipes-connectivity/networkman=
+ager/networkmanager-openvpn_1.8.14.bb
+> index a1a61bed1..1f76d8ab5 100644
+> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager=
+-openvpn_1.8.14.bb
+> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager=
+-openvpn_1.8.14.bb
+> @@ -38,6 +38,7 @@ USERADD_PARAM_${PN} =3D "--system nm-openvpn"
+>
+>  FILES_${PN} +=3D " \
+>      ${datadir}/dbus-1 \
+> +    ${datadir}/metainfo \
+>      ${libdir}/NetworkManager/*.so \
+>      ${nonarch_libdir}/NetworkManager/VPN/nm-openvpn-service.name \
+>  "
+> --
+> 2.26.2
+>
+>
+>=20
+>
