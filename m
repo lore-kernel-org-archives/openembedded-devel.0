@@ -1,108 +1,72 @@
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com [209.85.222.181])
- by mx.groups.io with SMTP id smtpd.web08.111.1617835285748344447
+Received: from mail-qv1-f50.google.com (mail-qv1-f50.google.com [209.85.219.50])
+ by mx.groups.io with SMTP id smtpd.web11.171.1617835600064607997
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Apr 2021 15:41:25 -0700
+ Wed, 07 Apr 2021 15:46:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=iOzvH3mE;
- spf=pass (domain: gmail.com, ip: 209.85.222.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f181.google.com with SMTP id g15so317738qkl.4
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Apr 2021 15:41:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=EOC+UKQX;
+ spf=pass (domain: gmail.com, ip: 209.85.219.50, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-qv1-f50.google.com with SMTP id iu14so9930886qvb.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Apr 2021 15:46:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc:content-transfer-encoding;
-        bh=Dl2eC67wlIk3MaD7l4WQnDtJ6KX7kJdzmR0XdeASEII=;
-        b=iOzvH3mEmVCktODFqAMMtI7H2BwenAtxNK51va7YBF1WAwnABIbyIWZ1nOnWzBHrgZ
-         wGR4G6hiyfNG3BstUi9wI74Aa+vPcc5BJYfREwSxcauSnCKlusNPrDj4hcUWCV0ojKr8
-         3V9gFGrKX314d2nIwhN+x9n8uKb/kOOJMOM3qMIc3dVvlM6KXHhQF1hnXOotBxHjZf1g
-         BE453rDDCuSqCI0Ux9WWVovnsJgbQy0w+qi517DbQMWk/XmATG376ZrBISQB3tHafl1W
-         sSS5+sWpttmzgXd8eONIduGN56LvYqj2hYFMJlk5Jw6blO2OCe6DyIkCkToAyHauFAyG
-         NjWg==
+        bh=800fzAQyh5d/rv61AbJJoh7iKQirZS4c0vxNZXp35NM=;
+        b=EOC+UKQXLvIw2NMoXwCBRQgdP6QZGmrFFDRxvHtkM9s5cBS6EAvBR8MAK2hLsNaX0I
+         fXJ23JmZnsA8jaWaMnTG5wLeGF8LSblXFC9XMgFJaYq911OxpyUBK3MdkY6DR4RC8AOO
+         z5l5cg20vP/ihDmdlmYMjIKfQoWbD5S44xE3355j1CxZ+y1QPAvKioXiMdQ8vzeaOrTe
+         HZI6r8tDshk9bnitrnSSW9jA+OvscY5RFJyXWqJnOnua6KoqkHjm+omwaHh7tfAjOeX+
+         nYQp32/gq9mwzUPuUBgGESbolM7zF9ENC3quFSQL8HTXwe0wEi3lrJ//PhATc4FygaKO
+         mNRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc:content-transfer-encoding;
-        bh=Dl2eC67wlIk3MaD7l4WQnDtJ6KX7kJdzmR0XdeASEII=;
-        b=b0ui1vMhhN0cF0LVvGwP+bussPu3Fxa3Maacsu4YX+Z4/G7J0q/48ZFSILh3n5mxIj
-         P7uHb0FXPKEsMWmDCUxSvFI/e2QUojzy4GUglEp8/zgkPZTaQvINCIb6p4gOK5L7Ghh8
-         FWSHffHfvsPH+eavGb70H5R31wATav0POIVR6q8CVCe7DErFxpBM8WCVCpzUcdEUcnse
-         wDkr3IB8cnLjuEtadMj76ws7ieA166guNn70MNX41xQX/SeTGzl2cQciiBaiTGqCbtOH
-         yTwKTxxiUWWRfJ4aiXfKc/PHGhGZHAPew2VMrHTeitNF0UvuhU2qIMvhKHPL6b76Vo+H
-         Fscw==
-X-Gm-Message-State: AOAM531i5otu6xgOPC9jlKp7NFkFiujGVXJslnp6W9Tx37T5bO3W3rp4
-	lLWxIw4zAxVROkp8fiY39+yi0YE3HoEoj2sGZCU=
-X-Google-Smtp-Source: ABdhPJxE0MiHCuWIanfqPiZ+aIBpJSVFEXghozEQfMg4t1QrV/ve2/9t6lzYK/HrY6vlW+KCzx/bC3dYhI+ErnW2gIk=
-X-Received: by 2002:a37:a350:: with SMTP id m77mr5416496qke.146.1617835284786;
- Wed, 07 Apr 2021 15:41:24 -0700 (PDT)
+        bh=800fzAQyh5d/rv61AbJJoh7iKQirZS4c0vxNZXp35NM=;
+        b=JXjwEJprmlT3LMpDH3wFqhAHzjKAtrustOA3neXZ7PpJXg+eb8N4W26V7sCXGzpDAA
+         O4jpTZLfmPS73udQgOkhJ94oYA9KKJnWfTLXqnSQMccNaFc3WcHFDQVUrL9/hGd1Bg0Z
+         yhx+oJDcL3ZIUCkkGM0Qgi0IciUoF3YlAh7hAV1NYoEoy0J0AToGXNq5TABLOwn9Z3S7
+         9qHzo89MapfREnS/Y7+WM6xYS3HptmN4Dzy0UndaYH6k6vhdJgPC03I2lSKgCpY5JJk+
+         qBVahA4SAbYBaL+PGsQRSZwtp7Fk3FSu9V3OKxFazXJ2BZK8jSaJSxfGJ7a6mHbFCiTF
+         0auw==
+X-Gm-Message-State: AOAM533FcrvpytlV3HTH1HBd3u1VXsxq9+VCivwE+wj5xz6ofV2VN1TD
+	j6vXC42e6aqwW9pAEKlIczVpeo0JjfhmwIwBbFM=
+X-Google-Smtp-Source: ABdhPJy4kU/6s3SKBnZ9FciIAKG70QBylm955TT7wDDaakXVXLfEYbc+cbFj3HZZ57YXF47xUDbkDGAkIPCrJxBwzwI=
+X-Received: by 2002:ad4:4f05:: with SMTP id fb5mr3344633qvb.59.1617835599207;
+ Wed, 07 Apr 2021 15:46:39 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210407221829.606871-1-schnitzeltony@gmail.com>
  <20210407221829.606871-2-schnitzeltony@gmail.com> <CAMKF1soK2QREb8XkTanPJQ_bCOQRAGTeng5iiuf1_D_WUwfpwQ@mail.gmail.com>
- <CA+chaQe8OauKrne0mB1sbZ2Ct46+qTwzkbjqzoFCCC3f16HisA@mail.gmail.com>
-In-Reply-To: <CA+chaQe8OauKrne0mB1sbZ2Ct46+qTwzkbjqzoFCCC3f16HisA@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Wed, 7 Apr 2021 15:40:58 -0700
-Message-ID: <CAMKF1spGShXGZUcghg6vm=mx4=8U4DRsLKT+zJOKKJ7ASF78TA@mail.gmail.com>
+In-Reply-To: <CAMKF1soK2QREb8XkTanPJQ_bCOQRAGTeng5iiuf1_D_WUwfpwQ@mail.gmail.com>
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+Date: Thu, 8 Apr 2021 00:46:26 +0200
+Message-ID: <CALbNGRSTsAjv017jex=h0T8iZPWwHiAQ6j+h1LHyO4k+Z4SkNQ@mail.gmail.com>
 Subject: Re: [oe] [PATCH] networkmanager-openvpn: Fix packageing
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>, 
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-yes infact, Thanks Marttin, I was looking at wrong local tree myself
-:) and wondering.
+On Thu, Apr 8, 2021 at 12:26 AM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Wed, Apr 7, 2021 at 3:18 PM Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om> wrote:
+> >
+> > Recent upgrade introduced:
+> > | ERROR: networkmanager-openvpn-1.8.14-r0 do_package: QA Issue: network=
+manager-openvpn: Files/directories were installed but not shipped in any pa=
+ckage:
+> > |  /usr/share/metainfo
+> > |  /usr/share/metainfo/network-manager-openvpn.metainfo.xml
+> >
+>
+> I wonder why my world build missed this. Is there any setting you are
+> use where this is triggered.
+I wondered either :) My guess was: I am not on the very very latest
+master of oe-core - maybe ${datadir}/metainfo was added to
+bitbake.conf meanwhile
 
-On Wed, Apr 7, 2021 at 3:32 PM Martin Jansa <martin.jansa@gmail.com> wrote=
-:
->
-> isn't this one already in master?
-> https://git.openembedded.org/meta-openembedded/commit/?id=3Da23fa069d0a6=
-0cf348dcc6399f7990de59105c21
->
-> On Thu, Apr 8, 2021 at 12:26 AM Khem Raj <raj.khem@gmail.com> wrote:
->>
->> On Wed, Apr 7, 2021 at 3:18 PM Andreas M=C3=BCller <schnitzeltony@gmail=
-.com> wrote:
->> >
->> > Recent upgrade introduced:
->> > | ERROR: networkmanager-openvpn-1.8.14-r0 do_package: QA Issue: netwo=
-rkmanager-openvpn: Files/directories were installed but not shipped in any =
-package:
->> > |  /usr/share/metainfo
->> > |  /usr/share/metainfo/network-manager-openvpn.metainfo.xml
->> >
->>
->> I wonder why my world build missed this. Is there any setting you are
->> use where this is triggered.
->>
->> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
->> > ---
->> >  .../networkmanager/networkmanager-openvpn_1.8.14.bb              | 1=
- +
->> >  1 file changed, 1 insertion(+)
->> >
->> > diff --git a/meta-networking/recipes-connectivity/networkmanager/netw=
-orkmanager-openvpn_1.8.14.bb b/meta-networking/recipes-connectivity/network=
-manager/networkmanager-openvpn_1.8.14.bb
->> > index a1a61bed1..1f76d8ab5 100644
->> > --- a/meta-networking/recipes-connectivity/networkmanager/networkmana=
-ger-openvpn_1.8.14.bb
->> > +++ b/meta-networking/recipes-connectivity/networkmanager/networkmana=
-ger-openvpn_1.8.14.bb
->> > @@ -38,6 +38,7 @@ USERADD_PARAM_${PN} =3D "--system nm-openvpn"
->> >
->> >  FILES_${PN} +=3D " \
->> >      ${datadir}/dbus-1 \
->> > +    ${datadir}/metainfo \
->> >      ${libdir}/NetworkManager/*.so \
->> >      ${nonarch_libdir}/NetworkManager/VPN/nm-openvpn-service.name \
->> >  "
->> > --
->> > 2.26.2
->> >
->> >
->> >
->> >
->>
->>=20
->>
+So before checking I decided to send this just in case openvpn-1.8.14
+becomes a candidate on elder branches: it is prepared to merge back.
+
+Andreas
