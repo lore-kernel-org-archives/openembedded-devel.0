@@ -1,50 +1,50 @@
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.web08.398.1617833921302968326
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.web10.421.1617833922087810404
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Apr 2021 15:18:41 -0700
+ Wed, 07 Apr 2021 15:18:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=poRafshl;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id f6so13467033wrv.12
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=iqIo5Ja9;
+ spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wr1-f53.google.com with SMTP id a4so2619556wrr.2
         for <openembedded-devel@lists.openembedded.org>; Wed, 07 Apr 2021 15:18:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=2ODWVJZQb3opqL7FEyHLT4p0Hx9GHy48JxOl/4ue+PQ=;
-        b=poRafshl0/kV1Yy3boJ7CNw9/bgLiSATcRI6H0Ak3Bsfib/c9GZQoG2GlUBnQQacje
-         3h3eCwS5qp0IqdQtrw1kpO9NCcs0wjo6SOU2s1SDZdo0v0Ya5/wV1DMtJLHvwhiLScHW
-         7AGR1QWqWkFPpZ9MYk0EuIwAMJ2AIEPPhEpHoHCKQsUzRRprO4Ro2i9GO/TJHqrO9h7E
-         6y0ZkMkc5AXcLdDN/nBQSyxCDeRhKIBaMzU0Ljd6Ujsm/M/EAGKvXVK3mFQEYr2wP2Uw
-         2Mxrxv4HcvNIl03eQ38BMONZM2TE6Y2Wuph0cul4X6uPBLCCgsJC4+IsYkgcwIuDdbpV
-         INSw==
+        bh=dPMnYDYkGdeEqqB+39ob4aW4GRO5S3ooN5QMuZzNmHM=;
+        b=iqIo5Ja9gTYnILEDL2+UV1AuEVHqivM/tTqzv3vlorDOBLpftMbQ2nH4nOG10Ez15F
+         yzB7pG3kVhC0kdQ2bLtJvThUfPJwUcQ7DOvYAvW6zH2nCaKQWxKYu77TwLzYkVjXx4qM
+         5kzIRsiG+2/sIdDcOMyOe3nVYr8KdM50DCGbAimsxzNk6qOi2NPVf4DcwsAPZOCQS8tY
+         MeqovcRMZL76h0LwmyiU78RfK1OiCRHP+4F2JFhboOgHK7qR+E09SomaVTMTNy+yxOdf
+         NUG5F/UriIwsmbI+K/ku+7/qHe29Q3FDPTn5YRxSIbEwBmLJR7xUYuYqAOlYvJyYBOdZ
+         1DAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=2ODWVJZQb3opqL7FEyHLT4p0Hx9GHy48JxOl/4ue+PQ=;
-        b=QmEqZCjVO32O5iLAGmKJBLZp1cV4rMVSGwq5cIvlMM+AeqXRnOMgeuP4SToDTBOFrI
-         zfLosJkpszxQwPvWr8d0DjlI9QrDxXm+c+Bu5k2SRjlk2YD5fkuFMk/PBzylpOv7OqEb
-         nDWf2b4P2Q6cVdmBIXUWEjPqOu/svn/MxC4ToXlizfQvT4h28K08EEBrmrQleysvboke
-         GC6Vw3M5fl//s+2GKp+IRmSiWy9pciojb47P+7fF/uITje1QyWWL9WhddAlCPvL0birL
-         VVeTBejBXN1wq0wwWkh5nCmnoc3Fo620HCiy1HRGMc+Q88DUwJ/o5/s9jNdsEfPpU/j3
-         61Kw==
-X-Gm-Message-State: AOAM530o5iCPHWcjTl2im0kmJyrp8Hfb2ZHQLDRj3rmUENSqWfpEIy0z
-	hCCztnrWhlKKyAI9YszEF80+Lmt0SQU=
-X-Google-Smtp-Source: ABdhPJwQ7xULT0iTQWaPoZtEt0TqxZZ3xxakaRy+1JNwO6np5IzIAE17mBhDEKCquuMHqlIktegTJQ==
-X-Received: by 2002:adf:b350:: with SMTP id k16mr6908037wrd.55.1617833919944;
-        Wed, 07 Apr 2021 15:18:39 -0700 (PDT)
+        bh=dPMnYDYkGdeEqqB+39ob4aW4GRO5S3ooN5QMuZzNmHM=;
+        b=KibP37wPfQT2gTazLVyszu9NZ4Wt3/PsSdWBrwfGP0ZNrahshs09V3DSNCBGTJcq17
+         cLGVVBN4g/r+NV1j/3Zar6Con709kRLG605k/EZQaeg9yeIks0qwqNBvK6jJucO446s6
+         Xucd+P3ft1klApU+AEo3DjAsEQcznEtg7RQU/dLaJesPxzk7IJvaVdnQsDCFDpy62lxz
+         0pbMBc4CpM3QIIpZC292mzQkBTh4OFOBGxlrbCAY00hgT4sDfAejTDZ9ORW/0oh025LG
+         njaa+Hg9K4PnOmGY4raCY4lsHFebFXO6gqmRqDuSBdxU2fIiu+OM+vR7DFF0b4GJ6yt+
+         XAtA==
+X-Gm-Message-State: AOAM532xmXkpwa/e2pG3nbvicQOqfu7UWdx9KEdvprm+QkB3oQiYO3lu
+	laPVuCcdKJQfNesvavo+EZpgrJ2lo68=
+X-Google-Smtp-Source: ABdhPJzBjpd/kQ+LHEfc1n3Pjgd631uIM8eLLwJ1jEtXiadkCWT4buAFbZVWAwq4Pjv379PX7V72Cw==
+X-Received: by 2002:adf:d218:: with SMTP id j24mr6761655wrh.297.1617833920767;
+        Wed, 07 Apr 2021 15:18:40 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300f07f1192521410777e3304dd72.dip0.t-ipconnect.de. [2003:f0:7f11:9252:1410:777e:3304:dd72])
-        by smtp.gmail.com with ESMTPSA id e9sm27462434wrv.92.2021.04.07.15.18.39
+        by smtp.gmail.com with ESMTPSA id e9sm27462434wrv.92.2021.04.07.15.18.40
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Apr 2021 15:18:39 -0700 (PDT)
+        Wed, 07 Apr 2021 15:18:40 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 2/6] xfce4-battery-plugin: upgrade 1.1.3 -> 1.1.4
-Date: Thu,  8 Apr 2021 00:18:25 +0200
-Message-Id: <20210407221829.606871-3-schnitzeltony@gmail.com>
+Subject: [PATCH 3/6] gigolo: upgrade 0.5.1 -> 0.5.2
+Date: Thu,  8 Apr 2021 00:18:26 +0200
+Message-Id: <20210407221829.606871-4-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210407221829.606871-1-schnitzeltony@gmail.com>
 References: <20210407221829.606871-1-schnitzeltony@gmail.com>
@@ -52,41 +52,51 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Release notes for 1.1.4
+Release notes for 0.5.2
 =======================
-- Add help button to properties dialog
-- Drop subtitle from settings dialog
-- Fix labels alignment for very small panels
+A bugfix and translation update, a new icon, various cleanups.. thanks
+to all contributors !
+
+======
+- Update TODO
+- Refresh Glade file, drop unused tab labels (fixes #13)
+- move the logic setting GtkSpin port value to setup_for_type() (#11)
+- Use new icon in window titlebar
 - Fix compilation warnings
-- automake: INCLUDES -> AM_CPPFLAGS
 - autoconf: Some updates
-- Remove unnecessary boxes
+- Only show an error dialog if the host field is visible/required
+- Remove capitalization from icon name
+- Update GenericName (#2)
+- Fix comment style.
 - Remove GSourceFunc casts
-- Add new README.md, update AM_INIT_AUTOMAKE
+- Update Makefile.am
+- Add gigolo.ui to POTFILES.in (Issue #6)
+- Added new icons following new style and reverse DNS format.
+- Add new README.md and update AM_INIT_AUTOMAKE
 - Add basic GitLab pipeline
-- Update URLs from goodies.xfce.org to docs.xfce.org (Bug #16154)
+- Bug #16717: Move from exo-csource to xdt-csource
 - Translation Updates
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...4-battery-plugin_1.1.3.bb => xfce4-battery-plugin_1.1.4.bb} | 3 +--
+ .../recipes-apps/gigolo/{gigolo_0.5.1.bb => gigolo_0.5.2.bb}   | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/battery/{xfce4-battery-plugin_1.1.3.bb => xfce4-battery-plugin_1.1.4.bb} (66%)
+ rename meta-xfce/recipes-apps/gigolo/{gigolo_0.5.1.bb => gigolo_0.5.2.bb} (67%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.3.bb b/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.4.bb
-similarity index 66%
-rename from meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.3.bb
-rename to meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.4.bb
-index ecbdc265e..9e65cf688 100644
---- a/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.3.bb
-+++ b/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.4.bb
-@@ -5,5 +5,4 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-xfce/recipes-apps/gigolo/gigolo_0.5.1.bb b/meta-xfce/recipes-apps/gigolo/gigolo_0.5.2.bb
+similarity index 67%
+rename from meta-xfce/recipes-apps/gigolo/gigolo_0.5.1.bb
+rename to meta-xfce/recipes-apps/gigolo/gigolo_0.5.2.bb
+index 1233fe069..517f1f4c5 100644
+--- a/meta-xfce/recipes-apps/gigolo/gigolo_0.5.1.bb
++++ b/meta-xfce/recipes-apps/gigolo/gigolo_0.5.2.bb
+@@ -7,5 +7,4 @@ DEPENDS = "gtk+3 intltool-native xfce4-dev-tools-native"
  
- inherit xfce-panel-plugin
+ inherit xfce-app
  
--SRC_URI[md5sum] = "9f82c7e77de0a417716d68d33367973b"
--SRC_URI[sha256sum] = "12be0a44d16bd1e1618513ee64f946814925872db7d1c1188ab1454b00d040a3"
-+SRC_URI[sha256sum] = "107df2a837156c010e1eab5430bab90c77f0a3dc699b5937678c8a9c5e64c222"
+-SRC_URI[md5sum] = "94e89ad3fabba7167760004b64062f4a"
+-SRC_URI[sha256sum] = "ca87badb5871e4844579704704ea9e5ede444f710a3b264c12b60b2a0e48e14e"
++SRC_URI[sha256sum] = "e34a1aa0755f9f6c234c7d24b23a6cecd6ef50741d79da3bb6f698a2281dbbc3"
 -- 
 2.26.2
 
