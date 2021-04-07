@@ -1,151 +1,297 @@
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.71])
- by mx.groups.io with SMTP id smtpd.web10.14.1617753574502487485
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+ by mx.groups.io with SMTP id smtpd.web08.3332.1617775820940672847
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Apr 2021 16:59:34 -0700
+ Tue, 06 Apr 2021 23:10:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=a4U9yaA6;
- spf=pass (domain: windriver.com, ip: 40.107.223.71, mailfrom: randy.macleod@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=oBJQNKO7TICHUuon4uy0IqpQ6XbleuojqBA2AkxeTt33ZooaSSwzbhD/bSknzvtOMudb6f5NphkxoRsFS4EY1DaWh/bKL+ibL9dl0tUHicEkRC/B2LkeIQGUOmv8PPwu8cRWogG8yZ+uyGO+tlbhetkarmVFda4ka/pWSN6E7ZJgkG/QZv+T6jkYGS3n+quj/Iew7nXcGHlAEBBOz861BOOjmt2jbKtLLklAYO5NDieedbz2jwpzHWyQqYem0ufSmsv7yhL/bk7PGQKpzWgm3UgPosV7tVx0JVsDOn2vU5WqQTt7fIY+o3Y+G5t86tCGI/9jZ8bmHf59i8qzDt6Jqw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=d5VUfroKUQy3Wge5y8P8ZsZwiWTsHU7rfSiAmljkiLQ=;
- b=HAT3B+k5EQ2HjkqD809KQVpIl91Osqr2zG3B7bm9DdsJXwt4VWZDolN20ptjbB+FdMymKnDsYlhHSOzMlecatYMsUZhdoiGWlyOBhPO2gXFoSli45CgMgNLatZWuHlciwb281GGcKUNLMSrPT/IlJ0Rqu+IU5BcGi0mBQ2WoUYjAum2//LT6e+7BqdtnkNQ8w5cJr3Zrj8tdsoyCb/mvRlRD8Kg7lL1jURYACVcsRh1I+JKqZceWpyhwPfByUuktgp/yqEDuESk62qX5Ckbxrk12HwdIacDbBF828ISgyI/3t1dAwRlLHVPzxm8akDg8T6ij9tJ/OIUY7gK/sPzqWQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=d5VUfroKUQy3Wge5y8P8ZsZwiWTsHU7rfSiAmljkiLQ=;
- b=a4U9yaA6CpvlL1gL2jb90j7BqZ9OI/rhqxJeZTvMy4rDwsli+87y7Kt5CiJvW1PVyCoCMYnUdk7Jlhho1zbSBKpdLJ8KG+k0FFN/DzrhoTn4TWjZlFgnIIM9z4/LTsNiIFxDDacpksxRRhmWLFLoLN6Oe0Lbv9nnRUo9gMzYSfc=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from DM6PR11MB3994.namprd11.prod.outlook.com (2603:10b6:5:193::19)
- by DM5PR11MB0027.namprd11.prod.outlook.com (2603:10b6:4:6b::33) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3999.32; Tue, 6 Apr
- 2021 23:59:32 +0000
-Received: from DM6PR11MB3994.namprd11.prod.outlook.com
- ([fe80::f17d:2de1:291f:80a9]) by DM6PR11MB3994.namprd11.prod.outlook.com
- ([fe80::f17d:2de1:291f:80a9%4]) with mapi id 15.20.3999.032; Tue, 6 Apr 2021
- 23:59:32 +0000
-Subject: Re: [oe] [PATCH] doxygen: Upgrade 1.8.20 -> 1.9.1
-From: "Randy MacLeod" <randy.macleod@windriver.com>
+ dkim=missing; spf=pass (domain: intel.com, ip: 134.134.136.24, mailfrom: naveen.kumar.saini@intel.com)
+IronPort-SDR: cj2/8/AFUgIXALWRGC3Pb3rojClZeoYhS+WE+7xmpiq2cY0Dxg/vEE9IkKonZERgHpYCyUidgU
+ x5uxRabWdoIA==
+X-IronPort-AV: E=McAfee;i="6000,8403,9946"; a="193344247"
+X-IronPort-AV: E=Sophos;i="5.82,201,1613462400"; 
+   d="scan'208";a="193344247"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Apr 2021 23:10:19 -0700
+IronPort-SDR: 0xRCIrMZPPt/rbEiXw59dhy0MYBvu2QwJ5PtosHHDOqyzZx4LOkWtvQ8lHRG3rhchKevoa9to0
+ 8zry8gK8asxA==
+X-IronPort-AV: E=Sophos;i="5.82,201,1613462400"; 
+   d="scan'208";a="421550891"
+Received: from saininav-desk1.png.intel.com ([172.30.199.23])
+  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Apr 2021 23:10:18 -0700
+From: "Naveen Saini" <naveen.kumar.saini@intel.com>
 To: openembedded-devel@lists.openembedded.org
-References: <167369E961644282.7917@lists.openembedded.org>
-Message-ID: <1377fa19-183d-293c-d3c8-9c9b11782c12@windriver.com>
-Date: Tue, 6 Apr 2021 19:59:28 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.1
-In-Reply-To: <167369E961644282.7917@lists.openembedded.org>
-X-Originating-IP: [198.48.226.187]
-X-ClientProxiedBy: BYAPR11CA0098.namprd11.prod.outlook.com
- (2603:10b6:a03:f4::39) To DM6PR11MB3994.namprd11.prod.outlook.com
- (2603:10b6:5:193::19)
-Return-Path: randy.macleod@windriver.com
-MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [172.25.44.2] (198.48.226.187) by BYAPR11CA0098.namprd11.prod.outlook.com (2603:10b6:a03:f4::39) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3999.29 via Frontend Transport; Tue, 6 Apr 2021 23:59:31 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 3140dbcb-119a-4064-3192-08d8f95805a0
-X-MS-TrafficTypeDiagnostic: DM5PR11MB0027:
-X-Microsoft-Antispam-PRVS: 
-	<DM5PR11MB00276EC5DE3C612246C41B22F8769@DM5PR11MB0027.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1728;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	OZCSlv4iEtAwROT2KsW7jL0SQmtdH+5lynUnieEpsanHuEa8W8QyCH01/h6HAX9p7zj/VO+jq5MGv13srYNjqutZQPYBvqB/Hh9SDMh5hIF6oZxsWqJOPT+KOaSxD6VsRL7PHDJtiujp1vXjMVbUMsSRwZosUSZqbjkQdAtkqUFQcna4X8B9NJYBlar64EWH/jrBZec9+HjiRoAvIY9aTTOrDeSeHCIjoT7xqB1WXUfnTGvTCTEDyx0337csO+quLyxrAHJD+chYywtjUAac8RmABfcWK+xIzSVUTcFzHTYQ/3O2lC71Hl0/oYW5uR1coQQ7efRoBOrBtcX0kvbcZ/oYhHpNOd3T9NiqlxS17wZUXhtdkmpBhvwHuUMevp8J7JQRt6KtNXnNslMJcPOkwsMISkzFy/Tfb+3DmKx54XdMhgfvuolZjc2HATuMyfHMZXffkwzIHh3/rjptPlm/GW5u8TvcpMzVckj1n2nWKdrpbR7wbD3cRt39m1ik2v7i1RMBmsCcNnlEZ+wn+3KZ2GacLjqieE3yYnyJ3qBrGnU4MDmuOSSOvhZ9ua1vI7IE3t2HKVtxWIc90sTxJfAzq2uq2kL8p+/kIgYHTWnj6M6vMeRQfYJGzpoVgMF2qgTviwVxwW/6BaqmizdT+DX0+kNtGXr1TRsGspPKc5drdFYsrXQPqpAwI+rupXEkrPw6NNUDYGmJYToMTUutXl5sbTsQ2AT/3xbk0LH9pO2bv1BWCwXZu7eoZyk9u8WP1rik
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3994.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(396003)(366004)(376002)(136003)(346002)(8936002)(66556008)(956004)(2616005)(31686004)(5660300002)(4744005)(86362001)(478600001)(16576012)(52116002)(38350700001)(26005)(36756003)(38100700001)(16526019)(31696002)(66476007)(8676002)(2906002)(316002)(6916009)(6666004)(66946007)(6486002)(186003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?NnFXY2lzWm9qS3RzREVDUXp5blhHTXh6MDUyMDBaREJoenpiUkt4ZnpQSDBT?=
- =?utf-8?B?bFpFOWhoanRzMEVjbkdZQjdoZDRkRm50bDhaR0hlSGZDQXlKR1REMHFyeE5z?=
- =?utf-8?B?RCtQS0liS21vNGVKMFVjanA0VlF2U0xsdlgxNTBsbWtzTzdPcklzdXR1VXRD?=
- =?utf-8?B?bjdGaXY4K0FCWmk4aXVsZ2h6Q0V5dkRhTWd3aHpQTXVaZThVSnlGaUZzOXBw?=
- =?utf-8?B?Z3AveWF1SUhBK1RNSUFEUlllMW13alF5Y3lnbnNRQndmQU5GTUdob01UeDQv?=
- =?utf-8?B?RnBVaGtFQWcyTXM1azA2VzUwSVJtcE95QXBrdjJZZ3BJb2QyTnh4T1BtZ1lY?=
- =?utf-8?B?RjZxbVVJUGI4Sm1kcHBtU25aWHVFYVVxUHR1TEVCOUMvcllVWHl2M1ZmQlR1?=
- =?utf-8?B?c3ltaFdXVE91NEppRzcxQktIS3VPVHRiTmc1QjZzODVEVS83S3h4ckNsOWMr?=
- =?utf-8?B?UWQ4NFFoQndSMzN6QTVLVGd2V1ErWjYvMWNOWXZ6d3QzMlpWZlBFWTNvUTdq?=
- =?utf-8?B?UDJnQXgwUFVUalk5OGVrb09zT2tjZ2s2aUtKY214ZjRqUXoyU2FERjF1TUJY?=
- =?utf-8?B?MXQwSDZoOTZGSmx6MVhlU2ptYmpaajRlc0FieC9mWG1sUU5IUFN2UkNKRHJY?=
- =?utf-8?B?Uk1GdVNvQkdENm1QSENMcjR6ZytWVXFlTmdRZEpGTy9LZFNaVWJDWlFkS2g0?=
- =?utf-8?B?WG5wOTJOb2Q4YTBadWg4NHFBckNCemZ4aTdGNU5UT0d2bUIrcWRZOFFhK01Y?=
- =?utf-8?B?RWt5YU1tbHJkdmcyRWdudDU2b1N3cmgxdjdMZTNkZzYvVzNJSWZPUHZCTnc4?=
- =?utf-8?B?NlNmUjQvS2VTMFJXRW9MNERldUdHaFdZZHE2N0ZPbmtINVpGVjdXZE40ME1B?=
- =?utf-8?B?MWwyWWxNVzVrdEVQd01hbWhQUlRYUmpJbll6UE1qaTlRM0tLSzJHN3FQTEpw?=
- =?utf-8?B?dHpHTFlsbERVN3FmTDY2bms0Nmo2YmtGbHcyd291UWdXWmdjV0YzZTM4UzRo?=
- =?utf-8?B?TjVHaWswVUFFN1Y1ODdaZ254M1Fkb28rdGZsTWwrVUVBZnNaVzRLSysvMUhk?=
- =?utf-8?B?bEd5cU1sQXYrWVBXemNmQ0Q5SVRGNENXTW1mamRpcmxoUkVDUUd3NlVMaXVZ?=
- =?utf-8?B?VmZ0U1lwRUUwMkF0ZlVHTWpEUTNqOGxuRUhQTS8vNmZ0WmFsd2JGSk9aMWpv?=
- =?utf-8?B?Rjk1RnZ0NVRHQmdaenpGTmcwbWZkZ0pTbmZ1cGJHa29aRS80RVlBZm5PTVox?=
- =?utf-8?B?ekMzRW5oMFhIOTJ6WnlEUTN2YTdkSUdRa2J4aWJyejQvclpFa2J0OU1KYVdM?=
- =?utf-8?B?RERpRkZHcUxTb25LdDRqN0pUSGJHNUxoSmNHWkxHeWpWSkF3VmFWOXpiS29B?=
- =?utf-8?B?NVpuZHBGOXRLUmNXY29NQmlvVk0vWVFqaE5jT3R6RDArcVVCaUY4Ni9jNTFx?=
- =?utf-8?B?Z3JscTNVQU12UEtDMEZORFF2dWcwcklOSWhjNzREc1pOaG13cGlEUXIvZWFz?=
- =?utf-8?B?ME5BTzdsMnFrOU1YWDQveGhLUngydGFUeWkrYzJubVBCRVpvSG9UTUpZZjg3?=
- =?utf-8?B?bWNRUWxXUVhaeWQ4dlBpKzZPYnNYejRteEFpRjJkellGQ1RHWmd6SXBzNnZR?=
- =?utf-8?B?Si9NV1c4a0ZnTUJsdStkR1hqbVE4UzNRaXprK2hVT3ZqZXA1TE5acVE3V0hh?=
- =?utf-8?B?Y0hRajZsYSt0b1BjUk9oaXBQemQrb2RsZkt4SFFzYTZuS2RvUXZnUld1aUxV?=
- =?utf-8?Q?55M/meIjei6vaeLvdUXHgCsh+vVrMtsTSEvaPbD?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3140dbcb-119a-4064-3192-08d8f95805a0
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3994.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Apr 2021 23:59:32.1267
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: u2Lzhr6hXMrSTMmu6Zb5WnC1e1GDXAdq0q4GdKHnWUG1f2W01U3gy4TgxxRHZO5+cCxhmU+0z4IikCJX6LHAkQrKUp1TPxlURsIZ3Mk918I=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB0027
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-CA
-Content-Transfer-Encoding: 7bit
+Subject: [meta-oe][PATCH] tbb: upgrade 2020.3 -> 2021.2.0
+Date: Wed,  7 Apr 2021 14:22:10 +0800
+Message-Id: <20210407062210.5883-1-naveen.kumar.saini@intel.com>
+X-Mailer: git-send-email 2.17.1
 
-Build results haven't changed since 1.8.20
+Switched to cmake build tool.
 
-$ cat doxygen-buildall.log
-BUILDALL-QEMU LOG FOR doxygen
-START TIME: 2021-04-06_07:45:55
-HOSTNAME: ala-lpggp3
-HOST OS: Ubuntu 18.04.3 LTS
-HOST KERNEL: 5.4.0-67-generic
-===============
-BUILD RESULTS:
-[glibc]
-PASS: qemuriscv32
-PASS: qemuarmv5
-PASS: qemumips
-PASS: qemux86-64
-PASS: qemuarm64
-PASS: qemumips64
-PASS: qemuarm
-PASS: qemuppc
-PASS: qemuriscv64
-PASS: qemuppc64
-PASS: qemux86
-[musl]
-FAIL: qemuriscv32
-PASS: qemuarmv5
-PASS: qemumips
-PASS: qemux86-64
-PASS: qemuarm64
-PASS: qemumips64
-PASS: qemuarm
-PASS: qemuppc
-PASS: qemuriscv64
-FAIL: qemuppc64
-PASS: qemux86
-===============
-PASSED: 20
-FAILED: 2
+Rebased some patches due to directory re-structuring.
+Dropped patches, which are not required anymore.
 
+Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+---
+ ...nfo-is-glibc-specific-API-mark-it-so.patch | 27 +++++++-------
+ .../GLIBC-PREREQ-is-not-defined-on-musl.patch | 22 +++++++-----
+ .../tbb/tbb/cross-compile.patch               | 35 -------------------
+ .../tbb/tbb/improve-reproducibility.patch     | 30 ----------------
+ meta-oe/recipes-support/tbb/tbb/tbb.pc        | 11 ------
+ .../tbb/{tbb_2020.3.bb => tbb_2021.2.0.bb}    | 35 ++++++-------------
+ 6 files changed, 38 insertions(+), 122 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/tbb/tbb/cross-compile.patch
+ delete mode 100644 meta-oe/recipes-support/tbb/tbb/improve-reproducibility.patch
+ delete mode 100644 meta-oe/recipes-support/tbb/tbb/tbb.pc
+ rename meta-oe/recipes-support/tbb/{tbb_2020.3.bb => tbb_2021.2.0.bb} (59%)
 
-../Randy
+diff --git a/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-API-mark-it-so.patch b/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-API-mark-it-so.patch
+index 7e66945fa..49325447e 100644
+--- a/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-API-mark-it-so.patch
++++ b/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-API-mark-it-so.patch
+@@ -1,22 +1,23 @@
+-From 6b2b136caa68912d77ffe26143cd3da768b9ef80 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 3 Jun 2017 08:39:37 -0700
++From 52c1586bff0ecb418ac21d6678f8963d70959f04 Mon Sep 17 00:00:00 2001
++From: Naveen Saini <naveen.kumar.saini@intel.com>
++Date: Wed, 7 Apr 2021 11:14:13 +0800
+ Subject: [PATCH] mallinfo() is glibc specific API mark it so
+ 
+ Helps compiling with musl
+ 
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+ Upstream-Status: Pending
+ 
+- src/tbbmalloc/proxy.cpp | 2 ++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
++---
++ src/tbbmalloc_proxy/proxy.cpp | 2 ++
+  1 file changed, 2 insertions(+)
+ 
+-diff --git a/src/tbbmalloc/proxy.cpp b/src/tbbmalloc/proxy.cpp
+-index 5ef279d..06c4872 100644
+---- a/src/tbbmalloc/proxy.cpp
+-+++ b/src/tbbmalloc/proxy.cpp
+-@@ -185,6 +185,7 @@ int mallopt(int /*param*/, int /*value*/) __THROW
++diff --git a/src/tbbmalloc_proxy/proxy.cpp b/src/tbbmalloc_proxy/proxy.cpp
++index f9942bf1..fe0dad89 100644
++--- a/src/tbbmalloc_proxy/proxy.cpp
+++++ b/src/tbbmalloc_proxy/proxy.cpp
++@@ -253,6 +253,7 @@ int mallopt(int /*param*/, int /*value*/) __THROW
+      return 1;
+  }
+  
+@@ -24,7 +25,7 @@ index 5ef279d..06c4872 100644
+  struct mallinfo mallinfo() __THROW
+  {
+      struct mallinfo m;
+-@@ -192,6 +193,7 @@ struct mallinfo mallinfo() __THROW
++@@ -260,6 +261,7 @@ struct mallinfo mallinfo() __THROW
+  
+      return m;
+  }
+@@ -33,5 +34,5 @@ index 5ef279d..06c4872 100644
+  #if __ANDROID__
+  // Android doesn't have malloc_usable_size, provide it to be compatible
+ -- 
+-2.13.0
++2.17.1
+ 
+diff --git a/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-musl.patch b/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-musl.patch
+index 6f28f6f3a..fb10684cd 100644
+--- a/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-musl.patch
++++ b/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-musl.patch
+@@ -1,7 +1,7 @@
+-From 27956d4c5fb615098231cebfb8eef11057639d3c Mon Sep 17 00:00:00 2001
+-From: Fabrice Fontaine <fontaine.fabrice@gmail.com>
+-Date: Sun, 8 Dec 2019 18:14:38 +0100
+-Subject: [PATCH] src/tbbmalloc/proxy.cpp: __GLIBC_PREREQ is not defined on
++From 5cac8b5fffa4ebf5f0090456c9e0cbf43827242a Mon Sep 17 00:00:00 2001
++From: Naveen Saini <naveen.kumar.saini@intel.com>
++Date: Wed, 7 Apr 2021 11:32:52 +0800
++Subject: [PATCH] src/tbbmalloc/proxy.cpp: __GLIBC_PREREQ is not defined on 
+  musl
+ 
+ Do not call __GLIBC_PREREQ if it is not defined otherwise build will
+@@ -12,14 +12,15 @@ Signed-off-by: Fabrice Fontaine <fontaine.fabrice@gmail.com>
+ Upstream-Status: Submitted [https://github.com/oneapi-src/oneTBB/pull/203]
+ 
+ Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
++Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+ ---
+- src/tbbmalloc/proxy.cpp | 6 ++++--
++ src/tbbmalloc_proxy/proxy.cpp | 6 ++++--
+  1 file changed, 4 insertions(+), 2 deletions(-)
+ 
+-diff --git a/src/tbbmalloc/proxy.cpp b/src/tbbmalloc/proxy.cpp
+-index d96ae7a0..709ae839 100644
+---- a/src/tbbmalloc/proxy.cpp
+-+++ b/src/tbbmalloc/proxy.cpp
++diff --git a/src/tbbmalloc_proxy/proxy.cpp b/src/tbbmalloc_proxy/proxy.cpp
++index fe0dad89..93e68049 100644
++--- a/src/tbbmalloc_proxy/proxy.cpp
+++++ b/src/tbbmalloc_proxy/proxy.cpp
+ @@ -24,7 +24,8 @@
+  // of aligned_alloc as required by new C++ standard, this makes it hard to
+  // redefine aligned_alloc here. However, running on systems with new libc
+@@ -40,3 +41,6 @@ index d96ae7a0..709ae839 100644
+  #endif // __linux__ && !__ANDROID__
+  
+  #include "proxy.h"
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-support/tbb/tbb/cross-compile.patch b/meta-oe/recipes-support/tbb/tbb/cross-compile.patch
+deleted file mode 100644
+index 36578543f..000000000
+--- a/meta-oe/recipes-support/tbb/tbb/cross-compile.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-Author: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+-  
+-Upstream-Status: unsuitable
+----
+-
+-diff --git a/build/linux.clang.inc b/build/linux.clang.inc
+-index fe9b5c98..b0dcd68b 100644
+---- a/build/linux.clang.inc
+-+++ b/build/linux.clang.inc
+-@@ -12,8 +12,8 @@
+- # See the License for the specific language governing permissions and
+- # limitations under the License.
+- 
+--CPLUS ?= clang++
+--CONLY ?= clang
+-+CPLUS ?= $(CXX)
+-+CONLY ?= $(CC)
+- COMPILE_ONLY = -c -MMD
+- PREPROC_ONLY = -E -x c++
+- INCLUDE_KEY = -I
+-diff --git a/build/linux.gcc.inc b/build/linux.gcc.inc
+-index d820c15d..62c76afd 100644
+---- a/build/linux.gcc.inc
+-+++ b/build/linux.gcc.inc
+-@@ -12,8 +12,8 @@
+- # See the License for the specific language governing permissions and
+- # limitations under the License.
+- 
+--CPLUS ?= g++
+--CONLY ?= gcc
+-+CPLUS ?= $(CXX)
+-+CONLY ?= $(CC)
+- COMPILE_ONLY = -c -MMD
+- PREPROC_ONLY = -E -x c++
+- INCLUDE_KEY = -I
+diff --git a/meta-oe/recipes-support/tbb/tbb/improve-reproducibility.patch b/meta-oe/recipes-support/tbb/tbb/improve-reproducibility.patch
+deleted file mode 100644
+index 91d10cb7a..000000000
+--- a/meta-oe/recipes-support/tbb/tbb/improve-reproducibility.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From f56eeb18a07df139864a99e1967d450cc5c8c0bb Mon Sep 17 00:00:00 2001
+-From: Lee Chee Yang <chee.yang.lee@intel.com>
+-Date: Wed, 30 Sep 2020 16:18:35 +0800
+-Subject: [PATCH] improve reproducibility
+-
+-remove the WORKDIR info from BUILD_COMMAND to improve reproducibility.
+-also use SOURCE_DATE_EPOCH as DATETIME wherever possible.
+-
+-Upstream-Status: Inappropriate [sed WORKDIR does not applies to upstream]
+-Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
+----
+- build/version_info_linux.sh | 4 +-
+- 1 file changed, 2 insertion(+), 2 deletion(-)
+-
+-diff --git a/build/version_info_linux.sh b/build/version_info_linux.sh
+-index 793cad11..ed6f4b2a 100644
+---- a/build/version_info_linux.sh
+-+++ b/build/version_info_linux.sh
+-@@ -25,6 +25,6 @@ echo '#N": BUILD_GCC'"\t\t"`g++ --version </dev/null 2>&1 | grep 'g++'`'" ENDL \
+- echo '#N": BUILD_LIBC'"\t"`getconf GNU_LIBC_VERSION | grep glibc | sed -e 's/^glibc //'`'" ENDL \'
+- echo '#N": BUILD_LD'"\t\t"`ld -v 2>&1 | grep 'version'`'" ENDL \'
+- echo '#N": BUILD_TARGET'"\t$arch on $runtime"'" ENDL \'
+--echo '#N": BUILD_COMMAND'"\t"$*'" ENDL \'
+-+echo '#N": BUILD_COMMAND'"\t"$(echo $* | sed 's#'$WORKDIR'#/workdir#g')'" ENDL \'
+- echo ""
+--echo "#define __TBB_DATETIME \""`date -u`"\""
+-+echo "#define __TBB_DATETIME \""`$(date -u -d "@$SOURCE_DATE_EPOCH"  2>/dev/null || date -u -r "$SOURCE_DATE_EPOCH"  2>/dev/null || date -u )`"\""
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-support/tbb/tbb/tbb.pc b/meta-oe/recipes-support/tbb/tbb/tbb.pc
+deleted file mode 100644
+index 4f9da1140..000000000
+--- a/meta-oe/recipes-support/tbb/tbb/tbb.pc
++++ /dev/null
+@@ -1,11 +0,0 @@
+-prefix=/usr
+-exec_prefix=${prefix}
+-libdir=${exec_prefix}/lib
+-includedir=${prefix}/include
+-
+-Name: Threading Building Blocks
+-Description: Intel's parallelism library for C++
+-URL: https://software.intel.com/en-us/tbb
+-Version: 2020.2
+-Libs: -L${libdir} -ltbb
+-Cflags: -I${includedir} 
+diff --git a/meta-oe/recipes-support/tbb/tbb_2020.3.bb b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+similarity index 59%
+rename from meta-oe/recipes-support/tbb/tbb_2020.3.bb
+rename to meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+index 8e0094b31..357fbba34 100644
+--- a/meta-oe/recipes-support/tbb/tbb_2020.3.bb
++++ b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+@@ -5,37 +5,24 @@ DESCRIPTION = "Parallelism library for C++ - runtime files \
+     and threading mechanism for performance and scalability."
+ HOMEPAGE = "https://software.intel.com/en-us/tbb"
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+-BRANCH = "tbb_2020"
+-SRCREV = "eca91f16d7490a8abfdee652dadf457ec820cc37"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=86d3f3a95c324c9479bd8986968f4327"
++BRANCH = "onetbb_2021"
++SRCREV = "2dba2072869a189b9fdab3ffa431d3ea49059a19"
+ SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
+-           file://cross-compile.patch \
+-           file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
+-           file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
+-           file://tbb.pc \
+-           file://improve-reproducibility.patch \
++            file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
++            file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
+ "
+ 
+ S = "${WORKDIR}/git"
+-PE = "1"
+ 
+-COMPILER ?= "gcc"
+-COMPILER_toolchain-clang = "clang"
++inherit cmake
+ 
+-do_compile() {
+-    oe_runmake compiler=${COMPILER} arch=${HOST_ARCH}
+-}
++# test build fails, error: 'mallinfo mallinfo()' is deprecated
++EXTRA_OECMAKE += " \
++                    -DTBB_TEST=OFF \
++                    -DCMAKE_BUILD_TYPE=Release \
++                "
+ 
+-do_install() {
+-    install -d ${D}${includedir} ${D}${libdir}
+-    rm ${S}/include/tbb/index.html -f
+-    cp -R --no-dereference --preserve=mode,links -v ${S}/include/tbb ${D}${includedir}
+-    for f in ${B}/build/linux_*_release/lib*.so*
+-    do
+-        install -Dm 0755 $f ${D}${libdir}/
+-    done
+-    install -Dm 0644 ${WORKDIR}/tbb.pc ${D}${libdir}/pkgconfig/tbb.pc
+-}
+ 
+ # fails with thumb enabled:
+ # | arm-oe-linux-gnueabi-g++  -march=armv7-a -mthumb -mthumb-interwork -mfloat-abi=softfp -mfpu=neon -mtune=cortex-a9 -mcpu=cortex-a9 -D__ARM__ -D__LINUX_ARM_ARCH__=7 -funwind-tables -mvectorize-with-neon-quad -rdynamic --sysroot=/OE/sysroots/m14tv -c -MMD -DTBB_USE_DEBUG  -g -O0 -DUSE_PTHREAD -fPIC -D__TBB_BUILD=1 -Wall -Wno-parentheses -Wno-non-virtual-dtor -O2 -pipe -g -feliminate-unused-debug-types -fpermissive -fvisibility-inlines-hidden   -I../../src -I../../src/rml/include -I../../include ../../src/tbb/concurrent_queue.cpp
+-- 
+2.17.1
 
