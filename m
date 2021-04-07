@@ -1,160 +1,401 @@
-Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
- by mx.groups.io with SMTP id smtpd.web11.9649.1617811525355018115
+Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com [209.85.222.169])
+ by mx.groups.io with SMTP id smtpd.web12.10921.1617816772403748816
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Apr 2021 09:05:25 -0700
+ Wed, 07 Apr 2021 10:32:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=XElSsxwF;
- spf=pass (domain: gmail.com, ip: 209.85.161.49, mailfrom: akuster808@gmail.com)
-Received: by mail-oo1-f49.google.com with SMTP id q127-20020a4a33850000b02901b646aa81b1so4656573ooq.8
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Apr 2021 09:05:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=E2qYK0V6;
+ spf=pass (domain: gmail.com, ip: 209.85.222.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f169.google.com with SMTP id c3so19569723qkc.5
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Apr 2021 10:32:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=to:from:subject:autocrypt:message-id:date:user-agent:mime-version
-         :content-transfer-encoding:content-language;
-        bh=xXkCJWF4QGYYlsmIfhZFuK5H2jGR0rjIWfd9NFpFzvY=;
-        b=XElSsxwFpzJNrNgVx2P96vA2ETjv8oXlsQVlIKMA0pmConPqbTTohuSiXPP9xxcES/
-         /Pp2l+7CKb4u3+f4fm4k+PtWGliMnAHesULPgOzTtIrxCkK5MlA63sNBHb+VV+kqhqje
-         Uw8RhC4hmKSjVHzEZOc8qZkwklOsesapZ/jl04XYzCCRedq1xP/bAt/xGLnVlpV4Wcts
-         TEUsIav7iY4XA2YZFnFMSiStxwGq32PfI9Sr3L7bCh+6iqzkG4rByvQSQ5REQPXG0XF6
-         uCXzxTuOr/yiWxrdFapFQgjU7i5V1k2/sMYledQ9rGiKHs6AmfLKizvF9GNt7AA88zib
-         k5FA==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=dSV+TvAFZwoA8uEJA8bj4pyYrKYWU+IgEBT8mDBB2/4=;
+        b=E2qYK0V6gYDRBYzfGgPxEcO+q4lUE0s4yhtcYLSCFVSCoMrnugKfbMyv8hOMlm5NBl
+         mDvulNVz+Xzyqqrjrva+1WAiNpy2Xt/YMDFwQXGsnuAjsikSZ+v5q2/JQOzARZ8VlxjF
+         1RgeZ1sypRCm0UojAtzN3olCfng+HABshU3rdVte3+OTmmMXX7bEEOf5JyYs/hkLB4u7
+         4U90UVCiCgncvfXPmn7ZjU7vBeI7xAH5ebugNawyWBPWfl3qAe6aLjArIOMBzcKojk0L
+         lmxCRxItZfJOm+cOOcFUFDMPRz+qV877IIZ0e5525ylffZVqCOfxuZA/4uhzu/8DXIms
+         8ISw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:to:from:subject:autocrypt:message-id:date
-         :user-agent:mime-version:content-transfer-encoding:content-language;
-        bh=xXkCJWF4QGYYlsmIfhZFuK5H2jGR0rjIWfd9NFpFzvY=;
-        b=FtjlnvHU7vhL0KtVCwjvgi62SuOKbVvI1pHwM111gbh7kRgjIDEY7q6H01mrlP9uSP
-         pmHB89pX7e6nG190u+NRezPLdv4yVcMgLhBHuxUWoJhPf3E0UKIzL2bsGV2oYQq1+hnd
-         J6FYrlvwcuaNDUBAj+dNQp1J9awJ2rmYPDFOkbmBRSHzk6Sao5/d+QEaI7oiRstxmWvQ
-         sPWNgUESwfYDZbMXsgwKPjzLp2Lpg56yyq3z6+R+eHWAnJpK3NckcJJf1l+Fr+nNEUXQ
-         N3lP9MCGNjKpUDyxQFp3gQH19iM6qojTxGDjF44lUGDHc+7OHpvpWg5BEzYJNpT3v0/y
-         0sjw==
-X-Gm-Message-State: AOAM531jrGthqL2oWzyfAzKCy6M2++De/rr2y3nCCbYuc9aGFAEuiLZw
-	pZQo6KpgviZDXjstuYpg1mI=
-X-Google-Smtp-Source: ABdhPJy0bwpByrB64ftFTmm+f+zsisOfmEvhJ8T4ms8SkfPYf2syzQt/MojxOv2jwcgpHa+I9qtBPw==
-X-Received: by 2002:a4a:395d:: with SMTP id x29mr3570808oog.41.1617811524713;
-        Wed, 07 Apr 2021 09:05:24 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0:d82f:cd1e:57b2:d04e? ([2601:202:4180:a5c0:d82f:cd1e:57b2:d04e])
-        by smtp.gmail.com with ESMTPSA id c2sm5367385otf.66.2021.04.07.09.05.23
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 07 Apr 2021 09:05:24 -0700 (PDT)
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
- Khem Raj <raj.khem@gmail.com>
-From: "akuster" <akuster808@gmail.com>
-Subject: dunfell-next merge request April 7
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
- xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
- Jmd71vHMw+coBetWC3lk+IKjX815Ox0puYXQVRRtI+yMCgd6ib3oGxoQ8tCMwhf9c9/aKjaz
- mP97lWgGHbiEVsDpjzmMZGlJ6pDVZzxykkJExKaosE46AcA8KvfhRQg5zRyYBtinzs8Zu8AP
- aquZVHNXxPwjKPaSEEYqQjFeiNgFTavV+AhM2dmPmGUWCX9RZisrqA4slGwEB0srMdFf12Zg
- mD35Y9jZ80qpu5LPtJCFcsaAlebqR+dg36pIpiRR+olhN1wmC6LYP1vw6uMEYBjkTa2Rnb6+
- C4FDzCJD4UCrUvLMNeTW810DY0bjMMj3SfmSGSfQUssaaaTXCVlLGuGxyCr/kza1rHaXMKum
- Ek4EFj1fyn7AfkSLEHfJfY4sO1tpgigvs4eD/4ZSQEXSu/TjVvyKx4EvUbhlGMRyH2CPwD/H
- 7DFF8tcVtJvCwUUW+zKtjxjSSLrhniNMXAOQJZ6CdaqCe4OyJQT5aRdr+FWbBRjpaRCCf5nf
- dTc88NMU9PrBT3vu0QJ5WNPO6MJpnb+d8iMNLZAz8tv8JMm2l+sMcNKSJ6lhX8peoBsfMVqc
- FgiykEO0fUt7DCbUYR5tLjM/3E5tHvTjMooVJyOxoufVLYtTtQARAQABzSFha3VzdGVyODA4
- IDxha3VzdGVyODA4QGdtYWlsLmNvbT7CwX0EEwEIACcFAlnlUP4CGyMFCQlmAYAFCwkIBwIG
- FQgJCgsCBBYCAwECHgECF4AACgkQ7ou0mfRW5/kuhRAAlR2FTq5572jrX5nnPR7AqI2bvSVb
- vqGLlvv739WhghvagbC+tu05QguopAhWW1/DcHK2+QtfIoC9UZrSW4RaO0CCo5sPjqK7l1KT
- ngWX/rGjF6xTF2QN0U/btcpMyVN2CNtVLwsDF9e+GHKoUcnFkP+JP8vHGokN9k6E/c97hLaL
- IJPeKl8LZXc2Efk+MaW1NXkfDJdcp/p+voajbihSQO6OZ/o+x9d2I3ZybKfTZ71+ek5Hxzjz
- g6KkMOI7KJjlmBlrQFAtVbS+CFAKrwkYznE6ggkcmGv3N7DeUBTUR78hf+EZEAM+ajeLMtrG
- rXE00pIb+gLGYPZxba5pCdQ+qWUW38qi9UnIRPm6fq7Ypx1r6XwJvbgCOkhbxo3D4YUdyC0b
- FE9lgrg8htbc9in4j2+hVI6ALswNjLprzXdzdKrd+T3Egx36o3Z/qrYsW2o5/A5sVvvASVKi
- wRPuEKhEhfmiHUPLvuKqhMoymHaz3fg5D2Q8G0gSDkLgeEpAjiWqf4+AGLx+MSDai7DSOsmI
- t61kWxs7cFTB32UrB/TDoVNn3Fm88ZFQpA/bngikE9jgEm045mSY86fNlbFj2mcCd0Ha1i1n
- aYc97RpgfjNMWyHDVHOGrNg/hJjkGa5RsAXkfyBwltHRw0Hj4urUQ3rr8um8PLe43SezPwXA
- oRoyDxDOwU0EWeVQ/gEQALNHwj5VSPdnvXy1RXUuH+rclMx4x8zaqDyY0YqHfA7b/d8Y0VAt
- Y6YpzDeFTwD8A0Wfb7kZ2mlDIE6ODCB71uT/E3C6b+FiiN+lgzslznjUW+9l8ddDhRrC8HMG
- 37vrXF5h++PTXUKEKUlkDib1w093tu3mlJXUvIAzl8CEHkptF6Br0L9XxFwuWoNUfjT9IorQ
- 0SVIhvq5PhVAITXUD5fD7/N8B4TYegmHFRo1UaaKSnSHwlJJkzKpeWOH8QTYrP0RHxX86Obv
- IZuwbAo3F3oojcvLJt9NxWnbEmEALkleklLZnukgu7q5Wp1VDwhUbMFTLb6qmnBa/Xi30uOk
- 0l1TMHDbeQswvQDOZBAMukSRqyBetKxQ3iTfZ/3z1ubQRcVDbVlMDScSHQq0LK3F9yMOMM/6
- 0QPqJjl13xn/+Bn7WJiAIXXwzAV7uo6i0khFfjDtCDQ40aeffqOLxp1yMLkc3EKJGcQ5F6O2
- ycEf4QXCYUbMXjxB0EJB8y7z+xOi5Mmd/pPlVmZ2gQK84NAL90p7n7jRlyf3gOUY+JOl4c5e
- UFiIhOzmuqNrvPOiZ02GXh6SGUU5y7IgSoIKvXSFgHAn2OG/tcspBmkyv6IuNVpmbmEgYn4I
- Rnt40UXVQkxTh0dENFhk2cjunMYozV/OqYCgmZLFSeJd8kAo4yn+yOtNABEBAAHCwWUEGAEI
- AA8FAlnlUP4CGwwFCQlmAYAACgkQ7ou0mfRW5/nNcg//R63cbOS6zLtvdnPub3Ssp1Ft8Wmv
- mni+kccuNApuDV7d63QckYxjAfUv2zYMLpbh87gVbLyCq9ASn552EbfRhTvHdk44CgbHBVcI
- ZBEdZWgRR5ViJakQSYHpP2e5AGNFnx9gSIuRTaa5rvZM+4xeoZ2vJiq93TtaYPr7UFNfK+c4
- vv4C66lkt9l95/I10eSc3RqbOKZW47emlg4X3ygEoB9k2lPrpspyf6sUuSEi0WrlSxoLAr6p
- JG8rTUErYNeXe6JCdL31odDx1Dh5sdKIj2RicUYZNilxu9f1M7jZwf2ra1FGAlKj2ybqmgpZ
- EFteaiCinEYsvDyZyOiWHjAFI+RZIPQQL3AnVp4l7wYD3r9hnqYPww0slyMDcb9262RoFkHq
- dDwxPYarrNjWUpOzxB6bFxOgNRdCTgvQl8Ftk8a/yXB6vHeUSm1vPFCBxQPZytyfOLhEWm0J
- /mkVL0Z6iRK3p1LKnpLYCS4/esL2u7RrhPyCs2SsL58YcQF/g+PpeT9geZ+oyZ/4IQ+TWJoU
- PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
- ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
- 8CS2NxU=
-Message-ID: <c32216ce-79fe-5457-8ed4-844973a0c8e3@gmail.com>
-Date: Wed, 7 Apr 2021 09:05:23 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=dSV+TvAFZwoA8uEJA8bj4pyYrKYWU+IgEBT8mDBB2/4=;
+        b=apKZ9NtIKncDTnBBfu0Rj9lzHc76YnRsZXUPQ7YV3ayF4v7/kvCN9ij+TCEtIRUfo1
+         MBBLumuNFEGo8aUUoxGnTWChpMlbNeRNE6XUWbfNITk+X/RQ29ktAcbXAc1cPSwihc4F
+         s/hOZMuDhf5WcZramXJGC78VTDSYkYG9n950G7x+rCgudG6YS1YsLK9Cxit4tG4PR7/R
+         8bKnYcSy+ANbt/uK9t1qhLiLWGgIiyxzXSH08IfCJ66eL/nWYNKVrOCutliJORSDWe3Q
+         I7lRICN/M2JmtUccvE3l26+E2mylKJcnB47MXAr20BlF1ZXjsUl72w/eofCm1XZ5PJGe
+         dnZg==
+X-Gm-Message-State: AOAM532iGppf+8r4kT2+ZbNi6lNLaSfFO0LmrKCxNCkGrk7xokHiG3U0
+	Rrl5tvwa4B+eHV7/F2BmPztKWZdC1Z2ZKQODZk0=
+X-Google-Smtp-Source: ABdhPJxpxjcJaEs4XhWbmYI4JlxB2nGhqC6Bbd0xM7hcQ4bPNKGj+KG0+j8rykmXu+H17WDhoagBArni5xDpCrdS32M=
+X-Received: by 2002:a05:620a:a12:: with SMTP id i18mr4292253qka.119.1617816771246;
+ Wed, 07 Apr 2021 10:32:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+References: <20210407062210.5883-1-naveen.kumar.saini@intel.com> <CAMKF1srrwWUT0q-0q6zS+=bv5pLZc25zLuhROfd5CZpW4YUu=g@mail.gmail.com>
+In-Reply-To: <CAMKF1srrwWUT0q-0q6zS+=bv5pLZc25zLuhROfd5CZpW4YUu=g@mail.gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Wed, 7 Apr 2021 10:32:25 -0700
+Message-ID: <CAMKF1sqndeKvqZwu_UNp40EmtVVzbKhZynK8U=-xt+Pe=rBLww@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] tbb: upgrade 2020.3 -> 2021.2.0
+To: Naveen Saini <naveen.kumar.saini@intel.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The following changes since commit 389757a7494221fea1d8437e9a01c6e4fb4700af:
+On Wed, Apr 7, 2021 at 7:25 AM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> https://errors.yoctoproject.org/Errors/Details/575697/
+>
+> opencv is looking for a tbb header which is not there
+>
 
-  opencv: Security fixes (2021-03-16 08:40:07 -0700)
+This is fixed in 4.5.2 release so I have a local patch for opencv upgrade
+however there are additional arches failing to build
 
-are available in the Git repository at:
+rv64 - https://errors.yoctoproject.org/Errors/Details/575734/
+rv32 - https://errors.yoctoproject.org/Errors/Details/575733/
+x86/musl - https://errors.yoctoproject.org/Errors/Details/575731/
+x86_64 - https://errors.yoctoproject.org/Errors/Details/575732/
+musl - https://errors.yoctoproject.org/Errors/Details/575728/
 
-  https://git.openembedded.org/meta-openembedded dunfell-next
+you might want to link with libucontext in when using musl.
 
-for you to fetch changes up to 430ef96fe65f62d8da995f446d5b9b093544f031:
+This is with GCC 11 btw but I. think most of them I not related to gcc ver=
+sion.
 
-  wireguard: fix build issue with updated 5.4 kernel (2021-04-07
-08:55:15 -0700)
-
-----------------------------------------------------------------
-Aditya.Tayade (1):
-      neon: Add ptest
-
-Armin Kuster (1):
-      wireguard: fix build issue with updated 5.4 kernel
-
-Marek Vasut (1):
-      freerdp: Add missing libxkbcommon WL dependency
-
-Martin Jansa (5):
-      opencv: refresh patches with devtool to apply cleanly
-      ceres-solver: prevent fetching git hook during do_configure
-      packagegroup-meta-oe: include nodejs without meta-python2 conditional
-      packagegroup-meta-oe: move the packages depending on meta-python2
-to separate packages
-      packagegroup-meta-oe: add guider
-
-Peace Lee (2):
-      guider: Upgrade to 3.9.7
-      Update commit for version 3.9.7
-
- ..._ndo_send-functions-were-backported-exten.patch |  32 +++++++
- .../wireguard/wireguard-module_1.0.20200401.bb     |   3 +-
- .../packagegroups/packagegroup-meta-oe.bb          |  37 ++++++--
- meta-oe/recipes-devtools/guider/guider_3.9.6.bb    |  39 --------
- meta-oe/recipes-devtools/guider/guider_3.9.7.bb    |  19 ++++
- .../ceres-solver/ceres-solver_1.14.0.bb            |   8 ++
- meta-oe/recipes-support/freerdp/freerdp_git.bb     |   2 +-
- meta-oe/recipes-support/neon/neon/run-ptest        |  25 +++++
- meta-oe/recipes-support/neon/neon_0.30.2.bb        |  15 ++-
- ...01-3rdparty-ippicv-Use-pre-downloaded-ipp.patch |   4 +-
- .../opencv/opencv/0001-Dont-use-isystem.patch      |   4 +-
- ...-work-around-deprecated-ffmpeg-RAW-functi.patch |   4 +-
- ...place-ipcp-unit-growth-with-ipa-cp-unit-g.patch |   9 +-
- ...-ts-create-share-library-intead-of-static.patch |   4 +-
- .../opencv/0003-To-fix-errors-as-following.patch   |   8 +-
- .../opencv/opencv/CVE-2019-14491.patch             |  56 +++++------
- .../opencv/opencv/CVE-2019-14493.patch             | 104
-++++++++++-----------
- .../opencv/opencv/CVE-2019-15939.patch             |  20 ++--
- .../opencv/opencv/CVE-2019-19624.patch             |  22 ++---
- .../recipes-support/opencv/opencv/download.patch   |   9 ++
- 20 files changed, 255 insertions(+), 169 deletions(-)
- create mode 100644
-meta-networking/recipes-kernel/wireguard/files/0001-compat-icmp_ndo_send-functions-were-backported-exten.patch
- delete mode 100644 meta-oe/recipes-devtools/guider/guider_3.9.6.bb
- create mode 100644 meta-oe/recipes-devtools/guider/guider_3.9.7.bb
- create mode 100644 meta-oe/recipes-support/neon/neon/run-ptest
-
+> On Tue, Apr 6, 2021 at 11:10 PM Naveen Saini
+> <naveen.kumar.saini@intel.com> wrote:
+> >
+> > Switched to cmake build tool.
+> >
+> > Rebased some patches due to directory re-structuring.
+> > Dropped patches, which are not required anymore.
+> >
+> > Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+> > ---
+> >  ...nfo-is-glibc-specific-API-mark-it-so.patch | 27 +++++++-------
+> >  .../GLIBC-PREREQ-is-not-defined-on-musl.patch | 22 +++++++-----
+> >  .../tbb/tbb/cross-compile.patch               | 35 ------------------=
+-
+> >  .../tbb/tbb/improve-reproducibility.patch     | 30 ----------------
+> >  meta-oe/recipes-support/tbb/tbb/tbb.pc        | 11 ------
+> >  .../tbb/{tbb_2020.3.bb =3D> tbb_2021.2.0.bb}    | 35 ++++++----------=
+---
+> >  6 files changed, 38 insertions(+), 122 deletions(-)
+> >  delete mode 100644 meta-oe/recipes-support/tbb/tbb/cross-compile.patc=
+h
+> >  delete mode 100644 meta-oe/recipes-support/tbb/tbb/improve-reproducib=
+ility.patch
+> >  delete mode 100644 meta-oe/recipes-support/tbb/tbb/tbb.pc
+> >  rename meta-oe/recipes-support/tbb/{tbb_2020.3.bb =3D> tbb_2021.2.0.b=
+b} (59%)
+> >
+> > diff --git a/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-sp=
+ecific-API-mark-it-so.patch b/meta-oe/recipes-support/tbb/tbb/0001-mallinfo=
+-is-glibc-specific-API-mark-it-so.patch
+> > index 7e66945fa..49325447e 100644
+> > --- a/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-=
+API-mark-it-so.patch
+> > +++ b/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-=
+API-mark-it-so.patch
+> > @@ -1,22 +1,23 @@
+> > -From 6b2b136caa68912d77ffe26143cd3da768b9ef80 Mon Sep 17 00:00:00 200=
+1
+> > -From: Khem Raj <raj.khem@gmail.com>
+> > -Date: Sat, 3 Jun 2017 08:39:37 -0700
+> > +From 52c1586bff0ecb418ac21d6678f8963d70959f04 Mon Sep 17 00:00:00 200=
+1
+> > +From: Naveen Saini <naveen.kumar.saini@intel.com>
+> > +Date: Wed, 7 Apr 2021 11:14:13 +0800
+> >  Subject: [PATCH] mallinfo() is glibc specific API mark it so
+> >
+> >  Helps compiling with musl
+> >
+> > -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ----
+> >  Upstream-Status: Pending
+> >
+> > - src/tbbmalloc/proxy.cpp | 2 ++
+> > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > +Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+> > +---
+> > + src/tbbmalloc_proxy/proxy.cpp | 2 ++
+> >   1 file changed, 2 insertions(+)
+> >
+> > -diff --git a/src/tbbmalloc/proxy.cpp b/src/tbbmalloc/proxy.cpp
+> > -index 5ef279d..06c4872 100644
+> > ---- a/src/tbbmalloc/proxy.cpp
+> > -+++ b/src/tbbmalloc/proxy.cpp
+> > -@@ -185,6 +185,7 @@ int mallopt(int /*param*/, int /*value*/) __THROW
+> > +diff --git a/src/tbbmalloc_proxy/proxy.cpp b/src/tbbmalloc_proxy/prox=
+y.cpp
+> > +index f9942bf1..fe0dad89 100644
+> > +--- a/src/tbbmalloc_proxy/proxy.cpp
+> > ++++ b/src/tbbmalloc_proxy/proxy.cpp
+> > +@@ -253,6 +253,7 @@ int mallopt(int /*param*/, int /*value*/) __THROW
+> >       return 1;
+> >   }
+> >
+> > @@ -24,7 +25,7 @@ index 5ef279d..06c4872 100644
+> >   struct mallinfo mallinfo() __THROW
+> >   {
+> >       struct mallinfo m;
+> > -@@ -192,6 +193,7 @@ struct mallinfo mallinfo() __THROW
+> > +@@ -260,6 +261,7 @@ struct mallinfo mallinfo() __THROW
+> >
+> >       return m;
+> >   }
+> > @@ -33,5 +34,5 @@ index 5ef279d..06c4872 100644
+> >   #if __ANDROID__
+> >   // Android doesn't have malloc_usable_size, provide it to be compati=
+ble
+> >  --
+> > -2.13.0
+> > +2.17.1
+> >
+> > diff --git a/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defin=
+ed-on-musl.patch b/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defi=
+ned-on-musl.patch
+> > index 6f28f6f3a..fb10684cd 100644
+> > --- a/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-m=
+usl.patch
+> > +++ b/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-m=
+usl.patch
+> > @@ -1,7 +1,7 @@
+> > -From 27956d4c5fb615098231cebfb8eef11057639d3c Mon Sep 17 00:00:00 200=
+1
+> > -From: Fabrice Fontaine <fontaine.fabrice@gmail.com>
+> > -Date: Sun, 8 Dec 2019 18:14:38 +0100
+> > -Subject: [PATCH] src/tbbmalloc/proxy.cpp: __GLIBC_PREREQ is not defin=
+ed on
+> > +From 5cac8b5fffa4ebf5f0090456c9e0cbf43827242a Mon Sep 17 00:00:00 200=
+1
+> > +From: Naveen Saini <naveen.kumar.saini@intel.com>
+> > +Date: Wed, 7 Apr 2021 11:32:52 +0800
+> > +Subject: [PATCH] src/tbbmalloc/proxy.cpp: __GLIBC_PREREQ is not defin=
+ed on
+> >   musl
+> >
+> >  Do not call __GLIBC_PREREQ if it is not defined otherwise build will
+> > @@ -12,14 +12,15 @@ Signed-off-by: Fabrice Fontaine <fontaine.fabrice@=
+gmail.com>
+> >  Upstream-Status: Submitted [https://github.com/oneapi-src/oneTBB/pull=
+/203]
+> >
+> >  Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+> > +Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+> >  ---
+> > - src/tbbmalloc/proxy.cpp | 6 ++++--
+> > + src/tbbmalloc_proxy/proxy.cpp | 6 ++++--
+> >   1 file changed, 4 insertions(+), 2 deletions(-)
+> >
+> > -diff --git a/src/tbbmalloc/proxy.cpp b/src/tbbmalloc/proxy.cpp
+> > -index d96ae7a0..709ae839 100644
+> > ---- a/src/tbbmalloc/proxy.cpp
+> > -+++ b/src/tbbmalloc/proxy.cpp
+> > +diff --git a/src/tbbmalloc_proxy/proxy.cpp b/src/tbbmalloc_proxy/prox=
+y.cpp
+> > +index fe0dad89..93e68049 100644
+> > +--- a/src/tbbmalloc_proxy/proxy.cpp
+> > ++++ b/src/tbbmalloc_proxy/proxy.cpp
+> >  @@ -24,7 +24,8 @@
+> >   // of aligned_alloc as required by new C++ standard, this makes it h=
+ard to
+> >   // redefine aligned_alloc here. However, running on systems with new=
+ libc
+> > @@ -40,3 +41,6 @@ index d96ae7a0..709ae839 100644
+> >   #endif // __linux__ && !__ANDROID__
+> >
+> >   #include "proxy.h"
+> > +--
+> > +2.17.1
+> > +
+> > diff --git a/meta-oe/recipes-support/tbb/tbb/cross-compile.patch b/met=
+a-oe/recipes-support/tbb/tbb/cross-compile.patch
+> > deleted file mode 100644
+> > index 36578543f..000000000
+> > --- a/meta-oe/recipes-support/tbb/tbb/cross-compile.patch
+> > +++ /dev/null
+> > @@ -1,35 +0,0 @@
+> > -Author: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+> > -
+> > -Upstream-Status: unsuitable
+> > ----
+> > -
+> > -diff --git a/build/linux.clang.inc b/build/linux.clang.inc
+> > -index fe9b5c98..b0dcd68b 100644
+> > ---- a/build/linux.clang.inc
+> > -+++ b/build/linux.clang.inc
+> > -@@ -12,8 +12,8 @@
+> > - # See the License for the specific language governing permissions an=
+d
+> > - # limitations under the License.
+> > -
+> > --CPLUS ?=3D clang++
+> > --CONLY ?=3D clang
+> > -+CPLUS ?=3D $(CXX)
+> > -+CONLY ?=3D $(CC)
+> > - COMPILE_ONLY =3D -c -MMD
+> > - PREPROC_ONLY =3D -E -x c++
+> > - INCLUDE_KEY =3D -I
+> > -diff --git a/build/linux.gcc.inc b/build/linux.gcc.inc
+> > -index d820c15d..62c76afd 100644
+> > ---- a/build/linux.gcc.inc
+> > -+++ b/build/linux.gcc.inc
+> > -@@ -12,8 +12,8 @@
+> > - # See the License for the specific language governing permissions an=
+d
+> > - # limitations under the License.
+> > -
+> > --CPLUS ?=3D g++
+> > --CONLY ?=3D gcc
+> > -+CPLUS ?=3D $(CXX)
+> > -+CONLY ?=3D $(CC)
+> > - COMPILE_ONLY =3D -c -MMD
+> > - PREPROC_ONLY =3D -E -x c++
+> > - INCLUDE_KEY =3D -I
+> > diff --git a/meta-oe/recipes-support/tbb/tbb/improve-reproducibility.p=
+atch b/meta-oe/recipes-support/tbb/tbb/improve-reproducibility.patch
+> > deleted file mode 100644
+> > index 91d10cb7a..000000000
+> > --- a/meta-oe/recipes-support/tbb/tbb/improve-reproducibility.patch
+> > +++ /dev/null
+> > @@ -1,30 +0,0 @@
+> > -From f56eeb18a07df139864a99e1967d450cc5c8c0bb Mon Sep 17 00:00:00 200=
+1
+> > -From: Lee Chee Yang <chee.yang.lee@intel.com>
+> > -Date: Wed, 30 Sep 2020 16:18:35 +0800
+> > -Subject: [PATCH] improve reproducibility
+> > -
+> > -remove the WORKDIR info from BUILD_COMMAND to improve reproducibility=
+.
+> > -also use SOURCE_DATE_EPOCH as DATETIME wherever possible.
+> > -
+> > -Upstream-Status: Inappropriate [sed WORKDIR does not applies to upstr=
+eam]
+> > -Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
+> > ----
+> > - build/version_info_linux.sh | 4 +-
+> > - 1 file changed, 2 insertion(+), 2 deletion(-)
+> > -
+> > -diff --git a/build/version_info_linux.sh b/build/version_info_linux.s=
+h
+> > -index 793cad11..ed6f4b2a 100644
+> > ---- a/build/version_info_linux.sh
+> > -+++ b/build/version_info_linux.sh
+> > -@@ -25,6 +25,6 @@ echo '#N": BUILD_GCC'"\t\t"`g++ --version </dev/nul=
+l 2>&1 | grep 'g++'`'" ENDL \
+> > - echo '#N": BUILD_LIBC'"\t"`getconf GNU_LIBC_VERSION | grep glibc | s=
+ed -e 's/^glibc //'`'" ENDL \'
+> > - echo '#N": BUILD_LD'"\t\t"`ld -v 2>&1 | grep 'version'`'" ENDL \'
+> > - echo '#N": BUILD_TARGET'"\t$arch on $runtime"'" ENDL \'
+> > --echo '#N": BUILD_COMMAND'"\t"$*'" ENDL \'
+> > -+echo '#N": BUILD_COMMAND'"\t"$(echo $* | sed 's#'$WORKDIR'#/workdir#=
+g')'" ENDL \'
+> > - echo ""
+> > --echo "#define __TBB_DATETIME \""`date -u`"\""
+> > -+echo "#define __TBB_DATETIME \""`$(date -u -d "@$SOURCE_DATE_EPOCH" =
+ 2>/dev/null || date -u -r "$SOURCE_DATE_EPOCH"  2>/dev/null || date -u )`"=
+\""
+> > ---
+> > -2.25.1
+> > -
+> > diff --git a/meta-oe/recipes-support/tbb/tbb/tbb.pc b/meta-oe/recipes-=
+support/tbb/tbb/tbb.pc
+> > deleted file mode 100644
+> > index 4f9da1140..000000000
+> > --- a/meta-oe/recipes-support/tbb/tbb/tbb.pc
+> > +++ /dev/null
+> > @@ -1,11 +0,0 @@
+> > -prefix=3D/usr
+> > -exec_prefix=3D${prefix}
+> > -libdir=3D${exec_prefix}/lib
+> > -includedir=3D${prefix}/include
+> > -
+> > -Name: Threading Building Blocks
+> > -Description: Intel's parallelism library for C++
+> > -URL: https://software.intel.com/en-us/tbb
+> > -Version: 2020.2
+> > -Libs: -L${libdir} -ltbb
+> > -Cflags: -I${includedir}
+> > diff --git a/meta-oe/recipes-support/tbb/tbb_2020.3.bb b/meta-oe/recip=
+es-support/tbb/tbb_2021.2.0.bb
+> > similarity index 59%
+> > rename from meta-oe/recipes-support/tbb/tbb_2020.3.bb
+> > rename to meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+> > index 8e0094b31..357fbba34 100644
+> > --- a/meta-oe/recipes-support/tbb/tbb_2020.3.bb
+> > +++ b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+> > @@ -5,37 +5,24 @@ DESCRIPTION =3D "Parallelism library for C++ - runti=
+me files \
+> >      and threading mechanism for performance and scalability."
+> >  HOMEPAGE =3D "https://software.intel.com/en-us/tbb"
+> >  LICENSE =3D "Apache-2.0"
+> > -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D86d3f3a95c324c9479bd898696=
+8f4327"
+> > -BRANCH =3D "tbb_2020"
+> > -SRCREV =3D "eca91f16d7490a8abfdee652dadf457ec820cc37"
+> > +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D86d3f3a95c324c9479bd89=
+86968f4327"
+> > +BRANCH =3D "onetbb_2021"
+> > +SRCREV =3D "2dba2072869a189b9fdab3ffa431d3ea49059a19"
+> >  SRC_URI =3D "git://github.com/oneapi-src/oneTBB.git;protocol=3Dhttps;=
+branch=3D${BRANCH} \
+> > -           file://cross-compile.patch \
+> > -           file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patc=
+h \
+> > -           file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
+> > -           file://tbb.pc \
+> > -           file://improve-reproducibility.patch \
+> > +            file://0001-mallinfo-is-glibc-specific-API-mark-it-so.pat=
+ch \
+> > +            file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
+> >  "
+> >
+> >  S =3D "${WORKDIR}/git"
+> > -PE =3D "1"
+> >
+> > -COMPILER ?=3D "gcc"
+> > -COMPILER_toolchain-clang =3D "clang"
+> > +inherit cmake
+> >
+> > -do_compile() {
+> > -    oe_runmake compiler=3D${COMPILER} arch=3D${HOST_ARCH}
+> > -}
+> > +# test build fails, error: 'mallinfo mallinfo()' is deprecated
+> > +EXTRA_OECMAKE +=3D " \
+> > +                    -DTBB_TEST=3DOFF \
+> > +                    -DCMAKE_BUILD_TYPE=3DRelease \
+> > +                "
+> >
+> > -do_install() {
+> > -    install -d ${D}${includedir} ${D}${libdir}
+> > -    rm ${S}/include/tbb/index.html -f
+> > -    cp -R --no-dereference --preserve=3Dmode,links -v ${S}/include/tb=
+b ${D}${includedir}
+> > -    for f in ${B}/build/linux_*_release/lib*.so*
+> > -    do
+> > -        install -Dm 0755 $f ${D}${libdir}/
+> > -    done
+> > -    install -Dm 0644 ${WORKDIR}/tbb.pc ${D}${libdir}/pkgconfig/tbb.pc
+> > -}
+> >
+> >  # fails with thumb enabled:
+> >  # | arm-oe-linux-gnueabi-g++  -march=3Darmv7-a -mthumb -mthumb-interw=
+ork -mfloat-abi=3Dsoftfp -mfpu=3Dneon -mtune=3Dcortex-a9 -mcpu=3Dcortex-a9 =
+-D__ARM__ -D__LINUX_ARM_ARCH__=3D7 -funwind-tables -mvectorize-with-neon-qu=
+ad -rdynamic --sysroot=3D/OE/sysroots/m14tv -c -MMD -DTBB_USE_DEBUG  -g -O0=
+ -DUSE_PTHREAD -fPIC -D__TBB_BUILD=3D1 -Wall -Wno-parentheses -Wno-non-virt=
+ual-dtor -O2 -pipe -g -feliminate-unused-debug-types -fpermissive -fvisibil=
+ity-inlines-hidden   -I../../src -I../../src/rml/include -I../../include ..=
+/../src/tbb/concurrent_queue.cpp
+> > --
+> > 2.17.1
+> >
+> >
+> >=20
+> >
