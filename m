@@ -1,89 +1,98 @@
-Received: from mail-ot1-f49.google.com (mail-ot1-f49.google.com [209.85.210.49])
- by mx.groups.io with SMTP id smtpd.web09.248.1617899778012468758
+Received: from mail-ot1-f52.google.com (mail-ot1-f52.google.com [209.85.210.52])
+ by mx.groups.io with SMTP id smtpd.web12.223.1617899778914587073
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Apr 2021 09:36:18 -0700
+ Thu, 08 Apr 2021 09:36:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=k8iGQSt+;
- spf=pass (domain: gmail.com, ip: 209.85.210.49, mailfrom: akuster808@gmail.com)
-Received: by mail-ot1-f49.google.com with SMTP id v24-20020a9d69d80000b02901b9aec33371so2914870oto.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:17 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=eOIsMwLL;
+ spf=pass (domain: gmail.com, ip: 209.85.210.52, mailfrom: akuster808@gmail.com)
+Received: by mail-ot1-f52.google.com with SMTP id w31-20020a9d36220000b02901f2cbfc9743so2883741otb.7
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=K+lMCt9ogiEdx78iTyTldyamuWeAG3Ki0zRSAg4skY8=;
-        b=k8iGQSt+VuLsI3hzXXgdJfi/Zgo7W5JhnvQ/gJFEH8Zl2WQ0JeU7HYKJbjZaOILg2U
-         4Ph5utfeEuIagFsUpQdwOAL72L5j+Rab38xIjSDNIlPcI0DLYtM9mfUatN+LkyPOdSXi
-         MLAKgDMYZ95ikGAICX79of2j9GNIrYD96fr9BTONr3emeXJq6QdNnagy/9e8V+rlC6vw
-         erXubMQWB2uaDHfKsgURKJ5yjmN1d5a32lSL2IxKUU9+MU/B3GdOCdsxODu+YAVVYObp
-         t9ECrGWdOFjL4i2FWEnM76OlKc8EA/fcj5TddyWmsEeDOzZ5uUdurODwOUItnHfhAsVP
-         3sKw==
+        bh=NYDcu4hyoGNNOIjaj6/m1ZBNUWz3ivWziaZ95j9htLs=;
+        b=eOIsMwLLs57/t61gnq8aUNDoaS3AefcpTFZHCQwMP56P2WIdmMoXjw0j5HrRZT4dkX
+         TJNci2pNONMRzaVqskS5Xui+CXgKYiJX5MkWL5nk+cszDoYKj6/CUDEbGAWg3LP+zgpK
+         +BZ7xfx6wKBmIP0HFvoOHSwHBvD9L0VRUvbNSiDqPQm/iBJW6xyEpFQYtUgVD/68XT4/
+         ing737VvbwdHD3wgSUen8R2a4qHqx2s1Gu9zv3BavRF1vVMt34zy8xFZADHou8LdM38V
+         D6t+Qzqz0wM9OcbxN7+kjaMy12E1ZvM7aIA91t7JpuGDh+/H/HTknIrQd8RtRKUaaU4d
+         jjkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=K+lMCt9ogiEdx78iTyTldyamuWeAG3Ki0zRSAg4skY8=;
-        b=UQAXmSSWqe+oWidmSRkSdBaFTzA4psabCoODu/ufYR8m9fv8bKLmEzdQVUsdbRxsgF
-         F56d+/v7AwZ+/m8LRxCrh3+4Io0nDu9rRf7/75sJD9LzDIcbWfCaUHoW6/eWV7Cfx42Q
-         8VSBUgTlwFx/RPPye6vP01hphTWURJcDGsfMbJMJ7T/StKbj22Q4bK2uCzyHlce2I1oN
-         yQyk0cRdaaNURyeM2NEO/gkmlNcHS8DiR8J/+ogkbrERqUkijHjL7J7gmk6+Vyd5SVHW
-         0mWP6AkQoaqVuWCPo9J8m9nJtJnnhiFh6Gb2wNS2YLrYaZ49eG85nAbP9zcRxgMyQh64
-         zRcg==
-X-Gm-Message-State: AOAM531Oa9biu2nvj7mlfUyQxXT3vRW4T/T4H7glKLK1imGkyXMbPT6n
-	RuZO65wbBOuLZDBxzvu41jepollKPY8=
-X-Google-Smtp-Source: ABdhPJz1ugKObyyG4mH+yzT9VYatomqbXMb8NlS+r1gvglPcDXX/h2foGoNLeKRVXSQhHkck2r+o3Q==
-X-Received: by 2002:a05:6830:40b3:: with SMTP id x51mr8335173ott.106.1617899777258;
-        Thu, 08 Apr 2021 09:36:17 -0700 (PDT)
+        bh=NYDcu4hyoGNNOIjaj6/m1ZBNUWz3ivWziaZ95j9htLs=;
+        b=sp+F6BQSs25mTQ7w0sglryrHQojfbur0F8XBjPZDjnr6p4gPkzklpkvW86Q6sS6nIe
+         Lo6npdTIqwMxLS5QnTbVURmZKr7Mfx9QTf4IV8lwUooR767A03zIXVPnkIPPn/It8vl+
+         aGfVLzXUkpeBdP8D/REOnevKMQfO5Nn8Dinsy0HO5YFw+D3/rfouwyYFV1+XxP5SMYp3
+         Bl5TXaGHmHwGVbeJsnWjs3+I38M1j8hZ6/8VBb5iJGYhLBotHaMakYlnTS+Z0Qju9SOy
+         7QqF3aNkAqmVxNuc5KDNikSONmAX1Dxh+5bSHsigGGAqvhga32Yrh1GSkKUxljmFLFoW
+         D7/Q==
+X-Gm-Message-State: AOAM530fxTcRr+ssGsjLBNAti697p9DrjkZQX0REOvioviulbxeM7pNS
+	GMBovmh7CFLHf0RqeLS438OzQ0mp5+c=
+X-Google-Smtp-Source: ABdhPJxzATGRxiE3zIys4F1Q/4OzZt4DOuopUY9HtI/Dhudfu+5cEaTPQ6Drp/N0rvRpQYNgQWfb4g==
+X-Received: by 2002:a05:6830:817:: with SMTP id r23mr8160487ots.234.1617899778020;
+        Thu, 08 Apr 2021 09:36:18 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.16
+        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.17
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 09:36:16 -0700 (PDT)
+        Thu, 08 Apr 2021 09:36:17 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 01/64] bpftool: improve reproducibility
-Date: Thu,  8 Apr 2021 09:35:08 -0700
-Message-Id: <2c5a2f12a80e2aac93e3a46354d45ab4d87f635a.1617899100.git.akuster808@gmail.com>
+Subject: [hardknott 02/64] libssh: add gcrypt to PACKAGECONFIG
+Date: Thu,  8 Apr 2021 09:35:09 -0700
+Message-Id: <603f75b0759e7f26e5eb80ba27ccd8683e68439f.1617899100.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617899100.git.akuster808@gmail.com>
 References: <cover.1617899100.git.akuster808@gmail.com>
 
-From: "INC@Cisco)" <INC@Cisco)>
+From: Valentin Longchamp <valentin@longchamp.me>
 
-Pass -f(debug|macro)-prefix-map through CC because libbpf
-build system overrides CFLAGS. Also remap STAGING_KERNEL_DIR
-because it is also stored in resulting executable
+This would allow to build it without libgcrypt (relying instead on
+libcrypto).
 
-Signed-off-by: Denys Zagorui <dzagorui@cisco.com>
+Enable it by default to keep the recipe behaving the same wihtout a
+configuration change.
+
+Signed-off-by: Valentin Longchamp <valentin@longchamp.me>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 120de5e02ae4d48bb75e910caa2b7f4ae4b3d025)
+(cherry picked from commit 86eb692a4e96b77857a4160a12625fc694812d52)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-kernel/bpftool/bpftool.bb | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/libssh/libssh_0.8.9.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
-index 15143a90b2e..f0696db59b1 100644
---- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
-+++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
-@@ -9,7 +9,16 @@ inherit bash-completion kernelsrc kernel-arch
+diff --git a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
+index 39ed8a8fbbb..2aff2c8781d 100644
+--- a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
++++ b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
+@@ -4,7 +4,7 @@ SECTION = "libs"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=dabb4958b830e5df11d2b0ed8ea255a0"
  
- do_populate_lic[depends] += "virtual/kernel:do_patch"
+-DEPENDS = "zlib openssl libgcrypt"
++DEPENDS = "zlib openssl"
  
--EXTRA_OEMAKE = "V=1 -C ${S}/tools/bpf/bpftool O=${B} CROSS=${TARGET_PREFIX} CC="${CC}" LD="${LD}" AR=${AR} ARCH=${ARCH}"
-+EXTRA_OEMAKE = "\
-+    V=1 \
-+    -C ${S}/tools/bpf/bpftool \
-+    O=${B} \
-+    CROSS=${TARGET_PREFIX} \
-+    CC="${CC} ${DEBUG_PREFIX_MAP} -fdebug-prefix-map=${STAGING_KERNEL_DIR}=${KERNEL_SRC_PATH}" \
-+    LD="${LD}" \
-+    AR=${AR} \
-+    ARCH=${ARCH} \
-+"
+ SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=stable-0.8"
+ SRCREV = "04685a74df9ce1db1bc116a83a0da78b4f4fa1f8"
+@@ -13,13 +13,13 @@ S = "${WORKDIR}/git"
  
- SECURITY_CFLAGS = ""
+ inherit cmake
  
+-PACKAGECONFIG ??=""
++PACKAGECONFIG ??= "gcrypt"
+ PACKAGECONFIG[gssapi] = "-DWITH_GSSAPI=1, -DWITH_GSSAPI=0, krb5, "
++PACKAGECONFIG[gcrypt] = "-DWITH_GCRYPT=1, -DWITH_GCRYPT=0, libgcrypt, "
+ 
+ ARM_INSTRUCTION_SET_armv5 = "arm"
+ 
+ EXTRA_OECMAKE = " \
+-    -DWITH_GCRYPT=1 \
+     -DWITH_PCAP=1 \
+     -DWITH_SFTP=1 \
+     -DWITH_ZLIB=1 \
 -- 
 2.17.1
 
