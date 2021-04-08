@@ -1,124 +1,149 @@
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web10.3464.1617854849409958019
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.3])
+ by mx.groups.io with SMTP id smtpd.web08.3795.1617858680511309277
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Apr 2021 21:07:29 -0700
+ Wed, 07 Apr 2021 22:11:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=slc7VNP8;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id mj7-20020a17090b3687b029014d162a65b6so2419511pjb.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Apr 2021 21:07:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=sSz/iFSx+yohLUtVvTX433Qvl2fn2pmIPEjVE32TVr0=;
-        b=slc7VNP8NE1TIk0Jk2WfvQq1iweuoeYDpmgywSu4jloeZOG8z3oVoHUeE+9C2x6N7x
-         sAGoCU5JWh/EqV+hVjVau5oCiZXso2/TA5GeOHtF+Ae4Jvr5DSGWTZUbK5uKpEBEwthv
-         7KIRvuN8XKtE4iB819F6mY6lJ1NKQEVYk1OkF8hixLCWFBuZTp/jJzgCo2bCefKT5Qmc
-         evOnfxmAiLUdhUUEXmlbVG36RdSKB+KWiVYp9yj9OC66Y2Fhvi3Osb9Sq7HJSGXi32LN
-         eTcfbLLecAlj/6v8IpSwoPHcNY9/cBuwQVaEdDIIuuOMl0JSI4+C0FGfoui1kKHJ52VH
-         TxNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=sSz/iFSx+yohLUtVvTX433Qvl2fn2pmIPEjVE32TVr0=;
-        b=GAFQFFpT1ZS8jbQSRSqtCzvigzdFSxeSG52R9oYbTAUHpmBs4PKW8gPoIQr75knm6+
-         mT+d8pRGpyUWGNpbcY1FDXmVVM/LmzHnQTv6M8oWnmVA+Dabjm4U40bTI6j3VMzkZA9a
-         tYzR7S4hUpO4IFF7eb+1p2+pzkgID71RYTl7XLqftHH6wFvx9LaJIpevTTtomqjE/QJj
-         Hwg5HOUDbFHBF0WbMRo/LeDWe1Th891eZ9t9tVllXCPjihzbLDzbA1PC06+qK6kAldrE
-         a3ObmfNGuOBRgQVN1lL3nf08SrsjGVbcAxHimQB49IMuLohyO+VamPjI1Ad3DdFfjN+n
-         TeVQ==
-X-Gm-Message-State: AOAM531Lpygp4vjitiNlLRVSUh4MESxNUT9pcWWUX5M386oqH0AzFVDM
-	ddTrtvMWDveNCkBXQhPmKjVMYpnF2TlAwQ==
-X-Google-Smtp-Source: ABdhPJwiz68JiiILmbOllVgyGTgkNwteCzRGUNebzfSmUJUTwJN0lSVpy1UM6FVKzCKJ2GsicN82UQ==
-X-Received: by 2002:a17:90a:528b:: with SMTP id w11mr6390672pjh.162.1617854848512;
-        Wed, 07 Apr 2021 21:07:28 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::bc1b])
-        by smtp.gmail.com with ESMTPSA id n16sm22734918pff.119.2021.04.07.21.07.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Apr 2021 21:07:28 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] opencv: Upgrade to 5.4.2
-Date: Wed,  7 Apr 2021 21:07:26 -0700
-Message-Id: <20210408040726.941701-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=v70TYp3+;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.3, mailfrom: zangrc.fnst@fujitsu.com)
+Return-Path: <zangrc.fnst@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1617858678; i=@fujitsu.com;
+	bh=dmWyGWCtH1A6Kt8lUSYMtj8Xz+nwv2D8AhvYeSdF810=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=v70TYp3+NDT3tbGwE+rJxdqTnTAaTRFRIp6B39wdBXyAz8OmLHBnffTcoiOMw2uNl
+	 Q8tocCAtaKSXYSIpk7jTSK0nHTrV0TxvMP1kmwSQjLpt+UNKKvd1bRsDfpC+IS+xgk
+	 NjSpXCqJzpdIfNWfmf+LgCIOCkkDKmJEnzdAKaUs/r3aHaHPcu7vIA13cVTlYOiUMh
+	 0bBoA7NWqGt3Ej2y1WfCFnDnZ4RtHq1hfbsT9wVN9MC39SDMKLsgURtd/eO82z5doc
+	 MjYgMTs6jD+2P9S2TgUTmufxKmoIAa6AQYw20hwCRodx0sN/x2qaEH6z6ob5jpBTXx
+	 s4Aqh4n3C104A==
+Received: from [100.113.0.194] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta.az-a.eu-central-1.aws.symcld.net id 3A/04-41911-6709E606; Thu, 08 Apr 2021 05:11:18 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprJIsWRWlGSWpSXmKPExsViZ8MRqls6IS/
+  BYPUSC4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePNpPPMBXelK65Of8/cwLhAoouRi0NIYCuT
+  xJWJ59khnOOMEn3PLgE5nBxsAjoSHS+6WUBsEQF9iaWz9zCD2MICNhJLO28ygtgsAioSO9cdA
+  qvhFXCTmL/tOlivhICCxJSH75kh4oISJ2c+AathFpCQOPjiBTNEjaLE9p1nWCDsKomzs78wTW
+  DkmYWkZRaSlgWMTKsYLZOKMtMzSnITM3N0DQ0MdA0NjXUNdY2MzPQSq3QT9VJLdZNT80qKEoG
+  yeonlxXrFlbnJOSl6eaklmxiBoZRSyPhoB+Pp1x/0DjFKcjApifLaPclNEOJLyk+pzEgszogv
+  Ks1JLT7EKMPBoSTBe6EtL0FIsCg1PbUiLTMHGNYwaQkOHiUR3qxeoDRvcUFibnFmOkTqFKMux
+  +Xr8xYxC7Hk5eelSonzSoMUCYAUZZTmwY2AxdglRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSs
+  K8u/qApvBk5pXAbXoFdAQT0BElB3NBjihJREhJNTAtOb7mD+PF3TyHNS7JHVQWPCX6I3P6HSZ
+  ntz/T2ua4NSUY/d62X1k++lDM6yNzdF03Ho18G9Oa189ecvHcm4gVe5c99os6otbRsNDEjnPb
+  dn3W2u+t5bVXz/bEmql7xar67098X/1KYr3sqr1aqb4nr02Itio+qPprpapAcolKnYVzls3vd
+  9NcG+1euV0+fCryh6Z6XcXnc1sSV9/Xu39P6qeNwjleb6ZvW13kjf6XmeV5qDnt7/rxIbL9/x
+  qWLdfLj854lbryh7FPTX+J6ccFX7dc2x/5yUbovt0kIZtWploX6VexD9oy7EVe2H4uqtqwdfn
+  hWRqNHuuCzRTWHZyo7nciT4DlxNZJEsW3Lz9QYinOSDTUYi4qTgQAKw7ETiwDAAA=
+X-Env-Sender: zangrc.fnst@fujitsu.com
+X-Msg-Ref: server-28.tower-228.messagelabs.com!1617858677!936958!1
+X-Originating-IP: [62.60.8.85]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.60.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 6660 invoked from network); 8 Apr 2021 05:11:17 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-28.tower-228.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 Apr 2021 05:11:17 -0000
+Received: from R01UKEXCASM223.r01.fujitsu.local (ex2k13_223.fs.fujitsu.com [10.182.185.121])
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1385B92w021727
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 8 Apr 2021 06:11:17 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Thu, 8 Apr 2021 06:11:08 +0100
+From: "zangrc" <zangrc.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-oe] [PATCH v3] xterm: upgrade 366 -> 367
+Date: Fri, 9 Apr 2021 01:10:59 +0800
+Message-ID: <1617901859-4838-1-git-send-email-zangrc.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
+Content-Type: text/plain
 
-Drop patch which is already in 5.4.2 release
+-License-Update: Copyright year updated to 2021.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Refresh the following patch:
+0001-Add-configure-time-check-for-setsid.patch
+
+Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- ...building-opencv-using-gcc-11.x-19244.patch | 28 -------------------
- .../{opencv_4.5.1.bb => opencv_4.5.2.bb}      |  5 ++--
- 2 files changed, 2 insertions(+), 31 deletions(-)
- delete mode 100644 meta-oe/recipes-support/opencv/opencv/0001-Fix-building-opencv-using-gcc-11.x-19244.patch
- rename meta-oe/recipes-support/opencv/{opencv_4.5.1.bb => opencv_4.5.2.bb} (98%)
+ .../0001-Add-configure-time-check-for-setsid.patch     | 10 +++++-----
+ .../xorg-app/{xterm_366.bb => xterm_367.bb}            |  4 ++--
+ 2 files changed, 7 insertions(+), 7 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-app/{xterm_366.bb => xterm_367.bb} (89%)
 
-diff --git a/meta-oe/recipes-support/opencv/opencv/0001-Fix-building-opencv-using-gcc-11.x-19244.patch b/meta-oe/recipes-support/opencv/opencv/0001-Fix-building-opencv-using-gcc-11.x-19244.patch
-deleted file mode 100644
-index ce6499bfce..0000000000
---- a/meta-oe/recipes-support/opencv/opencv/0001-Fix-building-opencv-using-gcc-11.x-19244.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From 67e1a5400383543b28fc69eb09c9429cb9d8c026 Mon Sep 17 00:00:00 2001
--From: Your Name <you@example.com>
--Date: Sat, 2 Jan 2021 17:43:11 +0000
--Subject: [PATCH] Fix building opencv using gcc 11.x #19244
--
--Add missing `#include <thread>` in modules/gapi/test/test_precomp.hpp
--
--Upstream-Status: Backport [https://github.com/opencv/opencv/pull/19247]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- modules/gapi/test/test_precomp.hpp | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/modules/gapi/test/test_precomp.hpp b/modules/gapi/test/test_precomp.hpp
--index 7b3c695443..e92b1d03bf 100644
----- a/modules/gapi/test/test_precomp.hpp
--+++ b/modules/gapi/test/test_precomp.hpp
--@@ -11,6 +11,7 @@
-- #define __OPENCV_GAPI_TEST_PRECOMP_HPP__
-- 
-- #include <cstdint>
--+#include <thread>
-- #include <vector>
-- 
-- #include <opencv2/ts.hpp>
---- 
--2.30.1
--
-diff --git a/meta-oe/recipes-support/opencv/opencv_4.5.1.bb b/meta-oe/recipes-support/opencv/opencv_4.5.2.bb
-similarity index 98%
-rename from meta-oe/recipes-support/opencv/opencv_4.5.1.bb
-rename to meta-oe/recipes-support/opencv/opencv_4.5.2.bb
-index d87e140ba7..553fb4e08a 100644
---- a/meta-oe/recipes-support/opencv/opencv_4.5.1.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_4.5.2.bb
-@@ -10,8 +10,8 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm/0001-Add-configure-time-check-for-setsid.patch b/meta-oe/recipes-graphics/xorg-app/xterm/0001-Add-configure-time-check-for-setsid.patch
+index d3beea8be..92ecdac22 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xterm/0001-Add-configure-time-check-for-setsid.patch
++++ b/meta-oe/recipes-graphics/xorg-app/xterm/0001-Add-configure-time-check-for-setsid.patch
+@@ -18,7 +18,7 @@ diff --git a/configure b/configure
+ index 0aafefc..03e8df0 100755
+ --- a/configure
+ +++ b/configure
+-@@ -5411,6 +5411,7 @@ for ac_func in \
++@@ -5605,6 +5605,7 @@ for ac_func in \
+  	unsetenv \
+  	sched_yield \
+  	setpgid \
+@@ -42,7 +42,7 @@ diff --git a/main.c b/main.c
+ index 5e60589..b81d2be 100644
+ --- a/main.c
+ +++ b/main.c
+-@@ -2868,7 +2868,7 @@ main(int argc, char *argv[]ENVP_ARG)
++@@ -2903,7 +2903,7 @@ main(int argc, char *argv[]ENVP_ARG)
+      }
+  }
+  
+@@ -51,7 +51,7 @@ index 5e60589..b81d2be 100644
+  #define USE_OPENPTY 1
+  static int opened_tty = -1;
+  #endif
+-@@ -4040,7 +4040,7 @@ spawnXTerm(XtermWidget xw, unsigned line_speed)
++@@ -4074,7 +4074,7 @@ spawnXTerm(XtermWidget xw, unsigned line_speed)
+  	    /*
+  	     * now in child process
+  	     */
+@@ -64,14 +64,14 @@ diff --git a/xtermcfg.hin b/xtermcfg.hin
+ index 1dbc3b8..4f3ff5b 100644
+ --- a/xtermcfg.hin
+ +++ b/xtermcfg.hin
+-@@ -96,6 +96,7 @@
++@@ -95,6 +95,7 @@
+  #undef HAVE_PUTENV		/* AC_CHECK_FUNCS(putenv) */
+  #undef HAVE_SCHED_YIELD		/* AC_CHECK_FUNCS(sched_yield) */
+  #undef HAVE_SETPGID		/* AC_CHECK_FUNCS(setpgid) */
+ +#undef HAVE_SETSID		/* AC_CHECK_FUNCS(setsid) */
+  #undef HAVE_STDINT_H		/* AC_PROG_CC_STDC */
+  #undef HAVE_STDLIB_H		/* AC_CHECK_HEADERS(stdlib.h) */
+- #undef HAVE_STRFTIME		/* AC_CHECK_FUNCS(strftime) */
++ #undef HAVE_STDNORETURN_H	/* CF_C11_NORETURN */
+ -- 
+ 2.24.1
  
- DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_366.bb b/meta-oe/recipes-graphics/xorg-app/xterm_367.bb
+similarity index 89%
+rename from meta-oe/recipes-graphics/xorg-app/xterm_366.bb
+rename to meta-oe/recipes-graphics/xorg-app/xterm_367.bb
+index 969159bc5..e0d3dcec1 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xterm_366.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xterm_367.bb
+@@ -2,13 +2,13 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
+ SUMMARY = "xterm is the standard terminal emulator for the X Window System"
+ DEPENDS = "libxaw xorgproto libxext libxau libxinerama libxpm ncurses desktop-file-utils-native"
  
--SRCREV_opencv = "1363496c1106606684d40447f5d1149b2c66a9f8"
--SRCREV_contrib = "b91a781cbc1285d441aa682926d93d8c23678b0b"
-+SRCREV_opencv = "69357b1e88680658a07cffde7678a4d697469f03"
-+SRCREV_contrib = "f5d7f6712d4ff229ba4f45cf79dfd11c557d56fd"
- SRCREV_ipp = "a56b6ac6f030c312b2dce17430eef13aed9af274"
- SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
- SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
-@@ -49,7 +49,6 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
-            file://0001-Dont-use-isystem.patch \
-            file://download.patch \
-            file://0001-Make-ts-module-external.patch \
--           file://0001-Fix-building-opencv-using-gcc-11.x-19244.patch \
-            "
- SRC_URI_append_riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=../contrib"
+-LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=996b1ce0584c0747b17b57654cc81e8e"
++LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=987de9787175385203a1ea2482246a17"
  
+ SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz \
+            file://0001-Add-configure-time-check-for-setsid.patch \
+           "
+ 
+-SRC_URI[sha256sum] = "858b2885963fe97e712739066aadc1baeba2b33a0016303a7fec7d38bc73bf6e"
++SRC_URI[sha256sum] = "27f1a8b1c756e269fd5684e60802b545f0be9b36b8b5d6bdbc840c6b000dc51f"
+ 
+ PACKAGECONFIG ?= ""
+ PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
 -- 
-2.31.1
+2.25.1
 
