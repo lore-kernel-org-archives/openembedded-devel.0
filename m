@@ -1,59 +1,59 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.66])
- by mx.groups.io with SMTP id smtpd.web09.4027.1617859708567622632
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web11.3982.1617859737399662871
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Apr 2021 22:28:28 -0700
+ Wed, 07 Apr 2021 22:28:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ic83AiEK;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.66, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=dw2MNTzM;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1617859706; i=@fujitsu.com;
-	bh=6zFOPx+RdD9eeR2LLcGpvAktMq+B+0tL22fX6lvfSoY=;
+	s=170520fj; t=1617859735; i=@fujitsu.com;
+	bh=BAE1i5zCDcByecpCmZOdhrnQTynmpo3+TKiL2rTs/yE=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=ic83AiEKIAGgEo1AL9fvTkbpWAM2ggkUMzZAQgVqVLDlfs+HtjsBUILrh1oGPse4L
-	 rLjMbE5Ii/ie9cxbQLXkzBat0uvn+Z7j/2w+SNP2gTPcUE9g8KcCyEBNQociWj98mm
-	 tyFp7VOGjaCfJHmuwXdlJlFC4V6slJ1n6XKLY4KakgW+iE+liezpzGLAdXctgnVmJH
-	 lrJRNIy1YQ7HyXv5QoYpMj8AYSrF2ZmBFt/cSq4ykYeJqpwPiy68/dWzZhh0qYXTuz
-	 /gIxHEj0PNikQHTYu2A9OlgY6bMHBUxFAv8UX2kXFhj2KDOGAlE2kHHK4POKqgn8LO
-	 XZqgGNoTuSj0g==
-Received: from [100.112.199.60] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-b.eu-west-1.aws.symcld.net id 4A/26-60958-A749E606; Thu, 08 Apr 2021 05:28:26 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYols5JS/
-  B4OJSa4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPbKfeCX6wVj+beYmlg3MjaxcjFISSwlUni
-  WttBNgjnOKPEqle3mboYOTnYBHQkOl50s4DYIgL6Ektn72EGsYUF7CTOfzwLVsMioCJx8fgdR
-  hCbV8BNYs+6XWD1EgIKElMevmeGiAtKnJz5BCzOLCAhcfDFC2aIGkWJ7TvPQNVXSZyd/YVpAi
-  PPLCQts5C0LGBkWsVokVSUmZ5RkpuYmaNraGCga2hopGtoaa5raGyul1ilm6SXWqpbnlpcomu
-  ol1herFdcmZuck6KXl1qyiREYRikFRzt3MP569UHvEKMkB5OSKG/WpLwEIb6k/JTKjMTijPii
-  0pzU4kOMMhwcShK8F9qAcoJFqempFWmZOcCQhklLcPAoifCmgbTyFhck5hZnpkOkTjEqSonz3
-  p4MlBAASWSU5sG1weLoEqOslDAvIwMDgxBPQWpRbmYJqvwrRnEORiVh3ocgU3gy80rgpr8CWs
-  wEtLjkYC7I4pJEhJRUA1N6vM6rvcxxczmueLh6yXgWbtCTNov5477sk8n6pw2836Oe1p45Hxv
-  ifTWXxUNz17re5avD+8oXiXosW/fJxOpKTsA0Ea4qxpZPqQc/hRnv8LZbXHx4ydUiyf9ykx+r
-  8d6vvjx9Rqr9bG4HBrPdjw4kHRBJvci6eMYJL7aKCycjFZndSmO5yk1lF4tPK+F2aFur932t/
-  cyVFn+SlY9rSkuv6mNYsGFjtUzlxBdBffxeApr53Gdqd649P+9f3WUt8QkJNxhVZf6bhL7uMV
-  PsFtSaqin3+3NG+OF3odyPdRn1SjZWdD068cvxa5uLzBGnX+fEE3T2h3L+O7HAkXFflFaWmNL
-  Biq70R5btVz3XKbEUZyQaajEXFScCAM87zoweAwAA
+	b=dw2MNTzM6HaPuAdEnvLZvGLq/hBubMXMbFYab3SNaYRpLTkjE91uMk4dR+eXnz2Iq
+	 XlaqXTFcBIRoR3Ypvz02C7887fEiV0fUIMWDIhWm9eIeKrP6mgASto0Gy7FFPMvhHW
+	 sKOPPBrtPgYsnAQg6GDtWmDYlUAWuYmjXX9pRj3Hh12ZnI1kudpFXYQYxYwgn5F/Y8
+	 9qux2RT2+upcwOEK0aoPKP8zeQifeNAmNxktC308S+sfOQLWUNRQvlqO3qJ2Kx+s5p
+	 5rNiJ+gJ4NmVWUL9qq+qSd/mkJsvI8T8wPDcg5UPeAUA6LG2VVrk0ar04OiAC1pqYB
+	 sc70zriM627uQ==
+Received: from [100.113.6.193] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-b.eu-central-1.aws.symcld.net id CC/9E-14281-7949E606; Thu, 08 Apr 2021 05:28:55 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprJIsWRWlGSWpSXmKPExsViZ8MRqjt9Sl6
+  CwYf/jBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8budx8YC85wVhw9u5apgfEFRxcjF4eQwFYm
+  iecdd9khnOOMEotWPGbqYuTkYBPQkeh40c0CYosI6Essnb2HGcQWFnCV2LTpBjuIzSKgIrFo4
+  n1GEJtXwE3i2aojYDUSAgoSUx6+Z4aIC0qcnPkEbA6zgITEwRcvoGoUJbbvPMMCYVdJnJ39hW
+  kCI88sJC2zkLQsYGRaxWiZVJSZnlGSm5iZo2toYKBraGisa6JraGygl1ilm6SXWqqbnJpXUpQ
+  IlNVLLC/WK67MTc5J0ctLLdnECAyllEKWph2Mv1990DvEKMnBpCTKmzUpL0GILyk/pTIjsTgj
+  vqg0J7X4EKMMB4eSBO+FNqCcYFFqempFWmYOMKxh0hIcPEoivGkgrbzFBYm5xZnpEKlTjLocX
+  1YtWcQsxJKXn5cqJc6bOhmoSACkKKM0D24ELMYuMcpKCfMyMjAwCPEUpBblZpagyr9iFOdgVB
+  LmnQyyiiczrwRu0yugI5iAjig5mAtyREkiQkqqganwiGNfyuR/gaUHefpz12U8/mItvv7oU3d
+  tA4OXt8ssNrVVqFz2cSqL1v277OfH/Gs2l200Sv6b5SntsX8+95/hRfs99/cV5MikTXVxb8hd
+  WPBhs92uD7P3dfPZrORnTrNYenHtTpGZ6jc4pljxMfIHlB9o4eKf9nna0+/Oh0/U2jB8PHP69
+  72f+4+VrJnpEezza0fpxl3L5/RWqJV/8uGfyr7HWu64hhlruenykHucav83fzZ7XqCcqST8xb
+  1u6tOQex27L7Zm1vksWrazXWXf7p7vRY/rt5+6+VFsi7r8xqSQ67t3v1hv1n3N0m3PkYnMR45
+  eDHKabPNJMqFVITWgoERA7NK/E3X6Ktx+05YpsRRnJBpqMRcVJwIACR5awSwDAAA=
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-3.tower-287.messagelabs.com!1617859705!606794!1
-X-Originating-IP: [62.60.8.148]
+X-Msg-Ref: server-18.tower-238.messagelabs.com!1617859734!1492446!1
+X-Originating-IP: [62.60.8.85]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.60.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 18596 invoked from network); 8 Apr 2021 05:28:25 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-3.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 Apr 2021 05:28:25 -0000
+Received: (qmail 29623 invoked from network); 8 Apr 2021 05:28:54 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-18.tower-238.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 Apr 2021 05:28:54 -0000
 Received: from R01UKEXCASM223.r01.fujitsu.local (ex2k13_223.fs.fujitsu.com [10.182.185.121])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1385SMp6019009
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1385Sste025944
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 8 Apr 2021 06:28:25 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 8 Apr 2021 06:28:54 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 8 Apr 2021 06:28:20 +0100
+ (TLS) id 15.0.1497.2; Thu, 8 Apr 2021 06:28:53 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] hwdata: upgrade 0.345 -> 0.346
-Date: Fri, 9 Apr 2021 01:28:14 +0800
-Message-ID: <1617902894-5351-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] live555: upgrade 20210322 -> 20210406
+Date: Fri, 9 Apr 2021 01:28:47 +0800
+Message-ID: <1617902927-5429-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -63,24 +63,26 @@ Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- meta-oe/recipes-support/hwdata/hwdata_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../live555/{live555_20210322.bb => live555_20210406.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-multimedia/live555/{live555_20210322.bb => live555_20210406.bb} (97%)
 
-diff --git a/meta-oe/recipes-support/hwdata/hwdata_git.bb b/meta-oe/recipes-support/hwdata/hwdata_git.bb
-index 56d814db8..738c32d63 100644
---- a/meta-oe/recipes-support/hwdata/hwdata_git.bb
-+++ b/meta-oe/recipes-support/hwdata/hwdata_git.bb
-@@ -5,8 +5,8 @@ SECTION = "System/Base"
- LICENSE = "GPL-2.0+"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1556547711e8246992b999edd9445a57"
+diff --git a/meta-oe/recipes-multimedia/live555/live555_20210322.bb b/meta-oe/recipes-multimedia/live555/live555_20210406.bb
+similarity index 97%
+rename from meta-oe/recipes-multimedia/live555/live555_20210322.bb
+rename to meta-oe/recipes-multimedia/live555/live555_20210406.bb
+index 891338548..cc138adb6 100644
+--- a/meta-oe/recipes-multimedia/live555/live555_20210322.bb
++++ b/meta-oe/recipes-multimedia/live555/live555_20210406.bb
+@@ -16,7 +16,7 @@ SRC_URI = "https://download.videolan.org/pub/contrib/live555/live.${URLV}.tar.gz
+ # only latest live version stays on http://www.live555.com/liveMedia/public/, add mirror for older
+ MIRRORS += "http://www.live555.com/liveMedia/public/ http://download.videolan.org/contrib/live555/ \n"
  
--PV = "0.345"
--SRCREV = "5d7d97bae533401f60ce9a5a036ff7152c8aca8c"
-+PV = "0.346"
-+SRCREV = "a2bff16032a68b089eeb169f09dea08094891c9c"
- SRC_URI = "git://github.com/vcrhonek/${BPN}.git"
+-SRC_URI[sha256sum] = "b451c7ded8becbfa239e8f4fbe69784413270fb4c5e9b2e74269247dc3dd2e59"
++SRC_URI[sha256sum] = "0bd182fac7d6297d924af4405ce840515a38fa5438cb1a4b90fcb6bc737b36d6"
  
- S = "${WORKDIR}/git"
+ S = "${WORKDIR}/live"
+ 
 -- 
 2.25.1
 
