@@ -1,84 +1,90 @@
-Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com [209.85.167.179])
- by mx.groups.io with SMTP id smtpd.web12.240.1617899805870287074
+Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com [209.85.210.42])
+ by mx.groups.io with SMTP id smtpd.web09.266.1617899807070758070
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Apr 2021 09:36:46 -0700
+ Thu, 08 Apr 2021 09:36:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ox8DgGzn;
- spf=pass (domain: gmail.com, ip: 209.85.167.179, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f179.google.com with SMTP id 25so1317750oiy.5
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ODlTtZa4;
+ spf=pass (domain: gmail.com, ip: 209.85.210.42, mailfrom: akuster808@gmail.com)
+Received: by mail-ot1-f42.google.com with SMTP id h6-20020a0568300346b02901b71a850ab4so2890946ote.6
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=/zO6KjRyM8AtY4N5zcbe5vH9FsnBZ5RjjKCT+KZMHKU=;
-        b=Ox8DgGzn0AEVbVhtIjgUa+4UOgCwBwwP6p9Yu4jPNL7ng/dgS+ILP4PQJ1t1A98+2a
-         LM4myQ0bKvRyHKOJGCilcMqxnSqbrkIpNtjBUUehPmUFJbwM3UzS/EDyq6Idqt68XI3H
-         EHvAffg0QG0qfyR618vlv2EwTMTs9wUob/Sbrf0MjFwu5qNO39h2DWhk8cCcFdda4TpS
-         OPfAtEkvjEh2Vdmp8pAoBPDFQJOAI2Loc5OY/jWiOwiZSeBD5UUIz05xa7wAoG7iESvt
-         r4Ahp7RmtlQWy6yNC3Hj4DKpXbg0DkPGPe9glBJebzi5V8oxnAIH9FTh4hd/DgJ8Kdrl
-         nLlQ==
+        bh=sIkluJmTinDa29qEhomT4KQKagMtvcW4ttCInw5k2k8=;
+        b=ODlTtZa4D3/6ki+74OTP3X8nlDFBZtgXO0figsDLN3U3KsAGs+/coRt2aviGjnPYsT
+         PwsFjDqXvgfJ2ZzzvEyiRSLunJe+Vh3tGpitIs/I/IFcTS8N6/vYByMSYYqTz8Q+JLMH
+         kk0hNgXiz40W/LFkj1Iqe6nXS9qZv+NQM00BleutgbpBvb8kbygh64K+hdJnd5X4x0TK
+         hMUWI6k4uCHJ8p8Rrak6QvFJqUQPMesJLDe9EyCFflqitzkXIOi9D0dpyAyDGZFDceiA
+         KQEdQVK1UzkbBIRnSc9Vn5H4oV6oGliSEbI9I3UKflp8Cxek5RwmGvkloyA1zNaPUCMu
+         4fhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=/zO6KjRyM8AtY4N5zcbe5vH9FsnBZ5RjjKCT+KZMHKU=;
-        b=HufkqcSvvyfoHwhztRsMjXnJJBh4y6lpXeR9XzaMm+U6PYJltVRYTyUb7lRyHY7DdE
-         AEatAAaxe2fi2r8N6JtjfHkLIBZRVP1H1WL+rV9GKRsO9vyqHBvrzEl5jael/n5EA/MP
-         t2EbY3NgxbyUmOND9dSfbuCFdMMhaIGdPBbbsIMY0Oz0j5FmUNe23s5QZ2l5hovtDidk
-         qfYBlUyY30w9oOqyCZGgcqyoYkjLGGEWABTGA4H1MlIDFG4sLD17hw934RyGcgbffY8h
-         CAJHRE/28pJC/S44u8I1aOUG9DLv2/J08+j+BOI6iMjZ2DBxgFdqyEzEjcaviC21AVR9
-         Kp+w==
-X-Gm-Message-State: AOAM531KUOSmlgumF/mIw2WkjduUuYbOS5Mexx+Fu2gtud1poney0ltW
-	nm8+vvNXbGhsByi3Bp34e6USqaR1m3E=
-X-Google-Smtp-Source: ABdhPJyDSHqKrbdIaVSQpaPUgQqeB8qmFw3uLjFGQ96KvaLvaQ+313lNzA9fvXt8Rw4J/shBcCq75w==
-X-Received: by 2002:aca:d787:: with SMTP id o129mr7022396oig.40.1617899804994;
-        Thu, 08 Apr 2021 09:36:44 -0700 (PDT)
+        bh=sIkluJmTinDa29qEhomT4KQKagMtvcW4ttCInw5k2k8=;
+        b=ftkllxAYe+qenY6iq4WDOOMw0k+6O09USkMj2QjXOfY3fb0I1Pn6BoPSfX6bxOaGN/
+         xfqUHgHRCT/WL3w4/brCROTXTxYsImL4kf6cvOtrd3iPaFG0lr6kBxA4udGrlD/YHMoY
+         RhsXeFywx2arF0hClxZ26IkTqTvWteWLP0pmvEEtSrAzaHO3yCOtZowDcBiqB3qWES1J
+         uwK33YlqNWKYbI+jZxeupQzGcHqg9gvD0fozDQqX2RT5WlH+CKkaTB3cpXv9HYZINA2f
+         N0pUemjOvJaU1DZi360cOKbCr/Ahi3HaIKeI22jkXvVKagTw/vMpdx2jzjjIAz/AekoV
+         brww==
+X-Gm-Message-State: AOAM531XIfrpfmU1FOgb5/mBhD3ygPKXA04g33cStbigLLZAKWMv9cxF
+	p47tkw3zIpMoBTXCiLxU8NuLXadL5ZY=
+X-Google-Smtp-Source: ABdhPJwl3m4DyX3E2512Tp7EgUBqsq83Ob+NA7myX4NQhek8yxPELHe8J+YNP1WGkGzar74m1ItAzA==
+X-Received: by 2002:a05:6830:1c2b:: with SMTP id f11mr8616477ote.125.1617899805898;
+        Thu, 08 Apr 2021 09:36:45 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.44
+        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.45
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 09:36:44 -0700 (PDT)
+        Thu, 08 Apr 2021 09:36:45 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 35/64] libxaw: upgrade 1.0.13 -> 1.0.14
-Date: Thu,  8 Apr 2021 09:35:42 -0700
-Message-Id: <354aaa21d223f2185a46a968d9e3194dd3199206.1617899100.git.akuster808@gmail.com>
+Subject: [hardknott 36/64] python3-google-api-python-client: Upgrade 2.0.2 -> 2.1.0
+Date: Thu,  8 Apr 2021 09:35:43 -0700
+Message-Id: <6e4d464c883c17bca3f8bc0b4c469c64c290db70.1617899100.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617899100.git.akuster808@gmail.com>
 References: <cover.1617899100.git.akuster808@gmail.com>
 
-From: zangrc <zangrc.fnst@fujitsu.com>
+From: Leon Anavi <leon.anavi@konsulko.com>
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+Upgrade to release 2.1.0:
+
+- Add status_code property on http error handling
+- Change default of static_discovery when discoveryServiceUrl set
+- Correct api version in oauth-installed.md
+- fix .close()
+- Resolve issue where num_retries would have no effect
+- Distinguish between public/private docs in 2.0 guide
+- Update README to promote cloud client libraries
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 454644c578c84062f49b443626b7bb7dfff06060)
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+(cherry picked from commit 212c6a5f1447f92d70c68c06855735927866cfdb)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../xorg-lib/{libxaw_1.0.13.bb => libxaw_1.0.14.bb}          | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-graphics/xorg-lib/{libxaw_1.0.13.bb => libxaw_1.0.14.bb} (82%)
+ ...lient_2.0.2.bb => python3-google-api-python-client_2.1.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-google-api-python-client_2.0.2.bb => python3-google-api-python-client_2.1.0.bb} (78%)
 
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.14.bb
-similarity index 82%
-rename from meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb
-rename to meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.14.bb
-index cb1ffcd8cc9..15f52d8d453 100644
---- a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb
-+++ b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.14.bb
-@@ -5,10 +5,9 @@ DEPENDS += "xorgproto virtual/libx11 libxext libxt libxmu libxpm libxau xmlto-na
- LIC_FILES_CHKSUM = "file://COPYING;md5=1c65719d42900bb81b83e8293c20a364"
+diff --git a/meta-python/recipes-devtools/python/python3-google-api-python-client_2.0.2.bb b/meta-python/recipes-devtools/python/python3-google-api-python-client_2.1.0.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-google-api-python-client_2.0.2.bb
+rename to meta-python/recipes-devtools/python/python3-google-api-python-client_2.1.0.bb
+index 38aa349a6f2..11b94b3fcda 100644
+--- a/meta-python/recipes-devtools/python/python3-google-api-python-client_2.0.2.bb
++++ b/meta-python/recipes-devtools/python/python3-google-api-python-client_2.1.0.bb
+@@ -4,6 +4,6 @@ HOMEPAGE = "https://github.com/googleapis/google-api-python-client"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=94023d14f6b58272fd885e4e3f2f08b3"
  
- PE = "1"
--PR = "r2"
+-SRC_URI[sha256sum] = "48686cceb0dc8cb8b9ee1920ad7c0d9b499ef4fca0ca51c1c69f1e462a628011"
++SRC_URI[sha256sum] = "f9ac377efe69571aea1acc9e15760d4204aca23c4464eb63f963ae4defc95d97"
  
--SRC_URI[md5sum] = "e5e06eb14a608b58746bdd1c0bd7b8e3"
--SRC_URI[sha256sum] = "8ef8067312571292ccc2bbe94c41109dcf022ea5a4ec71656a83d8cce9edb0cd"
-+SRC_URI[md5sum] = "c1ce21c296bbf3da3e30cf651649563e"
-+SRC_URI[sha256sum] = "76aef98ea3df92615faec28004b5ce4e5c6855e716fa16de40c32030722a6f8e"
- 
- do_install_append () {
-     ln -sf libXaw6.so.6 ${D}${libdir}/libXaw.so.6
+ inherit pypi setuptools3
 -- 
 2.17.1
 
