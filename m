@@ -1,80 +1,80 @@
-Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com [209.85.210.42])
- by mx.groups.io with SMTP id smtpd.web08.253.1617899800504374924
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
+ by mx.groups.io with SMTP id smtpd.web11.229.1617899801761762666
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Apr 2021 09:36:40 -0700
+ Thu, 08 Apr 2021 09:36:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=eIjH42/H;
- spf=pass (domain: gmail.com, ip: 209.85.210.42, mailfrom: akuster808@gmail.com)
-Received: by mail-ot1-f42.google.com with SMTP id c24-20020a9d6c980000b02902662e210895so2870517otr.9
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:40 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=vBfaUSYZ;
+ spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f175.google.com with SMTP id k25so2809571oic.4
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=FJyUXOEi+tZKfiVSr4jRwbQX02ghl7R5EQvhIyXXkdI=;
-        b=eIjH42/H/DnrTxCbk/mvZbsPSaGkcBFFaS42jhJHntHAHgx2XtK8gQqvTQQZDszccf
-         CfmHa2rATErrjV28skOMqAgHYKEY0xgd3DbhT2mKG+Ydt/lmHo4axkgEu34Jnoz3hUlH
-         ymtGIKUkS4MlE0hdYi19KRCuMyMnU2JB9RItFylttvZl1Tu2ZF8Uzu9fbv1kiE3o691D
-         EAvw2NxnbEf6altDHtd8o5sTgbmmt0QjDvnwVLLNWUCtfKzCo9XO7T5l4icFRWKbfXdr
-         0R2NJzBXoBZBFLCaEqdKV0d6jUDkA3VsWFzcp8cxPgwolqXmbwylHJA63gQJuaPXYrfY
-         qX6A==
+        bh=CawP+fQ8ZzSj+WQuHSAXEFaqY6Y4CY6F5xZg02mDTnw=;
+        b=vBfaUSYZ2xzFKFMihxi5FLG90TXrXN0/PraxTMpRzpAfjSVxTbJIi2gPURD1gmLXhm
+         nGQa+w8aokG5gL9rFQarAkoYFJo6Xp4voMowVmJ5/oE1VYJrToS7IQjL0tM6fG0sE5QV
+         Hj7UAigsRFnFqE0IGhRIvVI9cE127AgqFH8r4ntk7f2WPzM4gLpTS8xLzFfexRUmx9iz
+         bwY9QEsWmtq2Zk5PIlI/agN/y2Vt7eGBEOriCrH2ihivt7Hq8KckI2/5UnbCDCR70AlY
+         NjdBUs8qIzAJq3c+neTu/+ZwayRtQVoA0dzqcJfsKfD1+104uOFZIdu+8jZNG8Y8Z0Xt
+         fDeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=FJyUXOEi+tZKfiVSr4jRwbQX02ghl7R5EQvhIyXXkdI=;
-        b=r9Kd7F5v0SHBLv2skCYaS5xHrwOT0uClBt+Rkk9NytibjpTA8IwJfquRvpOPAJtH3p
-         fPpTG7xnXz3tFkiVs8GE3yuTIJIN41pqzEROzyPgwD1B2wOYB5jDSlN3xjTV0QJ/L359
-         swCzKjcl100fCYMfjPOYVkJmwrxZGgiiQdBc2l6DfGOjr/ldegPkaJHHCBxSGrPR5WzN
-         RaU+4GKH3+v+tOLWn6IxxkyDDM93B0naowd90ZANQ9hebJhTX5S9yHC5kzf0neRC2y2t
-         5l2UQXaxonqscs8JKw75syaO+WUxdQOxrDvOM/XJTYRLtgxmM9P6AFoK3GbUmHTXDtna
-         6gPg==
-X-Gm-Message-State: AOAM533JutI2SnvyD5CdzvoEG1uXqKbKM7T6HsCBRx9ybt1uIeZEmxw9
-	rtnZU93T9H4AMHDMCL6cM9wyNamKsA0=
-X-Google-Smtp-Source: ABdhPJygamiSsrfodD5FIGst3I2hSACYfSKkzaAnAY47hyyaREgkkMZL5a7qjdxR52GIIsk0dz4Mkw==
-X-Received: by 2002:a05:6830:148c:: with SMTP id s12mr8661038otq.251.1617899799737;
-        Thu, 08 Apr 2021 09:36:39 -0700 (PDT)
+        bh=CawP+fQ8ZzSj+WQuHSAXEFaqY6Y4CY6F5xZg02mDTnw=;
+        b=eZx5QeKFUXi5t7WNxm5xy8LodMC6TaMKCgyjYxheZLIrk90r5w1/MKNTxlR95rOcr1
+         3iqcKzWW6kyK0xkzG50os73UnTqbknIdRA7n5BZJY8R2gMFJmNyPuLe0eMUQTjM8JtYW
+         /pjz44Z8gkvYt2WNm/X1aH654qHDICZD+5bZLJu10DO4IJrmshU105o6EHWXu0ygFWGc
+         3sXwX0aulkouYEMHhqFPWlDMdLvPMwBbSo8KaGl0tKY1HgCUzcBjvFm1tcoa8YNLxX6D
+         ljUd4XaowGajL/eMGxyhjE5fjOiNUOfGdexijvcRTA+nVosUqW2j9PJIrG1P59+z+2X1
+         5O0Q==
+X-Gm-Message-State: AOAM532y4KbjgMkYtt/Sq9AqHGCnJglyuSZ2dTsE5WLmALxMAoxS9swQ
+	TcxGhkDoILVVz3P8hF7ASk6kwEWpQ4c=
+X-Google-Smtp-Source: ABdhPJzlk3dzFsLBlAXYDZmkE9Zfg0nZJnWF4eWGNNnC3jI3d1EK8VS37K+bDvmQzC1rBgKXBc5qVw==
+X-Received: by 2002:aca:4bd6:: with SMTP id y205mr818952oia.77.1617899800977;
+        Thu, 08 Apr 2021 09:36:40 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
         by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.39
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 09:36:39 -0700 (PDT)
+        Thu, 08 Apr 2021 09:36:40 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 29/64] snort: upgrade 2.9.17 -> 2.9.17.1
-Date: Thu,  8 Apr 2021 09:35:36 -0700
-Message-Id: <bc7c6022c711884a31c565021a15cff413fd672f.1617899100.git.akuster808@gmail.com>
+Subject: [hardknott 30/64] emacs: upgrade 27.1 -> 27.2
+Date: Thu,  8 Apr 2021 09:35:37 -0700
+Message-Id: <c36fa8754da6a36e68ce24011d6586eeebf93178.1617899100.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617899100.git.akuster808@gmail.com>
 References: <cover.1617899100.git.akuster808@gmail.com>
 
-From: zhengruoqin <zhengrq.fnst@cn.fujitsu.com>
+From: zangrc <zangrc.fnst@fujitsu.com>
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 66dcc24cd7bf9d0a9b0a7718d9db2a58a2f8545d)
+(cherry picked from commit aaef364ac87f6c4b8544cca78e7e530fa3a08750)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../snort/{snort_2.9.17.bb => snort_2.9.17.1.bb}                | 2 +-
+ meta-oe/recipes-support/emacs/{emacs_27.1.bb => emacs_27.2.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/snort/{snort_2.9.17.bb => snort_2.9.17.1.bb} (97%)
+ rename meta-oe/recipes-support/emacs/{emacs_27.1.bb => emacs_27.2.bb} (99%)
 
-diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.17.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.17.1.bb
-similarity index 97%
-rename from meta-networking/recipes-connectivity/snort/snort_2.9.17.bb
-rename to meta-networking/recipes-connectivity/snort/snort_2.9.17.1.bb
-index 324114f63d8..9c20be537c8 100644
---- a/meta-networking/recipes-connectivity/snort/snort_2.9.17.bb
-+++ b/meta-networking/recipes-connectivity/snort/snort_2.9.17.1.bb
-@@ -14,7 +14,7 @@ SRC_URI = "https://www.snort.org/downloads/archive/snort/${BP}.tar.gz \
-     file://disable-run-test-program-while-cross-compiling.patch \
-     file://configure.in-disable-tirpc-checking-for-fedora.patch \
- "
--SRC_URI[sha256sum] = "c3b234c3922a09b0368b847ddb8d1fa371b741f032f42aa9ab53d67b428dc648"
-+SRC_URI[sha256sum] = "303d3d5dc5affecfeaad3a331d3163f901d48d960fdd6598cb55c6d1591eed82"
+diff --git a/meta-oe/recipes-support/emacs/emacs_27.1.bb b/meta-oe/recipes-support/emacs/emacs_27.2.bb
+similarity index 99%
+rename from meta-oe/recipes-support/emacs/emacs_27.1.bb
+rename to meta-oe/recipes-support/emacs/emacs_27.2.bb
+index cfc089b3b6a..e3157ec4217 100644
+--- a/meta-oe/recipes-support/emacs/emacs_27.1.bb
++++ b/meta-oe/recipes-support/emacs/emacs_27.2.bb
+@@ -8,7 +8,7 @@ SRC_URI = "https://ftp.gnu.org/pub/gnu/emacs/emacs-${PV}.tar.xz"
  
- UPSTREAM_CHECK_URI = "https://www.snort.org/downloads"
- UPSTREAM_CHECK_REGEX = "snort-(?P<pver>\d+(\.\d+)+)\.tar"
+ SRC_URI_append_class-target = " file://usemake-docfile-native.patch"
+ 
+-SRC_URI[sha256sum] = "4a4c128f915fc937d61edfc273c98106711b540c9be3cd5d2e2b9b5b2f172e41"
++SRC_URI[sha256sum] = "b4a7cc4e78e63f378624e0919215b910af5bb2a0afc819fad298272e9f40c1b9"
+ 
+ PACKAGECONFIG[gnutls] = "--with-gnutls=yes,--with-gnutls=no,gnutls"
+ PACKAGECONFIG[kerberos] = "--with-kerberos=yes,--with-kerberos=no,krb5"
 -- 
 2.17.1
 
