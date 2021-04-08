@@ -1,207 +1,83 @@
-Received: from mail-oo1-f54.google.com (mail-oo1-f54.google.com [209.85.161.54])
- by mx.groups.io with SMTP id smtpd.web08.250.1617899795362379948
+Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
+ by mx.groups.io with SMTP id smtpd.web11.227.1617899796107625785
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Apr 2021 09:36:35 -0700
+ Thu, 08 Apr 2021 09:36:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=O9ZxVtQK;
- spf=pass (domain: gmail.com, ip: 209.85.161.54, mailfrom: akuster808@gmail.com)
-Received: by mail-oo1-f54.google.com with SMTP id s1-20020a4ac1010000b02901cfd9170ce2so643231oop.12
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=T5XzRuaF;
+ spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: akuster808@gmail.com)
+Received: by mail-ot1-f48.google.com with SMTP id s11-20020a056830124bb029021bb3524ebeso2952550otp.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=GT4pquRryLo3hIKC7x7xE3id7Fcn39nw91eSEQyNPEM=;
-        b=O9ZxVtQKUy2Iv2tluCO4k9qHyJAkdYy2WGVBbcacD1cwfF/K7p/DpYnsPLyNBRcyeu
-         FT+n5t0wdpWhhSNwRct0xsVbnGXCcmqoMjJKxGBz8HFPYIrlz+gM8q/d5mIkGFi61FoO
-         bZ4JyKuUyXPE7V2v29SK8arMeDv+zSddUMR5gcY01iCi0tR5b85IGdVKP0VP9QiG58Ak
-         NqQdj/l7rOWFChIX9qBk46fnUllvr2/k4fXyRJC/ABZG1L0hmxjXxzqDGn3/22McJKsA
-         UQadBViSVsGNfUyZ4IfWG2dmOQYfMoNcps1EsidopttnPiprrrZC+9jCtskCye8a2xJj
-         CFMQ==
+        bh=OAaJZOOfGGXggFEcV01PbL79ttVeyRUM6gA4BFdp1Ew=;
+        b=T5XzRuaFW+GVlwVZ2+U50FypoCc1PTFjPfKuGetEZxZrE/pUrEkBgx9dzU9u4mJgrm
+         g/VJ1e6bTjkJmb+EtNHDy85QPBnMDBSXM9dSlCYg2TLyb+xf94/VnWYiCDOpbpRwTygh
+         UaHe6WvCXP9SGVY3BimUiGCrUWao+ORxt2UyG7dnSf6MwBzh9C9M727Hhr0ZKYOgFBDh
+         hvcuaxQAg/rtws3BMGXjqTJuLA/wJQC+O0bhldE+HZr0pkSqgxoe67gzJbk7EWYeRirv
+         IHyAZVopn3xn/Pv4T+bNqQDQn+8ueuzTL99iTSx3+dk5QaFxGCyvKZT7bdPS9sQn2PSq
+         ImBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=GT4pquRryLo3hIKC7x7xE3id7Fcn39nw91eSEQyNPEM=;
-        b=VT9EYwMO/IqCAYn2LKB0N5i8HyfvEksm2OHldG9x/Q72hkuIsAIdy6k68GU8T6cWLE
-         5tluxZTEgayDb93pv1cih1h8Arg/zf8M4ZLJ0GdFAilir5xxWtEiYqQlkR1incI9Z8RJ
-         B4RsvZHP+OpHSrL+jZcsHV9TP8khVoAsojuoPoCqAufT2XOV4rbmu2ANrFrzUrrhXbgW
-         fIdB9eacr7mUOh30YodRW6Nt9YxyOJA91yHPUG783wgtVMsYSCSKFXhZ9Hhs03JKHS5f
-         erJKqzWgBqMvjsBhQklKf1z+XZ4Kb/JEpxo0Y+P6Pjo9HAzwGx4wDRCcqrNyWW0RTxqY
-         ag7A==
-X-Gm-Message-State: AOAM531K0EGepCzSRTyHSjvpPMMBMR29ZTXJ7Gh2F4WpdEWKLDbm5Vrb
-	RmEuD/CM163xdc08ura4lRs0SjtfNVg=
-X-Google-Smtp-Source: ABdhPJz/mUS7YQU1hzLyNMnlQTghteKCHX57/jZZd3WwCGQ3hlcHM0LZvpIAVtjD329zagP/aCFI4g==
-X-Received: by 2002:a4a:6758:: with SMTP id j24mr8211816oof.84.1617899794489;
-        Thu, 08 Apr 2021 09:36:34 -0700 (PDT)
+        bh=OAaJZOOfGGXggFEcV01PbL79ttVeyRUM6gA4BFdp1Ew=;
+        b=hgcCQ+LL8h+hsOxpWDYf7F5m+SPPIfvs/ckoXdUfxkwLAd6etRqZ5E6FwGAC7biilx
+         bBSAaQDwsWZVHZ+FaYLSAl362Ylhm9SChA6/VxWJELkGAyYPsRhMTwe+lqkqbQm07uFZ
+         g0L/5EintXnbYM87gu6vt1y9TqwhmEx2eDcTrNtBVnH30zJBnlHhLvHhTKI6a1kR4GXr
+         Y5jLnKPa/+ppsFU6XWCXJnzrdfFHJUZDTsJ2nUPn1maK4FJRpddqeB4WJpihWottlcXm
+         6LUaabpyrXRMSqyrZlQK3kEa3Zr3SBFnh6SLBt1HEeW5I5jwihaIs3DuwFN153Uv4m5O
+         OQLA==
+X-Gm-Message-State: AOAM53248krz7WNZxMzr9izS/TVRJEbmIA4lEyA0Nj7Y+6QzP2qK89Vk
+	VamPe7L4+JfFycULkrP1b2aQsRRNoEM=
+X-Google-Smtp-Source: ABdhPJxux34fx9S1DdfZDdnUgaHXZ+yDZ8xSfQup/H9xOw37sT2uRksCNGykg1gQ3jI8k+l5sQHpaA==
+X-Received: by 2002:a05:6830:114b:: with SMTP id x11mr8210273otq.249.1617899795220;
+        Thu, 08 Apr 2021 09:36:35 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.33
+        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.34
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 09:36:33 -0700 (PDT)
+        Thu, 08 Apr 2021 09:36:34 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 23/64] rsyslog: fix some of the ptests
-Date: Thu,  8 Apr 2021 09:35:30 -0700
-Message-Id: <872701edb641379d700d1d13650b750c29758c17.1617899100.git.akuster808@gmail.com>
+Subject: [hardknott 24/64] libnet-ssleay-perl: add rdep on perl-module-autoloader
+Date: Thu,  8 Apr 2021 09:35:31 -0700
+Message-Id: <c9674d330e3416d2a10dd6ff85a67ac5f94fa9d8.1617899100.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617899100.git.akuster808@gmail.com>
 References: <cover.1617899100.git.akuster808@gmail.com>
 
-From: Yi Fan Yu <yifan.yu@windriver.com>
+From: Awais Belal <Awais_Belal@mentor.com>
 
-Run test as non-root 'tester'.
-Add more rdepends for ptest.
+Without the autoloader module, doing a Net::SSLeay fails.
+The Net::SSLeay package also does an
 
-Introduce a patch to skip checking for a libc header:
-    sys/inotify
+use AutoLoader;
+Ref: https://github.com/rurban/Net-SSLeay/blob/master/lib/Net/SSLeay.pm#L26
 
-Python scripts no longer called with ./script.
-Remove the need to add the correct shebang.
-Ptest results:
+so this is evident.
 
-    8.2102.0
-===============
-TOTAL: 424
-PASS:  417
-SKIP:  5
-XFAIL: 0
-FAIL:  2
-XPASS: 0
-ERROR: 0
-
-Remaining failure related to relp:
-* imrelp-tls-cfgcmd
-* sndrcv_relp_tls-cfgcmd
-
-the test expects an error "relp connect failed with return 10031",
-but the connection seems to be established and working.
-
-Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+Signed-off-by: Awais Belal <awais_belal@mentor.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 9dda6b9608f3d8a06806b595a909d44bc00c377b)
+(cherry picked from commit 56058fe5b9cb77033f095e8f78838eb466a506ad)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...-tests-disable-the-check-for-inotify.patch | 46 +++++++++++++++++++
- .../rsyslog/rsyslog/run-ptest                 |  6 ++-
- .../rsyslog/rsyslog_8.2102.0.bb               | 15 +++---
- 3 files changed, 60 insertions(+), 7 deletions(-)
- create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/0001-tests-disable-the-check-for-inotify.patch
+ meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/0001-tests-disable-the-check-for-inotify.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-tests-disable-the-check-for-inotify.patch
-new file mode 100644
-index 00000000000..552172d3974
---- /dev/null
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-tests-disable-the-check-for-inotify.patch
-@@ -0,0 +1,46 @@
-+From 194e199ce08acc2192f6a63420ff24d9064666e5 Mon Sep 17 00:00:00 2001
-+From: Yi Fan Yu <yifan.yu@windriver.com>
-+Date: Sat, 27 Mar 2021 19:18:25 -0400
-+Subject: [PATCH] tests: disable the check for inotify
-+
-+We don't need to check inotify.h.
-+Assume it is present since it is part of the linux kernel
-+since 2.6.13 [1].
-+
-+[1](https://kernelnewbies.org/Linux_2_6_13)
-+
-+(it would require installing the libc headers otherwise,
-+ for the test  to detect /usr/include/sys/inotify.h.)
-+
-+Upstream-Status: Inappropriate[OE-specific]
-+
-+Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
-+---
-+ tests/diag.sh | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/tests/diag.sh b/tests/diag.sh
-+index 6cd60ea88..7424f48c5 100755
-+--- a/tests/diag.sh
-++++ b/tests/diag.sh
-+@@ -2672,7 +2672,7 @@ case $1 in
-+ 		fi
-+ 		;;
-+ 	'check-inotify') # Check for inotify/fen support 
-+-		if [ -n "$(find /usr/include -name 'inotify.h' -print -quit)" ]; then
-++		if true; then
-+ 			echo [inotify mode]
-+ 		elif [ -n "$(find /usr/include/sys/ -name 'port.h' -print -quit)" ]; then
-+ 			grep -qF "PORT_SOURCE_FILE" < /usr/include/sys/port.h
-+@@ -2687,7 +2687,7 @@ case $1 in
-+ 		fi
-+ 		;;
-+ 	'check-inotify-only') # Check for ONLY inotify support 
-+-		if [ -n "$(find /usr/include -name 'inotify.h' -print -quit)" ]; then
-++		if true; then
-+ 			echo [inotify mode]
-+ 		else
-+ 			echo [inotify not supported, skipping...]
-+-- 
-+2.29.2
-+
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/run-ptest b/meta-oe/recipes-extended/rsyslog/rsyslog/run-ptest
-index aa698d85ce1..efa9ba3ed01 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog/run-ptest
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog/run-ptest
-@@ -5,4 +5,8 @@ set -o pipefail
- 
- SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
- cd ${SCRIPTPATH}
--make -C tests -k check-TESTS
-+useradd tester  || echo "user already exists"
-+ln -sf /usr/sbin/logrotate /usr/bin/logrotate
-+su tester -c "make -C tests -k check-TESTS"
-+userdel tester
-+rm -f /usr/bin/logrotate
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2102.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2102.0.bb
-index 22059d1407b..921124024cb 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2102.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2102.0.bb
-@@ -24,6 +24,7 @@ SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.t
-            file://rsyslog.service \
-            file://use-pkgconfig-to-check-libgcrypt.patch \
-            file://run-ptest \
-+           file://0001-tests-disable-the-check-for-inotify.patch \
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
+index 50ab5af3add..93a0687b2a3 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
+@@ -19,6 +19,7 @@ RDEPENDS_${PN} += "\
+     perl-module-extutils-makemaker \
+     perl-module-mime-base64 \
+     perl-module-socket \
++    perl-module-autoloader \
+     zlib \
  "
  
- SRC_URI_append_libc-musl = " \
-@@ -80,11 +81,6 @@ PACKAGECONFIG[mail] = "--enable-mail,--disable-mail,,"
- PACKAGECONFIG[valgrind] = ",--without-valgrind-testbench,valgrind,"
- PACKAGECONFIG[imhttp] = "--enable-imhttp,--disable-imhttp,civetweb,"
- 
--do_configure_prepend() {
--    sed -i -e 's|python |python3 |g' ${S}/tests/*.sh
--    sed -i -e 's|/usr/bin/env python|/usr/bin/env python3|g' ${S}/tests/*.py
--    sed -i -e 's|/usr/bin/env python|/usr/bin/env python3|g' ${S}/tests/testsuites/*.py
--}
- 
- TESTDIR = "tests"
- do_compile_ptest() {
-@@ -97,6 +93,10 @@ do_install_ptest() {
-     cp -rf ${S}/${TESTDIR} ${D}${PTEST_PATH}
-     cp -rf ${B}/${TESTDIR} ${D}${PTEST_PATH}
- 
-+    # give permissions to all users
-+    # some tests need to write to this directory as user 'daemon'
-+    chmod 777 -R ${D}${PTEST_PATH}/tests
-+
-     # do NOT need to rebuild Makefile itself
-     sed -i 's/^Makefile:.*$/Makefile:/' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
-     # do NOT need to rebuild $(check_PROGRAMS)
-@@ -195,8 +195,11 @@ VALGRIND_libc-musl_powerpc64le = ''
- VALGRIND_riscv64 = ""
- VALGRIND_riscv32 = ""
- 
-+# util-linux: logger needs the -d option
- RDEPENDS_${PN}-ptest += "\
-   make diffutils gzip bash gawk coreutils procps \
--  libgcc python3-core python3-io \
-+  libgcc python3-core python3-io python3-json \
-+  curl util-linux shadow \
-   "
-+
- RRECOMMENDS_${PN}-ptest += "${TCLIBC}-dbg ${VALGRIND}"
 -- 
 2.17.1
 
