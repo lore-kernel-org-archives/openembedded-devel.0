@@ -1,49 +1,49 @@
-Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com [209.85.210.53])
- by mx.groups.io with SMTP id smtpd.web11.228.1617899797838217633
+Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com [209.85.167.179])
+ by mx.groups.io with SMTP id smtpd.web10.253.1617899798796371613
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 08 Apr 2021 09:36:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=e+eanLEu;
- spf=pass (domain: gmail.com, ip: 209.85.210.53, mailfrom: akuster808@gmail.com)
-Received: by mail-ot1-f53.google.com with SMTP id 91-20020a9d08640000b0290237d9c40382so2849380oty.12
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=o1M7jAkM;
+ spf=pass (domain: gmail.com, ip: 209.85.167.179, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f179.google.com with SMTP id d12so2760760oiw.12
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=Ue+8AQCTsXYv38P1X0OG2uRFiIHNsG0nxTcszQTxIyE=;
-        b=e+eanLEu/TqNHfoJUWwwEAcLpWji6HHaU2SiiNbZnhcuclh3x6xjspX4aQAa5erWZU
-         z8vlN8uSjCy1JYWwN6sgBmNimRohEXE9mOlj6zRl0vgzjb3FddAb+hg6TPZ8vb6cUQy3
-         qP4Ux/3COWW5/AJeMQfFfjAp4uX1z0v2c2PqLiNgDJnkBVOM4Nn8E4RVkoPoxUocHfqH
-         y7R5gfcLampFfuGQTxkHbumM02YBACMlVkRu1wB+f1GtyTD9XePGS7SniMGh2M+NX3T3
-         HEaOcByS9ecVmDYiSA7sqp0QqSlSkeDOzCbED5wQfWNlWpv0SOMN7+Cv79gmuqAAAeyi
-         xU5w==
+        bh=/6e5xrg6hJvfPUprSNxILMnq84qLpKGSPfxg09pjTM0=;
+        b=o1M7jAkMtM2GkCw/W8xq4D96jyy4lSrsJF+KaoCQpTwGiZeqlk9ORsUdVAWnaMiKGC
+         ZMaL4eGENjzPSpBog9VPCryC2CuwHjy8iDW54egkeDpwwft/c0J9Na5HerE7n86H+7eq
+         pwHZDtRHNsKGiMvlzMBVri/I2dykUJZ9OYVI3P/44w8THd/FdghF3ciCq8tBb62gW9Ph
+         VY+wwdw3AKMgZjYCkKdbeEMhGxgShSJfJAX+zGR2zaJHYq23lTcR7x12ctWy+IJrEaox
+         zMBUh7vWk4hdAPE+TTe2J8+J/Uy4O1HHzBbKT5kovEfeHLZI2fIOotTD4G6PqN8kphcJ
+         Npaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=Ue+8AQCTsXYv38P1X0OG2uRFiIHNsG0nxTcszQTxIyE=;
-        b=PvYMok87BAdSw7mK1qwUeNgx/MZuVFc26XoKtnO4/SnXv9F033GcVUwNORDiXMw+VZ
-         WKqrBq+JBtHMYO6S9FS7l92Cz68QL2oEWCGSmDcg9p2mZbGr+R66Qq/q3kPbNO1skrWQ
-         vB9qdP3tnXmU3cXzVJrCgGMBiCXPVLu5yLNW+k1IIoQOT5PFRNzvl5OJG57iQsAzvmK4
-         XGS5Xx55eElW55aYMjGDqqmEQdjc9N2DKfV1dS5ans2JMHjKlYKNyUpnDNisZ4CRvOo6
-         yk/5vy7/G4vSeUyk/K7IPmoMF8HgQp+oRAavR0mXrdCAr/ozKZtw0TVjTDPfmY7JtEgf
-         J/9A==
-X-Gm-Message-State: AOAM530XyCCIzr2gqwgaxBhSyK4Sc0UqIs85al/1+91noF+bnB6Er4BE
-	+EXNJHn76D8zdKFEYpK1+dMpIHEvirU=
-X-Google-Smtp-Source: ABdhPJzuiHLlGuyL5N6vQDMVCgQ5F+kDC2nazB2z+PitW3unE8BbzWuSENVvp/JS2O81splt9OdbgQ==
-X-Received: by 2002:a9d:2ae1:: with SMTP id e88mr8140096otb.265.1617899796990;
-        Thu, 08 Apr 2021 09:36:36 -0700 (PDT)
+        bh=/6e5xrg6hJvfPUprSNxILMnq84qLpKGSPfxg09pjTM0=;
+        b=d7FwFo02fCS2yb7127FW1LFeER2x8aKRoOs+fG1nmJTHBtA3wTo630HlJWEOyvYkPn
+         vHSEEiO2b8CDRnuLw0PJ229d5VvfXMrgKTMnB4xBN+ig+I+yAJ5UxyxBpmDaGMOsKOkF
+         OaS3XBTg1p0YHYRl6JF513+NdbZWi+BAunrilMZgI6pFeLta1Zs8udBkUlTdUhyu1WXK
+         HBFP8HzSHGzjaaVOHdhM4FP634+lsPp8nLoZ/WadxXtFYX4rfjtWpkIDWoqPnvyymI5Y
+         5aE7hyLNMrht0XRJbU8agXY/KriWT21+MlMwgJ6dWowZw33DMESEB9tzFoIvQZNpvrqM
+         3/bQ==
+X-Gm-Message-State: AOAM5310vTUwdmbrag8eUhsN8EUx87wvflUJyQwH27TFeKa4KtJR5rdq
+	Nu0kgFsE6AtfR6p5htW79U97W9tRB6I=
+X-Google-Smtp-Source: ABdhPJyxhpFwAhAdvR+AKwUJ+cHlBrAxhU/JtkAVwMibqS3iZ0inCSvn0i143VZg2aPI6DBBOtQvyQ==
+X-Received: by 2002:aca:eb8c:: with SMTP id j134mr6815101oih.3.1617899797934;
+        Thu, 08 Apr 2021 09:36:37 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.36
+        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.37
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 09:36:36 -0700 (PDT)
+        Thu, 08 Apr 2021 09:36:37 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 26/64] fetchmail: upgrade 6.4.17 -> 6.4.18
-Date: Thu,  8 Apr 2021 09:35:33 -0700
-Message-Id: <de95c60482bdafcc178d932bc40cb4ec3aaf273a.1617899100.git.akuster808@gmail.com>
+Subject: [hardknott 27/64] lldpd: upgrade 1.0.4 -> 1.0.8
+Date: Thu,  8 Apr 2021 09:35:34 -0700
+Message-Id: <d63cab7c0b678cd325359557f479170a1aa3629b.1617899100.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617899100.git.akuster808@gmail.com>
 References: <cover.1617899100.git.akuster808@gmail.com>
@@ -52,28 +52,30 @@ From: zhengruoqin <zhengrq.fnst@cn.fujitsu.com>
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit d399c6043c1e30d5d06e81fc2771ee7fa1143c2a)
+(cherry picked from commit 55669e9214f3213ade48896e7cfe72396cb1e795)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../fetchmail/{fetchmail_6.4.17.bb => fetchmail_6.4.18.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/fetchmail/{fetchmail_6.4.17.bb => fetchmail_6.4.18.bb} (91%)
+ .../recipes-daemons/lldpd/{lldpd_1.0.4.bb => lldpd_1.0.8.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-daemons/lldpd/{lldpd_1.0.4.bb => lldpd_1.0.8.bb} (94%)
 
-diff --git a/meta-networking/recipes-support/fetchmail/fetchmail_6.4.17.bb b/meta-networking/recipes-support/fetchmail/fetchmail_6.4.18.bb
-similarity index 91%
-rename from meta-networking/recipes-support/fetchmail/fetchmail_6.4.17.bb
-rename to meta-networking/recipes-support/fetchmail/fetchmail_6.4.18.bb
-index 7c513f62b64..7254a4713a6 100644
---- a/meta-networking/recipes-support/fetchmail/fetchmail_6.4.17.bb
-+++ b/meta-networking/recipes-support/fetchmail/fetchmail_6.4.18.bb
-@@ -12,7 +12,7 @@ DEPENDS = "openssl"
+diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.4.bb b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb
+similarity index 94%
+rename from meta-networking/recipes-daemons/lldpd/lldpd_1.0.4.bb
+rename to meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb
+index 8fdaf848ff2..bd94c091989 100644
+--- a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.4.bb
++++ b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb
+@@ -11,8 +11,8 @@ SRC_URI = "\
+     file://lldpd.default \
+     "
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz \
-            "
--SRC_URI[sha256sum] = "a41bcdf11b41aa0682b259aee4717c617c15dadd43fa008b2ed38b770f4d50c6"
-+SRC_URI[sha256sum] = "302dc9bcdc6927dedf375d2baaead2347557faa70d98b1da83f2409fa6fb259f"
+-SRC_URI[md5sum] = "33e8d58623f99184e4e709cbbfe45db3"
+-SRC_URI[sha256sum] = "5319bc032fabf1008d5d91e280276aa7f1bbfbb70129d8526cd4526d7c22724f"
++SRC_URI[md5sum] = "000042dbf5b445f750b5ba01ab25c8ba"
++SRC_URI[sha256sum] = "98d200e76e30f6262c4a4493148c1840827898329146a57a34f8f0f928ca3def"
  
- inherit autotools gettext python3-dir python3native
+ inherit autotools update-rc.d useradd systemd pkgconfig bash-completion
  
 -- 
 2.17.1
