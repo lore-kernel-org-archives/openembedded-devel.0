@@ -1,90 +1,94 @@
-Received: from mail-ot1-f52.google.com (mail-ot1-f52.google.com [209.85.210.52])
- by mx.groups.io with SMTP id smtpd.web12.242.1617899808803593808
+Received: from mail-ot1-f50.google.com (mail-ot1-f50.google.com [209.85.210.50])
+ by mx.groups.io with SMTP id smtpd.web11.233.1617899810288580531
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Apr 2021 09:36:48 -0700
+ Thu, 08 Apr 2021 09:36:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=X5gLHJ1V;
- spf=pass (domain: gmail.com, ip: 209.85.210.52, mailfrom: akuster808@gmail.com)
-Received: by mail-ot1-f52.google.com with SMTP id s11-20020a056830124bb029021bb3524ebeso2953163otp.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:48 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=hRe9ia9W;
+ spf=pass (domain: gmail.com, ip: 209.85.210.50, mailfrom: akuster808@gmail.com)
+Received: by mail-ot1-f50.google.com with SMTP id s11-20020a056830124bb029021bb3524ebeso2953234otp.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=/6HeRsYWzeAMgTt16LRY1W35Y069AKcuIW2BxbN8gAk=;
-        b=X5gLHJ1VQIG68AQSTi78k6NTqdl604NmmQOs2boKW7cadrez+uRIkqGh6/tpjZaOFs
-         wdgAsiyGWoL76ZfXSUajzxcTIMhgPdrUO9hqPN6IVEkqI+vORxWwUtvRXcnC3RF3bFmM
-         rki8wh5wV8N+CFbBUFcJaqmgv/VI87ZftwASgo30gEJ+cRPCeMihz64dwXLUnR4HHtRt
-         p4G+lBi37gRopG/U5jm2fsnIkqHdtKVlIlthb13SZGBqmeXE8SGjriRY3UJIhiwTUJ6C
-         GaR/hN1EjnSodPoBDl6MvI6/LfRn8CLTZic8X8FUxDxJWtBrAkOUMz0kYV7F/DfP3k8R
-         fjdQ==
+        bh=06zRtbJvJDFVWACs/U9BaNTzBLk8VkqOXnoBRI7fnS0=;
+        b=hRe9ia9WFh/5jQ9ztcun3PfjHElZmDGs2FIZm6xD3JWVO77DS0Y85q3jpovPDIOX74
+         m295wY+G3WxHAYMIwql1Nr8L7m/4iicWqK6x0D/wTg9P0VmwGwBrkiqqzlfWENx0G02r
+         Ihfw4vk35nBPK+C7nfr4N2BBEY6YgjS6vPx2lWscB5A9/dSJMPIUoYymt8xQms0jktYE
+         /+WTDGw9Sfbof5D9OYnuPEqNjXCGJtcqM9fAteJJlJHMvATe/Og7BgUZbORZJYKYGvGZ
+         ZSqC4Xumzu459L2hJmfiLmi6N3B9AeXZ4putMWCdMk+sO/tdD/UtmODqoGXilPdwLied
+         QxnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=/6HeRsYWzeAMgTt16LRY1W35Y069AKcuIW2BxbN8gAk=;
-        b=Fb2f9OsvsMlLPr5/I7g364m6l9kESbCqqXCy8/OCb10O8fnkO658iG5UtUCnnqK7yx
-         YpLksxQtG/K4ipVcKnMTAtkHGzXT9vEUytujRECIl2ysyu6v+IUKI2GCZXRHuZx0m655
-         N31478mt/RZymYNELQPequi335iPfRB5F4Zc2DEVM0Lh77kmsV+VI6ufirj6kIzbaZFL
-         IoqNZfrJf/lT8X5pOV/IlIVpo18WgHXTxcSKlIPNP3oHj5EYijGG9s5j+AQ+00+drC17
-         DcAR1WYChvCsmtFb2P9XmP57AwE0DFvl2DHyKCvoFNcWwyKNHNe0KC0iJmLXpzc9Nzls
-         wchw==
-X-Gm-Message-State: AOAM530mpFzAHFK9REEuKy/vrfD4tjWGnofXXDhwlhMfVsDptKnwu8dl
-	gBr8sqaw0DN6va11N9BRmbSvKGI50GY=
-X-Google-Smtp-Source: ABdhPJx3w67Pnw/+xmuzexvBPiDCs2v16ml02EV+r6X0YLmT4wJfdmo8FhTihrY3n1pTg9deHRwELw==
-X-Received: by 2002:a9d:7c99:: with SMTP id q25mr8534774otn.339.1617899807900;
-        Thu, 08 Apr 2021 09:36:47 -0700 (PDT)
+        bh=06zRtbJvJDFVWACs/U9BaNTzBLk8VkqOXnoBRI7fnS0=;
+        b=TbOYC//tUo07nY/cYALSf9i2Nkn7gWuPowFQYwSitURA9SWezJbnN/1AXdom0wFPu8
+         3waNmLED0+nsUsfuCKEexTJs2SVwhiI/DBp7dQCwOb1mwtGKUpOP+wvLfEU2IxqoTMem
+         GD5K1w6pijzJkHk9PBPP4DvZRLNC7zFPhlIK/VU0rDYDOibJb2td5b2kB1FbHVZoHR7F
+         XWtEHFqSs/pGcxyEL/0k5i6OR8POoBuoM9KNat/hsy85BPvqEroR8XoIxcSv5eQ81XZi
+         0oHzyZYsSsWCJqfnsJHPKyy9ebJrREOZfKQ/gX36avnyWG8T/76+JMI/SlLgv6nKZ7Ol
+         U2pQ==
+X-Gm-Message-State: AOAM533NhL7zNxgP3I2iEs7JY+X4mNsSPK+CRWQ67o40Kwu9rivu7ef3
+	dB+kIqUI62+LFu357qzLWidHWa2nZN8=
+X-Google-Smtp-Source: ABdhPJymHDCMQLYFHcClS1GrE8WFioOplpEaPvYJLfPByFspPuKojhkMSDFtKk7/KCg2vpnT9ySLeg==
+X-Received: by 2002:a9d:67c2:: with SMTP id c2mr8583093otn.343.1617899809511;
+        Thu, 08 Apr 2021 09:36:49 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.47
+        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.48
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 09:36:47 -0700 (PDT)
+        Thu, 08 Apr 2021 09:36:48 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 38/64] python3-pymisp: Upgrade 2.4.140 -> 2.4.141
-Date: Thu,  8 Apr 2021 09:35:45 -0700
-Message-Id: <d6a31cdce720031677bcf730a666f8856e589a9b.1617899100.git.akuster808@gmail.com>
+Subject: [hardknott 39/64] python3-tqdm: Upgrade 4.58.0 -> 4.59.0
+Date: Thu,  8 Apr 2021 09:35:46 -0700
+Message-Id: <5e1202f5b63518ee5c4fd7d35c7c6e621a546c97.1617899100.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617899100.git.akuster808@gmail.com>
 References: <cover.1617899100.git.akuster808@gmail.com>
 
 From: Leon Anavi <leon.anavi@konsulko.com>
 
-Upgrade to release 2.4.141:
+Upgrade to release 4.59.0:
 
-- Use get_uuid_or_id_from_abstract_misp in tag methods
-- Skip nameless sections in ELF
-- Make reportlab tests optional if missing dep
-- Enable taxonomy failed if global pythonify is on
-- Properly pass content-type
-- Re-enable support for uploading STIX 1 documents
+- add tqdm.dask.TqdmCallback
+- add asyncio.gather()
+- add basic support for length_hint
+- add & update tests
+- misc documentation updates
+- update contributing guide
+- update URLs
+- bash completion: add missing --delay
+- misc code tidy
+- add [notebook] extra
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-(cherry picked from commit b3b8d4f6a637ce695030921d4d335f5941380b53)
+(cherry picked from commit d35780c181474bd1b214ec2e17d5efee7b9c042f)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{python3-pymisp_2.4.140.bb => python3-pymisp_2.4.141.bb}    | 2 +-
+ .../python/{python3-tqdm_4.58.0.bb => python3-tqdm_4.59.0.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.140.bb => python3-pymisp_2.4.141.bb} (91%)
+ rename meta-python/recipes-devtools/python/{python3-tqdm_4.58.0.bb => python3-tqdm_4.59.0.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.140.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.141.bb
-similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.140.bb
-rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.141.bb
-index 32e673660cf..c8bd52f105c 100644
---- a/meta-python/recipes-devtools/python/python3-pymisp_2.4.140.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymisp_2.4.141.bb
-@@ -4,7 +4,7 @@ LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
+diff --git a/meta-python/recipes-devtools/python/python3-tqdm_4.58.0.bb b/meta-python/recipes-devtools/python/python3-tqdm_4.59.0.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-tqdm_4.58.0.bb
+rename to meta-python/recipes-devtools/python/python3-tqdm_4.59.0.bb
+index 771016962da..32e5cf053a4 100644
+--- a/meta-python/recipes-devtools/python/python3-tqdm_4.58.0.bb
++++ b/meta-python/recipes-devtools/python/python3-tqdm_4.59.0.bb
+@@ -5,7 +5,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT & MPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=59e4271a933d33edfe60237db377a14b"
  
- SRC_URI = "git://github.com/MISP/PyMISP.git;protocol=https;branch=main"
--SRCREV = "39a7b8242f0d3022276d417ec334bb46b890ff23"
-+SRCREV = "4a0c1e1dc42af171d3c1bcaa12436f79ff6cfd9b"
- S = "${WORKDIR}/git"
+-SRC_URI[sha256sum] = "c23ac707e8e8aabb825e4d91f8e17247f9cc14b0d64dd9e97be0781e9e525bba"
++SRC_URI[sha256sum] = "d666ae29164da3e517fcf125e41d4fe96e5bb375cd87ff9763f6b38b5592fe33"
  
- inherit setuptools3
+ inherit pypi setuptools3
+ 
 -- 
 2.17.1
 
