@@ -1,49 +1,49 @@
-Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
- by mx.groups.io with SMTP id smtpd.web11.245.1617899824793439678
+Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com [209.85.167.178])
+ by mx.groups.io with SMTP id smtpd.web10.265.1617899825621853306
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Apr 2021 09:37:04 -0700
+ Thu, 08 Apr 2021 09:37:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=kz6PSyNr;
- spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: akuster808@gmail.com)
-Received: by mail-ot1-f48.google.com with SMTP id h6-20020a0568300346b02901b71a850ab4so2891919ote.6
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:37:04 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Dxr+jolJ;
+ spf=pass (domain: gmail.com, ip: 209.85.167.178, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f178.google.com with SMTP id n140so2775010oig.9
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:37:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=Ko8oPuXLtYh2aUUV4fY3JRFL+3oLs07kFlJItZrNHH4=;
-        b=kz6PSyNr/o4HVPLmlEdAPnKJh40il1hAu+2zza+GQAJohuDK2lf6e6539eOmWZq03q
-         rWtg1GoIuHdQa+1NSaJxAEnBkzGpHZSRB8mNsUrYHdbCyn6gCXrGJwbtz1qEh6sinB0r
-         9Gx6xVBNw4uIgCIv4Uuh0LfuxNizsUTAfUoZC7CY21uUE/Dj9mUG4Vf3ox+3GzS1qMzO
-         qnaj3hHw34bpbgwn7muOA//3uf0uydLL20sVOVIGkRyoRzVAqtb1/8yx+83uI4jzw4/C
-         8Qgyrn7Ww4iv1HLcIo8+fj8J50LQ6azuL8YlE45G/0VnRdq1xY3YvAZJOBAtVTL0gAHl
-         N99Q==
+        bh=2XBx1PJDxMzlsCwlV325FG3KZT0R71axlAabBbQkxBY=;
+        b=Dxr+jolJxdIZ71h9yCNreBnGMkOJHkKWrwL2lyqJWUVnfDqh53jMvbmtVTsoj6rDvK
+         B51uJ3D81gV8Z+cps3lAzfwV/pDjVA8pp0549t3gP8XRbLoqhPnepFVvyWY5lat5BVJF
+         BRNpD7rJnudbyWuWbdYcHVc8gA9VUgyec2DW1LuOSmo3EjosXq8t6fSTF3Z1jJNOwOZP
+         SjXmieMde8emDgqEtM0CZ/eY1BxTNyO7ayc59zAFAbIyT9WGwMdEjBkSfVZjypt+ZFcT
+         FGkMzRmT+/CLGcyhwLxgrhyA30OrLeCq9t5sdiuxwXy1gqYVhNF3zQCHIP8Wo0ceFFyf
+         9yhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=Ko8oPuXLtYh2aUUV4fY3JRFL+3oLs07kFlJItZrNHH4=;
-        b=omuN5s3pUFDHu3Zj7l9OMNH1lN7rqH/8zA7fzB/nYZ5WiwCHzZnnfJNa/VRp31S2Ru
-         Wz4e6EOUOzi4MXQsFo6Y16faLvEkbtIIA5W3qaesK2EaYd73ETCS840hF90CIHW2jjEm
-         bDjiqBmQwiEEc4WRG1ZnL0sjm2qnZx7iK+Kzc3o03nLsnP2kh/7q2mOXkaD2HA/nN7X8
-         FJ+bfFwkfp6ZdY2YdaH8J3YLfYMoVqE5DNi4kdVtpKwbhR+E0UmMcU/soINxHAHx+GP6
-         /H41SbWSCrtiv+2XbYs/q5NOdIL1x8LCpxiE5P5hgmJVwl9PPMWFCeS23NnFH/oWeSTI
-         yw0g==
-X-Gm-Message-State: AOAM531Q3NgRGtqtoMcqtHHAKtTrd+gd9XsIbSKSDIyZmELAwCZrvIqe
-	uyGrsU0kYrudRKphQw9bZyXmuiA3Hi4=
-X-Google-Smtp-Source: ABdhPJz/uHbFi8ul1RGAG7VkHoVWVW7JxKqwjEPR9JsPCybXGk7IQzRIcxP/EQFTHqJstGLNqbkxig==
-X-Received: by 2002:a9d:6d87:: with SMTP id x7mr8440484otp.250.1617899823968;
-        Thu, 08 Apr 2021 09:37:03 -0700 (PDT)
+        bh=2XBx1PJDxMzlsCwlV325FG3KZT0R71axlAabBbQkxBY=;
+        b=h1p+iU6gSp6BF6Fz/ujZkCC+wbzZfOFd54Pp1Ld2K3aH0nRx9NlHqghzHVUoAiTX75
+         b16x8uPfdtJPyoOAwbm+LRU/x88N5i1uHB2VpRsrOPqcgdlLdrSP3ITYWcCDzE+3ymkp
+         T3x8AH7Kpo8i2VOg6VmEIReIiDPEbV9k1ORyaO1IC9vV765b2yYjoRTZ7fpWiVpUHQRO
+         c3XpqR7Dx4sNetD+1hB7OTLfScXRxNSiW2vcQMTfuO5k4l47cg2+ROqmuAjE2W3R2PYW
+         BAF5oEDhR6tPNh6x6C12u1eOBogfZQ96snDddnhPpr3XCVldK+irMTYZugOdhjmNT7Vu
+         bUxg==
+X-Gm-Message-State: AOAM533sgG5QWCdNu8TYgaupyVOY5RDLr9VsOCEX5wc75ZMRQ5gaAkVM
+	P02isHIbame3m64LsUTyeYoI49T5FoY=
+X-Google-Smtp-Source: ABdhPJy3VJvRVwzdNKhKZCI5egtFpXGXv65I1xF2Sr1fHP2SNFyKZuscW358q07H/kIlacVooY0mSg==
+X-Received: by 2002:a54:4492:: with SMTP id v18mr6806154oiv.49.1617899824768;
+        Thu, 08 Apr 2021 09:37:04 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.37.03
+        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.37.04
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 09:37:03 -0700 (PDT)
+        Thu, 08 Apr 2021 09:37:04 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 55/64] packagegroup-meta-oe: use 4 spaces for identation
-Date: Thu,  8 Apr 2021 09:36:02 -0700
-Message-Id: <ee7458f08613163d04af0c47002ef117d1686abc.1617899100.git.akuster808@gmail.com>
+Subject: [hardknott 56/64] telepathy-glib: respect GI_DATA_ENABLED when enabling vala-bindings
+Date: Thu,  8 Apr 2021 09:36:03 -0700
+Message-Id: <02a8f97cb6842d47c53c0c0b189c6707d5f1ccab.1617899100.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617899100.git.akuster808@gmail.com>
 References: <cover.1617899100.git.akuster808@gmail.com>
@@ -52,228 +52,27 @@ From: Martin Jansa <Martin.Jansa@gmail.com>
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 5c83f2da63504fc3d6bfaec3e0d149a8926f56b7)
+(cherry picked from commit e721f6d9444779cfd5f5de54c0cf4fe2f15fc74d)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../packagegroups/packagegroup-meta-oe.bb     | 204 +++++++++---------
- 1 file changed, 102 insertions(+), 102 deletions(-)
+ .../recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb   | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index d5e5aa01cd6..a6513352c04 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -321,109 +321,109 @@ RDEPENDS_packagegroup-meta-oe-devtools_remove_aarch64 = "concurrencykit"
- RDEPENDS_packagegroup-meta-oe-devtools_remove_x86 = "ply"
+diff --git a/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb b/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb
+index 2b05c61a0d0..4d4e841f624 100644
+--- a/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb
++++ b/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb
+@@ -12,7 +12,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e413d83db6ee8f2c8e6055719096a48e"
  
- RDEPENDS_packagegroup-meta-oe-extended ="\
--     bitwise \
-+    bitwise \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland opengl", "boinc-client", "", d)} \
--     brotli \
--     byacc \
--     cmpi-bindings \
--     collectd \
--     cfengine-masterfiles \
--     cfengine \
--     ddrescue \
--     dialog \
--     enscript \
--     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gnuplot", "", d)} \
--     dlt-daemon \
--     docopt.cpp \
--     iotop \
--     dumb-init \
--     konkretcmpi \
--     figlet \
--     libcec \
--     libdivecomputer \
--     fluentbit \
--     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libgxim", "", d)} \
--     liblognorm \
--     libmodbus \
--     haveged \
--     hexedit \
--     hiredis \
--     hplip \
--     hwloc \
--     libleak \
--     libuio \
--     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libwmf", "", d)} \
--     lprng \
--     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "icewm", "", d)} \
--     md5deep \
--     indent \
--     jansson \
--     nana \
--     nicstat \
--     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "openwsman", "", d)} \
--     p7zip \
--     isomd5sum \
--     jpnevulator \
--     ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "polkit-group-rule-datetime polkit-group-rule-network polkit", "", d)} \
--     rarpd \
--     redis \
--     libfastjson \
--     librelp \
--     sblim-cmpi-devel \
--     sblim-sfc-common \
--     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "sblim-sfcb ", "", d)} \
--     sblim-sfcc \
--     libblockdev \
--     sgpio \
--     smartmontools \
--     can-utils \
--     canutils \
--     libsocketcan \
--     libconfig \
--     linuxconsole \
--     uml-utilities \
--     libidn \
--     libqb \
--     wipe \
--     libzip \
--     zram \
--     libplist \
--     libusbmuxd \
--     liblockfile \
--     liblogging \
--     libnss-nisplus \
--     libpwquality \
--     ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "libreport", "", d)} \
--     libserialport \
--     libstatgrab \
--     lockfile-progs \
--     logwatch \
--     mailx \
--     mraa \
--     ostree \
--     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "pam-plugin-ccreds pam-plugin-ldapdb pam-ssh-agent-auth", "", d)} \
--     pegtl \
--     libfile-fnmatch-perl \
--     rrdtool \
--     sanlock \
--     scsirastools \
--     sedutil \
--     libsigrok \
--     libsigrokdecode \
--     sigrok-cli \
--     snappy \
--     tipcutils \
--     tiptop \
--     tmate \
--     tmux \
--     triggerhappy \
--     upm \
--     vlock \
--     volume-key \
--     wxwidgets \
--     zlog \
--     zstd \
--     redis-plus-plus \
-+    brotli \
-+    byacc \
-+    cmpi-bindings \
-+    collectd \
-+    cfengine-masterfiles \
-+    cfengine \
-+    ddrescue \
-+    dialog \
-+    enscript \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gnuplot", "", d)} \
-+    dlt-daemon \
-+    docopt.cpp \
-+    iotop \
-+    dumb-init \
-+    konkretcmpi \
-+    figlet \
-+    libcec \
-+    libdivecomputer \
-+    fluentbit \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libgxim", "", d)} \
-+    liblognorm \
-+    libmodbus \
-+    haveged \
-+    hexedit \
-+    hiredis \
-+    hplip \
-+    hwloc \
-+    libleak \
-+    libuio \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libwmf", "", d)} \
-+    lprng \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "icewm", "", d)} \
-+    md5deep \
-+    indent \
-+    jansson \
-+    nana \
-+    nicstat \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "pam", "openwsman", "", d)} \
-+    p7zip \
-+    isomd5sum \
-+    jpnevulator \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "polkit-group-rule-datetime polkit-group-rule-network polkit", "", d)} \
-+    rarpd \
-+    redis \
-+    libfastjson \
-+    librelp \
-+    sblim-cmpi-devel \
-+    sblim-sfc-common \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "pam", "sblim-sfcb ", "", d)} \
-+    sblim-sfcc \
-+    libblockdev \
-+    sgpio \
-+    smartmontools \
-+    can-utils \
-+    canutils \
-+    libsocketcan \
-+    libconfig \
-+    linuxconsole \
-+    uml-utilities \
-+    libidn \
-+    libqb \
-+    wipe \
-+    libzip \
-+    zram \
-+    libplist \
-+    libusbmuxd \
-+    liblockfile \
-+    liblogging \
-+    libnss-nisplus \
-+    libpwquality \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "libreport", "", d)} \
-+    libserialport \
-+    libstatgrab \
-+    lockfile-progs \
-+    logwatch \
-+    mailx \
-+    mraa \
-+    ostree \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "pam", "pam-plugin-ccreds pam-plugin-ldapdb pam-ssh-agent-auth", "", d)} \
-+    pegtl \
-+    libfile-fnmatch-perl \
-+    rrdtool \
-+    sanlock \
-+    scsirastools \
-+    sedutil \
-+    libsigrok \
-+    libsigrokdecode \
-+    sigrok-cli \
-+    snappy \
-+    tipcutils \
-+    tiptop \
-+    tmate \
-+    tmux \
-+    triggerhappy \
-+    upm \
-+    vlock \
-+    volume-key \
-+    wxwidgets \
-+    zlog \
-+    zstd \
-+    redis-plus-plus \
- "
- RDEPENDS_packagegroup-meta-oe-extended_append_libc-musl = " libexecinfo"
- RDEPENDS_packagegroup-meta-oe-extended_append_x86-64 = " pmdk libx86-1"
+ inherit autotools pkgconfig gettext gobject-introspection vala
+ 
+-EXTRA_OECONF = "--enable-vala-bindings"
++# Respect GI_DATA_ENABLED value when enabling vala-bindings:
++# configure: error: GObject-Introspection must be enabled for Vala bindings
++EXTRA_OECONF = "${@bb.utils.contains('GI_DATA_ENABLED', 'True', '--enable-vala-bindings', '--disable-vala-bindings', d)}"
+ 
+ FILES_${PN} += "${datadir}/telepathy \
+                 ${datadir}/dbus-1"
 -- 
 2.17.1
 
