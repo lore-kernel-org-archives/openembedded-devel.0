@@ -1,49 +1,49 @@
-Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com [209.85.167.179])
- by mx.groups.io with SMTP id smtpd.web10.253.1617899798796371613
+Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
+ by mx.groups.io with SMTP id smtpd.web09.265.1617899799787071657
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Apr 2021 09:36:38 -0700
+ Thu, 08 Apr 2021 09:36:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=o1M7jAkM;
- spf=pass (domain: gmail.com, ip: 209.85.167.179, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f179.google.com with SMTP id d12so2760760oiw.12
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=HpjCBH9P;
+ spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: akuster808@gmail.com)
+Received: by mail-ot1-f48.google.com with SMTP id d3-20020a9d29030000b029027e8019067fso977235otb.13
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=/6e5xrg6hJvfPUprSNxILMnq84qLpKGSPfxg09pjTM0=;
-        b=o1M7jAkMtM2GkCw/W8xq4D96jyy4lSrsJF+KaoCQpTwGiZeqlk9ORsUdVAWnaMiKGC
-         ZMaL4eGENjzPSpBog9VPCryC2CuwHjy8iDW54egkeDpwwft/c0J9Na5HerE7n86H+7eq
-         pwHZDtRHNsKGiMvlzMBVri/I2dykUJZ9OYVI3P/44w8THd/FdghF3ciCq8tBb62gW9Ph
-         VY+wwdw3AKMgZjYCkKdbeEMhGxgShSJfJAX+zGR2zaJHYq23lTcR7x12ctWy+IJrEaox
-         zMBUh7vWk4hdAPE+TTe2J8+J/Uy4O1HHzBbKT5kovEfeHLZI2fIOotTD4G6PqN8kphcJ
-         Npaw==
+        bh=z+7CRcpXQoreDCWyc36H8u4ccHrQ5IPjw1C3L9PR28Y=;
+        b=HpjCBH9P3AktWSP6+5mfy7yvYP6VH3FNLfsMnkO2bA/hUS5S/dXzwmoqewCBxin9gz
+         mUivpgatBbc57GESOf2KZp+q/zjeLCQKlnDG72xBYqPHVfTgpfaHaTr4BDHKWzWZASfm
+         UOEtIjMI6jNp5u5bocq1rgvULXdlT7SLexO3Gkz19bCR7xQGbWWxN4NPkyuilxFz6bCH
+         w8B/xaGsJtId1eCShrm3HYYtFZZhpBp2S9lw/0PYp3GpHZXfRSCx8u7uC3KTGar8JI81
+         SCOAjSrmD8GgqCW1sLZ/LMgHkw8274Ec3FXLgHYCJe+HekFZOwpfEahsdlP6PoYI/3FX
+         PInQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=/6e5xrg6hJvfPUprSNxILMnq84qLpKGSPfxg09pjTM0=;
-        b=d7FwFo02fCS2yb7127FW1LFeER2x8aKRoOs+fG1nmJTHBtA3wTo630HlJWEOyvYkPn
-         vHSEEiO2b8CDRnuLw0PJ229d5VvfXMrgKTMnB4xBN+ig+I+yAJ5UxyxBpmDaGMOsKOkF
-         OaS3XBTg1p0YHYRl6JF513+NdbZWi+BAunrilMZgI6pFeLta1Zs8udBkUlTdUhyu1WXK
-         HBFP8HzSHGzjaaVOHdhM4FP634+lsPp8nLoZ/WadxXtFYX4rfjtWpkIDWoqPnvyymI5Y
-         5aE7hyLNMrht0XRJbU8agXY/KriWT21+MlMwgJ6dWowZw33DMESEB9tzFoIvQZNpvrqM
-         3/bQ==
-X-Gm-Message-State: AOAM5310vTUwdmbrag8eUhsN8EUx87wvflUJyQwH27TFeKa4KtJR5rdq
-	Nu0kgFsE6AtfR6p5htW79U97W9tRB6I=
-X-Google-Smtp-Source: ABdhPJyxhpFwAhAdvR+AKwUJ+cHlBrAxhU/JtkAVwMibqS3iZ0inCSvn0i143VZg2aPI6DBBOtQvyQ==
-X-Received: by 2002:aca:eb8c:: with SMTP id j134mr6815101oih.3.1617899797934;
-        Thu, 08 Apr 2021 09:36:37 -0700 (PDT)
+        bh=z+7CRcpXQoreDCWyc36H8u4ccHrQ5IPjw1C3L9PR28Y=;
+        b=WMaGo4HVc5ClRbHlZItE9EWaWqHQ9WGWaLqhVKjS0PwZXA7iMTAibceLyYfNDs+6H4
+         QtSehl5Z4ftSvd24Vu+gCzfssIVTWYjgNZxFi/MNjip1mXOAetMz163cHtT/9xhjlsUU
+         IYGyww7qAJxdaZvXb5H+E/M++ZPJ+d1bgt38T19qncaj4LprLY3bHtea6uAuUm0PxaLR
+         mCUbrg6KnkNuWZhR1aiGHnV6NFJfSI0kKbsTZ04n2w4WFo6OPXFJ06ekd6mCVf0Plb2s
+         sLUpeLhjRbDmQvEbBL2/B8RzecZx7qZzi3VMZNeDq3BFTTPAwOjcwZSPZbz4ER8BUCuL
+         2XfQ==
+X-Gm-Message-State: AOAM530TN9dCv7sXyQNb3cpfULP9GqoOZzkCjul/zzRxj4gL+YD1FW8s
+	wwY1arqs/pD2o6qNzf8Ia8A+X9nB/EU=
+X-Google-Smtp-Source: ABdhPJw5RiRa0KyVaee7AtDgZAK2VYkQJXlQ2tSuLXytXMIrXkGpnmsd8oP9wrZ5DgWkgYzUbQx73w==
+X-Received: by 2002:a9d:6f06:: with SMTP id n6mr8343022otq.189.1617899799024;
+        Thu, 08 Apr 2021 09:36:39 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.37
+        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.38
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 09:36:37 -0700 (PDT)
+        Thu, 08 Apr 2021 09:36:38 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 27/64] lldpd: upgrade 1.0.4 -> 1.0.8
-Date: Thu,  8 Apr 2021 09:35:34 -0700
-Message-Id: <d63cab7c0b678cd325359557f479170a1aa3629b.1617899100.git.akuster808@gmail.com>
+Subject: [hardknott 28/64] networkmanager-openvpn: upgrade 1.8.12 -> 1.8.14
+Date: Thu,  8 Apr 2021 09:35:35 -0700
+Message-Id: <16aed184fa0c19fbf6af734dc80e34cb6cfa01af.1617899100.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617899100.git.akuster808@gmail.com>
 References: <cover.1617899100.git.akuster808@gmail.com>
@@ -52,30 +52,30 @@ From: zhengruoqin <zhengrq.fnst@cn.fujitsu.com>
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 55669e9214f3213ade48896e7cfe72396cb1e795)
+(cherry picked from commit 30a80664e38912d3532cfab5291e468191507625)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-daemons/lldpd/{lldpd_1.0.4.bb => lldpd_1.0.8.bb}  | 4 ++--
+ ...ger-openvpn_1.8.12.bb => networkmanager-openvpn_1.8.14.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-daemons/lldpd/{lldpd_1.0.4.bb => lldpd_1.0.8.bb} (94%)
+ rename meta-networking/recipes-connectivity/networkmanager/{networkmanager-openvpn_1.8.12.bb => networkmanager-openvpn_1.8.14.bb} (91%)
 
-diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.4.bb b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb
-similarity index 94%
-rename from meta-networking/recipes-daemons/lldpd/lldpd_1.0.4.bb
-rename to meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb
-index 8fdaf848ff2..bd94c091989 100644
---- a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.4.bb
-+++ b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb
-@@ -11,8 +11,8 @@ SRC_URI = "\
-     file://lldpd.default \
-     "
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.12.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.14.bb
+similarity index 91%
+rename from meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.12.bb
+rename to meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.14.bb
+index d455a0f06b8..a1a61bed1e3 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.12.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.14.bb
+@@ -10,8 +10,8 @@ inherit gnomebase useradd gettext systemd
  
--SRC_URI[md5sum] = "33e8d58623f99184e4e709cbbfe45db3"
--SRC_URI[sha256sum] = "5319bc032fabf1008d5d91e280276aa7f1bbfbb70129d8526cd4526d7c22724f"
-+SRC_URI[md5sum] = "000042dbf5b445f750b5ba01ab25c8ba"
-+SRC_URI[sha256sum] = "98d200e76e30f6262c4a4493148c1840827898329146a57a34f8f0f928ca3def"
+ SRC_URI = "${GNOME_MIRROR}/NetworkManager-openvpn/${@gnome_verdir("${PV}")}/NetworkManager-openvpn-${PV}.tar.xz"
  
- inherit autotools update-rc.d useradd systemd pkgconfig bash-completion
+-SRC_URI[md5sum] = "e8b1210011ece18d0278310fbff45af5"
+-SRC_URI[sha256sum] = "0efda8878aaf0e6eb5071a053aea5d7f9d42aac097b3ff89e7cbc9233f815318"
++SRC_URI[md5sum] = "bef67eca77bee68da703609b92f804a0"
++SRC_URI[sha256sum] = "e7419053fc3b5a7e25f1a7517c313ad4531b6ea280255524ebb85a70c76fdbeb"
+ 
+ S = "${WORKDIR}/NetworkManager-openvpn-${PV}"
  
 -- 
 2.17.1
