@@ -1,50 +1,50 @@
-Received: from mail-ot1-f41.google.com (mail-ot1-f41.google.com [209.85.210.41])
- by mx.groups.io with SMTP id smtpd.web08.246.1617899786072069133
+Received: from mail-oi1-f169.google.com (mail-oi1-f169.google.com [209.85.167.169])
+ by mx.groups.io with SMTP id smtpd.web12.227.1617899786768841673
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 08 Apr 2021 09:36:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ApONnSm2;
- spf=pass (domain: gmail.com, ip: 209.85.210.41, mailfrom: akuster808@gmail.com)
-Received: by mail-ot1-f41.google.com with SMTP id l12-20020a9d6a8c0000b0290238e0f9f0d8so2876706otq.8
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=EyaDDDGh;
+ spf=pass (domain: gmail.com, ip: 209.85.167.169, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f169.google.com with SMTP id c16so2806972oib.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=3QJeU0r8thy7aVa25HTJKiA8Stox8uIJRR0EjCf58Bg=;
-        b=ApONnSm2pDx90Slf7MdLrUHX4S6xA/EMgleVUVBA+fQCS+Nzxz3iXjeXLX9nrx/wvY
-         8fsZhLV6Nq2cj9BDE3nt4M0wdWReMWzATDUr9+pXcAupAim3V2c4ZRektJUMN+sw/PCu
-         TZC7I81i4cKD64RBR1MWhWdV9rb2sc6QjICZ5SNCWlVh2K2rZXQtQ+57WbGRuP0gUwi3
-         iKhgA3uhpMdLDXPOD4TU9xrzGDjgH0ClVR9rLYT3F03fD7Ur7Vwl9mkc+Bo8mPA7/KNf
-         RO7hexDLlgTf2S5iLo/Y6kIggOEUwZ1bANcJcHfN9LRlT1YFPlIrPVeT2hbDBY93K7RF
-         5zzQ==
+        bh=qcn0mL07UCi+/sCYOzOQM95urbC20NtAggVnsDePoqU=;
+        b=EyaDDDGhPzL9PIIji+C4obLTqyDHMKiV+vK8tK366onW63v5BkMf9IVKyaiuN39Tzi
+         zTsoMuJ7PYvUk5WljWD1PduoiRDj2lfRLabHddSpoTtlSxYcCUfAx4/+zXcekQJUJNCK
+         /ZuuMLOvhemsuxr9HQWH6N3+1SAC0FQtGpvfJWD6VLiKDEWrKoEeaN90g3jktjQ7c9ze
+         ST6jvxMkeoRa5s/cxxP5u4iOYRIWr92xHxpqEblY5aK503R73tiBnTXbsM49aECubSHz
+         Rcka2Np2Nkyx24Eb1NxD+exptth2GImEWxl/T9eB+vhIyAHeWaOuA8zgkYu3/FaQQBaE
+         inug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=3QJeU0r8thy7aVa25HTJKiA8Stox8uIJRR0EjCf58Bg=;
-        b=mptAXmwM65Ac7Fjow2rEsc2wfpDD96Utfr9V3CPvzQNv//duNqF6Xg1sqNxMKZPbaq
-         y5HDzKpUwPyOmgCLDS5RUMcVB7AMyL/2sYcBJ3ljp2tW4C9oRR8XPSz9/yuzKg/9rb3q
-         gsifDWl7Y3pVx9shKlSqDTk8xbBitwAQSDKLPBkoqnLcBGBnn1rx9opzHzLeyKQNznCc
-         ot1gW5Xj0G028rBhpFMwyVoe6016aph1rQ5SzV5suiBoQCzFS+mD0NdjQqN3iZ2N/ruK
-         JWRxeFzsMn13ZcBSBAdPSXEe1jTQ4FmMEmWruyG3oLCn5VGCwrRfvBEpo9Tn4MyCMGJq
-         /19Q==
-X-Gm-Message-State: AOAM531aCTDsomdiaUUo1Ixi/qdAD045DEOIRBVPKIAOkxKjSS56eiuX
-	9FBQRXn8PdwuABZ97c8gPOnJxavVtDw=
-X-Google-Smtp-Source: ABdhPJxyMH/qgFBKOjWfVjDUWGp37eATgL5C30Rdc9cFLE0azihq2AOMuPWB5NjvczXDx1ynmDPf0A==
-X-Received: by 2002:a9d:ec4:: with SMTP id 62mr8527608otj.277.1617899785313;
-        Thu, 08 Apr 2021 09:36:25 -0700 (PDT)
+        bh=qcn0mL07UCi+/sCYOzOQM95urbC20NtAggVnsDePoqU=;
+        b=O2WGgxenNb9FrcqEMhw7M3GP8OcWJ073xox58/AQ5ROQbZHFN9z88+7jF4muN8zg/Q
+         oXWgBhAWMx+EbkNlIfM+d2s28/PsLAP+lD4QcY9jr6pFIPObgr/GuGiJW2NEzjMEUHM4
+         xkgwnJcUB3A+Qf3uORnOb613IFjnBaxU2M8PQcZV1wsq9V7/lUgQTgqiRKOLMI8J1VpG
+         BbOaH8n1/znQnI6uh+BX8OblXghdrwwi95nts1GcRsJLM5Pv2aS5Mv9rNvqwQsdb6jzQ
+         wuPvheS0IxbS5cOMHbgs4cFTzXz7TTDhxpdEF8DCdtYb14Vxf5Yv2ySSXB7j3CwCS8KQ
+         Y4XQ==
+X-Gm-Message-State: AOAM532nsnoZNHFDCMse5WhUzzOhDKAGNNxno2ImpTXfEPanfDM2hIsS
+	oCuiGZ7VyFWeYJVmLmIYMuJQBHYkZBY=
+X-Google-Smtp-Source: ABdhPJwRgn+8RUr85DpL9FWBwuk/ML6+SwwhLlRdioMkrriq+FDgJXzl+mFSCyZOrIXUbw6y2s0V/w==
+X-Received: by 2002:aca:d70a:: with SMTP id o10mr6935355oig.143.1617899786010;
+        Thu, 08 Apr 2021 09:36:26 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.24
+        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.25
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Thu, 08 Apr 2021 09:36:25 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 12/64] vlc: Exclude from world if commercial is not in inclusion list
-Date: Thu,  8 Apr 2021 09:35:19 -0700
-Message-Id: <0bcc3f89f11a6f72a3b32fcb2e68d98291d647c5.1617899100.git.akuster808@gmail.com>
+Subject: [hardknott 13/64] sox: Remove LICENSE_FLAGS = "commercial"
+Date: Thu,  8 Apr 2021 09:35:20 -0700
+Message-Id: <d93e3b7f968a640181c7eebe83272514ef941f89.1617899100.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617899100.git.akuster808@gmail.com>
 References: <cover.1617899100.git.akuster808@gmail.com>
@@ -54,35 +54,36 @@ Content-Transfer-Encoding: 8bit
 
 From: Khem Raj <raj.khem@gmail.com>
 
-Remove LICENSE_FLAGS setting as its no longer needed
+Its not needed bitbake gives a better diagnostics when included
+in image deps without accepting commercial license
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Cc: Andreas Müller <schnitzeltony@gmail.com>
-(cherry picked from commit dbd662de1ca670459ddc88cf68c9a3f888ba71ee)
+(cherry picked from commit da393545a2721af13ff42426b7effdd7adc4d927)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/vlc/vlc_3.0.12.bb | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.12.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.12.bb
-index c0074aabb5d..cb796a00fa4 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.12.bb
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.12.bb
-@@ -16,9 +16,6 @@ DEPENDS = "coreutils-native fribidi libtool libgcrypt libgcrypt-native \
- LDFLAGS_append_riscv64 = " -latomic"
- LDFLAGS_append_riscv32 = " -latomic"
+diff --git a/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb b/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
+index 4c3f37913ad..2d6e913d871 100644
+--- a/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
++++ b/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
+@@ -6,9 +6,6 @@ SECTION = "audio"
+ 
+ DEPENDS = "libpng ffmpeg libsndfile1"
  
 -# While this item does not require it, it depends on ffmpeg which does
 -LICENSE_FLAGS = "commercial"
 -
- SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz \
-            file://0001-make-opencv-configurable.patch \
-            file://0002-use-vorbisidec.patch \
-@@ -134,3 +131,4 @@ FILES_${PN}-staticdev += "\
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'alsa pulseaudio', d)} \
+                    magic \
+ "
+@@ -40,4 +37,3 @@ SRC_URI[sha256sum] = "b45f598643ffbd8e363ff24d61166ccec4836fea6d3888881b8df53e3b
+ inherit autotools pkgconfig
  
- INSANE_SKIP_${PN} = "dev-so"
- 
-+EXCLUDE_FROM_WORLD = "${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "0", "1", d)}"
+ EXCLUDE_FROM_WORLD = "${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "0", "1", d)}"
+-
 -- 
 2.17.1
 
