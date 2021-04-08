@@ -1,102 +1,87 @@
-Received: from mail-oo1-f45.google.com (mail-oo1-f45.google.com [209.85.161.45])
- by mx.groups.io with SMTP id smtpd.web11.239.1617899817175134149
+Received: from mail-oo1-f47.google.com (mail-oo1-f47.google.com [209.85.161.47])
+ by mx.groups.io with SMTP id smtpd.web11.241.1617899818010432845
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Apr 2021 09:36:57 -0700
+ Thu, 08 Apr 2021 09:36:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=JPOkGdNV;
- spf=pass (domain: gmail.com, ip: 209.85.161.45, mailfrom: akuster808@gmail.com)
-Received: by mail-oo1-f45.google.com with SMTP id x187-20020a4a41c40000b02901b664cf3220so645631ooa.10
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Z5NFOBmC;
+ spf=pass (domain: gmail.com, ip: 209.85.161.47, mailfrom: akuster808@gmail.com)
+Received: by mail-oo1-f47.google.com with SMTP id w1-20020a4adec10000b02901bc77feac3eso652399oou.3
         for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=AZrys87HiYGYZPWmCoY1qSxj2sYvXg9hg70T665/dCM=;
-        b=JPOkGdNVZwpdxfHpzT52j/s/dWH5FifnyhgmHATx3mdx880TQINMaPj54Wfdp+hcBg
-         8SH3GCjr7++Ih7Z761wm0IBJ10F4dRwLhqV+eFum8GHcK/YoVt5w8jsPKZ7VfQsvztlg
-         BbExcrIuQ29OdG1WrPuriiAa80RLD6GWRdBX7sYX5769BVZjaYBDZAZ39J8sF+6dSdzz
-         X+ITboDuVN6xK3+wsZOJevbZ6tbLkJwXIyU/O8RlnzZA3vmf2JewmFwd0Pofq36neEhc
-         g0CEL2aMKmbepGkJqyvaU5JO2VX35IpbzQ2IpNJnwO0dxFxvHbwVLBhV+9VruQu0FWyz
-         jFlw==
+        bh=7i8O6tSV/TDIgGbtnn3oSKAdBT66SYJ0GhNdP5vHhiw=;
+        b=Z5NFOBmC0oeRR0ne4el9uWCFUgt0ospdS/ltc6O0SKo/sKlzl/PEJsfvCjO3gChUqW
+         krxHvwkOFbmGEZhpSimeFl3HP1aX7YDD504J3K6QUT3JGpG0bl4ZQmVDiWaHIl0HzSuv
+         BS9K2Scz+iWZSR17qmXJQIOQF5+O4IGewE9zWqlE6QFg9fXVElquEYvs4dYkKTE+aWGb
+         2TKCF4+FRi8j66K0TqRGJbUdkbl58Rl2ZIIsj/2sXUvwbhRKeuv0CgHN1I7qW1nGisEQ
+         Kgy1HlkWrpTn6hpDMbP22wMnQhtYquN2H01hDClpOG/fCIgaV/USkELIkpegAxLym3DI
+         vSFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=AZrys87HiYGYZPWmCoY1qSxj2sYvXg9hg70T665/dCM=;
-        b=QgP8C+U5kF5M2fSZawjWKKX8HiFxEbSgV//1Ow8zQ8LIKHgBSmP1TZ9P/elbZU0mnM
-         QPYjH2q0WYIlFEGJKiezYg/HQPZBxybThWH3aRAUkjGOaOET+qfoz1aUiW1TDsBiEw9D
-         DKpgpwbTBYzHrmWF5YQAIewoMgGn/S2t0Faga2zLgkkjWFsPznNFZlCkmKwnWP8A5rx7
-         YRk/2PCI3dH5mjhPMb15D/pK5fqlVLj1MUe/mHrlMJV1w99dtrBGLyQUQjJJ2kwGMsck
-         2cRY2hXY+6lljkq5M1XjEbWbZaKINr++FZv//U37Jt9S1qsSpHwSn4ZRgp0DE9AUOl/I
-         m0Xw==
-X-Gm-Message-State: AOAM532tddf98uF5BAOox9IP7quzBnL+AqwHpYNR+hLj8A4Hg2C164tk
-	23umdaWnb9irFFVafaB1psBPuWa60LQ=
-X-Google-Smtp-Source: ABdhPJwg6VnWd1XSmhHszBYCtTYb82n7FylkAX4GSbW663qPJPJQ83Pa7ikPWhFnxpeoQJdgl/1NTw==
-X-Received: by 2002:a4a:a5cc:: with SMTP id k12mr8235894oom.37.1617899816400;
-        Thu, 08 Apr 2021 09:36:56 -0700 (PDT)
+        bh=7i8O6tSV/TDIgGbtnn3oSKAdBT66SYJ0GhNdP5vHhiw=;
+        b=qDl53DkUM2kX4Ru5UD+boX7UcNYaJttvCyOZPH8xU6ZpoOzqQaCTVIJh4tXIAhzP+W
+         M0HFcI7MCdXG7uEGbhjBrjcZCRGC2RexNhWhzDKOp9YG1RQxBjjZxdMQTY3g6DhzJ6vH
+         9sHuRSAhu1Wnb5gXYNQn6feXYxv9GLPeP4DHfkSsfGm2/xAttThsVdq+bSEBC9UkohbT
+         /pevfnSLimQPvQETPqMfKnTEz7wUE6T2anfrstatV+wTPfr290SuLkkVRWCUX8LtvG3N
+         l2wmUlydZNwzBRkJwuJWKnA8s07dt1mOAuvk0xmnHXm+oN7m5AurcTKgyK5eQ+5aUyjl
+         WwSg==
+X-Gm-Message-State: AOAM533vyESMdyKTFzZwdugSlSzMevE0OELydwXDfzsfPH2zTJ07ZP93
+	Jhh1xqeZXgS5ZOL4NBbLsvJQL02qQs4=
+X-Google-Smtp-Source: ABdhPJxABf0zEgKkXK6oRBhbNgv0hOMfeNkn57hMQ8UAE9BaGt+cNwu20t/3SsKx/YUeN0+GxW8JMQ==
+X-Received: by 2002:a4a:e2c6:: with SMTP id l6mr8245445oot.31.1617899817224;
+        Thu, 08 Apr 2021 09:36:57 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.55
+        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.56
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Thu, 08 Apr 2021 09:36:56 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 47/64] python3-docutils: Upgrade 0.16 -> 0.17
-Date: Thu,  8 Apr 2021 09:35:54 -0700
-Message-Id: <155b9d8de55d8fb19335fd8b14cd025436f48dd0.1617899100.git.akuster808@gmail.com>
+Subject: [hardknott 48/64] python3-bitarray: Upgrade 1.8.2 -> 1.9.0
+Date: Thu,  8 Apr 2021 09:35:55 -0700
+Message-Id: <8b22a2a83a9990953701ba50406c1bbbba7b8d92.1617899100.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617899100.git.akuster808@gmail.com>
 References: <cover.1617899100.git.akuster808@gmail.com>
 
 From: Leon Anavi <leon.anavi@konsulko.com>
 
-Upgrade to release 0.17:
+Upgrade to release 1.9.0:
 
-- Installing with setup.py now requires setuptools. Alternatively,
-  install with pip.
-- The generic command line front end tool docutils-cli.py allows
-  the free selection of reader, parser, and writer components.
-- New, experimental wrapper to integrate the recommonmark Markdown
-  parser for use with Docutils.
-- pseudoxml-writer got a --detailled option for pretty printing
-  text nodes.
-- odf/odt-writer improved metadata handling.
-- HTML5 writer improvements.
-- LaTeX writer improvements.
-- Fixes in Arabic mappings and Korean translations.
-- directives: Prevent infinte inclusion loops.
-
-License-Update: Fix link to 2-Clause BSD license in COPYING.txt.
+- add shift operations (`<<`, `>>`, `<<=`, `>>=`)
+- add `bitarray.util.ba2base()` and `bitarray.util.base2ba()`
+- documentation and tests
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-(cherry picked from commit a2964529ec9d7b4a8e9233ec7d7bb66eb9942edc)
+(cherry picked from commit befe8552bdefc3fa289c9a5a966b5a8c96377ada)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{python3-docutils_0.16.bb => python3-docutils_0.17.bb}   | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-docutils_0.16.bb => python3-docutils_0.17.bb} (52%)
+ .../{python3-bitarray_1.8.2.bb => python3-bitarray_1.9.0.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-bitarray_1.8.2.bb => python3-bitarray_1.9.0.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-docutils_0.16.bb b/meta-python/recipes-devtools/python/python3-docutils_0.17.bb
-similarity index 52%
-rename from meta-python/recipes-devtools/python/python3-docutils_0.16.bb
-rename to meta-python/recipes-devtools/python/python3-docutils_0.17.bb
-index 44b7320cbb5..8605e93b52f 100644
---- a/meta-python/recipes-devtools/python/python3-docutils_0.16.bb
-+++ b/meta-python/recipes-devtools/python/python3-docutils_0.17.bb
-@@ -2,9 +2,8 @@ SUMMARY = "Docutils is a modular system for processing documentation into useful
- HOMEPAGE = "https://pypi.org/project/docutils/"
- SECTION = "devel/python"
- LICENSE = "BSD-2-Clause & GPL-2.0 & Python-2.0"
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=7a4646907ab9083c826280b19e103106"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=836a1950177996968a49ff477a4a61c4"
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.8.2.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.9.0.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-bitarray_1.8.2.bb
+rename to meta-python/recipes-devtools/python/python3-bitarray_1.9.0.bb
+index 8fd4b6c31f4..12ac3d964f4 100644
+--- a/meta-python/recipes-devtools/python/python3-bitarray_1.8.2.bb
++++ b/meta-python/recipes-devtools/python/python3-bitarray_1.9.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+ LICENSE = "PSF"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
  
--SRC_URI[md5sum] = "9ccb6f332e23360f964de72c8ea5f0ed"
--SRC_URI[sha256sum] = "7d4e999cca74a52611773a42912088078363a30912e8822f7a3d38043b767573"
-+SRC_URI[sha256sum] = "e2ffeea817964356ba4470efba7c2f42b6b0de0b04e66378507e3e2504bbff4c"
+-SRC_URI[sha256sum] = "96136d9add2b9b3b73e1eb7538b8d12547ee82dc3fbd31addef829371ce2a1bd"
++SRC_URI[sha256sum] = "db00073387af7fe30852d96b04742a0cdbc7feaf3158558520ab7898b0435ee2"
  
- inherit pypi setuptools3
+ inherit setuptools3 pypi
+ 
 -- 
 2.17.1
 
