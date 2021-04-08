@@ -1,60 +1,59 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.4])
- by mx.groups.io with SMTP id smtpd.web11.3973.1617859675430660609
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.66])
+ by mx.groups.io with SMTP id smtpd.web09.4027.1617859708567622632
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Apr 2021 22:27:55 -0700
+ Wed, 07 Apr 2021 22:28:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=q2FLLtwj;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.4, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ic83AiEK;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.66, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1617859673; i=@fujitsu.com;
-	bh=8yJzsUssEW0ReNqP5gprQUgPMExStHP7jqNMKBVPWAE=;
+	s=170520fj; t=1617859706; i=@fujitsu.com;
+	bh=6zFOPx+RdD9eeR2LLcGpvAktMq+B+0tL22fX6lvfSoY=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=q2FLLtwj5b9ZDKHmr7uA7YRw2PZnuN1hE016+1+4NnwWuZPCZFlJrsAFQocsPWkFp
-	 aPmeFL61GdkOmlWwkDk7vLsMA9QN1J70XHECu893pDLvTPCrPPJxdzcMdqcWeXHY3s
-	 kvztZzPXPx8ml+AWK+6Kc8p4CI/qzCI4vuyrCl+qxv9Pg6NrNz3lvPt91aaPd8LhwV
-	 IcRl1jbZmJcZuVJvmE7FRpKeeY3KGMVgFQtIIg5l8/z0BUt75laUiXQAK0F3tzpiPv
-	 RZQ0yNQk65kCdEwmxp9pw+hSDOb/33/9zoXdqE0jfVdZxHXkNOcRHvsojlI2U/TEmy
-	 SnWzaOj5FJvkw==
-Received: from [100.113.2.232] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-a.eu-central-1.aws.symcld.net id E4/CD-42359-9549E606; Thu, 08 Apr 2021 05:27:53 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrFIsWRWlGSWpSXmKPExsViZ8MRqhsxJS/
-  B4ONbE4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePtr+XMBV/ZKx7PPcfewDiRvYuRi0NIYCuT
-  RNP390wQznFGiTunrjF3MXJysAnoSHS86GYBsUUE9CWWzt4DFhcW8JDofnuYHcRmEVCRuDNhG
-  iOIzSvgJjHhQwtYvYSAgsSUh++ZIeKCEidnPgGLMwtISBx88YIZokZRYvvOM1D1VRJnZ39hms
-  DIMwtJyywkLQsYmVYxWiQVZaZnlOQmZuboGhoY6BoaGusa6Zoa6iVW6SbqpZbqJqfmlRQlAiX
-  1EsuL9Yorc5NzUvTyUks2MQIDKaWQyXgH47XXH/QOMUpyMCmJ8mZNyksQ4kvKT6nMSCzOiC8q
-  zUktPsQow8GhJMF7oQ0oJ1iUmp5akZaZAwxqmLQEB4+SCG8aSCtvcUFibnFmOkTqFKM9x5u1S
-  xYxc7TduwskZy44uJqZ4377odXMQix5+XmpUuK8qZOB2gRA2jJK8+CGwqLwEqOslDAvIwMDgx
-  BPQWpRbmYJqvwrRnEORiVh3skgy3ky80rgdr8COosJ6KySg7kgZ5UkIqSkGpi8BXQTX/Dqerh
-  HyK4wXPpn0hSuAr5tfdP23KrX++P9wNr8ifEUXp4HK5WWTdt/wey2ZMzO00FnCv9P73u3NG9m
-  gv2kopser/rcRLLtUg/Xz520tUnmse7ORo0VGQ+4w/zX3AuxkX3qMXlm+BV35hhhI+eaGWmJ8
-  ydLfg7rqmrtNJ1o3/J/xh+GqR4R69R4f3wTFz3W3l6zZdVcsbtHLb3mKjgG2W/TTi7MXXzaWG
-  bzKfdbxz4lXriypttUojzMi4txfcKqQ8JH31hKvC9f8V3rq2ynywbnA4eTZzy1FzrL2btp6S1
-  2xjXTGnZxBcy32mN2SvjRpisuHyU5LZ69Pabc0rTGLVzm60yNMCn3HC8lluKMREMt5qLiRACB
-  LXAZPQMAAA==
+	b=ic83AiEKIAGgEo1AL9fvTkbpWAM2ggkUMzZAQgVqVLDlfs+HtjsBUILrh1oGPse4L
+	 rLjMbE5Ii/ie9cxbQLXkzBat0uvn+Z7j/2w+SNP2gTPcUE9g8KcCyEBNQociWj98mm
+	 tyFp7VOGjaCfJHmuwXdlJlFC4V6slJ1n6XKLY4KakgW+iE+liezpzGLAdXctgnVmJH
+	 lrJRNIy1YQ7HyXv5QoYpMj8AYSrF2ZmBFt/cSq4ykYeJqpwPiy68/dWzZhh0qYXTuz
+	 /gIxHEj0PNikQHTYu2A9OlgY6bMHBUxFAv8UX2kXFhj2KDOGAlE2kHHK4POKqgn8LO
+	 XZqgGNoTuSj0g==
+Received: from [100.112.199.60] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-b.eu-west-1.aws.symcld.net id 4A/26-60958-A749E606; Thu, 08 Apr 2021 05:28:26 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYols5JS/
+  B4OJSa4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPbKfeCX6wVj+beYmlg3MjaxcjFISSwlUni
+  WttBNgjnOKPEqle3mboYOTnYBHQkOl50s4DYIgL6Ektn72EGsYUF7CTOfzwLVsMioCJx8fgdR
+  hCbV8BNYs+6XWD1EgIKElMevmeGiAtKnJz5BCzOLCAhcfDFC2aIGkWJ7TvPQNVXSZyd/YVpAi
+  PPLCQts5C0LGBkWsVokVSUmZ5RkpuYmaNraGCga2hopGtoaa5raGyul1ilm6SXWqpbnlpcomu
+  ol1herFdcmZuck6KXl1qyiREYRikFRzt3MP569UHvEKMkB5OSKG/WpLwEIb6k/JTKjMTijPii
+  0pzU4kOMMhwcShK8F9qAcoJFqempFWmZOcCQhklLcPAoifCmgbTyFhck5hZnpkOkTjEqSonz3
+  p4MlBAASWSU5sG1weLoEqOslDAvIwMDgxBPQWpRbmYJqvwrRnEORiVh3ocgU3gy80rgpr8CWs
+  wEtLjkYC7I4pJEhJRUA1N6vM6rvcxxczmueLh6yXgWbtCTNov5477sk8n6pw2836Oe1p45Hxv
+  ifTWXxUNz17re5avD+8oXiXosW/fJxOpKTsA0Ea4qxpZPqQc/hRnv8LZbXHx4ydUiyf9ykx+r
+  8d6vvjx9Rqr9bG4HBrPdjw4kHRBJvci6eMYJL7aKCycjFZndSmO5yk1lF4tPK+F2aFur932t/
+  cyVFn+SlY9rSkuv6mNYsGFjtUzlxBdBffxeApr53Gdqd649P+9f3WUt8QkJNxhVZf6bhL7uMV
+  PsFtSaqin3+3NG+OF3odyPdRn1SjZWdD068cvxa5uLzBGnX+fEE3T2h3L+O7HAkXFflFaWmNL
+  Biq70R5btVz3XKbEUZyQaajEXFScCAM87zoweAwAA
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-13.tower-232.messagelabs.com!1617859672!1009737!1
-X-Originating-IP: [62.60.8.85]
+X-Msg-Ref: server-3.tower-287.messagelabs.com!1617859705!606794!1
+X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.60.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 27240 invoked from network); 8 Apr 2021 05:27:52 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-13.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 Apr 2021 05:27:52 -0000
+Received: (qmail 18596 invoked from network); 8 Apr 2021 05:28:25 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-3.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 Apr 2021 05:28:25 -0000
 Received: from R01UKEXCASM223.r01.fujitsu.local (ex2k13_223.fs.fujitsu.com [10.182.185.121])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1385RqRA025710
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1385SMp6019009
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 8 Apr 2021 06:27:52 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 8 Apr 2021 06:28:25 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 8 Apr 2021 06:27:50 +0100
+ (TLS) id 15.0.1497.2; Thu, 8 Apr 2021 06:28:20 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-networking] [PATCH] usbredir: upgrade 0.8.0 -> 0.9.0
-Date: Fri, 9 Apr 2021 01:27:43 +0800
-Message-ID: <1617902863-5289-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] hwdata: upgrade 0.345 -> 0.346
+Date: Fri, 9 Apr 2021 01:28:14 +0800
+Message-ID: <1617902894-5351-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -64,26 +63,24 @@ Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../spice/{usbredir_0.8.0.bb => usbredir_0.9.0.bb}              | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/spice/{usbredir_0.8.0.bb => usbredir_0.9.0.bb} (88%)
+ meta-oe/recipes-support/hwdata/hwdata_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-support/spice/usbredir_0.8.0.bb b/meta-networking/recipes-support/spice/usbredir_0.9.0.bb
-similarity index 88%
-rename from meta-networking/recipes-support/spice/usbredir_0.8.0.bb
-rename to meta-networking/recipes-support/spice/usbredir_0.9.0.bb
-index 9ee43be1e..079f52f99 100644
---- a/meta-networking/recipes-support/spice/usbredir_0.8.0.bb
-+++ b/meta-networking/recipes-support/spice/usbredir_0.9.0.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+diff --git a/meta-oe/recipes-support/hwdata/hwdata_git.bb b/meta-oe/recipes-support/hwdata/hwdata_git.bb
+index 56d814db8..738c32d63 100644
+--- a/meta-oe/recipes-support/hwdata/hwdata_git.bb
++++ b/meta-oe/recipes-support/hwdata/hwdata_git.bb
+@@ -5,8 +5,8 @@ SECTION = "System/Base"
+ LICENSE = "GPL-2.0+"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1556547711e8246992b999edd9445a57"
  
- DEPENDS = "libusb1"
+-PV = "0.345"
+-SRCREV = "5d7d97bae533401f60ce9a5a036ff7152c8aca8c"
++PV = "0.346"
++SRCREV = "a2bff16032a68b089eeb169f09dea08094891c9c"
+ SRC_URI = "git://github.com/vcrhonek/${BPN}.git"
  
--SRCREV = "07b98b8e71f620dfdd57e92ddef6b677b259a092"
-+SRCREV = "bca484fc6f206ab9da2f73e8a0118fad45374d4e"
- 
- SRC_URI = " \
-     git://anongit.freedesktop.org/spice/usbredir \
+ S = "${WORKDIR}/git"
 -- 
 2.25.1
 
