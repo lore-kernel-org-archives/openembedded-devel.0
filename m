@@ -1,59 +1,59 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.3])
- by mx.groups.io with SMTP id smtpd.web08.3795.1617858680511309277
+Received: from mail3.bemta25.messagelabs.com (mail3.bemta25.messagelabs.com [195.245.230.82])
+ by mx.groups.io with SMTP id smtpd.web10.3915.1617858818222741981
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Apr 2021 22:11:21 -0700
+ Wed, 07 Apr 2021 22:13:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=v70TYp3+;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.3, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WFiZILCg;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.82, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1617858678; i=@fujitsu.com;
-	bh=dmWyGWCtH1A6Kt8lUSYMtj8Xz+nwv2D8AhvYeSdF810=;
+	s=170520fj; t=1617858816; i=@fujitsu.com;
+	bh=kX5kU/HgvtOYPdkgjz7NVCzr2joSnktBLdt2UM81Udk=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=v70TYp3+NDT3tbGwE+rJxdqTnTAaTRFRIp6B39wdBXyAz8OmLHBnffTcoiOMw2uNl
-	 Q8tocCAtaKSXYSIpk7jTSK0nHTrV0TxvMP1kmwSQjLpt+UNKKvd1bRsDfpC+IS+xgk
-	 NjSpXCqJzpdIfNWfmf+LgCIOCkkDKmJEnzdAKaUs/r3aHaHPcu7vIA13cVTlYOiUMh
-	 0bBoA7NWqGt3Ej2y1WfCFnDnZ4RtHq1hfbsT9wVN9MC39SDMKLsgURtd/eO82z5doc
-	 MjYgMTs6jD+2P9S2TgUTmufxKmoIAa6AQYw20hwCRodx0sN/x2qaEH6z6ob5jpBTXx
-	 s4Aqh4n3C104A==
-Received: from [100.113.0.194] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-a.eu-central-1.aws.symcld.net id 3A/04-41911-6709E606; Thu, 08 Apr 2021 05:11:18 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprJIsWRWlGSWpSXmKPExsViZ8MRqls6IS/
-  BYPUSC4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePNpPPMBXelK65Of8/cwLhAoouRi0NIYCuT
-  xJWJ59khnOOMEn3PLgE5nBxsAjoSHS+6WUBsEQF9iaWz9zCD2MICNhJLO28ygtgsAioSO9cdA
-  qvhFXCTmL/tOlivhICCxJSH75kh4oISJ2c+AathFpCQOPjiBTNEjaLE9p1nWCDsKomzs78wTW
-  DkmYWkZRaSlgWMTKsYLZOKMtMzSnITM3N0DQ0MdA0NjXUNdY2MzPQSq3QT9VJLdZNT80qKEoG
-  yeonlxXrFlbnJOSl6eaklmxiBoZRSyPhoB+Pp1x/0DjFKcjApifLaPclNEOJLyk+pzEgszogv
-  Ks1JLT7EKMPBoSTBe6EtL0FIsCg1PbUiLTMHGNYwaQkOHiUR3qxeoDRvcUFibnFmOkTqFKMux
-  +Xr8xYxC7Hk5eelSonzSoMUCYAUZZTmwY2AxdglRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSs
-  K8u/qApvBk5pXAbXoFdAQT0BElB3NBjihJREhJNTAtOb7mD+PF3TyHNS7JHVQWPCX6I3P6HSZ
-  ntz/T2ua4NSUY/d62X1k++lDM6yNzdF03Ho18G9Oa189ecvHcm4gVe5c99os6otbRsNDEjnPb
-  dn3W2u+t5bVXz/bEmql7xar67098X/1KYr3sqr1aqb4nr02Itio+qPprpapAcolKnYVzls3vd
-  9NcG+1euV0+fCryh6Z6XcXnc1sSV9/Xu39P6qeNwjleb6ZvW13kjf6XmeV5qDnt7/rxIbL9/x
-  qWLdfLj854lbryh7FPTX+J6ccFX7dc2x/5yUbovt0kIZtWploX6VexD9oy7EVe2H4uqtqwdfn
-  hWRqNHuuCzRTWHZyo7nciT4DlxNZJEsW3Lz9QYinOSDTUYi4qTgQAKw7ETiwDAAA=
+	b=WFiZILCgPfM89xQpQ6CwZdWzxmmIrxrFhPjJup2FXxPPG9rB/AMkPg8mxBbJ+LZgR
+	 57nZcjymPprX3zbDt6zFOcxHyyV2PDiy/C/vp2ZwVAIbHGaiNIVSsLzJF71yKvOWfn
+	 M97d2RwO5dw4KqBcHo4BZoYfYRRlR/tTi/esFaK4sE7gNSu4Qg4GqSXP9DUyXDu45a
+	 TUw69gAqXnEjMDxm98xH0lBNmw71RODKzF67nNh5jjPJSkru0J7Z0S8ZrnaqCo9Tk/
+	 i1/H6GhIVF2LrF6gqXP3k/x8R/s77WIXMBhV8Bm42v9GryrDUcowuK3oPsFGH175lf
+	 04Cpx9Ps1e+hg==
+Received: from [100.112.199.60] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-b.eu-west-1.aws.symcld.net id D4/BE-60958-FF09E606; Thu, 08 Apr 2021 05:13:35 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupgkeJIrShJLcpLzFFi42Kxs+GYovt/Ql6
+  CwdteGYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPT5/CCV5wVS/e0MjUwNnN2MXJxCAlsZZI4
+  dfEzG4RznFFid+s5li5GTg42AR2JjhfdYLaIgL7E0tl7mLsYOTiEBbwk2jewgpgsAioSj2/Wg
+  Ji8Am4Sx39kgBRLCChITHn4nhnE5hUQlDg58wnYEGYBCYmDL14wQ9QoSmzfeYYFwq6SODv7C9
+  MERp5ZSFpmIWlZwMi0itEiqSgzPaMkNzEzR9fQwEDX0NBI19DSQtfQ2EAvsUo3SS+1VLc8tbh
+  E11AvsbxYr7gyNzknRS8vtWQTIzCAUgqONe1gPPn6g94hRkkOJiVRXrsnuQlCfEn5KZUZicUZ
+  8UWlOanFhxhlODiUJHgvtOUlCAkWpaanVqRl5gCDGSYtwcGjJMKb1QuU5i0uSMwtzkyHSJ1iV
+  JQS55UGSQiAJDJK8+DaYBF0iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5IwLwswHoV4MvNK4K
+  a/AlrMBLS45GAuyOKSRISUVANT3paG5vX1zWyKC84pPq6327r/66oVHxOnxYlzlIQyXtR9Ki6
+  lsC3qU9LzdcnfLr0K6vavrL+1ccNe3bea19f3/T6z9cFn8X8Pcr5/PL54zuP0VOXFj6+6x6wI
+  MXnk/O/p9eQlbyrXPfTc/ql5Nttcnhtla5XNZVbkxKZfevJpkVaSYEZn07aSCeFK26Z8beopv
+  zMvIvfb1w2WpZuSe3kM1ssmHLFOfSWxrydwY1CzsKzH+/3JGw0LshvUr+irChw7+N1W3Hjnxd
+  tKK1/OCXomUvyhZ40j/8INgsFl/ccnPnm0bl7Q6+a2R4mrjgadehK3xsSVe1lYkSDnwVOhV9f
+  s9jTlahEqmfFBL3y31JUVtkosxRmJhlrMRcWJAOBGVl8bAwAA
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-28.tower-228.messagelabs.com!1617858677!936958!1
-X-Originating-IP: [62.60.8.85]
+X-Msg-Ref: server-18.tower-285.messagelabs.com!1617858815!614188!1
+X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.60.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 6660 invoked from network); 8 Apr 2021 05:11:17 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-28.tower-228.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 Apr 2021 05:11:17 -0000
+Received: (qmail 13635 invoked from network); 8 Apr 2021 05:13:35 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-18.tower-285.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 Apr 2021 05:13:35 -0000
 Received: from R01UKEXCASM223.r01.fujitsu.local (ex2k13_223.fs.fujitsu.com [10.182.185.121])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1385B92w021727
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1385DZmV014902
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 8 Apr 2021 06:11:17 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 8 Apr 2021 06:13:35 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 8 Apr 2021 06:11:08 +0100
+ (TLS) id 15.0.1497.2; Thu, 8 Apr 2021 06:13:33 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH v3] xterm: upgrade 366 -> 367
-Date: Fri, 9 Apr 2021 01:10:59 +0800
-Message-ID: <1617901859-4838-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] mosquitto: upgrade 2.0.9 -> 2.0.10
+Date: Fri, 9 Apr 2021 01:13:27 +0800
+Message-ID: <1617902007-4927-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -61,89 +61,30 @@ X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
 Content-Type: text/plain
 
--License-Update: Copyright year updated to 2021.
-
-Refresh the following patch:
-0001-Add-configure-time-check-for-setsid.patch
-
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../0001-Add-configure-time-check-for-setsid.patch     | 10 +++++-----
- .../xorg-app/{xterm_366.bb => xterm_367.bb}            |  4 ++--
- 2 files changed, 7 insertions(+), 7 deletions(-)
- rename meta-oe/recipes-graphics/xorg-app/{xterm_366.bb => xterm_367.bb} (89%)
+ .../mosquitto/{mosquitto_2.0.9.bb => mosquitto_2.0.10.bb}     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.9.bb => mosquitto_2.0.10.bb} (95%)
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/xterm/0001-Add-configure-time-check-for-setsid.patch b/meta-oe/recipes-graphics/xorg-app/xterm/0001-Add-configure-time-check-for-setsid.patch
-index d3beea8be..92ecdac22 100644
---- a/meta-oe/recipes-graphics/xorg-app/xterm/0001-Add-configure-time-check-for-setsid.patch
-+++ b/meta-oe/recipes-graphics/xorg-app/xterm/0001-Add-configure-time-check-for-setsid.patch
-@@ -18,7 +18,7 @@ diff --git a/configure b/configure
- index 0aafefc..03e8df0 100755
- --- a/configure
- +++ b/configure
--@@ -5411,6 +5411,7 @@ for ac_func in \
-+@@ -5605,6 +5605,7 @@ for ac_func in \
-  	unsetenv \
-  	sched_yield \
-  	setpgid \
-@@ -42,7 +42,7 @@ diff --git a/main.c b/main.c
- index 5e60589..b81d2be 100644
- --- a/main.c
- +++ b/main.c
--@@ -2868,7 +2868,7 @@ main(int argc, char *argv[]ENVP_ARG)
-+@@ -2903,7 +2903,7 @@ main(int argc, char *argv[]ENVP_ARG)
-      }
-  }
-  
-@@ -51,7 +51,7 @@ index 5e60589..b81d2be 100644
-  #define USE_OPENPTY 1
-  static int opened_tty = -1;
-  #endif
--@@ -4040,7 +4040,7 @@ spawnXTerm(XtermWidget xw, unsigned line_speed)
-+@@ -4074,7 +4074,7 @@ spawnXTerm(XtermWidget xw, unsigned line_speed)
-  	    /*
-  	     * now in child process
-  	     */
-@@ -64,14 +64,14 @@ diff --git a/xtermcfg.hin b/xtermcfg.hin
- index 1dbc3b8..4f3ff5b 100644
- --- a/xtermcfg.hin
- +++ b/xtermcfg.hin
--@@ -96,6 +96,7 @@
-+@@ -95,6 +95,7 @@
-  #undef HAVE_PUTENV		/* AC_CHECK_FUNCS(putenv) */
-  #undef HAVE_SCHED_YIELD		/* AC_CHECK_FUNCS(sched_yield) */
-  #undef HAVE_SETPGID		/* AC_CHECK_FUNCS(setpgid) */
- +#undef HAVE_SETSID		/* AC_CHECK_FUNCS(setsid) */
-  #undef HAVE_STDINT_H		/* AC_PROG_CC_STDC */
-  #undef HAVE_STDLIB_H		/* AC_CHECK_HEADERS(stdlib.h) */
-- #undef HAVE_STRFTIME		/* AC_CHECK_FUNCS(strftime) */
-+ #undef HAVE_STDNORETURN_H	/* CF_C11_NORETURN */
- -- 
- 2.24.1
+diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.9.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.10.bb
+similarity index 95%
+rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.9.bb
+rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.10.bb
+index 97a380117..b815ac3b4 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.9.bb
++++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.10.bb
+@@ -19,8 +19,8 @@ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
+            file://1571.patch \
+ "
  
-diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_366.bb b/meta-oe/recipes-graphics/xorg-app/xterm_367.bb
-similarity index 89%
-rename from meta-oe/recipes-graphics/xorg-app/xterm_366.bb
-rename to meta-oe/recipes-graphics/xorg-app/xterm_367.bb
-index 969159bc5..e0d3dcec1 100644
---- a/meta-oe/recipes-graphics/xorg-app/xterm_366.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xterm_367.bb
-@@ -2,13 +2,13 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
- SUMMARY = "xterm is the standard terminal emulator for the X Window System"
- DEPENDS = "libxaw xorgproto libxext libxau libxinerama libxpm ncurses desktop-file-utils-native"
+-SRC_URI[md5sum] = "b77cee4ee6f0d32ca8816a58167e8b1d"
+-SRC_URI[sha256sum] = "1b8553ef64a1cf5e4f4cfbe098330ae612adccd3d37f35b2db6f6fab501b01d4"
++SRC_URI[md5sum] = "3d1c327d8c5881f56983bee1e3c8f068"
++SRC_URI[sha256sum] = "0188f7b21b91d6d80e992b8d6116ba851468b3bd154030e8a003ed28fb6f4a44"
  
--LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=996b1ce0584c0747b17b57654cc81e8e"
-+LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=987de9787175385203a1ea2482246a17"
+ inherit systemd update-rc.d useradd cmake
  
- SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz \
-            file://0001-Add-configure-time-check-for-setsid.patch \
-           "
- 
--SRC_URI[sha256sum] = "858b2885963fe97e712739066aadc1baeba2b33a0016303a7fec7d38bc73bf6e"
-+SRC_URI[sha256sum] = "27f1a8b1c756e269fd5684e60802b545f0be9b36b8b5d6bdbc840c6b000dc51f"
- 
- PACKAGECONFIG ?= ""
- PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
 -- 
 2.25.1
 
