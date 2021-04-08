@@ -1,49 +1,49 @@
-Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
- by mx.groups.io with SMTP id smtpd.web09.265.1617899799787071657
+Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com [209.85.210.42])
+ by mx.groups.io with SMTP id smtpd.web08.253.1617899800504374924
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Apr 2021 09:36:39 -0700
+ Thu, 08 Apr 2021 09:36:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=HpjCBH9P;
- spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: akuster808@gmail.com)
-Received: by mail-ot1-f48.google.com with SMTP id d3-20020a9d29030000b029027e8019067fso977235otb.13
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:39 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=eIjH42/H;
+ spf=pass (domain: gmail.com, ip: 209.85.210.42, mailfrom: akuster808@gmail.com)
+Received: by mail-ot1-f42.google.com with SMTP id c24-20020a9d6c980000b02902662e210895so2870517otr.9
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=z+7CRcpXQoreDCWyc36H8u4ccHrQ5IPjw1C3L9PR28Y=;
-        b=HpjCBH9P3AktWSP6+5mfy7yvYP6VH3FNLfsMnkO2bA/hUS5S/dXzwmoqewCBxin9gz
-         mUivpgatBbc57GESOf2KZp+q/zjeLCQKlnDG72xBYqPHVfTgpfaHaTr4BDHKWzWZASfm
-         UOEtIjMI6jNp5u5bocq1rgvULXdlT7SLexO3Gkz19bCR7xQGbWWxN4NPkyuilxFz6bCH
-         w8B/xaGsJtId1eCShrm3HYYtFZZhpBp2S9lw/0PYp3GpHZXfRSCx8u7uC3KTGar8JI81
-         SCOAjSrmD8GgqCW1sLZ/LMgHkw8274Ec3FXLgHYCJe+HekFZOwpfEahsdlP6PoYI/3FX
-         PInQ==
+        bh=FJyUXOEi+tZKfiVSr4jRwbQX02ghl7R5EQvhIyXXkdI=;
+        b=eIjH42/H/DnrTxCbk/mvZbsPSaGkcBFFaS42jhJHntHAHgx2XtK8gQqvTQQZDszccf
+         CfmHa2rATErrjV28skOMqAgHYKEY0xgd3DbhT2mKG+Ydt/lmHo4axkgEu34Jnoz3hUlH
+         ymtGIKUkS4MlE0hdYi19KRCuMyMnU2JB9RItFylttvZl1Tu2ZF8Uzu9fbv1kiE3o691D
+         EAvw2NxnbEf6altDHtd8o5sTgbmmt0QjDvnwVLLNWUCtfKzCo9XO7T5l4icFRWKbfXdr
+         0R2NJzBXoBZBFLCaEqdKV0d6jUDkA3VsWFzcp8cxPgwolqXmbwylHJA63gQJuaPXYrfY
+         qX6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=z+7CRcpXQoreDCWyc36H8u4ccHrQ5IPjw1C3L9PR28Y=;
-        b=WMaGo4HVc5ClRbHlZItE9EWaWqHQ9WGWaLqhVKjS0PwZXA7iMTAibceLyYfNDs+6H4
-         QtSehl5Z4ftSvd24Vu+gCzfssIVTWYjgNZxFi/MNjip1mXOAetMz163cHtT/9xhjlsUU
-         IYGyww7qAJxdaZvXb5H+E/M++ZPJ+d1bgt38T19qncaj4LprLY3bHtea6uAuUm0PxaLR
-         mCUbrg6KnkNuWZhR1aiGHnV6NFJfSI0kKbsTZ04n2w4WFo6OPXFJ06ekd6mCVf0Plb2s
-         sLUpeLhjRbDmQvEbBL2/B8RzecZx7qZzi3VMZNeDq3BFTTPAwOjcwZSPZbz4ER8BUCuL
-         2XfQ==
-X-Gm-Message-State: AOAM530TN9dCv7sXyQNb3cpfULP9GqoOZzkCjul/zzRxj4gL+YD1FW8s
-	wwY1arqs/pD2o6qNzf8Ia8A+X9nB/EU=
-X-Google-Smtp-Source: ABdhPJw5RiRa0KyVaee7AtDgZAK2VYkQJXlQ2tSuLXytXMIrXkGpnmsd8oP9wrZ5DgWkgYzUbQx73w==
-X-Received: by 2002:a9d:6f06:: with SMTP id n6mr8343022otq.189.1617899799024;
+        bh=FJyUXOEi+tZKfiVSr4jRwbQX02ghl7R5EQvhIyXXkdI=;
+        b=r9Kd7F5v0SHBLv2skCYaS5xHrwOT0uClBt+Rkk9NytibjpTA8IwJfquRvpOPAJtH3p
+         fPpTG7xnXz3tFkiVs8GE3yuTIJIN41pqzEROzyPgwD1B2wOYB5jDSlN3xjTV0QJ/L359
+         swCzKjcl100fCYMfjPOYVkJmwrxZGgiiQdBc2l6DfGOjr/ldegPkaJHHCBxSGrPR5WzN
+         RaU+4GKH3+v+tOLWn6IxxkyDDM93B0naowd90ZANQ9hebJhTX5S9yHC5kzf0neRC2y2t
+         5l2UQXaxonqscs8JKw75syaO+WUxdQOxrDvOM/XJTYRLtgxmM9P6AFoK3GbUmHTXDtna
+         6gPg==
+X-Gm-Message-State: AOAM533JutI2SnvyD5CdzvoEG1uXqKbKM7T6HsCBRx9ybt1uIeZEmxw9
+	rtnZU93T9H4AMHDMCL6cM9wyNamKsA0=
+X-Google-Smtp-Source: ABdhPJygamiSsrfodD5FIGst3I2hSACYfSKkzaAnAY47hyyaREgkkMZL5a7qjdxR52GIIsk0dz4Mkw==
+X-Received: by 2002:a05:6830:148c:: with SMTP id s12mr8661038otq.251.1617899799737;
         Thu, 08 Apr 2021 09:36:39 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.38
+        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.39
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 09:36:38 -0700 (PDT)
+        Thu, 08 Apr 2021 09:36:39 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 28/64] networkmanager-openvpn: upgrade 1.8.12 -> 1.8.14
-Date: Thu,  8 Apr 2021 09:35:35 -0700
-Message-Id: <16aed184fa0c19fbf6af734dc80e34cb6cfa01af.1617899100.git.akuster808@gmail.com>
+Subject: [hardknott 29/64] snort: upgrade 2.9.17 -> 2.9.17.1
+Date: Thu,  8 Apr 2021 09:35:36 -0700
+Message-Id: <bc7c6022c711884a31c565021a15cff413fd672f.1617899100.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617899100.git.akuster808@gmail.com>
 References: <cover.1617899100.git.akuster808@gmail.com>
@@ -52,31 +52,29 @@ From: zhengruoqin <zhengrq.fnst@cn.fujitsu.com>
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 30a80664e38912d3532cfab5291e468191507625)
+(cherry picked from commit 66dcc24cd7bf9d0a9b0a7718d9db2a58a2f8545d)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...ger-openvpn_1.8.12.bb => networkmanager-openvpn_1.8.14.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/networkmanager/{networkmanager-openvpn_1.8.12.bb => networkmanager-openvpn_1.8.14.bb} (91%)
+ .../snort/{snort_2.9.17.bb => snort_2.9.17.1.bb}                | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-connectivity/snort/{snort_2.9.17.bb => snort_2.9.17.1.bb} (97%)
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.12.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.14.bb
-similarity index 91%
-rename from meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.12.bb
-rename to meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.14.bb
-index d455a0f06b8..a1a61bed1e3 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.12.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.14.bb
-@@ -10,8 +10,8 @@ inherit gnomebase useradd gettext systemd
+diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.17.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.17.1.bb
+similarity index 97%
+rename from meta-networking/recipes-connectivity/snort/snort_2.9.17.bb
+rename to meta-networking/recipes-connectivity/snort/snort_2.9.17.1.bb
+index 324114f63d8..9c20be537c8 100644
+--- a/meta-networking/recipes-connectivity/snort/snort_2.9.17.bb
++++ b/meta-networking/recipes-connectivity/snort/snort_2.9.17.1.bb
+@@ -14,7 +14,7 @@ SRC_URI = "https://www.snort.org/downloads/archive/snort/${BP}.tar.gz \
+     file://disable-run-test-program-while-cross-compiling.patch \
+     file://configure.in-disable-tirpc-checking-for-fedora.patch \
+ "
+-SRC_URI[sha256sum] = "c3b234c3922a09b0368b847ddb8d1fa371b741f032f42aa9ab53d67b428dc648"
++SRC_URI[sha256sum] = "303d3d5dc5affecfeaad3a331d3163f901d48d960fdd6598cb55c6d1591eed82"
  
- SRC_URI = "${GNOME_MIRROR}/NetworkManager-openvpn/${@gnome_verdir("${PV}")}/NetworkManager-openvpn-${PV}.tar.xz"
- 
--SRC_URI[md5sum] = "e8b1210011ece18d0278310fbff45af5"
--SRC_URI[sha256sum] = "0efda8878aaf0e6eb5071a053aea5d7f9d42aac097b3ff89e7cbc9233f815318"
-+SRC_URI[md5sum] = "bef67eca77bee68da703609b92f804a0"
-+SRC_URI[sha256sum] = "e7419053fc3b5a7e25f1a7517c313ad4531b6ea280255524ebb85a70c76fdbeb"
- 
- S = "${WORKDIR}/NetworkManager-openvpn-${PV}"
- 
+ UPSTREAM_CHECK_URI = "https://www.snort.org/downloads"
+ UPSTREAM_CHECK_REGEX = "snort-(?P<pver>\d+(\.\d+)+)\.tar"
 -- 
 2.17.1
 
