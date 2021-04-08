@@ -1,49 +1,49 @@
-Received: from mail-oi1-f169.google.com (mail-oi1-f169.google.com [209.85.167.169])
- by mx.groups.io with SMTP id smtpd.web08.254.1617899803507090972
+Received: from mail-ot1-f44.google.com (mail-ot1-f44.google.com [209.85.210.44])
+ by mx.groups.io with SMTP id smtpd.web12.238.1617899804394788485
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Apr 2021 09:36:43 -0700
+ Thu, 08 Apr 2021 09:36:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=OMCCPbSK;
- spf=pass (domain: gmail.com, ip: 209.85.167.169, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f169.google.com with SMTP id m13so2758590oiw.13
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=bLs+qLBZ;
+ spf=pass (domain: gmail.com, ip: 209.85.210.44, mailfrom: akuster808@gmail.com)
+Received: by mail-ot1-f44.google.com with SMTP id g8-20020a9d6c480000b02901b65ca2432cso2901810otq.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=TBOFdB/RzQFxVzhfF43tbJlcDdU/yJ+/u4mEEAaWu1s=;
-        b=OMCCPbSKnuoiIwhQse7SztzECrnjLzqfagRSw9rQ+2DjdUY6fBTEELC0+VgZuDgar0
-         pLoo6xZEofjayWgpjtTmagzFS/eeCyx2aGrDBG5G9n9Kdh4Ig6U4MxyrLrT5Y45WSIft
-         wtIdLDD1jU8fS/G3+9sSATYVrL/lhH93tyDR8iCGanOshvrwa70yzZAp7DYhYXjCiZEA
-         GE80BsP1dD/Tze89ETDQrEWA6gH68kIJAKTdHXLXDibKQ1fpfBAy+Bsh5zk1fNV4QscQ
-         dfHA7vPj6W24RpRYysM0X1aZ5eE1RDa7KDxWOttoL03e4cnaICclwlif8a3ztP8Sc5gB
-         VSiQ==
+        bh=kJjo5dCEq9ASzognlZuXYu8nkPAIE8O5+AdIH3NUtPM=;
+        b=bLs+qLBZn8u0gYYBCua8NKh4k0bBXg3IQ7JwNPSAtgnbeiNM2jYdKnAeY26edOqhZl
+         L34PGqiFr9sI14EGdNL2o7iBpa3NXQY+3nL6RxWrtyZk7hQq0QGocAdyDEytJShiD/Ca
+         cpmin2KQ6OQxpdPEVCvgCV2h/XWRqv0zWa85YJsfKteJXQuS5zAFYc1Ygxh1PfYjyaQG
+         bomFjcdRQ61NBOPEVEO/AmDf8aDs1td6bQf4cM1ngivenaCfvmtu5dmL9nZV4MY3qbNm
+         ghiqGJJTuq3pUzd4PyVDcgiu+s6+rT9GUnx6mlYlUJQpXDuueqNXZkJjhwSZCVR5Pcv+
+         0DGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=TBOFdB/RzQFxVzhfF43tbJlcDdU/yJ+/u4mEEAaWu1s=;
-        b=o5rQ/7mdhQtm0lt/r/xxtzB3/t00Kar0NtAjDTwJolESByEPdb7NI02vicSe0zxlyC
-         0HJ2zEVr+LsbBpVECfb/RcMnkvm/vrv3+XgAHn5IQXU5tlTIwMmAROgY7rzW6Qtqxowy
-         Bt0gcM5HEOxzR/Sgz/nTeIqUmnrTlwatjlnt5/czH4kFpSURFptZnNv8qhW85s67ozTs
-         WKRaywRRPq6QXYQptibgArukdDwPUNhqFf561gH3gNpaidDtPLMGASqG5p/VIFgyGOp0
-         TYKWx+ZerAbyGUNiGC2z1b7txCNT8FygXPnwuaq2DeCkrwRvvQ8I464sSiQwEtRzJ5Ls
-         8QXQ==
-X-Gm-Message-State: AOAM530FhYae4lK6TcvQ7r3iA8O+EyO4HfIksqv7efBVikzSzzArQktK
-	fe1SXR1qqTONQRAthcp8mdUVET5DvoY=
-X-Google-Smtp-Source: ABdhPJzO3/pmMEKVSbnS9MbWkq7wLvbRxenFMMxiimjFV++VLbKIoJf14tgbJklLauJE/lGWDpSNnw==
-X-Received: by 2002:aca:f452:: with SMTP id s79mr6910873oih.126.1617899802752;
-        Thu, 08 Apr 2021 09:36:42 -0700 (PDT)
+        bh=kJjo5dCEq9ASzognlZuXYu8nkPAIE8O5+AdIH3NUtPM=;
+        b=kGWcWfgFLb/YPOF+HNk9fZaCp5o5oQYc1sMQ52c9upfLgtg9xWutzSBr1C3w+GnwsU
+         yfvcewYVKtdUFjkqsE6i6oXuZW2cNzTuQu3DYymzBdJwa2RpT6F85JeVAyDKbMPXJ5vs
+         LBxYLg48BxYyxl4cRRvsrdcGHQuhA6g9tPXJHt9p0pisLPEyHnVH3oRcQwR0PzyUU8By
+         JuAnxa93LSteDa0+nEQFCPA5IzQyHbJqJYZ2IXER3Dpyv/cr9j7YpmFVRrlh3iHBa+Gi
+         iq9MOfea+KX3RxHN67Vm8iKCzvayRh8+/6cdrn7OiS86t7mFijgZWPV+6U/KlYH4RwMn
+         fdaw==
+X-Gm-Message-State: AOAM532FGgPOssmD1Uk4ibvRbBc1tMxDOVOCWwsiutnum5rGpakQ6+oa
+	rY39gKrHvjhL3LREJPgCDrDzFzfYY6A=
+X-Google-Smtp-Source: ABdhPJzVJGXVjEtI0Rvy3M6fhncv4pCGsPiLc/ttrg9qLxiaCnkdAe9CsJogrMKBFGjylLJFTWJM3g==
+X-Received: by 2002:a05:6830:1d70:: with SMTP id l16mr8461746oti.148.1617899803620;
+        Thu, 08 Apr 2021 09:36:43 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
         by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.42
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 09:36:42 -0700 (PDT)
+        Thu, 08 Apr 2021 09:36:43 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 32/64] ostree: upgrade 2020.8 -> 2021.1
-Date: Thu,  8 Apr 2021 09:35:39 -0700
-Message-Id: <4fd44de9a8d26396ba17780e63a7d09f97d1e69a.1617899100.git.akuster808@gmail.com>
+Subject: [hardknott 33/64] zabbix: upgrade 5.2.5 -> 5.2.6
+Date: Thu,  8 Apr 2021 09:35:40 -0700
+Message-Id: <839f409436d465f17049e064999439dd28d9b09f.1617899100.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617899100.git.akuster808@gmail.com>
 References: <cover.1617899100.git.akuster808@gmail.com>
@@ -52,28 +52,30 @@ From: zangrc <zangrc.fnst@fujitsu.com>
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 7d2604942cebea24e090f11186d0aa43a61be037)
+(cherry picked from commit 5f3159f6349e5e1a1b134b2997d7dc62daaf2ef7)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../ostree/{ostree_2020.8.bb => ostree_2021.1.bb}               | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/ostree/{ostree_2020.8.bb => ostree_2021.1.bb} (99%)
+ .../zabbix/{zabbix_5.2.5.bb => zabbix_5.2.6.bb}               | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/zabbix/{zabbix_5.2.5.bb => zabbix_5.2.6.bb} (95%)
 
-diff --git a/meta-oe/recipes-extended/ostree/ostree_2020.8.bb b/meta-oe/recipes-extended/ostree/ostree_2021.1.bb
-similarity index 99%
-rename from meta-oe/recipes-extended/ostree/ostree_2020.8.bb
-rename to meta-oe/recipes-extended/ostree/ostree_2021.1.bb
-index 4f0f719fb38..c382ad87f27 100644
---- a/meta-oe/recipes-extended/ostree/ostree_2020.8.bb
-+++ b/meta-oe/recipes-extended/ostree/ostree_2021.1.bb
-@@ -25,7 +25,7 @@ SRC_URI = " \
-     gitsm://github.com/ostreedev/ostree \
-     file://run-ptest \
+diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_5.2.5.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_5.2.6.bb
+similarity index 95%
+rename from meta-oe/recipes-connectivity/zabbix/zabbix_5.2.5.bb
+rename to meta-oe/recipes-connectivity/zabbix/zabbix_5.2.6.bb
+index 2bbfec9dcf2..37bb9a2820b 100644
+--- a/meta-oe/recipes-connectivity/zabbix/zabbix_5.2.5.bb
++++ b/meta-oe/recipes-connectivity/zabbix/zabbix_5.2.6.bb
+@@ -28,8 +28,8 @@ SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/5.2/${BPN}-${PV}.tar.gz
+     file://zabbix-agent.service \
  "
--SRCREV = "3e289b19345e30d2da193cd208e109f7d7aaa2a1"
-+SRCREV = "e9e4b9112083228b8c385ad26924b6c4623f4179"
  
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
+-SRC_URI[md5sum] = "e90822716c5c241890f6fed1588b5451"
+-SRC_URI[sha256sum] = "ce0d9745a8b9154e87d6906edd0fce7b7ec298acd34a0543ea53d1a5f2f14bc5"
++SRC_URI[md5sum] = "31dab3535a1fa212f5724902727f6d4d"
++SRC_URI[sha256sum] = "76cb704f2a04fbc87bb3eff44fa71339c355d467f7bbd8fb53f8927c760e1680"
+ 
+ inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
  
 -- 
 2.17.1
