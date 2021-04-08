@@ -1,109 +1,90 @@
-Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
- by mx.groups.io with SMTP id smtpd.web12.241.1617899807935509692
+Received: from mail-ot1-f52.google.com (mail-ot1-f52.google.com [209.85.210.52])
+ by mx.groups.io with SMTP id smtpd.web12.242.1617899808803593808
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 08 Apr 2021 09:36:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ar5Kdm1h;
- spf=pass (domain: gmail.com, ip: 209.85.167.182, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f182.google.com with SMTP id n8so2765394oie.10
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=X5gLHJ1V;
+ spf=pass (domain: gmail.com, ip: 209.85.210.52, mailfrom: akuster808@gmail.com)
+Received: by mail-ot1-f52.google.com with SMTP id s11-20020a056830124bb029021bb3524ebeso2953163otp.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 09:36:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=rjpdMbQsfCZysFpxSoyOVhcBuADjnShHWYBQ7haQkL0=;
-        b=ar5Kdm1hK6ChKLpnnzbLJ2oFywYTVdpkLURcqB1Cs9vAjZU+phhpV+1uzCGPRT4DL8
-         MaHoqnVjN9c1kf+X3t/JCTb1XWpwfC0UkZDkhZNsieT7D2Y8WJCqqwvrVYjgSnISbqNp
-         KMW9kteHB2Eru7quCvbYN1TlH6/J1b2sdhKaBeiSf/CuZEosjKGD/wadjOPfQYZlr+PT
-         H/DJcxCufxEQwhLfdZMp8zt0lZcA5abV4O1kkaJrRaDdM0sNpA28wGiPWeQqMwV3nYCV
-         C4heGqfktYjKfWwlhJGACRJCsF2UCtFj6xj5gkSi+TG+ePOqhHwJfNwqRBhatIyUJ+cW
-         bT6A==
+        bh=/6HeRsYWzeAMgTt16LRY1W35Y069AKcuIW2BxbN8gAk=;
+        b=X5gLHJ1VQIG68AQSTi78k6NTqdl604NmmQOs2boKW7cadrez+uRIkqGh6/tpjZaOFs
+         wdgAsiyGWoL76ZfXSUajzxcTIMhgPdrUO9hqPN6IVEkqI+vORxWwUtvRXcnC3RF3bFmM
+         rki8wh5wV8N+CFbBUFcJaqmgv/VI87ZftwASgo30gEJ+cRPCeMihz64dwXLUnR4HHtRt
+         p4G+lBi37gRopG/U5jm2fsnIkqHdtKVlIlthb13SZGBqmeXE8SGjriRY3UJIhiwTUJ6C
+         GaR/hN1EjnSodPoBDl6MvI6/LfRn8CLTZic8X8FUxDxJWtBrAkOUMz0kYV7F/DfP3k8R
+         fjdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=rjpdMbQsfCZysFpxSoyOVhcBuADjnShHWYBQ7haQkL0=;
-        b=DgehPysxz3wFgczYisMEWEGfkrLWVOlzWvJ37MvfjfcqIQCUy197sOBmcRfV6zzMm8
-         L+j1iVSSyCKqv3051Fd74v2B8xflMnqfAKIQz0+QmdNJdZrO6G3XZ696y3KiPAWPFoxa
-         +gXmjduAiRSlg1fPfi5M6eY/2iTohObiunEyxIqoQ4nX1Myz/g4KG9KHbxZZuVPuikmM
-         t80sa4YOKCqpk+aa9huziWBBwlqq958g2amwfW0Q7bsktsxNUhGrVHJt3PjOksW9WyKN
-         e7oBon/bvr5rnsvOXqEYwiAmUDztEOagln2xLYazFV8XSAnDVDRjZMhhIKpanXj9rLE7
-         z3/w==
-X-Gm-Message-State: AOAM530NNdo707/eslqRDzw4ieiB8BJMC6N8fZHovbobKrhXO3r3XbAU
-	ED1HQfUSvXnpjFnXHQFnJCMZLrEQpU4=
-X-Google-Smtp-Source: ABdhPJxpvyOVDRmWGnXWwGpO/xQKKMHVy8giNKqooGz1QaizY2DQDjdwxQ9e2sy2be1iplqepSnt0Q==
-X-Received: by 2002:a05:6808:1444:: with SMTP id x4mr6863303oiv.142.1617899806941;
-        Thu, 08 Apr 2021 09:36:46 -0700 (PDT)
+        bh=/6HeRsYWzeAMgTt16LRY1W35Y069AKcuIW2BxbN8gAk=;
+        b=Fb2f9OsvsMlLPr5/I7g364m6l9kESbCqqXCy8/OCb10O8fnkO658iG5UtUCnnqK7yx
+         YpLksxQtG/K4ipVcKnMTAtkHGzXT9vEUytujRECIl2ysyu6v+IUKI2GCZXRHuZx0m655
+         N31478mt/RZymYNELQPequi335iPfRB5F4Zc2DEVM0Lh77kmsV+VI6ufirj6kIzbaZFL
+         IoqNZfrJf/lT8X5pOV/IlIVpo18WgHXTxcSKlIPNP3oHj5EYijGG9s5j+AQ+00+drC17
+         DcAR1WYChvCsmtFb2P9XmP57AwE0DFvl2DHyKCvoFNcWwyKNHNe0KC0iJmLXpzc9Nzls
+         wchw==
+X-Gm-Message-State: AOAM530mpFzAHFK9REEuKy/vrfD4tjWGnofXXDhwlhMfVsDptKnwu8dl
+	gBr8sqaw0DN6va11N9BRmbSvKGI50GY=
+X-Google-Smtp-Source: ABdhPJx3w67Pnw/+xmuzexvBPiDCs2v16ml02EV+r6X0YLmT4wJfdmo8FhTihrY3n1pTg9deHRwELw==
+X-Received: by 2002:a9d:7c99:: with SMTP id q25mr8534774otn.339.1617899807900;
+        Thu, 08 Apr 2021 09:36:47 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.46
+        by smtp.gmail.com with ESMTPSA id s131sm4977838oib.14.2021.04.08.09.36.47
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 09:36:46 -0700 (PDT)
+        Thu, 08 Apr 2021 09:36:47 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 37/64] python3-xlsxwriter: Upgrade 1.3.7 -> 1.3.8
-Date: Thu,  8 Apr 2021 09:35:44 -0700
-Message-Id: <fb2393b406bb3b23fe5c43b41fea6118e703a063.1617899100.git.akuster808@gmail.com>
+Subject: [hardknott 38/64] python3-pymisp: Upgrade 2.4.140 -> 2.4.141
+Date: Thu,  8 Apr 2021 09:35:45 -0700
+Message-Id: <d6a31cdce720031677bcf730a666f8856e589a9b.1617899100.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617899100.git.akuster808@gmail.com>
 References: <cover.1617899100.git.akuster808@gmail.com>
 
 From: Leon Anavi <leon.anavi@konsulko.com>
 
-Upgrade to release 1.3.8:
+Upgrade to release 2.4.141:
 
-- Added ability to add accessibility options "description" and
-  "decorative" to images via :func:`insert_image`.
-- Added fix for datetime.timedelta values that exceed the Excel
-  1900 leap day (timedeltas greater than 59 days, in hours).
-  This is a backward incompatible change.
-- Added the worksheet :func:`read_only_recommended` method to set
-  the Excel "Read-only Recommended" option that is available when
-  saving a file.
-- Fixed issue where temp files used in `constant_memory` mode
-  weren't closed/deleted if the workbook object was garbage
-  collected.
-- Fixed issue where pattern formats without colors were given a
-  default black fill color.
-- Added option to set a chart crossing to 'min' as well as the
-  existing 'max' option. The 'min' option isn't available in the
-  Excel interface but can be enabled via VBA.
-
-License-Update: Updated copyright year.
+- Use get_uuid_or_id_from_abstract_misp in tag methods
+- Skip nameless sections in ELF
+- Make reportlab tests optional if missing dep
+- Enable taxonomy failed if global pythonify is on
+- Properly pass content-type
+- Re-enable support for uploading STIX 1 documents
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-(cherry picked from commit 4161ee91c1607d32651b4852f0c3b27f763880ec)
+(cherry picked from commit b3b8d4f6a637ce695030921d4d335f5941380b53)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...thon3-xlsxwriter_1.3.7.bb => python3-xlsxwriter_1.3.8.bb} | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-xlsxwriter_1.3.7.bb => python3-xlsxwriter_1.3.8.bb} (51%)
+ .../{python3-pymisp_2.4.140.bb => python3-pymisp_2.4.141.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.140.bb => python3-pymisp_2.4.141.bb} (91%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.7.bb b/meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.8.bb
-similarity index 51%
-rename from meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.7.bb
-rename to meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.8.bb
-index a8f013c580a..e89221e5c38 100644
---- a/meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.8.bb
-@@ -2,13 +2,12 @@ SUMMARY = "Python 2 and 3 compatibility library"
- HOMEPAGE = "https://xlsxwriter.readthedocs.io"
- SECTION = "devel/python"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=0960d52d61b0801760f39463288c2672"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4e95e368cd6cb090815046688e92d11e"
+diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.140.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.141.bb
+similarity index 91%
+rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.140.bb
+rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.141.bb
+index 32e673660cf..c8bd52f105c 100644
+--- a/meta-python/recipes-devtools/python/python3-pymisp_2.4.140.bb
++++ b/meta-python/recipes-devtools/python/python3-pymisp_2.4.141.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
  
- inherit pypi setuptools3
+ SRC_URI = "git://github.com/MISP/PyMISP.git;protocol=https;branch=main"
+-SRCREV = "39a7b8242f0d3022276d417ec334bb46b890ff23"
++SRCREV = "4a0c1e1dc42af171d3c1bcaa12436f79ff6cfd9b"
+ S = "${WORKDIR}/git"
  
- PYPI_PACKAGE = "XlsxWriter"
- 
--SRC_URI[md5sum] = "8c0595292fae76297eac03ae76507b7b"
--SRC_URI[sha256sum] = "9b1ade2d1ba5d9b40a6d1de1d55ded4394ab8002718092ae80a08532c2add2e6"
-+SRC_URI[sha256sum] = "2b7e22b1268c2ed85d73e5629097c9a63357f2429667ada9863cd05ff8ee33aa"
- 
- BBCLASSEXTEND = "native nativesdk"
+ inherit setuptools3
 -- 
 2.17.1
 
