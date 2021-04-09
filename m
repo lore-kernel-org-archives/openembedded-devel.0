@@ -1,85 +1,88 @@
-Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com [209.85.167.172])
- by mx.groups.io with SMTP id smtpd.web12.3629.1617934862400227647
+Received: from mail-ot1-f44.google.com (mail-ot1-f44.google.com [209.85.210.44])
+ by mx.groups.io with SMTP id smtpd.web11.3671.1617934863129387751
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Apr 2021 19:21:02 -0700
+ Thu, 08 Apr 2021 19:21:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=TFJbu6EM;
- spf=pass (domain: gmail.com, ip: 209.85.167.172, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f172.google.com with SMTP id w70so4350714oie.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:21:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=hCCktecg;
+ spf=pass (domain: gmail.com, ip: 209.85.210.44, mailfrom: akuster808@gmail.com)
+Received: by mail-ot1-f44.google.com with SMTP id w31-20020a9d36220000b02901f2cbfc9743so4307288otb.7
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:21:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=ZuoVrGGBab9Xo7MNBjq2A+aRTZvWChPTBC/PsOaoWs8=;
-        b=TFJbu6EMLvV3wZvLpFkP+SKuttFjf7ITPlDTYUs+xHI2XswiC5AqeG6JE5YsXzuu+X
-         iU3z8brqUsJY5KGbW6OBD8VIH29KApQ5qjQ+wVZ0qn49tf55Bt3S4cgZtZlzg0cmlVo8
-         gZtjxqMQelNsiEXS9dxJ4kLPMgu4c9NOYEMnCUkX3nAjQnjqQDcNEdxTcDmB6xo1uFWp
-         frwJ25gwxFHXfhK340a7iz9UtCML+nliIg64ltp/IcMGjXSOL79w+hWbVHG9CYFeMZXa
-         liRO4ykag1Fh8Ul5l3ZCkn2zaoNueCGe4v2+/W/dmgDsHxTp0AlD4cNj9QZI+ZJIRxB8
-         f78g==
+        bh=0gl70TaobRJm117SGPiW2Eqh4Bb0YQCOIl+9AYoO8lw=;
+        b=hCCktecgGGD5DpnkWT734J8lh3Gq6WDwZC+H7iT+IKOUuAMiGAe6f/7pEKH8we6HEJ
+         leQuDCIhSDLY+tHzSWUV2f/ipfMixzKsLxjofel+quMerb6x11de82SMNszkLkb49cC/
+         Qi1hEzZO9cpAxyarh+Lz2JQnNhxrSmw4Pd5FWZMNHuRJ3N+IvqwWtKHmD2kjIOSCfoWB
+         r3p21nZ3NLVCKxxIfFAr1LDvUxHD/ykDOZVpgvhaH+y+05oC60nVj5xruiDSE81EiPKu
+         lkG6jXWenSVkdUsj3cFE5BseKCHOyAWammxPDrmYPx8jteTNL9Zhl0Vj/Q7vgDmYH86m
+         0g6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=ZuoVrGGBab9Xo7MNBjq2A+aRTZvWChPTBC/PsOaoWs8=;
-        b=BQf1UFDNDh3MYZwYXeLo2MMVGg2+mgg0sAtFsXma1OITK0Sil6LmUHUnkXyd22e3So
-         rFhIpPeiJ6Qy6sXEMEhfps5dbFWVP5ds8BMr8tNLKRAKvW97VOztBTM6AwrgJPHA/yi7
-         GoRFcUo7tAu8EBOrcLkoMNSi7L/FnIaZr8pFrc+zLtB21JyeaDziJX/wz2VFIbbGNP2D
-         FAcJoMmBOyDLMQ0l+UqC+n4ETp1eH3XOfY3lCdkeF0sb8FVtCRsNkY2SHm3lpMCbZ14k
-         oyP23aKrMks6FWaoliaFLb/25FRPBZsEy8nORfSRu5vfNIsUtMEiIdcx5D4MRzYOG6Oz
-         yTLw==
-X-Gm-Message-State: AOAM533Uyh2l8IZRD8k6oa/iH6WDxxk0NsRAvZPbaBrapdEcj/M/QQVF
-	Psxmeo4rjl6CPdMQj1gVmZYTJJkFL/k=
-X-Google-Smtp-Source: ABdhPJzHQBLJzQC9AoLoxLH7DJjfENa/QVrXGe1W7c7ZQ2iGetoAhYKF8MLEVj3siuiRX0kM1YR74g==
-X-Received: by 2002:aca:f48f:: with SMTP id s137mr8334603oih.101.1617934861595;
-        Thu, 08 Apr 2021 19:21:01 -0700 (PDT)
+        bh=0gl70TaobRJm117SGPiW2Eqh4Bb0YQCOIl+9AYoO8lw=;
+        b=DeR6DIJaPQJXKt27Djb1tlUogk3LD4EENkXAmfWVtkppWYAQ+/IfKtJLsBLQWX+D1i
+         cjMv4g1a/nF4Rd8TelLl9j5WwYBITmei7foY2rR4fvUf+Qr9AMuMSgiT9oxW9wG+YpL+
+         Ku/snQMWKyWETUS+ID6fLBy4YUwJHO4GJTfMk/5UB2rSIJETwZ1la4uWYXv2sQnuMHj0
+         OCXEaLDnZzIYZ++eHs1SfySZr65AwVUSE8DwXt9kAi11/xPIXzKcJ9/lQQSDRfpR5NKk
+         iswUj9gwaZJ/9PREPzXe42EcgciTCWGbcaaG5caCWbAxtnx+vf4Cpjv8cvUPSh0M7Avu
+         1n7w==
+X-Gm-Message-State: AOAM5320jk8OljFBEfaMg8X8y7k531fbM7MbWowC6MKbcIyJLQvFuyV2
+	W+LE7KBUkJPObL+XU0kjk0hdDVI9pxM=
+X-Google-Smtp-Source: ABdhPJylUTDf7vXejS0pLUBFBc2QW6SbH0Hd4jxO1R8LvE3SKF7Csv9m/1+bhQZvS5lnHfv+s7616w==
+X-Received: by 2002:a9d:5d0a:: with SMTP id b10mr10138003oti.180.1617934862356;
+        Thu, 08 Apr 2021 19:21:02 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id k65sm299815otk.53.2021.04.08.19.21.00
+        by smtp.gmail.com with ESMTPSA id k65sm299815otk.53.2021.04.08.19.21.01
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 19:21:01 -0700 (PDT)
+        Thu, 08 Apr 2021 19:21:02 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 09/36] python3-pychromecast: Upgrade 9.1.1 -> 9.1.2
-Date: Thu,  8 Apr 2021 19:20:22 -0700
-Message-Id: <4b9aee882ec36291bbb905c12ce0ab88764e5d88.1617934043.git.akuster808@gmail.com>
+Subject: [hardknott 10/36] python3-decorator: Upgrade 5.0.1 -> 5.0.5
+Date: Thu,  8 Apr 2021 19:20:23 -0700
+Message-Id: <6da16d6631a533d231f608b1a4c1729691102f60.1617934043.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617934043.git.akuster808@gmail.com>
 References: <cover.1617934043.git.akuster808@gmail.com>
 
 From: Leon Anavi <leon.anavi@konsulko.com>
 
-Upgrade to release 9.1.2:
+Upgrade to release 5.0.5:
 
-- Handle bad UUIDs from third-party Chromecasts
-- Reuse SSL context in host browser
+- Dropped support for Python < 3.5 with a substantial
+  simplification of the code base (now building a decorator does
+  not require calling "exec").
+- Added a way to mimic functools.wraps-generated decorators.
+- Ported the Continuous Integration from Travis to GitHub.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-(cherry picked from commit 75a9fe6cc0ec8d031540462fdbbbcf28bbf87ccf)
+(cherry picked from commit daf804c88290898bb56e401433aa6860c69afa2f)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...hon3-pychromecast_9.1.1.bb => python3-pychromecast_9.1.2.bb} | 2 +-
+ .../{python3-decorator_5.0.1.bb => python3-decorator_5.0.5.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pychromecast_9.1.1.bb => python3-pychromecast_9.1.2.bb} (76%)
+ rename meta-python/recipes-devtools/python/{python3-decorator_5.0.1.bb => python3-decorator_5.0.5.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_9.1.1.bb b/meta-python/recipes-devtools/python/python3-pychromecast_9.1.2.bb
-similarity index 76%
-rename from meta-python/recipes-devtools/python/python3-pychromecast_9.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-pychromecast_9.1.2.bb
-index 3d0b84cf0bf..c392261ade2 100644
---- a/meta-python/recipes-devtools/python/python3-pychromecast_9.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pychromecast_9.1.2.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
+diff --git a/meta-python/recipes-devtools/python/python3-decorator_5.0.1.bb b/meta-python/recipes-devtools/python/python3-decorator_5.0.5.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-decorator_5.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-decorator_5.0.5.bb
+index e9d20379f9d..47daba8a0cc 100644
+--- a/meta-python/recipes-devtools/python/python3-decorator_5.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-decorator_5.0.5.bb
+@@ -9,7 +9,7 @@ decorator, just because you can."
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=be2fd2007972bf96c08af3293d728b22"
  
--SRC_URI[sha256sum] = "ab9da1d2ef424b1fc755f6436f545a56056ec6de24075e93f369eac8eb821837"
-+SRC_URI[sha256sum] = "907656cea46d39d0e93ec815979578ef4fb6f655fd8bf4e88e6421fcd7824e85"
+-SRC_URI[sha256sum] = "1e53162e016f317a61d93848f00e80e7109ca9ed06846c7f2930cf0ebede7c6c"
++SRC_URI[sha256sum] = "acda948ffcfe4bd0c4a57834b74ad968b91925b8201b740ca9d46fb8c5c618ce"
  
- PYPI_PACKAGE = "PyChromecast"
+ inherit pypi setuptools3
  
 -- 
 2.17.1
