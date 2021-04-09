@@ -1,87 +1,94 @@
-Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com [209.85.167.176])
- by mx.groups.io with SMTP id smtpd.web10.3673.1617934864662728137
+Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com [209.85.167.172])
+ by mx.groups.io with SMTP id smtpd.web12.3630.1617934865397243303
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Apr 2021 19:21:04 -0700
+ Thu, 08 Apr 2021 19:21:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=qoOcTW+D;
- spf=pass (domain: gmail.com, ip: 209.85.167.176, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f176.google.com with SMTP id i81so4288400oif.6
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:21:04 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=XTdgRS3k;
+ spf=pass (domain: gmail.com, ip: 209.85.167.172, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f172.google.com with SMTP id a8so4273041oic.11
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:21:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=YQGib1dEG0/8v2bEtj7yKmdDn+P2RR3bBQQL8KzxUyg=;
-        b=qoOcTW+DYLlX81RW/jKjM5s5dRuqQyvKbTcGXyvW4lz/BpKgZyvdd07zudmxOvZbvp
-         zeGXLmKD9B52GWTxIuxas95M+fgGazDv0uGHbvb45kNzdHoA/WlPdalGrCLXDt6OCQCM
-         P75HR2Auugkgg0NpjqYF15iXzU47pBwLFzcdYv/qR2ZzihuwFYy6ivCZGCgQQDNInB3Q
-         7PE9mhxoa1t0ySYf1iWDKNpxDCRqM6BYt7uB/bALqKhkac3sIL9AnOXkXc4Afb1Q2Ekd
-         MNc4e4EHBiYkJctseXlAgUdZjmAeVjUCUNeKC7nBewEIuCJ0A6lIQCOEvcbaaEYpqHu8
-         SC0Q==
+        bh=u7VS+gIxX8LAxYO8fgd6HgR+cc7d8NpGceXQ9OF48No=;
+        b=XTdgRS3k0LfwJP+V626R1qFP9W0UURMPIb/oJE669GErIiee76MiCpHWtBLtcip5cp
+         mP4L5xURqO0WIqpagBYBfRSsXdE37ubboWUDb4k/S+ZAYPFuHnq3vZHLMMauBl+qMiiA
+         +MPIU/gq8SdG8Hh2k+dGUV7nZy3B9S4SIjs5qaPqBEclJI4ZmaVn+zrcEOqQz1YLsxxn
+         VLp+D2NMb3mu9JOZyu7IpOMlBTPCBiK52h+QEnLEvVMSMk3yqETivoT7XLgC/GDG7WO+
+         WGj9PmLr6DmeW1Q+Fs6v5Sg67g7QtC5V4kIB0rLv8E4IscQLFA3VdbQCVZl9vBeOvDe7
+         3A2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=YQGib1dEG0/8v2bEtj7yKmdDn+P2RR3bBQQL8KzxUyg=;
-        b=rz/lSL/ILvlmHSk0eHeWzzEIsF/mZ8EiOateyskyJz6sYN5Dp5ir1v54j8kVKWdP/r
-         goB6Lt/caZUxSdTfax2V32jGhw7hv3P7qh15HE13Wro5LXiC4mBZg4Akgm0WbiGoyu+k
-         RhVlWNAVS3vUq4CmljnumNVDFZjzkZVCsNMuMyi346wdrbJJ3+inI1vl7yLmNnjOURBO
-         vOlWUTE/qH7mcDv1wcb2ybFF1sB9V6XQMViEFkSf54brE7GYJ4yrQeGYgbQhh3PtQDbr
-         ShfYqDUcKl0DrNtQ/sawOZ3gQtEoBXFBt36zuuq29r+0NjRgppjPVxljVNn6uPl38pEt
-         p24Q==
-X-Gm-Message-State: AOAM532Nm1TvGkG/M9R2Wxb5qEsArTUobimoCm2qpCtiV07GddfimUwz
-	VX1GjGdLTpi+kvsZWpKOblcvuJib4qY=
-X-Google-Smtp-Source: ABdhPJxwr3HF7SIB2G+UaEX2w5rfY7anrGuhfsKsbHzDw01yxAlW0RqM+xjtdfAQ6EKtD4dGDX/L4g==
-X-Received: by 2002:aca:5d82:: with SMTP id r124mr8410030oib.59.1617934863879;
-        Thu, 08 Apr 2021 19:21:03 -0700 (PDT)
+        bh=u7VS+gIxX8LAxYO8fgd6HgR+cc7d8NpGceXQ9OF48No=;
+        b=baRRelRvl6p8ZGmCmvcNM8aXO3HOHfQ1ZOvu/cjC1TyH4Q52LrPdKuqAM2ZqimDVaP
+         REjtDrYtsWdlUAXlBfFTV6+Ks5RCYsDZyaXgFIM1HVfSDsE9dUBQVZmqe2xyGfnBHiy6
+         KITf8B6vUVdrM2Dhgcd0EExan9nZ6z5/JUmRs1viewkkZAeBqe46cP2/+OxrmgqcnkNZ
+         GTcHc7bPkxweF6iX2cDxtDGNreg7ou8pectGebojpVwz+Q/elW8PJg++Xe2eTxsMwaVJ
+         NMkErp6jEJ+GETUj3rpc4tHLN9+M0WRKxlrNXZKwjlY9513kvAOR7JRMayq02WZ9HfXH
+         ZW7g==
+X-Gm-Message-State: AOAM532Z1LCoCJlk1Z23fEyumjtKpj/qKLx89RIZI6bwwSHBsYsCnyV8
+	0lirZoE8ZLRt1pUSHHYhqxDeMf834ic=
+X-Google-Smtp-Source: ABdhPJxB5qAz66s6W+vcOUxXY3kZbsw3BeFHK6vYsRYnj4HjZPEltvTpwpViNeH1nWwN1g9REIgZ6A==
+X-Received: by 2002:a05:6808:14c3:: with SMTP id f3mr804959oiw.52.1617934864602;
+        Thu, 08 Apr 2021 19:21:04 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id k65sm299815otk.53.2021.04.08.19.21.03
+        by smtp.gmail.com with ESMTPSA id k65sm299815otk.53.2021.04.08.19.21.04
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 19:21:03 -0700 (PDT)
+        Thu, 08 Apr 2021 19:21:04 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 12/36] python3-pyroute2: Upgrade 0.5.16 -> 0.5.17
-Date: Thu,  8 Apr 2021 19:20:25 -0700
-Message-Id: <cc590fbbc6ee030aaa30735cf752592f67371a6e.1617934043.git.akuster808@gmail.com>
+Subject: [hardknott 13/36] python3-transitions: Upgrade 0.8.7 -> 0.8.8
+Date: Thu,  8 Apr 2021 19:20:26 -0700
+Message-Id: <04849afa784feea8f0fd9ede932adc0f5a8cf8e9.1617934043.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617934043.git.akuster808@gmail.com>
 References: <cover.1617934043.git.akuster808@gmail.com>
 
 From: Leon Anavi <leon.anavi@konsulko.com>
 
-Upgrade to release 0.5.17:
+Upgrade to release 0.8.8:
 
-- license: aligned cli/ss2
-- ndb: del_ip() improvements
-- ndb: wait(timeout=...)
+- AsyncMachine does not remove models when remove_models is called
+- Introduce try/except for finalize callbacks in Machine and
+  HierachicalMachine. Thus, errors occurring in finalize callbacks
+  will be suppressed and only the original error will be raised.
+- Show references in graphs and markup. Introduce
+  MarkupMachine.format_references to tweak reference formatting
+- Introduce Machine.on_exception to handle raised exceptions in
+  callbacks
+- Machine.get_triggers now supports State and Enum as arguments
+- NestedState and HierachicalMachine.add_states now accept (lists
+  of) states and enums as initial parameter
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-(cherry picked from commit be5b722809c29acef2de0c0978659692483aa8aa)
+(cherry picked from commit dce8ef5add115eb1ecdf39d547e5c566a92b2bd6)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{python3-pyroute2_0.5.16.bb => python3-pyroute2_0.5.17.bb}  | 2 +-
+ ...ython3-transitions_0.8.7.bb => python3-transitions_0.8.8.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pyroute2_0.5.16.bb => python3-pyroute2_0.5.17.bb} (90%)
+ rename meta-python/recipes-devtools/python/{python3-transitions_0.8.7.bb => python3-transitions_0.8.8.bb} (73%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.16.bb b/meta-python/recipes-devtools/python/python3-pyroute2_0.5.17.bb
-similarity index 90%
-rename from meta-python/recipes-devtools/python/python3-pyroute2_0.5.16.bb
-rename to meta-python/recipes-devtools/python/python3-pyroute2_0.5.17.bb
-index fed0fc38fe7..1d3d5a253a6 100644
---- a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.16.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyroute2_0.5.17.bb
-@@ -3,7 +3,7 @@ LICENSE = "GPLv2 & Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://LICENSE.Apache.v2;md5=34281e312165f843a2b7d1f114fe65ce"
+diff --git a/meta-python/recipes-devtools/python/python3-transitions_0.8.7.bb b/meta-python/recipes-devtools/python/python3-transitions_0.8.8.bb
+similarity index 73%
+rename from meta-python/recipes-devtools/python/python3-transitions_0.8.7.bb
+rename to meta-python/recipes-devtools/python/python3-transitions_0.8.8.bb
+index 04a033742a6..2b82df5814f 100644
+--- a/meta-python/recipes-devtools/python/python3-transitions_0.8.7.bb
++++ b/meta-python/recipes-devtools/python/python3-transitions_0.8.8.bb
+@@ -4,6 +4,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=baac7be1f4c17620df74188e23da6d47"
  
--SRC_URI[sha256sum] = "fe681a2d008cac815b9f287250d69a333fbfc2b2d89c37d58798104057149989"
-+SRC_URI[sha256sum] = "12d51066ea5628a6fa76fc244f301a8eea5d25d71a9d664016976edfa3889733"
+ inherit pypi setuptools3
  
- inherit setuptools3 pypi ptest
+-SRC_URI[sha256sum] = "8c60ec0828cd037820726283cad5d4d77a5e31514e058b51250420e9873e9bc7"
++SRC_URI[sha256sum] = "e7a86b31a161a76133f189b3ae9dad2755a80ea4c1e0eee1805648d021fb677d"
  
+ RDEPENDS_${PN} += "python3-six"
 -- 
 2.17.1
 
