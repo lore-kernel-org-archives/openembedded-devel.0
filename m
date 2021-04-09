@@ -1,417 +1,554 @@
-Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
- by mx.groups.io with SMTP id smtpd.web12.3632.1617934871655985584
+Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com [209.85.167.179])
+ by mx.groups.io with SMTP id smtpd.web10.3677.1617934872520402271
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Apr 2021 19:21:11 -0700
+ Thu, 08 Apr 2021 19:21:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=f6K8UQj5;
- spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: akuster808@gmail.com)
-Received: by mail-ot1-f48.google.com with SMTP id h6-20020a0568300346b02901b71a850ab4so4317010ote.6
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:21:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=J7FJNGhN;
+ spf=pass (domain: gmail.com, ip: 209.85.167.179, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f179.google.com with SMTP id m13so4253105oiw.13
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:21:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=rKKfj9VBQWtd3STTFjUDPwyH1qGcIP8ChAoyZaoEa1M=;
-        b=f6K8UQj5/FBp8CfWg4G/wwrQu94ADJ71NNx1LPZIjwqaNFrB6t52/6a4xtGT8P4CKO
-         bHaWjXmI9xT2xC9DbWKv/JuG4pdiOJVbxuZ2LDw5vNt6sguOG7YRFwg6dHoUx7iLlX3W
-         M7ppb+1nd7f/QCkOroaX7a7RNlQu4QuIc4AsUbbUb4JUeeJMCIhfu8DGQkfgi/eu/Rtv
-         2KEe+rO8lNiC+FlLqSe6k3d/Xvl0d/GlCD1X8Y3ZN6RQmcn/Lugod4QzfDXVvKIcgnsJ
-         XICRIZSI0y0BHzsTEsyib8fPlE83GmMT+d4h+wrlu6KGocsB/x23YNXE7c7J7Zj4Sd8L
-         eM6Q==
+        h=from:to:subject:date:message-id:mime-version:in-reply-to:references
+         :content-transfer-encoding;
+        bh=TI7TttEtF8mzTlO3oGFilftSmr1pvQFNTCxztJjXO60=;
+        b=J7FJNGhNBix8QyXqPTTr/4LX9MHqsf4GlJjoLd4hTx6EYETOgKVn9bullx3RcHtdaH
+         /aEnq4l0nnyuugxl2rIgJSCJ3TdWJOjR8icBoWXSqJLSiwJ7O9EU5SVewrCJy2F4HP9L
+         Mpj9PxeZM62/Tw/SaZT/K4F5DwQQQs5KNZL8pA9C8SyWEdbGN8H/Ovi0rRwY8HrOg8ub
+         1moxaWQ0M5hvALm3eOekl942ptj6ybq1SCU4RZrpvVk4QOTKkUrRYScqSd9XzZ1T25K+
+         O1FVNPHuNVkzBQAeVVaCmx+D5nm/eg0Oedn0/LiXkGc14RDyJNjr80K+HAdyYalKDuxa
+         nviQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=rKKfj9VBQWtd3STTFjUDPwyH1qGcIP8ChAoyZaoEa1M=;
-        b=SXjbgxobsYs0jds9IxwMf3gLGl9ZfHhbhn3qnbkSAwxJ17IXQcT+4SezsXYZPricSZ
-         ZIqSPVPXn5kfABCSm9koL575/oFuOe/zZUfWOFAcd5szM5ZHr5w69hTEZjNoRyzPC76T
-         CVQePjTCJ8FVfrZWl+EMkMpHdpsuKgMe+7Y/6ODM0TLTKFAd2vfxETeqRrSgejpGCMIW
-         /4xAe5wdIsz7iFAwxSDShM+3ZvPz4CbHnNtd2w5KqpArG2U6YdeZ09MzC5TPlKCcfVYv
-         o3v204VetfcTT1aExCW0NckLCyFLRV+9xCN/PmW1RgoH9o6QzWfXLEUjMDn3QgICOLFg
-         7FIg==
-X-Gm-Message-State: AOAM530XoRsHpD0/r3Kg7YBVjmeDT9zhsVbXrOngD40EEV3lyif55iqv
-	DXsEAU+bBQqQQZj2V1ezSWH1OiCHKfQ=
-X-Google-Smtp-Source: ABdhPJw05P5hAz3RyI/CQBG0eqsKNn2q0gb8PGVHXR/sp0HOFmn+V9ohWMCz9zci6p9DaMNdqGelYw==
-X-Received: by 2002:a9d:6e18:: with SMTP id e24mr10479929otr.284.1617934870328;
-        Thu, 08 Apr 2021 19:21:10 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :in-reply-to:references:content-transfer-encoding;
+        bh=TI7TttEtF8mzTlO3oGFilftSmr1pvQFNTCxztJjXO60=;
+        b=WNdGWm0hqyC1+QLYdyqcnniq28AcHC8AaTB4NeGlCg/d5KaiOsbXwwLPyj4PDtIl03
+         6QXjrya1CNb7xpahJt0jvim8Wzsi1C/MpgGu6qUSLibE2OHFUbJmr0Mh8crKeNTYB7FQ
+         fGHlKjmUMWS8uavYyYU9KlqKQd+tS1SIRYdZ1yWG8LyA/G+Xxiea4O0HrEnOLw6YAHnE
+         sp2WzVYrFMb88E/yYUnS6iC9t+3F1erHZP6bgKTdsXlOcfEi4ItYvw+fJ1dJ79/NVs0x
+         pFWlSjubqZSTDCkgIhsqhnIaU7r4ZB9o6HAXaSgd0heo1JD7FgnncxuoxQQxCHVEDcTR
+         29LA==
+X-Gm-Message-State: AOAM533sytI+cjpz1qc3Gjw4OXP8sqgNuh8U8mxyy+U2NUsLwVNvOniN
+	mPTNGxhYr8RYrkkAZky7pRs68AVSHt0=
+X-Google-Smtp-Source: ABdhPJyMYH3OZ2iM4N1epBf8TIGvKiDLujUY6ErGECM1Ewa4kqqZl9BjHsj5lTCsb2jPOfZ5hoh3VA==
+X-Received: by 2002:aca:6545:: with SMTP id j5mr8391738oiw.31.1617934871406;
+        Thu, 08 Apr 2021 19:21:11 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id k65sm299815otk.53.2021.04.08.19.21.09
+        by smtp.gmail.com with ESMTPSA id k65sm299815otk.53.2021.04.08.19.21.10
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Thu, 08 Apr 2021 19:21:10 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 20/36] pidgin: upgrade to 2.14.2
-Date: Thu,  8 Apr 2021 19:20:33 -0700
-Message-Id: <84c73f49aa2bb6e5f5ec4deb0bfb0160d4c53ea6.1617934043.git.akuster808@gmail.com>
+Subject: [hardknott 21/36] networkmanager: upgrade 1.28.0 -> 1.30.2
+Date: Thu,  8 Apr 2021 19:20:34 -0700
+Message-Id: <efadc8a79e15fb82be2b92857459e590eed71aa3.1617934043.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
 In-Reply-To: <cover.1617934043.git.akuster808@gmail.com>
 References: <cover.1617934043.git.akuster808@gmail.com>
+Content-Type: text/plain; charset=y
+Content-Transfer-Encoding: 8bit
 
-From: Martin Jansa <Martin.Jansa@gmail.com>
+From: Vinicius Aquino <voa.aquino@gmail.com>
 
-* drop --with-python=python3 as it was renamed to --with-python3 and it defaults to
-  python3 now anyway
-  https://reviews.imfreedom.org/r/550/
+Upgrade to release 1.30.2:
 
-* add PACKAGECONFIG for cyrus-sasl, it's enabled by default since:
-  commit 8d6c390002378664dea48e8766a0e4f063b12f78
-  Author: Gary Kramlich <grim@reaperworld.com>
-  Date:   Mon Jul 13 03:34:57 2020 -0500
+- 0004-fix_reallocarray_check.patch removed because the current
+  version of nm already includes boths malloc.h and stdlib.h
+- musl/0002-Fix-build-with-musl.patch removed because the commit
+  c50da167bc of nm solves the build issue with musl
+- musl/0001-Fix-build-with-musl-systemd-specific.patch modified
+  to avoid conflicts when applied to current version of nm
+- musl/0003-Fix-build-with-musl-systemd-specific.patch renamed
+  to musl/0002-Fix-build-with-musl-systemd-specific.patch and
+  modified to avoid conflicts when applied to current version of nm
 
-    Enable cyrus-sasl support by default
-  but cyrus-sasl is in meta-networking layer, so we want to keep it disabled by default
-
-* drop patches for autoconf-2.71, it was resolved upstream in:
-  commit aedf4a502e3b5875966e3f8277d7d43a0d9497a2
-  Author: Gary Kramlich <grim@reaperworld.com>
-  Date:   Mon Mar 29 22:56:22 2021 -0500
-
-    Fix a bug where autoconf 2.71 complains about AC_PROG_INTLTOOL not being used.
-
-* 2.14.1 was sometimes failing with
-  cat ../../pidgin-2.14.1/libpurple/account.h ../../pidgin-2.14.1/libpurple/accountopt.h ../../pidgin-2.14.1/libpurple/blist.h ../../pidgin-2.14.1/libpurple/buddyicon.h ../../pidgin-2.14.1/libpurple/certificate.h ../../pidgin-2.14.1/libpurple/cipher.h ../../pidgin-2.14.1/libpurple/circbuffer.h ../../pidgin-2.14.1/libpurple/cmds.h ../../pidgin-2.14.1/libpurple/connection.h ../../pidgin-2.14.1/libpurple/conversation.h ../../pidgin-2.14.1/libpurple/core.h ../../pidgin-2.14.1/libpurple/dbus-maybe.h ../../pidgin-2.14.1/libpurple/debug.h ../../pidgin-2.14.1/libpurple/desktopitem.h ../../pidgin-2.14.1/libpurple/eventloop.h ../../pidgin-2.14.1/libpurple/ft.h ../../pidgin-2.14.1/libpurple/gaim-compat.h ../../pidgin-2.14.1/libpurple/glibcompat.h
-  ../../pidgin-2.14.1/libpurple/idle.h ../../pidgin-2.14.1/libpurple/imgstore.h ../../pidgin-2.14.1/libpurple/log.h ../../pidgin-2.14.1/libpurple/media.h ../../pidgin-2.14.1/libpurple/media-gst.h ../../pidgin-2.14.1/libpurple/mediamanager.h ../../pidgin-2.14.1/libpurple/mime.h ../../pidgin-2.14.1/libpurple/nat-pmp.h ../../pidgin-2.14.1/libpurple/network.h ../../pidgin-2.14.1/libpurple/notify.h ../../pidgin-2.14.1/libpurple/ntlm.h ../../pidgin-2.14.1/libpurple/plugin.h ../../pidgin-2.14.1/libpurple/pluginpref.h ../../pidgin-2.14.1/libpurple/pounce.h ../../pidgin-2.14.1/libpurple/prefs.h ../../pidgin-2.14.1/libpurple/privacy.h ../../pidgin-2.14.1/libpurple/proxy.h ../../pidgin-2.14.1/libpurple/prpl.h ../../pidgin-2.14.1/libpurple/request.h ../../pidgin-2.14.1/libpurple/roomlist.h ../../pidgin-2.14.1/libpurple/savedstatuses.h 
-  ../../pidgin-2.14.1/libpurple/server.h ../../pidgin-2.14.1/libpurple/signals.h ../../pidgin-2.14.1/libpurple/smiley.h ../../pidgin-2.14.1/libpurple/dnsquery.h ../../pidgin-2.14.1/libpurple/dnssrv.h ../../pidgin-2.14.1/libpurple/status.h ../../pidgin-2.14.1/libpurple/stringref.h ../../pidgin-2.14.1/libpurple/stun.h ../../pidgin-2.14.1/libpurple/sound.h ../../pidgin-2.14.1/libpurple/sound-theme.h ../../pidgin-2.14.1/libpurple/sound-theme-loader.h ../../pidgin-2.14.1/libpurple/sslconn.h ../../pidgin-2.14.1/libpurple/theme.h ../../pidgin-2.14.1/libpurple/theme-loader.h ../../pidgin-2.14.1/libpurple/theme-manager.h 
-  ../../pidgin-2.14.1/libpurple/upnp.h ../../pidgin-2.14.1/libpurple/util.h ../../pidgin-2.14.1/libpurple/value.h ../../pidgin-2.14.1/libpurple/xmlnode.h ../../pidgin-2.14.1/libpurple/whiteboard.h ../../pidgin-2.14.1/libpurple/media/backend-iface.h ../../pidgin-2.14.1/libpurple/media/candidate.h ../../pidgin-2.14.1/libpurple/media/codec.h ../../pidgin-2.14.1/libpurple/media/enum-types.h purple.h version.h marshallers.h | python3 ../../pidgin-2.14.1/libpurple/dbus-analyze-types.py --keyword=enum --verbatim > purple-client-bindings.h
-  cat: marshallers.h: No such file or directory
-  cat: marshallers.h: No such file or directory
-  cat: marshallers.h: No such file or directory
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Vinicius Aquino <voa.aquino@gmail.com>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 92926a3e45dadb55cfcacb892c01d512c42d53c4)
+(cherry picked from commit 12a241278aec8893d65dc6fa8d045b0bac0220ea)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...gure.ac-fix-build-with-autoconf-2.71.patch | 229 ------------------
- ...able-few-languages-not-compatible-wi.patch |  49 ----
- .../{pidgin_2.14.1.bb => pidgin_2.14.2.bb}    |   6 +-
- 3 files changed, 2 insertions(+), 282 deletions(-)
- delete mode 100644 meta-oe/recipes-support/pidgin/pidgin/0001-configure.ac-fix-build-with-autoconf-2.71.patch
- delete mode 100644 meta-oe/recipes-support/pidgin/pidgin/0002-configure.ac-disable-few-languages-not-compatible-wi.patch
- rename meta-oe/recipes-support/pidgin/{pidgin_2.14.1.bb => pidgin_2.14.2.bb} (94%)
+ ...ttings-settings-property-documentati.patch |  50 ++------
+ .../0004-fix_reallocarray_check.patch         |  27 ----
+ ...Fix-build-with-musl-systemd-specific.patch |  52 +++-----
+ ...Fix-build-with-musl-systemd-specific.patch |  26 ++++
+ .../musl/0002-Fix-build-with-musl.patch       | 121 ------------------
+ ...Fix-build-with-musl-systemd-specific.patch |  26 ----
+ ...ger_1.28.0.bb => networkmanager_1.30.2.bb} |   6 +-
+ 7 files changed, 59 insertions(+), 249 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/0004-fix_reallocarray_check.patch
+ create mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-Fix-build-with-musl-systemd-specific.patch
+ delete mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-Fix-build-with-musl.patch
+ delete mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0003-Fix-build-with-musl-systemd-specific.patch
+ rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.28.0.bb => networkmanager_1.30.2.bb} (96%)
 
-diff --git a/meta-oe/recipes-support/pidgin/pidgin/0001-configure.ac-fix-build-with-autoconf-2.71.patch b/meta-oe/recipes-support/pidgin/pidgin/0001-configure.ac-fix-build-with-autoconf-2.71.patch
-deleted file mode 100644
-index cfb0290f9b7..00000000000
---- a/meta-oe/recipes-support/pidgin/pidgin/0001-configure.ac-fix-build-with-autoconf-2.71.patch
-+++ /dev/null
-@@ -1,229 +0,0 @@
--From e03d3ef5aadd582ebf7102b7d5785fed177a0cb1 Mon Sep 17 00:00:00 2001
--From: Martin Jansa <Martin.Jansa@gmail.com>
--Date: Sun, 7 Feb 2021 13:25:29 +0100
--Subject: [PATCH] configure.ac: fix build with autoconf-2.71
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0002-Do-not-create-settings-settings-property-documentati.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0002-Do-not-create-settings-settings-property-documentati.patch
+index ecd13504d33..0a86abafc06 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0002-Do-not-create-settings-settings-property-documentati.patch
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0002-Do-not-create-settings-settings-property-documentati.patch
+@@ -1,34 +1,29 @@
+-From 9eab96351a726e9ce6a15d158f743e35d73a8900 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+-Date: Sat, 16 Jan 2021 14:27:38 +0100
++From d0dead0478a070b96f37bd3b310443eaa8c93a25 Mon Sep 17 00:00:00 2001
++From: Vinicius Aquino <voa.aquino@gmail.com>
++Date: Thu, 1 Apr 2021 14:13:07 -0300
+ Subject: [PATCH] Do not create settings settings/property documentation
+ MIME-Version: 1.0
+ Content-Type: text/plain; charset=UTF-8
+ Content-Transfer-Encoding: 8bit
+ 
+-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
 -
--* fixes:
--  | autoreconf: running: intltoolize --copy --force
--  | ERROR: 'IT_PROG_INTLTOOL' must appear in configure.ac for intltool to work.
--  | autoreconf: error: intltoolize failed with exit status: 1
+ It was tried to get this work by adding python3-pygobject-native to DEPENDS but
+-compile could not find (configure passed) python module gi. 
++compile could not find (configure passed) python module gi.
+ Anyway it is not necessary for us to have the settings/property docs.
+ 
+ Upstream-Status: Inappropriate [OE specific]
+ 
+ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 -
--* replace AM_GLIB_GNU_GETTEXT with AM_GNU_GETTEXT as suggested in:
--  https://wiki.gnome.org/Initiatives/GnomeGoals/GettextMigration
--  https://blogs.gnome.org/jjardon/2010/10/08/use-upstream-gettext-instead-the-glib-one/
--  because the former is causing issues with autoconf-2.71:
--
--  -m4trace:configure.ac:266: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
--  -You should run autoupdate.], [../autoconf-2.71/lib/autoconf/general.m4:2920: AC_TRY_LINK is expanded from...
--  -../autoconf-2.71/lib/m4sugar/m4sh.m4:699: AS_IF is expanded from...
--  -../autoconf-2.71/lib/autoconf/headers.m4:89: _AC_CHECK_HEADER_COMPILE is expanded from...
--  -../autoconf-2.71/lib/autoconf/headers.m4:56: AC_CHECK_HEADER is expanded from...
--  -pidgin/2.14.1-r0/recipe-sysroot-native/usr/share/aclocal/glib-gettext.m4:150: GLIB_WITH_NLS is expanded from...
--  -pidgin/2.14.1-r0/recipe-sysroot-native/usr/share/aclocal/glib-gettext.m4:370: GLIB_GNU_GETTEXT is expanded from...
--  -pidgin/2.14.1-r0/recipe-sysroot-native/usr/share/aclocal/glib-gettext.m4:470: AM_GLIB_GNU_GETTEXT is expanded from...
--  -configure.ac:266: the top level])
--  -m4trace:configure.ac:266: -1- m4_pattern_allow([^ENABLE_NLS$])
--  -m4trace:configure.ac:266: -1- _m4_warn([obsolete], [The macro `AC_OUTPUT_COMMANDS' is obsolete.
--  -You should run autoupdate.], [../autoconf-2.71/lib/autoconf/status.m4:1025: AC_OUTPUT_COMMANDS is expanded from...
--  -pidgin/2.14.1-r0/recipe-sysroot-native/usr/share/aclocal/glib-gettext.m4:150: GLIB_WITH_NLS is expanded from...
--  -pidgin/2.14.1-r0/recipe-sysroot-native/usr/share/aclocal/glib-gettext.m4:370: GLIB_GNU_GETTEXT is expanded from...
--  -pidgin/2.14.1-r0/recipe-sysroot-native/usr/share/aclocal/glib-gettext.m4:470: AM_GLIB_GNU_GETTEXT is expanded from...
--  -configure.ac:266: the top level])
--
--  and then configure fails with:
--
--  configure.ac:2621: error: `po/stamp-it' is already registered with AC_CONFIG_COMMANDS.
--  autoconf-2.71/lib/autoconf/status.m4:1008: AC_CONFIG_COMMANDS is expanded from...
--  configure.ac:2621: the top level
--
--* add AM_GNU_GETTEXT_VERSION as well to resolve warning with autoconf-2.71
--  configure.ac: warning: AM_GNU_GETTEXT is used, but not AM_GNU_GETTEXT_VERSION or AM_GNU_GETTEXT_REQUIRE_VERSION
--
--Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-----
-- ABOUT-NLS          |  1 +
-- Makefile.am        |  6 +---
-- configure.ac       |  6 ++--
-- pidgin/Makefile.am |  7 ++--
-- po/Makevars        | 82 ++++++++++++++++++++++++++++++++++++++++++++++
-- po/POTFILES.in     |  1 -
-- 6 files changed, 92 insertions(+), 11 deletions(-)
-- create mode 100644 ABOUT-NLS
-- create mode 100644 po/Makevars
--
--diff --git a/ABOUT-NLS b/ABOUT-NLS
--new file mode 100644
--index 0000000..0a9d56d
----- /dev/null
--+++ b/ABOUT-NLS
--@@ -0,0 +1 @@
--+<https://www.gnu.org/software/gettext/manual/html_node/Users.html>
--diff --git a/Makefile.am b/Makefile.am
--index f8e2bc9..a74145f 100644
----- a/Makefile.am
--+++ b/Makefile.am
--@@ -13,9 +13,6 @@ EXTRA_DIST = \
-- 		fix-casts.sh \
-- 		gaim.pc.in \
-- 		gaim-uninstalled.pc.in \
---		intltool-extract.in \
---		intltool-merge.in \
---		intltool-update.in \
-- 		package_revision.h \
-- 		pidgin.apspec.in \
-- 		pidgin.spec.in \
--@@ -139,5 +136,4 @@ endif
-- distuninstallcheck_listfiles = \
-- 	find . -type f -print | grep -v perl | grep -v Purple.3pm | grep -v Pidgin.3pm
++Signed-off-by: Vinicius Aquino <voa.aquino@gmail.com>
+ ---
+- Makefile.am  | 13 -------------
+- configure.ac |  5 -----
+- 2 files changed, 18 deletions(-)
++ Makefile.am  | 4 ----
++ configure.ac | 5 -----
++ 2 files changed, 9 deletions(-)
+ 
+ diff --git a/Makefile.am b/Makefile.am
+-index 110957a..b4cfbcc 100644
++index 9279672c1..2e52acbb2 100644
+ --- a/Makefile.am
+ +++ b/Makefile.am
+-@@ -1587,14 +1587,10 @@ libnm/libnm.typelib: libnm/libnm.gir
++@@ -1686,14 +1686,10 @@ libnm/libnm.typelib: libnm/libnm.gir
+  INTROSPECTION_GIRS += libnm/NM-1.0.gir
+  
+  libnm_noinst_data = \
+@@ -43,30 +38,11 @@ index 110957a..b4cfbcc 100644
+  	$(NULL)
+  
+  noinst_DATA += $(libnm_noinst_data)
+-@@ -4448,18 +4444,9 @@ $(clients_common_libnmc_base_la_OBJECTS): $(libnm_lib_h_pub_mkenums)
+- $(clients_common_libnmc_base_la_OBJECTS): clients/common/.dirstamp
 - 
---DISTCLEANFILES= intltool-extract intltool-merge intltool-update \
---			package_revision_raw.txt
--+DISTCLEANFILES=package_revision_raw.txt
--diff --git a/configure.ac b/configure.ac
--index 81d8592..e2280cd 100644
+- clients_common_settings_doc_h = clients/common/settings-docs.h
+--if HAVE_INTROSPECTION
+--$(clients_common_settings_doc_h): clients/common/settings-docs.xsl libnm/nm-settings-docs-gir.xml clients/common/.dirstamp
+--	$(AM_V_GEN) $(XSLTPROC) --output $@ $< $(word 2,$^)
+--DISTCLEANFILES += $(clients_common_settings_doc_h)
+--check-local-settings-docs: $(clients_common_settings_doc_h)
+--	$(srcdir)/tools/check-settings-docs.sh "$(srcdir)" "$(builddir)" "$(clients_common_settings_doc_h)"
+--check_local += check-local-settings-docs
+--else
+- $(clients_common_settings_doc_h): $(clients_common_settings_doc_h).in clients/common/.dirstamp
+- 	$(AM_V_GEN) cp "$(srcdir)/$(clients_common_settings_doc_h).in" "$(builddir)/$(clients_common_settings_doc_h)"
+- check-local-settings-docs:
+--endif
+- EXTRA_DIST += \
+- 	$(clients_common_settings_doc_h) \
+- 	$(clients_common_settings_doc_h).in
+ diff --git a/configure.ac b/configure.ac
+-index 704b1c1..18bba87 100644
++index 784ac4695..681e6cb32 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -1228,11 +1228,6 @@ GTK_DOC_CHECK(1.0)
++@@ -1241,11 +1241,6 @@ GTK_DOC_CHECK(1.0)
+  # check if we can build setting property documentation
+  build_docs=no
+  if test -n "$INTROSPECTION_MAKEFILE"; then
+@@ -79,5 +55,5 @@ index 704b1c1..18bba87 100644
+  	if test -z "$PERL"; then
+  		AC_MSG_ERROR([--enable-introspection requires perl])
+ -- 
+-2.26.2
++2.20.1
+ 
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0004-fix_reallocarray_check.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0004-fix_reallocarray_check.patch
+deleted file mode 100644
+index 2df449f2eba..00000000000
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0004-fix_reallocarray_check.patch
++++ /dev/null
+@@ -1,27 +0,0 @@
+-reallocarray() is coming from stdlib.h which maybe indirectly included
+-by malloc.h but not on all libc implementations
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---- a/meson.build
+-+++ b/meson.build
+-@@ -114,7 +114,7 @@ config_h.set10('HAVE_GETRANDOM', use_sys
+-                                                                                      #include <sys/wait.h>'''))
+- config_h.set('HAVE_SECURE_GETENV', cc.has_function('secure_getenv'))
+- config_h.set('HAVE___SECURE_GETENV', cc.has_function('__secure_getenv'))
+--config_h.set10('HAVE_DECL_REALLOCARRAY', cc.has_function('reallocarray', prefix: '#include <malloc.h>'))
+-+config_h.set10('HAVE_DECL_REALLOCARRAY', cc.has_function('reallocarray', prefix: '#include <stdlib.h>'))
+- config_h.set10('HAVE_DECL_EXPLICIT_BZERO', cc.has_function('explicit_bzero', prefix: '#include <string.h>'))
+- config_h.set10('HAVE_DECL_MEMFD_CREATE', cc.has_function('memfd_create', prefix: '#include <sys/mman.h>'))
+- 
 ---- a/configure.ac
 -+++ b/configure.ac
--@@ -43,7 +43,7 @@ fi
+-@@ -82,7 +82,7 @@ AC_CHECK_DECLS([
+- AC_CHECK_DECLS([
+- 	reallocarray],
+- 	[], [], [[
+--#include <malloc.h>
+-+#include <stdlib.h>
+- ]])
 - 
-- AC_CANONICAL_HOST
-- AC_CONFIG_HEADERS([config.h])
---AM_INIT_AUTOMAKE([1.9 -Wno-portability dist-bzip2])
--+AM_INIT_AUTOMAKE([1.9 -Wno-portability dist-bzip2 foreign])
-- dnl TODO: Always use AM_SILENT_RULES when we depend on automake >= 1.11
-- m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
-- 
--@@ -257,12 +257,12 @@ dnl #######################################################################
-- AC_ARG_ENABLE(nls, AC_HELP_STRING([--disable-nls], [disable installation of translation files]), enable_i18n="$enableval", enable_i18n=yes)
-- 
-- if test x$enable_i18n = xyes; then
---	AC_PROG_INTLTOOL
-- 	GETTEXT_PACKAGE=pidgin
-- 	AC_SUBST(GETTEXT_PACKAGE)
-- 
-- 	ALL_LINGUAS="af am ar ar_SA as ast az be@latin bg bn_IN bn br brx bs ca ca@valencia cs da de dz el en_AU en_CA en_GB eo es_AR es et eu fa fi fr ga gl gu he hi hr hu id it ja ka kk km kn ko ks ku_IQ ku lt lv mai mhr mk ml mn mr ms_MY my_MM nb ne nl nn oc or pa pl ps pt_BR pt ro ru sd si sk sl sq sr@latin sr sv sw ta te th tr tt uk ur uz vi xh zh_CN zh_HK zh_TW"
---	AM_GLIB_GNU_GETTEXT
--+	AM_GNU_GETTEXT([external])
--+	AM_GNU_GETTEXT_VERSION([0.21])
-- 
-- 	dnl If we don't have msgfmt, then po/ is going to fail -- ensure that
-- 	dnl AM_GLIB_GNU_GETTEXT found it.
--diff --git a/pidgin/Makefile.am b/pidgin/Makefile.am
--index 2278b88..4d32c53 100644
----- a/pidgin/Makefile.am
--+++ b/pidgin/Makefile.am
--@@ -192,13 +192,16 @@ DESKTOP_FILE=data/pidgin.desktop
-- appsdir = $(datadir)/applications
-- apps_in_files = data/pidgin.desktop.in
-- apps_DATA = $(apps_in_files:.desktop.in=.desktop)
---@INTLTOOL_DESKTOP_RULE@
--+
--+data/pidgin.desktop: data/pidgin.desktop.in
--+	$(AM_V_GEN)$(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
-- 
-- appdatadir = $(datarootdir)/appdata
-- appdata_DATA = $(appdata_in_files:.xml.in=.xml)
-- appdata_in_files = data/pidgin.appdata.xml.in
-- 
---@INTLTOOL_XML_RULE@
--+data/pidgin.appdata.xml: data/pidgin.appdata.xml.in
--+	$(AM_V_GEN)$(MSGFMT) --xml --template $< -d $(top_srcdir)/po -o $@ || cp $< $@
-- 
-- endif # INSTALL_I18N
-- 
--diff --git a/po/Makevars b/po/Makevars
--new file mode 100644
--index 0000000..970237a
----- /dev/null
--+++ b/po/Makevars
--@@ -0,0 +1,82 @@
--+# Makefile variables for PO directory in any package using GNU gettext.
--+#
--+# Copyright (C) 2003-2019 Free Software Foundation, Inc.
--+# This file is free software; the Free Software Foundation gives
--+# unlimited permission to use, copy, distribute, and modify it.
--+
--+# Usually the message domain is the same as the package name.
--+DOMAIN = $(PACKAGE)
--+
--+# These two variables depend on the location of this directory.
--+subdir = po
--+top_builddir = ..
--+
--+# These options get passed to xgettext.
--+XGETTEXT_OPTIONS = --keyword=_ --keyword=N_ --from-code=UTF-8
--+
--+# This is the copyright holder that gets inserted into the header of the
--+# $(DOMAIN).pot file.  Set this to the copyright holder of the surrounding
--+# package.  (Note that the msgstr strings, extracted from the package's
--+# sources, belong to the copyright holder of the package.)  Translators are
--+# expected to transfer the copyright for their translations to this person
--+# or entity, or to disclaim their copyright.  The empty string stands for
--+# the public domain; in this case the translators are expected to disclaim
--+# their copyright.
--+COPYRIGHT_HOLDER = Free Software Foundation, Inc.
--+
--+# This tells whether or not to prepend "GNU " prefix to the package
--+# name that gets inserted into the header of the $(DOMAIN).pot file.
--+# Possible values are "yes", "no", or empty.  If it is empty, try to
--+# detect it automatically by scanning the files in $(top_srcdir) for
--+# "GNU packagename" string.
--+PACKAGE_GNU =
--+
--+# This is the email address or URL to which the translators shall report
--+# bugs in the untranslated strings:
--+# - Strings which are not entire sentences, see the maintainer guidelines
--+#   in the GNU gettext documentation, section 'Preparing Strings'.
--+# - Strings which use unclear terms or require additional context to be
--+#   understood.
--+# - Strings which make invalid assumptions about notation of date, time or
--+#   money.
--+# - Pluralisation problems.
--+# - Incorrect English spelling.
--+# - Incorrect formatting.
--+# It can be your email address, or a mailing list address where translators
--+# can write to without being subscribed, or the URL of a web page through
--+# which the translators can contact you.
--+MSGID_BUGS_ADDRESS =
--+
--+# This is the list of locale categories, beyond LC_MESSAGES, for which the
--+# message catalogs shall be used.  It is usually empty.
--+EXTRA_LOCALE_CATEGORIES =
--+
--+# This tells whether the $(DOMAIN).pot file contains messages with an 'msgctxt'
--+# context.  Possible values are "yes" and "no".  Set this to yes if the
--+# package uses functions taking also a message context, like pgettext(), or
--+# if in $(XGETTEXT_OPTIONS) you define keywords with a context argument.
--+USE_MSGCTXT = no
--+
--+# These options get passed to msgmerge.
--+# Useful options are in particular:
--+#   --previous            to keep previous msgids of translated messages,
--+#   --quiet               to reduce the verbosity.
--+MSGMERGE_OPTIONS =
--+
--+# These options get passed to msginit.
--+# If you want to disable line wrapping when writing PO files, add
--+# --no-wrap to MSGMERGE_OPTIONS, XGETTEXT_OPTIONS, and
--+# MSGINIT_OPTIONS.
--+MSGINIT_OPTIONS =
--+
--+# This tells whether or not to regenerate a PO file when $(DOMAIN).pot
--+# has changed.  Possible values are "yes" and "no".  Set this to no if
--+# the POT file is checked in the repository and the version control
--+# program ignores timestamps.
--+PO_DEPENDS_ON_POT = no
--+
--+# This tells whether or not to forcibly update $(DOMAIN).pot and
--+# regenerate PO files on "make dist".  Possible values are "yes" and
--+# "no".  Set this to no if the POT file and PO files are maintained
--+# externally.
--+DIST_DEPENDS_ON_UPDATE_PO = no
--diff --git a/po/POTFILES.in b/po/POTFILES.in
--index a5691a1..b494bf3 100644
----- a/po/POTFILES.in
--+++ b/po/POTFILES.in
--@@ -1,4 +1,3 @@
---[encoding: UTF-8]
-- finch/finch.c
-- finch/gntaccount.c
-- finch/gntblist.c
-diff --git a/meta-oe/recipes-support/pidgin/pidgin/0002-configure.ac-disable-few-languages-not-compatible-wi.patch b/meta-oe/recipes-support/pidgin/pidgin/0002-configure.ac-disable-few-languages-not-compatible-wi.patch
+- AC_CHECK_DECLS([
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0001-Fix-build-with-musl-systemd-specific.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0001-Fix-build-with-musl-systemd-specific.patch
+index 7807fc77c68..692f1ffa4f4 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0001-Fix-build-with-musl-systemd-specific.patch
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0001-Fix-build-with-musl-systemd-specific.patch
+@@ -1,12 +1,11 @@
+-From 9597122867c22e949ef3b69c779e0facebce6eb5 Mon Sep 17 00:00:00 2001
++From 44884c7e7655b889f41cb02ffc8ab72a29b52ebf Mon Sep 17 00:00:00 2001
+ From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+ Date: Tue, 2 Apr 2019 01:34:35 +0200
+-Subject: [PATCH] Fix build with musl - systemd specific
++Subject: [PATCH 1/2] Fix build with musl - systemd specific
+ MIME-Version: 1.0
+ Content-Type: text/plain; charset=UTF-8
+ Content-Transfer-Encoding: 8bit
+ 
+-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+ MIME-Version: 1.0
+ Content-Type: text/plain; charset=UTF-8
+ Content-Transfer-Encoding: 8bit
+@@ -17,18 +16,18 @@ for musl.
+ Upstream-Status: Pending
+ 
+ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+-
++Signed-off-by: Vinicius Aquino <voa.aquino@gmail.com>
+ ---
+  shared/systemd/src/basic/in-addr-util.c |  1 +
+  shared/systemd/src/basic/process-util.c |  9 +++++++++
+  shared/systemd/src/basic/socket-util.h  |  6 ++++++
+- shared/systemd/src/basic/sort-util.h    | 27 ++++---------------------
++ shared/systemd/src/basic/sort-util.h    | 13 ++++---------
+  shared/systemd/src/basic/stdio-util.h   |  2 ++
+  shared/systemd/src/basic/string-util.h  |  5 +++++
+- 6 files changed, 27 insertions(+), 23 deletions(-)
++ 6 files changed, 27 insertions(+), 9 deletions(-)
+ 
+ diff --git a/shared/systemd/src/basic/in-addr-util.c b/shared/systemd/src/basic/in-addr-util.c
+-index 1ea3e7f..1204393 100644
++index c315dcbb8..5b7e04eb7 100644
+ --- a/shared/systemd/src/basic/in-addr-util.c
+ +++ b/shared/systemd/src/basic/in-addr-util.c
+ @@ -15,6 +15,7 @@
+@@ -40,7 +39,7 @@ index 1ea3e7f..1204393 100644
+  #include "string-util.h"
+  #include "strxcpyx.h"
+ diff --git a/shared/systemd/src/basic/process-util.c b/shared/systemd/src/basic/process-util.c
+-index 03ca04e..be8bca8 100644
++index 0e25b0200..ea2c0fbb4 100644
+ --- a/shared/systemd/src/basic/process-util.c
+ +++ b/shared/systemd/src/basic/process-util.c
+ @@ -17,6 +17,9 @@
+@@ -80,7 +79,7 @@ index 03ca04e..be8bca8 100644
+                                  cached_pid = CACHED_PID_UNSET;
+                                  return new_pid;
+ diff --git a/shared/systemd/src/basic/socket-util.h b/shared/systemd/src/basic/socket-util.h
+-index 1ece911..290e94c 100644
++index 1de069476..f6834fbd2 100644
+ --- a/shared/systemd/src/basic/socket-util.h
+ +++ b/shared/systemd/src/basic/socket-util.h
+ @@ -14,6 +14,12 @@
+@@ -94,10 +93,10 @@ index 1ece911..290e94c 100644
+ +#endif
+ +
+  #include "macro.h"
++ #include "missing_network.h"
+  #include "missing_socket.h"
+- #include "sparse-endian.h"
+ diff --git a/shared/systemd/src/basic/sort-util.h b/shared/systemd/src/basic/sort-util.h
+-index a8dc3bb..ff0aa88 100644
++index a8984fc16..5fb90f8c5 100644
+ --- a/shared/systemd/src/basic/sort-util.h
+ +++ b/shared/systemd/src/basic/sort-util.h
+ @@ -5,15 +5,10 @@
+@@ -120,40 +119,22 @@ index a8dc3bb..ff0aa88 100644
+  
+  /**
+   * Normal bsearch requires base to be nonnull. Here were require
+-@@ -54,17 +49,3 @@ static inline void _qsort_safe(void *base, size_t nmemb, size_t size, __compar_f
+-                 int (*_func_)(const typeof(p[0])*, const typeof(p[0])*) = func; \
+-                 _qsort_safe((p), (n), sizeof((p)[0]), (__compar_fn_t) _func_); \
+-         })
+--
+--static inline void qsort_r_safe(void *base, size_t nmemb, size_t size, __compar_d_fn_t compar, void *userdata) {
+--        if (nmemb <= 1)
+--                return;
+--
+--        assert(base);
+--        qsort_r(base, nmemb, size, compar, userdata);
+--}
+--
+--#define typesafe_qsort_r(p, n, func, userdata)                          \
+--        ({                                                              \
+--                int (*_func_)(const typeof(p[0])*, const typeof(p[0])*, typeof(userdata)) = func; \
+--                qsort_r_safe((p), (n), sizeof((p)[0]), (__compar_d_fn_t) _func_, userdata); \
+--        })
+ diff --git a/shared/systemd/src/basic/stdio-util.h b/shared/systemd/src/basic/stdio-util.h
+-index c3b9448..e80a938 100644
++index d45d3c1a6..fee1a57ca 100644
+ --- a/shared/systemd/src/basic/stdio-util.h
+ +++ b/shared/systemd/src/basic/stdio-util.h
+-@@ -1,7 +1,9 @@
+- /* SPDX-License-Identifier: LGPL-2.1+ */
++@@ -2,7 +2,9 @@
+  #pragma once
+  
++ #if 0 /* NM_IGNORED */
+ +#if defined(__GLIBC__)
+  #include <printf.h>
+ +#endif
++ #endif /* NM_IGNORED */
+  #include <stdarg.h>
+  #include <stdio.h>
+- #include <sys/types.h>
+ diff --git a/shared/systemd/src/basic/string-util.h b/shared/systemd/src/basic/string-util.h
+-index cefbda3..71e4dec 100644
++index 593cf04ae..541c393f6 100644
+ --- a/shared/systemd/src/basic/string-util.h
+ +++ b/shared/systemd/src/basic/string-util.h
+ @@ -26,6 +26,11 @@
+@@ -168,3 +149,6 @@ index cefbda3..71e4dec 100644
+  int strcmp_ptr(const char *a, const char *b) _pure_;
+  int strcasecmp_ptr(const char *a, const char *b) _pure_;
+  
++-- 
++2.20.1
++
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-Fix-build-with-musl-systemd-specific.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-Fix-build-with-musl-systemd-specific.patch
+new file mode 100644
+index 00000000000..d83efd39e46
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-Fix-build-with-musl-systemd-specific.patch
+@@ -0,0 +1,26 @@
++From 7d9a11a17da425d106791ada7100d7a6559e6065 Mon Sep 17 00:00:00 2001
++From: Adrian Freihofer <adrian.freihofer@siemens.com>
++Date: Sat, 7 Mar 2020 14:24:01 +0100
++Subject: [PATCH 2/2] Fix build with musl - systemd specific
++
++---
++ src/core/systemd/src/libsystemd-network/sd-dhcp6-client.c | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/src/core/systemd/src/libsystemd-network/sd-dhcp6-client.c b/src/core/systemd/src/libsystemd-network/sd-dhcp6-client.c
++index 3fafd3c0e..79d6096c2 100644
++--- a/src/core/systemd/src/libsystemd-network/sd-dhcp6-client.c
+++++ b/src/core/systemd/src/libsystemd-network/sd-dhcp6-client.c
++@@ -8,7 +8,9 @@
++ #include <errno.h>
++ #include <sys/ioctl.h>
++ #if 0 /* NM_IGNORED */
+++#ifdef __GLIBC__  /* musl supplies full set of userspace headers */
++ #include <linux/if_arp.h>
+++#endif
++ #else /* NM_IGNORED */
++ #include <net/if_arp.h>
++ #endif /* NM_IGNORED */
++-- 
++2.20.1
++
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-Fix-build-with-musl.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-Fix-build-with-musl.patch
 deleted file mode 100644
-index 99c523d5d9d..00000000000
---- a/meta-oe/recipes-support/pidgin/pidgin/0002-configure.ac-disable-few-languages-not-compatible-wi.patch
+index 0f43c0c6840..00000000000
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-Fix-build-with-musl.patch
 +++ /dev/null
-@@ -1,49 +0,0 @@
--From 861c8a63c36f9ee7d46238c9bc13a2c1f14372c3 Mon Sep 17 00:00:00 2001
--From: Martin Jansa <Martin.Jansa@gmail.com>
--Date: Sun, 7 Feb 2021 14:35:14 +0000
--Subject: [PATCH] configure.ac: disable few languages not compatible with
-- modern gettext
+@@ -1,121 +0,0 @@
+-From bacc14089c80ec757025789ff054a05e1f9c088d Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+-Date: Mon, 8 Apr 2019 23:10:43 +0200
+-Subject: [PATCH] Fix build with musl
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
 -
--* as pidgin-3 development is moving to meson and probably
--  most of these changes won't be applicable there, lets just
--  disable them until someone interested steps-up to maintain it
+-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
 -
--* these 3 fail with:
--cd ../../pidgin-2.14.1/po && rm -f brx.gmo && pidgin/2.14.1-r0/recipe-sysroot-native/usr/bin/msgmerge --for-msgfmt -o brx.1po brx.po pidgin.pot && pidgin/2.14.1-r0/recipe-sysroot-native/usr/bin/msgfmt -c --statistics --verbose -o brx.gmo brx.1po && rm -f brx.1po
--cd ../../pidgin-2.14.1/po && rm -f zh_HK.gmo && pidgin/2.14.1-r0/recipe-sysroot-native/usr/bin/msgmerge --for-msgfmt -o zh_HK.1po zh_HK.po pidgin.pot && pidgin/2.14.1-r0/recipe-sysroot-native/usr/bin/msgfmt -c --statistics --verbose -o zh_HK.gmo zh_HK.1po && rm -f zh_HK.1po
--cd ../../pidgin-2.14.1/po && rm -f zh_TW.gmo && pidgin/2.14.1-r0/recipe-sysroot-native/usr/bin/msgmerge --for-msgfmt -o zh_TW.1po zh_TW.po pidgin.pot && pidgin/2.14.1-r0/recipe-sysroot-native/usr/bin/msgfmt -c --statistics --verbose -o zh_TW.gmo zh_TW.1po && rm -f zh_TW.1po
--zh_HK.1po:2790: 'msgstr' is not a valid C format string, unlike 'msgid'. Reason: The string refers to arguments both through absolute argument numbers and through unnumbered argument specifications.
--pidgin/2.14.1-r0/recipe-sysroot-native/usr/bin/msgfmt: found 1 fatal error
--zh_TW.1po:2790: 'msgstr' is not a valid C format string, unlike 'msgid'. Reason: The string refers to arguments both through absolute argument numbers and through unnumbered argument specifications.
--pidgin/2.14.1-r0/recipe-sysroot-native/usr/bin/msgfmt: found 1 fatal error
--zh_HK.1po: 3234 translated messages.
--make[3]: *** [Makefile:415: ../../pidgin-2.14.1/po/zh_HK.gmo] Error 1
--make[3]: *** Waiting for unfinished jobs....
--zh_TW.1po: 3234 translated messages.
--make[3]: *** [Makefile:415: ../../pidgin-2.14.1/po/zh_TW.gmo] Error 1
--brx.1po:778: number of format specifications in 'msgid' and 'msgstr' does not match
--brx.1po:3179: number of format specifications in 'msgid' and 'msgstr' does not match
--brx.1po:5175: format specifications in 'msgid_plural' and 'msgstr[0]' for argument 1 are not the same
--brx.1po:5184: format specifications in 'msgid_plural' and 'msgstr[0]' for argument 1 are not the same
--brx.1po:7754: format specifications in 'msgid_plural' and 'msgstr[0]' for argument 1 are not the same
--pidgin/2.14.1-r0/recipe-sysroot-native/usr/bin/msgfmt: found 8 fatal errors
--brx.1po: 3246 translated messages.
+-The build issues caused by definition conflicts musl vs linux-libc headers
+-(error: redefinition of ...) can be reduced to two headers:
 -
--Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+-1. netinet/if_ether.h <-> linux/if_ether.h: linux-libc header plays well with
+-   glibc and musl headers in case libc's variant (netinet/if_ether.h) is
+-   included BEFORE linux variant [1]. We add include at two positions:
+-   1. shared/nm-default.h: This is a global which used for networkmanager and
+-      is included at the very beginning of all c-files.
+-   2. libnm-core/nm-utils.h: This file makes it into installation and is used
+-      by dependent packages as network-manager-applet
+-2. net/if_arp. <-> linux/if_ether.h: linux-libc: Unfortunaly these files do
+-   not play together in harmony. Therefore the libc variant is included early in
+-   shared/nm-default.h and occurances linux/if_arp.h are removed.
+-
+-Note:
+-Be aware that this is still nasty business: We have to trust that musl headers
+-define same signatures as linux would do - just because musl-makers consider
+-linux-libc headers 'notoriously broken for userspace' [2] (search for
+-'error: redefinition of').
+-
+-[1] http://lists.openembedded.org/pipermail/openembedded-core/2019-March/280440.html
+-[2] https://wiki.musl-libc.org/faq.html
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+-
 ----
-- configure.ac | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
+- clients/tui/nmt-device-entry.c   | 1 -
+- libnm-core/nm-utils.h            | 4 ++++
+- shared/nm-default.h              | 3 +++
+- src/devices/nm-device.c          | 2 +-
+- src/platform/nm-linux-platform.c | 1 -
+- 5 files changed, 8 insertions(+), 3 deletions(-)
 -
--diff --git a/configure.ac b/configure.ac
--index e2280cd..9332932 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -260,7 +260,7 @@ if test x$enable_i18n = xyes; then
-- 	GETTEXT_PACKAGE=pidgin
-- 	AC_SUBST(GETTEXT_PACKAGE)
+-diff --git a/clients/tui/nmt-device-entry.c b/clients/tui/nmt-device-entry.c
+-index 692a467..cf9b32e 100644
+---- a/clients/tui/nmt-device-entry.c
+-+++ b/clients/tui/nmt-device-entry.c
+-@@ -26,7 +26,6 @@
+- #include "nmt-device-entry.h"
 - 
---	ALL_LINGUAS="af am ar ar_SA as ast az be@latin bg bn_IN bn br brx bs ca ca@valencia cs da de dz el en_AU en_CA en_GB eo es_AR es et eu fa fi fr ga gl gu he hi hr hu id it ja ka kk km kn ko ks ku_IQ ku lt lv mai mhr mk ml mn mr ms_MY my_MM nb ne nl nn oc or pa pl ps pt_BR pt ro ru sd si sk sl sq sr@latin sr sv sw ta te th tr tt uk ur uz vi xh zh_CN zh_HK zh_TW"
--+	ALL_LINGUAS="af am ar ar_SA as ast az be@latin bg bn_IN bn br bs ca ca@valencia cs da de dz el en_AU en_CA en_GB eo es_AR es et eu fa fi fr ga gl gu he hi hr hu id it ja ka kk km kn ko ks ku_IQ ku lt lv mai mhr mk ml mn mr ms_MY my_MM nb ne nl nn oc or pa pl ps pt_BR pt ro ru sd si sk sl sq sr@latin sr sv sw ta te th tr tt uk ur uz vi xh zh_CN"
-- 	AM_GNU_GETTEXT([external])
-- 	AM_GNU_GETTEXT_VERSION([0.21])
+- #include <sys/socket.h>
+--#include <linux/if_arp.h>
 - 
-diff --git a/meta-oe/recipes-support/pidgin/pidgin_2.14.1.bb b/meta-oe/recipes-support/pidgin/pidgin_2.14.2.bb
-similarity index 94%
-rename from meta-oe/recipes-support/pidgin/pidgin_2.14.1.bb
-rename to meta-oe/recipes-support/pidgin/pidgin_2.14.2.bb
-index d22380eb0df..ba0dca233ba 100644
---- a/meta-oe/recipes-support/pidgin/pidgin_2.14.1.bb
-+++ b/meta-oe/recipes-support/pidgin/pidgin_2.14.2.bb
-@@ -11,11 +11,9 @@ SRC_URI = "\
-     ${SOURCEFORGE_MIRROR}/pidgin/pidgin-${PV}.tar.bz2 \
-     file://sanitize-configure.ac.patch \
-     file://purple-OE-branding-25.patch \
--    file://0001-configure.ac-fix-build-with-autoconf-2.71.patch \
--    file://0002-configure.ac-disable-few-languages-not-compatible-wi.patch \
+- #include "nmtui.h"
+- 
+-diff --git a/libnm-core/nm-utils.h b/libnm-core/nm-utils.h
+-index 9589c51..b82c5cf 100644
+---- a/libnm-core/nm-utils.h
+-+++ b/libnm-core/nm-utils.h
+-@@ -10,6 +10,10 @@
+-     #error "Only <NetworkManager.h> can be included directly."
+- #endif
+- 
+-+/* include as early as possible for musl */
+-+#include <netinet/if_ether.h>
+-+/* #include <net/if_arp.h> - uncoment for broken dependents?? */
+-+
+- #include <glib.h>
+- 
+- #include <netinet/in.h>
+-diff --git a/shared/nm-default.h b/shared/nm-default.h
+-index b322f1d..c287dbe 100644
+---- a/shared/nm-default.h
+-+++ b/shared/nm-default.h
+-@@ -178,6 +178,9 @@
+- #endif
+- 
+- #include <stdlib.h>
+-+/* include as early as possible for musl */
+-+#include <netinet/if_ether.h>
+-+#include <net/if_arp.h>
+- 
+- /*****************************************************************************/
+- 
+-diff --git a/src/devices/nm-device.c b/src/devices/nm-device.c
+-index 0be05f2..04061f9 100644
+---- a/src/devices/nm-device.c
+-+++ b/src/devices/nm-device.c
+-@@ -9,6 +9,7 @@
+- #include "nm-device.h"
+- 
+- #include <netinet/in.h>
+-+#include <net/if.h>
+- #include <unistd.h>
+- #include <sys/ioctl.h>
+- #include <signal.h>
+-@@ -17,7 +18,6 @@
+- #include <arpa/inet.h>
+- #include <fcntl.h>
+- #include <linux/if_addr.h>
+--#include <linux/if_arp.h>
+- #include <linux/rtnetlink.h>
+- 
+- #include "nm-std-aux/unaligned.h"
+-diff --git a/src/platform/nm-linux-platform.c b/src/platform/nm-linux-platform.c
+-index b377c85..87af59a 100644
+---- a/src/platform/nm-linux-platform.c
+-+++ b/src/platform/nm-linux-platform.c
+-@@ -14,7 +14,6 @@
+- #include <libudev.h>
+- #include <linux/fib_rules.h>
+- #include <linux/ip.h>
+--#include <linux/if_arp.h>
+- #include <linux/if_bridge.h>
+- #include <linux/if_link.h>
+- #include <linux/if_tun.h>
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0003-Fix-build-with-musl-systemd-specific.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0003-Fix-build-with-musl-systemd-specific.patch
+deleted file mode 100644
+index 5735d51a8cd..00000000000
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0003-Fix-build-with-musl-systemd-specific.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From ed748a28076eada9f38e3f4a476f28d7a10ba84b Mon Sep 17 00:00:00 2001
+-From: Adrian Freihofer <adrian.freihofer@siemens.com>
+-Date: Sat, 7 Mar 2020 14:24:01 +0100
+-Subject: [PATCH] Fix build with musl - systemd specific
+-
+----
+- src/systemd/src/libsystemd-network/sd-dhcp6-client.c | 2 ++
+- 1 file changed, 2 insertions(+)
+-
+-diff --git a/src/systemd/src/libsystemd-network/sd-dhcp6-client.c b/src/systemd/src/libsystemd-network/sd-dhcp6-client.c
+-index ec7f1be..31bcd4d 100644
+---- a/src/systemd/src/libsystemd-network/sd-dhcp6-client.c
+-+++ b/src/systemd/src/libsystemd-network/sd-dhcp6-client.c
+-@@ -7,7 +7,9 @@
+- 
+- #include <errno.h>
+- #include <sys/ioctl.h>
+-+#ifdef __GLIBC__  /* musl supplies full set of userspace headers */
+- #include <linux/if_arp.h>
+-+#endif
+- #include <linux/if_infiniband.h>
+- 
+- #include "sd-dhcp6-client.h"
+--- 
+-2.24.1
+-
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.28.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.30.2.bb
+similarity index 96%
+rename from meta-networking/recipes-connectivity/networkmanager/networkmanager_1.28.0.bb
+rename to meta-networking/recipes-connectivity/networkmanager/networkmanager_1.30.2.bb
+index 7a20e914f16..ec3bdd22bdc 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.28.0.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.30.2.bb
+@@ -26,14 +26,12 @@ SRC_URI = " \
+     file://0001-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch \
+     file://0002-Do-not-create-settings-settings-property-documentati.patch \
+     file://0003-install-firewalld-to-var-libdir-rather-than-hardcod-.patch \
+-    file://0004-fix_reallocarray_check.patch \
  "
+ SRC_URI_append_libc-musl = " \
+     file://musl/0001-Fix-build-with-musl-systemd-specific.patch \
+-    file://musl/0002-Fix-build-with-musl.patch \
+-    file://musl/0003-Fix-build-with-musl-systemd-specific.patch \
++    file://musl/0002-Fix-build-with-musl-systemd-specific.patch \
+ "
+-SRC_URI[sha256sum] = "3e170e9045e20598d2630e40c5789b2e2c46b942bfe5cb220f36202299253062"
++SRC_URI[sha256sum] = "0c8e80e77877860e4a4e6ab4a0f7cdc1186e356b65b042a751897188b88944d2"
  
--SRC_URI[sha256sum] = "f132e18d551117d9e46acce29ba4f40892a86746c366999166a3862b51060780"
-+SRC_URI[sha256sum] = "19654ad276b149646371fbdac21bc7620742f2975f7399fed0ffc1a18fbaf603"
+ S = "${WORKDIR}/NetworkManager-${PV}"
  
- PACKAGECONFIG ??= "gnutls consoleui avahi dbus idn nss \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 gtk startup-notification', '', d)} \
-@@ -39,9 +37,9 @@ PACKAGECONFIG[gnutls] = "--enable-gnutls --with-gnutls-includes=${STAGING_INCDIR
- PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,dbus dbus-glib"
- PACKAGECONFIG[avahi] = "--enable-avahi,--disable-avahi,avahi"
- PACKAGECONFIG[nss] = "--enable-nss,--disable-nss,nss nspr,libpurple-plugin-ssl-nss"
-+PACKAGECONFIG[cyrus-sasl] = "--enable-cyrus-sasl,--disable-cyrus-sasl,cyrus-sasl"
- 
- EXTRA_OECONF = " \
--    --with-python=python3 \
-     --disable-perl \
-     --disable-tcl \
-     --disable-gevolution \
 -- 
 2.17.1
 
