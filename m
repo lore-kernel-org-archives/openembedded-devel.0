@@ -1,50 +1,50 @@
-Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
- by mx.groups.io with SMTP id smtpd.web12.3634.1617934874950215335
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
+ by mx.groups.io with SMTP id smtpd.web11.3676.1617934875758553549
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 08 Apr 2021 19:21:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=NYtHRzvG;
- spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: akuster808@gmail.com)
-Received: by mail-ot1-f48.google.com with SMTP id k14-20020a9d7dce0000b02901b866632f29so4335733otn.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:21:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=SF32i7f0;
+ spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f175.google.com with SMTP id i81so4288731oif.6
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:21:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=AZmBosKMww7o2E0vwpmX+IIBtsb4w/EKwcqMO3g3NVs=;
-        b=NYtHRzvGvqC0uhxvqxFTZdX/U0T7Cyd61WNZMI0QQf+UIKxoByI1mEpXiR9vs3fMgB
-         bizSWwvfQCY0zSgtz6DE9xvIjxVPk2lrg2TzRbTap33V/ddMTzYItURohw5gukPIsYn5
-         IbTZsIc5Eg/KI8tbd6Rdp08GaPiQBZvZrn9X80/KP6qX+BkHxeD9SUQ0Sr0IR/6cZQy3
-         +8Y67L4HAuOAwlpteyywnf65r6u5IRDPup5CTCQVHLkrcJk8IDNYZ2seLVROjrNnWrav
-         GZsClfkaYOLwnepFf0JzxYqoYtO1eU47J3zchvc5j3oWZnO//YMCuOmqdrjrtaCFAqb9
-         OGQg==
+        bh=hIKONag1zuvTIj2Ye8UPNQ1+9PUiGLkYNvuczOTLgtc=;
+        b=SF32i7f0EfAcM1ZkjkA2PzKfc/QWxX/+9OhkVIPf0GoKeakkUIqvpHa2jF9678Byd3
+         aNuhCFxARk38TWmxp86/xGyjUll5xA3aPpF+ewMCYSzGYMdJ6+ByZFKrirqVqinZS9K4
+         xON2t2sRRpsPANeWuWAwQvXstXrh/qmNuPcVMwhj2qSYy497s4IY0ItPsomcKMrl3pgx
+         6kt/lfxIyMHr+2+fNJkUZ5d9vk9MG51Yda96P977uXUdIXErtbTz09g2i0tj1wA5MzdS
+         0r6t8AR4wxw9IyYWGnTOPY6OGHGF9DmN9zNUJGtq/wBLd/aaCuY/UDhP94FgyiYOI2I4
+         CL3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=AZmBosKMww7o2E0vwpmX+IIBtsb4w/EKwcqMO3g3NVs=;
-        b=SpYo11nfcIfXpP/MayZ4ltIHn6nwL075tcEz6jmglFyaLK3nxYYAZ9VqqXWPzLslrh
-         RbzfSbtcfq3o6WeyyMN0XG3PC/ANlGFTpD4R1bX1r6RkS1dSkM6RDnzZzXgTM4f30XQD
-         2OnICnnZ5J1kPz/VEWS+AjpEizGqen+ea0kkijnSjvxrNwLpfmnzrcJWcLX8jM41k0WA
-         l/2avlgzgz9Qvm/LR9jU/rM4llSwD40nnTo+da1E+Nq/L/eMGQReLl7UZrxRA/E+a+jG
-         85FRlclJY7DEJooOPPA/gBRa2KlEmcSxq4Uw7iHlM4BbuH5iTpCjpcJtu8Y/5VkFPKV/
-         sf+w==
-X-Gm-Message-State: AOAM5320hfbHgOWk5o5Hj2D0zALOH+7emHNmlV2z21ZtX1zd5s+2c4dX
-	+ZaMJ35dLcejwlCjGN8IMkQgzD7trS0=
-X-Google-Smtp-Source: ABdhPJzayjqSnLwXDqzH9VOW5oWWhKji7bh7Mvi/ndioBzQxnpetPt21wtsM+4lN9opHCu2EjjMU9Q==
-X-Received: by 2002:a9d:600a:: with SMTP id h10mr10498219otj.90.1617934874166;
+        bh=hIKONag1zuvTIj2Ye8UPNQ1+9PUiGLkYNvuczOTLgtc=;
+        b=tP2g/T41K+tRaJNuNHI3qN0oNwtHysq5CJkPZkvEh9VdJJaonaQILgA5D7++K7iHyf
+         hge3nCCKDhuqJsxFUASzLYLX+eWRJalafchw0hRsstvixZm1Rh8Fl1nVZFyhfXpTeVcA
+         aOnzhNytbivCz12eOZjvBdAry19cYtrW+wi0bnj6WpCHJH0kaTGPIkelL1/ebJWpIKqV
+         8Fmaf6EPvcGH/7+DKT40D8SlLRl6dpfRFRW1Xq6tkjcQ44GtIYEm2SGATGRr0weA+4rp
+         4OBKrVCGCNOLfDiXOC8xCMINg6W8RLpIapTPERVdJeOaZ16vIJu11zsLvuJrgKejM/kl
+         +IDQ==
+X-Gm-Message-State: AOAM533qdln2OW5TIVIpxQd8KxuUEJX9wChlCrVNE9YTDLqDPeVHtH8h
+	kkUE8ALY1PGHtrXvEWDEIt25MO7IGo4=
+X-Google-Smtp-Source: ABdhPJwOaEuFFOllRqfb6lrRPk3/9a2u+XNILWuHuPfjsWv3BYuDCrhoneEafQUOFLrl84qMcIItbA==
+X-Received: by 2002:a05:6808:2d0:: with SMTP id a16mr8116307oid.83.1617934874864;
         Thu, 08 Apr 2021 19:21:14 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id k65sm299815otk.53.2021.04.08.19.21.13
+        by smtp.gmail.com with ESMTPSA id k65sm299815otk.53.2021.04.08.19.21.14
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 19:21:13 -0700 (PDT)
+        Thu, 08 Apr 2021 19:21:14 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 24/36] gigolo: upgrade 0.5.1 -> 0.5.2
-Date: Thu,  8 Apr 2021 19:20:37 -0700
-Message-Id: <35c2cf73f905384a36428a5b6211ca2fae5e9487.1617934043.git.akuster808@gmail.com>
+Subject: [hardknott 25/36] thunar: upgrade 4.16.4 -> 4.16.6
+Date: Thu,  8 Apr 2021 19:20:38 -0700
+Message-Id: <133e083d2939a9b02e6bb2433d9a7409ae423bbd.1617934043.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617934043.git.akuster808@gmail.com>
 References: <cover.1617934043.git.akuster808@gmail.com>
@@ -54,54 +54,45 @@ Content-Transfer-Encoding: 8bit
 
 From: Andreas Müller <schnitzeltony@gmail.com>
 
-Release notes for 0.5.2
-=======================
-A bugfix and translation update, a new icon, various cleanups.. thanks
-to all contributors !
-
+4.16.6
 ======
-- Update TODO
-- Refresh Glade file, drop unused tab labels (fixes #13)
-- move the logic setting GtkSpin port value to setup_for_type() (#11)
-- Use new icon in window titlebar
-- Fix compilation warnings
-- autoconf: Some updates
-- Only show an error dialog if the host field is visible/required
-- Remove capitalization from icon name
-- Update GenericName (#2)
-- Fix comment style.
-- Remove GSourceFunc casts
-- Update Makefile.am
-- Add gigolo.ui to POTFILES.in (Issue #6)
-- Added new icons following new style and reverse DNS format.
-- Add new README.md and update AM_INIT_AUTOMAKE
-- Add basic GitLab pipeline
-- Bug #16717: Move from exo-csource to xdt-csource
-- Translation Updates
+- Reload current directory before selecting new files (Issue #524)
+- tree-view: Hide menu-item "properties" for unmounted devices
+- Removed 'the root folder has no parent' dialog box
+- Revamp documentation to modernize/uniformize accross components
+- Remove watches on shortcuts (Issue #513) (Issue #47)
+- Translation Updates:
+  Finnish, Occitan
+
+4.16.5
+======
+- Revert "Bookmarks no longer need an existing file (Issue #47)"
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e2add121d2713ca72f3c4cf6ae2d557dd4cfc062)
+(cherry picked from commit 905b27cc610c78c28424ab1a1d122852b0787367)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-apps/gigolo/{gigolo_0.5.1.bb => gigolo_0.5.2.bb}   | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-xfce/recipes-apps/gigolo/{gigolo_0.5.1.bb => gigolo_0.5.2.bb} (67%)
+ .../recipes-xfce/thunar/{thunar_4.16.4.bb => thunar_4.16.6.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-xfce/recipes-xfce/thunar/{thunar_4.16.4.bb => thunar_4.16.6.bb} (89%)
 
-diff --git a/meta-xfce/recipes-apps/gigolo/gigolo_0.5.1.bb b/meta-xfce/recipes-apps/gigolo/gigolo_0.5.2.bb
-similarity index 67%
-rename from meta-xfce/recipes-apps/gigolo/gigolo_0.5.1.bb
-rename to meta-xfce/recipes-apps/gigolo/gigolo_0.5.2.bb
-index 1233fe0693c..517f1f4c506 100644
---- a/meta-xfce/recipes-apps/gigolo/gigolo_0.5.1.bb
-+++ b/meta-xfce/recipes-apps/gigolo/gigolo_0.5.2.bb
-@@ -7,5 +7,4 @@ DEPENDS = "gtk+3 intltool-native xfce4-dev-tools-native"
+diff --git a/meta-xfce/recipes-xfce/thunar/thunar_4.16.4.bb b/meta-xfce/recipes-xfce/thunar/thunar_4.16.6.bb
+similarity index 89%
+rename from meta-xfce/recipes-xfce/thunar/thunar_4.16.4.bb
+rename to meta-xfce/recipes-xfce/thunar/thunar_4.16.6.bb
+index e5fd5ffd3ad..128043d19b7 100644
+--- a/meta-xfce/recipes-xfce/thunar/thunar_4.16.4.bb
++++ b/meta-xfce/recipes-xfce/thunar/thunar_4.16.6.bb
+@@ -8,7 +8,7 @@ inherit xfce gobject-introspection features_check mime-xdg
  
- inherit xfce-app
+ REQUIRED_DISTRO_FEATURES = "x11"
  
--SRC_URI[md5sum] = "94e89ad3fabba7167760004b64062f4a"
--SRC_URI[sha256sum] = "ca87badb5871e4844579704704ea9e5ede444f710a3b264c12b60b2a0e48e14e"
-+SRC_URI[sha256sum] = "e34a1aa0755f9f6c234c7d24b23a6cecd6ef50741d79da3bb6f698a2281dbbc3"
+-SRC_URI[sha256sum] = "d51a2018c1ba7dcc420e7a84d85cc17a58f26fb1c80ee4c15e689a49f10425f9"
++SRC_URI[sha256sum] = "cb531d3fe67196a43ca04979ef271ece7858bbc80c15b0ee4323c1252a1a02b7"
+ 
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[pcre] = "--enable-pcre,--disable-pcre,libpcre"
 -- 
 2.17.1
 
