@@ -1,141 +1,307 @@
-Received: from mail-oi1-f173.google.com (mail-oi1-f173.google.com [209.85.167.173])
- by mx.groups.io with SMTP id smtpd.web10.3684.1617934886395082082
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+ by mx.groups.io with SMTP id smtpd.web11.3872.1617936169970755958
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Apr 2021 19:21:26 -0700
+ Thu, 08 Apr 2021 19:42:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=lE42qBMn;
- spf=pass (domain: gmail.com, ip: 209.85.167.173, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f173.google.com with SMTP id n8so4265537oie.10
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:21:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=f4k6jf/4FHtcVFFYD6mwNw6YkP6qHFovkoleufacbek=;
-        b=lE42qBMnD3qNxRndSEQvhbJeDpEcFJ9R8ro9AzdnR4lIjQNC14HMUJob2/bws8H1kB
-         7hDRDo56beyCih1dnn5+cXszh7k3QNSnH7U6bfz5VatsP+DeUraE1CBj6IQDd83g4vhH
-         bgUFePjbCgeIU0MeZ2VVHoAv9HpJW+44ib+ThR0DRErvtt80PyCIkfxTGgwfaUz5o0tl
-         m39BkzogNVjNbxRH1VqnYCCJPRt6Wpk8zsbbTIQMSKNCk5wRFxnJBDqVFMWWc/J3RiXq
-         ulbgDhKXh/CfMjuFrs6VeOz4z3eWNlRWjtnf/bSulZ86OvecHypOrH2Ca4HiZLSwrDTE
-         OO/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=f4k6jf/4FHtcVFFYD6mwNw6YkP6qHFovkoleufacbek=;
-        b=E5ALodX/gtrw+evEcTRTr/cj1sbUo+qSRvQQxqUlJ1rkWq0l9522G3ag5Si5pKPnsQ
-         0ABEJe+t10xbf3M50QOvl0/rdGJ26JzGBu7Y9kryhrh30Jn9rK4ia5+e1GK+urcR74aO
-         7PIEQ+O45y3QAtA0bLyOuZ/BQQGXcBh6II0pnIFDR8A6pukCtntraMe31GPeiMfQ5crt
-         LLwHC9CWekzdfcBde9NEv3JE1V7plZyO9WSrMiXYloK8aWOaOSdp9B0VtUm+dc+xaFjX
-         nV11dA1+OzlbPaPvCcGuhuhxiTY6ixGo2W6fhzYR3MdDA+4Tg1M5DmvwxPrQ1gsWPykM
-         UHxg==
-X-Gm-Message-State: AOAM532SsvOH2RDdZUpeblQceYU+xi9LbtVpagOcPLsqQd41thpBC1S5
-	uCbAXkgp+/5GTkbYDdjuAgHpAMclhoQ=
-X-Google-Smtp-Source: ABdhPJx4/Di3BAsVKBbhgO46dXfZTkDMGusMUqMbvES8k3qdwVWM8CTpiTogRY7x2iEZI+/ljZvRyA==
-X-Received: by 2002:aca:c7c6:: with SMTP id x189mr8372362oif.87.1617934885566;
-        Thu, 08 Apr 2021 19:21:25 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id k65sm299815otk.53.2021.04.08.19.21.24
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 19:21:25 -0700 (PDT)
-From: "akuster" <akuster808@gmail.com>
+ dkim=missing; spf=pass (domain: intel.com, ip: 192.55.52.88, mailfrom: naveen.kumar.saini@intel.com)
+IronPort-SDR: +E367KpvycuMPVOjKyNWJx+mLyCaxWqVSzE05sveNbRKxe9H4/GjTF22Fj8D36lEq8D5skfWfU
+ k9DQ3D2h+8qQ==
+X-IronPort-AV: E=McAfee;i="6000,8403,9948"; a="214093251"
+X-IronPort-AV: E=Sophos;i="5.82,208,1613462400"; 
+   d="scan'208";a="214093251"
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Apr 2021 19:42:48 -0700
+IronPort-SDR: TqjJNCONk3ubMWNI8Ubi2/bb+p1J5SOr3HW6TcJnEAu9WtyvRDUMOwki84fhgwsWJixbz0d0Qj
+ zVmSxo5D8KaQ==
+X-IronPort-AV: E=Sophos;i="5.82,208,1613462400"; 
+   d="scan'208";a="613569156"
+Received: from saininav-desk1.png.intel.com ([172.30.199.23])
+  by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Apr 2021 19:42:48 -0700
+From: "Naveen Saini" <naveen.kumar.saini@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 36/36] xterm: upgrade 366 -> 367
-Date: Thu,  8 Apr 2021 19:20:49 -0700
-Message-Id: <94fe80ce8609d62e51cc190595a9f0c2a4a5a89e.1617934043.git.akuster808@gmail.com>
+Subject: [meta-oe][PATCH v2] tbb: upgrade 2020.3 -> 2021.2.0
+Date: Fri,  9 Apr 2021 10:54:43 +0800
+Message-Id: <20210409025443.32047-1-naveen.kumar.saini@intel.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1617934043.git.akuster808@gmail.com>
-References: <cover.1617934043.git.akuster808@gmail.com>
 
-From: zangrc <zangrc.fnst@fujitsu.com>
+Switched to cmake build tool.
 
--License-Update: Copyright year updated to 2021.
+Rebased some patches due to directory re-structuring.
+Dropped patches, which are not required anymore.
 
-Refresh the following patch:
-0001-Add-configure-time-check-for-setsid.patch
+riscv is not yet supported. So exclude it.
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 97f59fb2063dae01c72e1e3a690edf5dfe645571)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../0001-Add-configure-time-check-for-setsid.patch     | 10 +++++-----
- .../xorg-app/{xterm_366.bb => xterm_367.bb}            |  4 ++--
- 2 files changed, 7 insertions(+), 7 deletions(-)
- rename meta-oe/recipes-graphics/xorg-app/{xterm_366.bb => xterm_367.bb} (89%)
+v2:
+Exclude for riscv machines
+Ref: https://github.com/oneapi-src/oneTBB/blob/onetbb_2021/src/tbb/CMakeLists.txt#L58
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/xterm/0001-Add-configure-time-check-for-setsid.patch b/meta-oe/recipes-graphics/xorg-app/xterm/0001-Add-configure-time-check-for-setsid.patch
-index d3beea8be19..92ecdac224b 100644
---- a/meta-oe/recipes-graphics/xorg-app/xterm/0001-Add-configure-time-check-for-setsid.patch
-+++ b/meta-oe/recipes-graphics/xorg-app/xterm/0001-Add-configure-time-check-for-setsid.patch
-@@ -18,7 +18,7 @@ diff --git a/configure b/configure
- index 0aafefc..03e8df0 100755
- --- a/configure
- +++ b/configure
--@@ -5411,6 +5411,7 @@ for ac_func in \
-+@@ -5605,6 +5605,7 @@ for ac_func in \
-  	unsetenv \
-  	sched_yield \
-  	setpgid \
-@@ -42,7 +42,7 @@ diff --git a/main.c b/main.c
- index 5e60589..b81d2be 100644
- --- a/main.c
- +++ b/main.c
--@@ -2868,7 +2868,7 @@ main(int argc, char *argv[]ENVP_ARG)
-+@@ -2903,7 +2903,7 @@ main(int argc, char *argv[]ENVP_ARG)
-      }
+Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+---
+ ...nfo-is-glibc-specific-API-mark-it-so.patch | 27 ++++++-------
+ .../GLIBC-PREREQ-is-not-defined-on-musl.patch | 22 ++++++-----
+ .../tbb/tbb/cross-compile.patch               | 35 -----------------
+ .../tbb/tbb/improve-reproducibility.patch     | 30 ---------------
+ meta-oe/recipes-support/tbb/tbb/tbb.pc        | 11 ------
+ .../tbb/{tbb_2020.3.bb => tbb_2021.2.0.bb}    | 38 +++++++------------
+ 6 files changed, 41 insertions(+), 122 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/tbb/tbb/cross-compile.patch
+ delete mode 100644 meta-oe/recipes-support/tbb/tbb/improve-reproducibility.patch
+ delete mode 100644 meta-oe/recipes-support/tbb/tbb/tbb.pc
+ rename meta-oe/recipes-support/tbb/{tbb_2020.3.bb => tbb_2021.2.0.bb} (59%)
+
+diff --git a/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-API-mark-it-so.patch b/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-API-mark-it-so.patch
+index 7e66945fa..49325447e 100644
+--- a/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-API-mark-it-so.patch
++++ b/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-API-mark-it-so.patch
+@@ -1,22 +1,23 @@
+-From 6b2b136caa68912d77ffe26143cd3da768b9ef80 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 3 Jun 2017 08:39:37 -0700
++From 52c1586bff0ecb418ac21d6678f8963d70959f04 Mon Sep 17 00:00:00 2001
++From: Naveen Saini <naveen.kumar.saini@intel.com>
++Date: Wed, 7 Apr 2021 11:14:13 +0800
+ Subject: [PATCH] mallinfo() is glibc specific API mark it so
+ 
+ Helps compiling with musl
+ 
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+ Upstream-Status: Pending
+ 
+- src/tbbmalloc/proxy.cpp | 2 ++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
++---
++ src/tbbmalloc_proxy/proxy.cpp | 2 ++
+  1 file changed, 2 insertions(+)
+ 
+-diff --git a/src/tbbmalloc/proxy.cpp b/src/tbbmalloc/proxy.cpp
+-index 5ef279d..06c4872 100644
+---- a/src/tbbmalloc/proxy.cpp
+-+++ b/src/tbbmalloc/proxy.cpp
+-@@ -185,6 +185,7 @@ int mallopt(int /*param*/, int /*value*/) __THROW
++diff --git a/src/tbbmalloc_proxy/proxy.cpp b/src/tbbmalloc_proxy/proxy.cpp
++index f9942bf1..fe0dad89 100644
++--- a/src/tbbmalloc_proxy/proxy.cpp
+++++ b/src/tbbmalloc_proxy/proxy.cpp
++@@ -253,6 +253,7 @@ int mallopt(int /*param*/, int /*value*/) __THROW
+      return 1;
   }
   
-@@ -51,7 +51,7 @@ index 5e60589..b81d2be 100644
-  #define USE_OPENPTY 1
-  static int opened_tty = -1;
-  #endif
--@@ -4040,7 +4040,7 @@ spawnXTerm(XtermWidget xw, unsigned line_speed)
-+@@ -4074,7 +4074,7 @@ spawnXTerm(XtermWidget xw, unsigned line_speed)
-  	    /*
-  	     * now in child process
-  	     */
-@@ -64,14 +64,14 @@ diff --git a/xtermcfg.hin b/xtermcfg.hin
- index 1dbc3b8..4f3ff5b 100644
- --- a/xtermcfg.hin
- +++ b/xtermcfg.hin
--@@ -96,6 +96,7 @@
-+@@ -95,6 +95,7 @@
-  #undef HAVE_PUTENV		/* AC_CHECK_FUNCS(putenv) */
-  #undef HAVE_SCHED_YIELD		/* AC_CHECK_FUNCS(sched_yield) */
-  #undef HAVE_SETPGID		/* AC_CHECK_FUNCS(setpgid) */
- +#undef HAVE_SETSID		/* AC_CHECK_FUNCS(setsid) */
-  #undef HAVE_STDINT_H		/* AC_PROG_CC_STDC */
-  #undef HAVE_STDLIB_H		/* AC_CHECK_HEADERS(stdlib.h) */
-- #undef HAVE_STRFTIME		/* AC_CHECK_FUNCS(strftime) */
-+ #undef HAVE_STDNORETURN_H	/* CF_C11_NORETURN */
+@@ -24,7 +25,7 @@ index 5ef279d..06c4872 100644
+  struct mallinfo mallinfo() __THROW
+  {
+      struct mallinfo m;
+-@@ -192,6 +193,7 @@ struct mallinfo mallinfo() __THROW
++@@ -260,6 +261,7 @@ struct mallinfo mallinfo() __THROW
+  
+      return m;
+  }
+@@ -33,5 +34,5 @@ index 5ef279d..06c4872 100644
+  #if __ANDROID__
+  // Android doesn't have malloc_usable_size, provide it to be compatible
  -- 
- 2.24.1
+-2.13.0
++2.17.1
  
-diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_366.bb b/meta-oe/recipes-graphics/xorg-app/xterm_367.bb
-similarity index 89%
-rename from meta-oe/recipes-graphics/xorg-app/xterm_366.bb
-rename to meta-oe/recipes-graphics/xorg-app/xterm_367.bb
-index 969159bc57b..e0d3dcec135 100644
---- a/meta-oe/recipes-graphics/xorg-app/xterm_366.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xterm_367.bb
-@@ -2,13 +2,13 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
- SUMMARY = "xterm is the standard terminal emulator for the X Window System"
- DEPENDS = "libxaw xorgproto libxext libxau libxinerama libxpm ncurses desktop-file-utils-native"
+diff --git a/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-musl.patch b/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-musl.patch
+index 6f28f6f3a..fb10684cd 100644
+--- a/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-musl.patch
++++ b/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-musl.patch
+@@ -1,7 +1,7 @@
+-From 27956d4c5fb615098231cebfb8eef11057639d3c Mon Sep 17 00:00:00 2001
+-From: Fabrice Fontaine <fontaine.fabrice@gmail.com>
+-Date: Sun, 8 Dec 2019 18:14:38 +0100
+-Subject: [PATCH] src/tbbmalloc/proxy.cpp: __GLIBC_PREREQ is not defined on
++From 5cac8b5fffa4ebf5f0090456c9e0cbf43827242a Mon Sep 17 00:00:00 2001
++From: Naveen Saini <naveen.kumar.saini@intel.com>
++Date: Wed, 7 Apr 2021 11:32:52 +0800
++Subject: [PATCH] src/tbbmalloc/proxy.cpp: __GLIBC_PREREQ is not defined on 
+  musl
  
--LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=996b1ce0584c0747b17b57654cc81e8e"
-+LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=987de9787175385203a1ea2482246a17"
+ Do not call __GLIBC_PREREQ if it is not defined otherwise build will
+@@ -12,14 +12,15 @@ Signed-off-by: Fabrice Fontaine <fontaine.fabrice@gmail.com>
+ Upstream-Status: Submitted [https://github.com/oneapi-src/oneTBB/pull/203]
  
- SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz \
-            file://0001-Add-configure-time-check-for-setsid.patch \
-           "
+ Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
++Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+ ---
+- src/tbbmalloc/proxy.cpp | 6 ++++--
++ src/tbbmalloc_proxy/proxy.cpp | 6 ++++--
+  1 file changed, 4 insertions(+), 2 deletions(-)
  
--SRC_URI[sha256sum] = "858b2885963fe97e712739066aadc1baeba2b33a0016303a7fec7d38bc73bf6e"
-+SRC_URI[sha256sum] = "27f1a8b1c756e269fd5684e60802b545f0be9b36b8b5d6bdbc840c6b000dc51f"
+-diff --git a/src/tbbmalloc/proxy.cpp b/src/tbbmalloc/proxy.cpp
+-index d96ae7a0..709ae839 100644
+---- a/src/tbbmalloc/proxy.cpp
+-+++ b/src/tbbmalloc/proxy.cpp
++diff --git a/src/tbbmalloc_proxy/proxy.cpp b/src/tbbmalloc_proxy/proxy.cpp
++index fe0dad89..93e68049 100644
++--- a/src/tbbmalloc_proxy/proxy.cpp
+++++ b/src/tbbmalloc_proxy/proxy.cpp
+ @@ -24,7 +24,8 @@
+  // of aligned_alloc as required by new C++ standard, this makes it hard to
+  // redefine aligned_alloc here. However, running on systems with new libc
+@@ -40,3 +41,6 @@ index d96ae7a0..709ae839 100644
+  #endif // __linux__ && !__ANDROID__
+  
+  #include "proxy.h"
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-support/tbb/tbb/cross-compile.patch b/meta-oe/recipes-support/tbb/tbb/cross-compile.patch
+deleted file mode 100644
+index 36578543f..000000000
+--- a/meta-oe/recipes-support/tbb/tbb/cross-compile.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-Author: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+-  
+-Upstream-Status: unsuitable
+----
+-
+-diff --git a/build/linux.clang.inc b/build/linux.clang.inc
+-index fe9b5c98..b0dcd68b 100644
+---- a/build/linux.clang.inc
+-+++ b/build/linux.clang.inc
+-@@ -12,8 +12,8 @@
+- # See the License for the specific language governing permissions and
+- # limitations under the License.
+- 
+--CPLUS ?= clang++
+--CONLY ?= clang
+-+CPLUS ?= $(CXX)
+-+CONLY ?= $(CC)
+- COMPILE_ONLY = -c -MMD
+- PREPROC_ONLY = -E -x c++
+- INCLUDE_KEY = -I
+-diff --git a/build/linux.gcc.inc b/build/linux.gcc.inc
+-index d820c15d..62c76afd 100644
+---- a/build/linux.gcc.inc
+-+++ b/build/linux.gcc.inc
+-@@ -12,8 +12,8 @@
+- # See the License for the specific language governing permissions and
+- # limitations under the License.
+- 
+--CPLUS ?= g++
+--CONLY ?= gcc
+-+CPLUS ?= $(CXX)
+-+CONLY ?= $(CC)
+- COMPILE_ONLY = -c -MMD
+- PREPROC_ONLY = -E -x c++
+- INCLUDE_KEY = -I
+diff --git a/meta-oe/recipes-support/tbb/tbb/improve-reproducibility.patch b/meta-oe/recipes-support/tbb/tbb/improve-reproducibility.patch
+deleted file mode 100644
+index 91d10cb7a..000000000
+--- a/meta-oe/recipes-support/tbb/tbb/improve-reproducibility.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From f56eeb18a07df139864a99e1967d450cc5c8c0bb Mon Sep 17 00:00:00 2001
+-From: Lee Chee Yang <chee.yang.lee@intel.com>
+-Date: Wed, 30 Sep 2020 16:18:35 +0800
+-Subject: [PATCH] improve reproducibility
+-
+-remove the WORKDIR info from BUILD_COMMAND to improve reproducibility.
+-also use SOURCE_DATE_EPOCH as DATETIME wherever possible.
+-
+-Upstream-Status: Inappropriate [sed WORKDIR does not applies to upstream]
+-Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
+----
+- build/version_info_linux.sh | 4 +-
+- 1 file changed, 2 insertion(+), 2 deletion(-)
+-
+-diff --git a/build/version_info_linux.sh b/build/version_info_linux.sh
+-index 793cad11..ed6f4b2a 100644
+---- a/build/version_info_linux.sh
+-+++ b/build/version_info_linux.sh
+-@@ -25,6 +25,6 @@ echo '#N": BUILD_GCC'"\t\t"`g++ --version </dev/null 2>&1 | grep 'g++'`'" ENDL \
+- echo '#N": BUILD_LIBC'"\t"`getconf GNU_LIBC_VERSION | grep glibc | sed -e 's/^glibc //'`'" ENDL \'
+- echo '#N": BUILD_LD'"\t\t"`ld -v 2>&1 | grep 'version'`'" ENDL \'
+- echo '#N": BUILD_TARGET'"\t$arch on $runtime"'" ENDL \'
+--echo '#N": BUILD_COMMAND'"\t"$*'" ENDL \'
+-+echo '#N": BUILD_COMMAND'"\t"$(echo $* | sed 's#'$WORKDIR'#/workdir#g')'" ENDL \'
+- echo ""
+--echo "#define __TBB_DATETIME \""`date -u`"\""
+-+echo "#define __TBB_DATETIME \""`$(date -u -d "@$SOURCE_DATE_EPOCH"  2>/dev/null || date -u -r "$SOURCE_DATE_EPOCH"  2>/dev/null || date -u )`"\""
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-support/tbb/tbb/tbb.pc b/meta-oe/recipes-support/tbb/tbb/tbb.pc
+deleted file mode 100644
+index 4f9da1140..000000000
+--- a/meta-oe/recipes-support/tbb/tbb/tbb.pc
++++ /dev/null
+@@ -1,11 +0,0 @@
+-prefix=/usr
+-exec_prefix=${prefix}
+-libdir=${exec_prefix}/lib
+-includedir=${prefix}/include
+-
+-Name: Threading Building Blocks
+-Description: Intel's parallelism library for C++
+-URL: https://software.intel.com/en-us/tbb
+-Version: 2020.2
+-Libs: -L${libdir} -ltbb
+-Cflags: -I${includedir} 
+diff --git a/meta-oe/recipes-support/tbb/tbb_2020.3.bb b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+similarity index 59%
+rename from meta-oe/recipes-support/tbb/tbb_2020.3.bb
+rename to meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+index 8e0094b31..bf1f604f1 100644
+--- a/meta-oe/recipes-support/tbb/tbb_2020.3.bb
++++ b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+@@ -5,37 +5,27 @@ DESCRIPTION = "Parallelism library for C++ - runtime files \
+     and threading mechanism for performance and scalability."
+ HOMEPAGE = "https://software.intel.com/en-us/tbb"
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+-BRANCH = "tbb_2020"
+-SRCREV = "eca91f16d7490a8abfdee652dadf457ec820cc37"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=86d3f3a95c324c9479bd8986968f4327"
++BRANCH = "onetbb_2021"
++SRCREV = "2dba2072869a189b9fdab3ffa431d3ea49059a19"
+ SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
+-           file://cross-compile.patch \
+-           file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
+-           file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
+-           file://tbb.pc \
+-           file://improve-reproducibility.patch \
++            file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
++            file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
+ "
  
- PACKAGECONFIG ?= ""
- PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
+ S = "${WORKDIR}/git"
+-PE = "1"
+ 
+-COMPILER ?= "gcc"
+-COMPILER_toolchain-clang = "clang"
++inherit cmake
+ 
+-do_compile() {
+-    oe_runmake compiler=${COMPILER} arch=${HOST_ARCH}
+-}
++COMPATIBLE_HOST_riscv64 = "null"
++COMPATIBLE_HOST_riscv32 = "null"
++
++# test build fails, error: 'mallinfo mallinfo()' is deprecated
++EXTRA_OECMAKE += " \
++                    -DTBB_TEST=OFF \
++                    -DCMAKE_BUILD_TYPE=Release \
++                "
+ 
+-do_install() {
+-    install -d ${D}${includedir} ${D}${libdir}
+-    rm ${S}/include/tbb/index.html -f
+-    cp -R --no-dereference --preserve=mode,links -v ${S}/include/tbb ${D}${includedir}
+-    for f in ${B}/build/linux_*_release/lib*.so*
+-    do
+-        install -Dm 0755 $f ${D}${libdir}/
+-    done
+-    install -Dm 0644 ${WORKDIR}/tbb.pc ${D}${libdir}/pkgconfig/tbb.pc
+-}
+ 
+ # fails with thumb enabled:
+ # | arm-oe-linux-gnueabi-g++  -march=armv7-a -mthumb -mthumb-interwork -mfloat-abi=softfp -mfpu=neon -mtune=cortex-a9 -mcpu=cortex-a9 -D__ARM__ -D__LINUX_ARM_ARCH__=7 -funwind-tables -mvectorize-with-neon-quad -rdynamic --sysroot=/OE/sysroots/m14tv -c -MMD -DTBB_USE_DEBUG  -g -O0 -DUSE_PTHREAD -fPIC -D__TBB_BUILD=1 -Wall -Wno-parentheses -Wno-non-virtual-dtor -O2 -pipe -g -feliminate-unused-debug-types -fpermissive -fvisibility-inlines-hidden   -I../../src -I../../src/rml/include -I../../include ../../src/tbb/concurrent_queue.cpp
 -- 
 2.17.1
 
