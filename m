@@ -1,82 +1,141 @@
-Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com [209.85.210.42])
- by mx.groups.io with SMTP id smtpd.web12.3638.1617934885588828496
+Received: from mail-oi1-f173.google.com (mail-oi1-f173.google.com [209.85.167.173])
+ by mx.groups.io with SMTP id smtpd.web10.3684.1617934886395082082
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Apr 2021 19:21:25 -0700
+ Thu, 08 Apr 2021 19:21:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=BJm6MchS;
- spf=pass (domain: gmail.com, ip: 209.85.210.42, mailfrom: akuster808@gmail.com)
-Received: by mail-ot1-f42.google.com with SMTP id k14-20020a9d7dce0000b02901b866632f29so4335961otn.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:21:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=lE42qBMn;
+ spf=pass (domain: gmail.com, ip: 209.85.167.173, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f173.google.com with SMTP id n8so4265537oie.10
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:21:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=OVLA66D9rKsn8+j0ryqiFsARZQSeIsQ4TUrzwW8BHlQ=;
-        b=BJm6MchS5jAqzi0lsRxmLKUkVosrsy1LCSX9+oRqKHxf+dy0SmZgR0yho2/LD+anIq
-         FHROnj7pVEp4IoEnJk/g6LjQ/5eM+cWAmOo0bB0Js5/2mRZb9T2I4WuUJQzPXEW/cKE3
-         2TJoKQLtZyBeD0kNw4mjYCzvHjw3gpXjtXuSBjvK0k0xScx4M1ezzxZtON+s9ZcGZs9d
-         3fZe2YIHR+JnNKU2UpcBZg1D3Lmc+/4INu/otKVjK05h5qQ7ajapHHSLNNmd4AyYBZtr
-         +aoIUDA1WowMLQB2KeM41TaPuXpFUzMiDTAGpXWCZ+HblQxFNSS9BhFDbMg6y3Kl/R7h
-         /dFw==
+        bh=f4k6jf/4FHtcVFFYD6mwNw6YkP6qHFovkoleufacbek=;
+        b=lE42qBMnD3qNxRndSEQvhbJeDpEcFJ9R8ro9AzdnR4lIjQNC14HMUJob2/bws8H1kB
+         7hDRDo56beyCih1dnn5+cXszh7k3QNSnH7U6bfz5VatsP+DeUraE1CBj6IQDd83g4vhH
+         bgUFePjbCgeIU0MeZ2VVHoAv9HpJW+44ib+ThR0DRErvtt80PyCIkfxTGgwfaUz5o0tl
+         m39BkzogNVjNbxRH1VqnYCCJPRt6Wpk8zsbbTIQMSKNCk5wRFxnJBDqVFMWWc/J3RiXq
+         ulbgDhKXh/CfMjuFrs6VeOz4z3eWNlRWjtnf/bSulZ86OvecHypOrH2Ca4HiZLSwrDTE
+         OO/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=OVLA66D9rKsn8+j0ryqiFsARZQSeIsQ4TUrzwW8BHlQ=;
-        b=RpKjI5MwGVMDpcZYjo/Rv4MCGAPRcpMXTdkusaXJeXJ+zGcmfvgneEjATOQNiMn/PJ
-         Xrxk50YMyBm3l6sqtdpMH1CMpA1iTmB6Nz8V17sVVWzdcVxO1QtezbX+AkrXK/j4ieI3
-         8z6G2eYiO0LfolBoHpoU08dRIRmRccV7E8+W8hC6srG33J0Dw8TM2OwlbVl06HAufxTg
-         ntgPQvcf6rkNVzEc46c6vywr4r38WHyXxaqAPApVn6tPH0JkFCFzeQalyzjehvqYNtLc
-         vDkGdUUs4YRHEoc/XACqqtUXOk81rlyaB6kcjFNoB4UlXoAuzrK+NEUzlZqjZPRk8S0n
-         2Rqw==
-X-Gm-Message-State: AOAM531ae64KsZdopnMXMV5MtW6RarnOw1/L8IudhravTFi5nYfm79ud
-	dqXuO0PtE8p0/s+cPxBrH1enyi2Z2ps=
-X-Google-Smtp-Source: ABdhPJxYL4Jhw0AuJ/i1F+Rkxa+2Lu1qjmm4eVVjkPua3REi25ajpOmnghhMcVbZpDoJf5Is8mF0UQ==
-X-Received: by 2002:a05:6830:14a:: with SMTP id j10mr10472565otp.143.1617934884817;
-        Thu, 08 Apr 2021 19:21:24 -0700 (PDT)
+        bh=f4k6jf/4FHtcVFFYD6mwNw6YkP6qHFovkoleufacbek=;
+        b=E5ALodX/gtrw+evEcTRTr/cj1sbUo+qSRvQQxqUlJ1rkWq0l9522G3ag5Si5pKPnsQ
+         0ABEJe+t10xbf3M50QOvl0/rdGJ26JzGBu7Y9kryhrh30Jn9rK4ia5+e1GK+urcR74aO
+         7PIEQ+O45y3QAtA0bLyOuZ/BQQGXcBh6II0pnIFDR8A6pukCtntraMe31GPeiMfQ5crt
+         LLwHC9CWekzdfcBde9NEv3JE1V7plZyO9WSrMiXYloK8aWOaOSdp9B0VtUm+dc+xaFjX
+         nV11dA1+OzlbPaPvCcGuhuhxiTY6ixGo2W6fhzYR3MdDA+4Tg1M5DmvwxPrQ1gsWPykM
+         UHxg==
+X-Gm-Message-State: AOAM532SsvOH2RDdZUpeblQceYU+xi9LbtVpagOcPLsqQd41thpBC1S5
+	uCbAXkgp+/5GTkbYDdjuAgHpAMclhoQ=
+X-Google-Smtp-Source: ABdhPJx4/Di3BAsVKBbhgO46dXfZTkDMGusMUqMbvES8k3qdwVWM8CTpiTogRY7x2iEZI+/ljZvRyA==
+X-Received: by 2002:aca:c7c6:: with SMTP id x189mr8372362oif.87.1617934885566;
+        Thu, 08 Apr 2021 19:21:25 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
         by smtp.gmail.com with ESMTPSA id k65sm299815otk.53.2021.04.08.19.21.24
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 19:21:24 -0700 (PDT)
+        Thu, 08 Apr 2021 19:21:25 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 35/36] rabbitmq-c: upgrade 0.10.0 -> 0.11.0
-Date: Thu,  8 Apr 2021 19:20:48 -0700
-Message-Id: <e0e0fb5240e3c6ef97b0b4e7545c89c70eeebe0f.1617934043.git.akuster808@gmail.com>
+Subject: [hardknott 36/36] xterm: upgrade 366 -> 367
+Date: Thu,  8 Apr 2021 19:20:49 -0700
+Message-Id: <94fe80ce8609d62e51cc190595a9f0c2a4a5a89e.1617934043.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617934043.git.akuster808@gmail.com>
 References: <cover.1617934043.git.akuster808@gmail.com>
 
 From: zangrc <zangrc.fnst@fujitsu.com>
 
+-License-Update: Copyright year updated to 2021.
+
+Refresh the following patch:
+0001-Add-configure-time-check-for-setsid.patch
+
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e1185b272a48e8b797bc7c4e96645cc2fce3d298)
+(cherry picked from commit 97f59fb2063dae01c72e1e3a690edf5dfe645571)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../rabbitmq-c/{rabbitmq-c_0.10.0.bb => rabbitmq-c_0.11.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/rabbitmq-c/{rabbitmq-c_0.10.0.bb => rabbitmq-c_0.11.0.bb} (88%)
+ .../0001-Add-configure-time-check-for-setsid.patch     | 10 +++++-----
+ .../xorg-app/{xterm_366.bb => xterm_367.bb}            |  4 ++--
+ 2 files changed, 7 insertions(+), 7 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-app/{xterm_366.bb => xterm_367.bb} (89%)
 
-diff --git a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.10.0.bb b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.11.0.bb
-similarity index 88%
-rename from meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.10.0.bb
-rename to meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.11.0.bb
-index 2ef6b187e94..0cfd225cf88 100644
---- a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.10.0.bb
-+++ b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.11.0.bb
-@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE-MIT;md5=6b7424f9db80cfb11fdd5c980b583f53"
- LICENSE = "MIT"
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm/0001-Add-configure-time-check-for-setsid.patch b/meta-oe/recipes-graphics/xorg-app/xterm/0001-Add-configure-time-check-for-setsid.patch
+index d3beea8be19..92ecdac224b 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xterm/0001-Add-configure-time-check-for-setsid.patch
++++ b/meta-oe/recipes-graphics/xorg-app/xterm/0001-Add-configure-time-check-for-setsid.patch
+@@ -18,7 +18,7 @@ diff --git a/configure b/configure
+ index 0aafefc..03e8df0 100755
+ --- a/configure
+ +++ b/configure
+-@@ -5411,6 +5411,7 @@ for ac_func in \
++@@ -5605,6 +5605,7 @@ for ac_func in \
+  	unsetenv \
+  	sched_yield \
+  	setpgid \
+@@ -42,7 +42,7 @@ diff --git a/main.c b/main.c
+ index 5e60589..b81d2be 100644
+ --- a/main.c
+ +++ b/main.c
+-@@ -2868,7 +2868,7 @@ main(int argc, char *argv[]ENVP_ARG)
++@@ -2903,7 +2903,7 @@ main(int argc, char *argv[]ENVP_ARG)
+      }
+  }
+  
+@@ -51,7 +51,7 @@ index 5e60589..b81d2be 100644
+  #define USE_OPENPTY 1
+  static int opened_tty = -1;
+  #endif
+-@@ -4040,7 +4040,7 @@ spawnXTerm(XtermWidget xw, unsigned line_speed)
++@@ -4074,7 +4074,7 @@ spawnXTerm(XtermWidget xw, unsigned line_speed)
+  	    /*
+  	     * now in child process
+  	     */
+@@ -64,14 +64,14 @@ diff --git a/xtermcfg.hin b/xtermcfg.hin
+ index 1dbc3b8..4f3ff5b 100644
+ --- a/xtermcfg.hin
+ +++ b/xtermcfg.hin
+-@@ -96,6 +96,7 @@
++@@ -95,6 +95,7 @@
+  #undef HAVE_PUTENV		/* AC_CHECK_FUNCS(putenv) */
+  #undef HAVE_SCHED_YIELD		/* AC_CHECK_FUNCS(sched_yield) */
+  #undef HAVE_SETPGID		/* AC_CHECK_FUNCS(setpgid) */
+ +#undef HAVE_SETSID		/* AC_CHECK_FUNCS(setsid) */
+  #undef HAVE_STDINT_H		/* AC_PROG_CC_STDC */
+  #undef HAVE_STDLIB_H		/* AC_CHECK_HEADERS(stdlib.h) */
+- #undef HAVE_STRFTIME		/* AC_CHECK_FUNCS(strftime) */
++ #undef HAVE_STDNORETURN_H	/* CF_C11_NORETURN */
+ -- 
+ 2.24.1
  
- SRC_URI = "git://github.com/alanxz/rabbitmq-c.git"
--# v0.10.0-master
--SRCREV = "ffe918a5fcef72038a88054dca3c56762b1953d4"
-+# v0.11.0-master
-+SRCREV = "a64c08c68aff34d49a2ac152f04988cd921084f9"
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_366.bb b/meta-oe/recipes-graphics/xorg-app/xterm_367.bb
+similarity index 89%
+rename from meta-oe/recipes-graphics/xorg-app/xterm_366.bb
+rename to meta-oe/recipes-graphics/xorg-app/xterm_367.bb
+index 969159bc57b..e0d3dcec135 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xterm_366.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xterm_367.bb
+@@ -2,13 +2,13 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
+ SUMMARY = "xterm is the standard terminal emulator for the X Window System"
+ DEPENDS = "libxaw xorgproto libxext libxau libxinerama libxpm ncurses desktop-file-utils-native"
  
- S = "${WORKDIR}/git"
+-LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=996b1ce0584c0747b17b57654cc81e8e"
++LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=987de9787175385203a1ea2482246a17"
  
+ SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz \
+            file://0001-Add-configure-time-check-for-setsid.patch \
+           "
+ 
+-SRC_URI[sha256sum] = "858b2885963fe97e712739066aadc1baeba2b33a0016303a7fec7d38bc73bf6e"
++SRC_URI[sha256sum] = "27f1a8b1c756e269fd5684e60802b545f0be9b36b8b5d6bdbc840c6b000dc51f"
+ 
+ PACKAGECONFIG ?= ""
+ PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
 -- 
 2.17.1
 
