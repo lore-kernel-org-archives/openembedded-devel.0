@@ -1,50 +1,50 @@
-Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
- by mx.groups.io with SMTP id smtpd.web11.3676.1617934875758553549
+Received: from mail-ot1-f49.google.com (mail-ot1-f49.google.com [209.85.210.49])
+ by mx.groups.io with SMTP id smtpd.web10.3678.1617934877165188088
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Apr 2021 19:21:15 -0700
+ Thu, 08 Apr 2021 19:21:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=SF32i7f0;
- spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f175.google.com with SMTP id i81so4288731oif.6
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:21:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=RdqvXCCo;
+ spf=pass (domain: gmail.com, ip: 209.85.210.49, mailfrom: akuster808@gmail.com)
+Received: by mail-ot1-f49.google.com with SMTP id y19-20020a0568301d93b02901b9f88a238eso4288102oti.11
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:21:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=hIKONag1zuvTIj2Ye8UPNQ1+9PUiGLkYNvuczOTLgtc=;
-        b=SF32i7f0EfAcM1ZkjkA2PzKfc/QWxX/+9OhkVIPf0GoKeakkUIqvpHa2jF9678Byd3
-         aNuhCFxARk38TWmxp86/xGyjUll5xA3aPpF+ewMCYSzGYMdJ6+ByZFKrirqVqinZS9K4
-         xON2t2sRRpsPANeWuWAwQvXstXrh/qmNuPcVMwhj2qSYy497s4IY0ItPsomcKMrl3pgx
-         6kt/lfxIyMHr+2+fNJkUZ5d9vk9MG51Yda96P977uXUdIXErtbTz09g2i0tj1wA5MzdS
-         0r6t8AR4wxw9IyYWGnTOPY6OGHGF9DmN9zNUJGtq/wBLd/aaCuY/UDhP94FgyiYOI2I4
-         CL3Q==
+        bh=cZlIz0jrjhpzZy0i8CA4Wn3ehQYXRSPoTyb+6hQsAwQ=;
+        b=RdqvXCCoZEeM2dVIBGJAUxtl2HV6a0FOj851nxEku453gV0A9hI5RKIzv7Uubdg3+H
+         k9Tuth6P5fJ9N51I3FgffZzExDQ4j4480C03VvQiCTlsZT/smm4TNPTo7qcroAvb9rzM
+         ER6u0i3qf8t5Nym3GE0k37lkTTLDn+O8UFYO1Ega3urcHqMGs3xP+EbdO6v5uY4WTKTC
+         GKtoILoL/cYfATQqw5XxUMbGxK6dXm6oDwkmEfqriCS0uS8r2SfJ4iIKZ5iGjnRM+1s3
+         dDWqAERhuCTz641rMnQc2NsApIbcKpd/0wNqtlc+6iyqWAzaOsQcM2f/KXbEBA8ovlep
+         X83A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=hIKONag1zuvTIj2Ye8UPNQ1+9PUiGLkYNvuczOTLgtc=;
-        b=tP2g/T41K+tRaJNuNHI3qN0oNwtHysq5CJkPZkvEh9VdJJaonaQILgA5D7++K7iHyf
-         hge3nCCKDhuqJsxFUASzLYLX+eWRJalafchw0hRsstvixZm1Rh8Fl1nVZFyhfXpTeVcA
-         aOnzhNytbivCz12eOZjvBdAry19cYtrW+wi0bnj6WpCHJH0kaTGPIkelL1/ebJWpIKqV
-         8Fmaf6EPvcGH/7+DKT40D8SlLRl6dpfRFRW1Xq6tkjcQ44GtIYEm2SGATGRr0weA+4rp
-         4OBKrVCGCNOLfDiXOC8xCMINg6W8RLpIapTPERVdJeOaZ16vIJu11zsLvuJrgKejM/kl
-         +IDQ==
-X-Gm-Message-State: AOAM533qdln2OW5TIVIpxQd8KxuUEJX9wChlCrVNE9YTDLqDPeVHtH8h
-	kkUE8ALY1PGHtrXvEWDEIt25MO7IGo4=
-X-Google-Smtp-Source: ABdhPJwOaEuFFOllRqfb6lrRPk3/9a2u+XNILWuHuPfjsWv3BYuDCrhoneEafQUOFLrl84qMcIItbA==
-X-Received: by 2002:a05:6808:2d0:: with SMTP id a16mr8116307oid.83.1617934874864;
-        Thu, 08 Apr 2021 19:21:14 -0700 (PDT)
+        bh=cZlIz0jrjhpzZy0i8CA4Wn3ehQYXRSPoTyb+6hQsAwQ=;
+        b=bNVcQ5+pyVb4FYF/xdnSQXiLPwhYrO4qfY8wQP1AL5fPSfA5covbi6mQejCNLr68qg
+         ygLGy24b0awieYeITar3NoMrJzxweZS+pgHHtXIW5tphdCZDpfYSXhN5lv1+UD8MaCix
+         ZqDCQiU4U/E6tUthEuRfp/1m06EQLaqb0oRkmi4aF5v80ZNVfCZm3qToLtGqJocGcwpX
+         eTUPswP1/cIQm2H+M3sSrJXIeb7+pQ6IwoLlSZftqDXMzrf5lfK69VDoBnM1/+Cqvh7q
+         ZsoTk6Wgh/WepVAzbjkr3HOW5oBqROJnojGvLKd+SP28LjdA14eNDhWDCv2gHe/G5WXL
+         5F/A==
+X-Gm-Message-State: AOAM530AjluLbdCIOl2FgS+oK6nLrSPdRjHN9+KCxT2djagaAHMKNGR/
+	ZNTEkrb4LXJIWJvRaRBPdFFFgI7zpK0=
+X-Google-Smtp-Source: ABdhPJxIjOvU0wtXWnNcwrySQdz/f46SwWJIHC6YJt/B4ZnjvBJEZqcEQeYlcRHOTfO0QWKOb3ne3w==
+X-Received: by 2002:a9d:4811:: with SMTP id c17mr10700501otf.206.1617934876181;
+        Thu, 08 Apr 2021 19:21:16 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
         by smtp.gmail.com with ESMTPSA id k65sm299815otk.53.2021.04.08.19.21.14
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 19:21:14 -0700 (PDT)
+        Thu, 08 Apr 2021 19:21:15 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 25/36] thunar: upgrade 4.16.4 -> 4.16.6
-Date: Thu,  8 Apr 2021 19:20:38 -0700
-Message-Id: <133e083d2939a9b02e6bb2433d9a7409ae423bbd.1617934043.git.akuster808@gmail.com>
+Subject: [hardknott 26/36] poppler: upgrade 21.03.0 -> 21.04.0
+Date: Thu,  8 Apr 2021 19:20:39 -0700
+Message-Id: <e4554302c3e5e95f383799cf01fd13d038dbf41e.1617934043.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617934043.git.akuster808@gmail.com>
 References: <cover.1617934043.git.akuster808@gmail.com>
@@ -54,45 +54,357 @@ Content-Transfer-Encoding: 8bit
 
 From: Andreas Müller <schnitzeltony@gmail.com>
 
-4.16.6
-======
-- Reload current directory before selecting new files (Issue #524)
-- tree-view: Hide menu-item "properties" for unmounted devices
-- Removed 'the root folder has no parent' dialog box
-- Revamp documentation to modernize/uniformize accross components
-- Remove watches on shortcuts (Issue #513) (Issue #47)
-- Translation Updates:
-  Finnish, Occitan
+Release 21.04.0
+core:
+ * Hide symbols by default
+ * TextSelectionDumper: fix word order for RTL text
+ * Fix rendering of text in some files. Issue #1052
+ * Implement rendering of Masks of Image subtype. Issue #1058
+ * Forms: fix unclicking standalone form buttons. Issue #1034
 
-4.16.5
-======
-- Revert "Bookmarks no longer need an existing file (Issue #47)"
+glib:
+ * Expose more fields from MediaRendition in PopplerMedia
+ * Use stock glib macro to define boxed type
+ * Remove incorrecly used volatile from enum type registration code
+
+qt5:
+ * Fix crash in files with malformed signatures
+ * Fix memory leak when QImage constructor "fails"
+
+qt6:
+ * Fix crash in files with malformed signatures
+ * Fix memory leak when QImage constructor "fails"
+
+utils:
+ * pdfsig: New paragraph for "-sign" in manpage
+ * pdfimages: Do not assert in "too big images". Issue #1061
+
+build system:
+ * Require cmake >= 3.10
+ * Require Qt 5 >= 5.9
+ * Require glib >= 2.56
+ * Require gtk 3 >= 3.22
+ * Require gdk-pixbuf >= 2.36
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 905b27cc610c78c28424ab1a1d122852b0787367)
+(cherry picked from commit 643af3ee2cf61d12123374ba915ce71c4a56410b)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-xfce/thunar/{thunar_4.16.4.bb => thunar_4.16.6.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-xfce/thunar/{thunar_4.16.4.bb => thunar_4.16.6.bb} (89%)
+ ...tock-glib-macro-to-define-boxed-type.patch | 228 ------------------
+ ...rrecly-used-volatile-from-enum-type-.patch |  47 ----
+ ...{poppler_21.03.0.bb => poppler_21.04.0.bb} |   4 +-
+ 3 files changed, 1 insertion(+), 278 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/poppler/poppler/0001-glib-Use-stock-glib-macro-to-define-boxed-type.patch
+ delete mode 100644 meta-oe/recipes-support/poppler/poppler/0002-glib-Remove-incorrecly-used-volatile-from-enum-type-.patch
+ rename meta-oe/recipes-support/poppler/{poppler_21.03.0.bb => poppler_21.04.0.bb} (89%)
 
-diff --git a/meta-xfce/recipes-xfce/thunar/thunar_4.16.4.bb b/meta-xfce/recipes-xfce/thunar/thunar_4.16.6.bb
+diff --git a/meta-oe/recipes-support/poppler/poppler/0001-glib-Use-stock-glib-macro-to-define-boxed-type.patch b/meta-oe/recipes-support/poppler/poppler/0001-glib-Use-stock-glib-macro-to-define-boxed-type.patch
+deleted file mode 100644
+index 89de98c0cb9..00000000000
+--- a/meta-oe/recipes-support/poppler/poppler/0001-glib-Use-stock-glib-macro-to-define-boxed-type.patch
++++ /dev/null
+@@ -1,228 +0,0 @@
+-From 17b25e3122685d8277fe70fb6d27ab1eaf15b3e7 Mon Sep 17 00:00:00 2001
+-From: Christian Persch <chpe@src.gnome.org>
+-Date: Fri, 26 Mar 2021 18:17:25 +0100
+-Subject: [PATCH 1/2] glib: Use stock glib macro to define boxed type
+-
+-Upstream-Staus: Backport [https://github.com/freedesktop/poppler/commit/47de887d7658cfd68df44b3acf710971054f957b]
+-Poppler already depends on a sufficiently new glib version, so we can
+-simply use G_DEFINE_BOXED_TYPE instead of defining our own macro.
+----
+- glib/poppler-action.cc            |  4 ++--
+- glib/poppler-annot.cc             |  2 +-
+- glib/poppler-document.cc          |  6 +++---
+- glib/poppler-page.cc              | 20 ++++++++++----------
+- glib/poppler-private.h            | 15 ---------------
+- glib/poppler-structure-element.cc |  4 ++--
+- 6 files changed, 18 insertions(+), 33 deletions(-)
+-
+-diff --git a/glib/poppler-action.cc b/glib/poppler-action.cc
+-index d395db7..b772a3c 100644
+---- a/glib/poppler-action.cc
+-+++ b/glib/poppler-action.cc
+-@@ -25,7 +25,7 @@
+-  * @title: PopplerAction
+-  */
+- 
+--POPPLER_DEFINE_BOXED_TYPE(PopplerDest, poppler_dest, poppler_dest_copy, poppler_dest_free)
+-+G_DEFINE_BOXED_TYPE(PopplerDest, poppler_dest, poppler_dest_copy, poppler_dest_free)
+- 
+- /**
+-  * poppler_dest_copy:
+-@@ -88,7 +88,7 @@ static PopplerActionLayer *poppler_action_layer_copy(PopplerActionLayer *action_
+-     return retval;
+- }
+- 
+--POPPLER_DEFINE_BOXED_TYPE(PopplerAction, poppler_action, poppler_action_copy, poppler_action_free)
+-+G_DEFINE_BOXED_TYPE(PopplerAction, poppler_action, poppler_action_copy, poppler_action_free)
+- 
+- /**
+-  * poppler_action_free:
+-diff --git a/glib/poppler-annot.cc b/glib/poppler-annot.cc
+-index f4c5bb1..5320565 100644
+---- a/glib/poppler-annot.cc
+-+++ b/glib/poppler-annot.cc
+-@@ -1693,7 +1693,7 @@ gchar *poppler_annot_file_attachment_get_name(PopplerAnnotFileAttachment *popple
+- }
+- 
+- /* PopplerAnnotCalloutLine */
+--POPPLER_DEFINE_BOXED_TYPE(PopplerAnnotCalloutLine, poppler_annot_callout_line, poppler_annot_callout_line_copy, poppler_annot_callout_line_free)
+-+G_DEFINE_BOXED_TYPE(PopplerAnnotCalloutLine, poppler_annot_callout_line, poppler_annot_callout_line_copy, poppler_annot_callout_line_free)
+- 
+- /**
+-  * poppler_annot_callout_line_new:
+-diff --git a/glib/poppler-document.cc b/glib/poppler-document.cc
+-index bd26bc7..9e62ff6 100644
+---- a/glib/poppler-document.cc
+-+++ b/glib/poppler-document.cc
+-@@ -2360,7 +2360,7 @@ struct _PopplerIndexIter
+-     int index;
+- };
+- 
+--POPPLER_DEFINE_BOXED_TYPE(PopplerIndexIter, poppler_index_iter, poppler_index_iter_copy, poppler_index_iter_free)
+-+G_DEFINE_BOXED_TYPE(PopplerIndexIter, poppler_index_iter, poppler_index_iter_copy, poppler_index_iter_free)
+- 
+- /**
+-  * poppler_index_iter_copy:
+-@@ -2579,7 +2579,7 @@ struct _PopplerFontsIter
+-     int index;
+- };
+- 
+--POPPLER_DEFINE_BOXED_TYPE(PopplerFontsIter, poppler_fonts_iter, poppler_fonts_iter_copy, poppler_fonts_iter_free)
+-+G_DEFINE_BOXED_TYPE(PopplerFontsIter, poppler_fonts_iter, poppler_fonts_iter_copy, poppler_fonts_iter_free)
+- 
+- /**
+-  * poppler_fonts_iter_get_full_name:
+-@@ -3111,7 +3111,7 @@ struct _PopplerLayersIter
+-     int index;
+- };
+- 
+--POPPLER_DEFINE_BOXED_TYPE(PopplerLayersIter, poppler_layers_iter, poppler_layers_iter_copy, poppler_layers_iter_free)
+-+G_DEFINE_BOXED_TYPE(PopplerLayersIter, poppler_layers_iter, poppler_layers_iter_copy, poppler_layers_iter_free)
+- 
+- /**
+-  * poppler_layers_iter_copy:
+-diff --git a/glib/poppler-page.cc b/glib/poppler-page.cc
+-index 7e21c71..2e229bf 100644
+---- a/glib/poppler-page.cc
+-+++ b/glib/poppler-page.cc
+-@@ -1566,7 +1566,7 @@ void poppler_page_remove_annot(PopplerPage *page, PopplerAnnot *annot)
+- 
+- /* PopplerRectangle type */
+- 
+--POPPLER_DEFINE_BOXED_TYPE(PopplerRectangle, poppler_rectangle, poppler_rectangle_copy, poppler_rectangle_free)
+-+G_DEFINE_BOXED_TYPE(PopplerRectangle, poppler_rectangle, poppler_rectangle_copy, poppler_rectangle_free)
+- 
+- /**
+-  * poppler_rectangle_new:
+-@@ -1608,7 +1608,7 @@ void poppler_rectangle_free(PopplerRectangle *rectangle)
+- 
+- /* PopplerPoint type */
+- 
+--POPPLER_DEFINE_BOXED_TYPE(PopplerPoint, poppler_point, poppler_point_copy, poppler_point_free)
+-+G_DEFINE_BOXED_TYPE(PopplerPoint, poppler_point, poppler_point_copy, poppler_point_free)
+- 
+- /**
+-  * poppler_point_new:
+-@@ -1657,7 +1657,7 @@ void poppler_point_free(PopplerPoint *point)
+- 
+- /* PopplerQuadrilateral type */
+- 
+--POPPLER_DEFINE_BOXED_TYPE(PopplerQuadrilateral, poppler_quadrilateral, poppler_quadrilateral_copy, poppler_quadrilateral_free)
+-+G_DEFINE_BOXED_TYPE(PopplerQuadrilateral, poppler_quadrilateral, poppler_quadrilateral_copy, poppler_quadrilateral_free)
+- 
+- /**
+-  * poppler_quadrilateral_new:
+-@@ -1705,7 +1705,7 @@ void poppler_quadrilateral_free(PopplerQuadrilateral *quad)
+- 
+- /* PopplerTextAttributes type */
+- 
+--POPPLER_DEFINE_BOXED_TYPE(PopplerTextAttributes, poppler_text_attributes, poppler_text_attributes_copy, poppler_text_attributes_free)
+-+G_DEFINE_BOXED_TYPE(PopplerTextAttributes, poppler_text_attributes, poppler_text_attributes_copy, poppler_text_attributes_free)
+- 
+- /**
+-  * poppler_text_attributes_new:
+-@@ -1804,7 +1804,7 @@ void poppler_text_attributes_free(PopplerTextAttributes *text_attrs)
+-  */
+- 
+- /* PopplerColor type */
+--POPPLER_DEFINE_BOXED_TYPE(PopplerColor, poppler_color, poppler_color_copy, poppler_color_free)
+-+G_DEFINE_BOXED_TYPE(PopplerColor, poppler_color, poppler_color_copy, poppler_color_free)
+- 
+- /**
+-  * poppler_color_new:
+-@@ -1848,7 +1848,7 @@ void poppler_color_free(PopplerColor *color)
+- }
+- 
+- /* PopplerLinkMapping type */
+--POPPLER_DEFINE_BOXED_TYPE(PopplerLinkMapping, poppler_link_mapping, poppler_link_mapping_copy, poppler_link_mapping_free)
+-+G_DEFINE_BOXED_TYPE(PopplerLinkMapping, poppler_link_mapping, poppler_link_mapping_copy, poppler_link_mapping_free)
+- 
+- /**
+-  * poppler_link_mapping_new:
+-@@ -1900,7 +1900,7 @@ void poppler_link_mapping_free(PopplerLinkMapping *mapping)
+- }
+- 
+- /* Poppler Image mapping type */
+--POPPLER_DEFINE_BOXED_TYPE(PopplerImageMapping, poppler_image_mapping, poppler_image_mapping_copy, poppler_image_mapping_free)
+-+G_DEFINE_BOXED_TYPE(PopplerImageMapping, poppler_image_mapping, poppler_image_mapping_copy, poppler_image_mapping_free)
+- 
+- /**
+-  * poppler_image_mapping_new:
+-@@ -1939,7 +1939,7 @@ void poppler_image_mapping_free(PopplerImageMapping *mapping)
+- }
+- 
+- /* Page Transition */
+--POPPLER_DEFINE_BOXED_TYPE(PopplerPageTransition, poppler_page_transition, poppler_page_transition_copy, poppler_page_transition_free)
+-+G_DEFINE_BOXED_TYPE(PopplerPageTransition, poppler_page_transition, poppler_page_transition_copy, poppler_page_transition_free)
+- 
+- /**
+-  * poppler_page_transition_new:
+-@@ -1983,7 +1983,7 @@ void poppler_page_transition_free(PopplerPageTransition *transition)
+- }
+- 
+- /* Form Field Mapping Type */
+--POPPLER_DEFINE_BOXED_TYPE(PopplerFormFieldMapping, poppler_form_field_mapping, poppler_form_field_mapping_copy, poppler_form_field_mapping_free)
+-+G_DEFINE_BOXED_TYPE(PopplerFormFieldMapping, poppler_form_field_mapping, poppler_form_field_mapping_copy, poppler_form_field_mapping_free)
+- 
+- /**
+-  * poppler_form_field_mapping_new:
+-@@ -2035,7 +2035,7 @@ void poppler_form_field_mapping_free(PopplerFormFieldMapping *mapping)
+- }
+- 
+- /* PopplerAnnot Mapping Type */
+--POPPLER_DEFINE_BOXED_TYPE(PopplerAnnotMapping, poppler_annot_mapping, poppler_annot_mapping_copy, poppler_annot_mapping_free)
+-+G_DEFINE_BOXED_TYPE(PopplerAnnotMapping, poppler_annot_mapping, poppler_annot_mapping_copy, poppler_annot_mapping_free)
+- 
+- /**
+-  * poppler_annot_mapping_new:
+-diff --git a/glib/poppler-private.h b/glib/poppler-private.h
+-index d41b59c..1027271 100644
+---- a/glib/poppler-private.h
+-+++ b/glib/poppler-private.h
+-@@ -143,21 +143,6 @@ gboolean _poppler_convert_pdf_date_to_gtime(const GooString *date, time_t *gdate
+- GDateTime *_poppler_convert_pdf_date_to_date_time(const GooString *date);
+- GooString *_poppler_convert_date_time_to_pdf_date(GDateTime *datetime);
+- 
+--/*
+-- * A convenience macro for boxed type implementations, which defines a
+-- * type_name_get_type() function registering the boxed type.
+-- */
+--#define POPPLER_DEFINE_BOXED_TYPE(TypeName, type_name, copy_func, free_func)                                                                                                                                                                   \
+--    GType type_name##_get_type(void)                                                                                                                                                                                                           \
+--    {                                                                                                                                                                                                                                          \
+--        static volatile gsize g_define_type_id__volatile = 0;                                                                                                                                                                                  \
+--        if (g_once_init_enter(&g_define_type_id__volatile)) {                                                                                                                                                                                  \
+--            GType g_define_type_id = g_boxed_type_register_static(g_intern_static_string(#TypeName), (GBoxedCopyFunc)copy_func, (GBoxedFreeFunc)free_func);                                                                                    \
+--            g_once_init_leave(&g_define_type_id__volatile, g_define_type_id);                                                                                                                                                                  \
+--        }                                                                                                                                                                                                                                      \
+--        return g_define_type_id__volatile;                                                                                                                                                                                                     \
+--    }
+--
+- void _poppler_error_cb(ErrorCategory category, Goffset pos, const char *message);
+- 
+- #endif
+-diff --git a/glib/poppler-structure-element.cc b/glib/poppler-structure-element.cc
+-index aec7cd1..29d3e5c 100644
+---- a/glib/poppler-structure-element.cc
+-+++ b/glib/poppler-structure-element.cc
+-@@ -581,7 +581,7 @@ struct _PopplerStructureElementIter
+-     unsigned index;
+- };
+- 
+--POPPLER_DEFINE_BOXED_TYPE(PopplerStructureElementIter, poppler_structure_element_iter, poppler_structure_element_iter_copy, poppler_structure_element_iter_free)
+-+G_DEFINE_BOXED_TYPE(PopplerStructureElementIter, poppler_structure_element_iter, poppler_structure_element_iter_copy, poppler_structure_element_iter_free)
+- 
+- /**
+-  * poppler_structure_element_iter_copy:
+-@@ -763,7 +763,7 @@ struct _PopplerTextSpan
+-     PopplerColor color;
+- };
+- 
+--POPPLER_DEFINE_BOXED_TYPE(PopplerTextSpan, poppler_text_span, poppler_text_span_copy, poppler_text_span_free)
+-+G_DEFINE_BOXED_TYPE(PopplerTextSpan, poppler_text_span, poppler_text_span_copy, poppler_text_span_free)
+- 
+- enum
+- {
+--- 
+-2.31.1
+-
+diff --git a/meta-oe/recipes-support/poppler/poppler/0002-glib-Remove-incorrecly-used-volatile-from-enum-type-.patch b/meta-oe/recipes-support/poppler/poppler/0002-glib-Remove-incorrecly-used-volatile-from-enum-type-.patch
+deleted file mode 100644
+index f4a54a184f2..00000000000
+--- a/meta-oe/recipes-support/poppler/poppler/0002-glib-Remove-incorrecly-used-volatile-from-enum-type-.patch
++++ /dev/null
+@@ -1,47 +0,0 @@
+-From 8b0890e2d1623e580d8a849e56c1f3a2984e782d Mon Sep 17 00:00:00 2001
+-From: Christian Persch <chpe@src.gnome.org>
+-Date: Fri, 26 Mar 2021 18:17:25 +0100
+-Subject: [PATCH 2/2] glib: Remove incorrecly used volatile from enum type
+- registration code
+-
+-Upstream-Status: Backport [https://github.com/freedesktop/poppler/commit/bdd110b45a38e8a4f80f522892e4c4a9e432abd5]
+----
+- glib/poppler-enums.c.template | 10 +++++-----
+- 1 file changed, 5 insertions(+), 5 deletions(-)
+-
+-diff --git a/glib/poppler-enums.c.template b/glib/poppler-enums.c.template
+-index 26a51b4..eefc769 100644
+---- a/glib/poppler-enums.c.template
+-+++ b/glib/poppler-enums.c.template
+-@@ -15,9 +15,9 @@
+- GType
+- @enum_name@_get_type (void)
+- {
+--  static volatile gsize g_define_type_id__volatile = 0;
+-+  static volatile gsize g_define_type_id = 0;
+-  
+--  if (g_once_init_enter (&g_define_type_id__volatile)) {
+-+  if (g_once_init_enter (&g_define_type_id)) {
+-     static const G@Type@Value values[] = {
+- /*** END value-header ***/
+- 
+-@@ -28,13 +28,13 @@ GType
+- /*** BEGIN value-tail ***/
+-       { 0, NULL, NULL }
+-     };
+--    GType g_define_type_id = 
+-+    GType type =
+-        g_@type@_register_static (g_intern_static_string ("@EnumName@"), values);
+-       
+--    g_once_init_leave (&g_define_type_id__volatile, g_define_type_id);
+-+    g_once_init_leave (&g_define_type_id, type);
+-   }
+-     
+--  return g_define_type_id__volatile;
+-+  return g_define_type_id;
+- }
+- 
+- /*** END value-tail ***/
+--- 
+-2.31.1
+-
+diff --git a/meta-oe/recipes-support/poppler/poppler_21.03.0.bb b/meta-oe/recipes-support/poppler/poppler_21.04.0.bb
 similarity index 89%
-rename from meta-xfce/recipes-xfce/thunar/thunar_4.16.4.bb
-rename to meta-xfce/recipes-xfce/thunar/thunar_4.16.6.bb
-index e5fd5ffd3ad..128043d19b7 100644
---- a/meta-xfce/recipes-xfce/thunar/thunar_4.16.4.bb
-+++ b/meta-xfce/recipes-xfce/thunar/thunar_4.16.6.bb
-@@ -8,7 +8,7 @@ inherit xfce gobject-introspection features_check mime-xdg
+rename from meta-oe/recipes-support/poppler/poppler_21.03.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_21.04.0.bb
+index b272bc82cce..de5f3803610 100644
+--- a/meta-oe/recipes-support/poppler/poppler_21.03.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_21.04.0.bb
+@@ -6,10 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://0001-Do-not-overwrite-all-our-build-flags.patch \
+            file://basename-include.patch \
+-           file://0001-glib-Use-stock-glib-macro-to-define-boxed-type.patch \
+-           file://0002-glib-Remove-incorrecly-used-volatile-from-enum-type-.patch \
+            "
+-SRC_URI[sha256sum] = "fd51ead4aac1d2f4684fa6e7b0ec06f0233ed21667e720a4e817e4455dd63d27"
++SRC_URI[sha256sum] = "5e2219656c6bbd36154133fef2e12b7d0938464518827098b29a10b1697ea79c"
  
- REQUIRED_DISTRO_FEATURES = "x11"
+ DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
  
--SRC_URI[sha256sum] = "d51a2018c1ba7dcc420e7a84d85cc17a58f26fb1c80ee4c15e689a49f10425f9"
-+SRC_URI[sha256sum] = "cb531d3fe67196a43ca04979ef271ece7858bbc80c15b0ee4323c1252a1a02b7"
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[pcre] = "--enable-pcre,--disable-pcre,libpcre"
 -- 
 2.17.1
 
