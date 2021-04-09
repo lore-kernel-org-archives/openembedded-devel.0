@@ -1,101 +1,87 @@
-Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com [209.85.210.47])
- by mx.groups.io with SMTP id smtpd.web11.3666.1617934856070454795
+Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com [209.85.210.46])
+ by mx.groups.io with SMTP id smtpd.web11.3667.1617934856652120340
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 08 Apr 2021 19:20:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gl6ISdpQ;
- spf=pass (domain: gmail.com, ip: 209.85.210.47, mailfrom: akuster808@gmail.com)
-Received: by mail-ot1-f47.google.com with SMTP id y19-20020a0568301d93b02901b9f88a238eso4287523oti.11
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:20:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Am4/PKZY;
+ spf=pass (domain: gmail.com, ip: 209.85.210.46, mailfrom: akuster808@gmail.com)
+Received: by mail-ot1-f46.google.com with SMTP id c24-20020a9d6c980000b02902662e210895so4295627otr.9
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:20:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=xBON3QaxvphMYHy/FfSibG1qT2eljnzBqGZVZqL4SEU=;
-        b=gl6ISdpQy3g5u/m5xQEr+x176ljsyqlpBrtwsmfI2Ttgs6BNTipQ3pGfvq/W6PkU+w
-         3+iyaNHxTg34cEfWs8KvKdSPFV9tz3u8dBrvGKg1WQXQWx780X30Fb4fZF6KwVo/jATg
-         b/Z7s6D4vYOnK2V7ZmUKGH7nCG86l/Celruan2PbLkIVImiBHnUCSO8RWP35Oj26zL43
-         gmUou/ruqcI14Yj6sRTmuAVx1h9v+4Qr/zCoEnV/q7lpsGZ/HZwiVnBPNw2rhk/3Nj6+
-         Q5k1rvmYHiNemaPfmIxEgINhEgVqUmeGEYlcUvEMUWi0zdxAxig1PVCBFj1FQaLWdaQA
-         TeDw==
+        bh=i7V9101yO3IYiGQy1Mu86sdrdGPEiHlw6FECtVIWuKA=;
+        b=Am4/PKZY+WrdPnR2NRYt6fKpdIOShJaYPIK1TvS1akhW5UxMPxCeO2pj5qO71VsqK8
+         pLP+j4dHjrC4MWpdJ6EvVxRXORxDdLoHCKnWMYbwMA6KIQXRzgeU4aQ4ALUkFmTrcm89
+         qnBx1xWaEIZ671BXcVW5PlTxgcU1kwoOGNKusxKmZLuOxkhUAXpbNmN6dUtYMZXMR3el
+         YyCz/Tu8ouc0BhHIGGKritUcvRycK8mKdx71hlYQg89dJd2VT87Zsm8H8gQLaAyeyaYP
+         yb9Ln/ra+Cv8+TTw1Q2Ys3dom1lDCwegmSqU9hFtmbctcfNyX7AAGknfhHe1rCAmmHWQ
+         H4aA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=xBON3QaxvphMYHy/FfSibG1qT2eljnzBqGZVZqL4SEU=;
-        b=JBjd0EBDYvluw5KCHmASjl3cZKiHfGV5LE38591TZWwYCuAyisiydvuPAq+BC+Jec/
-         UfuIkWLEiTnJL4oIoxbmrKiUiD41xC32QMjWeE0SAmn5Ia3gnF2fcEoQ1ZGzscRdqlMo
-         Wqoh9Hl/BD2BoiqFxGJXBHx18UkNKbDlhbrbrXf/3VD24CQ7nYBx/1+sfmXMwpT7nPN7
-         BCTMhZj8kynpIOHvXKIOheGAvy9JeZ+ydhXuICr8Hy1LLr33NOpMCdvuMUd1RzN8/Vgf
-         qgLc80CpTCECrxg637RSKwGEAOAsTTFooilOJ0RlxgrAp9F7gmCd1J45vwQh9rs+A02M
-         OSsA==
-X-Gm-Message-State: AOAM530vpL+nn98Q6ffLkY/WDM1wLHb9+AjioYA8sJbtDMMi7T35//0p
-	K7+gpGbXxO29Z8gSZmZnHhX9Bq8bq0I=
-X-Google-Smtp-Source: ABdhPJwv+Crlrocj1t/V6Dt9eBnNOXM8sT3AWKds+gGum9ATCf0tI2MK9EqaO/lSn9NlZmHuno9/Fw==
-X-Received: by 2002:a9d:730c:: with SMTP id e12mr10029737otk.230.1617934855130;
+        bh=i7V9101yO3IYiGQy1Mu86sdrdGPEiHlw6FECtVIWuKA=;
+        b=LUD6GtUo6E1I0LtHBLESCf/NRAeEOdDeiXbTPuwiqpExbsEhze59tfPARdf+EtDj7x
+         OeoUdKNIiI424Uc0eLlVxNAZfsnKqxQ1dwUQeYZv24VJ3sa7pfrhXXqppcdRMdqV/1kK
+         jl0W2kPTHyNVuRj8EB7VTvD7jsUOahNsgG2EUR5hC1IASkDfdCI0BZ3eEZEVW9R6nOAm
+         iPjjG3V4nWvlAwQBlmGAaIj7Yj4p0F5b11fLPk8pNrGNdpShZ+K0Eq3+IikBxvvziCqB
+         8Vpx9HZkHUSOD0UNuslT6SZbCtx2X/tziTNgs4gF2t5jgsosEe+LaT62woKei3JFwOco
+         uzKw==
+X-Gm-Message-State: AOAM5309znVQmEuYSE/c4DHc/2cHFL3rCVfs7b3FmG7y1SzQVaU1CtZo
+	rwWKuq1WqxMYFFuwdIvNcievHCqBHdg=
+X-Google-Smtp-Source: ABdhPJznyaohApuZEGkGkheDLb7WDALQ94LFp2qdm5haPEBeHK9bMvNRCiFpujSDPjT/okULxilCZg==
+X-Received: by 2002:a05:6830:14a:: with SMTP id j10mr10471202otp.143.1617934855901;
         Thu, 08 Apr 2021 19:20:55 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id k65sm299815otk.53.2021.04.08.19.20.54
+        by smtp.gmail.com with ESMTPSA id k65sm299815otk.53.2021.04.08.19.20.55
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 19:20:54 -0700 (PDT)
+        Thu, 08 Apr 2021 19:20:55 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 01/36] libsmi: use /bin/sh instead of ${base_bindir}/sh to silence QA error with usrmerge
-Date: Thu,  8 Apr 2021 19:20:14 -0700
-Message-Id: <9ea7a4336163697448a9e9f2d8ca670b3428de70.1617934043.git.akuster808@gmail.com>
+Subject: [hardknott 02/36] libyui: switch to libyui-old repo which still has this SRCREV
+Date: Thu,  8 Apr 2021 19:20:15 -0700
+Message-Id: <85923fc9e3e732dc6ef643868b74ca7a8e47ba99.1617934043.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617934043.git.akuster808@gmail.com>
 References: <cover.1617934043.git.akuster808@gmail.com>
 
 From: Martin Jansa <Martin.Jansa@gmail.com>
 
-* with usrmerge ${base_bindir} is /usr/bin/sh and libsmi fails with:
-  ERROR: libsmi-0.5.0-r0 do_package_qa: QA Issue: /usr/bin/smistrip contained in package libsmi requires /usr/bin/sh, but no providers found in RDEPENDS_libsmi? [file-rdeps]
-  ERROR: libsmi-0.5.0-r0 do_package_qa: QA run found fatal errors. Please consider fixing them.
+* af06143017fc5f18c4b6488ba4aed26bcc43ff6e doesn't exist in current repo:
+  libyui$ git branch -a --contains af06143017fc5f18c4b6488ba4aed26bcc43ff6e
+  error: no such commit af06143017fc5f18c4b6488ba4aed26bcc43ff6e
 
-* this is a bit strange as busybox does install /usr/bin/sh file:
-  ./1.33.0-r0.usrmerge/image/usr/bin/sh
-  ./1.33.0-r0.default/image/bin/sh
-
-  but also adds /bin/sh to RPROVIDES_${PN} for usrmerge in DISTRO_FEATURES:
-  RPROVIDES_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', '/bin/sh', '', d)}"
-  added in:
-  https://git.openembedded.org/openembedded-core/commit/?id=1f6c14939c8daa5e09103789c3ff5031cc888d16
-
-  and 1.33.0-r0.usrmerge/pkgdata/runtime/busybox:FILERPROVIDES_/usr/bin/busybox.nosuid_busybox
-  correctly contains /usr/bin/sh
-
-* adding runtime dependency on busybox as /usr/bin/sh provider would silence the QA warning
-  but people might not like adding busybox to their image
-
-* using /bin/sh silences the QA warning as well, because /bin/sh is explicitly ignored in file-rdeps insane.bbclass:
-  https://git.openembedded.org/openembedded-core/tree/meta/classes/insane.bbclass?id=1f6c14939c8daa5e09103789c3ff5031cc888d16#n907
-
-  if "file-rdeps" not in skip:
-    ignored_file_rdeps = set(['/bin/sh', '/usr/bin/env', 'rtld(GNU_HASH)'])
+* there are no common commits in the new libyui repo, but luckily old
+  repo is kept as
+  https://github.com/libyui/libyui-old
+  similarly libyui-ncurses now contains only README about being obsolete in:
+  https://github.com/libyui/libyui-ncurses
+  but at least it wasn't rewritten to have the new content
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 08fad9f3a6d1026eea84906c2ede7a4a2dc93863)
+(cherry picked from commit 902919167a97055e9be9cd3654f29823e81ae382)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb | 2 +-
+ meta-oe/recipes-graphics/libyui/libyui_4.0.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb b/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
-index 212b1e797c7..ae76fade738 100644
---- a/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
-+++ b/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
-@@ -16,7 +16,7 @@ RDEPENDS_${PN} += "wget"
+diff --git a/meta-oe/recipes-graphics/libyui/libyui_4.0.0.bb b/meta-oe/recipes-graphics/libyui/libyui_4.0.0.bb
+index bba17962e25..e42c178e66f 100644
+--- a/meta-oe/recipes-graphics/libyui/libyui_4.0.0.bb
++++ b/meta-oe/recipes-graphics/libyui/libyui_4.0.0.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING.gpl-3;md5=d32239bcb673463ab874e80d47fae504 \
+                     file://COPYING.lgpl-3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
+                    "
  
- inherit autotools
- 
--EXTRA_OECONF = "ac_cv_path_SH=${base_bindir}/sh ac_cv_path_WGET=${bindir}/wget ac_cv_path_AWK=${bindir}/awk"
-+EXTRA_OECONF = "ac_cv_path_SH=/bin/sh ac_cv_path_WGET=${bindir}/wget ac_cv_path_AWK=${bindir}/awk"
- 
- do_install_append () {
-     install -d ${D}${sysconfdir}
+-SRC_URI = "git://github.com/libyui/libyui.git \
++SRC_URI = "git://github.com/libyui/libyui-old.git \
+            file://0001-Fix-build-with-clang.patch \
+            file://0001-Use-relative-install-paths-for-CMake.patch \
+            "
 -- 
 2.17.1
 
