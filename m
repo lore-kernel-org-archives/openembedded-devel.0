@@ -1,85 +1,97 @@
-Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com [209.85.210.45])
- by mx.groups.io with SMTP id smtpd.web10.3676.1617934867643584348
+Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com [209.85.167.172])
+ by mx.groups.io with SMTP id smtpd.web09.3542.1617934868314044957
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Apr 2021 19:21:07 -0700
+ Thu, 08 Apr 2021 19:21:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=mo52/Zm4;
- spf=pass (domain: gmail.com, ip: 209.85.210.45, mailfrom: akuster808@gmail.com)
-Received: by mail-ot1-f45.google.com with SMTP id d3-20020a9d29030000b029027e8019067fso2403607otb.13
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:21:07 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=OyAusySJ;
+ spf=pass (domain: gmail.com, ip: 209.85.167.172, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f172.google.com with SMTP id x207so4320220oif.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:21:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=cNoDik/wjYLDrZTnPW4LBijJvKI8YVWYRLZH+Li7jH8=;
-        b=mo52/Zm46iYG9Dys1axzVSFe7oI9xT77SOjX4EYxa/ifY/43tMEPehztHb97OeUKJ9
-         mWVuoxwzy4EeuqUQKDWrr7vxICCN5WLNqQ2bk6iMoI8YDZmOIIEhGGoWZxN8RZHOysrp
-         1SKq5+oXsXoLXX/nl/KKbtz0A/LTBAwQmbOlW/9m+uyktLnvQHn5AtkCBiodtGEuWUFA
-         nHJuVAb2+MjfueFo+0xjoLscK5ZOEeJiueIY8mDM4tJeKrQXbqMqxO+Dr/UlT+NfuUxr
-         pK8op2kJdNU+nVpdNZBRLLw5IfrcD2kTtHJIMP7mcWpMXZSxX2lw0IQ+WUZZyJA8/Sjg
-         RQoQ==
+        bh=7ssEt1P9ju127bd9v5/69IVe4ESYI3tGC6Y//oVTd9Y=;
+        b=OyAusySJbLu6NtGdBNbtl7MKEj2nTdonn27e924suzEd46HGIujzEkHMU0mdQxsMrb
+         tMh4PQ2nO1WJNRGzKYZrtLxFpZMBW09S4Zthv6xa+m7Tr6QpF/rGeYvXv0i+JIBNpLyt
+         O+vkRcVVd7vJHRN/sp03CHR+DSejDlN/fXkKfKxeU//eCp2g75PQrW7CJ5VUyOUUwlzN
+         F/BEopAL4McsIfKlP8C9dPmszFjNc1PUaVBlqRVIGq2XNaVDjDb78B+ZsilDAvkNPYdW
+         dmo1mhcw2l8n3yoJe2ml3k9hjpoiUDJatUIwM1cWv0/p853c73406wOE5Npp0uaiOXjT
+         yjJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=cNoDik/wjYLDrZTnPW4LBijJvKI8YVWYRLZH+Li7jH8=;
-        b=sBmOFrZaRm0PaqH2B5K8fnXP3rxG1THxWYJrB98hge0DBs2hciXd3KqzpSmQ0rmJ38
-         2ygEZyFV7V6I/iOTwwxAvwIamofh0S7SOIq42susaKMwWLhA1Lv+kWqJgllCofXDUw9O
-         cnRfLkYrv0YkYRejCcrPlBSRZ7XEU1GoMuYyMkbIf2NniVnvNDDhxlTGngQVEd5rdLpY
-         neqPkK2GFetRTsR0kJhs1GMUdS+DJbumdZQsQY09TwMUJQTS2E5+x5NLBkUuhOraZsYP
-         WJbkDDRQr2xNBJhQtkifU/ikZSAlMHRvOaGHaxNbwuq9Dng6ly+PQu68aDfYrXfZ+fiq
-         17oQ==
-X-Gm-Message-State: AOAM531yIjFgYmZB/MYtxDhvMzMJBwzNmPOkkN3WsDmQS4XUX+uzQiic
-	+rHxYBOktRl723jx4CNxLTU9IcXdOTI=
-X-Google-Smtp-Source: ABdhPJyKEnijPufj3ju4y9jC74fym8M3BlDTeoORnfSpN1q3+I3JVNGfUycRYaV7pVMF3YGVMgqAFA==
-X-Received: by 2002:a9d:2049:: with SMTP id n67mr10565206ota.116.1617934866888;
-        Thu, 08 Apr 2021 19:21:06 -0700 (PDT)
+        bh=7ssEt1P9ju127bd9v5/69IVe4ESYI3tGC6Y//oVTd9Y=;
+        b=bTduCWIo1QxnywDauKvq5sHXyOhTQcB3fivJchHUQ38Fh8gcxZodKXZlqiVy9juiti
+         uXj7lMOgjrTUfMXEw0gsgd/meRRUuN7RuZ1f/3bt0hKkY+sskDgnsc8MzoJimgOFtZfZ
+         y+1iyUUJ+ylLvLl3enpuuhUvKTHnqj630ei/ZfJ/cbrPUGCIr2QaLS1EMqyENftEyhnm
+         1xPZZCBR4cwCQe1Jv3TabHrEqFAPxgO7V5ZGrLfu2z13AnSyXqytorGDGm+74xv0USFT
+         TLHZIgRIjCq/hReSOV37pjZc0EwYL52pWL5uYVTfAReyyx6Z3HHi41+VJzwIpwaJPN7+
+         lLlQ==
+X-Gm-Message-State: AOAM533R0w29HT98AMRKpSzlIQZRxTA/FT7Hgi4+tm6ujr0OuSwaEkd+
+	J3eAZtoZFBKd9COB9h75ujgGiZ8AmsE=
+X-Google-Smtp-Source: ABdhPJwfHmjOxd0/EfwUBNl8Xc/36i1PBYq2EvLB+vb0lS/5nW5pXzDRzio/ANaCWelczeu6wbeZIQ==
+X-Received: by 2002:aca:3d86:: with SMTP id k128mr8362908oia.86.1617934867586;
+        Thu, 08 Apr 2021 19:21:07 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id k65sm299815otk.53.2021.04.08.19.21.06
+        by smtp.gmail.com with ESMTPSA id k65sm299815otk.53.2021.04.08.19.21.07
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 19:21:06 -0700 (PDT)
+        Thu, 08 Apr 2021 19:21:07 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 16/36] python3-pysonos: Upgrade 0.0.41 -> 0.0.42
-Date: Thu,  8 Apr 2021 19:20:29 -0700
-Message-Id: <d54c87312656f6b224019d4afc1dcafd20980933.1617934043.git.akuster808@gmail.com>
+Subject: [hardknott 17/36] python3-django: Upgrade 3.1.7 -> 3.2
+Date: Thu,  8 Apr 2021 19:20:30 -0700
+Message-Id: <f67895f879693e343e2f5f8caf1c753fc2a3ac06.1617934043.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617934043.git.akuster808@gmail.com>
 References: <cover.1617934043.git.akuster808@gmail.com>
 
 From: Leon Anavi <leon.anavi@konsulko.com>
 
-Upgrade to release 0.0.42:
+Upgrade to release 3.2:
 
-- Handle parse_event_xml doing I/O in the asyncio event loop
+- Automatic AppConfig discovery
+- Customizing type of auto-created primary keys
+- Functional indexes
+- pymemcache support
+- New decorators for the admin site
+- Other minor new features
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-(cherry picked from commit 478e0e5833e8815f0e6ba77860ad54c342f34fb5)
+(cherry picked from commit f45f3862a64be2a8502a3a348bb3b7f72869c988)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{python3-pysonos_0.0.41.bb => python3-pysonos_0.0.42.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pysonos_0.0.41.bb => python3-pysonos_0.0.42.bb} (79%)
+ .../python/{python3-django_3.1.7.bb => python3-django_3.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-django_3.1.7.bb => python3-django_3.2.bb} (59%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pysonos_0.0.41.bb b/meta-python/recipes-devtools/python/python3-pysonos_0.0.42.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-pysonos_0.0.41.bb
-rename to meta-python/recipes-devtools/python/python3-pysonos_0.0.42.bb
-index 564d60ee47b..25defabc51b 100644
---- a/meta-python/recipes-devtools/python/python3-pysonos_0.0.41.bb
-+++ b/meta-python/recipes-devtools/python/python3-pysonos_0.0.42.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=07b0e2ca9ac77cd65cd4edf2e13367ea"
+diff --git a/meta-python/recipes-devtools/python/python3-django_3.1.7.bb b/meta-python/recipes-devtools/python/python3-django_3.2.bb
+similarity index 59%
+rename from meta-python/recipes-devtools/python/python3-django_3.1.7.bb
+rename to meta-python/recipes-devtools/python/python3-django_3.2.bb
+index d22bd14e8c2..e147e2f9d1b 100644
+--- a/meta-python/recipes-devtools/python/python3-django_3.1.7.bb
++++ b/meta-python/recipes-devtools/python/python3-django_3.2.bb
+@@ -1,7 +1,7 @@
+ require python-django.inc
+ inherit setuptools3
  
--SRC_URI[sha256sum] = "08d17fee04cc8209b915e61407673ea843b55792a9301fbe86adb9cc69a67a54"
-+SRC_URI[sha256sum] = "20b45fa1779a01325e67822d243e1a3f7657d8b515308d84c1eb3c805cc3bdb5"
+-SRC_URI[sha256sum] = "32ce792ee9b6a0cbbec340123e229ac9f765dff8c2a4ae9247a14b2ba3a365a7"
++SRC_URI[sha256sum] = "21f0f9643722675976004eb683c55d33c05486f94506672df3d6a141546f389d"
  
- inherit pypi setuptools3
+ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-sqlparse \
+@@ -9,5 +9,5 @@ RDEPENDS_${PN} += "\
  
+ # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
+ # default. To build the 3.x branch, 
+-# PREFERRED_VERSION_python3-django = "3.1.7" can be added to local.conf
++# PREFERRED_VERSION_python3-django = "3.2" can be added to local.conf
+ DEFAULT_PREFERENCE = "-1"
 -- 
 2.17.1
 
