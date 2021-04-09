@@ -1,86 +1,87 @@
-Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com [209.85.167.178])
- by mx.groups.io with SMTP id smtpd.web11.3672.1617934863906356343
+Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com [209.85.167.176])
+ by mx.groups.io with SMTP id smtpd.web10.3673.1617934864662728137
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 08 Apr 2021 19:21:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=YKd+l4ve;
- spf=pass (domain: gmail.com, ip: 209.85.167.178, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f178.google.com with SMTP id n8so4264821oie.10
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:21:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=qoOcTW+D;
+ spf=pass (domain: gmail.com, ip: 209.85.167.176, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f176.google.com with SMTP id i81so4288400oif.6
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Apr 2021 19:21:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=soZSo2KPfZqZ6GX+fF0rBT3lkGZ2ilMrzWzVGxZZ36A=;
-        b=YKd+l4vefZpteQuQfO1SXbp+VUgXfMS/2+MzRTbN1gzOi4bTlhFNnNApGhkGSZPheZ
-         kHz0XQRQcni+pMhKpfWXRWUR3Bh6vAt0JtUoqw4Hgl3aPOfVDTHA2/r6GSrxf79qkX9H
-         lF9XsUKMsp8t3/w/UhOb7/Yjyhxi7ukP1Er1wplYPi8IFEAB72MMPYh8O2QTNo2xNcMg
-         bh2G3j8WjpSz4FLIvYFtLP4ze4/hNCPXYX0GW8QQwyPFgojtCc01rACXRiwoaACWgKgR
-         sV/eXru4gBdhfGWBSkdnpO+2sGvi2nE/IRLiOucDziaz1wDFdAvkY3gBliRaXJHT78ZQ
-         YAZw==
+        bh=YQGib1dEG0/8v2bEtj7yKmdDn+P2RR3bBQQL8KzxUyg=;
+        b=qoOcTW+DYLlX81RW/jKjM5s5dRuqQyvKbTcGXyvW4lz/BpKgZyvdd07zudmxOvZbvp
+         zeGXLmKD9B52GWTxIuxas95M+fgGazDv0uGHbvb45kNzdHoA/WlPdalGrCLXDt6OCQCM
+         P75HR2Auugkgg0NpjqYF15iXzU47pBwLFzcdYv/qR2ZzihuwFYy6ivCZGCgQQDNInB3Q
+         7PE9mhxoa1t0ySYf1iWDKNpxDCRqM6BYt7uB/bALqKhkac3sIL9AnOXkXc4Afb1Q2Ekd
+         MNc4e4EHBiYkJctseXlAgUdZjmAeVjUCUNeKC7nBewEIuCJ0A6lIQCOEvcbaaEYpqHu8
+         SC0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=soZSo2KPfZqZ6GX+fF0rBT3lkGZ2ilMrzWzVGxZZ36A=;
-        b=tirsS+nzr501XXHg3L2QPj0lDSpcQ0d+dXcc/cvr7L8NGvDSF1roPX73ieyVkah893
-         b+gCaUCNALxCJQ6WF35MhcnS+ivubFpguMpAPFLTuPZg47HBAyNyL+vzVZ0uzJPlEImp
-         2kLhayANH5kw002J7B/T9rMozGgnqH9nnFVQlt92g4slgujGi2VBDhmTGKcPFRCuveNH
-         6a95e9opEE7x3fxVraLyFDfEpLLnmAEG8CDT4DlJU8a1Os3dt9ig05EPQQs8d4EsxoOE
-         MUparzJWqKsQhRaAEAMTpw9PZ9tNtodhZujJ9m0Vnosk6zi5gsvTCrfQ9kOe06/ak0T0
-         MNng==
-X-Gm-Message-State: AOAM533WSBjeu1pj6YZNVXYO627JP950NTHAO2wlRHemiPhPiwqv7Mxx
-	8vtkphIn88S/TAcN2Q2ml+aVIyTgDHk=
-X-Google-Smtp-Source: ABdhPJzAPhmvEgTuTCPARH8iis+xeJqE9qAIFF5F7d/umdgKXxFlbn/eTKYvWEUo4zn+glQF0tBQHg==
-X-Received: by 2002:aca:ea06:: with SMTP id i6mr8534550oih.82.1617934863126;
+        bh=YQGib1dEG0/8v2bEtj7yKmdDn+P2RR3bBQQL8KzxUyg=;
+        b=rz/lSL/ILvlmHSk0eHeWzzEIsF/mZ8EiOateyskyJz6sYN5Dp5ir1v54j8kVKWdP/r
+         goB6Lt/caZUxSdTfax2V32jGhw7hv3P7qh15HE13Wro5LXiC4mBZg4Akgm0WbiGoyu+k
+         RhVlWNAVS3vUq4CmljnumNVDFZjzkZVCsNMuMyi346wdrbJJ3+inI1vl7yLmNnjOURBO
+         vOlWUTE/qH7mcDv1wcb2ybFF1sB9V6XQMViEFkSf54brE7GYJ4yrQeGYgbQhh3PtQDbr
+         ShfYqDUcKl0DrNtQ/sawOZ3gQtEoBXFBt36zuuq29r+0NjRgppjPVxljVNn6uPl38pEt
+         p24Q==
+X-Gm-Message-State: AOAM532Nm1TvGkG/M9R2Wxb5qEsArTUobimoCm2qpCtiV07GddfimUwz
+	VX1GjGdLTpi+kvsZWpKOblcvuJib4qY=
+X-Google-Smtp-Source: ABdhPJxwr3HF7SIB2G+UaEX2w5rfY7anrGuhfsKsbHzDw01yxAlW0RqM+xjtdfAQ6EKtD4dGDX/L4g==
+X-Received: by 2002:aca:5d82:: with SMTP id r124mr8410030oib.59.1617934863879;
         Thu, 08 Apr 2021 19:21:03 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8533:6d3:7a8:8272])
-        by smtp.gmail.com with ESMTPSA id k65sm299815otk.53.2021.04.08.19.21.02
+        by smtp.gmail.com with ESMTPSA id k65sm299815otk.53.2021.04.08.19.21.03
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Apr 2021 19:21:02 -0700 (PDT)
+        Thu, 08 Apr 2021 19:21:03 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 11/36] python3-pymisp: Upgrade 2.4.141 -> 2.4.141.1
-Date: Thu,  8 Apr 2021 19:20:24 -0700
-Message-Id: <796b538871502b6b2e753d0a09c73bce62d7d47d.1617934043.git.akuster808@gmail.com>
+Subject: [hardknott 12/36] python3-pyroute2: Upgrade 0.5.16 -> 0.5.17
+Date: Thu,  8 Apr 2021 19:20:25 -0700
+Message-Id: <cc590fbbc6ee030aaa30735cf752592f67371a6e.1617934043.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1617934043.git.akuster808@gmail.com>
 References: <cover.1617934043.git.akuster808@gmail.com>
 
 From: Leon Anavi <leon.anavi@konsulko.com>
 
-Upgrade to release 2.4.141.1:
+Upgrade to release 0.5.17:
 
-- Re-bump changelog
-- Bump version
+- license: aligned cli/ss2
+- ndb: del_ip() improvements
+- ndb: wait(timeout=...)
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-(cherry picked from commit 0eefda892aea7f69189d1f3b1f99949d4feb5321)
+(cherry picked from commit be5b722809c29acef2de0c0978659692483aa8aa)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{python3-pymisp_2.4.141.bb => python3-pymisp_2.4.141.1.bb}  | 2 +-
+ .../{python3-pyroute2_0.5.16.bb => python3-pyroute2_0.5.17.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.141.bb => python3-pymisp_2.4.141.1.bb} (91%)
+ rename meta-python/recipes-devtools/python/{python3-pyroute2_0.5.16.bb => python3-pyroute2_0.5.17.bb} (90%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.141.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.141.1.bb
-similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.141.bb
-rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.141.1.bb
-index c8bd52f105c..df6f1c762d2 100644
---- a/meta-python/recipes-devtools/python/python3-pymisp_2.4.141.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymisp_2.4.141.1.bb
-@@ -4,7 +4,7 @@ LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
+diff --git a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.16.bb b/meta-python/recipes-devtools/python/python3-pyroute2_0.5.17.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-pyroute2_0.5.16.bb
+rename to meta-python/recipes-devtools/python/python3-pyroute2_0.5.17.bb
+index fed0fc38fe7..1d3d5a253a6 100644
+--- a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.16.bb
++++ b/meta-python/recipes-devtools/python/python3-pyroute2_0.5.17.bb
+@@ -3,7 +3,7 @@ LICENSE = "GPLv2 & Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://LICENSE.Apache.v2;md5=34281e312165f843a2b7d1f114fe65ce"
  
- SRC_URI = "git://github.com/MISP/PyMISP.git;protocol=https;branch=main"
--SRCREV = "4a0c1e1dc42af171d3c1bcaa12436f79ff6cfd9b"
-+SRCREV = "62cd5173f087e88834e88472060181b681b0b4d2"
- S = "${WORKDIR}/git"
+-SRC_URI[sha256sum] = "fe681a2d008cac815b9f287250d69a333fbfc2b2d89c37d58798104057149989"
++SRC_URI[sha256sum] = "12d51066ea5628a6fa76fc244f301a8eea5d25d71a9d664016976edfa3889733"
  
- inherit setuptools3
+ inherit setuptools3 pypi ptest
+ 
 -- 
 2.17.1
 
