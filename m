@@ -1,87 +1,940 @@
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
- by mx.groups.io with SMTP id smtpd.web12.5574.1618064981930752644
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web08.5567.1618064983455675542
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 10 Apr 2021 07:29:42 -0700
+ Sat, 10 Apr 2021 07:29:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=uqvosHgj;
- spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f176.google.com with SMTP id d10so5954050pgf.12
-        for <openembedded-devel@lists.openembedded.org>; Sat, 10 Apr 2021 07:29:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=lqeKvLOB;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id b8-20020a17090a5508b029014d0fbe9b64so6394386pji.5
+        for <openembedded-devel@lists.openembedded.org>; Sat, 10 Apr 2021 07:29:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=xL9OUQu6KQJDMIhp295iAWG1H+ZWp/9fyfoA1TKgGuM=;
-        b=uqvosHgjaBZWOUNBTj9S0r1t+B7ytpi8W9f6gvNXN5w7jJs3w9R0MceKKLZd0yIlGA
-         YP7LnI0adj571kn5hJklKh7W3ao3KBHd3h5vzL+rywCvZ2FlxoLI6J6BMaYH1cFHvQvl
-         yaQofC5z75w5ofsh12HJcPcBacmMAlFypbPLQBNSElXaOK1aUQ3yxRp6usE6+0lPHJfO
-         oJ2ZhgVkKHYppWxSxJaq+Q6Neig0KAAGoiISlNfZV4XJjYduHivEvljO5A83D4niuCdl
-         SuADjwmfpHKfl8JoOQVmfC0Cf8cMerf5a+/SVfQvJTQtnn7/hbsFUN6tUofkwqmXD9Yp
-         OMhw==
+        bh=ZQVt5kOLOggMgZ+D45YtqY4GcZGiVD3EAd5A8eO/Mpo=;
+        b=lqeKvLOB2SWLOqp1llbAMBG/m7B35Z7jqvAaJSAOmT1xTqmnT+1WHMEOD4DNRmmMKF
+         cHcVyY/laM2zmi6MWuOaLvk0no+gXRdY9g0cWSGMCoL2BQlqReFbuV0KbNh/a9eq6APE
+         6z76127L7HLqjwq6RXmM8Oe/PkcRZUyssQKI1lq143dZxxJYrO1sxHMTHk2BxIWi6/Ju
+         kMAumKDtHF6vl/yA5ULLZqIinrAlWdNl35TLckDFpWcqn/w2A6/pJATica0T+eaYClaM
+         pZuq1P2XeVOJyTTamLkVAAV4eXasK5jT9j1sqrqZMcUp0JHNymsHSBIDoc8WSfDnn2yV
+         CDng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=xL9OUQu6KQJDMIhp295iAWG1H+ZWp/9fyfoA1TKgGuM=;
-        b=K2Ar1sNDZ1fgLXua6bjJH2lOcw1oMnXpMcFanf/vjWrwlBYd+qyB2Ag9ouyR3+IlJz
-         D6/lZ0Y5t9Sjxt9fL0AFCRfJjydhOeMVTqp3dReODhv8KqaYRU+so5wyJIxl7RzT7gJZ
-         s1jF8ZT0b5RuBtqDhBaDgEWB0uLYmQVWpxRvUk0RZ9Yppyn70yIKuIUfv6RBHOuc750T
-         RTcsFgmk5myx/xb2Z2bN72yaJgPScSYLhnD4BmIHO6k/plKiPDwCBztWi4sA6shEWAri
-         PAxdzTeXj7jxs5MT1/YKClVQDmsODSNJq4N1efgP8dIJ0tZOHcJCyI2zkE5+Sf5zhePl
-         kJ/g==
-X-Gm-Message-State: AOAM532rx1u4sKxsnGbcOxs3MIkFztY0pvAtBrssdU0qg0JpFhHMIkaY
-	9obtAEnrgw86z/xoiKAzeGGQp3R5t64=
-X-Google-Smtp-Source: ABdhPJyPhVGUNFg7u2roMBagvBini1W7qipn/ocgVDY0Tb/zYJ6B2VTdaDFaTvm+5L4a0WT+TGYDpA==
-X-Received: by 2002:a65:6143:: with SMTP id o3mr7756141pgv.332.1618064981404;
-        Sat, 10 Apr 2021 07:29:41 -0700 (PDT)
+        bh=ZQVt5kOLOggMgZ+D45YtqY4GcZGiVD3EAd5A8eO/Mpo=;
+        b=c1HxZa1I6MVu9bobUGtuKCKVeWT+3OPVZCHvIBXVKaip0tbyX3OcMPhjEkRmqgSKwh
+         duHT0arJT11aEQU52EKBKs3jtOz0nEAAX2BfUUcyQi6wpeAZVoEMQVL/xwcLdw7StOQE
+         ivd7saG3R3CDLtVQsXk1H6Z/XyOSvJ8RI1cPTaG00LnxB8g46byrVWN2VIOi8zvD0ikI
+         t5X/6WsVtb28HPG9frHZothr6njZfPwKzsKYsSMdivsdsTSDrUE70iY28IQjgAG/hwkv
+         kZbLfIb+mOQJ32zU6EDArUNBRiKnXTKRJGlQyQQoVjPmjvovbWZa/1j5J6ty1RFi/+yi
+         rfmA==
+X-Gm-Message-State: AOAM532Oed8KStHU5w/78rPNhpU6ozm6zYnfj9/+H1zJZKVVBRT2d0ib
+	vTjW0NsCxptPK9luhww720zytNOPzLI=
+X-Google-Smtp-Source: ABdhPJxnoCAZj+l3LLQWZwgsuK14wr9C6Kb7Qe4EY2Y6H8YP+Ozf0UNLrgqGfv3v6cyFeoIPBt3JIw==
+X-Received: by 2002:a17:90b:33c5:: with SMTP id lk5mr18926955pjb.207.1618064982425;
+        Sat, 10 Apr 2021 07:29:42 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:8d5:10ce:6d52:dfc6])
-        by smtp.gmail.com with ESMTPSA id a65sm5120183pfb.116.2021.04.10.07.29.40
+        by smtp.gmail.com with ESMTPSA id a65sm5120183pfb.116.2021.04.10.07.29.41
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sat, 10 Apr 2021 07:29:41 -0700 (PDT)
 From: "akuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 4/6] libyui: switch to libyui-old repo which still has this SRCREV
-Date: Sat, 10 Apr 2021 07:29:32 -0700
-Message-Id: <d59f6e6e1b19b06332474c60f255f8a4e20357aa.1618064877.git.akuster808@gmail.com>
+Subject: [gatesgarth 5/6] hostapd: fix CVE-2019-5061
+Date: Sat, 10 Apr 2021 07:29:33 -0700
+Message-Id: <04ba527e94c8ecd7a95a9ed16cc27c2f5833f849.1618064877.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1618064877.git.akuster808@gmail.com>
 References: <cover.1618064877.git.akuster808@gmail.com>
 
-From: Martin Jansa <Martin.Jansa@gmail.com>
+From: Mingli Yu <mingli.yu@windriver.com>
 
-* af06143017fc5f18c4b6488ba4aed26bcc43ff6e doesn't exist in current repo:
-  libyui$ git branch -a --contains af06143017fc5f18c4b6488ba4aed26bcc43ff6e
-  error: no such commit af06143017fc5f18c4b6488ba4aed26bcc43ff6e
+Backport a patch to fix CVE-2019-5061.
 
-* there are no common commits in the new libyui repo, but luckily old
-  repo is kept as
-  https://github.com/libyui/libyui-old
-  similarly libyui-ncurses now contains only README about being obsolete in:
-  https://github.com/libyui/libyui-ncurses
-  but at least it wasn't rewritten to have the new content
+Reference: https://security-tracker.debian.org/tracker/CVE-2019-5061
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 902919167a97055e9be9cd3654f29823e81ae382)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-graphics/libyui/libyui_3.10.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../hostapd/hostapd/CVE-2019-5061.patch       | 854 ++++++++++++++++++
+ .../hostapd/hostapd_2.9.bb                    |   1 +
+ 2 files changed, 855 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2019-5061.patch
 
-diff --git a/meta-oe/recipes-graphics/libyui/libyui_3.10.0.bb b/meta-oe/recipes-graphics/libyui/libyui_3.10.0.bb
-index d7f529e3138..286d3ac9119 100644
---- a/meta-oe/recipes-graphics/libyui/libyui_3.10.0.bb
-+++ b/meta-oe/recipes-graphics/libyui/libyui_3.10.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING.gpl-3;md5=d32239bcb673463ab874e80d47fae504 \
-                     file://COPYING.lgpl-3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
-                    "
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2019-5061.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2019-5061.patch
+new file mode 100644
+index 00000000000..9214615d12f
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2019-5061.patch
+@@ -0,0 +1,854 @@
++From 018edec9b2bd3db20605117c32ff79c1e625c432 Mon Sep 17 00:00:00 2001
++From: Jouni Malinen <j@w1.fi>
++Date: Wed, 11 Sep 2019 12:34:28 +0300
++Subject: [PATCH] Remove IAPP functionality from hostapd
++
++IEEE Std 802.11F-2003 was withdrawn in 2006 and as such it has not been
++maintained nor is there any expectation of the withdrawn trial-use
++recommended practice to be maintained in the future. Furthermore,
++implementation of IAPP in hostapd was not complete, i.e., only parts of
++the recommended practice were included. The main item of some real use
++long time ago was the Layer 2 Update frame to update bridges when a STA
++roams within an ESS, but that functionality has, in practice, been moved
++to kernel drivers to provide better integration with the networking
++stack.
++
++CVE: CVE-2019-5061
++
++Upstream-Status: Backport
++
++Signed-off-by: Jouni Malinen <j@w1.fi>
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++---
++ hostapd/Android.mk                        |   5 -
++ hostapd/Makefile                          |   5 -
++ hostapd/android.config                    |   3 -
++ hostapd/config_file.c                     |   3 +-
++ hostapd/defconfig                         |   3 -
++ hostapd/hostapd.conf                      |   6 -
++ hostapd/main.c                            |   3 -
++ src/ap/Makefile                           |   2 -
++ src/ap/ap_config.h                        |   4 -
++ src/ap/hostapd.c                          |  14 -
++ src/ap/hostapd.h                          |   2 -
++ src/ap/iapp.c                             | 542 ----------------------
++ src/ap/iapp.h                             |  39 --
++ src/utils/wpa_debug.h                     |   1 -
++ 14 files changed, 1 insertion(+), 633 deletions(-)
++ delete mode 100644 src/ap/iapp.c
++ delete mode 100644 src/ap/iapp.h
++
++diff --git a/hostapd/Android.mk b/hostapd/Android.mk
++index 3183323ef..a87ac8144 100644
++--- a/hostapd/Android.mk
+++++ b/hostapd/Android.mk
++@@ -205,11 +205,6 @@ endif
++ 
++ L_CFLAGS += -DCONFIG_CTRL_IFACE -DCONFIG_CTRL_IFACE_UNIX
++ 
++-ifdef CONFIG_IAPP
++-L_CFLAGS += -DCONFIG_IAPP
++-OBJS += src/ap/iapp.c
++-endif
++-
++ ifdef CONFIG_RSN_PREAUTH
++ L_CFLAGS += -DCONFIG_RSN_PREAUTH
++ CONFIG_L2_PACKET=y
++diff --git a/hostapd/Makefile b/hostapd/Makefile
++index f7f4c785b..42bb9e4c8 100644
++--- a/hostapd/Makefile
+++++ b/hostapd/Makefile
++@@ -248,11 +248,6 @@ ifndef CONFIG_NO_CTRL_IFACE
++ CFLAGS += -DCONFIG_CTRL_IFACE
++ endif
++ 
++-ifdef CONFIG_IAPP
++-CFLAGS += -DCONFIG_IAPP
++-OBJS += ../src/ap/iapp.o
++-endif
++-
++ ifdef CONFIG_RSN_PREAUTH
++ CFLAGS += -DCONFIG_RSN_PREAUTH
++ CONFIG_L2_PACKET=y
++diff --git a/hostapd/android.config b/hostapd/android.config
++index efe252332..e2e6c7821 100644
++--- a/hostapd/android.config
+++++ b/hostapd/android.config
++@@ -38,9 +38,6 @@ CONFIG_DRIVER_NL80211_QCA=y
++ # Driver interface for no driver (e.g., RADIUS server only)
++ #CONFIG_DRIVER_NONE=y
++ 
++-# IEEE 802.11F/IAPP
++-#CONFIG_IAPP=y
++-
++ # WPA2/IEEE 802.11i RSN pre-authentication
++ #CONFIG_RSN_PREAUTH=y
++ 
++diff --git a/hostapd/config_file.c b/hostapd/config_file.c
++index 680f17ee0..0d340d252 100644
++--- a/hostapd/config_file.c
+++++ b/hostapd/config_file.c
++@@ -2712,8 +2712,7 @@ static int hostapd_config_fill(struct hostapd_config *conf,
++ 		bss->eapol_key_index_workaround = atoi(pos);
++ #ifdef CONFIG_IAPP
++ 	} else if (os_strcmp(buf, "iapp_interface") == 0) {
++-		bss->ieee802_11f = 1;
++-		os_strlcpy(bss->iapp_iface, pos, sizeof(bss->iapp_iface));
+++		wpa_printf(MSG_INFO, "DEPRECATED: iapp_interface not used");
++ #endif /* CONFIG_IAPP */
++ 	} else if (os_strcmp(buf, "own_ip_addr") == 0) {
++ 		if (hostapd_parse_ip_addr(pos, &bss->own_ip_addr)) {
++diff --git a/hostapd/defconfig b/hostapd/defconfig
++index b1fb56c3b..1a3d9f9ba 100644
++--- a/hostapd/defconfig
+++++ b/hostapd/defconfig
++@@ -44,9 +44,6 @@ CONFIG_LIBNL32=y
++ # Driver interface for no driver (e.g., RADIUS server only)
++ #CONFIG_DRIVER_NONE=y
++ 
++-# IEEE 802.11F/IAPP
++-CONFIG_IAPP=y
++-
++ # WPA2/IEEE 802.11i RSN pre-authentication
++ CONFIG_RSN_PREAUTH=y
++ 
++diff --git a/hostapd/hostapd.conf b/hostapd/hostapd.conf
++index 6c96a760a..a3c698480 100644
++--- a/hostapd/hostapd.conf
+++++ b/hostapd/hostapd.conf
++@@ -41,7 +41,6 @@ interface=wlan0
++ # bit 2 (4) = RADIUS
++ # bit 3 (8) = WPA
++ # bit 4 (16) = driver interface
++-# bit 5 (32) = IAPP
++ # bit 6 (64) = MLME
++ #
++ # Levels (minimum value for logged events):
++@@ -1243,11 +1242,6 @@ eap_server=0
++ # Whether to enable ERP on the EAP server.
++ #eap_server_erp=1
++ 
++-##### IEEE 802.11f - Inter-Access Point Protocol (IAPP) #######################
++-
++-# Interface to be used for IAPP broadcast packets
++-#iapp_interface=eth0
++-
++ 
++ ##### RADIUS client configuration #############################################
++ # for IEEE 802.1X with external Authentication Server, IEEE 802.11
++diff --git a/hostapd/main.c b/hostapd/main.c
++index 08896ffe2..8bfe24281 100644
++--- a/hostapd/main.c
+++++ b/hostapd/main.c
++@@ -81,9 +81,6 @@ static void hostapd_logger_cb(void *ctx, const u8 *addr, unsigned int module,
++ 	case HOSTAPD_MODULE_DRIVER:
++ 		module_str = "DRIVER";
++ 		break;
++-	case HOSTAPD_MODULE_IAPP:
++-		module_str = "IAPP";
++-		break;
++ 	case HOSTAPD_MODULE_MLME:
++ 		module_str = "MLME";
++ 		break;
++diff --git a/src/ap/Makefile b/src/ap/Makefile
++index bd3f33b77..54e48a0dd 100644
++--- a/src/ap/Makefile
+++++ b/src/ap/Makefile
++@@ -18,7 +18,6 @@ CFLAGS += -DCONFIG_IEEE80211R_AP
++ CFLAGS += -DCONFIG_WPS
++ CFLAGS += -DCONFIG_PROXYARP
++ CFLAGS += -DCONFIG_IPV6
++-CFLAGS += -DCONFIG_IAPP
++ CFLAGS += -DCONFIG_AIRTIME_POLICY
++ 
++ LIB_OBJS= \
++@@ -41,7 +40,6 @@ LIB_OBJS= \
++ 	hostapd.o \
++ 	hs20.o \
++ 	hw_features.o \
++-	iapp.o \
++ 	ieee802_11_auth.o \
++ 	ieee802_11.o \
++ 	ieee802_11_ht.o \
++diff --git a/src/ap/ap_config.h b/src/ap/ap_config.h
++index e219160b0..17eb0682b 100644
++--- a/src/ap/ap_config.h
+++++ b/src/ap/ap_config.h
++@@ -325,10 +325,6 @@ struct hostapd_bss_config {
++ 	int erp_send_reauth_start;
++ 	char *erp_domain;
++ 
++-	int ieee802_11f; /* use IEEE 802.11f (IAPP) */
++-	char iapp_iface[IFNAMSIZ + 1]; /* interface used with IAPP broadcast
++-					* frames */
++-
++ 	enum macaddr_acl {
++ 		ACCEPT_UNLESS_DENIED = 0,
++ 		DENY_UNLESS_ACCEPTED = 1,
++diff --git a/src/ap/hostapd.c b/src/ap/hostapd.c
++index ef988b634..bf7b1f89e 100644
++--- a/src/ap/hostapd.c
+++++ b/src/ap/hostapd.c
++@@ -28,7 +28,6 @@
++ #include "accounting.h"
++ #include "ap_list.h"
++ #include "beacon.h"
++-#include "iapp.h"
++ #include "ieee802_1x.h"
++ #include "ieee802_11_auth.h"
++ #include "vlan_init.h"
++@@ -361,8 +360,6 @@ static void hostapd_free_hapd_data(struct hostapd_data *hapd)
++ 	hapd->beacon_set_done = 0;
++ 
++ 	wpa_printf(MSG_DEBUG, "%s(%s)", __func__, hapd->conf->iface);
++-	iapp_deinit(hapd->iapp);
++-	hapd->iapp = NULL;
++ 	accounting_deinit(hapd);
++ 	hostapd_deinit_wpa(hapd);
++ 	vlan_deinit(hapd);
++@@ -1296,13 +1293,6 @@ static int hostapd_setup_bss(struct hostapd_data *hapd, int first)
++ 		return -1;
++ 	}
++ 
++-	if (conf->ieee802_11f &&
++-	    (hapd->iapp = iapp_init(hapd, conf->iapp_iface)) == NULL) {
++-		wpa_printf(MSG_ERROR, "IEEE 802.11F (IAPP) initialization "
++-			   "failed.");
++-		return -1;
++-	}
++-
++ #ifdef CONFIG_INTERWORKING
++ 	if (gas_serv_init(hapd)) {
++ 		wpa_printf(MSG_ERROR, "GAS server initialization failed");
++@@ -3056,10 +3046,6 @@ void hostapd_new_assoc_sta(struct hostapd_data *hapd, struct sta_info *sta,
++ 	hostapd_prune_associations(hapd, sta->addr);
++ 	ap_sta_clear_disconnect_timeouts(hapd, sta);
++ 
++-	/* IEEE 802.11F (IAPP) */
++-	if (hapd->conf->ieee802_11f)
++-		iapp_new_station(hapd->iapp, sta);
++-
++ #ifdef CONFIG_P2P
++ 	if (sta->p2p_ie == NULL && !sta->no_p2p_set) {
++ 		sta->no_p2p_set = 1;
++diff --git a/src/ap/hostapd.h b/src/ap/hostapd.h
++index 5b859b8a9..2358d1664 100644
++--- a/src/ap/hostapd.h
+++++ b/src/ap/hostapd.h
++@@ -179,8 +179,6 @@ struct hostapd_data {
++ 	u64 acct_session_id;
++ 	struct radius_das_data *radius_das;
++ 
++-	struct iapp_data *iapp;
++-
++ 	struct hostapd_cached_radius_acl *acl_cache;
++ 	struct hostapd_acl_query_data *acl_queries;
++ 
++diff --git a/src/ap/iapp.c b/src/ap/iapp.c
++deleted file mode 100644
++index 2556da30c..000000000
++--- a/src/ap/iapp.c
+++++ /dev/null
++@@ -1,542 +0,0 @@
++-/*
++- * hostapd / IEEE 802.11F-2003 Inter-Access Point Protocol (IAPP)
++- * Copyright (c) 2002-2007, Jouni Malinen <j@w1.fi>
++- *
++- * This software may be distributed under the terms of the BSD license.
++- * See README for more details.
++- *
++- * Note: IEEE 802.11F-2003 was a experimental use specification. It has expired
++- * and IEEE has withdrawn it. In other words, it is likely better to look at
++- * using some other mechanism for AP-to-AP communication than extending the
++- * implementation here.
++- */
++-
++-/* TODO:
++- * Level 1: no administrative or security support
++- *	(e.g., static BSSID to IP address mapping in each AP)
++- * Level 2: support for dynamic mapping of BSSID to IP address
++- * Level 3: support for encryption and authentication of IAPP messages
++- * - add support for MOVE-notify and MOVE-response (this requires support for
++- *   finding out IP address for previous AP using RADIUS)
++- * - add support for Send- and ACK-Security-Block to speedup IEEE 802.1X during
++- *   reassociation to another AP
++- * - implement counters etc. for IAPP MIB
++- * - verify endianness of fields in IAPP messages; are they big-endian as
++- *   used here?
++- * - RADIUS connection for AP registration and BSSID to IP address mapping
++- * - TCP connection for IAPP MOVE, CACHE
++- * - broadcast ESP for IAPP ADD-notify
++- * - ESP for IAPP MOVE messages
++- * - security block sending/processing
++- * - IEEE 802.11 context transfer
++- */
++-
++-#include "utils/includes.h"
++-#include <net/if.h>
++-#include <sys/ioctl.h>
++-#include <netpacket/packet.h>
++-
++-#include "utils/common.h"
++-#include "utils/eloop.h"
++-#include "common/ieee802_11_defs.h"
++-#include "hostapd.h"
++-#include "ap_config.h"
++-#include "ieee802_11.h"
++-#include "sta_info.h"
++-#include "iapp.h"
++-
++-
++-#define IAPP_MULTICAST "224.0.1.178"
++-#define IAPP_UDP_PORT 3517
++-#define IAPP_TCP_PORT 3517
++-
++-struct iapp_hdr {
++-	u8 version;
++-	u8 command;
++-	be16 identifier;
++-	be16 length;
++-	/* followed by length-6 octets of data */
++-} __attribute__ ((packed));
++-
++-#define IAPP_VERSION 0
++-
++-enum IAPP_COMMAND {
++-	IAPP_CMD_ADD_notify = 0,
++-	IAPP_CMD_MOVE_notify = 1,
++-	IAPP_CMD_MOVE_response = 2,
++-	IAPP_CMD_Send_Security_Block = 3,
++-	IAPP_CMD_ACK_Security_Block = 4,
++-	IAPP_CMD_CACHE_notify = 5,
++-	IAPP_CMD_CACHE_response = 6,
++-};
++-
++-
++-/* ADD-notify - multicast UDP on the local LAN */
++-struct iapp_add_notify {
++-	u8 addr_len; /* ETH_ALEN */
++-	u8 reserved;
++-	u8 mac_addr[ETH_ALEN];
++-	be16 seq_num;
++-} __attribute__ ((packed));
++-
++-
++-/* Layer 2 Update frame (802.2 Type 1 LLC XID Update response) */
++-struct iapp_layer2_update {
++-	u8 da[ETH_ALEN]; /* broadcast */
++-	u8 sa[ETH_ALEN]; /* STA addr */
++-	be16 len; /* 6 */
++-	u8 dsap; /* null DSAP address */
++-	u8 ssap; /* null SSAP address, CR=Response */
++-	u8 control;
++-	u8 xid_info[3];
++-} __attribute__ ((packed));
++-
++-
++-/* MOVE-notify - unicast TCP */
++-struct iapp_move_notify {
++-	u8 addr_len; /* ETH_ALEN */
++-	u8 reserved;
++-	u8 mac_addr[ETH_ALEN];
++-	u16 seq_num;
++-	u16 ctx_block_len;
++-	/* followed by ctx_block_len bytes */
++-} __attribute__ ((packed));
++-
++-
++-/* MOVE-response - unicast TCP */
++-struct iapp_move_response {
++-	u8 addr_len; /* ETH_ALEN */
++-	u8 status;
++-	u8 mac_addr[ETH_ALEN];
++-	u16 seq_num;
++-	u16 ctx_block_len;
++-	/* followed by ctx_block_len bytes */
++-} __attribute__ ((packed));
++-
++-enum {
++-	IAPP_MOVE_SUCCESSFUL = 0,
++-	IAPP_MOVE_DENIED = 1,
++-	IAPP_MOVE_STALE_MOVE = 2,
++-};
++-
++-
++-/* CACHE-notify */
++-struct iapp_cache_notify {
++-	u8 addr_len; /* ETH_ALEN */
++-	u8 reserved;
++-	u8 mac_addr[ETH_ALEN];
++-	u16 seq_num;
++-	u8 current_ap[ETH_ALEN];
++-	u16 ctx_block_len;
++-	/* ctx_block_len bytes of context block followed by 16-bit context
++-	 * timeout */
++-} __attribute__ ((packed));
++-
++-
++-/* CACHE-response - unicast TCP */
++-struct iapp_cache_response {
++-	u8 addr_len; /* ETH_ALEN */
++-	u8 status;
++-	u8 mac_addr[ETH_ALEN];
++-	u16 seq_num;
++-} __attribute__ ((packed));
++-
++-enum {
++-	IAPP_CACHE_SUCCESSFUL = 0,
++-	IAPP_CACHE_STALE_CACHE = 1,
++-};
++-
++-
++-/* Send-Security-Block - unicast TCP */
++-struct iapp_send_security_block {
++-	u8 iv[8];
++-	u16 sec_block_len;
++-	/* followed by sec_block_len bytes of security block */
++-} __attribute__ ((packed));
++-
++-
++-/* ACK-Security-Block - unicast TCP */
++-struct iapp_ack_security_block {
++-	u8 iv[8];
++-	u8 new_ap_ack_authenticator[48];
++-} __attribute__ ((packed));
++-
++-
++-struct iapp_data {
++-	struct hostapd_data *hapd;
++-	u16 identifier; /* next IAPP identifier */
++-	struct in_addr own, multicast;
++-	int udp_sock;
++-	int packet_sock;
++-};
++-
++-
++-static void iapp_send_add(struct iapp_data *iapp, u8 *mac_addr, u16 seq_num)
++-{
++-	char buf[128];
++-	struct iapp_hdr *hdr;
++-	struct iapp_add_notify *add;
++-	struct sockaddr_in addr;
++-
++-	/* Send IAPP ADD-notify to remove possible association from other APs
++-	 */
++-
++-	hdr = (struct iapp_hdr *) buf;
++-	hdr->version = IAPP_VERSION;
++-	hdr->command = IAPP_CMD_ADD_notify;
++-	hdr->identifier = host_to_be16(iapp->identifier++);
++-	hdr->length = host_to_be16(sizeof(*hdr) + sizeof(*add));
++-
++-	add = (struct iapp_add_notify *) (hdr + 1);
++-	add->addr_len = ETH_ALEN;
++-	add->reserved = 0;
++-	os_memcpy(add->mac_addr, mac_addr, ETH_ALEN);
++-
++-	add->seq_num = host_to_be16(seq_num);
++-	
++-	os_memset(&addr, 0, sizeof(addr));
++-	addr.sin_family = AF_INET;
++-	addr.sin_addr.s_addr = iapp->multicast.s_addr;
++-	addr.sin_port = htons(IAPP_UDP_PORT);
++-	if (sendto(iapp->udp_sock, buf, (char *) (add + 1) - buf, 0,
++-		   (struct sockaddr *) &addr, sizeof(addr)) < 0)
++-		wpa_printf(MSG_INFO, "sendto[IAPP-ADD]: %s", strerror(errno));
++-}
++-
++-
++-static void iapp_send_layer2_update(struct iapp_data *iapp, u8 *addr)
++-{
++-	struct iapp_layer2_update msg;
++-
++-	/* Send Level 2 Update Frame to update forwarding tables in layer 2
++-	 * bridge devices */
++-
++-	/* 802.2 Type 1 Logical Link Control (LLC) Exchange Identifier (XID)
++-	 * Update response frame; IEEE Std 802.2-1998, 5.4.1.2.1 */
++-
++-	os_memset(msg.da, 0xff, ETH_ALEN);
++-	os_memcpy(msg.sa, addr, ETH_ALEN);
++-	msg.len = host_to_be16(6);
++-	msg.dsap = 0; /* NULL DSAP address */
++-	msg.ssap = 0x01; /* NULL SSAP address, CR Bit: Response */
++-	msg.control = 0xaf; /* XID response lsb.1111F101.
++-			     * F=0 (no poll command; unsolicited frame) */
++-	msg.xid_info[0] = 0x81; /* XID format identifier */
++-	msg.xid_info[1] = 1; /* LLC types/classes: Type 1 LLC */
++-	msg.xid_info[2] = 1 << 1; /* XID sender's receive window size (RW)
++-				   * FIX: what is correct RW with 802.11? */
++-
++-	if (send(iapp->packet_sock, &msg, sizeof(msg), 0) < 0)
++-		wpa_printf(MSG_INFO, "send[L2 Update]: %s", strerror(errno));
++-}
++-
++-
++-/**
++- * iapp_new_station - IAPP processing for a new STA
++- * @iapp: IAPP data
++- * @sta: The associated station
++- */
++-void iapp_new_station(struct iapp_data *iapp, struct sta_info *sta)
++-{
++-	u16 seq = 0; /* TODO */
++-
++-	if (iapp == NULL)
++-		return;
++-
++-	/* IAPP-ADD.request(MAC Address, Sequence Number, Timeout) */
++-	hostapd_logger(iapp->hapd, sta->addr, HOSTAPD_MODULE_IAPP,
++-		       HOSTAPD_LEVEL_DEBUG, "IAPP-ADD.request(seq=%d)", seq);
++-	iapp_send_layer2_update(iapp, sta->addr);
++-	iapp_send_add(iapp, sta->addr, seq);
++-
++-	/* TODO: If this was reassociation:
++-	 * IAPP-MOVE.request(MAC Address, Sequence Number, Old AP,
++-	 *                   Context Block, Timeout)
++-	 * TODO: Send IAPP-MOVE to the old AP; Map Old AP BSSID to
++-	 * IP address */
++-}
++-
++-
++-static void iapp_process_add_notify(struct iapp_data *iapp,
++-				    struct sockaddr_in *from,
++-				    struct iapp_hdr *hdr, int len)
++-{
++-	struct iapp_add_notify *add = (struct iapp_add_notify *) (hdr + 1);
++-	struct sta_info *sta;
++-
++-	if (len != sizeof(*add)) {
++-		wpa_printf(MSG_INFO, "Invalid IAPP-ADD packet length %d (expected %lu)",
++-			   len, (unsigned long) sizeof(*add));
++-		return;
++-	}
++-
++-	sta = ap_get_sta(iapp->hapd, add->mac_addr);
++-
++-	/* IAPP-ADD.indication(MAC Address, Sequence Number) */
++-	hostapd_logger(iapp->hapd, add->mac_addr, HOSTAPD_MODULE_IAPP,
++-		       HOSTAPD_LEVEL_INFO,
++-		       "Received IAPP ADD-notify (seq# %d) from %s:%d%s",
++-		       be_to_host16(add->seq_num),
++-		       inet_ntoa(from->sin_addr), ntohs(from->sin_port),
++-		       sta ? "" : " (STA not found)");
++-
++-	if (!sta)
++-		return;
++-
++-	/* TODO: could use seq_num to try to determine whether last association
++-	 * to this AP is newer than the one advertised in IAPP-ADD. Although,
++-	 * this is not really a reliable verification. */
++-
++-	hostapd_logger(iapp->hapd, add->mac_addr, HOSTAPD_MODULE_IAPP,
++-		       HOSTAPD_LEVEL_DEBUG,
++-		       "Removing STA due to IAPP ADD-notify");
++-	ap_sta_disconnect(iapp->hapd, sta, NULL, 0);
++-}
++-
++-
++-/**
++- * iapp_receive_udp - Process IAPP UDP frames
++- * @sock: File descriptor for the socket
++- * @eloop_ctx: IAPP data (struct iapp_data *)
++- * @sock_ctx: Not used
++- */
++-static void iapp_receive_udp(int sock, void *eloop_ctx, void *sock_ctx)
++-{
++-	struct iapp_data *iapp = eloop_ctx;
++-	int len, hlen;
++-	unsigned char buf[128];
++-	struct sockaddr_in from;
++-	socklen_t fromlen;
++-	struct iapp_hdr *hdr;
++-
++-	/* Handle incoming IAPP frames (over UDP/IP) */
++-
++-	fromlen = sizeof(from);
++-	len = recvfrom(iapp->udp_sock, buf, sizeof(buf), 0,
++-		       (struct sockaddr *) &from, &fromlen);
++-	if (len < 0) {
++-		wpa_printf(MSG_INFO, "iapp_receive_udp - recvfrom: %s",
++-			   strerror(errno));
++-		return;
++-	}
++-
++-	if (from.sin_addr.s_addr == iapp->own.s_addr)
++-		return; /* ignore own IAPP messages */
++-
++-	hostapd_logger(iapp->hapd, NULL, HOSTAPD_MODULE_IAPP,
++-		       HOSTAPD_LEVEL_DEBUG,
++-		       "Received %d byte IAPP frame from %s%s\n",
++-		       len, inet_ntoa(from.sin_addr),
++-		       len < (int) sizeof(*hdr) ? " (too short)" : "");
++-
++-	if (len < (int) sizeof(*hdr))
++-		return;
++-
++-	hdr = (struct iapp_hdr *) buf;
++-	hlen = be_to_host16(hdr->length);
++-	hostapd_logger(iapp->hapd, NULL, HOSTAPD_MODULE_IAPP,
++-		       HOSTAPD_LEVEL_DEBUG,
++-		       "RX: version=%d command=%d id=%d len=%d\n",
++-		       hdr->version, hdr->command,
++-		       be_to_host16(hdr->identifier), hlen);
++-	if (hdr->version != IAPP_VERSION) {
++-		wpa_printf(MSG_INFO, "Dropping IAPP frame with unknown version %d",
++-			   hdr->version);
++-		return;
++-	}
++-	if (hlen > len) {
++-		wpa_printf(MSG_INFO, "Underflow IAPP frame (hlen=%d len=%d)",
++-			   hlen, len);
++-		return;
++-	}
++-	if (hlen < len) {
++-		wpa_printf(MSG_INFO, "Ignoring %d extra bytes from IAPP frame",
++-			   len - hlen);
++-		len = hlen;
++-	}
++-
++-	switch (hdr->command) {
++-	case IAPP_CMD_ADD_notify:
++-		iapp_process_add_notify(iapp, &from, hdr, len - sizeof(*hdr));
++-		break;
++-	case IAPP_CMD_MOVE_notify:
++-		/* TODO: MOVE is using TCP; so move this to TCP handler once it
++-		 * is implemented.. */
++-		/* IAPP-MOVE.indication(MAC Address, New BSSID,
++-		 * Sequence Number, AP Address, Context Block) */
++-		/* TODO: process */
++-		break;
++-	default:
++-		wpa_printf(MSG_INFO, "Unknown IAPP command %d", hdr->command);
++-		break;
++-	}
++-}
++-
++-
++-struct iapp_data * iapp_init(struct hostapd_data *hapd, const char *iface)
++-{
++-	struct ifreq ifr;
++-	struct sockaddr_ll addr;
++-	int ifindex;
++-	struct sockaddr_in *paddr, uaddr;
++-	struct iapp_data *iapp;
++-	struct ip_mreqn mreq;
++-	int reuseaddr = 1;
++-
++-	iapp = os_zalloc(sizeof(*iapp));
++-	if (iapp == NULL)
++-		return NULL;
++-	iapp->hapd = hapd;
++-	iapp->udp_sock = iapp->packet_sock = -1;
++-
++-	/* TODO:
++-	 * open socket for sending and receiving IAPP frames over TCP
++-	 */
++-
++-	iapp->udp_sock = socket(PF_INET, SOCK_DGRAM, 0);
++-	if (iapp->udp_sock < 0) {
++-		wpa_printf(MSG_INFO, "iapp_init - socket[PF_INET,SOCK_DGRAM]: %s",
++-			   strerror(errno));
++-		iapp_deinit(iapp);
++-		return NULL;
++-	}
++-
++-	os_memset(&ifr, 0, sizeof(ifr));
++-	os_strlcpy(ifr.ifr_name, iface, sizeof(ifr.ifr_name));
++-	if (ioctl(iapp->udp_sock, SIOCGIFINDEX, &ifr) != 0) {
++-		wpa_printf(MSG_INFO, "iapp_init - ioctl(SIOCGIFINDEX): %s",
++-			   strerror(errno));
++-		iapp_deinit(iapp);
++-		return NULL;
++-	}
++-	ifindex = ifr.ifr_ifindex;
++-
++-	if (ioctl(iapp->udp_sock, SIOCGIFADDR, &ifr) != 0) {
++-		wpa_printf(MSG_INFO, "iapp_init - ioctl(SIOCGIFADDR): %s",
++-			   strerror(errno));
++-		iapp_deinit(iapp);
++-		return NULL;
++-	}
++-	paddr = (struct sockaddr_in *) &ifr.ifr_addr;
++-	if (paddr->sin_family != AF_INET) {
++-		wpa_printf(MSG_INFO, "IAPP: Invalid address family %i (SIOCGIFADDR)",
++-			   paddr->sin_family);
++-		iapp_deinit(iapp);
++-		return NULL;
++-	}
++-	iapp->own.s_addr = paddr->sin_addr.s_addr;
++-
++-	if (ioctl(iapp->udp_sock, SIOCGIFBRDADDR, &ifr) != 0) {
++-		wpa_printf(MSG_INFO, "iapp_init - ioctl(SIOCGIFBRDADDR): %s",
++-			   strerror(errno));
++-		iapp_deinit(iapp);
++-		return NULL;
++-	}
++-	paddr = (struct sockaddr_in *) &ifr.ifr_addr;
++-	if (paddr->sin_family != AF_INET) {
++-		wpa_printf(MSG_INFO, "Invalid address family %i (SIOCGIFBRDADDR)",
++-			   paddr->sin_family);
++-		iapp_deinit(iapp);
++-		return NULL;
++-	}
++-	inet_aton(IAPP_MULTICAST, &iapp->multicast);
++-
++-	os_memset(&uaddr, 0, sizeof(uaddr));
++-	uaddr.sin_family = AF_INET;
++-	uaddr.sin_port = htons(IAPP_UDP_PORT);
++-
++-	if (setsockopt(iapp->udp_sock, SOL_SOCKET, SO_REUSEADDR, &reuseaddr,
++-		       sizeof(reuseaddr)) < 0) {
++-		wpa_printf(MSG_INFO,
++-			   "iapp_init - setsockopt[UDP,SO_REUSEADDR]: %s",
++-			   strerror(errno));
++-		/*
++-		 * Ignore this and try to continue. This is fine for single
++-		 * BSS cases, but may fail if multiple BSSes enable IAPP.
++-		 */
++-	}
++-
++-	if (bind(iapp->udp_sock, (struct sockaddr *) &uaddr,
++-		 sizeof(uaddr)) < 0) {
++-		wpa_printf(MSG_INFO, "iapp_init - bind[UDP]: %s",
++-			   strerror(errno));
++-		iapp_deinit(iapp);
++-		return NULL;
++-	}
++-
++-	os_memset(&mreq, 0, sizeof(mreq));
++-	mreq.imr_multiaddr = iapp->multicast;
++-	mreq.imr_address.s_addr = INADDR_ANY;
++-	mreq.imr_ifindex = 0;
++-	if (setsockopt(iapp->udp_sock, SOL_IP, IP_ADD_MEMBERSHIP, &mreq,
++-		       sizeof(mreq)) < 0) {
++-		wpa_printf(MSG_INFO, "iapp_init - setsockopt[UDP,IP_ADD_MEMBERSHIP]: %s",
++-			   strerror(errno));
++-		iapp_deinit(iapp);
++-		return NULL;
++-	}
++-
++-	iapp->packet_sock = socket(PF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
++-	if (iapp->packet_sock < 0) {
++-		wpa_printf(MSG_INFO, "iapp_init - socket[PF_PACKET,SOCK_RAW]: %s",
++-			   strerror(errno));
++-		iapp_deinit(iapp);
++-		return NULL;
++-	}
++-
++-	os_memset(&addr, 0, sizeof(addr));
++-	addr.sll_family = AF_PACKET;
++-	addr.sll_ifindex = ifindex;
++-	if (bind(iapp->packet_sock, (struct sockaddr *) &addr,
++-		 sizeof(addr)) < 0) {
++-		wpa_printf(MSG_INFO, "iapp_init - bind[PACKET]: %s",
++-			   strerror(errno));
++-		iapp_deinit(iapp);
++-		return NULL;
++-	}
++-
++-	if (eloop_register_read_sock(iapp->udp_sock, iapp_receive_udp,
++-				     iapp, NULL)) {
++-		wpa_printf(MSG_INFO, "Could not register read socket for IAPP");
++-		iapp_deinit(iapp);
++-		return NULL;
++-	}
++-
++-	wpa_printf(MSG_INFO, "IEEE 802.11F (IAPP) using interface %s", iface);
++-
++-	/* TODO: For levels 2 and 3: send RADIUS Initiate-Request, receive
++-	 * RADIUS Initiate-Accept or Initiate-Reject. IAPP port should actually
++-	 * be openned only after receiving Initiate-Accept. If Initiate-Reject
++-	 * is received, IAPP is not started. */
++-
++-	return iapp;
++-}
++-
++-
++-void iapp_deinit(struct iapp_data *iapp)
++-{
++-	struct ip_mreqn mreq;
++-
++-	if (iapp == NULL)
++-		return;
++-
++-	if (iapp->udp_sock >= 0) {
++-		os_memset(&mreq, 0, sizeof(mreq));
++-		mreq.imr_multiaddr = iapp->multicast;
++-		mreq.imr_address.s_addr = INADDR_ANY;
++-		mreq.imr_ifindex = 0;
++-		if (setsockopt(iapp->udp_sock, SOL_IP, IP_DROP_MEMBERSHIP,
++-			       &mreq, sizeof(mreq)) < 0) {
++-			wpa_printf(MSG_INFO, "iapp_deinit - setsockopt[UDP,IP_DEL_MEMBERSHIP]: %s",
++-				   strerror(errno));
++-		}
++-
++-		eloop_unregister_read_sock(iapp->udp_sock);
++-		close(iapp->udp_sock);
++-	}
++-	if (iapp->packet_sock >= 0) {
++-		eloop_unregister_read_sock(iapp->packet_sock);
++-		close(iapp->packet_sock);
++-	}
++-	os_free(iapp);
++-}
++diff --git a/src/ap/iapp.h b/src/ap/iapp.h
++deleted file mode 100644
++index c22118342..000000000
++--- a/src/ap/iapp.h
+++++ /dev/null
++@@ -1,39 +0,0 @@
++-/*
++- * hostapd / IEEE 802.11F-2003 Inter-Access Point Protocol (IAPP)
++- * Copyright (c) 2002-2005, Jouni Malinen <j@w1.fi>
++- *
++- * This software may be distributed under the terms of the BSD license.
++- * See README for more details.
++- */
++-
++-#ifndef IAPP_H
++-#define IAPP_H
++-
++-struct iapp_data;
++-
++-#ifdef CONFIG_IAPP
++-
++-void iapp_new_station(struct iapp_data *iapp, struct sta_info *sta);
++-struct iapp_data * iapp_init(struct hostapd_data *hapd, const char *iface);
++-void iapp_deinit(struct iapp_data *iapp);
++-
++-#else /* CONFIG_IAPP */
++-
++-static inline void iapp_new_station(struct iapp_data *iapp,
++-				    struct sta_info *sta)
++-{
++-}
++-
++-static inline struct iapp_data * iapp_init(struct hostapd_data *hapd,
++-					   const char *iface)
++-{
++-	return NULL;
++-}
++-
++-static inline void iapp_deinit(struct iapp_data *iapp)
++-{
++-}
++-
++-#endif /* CONFIG_IAPP */
++-
++-#endif /* IAPP_H */
++diff --git a/src/utils/wpa_debug.h b/src/utils/wpa_debug.h
++index 1fe0b7db7..c94c4391f 100644
++--- a/src/utils/wpa_debug.h
+++++ b/src/utils/wpa_debug.h
++@@ -305,7 +305,6 @@ void hostapd_logger_register_cb(hostapd_logger_cb_func func);
++ #define HOSTAPD_MODULE_RADIUS		0x00000004
++ #define HOSTAPD_MODULE_WPA		0x00000008
++ #define HOSTAPD_MODULE_DRIVER		0x00000010
++-#define HOSTAPD_MODULE_IAPP		0x00000020
++ #define HOSTAPD_MODULE_MLME		0x00000040
++ 
++ enum hostapd_logger_level {
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb
+index 68dc1237025..1f38eee0ffe 100644
+--- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb
+@@ -12,6 +12,7 @@ SRC_URI = " \
+     file://init \
+     file://hostapd.service \
+     file://CVE-2019-16275.patch \
++    file://CVE-2019-5061.patch \
+ "
  
--SRC_URI = "git://github.com/libyui/libyui.git \
-+SRC_URI = "git://github.com/libyui/libyui-old.git \
-            file://0001-Fix-build-with-clang.patch \
-            file://0001-Use-relative-install-paths-for-CMake.patch \
-            "
+ SRC_URI[md5sum] = "f188fc53a495fe7af3b6d77d3c31dee8"
 -- 
 2.17.1
 
