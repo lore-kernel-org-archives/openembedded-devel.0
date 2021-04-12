@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.33098.1618236147673206164
+ by mx.groups.io with SMTP id smtpd.web08.19171.1618236148254150832
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 12 Apr 2021 07:02:28 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=40390 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lVx90-0002MB-HG; Mon, 12 Apr 2021 17:02:27 +0300
+	id 1lVx91-0002MB-1Z; Mon, 12 Apr 2021 17:02:27 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/7] python3-typed-ast: Upgrade 1.4.2 -> 1.4.3
-Date: Mon, 12 Apr 2021 17:02:10 +0300
-Message-Id: <20210412140212.8395-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 6/7] python3-backports-functools-lru-cache: Upgrade 1.6.3 -> 1.6.4
+Date: Mon, 12 Apr 2021 17:02:11 +0300
+Message-Id: <20210412140212.8395-6-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210412140212.8395-1-leon.anavi@konsulko.com>
 References: <20210412140212.8395-1-leon.anavi@konsulko.com>
@@ -30,32 +30,33 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.4.3:
+Upgrade to release 1.6.4:
 
-- Fix compilation on python 3.10
-- Add Python 3.10 classifier
+- For test dependencies, when indicating Python 3, use >=3 instead
+  of >3
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-typed-ast_1.4.2.bb => python3-typed-ast_1.4.3.bb}  | 2 +-
+ ..._1.6.3.bb => python3-backports-functools-lru-cache_1.6.4.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-typed-ast_1.4.2.bb => python3-typed-ast_1.4.3.bb} (78%)
+ rename meta-python/recipes-devtools/python/{python3-backports-functools-lru-cache_1.6.3.bb => python3-backports-functools-lru-cache_1.6.4.bb} (88%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-typed-ast_1.4.2.bb b/meta-python/recipes-devtools/python/python3-typed-ast_1.4.3.bb
-similarity index 78%
-rename from meta-python/recipes-devtools/python/python3-typed-ast_1.4.2.bb
-rename to meta-python/recipes-devtools/python/python3-typed-ast_1.4.3.bb
-index 09f387ca6..c482251b8 100644
---- a/meta-python/recipes-devtools/python/python3-typed-ast_1.4.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-typed-ast_1.4.3.bb
-@@ -7,6 +7,6 @@ PYPI_PACKAGE = "typed_ast"
+diff --git a/meta-python/recipes-devtools/python/python3-backports-functools-lru-cache_1.6.3.bb b/meta-python/recipes-devtools/python/python3-backports-functools-lru-cache_1.6.4.bb
+similarity index 88%
+rename from meta-python/recipes-devtools/python/python3-backports-functools-lru-cache_1.6.3.bb
+rename to meta-python/recipes-devtools/python/python3-backports-functools-lru-cache_1.6.4.bb
+index 0d232dcab..c90ffa1b4 100644
+--- a/meta-python/recipes-devtools/python/python3-backports-functools-lru-cache_1.6.3.bb
++++ b/meta-python/recipes-devtools/python/python3-backports-functools-lru-cache_1.6.4.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7a7126e068206290f3fe9f8d6c713ea6"
  
- inherit pypi setuptools3
+ PYPI_PACKAGE = "backports.functools_lru_cache"
  
--SRC_URI[sha256sum] = "9fc0b3cb5d1720e7141d103cf4819aea239f7d136acf9ee4a69b047b7986175a"
-+SRC_URI[sha256sum] = "fb1bbeac803adea29cedd70781399c99138358c26d05fcbd23c13016b7f5ec65"
+-SRC_URI[sha256sum] = "d84e126e2a29e4fde8931ff8131240bbf30a0e7dbcc3897a8dbd8ea5ac11419c"
++SRC_URI[sha256sum] = "d5ed2169378b67d3c545e5600d363a923b09c456dab1593914935a68ad478271"
  
- BBCLASSEXTEND = "native"
+ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+ 
 -- 
 2.17.1
 
