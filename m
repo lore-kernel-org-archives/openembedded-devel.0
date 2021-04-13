@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.6737.1618307330228807491
+ by mx.groups.io with SMTP id smtpd.web11.6877.1618307330762496783
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Apr 2021 02:48:50 -0700
+ Tue, 13 Apr 2021 02:48:51 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=41218 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lWFf0-0007BP-3F; Tue, 13 Apr 2021 12:48:44 +0300
+	id 1lWFf2-0007BP-2k; Tue, 13 Apr 2021 12:48:44 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/4] python3-pandas: Upgrade 1.2.3 -> 1.2.4
-Date: Tue, 13 Apr 2021 12:48:34 +0300
-Message-Id: <20210413094835.20465-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/4] python3-humanize: Upgrade 3.4.0 -> 3.4.1
+Date: Tue, 13 Apr 2021 12:48:35 +0300
+Message-Id: <20210413094835.20465-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210413094835.20465-1-leon.anavi@konsulko.com>
 References: <20210413094835.20465-1-leon.anavi@konsulko.com>
@@ -30,45 +30,29 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.2.4:
+Upgrade to release 3.4.1:
 
-- Fixed regression in DataFrame.sum() when min_count greater than
-  the DataFrame shape was passed resulted in a ValueError
-- Fixed regression in DataFrame.to_json() raising AttributeError
-  when run on PyPy
-- Fixed regression in (in)equality comparison of pd.NaT with a
-  non-datetimelike numpy array returning a scalar instead of an
-  array
-- Fixed regression in DataFrame.where() not returning a copy in
-  the case of an all True condition
-- Fixed regression in DataFrame.replace() raising IndexError when
-  regex was a multi-key dictionary
-- Fixed regression in repr of floats in an object column not
-  respecting float_format when printed in the console or outputted
-  through DataFrame.to_string(), DataFrame.to_html(), and
-  DataFrame.to_latex()
-- Fixed regression in NumPy ufuncs such as np.add not passing
-  through all arguments for DataFrame
+- Add Catalan binary translation
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-pandas_1.2.3.bb => python3-pandas_1.2.4.bb} | 2 +-
+ .../{python3-humanize_3.4.0.bb => python3-humanize_3.4.1.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pandas_1.2.3.bb => python3-pandas_1.2.4.bb} (88%)
+ rename meta-python/recipes-devtools/python/{python3-humanize_3.4.0.bb => python3-humanize_3.4.1.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pandas_1.2.3.bb b/meta-python/recipes-devtools/python/python3-pandas_1.2.4.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-pandas_1.2.3.bb
-rename to meta-python/recipes-devtools/python/python3-pandas_1.2.4.bb
-index 8c36c21bb9..54fa910a98 100644
---- a/meta-python/recipes-devtools/python/python3-pandas_1.2.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pandas_1.2.4.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "http://pandas.pydata.org/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c2a8f987b2ce77c368c6b3e1b5b10774"
+diff --git a/meta-python/recipes-devtools/python/python3-humanize_3.4.0.bb b/meta-python/recipes-devtools/python/python3-humanize_3.4.1.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-humanize_3.4.0.bb
+rename to meta-python/recipes-devtools/python/python3-humanize_3.4.1.bb
+index f9c22e8914..5ffc2b5938 100644
+--- a/meta-python/recipes-devtools/python/python3-humanize_3.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-humanize_3.4.1.bb
+@@ -5,7 +5,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d"
  
--SRC_URI[sha256sum] = "df6f10b85aef7a5bb25259ad651ad1cc1d6bb09000595cab47e718cbac250b1d"
-+SRC_URI[sha256sum] = "649ecab692fade3cbfcf967ff936496b0cfba0af00a55dfaacd82bdda5cb2279"
+-SRC_URI[sha256sum] = "096b9ae6d1d56321d3d81f17117c2068179d7b4f7f73ba4baf302726923b48ec"
++SRC_URI[sha256sum] = "6e04cdd75d66074c34ff93c30a2ad6d19d91202a65c1bd400b2edeedae399bda"
  
  inherit pypi setuptools3
  
