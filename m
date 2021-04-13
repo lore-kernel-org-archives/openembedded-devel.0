@@ -1,55 +1,91 @@
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
- by mx.groups.io with SMTP id smtpd.web12.10023.1618323947689472882
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
+ by mx.groups.io with SMTP id smtpd.web10.428.1618326314371205905
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Apr 2021 07:25:47 -0700
+ Tue, 13 Apr 2021 08:05:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: intel.com, ip: 192.55.52.88, mailfrom: naveen.kumar.saini@intel.com)
-IronPort-SDR: JJrGc0KPqdU4lhbyvnPYTzcHFoFn+uwDYRhU4293dQW6OrTrvLHSO7xra46b1V1awDqvPoIuE9
- fTnozVuZs41g==
-X-IronPort-AV: E=McAfee;i="6200,9189,9953"; a="214903750"
-X-IronPort-AV: E=Sophos;i="5.82,219,1613462400"; 
-   d="scan'208";a="214903750"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Apr 2021 07:25:46 -0700
-IronPort-SDR: siKqFWly2fF4KO+NvHfCUfw9i776iQfr7rAHXwbVGjttmtcxIX4mQFsUMqIHX+jNJqjwWdA8KM
- bgCir2+6e1lQ==
-X-IronPort-AV: E=Sophos;i="5.82,219,1613462400"; 
-   d="scan'208";a="424275192"
-Received: from saininav-desk1.png.intel.com ([172.30.199.23])
-  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Apr 2021 07:25:44 -0700
-From: "Naveen Saini" <naveen.kumar.saini@intel.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=i7efvA5y;
+ spf=pass (domain: gmail.com, ip: 209.85.216.46, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f46.google.com with SMTP id z22-20020a17090a0156b029014d4056663fso9165414pje.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Apr 2021 08:05:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=TtWE+TfDZgvFtn7UVKT00NwXpHWY2aGqtSTmoRinhww=;
+        b=i7efvA5yvLMKCRtBx3+vY7eyheu7YeUr1PcRytvlTgw7RB1NWUV96eEk6PtcsUKWUj
+         i4XWUF9W/cPREKWXud99e/X6T6WVl5k+if5OXnJsM8rmqlre4Cvs1ASQf10/a5kWSAbT
+         hdLYmJGpeZFqn8+NbQjyLrZBP9QvrmoK9vTFpmJ13V3TKE0/fsdxJkYqLAW/lzXhVIDn
+         GQBVE8zRHc+ujz2PgdXSuvAPX7dbeCRa/VO4ifEMj97I36talw6zPmagtVR9T30PCaG6
+         7Rbbmg+3QA1jZEoskjmyLkR4RNqlnV9MyzvS1oFa+rKral+aUOI/x0Kusg8v190C+6K4
+         soeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=TtWE+TfDZgvFtn7UVKT00NwXpHWY2aGqtSTmoRinhww=;
+        b=UGTYMgdWE6xK3F3WVMjv8JmU4euBAZRrcKBP8Ih0SH83q9oYd4Hmhztj3mcDViYGHq
+         j1qWKhrqAeuvE3N747n8Q9X6p1xifrPBaBnPdTkiLV8pMUjq+qjFtzHfGP+7SXdloTyB
+         P3fzdZTJjwdjtTF8lWDjD+T1WQoY1kJ0mUV2h9rBYMI2Jqe15AWV7wEt/zEJ48XQdxWE
+         yZEou1o87j9BTmE4/80mqExq9bh4fwPKZRXCfdlX3fCg/VvH/yjKuG5QMb8OVO6EMq3o
+         r8DOuoheAImi53tgNIRZ80gblrMA/dZcf1itWEiH9N0AKRdbIO/oadAknxgdEolc6Zxm
+         lcsg==
+X-Gm-Message-State: AOAM532PNJjOR7q6y3B0pGqqKwdWlBoIamrk+x0YXgdovqxFxNP9PLOh
+	TYpbjZqyLJV/yxakxIK039nYWUxTMc/NLg==
+X-Google-Smtp-Source: ABdhPJzv7HSewwhvWtPhsgAEj4IhV1Gi5rOE7L26bC5cv6AlEpMPCUt1DwhD35NC6Sj1cpMfq75iKw==
+X-Received: by 2002:a17:90a:ec09:: with SMTP id l9mr463677pjy.141.1618326313605;
+        Tue, 13 Apr 2021 08:05:13 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::630])
+        by smtp.gmail.com with ESMTPSA id u18sm12814524pfm.4.2021.04.13.08.05.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 13 Apr 2021 08:05:12 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] ocl-icd: upgrade 2.2.14 -> 2.3.0
-Date: Tue, 13 Apr 2021 22:37:44 +0800
-Message-Id: <20210413143744.11165-1-naveen.kumar.saini@intel.com>
-X-Mailer: git-send-email 2.17.1
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Naveen Saini <naveen.kumar.saini@intel.com>
+Subject: [meta-oe][PATCH v2] tbb: Fix build with musl
+Date: Tue, 13 Apr 2021 08:05:11 -0700
+Message-Id: <20210413150511.671001-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.31.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Release tag:
-https://github.com/OCL-dev/ocl-icd/releases/tag/v2.3.0
+Need to link libucontext on musl
+Additionally, mips also needs libatomic
 
-Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Naveen Saini <naveen.kumar.saini@intel.com>
 ---
- .../recipes-core/opencl/{ocl-icd_git.bb => ocl-icd_2.3.0.bb}   | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-oe/recipes-core/opencl/{ocl-icd_git.bb => ocl-icd_2.3.0.bb} (84%)
+v2: libatomic is also needed on glibc/mips
 
-diff --git a/meta-oe/recipes-core/opencl/ocl-icd_git.bb b/meta-oe/recipes-core/opencl/ocl-icd_2.3.0.bb
-similarity index 84%
-rename from meta-oe/recipes-core/opencl/ocl-icd_git.bb
-rename to meta-oe/recipes-core/opencl/ocl-icd_2.3.0.bb
-index 2e43939b9..d94e4c2f0 100644
---- a/meta-oe/recipes-core/opencl/ocl-icd_git.bb
-+++ b/meta-oe/recipes-core/opencl/ocl-icd_2.3.0.bb
-@@ -7,8 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1238d5bccbb6bda30654e48dcc0a554b"
- 
- SRC_URI = "git://github.com/OCL-dev/ocl-icd.git;protocol=https"
- 
--PV = "2.2.14+git${SRCPV}"
--SRCREV = "109694ef2686fe25538c05f3c856912f8ef571a9"
-+SRCREV = "59c098b6b1f97a339e3e5308499aee6538ecea40"
- 
- S = "${WORKDIR}/git"
- 
+ meta-oe/recipes-support/tbb/tbb_2021.2.0.bb | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+index d0e2311402..b05a59dc70 100644
+--- a/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
++++ b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+@@ -6,6 +6,9 @@ DESCRIPTION = "Parallelism library for C++ - runtime files \
+ HOMEPAGE = "https://software.intel.com/en-us/tbb"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=86d3f3a95c324c9479bd8986968f4327"
++
++DEPENDS_append_libc-musl = " libucontext"
++
+ BRANCH = "onetbb_2021"
+ SRCREV = "2dba2072869a189b9fdab3ffa431d3ea49059a19"
+ SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
+@@ -33,3 +36,10 @@ EXTRA_OECMAKE += " \
+ # ...
+ # | make[1]: *** [concurrent_queue.o] Error 1
+ ARM_INSTRUCTION_SET = "arm"
++
++ASNEEDED = ""
++
++LDFLAGS_append_mips = " -latomic"
++LDFLAGS_append_mipsel = " -latomic"
++
++LDFLAGS_append_libc-musl = " -lucontext"
 -- 
-2.17.1
+2.31.1
 
