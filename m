@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.10116.1618389335079336824
+ by mx.groups.io with SMTP id smtpd.web08.10022.1618389336025801109
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Apr 2021 01:35:35 -0700
+ Wed, 14 Apr 2021 01:35:36 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=59772 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lWazj-00040c-6I; Wed, 14 Apr 2021 11:35:32 +0300
+	id 1lWazl-00040c-PH; Wed, 14 Apr 2021 11:35:34 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/4] python3-colorlog: Upgrade 4.8.0 -> 5.0.1
-Date: Wed, 14 Apr 2021 11:35:23 +0300
-Message-Id: <20210414083525.10948-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/4] python3-croniter: Upgrade 1.0.11 -> 1.0.12
+Date: Wed, 14 Apr 2021 11:35:25 +0300
+Message-Id: <20210414083525.10948-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210414083525.10948-1-leon.anavi@konsulko.com>
 References: <20210414083525.10948-1-leon.anavi@konsulko.com>
@@ -30,39 +30,34 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 5.0.1:
+Upgrade to release 1.0.12:
 
-- Fix colorlog.basicConfig does not accept '{' style
-- Fix linter errors
-
-License-Update: Update year
+- Add support for hashed/random/keyword expressions
+- Review support support for hashed/random/keyword expression and
+  add expanders reactor
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-colorlog_4.8.0.bb => python3-colorlog_5.0.1.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-colorlog_4.8.0.bb => python3-colorlog_5.0.1.bb} (54%)
+ .../{python3-croniter_1.0.11.bb => python3-croniter_1.0.12.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-croniter_1.0.11.bb => python3-croniter_1.0.12.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-colorlog_4.8.0.bb b/meta-python/recipes-devtools/python/python3-colorlog_5.0.1.bb
-similarity index 54%
-rename from meta-python/recipes-devtools/python/python3-colorlog_4.8.0.bb
-rename to meta-python/recipes-devtools/python/python3-colorlog_5.0.1.bb
-index 6f9b8d47a4..61b8152a1e 100644
---- a/meta-python/recipes-devtools/python/python3-colorlog_4.8.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-colorlog_5.0.1.bb
-@@ -1,10 +1,10 @@
- DESCRIPTION = "A colored formatter for the python logging module"
- HOMEPAGE = "https://github.com/borntyping/python-colorlog"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=85a1d478cd35d62763a1419e948bdde4"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=5c3c6ebdec7792ae12df8d1c0a46b26a"
+diff --git a/meta-python/recipes-devtools/python/python3-croniter_1.0.11.bb b/meta-python/recipes-devtools/python/python3-croniter_1.0.12.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-croniter_1.0.11.bb
+rename to meta-python/recipes-devtools/python/python3-croniter_1.0.12.bb
+index ca9bf71a56..fd70468953 100644
+--- a/meta-python/recipes-devtools/python/python3-croniter_1.0.11.bb
++++ b/meta-python/recipes-devtools/python/python3-croniter_1.0.12.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=b8ee59850b882cbf623188489ea748e2"
+ 
+ PYPI_PACKAGE = "croniter"
+ 
+-SRC_URI[sha256sum] = "cd89bcbed4d79f56bbf2c9415c2bbbfd09fadc8a59dbae3898fbca5bab34103d"
++SRC_URI[sha256sum] = "3603ef0d60fc6df98ce356c01529de90b06a002379b9f5e9eae981fb9c1fd936"
  
  inherit pypi setuptools3
  
- PYPI_PACKAGE = "colorlog"
- 
--SRC_URI[sha256sum] = "59b53160c60902c405cdec28d38356e09d40686659048893e026ecbd589516b1"
-+SRC_URI[sha256sum] = "f17c013a06962b02f4449ee07cfdbe6b287df29efc2c9a1515b4a376f4e588ea"
 -- 
 2.17.1
 
