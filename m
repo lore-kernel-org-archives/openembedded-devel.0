@@ -1,562 +1,218 @@
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
- by mx.groups.io with SMTP id smtpd.web12.1609.1618339390187081770
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web08.6281.1618360724921641418
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Apr 2021 11:43:10 -0700
+ Tue, 13 Apr 2021 17:38:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=cFw9/pdD;
- spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f172.google.com with SMTP id c17so12013698pfn.6
-        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Apr 2021 11:43:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=o+NQ5if9;
+ spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f51.google.com with SMTP id w23so21555807edx.7
+        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Apr 2021 17:38:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:references:from:organization:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=Vok2Ptir0+X4MeNdVj3gDA59qllzCXvBy0I/Dc4IRsA=;
-        b=cFw9/pdDpsKnY+DKOWiZ32MMBOfGv8Jtt0L3Jke+vtG0/onQcBoGsfLD2LBMqbrgWl
-         DUDZRXXif3pJCSuFesQDbu99WlHQsTlp/CO1N8KLY6WINN7b6FUmcgkf3kDvso6cUh8O
-         9Jxm8KXMBTIMXMR1p6+sL0iiGVrPV+IVvlR7KcHkQG7xKU3LA6tN1PF9NnCeDQ3SSbo1
-         fpY2ln12fgHTydSxHq4JqfyBJ6UZwJbUXAjdX88906JGz5cJAq3PVFSynYRWFl2mzQdG
-         VH/SqPmI/GvKwqOFNDy2nnUhM5a5EUOoQedEaThIsodHCJ2qxumGJvm3zfbnm97+di0+
-         mSEA==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=8ZTMv8M421EWb2tQFf3vC4jgY4a9k+x8FVZUVL2DEzc=;
+        b=o+NQ5if9xnuzkQ5fAqeHJubXL1uGBvWrXruJSPqWA4+ummAMonLAFkIcMsu+/bpEYD
+         xZE8j7v1MjCuBzouysv4jYlAHCOTkeFI6kUMt4phJ8J0yjfq1XgTiuleADz2mRxEUlya
+         ieWLY4+R1D3cfBJpfJKGn92z8Z/cuLq/B2JH1j8rYba+qbQUvvGSnub+IYyxiO5YNMso
+         YbZ8tAsFKgRd6frzHjh3PmFW20Z2U7WReneSS5j//bXQcZ6T85xVULDyWEWfb89ijPCJ
+         3sGjXOy5w8LFmWe4LQ8goyOAeotrHTt2sHMWorTHuvGkTsfUflgbV++LnJ8BKSMCH5C7
+         KOQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=Vok2Ptir0+X4MeNdVj3gDA59qllzCXvBy0I/Dc4IRsA=;
-        b=i2k9o5dacaD7davH2LOi8QHPAg4mlmcfqOV0Lt1KIBujdH9yFZpQKe2M9r40uoB1Ko
-         qCZ9f00Rr702WQ5swaFcgsEigBY+cssRJ4Yc2bT8lJaQbKyJqnZOKHPXXgvZzgS+auqD
-         sXQ86lOxJRwDQQYgzgyQKoKQaP+77AU9bM/zCV+5ZuK8RCnnSJo+S58/LmUP6l4sb7em
-         gR0H3mEZjCvnDjg+5rbdx1SB2JT5WVvlL87U/W+0KGzH+dXE2HKxv6qFp6UpV+cUecic
-         KSRQplMHj0nnHE4wcJE64gG+df63gqyE1jrrAW9kM31bHi5L59whbCSkVGdlo1hrwTz0
-         T+lQ==
-X-Gm-Message-State: AOAM5336ukOQL/jePKfJiE9hxHzt6tCi8WiFjIh5e7GCZvHzbTE3Z/Zh
-	jcTqAaij2PNpMfapdvEV1bAA4U+CRRMdaQ==
-X-Google-Smtp-Source: ABdhPJyC3oHKl1h0Y/xl1+fRFhSW1Cb/lLjp3+DLb2n+wWW6KcUbUHLy/MgukGF2eXpMPnLbzggZjQ==
-X-Received: by 2002:a63:d146:: with SMTP id c6mr34392859pgj.131.1618339388828;
-        Tue, 13 Apr 2021 11:43:08 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:a0f0:45ab:75b7:17a:f9f9? ([2601:646:9200:a0f0:45ab:75b7:17a:f9f9])
-        by smtp.gmail.com with ESMTPSA id m9sm15395494pgt.65.2021.04.13.11.43.08
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 13 Apr 2021 11:43:08 -0700 (PDT)
-Subject: Re: [oe] [meta-oe][PATCH] networkmanager: upgrade 1.28.0 -> 1.30.2
-To: =?UTF-8?Q?Vin=c3=adcius_Ossanes_Aquino?= <voa.aquino@gmail.com>,
- openembedded-devel@lists.openembedded.org
-References: <20210413174529.458526-1-voa.aquino@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <06b6a494-2d6f-1a4b-3ff9-4d4fb5f8a0e3@gmail.com>
-Date: Tue, 13 Apr 2021 11:43:06 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.9.1
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=8ZTMv8M421EWb2tQFf3vC4jgY4a9k+x8FVZUVL2DEzc=;
+        b=hu+NkJfEgtmN3lANmLU0kS37ERsvIWB4Ioz5Igtz4CoLZ6pFwf5AjKWaMQ+RyJnTgf
+         srqFH0p0zPWSlzLTa1yHg6fmtg+3fV2Oi+avciDDFw6nhdrD0Ezao25dTBjXGItij5p5
+         FqSM+rYLqq+nDdXL/6/L0Y03Rvq2WZpX6QOG4lsyE1jzzI5BB/l9blfs7BuS84mAxLIe
+         AAGZCxNLWByi+qBQsRGeyeMWchhfTUkeWDtr+RY+naBmHpX4OOrJ/S8fAVST/lsu5WGH
+         tqNegRf+0MusN6RztbROa6u9IIWLjqKujVqqyfHjDQsQJ49FGQjV331ZdN6yZzQNXONp
+         ikwA==
+X-Gm-Message-State: AOAM531ce9URxKGuNLQ7x7vJ5VF0oe4OrxSv6l0u4gP+wt2f1oOvo4mR
+	Y8lflmwqWAi/Hi8Z6fjdP8YLEAL8AYQ=
+X-Google-Smtp-Source: ABdhPJyKXg1OvqOoPu3tems29yES4Qpi9ZSav3d2zyVWPwX3kLIT8Ey+FMB6k/ulI5Q1EcU/8aotFw==
+X-Received: by 2002:a05:6402:2787:: with SMTP id b7mr37836073ede.225.1618360723300;
+        Tue, 13 Apr 2021 17:38:43 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id z17sm463950edx.36.2021.04.13.17.38.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 13 Apr 2021 17:38:43 -0700 (PDT)
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][hardknott][master][PATCH 2/2] opencv: link sfm module with Glog
+Date: Wed, 14 Apr 2021 02:38:40 +0200
+Message-Id: <20210414003840.2175988-2-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20210414003840.2175988-1-Martin.Jansa@gmail.com>
+References: <20210414003840.2175988-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20210413174529.458526-1-voa.aquino@gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-is it same as what is in master ?
+* fixes build issue when dnn PACKAGECONFIG is enabled and ld-is-gold in DIS=
+TRO_FEATURES
 
-https://git.openembedded.org/meta-openembedded/commit/?id=12a241278aec8893d65dc6fa8d045b0bac0220ea
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../opencv/0001-sfm-link-with-Glog_LIBS.patch | 44 +++++++++++++++++++
+ .../recipes-support/opencv/opencv_4.5.2.bb    |  1 +
+ 2 files changed, 45 insertions(+)
+ create mode 100644 meta-oe/recipes-support/opencv/opencv/0001-sfm-link-wit=
+h-Glog_LIBS.patch
 
-if there is diff then rebase and resend.
+diff --git a/meta-oe/recipes-support/opencv/opencv/0001-sfm-link-with-Glog_=
+LIBS.patch b/meta-oe/recipes-support/opencv/opencv/0001-sfm-link-with-Glog_=
+LIBS.patch
+new file mode 100644
+index 0000000000..7b2c4100a2
+--- /dev/null
++++ b/meta-oe/recipes-support/opencv/opencv/0001-sfm-link-with-Glog_LIBS.pa=
+tch
+@@ -0,0 +1,44 @@
++From ffe20fc4ec46c6b491eff29a38f90686d4d035f6 Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Mon, 12 Apr 2021 20:37:40 +0000
++Subject: [PATCH] sfm: link with Glog_LIBS
++
++* in 4.5.0 there was explicit linkage with GLOG_LIBRARY, but since 4.5.1 w=
+ith:
++  https://github.com/opencv/opencv_contrib/commit/23ee62a19b7a3e50d6dbf295=
+359d8b1aff2e03fd
++
++  it's gone, probably because Glog_FOUND is already set from Ceres,
++  but then GLOG_LIBRARIES is empty in LIBMV_LIGHT_LIBS and build with gold=
+ fails:
++
++FAILED: bin/example_tutorial_perspective_correction
++: && TOPDIR/tmp-glibc/work/core2-64-oe-linux/opencv/4.5.2-r0/recipe-sysroo=
+t-native/usr/bin/x86_64-oe-linux/x86_64-oe-linux-g++ -m64 -march=3Dcore2 -m=
+tune=3Dcore2 -msse3 -mfpmath=3Dsse -ITOPDIR/tmp-glibc/work/core2-64-oe-linu=
+x/opencv/4.5.2-r0/git/include  -fstack-protector-strong  -O2 -D_FORTIFY_SOU=
+RCE=3D2 -Wformat -Wformat-security -Werror=3Dformat-security  --sysroot=3DT=
+OPDIR/tmp-glibc/work/core2-64-oe-linux/opencv/4.5.2-r0/recipe-sysroot  -O2 =
+-pipe -g -feliminate-unused-debug-types -fmacro-prefix-map=3DTOPDIR/tmp-gli=
+bc/work/core2-64-oe-linux/opencv/4.5.2-r0=3D/usr/src/debug/opencv/4.5.2-r0 =
+                     -fdebug-prefix-map=3DTOPDIR/tmp-glibc/work/core2-64-oe=
+-linux/opencv/4.5.2-r0=3D/usr/src/debug/opencv/4.5.2-r0                    =
+  -fdebug-prefix-map=3DTOPDIR/tmp-glibc/work/core2-64-oe-linux/opencv/4.5.2=
+-r0/recipe-sysroot=3D                      -fdebug-prefix-map=3DTOPDIR/tmp-=
+glibc/work/core2-64-oe-linux/opencv/4.5.2-r0/recipe-sysroot-native=3D  -fvi=
+sibility-inlines-hidden  -m64 -march=3Dcore2 -mtune=3Dcore2 -msse3 -mfpmath=
+=3Dsse -ITOPDIR/tmp-glibc/work/core2-64-oe-linux/opencv/4.5.2-r0/git/includ=
+e  -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=3D2 -Wformat -Wformat-se=
+curity -Werror=3Dformat-security  --sysroot=3DTOPDIR/tmp-glibc/work/core2-6=
+4-oe-linux/opencv/4.5.2-r0/recipe-sysroot   -fsigned-char -W -Wall -Werror=
+=3Dreturn-type -Werror=3Dnon-virtual-dtor -Werror=3Daddress -Werror=3Dseque=
+nce-point -Wformat -Werror=3Dformat-security -Wmissing-declarations -Wundef=
+ -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Wsugges=
+t-override -Wno-delete-non-virtual-dtor -Wno-comment -Wimplicit-fallthrough=
+=3D3 -Wno-strict-overflow -fdiagnostics-show-option -Wno-long-long -pthread=
+ -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse -msse2 -ms=
+se3 -mssse3 -DNDEBUG  -DNDEBUG  -m64 -march=3Dcore2 -mtune=3Dcore2 -msse3 -=
+mfpmath=3Dsse -ITOPDIR/tmp-glibc/work/core2-64-oe-linux/opencv/4.5.2-r0/git=
+/include  -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=3D2 -Wformat -Wfo=
+rmat-security -Werror=3Dformat-security  --sysroot=3DTOPDIR/tmp-glibc/work/=
+core2-64-oe-linux/opencv/4.5.2-r0/recipe-sysroot  -O2 -pipe -g -feliminate-=
+unused-debug-types -fmacro-prefix-map=3DTOPDIR/tmp-glibc/work/core2-64-oe-l=
+inux/opencv/4.5.2-r0=3D/usr/src/debug/opencv/4.5.2-r0                      =
+-fdebug-prefix-map=3DTOPDIR/tmp-glibc/work/core2-64-oe-linux/opencv/4.5.2-r=
+0=3D/usr/src/debug/opencv/4.5.2-r0                      -fdebug-prefix-map=
+=3DTOPDIR/tmp-glibc/work/core2-64-oe-linux/opencv/4.5.2-r0/recipe-sysroot=
+=3D                      -fdebug-prefix-map=3DTOPDIR/tmp-glibc/work/core2-6=
+4-oe-linux/opencv/4.5.2-r0/recipe-sysroot-native=3D  -fvisibility-inlines-h=
+idden  -m64 -march=3Dcore2 -mtune=3Dcore2 -msse3 -mfpmath=3Dsse -ITOPDIR/tm=
+p-glibc/work/core2-64-oe-linux/opencv/4.5.2-r0/git/include  -fstack-protect=
+or-strong  -O2 -D_FORTIFY_SOURCE=3D2 -Wformat -Wformat-security -Werror=3Df=
+ormat-security  --sysroot=3DTOPDIR/tmp-glibc/work/core2-64-oe-linux/opencv/=
+4.5.2-r0/recipe-sysroot -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -Wl,=
+-z,relro,-z,now -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -Wl,-z,relro=
+,-z,now  -Wl,--gc-sections -Wl,--as-needed samples/cpp/CMakeFiles/example_t=
+utorial_perspective_correction.dir/tutorial_code/features2D/Homography/pers=
+pective_correction.cpp.o -o bin/example_tutorial_perspective_correction  -l=
+dl  -lm  -lpthread  -lrt  lib/libopencv_gapi.so.4.5.2  lib/libopencv_stitch=
+ing.so.4.5.2  lib/libopencv_ts.so.4.5.2  lib/libopencv_alphamat.so.4.5.2  l=
+ib/libopencv_aruco.so.4.5.2  lib/libopencv_bgsegm.so.4.5.2  lib/libopencv_b=
+ioinspired.so.4.5.2  lib/libopencv_ccalib.so.4.5.2  lib/libopencv_dnn_objde=
+tect.so.4.5.2  lib/libopencv_dnn_superres.so.4.5.2  lib/libopencv_dpm.so.4.=
+5.2  lib/libopencv_face.so.4.5.2  lib/libopencv_fuzzy.so.4.5.2  lib/libopen=
+cv_hfs.so.4.5.2  lib/libopencv_img_hash.so.4.5.2  lib/libopencv_intensity_t=
+ransform.so.4.5.2  lib/libopencv_line_descriptor.so.4.5.2  lib/libopencv_mc=
+c.so.4.5.2  lib/libopencv_quality.so.4.5.2  lib/libopencv_rapid.so.4.5.2  l=
+ib/libopencv_reg.so.4.5.2  lib/libopencv_rgbd.so.4.5.2  lib/libopencv_salie=
+ncy.so.4.5.2  lib/libopencv_sfm.so.4.5.2  lib/libopencv_stereo.so.4.5.2  li=
+b/libopencv_structured_light.so.4.5.2  lib/libopencv_superres.so.4.5.2  lib=
+/libopencv_surface_matching.so.4.5.2  lib/libopencv_tracking.so.4.5.2  lib/=
+libopencv_videostab.so.4.5.2  lib/libopencv_wechat_qrcode.so.4.5.2  lib/lib=
+opencv_xfeatures2d.so.4.5.2  lib/libopencv_xobjdetect.so.4.5.2  lib/libopen=
+cv_xphoto.so.4.5.2  lib/libopencv_shape.so.4.5.2  lib/libopencv_highgui.so.=
+4.5.2  lib/libopencv_datasets.so.4.5.2  lib/libopencv_ml.so.4.5.2  lib/libo=
+pencv_plot.so.4.5.2  lib/libopencv_phase_unwrapping.so.4.5.2  lib/libopencv=
+_optflow.so.4.5.2  lib/libopencv_ximgproc.so.4.5.2  lib/libopencv_videoio.s=
+o.4.5.2  lib/libopencv_video.so.4.5.2  lib/libopencv_dnn.so.4.5.2  lib/libo=
+pencv_imgcodecs.so.4.5.2  lib/libopencv_objdetect.so.4.5.2  lib/libopencv_c=
+alib3d.so.4.5.2  lib/libopencv_features2d.so.4.5.2  lib/libopencv_flann.so.=
+4.5.2  lib/libopencv_photo.so.4.5.2  lib/libopencv_imgproc.so.4.5.2  lib/li=
+bopencv_core.so.4.5.2  -Wl,-rpath-link,TOPDIR/tmp-glibc/work/core2-64-oe-li=
+nux/opencv/4.5.2-r0/build/lib && :
++lib/libopencv_sfm.so.4.5.2: error: undefined reference to 'google::LogMess=
+age::LogMessage(char const*, int)'
++lib/libopencv_sfm.so.4.5.2: error: undefined reference to 'google::LogMess=
+age::stream()'
++lib/libopencv_sfm.so.4.5.2: error: undefined reference to 'google::LogMess=
+age::~LogMessage()'
++lib/libopencv_sfm.so.4.5.2: error: undefined reference to 'google::kLogSit=
+eUninitialized'
++lib/libopencv_sfm.so.4.5.2: error: undefined reference to 'fLI::FLAGS_v'
++lib/libopencv_sfm.so.4.5.2: error: undefined reference to 'google::InitVLO=
+G3__(int**, int*, char const*, int)'
++lib/libopencv_sfm.so.4.5.2: error: undefined reference to 'google::LogMess=
+ageFatal::LogMessageFatal(char const*, int)'
++lib/libopencv_sfm.so.4.5.2: error: undefined reference to 'google::LogMess=
+ageFatal::~LogMessageFatal()'
++collect2: error: ld returned 1 exit status
++
++  Add Glog_LIBS which is set to the same value as GLOG_LIBRARIES used to b=
+e.
++
++Upstream-Status: Submitted [https://github.com/opencv/opencv_contrib/pull/=
+2923]
++
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ modules/sfm/CMakeLists.txt | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/modules/sfm/CMakeLists.txt b/modules/sfm/CMakeLists.txt
++index 045a1fe6e..ee7cecdac 100644
++--- a/modules/sfm/CMakeLists.txt
+++++ b/modules/sfm/CMakeLists.txt
++@@ -84,6 +84,7 @@ set(LIBMV_LIGHT_LIBS
++   multiview
++   numeric
++   ${GLOG_LIBRARIES}
+++  ${Glog_LIBS}
++   ${GFLAGS_LIBRARIES}
++ )
++=20
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.5.2.bb b/meta-oe/recip=
+es-support/opencv/opencv_4.5.2.bb
+index 04ab807540..311355bd7a 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.5.2.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.5.2.bb
+@@ -51,6 +51,7 @@ SRC_URI =3D "git://github.com/opencv/opencv.git;name=3Dop=
+encv \
+            file://0001-Dont-use-isystem.patch \
+            file://download.patch \
+            file://0001-Make-ts-module-external.patch \
++           file://0001-sfm-link-with-Glog_LIBS.patch;patchdir=3D../contrib=
+ \
+            "
+ SRC_URI_append_riscv64 =3D " file://0001-Use-Os-to-compile-tinyxml2.cpp.pa=
+tch;patchdir=3D../contrib"
+=20
+--=20
+2.30.2
 
-On 4/13/21 10:45 AM, Vinícius Ossanes Aquino wrote:
-> Upgrade to release 1.30.2:
-> 
-> - 0004-fix_reallocarray_check.patch removed because the current
->    version of nm already includes boths malloc.h and stdlib.h
-> - musl/0002-Fix-build-with-musl.patch removed because the commit
->    c50da167bc of nm solves the build issue with musl
-> - musl/0001-Fix-build-with-musl-systemd-specific.patch modified
->    to avoid conflicts when applied to current version of nm
-> - musl/0003-Fix-build-with-musl-systemd-specific.patch renamed
->    to musl/0002-Fix-build-with-musl-systemd-specific.patch and
->    modified to avoid conflicts when applied to current version of nm
-> 
-> Signed-off-by: Vinicius Aquino <voa.aquino@gmail.com>
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> ---
->   ...ttings-settings-property-documentati.patch |  50 ++------
->   .../0004-fix_reallocarray_check.patch         |  27 ----
->   ...Fix-build-with-musl-systemd-specific.patch |  52 +++-----
->   ...Fix-build-with-musl-systemd-specific.patch |  26 ++++
->   .../musl/0002-Fix-build-with-musl.patch       | 121 ------------------
->   ...Fix-build-with-musl-systemd-specific.patch |  26 ----
->   ...ger_1.28.0.bb => networkmanager_1.30.2.bb} |   6 +-
->   7 files changed, 59 insertions(+), 249 deletions(-)
->   delete mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/0004-fix_reallocarray_check.patch
->   create mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-Fix-build-with-musl-systemd-specific.patch
->   delete mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-Fix-build-with-musl.patch
->   delete mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0003-Fix-build-with-musl-systemd-specific.patch
->   rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.28.0.bb => networkmanager_1.30.2.bb} (96%)
-> 
-> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0002-Do-not-create-settings-settings-property-documentati.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0002-Do-not-create-settings-settings-property-documentati.patch
-> index ecd13504d..0a86abafc 100644
-> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0002-Do-not-create-settings-settings-property-documentati.patch
-> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0002-Do-not-create-settings-settings-property-documentati.patch
-> @@ -1,34 +1,29 @@
-> -From 9eab96351a726e9ce6a15d158f743e35d73a8900 Mon Sep 17 00:00:00 2001
-> -From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-> -Date: Sat, 16 Jan 2021 14:27:38 +0100
-> +From d0dead0478a070b96f37bd3b310443eaa8c93a25 Mon Sep 17 00:00:00 2001
-> +From: Vinicius Aquino <voa.aquino@gmail.com>
-> +Date: Thu, 1 Apr 2021 14:13:07 -0300
->   Subject: [PATCH] Do not create settings settings/property documentation
->   MIME-Version: 1.0
->   Content-Type: text/plain; charset=UTF-8
->   Content-Transfer-Encoding: 8bit
->   
-> -From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-> -MIME-Version: 1.0
-> -Content-Type: text/plain; charset=UTF-8
-> -Content-Transfer-Encoding: 8bit
-> -
->   It was tried to get this work by adding python3-pygobject-native to DEPENDS but
-> -compile could not find (configure passed) python module gi.
-> +compile could not find (configure passed) python module gi.
->   Anyway it is not necessary for us to have the settings/property docs.
->   
->   Upstream-Status: Inappropriate [OE specific]
->   
->   Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-> -
-> +Signed-off-by: Vinicius Aquino <voa.aquino@gmail.com>
->   ---
-> - Makefile.am  | 13 -------------
-> - configure.ac |  5 -----
-> - 2 files changed, 18 deletions(-)
-> + Makefile.am  | 4 ----
-> + configure.ac | 5 -----
-> + 2 files changed, 9 deletions(-)
->   
->   diff --git a/Makefile.am b/Makefile.am
-> -index 110957a..b4cfbcc 100644
-> +index 9279672c1..2e52acbb2 100644
->   --- a/Makefile.am
->   +++ b/Makefile.am
-> -@@ -1587,14 +1587,10 @@ libnm/libnm.typelib: libnm/libnm.gir
-> +@@ -1686,14 +1686,10 @@ libnm/libnm.typelib: libnm/libnm.gir
->    INTROSPECTION_GIRS += libnm/NM-1.0.gir
->    
->    libnm_noinst_data = \
-> @@ -43,30 +38,11 @@ index 110957a..b4cfbcc 100644
->    	$(NULL)
->    
->    noinst_DATA += $(libnm_noinst_data)
-> -@@ -4448,18 +4444,9 @@ $(clients_common_libnmc_base_la_OBJECTS): $(libnm_lib_h_pub_mkenums)
-> - $(clients_common_libnmc_base_la_OBJECTS): clients/common/.dirstamp
-> -
-> - clients_common_settings_doc_h = clients/common/settings-docs.h
-> --if HAVE_INTROSPECTION
-> --$(clients_common_settings_doc_h): clients/common/settings-docs.xsl libnm/nm-settings-docs-gir.xml clients/common/.dirstamp
-> --	$(AM_V_GEN) $(XSLTPROC) --output $@ $< $(word 2,$^)
-> --DISTCLEANFILES += $(clients_common_settings_doc_h)
-> --check-local-settings-docs: $(clients_common_settings_doc_h)
-> --	$(srcdir)/tools/check-settings-docs.sh "$(srcdir)" "$(builddir)" "$(clients_common_settings_doc_h)"
-> --check_local += check-local-settings-docs
-> --else
-> - $(clients_common_settings_doc_h): $(clients_common_settings_doc_h).in clients/common/.dirstamp
-> - 	$(AM_V_GEN) cp "$(srcdir)/$(clients_common_settings_doc_h).in" "$(builddir)/$(clients_common_settings_doc_h)"
-> - check-local-settings-docs:
-> --endif
-> - EXTRA_DIST += \
-> - 	$(clients_common_settings_doc_h) \
-> - 	$(clients_common_settings_doc_h).in
->   diff --git a/configure.ac b/configure.ac
-> -index 704b1c1..18bba87 100644
-> +index 784ac4695..681e6cb32 100644
->   --- a/configure.ac
->   +++ b/configure.ac
-> -@@ -1228,11 +1228,6 @@ GTK_DOC_CHECK(1.0)
-> +@@ -1241,11 +1241,6 @@ GTK_DOC_CHECK(1.0)
->    # check if we can build setting property documentation
->    build_docs=no
->    if test -n "$INTROSPECTION_MAKEFILE"; then
-> @@ -79,5 +55,5 @@ index 704b1c1..18bba87 100644
->    	if test -z "$PERL"; then
->    		AC_MSG_ERROR([--enable-introspection requires perl])
->   --
-> -2.26.2
-> +2.20.1
->   
-> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0004-fix_reallocarray_check.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0004-fix_reallocarray_check.patch
-> deleted file mode 100644
-> index 2df449f2e..000000000
-> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0004-fix_reallocarray_check.patch
-> +++ /dev/null
-> @@ -1,27 +0,0 @@
-> -reallocarray() is coming from stdlib.h which maybe indirectly included
-> -by malloc.h but not on all libc implementations
-> -
-> -Upstream-Status: Pending
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---- a/meson.build
-> -+++ b/meson.build
-> -@@ -114,7 +114,7 @@ config_h.set10('HAVE_GETRANDOM', use_sys
-> -                                                                                      #include <sys/wait.h>'''))
-> - config_h.set('HAVE_SECURE_GETENV', cc.has_function('secure_getenv'))
-> - config_h.set('HAVE___SECURE_GETENV', cc.has_function('__secure_getenv'))
-> --config_h.set10('HAVE_DECL_REALLOCARRAY', cc.has_function('reallocarray', prefix: '#include <malloc.h>'))
-> -+config_h.set10('HAVE_DECL_REALLOCARRAY', cc.has_function('reallocarray', prefix: '#include <stdlib.h>'))
-> - config_h.set10('HAVE_DECL_EXPLICIT_BZERO', cc.has_function('explicit_bzero', prefix: '#include <string.h>'))
-> - config_h.set10('HAVE_DECL_MEMFD_CREATE', cc.has_function('memfd_create', prefix: '#include <sys/mman.h>'))
-> -
-> ---- a/configure.ac
-> -+++ b/configure.ac
-> -@@ -82,7 +82,7 @@ AC_CHECK_DECLS([
-> - AC_CHECK_DECLS([
-> - 	reallocarray],
-> - 	[], [], [[
-> --#include <malloc.h>
-> -+#include <stdlib.h>
-> - ]])
-> -
-> - AC_CHECK_DECLS([
-> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0001-Fix-build-with-musl-systemd-specific.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0001-Fix-build-with-musl-systemd-specific.patch
-> index 7807fc77c..692f1ffa4 100644
-> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0001-Fix-build-with-musl-systemd-specific.patch
-> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0001-Fix-build-with-musl-systemd-specific.patch
-> @@ -1,12 +1,11 @@
-> -From 9597122867c22e949ef3b69c779e0facebce6eb5 Mon Sep 17 00:00:00 2001
-> +From 44884c7e7655b889f41cb02ffc8ab72a29b52ebf Mon Sep 17 00:00:00 2001
->   From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
->   Date: Tue, 2 Apr 2019 01:34:35 +0200
-> -Subject: [PATCH] Fix build with musl - systemd specific
-> +Subject: [PATCH 1/2] Fix build with musl - systemd specific
->   MIME-Version: 1.0
->   Content-Type: text/plain; charset=UTF-8
->   Content-Transfer-Encoding: 8bit
->   
-> -From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
->   MIME-Version: 1.0
->   Content-Type: text/plain; charset=UTF-8
->   Content-Transfer-Encoding: 8bit
-> @@ -17,18 +16,18 @@ for musl.
->   Upstream-Status: Pending
->   
->   Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-> -
-> +Signed-off-by: Vinicius Aquino <voa.aquino@gmail.com>
->   ---
->    shared/systemd/src/basic/in-addr-util.c |  1 +
->    shared/systemd/src/basic/process-util.c |  9 +++++++++
->    shared/systemd/src/basic/socket-util.h  |  6 ++++++
-> - shared/systemd/src/basic/sort-util.h    | 27 ++++---------------------
-> + shared/systemd/src/basic/sort-util.h    | 13 ++++---------
->    shared/systemd/src/basic/stdio-util.h   |  2 ++
->    shared/systemd/src/basic/string-util.h  |  5 +++++
-> - 6 files changed, 27 insertions(+), 23 deletions(-)
-> + 6 files changed, 27 insertions(+), 9 deletions(-)
->   
->   diff --git a/shared/systemd/src/basic/in-addr-util.c b/shared/systemd/src/basic/in-addr-util.c
-> -index 1ea3e7f..1204393 100644
-> +index c315dcbb8..5b7e04eb7 100644
->   --- a/shared/systemd/src/basic/in-addr-util.c
->   +++ b/shared/systemd/src/basic/in-addr-util.c
->   @@ -15,6 +15,7 @@
-> @@ -40,7 +39,7 @@ index 1ea3e7f..1204393 100644
->    #include "string-util.h"
->    #include "strxcpyx.h"
->   diff --git a/shared/systemd/src/basic/process-util.c b/shared/systemd/src/basic/process-util.c
-> -index 03ca04e..be8bca8 100644
-> +index 0e25b0200..ea2c0fbb4 100644
->   --- a/shared/systemd/src/basic/process-util.c
->   +++ b/shared/systemd/src/basic/process-util.c
->   @@ -17,6 +17,9 @@
-> @@ -80,7 +79,7 @@ index 03ca04e..be8bca8 100644
->                                    cached_pid = CACHED_PID_UNSET;
->                                    return new_pid;
->   diff --git a/shared/systemd/src/basic/socket-util.h b/shared/systemd/src/basic/socket-util.h
-> -index 1ece911..290e94c 100644
-> +index 1de069476..f6834fbd2 100644
->   --- a/shared/systemd/src/basic/socket-util.h
->   +++ b/shared/systemd/src/basic/socket-util.h
->   @@ -14,6 +14,12 @@
-> @@ -94,10 +93,10 @@ index 1ece911..290e94c 100644
->   +#endif
->   +
->    #include "macro.h"
-> + #include "missing_network.h"
->    #include "missing_socket.h"
-> - #include "sparse-endian.h"
->   diff --git a/shared/systemd/src/basic/sort-util.h b/shared/systemd/src/basic/sort-util.h
-> -index a8dc3bb..ff0aa88 100644
-> +index a8984fc16..5fb90f8c5 100644
->   --- a/shared/systemd/src/basic/sort-util.h
->   +++ b/shared/systemd/src/basic/sort-util.h
->   @@ -5,15 +5,10 @@
-> @@ -120,40 +119,22 @@ index a8dc3bb..ff0aa88 100644
->    
->    /**
->     * Normal bsearch requires base to be nonnull. Here were require
-> -@@ -54,17 +49,3 @@ static inline void _qsort_safe(void *base, size_t nmemb, size_t size, __compar_f
-> -                 int (*_func_)(const typeof(p[0])*, const typeof(p[0])*) = func; \
-> -                 _qsort_safe((p), (n), sizeof((p)[0]), (__compar_fn_t) _func_); \
-> -         })
-> --
-> --static inline void qsort_r_safe(void *base, size_t nmemb, size_t size, __compar_d_fn_t compar, void *userdata) {
-> --        if (nmemb <= 1)
-> --                return;
-> --
-> --        assert(base);
-> --        qsort_r(base, nmemb, size, compar, userdata);
-> --}
-> --
-> --#define typesafe_qsort_r(p, n, func, userdata)                          \
-> --        ({                                                              \
-> --                int (*_func_)(const typeof(p[0])*, const typeof(p[0])*, typeof(userdata)) = func; \
-> --                qsort_r_safe((p), (n), sizeof((p)[0]), (__compar_d_fn_t) _func_, userdata); \
-> --        })
->   diff --git a/shared/systemd/src/basic/stdio-util.h b/shared/systemd/src/basic/stdio-util.h
-> -index c3b9448..e80a938 100644
-> +index d45d3c1a6..fee1a57ca 100644
->   --- a/shared/systemd/src/basic/stdio-util.h
->   +++ b/shared/systemd/src/basic/stdio-util.h
-> -@@ -1,7 +1,9 @@
-> - /* SPDX-License-Identifier: LGPL-2.1+ */
-> +@@ -2,7 +2,9 @@
->    #pragma once
->    
-> + #if 0 /* NM_IGNORED */
->   +#if defined(__GLIBC__)
->    #include <printf.h>
->   +#endif
-> + #endif /* NM_IGNORED */
->    #include <stdarg.h>
->    #include <stdio.h>
-> - #include <sys/types.h>
->   diff --git a/shared/systemd/src/basic/string-util.h b/shared/systemd/src/basic/string-util.h
-> -index cefbda3..71e4dec 100644
-> +index 593cf04ae..541c393f6 100644
->   --- a/shared/systemd/src/basic/string-util.h
->   +++ b/shared/systemd/src/basic/string-util.h
->   @@ -26,6 +26,11 @@
-> @@ -168,3 +149,6 @@ index cefbda3..71e4dec 100644
->    int strcmp_ptr(const char *a, const char *b) _pure_;
->    int strcasecmp_ptr(const char *a, const char *b) _pure_;
->    
-> +--
-> +2.20.1
-> +
-> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-Fix-build-with-musl-systemd-specific.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-Fix-build-with-musl-systemd-specific.patch
-> new file mode 100644
-> index 000000000..d83efd39e
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-Fix-build-with-musl-systemd-specific.patch
-> @@ -0,0 +1,26 @@
-> +From 7d9a11a17da425d106791ada7100d7a6559e6065 Mon Sep 17 00:00:00 2001
-> +From: Adrian Freihofer <adrian.freihofer@siemens.com>
-> +Date: Sat, 7 Mar 2020 14:24:01 +0100
-> +Subject: [PATCH 2/2] Fix build with musl - systemd specific
-> +
-> +---
-> + src/core/systemd/src/libsystemd-network/sd-dhcp6-client.c | 2 ++
-> + 1 file changed, 2 insertions(+)
-> +
-> +diff --git a/src/core/systemd/src/libsystemd-network/sd-dhcp6-client.c b/src/core/systemd/src/libsystemd-network/sd-dhcp6-client.c
-> +index 3fafd3c0e..79d6096c2 100644
-> +--- a/src/core/systemd/src/libsystemd-network/sd-dhcp6-client.c
-> ++++ b/src/core/systemd/src/libsystemd-network/sd-dhcp6-client.c
-> +@@ -8,7 +8,9 @@
-> + #include <errno.h>
-> + #include <sys/ioctl.h>
-> + #if 0 /* NM_IGNORED */
-> ++#ifdef __GLIBC__  /* musl supplies full set of userspace headers */
-> + #include <linux/if_arp.h>
-> ++#endif
-> + #else /* NM_IGNORED */
-> + #include <net/if_arp.h>
-> + #endif /* NM_IGNORED */
-> +--
-> +2.20.1
-> +
-> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-Fix-build-with-musl.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-Fix-build-with-musl.patch
-> deleted file mode 100644
-> index 0f43c0c68..000000000
-> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-Fix-build-with-musl.patch
-> +++ /dev/null
-> @@ -1,121 +0,0 @@
-> -From bacc14089c80ec757025789ff054a05e1f9c088d Mon Sep 17 00:00:00 2001
-> -From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-> -Date: Mon, 8 Apr 2019 23:10:43 +0200
-> -Subject: [PATCH] Fix build with musl
-> -MIME-Version: 1.0
-> -Content-Type: text/plain; charset=UTF-8
-> -Content-Transfer-Encoding: 8bit
-> -
-> -From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-> -MIME-Version: 1.0
-> -Content-Type: text/plain; charset=UTF-8
-> -Content-Transfer-Encoding: 8bit
-> -
-> -The build issues caused by definition conflicts musl vs linux-libc headers
-> -(error: redefinition of ...) can be reduced to two headers:
-> -
-> -1. netinet/if_ether.h <-> linux/if_ether.h: linux-libc header plays well with
-> -   glibc and musl headers in case libc's variant (netinet/if_ether.h) is
-> -   included BEFORE linux variant [1]. We add include at two positions:
-> -   1. shared/nm-default.h: This is a global which used for networkmanager and
-> -      is included at the very beginning of all c-files.
-> -   2. libnm-core/nm-utils.h: This file makes it into installation and is used
-> -      by dependent packages as network-manager-applet
-> -2. net/if_arp. <-> linux/if_ether.h: linux-libc: Unfortunaly these files do
-> -   not play together in harmony. Therefore the libc variant is included early in
-> -   shared/nm-default.h and occurances linux/if_arp.h are removed.
-> -
-> -Note:
-> -Be aware that this is still nasty business: We have to trust that musl headers
-> -define same signatures as linux would do - just because musl-makers consider
-> -linux-libc headers 'notoriously broken for userspace' [2] (search for
-> -'error: redefinition of').
-> -
-> -[1] http://lists.openembedded.org/pipermail/openembedded-core/2019-March/280440.html
-> -[2] https://wiki.musl-libc.org/faq.html
-> -
-> -Upstream-Status: Pending
-> -
-> -Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-> -
-> ----
-> - clients/tui/nmt-device-entry.c   | 1 -
-> - libnm-core/nm-utils.h            | 4 ++++
-> - shared/nm-default.h              | 3 +++
-> - src/devices/nm-device.c          | 2 +-
-> - src/platform/nm-linux-platform.c | 1 -
-> - 5 files changed, 8 insertions(+), 3 deletions(-)
-> -
-> -diff --git a/clients/tui/nmt-device-entry.c b/clients/tui/nmt-device-entry.c
-> -index 692a467..cf9b32e 100644
-> ---- a/clients/tui/nmt-device-entry.c
-> -+++ b/clients/tui/nmt-device-entry.c
-> -@@ -26,7 +26,6 @@
-> - #include "nmt-device-entry.h"
-> -
-> - #include <sys/socket.h>
-> --#include <linux/if_arp.h>
-> -
-> - #include "nmtui.h"
-> -
-> -diff --git a/libnm-core/nm-utils.h b/libnm-core/nm-utils.h
-> -index 9589c51..b82c5cf 100644
-> ---- a/libnm-core/nm-utils.h
-> -+++ b/libnm-core/nm-utils.h
-> -@@ -10,6 +10,10 @@
-> -     #error "Only <NetworkManager.h> can be included directly."
-> - #endif
-> -
-> -+/* include as early as possible for musl */
-> -+#include <netinet/if_ether.h>
-> -+/* #include <net/if_arp.h> - uncoment for broken dependents?? */
-> -+
-> - #include <glib.h>
-> -
-> - #include <netinet/in.h>
-> -diff --git a/shared/nm-default.h b/shared/nm-default.h
-> -index b322f1d..c287dbe 100644
-> ---- a/shared/nm-default.h
-> -+++ b/shared/nm-default.h
-> -@@ -178,6 +178,9 @@
-> - #endif
-> -
-> - #include <stdlib.h>
-> -+/* include as early as possible for musl */
-> -+#include <netinet/if_ether.h>
-> -+#include <net/if_arp.h>
-> -
-> - /*****************************************************************************/
-> -
-> -diff --git a/src/devices/nm-device.c b/src/devices/nm-device.c
-> -index 0be05f2..04061f9 100644
-> ---- a/src/devices/nm-device.c
-> -+++ b/src/devices/nm-device.c
-> -@@ -9,6 +9,7 @@
-> - #include "nm-device.h"
-> -
-> - #include <netinet/in.h>
-> -+#include <net/if.h>
-> - #include <unistd.h>
-> - #include <sys/ioctl.h>
-> - #include <signal.h>
-> -@@ -17,7 +18,6 @@
-> - #include <arpa/inet.h>
-> - #include <fcntl.h>
-> - #include <linux/if_addr.h>
-> --#include <linux/if_arp.h>
-> - #include <linux/rtnetlink.h>
-> -
-> - #include "nm-std-aux/unaligned.h"
-> -diff --git a/src/platform/nm-linux-platform.c b/src/platform/nm-linux-platform.c
-> -index b377c85..87af59a 100644
-> ---- a/src/platform/nm-linux-platform.c
-> -+++ b/src/platform/nm-linux-platform.c
-> -@@ -14,7 +14,6 @@
-> - #include <libudev.h>
-> - #include <linux/fib_rules.h>
-> - #include <linux/ip.h>
-> --#include <linux/if_arp.h>
-> - #include <linux/if_bridge.h>
-> - #include <linux/if_link.h>
-> - #include <linux/if_tun.h>
-> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0003-Fix-build-with-musl-systemd-specific.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0003-Fix-build-with-musl-systemd-specific.patch
-> deleted file mode 100644
-> index 5735d51a8..000000000
-> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0003-Fix-build-with-musl-systemd-specific.patch
-> +++ /dev/null
-> @@ -1,26 +0,0 @@
-> -From ed748a28076eada9f38e3f4a476f28d7a10ba84b Mon Sep 17 00:00:00 2001
-> -From: Adrian Freihofer <adrian.freihofer@siemens.com>
-> -Date: Sat, 7 Mar 2020 14:24:01 +0100
-> -Subject: [PATCH] Fix build with musl - systemd specific
-> -
-> ----
-> - src/systemd/src/libsystemd-network/sd-dhcp6-client.c | 2 ++
-> - 1 file changed, 2 insertions(+)
-> -
-> -diff --git a/src/systemd/src/libsystemd-network/sd-dhcp6-client.c b/src/systemd/src/libsystemd-network/sd-dhcp6-client.c
-> -index ec7f1be..31bcd4d 100644
-> ---- a/src/systemd/src/libsystemd-network/sd-dhcp6-client.c
-> -+++ b/src/systemd/src/libsystemd-network/sd-dhcp6-client.c
-> -@@ -7,7 +7,9 @@
-> -
-> - #include <errno.h>
-> - #include <sys/ioctl.h>
-> -+#ifdef __GLIBC__  /* musl supplies full set of userspace headers */
-> - #include <linux/if_arp.h>
-> -+#endif
-> - #include <linux/if_infiniband.h>
-> -
-> - #include "sd-dhcp6-client.h"
-> ---
-> -2.24.1
-> -
-> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.28.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.30.2.bb
-> similarity index 96%
-> rename from meta-networking/recipes-connectivity/networkmanager/networkmanager_1.28.0.bb
-> rename to meta-networking/recipes-connectivity/networkmanager/networkmanager_1.30.2.bb
-> index 7a20e914f..ec3bdd22b 100644
-> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.28.0.bb
-> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.30.2.bb
-> @@ -26,14 +26,12 @@ SRC_URI = " \
->       file://0001-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch \
->       file://0002-Do-not-create-settings-settings-property-documentati.patch \
->       file://0003-install-firewalld-to-var-libdir-rather-than-hardcod-.patch \
-> -    file://0004-fix_reallocarray_check.patch \
->   "
->   SRC_URI_append_libc-musl = " \
->       file://musl/0001-Fix-build-with-musl-systemd-specific.patch \
-> -    file://musl/0002-Fix-build-with-musl.patch \
-> -    file://musl/0003-Fix-build-with-musl-systemd-specific.patch \
-> +    file://musl/0002-Fix-build-with-musl-systemd-specific.patch \
->   "
-> -SRC_URI[sha256sum] = "3e170e9045e20598d2630e40c5789b2e2c46b942bfe5cb220f36202299253062"
-> +SRC_URI[sha256sum] = "0c8e80e77877860e4a4e6ab4a0f7cdc1186e356b65b042a751897188b88944d2"
->   
->   S = "${WORKDIR}/NetworkManager-${PV}"
->   
-> 
-> 
-> 
-> 
-> 
