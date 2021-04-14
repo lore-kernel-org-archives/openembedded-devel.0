@@ -1,112 +1,62 @@
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
- by mx.groups.io with SMTP id smtpd.web11.9940.1618388935664010086
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.9983.1618389334391731230
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Apr 2021 01:28:56 -0700
+ Wed, 14 Apr 2021 01:35:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: siemens.com, ip: 192.35.17.2, mailfrom: andrej.kozemcak@siemens.com)
-Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id 13E8SrWe015752
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 14 Apr 2021 10:28:53 +0200
-Received: from dev.vm7.ccp.siemens.com ([144.145.220.59])
-	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id 13E8SqBk025089;
-	Wed, 14 Apr 2021 10:28:53 +0200
-Received: from dev.vm7.ccp.siemens.com (localhost [127.0.0.1])
-	by dev.vm7.ccp.siemens.com (Postfix) with ESMTP id 524EE304E690;
-	Wed, 14 Apr 2021 10:28:52 +0200 (CEST)
-From: "Andrej Kozemcak" <andrej.kozemcak@siemens.com>
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=59772 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1lWazi-00040c-Jl; Wed, 14 Apr 2021 11:35:31 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Andrej Kozemcak <andrej.kozemcak@siemens.com>
-Subject: [meta-oe][dunfell][PATCH] fix(libupnp): apply cve-2020-13848
-Date: Wed, 14 Apr 2021 10:27:21 +0200
-Message-Id: <20210414082721.32763-1-andrej.kozemcak@siemens.com>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/4] python3-decorator: Upgrade 5.0.6 -> 5.0.7
+Date: Wed, 14 Apr 2021 11:35:22 +0300
+Message-Id: <20210414083525.10948-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
+Upgrade to release 5.0.7:
+
+- The decorator module was not passing correctly the defaults
+  inside the *args tuple
+- Fixed some mispellings in the documentation
+- Integrated codespell in the CI
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../libupnp/files/CVE-2020-13848.patch        | 56 +++++++++++++++++++
- .../libupnp/libupnp_git.bb                    |  3 +-
- 2 files changed, 58 insertions(+), 1 deletion(-)
- create mode 100644 meta-multimedia/recipes-connectivity/libupnp/files/CVE-2020-13848.patch
+ .../{python3-decorator_5.0.6.bb => python3-decorator_5.0.7.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-decorator_5.0.6.bb => python3-decorator_5.0.7.bb} (86%)
 
-diff --git a/meta-multimedia/recipes-connectivity/libupnp/files/CVE-2020-13848.patch b/meta-multimedia/recipes-connectivity/libupnp/files/CVE-2020-13848.patch
-new file mode 100644
-index 000000000..8a90942fa
---- /dev/null
-+++ b/meta-multimedia/recipes-connectivity/libupnp/files/CVE-2020-13848.patch
-@@ -0,0 +1,56 @@
-+diff --git a/ChangeLog b/ChangeLog
-+index 4a956fc..265d268 100644
-+--- a/ChangeLog
-++++ b/ChangeLog
-+@@ -2,6 +2,12 @@
-+ Version 1.8.4
-+ *******************************************************************************
-+
-++2020-06-04 Patrik Lantz pjlantz(at)github
-++
-++	Fixes #177
-++
-++	NULL pointer dereference in FindServiceControlURLPath
-++
-+ 2017-11-17 Marcelo Jimenez <mroberto(at)users.sourceforge.net>
-+
-+	GitHub #57 - 1.8.3 broke ABI without changing SONAME
-+diff --git a/upnp/src/genlib/service_table/service_table.c b/upnp/src/genlib/service_table/service_table.c
-+index 98c2c0f..f3ee4e5 100644
-+--- a/upnp/src/genlib/service_table/service_table.c
-++++ b/upnp/src/genlib/service_table/service_table.c
-+@@ -300,12 +300,11 @@ FindServiceEventURLPath( service_table * table,
-+     uri_type parsed_url;
-+     uri_type parsed_url_in;
-+
-+-    if( ( table )
-+-        &&
-+-        ( parse_uri( eventURLPath,
-+-                     strlen( eventURLPath ),
-+-                     &parsed_url_in ) == HTTP_SUCCESS ) ) {
-+-
-++    if (!table || !eventURLPath) {
-++      return NULL;
-++    }
-++    if (parse_uri(eventURLPath, strlen(eventURLPath), &parsed_url_in) ==
-++        HTTP_SUCCESS) {
-+         finger = table->serviceList;
-+         while( finger ) {
-+             if( finger->eventURL )
-+@@ -352,11 +351,11 @@ FindServiceControlURLPath( service_table * table,
-+     uri_type parsed_url;
-+     uri_type parsed_url_in;
-+
-+-    if( ( table )
-+-        &&
-+-        ( parse_uri
-+-          ( controlURLPath, strlen( controlURLPath ),
-+-            &parsed_url_in ) == HTTP_SUCCESS ) ) {
-++    if (!table || !controlURLPath) {
-++      return NULL;
-++    }
-++    if (parse_uri(controlURLPath, strlen(controlURLPath), &parsed_url_in) ==
-++        HTTP_SUCCESS) {
-+         finger = table->serviceList;
-+         while( finger ) {
-+             if( finger->controlURL )
-diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp_git.bb b/meta-multimedia/recipes-connectivity/libupnp/libupnp_git.bb
-index 339c07cd9..828e351be 100644
---- a/meta-multimedia/recipes-connectivity/libupnp/libupnp_git.bb
-+++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp_git.bb
-@@ -12,7 +12,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=394a0f17b97f33426275571e15920434"
- PV = "1.8.4+git${SRCPV}"
- # release-1.8.4
- SRCREV = "d5a01fc9895daae98a0c5a8c7d3afce46add529d"
--SRC_URI = "git://github.com/mrjimenez/pupnp.git;protocol=https"
-+SRC_URI = "git://github.com/mrjimenez/pupnp.git;protocol=https \
-+           file://CVE-2020-13848.patch"
+diff --git a/meta-python/recipes-devtools/python/python3-decorator_5.0.6.bb b/meta-python/recipes-devtools/python/python3-decorator_5.0.7.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-decorator_5.0.6.bb
+rename to meta-python/recipes-devtools/python/python3-decorator_5.0.7.bb
+index 9e837b719e..3131b2bc0b 100644
+--- a/meta-python/recipes-devtools/python/python3-decorator_5.0.6.bb
++++ b/meta-python/recipes-devtools/python/python3-decorator_5.0.7.bb
+@@ -9,7 +9,7 @@ decorator, just because you can."
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=be2fd2007972bf96c08af3293d728b22"
  
- S="${WORKDIR}/git"
+-SRC_URI[sha256sum] = "f2e71efb39412bfd23d878e896a51b07744f2e2250b2e87d158e76828c5ae202"
++SRC_URI[sha256sum] = "6f201a6c4dac3d187352661f508b9364ec8091217442c9478f1f83c003a0f060"
+ 
+ inherit pypi setuptools3
  
 -- 
-2.20.1
+2.17.1
 
