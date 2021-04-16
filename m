@@ -1,17 +1,17 @@
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.44])
- by mx.groups.io with SMTP id smtpd.web12.10885.1618587430405850621
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.41])
+ by mx.groups.io with SMTP id smtpd.web09.10848.1618587755990885590
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Apr 2021 08:37:10 -0700
+ Fri, 16 Apr 2021 08:42:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=ee+VVbr/;
- spf=pass (domain: windriver.com, ip: 40.107.243.44, mailfrom: yifan.yu@windriver.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=N1BGFtej;
+ spf=pass (domain: windriver.com, ip: 40.107.244.41, mailfrom: yifan.yu@windriver.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=DZipkzx/+nXAbT/n7O9t/QnYXQbtzDh2pz49XiD7XapHmi6un3SkuaQ+IqZvN6GvSmhLF93Ct5+HQs1C/YKj9+FJffrXrPm73K6E3rcMbmRnH5VAeWCPrvoW3XUKx4IBTOWp1hAu8wG5OtIBCU+ghz8GA5m6X5D0QEE8rR3pdEPc7drqQ+KZ0tAK8OQT5XV3uPFkFON/IrWkcj0JKZBgau8cU7WUGKzzoKKRSAbb1xkPmOJGBV4L8kY1l22zICMOOmUVaXZFCPCWzKQFy5erhihV9UI1D9xfyCPwrssnJNT1xTgvFxRvl5S8wr8ZDL4PNYQk8UqVrLiylODDIpcieA==
+ b=QbOTMKeOhdCRfgSFEi06IiJSHTo3JvpqZA/pTU53XigliS0pQklqIcUkMGR1kLf0vfx02csPErHWW2+olwN9eqzFMy6rubTYXPRss8R8uCu/flPAOrSe8HOQ/M/d3zkW7Bj5imPU1SorX370jmNph3ZNZwdXb4OUNXbgCtXDWNrtnmLk9Vsrccqg0ODWWalr9EXZt8Qm1ilVzwUe1gFdP4aZlliEk9OPNbpyDFs9EVX5tMgTUusOgNg0rRdas+4HXKrwPRigOi7VqiQsNKCAvjq30hTRp+ucNFQp1BbaBwwnltyPRNEEkcHHXKmaK71tZgvPtuI12bJmhN/VTU5/Tw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LONGkXvzn0Wln7lAIXRb9paKk9Yoo5yymdiqf1ZDTQ8=;
- b=IFuOXd+pikSU9Gl1E9N8dC8/DGQ0lcUoECwUCoRWFZYgNTINxNH+fkS5SnJngw2wSpKe3HFNtXeA9NkW1aXDR1nKUWsbCd+21PSnY5EH/DExTqm7C18UlNlK2fD4kQi6of+bNXW1oMR3Mg9czczL5TcyQz7WVKwnZyyabyCoC5sEgv5L6gRG0HOQJFQGv6P9Wa3KYFL+U6PpmN0y0igpsdl+dDkMyFWCjBYlu8uEROIZykjzz5Ggdt4uOU3jdz8K5I+Doj0SVVdTM8nOgDySshdRT4IGdGrp3lfztXaZQ6OXQvDUlEj6BybVqOfaO9riHMtiwo7ukQH/ca5ev6Pxjg==
+ bh=V+KRZyT/LUnjRMGjR/XQCKj/bI5LZsycV3ipAVJuecQ=;
+ b=W5gecxqKGk6CEO02Q8UQmQLiJ4wQbzUWur8lAHvRW8zpEtuu0eaOz7n9yCSzpH489bKm1TIeueSAOuAKPuHDrgC6qcSjv6/QFPYftLAPWW+h3BF3fXG62ytlsekeiE4icwxWK7z9ND+MX4EgAMc8cekVCzSqFCMwaGhqNFxYqsmPPgbiU8A+o7XVN/o8GrDus6dWvT8V6KfQBBt+lnREME98dlD3C2GRS8xN9rTgb0FTxqphfHEe3sf/tXaBFHkJdiPfxr2bcVNSpgkX7QORSTt4hPNqaj1WNweFV/f1WwPg7aH11PngVMLEadDKXoXk75sBC9E7B/mM6L0WW7Cgvg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -19,217 +19,145 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=windriversystems.onmicrosoft.com;
  s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LONGkXvzn0Wln7lAIXRb9paKk9Yoo5yymdiqf1ZDTQ8=;
- b=ee+VVbr/lONOrCsz05Ugh6r6/GysLs4yn+KHgOWMCyN3KgcVzx/tH8QJS8P4HaqaBNEVVQ2jAkiESaB2K3CjwOVh/5ZYYoTiUCe6+8Yv1swrNjPXrnAbredDSTDKu1kYUxJWuOrHu63izLER08R+dn0yo9sebpW9tTIsY0FlUTM=
+ bh=V+KRZyT/LUnjRMGjR/XQCKj/bI5LZsycV3ipAVJuecQ=;
+ b=N1BGFtejUNnZnIHG5leqK7BH6YTGiA364vz5PCcbo7Onj1kWI8sdMOLCo4YLdfnaQ1lwT29p+FFuEHmXWzKz9sRu53NxP2q57xH/BtuQ1g7vpG1FN8hzGqSwVELnbZ0l/+1nKOVcFFS31GDiQICcPoHO0JUdYveuPOH+mnqfFjs=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
 Received: from SA0PR11MB4719.namprd11.prod.outlook.com (2603:10b6:806:95::17)
- by SA0PR11MB4640.namprd11.prod.outlook.com (2603:10b6:806:9b::15) with
+ by SA2PR11MB5147.namprd11.prod.outlook.com (2603:10b6:806:118::19) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4020.17; Fri, 16 Apr
- 2021 15:37:09 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4042.19; Fri, 16 Apr
+ 2021 15:42:34 +0000
 Received: from SA0PR11MB4719.namprd11.prod.outlook.com
  ([fe80::24e6:c5dd:a024:807f]) by SA0PR11MB4719.namprd11.prod.outlook.com
  ([fe80::24e6:c5dd:a024:807f%9]) with mapi id 15.20.4042.019; Fri, 16 Apr 2021
- 15:37:09 +0000
+ 15:42:34 +0000
+Subject: Re: [oe] [meta-oe][PATCH 1/2] syslog-ng: upgrade 3.24.1 -> 3.31.2
 From: "Yi Fan Yu" <yifan.yu@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] syslog-ng: remove CONFIG_TLS override for arm DEBUG_BUILD
-Date: Fri, 16 Apr 2021 11:36:48 -0400
-Message-ID: <20210416153648.25192-2-yifan.yu@windriver.com>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20210416153648.25192-1-yifan.yu@windriver.com>
-References: <20210416153648.25192-1-yifan.yu@windriver.com>
-X-Originating-IP: [128.224.252.2]
-X-ClientProxiedBy: MN2PR17CA0009.namprd17.prod.outlook.com
- (2603:10b6:208:15e::22) To SA0PR11MB4719.namprd11.prod.outlook.com
+References: <167660B107DD8DBF.31742@lists.openembedded.org>
+Message-ID: <f90b1c0a-1a63-6b65-64d3-cb17e8b80204@windriver.com>
+Date: Fri, 16 Apr 2021 11:42:30 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.1
+In-Reply-To: <167660B107DD8DBF.31742@lists.openembedded.org>
+X-Originating-IP: [135.0.247.71]
+X-ClientProxiedBy: BY5PR03CA0019.namprd03.prod.outlook.com
+ (2603:10b6:a03:1e0::29) To SA0PR11MB4719.namprd11.prod.outlook.com
  (2603:10b6:806:95::17)
 Return-Path: yifan.yu@windriver.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from yow-lpggp3.wrs.com (128.224.252.2) by MN2PR17CA0009.namprd17.prod.outlook.com (2603:10b6:208:15e::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4042.16 via Frontend Transport; Fri, 16 Apr 2021 15:37:08 +0000
+Received: from [192.168.1.42] (135.0.247.71) by BY5PR03CA0019.namprd03.prod.outlook.com (2603:10b6:a03:1e0::29) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4042.16 via Frontend Transport; Fri, 16 Apr 2021 15:42:33 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 109ac2f4-66ff-4fc3-2137-08d900ed7f37
-X-MS-TrafficTypeDiagnostic: SA0PR11MB4640:
+X-MS-Office365-Filtering-Correlation-Id: 81f0be78-ddaa-4673-7b80-08d900ee40c5
+X-MS-TrafficTypeDiagnostic: SA2PR11MB5147:
 X-Microsoft-Antispam-PRVS: 
-	<SA0PR11MB464048AA7B40D2B56E96617A804C9@SA0PR11MB4640.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2803;
+	<SA2PR11MB5147AC77391EE0997BC0D34E804C9@SA2PR11MB5147.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:36;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	Pd65CY82R7ZQxk8/N1uYqCEPnzqGtB+9kmiXH6PeOj/zvh4kpSJgDyo9zNsvVp7dx2CLUQNyQXsw28jnSW2GYI2ZzpeTaIyxZpNI18XC39qx1flPCadyepsv65yczaQ/3Ppm06/nkSDIkzG7Ap6FOnfmd58ASBlq35GF36ZF7Q6hKg72V8NNy06TiXZN56Hbyp/Jf4JOhdof88xS+mQmDm88MiDruy77+heHeSIav/wjobJ3t0sTWFLbl20Ll0P75GmQB0l43+g/fCDTcuha0bV2829FqTQ5LPcjYQNjOLMZaRV5SFeE79j9ZW92Yns+PqU2vfgbJ+G+cUl58fm2mdVi+Vkw5IArFunJItfXLa5HDURlSF20pb9i1g7YuVXKOSYh3uLOd6j27ktNSvtrQMKozWwRQ8XACZiXRz78o1bi2BNpToJHDY+HgM+WOYLHfiZl3isFeE1AA4K5ZIN/jVuGK40P5jR9TopzCY3/yLBpujWAZU+mcHPCAv3BXxtkAMbC3r2JTU75d7ROfSU6T743bUCScAyA+gt82eYoP1l/OOwTUTodwrSfLgIbXeGvmsYPnYa+9eimnVn2s3cTLKk2/LfSOu27ocvUfaJ+tE4cChF3JiKfavE6YqNSB6bZrm8HfcwsM/mp/VIxm2bNKn9Z39P+yxt5XEPQj1HRytXt93QX8KgCm9GrDFK5rqYx8HwymaYscF//bRIR2I/D+gI1R6ULDTjZYJS9P0wtWaA=
+	zCo5s7wM+aeivaO6HYC155MNCRp97OQpd2Z63u1OjnLL4y2/tJpOyHuetiUW4f6lYfMdIMUnju7QaWDWLfe12+khHL9sGiW2cO9PNrR4SUDYCYY/t63UWJ3wxtmR+CLPA4QXGVVZ+s675AKlKTWtr1ugxkhipWysQI2IIqDBNtcCuk0QrdebLPxL0NoNo2lka90WoI1eRUxN8YC3dWpwSSQY9dTeQh3prrpz2v6WOlObTDIKZaN6GRssuRMvJ8BkkvP0nR6f9O2YHocb0QSKDuOU/qAqLx/DxdyWDPO4ndpdP8lLBPbzTerNHiBJzSBGBaZqYWZNUi7k9EyDvwZAFhU5uu30KqzWMn/nTLAOdJTcEzELguLq9SfFFZqhnPbTo5+h0ByAGKQjjLWGW5lpfb5V0W/XDDn3961jRUUQLUd+8JfBwTrZTTqHpekotThF9JZ5mdt/uElfMAe614E1+fqWnt3Bm6uHK38DEqeIRUtYOmR/CBvnKB3KjLxCtTq+k150+UJgE/ZiJ5bMqfh5jkqfuG7l+LCEFnLnNoao96rYqkKugfS5NB8DiiQrz0NP59U6CoDupD7TCIoM07wIO9xE77Hh6J85Z9nps0UI5D6jNtcetYPRbWFAKVPbVNfA71HwPHKdLpDvaEs6U47aSG4y+mcHiCWHONAxvvu0Gi6zqfooJbo7eBjiVtVLU4mg9PWn4yD7rS6hs2O/t4A/mS+cZIXls3OV/9dztJLhi3TqYvfwcVCXwuE3Y2JW448JUj9ozLcgLbROA0DDZQ9x36BHna/BoVzZcXWomzWmq7M=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA0PR11MB4719.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(376002)(346002)(366004)(136003)(396003)(66556008)(16526019)(52116002)(8936002)(66476007)(38350700002)(36756003)(6506007)(86362001)(5660300002)(956004)(66946007)(2906002)(6512007)(6666004)(316002)(83380400001)(2616005)(186003)(478600001)(26005)(1076003)(6916009)(6486002)(8676002)(38100700002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA0PR11MB4719.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(346002)(39850400004)(136003)(366004)(396003)(66556008)(8676002)(38350700002)(38100700002)(2906002)(16526019)(31686004)(36756003)(5660300002)(86362001)(31696002)(8936002)(52116002)(66476007)(66946007)(478600001)(2616005)(53546011)(6916009)(316002)(26005)(186003)(6486002)(16576012)(83380400001)(966005)(956004)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?/vdXJxmHXHVgFpxpWCar6X6Xc4MVDCsMfOis3nwOYRF/hqZ9Ql9SQf9AYn6D?=
- =?us-ascii?Q?FBCnwAVknLFYa7MzPha6rB6aoqgJZu5MG+24GNjpBxfq8e9xg4VFrT+jGW7i?=
- =?us-ascii?Q?Qk0eed4M+Zfcb5H8LZQPwwpKl3LeiJXFRmTAwPTr+qOG42a+ksk4/LegREzL?=
- =?us-ascii?Q?pmCHJaUdvqRlHWY5tQryS64ISdiBBWE6m8bqniBvZw8yCWPHxbl/FrUkJHIr?=
- =?us-ascii?Q?qyA6fI2l7gVDkOQ24C3MzABKa3MJOFUezpL/Qt5q6ntBbHSEvHe9qqJNihV5?=
- =?us-ascii?Q?yJMO//PBfxpJpSfB1C30JtFWuOHK/dAFONrmio3fLB5CftDIY2QJLlaWeaR/?=
- =?us-ascii?Q?9c4rcHpUOQpq0yNuzElnRBIHXu1IoNaXOLchkesV4UQ+rtLp3INo0ItRSfLe?=
- =?us-ascii?Q?n9YB9xBbvtrcQQ1Aktl7Lp9Ncs5Gswrrwl/Ax0isdoupqGX2WLC5xr0pnrcj?=
- =?us-ascii?Q?vO7TUNZpiooj+SczOk1/MjZRcMNtY9fWEUUF4gSImPWVYkHIYNv+xTrbIQHy?=
- =?us-ascii?Q?mR28ifuAsCTmrs3AdkS7Xlw6mTpV1UFglEISSD/Yri8sVlqgAJvT0GwFvhGJ?=
- =?us-ascii?Q?stBdGOuvFdJ5dt5hH6iHbPZmQ7jSoXw3J4e3uKv4X03+uMc+qLBI3dhhgZBE?=
- =?us-ascii?Q?xJuVtNEA0nrMQbXwjwSS+LX1GDEr+PFY5YORe/P4uFCVaBMm7uQ5/zDv85Uq?=
- =?us-ascii?Q?yLMCmHDH2JY88B+1ycu49KQC2oEHVH2iLLBpEBSHTd1h49ZclF6RyTJv6q2c?=
- =?us-ascii?Q?hXLYIWvdl7MrD1H7wBc1/eEFaAEwAOWT+kq+Lgt7Dk6xAZzN4P1ih7cqI2uZ?=
- =?us-ascii?Q?Equ7/T38DJAFDC7akXfH2KqWRJ8ljGic1zODyLvlTSwmNDPy89Px0Lnem83O?=
- =?us-ascii?Q?haG2XeT/eak6IhF/Y648obqhJ1sIgACu4Ci9+tM/5+wX2yNt8Cj2PHTiE2Mq?=
- =?us-ascii?Q?mwF4fa8yiI3CSqcgFQfvKyJ8GU7X0f8mfn5ELawR1Grd/uW8Jl8F/WpLusti?=
- =?us-ascii?Q?9iEAQQHZU8uFpf/hKraRQTBV3xFfxZ7aZ5+8wT8AoBlFX5qp8tFVFBPXiXT+?=
- =?us-ascii?Q?DR39j8Kvct+YGNSLdFh4W6xXxMw4p4sxbc4TDyF36u7F35QuIo+MzBvOTMmo?=
- =?us-ascii?Q?irjnIbk+f+7E3zeussxWP6KWaTvL90mwG+rnwt6VVFUwxCzbtwXQ9eYKIjKL?=
- =?us-ascii?Q?quMjq/Cup8Bwm0v9UL2r7ei2ptWCXyu16VS5OYD0e3YE743kzjUJ80EN5Kt2?=
- =?us-ascii?Q?1WK5hvJHoS2ikDkOn7gxt1XfLNfOkpyanh3Ma6CSlk+ZidI/YNPigYsBEaoP?=
- =?us-ascii?Q?/G2gVSGZhoa4wGEnGUVW+F+R?=
+	=?utf-8?B?RFZjRDhJaG1EN09qYVA5TUlwTGlTaitWVHduU2NhRmtaY1YydjVORTBUZDJL?=
+ =?utf-8?B?cWlqYjFBQnVVNzdydDRYUHF1eEJYUm1JWi9mQmdSeWhiZGVsZURVbXVjZGpW?=
+ =?utf-8?B?MXp4M09ZTFJIc1hQR0NCcGptQ1FtTnZ2ZmZwdkNNMHpwT2s4azFyQ1JsOGVE?=
+ =?utf-8?B?MzBTTWh6Zk5acDZibEt1L0d4VHdncDFCVWt2UDY4NnoyakU2d0pydGR6NCtW?=
+ =?utf-8?B?cVN0YXV6c2hQUy9UUVVKeDRtOTRDbG90Yk5rZUFMV1UyZTg2STNpZzBaUVVN?=
+ =?utf-8?B?d1FFYmQ4a21DcXFJZHZpUkgwR1Z5Yk5CRGl4UUxXeW8zQlhQZWo5V0ZyQlk5?=
+ =?utf-8?B?TTY0b25rY3RHZ09rUDh4M0dndndzMGZTU3h6R1ordHlOR2xqT3BhSWNCR0VO?=
+ =?utf-8?B?ejRLT1VnNUZjeGVmRU9sbjVuQkRCZ3hRbjBGZW91WWovdVF5dkZUYWJLZzhW?=
+ =?utf-8?B?ZEZPLzNkcDZsK1RXRlY4bTdYSUVIS3Y0RGNuYXRBNzNkM0pnQ05wN1IvRXds?=
+ =?utf-8?B?M0o3RjNTNlNSclBRTm14eSt4VWtSdkJyQnpLV1NpaHptWTlXM0xpeDR2dFFL?=
+ =?utf-8?B?TW5Gcm9LVGVtOEkrb3RWa3d4cHp4UVJja3IyUG4yODRTR0h2OXA2aXdNeHpv?=
+ =?utf-8?B?UXFwTy90bDFYeDErVStIRXVFWnlMNG9ubjhINDNhSkJrMWd6dlBUejdmRDB0?=
+ =?utf-8?B?dTZTQ1lsZTlJOEpYRDNKUWt6ekhaN044SGxGRlIwcDRtNk9hMjVVbUl4NWNq?=
+ =?utf-8?B?M254cVpjdlRwcVFsSHRPRVA1Mi9qSnpYWGtrYU1GL25ROUp5aXNTL1QrOUk2?=
+ =?utf-8?B?aFZUU2MySWhwZ2krRmEvWHRQQUpidEoyR0VHMUJWa3FST0tObnlqTmZPeHlX?=
+ =?utf-8?B?WEJSaXIwSWR6VG1oNUVZZ2VubWIrbXFSNk55Z0dINVJnUU5kM2FPS0Qxci9o?=
+ =?utf-8?B?bDE3alp3TGgrcThmd3dBNEplN3lRMDNSZVlpYzlwbXFadGcrdWtwREVscmdJ?=
+ =?utf-8?B?clRDcGo3NDhqbWhUWCtkcE1aelhBV0VZTnJRZ0tHR1BiWVdNcUtvR0FPSUM0?=
+ =?utf-8?B?V01Da1hNSEhuSVdZdGxBM242Wlk2WHhzUm5zRkh5Z3ZLMzNQUmFIRFl3bnY1?=
+ =?utf-8?B?VjZJUzZsNERVSENpZ1FwRVQ2RXJUby9xd2Vac0E2TmxTR29GM0t6NFFDZzdt?=
+ =?utf-8?B?bzBVMmE0R25YNVRyeTFyUGs0WFlzV09ZZ1BXOVFUekR1MDRQOHV5TUJQWS8x?=
+ =?utf-8?B?RkFuN0pHaUtmYWlmNmdhZG5KdTYvZExrQ20zMVpDRzBJQ3JqdHIvNnMyRnlo?=
+ =?utf-8?B?V2JCcUZPR2tQcWhCZithYWlVL2EyK3R0QnBXbnpJckd1L0h0dmt4bnBwS0Fz?=
+ =?utf-8?B?RWJzSU5zUTZPeWhuYVROUm1XMGhpOGJzWWxZb2ZWZmlBMkt2U0ZNLzFnKzdk?=
+ =?utf-8?B?RklMY3JLTElvUTVYanc4NjdBNGpkNEx5bFgzbHIxNklRSnpjZDQ0K2NybkNk?=
+ =?utf-8?B?TVZHMjJaU1RWUzdsU1c4cGJQRk1IU0NvVVhzTlh2VmtuUjlUMFdQMVc4ZWdr?=
+ =?utf-8?B?ajFkOGsyWDhHMWljM1RUNDZKMXhodHY4cHNzU0hVOGF1VFhnVjF5aGZHdFdP?=
+ =?utf-8?B?clNWRlFSLytubUduM0xHd1BISmJxZlNLS05ZbGV0blIwL01zcUQ4WGVxWVJz?=
+ =?utf-8?B?QmlLME0vdkVZbEQvdW5jYk5WT3AwK1ZqZ21yVEtMWTBtWFNQYjdaaHc1NTRk?=
+ =?utf-8?Q?f4TK/MJbBw6rJZsIGRQ65BDnH16v3mmr/os7XTS?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 109ac2f4-66ff-4fc3-2137-08d900ed7f37
+X-MS-Exchange-CrossTenant-Network-Message-Id: 81f0be78-ddaa-4673-7b80-08d900ee40c5
 X-MS-Exchange-CrossTenant-AuthSource: SA0PR11MB4719.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2021 15:37:09.2399
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2021 15:42:33.9910
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: UQp/FwiN/e1EpNufbZ7MZNHu80gXvdyf1i4K1WdXoBXPWOf34xY9girQFRd+Z4y+O39GVhYWFzBsb8r5e2yv7w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR11MB4640
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-CrossTenant-UserPrincipalName: CjLZ4z+pz0wKLZk44Rrzh/AYXktG7RKUejXJNkF4cnDF5grHbebBDt5dYX/s+X94yuFrbDegNDAqBntMu3XN8A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR11MB5147
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-when enabling DEBUG_BUILD, an assembler failure used to be seen.
-But this patch was in meta-oe c0ce7599, dating in 2014...
+On 4/16/21 11:36 AM, Yi Fan Yu wrote:
+> License-Update:
+> Reword and clarify which subdir is LGPLv.1 and GPLv2.
+> 
+> Patch-Removal:
+> * 0001-syslog-ng-fix-segment-fault-during-service-start.patch
+> https://github.com/buytenh/ivykis/commit/a5e9caddbdb4d9d85133a440edec6aa7c1f018ac
+> 
+> Submit pending patches upstream.
+> 
+> Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
 
-Cannot reproduce the failure anymore with qemuarm.
+all failures i think are related to gcc.
+this was on master-next
 
-Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
----
- ...-option-enable-thread-tls-to-manage-.patch | 63 -------------------
- .../recipes-support/syslog-ng/syslog-ng.inc   |  5 --
- 2 files changed, 68 deletions(-)
- delete mode 100644 meta-oe/recipes-support/syslog-ng/files/configure.ac-ad=
-d-option-enable-thread-tls-to-manage-.patch
+BUILDALL-QEMU LOG FOR syslog-ng
+START TIME: 2021-04-16_09:34:42
+HOSTNAME: yow-lpggp3
+HOST OS: Ubuntu 18.04.5 LTS
+HOST KERNEL: 5.4.0-65-generic
+===============
+BUILD RESULTS:
+[glibc]
+PASS: qemumips
+PASS: qemumips64
+PASS: qemuppc
+PASS: qemuriscv64
+PASS: qemux86-64
+PASS: qemux86
+PASS: qemuarm
+PASS: qemuarm64
+PASS: qemuarmv5
+PASS: qemuppc64
+FAIL: qemuriscv32
+[musl]
+FAIL: qemumips
+FAIL: qemumips64
+PASS: qemuppc
+PASS: qemuriscv64
+PASS: qemux86-64
+PASS: qemux86
+PASS: qemuarm
+PASS: qemuarm64
+PASS: qemuarmv5
+FAIL: qemuppc64
+FAIL: qemuriscv32
+===============
+PASSED: 17
+FAILED: 5
+~
+~
 
-diff --git a/meta-oe/recipes-support/syslog-ng/files/configure.ac-add-optio=
-n-enable-thread-tls-to-manage-.patch b/meta-oe/recipes-support/syslog-ng/fi=
-les/configure.ac-add-option-enable-thread-tls-to-manage-.patch
-deleted file mode 100644
-index ff35fb157..000000000
---- a/meta-oe/recipes-support/syslog-ng/files/configure.ac-add-option-enabl=
-e-thread-tls-to-manage-.patch
-+++ /dev/null
-@@ -1,63 +0,0 @@
--From 15a90fd9ac1396015340e599e26d7cd193898fb8 Mon Sep 17 00:00:00 2001
--From: Hongxu Jia <hongxu.jia@windriver.com>
--Date: Tue, 12 Aug 2014 14:26:13 +0800
--Subject: [PATCH] configure.ac: add option --enable-thread-tls to manage th=
-read
-- ssl support
--MIME-Version: 1.0
--Content-Type: text/plain; charset=3DUTF-8
--Content-Transfer-Encoding: 8bit
--
--The thread local storage caused arm-gcc broken while compiling            =
-              =E2=94=82
--syslog-ng with option '-g -O'.                                            =
-              =E2=94=82
--...                                                                       =
-              =E2=94=82
--dnscache.s: Assembler messages:                                           =
-              =E2=94=82
--dnscache.s:100: Error: invalid operands (.text and *UND* sections) for `-'=
-              =E2=94=82
--...                                                                       =
-              =E2=94=82
--                                                                          =
-              =E2=94=82
--Add option --enable-thread-tls to manage the including of thread
--local storage, so we could explicitly disable it.
--
--Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
--
--change default to 'yes'
--Upstream-Status: Submitted [https://github.com/syslog-ng/syslog-ng/pull/36=
-49]
--
--Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
-----
-- configure.ac | 16 ++++++++++------
-- 1 file changed, 10 insertions(+), 6 deletions(-)
--
--diff --git a/configure.ac b/configure.ac
--index 1d67e81..7aad75f 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -210,6 +210,8 @@ AC_ARG_WITH(sanitizer,
--               [  --with-sanitizer=3D[address/undefined/etc...]
--                                          Enables compiler sanitizer suppo=
-rts (default: no)]
--               ,,with_sanitizer=3D"no")
--+AC_ARG_ENABLE(thread-tls,
--+              [  --enable-thread-tls        Enable Thread Local Storage s=
-upport (default: yes)],,enable_thread_tls=3D"yes")
--=20
-- AC_ARG_ENABLE(dynamic-linking,
--               [  --enable-dynamic-linking        Link everything dynamica=
-lly.],,enable_dynamic_linking=3D"auto")
--@@ -628,12 +630,14 @@ dnl ************************************************=
-***************************
-- dnl Is the __thread keyword available?
-- dnl *********************************************************************=
-******
--=20
---AC_LINK_IFELSE([AC_LANG_PROGRAM(
---[[#include <pthread.h>
---__thread int a;
---]],
---[a=3D0;])],
---[ac_cv_have_tls=3Dyes; AC_DEFINE_UNQUOTED(HAVE_THREAD_KEYWORD, 1, "Whethe=
-r Thread Local Storage is supported by the system")])
--+if test "x$enable_thread_tls" =3D "xyes"; then
--+    AC_LINK_IFELSE([AC_LANG_PROGRAM(
--+    [[#include <pthread.h>
--+    __thread int a;
--+    ]],
--+    [a=3D0;])],
--+    [ac_cv_have_tls=3Dyes; AC_DEFINE_UNQUOTED(HAVE_THREAD_KEYWORD, 1, "Wh=
-ether Thread Local Storage is supported by the system")])
--+fi
--=20
-- dnl *********************************************************************=
-******
-- dnl How to do static linking?
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/reci=
-pes-support/syslog-ng/syslog-ng.inc
-index ebb3eaf0f..e48e5d5e2 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-@@ -22,7 +22,6 @@ SRC_URI =3D "https://github.com/balabit/syslog-ng/release=
-s/download/${BP}/${BP}.ta
-            file://syslog-ng.conf.sysvinit \
-            file://initscript \
-            file://volatiles.03_syslog-ng \
--           file://configure.ac-add-option-enable-thread-tls-to-manage-.pat=
-ch \
- "
-=20
- UPSTREAM_CHECK_URI =3D "https://github.com/balabit/syslog-ng/releases"
-@@ -42,12 +41,8 @@ EXTRA_OECONF =3D " \
-     --disable-python \
-     --disable-java --disable-java-modules \
-     --with-pidfile-dir=3D${localstatedir}/run/${BPN} \
--    ${CONFIG_TLS} \
- "
-=20
--CONFIG_TLS =3D "--enable-thread-tls"
--CONFIG_TLS_arm =3D "${@oe.utils.conditional( "DEBUG_BUILD", "1", " --disab=
-le-thread-tls", " --enable-thread-tls", d )}"
--
- PACKAGECONFIG ??=3D " \
-     ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 systemd', d)} \
- "
---=20
-2.29.2
 
