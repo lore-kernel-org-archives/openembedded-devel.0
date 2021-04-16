@@ -1,216 +1,461 @@
-Received: from mail7.pr.hu (mail7.pr.hu [87.242.0.7])
- by mx.groups.io with SMTP id smtpd.web11.6623.1618564774752102591
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.73])
+ by mx.groups.io with SMTP id smtpd.web09.10575.1618586675168326444
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Apr 2021 02:19:36 -0700
+ Fri, 16 Apr 2021 08:24:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@pr.hu header.s=pr20170203 header.b=bWD5TUSS;
- spf=pass (domain: pr.hu, ip: 87.242.0.7, mailfrom: zboszor@pr.hu)
-Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
-	by frontdoor.pr.hu with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.89)
-	(envelope-from <zboszor@pr.hu>)
-	id 1lXKdQ-0004ow-OX; Fri, 16 Apr 2021 11:19:32 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
-	s=pr20170203; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=IZUPps4bPXlusfzQ/l5vthKwVLQuDj1/uQglCbDczns=; b=bWD5TUSS1xBaez7+xs7yo3dlN/
-	E1t11CX0oHo4GbdDLQ/dieCwEcA68DR1/LdNPlyL23u1sIofe4fJY7OwGE2TLzpugNxrAkir8gAxM
-	GreFvfFIN7xO6tCPNiFYwQr2IW080Uh+/aEzm/AQtXGPH7oItuHk65NyVuIgb5ZNRS1X4C54dFiqg
-	BTPyneaP5B7DZTB5hJkkka9dQbCb7jpyCdK9kruf0b1Tc8zIjT51R2s28oQMJmduAtALw5DAlGPTo
-	A6EbFhgabYnxN7mIREpQbPXcwK4qywYYcg8k5dh78WIMq8N2odMf8vpKkCjHrZwLlGkiF4sqv9PaC
-	zSCsRr/Q==;
-Received: from host-87-242-23-58.prtelecom.hu ([87.242.23.58] helo=[192.168.1.2])
-	by mail.pr.hu with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
-	(Exim 4.92)
-	(envelope-from <zboszor@pr.hu>)
-	id 1lXKdL-0006hy-9b; Fri, 16 Apr 2021 11:19:30 +0200
-Subject: Re: [oe] [meta-oe][hardknott][master][PATCH 2/2] opencv: link sfm module with Glog
-To: Martin Jansa <Martin.Jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <20210414003840.2175988-1-Martin.Jansa@gmail.com>
- <20210414003840.2175988-2-Martin.Jansa@gmail.com>
- <f8f8a255-c988-f5d3-fc53-a64e39959095@pr.hu>
- <20210416084512.ex6ko2o3o2vpufxj@jama>
-From: "Zoltan Boszormenyi" <zboszor@pr.hu>
-Message-ID: <de8343ef-1f6d-5281-4f48-4ed604d416eb@pr.hu>
-Date: Fri, 16 Apr 2021 11:19:24 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+ dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=POnuxyv3;
+ spf=pass (domain: windriver.com, ip: 40.107.243.73, mailfrom: stefan.ghinea@windriver.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=OGdZ0y9LG4s04p35bTXwrBHCK+gYYXu2ATohbGh3Y9LijcNabr9Ao47kp33H6RlW2jNyB0pCl1ltX+fNRfthd3TISEbbIwIOVUGmUGAT2ws2srBFAsfC2YYLVe3CD6AKw7Bs3nltVFM8VD1d6JiiMbw3RM6WkwvSwh02npHBj/oBYdrXtyAuZYRXHzZMyziFJJrogdFQyXF5q8OFdwyjPk3P1KglQXTc9zL84izg2OatN/gPJbs4bF0o5ZG626HmZb/uPztpwpwhqntw4GIpisSmI5QXRDr3BndfAZFXkOO2LxhDA6JsvGcQKJRpuZ83w7pRI5Mv3uQCv6I7hGAPug==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GDeCzTkKePmzJ9eTZ+Nmq5a8okxassMaeZpMWDAZXOg=;
+ b=Ka0iuMCUtc6fN1rs1e9Pu/AmLCGiqWsqxjqBzrYULtBAGDoz+JF3M9SxSOPqtmKwxmWi88dLkEhUiPAkazG8pi7EeXpj+3m0DGreAOFfA9W7a2t4hPI+N/oBmScyXinzU2uyT9ust9EGK8gIOvCTTt1Tcyt2q8dRWaDmr6U1dTyrV8d0Y3ffswQeo695NJAT/OjHSkXQQxfiy35yWrqP3QBcXncKJ89i2c3mM668/xzeO1wHUPc8lQlhFM/06SDU1KDEeB9pJ5aOh/ip7STq2PhhaPgInbkCUDkSy77BXpDJutbTbH+F2bd9szR21aKCCoZZPeOBle/wLfn8UswqBA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GDeCzTkKePmzJ9eTZ+Nmq5a8okxassMaeZpMWDAZXOg=;
+ b=POnuxyv3f8VL0bvMRmrGYSVq7EmDLdko7ItKx2QpsgImKEnTJ+m7DZo6LrqDfS/lTgAOmBYgNen+Ghk5W3enuSgsxXuGd17NH0fWKqLTEzY+1d3Yp5hOZ+q8E3LckZeSAdlsPjERVv61s4m6KLv7QHegk8d5NSaaLZ9oI0Lfsug=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from SJ0PR11MB4989.namprd11.prod.outlook.com (2603:10b6:a03:2d9::22)
+ by BYAPR11MB3574.namprd11.prod.outlook.com (2603:10b6:a03:b1::27) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4020.18; Fri, 16 Apr
+ 2021 15:24:32 +0000
+Received: from SJ0PR11MB4989.namprd11.prod.outlook.com
+ ([fe80::7037:7346:6da2:e8cb]) by SJ0PR11MB4989.namprd11.prod.outlook.com
+ ([fe80::7037:7346:6da2:e8cb%7]) with mapi id 15.20.4042.019; Fri, 16 Apr 2021
+ 15:24:31 +0000
+From: "Stefan Ghinea" <stefan.ghinea@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] [oe-devel] [meta-python] python3-django: fix CVE-2021-28658
+Date: Fri, 16 Apr 2021 18:24:17 +0300
+Message-ID: <20210416152417.26659-1-stefan.ghinea@windriver.com>
+X-Mailer: git-send-email 2.17.1
+X-Originating-IP: [89.137.231.29]
+X-ClientProxiedBy: VI1P194CA0024.EURP194.PROD.OUTLOOK.COM
+ (2603:10a6:800:be::34) To SJ0PR11MB4989.namprd11.prod.outlook.com
+ (2603:10b6:a03:2d9::22)
+Return-Path: stefan.ghinea@windriver.com
 MIME-Version: 1.0
-In-Reply-To: <20210416084512.ex6ko2o3o2vpufxj@jama>
-X-Spam-Score: -0.9 (/)
-X-Scan-Signature: 8bece591170332111aac0b79b2c40b8f
-X-Spam-Tracer: backend.mail.pr.hu -0.9 20210416091930Z
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: base64
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from localhost.localdomain (89.137.231.29) by VI1P194CA0024.EURP194.PROD.OUTLOOK.COM (2603:10a6:800:be::34) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4042.16 via Frontend Transport; Fri, 16 Apr 2021 15:24:31 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 179093f6-2c0d-4217-e149-08d900ebbbaf
+X-MS-TrafficTypeDiagnostic: BYAPR11MB3574:
+X-Microsoft-Antispam-PRVS: 
+	<BYAPR11MB357482A8C6D6A7403341593CF24C9@BYAPR11MB3574.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	Ld9styHcirQ6wMiheylHsmtbshzocNVKK/XXB4Irnem55PuQPWSgPhPiAsNUS56p2TsPcmHmj34Mjyj02S0VWPxr232Hg46fwthgbgfpWYpCBx4J/zf29eo3NjAAGGqbKWnDw73HfO4K3VBan2v0dZXFGAyWzRmlk1kD3BSsGv3et20mwWL8WdbCO4LLr90tvl/AyFmIfY3/Aef/bgwXZKj78eZSy7gSC/c/Z4iStAky+VPEMFDVzlmOJ+C1h2MqBTNIqN1WJ1dFXbw61sm4ixxXlgyKyg/LzC60QWLQ4kNNEXSVGoHMSk7XtJ+gum8s+uDWHhv7BdglLMgbesHkMVqCXv8ZiH2sgjcuMhtKZoMBcZwN4KWani7kkhSPZ6zbzSpcCHVbykekmveOa2BDlwucJ5v/lILDyjtKOJhiaCFBVS7o4Xuc5j6AcDSrFxl4JOikWB+aeMhvM3nZXjbDA/OuOWzgPHMNKzaT1uXVVoblzKbC5hiWAt9p6j1GmX+SUjs4oqmUEFWC6o6AmeTxJW0L1de4AgRFoDHWhlTDzJm3cS5n9sQOgM2xnMkxU+0RNA1Wq1IvKe7nZHQP3a+qa2wL76eErh7HLkxJVsqkPsV6XQYZCl+tAskpSJ9zC9o8ev34O5ukJCNhphmb7aNgRcC4pOpxRa1hfC88FlMn9at7F7xwBw9slUvgRk/qU6XOQW7XMDpxTwTDi/vE/OLUTvOeaHoOF1eK/8cgLXu0ygRCKhfP3rrClbw8wd+MtK7J
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR11MB4989.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(366004)(396003)(346002)(136003)(376002)(52116002)(5660300002)(316002)(6512007)(186003)(66574015)(86362001)(6916009)(2906002)(8936002)(478600001)(83380400001)(16526019)(966005)(2616005)(66556008)(1076003)(66946007)(44832011)(38100700002)(6486002)(6666004)(8676002)(956004)(36756003)(6506007)(66476007)(38350700002)(30864003)(26005)(473944003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	=?us-ascii?Q?QioZnRTeJtao+vbcFW+N9B+g8lJClxpEKqCMPz8/WOppuHwch8GChKeGz73+?=
+ =?us-ascii?Q?8LTt0PyW6sFJSnhiVE1lWI6mm0Jr3uA5745w+c23SPITe10vQjdTH3/5/hyV?=
+ =?us-ascii?Q?Znjac936zgF0YokSXNSnvRpGIdz+UuO4lBSkMyfs7DgVnbIE9E3wYNM4Nanu?=
+ =?us-ascii?Q?jN9sIZ9L8oDU3HJvH+Whrs0IDFg4tvjw3sDekDg03NXyhUX+3hv+xt4zyLB9?=
+ =?us-ascii?Q?J69Th6oZg+xnCKthR8EWXRcCpVvlqGwiEOxRhIPKMcsOrOPHCm4h+fLaRWnI?=
+ =?us-ascii?Q?JJSOdZx81psh7dzxbx7ToNZpUowhnZIun6Pg16PcCL5ZBLO1l/Vxoi8DaPI8?=
+ =?us-ascii?Q?vGVO86eFv0nA3sNVDb8IawclSEsFAv8D7TYKTGVWDJXxfc8P1IB9VF8RRPLI?=
+ =?us-ascii?Q?O1Y68TiwjHLcnzNqRVLB9JJPJAcN8GlCOsKVPV+r2QDU9mcuXeJewzLb1oFQ?=
+ =?us-ascii?Q?RjnwVnjvPP3+Oqq0P47RS7fQTrWT7CCUiHTpcdFs01vA7ZPodYmwDTl/E9eG?=
+ =?us-ascii?Q?cgsC3XkgjRm/NXV+lyjc0EZvSqBj8bm5qdLxaFZNxZbQHHNjx4w3CCbFvOZO?=
+ =?us-ascii?Q?R5N2ggQ7msjEjbZrh02bp4xg4ZsIV5r0Qc2EFr0yCFVhQdFPCGaDtpTEwX8t?=
+ =?us-ascii?Q?62GmuQVS83+L9dexnTreD9jHjW0jlUXu/GqlNn7R6KSbQ69RJsLqg+3OZd4z?=
+ =?us-ascii?Q?Ud3jK3cx44CIdAdC1us+lopCmH3zN2cehQ4Zbn8FvgzUoPXt2rVnlAyQ1GU8?=
+ =?us-ascii?Q?nWgOPQEmYTFH+SOyPlcTgLywU/KlMuLJWVSZLkt+keimVOUIfV8FAJ2h35Y9?=
+ =?us-ascii?Q?SSCJfxavji/0e/VH+HLzkB7Ho20Wg41qvZIlmwhNElfuGqhVg30OLC7ZhLBZ?=
+ =?us-ascii?Q?mMtpCT+XS+qsHpHKZuZDHrS0+kGRtMpKeDNinRp7XTrzu/9hxm4YDHsdbphP?=
+ =?us-ascii?Q?DJ8drZYTBrZAmhhWAVnoFUdMZr0LigYD9ityBSk4xhjdwFP7ohRWQzQcKQnz?=
+ =?us-ascii?Q?8At1cshFrrCeEfS2tDf37MV/GK9u978k/t8nDQpwXFomV/Q6m1l+a/E5ZIGC?=
+ =?us-ascii?Q?3xlWE915MxRyByEpVQChxt3DDO6c0yhrd7eV5v22byj77YE/jDG6a1LSKRuC?=
+ =?us-ascii?Q?vKvA4vw2IJhx9RuK7aIkcI0mhzOQWBzEkvdQwZ1gSv45/lp3DLVPHSYVnDPe?=
+ =?us-ascii?Q?KzbxZbOOdxEUNK+EiwavSi0pTiywfdOynBfQzAgbHN2sjjUgqi7VnMxLMC0j?=
+ =?us-ascii?Q?NNp+EqdSB8O7Cnpd8SpitPwRjUcoK56UG/ATcrXM6mSiccLqSeXooJ/gaPbQ?=
+ =?us-ascii?Q?DKNjKNKxPXBz2p9ptZB3QZeb?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 179093f6-2c0d-4217-e149-08d900ebbbaf
+X-MS-Exchange-CrossTenant-AuthSource: SJ0PR11MB4989.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2021 15:24:31.8136
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: shT+q+rt8OAofafZP2LgTkwjfqbySmwEmxZk7I/DB7626m3cBpVCzSAQLGMteKnk+vqb54rom6YjbWQ7y33oDZd7TxrsCmGlopfJxJvcmHY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3574
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-MjAyMS4gMDQuIDE2LiAxMDo0NSBrZWx0ZXrDqXNzZWwsIE1hcnRpbiBKYW5zYSDDrXJ0YToNCj4g
-T24gRnJpLCBBcHIgMTYsIDIwMjEgYXQgMTA6Mjk6MjRBTSArMDIwMCwgQsO2c3rDtnJtw6lueWkg
-Wm9sdMOhbiB3cm90ZToNCj4+IFRoYW5rIHlvdSEhIQ0KPj4NCj4+IEFub3RoZXIgZGF0YXBvaW50
-OiB3aGVuIG1ldGEtY2xhbmcgKHdpdGggTExWTSAxMi4wLjAtcmM1KSBpcyB1c2VkLA0KPj4gdGhl
-cmUgaXMgbm8gYnVpbGQgaXNzdWUuIEluc3RlYWQsIHRoZXJlJ3MgYSBydW50aW1lIGlzc3VlIGJl
-Y2F1c2Ugb2YNCj4+IHRoZSBtaXNzaW5nIHN5bWJvbHMgaW4gdGhlIHNmbSBsaWJyYXJ5Lg0KPiAN
-Cj4gQ2FuIHlvdSBwbGVhc2UgcmVwb3J0IHRoYXQgaW4gdXBzdHJlYW0gUFIgYXMgd2VsbD8NCj4g
-aHR0cHM6Ly9naXRodWIuY29tL29wZW5jdi9vcGVuY3ZfY29udHJpYi9wdWxsLzI5MjMNCg0KSSBq
-dXN0IGRpZC4NCg0KPiANCj4+IDIwMjEuIDA0LiAxNC4gMjozOCBrZWx0ZXrDqXNzZWwsIE1hcnRp
-biBKYW5zYSDDrXJ0YToNCj4+PiAqIGZpeGVzIGJ1aWxkIGlzc3VlIHdoZW4gZG5uIFBBQ0tBR0VD
-T05GSUcgaXMgZW5hYmxlZCBhbmQgbGQtaXMtZ29sZCBpbiBESVNUUk9fRkVBVFVSRVMNCj4+Pg0K
-Pj4+IFNpZ25lZC1vZmYtYnk6IE1hcnRpbiBKYW5zYSA8TWFydGluLkphbnNhQGdtYWlsLmNvbT4N
-Cj4+PiAtLS0NCj4+PiAgICAuLi4vb3BlbmN2LzAwMDEtc2ZtLWxpbmstd2l0aC1HbG9nX0xJQlMu
-cGF0Y2ggfCA0NCArKysrKysrKysrKysrKysrKysrDQo+Pj4gICAgLi4uL3JlY2lwZXMtc3VwcG9y
-dC9vcGVuY3Yvb3BlbmN2XzQuNS4yLmJiICAgIHwgIDEgKw0KPj4+ICAgIDIgZmlsZXMgY2hhbmdl
-ZCwgNDUgaW5zZXJ0aW9ucygrKQ0KPj4+ICAgIGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL3Jl
-Y2lwZXMtc3VwcG9ydC9vcGVuY3Yvb3BlbmN2LzAwMDEtc2ZtLWxpbmstd2l0aC1HbG9nX0xJQlMu
-cGF0Y2gNCj4+Pg0KPj4+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9vcGVu
-Y3Yvb3BlbmN2LzAwMDEtc2ZtLWxpbmstd2l0aC1HbG9nX0xJQlMucGF0Y2ggYi9tZXRhLW9lL3Jl
-Y2lwZXMtc3VwcG9ydC9vcGVuY3Yvb3BlbmN2LzAwMDEtc2ZtLWxpbmstd2l0aC1HbG9nX0xJQlMu
-cGF0Y2gNCj4+PiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPj4+IGluZGV4IDAwMDAwMDAwMDAuLjdi
-MmM0MTAwYTINCj4+PiAtLS0gL2Rldi9udWxsDQo+Pj4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLXN1
-cHBvcnQvb3BlbmN2L29wZW5jdi8wMDAxLXNmbS1saW5rLXdpdGgtR2xvZ19MSUJTLnBhdGNoDQo+
-Pj4gQEAgLTAsMCArMSw0NCBAQA0KPj4+ICtGcm9tIGZmZTIwZmM0ZWM0NmM2YjQ5MWVmZjI5YTM4
-ZjkwNjg2ZDRkMDM1ZjYgTW9uIFNlcCAxNyAwMDowMDowMCAyMDAxDQo+Pj4gK0Zyb206IE1hcnRp
-biBKYW5zYSA8TWFydGluLkphbnNhQGdtYWlsLmNvbT4NCj4+PiArRGF0ZTogTW9uLCAxMiBBcHIg
-MjAyMSAyMDozNzo0MCArMDAwMA0KPj4+ICtTdWJqZWN0OiBbUEFUQ0hdIHNmbTogbGluayB3aXRo
-IEdsb2dfTElCUw0KPj4+ICsNCj4+PiArKiBpbiA0LjUuMCB0aGVyZSB3YXMgZXhwbGljaXQgbGlu
-a2FnZSB3aXRoIEdMT0dfTElCUkFSWSwgYnV0IHNpbmNlIDQuNS4xIHdpdGg6DQo+Pj4gKyAgaHR0
-cHM6Ly9naXRodWIuY29tL29wZW5jdi9vcGVuY3ZfY29udHJpYi9jb21taXQvMjNlZTYyYTE5Yjdh
-M2U1MGQ2ZGJmMjk1MzU5ZDhiMWFmZjJlMDNmZA0KPj4+ICsNCj4+PiArICBpdCdzIGdvbmUsIHBy
-b2JhYmx5IGJlY2F1c2UgR2xvZ19GT1VORCBpcyBhbHJlYWR5IHNldCBmcm9tIENlcmVzLA0KPj4+
-ICsgIGJ1dCB0aGVuIEdMT0dfTElCUkFSSUVTIGlzIGVtcHR5IGluIExJQk1WX0xJR0hUX0xJQlMg
-YW5kIGJ1aWxkIHdpdGggZ29sZCBmYWlsczoNCj4+PiArDQo+Pj4gK0ZBSUxFRDogYmluL2V4YW1w
-bGVfdHV0b3JpYWxfcGVyc3BlY3RpdmVfY29ycmVjdGlvbg0KPj4+ICs6ICYmIFRPUERJUi90bXAt
-Z2xpYmMvd29yay9jb3JlMi02NC1vZS1saW51eC9vcGVuY3YvNC41LjItcjAvcmVjaXBlLXN5c3Jv
-b3QtbmF0aXZlL3Vzci9iaW4veDg2XzY0LW9lLWxpbnV4L3g4Nl82NC1vZS1saW51eC1nKysgLW02
-NCAtbWFyY2g9Y29yZTIgLW10dW5lPWNvcmUyIC1tc3NlMyAtbWZwbWF0aD1zc2UgLUlUT1BESVIv
-dG1wLWdsaWJjL3dvcmsvY29yZTItNjQtb2UtbGludXgvb3BlbmN2LzQuNS4yLXIwL2dpdC9pbmNs
-dWRlICAtZnN0YWNrLXByb3RlY3Rvci1zdHJvbmcgIC1PMiAtRF9GT1JUSUZZX1NPVVJDRT0yIC1X
-Zm9ybWF0IC1XZm9ybWF0LXNlY3VyaXR5IC1XZXJyb3I9Zm9ybWF0LXNlY3VyaXR5ICAtLXN5c3Jv
-b3Q9VE9QRElSL3RtcC1nbGliYy93b3JrL2NvcmUyLTY0LW9lLWxpbnV4L29wZW5jdi80LjUuMi1y
-MC9yZWNpcGUtc3lzcm9vdCAgLU8yIC1waXBlIC1nIC1mZWxpbWluYXRlLXVudXNlZC1kZWJ1Zy10
-eXBlcyAtZm1hY3JvLXByZWZpeC1tYXA9VE9QRElSL3RtcC1nbGliYy93b3JrL2NvcmUyLTY0LW9l
-LWxpbnV4L29wZW5jdi80LjUuMi1yMD0vdXNyL3NyYy9kZWJ1Zy9vcGVuY3YvNC41LjItcjAgICAg
-ICAgICAgICAgICAgICAgICAgLWZkZWJ1Zy1wcmVmaXgtbWFwPVRPUERJUi90bXAtZ2xpYmMvd29y
-ay9jb3JlMi02NC1vZS1saW51eC9vcGVuY3YvNC41LjItcjA9L3Vzci9zcmMvZGVidWcvb3BlbmN2
-LzQuNS4yLXIwICAgICAgICAgICAgICAgICAgICAgIC1mZGVidWctcHJlZml4LW1hcD1UT1BESVIv
-dG1wLWdsaWJjL3dvcmsvY29yZTItNjQtb2UtbGludXgvb3BlbmN2LzQuNS4yLXIwL3JlY2lwZS1z
-eXNyb290PSAgICAgICAgICAgICAgICAgICAgICAtZmRlYnVnLXByZWZpeC1tYXA9VE9QRElSL3Rt
-cC1nbGliYy93b3JrL2NvcmUyLTY0LW9lLWxpbnV4L29wZW5jdi80LjUuMi1yMC9yZWNpcGUtc3lz
-cm9vdC1uYXRpdmU9ICAtZnZpc2liaWxpdHktaW5saW5lcy1oaWRkZW4gIC1tNjQgLW1hcmNoPWNv
-cmUyIC1tdHVuZT1jb3JlMiAtbXNzZTMgLW1mcG1hdGg9c3NlIC1JVE9QRElSL3RtcC1nbGliYy93
-b3JrL2NvcmUyLTY0LW9lLWxpbnV4L29wZW5jdi80LjUuMi1yMC9naXQvaW5jbHVkZSAgLWZzdGFj
-ay1wcm90ZWN0b3Itc3Ryb25nICAtTzIgLURfRk9SVElGWV9TT1VSQ0U9MiAtV2Zvcm1hdCAtV2Zv
-cm1hdC1zZWN1cml0eSAtV2Vycm9yPWZvcm1hdC1zZWN1cml0eSAgLS1zeXNyb290PVRPUERJUi90
-bXAtZ2xpYmMvd29yay9jb3JlMi02NC1vZS1saW51eC9vcGVuY3YvNC41LjItcjAvcmVjaXBlLXN5
-c3Jvb3QgICAtZnNpZ25lZC1jaGFyIC1XIC1XYWxsIC1XZXJyb3I9cmV0dXJuLXR5cGUgLVdlcnJv
-cj1ub24tdmlydHVhbC1kdG9yIC1XZXJyb3I9YWRkcmVzcyAtV2Vycm9yPXNlcXVlbmNlLXBvaW50
-IC1XZm9ybWF0IC1XZXJyb3I9Zm9ybWF0LXNlY3VyaXR5IC1XbWlzc2luZy1kZWNsYXJhdGlvbnMg
-LVd1bmRlZiAtV2luaXQtc2VsZiAtV3BvaW50ZXItYXJpdGggLVdzaGFkb3cgLVdzaWduLXByb21v
-IC1XdW5pbml0aWFsaXplZCAtV3N1Z2dlc3Qtb3ZlcnJpZGUgLVduby1kZWxldGUtbm9uLXZpcnR1
-YWwtZHRvciAtV25vLWNvbW1lbnQgLVdpbXBsaWNpdC1mYWxsdGhyb3VnaD0zIC1Xbm8tc3RyaWN0
-LW92ZXJmbG93IC1mZGlhZ25vc3RpY3Mtc2hvdy1vcHRpb24gLVduby1sb25nLWxvbmcgLXB0aHJl
-YWQgLWZvbWl0LWZyYW1lLXBvaW50ZXIgLWZmdW5jdGlvbi1zZWN0aW9ucyAtZmRhdGEtc2VjdGlv
-bnMgIC1tc3NlIC1tc3NlMiAtbXNzZTMgLW1zc3NlMyAtRE5ERUJVRyAgLUROREVCVUcgIC1tNjQg
-LW1hcmNoPWNvcmUyIC1tdHVuZT1jb3JlMiAtbXNzZTMgLW1mcG1hdGg9c3NlIC1JVE9QRElSL3Rt
-cC1nbGliYy93b3JrL2NvcmUyLTY0LW9lLWxpbnV4L29wZW5jdi80LjUuMi1yMC9naXQvaW5jbHVk
-ZSAgLWZzdGFjay1wcm90ZWN0b3Itc3Ryb25nICAtTzIgLURfRk9SVElGWV9TT1VSQ0U9MiAtV2Zv
-cm1hdCAtV2Zvcm1hdC1zZWN1cml0eSAtV2Vycm9yPWZvcm1hdC1zZWN1cml0eSAgLS1zeXNyb290
-PVRPUERJUi90bXAtZ2xpYmMvd29yay9jb3JlMi02NC1vZS1saW51eC9vcGVuY3YvNC41LjItcjAv
-cmVjaXBlLXN5c3Jvb3QgIC1PMiAtcGlwZSAtZyAtZmVsaW1pbmF0ZS11bnVzZWQtZGVidWctdHlw
-ZXMgLWZtYWNyby1wcmVmaXgtbWFwPVRPUERJUi90bXAtZ2xpYmMvd29yay9jb3JlMi02NC1vZS1s
-aW51eC9vcGVuY3YvNC41LjItcjA9L3Vzci9zcmMvZGVidWcvb3BlbmN2LzQuNS4yLXIwICAgICAg
-ICAgICAgICAgICAgICAgIC1mZGVidWctcHJlZml4LW1hcD1UT1BESVIvdG1wLWdsaWJjL3dvcmsv
-Y29yZTItNjQtb2UtbGludXgvb3BlbmN2LzQuNS4yLXIwPS91c3Ivc3JjL2RlYnVnL29wZW5jdi80
-LjUuMi1yMCAgICAgICAgICAgICAgICAgICAgICAtZmRlYnVnLXByZWZpeC1tYXA9VE9QRElSL3Rt
-cC1nbGliYy93b3JrL2NvcmUyLTY0LW9lLWxpbnV4L29wZW5jdi80LjUuMi1yMC9yZWNpcGUtc3lz
-cm9vdD0gICAgICAgICAgICAgICAgICAgICAgLWZkZWJ1Zy1wcmVmaXgtbWFwPVRPUERJUi90bXAt
-Z2xpYmMvd29yay9jb3JlMi02NC1vZS1saW51eC9vcGVuY3YvNC41LjItcjAvcmVjaXBlLXN5c3Jv
-b3QtbmF0aXZlPSAgLWZ2aXNpYmlsaXR5LWlubGluZXMtaGlkZGVuICAtbTY0IC1tYXJjaD1jb3Jl
-MiAtbXR1bmU9Y29yZTIgLW1zc2UzIC1tZnBtYXRoPXNzZSAtSVRPUERJUi90bXAtZ2xpYmMvd29y
-ay9jb3JlMi02NC1vZS1saW51eC9vcGVuY3YvNC41LjItcjAvZ2l0L2luY2x1ZGUgIC1mc3RhY2st
-cHJvdGVjdG9yLXN0cm9uZyAgLU8yIC1EX0ZPUlRJRllfU09VUkNFPTIgLVdmb3JtYXQgLVdmb3Jt
-YXQtc2VjdXJpdHkgLVdlcnJvcj1mb3JtYXQtc2VjdXJpdHkgIC0tc3lzcm9vdD1UT1BESVIvdG1w
-LWdsaWJjL3dvcmsvY29yZTItNjQtb2UtbGludXgvb3BlbmN2LzQuNS4yLXIwL3JlY2lwZS1zeXNy
-b290IC1XbCwtTzEgLVdsLC0taGFzaC1zdHlsZT1nbnUgLVdsLC0tYXMtbmVlZGVkIC1XbCwteixy
-ZWxybywteixub3cgLVdsLC1PMSAtV2wsLS1oYXNoLXN0eWxlPWdudSAtV2wsLS1hcy1uZWVkZWQg
-LVdsLC16LHJlbHJvLC16LG5vdyAgLVdsLC0tZ2Mtc2VjdGlvbnMgLVdsLC0tYXMtbmVlZGVkIHNh
-bXBsZXMvY3BwL0NNYWtlRmlsZXMvZXhhbXBsZV90dXRvcmlhbF9wZXJzcGVjdGl2ZV9jb3JyZWN0
-aW9uLmRpci90dXRvcmlhbF9jb2RlL2ZlYXR1cmVzMkQvSG9tb2dyYXBoeS9wZXJzcGVjdGl2ZV9j
-b3JyZWN0aW9uLmNwcC5vIC1vIGJpbi9leGFtcGxlX3R1dG9yaWFsX3BlcnNwZWN0aXZlX2NvcnJl
-Y3Rpb24gIC1sZGwgIC1sbSAgLWxwdGhyZWFkICAtbHJ0ICBsaWIvbGlib3BlbmN2X2dhcGkuc28u
-NC41LjIgIGxpYi9saWJvcGVuY3Zfc3RpdGNoaW5nLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X3Rz
-LnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X2FscGhhbWF0LnNvLjQuNS4yICBsaWIvbGlib3BlbmN2
-X2FydWNvLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X2Jnc2VnbS5zby40LjUuMiAgbGliL2xpYm9w
-ZW5jdl9iaW9pbnNwaXJlZC5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9jY2FsaWIuc28uNC41LjIg
-IGxpYi9saWJvcGVuY3ZfZG5uX29iamRldGVjdC5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9kbm5f
-c3VwZXJyZXMuc28uNC41LjIgIGxpYi9saWJvcGVuY3ZfZHBtLnNvLjQuNS4yICBsaWIvbGlib3Bl
-bmN2X2ZhY2Uuc28uNC41LjIgIGxpYi9saWJvcGVuY3ZfZnV6enkuc28uNC41LjIgIGxpYi9saWJv
-cGVuY3ZfaGZzLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X2ltZ19oYXNoLnNvLjQuNS4yICBsaWIv
-bGlib3BlbmN2X2ludGVuc2l0eV90cmFuc2Zvcm0uc28uNC41LjIgIGxpYi9saWJvcGVuY3ZfbGlu
-ZV9kZXNjcmlwdG9yLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X21jYy5zby40LjUuMiAgbGliL2xp
-Ym9wZW5jdl9xdWFsaXR5LnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X3JhcGlkLnNvLjQuNS4yICBs
-aWIvbGlib3BlbmN2X3JlZy5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9yZ2JkLnNvLjQuNS4yICBs
-aWIvbGlib3BlbmN2X3NhbGllbmN5LnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X3NmbS5zby40LjUu
-MiAgbGliL2xpYm9wZW5jdl9zdGVyZW8uc28uNC41LjIgIGxpYi9saWJvcGVuY3Zfc3RydWN0dXJl
-ZF9saWdodC5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9zdXBlcnJlcy5zby40LjUuMiAgbGliL2xp
-Ym9wZW5jdl9zdXJmYWNlX21hdGNoaW5nLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X3RyYWNraW5n
-LnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X3ZpZGVvc3RhYi5zby40LjUuMiAgbGliL2xpYm9wZW5j
-dl93ZWNoYXRfcXJjb2RlLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X3hmZWF0dXJlczJkLnNvLjQu
-NS4yICBsaWIvbGlib3BlbmN2X3hvYmpkZXRlY3Quc28uNC41LjIgIGxpYi9saWJvcGVuY3ZfeHBo
-b3RvLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X3NoYXBlLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2
-X2hpZ2hndWkuc28uNC41LjIgIGxpYi9saWJvcGVuY3ZfZGF0YXNldHMuc28uNC41LjIgIGxpYi9s
-aWJvcGVuY3ZfbWwuc28uNC41LjIgIGxpYi9saWJvcGVuY3ZfcGxvdC5zby40LjUuMiAgbGliL2xp
-Ym9wZW5jdl9waGFzZV91bndyYXBwaW5nLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X29wdGZsb3cu
-c28uNC41LjIgIGxpYi9saWJvcGVuY3ZfeGltZ3Byb2Muc28uNC41LjIgIGxpYi9saWJvcGVuY3Zf
-dmlkZW9pby5zby40LjUuMiAgbGliL2xpYm9wZW5jdl92aWRlby5zby40LjUuMiAgbGliL2xpYm9w
-ZW5jdl9kbm4uc28uNC41LjIgIGxpYi9saWJvcGVuY3ZfaW1nY29kZWNzLnNvLjQuNS4yICBsaWIv
-bGlib3BlbmN2X29iamRldGVjdC5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9jYWxpYjNkLnNvLjQu
-NS4yICBsaWIvbGlib3BlbmN2X2ZlYXR1cmVzMmQuc28uNC41LjIgIGxpYi9saWJvcGVuY3ZfZmxh
-bm4uc28uNC41LjIgIGxpYi9saWJvcGVuY3ZfcGhvdG8uc28uNC41LjIgIGxpYi9saWJvcGVuY3Zf
-aW1ncHJvYy5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9jb3JlLnNvLjQuNS4yICAtV2wsLXJwYXRo
-LWxpbmssVE9QRElSL3RtcC1nbGliYy93b3JrL2NvcmUyLTY0LW9lLWxpbnV4L29wZW5jdi80LjUu
-Mi1yMC9idWlsZC9saWIgJiYgOg0KPj4+ICtsaWIvbGlib3BlbmN2X3NmbS5zby40LjUuMjogZXJy
-b3I6IHVuZGVmaW5lZCByZWZlcmVuY2UgdG8gJ2dvb2dsZTo6TG9nTWVzc2FnZTo6TG9nTWVzc2Fn
-ZShjaGFyIGNvbnN0KiwgaW50KScNCj4+PiArbGliL2xpYm9wZW5jdl9zZm0uc28uNC41LjI6IGVy
-cm9yOiB1bmRlZmluZWQgcmVmZXJlbmNlIHRvICdnb29nbGU6OkxvZ01lc3NhZ2U6OnN0cmVhbSgp
-Jw0KPj4+ICtsaWIvbGlib3BlbmN2X3NmbS5zby40LjUuMjogZXJyb3I6IHVuZGVmaW5lZCByZWZl
-cmVuY2UgdG8gJ2dvb2dsZTo6TG9nTWVzc2FnZTo6fkxvZ01lc3NhZ2UoKScNCj4+PiArbGliL2xp
-Ym9wZW5jdl9zZm0uc28uNC41LjI6IGVycm9yOiB1bmRlZmluZWQgcmVmZXJlbmNlIHRvICdnb29n
-bGU6OmtMb2dTaXRlVW5pbml0aWFsaXplZCcNCj4+PiArbGliL2xpYm9wZW5jdl9zZm0uc28uNC41
-LjI6IGVycm9yOiB1bmRlZmluZWQgcmVmZXJlbmNlIHRvICdmTEk6OkZMQUdTX3YnDQo+Pj4gK2xp
-Yi9saWJvcGVuY3Zfc2ZtLnNvLjQuNS4yOiBlcnJvcjogdW5kZWZpbmVkIHJlZmVyZW5jZSB0byAn
-Z29vZ2xlOjpJbml0VkxPRzNfXyhpbnQqKiwgaW50KiwgY2hhciBjb25zdCosIGludCknDQo+Pj4g
-K2xpYi9saWJvcGVuY3Zfc2ZtLnNvLjQuNS4yOiBlcnJvcjogdW5kZWZpbmVkIHJlZmVyZW5jZSB0
-byAnZ29vZ2xlOjpMb2dNZXNzYWdlRmF0YWw6OkxvZ01lc3NhZ2VGYXRhbChjaGFyIGNvbnN0Kiwg
-aW50KScNCj4+PiArbGliL2xpYm9wZW5jdl9zZm0uc28uNC41LjI6IGVycm9yOiB1bmRlZmluZWQg
-cmVmZXJlbmNlIHRvICdnb29nbGU6OkxvZ01lc3NhZ2VGYXRhbDo6fkxvZ01lc3NhZ2VGYXRhbCgp
-Jw0KPj4+ICtjb2xsZWN0MjogZXJyb3I6IGxkIHJldHVybmVkIDEgZXhpdCBzdGF0dXMNCj4+PiAr
-DQo+Pj4gKyAgQWRkIEdsb2dfTElCUyB3aGljaCBpcyBzZXQgdG8gdGhlIHNhbWUgdmFsdWUgYXMg
-R0xPR19MSUJSQVJJRVMgdXNlZCB0byBiZS4NCj4+PiArDQo+Pj4gK1Vwc3RyZWFtLVN0YXR1czog
-U3VibWl0dGVkIFtodHRwczovL2dpdGh1Yi5jb20vb3BlbmN2L29wZW5jdl9jb250cmliL3B1bGwv
-MjkyM10NCj4+PiArDQo+Pj4gK1NpZ25lZC1vZmYtYnk6IE1hcnRpbiBKYW5zYSA8TWFydGluLkph
-bnNhQGdtYWlsLmNvbT4NCj4+PiArLS0tDQo+Pj4gKyBtb2R1bGVzL3NmbS9DTWFrZUxpc3RzLnR4
-dCB8IDEgKw0KPj4+ICsgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspDQo+Pj4gKw0KPj4+
-ICtkaWZmIC0tZ2l0IGEvbW9kdWxlcy9zZm0vQ01ha2VMaXN0cy50eHQgYi9tb2R1bGVzL3NmbS9D
-TWFrZUxpc3RzLnR4dA0KPj4+ICtpbmRleCAwNDVhMWZlNmUuLmVlN2NlY2RhYyAxMDA2NDQNCj4+
-PiArLS0tIGEvbW9kdWxlcy9zZm0vQ01ha2VMaXN0cy50eHQNCj4+PiArKysrIGIvbW9kdWxlcy9z
-Zm0vQ01ha2VMaXN0cy50eHQNCj4+PiArQEAgLTg0LDYgKzg0LDcgQEAgc2V0KExJQk1WX0xJR0hU
-X0xJQlMNCj4+PiArICAgbXVsdGl2aWV3DQo+Pj4gKyAgIG51bWVyaWMNCj4+PiArICAgJHtHTE9H
-X0xJQlJBUklFU30NCj4+PiArKyAgJHtHbG9nX0xJQlN9DQo+Pj4gKyAgICR7R0ZMQUdTX0xJQlJB
-UklFU30NCj4+PiArICkNCj4+PiArDQo+Pj4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1z
-dXBwb3J0L29wZW5jdi9vcGVuY3ZfNC41LjIuYmIgYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9v
-cGVuY3Yvb3BlbmN2XzQuNS4yLmJiDQo+Pj4gaW5kZXggMDRhYjgwNzU0MC4uMzExMzU1YmQ3YSAx
-MDA2NDQNCj4+PiAtLS0gYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9vcGVuY3Yvb3BlbmN2XzQu
-NS4yLmJiDQo+Pj4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvb3BlbmN2L29wZW5jdl80
-LjUuMi5iYg0KPj4+IEBAIC01MSw2ICs1MSw3IEBAIFNSQ19VUkkgPSAiZ2l0Oi8vZ2l0aHViLmNv
-bS9vcGVuY3Yvb3BlbmN2LmdpdDtuYW1lPW9wZW5jdiBcDQo+Pj4gICAgICAgICAgICAgICBmaWxl
-Oi8vMDAwMS1Eb250LXVzZS1pc3lzdGVtLnBhdGNoIFwNCj4+PiAgICAgICAgICAgICAgIGZpbGU6
-Ly9kb3dubG9hZC5wYXRjaCBcDQo+Pj4gICAgICAgICAgICAgICBmaWxlOi8vMDAwMS1NYWtlLXRz
-LW1vZHVsZS1leHRlcm5hbC5wYXRjaCBcDQo+Pj4gKyAgICAgICAgICAgZmlsZTovLzAwMDEtc2Zt
-LWxpbmstd2l0aC1HbG9nX0xJQlMucGF0Y2g7cGF0Y2hkaXI9Li4vY29udHJpYiBcDQo+Pj4gICAg
-ICAgICAgICAgICAiDQo+Pj4gICAgU1JDX1VSSV9hcHBlbmRfcmlzY3Y2NCA9ICIgZmlsZTovLzAw
-MDEtVXNlLU9zLXRvLWNvbXBpbGUtdGlueXhtbDIuY3BwLnBhdGNoO3BhdGNoZGlyPS4uL2NvbnRy
-aWIiDQo+Pj4NCj4+Pg0KPj4+DQo+Pj4NCj4+Pg0KPj4NCj4+DQo+Pg0KPj4gDQo+Pg0KDQo=
+In Django 2.2 before 2.2.20, 3.0 before 3.0.14, and 3.1 before 3.1.8,
+MultiPartParser allowed directory traversal via uploaded files with
+suitably crafted file names. Built-in upload handlers were not affected
+by this vulnerability.
+
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2021-28658
+
+Upstream patches:
+https://github.com/django/django/commit/4036d62bda0e9e9f6172943794b744a454c=
+a49c2
+
+Signed-off-by: Stefan Ghinea <stefan.ghinea@windriver.com>
+---
+ .../CVE-2021-28658.patch                      | 289 ++++++++++++++++++
+ .../python/python3-django_2.2.16.bb           |   2 +
+ 2 files changed, 291 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-2.2.=
+16/CVE-2021-28658.patch
+
+diff --git a/meta-python/recipes-devtools/python/python3-django-2.2.16/CVE-=
+2021-28658.patch b/meta-python/recipes-devtools/python/python3-django-2.2.1=
+6/CVE-2021-28658.patch
+new file mode 100644
+index 000000000..325aa0042
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-django-2.2.16/CVE-2021-28=
+658.patch
+@@ -0,0 +1,289 @@
++From 4036d62bda0e9e9f6172943794b744a454ca49c2 Mon Sep 17 00:00:00 2001
++From: Mariusz Felisiak <felisiak.mariusz@gmail.com>
++Date: Tue, 16 Mar 2021 10:19:00 +0100
++Subject: [PATCH] Fixed CVE-2021-28658 -- Fixed potential directory-travers=
+al
++ via uploaded files.
++
++Thanks Claude Paroz for the initial patch.
++Thanks Dennis Brinkrolf for the report.
++
++Backport of d4d800ca1addc4141e03c5440a849bb64d1582cd from main.
++
++Upstream-Status: Backport
++CVE: CVE-2021-28658
++
++Reference to upstream patch:
++[https://github.com/django/django/commit/4036d62bda0e9e9f6172943794b744a45=
+4ca49c2]
++
++[SG: Adapted stable/2.2.x patch for 2.2.16]
++Signed-off-by: Stefan Ghinea <stefan.ghinea@windriver.com>
++---
++ django/http/multipartparser.py      | 13 ++++--
++ docs/releases/2.2.16.txt            | 12 +++++
++ tests/file_uploads/tests.py         | 72 ++++++++++++++++++++++-------
++ tests/file_uploads/uploadhandler.py | 31 +++++++++++++
++ tests/file_uploads/urls.py          |  1 +
++ tests/file_uploads/views.py         | 12 ++++-
++ 6 files changed, 120 insertions(+), 21 deletions(-)
++
++diff --git a/django/http/multipartparser.py b/django/http/multipartparser.=
+py
++index f6f12ca..5a9cca8 100644
++--- a/django/http/multipartparser.py
+++++ b/django/http/multipartparser.py
++@@ -7,6 +7,7 @@ file upload handlers for processing.
++ import base64
++ import binascii
++ import cgi
+++import os
++ from urllib.parse import unquote
++=20
++ from django.conf import settings
++@@ -205,7 +206,7 @@ class MultiPartParser:
++                     file_name =3D disposition.get('filename')
++                     if file_name:
++                         file_name =3D force_text(file_name, encoding, err=
+ors=3D'replace')
++-                        file_name =3D self.IE_sanitize(unescape_entities(=
+file_name))
+++                        file_name =3D self.sanitize_file_name(file_name)
++                     if not file_name:
++                         continue
++=20
++@@ -293,9 +294,13 @@ class MultiPartParser:
++                 self._files.appendlist(force_text(old_field_name, self._e=
+ncoding, errors=3D'replace'), file_obj)
++                 break
++=20
++-    def IE_sanitize(self, filename):
++-        """Cleanup filename from Internet Explorer full paths."""
++-        return filename and filename[filename.rfind("\\") + 1:].strip()
+++    def sanitize_file_name(self, file_name):
+++        file_name =3D unescape_entities(file_name)
+++        # Cleanup Windows-style path separators.
+++        file_name =3D file_name[file_name.rfind('\\') + 1:].strip()
+++        return os.path.basename(file_name)
+++
+++    IE_sanitize =3D sanitize_file_name
++=20
++     def _close_files(self):
++         # Free up all file handles.
++diff --git a/docs/releases/2.2.16.txt b/docs/releases/2.2.16.txt
++index 31231fb..4b7021b 100644
++--- a/docs/releases/2.2.16.txt
+++++ b/docs/releases/2.2.16.txt
++@@ -2,6 +2,18 @@
++ Django 2.2.16 release notes
++ =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
++=20
+++*April 6, 2021*
+++
+++Backported from Django 2.2.20 a fix for a security issue.
+++
+++CVE-2021-28658: Potential directory-traversal via uploaded files
+++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+++
+++``MultiPartParser`` allowed directory-traversal via uploaded files with
+++suitably crafted file names.
+++
+++Built-in upload handlers were not affected by this vulnerability.
+++
++ *September 1, 2020*
++=20
++ Django 2.2.16 fixes two security issues and two data loss bugs in 2.2.15.
++diff --git a/tests/file_uploads/tests.py b/tests/file_uploads/tests.py
++index ea4976d..2a08d1b 100644
++--- a/tests/file_uploads/tests.py
+++++ b/tests/file_uploads/tests.py
++@@ -22,6 +22,21 @@ UNICODE_FILENAME =3D 'test-0123456789_=E4=B8=AD=E6=96=
+=87_Orl=C3=A9ans.jpg'
++ MEDIA_ROOT =3D sys_tempfile.mkdtemp()
++ UPLOAD_TO =3D os.path.join(MEDIA_ROOT, 'test_upload')
++=20
+++CANDIDATE_TRAVERSAL_FILE_NAMES =3D [
+++    '/tmp/hax0rd.txt',          # Absolute path, *nix-style.
+++    'C:\\Windows\\hax0rd.txt',  # Absolute path, win-style.
+++    'C:/Windows/hax0rd.txt',    # Absolute path, broken-style.
+++    '\\tmp\\hax0rd.txt',        # Absolute path, broken in a different wa=
+y.
+++    '/tmp\\hax0rd.txt',         # Absolute path, broken by mixing.
+++    'subdir/hax0rd.txt',        # Descendant path, *nix-style.
+++    'subdir\\hax0rd.txt',       # Descendant path, win-style.
+++    'sub/dir\\hax0rd.txt',      # Descendant path, mixed.
+++    '../../hax0rd.txt',         # Relative path, *nix-style.
+++    '..\\..\\hax0rd.txt',       # Relative path, win-style.
+++    '../..\\hax0rd.txt',        # Relative path, mixed.
+++    '..&#x2F;hax0rd.txt',       # HTML entities.
+++]
+++
++=20
++ @override_settings(MEDIA_ROOT=3DMEDIA_ROOT, ROOT_URLCONF=3D'file_uploads.=
+urls', MIDDLEWARE=3D[])
++ class FileUploadTests(TestCase):
++@@ -205,22 +220,8 @@ class FileUploadTests(TestCase):
++         # a malicious payload with an invalid file name (containing os.se=
+p or
++         # os.pardir). This similar to what an attacker would need to do w=
+hen
++         # trying such an attack.
++-        scary_file_names =3D [
++-            "/tmp/hax0rd.txt",          # Absolute path, *nix-style.
++-            "C:\\Windows\\hax0rd.txt",  # Absolute path, win-style.
++-            "C:/Windows/hax0rd.txt",    # Absolute path, broken-style.
++-            "\\tmp\\hax0rd.txt",        # Absolute path, broken in a diff=
+erent way.
++-            "/tmp\\hax0rd.txt",         # Absolute path, broken by mixing=
+.
++-            "subdir/hax0rd.txt",        # Descendant path, *nix-style.
++-            "subdir\\hax0rd.txt",       # Descendant path, win-style.
++-            "sub/dir\\hax0rd.txt",      # Descendant path, mixed.
++-            "../../hax0rd.txt",         # Relative path, *nix-style.
++-            "..\\..\\hax0rd.txt",       # Relative path, win-style.
++-            "../..\\hax0rd.txt"         # Relative path, mixed.
++-        ]
++-
++         payload =3D client.FakePayload()
++-        for i, name in enumerate(scary_file_names):
+++        for i, name in enumerate(CANDIDATE_TRAVERSAL_FILE_NAMES):
++             payload.write('\r\n'.join([
++                 '--' + client.BOUNDARY,
++                 'Content-Disposition: form-data; name=3D"file%s"; filenam=
+e=3D"%s"' % (i, name),
++@@ -240,7 +241,7 @@ class FileUploadTests(TestCase):
++         response =3D self.client.request(**r)
++         # The filenames should have been sanitized by the time it got to =
+the view.
++         received =3D response.json()
++-        for i, name in enumerate(scary_file_names):
+++        for i, name in enumerate(CANDIDATE_TRAVERSAL_FILE_NAMES):
++             got =3D received["file%s" % i]
++             self.assertEqual(got, "hax0rd.txt")
++=20
++@@ -518,6 +519,36 @@ class FileUploadTests(TestCase):
++         # shouldn't differ.
++         self.assertEqual(os.path.basename(obj.testfile.path), 'MiXeD_cAsE=
+.txt')
++=20
+++    def test_filename_traversal_upload(self):
+++        os.makedirs(UPLOAD_TO, exist_ok=3DTrue)
+++        self.addCleanup(shutil.rmtree, MEDIA_ROOT)
+++        file_name =3D '..&#x2F;test.txt',
+++        payload =3D client.FakePayload()
+++        payload.write(
+++            '\r\n'.join([
+++                '--' + client.BOUNDARY,
+++                'Content-Disposition: form-data; name=3D"my_file"; '
+++                'filename=3D"%s";' % file_name,
+++                'Content-Type: text/plain',
+++                '',
+++                'file contents.\r\n',
+++                '\r\n--' + client.BOUNDARY + '--\r\n',
+++            ]),
+++        )
+++        r =3D {
+++            'CONTENT_LENGTH': len(payload),
+++            'CONTENT_TYPE': client.MULTIPART_CONTENT,
+++            'PATH_INFO': '/upload_traversal/',
+++            'REQUEST_METHOD': 'POST',
+++            'wsgi.input': payload,
+++        }
+++        response =3D self.client.request(**r)
+++        result =3D response.json()
+++        self.assertEqual(response.status_code, 200)
+++        self.assertEqual(result['file_name'], 'test.txt')
+++        self.assertIs(os.path.exists(os.path.join(MEDIA_ROOT, 'test.txt')=
+), False)
+++        self.assertIs(os.path.exists(os.path.join(UPLOAD_TO, 'test.txt'))=
+, True)
+++
++=20
++ @override_settings(MEDIA_ROOT=3DMEDIA_ROOT)
++ class DirectoryCreationTests(SimpleTestCase):
++@@ -591,6 +622,15 @@ class MultiParserTests(SimpleTestCase):
++         }, StringIO('x'), [], 'utf-8')
++         self.assertEqual(multipart_parser._content_length, 0)
++=20
+++    def test_sanitize_file_name(self):
+++        parser =3D MultiPartParser({
+++            'CONTENT_TYPE': 'multipart/form-data; boundary=3D_foo',
+++            'CONTENT_LENGTH': '1'
+++        }, StringIO('x'), [], 'utf-8')
+++        for file_name in CANDIDATE_TRAVERSAL_FILE_NAMES:
+++            with self.subTest(file_name=3Dfile_name):
+++                self.assertEqual(parser.sanitize_file_name(file_name), 'h=
+ax0rd.txt')
+++
++     def test_rfc2231_parsing(self):
++         test_data =3D (
++             (b"Content-Type: application/x-stuff; title*=3Dus-ascii'en-us=
+'This%20is%20%2A%2A%2Afun%2A%2A%2A",
++diff --git a/tests/file_uploads/uploadhandler.py b/tests/file_uploads/uplo=
+adhandler.py
++index 7c6199f..65d70c6 100644
++--- a/tests/file_uploads/uploadhandler.py
+++++ b/tests/file_uploads/uploadhandler.py
++@@ -1,6 +1,8 @@
++ """
++ Upload handlers to test the upload API.
++ """
+++import os
+++from tempfile import NamedTemporaryFile
++=20
++ from django.core.files.uploadhandler import FileUploadHandler, StopUpload
++=20
++@@ -35,3 +37,32 @@ class ErroringUploadHandler(FileUploadHandler):
++     """A handler that raises an exception."""
++     def receive_data_chunk(self, raw_data, start):
++         raise CustomUploadError("Oops!")
+++
+++
+++class TraversalUploadHandler(FileUploadHandler):
+++    """A handler with potential directory-traversal vulnerability."""
+++    def __init__(self, request=3DNone):
+++        from .views import UPLOAD_TO
+++
+++        super().__init__(request)
+++        self.upload_dir =3D UPLOAD_TO
+++
+++    def file_complete(self, file_size):
+++        self.file.seek(0)
+++        self.file.size =3D file_size
+++        with open(os.path.join(self.upload_dir, self.file_name), 'wb') as=
+ fp:
+++            fp.write(self.file.read())
+++        return self.file
+++
+++    def new_file(
+++        self, field_name, file_name, content_type, content_length, charse=
+t=3DNone,
+++        content_type_extra=3DNone,
+++    ):
+++        super().new_file(
+++            file_name, file_name, content_length, content_length, charset=
+,
+++            content_type_extra,
+++        )
+++        self.file =3D NamedTemporaryFile(suffix=3D'.upload', dir=3Dself.u=
+pload_dir)
+++
+++    def receive_data_chunk(self, raw_data, start):
+++        self.file.write(raw_data)
++diff --git a/tests/file_uploads/urls.py b/tests/file_uploads/urls.py
++index 3e7985d..eaac1da 100644
++--- a/tests/file_uploads/urls.py
+++++ b/tests/file_uploads/urls.py
++@@ -4,6 +4,7 @@ from . import views
++=20
++ urlpatterns =3D [
++     path('upload/', views.file_upload_view),
+++    path('upload_traversal/', views.file_upload_traversal_view),
++     path('verify/', views.file_upload_view_verify),
++     path('unicode_name/', views.file_upload_unicode_name),
++     path('echo/', views.file_upload_echo),
++diff --git a/tests/file_uploads/views.py b/tests/file_uploads/views.py
++index d4947e4..137c6f3 100644
++--- a/tests/file_uploads/views.py
+++++ b/tests/file_uploads/views.py
++@@ -6,7 +6,9 @@ from django.http import HttpResponse, HttpResponseServerEr=
+ror, JsonResponse
++=20
++ from .models import FileModel
++ from .tests import UNICODE_FILENAME, UPLOAD_TO
++-from .uploadhandler import ErroringUploadHandler, QuotaUploadHandler
+++from .uploadhandler import (
+++    ErroringUploadHandler, QuotaUploadHandler, TraversalUploadHandler,
+++)
++=20
++=20
++ def file_upload_view(request):
++@@ -158,3 +160,11 @@ def file_upload_fd_closing(request, access):
++     if access =3D=3D 't':
++         request.FILES  # Trigger file parsing.
++     return HttpResponse('')
+++
+++
+++def file_upload_traversal_view(request):
+++    request.upload_handlers.insert(0, TraversalUploadHandler())
+++    request.FILES  # Trigger file parsing.
+++    return JsonResponse(
+++        {'file_name': request.upload_handlers[0].file_name},
+++    )
++--=20
++2.17.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.16.bb b=
+/meta-python/recipes-devtools/python/python3-django_2.2.16.bb
+index 0715abbd4..eb626e8d3 100644
+--- a/meta-python/recipes-devtools/python/python3-django_2.2.16.bb
++++ b/meta-python/recipes-devtools/python/python3-django_2.2.16.bb
+@@ -7,3 +7,5 @@ SRC_URI[sha256sum] =3D "62cf45e5ee425c52e411c0742e641a6588b=
+7e8af0d2c274a27940931b2
+ RDEPENDS_${PN} +=3D "\
+     ${PYTHON_PN}-sqlparse \
+ "
++SRC_URI +=3D "file://CVE-2021-28658.patch \
++"
+--=20
+2.17.1
+
