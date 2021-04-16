@@ -1,88 +1,88 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.68])
- by mx.groups.io with SMTP id smtpd.web10.3420.1618537528629237655
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web12.3992.1618541542090530001
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Apr 2021 18:45:29 -0700
+ Thu, 15 Apr 2021 19:52:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=aTjtnwE6;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.68, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=dJM2QijZ;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: zhengrq.fnst@fujitsu.com)
+Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1618537526; i=@fujitsu.com;
-	bh=HgE/2goWKjyM1Syjk9L+28dM1ydtFf1Z5UWJ6HYzt18=;
+	s=170520fj; t=1618541540; i=@fujitsu.com;
+	bh=RFja6+AvoUgx6JwgTaGmrfZdkAkCv7UWfVNTYVHW/ko=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=aTjtnwE6xytHdCjTG/tbM0pNnKpGvqoYeI/2LSplRUUXHWU3tlzYJHjpAwGA5Pgqn
-	 BW6NMJOOE1mxmKbDg3HN0mw4y59fgnYUMvmH9Q7c8UbmRNFWVvg8aVcdpRSOpz2oTA
-	 hbFJtlP02RqLnjYNRVoGB/jCui5ewTCd+7d16aatlDeUMu95qyCo5J18+yAaq9iby0
-	 n81bGh7P9EITABL1Bs+BkaoJu6Lo/z8m4GdzZOF9WD20y6pCmGoeNVjySza0L8M9MJ
-	 mN0Bh77mcbw7x3qK7SineeSJEhzGYuBJT9unVDFDRMBFqHpF5AvLIozqq67ZB2tNQd
-	 gUq20irkWA3CA==
-Received: from [100.112.198.228] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-b.eu-west-1.aws.symcld.net id DB/38-64503-63CE8706; Fri, 16 Apr 2021 01:45:26 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+GYqmv6piL
-  BYMYxc4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePw4/nsBa0cFe+3rWNtYFzG3sXIxSEkMJtJ
-  om/PSTYI5zijxIv1U1m6GDk52AR0JDpedIPZIgL6Ektn72EGsYUF3CXeNB1lArFZBFQlbt08x
-  A5i8wq4SXx58QWsRkJAQWLKw/fMEHFBiZMzn4DNYRaQkDj44gVUjaLE9p1nWCDsSont084yTm
-  DkmYWkZRaSlgWMTKsYLZKKMtMzSnITM3N0DQ0MdA0NjXQNLS10DY0N9BKrdJP0Ukt1y1OLS3Q
-  N9RLLi/WKK3OTc1L08lJLNjECAyml4FjTDsaTrz/oHWKU5GBSEuU9tKIsQYgvKT+lMiOxOCO+
-  qDQntfgQowwHh5IE74VXFQlCgkWp6akVaZk5wKCGSUtw8CiJ8H54CZTmLS5IzC3OTIdInWJUl
-  BLnfQnSJwCSyCjNg2uDRdIlRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSsK8x0Cm8GTmlcBNfw
-  W0mAloccWqUpDFJYkIKakGJr24vihzyxuG19JVcxvM/4SG3pva8tC1tNv1ebuW1sRzNQEekcu
-  eP1PWzD8v+mHlNS5+1z0bD7T++331VqPplk3VajFKUUHCPMLZMf5HD/b0Xd9Z85DNLqjgSe7a
-  nU8f/hQ/fUorwsU/cdLtn7PEvq2+//66/Itp+w/eT3lrwJPpJDzL2n9/o5u2ucT6Nzm8ewyya
-  s2ye+tn/2i9fGFn5OZr5/iNNxXxl9nmv96oW+V+M3D3caXE/7nBL65PvhockPHoI8+VXebWt7
-  l31FV/+FH1Ouilf6JJtpex+bzfXa2n3nM6Ws3cLez76N6ViQ+mWS4MF3hUbvl1Ta/Y/92Hcvl
-  YElnzftUt9ykSKF8XpcRSnJFoqMVcVJwIAJ9SI2IfAwAA
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-6.tower-287.messagelabs.com!1618537525!1185526!1
-X-Originating-IP: [62.60.8.149]
+	b=dJM2QijZjvTquKlkoeTfR/rgLg4OpllvJB1AoPqcwLvMd2zNqgUyvh3HPtXW+mzFv
+	 m67aZc0I1kfqfsEhBafLcnQjD2GK8OVgETYiMOBkdF9LN1+E6vneAyXyWbpe4Js/Hv
+	 v2eAbknCCk1DKM9bCbLU4JwWdRwWR4PWU1mrzHrI1y62RGtEdn5SuhV2VCIBEymAm4
+	 7hA9EWSzIwsmYWihoLRqFeBYuWrgz8B/l2ZUBSvfADOmUtCWrCSHfD+NS1PevGoLgF
+	 TuU9wIxj5xiKGYtLCV8MLJCNoaYDHySHtfvEKVf0OZ6J/D4GmKtP016zoJZKDipL7B
+	 WikFxKD1vhWbg==
+Received: from [100.113.2.232] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-a.eu-central-1.aws.symcld.net id 50/E5-07430-4EBF8706; Fri, 16 Apr 2021 02:52:20 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYovv4d0W
+  CwYwjxhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8b9wx9YC16zVzRt2cDcwNjL3sXIxSEkMJtJ
+  YtWZBVDObkaJ2f+OMnYxcnKwCehKnHu8lh3EFhHQl1g6ew8ziC0s4CDR+HU/UA0HB4uAqsScZ
+  VEgYV4BD4md/++ClUgIKEhMefieGSIuKHFy5hMWEJtZQELi4IsXzCCtEgKKErOny0OUV0psn3
+  aWcQIjzywkHbOQdCxgZFrFaJlUlJmeUZKbmJmja2hgoGtoaKwLJI0N9BKrdBP1Ukt1k1PzSoo
+  SgbJ6ieXFesWVuck5KXp5qSWbGIFhlFLI0LSD8d2rD3qHGCU5mJREeQ+tKEsQ4kvKT6nMSCzO
+  iC8qzUktPsQow8GhJMG74GdFgpBgUWp6akVaZg4wpGHSEhw8SiK8L38BpXmLCxJzizPTIVKnG
+  BWlxHlXgCQEQBIZpXlwbbA4usQoKyXMy8jAwCDEU5BalJtZgir/ilGcg1FJmLcUZApPZl4J3P
+  RXQIuZgBZXrCoFWVySiJCSamBSZ/Rk1ixji+9rPPry/mOxVCW3qXbSFlbcEw1+VbR+Wz3jFl/
+  lqxezJqZwXb91avuH5S7zZ5+vYv+gYPTCXfX6Lflz06xy7e3j+HtduBRmnl/7XvLVFMP6cN3p
+  wg/5ehwSLRSk42q9wh6/0fKI6TeKu2gn+7aX5ViJw69HUq2RpoIuzH5bN3EpaRotniq2YMtpZ
+  8PF687tj1Pxdmi1kslf9yUzl2Hl0TgD6SbDLVV2j8pXPl35MGzC1Ycr//fKSK7dIBd7IXbC9N
+  NVXR+n7WbhMltx62l/IVsZr9enr8faJvBfUz34Zfb63crvvHtPS09lzXmzqSDg6Lcjt/YsUlX
+  atqfkp8LaWWrMWg9uHS5QYinOSDTUYi4qTgQAolZ/0h4DAAA=
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-10.tower-232.messagelabs.com!1618541539!1584996!1
+X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.60.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 14828 invoked from network); 16 Apr 2021 01:45:25 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-6.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 16 Apr 2021 01:45:25 -0000
+Received: (qmail 11608 invoked from network); 16 Apr 2021 02:52:19 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-10.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 16 Apr 2021 02:52:19 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 13G1jPh8014681
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 13G2qJCB020743
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 16 Apr 2021 02:45:25 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
+	for <openembedded-devel@lists.openembedded.org>; Fri, 16 Apr 2021 03:52:19 +0100
+Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 16 Apr 2021 02:45:23 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
+ (TLS) id 15.0.1497.2; Fri, 16 Apr 2021 03:52:17 +0100
+From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-networking] [PATCH] wolfssl: upgrade 4.7.0 -> 4.7.1
-Date: Fri, 16 Apr 2021 09:45:17 +0800
-Message-ID: <1618537517-7572-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] librsync: upgrade 2.3.1 -> 2.3.2
+Date: Fri, 16 Apr 2021 19:24:07 +0800
+Message-ID: <1618572247-69296-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
+X-Originating-IP: [10.167.225.35]
 X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../wolfssl/{wolfssl_4.7.0.bb => wolfssl_4.7.1.bb}              | 2 +-
+ .../librsync/{librsync_2.3.1.bb => librsync_2.3.2.bb}           | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/wolfssl/{wolfssl_4.7.0.bb => wolfssl_4.7.1.bb} (93%)
+ rename meta-oe/recipes-support/librsync/{librsync_2.3.1.bb => librsync_2.3.2.bb} (88%)
 
-diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_4.7.0.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_4.7.1.bb
-similarity index 93%
-rename from meta-networking/recipes-connectivity/wolfssl/wolfssl_4.7.0.bb
-rename to meta-networking/recipes-connectivity/wolfssl/wolfssl_4.7.1.bb
-index 83406f507..76a5fd75c 100644
---- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_4.7.0.bb
-+++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_4.7.1.bb
-@@ -14,7 +14,7 @@ RPROVIDES_${PN} = "cyassl"
+diff --git a/meta-oe/recipes-support/librsync/librsync_2.3.1.bb b/meta-oe/recipes-support/librsync/librsync_2.3.2.bb
+similarity index 88%
+rename from meta-oe/recipes-support/librsync/librsync_2.3.1.bb
+rename to meta-oe/recipes-support/librsync/librsync_2.3.2.bb
+index 004c93d0f..f1997136a 100644
+--- a/meta-oe/recipes-support/librsync/librsync_2.3.1.bb
++++ b/meta-oe/recipes-support/librsync/librsync_2.3.2.bb
+@@ -5,7 +5,7 @@ LICENSE = "LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499"
  
- SRC_URI = "git://github.com/wolfSSL/wolfssl.git;protocol=https \
- "
--SRCREV = "830de9a9fb99e30f9ac9caa0a7f7bba29c3b4863"
-+SRCREV = "95b91d89133a712a3d0f389442924612c103da24"
+ SRC_URI = "git://github.com/librsync/librsync.git"
+-SRCREV = "27f738650c20fef1285f11d85a34e5094a71c06f"
++SRCREV = "42b636d2a65ab6914ea7cac50886da28192aaf9b"
  S = "${WORKDIR}/git"
  
- inherit autotools
+ DEPENDS = "popt"
 -- 
 2.25.1
 
