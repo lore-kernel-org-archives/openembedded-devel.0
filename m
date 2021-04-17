@@ -1,48 +1,48 @@
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.web12.4461.1618670056263280596
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web11.4396.1618670209765910060
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 17 Apr 2021 07:34:16 -0700
+ Sat, 17 Apr 2021 07:36:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Z9gCyfBt;
- spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f49.google.com with SMTP id k23-20020a17090a5917b02901043e35ad4aso17939139pji.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Apr 2021 07:34:16 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=RPO1cm0k;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id c17so20247740pfn.6
+        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Apr 2021 07:36:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id;
-        bh=XwiyrCECxSUL1txGbusECESoay4ffuQxvOA8Skg3s1c=;
-        b=Z9gCyfBtTlxmYFa/alXIuXFFH+4DgjP+74QO0U7Ct0L10y42cQK0gZ7N5o4kGv7t95
-         vfriWFfUzmL5GbeEClkiGlXqOjVSQ2qYNIJCREQnvJ7lqrHHI78wd67vzDWTwo/ubsGk
-         KexlQOfk8ZWggeqb1b8Fqb2WBR/tNIlG7Ja8IMeRjipAk9KUG2ZqlozI79+IieaUTiES
-         N8Z/zDhQR2bdMr3yicZOeM/50QX1xPwBtKpODAAsaK/sQE79w3PCAO/kU+xciJmYripU
-         K5gGRzPQR4H81eehOy0L87OvzNz5kzHxTDnKOoj8V3cAVQz11pcs421J54tOwTIfi7da
-         7s6g==
+        bh=PtjktSk9BuSyA6+DV1k926spmlpqmc02tQnYgHUx/9A=;
+        b=RPO1cm0knb278Iq6M6DyJRdNstH9mJD76FEIqb60Hx8eVXDBi8NXD5U8twIfnTpv20
+         1/ki38Cl53Z1b3+23hol/ky8rInTCHpUXStglzx0GBmYg9RfGHOvSAW/kdXH84FVgodM
+         uXQlwWw1XDvOrkT0NjsgU9aIizaTIIvEjD/mycTMBl92m/uEqp58248ocdTIxEEYynme
+         6mI4gkKaTnPh7EAlOzjzK2cYgySj+EFSrWlcYNq7Fzc0NrfQSaLlHkC58SEqZxA4nkeK
+         oErNvdRlvjzTrzM9umGubGofU9moXr8jgXzQxL+VvAHAyHZdphvApBduwoPytmsT7Zru
+         y7ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id;
-        bh=XwiyrCECxSUL1txGbusECESoay4ffuQxvOA8Skg3s1c=;
-        b=Jhcro7okXojJeMiwaBs6nUmC4iunb7/1h5NutGCJkXSbr5vaJRuQiTgEDjm+7b/46i
-         YcQ/5OHQH08+sSMJNL0mHc/fZVC7XeainLdIijDSwpsL16u1SV30EC95HykwImh38cZx
-         g/3qnusWZ954PfinHOIYnuMDK6jac9H+4YNk/MLGrnRKS4u/PMKXDvXRJMPKzUqxHpwG
-         o7yKbgy9ZrmJAFzKmEl2KIforHpG7/Hbkidu95T0XyP8cTFqeUd32ieKjIPnGmOx71c4
-         m9HDvZ39dT5DkFTdm/NEdAfaIjqseauV3EJHIeQyfiCoSi0suKI68BR3AmJpEzhekRTJ
-         +ezg==
-X-Gm-Message-State: AOAM533gKfmibv0kmf+gy6FgGCOs9kDNuA5RNR4ozI07CAgjFr+ucfQ1
-	8HtaoCjeGaRBScTUkbLo4eVbwChPbIT7ug==
-X-Google-Smtp-Source: ABdhPJxAgmTChNrHH2EAqGPX2yoWdJp3UAWWcWfsLEqiUta7SLFWgxbxz1laP70LvMXyS+exqQ6kSA==
-X-Received: by 2002:a17:90a:a4c9:: with SMTP id l9mr15141839pjw.21.1618670055452;
-        Sat, 17 Apr 2021 07:34:15 -0700 (PDT)
+        bh=PtjktSk9BuSyA6+DV1k926spmlpqmc02tQnYgHUx/9A=;
+        b=qgy8isjxQLHLiy4a3SIupuROP1qMk7LT4XWGv2WhIlaUgGUUUKKKW8BYrIjHWAYwp9
+         ku4wSp6y1Gitd0VMJpqZSZLY5jHrQlbW4PVNebH1b9MkI7frUSKEdoY4e5qphkonzDhA
+         AL1/21VkDnoKvq0VewWJadQ1GZLzPjLzfr+/BZ7Ixqd+Un1z5VKm+gATke68WO9mg0LM
+         uQ3GHE0stt8/XJ6VQ1BI4FgGqF9fzWc4cX1h1bxNY7i8lPKLb5Zo0vz26qAVFtN3LcvS
+         d1uPdew+PSysNUnPdi1eL9ocI1C01E4KswbvT1mDE9P0ZkugetwO5aR3vojNcVfNUPSd
+         /UyQ==
+X-Gm-Message-State: AOAM530Tq2jvTH7483941y7taFrEYyvgDPOXGXFe//XjcfcI1HCfEkQm
+	qEsQRVdp4nZR5SbJXrmtqHOfhka4QE9HDg==
+X-Google-Smtp-Source: ABdhPJzT2UsLS8YmQzywdiDEPe+YnTkHErTPo9gYD9foBBWXp+EUxX3glxWxmuhcacNenYWhUNOXtQ==
+X-Received: by 2002:aa7:8a84:0:b029:231:ff56:2c7e with SMTP id a4-20020aa78a840000b0290231ff562c7emr12500221pfc.50.1618670209106;
+        Sat, 17 Apr 2021 07:36:49 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:7c7e:4cc5:a7d5:fd57])
-        by smtp.gmail.com with ESMTPSA id w3sm8983074pjg.7.2021.04.17.07.34.14
+        by smtp.gmail.com with ESMTPSA id t11sm2501455pji.54.2021.04.17.07.36.48
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 17 Apr 2021 07:34:14 -0700 (PDT)
+        Sat, 17 Apr 2021 07:36:48 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] wireguard: update to 1.0.20201112 +1
-Date: Sat, 17 Apr 2021 07:34:05 -0700
-Message-Id: <20210417143405.13821-1-akuster808@gmail.com>
+Subject: [V2][meta-networking][PATCH] wireguard: update to v1.0.20210219 +1
+Date: Sat, 17 Apr 2021 07:36:39 -0700
+Message-Id: <20210417143639.13914-1-akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 
 The +1 fixes build issues for the 5.4 kernel.
@@ -50,6 +50,9 @@ The +1 fixes build issues for the 5.4 kernel.
 This update looks like bugfixes
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
+
+v2]
+Wrong version listed
 ---
  ...module_1.0.20201112.bb => wireguard-module_1.0.20210219.bb} | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
