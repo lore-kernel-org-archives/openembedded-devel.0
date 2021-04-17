@@ -1,79 +1,80 @@
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
- by mx.groups.io with SMTP id smtpd.web09.1373.1618619196126675454
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.web12.4461.1618670056263280596
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Apr 2021 17:26:36 -0700
+ Sat, 17 Apr 2021 07:34:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=rL5fKU8+;
- spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f176.google.com with SMTP id q10so20255879pgj.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 16 Apr 2021 17:26:36 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Z9gCyfBt;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id k23-20020a17090a5917b02901043e35ad4aso17939139pji.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Apr 2021 07:34:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=CXg1x79UbkwSXV+mFkm1ilR/Mir6wiLbbAEs0L3/XQ4=;
-        b=rL5fKU8+jLbRWoKhBBb2fUJd3rD20vgriVqxCqQIqTkZVc6CVuairWQh7I4DuNXm76
-         JsfN4GTMvDRyKcgn1BKbsIfruqHPXFmkekcZDKNmCV/7xR5pzrfLIUEThs+z/qE4LxFJ
-         CuOR4zhPKKsAPDN7bNAK8OLYTlzapQVLw+vRhAUCiZ/7rXJ+q2aTlN07u5J2RUB42knw
-         26z21lozu6uTAnoTIMgALyGrcLC1+o8zb2oW1GD8bY5iVO6cbO/pkYnFyyJ5Ut+0d4Mc
-         9wm5Ru5kJ8mf8ZOFLBPWRNLaUJuR86UpS1xz3Z//0KcVZB/qb894BZNHPewdkOpZIL5i
-         Tg1w==
+        h=from:to:subject:date:message-id;
+        bh=XwiyrCECxSUL1txGbusECESoay4ffuQxvOA8Skg3s1c=;
+        b=Z9gCyfBtTlxmYFa/alXIuXFFH+4DgjP+74QO0U7Ct0L10y42cQK0gZ7N5o4kGv7t95
+         vfriWFfUzmL5GbeEClkiGlXqOjVSQ2qYNIJCREQnvJ7lqrHHI78wd67vzDWTwo/ubsGk
+         KexlQOfk8ZWggeqb1b8Fqb2WBR/tNIlG7Ja8IMeRjipAk9KUG2ZqlozI79+IieaUTiES
+         N8Z/zDhQR2bdMr3yicZOeM/50QX1xPwBtKpODAAsaK/sQE79w3PCAO/kU+xciJmYripU
+         K5gGRzPQR4H81eehOy0L87OvzNz5kzHxTDnKOoj8V3cAVQz11pcs421J54tOwTIfi7da
+         7s6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=CXg1x79UbkwSXV+mFkm1ilR/Mir6wiLbbAEs0L3/XQ4=;
-        b=WYOUtujMMf/wTodHxgk9gg2cwspj2IQKKREh0/hX1T/JOSxDBmBB8tY0UuszXgwDc8
-         LTLajRF3sg+mDSyYD0UcbYN2N99Rax0e8d2jokotjTbNPylnlohyFbZsLAwie937/AaJ
-         UE5MqJCOX0ApYvB7+a6OgIkqoLTXt2KOU+ALt+a16gbfEznNu1c1/L/xvrOt09HgQe97
-         +ggk4WU0dQMOMHZYUQX+XVmYlSJaVpyKoNiNEnfcNqjAgc7dgcXFsp6EtP5XlDxicV2r
-         v/aBh3Jg5o8q/c7coSasvVkJtvJonwj+V66Q1aqrYDaY2+sgIEpT/gQtrKhNRCs3sskb
-         ZPzA==
-X-Gm-Message-State: AOAM532bbI7VyxqX+dxffJCA1REPCrLEoPMWQAJQ2WrZcpv4M7xfNO2O
-	zrj2vV26VTtlpVtQb+qEUaBlX8KuI9u8CA==
-X-Google-Smtp-Source: ABdhPJzySEUNZ4Ns+4BUmNuWrnzFug/6meMtOYRmqPwQGD+8qsKO7pfb+5dKSYWleNFJY5banhsI5Q==
-X-Received: by 2002:a05:6a00:16c2:b029:228:964e:8b36 with SMTP id l2-20020a056a0016c2b0290228964e8b36mr10254236pfc.11.1618619195291;
-        Fri, 16 Apr 2021 17:26:35 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::630])
-        by smtp.gmail.com with ESMTPSA id l18sm6518951pjq.33.2021.04.16.17.26.33
+        h=x-gm-message-state:from:to:subject:date:message-id;
+        bh=XwiyrCECxSUL1txGbusECESoay4ffuQxvOA8Skg3s1c=;
+        b=Jhcro7okXojJeMiwaBs6nUmC4iunb7/1h5NutGCJkXSbr5vaJRuQiTgEDjm+7b/46i
+         YcQ/5OHQH08+sSMJNL0mHc/fZVC7XeainLdIijDSwpsL16u1SV30EC95HykwImh38cZx
+         g/3qnusWZ954PfinHOIYnuMDK6jac9H+4YNk/MLGrnRKS4u/PMKXDvXRJMPKzUqxHpwG
+         o7yKbgy9ZrmJAFzKmEl2KIforHpG7/Hbkidu95T0XyP8cTFqeUd32ieKjIPnGmOx71c4
+         m9HDvZ39dT5DkFTdm/NEdAfaIjqseauV3EJHIeQyfiCoSi0suKI68BR3AmJpEzhekRTJ
+         +ezg==
+X-Gm-Message-State: AOAM533gKfmibv0kmf+gy6FgGCOs9kDNuA5RNR4ozI07CAgjFr+ucfQ1
+	8HtaoCjeGaRBScTUkbLo4eVbwChPbIT7ug==
+X-Google-Smtp-Source: ABdhPJxAgmTChNrHH2EAqGPX2yoWdJp3UAWWcWfsLEqiUta7SLFWgxbxz1laP70LvMXyS+exqQ6kSA==
+X-Received: by 2002:a17:90a:a4c9:: with SMTP id l9mr15141839pjw.21.1618670055452;
+        Sat, 17 Apr 2021 07:34:15 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:7c7e:4cc5:a7d5:fd57])
+        by smtp.gmail.com with ESMTPSA id w3sm8983074pjg.7.2021.04.17.07.34.14
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Apr 2021 17:26:34 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+        Sat, 17 Apr 2021 07:34:14 -0700 (PDT)
+From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] strongswan: Make PACKAGECONFIG a default value
-Date: Fri, 16 Apr 2021 17:26:32 -0700
-Message-Id: <20210417002632.443728-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: [meta-networking][PATCH] wireguard: update to 1.0.20201112 +1
+Date: Sat, 17 Apr 2021 07:34:05 -0700
+Message-Id: <20210417143405.13821-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.17.1
 
-From: Joe Hershberger <joe.hershberger@ni.com>
+The +1 fixes build issues for the 5.4 kernel.
 
-Change from a weak default to a default in the definition of the PACKAGECONFIG.
+This update looks like bugfixes
 
-In https://github.com/flihp/meta-measured/blob/master/networking-layer/recipes-support/strongswan/strongswan_5.%25.bbappend the PACKAGECONFIG is appended to, so if the definition is weak here, the variable will be empty when the bbappend attempts to add to it.
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-support/strongswan/strongswan_5.9.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...module_1.0.20201112.bb => wireguard-module_1.0.20210219.bb} | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+ rename meta-networking/recipes-kernel/wireguard/{wireguard-module_1.0.20201112.bb => wireguard-module_1.0.20210219.bb} (95%)
 
-diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.9.2.bb b/meta-networking/recipes-support/strongswan/strongswan_5.9.2.bb
-index dd50fba3dd..c178b4cdac 100644
---- a/meta-networking/recipes-support/strongswan/strongswan_5.9.2.bb
-+++ b/meta-networking/recipes-support/strongswan/strongswan_5.9.2.bb
-@@ -24,7 +24,7 @@ EXTRA_OECONF = " \
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20201112.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20210219.bb
+similarity index 95%
+rename from meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20201112.bb
+rename to meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20210219.bb
+index 64958a75b2d..0525b4135af 100644
+--- a/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20201112.bb
++++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20210219.bb
+@@ -1,6 +1,6 @@
+ require wireguard.inc
  
- EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
+-SRCREV = "fe402261666821514377d06c2c68ed9bc19e7634"
++SRCREV = "122f06bfd8fc7b06a0899fa9adc4ce8e06900d98"
  
--PACKAGECONFIG ??= "curl gmp openssl sqlite3 swanctl \
-+PACKAGECONFIG ?= "curl gmp openssl sqlite3 swanctl \
-         ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-charon', 'charon', d)} \
- "
- PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,,${PN}-plugin-aesni"
+ SRC_URI = "git://git.zx2c4.com/wireguard-linux-compat"
+ 
+@@ -31,3 +31,4 @@ module_do_install() {
+ # OE-core post dunfell has moved to use kernel 5.8 which now means we cant build this module in world builds
+ # for reference machines e.g. qemu
+ EXCLUDE_FROM_WORLD = "1"
++
 -- 
-2.31.1
+2.17.1
 
