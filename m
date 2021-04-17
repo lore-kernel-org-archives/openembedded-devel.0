@@ -1,86 +1,85 @@
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.web11.3585.1618693584942173558
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
+ by mx.groups.io with SMTP id smtpd.web10.3515.1618693585996257492
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 17 Apr 2021 14:06:25 -0700
+ Sat, 17 Apr 2021 14:06:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=FyQwpgHi;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id a12so20619933pfc.7
-        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Apr 2021 14:06:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=nUrJcui2;
+ spf=pass (domain: gmail.com, ip: 209.85.216.46, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f46.google.com with SMTP id j6-20020a17090adc86b02900cbfe6f2c96so16415495pjv.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Apr 2021 14:06:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=Av59SSlfWgSmQumRF6UiodSGeGi3BdZRrUHHlS5f6ys=;
-        b=FyQwpgHiSUjGWXIMJQRqN+gGpJ4Cd4tvBTtqFJ8Rl2qKuUJ/s2Sr1T/eKZowWlPk0C
-         flUValtprErN6Ieef+DNpfyfX0oVMoFuOJskwyThWnpYRHCqTLwC4OrWebD6Iy5BLFRQ
-         WGkzIMI0E6qwbCUtI3+KWeKUasdZREX21hrzKDeSWEQnqyFRjrl219qpZ5F7BbdUE67g
-         d0S+5ptLAknAG3Pr5wsU6T52DMnvGCCMwnx5keYm2HVH3tgoAGb8z+cIx1X05i9oLmop
-         1gfVZw6JKCUgLY9Atg8vew5nrhJNov4m2CMxyHY0+z7Jm5lpU+iztuiwLSK19rrHjNza
-         xcgQ==
+        h=from:to:subject:date:message-id:mime-version:in-reply-to:references
+         :content-transfer-encoding;
+        bh=pg2Q/zuqq54dAnAhgaPj7chJj0T+98s8RKMM1IePmhM=;
+        b=nUrJcui2i/S2wsdEBetIMSTjbvhJwTel9S1W1wAO2LgILuSwRteOI7FHe2K8jo3vPm
+         a7BtDtOEr8vx6Ex0pKcLj8aj0HLIKfFyH1tjUK6qU1TMpkpOHwmotKeawI248woBXsxh
+         0e8n+YZ5salZhQGInt4fQH7Qd1X/Dd2QKXEI/FRSx1ZXM/nJxmhL3ad4hhPEx1ZOFQah
+         V625rlrMi9v1B2ve2LkODRhxaRyVYk73Iuqe0gT9HNxDiUgRZQ3c/4GVevbDnyIcfLn5
+         zowGb+Mi35L1rlo24wusAYr0uNr7ypDr0BvSDzIFYN2lBsgtQNprIFi/w3lj57nkLnEG
+         eN6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=Av59SSlfWgSmQumRF6UiodSGeGi3BdZRrUHHlS5f6ys=;
-        b=DutdadzuYszYrKG9FCdEN/wMc9vcwDgf5OYrWd7YV3Li7l7mS1M6veOMNSZeqA8DW9
-         vOK4wyOfHouDIE1GmJapcqT1c1FYiNrVGNQvRkQQZ4ASk7SSBix3iC4ODLH0ySW761YL
-         7W+oMJx1mwJ5swBnzwD8t//zeZ9tOwInmf16D3MxabvcTsvbYvvmZ+kGl83XVYjqaNOj
-         IiwZLasmjdpuf6qe2JeZX2AfZsXuLbMUwggMR0VNLK11lhJ1dMSSnw455jGaN8b7e+e8
-         DRvx2iV/4QAAYy4HVGsS8t4jTYbhlDOh5eQ7rlKLNelrSQcl/mIMskbeM0f9MdAzCKyx
-         29gQ==
-X-Gm-Message-State: AOAM531EphUSbLzQjYV+MH/pYpsWLLbOQyfc/+xwUOngICxcUJjIRBtM
-	NZIPPSdk1WlG1reG71tqpAy78dorPjANvw==
-X-Google-Smtp-Source: ABdhPJwPXDIVapKCvnMNm+4O6UfgY3sf1x7xX/dyrgf+VkgCBT21A3BNqpd5J02R1xmT/pNiScaxPQ==
-X-Received: by 2002:a63:d04b:: with SMTP id s11mr2860096pgi.92.1618693584417;
-        Sat, 17 Apr 2021 14:06:24 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :in-reply-to:references:content-transfer-encoding;
+        bh=pg2Q/zuqq54dAnAhgaPj7chJj0T+98s8RKMM1IePmhM=;
+        b=DEEQyyPg2sYVEA6PBpMD2hU8LIvwYy1v/3YVUdamXhXbQXyt1QzIqH4QvHj+pk8DFc
+         S9ty6JUT62sSI0XcWRHneMRU0NDGHaxMYIH5Su6ymSZRpftFScE21bcB21RsHSIh67k0
+         xZg1ewOJUgx2OusWR0+YNJ9ztWP0x1yiGuvGJEicaOa9mGI26Tp87Piwch6FItomIwxX
+         9jo6UKw2Qvka8Elj8qy3N6yQTo9Q0tZ+O+7mGyWuGWrz6+2BFU6NhC03/aVpdUCUfyGa
+         GaXdzRpvOPDXZn4+anTmYVDNZTZ/Cy0PQv+Ev1zrMPVYsfcFHlY+bIBuDrc7p4ReFYYB
+         Sn4A==
+X-Gm-Message-State: AOAM53143TM7XErZG4IunjgKYUr91ckYrKSEgWTKr60aJ22FboG6YAmW
+	6X2X7Ob6omj7n+sXNih4cjhmLeViihfJ8g==
+X-Google-Smtp-Source: ABdhPJx3gEFkOGwfZWl0SSfASpW02Ej5dCB6MyQX8CUtgWe9z0eyFe4Mg/RYDmqaKKqtviUaoRTHuA==
+X-Received: by 2002:a17:902:8e89:b029:e9:a576:886e with SMTP id bg9-20020a1709028e89b02900e9a576886emr15547817plb.65.1618693585491;
+        Sat, 17 Apr 2021 14:06:25 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:7c7e:4cc5:a7d5:fd57])
-        by smtp.gmail.com with ESMTPSA id t67sm8509204pfb.210.2021.04.17.14.06.23
+        by smtp.gmail.com with ESMTPSA id t67sm8509204pfb.210.2021.04.17.14.06.24
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 17 Apr 2021 14:06:24 -0700 (PDT)
+        Sat, 17 Apr 2021 14:06:25 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardnott 21/50] python3-xmlschema: Upgrade 1.6.0 -> 1.6.1
-Date: Sat, 17 Apr 2021 14:05:30 -0700
-Message-Id: <3198de3b4b41077f5164ea5e607d9de8c6fbc767.1618692905.git.akuster808@gmail.com>
+Subject: [hardnott 22/50] modemmanager: upgrade 1.14.10 -> 1.16.2
+Date: Sat, 17 Apr 2021 14:05:31 -0700
+Message-Id: <151a131c76881d6979756a23139bbd4f0fe38d60.1618692905.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
 In-Reply-To: <cover.1618692905.git.akuster808@gmail.com>
 References: <cover.1618692905.git.akuster808@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Leon Anavi <leon.anavi@konsulko.com>
+From: Vinícius Ossanes Aquino <voa.aquino@gmail.com>
 
-Upgrade to release 1.6.1:
-
-- Add multi-source initialization and add_schema() to schema class
-- Add bytes strings to accepted XML sources
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Vinicius Aquino <voa.aquino@gmail.com>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-(cherry picked from commit 98cc478e5e5453cb000c58f22f9993e3129bc350)
+(cherry picked from commit 4174e40a9833fe1a59ffe774d472073f96b1cc40)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{python3-xmlschema_1.6.0.bb => python3-xmlschema_1.6.1.bb}  | 2 +-
+ .../{modemmanager_1.14.10.bb => modemmanager_1.16.2.bb}         | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-xmlschema_1.6.0.bb => python3-xmlschema_1.6.1.bb} (83%)
+ rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.14.10.bb => modemmanager_1.16.2.bb} (95%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-xmlschema_1.6.0.bb b/meta-python/recipes-devtools/python/python3-xmlschema_1.6.1.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-xmlschema_1.6.0.bb
-rename to meta-python/recipes-devtools/python/python3-xmlschema_1.6.1.bb
-index 2d207fb243e..91697e39a97 100644
---- a/meta-python/recipes-devtools/python/python3-xmlschema_1.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-xmlschema_1.6.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/xmlschema"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=47489cb18c469474afeb259ed1d4832f"
+diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.14.10.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.16.2.bb
+similarity index 95%
+rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.14.10.bb
+rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.16.2.bb
+index 2045e2a8666..d1ba8e43e37 100644
+--- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.14.10.bb
++++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.16.2.bb
+@@ -12,7 +12,7 @@ inherit gnomebase gettext systemd vala gobject-introspection bash-completion
+ DEPENDS = "glib-2.0 libgudev intltool-native libxslt-native"
  
--SRC_URI[sha256sum] = "e951efc5ab3f251973f92cba7a7026adb32a4cd844d3425133d23eb269de4f8f"
-+SRC_URI[sha256sum] = "d02b82bb4fce3af09495b85e6ada5ce0cfdaa865b09b28ecc0f5ab81fad7e328"
+ SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz"
+-SRC_URI[sha256sum] = "4ea60b375a761e17e7bb095bca894579ed0e8e33b273dc698b5cbe03947f357f"
++SRC_URI[sha256sum] = "efa9a963499e0885f3f163096d433334143c4937545134ecd682e0157fa591e3"
+ S = "${WORKDIR}/ModemManager-${PV}"
  
- PYPI_PACKAGE = "xmlschema"
- inherit pypi setuptools3
+ PACKAGECONFIG ??= "mbim qmi \
 -- 
 2.17.1
 
