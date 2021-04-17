@@ -1,50 +1,50 @@
-Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
- by mx.groups.io with SMTP id smtpd.web10.3515.1618693585996257492
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
+ by mx.groups.io with SMTP id smtpd.web08.3485.1618693586671502864
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 17 Apr 2021 14:06:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=nUrJcui2;
- spf=pass (domain: gmail.com, ip: 209.85.216.46, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f46.google.com with SMTP id j6-20020a17090adc86b02900cbfe6f2c96so16415495pjv.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Apr 2021 14:06:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ulVAvIBo;
+ spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f172.google.com with SMTP id c3so1822863pfo.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Apr 2021 14:06:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:mime-version:in-reply-to:references
          :content-transfer-encoding;
-        bh=pg2Q/zuqq54dAnAhgaPj7chJj0T+98s8RKMM1IePmhM=;
-        b=nUrJcui2i/S2wsdEBetIMSTjbvhJwTel9S1W1wAO2LgILuSwRteOI7FHe2K8jo3vPm
-         a7BtDtOEr8vx6Ex0pKcLj8aj0HLIKfFyH1tjUK6qU1TMpkpOHwmotKeawI248woBXsxh
-         0e8n+YZ5salZhQGInt4fQH7Qd1X/Dd2QKXEI/FRSx1ZXM/nJxmhL3ad4hhPEx1ZOFQah
-         V625rlrMi9v1B2ve2LkODRhxaRyVYk73Iuqe0gT9HNxDiUgRZQ3c/4GVevbDnyIcfLn5
-         zowGb+Mi35L1rlo24wusAYr0uNr7ypDr0BvSDzIFYN2lBsgtQNprIFi/w3lj57nkLnEG
-         eN6g==
+        bh=RDYnXRqiIM9XIG3vy2uJhX4ie+QeON4fZUPfDWpUh7g=;
+        b=ulVAvIBoME7eK6JMqszUPu1s/eZgFihr6S8dfEao0uKGSJP693dADT8vHRrfD/7+Xz
+         apIe/AqjlPPPsETTSsBA2wKH54TZQGQIyY2mTxYWsf3ISNjzITyUF7+gxXWYlXVSpwJv
+         PqZX5OMzHJ1zJLiEr3OBwqQuXAvnHz9RRsGBYUShKRxmmFKs1dUG74q3VZHSDQCLivbk
+         5cignNNpCXXfKN7b0vbRcw5/k8YYw1jCnWPeAS3VDW9xxOkHQoAb/iGKQb1YS5IEUsor
+         r98e6NfzIpGvmJ7Nr97oVWVwsZHjH9LIPI5koNGDRcG58hJRbo09MWwXGfnfRsHJSrGI
+         wwJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :in-reply-to:references:content-transfer-encoding;
-        bh=pg2Q/zuqq54dAnAhgaPj7chJj0T+98s8RKMM1IePmhM=;
-        b=DEEQyyPg2sYVEA6PBpMD2hU8LIvwYy1v/3YVUdamXhXbQXyt1QzIqH4QvHj+pk8DFc
-         S9ty6JUT62sSI0XcWRHneMRU0NDGHaxMYIH5Su6ymSZRpftFScE21bcB21RsHSIh67k0
-         xZg1ewOJUgx2OusWR0+YNJ9ztWP0x1yiGuvGJEicaOa9mGI26Tp87Piwch6FItomIwxX
-         9jo6UKw2Qvka8Elj8qy3N6yQTo9Q0tZ+O+7mGyWuGWrz6+2BFU6NhC03/aVpdUCUfyGa
-         GaXdzRpvOPDXZn4+anTmYVDNZTZ/Cy0PQv+Ev1zrMPVYsfcFHlY+bIBuDrc7p4ReFYYB
-         Sn4A==
-X-Gm-Message-State: AOAM53143TM7XErZG4IunjgKYUr91ckYrKSEgWTKr60aJ22FboG6YAmW
-	6X2X7Ob6omj7n+sXNih4cjhmLeViihfJ8g==
-X-Google-Smtp-Source: ABdhPJx3gEFkOGwfZWl0SSfASpW02Ej5dCB6MyQX8CUtgWe9z0eyFe4Mg/RYDmqaKKqtviUaoRTHuA==
-X-Received: by 2002:a17:902:8e89:b029:e9:a576:886e with SMTP id bg9-20020a1709028e89b02900e9a576886emr15547817plb.65.1618693585491;
-        Sat, 17 Apr 2021 14:06:25 -0700 (PDT)
+        bh=RDYnXRqiIM9XIG3vy2uJhX4ie+QeON4fZUPfDWpUh7g=;
+        b=VOSn8BQZ0W7TR6jszJavaQyZ4tNMCMd8elHR+SwOdaEyoV1CerxgcNhhymOJPtFbZv
+         haUSvSwmO+YjLBYaIGZ7FB8tEfPKdecLE9HOuH9i24aYwl5nejLzXv0sbkW6f96I6ovA
+         ebzyyuRmER5rspQk7YrkYv4qMtPt7b/+qpMHefNRg1usDZQqVk93paSS4WnL93k++qpi
+         X/jy8P4iNuZBXZg1wxVNYhDX0+rFtVL8unq1Ae3dH+SbZ2MdhRy5E1KEnsx3UKLzD6j2
+         7lx1DL4NciKV7xBx5OM9tuHoZOUa4kl+0Wv2qvVKkeQtOhK5Gs9KIAdgC+zwj4xT5mI4
+         ZbXQ==
+X-Gm-Message-State: AOAM533jzI2qziZicLA75wADzgAWDK25vwvWzImsqgRSmdMBqwofx8cm
+	gHVcCJ0txbfSGwaBmh9kT8i90oHdAeb5yQ==
+X-Google-Smtp-Source: ABdhPJw4N6WXBpEMniWBTjTDCls8D9KuTA9poYlbtFSp/6WJJGbTrR6B72uWdC88jVtioQpfvm60wA==
+X-Received: by 2002:a63:6581:: with SMTP id z123mr1648114pgb.379.1618693586143;
+        Sat, 17 Apr 2021 14:06:26 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:7c7e:4cc5:a7d5:fd57])
-        by smtp.gmail.com with ESMTPSA id t67sm8509204pfb.210.2021.04.17.14.06.24
+        by smtp.gmail.com with ESMTPSA id t67sm8509204pfb.210.2021.04.17.14.06.25
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sat, 17 Apr 2021 14:06:25 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardnott 22/50] modemmanager: upgrade 1.14.10 -> 1.16.2
-Date: Sat, 17 Apr 2021 14:05:31 -0700
-Message-Id: <151a131c76881d6979756a23139bbd4f0fe38d60.1618692905.git.akuster808@gmail.com>
+Subject: [hardnott 23/50] libqmi: upgrade 1.26.6 -> 1.28.2
+Date: Sat, 17 Apr 2021 14:05:32 -0700
+Message-Id: <7ba897842c5b04a362599a0c614f13c4b0be2fee.1618692905.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 In-Reply-To: <cover.1618692905.git.akuster808@gmail.com>
@@ -57,29 +57,29 @@ From: Vinícius Ossanes Aquino <voa.aquino@gmail.com>
 Signed-off-by: Vinicius Aquino <voa.aquino@gmail.com>
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 4174e40a9833fe1a59ffe774d472073f96b1cc40)
+(cherry picked from commit fbd0b60a277911a03fc8ef08ee49142781627670)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{modemmanager_1.14.10.bb => modemmanager_1.16.2.bb}         | 2 +-
+ .../libqmi/{libqmi_1.26.6.bb => libqmi_1.28.2.bb}               | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.14.10.bb => modemmanager_1.16.2.bb} (95%)
+ rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.26.6.bb => libqmi_1.28.2.bb} (90%)
 
-diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.14.10.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.16.2.bb
-similarity index 95%
-rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.14.10.bb
-rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.16.2.bb
-index 2045e2a8666..d1ba8e43e37 100644
---- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.14.10.bb
-+++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.16.2.bb
-@@ -12,7 +12,7 @@ inherit gnomebase gettext systemd vala gobject-introspection bash-completion
- DEPENDS = "glib-2.0 libgudev intltool-native libxslt-native"
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.26.6.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.28.2.bb
+similarity index 90%
+rename from meta-oe/recipes-connectivity/libqmi/libqmi_1.26.6.bb
+rename to meta-oe/recipes-connectivity/libqmi/libqmi_1.28.2.bb
+index 6d60a670268..9be48b75f25 100644
+--- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.26.6.bb
++++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.28.2.bb
+@@ -14,7 +14,7 @@ inherit autotools pkgconfig bash-completion gobject-introspection
  
- SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz"
--SRC_URI[sha256sum] = "4ea60b375a761e17e7bb095bca894579ed0e8e33b273dc698b5cbe03947f357f"
-+SRC_URI[sha256sum] = "efa9a963499e0885f3f163096d433334143c4937545134ecd682e0157fa591e3"
- S = "${WORKDIR}/ModemManager-${PV}"
+ SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
  
- PACKAGECONFIG ??= "mbim qmi \
+-SRC_URI[sha256sum] = "a71963bb1097a42665287e40a9a36f95b8f9d6d6a4b7a5de22d660328af97cb9"
++SRC_URI[sha256sum] = "8c8c3ee719874d2529bce9b35b028fe435b36f003979a360d3ad0938449db783"
+ 
+ PACKAGECONFIG ??= "udev mbim"
+ PACKAGECONFIG[udev] = ",--without-udev,libgudev"
 -- 
 2.17.1
 
