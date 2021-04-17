@@ -1,91 +1,96 @@
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
- by mx.groups.io with SMTP id smtpd.web12.3565.1618693581590734805
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.web11.3583.1618693582295353710
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 17 Apr 2021 14:06:21 -0700
+ Sat, 17 Apr 2021 14:06:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZfISWAf2;
- spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f169.google.com with SMTP id d124so20594593pfa.13
-        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Apr 2021 14:06:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=TWkV4cI3;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id lt13so6961285pjb.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Apr 2021 14:06:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=qjtbLXkUPyUOEcezSw+QHzXu5r6PoFktSJ0+PG5m25w=;
-        b=ZfISWAf2R93AprTYyWYE2VROXF+nAPxLwO+8YPry5iyGkZhZdd0LYMqPkD0kTdpJN9
-         S7peYmPtcQp8dxFJr8q70JzCDEwIG7kzc9bBIogWP42xAbxrQ17TCQbh7T8MRw88ixbm
-         sLdYVP6kSvF66DC3R8QQVTutpOSMTyp9gUFrEkTpWfSm6wPRJGLg4UUncFY54IaG5SIw
-         g5NRNZbHNxU7Tfj1xrR5XxzvFIPEPlMbbLQlXddrHvZkrd3YR9SnZfFfQe/NobvbWwtv
-         8dg6tQlE13nEK8zElwIdiAGqxBvGTbLxlQsgnHVSOd1MSsJZCbRyZPoRu4fVzVIH/jrr
-         DFzg==
+        bh=+qwxrTV9ml3jj+iIVm9ymwlhd8V2Jgz3wJRDCGoluJo=;
+        b=TWkV4cI3U9Tu9l7xwe+cFYWjAigskgK84r30x8CTBLuHvFbFoIMdaT/s/ggC0InjGR
+         icB25XX7G1OhIh3esIOL3F/NxOyf5YHnlf5hmZs1n5f3iaRI+Ll0jMq+4/s9kkkzGOEu
+         heUThDQ8YF4POarNGIkFpUsFfWJHafaKsR/+DAS/vChiGqhnyBRJ66qWvdZM4uPPvnWs
+         Q4x9DM0foXCD1kq+Sy7OazSItv1gkQjOmsbPBGC/qh3t9a6jp/pp+JWurj806U3jNy5t
+         ptqbgd37BZUnPaikdsOujBWkV0TeXcA9HgizRqdl+t7vs+hLG5t95QmwxamTeBObGuF8
+         zchg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=qjtbLXkUPyUOEcezSw+QHzXu5r6PoFktSJ0+PG5m25w=;
-        b=LgVyXUPP+X2Y1s+RY1HLCZzTgW3sfeIkv079JknsIGKiX63X//SN2HjYemVkliLgA0
-         v2AyiqJHILUpQk005bxyKRcnFjYzHgFVtbOIh+yBuaadD1TNVO+0ZCFNkuP0XjFQcpZ4
-         MrwFa3r2jQdvavBGumcRHkS2C/q5j5TPHWn6oTNEtHZ+zAoTPGfmnmYqPBXIpVkhkAL6
-         gwbvtxKHnCn4IEPjNbFzJum1+6zk/ktN28bxsSf8KBtHvJzdFEGfcnGBObVuVF3NSHVu
-         OyRFQjkBgNai0yItUMSyKB7NKCLUtYXldB5W6zrXIWiBsjj8OeuLElJnn9Dq7/2XlX5U
-         rq4A==
-X-Gm-Message-State: AOAM532gSlkjXpDKKWH1FV/3x+BChPSKg+kHm0m1nqKwEmUl92vybluD
-	e58/y6bwG8TcChQweCDE9kfwNcK0uZkSiQ==
-X-Google-Smtp-Source: ABdhPJw4F+2PHlaYVOneZsBVM62B1B1VLYaFTsTZNYvXItBobLeRVYAx4ZJ+X5p/xpS+1M/qSj1ItQ==
-X-Received: by 2002:a63:b09:: with SMTP id 9mr4891273pgl.107.1618693581086;
+        bh=+qwxrTV9ml3jj+iIVm9ymwlhd8V2Jgz3wJRDCGoluJo=;
+        b=WEXm/bf4gi3WsaRPYnNniAIIFPCtDSFV7Vrevb2eLzGh8uF5XZbWknTw1P+YTQIle5
+         QAuJ8BewxJ9zm4Clk0x5iGQ3knjhQlPQrcW21GOgATiXT7GfUCQ+ukCq+a3YsDvJLmcx
+         IWMkVGldpa1IQIDWFJkXCRd6aqFuIHmIikLKux1RAovTxqnxDNR5P338VxD8scP8Uzze
+         PUCsvR68HNrURePnYfJIBlaibLoy+R5pby3vosNNRbEDsvDJ9CJ4X6VeWFBnTt1A4W1C
+         EYXU36ohLtw2Ne1/JvzeUNpy9cZSCo/BoMlpORANWU7QuMAsgBR7bVULeapW4X5BGdtr
+         0VvA==
+X-Gm-Message-State: AOAM531+FvM+Y155CPajceJkZg03TrOEsHF8AJY07DPhfSO9/xRYFQaW
+	vO2xh8ztPt36vYisHpdZSJGpR6d2pUtJ6A==
+X-Google-Smtp-Source: ABdhPJyHjwtRO5n+SibK7uJNmXol0PFkZ5tpnFsr24svxaM5Ve0IRI9VyFBJVjtooEZX2Oh7D691Mg==
+X-Received: by 2002:a17:90a:dc13:: with SMTP id i19mr16458075pjv.194.1618693581766;
         Sat, 17 Apr 2021 14:06:21 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:7c7e:4cc5:a7d5:fd57])
-        by smtp.gmail.com with ESMTPSA id t67sm8509204pfb.210.2021.04.17.14.06.20
+        by smtp.gmail.com with ESMTPSA id t67sm8509204pfb.210.2021.04.17.14.06.21
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 17 Apr 2021 14:06:20 -0700 (PDT)
+        Sat, 17 Apr 2021 14:06:21 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardnott 16/50] python3-humanize: Upgrade 3.3.0 -> 3.4.0
-Date: Sat, 17 Apr 2021 14:05:25 -0700
-Message-Id: <488b3f82c9e42c7310f40a7ef0f3908c48224fcc.1618692905.git.akuster808@gmail.com>
+Subject: [hardnott 17/50] python3-monotonic: Upgrade 1.5 -> 1.6
+Date: Sat, 17 Apr 2021 14:05:26 -0700
+Message-Id: <70f8006b1637dd838f20832168d52a95a75e8786.1618692905.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1618692905.git.akuster808@gmail.com>
 References: <cover.1618692905.git.akuster808@gmail.com>
 
 From: Leon Anavi <leon.anavi@konsulko.com>
 
-Upgrade to release 3.4.0:
+Upgrade to release 1.6:
 
-- Add Catalan translation
-- Add documentation and release notes to project_urls
-- Fix tests for Python 3.10
+- Fix order for converting mach absolute time
+
+Get the source code from the git repository because an archive
+is not available in PyPI for this release.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-(cherry picked from commit e8bcc60fb5b5880a215cdd44592bdc797258ac51)
+(cherry picked from commit 70768130796d5ac7ec049d0b85ff9b037c06d8f3)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{python3-humanize_3.3.0.bb => python3-humanize_3.4.0.bb}   | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-humanize_3.3.0.bb => python3-humanize_3.4.0.bb} (75%)
+ ...thon3-monotonic_1.5.bb => python3-monotonic_1.6.bb} | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-monotonic_1.5.bb => python3-monotonic_1.6.bb} (63%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-humanize_3.3.0.bb b/meta-python/recipes-devtools/python/python3-humanize_3.4.0.bb
-similarity index 75%
-rename from meta-python/recipes-devtools/python/python3-humanize_3.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-humanize_3.4.0.bb
-index 3d54cf0c433..f9c22e89148 100644
---- a/meta-python/recipes-devtools/python/python3-humanize_3.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-humanize_3.4.0.bb
-@@ -1,10 +1,11 @@
- SUMMARY = "Python humanize utilities"
- HOMEPAGE = "http://github.com/jmoiron/humanize"
+diff --git a/meta-python/recipes-devtools/python/python3-monotonic_1.5.bb b/meta-python/recipes-devtools/python/python3-monotonic_1.6.bb
+similarity index 63%
+rename from meta-python/recipes-devtools/python/python3-monotonic_1.5.bb
+rename to meta-python/recipes-devtools/python/python3-monotonic_1.6.bb
+index 94b90524b04..080c41e38be 100644
+--- a/meta-python/recipes-devtools/python/python3-monotonic_1.5.bb
++++ b/meta-python/recipes-devtools/python/python3-monotonic_1.6.bb
+@@ -1,9 +1,13 @@
+ SUMMARY = "This module provides a monotonic() function which returns the value (in fractional seconds) of a clock which never goes backwards."
+ HOMEPAGE = "https://github.com/atdt/monotonic"
 +SECTION = "devel/python"
++
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
  
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d"
+-SRC_URI[md5sum] = "9f81cb0e5966479754453dea2b6822f4"
+-SRC_URI[sha256sum] = "23953d55076df038541e648a53676fb24980f7a1be290cdda21300b3bc21dfb0"
++SRCREV = "80681f6604e136e513550342f977edb98f5fc5ad"
++SRC_URI = "git://github.com/atdt/monotonic.git"
++
++S = "${WORKDIR}/git"
  
--SRC_URI[sha256sum] = "8bf7abd672b867f38b8b04593829b85b9b6199a61ef6586bf3629cc06458ff35"
-+SRC_URI[sha256sum] = "096b9ae6d1d56321d3d81f17117c2068179d7b4f7f73ba4baf302726923b48ec"
- 
- inherit pypi setuptools3
- 
+-inherit pypi setuptools3
++inherit setuptools3
 -- 
 2.17.1
 
