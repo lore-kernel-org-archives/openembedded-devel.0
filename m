@@ -1,87 +1,75 @@
 Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
- by mx.groups.io with SMTP id smtpd.web11.3590.1618693595835611853
+ by mx.groups.io with SMTP id smtpd.web08.3491.1618693596466852218
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 17 Apr 2021 14:06:35 -0700
+ Sat, 17 Apr 2021 14:06:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=fhnrCRpj;
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=XYCfNnGo;
  spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f47.google.com with SMTP id e8-20020a17090a7288b029014e51f5a6baso11230830pjg.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Apr 2021 14:06:35 -0700 (PDT)
+Received: by mail-pj1-f47.google.com with SMTP id nk8so2655295pjb.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Apr 2021 14:06:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=7oLcCBMcbgq62TXu4QuvrDme/LJZsWPmvIoKI5qM5O4=;
-        b=fhnrCRpjoLrMQfPUmz1u/VQNngPRpbduskr0+R9hOrDhUnz80G5K1MvWurpu81/dsi
-         6ElQWjLTw5Oextx/RQYUItpZ0nZJ5BovZrhShTFwAIj9rL1AnCXA4lLYud0/WuQxwDDe
-         uCOXVrsll193iYLeLibDV2t1JxMbbGFHmjmruJEqcsPSCDMUHQlfKR4iArffWdPx5J8N
-         kfYHlMW11kz+b/kr5Ry1HvywkY6BymAry8k13uZaE/DCPn/Y9wBrfDj/Ic3HKgCqK8pe
-         xk+qede/dhXIpeSkTnhmL/Hf9apOo3zxxcDzNw7C68TpHvQjyEaNKw5n3YNId8xGNnz5
-         a9FQ==
+        bh=CN4Fjzmi1Be5oGHLOZJt+CaO8C8A5ohIdGRP0otL60Q=;
+        b=XYCfNnGoI6pgP4fP1NVo+6d6E0k6ngtcgwhcc31i2IAHrle6wyn1Y380Rrgv2EGpa3
+         B+mdYpUiyHxkFfIX0Gj0dkDlqAK8PEo+6AOO+y6RTO2AG8ZQIxptWDNAnyIBGAqJk69b
+         JBYx6XGScTgIJk9qh/kuaxWD8qBviJ5arp5piB4vkLI43VbWGMve9zmESk7Bg+jYcTmz
+         v0Rm1v4VqNKDJUYkbkWcjoleaykWUHJt3CfkjWvrQE5vxRwSQFOz62YImT9ATzkNQkFt
+         20XLFwzPrAOPb4clgYC5DsRVr6DtRS0QXWxU3Tl2oRO/wze1iHRyv+ch2FhHrJ3qqRzr
+         naDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=7oLcCBMcbgq62TXu4QuvrDme/LJZsWPmvIoKI5qM5O4=;
-        b=LxK0vpEaKXj41ZLL4UKYTLiFeZcT5wqxSFQUP2uKDMNoblWokoiRUidW/wW5vIrfZ9
-         gNtaBIZ2b9ydNZ8HyAqueqmE6aBMEgVzUl3gCK5Lt7dgBxhql4x3VhD3DdYGgPpctkED
-         WRsPmXCK67PnCAJUYEs+5cxsJgtL4rVJkImHatWktj5Ch7ZYXiL28M5vt6ewOakWj/aI
-         2EzE2cyTDWzq/msNIReWDtJPCgt8J/4ddBZLHE8k3E4KVGPRRxOecuXzq1NXHfcT/6w9
-         rr8GU9cI1WV396rCpg5dsSNHJWl7XKQmB9bLl3VfAPb97czlOiQJ0wsyryN9A1Fxu8L2
-         v8/A==
-X-Gm-Message-State: AOAM530ZnEc/rHrFsht0072Akq62Ec8nvdUGwGwMgo2MnGeij7DsufEw
-	4RWJijm2wQZoZBvB3v6yW9VFayXU+WCPWw==
-X-Google-Smtp-Source: ABdhPJwc5Itd/nu/XnGjdf6mmCGfthz1RbhqH9e7PhZ0bR6znYofxiq6Wcobk/KR/srWFUTdJ7o76A==
-X-Received: by 2002:a17:90a:5295:: with SMTP id w21mr2970525pjh.94.1618693595202;
+        bh=CN4Fjzmi1Be5oGHLOZJt+CaO8C8A5ohIdGRP0otL60Q=;
+        b=tbEurewSy8T5aKYfr3739hQiKpg0APleUgj0TW38+PYaONx+6YMsT7LnKlrydpCV5k
+         ZLDdQab/o/pVNdNk0pZGwszyIz9mzIo7EglMo8+KKtyCAEuZoxzWSMcUCmBScGupR4d1
+         RsIEx8fuqUENjaZmxFqTZcYtgfhw4ZDMklhhU1VgrqSCS5uT485fAK1psUml0ofrjkbx
+         jfUN73hp6re3/xwRt3uisFYPeJgYhKTUJt1bG0WWzEq6RsW067MKyrRBeUa4lXjZbL+6
+         zieKZPPesJv8wMlGqcTL11fwd2UlFXswhPkwRUTvoxXgLesMiKvmNs3x2jrt7aLed2ii
+         kFJg==
+X-Gm-Message-State: AOAM530+lI7AQpuH8tuIYSMrcb8EteUOJnl0F4E3FR2po6bpssYNvfW2
+	DnuXWlBrak9xA9CwbdQ2dI1PR+qxzX2yZA==
+X-Google-Smtp-Source: ABdhPJxLMMjxfJ/ukHuHb8Ehq9Kb0xy/LDV/u+3TS5So5EQomJttd4+MosDBEPjGipLikAA/Ja3d+A==
+X-Received: by 2002:a17:90a:5d0a:: with SMTP id s10mr13759303pji.0.1618693595977;
         Sat, 17 Apr 2021 14:06:35 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:7c7e:4cc5:a7d5:fd57])
-        by smtp.gmail.com with ESMTPSA id t67sm8509204pfb.210.2021.04.17.14.06.34
+        by smtp.gmail.com with ESMTPSA id t67sm8509204pfb.210.2021.04.17.14.06.35
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 17 Apr 2021 14:06:34 -0700 (PDT)
+        Sat, 17 Apr 2021 14:06:35 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardnott 35/50] python3-croniter: Upgrade 1.0.11 -> 1.0.12
-Date: Sat, 17 Apr 2021 14:05:44 -0700
-Message-Id: <e814109e1c2cbdf0e06c94cd5bcee384602f532f.1618692905.git.akuster808@gmail.com>
+Subject: [hardnott 36/50] core-image-minimal-xfce: Use graphical.target as default
+Date: Sat, 17 Apr 2021 14:05:45 -0700
+Message-Id: <fdff890d71bea08b94e3d90cf7d8c9b7f1e07f54.1618692905.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1618692905.git.akuster808@gmail.com>
 References: <cover.1618692905.git.akuster808@gmail.com>
 
-From: Leon Anavi <leon.anavi@konsulko.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-Upgrade to release 1.0.12:
+This ensures that nodm unit is started during boot with systemd images
 
-- Add support for hashed/random/keyword expressions
-- Review support support for hashed/random/keyword expression and
-  add expanders reactor
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-(cherry picked from commit 4c0e6d33651fe8dc41173c45cf0dbf2bef05e8ca)
+Acked-by: Kai Kang <kai.kang@windriver.com>
+(cherry picked from commit a2f2e752c201bf5e6a7345c63671e40dd14031c9)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{python3-croniter_1.0.11.bb => python3-croniter_1.0.12.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-croniter_1.0.11.bb => python3-croniter_1.0.12.bb} (78%)
+ meta-xfce/recipes-core/images/core-image-minimal-xfce.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-croniter_1.0.11.bb b/meta-python/recipes-devtools/python/python3-croniter_1.0.12.bb
-similarity index 78%
-rename from meta-python/recipes-devtools/python/python3-croniter_1.0.11.bb
-rename to meta-python/recipes-devtools/python/python3-croniter_1.0.12.bb
-index ca9bf71a560..fd70468953e 100644
---- a/meta-python/recipes-devtools/python/python3-croniter_1.0.11.bb
-+++ b/meta-python/recipes-devtools/python/python3-croniter_1.0.12.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=b8ee59850b882cbf623188489ea748e2"
+diff --git a/meta-xfce/recipes-core/images/core-image-minimal-xfce.bb b/meta-xfce/recipes-core/images/core-image-minimal-xfce.bb
+index 8009acdd9fa..9d997cf57c0 100644
+--- a/meta-xfce/recipes-core/images/core-image-minimal-xfce.bb
++++ b/meta-xfce/recipes-core/images/core-image-minimal-xfce.bb
+@@ -16,3 +16,5 @@ LICENSE = "MIT"
+ export IMAGE_BASENAME = "core-image-minimal-xfce"
  
- PYPI_PACKAGE = "croniter"
- 
--SRC_URI[sha256sum] = "cd89bcbed4d79f56bbf2c9415c2bbbfd09fadc8a59dbae3898fbca5bab34103d"
-+SRC_URI[sha256sum] = "3603ef0d60fc6df98ce356c01529de90b06a002379b9f5e9eae981fb9c1fd936"
- 
- inherit pypi setuptools3
- 
+ inherit core-image
++
++SYSTEMD_DEFAULT_TARGET = "graphical.target"
 -- 
 2.17.1
 
