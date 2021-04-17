@@ -1,284 +1,419 @@
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
- by mx.groups.io with SMTP id smtpd.web12.3556.1618693571617838119
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
+ by mx.groups.io with SMTP id smtpd.web11.3576.1618693572074946466
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 17 Apr 2021 14:06:11 -0700
+ Sat, 17 Apr 2021 14:06:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=U/WOiRnK;
- spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f173.google.com with SMTP id p12so21541542pgj.10
-        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Apr 2021 14:06:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ShZ6Y04h;
+ spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f45.google.com with SMTP id u11so12155472pjr.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Apr 2021 14:06:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=8wV7vYrKAk8oVjoPjpNbT0AxZgKYGjHL8UYTw98ma+Y=;
-        b=U/WOiRnKxXM+e/DQjzIo8pLLgB9gk6BQJlLo5aGv5dFvSq9fls52JjTLM/sqC9aYJ4
-         GmNubCBUprZcyfnCPIb18mFqeB6cbHjtV9V4jgowCBSznKVjWyeEoy9RS6ikUGkiINN4
-         agTKDHiOIRLQXyfv0g6Sn97iG0dGqZBGBEChCj496MNXyfAsNHz36su6EJ8eBj9zd5HQ
-         SkGooTGnKISbWjbia6nJvh6f4w7GrM0ws5U/HgyUqtCHkzg7AwWLHVkZqibOHUxCKCJa
-         2k8Gcw5cp7ZnHXSBjDvPge30FMTog3PABBavFJr8U6XE6cXGYJKT75GShvyETxqQVmee
-         U3/Q==
+        h=from:to:subject:date:message-id:in-reply-to:references;
+        bh=ltkOB1TarYTNtKHqs3ms8dzDsuBbZ5YfyLiqAtEy++s=;
+        b=ShZ6Y04hoNY9/qEPnFPnOFtLVRvQZymUISpLdcCACiSs1lY+GdbGI2OYqgN6LGqeO9
+         qjMz2AUIB1LRn+Pdn8UgdhqRfDCQbHexe7bCe0tlbg9OG0Iajj/1KDvn+ZmxQpJAHvVT
+         ZdJtgF8LlRWnqTjYQTRMxCrlStCqTHMXfKKt0nUVDdEaNoqmKJpySffp+s5IhzbEdd6E
+         Ep0utRCrcjNA+2BuPrL5br/CPcu3dMnH3hDV6ypfhKa1sDGM8FUaZgJbrAabgu0ohb7F
+         IJiOlLEesmSaHHKyWeexxsafNLTQZrR5eZQ3Bzsr9wfK9zmAgiEtqPnKJXhEQUuFmKPa
+         7TOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=8wV7vYrKAk8oVjoPjpNbT0AxZgKYGjHL8UYTw98ma+Y=;
-        b=NfghbN7GwgCQ0LhW4G4PUmtHWK+ef0HErMS8j+mXIauRS1O+XvOqyMye/xKm/c2RjM
-         MWsQRWOUuhNBF1ZJarZch/TC9XD5R+0rZaBYczlefDl1JFbECnM+VkHbQnBrxo3SZDKi
-         4ACwONUQ6W4c5BbWlKUpd4EZIq0bHcULh6Toyk9FAurbXTa3hq8UnyD6B4u0Ywmf6Wn4
-         5znJF8E8JlY4S3L9d8GKKMR9Uw94kcY8pticd+8qwZ3Zmm16ZB3NPFT5XtQpLlu7xYVf
-         /1+Mh6pEGy3VRkPpjS/rlT/grKhzR4IBIE39JLsRMXo9jVm/xBv2WCSMJP1cpY1aRv6L
-         +viQ==
-X-Gm-Message-State: AOAM533P+1ySFriJnpj78J5eMGTKPNidXkl73hUwin6lpSh2bpTcBdIa
-	LwiBgHOo7fFfAD2F63iXLuIG+OWDMJ0LHw==
-X-Google-Smtp-Source: ABdhPJzamd2+OHMoz/AQbJMNVoXmPGiVBy5Nxs/5y7yQ6VjWyb/92cXI7s61WiDW13d0J8Ip+XYoYw==
-X-Received: by 2002:a65:618c:: with SMTP id c12mr1288150pgv.296.1618693570495;
-        Sat, 17 Apr 2021 14:06:10 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+         :references;
+        bh=ltkOB1TarYTNtKHqs3ms8dzDsuBbZ5YfyLiqAtEy++s=;
+        b=JVevKdLINlRBMyFbdZQZ+M3BeqWOForYzb5FZc7Lhse1pL7WNkrRzrIVdfEjt48mJi
+         NWO0E5PucSLKi6Z3IxZXZdbHHtiQAv1A+42r3Ai01k8GBuLmxJ9hnc1+CuUTfAlp6xLY
+         cALlatlf9a0TSfgBRFzjT6Rz6sKvrYy4+f042rBMyUKkab9ExIPG2zJaojFoDenHS41Y
+         6k5/9t0uI/OMUnRiQA+6ghEK6jVaxq0z+KKskd/r2fvKwaeJd6B6yhCoVZN55K7pvK+A
+         u99mmXbgon6RDZwUiQogaj6X5fCSC2TsgCDE8kgTumamTrpY2Ius7tsh2tjmMOVK3Bqd
+         4SOw==
+X-Gm-Message-State: AOAM530eG2navYa91Ts80YIS5VaDsm4O/ykm2qvN6nd2XIn6edpb7XNe
+	eHK0nj5lA13G1xvDjPeb+lmincG58dPmxw==
+X-Google-Smtp-Source: ABdhPJzyDduc7UDhmbXRpCUmdPQZL6X+8nz9wMc5qdX9tJcik9VU9ogOuenj+tYTw4HLpgTWrvajbg==
+X-Received: by 2002:a17:90b:4a46:: with SMTP id lb6mr16740576pjb.45.1618693571099;
+        Sat, 17 Apr 2021 14:06:11 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:7c7e:4cc5:a7d5:fd57])
-        by smtp.gmail.com with ESMTPSA id t67sm8509204pfb.210.2021.04.17.14.06.09
+        by smtp.gmail.com with ESMTPSA id t67sm8509204pfb.210.2021.04.17.14.06.10
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sat, 17 Apr 2021 14:06:10 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardnott 00/50] Patch review April 17th
-Date: Sat, 17 Apr 2021 14:05:09 -0700
-Message-Id: <cover.1618692905.git.akuster808@gmail.com>
+Subject: [hardnott 01/50] tbb: upgrade 2020.3 -> 2021.2.0
+Date: Sat, 17 Apr 2021 14:05:10 -0700
+Message-Id: <98a26903f770aa8698770817bdaf6175367917e1.1618692905.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <cover.1618692905.git.akuster808@gmail.com>
+References: <cover.1618692905.git.akuster808@gmail.com>
 
-This technically sync's up to current master.
-Please review and have feedback back by Monday.
+From: Naveen Saini <naveen.kumar.saini@intel.com>
 
+Switched to cmake build tool.
 
-The following changes since commit 94fe80ce8609d62e51cc190595a9f0c2a4a5a89e:
+Rebased some patches due to directory re-structuring.
+Dropped patches, which are not required anymore.
 
-  xterm: upgrade 366 -> 367 (2021-04-08 13:13:29 -0700)
-
-are available in the Git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib stable/hardknott-nut
-  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/hardknott-nut
-
-Andreas Müller (2):
-  catfish: add python3-dbus to RDEPENDS
-  fluidsynth: upgrade 2.1.7 -> 2.2.0
-
-Hongxu Jia (1):
-  debootstrap: 1.0.67 -> 1.0.123
-
-Kamil Dziezyk (1):
-  bats: upgrade 1.1.0 -> 1.3.0
-
-Khem Raj (4):
-  tbb: Fix build with musl
-  core-image-minimal-xfce: Use graphical.target as default
-  vnstat: Disable install parallism to fix a potential install race
-  open-vm-tools: Fix build with gcc 11
-
-Leon Anavi (23):
-  python3-ruamel-yaml: Upgrade 0.17.2 -> 0.17.4
-  python3-croniter: Upgrade 1.0.10 -> 1.0.11
-  python3-decorator: Upgrade 5.0.5 -> 5.0.6
-  python3-grpcio-tools: Upgrade 1.36.1 -> 1.37.0
-  python3-speedtest-cli: Upgrade 2.1.2 -> 2.1.3
-  python3-python-vlc: Upgrade 3.0.11115 -> 3.0.12117
-  python3-robotframework: Upgrade 4.0 -> 4.0.1
-  python3-grpcio: Upgrade 1.36.1 -> 1.37.0
-  python3-cerberus: Upgrade 1.3.2 -> 1.3.3
-  python3-humanize: Upgrade 3.3.0 -> 3.4.0
-  python3-monotonic: Upgrade 1.5 -> 1.6
-  python3-sqlalchemy: Upgrade 1.4.6 -> 1.4.7
-  python3-typed-ast: Upgrade 1.4.2 -> 1.4.3
-  python3-backports-functools-lru-cache: Upgrade 1.6.3 -> 1.6.4
-  python3-xmlschema: Upgrade 1.6.0 -> 1.6.1
-  python3-pyroute2: Upgrade 0.5.17 -> 0.5.18
-  python3-sympy: Upgrade 1.7.1 -> 1.8
-  python3-pandas: Upgrade 1.2.3 -> 1.2.4
-  python3-humanize: Upgrade 3.4.0 -> 3.4.1
-  python3-decorator: Upgrade 5.0.6 -> 5.0.7
-  python3-colorlog: Upgrade 4.8.0 -> 5.0.1
-  python3-google-api-python-client: Upgrade 2.1.0 -> 2.2.0
-  python3-croniter: Upgrade 1.0.11 -> 1.0.12
-
-Martin Jansa (2):
-  opencv: fetch wechat_qrcode files used by dnn PACKAGECONFIG
-  opencv: link sfm module with Glog
-
-Naveen Saini (2):
-  tbb: upgrade 2020.3 -> 2021.2.0
-  ocl-icd: upgrade 2.2.14 -> 2.3.0
-
-Randy MacLeod (1):
-  open-vm-tools: upgrade 11.0.1 -> 11.2.5
-
-Ross Burton (1):
-  fwts: upgrade to 21.03.00
-
-Stefan Ghinea (1):
-  hostapd: fix CVE-2021-30004
-
-Vinícius Ossanes Aquino (2):
-  modemmanager: upgrade 1.14.10 -> 1.16.2
-  libqmi: upgrade 1.26.6 -> 1.28.2
-
-Yi Fan Yu (1):
-  redis: upgrade 6.0.9 -> 6.2.1
-
-persianpros (5):
-  PEP8 double aggressive E701, E70 and E502
-  PEP8 double aggressive E20 and E211
-  PEP8 double aggressive E22, E224, E241, E242 and E27
-  PEP8 double aggressive E301 ~ E306
-  PEP8 double aggressive W291 ~ W293 and W391
-
-wangmy (1):
-  uftrace: Fix error on aarch64 when binutils update to 2.35.1
-
-zhengruoqin (3):
-  python3-absl: upgrade 0.10.0 -> 0.12.0
-  python3-astroid: upgrade 2.5.2 -> 2.5.3
-  python3-bitarray: upgrade 1.9.1 -> 1.9.2
-
- contrib/oe-stylize.py                         | 121 ++-
- .../fluidsynth/fluidsynth.inc                 |   4 +-
- ...te_float-Allow-zero-pointer-for-left.patch |  26 +-
- ...-Add-resolv_compat.h-for-musl-builds.patch |  72 ++
- ....-Remove-references-to-deprecated-G_.patch |  94 ---
- ...0001-pollGtk-Drop-volatile-qualifier.patch |  32 -
- ...latile-qualifier-exposed-incorrectly.patch |  29 +
- ...1-utilBacktrace-Ignore-Warray-bounds.patch |  33 -
- .../0002-add-include-sys-sysmacros.h.patch    |  30 -
- ...ux-Consider-64bit-time_t-possibility.patch |  42 +-
- ...-test-for-feature-instead-of-platfor.patch |  24 +-
- .../0009-Rename-poll.h-to-vm_poll.h.patch     | 726 ++----------------
- ...11-Use-uintmax_t-for-handling-rlim_t.patch |  25 +-
- ...ools_11.0.1.bb => open-vm-tools_11.2.5.bb} |  14 +-
- .../recipes-support/vnstat/vnstat_2.6.bb      |   2 +
- .../oeqa/selftest/cases/meta_oe_sources.py    |   1 +
- .../hostapd/hostapd/CVE-2021-30004.patch      | 123 +++
- .../hostapd/hostapd_2.9.bb                    |   1 +
- .../{libqmi_1.26.6.bb => libqmi_1.28.2.bb}    |   2 +-
- ...ager_1.14.10.bb => modemmanager_1.16.2.bb} |   2 +-
- .../{ocl-icd_git.bb => ocl-icd_2.3.0.bb}      |   3 +-
- ...t-to-override-usr-sbin-and-usr-share.patch |  41 +
- ...upport-to-override-usr-bin-arch-test.patch |  47 ++
- .../debootstrap/debootstrap/devices.tar.gz    | Bin 767 -> 0 bytes
- .../debootstrap/debootstrap_1.0.123.bb        |  23 +
- .../debootstrap/debootstrap_1.0.67.bb         |  35 -
- ...error-on-aarch64-with-binutils2.35.1.patch |  27 +
- .../recipes-devtools/uftrace/uftrace_0.9.4.bb |   1 +
- ...06-Define-correct-gregs-for-RISCV32.patch} |  26 +-
- .../recipes-extended/redis/redis/ilp32.patch  |  29 -
- ...ile-to-use-environment-build-setting.patch |  66 +-
- .../redis/redis/oe-use-libc-malloc.patch      |  12 +-
- .../redis/{redis_6.0.9.bb => redis_6.2.1.bb}  |   5 +-
- .../opencv/0001-sfm-link-with-Glog_LIBS.patch |  44 ++
- .../recipes-support/opencv/opencv_4.5.2.bb    |   5 +
- ...akeLists.txt-exclude-riscv64-riscv32.patch |  42 +
- ...1-Disable-use-of-_tpause-instruction.patch |  34 +
- ...nfo-is-glibc-specific-API-mark-it-so.patch |  27 +-
- .../GLIBC-PREREQ-is-not-defined-on-musl.patch |  22 +-
- .../tbb/tbb/cross-compile.patch               |  35 -
- .../tbb/tbb/improve-reproducibility.patch     |  30 -
- meta-oe/recipes-support/tbb/tbb/tbb.pc        |  11 -
- .../tbb/{tbb_2020.3.bb => tbb_2021.2.0.bb}    |  53 +-
- .../bats/{bats_1.1.0.bb => bats_1.3.0.bb}     |  10 +-
- ...d-correct-printf-qualifier-for-off_t.patch |  20 +-
- ....h-instead-of-deprecated-sys-poll.h.patch} |  12 +-
- ...ch => 0003-Remove-Werror-from-build.patch} |  18 +-
- ...__SWORD_TYPE-if-not-defined-by-libc.patch} |  12 +-
- ...ZE.patch => 0005-Undefine-PAGE_SIZE.patch} |  10 +-
- ...t-to-fix-pointer-to-int-cast-issues.patch} |  37 +-
- .../{fwts_20.07.00.bb => fwts_21.03.00.bb}    |  18 +-
- ...-absl_0.10.0.bb => python3-absl_0.12.0.bb} |   4 +-
- ...roid_2.5.2.bb => python3-astroid_2.5.3.bb} |   2 +-
- ...n3-backports-functools-lru-cache_1.6.4.bb} |   2 +-
- ...ray_1.9.1.bb => python3-bitarray_1.9.2.bb} |   2 +-
- ...rus_1.3.2.bb => python3-cerberus_1.3.3.bb} |  14 +-
- ...log_4.8.0.bb => python3-colorlog_5.0.1.bb} |   4 +-
- ...r_1.0.10.bb => python3-croniter_1.0.12.bb} |   2 +-
- ...or_5.0.5.bb => python3-decorator_5.0.7.bb} |   2 +-
- ...python3-google-api-python-client_2.2.0.bb} |   2 +-
- ...36.1.bb => python3-grpcio-tools_1.37.0.bb} |   2 +-
- .../python/python3-grpcio/boring_ssl.patch    |  50 +-
- ...cio_1.36.1.bb => python3-grpcio_1.37.0.bb} |   2 +-
- ...ize_3.3.0.bb => python3-humanize_3.4.1.bb} |   3 +-
- ...otonic_1.5.bb => python3-monotonic_1.6.bb} |  10 +-
- ...andas_1.2.3.bb => python3-pandas_1.2.4.bb} |   2 +-
- ...2_0.5.17.bb => python3-pyroute2_0.5.18.bb} |   2 +-
- ...115.bb => python3-python-vlc_3.0.12117.bb} |   3 +-
- ...4.0.bb => python3-robotframework_4.0.1.bb} |   2 +-
- ....17.2.bb => python3-ruamel-yaml_0.17.4.bb} |   2 +-
- ....1.2.bb => python3-speedtest-cli_2.1.3.bb} |   3 +-
- ...y_1.4.6.bb => python3-sqlalchemy_1.4.7.bb} |   2 +-
- ...n3-sympy_1.7.1.bb => python3-sympy_1.8.bb} |   4 +-
- ...st_1.4.2.bb => python3-typed-ast_1.4.3.bb} |   2 +-
- ...ma_1.6.0.bb => python3-xmlschema_1.6.1.bb} |   2 +-
- .../recipes-apps/catfish/catfish_4.16.0.bb    |   2 +-
- .../images/core-image-minimal-xfce.bb         |   2 +
- 77 files changed, 969 insertions(+), 1318 deletions(-)
- create mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-Add-resolv_compat.h-for-musl-builds.patch
- delete mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch
- delete mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-pollGtk-Drop-volatile-qualifier.patch
- create mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-pollGtk-Fix-volatile-qualifier-exposed-incorrectly.patch
- delete mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-utilBacktrace-Ignore-Warray-bounds.patch
- delete mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/0002-add-include-sys-sysmacros.h.patch
- rename meta-networking/recipes-support/open-vm-tools/{open-vm-tools_11.0.1.bb => open-vm-tools_11.2.5.bb} (91%)
- create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2021-30004.patch
- rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.26.6.bb => libqmi_1.28.2.bb} (90%)
- rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.14.10.bb => modemmanager_1.16.2.bb} (95%)
- rename meta-oe/recipes-core/opencl/{ocl-icd_git.bb => ocl-icd_2.3.0.bb} (84%)
- create mode 100644 meta-oe/recipes-devtools/debootstrap/debootstrap/0001-support-to-override-usr-sbin-and-usr-share.patch
- create mode 100644 meta-oe/recipes-devtools/debootstrap/debootstrap/0002-support-to-override-usr-bin-arch-test.patch
- delete mode 100644 meta-oe/recipes-devtools/debootstrap/debootstrap/devices.tar.gz
- create mode 100644 meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.123.bb
- delete mode 100644 meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.67.bb
- create mode 100644 meta-oe/recipes-devtools/uftrace/uftrace/0001-Fix-error-on-aarch64-with-binutils2.35.1.patch
- rename meta-oe/recipes-extended/redis/redis/{riscv32.patch => 0006-Define-correct-gregs-for-RISCV32.patch} (61%)
- delete mode 100644 meta-oe/recipes-extended/redis/redis/ilp32.patch
- rename meta-oe/recipes-extended/redis/{redis_6.0.9.bb => redis_6.2.1.bb} (93%)
- create mode 100644 meta-oe/recipes-support/opencv/opencv/0001-sfm-link-with-Glog_LIBS.patch
+Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ ...akeLists.txt-exclude-riscv64-riscv32.patch | 42 +++++++++++++++++++
+ ...1-Disable-use-of-_tpause-instruction.patch | 34 +++++++++++++++
+ ...nfo-is-glibc-specific-API-mark-it-so.patch | 27 ++++++------
+ .../GLIBC-PREREQ-is-not-defined-on-musl.patch | 22 ++++++----
+ .../tbb/tbb/cross-compile.patch               | 35 ----------------
+ .../tbb/tbb/improve-reproducibility.patch     | 30 -------------
+ meta-oe/recipes-support/tbb/tbb/tbb.pc        | 11 -----
+ .../tbb/{tbb_2020.3.bb => tbb_2021.2.0.bb}    | 37 ++++++----------
+ 8 files changed, 116 insertions(+), 122 deletions(-)
  create mode 100644 meta-oe/recipes-support/tbb/tbb/0001-CMakeLists.txt-exclude-riscv64-riscv32.patch
  create mode 100644 meta-oe/recipes-support/tbb/tbb/0001-Disable-use-of-_tpause-instruction.patch
  delete mode 100644 meta-oe/recipes-support/tbb/tbb/cross-compile.patch
  delete mode 100644 meta-oe/recipes-support/tbb/tbb/improve-reproducibility.patch
  delete mode 100644 meta-oe/recipes-support/tbb/tbb/tbb.pc
  rename meta-oe/recipes-support/tbb/{tbb_2020.3.bb => tbb_2021.2.0.bb} (59%)
- rename meta-oe/recipes-test/bats/{bats_1.1.0.bb => bats_1.3.0.bb} (75%)
- rename meta-oe/recipes-test/fwts/fwts/{0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch => 0002-Include-poll.h-instead-of-deprecated-sys-poll.h.patch} (81%)
- rename meta-oe/recipes-test/fwts/fwts/{0001-Remove-Werror-from-build.patch => 0003-Remove-Werror-from-build.patch} (74%)
- rename meta-oe/recipes-test/fwts/fwts/{0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch => 0004-Define-__SWORD_TYPE-if-not-defined-by-libc.patch} (79%)
- rename meta-oe/recipes-test/fwts/fwts/{0003-Undefine-PAGE_SIZE.patch => 0005-Undefine-PAGE_SIZE.patch} (83%)
- rename meta-oe/recipes-test/fwts/fwts/{0003-use-intptr_t-to-fix-pointer-to-int-cast-issues.patch => 0006-use-intptr_t-to-fix-pointer-to-int-cast-issues.patch} (64%)
- rename meta-oe/recipes-test/fwts/{fwts_20.07.00.bb => fwts_21.03.00.bb} (65%)
- rename meta-python/recipes-devtools/python/{python3-absl_0.10.0.bb => python3-absl_0.12.0.bb} (67%)
- rename meta-python/recipes-devtools/python/{python3-astroid_2.5.2.bb => python3-astroid_2.5.3.bb} (89%)
- rename meta-python/recipes-devtools/python/{python3-backports-functools-lru-cache_1.6.3.bb => python3-backports-functools-lru-cache_1.6.4.bb} (88%)
- rename meta-python/recipes-devtools/python/{python3-bitarray_1.9.1.bb => python3-bitarray_1.9.2.bb} (77%)
- rename meta-python/recipes-devtools/python/{python3-cerberus_1.3.2.bb => python3-cerberus_1.3.3.bb} (66%)
- rename meta-python/recipes-devtools/python/{python3-colorlog_4.8.0.bb => python3-colorlog_5.0.1.bb} (54%)
- rename meta-python/recipes-devtools/python/{python3-croniter_1.0.10.bb => python3-croniter_1.0.12.bb} (78%)
- rename meta-python/recipes-devtools/python/{python3-decorator_5.0.5.bb => python3-decorator_5.0.7.bb} (86%)
- rename meta-python/recipes-devtools/python/{python3-google-api-python-client_2.1.0.bb => python3-google-api-python-client_2.2.0.bb} (78%)
- rename meta-python/recipes-devtools/python/{python3-grpcio-tools_1.36.1.bb => python3-grpcio-tools_1.37.0.bb} (85%)
- rename meta-python/recipes-devtools/python/{python3-grpcio_1.36.1.bb => python3-grpcio_1.37.0.bb} (94%)
- rename meta-python/recipes-devtools/python/{python3-humanize_3.3.0.bb => python3-humanize_3.4.1.bb} (75%)
- rename meta-python/recipes-devtools/python/{python3-monotonic_1.5.bb => python3-monotonic_1.6.bb} (63%)
- rename meta-python/recipes-devtools/python/{python3-pandas_1.2.3.bb => python3-pandas_1.2.4.bb} (88%)
- rename meta-python/recipes-devtools/python/{python3-pyroute2_0.5.17.bb => python3-pyroute2_0.5.18.bb} (90%)
- rename meta-python/recipes-devtools/python/{python3-python-vlc_3.0.11115.bb => python3-python-vlc_3.0.12117.bb} (65%)
- rename meta-python/recipes-devtools/python/{python3-robotframework_4.0.bb => python3-robotframework_4.0.1.bb} (91%)
- rename meta-python/recipes-devtools/python/{python3-ruamel-yaml_0.17.2.bb => python3-ruamel-yaml_0.17.4.bb} (83%)
- rename meta-python/recipes-devtools/python/{python3-speedtest-cli_2.1.2.bb => python3-speedtest-cli_2.1.3.bb} (67%)
- rename meta-python/recipes-devtools/python/{python3-sqlalchemy_1.4.6.bb => python3-sqlalchemy_1.4.7.bb} (85%)
- rename meta-python/recipes-devtools/python/{python3-sympy_1.7.1.bb => python3-sympy_1.8.bb} (68%)
- rename meta-python/recipes-devtools/python/{python3-typed-ast_1.4.2.bb => python3-typed-ast_1.4.3.bb} (78%)
- rename meta-python/recipes-devtools/python/{python3-xmlschema_1.6.0.bb => python3-xmlschema_1.6.1.bb} (83%)
 
+diff --git a/meta-oe/recipes-support/tbb/tbb/0001-CMakeLists.txt-exclude-riscv64-riscv32.patch b/meta-oe/recipes-support/tbb/tbb/0001-CMakeLists.txt-exclude-riscv64-riscv32.patch
+new file mode 100644
+index 00000000000..ff6154808c1
+--- /dev/null
++++ b/meta-oe/recipes-support/tbb/tbb/0001-CMakeLists.txt-exclude-riscv64-riscv32.patch
+@@ -0,0 +1,42 @@
++From cb9e9b5b1ad05dd9de07a65ee7147cdb3433746a Mon Sep 17 00:00:00 2001
++From: Naveen Saini <naveen.kumar.saini@intel.com>
++Date: Fri, 9 Apr 2021 15:41:35 +0800
++Subject: [PATCH] CMakeLists.txt: exclude riscv64 & riscv32
++
++Upstream-Status: Pending
++
++Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
++---
++ src/tbb/CMakeLists.txt       | 2 +-
++ src/tbbmalloc/CMakeLists.txt | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/src/tbb/CMakeLists.txt b/src/tbb/CMakeLists.txt
++index a6edb6ad..4f261813 100644
++--- a/src/tbb/CMakeLists.txt
+++++ b/src/tbb/CMakeLists.txt
++@@ -55,7 +55,7 @@ target_compile_definitions(tbb
++                            PRIVATE
++                            __TBB_BUILD)
++ 
++-if (NOT ("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "(armv7-a|aarch64|mips|arm64)" OR
+++if (NOT ("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "(armv7-a|aarch64|mips|arm64|riscv64|riscv32)" OR
++          "${CMAKE_OSX_ARCHITECTURES}" MATCHES "arm64" OR
++          WINDOWS_STORE OR
++          TBB_WINDOWS_DRIVER))
++diff --git a/src/tbbmalloc/CMakeLists.txt b/src/tbbmalloc/CMakeLists.txt
++index de7ca7ea..31e854fe 100644
++--- a/src/tbbmalloc/CMakeLists.txt
+++++ b/src/tbbmalloc/CMakeLists.txt
++@@ -28,7 +28,7 @@ target_compile_definitions(tbbmalloc
++                            PRIVATE
++                            __TBBMALLOC_BUILD)
++ 
++-if (NOT ("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "(armv7-a|aarch64|mips|arm64)" OR
+++if (NOT ("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "(armv7-a|aarch64|mips|arm64|riscv64|riscv32)" OR
++          "${CMAKE_OSX_ARCHITECTURES}" MATCHES "arm64" OR
++          WINDOWS_STORE OR
++          TBB_WINDOWS_DRIVER))
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-support/tbb/tbb/0001-Disable-use-of-_tpause-instruction.patch b/meta-oe/recipes-support/tbb/tbb/0001-Disable-use-of-_tpause-instruction.patch
+new file mode 100644
+index 00000000000..7a4cc3e4e3d
+--- /dev/null
++++ b/meta-oe/recipes-support/tbb/tbb/0001-Disable-use-of-_tpause-instruction.patch
+@@ -0,0 +1,34 @@
++From 26bc87fdad9f29c00a5e37d6d9aed7f6dc7ff416 Mon Sep 17 00:00:00 2001
++From: Anuj Mittal <anuj.mittal@intel.com>
++Date: Mon, 12 Apr 2021 14:15:53 +0800
++Subject: [PATCH] Disable use of _tpause instruction
++
++It is assuming right now that WAITPKG instructions are available when using
++gcc 11 or clang 12. It's possible that we are building for a
++CPU where it's not available - in this case anything older than Alder Lake.
++
++Disable for now until the detection isn't fixed upstream.
++
++Upstream-Status: Inappropriate
++
++Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
++---
++ src/tbb/scheduler_common.h | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/tbb/scheduler_common.h b/src/tbb/scheduler_common.h
++index ee13dbf9..49052001 100644
++--- a/src/tbb/scheduler_common.h
+++++ b/src/tbb/scheduler_common.h
++@@ -219,7 +219,7 @@ inline void prolonged_pause_impl() {
++ #endif
++ 
++ inline void prolonged_pause() {
++-#if __TBB_WAITPKG_INTRINSICS_PRESENT && (_WIN32 || _WIN64 || __linux__) && (__TBB_x86_32 || __TBB_x86_64)
+++#if 0
++     if (governor::wait_package_enabled()) {
++         std::uint64_t time_stamp = machine_time_stamp();
++         // _tpause function directs the processor to enter an implementation-dependent optimized state
++-- 
++2.29.0
++
+diff --git a/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-API-mark-it-so.patch b/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-API-mark-it-so.patch
+index 7e66945fa2e..49325447e87 100644
+--- a/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-API-mark-it-so.patch
++++ b/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-API-mark-it-so.patch
+@@ -1,22 +1,23 @@
+-From 6b2b136caa68912d77ffe26143cd3da768b9ef80 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 3 Jun 2017 08:39:37 -0700
++From 52c1586bff0ecb418ac21d6678f8963d70959f04 Mon Sep 17 00:00:00 2001
++From: Naveen Saini <naveen.kumar.saini@intel.com>
++Date: Wed, 7 Apr 2021 11:14:13 +0800
+ Subject: [PATCH] mallinfo() is glibc specific API mark it so
+ 
+ Helps compiling with musl
+ 
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+ Upstream-Status: Pending
+ 
+- src/tbbmalloc/proxy.cpp | 2 ++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
++---
++ src/tbbmalloc_proxy/proxy.cpp | 2 ++
+  1 file changed, 2 insertions(+)
+ 
+-diff --git a/src/tbbmalloc/proxy.cpp b/src/tbbmalloc/proxy.cpp
+-index 5ef279d..06c4872 100644
+---- a/src/tbbmalloc/proxy.cpp
+-+++ b/src/tbbmalloc/proxy.cpp
+-@@ -185,6 +185,7 @@ int mallopt(int /*param*/, int /*value*/) __THROW
++diff --git a/src/tbbmalloc_proxy/proxy.cpp b/src/tbbmalloc_proxy/proxy.cpp
++index f9942bf1..fe0dad89 100644
++--- a/src/tbbmalloc_proxy/proxy.cpp
+++++ b/src/tbbmalloc_proxy/proxy.cpp
++@@ -253,6 +253,7 @@ int mallopt(int /*param*/, int /*value*/) __THROW
+      return 1;
+  }
+  
+@@ -24,7 +25,7 @@ index 5ef279d..06c4872 100644
+  struct mallinfo mallinfo() __THROW
+  {
+      struct mallinfo m;
+-@@ -192,6 +193,7 @@ struct mallinfo mallinfo() __THROW
++@@ -260,6 +261,7 @@ struct mallinfo mallinfo() __THROW
+  
+      return m;
+  }
+@@ -33,5 +34,5 @@ index 5ef279d..06c4872 100644
+  #if __ANDROID__
+  // Android doesn't have malloc_usable_size, provide it to be compatible
+ -- 
+-2.13.0
++2.17.1
+ 
+diff --git a/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-musl.patch b/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-musl.patch
+index 6f28f6f3a47..fb10684cde4 100644
+--- a/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-musl.patch
++++ b/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-musl.patch
+@@ -1,7 +1,7 @@
+-From 27956d4c5fb615098231cebfb8eef11057639d3c Mon Sep 17 00:00:00 2001
+-From: Fabrice Fontaine <fontaine.fabrice@gmail.com>
+-Date: Sun, 8 Dec 2019 18:14:38 +0100
+-Subject: [PATCH] src/tbbmalloc/proxy.cpp: __GLIBC_PREREQ is not defined on
++From 5cac8b5fffa4ebf5f0090456c9e0cbf43827242a Mon Sep 17 00:00:00 2001
++From: Naveen Saini <naveen.kumar.saini@intel.com>
++Date: Wed, 7 Apr 2021 11:32:52 +0800
++Subject: [PATCH] src/tbbmalloc/proxy.cpp: __GLIBC_PREREQ is not defined on 
+  musl
+ 
+ Do not call __GLIBC_PREREQ if it is not defined otherwise build will
+@@ -12,14 +12,15 @@ Signed-off-by: Fabrice Fontaine <fontaine.fabrice@gmail.com>
+ Upstream-Status: Submitted [https://github.com/oneapi-src/oneTBB/pull/203]
+ 
+ Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
++Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+ ---
+- src/tbbmalloc/proxy.cpp | 6 ++++--
++ src/tbbmalloc_proxy/proxy.cpp | 6 ++++--
+  1 file changed, 4 insertions(+), 2 deletions(-)
+ 
+-diff --git a/src/tbbmalloc/proxy.cpp b/src/tbbmalloc/proxy.cpp
+-index d96ae7a0..709ae839 100644
+---- a/src/tbbmalloc/proxy.cpp
+-+++ b/src/tbbmalloc/proxy.cpp
++diff --git a/src/tbbmalloc_proxy/proxy.cpp b/src/tbbmalloc_proxy/proxy.cpp
++index fe0dad89..93e68049 100644
++--- a/src/tbbmalloc_proxy/proxy.cpp
+++++ b/src/tbbmalloc_proxy/proxy.cpp
+ @@ -24,7 +24,8 @@
+  // of aligned_alloc as required by new C++ standard, this makes it hard to
+  // redefine aligned_alloc here. However, running on systems with new libc
+@@ -40,3 +41,6 @@ index d96ae7a0..709ae839 100644
+  #endif // __linux__ && !__ANDROID__
+  
+  #include "proxy.h"
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-support/tbb/tbb/cross-compile.patch b/meta-oe/recipes-support/tbb/tbb/cross-compile.patch
+deleted file mode 100644
+index 36578543f8b..00000000000
+--- a/meta-oe/recipes-support/tbb/tbb/cross-compile.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-Author: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+-  
+-Upstream-Status: unsuitable
+----
+-
+-diff --git a/build/linux.clang.inc b/build/linux.clang.inc
+-index fe9b5c98..b0dcd68b 100644
+---- a/build/linux.clang.inc
+-+++ b/build/linux.clang.inc
+-@@ -12,8 +12,8 @@
+- # See the License for the specific language governing permissions and
+- # limitations under the License.
+- 
+--CPLUS ?= clang++
+--CONLY ?= clang
+-+CPLUS ?= $(CXX)
+-+CONLY ?= $(CC)
+- COMPILE_ONLY = -c -MMD
+- PREPROC_ONLY = -E -x c++
+- INCLUDE_KEY = -I
+-diff --git a/build/linux.gcc.inc b/build/linux.gcc.inc
+-index d820c15d..62c76afd 100644
+---- a/build/linux.gcc.inc
+-+++ b/build/linux.gcc.inc
+-@@ -12,8 +12,8 @@
+- # See the License for the specific language governing permissions and
+- # limitations under the License.
+- 
+--CPLUS ?= g++
+--CONLY ?= gcc
+-+CPLUS ?= $(CXX)
+-+CONLY ?= $(CC)
+- COMPILE_ONLY = -c -MMD
+- PREPROC_ONLY = -E -x c++
+- INCLUDE_KEY = -I
+diff --git a/meta-oe/recipes-support/tbb/tbb/improve-reproducibility.patch b/meta-oe/recipes-support/tbb/tbb/improve-reproducibility.patch
+deleted file mode 100644
+index 91d10cb7ab6..00000000000
+--- a/meta-oe/recipes-support/tbb/tbb/improve-reproducibility.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From f56eeb18a07df139864a99e1967d450cc5c8c0bb Mon Sep 17 00:00:00 2001
+-From: Lee Chee Yang <chee.yang.lee@intel.com>
+-Date: Wed, 30 Sep 2020 16:18:35 +0800
+-Subject: [PATCH] improve reproducibility
+-
+-remove the WORKDIR info from BUILD_COMMAND to improve reproducibility.
+-also use SOURCE_DATE_EPOCH as DATETIME wherever possible.
+-
+-Upstream-Status: Inappropriate [sed WORKDIR does not applies to upstream]
+-Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
+----
+- build/version_info_linux.sh | 4 +-
+- 1 file changed, 2 insertion(+), 2 deletion(-)
+-
+-diff --git a/build/version_info_linux.sh b/build/version_info_linux.sh
+-index 793cad11..ed6f4b2a 100644
+---- a/build/version_info_linux.sh
+-+++ b/build/version_info_linux.sh
+-@@ -25,6 +25,6 @@ echo '#N": BUILD_GCC'"\t\t"`g++ --version </dev/null 2>&1 | grep 'g++'`'" ENDL \
+- echo '#N": BUILD_LIBC'"\t"`getconf GNU_LIBC_VERSION | grep glibc | sed -e 's/^glibc //'`'" ENDL \'
+- echo '#N": BUILD_LD'"\t\t"`ld -v 2>&1 | grep 'version'`'" ENDL \'
+- echo '#N": BUILD_TARGET'"\t$arch on $runtime"'" ENDL \'
+--echo '#N": BUILD_COMMAND'"\t"$*'" ENDL \'
+-+echo '#N": BUILD_COMMAND'"\t"$(echo $* | sed 's#'$WORKDIR'#/workdir#g')'" ENDL \'
+- echo ""
+--echo "#define __TBB_DATETIME \""`date -u`"\""
+-+echo "#define __TBB_DATETIME \""`$(date -u -d "@$SOURCE_DATE_EPOCH"  2>/dev/null || date -u -r "$SOURCE_DATE_EPOCH"  2>/dev/null || date -u )`"\""
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-support/tbb/tbb/tbb.pc b/meta-oe/recipes-support/tbb/tbb/tbb.pc
+deleted file mode 100644
+index 4f9da114093..00000000000
+--- a/meta-oe/recipes-support/tbb/tbb/tbb.pc
++++ /dev/null
+@@ -1,11 +0,0 @@
+-prefix=/usr
+-exec_prefix=${prefix}
+-libdir=${exec_prefix}/lib
+-includedir=${prefix}/include
+-
+-Name: Threading Building Blocks
+-Description: Intel's parallelism library for C++
+-URL: https://software.intel.com/en-us/tbb
+-Version: 2020.2
+-Libs: -L${libdir} -ltbb
+-Cflags: -I${includedir} 
+diff --git a/meta-oe/recipes-support/tbb/tbb_2020.3.bb b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+similarity index 59%
+rename from meta-oe/recipes-support/tbb/tbb_2020.3.bb
+rename to meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+index 8e0094b3183..d0e23114021 100644
+--- a/meta-oe/recipes-support/tbb/tbb_2020.3.bb
++++ b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+@@ -5,37 +5,26 @@ DESCRIPTION = "Parallelism library for C++ - runtime files \
+     and threading mechanism for performance and scalability."
+ HOMEPAGE = "https://software.intel.com/en-us/tbb"
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+-BRANCH = "tbb_2020"
+-SRCREV = "eca91f16d7490a8abfdee652dadf457ec820cc37"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=86d3f3a95c324c9479bd8986968f4327"
++BRANCH = "onetbb_2021"
++SRCREV = "2dba2072869a189b9fdab3ffa431d3ea49059a19"
+ SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
+-           file://cross-compile.patch \
+-           file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
+-           file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
+-           file://tbb.pc \
+-           file://improve-reproducibility.patch \
++            file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
++            file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
++            file://0001-CMakeLists.txt-exclude-riscv64-riscv32.patch \
++            file://0001-Disable-use-of-_tpause-instruction.patch \
+ "
+ 
+ S = "${WORKDIR}/git"
+-PE = "1"
+ 
+-COMPILER ?= "gcc"
+-COMPILER_toolchain-clang = "clang"
++inherit cmake
+ 
+-do_compile() {
+-    oe_runmake compiler=${COMPILER} arch=${HOST_ARCH}
+-}
++# test build fails, error: 'mallinfo mallinfo()' is deprecated
++EXTRA_OECMAKE += " \
++                    -DTBB_TEST=OFF \
++                    -DCMAKE_BUILD_TYPE=Release \
++                "
+ 
+-do_install() {
+-    install -d ${D}${includedir} ${D}${libdir}
+-    rm ${S}/include/tbb/index.html -f
+-    cp -R --no-dereference --preserve=mode,links -v ${S}/include/tbb ${D}${includedir}
+-    for f in ${B}/build/linux_*_release/lib*.so*
+-    do
+-        install -Dm 0755 $f ${D}${libdir}/
+-    done
+-    install -Dm 0644 ${WORKDIR}/tbb.pc ${D}${libdir}/pkgconfig/tbb.pc
+-}
+ 
+ # fails with thumb enabled:
+ # | arm-oe-linux-gnueabi-g++  -march=armv7-a -mthumb -mthumb-interwork -mfloat-abi=softfp -mfpu=neon -mtune=cortex-a9 -mcpu=cortex-a9 -D__ARM__ -D__LINUX_ARM_ARCH__=7 -funwind-tables -mvectorize-with-neon-quad -rdynamic --sysroot=/OE/sysroots/m14tv -c -MMD -DTBB_USE_DEBUG  -g -O0 -DUSE_PTHREAD -fPIC -D__TBB_BUILD=1 -Wall -Wno-parentheses -Wno-non-virtual-dtor -O2 -pipe -g -feliminate-unused-debug-types -fpermissive -fvisibility-inlines-hidden   -I../../src -I../../src/rml/include -I../../include ../../src/tbb/concurrent_queue.cpp
 -- 
 2.17.1
 
