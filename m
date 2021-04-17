@@ -1,214 +1,93 @@
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web12.3570.1618693603825360445
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web12.3571.1618693604663126207
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 17 Apr 2021 14:06:43 -0700
+ Sat, 17 Apr 2021 14:06:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZViDChXZ;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id a12so20620199pfc.7
-        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Apr 2021 14:06:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=PyUMhDH6;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id z22so10611387plo.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Apr 2021 14:06:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=SNC9Mt03M/i3DcMPve96QZCPqRHpi2jkNLoqe7uiC+M=;
-        b=ZViDChXZkbVA2z6tbhiw6CdNc45A6KCWcYisGO7IfHez+JTUVj/hPx1RZo3T9HVMXU
-         oz1RGQsYiWu/kO9N4XKvCuFiMTbbNWHgyzj/gtaQx3k6GT404pCI1q6i+hzWnx9j3Cqd
-         Lxr+cGu7KfoMaIY7FqmWIcuS5ISKNwjnsdXLM7OeDUln6DHuT9W1ApkTpoZEcWIeNdAI
-         jGE1KGi9RVf+yCtx57OcCOIJ1SM0+Et5ByNJwgjF+ypNA8sCfuvRutNI9c+XDgOOH0pP
-         rRquogsaUxCHyb3o+yuPIpGLbykdiBbK8ViLX4QcHHur0cTkmMfyYAemmQn4jKOlhHX4
-         HoJA==
+        bh=ascjHQ6Ze6D6FwWhmyDL4wR1gdRTTIjIplvTUSSV9Ek=;
+        b=PyUMhDH6Vbcjt/T9k6/oM9vw9OkVar6wGEa/OQ9J3hoeZ5D+beX3i6DzWgmvyeDvJ7
+         4c52TTTxcnmTV/dMknoixOUZspGXHbmv2YcgkAZKhSYkoCwrjlqqLk0xWkdBGJLLvwCB
+         elQIIPzxwbh2+v5aiY1b3BdcuO/+yK5sa2nV/I39Iy5HCmBoHVOyDR2l3q3/grSIYhSB
+         2CZgm0oEOyPeOXvYRpLvf/58e0fBT81fPAyuDeSvtdgIcYnUqUgXgeDnhsSAp31woHbM
+         Agk5atrZUfWpD1bqEClaQsYLEeIP32SIGM7kp8FKAcgvCmQ8vZPqGKJJMEWSygOITcNq
+         87fA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=SNC9Mt03M/i3DcMPve96QZCPqRHpi2jkNLoqe7uiC+M=;
-        b=mE1c9H97I394EG1e/BF5IVujFBAu6VkBBqvJUdetWJQ8KSJkj7OhIes5/hskugcula
-         GQt/uXT5ZBTsQSutdsIpnFZVwgp4m7s++628StXGkqSsXl7o6CH/tWf0njmIpVksexeY
-         JJbiMyginUL2axxxiwixt8uQzWikXlb8NLr6z2FOTTV23JbYy1VfgC4gOLqflh7LQCF7
-         VC0WDFwwCCmMy6YQDLU3zkmBiw8yRVOH0jKQonuRmvsp+aD2bC7wytzCqAfsas7flOML
-         lV8aL6a+Dxzjl1wOofKnbeDJNqsb9WKoFW25OK/eZuy4EFAHxsFjMr2Ou1beK8sAjep1
-         N3mQ==
-X-Gm-Message-State: AOAM531OhmyO8+4RCRLbWCnzb4djVRya0r8E6XBP4Vyy5c+V9mUuTO9D
-	coafQRP2PhYY4QwI6l22w1OBSwOKNiCQdA==
-X-Google-Smtp-Source: ABdhPJzfLsuQpIoBLx+1hqUax2ivJ/BQkB50QbZ05tqwXiuGepdedEiMX5kXQzzl+m3oYesjk/MS5w==
-X-Received: by 2002:a62:6585:0:b029:241:cf5d:93b2 with SMTP id z127-20020a6265850000b0290241cf5d93b2mr13407191pfb.15.1618693603136;
-        Sat, 17 Apr 2021 14:06:43 -0700 (PDT)
+        bh=ascjHQ6Ze6D6FwWhmyDL4wR1gdRTTIjIplvTUSSV9Ek=;
+        b=MHuVqei5pbt4WW4gJ97i4rlLcFoyNXK2smdGZcsPLBojNH7GXKdLe25SgkqQBBhKiQ
+         yAmnnQ4VIRrrJGy1akLJVVSfvePg74huYKX8qzki7mHjKLd8dlv+2sfQDqKgKlzJrSYI
+         721unxImvQAxhlhlJtEmW6uqjGDr8DaYiGkNl6xp/cwkwjrx757PnV1Y9OBVP09qcjqj
+         v7SUmx5AVpV54BmsgCjfcgBEYJzvrZNjVLxqE45azqWziNPIPSBxpluMl+3vvjZ5LZfW
+         L7+xulsgZYYZIcrLFNoXqn4xbolwwsNqSd+jUXb3jg3sxpCdaOLxrEAWXES0yaH+eIG5
+         ZrPw==
+X-Gm-Message-State: AOAM531BToPt3cM5LA2/LcxFwBP0L9A7ehUm78tHtsrKHnW8NXEVeQX3
+	gQ99Z4HTNsL8LyDSLEcjUWFrCOPx+2aBIQ==
+X-Google-Smtp-Source: ABdhPJwuSH8H8k7Q/gAWFOcj+yzNEDyRZHesnDnDjN5j2vWePO7KybQ+eQ7O8Si8TXFXrNpM2Hi6/Q==
+X-Received: by 2002:a17:902:ed87:b029:eb:a96:7892 with SMTP id e7-20020a170902ed87b02900eb0a967892mr15398211plj.47.1618693604090;
+        Sat, 17 Apr 2021 14:06:44 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:7c7e:4cc5:a7d5:fd57])
-        by smtp.gmail.com with ESMTPSA id t67sm8509204pfb.210.2021.04.17.14.06.42
+        by smtp.gmail.com with ESMTPSA id t67sm8509204pfb.210.2021.04.17.14.06.43
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 17 Apr 2021 14:06:42 -0700 (PDT)
+        Sat, 17 Apr 2021 14:06:43 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardnott 46/50] PEP8 double aggressive W291 ~ W293 and W391
-Date: Sat, 17 Apr 2021 14:05:55 -0700
-Message-Id: <afec1a4fcef46c1423a060d84f25b7ec3f9b5ba2.1618692905.git.akuster808@gmail.com>
+Subject: [hardnott 47/50] vnstat: Disable install parallism to fix a potential install race
+Date: Sat, 17 Apr 2021 14:05:56 -0700
+Message-Id: <a9eace646c639ee1020925c3e0c5645230341ec1.1618692905.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1618692905.git.akuster808@gmail.com>
 References: <cover.1618692905.git.akuster808@gmail.com>
 
-From: persianpros <persianpros@yahoo.com>
+From: Khem Raj <raj.khem@gmail.com>
+
+It seems in some cases installing vnstati program races and is tried
+twice, and second operation fails since it ensues somewhere between
+the file being created by first operation and file actually being
+created
+
+   /home/pokybuild/yocto-worker/meta-oe/build/build/tmp/hosttools/install -c vnstat vnstati '/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/vnstat/2.6-r0/image/usr/bin'
+|  /home/pokybuild/yocto-worker/meta-oe/build/build/tmp/hosttools/install -c -m 644 ../vnstat-2.6/man/vnstatd.8 '/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/vnstat/2.6-r0/image/usr/share/man/man8'
+|  /home/pokybuild/yocto-worker/meta-oe/build/build/tmp/hosttools/install -c -m 644 ../vnstat-2.6/man/vnstat.conf.5 '/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/vnstat/2.6-r0/image/usr/share/man/man5'
+|  /home/pokybuild/yocto-worker/meta-oe/build/build/tmp/hosttools/install -c -m 644 ../vnstat-2.6/man/vnstat.1 ../vnstat-2.6/man/vnstati.1 '/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/vnstat/2.6-r0/image/usr/share/man/man1'
+| make  install-data-hook
+| make[3]: Entering directory '/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/vnstat/2.6-r0/build'
+| Making install-exec in .
+| make[4]: Entering directory '/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/vnstat/2.6-r0/build'
+|  /home/pokybuild/yocto-worker/meta-oe/build/build/tmp/hosttools/mkdir -p '/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/vnstat/2.6-r0/image/usr/bin'
+|  /home/pokybuild/yocto-worker/meta-oe/build/build/tmp/hosttools/mkdir -p '/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/vnstat/2.6-r0/image/usr/sbin'
+|   /home/pokybuild/yocto-worker/meta-oe/build/build/tmp/hosttools/install -c vnstat vnstati '/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/vnstat/2.6-r0/image/usr/bin'
+|   /home/pokybuild/yocto-worker/meta-oe/build/build/tmp/hosttools/install -c vnstatd '/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/vnstat/2.6-r0/image/usr/sbin'
+| /home/pokybuild/yocto-worker/meta-oe/build/build/tmp/hosttools/install: cannot create regular file '/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/vnstat/2.6-r0/image/usr/bin/vnstati': File exists
+| make[4]: *** [Makefile:822: install-binPROGRAMS] Error 1
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e0b9cd57fab747a84b5dddc52b7efd64afeff6f2)
+(cherry picked from commit 342b6b047504e4efa12d29c5f1956aa9d67a43e5)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- contrib/oe-stylize.py | 43 +++++++++++++++++++++----------------------
- 1 file changed, 21 insertions(+), 22 deletions(-)
+ meta-networking/recipes-support/vnstat/vnstat_2.6.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/contrib/oe-stylize.py b/contrib/oe-stylize.py
-index cfabb90b10f..e1ba1b32188 100755
---- a/contrib/oe-stylize.py
-+++ b/contrib/oe-stylize.py
-@@ -2,12 +2,12 @@
+diff --git a/meta-networking/recipes-support/vnstat/vnstat_2.6.bb b/meta-networking/recipes-support/vnstat/vnstat_2.6.bb
+index 9a650f40909..ad8802f3a66 100644
+--- a/meta-networking/recipes-support/vnstat/vnstat_2.6.bb
++++ b/meta-networking/recipes-support/vnstat/vnstat_2.6.bb
+@@ -17,4 +17,6 @@ do_install_append() {
+     install -Dm644 ${S}/examples/systemd/vnstat.service "${D}${systemd_system_unitdir}/vnstat.service"
+ }
  
- """\
- Sanitize a bitbake file following the OpenEmbedded style guidelines,
--see http://openembedded.org/wiki/StyleGuide 
-+see http://openembedded.org/wiki/StyleGuide
- 
- (C) 2006 Cyril Romain <cyril.romain@gmail.com>
- MIT license
- 
--TODO: 
-+TODO:
-  - add the others OpenEmbedded variables commonly used:
-  - parse command arguments and print usage on misuse
-     . prevent giving more than one .bb file in arguments
-@@ -19,7 +19,7 @@ TODO:
-  - count rule breaks and displays them in the order frequence
- """
- 
--from __future__ import print_function 
-+from __future__ import print_function
- import fileinput
- import string
- import re
-@@ -65,7 +65,7 @@ OE_vars = [
-     'RSUGGESTS',
-     'RPROVIDES',
-     'RCONFLICTS',
--    'FILES',    
-+    'FILES',
-     'do_package',
-     'do_stage',
-     'addhandler',
-@@ -215,36 +215,36 @@ routineRegexp = r'^([a-zA-Z0-9_ ${}-]+?)\('
- 
- # Variables seen in the processed .bb
- seen_vars = {}
--for v in OE_vars: 
-+for v in OE_vars:
-     seen_vars[v] = []
- 
--# _Format guideline #0_: 
--#   No spaces are allowed at the beginning of lines that define a variable or 
-+# _Format guideline #0_:
-+#   No spaces are allowed at the beginning of lines that define a variable or
- #   a do_ routine
- 
- 
--def respect_rule0(line): 
-+def respect_rule0(line):
-     return line.lstrip() == line
- 
- 
--def conformTo_rule0(line): 
-+def conformTo_rule0(line):
-     return line.lstrip()
- 
--# _Format guideline #1_: 
-+# _Format guideline #1_:
- #   No spaces are allowed behind the line continuation symbol '\'
- 
- 
- def respect_rule1(line):
-     if line.rstrip().endswith('\\'):
-         return line.endswith('\\')
--    else: 
-+    else:
-         return True
- 
- 
- def conformTo_rule1(line):
-     return line.rstrip()
- 
--# _Format guideline #2_: 
-+# _Format guideline #2_:
- #   Tabs should not be used (use spaces instead).
- 
- 
-@@ -256,14 +256,14 @@ def conformTo_rule2(line):
-     return line.expandtabs()
- 
- # _Format guideline #3_:
--#   Comments inside bb files are allowed using the '#' character at the 
-+#   Comments inside bb files are allowed using the '#' character at the
- #   beginning of a line.
- 
- 
- def respect_rule3(line):
-     if line.lstrip().startswith('#'):
-         return line.startswith('#')
--    else: 
-+    else:
-         return True
- 
- 
-@@ -364,8 +364,8 @@ if __name__ == "__main__":
-         if True:
-             lines.append(line)
-         else:
--            # expandtabs on each line so that rule2 is always respected 
--            # rstrip each line so that rule1 is always respected 
-+            # expandtabs on each line so that rule2 is always respected
-+            # rstrip each line so that rule1 is always respected
-             line = line.expandtabs().rstrip()
-             # ignore empty lines (or line filled with spaces or tabs only)
-             # so that rule6 is always respected
-@@ -377,7 +377,7 @@ if __name__ == "__main__":
-     in_routine = False
-     commentBloc = []
-     olines = []
--    for line in lines: 
-+    for line in lines:
-         originalLine = line
-         # rstrip line to remove line breaks characters
-         line = line.rstrip()
-@@ -393,7 +393,7 @@ if __name__ == "__main__":
-             commentBloc = []
-             continue
- 
--        if line.startswith('}'): 
-+        if line.startswith('}'):
-             in_routine = False
-         keep = line.endswith('\\') or in_routine
- 
-@@ -415,7 +415,7 @@ if __name__ == "__main__":
-                 if line.startswith(k):
-                     var = k
-                     break
--            if re.match(routineRegexp, line) is not None: 
-+            if re.match(routineRegexp, line) is not None:
-                 in_routine = True
-                 line = follow_rule(0, line)
-             elif re.match(varRegexp, line) is not None:
-@@ -443,12 +443,11 @@ if __name__ == "__main__":
-     for k in OE_vars:
-         if k == 'SRC_URI':
-             addEmptyLine = True
--        if seen_vars[k] != []: 
-+        if seen_vars[k] != []:
-             if addEmptyLine and not k.startswith(previourVarPrefix):
-                 olines.append("")
--            for l in seen_vars[k]: 
-+            for l in seen_vars[k]:
-                 olines.append(l)
-             previourVarPrefix = k.split('_')[0] == '' and "unknown" or k.split('_')[0]
-     for line in olines:
-         print(line)
--
++PARALLEL_MAKEINST = ""
++
+ SYSTEMD_SERVICE_${PN} = "vnstat.service"
 -- 
 2.17.1
 
