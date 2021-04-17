@@ -1,109 +1,1428 @@
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web11.3594.1618693605293126211
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web12.3572.1618693606588988416
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 17 Apr 2021 14:06:45 -0700
+ Sat, 17 Apr 2021 14:06:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gFPgjCf/;
- spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id g16so7336598pfq.5
-        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Apr 2021 14:06:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=bA/WvYMe;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id z22-20020a17090a0156b029014d4056663fso16427960pje.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Apr 2021 14:06:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=DQvRYmUREBpJZUXB+OoEJLKu7WbbZpJOel5pYlDACnU=;
-        b=gFPgjCf/KhYtzOMS6oZsrcBLEH4n/fmn9S3UVlv3LKzzjZgclEtiXdAqr+9+OiErnJ
-         4alIJbZJw/O7RqNozdiAS2vk63gNEGODlN4wdtnncL7P8a9R9BuxSUGP7dr10XqcQvmc
-         dL1Y+EH/S6Mv/7zpBfbRNnXfxD8WhlOTqf5U3Q25rzgj/YSd+pVQrASgAWDSK52IvGiC
-         FcdKPLBDLdZ1dMrwV0mUcm20e0dimMScdcyeelitwDnQbRNU5mumkEXFpnJpplUn/lok
-         efa8rcA1hoLK9AJq/lDPuXzYS56uPTe9Bo+GQccPoiiuHTLQ2BMt/jSRT6I7XZXzTUgJ
-         Hr+A==
+        bh=/Yz10R3qAKYxnJg0HpZ1dV/IZbhAjB5NrSYQd0U+9zY=;
+        b=bA/WvYMeC+P6BYx8+qIi5p2x2QYaI2xqLvFPK7aoe4rRGXtC2vJn3Lqvds6+gG0cJh
+         Ds83wcRPVF+H+Uvjj//36nBOtvZJW/UxKpH+sT9uJqCJyrdOtR/2RxpQZuH3/CxXJjfM
+         i3dqrkUddDG6bkAxsldpCAxkngSBkOJxWMKDxZi84ZorZfnypTCvtC/2HRQGJzGri/jD
+         MKojUNiq8qFZ6ZT0W7qCvRJ4ON4oLdp/Wh/b/mLLN8WGQxQalJFuzp5jhIDC2mlkMFc2
+         /Q0fKAibGGvJa4MCNrbJa6WQ+FKZhvVn9vvsgNT0SkQwo29fYqRmKJZ/pTe2SxB5lEiQ
+         cftg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=DQvRYmUREBpJZUXB+OoEJLKu7WbbZpJOel5pYlDACnU=;
-        b=InFPGoF2eeI1jVLmNA5TUGkQ1E2J46tVsbuvuQTVrjwICXDurS/E2b60koz5hJOrlC
-         0+MnDJdHNbNM09dOBbGbUTWd7oMhfYVrUWb1vMMUqgEOH5rvVrWpkEWdGZYAcPEVmqMe
-         A+YGCp+3I697TvTSa/80om3Wp5XayxvMSO5m7eaB+pFmpemsCPIR0mYYCLBBdT17dKCz
-         p3ZLHrUNUiZ5K4psRDF5GOnYPwMP2Yuu8wn4dLq0nXK5+T3tfQbAxxs43HZZL6lOhAs/
-         D7X3odb72vRvAR6MN4TYrQmegpy7iwb3XjG/DffhmTk0DbBK8SoFMU7KjeQVJhw8s/h+
-         VAgA==
-X-Gm-Message-State: AOAM532sd3khdVImDSIwGnI/9cThQXFIKYyKoJgwU3vjk67xyjLzkMe2
-	8uC+7KhzWgyQ08+bAxumYiFe3Udrd08Zkg==
-X-Google-Smtp-Source: ABdhPJzlR07flW5HIweotfSxEWYDav7v9OrmLSIX1sRn/LQNA8mjiZl+OIZgQKPzBhL6HB8ng3Ndgg==
-X-Received: by 2002:a62:e418:0:b029:259:d26b:4fa7 with SMTP id r24-20020a62e4180000b0290259d26b4fa7mr8680344pfh.7.1618693604731;
-        Sat, 17 Apr 2021 14:06:44 -0700 (PDT)
+        bh=/Yz10R3qAKYxnJg0HpZ1dV/IZbhAjB5NrSYQd0U+9zY=;
+        b=SSkFWv8/sJcsfbC5j2/GJsvGLG+FVGKD8BMro18B+aiWQshYb8KaV5fVhjpjAeEZFv
+         HD9NjGqrI0Venu1c42JOedL2rqAKzBFDZ42CeCvoEPxVSp+vS3dldcvbW/mnVo06aYMz
+         HywYT1hv2gbJMZRWBzexpMWChTK9aOm5Rd+ddorKUWodfGSbLUUuEU2oIWrNcn7/y82Y
+         QluMTKHNCeY0W+9rH/D+sab7t3IhrrK6h+rnXPgk4KFnkCwrumC30AEQ50SHtkDUd/L/
+         d0H7HwZjWVxcUH4NoekCB91rF10wIx1P2VP3kIQiTrEr3YEm876gA7V6y6ffp26elSBd
+         6OvA==
+X-Gm-Message-State: AOAM533LoM79a3dWkazpnQ5MQiq7rfi14kWMrPchVKDOddLL09jDv3Uo
+	Rzkv0BGfVLwgwSXLrq6eiZ1y6EOtL4q7bw==
+X-Google-Smtp-Source: ABdhPJz2ROhdYG9TG65r2vO3Z4ShHq4LK4GPcdAJoTFsNxZCL44vesUqitoVWXdgiPHZMOeHvXHZlg==
+X-Received: by 2002:a17:902:8308:b029:e9:d69:a2f with SMTP id bd8-20020a1709028308b02900e90d690a2fmr15590009plb.20.1618693605543;
+        Sat, 17 Apr 2021 14:06:45 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:7c7e:4cc5:a7d5:fd57])
         by smtp.gmail.com with ESMTPSA id t67sm8509204pfb.210.2021.04.17.14.06.44
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 17 Apr 2021 14:06:44 -0700 (PDT)
+        Sat, 17 Apr 2021 14:06:45 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardnott 48/50] uftrace: Fix error on aarch64 when binutils update to 2.35.1
-Date: Sat, 17 Apr 2021 14:05:57 -0700
-Message-Id: <5bd3bf081d721668ee75b39fe7c087c2318a9e03.1618692905.git.akuster808@gmail.com>
+Subject: [hardnott 49/50] open-vm-tools: upgrade 11.0.1 -> 11.2.5
+Date: Sat, 17 Apr 2021 14:05:58 -0700
+Message-Id: <62ddf0fa2bca03e399318a1d00273ce93336db8e.1618692905.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1618692905.git.akuster808@gmail.com>
 References: <cover.1618692905.git.akuster808@gmail.com>
 
-From: wangmy <wangmy@fujitsu.com>
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Drop 0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch
+since it was a backport.
+
+Drop 0001-pollGtk-Drop-volatile-qualifier.patch
+since it's covered by:
+   f48efc8e Make pollGtk resetable.
+
+Drop 0001-utilBacktrace-Ignore-Warray-bounds.patch
+since it's covered by:
+   0cfda58a Make peeking back into the stack work for back traces
+
+Drop 0002-add-include-sys-sysmacros.h.patch
+since it's covered by:
+   69b7e1f9 Include sysmacros.h directly as mandated by glibc-2.25.
+
+Refit:
+  0005-Use-configure-to-test-for-feature-instead-of-platfor.patch
+  0009-Rename-poll.h-to-vm_poll.h.patch
+  0002-hgfsServerLinux-Consider-64bit-time_t-possibility.patch
+  0011-Use-uintmax_t-for-handling-rlim_t.patch
+
+Add:
+  0001-Add-resolv_compat.h-for-musl-builds.patch
+
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+Signed-off-by: Trevor Gamblin <Trevor.Gamblin@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e1c894d6876c439e362e761176b09f863ee2c689)
+(cherry picked from commit 7a5fbd9d46cdec887d7b370f567e740e7731bfec)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...error-on-aarch64-with-binutils2.35.1.patch | 27 +++++++++++++++++++
- .../recipes-devtools/uftrace/uftrace_0.9.4.bb |  1 +
- 2 files changed, 28 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/uftrace/uftrace/0001-Fix-error-on-aarch64-with-binutils2.35.1.patch
+ ...-Add-resolv_compat.h-for-musl-builds.patch |  72 ++
+ ....-Remove-references-to-deprecated-G_.patch |  94 ---
+ ...0001-pollGtk-Drop-volatile-qualifier.patch |  32 -
+ ...1-utilBacktrace-Ignore-Warray-bounds.patch |  33 -
+ .../0002-add-include-sys-sysmacros.h.patch    |  30 -
+ ...ux-Consider-64bit-time_t-possibility.patch |  42 +-
+ ...-test-for-feature-instead-of-platfor.patch |  24 +-
+ .../0009-Rename-poll.h-to-vm_poll.h.patch     | 726 ++----------------
+ ...11-Use-uintmax_t-for-handling-rlim_t.patch |  25 +-
+ ...ools_11.0.1.bb => open-vm-tools_11.2.5.bb} |  13 +-
+ 10 files changed, 184 insertions(+), 907 deletions(-)
+ create mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-Add-resolv_compat.h-for-musl-builds.patch
+ delete mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch
+ delete mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-pollGtk-Drop-volatile-qualifier.patch
+ delete mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-utilBacktrace-Ignore-Warray-bounds.patch
+ delete mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/0002-add-include-sys-sysmacros.h.patch
+ rename meta-networking/recipes-support/open-vm-tools/{open-vm-tools_11.0.1.bb => open-vm-tools_11.2.5.bb} (93%)
 
-diff --git a/meta-oe/recipes-devtools/uftrace/uftrace/0001-Fix-error-on-aarch64-with-binutils2.35.1.patch b/meta-oe/recipes-devtools/uftrace/uftrace/0001-Fix-error-on-aarch64-with-binutils2.35.1.patch
+diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-Add-resolv_compat.h-for-musl-builds.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-Add-resolv_compat.h-for-musl-builds.patch
 new file mode 100644
-index 00000000000..ac17cf433f9
+index 00000000000..aa7a5607cf1
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/uftrace/uftrace/0001-Fix-error-on-aarch64-with-binutils2.35.1.patch
-@@ -0,0 +1,27 @@
-+From 0bc502989822506af308a559ac1cd52af82cac03 Mon Sep 17 00:00:00 2001
-+From: Lei Maohui <leimaohui@cn.fujitsu.com>
-+Date: Wed, 14 Apr 2021 09:35:35 +0900
-+Subject: [PATCH] Fix error on aarch64 with binutils2.35.1.
++++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-Add-resolv_compat.h-for-musl-builds.patch
+@@ -0,0 +1,72 @@
++From c0c36ba5dd7047710e4c3135f147ce4119021200 Mon Sep 17 00:00:00 2001
++From: Trevor Gamblin <trevor.gamblin@windriver.com>
++Date: Wed, 14 Apr 2021 10:24:52 -0400
++Subject: [PATCH] Add resolv_compat.h for musl builds
 +
-+WARN: child terminated by signal: 11: Segmentation fault
++musl doesn't implement res_ninit, so it needs to be defined
++independently for musl builds. This patch is based on the one at
++https://gitweb.gentoo.org/proj/musl.git/tree/dev-qt/qtwebengine/files/qtwebengine-5.7.0-musl-resolver.patch?id=7f4100326793d55d45d0f5bb6178827ce6173513
 +
-+Upstream-status: Pending
++Upstream-Status: Pending
 +
-+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
++Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 +---
-+ arch/aarch64/mcount-arch.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ open-vm-tools/lib/nicInfo/nicInfoPosix.c  |  4 +++
++ open-vm-tools/lib/nicInfo/resolv_compat.h | 30 +++++++++++++++++++++++
++ 2 files changed, 34 insertions(+)
++ create mode 100644 open-vm-tools/lib/nicInfo/resolv_compat.h
 +
-+diff --git a/arch/aarch64/mcount-arch.h b/arch/aarch64/mcount-arch.h
-+index 69efe521..60c2c1ba 100644
-+--- a/arch/aarch64/mcount-arch.h
-++++ b/arch/aarch64/mcount-arch.h
-+@@ -31,7 +31,7 @@ struct mcount_arch_context {
-+ 	double d[ARCH_MAX_FLOAT_REGS];
-+ };
++diff --git a/open-vm-tools/lib/nicInfo/nicInfoPosix.c b/open-vm-tools/lib/nicInfo/nicInfoPosix.c
++index 8710c542..25f3146e 100644
++--- a/open-vm-tools/lib/nicInfo/nicInfoPosix.c
+++++ b/open-vm-tools/lib/nicInfo/nicInfoPosix.c
++@@ -70,6 +70,10 @@
++ #   include <net/if.h>
++ #endif
 + 
-+-#define ARCH_PLT0_SIZE  32
-++#define ARCH_PLT0_SIZE  16
-+ #define ARCH_PLTHOOK_ADDR_OFFSET  0
-+ 
-+ struct mcount_disasm_engine;
-diff --git a/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb b/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb
-index a3d06021825..4b4fc831c3c 100644
---- a/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb
-+++ b/meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb
-@@ -13,6 +13,7 @@ inherit autotools
- PV .= "+git${SRCPV}"
- SRCREV = "d648bbffedef529220896283fb59e35531c13804"
- SRC_URI = "git://github.com/namhyung/${BPN} \
-+           file://0001-Fix-error-on-aarch64-with-binutils2.35.1.patch \
-            "
- S = "${WORKDIR}/git"
+++#if !defined(__GLIBC__)
+++#include "resolv_compat.h"
+++#endif
+++
++ /*
++  * resolver(3) and IPv6:
++  *
++diff --git a/open-vm-tools/lib/nicInfo/resolv_compat.h b/open-vm-tools/lib/nicInfo/resolv_compat.h
++new file mode 100644
++index 00000000..d768464b
++--- /dev/null
+++++ b/open-vm-tools/lib/nicInfo/resolv_compat.h
++@@ -0,0 +1,30 @@
+++#if !defined(__GLIBC__)
+++/***************************************************************************
+++ * resolv_compat.h
+++ *
+++ * Mimick GLIBC's res_ninit() and res_nclose() for musl libc
+++ * Note: res_init() is actually deprecated according to
+++ * http://docs.oracle.com/cd/E36784_01/html/E36875/res-nclose-3resolv.html
+++ **************************************************************************/
+++#include <string.h>
+++
+++static inline int res_ninit(res_state statp)
+++{
+++	int rc = res_init();
+++	if (statp != &_res) {
+++		memcpy(statp, &_res, sizeof(*statp));
+++	}
+++	return rc;
+++}
+++
+++static inline int res_nclose(res_state statp)
+++{
+++	if (!statp)
+++		return -1;
+++	if (statp != &_res) {
+++		memset(statp, 0, sizeof(*statp));
+++	}
+++	return 0;
+++}
+++#endif
+++
++-- 
++2.30.2
++
+diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch
+deleted file mode 100644
+index 6cb5dfcccbf..00000000000
+--- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch
++++ /dev/null
+@@ -1,94 +0,0 @@
+-From 6fb28085e867d7c3ef46577d9ff193a185693bcb Mon Sep 17 00:00:00 2001
+-From: Oliver Kurth <okurth@vmware.com>
+-Date: Mon, 30 Sep 2019 16:24:27 -0700
+-Subject: [PATCH] GitHub Issue #367. Remove references to deprecated G_INLINE_FUNC.
+-
+-G_INLINE_FUNC was a work-around for compilers that didn't support
+-static inline.  Change uses of it to static inline.
+-
+-Upstream-Status: Backport
+-[https://github.com/vmware/open-vm-tools/commit/89c0d444567eb525e8d083fb564c46d68e96660c]
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- open-vm-tools/lib/include/vmware/tools/plugin.h     | 2 +-
+- open-vm-tools/lib/include/vmware/tools/threadPool.h | 8 ++++----
+- open-vm-tools/lib/include/vmware/tools/utils.h      | 9 ---------
+- 3 files changed, 5 insertions(+), 14 deletions(-)
+-
+-diff --git a/open-vm-tools/lib/include/vmware/tools/plugin.h b/open-vm-tools/lib/include/vmware/tools/plugin.h
+-index f9acc6a2..deefd1f3 100644
+---- a/open-vm-tools/lib/include/vmware/tools/plugin.h
+-+++ b/open-vm-tools/lib/include/vmware/tools/plugin.h
+-@@ -290,7 +290,7 @@ typedef struct ToolsAppCtx {
+-  *
+-  * @return TRUE if COM is initialized when the function returns.
+-  */
+--G_INLINE_FUNC gboolean
+-+static inline gboolean
+- ToolsCore_InitializeCOM(ToolsAppCtx *ctx)
+- {
+-    if (!ctx->comInitialized) {
+-diff --git a/open-vm-tools/lib/include/vmware/tools/threadPool.h b/open-vm-tools/lib/include/vmware/tools/threadPool.h
+-index 3f2082b3..5880fbcf 100644
+---- a/open-vm-tools/lib/include/vmware/tools/threadPool.h
+-+++ b/open-vm-tools/lib/include/vmware/tools/threadPool.h
+-@@ -91,7 +91,7 @@ typedef struct ToolsCorePool {
+-  *******************************************************************************
+-  */
+- 
+--G_INLINE_FUNC ToolsCorePool *
+-+static inline ToolsCorePool *
+- ToolsCorePool_GetPool(ToolsAppCtx *ctx)
+- {
+-    ToolsCorePool *pool = NULL;
+-@@ -123,7 +123,7 @@ ToolsCorePool_GetPool(ToolsAppCtx *ctx)
+-  *******************************************************************************
+-  */
+- 
+--G_INLINE_FUNC guint
+-+static inline guint
+- ToolsCorePool_SubmitTask(ToolsAppCtx *ctx,
+-                          ToolsCorePoolCb cb,
+-                          gpointer data,
+-@@ -153,7 +153,7 @@ ToolsCorePool_SubmitTask(ToolsAppCtx *ctx,
+-  *******************************************************************************
+-  */
+- 
+--G_INLINE_FUNC void
+-+static inline void
+- ToolsCorePool_CancelTask(ToolsAppCtx *ctx,
+-                          guint taskId)
+- {
+-@@ -197,7 +197,7 @@ ToolsCorePool_CancelTask(ToolsAppCtx *ctx,
+-  *******************************************************************************
+-  */
+- 
+--G_INLINE_FUNC gboolean
+-+static inline gboolean
+- ToolsCorePool_StartThread(ToolsAppCtx *ctx,
+-                           const gchar *threadName,
+-                           ToolsCorePoolCb cb,
+-diff --git a/open-vm-tools/lib/include/vmware/tools/utils.h b/open-vm-tools/lib/include/vmware/tools/utils.h
+-index f6574590..a3292d5c 100644
+---- a/open-vm-tools/lib/include/vmware/tools/utils.h
+-+++ b/open-vm-tools/lib/include/vmware/tools/utils.h
+-@@ -51,15 +51,6 @@
+- #  include <sys/time.h>
+- #endif
+- 
+--
+--/* Work around a glib limitation: it doesn't set G_INLINE_FUNC on Win32. */
+--#if defined(G_PLATFORM_WIN32)
+--#  if defined(G_INLINE_FUNC)
+--#     undef G_INLINE_FUNC
+--#  endif
+--#  define G_INLINE_FUNC static __inline
+--#endif
+--
+- #ifndef ABS
+- #  define ABS(x) (((x) >= 0) ? (x) : -(x))
+- #endif
+--- 
+-2.23.0
+-
+diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-pollGtk-Drop-volatile-qualifier.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-pollGtk-Drop-volatile-qualifier.patch
+deleted file mode 100644
+index adc6571f7ea..00000000000
+--- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-pollGtk-Drop-volatile-qualifier.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From 7bd280f3cc07208760759c98bbfbac3f9d28f77c Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 5 Mar 2021 08:58:29 -0800
+-Subject: [PATCH] pollGtk: Drop volatile qualifier
+-
+-glib-2.0 has changed the function interfaces as well and do not expect
+-it to be volatile. GCC 11 complains about it
+-
+-glib/gatomic.h:112:5: error: argument 2 of '__atomic_load' discards 'volatile' qualifier [-Werror=incompatible-pointer-types]
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- open-vm-tools/lib/pollGtk/pollGtk.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/open-vm-tools/lib/pollGtk/pollGtk.c b/open-vm-tools/lib/pollGtk/pollGtk.c
+-index 6d95bf01..a941e7a7 100644
+---- a/open-vm-tools/lib/pollGtk/pollGtk.c
+-+++ b/open-vm-tools/lib/pollGtk/pollGtk.c
+-@@ -1473,7 +1473,7 @@ PollGtkBasicCallback(gpointer data) // IN: The eventEntry
+- void
+- Poll_InitGtk(void)
+- {
+--   static volatile gsize inited = 0;
+-+   static gsize inited = 0;
+- 
+-    static const PollImpl gtkImpl =
+-    {
+--- 
+-2.30.1
+-
+diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-utilBacktrace-Ignore-Warray-bounds.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-utilBacktrace-Ignore-Warray-bounds.patch
+deleted file mode 100644
+index 95664e85520..00000000000
+--- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0001-utilBacktrace-Ignore-Warray-bounds.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-From ac3f93ea087d3a5461fe57fe021d0fe9a959e13c Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 25 Dec 2019 15:25:02 -0800
+-Subject: [PATCH] utilBacktrace: Ignore -Warray-bounds
+-
+-This is new warning with gcc10, until its fixed ignore it like gcc<10
+-did
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- open-vm-tools/lib/user/utilBacktrace.c | 5 +++++
+- 1 file changed, 5 insertions(+)
+-
+-diff --git a/open-vm-tools/lib/user/utilBacktrace.c b/open-vm-tools/lib/user/utilBacktrace.c
+-index b72340ad..97ca53f2 100644
+---- a/open-vm-tools/lib/user/utilBacktrace.c
+-+++ b/open-vm-tools/lib/user/utilBacktrace.c
+-@@ -517,6 +517,11 @@ Util_BacktraceWithFunc(int bugNr,                // IN:
+-    } else {
+-       outFunc(outFuncData, "Backtrace for bugNr=%d\n",bugNr);
+-    }
+-+#pragma GCC diagnostic push
+-+#pragma GCC diagnostic ignored "-Warray-bounds"
+-+
+-    Util_BacktraceFromPointerWithFunc(&x[-2], outFunc, outFuncData);
+-+#pragma GCC diagnostic pop
+- #endif
+- }
+-+
+--- 
+-2.24.1
+-
+diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0002-add-include-sys-sysmacros.h.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0002-add-include-sys-sysmacros.h.patch
+deleted file mode 100644
+index 34628ffbefa..00000000000
+--- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0002-add-include-sys-sysmacros.h.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From 3fa237b3afabc293e563292b8d89265a871626ad Mon Sep 17 00:00:00 2001
+-From: Martin Kelly <mkelly@xevo.com>
+-Date: Mon, 22 May 2017 17:00:05 -0700
+-Subject: [PATCH] add #include <sys/sysmacros.h>
+-
+-In newer glibc versions, the definition for major() has been moved to
+-sys/sysmacros.h, and using the older version in <sys/types.h> has been
+-deprecated. So, add an include for <sys/sysmacros.h>.
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Martin Kelly <mkelly@xevo.com>
+----
+- open-vm-tools/lib/wiper/wiperPosix.c | 3 +++
+- 1 file changed, 3 insertions(+)
+-
+-diff --git a/open-vm-tools/lib/wiper/wiperPosix.c b/open-vm-tools/lib/wiper/wiperPosix.c
+-index bd542410..ccf06293 100644
+---- a/open-vm-tools/lib/wiper/wiperPosix.c
+-+++ b/open-vm-tools/lib/wiper/wiperPosix.c
+-@@ -43,6 +43,9 @@
+- #  include <libgen.h>
+- # endif /* __FreeBSD_version >= 500000 */
+- #endif
+-+#if defined(__linux__)
+-+#include <sys/sysmacros.h>
+-+#endif
+- #include <unistd.h>
+- 
+- #include "vmware.h"
+diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0002-hgfsServerLinux-Consider-64bit-time_t-possibility.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0002-hgfsServerLinux-Consider-64bit-time_t-possibility.patch
+index 0f64eabc944..efada7aafd1 100644
+--- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0002-hgfsServerLinux-Consider-64bit-time_t-possibility.patch
++++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0002-hgfsServerLinux-Consider-64bit-time_t-possibility.patch
+@@ -1,22 +1,27 @@
+-From fe56b67a2915a8632ea30604c14241f335dd3c15 Mon Sep 17 00:00:00 2001
++From deba3b87a9bfad007f94b840c9ccd6f1c78c2e98 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 12 Nov 2019 10:49:46 -0800
+-Subject: [PATCH] hgfsServerLinux: Consider 64bit time_t possibility
++Date: Wed, 24 Mar 2021 17:36:26 -0400
++Subject: [PATCH 1/2] hgfsServerLinux: Consider 64bit time_t possibility
+ 
+ Upstream-Status: Pending
++
++Refit for open-vm-tools-11.2.5.
++
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
++Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+ ---
+  .../lib/hgfsServer/hgfsServerLinux.c          | 19 +++++--------------
+  1 file changed, 5 insertions(+), 14 deletions(-)
+ 
+ diff --git a/open-vm-tools/lib/hgfsServer/hgfsServerLinux.c b/open-vm-tools/lib/hgfsServer/hgfsServerLinux.c
+-index 03175623..554da67f 100644
++index 62aeee6d..ba2e5624 100644
+ --- a/open-vm-tools/lib/hgfsServer/hgfsServerLinux.c
+ +++ b/open-vm-tools/lib/hgfsServer/hgfsServerLinux.c
+-@@ -2561,20 +2561,11 @@ HgfsStatToFileAttr(struct stat *stats,       // IN: stat information
+-    LOG(4, ("%s: done, permissions %o%o%o%o, size %"FMT64"u\n", __FUNCTION__,
+-            attr->specialPerms, attr->ownerPerms, attr->groupPerms,
+-            attr->otherPerms, attr->size));
++@@ -2566,20 +2566,11 @@ HgfsStatToFileAttr(struct stat *stats,       // IN: stat information
++    LOG(4, "%s: done, permissions %o%o%o%o, size %"FMT64"u\n", __FUNCTION__,
++        attr->specialPerms, attr->ownerPerms, attr->groupPerms,
++        attr->otherPerms, attr->size);
+ -#ifdef __FreeBSD__
+ -#   if !defined(VM_X86_64) && __FreeBSD_version >= 500043
+ -#      define FMTTIMET ""
+@@ -26,16 +31,19 @@ index 03175623..554da67f 100644
+ -#else
+ -#   define FMTTIMET "l"
+ -#endif
+--   LOG(4, ("access: %"FMTTIMET"d/%"FMT64"u \nwrite: %"FMTTIMET"d/%"FMT64"u \n"
+--           "attr: %"FMTTIMET"d/%"FMT64"u\n",
+--           stats->st_atime, attr->accessTime, stats->st_mtime, attr->writeTime,
+--           stats->st_ctime, attr->attrChangeTime));
++-   LOG(4, "access: %"FMTTIMET"d/%"FMT64"u \nwrite: %"FMTTIMET"d/%"FMT64"u \n"
++-       "attr: %"FMTTIMET"d/%"FMT64"u\n",
++-       stats->st_atime, attr->accessTime, stats->st_mtime, attr->writeTime,
++-       stats->st_ctime, attr->attrChangeTime);
+ -#undef FMTTIMET
+-+   LOG(4, ("access: %jd/%"FMT64"u \nwrite: %jd/%"FMT64"u \n"
+-+           "attr: %jd/%"FMT64"u\n",
+-+           (intmax_t)stats->st_atime, attr->accessTime,
+-+	   (intmax_t)stats->st_mtime, attr->writeTime,
+-+           (intmax_t)stats->st_ctime, attr->attrChangeTime));
+++   //LOG(4, ("access: %jd/%"FMT64"u \nwrite: %jd/%"FMT64"u \n"
+++   //        "attr: %jd/%"FMT64"u\n",
+++   //        (intmax_t)stats->st_atime, attr->accessTime,
+++   //        (intmax_t)stats->st_mtime, attr->writeTime,
+++   //        (intmax_t)stats->st_ctime, attr->attrChangeTime));
+  
+     attr->userId = stats->st_uid;
+     attr->groupId = stats->st_gid;
++-- 
++2.30.2
++
+diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0005-Use-configure-to-test-for-feature-instead-of-platfor.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0005-Use-configure-to-test-for-feature-instead-of-platfor.patch
+index c6378b80865..34d4ce4a90b 100644
+--- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0005-Use-configure-to-test-for-feature-instead-of-platfor.patch
++++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0005-Use-configure-to-test-for-feature-instead-of-platfor.patch
+@@ -1,4 +1,4 @@
+-From 719d60978f979cf2e03771a9b8a62e36c92639f9 Mon Sep 17 00:00:00 2001
++From b653a81da70c44af002dcbc7489ad9f4588ed11d Mon Sep 17 00:00:00 2001
+ From: Natanael Copa <ncopa@alpinelinux.org>
+ Date: Wed, 18 Nov 2015 10:05:07 +0000
+ Subject: [PATCH] Use configure to test for feature instead of platform
+@@ -18,7 +18,10 @@ The features we test for are:
+ 
+ This is needed for musl libc.
+ 
++Refit patch of open-vm-tools/lib/nicInfo/nicInfoPosix.c
++
+ Signed-off-by: Natanael Copa <ncopa@alpinelinux.org>
++Signed-off-by: Randy MacLeod <randy.macleod@windriver.com>
+ ---
+  open-vm-tools/configure.ac               |  4 ++++
+  open-vm-tools/lib/misc/idLinux.c         | 30 +++++++++++-------------
+@@ -26,10 +29,10 @@ Signed-off-by: Natanael Copa <ncopa@alpinelinux.org>
+  3 files changed, 23 insertions(+), 17 deletions(-)
+ 
+ diff --git a/open-vm-tools/configure.ac b/open-vm-tools/configure.ac
+-index 48ff1ef3..71e684bb 100644
++index 27f3717f..6baab9e3 100644
+ --- a/open-vm-tools/configure.ac
+ +++ b/open-vm-tools/configure.ac
+-@@ -897,6 +897,7 @@ AC_CHECK_FUNCS(
++@@ -923,6 +923,7 @@ AC_CHECK_FUNCS(
+  
+  AC_CHECK_FUNCS([ecvt])
+  AC_CHECK_FUNCS([fcvt])
+@@ -37,7 +40,7 @@ index 48ff1ef3..71e684bb 100644
+  
+  AC_CHECK_FUNC([mkdtemp], [have_mkdtemp=yes])
+  
+-@@ -1145,10 +1146,13 @@ fi
++@@ -1132,10 +1133,13 @@ fi
+  ###
+  
+  AC_CHECK_HEADERS([crypt.h])
+@@ -52,7 +55,7 @@ index 48ff1ef3..71e684bb 100644
+  AC_CHECK_HEADERS([sys/io.h])
+  AC_CHECK_HEADERS([sys/param.h]) # Required to make the sys/user.h check work correctly on FreeBSD
+ diff --git a/open-vm-tools/lib/misc/idLinux.c b/open-vm-tools/lib/misc/idLinux.c
+-index b950cf84..1dcfb508 100644
++index 1bb86f48..41c670cf 100644
+ --- a/open-vm-tools/lib/misc/idLinux.c
+ +++ b/open-vm-tools/lib/misc/idLinux.c
+ @@ -27,12 +27,9 @@
+@@ -69,7 +72,7 @@ index b950cf84..1dcfb508 100644
+  #ifdef __APPLE__
+  #include <sys/socket.h>
+  #include <TargetConditionals.h>
+-@@ -997,31 +994,32 @@ Id_EndSuperUser(uid_t uid)  // IN:
++@@ -1025,31 +1022,32 @@ Id_EndSuperUser(uid_t uid)  // IN:
+  static Bool
+  IdIsSetUGid(void)
+  {
+@@ -115,13 +118,13 @@ index b950cf84..1dcfb508 100644
+  }
+  #endif
+ diff --git a/open-vm-tools/lib/nicInfo/nicInfoPosix.c b/open-vm-tools/lib/nicInfo/nicInfoPosix.c
+-index a22981d5..b4e08681 100644
++index cc5fa281..8710c542 100644
+ --- a/open-vm-tools/lib/nicInfo/nicInfoPosix.c
+ +++ b/open-vm-tools/lib/nicInfo/nicInfoPosix.c
+-@@ -34,9 +34,13 @@
+- #include <sys/socket.h>
++@@ -35,9 +35,13 @@
+  #include <sys/stat.h>
+  #include <errno.h>
++ #include <limits.h>
+ -#if defined(__FreeBSD__) || defined(__APPLE__)
+ +#if HAVE_SYS_SYSCTL_H
+  # include <sys/sysctl.h>
+@@ -133,3 +136,6 @@ index a22981d5..b4e08681 100644
+  # include <net/if.h>
+  #endif
+  #ifndef NO_DNET
++-- 
++2.27.0
++
+diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0009-Rename-poll.h-to-vm_poll.h.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0009-Rename-poll.h-to-vm_poll.h.patch
+index 9cf54f6f442..214dac4717e 100644
+--- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0009-Rename-poll.h-to-vm_poll.h.patch
++++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0009-Rename-poll.h-to-vm_poll.h.patch
+@@ -1,27 +1,36 @@
+-From 8793466326dd10b0d2dbb83c64beff5cc8c0fc7d Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 13 Jun 2018 23:11:58 -0700
++From 7a5db1cf47e70e72d78a42468912c276e57f865e Mon Sep 17 00:00:00 2001
++From: Randy MacLeod <Randy.MacLeod@windriver.com>
++Date: Wed, 24 Mar 2021 16:21:35 -0400
+ Subject: [PATCH] Rename poll.h to vm_poll.h
+ 
++Rename poll.h to vm_poll.h and switch from:
++   #include <sys/poll.h>
++to
++   #include <poll.h>
++
+ musl libc's system headers pulls in open-vm-tools' poll.h. To avoid this
+ we rename poll.h to vm_poll.h.
+ 
++Update for open-vm-tools-11.2.5.
++
+ Signed-off-by: Natanael Copa <ncopa@alpinelinux.org>
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+ ---
+- open-vm-tools/lib/asyncsocket/asyncsocket.c                     | 2 +-
+- open-vm-tools/lib/hgfsServer/hgfsServer.c                       | 2 +-
+- open-vm-tools/lib/include/asyncsocket.h                         | 2 +-
+- open-vm-tools/lib/include/pollImpl.h                            | 2 +-
+- open-vm-tools/lib/include/{poll.h => vm_poll.h}                 | 2 +-
+- open-vm-tools/lib/rpcIn/rpcin.c                                 | 2 +-
+- .../services/plugins/grabbitmqProxy/grabbitmqProxyPlugin.c      | 2 +-
+- 7 files changed, 7 insertions(+), 7 deletions(-)
++ open-vm-tools/lib/asyncsocket/asyncsocket.c     | 2 +-
++ open-vm-tools/lib/hgfsServer/hgfsServer.c       | 2 +-
++ open-vm-tools/lib/include/asyncsocket.h         | 2 +-
++ open-vm-tools/lib/include/pollImpl.h            | 2 +-
++ open-vm-tools/lib/include/{poll.h => vm_poll.h} | 2 +-
++ open-vm-tools/lib/rpcIn/rpcin.c                 | 2 +-
++ 6 files changed, 6 insertions(+), 6 deletions(-)
+  rename open-vm-tools/lib/include/{poll.h => vm_poll.h} (99%)
+ 
++diff --git a/open-vm-tools/lib/asyncsocket/asyncsocket.c b/open-vm-tools/lib/asyncsocket/asyncsocket.c
++index 9914ffc5..89679f7a 100644
+ --- a/open-vm-tools/lib/asyncsocket/asyncsocket.c
+ +++ b/open-vm-tools/lib/asyncsocket/asyncsocket.c
+-@@ -86,7 +86,7 @@
++@@ -87,7 +87,7 @@
+  #include "random.h"
+  #include "asyncsocket.h"
+  #include "asyncSocketBase.h"
+@@ -30,20 +39,24 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  #include "log.h"
+  #include "err.h"
+  #include "hostinfo.h"
++diff --git a/open-vm-tools/lib/hgfsServer/hgfsServer.c b/open-vm-tools/lib/hgfsServer/hgfsServer.c
++index 3a18a7e1..acdda54d 100644
+ --- a/open-vm-tools/lib/hgfsServer/hgfsServer.c
+ +++ b/open-vm-tools/lib/hgfsServer/hgfsServer.c
+-@@ -48,7 +48,7 @@
+- #include "hgfsServerOplock.h"
++@@ -51,7 +51,7 @@
+  #include "hgfsDirNotify.h"
++ #include "hgfsThreadpool.h"
+  #include "userlock.h"
+ -#include "poll.h"
+ +#include "vm_poll.h"
+  #include "mutexRankLib.h"
+  #include "vm_basic_asm.h"
+  #include "unicodeOperations.h"
++diff --git a/open-vm-tools/lib/include/asyncsocket.h b/open-vm-tools/lib/include/asyncsocket.h
++index 746dd78b..82c22f46 100644
+ --- a/open-vm-tools/lib/include/asyncsocket.h
+ +++ b/open-vm-tools/lib/include/asyncsocket.h
+-@@ -164,7 +164,7 @@ typedef struct AsyncSocket AsyncSocket;
++@@ -171,7 +171,7 @@ typedef struct AsyncSocket AsyncSocket;
+   * Or the client can specify its favorite poll class and locking behavior.
+   * Use of IVmdbPoll is only supported for regular sockets and for Attach.
+   */
+@@ -52,6 +65,8 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  struct IVmdbPoll;
+  typedef struct AsyncSocketPollParams {
+     int flags;               /* Default 0, only POLL_FLAG_NO_BULL is valid */
++diff --git a/open-vm-tools/lib/include/pollImpl.h b/open-vm-tools/lib/include/pollImpl.h
++index 46442e55..8bc66997 100644
+ --- a/open-vm-tools/lib/include/pollImpl.h
+ +++ b/open-vm-tools/lib/include/pollImpl.h
+ @@ -44,7 +44,7 @@
+@@ -63,672 +78,24 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  #include "vm_basic_asm.h"
+  
+  #if defined(__cplusplus)
++diff --git a/open-vm-tools/lib/include/poll.h b/open-vm-tools/lib/include/vm_poll.h
++similarity index 99%
++rename from open-vm-tools/lib/include/poll.h
++rename to open-vm-tools/lib/include/vm_poll.h
++index c90f5dcd..73a56204 100644
+ --- a/open-vm-tools/lib/include/poll.h
+-+++ /dev/null
+-@@ -1,330 +0,0 @@
+--/*********************************************************
+-- * Copyright (C) 1998-2018 VMware, Inc. All rights reserved.
+-- *
+-- * This program is free software; you can redistribute it and/or modify it
+-- * under the terms of the GNU Lesser General Public License as published
+-- * by the Free Software Foundation version 2.1 and no later version.
+-- *
+-- * This program is distributed in the hope that it will be useful, but
+-- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+-- * or FITNESS FOR A PARTICULAR PURPOSE.  See the Lesser GNU General Public
+-- * License for more details.
+-- *
+-- * You should have received a copy of the GNU Lesser General Public License
+-- * along with this program; if not, write to the Free Software Foundation, Inc.,
+-- * 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA.
+-- *
+-- *********************************************************/
+--
+--/*********************************************************
+-- * The contents of this file are subject to the terms of the Common
+-- * Development and Distribution License (the "License") version 1.0
+-- * and no later version.  You may not use this file except in
+-- * compliance with the License.
+-- *
+-- * You can obtain a copy of the License at
+-- *         http://www.opensource.org/licenses/cddl1.php
+-- *
+-- * See the License for the specific language governing permissions
+-- * and limitations under the License.
+-- *
+-- *********************************************************/
+--
+--
+--#ifndef _POLL_H_
+--#define _POLL_H_
+--
+--#define INCLUDE_ALLOW_USERLEVEL
+--#define INCLUDE_ALLOW_VMCORE
+--#include "includeCheck.h"
+--
+--#include "vm_basic_types.h"
+--#include "vm_basic_defs.h"
+--#include "vmware.h"
+--#include "userlock.h"
+--
+--#if defined(__cplusplus)
+--extern "C" {
+--#endif
+--
+--#ifdef _WIN32
+--#define HZ 100
+--#elif defined linux
+--#include <asm/param.h>
+--#elif __APPLE__
+--#include <TargetConditionals.h>
+--/*
+-- * Old SDKs don't define TARGET_OS_IPHONE at all.
+-- * New ones define it to 0 on Mac OS X, 1 on iOS.
+-- */
+--#if !defined(TARGET_OS_IPHONE) || TARGET_OS_IPHONE == 0
+--#include <sys/kernel.h>
+--#endif
+--#include <sys/poll.h>
+--#define HZ 100
+--#endif
+--#ifdef __ANDROID__
+--/*
+-- * <poll.h> of android should be included, but its name is same
+-- * with this file. So its content is put here to avoid conflict.
+-- */
+--#include <asm/poll.h>
+--#define HZ 100
+--typedef unsigned int  nfds_t;
+--int poll(struct pollfd *, nfds_t, long);
+--#endif
+--
+--
+--/*
+-- * Poll event types: each type has a different reason for firing,
+-- * or condition that must be met before firing.
+-- */
+--
+--typedef enum {
+--   /*
+--    * Actual Poll queue types against which you can register callbacks.
+--    */
+--   POLL_VIRTUALREALTIME = -1, /* Negative because it doesn't have its own Q */
+--   POLL_VTIME = 0,
+--   POLL_REALTIME,
+--   POLL_DEVICE,
+--   POLL_MAIN_LOOP,
+--   POLL_NUM_QUEUES
+--} PollEventType;
+--
+--
+--/*
+-- * Classes of events
+-- *
+-- * These are the predefined classes.  More can be declared
+-- * with Poll_AllocClass().
+-- */
+--
+--typedef enum PollClass {
+--   POLL_CLASS_MAIN,
+--   POLL_CLASS_PAUSE,
+--   POLL_CLASS_IPC,
+--   POLL_CLASS_CPT,
+--   POLL_CLASS_MKS,
+--   POLL_FIXED_CLASSES,
+--   POLL_DEFAULT_FIXED_CLASSES,
+--   /* Size enum to maximum */
+--   POLL_MAX_CLASSES = 31,
+--} PollClass;
+--
+--/*
+-- * Do not use; Special pseudo private poll class supported by
+-- * PollDefault only
+-- */
+--#define POLL_DEFAULT_CLASS_NET POLL_FIXED_CLASSES
+--#define POLL_DEFAULT_CS_NET    PollClassSet_Singleton(POLL_DEFAULT_CLASS_NET)
+--
+--/*
+-- * Each callback is registered in a set of classes
+-- */
+--
+--typedef struct PollClassSet {
+--   uintptr_t bits;
+--} PollClassSet;
+--
+--/* An empty PollClassSet. */
+--static INLINE PollClassSet
+--PollClassSet_Empty(void)
+--{
+--   PollClassSet set = { 0 };
+--   return set;
+--}
+--
+--/* A PollClassSet with the single member. */
+--static INLINE PollClassSet
+--PollClassSet_Singleton(PollClass c)
+--{
+--   PollClassSet s = PollClassSet_Empty();
+--
+--   ASSERT_ON_COMPILE(POLL_MAX_CLASSES < sizeof s.bits * 8);
+--   ASSERT(c < POLL_MAX_CLASSES);
+--
+--   s.bits = CONST3264U(1) << c;
+--   return s;
+--}
+--
+--/* Combine two PollClassSets. */
+--static INLINE PollClassSet
+--PollClassSet_Union(PollClassSet lhs, PollClassSet rhs)
+--{
+--   PollClassSet set;
+--   set.bits = lhs.bits | rhs.bits;
+--   return set;
+--}
+--
+--/* Add single class to PollClassSet. */
+--static INLINE PollClassSet
+--PollClassSet_Include(PollClassSet set, PollClass c)
+--{
+--   return PollClassSet_Union(set, PollClassSet_Singleton(c));
+--}
+--
+--
+--#define POLL_CS_MAIN    PollClassSet_Singleton(POLL_CLASS_MAIN)
+--#define POLL_CS_PAUSE   PollClassSet_Union(POLL_CS_MAIN,            \
+--                           PollClassSet_Singleton(POLL_CLASS_PAUSE))
+--#define POLL_CS_CPT     PollClassSet_Union(POLL_CS_PAUSE,           \
+--                           PollClassSet_Singleton(POLL_CLASS_CPT))
+--#define POLL_CS_IPC     PollClassSet_Union(POLL_CS_CPT,             \
+--                           PollClassSet_Singleton(POLL_CLASS_IPC))
+--#define POLL_CS_VMDB    POLL_CS_PAUSE /* POLL_CLASS_VMDB is retired */
+--#define POLL_CS_MKS	PollClassSet_Singleton(POLL_CLASS_MKS)
+--/* 
+-- * DANGER.  You don't need POLL_CS_ALWAYS.  Really.  So don't use it.
+-- */
+--#define POLL_CS_ALWAYS  PollClassSet_Union(POLL_CS_CPT, POLL_CS_IPC)
+--
+--/*
+-- * Poll class-set taxonomy:
+-- * POLL_CS_MAIN
+-- *    - Unless you NEED another class, use POLL_CS_MAIN.
+-- * POLL_CS_PAUSE
+-- *    - For callbacks that must occur even if the guest is paused.
+-- *      Most VMDB or Foundry commands are in this category.
+-- * POLL_CS_CPT
+-- *    - Only for callbacks which can trigger intermediate Checkpoint 
+-- *      transitions.
+-- *      The ONLY such callback is Migrate.
+-- * POLL_CS_IPC
+-- *    - Only for callbacks which can contain Msg_(Post|Hint|Question) 
+-- *      responses, and for signal handlers (why)?
+-- *      Vigor, VMDB, and Foundry can contain Msg_* responses.
+-- * POLL_CS_MKS
+-- *    - Callback runs in MKS thread.
+-- * POLL_CS_ALWAYS
+-- *    - Only for events that must be processed immediately.
+-- *      The ONLY such callback is OvhdMemVmxSizeCheck.
+-- */
+--
+--
+--/*
+-- * Poll_Callback flags
+-- */
+--
+--#define POLL_FLAG_PERIODIC		0x01    // keep after firing
+--#define POLL_FLAG_REMOVE_AT_POWEROFF	0x02  	// self-explanatory
+--#define POLL_FLAG_READ			0x04	// device is ready for reading
+--#define POLL_FLAG_WRITE			0x08	// device is ready for writing
+--#define POLL_FLAG_SOCKET                0x10    // device is a Windows socket
+--#define POLL_FLAG_NO_BULL               0x20    // callback does its own locking
+--#define POLL_FLAG_WINSOCK               0x40    // Winsock style write events
+--#define POLL_FLAG_FD                    0x80    // device is a Windows file descriptor.
+--#define POLL_FLAG_ACCEPT_INVALID_FDS    0x100   // For broken 3rd party libs, e.g. curl
+--#define POLL_FLAG_THUNK_TO_WND          0x200   // thunk callback to window message loop
+--
+--
+--typedef void (*PollerFunction)(void *clientData);
+--typedef void (*PollerFireWrapper)(PollerFunction func,
+--                                  void *funcData,
+--                                  void *wrapperData);
+--typedef Bool (*PollerErrorFn)(const char *errorStr);
+--
+--/*
+-- * Initialisers:
+-- *
+-- *      For the sake of convenience, we declare the initialisers
+-- *      for custom implmentations here, even though the actual
+-- *      implementations are distinct from the core poll code.
+-- */
+--
+--typedef struct PollOptions {
+--   Bool locked;           // Use internal MXUser for locking
+--   Bool allowFullQueue;   // Don't assert when device event queue is full.
+--   VThreadID windowsMsgThread;       // thread that processes Windows messages
+--   PollerFireWrapper fireWrapperFn;  // optional; may be useful for stats
+--   void *fireWrapperData; // optional
+--   PollerErrorFn errorFn; // optional; called upon unrecoverable error
+--} PollOptions;
+--
+--
+--void Poll_InitDefault(void);
+--void Poll_InitDefaultEx(const PollOptions *opts);
+--void Poll_InitGtk(void); // On top of glib for Linux
+--void Poll_InitCF(void);  // On top of CoreFoundation for OSX
+--
+--
+--/*
+-- * Functions
+-- */
+--int Poll_SocketPair(Bool vmci, Bool stream, int fds[2]);
+--void Poll_Loop(Bool loop, Bool *exit, PollClass c);
+--void Poll_LoopTimeout(Bool loop, Bool *exit, PollClass c, int timeout);
+--Bool Poll_LockingEnabled(void);
+--void Poll_Exit(void);
+--
+--
+--/*
+-- * Poll_Callback adds a callback regardless of whether an identical one exists.
+-- * The exception to this rule is POLL_DEVICE callbacks: there is a maximum of
+-- * one read and one write callback per fd.
+-- *
+-- * Poll_CallbackRemove removes one callback. If there are multiple identical
+-- * callbacks, which one is removed is an implementation detail. Note that in
+-- * the case of POLL_DEVICE and POLL_REALTIME callbacks, the fd/delay used to
+-- * create the callback is not specified when removing, so all callbacks
+-- * of those types with the same flags, function, and clientData are considered
+-- * "identical" even if their fd/delay differed.
+-- */
+--
+--VMwareStatus Poll_Callback(PollClassSet classSet,
+--                           int flags,
+--                           PollerFunction f,
+--                           void *clientData,
+--                           PollEventType type,
+--                           PollDevHandle info, // fd/microsec delay
+--                           MXUserRecLock *lck);
+--Bool Poll_CallbackRemove(PollClassSet classSet,
+--                         int flags,
+--                         PollerFunction f,
+--                         void *clientData,
+--                         PollEventType type);
+--Bool Poll_CallbackRemoveOneByCB(PollClassSet classSet,
+--                                int flags,
+--                                PollerFunction f,
+--                                PollEventType type,
+--                                void **clientData);
+--
+--void Poll_NotifyChange(PollClassSet classSet);
+--
+--/*
+-- * Wrappers for Poll_Callback and Poll_CallbackRemove that present
+-- * simpler subsets of those interfaces.
+-- */
+--
+--VMwareStatus Poll_CB_Device(PollerFunction f,
+--                            void *clientData,
+--                            PollDevHandle device,
+--                            Bool periodic);
+--
+--Bool Poll_CB_DeviceRemove(PollerFunction f,
+--                          void *clientData,
+--                          Bool periodic);
+--
+--
+--VMwareStatus Poll_CB_RTime(PollerFunction f,
+--                           void *clientData,
+--                           int64 delay,   // microseconds
+--                           Bool periodic,
+--                           MXUserRecLock *lock);
+--
+--Bool Poll_CB_RTimeRemove(PollerFunction f,
+--                         void *clientData,
+--                         Bool periodic);
+--
+--
+--#ifdef _WIN32
+--void Poll_SetPumpsWindowsMessages(Bool pumps);
+--void Poll_SetWindowMessageRecipient(HWND hWnd, UINT msg, Bool alwaysThunk);
+--Bool Poll_FireWndCallback(void *lparam);
+--#endif
+--
+--#if defined(__cplusplus)
+--}  // extern "C"
+--#endif
+--
+--#endif // _POLL_H_
+---- /dev/null
+ +++ b/open-vm-tools/lib/include/vm_poll.h
+-@@ -0,0 +1,330 @@
+-+/*********************************************************
+-+ * Copyright (C) 1998-2018 VMware, Inc. All rights reserved.
+-+ *
+-+ * This program is free software; you can redistribute it and/or modify it
+-+ * under the terms of the GNU Lesser General Public License as published
+-+ * by the Free Software Foundation version 2.1 and no later version.
+-+ *
+-+ * This program is distributed in the hope that it will be useful, but
+-+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+-+ * or FITNESS FOR A PARTICULAR PURPOSE.  See the Lesser GNU General Public
+-+ * License for more details.
+-+ *
+-+ * You should have received a copy of the GNU Lesser General Public License
+-+ * along with this program; if not, write to the Free Software Foundation, Inc.,
+-+ * 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA.
+-+ *
+-+ *********************************************************/
+-+
+-+/*********************************************************
+-+ * The contents of this file are subject to the terms of the Common
+-+ * Development and Distribution License (the "License") version 1.0
+-+ * and no later version.  You may not use this file except in
+-+ * compliance with the License.
+-+ *
+-+ * You can obtain a copy of the License at
+-+ *         http://www.opensource.org/licenses/cddl1.php
+-+ *
+-+ * See the License for the specific language governing permissions
+-+ * and limitations under the License.
+-+ *
+-+ *********************************************************/
+-+
+-+
+-+#ifndef _POLL_H_
+-+#define _POLL_H_
+-+
+-+#define INCLUDE_ALLOW_USERLEVEL
+-+#define INCLUDE_ALLOW_VMCORE
+-+#include "includeCheck.h"
+-+
+-+#include "vm_basic_types.h"
+-+#include "vm_basic_defs.h"
+-+#include "vmware.h"
+-+#include "userlock.h"
+-+
+-+#if defined(__cplusplus)
+-+extern "C" {
+-+#endif
+-+
+-+#ifdef _WIN32
+-+#define HZ 100
+-+#elif defined linux
+-+#include <asm/param.h>
+-+#elif __APPLE__
+-+#include <TargetConditionals.h>
+-+/*
+-+ * Old SDKs don't define TARGET_OS_IPHONE at all.
+-+ * New ones define it to 0 on Mac OS X, 1 on iOS.
+-+ */
+-+#if !defined(TARGET_OS_IPHONE) || TARGET_OS_IPHONE == 0
+-+#include <sys/kernel.h>
+-+#endif
++@@ -60,7 +60,7 @@ extern "C" {
++ #if !defined(TARGET_OS_IPHONE) || TARGET_OS_IPHONE == 0
++ #include <sys/kernel.h>
++ #endif
++-#include <sys/poll.h>
+ +#include <poll.h>
+-+#define HZ 100
+-+#endif
+-+#ifdef __ANDROID__
+-+/*
+-+ * <poll.h> of android should be included, but its name is same
+-+ * with this file. So its content is put here to avoid conflict.
+-+ */
+-+#include <asm/poll.h>
+-+#define HZ 100
+-+typedef unsigned int  nfds_t;
+-+int poll(struct pollfd *, nfds_t, long);
+-+#endif
+-+
+-+
+-+/*
+-+ * Poll event types: each type has a different reason for firing,
+-+ * or condition that must be met before firing.
+-+ */
+-+
+-+typedef enum {
+-+   /*
+-+    * Actual Poll queue types against which you can register callbacks.
+-+    */
+-+   POLL_VIRTUALREALTIME = -1, /* Negative because it doesn't have its own Q */
+-+   POLL_VTIME = 0,
+-+   POLL_REALTIME,
+-+   POLL_DEVICE,
+-+   POLL_MAIN_LOOP,
+-+   POLL_NUM_QUEUES
+-+} PollEventType;
+-+
+-+
+-+/*
+-+ * Classes of events
+-+ *
+-+ * These are the predefined classes.  More can be declared
+-+ * with Poll_AllocClass().
+-+ */
+-+
+-+typedef enum PollClass {
+-+   POLL_CLASS_MAIN,
+-+   POLL_CLASS_PAUSE,
+-+   POLL_CLASS_IPC,
+-+   POLL_CLASS_CPT,
+-+   POLL_CLASS_MKS,
+-+   POLL_FIXED_CLASSES,
+-+   POLL_DEFAULT_FIXED_CLASSES,
+-+   /* Size enum to maximum */
+-+   POLL_MAX_CLASSES = 31,
+-+} PollClass;
+-+
+-+/*
+-+ * Do not use; Special pseudo private poll class supported by
+-+ * PollDefault only
+-+ */
+-+#define POLL_DEFAULT_CLASS_NET POLL_FIXED_CLASSES
+-+#define POLL_DEFAULT_CS_NET    PollClassSet_Singleton(POLL_DEFAULT_CLASS_NET)
+-+
+-+/*
+-+ * Each callback is registered in a set of classes
+-+ */
+-+
+-+typedef struct PollClassSet {
+-+   uintptr_t bits;
+-+} PollClassSet;
+-+
+-+/* An empty PollClassSet. */
+-+static INLINE PollClassSet
+-+PollClassSet_Empty(void)
+-+{
+-+   PollClassSet set = { 0 };
+-+   return set;
+-+}
+-+
+-+/* A PollClassSet with the single member. */
+-+static INLINE PollClassSet
+-+PollClassSet_Singleton(PollClass c)
+-+{
+-+   PollClassSet s = PollClassSet_Empty();
+-+
+-+   ASSERT_ON_COMPILE(POLL_MAX_CLASSES < sizeof s.bits * 8);
+-+   ASSERT(c < POLL_MAX_CLASSES);
+-+
+-+   s.bits = CONST3264U(1) << c;
+-+   return s;
+-+}
+-+
+-+/* Combine two PollClassSets. */
+-+static INLINE PollClassSet
+-+PollClassSet_Union(PollClassSet lhs, PollClassSet rhs)
+-+{
+-+   PollClassSet set;
+-+   set.bits = lhs.bits | rhs.bits;
+-+   return set;
+-+}
+-+
+-+/* Add single class to PollClassSet. */
+-+static INLINE PollClassSet
+-+PollClassSet_Include(PollClassSet set, PollClass c)
+-+{
+-+   return PollClassSet_Union(set, PollClassSet_Singleton(c));
+-+}
+-+
+-+
+-+#define POLL_CS_MAIN    PollClassSet_Singleton(POLL_CLASS_MAIN)
+-+#define POLL_CS_PAUSE   PollClassSet_Union(POLL_CS_MAIN,            \
+-+                           PollClassSet_Singleton(POLL_CLASS_PAUSE))
+-+#define POLL_CS_CPT     PollClassSet_Union(POLL_CS_PAUSE,           \
+-+                           PollClassSet_Singleton(POLL_CLASS_CPT))
+-+#define POLL_CS_IPC     PollClassSet_Union(POLL_CS_CPT,             \
+-+                           PollClassSet_Singleton(POLL_CLASS_IPC))
+-+#define POLL_CS_VMDB    POLL_CS_PAUSE /* POLL_CLASS_VMDB is retired */
+-+#define POLL_CS_MKS	PollClassSet_Singleton(POLL_CLASS_MKS)
+-+/* 
+-+ * DANGER.  You don't need POLL_CS_ALWAYS.  Really.  So don't use it.
+-+ */
+-+#define POLL_CS_ALWAYS  PollClassSet_Union(POLL_CS_CPT, POLL_CS_IPC)
+-+
+-+/*
+-+ * Poll class-set taxonomy:
+-+ * POLL_CS_MAIN
+-+ *    - Unless you NEED another class, use POLL_CS_MAIN.
+-+ * POLL_CS_PAUSE
+-+ *    - For callbacks that must occur even if the guest is paused.
+-+ *      Most VMDB or Foundry commands are in this category.
+-+ * POLL_CS_CPT
+-+ *    - Only for callbacks which can trigger intermediate Checkpoint 
+-+ *      transitions.
+-+ *      The ONLY such callback is Migrate.
+-+ * POLL_CS_IPC
+-+ *    - Only for callbacks which can contain Msg_(Post|Hint|Question) 
+-+ *      responses, and for signal handlers (why)?
+-+ *      Vigor, VMDB, and Foundry can contain Msg_* responses.
+-+ * POLL_CS_MKS
+-+ *    - Callback runs in MKS thread.
+-+ * POLL_CS_ALWAYS
+-+ *    - Only for events that must be processed immediately.
+-+ *      The ONLY such callback is OvhdMemVmxSizeCheck.
+-+ */
+-+
+-+
+-+/*
+-+ * Poll_Callback flags
+-+ */
+-+
+-+#define POLL_FLAG_PERIODIC		0x01    // keep after firing
+-+#define POLL_FLAG_REMOVE_AT_POWEROFF	0x02  	// self-explanatory
+-+#define POLL_FLAG_READ			0x04	// device is ready for reading
+-+#define POLL_FLAG_WRITE			0x08	// device is ready for writing
+-+#define POLL_FLAG_SOCKET                0x10    // device is a Windows socket
+-+#define POLL_FLAG_NO_BULL               0x20    // callback does its own locking
+-+#define POLL_FLAG_WINSOCK               0x40    // Winsock style write events
+-+#define POLL_FLAG_FD                    0x80    // device is a Windows file descriptor.
+-+#define POLL_FLAG_ACCEPT_INVALID_FDS    0x100   // For broken 3rd party libs, e.g. curl
+-+#define POLL_FLAG_THUNK_TO_WND          0x200   // thunk callback to window message loop
+-+
+-+
+-+typedef void (*PollerFunction)(void *clientData);
+-+typedef void (*PollerFireWrapper)(PollerFunction func,
+-+                                  void *funcData,
+-+                                  void *wrapperData);
+-+typedef Bool (*PollerErrorFn)(const char *errorStr);
+-+
+-+/*
+-+ * Initialisers:
+-+ *
+-+ *      For the sake of convenience, we declare the initialisers
+-+ *      for custom implmentations here, even though the actual
+-+ *      implementations are distinct from the core poll code.
+-+ */
+-+
+-+typedef struct PollOptions {
+-+   Bool locked;           // Use internal MXUser for locking
+-+   Bool allowFullQueue;   // Don't assert when device event queue is full.
+-+   VThreadID windowsMsgThread;       // thread that processes Windows messages
+-+   PollerFireWrapper fireWrapperFn;  // optional; may be useful for stats
+-+   void *fireWrapperData; // optional
+-+   PollerErrorFn errorFn; // optional; called upon unrecoverable error
+-+} PollOptions;
+-+
+-+
+-+void Poll_InitDefault(void);
+-+void Poll_InitDefaultEx(const PollOptions *opts);
+-+void Poll_InitGtk(void); // On top of glib for Linux
+-+void Poll_InitCF(void);  // On top of CoreFoundation for OSX
+-+
+-+
+-+/*
+-+ * Functions
+-+ */
+-+int Poll_SocketPair(Bool vmci, Bool stream, int fds[2]);
+-+void Poll_Loop(Bool loop, Bool *exit, PollClass c);
+-+void Poll_LoopTimeout(Bool loop, Bool *exit, PollClass c, int timeout);
+-+Bool Poll_LockingEnabled(void);
+-+void Poll_Exit(void);
+-+
+-+
+-+/*
+-+ * Poll_Callback adds a callback regardless of whether an identical one exists.
+-+ * The exception to this rule is POLL_DEVICE callbacks: there is a maximum of
+-+ * one read and one write callback per fd.
+-+ *
+-+ * Poll_CallbackRemove removes one callback. If there are multiple identical
+-+ * callbacks, which one is removed is an implementation detail. Note that in
+-+ * the case of POLL_DEVICE and POLL_REALTIME callbacks, the fd/delay used to
+-+ * create the callback is not specified when removing, so all callbacks
+-+ * of those types with the same flags, function, and clientData are considered
+-+ * "identical" even if their fd/delay differed.
+-+ */
+-+
+-+VMwareStatus Poll_Callback(PollClassSet classSet,
+-+                           int flags,
+-+                           PollerFunction f,
+-+                           void *clientData,
+-+                           PollEventType type,
+-+                           PollDevHandle info, // fd/microsec delay
+-+                           MXUserRecLock *lck);
+-+Bool Poll_CallbackRemove(PollClassSet classSet,
+-+                         int flags,
+-+                         PollerFunction f,
+-+                         void *clientData,
+-+                         PollEventType type);
+-+Bool Poll_CallbackRemoveOneByCB(PollClassSet classSet,
+-+                                int flags,
+-+                                PollerFunction f,
+-+                                PollEventType type,
+-+                                void **clientData);
+-+
+-+void Poll_NotifyChange(PollClassSet classSet);
+-+
+-+/*
+-+ * Wrappers for Poll_Callback and Poll_CallbackRemove that present
+-+ * simpler subsets of those interfaces.
+-+ */
+-+
+-+VMwareStatus Poll_CB_Device(PollerFunction f,
+-+                            void *clientData,
+-+                            PollDevHandle device,
+-+                            Bool periodic);
+-+
+-+Bool Poll_CB_DeviceRemove(PollerFunction f,
+-+                          void *clientData,
+-+                          Bool periodic);
+-+
+-+
+-+VMwareStatus Poll_CB_RTime(PollerFunction f,
+-+                           void *clientData,
+-+                           int64 delay,   // microseconds
+-+                           Bool periodic,
+-+                           MXUserRecLock *lock);
+-+
+-+Bool Poll_CB_RTimeRemove(PollerFunction f,
+-+                         void *clientData,
+-+                         Bool periodic);
+-+
+-+
+-+#ifdef _WIN32
+-+void Poll_SetPumpsWindowsMessages(Bool pumps);
+-+void Poll_SetWindowMessageRecipient(HWND hWnd, UINT msg, Bool alwaysThunk);
+-+Bool Poll_FireWndCallback(void *lparam);
+-+#endif
+-+
+-+#if defined(__cplusplus)
+-+}  // extern "C"
+-+#endif
+-+
+-+#endif // _POLL_H_
++ #define HZ 100
++ #endif
++ #ifdef __ANDROID__
++diff --git a/open-vm-tools/lib/rpcIn/rpcin.c b/open-vm-tools/lib/rpcIn/rpcin.c
++index 8b1fe759..f22fcd40 100644
+ --- a/open-vm-tools/lib/rpcIn/rpcin.c
+ +++ b/open-vm-tools/lib/rpcIn/rpcin.c
+ @@ -57,7 +57,7 @@
+@@ -740,3 +107,6 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  #  include "asyncsocket.h"
+  #  include "vmci_defs.h"
+  #include "dataMap.h"
++-- 
++2.27.0
++
+diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0011-Use-uintmax_t-for-handling-rlim_t.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0011-Use-uintmax_t-for-handling-rlim_t.patch
+index 0a1d008733c..144b5837cb1 100644
+--- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0011-Use-uintmax_t-for-handling-rlim_t.patch
++++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/0011-Use-uintmax_t-for-handling-rlim_t.patch
+@@ -1,29 +1,36 @@
+-From 18eea61a7a768c6c3b57c6683c7bef7049f0f6ab Mon Sep 17 00:00:00 2001
++From 4b69d8fd78bf6edbc8b4ace58e621d46071fd8dc Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 13 Jun 2018 23:37:09 -0700
+-Subject: [PATCH] Use uintmax_t for handling rlim_t
++Date: Wed, 24 Mar 2021 17:26:53 -0400
++Subject: [PATCH 2/2] Use uintmax_t for handling rlim_t
+ 
+ rlimit types are not representable with long or long long
+ formats, therefore use uintmax_t to typecast rlim_t types
+ and use %j to print it
+ 
++Refit patch for open-vm-tools-11.2.5.
++
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
++Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+ ---
+  open-vm-tools/lib/hgfsServer/hgfsServerLinux.c | 4 ++--
+  1 file changed, 2 insertions(+), 2 deletions(-)
+ 
+ diff --git a/open-vm-tools/lib/hgfsServer/hgfsServerLinux.c b/open-vm-tools/lib/hgfsServer/hgfsServerLinux.c
+-index 0e6351a9..a2ee1740 100644
++index ba2e5624..889f730a 100644
+ --- a/open-vm-tools/lib/hgfsServer/hgfsServerLinux.c
+ +++ b/open-vm-tools/lib/hgfsServer/hgfsServerLinux.c
+-@@ -5294,8 +5294,8 @@ HgfsWriteCheckIORange(off_t offset,         // IN:
++@@ -5292,8 +5292,8 @@ HgfsWriteCheckIORange(off_t offset,         // IN:
+        goto exit;
+     }
+  
+--   LOG(6, ("%s: File Size limits: 0x%"FMT64"x 0x%"FMT64"x\n",
+--           __FUNCTION__, fileSize.rlim_cur, fileSize.rlim_max));
+-+   LOG(6, ("%s: File Size limits: 0x%jx 0x%jx\n",
+-+           __FUNCTION__, (uintmax_t)fileSize.rlim_cur, (uintmax_t)fileSize.rlim_max));
++-   LOG(6, "%s: File Size limits: 0x%"FMT64"x 0x%"FMT64"x\n",
++-       __FUNCTION__, fileSize.rlim_cur, fileSize.rlim_max);
+++   //LOG(6, ("%s: File Size limits: 0x%jx 0x%jx\n",
+++   //    __FUNCTION__, (uintmax_t)fileSize.rlim_cur, (uintmax_t)fileSize.rlim_max));
+  
+     /*
+      * Check the offset is within the file size range.
++-- 
++2.30.2
++
+diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.2.5.bb
+similarity index 93%
+rename from meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
+rename to meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.2.5.bb
+index 832fab1eac4..256949a03d3 100644
+--- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
++++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.2.5.bb
+@@ -11,6 +11,10 @@
+ 
+ SUMMARY = "Tools to enhance VMWare guest integration and performance"
+ HOMEPAGE = "https://github.com/vmware/open-vm-tools"
++DESCRIPTION = "\
++open-vm-tools is a set of services and modules that enable several features in VMware products \
++for better management of and seamless user interactions with guests.\
++"
+ SECTION = "vmware-tools"
+ 
+ LICENSE = "LGPL-2.0 & GPL-2.0 & BSD & CDDL-1.0"
+@@ -26,7 +30,6 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https \
+     file://vmtoolsd.service \
+     file://vmtoolsd.init \
+     file://0001-configure.ac-don-t-use-dnet-config.patch;patchdir=.. \
+-    file://0002-add-include-sys-sysmacros.h.patch;patchdir=.. \
+     file://0003-Use-configure-test-for-struct-timespec.patch;patchdir=.. \
+     file://0004-Fix-definition-of-ALLPERMS-and-ACCESSPERMS.patch;patchdir=.. \
+     file://0005-Use-configure-to-test-for-feature-instead-of-platfor.patch;patchdir=.. \
+@@ -38,15 +41,15 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https \
+     file://0011-Use-uintmax_t-for-handling-rlim_t.patch;patchdir=.. \
+     file://0012-Use-off64_t-instead-of-__off64_t.patch;patchdir=.. \
+     file://0013-misc-Do-not-print-NULL-string-into-logs.patch;patchdir=.. \
+-    file://0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch;patchdir=.. \
+     file://0001-Make-HgfsConvertFromNtTimeNsec-aware-of-64-bit-time_.patch;patchdir=.. \
+     file://0002-hgfsServerLinux-Consider-64bit-time_t-possibility.patch;patchdir=.. \
+-    file://0001-utilBacktrace-Ignore-Warray-bounds.patch;patchdir=.. \
+     file://0001-hgfsmounter-Makefile.am-support-usrmerge.patch;patchdir=.. \
+-    file://0001-pollGtk-Drop-volatile-qualifier.patch;patchdir=.. \
+ "
+ 
+-SRCREV = "d3edfd142a81096f9f58aff17d84219b457f4987"
++SRC_URI_append_libc-musl = " file://0001-Add-resolv_compat.h-for-musl-builds.patch;patchdir=.. \
++"
++
++SRCREV = "7ae57c3c7c1f68c74637ad009673dae94ee52570"
+ 
+ S = "${WORKDIR}/git/open-vm-tools"
  
 -- 
 2.17.1
