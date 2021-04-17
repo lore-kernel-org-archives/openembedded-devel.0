@@ -1,38 +1,38 @@
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.web11.3593.1618693603054248150
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web12.3570.1618693603825360445
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 17 Apr 2021 14:06:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=X4+wuqk9;
- spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id kb13-20020a17090ae7cdb02901503d67f0beso4414191pjb.0
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZViDChXZ;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id a12so20620199pfc.7
         for <openembedded-devel@lists.openembedded.org>; Sat, 17 Apr 2021 14:06:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=MbdqBHGzrjJWSa7XawSN1x2tQui7yCa29L3/CtMhfx0=;
-        b=X4+wuqk9t69LgTXnx0VsLkh+mZZookDwaDmpYlNrIB4EAyZI0Ft9wSTSEtoGnw82M3
-         2wzhqkYKhgUVdZ+7b9X6A250kcxU9TYNiq2ERapomkC3XokPoSHj96rJOnYyq/Xrzzzi
-         ZpCeEhxO6+qQmKNRO0G0vt66lp+f4RfiBEOWHc7ISDcPSIuT5ZKmBt43tlq9ApkJMe6+
-         RgdWNGGRB4UF98OTp6usrvwRUOrSF2UehF34fjK82Acj5fU7Y30Zz8GmPdaSeE4Q3emm
-         ic96757sDx66rBDZZmv8XEpDQypFJmc8nT5TRZF7KZR+M7NGdHAwcjKEKfCrEbOiZpZt
-         uSDQ==
+        bh=SNC9Mt03M/i3DcMPve96QZCPqRHpi2jkNLoqe7uiC+M=;
+        b=ZViDChXZkbVA2z6tbhiw6CdNc45A6KCWcYisGO7IfHez+JTUVj/hPx1RZo3T9HVMXU
+         oz1RGQsYiWu/kO9N4XKvCuFiMTbbNWHgyzj/gtaQx3k6GT404pCI1q6i+hzWnx9j3Cqd
+         Lxr+cGu7KfoMaIY7FqmWIcuS5ISKNwjnsdXLM7OeDUln6DHuT9W1ApkTpoZEcWIeNdAI
+         jGE1KGi9RVf+yCtx57OcCOIJ1SM0+Et5ByNJwgjF+ypNA8sCfuvRutNI9c+XDgOOH0pP
+         rRquogsaUxCHyb3o+yuPIpGLbykdiBbK8ViLX4QcHHur0cTkmMfyYAemmQn4jKOlhHX4
+         HoJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=MbdqBHGzrjJWSa7XawSN1x2tQui7yCa29L3/CtMhfx0=;
-        b=jLNbLa+NeemjhbBCUknVw8IoK3mpfvd+vCSE21hONHr+e+wagE7lWGUDPHHGOYWHBV
-         ottkX/mqqSOOSB4t+ebMTJN9LkeeV5YU/nYHlT8LEKqm2DruMX/J3q49KzhzCGqX7e3w
-         Z9DCKO34q44vvUq++ljjhcZJ9WaoiThy+uvFbBck4yifU6BGHbgKO0Z65Qj5wRyeeLzN
-         FjPYnDwuclo2MzQAum8qDzAxKbFnGHcJC2/cgXyR9XIrDMQ79Bt38ae6ErgTAnHWTVSD
-         AG63PNCJtVHzmqrEen9Mma4WHLAx6kPSPRwyfyte2cquNRMaN/vvnX3P/md5d5zIfwdH
-         AUGg==
-X-Gm-Message-State: AOAM5324cfXfeXilkCZiDBqOO3vuaSWuGcaDN+Qh5Bu3ywTRDNDg1Tfw
-	xKhghdub5v8SGlYtljGWShRU4px2xQJEVA==
-X-Google-Smtp-Source: ABdhPJyP1JlcHc5JWTjyyYF+PkuftcqExpjx8nnpJlprFVrXFE3VNWXqRXKbkYkZNn4Kw25QEWqv/g==
-X-Received: by 2002:a17:902:b705:b029:e6:f027:adf8 with SMTP id d5-20020a170902b705b02900e6f027adf8mr16035561pls.72.1618693602496;
-        Sat, 17 Apr 2021 14:06:42 -0700 (PDT)
+        bh=SNC9Mt03M/i3DcMPve96QZCPqRHpi2jkNLoqe7uiC+M=;
+        b=mE1c9H97I394EG1e/BF5IVujFBAu6VkBBqvJUdetWJQ8KSJkj7OhIes5/hskugcula
+         GQt/uXT5ZBTsQSutdsIpnFZVwgp4m7s++628StXGkqSsXl7o6CH/tWf0njmIpVksexeY
+         JJbiMyginUL2axxxiwixt8uQzWikXlb8NLr6z2FOTTV23JbYy1VfgC4gOLqflh7LQCF7
+         VC0WDFwwCCmMy6YQDLU3zkmBiw8yRVOH0jKQonuRmvsp+aD2bC7wytzCqAfsas7flOML
+         lV8aL6a+Dxzjl1wOofKnbeDJNqsb9WKoFW25OK/eZuy4EFAHxsFjMr2Ou1beK8sAjep1
+         N3mQ==
+X-Gm-Message-State: AOAM531OhmyO8+4RCRLbWCnzb4djVRya0r8E6XBP4Vyy5c+V9mUuTO9D
+	coafQRP2PhYY4QwI6l22w1OBSwOKNiCQdA==
+X-Google-Smtp-Source: ABdhPJzfLsuQpIoBLx+1hqUax2ivJ/BQkB50QbZ05tqwXiuGepdedEiMX5kXQzzl+m3oYesjk/MS5w==
+X-Received: by 2002:a62:6585:0:b029:241:cf5d:93b2 with SMTP id z127-20020a6265850000b0290241cf5d93b2mr13407191pfb.15.1618693603136;
+        Sat, 17 Apr 2021 14:06:43 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:7c7e:4cc5:a7d5:fd57])
         by smtp.gmail.com with ESMTPSA id t67sm8509204pfb.210.2021.04.17.14.06.42
@@ -41,9 +41,9 @@ Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:7c7e:4cc5:
         Sat, 17 Apr 2021 14:06:42 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardnott 45/50] PEP8 double aggressive E301 ~ E306
-Date: Sat, 17 Apr 2021 14:05:54 -0700
-Message-Id: <40fb89213b1a232afc920a25692d054768858b3d.1618692905.git.akuster808@gmail.com>
+Subject: [hardnott 46/50] PEP8 double aggressive W291 ~ W293 and W391
+Date: Sat, 17 Apr 2021 14:05:55 -0700
+Message-Id: <afec1a4fcef46c1423a060d84f25b7ec3f9b5ba2.1618692905.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1618692905.git.akuster808@gmail.com>
 References: <cover.1618692905.git.akuster808@gmail.com>
@@ -51,147 +51,164 @@ References: <cover.1618692905.git.akuster808@gmail.com>
 From: persianpros <persianpros@yahoo.com>
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit af6838a62c53dab71941b2cc31f0e32387cd30e0)
+(cherry picked from commit e0b9cd57fab747a84b5dddc52b7efd64afeff6f2)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- contrib/oe-stylize.py                         | 35 +++++++++++++++++++
- .../oeqa/selftest/cases/meta_oe_sources.py    |  1 +
- 2 files changed, 36 insertions(+)
+ contrib/oe-stylize.py | 43 +++++++++++++++++++++----------------------
+ 1 file changed, 21 insertions(+), 22 deletions(-)
 
 diff --git a/contrib/oe-stylize.py b/contrib/oe-stylize.py
-index 9d95911ae6e..cfabb90b10f 100755
+index cfabb90b10f..e1ba1b32188 100755
 --- a/contrib/oe-stylize.py
 +++ b/contrib/oe-stylize.py
-@@ -221,41 +221,59 @@ for v in OE_vars:
- # _Format guideline #0_: 
- #   No spaces are allowed at the beginning of lines that define a variable or 
+@@ -2,12 +2,12 @@
+ 
+ """\
+ Sanitize a bitbake file following the OpenEmbedded style guidelines,
+-see http://openembedded.org/wiki/StyleGuide 
++see http://openembedded.org/wiki/StyleGuide
+ 
+ (C) 2006 Cyril Romain <cyril.romain@gmail.com>
+ MIT license
+ 
+-TODO: 
++TODO:
+  - add the others OpenEmbedded variables commonly used:
+  - parse command arguments and print usage on misuse
+     . prevent giving more than one .bb file in arguments
+@@ -19,7 +19,7 @@ TODO:
+  - count rule breaks and displays them in the order frequence
+ """
+ 
+-from __future__ import print_function 
++from __future__ import print_function
+ import fileinput
+ import string
+ import re
+@@ -65,7 +65,7 @@ OE_vars = [
+     'RSUGGESTS',
+     'RPROVIDES',
+     'RCONFLICTS',
+-    'FILES',    
++    'FILES',
+     'do_package',
+     'do_stage',
+     'addhandler',
+@@ -215,36 +215,36 @@ routineRegexp = r'^([a-zA-Z0-9_ ${}-]+?)\('
+ 
+ # Variables seen in the processed .bb
+ seen_vars = {}
+-for v in OE_vars: 
++for v in OE_vars:
+     seen_vars[v] = []
+ 
+-# _Format guideline #0_: 
+-#   No spaces are allowed at the beginning of lines that define a variable or 
++# _Format guideline #0_:
++#   No spaces are allowed at the beginning of lines that define a variable or
  #   a do_ routine
-+
-+
- def respect_rule0(line): 
+ 
+ 
+-def respect_rule0(line): 
++def respect_rule0(line):
      return line.lstrip() == line
-+
-+
- def conformTo_rule0(line): 
+ 
+ 
+-def conformTo_rule0(line): 
++def conformTo_rule0(line):
      return line.lstrip()
  
- # _Format guideline #1_: 
+-# _Format guideline #1_: 
++# _Format guideline #1_:
  #   No spaces are allowed behind the line continuation symbol '\'
-+
-+
+ 
+ 
  def respect_rule1(line):
      if line.rstrip().endswith('\\'):
          return line.endswith('\\')
-     else: 
+-    else: 
++    else:
          return True
-+
-+
+ 
+ 
  def conformTo_rule1(line):
      return line.rstrip()
  
- # _Format guideline #2_: 
+-# _Format guideline #2_: 
++# _Format guideline #2_:
  #   Tabs should not be used (use spaces instead).
-+
-+
- def respect_rule2(line):
-     return line.count('\t') == 0
-+
-+
- def conformTo_rule2(line):
+ 
+ 
+@@ -256,14 +256,14 @@ def conformTo_rule2(line):
      return line.expandtabs()
  
  # _Format guideline #3_:
- #   Comments inside bb files are allowed using the '#' character at the 
+-#   Comments inside bb files are allowed using the '#' character at the 
++#   Comments inside bb files are allowed using the '#' character at the
  #   beginning of a line.
-+
-+
+ 
+ 
  def respect_rule3(line):
      if line.lstrip().startswith('#'):
          return line.startswith('#')
-     else: 
+-    else: 
++    else:
          return True
-+
-+
- def conformTo_rule3(line):
-     return line.lstrip()
  
- # _Format guideline #4_:
- #   Use quotes on the right hand side of assignments FOO = "BAR"
-+
-+
- def respect_rule4(line):
-     r = re.search(varRegexp, line)
-     if r is not None:
-@@ -263,33 +281,48 @@ def respect_rule4(line):
-         # do not test for None it because always match
-         return r2.group(1) == '"' and r2.group(3) != ''
-     return False
-+
-+
- def conformTo_rule4(line):
-     r = re.search(varRegexp, line)
-     return ''.join([r.group(1), ' ', r.group(3), ' "', r.group(5), r.group(5).endswith('"') and '' or '"'])
  
- # _Format guideline #5_:
- #   The correct spacing for a variable is FOO = "BAR".
-+
-+
- def respect_rule5(line):
-     r = re.search(varRegexp, line)
-     return r is not None and r.group(2) == " " and r.group(4) == " "
-+
-+
- def conformTo_rule5(line):
-     r = re.search(varRegexp, line)
-     return ''.join([r.group(1), ' ', r.group(3), ' ', r.group(5)])
+@@ -364,8 +364,8 @@ if __name__ == "__main__":
+         if True:
+             lines.append(line)
+         else:
+-            # expandtabs on each line so that rule2 is always respected 
+-            # rstrip each line so that rule1 is always respected 
++            # expandtabs on each line so that rule2 is always respected
++            # rstrip each line so that rule1 is always respected
+             line = line.expandtabs().rstrip()
+             # ignore empty lines (or line filled with spaces or tabs only)
+             # so that rule6 is always respected
+@@ -377,7 +377,7 @@ if __name__ == "__main__":
+     in_routine = False
+     commentBloc = []
+     olines = []
+-    for line in lines: 
++    for line in lines:
+         originalLine = line
+         # rstrip line to remove line breaks characters
+         line = line.rstrip()
+@@ -393,7 +393,7 @@ if __name__ == "__main__":
+             commentBloc = []
+             continue
  
- # _Format guideline #6_:
- #   Don't use spaces or tabs on empty lines
-+
-+
- def respect_rule6(line):
-     return not line.isspace() or line == "\n"
-+
-+
- def conformTo_rule6(line):
-     return ""
+-        if line.startswith('}'): 
++        if line.startswith('}'):
+             in_routine = False
+         keep = line.endswith('\\') or in_routine
  
- # _Format guideline #7_:
- #   Indentation of multiline variables such as SRC_URI is desireable.
-+
-+
- def respect_rule7(line):
-     return True
-+
-+
- def conformTo_rule7(line):
-     return line
- 
-+
- rules = (
-     (respect_rule0, conformTo_rule0, "No spaces are allowed at the beginning of lines that define a variable or a do_ routine"),
-     (respect_rule1, conformTo_rule1, "No spaces are allowed behind the line continuation symbol '\\'"),
-@@ -303,6 +336,8 @@ rules = (
- 
- # Function to check that a line respects a rule. If not, it tries to conform
- # the line to the rule. Reminder or Disgression message are dump accordingly.
-+
-+
- def follow_rule(i, line):
-     oldline = line
-     # if the line does not respect the rule
-diff --git a/meta-oe/lib/oeqa/selftest/cases/meta_oe_sources.py b/meta-oe/lib/oeqa/selftest/cases/meta_oe_sources.py
-index b17c7950c7e..c5a9a279465 100644
---- a/meta-oe/lib/oeqa/selftest/cases/meta_oe_sources.py
-+++ b/meta-oe/lib/oeqa/selftest/cases/meta_oe_sources.py
-@@ -6,6 +6,7 @@ import tempfile
- from oeqa.selftest.case import OESelftestTestCase
- from oeqa.utils.commands import runCmd, bitbake, get_bb_var, get_bb_vars
- 
-+
- class MetaOESourceMirroring(OESelftestTestCase):
-     # Can we download everything from the OpenEmbedded Sources Mirror over http only
-     def test_oe_source_mirror(self):
+@@ -415,7 +415,7 @@ if __name__ == "__main__":
+                 if line.startswith(k):
+                     var = k
+                     break
+-            if re.match(routineRegexp, line) is not None: 
++            if re.match(routineRegexp, line) is not None:
+                 in_routine = True
+                 line = follow_rule(0, line)
+             elif re.match(varRegexp, line) is not None:
+@@ -443,12 +443,11 @@ if __name__ == "__main__":
+     for k in OE_vars:
+         if k == 'SRC_URI':
+             addEmptyLine = True
+-        if seen_vars[k] != []: 
++        if seen_vars[k] != []:
+             if addEmptyLine and not k.startswith(previourVarPrefix):
+                 olines.append("")
+-            for l in seen_vars[k]: 
++            for l in seen_vars[k]:
+                 olines.append(l)
+             previourVarPrefix = k.split('_')[0] == '' and "unknown" or k.split('_')[0]
+     for line in olines:
+         print(line)
+-
 -- 
 2.17.1
 
