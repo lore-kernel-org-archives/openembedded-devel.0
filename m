@@ -1,176 +1,240 @@
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.web12.988.1618866284860949736
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web12.989.1618866285965722106
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Apr 2021 14:04:44 -0700
+ Mon, 19 Apr 2021 14:04:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=EJitZfcE;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id cu16so16648261pjb.4
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Apr 2021 14:04:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=QFp5z29k;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id y1so2806628plg.11
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Apr 2021 14:04:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=vlTVnzSZS+lb5by9euEcYUEQd64sJbykntT4sRD1CUs=;
-        b=EJitZfcEZPwfZ5i1pehwI1otfN7xEIi6x7GdXhRkEsZvmCEbPnStcsud1QZbnt9b6c
-         sOrAz/CGBnlH6KxI/e/DkBGGkqf/stpJBNoG9edX4Srw+uyt2vsJ8QLwOaK0khx8wGAw
-         h/dMnFniBx4RwGEZoC7kYtN9VcfAEpZuMrZZrGvSpvIE0DYz1X/Zw5BmC9Bk2kmO8SKQ
-         6Lee3o4nxsBfa+nhZidPjJtqOahOJbgcxwHyYc9Z7XuU7fiHmHkOImnqRXJFjGezr3zr
-         iHEuLQPk40qHaD+uh4ByEP1xhN+wm6wPUfIn0cjrCzpH05Mv2I94xXMCcVnh15QUTIUo
-         MyWQ==
+        bh=FLdiJGq83fMoUUfyDqkddzQQMXW7AqCZwUw8/kUacv4=;
+        b=QFp5z29kZU6PmHWEsnWBQcrjlg2KDpGOtKLRwX11c/BW27SYj8logWqtFNdyhzo/Fl
+         eDMnBbiY7P6UxuFY0f3qenNZGlsR5XUSNxqQp1WZO0tHwFs18qAWu3Fk/to8pwCYo77o
+         KBybnV5pxoyzTH4D1MvbrRvb53aoL9kojMZogA6fyesRnlP203nKKBbNwbo0/IBgmCF3
+         gFFXu3JTA7wGHO0pSnVIfN0VumyYP4zK8xaxaLJit+66odLGo8RSycSFRK1iSIZ5/x9j
+         XV/3ntY4EnHC59JvHifwqBdZM42IKkTnfecizoQzElLUTj4/VZWdCi/uhseVb0S8I1W8
+         Dxag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=vlTVnzSZS+lb5by9euEcYUEQd64sJbykntT4sRD1CUs=;
-        b=ItYwqj0w/hqrCPIz+MsOgbUSjWzcfkGJbUNCOihPnjor+tqvnRYdpQZC615B4RLU+3
-         Ggt+/43cy0fgjBFPjxbAduy4i5KWZe9nDxyFiq2yjlLg/E3BlLMWmIcUzpjdXJoEj0xj
-         4xP7gCcyErIhVt3H5cwq+ua0R2tN8l2vDY8Ud7nH8xKhbvz+x9MjiPXSbGsTubfSjy2N
-         wSI1xd2su4/zFQFFOYr/Eel3Qs427J2BduPsd6wA4Okkw+Wc9w2xM0/b6EQl/iSCjRZE
-         njQI5nBekMa2i4iA+UhoqsczvrJw6LzH/D/8NhJrKtB5gqHNbH5ZWgvSQ2jit2FsK3s+
-         i/PQ==
-X-Gm-Message-State: AOAM533yxF4JPUOI7dKe5rX9yYU2plUdjTDV3HF9uZUuCU6sZxIWetfA
-	DMoy7erZa27iOatlkWKeqx6JRwMe2Ad4vg==
-X-Google-Smtp-Source: ABdhPJwO2GQ626QHwVsq4B2QUp4P3koO8luTP0/EJP5IsWZQc5JJ16mMio2/BeTxrNuMJZNvwjncDA==
-X-Received: by 2002:a17:90a:6f45:: with SMTP id d63mr1083776pjk.39.1618866284144;
-        Mon, 19 Apr 2021 14:04:44 -0700 (PDT)
+        bh=FLdiJGq83fMoUUfyDqkddzQQMXW7AqCZwUw8/kUacv4=;
+        b=W6H+s2ZwaKVRWRqiz3bmYrREfhzbcpDOOOcr40Wrkm42sA+uX9LXsb81Yxgmm4ZAHk
+         ilbnZlRJ/4Z/+mrzTjxjaHR5eoTJktG4E8d+GZPO4ZA/xNYfs4l1U/XktAjsRcqe46nZ
+         MJ8fWW55x16urO21T5QZ5D8ZMBESv9hCvxeOZhgO4mERkUBZmWc8ngB3xfMPgWTlGQak
+         bwUpfX7KtpuKQIdqQ2WDfsRD5uzRuAn5QRUpcKOZIIg4qATPgYQ3qaFJb9gFL23BWcCG
+         XR2pb2NuqmvByzYCjJaGLk1pdB1ZAMiIznGaGBHAoRSBcKpEiJWpuqPelQovwb/mdgtZ
+         JHTg==
+X-Gm-Message-State: AOAM5328v51Bvghu+FLPorCV+WMfVkDyKAUi9qY7FKRDQY/SZ8rROtwg
+	jz1z6FqzVjhMBy/5dTQzUoR1lkyUB+nRXw==
+X-Google-Smtp-Source: ABdhPJz2jbe5NeOP2c4VGYPXDeA6yJJEsJucK4FbyExBW12VDVxqFR3CIAm58XuZGPWW0nkejiyMlQ==
+X-Received: by 2002:a17:90a:4290:: with SMTP id p16mr1105974pjg.120.1618866285061;
+        Mon, 19 Apr 2021 14:04:45 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0:db81:2f56:60e4:2c64])
-        by smtp.gmail.com with ESMTPSA id b7sm305439pjq.36.2021.04.19.14.04.43
+        by smtp.gmail.com with ESMTPSA id b7sm305439pjq.36.2021.04.19.14.04.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Apr 2021 14:04:43 -0700 (PDT)
+        Mon, 19 Apr 2021 14:04:44 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH v3 2/4] nodejs: Fix build with icu-69
-Date: Mon, 19 Apr 2021 14:04:38 -0700
-Message-Id: <20210419210440.2446040-3-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH v3 3/4] nodejs: Use qemu usermode to run target binaries during build
+Date: Mon, 19 Apr 2021 14:04:39 -0700
+Message-Id: <20210419210440.2446040-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210419210440.2446040-1-raj.khem@gmail.com>
 References: <20210419210440.2446040-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-backport relevant v8 patch to fix the build issue
+So far, we have been trying to build nodejs-native and use the native
+host binaries from there, which has worked out ok but always changes
+when major upgrade is done, since more binaries or places are required
+to be captured. This patch changes this approach to use qemu-user to run
+these binaries under during cross build. This lets them run closer to
+upstream build process and also removes dependency on nodejs-native
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...all-new-ListFormatter-createInstance.patch | 93 +++++++++++++++++++
- .../recipes-devtools/nodejs/nodejs_14.16.1.bb |  1 +
- 2 files changed, 94 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/v8-call-new-ListFormatter-createInstance.patch
+ .../nodejs/0002-Using-native-binaries.patch   | 93 +++++++++----------
+ .../recipes-devtools/nodejs/nodejs_14.16.1.bb | 34 ++++++-
+ 2 files changed, 74 insertions(+), 53 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/v8-call-new-ListFormatter-createInstance.patch b/meta-oe/recipes-devtools/nodejs/nodejs/v8-call-new-ListFormatter-createInstance.patch
-new file mode 100644
-index 0000000000..806360084c
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/v8-call-new-ListFormatter-createInstance.patch
-@@ -0,0 +1,93 @@
-+From 035c305ce7761f51328b45f1bd83e26aef267c9d Mon Sep 17 00:00:00 2001
-+From: Frank Tang <ftang@chromium.org>
-+Date: Thu, 15 Oct 2020 22:44:27 -0700
-+Subject: [PATCH] [Intl] call new ListFormatter::createInstance
-+
-+The one we currently using is now marked as internal and to be removed
-+for 68. Migrating to the style which already avaiable in ICU 67-1.
-+
-+Upstream-Status: Backport
-+Bug: v8:11031
-+Change-Id: I668382a2e1b8602ddca02bf231c5008a6c92bf2d
-+Reviewed-on: https://chromium-review.googlesource.com/c/v8/v8/+/2477751
-+Reviewed-by: Jakob Kummerow <jkummerow@chromium.org>
-+Commit-Queue: Frank Tang <ftang@chromium.org>
-+Cr-Commit-Position: refs/heads/master@{#70638}
-+---
-+ deps/v8/src/objects/js-list-format.cc | 55 ++++++++++++-----------------------
-+ 1 file changed, 18 insertions(+), 37 deletions(-)
-+
-+--- a/deps/v8/src/objects/js-list-format.cc
-++++ b/deps/v8/src/objects/js-list-format.cc
-+@@ -29,46 +29,27 @@ namespace v8 {
-+ namespace internal {
-+ 
-+ namespace {
-+-const char* kStandard = "standard";
-+-const char* kOr = "or";
-+-const char* kUnit = "unit";
-+-const char* kStandardShort = "standard-short";
-+-const char* kOrShort = "or-short";
-+-const char* kUnitShort = "unit-short";
-+-const char* kStandardNarrow = "standard-narrow";
-+-const char* kOrNarrow = "or-narrow";
-+-const char* kUnitNarrow = "unit-narrow";
-+ 
-+-const char* GetIcuStyleString(JSListFormat::Style style,
-+-                              JSListFormat::Type type) {
-++UListFormatterWidth GetIcuWidth(JSListFormat::Style style) {
-++  switch (style) {
-++    case JSListFormat::Style::LONG:
-++      return ULISTFMT_WIDTH_WIDE;
-++    case JSListFormat::Style::SHORT:
-++      return ULISTFMT_WIDTH_SHORT;
-++    case JSListFormat::Style::NARROW:
-++      return ULISTFMT_WIDTH_NARROW;
-++  }
-++  UNREACHABLE();
-++}
-++
-++UListFormatterType GetIcuType(JSListFormat::Type type) {
-+   switch (type) {
-+     case JSListFormat::Type::CONJUNCTION:
-+-      switch (style) {
-+-        case JSListFormat::Style::LONG:
-+-          return kStandard;
-+-        case JSListFormat::Style::SHORT:
-+-          return kStandardShort;
-+-        case JSListFormat::Style::NARROW:
-+-          return kStandardNarrow;
-+-      }
-++      return ULISTFMT_TYPE_AND;
-+     case JSListFormat::Type::DISJUNCTION:
-+-      switch (style) {
-+-        case JSListFormat::Style::LONG:
-+-          return kOr;
-+-        case JSListFormat::Style::SHORT:
-+-          return kOrShort;
-+-        case JSListFormat::Style::NARROW:
-+-          return kOrNarrow;
-+-      }
-++      return ULISTFMT_TYPE_OR;
-+     case JSListFormat::Type::UNIT:
-+-      switch (style) {
-+-        case JSListFormat::Style::LONG:
-+-          return kUnit;
-+-        case JSListFormat::Style::SHORT:
-+-          return kUnitShort;
-+-        case JSListFormat::Style::NARROW:
-+-          return kUnitNarrow;
-+-      }
-++      return ULISTFMT_TYPE_UNITS;
-+   }
-+   UNREACHABLE();
-+ }
-+@@ -143,7 +124,7 @@ MaybeHandle<JSListFormat> JSListFormat::
-+   icu::Locale icu_locale = r.icu_locale;
-+   UErrorCode status = U_ZERO_ERROR;
-+   icu::ListFormatter* formatter = icu::ListFormatter::createInstance(
-+-      icu_locale, GetIcuStyleString(style_enum, type_enum), status);
-++      icu_locale, GetIcuType(type_enum), GetIcuWidth(style_enum), status);
-+   if (U_FAILURE(status) || formatter == nullptr) {
-+     delete formatter;
-+     THROW_NEW_ERROR(isolate, NewRangeError(MessageTemplate::kIcuError),
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-native-binaries.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-native-binaries.patch
+index b5142dc9c1..c6fc2dcd76 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-native-binaries.patch
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-native-binaries.patch
+@@ -8,64 +8,55 @@ Subject: [PATCH] Using native binaries
+  tools/v8_gypfiles/v8.gyp | 11 ++++-------
+  2 files changed, 6 insertions(+), 9 deletions(-)
+ 
+-diff --git a/node.gyp b/node.gyp
+-index 8f4dc518..d9389190 100644
+ --- a/node.gyp
+ +++ b/node.gyp
+-@@ -446,7 +446,7 @@
+-                 '<(SHARED_INTERMEDIATE_DIR)/node_code_cache.cc',
++@@ -487,6 +487,7 @@
++               'action_name': 'run_mkcodecache',
++               'process_outputs_as_sources': 1,
++               'inputs': [
+++                '<(PRODUCT_DIR)/v8-qemu-wrapper.sh',
++                 '<(mkcodecache_exec)',
+                ],
+-               'action': [
+--                '<@(_inputs)',
+-+                'mkcodecache',
+-                 '<@(_outputs)',
++               'outputs': [
++@@ -512,6 +513,7 @@
++               'action_name': 'node_mksnapshot',
++               'process_outputs_as_sources': 1,
++               'inputs': [
+++                '<(PRODUCT_DIR)/v8-qemu-wrapper.sh',
++                 '<(node_mksnapshot_exec)',
+                ],
+-             },
+-@@ -471,7 +471,7 @@
+-                 '<(SHARED_INTERMEDIATE_DIR)/node_snapshot.cc',
+-               ],
+-               'action': [
+--                '<@(_inputs)',
+-+                'node_mksnapshot',
+-                 '<@(_outputs)',
+-               ],
+-             },
+-diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
+-index a506a67d..c91f7dde 100644
++               'outputs': [
+ --- a/tools/v8_gypfiles/v8.gyp
+ +++ b/tools/v8_gypfiles/v8.gyp
+-@@ -140,7 +140,8 @@
+-             '<@(torque_outputs)',
+-           ],
+-           'action': [
+--            '<@(_inputs)',
+-+            'torque',
+-+            '<@(torque_files)',
+-             '-o', '<(torque_output_root)/torque-generated',
+-             '-v8-root', '<(V8_ROOT)'
++@@ -220,6 +220,7 @@
++         {
++           'action_name': 'run_torque_action',
++           'inputs': [  # Order matters.
+++            '<(PRODUCT_DIR)/v8-qemu-wrapper.sh',
++             '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)torque<(EXECUTABLE_SUFFIX)',
++             '<@(torque_files)',
+            ],
+-@@ -247,9 +248,7 @@
+-             '<(generate_bytecode_builtins_list_output)',
++@@ -351,6 +352,7 @@
++         {
++           'action_name': 'generate_bytecode_builtins_list_action',
++           'inputs': [
+++            '<(PRODUCT_DIR)/v8-qemu-wrapper.sh',
++             '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)bytecode_builtins_list_generator<(EXECUTABLE_SUFFIX)',
+            ],
+-           'action': [
+--            'python',
+--            '<(V8_ROOT)/tools/run.py',
+--            '<@(_inputs)',
+-+            'bytecode_builtins_list_generator',
+-             '<@(_outputs)',
++           'outputs': [
++@@ -533,6 +535,7 @@
++             ],
++           },
++           'inputs': [
+++            '<(PRODUCT_DIR)/v8-qemu-wrapper.sh',
++             '<(mksnapshot_exec)',
+            ],
+-         },
+-@@ -1396,9 +1395,7 @@
+-             '<(SHARED_INTERMEDIATE_DIR)/src/regexp/special-case.cc',
++           'outputs': [
++@@ -1448,6 +1451,7 @@
++         {
++           'action_name': 'run_gen-regexp-special-case_action',
++           'inputs': [
+++            '<(PRODUCT_DIR)/v8-qemu-wrapper.sh',
++             '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)gen-regexp-special-case<(EXECUTABLE_SUFFIX)',
+            ],
+-           'action': [
+--            'python',
+--            '<(V8_ROOT)/tools/run.py',
+--            '<@(_inputs)',
+-+            'gen-regexp-special-case',
+-             '<@(_outputs)',
+-           ],
+-         },
+--- 
+-2.20.1
+-
++           'outputs': [
 diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_14.16.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_14.16.1.bb
-index b24a6d6567..32bdd713b5 100644
+index 32bdd713b5..aef83cc31c 100644
 --- a/meta-oe/recipes-devtools/nodejs/nodejs_14.16.1.bb
 +++ b/meta-oe/recipes-devtools/nodejs/nodejs_14.16.1.bb
-@@ -21,6 +21,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://0004-v8-don-t-override-ARM-CFLAGS.patch \
-            file://big-endian.patch \
-            file://mips-warnings.patch \
-+           file://v8-call-new-ListFormatter-createInstance.patch \
-            "
- SRC_URI_append_class-target = " \
-            file://0002-Using-native-binaries.patch \
+@@ -4,9 +4,9 @@ LICENSE = "MIT & BSD & Artistic-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=85bf260d8b6de1588f57abc5dc66587c"
+ 
+ DEPENDS = "openssl"
+-DEPENDS_append_class-target = " nodejs-native"
++DEPENDS_append_class-target = " qemu-native"
+ 
+-inherit pkgconfig python3native
++inherit pkgconfig python3native qemu
+ 
+ COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
+ COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
+@@ -93,6 +93,35 @@ python do_unpack() {
+         shutil.rmtree(d.getVar('S') + '/deps/zlib', True)
+ }
+ 
++# V8's JIT infrastructure requires binaries such as mksnapshot and
++# mkpeephole to be run in the host during the build. However, these
++# binaries must have the same bit-width as the target (e.g. a x86_64
++# host targeting ARMv6 needs to produce a 32-bit binary). Instead of
++# depending on a third Yocto toolchain, we just build those binaries
++# for the target and run them on the host with QEMU.
++python do_create_v8_qemu_wrapper () {
++    """Creates a small wrapper that invokes QEMU to run some target V8 binaries
++    on the host."""
++    qemu_libdirs = [d.expand('${STAGING_DIR_HOST}${libdir}'),
++                    d.expand('${STAGING_DIR_HOST}${base_libdir}')]
++    qemu_cmd = qemu_wrapper_cmdline(d, d.getVar('STAGING_DIR_HOST', True),
++                                    qemu_libdirs)
++    wrapper_path = d.expand('${B}/v8-qemu-wrapper.sh')
++    with open(wrapper_path, 'w') as wrapper_file:
++        wrapper_file.write("""#!/bin/sh
++
++# This file has been generated automatically.
++# It invokes QEMU to run binaries built for the target in the host during the
++# build process.
++
++%s "$@"
++""" % qemu_cmd)
++    os.chmod(wrapper_path, 0o755)
++}
++
++do_create_v8_qemu_wrapper[dirs] = "${B}"
++addtask create_v8_qemu_wrapper after do_configure before do_compile
++
+ # Node is way too cool to use proper autotools, so we install two wrappers to forcefully inject proper arch cflags to workaround gypi
+ do_configure () {
+     export LD="${CXX}"
+@@ -110,6 +139,7 @@ do_configure () {
+ 
+ do_compile () {
+     export LD="${CXX}"
++    install -Dm 0755 ${B}/v8-qemu-wrapper.sh ${B}/out/Release/v8-qemu-wrapper.sh
+     oe_runmake BUILDTYPE=Release
+ }
+ 
 -- 
 2.31.1
 
