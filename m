@@ -1,107 +1,195 @@
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.92.41.91])
- by mx.groups.io with SMTP id smtpd.web12.6478.1618898110011094809
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web12.6853.1618901710845777373
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Apr 2021 22:55:10 -0700
+ Mon, 19 Apr 2021 23:55:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@hotmail.com header.s=selector1 header.b=JMie6SBf;
- spf=pass (domain: hotmail.com, ip: 40.92.41.91, mailfrom: mitch_dz@hotmail.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ib//CUf8SaQPfz4CxbUtF74CEXCIj08Qg7ePxqN+eppQNIFsqr6df2ox88TNl4tfpz8Ct+o2G+jtP1vNqcSTj3rH03JUy0oaxkR3CqSwRGlAbGk5gHvdDtgRrqUyr4BcheFCtCy3piXT27yvh2SpHtpfPH3XI3z9IeJVtQhGxpCoSSpMIKPDSpvFd5lQ/7hCvP+vL5P2jCaiL5ALpclH1BFfk+tLPVwPY2wfKUptFmmKXxDbMSFGVz8mNkUFRRrqBEJtxtXGaUF0CRcTSdUbZKdo+72lf01YXumaWeHwHQSm0RnSUBSHZ4GajRjPb1xeie2DA1UcxrG5OtLdgriHZw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7EZel42xB5p5roscCcLEckqvYxDPeVp4RZyT9H9RVAE=;
- b=N5MSDWNF5slPvUhgSDQtDqr36eaGPE167smCSphHM2vAVyC7AEaazNgi0V5oTJZy62RtR5pzG+gpn41n+dwSDQXjH5xTN/OLl+vXqgYGzkNRUQGgppw0jNBsak52UxLXVhihMd30Ay3Suvb89GKOiMoVLCfG1ty5ztOaschaaOVyEZyulo/0WrHS9E6r/JWET5dscYyzN8Zkpe8VdTIzSWrJeotOqXFTEPcCFgQ8dvDB+C8a94xH8NHY7hxrJdJ2C97TS4xdnKTzYmuBqhlYJWC1hL+l0dVza51i6YoTNVo+i0vreGpQ0Z0Ypvs1/wTbDI23Jgoj+7gQIHZ3cKRwSA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7EZel42xB5p5roscCcLEckqvYxDPeVp4RZyT9H9RVAE=;
- b=JMie6SBfvpe4/lY3qhTMQ1qN3ULKQTRh4hEQYnb17pD6WUlYhZSR4ASZj0n1HJSi66NfxYJzwdBWFjh2miMm/Hi4PurJI/f/fQMoSVAnDMxlvRpjxPbsR2ej6gwbA4gfJnaVP+6cE5AK57AszlRTgjkO00Zb8UB5WQTiZpnt6HdFxCuB5WXgvAEbD+tqaFO6BdOJuDEXePrxFp9y8KeOMA0A3I6uvY/+0JQ4O0gW2i3Sf/Re1NNh4b/9tg6cAxoJj1al9eeFrj2+y/mRfbZY0qxhvoiFE+X0Tl7WEzjUlQowzUm7UjCq4XV7+l3tXMe30MSvk/QDekOxtErPZCzeWA==
-Received: from DM6NAM10FT028.eop-nam10.prod.protection.outlook.com
- (2a01:111:e400:7e86::4b) by
- DM6NAM10HT191.eop-nam10.prod.protection.outlook.com (2a01:111:e400:7e86::205)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4042.16; Tue, 20 Apr
- 2021 05:55:08 +0000
-Received: from BYAPR04MB5208.namprd04.prod.outlook.com
- (2a01:111:e400:7e86::42) by DM6NAM10FT028.mail.protection.outlook.com
- (2a01:111:e400:7e86::240) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4042.16 via Frontend
- Transport; Tue, 20 Apr 2021 05:55:08 +0000
-X-IncomingTopHeaderMarker: OriginalChecksum:9BA12B742E487C2373525B43B28C1E8B53879F6C290B3AD88B44D38804090749;UpperCasedChecksum:128457EC689E814A3A4DB26A15702482F6F50307292CC99D4D30FF46B046F501;SizeAsReceived:7271;Count:45
-Received: from BYAPR04MB5208.namprd04.prod.outlook.com
- ([fe80::185:fb9c:3187:8382]) by BYAPR04MB5208.namprd04.prod.outlook.com
- ([fe80::185:fb9c:3187:8382%7]) with mapi id 15.20.4042.024; Tue, 20 Apr 2021
- 05:55:08 +0000
-From: mitch_dz@hotmail.com
-To: openembedded-devel@lists.openembedded.org
-CC: mitchdz <mitch_dz@hotmail.com>
-Subject: [PATCH] understand-autobuilder: fix small typo
-Date: Mon, 19 Apr 2021 22:54:33 -0700
-Message-ID: <BYAPR04MB52088E8EDE6C00899D783BD2F5489@BYAPR04MB5208.namprd04.prod.outlook.com>
-X-Mailer: git-send-email 2.27.0
-X-TMN: [cT2SVursnMEurURH4phhO58nThLCMRUw]
-X-ClientProxiedBy: BYAPR03CA0009.namprd03.prod.outlook.com
- (2603:10b6:a02:a8::22) To BYAPR04MB5208.namprd04.prod.outlook.com
- (2603:10b6:a03:c3::17)
-Return-Path: mitch_dz@hotmail.com
-X-Microsoft-Original-Message-ID: <20210420055433.1155698-1-mitch_dz@hotmail.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: qi.chen@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 13K6t9Hn025363
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 19 Apr 2021 23:55:09 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.4; Mon, 19 Apr 2021 23:55:08 -0700
+Received: from ala-lpggp7.wrs.com (147.11.105.171) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.4 via Frontend Transport; Mon, 19 Apr 2021 23:55:08 -0700
+From: "Chen Qi" <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][PATCH] tigervnc: upgrade to 1.11.0
+Date: Mon, 19 Apr 2021 23:55:08 -0700
+Message-ID: <20210420065508.16247-1-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from light.localdomain (68.106.20.65) by BYAPR03CA0009.namprd03.prod.outlook.com (2603:10b6:a02:a8::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4042.16 via Frontend Transport; Tue, 20 Apr 2021 05:55:08 +0000
-X-MS-PublicTrafficType: Email
-X-IncomingHeaderCount: 45
-X-EOPAttributedMessage: 0
-X-MS-Office365-Filtering-Correlation-Id: 9d082ad0-1393-4919-9ebc-08d903c0da5f
-X-MS-Exchange-SLBlob-MailProps: 
-	0RSV28T7LqRqj+ZmLEmwpgDcwgYvRzWJSEC9nB05KuUsU0hQP+VlrrmFOs6HHj6y3LfkiRCQcO2aNOGwRzc+3WE0bKpYtmGXP96sP1SCXmEstzgDFTzWveHLOWgh936UIzjur9nDtqTg+eWCNOoifLC8AxvsRCvDEZY5IZdPRIgda0E1cjb1ODqBfxRDRU5ugMHj3PI2YKYPAQ9FBtz37ixG6qPqCxHpYmGbvJ+7pVBQ7NLbvvc1L5t3m/1M7L84xBXBwv1OsdbBk5xNkgpTkQHzp+fLjVyP0rpMN0cfavOUV+bEe0/ITJ+kmPwjazY3kmCz768xLjMB4OzgHF9Ua6+jH++nQsiVUyCbx39gqnr2E07k1wSgnanQMK8lSjQ7gPQu6jObLXetzeIWGOYmZW4vg3QR9vIP7UMXdRjJl0KEyVzZgbIHBsMUc/iEGCwTR2UyAia6qLRNalSazgg2yN5HG5jL2LzFpb91Yb4X5tyEWEH7JMkhk138xlX/GQeYBWkKoNmmLg0RwY3EOzb5kfS1Of9OQQnP19pnTh/vmkQKaQQi97y/YiPWEYKFXFUVx+Vfuc4kD6oxSAvfVTi9PSdNZcfsnYIGNdm4PhrTxBwje/DEqtxd+7qw+g0z2Yj3FyJJNTc8sWmWXMDfb6RkoJg1I6saXJx8wqNB8EXAFklKeM0aE9fLMSEc5bFaYLjB
-X-MS-TrafficTypeDiagnostic: DM6NAM10HT191:
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	5xCgfDsk8/vgN2zSuITlx7fBgIPBSbkgkkMUkUI2juTBfMK6MCLTE0gXsQoWQKJW7/hrrMZgCYdILwXiNwslamRpZq/sypr1zDy5FvkyTdqARh9r0D1pEg02e4HDzOJu/Edn0f1VL4RbouIEuo56Kp1tWu0vtd/LLHqc9Nvx1oVOawK/+BqctDsEyzUECkUOzULV5ktjZfEqpI7398aoyL/RSaF533AXkrW5SH7kRI7xiE8jqXIvRJTI5bWgBC1h4mjsQPtjC2ViHZfxeW/L2xk90h5H5+iYWrGpVcSdlNP8FjHVyziQiLAL46XytD3Z9RfbA0DyBdT66XWC7YEZa2HDGoS3PqU162KDtXyB0QJVT/vOjFgo2X4u0ed/anAOD2he3+5POSzacqn5GVWm0A==
-X-MS-Exchange-AntiSpam-MessageData: 
-	Fcy5BOK9Twyl8BweQAih9KBNpq1qin/VNOBkMcedX4ymZEDnyvfJpijEUDqDIH+62ccm8k1ydXTiGtHFNtmbHuq44qG6UOY/RdJbT19NGovQ+dyZyxbpV9DO8ChK0/0MzKwT0TzNm3qPJZLUNm4R9g==
-X-OriginatorOrg: hotmail.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9d082ad0-1393-4919-9ebc-08d903c0da5f
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2021 05:55:08.7766
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DM6NAM10FT028.eop-nam10.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 
-	00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6NAM10HT191
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-The documentation has a small typo where it has
-"wo" instead of "two".
+Upgrade to latest stable version.
 
-Signed-off-by: mitchdz <mitch_dz@hotmail.com>
+The 1.10 branch is not maitained any more, it stops update in 2019.
+The 1.11 branch has fix for CVE-2020-26117, which is a high risk CVE.
+https://nvd.nist.gov/vuln/detail/CVE-2020-26117
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- documentation/test-manual/understand-autobuilder.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...002-do-not-build-tests-sub-directory.patch | 21 +++++------
+ ...vnc-add-fPIC-option-to-COMPILE_FLAGS.patch | 36 +++++++------------
+ ...{tigervnc_1.10.1.bb => tigervnc_1.11.0.bb} |  6 ++--
+ 3 files changed, 28 insertions(+), 35 deletions(-)
+ rename meta-oe/recipes-graphics/tigervnc/{tigervnc_1.10.1.bb => tigervnc_1.11.0.bb} (96%)
 
-diff --git a/documentation/test-manual/understand-autobuilder.rst b/documen=
-tation/test-manual/understand-autobuilder.rst
-index c158d9ce4..da17968bc 100644
---- a/documentation/test-manual/understand-autobuilder.rst
-+++ b/documentation/test-manual/understand-autobuilder.rst
-@@ -258,7 +258,7 @@ it is inevitable that users will end up needing to heav=
-ily customise the
- ``yocto-autobuilder-helper`` repository, particularly the
- ``config.json`` file as they will want to define their own test matrix.
-=20
--The Autobuilder supports wo customization options:
-+The Autobuilder supports two customization options:
-=20
- -  variable substitution
-=20
---=20
-2.27.0
+diff --git a/meta-oe/recipes-graphics/tigervnc/files/0002-do-not-build-tests-sub-directory.patch b/meta-oe/recipes-graphics/tigervnc/files/0002-do-not-build-tests-sub-directory.patch
+index 4e875ba82..5a42e67d0 100644
+--- a/meta-oe/recipes-graphics/tigervnc/files/0002-do-not-build-tests-sub-directory.patch
++++ b/meta-oe/recipes-graphics/tigervnc/files/0002-do-not-build-tests-sub-directory.patch
+@@ -1,29 +1,30 @@
+-From c3460d63f0b6cd50b9a64265f420f0439e12a1d5 Mon Sep 17 00:00:00 2001
+-From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Tue, 25 Apr 2017 01:36:44 -0400
+-Subject: [PATCH 2/4] do not build tests sub directory
++From 076d0e12a7be6cd2108e4ca0dcde1cb658918fa5 Mon Sep 17 00:00:00 2001
++From: Chen Qi <Qi.Chen@windriver.com>
++Date: Mon, 19 Apr 2021 23:02:45 -0700
++Subject: [PATCH] do not build tests sub directory
+ 
+-Upstream-Status: Inappropriate [oe specific]
++Upstream-Status: Inappropriate [OE Specific]
+ 
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++Signed-off-by: Hongxu Jia <Hongxu.Jia@windriver.com>
++Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+ ---
+  CMakeLists.txt | 3 ---
+  1 file changed, 3 deletions(-)
+ 
+ diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 94ec2ef..fb72a00 100644
++index 7bf99441..bda80598 100644
+ --- a/CMakeLists.txt
+ +++ b/CMakeLists.txt
+-@@ -300,9 +300,6 @@ if(BUILD_VIEWER)
++@@ -304,9 +304,6 @@ if(BUILD_VIEWER)
+    add_subdirectory(media)
+  endif()
+  
+ -add_subdirectory(tests)
+ -
+ -
+- include(cmake/BuildPackages.cmake)
++ add_subdirectory(release)
+  
+  # uninstall
+ -- 
+-2.7.4
++2.30.2
+ 
+diff --git a/meta-oe/recipes-graphics/tigervnc/files/0004-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch b/meta-oe/recipes-graphics/tigervnc/files/0004-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch
+index 97b0a388a..5f14665b8 100644
+--- a/meta-oe/recipes-graphics/tigervnc/files/0004-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch
++++ b/meta-oe/recipes-graphics/tigervnc/files/0004-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch
+@@ -1,44 +1,34 @@
+-From 9563b69640227da2220ee0c39077afb736cc96d1 Mon Sep 17 00:00:00 2001
+-From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Thu, 20 Jul 2017 17:12:17 +0800
+-Subject: [PATCH 4/4] tigervnc: add fPIC option to COMPILE_FLAGS
++From 7f8acd59bb2e54f9be25a98dd71534700a9e355a Mon Sep 17 00:00:00 2001
++From: Chen Qi <Qi.Chen@windriver.com>
++Date: Mon, 19 Apr 2021 23:14:28 -0700
++Subject: [PATCH] tigervnc: add fPIC option to COMPILE_FLAGS
+ 
+-The static libraries in Xregion/network/rdr/rfb were linked by shared
++The static libraries in network/rdr/rfb were linked by shared
+ library libvnc.so, so we should add fPIC option to COMPILE_FLAGS to fix
+ relocation issue.
+ 
+ Upstream-Status: Pending
+ 
+ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+ ---
+- common/Xregion/CMakeLists.txt | 1 +
+  common/network/CMakeLists.txt | 1 +
+  common/rdr/CMakeLists.txt     | 1 +
+  common/rfb/CMakeLists.txt     | 1 +
+- 4 files changed, 4 insertions(+)
++ 3 files changed, 3 insertions(+)
+ 
+-diff --git a/common/Xregion/CMakeLists.txt b/common/Xregion/CMakeLists.txt
+-index 40ca97e..9411328 100644
+---- a/common/Xregion/CMakeLists.txt
+-+++ b/common/Xregion/CMakeLists.txt
+-@@ -3,4 +3,5 @@ add_library(Xregion STATIC
+- 
+- if(UNIX)
+-   libtool_create_control_file(Xregion)
+-+  set_target_properties(Xregion PROPERTIES COMPILE_FLAGS -fPIC)
+- endif()
+ diff --git a/common/network/CMakeLists.txt b/common/network/CMakeLists.txt
+-index b624c8e..6c06ec9 100644
++index d00ca452..e84e0290 100644
+ --- a/common/network/CMakeLists.txt
+ +++ b/common/network/CMakeLists.txt
+-@@ -9,4 +9,5 @@ endif()
++@@ -16,4 +16,5 @@ endif()
+  
+  if(UNIX)
+    libtool_create_control_file(network)
+ +  set_target_properties(network PROPERTIES COMPILE_FLAGS -fPIC)
+  endif()
+ diff --git a/common/rdr/CMakeLists.txt b/common/rdr/CMakeLists.txt
+-index 989ba2f..20f6489 100644
++index 989ba2f4..20f6489d 100644
+ --- a/common/rdr/CMakeLists.txt
+ +++ b/common/rdr/CMakeLists.txt
+ @@ -27,4 +27,5 @@ target_link_libraries(rdr ${RDR_LIBRARIES})
+@@ -48,15 +38,15 @@ index 989ba2f..20f6489 100644
+ +  set_target_properties(rdr PROPERTIES COMPILE_FLAGS -fPIC)
+  endif()
+ diff --git a/common/rfb/CMakeLists.txt b/common/rfb/CMakeLists.txt
+-index 5047e5e..88838ab 100644
++index fc5a37bf..7f5ce131 100644
+ --- a/common/rfb/CMakeLists.txt
+ +++ b/common/rfb/CMakeLists.txt
+-@@ -98,4 +98,5 @@ target_link_libraries(rfb ${RFB_LIBRARIES})
++@@ -99,4 +99,5 @@ target_link_libraries(rfb ${RFB_LIBRARIES})
+  
+  if(UNIX)
+    libtool_create_control_file(rfb)
+ +  set_target_properties(rfb PROPERTIES COMPILE_FLAGS -fPIC)
+  endif()
+ -- 
+-2.7.4
++2.30.2
+ 
+diff --git a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.10.1.bb b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb
+similarity index 96%
+rename from meta-oe/recipes-graphics/tigervnc/tigervnc_1.10.1.bb
+rename to meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb
+index f97c2b2d6..1e7160aea 100644
+--- a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.10.1.bb
++++ b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb
+@@ -15,9 +15,9 @@ REQUIRED_DISTRO_FEATURES = "x11"
+ inherit autotools cmake
+ B = "${S}"
+ 
+-SRCREV = "4739493b635372bd40a34640a719f79fa90e4dba"
++SRCREV = "540bfc3278e396321124d4b18a798ac2bc18b6ca"
+ 
+-SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.10-branch \
++SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.11-branch \
+            file://0002-do-not-build-tests-sub-directory.patch \
+            file://0003-add-missing-dynamic-library-to-FLTK_LIBRARIES.patch \
+            file://0004-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch \
+@@ -83,6 +83,8 @@ EXTRA_OECONF = "--disable-xorg --disable-xnest --disable-xvfb --disable-dmx \
+         --disable-xwayland \
+ "
+ 
++EXTRA_OECMAKE += "-DINSTALL_SYSTEMD_UNITS=OFF"
++
+ do_configure_append () {
+     olddir=`pwd`
+     cd ${XSERVER_SOURCE_DIR}
+-- 
+2.30.2
 
