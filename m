@@ -1,117 +1,144 @@
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
- by mx.groups.io with SMTP id smtpd.web10.2784.1618951585751643789
+Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
+ by mx.groups.io with SMTP id smtpd.web09.4832.1618961037782592503
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Apr 2021 13:46:26 -0700
+ Tue, 20 Apr 2021 16:23:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=L4CsaK3i;
- spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-ed1-f46.google.com with SMTP id s15so46735027edd.4
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Apr 2021 13:46:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=kPFSImvH;
+ spf=pass (domain: gmail.com, ip: 209.85.167.182, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f182.google.com with SMTP id i81so40676274oif.6
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Apr 2021 16:23:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=uz02jf0hMDsj7eBHi6CT02dKh8Ox488ovUTx4xSGd2s=;
-        b=L4CsaK3iEN0/7bdNMbFk0BUQhz4/MaI1dMmtzJD/14uyoHFsr6Wat/CStW2djFlLbR
-         1mSbBwjZpQxyztf/NCTaBTE9gf8YtsAtf7HI01FNTlbo1MVmU27ivVrjpa1Qi4rROCHx
-         GI2vebfvs71ZXkkNFxsf9msynixcVB1v+OK2KKJPSsU6dMRFfCd0nHuKtbw2nmk5BuzP
-         mu6umxxo1pTngCb2xGl8SQcIAW+gXAZhx5RC3R46RtOlyiivwY9pK+aY+OyXGB9rPuhT
-         vvi7mqLyPsEasW+6mKTtU6qVskbesnysp+eF/gDy9MGbt491clD48USiZVOkiBGfRv/7
-         pd2A==
+        h=subject:to:references:from:autocrypt:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=jePsYdlAerN8cBHPYt9LS9LpwKP71lFavGhXnfZPJ6I=;
+        b=kPFSImvH0+V9XRuhmAM/IAA9dOjpw8CGS7+vVtXByNlK5h7ks8mtl7m7Dx+RAGpxCk
+         51qTz6yCj6WKp8k8EDyrUw1mf1kfSuYjZ0Y488rH+BBGxuMvy7o5VqWjq0sA13XnxQCM
+         MpjuFaXH258gqEAM+47NrWlIX6BirGdtsE6VewvXM0wI7m9vXCsDzXKgSkktbdB/koUE
+         huVXjcZljtgRitRDmV1ynwzaMi3wvmaQw9Y9H1H7lSn904yoVG0oyLUWeBkKH2BRtws4
+         GQgl610KtUCbG9Mw8/dHTKsEMFUDz3Oe+WeZjhYrnPNoZS2pGea8v38LIZjFubcz1X1I
+         A0aA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=uz02jf0hMDsj7eBHi6CT02dKh8Ox488ovUTx4xSGd2s=;
-        b=IFfP34BqOkEUKI3zEKIfCgVt6WVq3e9MBV+jUcpJWN+TpVP7I9YXk3Y5jfgsBXPgv0
-         K3xRuz8e5zkwDTZ0swdoZT1soy9tG1dIdNkUJoXnXZRo64SdqF8EhJjnVrJaVH+PT2TV
-         QpCqqLCjEIiwQEltNsysitJ8edi4PK9NNSZkPkdSshninx4GuXAyn9HEX+51UgpJJISo
-         b7nK9FV+gH6YxvPa2l0+9zhJGwAL8Mx1m7XL+NdKLaezKnSROMsKJUFVR3KaPJllIWUO
-         IGXIqFquRT4uqWASTz30qsVMLEh83blBxiedB4Wja7OUBsDmemOrRu09MneZ1ANc59HH
-         UERA==
-X-Gm-Message-State: AOAM532RW+p+fWmyxMgmbKAw0D1Z3D/v+d76+HJhQZtsHE+agmLaAxX2
-	ADJvNiGdu0KkpBMKclHZaNnG8/0T5mfqRHD0
-X-Google-Smtp-Source: ABdhPJzhCAUYiIx3LJkoCuuRiuVXf4dK2iIhnGQ6glZVEHiZI+ZpxEO/qrcD2Jn1tDYCFa7p1aZ/mQ==
-X-Received: by 2002:a50:ec97:: with SMTP id e23mr13618482edr.98.1618951583959;
-        Tue, 20 Apr 2021 13:46:23 -0700 (PDT)
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from Unimatrix08-Focal.lan (mob-109-113-181-220.net.vodafone.it. [109.113.181.220])
-        by smtp.gmail.com with ESMTPSA id dc24sm9147ejb.123.2021.04.20.13.46.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Apr 2021 13:46:23 -0700 (PDT)
-From: "Gianfranco" <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	Gianfranco Costamagna <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH] vboxguestdrivers: upgrade 6.1.18 -> 6.1.20
-Date: Tue, 20 Apr 2021 22:46:21 +0200
-Message-Id: <20210420204621.69168-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.25.1
+        h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
+         :date:user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=jePsYdlAerN8cBHPYt9LS9LpwKP71lFavGhXnfZPJ6I=;
+        b=YmjAPYylLPxBAmq0TbAglHk5OzH4qmvpS8T38TDQPpnnLringE1Cq2j2yA6iiKNpTB
+         vU9uov+tpDSiF5tZH7I7XJVtVIAxkFICFwmAC9PBKGfWog/yUGVGG5Tx66sIaQsdwyT7
+         jkiS0yWwV21+KIGts/ylobzFEvX5sNyQpILzHELbEdmNaIPt4lUIKtCqgpd58qz07S8d
+         cHoJ4NV5ihMQIFsqJ4/p+oWLVsqs5P5WwjxrtqSsSW2hBEJJusx6wPMTq/tQdGjdqph/
+         y3CDLdPqMOP05io37PFpHKapTx3zhUCWf96NplgdmPpnZ4A8GKEhDs3T4XuQjn2SBqw6
+         vusw==
+X-Gm-Message-State: AOAM531Db55DsC42N2e1U6ofz7YmHhFryO1cnmz2RMKYKDtq9x03dISi
+	jc7FAEQ68JuMLET1UakS1z9hosnpaefb8Q==
+X-Google-Smtp-Source: ABdhPJzrBb0mrZF1nUmTiOG6vQGoNub4nHoV4qSwm7CrcJZ/wPNEclUWd9LZdusGEEEkX3Yu9rq7YA==
+X-Received: by 2002:aca:5d82:: with SMTP id r124mr4760933oib.59.1618961036906;
+        Tue, 20 Apr 2021 16:23:56 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:eda2:54f2:452e:fbfe? ([2601:202:4180:a5c0:eda2:54f2:452e:fbfe])
+        by smtp.gmail.com with ESMTPSA id g96sm129805otg.39.2021.04.20.16.23.56
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 20 Apr 2021 16:23:56 -0700 (PDT)
+Subject: Re: [oe] [meta-oe][dunfell][PATCH 3/3] libyui: switch to libyui-old repo which still has this SRCREV
+To: Martin Jansa <Martin.Jansa@gmail.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20210406184327.1585452-1-Martin.Jansa@gmail.com>
+ <1673590F38769AC5.4402@lists.openembedded.org>
+ <20210420105624.nbhzv633jdso2m34@jama>
+From: "Armin Kuster" <akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+ 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
+ 8CS2NxU=
+Message-ID: <7ffb0762-4e9b-72d8-492b-f158594339c0@gmail.com>
+Date: Tue, 20 Apr 2021 16:23:55 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20210420105624.nbhzv633jdso2m34@jama>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Drop all patches, now part of upstream codebase
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
----
- .../vboxguestdrivers/kernel-5.10.patch        | 23 -------------------
- ...s_6.1.18.bb => vboxguestdrivers_6.1.20.bb} |  5 ++--
- 2 files changed, 2 insertions(+), 26 deletions(-)
- delete mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/kernel-5.10.patch
- rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_6.1.18.bb => vboxguestdrivers_6.1.20.bb} (94%)
 
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/kernel-5.10.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/kernel-5.10.patch
-deleted file mode 100644
-index a6b0a0454..000000000
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/kernel-5.10.patch
-+++ /dev/null
-@@ -1,23 +0,0 @@
--Origin: https://www.mail-archive.com/pld-cvs-commit@lists.pld-linux.org/msg461494.html
--From 80bfab5ec8575703ef26b442a3af2d030793ebde Mon Sep 17 00:00:00 2001
--From: =?utf8?q?Jan=20R=C4=99korajski?= <baggins@pld-linux.org>
--Date: Thu, 24 Dec 2020 23:03:55 +0100
--Subject: [PATCH] - DECLCALLBACK generates incorrect code on ix86, remove it
--
-----
-- kernel-5.10.patch | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/kernel-5.10.patch b/kernel-5.10.patch
--index b28d6e0..729235d 100644
----- a/src/VBox/Runtime/r0drv/linux/memobj-r0drv-linux.c
--+++ b/src/VBox/Runtime/r0drv/linux/memobj-r0drv-linux.c
--@@ -536,7 +536,7 @@ typedef const LNXAPPLYPGRANGE *PCLNXAPPLYPGRANGE;
--  * @param   uAddr               The address to apply the new protection to.
--  * @param   pvUser              The opaque user data.
--  */
---static DECLCALLBACK(int) rtR0MemObjLinuxApplyPageRange(pte_t *pPte, unsigned long uAddr, void *pvUser)
--+static int rtR0MemObjLinuxApplyPageRange(pte_t *pPte, unsigned long uAddr, void *pvUser)
-- {
--     PCLNXAPPLYPGRANGE pArgs = (PCLNXAPPLYPGRANGE)pvUser;
--     PRTR0MEMOBJLNX pMemLnx = pArgs->pMemLnx;
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.18.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.20.bb
-similarity index 94%
-rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.18.bb
-rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.20.bb
-index 1def1a311..9df2e3960 100644
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.18.bb
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.20.bb
-@@ -13,11 +13,10 @@ VBOX_NAME = "VirtualBox-${PV}"
- 
- SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
-     file://Makefile.utils \
--    file://kernel-5.10.patch \
-     file://add__divmoddi4.patch \
- "
--SRC_URI[md5sum] = "c61001386eb3822ab8f06d688a82e84b"
--SRC_URI[sha256sum] = "108d42b9b391b7a332a33df1662cf7b0e9d9a80f3079d16288d8b9487f427d40"
-+SRC_URI[md5sum] = "f2fe05e72c37d40afb36b9fb3aa38b78"
-+SRC_URI[sha256sum] = "e690c91974a2e7a5aca2c0939ad514382f9a2136797a5e0b96aab778e42bc8a7"
- 
- S ?= "${WORKDIR}/vbox_module"
- S_task-patch = "${WORKDIR}/${VBOX_NAME}"
--- 
-2.25.1
+On 4/20/21 3:56 AM, Martin Jansa wrote:
+> On Tue, Apr 06, 2021 at 08:43:27PM +0200, Martin Jansa via lists.openembedded.org wrote:
+>> * 8459235919f592b1bc099ecf9a947cb6344b6fa5 doesn't exist in current repo:
+>>   libyui$ git branch -a --contains 8459235919f592b1bc099ecf9a947cb6344b6fa5
+>>   error: no such commit 8459235919f592b1bc099ecf9a947cb6344b6fa5
+>>
+>> * there are no common commits in the new libyui repo, but luckily old
+>>   repo is kept as
+>>   https://github.com/libyui/libyui-old
+>>   similarly libyui-ncurses now contains only README about being obsolete in:
+>>   https://github.com/libyui/libyui-ncurses
+>>   but at least it wasn't rewritten to have the new content
+>>
+>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>> ---
+>>  meta-oe/recipes-graphics/libyui/libyui_3.6.0.bb | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/meta-oe/recipes-graphics/libyui/libyui_3.6.0.bb b/meta-oe/recipes-graphics/libyui/libyui_3.6.0.bb
+>> index 7c6f4c13d2..f3c112c3b8 100644
+>> --- a/meta-oe/recipes-graphics/libyui/libyui_3.6.0.bb
+>> +++ b/meta-oe/recipes-graphics/libyui/libyui_3.6.0.bb
+>> @@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING.gpl-3;md5=d32239bcb673463ab874e80d47fae504 \
+>>                      file://COPYING.lgpl-3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
+>>                     "
+>>  
+>> -SRC_URI = "git://github.com/libyui/libyui.git \
+>> +SRC_URI = "git://github.com/libyui/libyui-old.git \
+>>             file://0001-Fix-build-with-clang.patch \
+>>             file://0001-Use-relative-install-paths-for-CMake.patch \
+>>             "
+> Gentle ping for these 3 (and 3 hostapd fixes currently in
+> stable/dunfell-nut).
+Noted. Thanks. Ill get to those once my current Gategarth builds finish.
+
+-armin
+>
+> 
+>
 
