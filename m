@@ -1,242 +1,113 @@
-Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
- by mx.groups.io with SMTP id smtpd.web12.8524.1618913690610443269
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+ by mx.groups.io with SMTP id smtpd.web08.8814.1618916187670730618
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Apr 2021 03:14:51 -0700
+ Tue, 20 Apr 2021 03:56:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: siemens.com, ip: 192.35.17.28, mailfrom: andrej.kozemcak@siemens.com)
-Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
-	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id 13KAEm0v006576
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 20 Apr 2021 12:14:48 +0200
-Received: from dev.vm7.ccp.siemens.com ([144.145.220.57])
-	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id 13KAEluq010819;
-	Tue, 20 Apr 2021 12:14:48 +0200
-Received: from dev.vm7.ccp.siemens.com (localhost [127.0.0.1])
-	by dev.vm7.ccp.siemens.com (Postfix) with ESMTP id B584D308585B;
-	Tue, 20 Apr 2021 12:14:47 +0200 (CEST)
-From: "Andrej Kozemcak" <andrej.kozemcak@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ulU9FrtK;
+ spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f54.google.com with SMTP id l4so57562775ejc.10
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Apr 2021 03:56:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:date:to:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=HBtQob9YOZIuUzwPevlco+pTa3oQDFvRrX0bvh4zWQ0=;
+        b=ulU9FrtKoApXQGLCWuOOPRfLIu4P2UkyCZQ2zA1dAiUZxviO7ym66EQ8gCp/iUNxOa
+         OVSYkV4uD1bJJrU80e7NlKKUZM0Wkqn/kmfQjhi7LaMQE05e+j5BF5imJMtNK216iMr8
+         A/DBz/jhl/YpZ1cITHId56VtAQjWboX64UdapV0/EWZ8h0ne16br6BLlhXB+BiOLu6qA
+         5nuiQqgf6O4GAUJ8eXIZBV4XBVwE5OH680s4HO8ordGJivimS87vPCKb1QVyTNTIy7oT
+         YldSDgCU47x0YSPNXgTiM57Ng6WYyv6zcKNlEWq/kWQe/v4JO+J73pnBYA7RKRIPOtZ5
+         ubQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:date:to:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=HBtQob9YOZIuUzwPevlco+pTa3oQDFvRrX0bvh4zWQ0=;
+        b=ryUtTMKZ/wmjPShoIN2CH6ZDbMXdvfbk9/X6JTHcCCFjjk5EUdrQwih6+tHo7M43xQ
+         Y6GX7VaX0Xvrn0jXLoA0NGOUhponq4vJK1QJfre2wKVSO21be2RQWNnwkyOGKgUaslZR
+         ZWdBQafKnVs5ZGbPcP1VnSrPTsxDdh0OCGhtwyYX2JIaU5utl4YAAg992Qz9MvnKelkI
+         RRmSlyqVGojvKojgkd36O71l+jSYnAJ9h2dFEkaXfYN1quyRqSCMxrqJGAEMfASSDbdU
+         j83YP5pthnhbLauVeLeiaEHiq93wi7GXijVSkRFGIhx9Gi9qB8mhf+JKUUIb/EAHxTcK
+         1Ikw==
+X-Gm-Message-State: AOAM530kSJo0JfcB5mmgTEjkiFNbAv+tyA+l7lpbKntTcOG7tShJJ+gz
+	mT7KyZWIvmwriWk2TIUNHGEcDWAdUzU=
+X-Google-Smtp-Source: ABdhPJwEWfYvmNQ0PF5Dh4aC4TIF9su0ge9JIa6sPDRE5og6tfk45VX7842iQtxhKijrL5kWwLeKpA==
+X-Received: by 2002:a17:906:138c:: with SMTP id f12mr26812307ejc.180.1618916185840;
+        Tue, 20 Apr 2021 03:56:25 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id s13sm12156849ejz.110.2021.04.20.03.56.24
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 20 Apr 2021 03:56:25 -0700 (PDT)
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 20 Apr 2021 12:56:24 +0200
 To: openembedded-devel@lists.openembedded.org
-Cc: Andrej Kozemcak <andrej.kozemcak@siemens.com>
-Subject: [meta-oe][PATCH v2] proftpd: Update to 1.3.7a release
-Date: Tue, 20 Apr 2021 12:13:59 +0200
-Message-Id: <20210420101359.32550-1-andrej.kozemcak@siemens.com>
-X-Mailer: git-send-email 2.20.1
+Subject: Re: [oe] [meta-oe][dunfell][PATCH 3/3] libyui: switch to libyui-old repo which still has this SRCREV
+Message-ID: <20210420105624.nbhzv633jdso2m34@jama>
+References: <20210406184327.1585452-1-Martin.Jansa@gmail.com>
+ <1673590F38769AC5.4402@lists.openembedded.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <1673590F38769AC5.4402@lists.openembedded.org>
+X-Groupsio-MsgNum: 90947
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="zy2w4h3dobg6gzgy"
+Content-Disposition: inline
 
-Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
----
- .../proftpd/files/build_fixup.patch           | 69 ++++++++-----------
- .../proftpd/files/contrib.patch               | 29 ++++----
- .../{proftpd_1.3.6.bb => proftpd_1.3.7a.bb}   |  9 ++-
- 3 files changed, 47 insertions(+), 60 deletions(-)
- rename meta-networking/recipes-daemons/proftpd/{proftpd_1.3.6.bb => proftpd_1.3.7a.bb} (96%)
+--zy2w4h3dobg6gzgy
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-networking/recipes-daemons/proftpd/files/build_fixup.patch b/meta-networking/recipes-daemons/proftpd/files/build_fixup.patch
-index 9816d4d22..d888dd826 100644
---- a/meta-networking/recipes-daemons/proftpd/files/build_fixup.patch
-+++ b/meta-networking/recipes-daemons/proftpd/files/build_fixup.patch
-@@ -9,10 +9,10 @@ redefine PR_RUN_DIR as ${localstatedir}/run
- Signed-off-By: Armin Kuster <akuster808@gmail.com>
- 
- 
--Index: proftpd-1.3.6/Make.rules.in
--===================================================================
----- proftpd-1.3.6.orig/Make.rules.in
--+++ proftpd-1.3.6/Make.rules.in
-+diff --git a/Make.rules.in b/Make.rules.in
-+index a5028ac..ccd7807 100644
-+--- a/Make.rules.in
-++++ b/Make.rules.in
- @@ -30,9 +30,9 @@ INSTALL=@INSTALL@
-  INSTALL_STRIP=@INSTALL_STRIP@
-  INSTALL_USER=@install_user@
-@@ -26,11 +26,11 @@ Index: proftpd-1.3.6/Make.rules.in
-  
-  RM=rm -f
-  SHELL=@CONFIG_SHELL@
--Index: proftpd-1.3.6/Makefile.in
--===================================================================
----- proftpd-1.3.6.orig/Makefile.in
--+++ proftpd-1.3.6/Makefile.in
--@@ -105,7 +105,6 @@ check: proftpd$(EXEEXT)
-+diff --git a/Makefile.in b/Makefile.in
-+index 9434cbd..13f2e16 100644
-+--- a/Makefile.in
-++++ b/Makefile.in
-+@@ -123,7 +123,6 @@ check: proftpd$(EXEEXT)
-  $(DESTDIR)$(localedir) $(DESTDIR)$(includedir) $(DESTDIR)$(includedir)/proftpd $(DESTDIR)$(libdir) $(DESTDIR)$(pkgconfigdir) $(DESTDIR)$(libdir)/proftpd $(DESTDIR)$(libexecdir) $(DESTDIR)$(localstatedir) $(DESTDIR)$(sysconfdir) $(DESTDIR)$(bindir) $(DESTDIR)$(sbindir) $(DESTDIR)$(mandir) $(DESTDIR)$(mandir)/man1 $(DESTDIR)$(mandir)/man5 $(DESTDIR)$(mandir)/man8:
-  	@if [ ! -d $@ ]; then \
-  		mkdir -p $@; \
-@@ -38,20 +38,20 @@ Index: proftpd-1.3.6/Makefile.in
-  		chmod 0755 $@; \
-  	fi
-  
--@@ -115,7 +114,6 @@ install-proftpd: proftpd $(DESTDIR)$(inc
-+@@ -133,7 +132,6 @@ install-proftpd: proftpd$(EXEEXT) $(DESTDIR)$(includedir) $(DESTDIR)$(localstate
-  		rm -f $(DESTDIR)$(sbindir)/in.proftpd ; \
-  	fi
-- 	ln -s proftpd $(DESTDIR)$(sbindir)/in.proftpd
-+	ln -s $(top_builddir)/proftpd $(DESTDIR)$(sbindir)/in.proftpd
- -	-chown -h $(INSTALL_USER):$(INSTALL_GROUP) $(DESTDIR)$(sbindir)/in.proftpd
-  
-  install-libs: $(DESTDIR)$(libdir)/proftpd
-  	cd lib/ && $(MAKE) install
--@@ -152,11 +150,11 @@ install-utils: $(DESTDIR)$(sbindir) $(DE
-- 	$(INSTALL_SBIN) ftpshut  $(DESTDIR)$(sbindir)/ftpshut
-- 	$(INSTALL_BIN)  ftptop   $(DESTDIR)$(bindir)/ftptop
-- 	$(INSTALL_BIN)  ftpwho   $(DESTDIR)$(bindir)/ftpwho
---	$(INSTALL) -o $(INSTALL_USER) -g $(INSTALL_GROUP) -m 0755 src/prxs $(DESTDIR)$(bindir)/prxs
--+	$(INSTALL) -m 0755 src/prxs $(DESTDIR)$(bindir)/prxs
-+@@ -170,11 +168,11 @@ install-utils: $(DESTDIR)$(sbindir) $(DESTDIR)$(bindir)
-+	$(INSTALL_SBIN) $(top_builddir)/ftpshut  $(DESTDIR)$(sbindir)/ftpshut
-+	$(INSTALL_BIN)  $(top_builddir)/ftptop   $(DESTDIR)$(bindir)/ftptop
-+	$(INSTALL_BIN)  $(top_builddir)/ftpwho   $(DESTDIR)$(bindir)/ftpwho
-+-	$(INSTALL) -o $(INSTALL_USER) -g $(INSTALL_GROUP) -m 0755 $(top_builddir)/src/prxs $(DESTDIR)$(bindir)/prxs
-++	$(INSTALL) -m 0755 $(top_builddir)/src/prxs $(DESTDIR)$(bindir)/prxs
-  
-  install-conf: $(DESTDIR)$(sysconfdir)
-  	if [ ! -f $(DESTDIR)$(sysconfdir)/proftpd.conf ] ; then \
-@@ -60,11 +60,11 @@ Index: proftpd-1.3.6/Makefile.in
-  		           $(top_srcdir)/sample-configurations/basic.conf \
-  	       	           $(DESTDIR)$(sysconfdir)/proftpd.conf ; \
-  	fi
--Index: proftpd-1.3.6/configure
--===================================================================
----- proftpd-1.3.6.orig/configure
--+++ proftpd-1.3.6/configure
--@@ -41777,7 +41777,7 @@ _ACEOF
-+diff --git a/configure b/configure
-+index 0a51670..69fa130 100755
-+--- a/configure
-++++ b/configure
-+@@ -25116,7 +25116,7 @@ _ACEOF
-  
-  
-  cat >>confdefs.h <<_ACEOF
-@@ -73,7 +73,7 @@ Index: proftpd-1.3.6/configure
-  _ACEOF
-  
-  
--@@ -41787,7 +41787,7 @@ _ACEOF
-+@@ -25126,7 +25126,7 @@ _ACEOF
-  
-  
-  cat >>confdefs.h <<_ACEOF
-@@ -82,11 +82,11 @@ Index: proftpd-1.3.6/configure
-  _ACEOF
-  
-  
--Index: proftpd-1.3.6/configure.in
--===================================================================
----- proftpd-1.3.6.orig/configure.in
--+++ proftpd-1.3.6/configure.in
--@@ -3833,8 +3833,8 @@ locale_dir="`eval echo ${locale_dir}`"
-+diff --git a/configure.in b/configure.in
-+index 50561de..93cad3f 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -4059,8 +4059,8 @@ locale_dir="`eval echo ${locale_dir}`"
-  AC_DEFINE_UNQUOTED(PR_LOCALE_DIR, "`eval echo "${locale_dir}"`", [Define the locale directory])
-  
-  AC_DEFINE_UNQUOTED(PR_RUN_DIR, "`eval echo "${localstatedir}"`", [Define the run directory])
-@@ -97,16 +97,3 @@ Index: proftpd-1.3.6/configure.in
-  
-  prefix="$pr_saved_prefix"
-  exec_prefix="$pr_saved_exec_prefix"
--Index: proftpd-1.3.6/lib/libcap/Makefile
--===================================================================
----- proftpd-1.3.6.orig/lib/libcap/Makefile
--+++ proftpd-1.3.6/lib/libcap/Makefile
--@@ -26,7 +26,7 @@ OBJS=$(addsuffix .o, $(FILES))
-- all: $(LIBNAME)
-- 
-- _makenames: _makenames.c cap_names.sed
---	$(CC) $(CFLAGS) $(LDFLAGS) $< -o $@
--+	$(BUILD_CC) $(CFLAGS) $(LDFLAGS) $< -o $@
-- 
-- cap_names.h: _makenames
-- 	./_makenames > cap_names.h
-diff --git a/meta-networking/recipes-daemons/proftpd/files/contrib.patch b/meta-networking/recipes-daemons/proftpd/files/contrib.patch
-index 7e2a8e3ce..96c237d38 100644
---- a/meta-networking/recipes-daemons/proftpd/files/contrib.patch
-+++ b/meta-networking/recipes-daemons/proftpd/files/contrib.patch
-@@ -11,32 +11,29 @@ Signed-off-by: Kevin Strasser <kevin.strasser@linux.intel.com>
-  2 files changed, 4 insertions(+), 4 deletions(-)
- 
- diff --git a/Makefile.in b/Makefile.in
--index 5b2e683..ee72fe1 100644
-+index 9434cbd..8da7d1f 100644
- --- a/Makefile.in
- +++ b/Makefile.in
--@@ -120,7 +120,7 @@ install-modules: $(DESTDIR)$(libexecdir) $(DESTDIR)$(sysconfdir)
-+@@ -163,7 +163,7 @@ install-modules: $(DESTDIR)$(libexecdir) $(DESTDIR)$(sysconfdir)
-  	test -z "$(SHARED_MODULE_OBJS)" -a -z "$(SHARED_MODULE_DIRS)" -a -z "$(STATIC_MODULE_DIRS)" || (cd modules/ && $(MAKE) install)
-  
-  install-utils: $(DESTDIR)$(sbindir) $(DESTDIR)$(bindir)
- -	cd contrib/ && $(MAKE) install-utils
- +	cd contrib/ && $(MAKE) DESTDIR=${DESTDIR} install-utils
-- 	$(INSTALL_BIN)  ftpcount $(DESTDIR)$(bindir)/ftpcount
-- 	$(INSTALL_BIN)  ftpdctl  $(DESTDIR)$(bindir)/ftpdctl
-- 	$(INSTALL_SBIN) ftpscrub $(DESTDIR)$(sbindir)/ftpscrub
-+	$(INSTALL_BIN)  $(top_builddir)/ftpcount $(DESTDIR)$(bindir)/ftpcount
-+	$(INSTALL_BIN)  $(top_builddir)/ftpdctl  $(DESTDIR)$(bindir)/ftpdctl
-+	$(INSTALL_SBIN) $(top_builddir)/ftpscrub $(DESTDIR)$(sbindir)/ftpscrub
- diff --git a/contrib/Makefile.in b/contrib/Makefile.in
--index 5bcc038..51d248c 100644
-+index d1a31af..65d2abc 100644
- --- a/contrib/Makefile.in
- +++ b/contrib/Makefile.in
--@@ -18,6 +18,6 @@ Makefile: Makefile.in ../config.status
-+@@ -17,6 +17,6 @@ Makefile: Makefile.in ../config.status
-  	cd ../ && ./config.status
-  
-  install-utils:
---	$(INSTALL) -o $(INSTALL_USER) -g $(INSTALL_GROUP) -m 0755 ftpasswd $(DESTDIR)$(bindir)/ftpasswd
---	$(INSTALL) -o $(INSTALL_USER) -g $(INSTALL_GROUP) -m 0755 ftpmail $(DESTDIR)$(bindir)/ftpmail
---	$(INSTALL) -o $(INSTALL_USER) -g $(INSTALL_GROUP) -m 0755 ftpquota $(DESTDIR)$(bindir)/ftpquota
--+	$(INSTALL) -m 0755 ftpasswd $(DESTDIR)$(bindir)/ftpasswd
--+	$(INSTALL) -m 0755 ftpmail $(DESTDIR)$(bindir)/ftpmail
--+	$(INSTALL) -m 0755 ftpquota $(DESTDIR)$(bindir)/ftpquota
---- 
--1.7.9.5
--
-+-	$(INSTALL) -o $(INSTALL_USER) -g $(INSTALL_GROUP) -m 0755 $(srcdir)/ftpasswd $(DESTDIR)$(bindir)/ftpasswd
-+-	$(INSTALL) -o $(INSTALL_USER) -g $(INSTALL_GROUP) -m 0755 $(srcdir)/ftpmail $(DESTDIR)$(bindir)/ftpmail
-+-	$(INSTALL) -o $(INSTALL_USER) -g $(INSTALL_GROUP) -m 0755 $(srcdir)/ftpquota $(DESTDIR)$(bindir)/ftpquota
-++	$(INSTALL) -m 0755 $(srcdir)/ftpasswd $(DESTDIR)$(bindir)/ftpasswd
-++	$(INSTALL) -m 0755 $(srcdir)/ftpmail $(DESTDIR)$(bindir)/ftpmail
-++	$(INSTALL) -m 0755 $(srcdir)/ftpquota $(DESTDIR)$(bindir)/ftpquota
-diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7a.bb
-similarity index 96%
-rename from meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
-rename to meta-networking/recipes-daemons/proftpd/proftpd_1.3.7a.bb
-index 1e4697a63..9f1e47d6c 100644
---- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
-+++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7a.bb
-@@ -4,7 +4,10 @@ HOMEPAGE = "http://www.proftpd.org"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fb0d1484d11915fa88a6a7702f1dc184"
- 
--SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
-+SRCREV = "715eadc1aa4f6b07d69f9d09558e9cb471e51d87"
-+BRANCH = "1.3.7"
-+
-+SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH} \
-            file://basic.conf.patch \
-            file://proftpd-basic.init \
-            file://default \
-@@ -13,8 +16,8 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
-            file://build_fixup.patch \
-            file://proftpd.service \
-            "
--SRC_URI[md5sum] = "13270911c42aac842435f18205546a1b"
--SRC_URI[sha256sum] = "91ef74b143495d5ff97c4d4770c6804072a8c8eb1ad1ecc8cc541b40e152ecaf"
-+
-+S = "${WORKDIR}/git"
- 
- inherit autotools-brokensep useradd update-rc.d systemd multilib_script
- 
--- 
-2.20.1
+On Tue, Apr 06, 2021 at 08:43:27PM +0200, Martin Jansa via lists.openembedd=
+ed.org wrote:
+> * 8459235919f592b1bc099ecf9a947cb6344b6fa5 doesn't exist in current repo:
+>   libyui$ git branch -a --contains 8459235919f592b1bc099ecf9a947cb6344b6f=
+a5
+>   error: no such commit 8459235919f592b1bc099ecf9a947cb6344b6fa5
+>=20
+> * there are no common commits in the new libyui repo, but luckily old
+>   repo is kept as
+>   https://github.com/libyui/libyui-old
+>   similarly libyui-ncurses now contains only README about being obsolete =
+in:
+>   https://github.com/libyui/libyui-ncurses
+>   but at least it wasn't rewritten to have the new content
+>=20
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-oe/recipes-graphics/libyui/libyui_3.6.0.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-graphics/libyui/libyui_3.6.0.bb b/meta-oe/re=
+cipes-graphics/libyui/libyui_3.6.0.bb
+> index 7c6f4c13d2..f3c112c3b8 100644
+> --- a/meta-oe/recipes-graphics/libyui/libyui_3.6.0.bb
+> +++ b/meta-oe/recipes-graphics/libyui/libyui_3.6.0.bb
+> @@ -5,7 +5,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING.gpl-3;md5=3Dd32239bc=
+b673463ab874e80d47fae504 \
+>                      file://COPYING.lgpl-3;md5=3De6a600fd5e1d9cbde2d98368=
+0233ad02 \
+>                     "
+> =20
+> -SRC_URI =3D "git://github.com/libyui/libyui.git \
+> +SRC_URI =3D "git://github.com/libyui/libyui-old.git \
+>             file://0001-Fix-build-with-clang.patch \
+>             file://0001-Use-relative-install-paths-for-CMake.patch \
+>             "
 
+Gentle ping for these 3 (and 3 hostapd fixes currently in
+stable/dunfell-nut).
+
+--zy2w4h3dobg6gzgy
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EABECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCYH6zUgAKCRA3VSO3ZXaA
+HJX1AJ93lwCH5CqrZBeEy53uMyPOgQ/YBQCdFt25DLK/WHYqhe/Xcpgbnoj+KIU=
+=VsxE
+-----END PGP SIGNATURE-----
+
+--zy2w4h3dobg6gzgy--
