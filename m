@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.9100.1618991943532174788
+ by mx.groups.io with SMTP id smtpd.web11.9022.1618991947104237397
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Apr 2021 00:59:03 -0700
+ Wed, 21 Apr 2021 00:59:07 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=41746 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lZ7l6-0002oU-WA; Wed, 21 Apr 2021 10:58:57 +0300
+	id 1lZ7lG-0002oU-3C; Wed, 21 Apr 2021 10:59:05 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-argcomplete: Upgrade 1.12.2 -> 1.12.3
-Date: Wed, 21 Apr 2021 10:58:40 +0300
-Message-Id: <20210421075843.17725-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/5] python3-pysonos: Upgrade 0.0.42 -> 0.0.43
+Date: Wed, 21 Apr 2021 10:58:42 +0300
+Message-Id: <20210421075843.17725-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210421075843.17725-1-leon.anavi@konsulko.com>
 References: <20210421075843.17725-1-leon.anavi@konsulko.com>
@@ -30,37 +30,31 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.12.3:
+Upgrade to release 0.0.43:
 
-- Help string support for fish
-- Add option to use tempfiles for IPC
-- Fix multiple command registration for non-bash shells
-- Register auto completion for an arbitrary name using a given
-  external script
-- Skip completions from active subprocess completer
-- Fix warnings regarding invalid escape sequences
+- Downgrade asyncio log severity
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...hon3-argcomplete_1.12.2.bb => python3-argcomplete_1.12.3.bb} | 2 +-
+ .../{python3-pysonos_0.0.42.bb => python3-pysonos_0.0.43.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-argcomplete_1.12.2.bb => python3-argcomplete_1.12.3.bb} (82%)
+ rename meta-python/recipes-devtools/python/{python3-pysonos_0.0.42.bb => python3-pysonos_0.0.43.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-argcomplete_1.12.2.bb b/meta-python/recipes-devtools/python/python3-argcomplete_1.12.3.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-argcomplete_1.12.2.bb
-rename to meta-python/recipes-devtools/python/python3-argcomplete_1.12.3.bb
-index a08f882ab1..3eb4e5c27c 100644
---- a/meta-python/recipes-devtools/python/python3-argcomplete_1.12.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-argcomplete_1.12.3.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/kislyuk/argcomplete"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=2ee41112a44fe7014dce33e26468ba93"
+diff --git a/meta-python/recipes-devtools/python/python3-pysonos_0.0.42.bb b/meta-python/recipes-devtools/python/python3-pysonos_0.0.43.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-pysonos_0.0.42.bb
+rename to meta-python/recipes-devtools/python/python3-pysonos_0.0.43.bb
+index 25defabc51..dbb6a8d8f6 100644
+--- a/meta-python/recipes-devtools/python/python3-pysonos_0.0.42.bb
++++ b/meta-python/recipes-devtools/python/python3-pysonos_0.0.43.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=07b0e2ca9ac77cd65cd4edf2e13367ea"
  
--SRC_URI[sha256sum] = "de0e1282330940d52ea92a80fea2e4b9e0da1932aaa570f84d268939d1897b04"
-+SRC_URI[sha256sum] = "2c7dbffd8c045ea534921e63b0be6fe65e88599990d8dc408ac8c542b72a5445"
+-SRC_URI[sha256sum] = "20b45fa1779a01325e67822d243e1a3f7657d8b515308d84c1eb3c805cc3bdb5"
++SRC_URI[sha256sum] = "47be2b37defc856f15d7e7a419cfb939e9822750efe968db192156ebeba31684"
  
- PYPI_PACKAGE = "argcomplete"
+ inherit pypi setuptools3
  
 -- 
 2.17.1
