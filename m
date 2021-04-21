@@ -1,102 +1,129 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web11.9851.1618998030493460152
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+ by mx.groups.io with SMTP id smtpd.web09.10757.1619003921647732051
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Apr 2021 02:40:30 -0700
+ Wed, 21 Apr 2021 04:18:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: kai.kang@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 13L9eTSk017815
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 21 Apr 2021 02:40:29 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.4; Wed, 21 Apr 2021 02:40:28 -0700
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.4 via Frontend Transport; Wed, 21 Apr 2021 02:40:27 -0700
-From: "kai" <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][PATCH] freeradius: check existence of openssl's commands in bootstrap
-Date: Wed, 21 Apr 2021 17:40:24 +0800
-Message-ID: <20210421094024.38108-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=m7xx9Mf2;
+ spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f52.google.com with SMTP id u21so62970307ejo.13
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Apr 2021 04:18:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:date:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=xX3i4geqOhMW50gP/RETqMTQSJp7WbC/59nzKVC/lOw=;
+        b=m7xx9Mf26vbS1qBh3vl1B/N22r3Yi0ZaSxSgrMvqpmyZEO8feVmnqDuT4AqDLHybh3
+         12+B0FwcEwynn7ipxecBPj6HFcpewMq9Vme9B1LzY1OlgN9R3jnZQR/ELbXHEw5ibM8U
+         ddG0TPgH+PjHnE9iyaydCz1j57+ZMlDw/+nr1Ti4D2OqdW/1IRSAqqbcO2F665x9X3c9
+         cCNPBWuWPcDXzfTS0kuaDMYnYqFGcF26pLElJREJYcuY4na85NyZafhERUG7N/4/b/E/
+         NexuXNcbYu2J7iqV3iQNs1YmU88NeCvscXLjEVB2dtpvFtCKROPGDHtinviupFAKKvnC
+         b+fQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=xX3i4geqOhMW50gP/RETqMTQSJp7WbC/59nzKVC/lOw=;
+        b=P+Zz0WhlnDgjMITp/TmTiPa6XmzySMk3F3flLt7VEDDNvPZ4cuQaY7K0zT8/UI4ts3
+         YEghVBMM/O16jEQdfU7Kc1yiLnxSbvx3oH4NWZdhAsPI/hCh2b33jdJQgGhSt0+08njo
+         bwNtaYdVmaNTtHcNPKCXJwf+meknHq0hplIOlkZNkRK7CSFn25ba0jmtXUZesGNxZwwi
+         xMeNM3+6wlUrPDMMk08NeUHaASQECqumOVZdW0Hv4jxF/fRAOE/aDQ7xVaDSMxr8M+gV
+         2QuxiWlUlu9VBB73AeGArc4VkAkrdYOgk1rtB/7laitYX/U8Kj9lc52lqK4AlYaxGlGx
+         +yDg==
+X-Gm-Message-State: AOAM531Px63t5lTNu9//s0Wvp4K7lgzdPVLO/tlQWUbLRvyGq1CEb4vg
+	5qjow1DjMz6d5hlWiTD/RUQ=
+X-Google-Smtp-Source: ABdhPJy37zKDOA63tEx+veXjNG/GD2gSKQe9xq72k8HUivWbdMhEtUGqryNxEaLye3G6IRYnphH5GA==
+X-Received: by 2002:a17:906:6801:: with SMTP id k1mr17724895ejr.137.1619003920131;
+        Wed, 21 Apr 2021 04:18:40 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id f22sm2098046ejr.35.2021.04.21.04.18.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 21 Apr 2021 04:18:39 -0700 (PDT)
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 21 Apr 2021 13:18:39 +0200
+To: Naveen Saini <naveen.kumar.saini@intel.com>
+Cc: Khem Raj <raj.khem@gmail.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-oe][PATCH] tbb: upgrade 2020.3 -> 2021.2.0
+Message-ID: <20210421111839.nkrxhzsh7ldst3a4@jama>
+References: <20210407062210.5883-1-naveen.kumar.saini@intel.com>
+ <CAMKF1srrwWUT0q-0q6zS+=bv5pLZc25zLuhROfd5CZpW4YUu=g@mail.gmail.com>
+ <CAMKF1sqndeKvqZwu_UNp40EmtVVzbKhZynK8U=-xt+Pe=rBLww@mail.gmail.com>
+ <020d1d4733fb4804bd53191b9a54887f@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+In-Reply-To: <020d1d4733fb4804bd53191b9a54887f@intel.com>
+X-Groupsio-MsgNum: 90968
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="qospcipfyqcdafb3"
+Content-Disposition: inline
 
-From: Kai Kang <kai.kang@windriver.com>
+--qospcipfyqcdafb3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-It calls openssl's commands 'dhparam' and 'pkcs12' in script bootstrap.
-These commands are configurable based on configure options 'no-dh' and
-'no-des', and may not be provided by openssl. So check existence of
-these commands. If not, abort running of script bootstrap.
+On Thu, Apr 08, 2021 at 06:51:17AM +0000, Naveen Saini wrote:
+> > > On Tue, Apr 6, 2021 at 11:10 PM Naveen Saini
+> > > <naveen.kumar.saini@intel.com> wrote:
+> > > >
+> > > > Switched to cmake build tool.
+> > > >
+> > > > Rebased some patches due to directory re-structuring.
+> > > > Dropped patches, which are not required anymore.
+> > > >
+> > > > Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+> > > > rename from meta-oe/recipes-support/tbb/tbb_2020.3.bb
+> > > > rename to meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+> > > > index 8e0094b31..357fbba34 100644
+> > > > --- a/meta-oe/recipes-support/tbb/tbb_2020.3.bb
+> > > > +++ b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+> > > > @@ -5,37 +5,24 @@ DESCRIPTION = "Parallelism library for C++ - runtime
+> > files \
+> > > >      and threading mechanism for performance and scalability."
+> > > >  HOMEPAGE = "https://software.intel.com/en-us/tbb"
+> > > >  LICENSE = "Apache-2.0"
+> > > > -LIC_FILES_CHKSUM =
+> > "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+> > > > -BRANCH = "tbb_2020"
+> > > > -SRCREV = "eca91f16d7490a8abfdee652dadf457ec820cc37"
+> > > > +LIC_FILES_CHKSUM =
+> > "file://LICENSE.txt;md5=86d3f3a95c324c9479bd8986968f4327"
+> > > > +BRANCH = "onetbb_2021"
+> > > > +SRCREV = "2dba2072869a189b9fdab3ffa431d3ea49059a19"
+> > > >  SRC_URI = "git://github.com/oneapi-
+> > src/oneTBB.git;protocol=https;branch=${BRANCH} \
+> > > > -           file://cross-compile.patch \
+> > > > -           file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
+> > > > -           file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
+> > > > -           file://tbb.pc \
+> > > > -           file://improve-reproducibility.patch \
+> > > > +            file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
+> > > > +            file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
+> > > >  "
+> > > >
+> > > >  S = "${WORKDIR}/git"
+> > > > -PE = "1"
 
-1. https://github.com/openssl/openssl/blob/master/apps/build.info#L37
-2. https://github.com/openssl/openssl/blob/master/apps/build.info#L22
+Why did you drop PE? Please send follow-up patch to restore it to fix:
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- ...eck-openssl-cmds-in-script-bootstrap.patch | 38 +++++++++++++++++++
- .../freeradius/freeradius_3.0.21.bb           |  1 +
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/freeradius/files/check-openssl-cmds-in-script-bootstrap.patch
+ERROR: tbb-2021.2.0-r0 do_packagedata: QA Issue: Package version for package tbb-dbg went backwards which would break package feeds (from 1:2020.3-r0 to 0:2021.2.0-r0) [version-going-backwards]
+ERROR: tbb-2021.2.0-r0 do_packagedata: QA Issue: Package version for package tbb-dev went backwards which would break package feeds (from 1:2020.3-r0 to 0:2021.2.0-r0) [version-going-backwards]
+ERROR: tbb-2021.2.0-r0 do_packagedata: QA Issue: Package version for package tbb-doc went backwards which would break package feeds (from 1:2020.3-r0 to 0:2021.2.0-r0) [version-going-backwards]
+ERROR: tbb-2021.2.0-r0 do_packagedata: QA Issue: Package version for package tbb-locale went backwards which would break package feeds (from 1:2020.3-r0 to 0:2021.2.0-r0) [version-going-backwards]
+ERROR: tbb-2021.2.0-r0 do_packagedata: QA Issue: Package version for package tbb-src went backwards which would break package feeds (from 1:2020.3-r0 to 0:2021.2.0-r0) [version-going-backwards]
+ERROR: tbb-2021.2.0-r0 do_packagedata: QA Issue: Package version for package tbb-staticdev went backwards which would break package feeds (from 1:2020.3-r0 to 0:2021.2.0-r0) [version-going-backwards]
+ERROR: tbb-2021.2.0-r0 do_packagedata: QA Issue: Package version for package tbb went backwards which would break package feeds (from 1:2020.3-r0 to 0:2021.2.0-r0) [version-going-backwards]
 
-diff --git a/meta-networking/recipes-connectivity/freeradius/files/check-openssl-cmds-in-script-bootstrap.patch b/meta-networking/recipes-connectivity/freeradius/files/check-openssl-cmds-in-script-bootstrap.patch
-new file mode 100644
-index 000000000..fcadae93a
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/freeradius/files/check-openssl-cmds-in-script-bootstrap.patch
-@@ -0,0 +1,38 @@
-+bootstrap: check commands of openssl exist
-+
-+It calls openssl commands dhparam and pkcs12 in script bootstrap. These
-+commands are configurable based on configure options 'no-dh' and
-+'no-des', and may not be provided by openssl. So check existence of
-+these commands. If not, abort running of script bootstrap.
-+
-+1. https://github.com/openssl/openssl/blob/master/apps/build.info#L37
-+2. https://github.com/openssl/openssl/blob/master/apps/build.info#L22
-+
-+Upstream-Status: Denied [https://github.com/FreeRADIUS/freeradius-server/pull/4059]
-+				 The maintainer commented in the pull that the script could
-+				 be run on a host which provides these openssl commands.
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+ raddb/certs/bootstrap | 8 ++++++++
-+ 1 file changed, 8 insertions(+)
-+
-+diff --git a/raddb/certs/bootstrap b/raddb/certs/bootstrap
-+index 0f719aafd4..17feddbeeb 100755
-+--- a/raddb/certs/bootstrap
-++++ b/raddb/certs/bootstrap
-+@@ -13,6 +13,14 @@
-+ umask 027
-+ cd `dirname $0`
-+ 
-++#  check commands of openssl exist
-++for cmd in dhparam pkcs12; do
-++	if ! openssl ${cmd} -help >/dev/null 2>&1; then
-++		echo "Error: command ${cmd} is not supported by openssl."
-++		exit 1
-++	fi
-++done
-++
-+ make -h > /dev/null 2>&1
-+ 
-+ #
-diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
-index 864a4e944..a6df2aeb0 100644
---- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
-+++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
-@@ -31,6 +31,7 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0
-     file://0001-workaround-error-with-autoconf-2.7.patch \
-     file://radiusd.service \
-     file://radiusd-volatiles.conf \
-+    file://check-openssl-cmds-in-script-bootstrap.patch \
- "
- 
- SRCREV = "af428abda249b2279ba0582180985a9f6f4a144a"
--- 
-2.17.1
+Regards,
 
+--qospcipfyqcdafb3
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EABECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCYIAKDQAKCRA3VSO3ZXaA
+HMQOAJ9g1UAVOWxJtBgskBdoE+hWu3DSrACfQZ+GY4YA8a6Fm9ePVnETPzEmvig=
+=pEFL
+-----END PGP SIGNATURE-----
+
+--qospcipfyqcdafb3--
