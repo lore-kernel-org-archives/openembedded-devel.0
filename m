@@ -1,64 +1,102 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.9023.1618991947636141453
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web11.9851.1618998030493460152
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Apr 2021 00:59:08 -0700
+ Wed, 21 Apr 2021 02:40:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=41746 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lZ7lJ-0002oU-W6; Wed, 21 Apr 2021 10:59:06 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-huey: Upgrade 2.3.1 -> 2.3.2
-Date: Wed, 21 Apr 2021 10:58:43 +0300
-Message-Id: <20210421075843.17725-5-leon.anavi@konsulko.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: kai.kang@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 13L9eTSk017815
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 21 Apr 2021 02:40:29 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.4; Wed, 21 Apr 2021 02:40:28 -0700
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.4 via Frontend Transport; Wed, 21 Apr 2021 02:40:27 -0700
+From: "kai" <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-networking][PATCH] freeradius: check existence of openssl's commands in bootstrap
+Date: Wed, 21 Apr 2021 17:40:24 +0800
+Message-ID: <20210421094024.38108-1-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210421075843.17725-1-leon.anavi@konsulko.com>
-References: <20210421075843.17725-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+MIME-Version: 1.0
+Content-Type: text/plain
 
-Upgrade to release 2.3.2:
+From: Kai Kang <kai.kang@windriver.com>
 
-- Add hook (Huey.build_error_result) for customizing the error
-  result metadata.
-- Avoid crashing if another module already modified/set the
-  multiprocessing start method.
+It calls openssl's commands 'dhparam' and 'pkcs12' in script bootstrap.
+These commands are configurable based on configure options 'no-dh' and
+'no-des', and may not be provided by openssl. So check existence of
+these commands. If not, abort running of script bootstrap.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+1. https://github.com/openssl/openssl/blob/master/apps/build.info#L37
+2. https://github.com/openssl/openssl/blob/master/apps/build.info#L22
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../python/{python3-huey_2.3.1.bb => python3-huey_2.3.2.bb}     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-huey_2.3.1.bb => python3-huey_2.3.2.bb} (70%)
+ ...eck-openssl-cmds-in-script-bootstrap.patch | 38 +++++++++++++++++++
+ .../freeradius/freeradius_3.0.21.bb           |  1 +
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/check-openssl-cmds-in-script-bootstrap.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-huey_2.3.1.bb b/meta-python/recipes-devtools/python/python3-huey_2.3.2.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-huey_2.3.1.bb
-rename to meta-python/recipes-devtools/python/python3-huey_2.3.2.bb
-index d8141c8e81..4ef80c4a85 100644
---- a/meta-python/recipes-devtools/python/python3-huey_2.3.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-huey_2.3.2.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5cac039fcc82f01141cc170b48f315d4"
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/check-openssl-cmds-in-script-bootstrap.patch b/meta-networking/recipes-connectivity/freeradius/files/check-openssl-cmds-in-script-bootstrap.patch
+new file mode 100644
+index 000000000..fcadae93a
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/freeradius/files/check-openssl-cmds-in-script-bootstrap.patch
+@@ -0,0 +1,38 @@
++bootstrap: check commands of openssl exist
++
++It calls openssl commands dhparam and pkcs12 in script bootstrap. These
++commands are configurable based on configure options 'no-dh' and
++'no-des', and may not be provided by openssl. So check existence of
++these commands. If not, abort running of script bootstrap.
++
++1. https://github.com/openssl/openssl/blob/master/apps/build.info#L37
++2. https://github.com/openssl/openssl/blob/master/apps/build.info#L22
++
++Upstream-Status: Denied [https://github.com/FreeRADIUS/freeradius-server/pull/4059]
++				 The maintainer commented in the pull that the script could
++				 be run on a host which provides these openssl commands.
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++---
++ raddb/certs/bootstrap | 8 ++++++++
++ 1 file changed, 8 insertions(+)
++
++diff --git a/raddb/certs/bootstrap b/raddb/certs/bootstrap
++index 0f719aafd4..17feddbeeb 100755
++--- a/raddb/certs/bootstrap
+++++ b/raddb/certs/bootstrap
++@@ -13,6 +13,14 @@
++ umask 027
++ cd `dirname $0`
++ 
+++#  check commands of openssl exist
+++for cmd in dhparam pkcs12; do
+++	if ! openssl ${cmd} -help >/dev/null 2>&1; then
+++		echo "Error: command ${cmd} is not supported by openssl."
+++		exit 1
+++	fi
+++done
+++
++ make -h > /dev/null 2>&1
++ 
++ #
+diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
+index 864a4e944..a6df2aeb0 100644
+--- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
++++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
+@@ -31,6 +31,7 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0
+     file://0001-workaround-error-with-autoconf-2.7.patch \
+     file://radiusd.service \
+     file://radiusd-volatiles.conf \
++    file://check-openssl-cmds-in-script-bootstrap.patch \
+ "
  
- PYPI_PACKAGE = "huey"
- 
--SRC_URI[sha256sum] = "de9b6d0fd59794378fe05813d302be68038044ef3b68274b84ca8d285e20f803"
-+SRC_URI[sha256sum] = "7176acb113850824490da5a31f328cc48a2002a59bfb396efbab8ecbd3573910"
- 
- inherit pypi setuptools3
- 
+ SRCREV = "af428abda249b2279ba0582180985a9f6f4a144a"
 -- 
 2.17.1
 
