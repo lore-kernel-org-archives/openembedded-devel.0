@@ -1,78 +1,125 @@
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web10.13906.1619018630158920303
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.web11.14037.1619018681448921818
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Apr 2021 08:23:50 -0700
+ Wed, 21 Apr 2021 08:24:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gpjuzTpp;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id u7so20022571plr.6
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Apr 2021 08:23:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ozlxePHD;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f173.google.com with SMTP id g16so4977477plq.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Apr 2021 08:24:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
+        h=subject:to:cc:references:from:organization:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
          :content-transfer-encoding;
-        bh=uUE7O55Zx8NlW3TDRfGZoRoHtU7iiH27FdkRGUcGhB8=;
-        b=gpjuzTpp/ruXAnuWZWIBRces8LctsP+Mpk2Jvh7X/XBxttlYLM4YyinD8tCyZ2lCj7
-         VLI1JNfixruEG45IHQPUxS8NuxWfWx0Zg7etJ42IE4HJbJrpX4O5XU7p5MdpE3EFDFPK
-         vp36Vazme31QG3MAsuUhgCOMJ0SZsEhUG/rMLXRZS0CSYFKITbKUiLfoWNUOf+5sHwmt
-         p/Oxx8i4gRXez+9nX0tihaigyDtASAaQ3hG/Pvdqai6fKom92WKsz7WEZA4qpNWVFOYD
-         2GBYUaqhZJG1Ln7ZgEm3u6pm4pNlmOpQ8vmHGlxRIFdbyXYtWbYOnlOwMVDBgS0bKn/V
-         cmVA==
+        bh=wRI3NwLxeE5jw/izXrTn8Ny+KE+1/rC8ZMeU9Snk46Q=;
+        b=ozlxePHDbpV0SJVpLTB99toA2K3RIX/4K12itvqlQFL8YNwpbefpVaszWsI7jkUnrI
+         ddTuje7kP5gPjV4VDUoYbHAycvdEvEcFvAA4g76bDygQU8Y3CKqe4VRRq4SR8nAJcb49
+         tmBuLt+8ZnEYC95sff+VSmUYF7DilLt4qNTViUPaNWBbgqRNPTxFlLMwBp9aS0kdDC5/
+         s1OT4jJqDXFCL1O8IeWyic4JfE1ZlmNoPlJfCaplxWwv9NdMvhwWJjxgsz4eHVCepCtF
+         pRxaJwx2vWcZH7yMGgwOML7GabMXOOGV3B6IgSMGQLOFBMRsrBWKT+aRe9WMNmhvm6i2
+         esiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=uUE7O55Zx8NlW3TDRfGZoRoHtU7iiH27FdkRGUcGhB8=;
-        b=G36tooHZwfyqybn6m63V8ZmvWGrAulg5fQIeYLpRWP7t9RtxGdnqb3Ann9TosevbOE
-         AIDf/gX/rICTaNSGE5JHauEhgKcexLpRmNXOObcovHqPZK1LwiixAqMoWQGZimnw++Mt
-         3CS/IozA4IES5zzfn8WaSbQNzh+jgs523UvXJler4hbJRR9sbYRgbCTnbl5Wa6NOJvTf
-         xEtpx8g1dknO/Fy3loL2CxUnibmeKmCcRvCtZABfSktDZJmMItUlUDLwCRIUUfEAEB3Q
-         NLYvQWDqQGdsxiWzgFRAhlyHWASoRbMDIUPgvEt2mWm53dBg7XErp66x0x+EuKUvh1BT
-         Vl+g==
-X-Gm-Message-State: AOAM531JsDQDBWKhmakI9VjZPLzHWqr2pfuQFor4wwPfONVEX+zE8ln7
-	/U+9ASNwM+Fg3kPZ5hTy0u9rqi6u1ocU7Q==
-X-Google-Smtp-Source: ABdhPJyh12Cquxc1ZH+oJjiYc+XyuLXWAOJR7KgApqWyx4J2AmGcZBfXcCzPuwTKzM1mhkuujVb+Ag==
-X-Received: by 2002:a17:902:a9c7:b029:e8:de49:6a76 with SMTP id b7-20020a170902a9c7b02900e8de496a76mr35460239plr.63.1619018629591;
-        Wed, 21 Apr 2021 08:23:49 -0700 (PDT)
+        h=x-gm-message-state:subject:to:cc:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=wRI3NwLxeE5jw/izXrTn8Ny+KE+1/rC8ZMeU9Snk46Q=;
+        b=nNTYOqIRyRnlnfkHS1RNsS8kZAR7mF5pqssGcc7rjzwic3T9hRa88llHCU4uRwXrs9
+         a/+SyLUtYS8ci+xCVG/64fG8wHzSZW31ghqsiJiCE+bGTvYUaPj9MwPrdQl4j9q6HFsT
+         eahf/AIIlkpsk8QhIpYdmbGFB0q6mw0S2k516piQlJODxTOkB9jlYaV6ITofoxoLcwuz
+         iD8lLJcf69+YANd2gqD+ScbZlIywNGUq03XRtyuYGRl765lZtOYAd3MKC4vpCDtZweFE
+         XHHDP7cZDq3HLL30N76ehI247Mf5WQ5cZ46ep4hAgCEX2r8MqtMiWO3wYXU1CX8T0mZ+
+         za4Q==
+X-Gm-Message-State: AOAM530djYUo37a8ojaj3pf7KJ00SM3fb6BscR5OG459u2kD/DUXR7JT
+	EMeHotS/K2OV/ZuzLD5MA1CRCRR1ul5A8A==
+X-Google-Smtp-Source: ABdhPJwKB0fBzrGco+UjP+knse2pTG+TBNMvnlZjFiEXum7lVlD8fXDS2y2rRQmOK+dg7TkKhDuTeA==
+X-Received: by 2002:a17:902:f284:b029:ec:a434:b6ff with SMTP id k4-20020a170902f284b02900eca434b6ffmr16596397plc.81.1619018680855;
+        Wed, 21 Apr 2021 08:24:40 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::bc1b])
-        by smtp.gmail.com with ESMTPSA id a11sm2165257pfg.124.2021.04.21.08.23.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Apr 2021 08:23:49 -0700 (PDT)
+Received: from ?IPv6:2601:646:9200:a0f0:68f4:e6f3:44c5:768e? ([2601:646:9200:a0f0:68f4:e6f3:44c5:768e])
+        by smtp.gmail.com with ESMTPSA id p12sm2595692pjo.4.2021.04.21.08.24.40
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 21 Apr 2021 08:24:40 -0700 (PDT)
+Subject: Re: [oe] [meta-oe][PATCH] tbb: upgrade 2020.3 -> 2021.2.0
+To: Martin Jansa <martin.jansa@gmail.com>,
+ Naveen Saini <naveen.kumar.saini@intel.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <20210407062210.5883-1-naveen.kumar.saini@intel.com>
+ <CAMKF1srrwWUT0q-0q6zS+=bv5pLZc25zLuhROfd5CZpW4YUu=g@mail.gmail.com>
+ <CAMKF1sqndeKvqZwu_UNp40EmtVVzbKhZynK8U=-xt+Pe=rBLww@mail.gmail.com>
+ <020d1d4733fb4804bd53191b9a54887f@intel.com>
+ <20210421111839.nkrxhzsh7ldst3a4@jama>
 From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Martin Jansa <martin.jansa@gmail.com>,
-	Naveen Saini <naveen.kumar.saini@intel.com>
-Subject: [meta-oe][PATCH] tbb: Re-introduce PE
-Date: Wed, 21 Apr 2021 08:23:47 -0700
-Message-Id: <20210421152347.176368-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
+Organization: HIMVIS LLC
+Message-ID: <6b71b535-fd7e-e648-6e62-bdf55958c7d7@gmail.com>
+Date: Wed, 21 Apr 2021 08:24:39 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20210421111839.nkrxhzsh7ldst3a4@jama>
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-It was accidentally dropped in last upgrade for this recipe
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Cc: Naveen Saini <naveen.kumar.saini@intel.com>
----
- meta-oe/recipes-support/tbb/tbb_2021.2.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
-index b05a59dc70..7e57ebf555 100644
---- a/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
-+++ b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
-@@ -9,6 +9,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=86d3f3a95c324c9479bd8986968f4327"
- 
- DEPENDS_append_libc-musl = " libucontext"
- 
-+PE = "1"
-+
- BRANCH = "onetbb_2021"
- SRCREV = "2dba2072869a189b9fdab3ffa431d3ea49059a19"
- SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
--- 
-2.31.1
+On 4/21/21 4:18 AM, Martin Jansa wrote:
+> On Thu, Apr 08, 2021 at 06:51:17AM +0000, Naveen Saini wrote:
+>>>> On Tue, Apr 6, 2021 at 11:10 PM Naveen Saini
+>>>> <naveen.kumar.saini@intel.com> wrote:
+>>>>>
+>>>>> Switched to cmake build tool.
+>>>>>
+>>>>> Rebased some patches due to directory re-structuring.
+>>>>> Dropped patches, which are not required anymore.
+>>>>>
+>>>>> Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+>>>>> rename from meta-oe/recipes-support/tbb/tbb_2020.3.bb
+>>>>> rename to meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+>>>>> index 8e0094b31..357fbba34 100644
+>>>>> --- a/meta-oe/recipes-support/tbb/tbb_2020.3.bb
+>>>>> +++ b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+>>>>> @@ -5,37 +5,24 @@ DESCRIPTION = "Parallelism library for C++ - runtime
+>>> files \
+>>>>>       and threading mechanism for performance and scalability."
+>>>>>   HOMEPAGE = "https://software.intel.com/en-us/tbb"
+>>>>>   LICENSE = "Apache-2.0"
+>>>>> -LIC_FILES_CHKSUM =
+>>> "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+>>>>> -BRANCH = "tbb_2020"
+>>>>> -SRCREV = "eca91f16d7490a8abfdee652dadf457ec820cc37"
+>>>>> +LIC_FILES_CHKSUM =
+>>> "file://LICENSE.txt;md5=86d3f3a95c324c9479bd8986968f4327"
+>>>>> +BRANCH = "onetbb_2021"
+>>>>> +SRCREV = "2dba2072869a189b9fdab3ffa431d3ea49059a19"
+>>>>>   SRC_URI = "git://github.com/oneapi-
+>>> src/oneTBB.git;protocol=https;branch=${BRANCH} \
+>>>>> -           file://cross-compile.patch \
+>>>>> -           file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
+>>>>> -           file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
+>>>>> -           file://tbb.pc \
+>>>>> -           file://improve-reproducibility.patch \
+>>>>> +            file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
+>>>>> +            file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
+>>>>>   "
+>>>>>
+>>>>>   S = "${WORKDIR}/git"
+>>>>> -PE = "1"
+> 
+> Why did you drop PE? Please send follow-up patch to restore it to fix:
+> 
 
+
+right. Since its a simple change, I have sent the patch to restore it
+
+> ERROR: tbb-2021.2.0-r0 do_packagedata: QA Issue: Package version for package tbb-dbg went backwards which would break package feeds (from 1:2020.3-r0 to 0:2021.2.0-r0) [version-going-backwards]
+> ERROR: tbb-2021.2.0-r0 do_packagedata: QA Issue: Package version for package tbb-dev went backwards which would break package feeds (from 1:2020.3-r0 to 0:2021.2.0-r0) [version-going-backwards]
+> ERROR: tbb-2021.2.0-r0 do_packagedata: QA Issue: Package version for package tbb-doc went backwards which would break package feeds (from 1:2020.3-r0 to 0:2021.2.0-r0) [version-going-backwards]
+> ERROR: tbb-2021.2.0-r0 do_packagedata: QA Issue: Package version for package tbb-locale went backwards which would break package feeds (from 1:2020.3-r0 to 0:2021.2.0-r0) [version-going-backwards]
+> ERROR: tbb-2021.2.0-r0 do_packagedata: QA Issue: Package version for package tbb-src went backwards which would break package feeds (from 1:2020.3-r0 to 0:2021.2.0-r0) [version-going-backwards]
+> ERROR: tbb-2021.2.0-r0 do_packagedata: QA Issue: Package version for package tbb-staticdev went backwards which would break package feeds (from 1:2020.3-r0 to 0:2021.2.0-r0) [version-going-backwards]
+> ERROR: tbb-2021.2.0-r0 do_packagedata: QA Issue: Package version for package tbb went backwards which would break package feeds (from 1:2020.3-r0 to 0:2021.2.0-r0) [version-going-backwards]
+> 
+> Regards,
+> 
