@@ -1,138 +1,74 @@
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
- by mx.groups.io with SMTP id smtpd.web12.615.1619110701880634775
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
+ by mx.groups.io with SMTP id smtpd.web12.731.1619111162673755574
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Apr 2021 09:58:21 -0700
+ Thu, 22 Apr 2021 10:06:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=kljogxCb;
- spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f181.google.com with SMTP id s22so12159738pgk.6
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Apr 2021 09:58:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=k9UXHM2n;
+ spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f182.google.com with SMTP id m11so32156852pfc.11
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Apr 2021 10:06:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:references:from:autocrypt:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=PcqR1wDnNn41rOoSWIL5RcfafIOR2uWYC8oPM+6OM7o=;
-        b=kljogxCbxVFwRS7UeTiirW6LUekFdb+EZJ1vIUO9pvx8LeBgoVuCspWBt22sLdbHD6
-         5g691PYfiiKihe57n/sgEGdwR2RT2GtxTa3RfPfnFrPiGo3u3/OXSktzkhuTH4vef2V6
-         FFczIPnjoaTNHw4m+Lrl75a95OUtMzmr7/gcUGb32MPhuBoVfEtBcILGdhNty5XwuJgR
-         UR83glU5BKUF349U1LwJ1KjUkCrYU4413xIyMTS2IZbiML98O4ustZ3XGB/OwJVCLWE+
-         VTzyV3dNCiQ9+m3yVm9Ki5rMK7oZWomrmEdJQblw3tRksjTcPaghhlM8NjaAKXWy9g92
-         i2Lw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=NS29NSAlPb0jsD9yM00ILGP0XaiK5MvoD3XY+YZ6LV4=;
+        b=k9UXHM2n28E8v6+cQO/BFiXjOQfSiZRGT19TbPYUfngM2fy2kKByz8MSA76Gxk44KX
+         677lgHxMDbCM9ixXI4zyXAf8ia5l3flwTdndqQxsNSL334qVKwmKpJoiZEXEpPMjBG7S
+         BN164ay43ri6H8MjDmB9V33fcYKHiXG//cB1J780zSLUo/5SVV//53pXi9BXu/wYf4Jy
+         N2hE7RaY8r93Ff4RM4gkqbOpK0ozNQgkyQKl8+5G2B1gR3MxB2BVGJgzCxdMMXgXnqXz
+         +Avo6pozLC1c++97g1qzYLQL5Woz3e8vGL2ZdPyJ/vKE19X8YX7mOH3eO27yH0gTJX9L
+         xQ8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
-         :date:user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=PcqR1wDnNn41rOoSWIL5RcfafIOR2uWYC8oPM+6OM7o=;
-        b=ZMHzWdIszifg9MmROxMalq5B23YK2QaUFmWMaCJtRWkZYrtYZVrBoN9PK8lhSSgmuH
-         Pdx4V9XSoEyUUy2bztpExmqeBwt8LK7rySHrGvTR/FqD8GQjBrBAGvx608fU4tTZunNy
-         u9OZFrwQVVhs7AMlZtd7xcG3GM47ZCEhEuxEI0+eNy2O81S9OqFij8rOaZ6Mz01oN8JU
-         9LFJoojDpHjTiHsDVupytz1gdI76GWWoUYQvFO/Z7V7TZpd61Rl16AR6GklWRvbcPrnE
-         0QY8GdIfv+QsfSClgtIZMFpnk+Qo7PWxCUuCdPUGFHqGrydpDyiEge2y9usULsP5YHwM
-         RxWg==
-X-Gm-Message-State: AOAM530ooZj0S8yObi2aG+nCBNlMo7Dpg/8KN/w8zSMCQoEmwz2TZmoo
-	Qr5G5MBA1ZAsKmeX0H779BtlAzJbzN7Gng==
-X-Google-Smtp-Source: ABdhPJxao6hVi/MnsfGDouThGo/WypT/gWhGHeYXGx7xkSkyub5P8aFAPVulnr1MW/qCEFTi92Notw==
-X-Received: by 2002:a63:f801:: with SMTP id n1mr4451262pgh.231.1619110701067;
-        Thu, 22 Apr 2021 09:58:21 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0:e183:e120:a0a1:83e4? ([2601:202:4180:a5c0:e183:e120:a0a1:83e4])
-        by smtp.gmail.com with ESMTPSA id n48sm2531445pfv.130.2021.04.22.09.58.15
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 22 Apr 2021 09:58:20 -0700 (PDT)
-Subject: Re: [oe] [meta-oe] [PATCH] nss: upgrade 3.63 -> 3.64
-To: zangrc <zangrc.fnst@fujitsu.com>,
- openembedded-devel@lists.openembedded.org
-References: <1619114328-5000-1-git-send-email-zangrc.fnst@fujitsu.com>
-From: "Armin Kuster" <akuster808@gmail.com>
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
- 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
- 8CS2NxU=
-Message-ID: <af4556d5-19ec-43b3-b820-390eed87db66@gmail.com>
-Date: Thu, 22 Apr 2021 09:58:13 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=NS29NSAlPb0jsD9yM00ILGP0XaiK5MvoD3XY+YZ6LV4=;
+        b=Lw9jb/5ekqBMYb3fg/KRFHrswz2sbeM5OafZr2QyUrkgCBxiZButntiy/1dZBvvASj
+         2fpFUbmjPknNq0Gca+1BM8HoWz6gqpyBLlz7lZu3tdu/SL4INNQYcmb0qPAKu3y4MeDW
+         A0jT0so013wo9cv3EWYNr+o+O1f6QCPdY8NF+UKxMfsZCqpYLwWM/vsHVQarVw0O+AYj
+         B1ytJD+RZg0XT9YGKx/Ezkb6TatCemDrQ+84OrExqGulV/BYyghapl8KNdaZHNdBBQZt
+         DMoQ+7sZz0kfeAEgEJ1G0HpiwCMl7qm1ZbWr5bGUyOQise64YOFZ/yKJzAvFPj1QCu2r
+         6AcQ==
+X-Gm-Message-State: AOAM53012704jAZrilxxbjmX2IgwlusFQ89HDFy0duFe9uQrz6gcvRii
+	D71olWIbrTt/3X8HQ5GhVkHxyXANb7q49Q==
+X-Google-Smtp-Source: ABdhPJy5vjbJyZTjGpwSANtjX3IA591+faZIc2+b3vr5w1IScVeIwC29EZ5FLX+alPCAMs8Ia2PqbQ==
+X-Received: by 2002:a63:df09:: with SMTP id u9mr4372245pgg.112.1619111161898;
+        Thu, 22 Apr 2021 10:06:01 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::bc1b])
+        by smtp.gmail.com with ESMTPSA id d5sm2948370pgj.36.2021.04.22.10.06.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 22 Apr 2021 10:06:01 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH] gimp: Disable vector icons on musl/x86
+Date: Thu, 22 Apr 2021 10:05:59 -0700
+Message-Id: <20210422170559.1139028-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-In-Reply-To: <1619114328-5000-1-git-send-email-zangrc.fnst@fujitsu.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
+it uses qemu underneath which segfaults on musl/x86
+until its fixed, we disable vector icons
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-On 4/22/21 10:58 AM, zangrc wrote:
-> Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
-> ---
->  meta-oe/recipes-support/nss/{nss_3.63.bb => nss_3.64.bb} | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-oe/recipes-support/nss/{nss_3.63.bb => nss_3.64.bb} (99%)
-
-I think the LICENSE needs to be updated to include 'MIT'
-
-this update includes new files that contain that license.
-
-see:
-https://github.com/nss-dev/nss/blob/NSS_3_64_BRANCH/lib/freebl/ecl/ecp_secp384r1.c
-
-- armin
->
-> diff --git a/meta-oe/recipes-support/nss/nss_3.63.bb b/meta-oe/recipes-support/nss/nss_3.64.bb
-> similarity index 99%
-> rename from meta-oe/recipes-support/nss/nss_3.63.bb
-> rename to meta-oe/recipes-support/nss/nss_3.64.bb
-> index b7192a46d1..ff90d2caf9 100644
-> --- a/meta-oe/recipes-support/nss/nss_3.63.bb
-> +++ b/meta-oe/recipes-support/nss/nss_3.64.bb
-> @@ -32,7 +32,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
->             file://nss-fix-nsinstall-build.patch \
->             file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
->             "
-> -SRC_URI[sha256sum] = "182d2fef629102ae9423aabf2c192242b565cf5098e82c5a26cf70c5e4ea2221"
-> +SRC_URI[sha256sum] = "d3175427172e9c3a6f1ebc74452cb791590f28191c6a1a443dbc0d87c9df1126"
->  
->  UPSTREAM_CHECK_URI = "https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS/NSS_Releases"
->  UPSTREAM_CHECK_REGEX = "NSS_(?P<pver>.+)_release_notes"
->
-> 
->
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb b/meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb
+index a5e6990580..717716e1f9 100644
+--- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb
++++ b/meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb
+@@ -55,6 +55,7 @@ EXTRA_OECONF = "--disable-python \
+ 
+ EXTRA_OECONF_append_mipsarch = " --disable-vector-icons"
+ EXTRA_OECONF_append_libc-musl_riscv32 = " --disable-vector-icons"
++EXTRA_OECONF_append_libc-musl_x86 = " --disable-vector-icons"
+ EXTRA_OECONF_append_arm = " --disable-vector-icons"
+ 
+ do_configure_append() {
+-- 
+2.31.1
 
