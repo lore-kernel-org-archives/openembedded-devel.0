@@ -1,59 +1,60 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.3])
- by mx.groups.io with SMTP id smtpd.web09.8394.1619071069993450911
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.2])
+ by mx.groups.io with SMTP id smtpd.web11.8451.1619071129911865816
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Apr 2021 22:57:50 -0700
+ Wed, 21 Apr 2021 22:58:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=TBroaUpy;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.3, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=B9HlKPSa;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1619071067; i=@fujitsu.com;
-	bh=tmdmk49uuRfH5saafhFuevSKyuMX0JTZNOHBYI635Ys=;
+	s=170520fj; t=1619071118; i=@fujitsu.com;
+	bh=eUnbNhZQVVuIVe46bm39uU6WDxzpC8+DVRhVl7SKEl4=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=TBroaUpybfxB5HjWsJ72EqWHw1MiYN3Rrs+NFHIzftwWyLfFworW7ve/FZvSEw+wM
-	 6SYOHIsDQ/9JCzLAU5HAYh4QlWtjQ9rNrTvpwj5r5Dbt/gSd6jK9JmkN7wIWGGMm1i
-	 BqyapEKmHEuOABbXo0m/Kcq52LqoAkQ9glytz8lOYV2qEEWALbx1YmeXzreW0TiVCh
-	 21hDZbseFDljnvF/6Z9+LWg4HzdQe6De97uGcLGhtKOuOvSXFIIy++VvpErT/9udBg
-	 Ms9DuFLgkw8hOzzS+dndkjDr1rNTdAV5Yg91AZ66Sv+8Lu05hB7BhZkFsW6CJ40vDX
-	 H0wy7csh3FNXA==
-Received: from [100.113.3.92] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-a.eu-central-1.aws.symcld.net id AF/D7-41911-B5011806; Thu, 22 Apr 2021 05:57:47 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+GYohsl0Jh
-  gMOW0jcXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvHilUVBD1fFhzUr2RoYN3B2MXJxCAnMZpL4
-  dX4hK4RznFFixZ0/bF2MnBxsAjoSHS+6WUBsEQF9iaWz9zCD2MICThKHNneA2SwCqhJzv60Hq
-  +EVcJO43PeIHcSWEFCQmPLwPTNEXFDi5MwnYDXMAhISB1+8YIaoUZTYvvMMC4RdKbF92lnGCY
-  w8s5C0zELSsoCRaRWjZVJRZnpGSW5iZo6uoYGBrqGhsS6QNDbQS6zSTdRLLdVNTs0rKUoEyuo
-  llhfrFVfmJuek6OWllmxiBAZSSiFD0w7Gd68+6B1ilORgUhLlXcjXmCDEl5SfUpmRWJwRX1Sa
-  k1p8iFGGg0NJgvcISE6wKDU9tSItMwcY1DBpCQ4eJRHe37xAad7igsTc4sx0iNQpRkUpcd6dI
-  H0CIImM0jy4NlgkXWKUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzHsWZApPZl4J3PRXQIuZgB
-  ZrT6kFWVySiJCSamCKzpB9HNomVuKiWCxbzvBxrczn/gnRZZf9o7XcLB71v5dSqf7p8MFqSaP
-  8utvv9pyq8nd49GeJlenF6yz5Phzfdf9lOidHa8Ru0Q2d9fXoPJuOaelcNxnzWn2ObZux+pLj
-  oa7cN2ULrI6eWP1qf9ahqyvd2QLdcq3Z30wWdj3/8s/frTdEbuTX899hFHV5+d/6lYeBeMy3W
-  9KXj39c+n/ru4Xvi6Wv31JTajVZ7XSrRe/tZxvLe1s+SrxoezfdrEvhap52Y2Cc8wnrM7Un+f
-  jbm9QWVVzf1Pk8XmHuB+7Jc/VjctSXMvpcLHiuf0t7lcdSE6uIZ01q28tT9aqyvOqVn2QWGTc
-  J/e3gOuW57q4SS3FGoqEWc1FxIgCBSECsHwMAAA==
+	b=B9HlKPSaBeQdKavomqjW7yNB+ErhO3ZN9EcUj/fvANMFaU6cq794I8ceubY9u+Q4S
+	 7Vgs1fqs3u3am4e2Oae/DaROCcu/UjKZdjO4aC0ljasSIppV5/kjgco3D8CH9NKsme
+	 SHfD0sosp1hWi6rqf3qva+7+ZzDuvu9sJxoweIvjF6N52bI/Ms2XOCutXp8GbXA7Uy
+	 aRONtHO4Yy8Q/nUuaCTz6O7BT+gGN/QNjJuMRae2haUPkXwBAwsxHKRBDwdZb94ouQ
+	 xzZYbhxI+ZDf2I7aR+NzEiLNDIVrke0iMXjFxa3xwC9hF2BXJRzHFosiCpAj5AYHHE
+	 8enVTZ/bcD4Og==
+Received: from [100.112.192.143] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-a.eu-west-1.aws.symcld.net id 60/77-53635-E8011806; Thu, 22 Apr 2021 05:58:38 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrEIsWRWlGSWpSXmKPExsViZ8MRotsn0Jh
+  g0DiNxeLi4aXMDowe5zauYAxgjGLNzEvKr0hgzbi1dS9rwX6uihv/V7M2MN7j7GLk4hASmM0k
+  0TH1JBuEc5xR4s+vbUAOJwebgI5Ex4tuFhBbREBfYunsPcwgtrCAq8Seqa+YQGwWAVWJQzO3M
+  YLYvAJuEke294DVSwgoSEx5+J4ZIi4ocXLmE7A4s4CExMEXL5ghahQltu88A1VfKbF92lnGCY
+  w8s5C0zELSsoCRaRWjRVJRZnpGSW5iZo6uoYGBrqGhka6hJRCbmOglVukm6qWW6panFpfoGuo
+  llhfrFVfmJuek6OWllmxiBAZSSsGBCTsY97/+oHeIUZKDSUmUdyFfY4IQX1J+SmVGYnFGfFFp
+  TmrxIUYZDg4lCd4jIDnBotT01Iq0zBxgUMOkJTh4lER4f/MCpXmLCxJzizPTIVKnGMM53qxds
+  oiZ4y2YbLt3F0i2g8mZCw6uZuaYBSbvtx8Ckg9ApBBLXn5eqpQ4706QbQIg4zJK8+CWwaL2Eq
+  OslDAvIwMDgxBPQWpRbmYJqvwrRnEORiVh3rMgU3gy80rgbnoFdC4T0LnaU2pBzi1JREhJNTD
+  Vpf9Uvux4JtaBpe9UH3+s/87ypjl2JknyYrlrP56eX/x3fkrkamsOo6jkyzV5d3dtmjL7cOHn
+  8LogkeKm3jmeL2y9NB+fTKvas+DTwbWvPzDMkbSfnfo9TMTU+tE0uXzbQ23Oej1sZy4YLngvV
+  rCdrfyAQUxG7uSApsQmUWYZRi+96OzlD6U2Ovbu4urlVpWaF7Ri0fWkaSu7VCftZmxRqN0Wa6
+  vKkWOWMNG/pvF9xZrKaY8OZ8z8PH9T98EH21jPt8l+t/vVetL8jNija9lhIRuPGDHse8W24kb
+  rju3Ob/6w+jNOSPD73cB/tk7of5nxwSv8l7qrBK238M24+cdDksFWqelHc80TFok5rEosxRmJ
+  hlrMRcWJAOOrU7VVAwAA
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-9.tower-226.messagelabs.com!1619071066!77030!1
-X-Originating-IP: [62.60.8.148]
+X-Msg-Ref: server-10.tower-265.messagelabs.com!1619071117!271940!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
-X-StarScan-Version: 9.60.3; banners=-,-,-
+X-StarScan-Version: 9.75.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 31389 invoked from network); 22 Apr 2021 05:57:46 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-9.tower-226.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 22 Apr 2021 05:57:46 -0000
+Received: (qmail 2296 invoked from network); 22 Apr 2021 05:58:38 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-10.tower-265.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 22 Apr 2021 05:58:38 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 13M5vknx015951
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 13M5wb6g032448
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 22 Apr 2021 06:57:46 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 22 Apr 2021 06:58:37 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 22 Apr 2021 06:57:44 +0100
+ (TLS) id 15.0.1497.2; Thu, 22 Apr 2021 06:58:36 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] libdvdread: upgrade 6.1.1 -> 6.1.2
-Date: Fri, 23 Apr 2021 01:57:37 +0800
-Message-ID: <1619114257-4875-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libwebsockets: upgrade 4.1.6 -> 4.2.0
+Date: Fri, 23 Apr 2021 01:58:29 +0800
+Message-ID: <1619114309-4929-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -63,28 +64,28 @@ Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../libdvdread/{libdvdread_6.1.1.bb => libdvdread_6.1.2.bb}   | 4 ++--
+ .../{libwebsockets_4.1.6.bb => libwebsockets_4.2.0.bb}        | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-multimedia/libdvdread/{libdvdread_6.1.1.bb => libdvdread_6.1.2.bb} (71%)
+ rename meta-oe/recipes-connectivity/libwebsockets/{libwebsockets_4.1.6.bb => libwebsockets_4.2.0.bb} (96%)
 
-diff --git a/meta-oe/recipes-multimedia/libdvdread/libdvdread_6.1.1.bb b/meta-oe/recipes-multimedia/libdvdread/libdvdread_6.1.2.bb
-similarity index 71%
-rename from meta-oe/recipes-multimedia/libdvdread/libdvdread_6.1.1.bb
-rename to meta-oe/recipes-multimedia/libdvdread/libdvdread_6.1.2.bb
-index 65f5b6adf4..ed7443dfd4 100644
---- a/meta-oe/recipes-multimedia/libdvdread/libdvdread_6.1.1.bb
-+++ b/meta-oe/recipes-multimedia/libdvdread/libdvdread_6.1.2.bb
-@@ -4,8 +4,8 @@ LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=64e753fa7d1ca31632bc383da3b57c27"
+diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.1.6.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.0.bb
+similarity index 96%
+rename from meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.1.6.bb
+rename to meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.0.bb
+index 6a3eb917f0..89c98fec02 100644
+--- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.1.6.bb
++++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.0.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8c47b078124308a4e1354e8d59f606b7"
+ DEPENDS = "zlib"
  
- SRC_URI = "http://download.videolan.org/pub/videolan/libdvdread/${PV}/libdvdread-${PV}.tar.bz2"
--SRC_URI[md5sum] = "09c7423568fb679279fd2a2bc6b10b6e"
--SRC_URI[sha256sum] = "3e357309a17c5be3731385b9eabda6b7e3fa010f46022a06f104553bf8e21796"
-+SRC_URI[md5sum] = "034581479968405ed415c34a50d00224"
-+SRC_URI[sha256sum] = "cc190f553758ced7571859e301f802cb4821f164d02bfacfd320c14a4e0da763"
+ S = "${WORKDIR}/git"
+-SRCREV = "736f0739ed8c75db0e29c7678b5a9194e957c347"
+-SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.1-stable"
++SRCREV = "1367c11e1ee44d9e19daa50e1d015365bae17354"
++SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.2-stable"
  
- inherit autotools lib_package binconfig pkgconfig
- 
+ UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 -- 
 2.25.1
 
