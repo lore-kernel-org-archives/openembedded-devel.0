@@ -1,218 +1,133 @@
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web10.12363.1619098416185220587
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web09.12333.1619098417078244426
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Apr 2021 06:33:36 -0700
+ Thu, 22 Apr 2021 06:33:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=l1GApBqj;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id y1so7889841plg.11
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Apr 2021 06:33:36 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=NQ45k1Se;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id y62so467953pfg.4
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Apr 2021 06:33:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=Wup6rkEFk9icxiQbpHTlsPwhMRX0gLAptruufliWm0M=;
-        b=l1GApBqjtD6zBOWG/NEHqIaDZFiIQVInbtfODbvu/fsIJsupvmlW4F3PknFZ2lruVI
-         4dH/wZuOzQXcUb1tVyqeq/zWWNtP5wn1GmRZkPddri2vS8QrpC9M5QkkelUYQqrO4+T5
-         H7sX+DUz9p/Dp5RVGo0a/K0Yk8pRUfmeWv4NmyGST1zp0pw7jRgLHZryY02rYJklMiSI
-         j0+ys2QLX+wWAHoQkO2Yo+yZRl7/ZnXQgyd+JvWXVK3uCMRHWIOdkIDpg4Oyh9IfHbf6
-         ztmmxLpuNqzwyPWKCRXcIRbRczq1oLYBLehfYaggGembYGex5g4lgCT8LFvPiq8QcEgB
-         QILQ==
+        bh=H6dxDIpjjtHGKSFTHBgMxg7/XvLrPYgravHl3jVH7bU=;
+        b=NQ45k1SeFzLzHC8jTfcQlulAMDT65I0u7Xu4n5vwbhYzvNYPOYJ/gnQO+0Y+BLjl1k
+         n7SzWL1HWip/5ETU8Bs7idlmKJFoA1AsT6qPXkGmY7c89z569N7yDGIQnuFRj+Igb1PJ
+         LcTSf4weAopmpwZva7FVGuCWRqYr+ORHm4dvY73ohTtT8D3FHyZ6CyiwMuX/u1VrQ5uT
+         9tVSAtcYDI22MnGXQtP61K856ZhNQ/Ftj8kGY/0cKlNQ5yyGpNeS0AKKtY8zqVLa6lFm
+         8TXzh5+IruF/m78z5mqTuqcK126kGFKAWcMuU6UrOluA2O2+Czk5UzxhYpM8TIa8Z/dx
+         O5Ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=Wup6rkEFk9icxiQbpHTlsPwhMRX0gLAptruufliWm0M=;
-        b=Shfoa5OrbGzz/1wtmu7wLC8zVB33RmPrKyL31RK77wnC3BP7h++joZmOlpLeOFtiML
-         SWebVfRYeq6n6NHZIQ7Uk5SZ5aUcKaoSVZdF2U6vLYykLClV4/wkjTcHVh1Cfs38QS3j
-         99P+LagBkhVU090P33tRvrZYysyONJMziMPQyg8xzZnX5D/QeNE/KLDY+jbiwd71JdXE
-         m6xNBHb7t7fm0SlFJ7DNtGyrogkSDVBxByXSPeU8XF1hPOVwbfPBiSgOCIsEvRkuNOTf
-         lrKACNJY4bsDKI2F1Vd5IJvaRoCvbZK4et5J60g4IfjfL+uO+50wZAVbm2rEKNFcRkA7
-         s46A==
-X-Gm-Message-State: AOAM530NMe6qYQmTJgzRCHt8SYH/gbezkKvpQMPy9n94AzIHtDldjgi5
-	pD4ePFApoFsS1aoht0u1BDhImJzUi07t7A==
-X-Google-Smtp-Source: ABdhPJyXEhQtaaAotUxaf7+ILgIX+6DTBDOeYyNLiIHFT3yOx+RCeuaLGwu+BwEUZgP7jQM3vcEnGQ==
-X-Received: by 2002:a17:90a:66cb:: with SMTP id z11mr4156829pjl.15.1619098415396;
-        Thu, 22 Apr 2021 06:33:35 -0700 (PDT)
+        bh=H6dxDIpjjtHGKSFTHBgMxg7/XvLrPYgravHl3jVH7bU=;
+        b=mA6ET/XDoP6Vjd+udnAvoAF53LfPadKLYywlSAjCHrryr5S8BBL8W3GHmPRBMThj06
+         qw/a59cIa2ZeHY4dMuZ2JFfkpiCj/kjZ4rSHhNUhMmaHm032fpZDeNPSrlhaNo0bC3zz
+         WYHXlZEuxCbmmcw3uZFUiqvD+BinLNMEQJNiPJvbqXoWM+Mnkl9jWWZEP9VYjeqclk8b
+         rh/Vaxc3UqEIZ/hLf5irTH8vDQjRAQSsDtfTC8/ydYa/wl2h08fOtQdvS6PcFZBbZTUX
+         I0pTaQXFYvOCsSrZlPtIBBWNn0jIakgCaVrJETSKvd1YULeA8MI2j305cdb43bH7cpzB
+         pOZA==
+X-Gm-Message-State: AOAM532YjvvsiSWT3VAEuzQcMbnCGlb0kTVaMJNBKH/qZ2/CyuezspJ4
+	MosVkpuVn+94GgCj+4qrBKqnikq+fFhwtA==
+X-Google-Smtp-Source: ABdhPJywKiDSotiIt+FJzw6hJkCc6Js4aDiwZHYZ5atYt0FkbDAQ+IoVSVJUGGS3ch9X+QPcKWFfVg==
+X-Received: by 2002:a63:dc49:: with SMTP id f9mr3520293pgj.361.1619098416274;
+        Thu, 22 Apr 2021 06:33:36 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:e183:e120:a0a1:83e4])
-        by smtp.gmail.com with ESMTPSA id gd1sm2376182pjb.49.2021.04.22.06.33.34
+        by smtp.gmail.com with ESMTPSA id gd1sm2376182pjb.49.2021.04.22.06.33.35
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Apr 2021 06:33:34 -0700 (PDT)
+        Thu, 22 Apr 2021 06:33:35 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 1/4] hostapd: fix CVE-2021-30004
-Date: Thu, 22 Apr 2021 06:33:17 -0700
-Message-Id: <730de4763a508234d09c755c838cdc4c8dd49493.1619098298.git.akuster808@gmail.com>
+Subject: [gatesgarth 2/4] mariadb: Fix build on musl/ppc
+Date: Thu, 22 Apr 2021 06:33:18 -0700
+Message-Id: <a21c185df98e47599a53e3e2f66598e6d52f0075.1619098298.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1619098298.git.akuster808@gmail.com>
 References: <cover.1619098298.git.akuster808@gmail.com>
 
-From: Stefan Ghinea <stefan.ghinea@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-In wpa_supplicant and hostapd 2.9, forging attacks may occur because
-AlgorithmIdentifier parameters are mishandled in tls/pkcs1.c and
-tls/x509v3.c.
-
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2021-30004
-
-Upstream patches:
-https://w1.fi/cgit/hostap/commit/?id=a0541334a6394f8237a4393b7372693cd7e96f15
-
-Signed-off-by: Stefan Ghinea <stefan.ghinea@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e2bd6a52bf689b77b237eaee3067d2b0b6eee3d5)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
-(cherry picked from commit 98c5cddf677addcb9aa296a7437b92100a478566)
+(cherry picked from commit e68935ce287e2b0abd819180ebd86364c853d055)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../hostapd/hostapd/CVE-2021-30004.patch      | 123 ++++++++++++++++++
- .../hostapd/hostapd_2.9.bb                    |   1 +
- 2 files changed, 124 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2021-30004.patch
+ meta-oe/recipes-dbs/mysql/mariadb.inc         |  2 +
+ .../mysql/mariadb/ppc-remove-glibc-dep.patch  | 50 +++++++++++++++++++
+ 2 files changed, 52 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
 
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2021-30004.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2021-30004.patch
-new file mode 100644
-index 0000000000..e2540fc26b
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2021-30004.patch
-@@ -0,0 +1,123 @@
-+From a0541334a6394f8237a4393b7372693cd7e96f15 Mon Sep 17 00:00:00 2001
-+From: Jouni Malinen <j@w1.fi>
-+Date: Sat, 13 Mar 2021 18:19:31 +0200
-+Subject: [PATCH] ASN.1: Validate DigestAlgorithmIdentifier parameters
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 27eede6c30..1fbcb71427 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -22,6 +22,8 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
+            file://0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch \
+            file://0001-stacktrace-t.c-make-the-test-conditional.patch \
+           "
++SRC_URI_append_libc-musl = " file://ppc-remove-glibc-dep.patch"
 +
-+The supported hash algorithms do not use AlgorithmIdentifier parameters.
-+However, there are implementations that include NULL parameters in
-+addition to ones that omit the parameters. Previous implementation did
-+not check the parameters value at all which supported both these cases,
-+but did not reject any other unexpected information.
-+
-+Use strict validation of digest algorithm parameters and reject any
-+unexpected value when validating a signature. This is needed to prevent
-+potential forging attacks.
-+
-+Signed-off-by: Jouni Malinen <j@w1.fi>
-+
-+Upstream-Status: Backport
-+CVE: CVE-2021-30004
-+
-+Reference to upstream patch:
-+[https://w1.fi/cgit/hostap/commit/?id=a0541334a6394f8237a4393b7372693cd7e96f15]
-+
-+Signed-off-by: Stefan Ghinea <stefan.ghinea@windriver.com>
-+---
-+ src/tls/pkcs1.c  | 21 +++++++++++++++++++++
-+ src/tls/x509v3.c | 20 ++++++++++++++++++++
-+ 2 files changed, 41 insertions(+)
-+
-+diff --git a/src/tls/pkcs1.c b/src/tls/pkcs1.c
-+index 141ac50..e09db07 100644
-+--- a/src/tls/pkcs1.c
-++++ b/src/tls/pkcs1.c
-+@@ -240,6 +240,8 @@ int pkcs1_v15_sig_ver(struct crypto_public_key *pk,
-+ 		os_free(decrypted);
-+ 		return -1;
-+ 	}
-++	wpa_hexdump(MSG_MSGDUMP, "PKCS #1: DigestInfo",
-++		    hdr.payload, hdr.length);
-+ 
-+ 	pos = hdr.payload;
-+ 	end = pos + hdr.length;
-+@@ -261,6 +263,8 @@ int pkcs1_v15_sig_ver(struct crypto_public_key *pk,
-+ 		os_free(decrypted);
-+ 		return -1;
-+ 	}
-++	wpa_hexdump(MSG_MSGDUMP, "PKCS #1: DigestAlgorithmIdentifier",
-++		    hdr.payload, hdr.length);
-+ 	da_end = hdr.payload + hdr.length;
-+ 
-+ 	if (asn1_get_oid(hdr.payload, hdr.length, &oid, &next)) {
-+@@ -269,6 +273,23 @@ int pkcs1_v15_sig_ver(struct crypto_public_key *pk,
-+ 		os_free(decrypted);
-+ 		return -1;
-+ 	}
-++	wpa_hexdump(MSG_MSGDUMP, "PKCS #1: Digest algorithm parameters",
-++		    next, da_end - next);
-++
-++	/*
-++	 * RFC 5754: The correct encoding for the SHA2 algorithms would be to
-++	 * omit the parameters, but there are implementation that encode these
-++	 * as a NULL element. Allow these two cases and reject anything else.
-++	 */
-++	if (da_end > next &&
-++	    (asn1_get_next(next, da_end - next, &hdr) < 0 ||
-++	     !asn1_is_null(&hdr) ||
-++	     hdr.payload + hdr.length != da_end)) {
-++		wpa_printf(MSG_DEBUG,
-++			   "PKCS #1: Unexpected digest algorithm parameters");
-++		os_free(decrypted);
-++		return -1;
-++	}
-+ 
-+ 	if (!asn1_oid_equal(&oid, hash_alg)) {
-+ 		char txt[100], txt2[100];
-+diff --git a/src/tls/x509v3.c b/src/tls/x509v3.c
-+index 1bd5aa0..bf2289f 100644
-+--- a/src/tls/x509v3.c
-++++ b/src/tls/x509v3.c
-+@@ -1834,6 +1834,7 @@ int x509_check_signature(struct x509_certificate *issuer,
-+ 		os_free(data);
-+ 		return -1;
-+ 	}
-++	wpa_hexdump(MSG_MSGDUMP, "X509: DigestInfo", hdr.payload, hdr.length);
-+ 
-+ 	pos = hdr.payload;
-+ 	end = pos + hdr.length;
-+@@ -1855,6 +1856,8 @@ int x509_check_signature(struct x509_certificate *issuer,
-+ 		os_free(data);
-+ 		return -1;
-+ 	}
-++	wpa_hexdump(MSG_MSGDUMP, "X509: DigestAlgorithmIdentifier",
-++		    hdr.payload, hdr.length);
-+ 	da_end = hdr.payload + hdr.length;
-+ 
-+ 	if (asn1_get_oid(hdr.payload, hdr.length, &oid, &next)) {
-+@@ -1862,6 +1865,23 @@ int x509_check_signature(struct x509_certificate *issuer,
-+ 		os_free(data);
-+ 		return -1;
-+ 	}
-++	wpa_hexdump(MSG_MSGDUMP, "X509: Digest algorithm parameters",
-++		    next, da_end - next);
-++
-++	/*
-++	 * RFC 5754: The correct encoding for the SHA2 algorithms would be to
-++	 * omit the parameters, but there are implementation that encode these
-++	 * as a NULL element. Allow these two cases and reject anything else.
-++	 */
-++	if (da_end > next &&
-++	    (asn1_get_next(next, da_end - next, &hdr) < 0 ||
-++	     !asn1_is_null(&hdr) ||
-++	     hdr.payload + hdr.length != da_end)) {
-++		wpa_printf(MSG_DEBUG,
-++			   "X509: Unexpected digest algorithm parameters");
-++		os_free(data);
-++		return -1;
-++	}
-+ 
-+ 	if (x509_sha1_oid(&oid)) {
-+ 		if (signature->oid.oid[6] != 5 /* sha-1WithRSAEncryption */) {
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb
-index 87899f3da2..e586018685 100644
---- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb
-@@ -15,6 +15,7 @@ SRC_URI = " \
-     file://CVE-2019-5061.patch \
-     file://CVE-2021-0326.patch \
-     file://CVE-2021-27803.patch \
-+    file://CVE-2021-30004.patch \
- "
+ SRC_URI[sha256sum] = "eb4824f6f2c532cd3fc6a6bce7bf78ea7c6b949f8bdd07656b2c84344e757be8"
  
- SRC_URI[md5sum] = "f188fc53a495fe7af3b6d77d3c31dee8"
+ UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch b/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
+new file mode 100644
+index 0000000000..1ca86bcca2
+--- /dev/null
++++ b/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
+@@ -0,0 +1,50 @@
++Remove glibc specific function dependencies
++
++Sourced from: https://git.alpinelinux.org/aports/tree/main/mariadb/ppc-remove-glibc-dep.patch
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++--- a/include/my_cpu.h
+++++ b/include/my_cpu.h
++@@ -24,17 +24,16 @@
++ */
++ 
++ #ifdef _ARCH_PWR8
++-#include <sys/platform/ppc.h>
++ /* Very low priority */
++-#define HMT_very_low() __ppc_set_ppr_very_low()
+++#define HMT_very_low() asm volatile("or 31,31,31")
++ /* Low priority */
++-#define HMT_low() __ppc_set_ppr_low()
+++#define HMT_low() asm volatile ("or 1,1,1")
++ /* Medium low priority */
++-#define HMT_medium_low() __ppc_set_ppr_med_low()
+++#define HMT_medium_low() asm volatile ("or 6,6,6")
++ /* Medium priority */
++-#define HMT_medium() __ppc_set_ppr_med()
+++#define HMT_medium() asm volatile ("or 2,2,2")
++ /* Medium high priority */
++-#define HMT_medium_high() __ppc_set_ppr_med_high()
+++#define HMT_medium_high() asm volatile("or 5,5,5")
++ /* High priority */
++ #define HMT_high() asm volatile("or 3,3,3")
++ #else
++@@ -81,7 +80,7 @@ static inline void MY_RELAX_CPU(void)
++   __asm__ __volatile__ ("pause");
++ #endif
++ #elif defined(_ARCH_PWR8)
++-  __ppc_get_timebase();
+++  __builtin_ppc_get_timebase();
++ #elif defined __GNUC__ && (defined __arm__ || defined __aarch64__)
++   /* Mainly, prevent the compiler from optimizing away delay loops */
++   __asm__ __volatile__ ("":::"memory");
++--- a/storage/tokudb/PerconaFT/portability/toku_time.h
+++++ b/storage/tokudb/PerconaFT/portability/toku_time.h
++@@ -124,7 +124,7 @@ static inline tokutime_t toku_time_now(v
++     __asm __volatile__ ("mrs %[rt], cntvct_el0" : [rt] "=r" (result));
++     return result;
++ #elif defined(__powerpc__)
++-    return __ppc_get_timebase();
+++    return __builtin_ppc_get_timebase();
++ #else
++ #error No timer implementation for this platform
++ #endif
 -- 
 2.17.1
 
