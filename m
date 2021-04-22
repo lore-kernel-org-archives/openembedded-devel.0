@@ -1,123 +1,195 @@
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
- by mx.groups.io with SMTP id smtpd.web12.12497.1619098419158247153
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
+ by mx.groups.io with SMTP id smtpd.web08.12668.1619099555982696708
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Apr 2021 06:33:39 -0700
+ Thu, 22 Apr 2021 06:52:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=edlYUzsz;
- spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f174.google.com with SMTP id q10so32819956pgj.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Apr 2021 06:33:39 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Pih5Zsuv;
+ spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f169.google.com with SMTP id y32so32860913pga.11
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Apr 2021 06:52:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=v4pl5LMrkO2//1Ha3jNJxl8txKHJiNC1VkUI6Z4j1IA=;
-        b=edlYUzszyMbcPiN0zrGddygEKUT3/FxSPcwGMvjc4hUl6RxFjwG+WLWp18mtQzN0GZ
-         sOFRcUXSZ3nIG9dZx70I1ZPuNOx9bRMHThdWPRKm4B/2WKKUtvPg4fSQTNA5v/KUTycC
-         qG5Aesfz/1VCpvNnaVbcMkvx1c/2PI7VjNTYBECSwumO4OpiQ0fTSmHwlGbSCvbgAU6C
-         4Ahv7FH5My10BahBbEZ6wswd6h+fFDh1bc7W6jkH0Wm43dCJ81k9uHISMhxF1rMGSQBU
-         b1EyKrd8Hz23BSDtbRpLs19n/dBULR9zpIOrXb+Kb7R9Tud68+KG0rCShKfBqXR8xf/o
-         ZfVQ==
+        h=subject:to:references:from:autocrypt:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=lIxqGKNmxutl5QaYKF5uS2S5EgvE8o+X6PZlyuLDAf0=;
+        b=Pih5ZsuvQWxVfGfu7CsqOM7vig5Wks0Q78OWUnX2ns66MOPTI3ORhEg6nBGAU1iQAs
+         a1iPT4rcD/R/b3YGLENFZBV8JdhnsT34alrhSz6toRjPWJBsGo/r2r2NnohnsU8ie5VY
+         ZfDrzuj/NBhvDVeWdaxu+/XO1ASQufFPjFTNdWL60M2cY0HH3KrDSmIwRbQVUYm79YJQ
+         qkP9aqxjd6ndjJyMGeq0nxRWtRCuolAMbrnjt3S2kily9viD4SBkF92l4GjP5Vkv3poK
+         SRMftiAqOVaBUpNrrYDAUEuYVXfuYTIjVVe8HuKgVrUcJEpjSlYTfrGvzQOZNskiuvDG
+         RMRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=v4pl5LMrkO2//1Ha3jNJxl8txKHJiNC1VkUI6Z4j1IA=;
-        b=bbKaoGjB3JVrSM55ORm4W5114fEJQ/q9B36ESlYocVNkSbo49WHG3ChmaC3GuazSCq
-         odNqhiU6l/jPxET3fI1XKd1JcVUw3+o7zzvO3gfJ3H40kh8zy1DzKlnKE+YhomCNjPj0
-         VcXsaIYTjPnV+PApAt8Fougm8mX70OFOvaKEddT+lSf331yj4cXyeAc6m9lSgeULB4DD
-         y4lUxDWnDeL3ul0MdHZl+rLB93pDv+AkBIyZ8L2tIkLrocSeMgagUHU0Rq+NwNzdsNlf
-         l59Cq9mvAzk5+CWl6uoDB70r/SA/JBxeFTGhJqte/A2N1JsmSsZ8GiZqz3shC41ERJ2l
-         yTag==
-X-Gm-Message-State: AOAM533bIgzJYO3MwFbqLlWTEq06TeTMWhYQ1ol9BfNyWyXqmHgvisAH
-	vRkk9CrZMiIWUp6omyf5r0qB9xp2UkqXNg==
-X-Google-Smtp-Source: ABdhPJypqK3Yk0c6B8ECP+NsnL2/sdFO3cCjLVBLsGpTIc0/AKnKtgcIM9i5cMY3MAYJQfykVGtPYA==
-X-Received: by 2002:a63:4758:: with SMTP id w24mr3614239pgk.33.1619098418569;
-        Thu, 22 Apr 2021 06:33:38 -0700 (PDT)
+        h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
+         :date:user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=lIxqGKNmxutl5QaYKF5uS2S5EgvE8o+X6PZlyuLDAf0=;
+        b=RwnODnftxEBd4NRO28+3yAptOGCW1Epe9IEtC4cE2taURGDKz0HyP1hKuY3d8IDkp4
+         Jpr9RnIzIcxQtgPXAlipeuJ/jf1TcIoASWO3RVNuV7yFrCi5Z5+ZowXudDj5mzbbrOBL
+         3uzJSUrQXZrQ8DTHiIg6YmCo0Rcca7ZrT60FvBk7PGy4q9fdJP2srlVlns0C+P7nSf6F
+         +nzZNiiqwwYWJVRlMt5fioX9KSDar7eGzSHRYDKmkOXWIlZ1MFsDY89hieUz5Zt+8eFI
+         0VjP2+Z9sRzy0ViNQmR2l0dSEodXtr50OzrDGhTugFupUf+GlrMu11fLfqlIADDpml/u
+         tIjw==
+X-Gm-Message-State: AOAM530cAZdLz0sGPIaNJ+w/9pojP4q9wuFCubEY3K7+AQWK/5qmtNft
+	0+d+Xkt2V1R5GPqPd4AMRWXAJerYMNnZ0g==
+X-Google-Smtp-Source: ABdhPJwV/mk24b7HzwCARsLYI+Uo4p9XwOqDyITWRTfj52j9XOqZOI8/cbThu0w8vNK0n/1cCxZjnQ==
+X-Received: by 2002:a63:105d:: with SMTP id 29mr3718787pgq.45.1619099555224;
+        Thu, 22 Apr 2021 06:52:35 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:e183:e120:a0a1:83e4])
-        by smtp.gmail.com with ESMTPSA id gd1sm2376182pjb.49.2021.04.22.06.33.37
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Apr 2021 06:33:38 -0700 (PDT)
+Received: from ?IPv6:2601:202:4180:a5c0:e183:e120:a0a1:83e4? ([2601:202:4180:a5c0:e183:e120:a0a1:83e4])
+        by smtp.gmail.com with ESMTPSA id 15sm2526796pgb.61.2021.04.22.06.52.34
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 22 Apr 2021 06:52:34 -0700 (PDT)
+Subject: Re: [oe] [meta-oe][dunfell][PATCH] fix(libupnp): apply cve-2020-13848
+To: Andrej Kozemcak <andrej.kozemcak@siemens.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20210414082721.32763-1-andrej.kozemcak@siemens.com>
 From: "Armin Kuster" <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 4/4] gpsd: backport d-bus message time patch from upstream
-Date: Thu, 22 Apr 2021 06:33:20 -0700
-Message-Id: <29ca52c7826ad3044b53ccb5224016bd73abdb5c.1619098298.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1619098298.git.akuster808@gmail.com>
-References: <cover.1619098298.git.akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+ 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
+ 8CS2NxU=
+Message-ID: <8646375d-35b0-5917-a6d9-350446492ab1@gmail.com>
+Date: Thu, 22 Apr 2021 06:52:26 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+MIME-Version: 1.0
+In-Reply-To: <20210414082721.32763-1-andrej.kozemcak@siemens.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-From: Hermes Zhang <chenhuiz@axis.com>
 
-This patch is backport from 821c149d486c0e67c1bd35d7c044ede9348aeb8d of
-upstream to fix the broken d-bus message time
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 285e4c9bfb5bee87f33193c455ce4962a0b927c3)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
-(cherry picked from commit cd14b3faa1aa029d7c067d7b342fff64215d58fc)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- ...port.c-Fix-broken-d-bus-message-time.patch | 36 +++++++++++++++++++
- meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb  |  1 +
- 2 files changed, 37 insertions(+)
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/0001-gpsd-dbusexport.c-Fix-broken-d-bus-message-time.patch
+On 4/14/21 1:27 AM, Andrej Kozemcak wrote:
+> Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
+> ---
+>  .../libupnp/files/CVE-2020-13848.patch        | 56 +++++++++++++++++++
+>  .../libupnp/libupnp_git.bb                    |  3 +-
+>  2 files changed, 58 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-multimedia/recipes-connectivity/libupnp/files/CVE-2020-13848.patch
+>
+> diff --git a/meta-multimedia/recipes-connectivity/libupnp/files/CVE-2020-13848.patch b/meta-multimedia/recipes-connectivity/libupnp/files/CVE-2020-13848.patch
+> new file mode 100644
+> index 000000000..8a90942fa
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-connectivity/libupnp/files/CVE-2020-13848.patch
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd/0001-gpsd-dbusexport.c-Fix-broken-d-bus-message-time.patch b/meta-oe/recipes-navigation/gpsd/gpsd/0001-gpsd-dbusexport.c-Fix-broken-d-bus-message-time.patch
-new file mode 100644
-index 0000000000..659865efe1
---- /dev/null
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd/0001-gpsd-dbusexport.c-Fix-broken-d-bus-message-time.patch
-@@ -0,0 +1,36 @@
-+From c9cec2a888d4fea8534be78a0f46d920155ceae6 Mon Sep 17 00:00:00 2001
-+From: Paul Fertser <fercerpav@gmail.com>
-+Date: Wed, 4 Nov 2020 12:40:50 -0800
-+Subject: [PATCH] gpsd/dbusexport.c: Fix broken d-bus message time.
-+
-+Change-Id: I4b9990ce4517a8feb29fc9e090c62f5a0c56ddd5
-+---
-+ dbusexport.c | 4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/dbusexport.c b/dbusexport.c
-+index 40b35739e..5d08a8702 100644
-+--- a/dbusexport.c
-++++ b/dbusexport.c
-+@@ -38,6 +38,7 @@ void send_dbus_fix(struct gps_device_t *channel)
-+     /*DBusMessageIter   iter; */
-+     dbus_uint32_t serial;	/* collected, but not used */
-+     char *gpsd_devname;
-++    double dtime;               // time as a double, loss of precision!
-+ 
-+     /* if the connection is non existent, return without doing anything */
-+     if (connection == NULL)
-+@@ -51,8 +52,9 @@ void send_dbus_fix(struct gps_device_t *channel)
-+     /* the dbus/locationd doc fails to specify altitude as WGS84 or MSL.
-+      * assume altMSL */
-+     message = dbus_message_new_signal("/org/gpsd", "org.gpsd", "fix");
-++    dtime = TSTONS(&gpsfix->time);
-+     dbus_message_append_args(message,
-+-			     DBUS_TYPE_DOUBLE, &(gpsfix->time),
-++			     DBUS_TYPE_DOUBLE, &dtime,
-+ 			     DBUS_TYPE_INT32, &(gpsfix->mode),
-+ 			     DBUS_TYPE_DOUBLE, &(gpsfix->ept),
-+ 			     DBUS_TYPE_DOUBLE, &(gpsfix->latitude),
-+-- 
-+2.20.1
-+
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
-index 3888ad8fa3..0989cc1398 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
-@@ -8,6 +8,7 @@ PROVIDES = "virtual/gpsd"
- SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-     file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
-     file://0001-Revert-SConstruct-Add-test-for-sizeof-time_t-result-.patch \
-+    file://0001-gpsd-dbusexport.c-Fix-broken-d-bus-message-time.patch \
-     file://gpsd.init \
- "
- SRC_URI[md5sum] = "cf7fdec7ce7221d20bee1a7246362b05"
--- 
-2.17.1
+Patch missing all the needful as defined in the Patch Guidelines
+https://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
+
+- armin
+> @@ -0,0 +1,56 @@
+> +diff --git a/ChangeLog b/ChangeLog
+> +index 4a956fc..265d268 100644
+> +--- a/ChangeLog
+> ++++ b/ChangeLog
+> +@@ -2,6 +2,12 @@
+> + Version 1.8.4
+> + *******************************************************************************
+> +
+> ++2020-06-04 Patrik Lantz pjlantz(at)github
+> ++
+> ++	Fixes #177
+> ++
+> ++	NULL pointer dereference in FindServiceControlURLPath
+> ++
+> + 2017-11-17 Marcelo Jimenez <mroberto(at)users.sourceforge.net>
+> +
+> +	GitHub #57 - 1.8.3 broke ABI without changing SONAME
+> +diff --git a/upnp/src/genlib/service_table/service_table.c b/upnp/src/genlib/service_table/service_table.c
+> +index 98c2c0f..f3ee4e5 100644
+> +--- a/upnp/src/genlib/service_table/service_table.c
+> ++++ b/upnp/src/genlib/service_table/service_table.c
+> +@@ -300,12 +300,11 @@ FindServiceEventURLPath( service_table * table,
+> +     uri_type parsed_url;
+> +     uri_type parsed_url_in;
+> +
+> +-    if( ( table )
+> +-        &&
+> +-        ( parse_uri( eventURLPath,
+> +-                     strlen( eventURLPath ),
+> +-                     &parsed_url_in ) == HTTP_SUCCESS ) ) {
+> +-
+> ++    if (!table || !eventURLPath) {
+> ++      return NULL;
+> ++    }
+> ++    if (parse_uri(eventURLPath, strlen(eventURLPath), &parsed_url_in) ==
+> ++        HTTP_SUCCESS) {
+> +         finger = table->serviceList;
+> +         while( finger ) {
+> +             if( finger->eventURL )
+> +@@ -352,11 +351,11 @@ FindServiceControlURLPath( service_table * table,
+> +     uri_type parsed_url;
+> +     uri_type parsed_url_in;
+> +
+> +-    if( ( table )
+> +-        &&
+> +-        ( parse_uri
+> +-          ( controlURLPath, strlen( controlURLPath ),
+> +-            &parsed_url_in ) == HTTP_SUCCESS ) ) {
+> ++    if (!table || !controlURLPath) {
+> ++      return NULL;
+> ++    }
+> ++    if (parse_uri(controlURLPath, strlen(controlURLPath), &parsed_url_in) ==
+> ++        HTTP_SUCCESS) {
+> +         finger = table->serviceList;
+> +         while( finger ) {
+> +             if( finger->controlURL )
+> diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp_git.bb b/meta-multimedia/recipes-connectivity/libupnp/libupnp_git.bb
+> index 339c07cd9..828e351be 100644
+> --- a/meta-multimedia/recipes-connectivity/libupnp/libupnp_git.bb
+> +++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp_git.bb
+> @@ -12,7 +12,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=394a0f17b97f33426275571e15920434"
+>  PV = "1.8.4+git${SRCPV}"
+>  # release-1.8.4
+>  SRCREV = "d5a01fc9895daae98a0c5a8c7d3afce46add529d"
+> -SRC_URI = "git://github.com/mrjimenez/pupnp.git;protocol=https"
+> +SRC_URI = "git://github.com/mrjimenez/pupnp.git;protocol=https \
+> +           file://CVE-2020-13848.patch"
+>  
+>  S="${WORKDIR}/git"
+>  
+>
+> 
+>
 
