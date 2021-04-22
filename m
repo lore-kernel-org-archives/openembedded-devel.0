@@ -1,133 +1,198 @@
 Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web09.12333.1619098417078244426
+ by mx.groups.io with SMTP id smtpd.web09.12334.1619098418417515669
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Apr 2021 06:33:37 -0700
+ Thu, 22 Apr 2021 06:33:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=NQ45k1Se;
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=H6FAVKlm;
  spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id y62so467953pfg.4
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Apr 2021 06:33:37 -0700 (PDT)
+Received: by mail-pf1-f176.google.com with SMTP id c17so31708151pfn.6
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Apr 2021 06:33:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=H6dxDIpjjtHGKSFTHBgMxg7/XvLrPYgravHl3jVH7bU=;
-        b=NQ45k1SeFzLzHC8jTfcQlulAMDT65I0u7Xu4n5vwbhYzvNYPOYJ/gnQO+0Y+BLjl1k
-         n7SzWL1HWip/5ETU8Bs7idlmKJFoA1AsT6qPXkGmY7c89z569N7yDGIQnuFRj+Igb1PJ
-         LcTSf4weAopmpwZva7FVGuCWRqYr+ORHm4dvY73ohTtT8D3FHyZ6CyiwMuX/u1VrQ5uT
-         9tVSAtcYDI22MnGXQtP61K856ZhNQ/Ftj8kGY/0cKlNQ5yyGpNeS0AKKtY8zqVLa6lFm
-         8TXzh5+IruF/m78z5mqTuqcK126kGFKAWcMuU6UrOluA2O2+Czk5UzxhYpM8TIa8Z/dx
-         O5Ww==
+        bh=6wcXOpqMxmwlGaFKq7I4lQdRE+NemokiyprQL7ova+c=;
+        b=H6FAVKlmgxWUwj61xS9Dp/o/8fGBC7d56KiMa+p1tnP9A3m2a3D6LmCfXOsm/Figoe
+         mEdaorFCXfZ42Uo/LULoZiTTQOJXZ6D5/bLc21dEn6+407xKau/USCFQdkNB6wEDKzux
+         9O2fjPTSqSrrZ/G0uCxPhQPr8rh2QPmrL0dQWMWusXluc5XVO7dPtx5QeoIW4YUKShwW
+         s3ZVDc6wbfN2nkXAszoFb4LOW8JJfevq2VTwewcFA9rJiLLv1cU1r8x5z0Gf86I2ahf8
+         Tc72SADB8RWuJP+C8Y/CFaoHWq+mu5Z191KUXJRI/d7WJU3PxeSjd7wjewrOULG7l0w9
+         H8iA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=H6dxDIpjjtHGKSFTHBgMxg7/XvLrPYgravHl3jVH7bU=;
-        b=mA6ET/XDoP6Vjd+udnAvoAF53LfPadKLYywlSAjCHrryr5S8BBL8W3GHmPRBMThj06
-         qw/a59cIa2ZeHY4dMuZ2JFfkpiCj/kjZ4rSHhNUhMmaHm032fpZDeNPSrlhaNo0bC3zz
-         WYHXlZEuxCbmmcw3uZFUiqvD+BinLNMEQJNiPJvbqXoWM+Mnkl9jWWZEP9VYjeqclk8b
-         rh/Vaxc3UqEIZ/hLf5irTH8vDQjRAQSsDtfTC8/ydYa/wl2h08fOtQdvS6PcFZBbZTUX
-         I0pTaQXFYvOCsSrZlPtIBBWNn0jIakgCaVrJETSKvd1YULeA8MI2j305cdb43bH7cpzB
-         pOZA==
-X-Gm-Message-State: AOAM532YjvvsiSWT3VAEuzQcMbnCGlb0kTVaMJNBKH/qZ2/CyuezspJ4
-	MosVkpuVn+94GgCj+4qrBKqnikq+fFhwtA==
-X-Google-Smtp-Source: ABdhPJywKiDSotiIt+FJzw6hJkCc6Js4aDiwZHYZ5atYt0FkbDAQ+IoVSVJUGGS3ch9X+QPcKWFfVg==
-X-Received: by 2002:a63:dc49:: with SMTP id f9mr3520293pgj.361.1619098416274;
-        Thu, 22 Apr 2021 06:33:36 -0700 (PDT)
+        bh=6wcXOpqMxmwlGaFKq7I4lQdRE+NemokiyprQL7ova+c=;
+        b=C5DNUuWRLcoshq2pffEo0r3aqbxkn9vkuaBK45T4G/RNhgTK6y7KPyhbD4ShZsjc0c
+         D0/5KOTdIZPdq2ZAtymMMWGF9ryulOFsr/9p20/aJpVYQ+iKXiOGLRzLn3/gqivj+kPO
+         wDVAoqid/f5f/svCTDaaUnOuINNSnENBIcLmLRTJL2/o0STjiKhxhqd4P4XBxmW2Bn/l
+         zZ7Z33rZwO+46+1V5JyjUM249S0vAiPl/6tTzBu1Ga9AMmDFCOJ8cJ/AqtPVtbtC5AoG
+         h0lXGmFl6RFBGCmddwbhidNrD569XI5aSOJPAt8lez365+ZuD565Ov5kGsQGCB7MXsy7
+         dinA==
+X-Gm-Message-State: AOAM531fLLbtXSHEqi0+9P0PBjiVeHFuLcy4Y3JGcQbR120PlmuJu2Zd
+	j8U4J5HasG079iqGkatqtYPioQhqJFmucA==
+X-Google-Smtp-Source: ABdhPJya8qsEP1vc3Lp0M7xSPpntlfmjwFKLiBWg3WVLzslYnRmSk2C6ad3u03y0cv8qZyvDRZyySg==
+X-Received: by 2002:a63:d552:: with SMTP id v18mr3573642pgi.313.1619098417684;
+        Thu, 22 Apr 2021 06:33:37 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:e183:e120:a0a1:83e4])
-        by smtp.gmail.com with ESMTPSA id gd1sm2376182pjb.49.2021.04.22.06.33.35
+        by smtp.gmail.com with ESMTPSA id gd1sm2376182pjb.49.2021.04.22.06.33.36
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Apr 2021 06:33:35 -0700 (PDT)
+        Thu, 22 Apr 2021 06:33:36 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 2/4] mariadb: Fix build on musl/ppc
-Date: Thu, 22 Apr 2021 06:33:18 -0700
-Message-Id: <a21c185df98e47599a53e3e2f66598e6d52f0075.1619098298.git.akuster808@gmail.com>
+Subject: [gatesgarth 3/4] mariadb: upgrade 10.5.8 -> 10.5.9
+Date: Thu, 22 Apr 2021 06:33:19 -0700
+Message-Id: <20985dbd35c990b547bb98805e6df59a122bc0ff.1619098298.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1619098298.git.akuster808@gmail.com>
 References: <cover.1619098298.git.akuster808@gmail.com>
 
-From: Khem Raj <raj.khem@gmail.com>
+From: wangmy <wangmy@fujitsu.com>
 
+refresh c11_atomics.patch
+remove 0001-stacktrace-t.c-make-the-test-conditional.patch since it is
+included in 10.5.9
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e68935ce287e2b0abd819180ebd86364c853d055)
+(cherry picked from commit 7e64cce442c14f026a5e43cd5d90416c9f81343a)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-dbs/mysql/mariadb.inc         |  2 +
- .../mysql/mariadb/ppc-remove-glibc-dep.patch  | 50 +++++++++++++++++++
- 2 files changed, 52 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
+ ...ive_10.5.8.bb => mariadb-native_10.5.9.bb} |  0
+ meta-oe/recipes-dbs/mysql/mariadb.inc         |  3 +-
+ ...ktrace-t.c-make-the-test-conditional.patch | 38 -------------------
+ .../mysql/mariadb/c11_atomics.patch           | 16 ++++----
+ .../{mariadb_10.5.8.bb => mariadb_10.5.9.bb}  |  0
+ 5 files changed, 9 insertions(+), 48 deletions(-)
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.5.8.bb => mariadb-native_10.5.9.bb} (100%)
+ delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-stacktrace-t.c-make-the-test-conditional.patch
+ rename meta-oe/recipes-dbs/mysql/{mariadb_10.5.8.bb => mariadb_10.5.9.bb} (100%)
 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.8.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.9.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.5.8.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.5.9.bb
 diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 27eede6c30..1fbcb71427 100644
+index 1fbcb71427..67cfa54f02 100644
 --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
 +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -22,6 +22,8 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
+@@ -20,11 +20,10 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
+            file://fix-arm-atomic.patch \
+            file://0001-Fix-library-LZ4-lookup.patch \
             file://0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch \
-            file://0001-stacktrace-t.c-make-the-test-conditional.patch \
+-           file://0001-stacktrace-t.c-make-the-test-conditional.patch \
            "
-+SRC_URI_append_libc-musl = " file://ppc-remove-glibc-dep.patch"
-+
- SRC_URI[sha256sum] = "eb4824f6f2c532cd3fc6a6bce7bf78ea7c6b949f8bdd07656b2c84344e757be8"
+ SRC_URI_append_libc-musl = " file://ppc-remove-glibc-dep.patch"
+ 
+-SRC_URI[sha256sum] = "eb4824f6f2c532cd3fc6a6bce7bf78ea7c6b949f8bdd07656b2c84344e757be8"
++SRC_URI[sha256sum] = "40ab19aeb8de141fdc188cf2251213c9e7351bee4d0cd29db704fae68d1068cf"
  
  UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch b/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
-new file mode 100644
-index 0000000000..1ca86bcca2
---- /dev/null
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
-@@ -0,0 +1,50 @@
-+Remove glibc specific function dependencies
-+
-+Sourced from: https://git.alpinelinux.org/aports/tree/main/mariadb/ppc-remove-glibc-dep.patch
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+--- a/include/my_cpu.h
-++++ b/include/my_cpu.h
-+@@ -24,17 +24,16 @@
-+ */
-+ 
-+ #ifdef _ARCH_PWR8
-+-#include <sys/platform/ppc.h>
-+ /* Very low priority */
-+-#define HMT_very_low() __ppc_set_ppr_very_low()
-++#define HMT_very_low() asm volatile("or 31,31,31")
-+ /* Low priority */
-+-#define HMT_low() __ppc_set_ppr_low()
-++#define HMT_low() asm volatile ("or 1,1,1")
-+ /* Medium low priority */
-+-#define HMT_medium_low() __ppc_set_ppr_med_low()
-++#define HMT_medium_low() asm volatile ("or 6,6,6")
-+ /* Medium priority */
-+-#define HMT_medium() __ppc_set_ppr_med()
-++#define HMT_medium() asm volatile ("or 2,2,2")
-+ /* Medium high priority */
-+-#define HMT_medium_high() __ppc_set_ppr_med_high()
-++#define HMT_medium_high() asm volatile("or 5,5,5")
-+ /* High priority */
-+ #define HMT_high() asm volatile("or 3,3,3")
-+ #else
-+@@ -81,7 +80,7 @@ static inline void MY_RELAX_CPU(void)
-+   __asm__ __volatile__ ("pause");
-+ #endif
-+ #elif defined(_ARCH_PWR8)
-+-  __ppc_get_timebase();
-++  __builtin_ppc_get_timebase();
-+ #elif defined __GNUC__ && (defined __arm__ || defined __aarch64__)
-+   /* Mainly, prevent the compiler from optimizing away delay loops */
-+   __asm__ __volatile__ ("":::"memory");
-+--- a/storage/tokudb/PerconaFT/portability/toku_time.h
-++++ b/storage/tokudb/PerconaFT/portability/toku_time.h
-+@@ -124,7 +124,7 @@ static inline tokutime_t toku_time_now(v
-+     __asm __volatile__ ("mrs %[rt], cntvct_el0" : [rt] "=r" (result));
-+     return result;
-+ #elif defined(__powerpc__)
-+-    return __ppc_get_timebase();
-++    return __builtin_ppc_get_timebase();
-+ #else
-+ #error No timer implementation for this platform
-+ #endif
+ 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-stacktrace-t.c-make-the-test-conditional.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-stacktrace-t.c-make-the-test-conditional.patch
+deleted file mode 100644
+index d8f672d744..0000000000
+--- a/meta-oe/recipes-dbs/mysql/mariadb/0001-stacktrace-t.c-make-the-test-conditional.patch
++++ /dev/null
+@@ -1,38 +0,0 @@
+-From 966cbeb309f867ff4ac8e7f4462be4780e421700 Mon Sep 17 00:00:00 2001
+-From: Mingli Yu <mingli.yu@windriver.com>
+-Date: Mon, 25 Jan 2021 19:01:06 -0800
+-Subject: [PATCH] stacktrace-t.c: make the test conditional
+-
+-Fixes:
+-/prj/tmp/work/cortexa57-poky-linux-musl/mariadb/10.5.8-r0/recipe-sysroot-native/usr/bin/aarch64-poky-linux-musl/../../libexec/aarch64-poky-linux-musl/gcc/aarch64-poky-linux-musl/10.2.0/ld.bfd: /usr/src/debug/mariadb/10.5.8-r0/mariadb-10.5.8/unittest/mysys/stacktrace-t.c:36: undefined reference to `my_safe_print_str'
+-
+-Upstream-Status: Submitted [https://jira.mariadb.org/browse/MDEV-24131]
+-
+-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+----
+- unittest/mysys/stacktrace-t.c | 2 ++
+- 1 file changed, 2 insertions(+)
+-
+-diff --git a/unittest/mysys/stacktrace-t.c b/unittest/mysys/stacktrace-t.c
+-index 8fa0db15b36..d8408f80d76 100644
+---- a/unittest/mysys/stacktrace-t.c
+-+++ b/unittest/mysys/stacktrace-t.c
+-@@ -29,6 +29,7 @@ void test_my_safe_print_str()
+-   memcpy(b_stack, "LEGAL", 6);
+-   memcpy(b_bss, "LEGAL", 6);
+- 
+-+#ifdef HAVE_STACKTRACE
+- #ifndef __SANITIZE_ADDRESS__
+-   fprintf(stderr, "\n===== stack =====\n");
+-   my_safe_print_str(b_stack, 65535);
+-@@ -48,6 +49,7 @@ void test_my_safe_print_str()
+-   fprintf(stderr, "\n===== (const char*) 1 =====\n");
+-   my_safe_print_str((const char*)1, 5);
+- #endif /*__SANITIZE_ADDRESS__*/
+-+#endif /*HAVE_STACKTRACE*/
+- 
+-   free(b_heap);
+- 
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch b/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
+index 32c9818ab0..1c76ab3918 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
++++ b/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
+@@ -17,10 +17,10 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+  3 files changed, 27 insertions(+), 1 deletion(-)
+ 
+ diff --git a/configure.cmake b/configure.cmake
+-index bb3ad43..2ff4f19 100644
++index 4fc324a9..23a2ea91 100644
+ --- a/configure.cmake
+ +++ b/configure.cmake
+-@@ -861,7 +861,25 @@ int main()
++@@ -862,7 +862,25 @@ int main()
+    long long int *ptr= &var;
+    return (int)__atomic_load_n(ptr, __ATOMIC_SEQ_CST);
+  }"
+@@ -48,10 +48,10 @@ index bb3ad43..2ff4f19 100644
+  IF(WITH_VALGRIND)
+    SET(HAVE_valgrind 1)
+ diff --git a/mysys/CMakeLists.txt b/mysys/CMakeLists.txt
+-index 6a3a1ef..e306ae7 100644
++index 6aab788f..91b9c393 100644
+ --- a/mysys/CMakeLists.txt
+ +++ b/mysys/CMakeLists.txt
+-@@ -140,6 +140,10 @@ TARGET_LINK_LIBRARIES(mysys dbug strings ${ZLIB_LIBRARY}
++@@ -154,6 +154,10 @@ TARGET_LINK_LIBRARIES(mysys dbug strings ${ZLIB_LIBRARY}
+   ${LIBNSL} ${LIBM} ${LIBRT} ${CMAKE_DL_LIBS} ${LIBSOCKET} ${LIBEXECINFO})
+  DTRACE_INSTRUMENT(mysys)
+  
+@@ -63,10 +63,10 @@ index 6a3a1ef..e306ae7 100644
+    TARGET_LINK_LIBRARIES(mysys bfd)  
+  ENDIF(HAVE_BFD_H)
+ diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
+-index 4978d01..883a930 100644
++index b9cd418f..d42e5017 100644
+ --- a/sql/CMakeLists.txt
+ +++ b/sql/CMakeLists.txt
+-@@ -220,6 +220,10 @@ ELSE()
++@@ -222,6 +222,10 @@ ELSE()
+    SET(MYSQLD_SOURCE main.cc ${DTRACE_PROBES_ALL})
+  ENDIF()
+  
+@@ -74,9 +74,9 @@ index 4978d01..883a930 100644
+ +  TARGET_LINK_LIBRARIES(sql atomic)
+ +ENDIF()
+ +
+- IF(MSVC)
++ IF(MSVC OR CMAKE_SYSTEM_NAME MATCHES AIX)
+    SET(libs_to_export_symbols sql mysys dbug strings)
+    # Create shared library of already compiled object
+ -- 
+-2.17.1
++2.25.1
+ 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.5.8.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.5.9.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb_10.5.8.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb_10.5.9.bb
 -- 
 2.17.1
 
