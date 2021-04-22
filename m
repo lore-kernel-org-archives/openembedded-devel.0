@@ -1,198 +1,123 @@
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web09.12334.1619098418417515669
+Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
+ by mx.groups.io with SMTP id smtpd.web12.12497.1619098419158247153
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Apr 2021 06:33:38 -0700
+ Thu, 22 Apr 2021 06:33:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=H6FAVKlm;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id c17so31708151pfn.6
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Apr 2021 06:33:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=edlYUzsz;
+ spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f174.google.com with SMTP id q10so32819956pgj.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Apr 2021 06:33:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=6wcXOpqMxmwlGaFKq7I4lQdRE+NemokiyprQL7ova+c=;
-        b=H6FAVKlmgxWUwj61xS9Dp/o/8fGBC7d56KiMa+p1tnP9A3m2a3D6LmCfXOsm/Figoe
-         mEdaorFCXfZ42Uo/LULoZiTTQOJXZ6D5/bLc21dEn6+407xKau/USCFQdkNB6wEDKzux
-         9O2fjPTSqSrrZ/G0uCxPhQPr8rh2QPmrL0dQWMWusXluc5XVO7dPtx5QeoIW4YUKShwW
-         s3ZVDc6wbfN2nkXAszoFb4LOW8JJfevq2VTwewcFA9rJiLLv1cU1r8x5z0Gf86I2ahf8
-         Tc72SADB8RWuJP+C8Y/CFaoHWq+mu5Z191KUXJRI/d7WJU3PxeSjd7wjewrOULG7l0w9
-         H8iA==
+        bh=v4pl5LMrkO2//1Ha3jNJxl8txKHJiNC1VkUI6Z4j1IA=;
+        b=edlYUzszyMbcPiN0zrGddygEKUT3/FxSPcwGMvjc4hUl6RxFjwG+WLWp18mtQzN0GZ
+         sOFRcUXSZ3nIG9dZx70I1ZPuNOx9bRMHThdWPRKm4B/2WKKUtvPg4fSQTNA5v/KUTycC
+         qG5Aesfz/1VCpvNnaVbcMkvx1c/2PI7VjNTYBECSwumO4OpiQ0fTSmHwlGbSCvbgAU6C
+         4Ahv7FH5My10BahBbEZ6wswd6h+fFDh1bc7W6jkH0Wm43dCJ81k9uHISMhxF1rMGSQBU
+         b1EyKrd8Hz23BSDtbRpLs19n/dBULR9zpIOrXb+Kb7R9Tud68+KG0rCShKfBqXR8xf/o
+         ZfVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=6wcXOpqMxmwlGaFKq7I4lQdRE+NemokiyprQL7ova+c=;
-        b=C5DNUuWRLcoshq2pffEo0r3aqbxkn9vkuaBK45T4G/RNhgTK6y7KPyhbD4ShZsjc0c
-         D0/5KOTdIZPdq2ZAtymMMWGF9ryulOFsr/9p20/aJpVYQ+iKXiOGLRzLn3/gqivj+kPO
-         wDVAoqid/f5f/svCTDaaUnOuINNSnENBIcLmLRTJL2/o0STjiKhxhqd4P4XBxmW2Bn/l
-         zZ7Z33rZwO+46+1V5JyjUM249S0vAiPl/6tTzBu1Ga9AMmDFCOJ8cJ/AqtPVtbtC5AoG
-         h0lXGmFl6RFBGCmddwbhidNrD569XI5aSOJPAt8lez365+ZuD565Ov5kGsQGCB7MXsy7
-         dinA==
-X-Gm-Message-State: AOAM531fLLbtXSHEqi0+9P0PBjiVeHFuLcy4Y3JGcQbR120PlmuJu2Zd
-	j8U4J5HasG079iqGkatqtYPioQhqJFmucA==
-X-Google-Smtp-Source: ABdhPJya8qsEP1vc3Lp0M7xSPpntlfmjwFKLiBWg3WVLzslYnRmSk2C6ad3u03y0cv8qZyvDRZyySg==
-X-Received: by 2002:a63:d552:: with SMTP id v18mr3573642pgi.313.1619098417684;
-        Thu, 22 Apr 2021 06:33:37 -0700 (PDT)
+        bh=v4pl5LMrkO2//1Ha3jNJxl8txKHJiNC1VkUI6Z4j1IA=;
+        b=bbKaoGjB3JVrSM55ORm4W5114fEJQ/q9B36ESlYocVNkSbo49WHG3ChmaC3GuazSCq
+         odNqhiU6l/jPxET3fI1XKd1JcVUw3+o7zzvO3gfJ3H40kh8zy1DzKlnKE+YhomCNjPj0
+         VcXsaIYTjPnV+PApAt8Fougm8mX70OFOvaKEddT+lSf331yj4cXyeAc6m9lSgeULB4DD
+         y4lUxDWnDeL3ul0MdHZl+rLB93pDv+AkBIyZ8L2tIkLrocSeMgagUHU0Rq+NwNzdsNlf
+         l59Cq9mvAzk5+CWl6uoDB70r/SA/JBxeFTGhJqte/A2N1JsmSsZ8GiZqz3shC41ERJ2l
+         yTag==
+X-Gm-Message-State: AOAM533bIgzJYO3MwFbqLlWTEq06TeTMWhYQ1ol9BfNyWyXqmHgvisAH
+	vRkk9CrZMiIWUp6omyf5r0qB9xp2UkqXNg==
+X-Google-Smtp-Source: ABdhPJypqK3Yk0c6B8ECP+NsnL2/sdFO3cCjLVBLsGpTIc0/AKnKtgcIM9i5cMY3MAYJQfykVGtPYA==
+X-Received: by 2002:a63:4758:: with SMTP id w24mr3614239pgk.33.1619098418569;
+        Thu, 22 Apr 2021 06:33:38 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:e183:e120:a0a1:83e4])
-        by smtp.gmail.com with ESMTPSA id gd1sm2376182pjb.49.2021.04.22.06.33.36
+        by smtp.gmail.com with ESMTPSA id gd1sm2376182pjb.49.2021.04.22.06.33.37
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Apr 2021 06:33:36 -0700 (PDT)
+        Thu, 22 Apr 2021 06:33:38 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [gatesgarth 3/4] mariadb: upgrade 10.5.8 -> 10.5.9
-Date: Thu, 22 Apr 2021 06:33:19 -0700
-Message-Id: <20985dbd35c990b547bb98805e6df59a122bc0ff.1619098298.git.akuster808@gmail.com>
+Subject: [gatesgarth 4/4] gpsd: backport d-bus message time patch from upstream
+Date: Thu, 22 Apr 2021 06:33:20 -0700
+Message-Id: <29ca52c7826ad3044b53ccb5224016bd73abdb5c.1619098298.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1619098298.git.akuster808@gmail.com>
 References: <cover.1619098298.git.akuster808@gmail.com>
 
-From: wangmy <wangmy@fujitsu.com>
+From: Hermes Zhang <chenhuiz@axis.com>
 
-refresh c11_atomics.patch
-remove 0001-stacktrace-t.c-make-the-test-conditional.patch since it is
-included in 10.5.9
+This patch is backport from 821c149d486c0e67c1bd35d7c044ede9348aeb8d of
+upstream to fix the broken d-bus message time
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 7e64cce442c14f026a5e43cd5d90416c9f81343a)
+(cherry picked from commit 285e4c9bfb5bee87f33193c455ce4962a0b927c3)
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+(cherry picked from commit cd14b3faa1aa029d7c067d7b342fff64215d58fc)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...ive_10.5.8.bb => mariadb-native_10.5.9.bb} |  0
- meta-oe/recipes-dbs/mysql/mariadb.inc         |  3 +-
- ...ktrace-t.c-make-the-test-conditional.patch | 38 -------------------
- .../mysql/mariadb/c11_atomics.patch           | 16 ++++----
- .../{mariadb_10.5.8.bb => mariadb_10.5.9.bb}  |  0
- 5 files changed, 9 insertions(+), 48 deletions(-)
- rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.5.8.bb => mariadb-native_10.5.9.bb} (100%)
- delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-stacktrace-t.c-make-the-test-conditional.patch
- rename meta-oe/recipes-dbs/mysql/{mariadb_10.5.8.bb => mariadb_10.5.9.bb} (100%)
+ ...port.c-Fix-broken-d-bus-message-time.patch | 36 +++++++++++++++++++
+ meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb  |  1 +
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/0001-gpsd-dbusexport.c-Fix-broken-d-bus-message-time.patch
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.8.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.9.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.5.8.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.5.9.bb
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 1fbcb71427..67cfa54f02 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -20,11 +20,10 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
-            file://fix-arm-atomic.patch \
-            file://0001-Fix-library-LZ4-lookup.patch \
-            file://0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch \
--           file://0001-stacktrace-t.c-make-the-test-conditional.patch \
-           "
- SRC_URI_append_libc-musl = " file://ppc-remove-glibc-dep.patch"
- 
--SRC_URI[sha256sum] = "eb4824f6f2c532cd3fc6a6bce7bf78ea7c6b949f8bdd07656b2c84344e757be8"
-+SRC_URI[sha256sum] = "40ab19aeb8de141fdc188cf2251213c9e7351bee4d0cd29db704fae68d1068cf"
- 
- UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
- 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-stacktrace-t.c-make-the-test-conditional.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-stacktrace-t.c-make-the-test-conditional.patch
-deleted file mode 100644
-index d8f672d744..0000000000
---- a/meta-oe/recipes-dbs/mysql/mariadb/0001-stacktrace-t.c-make-the-test-conditional.patch
-+++ /dev/null
-@@ -1,38 +0,0 @@
--From 966cbeb309f867ff4ac8e7f4462be4780e421700 Mon Sep 17 00:00:00 2001
--From: Mingli Yu <mingli.yu@windriver.com>
--Date: Mon, 25 Jan 2021 19:01:06 -0800
--Subject: [PATCH] stacktrace-t.c: make the test conditional
--
--Fixes:
--/prj/tmp/work/cortexa57-poky-linux-musl/mariadb/10.5.8-r0/recipe-sysroot-native/usr/bin/aarch64-poky-linux-musl/../../libexec/aarch64-poky-linux-musl/gcc/aarch64-poky-linux-musl/10.2.0/ld.bfd: /usr/src/debug/mariadb/10.5.8-r0/mariadb-10.5.8/unittest/mysys/stacktrace-t.c:36: undefined reference to `my_safe_print_str'
--
--Upstream-Status: Submitted [https://jira.mariadb.org/browse/MDEV-24131]
--
--Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-----
-- unittest/mysys/stacktrace-t.c | 2 ++
-- 1 file changed, 2 insertions(+)
--
--diff --git a/unittest/mysys/stacktrace-t.c b/unittest/mysys/stacktrace-t.c
--index 8fa0db15b36..d8408f80d76 100644
----- a/unittest/mysys/stacktrace-t.c
--+++ b/unittest/mysys/stacktrace-t.c
--@@ -29,6 +29,7 @@ void test_my_safe_print_str()
--   memcpy(b_stack, "LEGAL", 6);
--   memcpy(b_bss, "LEGAL", 6);
-- 
--+#ifdef HAVE_STACKTRACE
-- #ifndef __SANITIZE_ADDRESS__
--   fprintf(stderr, "\n===== stack =====\n");
--   my_safe_print_str(b_stack, 65535);
--@@ -48,6 +49,7 @@ void test_my_safe_print_str()
--   fprintf(stderr, "\n===== (const char*) 1 =====\n");
--   my_safe_print_str((const char*)1, 5);
-- #endif /*__SANITIZE_ADDRESS__*/
--+#endif /*HAVE_STACKTRACE*/
-- 
--   free(b_heap);
-- 
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch b/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
-index 32c9818ab0..1c76ab3918 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/c11_atomics.patch
-@@ -17,10 +17,10 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  3 files changed, 27 insertions(+), 1 deletion(-)
- 
- diff --git a/configure.cmake b/configure.cmake
--index bb3ad43..2ff4f19 100644
-+index 4fc324a9..23a2ea91 100644
- --- a/configure.cmake
- +++ b/configure.cmake
--@@ -861,7 +861,25 @@ int main()
-+@@ -862,7 +862,25 @@ int main()
-    long long int *ptr= &var;
-    return (int)__atomic_load_n(ptr, __ATOMIC_SEQ_CST);
-  }"
-@@ -48,10 +48,10 @@ index bb3ad43..2ff4f19 100644
-  IF(WITH_VALGRIND)
-    SET(HAVE_valgrind 1)
- diff --git a/mysys/CMakeLists.txt b/mysys/CMakeLists.txt
--index 6a3a1ef..e306ae7 100644
-+index 6aab788f..91b9c393 100644
- --- a/mysys/CMakeLists.txt
- +++ b/mysys/CMakeLists.txt
--@@ -140,6 +140,10 @@ TARGET_LINK_LIBRARIES(mysys dbug strings ${ZLIB_LIBRARY}
-+@@ -154,6 +154,10 @@ TARGET_LINK_LIBRARIES(mysys dbug strings ${ZLIB_LIBRARY}
-   ${LIBNSL} ${LIBM} ${LIBRT} ${CMAKE_DL_LIBS} ${LIBSOCKET} ${LIBEXECINFO})
-  DTRACE_INSTRUMENT(mysys)
-  
-@@ -63,10 +63,10 @@ index 6a3a1ef..e306ae7 100644
-    TARGET_LINK_LIBRARIES(mysys bfd)  
-  ENDIF(HAVE_BFD_H)
- diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
--index 4978d01..883a930 100644
-+index b9cd418f..d42e5017 100644
- --- a/sql/CMakeLists.txt
- +++ b/sql/CMakeLists.txt
--@@ -220,6 +220,10 @@ ELSE()
-+@@ -222,6 +222,10 @@ ELSE()
-    SET(MYSQLD_SOURCE main.cc ${DTRACE_PROBES_ALL})
-  ENDIF()
-  
-@@ -74,9 +74,9 @@ index 4978d01..883a930 100644
- +  TARGET_LINK_LIBRARIES(sql atomic)
- +ENDIF()
- +
-- IF(MSVC)
-+ IF(MSVC OR CMAKE_SYSTEM_NAME MATCHES AIX)
-    SET(libs_to_export_symbols sql mysys dbug strings)
-    # Create shared library of already compiled object
- -- 
--2.17.1
-+2.25.1
- 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.5.8.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.5.9.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb_10.5.8.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb_10.5.9.bb
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd/0001-gpsd-dbusexport.c-Fix-broken-d-bus-message-time.patch b/meta-oe/recipes-navigation/gpsd/gpsd/0001-gpsd-dbusexport.c-Fix-broken-d-bus-message-time.patch
+new file mode 100644
+index 0000000000..659865efe1
+--- /dev/null
++++ b/meta-oe/recipes-navigation/gpsd/gpsd/0001-gpsd-dbusexport.c-Fix-broken-d-bus-message-time.patch
+@@ -0,0 +1,36 @@
++From c9cec2a888d4fea8534be78a0f46d920155ceae6 Mon Sep 17 00:00:00 2001
++From: Paul Fertser <fercerpav@gmail.com>
++Date: Wed, 4 Nov 2020 12:40:50 -0800
++Subject: [PATCH] gpsd/dbusexport.c: Fix broken d-bus message time.
++
++Change-Id: I4b9990ce4517a8feb29fc9e090c62f5a0c56ddd5
++---
++ dbusexport.c | 4 +++-
++ 1 file changed, 3 insertions(+), 1 deletion(-)
++
++diff --git a/dbusexport.c b/dbusexport.c
++index 40b35739e..5d08a8702 100644
++--- a/dbusexport.c
+++++ b/dbusexport.c
++@@ -38,6 +38,7 @@ void send_dbus_fix(struct gps_device_t *channel)
++     /*DBusMessageIter   iter; */
++     dbus_uint32_t serial;	/* collected, but not used */
++     char *gpsd_devname;
+++    double dtime;               // time as a double, loss of precision!
++ 
++     /* if the connection is non existent, return without doing anything */
++     if (connection == NULL)
++@@ -51,8 +52,9 @@ void send_dbus_fix(struct gps_device_t *channel)
++     /* the dbus/locationd doc fails to specify altitude as WGS84 or MSL.
++      * assume altMSL */
++     message = dbus_message_new_signal("/org/gpsd", "org.gpsd", "fix");
+++    dtime = TSTONS(&gpsfix->time);
++     dbus_message_append_args(message,
++-			     DBUS_TYPE_DOUBLE, &(gpsfix->time),
+++			     DBUS_TYPE_DOUBLE, &dtime,
++ 			     DBUS_TYPE_INT32, &(gpsfix->mode),
++ 			     DBUS_TYPE_DOUBLE, &(gpsfix->ept),
++ 			     DBUS_TYPE_DOUBLE, &(gpsfix->latitude),
++-- 
++2.20.1
++
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
+index 3888ad8fa3..0989cc1398 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb
+@@ -8,6 +8,7 @@ PROVIDES = "virtual/gpsd"
+ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+     file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
+     file://0001-Revert-SConstruct-Add-test-for-sizeof-time_t-result-.patch \
++    file://0001-gpsd-dbusexport.c-Fix-broken-d-bus-message-time.patch \
+     file://gpsd.init \
+ "
+ SRC_URI[md5sum] = "cf7fdec7ce7221d20bee1a7246362b05"
 -- 
 2.17.1
 
