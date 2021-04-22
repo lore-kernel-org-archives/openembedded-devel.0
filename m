@@ -1,74 +1,107 @@
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web12.731.1619111162673755574
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
+ by mx.groups.io with SMTP id smtpd.web10.1155.1619112740718324470
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Apr 2021 10:06:02 -0700
+ Thu, 22 Apr 2021 10:32:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=k9UXHM2n;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id m11so32156852pfc.11
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Apr 2021 10:06:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=jCd8Vi7X;
+ spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f45.google.com with SMTP id lr7so5538571pjb.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Apr 2021 10:32:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=NS29NSAlPb0jsD9yM00ILGP0XaiK5MvoD3XY+YZ6LV4=;
-        b=k9UXHM2n28E8v6+cQO/BFiXjOQfSiZRGT19TbPYUfngM2fy2kKByz8MSA76Gxk44KX
-         677lgHxMDbCM9ixXI4zyXAf8ia5l3flwTdndqQxsNSL334qVKwmKpJoiZEXEpPMjBG7S
-         BN164ay43ri6H8MjDmB9V33fcYKHiXG//cB1J780zSLUo/5SVV//53pXi9BXu/wYf4Jy
-         N2hE7RaY8r93Ff4RM4gkqbOpK0ozNQgkyQKl8+5G2B1gR3MxB2BVGJgzCxdMMXgXnqXz
-         +Avo6pozLC1c++97g1qzYLQL5Woz3e8vGL2ZdPyJ/vKE19X8YX7mOH3eO27yH0gTJX9L
-         xQ8g==
+        h=subject:to:references:from:organization:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=UyPFsRy3T367S+dBDfzehl91Nmvn4BGfkdRVgAO7jrk=;
+        b=jCd8Vi7XY14JgGCG9Ci5HPcYsusTsmOhTXa3Kdl77Ad5TO5sJDGBsHzvvL5t8pY/Yq
+         IArPAyqkSKo2L6bGqldEmwJdX86nDJqSxFAj4SQ9cZUDc3ENnkvtCistJqZTXruNxYHk
+         byq8paYA9mKEMzND+MESPKWsss3s03+p+K0CIDKhdpWehWwsTuJ5YJYnrhkkmYSAWRfU
+         5FqWulJHoBxUN0j9TxYeTFRb8tOyYiPAepn9CglHFSNzhNgXUvI5BAv0JD490LXuK5yg
+         VHOc+fTjaM2ypTnHjH/L1+lNt9u4L+29KSzcvrMTwRce/G3b3/JCS6T9M8AtpV+7yUbL
+         PgGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=NS29NSAlPb0jsD9yM00ILGP0XaiK5MvoD3XY+YZ6LV4=;
-        b=Lw9jb/5ekqBMYb3fg/KRFHrswz2sbeM5OafZr2QyUrkgCBxiZButntiy/1dZBvvASj
-         2fpFUbmjPknNq0Gca+1BM8HoWz6gqpyBLlz7lZu3tdu/SL4INNQYcmb0qPAKu3y4MeDW
-         A0jT0so013wo9cv3EWYNr+o+O1f6QCPdY8NF+UKxMfsZCqpYLwWM/vsHVQarVw0O+AYj
-         B1ytJD+RZg0XT9YGKx/Ezkb6TatCemDrQ+84OrExqGulV/BYyghapl8KNdaZHNdBBQZt
-         DMoQ+7sZz0kfeAEgEJ1G0HpiwCMl7qm1ZbWr5bGUyOQise64YOFZ/yKJzAvFPj1QCu2r
-         6AcQ==
-X-Gm-Message-State: AOAM53012704jAZrilxxbjmX2IgwlusFQ89HDFy0duFe9uQrz6gcvRii
-	D71olWIbrTt/3X8HQ5GhVkHxyXANb7q49Q==
-X-Google-Smtp-Source: ABdhPJy5vjbJyZTjGpwSANtjX3IA591+faZIc2+b3vr5w1IScVeIwC29EZ5FLX+alPCAMs8Ia2PqbQ==
-X-Received: by 2002:a63:df09:: with SMTP id u9mr4372245pgg.112.1619111161898;
-        Thu, 22 Apr 2021 10:06:01 -0700 (PDT)
+        h=x-gm-message-state:subject:to:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=UyPFsRy3T367S+dBDfzehl91Nmvn4BGfkdRVgAO7jrk=;
+        b=uY15KPCPVNZsdKhSnM0KYeicRVrZmBvbv1LO30SKN+9Kw+Dv5SHzLPjj1bQJ1TWv+P
+         9+320Kxt2Q8K2TJcHdZ2OCPUECdst3//YnWYsDSqiPQOi7Bv5bysKbKliwPgJJh6cFb0
+         eVm91YvN0+GB8e1qld5ut3llyA6bP6LQ5ITmk5drDEyq91e48D1UmFxD2FBtImoY/yax
+         tAMeSEN14sJAp+gxt0rj3L1FczrN1FLshEVeIzFX1qiryz4g0137wDeRq+n+G7wl+k1M
+         XebYEoTXSSPMV14GZhyxM1EEVSHlExH/xrbLp8E3oJwvhTTpkFuLaMnwSWeewQHGIgo/
+         l1gQ==
+X-Gm-Message-State: AOAM5328aqK+xVzomsp+XlsJJ30vX36d1RbplH9wGr7ahgFEN+9ldl4a
+	LSWfveH44NIbRxIa8nMtPr8jg5GyXM5ZHQ==
+X-Google-Smtp-Source: ABdhPJyb/fCG7A7nFg43Asn9zXxQmIZa++TOBiPVFXowUMF1BufORomZR3EblNKKxlJWD4MVyoXtew==
+X-Received: by 2002:a17:903:4106:b029:e9:244f:9aca with SMTP id r6-20020a1709034106b02900e9244f9acamr4849978pld.58.1619112739951;
+        Thu, 22 Apr 2021 10:32:19 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::bc1b])
-        by smtp.gmail.com with ESMTPSA id d5sm2948370pgj.36.2021.04.22.10.06.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Apr 2021 10:06:01 -0700 (PDT)
+Received: from ?IPv6:2601:646:9200:a0f0:68f4:e6f3:44c5:768e? ([2601:646:9200:a0f0:68f4:e6f3:44c5:768e])
+        by smtp.gmail.com with ESMTPSA id o16sm2635359pfp.215.2021.04.22.10.32.19
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 22 Apr 2021 10:32:19 -0700 (PDT)
+Subject: Re: [oe] [meta-oe] [PATCH] nss: upgrade 3.63 -> 3.64
+To: Armin Kuster <akuster808@gmail.com>, zangrc <zangrc.fnst@fujitsu.com>,
+ openembedded-devel@lists.openembedded.org
+References: <1619114328-5000-1-git-send-email-zangrc.fnst@fujitsu.com>
+ <af4556d5-19ec-43b3-b820-390eed87db66@gmail.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH] gimp: Disable vector icons on musl/x86
-Date: Thu, 22 Apr 2021 10:05:59 -0700
-Message-Id: <20210422170559.1139028-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
+Organization: HIMVIS LLC
+Message-ID: <68d27254-8701-b3e4-6168-1b8a0fe5c38d@gmail.com>
+Date: Thu, 22 Apr 2021 10:32:18 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <af4556d5-19ec-43b3-b820-390eed87db66@gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-it uses qemu underneath which segfaults on musl/x86
-until its fixed, we disable vector icons
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb | 1 +
- 1 file changed, 1 insertion(+)
 
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb b/meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb
-index a5e6990580..717716e1f9 100644
---- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb
-+++ b/meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb
-@@ -55,6 +55,7 @@ EXTRA_OECONF = "--disable-python \
- 
- EXTRA_OECONF_append_mipsarch = " --disable-vector-icons"
- EXTRA_OECONF_append_libc-musl_riscv32 = " --disable-vector-icons"
-+EXTRA_OECONF_append_libc-musl_x86 = " --disable-vector-icons"
- EXTRA_OECONF_append_arm = " --disable-vector-icons"
- 
- do_configure_append() {
--- 
-2.31.1
+On 4/22/21 9:58 AM, Armin Kuster wrote:
+> 
+> 
+> On 4/22/21 10:58 AM, zangrc wrote:
+>> Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+>> ---
+>>   meta-oe/recipes-support/nss/{nss_3.63.bb => nss_3.64.bb} | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>   rename meta-oe/recipes-support/nss/{nss_3.63.bb => nss_3.64.bb} (99%)
+> 
+> I think the LICENSE needs to be updated to include 'MIT'
+> 
+> this update includes new files that contain that license.
+> 
+> see:
+> https://github.com/nss-dev/nss/blob/NSS_3_64_BRANCH/lib/freebl/ecl/ecp_secp384r1.c
+> 
 
+yeah I agree. Also add it to checksums perhaps.
+
+> - armin
+>>
+>> diff --git a/meta-oe/recipes-support/nss/nss_3.63.bb b/meta-oe/recipes-support/nss/nss_3.64.bb
+>> similarity index 99%
+>> rename from meta-oe/recipes-support/nss/nss_3.63.bb
+>> rename to meta-oe/recipes-support/nss/nss_3.64.bb
+>> index b7192a46d1..ff90d2caf9 100644
+>> --- a/meta-oe/recipes-support/nss/nss_3.63.bb
+>> +++ b/meta-oe/recipes-support/nss/nss_3.64.bb
+>> @@ -32,7 +32,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
+>>              file://nss-fix-nsinstall-build.patch \
+>>              file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
+>>              "
+>> -SRC_URI[sha256sum] = "182d2fef629102ae9423aabf2c192242b565cf5098e82c5a26cf70c5e4ea2221"
+>> +SRC_URI[sha256sum] = "d3175427172e9c3a6f1ebc74452cb791590f28191c6a1a443dbc0d87c9df1126"
+>>   
+>>   UPSTREAM_CHECK_URI = "https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS/NSS_Releases"
+>>   UPSTREAM_CHECK_REGEX = "NSS_(?P<pver>.+)_release_notes"
+>>
+>>
+>>
+> 
+> 
+> 
+> 
+> 
