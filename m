@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.11063.1619092275842558685
+ by mx.groups.io with SMTP id smtpd.web12.11192.1619092278261590978
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Apr 2021 04:51:16 -0700
+ Thu, 22 Apr 2021 04:51:18 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=59522 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lZXrV-0003Zx-1t; Thu, 22 Apr 2021 14:51:15 +0300
+	id 1lZXrX-0003Zx-H0; Thu, 22 Apr 2021 14:51:17 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-bitarray: Upgrade 2.0.0 -> 2.0.1
-Date: Thu, 22 Apr 2021 14:50:59 +0300
-Message-Id: <20210422115100.28615-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-sqlalchemy: Upgrade 1.4.7 -> 1.4.11
+Date: Thu, 22 Apr 2021 14:51:00 +0300
+Message-Id: <20210422115100.28615-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210422115100.28615-1-leon.anavi@konsulko.com>
 References: <20210422115100.28615-1-leon.anavi@konsulko.com>
@@ -30,33 +30,41 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.0.1:
+Upgrade to release 1.4.11:
 
-- update documentation
-- improve some error messages
+orm:
+- Fixed regression where recent changes to support Python
+  dataclasses had the inadvertent effect that an ORM mapped class
+  could not successfully override the __new__() method.
+
+engine:
+- Fixed critical regression where the connection pool "init" phase
+  no longer occurred within mutexed isolation, allowing other
+  threads to proceed with the dialect uninitialized, which could
+  then impact the compilation of SQL statements.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-bitarray_2.0.0.bb => python3-bitarray_2.0.1.bb}    | 2 +-
+ ...python3-sqlalchemy_1.4.7.bb => python3-sqlalchemy_1.4.11.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-bitarray_2.0.0.bb => python3-bitarray_2.0.1.bb} (77%)
+ rename meta-python/recipes-devtools/python/{python3-sqlalchemy_1.4.7.bb => python3-sqlalchemy_1.4.11.bb} (85%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_2.0.0.bb b/meta-python/recipes-devtools/python/python3-bitarray_2.0.1.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-bitarray_2.0.0.bb
-rename to meta-python/recipes-devtools/python/python3-bitarray_2.0.1.bb
-index 5c00d7df66..a91e246d40 100644
---- a/meta-python/recipes-devtools/python/python3-bitarray_2.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-bitarray_2.0.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
- LICENSE = "PSF"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
+diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.7.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.11.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.7.bb
+rename to meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.11.bb
+index 883b2660b0..ca61ab6ff0 100644
+--- a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.7.bb
++++ b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.11.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.sqlalchemy.org/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3359ed561ac16aaa25b6c6eff84df595"
  
--SRC_URI[sha256sum] = "ee13850d3237c254c7af8acce2f1a044a1c4f22dcec5380cba7443c8be38f701"
-+SRC_URI[sha256sum] = "ec3a4f6d711a79ed23aea9541638d3353dc3f083f293a13180b14b482e3e19ef"
+-SRC_URI[sha256sum] = "84115f97d88c8ccf26db81b7997c5f5de9ae360e0785ef859d0987794495f0a9"
++SRC_URI[sha256sum] = "4ad4044eb86fbcbdff2106e44f479fbdac703d77860b3e19988c8a8786e73061"
  
- inherit setuptools3 pypi
- 
+ PYPI_PACKAGE = "SQLAlchemy"
+ inherit pypi setuptools3
 -- 
 2.17.1
 
