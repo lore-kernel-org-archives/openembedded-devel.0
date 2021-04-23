@@ -1,39 +1,39 @@
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web12.45.1619208272126142336
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.web10.39.1619208272905197886
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Apr 2021 13:04:32 -0700
+ Fri, 23 Apr 2021 13:04:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=NyPYU+vW;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id e9so8781684plj.2
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=lOixInZQ;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id j6-20020a17090adc86b02900cbfe6f2c96so1865221pjv.1
         for <openembedded-devel@lists.openembedded.org>; Fri, 23 Apr 2021 13:04:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=NnM3gtrjtvega5JqUpY5pmWKlWHxf4F+dDqggssYTfE=;
-        b=NyPYU+vW1Wr/26Sy4DXw7FCZLdzZ2XZiOhJ64Vn09l+EY25KjgOpGyKdDUZWwmNswK
-         URh2J6TfnXkoAUKBd6nCzltDtkqZfS9PThvGXxE7+1fyHTwWcdlVGtEKQ2y6EF8I/fO/
-         kkkpfBgktRLvreaJf3tnPEdkRR7O3WYi/1e82DTyZ4dKj7dQATl6rPXKgzimV2eDoJDA
-         R/cGjbOQJuoh8+TZIvrQBumgo4J3THrSBPbzQGFlWgRsGaHeIv/urcjvAs5kXsHNa0yU
-         q9tDTF+C1isMHtd/pQURE7i8JmsFkwyEZHT2psvRlXBlW6hy0g6YymVuwkwKUI7UxJye
-         fCmg==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=ulttXcfBBnOqxji6urrNlw51yLzDA+ACe/mqeJtxuHE=;
+        b=lOixInZQ8XEdzfSHgJK9OceL7vA0zyzGXTAO96znUSJ09zV2/kYxN6fUXnYCeH/rUf
+         bZ5sPK4vsbYQOsrMll7tgl4FV0BpvJNukH8otp1OdjzhGwEGU8iWBhquE9e0T9idLtMY
+         F8GucpcD7VsQpvCIuYfIdsadM8M28OBDpeBCNzulaILzYNkXhD2Wn0uQ4GF9sOWB9FNa
+         ORlSoXD1HXS3Z6Q9DpAgEhk60QE9zyxjxX+yQgO1UBKyXJA5PKv6Znalib6/4iGRPYLd
+         /zlQDI7w4mDDIPN6eeQkw6/57uOJ1DkAUmbVig5WFIuBG21tdfvJDvEwghhn7+nQNdK3
+         mTSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=NnM3gtrjtvega5JqUpY5pmWKlWHxf4F+dDqggssYTfE=;
-        b=piMUEKPjgviych3Ri8cAiozNFJKCHtxjLHf7kYZON6Ww8svd3dylV/19EXp8ekJj4g
-         5+yojiRPUQetpULJLIdU1CXfw7ILQ02UiQOI5ngOapPiJvab/1iEvCpv4PUyLa3a9Mqd
-         R8E/fOvrF+2lBy1RzyY/chzr/LUNJLEf8FSXUP5lIu8/SLGoHcA5U2++T4fVGL7Qa5b0
-         5QrodigMEX4bNi2cAsXSnnxVeujVimxZ6Fy/ZmzTQJGrFkiHIdlxeIC2uXAnKG5RNPbJ
-         itnty7YyPbU78bbO0V9kJRXu4YctrncvfU3OaESKxnJOzwEBm4OgzI6yX3ajXnZ3AaJH
-         bEWg==
-X-Gm-Message-State: AOAM532mah4HOvW4US1wG/lvTeyhp0UBgjsxeAHWLT1cpp52mLL/+Dud
-	wR1/YanAbmMjmEqk8DVD/xOm/ySriSpCqg==
-X-Google-Smtp-Source: ABdhPJwngR5lhjo2dctXJAh3NABZ8KCQj3sz/PJ/BvZ8H1n6i3c8aIjHKgz6vEtCVLzfMGDsMaCgyg==
-X-Received: by 2002:a17:90a:f2ca:: with SMTP id gt10mr6423251pjb.231.1619208271482;
-        Fri, 23 Apr 2021 13:04:31 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=ulttXcfBBnOqxji6urrNlw51yLzDA+ACe/mqeJtxuHE=;
+        b=JmssP8ONOxjE9/k3AI7HkJNW3S6IFdW7qFPMSbp2vBIMCkmCs1B3QdP7408CGvLf46
+         j8TPH0lPXXDi1688Vx0cjeOYjDGNhvCIAiVN7J/Qb3r7B+hM+N7qNtSoC3eIomTdTM5J
+         T/qJxU/tzTwTjoHUBzOC4Gjo8/HGG0HmQo1BiQzDmsfCTcbgmjXSoyGb8eu9NqYWzk6W
+         w5h8Ddy6Lbve5xD7R01ySNdCC2Mwwzmvu0NxSvyPbH6FYThatzhyOMfg/vJqaZHfjPt6
+         SScbqk7GRxWo3gUvJwhEC76jaySszpPzsNbvxlrH3vSC3328s5lZT9K1MAIkpZ+kZP9A
+         sl6A==
+X-Gm-Message-State: AOAM530wK4IqFY86isGiyAlVX8Gt2wywJRx/Cr1lRglBnJYiTxlD7TxJ
+	PDIH6HQswa5YgczXxlB5i2dtwKvk2XE79A==
+X-Google-Smtp-Source: ABdhPJyij2g8FbsnnX/q1QuVi2+ISEVn5V5sQ6YdCto6MXJ7pE70SRO5ETzGj/fzBcPNAwrzlI5DNA==
+X-Received: by 2002:a17:903:30c3:b029:ea:afe2:56f5 with SMTP id s3-20020a17090330c3b02900eaafe256f5mr5451652plc.64.1619208272242;
+        Fri, 23 Apr 2021 13:04:32 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::bc1b])
         by smtp.gmail.com with ESMTPSA id s22sm5653008pjs.42.2021.04.23.13.04.31
@@ -42,40 +42,35 @@ Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::bc1b])
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][ 1/4] python3-jinja2_2.%.bbappend: Delete
-Date: Fri, 23 Apr 2021 13:04:26 -0700
-Message-Id: <20210423200429.1109991-1-raj.khem@gmail.com>
+Subject: [meta-python][ 2/4] python3-pyyaml: Do not check for meta-python
+Date: Fri, 23 Apr 2021 13:04:27 -0700
+Message-Id: <20210423200429.1109991-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20210423200429.1109991-1-raj.khem@gmail.com>
+References: <20210423200429.1109991-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-These changes are moved to OE-Core
+Its in OE-core now
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../python/python3-jinja2_2.%.bbappend              | 13 -------------
- 1 file changed, 13 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-jinja2_2.%.bbappend
+ meta-oe/recipes-extended/ostree/ostree_2021.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-jinja2_2.%.bbappend b/meta-python/recipes-devtools/python/python3-jinja2_2.%.bbappend
-deleted file mode 100644
-index 9fe358427a..0000000000
---- a/meta-python/recipes-devtools/python/python3-jinja2_2.%.bbappend
-+++ /dev/null
-@@ -1,13 +0,0 @@
--# Main recipe was moved to oe-core, but with ptest disabled
--inherit ${@bb.utils.filter('DISTRO_FEATURES', 'ptest', d)}
--
--do_install_ptest() {
--    install -d ${D}${PTEST_PATH}/tests
--    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
--}
--
--RDEPENDS_${PN}-ptest += " \
--    ${PYTHON_PN}-pytest \
--    ${PYTHON_PN}-toml \
--    ${PYTHON_PN}-unixadmin \
--"
+diff --git a/meta-oe/recipes-extended/ostree/ostree_2021.2.bb b/meta-oe/recipes-extended/ostree/ostree_2021.2.bb
+index 3a9574da11..62467b01d2 100644
+--- a/meta-oe/recipes-extended/ostree/ostree_2021.2.bb
++++ b/meta-oe/recipes-extended/ostree/ostree_2021.2.bb
+@@ -176,7 +176,7 @@ RDEPENDS_${PN}-ptest += " \
+     util-linux \
+     xz \
+     ${PN}-trivial-httpd \
+-    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'meta-python', 'python3-pyyaml', '', d)} \
++    python3-pyyaml \
+     ${@bb.utils.contains('PACKAGECONFIG', 'gjs', 'gjs', '', d)} \
+ "
+ RDEPENDS_${PN}-ptest_append_libc-glibc = " glibc-utils glibc-localedata-en-us"
 -- 
 2.31.1
 
