@@ -1,48 +1,53 @@
-Received: from mail-oo1-f41.google.com (mail-oo1-f41.google.com [209.85.161.41])
- by mx.groups.io with SMTP id smtpd.web08.189.1619189129651180291
+Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com [209.85.210.47])
+ by mx.groups.io with SMTP id smtpd.web11.541.1619190388371226630
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Apr 2021 07:45:29 -0700
+ Fri, 23 Apr 2021 08:06:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=JUWuYM/e;
- spf=pass (domain: gmail.com, ip: 209.85.161.41, mailfrom: akuster808@gmail.com)
-Received: by mail-oo1-f41.google.com with SMTP id c6-20020a4aacc60000b02901e6260b12e2so8228290oon.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Apr 2021 07:45:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Mz4KBXde;
+ spf=pass (domain: gmail.com, ip: 209.85.210.47, mailfrom: akuster808@gmail.com)
+Received: by mail-ot1-f47.google.com with SMTP id 5-20020a9d09050000b029029432d8d8c5so19607263otp.11;
+        Fri, 23 Apr 2021 08:06:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=to:from:subject:autocrypt:message-id:date:user-agent:mime-version
          :content-transfer-encoding:content-language;
-        bh=qhvdcf6WSWjfOi7rykq1lpRy42bDO1M9nDaJhKMG7iY=;
-        b=JUWuYM/eSvIcaYtERwU/Lae2oTLY+WdCmjduaPkEFNX3+4yZew+dwPt/BbP2Ka0RfB
-         Z3rJtuhPiFZqO2QY8r+vXVBOvNf2bjC+3z1R/jF24EAgBt/qrdB4umgxQCFO6irajnw3
-         VZJJkfKqOpxGypE24yydvp9cUSa+KPfD2wIUAqw0P8LrD0Hn2zs+USzeNhMCbi21MHZW
-         yVeyKPl6z7xKiJxS+TVSec+gc2ADDewQokEuh9viPrIeS+th2asVNTF7MbLNt/XypXTI
-         LeeNEGGFVd2z/KmEi0Tu1+8xLAnjHHpG+3uPgkT0b52birmhgaKjj23e6X9alOrtK1Mk
-         K51w==
+        bh=JILy8ZHl5pwvPXa0mtUjHdlQ3BcKOMGNk83p3KqJDOg=;
+        b=Mz4KBXdeLVRw3g7nMrKNq7Sd6LG6nauNQ5zZZC47IVWy3HtV/GZst8cvfQJrzBoDMR
+         OqKzJou7NJnF6AdP5NgIfMsuPeYLhXYSSbL0a0aMyyh4rGPaG3YKbn/L8wYoetnI5IX0
+         +ZLF8Qh9OyAR4uyHaHMLyPe6iOlHpkKhY3/Vxfzvr4agmEm0Bz+9mTv6iIJmKBWIQU98
+         jf0ENlwPx6f7WVJ2Ks0ff9klOIBEOOfWMAg3WmdyrmZUmX4/BgKKNWQ53kt2K4fZy5Ii
+         ZUMJYTLdbn4f5qts6zh27HsXamEO3PnaKCLmqSgghnDFpvBVcsjitp/NjwZjD4hL6uLg
+         KebQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:to:from:subject:autocrypt:message-id:date
          :user-agent:mime-version:content-transfer-encoding:content-language;
-        bh=qhvdcf6WSWjfOi7rykq1lpRy42bDO1M9nDaJhKMG7iY=;
-        b=fFgFDoFNx5Z5ZcyiMsTutlh+oDxo7yDHg/j+3YmAr1VQgKCpIaJOdyk1G/JHWKHgTA
-         A5k5HhLo36uqGheOretkYw57qZsZivthncZngkdW/rnYmYccFjsCfdK5fhAgkC3AqhJU
-         Io4DHo2QtHapzICOSZk5QlW4YppahpkLZR8iidLvKS9JHli4DVh8zuS3kfsKkHkq5N5j
-         7T7UvXQGcm5bnRItK2OfUJwc+3h/anpgZVlHGejrAFN4kSATOJDXb4OLDrfoAnQGbls+
-         jdAAgHyp0ooDMRr11XE25IQ7SEOjgF7r5dbuuq1MSah2tOAnQBxFUW7MmJS9jbsd3JhR
-         OOLg==
-X-Gm-Message-State: AOAM531AYlIc+h7gi2CVCW6VIouoWBEC7vW9A/pRE+mJbKrFgNYw7eIe
-	DGuuPfXGQ847V60bF6+6czs=
-X-Google-Smtp-Source: ABdhPJy3+yCeOKe0PIXXQFN+6Tl9vH+rUEREAVoJa2oACXsrqgCKZRRfmijrlV4C6FpDiw1fUXat6g==
-X-Received: by 2002:a4a:e512:: with SMTP id r18mr3312470oot.40.1619189128916;
-        Fri, 23 Apr 2021 07:45:28 -0700 (PDT)
+        bh=JILy8ZHl5pwvPXa0mtUjHdlQ3BcKOMGNk83p3KqJDOg=;
+        b=lcpf6GZgr5dmyRWmhwsGHzWn8lNy5ARdRMF89pp/rI/RG1HWAAJj5wSuV6x/IMoTOF
+         bT2YYMKw3Rf1GPBZ997Pj5Dmwfi+MpbQ/+l7tVWiqR4TBwuIdbPMuWeTJR0trE5x+SD1
+         khcYJPciTt/wX+1MLiPHXiqrtvGTlxS2DAKmjNjmAh8rDvXS8KSavOVbuB1pwLZsJ1bC
+         MM/e9cx12sxP0aMgav4JyMNYfO9xb6P8pK1SEdwiUxK4KlRNIulq3ZMa244Y6rxH5BwG
+         PeHVmErhBcwW2lmYGbtxt5Sz3J4CwwhO/ZuzEo/ALqBV7s6nRD106beJZCe3Wb/1/TcT
+         ZgUA==
+X-Gm-Message-State: AOAM533SniKmIp457tCdaJDHYcX3h6Wh7dY1Ke6MikysY4/KlV7vxauy
+	VQ36deeKdkZtI6nwROR3Zwo=
+X-Google-Smtp-Source: ABdhPJwilO2KJ1Ir7sJ32Cb3/PcBTjAvbEeQ2y8BEz5rWGN36Mq7s1hTHdy2x0oantX7Ilg/5CiqPQ==
+X-Received: by 2002:a05:6830:1e3a:: with SMTP id t26mr3699845otr.134.1619190387690;
+        Fri, 23 Apr 2021 08:06:27 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from ?IPv6:2601:202:4180:a5c0:e183:e120:a0a1:83e4? ([2601:202:4180:a5c0:e183:e120:a0a1:83e4])
-        by smtp.gmail.com with ESMTPSA id j7sm1386608otk.65.2021.04.23.07.45.28
+        by smtp.gmail.com with ESMTPSA id w66sm1452023otb.69.2021.04.23.08.06.26
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 23 Apr 2021 07:45:28 -0700 (PDT)
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
- Khem Raj <raj.khem@gmail.com>
+        Fri, 23 Apr 2021 08:06:27 -0700 (PDT)
+To: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+ Patches and discussions about the oe-core layer
+ <openembedded-core@lists.openembedded.org>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+ "bitbake-devel@lists.openembedded.org"
+ <bitbake-devel@lists.openembedded.org>,
+ "conferences@yoctoproject.org" <conferences@yoctoproject.org>
 From: "Armin Kuster" <akuster808@gmail.com>
-Subject: Gatesgarth merge request - April 23
+Subject: The Yocto Project 2021 virtual Summit CFP reminder
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
  Jmd71vHMw+coBetWC3lk+IKjX815Ox0puYXQVRRtI+yMCgd6ib3oGxoQ8tCMwhf9c9/aKjaz
@@ -86,64 +91,26 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
  ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
  8CS2NxU=
-Message-ID: <7aa614e7-a401-08e6-cd4f-bcf5c11f7958@gmail.com>
-Date: Fri, 23 Apr 2021 07:45:27 -0700
+Message-ID: <ee79718a-8ae2-6e9f-a071-9072f106dce2@gmail.com>
+Date: Fri, 23 Apr 2021 08:06:25 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 Content-Language: en-US
 
-The following changes since commit c9815c86bfd63b2d9479915045197e7d315ef709:
+Hello all,
 
-  telepathy-glib: respect GI_DATA_ENABLED when enabling vala-bindings
-(2021-04-10 07:37:44 -0700)
+This is a reminder that the 2021 Yocto Project Summit CFP window closes
+this Sunday at 11:59 PM PST.
 
-are available in the Git repository at:
+If anyone is interested, please visit:
+https://pretalx.com/yocto-project-summit-2021/cfp
 
-  https://git.openembedded.org/meta-openembedded gatesgarth-next
+Kind regards,
+Armin
 
-for you to fetch changes up to 29ca52c7826ad3044b53ccb5224016bd73abdb5c:
+sorry about the cross posting.
 
-  gpsd: backport d-bus message time patch from upstream (2021-04-18
-20:03:23 -0700)
-
-----------------------------------------------------------------
-Hermes Zhang (1):
-      gpsd: backport d-bus message time patch from upstream
-
-Khem Raj (1):
-      mariadb: Fix build on musl/ppc
-
-Stefan Ghinea (1):
-      hostapd: fix CVE-2021-30004
-
-wangmy (1):
-      mariadb: upgrade 10.5.8 -> 10.5.9
-
- .../hostapd/hostapd/CVE-2021-30004.patch           | 123
-+++++++++++++++++++++
- .../recipes-connectivity/hostapd/hostapd_2.9.bb    |   1 +
- ...b-native_10.5.8.bb => mariadb-native_10.5.9.bb} |   0
- meta-oe/recipes-dbs/mysql/mariadb.inc              |   5 +-
- ...-stacktrace-t.c-make-the-test-conditional.patch |  38 -------
- .../recipes-dbs/mysql/mariadb/c11_atomics.patch    |  16 +--
- .../mysql/mariadb/ppc-remove-glibc-dep.patch       |  50 +++++++++
- .../mysql/{mariadb_10.5.8.bb => mariadb_10.5.9.bb} |   0
- ...busexport.c-Fix-broken-d-bus-message-time.patch |  36 ++++++
- meta-oe/recipes-navigation/gpsd/gpsd_3.20.bb       |   1 +
- 10 files changed, 222 insertions(+), 48 deletions(-)
- create mode 100644
-meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2021-30004.patch
- rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.5.8.bb =>
-mariadb-native_10.5.9.bb} (100%)
- delete mode 100644
-meta-oe/recipes-dbs/mysql/mariadb/0001-stacktrace-t.c-make-the-test-conditional.patch
- create mode 100644
-meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
- rename meta-oe/recipes-dbs/mysql/{mariadb_10.5.8.bb =>
-mariadb_10.5.9.bb} (100%)
- create mode 100644
-meta-oe/recipes-navigation/gpsd/gpsd/0001-gpsd-dbusexport.c-Fix-broken-d-bus-message-time.patch
 
