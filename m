@@ -1,83 +1,76 @@
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
- by mx.groups.io with SMTP id smtpd.web09.31.1619208274466754843
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web09.622.1619212254951357059
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Apr 2021 13:04:34 -0700
+ Fri, 23 Apr 2021 14:10:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=YG76aeaH;
- spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f50.google.com with SMTP id nk8so10499990pjb.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Apr 2021 13:04:34 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=k/Y0xkZ1;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id s14so18897566pjl.5
+        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Apr 2021 14:10:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=jR3at6Z0VhzX6edgmea/w2Yue+wPnqjzWla/UnyNG6U=;
-        b=YG76aeaHzWmRE3sWBptMg2607mkxh206RrJJxADP5lVUbADjrLSAd1k/G/Q8WbCVnk
-         agaTjiYEyjmNwLxuWlt3F5Kdqy8B/2BoRpEZO2ONxOTwgo5bmfb0N3QL2UEMEZhMgTDL
-         yaBHa3nEfhBesCtkCzZiCRwUlyMODHEYR4H/ThOTfvydmXbarEqi3zkcuIwmW+x8PoAn
-         H/jKD/xnmTBgY63h3lxolg28Y0SX94wTby5SCS2waXAiWCHAonmizIP9ka5KPT8MKAzn
-         CcGIkjCH2Rf+P316i41CcGlbr/flyEPwl5qwMTHwDMpUTO/bHCA5ixNNhuGPQE8o4ril
-         yFcw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=FdtMS+RX4BSulnr6JNeExmAVpj2+ZIEi9iVBDHwIRrU=;
+        b=k/Y0xkZ1I4m+mSP+hj40QyWKczlRFOcaUjBZeFEL+2KicB8XdL5JXQMY/1cYaAKsDz
+         pcPhLOiwM1vMFyRaw07kk7DaNRVAWnPiKy0yma6KlkymRgEIKeSs9xqCYLrbKdZAcFvk
+         zL1qu3eWEvf1fuFfp0hvjvCQfOw2C0jhLVtIJsBef63hQeycwSZaaOrAwe0nYGleSMBR
+         ODqk/+WhNLsFgDzz2OX+lyMbncDVISStJYZ3ZA/o/NWd2xD+xqCnSC6X6M4rGhkaMxeA
+         Z/WKuYyZ6XG7daFNsjIYB7xp//fzeN07hdxoPI3ygUCChevzfJgdeJuvyg1Jnr4+I3Lq
+         vhsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=jR3at6Z0VhzX6edgmea/w2Yue+wPnqjzWla/UnyNG6U=;
-        b=qoCPFQq7EnzCYZ0PDi3tJlV5GZGzjKC4cFhZWV/jGj2R4K6KBFpucRdqGV2E710Dac
-         zNC5WM6F8VrK9LDf2uz9uNS+61bzMJUV+CJ3LRNvtEqzRH2hfotImMCqxaIkh2u5Lm/H
-         vdQULLzgA4bb99bCCdSBTeONx3xFMCKpYWVYxxAoRmYmX99brf/NE3wanUT5xMGPMOUz
-         g4Uo88i0k7IGTSRVt+KSdUdYfiicK6gjBS2tCH9z3nx/ED+9ZMyj2LZmtmLo4T/pjglN
-         3kytGM/VhHtow9KLaWK4pybmSG4sVJ/2Lamip7U8/dV87xTzAh4bZbR7rQkYBUlRKKjY
-         vb2g==
-X-Gm-Message-State: AOAM530c1rxUY6Y8hd3CfY770htK9kGyjhUDw9yJIcos9vz0+Z3N6t/M
-	3YDdmkMVsjZMi5CSFOy7X04bmVlM0yA6vg==
-X-Google-Smtp-Source: ABdhPJx0kq2qvKKoNGo9j6/qP9VT+Ic3E+jo5kEzBow4lvLioDuKZGRlyBPiBmYLgwwjitkQl5WUng==
-X-Received: by 2002:a17:902:7081:b029:ec:c083:878a with SMTP id z1-20020a1709027081b02900ecc083878amr5296120plk.76.1619208273834;
-        Fri, 23 Apr 2021 13:04:33 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=FdtMS+RX4BSulnr6JNeExmAVpj2+ZIEi9iVBDHwIRrU=;
+        b=Rsz/8pBcGww1J78d9FPJfsyybuNV1K9AZq+J0dFmNxiSR4niTAfaVEAxDnE65SrCn0
+         p6tJej0D39WGYs754aC59frzyLKSOqXLIZocV0VNo1Ac6rmnEN06zp2RTgOOdcWqpZn1
+         ozBnREaieH/E4gbytoUZ1B+poPtnNYio1s5dnh873e9n4MqsbzNZt1GFkvMGI/PqbSSA
+         FBWPpEJ26ROBylUffEdsIPBPT7HDwvU4JaDJ6VGHaH0UZ6FI4Tgw9X6S0tk1K2Wmg3z5
+         XucGMkluHC3Qp8R/yk1amxHq+0eGmkx+LtqWperBSTB7jhSvP3VOCInl6XKsKVwHjKrm
+         Yi7A==
+X-Gm-Message-State: AOAM530czsXECsxqn2kLl6dj3xpQPVoRoYJeSxeZfueuGM7iOf3kvwiB
+	4B+PZOrvIHZZE5lPakytIVLpWuRcNfjVig==
+X-Google-Smtp-Source: ABdhPJwyfIRgjEpZvXpyVMTaRQaj5lDi0HzInloAaMcxJhf8WPWNEgt3PiGaTqkuelfEmBx+OO8xYw==
+X-Received: by 2002:a17:90a:352:: with SMTP id 18mr6296772pjf.223.1619212254183;
+        Fri, 23 Apr 2021 14:10:54 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::bc1b])
-        by smtp.gmail.com with ESMTPSA id s22sm5653008pjs.42.2021.04.23.13.04.33
+        by smtp.gmail.com with ESMTPSA id n9sm5685072pgt.35.2021.04.23.14.10.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 Apr 2021 13:04:33 -0700 (PDT)
+        Fri, 23 Apr 2021 14:10:53 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][ 4/4] python3-markupsafe: Delete bbappend
-Date: Fri, 23 Apr 2021 13:04:29 -0700
-Message-Id: <20210423200429.1109991-4-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Kory Maincent <kory.maincent@bootlin.com>
+Subject: [meta-oe][PATCH] nodejs: Enable snapshot
+Date: Fri, 23 Apr 2021 14:10:51 -0700
+Message-Id: <20210423211051.1134029-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210423200429.1109991-1-raj.khem@gmail.com>
-References: <20210423200429.1109991-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-It was enabling ptests which is now on by default in OE-core for this
-version
+New build method lets mksnaphot run so thsi is no longer needed
 
+Reported-by: Kory Maincent <kory.maincent@bootlin.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../python/python3-markupsafe_1.%.bbappend           | 12 ------------
- 1 file changed, 12 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-markupsafe_1.%.bbappend
+ meta-oe/recipes-devtools/nodejs/nodejs_14.16.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-markupsafe_1.%.bbappend b/meta-python/recipes-devtools/python/python3-markupsafe_1.%.bbappend
-deleted file mode 100644
-index abfda60658..0000000000
---- a/meta-python/recipes-devtools/python/python3-markupsafe_1.%.bbappend
-+++ /dev/null
-@@ -1,12 +0,0 @@
--# Main recipe was moved to oe-core, but with ptest disabled
--inherit ${@bb.utils.filter('DISTRO_FEATURES', 'ptest', d)}
--
--RDEPENDS_${PN}-ptest += " \
--    ${PYTHON_PN}-pytest \
--"
--
--do_install_ptest() {
--    install -d ${D}${PTEST_PATH}/tests
--    cp -f ${S}/tests/* ${D}${PTEST_PATH}/tests/
--}
--
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_14.16.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_14.16.1.bb
+index 2953e9740b..48bf2f4a8a 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_14.16.1.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_14.16.1.bb
+@@ -133,7 +133,7 @@ do_configure () {
+     export LD="${CXX}"
+     GYP_DEFINES="${GYP_DEFINES}" export GYP_DEFINES
+     # $TARGET_ARCH settings don't match --dest-cpu settings
+-    python3 configure.py --prefix=${prefix} --cross-compiling --without-snapshot --shared-openssl \
++    python3 configure.py --prefix=${prefix} --cross-compiling --shared-openssl \
+                --without-dtrace \
+                --without-etw \
+                --dest-cpu="${@map_nodejs_arch(d.getVar('TARGET_ARCH'), d)}" \
 -- 
 2.31.1
 
