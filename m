@@ -1,52 +1,81 @@
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by mx.groups.io with SMTP id smtpd.web10.26.1619208224072212639
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web12.45.1619208272126142336
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Apr 2021 13:03:44 -0700
+ Fri, 23 Apr 2021 13:04:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kernel.org header.s=k20201202 header.b=T3nDeHcg;
- spf=pass (domain: kernel.org, ip: 198.145.29.99, mailfrom: okaya@kernel.org)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 57F436144A;
-	Fri, 23 Apr 2021 20:03:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1619208221;
-	bh=W8bT+CnR4J8VVZnQuaQMJuj7/NAi6FiUwn2wjUbZGoU=;
-	h=From:To:Cc:Subject:Date:From;
-	b=T3nDeHcg0aB4Jqcplu8IL154yl7NkZ09I0GS+rJZI0jHYqSYWbX1k+SQvlr/vx1Ew
-	 sowJBkPFZIcofMhIzYAShS6S63jKFI8mnoa6MyUCfuvAnXJlCQ+fjOnBuIRGG+Ek4e
-	 OmmY0Pi0yX62DCN1lmQR1fnl6wFIpy3nShd4UyTucy8aXzyAqJDeEuRPqxKoHtjwFJ
-	 9wA81gD9kDCcK2qFcHRz3svhsN4E1xVRbMNoErRwv4+3U9U1hVvkij5ISNPaNKLC1f
-	 MI/oiNEYkoi8AIvpinqzh2lMbr3Bk/bhk9EW2tiNOouSUMl4/eYnqWSNtctsYmBu/F
-	 PxSb0kj70P6Ug==
-From: "Sinan Kaya" <okaya@kernel.org>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=NyPYU+vW;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id e9so8781684plj.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Apr 2021 13:04:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=NnM3gtrjtvega5JqUpY5pmWKlWHxf4F+dDqggssYTfE=;
+        b=NyPYU+vW1Wr/26Sy4DXw7FCZLdzZ2XZiOhJ64Vn09l+EY25KjgOpGyKdDUZWwmNswK
+         URh2J6TfnXkoAUKBd6nCzltDtkqZfS9PThvGXxE7+1fyHTwWcdlVGtEKQ2y6EF8I/fO/
+         kkkpfBgktRLvreaJf3tnPEdkRR7O3WYi/1e82DTyZ4dKj7dQATl6rPXKgzimV2eDoJDA
+         R/cGjbOQJuoh8+TZIvrQBumgo4J3THrSBPbzQGFlWgRsGaHeIv/urcjvAs5kXsHNa0yU
+         q9tDTF+C1isMHtd/pQURE7i8JmsFkwyEZHT2psvRlXBlW6hy0g6YymVuwkwKUI7UxJye
+         fCmg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=NnM3gtrjtvega5JqUpY5pmWKlWHxf4F+dDqggssYTfE=;
+        b=piMUEKPjgviych3Ri8cAiozNFJKCHtxjLHf7kYZON6Ww8svd3dylV/19EXp8ekJj4g
+         5+yojiRPUQetpULJLIdU1CXfw7ILQ02UiQOI5ngOapPiJvab/1iEvCpv4PUyLa3a9Mqd
+         R8E/fOvrF+2lBy1RzyY/chzr/LUNJLEf8FSXUP5lIu8/SLGoHcA5U2++T4fVGL7Qa5b0
+         5QrodigMEX4bNi2cAsXSnnxVeujVimxZ6Fy/ZmzTQJGrFkiHIdlxeIC2uXAnKG5RNPbJ
+         itnty7YyPbU78bbO0V9kJRXu4YctrncvfU3OaESKxnJOzwEBm4OgzI6yX3ajXnZ3AaJH
+         bEWg==
+X-Gm-Message-State: AOAM532mah4HOvW4US1wG/lvTeyhp0UBgjsxeAHWLT1cpp52mLL/+Dud
+	wR1/YanAbmMjmEqk8DVD/xOm/ySriSpCqg==
+X-Google-Smtp-Source: ABdhPJwngR5lhjo2dctXJAh3NABZ8KCQj3sz/PJ/BvZ8H1n6i3c8aIjHKgz6vEtCVLzfMGDsMaCgyg==
+X-Received: by 2002:a17:90a:f2ca:: with SMTP id gt10mr6423251pjb.231.1619208271482;
+        Fri, 23 Apr 2021 13:04:31 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::bc1b])
+        by smtp.gmail.com with ESMTPSA id s22sm5653008pjs.42.2021.04.23.13.04.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 23 Apr 2021 13:04:31 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Sinan Kaya <okaya@kernel.org>
-Subject: [meta-oe][PATCH] zram: add support for mem_limit
-Date: Fri, 23 Apr 2021 20:03:25 +0000
-Message-Id: <20210423200325.3204-1-okaya@kernel.org>
-X-Mailer: git-send-email 2.17.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][ 1/4] python3-jinja2_2.%.bbappend: Delete
+Date: Fri, 23 Apr 2021 13:04:26 -0700
+Message-Id: <20210423200429.1109991-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.31.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Some targets might be interested in limiting how big
-zram can grow. If the variable is set in /etc/default/zram file,
-configure it in mem_limit sysfs attribute.
+These changes are moved to OE-Core
 
-Signed-off-by: Sinan Kaya <okaya@kernel.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/zram/zram/zram-swap-init | 5 +++++
- 1 file changed, 5 insertions(+)
+ .../python/python3-jinja2_2.%.bbappend              | 13 -------------
+ 1 file changed, 13 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-jinja2_2.%.bbappend
 
-diff --git a/meta-oe/recipes-extended/zram/zram/zram-swap-init b/meta-oe/recipes-extended/zram/zram/zram-swap-init
-index ccc3aafe3a..28082f7ff0 100755
---- a/meta-oe/recipes-extended/zram/zram/zram-swap-init
-+++ b/meta-oe/recipes-extended/zram/zram/zram-swap-init
-@@ -24,3 +24,8 @@ modprobe -q zram || true
- 
- zramctl -a ${ZRAM_ALGORITHM} -s ${memzram}KB $device
- mkswap -L "zram-swap" $device
-+
-+devname="${device##*/}"
-+if [ ! -z ${ZRAM_SIZE_LIMIT+x} ]; then
-+	echo ${ZRAM_SIZE_LIMIT} > /sys/block/$devname/mem_limit
-+fi
+diff --git a/meta-python/recipes-devtools/python/python3-jinja2_2.%.bbappend b/meta-python/recipes-devtools/python/python3-jinja2_2.%.bbappend
+deleted file mode 100644
+index 9fe358427a..0000000000
+--- a/meta-python/recipes-devtools/python/python3-jinja2_2.%.bbappend
++++ /dev/null
+@@ -1,13 +0,0 @@
+-# Main recipe was moved to oe-core, but with ptest disabled
+-inherit ${@bb.utils.filter('DISTRO_FEATURES', 'ptest', d)}
+-
+-do_install_ptest() {
+-    install -d ${D}${PTEST_PATH}/tests
+-    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+-}
+-
+-RDEPENDS_${PN}-ptest += " \
+-    ${PYTHON_PN}-pytest \
+-    ${PYTHON_PN}-toml \
+-    ${PYTHON_PN}-unixadmin \
+-"
 -- 
-2.17.1
+2.31.1
 
