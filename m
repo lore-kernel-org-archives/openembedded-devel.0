@@ -1,51 +1,51 @@
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
- by mx.groups.io with SMTP id smtpd.web10.3083.1619138160966575664
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.web10.3448.1619140247733893780
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Apr 2021 17:36:01 -0700
+ Thu, 22 Apr 2021 18:10:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=nxwcgYB0;
- spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f181.google.com with SMTP id w10so34058591pgh.5
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Apr 2021 17:36:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=rIgixPEF;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id f11-20020a17090a638bb02901524d3a3d48so307501pjj.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Apr 2021 18:10:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=Ha0ppd1FuLer+aGpoM29ymO0mc11bXcruZ6cOS2UnwE=;
-        b=nxwcgYB0iOkp0iFARnztsKw2U2J/kHdsSQFQnj4eskHQOc1gf8ENihRhAgw966PLfZ
-         I01Spk2mFJQmhsXH+V9Zz/H/djHyQ7YkCkXUyk1osCnlFClRkLOrMH+2VPA8FBi1AQq4
-         picRnLfY0Zpegx7dmEao5tfJ9bEdW0tGoFlnzkAAtxj+gBjRhxBbupfIdaGKIPRRAyQF
-         T7MI4/laHhefWIdVSgz2pDVykhjhXMoK+GV2UcVQHoa8ZmhITpq9M/uQCUb/4QuETVY5
-         uTL7CVdxZqoSc527OEp8RjqyT8vo8FbHwQcKhIQC5ldXheIhthlJIf8ujyqvPRDvdTLo
-         5MMA==
+        bh=fpr2RUEESpT/0Px8yJ0KlonqQot2pSpTzYE4rrtfW+E=;
+        b=rIgixPEF4E1z3gpIaEtReCGAEep9/Uzf7G3VDPGUCHEOxZbkRPZAhoqeHhVN0cwlBw
+         cJ+VygxZ0H69uJWNMb5Gj9tXPSi9KxsoY9cG9Z3Hke9s4g5Vl9O1Awu5tXBr0dv/pBhl
+         OOSPldihMevDGvLcoVWv5on2OpqEhbtsGn45lCN9FR6WUNa1cqIfOHxrZgtWx+m6FmEB
+         QuOuJePE5tCd+3e6LCZ9bUDBLIgSnyDOsZnSNmIGyw7tyPe05Pp1dgVMrNA34dV8PUGY
+         zxkFCVYzFn7AVhiMVFsjkdHWKYhJMvcS9dgYutCFsbFlsh/el5rB/dMxeaLsJgHVEOlD
+         KFOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=Ha0ppd1FuLer+aGpoM29ymO0mc11bXcruZ6cOS2UnwE=;
-        b=Zmf/l03h1fbiBWrfDC4q4F3AFyuNlkaezayznqv4LDthjx0QmigKg7S31bkGFfEeHN
-         ocOrH0QmBdXGskbZDSDqY3UpJAzcBgFASSI9j4THmxuIRJkIdJmsg1HhV5kPehK2PekK
-         8ceW/3L/Bpu6JNfyn6jWldkcsTOWHuYHbSxPf4OrP4z2K/WRoqLzOVanrgOy7f5o2A8t
-         lmNNm+0dE03tOFdBzZRqMe8GZ/qdMU3q5isBRvxf/R/rv82cRrvLyZmOSzQV177xmKbp
-         nO54c3mnhGk9iIgaL0eN2l6eWSh0vThIXvh8eJUZORzKPR6TlNwPkSwOoYguyFBoikYt
-         wExw==
-X-Gm-Message-State: AOAM531PLAY1TfHOuXWSsLl3gRJHdo6I2ZfWlnGCT8QkO/3BZaEwJQ7X
-	7iy4sQMYM0UrZ6mts9YX11RHCBbA5zolpg==
-X-Google-Smtp-Source: ABdhPJxuvS0lX4HVV6T2O+0xHMznc9vtEssmh9XeKI3ZG/IjxrPP9Ca6njDhAtVKwQRZOjxQI5pxgw==
-X-Received: by 2002:a62:1401:0:b029:25a:d41c:fb2e with SMTP id 1-20020a6214010000b029025ad41cfb2emr1404373pfu.51.1619138160278;
-        Thu, 22 Apr 2021 17:36:00 -0700 (PDT)
+        bh=fpr2RUEESpT/0Px8yJ0KlonqQot2pSpTzYE4rrtfW+E=;
+        b=EMg0JquNL8d5Y+kICzvN5tuPLVr6xRMjnOkP1XPHqpkvweGQCF8PTkepo0kcUT9yLS
+         g51lYDELtVYChmi3j/QJHBchCMl5oFH8uhfoQummgSXWIzKmOMmhhmoc95Ar3+SEYfrR
+         sF+V+eX3rbBEnq8UE333m7qJeTXlcsvdM7Ke0+fxMFBnmOnqviidr12+t38sq5rOp4qw
+         3+OvfCiYjcSMjdOWkHxM/AgwGbaCG6kwGsv+3ibIhPpIscj8I8je38oVNL+ghhsqMm2g
+         j77z7E2KZq6b8GDz7kfh1D9y9KEuG11BVfL0aJW+ofuyr3kRLye40EAOuHiSJLk+w/r3
+         BhYA==
+X-Gm-Message-State: AOAM532P9ZOuW+xySNCiTxLXai6AHkRPegGMzftMkxkV+4+CHbDRtvZQ
+	qCVNO1YpqT9FNBHV3lwi/EaYw+E5hjBMKA==
+X-Google-Smtp-Source: ABdhPJxoPK8G9nNKmhPn0QW8Jj6cTO4JBy1IH33EFKoDRDDf9DEmBp0yOuTt0lf2+YS/5vWpZdxQOA==
+X-Received: by 2002:a17:90b:60a:: with SMTP id gb10mr2964086pjb.71.1619140246809;
+        Thu, 22 Apr 2021 18:10:46 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::bc1b])
-        by smtp.gmail.com with ESMTPSA id kk7sm5893923pjb.11.2021.04.22.17.35.59
+        by smtp.gmail.com with ESMTPSA id 187sm2939200pff.139.2021.04.22.18.10.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Apr 2021 17:35:59 -0700 (PDT)
+        Thu, 22 Apr 2021 18:10:46 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>,
 	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Subject: [meta-gnome][PATCH] libchamplain: Require opengl distro feature
-Date: Thu, 22 Apr 2021 17:35:53 -0700
-Message-Id: <20210423003553.3537524-1-raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH v2 1/3] libchamplain: Require opengl distro feature
+Date: Thu, 22 Apr 2021 18:10:42 -0700
+Message-Id: <20210423011044.3627373-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -62,22 +62,26 @@ Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'libchamplai
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Cc: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb | 2 ++
- 1 file changed, 2 insertions(+)
+v2: Also inherit features_check
+
+ meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb b/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb
-index 90e5533015..ef9e7b254a 100644
+index 90e5533015..24312c78a3 100644
 --- a/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb
 +++ b/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb
-@@ -5,6 +5,8 @@ DEPENDS = "glib-2.0 gtk+3 gdk-pixbuf clutter-1.0 clutter-gtk-1.0 libsoup-2.4"
+@@ -3,7 +3,9 @@ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+ DEPENDS = "glib-2.0 gtk+3 gdk-pixbuf clutter-1.0 clutter-gtk-1.0 libsoup-2.4"
  
- inherit meson gobject-introspection
- 
-+REQUIRED_DISTRO_FEATURES = "opengl"
+-inherit meson gobject-introspection
++inherit features_check gobject-introspection meson
 +
++REQUIRED_DISTRO_FEATURES = "opengl"
+ 
  SRCREV = "145e417f32e507b63c21ad4e915b808a6174099e"
  SRC_URI = "git://github.com/gnome/libchamplain.git"
- 
 -- 
 2.31.1
 
