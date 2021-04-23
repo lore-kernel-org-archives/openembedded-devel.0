@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.6694.1619165020956303070
+ by mx.groups.io with SMTP id smtpd.web11.6837.1619165023063506860
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Apr 2021 01:03:41 -0700
+ Fri, 23 Apr 2021 01:03:43 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=47740 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lZqmn-00018D-Rh; Fri, 23 Apr 2021 11:03:40 +0300
+	id 1lZqmq-00018D-2G; Fri, 23 Apr 2021 11:03:42 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-pytest-asyncio: Upgrade 0.14.0 -> 0.15.1
-Date: Fri, 23 Apr 2021 11:03:25 +0300
-Message-Id: <20210423080326.6577-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-xlsxwriter: Upgrade 1.3.9 -> 1.4.0
+Date: Fri, 23 Apr 2021 11:03:26 +0300
+Message-Id: <20210423080326.6577-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210423080326.6577-1-leon.anavi@konsulko.com>
 References: <20210423080326.6577-1-leon.anavi@konsulko.com>
@@ -30,39 +30,32 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.15.1:
+Upgrade to release 1.4.0:
 
-- Hotfix for errors while closing event loops while replacing
-  them.
-- Add support for Python 3.9
-- Abandon support for Python 3.5. If you still require support for
-  Python 3.5, please use pytest-asyncio v0.14 or earlier.
-- Set unused_tcp_port_factory fixture scope to 'session'.
-- Properly close event loops when replacing them.
+- Add fix for issue for where a y_axis font rotation of 0 was
+  ignored.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...test-asyncio_0.14.0.bb => python3-pytest-asyncio_0.15.1.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pytest-asyncio_0.14.0.bb => python3-pytest-asyncio_0.15.1.bb} (70%)
+ ...{python3-xlsxwriter_1.3.9.bb => python3-xlsxwriter_1.4.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-xlsxwriter_1.3.9.bb => python3-xlsxwriter_1.4.0.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.14.0.bb b/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.15.1.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-pytest-asyncio_0.14.0.bb
-rename to meta-python/recipes-devtools/python/python3-pytest-asyncio_0.15.1.bb
-index 1e94c25f7e..1aa606b78b 100644
---- a/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.14.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.15.1.bb
-@@ -3,8 +3,7 @@ DESCRIPTION = "pytest-asyncio is an Apache2 licensed library, written in Python,
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
+diff --git a/meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.9.bb b/meta-python/recipes-devtools/python/python3-xlsxwriter_1.4.0.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.9.bb
+rename to meta-python/recipes-devtools/python/python3-xlsxwriter_1.4.0.bb
+index e53dd4d5b9..b5e15f14c9 100644
+--- a/meta-python/recipes-devtools/python/python3-xlsxwriter_1.3.9.bb
++++ b/meta-python/recipes-devtools/python/python3-xlsxwriter_1.4.0.bb
+@@ -8,6 +8,6 @@ inherit pypi setuptools3
  
--SRC_URI[md5sum] = "b63593bc08f445f6e3f14c34128a68ed"
--SRC_URI[sha256sum] = "9882c0c6b24429449f5f969a5158b528f39bde47dc32e85b9f0403965017e700"
-+SRC_URI[sha256sum] = "2564ceb9612bbd560d19ca4b41347b54e7835c2f792c504f698e05395ed63f6f"
+ PYPI_PACKAGE = "XlsxWriter"
  
- inherit pypi setuptools3
+-SRC_URI[sha256sum] = "eca2e737d0b8df3cd72520fadcda9f48c3581282639965125a86ea8cd04620cf"
++SRC_URI[sha256sum] = "82be5a58c09bdc2ff8afc25acc815c465275239ddfc56d6e7b2a7e6c5d2e213b"
  
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
