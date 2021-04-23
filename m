@@ -1,76 +1,83 @@
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web09.622.1619212254951357059
+Received: from mail-qv1-f46.google.com (mail-qv1-f46.google.com [209.85.219.46])
+ by mx.groups.io with SMTP id smtpd.web09.628.1619212284925447715
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Apr 2021 14:10:55 -0700
+ Fri, 23 Apr 2021 14:11:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=k/Y0xkZ1;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id s14so18897566pjl.5
-        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Apr 2021 14:10:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=YBGYy0Us;
+ spf=pass (domain: gmail.com, ip: 209.85.219.46, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f46.google.com with SMTP id d1so12910588qvy.11
+        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Apr 2021 14:11:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=FdtMS+RX4BSulnr6JNeExmAVpj2+ZIEi9iVBDHwIRrU=;
-        b=k/Y0xkZ1I4m+mSP+hj40QyWKczlRFOcaUjBZeFEL+2KicB8XdL5JXQMY/1cYaAKsDz
-         pcPhLOiwM1vMFyRaw07kk7DaNRVAWnPiKy0yma6KlkymRgEIKeSs9xqCYLrbKdZAcFvk
-         zL1qu3eWEvf1fuFfp0hvjvCQfOw2C0jhLVtIJsBef63hQeycwSZaaOrAwe0nYGleSMBR
-         ODqk/+WhNLsFgDzz2OX+lyMbncDVISStJYZ3ZA/o/NWd2xD+xqCnSC6X6M4rGhkaMxeA
-         Z/WKuYyZ6XG7daFNsjIYB7xp//fzeN07hdxoPI3ygUCChevzfJgdeJuvyg1Jnr4+I3Lq
-         vhsw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=gCjfg2iCvc5r900H/gnyYIOqtdl9YxVmnaG92wqvTUw=;
+        b=YBGYy0UsqgP6KShYzOq6/GVwNQ4K4Mvr2SwzIChT+eujgYHWjp7Wjbi+FIKcks3+pZ
+         8KiWD6RZiSnTHLZEqBML37CR//UYDR0N1+umf45xB2qzEB2EoOycieMCrgndHBE+aMHF
+         DCZ3pi9+BKwe3GPt+RVF+rEN2Lz363JS9h2EIc071LdnBI+nz5Hjb2k6VzDlwXT3+v+v
+         g0AA83Og6Qw2yP2DW8kK2dSikcqnP9auKY+nMc4tT8WWcp8CFeVY4pU8Rl7StlwTw5ap
+         F0qllKefZrF453uJMLLSnNbWEwtvmFCpb6cjA+DDa8ax46EG6u32MfdhLVNlSyhUdv59
+         0XrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=FdtMS+RX4BSulnr6JNeExmAVpj2+ZIEi9iVBDHwIRrU=;
-        b=Rsz/8pBcGww1J78d9FPJfsyybuNV1K9AZq+J0dFmNxiSR4niTAfaVEAxDnE65SrCn0
-         p6tJej0D39WGYs754aC59frzyLKSOqXLIZocV0VNo1Ac6rmnEN06zp2RTgOOdcWqpZn1
-         ozBnREaieH/E4gbytoUZ1B+poPtnNYio1s5dnh873e9n4MqsbzNZt1GFkvMGI/PqbSSA
-         FBWPpEJ26ROBylUffEdsIPBPT7HDwvU4JaDJ6VGHaH0UZ6FI4Tgw9X6S0tk1K2Wmg3z5
-         XucGMkluHC3Qp8R/yk1amxHq+0eGmkx+LtqWperBSTB7jhSvP3VOCInl6XKsKVwHjKrm
-         Yi7A==
-X-Gm-Message-State: AOAM530czsXECsxqn2kLl6dj3xpQPVoRoYJeSxeZfueuGM7iOf3kvwiB
-	4B+PZOrvIHZZE5lPakytIVLpWuRcNfjVig==
-X-Google-Smtp-Source: ABdhPJwyfIRgjEpZvXpyVMTaRQaj5lDi0HzInloAaMcxJhf8WPWNEgt3PiGaTqkuelfEmBx+OO8xYw==
-X-Received: by 2002:a17:90a:352:: with SMTP id 18mr6296772pjf.223.1619212254183;
-        Fri, 23 Apr 2021 14:10:54 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::bc1b])
-        by smtp.gmail.com with ESMTPSA id n9sm5685072pgt.35.2021.04.23.14.10.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 Apr 2021 14:10:53 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Kory Maincent <kory.maincent@bootlin.com>
-Subject: [meta-oe][PATCH] nodejs: Enable snapshot
-Date: Fri, 23 Apr 2021 14:10:51 -0700
-Message-Id: <20210423211051.1134029-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=gCjfg2iCvc5r900H/gnyYIOqtdl9YxVmnaG92wqvTUw=;
+        b=BT1zUiW1tChLXkNKvHrL5699T4Luy8pYEFLK2KuUWAC1FAxLSqSLZVJ/H3rl6LH5E8
+         EH/C9YKHlZCFW4SNdY4/5thz0PJCHocUElAg+4/grrBOAX1LicYM4obexG0T3dS3OjwK
+         Z7nv7mwAkWIUEOWVAplU4jmTsBiyJf+9a/9f4nRe027FUk1GB3ePF9tsg1rp0K81Lk2R
+         3hWiMsBvaMIMXtz3tApLFOH14kBTNolzPrSySAkpcZQPLlNYt4FwTK5WSnmab0lBW33x
+         I8w8TYcGm299Axdui1SNIErwEEYjdyMJCCfZaRCp4H6rDQSSZvAvLCU8ufMF8Ju/kiQA
+         EcKg==
+X-Gm-Message-State: AOAM533WOc9/0qotZhdjTbsrHRR1FeSFEZ3ftyhz0PD0Z8ziMD6T6t5w
+	ZFcgNUkDMZrePZCZv2hgU975daxZS/Qj1euFhh5KWwuG+tL0rA==
+X-Google-Smtp-Source: ABdhPJzB5gxiI+7yaFyOdUvtQMvhLjKbNfax5vkdz5NwgArODMWHJPpoIXT/+5YZjef0UyQcFh1i2ZZJNJRb6GrT3Bc=
+X-Received: by 2002:ad4:5bef:: with SMTP id k15mr6274023qvc.16.1619212283904;
+ Fri, 23 Apr 2021 14:11:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210419210440.2446040-1-raj.khem@gmail.com> <20210419210440.2446040-4-raj.khem@gmail.com>
+ <20210422123348.4e15c17f@kmaincent-XPS-13-7390>
+In-Reply-To: <20210422123348.4e15c17f@kmaincent-XPS-13-7390>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 23 Apr 2021 14:10:58 -0700
+Message-ID: <CAMKF1srte22fUKkODrUt0WvAT+pBLOzNJm8eFx-3TFeOc_awzw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v3 3/4] nodejs: Use qemu usermode to run target binaries during build
+To: =?UTF-8?Q?K=C3=B6ry_Maincent?= <kory.maincent@bootlin.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-New build method lets mksnaphot run so thsi is no longer needed
+On Thu, Apr 22, 2021 at 3:33 AM K=C3=B6ry Maincent <kory.maincent@bootlin.c=
+om> wrote:
+>
+> On Mon, 19 Apr 2021 14:04:39 -0700
+> "Khem Raj" <raj.khem@gmail.com> wrote:
+>
+> > So far, we have been trying to build nodejs-native and use the native
+> > host binaries from there, which has worked out ok but always changes
+> > when major upgrade is done, since more binaries or places are required
+> > to be captured. This patch changes this approach to use qemu-user to ru=
+n
+> > these binaries under during cross build. This lets them run closer to
+> > upstream build process and also removes dependency on nodejs-native
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ---
+> >  .../nodejs/0002-Using-native-binaries.patch   | 93 +++++++++----------
+> >  .../recipes-devtools/nodejs/nodejs_14.16.1.bb | 34 ++++++-
+> >  2 files changed, 74 insertions(+), 53 deletions(-)
+> >
+>
+> You can remove the "--without-snapshot" configuration parameter, now usel=
+ess.
+>
+> With that fixed:
+> Tested-by: Kory Maincent <kory.maincent@bootlin.com>
+>
 
-Reported-by: Kory Maincent <kory.maincent@bootlin.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-devtools/nodejs/nodejs_14.16.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Thanks a lot for testing it Kory, it was already merged but I have
+send a followup to remove --without-snapshot
+let me know if there anything else we need in this recipe
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_14.16.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_14.16.1.bb
-index 2953e9740b..48bf2f4a8a 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_14.16.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_14.16.1.bb
-@@ -133,7 +133,7 @@ do_configure () {
-     export LD="${CXX}"
-     GYP_DEFINES="${GYP_DEFINES}" export GYP_DEFINES
-     # $TARGET_ARCH settings don't match --dest-cpu settings
--    python3 configure.py --prefix=${prefix} --cross-compiling --without-snapshot --shared-openssl \
-+    python3 configure.py --prefix=${prefix} --cross-compiling --shared-openssl \
-                --without-dtrace \
-                --without-etw \
-                --dest-cpu="${@map_nodejs_arch(d.getVar('TARGET_ARCH'), d)}" \
--- 
-2.31.1
-
+> Thanks,
+> K=C3=B6ry
