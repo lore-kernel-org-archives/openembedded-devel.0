@@ -1,222 +1,385 @@
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
- by mx.groups.io with SMTP id smtpd.web09.4838.1619259111645572207
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web10.4870.1619259112924525311
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 24 Apr 2021 03:11:51 -0700
+ Sat, 24 Apr 2021 03:11:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=pCuC+hw4;
- spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f173.google.com with SMTP id p2so21415187pgh.4
-        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Apr 2021 03:11:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=jZcoEtVx;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id f11-20020a17090a638bb02901524d3a3d48so2487840pjj.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Apr 2021 03:11:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+        h=from:to:subject:date:message-id:mime-version:in-reply-to:references
          :content-transfer-encoding;
-        bh=wcYFbKBxzB0/AyaN3XnbAwgpZCQWaOWxrLm54HiZTTw=;
-        b=pCuC+hw4AGGitGai7xbeubKmuN5exB8DFgG4xo41DNwxUFEtHEAtNKDVNA80HHdB0I
-         yFYKNGeAfrq8Jqoe/C1l9hpSCiDM5S53TtcOr/0BSPGR3GFPPJ0/2//zyVko6tjW9L75
-         ZPhtZyhazptdK42XxHcqf/uG43aOieKjMVnUIh3Pxt4nWIuqkOsgSjwb/N+NzGe6Lutz
-         ZcbOq020mnTGx2iaQttZjTDFlL3IHRZr0MtDL1OHJp+Ts0LstRIgNZKgwpaly5U1RJtl
-         WNcvTX5o0o2yToK4HLOqXV8rSSpD1zzuE1/GaYpoyUr+4zKX+VRIS6sbw12bVJcmEg8k
-         BW3A==
+        bh=zn2duoUFMx9M64mobhehwOoo3C6qgQeIJB+ezcYJqx0=;
+        b=jZcoEtVx2j9tBMamFaSt1Lw7oOfOmSilHS1TBIfRH5oy2yf0kq1RxFEPpWXVTQwDhQ
+         pywduP8m4efxeJLvnpGSyp+sbopTJXWt+voR1RNBZhdHrACAhDoHMluZ9otTCKJAPgNU
+         PxvMea1DvEdTPAM/2f5nCTucSDHGrYUVWI5yEWTjAgLbiteaP1n3JEvIk5rvhA4U87iB
+         NoVFTrTdzL8Lan/o30y0zeA/CvasAJ0HUrZizGWc6bl9wqx7VNt6gfEW7YfXXKKfjAwO
+         4uFGuMR10681arGODcWgBi0KFSAyrqM3t09sY6Mv3MygYh8G/iRGTh0LgkF8aifYa5gr
+         vaCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=wcYFbKBxzB0/AyaN3XnbAwgpZCQWaOWxrLm54HiZTTw=;
-        b=X4NRypqiqSi/YcUQGdYFvVB1XkMTJ4uBViDbTOm9i4KjVepavI8CqsOmRyLFDSLRwr
-         SUA4Bh1RtEoUrHCuc3c17f4X44QVosfL7ujC3BfZgfujWp2tmoCB9lNJwhFkQ/dWs4DX
-         ueb+wB/L70Psg0qNRJEm3ev+eCGo9t6WFsKgQeYbiK2gEEv75xuzAsXRYsme+27YdLoS
-         CqraBCvFThCitwekbxOWjKqWeG3eqcKUKn6JvBir8oeqUakLmEc5bSnc5hgxNU8KqVYh
-         2vvewXiPlaqk2prNBIoBZl1cx02VZYPvPaU8ogXugRjEjpJXtHbthAaDvqsl4Bd6g8Ct
-         7PSg==
-X-Gm-Message-State: AOAM53381o5jqgfbM4Xn9JjuUdkvMujZI7Oqf8KUX+eyBUfG4iVz4+SV
-	ZHrjRadx71PS6SD9X+xTPYET85ZgabqX3Q==
-X-Google-Smtp-Source: ABdhPJzJSk8MYgMy34fN91b1RUKqTmWIRK7A4bOvHeESAY2PtVnYGL6j/HHPpuAHRJQsj+5hhHcLWA==
-X-Received: by 2002:a65:6a08:: with SMTP id m8mr7814955pgu.146.1619259110936;
-        Sat, 24 Apr 2021 03:11:50 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :in-reply-to:references:content-transfer-encoding;
+        bh=zn2duoUFMx9M64mobhehwOoo3C6qgQeIJB+ezcYJqx0=;
+        b=nAk3rWjH0032zXNe9k9f+Pikrs4vvgDCcDPG6cTy2dFqseHoLOYZe/l0fUVXWvKc7b
+         lUyzIaAg6slvnSFspMEP0DghY1Pfp40q8gotvPTVwfUlf9bRbq/6AkDDUNkbXVoXLVUg
+         roulU3u4j9/5Lj6QfIQl7cxyYE6MxtPVpDuZzHTjo/qqiqm4makPHb5s4p26azUIH7lS
+         tvyMcLcEX1g8roJKhlrMciMEF3Iwqq7xcuPVMsun7r+LIDPffrhHEAgN58lT0RCQ/UB/
+         VKTcpWTij72nU2CwOblCRG6InWkwvS2/x7Jb4w9NIoerkGZHzr5f8B2wTf5bpggO1tJx
+         uj8g==
+X-Gm-Message-State: AOAM5331uOXFlxqzoBjg6TnxBZMVZGIWAb5AuqD7/Hlr3NWm4/3sdP/A
+	Rz8FHz1E3hXaF5Tmdmv2E8ihv4fsN0E9Hg==
+X-Google-Smtp-Source: ABdhPJxQSCgWHyMomEDMU/cz3ObyZHjc7bu1Uie0/BWvmCT9sxv8k+3S1xNRcKFzAbECtMwM6GsxUA==
+X-Received: by 2002:a17:902:7603:b029:ec:f560:7d66 with SMTP id k3-20020a1709027603b02900ecf5607d66mr1740752pll.39.1619259111789;
+        Sat, 24 Apr 2021 03:11:51 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:9c11:697b:fdac:256e])
-        by smtp.gmail.com with ESMTPSA id h17sm1033173pfr.97.2021.04.24.03.11.50
+        by smtp.gmail.com with ESMTPSA id h17sm1033173pfr.97.2021.04.24.03.11.51
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 24 Apr 2021 03:11:50 -0700 (PDT)
+        Sat, 24 Apr 2021 03:11:51 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 1/6] v4l-utils: fix reproducibility
-Date: Sat, 24 Apr 2021 03:11:42 -0700
-Message-Id: <e2aef4022af4f3a622892ed4f52961e120202324.1619258978.git.akuster808@gmail.com>
+Subject: [hardknott 2/6] python3-django: fix CVE-2021-28658
+Date: Sat, 24 Apr 2021 03:11:43 -0700
+Message-Id: <aef354a0c29a4c6aad4ace53190b5573c78d881b.1619258978.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
 In-Reply-To: <cover.1619258978.git.akuster808@gmail.com>
 References: <cover.1619258978.git.akuster808@gmail.com>
-MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Ulrich Ölmann <u.oelmann@pengutronix.de>
+From: Stefan Ghinea <stefan.ghinea@windriver.com>
 
-Add upstream patches [1] & [2] to automatically detect the availability of
-systemd and (currently) never install '50-rc_keymap.conf' at all as the
-prerequisite would be the ability to compile BPF programs which is not supported
-in this recipe (at least not now).
+In Django 2.2 before 2.2.20, 3.0 before 3.0.14, and 3.1 before 3.1.8,
+MultiPartParser allowed directory traversal via uploaded files with
+suitably crafted file names. Built-in upload handlers were not affected
+by this vulnerability.
 
-Previously if your distro was not systemd based the existance of the host
-system's path "/lib/systemd/system" decided if '50-rc_keymap.conf' was installed
-or not.
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2021-28658
 
-[1] https://git.linuxtv.org/v4l-utils.git/commit/?id=3f61e353424fb9ea3dce742022b94dfd7ea1ed9f
-[2] https://git.linuxtv.org/v4l-utils.git/commit/?id=01f2c6c58e6f4441df7df8e27eb7919f1f01e310
+Upstream patches:
+https://github.com/django/django/commit/4036d62bda0e9e9f6172943794b744a454ca49c2
 
-Signed-off-by: Ulrich Ölmann <u.oelmann@pengutronix.de>
+Signed-off-by: Stefan Ghinea <stefan.ghinea@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...c-autodetect-availability-of-systemd.patch | 47 +++++++++++++++++++
- ...ct-installation-of-50-rc_keymap.conf.patch | 40 ++++++++++++++++
- .../v4l2apps/v4l-utils_1.20.0.bb              | 11 +++--
- 3 files changed, 93 insertions(+), 5 deletions(-)
- create mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0008-configure.ac-autodetect-availability-of-systemd.patch
- create mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0009-keytable-restrict-installation-of-50-rc_keymap.conf.patch
+ .../CVE-2021-28658.patch                      | 289 ++++++++++++++++++
+ .../python/python3-django_2.2.16.bb           |   2 +
+ 2 files changed, 291 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-2.2.16/CVE-2021-28658.patch
 
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0008-configure.ac-autodetect-availability-of-systemd.patch b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0008-configure.ac-autodetect-availability-of-systemd.patch
+diff --git a/meta-python/recipes-devtools/python/python3-django-2.2.16/CVE-2021-28658.patch b/meta-python/recipes-devtools/python/python3-django-2.2.16/CVE-2021-28658.patch
 new file mode 100644
-index 0000000000..5aec3c5747
+index 0000000000..325aa00420
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0008-configure.ac-autodetect-availability-of-systemd.patch
-@@ -0,0 +1,47 @@
-+From 3f61e353424fb9ea3dce742022b94dfd7ea1ed9f Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Ulrich=20=C3=96lmann?= <u.oelmann@pengutronix.de>
-+Date: Thu, 4 Mar 2021 14:23:39 +0100
-+Subject: [PATCH] configure.ac: autodetect availability of systemd
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
++++ b/meta-python/recipes-devtools/python/python3-django-2.2.16/CVE-2021-28658.patch
+@@ -0,0 +1,289 @@
++From 4036d62bda0e9e9f6172943794b744a454ca49c2 Mon Sep 17 00:00:00 2001
++From: Mariusz Felisiak <felisiak.mariusz@gmail.com>
++Date: Tue, 16 Mar 2021 10:19:00 +0100
++Subject: [PATCH] Fixed CVE-2021-28658 -- Fixed potential directory-traversal
++ via uploaded files.
 +
-+Import systemd's official suggestion [1] how this should be handled in packages
-+using autoconf. A side effect of this is the removal of the hardcoded fallback
-+path "/lib/systemd/system" which leaks build host information when cross
-+compiling v4l-utils and therefore defeats reproducible builds.
++Thanks Claude Paroz for the initial patch.
++Thanks Dennis Brinkrolf for the report.
 +
-+[1] https://www.freedesktop.org/software/systemd/man/daemon.html#Installing%20systemd%20Service%20Files
++Backport of d4d800ca1addc4141e03c5440a849bb64d1582cd from main.
 +
-+Upstream-Status: Backport [https://git.linuxtv.org/v4l-utils.git/commit/?id=3f61e353424fb9ea3dce742022b94dfd7ea1ed9f]
++Upstream-Status: Backport
++CVE: CVE-2021-28658
 +
-+Signed-off-by: Ulrich Ölmann <u.oelmann@pengutronix.de>
-+Signed-off-by: Sean Young <sean@mess.org>
++Reference to upstream patch:
++[https://github.com/django/django/commit/4036d62bda0e9e9f6172943794b744a454ca49c2]
++
++[SG: Adapted stable/2.2.x patch for 2.2.16]
++Signed-off-by: Stefan Ghinea <stefan.ghinea@windriver.com>
 +---
-+ configure.ac | 10 +++++++++-
-+ 1 file changed, 9 insertions(+), 1 deletion(-)
++ django/http/multipartparser.py      | 13 ++++--
++ docs/releases/2.2.16.txt            | 12 +++++
++ tests/file_uploads/tests.py         | 72 ++++++++++++++++++++++-------
++ tests/file_uploads/uploadhandler.py | 31 +++++++++++++
++ tests/file_uploads/urls.py          |  1 +
++ tests/file_uploads/views.py         | 12 ++++-
++ 6 files changed, 120 insertions(+), 21 deletions(-)
 +
-+diff --git a/configure.ac b/configure.ac
-+index 727730c5ccf4..8470116df4b1 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -388,7 +388,15 @@ AC_ARG_WITH(udevdir,
-+ AC_ARG_WITH(systemdsystemunitdir,
-+ 	AS_HELP_STRING([--with-systemdsystemunitdir=DIR], [set systemd system unit directory]),
-+ 	[],
-+-	[with_systemdsystemunitdir=`$PKG_CONFIG --variable=systemdsystemunitdir systemd || echo /lib/systemd/system`])
-++	[with_systemdsystemunitdir=auto])
-++AS_IF([test "x$with_systemdsystemunitdir" = "xyes" -o "x$with_systemdsystemunitdir" = "xauto"],
-++      [def_systemdsystemunitdir=$($PKG_CONFIG --variable=systemdsystemunitdir systemd)
-++       AS_IF([test "x$def_systemdsystemunitdir" = "x"],
-++             [AS_IF([test "x$with_systemdsystemunitdir" = "xyes"],
-++                    [AC_MSG_ERROR([systemd support requested but pkg-config unable to query systemd package])])
-++              with_systemdsystemunitdir=no],
-++             [with_systemdsystemunitdir="$def_systemdsystemunitdir"])])
-++AM_CONDITIONAL([HAVE_SYSTEMD], [test "x$with_systemdsystemunitdir" != "xno"])
++diff --git a/django/http/multipartparser.py b/django/http/multipartparser.py
++index f6f12ca..5a9cca8 100644
++--- a/django/http/multipartparser.py
+++++ b/django/http/multipartparser.py
++@@ -7,6 +7,7 @@ file upload handlers for processing.
++ import base64
++ import binascii
++ import cgi
+++import os
++ from urllib.parse import unquote
 + 
-+ # Generic check: works with most distributions
-+ def_gconv_dir=`for i in /lib64 /usr/lib64 /usr/local/lib64 /lib /usr/lib /usr/local/lib; do if @<:@ -d \$i/gconv @:>@; then echo \$i/gconv; break; fi; done`
++ from django.conf import settings
++@@ -205,7 +206,7 @@ class MultiPartParser:
++                     file_name = disposition.get('filename')
++                     if file_name:
++                         file_name = force_text(file_name, encoding, errors='replace')
++-                        file_name = self.IE_sanitize(unescape_entities(file_name))
+++                        file_name = self.sanitize_file_name(file_name)
++                     if not file_name:
++                         continue
++ 
++@@ -293,9 +294,13 @@ class MultiPartParser:
++                 self._files.appendlist(force_text(old_field_name, self._encoding, errors='replace'), file_obj)
++                 break
++ 
++-    def IE_sanitize(self, filename):
++-        """Cleanup filename from Internet Explorer full paths."""
++-        return filename and filename[filename.rfind("\\") + 1:].strip()
+++    def sanitize_file_name(self, file_name):
+++        file_name = unescape_entities(file_name)
+++        # Cleanup Windows-style path separators.
+++        file_name = file_name[file_name.rfind('\\') + 1:].strip()
+++        return os.path.basename(file_name)
+++
+++    IE_sanitize = sanitize_file_name
++ 
++     def _close_files(self):
++         # Free up all file handles.
++diff --git a/docs/releases/2.2.16.txt b/docs/releases/2.2.16.txt
++index 31231fb..4b7021b 100644
++--- a/docs/releases/2.2.16.txt
+++++ b/docs/releases/2.2.16.txt
++@@ -2,6 +2,18 @@
++ Django 2.2.16 release notes
++ ===========================
++ 
+++*April 6, 2021*
+++
+++Backported from Django 2.2.20 a fix for a security issue.
+++
+++CVE-2021-28658: Potential directory-traversal via uploaded files
+++================================================================
+++
+++``MultiPartParser`` allowed directory-traversal via uploaded files with
+++suitably crafted file names.
+++
+++Built-in upload handlers were not affected by this vulnerability.
+++
++ *September 1, 2020*
++ 
++ Django 2.2.16 fixes two security issues and two data loss bugs in 2.2.15.
++diff --git a/tests/file_uploads/tests.py b/tests/file_uploads/tests.py
++index ea4976d..2a08d1b 100644
++--- a/tests/file_uploads/tests.py
+++++ b/tests/file_uploads/tests.py
++@@ -22,6 +22,21 @@ UNICODE_FILENAME = 'test-0123456789_中文_Orléans.jpg'
++ MEDIA_ROOT = sys_tempfile.mkdtemp()
++ UPLOAD_TO = os.path.join(MEDIA_ROOT, 'test_upload')
++ 
+++CANDIDATE_TRAVERSAL_FILE_NAMES = [
+++    '/tmp/hax0rd.txt',          # Absolute path, *nix-style.
+++    'C:\\Windows\\hax0rd.txt',  # Absolute path, win-style.
+++    'C:/Windows/hax0rd.txt',    # Absolute path, broken-style.
+++    '\\tmp\\hax0rd.txt',        # Absolute path, broken in a different way.
+++    '/tmp\\hax0rd.txt',         # Absolute path, broken by mixing.
+++    'subdir/hax0rd.txt',        # Descendant path, *nix-style.
+++    'subdir\\hax0rd.txt',       # Descendant path, win-style.
+++    'sub/dir\\hax0rd.txt',      # Descendant path, mixed.
+++    '../../hax0rd.txt',         # Relative path, *nix-style.
+++    '..\\..\\hax0rd.txt',       # Relative path, win-style.
+++    '../..\\hax0rd.txt',        # Relative path, mixed.
+++    '..&#x2F;hax0rd.txt',       # HTML entities.
+++]
+++
++ 
++ @override_settings(MEDIA_ROOT=MEDIA_ROOT, ROOT_URLCONF='file_uploads.urls', MIDDLEWARE=[])
++ class FileUploadTests(TestCase):
++@@ -205,22 +220,8 @@ class FileUploadTests(TestCase):
++         # a malicious payload with an invalid file name (containing os.sep or
++         # os.pardir). This similar to what an attacker would need to do when
++         # trying such an attack.
++-        scary_file_names = [
++-            "/tmp/hax0rd.txt",          # Absolute path, *nix-style.
++-            "C:\\Windows\\hax0rd.txt",  # Absolute path, win-style.
++-            "C:/Windows/hax0rd.txt",    # Absolute path, broken-style.
++-            "\\tmp\\hax0rd.txt",        # Absolute path, broken in a different way.
++-            "/tmp\\hax0rd.txt",         # Absolute path, broken by mixing.
++-            "subdir/hax0rd.txt",        # Descendant path, *nix-style.
++-            "subdir\\hax0rd.txt",       # Descendant path, win-style.
++-            "sub/dir\\hax0rd.txt",      # Descendant path, mixed.
++-            "../../hax0rd.txt",         # Relative path, *nix-style.
++-            "..\\..\\hax0rd.txt",       # Relative path, win-style.
++-            "../..\\hax0rd.txt"         # Relative path, mixed.
++-        ]
++-
++         payload = client.FakePayload()
++-        for i, name in enumerate(scary_file_names):
+++        for i, name in enumerate(CANDIDATE_TRAVERSAL_FILE_NAMES):
++             payload.write('\r\n'.join([
++                 '--' + client.BOUNDARY,
++                 'Content-Disposition: form-data; name="file%s"; filename="%s"' % (i, name),
++@@ -240,7 +241,7 @@ class FileUploadTests(TestCase):
++         response = self.client.request(**r)
++         # The filenames should have been sanitized by the time it got to the view.
++         received = response.json()
++-        for i, name in enumerate(scary_file_names):
+++        for i, name in enumerate(CANDIDATE_TRAVERSAL_FILE_NAMES):
++             got = received["file%s" % i]
++             self.assertEqual(got, "hax0rd.txt")
++ 
++@@ -518,6 +519,36 @@ class FileUploadTests(TestCase):
++         # shouldn't differ.
++         self.assertEqual(os.path.basename(obj.testfile.path), 'MiXeD_cAsE.txt')
++ 
+++    def test_filename_traversal_upload(self):
+++        os.makedirs(UPLOAD_TO, exist_ok=True)
+++        self.addCleanup(shutil.rmtree, MEDIA_ROOT)
+++        file_name = '..&#x2F;test.txt',
+++        payload = client.FakePayload()
+++        payload.write(
+++            '\r\n'.join([
+++                '--' + client.BOUNDARY,
+++                'Content-Disposition: form-data; name="my_file"; '
+++                'filename="%s";' % file_name,
+++                'Content-Type: text/plain',
+++                '',
+++                'file contents.\r\n',
+++                '\r\n--' + client.BOUNDARY + '--\r\n',
+++            ]),
+++        )
+++        r = {
+++            'CONTENT_LENGTH': len(payload),
+++            'CONTENT_TYPE': client.MULTIPART_CONTENT,
+++            'PATH_INFO': '/upload_traversal/',
+++            'REQUEST_METHOD': 'POST',
+++            'wsgi.input': payload,
+++        }
+++        response = self.client.request(**r)
+++        result = response.json()
+++        self.assertEqual(response.status_code, 200)
+++        self.assertEqual(result['file_name'], 'test.txt')
+++        self.assertIs(os.path.exists(os.path.join(MEDIA_ROOT, 'test.txt')), False)
+++        self.assertIs(os.path.exists(os.path.join(UPLOAD_TO, 'test.txt')), True)
+++
++ 
++ @override_settings(MEDIA_ROOT=MEDIA_ROOT)
++ class DirectoryCreationTests(SimpleTestCase):
++@@ -591,6 +622,15 @@ class MultiParserTests(SimpleTestCase):
++         }, StringIO('x'), [], 'utf-8')
++         self.assertEqual(multipart_parser._content_length, 0)
++ 
+++    def test_sanitize_file_name(self):
+++        parser = MultiPartParser({
+++            'CONTENT_TYPE': 'multipart/form-data; boundary=_foo',
+++            'CONTENT_LENGTH': '1'
+++        }, StringIO('x'), [], 'utf-8')
+++        for file_name in CANDIDATE_TRAVERSAL_FILE_NAMES:
+++            with self.subTest(file_name=file_name):
+++                self.assertEqual(parser.sanitize_file_name(file_name), 'hax0rd.txt')
+++
++     def test_rfc2231_parsing(self):
++         test_data = (
++             (b"Content-Type: application/x-stuff; title*=us-ascii'en-us'This%20is%20%2A%2A%2Afun%2A%2A%2A",
++diff --git a/tests/file_uploads/uploadhandler.py b/tests/file_uploads/uploadhandler.py
++index 7c6199f..65d70c6 100644
++--- a/tests/file_uploads/uploadhandler.py
+++++ b/tests/file_uploads/uploadhandler.py
++@@ -1,6 +1,8 @@
++ """
++ Upload handlers to test the upload API.
++ """
+++import os
+++from tempfile import NamedTemporaryFile
++ 
++ from django.core.files.uploadhandler import FileUploadHandler, StopUpload
++ 
++@@ -35,3 +37,32 @@ class ErroringUploadHandler(FileUploadHandler):
++     """A handler that raises an exception."""
++     def receive_data_chunk(self, raw_data, start):
++         raise CustomUploadError("Oops!")
+++
+++
+++class TraversalUploadHandler(FileUploadHandler):
+++    """A handler with potential directory-traversal vulnerability."""
+++    def __init__(self, request=None):
+++        from .views import UPLOAD_TO
+++
+++        super().__init__(request)
+++        self.upload_dir = UPLOAD_TO
+++
+++    def file_complete(self, file_size):
+++        self.file.seek(0)
+++        self.file.size = file_size
+++        with open(os.path.join(self.upload_dir, self.file_name), 'wb') as fp:
+++            fp.write(self.file.read())
+++        return self.file
+++
+++    def new_file(
+++        self, field_name, file_name, content_type, content_length, charset=None,
+++        content_type_extra=None,
+++    ):
+++        super().new_file(
+++            file_name, file_name, content_length, content_length, charset,
+++            content_type_extra,
+++        )
+++        self.file = NamedTemporaryFile(suffix='.upload', dir=self.upload_dir)
+++
+++    def receive_data_chunk(self, raw_data, start):
+++        self.file.write(raw_data)
++diff --git a/tests/file_uploads/urls.py b/tests/file_uploads/urls.py
++index 3e7985d..eaac1da 100644
++--- a/tests/file_uploads/urls.py
+++++ b/tests/file_uploads/urls.py
++@@ -4,6 +4,7 @@ from . import views
++ 
++ urlpatterns = [
++     path('upload/', views.file_upload_view),
+++    path('upload_traversal/', views.file_upload_traversal_view),
++     path('verify/', views.file_upload_view_verify),
++     path('unicode_name/', views.file_upload_unicode_name),
++     path('echo/', views.file_upload_echo),
++diff --git a/tests/file_uploads/views.py b/tests/file_uploads/views.py
++index d4947e4..137c6f3 100644
++--- a/tests/file_uploads/views.py
+++++ b/tests/file_uploads/views.py
++@@ -6,7 +6,9 @@ from django.http import HttpResponse, HttpResponseServerError, JsonResponse
++ 
++ from .models import FileModel
++ from .tests import UNICODE_FILENAME, UPLOAD_TO
++-from .uploadhandler import ErroringUploadHandler, QuotaUploadHandler
+++from .uploadhandler import (
+++    ErroringUploadHandler, QuotaUploadHandler, TraversalUploadHandler,
+++)
++ 
++ 
++ def file_upload_view(request):
++@@ -158,3 +160,11 @@ def file_upload_fd_closing(request, access):
++     if access == 't':
++         request.FILES  # Trigger file parsing.
++     return HttpResponse('')
+++
+++
+++def file_upload_traversal_view(request):
+++    request.upload_handlers.insert(0, TraversalUploadHandler())
+++    request.FILES  # Trigger file parsing.
+++    return JsonResponse(
+++        {'file_name': request.upload_handlers[0].file_name},
+++    )
 +-- 
-+2.29.2
++2.17.1
 +
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0009-keytable-restrict-installation-of-50-rc_keymap.conf.patch b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0009-keytable-restrict-installation-of-50-rc_keymap.conf.patch
-new file mode 100644
-index 0000000000..63a695f8f9
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0009-keytable-restrict-installation-of-50-rc_keymap.conf.patch
-@@ -0,0 +1,40 @@
-+From 01f2c6c58e6f4441df7df8e27eb7919f1f01e310 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Ulrich=20=C3=96lmann?= <u.oelmann@pengutronix.de>
-+Date: Thu, 4 Mar 2021 14:23:40 +0100
-+Subject: [PATCH] keytable: restrict installation of 50-rc_keymap.conf
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+It is only needed if BPF is effectively used and the package is compiled for a
-+systemd based target.
-+
-+Upstream-Status: Backport [https://git.linuxtv.org/v4l-utils.git/commit/?id=01f2c6c58e6f4441df7df8e27eb7919f1f01e310]
-+
-+Signed-off-by: Ulrich Ölmann <u.oelmann@pengutronix.de>
-+Signed-off-by: Sean Young <sean@mess.org>
-+---
-+ utils/keytable/Makefile.am | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/utils/keytable/Makefile.am b/utils/keytable/Makefile.am
-+index c5eb414acf2f..eee61f0e0551 100644
-+--- a/utils/keytable/Makefile.am
-++++ b/utils/keytable/Makefile.am
-+@@ -3,9 +3,13 @@ man_MANS = ir-keytable.1 rc_keymap.5
-+ sysconf_DATA = rc_maps.cfg
-+ keytablesystem_DATA = $(srcdir)/rc_keymaps/*
-+ udevrules_DATA = 70-infrared.rules
-++if WITH_BPF
-++if HAVE_SYSTEMD
-+ if HAVE_UDEVDSYSCALLFILTER
-+ systemdsystemunit_DATA = 50-rc_keymap.conf
-+ endif
-++endif
-++endif
-+ 
-+ ir_keytable_SOURCES = keytable.c parse.h ir-encode.c ir-encode.h toml.c toml.h keymap.c keymap.h
-+ 
-+-- 
-+2.29.2
-+
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.20.0.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.20.0.bb
-index 3e92d49b4f..2261feb56c 100644
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.20.0.bb
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.20.0.bb
-@@ -5,7 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
- PROVIDES = "libv4l media-ctl"
- 
- DEPENDS = "jpeg \
--           ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)}"
-+           ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)} \
-+           ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
- DEPENDS_append_libc-musl = " argp-standalone"
- DEPENDS_append_class-target = " udev"
- LDFLAGS_append = " -pthread"
-@@ -21,13 +22,14 @@ SRC_URI = "http://linuxtv.org/downloads/v4l-utils/v4l-utils-${PV}.tar.bz2 \
-            file://export-mediactl-headers.patch \
-            file://0002-contrib-test-Link-mc_nextgen_test-with-libargp-if-ne.patch \
-            file://0007-Do-not-use-getsubopt.patch \
-+           file://0008-configure.ac-autodetect-availability-of-systemd.patch \
-+           file://0009-keytable-restrict-installation-of-50-rc_keymap.conf.patch \
-            "
- SRC_URI[md5sum] = "46f9e2c0b2fdccd009da2f7e1aa87894"
- SRC_URI[sha256sum] = "956118713f7ccb405c55c7088a6a2490c32d54300dd9a30d8d5008c28d3726f7"
- 
- EXTRA_OECONF = "--disable-qv4l2 --enable-shared --with-udevdir=${base_libdir}/udev \
--                --disable-v4l2-compliance-32 --disable-v4l2-ctl-32 \
--                --with-systemdsystemunitdir=${systemd_system_unitdir}"
-+                --disable-v4l2-compliance-32 --disable-v4l2-ctl-32"
- 
- VIRTUAL-RUNTIME_ir-keytable-keymaps ?= "rc-keymaps"
- 
-@@ -37,8 +39,7 @@ RPROVIDES_${PN}-dbg += "libv4l-dbg"
- 
- FILES_media-ctl = "${bindir}/media-ctl ${libdir}/libmediactl.so.*"
- 
--FILES_ir-keytable = "${bindir}/ir-keytable ${base_libdir}/udev/rules.d/*-infrared.rules \
--                     ${systemd_system_unitdir}/systemd-udevd.service.d/50-rc_keymap.conf"
-+FILES_ir-keytable = "${bindir}/ir-keytable ${base_libdir}/udev/rules.d/*-infrared.rules"
- RDEPENDS_ir-keytable += "${VIRTUAL-RUNTIME_ir-keytable-keymaps}"
- 
- FILES_rc-keymaps = "${sysconfdir}/rc* ${base_libdir}/udev/rc*"
+diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.16.bb b/meta-python/recipes-devtools/python/python3-django_2.2.16.bb
+index 0715abbd4c..eb626e8d3f 100644
+--- a/meta-python/recipes-devtools/python/python3-django_2.2.16.bb
++++ b/meta-python/recipes-devtools/python/python3-django_2.2.16.bb
+@@ -7,3 +7,5 @@ SRC_URI[sha256sum] = "62cf45e5ee425c52e411c0742e641a6588b7e8af0d2c274a27940931b2
+ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-sqlparse \
+ "
++SRC_URI += "file://CVE-2021-28658.patch \
++"
 -- 
 2.17.1
 
