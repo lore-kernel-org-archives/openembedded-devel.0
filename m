@@ -1,261 +1,404 @@
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.web12.4950.1619259113332641200
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web09.4839.1619259114401375862
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 24 Apr 2021 03:11:53 -0700
+ Sat, 24 Apr 2021 03:11:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gemp8mHs;
- spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id p17so541266plf.12
-        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Apr 2021 03:11:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=SgtM5Fjd;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id s22so15762665pgk.6
+        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Apr 2021 03:11:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=1np6gR2FQA+wV3VTb0heKVN5v0Cj21hKSXortkRevBo=;
-        b=gemp8mHs34j+TqizeVoggRR5Wd7r30s39vDaPKOqnTo3lUu4GlybPmya/a+y+Z33rQ
-         zX4kdSzYk61fna7jHPeNxiZuz7fMG8ZKUsvoGwb7HzTdYtWMKBz5dZ0JqfzZqVlxW63E
-         eULk6csPIgH34xEv1bHxKc6DAGB7z0KesUZcXm6U5Igey0/BXMOm9GcLPsPptxbcExQN
-         3CJluApfRNe1Q9rsuL5oE916WcxZRrsYFcoRLGHASxftcFomwQK3mPxeg8tq/DOTfXOC
-         ABGoQZauiaZOcYebckHqUlTSLH3M4pi1/4H9F+5dXWG2CZ20Rud6x2UjhzQq3Am4jDR2
-         eJEg==
+        h=from:to:subject:date:message-id:mime-version:in-reply-to:references
+         :content-transfer-encoding;
+        bh=/EGyxUqaHYHPaWXgGHb3yZiWu/FBxJckNSPN1QwxUOA=;
+        b=SgtM5FjdbWXtUMVi2fUAH8Ax4jETdvdTRfLH+uboSS/Yf1kbx3l+QBDKjyTBtEVcE4
+         Cn5ILfHNxV+mKkztQhSuZkVYnh+Em9IeeKA8PQTUQV7MJ8bDM/TnACBjPNonVcW1uZPc
+         zhfblV565wYGSwVl5umc71y97h+rhQWlhH6dnPzQxkIBT6ovtLpKGp7EKuu2Dlyogqx/
+         SyZx0Ppq0nKFQ17dDXsfAExY0R1Tj0DRYDxjAmdW0bq0hC+L4rE3G9pvZKxA5Ejx2eCT
+         jy/Owb3gICh3qu8RGqoO2apsdTXoEI40j1KLohBiNnJd6D0lw0OVUI743MpK1p6MAF8K
+         sWqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=1np6gR2FQA+wV3VTb0heKVN5v0Cj21hKSXortkRevBo=;
-        b=h+R0zDkYmbgrAQsPI7JYKfs3jKdIVVVpvIhEi6RHydZjgnLvHye2DcWBXIu9Hw3U+q
-         UbAxv7f6fGCKpDrPwWx+3QfVBvPpB2o+rqxyKRbkA7VG9SvHqSTUycthpDvypUbjF3nn
-         lI4oGNAXY0sQUaOKeZRG8QM+H9NZvNpHCUSMvdRY/xs9CGPKFcKzn1VgLMEODHzgUlcp
-         s0myqrHNtmgyR4KB9z7rSjNIXFZXs5xBj/SNrLTVNzzlKHi6zZ2h945fHdIRqb5D/r4k
-         dD+Ma/dCziPIvzOXQev4H/jA9gACQslnK72tvVQiF1AyFhEA9400vU7T4LiBixpGfz3Q
-         6KOg==
-X-Gm-Message-State: AOAM531zsZmHQD36fSgiGTRJ7DbrNQynCMwwXAtg8H12s29vveyYocka
-	MAUH4WCVoxPBDY/ho9toznaikMGshE43Eg==
-X-Google-Smtp-Source: ABdhPJz55y3MNGxc2yaiAp7+kdtZHjn7eWd6FAGMEPaVPPjReLQFxA55xjGrvw0F7dbqmAVYjQFv+A==
-X-Received: by 2002:a17:902:7689:b029:eb:3d5f:ae58 with SMTP id m9-20020a1709027689b02900eb3d5fae58mr7934054pll.39.1619259112548;
-        Sat, 24 Apr 2021 03:11:52 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :in-reply-to:references:content-transfer-encoding;
+        bh=/EGyxUqaHYHPaWXgGHb3yZiWu/FBxJckNSPN1QwxUOA=;
+        b=aHKyRQdqtXbD6jwqi32zM+KugAmGfKzlEFoqAscNjjhZa/nME4v6QYSZg2M6U5INTm
+         bcju+zG5uN4iEnVM84T4syPwV5vjT+ZqUSYH66c6dTLUw/JhB51kYifSoqqzmAuN/zMl
+         g8r5JfWzQu1X8jqZMwjMPW3QM9LNVGCPuB7C7hkRYyYZGinaYhDA+O5d++R+s3YoL3AW
+         Cckqi+Wg+YICACONiIWpw/7V5RIgBj7ibg2oScDxr0RblFJ82Hj+Dr7H+JEIMzHTbR2+
+         eDib5gY4BQ5qnMjF7o7xvU7q3jq3rqWoFVJslksrEFojMgixvb8oPsEpzGpB7TNSbLY5
+         fp/g==
+X-Gm-Message-State: AOAM53170YubdMrrFMaPJedtfPPIyqQswEn0llhZ57rM2J6XlvmEi3QB
+	clTCukb47Gy5egaseZHCTHSfn9smoQ2Teg==
+X-Google-Smtp-Source: ABdhPJwBdyvJV08bI2bF/KG6W0tYo2mI0ASc/uRI0N/um/W2NRKOzxABiqVR5NfSUVwZTBYiKk/27w==
+X-Received: by 2002:aa7:908c:0:b029:209:aacd:d8b with SMTP id i12-20020aa7908c0000b0290209aacd0d8bmr8215603pfa.74.1619259113317;
+        Sat, 24 Apr 2021 03:11:53 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:9c11:697b:fdac:256e])
-        by smtp.gmail.com with ESMTPSA id h17sm1033173pfr.97.2021.04.24.03.11.51
+        by smtp.gmail.com with ESMTPSA id h17sm1033173pfr.97.2021.04.24.03.11.52
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 24 Apr 2021 03:11:52 -0700 (PDT)
+        Sat, 24 Apr 2021 03:11:53 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 3/6] tigervnc: upgrade to 1.11.0
-Date: Sat, 24 Apr 2021 03:11:44 -0700
-Message-Id: <63bcddbd85be0bb155de8be26af24f9c97677992.1619258978.git.akuster808@gmail.com>
+Subject: [hardknott 4/6] python3-django: upgrade to 2.2.20
+Date: Sat, 24 Apr 2021 03:11:45 -0700
+Message-Id: <e705d4932a57d0dc3a961fed73ae5ad2e0313429.1619258978.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
 In-Reply-To: <cover.1619258978.git.akuster808@gmail.com>
 References: <cover.1619258978.git.akuster808@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
 From: Chen Qi <Qi.Chen@windriver.com>
 
-Upgrade to latest stable version.
+2.2.x is LTS, so upgrade to latest release 2.2.20.
+This upgrade fixes several CVEs such as CVE-2021-3281.
 
-The 1.10 branch is not maitained any more, it stops update in 2019.
-The 1.11 branch has fix for CVE-2020-26117, which is a high risk CVE.
-https://nvd.nist.gov/vuln/detail/CVE-2020-26117
-
-Some changes in this new version are as below.
-1) 'bash' is added to RDEPENDS as /usr/libexec/vncsession-start requires it.
-2) DEPENDS on libpam and requires 'pam' distro feature.
-   This is because upstream has made 'pam' mandatory in the following commit.
-   """
-   commit d80817f101d1b3f1a9b1c5ec268f28fffa2d75f9
-   Author: Pierre Ossman <ossman@cendio.se>
-   Date:   Wed Jul 11 15:49:46 2018 +0200
-
-       Make PAM mandatory
-
-       It is present on all UNIX systems anyway, so let's simplify things.
-       We will need it for more proper session startup anyway.
-   """
+Also, CVE-2021-28658.patch is dropped as it's already in 2.2.20.
 
 Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...002-do-not-build-tests-sub-directory.patch | 21 +++++------
- ...vnc-add-fPIC-option-to-COMPILE_FLAGS.patch | 36 +++++++------------
- ...{tigervnc_1.10.1.bb => tigervnc_1.11.0.bb} | 13 ++++---
- 3 files changed, 32 insertions(+), 38 deletions(-)
- rename meta-oe/recipes-graphics/tigervnc/{tigervnc_1.10.1.bb => tigervnc_1.11.0.bb} (89%)
+ .../CVE-2021-28658.patch                      | 289 ------------------
+ .../python/python3-django_2.2.16.bb           |  11 -
+ .../python/python3-django_2.2.20.bb           |   9 +
+ 3 files changed, 9 insertions(+), 300 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-django-2.2.16/CVE-2021-28658.patch
+ delete mode 100644 meta-python/recipes-devtools/python/python3-django_2.2.16.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-django_2.2.20.bb
 
-diff --git a/meta-oe/recipes-graphics/tigervnc/files/0002-do-not-build-tests-sub-directory.patch b/meta-oe/recipes-graphics/tigervnc/files/0002-do-not-build-tests-sub-directory.patch
-index 4e875ba82b..5a42e67d06 100644
---- a/meta-oe/recipes-graphics/tigervnc/files/0002-do-not-build-tests-sub-directory.patch
-+++ b/meta-oe/recipes-graphics/tigervnc/files/0002-do-not-build-tests-sub-directory.patch
-@@ -1,29 +1,30 @@
--From c3460d63f0b6cd50b9a64265f420f0439e12a1d5 Mon Sep 17 00:00:00 2001
--From: Hongxu Jia <hongxu.jia@windriver.com>
--Date: Tue, 25 Apr 2017 01:36:44 -0400
--Subject: [PATCH 2/4] do not build tests sub directory
-+From 076d0e12a7be6cd2108e4ca0dcde1cb658918fa5 Mon Sep 17 00:00:00 2001
-+From: Chen Qi <Qi.Chen@windriver.com>
-+Date: Mon, 19 Apr 2021 23:02:45 -0700
-+Subject: [PATCH] do not build tests sub directory
- 
--Upstream-Status: Inappropriate [oe specific]
-+Upstream-Status: Inappropriate [OE Specific]
- 
--Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+Signed-off-by: Hongxu Jia <Hongxu.Jia@windriver.com>
-+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
- ---
-  CMakeLists.txt | 3 ---
-  1 file changed, 3 deletions(-)
- 
- diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 94ec2ef..fb72a00 100644
-+index 7bf99441..bda80598 100644
- --- a/CMakeLists.txt
- +++ b/CMakeLists.txt
--@@ -300,9 +300,6 @@ if(BUILD_VIEWER)
-+@@ -304,9 +304,6 @@ if(BUILD_VIEWER)
-    add_subdirectory(media)
-  endif()
-  
- -add_subdirectory(tests)
- -
- -
-- include(cmake/BuildPackages.cmake)
-+ add_subdirectory(release)
-  
-  # uninstall
- -- 
--2.7.4
-+2.30.2
- 
-diff --git a/meta-oe/recipes-graphics/tigervnc/files/0004-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch b/meta-oe/recipes-graphics/tigervnc/files/0004-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch
-index 97b0a388a2..5f14665b8d 100644
---- a/meta-oe/recipes-graphics/tigervnc/files/0004-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch
-+++ b/meta-oe/recipes-graphics/tigervnc/files/0004-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch
-@@ -1,44 +1,34 @@
--From 9563b69640227da2220ee0c39077afb736cc96d1 Mon Sep 17 00:00:00 2001
--From: Hongxu Jia <hongxu.jia@windriver.com>
--Date: Thu, 20 Jul 2017 17:12:17 +0800
--Subject: [PATCH 4/4] tigervnc: add fPIC option to COMPILE_FLAGS
-+From 7f8acd59bb2e54f9be25a98dd71534700a9e355a Mon Sep 17 00:00:00 2001
-+From: Chen Qi <Qi.Chen@windriver.com>
-+Date: Mon, 19 Apr 2021 23:14:28 -0700
-+Subject: [PATCH] tigervnc: add fPIC option to COMPILE_FLAGS
- 
--The static libraries in Xregion/network/rdr/rfb were linked by shared
-+The static libraries in network/rdr/rfb were linked by shared
- library libvnc.so, so we should add fPIC option to COMPILE_FLAGS to fix
- relocation issue.
- 
- Upstream-Status: Pending
- 
- Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
- ---
-- common/Xregion/CMakeLists.txt | 1 +
-  common/network/CMakeLists.txt | 1 +
-  common/rdr/CMakeLists.txt     | 1 +
-  common/rfb/CMakeLists.txt     | 1 +
-- 4 files changed, 4 insertions(+)
-+ 3 files changed, 3 insertions(+)
- 
--diff --git a/common/Xregion/CMakeLists.txt b/common/Xregion/CMakeLists.txt
--index 40ca97e..9411328 100644
----- a/common/Xregion/CMakeLists.txt
--+++ b/common/Xregion/CMakeLists.txt
--@@ -3,4 +3,5 @@ add_library(Xregion STATIC
+diff --git a/meta-python/recipes-devtools/python/python3-django-2.2.16/CVE-2021-28658.patch b/meta-python/recipes-devtools/python/python3-django-2.2.16/CVE-2021-28658.patch
+deleted file mode 100644
+index 325aa00420..0000000000
+--- a/meta-python/recipes-devtools/python/python3-django-2.2.16/CVE-2021-28658.patch
++++ /dev/null
+@@ -1,289 +0,0 @@
+-From 4036d62bda0e9e9f6172943794b744a454ca49c2 Mon Sep 17 00:00:00 2001
+-From: Mariusz Felisiak <felisiak.mariusz@gmail.com>
+-Date: Tue, 16 Mar 2021 10:19:00 +0100
+-Subject: [PATCH] Fixed CVE-2021-28658 -- Fixed potential directory-traversal
+- via uploaded files.
+-
+-Thanks Claude Paroz for the initial patch.
+-Thanks Dennis Brinkrolf for the report.
+-
+-Backport of d4d800ca1addc4141e03c5440a849bb64d1582cd from main.
+-
+-Upstream-Status: Backport
+-CVE: CVE-2021-28658
+-
+-Reference to upstream patch:
+-[https://github.com/django/django/commit/4036d62bda0e9e9f6172943794b744a454ca49c2]
+-
+-[SG: Adapted stable/2.2.x patch for 2.2.16]
+-Signed-off-by: Stefan Ghinea <stefan.ghinea@windriver.com>
+----
+- django/http/multipartparser.py      | 13 ++++--
+- docs/releases/2.2.16.txt            | 12 +++++
+- tests/file_uploads/tests.py         | 72 ++++++++++++++++++++++-------
+- tests/file_uploads/uploadhandler.py | 31 +++++++++++++
+- tests/file_uploads/urls.py          |  1 +
+- tests/file_uploads/views.py         | 12 ++++-
+- 6 files changed, 120 insertions(+), 21 deletions(-)
+-
+-diff --git a/django/http/multipartparser.py b/django/http/multipartparser.py
+-index f6f12ca..5a9cca8 100644
+---- a/django/http/multipartparser.py
+-+++ b/django/http/multipartparser.py
+-@@ -7,6 +7,7 @@ file upload handlers for processing.
+- import base64
+- import binascii
+- import cgi
+-+import os
+- from urllib.parse import unquote
 - 
-- if(UNIX)
--   libtool_create_control_file(Xregion)
--+  set_target_properties(Xregion PROPERTIES COMPILE_FLAGS -fPIC)
-- endif()
- diff --git a/common/network/CMakeLists.txt b/common/network/CMakeLists.txt
--index b624c8e..6c06ec9 100644
-+index d00ca452..e84e0290 100644
- --- a/common/network/CMakeLists.txt
- +++ b/common/network/CMakeLists.txt
--@@ -9,4 +9,5 @@ endif()
-+@@ -16,4 +16,5 @@ endif()
-  
-  if(UNIX)
-    libtool_create_control_file(network)
- +  set_target_properties(network PROPERTIES COMPILE_FLAGS -fPIC)
-  endif()
- diff --git a/common/rdr/CMakeLists.txt b/common/rdr/CMakeLists.txt
--index 989ba2f..20f6489 100644
-+index 989ba2f4..20f6489d 100644
- --- a/common/rdr/CMakeLists.txt
- +++ b/common/rdr/CMakeLists.txt
- @@ -27,4 +27,5 @@ target_link_libraries(rdr ${RDR_LIBRARIES})
-@@ -48,15 +38,15 @@ index 989ba2f..20f6489 100644
- +  set_target_properties(rdr PROPERTIES COMPILE_FLAGS -fPIC)
-  endif()
- diff --git a/common/rfb/CMakeLists.txt b/common/rfb/CMakeLists.txt
--index 5047e5e..88838ab 100644
-+index fc5a37bf..7f5ce131 100644
- --- a/common/rfb/CMakeLists.txt
- +++ b/common/rfb/CMakeLists.txt
--@@ -98,4 +98,5 @@ target_link_libraries(rfb ${RFB_LIBRARIES})
-+@@ -99,4 +99,5 @@ target_link_libraries(rfb ${RFB_LIBRARIES})
-  
-  if(UNIX)
-    libtool_create_control_file(rfb)
- +  set_target_properties(rfb PROPERTIES COMPILE_FLAGS -fPIC)
-  endif()
- -- 
--2.7.4
-+2.30.2
- 
-diff --git a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.10.1.bb b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb
-similarity index 89%
-rename from meta-oe/recipes-graphics/tigervnc/tigervnc_1.10.1.bb
-rename to meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb
-index f97c2b2d6c..ce6c59bc39 100644
---- a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.10.1.bb
-+++ b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb
-@@ -2,22 +2,22 @@ DESCRIPTION = "TigerVNC remote display system"
- HOMEPAGE = "http://www.tigervnc.com/"
- LICENSE = "GPLv2+"
- SECTION = "x11/utils"
--DEPENDS = "xserver-xorg gnutls jpeg libxtst gettext-native fltk"
--RDEPENDS_${PN} = "coreutils hicolor-icon-theme perl"
-+DEPENDS = "xserver-xorg gnutls jpeg libxtst gettext-native fltk libpam"
-+RDEPENDS_${PN} = "coreutils hicolor-icon-theme perl bash"
- 
- LIC_FILES_CHKSUM = "file://LICENCE.TXT;md5=75b02c2872421380bbd47781d2bd75d3"
- 
- S = "${WORKDIR}/git"
- 
- inherit features_check
--REQUIRED_DISTRO_FEATURES = "x11"
-+REQUIRED_DISTRO_FEATURES = "x11 pam"
- 
- inherit autotools cmake
- B = "${S}"
- 
--SRCREV = "4739493b635372bd40a34640a719f79fa90e4dba"
-+SRCREV = "540bfc3278e396321124d4b18a798ac2bc18b6ca"
- 
--SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.10-branch \
-+SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.11-branch \
-            file://0002-do-not-build-tests-sub-directory.patch \
-            file://0003-add-missing-dynamic-library-to-FLTK_LIBRARIES.patch \
-            file://0004-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch \
-@@ -83,6 +83,8 @@ EXTRA_OECONF = "--disable-xorg --disable-xnest --disable-xvfb --disable-dmx \
-         --disable-xwayland \
- "
- 
-+EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-DCMAKE_INSTALL_UNITDIR=/lib/systemd/system', '-DINSTALL_SYSTEMD_UNITS=OFF', d)}"
+- from django.conf import settings
+-@@ -205,7 +206,7 @@ class MultiPartParser:
+-                     file_name = disposition.get('filename')
+-                     if file_name:
+-                         file_name = force_text(file_name, encoding, errors='replace')
+--                        file_name = self.IE_sanitize(unescape_entities(file_name))
+-+                        file_name = self.sanitize_file_name(file_name)
+-                     if not file_name:
+-                         continue
+- 
+-@@ -293,9 +294,13 @@ class MultiPartParser:
+-                 self._files.appendlist(force_text(old_field_name, self._encoding, errors='replace'), file_obj)
+-                 break
+- 
+--    def IE_sanitize(self, filename):
+--        """Cleanup filename from Internet Explorer full paths."""
+--        return filename and filename[filename.rfind("\\") + 1:].strip()
+-+    def sanitize_file_name(self, file_name):
+-+        file_name = unescape_entities(file_name)
+-+        # Cleanup Windows-style path separators.
+-+        file_name = file_name[file_name.rfind('\\') + 1:].strip()
+-+        return os.path.basename(file_name)
+-+
+-+    IE_sanitize = sanitize_file_name
+- 
+-     def _close_files(self):
+-         # Free up all file handles.
+-diff --git a/docs/releases/2.2.16.txt b/docs/releases/2.2.16.txt
+-index 31231fb..4b7021b 100644
+---- a/docs/releases/2.2.16.txt
+-+++ b/docs/releases/2.2.16.txt
+-@@ -2,6 +2,18 @@
+- Django 2.2.16 release notes
+- ===========================
+- 
+-+*April 6, 2021*
+-+
+-+Backported from Django 2.2.20 a fix for a security issue.
+-+
+-+CVE-2021-28658: Potential directory-traversal via uploaded files
+-+================================================================
+-+
+-+``MultiPartParser`` allowed directory-traversal via uploaded files with
+-+suitably crafted file names.
+-+
+-+Built-in upload handlers were not affected by this vulnerability.
+-+
+- *September 1, 2020*
+- 
+- Django 2.2.16 fixes two security issues and two data loss bugs in 2.2.15.
+-diff --git a/tests/file_uploads/tests.py b/tests/file_uploads/tests.py
+-index ea4976d..2a08d1b 100644
+---- a/tests/file_uploads/tests.py
+-+++ b/tests/file_uploads/tests.py
+-@@ -22,6 +22,21 @@ UNICODE_FILENAME = 'test-0123456789_中文_Orléans.jpg'
+- MEDIA_ROOT = sys_tempfile.mkdtemp()
+- UPLOAD_TO = os.path.join(MEDIA_ROOT, 'test_upload')
+- 
+-+CANDIDATE_TRAVERSAL_FILE_NAMES = [
+-+    '/tmp/hax0rd.txt',          # Absolute path, *nix-style.
+-+    'C:\\Windows\\hax0rd.txt',  # Absolute path, win-style.
+-+    'C:/Windows/hax0rd.txt',    # Absolute path, broken-style.
+-+    '\\tmp\\hax0rd.txt',        # Absolute path, broken in a different way.
+-+    '/tmp\\hax0rd.txt',         # Absolute path, broken by mixing.
+-+    'subdir/hax0rd.txt',        # Descendant path, *nix-style.
+-+    'subdir\\hax0rd.txt',       # Descendant path, win-style.
+-+    'sub/dir\\hax0rd.txt',      # Descendant path, mixed.
+-+    '../../hax0rd.txt',         # Relative path, *nix-style.
+-+    '..\\..\\hax0rd.txt',       # Relative path, win-style.
+-+    '../..\\hax0rd.txt',        # Relative path, mixed.
+-+    '..&#x2F;hax0rd.txt',       # HTML entities.
+-+]
+-+
+- 
+- @override_settings(MEDIA_ROOT=MEDIA_ROOT, ROOT_URLCONF='file_uploads.urls', MIDDLEWARE=[])
+- class FileUploadTests(TestCase):
+-@@ -205,22 +220,8 @@ class FileUploadTests(TestCase):
+-         # a malicious payload with an invalid file name (containing os.sep or
+-         # os.pardir). This similar to what an attacker would need to do when
+-         # trying such an attack.
+--        scary_file_names = [
+--            "/tmp/hax0rd.txt",          # Absolute path, *nix-style.
+--            "C:\\Windows\\hax0rd.txt",  # Absolute path, win-style.
+--            "C:/Windows/hax0rd.txt",    # Absolute path, broken-style.
+--            "\\tmp\\hax0rd.txt",        # Absolute path, broken in a different way.
+--            "/tmp\\hax0rd.txt",         # Absolute path, broken by mixing.
+--            "subdir/hax0rd.txt",        # Descendant path, *nix-style.
+--            "subdir\\hax0rd.txt",       # Descendant path, win-style.
+--            "sub/dir\\hax0rd.txt",      # Descendant path, mixed.
+--            "../../hax0rd.txt",         # Relative path, *nix-style.
+--            "..\\..\\hax0rd.txt",       # Relative path, win-style.
+--            "../..\\hax0rd.txt"         # Relative path, mixed.
+--        ]
+--
+-         payload = client.FakePayload()
+--        for i, name in enumerate(scary_file_names):
+-+        for i, name in enumerate(CANDIDATE_TRAVERSAL_FILE_NAMES):
+-             payload.write('\r\n'.join([
+-                 '--' + client.BOUNDARY,
+-                 'Content-Disposition: form-data; name="file%s"; filename="%s"' % (i, name),
+-@@ -240,7 +241,7 @@ class FileUploadTests(TestCase):
+-         response = self.client.request(**r)
+-         # The filenames should have been sanitized by the time it got to the view.
+-         received = response.json()
+--        for i, name in enumerate(scary_file_names):
+-+        for i, name in enumerate(CANDIDATE_TRAVERSAL_FILE_NAMES):
+-             got = received["file%s" % i]
+-             self.assertEqual(got, "hax0rd.txt")
+- 
+-@@ -518,6 +519,36 @@ class FileUploadTests(TestCase):
+-         # shouldn't differ.
+-         self.assertEqual(os.path.basename(obj.testfile.path), 'MiXeD_cAsE.txt')
+- 
+-+    def test_filename_traversal_upload(self):
+-+        os.makedirs(UPLOAD_TO, exist_ok=True)
+-+        self.addCleanup(shutil.rmtree, MEDIA_ROOT)
+-+        file_name = '..&#x2F;test.txt',
+-+        payload = client.FakePayload()
+-+        payload.write(
+-+            '\r\n'.join([
+-+                '--' + client.BOUNDARY,
+-+                'Content-Disposition: form-data; name="my_file"; '
+-+                'filename="%s";' % file_name,
+-+                'Content-Type: text/plain',
+-+                '',
+-+                'file contents.\r\n',
+-+                '\r\n--' + client.BOUNDARY + '--\r\n',
+-+            ]),
+-+        )
+-+        r = {
+-+            'CONTENT_LENGTH': len(payload),
+-+            'CONTENT_TYPE': client.MULTIPART_CONTENT,
+-+            'PATH_INFO': '/upload_traversal/',
+-+            'REQUEST_METHOD': 'POST',
+-+            'wsgi.input': payload,
+-+        }
+-+        response = self.client.request(**r)
+-+        result = response.json()
+-+        self.assertEqual(response.status_code, 200)
+-+        self.assertEqual(result['file_name'], 'test.txt')
+-+        self.assertIs(os.path.exists(os.path.join(MEDIA_ROOT, 'test.txt')), False)
+-+        self.assertIs(os.path.exists(os.path.join(UPLOAD_TO, 'test.txt')), True)
+-+
+- 
+- @override_settings(MEDIA_ROOT=MEDIA_ROOT)
+- class DirectoryCreationTests(SimpleTestCase):
+-@@ -591,6 +622,15 @@ class MultiParserTests(SimpleTestCase):
+-         }, StringIO('x'), [], 'utf-8')
+-         self.assertEqual(multipart_parser._content_length, 0)
+- 
+-+    def test_sanitize_file_name(self):
+-+        parser = MultiPartParser({
+-+            'CONTENT_TYPE': 'multipart/form-data; boundary=_foo',
+-+            'CONTENT_LENGTH': '1'
+-+        }, StringIO('x'), [], 'utf-8')
+-+        for file_name in CANDIDATE_TRAVERSAL_FILE_NAMES:
+-+            with self.subTest(file_name=file_name):
+-+                self.assertEqual(parser.sanitize_file_name(file_name), 'hax0rd.txt')
+-+
+-     def test_rfc2231_parsing(self):
+-         test_data = (
+-             (b"Content-Type: application/x-stuff; title*=us-ascii'en-us'This%20is%20%2A%2A%2Afun%2A%2A%2A",
+-diff --git a/tests/file_uploads/uploadhandler.py b/tests/file_uploads/uploadhandler.py
+-index 7c6199f..65d70c6 100644
+---- a/tests/file_uploads/uploadhandler.py
+-+++ b/tests/file_uploads/uploadhandler.py
+-@@ -1,6 +1,8 @@
+- """
+- Upload handlers to test the upload API.
+- """
+-+import os
+-+from tempfile import NamedTemporaryFile
+- 
+- from django.core.files.uploadhandler import FileUploadHandler, StopUpload
+- 
+-@@ -35,3 +37,32 @@ class ErroringUploadHandler(FileUploadHandler):
+-     """A handler that raises an exception."""
+-     def receive_data_chunk(self, raw_data, start):
+-         raise CustomUploadError("Oops!")
+-+
+-+
+-+class TraversalUploadHandler(FileUploadHandler):
+-+    """A handler with potential directory-traversal vulnerability."""
+-+    def __init__(self, request=None):
+-+        from .views import UPLOAD_TO
+-+
+-+        super().__init__(request)
+-+        self.upload_dir = UPLOAD_TO
+-+
+-+    def file_complete(self, file_size):
+-+        self.file.seek(0)
+-+        self.file.size = file_size
+-+        with open(os.path.join(self.upload_dir, self.file_name), 'wb') as fp:
+-+            fp.write(self.file.read())
+-+        return self.file
+-+
+-+    def new_file(
+-+        self, field_name, file_name, content_type, content_length, charset=None,
+-+        content_type_extra=None,
+-+    ):
+-+        super().new_file(
+-+            file_name, file_name, content_length, content_length, charset,
+-+            content_type_extra,
+-+        )
+-+        self.file = NamedTemporaryFile(suffix='.upload', dir=self.upload_dir)
+-+
+-+    def receive_data_chunk(self, raw_data, start):
+-+        self.file.write(raw_data)
+-diff --git a/tests/file_uploads/urls.py b/tests/file_uploads/urls.py
+-index 3e7985d..eaac1da 100644
+---- a/tests/file_uploads/urls.py
+-+++ b/tests/file_uploads/urls.py
+-@@ -4,6 +4,7 @@ from . import views
+- 
+- urlpatterns = [
+-     path('upload/', views.file_upload_view),
+-+    path('upload_traversal/', views.file_upload_traversal_view),
+-     path('verify/', views.file_upload_view_verify),
+-     path('unicode_name/', views.file_upload_unicode_name),
+-     path('echo/', views.file_upload_echo),
+-diff --git a/tests/file_uploads/views.py b/tests/file_uploads/views.py
+-index d4947e4..137c6f3 100644
+---- a/tests/file_uploads/views.py
+-+++ b/tests/file_uploads/views.py
+-@@ -6,7 +6,9 @@ from django.http import HttpResponse, HttpResponseServerError, JsonResponse
+- 
+- from .models import FileModel
+- from .tests import UNICODE_FILENAME, UPLOAD_TO
+--from .uploadhandler import ErroringUploadHandler, QuotaUploadHandler
+-+from .uploadhandler import (
+-+    ErroringUploadHandler, QuotaUploadHandler, TraversalUploadHandler,
+-+)
+- 
+- 
+- def file_upload_view(request):
+-@@ -158,3 +160,11 @@ def file_upload_fd_closing(request, access):
+-     if access == 't':
+-         request.FILES  # Trigger file parsing.
+-     return HttpResponse('')
+-+
+-+
+-+def file_upload_traversal_view(request):
+-+    request.upload_handlers.insert(0, TraversalUploadHandler())
+-+    request.FILES  # Trigger file parsing.
+-+    return JsonResponse(
+-+        {'file_name': request.upload_handlers[0].file_name},
+-+    )
+--- 
+-2.17.1
+-
+diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.16.bb b/meta-python/recipes-devtools/python/python3-django_2.2.16.bb
+deleted file mode 100644
+index eb626e8d3f..0000000000
+--- a/meta-python/recipes-devtools/python/python3-django_2.2.16.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-require python-django.inc
+-inherit setuptools3
+-
+-SRC_URI[md5sum] = "93faf5bbd54a19ea49f4932a813b9758"
+-SRC_URI[sha256sum] = "62cf45e5ee425c52e411c0742e641a6588b7e8af0d2c274a27940931b2786594"
+-
+-RDEPENDS_${PN} += "\
+-    ${PYTHON_PN}-sqlparse \
+-"
+-SRC_URI += "file://CVE-2021-28658.patch \
+-"
+diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.20.bb b/meta-python/recipes-devtools/python/python3-django_2.2.20.bb
+new file mode 100644
+index 0000000000..905d022a4f
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-django_2.2.20.bb
+@@ -0,0 +1,9 @@
++require python-django.inc
++inherit setuptools3
 +
- do_configure_append () {
-     olddir=`pwd`
-     cd ${XSERVER_SOURCE_DIR}
-@@ -125,6 +127,7 @@ do_install_append() {
- FILES_${PN} += " \
-     ${libdir}/xorg/modules/extensions \
-     ${datadir}/icons \
-+    ${systemd_unitdir} \
- "
- 
- FILES_${PN}-dbg += "${libdir}/xorg/modules/extensions/.debug"
++SRC_URI[md5sum] = "947060d96ccc0a05e8049d839e541b25"
++SRC_URI[sha256sum] = "2569f9dc5f8e458a5e988b03d6b7a02bda59b006d6782f4ea0fd590ed7336a64"
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-sqlparse \
++"
 -- 
 2.17.1
 
