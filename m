@@ -1,238 +1,181 @@
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
- by mx.groups.io with SMTP id smtpd.web09.5067.1619260629373093882
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
+ by mx.groups.io with SMTP id smtpd.web11.4939.1619260657333031092
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 24 Apr 2021 03:37:09 -0700
+ Sat, 24 Apr 2021 03:37:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=n9eFkhNF;
- spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f41.google.com with SMTP id k17so20647014edr.7
-        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Apr 2021 03:37:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=O/RPfu0x;
+ spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f49.google.com with SMTP id g14so480723edy.6
+        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Apr 2021 03:37:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=E0fglr+0lwKfEzfXOdR2F3FiwuEn9JauGiJQvVuHKA4=;
-        b=n9eFkhNFZPPoCnzn5saAq62m+aYE00mZxOiN4Nmpm6QB2XvF2d9FZU3G6TqVSYdBLd
-         QYJRUzjX8f5W2h8ABTj0m7BgWZsyOXTkSlIdRa7FZXaGPOj14+ZQmi54Y/pg4kamdO/x
-         oXCZm5gXup5vPeKZC4V47R62kPJn4aopuwhh1jD2TE9cG0IeGi8mtIdd7TPJOlIirYyG
-         If3kFBc9wLfVCJa6Oryenla39qM501sfim7NSZz2NJXUa7t3IKyTuIxHC6cYdhwP4eDP
-         HkGDRj0RN+s8tFc5T8V4ydjYNxJYY0TO76IKrZNU5KVKmRorvPDCyIJTs4KAlYstWvjM
-         IA3A==
+        bh=DLyM+VfpRJW9DyS6jfRr8UXnlQEtGQEJmjp++U6yWyc=;
+        b=O/RPfu0xBqNw046/eUBrfS58KGOhdYZu8is74mMj9/w9k85bM+RnyRdV+CP6LwY4LC
+         b6yszsPT16SUji61OJriikMngn6aniTV9Vwe+mkDU+6ddvO78xHKuJJs063dljYA90u6
+         50aN6ZqRgBUVPjovK1IHIkrOiHVopn0dmYPuS6S4Yc+z/nluBIg9WA2WPWhlYlb/5tYj
+         NaH7EMb17V9D5Xnwzmd0lQcA68dRT8aADTJJA2eFbW2ndkwnZu5JuyZTqvdPd5DrMCgv
+         R5rAa/N+XIo/ELIkisg4T6Qbk4B034IOpcA18ZwIrdZJK8Ma6ZjX70Dnaxtd+fVRXqYH
+         iZpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=E0fglr+0lwKfEzfXOdR2F3FiwuEn9JauGiJQvVuHKA4=;
-        b=LcrDky6OL5gzL3s9tPUTPq78ujQpXNhycYg/eeVr9ELXbh3JH8W0pD+H+4pBMc0Bqg
-         7mILNdq1jlzyBSUWdZvUsn97ZXHNR+emkieOgPnu+IbqU4lzC7vNmtX9NrD8xJmu/giy
-         ydX2xAZNNpf5MamGMsrKJ/L7lG9PO2Ac/LgJrRq3gGqzMDe1ruJOw5/Y5Ajo1zqhvymi
-         Z3eVNZvh50vZons8iHpuHjI16WuCtAVi6QN1C/eAtUQQ4ZVRQIPxK26aCsJIdt3ABlIY
-         MByGq76eUel+ey5PEJGPbcASdotv5RdHguat43UmpmfUgZbBLDHCcL25578QxAu5Hqd3
-         gm8A==
-X-Gm-Message-State: AOAM530WMqJde9OUAI2uOm87X6c+PZhg1byOUwKOD4udNmcYvH8Gy/CD
-	yEVwxgaoaiKiWRM60VNbHhISEBSw79Mr4bancjs=
-X-Google-Smtp-Source: ABdhPJw/O8LdPX40iDKhXOZCCvT0UzpcMQSNKbLfIdLD3Und2qW9fDJmMpIgKkB5a2aT1kPw1/mnCsxSSaZ8L23/rtw=
-X-Received: by 2002:aa7:c349:: with SMTP id j9mr1366123edr.230.1619260627750;
- Sat, 24 Apr 2021 03:37:07 -0700 (PDT)
+        bh=DLyM+VfpRJW9DyS6jfRr8UXnlQEtGQEJmjp++U6yWyc=;
+        b=SqBXyrmePScSdqopHOhsg87Lqc0H65X07tz7jX3hKUm69OrfAf2HdWDgHdlRgSmBJ5
+         MehVitbwGXpuk5G3oO86jSvwqPhywwt85ZzsbbGNOIdr+4ECv/3F5FWDR49rKRuwKnCz
+         pLPP6Wwq7yImk8Ia7bnUUepLKRztQb9G5zG7FntyeSCgCIOOC7fc54kI54z0XxdKoZwm
+         UsSgAntzIMw3KQSgcBeKdN1QWygYHusJz0SkeZRUGg2PsQy4XaDZOG0MxOLGhZ2X4lgm
+         4Upy9pr16SC7b0gSSMPCHXH3gZiKN1h6QSgy+/1TQB5zB3zQpdOTqBtz0rKTPob8v1vh
+         Tmyg==
+X-Gm-Message-State: AOAM530wZSEi7atJfFN95tMQr2R/vsKksyJkMO+NnmuO4xT0j2vTy8Mu
+	E/WNjIHZf16220DkvpnTHIyu9t9MwZ8yrOKe4pc=
+X-Google-Smtp-Source: ABdhPJwcidosFNIPmbk7GHEwZG1yu2nbamT2k3hVGXal7QMwaPcFuqonnKFv6SmlRNpDK5+1fNPmNBvYY4simBzWH/8=
+X-Received: by 2002:a05:6402:42c3:: with SMTP id i3mr9654939edc.270.1619260655998;
+ Sat, 24 Apr 2021 03:37:35 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1619258978.git.akuster808@gmail.com>
-In-Reply-To: <cover.1619258978.git.akuster808@gmail.com>
+References: <cover.1619228936.git.akuster808@gmail.com>
+In-Reply-To: <cover.1619228936.git.akuster808@gmail.com>
 From: "Martin Jansa" <Martin.Jansa@gmail.com>
-Date: Sat, 24 Apr 2021 03:36:56 -0700
-Message-ID: <CA+chaQeSzuwXe2YRgc68xek+ZygZ7D16Q3jj=jBrTico5TvCEA@mail.gmail.com>
-Subject: Re: [oe] [hardknott 0/6] Patch review April 24th
+Date: Sat, 24 Apr 2021 03:37:24 -0700
+Message-ID: <CA+chaQfOVE4U0L9Oz-GGOO9ZRRGhyG7weP+FBSe9LNQxHGWBwA@mail.gmail.com>
+Subject: Re: [oe] [dunfell 0/6] Dunfell patch review April 23rd
 To: Armin Kuster <akuster808@gmail.com>
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="00000000000084101e05c0b57e0c"
+Content-Type: multipart/alternative; boundary="000000000000331b1005c0b58036"
 
---00000000000084101e05c0b57e0c
+--000000000000331b1005c0b58036
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Please take
-https://git.openembedded.org/meta-openembedded/commit/?id=3Db5ad9c011db258=
-1cc84e5daa139acf73a0f6f5c0
-as well to fix
-https://git.openembedded.org/meta-openembedded/commit/?h=3Dhardknott&id=3D=
-98a26903f770aa8698770817bdaf6175367917e1
-merged in previous PR.
+Acked-by: Martin Jansa <martin.jansa@gmail.com>
 
-On Sat, Apr 24, 2021 at 3:12 AM Armin Kuster <akuster808@gmail.com> wrote:
+On Fri, Apr 23, 2021 at 6:50 PM Armin Kuster <akuster808@gmail.com> wrote:
 
-> These have been sent to the list already so shorter review cycle.
-> Please have feedback by Sunday.
+> Please have comments back by Sunday.
 >
 > The following changes since commit
-> 2297d4ee04b47bc574f8879732d9e213ab7bf685:
+> 430ef96fe65f62d8da995f446d5b9b093544f031:
 >
->   wireguard: update to v1.0.20210219 +1 (2021-04-18 13:49:13 -0700)
+>   wireguard: fix build issue with updated 5.4 kernel (2021-04-07 08:55:15
+> -0700)
 >
 > are available in the Git repository at:
 >
->   git://git.openembedded.org/meta-openembedded-contrib
-> stable/hardknott-nut
+>   git://git.openembedded.org/meta-openembedded-contrib stable/dunfell-nut
 >
-> http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=3Dstable/h=
-ardknott-nut
+> http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/dunfell-nut
 >
-> Chen Qi (2):
->   tigervnc: upgrade to 1.11.0
->   python3-django: upgrade to 2.2.20
+> Martin Jansa (3):
+>   uml-utilities: fix installed-vs-shipped with usrmerge
+>   telepathy-glib: respect GI_DATA_ENABLED when enabling vala-bindings
+>   libyui: switch to libyui-old repo which still has this SRCREV
 >
 > Mingli Yu (2):
->   php: Upgrade to 7.4.16
->   python3-cryptography: Upgrade to 3.3.2
+>   hostapd: fix CVE-2019-5061
+>   hostapd: fix CVE-2021-0326 and CVE-2021-27803
 >
 > Stefan Ghinea (1):
->   python3-django: fix CVE-2021-28658
+>   hostapd: fix CVE-2021-30004
 >
-> Ulrich =C3=96lmann (1):
->   v4l-utils: fix reproducibility
->
->  .../php/php/CVE-2020-7069.patch               | 158 ------------------
->  .../php/php/CVE-2020-7070.patch               |  24 ---
->  .../php/{php_7.4.9.bb =3D> php_7.4.16.bb}       |   7 +-
->  ...002-do-not-build-tests-sub-directory.patch |  21 +--
->  ...vnc-add-fPIC-option-to-COMPILE_FLAGS.patch |  36 ++--
->  ...{tigervnc_1.10.1.bb =3D> tigervnc_1.11.0.bb} |  13 +-
->  ...c-autodetect-availability-of-systemd.patch |  47 ++++++
->  ...ct-installation-of-50-rc_keymap.conf.patch |  40 +++++
->  .../v4l2apps/v4l-utils_1.20.0.bb              |  11 +-
->  ...3.3.1.bb =3D> python3-cryptography_3.3.2.bb} |   2 +-
->  ...ngo_2.2.16.bb =3D> python3-django_2.2.20.bb} |   4 +-
->  11 files changed, 130 insertions(+), 233 deletions(-)
->  delete mode 100644 meta-oe/recipes-devtools/php/php/CVE-2020-7069.patch
->  delete mode 100644 meta-oe/recipes-devtools/php/php/CVE-2020-7070.patch
->  rename meta-oe/recipes-devtools/php/{php_7.4.9.bb =3D> php_7.4.16.bb} (=
-97%)
->  rename meta-oe/recipes-graphics/tigervnc/{tigervnc_1.10.1.bb =3D>
-> tigervnc_1.11.0.bb} (89%)
+>  .../hostapd/hostapd/CVE-2019-5061.patch       | 854 ++++++++++++++++++
+>  .../hostapd/hostapd/CVE-2021-0326.patch       |  43 +
+>  .../hostapd/hostapd/CVE-2021-27803.patch      |  54 ++
+>  .../hostapd/hostapd/CVE-2021-30004.patch      | 123 +++
+>  .../hostapd/hostapd_2.9.bb                    |   4 +
+>  .../telepathy/telepathy-glib_0.24.1.bb        |   4 +-
+>  .../uml-utilities/uml-utilities_20040406.bb   |   5 +-
+>  .../recipes-graphics/libyui/libyui_3.6.0.bb   |   2 +-
+>  8 files changed, 1084 insertions(+), 5 deletions(-)
 >  create mode 100644
-> meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0008-configure.ac-autodete=
-ct-availability-of-systemd.patch
+> meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2019-5061.patch
 >  create mode 100644
-> meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0009-keytable-restrict-ins=
-tallation-of-50-rc_keymap.conf.patch
->  rename meta-python/recipes-devtools/python/{python3-cryptography_3.3.1.=
-bb
-> =3D> python3-cryptography_3.3.2.bb} (94%)
->  rename meta-python/recipes-devtools/python/{python3-django_2.2.16.bb =
-=3D>
-> python3-django_2.2.20.bb} (41%)
+> meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2021-0326.patch
+>  create mode 100644
+> meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2021-27803.patch
+>  create mode 100644
+> meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2021-30004.patch
 >
 > --
 > 2.17.1
 >
 >
->=20
+> 
 >
 >
 
---00000000000084101e05c0b57e0c
+--000000000000331b1005c0b58036
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">Please take<div><a href=3D"https://git.openembedded.org/me=
-ta-openembedded/commit/?id=3Db5ad9c011db2581cc84e5daa139acf73a0f6f5c0">http=
-s://git.openembedded.org/meta-openembedded/commit/?id=3Db5ad9c011db2581cc84=
-e5daa139acf73a0f6f5c0</a><br></div><div>as well to fix</div><div><a href=3D=
-"https://git.openembedded.org/meta-openembedded/commit/?h=3Dhardknott&amp;i=
-d=3D98a26903f770aa8698770817bdaf6175367917e1">https://git.openembedded.org/=
-meta-openembedded/commit/?h=3Dhardknott&amp;id=3D98a26903f770aa8698770817bd=
-af6175367917e1</a><br></div><div>merged in previous PR.</div></div><br><div=
- class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Sat, Apr 24=
-, 2021 at 3:12 AM Armin Kuster &lt;<a href=3D"mailto:akuster808@gmail.com">=
-akuster808@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quo=
-te" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204=
-);padding-left:1ex">These have been sent to the list already so shorter rev=
-iew cycle.<br>
-Please have feedback by Sunday.<br>
+<div dir=3D"ltr">Acked-by:=C2=A0Martin Jansa &lt;<a href=3D"mailto:martin.j=
+ansa@gmail.com">martin.jansa@gmail.com</a>&gt;</div><br><div class=3D"gmail=
+_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Apr 23, 2021 at 6:50 =
+PM Armin Kuster &lt;<a href=3D"mailto:akuster808@gmail.com">akuster808@gmai=
+l.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"ma=
+rgin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:=
+1ex">Please have comments back by Sunday.<br>
 <br>
-The following changes since commit 2297d4ee04b47bc574f8879732d9e213ab7bf68=
-5:<br>
+The following changes since commit 430ef96fe65f62d8da995f446d5b9b093544f03=
+1:<br>
 <br>
-=C2=A0 wireguard: update to v1.0.20210219 +1 (2021-04-18 13:49:13 -0700)<b=
-r>
+=C2=A0 wireguard: fix build issue with updated 5.4 kernel (2021-04-07 08:5=
+5:15 -0700)<br>
 <br>
 are available in the Git repository at:<br>
 <br>
 =C2=A0 git://<a href=3D"http://git.openembedded.org/meta-openembedded-cont=
 rib" rel=3D"noreferrer" target=3D"_blank">git.openembedded.org/meta-openemb=
-edded-contrib</a> stable/hardknott-nut<br>
+edded-contrib</a> stable/dunfell-nut<br>
 =C2=A0 <a href=3D"http://cgit.openembedded.org/meta-openembedded-contrib/l=
-og/?h=3Dstable/hardknott-nut" rel=3D"noreferrer" target=3D"_blank">http://c=
-git.openembedded.org/meta-openembedded-contrib/log/?h=3Dstable/hardknott-nu=
-t</a><br>
+og/?h=3Dstable/dunfell-nut" rel=3D"noreferrer" target=3D"_blank">http://cgi=
+t.openembedded.org/meta-openembedded-contrib/log/?h=3Dstable/dunfell-nut</a=
+><br>
 <br>
-Chen Qi (2):<br>
-=C2=A0 tigervnc: upgrade to 1.11.0<br>
-=C2=A0 python3-django: upgrade to 2.2.20<br>
+Martin Jansa (3):<br>
+=C2=A0 uml-utilities: fix installed-vs-shipped with usrmerge<br>
+=C2=A0 telepathy-glib: respect GI_DATA_ENABLED when enabling vala-bindings=
+<br>
+=C2=A0 libyui: switch to libyui-old repo which still has this SRCREV<br>
 <br>
 Mingli Yu (2):<br>
-=C2=A0 php: Upgrade to 7.4.16<br>
-=C2=A0 python3-cryptography: Upgrade to 3.3.2<br>
+=C2=A0 hostapd: fix CVE-2019-5061<br>
+=C2=A0 hostapd: fix CVE-2021-0326 and CVE-2021-27803<br>
 <br>
 Stefan Ghinea (1):<br>
-=C2=A0 python3-django: fix CVE-2021-28658<br>
+=C2=A0 hostapd: fix CVE-2021-30004<br>
 <br>
-Ulrich =C3=96lmann (1):<br>
-=C2=A0 v4l-utils: fix reproducibility<br>
-<br>
-=C2=A0.../php/php/CVE-2020-7069.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0| 158 ------------------<br>
-=C2=A0.../php/php/CVE-2020-7070.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0|=C2=A0 24 ---<br>
-=C2=A0.../php/{<a href=3D"http://php_7.4.9.bb" rel=3D"noreferrer" target=
-=3D"_blank">php_7.4.9.bb</a> =3D&gt; <a href=3D"http://php_7.4.16.bb" rel=
-=3D"noreferrer" target=3D"_blank">php_7.4.16.bb</a>}=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0|=C2=A0 =C2=A07 +-<br>
-=C2=A0...002-do-not-build-tests-sub-directory.patch |=C2=A0 21 +--<br>
-=C2=A0...vnc-add-fPIC-option-to-COMPILE_FLAGS.patch |=C2=A0 36 ++--<br>
-=C2=A0...{<a href=3D"http://tigervnc_1.10.1.bb" rel=3D"noreferrer" target=
-=3D"_blank">tigervnc_1.10.1.bb</a> =3D&gt; <a href=3D"http://tigervnc_1.11=
-.0.bb" rel=3D"noreferrer" target=3D"_blank">tigervnc_1.11.0.bb</a>} |=C2=A0=
- 13 +-<br>
-=C2=A0...c-autodetect-availability-of-systemd.patch |=C2=A0 47 ++++++<br>
-=C2=A0...ct-installation-of-50-rc_keymap.conf.patch |=C2=A0 40 +++++<br>
-=C2=A0.../v4l2apps/<a href=3D"http://v4l-utils_1.20.0.bb" rel=3D"noreferre=
-r" target=3D"_blank">v4l-utils_1.20.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=C2=A0.../hostapd/hostapd/CVE-2019-5061.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0| =
+854 ++++++++++++++++++<br>
+=C2=A0.../hostapd/hostapd/CVE-2021-0326.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0|=
+=C2=A0 43 +<br>
+=C2=A0.../hostapd/hostapd/CVE-2021-27803.patch=C2=A0 =C2=A0 =C2=A0 |=C2=A0=
+ 54 ++<br>
+=C2=A0.../hostapd/hostapd/CVE-2021-30004.patch=C2=A0 =C2=A0 =C2=A0 | 123 +=
+++<br>
+=C2=A0.../hostapd/<a href=3D"http://hostapd_2.9.bb" rel=3D"noreferrer" tar=
+get=3D"_blank">hostapd_2.9.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
 =
-=A0 =C2=A0 =C2=A0 |=C2=A0 11 +-<br>
-=C2=A0...<a href=3D"http://3.3.1.bb" rel=3D"noreferrer" target=3D"_blank">=
-3.3.1.bb</a> =3D&gt; <a href=3D"http://python3-cryptography_3.3.2.bb" rel=
-=3D"noreferrer" target=3D"_blank">python3-cryptography_3.3.2.bb</a>} |=C2=
-=A0 =C2=A02 +-<br>
-=C2=A0...<a href=3D"http://ngo_2.2.16.bb" rel=3D"noreferrer" target=3D"_bl=
-ank">ngo_2.2.16.bb</a> =3D&gt; <a href=3D"http://python3-django_2.2.20.bb" =
-rel=3D"noreferrer" target=3D"_blank">python3-django_2.2.20.bb</a>} |=C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A04 +<br>
+=C2=A0.../telepathy/<a href=3D"http://telepathy-glib_0.24.1.bb" rel=3D"nor=
+eferrer" target=3D"_blank">telepathy-glib_0.24.1.bb</a>=C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 |=C2=A0 =C2=A04 +-<br>
+=C2=A0.../uml-utilities/<a href=3D"http://uml-utilities_20040406.bb" rel=
+=3D"noreferrer" target=3D"_blank">uml-utilities_20040406.bb</a>=C2=A0 =C2=
+=A0|=C2=A0 =C2=A05 +-<br>
+=C2=A0.../recipes-graphics/libyui/<a href=3D"http://libyui_3.6.0.bb" rel=
+=3D"noreferrer" target=3D"_blank">libyui_3.6.0.bb</a>=C2=A0 =C2=A0|=C2=A0 =
 =
-=C2=A04 +-<br>
-=C2=A011 files changed, 130 insertions(+), 233 deletions(-)<br>
-=C2=A0delete mode 100644 meta-oe/recipes-devtools/php/php/CVE-2020-7069.pa=
-tch<br>
-=C2=A0delete mode 100644 meta-oe/recipes-devtools/php/php/CVE-2020-7070.pa=
-tch<br>
-=C2=A0rename meta-oe/recipes-devtools/php/{<a href=3D"http://php_7.4.9.bb"=
- rel=3D"noreferrer" target=3D"_blank">php_7.4.9.bb</a> =3D&gt; <a href=3D"h=
-ttp://php_7.4.16.bb" rel=3D"noreferrer" target=3D"_blank">php_7.4.16.bb</a>=
-} (97%)<br>
-=C2=A0rename meta-oe/recipes-graphics/tigervnc/{<a href=3D"http://tigervnc=
-_1.10.1.bb" rel=3D"noreferrer" target=3D"_blank">tigervnc_1.10.1.bb</a> =3D=
-&gt; <a href=3D"http://tigervnc_1.11.0.bb" rel=3D"noreferrer" target=3D"_bl=
-ank">tigervnc_1.11.0.bb</a>} (89%)<br>
-=C2=A0create mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils/000=
-8-configure.ac-autodetect-availability-of-systemd.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils/000=
-9-keytable-restrict-installation-of-50-rc_keymap.conf.patch<br>
-=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python=
-3-cryptography_3.3.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-crypt=
-ography_3.3.1.bb</a> =3D&gt; <a href=3D"http://python3-cryptography_3.3.2.b=
-b" rel=3D"noreferrer" target=3D"_blank">python3-cryptography_3.3.2.bb</a>} =
-(94%)<br>
-=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python=
-3-django_2.2.16.bb" rel=3D"noreferrer" target=3D"_blank">python3-django_2.2=
-.16.bb</a> =3D&gt; <a href=3D"http://python3-django_2.2.20.bb" rel=3D"noref=
-errer" target=3D"_blank">python3-django_2.2.20.bb</a>} (41%)<br>
+=C2=A02 +-<br>
+=C2=A08 files changed, 1084 insertions(+), 5 deletions(-)<br>
+=C2=A0create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-=
+2019-5061.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-=
+2021-0326.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-=
+2021-27803.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-=
+2021-30004.patch<br>
 <br>
 -- <br>
 2.17.1<br>
@@ -242,4 +185,4 @@ errer" target=3D"_blank">python3-django_2.2.20.bb</a>} (41%)<br>
 <br>
 </blockquote></div>
 
---00000000000084101e05c0b57e0c--
+--000000000000331b1005c0b58036--
