@@ -1,50 +1,50 @@
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
- by mx.groups.io with SMTP id smtpd.web11.6469.1619384088316792033
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web09.6683.1619384198735776427
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 25 Apr 2021 13:54:48 -0700
+ Sun, 25 Apr 2021 13:56:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=EyTc4OCT;
- spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f169.google.com with SMTP id a12so37617657pfc.7
-        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Apr 2021 13:54:48 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Co8DJxV3;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id s20so11998345plr.13
+        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Apr 2021 13:56:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:references:from:autocrypt:message-id:date:user-agent
+        h=subject:to:cc:references:from:autocrypt:message-id:date:user-agent
          :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=fObbw6ClLP5/sHDBK6VhrL6R56lyZxINCtIjUBI20EI=;
-        b=EyTc4OCTX+rbBMdcbXBik8lulLer4Umhn5z+Sqz1xrpkfpkUUvWzdIsTciHOUI0NXe
-         BDr6+D7Ik8o/3cO8QH/npdMVTpb8sEBAUcsjQETH+RbbVgWjPWdBQCL45QGmO4BRkpjk
-         a0ZhZaQnU36TxZ8tGLy9rA/qN9zVdNp4sZLPEsPkPh/Pn5JYfCv4rQc7i2jAq0uLEA8M
-         Gac6lteZ50iCoRcU8uI87nh+19SJ7+6jBak8XT/tWIRQ/+GR+aP6RdfmKKm22MXA9RJc
-         9LqSlwg0XnwCjsTaq5pm6cz78krLd+KiJOn64XTcOKc2YfATmliDrXAPQA0yzs+hLFDn
-         a5fg==
+        bh=Xc0Ye+o2ojiPJs9n0imrT/FV0EimUAOp4ZbKcALcdyo=;
+        b=Co8DJxV3ZD4nsEPkkjFUf/GphWamIR71RgGhGM0kaALt/baPYZWO4/AF+3hyffUL7e
+         Az1+FPyW/jMwuOvOCu46w9p0jyYqL4mWB+3lfuzaPjzT63d6u2mc+i7uM1pU5UHTPTCf
+         oFVhWP0qo1eaY6BC5M/sHyG/UqurSC3x2zBQicqxvXWdoYblwkV+0cbSReyIMvy0gQjU
+         KWRXGd4gthWiB23hbiFL6OGkz/x5JtXAKPmvDOlajkes+I+qbsJ8LEf9Qol9TNgRVWkq
+         rlpGkCliydF3Vrb1G7CC50VTZdI+f9RJoWfHrbx6JztAYT9NbS/IL5nC/C4OfomnXaEL
+         d9cA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
-         :date:user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=fObbw6ClLP5/sHDBK6VhrL6R56lyZxINCtIjUBI20EI=;
-        b=SFGBLoOb1ICXa8gLANfXaPSEB870M/nUxge+9JH1B2T4ubpnWqeBbBVFAshTBg6vz3
-         F3KkiNdFILWgZ3HPPH/QwA97uMUfCGFz0dZ+8DXj/fBFKtcQEk7avIBCf3FQAMwZy/Bl
-         8uRQqKiT8wRZDoTAp0z7qvL/r9a/o4ATyCjCA0LJlyK2tbIB7XS37aOjKitb6DGBEpbb
-         uPmp2zMT3RN8LAvK0TnlMfCihh76OhSujKjXDEujmZsZhTATEQ6tMNGkMcJMAIbqhKAx
-         29/EPexR37J3qawgh0gRqfUzgmDKwJtCpD0zK7Y563/ioobqxUNOnawouftWtq7jh4Kh
-         6opw==
-X-Gm-Message-State: AOAM5316nqvpSQ2fa6GPaDG7W1vEVrZ+6lfgyZMSadn7eJrJ6f2n7OE3
-	0/21SOxYpIYS226+zr3qs3PAWCnSSJK8yw==
-X-Google-Smtp-Source: ABdhPJxn7PJctTWjXrSiFg7095Q6wKQ5yw3fzbN6GDPRy8c5ZEn0QM3RcNr1TAK55fqnDc8D1AEiIQ==
-X-Received: by 2002:a63:dc49:: with SMTP id f9mr13670086pgj.361.1619384087434;
-        Sun, 25 Apr 2021 13:54:47 -0700 (PDT)
+        h=x-gm-message-state:subject:to:cc:references:from:autocrypt
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-transfer-encoding:content-language;
+        bh=Xc0Ye+o2ojiPJs9n0imrT/FV0EimUAOp4ZbKcALcdyo=;
+        b=iaff35cJGuRQCCZk4denCbhMAP6mJ2dl7su5uVF4Q6cUyI05J/S/gO5mCxD9WbwXR3
+         wOWJVdI5S4QVcPqonw7+3dYGqixETDOOSXWef+/3DMu3qgOTGBSnOVaYUogblJa+LQoV
+         n+FdXAIzVFiAD9wZpMQudkmp0Q1Jt9O9c8mHi0noA/bhk8ahGwzaQXBoo6cOUcHIYyj1
+         GwKaucMYof+es7b2MriU5+njIApgW4x77uh7d+4V0r84YDaBxgd5r3Xu6NFo+xLaeBho
+         YZ5/fvsozrSCse8qyWONvH609aN/xodzMxRCPnIySCycPYaFYkrIgeIGROAdrCSLQAdz
+         ZDgQ==
+X-Gm-Message-State: AOAM531j1GJRSHv7Cd+c8OwbZsKSKkMhK0Um4gVJ5k0KK+NCuhag00Gr
+	5gjzZPo6om+v3cfYsj7uI0xibv4JtYo93g==
+X-Google-Smtp-Source: ABdhPJzqTIVotTsLw/8mzZBm1MgJsdhMri9nq/acWTxjHVl0ut5p+XyHk4+kLtGX2mVj3gfEL21hJA==
+X-Received: by 2002:a17:90a:a613:: with SMTP id c19mr18630591pjq.117.1619384198117;
+        Sun, 25 Apr 2021 13:56:38 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from ?IPv6:2601:202:4180:a5c0:880e:6a48:f6c3:8404? ([2601:202:4180:a5c0:880e:6a48:f6c3:8404])
-        by smtp.gmail.com with ESMTPSA id u189sm9255548pfb.151.2021.04.25.13.54.46
+        by smtp.gmail.com with ESMTPSA id e6sm9270716pgh.17.2021.04.25.13.56.37
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 25 Apr 2021 13:54:46 -0700 (PDT)
-Subject: Re: [oe] [meta-oe][hardknott][PATCH 1/2] php: Upgrade to 7.4.16
-To: "Yu, Mingli" <mingli.yu@windriver.com>,
- openembedded-devel@lists.openembedded.org
-References: <1678669C913490A8.14065@lists.openembedded.org>
- <67b43873-0bfb-b7ee-d8c9-509061869841@windriver.com>
+        Sun, 25 Apr 2021 13:56:37 -0700 (PDT)
+Subject: Re: [oe] [hardknott 0/6] Patch review April 24th
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+References: <cover.1619258978.git.akuster808@gmail.com>
+ <CA+chaQeSzuwXe2YRgc68xek+ZygZ7D16Q3jj=jBrTico5TvCEA@mail.gmail.com>
 From: "Armin Kuster" <akuster808@gmail.com>
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
@@ -89,301 +89,107 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
  ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
  8CS2NxU=
-Message-ID: <398fc81c-50cc-2a80-7ea9-3c72ab9d9909@gmail.com>
-Date: Sun, 25 Apr 2021 13:54:45 -0700
+Message-ID: <87d755d5-1068-dd5a-58e1-7ffbec9310b7@gmail.com>
+Date: Sun, 25 Apr 2021 13:56:36 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <67b43873-0bfb-b7ee-d8c9-509061869841@windriver.com>
+In-Reply-To: <CA+chaQeSzuwXe2YRgc68xek+ZygZ7D16Q3jj=jBrTico5TvCEA@mail.gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
 
 
 
-On 4/25/21 12:46 AM, Yu, Mingli wrote:
-> Ping.
-this is in stable/hardknott-nut.  Things take time to work themselves
-through my build systems.
+On 4/24/21 3:36 AM, Martin Jansa wrote:
+> Please take
+> https://git.openembedded.org/meta-openembedded/commit/?id=b5ad9c011db2581cc84e5daa139acf73a0f6f5c0
+> as well to fix
+> https://git.openembedded.org/meta-openembedded/commit/?h=hardknott&id=98a26903f770aa8698770817bdaf6175367917e1
+> merged in previous PR.
+
+Hardknott already has that commit. Was this meant for Gatesgarth?
 
 -armin
 >
-> Thanks,
+> On Sat, Apr 24, 2021 at 3:12 AM Armin Kuster <akuster808@gmail.com
+> <mailto:akuster808@gmail.com>> wrote:
 >
-> On 4/23/21 1:48 PM, Yu, Mingli wrote:
->> From: Mingli Yu <mingli.yu@windriver.com>
->>
->> License-Update: License updated (year updated)
->>
->> Fix some security issues such as CVE-2021-21702 and remove two
->> cve patches which already included in the new version.
->>
->> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>   .../php/php/CVE-2020-7069.patch               | 158 ------------------
->>   .../php/php/CVE-2020-7070.patch               |  24 ---
->>   .../php/{php_7.4.9.bb => php_7.4.16.bb}       |   7 +-
->>   3 files changed, 2 insertions(+), 187 deletions(-)
->>   delete mode 100644
->> meta-oe/recipes-devtools/php/php/CVE-2020-7069.patch
->>   delete mode 100644
->> meta-oe/recipes-devtools/php/php/CVE-2020-7070.patch
->>   rename meta-oe/recipes-devtools/php/{php_7.4.9.bb => php_7.4.16.bb}
->> (97%)
->>
->> diff --git a/meta-oe/recipes-devtools/php/php/CVE-2020-7069.patch
->> b/meta-oe/recipes-devtools/php/php/CVE-2020-7069.patch
->> deleted file mode 100644
->> index 0cf4d5ed6..000000000
->> --- a/meta-oe/recipes-devtools/php/php/CVE-2020-7069.patch
->> +++ /dev/null
->> @@ -1,158 +0,0 @@
->> -Subject: Fix bug #79601 (Wrong ciphertext/tag in AES-CCM encryption
->> - for a 12 bytes IV)
->> -
->> ----
->> - ext/openssl/openssl.c                      | 10 ++++-----
->> - ext/openssl/tests/cipher_tests.inc         | 21 +++++++++++++++++
->> - ext/openssl/tests/openssl_decrypt_ccm.phpt | 22 +++++++++++-------
->> - ext/openssl/tests/openssl_encrypt_ccm.phpt | 26 ++++++++++++++--------
->> - 4 files changed, 57 insertions(+), 22 deletions(-)
->> -
->> -diff --git a/ext/openssl/openssl.c b/ext/openssl/openssl.c
->> -index 04cb9b0f..fdad2c3b 100644
->> ---- a/ext/openssl/openssl.c
->> -+++ b/ext/openssl/openssl.c
->> -@@ -6521,11 +6521,6 @@ static int php_openssl_validate_iv(char
->> **piv, size_t *piv_len, size_t iv_requir
->> - {
->> -     char *iv_new;
->> -
->> --    /* Best case scenario, user behaved */
->> --    if (*piv_len == iv_required_len) {
->> --        return SUCCESS;
->> --    }
->> -- 
->> -     if (mode->is_aead) {
->> -         if (EVP_CIPHER_CTX_ctrl(cipher_ctx, mode->aead_ivlen_flag,
->> *piv_len, NULL) != 1) {
->> -             php_error_docref(NULL, E_WARNING, "Setting of IV length
->> for AEAD mode failed");
->> -@@ -6534,6 +6529,11 @@ static int php_openssl_validate_iv(char
->> **piv, size_t *piv_len, size_t iv_requir
->> -         return SUCCESS;
->> -     }
->> -
->> -+    /* Best case scenario, user behaved */
->> -+    if (*piv_len == iv_required_len) {
->> -+        return SUCCESS;
->> -+    }
->> -+
->> -     iv_new = ecalloc(1, iv_required_len + 1);
->> -
->> -     if (*piv_len == 0) {
->> -diff --git a/ext/openssl/tests/cipher_tests.inc
->> b/ext/openssl/tests/cipher_tests.inc
->> -index b1e46b41..779bfa85 100644
->> ---- a/ext/openssl/tests/cipher_tests.inc
->> -+++ b/ext/openssl/tests/cipher_tests.inc
->> -@@ -1,5 +1,26 @@
->> - <?php
->> - $php_openssl_cipher_tests = array(
->> -+    'aes-128-ccm' => array(
->> -+        array(
->> -+            'key' => '404142434445464748494a4b4c4d4e4f',
->> -+            'iv'  => '1011121314151617',
->> -+            'aad' => '000102030405060708090a0b0c0d0e0f',
->> -+            'tag' => '1fc64fbfaccd',
->> -+            'pt'  => '202122232425262728292a2b2c2d2e2f',
->> -+            'ct'  => 'd2a1f0e051ea5f62081a7792073d593d',
->> -+        ),
->> -+        array(
->> -+            'key' => '404142434445464748494a4b4c4d4e4f',
->> -+            'iv'  => '101112131415161718191a1b',
->> -+            'aad' => '000102030405060708090a0b0c0d0e0f' .
->> -+                     '10111213',
->> -+            'tag' => '484392fbc1b09951',
->> -+            'pt'  => '202122232425262728292a2b2c2d2e2f' .
->> -+                     '3031323334353637',
->> -+            'ct'  => 'e3b201a9f5b71a7a9b1ceaeccd97e70b' .
->> -+                     '6176aad9a4428aa5',
->> -+        ),
->> -+    ),
->> -     'aes-256-ccm' => array(
->> -         array(
->> -             'key' => '1bde3251d41a8b5ea013c195ae128b21' .
->> -diff --git a/ext/openssl/tests/openssl_decrypt_ccm.phpt
->> b/ext/openssl/tests/openssl_decrypt_ccm.phpt
->> -index a5f01b87..08ef5bb7 100644
->> ---- a/ext/openssl/tests/openssl_decrypt_ccm.phpt
->> -+++ b/ext/openssl/tests/openssl_decrypt_ccm.phpt
->> -@@ -10,14 +10,16 @@ if (!in_array('aes-256-ccm',
->> openssl_get_cipher_methods()))
->> - --FILE--
->> - <?php
->> - require_once __DIR__ . "/cipher_tests.inc";
->> --$method = 'aes-256-ccm';
->> --$tests = openssl_get_cipher_tests($method);
->> -+$methods = ['aes-128-ccm', 'aes-256-ccm'];
->> -
->> --foreach ($tests as $idx => $test) {
->> --    echo "TEST $idx\n";
->> --    $pt = openssl_decrypt($test['ct'], $method, $test['key'],
->> OPENSSL_RAW_DATA,
->> --        $test['iv'], $test['tag'], $test['aad']);
->> --    var_dump($test['pt'] === $pt);
->> -+foreach ($methods as $method) {
->> -+    $tests = openssl_get_cipher_tests($method);
->> -+    foreach ($tests as $idx => $test) {
->> -+        echo "$method - TEST $idx\n";
->> -+        $pt = openssl_decrypt($test['ct'], $method, $test['key'],
->> OPENSSL_RAW_DATA,
->> -+            $test['iv'], $test['tag'], $test['aad']);
->> -+        var_dump($test['pt'] === $pt);
->> -+    }
->> - }
->> -
->> - // no IV
->> -@@ -32,7 +34,11 @@ var_dump(openssl_decrypt($test['ct'], $method,
->> $test['key'], OPENSSL_RAW_DATA,
->> -
->> - ?>
->> - --EXPECTF--
->> --TEST 0
->> -+aes-128-ccm - TEST 0
->> -+bool(true)
->> -+aes-128-ccm - TEST 1
->> -+bool(true)
->> -+aes-256-ccm - TEST 0
->> - bool(true)
->> -
->> - Warning: openssl_decrypt(): Setting of IV length for AEAD mode
->> failed in %s on line %d
->> -diff --git a/ext/openssl/tests/openssl_encrypt_ccm.phpt
->> b/ext/openssl/tests/openssl_encrypt_ccm.phpt
->> -index fb5dbbc8..8c4c41f8 100644
->> ---- a/ext/openssl/tests/openssl_encrypt_ccm.phpt
->> -+++ b/ext/openssl/tests/openssl_encrypt_ccm.phpt
->> -@@ -10,15 +10,17 @@ if (!in_array('aes-256-ccm',
->> openssl_get_cipher_methods()))
->> - --FILE--
->> - <?php
->> - require_once __DIR__ . "/cipher_tests.inc";
->> --$method = 'aes-256-ccm';
->> --$tests = openssl_get_cipher_tests($method);
->> -+$methods = ['aes-128-ccm', 'aes-256-ccm'];
->> -
->> --foreach ($tests as $idx => $test) {
->> --    echo "TEST $idx\n";
->> --    $ct = openssl_encrypt($test['pt'], $method, $test['key'],
->> OPENSSL_RAW_DATA,
->> --        $test['iv'], $tag, $test['aad'], strlen($test['tag']));
->> --    var_dump($test['ct'] === $ct);
->> --    var_dump($test['tag'] === $tag);
->> -+foreach ($methods as $method) {
->> -+    $tests = openssl_get_cipher_tests($method);
->> -+    foreach ($tests as $idx => $test) {
->> -+        echo "$method - TEST $idx\n";
->> -+        $ct = openssl_encrypt($test['pt'], $method, $test['key'],
->> OPENSSL_RAW_DATA,
->> -+            $test['iv'], $tag, $test['aad'], strlen($test['tag']));
->> -+        var_dump($test['ct'] === $ct);
->> -+        var_dump($test['tag'] === $tag);
->> -+    }
->> - }
->> -
->> - // Empty IV error
->> -@@ -32,7 +34,13 @@ var_dump(strlen($tag));
->> - var_dump(openssl_encrypt('data', $method, 'password', 0,
->> str_repeat('x', 16), $tag, '', 1024));
->> - ?>
->> - --EXPECTF--
->> --TEST 0
->> -+aes-128-ccm - TEST 0
->> -+bool(true)
->> -+bool(true)
->> -+aes-128-ccm - TEST 1
->> -+bool(true)
->> -+bool(true)
->> -+aes-256-ccm - TEST 0
->> - bool(true)
->> - bool(true)
->> -
->> ---
->> -2.25.1
->> -
->> diff --git a/meta-oe/recipes-devtools/php/php/CVE-2020-7070.patch
->> b/meta-oe/recipes-devtools/php/php/CVE-2020-7070.patch
->> deleted file mode 100644
->> index e5b527f98..000000000
->> --- a/meta-oe/recipes-devtools/php/php/CVE-2020-7070.patch
->> +++ /dev/null
->> @@ -1,24 +0,0 @@
->> -Subject: Patch fix-urldecode for HTTP related Bug #79699
->> -
->> ----
->> - main/php_variables.c | 4 +++-
->> - 1 file changed, 3 insertions(+), 1 deletion(-)
->> -
->> -diff --git a/main/php_variables.c b/main/php_variables.c
->> -index 1a40c2a1..cbdc7cf1 100644
->> ---- a/main/php_variables.c
->> -+++ b/main/php_variables.c
->> -@@ -514,7 +514,9 @@ SAPI_API
->> SAPI_TREAT_DATA_FUNC(php_default_treat_data)
->> -         }
->> -
->> -         val = estrndup(val, val_len);
->> --        php_url_decode(var, strlen(var));
->> -+        if (arg != PARSE_COOKIE) {
->> -+            php_url_decode(var, strlen(var));
->> -+        }
->> -         if (sapi_module.input_filter(arg, var, &val, val_len,
->> &new_val_len)) {
->> -             php_register_variable_safe(var, val, new_val_len, &array);
->> -         }
->> ---
->> -2.25.1
->> -
->> diff --git a/meta-oe/recipes-devtools/php/php_7.4.9.bb
->> b/meta-oe/recipes-devtools/php/php_7.4.16.bb
->> similarity index 97%
->> rename from meta-oe/recipes-devtools/php/php_7.4.9.bb
->> rename to meta-oe/recipes-devtools/php/php_7.4.16.bb
->> index e19d5dd21..821d9cd04 100644
->> --- a/meta-oe/recipes-devtools/php/php_7.4.9.bb
->> +++ b/meta-oe/recipes-devtools/php/php_7.4.16.bb
->> @@ -3,7 +3,7 @@ HOMEPAGE = "http://www.php.net"
->>   SECTION = "console/network"
->>     LICENSE = "PHP-3.0"
->> -LIC_FILES_CHKSUM =
->> "file://LICENSE;md5=7e571b888d585b31f9ef5edcc647fa30"
->> +LIC_FILES_CHKSUM =
->> "file://LICENSE;md5=99532e0f6620bc9bca34f12fadaee33c"
->>     BBCLASSEXTEND = "native"
->>   DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native
->> lemon-native"
->> @@ -30,13 +30,10 @@ SRC_URI_append_class-target = " \
->>               file://phar-makefile.patch \
->>               file://0001-opcache-config.m4-enable-opcache.patch \
->>               file://xfail_two_bug_tests.patch \
->> -            file://CVE-2020-7070.patch \
->> -            file://CVE-2020-7069.patch \
->>             "
->>     S = "${WORKDIR}/php-${PV}"
->> -SRC_URI[md5sum] = "e68a66c54b080d108831f6dc2e1e403d"
->> -SRC_URI[sha256sum] =
->> "2e270958a4216480da7886743438ccc92b6acf32ea96fefda88d07e0a5095deb"
->> +SRC_URI[sha256sum] =
->> "85710f007cfd0fae94e13a02a3a036f4e81ef43693260cae8a2e1ca93659ce3e"
->>     inherit autotools pkgconfig python3native gettext
->>  
->>
->>
->>
->>
+>     These have been sent to the list already so shorter review cycle.
+>     Please have feedback by Sunday.
 >
-> 
+>     The following changes since commit
+>     2297d4ee04b47bc574f8879732d9e213ab7bf685:
+>
+>       wireguard: update to v1.0.20210219 +1 (2021-04-18 13:49:13 -0700)
+>
+>     are available in the Git repository at:
+>
+>       git://git.openembedded.org/meta-openembedded-contrib
+>     <http://git.openembedded.org/meta-openembedded-contrib>
+>     stable/hardknott-nut
+>      
+>     http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/hardknott-nut
+>
+>     Chen Qi (2):
+>       tigervnc: upgrade to 1.11.0
+>       python3-django: upgrade to 2.2.20
+>
+>     Mingli Yu (2):
+>       php: Upgrade to 7.4.16
+>       python3-cryptography: Upgrade to 3.3.2
+>
+>     Stefan Ghinea (1):
+>       python3-django: fix CVE-2021-28658
+>
+>     Ulrich Ölmann (1):
+>       v4l-utils: fix reproducibility
+>
+>      .../php/php/CVE-2020-7069.patch               | 158
+>     ------------------
+>      .../php/php/CVE-2020-7070.patch               |  24 ---
+>      .../php/{php_7.4.9.bb <http://php_7.4.9.bb> => php_7.4.16.bb
+>     <http://php_7.4.16.bb>}       |   7 +-
+>      ...002-do-not-build-tests-sub-directory.patch |  21 +--
+>      ...vnc-add-fPIC-option-to-COMPILE_FLAGS.patch |  36 ++--
+>      ...{tigervnc_1.10.1.bb <http://tigervnc_1.10.1.bb> =>
+>     tigervnc_1.11.0.bb <http://tigervnc_1.11.0.bb>} |  13 +-
+>      ...c-autodetect-availability-of-systemd.patch |  47 ++++++
+>      ...ct-installation-of-50-rc_keymap.conf.patch |  40 +++++
+>      .../v4l2apps/v4l-utils_1.20.0.bb <http://v4l-utils_1.20.0.bb>   
+>               |  11 +-
+>      ...3.3.1.bb <http://3.3.1.bb> => python3-cryptography_3.3.2.bb
+>     <http://python3-cryptography_3.3.2.bb>} |   2 +-
+>      ...ngo_2.2.16.bb <http://ngo_2.2.16.bb> =>
+>     python3-django_2.2.20.bb <http://python3-django_2.2.20.bb>} |   4 +-
+>      11 files changed, 130 insertions(+), 233 deletions(-)
+>      delete mode 100644
+>     meta-oe/recipes-devtools/php/php/CVE-2020-7069.patch
+>      delete mode 100644
+>     meta-oe/recipes-devtools/php/php/CVE-2020-7070.patch
+>      rename meta-oe/recipes-devtools/php/{php_7.4.9.bb
+>     <http://php_7.4.9.bb> => php_7.4.16.bb <http://php_7.4.16.bb>} (97%)
+>      rename meta-oe/recipes-graphics/tigervnc/{tigervnc_1.10.1.bb
+>     <http://tigervnc_1.10.1.bb> => tigervnc_1.11.0.bb
+>     <http://tigervnc_1.11.0.bb>} (89%)
+>      create mode 100644
+>     meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0008-configure.ac-autodetect-availability-of-systemd.patch
+>      create mode 100644
+>     meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0009-keytable-restrict-installation-of-50-rc_keymap.conf.patch
+>      rename
+>     meta-python/recipes-devtools/python/{python3-cryptography_3.3.1.bb
+>     <http://python3-cryptography_3.3.1.bb> =>
+>     python3-cryptography_3.3.2.bb
+>     <http://python3-cryptography_3.3.2.bb>} (94%)
+>      rename
+>     meta-python/recipes-devtools/python/{python3-django_2.2.16.bb
+>     <http://python3-django_2.2.16.bb> => python3-django_2.2.20.bb
+>     <http://python3-django_2.2.20.bb>} (41%)
+>
+>     -- 
+>     2.17.1
+>
+>
+>     
 >
 
