@@ -1,48 +1,48 @@
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web11.6819.1619386153892361969
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
+ by mx.groups.io with SMTP id smtpd.web12.7156.1619386542316881869
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 25 Apr 2021 14:29:14 -0700
+ Sun, 25 Apr 2021 14:35:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=o1xXECY6;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id m6-20020a17090a8586b02901507e1acf0fso4100721pjn.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Apr 2021 14:29:13 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=IcVGkBvP;
+ spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f169.google.com with SMTP id z16so38794558pga.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Apr 2021 14:35:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=to:from:subject:autocrypt:message-id:date:user-agent:mime-version
          :content-transfer-encoding:content-language;
-        bh=vb7OMTFCuEq0F51oqxTjT739EPVGB+VY2l/uBzUZe60=;
-        b=o1xXECY6bYIg2G0QpVEcsCNo4+UfsHANxT4hfkZ/qyo0ODZ+PiIMO18TQe9CN3TUjy
-         cOaqtFfSi1fbJg0uwRrm04m9tlLXIXip2+8Ihap5hFrf3ReEATxIKjI6A20m4ckyT4aF
-         Y4nnw2J3Ox5sM01/uJkicv0rFtGV7w2XfBqQGKHCoMTe5Kz1XAFsc7lhu/oBGmw8D42h
-         4D0i51frxuiQDBGBKvwCpT0xccixJd0zMqKzU9glxwkraxd3RLes/DYvpf9FUSoWGUiN
-         Pa7hZlDrg4md34ieJIqj9b6mPjd69gwqsCgnTBEp0TcBVwu2ZFchf26eGzrGnf/gIFTQ
-         iALg==
+        bh=dOjuMW16/ZZ33KZrbk3D4bYNNYNyzE7Wnl5yKXPHYac=;
+        b=IcVGkBvP+V1mMxdgF7n7NM9xNIPRNK60o7nLvV16u1JlGfn65XcGAiMbYjUeXIMtE9
+         WwF9j3cQnaSo5KaDlkU8W2Wo2/uZOfFiMi6yoOgYVJj9UeWSyS2EHBmW6ewYCoiLxUlA
+         E99TQY8TJy7mjF14Pc7a8w7LJYF8r+nq1Lpk1u2Ag7iFJdh+MywqZjWSWwAVn7IcXhK3
+         OozHBCEBnGq3ZrcXjv8f1iocv7tz1mY5R+QpVculETAdl8F6vkY8mOrAXaBHqSeuhIDe
+         lI1bo9swasDjvHuaNUtPsf1aNWQBGKQ9K2oAm20HTYWzq2+wv6b8Jy5kSm8tO4J6PUd/
+         2z0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:to:from:subject:autocrypt:message-id:date
          :user-agent:mime-version:content-transfer-encoding:content-language;
-        bh=vb7OMTFCuEq0F51oqxTjT739EPVGB+VY2l/uBzUZe60=;
-        b=OhBm5DPuOinRF6cL6tDbEyrdeykK3MJ1CY7qjZ76bhnrPLRrTZ3DhiRL5vAV53XmoZ
-         bE93D+tzu+3aVPJokQpMYDzXf1moZyVfTcknpdUFeMuMnHTGUGMOyOqmMrqNDny+FaYo
-         SlW3pyHZNKnZ4W6gbT4fPFrKQGu1EVT0tWujIBKFfvnhG/RSiBUDKhcPhGF4trLjVKbl
-         tFDWvMQ1/2OXwq6/kg61gEvEMyBFz5GKrZd0hKAsqJ55qOqNhy7W3OgoO42SoJmDZh4t
-         aDQm7qYMVvGrD8IkWLcoYIqsCIIgV1Z2fMRwYL9UVDcSauQDBf+6IPCGR6EplKNC/xjq
-         ATtA==
-X-Gm-Message-State: AOAM531pNWmMjsAUN9DT0dJDvPoriB0Eg2ToLL99iRDdcWUe1DoJgqHa
-	OIW223/zmTPYqTuYq1ZG38g=
-X-Google-Smtp-Source: ABdhPJzevByClbbk70LxRIe/JedARKnJvNyG9476pquwcIwS7SZizh+Rsa8Qn3dAQHUJAFVVURWiTQ==
-X-Received: by 2002:a17:90b:1b0a:: with SMTP id nu10mr17340220pjb.118.1619386153461;
-        Sun, 25 Apr 2021 14:29:13 -0700 (PDT)
+        bh=dOjuMW16/ZZ33KZrbk3D4bYNNYNyzE7Wnl5yKXPHYac=;
+        b=B++MRiuBcDZpTxFxSAHTyBbOIHJ97ii7YrRxcOuZ7sSQSigfEgylGLz1ArwVy2uF07
+         WLxU6q0zanWizXTy1w/w6SJIgxvZ2N/qxpnSMSxr6UbeD9tzqbZZeQRbY6aByggOYeXQ
+         1kGX4IsTC+YRiB/Fow2DbcrIpl13yYZ3DWgNS9BigqOZ3GPfiaMavbuJ/v2WIAI3bbmb
+         TucOlRtltrgAjpUUYH5QSuebzNkQKcZwCs1JoWtyRfIHwq93K4DsjDk/R8awxmZ/8BBj
+         MLz5C8xEgpNbb24PKN1FPbcbs0czd67FCPJBMw2PImDmaK6hPu+dYL47Z9y1peWjOC3k
+         dUrg==
+X-Gm-Message-State: AOAM531XvD6V3JzlJWwJxgCW0No+IbVL5prLptoTl4VZR8+mLYBvbwkY
+	rUUgMgGU/D55GQZyOaLJqJueFtDpcytvMg==
+X-Google-Smtp-Source: ABdhPJzahCG46NXRxKD6i3TOT21qJJFTM7PNO7j3B1eO6GV6343xk1+pTKFHMLAJc/sou58PScIKLw==
+X-Received: by 2002:a63:e443:: with SMTP id i3mr14181193pgk.114.1619386541700;
+        Sun, 25 Apr 2021 14:35:41 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from ?IPv6:2601:202:4180:a5c0:880e:6a48:f6c3:8404? ([2601:202:4180:a5c0:880e:6a48:f6c3:8404])
-        by smtp.gmail.com with ESMTPSA id g15sm9376556pfv.216.2021.04.25.14.29.12
+        by smtp.gmail.com with ESMTPSA id u189sm9285917pfb.151.2021.04.25.14.35.40
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 25 Apr 2021 14:29:13 -0700 (PDT)
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
- Khem Raj <raj.khem@gmail.com>
+        Sun, 25 Apr 2021 14:35:41 -0700 (PDT)
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 From: "Armin Kuster" <akuster808@gmail.com>
-Subject: Dunfell merge request - April 25th
+Subject: Hardknott merge request - April 25th
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
  Jmd71vHMw+coBetWC3lk+IKjX815Ox0puYXQVRRtI+yMCgd6ib3oGxoQ8tCMwhf9c9/aKjaz
@@ -86,8 +86,8 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
  ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
  8CS2NxU=
-Message-ID: <248b148e-b0f9-b13f-3ee8-c84ce1c4155a@gmail.com>
-Date: Sun, 25 Apr 2021 14:29:10 -0700
+Message-ID: <bfd87f9a-d54f-25fd-5229-ff3cd60ad033@gmail.com>
+Date: Sun, 25 Apr 2021 14:35:39 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
@@ -95,55 +95,45 @@ Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
 
-The following changes since commit 430ef96fe65f62d8da995f446d5b9b093544f031:
+The following changes since commit 2297d4ee04b47bc574f8879732d9e213ab7bf685:
 
-  wireguard: fix build issue with updated 5.4 kernel (2021-04-07
-08:55:15 -0700)
+  wireguard: update to v1.0.20210219 +1 (2021-04-18 13:49:13 -0700)
 
 are available in the Git repository at:
 
-  https://git.openembedded.org/meta-openembedded dunfell-next
+  https://git.openembedded.org/meta-openembedded hardknott-next
 
-for you to fetch changes up to c1a50683225b0bf10f8d7a18280acefa7469ecc2:
+for you to fetch changes up to 71b546ed8595b14d29efc1e8b951f8c845ad10c4:
 
-  libupnp: Fix CVE-2020-13848 (2021-04-23 19:13:09 -0700)
+  python3-cryptography: Upgrade to 3.3.2 (2021-04-23 19:09:56 -0700)
 
 ----------------------------------------------------------------
-Andrej Kozemcak (1):
-      libupnp: Fix CVE-2020-13848
-
-Martin Jansa (3):
-      uml-utilities: fix installed-vs-shipped with usrmerge
-      telepathy-glib: respect GI_DATA_ENABLED when enabling vala-bindings
-      libyui: switch to libyui-old repo which still has this SRCREV
+Chen Qi (2):
+      tigervnc: upgrade to 1.11.0
+      python3-django: upgrade to 2.2.20
 
 Mingli Yu (2):
-      hostapd: fix CVE-2019-5061
-      hostapd: fix CVE-2021-0326 and CVE-2021-27803
+      php: Upgrade to 7.4.16
+      python3-cryptography: Upgrade to 3.3.2
 
 Stefan Ghinea (1):
-      hostapd: fix CVE-2021-30004
+      python3-django: fix CVE-2021-28658
 
- .../libupnp/files/CVE-2020-13848.patch             |  75 ++
- .../recipes-connectivity/libupnp/libupnp_git.bb    |   3 +-
- .../hostapd/hostapd/CVE-2019-5061.patch            | 854
-+++++++++++++++++++++
- .../hostapd/hostapd/CVE-2021-0326.patch            |  43 ++
- .../hostapd/hostapd/CVE-2021-27803.patch           |  54 ++
- .../hostapd/hostapd/CVE-2021-30004.patch           | 123 +++
- .../recipes-connectivity/hostapd/hostapd_2.9.bb    |   4 +
- .../telepathy/telepathy-glib_0.24.1.bb             |   4 +-
- .../uml-utilities/uml-utilities_20040406.bb        |   5 +-
- meta-oe/recipes-graphics/libyui/libyui_3.6.0.bb    |   2 +-
- 10 files changed, 1161 insertions(+), 6 deletions(-)
- create mode 100644
-meta-multimedia/recipes-connectivity/libupnp/files/CVE-2020-13848.patch
- create mode 100644
-meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2019-5061.patch
- create mode 100644
-meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2021-0326.patch
- create mode 100644
-meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2021-27803.patch
- create mode 100644
-meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2021-30004.patch
+Ulrich Ölmann (1):
+      v4l-utils: fix reproducibility
+
+ .../recipes-devtools/php/php/CVE-2020-7069.patch   | 158
+---------------------
+ .../recipes-devtools/php/php/CVE-2020-7070.patch   |  24 ----
+ .../php/{php_7.4.9.bb => php_7.4.16.bb}            |   7 +-
+ .../0002-do-not-build-tests-sub-directory.patch    |  21 +--
+ ...tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch |  36 ++---
+ .../{tigervnc_1.10.1.bb => tigervnc_1.11.0.bb}     |  13 +-
+ ...ure.ac-autodetect-availability-of-systemd.patch |  47 ++++++
+ ...estrict-installation-of-50-rc_keymap.conf.patch |  40 ++++++
+ .../v4l2apps/v4l-utils_1.20.0.bb                   |  11 +-
+ ...aphy_3.3.1.bb => python3-cryptography_3.3.2.bb} |   2 +-
+ .../python/python3-django_2.2.16.bb                |   9 --
+ .../python/python3-django_2.2.20.bb                |   9 ++
+ 12 files changed, 137 insertions(+), 240 deletions(-)
 
