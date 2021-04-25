@@ -1,152 +1,259 @@
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (NAM12-BN8-obe.outbound.protection.outlook.com [40.107.237.80])
- by mx.groups.io with SMTP id smtpd.web11.8828.1619336891719705048
+Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
+ by mx.groups.io with SMTP id smtpd.web11.3079.1619366284406708523
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 25 Apr 2021 00:48:12 -0700
+ Sun, 25 Apr 2021 08:58:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=kiGG1inx;
- spf=pass (domain: windriver.com, ip: 40.107.237.80, mailfrom: mingli.yu@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=b86AOEqBuh2eiHuiNFbIpjo0ZuFb4/ChLfUCIdSD/cEQW4ylAIBwtELlHD7PlyseY/72zC+ovhn01gL6ecP5DCtBd0Y5upjYxVtN+lCdMZL2iwFRAzaK1kjbEydiL7thBcBVWVS27IBfaCXrbDIpJyv8LFc54QJrbXzMk//oc3ZpMXa/pvM6pHwtdmrRX3jhdNl48rVYcXKKHDNzivLRI4/ok9cATm/uWjf+05lPwWrGdMb5g1M7J+WlyVhICNAc9FJVm97g6tN9nl0kARJ5IQOz7//RX+zJFmhR8MFon2GZrPNe0N8G4SycGAf5qeQCRhxjiyh39qcQTT/apU1bsw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=f+xOAcRIrzNvT20AU65hu+UM9NJpXSrwwEdKzf6hlyY=;
- b=cfRwSxoqGHMwjztSCCjm/51AteWqUdt1brP6flReTXusY1TQELwCKzXaRPXpwksWeAf6ZeMmaHWoV+vOy8R5990qsYKWCzeBqgOCeYIj9HJfh567SXE4WAQ4xvtrACdX39ETUaLT5KUB36CqwIRLprPTzKteQ+5U06L6VH/Y9pugTjBtiEz5Tfw0MeKTqzpCkROWxksGnTuJUcdYVKcDnBkDvfCAkIT3k42GvPc69pXXb9cfZV9Ys4+z9Gw2WwIX1txzcPGUna0XxdvEC1NwMRP0NZp4RXQWoV3IHkqQDJ8N6wmUg/WiCc85AR5XDdZN3D/IuvB1kA6IkK4HLq/WoA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=PmMGqRsq;
+ spf=pass (domain: gmail.com, ip: 209.85.208.45, mailfrom: peron.clem@gmail.com)
+Received: by mail-ed1-f45.google.com with SMTP id e7so62761197edu.10
+        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Apr 2021 08:58:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=f+xOAcRIrzNvT20AU65hu+UM9NJpXSrwwEdKzf6hlyY=;
- b=kiGG1inxkb63ysfS96jrEW2bXYogSPNAedJE3odLqFtXiVoRnv7Nbcj8qDlX59qsBEGs35U0d4/BH3iQZ6pOWI6dOsXrk0uolqY9osrJbqCrioIhYHOSBWvCjR8Rk0W0BOjnaI5B4OEKVLdkYM6I1rN/CRXIb+unNG0uOsSccos=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from CO1PR11MB5009.namprd11.prod.outlook.com (2603:10b6:303:9e::11)
- by MWHPR11MB1949.namprd11.prod.outlook.com (2603:10b6:300:110::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4065.25; Sun, 25 Apr
- 2021 07:48:09 +0000
-Received: from CO1PR11MB5009.namprd11.prod.outlook.com
- ([fe80::c129:2a53:5093:81e8]) by CO1PR11MB5009.namprd11.prod.outlook.com
- ([fe80::c129:2a53:5093:81e8%3]) with mapi id 15.20.4065.025; Sun, 25 Apr 2021
- 07:48:09 +0000
-Subject: Re: [oe] [meta-python][hardknott][PATCH 2/2] python3-cryptography: Upgrade to 3.3.2
-From: "Yu, Mingli" <mingli.yu@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-References: <20210423054804.28633-1-mingli.yu@windriver.com>
- <1678669C91285DA3.14065@lists.openembedded.org>
-Message-ID: <cba3e546-3938-721f-576b-6d0fc7d1f679@windriver.com>
-Date: Sun, 25 Apr 2021 15:47:06 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-In-Reply-To: <1678669C91285DA3.14065@lists.openembedded.org>
-X-Originating-IP: [60.247.85.82]
-X-ClientProxiedBy: HK2PR04CA0054.apcprd04.prod.outlook.com
- (2603:1096:202:14::22) To CO1PR11MB5009.namprd11.prod.outlook.com
- (2603:10b6:303:9e::11)
-Return-Path: mingli.yu@windriver.com
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=0+WvRM6QL9ZsiC3NdqIFBzhEB/eeWyfvCgRvtds3Vmc=;
+        b=PmMGqRsqfbCvYyk5g4tcpWIXnp/TVBttf2mpT8AkwMF2rmn5hArWUpzgcLMaEdNEHR
+         yZQOh5xTWL7590OXtFtUT/AClqo/zmMXA8tmvZ4LYaEHIPFuEPQmo6XisXxz7/2Yjso7
+         80B09YHi/cl2FqTsaMb4wqAUSAOQ/9lxp89jurHg4YZiXK+RaB9Bf8DnujduKO8oXPVg
+         uo8Kpzz78bbNrypk/0Hmv1mHpId2yqvzHUSyCVHdj8Y6qMsGnk/F6ufRZTrJ7XwDgKpc
+         BzHMU9Deg3hoDCUlHiyjLZQKHkzQDC3ubGeJGiiL7Aq/xMle++qZKDk0Jqv3A4OtMK9Y
+         IV7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=0+WvRM6QL9ZsiC3NdqIFBzhEB/eeWyfvCgRvtds3Vmc=;
+        b=VGStoFqztF7blLgGoeDtYXjVFVaM4LmCXS4U3EcxjD0VpDaU5B4Nlh9SqwEh7dXqFV
+         pW+Wmp4FkF4i9wARlOObpIGGPh0cDHnzgnJpDCGrZUQHhA6TLNiDcfM4PlMH6DFNKqGz
+         nfaRzMVDOE+IBmAhEJJUdYzNrsFRC5Gm5BWTW9kMFwy8byr34BPrLHGYrzoPa3hmGW4L
+         6tLfXcGuqUwRfVyTuJaF8KgdDk0Xxg/esmfs+fXuyjK4Y7u30eJARn6q5adubjJPfPYE
+         gJvaoqWz9f3VWF2/uScAMzmg2UrymeQhkn/1Ub4LUdbNB3HTU3fAzRBNgWbYV73JjJC0
+         jDkA==
+X-Gm-Message-State: AOAM5316mvsdBFkfS/h0ZIrHB2xaBGqi9MLvTCo+Cv1FPYrnVZAiWU9g
+	OkUWp27M/iBXzL0mW+AKMXCDSyRWcRcmc8jcQcA=
+X-Google-Smtp-Source: ABdhPJwCI1RTrcpJK7Dy+3UoLe5VQs6108yU3lXVOec5J5VD7ceeaJPjx4kIYERF3wGqExVZmNP323jAo38yZ8c7k/k=
+X-Received: by 2002:a50:eb82:: with SMTP id y2mr8549085edr.190.1619366282712;
+ Sun, 25 Apr 2021 08:58:02 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [128.224.162.140] (60.247.85.82) by HK2PR04CA0054.apcprd04.prod.outlook.com (2603:1096:202:14::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4065.20 via Frontend Transport; Sun, 25 Apr 2021 07:48:08 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: cea2dafa-465b-4e1f-041a-08d907be7863
-X-MS-TrafficTypeDiagnostic: MWHPR11MB1949:
-X-Microsoft-Antispam-PRVS: 
-	<MWHPR11MB1949A993A1F6EC9A45E32BB4F1439@MWHPR11MB1949.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:826;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	4N37eI07toz09sn0OUd3OBSU/65jw9jvwGK7Kf9jI68FwA+PTB5b0uEOVjYaviconCtdzX9Eh4AMu9+n4nQWLeIZXGplh9jYadDPEYMKpWeL2MG4ZiO06HKGXvS3FNeByiM/SBcktFgFnghd8QHgzEGjghKdCbMecLzq5xQhNYC8abMkSK0m/eV0l0U4hZUu+S86pILCEZ5h7DvemsGnxttw+6iADPGYzO+Q+xTVmQTlx+4AmsteMHOlOdeFn4pBzIF3lp6L6ag5GsTdVIMFxZ3DmH230tyK5GiE80Np+LKWFqvfRyoen3aMpW254OFaivqUbu0i4w/NaJrZc7l9RNbe1YrR3raz646+a3WTA56w2U4hGzy2aLmnkZewRi5xq1fBfpWoOlpX/fK5TxnhAuhYvFaI4yL6yWFbUiZ7qDMwylUdiTrnFlPcp8m7rKP5ncdLQZeD9REjDElKiXSJ9yiNdcxI8PjjiaI+HAJ5qRlyxE1rgqUk6le/KEvWHlYRHCVPxCeJ+Hqww18ow6yjbp097EyWyeEGqr1+AitAgHW6EVsu7NOuXbgGq0JEY+olbjR9P7/aZ6Cp+VfuBk1pjuHTwMtFfJZ1rRIhgNXpfHdvjt+jmKKl2jo3ftUpPpHCzyphYFOocjULtsZG5fTUufurUWWzd9MNhFgc8Tg6uUcxB9Cqf7/hF5T0H3roizaG4EO5CeZwVTG+oeP//wF9h/2nRdUP+bDaYdL/RYLTZg9Fs44kllnbxFsJExPJgZMw13NmiFS0JZhHzdUpiUpq6Tl6UIUJjYqLeN6YGZN2qU5kZq6CnDmKF93sEhnJe72H
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB5009.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(136003)(39830400003)(396003)(346002)(376002)(52116002)(8936002)(8676002)(36756003)(38100700002)(31686004)(2906002)(53546011)(6706004)(6916009)(38350700002)(26005)(31696002)(66476007)(478600001)(66556008)(966005)(186003)(16526019)(5660300002)(16576012)(6486002)(316002)(66946007)(86362001)(956004)(2616005)(83380400001)(78286007)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?dUpJKzV3Zi8rNFB4QlUrRi9YUnhnL2tlVE5jWTAyUTZpbGtDNi8rbTAvc3N1?=
- =?utf-8?B?a0dJNk9CNWNqOWlWUFB5RGZzTFpuK1ZKeWV1d1RhK0l2RUVZRllvd2xPMGFC?=
- =?utf-8?B?MHNON1h1NFFGcFNzVFF6QmEyeURFTkZEYm5aVitKdHVKcVMxSUxKMFljTjRL?=
- =?utf-8?B?NUFGVitvSk1BclJHeVIzYWU0SUlFQVVDamhVTldIaWsxcGdDSkxMa3k0RnYv?=
- =?utf-8?B?SDhwakNsOEVML2NaRWxMWThUSVZtek0ydkxzeC9lVnZTSkxMZnl0VTZHa01y?=
- =?utf-8?B?cXdoNCtKU3diYkNWQjFFOUtuY2FzTFpzU1NxNklxMUVrcUxPd0pUMUpPSlhk?=
- =?utf-8?B?anRQSC9HWTljQnBrLzNzSUFvSjdOdHR3MXREcDRLaktlWTV4WmJZdFE1UU9S?=
- =?utf-8?B?NVAzVU80VkNPSmdSRThYd25IOEx2RnRaaFBYK3A2V2V1Q2hUbGxiYnpZYzlq?=
- =?utf-8?B?Wi9YeWNvWE5jd01HVlBDWThRSGVsbUR0cUN5RG5sbjNNZXMyaG9GUmN2OGYx?=
- =?utf-8?B?TUhqb1NOM0pjWUZzZWMwTmppU1BvcmFwMW9OVVBFYUJjSkZ3SHJVSWUzeUVX?=
- =?utf-8?B?TWxKSjBmaUVzVnJFeDFDN3AwR2VIRVk2aUZrWWoyejZaRGJzMkwwaG0zRk9Z?=
- =?utf-8?B?V0dNZkFUYmFtMkZoUUFTbU8wTm02YW1VazRSdnVoM2xmeVJ4eFo3ekRzbzQw?=
- =?utf-8?B?a05UQ3UrTC93a3VtUEJoeHg1bys0eVBzT1VOZWZBV0JNRk5NQk5pRWpuS2JC?=
- =?utf-8?B?T0RIZGZORFJ1anZZS084WitmS0orRU9kVHdBUjd4TGJ4V1ppZWt6T0pjaW13?=
- =?utf-8?B?SnRLV2c0ckMvdjBxdGRBbzJhUWNVQlFhdnQyUmFpb0VXSHEyS0E3azJWZ2tn?=
- =?utf-8?B?Y3k4Qkd2QVhqTXRDbVZmQ0xHQWd1WlVrNUhYMVZJMWFlQ2JLMDZRU2ZFeTFU?=
- =?utf-8?B?OXBvRFZ4MVRKUk5hcG55UXE0ZE5GelAwYWsyWEI2YWRnNGlHMkVvWlkxZW4y?=
- =?utf-8?B?Yzh3V1Q3U0xHZkhENUljVzRZeUNUQlN6RjJYMTJTSnBuRS90YlRJc3RLbjU5?=
- =?utf-8?B?UTVwRkxOdjdYZE5XZ092Qm4rc1M0TjhSQnlQZ1A0QmdMc281ZTM2VG9ZZmNl?=
- =?utf-8?B?RWhsRFI5SXpQYlh1QmpreThtZGFxUE1HUUVnSW5iOHpXVGF2bDdnU1htcEFD?=
- =?utf-8?B?VnBaVHhSam1wS2gwc0pYSDRnczR3MzVmZ0ZHYW9JN1JNeE13ZU1LYWxRamo2?=
- =?utf-8?B?QW5hUm5td0ZmTmliUWd2c1djbzBwenlka3BIMFhBcmdKZHBDL0MyRHJXOUIy?=
- =?utf-8?B?TVBnUDViVGNadnFjUXY0ZnlhczF4bGRBOTVrMU04MEJ2UXFWbkl6clJld2xs?=
- =?utf-8?B?NWZ2S3JuY3FiOENrR1ZoVGMvQmhxeHpzcHcySndJd3dWZGlHbjdoM1VtUTlQ?=
- =?utf-8?B?RERxKzFZNHZGZ1BxL2pBWm04OEZQejEzVHBtazlpSkl5blkxcld5dHIvbW5t?=
- =?utf-8?B?QXZIdTZlQXZiNFViaVVVQVoreGxrYWFIK0M1Rno2VHF4NDIwL0dtdlR5dXd0?=
- =?utf-8?B?bkVRUnRUa1BPejdKWlorSlJhdEJQM0lnQXJhcld1MDBLKzA4S0UxbEVvVE96?=
- =?utf-8?B?eWtyZzE2SnpBeWRPL3RHdUZLZVRKcTNQUmNscEQ2Zm5PN0l4Z0liaUVOSTB6?=
- =?utf-8?B?T21yeGxhbkdTUWYrSmtCTmpabnBCckxOZndZYTNrTDdMK0locTVFeFhVZkN1?=
- =?utf-8?Q?d4c3Lizv717Px7z98agnLkdQyEhyEMj8edjTdcB?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cea2dafa-465b-4e1f-041a-08d907be7863
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB5009.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Apr 2021 07:48:09.5308
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GuGaWV2kih8hRdfyvA8CXlfpvQNmtGC8iU/qCSMNoSj+LMZ8TduD5+Pb42D9MNukmmgR5SCM+ELxhP0+wZhPzQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR11MB1949
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <20210424102451.885867-1-peron.clem@gmail.com> <CAJiuCcf7mOszQNA=+mQmrr0ZrFsew+e_N_=316qgLtsoU0j-Cw@mail.gmail.com>
+ <CA+chaQekMoLrC0m-gyPC3nAU6JxMOGHwU0J3PNqRiafembWKHw@mail.gmail.com>
+ <CAJiuCcew5bi+kR=FEWjYzjSJSHzG_pDyrrGjqEVFNzNRNaQRmQ@mail.gmail.com>
+ <CA+chaQcO9cMcP9PxjnAU_SzEt+PJkQKgVhxwjAWAyngapev3Gw@mail.gmail.com>
+ <CAAnfSTuBbktC_7x9PhvCwJuLBjAPqi4TRb66yQHRfZc_O+ogHw@mail.gmail.com> <CAMKF1srVXY95O3v6x2KPkmZ79nbaSjHUwfCuMZN3Eq67RX4J2Q@mail.gmail.com>
+In-Reply-To: <CAMKF1srVXY95O3v6x2KPkmZ79nbaSjHUwfCuMZN3Eq67RX4J2Q@mail.gmail.com>
+From: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
+Date: Sun, 25 Apr 2021 17:57:51 +0200
+Message-ID: <CAJiuCcde=8f6Ms7_3se39AhN8TVHa1S2eq1N51d5CwT_TC+NBQ@mail.gmail.com>
+Subject: Re: [oe] [PATCH] [RFC] gator: Add new package
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Ross Burton <ross@burtonini.com>, Martin Jansa <Martin.Jansa@gmail.com>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Ping.
+Hi,
 
-Thanks,
+On Sun, 25 Apr 2021 at 00:12, Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Sat, Apr 24, 2021 at 2:48 PM Ross Burton <ross@burtonini.com> wrote:
+> >
+> > To be honest, as this is Arm-specific I'd encourage adding it to
+> > meta-arm instead of meta-oe.
+>
+> I would tend to agree, although there is something to consider it also
+> means all arm SOCs will have to depend on meta-arm for this recipe
+> which may not be a bad thing but some BSP layers for ARM based SOCs
+> are independent
 
-On 4/23/21 1:48 PM, Yu, Mingli wrote:
-> From: Mingli Yu <mingli.yu@windriver.com>
-> 
-> Fix a security issue CVE-2020-36242 where certain sequences of
-> ``update()`` calls when symmetrically encrypting very large
-> payloads (>2GB) could result in an integer overflow, leading to
-> buffer overflows.
-> 
-> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   ...hon3-cryptography_3.3.1.bb => python3-cryptography_3.3.2.bb} | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->   rename meta-python/recipes-devtools/python/{python3-cryptography_3.3.1.bb => python3-cryptography_3.3.2.bb} (94%)
-> 
-> diff --git a/meta-python/recipes-devtools/python/python3-cryptography_3.3.1.bb b/meta-python/recipes-devtools/python/python3-cryptography_3.3.2.bb
-> similarity index 94%
-> rename from meta-python/recipes-devtools/python/python3-cryptography_3.3.1.bb
-> rename to meta-python/recipes-devtools/python/python3-cryptography_3.3.2.bb
-> index 79a7ac1bf..0a36ffe1b 100644
-> --- a/meta-python/recipes-devtools/python/python3-cryptography_3.3.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-cryptography_3.3.2.bb
-> @@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=bf405a8056a6647e7d077b0e7bc36aba"
->   
->   LDSHARED += "-pthread"
->   
-> -SRC_URI[sha256sum] = "7e177e4bea2de937a584b13645cab32f25e3d96fc0bc4a4cf99c27dc77682be6"
-> +SRC_URI[sha256sum] = "5a60d3780149e13b7a6ff7ad6526b38846354d11a15e21068e57073e29e19bed"
->   
->   SRC_URI += " \
->       file://run-ptest \
-> 
-> 
-> 
-> 
-> 
+Ok, so I will submit this patch to meta-arm.
+
+Clement
+
+>
+> >
+> > (speaking as the meta-arm co-maintainer)
+> >
+> > Ross
+> >
+> > On Sat, 24 Apr 2021 at 12:29, Martin Jansa <Martin.Jansa@gmail.com> wr=
+ote:
+> > >
+> > > Ah, even better than, but I would keep the recipe name as gator, if =
+it's going to completely replace these older gator versions in other layers=
+.
+> > >
+> > > On Sat, Apr 24, 2021 at 1:24 PM Cl=C3=A9ment P=C3=A9ron <peron.clem@=
+gmail.com> wrote:
+> > >>
+> > >> Hi Martin,
+> > >>
+> > >> On Sat, 24 Apr 2021 at 12:45, Martin Jansa <martin.jansa@gmail.com>=
+ wrote:
+> > >> >
+> > >> > Why do you want to build only the daemon?
+> > >> >
+> > >> > There are already 4 variants of this recipe in various layers (at=
+ least by what's reported on layerindex):
+> > >> > http://git.linaro.org/openembedded/meta-linaro.git/tree/meta-lina=
+ro/recipes-kernel/gator/gator_git.bb?h=3Dmaster
+> > >> > https://github.com/webosose/meta-webosose/blob/master/meta-webos/=
+recipes-core/gator/gator_git.bb
+> > >> > https://github.com/kratsg/meta-l1calo/blob/master/recipes-kernel/=
+gator/gator_git.bb
+> > >> > https://github.com/robseb/meta-intelfpga/blob/master/recipes-devt=
+ools/gator/gator_git.bb
+> > >> >
+> > >> > so sharing some recipe which would suit most of these needs in me=
+ta-oe is definitely welcome, but starting with just a daemon will just comp=
+licate things to these layers.
+> > >>
+> > >> New gator daemon doesn't need a kernel module anymore, it's now ful=
+ly userspace.
+> > >>
+> > >> Regards,
+> > >> Clement
+> > >>
+> > >> >
+> > >> > But I understand that building the kernel modules for wider range=
+ of kernels in different MACHINEs is quite pain (been there:
+> > >> > https://github.com/shr-project/meta-webosose/commit/f4674ac6fa18a=
+0a96cefefa49ebf397a383a88f1
+> > >> > and given up shortly after:
+> > >> > https://github.com/shr-project/meta-webosose/commit/d4bc575623dfb=
+fad780fc39fef47d55d4d6e698d
+> > >> > as I don't really use gator, it was just one of many build issues=
+ in 'bitbake world' I was looking at).
+> > >> >
+> > >> > Regards,
+> > >> >
+> > >> > On Sat, Apr 24, 2021 at 3:29 AM Cl=C3=A9ment P=C3=A9ron <peron.cl=
+em@gmail.com> wrote:
+> > >> >>
+> > >> >> Hi,
+> > >> >>
+> > >> >> I have some questions regarding my patch.
+> > >> >>
+> > >> >> On Sat, 24 Apr 2021 at 12:24, Cl=C3=A9ment P=C3=A9ron <peron.cle=
+m@gmail.com> wrote:
+> > >> >> >
+> > >> >> > To communicate with the target device, Streamline requires the
+> > >> >> > gator daemon, gatord, to be running on the device.
+> > >> >>
+> > >> >> Is gator the correct name for this package? or would gatord be b=
+etter?
+> > >> >>
+> > >> >> >
+> > >> >> > Signed-off-by: Cl=C3=A9ment P=C3=A9ron <peron.clem@gmail.com>
+> > >> >> > ---
+> > >> >> >  .../gator/0001-gator-don-t-strip-debug.patch  | 24 ++++++++++=
++++++++++
+> > >> >> >  meta-oe/recipes-devtools/gator/gator_7.5.0.bb | 22 ++++++++++=
++++++++
+> > >> >> >  2 files changed, 46 insertions(+)
+> > >> >> >  create mode 100644 meta-oe/recipes-devtools/gator/gator/0001-=
+gator-don-t-strip-debug.patch
+> > >> >> >  create mode 100644 meta-oe/recipes-devtools/gator/gator_7.5.0=
+.bb
+> > >> >> >
+> > >> >> > diff --git a/meta-oe/recipes-devtools/gator/gator/0001-gator-d=
+on-t-strip-debug.patch b/meta-oe/recipes-devtools/gator/gator/0001-gator-do=
+n-t-strip-debug.patch
+> > >> >> > new file mode 100644
+> > >> >> > index 000000000000..8e59fffa1fc2
+> > >> >> > --- /dev/null
+> > >> >> > +++ b/meta-oe/recipes-devtools/gator/gator/0001-gator-don-t-st=
+rip-debug.patch
+> > >> >> > @@ -0,0 +1,24 @@
+> > >> >> > +From 370e9c97f1bc07a63aa87e954823c0063058aad7 Mon Sep 17 00:0=
+0:00 2001
+> > >> >> > +From: =3D?UTF-8?q?Cl=3DC3=3DA9ment=3D20P=3DC3=3DA9ron?=3D <cp=
+e@outsight.tech>
+> > >> >> > +Date: Fri, 16 Apr 2021 15:27:16 +0200
+> > >> >> > +Subject: [PATCH] gator: don't strip debug
+> > >> >> > +
+> > >> >> > +---
+> > >> >> > + daemon/Makefile | 2 --
+> > >> >> > + 1 file changed, 2 deletions(-)
+> > >> >> > +
+> > >> >> > +diff --git a/daemon/Makefile b/daemon/Makefile
+> > >> >> > +index ba5f29cfeb10..6807948310f9 100644
+> > >> >> > +--- a/daemon/Makefile
+> > >> >> > ++++ b/daemon/Makefile
+> > >> >> > +@@ -26,8 +26,6 @@ ifeq ($(shell expr `$(CXX) -dumpversion | c=
+ut -f1 -d.` \>=3D 5),1)
+> > >> >> > +       CXXFLAGS +=3D -fno-sized-deallocation
+> > >> >> > + endif
+> > >> >> > +
+> > >> >> > +-# -s strips the binary of debug info
+> > >> >> > +-LDFLAGS     +=3D -s
+> > >> >> > + LDLIBS      +=3D -lrt -lm -pthread
+> > >> >> > + TARGET      :=3D $(OBJ_DIR)gatord
+> > >> >> > + ESCAPE_EXE  :=3D $(OBJ_DIR)escape/escape
+> > >> >> > +--
+> > >> >> > +2.25.1
+> > >> >> > diff --git a/meta-oe/recipes-devtools/gator/gator_7.5.0.bb b/m=
+eta-oe/recipes-devtools/gator/gator_7.5.0.bb
+> > >> >> > new file mode 100644
+> > >> >> > index 000000000000..8e15b1ca5fc5
+> > >> >> > --- /dev/null
+> > >> >> > +++ b/meta-oe/recipes-devtools/gator/gator_7.5.0.bb
+> > >> >> > @@ -0,0 +1,22 @@
+> > >> >> > +SUMMARY =3D "DS-5 Streamine Gator daemon"
+> > >> >> > +DESCRIPTION =3D "Target-side daemon gathering data for ARM St=
+reamline Performance Analyzer."
+> > >> >> > +
+> > >> >> > +LICENSE =3D "GPL-2.0-only"
+> > >> >> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce448=
+6a80fdaf4a4263"
+> > >> >> > +LICENSE_libsensors =3D "LGPL-2.1-or-later"
+> > >> >>
+> > >> >> Gator git specifies that:
+> > >> >>
+> > >> >> -libsensors source code in daemon/libsensors licensed under LGPL=
+-2.1-or-later
+> > >> >> -mxml source code in daemon/mxml licensed under APACHE-2.0 WITH
+> > >> >> Mini-XML-exception
+> > >> >> -perf_event.h from Linux userspace kernel headers in daemon/k li=
+censed
+> > >> >> under GPL-2.0-only WITH Linux-syscall-note.
+> > >> >>
+> > >> >> I'm not sure how to properly reflect this in the recipe.
+> > >> >>
+> > >> >> Thanks for your help,
+> > >> >> Clement
+> > >> >>
+> > >> >> > +
+> > >> >> > +SRCREV =3D "6088d3533146d7b7c9700b8e396292053240b25f"
+> > >> >> > +SRC_URI =3D "git://github.com/ARM-software/gator.git;protocol=
+=
+=3Dhttp;branch=3Dmaster \
+> > >> >> > +          file://0001-gator-don-t-strip-debug.patch;patchdir=
+=3D.. \
+> > >> >> > +         "
+> > >> >> > +
+> > >> >> > +S =3D "${WORKDIR}/git/daemon"
+> > >> >> > +
+> > >> >> > +EXTRA_OEMAKE =3D "'CFLAGS=3D${CFLAGS} ${TARGET_CC_ARCH} -D_DE=
+FAULT_SOURCE -DETCDIR=3D\"${sysconfdir}\"' \
+> > >> >> > +    'LDFLAGS=3D${LDFLAGS} ${TARGET_CC_ARCH}' 'CROSS_COMPILE=
+=3D${TARGET_PREFIX}' \
+> > >> >> > +    'CXXFLAGS=3D${CXXFLAGS} ${TARGET_CC_ARCH} -fno-rtti' CC=
+=3D'${CC}' CXX=3D'${CXX}'"
+> > >> >> > +
+> > >> >> > +do_install() {
+> > >> >> > +       install -d ${D}${sbindir}
+> > >> >> > +       install -m 0755 ${S}/gatord ${D}${sbindir}/gatord
+> > >> >> > +}
+> > >> >> > --
+> > >> >> > 2.25.1
+> > >> >> >
+> > >> >>
+> > >> >>
+> > >> >>
+> > >
+> > >
+> > >
+> > >
+> >
+> >=20
+> >
