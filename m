@@ -1,54 +1,48 @@
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.web11.9277.1619452972332871171
+Received: from mail-io1-f46.google.com (mail-io1-f46.google.com [209.85.166.46])
+ by mx.groups.io with SMTP id smtpd.web11.10409.1619457255501009103
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Apr 2021 09:02:52 -0700
+ Mon, 26 Apr 2021 10:14:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=QM/u3kE9;
- spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id v13so15582133ple.9
-        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Apr 2021 09:02:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=NjG4pdRO;
+ spf=pass (domain: gmail.com, ip: 209.85.166.46, mailfrom: akuster808@gmail.com)
+Received: by mail-io1-f46.google.com with SMTP id p8so4046740iol.11
+        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Apr 2021 10:14:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:references:from:autocrypt:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=u//+VDX074LgZBlODL0cSTrTKlamErZj0Y9u8nLQPQE=;
-        b=QM/u3kE9yFbM1iqv+C2/B1Y/wJhqX4TSmVE2WXK5G4H6ccXYCn2ct+2JwQYRG70fCU
-         3Z+QXs7dRXEEEjUll82WFds7ylhG/FdXtcaR6fy9ljVEJigrgdkBEk7vyXI7frvdC4x0
-         8AypEQX4cnj/0iuTZFINjzc3vZ4fOWhelpEuzOF092dsD+IS6N9Mug8bFvy4odiIFFkX
-         Ae3s7DdGLF/5aCHua75JdoKKicAm6M+l0DqUiuMbv1aH1mqX+mZggBriIqZ+ywhTvxJ2
-         gAO9cwf0sfv5nbE4CwHjNsC+3YiFaY8HuXBlBMwB4Gwq5j7nIoLzVk1dnOBmD3Mf1Pc8
-         Y0Tw==
+        h=to:from:subject:autocrypt:message-id:date:user-agent:mime-version
+         :content-transfer-encoding:content-language;
+        bh=P7CwZiCo+qpozNOfC/tifCXxPMDEYbJ1CAM8MGt3/Hw=;
+        b=NjG4pdROVj3GCrq029t+6rIvAc/8KbcKxyGE3aikBfKCGkkNCKM25Q7G/CGXtqyLqi
+         NhjTzC+Xzj+6gwDmK29EeEKVwXLk+0/mJq5j1zbDaUZXPLPacI75B8SpNaEiERoZwRvm
+         yhL0h7s5izFyKj8H47koBKqWQO5ggBvfXGTn0Fb6f/CLfgdsbfUm259DitlOvsWdaytB
+         vmMJKzzH5HKzOGuq65+32xKYCd2Tu2aHnifLS8KHefbDmSesOeSi6eUGfFdWjdAbBI7r
+         8x5AH5txwHsMwP+uyJZR1RqUznez/VJuvHk7DZMmAsrVmpr+WsWAV2AE4hBvEButwxOP
+         nNqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
-         :date:user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=u//+VDX074LgZBlODL0cSTrTKlamErZj0Y9u8nLQPQE=;
-        b=j1RgLrD7fzZm/K0EVwWsIctlMTXne2fh/U0rzJK3MwAW568PA8Bsx1HiNf4f1NaBWk
-         sdRC4kAm0KQr6M+WEzm0Jz8J/09ujLu2FcyZGLGsL7Hc8dSnPVYpwTVwrNGMwpySu3r4
-         fRZy5aAutxy89l7BcDpXFALvTN3iWwKGDujlmIqRZaTTUvlF1wUjXUDQc015NyRUvL4A
-         MJkhPRF5s2TJDG+twGrVfxlCFnXkre0BbySxvzKcMIcr2HUM9DgRI0PQltfSghxZtzfH
-         n0dWgYAr1f/QDZjurlC5RsKGZPxZQEV4/Z4vbFX+tIw5bB57WMARmu195SUybjU5zm/C
-         azIA==
-X-Gm-Message-State: AOAM530tmhKXITSrj3J0Tt04/v69SqM6ZPxWWhfbEzeRQO8Ecv9S8qok
-	CZcD0xqpa5kVKBFeV9Jqbj0=
-X-Google-Smtp-Source: ABdhPJz+yFHKP46xbN8hyC8cSySuUijJ9X0A1usmS4b6NgBCyNQa4wlyBple8VIOWBvZ0uYqNxUpMA==
-X-Received: by 2002:a17:90a:730c:: with SMTP id m12mr23298409pjk.111.1619452971763;
-        Mon, 26 Apr 2021 09:02:51 -0700 (PDT)
+        h=x-gm-message-state:to:from:subject:autocrypt:message-id:date
+         :user-agent:mime-version:content-transfer-encoding:content-language;
+        bh=P7CwZiCo+qpozNOfC/tifCXxPMDEYbJ1CAM8MGt3/Hw=;
+        b=aAteXH0phKwhFG2SzlxuecktNnbjelKcavkTnsNjwtHK/oBBvrnEDxTjonBLfF8LA6
+         9hyJI9uLMNldATSo2XDGXmzaKhdpN7jbeDoEe/jpihdsw5JGBeaFIHHoSEFOJ8IlUQE4
+         IjM1eAwrD2OjNh4M2ahAYXqnpzXZR/2J4SBT4QBuDSArHsb3Sfa47P6pQv4fm7nyi9ny
+         /umO3BNJ/4+57qyafaJBMfrbbAVv1YPbqqwZqQKUoCUDkBJlxoLfi3Xpha3ZXpfKa2c/
+         5yVB0Vs8oaqrmYQZKArDR2wHwFXNQlguzwgYLYtSpPTpYGYludVON/iUhvkW5oz3e+1B
+         DvOw==
+X-Gm-Message-State: AOAM5309JiG4aQ3vdF74wLWerFqSPFgIXDL1T0rbJmYS1YPAKBgy43kl
+	G98njdPGUji8PudrMH0fwPyzX2MEpyH+Nw==
+X-Google-Smtp-Source: ABdhPJyRvuvnv0NxT6wJcPhBRhWrS8s8unonGuky9Sj3TNXrBx7iXinQJTGKjdoTv2948z4qctgF/w==
+X-Received: by 2002:a05:6638:381e:: with SMTP id i30mr5832840jav.61.1619457254281;
+        Mon, 26 Apr 2021 10:14:14 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from ?IPv6:2601:202:4180:a5c0:1c81:c15:4155:b74d? ([2601:202:4180:a5c0:1c81:c15:4155:b74d])
-        by smtp.gmail.com with ESMTPSA id k14sm2434258pgl.2.2021.04.26.09.02.50
+        by smtp.gmail.com with ESMTPSA id w4sm210719ilj.12.2021.04.26.10.14.13
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 26 Apr 2021 09:02:51 -0700 (PDT)
-Subject: Re: [oe] Hardknott merge request - April 25th
-To: Randy MacLeod <randy.macleod@windriver.com>, Khem Raj
- <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
- "Yang, Liezhi" <Liezhi.Yang@windriver.com>,
- "Jia, Hongxu" <Hongxu.Jia@windriver.com>
-References: <bfd87f9a-d54f-25fd-5229-ff3cd60ad033@gmail.com>
- <8f10c7cd-696b-7276-90bb-99e1194ff859@windriver.com>
+        Mon, 26 Apr 2021 10:14:13 -0700 (PDT)
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 From: "Armin Kuster" <akuster808@gmail.com>
+Subject: nostromo fetch error on master/hardknott
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
  Jmd71vHMw+coBetWC3lk+IKjX815Ox0puYXQVRRtI+yMCgd6ib3oGxoQ8tCMwhf9c9/aKjaz
@@ -92,86 +86,27 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
  ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
  8CS2NxU=
-Message-ID: <b5d31016-10a8-9f80-1041-5f3a0d0ec38d@gmail.com>
-Date: Mon, 26 Apr 2021 09:02:50 -0700
+Message-ID: <3d3b4f06-859a-86cd-e0ed-0934c673e76e@gmail.com>
+Date: Mon, 26 Apr 2021 10:14:13 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <8f10c7cd-696b-7276-90bb-99e1194ff859@windriver.com>
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 Content-Language: en-US
 
+Hello,
 
+I just notice new fetch errors for nostromo
+<https://git.openembedded.org/meta-openembedded/tree/meta-webserver/recip=
+es-httpd/nostromo/nostromo_1.9.9.bb>
+in meta-webservers.
 
-On 4/26/21 7:28 AM, Randy MacLeod wrote:
-> On 2021-04-25 5:35 p.m., Armin Kuster wrote:
->> The following changes since commit
->> 2297d4ee04b47bc574f8879732d9e213ab7bf685:
->>
->>    wireguard: update to v1.0.20210219 +1 (2021-04-18 13:49:13 -0700)
->>
->> are available in the Git repository at:
->>
->>    https://git.openembedded.org/meta-openembedded hardknott-next
->>
->> for you to fetch changes up to 71b546ed8595b14d29efc1e8b951f8c845ad10c4:
->>
->>    python3-cryptography: Upgrade to 3.3.2 (2021-04-23 19:09:56 -0700)
->>
->> ----------------------------------------------------------------
->> Chen Qi (2):
->>        tigervnc: upgrade to 1.11.0
->>        python3-django: upgrade to 2.2.20
->>
->> Mingli Yu (2):
->>        php: Upgrade to 7.4.16
->>        python3-cryptography: Upgrade to 3.3.2
->>
->> Stefan Ghinea (1):
->>        python3-django: fix CVE-2021-28658
->>
->> Ulrich Ölmann (1):
->>        v4l-utils: fix reproducibility
->
->
-> These are CVE or fix-ups to get to a supported version of tigervnc.
->
-> Thanks for letting us get open-vm-tools and syslog-ng updated.
->
-> Armin,
->   Do we hope/expect things to slow down now
-> aside from CVE patches (or 'dot' updates to fix them)?
+The hosting site is not responding. https://www.nazgul.ch/
 
-correct. That should be how stable is run IMHO. Or any changes to
-address any major changes in Core.
+My limited search for an alt source is coming up empty.=C2=A0 Is anyone u=
+sing
+this app?
 
 -armin
->
->
-> ../Randy
->
->
->>
->>   .../recipes-devtools/php/php/CVE-2020-7069.patch   | 158
->> ---------------------
->>   .../recipes-devtools/php/php/CVE-2020-7070.patch   |  24 ----
->>   .../php/{php_7.4.9.bb => php_7.4.16.bb}            |   7 +-
->>   .../0002-do-not-build-tests-sub-directory.patch    |  21 +--
->>   ...tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch |  36 ++---
->>   .../{tigervnc_1.10.1.bb => tigervnc_1.11.0.bb}     |  13 +-
->>   ...ure.ac-autodetect-availability-of-systemd.patch |  47 ++++++
->>   ...estrict-installation-of-50-rc_keymap.conf.patch |  40 ++++++
->>   .../v4l2apps/v4l-utils_1.20.0.bb                   |  11 +-
->>   ...aphy_3.3.1.bb => python3-cryptography_3.3.2.bb} |   2 +-
->>   .../python/python3-django_2.2.16.bb                |   9 --
->>   .../python/python3-django_2.2.20.bb                |   9 ++
->>   12 files changed, 137 insertions(+), 240 deletions(-)
->>
->>
->>
->> 
->>
->
->
 
