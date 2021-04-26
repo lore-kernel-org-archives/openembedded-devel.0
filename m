@@ -1,95 +1,88 @@
-Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com [209.85.160.176])
- by mx.groups.io with SMTP id smtpd.web09.460.1619395575380953497
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.5])
+ by mx.groups.io with SMTP id smtpd.web12.4094.1619425293780442731
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 25 Apr 2021 17:06:15 -0700
+ Mon, 26 Apr 2021 01:21:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=OmPPqqFW;
- spf=pass (domain: gmail.com, ip: 209.85.160.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f176.google.com with SMTP id j19so149816qtx.13
-        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Apr 2021 17:06:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=bF3QFt3sZeIWda2AhzTuxjb30kCW3pPymgb8AiD4ENI=;
-        b=OmPPqqFWCvxVnoXEPo43liE8aQEbi7dVA2xwucX8c/M0VB7dtyVzrZq9ZZisrY5BFO
-         91fOmZJs2l5MAc4q1LX3u/lPIhgFhTGxTW9Mit2yF5IXTNflxywI23SdMbtl2b3FLXKs
-         /Y1dQVf7VjZVvLzhoE8ttsK6DuE94vqpbmGn3t6OzeAhwRK1RcdbRjpnHZ4SOHxXbRiC
-         RyWeF3v+fx4+shOGH5gxdddyZtfBlVRUZwD09PzC1jNt8EORr4wxVpR7ns8SGi/CQVn7
-         tuahKpfP/bMyXQ5beGHDSlZ7yOzyCz1qeBW38Vnt+0qTO3/eIx74h6qclx6xkpYnHEcF
-         V0JQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=bF3QFt3sZeIWda2AhzTuxjb30kCW3pPymgb8AiD4ENI=;
-        b=owyjhI+fdnpJB2W0P747fwZkH89OvgWFgifxuIhKuXZzDbd27e+0zYERqi1CNscwUZ
-         fBadfepqAmcN9XSbYUhc6XX/UkNahjcihXyivfHEV+CUFIkmbB5kv02t5JL27LKhBtG2
-         v7ap8cUU5kK8FHNuA55VQp05z5KTM79KhSVtDCk/SrMZi7zqNNXovbrrO3ZyrnvXPLiH
-         Bz9rSAC/yuWus6VYzZ0nL0j/mNVIA7Q5FMGFxCJsD6xm/GDNsNsH9///DkD2lhFYaoXU
-         E4rQRCQvCL09YZGI3Do/kfotOox8RRjqdF1od4ukAU9MgA442NhPHfnGspe2sBeIfriK
-         tVmg==
-X-Gm-Message-State: AOAM531RfK4KSraBcEPm0D9njrpzPKkpvWqtO5N++pBYrp17Z6QGVXFK
-	vyi6HtpgNj/yku5jmqLDNSAmIT2ktFHqLEbIWzs=
-X-Google-Smtp-Source: ABdhPJyTUHk5zcxmVR5k1zP3niEKCuYe1L+ArDbkWMRRLPohTbmWIUqb0tXOV7M/iYYfYtgWfToUEvMNsOuePgA1/R4=
-X-Received: by 2002:ac8:5cc4:: with SMTP id s4mr14035639qta.214.1619395574516;
- Sun, 25 Apr 2021 17:06:14 -0700 (PDT)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=mfS4eNWa;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.5, mailfrom: zhengrq.fnst@fujitsu.com)
+Return-Path: <zhengrq.fnst@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1619425292; i=@fujitsu.com;
+	bh=y67FiVL1plkjczUmwJ0+BksSwQRt5o6VpAAhhUk4kq4=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=mfS4eNWaqTwnx9+BL6cnMN6JHA1ETJ6nX8mdw8BCNFCTgxs0ujws2z8TehX5Tey+P
+	 7nhuLl0AeqnvrE6VZGB9687fropBjKJuS3ptzJQx8uTY8gx0rQZmgnxBZWvqQ6c4fC
+	 ZDh1ZPVBj3PcWbDW94NyLTHUycLlznA+rf0OtHGJ/mftJX4Aynfla84GmhnKom6FxL
+	 qpe32A049+4Q1VBc02P/pTmPpo2M7gSbkOlNObYUhAzzTzLz78+KTZmzQ7u7SUSAwx
+	 RS6QSauqB3+2aAcTb0WnW02CVbwu48xyrOfr5hRVf9vAJkXuOC42CbzZYfSqpArrw+
+	 ILdL2Wa+91wKQ==
+Received: from [100.112.192.143] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-5.bemta.az-a.eu-west-1.aws.symcld.net id 9D/81-01834-C0876806; Mon, 26 Apr 2021 08:21:32 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupkkeJIrShJLcpLzFFi42Kxs+GYqstd0ZZ
+  gsPOMkcXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnFwwg+2gj2cFd9uPGJsYHzO0cXIxSEkMJtJ
+  Yv3S/+xdjJxAzm5GiXvPpUFsNgFdiXOP14LFRQT0JZbO3sMMYgsL+El823eLBcRmEVCV2L7/J
+  lgNr4CHxO0XG9hAbAkBBYkpD98zQ8QFJU7OfAJWzywgIXHwxQugOAdQjaLE7OnyEOWVEtunnW
+  WcwMgzC0nHLCQdCxiZVjGaJxVlpmeU5CZm5ugaGhjoGhoa6RpamuqamOklVukm6qWW6panFpf
+  oGuollhfrFVfmJuek6OWllmxiBIZQSsFhvR2ME9580DvEKMnBpCTKK5TdliDEl5SfUpmRWJwR
+  X1Sak1p8iFGGg0NJgle0FCgnWJSanlqRlpkDDGeYtAQHj5IIr3YRUJq3uCAxtzgzHSJ1ilFRS
+  pzXpQwoIQCSyCjNg2uDxdAlRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSsK8KiBTeDLzSuCmvw
+  JazAS0mK+uFWRxSSJCSqqBKWROn+an2mv+Tx4+TdmhY56boxO+iXH3nlMPWn+KNa8KZ7z2fNM
+  OJ89rRWWbt+sdZLAQderfJFA3hX19rdXs4tZV7yUc/q6M+fV26drLWu9F9Q+Ktdnd/6zR0d30
+  emp49gP3aNvVxgUi5fdkr12yVVPbrSxW/f+nnv86q5hoFX6nl1VR83kFc6/EVakHqezu+N7CE
+  3F1u2Ngymz1a1Gmc5wjg1892jaH8yu7UO3pVw6t+UqMN1/YawarT54f+p/vDyvH0t1K3So/dk
+  +dI+p8bo7tOw2nxv6m588eaXq9iq7IuN+7XuZlGmtA25JwxxT5DbYefl2SUzzFN+i8mMH9b/m
+  PCONy/u8P9wpMmLpEiaU4I9FQi7moOBEARD7igxwDAAA=
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-18.tower-271.messagelabs.com!1619425291!2194446!1
+X-Originating-IP: [62.60.8.149]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.60.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 5394 invoked from network); 26 Apr 2021 08:21:31 -0000
+Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
+  by server-18.tower-271.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 26 Apr 2021 08:21:31 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 13Q8LPox009618
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 26 Apr 2021 09:21:31 +0100
+Received: from localhost.localdomain (10.167.225.35) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Mon, 26 Apr 2021 09:21:24 +0100
+From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-python] [PATCH] python3-supervisor: upgrade 4.2.1 -> 4.2.2
+Date: Mon, 26 Apr 2021 16:21:14 +0800
+Message-ID: <1619425274-76504-1-git-send-email-zhengrq.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <bfd87f9a-d54f-25fd-5229-ff3cd60ad033@gmail.com>
-In-Reply-To: <bfd87f9a-d54f-25fd-5229-ff3cd60ad033@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sun, 25 Apr 2021 17:05:48 -0700
-Message-ID: <CAMKF1sp2_j7D=XAE=+WiYHrLXf1C4qfE0f8mo9Zr7AWr4kdvZw@mail.gmail.com>
-Subject: Re: Hardknott merge request - April 25th
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD05.g08.fujitsu.local (10.167.33.203) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Type: text/plain
 
-merged thanks
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+---
+ ...{python3-supervisor_4.2.1.bb => python3-supervisor_4.2.2.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-supervisor_4.2.1.bb => python3-supervisor_4.2.2.bb} (90%)
 
-On Sun, Apr 25, 2021 at 2:35 PM akuster808 <akuster808@gmail.com> wrote:
->
-> The following changes since commit 2297d4ee04b47bc574f8879732d9e213ab7bf6=
-85:
->
->   wireguard: update to v1.0.20210219 +1 (2021-04-18 13:49:13 -0700)
->
-> are available in the Git repository at:
->
->   https://git.openembedded.org/meta-openembedded hardknott-next
->
-> for you to fetch changes up to 71b546ed8595b14d29efc1e8b951f8c845ad10c4:
->
->   python3-cryptography: Upgrade to 3.3.2 (2021-04-23 19:09:56 -0700)
->
-> ----------------------------------------------------------------
-> Chen Qi (2):
->       tigervnc: upgrade to 1.11.0
->       python3-django: upgrade to 2.2.20
->
-> Mingli Yu (2):
->       php: Upgrade to 7.4.16
->       python3-cryptography: Upgrade to 3.3.2
->
-> Stefan Ghinea (1):
->       python3-django: fix CVE-2021-28658
->
-> Ulrich =C3=96lmann (1):
->       v4l-utils: fix reproducibility
->
->  .../recipes-devtools/php/php/CVE-2020-7069.patch   | 158
-> ---------------------
->  .../recipes-devtools/php/php/CVE-2020-7070.patch   |  24 ----
->  .../php/{php_7.4.9.bb =3D> php_7.4.16.bb}            |   7 +-
->  .../0002-do-not-build-tests-sub-directory.patch    |  21 +--
->  ...tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch |  36 ++---
->  .../{tigervnc_1.10.1.bb =3D> tigervnc_1.11.0.bb}     |  13 +-
->  ...ure.ac-autodetect-availability-of-systemd.patch |  47 ++++++
->  ...estrict-installation-of-50-rc_keymap.conf.patch |  40 ++++++
->  .../v4l2apps/v4l-utils_1.20.0.bb                   |  11 +-
->  ...aphy_3.3.1.bb =3D> python3-cryptography_3.3.2.bb} |   2 +-
->  .../python/python3-django_2.2.16.bb                |   9 --
->  .../python/python3-django_2.2.20.bb                |   9 ++
->  12 files changed, 137 insertions(+), 240 deletions(-)
->
+diff --git a/meta-python/recipes-devtools/python/python3-supervisor_4.2.1.bb b/meta-python/recipes-devtools/python/python3-supervisor_4.2.2.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-supervisor_4.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-supervisor_4.2.2.bb
+index 0ff4b35d90..6944ecb979 100644
+--- a/meta-python/recipes-devtools/python/python3-supervisor_4.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-supervisor_4.2.2.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/Supervisor/supervisor"
+ LICENSE = "BSD-4-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=5b4e3a2172bba4c47cded5885e7e507e"
+ 
+-SRC_URI[sha256sum] = "c479c875853e9c013d1fa73e529fd2165ff1ecaecc7e82810ba57e7362ae984d"
++SRC_URI[sha256sum] = "5b2b8882ec8a3c3733cce6965cc098b6d80b417f21229ab90b18fe551d619f90"
+ 
+ PYPI_PACKAGE = "supervisor"
+ inherit pypi systemd setuptools3
+-- 
+2.25.1
+
