@@ -1,69 +1,82 @@
-Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com [209.85.222.172])
- by mx.groups.io with SMTP id smtpd.web08.3819.1619496238570149507
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.web08.5445.1619511886543632359
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Apr 2021 21:03:58 -0700
+ Tue, 27 Apr 2021 01:24:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=UQLcioyH;
- spf=pass (domain: gmail.com, ip: 209.85.222.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f172.google.com with SMTP id k127so3204164qkc.6
-        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Apr 2021 21:03:58 -0700 (PDT)
+ dkim=pass header.i=@justinstandring.com header.s=google header.b=hQSBSWdA;
+ spf=pass (domain: justinstandring.com, ip: 209.85.216.44, mailfrom: me@justinstandring.com)
+Received: by mail-pj1-f44.google.com with SMTP id p17so2584617pjz.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Apr 2021 01:24:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=uj/9dzcIKg7DlkXgHVOq4RG9QTGhXZPVxLP1JBrIhA8=;
-        b=UQLcioyHFCFvfSwYtL763LvtIjOiiVWV91Vy9zrRsXgZ3wmbQIxgBfbO7JnCHjM/PB
-         nzLR+uLhJ3XY/zeQltTzj2w4TQPGzF9VUuZEagWg3+3RS7h8MsUZbyZLKDSqqMUareoI
-         dgoDpLsjKy6/UxO0SU58qtrsVzt8SDx76teVo8ZTL5jJPzkDBiPLpgCx62u6GzIDL7of
-         5PsgiZuEJ45SsUlLBiFyDwHDLKIyz0HKEHmnDi8x93tM1iwsWWBBycs1b3I6/CP9Q9xe
-         083XKT6n9eupBz5odAoJkz/Vrtd2XEncUKHqu875Ubw85qUScN0ajnj4Vr9sK8g7ar2V
-         AgqA==
+        d=justinstandring.com; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=FhU7/fR3RquYcF7y/nvtYI8V+O99sTvjDINTmT6LtCU=;
+        b=hQSBSWdAUdL4WBy2IMvj1yxNLZjKqNQmajaPcKNdAXDnTHYGSVhLfmuumZxSdOLTl6
+         HR+DnqYqL3kWmq2YjpUzBk46/zmva4HaEzrfqB67RU0jzt3VZWO55ePLy6iSZTiXj16o
+         GSqJkrQDGh9ErhJpb1emFTzMxee1nNknqrVuc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=uj/9dzcIKg7DlkXgHVOq4RG9QTGhXZPVxLP1JBrIhA8=;
-        b=XEwkFKEd5n+zE9zZxXvoYZdK7Kdcgb5SqBFCpLpqEjO54PvILw0mWZw2wKg3GSJVLu
-         RVQWqsm2fYezhVSEsFOtey+Iq9H2glS4b+JxvSjrTwH2srPTfrW9oLae5LMvcFXxDr7R
-         yVruilk08QauxXljaCDGOBlWXB+l3qrDhcK5jr8f+g4JqcoZCMIi+9ruViDjczQnw2r3
-         K+vdHumoFxNOSUv9LjI3Djo3dJAs8qyKhFXEO9DMBv/KcLl2v6BA7jjZ4zgQKpnH6yHf
-         IQxG32GY5cL3V52mRa2rMfRo18JY8cdetX8sHJ8HEoVSLvr+t7AVrDAFIZwVxo0cmlmy
-         Ahfw==
-X-Gm-Message-State: AOAM5330CDxF6+u3SgZTogVZFOButNeyhg1s27XHHE4waAzr8XaB56pv
-	rtx6TPdh7vdNIYFDESOBg8Ogbk4FnClHc0gTTxA=
-X-Google-Smtp-Source: ABdhPJwsjDXbFhwcKDqNjtYiWtyiOi2k6zt4vNl0IfGmxcuctIPTy7gb8JJi9QMKg4QkULZN46BN4hULI2rmSmAzYPg=
-X-Received: by 2002:a37:9607:: with SMTP id y7mr21159774qkd.25.1619496237615;
- Mon, 26 Apr 2021 21:03:57 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=FhU7/fR3RquYcF7y/nvtYI8V+O99sTvjDINTmT6LtCU=;
+        b=DeRaDCe3cGhXNRMnQ5LCs8Tbh6u+taQnlSDXSI4Tonxm3ZdQ1MPgBCFZ7D2ee/qNQT
+         VuH2BA2GjkGDLCBB45eS7/tdtlKzOwuhAbjbso96EqLlwd5q7j0dsxM3oJ1bwHGBWb9i
+         YqgIOETgd5UC1FcvDoFYZZOVUHJKoV31OXfvsDcyevaRxoWfAQ3cP6asyuftyPFnFjcW
+         f8NFIoTtG7y1jyip+ta/Ufjy2Q4zfXbRVf1Etug8GF/6wC5SGoyZFT9xAqFMRD3ZEhbv
+         J1KkXdwThcw1Kdk0KDqwQcePb+OWJ2Z0Xxg5XobUYchwsg7iQiHrho/sTktI3goqfr1F
+         vlHg==
+X-Gm-Message-State: AOAM530PWpV3skp2XCFMAxSfYDU3uDlAfUAvJVDJEylfbistYV9GQ0dl
+	BhWUCt8sLGOeaFff6fi7qHgejZGIEhb8O+Bk
+X-Google-Smtp-Source: ABdhPJywYDuQ0twikScwSSQ+/Z0mNgChOgEfwNRHVKsiGkaKi0NQi1ChQWZN5euUNBaSgVTSdT/oVA==
+X-Received: by 2002:a17:90a:94c4:: with SMTP id j4mr3553528pjw.14.1619511885875;
+        Tue, 27 Apr 2021 01:24:45 -0700 (PDT)
+Return-Path: <me@justinstandring.com>
+Received: from localhost.localdomain (203-86-195-211.tasman.net. [203.86.195.211])
+        by smtp.gmail.com with ESMTPSA id a18sm7774817pgk.66.2021.04.27.01.24.44
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 27 Apr 2021 01:24:45 -0700 (PDT)
+From: "Justin Standring" <me@justinstandring.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Justin Standring <me@justinstandring.com>
+Subject: [meta-oe][PATCH] tslib: add PACKAGECONFIG for evthres, one-wire-ts-input
+Date: Tue, 27 Apr 2021 20:24:39 +1200
+Message-Id: <20210427082439.7047-1-me@justinstandring.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <3d3b4f06-859a-86cd-e0ed-0934c673e76e@gmail.com>
-In-Reply-To: <3d3b4f06-859a-86cd-e0ed-0934c673e76e@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Mon, 26 Apr 2021 21:03:31 -0700
-Message-ID: <CAMKF1srqFHxSdOspdBTuj-i8dqTDfTUsYgErq3yT=9p7+k33+w@mail.gmail.com>
-Subject: Re: [oe] nostromo fetch error on master/hardknott
-To: Armin Kuster <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Mon, Apr 26, 2021 at 10:14 AM Armin Kuster <akuster808@gmail.com> wrote:
->
-> Hello,
->
-> I just notice new fetch errors for nostromo
-> <https://git.openembedded.org/meta-openembedded/tree/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.9.bb>
-> in meta-webservers.
->
-> The hosting site is not responding. https://www.nazgul.ch/
->
-> My limited search for an alt source is coming up empty.  Is anyone using
-> this app?
+In configure.ac, evthres is enabled by default.
 
-If this site stays AWOL then I am willing to accept a patch to delete
-this recipe.
+Signed-off-by: Justin Standring <me@justinstandring.com>
+---
+ meta-oe/recipes-graphics/tslib/tslib_1.22.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
->
-> -armin
->
->
-> 
->
+diff --git a/meta-oe/recipes-graphics/tslib/tslib_1.22.bb b/meta-oe/recipes-graphics/tslib/tslib_1.22.bb
+index 5d3508857..326818eef 100644
+--- a/meta-oe/recipes-graphics/tslib/tslib_1.22.bb
++++ b/meta-oe/recipes-graphics/tslib/tslib_1.22.bb
+@@ -23,9 +23,10 @@ UPSTREAM_CHECK_URI = "https://github.com/kergoth/tslib/releases"
+ 
+ inherit autotools pkgconfig
+ 
+-PACKAGECONFIG ??= "debounce dejitter iir linear median pthres skip lowpass invert variance input touchkit waveshare"
++PACKAGECONFIG ??= "debounce dejitter evthres iir linear median pthres skip lowpass invert variance input touchkit waveshare"
+ PACKAGECONFIG[debounce] = "--enable-debounce,--disable-debounce"
+ PACKAGECONFIG[dejitter] = "--enable-dejitter,--disable-dejitter"
++PACKAGECONFIG[evthres] = "--enable-evthres,--disable-evthres"
+ PACKAGECONFIG[iir] = "--enable-iir,--disable-iir"
+ PACKAGECONFIG[linear] = "--enable-linear,--disable-linear"
+ PACKAGECONFIG[median] = "--enable-median,--disable-median"
+@@ -49,6 +50,7 @@ PACKAGECONFIG[arctic2] = "--enable-arctic2,--disable-arctic2"
+ PACKAGECONFIG[dmc_dus3000] = "--enable-dmc_dus3000,--disable-dmc_dus3000"
+ PACKAGECONFIG[cy8mrln-palmpre] = "--enable-cy8mrln-palmpre,--disable-cy8mrln-palmpre"
+ PACKAGECONFIG[galax] = "--enable-galax,--disable-galax"
++PACKAGECONFIG[one-wire-ts-input] = "--enable-one-wire-ts-input,--disable-one-wire-ts-input"
+ PACKAGECONFIG[debug] = "--enable-debug,--disable-debug"
+ 
+ do_install_prepend() {
+-- 
+2.25.1
+
