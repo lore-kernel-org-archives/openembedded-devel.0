@@ -1,82 +1,102 @@
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web08.5445.1619511886543632359
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web08.5786.1619514965809941678
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Apr 2021 01:24:46 -0700
+ Tue, 27 Apr 2021 02:16:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@justinstandring.com header.s=google header.b=hQSBSWdA;
- spf=pass (domain: justinstandring.com, ip: 209.85.216.44, mailfrom: me@justinstandring.com)
-Received: by mail-pj1-f44.google.com with SMTP id p17so2584617pjz.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Apr 2021 01:24:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=justinstandring.com; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=FhU7/fR3RquYcF7y/nvtYI8V+O99sTvjDINTmT6LtCU=;
-        b=hQSBSWdAUdL4WBy2IMvj1yxNLZjKqNQmajaPcKNdAXDnTHYGSVhLfmuumZxSdOLTl6
-         HR+DnqYqL3kWmq2YjpUzBk46/zmva4HaEzrfqB67RU0jzt3VZWO55ePLy6iSZTiXj16o
-         GSqJkrQDGh9ErhJpb1emFTzMxee1nNknqrVuc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=FhU7/fR3RquYcF7y/nvtYI8V+O99sTvjDINTmT6LtCU=;
-        b=DeRaDCe3cGhXNRMnQ5LCs8Tbh6u+taQnlSDXSI4Tonxm3ZdQ1MPgBCFZ7D2ee/qNQT
-         VuH2BA2GjkGDLCBB45eS7/tdtlKzOwuhAbjbso96EqLlwd5q7j0dsxM3oJ1bwHGBWb9i
-         YqgIOETgd5UC1FcvDoFYZZOVUHJKoV31OXfvsDcyevaRxoWfAQ3cP6asyuftyPFnFjcW
-         f8NFIoTtG7y1jyip+ta/Ufjy2Q4zfXbRVf1Etug8GF/6wC5SGoyZFT9xAqFMRD3ZEhbv
-         J1KkXdwThcw1Kdk0KDqwQcePb+OWJ2Z0Xxg5XobUYchwsg7iQiHrho/sTktI3goqfr1F
-         vlHg==
-X-Gm-Message-State: AOAM530PWpV3skp2XCFMAxSfYDU3uDlAfUAvJVDJEylfbistYV9GQ0dl
-	BhWUCt8sLGOeaFff6fi7qHgejZGIEhb8O+Bk
-X-Google-Smtp-Source: ABdhPJywYDuQ0twikScwSSQ+/Z0mNgChOgEfwNRHVKsiGkaKi0NQi1ChQWZN5euUNBaSgVTSdT/oVA==
-X-Received: by 2002:a17:90a:94c4:: with SMTP id j4mr3553528pjw.14.1619511885875;
-        Tue, 27 Apr 2021 01:24:45 -0700 (PDT)
-Return-Path: <me@justinstandring.com>
-Received: from localhost.localdomain (203-86-195-211.tasman.net. [203.86.195.211])
-        by smtp.gmail.com with ESMTPSA id a18sm7774817pgk.66.2021.04.27.01.24.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Apr 2021 01:24:45 -0700 (PDT)
-From: "Justin Standring" <me@justinstandring.com>
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=56792 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1lbJp5-0008Bm-GL; Tue, 27 Apr 2021 12:16:04 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Justin Standring <me@justinstandring.com>
-Subject: [meta-oe][PATCH] tslib: add PACKAGECONFIG for evthres, one-wire-ts-input
-Date: Tue, 27 Apr 2021 20:24:39 +1200
-Message-Id: <20210427082439.7047-1-me@justinstandring.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-et-xmlfile: Upgrade 1.0.1 -> 1.1.0
+Date: Tue, 27 Apr 2021 12:15:57 +0300
+Message-Id: <20210427091557.17899-3-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210427091557.17899-1-leon.anavi@konsulko.com>
+References: <20210427091557.17899-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-In configure.ac, evthres is enabled by default.
+Upgrade to release 1.1.0:
 
-Signed-off-by: Justin Standring <me@justinstandring.com>
+- Remove bitbucket pipelines config and streamline setup.py
+- Update project URL
+- Update APIDOC config
+- Update tox config
+- Update python_requires and add sys.path('.')
+
+License-Update: Use the exact line from PKG-INFO.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-graphics/tslib/tslib_1.22.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ .../python/python3-et-xmlfile_1.0.1.bb        | 20 -------------------
+ .../python/python3-et-xmlfile_1.1.0.bb        | 17 ++++++++++++++++
+ 2 files changed, 17 insertions(+), 20 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-et-xmlfile_1.0.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-et-xmlfile_1.1.0.bb
 
-diff --git a/meta-oe/recipes-graphics/tslib/tslib_1.22.bb b/meta-oe/recipes-graphics/tslib/tslib_1.22.bb
-index 5d3508857..326818eef 100644
---- a/meta-oe/recipes-graphics/tslib/tslib_1.22.bb
-+++ b/meta-oe/recipes-graphics/tslib/tslib_1.22.bb
-@@ -23,9 +23,10 @@ UPSTREAM_CHECK_URI = "https://github.com/kergoth/tslib/releases"
- 
- inherit autotools pkgconfig
- 
--PACKAGECONFIG ??= "debounce dejitter iir linear median pthres skip lowpass invert variance input touchkit waveshare"
-+PACKAGECONFIG ??= "debounce dejitter evthres iir linear median pthres skip lowpass invert variance input touchkit waveshare"
- PACKAGECONFIG[debounce] = "--enable-debounce,--disable-debounce"
- PACKAGECONFIG[dejitter] = "--enable-dejitter,--disable-dejitter"
-+PACKAGECONFIG[evthres] = "--enable-evthres,--disable-evthres"
- PACKAGECONFIG[iir] = "--enable-iir,--disable-iir"
- PACKAGECONFIG[linear] = "--enable-linear,--disable-linear"
- PACKAGECONFIG[median] = "--enable-median,--disable-median"
-@@ -49,6 +50,7 @@ PACKAGECONFIG[arctic2] = "--enable-arctic2,--disable-arctic2"
- PACKAGECONFIG[dmc_dus3000] = "--enable-dmc_dus3000,--disable-dmc_dus3000"
- PACKAGECONFIG[cy8mrln-palmpre] = "--enable-cy8mrln-palmpre,--disable-cy8mrln-palmpre"
- PACKAGECONFIG[galax] = "--enable-galax,--disable-galax"
-+PACKAGECONFIG[one-wire-ts-input] = "--enable-one-wire-ts-input,--disable-one-wire-ts-input"
- PACKAGECONFIG[debug] = "--enable-debug,--disable-debug"
- 
- do_install_prepend() {
+diff --git a/meta-python/recipes-devtools/python/python3-et-xmlfile_1.0.1.bb b/meta-python/recipes-devtools/python/python3-et-xmlfile_1.0.1.bb
+deleted file mode 100644
+index cfff150cc7..0000000000
+--- a/meta-python/recipes-devtools/python/python3-et-xmlfile_1.0.1.bb
++++ /dev/null
+@@ -1,20 +0,0 @@
+-SUMMARY = "et_xmlfile is a low memory library for creating large XML files"
+-DESCRIPTION = "It is based upon the xmlfile module from lxml with the aim of allowing code \
+-to be developed that will work with both libraries. It was developed initially for \
+-the openpyxl project but is now a standalone module."
+-
+-HOMEPAGE = "https://bitbucket.org/openpyxl/et_xmlfile/src/default/"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=b3d89cae66f26c3a0799be8a96f3178b"
+-
+-SRC_URI[md5sum] = "f47940fd9d556375420b2e276476cfaf"
+-SRC_URI[sha256sum] = "614d9722d572f6246302c4491846d2c393c199cfa4edc9af593437691683335b"
+-
+-RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-io ${PYTHON_PN}-pprint ${PYTHON_PN}-shell"
+-
+-inherit setuptools3
+-PYPI_PACKAGE ?= "et_xmlfile"
+-PYPI_SRC_URI ?= "https://files.pythonhosted.org/packages/source/e/et_xmlfile/et_xmlfile-1.0.1.tar.gz"
+-SECTION = "devel/python"
+-SRC_URI += "${PYPI_SRC_URI}"
+-S = "${WORKDIR}/${PYPI_PACKAGE}-${PV}"
+diff --git a/meta-python/recipes-devtools/python/python3-et-xmlfile_1.1.0.bb b/meta-python/recipes-devtools/python/python3-et-xmlfile_1.1.0.bb
+new file mode 100644
+index 0000000000..182a81d694
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-et-xmlfile_1.1.0.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "et_xmlfile is a low memory library for creating large XML files"
++DESCRIPTION = "It is based upon the xmlfile module from lxml with the aim of allowing code \
++to be developed that will work with both libraries. It was developed initially for \
++the openpyxl project but is now a standalone module."
++
++HOMEPAGE = "https://foss.heptapod.net/openpyxl/et_xmlfile"
++SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
++
++SRC_URI[sha256sum] = "8eb9e2bc2f8c97e37a2dc85a09ecdcdec9d8a396530a6d5a33b30b9a92da0c5c"
++
++RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-io ${PYTHON_PN}-pprint ${PYTHON_PN}-shell"
++
++inherit setuptools3 pypi
++
++PYPI_PACKAGE = "et_xmlfile"
 -- 
-2.25.1
+2.17.1
 
