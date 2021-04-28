@@ -1,54 +1,71 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.2108.1619554905539966004
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web12.11984.1619618108561281867
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Apr 2021 13:21:46 -0700
+ Wed, 28 Apr 2021 06:55:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 483A440C37;
-	Tue, 27 Apr 2021 20:21:44 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id eOyEdZVIUvFf; Tue, 27 Apr 2021 20:21:44 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 12039407FE;
-	Tue, 27 Apr 2021 20:21:40 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id C8F0A1745CF; Tue, 27 Apr 2021 16:21:39 -0400 (EDT)
-Date: Tue, 27 Apr 2021 16:21:39 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	openembedded-architecture <openembedded-architecture@lists.openembedded.org>,
-	Yocto Project <yocto@yoctoproject.org>,
-	openembedded-members@lists.openembedded.org
-Subject: Re: OpenEmbedded Happy Hour April 28 9pm/2100 UTC
-Message-ID: <20210427202139.GO15937@denix.org>
-References: <1677F82EEC882921.25172@lists.openembedded.org>
-MIME-Version: 1.0
-In-Reply-To: <1677F82EEC882921.25172@lists.openembedded.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=44422 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1lbkeW-0000GX-Qc; Wed, 28 Apr 2021 16:54:57 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-cachetools: Upgrade 4.2.1 -> 4.2.2
+Date: Wed, 28 Apr 2021 16:54:47 +0300
+Message-Id: <20210428135448.9231-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Reminder, next Happy Hour is in one day - everyone is welcome to meet with 
-fellow developers and chat about any interesting topics over Zoom. BYOB - 
-bring your own beverage.
+Upgrade to release 4.2.2:
 
+- Update build environment.
+- Remove Python 2 remnants.
+- Format code with Black.
 
-On Wed, Apr 21, 2021 at 04:04:25PM -0400, Denys Dmytriyenko wrote:
-> Hi,
-> 
-> Please join us for the upcoming OpenEmbedded Happy Hour on April 28 for 
-> Asia/Pacific timezones @ 2100/9pm UTC (5pm EDT):
-> 
-> https://www.openembedded.org/wiki/Calendar
-> https://www.timeanddate.com/worldclock/fixedtime.html?msg=OpenEmbedded+Happy+Hour+April+28&iso=20210428T21
+License-Update: Fix copyright year
 
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ ...ython3-cachetools_4.2.1.bb => python3-cachetools_4.2.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cachetools_4.2.1.bb => python3-cachetools_4.2.2.bb} (79%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-cachetools_4.2.1.bb b/meta-python/recipes-devtools/python/python3-cachetools_4.2.2.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-cachetools_4.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-cachetools_4.2.2.bb
+index 616e880453..43049dafe7 100644
+--- a/meta-python/recipes-devtools/python/python3-cachetools_4.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-cachetools_4.2.2.bb
+@@ -6,7 +6,7 @@ Python 3 Standard Library @lru_cache function decorator."
+ SECTION = "devel/python"
+ 
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=2d1e1bf0ccb26126a230c51f997ce362"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=439a07e400525964c3c82684146e46eb"
+ 
+ inherit pypi setuptools3 ptest
+ 
+@@ -27,6 +27,6 @@ do_install_ptest() {
+ 	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+ }
+ 
+-SRC_URI[sha256sum] = "f469e29e7aa4cff64d8de4aad95ce76de8ea1125a16c68e0d93f65c3c3dc92e9"
++SRC_URI[sha256sum] = "61b5ed1e22a0924aed1d23b478f37e8d52549ff8a961de2909c69bf950020cff"
+ 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+2.17.1
+
