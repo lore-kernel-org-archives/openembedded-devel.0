@@ -1,59 +1,59 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.2])
- by mx.groups.io with SMTP id smtpd.web10.6228.1619699995301558753
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web09.6228.1619700007068592171
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Apr 2021 05:39:55 -0700
+ Thu, 29 Apr 2021 05:40:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=e/+e8TcT;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.2, mailfrom: zhengrq.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ypOPAGA4;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: zhengrq.fnst@fujitsu.com)
 Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1619699993; i=@fujitsu.com;
-	bh=hSlFZ0VTEGP6lo6WMQFitRMfwb+yCaLAPdVmOE1dP30=;
+	s=170520fj; t=1619700005; i=@fujitsu.com;
+	bh=A7m8fj9539GvmBU7Uaf3OqpIdImfLX1QJCkBb4hOGlo=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=e/+e8TcTjhK0iVHqKsOh4cwF/KZTl5nK9csAB+lSbdHeCXvkTvMjoFyociIRqj50o
-	 BkAcETtrShv/7I8j4eXUqm8hb+cm8yJhbk2FVIvZy4LVZGweJT55e4VhC2cypPKStG
-	 GscOONM2sy6V7OfMJCkVcu0Kc4+kl1DcgN+0niKmffdSETq28UZWeNmGCeq82I4hnA
-	 oPWrE7YFRezlzVTIVACBRx5itHy1cQb0ngUl19V874HGlGXfPNE3DONmrkDZVEPgfl
-	 k3YDXyUmLt6ozXNC6kf+OkrWxslNW1thf3ywPYAk7QAuTaF26smOOSWLBCUmYJOBNJ
-	 JpQ8t5OKJoqUw==
-Received: from [100.113.2.232] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-central-1.aws.symcld.net id BE/43-55623-819AA806; Thu, 29 Apr 2021 12:39:52 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+EI1ZVY2ZV
-  gMHeKtsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvH7TA9bwTWOihVvPzA2MP5j72Lk4hASmM0k
-  cf/AXjYIZzejxK7j71i7GDk52AR0Jc49XssOYosI6Essnb2HGcQWFrCROPv2GyOIzSKgKvHv2
-  wKwGl4Bd4mzz5+AxSUEFCSmPHzPDBEXlDg58wkLiM0sICFx8MULoDgHUI2ixOzp8hDllRLbp5
-  1lnMDIMwtJxywkHQsYmVYxWiYVZaZnlOQmZuboGhoY6BoaGusaAklzvcQq3US91FLd5NS8kqJ
-  EoKxeYnmxXnFlbnJOil5easkmRmAgpRQylu5gnPbmg94hRkkOJiVR3i2dnQlCfEn5KZUZicUZ
-  8UWlOanFhxhlODiUJHj5lnclCAkWpaanVqRl5gCDGiYtwcGjJMKrMx8ozVtckJhbnJkOkTrFq
-  CglzusG0icAksgozYNrg0XSJUZZKWFeRgYGBiGegtSi3MwSVPlXjOIcjErCvPYgU3gy80rgpr
-  8CWswEtHjZ+TaQxSWJCCmpBqYyddteL62UY9NF0lOvv7yYqMA1k/9ubfnctaKv1fIzk5teVvA
-  /7dIKfsu+c+4G6UNrLS/c5290MfBY+eah3dUfF11vbzm/mKWd/VCNzWS+zsL1irKl9/onLjp7
-  pDPzW4fZ1YNPgvgXzs6O/Ol3av48j7WvdZ4FsCpNYBLIXu7EMdH1lfyyd26Ouhf5C/ftP5ngf
-  N5G9/NTg8Ag76OH0lkjq1ffjGUIP62X5dz120Y+NjDzdbrwL+4n2+6waCyo/9k7Y+1fDo0zs2
-  zsJVy+7fDiPvD33ZyaOes6PG7W3c/8pmhrPGd3tOP8mTeuL24oPsXcxn2XQ0WmLFC+fpX+JD2
-  nY5+To9++nBR19Pmi/i4lluKMREMt5qLiRABQe1TAHwMAAA==
+	b=ypOPAGA4khsf/DyfDCqhbq8EexyeVKSXeypZvFDhMqkJ3H7gxjOLFvqEksnq1a9oS
+	 Iq+/0Yp7Ur39iZn9d23CLpfmBtzaZdi5RnbJnBcs4npJMkrs9NiFb4ks/Qg8Vi2iiF
+	 ohj2Ep99HDoHp9Q6JzsePeZbYzIahpMVIRjBWVQaR0t2+XVeYGdhzM0WIrSWadyGNH
+	 IjvM2UNCKZCKDFHwv9vjRTwaeGgNGU9m1ByjUzkzouJZx3FXwMwcX7VyPsyAEynp/R
+	 hdusBQfbTeJfYzm0zrYbFr5keFr00FlUvOGKvkUwa+LVssniCWnfwr8qVIaSFIS9jA
+	 rfAdAzT1rQTtA==
+Received: from [100.113.6.193] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-b.eu-central-1.aws.symcld.net id 4C/AC-38008-529AA806; Thu, 29 Apr 2021 12:40:05 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+EI0VVd2ZV
+  g0LKAw+Li4aXMDowe5zauYAxgjGLNzEvKr0hgzbhy9DNzwUeOit55rUwNjBM4uhi5OIQEZjNJ
+  NM+/wQzh7GaUmP7gL3sXIycHm4CuxLnHa8FsEQF9iaWz9zCD2MICDhKfZ05lA7FZBFQlvi5ey
+  ghi8wq4S9zsvgIWlxBQkJjy8D0zRFxQ4uTMJywgNrOAhMTBFy+A4hxANYoSs6fLQ5RXSmyfdp
+  ZxAiPPLCQds5B0LGBkWsVomVSUmZ5RkpuYmaNraGCga2horGuqa2RgqJdYpZukl1qqm5yaV1K
+  UCJTVSywv1iuuzE3OSdHLSy3ZxAgMpJRC1pM7GCe9+aB3iFGSg0lJlHdLZ2eCEF9SfkplRmJx
+  RnxRaU5q8SFGGQ4OJQlevuVdCUKCRanpqRVpmTnAoIZJS3DwKInw6swHSvMWFyTmFmemQ6ROM
+  SpKifO6gfQJgCQySvPg2mCRdIlRVkqYl5GBgUGIpyC1KDezBFX+FaM4B6OSMK89yBSezLwSuO
+  mvgBYzAS1edr4NZHFJIkJKqoFp0angC51rzVMS7n5vlt7i6lVYNOH1Fz5F/ZeL+DVsp398ecB
+  eWKc5bi7zDEs31abLt5gmJj01XTC3uUX8cvXZ4PTPIsvP3M4JCdmUzV8Q1hV+/ttF54OMr/7/
+  btj/cM0PXYa5mvPzJ+yfajxXKuFDxtzLTwwNbW2NpaPVduSx7JXb5reGeXFoXWbazCqWNLs7/
+  Oaz3yXMfZE2bdGmHDHzJ8auK69t8PCTCYnfuCp24763f+OrFvxee7it9dqP7vSnNRatTFFTLh
+  5zjp+h9jX94osCl/v7d/LsZLm5Sc/jhfN2939bstpE9T09/R1eZNw77setrhv4xEVES4izJc/
+  9evCFyZOnrXSX42sJm3pHiaU4I9FQi7moOBEAfjvfjh8DAAA=
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-5.tower-232.messagelabs.com!1619699992!7618!1
-X-Originating-IP: [62.60.8.85]
+X-Msg-Ref: server-20.tower-245.messagelabs.com!1619700004!266089!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
-X-StarScan-Version: 9.75.3; banners=-,-,-
+X-StarScan-Version: 9.60.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 18015 invoked from network); 29 Apr 2021 12:39:52 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-5.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 29 Apr 2021 12:39:52 -0000
+Received: (qmail 8755 invoked from network); 29 Apr 2021 12:40:05 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-20.tower-245.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 29 Apr 2021 12:40:05 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 13TCdk8n023183
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 13TCe4A5026086
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 29 Apr 2021 13:39:52 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 29 Apr 2021 13:40:04 +0100
 Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 29 Apr 2021 13:39:45 +0100
+ (TLS) id 15.0.1497.2; Thu, 29 Apr 2021 13:40:02 +0100
 From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] sdparm: upgrade 1.11 -> 1.12
-Date: Thu, 29 Apr 2021 20:39:37 +0800
-Message-ID: <1619699977-5307-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] tcsh: upgrade 6.22.03 -> 6.22.04
+Date: Thu, 29 Apr 2021 20:39:55 +0800
+Message-ID: <1619699995-5343-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.35]
@@ -63,28 +63,28 @@ Content-Type: text/plain
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../recipes-support/sdparm/{sdparm_1.11.bb => sdparm_1.12.bb} | 4 ++--
+ .../recipes-shells/tcsh/{tcsh_6.22.03.bb => tcsh_6.22.04.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/sdparm/{sdparm_1.11.bb => sdparm_1.12.bb} (86%)
+ rename meta-oe/recipes-shells/tcsh/{tcsh_6.22.03.bb => tcsh_6.22.04.bb} (90%)
 
-diff --git a/meta-oe/recipes-support/sdparm/sdparm_1.11.bb b/meta-oe/recipes-support/sdparm/sdparm_1.12.bb
-similarity index 86%
-rename from meta-oe/recipes-support/sdparm/sdparm_1.11.bb
-rename to meta-oe/recipes-support/sdparm/sdparm_1.12.bb
-index 7fc87db2b..d0a4a0467 100644
---- a/meta-oe/recipes-support/sdparm/sdparm_1.11.bb
-+++ b/meta-oe/recipes-support/sdparm/sdparm_1.12.bb
-@@ -17,8 +17,8 @@ UPSTREAM_CHECK_REGEX = "sdparm-(?P<pver>\d+(\.\d+)+)\.tgz"
- PACKAGES =+ "${PN}-scripts"
- RDEPENDS_${PN}-scripts += "bash ${PN}"
+diff --git a/meta-oe/recipes-shells/tcsh/tcsh_6.22.03.bb b/meta-oe/recipes-shells/tcsh/tcsh_6.22.04.bb
+similarity index 90%
+rename from meta-oe/recipes-shells/tcsh/tcsh_6.22.03.bb
+rename to meta-oe/recipes-shells/tcsh/tcsh_6.22.04.bb
+index fab626c61..f74f582e3 100644
+--- a/meta-oe/recipes-shells/tcsh/tcsh_6.22.03.bb
++++ b/meta-oe/recipes-shells/tcsh/tcsh_6.22.04.bb
+@@ -13,8 +13,8 @@ SRC_URI = " \
+     file://0001-Enable-system-malloc-on-all-linux.patch \
+     file://0002-Add-debian-csh-scripts.patch \
+ "
+-SRC_URI[md5sum] = "c9387b7c8cf958956e75b1fa4e59b612"
+-SRC_URI[sha256sum] = "be2cfd653d2a0c7f506d2dd14c12324ba749bd484037be6df44a3973f52262b7"
++SRC_URI[md5sum] = "fa2b347fa9ae866eb036e6e4bb85fe1a"
++SRC_URI[sha256sum] = "eb16356243218c32f39e07258d72bf8b21e62ce94bb0e8a95e318b151397e231"
  
--SRC_URI[md5sum] = "cd998d1c12a4ec11652d0af580f06b4d"
--SRC_URI[sha256sum] = "432fdbfe90f0c51640291faf7602489b0ae56dfb96d0c02ed02308792adc7fb0"
-+SRC_URI[md5sum] = "2902fd29e6834fd62c16bb5d1ac53c7e"
-+SRC_URI[sha256sum] = "e7f84247069da9a0c293963948d8aba8e5897a13e35e5476c8258acb7ca3a124"
- 
+ EXTRA_OEMAKE += "CC_FOR_GETHOST='${BUILD_CC}'"
  inherit autotools
- 
 -- 
 2.25.1
 
