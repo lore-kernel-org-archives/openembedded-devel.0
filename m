@@ -1,131 +1,109 @@
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (NAM12-MW2-obe.outbound.protection.outlook.com [40.107.244.62])
- by mx.groups.io with SMTP id smtpd.web08.94.1619718285675700406
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.web08.4062.1619735998174147454
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Apr 2021 10:44:45 -0700
+ Thu, 29 Apr 2021 15:39:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=cUpJws50;
- spf=pass (domain: windriver.com, ip: 40.107.244.62, mailfrom: saul.wold@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=W1p1Jjxtf22fwxgtYFuL+XUUb+0y0bLW7zfg26sHFdQ0R1DQ6DgPMj4e/ANSkoI1XLgr13iCU2/cJsD0yjB/t5MhAvIMbx//F+dOQU+sRGZBVc3yYGBVPpgUeRAXfU7rD+u9T4N9Egub9sl6NzaFZV3PwHBvOG0zI8DAXlbIEOOr9D3ruwnWfGn4//GB/N5k0tlguxkX465JQqcb2CzFj2b/jchjD4+645hCDoy8haca/yZBeTztNbssT8XF8zePplIQp3/tR5OU0dwlT2iingKFUX42xZxPTj4M480ZUByWYr/IMFzbv/C9OaYLpEdOV32tk9NaBF0DocnR/QptEw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Sea9n0iaDkEBEFcyAdcARuylNOSKl6mcmFsOzJKGCoM=;
- b=kPZwt4PfGnRqas84pmoF36lk5AI5lE5RGJ/9soIeuJNWBTdSs3j7x2lj6T6kb4qklrZB3NJN61f4B4IKaDLiot+2ajQMksrNmZNm50UiEGUdIEYKDoHi7cD4LM87C15ngkaX4OdU6qN8I7Yh6Rea/zzm4tWqwEjOfYF/U7TtXbPFajSgLYManWBtyfW0ChagYCMLBF9RX1jtdAnec1fMbWxvSu27a1GuxT8q9nelylY2YhQLnK9U39+Gjk8+1dryqGDTcUoO+GhOj0aGGbdu3GsI3vyAAWb9MsDqhrsl66pum/Enu6NRKHqjV3XH6ntGH0KuCKNJbNIgbO42KxRLHQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=K6kyJcyE;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f171.google.com with SMTP id t21so4469136plo.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Apr 2021 15:39:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Sea9n0iaDkEBEFcyAdcARuylNOSKl6mcmFsOzJKGCoM=;
- b=cUpJws509/40LH7ZxZqoNTGTbmgvjpnWTpDno/YtTdt6orBFZma0swcLe4Pjh4pGz2DBNCS1CLATwaxnh+0mQTAOe/tXsGdfIznnUA7GU/XX8xo2gJkNdIq1HWkniZkR5UD5HSIYAgIIvoh4QdQOMNNAJyj3EFB9m/Aj04PNNJM=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from CO1PR11MB5076.namprd11.prod.outlook.com (2603:10b6:303:90::7)
- by CO1PR11MB5106.namprd11.prod.outlook.com (2603:10b6:303:93::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4065.20; Thu, 29 Apr
- 2021 17:44:44 +0000
-Received: from CO1PR11MB5076.namprd11.prod.outlook.com
- ([fe80::351e:20b5:1ef6:48f7]) by CO1PR11MB5076.namprd11.prod.outlook.com
- ([fe80::351e:20b5:1ef6:48f7%6]) with mapi id 15.20.4065.027; Thu, 29 Apr 2021
- 17:44:44 +0000
-From: "Saul Wold" <Saul.Wold@windriver.com>
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=a1A+rMMvPTVeiP+qpwirLLlcybUnyhtmh67UBnMsjdc=;
+        b=K6kyJcyE9zR5jNCEOT9A+M2ujlKa+qKsy/hpE9esMh2W8z0/j5d43WOvZJbfe1ORdY
+         RK9MEJAjlPFVvJRHSxvid/Iktx/jLGycdqhA53ljSJQ5lfgSEltCoydTzvg9xfCzEW9G
+         srb19rHjnPh+1JEckNyg85aNBsUrIllMpfWF9hNbBXKej+VEN9115YwUI/7An46Qk/DU
+         MGT/fyDy+jsNwDyoeNPp7pwfI6lUGZbNQ8sdSRnMgsKtU4fEqIv1BSAg6q2ahec7feox
+         iFguyvMHMAcKzZ+RtmnsW9xbzyO3lDp2v2Zy6nc0Z4yeeohrWpLazhw1jO7CHOPB7pmT
+         bhow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=a1A+rMMvPTVeiP+qpwirLLlcybUnyhtmh67UBnMsjdc=;
+        b=EXPlIKloISvXom8jCkaXULZJiGdIUGCa42Auzc9HJpK/cTlgBwHQ58OcIsfyhWwWYe
+         eFVz9NvigY8PYD/lamX81OT1Ie5ZC6wibW+vvgn663R9dMm+SqQ0W4RFyGmaCIIhjkPf
+         Es5ExBlCjOVK58LUnfyDuUUuneLow/rAoxm4tK+oAOaOrVPzQpLtrZqRnnMkMx/z2UFO
+         EvFzUhLeIQ0YbRqLpnJFpZBgZofao/p5Md/5MKvDJqzswZhzh9K0WyyZMMdaH4b5TLJQ
+         PUnbLKvAgwRie65qo6q1N3GBocCucpE+YNraTv5oWaUhzA+hDM6d+K5NSuGjavxqm2Jo
+         HbiA==
+X-Gm-Message-State: AOAM533PTofPwTENRjNEvnbjkyjXAp60cRap8LUqvW4YS1wrCnA2UKQO
+	OiZXRH8wZgvqyhLHq8ZSgKHEkcB/i7znPQ==
+X-Google-Smtp-Source: ABdhPJw90FnOI35N6207hzls0ZsTyF4ThJdNvLL+lmE3ChiriamgJt71p2YUnJ0LPVcTakXHjjsxrw==
+X-Received: by 2002:a17:902:b408:b029:ec:e879:bbd8 with SMTP id x8-20020a170902b408b02900ece879bbd8mr2044091plr.65.1619735997376;
+        Thu, 29 Apr 2021 15:39:57 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ef3])
+        by smtp.gmail.com with ESMTPSA id u18sm30081pfm.4.2021.04.29.15.39.56
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 29 Apr 2021 15:39:56 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-CC: naveen.kumar.saini@intel.com,
-	liezhi.yang@windriver.com
-Subject: [PATCH][meta-oe] tbb: Disable PPC as COMPATIBLE_MACHINE
-Date: Thu, 29 Apr 2021 10:44:33 -0700
-Message-ID: <20210429174433.2615632-1-saul.wold@windriver.com>
-X-Mailer: git-send-email 2.25.1
-X-Originating-IP: [71.238.119.71]
-X-ClientProxiedBy: MWHPR18CA0025.namprd18.prod.outlook.com
- (2603:10b6:320:31::11) To CO1PR11MB5076.namprd11.prod.outlook.com
- (2603:10b6:303:90::7)
-Return-Path: saul.wold@windriver.com
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 1/2] snort,proftpd,net-snmp: Deal with -ffile-prefix-map as well
+Date: Thu, 29 Apr 2021 15:39:54 -0700
+Message-Id: <20210429223955.1878527-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from soho-swold-l2.corp.ad.wrs.com (71.238.119.71) by MWHPR18CA0025.namprd18.prod.outlook.com (2603:10b6:320:31::11) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4087.25 via Frontend Transport; Thu, 29 Apr 2021 17:44:44 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 87449043-d2b3-425e-3978-08d90b367989
-X-MS-TrafficTypeDiagnostic: CO1PR11MB5106:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<CO1PR11MB5106AD6BC553F44F82B26293EE5F9@CO1PR11MB5106.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:5516;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	OVMYCbMm7KX7ctD3UNVaBGfotQzRQc6OqPLY0b/Dzi3nse21nOLKoEMDhh7j/jXyK8VC9KNgO1FqZKmGNtmrbh2rLVjFJ80gXcc36INvjY1nLKJuV55ObFuLB8Pu4fL53g/t4iF794Ehjva/394VgDZvRLy0kh8Hb6tQI55HlNF5ckVLUMDvbU2WfQg76SV56Ldakx8W/zPgg/jivI5UtV740RRW7DtYH3YeqFMV5fG/PSRduOP6MzN+pwRmXaK2jMK/cfipYERiNxm7jS3ihsyYQBv1Lld2Xv07ysK0/W4nzIqNrYUfwmQd6iANSG3GCrNPIvWAm0gkteF1ul6dBN2aVN4esBsJBWK3OdYN0AaHiTkcei6opyGFxLi1wloS0te9TaKDhd1h+z9Vf6i7t/CDS/Mr2Se/XYzvDWQ21N9Fi+Nmux5z7GaNI05VvK79Tl1NsRpnrgWQoJL1Qd51vnyazPkTqGLhqux4P62f/fe/L0jq63fk0klVC1zVkX3laJySFC+/xPg1JnLtlO+uJrrlldBJSopMiU/79BiH4Isabo/pApqdZlx/IYeAlaXWrf6p1s8239AJ+lPYFXYu6qzujLn6zsRwHLj3rBEQ8eqctM/YrjkkY2M7pf5CCeLduA088WAfYLfkDBaLa2QTjbER2lORw3/oS7NRhjITQcw=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB5076.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(366004)(376002)(396003)(346002)(136003)(478600001)(6512007)(8676002)(2906002)(2616005)(86362001)(1076003)(5660300002)(66556008)(6486002)(186003)(66476007)(8936002)(4744005)(107886003)(44832011)(26005)(52116002)(66946007)(6506007)(316002)(4326008)(38100700002)(36756003)(38350700002)(16526019)(6666004)(6916009)(956004);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?8G/fTKf/ubmFvI4l76D+lJglENOtTgvFxIg+hcq0lc1aaLHadKJJKhaxIsza?=
- =?us-ascii?Q?edpQc6lkfHr176VgH1YSHPToRLGGJfH0jKrOURyqITgYYgLYk0/++yBOTlB6?=
- =?us-ascii?Q?uS/bFQfmOPXXEcS0Bny7/CQq7uPIi9Q5VGn0319CpfR3zK0r+ZX96DfjMN8/?=
- =?us-ascii?Q?FQc73oAIxauGsQcfPbKPhd5P1ONtqAJjO36Of5qZqAfEC/d6DGz+4/q+MO6H?=
- =?us-ascii?Q?xet2/Nb3L04T/oRjk78MbCC/OL+1SqCbC1mqVOh83q8hD8S29yAqc9d1Px7f?=
- =?us-ascii?Q?wZsmZZrCafP/0H5eBrq376KyZPfqknn18ZEPOSbRIFuDn0KXVO8C6hjCjsHE?=
- =?us-ascii?Q?DJuXj/JzWsK1Nr6gQKF100Hsywyf2RIQrpM5gAuwv/qt6DOKjr/fjWjfculV?=
- =?us-ascii?Q?KB1a9zI/ctjkL1hLQEmjcuVD0TtsWgtH+peRukDA5s16kfdO7vM0AdujXMf9?=
- =?us-ascii?Q?2dDqRobBOhrGg7/uAmpxfJyjXhhhGG5cyG94/ZemTO0RXwH1ZymJAnJg9Y09?=
- =?us-ascii?Q?YHbXpfw2WFEzt8MOx+B774NDaWzUlCB83PTBVtVWEk5iLlk9WODnwRPD14jA?=
- =?us-ascii?Q?VjZSH0j92nmOUbllVqPNgYi/E8TKekrcQcqnf4QO6QrbMCH/zYJ/qpScMEAF?=
- =?us-ascii?Q?GvtcfscGKd8LnS12aH7Z6+n2bJMFXCdUpUhYmClazSBJlq/KnwHYsyzCiTiK?=
- =?us-ascii?Q?lEQOHv0uvjzOez8q79XkCZ8cBIe8esHAZubdqT/jHg1yzL3D/cKt3HhZgusp?=
- =?us-ascii?Q?Rm7WS4PnJ7u8o/c3IovV3O6MJOxLz81fC+yHGFwZMpzuFQXHXlUBd1fNl6re?=
- =?us-ascii?Q?uR9lCHeQqyA9mZBAxF35GDjQs93+Lh49e3WGPvIPcAMzg4PsJmTauKCuYZt/?=
- =?us-ascii?Q?YMACSQCOVhyUnCKJ9wRXUD3Zo0nXKpQqA/hgM9W/Wbk3dnliPWu69CRhansb?=
- =?us-ascii?Q?OGpIs0mPB5R2RgafDoWZMVd4CkUsh6VFeUV7ITgLC8XnKbQL3nNJH/mZUtL4?=
- =?us-ascii?Q?ymPU1BNIvH1GmriIc6230+zhjskenWpba2aGNCLihNMCqJgLS4Rhj/8d6oX9?=
- =?us-ascii?Q?GZgghXFvkO4cZkUP10OGKhKwq/fNnBQBHUacIzNVXhd1IrTK8LRmq+1SoraB?=
- =?us-ascii?Q?0kYUNoKquGhF3ZO6/7s/DDglRjyXDxxmGtXZ7r85gv+Ed2eWlTlBjctssALC?=
- =?us-ascii?Q?zEsWD8ECpHA8vQZE51wy7UqQStQkSI9Yo0Y0B3MULNwbRo3J9RIZYBHtPyit?=
- =?us-ascii?Q?SmPe7/Ql/tsb7fh3X2bG7DbE8IdA2ZwNNZobQdBN+xg5z7z7IWreVNbt9xIB?=
- =?us-ascii?Q?d7m/9EwtmaO5Zky/ZD2RMCjq?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 87449043-d2b3-425e-3978-08d90b367989
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB5076.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2021 17:44:44.7340
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sS/zZOTBfkW4er3ncXs55qcnHp9ASBuYU+mHUtA1vYxepz2lYmqPmXJOziOQQf0PyZ1GMoUeBE4pH0y6a+LsUQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR11MB5106
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-The latest version does not support PPC architecture, so disable
-the it. Otherwise the following error occurs:
+this is another option for reproducibility which can be used by
+compilers, and here consider processing it as well
 
-/srv/nvme/yocto/hardknott/builds/tbb/tmp/work/ppc7400-poky-linux/tbb/2021.2=
-.0-r0/git/src/tbb/tools_api/ittnotify_config.h:338:12: error: '__TBB_machin=
-e_fetchadd4' was not declared in this scope
-  338 |     return __TBB_machine_fetchadd4(ptr, 1) + 1L;
-      |            ^~~~~~~~~~~~~~~~~~~~~~~
-
-Signed-off-by: Saul Wold <saul.wold@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/tbb/tbb_2021.2.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-networking/recipes-connectivity/snort/snort_2.9.17.1.bb | 2 +-
+ meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb     | 1 +
+ meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb   | 2 ++
+ 3 files changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb b/meta-oe/recipes-=
-support/tbb/tbb_2021.2.0.bb
-index b05a59dc7..d8a18866c 100644
---- a/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
-+++ b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
-@@ -43,3 +43,6 @@ LDFLAGS_append_mips =3D " -latomic"
- LDFLAGS_append_mipsel =3D " -latomic"
-=20
- LDFLAGS_append_libc-musl =3D " -lucontext"
-+
-+# The latest version of oneTBB does not support PPC
-+COMPATIBLE_MACHINE_powerpc =3D "(!.*ppc).*"
---=20
-2.25.1
+diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.17.1.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.17.1.bb
+index 9c20be537c..b5ff430993 100644
+--- a/meta-networking/recipes-connectivity/snort/snort_2.9.17.1.bb
++++ b/meta-networking/recipes-connectivity/snort/snort_2.9.17.1.bb
+@@ -74,7 +74,7 @@ do_install_append() {
+     install -d ${D}${sysconfdir}/default/volatiles
+     install -m 0644 ${WORKDIR}/volatiles.99_snort ${D}${sysconfdir}/default/volatiles/99_snort
+ 
+-    sed -i -e 's|-fdebug-prefix-map[^ ]*||g; s|-fmacro-prefix-map[^ ]*||g; s|${STAGING_DIR_TARGET}||g' ${D}${libdir}/pkgconfig/*.pc
++    sed -i -e 's|-ffile-prefix-map[^ ]*||g; s|-fdebug-prefix-map[^ ]*||g; s|-fmacro-prefix-map[^ ]*||g; s|${STAGING_DIR_TARGET}||g' ${D}${libdir}/pkgconfig/*.pc
+ }
+ 
+ pkg_postinst_${PN}() {
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
+index 1e4697a633..483c22a0d4 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
+@@ -109,6 +109,7 @@ do_install () {
+ 
+     sed -e 's|--sysroot=${STAGING_DIR_HOST}||g' \
+         -e 's|${STAGING_DIR_NATIVE}||g' \
++        -e 's|-ffile-prefix-map=[^ ]*||g' \
+         -e 's|-fdebug-prefix-map=[^ ]*||g' \
+         -e 's|-fmacro-prefix-map=[^ ]*||g' \
+         -i ${D}/${bindir}/prxs
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb
+index d9040c1647..de0aeeec7c 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb
+@@ -120,6 +120,7 @@ do_install_append() {
+     sed    -e "s@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g" \
+         -i ${D}${bindir}/net-snmp-create-v3-user
+     sed -e 's@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g' \
++        -e 's@[^ ]*-ffile-prefix-map=[^ "]*@@g' \
+         -e 's@[^ ]*-fdebug-prefix-map=[^ "]*@@g' \
+         -e 's@[^ ]*-fmacro-prefix-map=[^ "]*@@g' \
+         -e 's@[^ ]*--sysroot=[^ "]*@@g' \
+@@ -172,6 +173,7 @@ net_snmp_sysroot_preprocess () {
+             -e "s@^includedir=.*@includedir=${STAGING_INCDIR}@g" \
+             -e "s@^libdir=.*@libdir=${STAGING_LIBDIR}@g" \
+             -e "s@^NSC_SRCDIR=.*@NSC_SRCDIR=${S}@g" \
++            -e "s@-ffile-prefix-map=${SNMP_DBGDIR}@-ffile-prefix-map=${WORKDIR}=${SNMP_DBGDIR}@g" \
+             -e "s@-fdebug-prefix-map=${SNMP_DBGDIR}@-fdebug-prefix-map=${WORKDIR}=${SNMP_DBGDIR}@g" \
+             -e "s@-fdebug-prefix-map= -fdebug-prefix-map=@-fdebug-prefix-map=${STAGING_DIR_NATIVE}= \
+                   -fdebug-prefix-map=${STAGING_DIR_HOST}=@g" \
+-- 
+2.31.1
 
