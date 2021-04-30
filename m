@@ -1,93 +1,83 @@
-Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
- by mx.groups.io with SMTP id smtpd.web11.4264.1619817352439976909
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+ by mx.groups.io with SMTP id smtpd.web11.231.1619821056434726320
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Apr 2021 14:15:52 -0700
+ Fri, 30 Apr 2021 15:17:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=k+L9XDVK;
- spf=pass (domain: gmail.com, ip: 209.85.160.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f178.google.com with SMTP id a18so28875501qtj.10
-        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Apr 2021 14:15:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=SD13PGhJ;
+ spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f52.google.com with SMTP id u3so28720165eja.12
+        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Apr 2021 15:17:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=9si6yHW1suywA/2+kJzTPYHoGl/dVluQURhipfklS2I=;
-        b=k+L9XDVK2XhTJ0vkvYuv/AaZRrsuYi4JPtwZ/9c00bHtio7xkW6rKeMoGxvNSFcv2o
-         FynUAXqq6vdJIrYkFkiBvU1BEBis4TVLjSfhHGQCsKjLIeNU3Vr3DXYcabxRSybzDXe9
-         HWZYdO3BO19uHs6zmKYikztZpzLmOEAUW60PmK6HBPUZsv5aO3FTWCNJ5TPemvF+dWHp
-         yqTjqLRxirgJSu/CDFszsScG0H/h8AopFi6d0hBoN0qKl9TcuM3MRQJHe5mEmhZU817J
-         TMyGtGkfaW6J8XdFjRq6iBt/8GKK8RTCAIi4trHX7NxgIQSHXMdwGue+Ki5iZ3a/978r
-         i83Q==
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=n81Comqb8W2nneROYtztl/EHSDhNkqvQm98svA+Fpvg=;
+        b=SD13PGhJpOFxpz02s9cm+YlZUPe6D69gotf3JtQdwFMXLACjPvN5hdjBT/PxSQAIhL
+         YZeUm2Mc0vPUx5H4GvVwjaFPu4UNsnSiC4sIZiim4jgc0Pq4k7yM1j1mIWtcCjp2eZ94
+         77HKZUmbAi43zypbBygRWE7zb7GMTWByxVluCR6FQ2G0azwoaOhBhIeSRhi1DuvzB7px
+         UzyJazXjbz62mKq+ah1yF9S1KfCohMz7M2mnehlx7oxmmtV1QLjowScTgQzsG1+39iLy
+         Jev8jjdFhe4kKza20gWWl5N3A3z2ecWnnl4o/+t/2DZtwdVSvvEZNFH/lk74CkrApicH
+         Kajg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=9si6yHW1suywA/2+kJzTPYHoGl/dVluQURhipfklS2I=;
-        b=oJk+UrSz3TAVPWHhqtwG036m76huzjPZFze+hCRxUL7upAyq9joOdz8PrrxCqGMUmd
-         uN2Y75WYLK8TmIbPi/eeWyQbTQTcAxP3LLWcSIvokCxN8F7swoeqJ6HymXNva8x1mIXO
-         zYDkd3Pnlp/mk8WdpZM7sPNpbWmD624vr7OyMxNUh6m0/+xOipyx3Z2AwAhYJlzQ5Pqw
-         bwl7dQiLK8GU1g0m7Nxrcjd6Bz+eQfDJmQxOELwSovkFISYh7pGlLFdr43NL4JzWFESV
-         OybtnW4jNxBOEx0bBYx0wdh1zY0J//D6LjjcXbsSs7f73+Q2Cm4BcL3JL04ABB7FQnm4
-         8YLg==
-X-Gm-Message-State: AOAM532aDUobQNdZGYeJ4ml8qwNvvukHFNztrdHWSIjt2Qx4U6D8bR3/
-	n/qdNS3lXeXKhXkwhpT0aNrIqgjzeBqq5d4GiOQ=
-X-Google-Smtp-Source: ABdhPJz2ocbCJ9xGfTR80mFZ2N2ZT5ZUpQXcSli9U+CxBjtkiReRl+O7HdnIDcNRJU1Tw4x8KPvmYOHHdhssp+XSRkk=
-X-Received: by 2002:a05:622a:2c9:: with SMTP id a9mr6306579qtx.82.1619817351535;
- Fri, 30 Apr 2021 14:15:51 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=n81Comqb8W2nneROYtztl/EHSDhNkqvQm98svA+Fpvg=;
+        b=X5JRgT21aIVjQ77d7FsUiRKdCFNXty7CTiD2V19eYXkd/V6EWGOdkg2eBHhuh7hQFt
+         go6CLwjqjNi29tbs9ImiIzlG4Xu3QVvz8OwxJDylydEDAT5Q7EFT9N0NoB5f+Ei0Nbfc
+         feNNGFXrKGHxVbKYBnbgSRxtS+lcYfBjplzV1eqRkez/4fHcC6IOTTUa17f383EDXR1U
+         m59F6nvSzD7PMThUabJtCYFa5ggxPdqw8Ti+UCF84pQNENqjmEaiVTJLjWBa83oK1uCW
+         U0FL97YBLx8dENn/s0peOZQ7a4wASMsksnIgzMziGWKyWVQ5ZDn3DAnAHTGNxobeOccS
+         ioqw==
+X-Gm-Message-State: AOAM532CWOi2lkluQ6kHMU4xb7+qZ/a427TohRj1VLOFuQTKSJMMD3xD
+	7rmtB+GcClHOXmDq48IQfqtszhCmbBE=
+X-Google-Smtp-Source: ABdhPJyiaNdlM8xcgCRTJNnKtSbI45OT3YXWa4UZT8mcgcT4zqO8DKX5yHs/7bXDL+34ZVYbuZYQQw==
+X-Received: by 2002:a17:906:b315:: with SMTP id n21mr6676259ejz.219.1619821054817;
+        Fri, 30 Apr 2021 15:17:34 -0700 (PDT)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from thanks-buchmuellers.speedport.ip (p200300f07f15f5094da33e6dbc0cf84f.dip0.t-ipconnect.de. [2003:f0:7f15:f509:4da3:3e6d:bc0c:f84f])
+        by smtp.gmail.com with ESMTPSA id h11sm2817669eds.15.2021.04.30.15.17.33
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 30 Apr 2021 15:17:34 -0700 (PDT)
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH 1/2] jack: upgrade 1.19.17 -> 1.19.18
+Date: Sat,  1 May 2021 00:17:12 +0200
+Message-Id: <20210430221713.2128361-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-References: <20210430194505.69750-1-m.glembo@gmail.com>
-In-Reply-To: <20210430194505.69750-1-m.glembo@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Fri, 30 Apr 2021 14:15:25 -0700
-Message-ID: <CAMKF1spEJt_CBdm1owcOVPR-5RRd_g86Ey11ybcxB8bw0Wv89A@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] yaml-cpp: Add a new recipe for yaml-cpp 0.6.3
-To: m.glembo@googlemail.com
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	Michael Glembotzki <m.glembo@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-it was already added via
-https://git.openembedded.org/meta-openembedded/commit/?id=4090ca3b5be48b4df4c526cf0b66bf02ee2a8058
-if you have changes on top, please apply them to this recipe and send the delta.
+Changes:
+* Add zalsa_in/out as internal client (based on zita-a2j/j2a and jack1 code)
+* Fix jack_midi_dump deadlock on close after the jack server is restarted
+* Fix interrupt signal for linux futex waits
+* Log error message when cleaning previous DB (macOS and Windows)
 
-On Fri, Apr 30, 2021 at 12:50 PM m g via lists.openembedded.org
-<m.glembo=googlemail.com@lists.openembedded.org> wrote:
->
-> Signed-off-by: Michael Glembotzki <m.glembo@gmail.com>
-> ---
->  .../yaml-cpp/yaml-cpp_0.6.3.bb                | 20 +++++++++++++++++++
->  1 file changed, 20 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/yaml-cpp/yaml-cpp_0.6.3.bb
->
-> diff --git a/meta-oe/recipes-devtools/yaml-cpp/yaml-cpp_0.6.3.bb b/meta-oe/recipes-devtools/yaml-cpp/yaml-cpp_0.6.3.bb
-> new file mode 100644
-> index 000000000..cee2ea55b
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/yaml-cpp/yaml-cpp_0.6.3.bb
-> @@ -0,0 +1,20 @@
-> +SUMMARY = "YAML C++ lib used to read and write yaml file."
-> +DESCRIPTION = "yaml-cpp is a YAML parser and emitter in C++ matching the YAML 1.2 spec"
-> +
-> +HOMEPAGE = "https://github.com/jbeder/yaml-cpp/"
-> +
-> +SECTION = "libs"
-> +
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=6a8aaf0595c2efc1a9c2e0913e9c1a2c"
-> +
-> +SRC_URI = "git://github.com/jbeder/${BPN}.git"
-> +SRCREV = "9a3624205e8774953ef18f57067b3426c1c5ada6"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit cmake
-> +
-> +EXTRA_OECMAKE = "-DYAML_BUILD_SHARED_LIBS=ON -DYAML_CPP_BUILD_TESTS=OFF"
-> +
-> +BBCLASSEXTEND = "native"
-> --
-> 2.31.1
->
->
-> 
->
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ .../jack/{jack_1.19.17.bb => jack_1.19.18.bb}                   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-multimedia/jack/{jack_1.19.17.bb => jack_1.19.18.bb} (97%)
+
+diff --git a/meta-oe/recipes-multimedia/jack/jack_1.19.17.bb b/meta-oe/recipes-multimedia/jack/jack_1.19.18.bb
+similarity index 97%
+rename from meta-oe/recipes-multimedia/jack/jack_1.19.17.bb
+rename to meta-oe/recipes-multimedia/jack/jack_1.19.18.bb
+index d5288c7b7..038e9ce11 100644
+--- a/meta-oe/recipes-multimedia/jack/jack_1.19.17.bb
++++ b/meta-oe/recipes-multimedia/jack/jack_1.19.18.bb
+@@ -17,7 +17,7 @@ DEPENDS = "libsamplerate0 libsndfile1 readline"
+ SRC_URI = "git://github.com/jackaudio/jack2.git \
+            file://0001-example-clients-Use-c-compiler-for-jack_simdtests.patch \
+           "
+-SRCREV = "9e23888b8def6527774889cf4ef6348fb78c7154"
++SRCREV = "5041ab0fe7fb719efa5122386d355397289a91f0"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.30.2
+
