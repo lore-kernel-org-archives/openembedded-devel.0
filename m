@@ -1,129 +1,150 @@
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web10.14584.1619912042412019874
+Received: from IND01-MA1-obe.outbound.protection.outlook.com (IND01-MA1-obe.outbound.protection.outlook.com [40.107.138.58])
+ by mx.groups.io with SMTP id smtpd.web09.15236.1619918637922615147
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 May 2021 16:34:02 -0700
+ Sat, 01 May 2021 18:23:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=tPBoSGr4;
- spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id 10so1658020pfl.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 01 May 2021 16:34:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:references:from:autocrypt:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=8raXicMqeMKW5Av93e/1rkZYlaGeuywAFHnUmXETRP8=;
-        b=tPBoSGr4bp6R7hiu5kZ3JRkcE1KVPFwlbaQ6C42iC/DkfOrGsWCyDA/VCZCoD+8Ds0
-         Gb597dm5zM0B7ASHdJrl85H5NwxF5Y8piv8PPyiTsuAIbt3NyDGmhYteee1ozmbUlJPL
-         QszX648cXueu1AzaILcKggTlKLGkJHJGamEQCNteIsIm9AWS4vVEupVOUmkj2qdVmFlM
-         FnXA4tgZ3zSVrRlh1HV8k0NHUlBx1un6BMh5i6jd2zJE67yY4pnRKL5W1H5QMe+My9pB
-         VrU8+oh842HDOndH2yG7FAjc5YRedKA/dq0J0ftqOJNOjZ+6PU7+sXJxqNY7iNj8Djfi
-         jyFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
-         :date:user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=8raXicMqeMKW5Av93e/1rkZYlaGeuywAFHnUmXETRP8=;
-        b=f63KfinJm0O/UHJwlWUjL5+g0CcKXpajv6iEB6Tj/UnS5/MgYcjKCFmPMeer2i2zjm
-         jEzunDzMZM7YIpehhi+eOBPsJvWYTQQsvcZeh2lwvNAaccAEgDxQF7tuC92xk+r8K2Fn
-         bnpdamzp9wQExhVOoNoXV0Krhnmm5cPY4gLrtf2m7zs9Zt5FJ8gPgWVCDOb+8n1fV9Km
-         iNZvOHpYK+C6FXkZC5VttjGshAH+JcL2HIs5huBf2hTZRKTocbsRazg/KW9ra9/01Ayb
-         DIUK/AqxcpZQHSgAp5/ED7ccYK69hcHwunVDn0pPswVVgoTDtkp6J950orMq5YwG/tmm
-         QlEA==
-X-Gm-Message-State: AOAM531j4v/Byyt/lZRyHl1irVCeBIQTVUlTZ3IIk5MQ4ZtXgx28re4s
-	TvC/EVWE1pVUS2h/ebAgiFld0MR/dnpiNQ==
-X-Google-Smtp-Source: ABdhPJxpTOceu4LBLUpX4yVfX/W4YaVL654HzGipBWZ9bEHR1GX+zKEYR85EvXJ+jhfSC1UxOAs80w==
-X-Received: by 2002:a63:d47:: with SMTP id 7mr11524274pgn.400.1619912041802;
-        Sat, 01 May 2021 16:34:01 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0:8589:f92a:54a1:6475? ([2601:202:4180:a5c0:8589:f92a:54a1:6475])
-        by smtp.gmail.com with ESMTPSA id z16sm9783108pjq.42.2021.05.01.16.34.00
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 01 May 2021 16:34:01 -0700 (PDT)
-Subject: Re: [oe] [meta-oe][PATCH 1/4] nostromo: Blacklist and exclude from world builds
-To: openembedded-devel@lists.openembedded.org
-References: <167B153DE0E00D49.25516@lists.openembedded.org>
-From: "Armin Kuster" <akuster808@gmail.com>
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
- 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
- 8CS2NxU=
-Message-ID: <3e1df708-4887-de2f-723f-147d6b5d22db@gmail.com>
-Date: Sat, 1 May 2021 16:33:52 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ dkim=pass header.i=@kpit.com header.s=selector1 header.b=Ne69bpBO;
+ spf=pass (domain: kpit.com, ip: 40.107.138.58, mailfrom: saloni.jain@kpit.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=it/mJBIR2BdII6Hbp7d8H9oHxn/zYHxMzWKFigoKYHbYsF174MLmCCTr7TGBAczcAmJdlFxNNaLm34IZC3BoZRFdkPWZijmng1/tJGUzeTt7FR4FyyI3LnqG5ZAkSuhrWqNJ8XpnwbzA3qUWCDXmq0y7ZmkruByeVYY1T5i5YnqpUhYhGXaPGZYAjawhYiKU36y+IeOfx6bRoNd75n+qtPtne/1zIGJb1Y1yikDTHGXRvXrhppGMdGOsX6HTAimvqf0MqirqTO313HbDeAE4h30uXG55VJ4xj40wPRbMMwJr229MINShzz1IVAHqywWDGlFfz8IdD9UN2k4Jg+7IVw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=iFXTFTESnrhhJwepw4jhMkHj8oZv3nkMwUFL3SAqBLA=;
+ b=eH5wENqY68OT9+ZGrB29f1Bp3+S32pqVahnX4Y/H83wwt89VnBBiD0Q9XSwsHWjoKOxpPq2EMYFPfsn1WSgmG0ZqgUjT1ZgrOlkt3km/81tzbnvWHD6nrJRQRfzOW7VMZCvfEmZejswJo9wvbbjv6XKpSh0HUedPrKsM49ZBDaX0pYdmoQrhzcL0ZZQLoqXUkcmvhzWHWnujtYIhY7AgrMrai4cZDAeYjU5LYGFJQL1kudYXfAOyw2ciZW9djIAHwQmFTYYbZnwgJrAIZ6hsy3dbyflLeCdeh3CqMpBS9MYPwQEZjH6vidTFfEN592tSWEq2agD3Yd0HH1Ga8S+ong==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=kpit.com; dmarc=pass action=none header.from=kpit.com;
+ dkim=pass header.d=kpit.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=iFXTFTESnrhhJwepw4jhMkHj8oZv3nkMwUFL3SAqBLA=;
+ b=Ne69bpBOwKXekIpn+0Zf2kTyau87eaUC/e1fC1kud3x+daHv2kU+vgPgUq6RK0Jie8k3z4gIR6ab8ttzU3A+7B7rOGFbRxrpK49MLjiIiQJdcZttUmy507mjm4u5Y6lMdpJTTFQLT+WYCEmH3ejuaT6iEY8QJAU4OR/WdBEYoVs=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=kpit.com;
+Received: from MA1PR01MB3257.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:72::14)
+ by MA1PR01MB0748.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:4::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4065.21; Sun, 2 May
+ 2021 01:23:52 +0000
+Received: from MA1PR01MB3257.INDPRD01.PROD.OUTLOOK.COM
+ ([fe80::259f:e6b9:4e20:3471]) by MA1PR01MB3257.INDPRD01.PROD.OUTLOOK.COM
+ ([fe80::259f:e6b9:4e20:3471%7]) with mapi id 15.20.4065.035; Sun, 2 May 2021
+ 01:23:52 +0000
+From: "saloni" <saloni.jain@kpit.com>
+To: openembedded-devel@lists.openembedded.org,
+	raj.khem@gmail.com
+Cc: nisha.parrakat@kpit.com,
+	Saloni Jain <Saloni.Jain@kpit.com>
+Subject: [meta-oe][dunfell][PATCH v3] fuse: Whitelisted CVE-2019-14860
+Date: Sat,  1 May 2021 21:23:36 -0400
+Message-Id: <20210502012336.9888-1-Saloni.Jain@kpit.com>
+X-Mailer: git-send-email 2.17.1
+X-Originating-IP: [2402:8100:22a2:ee48:886e:de50:9739:db5f]
+X-ClientProxiedBy: PN2PR01CA0061.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:c01:23::6) To MA1PR01MB3257.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a00:72::14)
+Return-Path: Saloni.Jain@kpit.com
 MIME-Version: 1.0
-In-Reply-To: <167B153DE0E00D49.25516@lists.openembedded.org>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from localhost.localdomain (2402:8100:22a2:ee48:886e:de50:9739:db5f) by PN2PR01CA0061.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:23::6) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4087.35 via Frontend Transport; Sun, 2 May 2021 01:23:51 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 3968a324-824b-4d81-e95c-08d90d08f1ff
+X-MS-TrafficTypeDiagnostic: MA1PR01MB0748:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: 
+	<MA1PR01MB0748B64FA190711A8970DAE7875C9@MA1PR01MB0748.INDPRD01.PROD.OUTLOOK.COM>
+X-MS-Oob-TLC-OOBClassifiers: OLM:4941;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	iRJgslsXhxH5k5BD2Ll5RiyZ3PMC7f90F5poQcV49Gac2wgaXcN/qVsuY5DpFK5GwElk1tCqEqL1w2FrmLAAUeYGYjSf7JqrDhzyDbwCkA3MvyDs+nAkWGs234IpGvdh3rLAUwK4mathfXhnOlBEfkMoUgGE01EQcapJVQaBhlEvABy+q516PZ+Oj8Nj4z21MLPYzviRgiAFBjYjsf+RqGnNjUjRw/Qv2zALalwaBJabn4RfOOsIc6RIw681gxYi9MU+gpUUJXXImIQDX/udLK45YItsIhklcOru4CI7QcXimWgvHaTtoG3mtrGi7M41nAh9AerhzUDSx3snLyM5pTgqr+L3gierMbH/UedywKFBXFiNPQ2j5AWlQllWbDdm1g2OJh0892t1uWigUBrktb1lLM4BKd1DnZivC4+f3LbL5GqHNRgrNyhCEronUOCGEhzfDxplgYvZQedpwu3expdSA6pkCPJQWZ3su/Tt8Y4Qd8PkoD2sGfyhFPCkVKyFYIJ18ZvZFfd1C6LvL1u3QSPGvBj+qHiwuZSpbCQnVtcstfGrGb2zi72Yhjlcn/pW91nA0gh+qhc5iMdAwvSlt3ukY3B2UUbNsT232Bo4P6F7EoOipmKwEGxw5nk2AzfhlWiIsCYG2sXBNSBSsGk58oJ/sijbMlcMlgMF0ckmoe2Sd17rglT1fmPtTA9DFodJPWgJ/fLRIfEAmtvqBtMX5lxRXZopVHptTY+yKcDaedw=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MA1PR01MB3257.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(346002)(39850400004)(366004)(376002)(136003)(396003)(6512007)(186003)(2906002)(8936002)(2616005)(478600001)(66476007)(1076003)(16526019)(6506007)(107886003)(36756003)(52116002)(66556008)(66946007)(966005)(5660300002)(4326008)(6666004)(6486002)(66574015)(83380400001)(38100700002)(8676002)(316002)(86362001)(69590400013);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	=?us-ascii?Q?goofse3uY9xDZDpy0Ztv57DDCXybFPCagkBJHnN5Cvosjq69gDqaReER4X6k?=
+ =?us-ascii?Q?fju3oTcig36wgHtkwjsbWW2oe9WYzOAinwr3fekwUUl9yvLobpx5OQRzfPFP?=
+ =?us-ascii?Q?BSqt8CCshs61CmZuC0sB8xWojzX59DcUMuT0maX75VXVUo21r85gqSRH9Hcm?=
+ =?us-ascii?Q?QY7w9/D20Y0s8NDCTFw4UrRxHVyOZ0Yj4i2bZB4dIVRWd6+0nGmSGl0KT0Os?=
+ =?us-ascii?Q?b3Quyj9pvFbk+N6v7DtWupg+5l8puG8h8BkSoBHEcKNs5OYrJhN3JoTjA48d?=
+ =?us-ascii?Q?6splcmpULjSz5PrPFRpDUwJrxNtAkn4HOmll3Wt3jjkwHicHFO0TWaVcf+2D?=
+ =?us-ascii?Q?8KqPO/AjNVA6oFTVq2mCNc4kpj1pVX/edasComdypx7s4We3ARbl4+ZWqphi?=
+ =?us-ascii?Q?R8tbDZxl/JHvUzaDv81/6TzS3Hw+Vu/KpbwS230vRiWuaLe1sPjf0cXbnD6Z?=
+ =?us-ascii?Q?MdIbaDCYA+vnNDlVAdfeAaj9bh2LuNlW1Zn1ER75Pv5aXy+3uWGjC0am+2P8?=
+ =?us-ascii?Q?SB5uPu2FMhSw6OeU6OQCZ2u/8J+4cBOhqvOhvCvtIdSKTfJvMSNGABkHstcD?=
+ =?us-ascii?Q?6CbYgu+g8vGiKt5ZWyxBLgrLRQbouEQ25jDLMgOjJ8VGa/KmuIZY0hCVDQMP?=
+ =?us-ascii?Q?VOd9ZossdoN7j9Uz+lOfGhhWOiFvBm6M6yCmuqAs9fhK2eULcuke1v/9snc+?=
+ =?us-ascii?Q?+t79tUsZoSKzDgWeACbfP0uWzilSaleOHiYng6lc6QJ94wdwKDLPTZ4gBtpD?=
+ =?us-ascii?Q?KX055VyI7urtoAJz9QSX4kSJgyf+fy9nFy9Zb71oWpqaeDc1hucaTMr9pOOD?=
+ =?us-ascii?Q?2JdWV55KPIDRvyVFLRep5/XtYq0m3szj0aFkAaNI1vYBO3Y0J4SKXvCU9WW6?=
+ =?us-ascii?Q?HDLBjZKZEinBTYR54w1esUUmMVyL95+J8XXV7X2P9L+bBUB6CLDP5DoDYm/6?=
+ =?us-ascii?Q?WYDIQLkS2FbmuEViUz20E8zqaVpSlUEhCXNiDtCIpYVIDgPN1umeFAoS1Rxn?=
+ =?us-ascii?Q?YuJSvpYqK7OVZqRrVeir+8hJ0wA2eEhlsyri2YoF6VhYemDm4tnM14TcfyE3?=
+ =?us-ascii?Q?bdnSEX6gi+/OOUu3IBON/8PgmbrWJPOmseA19S3f0qWWxH5p3z92ajFLjc1h?=
+ =?us-ascii?Q?Bi+lzKWw7MRU6Mwrfludr+y2wgg44XuqzHA9dYul5Dt4wjllep+W+gak1fGp?=
+ =?us-ascii?Q?AaTNHE4bnYBWmiG6oyo0vkTH9Uzi/HVzgBhgLAA90fkwKYajD4vDh6wsGfv2?=
+ =?us-ascii?Q?nAiFS8SaX/FJ0ZIQlqAEuNjpQqqPr7FRVkKbIZgPG19m0AMWzHcrn/CYK03u?=
+ =?us-ascii?Q?+21cmwlXBy1/6xyy4qLFNAU4+jkIxM2M+f3rFNJgZiWCqLN/m4xWXvqL0F7F?=
+ =?us-ascii?Q?p8y6G+jb1apkOLfqQBr9Bz/5GDZR?=
+X-OriginatorOrg: kpit.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3968a324-824b-4d81-e95c-08d90d08f1ff
+X-MS-Exchange-CrossTenant-AuthSource: MA1PR01MB3257.INDPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 May 2021 01:23:52.2764
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3539451e-b46e-4a26-a242-ff61502855c7
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: svgNbVqh3LSLHIhaUmHvC9GXNXFcsnadKE/O5ODXbGnVk0A+JcBm6xQsieB7/jERGOaJmqFRSRqS2Xc8hcJJ2g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MA1PR01MB0748
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-wow.  The README is missing 'gatesgarth... wonder how that got missed.
+From: Saloni Jain <Saloni.Jain@kpit.com>
 
-this set was for 'Gatesgarth'....
+CVE-2019-14860 is a REDHAT specific issue and
+was addressed for REDHAT Fuse products on
+Red Hat Fuse 7.4.1 and Red Hat Fuse 7.5.0.
+REDHAT has also released the fix and updated their
+security advisories after significant releases.
+Hence, whitelisted the CVE-2019-14860.
 
--armin
+Link: https://access.redhat.com/security/cve/cve-2019-14860
+Link: https://access.redhat.com/errata/RHSA-2019:3244
+Link: https://access.redhat.com/errata/RHSA-2019:3892
+---
+ meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-On 5/1/21 4:30 PM, Armin Kuster via lists.openembedded.org wrote:
-> Host site is dead.
->
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->  meta-webserver/recipes-httpd/nostromo/nostromo_1.9.9.bb | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.9.bb b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.9.bb
-> index e726c9ac66..f1cf59355d 100644
-> --- a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.9.bb
-> +++ b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.9.bb
-> @@ -62,3 +62,6 @@ pkg_postinst_${PN} () {
->          fi
->      fi
->  }
-> +
-> +PNBLACKLIST[nostromo] ?= "Host site for URI is dead"
-> +EXCLUDE_FROM_WORLD = "1"
->
-> 
->
+diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb b/meta-fil=
+esystems/recipes-support/fuse/fuse_2.9.9.bb
+index 95e870691..49682b3cd 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
+@@ -19,6 +19,11 @@ SRC_URI =3D "https://github.com/libfuse/libfuse/releases=
+/download/${BP}/${BP}.tar.
+ SRC_URI[md5sum] =3D "8000410aadc9231fd48495f7642f3312"
+ SRC_URI[sha256sum] =3D "d0e69d5d608cc22ff4843791ad097f554dd32540ddc9bed763=
+8cc6fea7c1b4b5"
 
++# CVE-2019-14860 is a REDHAT specific issue and was addressed for REDHAT F=
+use products on Red Hat Fuse 7.4.1 and Red Hat Fuse 7.5.0.
++# REDHAT has also released the fix and updated their security advisories a=
+fter significant releases.
++CVE_PRODUCT =3D "fuse"
++CVE_CHECK_WHITELIST +=3D "CVE-2019-14860"
++
+ UPSTREAM_CHECK_URI =3D "https://github.com/libfuse/libfuse/releases"
+ UPSTREAM_CHECK_REGEX =3D "fuse\-(?P<pver>2(\.\d+)+).tar.gz"
+
+--
+2.17.1
+
+This message contains information that may be privileged or confidential an=
+d is the property of the KPIT Technologies Ltd. It is intended only for the=
+ person to whom it is addressed. If you are not the intended recipient, you=
+ are not authorized to read, print, retain copy, disseminate, distribute, o=
+r use this message or any part thereof. If you receive this message in erro=
+r, please notify the sender immediately and delete all copies of this messa=
+ge. KPIT Technologies Ltd. does not accept any liability for virus infected=
+ mails.
