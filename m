@@ -1,79 +1,89 @@
-Received: from mail-oi1-f169.google.com (mail-oi1-f169.google.com [209.85.167.169])
- by mx.groups.io with SMTP id smtpd.web09.1803.1620069133878122295
+Received: from mail-oi1-f174.google.com (mail-oi1-f174.google.com [209.85.167.174])
+ by mx.groups.io with SMTP id smtpd.web08.1662.1620069134748857151
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 03 May 2021 12:12:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dg8HxMJF;
- spf=pass (domain: gmail.com, ip: 209.85.167.169, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f169.google.com with SMTP id n184so6402411oia.12
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 May 2021 12:12:13 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Gvr8clgg;
+ spf=pass (domain: gmail.com, ip: 209.85.167.174, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f174.google.com with SMTP id i26so6429770oii.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 03 May 2021 12:12:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=ZAgAdjnssQH5QErJYgsufJJipGtSiGXSgDMYUNHNP5o=;
-        b=dg8HxMJFuaWQqufO6k2wWHjEQtnbeyl0E9WOn/rd+GQHMnUxLcPyas6woOukTJhuoH
-         +TimpQKhCIKKywbTDWPAWYpYPN4qyQcqB9xHXdf+CYAklSPY7CtLvVMH0LiZVfW21KT/
-         AhX9jGdt6mKn+Bm17YJ90qk4dmHlI1SsoOqU5ohaRhL94y+sadncRpbkvmibc4bPHH10
-         HEd/OHEh41zSKLhV4OUNPu19/gYOdTHY7BUYqnBj5NYuz2N3QD/2qR8l3GT9azKaSayQ
-         jR9fjKgovrQGNaWnnwnNNf5g9CalTF7G/PtxLfVJst5Gsi4yIjLOvZHgWTnQFhlSmYQf
-         +zOA==
+        bh=B3PzTUQ3anvQY8v1Cz7ospOv7Uh6g3yB1Y/vBlTBwec=;
+        b=Gvr8clgg+KI2UfURlKWLwAkRQzEGcFtIB3ebgGFvK6hMqVu0TKI52iRlbzIFIFi4Nu
+         nQNlbV350U7AZZpj73EZetyMOg+jy0M4uTCH5pOg9KOyfogQlBoCTiAWkcRyeTJ51APW
+         LgkjFSRH9lD7gD34qGWUSVfwpK5eTcePzWZ3BXwwP5a9HVhmFL9UKhYPi9Tn5bfaptHC
+         AyMEFJNE3ck75+m55tkCGAngCiw/+NLsd4jQlJ76eD/5RNJ4Fvkr/5zori6HyreP1hCO
+         mdnBT+h24KXZxCJPctwibZ9YyiSU3YFZtR+48FrSc3ohhs1yGeFn8eJEjIknvnAh5j24
+         RTxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=ZAgAdjnssQH5QErJYgsufJJipGtSiGXSgDMYUNHNP5o=;
-        b=JVUKRhKdUCCHwryksTIhHND2J4j8QoNj8PO2TQftyzVTl8Z6FZGM1hd8uW68F7MSIf
-         ZgMLka0KlmTwcj1JlwErXomKTdsYlG9v9OPgaqwfChOjynvX9GRc4dB2l+wdKaTZ7hAl
-         EEPTkdkgNNu7CvVeaboRiGPxacK/82QoLRyVoyxq6PQA8YrsaqxLMQKMJ9psripNDRv3
-         ZJbeKT+1VXLhZ/3qF35WXA47rjcBDVTxnJdEa8sm+NwnRzUCgeuB3M+mvMXHIN7XnuQv
-         aHdheAIFGdryGCmemCZE5aadNyUJ71YnlbBTKUg6MgBac2+GkJdk4pkkfxiUHY3o1Alt
-         ZNAQ==
-X-Gm-Message-State: AOAM532pKDa345tNj0NTB0mSvqk599qCcE7VBKWvYaiOkthLLzX93ajO
-	F0uW/SXhBQL+xHzp9x3ewfMcDR5sb6JJGA==
-X-Google-Smtp-Source: ABdhPJw4BuCmfbpdSKKmHBLI0wAy77izUFwjKPLWX9WMxtWxh7vVVSb429O4FXvVHFIrgQkUivU4DQ==
-X-Received: by 2002:aca:c402:: with SMTP id u2mr8290944oif.139.1620069132268;
-        Mon, 03 May 2021 12:12:12 -0700 (PDT)
+        bh=B3PzTUQ3anvQY8v1Cz7ospOv7Uh6g3yB1Y/vBlTBwec=;
+        b=bTEG7epeA1Mz1xZB506hNLSSFMs28uwARBsECBOqF71sJP1OrKa0LUF6AlRXP32/R1
+         afkCCwVpa94L9Zyc7a0tz1F/YZT3VKaPcdg35HyDoZbP/W/4Aj7+qt+Ds9u9AJxUmXAi
+         vwn9/Z14n47uwSEd6izoTxFWM36AU9FFAIPRZSBWIb+uDgAfoVlknmgPe+iMVf3fq1hF
+         H51o7xchC3LOlc8IP7Uf7yv80JD712dc4k+Tk/+A1zItjXEjLQVZGQbOar2NOnU1fDtO
+         bNtPem7s56e0jn/gGBYt7LOKKgwWVAZAisk9u65aNeQBm/e4P+NOl5MsDEmvX5D43hW5
+         Ch1Q==
+X-Gm-Message-State: AOAM533HgsP0EbzjqRzwG5nYEjiH7d8IhpET8U74KoaUXuW3mW8vVag1
+	euuRw/2Adgo7Df94+Q1FePSdjVrnHozIDw==
+X-Google-Smtp-Source: ABdhPJyQBgyMbJg8ThrFDv2vMqvE/GrMd6vXAtex5cqLEVPkMY4qopIsRrTi7kdxNP+Ts0iJD/P8Iw==
+X-Received: by 2002:a05:6808:51:: with SMTP id v17mr59662oic.132.1620069133954;
+        Mon, 03 May 2021 12:12:13 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:dc35:22d6:72af:c1da])
-        by smtp.gmail.com with ESMTPSA id s85sm150047oos.4.2021.05.03.12.12.11
+        by smtp.gmail.com with ESMTPSA id s85sm150047oos.4.2021.05.03.12.12.13
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 May 2021 12:12:12 -0700 (PDT)
+        Mon, 03 May 2021 12:12:13 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 02/14] tbb: Re-introduce PE
-Date: Mon,  3 May 2021 12:11:55 -0700
-Message-Id: <ab71ab067d9723638dc424fb7df52ebe46b58e41.1620069041.git.akuster808@gmail.com>
+Subject: [hardknott 04/14] python3-asttokens: Upgrade 2.0.4 -> 2.0.5
+Date: Mon,  3 May 2021 12:11:57 -0700
+Message-Id: <ba22785a42eeb3ecbcb8482329a594a4cc34c2f0.1620069041.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1620069041.git.akuster808@gmail.com>
 References: <cover.1620069041.git.akuster808@gmail.com>
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Leon Anavi <leon.anavi@konsulko.com>
 
-It was accidentally dropped in last upgrade for this recipe
+Upgrade to release 2.0.5:
 
+- setup.cfg: remove wheel dependency
+- Handle starred expressions in tests
+- Make 3.9 support official
+- pypy2 instead of pypy2.7
+- pypy3 instead of pypy3.5
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Cc: Naveen Saini <naveen.kumar.saini@intel.com>
-(cherry picked from commit b5ad9c011db2581cc84e5daa139acf73a0f6f5c0)
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+(cherry picked from commit 3bef475e7618ab54f5666ccacbdd892b86ce96a0)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/tbb/tbb_2021.2.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../{python3-asttokens_2.0.4.bb => python3-asttokens_2.0.5.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-asttokens_2.0.4.bb => python3-asttokens_2.0.5.bb} (81%)
 
-diff --git a/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
-index b05a59dc70..7e57ebf555 100644
---- a/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
-+++ b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
-@@ -9,6 +9,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=86d3f3a95c324c9479bd8986968f4327"
+diff --git a/meta-python/recipes-devtools/python/python3-asttokens_2.0.4.bb b/meta-python/recipes-devtools/python/python3-asttokens_2.0.5.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-asttokens_2.0.4.bb
+rename to meta-python/recipes-devtools/python/python3-asttokens_2.0.5.bb
+index c2149336fd..429a56bae6 100644
+--- a/meta-python/recipes-devtools/python/python3-asttokens_2.0.4.bb
++++ b/meta-python/recipes-devtools/python/python3-asttokens_2.0.5.bb
+@@ -7,7 +7,7 @@ PYPI_PACKAGE = "asttokens"
  
- DEPENDS_append_libc-musl = " libucontext"
+ inherit pypi setuptools3
  
-+PE = "1"
-+
- BRANCH = "onetbb_2021"
- SRCREV = "2dba2072869a189b9fdab3ffa431d3ea49059a19"
- SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
+-SRC_URI[sha256sum] = "a42e57e28f2ac1c85ed9b1f84109401427e5c63c04f61d15b8842b027eec5128"
++SRC_URI[sha256sum] = "9a54c114f02c7a9480d56550932546a3f1fe71d8a02f1bc7ccd0ee3ee35cf4d5"
+ 
+ DEPENDS += "\
+     python3-setuptools-scm-native \
 -- 
 2.17.1
 
