@@ -1,49 +1,49 @@
-Received: from mail-ot1-f49.google.com (mail-ot1-f49.google.com [209.85.210.49])
- by mx.groups.io with SMTP id smtpd.web09.1805.1620069137039536497
+Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
+ by mx.groups.io with SMTP id smtpd.web09.1806.1620069138121166595
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 May 2021 12:12:17 -0700
+ Mon, 03 May 2021 12:12:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=YBzSpAS7;
- spf=pass (domain: gmail.com, ip: 209.85.210.49, mailfrom: akuster808@gmail.com)
-Received: by mail-ot1-f49.google.com with SMTP id n32-20020a9d1ea30000b02902a53d6ad4bdso6088970otn.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 May 2021 12:12:16 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=PLghHj6/;
+ spf=pass (domain: gmail.com, ip: 209.85.167.182, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f182.google.com with SMTP id l6so6454434oii.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 03 May 2021 12:12:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=4vK6gt0CKaDdlJnLLfPFy6Pzhp8xOkvWdmahtI1w3IA=;
-        b=YBzSpAS7DmoWNmmK9VeR+DAv8GiQ1iyB0SnW569LYCdcbB/kVFEm9pODUAVbmb7CBa
-         NceDzSUzDkPFy+FPfQMTvyDJWl08qqShnaO/WN3T0XXRrMY6p/8VH98Hp9m+zDcSzRMU
-         qMlHMcuC8D+rRcNvyBhTuv+km6kV+xjhTyeCmiP5QqYGYWnC5X6GngociCic8zDJpIry
-         G/qCi3H+P0SPenVEfSUPlHp+mtBbQun9eXTjfkJED086fvLlpmMYSI0EgD1cNfjyr3Jk
-         GzVwIhWZpbP6eAlaQgBWTu5fOeUE0pBDU4bczTxbfStO22URPdcQDVA9O0xvx/T/jl1Q
-         wR5A==
+        bh=p9HJx8nXCPHB/xFC7b49ZhosgcSkqvrXL2ct0F7Ipxc=;
+        b=PLghHj6/n6hZVLSNhFMjGvMSI936Su/Mg9YA3YcPTzbb7h5Hwsyblhs1IEbSg4+bJg
+         lPgXTGMYM+Dbb412S8TQTcWiH02cr/pJDnztWutAe1F6/oG7b3rctGyOAWq88H0cr9wc
+         qrdXU+RBNmvExRxLkFcePa56a5ki+KvMbq10t8Q4e/BtumjO7PCAeLDdAyG1NQIS2YkV
+         La8LoDySAWhhS+lufqNf6EtQf0efq1aXYmyetG0d6s7ArLX5pUT8PLfVne9U22R1g2KQ
+         gapLUI3O7jTHo9hMlsepq+naJHW0h8ETblSLTa4WJKXW7wu/F5MDbERoGvvsbcY6J7e4
+         eRjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=4vK6gt0CKaDdlJnLLfPFy6Pzhp8xOkvWdmahtI1w3IA=;
-        b=p/cV35n2lH/kfYCVvwLFjTGB8ktlDA1KE+Ow/p8GbCW0rmVuWmoz5VltDHgnDZfQDE
-         JBVVV2iRTjLhrP5JrbQRV17jPIk26c0Mgo6MS7X4v3m0hjCCHyMXj93hPlkq12Xpl1nG
-         nrrTCQLuEvoSuCiZRgcTOXQ6VatXt2MpI10hzH40nKFF5YLptd7cr9hY4FwtTr3Ef+wA
-         s7aYXCrb8ifec6hbwFudY9O7A1ff21swtKhRsd5VrPIrdrklCptldfJs2R5MX7B2NzOa
-         uBjGRGCIT91SFq6ovinVHKQ/FJNyNK36Dv9h3tdJ+7mParU1OrdH2WG74xMkDRyM/1An
-         sbmw==
-X-Gm-Message-State: AOAM5317OyWQYnLWPKrBMFh5ewnKKrtL03M86KSuQB2wgVIZrfZJLLBl
-	jbC3L27P+l0yMyNFrL1U0r9K/XEBvNdWNw==
-X-Google-Smtp-Source: ABdhPJyDeRZ9UL77x84wDQvvC8NzZRRakzhIaja6OE/1lBy1ps4gSU86GGJaWMOuC7t36khUN+F3Lw==
-X-Received: by 2002:a05:6830:2086:: with SMTP id y6mr15968455otq.356.1620069136247;
-        Mon, 03 May 2021 12:12:16 -0700 (PDT)
+        bh=p9HJx8nXCPHB/xFC7b49ZhosgcSkqvrXL2ct0F7Ipxc=;
+        b=SAnNIVpJsxYY479dtv6AA23GVWzTMJ2GYbDGtovjVsy9+U4CloRirpisTgN2V6a77c
+         Rg/vZ7+K3GYHcc5qx0xmVb4QF0U3FP0H8MOy2fwcgjfn+IFMFKsKnkiTYmioCbY5r5uI
+         pQuyRxx7x/ZYhICuyRNSnz3XZjTEW+28+vZTgfqHiuOOaLxYRUX4kq20AVxtzjbjnXfi
+         x2/Wcoq/lXf9rE0C9M9e9bkm3ocOqMsSN46X56bGkxfnUk43ZoZsZjA3Lnuefiol6cH+
+         kKFajrlDMqL2VzBxnRz9llqJ61mDnZIcA8Hg9Dx85TT+Ua6y/t5TrU8NyoQWVavg39yZ
+         kGUw==
+X-Gm-Message-State: AOAM532kTFwslWzurU4PrORzP6iSb1BrA/lu7awIRGAfM9L+jRwSQ5cx
+	ITOcF7Z2XyXq9c8/eN9KI5FcAnd+dr1BFg==
+X-Google-Smtp-Source: ABdhPJxdNCacteSOpjudHTRvk/EMA57lRWxoR0z9M0/+nJkQcPC1MyVDJ3k5W3rjNL4/ZhO2+cpfNg==
+X-Received: by 2002:aca:5856:: with SMTP id m83mr73009oib.20.1620069137144;
+        Mon, 03 May 2021 12:12:17 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:dc35:22d6:72af:c1da])
-        by smtp.gmail.com with ESMTPSA id s85sm150047oos.4.2021.05.03.12.12.15
+        by smtp.gmail.com with ESMTPSA id s85sm150047oos.4.2021.05.03.12.12.16
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Mon, 03 May 2021 12:12:16 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 07/14] libdvdread: upgrade 6.1.1 -> 6.1.2
-Date: Mon,  3 May 2021 12:12:00 -0700
-Message-Id: <25532d82a7ac752b93e00b1afa84b08c1c301504.1620069041.git.akuster808@gmail.com>
+Subject: [hardknott 08/14] redis: upgrade 6.2.1 -> 6.2.2
+Date: Mon,  3 May 2021 12:12:01 -0700
+Message-Id: <085332dcd273564b13c9261429947ebb33f1652d.1620069041.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1620069041.git.akuster808@gmail.com>
 References: <cover.1620069041.git.akuster808@gmail.com>
@@ -52,30 +52,28 @@ From: zangrc <zangrc.fnst@fujitsu.com>
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 1dc583540355ab6af483b20b945cbd7c42984ccf)
+(cherry picked from commit 4b04112fddb7b2ef5d4b61975d385b386bbd9f5b)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../libdvdread/{libdvdread_6.1.1.bb => libdvdread_6.1.2.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-multimedia/libdvdread/{libdvdread_6.1.1.bb => libdvdread_6.1.2.bb} (71%)
+ .../recipes-extended/redis/{redis_6.2.1.bb => redis_6.2.2.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/redis/{redis_6.2.1.bb => redis_6.2.2.bb} (96%)
 
-diff --git a/meta-oe/recipes-multimedia/libdvdread/libdvdread_6.1.1.bb b/meta-oe/recipes-multimedia/libdvdread/libdvdread_6.1.2.bb
-similarity index 71%
-rename from meta-oe/recipes-multimedia/libdvdread/libdvdread_6.1.1.bb
-rename to meta-oe/recipes-multimedia/libdvdread/libdvdread_6.1.2.bb
-index 65f5b6adf4..ed7443dfd4 100644
---- a/meta-oe/recipes-multimedia/libdvdread/libdvdread_6.1.1.bb
-+++ b/meta-oe/recipes-multimedia/libdvdread/libdvdread_6.1.2.bb
-@@ -4,8 +4,8 @@ LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=64e753fa7d1ca31632bc383da3b57c27"
+diff --git a/meta-oe/recipes-extended/redis/redis_6.2.1.bb b/meta-oe/recipes-extended/redis/redis_6.2.2.bb
+similarity index 96%
+rename from meta-oe/recipes-extended/redis/redis_6.2.1.bb
+rename to meta-oe/recipes-extended/redis/redis_6.2.2.bb
+index 89990df3de..65b525709e 100644
+--- a/meta-oe/recipes-extended/redis/redis_6.2.1.bb
++++ b/meta-oe/recipes-extended/redis/redis_6.2.2.bb
+@@ -17,7 +17,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://GNU_SOURCE.patch \
+            file://0006-Define-correct-gregs-for-RISCV32.patch \
+            "
+-SRC_URI[sha256sum] = "cd222505012cce20b25682fca931ec93bd21ae92cb4abfe742cf7b76aa907520"
++SRC_URI[sha256sum] = "7a260bb74860f1b88c3d5942bf8ba60ca59f121c6dce42d3017bed6add0b9535"
  
- SRC_URI = "http://download.videolan.org/pub/videolan/libdvdread/${PV}/libdvdread-${PV}.tar.bz2"
--SRC_URI[md5sum] = "09c7423568fb679279fd2a2bc6b10b6e"
--SRC_URI[sha256sum] = "3e357309a17c5be3731385b9eabda6b7e3fa010f46022a06f104553bf8e21796"
-+SRC_URI[md5sum] = "034581479968405ed415c34a50d00224"
-+SRC_URI[sha256sum] = "cc190f553758ced7571859e301f802cb4821f164d02bfacfd320c14a4e0da763"
- 
- inherit autotools lib_package binconfig pkgconfig
+ inherit autotools-brokensep update-rc.d systemd useradd
  
 -- 
 2.17.1
