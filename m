@@ -1,80 +1,71 @@
-Received: from mail-ot1-f50.google.com (mail-ot1-f50.google.com [209.85.210.50])
- by mx.groups.io with SMTP id smtpd.web11.1856.1620069141157981185
+Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com [209.85.210.46])
+ by mx.groups.io with SMTP id smtpd.web08.1666.1620069141902094733
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 May 2021 12:12:21 -0700
+ Mon, 03 May 2021 12:12:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=suBzXmcG;
- spf=pass (domain: gmail.com, ip: 209.85.210.50, mailfrom: akuster808@gmail.com)
-Received: by mail-ot1-f50.google.com with SMTP id 103-20020a9d0d700000b02902a5baf33f37so5606275oti.9
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=M4neq9M7;
+ spf=pass (domain: gmail.com, ip: 209.85.210.46, mailfrom: akuster808@gmail.com)
+Received: by mail-ot1-f46.google.com with SMTP id g7-20020a9d5f870000b02902a5831ad705so6058391oti.10
         for <openembedded-devel@lists.openembedded.org>; Mon, 03 May 2021 12:12:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=g7oOA8xyPg5ix4qio+xAteU8r1qLOTnHd/y9kUQj7eE=;
-        b=suBzXmcG2nnob/9zbkClaedI1F6Efiez23i+MOiaDGteQQRp7RwM+jYjLk4v2DXHJK
-         czTvSZr7kRyOsc48lsVCmnbggttXu2xSQu7RU2k03TWq9iFUNZCWJja5ilKoMLnmav9a
-         teMtpeJEMD1pcJjJdRnZklRDCJZFbOUsnnLYKu9s8jlTvzpbwuaQPMfN7q3B1Nq9SA5j
-         WGJZu1Q6ad7I5G6WPR88ZM/kf0NSvyJTUrGOHwXWRWEcNu0FsOTRdbU66OP/koneayLO
-         fxcHuo6ZfgsmH4/ff6lqogA6Dghhkfmm/xH10Ag1WsxKCkVS4otpb4MzE8WgU4YrnzHf
-         yrmg==
+        bh=ZdvVToQ1yBnExj9BP9FPz9vS8YZaZQkivW1V9yQgTvE=;
+        b=M4neq9M75HgowsdxQozzuDLgVjA69UXIgQXUsm+YcCISfMhvpinfYgOw6a8MDAS/Zj
+         bsl8TxxEfVjIC1gZkER87fZUKuu/5BjclHQpoUwhsowMutmQwpuhVRRRXJQsmeqm0XNe
+         Ih4xM5rtuj2nkh+6cvHUO//xwXAffFt9qtEnVqq9wCLFB9cM9sfHbtU7VqFgwPUUhI0u
+         I2qjOrPFg56OtN5RY0WaFCV12JdpNWL4DRSOiL8YgVcX1Zzaxnyu0SbTlwt/ePB0epEO
+         yS+fAltWPyDrvF/VoosoaKImF6xVOGNbBC6Qt+OAaxiPp0miJNob2PJwV6ovDnJ47v8y
+         8AWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=g7oOA8xyPg5ix4qio+xAteU8r1qLOTnHd/y9kUQj7eE=;
-        b=MdW8BugMJtlWfzNhLMwS68e2YNlUOUMalOEFjdYkEl8pGFJdeYobWulGzG8j1A5B1W
-         WV51Bj6rzK5dF/9ycH7QID1VrLnF8t9vvTEj80soLodgkUVgB1APCkmUnoh4gjUceiCS
-         PJDKn0En79OzPsH2fZNnZfTF831YBZYi3HuEDzPgTVBpZ1uWc4LL8u40OB94MnRp+ero
-         GAW+pwEr8kW0QlPUlCzxJDh+9BsEOg6uvrSKz8NRYBEFv7bP9Xml/GT64izSqBfrxAvA
-         T+0RL1SzL4bfmbPqYaMaCjQlJtsqzp93c29w/qSPqbPRFqPQbemcguS7mHyYuOTG7MI/
-         65tw==
-X-Gm-Message-State: AOAM530rtbOiDvhLktEvhY1aZWuTYiIVtgYT6t7vCNODUg3bcZxAIwfV
-	TWPbtPb/IYW4/m95pDe2prbpLlv1MNCaRA==
-X-Google-Smtp-Source: ABdhPJz9viVcLbzEwvFIP6o9WbcgKOn7lD810szBD324mU2h8Dig8oZkaFy0qKBRY7MRrJmMrmDcPw==
-X-Received: by 2002:a9d:68cc:: with SMTP id i12mr2120274oto.205.1620069140410;
-        Mon, 03 May 2021 12:12:20 -0700 (PDT)
+        bh=ZdvVToQ1yBnExj9BP9FPz9vS8YZaZQkivW1V9yQgTvE=;
+        b=O2rC76XVGhPzyZjft7xMHn4anq6A8wsC2RZJgknfNfx1q4HGpZSo4S6D3DossndBqK
+         wvvOeLo55y38b8S+BZ7m4nA17oRVoqaf1hR/kpnN/nTiB/68uG/kUIbwRly4+AqRgZKS
+         POTHAKFo+bgqyXVVB+xhOlgZ0gIj47AyEyqvLdtr6GLOm00dejAp9xlqDmSN62ienv96
+         peVJMIGX/ytuQrnt+20Ak3EUXJyxoH86uimlG+l9TDpetyiAYhfkZa+kGP5rIjGCYMIL
+         inguOQfuJTSjjBb21lwyUMqJ0fRCH0+6vhjZZ/EJcSPxB88xSKQXA/p0efr75/AsUv9f
+         VhXg==
+X-Gm-Message-State: AOAM5313HrqOxmi4DuY7pPB6H+cheBGSnFZPmw8fuUC8usewwqmQSsu9
+	9Pwq42NYKV0ZieZHAq7fR6NGr61J5cdxfA==
+X-Google-Smtp-Source: ABdhPJwoNKchTDqf1qTWAcoV0g9SEzc3h04hyrQQHK7fW3VcikA446R1ztv4FNyZDm7qavfIOu4eOA==
+X-Received: by 2002:a05:6830:55b:: with SMTP id l27mr15605999otb.260.1620069141117;
+        Mon, 03 May 2021 12:12:21 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:dc35:22d6:72af:c1da])
-        by smtp.gmail.com with ESMTPSA id s85sm150047oos.4.2021.05.03.12.12.19
+        by smtp.gmail.com with ESMTPSA id s85sm150047oos.4.2021.05.03.12.12.20
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Mon, 03 May 2021 12:12:20 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 12/14] zram: add support for mem_limit
-Date: Mon,  3 May 2021 12:12:05 -0700
-Message-Id: <ef6adcba6f45ff84b5150c372c50f270edc3cc76.1620069042.git.akuster808@gmail.com>
+Subject: [hardknott 13/14] nostromo: Blacklist and exclude from world builds
+Date: Mon,  3 May 2021 12:12:06 -0700
+Message-Id: <c4a4070a461c151fc5f75a773b8fcb56e22df71e.1620069042.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1620069041.git.akuster808@gmail.com>
 References: <cover.1620069041.git.akuster808@gmail.com>
 
-From: Sinan Kaya <okaya@kernel.org>
+Host site is dead.
 
-Some targets might be interested in limiting how big
-zram can grow. If the variable is set in /etc/default/zram file,
-configure it in mem_limit sysfs attribute.
-
-Signed-off-by: Sinan Kaya <okaya@kernel.org>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit cb1cf053785bcb5670b2eca7051aa11f29ef80b1)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-extended/zram/zram/zram-swap-init | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-webserver/recipes-httpd/nostromo/nostromo_1.9.9.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/zram/zram/zram-swap-init b/meta-oe/recipes-extended/zram/zram/zram-swap-init
-index ccc3aafe3a..28082f7ff0 100755
---- a/meta-oe/recipes-extended/zram/zram/zram-swap-init
-+++ b/meta-oe/recipes-extended/zram/zram/zram-swap-init
-@@ -24,3 +24,8 @@ modprobe -q zram || true
- 
- zramctl -a ${ZRAM_ALGORITHM} -s ${memzram}KB $device
- mkswap -L "zram-swap" $device
+diff --git a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.9.bb b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.9.bb
+index e726c9ac66..f1cf59355d 100644
+--- a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.9.bb
++++ b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.9.bb
+@@ -62,3 +62,6 @@ pkg_postinst_${PN} () {
+         fi
+     fi
+ }
 +
-+devname="${device##*/}"
-+if [ ! -z ${ZRAM_SIZE_LIMIT+x} ]; then
-+	echo ${ZRAM_SIZE_LIMIT} > /sys/block/$devname/mem_limit
-+fi
++PNBLACKLIST[nostromo] ?= "Host site for URI is dead"
++EXCLUDE_FROM_WORLD = "1"
 -- 
 2.17.1
 
