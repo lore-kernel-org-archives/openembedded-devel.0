@@ -1,129 +1,85 @@
-Received: from mail-oi1-f171.google.com (mail-oi1-f171.google.com [209.85.167.171])
- by mx.groups.io with SMTP id smtpd.web10.1756.1620069133713246910
+Received: from mail-ot1-f50.google.com (mail-ot1-f50.google.com [209.85.210.50])
+ by mx.groups.io with SMTP id smtpd.web11.1850.1620069133934246419
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 May 2021 12:12:13 -0700
+ Mon, 03 May 2021 12:12:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=M222FNeV;
- spf=pass (domain: gmail.com, ip: 209.85.167.171, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f171.google.com with SMTP id n184so6402398oia.12
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=e4EdKQB2;
+ spf=pass (domain: gmail.com, ip: 209.85.210.50, mailfrom: akuster808@gmail.com)
+Received: by mail-ot1-f50.google.com with SMTP id c36-20020a05683034a4b02902a5b84b1d12so5694400otu.8
         for <openembedded-devel@lists.openembedded.org>; Mon, 03 May 2021 12:12:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=garUWf24evg8vcsG4JAYMoYYKneRgSM0reYsH7UVFF8=;
-        b=M222FNeVPyhva9KBopKELy6iuyFwQcE91nUML6fJbGvulhLjl5XpFA6g1F6k4+7P/K
-         HvOiEPpfxnJuyNRDh2tfLSAS9m6/5jbK60rj+1IUmqsxpANVaOsEPeMT+913Q/aY6AP2
-         X6s0ZU4pROyltaqujJnQL5YiBsjLDQzT+cv0aCveAdol37KVIr184PFLobsymTzp0ghX
-         uAaPoY5zwQH+zs/GI5V4bgtm/CGvQNqssG0UjmSc/3+cyxjMv9oDY/m3OOr4nWrdB+JA
-         GfenxpMYSx4Dnp82hoSt8L7YTHdANAlJA8It+5RwBRbvBBbm+Q5aZE9r1De4RC46084T
-         cvPA==
+        bh=Ulibi+GWXPIbb8qNPXPTmCw2queryTDR4kaALIdxxxw=;
+        b=e4EdKQB2xBDLKBSetaCvWL0IVFrpXiwUsFWQ8RcJjkpF41zY9ksghq8kUGUQCuIWH+
+         onAR/hv0QIxDc5ih1NvAv83u0IiaIk8Tprz2AhnReoGYJCtC6wKYelsC6XYSsTSv0m13
+         eJKtRL3KF5tDlQghw2Yi33uW4mXbk3bXEhCOramBQjIU3qRcABgo9JM/TwLdMxWdW/F6
+         sSbfodP9gLTgpX2lkyuEwgGyTJrEqbPHZ6oxedL+dOXuS5192idoqCSia92IKTtXvH6E
+         +J3whhvE2iOTwyumKnx9/7CCI4yrboFa6CCjqaKbdUsuswEg8DImMSAW3oig7R/z7Xiw
+         mDug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=garUWf24evg8vcsG4JAYMoYYKneRgSM0reYsH7UVFF8=;
-        b=mT0Nk0angzjx4c8drLynRYnJBaQuMr67ERohqq/Kb4mjp186E8NhNmwrcQdrRx27Ft
-         bFhgn4ylEpH3ny5FaoQ287ab2HPWkY7sCw+tWoWh5TbF+rX0Nf2wy9kC7sj9P6MP65KB
-         gdiduTRXpiLDWM1rDjF4iiugtsqwtNww1DNqaeL4nTxS16AZbymSq6sDg2as464G+/er
-         V9P8FtRbgq4rTYYMeSkbxHGUiQUkk467di3PK1wMaweaMZvMr+KL60+rRSLoE/Yu2Ttq
-         B60+bpH75zZRYU/tJCzrDGVHs/6gc5XzKjZaAj2pfJUoIUNbVaIN939Owrk2CJ0ExfKQ
-         z/nQ==
-X-Gm-Message-State: AOAM530EfZDayBlKR/ZURLL56cZGhidl6NokZMCZ7GfeS1c4IPsqBUrv
-	fmUNHtZ0AJ1c6URl2BBm8LM1hYpKNUtCwQ==
-X-Google-Smtp-Source: ABdhPJwakEGZefgE22jPWD+hkT7Sd02BiUlXiXGHWe5fE+AQ8SIZY9rcpd1RNcyWEDas1tCDuNsReQ==
-X-Received: by 2002:a05:6808:253:: with SMTP id m19mr66141oie.56.1620069131502;
-        Mon, 03 May 2021 12:12:11 -0700 (PDT)
+        bh=Ulibi+GWXPIbb8qNPXPTmCw2queryTDR4kaALIdxxxw=;
+        b=LIXyiTgEl4tyBmIXvxWDwL38dcp0XUuQIf7+1ZHdmtbskyWAvrLZZ32UsIpa4D+e3K
+         J1qYBQauviJhnwqA1v5Q/jSxfuYeUWgLDmFa1G7YeIu86DH0Wx50HgEA/ggjPYdaTtEs
+         0fTFEceLL5dezDIRv84VDHezW3NEXAsmD3O/A459Rq9OiJ9umXSwToHuMjzKC+xPZp9f
+         6lD39Sw7e54P1jqCbQuctVFOcbpT0sFzxc9WxQ7nINpwDPOupOnMeX6L6DNFNiZx72BW
+         Rr/v8mVX3EarN4k6maQVJ/K/AdTndyLicDrKd3U/MY8q8FdZb4m7wuPhTdXbbXbFKDBl
+         Ld8Q==
+X-Gm-Message-State: AOAM531ocZsdC7dUBrDHal8y4NcRJoN2wLpPVopeQPoxU7JeOvC9VNvG
+	2+qDeM2+tQWLv9S6nlYDqq3/nIUqaxs0AA==
+X-Google-Smtp-Source: ABdhPJyjScRbPW7VcrNFRXd+pYfjLc8PEGe1PxkhtdcDVz32ltZhsB2dtSsUD1xw8lEIAYwY9GyMEQ==
+X-Received: by 2002:a9d:6d96:: with SMTP id x22mr14791627otp.230.1620069133006;
+        Mon, 03 May 2021 12:12:13 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:dc35:22d6:72af:c1da])
-        by smtp.gmail.com with ESMTPSA id s85sm150047oos.4.2021.05.03.12.12.10
+        by smtp.gmail.com with ESMTPSA id s85sm150047oos.4.2021.05.03.12.12.12
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 May 2021 12:12:11 -0700 (PDT)
+        Mon, 03 May 2021 12:12:12 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 01/14] freeradius: check existence of openssl's commands in bootstrap
-Date: Mon,  3 May 2021 12:11:54 -0700
-Message-Id: <601c0804998f2e478e42fe5a0008df18b73d3b8b.1620069041.git.akuster808@gmail.com>
+Subject: [hardknott 03/14] python3-pysonos: Upgrade 0.0.42 -> 0.0.43
+Date: Mon,  3 May 2021 12:11:56 -0700
+Message-Id: <2eb29a380566cfb7c566961ecb116c051639cf47.1620069041.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1620069041.git.akuster808@gmail.com>
 References: <cover.1620069041.git.akuster808@gmail.com>
 
-From: Kai Kang <kai.kang@windriver.com>
+From: Leon Anavi <leon.anavi@konsulko.com>
 
-It calls openssl's commands 'dhparam' and 'pkcs12' in script bootstrap.
-These commands are configurable based on configure options 'no-dh' and
-'no-des', and may not be provided by openssl. So check existence of
-these commands. If not, abort running of script bootstrap.
+Upgrade to release 0.0.43:
 
-1. https://github.com/openssl/openssl/blob/master/apps/build.info#L37
-2. https://github.com/openssl/openssl/blob/master/apps/build.info#L22
+- Downgrade asyncio log severity
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit c8ceefc5c3fa5ce87f0e1b0a8f5bb06b259d1e76)
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+(cherry picked from commit 2d9aca131f4885d78a3d5470f2ef9a8b3fb68a19)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...eck-openssl-cmds-in-script-bootstrap.patch | 38 +++++++++++++++++++
- .../freeradius/freeradius_3.0.21.bb           |  1 +
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/freeradius/files/check-openssl-cmds-in-script-bootstrap.patch
+ .../{python3-pysonos_0.0.42.bb => python3-pysonos_0.0.43.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pysonos_0.0.42.bb => python3-pysonos_0.0.43.bb} (79%)
 
-diff --git a/meta-networking/recipes-connectivity/freeradius/files/check-openssl-cmds-in-script-bootstrap.patch b/meta-networking/recipes-connectivity/freeradius/files/check-openssl-cmds-in-script-bootstrap.patch
-new file mode 100644
-index 0000000000..fcadae93a0
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/freeradius/files/check-openssl-cmds-in-script-bootstrap.patch
-@@ -0,0 +1,38 @@
-+bootstrap: check commands of openssl exist
-+
-+It calls openssl commands dhparam and pkcs12 in script bootstrap. These
-+commands are configurable based on configure options 'no-dh' and
-+'no-des', and may not be provided by openssl. So check existence of
-+these commands. If not, abort running of script bootstrap.
-+
-+1. https://github.com/openssl/openssl/blob/master/apps/build.info#L37
-+2. https://github.com/openssl/openssl/blob/master/apps/build.info#L22
-+
-+Upstream-Status: Denied [https://github.com/FreeRADIUS/freeradius-server/pull/4059]
-+				 The maintainer commented in the pull that the script could
-+				 be run on a host which provides these openssl commands.
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+ raddb/certs/bootstrap | 8 ++++++++
-+ 1 file changed, 8 insertions(+)
-+
-+diff --git a/raddb/certs/bootstrap b/raddb/certs/bootstrap
-+index 0f719aafd4..17feddbeeb 100755
-+--- a/raddb/certs/bootstrap
-++++ b/raddb/certs/bootstrap
-+@@ -13,6 +13,14 @@
-+ umask 027
-+ cd `dirname $0`
-+ 
-++#  check commands of openssl exist
-++for cmd in dhparam pkcs12; do
-++	if ! openssl ${cmd} -help >/dev/null 2>&1; then
-++		echo "Error: command ${cmd} is not supported by openssl."
-++		exit 1
-++	fi
-++done
-++
-+ make -h > /dev/null 2>&1
-+ 
-+ #
-diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
-index 864a4e9447..a6df2aeb03 100644
---- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
-+++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
-@@ -31,6 +31,7 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0
-     file://0001-workaround-error-with-autoconf-2.7.patch \
-     file://radiusd.service \
-     file://radiusd-volatiles.conf \
-+    file://check-openssl-cmds-in-script-bootstrap.patch \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-pysonos_0.0.42.bb b/meta-python/recipes-devtools/python/python3-pysonos_0.0.43.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-pysonos_0.0.42.bb
+rename to meta-python/recipes-devtools/python/python3-pysonos_0.0.43.bb
+index 25defabc51..dbb6a8d8f6 100644
+--- a/meta-python/recipes-devtools/python/python3-pysonos_0.0.42.bb
++++ b/meta-python/recipes-devtools/python/python3-pysonos_0.0.43.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=07b0e2ca9ac77cd65cd4edf2e13367ea"
  
- SRCREV = "af428abda249b2279ba0582180985a9f6f4a144a"
+-SRC_URI[sha256sum] = "20b45fa1779a01325e67822d243e1a3f7657d8b515308d84c1eb3c805cc3bdb5"
++SRC_URI[sha256sum] = "47be2b37defc856f15d7e7a419cfb939e9822750efe968db192156ebeba31684"
+ 
+ inherit pypi setuptools3
+ 
 -- 
 2.17.1
 
