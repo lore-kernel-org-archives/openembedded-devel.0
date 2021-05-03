@@ -1,80 +1,77 @@
-Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
- by mx.groups.io with SMTP id smtpd.web09.1806.1620069138121166595
+Received: from mail-ot1-f52.google.com (mail-ot1-f52.google.com [209.85.210.52])
+ by mx.groups.io with SMTP id smtpd.web12.1707.1620069138643343891
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 03 May 2021 12:12:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=PLghHj6/;
- spf=pass (domain: gmail.com, ip: 209.85.167.182, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f182.google.com with SMTP id l6so6454434oii.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=MFuFDZ5z;
+ spf=pass (domain: gmail.com, ip: 209.85.210.52, mailfrom: akuster808@gmail.com)
+Received: by mail-ot1-f52.google.com with SMTP id x54-20020a05683040b6b02902a527443e2fso6093997ott.1
         for <openembedded-devel@lists.openembedded.org>; Mon, 03 May 2021 12:12:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=p9HJx8nXCPHB/xFC7b49ZhosgcSkqvrXL2ct0F7Ipxc=;
-        b=PLghHj6/n6hZVLSNhFMjGvMSI936Su/Mg9YA3YcPTzbb7h5Hwsyblhs1IEbSg4+bJg
-         lPgXTGMYM+Dbb412S8TQTcWiH02cr/pJDnztWutAe1F6/oG7b3rctGyOAWq88H0cr9wc
-         qrdXU+RBNmvExRxLkFcePa56a5ki+KvMbq10t8Q4e/BtumjO7PCAeLDdAyG1NQIS2YkV
-         La8LoDySAWhhS+lufqNf6EtQf0efq1aXYmyetG0d6s7ArLX5pUT8PLfVne9U22R1g2KQ
-         gapLUI3O7jTHo9hMlsepq+naJHW0h8ETblSLTa4WJKXW7wu/F5MDbERoGvvsbcY6J7e4
-         eRjA==
+        bh=2ir5Heo212tADlh46txwsZhA03yEdzzuoivpBtqSA70=;
+        b=MFuFDZ5zAF3Ru85IqYxjpq0ZQiNi1JhxBqqOCjY8NOqEnpUDNXWIGv7UNRobpN4bgF
+         sM7bBQZMFobZMP9r2qBITyq6Ok4BDiTZF1u4Mz3I5wC0fgaNypAnd7PhdKc7NDuSJivM
+         pkJOp+yla/sBzpbv1NXi9ZstQKfI32AWZHLhTI2IN/OJT0HQ4hRawFyLjSWHpmPpem+l
+         DHh13TRsWwGisFICJh4q513QfDmyHbqTp0dTiq8PHtXl50aa1vM1VIyHCBzPuo0+1ay1
+         slkWoK4iYo29N9S34kM1VDo0pX7YQL12U36DGfgMBqlJVlTVST/GPseVhxUV9gCa7eRw
+         WnXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=p9HJx8nXCPHB/xFC7b49ZhosgcSkqvrXL2ct0F7Ipxc=;
-        b=SAnNIVpJsxYY479dtv6AA23GVWzTMJ2GYbDGtovjVsy9+U4CloRirpisTgN2V6a77c
-         Rg/vZ7+K3GYHcc5qx0xmVb4QF0U3FP0H8MOy2fwcgjfn+IFMFKsKnkiTYmioCbY5r5uI
-         pQuyRxx7x/ZYhICuyRNSnz3XZjTEW+28+vZTgfqHiuOOaLxYRUX4kq20AVxtzjbjnXfi
-         x2/Wcoq/lXf9rE0C9M9e9bkm3ocOqMsSN46X56bGkxfnUk43ZoZsZjA3Lnuefiol6cH+
-         kKFajrlDMqL2VzBxnRz9llqJ61mDnZIcA8Hg9Dx85TT+Ua6y/t5TrU8NyoQWVavg39yZ
-         kGUw==
-X-Gm-Message-State: AOAM532kTFwslWzurU4PrORzP6iSb1BrA/lu7awIRGAfM9L+jRwSQ5cx
-	ITOcF7Z2XyXq9c8/eN9KI5FcAnd+dr1BFg==
-X-Google-Smtp-Source: ABdhPJxdNCacteSOpjudHTRvk/EMA57lRWxoR0z9M0/+nJkQcPC1MyVDJ3k5W3rjNL4/ZhO2+cpfNg==
-X-Received: by 2002:aca:5856:: with SMTP id m83mr73009oib.20.1620069137144;
+        bh=2ir5Heo212tADlh46txwsZhA03yEdzzuoivpBtqSA70=;
+        b=FG1kGhJkbbGI0DOVIcGF4TnPkRTksNcNqWZMBu66ZnX2ZNOMZ4+C4yhOb/sOvYqHc2
+         ZPrAZLax0rXNIYm2KiWhKv0SzfckJ5K1c3gqnitd0NbfopQ1/a9x6KlGKbifHzkMm0ic
+         maeXKCBC3aCBbnJY/oTU9UrZAvHOsoGgXNws7W3wIPNUgiNsBwYSxUZIlMIXiTkCqF8O
+         1aaBNGo6ep7fCV6tN9WPnFcLT8iqhkFF60/4FnyJP1X6ji59pInoBzjzWgmWxObwhm11
+         LG8nDix/4AhcE9mDBqDtDnvIuOrwyH7KwoMI2418CdCrv3LWSHg84jxrcfswIFVXPmIt
+         tFjw==
+X-Gm-Message-State: AOAM532P3cooS8/v28aXDjFKsXau/QDDiqvVHGISSQ7qNUFuSLf1NY1g
+	tDyAkDZDd0ZKaOFuBXt7HxSKgCeTRXRELQ==
+X-Google-Smtp-Source: ABdhPJx5CWmPgpFPJle+OFP7V1pPrZ2pb+8ko0Sb6mxNey223/bwwYi7WonDelXxW+gMk+KYQ59Yig==
+X-Received: by 2002:a05:6830:16c4:: with SMTP id l4mr6478065otr.93.1620069137874;
         Mon, 03 May 2021 12:12:17 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:dc35:22d6:72af:c1da])
-        by smtp.gmail.com with ESMTPSA id s85sm150047oos.4.2021.05.03.12.12.16
+        by smtp.gmail.com with ESMTPSA id s85sm150047oos.4.2021.05.03.12.12.17
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 May 2021 12:12:16 -0700 (PDT)
+        Mon, 03 May 2021 12:12:17 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 08/14] redis: upgrade 6.2.1 -> 6.2.2
-Date: Mon,  3 May 2021 12:12:01 -0700
-Message-Id: <085332dcd273564b13c9261429947ebb33f1652d.1620069041.git.akuster808@gmail.com>
+Subject: [hardknott 09/14] gimp: Disable vector icons on musl/x86
+Date: Mon,  3 May 2021 12:12:02 -0700
+Message-Id: <8dcdded940849a729aa1c910e0f39da8290ab0e5.1620069042.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1620069041.git.akuster808@gmail.com>
 References: <cover.1620069041.git.akuster808@gmail.com>
 
-From: zangrc <zangrc.fnst@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+it uses qemu underneath which segfaults on musl/x86
+until its fixed, we disable vector icons
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 4b04112fddb7b2ef5d4b61975d385b386bbd9f5b)
+(cherry picked from commit 44ca91f0fe174f9a69bc3e66ce17e1a2ae8447a4)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-extended/redis/{redis_6.2.1.bb => redis_6.2.2.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/redis/{redis_6.2.1.bb => redis_6.2.2.bb} (96%)
+ meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-extended/redis/redis_6.2.1.bb b/meta-oe/recipes-extended/redis/redis_6.2.2.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/redis/redis_6.2.1.bb
-rename to meta-oe/recipes-extended/redis/redis_6.2.2.bb
-index 89990df3de..65b525709e 100644
---- a/meta-oe/recipes-extended/redis/redis_6.2.1.bb
-+++ b/meta-oe/recipes-extended/redis/redis_6.2.2.bb
-@@ -17,7 +17,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://GNU_SOURCE.patch \
-            file://0006-Define-correct-gregs-for-RISCV32.patch \
-            "
--SRC_URI[sha256sum] = "cd222505012cce20b25682fca931ec93bd21ae92cb4abfe742cf7b76aa907520"
-+SRC_URI[sha256sum] = "7a260bb74860f1b88c3d5942bf8ba60ca59f121c6dce42d3017bed6add0b9535"
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb b/meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb
+index a5e6990580..717716e1f9 100644
+--- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb
++++ b/meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb
+@@ -55,6 +55,7 @@ EXTRA_OECONF = "--disable-python \
  
- inherit autotools-brokensep update-rc.d systemd useradd
+ EXTRA_OECONF_append_mipsarch = " --disable-vector-icons"
+ EXTRA_OECONF_append_libc-musl_riscv32 = " --disable-vector-icons"
++EXTRA_OECONF_append_libc-musl_x86 = " --disable-vector-icons"
+ EXTRA_OECONF_append_arm = " --disable-vector-icons"
  
+ do_configure_append() {
 -- 
 2.17.1
 
