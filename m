@@ -1,642 +1,141 @@
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
- by mx.groups.io with SMTP id smtpd.web11.862.1620076958415689291
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.1339.1620078963620615430
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 May 2021 14:22:38 -0700
+ Mon, 03 May 2021 14:56:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=cUEOgPw4;
- spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f175.google.com with SMTP id m37so4716870pgb.8
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 May 2021 14:22:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=MLVERi1KQHSOYG0MqezRaIl+Ir1hCay2/y7uJzMaE5w=;
-        b=cUEOgPw4lmILc1cdAbXfslXl8Fnp+3eDZFsOLUw98aTOO4raE6BJuFnYxqFIV8vgCe
-         0MmvsI2TWgzmkIsN7RYQZ6sd0tQGSLpvklEbybID6stedxD5XGsIDb/nfrV+oykJdsFe
-         M4z6NBpNnZoPk1lOBsyavtCTA1WXBcPEBt8l+7N9/9Mmr2khXnC7n7vYXY6QVGimD+6X
-         sLy8ePaOSvGiwoyp0N4DKyfr7Xv8HL74xlKoDEFwx4a5u7pCV0Gxf7du4OmoFlLkPFI0
-         B/rJ6FLjO9JDt3AXbkOB0jWpnBeJ2l7PB1AhlukLbtkCFU5wOIIEiUH+tcZCDC5CNqFh
-         gGkw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=MLVERi1KQHSOYG0MqezRaIl+Ir1hCay2/y7uJzMaE5w=;
-        b=smtjWqU7zs6RiZEH1udilmfZpbwhh/lPA786VfmH0onnd9FErz3L6xh4fOd/X48IQZ
-         p7FBF0Z3BdGYNzKwKam80vbAfptFVLfm7wUYxppSlmQxYm/WjhOiX+6sp4pUEA5NQwpH
-         +iJAatxQtlO7gNCwtAh//ACwPCZl5AY5RhgnnHbQREtNDhhtS3jjPKo7I88+kXLU5gwU
-         J7tKVQH89ua30twMqvbebnrXbIC5lXA7jBQfe1efVD0Jn6MpfHD/D1flH0W+txoSiEyJ
-         GoQ0AJTLD4pruXsHRx1ZXkk6atZBzdBqdI9fX1MbO7dGh6RMj92IhWvslxTKeNnkjEKh
-         wSDA==
-X-Gm-Message-State: AOAM531hCHl5hRAsH5NfRbu7ziAhbI8JYoRtcJYdsJq4la/+7/8hnftz
-	g2jXOAcSpQng7YMEgC22lL3duAjWATBi4g==
-X-Google-Smtp-Source: ABdhPJwruw6MAyQY6vjuufpn7MnN6BYVqgzZ5p1cV2TspXAkP6HYCIjLyWDRbJ9SORKdNNByQzb7Yw==
-X-Received: by 2002:a63:1813:: with SMTP id y19mr19819334pgl.144.1620076957244;
-        Mon, 03 May 2021 14:22:37 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a7ac])
-        by smtp.gmail.com with ESMTPSA id u12sm9701113pfh.122.2021.05.03.14.22.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 May 2021 14:22:36 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id ABEEE40C56;
+	Mon,  3 May 2021 21:56:02 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id iVKdAvJfuEqx; Mon,  3 May 2021 21:56:02 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8E25740AB7;
+	Mon,  3 May 2021 21:56:01 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 42F591745D7;
+	Mon,  3 May 2021 17:56:01 -0400 (EDT)
+From: "Denys Dmytriyenko" <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] libowfat: Replace __pure__ with pure and remove using __deprecated__
-Date: Mon,  3 May 2021 14:22:35 -0700
-Message-Id: <20210503212235.3550680-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Denys Dmytriyenko <denis@denix.org>
+Subject: [dunfell][PATCH] linuxptp: Fix cross build
+Date: Mon,  3 May 2021 17:56:00 -0400
+Message-Id: <1620078960-57111-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+
+From: Khem Raj <raj.khem@gmail.com>
+
+Adjust incdefs.sh to use cross tools to poke for system functionality
+Re-enable using incdefs.sh
+export KBUILD_OUTPUT to point to recipe sysroot
+
+(From meta-oe rev: b6022761d6880382c5e6ffa4b3dc6f1ec2ae1e73)
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Denys Dmytriyenko <denis@denix.org>
 ---
- ..._pure__-with-compiler-attribute-pure.patch | 562 ++++++++++++++++++
- .../recipes-support/ncp/libowfat_0.32.bb      |   1 +
- 2 files changed, 563 insertions(+)
- create mode 100644 meta-networking/recipes-support/ncp/libowfat/0001-replace-__pure__-with-compiler-attribute-pure.patch
+ .../linuxptp/Use-cross-cpp-in-incdefs.patch        | 26 +++++++++++++++++++
+ .../linuxptp/no-incdefs-using-host-headers.patch   | 29 ----------------------
+ .../recipes-connectivity/linuxptp/linuxptp_2.0.bb  |  7 +++---
+ 3 files changed, 30 insertions(+), 32 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch
+ delete mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
 
-diff --git a/meta-networking/recipes-support/ncp/libowfat/0001-replace-__pure__-with-compiler-attribute-pure.patch b/meta-networking/recipes-support/ncp/libowfat/0001-replace-__pure__-with-compiler-attribute-pure.patch
+diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch b/meta-oe/recipes-connectivity/linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch
 new file mode 100644
-index 0000000000..3ad3b4aa8d
+index 0000000..8760886
 --- /dev/null
-+++ b/meta-networking/recipes-support/ncp/libowfat/0001-replace-__pure__-with-compiler-attribute-pure.patch
-@@ -0,0 +1,562 @@
-+From 408e7dfaf2eb735804f62728de679972867c30d5 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 3 May 2021 13:53:10 -0700
-+Subject: [PATCH] replace __pure__ with compiler attribute 'pure'
++++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch
+@@ -0,0 +1,26 @@
++From 8a4cad5e2f2cbb6a34bdc6e877fe499502b8c4c8 Mon Sep 17 00:00:00 2001
++From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
++Date: Fri, 23 Dec 2016 18:12:29 +0100
++Subject: [PATCH] linuxptp: Use cross cpp in incdefs
 +
-+Remove defining __deprecated__
++Use cross cpp incdefs.sh shell script since we are doing cross compiling
++we need to ensure we use correct setttings from toolchain
 +
-+Upstream-Status: OE-Specific [Untested with dietlibc]
++Upstream-Status: Inappropriate [OE-Specific]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ byte.h     |  22 ++++++----
-+ critbit.h  |  12 ++++--
-+ fmt.h      | 100 +++++++++++++++++++++++---------------------
-+ str.h      |  22 ++++++----
-+ stralloc.h |  20 +++++----
-+ 5 files changed, 103 insertions(+), 73 deletions(-)
 +
-+--- a/byte.h
-++++ b/byte.h
-+@@ -2,6 +2,16 @@
-+ #ifndef BYTE_H
-+ #define BYTE_H
-+ 
-++#ifndef __has_attribute
-++  #define __has_attribute(x) 0
-++#endif
-++
-++#if __has_attribute(pure)
-++#define __PURE __attribute__ ((pure))
-++#else
-++#define __PURE
-++#endif
-++
-+ /* for size_t: */
-+ #include <stddef.h>
-+ 
-+@@ -9,17 +19,13 @@
-+ extern "C" {
-+ #endif
-+ 
-+-#ifndef __pure__
-+-#define __pure__
-+-#endif
-+-
-+ /* byte_chr returns the smallest integer i between 0 and len-1
-+  * inclusive such that one[i] equals needle, or len if not found. */
-+-size_t byte_chr(const void* haystack, size_t len, char needle) __pure__;
-++size_t byte_chr(const void* haystack, size_t len, char needle) __PURE;
-+ 
-+ /* byte_rchr returns the largest integer i between 0 and len-1 inclusive
-+  * such that one[i] equals needle, or len if not found. */
-+-size_t byte_rchr(const void* haystack,size_t len,char needle) __pure__;
-++size_t byte_rchr(const void* haystack,size_t len,char needle) __PURE;
-+ 
-+ /* byte_copy copies in[0] to out[0], in[1] to out[1], ... and in[len-1]
-+  * to out[len-1]. */
-+@@ -34,14 +40,14 @@ void byte_copyr(void* out, size_t len, c
-+  * than, equal to, or greater than the string b[0], b[1], ...,
-+  * b[len-1]. When the strings are different, byte_diff does not read
-+  * bytes past the first difference. */
-+-int byte_diff(const void* a, size_t len, const void* b) __pure__;
-++int byte_diff(const void* a, size_t len, const void* b) __PURE;
-+ 
-+ /* byte_zero sets the bytes out[0], out[1], ..., out[len-1] to 0 */
-+ void byte_zero(void* out, size_t len);
-+ 
-+ #define byte_equal(s,n,t) (!byte_diff((s),(n),(t)))
-+ 
-+-int byte_equal_notimingattack(const void* a, size_t len,const void* b) __pure__;
-++int byte_equal_notimingattack(const void* a, size_t len,const void* b) __PURE;
-+ 
-+ #if defined(__i386__) || defined(__x86_64__)
-+ #define UNALIGNED_ACCESS_OK
-+--- a/critbit.h
-++++ b/critbit.h
-+@@ -8,15 +8,21 @@ extern "C" {
-+ /* for __pure__ if we are compiling under dietlibc */
-+ #include <stddef.h>
-+ 
-+-#ifndef __pure__
-+-#define __pure__
-++#ifndef __has_attribute
-++  #define __has_attribute(x) 0
-++#endif
-++
-++#if __has_attribute(pure)
-++#define __PURE __attribute__ ((pure))
-++#else
-++#define __PURE
-+ #endif
-+ 
-+ typedef struct {
-+   void *root;
-+ } critbit0_tree;
-+ 
-+-int critbit0_contains(critbit0_tree *t, const char *u) __pure__;
-++int critbit0_contains(critbit0_tree *t, const char *u) __PURE;
-+ int critbit0_insert(critbit0_tree *t, const char *u);
-+ int critbit0_delete(critbit0_tree *t, const char *u);
-+ void critbit0_clear(critbit0_tree *t);
-+--- a/fmt.h
-++++ b/fmt.h
-+@@ -2,6 +2,16 @@
-+ #ifndef FMT_H
-+ #define FMT_H
-+ 
-++#ifndef __has_attribute
-++  #define __has_attribute(x) 0
-++#endif
-++
-++#if __has_attribute(pure)
-++#define __PURE __attribute__ ((pure))
-++#else
-++#define __PURE
-++#endif
-++
-+ /* for size_t: */
-+ #include <stddef.h>
-+ /* for uint32_t */
-+@@ -15,10 +25,6 @@
-+ extern "C" {
-+ #endif
-+ 
-+-#ifndef __pure__
-+-#define __pure__
-+-#endif
-+-
-+ #define FMT_LONG  41 /* enough space to hold -2^127 in decimal, plus \0 */
-+ #define FMT_ULONG 40 /* enough space to hold 2^128 - 1 in decimal, plus \0 */
-+ #define FMT_8LONG 44 /* enough space to hold 2^128 - 1 in octal, plus \0 */
-+@@ -46,31 +52,31 @@ extern "C" {
-+ /* convert signed src integer -23 to ASCII '-','2','3', return number of
-+  * bytes of value in output format (3 in this example).
-+  * If dest is not NULL, write result to dest */
-+-size_t fmt_long(char *dest,signed long src) __pure__;
-++size_t fmt_long(char *dest,signed long src) __PURE;
-+ 
-+ /* convert unsigned src integer 23 to ASCII '2','3', return number of
-+  * bytes of value in output format (2 in this example).
-+  * If dest is not NULL, write result to dest */
-+-size_t fmt_ulong(char *dest,unsigned long src) __pure__;
-++size_t fmt_ulong(char *dest,unsigned long src) __PURE;
-+ 
-+ /* convert unsigned src integer 0x23 to ASCII '2','3', return number of
-+  * bytes of value in output format (2 in this example).
-+  * If dest is not NULL, write result to dest */
-+-size_t fmt_xlong(char *dest,unsigned long src) __pure__;
-++size_t fmt_xlong(char *dest,unsigned long src) __PURE;
-+ 
-+ /* convert unsigned src integer 023 to ASCII '2','3', return number of
-+  * bytes of value in output format (2 in this example).
-+  * If dest is not NULL, write result to dest */
-+-size_t fmt_8long(char *dest,unsigned long src) __pure__;
-++size_t fmt_8long(char *dest,unsigned long src) __PURE;
-+ 
-+ /* like fmt_long but for long long */
-+-size_t fmt_longlong(char *dest,signed long long src) __pure__;
-++size_t fmt_longlong(char *dest,signed long long src) __PURE;
-+ 
-+ /* like fmt_ulong but for unsigned long long */
-+-size_t fmt_ulonglong(char *dest,unsigned long long src) __pure__;
-++size_t fmt_ulonglong(char *dest,unsigned long long src) __PURE;
-+ 
-+ /* like fmt_xlong but for unsigned long long */
-+-size_t fmt_xlonglong(char *dest,unsigned long long src) __pure__;
-++size_t fmt_xlonglong(char *dest,unsigned long long src) __PURE;
-+ 
-+ #define fmt_uint(dest,src) fmt_ulong(dest,src)
-+ #define fmt_int(dest,src) fmt_long(dest,src)
-+@@ -81,22 +87,22 @@ size_t fmt_xlonglong(char *dest,unsigned
-+  * Does not truncate! */
-+ /* fmt_ulong0(buf,23,4) -> '0','0','2','3' return 4 */
-+ /* fmt_ulong0(buf,234,2) -> '2','3','4', return 3 */
-+-size_t fmt_ulong0(char *,unsigned long src,size_t padto) __pure__;
-++size_t fmt_ulong0(char *,unsigned long src,size_t padto) __PURE;
-+ 
-+ #define fmt_uint0(buf,src,padto) fmt_ulong0(buf,src,padto)
-+ 
-+ /* convert src double 1.7 to ASCII '1','.','7', return length.
-+  * If dest is not NULL, write result to dest */
-+-size_t fmt_double(char *dest, double d,int max,int prec) __pure__;
-++size_t fmt_double(char *dest, double d,int max,int prec) __PURE;
-+ 
-+ /* if src is negative, write '-' and return 1.
-+  * if src is positive, write '+' and return 1.
-+  * otherwise return 0 */
-+-size_t fmt_plusminus(char *dest,int src) __pure__;
-++size_t fmt_plusminus(char *dest,int src) __PURE;
-+ 
-+ /* if src is negative, write '-' and return 1.
-+  * otherwise return 0. */
-+-size_t fmt_minus(char *dest,int src) __pure__;
-++size_t fmt_minus(char *dest,int src) __PURE;
-+ 
-+ /* copy str to dest until \0 byte, return number of copied bytes. */
-+ /* fmt_str(NULL,str) == strlen(str) */
-+@@ -108,11 +114,11 @@ size_t fmt_minus(char *dest,int src) __p
-+  * This is more efficient because strcat needs to scan the string to
-+  * find the end and append.
-+  */
-+-size_t fmt_str(char *dest,const char *src) __pure__;
-++size_t fmt_str(char *dest,const char *src) __PURE;
-+ 
-+ /* copy str to dest until \0 byte or limit bytes copied.
-+  * return number of copied bytes. */
-+-size_t fmt_strn(char *dest,const char *src,size_t limit) __pure__;
-++size_t fmt_strn(char *dest,const char *src,size_t limit) __PURE;
-+ 
-+ /* copy n bytes from src to dest, return n */
-+ static inline size_t fmt_copybytes(char* dest,const char* src,size_t n) {
-+@@ -124,56 +130,56 @@ static inline size_t fmt_copybytes(char*
-+  * write padlen-srclen spaces, if that is >= 0.  Then copy srclen
-+  * characters from src.  Truncate only if total length is larger than
-+  * maxlen.  Return number of characters written. */
-+-size_t fmt_pad(char* dest,const char* src,size_t srclen,size_t padlen,size_t maxlen) __pure__;
-++size_t fmt_pad(char* dest,const char* src,size_t srclen,size_t padlen,size_t maxlen) __PURE;
-+ 
-+ /* "foo" -> "foo  "
-+  * append padlen-srclen spaces after dest, if that is >= 0.  Truncate
-+  * only if total length is larger than maxlen.  Return number of
-+  * characters written. */
-+-size_t fmt_fill(char* dest,size_t srclen,size_t padlen,size_t maxlen) __pure__;
-++size_t fmt_fill(char* dest,size_t srclen,size_t padlen,size_t maxlen) __PURE;
-+ 
-+ /* 1 -> "1", 4900 -> "4.9k", 2300000 -> "2.3M" */
-+-size_t fmt_human(char* dest,unsigned long long l) __pure__;
-++size_t fmt_human(char* dest,unsigned long long l) __PURE;
-+ 
-+ /* 1 -> "1", 4900 -> "4.8k", 2300000 -> "2.2M" */
-+-size_t fmt_humank(char* dest,unsigned long long l) __pure__;
-++size_t fmt_humank(char* dest,unsigned long long l) __PURE;
-+ 
-+ /* "Sun, 06 Nov 1994 08:49:37 GMT" */
-+ size_t fmt_httpdate(char* dest,time_t t);	/* not marked pure because it calls gmtime */
-+ 
-+ /* "2014-05-27T19:22:16.247Z" */
-+-size_t fmt_iso8601(char* dest,time_t t) __pure__;
-++size_t fmt_iso8601(char* dest,time_t t) __PURE;
-+ 
-+ #define FMT_UTF8 5
-+ #define FMT_ASN1LENGTH 17 /* enough space to hold 2^128-1 */
-+ #define FMT_ASN1TAG 19 /* enough space to hold 2^128-1 */
-+ 
-+ /* some variable length encodings for integers */
-+-size_t fmt_utf8(char* dest,uint32_t n) __pure__;	/* can store 0-0x7fffffff */
-+-size_t fmt_asn1derlength(char* dest,unsigned long long l) __pure__;	/* 0-0x7f: 1 byte, above that 1+bytes_needed bytes */
-+-size_t fmt_asn1dertag(char* dest,unsigned long long l) __pure__;	/* 1 byte for each 7 bits; upper bit = more bytes coming */
-++size_t fmt_utf8(char* dest,uint32_t n) __PURE;	/* can store 0-0x7fffffff */
-++size_t fmt_asn1derlength(char* dest,unsigned long long l) __PURE;	/* 0-0x7f: 1 byte, above that 1+bytes_needed bytes */
-++size_t fmt_asn1dertag(char* dest,unsigned long long l) __PURE;	/* 1 byte for each 7 bits; upper bit = more bytes coming */
-+ 
-+ /* Google Protocol Buffers, https://developers.google.com/protocol-buffers/docs/encoding */
-+-size_t fmt_varint(char* dest,unsigned long long l) __pure__;	/* protocol buffers encoding; like asn1dertag but little endian */
-+-size_t fmt_pb_tag(char* dest,size_t fieldno,unsigned char type) __pure__;	/* protocol buffer tag */
-+-size_t fmt_pb_type0_int(char* dest,unsigned long long l) __pure__;	/* protocol buffers encoding: type 0 bool/enum/int32/uint32/int64/uint64 */
-+-size_t fmt_pb_type0_sint(char* dest,signed long long l) __pure__;/* protocol buffers encoding: type 0 sint32/sint64 */
-+-size_t fmt_pb_type1_double(char* dest,double d) __pure__;	/* protocol buffers encoding: double (64-bit little endian blob) */
-+-size_t fmt_pb_type1_fixed64(char* dest,uint64_t l) __pure__;	/* protocol buffers encoding: 64-bit little endian blob */
-++size_t fmt_varint(char* dest,unsigned long long l) __PURE;	/* protocol buffers encoding; like asn1dertag but little endian */
-++size_t fmt_pb_tag(char* dest,size_t fieldno,unsigned char type) __PURE;	/* protocol buffer tag */
-++size_t fmt_pb_type0_int(char* dest,unsigned long long l) __PURE;	/* protocol buffers encoding: type 0 bool/enum/int32/uint32/int64/uint64 */
-++size_t fmt_pb_type0_sint(char* dest,signed long long l) __PURE;/* protocol buffers encoding: type 0 sint32/sint64 */
-++size_t fmt_pb_type1_double(char* dest,double d) __PURE;	/* protocol buffers encoding: double (64-bit little endian blob) */
-++size_t fmt_pb_type1_fixed64(char* dest,uint64_t l) __PURE;	/* protocol buffers encoding: 64-bit little endian blob */
-+ 
-+ /* fmt_pb_type2_string can return 0 if (s,l) is clearly invalid */
-+-size_t fmt_pb_type2_string(char* dest,const char* s,size_t l) __pure__;	/* protocol buffers encoding: varint length + blob */
-+-size_t fmt_pb_type5_float(char* dest,float f) __pure__;		/* protocol buffers encoding: float (32-bit little endian blob) */
-+-size_t fmt_pb_type5_fixed32(char* dest,uint32_t l) __pure__;	/* protocol buffers encoding: 32-bit little endian blob */
-+-
-+-size_t fmt_pb_int(char* dest,size_t fieldno,unsigned long long l) __pure__;
-+-size_t fmt_pb_sint(char* dest,size_t fieldno,signed long long l) __pure__;
-+-size_t fmt_pb_double(char* dest,size_t fieldno,double d) __pure__;
-+-size_t fmt_pb_float(char* dest,size_t fieldno,float f) __pure__;
-+-size_t fmt_pb_string(char* dest,size_t fieldno,const char* s,size_t l) __pure__;
-++size_t fmt_pb_type2_string(char* dest,const char* s,size_t l) __PURE;	/* protocol buffers encoding: varint length + blob */
-++size_t fmt_pb_type5_float(char* dest,float f) __PURE;		/* protocol buffers encoding: float (32-bit little endian blob) */
-++size_t fmt_pb_type5_fixed32(char* dest,uint32_t l) __PURE;	/* protocol buffers encoding: 32-bit little endian blob */
-++
-++size_t fmt_pb_int(char* dest,size_t fieldno,unsigned long long l) __PURE;
-++size_t fmt_pb_sint(char* dest,size_t fieldno,signed long long l) __PURE;
-++size_t fmt_pb_double(char* dest,size_t fieldno,double d) __PURE;
-++size_t fmt_pb_float(char* dest,size_t fieldno,float f) __PURE;
-++size_t fmt_pb_string(char* dest,size_t fieldno,const char* s,size_t l) __PURE;
-+ 
-+ /* fmt_netstring can return 0 if (src,len) is clearly invalid */
-+-size_t fmt_netstring(char* dest,const char* src,size_t len) __pure__;
-++size_t fmt_netstring(char* dest,const char* src,size_t len) __PURE;
-+ 
-+ /* Marshaling helper functions.
-+  * Escape one character, no matter if it needs escaping or not.
-+@@ -185,27 +191,27 @@ size_t fmt_netstring(char* dest,const ch
-+  * unicode codepoint) may be limited to 0x7f, 0xff or 0x10ffff. */
-+ 
-+ /* XML escaping: '&' -> '&amp;', '<' -> '&lt;', 'ö' -> '&#xf6;' */
-+-size_t fmt_escapecharxml(char* dest,uint32_t ch) __pure__;
-++size_t fmt_escapecharxml(char* dest,uint32_t ch) __PURE;
-+ /* HTML escaping is the same as XML escaping. */
-+-size_t fmt_escapecharhtml(char* dest,uint32_t ch) __pure__;
-++size_t fmt_escapecharhtml(char* dest,uint32_t ch) __PURE;
-+ 
-+ /* JSON escaping: '\' -> '\\', '"' -> '\"', 'ö' -> '\u00f6' */
-+-size_t fmt_escapecharjson(char* dest,uint32_t ch) __pure__;
-++size_t fmt_escapecharjson(char* dest,uint32_t ch) __PURE;
-+ 
-+ /* MIME quoted-printable escaping: 'ö' -> '=f6', characters > 0xff not supported */
-+-size_t fmt_escapecharquotedprintable(char* dest,uint32_t ch) __pure__;
-++size_t fmt_escapecharquotedprintable(char* dest,uint32_t ch) __PURE;
-+ 
-+ /* MIME quoted-printable escaping with UTF-8: 'ö' -> '=c3=b6', characters > 0x7fffffff not supported */
-+-size_t fmt_escapecharquotedprintableutf8(char* dest,uint32_t ch) __pure__;
-++size_t fmt_escapecharquotedprintableutf8(char* dest,uint32_t ch) __PURE;
-+ 
-+ /* C99 style escaping: '\' -> '\\', newline -> '\n', 0xc2 -> '\302' */
-+-size_t fmt_escapecharc(char* dest,uint32_t ch) __pure__;
-++size_t fmt_escapecharc(char* dest,uint32_t ch) __PURE;
-+ 
-+ /* internal functions, may be independently useful */
-+ char fmt_tohex(char c) __attribute__((__const__));
-+ 
-+ #define fmt_strm(b,...) fmt_strm_internal(b,__VA_ARGS__,(char*)0)
-+-size_t fmt_strm_internal(char* dest,...) __pure__;
-++size_t fmt_strm_internal(char* dest,...) __PURE;
-+ 
-+ #ifndef MAX_ALLOCA
-+ #define MAX_ALLOCA 100000
-+--- a/str.h
-++++ b/str.h
-+@@ -8,8 +8,14 @@
-+ extern "C" {
-+ #endif
-+ 
-+-#ifndef __pure__
-+-#define __pure__
-++#ifndef __has_attribute
-++  #define __has_attribute(x) 0
-++#endif
-++
-++#if __has_attribute(pure)
-++#define __PURE __attribute__ ((pure))
-++#else
-++#define __PURE
-+ #endif
-+ 
-+ /* str_copy copies leading bytes from in to out until \0.
-+@@ -21,7 +27,7 @@ size_t str_copy(char *out,const char *in
-+  * equal to, or greater than the string b[0], b[1], ..., b[m-1]=='\0'.
-+  * If the strings are different, str_diff does not read bytes past the
-+  * first difference. */
-+-int str_diff(const char *a,const char *b) __pure__;
-++int str_diff(const char *a,const char *b) __PURE;
-+ 
-+ /* str_diffn returns negative, 0, or positive, depending on whether the
-+  * string a[0], a[1], ..., a[n]=='\0' is lexicographically smaller than,
-+@@ -29,24 +35,24 @@ int str_diff(const char *a,const char *b
-+  * If the strings are different, str_diffn does not read bytes past the
-+  * first difference. The strings will be considered equal if the first
-+  * limit characters match. */
-+-int str_diffn(const char *a,const char *b,size_t limit) __pure__;
-++int str_diffn(const char *a,const char *b,size_t limit) __PURE;
-+ 
-+ #ifdef __dietlibc__
-+ #include <string.h>
-+ #define str_len(foo) strlen(foo)
-+ #else
-+ /* str_len returns the index of \0 in s */
-+-size_t str_len(const char *s) __pure__;
-++size_t str_len(const char *s) __PURE;
-+ #endif
-+ 
-+ /* str_chr returns the index of the first occurance of needle or \0 in haystack */
-+-size_t str_chr(const char *haystack,char needle) __pure__;
-++size_t str_chr(const char *haystack,char needle) __PURE;
-+ 
-+ /* str_rchr returns the index of the last occurance of needle or \0 in haystack */
-+-size_t str_rchr(const char *haystack,char needle) __pure__;
-++size_t str_rchr(const char *haystack,char needle) __PURE;
-+ 
-+ /* str_start returns 1 if the b is a prefix of a, 0 otherwise */
-+-int str_start(const char *a,const char *b) __pure__;
-++int str_start(const char *a,const char *b) __PURE;
-+ 
-+ /* convenience shortcut to test for string equality */
-+ #define str_equal(s,t) (!str_diff((s),(t)))
-+--- a/stralloc.h
-++++ b/stralloc.h
-+@@ -2,16 +2,22 @@
-+ #ifndef STRALLOC_H
-+ #define STRALLOC_H
-+ 
-++#ifndef __has_attribute
-++  #define __has_attribute(x) 0
-++#endif
-++
-++#if __has_attribute(pure)
-++#define __PURE __attribute__ ((pure))
-++#else
-++#define __PURE
-++#endif
-++
-+ #include <stddef.h>
-+ 
-+ #ifdef __cplusplus
-+ extern "C" {
-+ #endif
-+ 
-+-#ifndef __pure__
-+-#define __pure__
-+-#endif
-+-
-+ /* stralloc is the internal data structure all functions are working on.
-+  * s is the string.
-+  * len is the used length of the string.
-+@@ -101,17 +107,17 @@ static inline int stralloc_APPEND(strall
-+ /* stralloc_starts returns 1 if the \0-terminated string in "in", without
-+  * the terminating \0, is a prefix of the string stored in sa. Otherwise
-+  * it returns 0. sa must already be allocated. */
-+-int stralloc_starts(stralloc* sa,const char* in) __pure__;
-++int stralloc_starts(stralloc* sa,const char* in) __PURE;
-+ 
-+ /* stralloc_diff returns negative, 0, or positive, depending on whether
-+  * a is lexicographically smaller than, equal to, or greater than the
-+  * string b. */
-+-int stralloc_diff(const stralloc* a,const stralloc* b) __pure__;
-++int stralloc_diff(const stralloc* a,const stralloc* b) __PURE;
-+ 
-+ /* stralloc_diffs returns negative, 0, or positive, depending on whether
-+  * a is lexicographically smaller than, equal to, or greater than the
-+  * string b[0], b[1], ..., b[n]=='\0'. */
-+-int stralloc_diffs(const stralloc* a,const char* b) __pure__;
-++int stralloc_diffs(const stralloc* a,const char* b) __PURE;
-+ 
-+ #define stralloc_equal(a,b) (!stralloc_diff((a),(b)))
-+ #define stralloc_equals(a,b) (!stralloc_diffs((a),(b)))
-+--- a/scan.h
-++++ b/scan.h
-+@@ -15,8 +15,14 @@
-+ extern "C" {
-+ #endif
-+ 
-+-#ifndef __pure__
-+-#define __pure__
-++#ifndef __has_attribute
-++  #define __has_attribute(x) 0
-++#endif
-++
-++#if __has_attribute(pure)
-++#define __PURE __attribute__ ((pure))
-++#else
-++#define __PURE
-+ #endif
-+ 
-+ /* This file declared functions used to decode / scan / unmarshal
-+@@ -84,18 +90,18 @@ size_t scan_double(const char *in, doubl
-+ size_t scan_plusminus(const char *src,signed int *dest);
-+ 
-+ /* return the highest integer n<=limit so that isspace(in[i]) for all 0<=i<=n */
-+-size_t scan_whitenskip(const char *in,size_t limit) __pure__;
-++size_t scan_whitenskip(const char *in,size_t limit) __PURE;
-+ 
-+ /* return the highest integer n<=limit so that !isspace(in[i]) for all 0<=i<=n */
-+-size_t scan_nonwhitenskip(const char *in,size_t limit) __pure__;
-++size_t scan_nonwhitenskip(const char *in,size_t limit) __PURE;
-+ 
-+ /* return the highest integer n<=limit so that in[i] is element of
-+  * charset (ASCIIZ string) for all 0<=i<=n */
-+-size_t scan_charsetnskip(const char *in,const char *charset,size_t limit) __pure__;
-++size_t scan_charsetnskip(const char *in,const char *charset,size_t limit) __PURE;
-+ 
-+ /* return the highest integer n<=limit so that in[i] is not element of
-+  * charset (ASCIIZ string) for all 0<=i<=n */
-+-size_t scan_noncharsetnskip(const char *in,const char *charset,size_t limit) __pure__;
-++size_t scan_noncharsetnskip(const char *in,const char *charset,size_t limit) __PURE;
-+ 
-+ /* try to parse ASCII GMT date; does not understand time zones. */
-+ /* example dates:
-+@@ -103,17 +109,17 @@ size_t scan_noncharsetnskip(const char *
-+  *   "Sunday, 06-Nov-94 08:49:37 GMT"
-+  *   "Sun Nov  6 08:49:37 1994"
-+  */
-+-size_t scan_httpdate(const char *in,time_t *t) __pure__;
-++size_t scan_httpdate(const char *in,time_t *t) __PURE;
-+ 
-+ /* try to parse ASCII ISO-8601 date; does not understand time zones. */
-+ /* example date: "2014-05-27T19:22:16Z" */
-+-size_t scan_iso8601(const char* in,struct timespec* t) __pure__;
-++size_t scan_iso8601(const char* in,struct timespec* t) __PURE;
-+ 
-+ /* some variable length encodings for integers */
-+-size_t scan_utf8(const char* in,size_t len,uint32_t* n) __pure__;
-+-size_t scan_utf8_sem(const char* in,size_t len,uint32_t* n) __pure__;
-+-size_t scan_asn1derlength(const char* in,size_t len,unsigned long long* n) __pure__;
-+-size_t scan_asn1dertag(const char* in,size_t len,unsigned long long* n) __pure__;
-++size_t scan_utf8(const char* in,size_t len,uint32_t* n) __PURE;
-++size_t scan_utf8_sem(const char* in,size_t len,uint32_t* n) __PURE;
-++size_t scan_asn1derlength(const char* in,size_t len,unsigned long long* n) __PURE;
-++size_t scan_asn1dertag(const char* in,size_t len,unsigned long long* n) __PURE;
-+ 
-+ /* Google protocol buffers */
-+ /* A protocol buffer is a sequence of (tag,value).
-+@@ -121,16 +127,16 @@ size_t scan_asn1dertag(const char* in,si
-+  *   which field in your struct is being sent. Integers must have type
-+  *   0, double type 1, strings type 2 and floats type 5. However, you
-+  *   have to check this yourself.
-+- */ 
-+-size_t scan_varint(const char* in,size_t len, unsigned long long* n) __pure__;	/* internal */
-+-size_t scan_pb_tag(const char* in,size_t len, size_t* fieldno,unsigned char* type) __pure__;
-++ */
-++size_t scan_varint(const char* in,size_t len, unsigned long long* n) __PURE;	/* internal */
-++size_t scan_pb_tag(const char* in,size_t len, size_t* fieldno,unsigned char* type) __PURE;
-+ 
-+ /* Then, depending on the field number, validate the type and call the
-+  * corresponding of these functions to parse the value */
-+-size_t scan_pb_type0_int(const char* in,size_t len,unsigned long long* l) __pure__;
-+-size_t scan_pb_type0_sint(const char* in,size_t len,signed long long* l) __pure__;
-+-size_t scan_pb_type1_double(const char* in,size_t len,double* d) __pure__;
-+-size_t scan_pb_type1_fixed64(const char* in,size_t len,uint64_t* b) __pure__;
-++size_t scan_pb_type0_int(const char* in,size_t len,unsigned long long* l) __PURE;
-++size_t scan_pb_type0_sint(const char* in,size_t len,signed long long* l) __PURE;
-++size_t scan_pb_type1_double(const char* in,size_t len,double* d) __PURE;
-++size_t scan_pb_type1_fixed64(const char* in,size_t len,uint64_t* b) __PURE;
-+ /* NOTE: scan_pb_type2_stringlen only parses the length of the string,
-+  * not the string itself. It will return the number of bytes parsed in
-+  * the length, then set slen to the value of the length integer it just
-+@@ -141,9 +147,9 @@ size_t scan_pb_type1_fixed64(const char*
-+  * parsing early without having to read and allocate memory for the rest
-+  * (potentially gigabytes) of the data announced by one unreasonable
-+  * string length value. */
-+-size_t scan_pb_type2_stringlen(const char* in,size_t len,const char** string, size_t* slen) __pure__;
-+-size_t scan_pb_type5_float(const char* in,size_t len,float* f) __pure__;
-+-size_t scan_pb_type5_fixed32(const char* in,size_t len,uint32_t* b) __pure__;
-++size_t scan_pb_type2_stringlen(const char* in,size_t len,const char** string, size_t* slen) __PURE;
-++size_t scan_pb_type5_float(const char* in,size_t len,float* f) __PURE;
-++size_t scan_pb_type5_fixed32(const char* in,size_t len,uint32_t* b) __PURE;
-+ 
-+ /* parse a netstring, input buffer is in (len bytes).
-+  * if parsing is successful:
-+@@ -153,7 +159,7 @@ size_t scan_pb_type5_fixed32(const char*
-+  *   return 0
-+  * Note: *dest will point inside the input buffer!
-+  */
-+-size_t scan_netstring(const char* in,size_t len,char** dest,size_t* slen) __pure__;
-++size_t scan_netstring(const char* in,size_t len,char** dest,size_t* slen) __PURE;
-+ 
-+ /* internal function that might be useful independently */
-+ /* convert from hex ASCII, return 0 to 15 for success or -1 for failure */
-+--- a/scan/scan_httpdate.c
-++++ b/scan/scan_httpdate.c
-+@@ -1,5 +1,4 @@
-+ #define _GNU_SOURCE
-+-#define __deprecated__
-+ #include "scan.h"
-+ #include "byte.h"
-+ #include "case.h"
-+--- a/scan/scan_iso8601.c
-++++ b/scan/scan_iso8601.c
-+@@ -1,5 +1,4 @@
-+ #define _GNU_SOURCE
-+-#define __deprecated__
-+ #include "scan.h"
-+ #include "byte.h"
-+ #include "case.h"
-diff --git a/meta-networking/recipes-support/ncp/libowfat_0.32.bb b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
-index d2f4df78ea..ec24578b7e 100644
---- a/meta-networking/recipes-support/ncp/libowfat_0.32.bb
-+++ b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
-@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
++ makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++--- a/incdefs.sh
+++++ b/incdefs.sh
++@@ -27,7 +27,7 @@ user_flags()
++ 	printf " -D_GNU_SOURCE"
++ 
++ 	# Get list of directories searched for header files.
++-	dirs=$(echo "" | ${CROSS_COMPILE}cpp -Wp,-v 2>&1 >/dev/null | grep ^" /")
+++	dirs=$(${CPP} -Wp,-v -xc /dev/null 2>&1 >/dev/null | grep ^" /")
++ 
++ 	# Look for clock_adjtime().
++ 	for d in $dirs; do
+diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch b/meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
+deleted file mode 100644
+index 02dbb23..0000000
+--- a/meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 8a4cad5e2f2cbb6a34bdc6e877fe499502b8c4c8 Mon Sep 17 00:00:00 2001
+-From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+-Date: Fri, 23 Dec 2016 18:12:29 +0100
+-Subject: [PATCH] linuxptp: no incdefs using host headers
+-
+-Avoid using host headers via incdefs.sh shell script.
+-
+-Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+----
+-
+- makefile | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/makefile b/makefile
+-index 8cdbd15..85174b8 100644
+---- a/makefile
+-+++ b/makefile
+-@@ -33,7 +33,7 @@ OBJECTS	= $(OBJ) hwstamp_ctl.o phc2sys.o phc_ctl.o pmc.o pmc_common.o \
+- SRC	= $(OBJECTS:.o=.c)
+- DEPEND	= $(OBJECTS:.o=.d)
+- srcdir	:= $(dir $(lastword $(MAKEFILE_LIST)))
+--incdefs := $(shell $(srcdir)/incdefs.sh)
+-+#incdefs := $(shell $(srcdir)/incdefs.sh)
+- version := $(shell $(srcdir)/version.sh $(srcdir))
+- VPATH	= $(srcdir)
+- 
+--- 
+-2.9.3
+-
+diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb b/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
+index 930c667..e80abc7 100644
+--- a/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
++++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
+@@ -4,15 +4,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- SRC_URI = "https://www.fefe.de/${BPN}/${BP}.tar.xz \
-            file://0001-Depend-on-haveuint128.h-for-umult64.c.patch \
-+           file://0001-replace-__pure__-with-compiler-attribute-pure.patch \
-           "
- SRC_URI[md5sum] = "ee015ccf45cb2bc61c942642038c2bdc"
- SRC_URI[sha256sum] = "f4b9b3d9922dc25bc93adedf9e9ff8ddbebaf623f14c8e7a5f2301bfef7998c1"
+ SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.tgz \
+            file://build-Allow-CC-and-prefix-to-be-overriden.patch \
+-           file://no-incdefs-using-host-headers.patch \
++           file://Use-cross-cpp-in-incdefs.patch \
+            file://time_t_maybe_long_long.patch \
+            "
+ 
+ SRC_URI[md5sum] = "d8bb7374943bb747db7786ac26f17f11"
+ SRC_URI[sha256sum] = "0a24d9401e87d4af023d201e234d91127d82c350daad93432106284aa9459c7d"
+ 
+-EXTRA_OEMAKE = "ARCH=${TARGET_ARCH} \
+-    EXTRA_CFLAGS='-D_GNU_SOURCE -DHAVE_CLOCK_ADJTIME -DHAVE_POSIX_SPAWN -DHAVE_ONESTEP_SYNC ${CFLAGS}'"
++EXTRA_OEMAKE = "ARCH=${TARGET_ARCH} EXTRA_CFLAGS='${CFLAGS}'"
++
++export KBUILD_OUTPUT="${RECIPE_SYSROOT}"
+ 
+ do_install () {
+     install -d ${D}/${bindir}
 -- 
-2.31.1
+2.7.4
 
