@@ -1,141 +1,150 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.1339.1620078963620615430
+Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com [209.85.167.172])
+ by mx.groups.io with SMTP id smtpd.web08.41.1620093724661530762
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 May 2021 14:56:04 -0700
+ Mon, 03 May 2021 19:02:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id ABEEE40C56;
-	Mon,  3 May 2021 21:56:02 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id iVKdAvJfuEqx; Mon,  3 May 2021 21:56:02 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8E25740AB7;
-	Mon,  3 May 2021 21:56:01 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 42F591745D7;
-	Mon,  3 May 2021 17:56:01 -0400 (EDT)
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Denys Dmytriyenko <denis@denix.org>
-Subject: [dunfell][PATCH] linuxptp: Fix cross build
-Date: Mon,  3 May 2021 17:56:00 -0400
-Message-Id: <1620078960-57111-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=M4WJm+71;
+ spf=pass (domain: gmail.com, ip: 209.85.167.172, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f172.google.com with SMTP id i26so7345181oii.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 03 May 2021 19:02:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:autocrypt:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=mzZK7Jn4AVms7tQPm+Z8Dia7fYHLw1lnjq1//Hv2EcE=;
+        b=M4WJm+71nAsfx9ywA0dADUY4hYPZ2PYfFR8iJSCtAONHywMV7vpurgq751SEGcCdzC
+         7edmBwfcbmFvshmFcN8L9kT9r8d7MWmnTVKHVcYiheDpSDKMrgKUgBwz54fsuvwsDDiF
+         Mg9JiBpQyaQk1KN+xxDb7XUyFMzpHAG1Xdk7QMMri1vCYE7rHdpCJNfFltY2pfn7zKfZ
+         EOlnTAmAjuWhBoK/tSPASRDxGXh0x103VjRXnwdIpIbIzMJy70cTp7BUWgxTyeTlbHKo
+         qe45qgzzRULNINDLl2neinETmvQWyG7tugew5kc9SSicV6IsBZqj0nFsp+woCmV14Hag
+         TwYg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:autocrypt
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-transfer-encoding:content-language;
+        bh=mzZK7Jn4AVms7tQPm+Z8Dia7fYHLw1lnjq1//Hv2EcE=;
+        b=Cdf9cZmA74E0uiCplNKS27nQe3bUc589CToCTVd+ygjZAjDSYC0LAbFsDgRQHz+iQM
+         WGmXrPBriyuK+Ncqdd0aC3B8T2AocrCAFIODoMEaTQdwMZV+/2SbNeLHakvKlWBj+jFy
+         TkJu2L1xAzi5HzxGN44fmahhNg2Xt+j15LV4VPUnc5qoW7Lr5ldbkj8eUsj8EcePtnEv
+         kCBD09T5MUVzA8FVskfR5P5mNj6/QUMuOzFw0z++Aeu5rzrUURk++SciqPeHrfTAuOYY
+         hQVYuvjF5kAIMymvQ/JX5L9vUsiIoyuWBNtDemr+zAYachsl/PJMfoFCfbuJ+47bxu2a
+         d5Bg==
+X-Gm-Message-State: AOAM532bGiUZSkEziS9DZ4FXvtuoMpe37rU/r1FL8Fo6aqsvYfXFMbOc
+	DoiACklkSB52vSpXB60C17xv3VnIVAP+jA==
+X-Google-Smtp-Source: ABdhPJxaq4mvAyy1TMjmQOh6/RtDfGvgF4DW40xqhdH0cPd6xy9HjxyurybHacPwU3hyHxXLZVEe/g==
+X-Received: by 2002:aca:b387:: with SMTP id c129mr1138634oif.30.1620093723821;
+        Mon, 03 May 2021 19:02:03 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:dc35:22d6:72af:c1da? ([2601:202:4180:a5c0:dc35:22d6:72af:c1da])
+        by smtp.gmail.com with ESMTPSA id p1sm443321otk.58.2021.05.03.19.02.02
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 03 May 2021 19:02:03 -0700 (PDT)
+Subject: Re: [oe] [PATCH] tbb: Disable PPC as COMPATIBLE_MACHINE
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Saul Wold <Saul.Wold@windriver.com>,
+ openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <20210503154248.2359344-1-saul.wold@windriver.com>
+ <20210503154248.2359344-2-saul.wold@windriver.com>
+ <56aac87e-556a-dfba-4aca-70644a8fcd9a@gmail.com>
+ <CAMKF1sqgwU5-KtiepOD-ct5dP=HV464Wis+1vQSXnXWVf6v=aQ@mail.gmail.com>
+From: "Armin Kuster" <akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+ 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
+ 8CS2NxU=
+Message-ID: <a9affa6e-e7d6-2b5d-5182-e29d469c173b@gmail.com>
+Date: Mon, 3 May 2021 19:02:02 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1sqgwU5-KtiepOD-ct5dP=HV464Wis+1vQSXnXWVf6v=aQ@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-From: Khem Raj <raj.khem@gmail.com>
 
-Adjust incdefs.sh to use cross tools to poke for system functionality
-Re-enable using incdefs.sh
-export KBUILD_OUTPUT to point to recipe sysroot
 
-(From meta-oe rev: b6022761d6880382c5e6ffa4b3dc6f1ec2ae1e73)
+On 5/3/21 12:59 PM, Khem Raj wrote:
+> On Mon, May 3, 2021 at 12:07 PM akuster808 <akuster808@gmail.com> wrote:
+>>
+>>
+>> On 5/3/21 8:42 AM, Saul Wold wrote:
+>>> From: Saul Wold <Saul.Wold@windriver.com>
+>>>
+>>> The latest version does not support PPC architecture, so disable
+>>> the it. Otherwise the following error occurs:
+>>>
+>>> /srv/nvme/yocto/hardknott/builds/tbb/tmp/work/ppc7400-poky-linux/tbb/2021.2.0-r0/git/src/tbb/tools_api/ittnotify_config.h:338:12: error: '__TBB_machine_fetchadd4' was not declared in this scope
+>>>   338 |     return __TBB_machine_fetchadd4(ptr, 1) + 1L;
+>>>       |            ^~~~~~~~~~~~~~~~~~~~~~~
+>>>
+>>> Signed-off-by: Saul Wold <saul.wold@windriver.com>
+>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>> ---
+>>>  meta-oe/recipes-support/tbb/tbb_2021.2.0.bb | 3 +++
+>>>  1 file changed, 3 insertions(+)
+>>>
+>>> diff --git a/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+>>> index b05a59dc7..d8a18866c 100644
+>>> --- a/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+>>> +++ b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+>>> @@ -43,3 +43,6 @@ LDFLAGS_append_mips = " -latomic"
+>>>  LDFLAGS_append_mipsel = " -latomic"
+>>>
+>>>  LDFLAGS_append_libc-musl = " -lucontext"
+>>> +
+>>> +# The latest version of oneTBB does not support PPC
+>>> +COMPATIBLE_MACHINE_powerpc = "(!.*ppc).*"
+>> Should we also exclude including that package for ppc in
+>> packagegroup-meta-oe.bb?
+>>
+>> RDEPENDS_packagegroup-meta-oe-support_remove_powerpc = "ssiapi tbb"  <<<---?
+> yes it should be.
+sysdig and opencv both have a depends on tbb. I suspect world builds may
+fail.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
----
- .../linuxptp/Use-cross-cpp-in-incdefs.patch        | 26 +++++++++++++++++++
- .../linuxptp/no-incdefs-using-host-headers.patch   | 29 ----------------------
- .../recipes-connectivity/linuxptp/linuxptp_2.0.bb  |  7 +++---
- 3 files changed, 30 insertions(+), 32 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch
- delete mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
-
-diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch b/meta-oe/recipes-connectivity/linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch
-new file mode 100644
-index 0000000..8760886
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch
-@@ -0,0 +1,26 @@
-+From 8a4cad5e2f2cbb6a34bdc6e877fe499502b8c4c8 Mon Sep 17 00:00:00 2001
-+From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-+Date: Fri, 23 Dec 2016 18:12:29 +0100
-+Subject: [PATCH] linuxptp: Use cross cpp in incdefs
-+
-+Use cross cpp incdefs.sh shell script since we are doing cross compiling
-+we need to ensure we use correct setttings from toolchain
-+
-+Upstream-Status: Inappropriate [OE-Specific]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+
-+ makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+--- a/incdefs.sh
-++++ b/incdefs.sh
-+@@ -27,7 +27,7 @@ user_flags()
-+ 	printf " -D_GNU_SOURCE"
-+ 
-+ 	# Get list of directories searched for header files.
-+-	dirs=$(echo "" | ${CROSS_COMPILE}cpp -Wp,-v 2>&1 >/dev/null | grep ^" /")
-++	dirs=$(${CPP} -Wp,-v -xc /dev/null 2>&1 >/dev/null | grep ^" /")
-+ 
-+ 	# Look for clock_adjtime().
-+ 	for d in $dirs; do
-diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch b/meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
-deleted file mode 100644
-index 02dbb23..0000000
---- a/meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--From 8a4cad5e2f2cbb6a34bdc6e877fe499502b8c4c8 Mon Sep 17 00:00:00 2001
--From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
--Date: Fri, 23 Dec 2016 18:12:29 +0100
--Subject: [PATCH] linuxptp: no incdefs using host headers
--
--Avoid using host headers via incdefs.sh shell script.
--
--Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-----
--
-- makefile | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/makefile b/makefile
--index 8cdbd15..85174b8 100644
----- a/makefile
--+++ b/makefile
--@@ -33,7 +33,7 @@ OBJECTS	= $(OBJ) hwstamp_ctl.o phc2sys.o phc_ctl.o pmc.o pmc_common.o \
-- SRC	= $(OBJECTS:.o=.c)
-- DEPEND	= $(OBJECTS:.o=.d)
-- srcdir	:= $(dir $(lastword $(MAKEFILE_LIST)))
---incdefs := $(shell $(srcdir)/incdefs.sh)
--+#incdefs := $(shell $(srcdir)/incdefs.sh)
-- version := $(shell $(srcdir)/version.sh $(srcdir))
-- VPATH	= $(srcdir)
-- 
---- 
--2.9.3
--
-diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb b/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
-index 930c667..e80abc7 100644
---- a/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
-+++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
-@@ -4,15 +4,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.tgz \
-            file://build-Allow-CC-and-prefix-to-be-overriden.patch \
--           file://no-incdefs-using-host-headers.patch \
-+           file://Use-cross-cpp-in-incdefs.patch \
-            file://time_t_maybe_long_long.patch \
-            "
- 
- SRC_URI[md5sum] = "d8bb7374943bb747db7786ac26f17f11"
- SRC_URI[sha256sum] = "0a24d9401e87d4af023d201e234d91127d82c350daad93432106284aa9459c7d"
- 
--EXTRA_OEMAKE = "ARCH=${TARGET_ARCH} \
--    EXTRA_CFLAGS='-D_GNU_SOURCE -DHAVE_CLOCK_ADJTIME -DHAVE_POSIX_SPAWN -DHAVE_ONESTEP_SYNC ${CFLAGS}'"
-+EXTRA_OEMAKE = "ARCH=${TARGET_ARCH} EXTRA_CFLAGS='${CFLAGS}'"
-+
-+export KBUILD_OUTPUT="${RECIPE_SYSROOT}"
- 
- do_install () {
-     install -d ${D}/${bindir}
--- 
-2.7.4
+-armin
+>
+>>> 
+>>>
 
