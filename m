@@ -1,124 +1,130 @@
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web10.1915.1620107851927705204
+Received: from EUR03-DB5-obe.outbound.protection.outlook.com (EUR03-DB5-obe.outbound.protection.outlook.com [40.107.4.58])
+ by mx.groups.io with SMTP id smtpd.web08.3923.1620125567346538391
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 May 2021 22:57:32 -0700
+ Tue, 04 May 2021 03:52:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=qUHWOP4P;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id a11so4242847plh.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 May 2021 22:57:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=5/G09E2ouovDvf2QB3tIkFAjac9YTv5DH+OF8zzH+n0=;
-        b=qUHWOP4P4b98o1fZB14qmTwATrBXaVEO7PHmdXmmKGUi8euRoEz8PGBMp8bgx2+eQ4
-         cqYM1ypsctF0cOZGIUDBDh3RUrelck9halbxzP83SPw2C0PyMu4X/DX2XYlrCmGi+9ix
-         iGwrq5XIuFXm5e/N4KUa2xzkC94rHTbmT+WP1/hgda9efYD3qCjTpbw3VuF1hQrZ94V0
-         hVLCXoIhNfRCj0wcuJhlul5OF1OfydImlCmaF0UtRxloNuksz8FytsdvaVuMWynvp8VT
-         PfWu20BbCIzR4mDTGyzCw+mut8oGhhSQAa+1kq5Kg+AjETLZYywRdUnfyZbiyvdyLwmk
-         4X4A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=5/G09E2ouovDvf2QB3tIkFAjac9YTv5DH+OF8zzH+n0=;
-        b=mlXIxHpET0YxHn4zQi75sPMHmEFqpt+bpqhZK4QPajtfFNhCiyZQUDhxYHEx7jNNRf
-         xwre4HHWfrJ2r43+Zxibg5RnoZyEpSx6OmqcT5CuTxaQ+49ywcqso0en3vLfsgr4gyZ5
-         wLFYZMjGmk1SPtBMS7UUiveKRcbJRS2Ho2grrbaXvQf3R6JVNr2TRvckSokHZJV30tNy
-         nDI690AG8A1N9/aSKkZFksYnRCZNQ/OtKz9jN1Pq8+/2xLqGXvXrjFkgT08XJlUVi8Zc
-         Wi6ecM6/D2vRgrAZMGqwtrq8U8odDXYTZ86C8k6n8872m+Uh0l3e6sYHGKNojpePDWGb
-         uhsg==
-X-Gm-Message-State: AOAM530LHUKZ0MlP9H6IiTgjcvEj3EJeyYnaOM3fx/96e953/MxhtTBA
-	zjgdVvMK2sxawuaFfNwqqyO2TmTqxvZIUg==
-X-Google-Smtp-Source: ABdhPJxufvcs/+A0ym5Am7UekBe+/rMCVYBTFojXh0iSuVCbMy57M+O/OTbIgR31ss03KU95vizsGg==
-X-Received: by 2002:a17:902:7c17:b029:ec:bfde:23e2 with SMTP id x23-20020a1709027c17b02900ecbfde23e2mr24734825pll.33.1620107851143;
-        Mon, 03 May 2021 22:57:31 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a7ac])
-        by smtp.gmail.com with ESMTPSA id a16sm8310592pfc.37.2021.05.03.22.57.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 May 2021 22:57:30 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+ dkim=pass header.i=@detectomat.com header.s=selector2 header.b=LoWdQPhN;
+ spf=pass (domain: detectomat.com, ip: 40.107.4.58, mailfrom: harald.brinkmann@detectomat.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=G0wenWOyQNrjPjtaKkmqhjvcgHnAwtYNdEpGBmKM8ACwAEKYdSovzB+Eus7F130M38h3NF/uTLFfOZMRRmogAhfSSBzLwwuEmVYeQ20iF0UYdGZTKBsM2+BgHQy41elAFLN8WAYXFIVsPUuMLOTE3pCknuIk9RZVYTMBpTPXmpNcNA0/IDEq+ksj/B2TcUigI79hCB/em/xEDVSVKfMxK5k4nAIQErezeORBaNT3lUPeN4vk5aJ31hS3FVePJVHiHzVLQwTArc27UsWpx/9AvVuQ0OkqWvBKqkChobmGJoYm9iYPtrgQca33Gt/xuk9G76tbMGAd8VbeJ9arzcqIeQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Wm65Un7fjoAtW57RGCRnJqGkKnzDkZQDkplS5vff7m0=;
+ b=a3WpekRViKWtGpaNqtT6P3APG7qXsTySk+m+ZewIwxULdv+BfP8BZ8hHyJJerhxOBHtby8hud/AYh3fJozJIUTQ3CCAmQD+O2UwA/YZOzrpThNIoCZP3q8rCxbLRsNWWf//sxAu41xCb44pAMYu5HW9dcmPmiQ7nvwd/sOhUgySaDo9rNPHr6yMopSn6UDV7fWcK2T31yUOKLLS4QqoMnuure7+fa0jP6XI9yBo+wrFlishu33M2YPx92oQTndA7o+dYz9Eq6nKg1bvr5XeJppL9aWolk5G3mlP6tOHDpACOpQoAmNREycMhG2UBVj7wzlbLVYFjPQmEumT4vIV79w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=detectomat.com; dmarc=pass action=none
+ header.from=detectomat.com; dkim=pass header.d=detectomat.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=detectomat.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Wm65Un7fjoAtW57RGCRnJqGkKnzDkZQDkplS5vff7m0=;
+ b=LoWdQPhN6JFCyibdvxwkA8qWSXY3Jzn6U5O8NuoDiXdwyiVfIVe0+N/dtfGrU4/LKUbeZymJnZLdybummYE7EEoc9L0Bew1RdF+ZaX3SRoCHxfp/Comgn4WXVJZPz2G1UdCR9G6TyyVB6wBznI++KdfDDEDrmGA7V8eLw+6HvUg=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=detectomat.com;
+Received: from DB7PR08MB3851.eurprd08.prod.outlook.com (2603:10a6:10:7a::24)
+ by DBAPR08MB5591.eurprd08.prod.outlook.com (2603:10a6:10:1ae::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4087.41; Tue, 4 May
+ 2021 10:52:44 +0000
+Received: from DB7PR08MB3851.eurprd08.prod.outlook.com
+ ([fe80::1de1:8ed2:1159:e1f1]) by DB7PR08MB3851.eurprd08.prod.outlook.com
+ ([fe80::1de1:8ed2:1159:e1f1%5]) with mapi id 15.20.4087.044; Tue, 4 May 2021
+ 10:52:44 +0000
+From: harald.brinkmann@detectomat.com
+Subject: [PATCH] Fix parsing revision of SVN repos with redirects
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] emacs: Do not use SIGSTKSZ
-Date: Mon,  3 May 2021 22:57:28 -0700
-Message-Id: <20210504055728.1871333-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
+Message-ID: <e32ab99e-1a15-aeb1-160d-b1638eda0d7a@detectomat.com>
+Date: Tue, 4 May 2021 12:52:42 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.0
+X-Originating-IP: [193.32.127.214]
+X-ClientProxiedBy: AM0PR04CA0134.eurprd04.prod.outlook.com
+ (2603:10a6:208:55::39) To DB7PR08MB3851.eurprd08.prod.outlook.com
+ (2603:10a6:10:7a::24)
+Return-Path: Harald.Brinkmann@detectomat.com
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [192.168.178.50] (193.32.127.214) by AM0PR04CA0134.eurprd04.prod.outlook.com (2603:10a6:208:55::39) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4087.27 via Frontend Transport; Tue, 4 May 2021 10:52:43 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: c320633a-8d2a-467b-33a1-08d90eeabf26
+X-MS-TrafficTypeDiagnostic: DBAPR08MB5591:
+X-Microsoft-Antispam-PRVS: 
+	<DBAPR08MB5591A646AF398D3618D050ABE95A9@DBAPR08MB5591.eurprd08.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:153;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	Hljpwf6dXexjaJ8HGAzM+t8lUQlfhDErpihms7JXSYMlHa0kD1TqrfnZGp5L9f8eKW+WbNdRE9W+YdnwoWnYTNXzUpI9q8nZJPtdIaugW+VOk6u4mUBIDfOxyEXL3yD+Wm4NS6QeEgXoWAzLi3v/79N1oCk8Uwgx8Fed7S3w1K5Y59aWnPouFIXm5LQPjym9Whni3S7w2w6uBJuSrPae1qYg1N0uirMnGO5QUjQ/5urjtjjBsc8FvHAkWa94b+BG1DFx219hqIb5qLCIR8mJ0C8yISNnfyn30dnSEYjtMJnkRDb7n6tMz4LbEBxcm3e0SQO3rugOZojW2uVOIQVeohQu5AUHrFWP2peUaXIVc+UZIDQ+5VD1ta38CoRBrjVi9CMFMz/lkp7KuWFvW8f+zRaEVP7YugkvVREOtDrKDEPu/JQtBgV+KoTPyJtaI5I0N0hm1qROCSjHtf1HIe3p4/TlsUtCPuDky53aG5lIcU0xe0dessLE+4C+bCfogXTbd2BCrBy/piI24hr13cZH4eS6xbRPnVSM7so1tjzlJ0PyT8kw71gXtsgL5DfHBd/D8jO65a1opKq30oY8TlEtfEtEoLaE8ATCl0dpPKtLBpYOjlKav9xnDCM6J5gS4fwHb1Ck0DHapjfrmw6yznk39VECzSkS0s/2EuTrzvd7aCrpS7Ac++SWxGIGvKJ8W363rvWjZe4MxkN9Nn9iHA125xG81E+SRMC05mQc3z5zvGE=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB7PR08MB3851.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(136003)(346002)(376002)(396003)(39850400004)(366004)(83380400001)(6486002)(2906002)(186003)(478600001)(16526019)(5660300002)(36756003)(52116002)(316002)(31686004)(31696002)(16576012)(2616005)(86362001)(4744005)(956004)(8676002)(66946007)(8936002)(38100700002)(38350700002)(6916009)(66476007)(66556008)(26005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	=?utf-8?B?WTl4bHF0TUFYMmJDN2NDY3l2SnRqSFp2THJ0SU9vN2ZyNVRWdXVBcFZaMHdz?=
+ =?utf-8?B?UjkyaUdWeWZMUDhVMHEyRzBqUHkrMXVSWnU3QlVXbFdlVTVGc0oycWtJZHNG?=
+ =?utf-8?B?YW1YQm03OFNYb2FqcVFDWTFINGlBSUdJL2xCRGFNZExVRUU2K3pEUmtzY1lj?=
+ =?utf-8?B?c05LbXhwOHlpODJYU3J3dTBYOUVieEg3d2JEUVl3UDAraXhtaXJIVForUnZm?=
+ =?utf-8?B?d25KNFhNQldBRHllZnRIRDJ2VHNOcTArUkt1UGZNTjFQZ3A2NEFzNzAvTVJw?=
+ =?utf-8?B?b0xuenBwWm1XUVFFYzZwSXVKNEtzaWRsZHZkbjM3bFRHZy9vZEszTk9vWlF2?=
+ =?utf-8?B?Njg3T1NxRHVURUZRQlRZVit5SmVsS1NPSUJBbFZrL0pIejYwMUhtTWx3ZWlh?=
+ =?utf-8?B?Rjl0TXpBWkNBVmZlOTZqenFtZmEyRC96eEF2OXlJWGIzRm9udXlmcVZVN1lu?=
+ =?utf-8?B?UFhJYkl3M1Rwak5pbW1Lam9FUVFJUkNUKytlWldnSDZQMUJNVGxQcGtsVkkr?=
+ =?utf-8?B?Ylo0Y0N4RTJzem4zQ3cxNC9wYWR1VEZUMnRSTVpVWUtwa2JWL0RnNWNDZ3lI?=
+ =?utf-8?B?bzF4cjJnUkpNbVVmMG9rY3BBWFFURTRZU1VaOS9jNVNEcU1qY0JkMEgrM1Rk?=
+ =?utf-8?B?L04zZG1vb1BjSjlKU0p5MHQ4UnA5cmFYckRQVjNZb1NiN052eVhlYzd2VzMz?=
+ =?utf-8?B?L1RoeksyeUhwSzJvMkNJMTRXZmIxaTBlbk1iZCtNeXRjdkRPTWhSVFpXMHVW?=
+ =?utf-8?B?dmxNVERwR1dXTktVOUhVVnRUc094aVRhMm5VYzZKNzFTWVdYOEIwRnBMS3Vm?=
+ =?utf-8?B?Mm94ZWxLNVFUMFk0TEJKMHQzTDE0R3N0N3plRVhBMHJrQjFmb0lTN2lSYmVD?=
+ =?utf-8?B?Zkdrd1pMUjRtbGtvang0QkQxVlFtUzlBZi9YK0VqS2J5WHR2aGo3eTVydFg0?=
+ =?utf-8?B?L3lYNUhYc3RkdmNubWpiR1lZdFIxcjlSRXMycGRHZnJnWU4zRVBlSEJlVUdQ?=
+ =?utf-8?B?L2FSd0x1Q1FVT05GSS9tZjhZSlEwRGF6U0oreVNoeFR3N2NqclQya1RXSjNz?=
+ =?utf-8?B?Q3BTcUpoYSticW1xREM4RUJMV29oTk12SWtVMkVNWUdtcEhqaDVBRVo4aFht?=
+ =?utf-8?B?WjVBdE01SERuU0lXWHR1aStHNXZJNStYWjgvVTZlZnhjZjR6RTUzUzJkb0hn?=
+ =?utf-8?B?K0RlODZiQjg1T0RwMXJzN2xHVkgrR2UvU2lsWnhCMHZoa1llREdSWDRtd053?=
+ =?utf-8?B?Z2czcWZNZXVEdmp1YlFzalZXVWtWQ1FuR0FkdlNPcTNPcHF2TXA1RmJ1YVgx?=
+ =?utf-8?B?SllYSXArN2ViWUJQNHNNeng2ejJDNHJndm9oUHA2RExnSmFpWjJHMDg0Q2Z6?=
+ =?utf-8?B?M0Iyc090ZHVWYzVwSVova2lJSFE1UUZtNGcydUZlekFCaDVBT0dTNFBrK0hq?=
+ =?utf-8?B?dDFsVGZ5eWd6SFFhZEw3RjkvZXU1K3Z1SzZETmpWL1MvQTlldEFsd24vVlo4?=
+ =?utf-8?B?ZDBEUVF4OXlnWkRkWnhGMi9NMjQvZTVNKzNQUEdKNVlOZm1MTjJoQnUzSmF0?=
+ =?utf-8?B?SzBMSTQvNXJHZXNRZ2Y0V2hxY1V2RENaZUlCbnpibnErRGd1cmRwOUdrRzlC?=
+ =?utf-8?B?OC8wdXdMYk45SFVlZmVYeDVJQVVERTVrL0NKQk5BOFlUb0l1NE9wL1RWVVZx?=
+ =?utf-8?B?MUNDZGkvamordmRLTG05TGhvMlJPcjA0TUFVbHpFQWRzSVdyRmF6ZWE4R0VV?=
+ =?utf-8?Q?pwpXMfx/B5RxirDTH8RdQdXpL5ofKTvyysyngC5?=
+X-OriginatorOrg: detectomat.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c320633a-8d2a-467b-33a1-08d90eeabf26
+X-MS-Exchange-CrossTenant-AuthSource: DB7PR08MB3851.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 May 2021 10:52:44.2413
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 07587bd1-3a09-4971-a5a0-370e32888812
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: mMnT1cRufXHpj9qVtUAGLBhb2NMDxI+PebB8wde93nBA5RsOPh6qYhKoUJchO9UeRrtByhsSbyKcIGvpEqaPQq/HNXtBFm9DAp/G724xv2U=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR08MB5591
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+svn was printing a message when encountering HTTP redirects.
+This confused the revision parser.
+
+Signed-off-by: Harald Brinkmann <Harald.Brinkmann@detectomat.com>
 ---
- meta-oe/recipes-support/emacs/emacs_27.2.bb   |  5 ++-
- .../emacs/files/emacs-glibc-2.34.patch        | 40 +++++++++++++++++++
- 2 files changed, 43 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-support/emacs/files/emacs-glibc-2.34.patch
+  bitbake/lib/bb/fetch2/svn.py | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/emacs/emacs_27.2.bb b/meta-oe/recipes-support/emacs/emacs_27.2.bb
-index e3157ec421..01629f4166 100644
---- a/meta-oe/recipes-support/emacs/emacs_27.2.bb
-+++ b/meta-oe/recipes-support/emacs/emacs_27.2.bb
-@@ -4,8 +4,9 @@ HOMEPAGE = "https://www.gnu.org/software/emacs/"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
- 
--SRC_URI = "https://ftp.gnu.org/pub/gnu/emacs/emacs-${PV}.tar.xz"
--
-+SRC_URI = "https://ftp.gnu.org/pub/gnu/emacs/emacs-${PV}.tar.xz \
-+           file://emacs-glibc-2.34.patch \
-+          "
- SRC_URI_append_class-target = " file://usemake-docfile-native.patch"
- 
- SRC_URI[sha256sum] = "b4a7cc4e78e63f378624e0919215b910af5bb2a0afc819fad298272e9f40c1b9"
-diff --git a/meta-oe/recipes-support/emacs/files/emacs-glibc-2.34.patch b/meta-oe/recipes-support/emacs/files/emacs-glibc-2.34.patch
-new file mode 100644
-index 0000000000..6d764aa266
---- /dev/null
-+++ b/meta-oe/recipes-support/emacs/files/emacs-glibc-2.34.patch
-@@ -0,0 +1,40 @@
-+From f97e07ea807cc6d38774a3888a15091b20645ac6 Mon Sep 17 00:00:00 2001
-+From: Paul Eggert <eggert@cs.ucla.edu>
-+Date: Tue, 9 Mar 2021 11:22:59 -0800
-+Subject: [PATCH] Port alternate signal stack to upcoming glibc 2.34
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+* src/sysdep.c (sigsegv_stack): Increase size to 64 KiB and align
-+it to max_align_t.  This copies from Gnulib’s c-stack.c, and works
-+around a portability bug in draft glibc 2.34, which no longer
-+defines SIGSTKSZ when _GNU_SOURCE is defined.
-+---
-+ src/sysdep.c | 10 +++++++++-
-+ 1 file changed, 9 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/sysdep.c b/src/sysdep.c
-+index 941b4e2fa2..24d8832b2f 100644
-+--- a/src/sysdep.c
-++++ b/src/sysdep.c
-+@@ -1785,7 +1785,15 @@ handle_arith_signal (int sig)
-+ 
-+ /* Alternate stack used by SIGSEGV handler below.  */
-+ 
-+-static unsigned char sigsegv_stack[SIGSTKSZ];
-++/* Storage for the alternate signal stack.
-++   64 KiB is not too large for Emacs, and is large enough
-++   for all known platforms.  Smaller sizes may run into trouble.
-++   For example, libsigsegv 2.6 through 2.8 have a bug where some
-++   architectures use more than the Linux default of an 8 KiB alternate
-++   stack when deciding if a fault was caused by stack overflow.  */
-++static max_align_t sigsegv_stack[(64 * 1024
-++				  + sizeof (max_align_t) - 1)
-++				 / sizeof (max_align_t)];
-+ 
-+ 
-+ /* Return true if SIGINFO indicates a stack overflow.  */
-+-- 
-+2.29.2
-+
+diff --git a/bitbake/lib/bb/fetch2/svn.py b/bitbake/lib/bb/fetch2/svn.py
+index 971a5add4a..5c305c4a75 100644
+--- a/bitbake/lib/bb/fetch2/svn.py
++++ b/bitbake/lib/bb/fetch2/svn.py
+@@ -86,7 +86,7 @@ class Svn(FetchMethod):
+          if command == "info":
+              svncmd = "%s info %s %s://%s/%s/" % (ud.basecmd, " ".join(options), proto, svnroot, ud.module)
+          elif command == "log1":
+-            svncmd = "%s log --limit 1 %s %s://%s/%s/" % (ud.basecmd, " ".join(options), proto, svnroot, ud.module)
++            svncmd = "%s log --limit 1 --quiet %s %s://%s/%s/" % (ud.basecmd, " ".join(options), proto, svnroot, ud.module)
+          else:
+              suffix = ""
+
 -- 
-2.31.1
-
+2.26.2
