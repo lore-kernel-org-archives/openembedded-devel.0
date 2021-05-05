@@ -1,209 +1,256 @@
-Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com [209.85.219.44])
- by mx.groups.io with SMTP id smtpd.web08.309.1620252557218255256
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.web08.1088.1620255960654663469
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 May 2021 15:09:17 -0700
+ Wed, 05 May 2021 16:06:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=sed+Z4cu;
- spf=pass (domain: gmail.com, ip: 209.85.219.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f44.google.com with SMTP id u7so2087011qvv.12
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 May 2021 15:09:17 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ijN5mtA4;
+ spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: romain.naour@gmail.com)
+Received: by mail-wm1-f48.google.com with SMTP id s5-20020a7bc0c50000b0290147d0c21c51so2005169wmh.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 05 May 2021 16:06:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=KLUmO+R6QhVRsMPvdDBY0re657TLFqR/RoRdpEKthX4=;
-        b=sed+Z4cubyiKR3jBD2aLIlk0l7zBSdiYicUBXuyO9R3MVwZjo1hhMGY/pPgc7aE9e/
-         x0cPBVKPJPA8v8CbzeZkoi84s0Ri7Hk2XrL7/KkxncDs/tlGdlt2qVBdmxfXqSx9Cg/2
-         OioCbi5HJ9RQnzGNsMmV9zaOhy0OAyFZa/hr1wl0jfuUFDzj647hlT02ssbMPCUDpmOL
-         ceC+8Hzuay5TT6aSln66BrgQ72UaEzJ9Gv4DoKPfBl8UMcwijY/JPsL5yGnpAL+xB6wv
-         hxWu6nRH+mGmoywiQaeLDXafCJBkOumOpVAC/i2w5OhGzGX+yPFrNuPN6mi5AHO+fFwX
-         IVkQ==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=o7zl+dejctGWBp0vaKCj3tbnhyu25uhxo5wDQY9UU8w=;
+        b=ijN5mtA4op6dM4/UbJPDTkmgygt4jzMBizX+T0qfboC27bLDYhUNHJoE/uIEx5YN+0
+         7kIPWYnpxWD7Q75Itfe9dnzLtC2uiXgy+8AaEG4z/yvOqxhxjA86BV4km/80Dsup5Yfp
+         /z3dptAUH54sU0wZuK7eXvyikxkeK3cNVMtfzXwCP+9VvwyKr5yNRWpop/9XqdzlzYuf
+         12Q3aB5GX+9kHvbrLxeMrwT68whG1KXMyyA6/nd4mi+5eCDtJnj9zVOMI+f4IjXJsm7g
+         dwKD4FUR3yqA7n6s0TH2Sf92C8iGMyjzFDJlghX/edMF+jOnZafYyTgk1LmWINLZ8H5E
+         s+xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=KLUmO+R6QhVRsMPvdDBY0re657TLFqR/RoRdpEKthX4=;
-        b=CkRYqUa1pmSdV+bx7Mxb2a93ML/ezaonlDGGQ+W94BD3OyaqM03XtW2TCa3mP/M+f0
-         N2DkE2unLJUT/oLdACLpPx5yHtb6S/ydPBYLIMtYMc9cLnIIqZ4BVWUEX7NydfOmbqJD
-         o+6YncMFy4GnqCb4Y9+gW5ke7BCmbbEjV/jsAkt3ZkpMEUsyxmQ2oyS4XMizDR+4Qmzl
-         zWt9aer9EVxJnKTU6DY54W2rq+65psUislHPGrO2eeMe9VzUa61RfDjfX4zPb79Pn76p
-         Gu2Amuf0L+5hXdUHcBw+wAv6DRz0Rcw5nDUxZ3CuVbEKZZj5M5LF6DVt9aP9weBSCm+c
-         Vyxg==
-X-Gm-Message-State: AOAM531rsEIOxQ/uiZoLl4PqffvP+X/29lD4vWyQK+WTMdwDjSGu4Qyq
-	FeUaN3rGPBI9U3J3oaYAN22/UNdVmMn9d62FCQE=
-X-Google-Smtp-Source: ABdhPJxtVDbjywI6J/9wrvl4JAaTJGfi4g2mgC23nPStnBcl8Bjgfo3bLnbjk/NHI9Aa74reMdPYitZikEkTA1kMyMQ=
-X-Received: by 2002:a0c:b218:: with SMTP id x24mr936308qvd.55.1620252556300;
- Wed, 05 May 2021 15:09:16 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=o7zl+dejctGWBp0vaKCj3tbnhyu25uhxo5wDQY9UU8w=;
+        b=r+AwByXuSE8/9QY84JkVocxg2dwHGjw+pKbE63fa6L2/kyQLB1TYbYMYS39IRKRAPx
+         cjZknDlqHqhGhq/5u2et4Qp6wgVht4tdpZUXOeDCwxj9Yozkn6DQ+CSefbi5RytnGSZa
+         VnjXXuYT8yfKO/jck+P8s6LjQJuD+pGCmPUe0fHpabsfpbPXfPx5Usw3wEcDHYND1+Uk
+         KJrSi0ZRb5mVKXh5VcjZShALj3k67dPc9oaIF5D0MfIBh2UqZOkg7kFpirryVeN05Axq
+         YL8xcuHNE0nzbpEHojCkuKcEnqGtVjxlXdwWkByg85QacxcqywtIbhEFJ2owwbN7x2zy
+         lTcA==
+X-Gm-Message-State: AOAM530aQH8oNDpGhEEuI3GEYp7G68oA6ub+2eqBwbQO5K88v2McXs/N
+	RHKkQoEqYUhg3DoSVJoO+7yN+wAde6A=
+X-Google-Smtp-Source: ABdhPJzLyeMGFKIOJRTRSaH9VPesvn2+0vsNIuBeesh49bbX+LTGcdSSd4xShlX2x4VVjlWJZkCS/w==
+X-Received: by 2002:a05:600c:214f:: with SMTP id v15mr12343636wml.146.1620255959244;
+        Wed, 05 May 2021 16:05:59 -0700 (PDT)
+Return-Path: <romain.naour@gmail.com>
+Received: from localhost.localdomain (2a01cb058f8a180022164e4eb697b4ce.ipv6.abo.wanadoo.fr. [2a01:cb05:8f8a:1800:2216:4e4e:b697:b4ce])
+        by smtp.gmail.com with ESMTPSA id u2sm6924174wmc.22.2021.05.05.16.05.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 05 May 2021 16:05:58 -0700 (PDT)
+From: "Romain Naour" <romain.naour@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Romain Naour <romain.naour@gmail.com>
+Subject: [meta-oe][PATCH 1/2] poke: add recipe for version 1.2
+Date: Thu,  6 May 2021 01:05:44 +0200
+Message-Id: <20210505230545.2574514-1-romain.naour@gmail.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-References: <20210505215026.1339351-1-Martin.Jansa@gmail.com>
-In-Reply-To: <20210505215026.1339351-1-Martin.Jansa@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Wed, 5 May 2021 15:08:50 -0700
-Message-ID: <CAMKF1soMMAPpwS5meeJbhJn_mB4pX8i+AYO4ocEacYe3wq5YQQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][RFC][PATCH] python3-m2crypto: restore m2crypto-0.26.4-gcc_macros.patch
-To: Martin Jansa <Martin.Jansa@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Thanks, I guess I forgot that it was added for fixing same reason and
-by me :) so I should have known better but as always thanks for
-providing the fix.
+Backport a patch to disable tcl/tk dependencies when gui support
+is disabled.
 
-On Wed, May 5, 2021 at 2:50 PM Martin Jansa <Martin.Jansa@gmail.com> wrote=
-:
->
-> * m2crypto-0.26.4-gcc_macros.patch was dropped as unnecessary
->   in the upgrade to 0.37.1 but for aarch64 it still seems to
->   be needed at least in some setups otherwise swig fails with:
->   http://errors.yoctoproject.org/Errors/Details/580206/
->   swig -python -py3 -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m=
-2crypto/0.37.1-r0/recipe-sysroot-native/usr/bin/aarch64-oe-linux/../../lib/=
-aarch64-oe-linux/gcc/aarch64-oe-linux/11.1.0/include -ITOPDIR/tmp-glibc/wor=
-k/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot-native/usr/b=
-in/aarch64-oe-linux/../../lib/aarch64-oe-linux/gcc/aarch64-oe-linux/11.1.0/=
-include-fixed -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0=
-.37.1-r0/recipe-sysroot/usr/lib/aarch64-oe-linux/11.1.0/include -ITOPDIR/tm=
-p-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot/u=
-sr/include -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37=
-.1-r0/recipe-sysroot/usr/include -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux=
-/python3-m2crypto/0.37.1-r0/recipe-sysroot/usr/include/python3.9 -I/usr/inc=
-lude/openssl -includeall -modern -builtin -outdir TOPDIR/tmp-glibc/work/cor=
-texa57-oe-linux/python3-m2crypto/0.37.1-r0/M2Crypto-0.37.1/M2Crypto -o SWIG=
-/_m2crypto_wrap.c SWIG/_m2crypto.i
->   TOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/re=
-cipe-sysroot/usr/include/openssl/opensslconf.h:23: Error: Unable to find 'o=
-penssl/opensslconf-32.h'
->
-> * if I drop the -includeall from swig call I get a bit more reasonable e=
-rror message:
->   Preprocessing...
->   /OE/build/oe-core/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0=
-.37.1-r0/recipe-sysroot/usr/include/openssl/opensslconf.h:29: Error: CPP #e=
-rror ""Unknown __WORDSIZE detected"". Use the -cpperraswarn option to conti=
-nue swig processing.
->
-> * gcc_macros.h is generated by do_configure_prepend, if
->   this patch really isn't needed, then the do_configure_prepend
->   should probably be dropped as well
->
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  .../0001-import-gcc_macros.h.patch            | 59 +++++++++++++++++++
->  .../python/python3-m2crypto_0.37.1.bb         |  1 +
->  2 files changed, 60 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python3-m2crypto=
-/0001-import-gcc_macros.h.patch
->
-> diff --git a/meta-python/recipes-devtools/python/python3-m2crypto/0001-i=
-mport-gcc_macros.h.patch b/meta-python/recipes-devtools/python/python3-m2cr=
-ypto/0001-import-gcc_macros.h.patch
-> new file mode 100644
-> index 0000000000..3c6d584983
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-m2crypto/0001-import-g=
-cc_macros.h.patch
-> @@ -0,0 +1,59 @@
-> +From 1364722439a0a36e3f57119dd45de666d213888c Mon Sep 17 00:00:00 2001
-> +From: Martin Jansa <Martin.Jansa@gmail.com>
-> +Date: Wed, 5 May 2021 21:34:35 +0000
-> +Subject: [PATCH] import gcc_macros.h
-> +
-> +* it was dropped as unnecessary in the upgrade to 0.37.1 but for
-> +  aarch64 it still seems to be needed at least in some setups
-> +  otherwise swig fails with:
-> +  http://errors.yoctoproject.org/Errors/Details/580206/
-> +  swig -python -py3 -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-=
-m2crypto/0.37.1-r0/recipe-sysroot-native/usr/bin/aarch64-oe-linux/../../lib=
-/aarch64-oe-linux/gcc/aarch64-oe-linux/11.1.0/include -ITOPDIR/tmp-glibc/wo=
-rk/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot-native/usr/=
-bin/aarch64-oe-linux/../../lib/aarch64-oe-linux/gcc/aarch64-oe-linux/11.1.0=
-/include-fixed -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/=
-0.37.1-r0/recipe-sysroot/usr/lib/aarch64-oe-linux/11.1.0/include -ITOPDIR/t=
-mp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot/=
-usr/include -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.3=
-7.1-r0/recipe-sysroot/usr/include -ITOPDIR/tmp-glibc/work/cortexa57-oe-linu=
-x/python3-m2crypto/0.37.1-r0/recipe-sysroot/usr/include/python3.9 -I/usr/in=
-clude/openssl -includeall -modern -builtin -outdir TOPDIR/tmp-glibc/work/co=
-rtexa57-oe-linux/python3-m2crypto/0.37.1-r0/M2Crypto-0.37.1/M2Crypto -o SWI=
-G/_m2crypto_wrap.c SWIG/_m2crypto.i
-> +  TOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/r=
-ecipe-sysroot/usr/include/openssl/opensslconf.h:23: Error: Unable to find '=
-openssl/opensslconf-32.h'
-> +
-> +* if I drop the -includeall from swig call I get a bit more reasonable =
-error message:
-> +  Preprocessing...
-> +  /OE/build/oe-core/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/=
-0.37.1-r0/recipe-sysroot/usr/include/openssl/opensslconf.h:29: Error: CPP #=
-error ""Unknown __WORDSIZE detected"". Use the -cpperraswarn option to cont=
-inue swig processing.
-> +
-> +* maybe we need newer swig, the regenerated m2crypto.py shows
-> +  that it was generated with 4.0.2 before while meta-oe has 3.0.12
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> +---
-> + SWIG/_m2crypto.i  |  10 +-
-> + 2 files changed, 737 insertions(+), 5 deletions(-)
-> + create mode 100644 SWIG/gcc_macros.h
-> +
-> +diff --git a/SWIG/_m2crypto.i b/SWIG/_m2crypto.i
-> +index e300a10..3d51c22 100644
-> +--- a/SWIG/_m2crypto.i
-> ++++ b/SWIG/_m2crypto.i
-> +@@ -8,6 +8,11 @@
-> +  *
-> +  */
-> +
-> ++%import "gcc_macros.h"
-> ++
-> ++%ignore WCHAR_MAX;
-> ++%ignore WCHAR_MIN;
-> ++
-> + %module(threads=3D1) m2crypto
-> + /* We really don't need threadblock (PyGILState_Ensure() etc.) anywher=
-e.
-> +    Disable threadallow as well, only enable it for operations likely t=
-o
-> +@@ -15,10 +20,6 @@
-> + %nothreadblock;
-> + %nothreadallow;
-> +
-> +-#if SWIG_VERSION >=3D 0x030000
-> +-#define __WCHAR_MAX__ __WCHAR_MAX
-> +-#define __WCHAR_MIN__ __WCHAR_MIN
-> +-#endif
-> + /* https://gitlab.com/m2crypto/m2crypto/issues/246 */
-> + %ignore WCHAR_MAX;
-> + %ignore WCHAR_MIN;
-> +@@ -103,4 +104,3 @@ static PyObject *x509_store_verify_cb_func;
-> + %constant int encrypt =3D 1;
-> + %constant int decrypt =3D 0;
-> + #endif
-> +-
-> diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1=
-.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
-> index 896d9d2cc4..84400da002 100644
-> --- a/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
-> @@ -10,6 +10,7 @@ SRC_URI +=3D "file://0001-setup.py-link-in-sysroot-not=
--in-host-directories.patch \
->              file://cross-compile-platform.patch \
->              file://0001-Allow-verify_cb_-to-be-called-with-ok-True.patc=
-h \
->              file://0001-Use-of-RSA_SSLV23_PADDING-has-been-deprecated.p=
-atch \
-> +            file://0001-import-gcc_macros.h.patch \
->             "
->  SRC_URI[sha256sum] =3D "e4e42f068b78ccbf113e5d0a72ae5f480f6c3ace4940b91=
-e4fff5598cfff6fb3"
->
-> --
-> 2.30.2
->
->
->=20
->
+Add a local patch to workaround a path poisoning issue. Issue
+reported upstream.
+
+Add another local patch when HELP2MAN is missing.
+
+See:
+http://www.jemarch.net/poke-1.0-relnotes.html
+http://www.jemarch.net/poke-1.1-relnotes.html
+http://www.jemarch.net/poke-1.2-relnotes.html
+
+Signed-off-by: Romain Naour <romain.naour@gmail.com>
+---
+ ...ck-for-Tcl-Tk-if-disable-gui-is-spec.patch | 43 ++++++++++++++++++
+ ...nfig.in-avoit-host-poisoning-while-c.patch | 45 +++++++++++++++++++
+ ...P2MAN-replace-by-true-when-cross-com.patch | 34 ++++++++++++++
+ meta-oe/recipes-devtools/poke/poke_1.2.bb     | 31 +++++++++++++
+ 4 files changed, 153 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/poke/poke/0001-build-do-not-check-for-Tcl-Tk-if-disable-gui-is-spec.patch
+ create mode 100644 meta-oe/recipes-devtools/poke/poke/0002-jitter-jitter-config.in-avoit-host-poisoning-while-c.patch
+ create mode 100644 meta-oe/recipes-devtools/poke/poke/0003-configure.ac-HELP2MAN-replace-by-true-when-cross-com.patch
+ create mode 100644 meta-oe/recipes-devtools/poke/poke_1.2.bb
+
+diff --git a/meta-oe/recipes-devtools/poke/poke/0001-build-do-not-check-for-Tcl-Tk-if-disable-gui-is-spec.patch b/meta-oe/recipes-devtools/poke/poke/0001-build-do-not-check-for-Tcl-Tk-if-disable-gui-is-spec.patch
+new file mode 100644
+index 000000000..3bd041a0e
+--- /dev/null
++++ b/meta-oe/recipes-devtools/poke/poke/0001-build-do-not-check-for-Tcl-Tk-if-disable-gui-is-spec.patch
+@@ -0,0 +1,43 @@
++From cef3fc90f02ef4fc49515745194bac3d81a2265b Mon Sep 17 00:00:00 2001
++From: "Jose E. Marchesi" <jose.marchesi@oracle.com>
++Date: Fri, 30 Apr 2021 13:17:05 +0200
++Subject: [PATCH] build: do not check for Tcl/Tk if --disable-gui is specified
++
++2021-04-30  Jose E. Marchesi  <jemarch@gnu.org>
++
++	* configure.ac: Do not check for tcl/tk if --disable-gui is
++	specified at configure time.
++
++(cherry picked from commit 280a5e154287e43c0a40d9530a9cc658a7367a9c)
++[Romain: remove Changelog entry]
++Signed-off-by: Romain Naour <romain.naour@gmail.com>
++---
++ configure.ac | 9 ++++++---
++ 1 file changed, 6 insertions(+), 3 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index c7205513..c2f0760a 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -214,12 +214,15 @@ fi
++ dnl The GUI is optional, and depends on the availability of Tcl and
++ dnl Tk.
++ 
++-POKE_TCLTK
++-
++ AC_ARG_ENABLE([gui],
++               AS_HELP_STRING([--enable-gui],
++                              [Enable the GUI (default is YES)]),
++-              [gui_enabled=$enableval], [gui_enabled=$has_tcltk])
+++              [gui_enabled=$enableval], [gui_enabled=yes])
+++
+++if test "x$gui_enabled" = "xyes"; then
+++ POKE_TCLTK
+++ gui_enabled=$has_tcltk
+++fi
++ 
++ AM_CONDITIONAL([GUI], [test "x$gui_enabled" = "xyes"])
++ 
++-- 
++2.30.2
++
+diff --git a/meta-oe/recipes-devtools/poke/poke/0002-jitter-jitter-config.in-avoit-host-poisoning-while-c.patch b/meta-oe/recipes-devtools/poke/poke/0002-jitter-jitter-config.in-avoit-host-poisoning-while-c.patch
+new file mode 100644
+index 000000000..fa55f817f
+--- /dev/null
++++ b/meta-oe/recipes-devtools/poke/poke/0002-jitter-jitter-config.in-avoit-host-poisoning-while-c.patch
+@@ -0,0 +1,45 @@
++From c37419e459bd5863534719fa50755174d0912e6d Mon Sep 17 00:00:00 2001
++From: Romain Naour <romain.naour@gmail.com>
++Date: Fri, 30 Apr 2021 14:32:21 +0200
++Subject: [PATCH] jitter: jitter-config.in: avoit host poisoning while
++ cross-compiling
++
++When jitter is bundled into another project (poke), jitter-config --cppflags
++return an unsafe path "-I /usr/include".
++
++In the context of Buildroot, such configuration script woulf be "fixed"
++after installation. But jitter-config is not installed by poke since it's
++build as static library and liked to poke.
++
++For now, patch jitter-config.in instead of jitter-config.in.m4sh since
++there is an issue while converting the M4sh m4sh script ( .in.m4sh )
++into a portable shell script ( .in ) ready to be processed by aclocal
++for @-substitutions.
++
++[1] https://git.buildroot.net/buildroot/tree/package/pkg-generic.mk?h=2021.02.1#n291
++
++Signed-off-by: Romain Naour <romain.naour@gmail.com>
++---
++ jitter/bin/jitter-config.in | 6 +-----
++ 1 file changed, 1 insertion(+), 5 deletions(-)
++
++diff --git a/jitter/bin/jitter-config.in b/jitter/bin/jitter-config.in
++index 5e124f0..af0ac9d 100644
++--- a/jitter/bin/jitter-config.in
+++++ b/jitter/bin/jitter-config.in
++@@ -998,11 +998,7 @@ while test "$#" != "0"; do
++             append_to_output cflags;;
++         --cppflags)
++             no_option_argument
++-            append_to_output cppflags
++-            # Append a -I argument.  This is defined separately from the rest,
++-            # as the installation prefix can be decided very late, at Jitter
++-            # installation time.
++-            output="$output -I $includedir";;
+++            append_to_output cppflags;;
++         --ldadd)
++             no_option_argument
++             append_to_output ldadd;;
++-- 
++2.30.2
++
+diff --git a/meta-oe/recipes-devtools/poke/poke/0003-configure.ac-HELP2MAN-replace-by-true-when-cross-com.patch b/meta-oe/recipes-devtools/poke/poke/0003-configure.ac-HELP2MAN-replace-by-true-when-cross-com.patch
+new file mode 100644
+index 000000000..f217c917f
+--- /dev/null
++++ b/meta-oe/recipes-devtools/poke/poke/0003-configure.ac-HELP2MAN-replace-by-true-when-cross-com.patch
+@@ -0,0 +1,34 @@
++From 8ba76a5a7ce311f67890199c5595bc1f626495ad Mon Sep 17 00:00:00 2001
++From: Romain Naour <romain.naour@gmail.com>
++Date: Fri, 30 Apr 2021 15:43:59 +0200
++Subject: [PATCH] configure.ac: HELP2MAN replace ':' by 'true' when
++ cross-compiling
++
++Avoid:
++/usr/bin/make  ./../poke/poke
++../run \
++  : -p poke --name="The GNU extensible binary editor" \
++      ./../poke/poke -o ./poke.1
++../run: line 51: exec: :: not found
++
++Signed-off-by: Romain Naour <romain.naour@gmail.com>
++---
++ configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index c2f0760a..93769ef9 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -74,7 +74,7 @@ gl_LIBTEXTSTYLE_OPTIONAL([0.20.5])
++ if test $cross_compiling = no; then
++   AM_MISSING_PROG(HELP2MAN, help2man)
++ else
++-  HELP2MAN=:
+++  HELP2MAN=true
++ fi
++ 
++ dnl recfix is part of the GNU recutils suite, and is used in cfg.mk to
++-- 
++2.30.2
++
+diff --git a/meta-oe/recipes-devtools/poke/poke_1.2.bb b/meta-oe/recipes-devtools/poke/poke_1.2.bb
+new file mode 100644
+index 000000000..dcb547ff8
+--- /dev/null
++++ b/meta-oe/recipes-devtools/poke/poke_1.2.bb
+@@ -0,0 +1,31 @@
++SUMMARY = "GNU poke is an extensible editor for structured binary data"
++HOMEPAGE = "https://pokology.org"
++DESCRIPTION = "GNU poke is an interactive, extensible editor for binary data. Not limited to editing basic entities such as bits and bytes, it provides a full-fledged procedural, interactive programming language designed to describe data structures and to operate on them."
++SECTION = "console/utils"
++LICENSE = "GPL-3.0+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++
++SRC_URI = "${GNU_MIRROR}/poke/poke-${PV}.tar.gz \
++          file://0001-build-do-not-check-for-Tcl-Tk-if-disable-gui-is-spec.patch \
++          file://0002-jitter-jitter-config.in-avoit-host-poisoning-while-c.patch \
++          file://0003-configure.ac-HELP2MAN-replace-by-true-when-cross-com.patch \
++          "
++
++DEPENDS = "flex-native bison-native bdwgc readline"
++
++SRC_URI[sha256sum] = "f61cf8da5b64c01a1359373725aad1ca257f35c1c9269e4d50dd0664183ddf62"
++
++# poke does not support using out-of-tree builds
++inherit autotools-brokensep gettext pkgconfig
++
++# The automatic m4 path detection gets confused, so force the right value from
++# the poke bootstrap script.
++acpaths = "-I ./m4"
++
++EXTRA_OECONF = "--disable-gui \
++                --disable-libnbd \
++                --disable-mi \
++                --with-libreadline-prefix=${STAGING_INCDIR} \
++                "
++
++FILES_${PN} += "${datadir}/emacs/site-lisp"
+-- 
+2.30.2
+
