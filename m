@@ -1,131 +1,217 @@
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web09.9178.1620307917684961419
+Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
+ by mx.groups.io with SMTP id smtpd.web11.546.1620313186660641833
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 May 2021 06:31:57 -0700
+ Thu, 06 May 2021 07:59:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=LKL0JuPB;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id t2-20020a17090ae502b029015b0fbfbc50so3459345pjy.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 06 May 2021 06:31:57 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=XZNbPn3s;
+ spf=pass (domain: gmail.com, ip: 209.85.222.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f174.google.com with SMTP id q127so5197506qkb.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 06 May 2021 07:59:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=to:from:subject:autocrypt:message-id:date:user-agent:mime-version
-         :content-transfer-encoding:content-language;
-        bh=LvOM4zeA9m9w/uZ7lscG3KiLty4rUqjDSkOfHzYiXBI=;
-        b=LKL0JuPB12ikiWkvupGG6Qs4W86ktc5KrwnjPHk1R/0Ge+GgoLTfOTZsOG41btzZed
-         7AM6js8X3L/jEe2KPdNy695lhRvZ/pD/bRaPbBsW26W5ibljkOIoweMiMsc4fE2qrmLC
-         Z1+P93FwP+hgUoNBmpvfFPRgvnApCs8ZIQZo/GuDiqGULlEE4gWuG4EckSr6VuRr92pg
-         6FWzn76XtOzWEIQNhvUoh5kx41iu2zosi3VD9IcSoH92J5yBKl33c7XTpobRvOKNG7Wo
-         EVqlsz6Id5XWY1r6acaaqU8uspyyoVk/XqWQ+xk/oKHSWByon7pMpNvRxEU2ohTNYkxT
-         zEnw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=5TBWhjYLbBa+O2g+c/sCb0WDM/t2jERltB6B24OPjWM=;
+        b=XZNbPn3szyEGc4lPc8Z1x49kvTGzyVsmCv6vUjRjjkpGRqnoxHDZutIqhM76EngU4L
+         bSpT5LEudegDkvMhySXxC4b98uRCyzYesPc4cCUDkZc+L8gvE9bvEkdsm/FAG2N4hLJJ
+         OhbeLeYMWt1//fKzCLjay2wvyLVrSGXw43m13pkyEqAdMPEEzqGqLUv3TemaBRSs9jX3
+         N02RS/epzP+szt8YQ9t4hPd/Las24b6/f45e3tM89P4S0ZjOyLpdbLW8aBwi+bhUYRQc
+         gsaAmdaSMyqKMuIyPiyMd7K0FzeeBOvRyMKItF9tjOs3TWHqQ7/A2r6rCVfzLKO0nreQ
+         EKSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:to:from:subject:autocrypt:message-id:date
-         :user-agent:mime-version:content-transfer-encoding:content-language;
-        bh=LvOM4zeA9m9w/uZ7lscG3KiLty4rUqjDSkOfHzYiXBI=;
-        b=jC/ARG0UkD2tHQ1qG5mXtaHMNmU5ObO/cR6oQMziFz+JXwl09gJAgGiW99ddepZv3L
-         GNfxmdMl2YQD4L7ZCwCzumrR7Zu0BH5o2DZUt9Ksky8JVSf4jOIMKM4htSauc7EaFgOM
-         +VIQm4SZmOwerZwzVkDeuqRnFxhaNwz8FSqQroNEtpabzddEIv+E6dm6SAP1YuYwyR/b
-         4aX1T9DC5b4xtoqWx0AIr+St4RCkre06Fn9PV+easWdsADyQQsszuu8DKjWsEdi1C3LE
-         k9EPGmuSQ72QbhwNJhBSJdlCgeSEwmfQoGprGIpzaFFoMBiGFlBvN+zdF+s3IWxAkCMd
-         yCOg==
-X-Gm-Message-State: AOAM5328HqQoJcLqUMBNWkS4F0ohZqQVNJkpHZsPRJUn5LwWYQ4RjDcn
-	mRwL+Z6JdWC/Ylk0zalIjCs=
-X-Google-Smtp-Source: ABdhPJyqK7kBgpRV4qvrgwwtF7Ooli+RPgzdc0NqiDDaKGBC5YujreW9RPoTdHgGjvjJBU6zrLaYYA==
-X-Received: by 2002:a17:90a:c7d4:: with SMTP id gf20mr4632775pjb.106.1620307917215;
-        Thu, 06 May 2021 06:31:57 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0:899e:2fa0:8320:d89b? ([2601:202:4180:a5c0:899e:2fa0:8320:d89b])
-        by smtp.gmail.com with ESMTPSA id h9sm2338078pfv.14.2021.05.06.06.31.56
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 06 May 2021 06:31:56 -0700 (PDT)
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
- Khem Raj <raj.khem@gmail.com>
-From: "Armin Kuster" <akuster808@gmail.com>
-Subject: Gatesgarth-next merge request: May 6
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
- 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
- 8CS2NxU=
-Message-ID: <1f41ca9d-1cd1-b4af-c107-5ca152360976@gmail.com>
-Date: Thu, 6 May 2021 06:31:55 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=5TBWhjYLbBa+O2g+c/sCb0WDM/t2jERltB6B24OPjWM=;
+        b=Oam8J124YZu62SgB1tFJ3oaCXJOv9c+1UvBHAlrbjVKsusNIRUYoBCExJekP2pYDQD
+         9Jh7JAJBBGUqeGJhESKDwvgO71P4t5mMNEiypqm7ppFxLEizZUGX2CfFhZfIGPB1b332
+         /j3F2LaP+kjMD4Hs3mgbzBHwj1OtPYyew0HzTRxyA2NPwtwMiUQ/WrQNi0Ni0Rar76ne
+         xdywG3LOyxsbP8nZedrr/7ZAaCKDXB/cy+11poViN2V23FxXmRRqGDedweR3Bz8HuGAb
+         VR6xmsREpRjql3/Gk/bhYokz6jdhnPAozQ7r+O/azWsFWDzEBjH4DvLhWTIDWzRcznpu
+         h9qQ==
+X-Gm-Message-State: AOAM532d801jqvY5up6UD5OwX4droxKaT3f5XOmAgqZAuTSzectrjtrw
+	opMJrXCuTpxSBA51MzOBKTCqugaY9pK275+FKowqk6JISeaILw==
+X-Google-Smtp-Source: ABdhPJxFr7obsNye3Y6RhaqQPsfXjPUWjiXSd/ZmslBFvROodvegelxEB/tAP3irrrktYuWPsGUrdSH7tSZmc5aSPA8=
+X-Received: by 2002:a05:620a:9c8:: with SMTP id y8mr4390936qky.125.1620313185735;
+ Thu, 06 May 2021 07:59:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+References: <20210505215026.1339351-1-Martin.Jansa@gmail.com> <CAMKF1soMMAPpwS5meeJbhJn_mB4pX8i+AYO4ocEacYe3wq5YQQ@mail.gmail.com>
+In-Reply-To: <CAMKF1soMMAPpwS5meeJbhJn_mB4pX8i+AYO4ocEacYe3wq5YQQ@mail.gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 6 May 2021 07:59:19 -0700
+Message-ID: <CAMKF1so2gJRf6TWMdqs-C41tu7Qw2-TFvjoO_=9KnmsEkAVY3A@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][RFC][PATCH] python3-m2crypto: restore m2crypto-0.26.4-gcc_macros.patch
+To: Martin Jansa <Martin.Jansa@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The following changes since commit 29ca52c7826ad3044b53ccb5224016bd73abdb5c:
+fails on musl builds
 
-  gpsd: backport d-bus message time patch from upstream (2021-04-18
-20:03:23 -0700)
+https://errors.yoctoproject.org/Errors/Details/580240/
 
-are available in the Git repository at:
-
-  https://git.openembedded.org/meta-openembedded gatesgarth-next
-
-for you to fetch changes up to 70ee7293017c4f38fee71ffdb60e4713fdc88bcf:
-
-  nodejs: 12.20.2 -> 12.21.0 (2021-04-29 21:41:27 -0700)
-
-----------------------------------------------------------------
-Armin Kuster (2):
-      nostromo: Blacklist and exclude from world builds
-      packagegroup-meta-webserver: remove nostromo from pkg grp
-
-Clément Péron (1):
-      nodejs: 12.20.2 -> 12.21.0
-
-Sean Nyekjaer (1):
-      nodejs: 12.20.1 -> 12.20.2
-
- .../recipes-devtools/nodejs/{nodejs_12.20.1.bb => nodejs_12.21.0.bb}  
-| 2 +-
- .../recipes-core/packagesgroups/packagegroup-meta-webserver.bb        
-| 1 -
- meta-webserver/recipes-httpd/nostromo/nostromo_1.9.9.bb               
-| 3 +++
- 3 files changed, 4 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_12.20.1.bb =>
-nodejs_12.21.0.bb} (98%)
-
+On Wed, May 5, 2021 at 3:08 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> Thanks, I guess I forgot that it was added for fixing same reason and
+> by me :) so I should have known better but as always thanks for
+> providing the fix.
+>
+> On Wed, May 5, 2021 at 2:50 PM Martin Jansa <Martin.Jansa@gmail.com> wro=
+te:
+> >
+> > * m2crypto-0.26.4-gcc_macros.patch was dropped as unnecessary
+> >   in the upgrade to 0.37.1 but for aarch64 it still seems to
+> >   be needed at least in some setups otherwise swig fails with:
+> >   http://errors.yoctoproject.org/Errors/Details/580206/
+> >   swig -python -py3 -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3=
+-m2crypto/0.37.1-r0/recipe-sysroot-native/usr/bin/aarch64-oe-linux/../../li=
+b/aarch64-oe-linux/gcc/aarch64-oe-linux/11.1.0/include -ITOPDIR/tmp-glibc/w=
+ork/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot-native/usr=
+/bin/aarch64-oe-linux/../../lib/aarch64-oe-linux/gcc/aarch64-oe-linux/11.1.=
+0/include-fixed -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto=
+/0.37.1-r0/recipe-sysroot/usr/lib/aarch64-oe-linux/11.1.0/include -ITOPDIR/=
+tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot=
+/usr/include -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.=
+37.1-r0/recipe-sysroot/usr/include -ITOPDIR/tmp-glibc/work/cortexa57-oe-lin=
+ux/python3-m2crypto/0.37.1-r0/recipe-sysroot/usr/include/python3.9 -I/usr/i=
+nclude/openssl -includeall -modern -builtin -outdir TOPDIR/tmp-glibc/work/c=
+ortexa57-oe-linux/python3-m2crypto/0.37.1-r0/M2Crypto-0.37.1/M2Crypto -o SW=
+IG/_m2crypto_wrap.c SWIG/_m2crypto.i
+> >   TOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/=
+recipe-sysroot/usr/include/openssl/opensslconf.h:23: Error: Unable to find =
+'openssl/opensslconf-32.h'
+> >
+> > * if I drop the -includeall from swig call I get a bit more reasonable=
+ error message:
+> >   Preprocessing...
+> >   /OE/build/oe-core/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto=
+/0.37.1-r0/recipe-sysroot/usr/include/openssl/opensslconf.h:29: Error: CPP =
+#error ""Unknown __WORDSIZE detected"". Use the -cpperraswarn option to con=
+tinue swig processing.
+> >
+> > * gcc_macros.h is generated by do_configure_prepend, if
+> >   this patch really isn't needed, then the do_configure_prepend
+> >   should probably be dropped as well
+> >
+> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > ---
+> >  .../0001-import-gcc_macros.h.patch            | 59 ++++++++++++++++++=
++
+> >  .../python/python3-m2crypto_0.37.1.bb         |  1 +
+> >  2 files changed, 60 insertions(+)
+> >  create mode 100644 meta-python/recipes-devtools/python/python3-m2cryp=
+to/0001-import-gcc_macros.h.patch
+> >
+> > diff --git a/meta-python/recipes-devtools/python/python3-m2crypto/0001=
+-import-gcc_macros.h.patch b/meta-python/recipes-devtools/python/python3-m2=
+crypto/0001-import-gcc_macros.h.patch
+> > new file mode 100644
+> > index 0000000000..3c6d584983
+> > --- /dev/null
+> > +++ b/meta-python/recipes-devtools/python/python3-m2crypto/0001-import=
+-gcc_macros.h.patch
+> > @@ -0,0 +1,59 @@
+> > +From 1364722439a0a36e3f57119dd45de666d213888c Mon Sep 17 00:00:00 200=
+1
+> > +From: Martin Jansa <Martin.Jansa@gmail.com>
+> > +Date: Wed, 5 May 2021 21:34:35 +0000
+> > +Subject: [PATCH] import gcc_macros.h
+> > +
+> > +* it was dropped as unnecessary in the upgrade to 0.37.1 but for
+> > +  aarch64 it still seems to be needed at least in some setups
+> > +  otherwise swig fails with:
+> > +  http://errors.yoctoproject.org/Errors/Details/580206/
+> > +  swig -python -py3 -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python=
+3-m2crypto/0.37.1-r0/recipe-sysroot-native/usr/bin/aarch64-oe-linux/../../l=
+ib/aarch64-oe-linux/gcc/aarch64-oe-linux/11.1.0/include -ITOPDIR/tmp-glibc/=
+work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot-native/us=
+r/bin/aarch64-oe-linux/../../lib/aarch64-oe-linux/gcc/aarch64-oe-linux/11.1=
+.0/include-fixed -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypt=
+o/0.37.1-r0/recipe-sysroot/usr/lib/aarch64-oe-linux/11.1.0/include -ITOPDIR=
+/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroo=
+t/usr/include -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0=
+.37.1-r0/recipe-sysroot/usr/include -ITOPDIR/tmp-glibc/work/cortexa57-oe-li=
+nux/python3-m2crypto/0.37.1-r0/recipe-sysroot/usr/include/python3.9 -I/usr/=
+include/openssl -includeall -modern -builtin -outdir TOPDIR/tmp-glibc/work/=
+cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/M2Crypto-0.37.1/M2Crypto -o S=
+WIG/_m2crypto_wrap.c SWIG/_m2crypto.i
+> > +  TOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0=
+/recipe-sysroot/usr/include/openssl/opensslconf.h:23: Error: Unable to find=
+ 'openssl/opensslconf-32.h'
+> > +
+> > +* if I drop the -includeall from swig call I get a bit more reasonabl=
+e error message:
+> > +  Preprocessing...
+> > +  /OE/build/oe-core/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypt=
+o/0.37.1-r0/recipe-sysroot/usr/include/openssl/opensslconf.h:29: Error: CPP=
+ #error ""Unknown __WORDSIZE detected"". Use the -cpperraswarn option to co=
+ntinue swig processing.
+> > +
+> > +* maybe we need newer swig, the regenerated m2crypto.py shows
+> > +  that it was generated with 4.0.2 before while meta-oe has 3.0.12
+> > +
+> > +Upstream-Status: Pending
+> > +
+> > +Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > +---
+> > + SWIG/_m2crypto.i  |  10 +-
+> > + 2 files changed, 737 insertions(+), 5 deletions(-)
+> > + create mode 100644 SWIG/gcc_macros.h
+> > +
+> > +diff --git a/SWIG/_m2crypto.i b/SWIG/_m2crypto.i
+> > +index e300a10..3d51c22 100644
+> > +--- a/SWIG/_m2crypto.i
+> > ++++ b/SWIG/_m2crypto.i
+> > +@@ -8,6 +8,11 @@
+> > +  *
+> > +  */
+> > +
+> > ++%import "gcc_macros.h"
+> > ++
+> > ++%ignore WCHAR_MAX;
+> > ++%ignore WCHAR_MIN;
+> > ++
+> > + %module(threads=3D1) m2crypto
+> > + /* We really don't need threadblock (PyGILState_Ensure() etc.) anywh=
+ere.
+> > +    Disable threadallow as well, only enable it for operations likely=
+ to
+> > +@@ -15,10 +20,6 @@
+> > + %nothreadblock;
+> > + %nothreadallow;
+> > +
+> > +-#if SWIG_VERSION >=3D 0x030000
+> > +-#define __WCHAR_MAX__ __WCHAR_MAX
+> > +-#define __WCHAR_MIN__ __WCHAR_MIN
+> > +-#endif
+> > + /* https://gitlab.com/m2crypto/m2crypto/issues/246 */
+> > + %ignore WCHAR_MAX;
+> > + %ignore WCHAR_MIN;
+> > +@@ -103,4 +104,3 @@ static PyObject *x509_store_verify_cb_func;
+> > + %constant int encrypt =3D 1;
+> > + %constant int decrypt =3D 0;
+> > + #endif
+> > +-
+> > diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.37=
+.1.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
+> > index 896d9d2cc4..84400da002 100644
+> > --- a/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
+> > +++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
+> > @@ -10,6 +10,7 @@ SRC_URI +=3D "file://0001-setup.py-link-in-sysroot-n=
+ot-in-host-directories.patch \
+> >              file://cross-compile-platform.patch \
+> >              file://0001-Allow-verify_cb_-to-be-called-with-ok-True.pa=
+tch \
+> >              file://0001-Use-of-RSA_SSLV23_PADDING-has-been-deprecated=
+.patch \
+> > +            file://0001-import-gcc_macros.h.patch \
+> >             "
+> >  SRC_URI[sha256sum] =3D "e4e42f068b78ccbf113e5d0a72ae5f480f6c3ace4940b=
+91e4fff5598cfff6fb3"
+> >
+> > --
+> > 2.30.2
+> >
+> >
+> >=20
+> >
