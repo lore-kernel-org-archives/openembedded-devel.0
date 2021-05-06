@@ -1,71 +1,90 @@
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.web11.1005.1620325638517347146
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.web11.1025.1620325715708875195
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 May 2021 11:27:18 -0700
+ Thu, 06 May 2021 11:28:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Gjd2chDx;
- spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: romain.naour@gmail.com)
-Received: by mail-wr1-f46.google.com with SMTP id l14so6636862wrx.5
-        for <openembedded-devel@lists.openembedded.org>; Thu, 06 May 2021 11:27:18 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=SRyKP7hE;
+ spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: romain.naour@gmail.com)
+Received: by mail-wr1-f51.google.com with SMTP id l14so6640368wrx.5
+        for <openembedded-devel@lists.openembedded.org>; Thu, 06 May 2021 11:28:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Im2elw5mD2eRCLrQhNWNFFMqaI+UxvuRkIdeMjlwmcM=;
-        b=Gjd2chDxtja+INMDZpHRGlFZJZOI4y9D3yVmoJyNWgsc7l98hkTlE7kbrY6S+FEsn7
-         TqIgR6VQOkwqS5IAEuwWR2e3N4Fex/VP+iN9BOWb2GrAitBCAXSdqz9pMigF/TOdszLV
-         u0Vn05KJpinFOEjMQCKGC4fhuxLNMXqpDhfe+a77iG8cU65U3zX+FSdGaq/kbHlTTGE+
-         uPHuaYZv6q5HxeBwow2re6RU9fwE9nuUvXljz5Nk5Dtu9ViFU8P6hDEuSjkVrsT/RZGr
-         u0ojmvqPsnZPC1piA46NHuUNuVSCmN3g83Bpc0xJgFicS4WebQa4GoiE+RWVyAWBwKjv
-         TsDQ==
+        h=subject:to:references:from:message-id:date:user-agent:mime-version
+         :in-reply-to:content-language:content-transfer-encoding;
+        bh=dkG3kTrxblvz0nCGs3YhGXInE5RinLHxYwx6jIzmZyo=;
+        b=SRyKP7hEMYGxf+szi7JY38vfYXaZ+7TgVv57PtP3olBkJwna9aDoP7PoNjft0ajKC/
+         LGQ984yBgOxErPQcEernX+uQY5D9ox0vuXfzbFLVYtrX+4MbJfuvXEjlmZng96L1YE7m
+         FAxfaNUnLJ5T7yrpf95EhKZ8IXnIIfYyTTPLB6bsxD+kXqK2krfC/540L7sp1ee6hE6v
+         K2iHAIEOJXEfhgtYUbrYKftV1Hv5CC03V6s5hqmjrBJfqmDEcnPKLaGfTyD/guRCnSxF
+         edw/KdN7aTXlQ62tVsMCVukAezEebzuLZfn3HXZw/41EIQfbuDmWjbrhFifLM4tdjYMZ
+         Qdhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:subject:to:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
          :content-transfer-encoding;
-        bh=Im2elw5mD2eRCLrQhNWNFFMqaI+UxvuRkIdeMjlwmcM=;
-        b=dk/zduJJcrzuVDy95j5Ti+Tgst3HrqCxXmpshxNVNxzR7laT8olXJ4Mq0xTcvpQV68
-         Xrwxt6v9P7Y474jFQR4O2KZgOo+uc0I38vCrFHSpgR7UOd9f3a2C6fqMDByWGIiS809D
-         4oxN5HWnTFS+sJjnZwj80i+44VKPqH2z/nNtWAlGOZrojAehA/a11RhSBUtUiRzB0JCn
-         isUpDKrxYnTYz3IJzSzUeAhFGEoSA7cDIhXv6BpR15+O1qMPUcu7ReI94MciPijW3QIW
-         5LBq3MAbJzjl97Jh1CkBWFI5L8GFzksbTVLVJKHKKWOp1WR8CkYb1UkoZANNZsabjJcD
-         ISlA==
-X-Gm-Message-State: AOAM53120NmzGOQ071UyAQ+5Iv65N7giK2lDqpHS9xIBx02MemZscsFG
-	bLRmXTE0jnCCf3KpPkQDx03qztOrIso=
-X-Google-Smtp-Source: ABdhPJx5SnJrosfYjQUBD91+h5MNoWUhxnA/UT+FJZZrbYN3FEfkHV+2n05bEBn30HKvLBjiJQllWQ==
-X-Received: by 2002:adf:d1e8:: with SMTP id g8mr7053627wrd.80.1620325636908;
-        Thu, 06 May 2021 11:27:16 -0700 (PDT)
+        bh=dkG3kTrxblvz0nCGs3YhGXInE5RinLHxYwx6jIzmZyo=;
+        b=RG45Kw1FkMjKF+2IR4j/2PooVaqUJLVPYyUKcjN4HcUd69y0dAZlSQLY6InBJ8JdW1
+         42a4bEh5pKnsiPZcWY5ayWUj3eu60adOSVQ0vtwLZCfHHZXLWjRoBAOHIWO8UEYqRNlU
+         w00pxZ8PwjAXdou0iHGh/mlJKZby8abKil+ghEcT6QdjsCBnNHcFVzSb3WW+3cOFep6T
+         g8SETW1fVGgGRo92Y7mCU3xHiEn05wdgMMts5MBnQms6hZbDJfAjmJUEHFLFN5O044GO
+         ROB55KFuNp5v+IWdzDCP6TuG9Mjj2gB7niX7BOXq2ueQEQwUC8p8uyZnlv59rt8GRejk
+         B0VA==
+X-Gm-Message-State: AOAM531goq6frvFvrnQ2N4xXt7DMjndp47S1FyTljgg+F6H8kI3fhh0b
+	KSQlQ2b8RKfBSGNCRJ8ONNgwVBIKVvA=
+X-Google-Smtp-Source: ABdhPJw8mX8OdscMp+QnAl0ctM0fk2drsCrj5YpMTn7aiW6KpmyXJWha22WlRHZqKvw78gZovkiVTA==
+X-Received: by 2002:a5d:53c9:: with SMTP id a9mr7145719wrw.108.1620325714214;
+        Thu, 06 May 2021 11:28:34 -0700 (PDT)
 Return-Path: <romain.naour@gmail.com>
-Received: from localhost.localdomain (pop.92-184-97-96.mobile.abo.orange.fr. [92.184.97.96])
-        by smtp.gmail.com with ESMTPSA id 3sm4117051wms.30.2021.05.06.11.27.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 06 May 2021 11:27:16 -0700 (PDT)
+Received: from [192.168.42.153] (pop.92-184-97-96.mobile.abo.orange.fr. [92.184.97.96])
+        by smtp.gmail.com with ESMTPSA id n5sm5665797wrx.31.2021.05.06.11.28.33
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 06 May 2021 11:28:33 -0700 (PDT)
+Subject: Re: [oe] [meta-oe][PATCH 1/2] poke: add recipe for version 1.2
+To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
+References: <20210505230545.2574514-1-romain.naour@gmail.com>
+ <cfd7b579-09cc-6d6d-4fa6-6f1f2a31bb5b@gmail.com>
 From: "Romain Naour" <romain.naour@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Romain Naour <romain.naour@gmail.com>
-Subject: [PATCH] packagegroup-meta-oe: Add poke to packagegroup-meta-oe-devtools
-Date: Thu,  6 May 2021 20:27:12 +0200
-Message-Id: <20210506182712.2632787-1-romain.naour@gmail.com>
-X-Mailer: git-send-email 2.30.2
+Message-ID: <b609cc76-25e2-63db-05dc-d2d1cf8163ce@gmail.com>
+Date: Thu, 6 May 2021 20:28:32 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
+In-Reply-To: <cfd7b579-09cc-6d6d-4fa6-6f1f2a31bb5b@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Romain Naour <romain.naour@gmail.com>
----
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 1 +
- 1 file changed, 1 insertion(+)
+Hi Khem,
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index eb095a237..e9493fe27 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -300,6 +300,7 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
-     xmlrpc-c \
-     yasm \
-     json-schema-validator \
-+    poke \
- "
- RDEPENDS_packagegroup-meta-oe-devtools_append_x86 = " cpuid msr-tools pmtools"
- RDEPENDS_packagegroup-meta-oe-devtools_append_x86-64 = " cpuid msr-tools pcimem pmtools"
--- 
-2.30.2
+Le 06/05/2021 à 02:40, Khem Raj a écrit :
+> Thanks for Patch Roman
+> 
+> Since its a new package can you also send a followup to add it to test
+> packagegroup packagegroup-meta-oe-devtools in packagegroup-meta-oe.bb
 
+Thanks for the suggestion.
+
+See:
+https://lists.openembedded.org/g/openembedded-devel/message/91178
+
+Best regards,
+Romain
+
+
+> 
+> On 5/5/21 4:05 PM, Romain Naour wrote:
+>> Backport a patch to disable tcl/tk dependencies when gui support
+>> is disabled.
+>>
+>> Add a local patch to workaround a path poisoning issue. Issue
+>> reported upstream.
+>>
+>> Add another local patch when HELP2MAN is missing.
+>>
+>> See:
+>> http://www.jemarch.net/poke-1.0-relnotes.html
+>> http://www.jemarch.net/poke-1.1-relnotes.html
+>> http://www.jemarch.net/poke-1.2-relnotes.html
+>>
+>> Signed-off-by: Romain Naour <romain.naour@gmail.com>
