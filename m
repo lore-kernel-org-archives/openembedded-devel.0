@@ -1,48 +1,48 @@
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
- by mx.groups.io with SMTP id smtpd.web08.9213.1620307402002996822
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.web09.9178.1620307917684961419
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 May 2021 06:23:22 -0700
+ Thu, 06 May 2021 06:31:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=esW8tQxC;
- spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f47.google.com with SMTP id gc22-20020a17090b3116b02901558435aec1so3456325pjb.4
-        for <openembedded-devel@lists.openembedded.org>; Thu, 06 May 2021 06:23:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=LKL0JuPB;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id t2-20020a17090ae502b029015b0fbfbc50so3459345pjy.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 06 May 2021 06:31:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=to:from:subject:autocrypt:message-id:date:user-agent:mime-version
          :content-transfer-encoding:content-language;
-        bh=QIOkXpfUmsR0iVkBrIwHg/9HWksEv6Pr5IT6j2KeRu0=;
-        b=esW8tQxCsmqkLgasFQE3eDc3m3CDxQfz5N+DL25kX12Yw3IxW0Pg/Yg+VzfU2DJYTK
-         shM3sEVRegJUHOYE+LjkFb7o2ia5s6qSpN7T4mQ3gGHXZgOXWsdjXdG+ssWLoi0rnzSq
-         Ke/dkGtLBErzOxim+PMPdlc+kdo70jff3jVl06sRiYtTuk3dVGa4WFqfGs/DqOAiv12O
-         0PZegPGHdlR8M2BKMbIKTEUzyE8Dp9lRU4KRhPXoKKZpiHbgK8KGN1NR768+0xfndhP8
-         LXl3eSpZjJeQWthS1qnR3tDQj0q+YZ4BE9C0D2BQewn+Ek6tz5jG+ouOIEqOyBzL+piv
-         Wnew==
+        bh=LvOM4zeA9m9w/uZ7lscG3KiLty4rUqjDSkOfHzYiXBI=;
+        b=LKL0JuPB12ikiWkvupGG6Qs4W86ktc5KrwnjPHk1R/0Ge+GgoLTfOTZsOG41btzZed
+         7AM6js8X3L/jEe2KPdNy695lhRvZ/pD/bRaPbBsW26W5ibljkOIoweMiMsc4fE2qrmLC
+         Z1+P93FwP+hgUoNBmpvfFPRgvnApCs8ZIQZo/GuDiqGULlEE4gWuG4EckSr6VuRr92pg
+         6FWzn76XtOzWEIQNhvUoh5kx41iu2zosi3VD9IcSoH92J5yBKl33c7XTpobRvOKNG7Wo
+         EVqlsz6Id5XWY1r6acaaqU8uspyyoVk/XqWQ+xk/oKHSWByon7pMpNvRxEU2ohTNYkxT
+         zEnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:to:from:subject:autocrypt:message-id:date
          :user-agent:mime-version:content-transfer-encoding:content-language;
-        bh=QIOkXpfUmsR0iVkBrIwHg/9HWksEv6Pr5IT6j2KeRu0=;
-        b=sEcDayQ65m5QnN2qFw2+C0ofhH6BxQqGNHyRBuY9raXIiOpBzFmF4jQze/7eEL7J6X
-         zu72Oi7F2DHOKsWjdD92wh1eXKDFD5Aa0+tDaw2+cjeW4G++RiLs+vDCPRiMvI3eopXK
-         X3oWuaXopThOB9B06vvfA6zMeRRvecqkPqlaM3Jsml+BunBAjK2F9A8lEGp48dr/kKjX
-         lAuHE07MXiAP8s2ip9GgNBm/TmI4RbCFnjngRRKSWSXcNOHdcitjiNnJQm5AZk+13+MA
-         6QVG4HKD8noEIqucDoPqp79jH4qPJtMUaTk/qYOKwnod/9DoTQk8S3PNQ00aEwqcBmSm
-         whSA==
-X-Gm-Message-State: AOAM531Ga9lhL+ar55sKLp44nV50fPgS3M5UxeKXPQboXIUGsQaZWGpm
-	lSZPvea2ur0gGabIDUMokqU=
-X-Google-Smtp-Source: ABdhPJwnm7reInq4yD5tKqTTPh6VyufP42CaGcqLlT2wIeMKt5TYZ9o5negXv2jTTXQGGR3N4ekS3A==
-X-Received: by 2002:a17:90a:f283:: with SMTP id fs3mr18661783pjb.122.1620307401485;
-        Thu, 06 May 2021 06:23:21 -0700 (PDT)
+        bh=LvOM4zeA9m9w/uZ7lscG3KiLty4rUqjDSkOfHzYiXBI=;
+        b=jC/ARG0UkD2tHQ1qG5mXtaHMNmU5ObO/cR6oQMziFz+JXwl09gJAgGiW99ddepZv3L
+         GNfxmdMl2YQD4L7ZCwCzumrR7Zu0BH5o2DZUt9Ksky8JVSf4jOIMKM4htSauc7EaFgOM
+         +VIQm4SZmOwerZwzVkDeuqRnFxhaNwz8FSqQroNEtpabzddEIv+E6dm6SAP1YuYwyR/b
+         4aX1T9DC5b4xtoqWx0AIr+St4RCkre06Fn9PV+easWdsADyQQsszuu8DKjWsEdi1C3LE
+         k9EPGmuSQ72QbhwNJhBSJdlCgeSEwmfQoGprGIpzaFFoMBiGFlBvN+zdF+s3IWxAkCMd
+         yCOg==
+X-Gm-Message-State: AOAM5328HqQoJcLqUMBNWkS4F0ohZqQVNJkpHZsPRJUn5LwWYQ4RjDcn
+	mRwL+Z6JdWC/Ylk0zalIjCs=
+X-Google-Smtp-Source: ABdhPJyqK7kBgpRV4qvrgwwtF7Ooli+RPgzdc0NqiDDaKGBC5YujreW9RPoTdHgGjvjJBU6zrLaYYA==
+X-Received: by 2002:a17:90a:c7d4:: with SMTP id gf20mr4632775pjb.106.1620307917215;
+        Thu, 06 May 2021 06:31:57 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from ?IPv6:2601:202:4180:a5c0:899e:2fa0:8320:d89b? ([2601:202:4180:a5c0:899e:2fa0:8320:d89b])
-        by smtp.gmail.com with ESMTPSA id k12sm2046877pgh.16.2021.05.06.06.23.20
+        by smtp.gmail.com with ESMTPSA id h9sm2338078pfv.14.2021.05.06.06.31.56
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 06 May 2021 06:23:21 -0700 (PDT)
+        Thu, 06 May 2021 06:31:56 -0700 (PDT)
 To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
  Khem Raj <raj.khem@gmail.com>
 From: "Armin Kuster" <akuster808@gmail.com>
-Subject: hardknott-next merge request
+Subject: Gatesgarth-next merge request: May 6
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
  Jmd71vHMw+coBetWC3lk+IKjX815Ox0puYXQVRRtI+yMCgd6ib3oGxoQ8tCMwhf9c9/aKjaz
@@ -86,8 +86,8 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
  PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
  ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
  8CS2NxU=
-Message-ID: <e2bc5e89-5b18-177d-a0f2-75cc6d0b0774@gmail.com>
-Date: Thu, 6 May 2021 06:23:19 -0700
+Message-ID: <1f41ca9d-1cd1-b4af-c107-5ca152360976@gmail.com>
+Date: Thu, 6 May 2021 06:31:55 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
@@ -95,80 +95,37 @@ Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
 
-The following changes since commit 71b546ed8595b14d29efc1e8b951f8c845ad10c4:
+The following changes since commit 29ca52c7826ad3044b53ccb5224016bd73abdb5c:
 
-  python3-cryptography: Upgrade to 3.3.2 (2021-04-23 19:09:56 -0700)
+  gpsd: backport d-bus message time patch from upstream (2021-04-18
+20:03:23 -0700)
 
 are available in the Git repository at:
 
-  https://git.openembedded.org/meta-openembedded hardknott-next
+  https://git.openembedded.org/meta-openembedded gatesgarth-next
 
-for you to fetch changes up to c3a36263f91e42302ad7c347e051cf1cd83e39f6:
+for you to fetch changes up to 70ee7293017c4f38fee71ffdb60e4713fdc88bcf:
 
-  packagegroup-meta-webserver: remove nostromo from pkg grp (2021-04-29
-18:57:25 -0700)
+  nodejs: 12.20.2 -> 12.21.0 (2021-04-29 21:41:27 -0700)
 
 ----------------------------------------------------------------
 Armin Kuster (2):
       nostromo: Blacklist and exclude from world builds
       packagegroup-meta-webserver: remove nostromo from pkg grp
 
-Kai Kang (1):
-      freeradius: check existence of openssl's commands in bootstrap
+Clément Péron (1):
+      nodejs: 12.20.2 -> 12.21.0
 
-Khem Raj (2):
-      tbb: Re-introduce PE
-      gimp: Disable vector icons on musl/x86
+Sean Nyekjaer (1):
+      nodejs: 12.20.1 -> 12.20.2
 
-Leon Anavi (3):
-      python3-pysonos: Upgrade 0.0.42 -> 0.0.43
-      python3-asttokens: Upgrade 2.0.4 -> 2.0.5
-      python3-hyperframe: Upgrade 6.0.0 -> 6.0.1
-
-Sinan Kaya (1):
-      zram: add support for mem_limit
-
-Yi Zhao (1):
-      gvfs: rdepend on gsettings-desktop-schemas
-
-zangrc (4):
-      networkmanager: upgrade 1.30.2 -> 1.30.4
-      libdvdread: upgrade 6.1.1 -> 6.1.2
-      redis: upgrade 6.2.1 -> 6.2.2
-      nss: upgrade 3.63 -> 3.64
-
- meta-gnome/recipes-gimp/gimp/gimp_2.10.22.bb       |  1 +
- meta-gnome/recipes-gnome/gvfs/gvfs_1.44.1.bb       |  2 ++
- .../check-openssl-cmds-in-script-bootstrap.patch   | 38
-++++++++++++++++++++++
- .../freeradius/freeradius_3.0.21.bb                |  1 +
- ...kmanager_1.30.2.bb => networkmanager_1.30.4.bb} |  2 +-
- .../redis/{redis_6.2.1.bb => redis_6.2.2.bb}       |  2 +-
- meta-oe/recipes-extended/zram/zram/zram-swap-init  |  5 +++
- .../{libdvdread_6.1.1.bb => libdvdread_6.1.2.bb}   |  4 +--
- .../nss/{nss_3.63.bb => nss_3.64.bb}               |  7 ++--
- meta-oe/recipes-support/tbb/tbb_2021.2.0.bb        |  2 ++
- ...rframe_6.0.0.bb => python3-hyperframe_6.0.1.bb} |  3 +-
- ...ttokens_2.0.4.bb => python3-asttokens_2.0.5.bb} |  2 +-
- ...pysonos_0.0.42.bb => python3-pysonos_0.0.43.bb} |  2 +-
- .../packagesgroups/packagegroup-meta-webserver.bb  |  1 -
- .../recipes-httpd/nostromo/nostromo_1.9.9.bb       |  3 ++
- 15 files changed, 63 insertions(+), 12 deletions(-)
- create mode 100644
-meta-networking/recipes-connectivity/freeradius/files/check-openssl-cmds-in-script-bootstrap.patch
- rename
-meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.30.2.bb
-=> networkmanager_1.30.4.bb} (98%)
- rename meta-oe/recipes-extended/redis/{redis_6.2.1.bb =>
-redis_6.2.2.bb} (96%)
- rename meta-oe/recipes-multimedia/libdvdread/{libdvdread_6.1.1.bb =>
-libdvdread_6.1.2.bb} (71%)
- rename meta-oe/recipes-support/nss/{nss_3.63.bb => nss_3.64.bb} (96%)
- rename
-meta-python/recipes-connectivity/python-hyperframe/{python3-hyperframe_6.0.0.bb
-=> python3-hyperframe_6.0.1.bb} (61%)
- rename meta-python/recipes-devtools/python/{python3-asttokens_2.0.4.bb
-=> python3-asttokens_2.0.5.bb} (81%)
- rename meta-python/recipes-devtools/python/{python3-pysonos_0.0.42.bb
-=> python3-pysonos_0.0.43.bb} (79%)
+ .../recipes-devtools/nodejs/{nodejs_12.20.1.bb => nodejs_12.21.0.bb}  
+| 2 +-
+ .../recipes-core/packagesgroups/packagegroup-meta-webserver.bb        
+| 1 -
+ meta-webserver/recipes-httpd/nostromo/nostromo_1.9.9.bb               
+| 3 +++
+ 3 files changed, 4 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_12.20.1.bb =>
+nodejs_12.21.0.bb} (98%)
 
