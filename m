@@ -1,152 +1,132 @@
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web11.7131.1620484726058704246
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web08.7830.1620488404604533099
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 08 May 2021 07:38:46 -0700
+ Sat, 08 May 2021 08:40:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=VxuHAEA4;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id q2so9883415pfh.13
-        for <openembedded-devel@lists.openembedded.org>; Sat, 08 May 2021 07:38:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=kW5hWFkX;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id h14-20020a17090aea8eb02901553e1cc649so7064184pjz.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 08 May 2021 08:40:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ovyxqjQQbpxXoBFji3R7LwHZvACiexB3Mn/2ELGqOgs=;
-        b=VxuHAEA4bhmDiO0lSjPmilHfODYKU/CVSJ3c3n/bGpDL9jM4ey1zDpLUTGZ81UlbgG
-         6qg2C4zPob3ojg+aV/aB0hew9B3K8LETcjBgN3aqBoNDC2bl0U0blWcihh+SwtPJItzJ
-         9rjpdJdyhAkiFns5az4DcCwZXdVct9EzAvFXNkKvo558MgfLbKP634h5o7xLW/gOOPvV
-         tjq7i5ZCPJc/XhNRpuf1ntM2LyD91T/qklfTN1r1xytODIHYxD85rWzvZNPA27mRInz3
-         E/pTnPdiI4ojzWNWzeWxZMMRsmMgf6EMModapdgPbAH3GylTkt9VNU28nnOlzTNzdSSE
-         pr7g==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=GL47OecEOtaIZsCouckHhnwBHGg5C6AOClQQPqBeeOs=;
+        b=kW5hWFkXQbohQslPt/n3bvI4rI1SKY+a5LeJnhkEFU4UTOn7ll/mK6cLcq7joju903
+         k7QBMI7Y2T6NCW09yojG3y2zOmuxApMvUkgDsq1a7pR5udPOO1nxuISv29d2oDPakmJ1
+         tJQ0nfM7oNtdeYMEumq/JolQqFpKtNq7rKvEmIqXpaPvxOQkfY77fe9BdY16KP7QHO28
+         N/mGNzvaEWUcdzT1UWmtRHjcfGIvIwdy8IEW5zp0sF87BfLKxMcHJMi9F+zzyaeErQtW
+         cZQsp3WWRAzNn2wqN5VxTc2TjvYJ3mhfgVC54tRw7bbwo6uEMq8G0OvKZrTflW/R9jwx
+         LfsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ovyxqjQQbpxXoBFji3R7LwHZvACiexB3Mn/2ELGqOgs=;
-        b=pjUqwH9Uxd0wgwkaLgNTTAN1qAjmsFvaO7qgSFCKUctnFD6twcWcbsse39RPAiGAtd
-         MkrAFV1u/0ZJZlKr2LU1/QbaY1wUMrPpVnPNUsud/3Uo/yvhCW7BzCQnmAKDVT0e6Jji
-         GhmQ6jTJlf52lDg4wpKApIILJZUU3Jn+Jd5XG5hTCWmRId4WF1ke9Xa0ClKijJzPPSX5
-         Qp8u6CUcKunvZjPTpDequcDFcUgq1SiUfiDx5KHknj+SG/LGUeaeSDHlLQ/UUErZfWwr
-         I6jz77RRC4xT3sGPJgLv1r/Bnz0awkTN8T51NoTV2jP2wqDKLYFPTqasjh4skL56bC4r
-         ra/A==
-X-Gm-Message-State: AOAM532GZvRUVereUeLH1T0iAGsk5Y9oxnPlJwgm40C3uCFc3Bwb6/hH
-	TL2nE10JWF1TMmqPhz/fnwIdjiKAdimJPA==
-X-Google-Smtp-Source: ABdhPJyqjeBVgOzlJVDxtkhqOMwFSNPMJq0chEQYA6/Gmg5p4TTf131UhjG2Embrs7bsMiwndLwDmA==
-X-Received: by 2002:aa7:838a:0:b029:28e:d71b:b9bd with SMTP id u10-20020aa7838a0000b029028ed71bb9bdmr15733556pfm.38.1620484725305;
-        Sat, 08 May 2021 07:38:45 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::308d])
-        by smtp.gmail.com with ESMTPSA id c195sm7325358pfb.5.2021.05.08.07.38.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 08 May 2021 07:38:45 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] mariadb: Upgrade to 10.5.10
-Date: Sat,  8 May 2021 07:38:43 -0700
-Message-Id: <20210508143843.2039576-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=GL47OecEOtaIZsCouckHhnwBHGg5C6AOClQQPqBeeOs=;
+        b=kG20D+UeHHHwtZS1uXqeUFsyTogCRXwPJZGVVkjg9hApX8y5qWzd76x6gp7QpeaERO
+         5xkOkK8Z4L2gAOgzmfjigT6YbmLmJc7En2VzpMi9uDRq+Lf1j4r+BSn1TkISI8aHB6aA
+         9G6+USu+h+jyLsf9yFoLdWsxjrfKW2yWr4ubOTd0BusqhsMAHHMPonaFbv9E44JIvKuy
+         8sPLM7rmkC2x9y0I4brBO5HbWKjd7OczrErv3Ruo4XL8JGGoiAyPvA+RQNaAr0rk0Fz+
+         skZJgC0UkT2e75UYcunPbjVopqOU4pgy2x/pxPYHemkCf5D8Zy0xs3EVWOj4IHfOFJKn
+         gYTw==
+X-Gm-Message-State: AOAM533pnQTGGT51H0wvgzN7ZDxYqpXYYS7vS/mw/+yHOrIw07FbyXRi
+	zwLTFCFUXz/3M+My2dVLVMZYDoXgPQ1t0if2P54=
+X-Google-Smtp-Source: ABdhPJx/3bulSZuzmSvvXNMb2ayDZkTctRMJ4WYtN2r8ZKVVygtiJrK+SBuys1DoGfkKDajal5/R+FTAn2PHhbjc69g=
+X-Received: by 2002:a17:90a:c716:: with SMTP id o22mr16942467pjt.77.1620488404132;
+ Sat, 08 May 2021 08:40:04 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210508142135.2014030-1-raj.khem@gmail.com>
+In-Reply-To: <20210508142135.2014030-1-raj.khem@gmail.com>
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+Date: Sat, 8 May 2021 17:39:53 +0200
+Message-ID: <CALbNGRScoFY-hVi11kBZPK3utntZDp3=hiQ_TKqxMd83-X8-qA@mail.gmail.com>
+Subject: Re: [meta-multimedia][PATCH] libmusicbrainz: Rework native and target pieces
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Drop fix-a-building-failure.patch because upstream has made is narrower
-to apply to emulator builds and not just any cross compiling builds
+On Sat, May 8, 2021 at 4:21 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> Build the native tools via a proper native recipe
+> Once done this way we do not need any patches
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Cc: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> ---
+>  .../files/allow-libdir-override.patch         | 21 ------------
+>  .../musicbrainz/libmusicbrainz_git.bb         | 34 +++++--------------
+>  2 files changed, 9 insertions(+), 46 deletions(-)
+>  delete mode 100644 meta-multimedia/recipes-multimedia/musicbrainz/files/=
+allow-libdir-override.patch
+>
+> diff --git a/meta-multimedia/recipes-multimedia/musicbrainz/files/allow-l=
+ibdir-override.patch b/meta-multimedia/recipes-multimedia/musicbrainz/files=
+/allow-libdir-override.patch
+> deleted file mode 100644
+> index db4d6e8c99..0000000000
+> --- a/meta-multimedia/recipes-multimedia/musicbrainz/files/allow-libdir-o=
+verride.patch
+> +++ /dev/null
+> @@ -1,21 +0,0 @@
+> -Allow LIB_INSTALL_DIR to be set by the the cmake configure invocation.  =
+We dont
+> -easily have a way of determining something that patches ${LIB_SUFFIX} so=
+ we'll
+> -set LIB_INSTALL_DIR.
+> -
+> -Upstream-Status: Inappropriate [configuration]
+> -
+> -Signed-off-by: Kumar Gala <galak@kernel.crashing.org>
+> -
+> -Index: git/CMakeLists.txt
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- git.orig/CMakeLists.txt
+> -+++ git/CMakeLists.txt
+> -@@ -36,7 +36,7 @@ FIND_PACKAGE(LibXml2 REQUIRED)
+> - SET(LIB_SUFFIX "" CACHE STRING "Define suffix of directory name (32/64)=
+")
+> - SET(EXEC_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX} CACHE PATH "Installatio=
+n prefix for executables and object code libraries" FORCE)
+> - SET(BIN_INSTALL_DIR ${EXEC_INSTALL_PREFIX}/bin CACHE PATH "Installation=
+ prefix for user executables" FORCE)
+> --SET(LIB_INSTALL_DIR ${EXEC_INSTALL_PREFIX}/lib${LIB_SUFFIX} CACHE PATH =
+ "Installation prefix for object code libraries" FORCE)
+> -+SET(LIB_INSTALL_DIR ${EXEC_INSTALL_PREFIX}/lib${LIB_SUFFIX} CACHE PATH =
+ "Installation prefix for object code libraries")
+> - SET(INCLUDE_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/include CACHE PATH "Ins=
+tallation prefix for C header files" FORCE)
+> -
+> - CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/libmusicbrainz5.pc.cmake ${C=
+MAKE_CURRENT_BINARY_DIR}/libmusicbrainz5.pc)
+> diff --git a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrain=
+z_git.bb b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_gi=
+t.bb
+> index ca9d94a19c..f5ea36da91 100644
+> --- a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.b=
+b
+> +++ b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.b=
+b
+> @@ -3,38 +3,22 @@ DESCRIPTION =3D "The MusicBrainz client is a library wh=
+ich can be built into other
+>  HOMEPAGE =3D "http://musicbrainz.org"
+>  LICENSE =3D "LGPLv2.1+"
+>  LIC_FILES_CHKSUM =3D "file://COPYING.txt;md5=3Dfbc093901857fcd118f065f90=
+0982c24"
+> -DEPENDS =3D "expat libxml2 libxml2-native neon neon-native"
+> +DEPENDS =3D "expat libxml2 libxml2-native neon neon-native libmusicbrain=
+z-native"
+>
+>  PV =3D "5.1.0+git${SRCPV}"
+>
+> -SRCREV =3D "44c05779dd996035758f5ec426766aeedce29cc3"
+> -SRC_URI =3D "git://github.com/metabrainz/libmusicbrainz.git \
+> -           file://allow-libdir-override.patch "
+> +SRCREV =3D "8be45b12a86bc0e46f2f836c8ac88e1e98d82aee"
+^ This was not mentioned in description. Is PV still valid?
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...ve_10.5.9.bb => mariadb-native_10.5.10.bb} |  0
- meta-oe/recipes-dbs/mysql/mariadb.inc         |  3 +-
- .../mariadb/fix-a-building-failure.patch      | 35 -------------------
- .../mysql/mariadb/ppc-remove-glibc-dep.patch  |  2 +-
- .../{mariadb_10.5.9.bb => mariadb_10.5.10.bb} |  0
- 5 files changed, 2 insertions(+), 38 deletions(-)
- rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.5.9.bb => mariadb-native_10.5.10.bb} (100%)
- delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/fix-a-building-failure.patch
- rename meta-oe/recipes-dbs/mysql/{mariadb_10.5.9.bb => mariadb_10.5.10.bb} (100%)
+Cheers
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.9.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.10.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.5.9.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.5.10.bb
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 9833b28857..50cf5ed236 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -11,7 +11,6 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
-            file://install_db \
-            file://mysql-systemd-start \
-            file://configure.cmake-fix-valgrind.patch \
--           file://fix-a-building-failure.patch \
-            file://support-files-CMakeLists.txt-fix-do_populate_sysroot.patch \
-            file://sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
-            file://0001-disable-ucontext-on-musl.patch \
-@@ -25,7 +24,7 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
-           "
- SRC_URI_append_libc-musl = " file://ppc-remove-glibc-dep.patch"
- 
--SRC_URI[sha256sum] = "40ab19aeb8de141fdc188cf2251213c9e7351bee4d0cd29db704fae68d1068cf"
-+SRC_URI[sha256sum] = "a5ff32f9fcaaf26bf5cba94accc7b246d2d5eb75710d027e40122df6bac0babb"
- 
- UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
- 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/fix-a-building-failure.patch b/meta-oe/recipes-dbs/mysql/mariadb/fix-a-building-failure.patch
-deleted file mode 100644
-index 9149ee21f2..0000000000
---- a/meta-oe/recipes-dbs/mysql/mariadb/fix-a-building-failure.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From 1b2b6a61c9f82157cd2e0c3744f6c07e07aeb0bd Mon Sep 17 00:00:00 2001
--From: Mingli Yu <mingli.yu@windriver.com>
--Date: Mon, 4 Mar 2019 01:11:30 -0800
--Subject: [PATCH] fix a building failure
--
--Upstream-Status: Inappropriate [configuration]
--
--building failed since native does not generate import_executables.cmake
--In fact, our building system will export the needed commands
--
--Signed-off-by: Roy Li <rongqing.li@windriver.com>
--Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-----
-- CMakeLists.txt | 5 -----
-- 1 file changed, 5 deletions(-)
--
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index fc30750..4f9110e 100644
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -347,11 +347,6 @@ CHECK_PCRE()
-- 
-- CHECK_SYSTEMD()
-- 
---IF(CMAKE_CROSSCOMPILING)
---  SET(IMPORT_EXECUTABLES "IMPORTFILE-NOTFOUND" CACHE FILEPATH "Path to import_executables.cmake from a native build")
---  INCLUDE(${IMPORT_EXECUTABLES})
---ENDIF()
---
-- #
-- # Setup maintainer mode options. Platform checks are
-- # not run with the warning options as to not perturb fragile checks
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch b/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
-index 1ca86bcca2..d082d424b0 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
-@@ -36,7 +36,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
- +  __builtin_ppc_get_timebase();
-  #elif defined __GNUC__ && (defined __arm__ || defined __aarch64__)
-    /* Mainly, prevent the compiler from optimizing away delay loops */
--   __asm__ __volatile__ ("":::"memory");
-+   __asm__ __volatile__ ("isb":::"memory");
- --- a/storage/tokudb/PerconaFT/portability/toku_time.h
- +++ b/storage/tokudb/PerconaFT/portability/toku_time.h
- @@ -124,7 +124,7 @@ static inline tokutime_t toku_time_now(v
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.5.9.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.5.10.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb_10.5.9.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb_10.5.10.bb
--- 
-2.31.1
-
+Andreas
