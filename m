@@ -1,226 +1,138 @@
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
- by mx.groups.io with SMTP id smtpd.web09.3255.1620453080505315907
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web12.3285.1620453124863794892
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 07 May 2021 22:51:20 -0700
+ Fri, 07 May 2021 22:52:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=vGFfofHX;
- spf=pass (domain: gmail.com, ip: 209.85.222.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f174.google.com with SMTP id a2so10737536qkh.11
-        for <openembedded-devel@lists.openembedded.org>; Fri, 07 May 2021 22:51:20 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=OuZYC4mU;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id p17so6295659plf.12
+        for <openembedded-devel@lists.openembedded.org>; Fri, 07 May 2021 22:52:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=57qVAj+g2ehoEKmPSvnyxxfF40N5GF4OicL3VCminzI=;
-        b=vGFfofHXhukgc2RDEIAg+dbqmm/lWdRmaWAQiUgx+Xp85gq7ZWYRRKjlzKx6iu9KGt
-         Su1PSoYJzWSN6pd0I9STf5nTt2y7vrNat0nMdyR9nbqZkpu/LQ1nyOfQMZFsj3165Dcc
-         Etjqw1//A+cRbx9RX4a3C5zyMb3X/mULnqyzX9NCrccZyisy3rHqfL6lcm5PbniHqXY1
-         BcgZf13hwAeK0X8/JfHJDoXtOadx1Yrfn6S8yXoq0JaAuu7hw1VFJq0Z/HZlL12KQF31
-         zek/bItIdISi8OasQWZsyOd8Lqgdjjns0J4/eZ5o5olBf+ilOqH3+qAwUqP0g8WCvBu3
-         OF5A==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=fIzsaWf9i/CfE+X8tcuuj9i+vw4d8adrxAsyDiqofU8=;
+        b=OuZYC4mUkjQiLu9sRGrzud8QaIZq6vdcq1bzyQxwr/wBzd6B3JZHUZyda01ynFYj3T
+         GB0OfJfKJLkJivm7dwuF6PCY+Z/sVSmxkjDS3iPQS5456pHU0CEtE5E61oTUVSmDDPzP
+         4I63YIn0xfgmgXb7iW9biFL6UwmTEiUXIYh1bqmbJACEsm3lvjX5QcT7a5Q4dF3eo6Nn
+         lE38qsHBXOW/2MRTms8ZYAySYWn2jGFsuSQC3vRz710G4qWltjZhY5W7sWM6G0i3GqT2
+         GGe+c1v+VBIOWZHu6ATN0Jjhvcv8uOJoOQ4EBJxxp4IYpwAFQkTAW7zQ3thQFs9PbVgC
+         sKSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=57qVAj+g2ehoEKmPSvnyxxfF40N5GF4OicL3VCminzI=;
-        b=Fisdht5TPJzB+dOpq5DeWVx5M8F4AkDrlCyD9oDoodCoMymTu+uyUhwFBWoJKwR4EO
-         00OeeT54CBdtkB6EmwiJEdWriRNEjGGYJi8kEwtVUfdXEkjRK8dLrKsswZ0Jm2IScPYA
-         GFrNwS/82m8n8cq7U9w1Vs7hf1C5DsUikMiUvdpod8wpKHiSqgxOY09dJBi000pcqP1U
-         3eMiE5Lh9iTyxqx+kIZgXhnudvmu7SqOi0sceqjydx9Djo66zR9TLardk2cNpFdWoG5G
-         JVihxHckAOuk0xkulbihjWfGkP/0XFxXQlIT/To5SA8o8BaN65FcOtrufHkS0QZ4ZMMj
-         KV2Q==
-X-Gm-Message-State: AOAM531TFouNyuXc/eJZrMaAnL08e0I3eVl2Vc066J9lLyhnanwXZeci
-	pmTIrEWsgJKlwjbzoL4gtto9qJL4wWqVUK3FkhI=
-X-Google-Smtp-Source: ABdhPJziaDv3iYxWrQzT45vQcDZ+ZuZNfHJAKQhZ1/i0JhQGC0DGg8GgrKDSsyNLlqZNxDzNttL5/OekfpkxAyr2cfk=
-X-Received: by 2002:a37:9607:: with SMTP id y7mr13286556qkd.25.1620453079545;
- Fri, 07 May 2021 22:51:19 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210505215026.1339351-1-Martin.Jansa@gmail.com>
- <CAMKF1soMMAPpwS5meeJbhJn_mB4pX8i+AYO4ocEacYe3wq5YQQ@mail.gmail.com> <CAMKF1so2gJRf6TWMdqs-C41tu7Qw2-TFvjoO_=9KnmsEkAVY3A@mail.gmail.com>
-In-Reply-To: <CAMKF1so2gJRf6TWMdqs-C41tu7Qw2-TFvjoO_=9KnmsEkAVY3A@mail.gmail.com>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=fIzsaWf9i/CfE+X8tcuuj9i+vw4d8adrxAsyDiqofU8=;
+        b=XlmIrGMMYDEBqr4hB9rOloLzw1adAdPvamTSLqzBvcxrpRRQ+p9Y6DRW5ZUbqQdmWd
+         CV3YJ+6J95BrwkaaGbwfweCHf5c5VrIOI+JfYweGT1/CDC8Wv5AZF6jPFwTNKmE7JGrK
+         urAbKdViqOEI7c6uftAh1QzU58M7zvM3V4UzPWt7qc62o0T4wLH51qrH4R2k4d5+NQAF
+         8GUB8iXns5phhb6XcXsnuuFAjk02x/u8QX6O2UOdK+26VQPltNPQcRpoC8kk01+IU1tQ
+         e/RU/X7KSzn6yPS63YMjBd8TW1YSvjUEvwnDfdpNVIYb8sa0dCiml7JoRjCQSyMbqO49
+         +Cgw==
+X-Gm-Message-State: AOAM530RpacYU96r7gAckQIdBQQZFa4nTOXHxUG0nHFzcKIK1DE9o9bs
+	IgLiubEVgrkxju6bQBBJp8uXR2PGrqHbiA==
+X-Google-Smtp-Source: ABdhPJzkoapEceVTCVJTQtsuLANLaXl49HyqKKfwtNrJaJ1G9SkRcJrhRZNGZBJnNistW0FVNFh97g==
+X-Received: by 2002:a17:90b:3796:: with SMTP id mz22mr26905661pjb.80.1620453123957;
+        Fri, 07 May 2021 22:52:03 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::308d])
+        by smtp.gmail.com with ESMTPSA id x6sm1141541pjk.19.2021.05.07.22.52.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 07 May 2021 22:52:03 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Fri, 7 May 2021 22:50:52 -0700
-Message-ID: <CAMKF1sogZt-y=113BxbWX1DKJPupEtQ9713npa6+satGor-SqA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][RFC][PATCH] python3-m2crypto: restore m2crypto-0.26.4-gcc_macros.patch
-To: Martin Jansa <Martin.Jansa@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] sdbus-c++-libsystemd: Avoid hard dependency on rsync
+Date: Fri,  7 May 2021 22:52:01 -0700
+Message-Id: <20210508055201.1527814-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.31.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Hi Martin
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...d25119a495009ea62f79e5daec34cc464628.patch | 53 +++++++++++++++++++
+ .../sdbus-c++/sdbus-c++-libsystemd_243.bb     |  7 +--
+ 2 files changed, 57 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd-243/7c5fd25119a495009ea62f79e5daec34cc464628.patch
 
-I have sent another simpler fix, please test it in your environment,
-this macros patch is a hack and has many issues, thats why I wanted to
-drop it in the first place.
+diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd-243/7c5fd25119a495009ea62f79e5daec34cc464628.patch b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd-243/7c5fd25119a495009ea62f79e5daec34cc464628.patch
+new file mode 100644
+index 0000000000..ae449791f1
+--- /dev/null
++++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd-243/7c5fd25119a495009ea62f79e5daec34cc464628.patch
+@@ -0,0 +1,53 @@
++From 7c5fd25119a495009ea62f79e5daec34cc464628 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Zbigniew=20J=C4=99drzejewski-Szmek?= <zbyszek@in.waw.pl>
++Date: Mon, 12 Apr 2021 14:03:32 +0200
++Subject: [PATCH] meson: do not fail if rsync is not installed with meson
++ 0.57.2
++
++https://github.com/mesonbuild/meson/issues/8641
++
++Our CI started to fail. Even if the change is reverted in meson,
++we need a quick workaround here.
++
++Upstream-Status: Backport
++Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
++---
++ man/meson.build | 25 ++++++++++++++-----------
++ 1 file changed, 14 insertions(+), 11 deletions(-)
++
++diff --git a/man/meson.build b/man/meson.build
++index 3cae8446cda..f9c4b83dc81 100644
++--- a/man/meson.build
+++++ b/man/meson.build
++@@ -184,17 +184,20 @@ html = custom_target(
++         depends : html_pages,
++         command : ['echo'])
++ 
++-run_target(
++-        'doc-sync',
++-        depends : man_pages + html_pages,
++-        command : ['rsync', '-rlv',
++-                   '--delete-excluded',
++-                   '--include=man',
++-                   '--include=*.html',
++-                   '--exclude=*',
++-                   '--omit-dir-times',
++-                   meson.current_build_dir(),
++-                   get_option('www-target')])
+++rsync = find_program('rsync', required : false)
+++if rsync.found()
+++        run_target(
+++                'doc-sync',
+++                depends : man_pages + html_pages,
+++                command : [rsync, '-rlv',
+++                           '--delete-excluded',
+++                           '--include=man',
+++                           '--include=*.html',
+++                           '--exclude=*',
+++                           '--omit-dir-times',
+++                           meson.current_build_dir(),
+++                           get_option('www-target')])
+++endif
++ 
++ ############################################################
++ 
+diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_243.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_243.bb
+index 4b93087f4f..dee3eab497 100644
+--- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_243.bb
++++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_243.bb
+@@ -12,9 +12,10 @@ DEPENDS += "gperf-native gettext-native util-linux libcap"
+ 
+ SRCREV = "efb536d0cbe2e58f80e501d19999928c75e08f6a"
+ SRCBRANCH = "v243-stable"
+-SRC_URI = "git://github.com/systemd/systemd-stable.git;protocol=git;branch=${SRCBRANCH}"
+-
+-SRC_URI += "file://static-libsystemd-pkgconfig.patch"
++SRC_URI = "git://github.com/systemd/systemd-stable.git;protocol=git;branch=${SRCBRANCH} \
++           file://static-libsystemd-pkgconfig.patch \
++           file://7c5fd25119a495009ea62f79e5daec34cc464628.patch \
++           "
+ 
+ # patches needed by musl
+ SRC_URI_append_libc-musl = " ${SRC_URI_MUSL}"
+-- 
+2.31.1
 
-On Thu, May 6, 2021 at 7:59 AM Khem Raj <raj.khem@gmail.com> wrote:
->
-> fails on musl builds
->
-> https://errors.yoctoproject.org/Errors/Details/580240/
->
-> On Wed, May 5, 2021 at 3:08 PM Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > Thanks, I guess I forgot that it was added for fixing same reason and
-> > by me :) so I should have known better but as always thanks for
-> > providing the fix.
-> >
-> > On Wed, May 5, 2021 at 2:50 PM Martin Jansa <Martin.Jansa@gmail.com> w=
-rote:
-> > >
-> > > * m2crypto-0.26.4-gcc_macros.patch was dropped as unnecessary
-> > >   in the upgrade to 0.37.1 but for aarch64 it still seems to
-> > >   be needed at least in some setups otherwise swig fails with:
-> > >   http://errors.yoctoproject.org/Errors/Details/580206/
-> > >   swig -python -py3 -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/pytho=
-n3-m2crypto/0.37.1-r0/recipe-sysroot-native/usr/bin/aarch64-oe-linux/../../=
-lib/aarch64-oe-linux/gcc/aarch64-oe-linux/11.1.0/include -ITOPDIR/tmp-glibc=
-/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot-native/u=
-sr/bin/aarch64-oe-linux/../../lib/aarch64-oe-linux/gcc/aarch64-oe-linux/11.=
-1.0/include-fixed -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2cryp=
-to/0.37.1-r0/recipe-sysroot/usr/lib/aarch64-oe-linux/11.1.0/include -ITOPDI=
-R/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysro=
-ot/usr/include -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/=
-0.37.1-r0/recipe-sysroot/usr/include -ITOPDIR/tmp-glibc/work/cortexa57-oe-l=
-inux/python3-m2crypto/0.37.1-r0/recipe-sysroot/usr/include/python3.9 -I/usr=
-/include/openssl -includeall -modern -builtin -outdir TOPDIR/tmp-glibc/work=
-/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/M2Crypto-0.37.1/M2Crypto -o =
-SWIG/_m2crypto_wrap.c SWIG/_m2crypto.i
-> > >   TOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r=
-0/recipe-sysroot/usr/include/openssl/opensslconf.h:23: Error: Unable to fin=
-d 'openssl/opensslconf-32.h'
-> > >
-> > > * if I drop the -includeall from swig call I get a bit more reasonab=
-le error message:
-> > >   Preprocessing...
-> > >   /OE/build/oe-core/tmp-glibc/work/cortexa57-oe-linux/python3-m2cryp=
-to/0.37.1-r0/recipe-sysroot/usr/include/openssl/opensslconf.h:29: Error: CP=
-P #error ""Unknown __WORDSIZE detected"". Use the -cpperraswarn option to c=
-ontinue swig processing.
-> > >
-> > > * gcc_macros.h is generated by do_configure_prepend, if
-> > >   this patch really isn't needed, then the do_configure_prepend
-> > >   should probably be dropped as well
-> > >
-> > > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > > ---
-> > >  .../0001-import-gcc_macros.h.patch            | 59 ++++++++++++++++=
-+++
-> > >  .../python/python3-m2crypto_0.37.1.bb         |  1 +
-> > >  2 files changed, 60 insertions(+)
-> > >  create mode 100644 meta-python/recipes-devtools/python/python3-m2cr=
-ypto/0001-import-gcc_macros.h.patch
-> > >
-> > > diff --git a/meta-python/recipes-devtools/python/python3-m2crypto/00=
-01-import-gcc_macros.h.patch b/meta-python/recipes-devtools/python/python3-=
-m2crypto/0001-import-gcc_macros.h.patch
-> > > new file mode 100644
-> > > index 0000000000..3c6d584983
-> > > --- /dev/null
-> > > +++ b/meta-python/recipes-devtools/python/python3-m2crypto/0001-impo=
-rt-gcc_macros.h.patch
-> > > @@ -0,0 +1,59 @@
-> > > +From 1364722439a0a36e3f57119dd45de666d213888c Mon Sep 17 00:00:00 2=
-001
-> > > +From: Martin Jansa <Martin.Jansa@gmail.com>
-> > > +Date: Wed, 5 May 2021 21:34:35 +0000
-> > > +Subject: [PATCH] import gcc_macros.h
-> > > +
-> > > +* it was dropped as unnecessary in the upgrade to 0.37.1 but for
-> > > +  aarch64 it still seems to be needed at least in some setups
-> > > +  otherwise swig fails with:
-> > > +  http://errors.yoctoproject.org/Errors/Details/580206/
-> > > +  swig -python -py3 -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/pyth=
-on3-m2crypto/0.37.1-r0/recipe-sysroot-native/usr/bin/aarch64-oe-linux/../..=
-/lib/aarch64-oe-linux/gcc/aarch64-oe-linux/11.1.0/include -ITOPDIR/tmp-glib=
-c/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot-native/=
-usr/bin/aarch64-oe-linux/../../lib/aarch64-oe-linux/gcc/aarch64-oe-linux/11=
-.1.0/include-fixed -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2cry=
-pto/0.37.1-r0/recipe-sysroot/usr/lib/aarch64-oe-linux/11.1.0/include -ITOPD=
-IR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysr=
-oot/usr/include -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto=
-/0.37.1-r0/recipe-sysroot/usr/include -ITOPDIR/tmp-glibc/work/cortexa57-oe-=
-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot/usr/include/python3.9 -I/us=
-r/include/openssl -includeall -modern -builtin -outdir TOPDIR/tmp-glibc/wor=
-k/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/M2Crypto-0.37.1/M2Crypto -o=
- SWIG/_m2crypto_wrap.c SWIG/_m2crypto.i
-> > > +  TOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-=
-r0/recipe-sysroot/usr/include/openssl/opensslconf.h:23: Error: Unable to fi=
-nd 'openssl/opensslconf-32.h'
-> > > +
-> > > +* if I drop the -includeall from swig call I get a bit more reasona=
-ble error message:
-> > > +  Preprocessing...
-> > > +  /OE/build/oe-core/tmp-glibc/work/cortexa57-oe-linux/python3-m2cry=
-pto/0.37.1-r0/recipe-sysroot/usr/include/openssl/opensslconf.h:29: Error: C=
-PP #error ""Unknown __WORDSIZE detected"". Use the -cpperraswarn option to =
-continue swig processing.
-> > > +
-> > > +* maybe we need newer swig, the regenerated m2crypto.py shows
-> > > +  that it was generated with 4.0.2 before while meta-oe has 3.0.12
-> > > +
-> > > +Upstream-Status: Pending
-> > > +
-> > > +Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > > +---
-> > > + SWIG/_m2crypto.i  |  10 +-
-> > > + 2 files changed, 737 insertions(+), 5 deletions(-)
-> > > + create mode 100644 SWIG/gcc_macros.h
-> > > +
-> > > +diff --git a/SWIG/_m2crypto.i b/SWIG/_m2crypto.i
-> > > +index e300a10..3d51c22 100644
-> > > +--- a/SWIG/_m2crypto.i
-> > > ++++ b/SWIG/_m2crypto.i
-> > > +@@ -8,6 +8,11 @@
-> > > +  *
-> > > +  */
-> > > +
-> > > ++%import "gcc_macros.h"
-> > > ++
-> > > ++%ignore WCHAR_MAX;
-> > > ++%ignore WCHAR_MIN;
-> > > ++
-> > > + %module(threads=3D1) m2crypto
-> > > + /* We really don't need threadblock (PyGILState_Ensure() etc.) any=
-where.
-> > > +    Disable threadallow as well, only enable it for operations like=
-ly to
-> > > +@@ -15,10 +20,6 @@
-> > > + %nothreadblock;
-> > > + %nothreadallow;
-> > > +
-> > > +-#if SWIG_VERSION >=3D 0x030000
-> > > +-#define __WCHAR_MAX__ __WCHAR_MAX
-> > > +-#define __WCHAR_MIN__ __WCHAR_MIN
-> > > +-#endif
-> > > + /* https://gitlab.com/m2crypto/m2crypto/issues/246 */
-> > > + %ignore WCHAR_MAX;
-> > > + %ignore WCHAR_MIN;
-> > > +@@ -103,4 +104,3 @@ static PyObject *x509_store_verify_cb_func;
-> > > + %constant int encrypt =3D 1;
-> > > + %constant int decrypt =3D 0;
-> > > + #endif
-> > > +-
-> > > diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.=
-37.1.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
-> > > index 896d9d2cc4..84400da002 100644
-> > > --- a/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
-> > > +++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
-> > > @@ -10,6 +10,7 @@ SRC_URI +=3D "file://0001-setup.py-link-in-sysroot=
--not-in-host-directories.patch \
-> > >              file://cross-compile-platform.patch \
-> > >              file://0001-Allow-verify_cb_-to-be-called-with-ok-True.=
-patch \
-> > >              file://0001-Use-of-RSA_SSLV23_PADDING-has-been-deprecat=
-ed.patch \
-> > > +            file://0001-import-gcc_macros.h.patch \
-> > >             "
-> > >  SRC_URI[sha256sum] =3D "e4e42f068b78ccbf113e5d0a72ae5f480f6c3ace494=
-0b91e4fff5598cfff6fb3"
-> > >
-> > > --
-> > > 2.30.2
-> > >
-> > >
-> > >=20
-> > >
