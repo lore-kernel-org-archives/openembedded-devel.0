@@ -1,97 +1,152 @@
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.web11.6976.1620483726567464845
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web11.7131.1620484726058704246
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 08 May 2021 07:22:06 -0700
+ Sat, 08 May 2021 07:38:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linuxfoundation.org header.s=google header.b=f/gkMjOb;
- spf=pass (domain: linuxfoundation.org, ip: 209.85.221.43, mailfrom: richard.purdie@linuxfoundation.org)
-Received: by mail-wr1-f43.google.com with SMTP id l2so12040814wrm.9
-        for <openembedded-devel@lists.openembedded.org>; Sat, 08 May 2021 07:22:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=VxuHAEA4;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id q2so9883415pfh.13
+        for <openembedded-devel@lists.openembedded.org>; Sat, 08 May 2021 07:38:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linuxfoundation.org; s=google;
-        h=from:to:subject:date:message-id:mime-version
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=CW4xChsNbsHlU9c2V+finD/Leol7t4xcOYRipDiLEgw=;
-        b=f/gkMjObVurnXBndFIF+Ha50xeE4Hv+CDVNlrrKfYuRBevp0p+AetViBSXwGuzFeSN
-         c5do2zadTU5J6ewjLfWlBqZv9h6Bmyz/0/lUpJKw2moUyZjlrgPR2nRJj4YL6bpYu51k
-         J3LGACtV/5MmExAtL7ClWyu68pisAo/9b2CP0=
+        bh=ovyxqjQQbpxXoBFji3R7LwHZvACiexB3Mn/2ELGqOgs=;
+        b=VxuHAEA4bhmDiO0lSjPmilHfODYKU/CVSJ3c3n/bGpDL9jM4ey1zDpLUTGZ81UlbgG
+         6qg2C4zPob3ojg+aV/aB0hew9B3K8LETcjBgN3aqBoNDC2bl0U0blWcihh+SwtPJItzJ
+         9rjpdJdyhAkiFns5az4DcCwZXdVct9EzAvFXNkKvo558MgfLbKP634h5o7xLW/gOOPvV
+         tjq7i5ZCPJc/XhNRpuf1ntM2LyD91T/qklfTN1r1xytODIHYxD85rWzvZNPA27mRInz3
+         E/pTnPdiI4ojzWNWzeWxZMMRsmMgf6EMModapdgPbAH3GylTkt9VNU28nnOlzTNzdSSE
+         pr7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=CW4xChsNbsHlU9c2V+finD/Leol7t4xcOYRipDiLEgw=;
-        b=OuZCRRQ8NutgdF2PT/poOItxqQ5kVYBxP8SC4YWV/bHmvOmSj0lp7HWcQ8IoWrtQNP
-         qn9NhizcI9wmksiVAzz0TBUbVQXIbR3So7ERDg1hf3f+jiuyIMsD4Cz33AZDpazLontI
-         8ap/nT0SDjRK6vHHNsjuErJfQvkBWmiC5SgYBOYBk2dRtiXeeZdkO94Ay+2oJTbghS5U
-         QGWv4X7O6x3krMe+RE3TRAPCQ19qKakEdTnilEXJsLLSUy3CgQgFHvnH9yVdR3Tj9dEt
-         BOBlKYqeS1brhwW7t7pILhT22i698Hfe0f3V8AaAD8NURgS73LhwarpXxbIM87cKg1BX
-         XaEQ==
-X-Gm-Message-State: AOAM530cc1mrVrtQqIqjtLg5hWmTnA9KigG/9sj7vSuN9tyEUgvNmhV6
-	wLlHcLr8T63eO/tU1eof+vpiXOWlJBzUuA==
-X-Google-Smtp-Source: ABdhPJz6klB2Tg9FXrPkQr57H0ZPF6/yoMGFL+QsMJHMYfqwBKei2tiLFTeN5osHG4+X4D6tGnM/xw==
-X-Received: by 2002:adf:e947:: with SMTP id m7mr20175711wrn.70.1620483724408;
-        Sat, 08 May 2021 07:22:04 -0700 (PDT)
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from hex.int.rpsys.net ([2001:8b0:aba:5f3c:8b6c:ea91:f112:97a5])
-        by smtp.gmail.com with ESMTPSA id 61sm15587812wrm.52.2021.05.08.07.22.04
-        for <openembedded-devel@lists.openembedded.org>
+        bh=ovyxqjQQbpxXoBFji3R7LwHZvACiexB3Mn/2ELGqOgs=;
+        b=pjUqwH9Uxd0wgwkaLgNTTAN1qAjmsFvaO7qgSFCKUctnFD6twcWcbsse39RPAiGAtd
+         MkrAFV1u/0ZJZlKr2LU1/QbaY1wUMrPpVnPNUsud/3Uo/yvhCW7BzCQnmAKDVT0e6Jji
+         GhmQ6jTJlf52lDg4wpKApIILJZUU3Jn+Jd5XG5hTCWmRId4WF1ke9Xa0ClKijJzPPSX5
+         Qp8u6CUcKunvZjPTpDequcDFcUgq1SiUfiDx5KHknj+SG/LGUeaeSDHlLQ/UUErZfWwr
+         I6jz77RRC4xT3sGPJgLv1r/Bnz0awkTN8T51NoTV2jP2wqDKLYFPTqasjh4skL56bC4r
+         ra/A==
+X-Gm-Message-State: AOAM532GZvRUVereUeLH1T0iAGsk5Y9oxnPlJwgm40C3uCFc3Bwb6/hH
+	TL2nE10JWF1TMmqPhz/fnwIdjiKAdimJPA==
+X-Google-Smtp-Source: ABdhPJyqjeBVgOzlJVDxtkhqOMwFSNPMJq0chEQYA6/Gmg5p4TTf131UhjG2Embrs7bsMiwndLwDmA==
+X-Received: by 2002:aa7:838a:0:b029:28e:d71b:b9bd with SMTP id u10-20020aa7838a0000b029028ed71bb9bdmr15733556pfm.38.1620484725305;
+        Sat, 08 May 2021 07:38:45 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::308d])
+        by smtp.gmail.com with ESMTPSA id c195sm7325358pfb.5.2021.05.08.07.38.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 08 May 2021 07:22:04 -0700 (PDT)
-From: "Richard Purdie" <richard.purdie@linuxfoundation.org>
+        Sat, 08 May 2021 07:38:45 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] [meta-python] python3-m2crypto: Improve multilib header workaround
-Date: Sat,  8 May 2021 15:22:03 +0100
-Message-Id: <20210508142203.2098012-1-richard.purdie@linuxfoundation.org>
-X-Mailer: git-send-email 2.30.2
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] mariadb: Upgrade to 10.5.10
+Date: Sat,  8 May 2021 07:38:43 -0700
+Message-Id: <20210508143843.2039576-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The multilib header issues continue to cause problems for this recipe. Simplfy
-the workaround to something which resolves all the current issues and
-is much simpler to understand/maintain.
+Drop fix-a-building-failure.patch because upstream has made is narrower
+to apply to emulator builds and not just any cross compiling builds
 
-Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../python/python3-m2crypto_0.37.1.bb         | 25 ++++---------------
- 1 file changed, 5 insertions(+), 20 deletions(-)
+ ...ve_10.5.9.bb => mariadb-native_10.5.10.bb} |  0
+ meta-oe/recipes-dbs/mysql/mariadb.inc         |  3 +-
+ .../mariadb/fix-a-building-failure.patch      | 35 -------------------
+ .../mysql/mariadb/ppc-remove-glibc-dep.patch  |  2 +-
+ .../{mariadb_10.5.9.bb => mariadb_10.5.10.bb} |  0
+ 5 files changed, 2 insertions(+), 38 deletions(-)
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.5.9.bb => mariadb-native_10.5.10.bb} (100%)
+ delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/fix-a-building-failure.patch
+ rename meta-oe/recipes-dbs/mysql/{mariadb_10.5.9.bb => mariadb_10.5.10.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
-index 896d9d2cc..45abaac33 100644
---- a/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
-@@ -36,27 +36,12 @@ SWIG_FEATURES_x32 = "-D__ILP32__"
- SWIG_FEATURES ?= "-D__${HOST_ARCH}__"
- export SWIG_FEATURES
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.9.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.10.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.5.9.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.5.10.bb
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 9833b28857..50cf5ed236 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -11,7 +11,6 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
+            file://install_db \
+            file://mysql-systemd-start \
+            file://configure.cmake-fix-valgrind.patch \
+-           file://fix-a-building-failure.patch \
+            file://support-files-CMakeLists.txt-fix-do_populate_sysroot.patch \
+            file://sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
+            file://0001-disable-ucontext-on-musl.patch \
+@@ -25,7 +24,7 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
+           "
+ SRC_URI_append_libc-musl = " file://ppc-remove-glibc-dep.patch"
  
--# Get around a problem with swig, but only if the
--# multilib header file exists.
--#
- do_configure_prepend() {
--    ${CPP} -dM - < /dev/null | grep -v '__\(STDC\|REGISTER_PREFIX\|GNUC\|STDC_HOSTED\)__' \
--    | sed 's/^\(#define \([^ ]*\) .*\)$/#undef \2\n\1/' > ${S}/SWIG/gcc_macros.h
--
--    if [ "${SITEINFO_BITS}" = "64" ];then
--        bit="64"
--    else
--        bit="32"
--    fi
--
--    if [ -e ${STAGING_INCDIR}/openssl/opensslconf-${bit}.h ] ;then
--        for i in SWIG/_ec.i SWIG/_evp.i; do
--            sed -i -e "s/opensslconf.*\./opensslconf-${bit}\./" "${S}/$i"
--        done
--    elif [ -e ${STAGING_INCDIR}/openssl/opensslconf-n${bit}.h ] ;then
--        for i in SWIG/_ec.i SWIG/_evp.i; do
--            sed -i -e "s/opensslconf.*\./opensslconf-n${bit}\./" "${S}/$i"
--        done
-+    # swig can't handle any multilib header redirection so just remove it for this build
-+    if [ -e ${STAGING_INCDIR}/openssl/opensslconf-64.h ] ;then
-+        cp ${STAGING_INCDIR}/openssl/opensslconf-64.h ${STAGING_INCDIR}/openssl/opensslconf.h
-+    elif [ -e ${STAGING_INCDIR}/openssl/opensslconf-32.h ] ;then
-+        cp ${STAGING_INCDIR}/openssl/opensslconf-32.h ${STAGING_INCDIR}/openssl/opensslconf.h
-     fi
- }
+-SRC_URI[sha256sum] = "40ab19aeb8de141fdc188cf2251213c9e7351bee4d0cd29db704fae68d1068cf"
++SRC_URI[sha256sum] = "a5ff32f9fcaaf26bf5cba94accc7b246d2d5eb75710d027e40122df6bac0babb"
  
+ UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
+ 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/fix-a-building-failure.patch b/meta-oe/recipes-dbs/mysql/mariadb/fix-a-building-failure.patch
+deleted file mode 100644
+index 9149ee21f2..0000000000
+--- a/meta-oe/recipes-dbs/mysql/mariadb/fix-a-building-failure.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-From 1b2b6a61c9f82157cd2e0c3744f6c07e07aeb0bd Mon Sep 17 00:00:00 2001
+-From: Mingli Yu <mingli.yu@windriver.com>
+-Date: Mon, 4 Mar 2019 01:11:30 -0800
+-Subject: [PATCH] fix a building failure
+-
+-Upstream-Status: Inappropriate [configuration]
+-
+-building failed since native does not generate import_executables.cmake
+-In fact, our building system will export the needed commands
+-
+-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+----
+- CMakeLists.txt | 5 -----
+- 1 file changed, 5 deletions(-)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index fc30750..4f9110e 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -347,11 +347,6 @@ CHECK_PCRE()
+- 
+- CHECK_SYSTEMD()
+- 
+--IF(CMAKE_CROSSCOMPILING)
+--  SET(IMPORT_EXECUTABLES "IMPORTFILE-NOTFOUND" CACHE FILEPATH "Path to import_executables.cmake from a native build")
+--  INCLUDE(${IMPORT_EXECUTABLES})
+--ENDIF()
+--
+- #
+- # Setup maintainer mode options. Platform checks are
+- # not run with the warning options as to not perturb fragile checks
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch b/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
+index 1ca86bcca2..d082d424b0 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
++++ b/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
+@@ -36,7 +36,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ +  __builtin_ppc_get_timebase();
+  #elif defined __GNUC__ && (defined __arm__ || defined __aarch64__)
+    /* Mainly, prevent the compiler from optimizing away delay loops */
+-   __asm__ __volatile__ ("":::"memory");
++   __asm__ __volatile__ ("isb":::"memory");
+ --- a/storage/tokudb/PerconaFT/portability/toku_time.h
+ +++ b/storage/tokudb/PerconaFT/portability/toku_time.h
+ @@ -124,7 +124,7 @@ static inline tokutime_t toku_time_now(v
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.5.9.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.5.10.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb_10.5.9.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb_10.5.10.bb
 -- 
-2.25.1
+2.31.1
 
