@@ -1,154 +1,151 @@
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web09.23756.1620594500717329330
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.web12.24346.1620596741747940113
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 09 May 2021 14:08:20 -0700
+ Sun, 09 May 2021 14:45:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=n1+ceoMd;
- spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id h20so8142273plr.4
-        for <openembedded-devel@lists.openembedded.org>; Sun, 09 May 2021 14:08:20 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=B5Cdvmbb;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id c17so12260463pfn.6
+        for <openembedded-devel@lists.openembedded.org>; Sun, 09 May 2021 14:45:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=J7l0Iu/MrlTOJFwgbFu+UHc9NKsKot9WwzyCPbJev3U=;
-        b=n1+ceoMdjJCFFQ7qzD+WxcH6wFe94vsJRi6OxTcJtufSx625LRE6rSQk96qYRUmMqR
-         W5xcbMYX0Kggq9MRZPQvv3iI4LeYvDFprwZySeqifKE6Lc21/v6LHyED4vTC64n5oK1n
-         bwoxTxU4qJBsDLJvjgEqX5Gd/n67pM68wTJt9jJffhX9WzFL1l9vKAQsOFX6VS0ZFAPw
-         sMDpCtHO/tsdWhqZXngD+NkfljzDB5T4WOa52tgOMH7oh3mfA5X+ircFnBn5bPnXzyUs
-         soqmf5wYTZWKs5R3Tp6VqYwnGudiwaGm/2jE+KjGLTPnTaNyO3PedjqQeVjC2/G2Bkmb
-         oDxA==
+        bh=siYGGJdI60Y9vUuyi2GbDZMURY+l8/Ly+3ielPgjOcs=;
+        b=B5CdvmbbyQgBWaFn++SQ9OJHI/oGdGdMTP6c8pDMMI5IGbqxb7jIzd3IWKSolYi9GY
+         BB5vRFbSoUaz/4kUiDG14RgyE8pq9OaRepW3SYyPS/0dg94y1qGNhGo0diU+2xsT+8iP
+         zs5gZIwAo/t3gmdhhRQ6Jo+Adyxd96939KUDyxRb2UkWoqK3HIY7gbjZUiasdA53avFL
+         eFC6zxNFqoOugVaEVWMroyFMN6NUfFXkhk7c4VBbKMYOV0BlZ2rd9MFW7+vf9FZbXK3U
+         rMr9On+D29A9yKPeUbLqFJdm5r/PORaoYUGdUQrCh6jnBOK/Mh9AvaIil4ignOiUtamu
+         PCLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=J7l0Iu/MrlTOJFwgbFu+UHc9NKsKot9WwzyCPbJev3U=;
-        b=KBbAepP8lodpge3exaqxAhnTlnSv59cjbiBtfnmd8Knav+K0QD7rs1opbIC/4U1IR5
-         SfEc7/7IZqZG9bUufIYNdHMXX5suTqmrag3E48rWkDKWQgbhcbnb7u4GEW6q0A6C2AwQ
-         2w82B1djxUaLyIQb4BbZCr1DUV/Q/qJQqrvXQcv6v7Aeh/cQHGbKmM0kmeWoRq2rtp5s
-         HyAISZkiyvLNmyruHxmTMIAilhcYI0IAmNnbIkxc0u4yGuh4RqbPEJz0q+GZ0B/a6NSG
-         pkZzRG3K8A2X0XZAATtb7GzsqSR8f5Ob0+ddkQtA1NXAJq9ehMOWrH/Atc7M8tPG9jzV
-         pgYA==
-X-Gm-Message-State: AOAM532mkR01qVAavo3M6KjvAt/JO6SRqjgAx+14R1Adgx7zXgKCxeNk
-	QR/m6YYryC0Z/Oy5sle41hPkm0qPpCwR/g==
-X-Google-Smtp-Source: ABdhPJzcltUepj2x4TtIoZFX2dPsiQOjJViecR3vdb9JXQlPvSwZTC47DR856oJPp3cbgQBnoronrA==
-X-Received: by 2002:a17:90a:c389:: with SMTP id h9mr35549727pjt.98.1620594499916;
-        Sun, 09 May 2021 14:08:19 -0700 (PDT)
+        bh=siYGGJdI60Y9vUuyi2GbDZMURY+l8/Ly+3ielPgjOcs=;
+        b=M/KXmmaU8ekKkGUhaX4n5fMvf/kmQ0sAzFcnjqhioAi3ms1RHg4neJ3f105sqpl13A
+         JrRcqVG7qo6mSvjFZYKbyFq3CdngrTCDEIAYOFOD25qkD4Jjo0G4wfkd7EVqsn10Hhz2
+         7vBid2g9YhTqs0lIpBDwlOYpxpC+co1R2x2FOQBt1prBHByc+CFBlFLNeK4n8Oaisz9U
+         WkxZqD9dv5KuHDppKVnP5/25jAKI7BId2w84sZ2KEKaErS+CAXPgtOFkNdEL/XMMFZHM
+         lImWVSvRBbPQUL13rjmFV5Se0iEEVdyr8f5paasXPZyluTzkaSBAgpHsllyGfQV4kz+R
+         Qm4w==
+X-Gm-Message-State: AOAM530rn757VdAQOfnyvR3Rv7jRqe9r6mWK7drrn87HbYcnHIpYj6EC
+	i/QmDf9/EDHMHI/ShQfSHaU0fu0rTodxMA==
+X-Google-Smtp-Source: ABdhPJytNIEG5+Hv/2sGc0eYMKSAsH0fbhleE8IQ/Fx3tiopUvqf6Ezgdm20XAWe1Nk53BUV7eUFAA==
+X-Received: by 2002:a63:6486:: with SMTP id y128mr21675594pgb.414.1620596740862;
+        Sun, 09 May 2021 14:45:40 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::308d])
-        by smtp.gmail.com with ESMTPSA id n18sm9357514pgj.71.2021.05.09.14.08.18
+        by smtp.gmail.com with ESMTPSA id f24sm10002770pfk.45.2021.05.09.14.45.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 09 May 2021 14:08:19 -0700 (PDT)
+        Sun, 09 May 2021 14:45:40 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Subject: [meta-multimedia][PATCH] libmusicbrainz: Rework native and target pieces
-Date: Sun,  9 May 2021 14:08:17 -0700
-Message-Id: <20210509210817.1511613-1-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] minicoredumper: Replace pthread_mutexattr_setrobust_np with pthread_mutexattr_setrobust
+Date: Sun,  9 May 2021 14:45:37 -0700
+Message-Id: <20210509214537.1536077-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Build the native tools via a proper native recipe
-Once done this way we do not need any patches
-
-Bump SRCREV to latest which brings in one fix [1]
-
-[1] https://github.com/metabrainz/libmusicbrainz/commit/8be45b12a86bc0e46f2f836c8ac88e1e98d82aee
+Remove unused patch 0001-minicoredumper-Initialize-pointer-to-config-struct-t.patch
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andreas Müller <schnitzeltony@gmail.com>
 ---
-v2: Improve commit msg
-v3: Install native make-c-interface as well
+ ...nitialize-pointer-to-config-struct-t.patch | 29 ----------------
+ ...mutexattr_setrobust_np-with-pthread_.patch | 33 +++++++++++++++++++
+ .../minicoredumper/minicoredumper_2.0.1.bb    |  1 +
+ 3 files changed, 34 insertions(+), 29 deletions(-)
+ delete mode 100644 meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-Initialize-pointer-to-config-struct-t.patch
+ create mode 100644 meta-oe/recipes-kernel/minicoredumper/files/0001-replace-pthread_mutexattr_setrobust_np-with-pthread_.patch
 
- .../files/allow-libdir-override.patch         | 21 -----------
- .../musicbrainz/libmusicbrainz_git.bb         | 35 ++++++-------------
- 2 files changed, 10 insertions(+), 46 deletions(-)
- delete mode 100644 meta-multimedia/recipes-multimedia/musicbrainz/files/allow-libdir-override.patch
-
-diff --git a/meta-multimedia/recipes-multimedia/musicbrainz/files/allow-libdir-override.patch b/meta-multimedia/recipes-multimedia/musicbrainz/files/allow-libdir-override.patch
+diff --git a/meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-Initialize-pointer-to-config-struct-t.patch b/meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-Initialize-pointer-to-config-struct-t.patch
 deleted file mode 100644
-index db4d6e8c99..0000000000
---- a/meta-multimedia/recipes-multimedia/musicbrainz/files/allow-libdir-override.patch
+index ad255fae06..0000000000
+--- a/meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-Initialize-pointer-to-config-struct-t.patch
 +++ /dev/null
-@@ -1,21 +0,0 @@
--Allow LIB_INSTALL_DIR to be set by the the cmake configure invocation.  We dont
--easily have a way of determining something that patches ${LIB_SUFFIX} so we'll
--set LIB_INSTALL_DIR.
+@@ -1,29 +0,0 @@
+-From 6181d9c3c407ee030b4c3a94045318b9e3a3cc89 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 25 Jul 2017 14:08:54 -0700
+-Subject: [PATCH] minicoredumper: Initialize pointer to config struct to null
 -
--Upstream-Status: Inappropriate [configuration]
+-Fixes
+-corestripper.c:3632:13: error: variable 'cfg' is used uninitialized whenever 'if' condition is false [-Werror,-Wsometimes-uninitialized]
 -
--Signed-off-by: Kumar Gala <galak@kernel.crashing.org>
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/minicoredumper/corestripper.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
 -
--Index: git/CMakeLists.txt
--===================================================================
----- git.orig/CMakeLists.txt
--+++ git/CMakeLists.txt
--@@ -36,7 +36,7 @@ FIND_PACKAGE(LibXml2 REQUIRED)
-- SET(LIB_SUFFIX "" CACHE STRING "Define suffix of directory name (32/64)")
-- SET(EXEC_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX} CACHE PATH "Installation prefix for executables and object code libraries" FORCE)
-- SET(BIN_INSTALL_DIR ${EXEC_INSTALL_PREFIX}/bin CACHE PATH "Installation prefix for user executables" FORCE)
---SET(LIB_INSTALL_DIR ${EXEC_INSTALL_PREFIX}/lib${LIB_SUFFIX} CACHE PATH  "Installation prefix for object code libraries" FORCE)
--+SET(LIB_INSTALL_DIR ${EXEC_INSTALL_PREFIX}/lib${LIB_SUFFIX} CACHE PATH  "Installation prefix for object code libraries")
-- SET(INCLUDE_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/include CACHE PATH "Installation prefix for C header files" FORCE)
+-diff --git a/src/minicoredumper/corestripper.c b/src/minicoredumper/corestripper.c
+-index a764073..ddb0d25 100644
+---- a/src/minicoredumper/corestripper.c
+-+++ b/src/minicoredumper/corestripper.c
+-@@ -3605,7 +3605,7 @@ out:
 - 
-- CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/libmusicbrainz5.pc.cmake ${CMAKE_CURRENT_BINARY_DIR}/libmusicbrainz5.pc)
-diff --git a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
-index ca9d94a19c..20f0777c35 100644
---- a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
-+++ b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
-@@ -3,38 +3,23 @@ DESCRIPTION = "The MusicBrainz client is a library which can be built into other
- HOMEPAGE = "http://musicbrainz.org"
- LICENSE = "LGPLv2.1+"
- LIC_FILES_CHKSUM = "file://COPYING.txt;md5=fbc093901857fcd118f065f900982c24"
--DEPENDS = "expat libxml2 libxml2-native neon neon-native"
-+DEPENDS = "expat libxml2 libxml2-native neon neon-native libmusicbrainz-native"
+- static int do_all_dumps(struct dump_info *di, int argc, char *argv[])
+- {
+--	struct config *cfg;
+-+	struct config *cfg = 0;
+- 	const char *recept;
+- 	bool live_dumper;
+- 	char *comm_base;
+--- 
+-2.13.3
+-
+diff --git a/meta-oe/recipes-kernel/minicoredumper/files/0001-replace-pthread_mutexattr_setrobust_np-with-pthread_.patch b/meta-oe/recipes-kernel/minicoredumper/files/0001-replace-pthread_mutexattr_setrobust_np-with-pthread_.patch
+new file mode 100644
+index 0000000000..455e6f3181
+--- /dev/null
++++ b/meta-oe/recipes-kernel/minicoredumper/files/0001-replace-pthread_mutexattr_setrobust_np-with-pthread_.patch
+@@ -0,0 +1,33 @@
++From 5895caba6573e84f73f159d9e84cd1aa7e969f18 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sun, 9 May 2021 14:37:00 -0700
++Subject: [PATCH] replace pthread_mutexattr_setrobust_np with
++ pthread_mutexattr_setrobust
++
++This is now part of standard POSIX function [1]
++
++Upstream-Status: Submitted [https://github.com/diamon/minicoredumper/pull/3]
++
++[1] https://man7.org/linux/man-pages/man3/pthread_mutexattr_setrobust_np.3.html
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/minicoredumper_regd/daemon.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/minicoredumper_regd/daemon.c b/src/minicoredumper_regd/daemon.c
++index 115ec92..b9ad1ea 100644
++--- a/src/minicoredumper_regd/daemon.c
+++++ b/src/minicoredumper_regd/daemon.c
++@@ -224,7 +224,7 @@ static int setup_shm(void)
++ 
++ 	pthread_mutexattr_init(&attr);
++ 	pthread_mutexattr_setprotocol(&attr, PTHREAD_PRIO_INHERIT);
++-	pthread_mutexattr_setrobust_np(&attr, PTHREAD_MUTEX_ROBUST_NP);
+++	pthread_mutexattr_setrobust(&attr, PTHREAD_MUTEX_ROBUST);
++ 	pthread_mutexattr_setpshared(&attr, PTHREAD_PROCESS_SHARED);
++ 	pthread_mutex_init(&sh->m, &attr);
++ 
++-- 
++2.31.1
++
+diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
+index d381c83ae8..6a04e78919 100644
+--- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
++++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
+@@ -14,6 +14,7 @@ SRCREV = "16a0d44f1725eaa93096eaa0e086f42ef4c2712c"
+ PR .= "+git${SRCPV}"
  
- PV = "5.1.0+git${SRCPV}"
- 
--SRCREV = "44c05779dd996035758f5ec426766aeedce29cc3"
--SRC_URI = "git://github.com/metabrainz/libmusicbrainz.git \
--           file://allow-libdir-override.patch "
-+SRCREV = "8be45b12a86bc0e46f2f836c8ac88e1e98d82aee"
-+SRC_URI = "git://github.com/metabrainz/libmusicbrainz.git"
- 
- S = "${WORKDIR}/git"
- 
- inherit cmake pkgconfig
- 
--do_configure_prepend() {
--    # The native build really doesn't like being rebuilt, so delete
--    # it if it's already present. Also delete all other files not
--    # known to Git to fix subsequent invocations of do_configure.
--    git clean -dfx -e /.pc/ -e /patches/ .
--    mkdir build-native
--    cd build-native
--    LDFLAGS="${BUILD_LDFLAGS}" \
--          cmake -DCMAKE_C_FLAGS=${BUILD_CFLAGS} \
--          -DCMAKE_C_COMPILER=${BUILD_CC} \
--          -DCMAKE_CXX_FLAGS=${BUILD_CXXFLAGS} \
--          -DCMAKE_CXX_COMPILER=${BUILD_CXX} \
--          -DCMAKE_EXE_LINKER_FLAGS=${BUILD_LDFLAGS} \
--          ..
--    make make-c-interface
--    cd ..
--}
-+EXTRA_OECMAKE_append_class-target = " -DIMPORT_EXECUTABLES=${STAGING_LIBDIR_NATIVE}/cmake/${BPN}/ImportExecutables.cmake"
- 
--EXTRA_OECMAKE = "-DLIB_INSTALL_DIR:PATH=${libdir} \
--                 -DIMPORT_EXECUTABLES=build-native/ImportExecutables.cmake"
-+do_install_append_class-native() {
-+    install -Dm 0755 ${B}/src/make-c-interface ${D}${bindir}/make-c-interface
-+    install -Dm 0644 ${B}/ImportExecutables.cmake ${D}${libdir}/cmake/${BPN}/ImportExecutables.cmake
-+    sed -e "s#${B}/src/##g" ${D}${libdir}/cmake/${BPN}/ImportExecutables.cmake
-+}
- 
--# out-of-tree building doesn't appear to work for this package.
--B = "${S}"
-+BBCLASSEXTEND = "native"
+ SRC_URI = "git://github.com/diamon/minicoredumper;protocol=https \
++           file://0001-replace-pthread_mutexattr_setrobust_np-with-pthread_.patch \
+            file://minicoredumper.service \
+            file://minicoredumper.init \
+            "
 -- 
 2.31.1
 
