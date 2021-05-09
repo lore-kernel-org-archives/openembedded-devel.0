@@ -1,151 +1,137 @@
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.web12.24346.1620596741747940113
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
+ by mx.groups.io with SMTP id smtpd.web11.24749.1620600298631588740
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 09 May 2021 14:45:41 -0700
+ Sun, 09 May 2021 15:44:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=B5Cdvmbb;
- spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f173.google.com with SMTP id c17so12260463pfn.6
-        for <openembedded-devel@lists.openembedded.org>; Sun, 09 May 2021 14:45:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=gULFbjUX;
+ spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f181.google.com with SMTP id b21so5217831pft.10
+        for <openembedded-devel@lists.openembedded.org>; Sun, 09 May 2021 15:44:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=siYGGJdI60Y9vUuyi2GbDZMURY+l8/Ly+3ielPgjOcs=;
-        b=B5CdvmbbyQgBWaFn++SQ9OJHI/oGdGdMTP6c8pDMMI5IGbqxb7jIzd3IWKSolYi9GY
-         BB5vRFbSoUaz/4kUiDG14RgyE8pq9OaRepW3SYyPS/0dg94y1qGNhGo0diU+2xsT+8iP
-         zs5gZIwAo/t3gmdhhRQ6Jo+Adyxd96939KUDyxRb2UkWoqK3HIY7gbjZUiasdA53avFL
-         eFC6zxNFqoOugVaEVWMroyFMN6NUfFXkhk7c4VBbKMYOV0BlZ2rd9MFW7+vf9FZbXK3U
-         rMr9On+D29A9yKPeUbLqFJdm5r/PORaoYUGdUQrCh6jnBOK/Mh9AvaIil4ignOiUtamu
-         PCLg==
+        bh=lWFEs2RFwQY618sMOFX6IGsFxpJ5EN1ctIWEbp1lMGo=;
+        b=gULFbjUXU+JzHtvlbs9ZiisK7CVowYLC9CBzarjhlxIxbCTns4/5V0+KLcjURXI9Ww
+         uQnn/0yAU6UIcPx47MnmBMhfzqt4qIW+rqsCUuJJulsnjCY9yh/fqtnrtpEGcOqp/bZR
+         nqgtxlRowXU0Pc+ngCQvIFIW5tr1sKatEsd3r/zQpM9fPo5A/Zy+hTHazqyHg2StoULG
+         eRW9huBtzTPICe7307aganJTv0BmL9sd896jL1k7FTT+qltcdkozk5EXiY7SJPKPo6l+
+         oPBY2EbmwSpNb26+Fk2zW3CtahvW/wymFZZu0+Ydrn0wQQfeTMdV5komKJNc+V9lO7MX
+         mEng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=siYGGJdI60Y9vUuyi2GbDZMURY+l8/Ly+3ielPgjOcs=;
-        b=M/KXmmaU8ekKkGUhaX4n5fMvf/kmQ0sAzFcnjqhioAi3ms1RHg4neJ3f105sqpl13A
-         JrRcqVG7qo6mSvjFZYKbyFq3CdngrTCDEIAYOFOD25qkD4Jjo0G4wfkd7EVqsn10Hhz2
-         7vBid2g9YhTqs0lIpBDwlOYpxpC+co1R2x2FOQBt1prBHByc+CFBlFLNeK4n8Oaisz9U
-         WkxZqD9dv5KuHDppKVnP5/25jAKI7BId2w84sZ2KEKaErS+CAXPgtOFkNdEL/XMMFZHM
-         lImWVSvRBbPQUL13rjmFV5Se0iEEVdyr8f5paasXPZyluTzkaSBAgpHsllyGfQV4kz+R
-         Qm4w==
-X-Gm-Message-State: AOAM530rn757VdAQOfnyvR3Rv7jRqe9r6mWK7drrn87HbYcnHIpYj6EC
-	i/QmDf9/EDHMHI/ShQfSHaU0fu0rTodxMA==
-X-Google-Smtp-Source: ABdhPJytNIEG5+Hv/2sGc0eYMKSAsH0fbhleE8IQ/Fx3tiopUvqf6Ezgdm20XAWe1Nk53BUV7eUFAA==
-X-Received: by 2002:a63:6486:: with SMTP id y128mr21675594pgb.414.1620596740862;
-        Sun, 09 May 2021 14:45:40 -0700 (PDT)
+        bh=lWFEs2RFwQY618sMOFX6IGsFxpJ5EN1ctIWEbp1lMGo=;
+        b=jyCIo2GsCQZgQxOQYwZYbDdDqmxuTYJ6BnBkzoQT7mBUioTVjJt3UDAlVAKrjqSUIl
+         uOwV+HfkO9kWDxgecUcOjl5WOCoWn+RSGa+OFY3+LTe9pI4qFG2OCyLOpbYIAKlpNtlq
+         laYxyL/8l4lJbdHnwQLEVNx4Y8/EQN4+JFXLKdgfoHwD8WyRA004nowvypH83HcO6Pxn
+         aYZ78+SokG68oeTckdUF4+L7baDAKjyOkxMgkkV7tx+YGXIbEO8+GKQcDqtO0py9Ro1D
+         yDWwaae7WH61QDpHqQeaKjUk4H7xL+Zzu5DWDGHcAdpXm6on41wzI7lWQoMsRdd848yu
+         MXzg==
+X-Gm-Message-State: AOAM532hAJBAM4t8vD5zDjlvI2IrLxM0ltc/oI9SQL1e8x5d71HR40CF
+	aWTnLhyVgpHEKmKf1zTp7XSZaU32ErhY5g==
+X-Google-Smtp-Source: ABdhPJw4Eb5VOp6Fy3SQ+pc1WD1IFlrCsEUuB3ef8ODfPETv+p9Y9Uw5Xhq2BS2rMsXscJ2YXipjFw==
+X-Received: by 2002:a62:3201:0:b029:211:3dcc:c9ca with SMTP id y1-20020a6232010000b02902113dccc9camr21886880pfy.46.1620600297764;
+        Sun, 09 May 2021 15:44:57 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::308d])
-        by smtp.gmail.com with ESMTPSA id f24sm10002770pfk.45.2021.05.09.14.45.39
+        by smtp.gmail.com with ESMTPSA id 3sm9008337pff.132.2021.05.09.15.44.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 09 May 2021 14:45:40 -0700 (PDT)
+        Sun, 09 May 2021 15:44:57 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] minicoredumper: Replace pthread_mutexattr_setrobust_np with pthread_mutexattr_setrobust
-Date: Sun,  9 May 2021 14:45:37 -0700
-Message-Id: <20210509214537.1536077-1-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>,
+	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Subject: [meta-multimedia][PATCH] libupnp: Do not use _np versions of mutex APIs
+Date: Sun,  9 May 2021 15:44:54 -0700
+Message-Id: <20210509224454.1573151-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Remove unused patch 0001-minicoredumper-Initialize-pointer-to-config-struct-t.patch
+These APIs are deprecated/removed in future glibc 2.34+
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...nitialize-pointer-to-config-struct-t.patch | 29 ----------------
- ...mutexattr_setrobust_np-with-pthread_.patch | 33 +++++++++++++++++++
- .../minicoredumper/minicoredumper_2.0.1.bb    |  1 +
- 3 files changed, 34 insertions(+), 29 deletions(-)
- delete mode 100644 meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-Initialize-pointer-to-config-struct-t.patch
- create mode 100644 meta-oe/recipes-kernel/minicoredumper/files/0001-replace-pthread_mutexattr_setrobust_np-with-pthread_.patch
+ ...ead_mutexattr_gettype-pthread_mutexa.patch | 42 +++++++++++++++++++
+ .../libupnp/libupnp_1.14.6.bb                 |  8 ++--
+ 2 files changed, 47 insertions(+), 3 deletions(-)
+ create mode 100644 meta-multimedia/recipes-connectivity/libupnp/libupnp/0001-ithread-Use-pthread_mutexattr_gettype-pthread_mutexa.patch
 
-diff --git a/meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-Initialize-pointer-to-config-struct-t.patch b/meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-Initialize-pointer-to-config-struct-t.patch
-deleted file mode 100644
-index ad255fae06..0000000000
---- a/meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-Initialize-pointer-to-config-struct-t.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--From 6181d9c3c407ee030b4c3a94045318b9e3a3cc89 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 25 Jul 2017 14:08:54 -0700
--Subject: [PATCH] minicoredumper: Initialize pointer to config struct to null
--
--Fixes
--corestripper.c:3632:13: error: variable 'cfg' is used uninitialized whenever 'if' condition is false [-Werror,-Wsometimes-uninitialized]
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/minicoredumper/corestripper.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/src/minicoredumper/corestripper.c b/src/minicoredumper/corestripper.c
--index a764073..ddb0d25 100644
----- a/src/minicoredumper/corestripper.c
--+++ b/src/minicoredumper/corestripper.c
--@@ -3605,7 +3605,7 @@ out:
-- 
-- static int do_all_dumps(struct dump_info *di, int argc, char *argv[])
-- {
---	struct config *cfg;
--+	struct config *cfg = 0;
-- 	const char *recept;
-- 	bool live_dumper;
-- 	char *comm_base;
---- 
--2.13.3
--
-diff --git a/meta-oe/recipes-kernel/minicoredumper/files/0001-replace-pthread_mutexattr_setrobust_np-with-pthread_.patch b/meta-oe/recipes-kernel/minicoredumper/files/0001-replace-pthread_mutexattr_setrobust_np-with-pthread_.patch
+diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp/0001-ithread-Use-pthread_mutexattr_gettype-pthread_mutexa.patch b/meta-multimedia/recipes-connectivity/libupnp/libupnp/0001-ithread-Use-pthread_mutexattr_gettype-pthread_mutexa.patch
 new file mode 100644
-index 0000000000..455e6f3181
+index 0000000000..ee78196779
 --- /dev/null
-+++ b/meta-oe/recipes-kernel/minicoredumper/files/0001-replace-pthread_mutexattr_setrobust_np-with-pthread_.patch
-@@ -0,0 +1,33 @@
-+From 5895caba6573e84f73f159d9e84cd1aa7e969f18 Mon Sep 17 00:00:00 2001
++++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp/0001-ithread-Use-pthread_mutexattr_gettype-pthread_mutexa.patch
+@@ -0,0 +1,42 @@
++From 343a3b724225d3c87af0b268da14d3acb7a5b9a1 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 9 May 2021 14:37:00 -0700
-+Subject: [PATCH] replace pthread_mutexattr_setrobust_np with
-+ pthread_mutexattr_setrobust
++Date: Sun, 9 May 2021 15:38:43 -0700
++Subject: [PATCH] ithread: Use
++ pthread_mutexattr_gettype/pthread_mutexattr_settype on linux
 +
-+This is now part of standard POSIX function [1]
++_np variants are not recommended anymore, and glibc 2.34+ will have
++these removed
 +
-+Upstream-Status: Submitted [https://github.com/diamon/minicoredumper/pull/3]
-+
-+[1] https://man7.org/linux/man-pages/man3/pthread_mutexattr_setrobust_np.3.html
-+
++Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/minicoredumper_regd/daemon.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ upnp/inc/ithread.h | 6 ++++--
++ 1 file changed, 4 insertions(+), 2 deletions(-)
 +
-+diff --git a/src/minicoredumper_regd/daemon.c b/src/minicoredumper_regd/daemon.c
-+index 115ec92..b9ad1ea 100644
-+--- a/src/minicoredumper_regd/daemon.c
-++++ b/src/minicoredumper_regd/daemon.c
-+@@ -224,7 +224,7 @@ static int setup_shm(void)
-+ 
-+ 	pthread_mutexattr_init(&attr);
-+ 	pthread_mutexattr_setprotocol(&attr, PTHREAD_PRIO_INHERIT);
-+-	pthread_mutexattr_setrobust_np(&attr, PTHREAD_MUTEX_ROBUST_NP);
-++	pthread_mutexattr_setrobust(&attr, PTHREAD_MUTEX_ROBUST);
-+ 	pthread_mutexattr_setpshared(&attr, PTHREAD_PROCESS_SHARED);
-+ 	pthread_mutex_init(&sh->m, &attr);
-+ 
++diff --git a/upnp/inc/ithread.h b/upnp/inc/ithread.h
++index f6800ea9..1d0f9dba 100644
++--- a/upnp/inc/ithread.h
+++++ b/upnp/inc/ithread.h
++@@ -304,7 +304,8 @@ static UPNP_INLINE int ithread_cleanup_thread(void)
++  *      Returns EINVAL if the kind is not supported.
++  *      See man page for pthread_mutexattr_setkind_np
++  *****************************************************************************/
++-#if defined(PTHREAD_MUTEX_RECURSIVE) || defined(__DragonFly__)
+++#if defined(PTHREAD_MUTEX_RECURSIVE) || defined(__DragonFly__) \
+++    || defined (__linux__)
++ 	#define ithread_mutexattr_setkind_np pthread_mutexattr_settype
++ #else
++ 	#define ithread_mutexattr_setkind_np pthread_mutexattr_setkind_np
++@@ -329,7 +330,8 @@ static UPNP_INLINE int ithread_cleanup_thread(void)
++  *      Always returns 0.
++  *      See man page for pthread_mutexattr_getkind_np
++  *****************************************************************************/
++-#if defined(PTHREAD_MUTEX_RECURSIVE) || defined(__DragonFly__)
+++#if defined(PTHREAD_MUTEX_RECURSIVE) || defined(__DragonFly__) \
+++    || defined (__linux__)
++ 	#define ithread_mutexattr_getkind_np pthread_mutexattr_gettype
++ #else
++ 	#define ithread_mutexattr_getkind_np pthread_mutexattr_getkind_np
 +-- 
 +2.31.1
 +
-diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-index d381c83ae8..6a04e78919 100644
---- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-+++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-@@ -14,6 +14,7 @@ SRCREV = "16a0d44f1725eaa93096eaa0e086f42ef4c2712c"
- PR .= "+git${SRCPV}"
+diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.6.bb b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.6.bb
+index ff6fb55dd3..81b42da412 100644
+--- a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.6.bb
++++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.6.bb
+@@ -9,7 +9,9 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=394a0f17b97f33426275571e15920434"
  
- SRC_URI = "git://github.com/diamon/minicoredumper;protocol=https \
-+           file://0001-replace-pthread_mutexattr_setrobust_np-with-pthread_.patch \
-            file://minicoredumper.service \
-            file://minicoredumper.init \
-            "
+ SRCREV = "cef2b23fb36baac091b0c7d41136b4c1d9549c6d"
+-SRC_URI = "git://github.com/pupnp/pupnp.git;protocol=https;branch=branch-1.14.x"
++SRC_URI = "git://github.com/pupnp/pupnp.git;protocol=https;branch=branch-1.14.x \
++           file://0001-ithread-Use-pthread_mutexattr_gettype-pthread_mutexa.patch \
++          "
+ 
+ S="${WORKDIR}/git"
+ 
+@@ -18,5 +20,5 @@ inherit autotools pkgconfig
+ EXTRA_OECONF += "--enable-reuseaddr"
+ 
+ # Enable LFS support ( for samples )
+-CFLAGS += "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
+-CXXFLAGS += "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
++CFLAGS += "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE"
++CXXFLAGS += "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE"
 -- 
 2.31.1
 
