@@ -1,110 +1,117 @@
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
- by mx.groups.io with SMTP id smtpd.web08.29075.1620636452952398717
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.web12.30704.1620647055142750657
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 May 2021 01:47:33 -0700
+ Mon, 10 May 2021 04:44:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=hPKNRe/R;
- spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f54.google.com with SMTP id gx5so23256515ejb.11
-        for <openembedded-devel@lists.openembedded.org>; Mon, 10 May 2021 01:47:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=RV0tybOI;
+ spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wm1-f44.google.com with SMTP id g65so9002435wmg.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 10 May 2021 04:44:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:date:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=kTB/3FYqe10fTG5nzdyK16Uhj68l5TfbUW21IVgbgGQ=;
-        b=hPKNRe/RKivXMTLVNbMO8Zi+XFXdoObhDuMByuiPRT5/9HK15tJqBYo0ll6q3v0UwJ
-         xbq4RlyFBQ9QDHBfPCdPzD6OAAnjOYEi4g7dNl68qzqOYVGc3zJOLOYPPFU2Nr/iDgZd
-         2zO2weDrkJSO2FmeWEjAuJz+2AZhCULIU6x0adVCbxQVP6e43vnFajMqL4JFqtJxr0bg
-         UJRjmL50sqBCttjt8cL9R9givqCxKldUPQder+pUiqVhWPbX9UG3FS79e2iNmWtpx/aB
-         Cq1vWxn1UKi2K0IEAmqCpA7d6vzEi42TCCEqA4Jmwo23ZOu8WASxqVBCoVRyB4Zi6mWn
-         p5uQ==
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=g/Dccjv/prqNv1bmY44kpevZP4R5w2/VA/AiEDuYxho=;
+        b=RV0tybOI0s5+OT7+3D0qXs7wCIWnDy7m2ufMn3vrTf2mgsmIdp7fQ3su3wxQ4HN73I
+         6fATDwDSQRpzFywbYuJGemxFuRF4IssY6esk5ZaGLxIgSFRKNBEgoPkSCAVcwySavKT6
+         7Yx/g0GXotVedS9j3pLh6+wkEi1riNJk+i2tLTDfsUHVwZULcS6dyCNV1NqSxi2aTx2Y
+         AY6T754H5W+EoGVaIYRo5mEGoldbnryvJBGvusePDONekI3b9N1UaCapJ2jeIKDY56En
+         IP1AlMQuw7OxmYEQE7zJrwWVwxKcWR8lZvNwhRYNv+26JF1MJdIEb2eI82mbQQymyUAm
+         zFoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=kTB/3FYqe10fTG5nzdyK16Uhj68l5TfbUW21IVgbgGQ=;
-        b=cMLiMTJuKXN72noJOg1VYq65aTqQvaNq5m2x1+eGCk9NyXZMpvm4oRVmQSvKXUKLIV
-         /Ind7GdHaII5fDG2R662R2p95KUHf/dLwarmFEcXpKupECF4Yjj8sIP251BvyyU1NSfH
-         KWkwBTeMsR98BAFkpX6aOL4up9gb7UDS/mSY4lTzyGbpcB0M4AncUiNwURNcVTvC/liv
-         46Z4Mcmuy2GWmIl6Aw5E26PyjX9e93gRqbYTOXD9qEdM8yBwN4+yFqClEKYd5gVvHjzG
-         1eDw1EtIwLPziwVRIbHfx0uEFamhjfKDtrBiIVAhgo8Dz+A5PhzBnEztUo/flnB0nCgs
-         hSxQ==
-X-Gm-Message-State: AOAM530mALOp4ttLpWmYoIPgNCCV91ylTEzL0S3Q4ILZEYP+vTUroy1c
-	zge1y3kukhvOW2FRYuLl2qA=
-X-Google-Smtp-Source: ABdhPJxZX+fPMNNAywbZ+W8WKe3xxQ5t+VfQvzVzzFQSj8PlZHotrk26d7eDUWlFyI9oUv7CkSwTyg==
-X-Received: by 2002:a17:906:564f:: with SMTP id v15mr23962738ejr.96.1620636451260;
-        Mon, 10 May 2021 01:47:31 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id w14sm10947755edj.6.2021.05.10.01.47.30
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=g/Dccjv/prqNv1bmY44kpevZP4R5w2/VA/AiEDuYxho=;
+        b=ek3vvvNhKGJ5z0q/wRBC5Uy5k9Uv7ZzzdvVKRCkSi3gEJZzEt3q4s9zTXtPmi4IdSb
+         bOOV+MNx3lflw6R+BJtUxgT3vFj/vpj7MFlTSu9+P8Sx0TGeWYO5NHJHeegfp/MOV4gK
+         c3e7CnBMYLg6TvvKTcHoRaODdxwSYaKd2WHV8KMp7rJws/LW44syF2nPM+n5Lgky9QO9
+         W4Bu7Ao0Qy0sHlaG6oRMiQYW/UlK8k6Rs52ZDe6J6IQxJstZFY1VME/b2SnrK3kp0GBy
+         +sVT7DhXFLIiBNqy0pDpGKmZCgsuuwkxxiQcNbug26sX7ev1PgibsXndrtnM7EbtQ/1l
+         Ubvw==
+X-Gm-Message-State: AOAM533M69XbTeAgP7mcc7pkoAGBf8RRttf2KyIaMJPzmbvyVhVBfUxJ
+	daUzGTkexkYhaOtWms8pb8MZE2D7uAE=
+X-Google-Smtp-Source: ABdhPJzYafHE4YJYcV9TzVjfES/fpoKVTOfQKGKuTn6+fToBMVqlrB6LW9gw6wCpOsyjQp3+H8q1Cg==
+X-Received: by 2002:a1c:6a04:: with SMTP id f4mr24981744wmc.131.1620647053349;
+        Mon, 10 May 2021 04:44:13 -0700 (PDT)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from thanks-buchmuellers.speedport.ip (p200300f07f4fac346ac282ef7d435921.dip0.t-ipconnect.de. [2003:f0:7f4f:ac34:6ac2:82ef:7d43:5921])
+        by smtp.gmail.com with ESMTPSA id r7sm3170425wmq.3.2021.05.10.04.44.12
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 May 2021 01:47:30 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 10 May 2021 10:47:29 +0200
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v2] python3-m2crypto: Pass correct ABI defines to swig
-Message-ID: <20210510084729.udt6iiekqis36jwa@jama>
-References: <20210508155739.3380129-1-raj.khem@gmail.com>
- <20210508155739.3380129-2-raj.khem@gmail.com>
+        Mon, 10 May 2021 04:44:12 -0700 (PDT)
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] mariadb: Fix configure
+Date: Mon, 10 May 2021 13:44:04 +0200
+Message-Id: <20210510114404.4039335-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-In-Reply-To: <20210508155739.3380129-2-raj.khem@gmail.com>
-X-Groupsio-MsgNum: 91203
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="63s7gemce77c7een"
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---63s7gemce77c7een
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Assume recent CMake upgrade made this pop up.
 
-On Sat, May 08, 2021 at 08:57:39AM -0700, Khem Raj wrote:
-> This ensures that WORDSIZE is as per the target, currently this does not
-> get it right for cross-compilation env, and OE uses multilib headers by
-> default ( even when you do not use multilib ) which means if WORDSIZE
-> is wrong it will go on to include wrong headers due to these artificial s=
-tubs
->=20
-> Fixes
-> swig -python -py3 -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2cr=
-ypto/0.37.1-r0/recipe-sysroot-native/usr/bin/aarch64-oe-linux/../../lib/aar=
-ch64-oe-linux/gcc/aarch64-oe-linux/11.1.0/include -ITOPDIR/tmp-glibc/work/c=
-ortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot-native/usr/bin/=
-aarch64-oe-linux/../../lib/aarch64-oe-linux/gcc/aarch64-oe-linux/11.1.0/inc=
-lude-fixed -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37=
-=2E1-r0/recipe-sysroot/usr/lib/aarch64-oe-linux/11.1.0/include -ITOPDIR/tmp=
--glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot/us=
-r/include -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.=
-1-r0/recipe-sysroot/usr/include -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/=
-python3-m2crypto/0.37.1-r0/recipe-sysroot/usr/include/python3.9 -I/usr/incl=
-ude/openssl -includeall -modern -builtin -outdir TOPDIR/tmp-glibc/work/cort=
-exa57-oe-linux/python3-m2crypto/0.37.1-r0/M2Crypto-0.37.1/M2Crypto -o SWIG/=
-_m2crypto_wrap.c SWIG/_m2crypto.i
->   TOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/rec=
-ipe-sysroot/usr/include/openssl/opensslconf.h:23: Error: Unable to find 'op=
-enssl/opensslconf-32.h'
->=20
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Cc: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
-> v1->v2:
-> - Fix typos in commit
-> - Drop do_configure_prepend as its no longer needed
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ meta-oe/recipes-dbs/mysql/mariadb.inc         |  1 +
+ ...onfigure-by-closing-IF-ELSE-properly.patch | 35 +++++++++++++++++++
+ 2 files changed, 36 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0002-Fix-configure-by-closing-IF-ELSE-properly.patch
 
-Thanks Khem
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 9833b2885..92e54d759 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -22,6 +22,7 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
+            file://0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch \
+            file://0001-aio_linux-Check-if-syscall-exists-before-using-it.patch \
+            file://sys_futex.patch \
++           file://0002-Fix-configure-by-closing-IF-ELSE-properly.patch \
+           "
+ SRC_URI_append_libc-musl = " file://ppc-remove-glibc-dep.patch"
+ 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0002-Fix-configure-by-closing-IF-ELSE-properly.patch b/meta-oe/recipes-dbs/mysql/mariadb/0002-Fix-configure-by-closing-IF-ELSE-properly.patch
+new file mode 100644
+index 000000000..36c74d8f9
+--- /dev/null
++++ b/meta-oe/recipes-dbs/mysql/mariadb/0002-Fix-configure-by-closing-IF-ELSE-properly.patch
+@@ -0,0 +1,35 @@
++From fdd08a8774265618668c7f24697e138587c47a16 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
++Date: Mon, 10 May 2021 13:35:54 +0200
++Subject: [PATCH] Fix configure by closing IF ELSE properly
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Fixes:
++| CMake Error at libmariadb/cmake/ConnectorName.cmake:30 (ENDMACRO):
++|   Flow control statements are not properly nested.
++
++Upstream-Status: Pending
++
++Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
++---
++ libmariadb/cmake/ConnectorName.cmake | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/libmariadb/cmake/ConnectorName.cmake b/libmariadb/cmake/ConnectorName.cmake
++index b7bbbad..357b8ac 100644
++--- a/libmariadb/cmake/ConnectorName.cmake
+++++ b/libmariadb/cmake/ConnectorName.cmake
++@@ -22,7 +22,7 @@ IF(CMAKE_SYSTEM_NAME MATCHES "Windows")
++     SET(MACHINE_NAME "x64")
++   ELSE()
++     SET(MACHINE_NAME "32")
++-  END()
+++  ENDIF()
++ ENDIF()
++ 
++ SET(product_name "mysql-connector-c-${CPACK_PACKAGE_VERSION}-${PLATFORM_NAME}${CONCAT_SIGN}${MACHINE_NAME}")
++-- 
++2.30.2
++
+-- 
+2.30.2
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
-
---63s7gemce77c7een
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EABECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCYJjzIAAKCRA3VSO3ZXaA
-HFP7AJ9Z5rOlIn6wN6qhfruJ8Ks/zj6E+ACgoPX3S2DIbLToDMBOxUcCF7jVF1M=
-=QCTf
------END PGP SIGNATURE-----
-
---63s7gemce77c7een--
