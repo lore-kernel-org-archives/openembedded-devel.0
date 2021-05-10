@@ -1,147 +1,129 @@
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
- by mx.groups.io with SMTP id smtpd.web11.1430.1620671049706532576
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
+ by mx.groups.io with SMTP id smtpd.web09.5244.1620688328626467570
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 May 2021 11:24:10 -0700
+ Mon, 10 May 2021 16:12:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Xt0Bz+G4;
- spf=pass (domain: gmail.com, ip: 209.85.208.44, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ed1-f44.google.com with SMTP id r11so4998835edt.13
-        for <openembedded-devel@lists.openembedded.org>; Mon, 10 May 2021 11:24:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=oPfSCPWK;
+ spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f174.google.com with SMTP id h20so9905102plr.4
+        for <openembedded-devel@lists.openembedded.org>; Mon, 10 May 2021 16:12:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=8+wcLUMXTpWh+9UMEKBThjJjizU+0AelcJ3AapNBigw=;
-        b=Xt0Bz+G4ns6Zfj38riCs+Fz/GZ4o7XDIPA6Io9DiAPIKqlo8gsWNfFovEQlSAVCT83
-         KVaGA8ix3ziFE7yglyrw5cr2ue9Gri2m1+yCDsJiU+4DKJGtz3R+XLpG9OLz8IzJPwOx
-         hzK4OnR5242tnmdl2W8q8n8UuM7o2je84f+CTuimNQs35/TWYk/qRzY59DHLdHLtRa+6
-         EVZ67bTxKd+u2A3F0XZCqHRD0+JgOZNK+W9w4vfuPPIbzGmrcTHpKDxa/xzglSIlZhIT
-         dJssVTbfrF8blT3y6X0dQK4hYMyDOP1BDZrSOWyi45MS2hPrHwcL3azq6+PiPPOx3jlv
-         cB3w==
+        bh=YMRQcCm2wz5DqFClJjEWM0/FTP09oliHTuvfuIR6uMg=;
+        b=oPfSCPWKTNUi1kF98yZpOpDTadIXez35cr4mZ8aFOu+ObdQJmwQ5KcAityD2AQHuyC
+         rfyUxN++8jrlLGsUUUju0ZGqfA/aPYNrlnc5XRiShSRCp6cIdEmo68TJjpnHZG031KE7
+         +nfZN6qCG474X5JVnNdRcHELq4Fk+Yu5xZb8CeTNEeCUEK4cKhEkb3A9veAPgckp0stM
+         BrGLytWu1M6NOAMQkUf3tA1KVjywFzrTamcj4Zf4sr23RDW2UzTniqczxkMiu1Fj0Q2z
+         lByXuhXdIdTgpQTDbhylDzERIHfMrYveKeSrVEfUUIRhg2fdjyOEwUs3NwDza4P4TJX1
+         eDKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=8+wcLUMXTpWh+9UMEKBThjJjizU+0AelcJ3AapNBigw=;
-        b=PMkgx3SB+YtjceBjWW/ak74XOYtBSPrNV4Y56u1wOVuh16LboI3arr3Jcyd1/WCsha
-         EQtBt2/jnHZJ904WfHe9sMU2A9GF+MgDR18h/YDtwy/8phk7tEfu30Uza4T8ZlLtnw1X
-         wJRR1fH90kR0HYYaWK0xgAh+gv/r2dWFBS/vXw4rMosTNSykWtEZvr1nR/b1oplU4MhT
-         zT2b7J3Fkiha6xUzRDZqhbdHOKSJA+dwdbzbMtOgVvt3q0MKVrS/J0NnLPHuh7fP1zU+
-         jkpohB2XW/MQff6SH/+O/iqoTRPJ/BQDGM+xHlmRNil+Fcp9W+BeC7reGIqYLlLZJcA0
-         /tUg==
-X-Gm-Message-State: AOAM532GtpQYPKbtGxbfXIHwJyDqg3oqLyhsK2z7Hs9/nLvZGoAB9xlq
-	SQzRN6vbKaQTD8h2olWOkCF/ZVSsOmg=
-X-Google-Smtp-Source: ABdhPJzZqzsaYuQG4/yMqjwponV/m72HZJo2ONQ84NABQYMRgb51erayk+XMMVr3i2mzl3D3IpfB+A==
-X-Received: by 2002:aa7:d594:: with SMTP id r20mr30532830edq.242.1620671047925;
-        Mon, 10 May 2021 11:24:07 -0700 (PDT)
-Return-Path: <schnitzeltony@gmail.com>
-Received: from thanks-buchmuellers.speedport.ip (p200300f07f4fac346ac282ef7d435921.dip0.t-ipconnect.de. [2003:f0:7f4f:ac34:6ac2:82ef:7d43:5921])
-        by smtp.gmail.com with ESMTPSA id da25sm12459325edb.38.2021.05.10.11.24.07
-        for <openembedded-devel@lists.openembedded.org>
+        bh=YMRQcCm2wz5DqFClJjEWM0/FTP09oliHTuvfuIR6uMg=;
+        b=tQFeKgqFR0A2tQtl8uSFQ1TVhMdotRV2VR2ku5g3cho1EifVd/k9vqSg7FI7uYe3Cp
+         vJCAOOtkoWuKB8gTZDDHdXg+Pc5mEPw2otUvQ+SypA+xuCEHwD/hWmemQAPkljTydcFl
+         N2Y8TvlbvF9TSBjvRU4JJvhLapCLcL31+sYoolj1YK9FfxDV4D1/rJaTpvH5ApvzqbhN
+         JX97i8JTtgi48/t2opT6vxgbImOIL+lO/jwnc5EW1GqYWo/Vn8pX18q3pj3KLXJPI4lS
+         G1dnTVZiNZTE1NClUG7aKlc7gdxmVS8mVyhKdhGZVFBKUOE/KLfLgUDUgm2B/In7Zzn3
+         Ejsg==
+X-Gm-Message-State: AOAM530+DwOCtH5pu4h29Yf4LClYzQet5L+CWiy0L3LuRGAjJUOF6wfA
+	yI422V1gd/bPRc5QthH2EYwFuA9MEMF+hw==
+X-Google-Smtp-Source: ABdhPJwROxjDACeWDG/B7vnloTInrmyglpr1Jz0dUCV1xGsMQsXiG+Y34OzxLh3LTxXlgidiDSULOA==
+X-Received: by 2002:a17:90b:3891:: with SMTP id mu17mr30620081pjb.151.1620688327743;
+        Mon, 10 May 2021 16:12:07 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a7ac])
+        by smtp.gmail.com with ESMTPSA id m19sm12380106pjq.41.2021.05.10.16.12.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 May 2021 11:24:07 -0700 (PDT)
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+        Mon, 10 May 2021 16:12:07 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] evolution-data-server: Backport upstream patch to fix configure on latest CMake
-Date: Mon, 10 May 2021 20:23:59 +0200
-Message-Id: <20210510182359.2753647-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.30.2
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH v2] apitrace: Upgrade to 0.10
+Date: Mon, 10 May 2021 16:12:05 -0700
+Message-Id: <20210510231205.102801-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- .../evolution-data-server.bb                  |  1 +
- ....cmake-Correct-variable-name-compari.patch | 67 +++++++++++++++++++
- 2 files changed, 68 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0005-PrintableOptions.cmake-Correct-variable-name-compari.patch
+apitrace: Fix build with musl
 
-diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
-index 7f267b497..e2d7f502b 100644
---- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
-+++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
-@@ -16,6 +16,7 @@ SRC_URI += " \
-     file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
-     file://0004-call-native-helpers.patch \
-     file://iconv-detect.h \
-+    file://0005-PrintableOptions.cmake-Correct-variable-name-compari.patch \
- "
- 
- LKSTRFTIME = "HAVE_LKSTRFTIME=ON"
-diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0005-PrintableOptions.cmake-Correct-variable-name-compari.patch b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0005-PrintableOptions.cmake-Correct-variable-name-compari.patch
+Changes are here [1] which fixed musl build
+
+[1] https://github.com/apitrace/apitrace/releases/tag/10.0
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+v2: Fix build on musl
+
+ .../0001-libbacktrace-include-config.h.patch  | 33 +++++++++++++++++++
+ .../{apitrace_9.0.bb => apitrace_10.0.bb}     |  6 ++--
+ 2 files changed, 37 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/apitrace/apitrace/0001-libbacktrace-include-config.h.patch
+ rename meta-oe/recipes-devtools/apitrace/{apitrace_9.0.bb => apitrace_10.0.bb} (80%)
+
+diff --git a/meta-oe/recipes-devtools/apitrace/apitrace/0001-libbacktrace-include-config.h.patch b/meta-oe/recipes-devtools/apitrace/apitrace/0001-libbacktrace-include-config.h.patch
 new file mode 100644
-index 000000000..d84b41d00
+index 0000000000..87fb4992d4
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0005-PrintableOptions.cmake-Correct-variable-name-compari.patch
-@@ -0,0 +1,67 @@
-+From c95a70bfeae25ba11fbe50fe759a6cdb29388e44 Mon Sep 17 00:00:00 2001
-+From: Milan Crha <mcrha@redhat.com>
-+Date: Wed, 14 Apr 2021 16:58:08 +0200
-+Subject: [PATCH] PrintableOptions.cmake: Correct variable name comparison
++++ b/meta-oe/recipes-devtools/apitrace/apitrace/0001-libbacktrace-include-config.h.patch
+@@ -0,0 +1,33 @@
++From bdd5f0834d95a9598b0d87a18e7e96afade9d418 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 10 May 2021 15:28:05 -0700
++Subject: [PATCH] libbacktrace: include config.h
 +
-+CMake 3.20.1 errors out with:
++Fixes
++thirdparty/libbacktrace/backtrace.h:53:10: fatal error: gstdint.h: No such file or directory
++   53 | #include "gstdint.h"
++      |          ^~~~~~~~~~~
++compilation terminated.
 +
-+CMake Error at cmake/modules/PrintableOptions.cmake:38 (message):
-+   variable name cannot be empty
-+ Call Stack (most recent call first):
-+   CMakeLists.txt:152 (add_printable_variable)
++Upstream-Status: Pending
 +
-+Change how the parameter value is compared, to fix it.
-+
-+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/evolution-data-server/-/commit/c95a70bfeae25ba11fbe50fe759a6cdb29388e44]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ cmake/modules/PrintableOptions.cmake | 16 ++++++++--------
-+ 1 file changed, 8 insertions(+), 8 deletions(-)
++ thirdparty/libbacktrace/backtrace.h | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+diff --git a/cmake/modules/PrintableOptions.cmake b/cmake/modules/PrintableOptions.cmake
-+index a79419a..c74531a 100644
-+--- a/cmake/modules/PrintableOptions.cmake
-++++ b/cmake/modules/PrintableOptions.cmake
-+@@ -19,32 +19,32 @@
-+ #    prints all the build options previously added with the above functions
++diff --git a/thirdparty/libbacktrace/backtrace.h b/thirdparty/libbacktrace/backtrace.h
++index 2814763f..802cf989 100644
++--- a/thirdparty/libbacktrace/backtrace.h
+++++ b/thirdparty/libbacktrace/backtrace.h
++@@ -33,6 +33,7 @@ POSSIBILITY OF SUCH DAMAGE.  */
++ #ifndef BACKTRACE_H
++ #define BACKTRACE_H
 + 
-+ macro(add_printable_variable_bare _name)
-+-	if(_name STREQUAL "")
-++	if("${_name}" STREQUAL "")
-+ 		message(FATAL_ERROR "variable name cannot be empty")
-+-	endif(_name STREQUAL "")
-++	endif("${_name}" STREQUAL "")
-+ 	list(APPEND _printable_options ${_name})
-+ endmacro()
+++#include <config.h>
++ #include <stddef.h>
++ #include <stdio.h>
 + 
-+ macro(add_printable_option _name _description _default_value)
-+-	if(_name STREQUAL "")
-++	if("${_name}" STREQUAL "")
-+ 		message(FATAL_ERROR "option name cannot be empty")
-+-	endif(_name STREQUAL "")
-++	endif("${_name}" STREQUAL "")
-+ 	option(${_name} ${_description} ${_default_value})
-+ 	add_printable_variable_bare(${_name})
-+ endmacro()
-+ 
-+ macro(add_printable_variable _name _description _default_value)
-+-	if(_name STREQUAL "")
-++	if("${_name}" STREQUAL "")
-+ 		message(FATAL_ERROR "variable name cannot be empty")
-+-	endif(_name STREQUAL "")
-++	endif("${_name}" STREQUAL "")
-+ 	set(${_name} ${_default_value} CACHE STRING ${_description})
-+ 	add_printable_variable_bare(${_name})
-+ endmacro()
-+ 
-+ macro(add_printable_variable_path _name _description _default_value)
-+-	if(_name STREQUAL "")
-++	if("${_name}" STREQUAL "")
-+ 		message(FATAL_ERROR "path variable name cannot be empty")
-+-	endif(_name STREQUAL "")
-++	endif("${_name}" STREQUAL "")
-+ 	set(${_name} ${_default_value} CACHE PATH ${_description})
-+ 	add_printable_variable_bare(${_name})
-+ endmacro()
 +-- 
-+2.30.2
++2.31.1
 +
+diff --git a/meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb b/meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb
+similarity index 80%
+rename from meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb
+rename to meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb
+index 826291a5e4..616d56daa1 100644
+--- a/meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb
++++ b/meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb
+@@ -5,8 +5,10 @@ LICENSE = "MIT & BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=aeb969185a143c3c25130bc2c3ef9a50 \
+                     file://thirdparty/snappy/COPYING;md5=f62f3080324a97b3159a7a7e61812d0c"
+ 
+-SRCREV = "cae55f54c53449fd07f8a917dcd0874db2c15032"
+-SRC_URI = "git://github.com/${BPN}/${BPN}.git"
++SRCREV = "03e4e9d2cab4f1a61d3f589785641a73dff027c5"
++SRC_URI = "git://github.com/${BPN}/${BPN}.git \
++           file://0001-libbacktrace-include-config.h.patch \
++          "
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.30.2
+2.31.1
 
