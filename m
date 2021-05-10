@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.32063.1620655673281715696
+ by mx.groups.io with SMTP id smtpd.web08.32174.1620655675406980468
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 May 2021 07:07:53 -0700
+ Mon, 10 May 2021 07:07:55 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=57184 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lg6Za-000657-4v; Mon, 10 May 2021 17:07:52 +0300
+	id 1lg6Zc-000657-Lt; Mon, 10 May 2021 17:07:54 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 09/10] python3-babel: Upgrade 2.9.0 -> 2.9.1
-Date: Mon, 10 May 2021 17:07:21 +0300
-Message-Id: <20210510140722.27201-9-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 10/10] python3-croniter: Upgrade 1.0.12 -> 1.0.13
+Date: Mon, 10 May 2021 17:07:22 +0300
+Message-Id: <20210510140722.27201-10-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210510140722.27201-1-leon.anavi@konsulko.com>
 References: <20210510140722.27201-1-leon.anavi@konsulko.com>
@@ -30,39 +30,31 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.9.1:
+Upgrade to release 1.0.13:
 
-- The internal locale-data loading functions now validate the name
-  of the locale file to be loaded and only allow files within
-  Babel's data directory. Thanks to Chris Lyne of Tenable, Inc. for
-  discovering the issue!
-
-License-Update: Update years
+- Fix ZeroDivisionError with * * R/0 * *
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-babel_2.9.0.bb => python3-babel_2.9.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-babel_2.9.0.bb => python3-babel_2.9.1.bb} (76%)
+ .../{python3-croniter_1.0.12.bb => python3-croniter_1.0.13.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-croniter_1.0.12.bb => python3-croniter_1.0.13.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-babel_2.9.0.bb b/meta-python/recipes-devtools/python/python3-babel_2.9.1.bb
-similarity index 76%
-rename from meta-python/recipes-devtools/python/python3-babel_2.9.0.bb
-rename to meta-python/recipes-devtools/python/python3-babel_2.9.1.bb
-index 7248abf33b..a54f0d2100 100644
---- a/meta-python/recipes-devtools/python/python3-babel_2.9.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-babel_2.9.1.bb
-@@ -1,9 +1,9 @@
- DESCRIPTION = "A collection of tools for internationalizing Python applications"
- HOMEPAGE = "http://babel.edgewall.org/"
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=22a580b27e4ebf9689e466b63aedeb7f"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=05fb707293a85504aa67afc8ea34d747"
+diff --git a/meta-python/recipes-devtools/python/python3-croniter_1.0.12.bb b/meta-python/recipes-devtools/python/python3-croniter_1.0.13.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-croniter_1.0.12.bb
+rename to meta-python/recipes-devtools/python/python3-croniter_1.0.13.bb
+index fd70468953..c520fa715f 100644
+--- a/meta-python/recipes-devtools/python/python3-croniter_1.0.12.bb
++++ b/meta-python/recipes-devtools/python/python3-croniter_1.0.13.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=b8ee59850b882cbf623188489ea748e2"
  
--SRC_URI[sha256sum] = "da031ab54472314f210b0adcff1588ee5d1d1d0ba4dbd07b94dba82bde791e05"
-+SRC_URI[sha256sum] = "bc0c176f9f6a994582230df350aa6e05ba2ebe4b3ac317eab29d9be5d2768da0"
+ PYPI_PACKAGE = "croniter"
  
- PYPI_PACKAGE = "Babel"
+-SRC_URI[sha256sum] = "3603ef0d60fc6df98ce356c01529de90b06a002379b9f5e9eae981fb9c1fd936"
++SRC_URI[sha256sum] = "57f36df4f5a1c31bbf50bbffa3551612c19f6156ab1e88e2e42342ccbb9f9b9a"
+ 
+ inherit pypi setuptools3
  
 -- 
 2.17.1
