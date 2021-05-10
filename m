@@ -1,61 +1,85 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.32174.1620655675406980468
+Received: from mail7.pr.hu (mail7.pr.hu [87.242.0.7])
+ by mx.groups.io with SMTP id smtpd.web11.33013.1620659370071962950
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 May 2021 07:07:55 -0700
+ Mon, 10 May 2021 08:09:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=57184 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+ dkim=pass header.i=@pr.hu header.s=pr20170203 header.b=gsBcPAuT;
+ spf=pass (domain: pr.hu, ip: 87.242.0.7, mailfrom: zboszor@pr.hu)
+Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
+	by frontdoor.pr.hu with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.89)
+	(envelope-from <zboszor@pr.hu>)
+	id 1lg7XD-0004sP-8n; Mon, 10 May 2021 17:09:27 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
+	s=pr20170203; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=/Wj/BwVp18w0etZreW02b7czZvYgjNYnGLPYrU1NozQ=; b=gsBcPAuT3vhEjJjN/8nHwW0UQn
+	8ZMouy5ba7/M2/zVtj08ezYwgJaGLOyvJBdevO6lQ6PvAY3mzYFASRC5Vl+Rbqd+v5Ju0bcFCCwaG
+	VMpYfzAVDap1PEQG1jXvafNZOBiSH8AZZkQdU66HUsfvoQPJh3+SJsauipJCczq9JX+cifsJ59AuV
+	0k5YoCSpbv8yfPWVv7aaZiFppp5C9ADv6fhF8ydVrqg+HkkokSL+Nbk6WaEhqroy+8uF6nNHtB+vA
+	pYSb1hAG8TShRoC2XkYZpausR4MJEjHt3dDeXARIPhZiKU5Xdj/kw18raxxb5BnY1LLI1wJjw7I+Q
+	nzoOXMXg==;
+Received: from host-87-242-23-58.prtelecom.hu ([87.242.23.58] helo=localhost.localdomain)
+	by mail.pr.hu with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
 	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lg6Zc-000657-Lt; Mon, 10 May 2021 17:07:54 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 10/10] python3-croniter: Upgrade 1.0.12 -> 1.0.13
-Date: Mon, 10 May 2021 17:07:22 +0300
-Message-Id: <20210510140722.27201-10-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210510140722.27201-1-leon.anavi@konsulko.com>
-References: <20210510140722.27201-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+	(envelope-from <zboszor@pr.hu>)
+	id 1lg7X9-0006Kj-3h; Mon, 10 May 2021 17:09:25 +0200
+Subject: Re: [oe] mariadb-native fails to build on Fedora 34
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <59e17e43-74f3-76f4-69e1-150f152c1831@pr.hu>
+ <CALbNGRS6ML4LCrU-AmeSukS1PoZeqhvOJ7hB1D-dN88Ju5ZaBQ@mail.gmail.com>
+From: "Zoltan Boszormenyi" <zboszor@pr.hu>
+Message-ID: <b0464301-6580-0334-0932-e4f81fde444f@pr.hu>
+Date: Mon, 10 May 2021 17:09:20 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.1
+MIME-Version: 1.0
+In-Reply-To: <CALbNGRS6ML4LCrU-AmeSukS1PoZeqhvOJ7hB1D-dN88Ju5ZaBQ@mail.gmail.com>
+X-Spam-Score: -0.9 (/)
+X-Scan-Signature: 02d3abc61471e6dd9f9388029c518d83
+X-Spam-Tracer: backend.mail.pr.hu -0.9 20210510150925Z
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 1.0.13:
+2021. 05. 10. 15:59 keltezéssel, Andreas Müller írta:
+> On Mon, May 10, 2021 at 3:51 PM Zoltan Boszormenyi via
+> lists.openembedded.org <zboszor=pr.hu@lists.openembedded.org> wrote:
+>>
+>> Hi,
+>>
+>> mariadb-native 10.5.9 on Hardknott fails to build on
+>> Fedora 34 host with a lot of "undefined reference" linker errors.
+>> It's likely related to GCC 11 on the host OS.
+>>
+>> BTW the same MariaDB version is shipped by Fedora 34. ¯\_(ツ)_/¯
+>>
+>> Best regards,
+>> Zoltán Böszörményi
+>>
+> Hi Zoltan,
+> 
+> There are two patches around for this: Khem sent an upgrade to 10.5.10
+> which is in master-next (haven't tested that yet). Have missed that so
+> I sent a fix for 10.5.9
 
-- Fix ZeroDivisionError with * * R/0 * *
+Strange. After "bitbake -c clean mariadb-native mariadb"
+the build have succeeded.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../{python3-croniter_1.0.12.bb => python3-croniter_1.0.13.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-croniter_1.0.12.bb => python3-croniter_1.0.13.bb} (78%)
+Best regards,
+Zoltán Böszörményi
 
-diff --git a/meta-python/recipes-devtools/python/python3-croniter_1.0.12.bb b/meta-python/recipes-devtools/python/python3-croniter_1.0.13.bb
-similarity index 78%
-rename from meta-python/recipes-devtools/python/python3-croniter_1.0.12.bb
-rename to meta-python/recipes-devtools/python/python3-croniter_1.0.13.bb
-index fd70468953..c520fa715f 100644
---- a/meta-python/recipes-devtools/python/python3-croniter_1.0.12.bb
-+++ b/meta-python/recipes-devtools/python/python3-croniter_1.0.13.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=b8ee59850b882cbf623188489ea748e2"
- 
- PYPI_PACKAGE = "croniter"
- 
--SRC_URI[sha256sum] = "3603ef0d60fc6df98ce356c01529de90b06a002379b9f5e9eae981fb9c1fd936"
-+SRC_URI[sha256sum] = "57f36df4f5a1c31bbf50bbffa3551612c19f6156ab1e88e2e42342ccbb9f9b9a"
- 
- inherit pypi setuptools3
- 
--- 
-2.17.1
+> 
+> HTH
+> 
+> Andreras
+> 
+> 
+> 
+> 
+> 
 
