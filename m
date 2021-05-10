@@ -1,76 +1,147 @@
-Received: from mail7.pr.hu (mail7.pr.hu [87.242.0.7])
- by mx.groups.io with SMTP id smtpd.web08.942.1620669145664785507
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
+ by mx.groups.io with SMTP id smtpd.web11.1430.1620671049706532576
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 May 2021 10:52:26 -0700
+ Mon, 10 May 2021 11:24:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@pr.hu header.s=pr20170203 header.b=OSI1Erhd;
- spf=pass (domain: pr.hu, ip: 87.242.0.7, mailfrom: zboszor@pr.hu)
-Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
-	by frontdoor.pr.hu with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.89)
-	(envelope-from <zboszor@pr.hu>)
-	id 1lgA4s-0007tJ-IT
-	for openembedded-devel@lists.openembedded.org; Mon, 10 May 2021 19:52:22 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
-	s=pr20170203; h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:
-	Message-ID:Subject:From:To:Sender:Reply-To:Cc:Content-ID:Content-Description:
-	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=Vr40KrpO+69Y1vQjVywk7hItngrIgTn7F+aPSdLokx8=; b=OSI1Erhdljovuhwj+P6hyYYb1m
-	RlpJpZEkd3Ulu1nBOL+ed43PftDisB1fU4gCQxYS9EEYE3yoh1berNdoWpiKIrDStF+z/1XzP4YrN
-	TruNd0d293mhd+diWPlxZRJdNIGEHzFuaRcEqPFfsrvSRP6PyUlC6zyYv0Y6g1M7sgs0rHwCrLZ9z
-	d6wV8HIUmDNRWne7zVajnulavIqtjkRaFmy2uigULJDl19msR68A97vhD9+Oe19O4ZwvxnYqXCZdW
-	+RLpRzMtxsnhIgrjWnvjPJRhy5zuFKECDssSMJCyHDMuHrA3wPZbxsh0sULlvH+TfYFTC3NrucWJu
-	1l/CCueg==;
-Received: from host-87-242-23-58.prtelecom.hu ([87.242.23.58] helo=localhost.localdomain)
-	by mail.pr.hu with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
-	(Exim 4.92)
-	(envelope-from <zboszor@pr.hu>)
-	id 1lgA4o-0003Zr-Nl
-	for openembedded-devel@lists.openembedded.org; Mon, 10 May 2021 19:52:20 +0200
-To: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-From: "Zoltan Boszormenyi" <zboszor@pr.hu>
-Subject: ovmf-native build error with GCC 11 host compiler
-Message-ID: <1a68d742-389c-b39a-e97f-ff8a29d930f3@pr.hu>
-Date: Mon, 10 May 2021 19:52:16 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Xt0Bz+G4;
+ spf=pass (domain: gmail.com, ip: 209.85.208.44, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ed1-f44.google.com with SMTP id r11so4998835edt.13
+        for <openembedded-devel@lists.openembedded.org>; Mon, 10 May 2021 11:24:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=8+wcLUMXTpWh+9UMEKBThjJjizU+0AelcJ3AapNBigw=;
+        b=Xt0Bz+G4ns6Zfj38riCs+Fz/GZ4o7XDIPA6Io9DiAPIKqlo8gsWNfFovEQlSAVCT83
+         KVaGA8ix3ziFE7yglyrw5cr2ue9Gri2m1+yCDsJiU+4DKJGtz3R+XLpG9OLz8IzJPwOx
+         hzK4OnR5242tnmdl2W8q8n8UuM7o2je84f+CTuimNQs35/TWYk/qRzY59DHLdHLtRa+6
+         EVZ67bTxKd+u2A3F0XZCqHRD0+JgOZNK+W9w4vfuPPIbzGmrcTHpKDxa/xzglSIlZhIT
+         dJssVTbfrF8blT3y6X0dQK4hYMyDOP1BDZrSOWyi45MS2hPrHwcL3azq6+PiPPOx3jlv
+         cB3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=8+wcLUMXTpWh+9UMEKBThjJjizU+0AelcJ3AapNBigw=;
+        b=PMkgx3SB+YtjceBjWW/ak74XOYtBSPrNV4Y56u1wOVuh16LboI3arr3Jcyd1/WCsha
+         EQtBt2/jnHZJ904WfHe9sMU2A9GF+MgDR18h/YDtwy/8phk7tEfu30Uza4T8ZlLtnw1X
+         wJRR1fH90kR0HYYaWK0xgAh+gv/r2dWFBS/vXw4rMosTNSykWtEZvr1nR/b1oplU4MhT
+         zT2b7J3Fkiha6xUzRDZqhbdHOKSJA+dwdbzbMtOgVvt3q0MKVrS/J0NnLPHuh7fP1zU+
+         jkpohB2XW/MQff6SH/+O/iqoTRPJ/BQDGM+xHlmRNil+Fcp9W+BeC7reGIqYLlLZJcA0
+         /tUg==
+X-Gm-Message-State: AOAM532GtpQYPKbtGxbfXIHwJyDqg3oqLyhsK2z7Hs9/nLvZGoAB9xlq
+	SQzRN6vbKaQTD8h2olWOkCF/ZVSsOmg=
+X-Google-Smtp-Source: ABdhPJzZqzsaYuQG4/yMqjwponV/m72HZJo2ONQ84NABQYMRgb51erayk+XMMVr3i2mzl3D3IpfB+A==
+X-Received: by 2002:aa7:d594:: with SMTP id r20mr30532830edq.242.1620671047925;
+        Mon, 10 May 2021 11:24:07 -0700 (PDT)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from thanks-buchmuellers.speedport.ip (p200300f07f4fac346ac282ef7d435921.dip0.t-ipconnect.de. [2003:f0:7f4f:ac34:6ac2:82ef:7d43:5921])
+        by smtp.gmail.com with ESMTPSA id da25sm12459325edb.38.2021.05.10.11.24.07
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 May 2021 11:24:07 -0700 (PDT)
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] evolution-data-server: Backport upstream patch to fix configure on latest CMake
+Date: Mon, 10 May 2021 20:23:59 +0200
+Message-Id: <20210510182359.2753647-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-X-Spam-Score: -0.9 (/)
-X-Scan-Signature: eb3d9b7f1f3400e9adcc1170d01d5e4d
-X-Spam-Tracer: backend.mail.pr.hu -0.9 20210510175220Z
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hi,
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ .../evolution-data-server.bb                  |  1 +
+ ....cmake-Correct-variable-name-compari.patch | 67 +++++++++++++++++++
+ 2 files changed, 68 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0005-PrintableOptions.cmake-Correct-variable-name-compari.patch
 
-it's a genuine build error with Hardknott on Fedora 34:
+diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
+index 7f267b497..e2d7f502b 100644
+--- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
++++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
+@@ -16,6 +16,7 @@ SRC_URI += " \
+     file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
+     file://0004-call-native-helpers.patch \
+     file://iconv-detect.h \
++    file://0005-PrintableOptions.cmake-Correct-variable-name-compari.patch \
+ "
+ 
+ LKSTRFTIME = "HAVE_LKSTRFTIME=ON"
+diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0005-PrintableOptions.cmake-Correct-variable-name-compari.patch b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0005-PrintableOptions.cmake-Correct-variable-name-compari.patch
+new file mode 100644
+index 000000000..d84b41d00
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0005-PrintableOptions.cmake-Correct-variable-name-compari.patch
+@@ -0,0 +1,67 @@
++From c95a70bfeae25ba11fbe50fe759a6cdb29388e44 Mon Sep 17 00:00:00 2001
++From: Milan Crha <mcrha@redhat.com>
++Date: Wed, 14 Apr 2021 16:58:08 +0200
++Subject: [PATCH] PrintableOptions.cmake: Correct variable name comparison
++
++CMake 3.20.1 errors out with:
++
++CMake Error at cmake/modules/PrintableOptions.cmake:38 (message):
++   variable name cannot be empty
++ Call Stack (most recent call first):
++   CMakeLists.txt:152 (add_printable_variable)
++
++Change how the parameter value is compared, to fix it.
++
++Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/evolution-data-server/-/commit/c95a70bfeae25ba11fbe50fe759a6cdb29388e44]
++---
++ cmake/modules/PrintableOptions.cmake | 16 ++++++++--------
++ 1 file changed, 8 insertions(+), 8 deletions(-)
++
++diff --git a/cmake/modules/PrintableOptions.cmake b/cmake/modules/PrintableOptions.cmake
++index a79419a..c74531a 100644
++--- a/cmake/modules/PrintableOptions.cmake
+++++ b/cmake/modules/PrintableOptions.cmake
++@@ -19,32 +19,32 @@
++ #    prints all the build options previously added with the above functions
++ 
++ macro(add_printable_variable_bare _name)
++-	if(_name STREQUAL "")
+++	if("${_name}" STREQUAL "")
++ 		message(FATAL_ERROR "variable name cannot be empty")
++-	endif(_name STREQUAL "")
+++	endif("${_name}" STREQUAL "")
++ 	list(APPEND _printable_options ${_name})
++ endmacro()
++ 
++ macro(add_printable_option _name _description _default_value)
++-	if(_name STREQUAL "")
+++	if("${_name}" STREQUAL "")
++ 		message(FATAL_ERROR "option name cannot be empty")
++-	endif(_name STREQUAL "")
+++	endif("${_name}" STREQUAL "")
++ 	option(${_name} ${_description} ${_default_value})
++ 	add_printable_variable_bare(${_name})
++ endmacro()
++ 
++ macro(add_printable_variable _name _description _default_value)
++-	if(_name STREQUAL "")
+++	if("${_name}" STREQUAL "")
++ 		message(FATAL_ERROR "variable name cannot be empty")
++-	endif(_name STREQUAL "")
+++	endif("${_name}" STREQUAL "")
++ 	set(${_name} ${_default_value} CACHE STRING ${_description})
++ 	add_printable_variable_bare(${_name})
++ endmacro()
++ 
++ macro(add_printable_variable_path _name _description _default_value)
++-	if(_name STREQUAL "")
+++	if("${_name}" STREQUAL "")
++ 		message(FATAL_ERROR "path variable name cannot be empty")
++-	endif(_name STREQUAL "")
+++	endif("${_name}" STREQUAL "")
++ 	set(${_name} ${_default_value} CACHE PATH ${_description})
++ 	add_printable_variable_bare(${_name})
++ endmacro()
++-- 
++2.30.2
++
+-- 
+2.30.2
 
-brotli/c/dec/decode.c:2033:41: error: argument 2 of type ‘const uint8_t *’ {aka ‘const 
-unsigned char *’} declared as a pointer [-Werror=vla-parameter]
-  2033 |     size_t encoded_size, const uint8_t* encoded_buffer, size_t* decoded_size,
-       |                          ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
-In file included from brotli/c/dec/decode.c:7:
-./brotli/c/include/brotli/decode.h:204:19: note: previously declared as a variable length 
-array ‘const uint8_t[*decoded_size]’ {aka ‘const unsigned char[*decoded_size]’}
-   204 |     const uint8_t encoded_buffer[BROTLI_ARRAY_PARAM(encoded_size)],
-       |     ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-brotli/c/dec/decode.c:2034:14: error: argument 4 of type ‘uint8_t *’ {aka ‘unsigned char 
-*’} declared as a pointer [-Werror=vla-parameter]
-  2034 |     uint8_t* decoded_buffer) {
-       |     ~~~~~~~~~^~~~~~~~~~~~~~
-In file included from brotli/c/dec/decode.c:7:
-./brotli/c/include/brotli/decode.h:206:13: note: previously declared as a variable length 
-array ‘uint8_t[encoded_size]’ {aka ‘unsigned char[encoded_size]’}
-   206 |     uint8_t decoded_buffer[BROTLI_ARRAY_PARAM(*decoded_size)]);
-       |     ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-cc1: all warnings being treated as errors
-
-Comparing GCC 10 and 11, -Wvla-parameter is new in GCC 11 and
-it's part of to -Wall.
-
-Best regards,
-Zoltán Böszörményi
