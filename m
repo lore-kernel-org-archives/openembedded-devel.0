@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.32166.1620655655129522365
+ by mx.groups.io with SMTP id smtpd.web12.32336.1620655657536049599
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 May 2021 07:07:35 -0700
+ Mon, 10 May 2021 07:07:37 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=57184 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lg6ZI-000657-E2; Mon, 10 May 2021 17:07:34 +0300
+	id 1lg6ZK-000657-Hv; Mon, 10 May 2021 17:07:36 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 02/10] python3-humanize: Upgrade 3.4.1 -> 3.5.0
-Date: Mon, 10 May 2021 17:07:14 +0300
-Message-Id: <20210510140722.27201-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 03/10] python3-elementpath: Upgrade 2.2.1 -> 2.2.2
+Date: Mon, 10 May 2021 17:07:15 +0300
+Message-Id: <20210510140722.27201-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210510140722.27201-1-leon.anavi@konsulko.com>
 References: <20210510140722.27201-1-leon.anavi@konsulko.com>
@@ -30,34 +30,33 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.5.0:
+Upgrade to release 2.2.2:
 
-- Add intword processing for thousands
-- Update translation .po files with 'thousand'
-- Remove generated translation binaries from repo
+- Fix issue sissaschool/xmlschema#243 (assert with xsi:nil usage)
+- First implementation of XPath 3.0 fn:format-integer
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-humanize_3.4.1.bb => python3-humanize_3.5.0.bb}    | 2 +-
+ ...ython3-elementpath_2.2.1.bb => python3-elementpath_2.2.2.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-humanize_3.4.1.bb => python3-humanize_3.5.0.bb} (80%)
+ rename meta-python/recipes-devtools/python/{python3-elementpath_2.2.1.bb => python3-elementpath_2.2.2.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-humanize_3.4.1.bb b/meta-python/recipes-devtools/python/python3-humanize_3.5.0.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-humanize_3.4.1.bb
-rename to meta-python/recipes-devtools/python/python3-humanize_3.5.0.bb
-index 5ffc2b5938..866079105e 100644
---- a/meta-python/recipes-devtools/python/python3-humanize_3.4.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-humanize_3.5.0.bb
-@@ -5,7 +5,7 @@ SECTION = "devel/python"
+diff --git a/meta-python/recipes-devtools/python/python3-elementpath_2.2.1.bb b/meta-python/recipes-devtools/python/python3-elementpath_2.2.2.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-elementpath_2.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-elementpath_2.2.2.bb
+index b0a7339687..c793592bea 100644
+--- a/meta-python/recipes-devtools/python/python3-elementpath_2.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-elementpath_2.2.2.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/elementpath"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5dbb7fb7d72da3921202dd7b995d3ecf"
  
--SRC_URI[sha256sum] = "6e04cdd75d66074c34ff93c30a2ad6d19d91202a65c1bd400b2edeedae399bda"
-+SRC_URI[sha256sum] = "a0474226e1494923f9106758e11f0c3bb4dbe5e7d84388fa78f90eb7713b5d65"
+-SRC_URI[sha256sum] = "c7b996c5624926f329f4379fbcffd5787629e08b2f8d7159d23525e9243ba637"
++SRC_URI[sha256sum] = "68de07c1aec3b1d33126111252cc699600dd1e45802625344aa6eb9e680ef157"
  
+ PYPI_PACKAGE = "elementpath"
  inherit pypi setuptools3
- 
 -- 
 2.17.1
 
