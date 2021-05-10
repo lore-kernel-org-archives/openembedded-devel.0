@@ -1,56 +1,72 @@
-Received: from mail7.pr.hu (mail7.pr.hu [87.242.0.7])
- by mx.groups.io with SMTP id smtpd.web11.31840.1620654674099069712
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web09.32121.1620655206573810401
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 May 2021 06:51:15 -0700
+ Mon, 10 May 2021 07:00:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@pr.hu header.s=pr20170203 header.b=TrL2zRrP;
- spf=pass (domain: pr.hu, ip: 87.242.0.7, mailfrom: zboszor@pr.hu)
-Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
-	by frontdoor.pr.hu with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.89)
-	(envelope-from <zboszor@pr.hu>)
-	id 1lg6JT-0007Aa-0T
-	for openembedded-devel@lists.openembedded.org; Mon, 10 May 2021 15:51:11 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
-	s=pr20170203; h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:
-	Message-ID:Subject:From:To:Sender:Reply-To:Cc:Content-ID:Content-Description:
-	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=/RmKLKODUzIFEn6PzNn7qdMvCdSYbVpTF0w3MzzhHA0=; b=TrL2zRrPAcYDam1Fq/FP1dW2cg
-	RAZE6m9eRaW7fTkijX6bRxQYqFu83CjUijpqnlEjGvFdg2O8O7lvd0NO75MC8AAnkpiVzUpZn4DKX
-	3JWRbX947WtmwtWnR+eWHCfPM8+sw6x4bSPTRu7fH85tju6Fxf2Vx506MzseEhmRD1yyQuHRBx+y/
-	Tw8EgBz23hdtuz6pFAcCC4b7krzk1MEVjuCz/pjgaz+MkhN/5/olavKi8UYaQ5hjvHKKtWB3G89IT
-	wy8+iR3WGOubSEmeof7KXfg0X07K4yS1aabZhqr4QPOe39I4foGm/TL1uHLCtKaKbRalIsWGgI9TR
-	tGku/pDg==;
-Received: from host-87-242-23-58.prtelecom.hu ([87.242.23.58] helo=localhost.localdomain)
-	by mail.pr.hu with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
-	(Exim 4.92)
-	(envelope-from <zboszor@pr.hu>)
-	id 1lg6JP-0000qG-6F
-	for openembedded-devel@lists.openembedded.org; Mon, 10 May 2021 15:51:08 +0200
-To: openembedded-devel@lists.openembedded.org
-From: "Zoltan Boszormenyi" <zboszor@pr.hu>
-Subject: mariadb-native fails to build on Fedora 34
-Message-ID: <59e17e43-74f3-76f4-69e1-150f152c1831@pr.hu>
-Date: Mon, 10 May 2021 15:51:04 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=fOHSNOL5;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id x188so13659478pfd.7
+        for <openembedded-devel@lists.openembedded.org>; Mon, 10 May 2021 07:00:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=QW+TEItewzZ+4TU1R6hsrAUzVqzxdwkdqAgBkSpem9A=;
+        b=fOHSNOL5rNHpvumf125csRg5FDSVwSx1ZYJR7w5yXi9AE4XBc5H1cmR+UIdhVh/bwk
+         WDkr12R2+VITcQIhrT0ZuJPIkgrimBhMfUoejmHJM7Zl5BUSn8caqSZDm4loDcGKwvVz
+         P5ibpjz5b0fKr0BmeJTUwmmk9pQaioi5qwgeMucliYPMS3bx5IKAZyLDVJ/b0tzNnr1B
+         b1UKw4hofmTRXXwzW2z08MV5JQmOHXvnLqKZa26jCfyKFiikhLziR9YWJBouFGJU8t9V
+         SRGnEEDNTf+WEMuoOt4zzqMLYAqmjsGbngnz/8bukttaU/5CstiuV0qJK+03IFNh4OBG
+         B/xw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=QW+TEItewzZ+4TU1R6hsrAUzVqzxdwkdqAgBkSpem9A=;
+        b=oym9hzC+SlcD1n8WlNycRxeum8L7F8Yuc+1hDYwu4IXeYDpEqyT5IcXcK9epUUZy0r
+         gydJy8prodKsUL8TbAVvar/JNwJHomnCb+ug+CMuwmpQqABhE0Cl8Is6yB745ZwjX75v
+         LC2mDI7fcoEodSP61PhIHHMopGvvKvFh1grZmSDhCXNea+4Ykk12b9ZbNccPOPpM4FjJ
+         Pk05VpKHwEIj+FlTfIL+tvEaMmENq3fQ/mDR3w2hFbdCK9hfHvIeuA/berHBQgCCbFjm
+         JtEwBIwI0j+R68BTYbMZFgSENPzUeRK7biFcyJ7RH6HPST6B7Tzwiy51I5q8aagjDhdI
+         3iLQ==
+X-Gm-Message-State: AOAM531aWK8YK2KweDGUS2gIqtVOkbUbhFoU3bzQtGlwNHkZ37mTjcrI
+	1XVCR3hs/qGitm8CxVGGkEwHyGOhb3rfSTIEZRF5P5cI
+X-Google-Smtp-Source: ABdhPJxIo5IrKIY9p1/Rj2SqOYxftb6Mo0GpugONoCUM3X3dsJTOfPjreRIPOlpj9HLz2SafpS9Gh890yp/Pi6kM8XQ=
+X-Received: by 2002:a63:4f57:: with SMTP id p23mr7926096pgl.6.1620655205937;
+ Mon, 10 May 2021 07:00:05 -0700 (PDT)
 MIME-Version: 1.0
-X-Spam-Score: -0.9 (/)
-X-Scan-Signature: 5c27a7ee490ccbfea099474daaf9cbba
-X-Spam-Tracer: backend.mail.pr.hu -0.9 20210510135108Z
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+References: <59e17e43-74f3-76f4-69e1-150f152c1831@pr.hu>
+In-Reply-To: <59e17e43-74f3-76f4-69e1-150f152c1831@pr.hu>
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+Date: Mon, 10 May 2021 15:59:54 +0200
+Message-ID: <CALbNGRS6ML4LCrU-AmeSukS1PoZeqhvOJ7hB1D-dN88Ju5ZaBQ@mail.gmail.com>
+Subject: Re: [oe] mariadb-native fails to build on Fedora 34
+To: zboszor@pr.hu
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Mon, May 10, 2021 at 3:51 PM Zoltan Boszormenyi via
+lists.openembedded.org <zboszor=3Dpr.hu@lists.openembedded.org> wrote:
+>
+> Hi,
+>
+> mariadb-native 10.5.9 on Hardknott fails to build on
+> Fedora 34 host with a lot of "undefined reference" linker errors.
+> It's likely related to GCC 11 on the host OS.
+>
+> BTW the same MariaDB version is shipped by Fedora 34. =C2=AF\_(=E3=83=84)=
+_/=C2=AF
+>
+> Best regards,
+> Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi
+>
+Hi Zoltan,
 
-mariadb-native 10.5.9 on Hardknott fails to build on
-Fedora 34 host with a lot of "undefined reference" linker errors.
-It's likely related to GCC 11 on the host OS.
+There are two patches around for this: Khem sent an upgrade to 10.5.10
+which is in master-next (haven't tested that yet). Have missed that so
+I sent a fix for 10.5.9
 
-BTW the same MariaDB version is shipped by Fedora 34. ¯\_(ツ)_/¯
+HTH
 
-Best regards,
-Zoltán Böszörményi
+Andreras
