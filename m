@@ -1,50 +1,50 @@
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.web10.6906.1620698861837876821
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.web11.7022.1620698862577614072
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 10 May 2021 19:07:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=jNIkzXxH;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 4-20020a05600c26c4b0290146e1feccd8so356812wmv.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 10 May 2021 19:07:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=mZYoU52t;
+ spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wm1-f52.google.com with SMTP id n205so10215849wmf.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 10 May 2021 19:07:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=06f+u2Al7NPYvMklT0he/1KiVUfV8Kw+IdoQ+hfcb7g=;
-        b=jNIkzXxHvuFJSD4t+6l5/GzpMwTgWLklED/DCOzBpi6IWF72ny94LbzxvS8Cd0UKh8
-         Q3XXoOc30lVbdA0yWkZn/jfA6gpbEFpKgyAZaKMUV9dPHG2W9rVI107BQjRIAzRfb1Ra
-         q7P6e9cXcSAxFY9yLVefB4AjkcUMD8KPLIC5iqk2XQjH6agwgjLhVEVfTMArC9uXvamV
-         tdEFs1mxnSi/C2pDJhi9UPcgcJwucNHXYTv9n74RoQYbe+hWNx704V0y0NcU8cl8FN1n
-         seM8Ac4LWkIPop/FwqGWXQjpCL5vWbCXXGAxzHESQMrlzx9xbq3LkZ2cbEYkms/exr+8
-         0thg==
+        bh=TJsZbhOpJyDzRdBBsYREvh+NoscM1T28021cjoEY9v8=;
+        b=mZYoU52tOUShkUHSHA++6wEaVtfY4LIMAtHNzeG2KfZQO7z0HkyLYaRLAkdRXfr296
+         Ivz/KNzzYjntrYJWVUYxWyTx5xvPpvZa2nXlt4I9r9Q8EI0cgejJFAGa5s6Ik7OekHki
+         h+aj7+AgGkuBPB2zksP1gVmEHDGSuiUzgIhOCfhV6S4M1ln6xkGFtxcnVu+tMSDNztVl
+         GBJKesLygAVh685/p+l2iqO7AQ6WBrhqNuefcOD3P/N6G0vS7FV6sKOsCwsqFj1foIZK
+         +iqJ5p2eqQC+oIGZVbU3t+8G7oHdS+3UhqrufJiqs1L5rUPD1/qIMG62qasA5zPGdcNE
+         eOrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=06f+u2Al7NPYvMklT0he/1KiVUfV8Kw+IdoQ+hfcb7g=;
-        b=DJsViwjRadXH2dz4rejOsss8xCn6jM6D/hrdMUv3zelm6zYufSLS98CX9VSE/FrJz0
-         3gA3ApZVCw+1rDkeb8p9ay0EXVc2Txthho83vOhr8R+IqrcJ9Pc6tzxqEYZFOvyv/JQN
-         tn7+InH//REXTSwjrTu/1hA1H2ExpK/iyKPiYtGjJ9bTz9fvTO1Ef/WQDD89/be2+LzY
-         t4dedD+0c+weJPptJUPeoqLAFB569YBRGaTmKWbANkcyH5WggNVYirc7+fn23PWP4Bul
-         wGkr+h1AWN7y0CVcUxMlXjQbs7+ATYEPVOt2a41yMa5PLgC6DVfdxm3SEPUelN/+9Pmp
-         LMCQ==
-X-Gm-Message-State: AOAM533qkEJZEzzjKB8JqBTVvUnuHaV4Fkm+roMwhtR2ZBOUk/ChC8uI
-	mVQSCkw7GQ014GhqcWm6gmE5UWuV2s0=
-X-Google-Smtp-Source: ABdhPJz0lQPrd49Y7W190m44nYAKSoVtMNAUj7PlurQO/227AMFV+7hv9RWrhGwYjHxsPVYMYlbtYg==
-X-Received: by 2002:a1c:2786:: with SMTP id n128mr2448263wmn.82.1620698860533;
-        Mon, 10 May 2021 19:07:40 -0700 (PDT)
+        bh=TJsZbhOpJyDzRdBBsYREvh+NoscM1T28021cjoEY9v8=;
+        b=G7JmwDrUoumRSULEUb1e+CL7pntdsmii2ZwBS9F6WoHtRgssn12LESdQ5ZEjLdOtAn
+         HU59h8bs57l+y3AixOFoMDF/8JOIh3OAaGiPUVWaDKZsx/1HXI3L+orFcf3ThhdPC1EB
+         2ZEFTBvRbveBR9dyNpEu3Ah/6MRpSa/zjnylOtz87wGLyeIeB90DARvjBejBtQo6symV
+         rJD87XhWMDWlNMF/Pz9el1l1kBh3JYpnF5BzivTMUPncF8O6JaB1kKkvIdJHAVtqO8yJ
+         BA2XaGtw2zQ2c9Xs77IKlzcHYPfEwDWXJHo5aFKpyyf+PMFumHsSo98uTe6MoRkd2m1e
+         QBRw==
+X-Gm-Message-State: AOAM532IU1GJyiIDd+fe/ATKSafVEKQbrt8VkuR3PrqILc7Yw2utf3hZ
+	hnOxBmk2umYaEgj/Hz67xZeNQE/sOcY=
+X-Google-Smtp-Source: ABdhPJxxXqxj2tZ9brS9htsGX0KS8Nxpd2iOEPms5rvXWzkm0M4Pe7+K3CTiFYfjE/20dBs1YTRCqA==
+X-Received: by 2002:a05:600c:4ecd:: with SMTP id g13mr29040391wmq.173.1620698861249;
+        Mon, 10 May 2021 19:07:41 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from thanks-buchmuellers.speedport.ip (p200300f07f4fac346ac282ef7d435921.dip0.t-ipconnect.de. [2003:f0:7f4f:ac34:6ac2:82ef:7d43:5921])
-        by smtp.gmail.com with ESMTPSA id n12sm20145075wmq.29.2021.05.10.19.07.39
+        by smtp.gmail.com with ESMTPSA id n12sm20145075wmq.29.2021.05.10.19.07.40
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Mon, 10 May 2021 19:07:40 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 6/7] gparted: upgrade 1.2.0 -> 1.3.0
-Date: Tue, 11 May 2021 04:07:24 +0200
-Message-Id: <20210511020725.346160-6-schnitzeltony@gmail.com>
+Subject: [PATCH 7/7] poppler: upgrade 21.04.0 -> 21.05.0
+Date: Tue, 11 May 2021 04:07:25 +0200
+Message-Id: <20210511020725.346160-7-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210511020725.346160-1-schnitzeltony@gmail.com>
 References: <20210511020725.346160-1-schnitzeltony@gmail.com>
@@ -52,37 +52,48 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The GParted 1.3.0 release includes some new features in addition to bug
-fixes, and language translation updates.
+Release 21.05.0
 
-Key changes include:
-     - Support resizing open LUKS2 encryption mappings
-     - Improve exFAT support such as read FS usage and set UUID
-     - Fix crash in Create New Partition dialog when changing type
-     - Avoid GParted hanging when non-named device is hung
+core:
+ * Fix crashes in malformed files
+ * Export SplashFont* symbols used by Scribus
+ * Minor code improvements
+
+qt5/qt6:
+ * Make sure new signatures are always properly oriented
+ * Allow to pass the border width when signing
+
+glib:
+ * Enhance find to support multi-line matching
+
+utils:
+ * pdftoppm: Fix regression when using single scaleTo. Issue #1062
+
+build system:
+ * Allow to disable building manual tests
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../gparted/{gparted_1.2.0.bb => gparted_1.3.0.bb}              | 2 +-
+ .../poppler/{poppler_21.04.0.bb => poppler_21.05.0.bb}          | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-extended/gparted/{gparted_1.2.0.bb => gparted_1.3.0.bb} (91%)
+ rename meta-oe/recipes-support/poppler/{poppler_21.04.0.bb => poppler_21.05.0.bb} (96%)
 
-diff --git a/meta-gnome/recipes-extended/gparted/gparted_1.2.0.bb b/meta-gnome/recipes-extended/gparted/gparted_1.3.0.bb
-similarity index 91%
-rename from meta-gnome/recipes-extended/gparted/gparted_1.2.0.bb
-rename to meta-gnome/recipes-extended/gparted/gparted_1.3.0.bb
-index d0a499e6e..4eb383bbf 100644
---- a/meta-gnome/recipes-extended/gparted/gparted_1.2.0.bb
-+++ b/meta-gnome/recipes-extended/gparted/gparted_1.3.0.bb
-@@ -11,7 +11,7 @@ SRC_URI = " \
-     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
-     file://0001-Install-polkit-action-unconditionally-executable-pke.patch \
- "
--SRC_URI[sha256sum] = "6c90715d254d7a7ec0208b29007b64160dd9fb7df4c4aa7f8ec2c9d23114c719"
-+SRC_URI[sha256sum] = "8dc180245dd9ea45e6e2f4bc69512f187e08be7f799c98a825a0b04c161cbd2a"
+diff --git a/meta-oe/recipes-support/poppler/poppler_21.04.0.bb b/meta-oe/recipes-support/poppler/poppler_21.05.0.bb
+similarity index 96%
+rename from meta-oe/recipes-support/poppler/poppler_21.04.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_21.05.0.bb
+index de5f38036..4cfc5bd86 100644
+--- a/meta-oe/recipes-support/poppler/poppler_21.04.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_21.05.0.bb
+@@ -7,7 +7,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://0001-Do-not-overwrite-all-our-build-flags.patch \
+            file://basename-include.patch \
+            "
+-SRC_URI[sha256sum] = "5e2219656c6bbd36154133fef2e12b7d0938464518827098b29a10b1697ea79c"
++SRC_URI[sha256sum] = "dafd537b680fad1215bc40fc53d1f38e8449d7c185bc60d5a89e1d26c90dbd8c"
  
- DEPENDS += " \
-     glib-2.0-native \
+ DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
+ 
 -- 
 2.30.2
 
