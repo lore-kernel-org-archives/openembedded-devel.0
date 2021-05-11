@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.1808.1620751949550578194
+ by mx.groups.io with SMTP id smtpd.web10.1930.1620751950370812873
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 11 May 2021 09:52:30 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=60228 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lgVcS-0007jj-1L; Tue, 11 May 2021 19:52:29 +0300
+	id 1lgVcT-0007jj-Ax; Tue, 11 May 2021 19:52:30 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-robotframework: Upgrade 4.0.1 -> 4.0.2
-Date: Tue, 11 May 2021 19:52:16 +0300
-Message-Id: <20210511165217.18433-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-sentry-sdk: Upgrade 1.0.0 -> 1.1.0
+Date: Tue, 11 May 2021 19:52:17 +0300
+Message-Id: <20210511165217.18433-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210511165217.18433-1-leon.anavi@konsulko.com>
 References: <20210511165217.18433-1-leon.anavi@konsulko.com>
@@ -30,37 +30,41 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 4.0.2:
+Upgrade to release 1.1.0:
 
-- Using Union containing generics as type hint causes an error
-- Libdoc does not anymore work with resource files in PYTHONPATH
-- Rebot removes sourcename attribute from <kw> in output.xml
-- Run Keyword If Test Failed does not work correctly if it is not
-  first keyword in teardown and test is skipped
-- Argument conversion problems when type hint is ABC
+- Fix for AWSLambda integration returns value of original handler
+- Fix for RQ integration that only captures exception if RQ job
+  has failed and ignore retries
+- Feature that supports Tracing for the Tornado integration
+- Feature that supports wild cards in ignore_logger in the Logging
+  Integration
+- Fix for django that deals with template span description names
+  that are either lists or tuples
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...-robotframework_4.0.1.bb => python3-robotframework_4.0.2.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-robotframework_4.0.1.bb => python3-robotframework_4.0.2.bb} (91%)
+ ...ython3-sentry-sdk_1.0.0.bb => python3-sentry-sdk_1.1.0.bb} | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-sentry-sdk_1.0.0.bb => python3-sentry-sdk_1.1.0.bb} (74%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-robotframework_4.0.1.bb b/meta-python/recipes-devtools/python/python3-robotframework_4.0.2.bb
-similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-robotframework_4.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-robotframework_4.0.2.bb
-index 3e5d67e0a4..67ebe3ee69 100644
---- a/meta-python/recipes-devtools/python/python3-robotframework_4.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-robotframework_4.0.2.bb
-@@ -13,7 +13,7 @@ inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_1.0.0.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.1.0.bb
+similarity index 74%
+rename from meta-python/recipes-devtools/python/python3-sentry-sdk_1.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-sentry-sdk_1.1.0.bb
+index 22b9f55ddf..89c659dba3 100644
+--- a/meta-python/recipes-devtools/python/python3-sentry-sdk_1.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.1.0.bb
+@@ -5,7 +5,9 @@ HOMEPAGE = "https://github.com/getsentry/sentry-python"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341"
  
- PYPI_PACKAGE_EXT = "zip"
+-SRC_URI[sha256sum] = "71de00c9711926816f750bc0f57ef2abbcb1bfbdf5378c601df7ec978f44857a"
++RDEPENDS_${PN} += "python3-urllib3"
++
++SRC_URI[sha256sum] = "c1227d38dca315ba35182373f129c3e2722e8ed999e52584e6aca7d287870739"
  
--SRC_URI[sha256sum] = "9fa609ceb78f67b1476edce8a7011b16bf3ab41c0fb8c211de6c99955eaf9fde"
-+SRC_URI[sha256sum] = "efd39558219fddc86473d4d390aeaec60640d7a7567a15fd51c0576f20e46171"
+ PYPI_PACKAGE = "sentry-sdk"
  
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-shell \
 -- 
 2.17.1
 
