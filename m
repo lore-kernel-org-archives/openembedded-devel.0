@@ -1,79 +1,75 @@
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.web08.3856.1620806860047843056
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web11.4536.1620811844748941559
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 May 2021 01:07:40 -0700
+ Wed, 12 May 2021 02:30:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=los5ahap;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.49, mailfrom: brgl@bgdev.pl)
-Received: by mail-wr1-f49.google.com with SMTP id x8so353256wrq.9
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 May 2021 01:07:39 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=GVyiEDKN;
+ spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f41.google.com with SMTP id s20so28465574ejr.9
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 May 2021 02:30:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+        d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=jV8keC8jwFyuCK6+TEqIKbCm9hufuef4h8qS/PgOAWo=;
-        b=los5ahapqdXKgxrFzsPhayY4jjeDMAC4ZHrcdpNH1wP9ISZivSDlX7//X3rZ35hSVk
-         wN1eg6wSYTAvt+fLaJpnaTuz/x6uE61vJBtMdS9QvgVRYfT+2sMDR5oqI98rsvAntCQQ
-         H3lONyS2L8gtK528+xwKXi4qB0uw2PuE2QGtXAILaXTZ0nSuhg7WobFDo5gcmMepeiwh
-         vbh2ffieTj2WRUufmJnFKL39bFz3+MqimFTZJM7kgT9S1gNr+jY18JDA0wv6QoA7b32P
-         kp5FcUcAtDrOradyLgH+IyZHsw4iNt+8YMCBp2j2tJRS9mz/YsOwavlZO1CGFJ7yGksQ
-         LyjQ==
+        bh=BTEsu6K59hLKTpP+/wrxuEMmi/2otPkg7teh9BeZSFQ=;
+        b=GVyiEDKNmPkuWtpysVzbVgZeCkGtDJtN/Zh8i4b9TV5den64o9EZS3ZfD2Pm7qXJC8
+         wH5mwsmf8M3QBiAFDmSBy0ZxwDsFVzdj3QeRMvmBMkPIST43cXv9usKIRSmDXxAEdHxm
+         EJp9KOPdxuqPusScfMlrXMJQWMNB9PMdMZVCj7AzKTLqDYSm+DBdmmj4RS1zMw0OAoNP
+         dj3VApaaq4cBMfl0TtXI5rWS87aahRZ18f1Fz/k6JLP+9PCj5Jvv7WLPuVEi4XJnmGAm
+         Y0XI2J2t2z6YKvqqC3IAdaqL6JP/wVIaSFMkR7jrRLwX0c5Gx09WW4glf3Z3wivb8YwI
+         5SAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=jV8keC8jwFyuCK6+TEqIKbCm9hufuef4h8qS/PgOAWo=;
-        b=fvEY1N/HaWtGCzzbeTOeBD/UruQML/Yv1VeeVl8GP4MYaMKtsbRh0Fb9qXgkQC2JE9
-         /OFqW7yKras4D+OnJKMi6nEWXRDwHPm7AVj82mXq9uOvPUuJvCd4amOdxHM5GircH/NI
-         E5Qndge4toJhjt6P0UVLHGnVZzwZr3WKS3rL2VgPOslj07gcpxxUZbtCYJ+BxmIMNBdB
-         sdKXCZfBi1ckQHG29B7U6qSg36DUPcNUn9bHQQhOI3G7w/BYsndI4YAfvHYVR8Z21X1o
-         QRSu2WU6yz1X7SIESbX6c9T+erBXamDLwO+HYp3izQJLzXjjkwsJMScdp8WgtQ8VEaYv
-         VYhA==
-X-Gm-Message-State: AOAM532qujQLGFY6RMDMR1L1X0ulA31ZS9Y/Qt4As3N8w2m562mpphoa
-	6X9A/ulAmlU/RFh0wObojQBRww==
-X-Google-Smtp-Source: ABdhPJxn46sBF+Jq89jfTMUxkg9GhOtACClZADnxaSZca8igMdknYB0H0MA5A8iFOnptLFNNXMBqbA==
-X-Received: by 2002:a5d:5254:: with SMTP id k20mr45144288wrc.62.1620806858515;
-        Wed, 12 May 2021 01:07:38 -0700 (PDT)
-Return-Path: <brgl@bgdev.pl>
-Received: from debian-brgl.home (lfbn-nic-1-149-6.w2-15.abo.wanadoo.fr. [2.15.231.6])
-        by smtp.gmail.com with ESMTPSA id y21sm5709929wmi.15.2021.05.12.01.07.37
+        bh=BTEsu6K59hLKTpP+/wrxuEMmi/2otPkg7teh9BeZSFQ=;
+        b=lyvED+qWKI3yuijviSAlnf0RZjl/1/kXac8/C8seqXkywuML931JV9N4nmm6CKA3/R
+         Gp8zf5HuGUnNb4oH86RX71vFyMJonqcMx49RseM5eiM4mOMRB7b9toUp/iRHi0g2qNzN
+         5EBT1noaPC7XuHESscOzHooR3x5B9ad3tbtx1cEkxlwtbgVkOm5oaZ9hcDsUm1KKyRgq
+         xvhUBW4YkbaKbZnragfU7xv6BEM7pZ+u2fBRxck7/5wXa/oLtVdAFdITZb9njDdYXpaO
+         dHtUoaHPukyw3+XhLyuiNHNKgfuGoEsO1oX2RfaEMqhejtjE/tohvvbj7+xmneTCfd6Z
+         FrPg==
+X-Gm-Message-State: AOAM533iUVML80gWJnT1RAGaWx8GLFHR35B5e6CT+rWN5p4x0VDyfSfE
+	OWXdrO456dIMyFcv9BGw9h8kCx3hSkM=
+X-Google-Smtp-Source: ABdhPJzr330+kAMdQFWHo/Ikc/77/ProZ2KyIpAMUeA9bbzKT6MzvKDPlzmToASA/R+7FK7bH6zXNw==
+X-Received: by 2002:a17:906:994f:: with SMTP id zm15mr37026581ejb.24.1620811842999;
+        Wed, 12 May 2021 02:30:42 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id n8sm3761751ejl.0.2021.05.12.02.30.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 May 2021 01:07:38 -0700 (PDT)
-From: "Bartosz Golaszewski" <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>,
-	Armin Kuster <akuster808@gmail.com>,
-	Tim moto-timo Orling <TicoTimo@gmail.com>,
-	Derek Straka <derek@asterius.io>,
-	Trevor Gamblin <trevor.gamblin@windriver.com>
-Cc: openembedded-devel@lists.openembedded.org,
-	Bartosz Golaszewski <brgl@bgdev.pl>
-Subject: [meta-python][PATCH] python3-pycocotools: add package to packagegroup-meta-python
-Date: Wed, 12 May 2021 10:07:36 +0200
-Message-Id: <20210512080736.10262-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.30.1
+        Wed, 12 May 2021 02:30:42 -0700 (PDT)
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH] ostree: switch from default master branch to main to fix do_fetch failure
+Date: Wed, 12 May 2021 11:30:40 +0200
+Message-Id: <20210512093040.48114-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This is a follow-up to the commit adding the recipe for pycocotools.
-Let's add the package to the meta-python packagegroup.
+* branch was renamed in upstream repo
 
-Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-core/packagegroups/packagegroup-meta-python.bb       | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-extended/ostree/ostree_2021.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index 0418b5930..992dd690a 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -290,6 +290,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
-     python3-pybind11-json \
-     python3-pybluez \
-     python3-pychromecast \
-+    python3-pycocotools \
-     python3-pycodestyle \
-     python3-pyconnman \
-     python3-pycparser \
+diff --git a/meta-oe/recipes-extended/ostree/ostree_2021.2.bb b/meta-oe/recipes-extended/ostree/ostree_2021.2.bb
+index 62467b01d2..c3505ab06b 100644
+--- a/meta-oe/recipes-extended/ostree/ostree_2021.2.bb
++++ b/meta-oe/recipes-extended/ostree/ostree_2021.2.bb
+@@ -22,7 +22,7 @@ DEPENDS = " \
+ PREMIRRORS = ""
+ 
+ SRC_URI = " \
+-    gitsm://github.com/ostreedev/ostree \
++    gitsm://github.com/ostreedev/ostree;branch=main \
+     file://run-ptest \
+ "
+ SRCREV = "6a72674ec621a2282043c3a083fe1e45cd6a8761"
 -- 
-2.30.1
+2.30.2
 
