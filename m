@@ -1,115 +1,118 @@
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.web11.67.1620778028297113414
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.web11.68.1620778029196125354
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 May 2021 17:07:08 -0700
+ Tue, 11 May 2021 17:07:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=nDYGbuj+;
- spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id md17so12567905pjb.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 11 May 2021 17:07:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=AeUQ2t4K;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f178.google.com with SMTP id t4so11629799plc.6
+        for <openembedded-devel@lists.openembedded.org>; Tue, 11 May 2021 17:07:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=RbAok0IwHCVx6CST8GVhkYNANlZKD5SlZsOYuyODVnU=;
-        b=nDYGbuj+XEewE4+TB90JeJlKeikyByEpqY170Lqhb+DqOTLT3p4UMjpKsYKukYYyQR
-         L+BQhCGWnJffzqcl5xKEOhnrcUSr7wy8PDCLxfQsnzRPD4rZhEmRoFsySVGGrjtkcyBY
-         tmBm95f7XqUeiNsx/us+ZIcWHS9n4dsxTSBalN0C6STd31beqpgKcIwQxBlu9esm/Atu
-         uxfJMzVijIRaGhWCXjsCjJflpCrg3GEYF6gHu3+O2Cb6k/E+JpU51kwPyzu0IDEpWlHV
-         aeyNKYdRN0dRnEHJFwVxzJ/974nHEafFArI0mNqgvnK5o7hvwoX12/waliehe+1cgC69
-         Je4Q==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=S6D/q6qRDCZXthAx9GnVhrE/e0b5S79wSqesBnmnKkQ=;
+        b=AeUQ2t4KvAalqxP8unrGRqzVEc4drNNdBUkMMhAxY6sQt2M6CU6RtgTDduXbeE0Ccz
+         z73kQxG+grt3THyCvv68sd8CgXrJPuRwGoSnMy2ChgyynlY+fSQmKCCD1oDpBTco3c+/
+         fYtqD4xkF0Cn9pWf+4sBBRwZxap5u6wxdnIpe7EGpLbI1ImW6B6Cdj0JTlAhMJUtDV0b
+         aBNJbiRAecGGjtyRhnmEFuHaev24zrwRtusKzXOol3dmcATbOOngOBlEMij1N49c/ETB
+         EOq4HTIUJ7t+Sr2phX9XBZIycoT3tsWqLvfBh/1mpHUclQzMJu+cIAOKg9gCUxt12OfF
+         PX0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=RbAok0IwHCVx6CST8GVhkYNANlZKD5SlZsOYuyODVnU=;
-        b=i8lyitkByRLo7hayg9n+sATnK6WoVxPMB5U2K7VlzmamTHPawGQRDytSlaHtvb5cyt
-         qOLqDGMUR9xQuGnal0Ji+2T3aF6xNzIwzC7uEy+aXtRuqjWrs7ZCdk9GNqO5YeZ1uomQ
-         cIQe0JBxWuQ54e8N36oockFBmMhWgRiN+2FIVi/p0Cc53m8pEhU8gzEko9iD6qHGctPb
-         ecuSp744r08/IOt5dkAVzCQQi1oa7H4YaN3mLsRgW8hkBXQ81SAdzNh53kDvyo75orsQ
-         28x8jnP9EDqSdXlfLFN8lBCSZcb9C/mZ25SfLzI/SJvH+8VfxDQSVQNr7HelvdG1K2Tc
-         p1QA==
-X-Gm-Message-State: AOAM533/t/qSPovyMgNiylP1L6eHi/r/XtmUmWj+BjJeQ/2N6IBf2hkT
-	Litcl3HpYq2ZZzio8T50r/N3IaxaXEaS5Q==
-X-Google-Smtp-Source: ABdhPJxxBE8pO4JwwbiYXwFdTuB5tWE6rrvo9MwqFWo7Lw/51ARr2J3NjLT4FSTobv2GyRczHhFONQ==
-X-Received: by 2002:a17:90a:e64e:: with SMTP id ep14mr36481052pjb.103.1620778027443;
-        Tue, 11 May 2021 17:07:07 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=S6D/q6qRDCZXthAx9GnVhrE/e0b5S79wSqesBnmnKkQ=;
+        b=EGt89uhjLoRPs21jhWkhqSQC0XEpgrKXRSP41KKJVhohXrtM/l7FOn6tCWQvJEeKLO
+         tHu922QUGeXr8DKH37VM/Wc/kvMRUSCZ5Hkh9lg6Qyao6/TM50U93cz+AUalYf107g0n
+         Gma5JEtrMasHjjMYEZKnyHgO5iu2OmOik9Hvxfrid0npGsHGRVuxK1K0Cuqyv30Lyh/g
+         RcmQBGjpJ3WQ6iNwXJjL6JPicB+VK3ihCo7BEGzPajNIPDLvX2sLdnJ+zj4+6aD5aaLX
+         jjEKhFjArOJWEoc+udO63JV8BMn1yb42itO/RwC1KtEArPzrP5yvHNxN1EpERsQp2tJf
+         arMw==
+X-Gm-Message-State: AOAM531Ew3cbPdI1lyV/55oenXZXjzkRPAF31TjgQ1nOX8TSXZV4rl1u
+	3j50j2eX3uaaGTjE5VtKFWJ04M+htq7gkQ==
+X-Google-Smtp-Source: ABdhPJwLb6MXrWGPd3KpIFl6JWmp1gptdwuCFujO41NM3lKBbRy9jHZt3qACrHhK1BcfrctJsC+ZxQ==
+X-Received: by 2002:a17:902:724c:b029:ef:571f:8894 with SMTP id c12-20020a170902724cb02900ef571f8894mr6697216pll.49.1620778028422;
+        Tue, 11 May 2021 17:07:08 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a7ac])
-        by smtp.gmail.com with ESMTPSA id n30sm14675966pgd.8.2021.05.11.17.07.06
+        by smtp.gmail.com with ESMTPSA id n30sm14675966pgd.8.2021.05.11.17.07.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 11 May 2021 17:07:06 -0700 (PDT)
+        Tue, 11 May 2021 17:07:07 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/3] mongodb: Do not use MINSIGSTKSZ
-Date: Tue, 11 May 2021 17:07:02 -0700
-Message-Id: <20210512000704.2889545-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/3] tbb: Fix build with GCC 11
+Date: Tue, 11 May 2021 17:07:03 -0700
+Message-Id: <20210512000704.2889545-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20210512000704.2889545-1-raj.khem@gmail.com>
+References: <20210512000704.2889545-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-glibc 2.34 has made MINSIGSTKSZ non-constant
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../mongodb/0001-Do-not-use-MINSIGSTKSZ.patch | 34 +++++++++++++++++++
- .../recipes-dbs/mongodb/mongodb_git.bb        |  1 +
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Do-not-use-MINSIGSTKSZ.patch
+ ...f_input-Use-an-arbitrary-but-valid-p.patch | 37 +++++++++++++++++++
+ meta-oe/recipes-support/tbb/tbb_2021.2.0.bb   |  1 +
+ 2 files changed, 38 insertions(+)
+ create mode 100644 meta-oe/recipes-support/tbb/tbb/0001-set_my_tls_end_of_input-Use-an-arbitrary-but-valid-p.patch
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Do-not-use-MINSIGSTKSZ.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Do-not-use-MINSIGSTKSZ.patch
+diff --git a/meta-oe/recipes-support/tbb/tbb/0001-set_my_tls_end_of_input-Use-an-arbitrary-but-valid-p.patch b/meta-oe/recipes-support/tbb/tbb/0001-set_my_tls_end_of_input-Use-an-arbitrary-but-valid-p.patch
 new file mode 100644
-index 0000000000..0ee64e9c6c
+index 0000000000..caa68e64c5
 --- /dev/null
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Do-not-use-MINSIGSTKSZ.patch
-@@ -0,0 +1,34 @@
-+From 027044a692b588ef586d495f65eb58b07cc711a3 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/tbb/tbb/0001-set_my_tls_end_of_input-Use-an-arbitrary-but-valid-p.patch
+@@ -0,0 +1,37 @@
++From a996fd451bbd7be93cff5f466bff7282ae972fe1 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 11 May 2021 10:15:51 -0700
-+Subject: [PATCH] Do not use MINSIGSTKSZ
++Date: Tue, 11 May 2021 10:52:51 -0700
++Subject: [PATCH] set_my_tls_end_of_input: Use an arbitrary but valid pointer
++ as value
 +
-+Since glibc 2.34+ MINSIGSTKSZ is no more a constant.  So,
-+let's hardwire this for now until better fix is found.
-+64Kb should be good anyway
++Pass a valid pointer to pthread_setspecific to avoid GCC 11 warning.
++Fixes
 +
-+Upstream-Status: Pending
++src/tbb/tls.h:44:46: error: 'int pthread_setspecific(pthread_key_t, const void*)' expecting 1 byte in a region of size 0 [-Werror=stringop-overread]
++|    44 |     void set( T value ) { pthread_setspecific(my_key, (void*)value); }
++|       |                           ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~
++| compilation terminated due to -Wfatal-errors.
++
++Upstream-Status: Submitted [https://github.com/oneapi-src/oneTBB/pull/394]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/mongo/stdx/thread.h | 5 +----
-+ 1 file changed, 1 insertion(+), 4 deletions(-)
++ src/tbb/parallel_pipeline.cpp | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
 +
-+diff --git a/src/mongo/stdx/thread.h b/src/mongo/stdx/thread.h
-+index f8058279e3..f31f309959 100644
-+--- a/src/mongo/stdx/thread.h
-++++ b/src/mongo/stdx/thread.h
-+@@ -104,10 +104,7 @@ private:
-+     //   .                     N   Y :      4,344 |  13,048 |     7,352
-+     //   .                     Y   Y :      4,424 |  13,672 |     8,392
-+     //   ( https://jira.mongodb.org/secure/attachment/233569/233569_stacktrace-writeup.txt )
-+-    static constexpr std::size_t kMongoMinSignalStackSize = std::size_t{64} << 10;
-+-
-+-    static constexpr std::size_t kStackSize =
-+-        std::max(kMongoMinSignalStackSize, std::size_t{MINSIGSTKSZ});
-++    static constexpr std::size_t kStackSize = std::size_t{64} << 10;
-+     std::unique_ptr<std::byte[]> _stackStorage = std::make_unique<std::byte[]>(kStackSize);
++diff --git a/src/tbb/parallel_pipeline.cpp b/src/tbb/parallel_pipeline.cpp
++index b7655c6b..ca518b5b 100644
++--- a/src/tbb/parallel_pipeline.cpp
+++++ b/src/tbb/parallel_pipeline.cpp
++@@ -243,7 +243,8 @@ public:
++         return end_of_input_tls.get() != 0;
++     }
++     void set_my_tls_end_of_input() {
++-        end_of_input_tls.set(1);
+++	// Use an arbitrary but valid pointer as value.
+++        end_of_input_tls.set(array_size);
++     }
++ };
 + 
-+ #else   // !MONGO_HAS_SIGALTSTACK
 +-- 
 +2.31.1
 +
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-index 54178bf75a..cfa2bc18c2 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-@@ -29,6 +29,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4 \
-            file://0001-include-needed-c-header.patch \
-            file://disable_runtime_check.patch \
-            file://ppc64_ARCH_BITS.patch \
-+           file://0001-Do-not-use-MINSIGSTKSZ.patch \
-            "
- SRC_URI_append_libc-musl ="\
-            file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
+diff --git a/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+index 771ddd49b8..f4c52daf41 100644
+--- a/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
++++ b/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
+@@ -18,6 +18,7 @@ SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH
+             file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
+             file://0001-CMakeLists.txt-exclude-riscv64-riscv32.patch \
+             file://0001-Disable-use-of-_tpause-instruction.patch \
++            file://0001-set_my_tls_end_of_input-Use-an-arbitrary-but-valid-p.patch \
+ "
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.31.1
 
