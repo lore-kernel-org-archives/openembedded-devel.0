@@ -1,94 +1,115 @@
 Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.web10.678.1620756241608221760
+ by mx.groups.io with SMTP id smtpd.web11.67.1620778028297113414
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 May 2021 11:04:01 -0700
+ Tue, 11 May 2021 17:07:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=rIbbbih8;
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=nDYGbuj+;
  spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id g24so12109237pji.4
-        for <openembedded-devel@lists.openembedded.org>; Tue, 11 May 2021 11:04:01 -0700 (PDT)
+Received: by mail-pj1-f45.google.com with SMTP id md17so12567905pjb.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 11 May 2021 17:07:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:organization:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=D7XiKeAMcVBRmV/+oMWPi6Kn2RIHdP2i518wnIjZn+A=;
-        b=rIbbbih8U2gQ7wfjPgvCbNd1sfXOS6i7b691jhdrXPkTM2eH1V5yZTiFD7lAdjRbvh
-         tOBGFkWweJ5FzBN+kjGrnzFHuBCrmoCraViKG5E5Pe0svBwY0ht0bWRI3OgT/YHJlk91
-         154EcrGH/4KcTXqQZ6LSqTjJky7iPrlUpaf3Q8jNSG3HZV6/fSN48qOL657JJ1rUT+6e
-         EJTNyv+GjBpIozmCug+wCc48JdKp4QMSnjnLK6CK8QRI7jweJFDQvvEIrSlIoWU78YtM
-         E0HaX87u25R7IPXX0Vv7xW45NsxA8tL6a8VKQjvVKZ81vp7Ht8PjcVfT9luEsqPbfjfD
-         fvSg==
+        bh=RbAok0IwHCVx6CST8GVhkYNANlZKD5SlZsOYuyODVnU=;
+        b=nDYGbuj+XEewE4+TB90JeJlKeikyByEpqY170Lqhb+DqOTLT3p4UMjpKsYKukYYyQR
+         L+BQhCGWnJffzqcl5xKEOhnrcUSr7wy8PDCLxfQsnzRPD4rZhEmRoFsySVGGrjtkcyBY
+         tmBm95f7XqUeiNsx/us+ZIcWHS9n4dsxTSBalN0C6STd31beqpgKcIwQxBlu9esm/Atu
+         uxfJMzVijIRaGhWCXjsCjJflpCrg3GEYF6gHu3+O2Cb6k/E+JpU51kwPyzu0IDEpWlHV
+         aeyNKYdRN0dRnEHJFwVxzJ/974nHEafFArI0mNqgvnK5o7hvwoX12/waliehe+1cgC69
+         Je4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=D7XiKeAMcVBRmV/+oMWPi6Kn2RIHdP2i518wnIjZn+A=;
-        b=Yzq2P1D8rgQwRARYsKOSneef8cML/PQ57z2TyQFcRcm+Ozi6WgnkFnNJSH60srPDhh
-         yr2Xdo8bsIYYnhmr3I3YCqkkX0yA7c802cgDsPFYEGHgEtk6F0zXwoysiVQ5pyQZpL+B
-         xgKIR9ieHdTlbcf0n/QfWFUrdDf1Qwl5glze34pl2xfn/L8g2iF9IYzs70mTxss1aXGI
-         kRSQ+ISxOVdpg5iVRwHBvhEdunXZ6WpkP7UThPK90Jb99HSNvFMIO2DwPAOQ1oLr+8KU
-         NmQSaULMMLrThc3sZCGfsTYYx8pqfyMBbKmU0taS1qcf0jonLMpEb8RcoWCentZchdF8
-         3cvw==
-X-Gm-Message-State: AOAM533K1HGS/7Uyqy7bZkWlmcjOFL+EAhNUh/BuqEVQyScP3Mi+6MW1
-	g4sWP1jVeVNT8cjVGuHCUnrT+TmlYXh6oQ==
-X-Google-Smtp-Source: ABdhPJwV4TqFXIz61eHncN63chNkPd4AX0KGrkIgm7MNcouKe4rywgqAFyDt6k38VibI+BM5LcAYLA==
-X-Received: by 2002:a17:90b:194:: with SMTP id t20mr35282104pjs.83.1620756240784;
-        Tue, 11 May 2021 11:04:00 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=RbAok0IwHCVx6CST8GVhkYNANlZKD5SlZsOYuyODVnU=;
+        b=i8lyitkByRLo7hayg9n+sATnK6WoVxPMB5U2K7VlzmamTHPawGQRDytSlaHtvb5cyt
+         qOLqDGMUR9xQuGnal0Ji+2T3aF6xNzIwzC7uEy+aXtRuqjWrs7ZCdk9GNqO5YeZ1uomQ
+         cIQe0JBxWuQ54e8N36oockFBmMhWgRiN+2FIVi/p0Cc53m8pEhU8gzEko9iD6qHGctPb
+         ecuSp744r08/IOt5dkAVzCQQi1oa7H4YaN3mLsRgW8hkBXQ81SAdzNh53kDvyo75orsQ
+         28x8jnP9EDqSdXlfLFN8lBCSZcb9C/mZ25SfLzI/SJvH+8VfxDQSVQNr7HelvdG1K2Tc
+         p1QA==
+X-Gm-Message-State: AOAM533/t/qSPovyMgNiylP1L6eHi/r/XtmUmWj+BjJeQ/2N6IBf2hkT
+	Litcl3HpYq2ZZzio8T50r/N3IaxaXEaS5Q==
+X-Google-Smtp-Source: ABdhPJxxBE8pO4JwwbiYXwFdTuB5tWE6rrvo9MwqFWo7Lw/51ARr2J3NjLT4FSTobv2GyRczHhFONQ==
+X-Received: by 2002:a17:90a:e64e:: with SMTP id ep14mr36481052pjb.103.1620778027443;
+        Tue, 11 May 2021 17:07:07 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:a0f0:4c51:e82a:7ea3:9a08? ([2601:646:9200:a0f0:4c51:e82a:7ea3:9a08])
-        by smtp.gmail.com with ESMTPSA id x6sm13947269pfu.120.2021.05.11.11.04.00
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 11 May 2021 11:04:00 -0700 (PDT)
-Subject: Re: [meta-python][PATCH] python3-pycocotools: new package
-To: Bartosz Golaszewski <brgl@bgdev.pl>, Armin Kuster <akuster808@gmail.com>,
- Tim moto-timo Orling <TicoTimo@gmail.com>, Derek Straka <derek@asterius.io>,
- Trevor Gamblin <trevor.gamblin@windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <20210511171359.4534-1-brgl@bgdev.pl>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a7ac])
+        by smtp.gmail.com with ESMTPSA id n30sm14675966pgd.8.2021.05.11.17.07.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 11 May 2021 17:07:06 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <e16a45e1-34cd-b2b4-b427-ec59c0216533@gmail.com>
-Date: Tue, 11 May 2021 11:03:59 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.10.1
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/3] mongodb: Do not use MINSIGSTKSZ
+Date: Tue, 11 May 2021 17:07:02 -0700
+Message-Id: <20210512000704.2889545-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-In-Reply-To: <20210511171359.4534-1-brgl@bgdev.pl>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-add it to test packagegroup as well in a followup please.
+glibc 2.34 has made MINSIGSTKSZ non-constant
 
-On 5/11/21 10:13 AM, Bartosz Golaszewski wrote:
-> Add a recipe for building pycocotools - a Python wrapper for cocapi.
-> 
-> Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
-> ---
->   .../python/python3-pycocotools_2.0.2.bb           | 15 +++++++++++++++
->   1 file changed, 15 insertions(+)
->   create mode 100644 meta-python/recipes-devtools/python/python3-pycocotools_2.0.2.bb
-> 
-> diff --git a/meta-python/recipes-devtools/python/python3-pycocotools_2.0.2.bb b/meta-python/recipes-devtools/python/python3-pycocotools_2.0.2.bb
-> new file mode 100644
-> index 000000000..4821c313e
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-pycocotools_2.0.2.bb
-> @@ -0,0 +1,15 @@
-> +SUMMARY = "COCO is a large image dataset designed for object detection, segmentation, \
-> +           person keypoints detection, stuff segmentation, and caption generation."
-> +LICENSE = "BSD-2-Clause"
-> +LIC_FILES_CHKSUM = "file://pycocotools/coco.py;beginline=45;endline=45;md5=12cb539683cf245df8b6ce782d78f647"
-> +
-> +inherit setuptools3 pypi
-> +
-> +SRC_URI[md5sum] = "33858f23c8b99ce8116b70c32f6b6dd9"
-> +SRC_URI[sha256sum] = "24717a12799b4471c2e54aa210d642e6cd4028826a1d49fcc2b0e3497e041f1a"
-> +
-> +DEPENDS = "python3-cython-native \
-> +           python3-numpy-native \
-> +           libxcrypt"
-> +
-> +RDEPENDS_${PN} = "python3-matplotlib python3-pillow python3-profile"
-> 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../mongodb/0001-Do-not-use-MINSIGSTKSZ.patch | 34 +++++++++++++++++++
+ .../recipes-dbs/mongodb/mongodb_git.bb        |  1 +
+ 2 files changed, 35 insertions(+)
+ create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Do-not-use-MINSIGSTKSZ.patch
+
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Do-not-use-MINSIGSTKSZ.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Do-not-use-MINSIGSTKSZ.patch
+new file mode 100644
+index 0000000000..0ee64e9c6c
+--- /dev/null
++++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Do-not-use-MINSIGSTKSZ.patch
+@@ -0,0 +1,34 @@
++From 027044a692b588ef586d495f65eb58b07cc711a3 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 11 May 2021 10:15:51 -0700
++Subject: [PATCH] Do not use MINSIGSTKSZ
++
++Since glibc 2.34+ MINSIGSTKSZ is no more a constant.  So,
++let's hardwire this for now until better fix is found.
++64Kb should be good anyway
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/mongo/stdx/thread.h | 5 +----
++ 1 file changed, 1 insertion(+), 4 deletions(-)
++
++diff --git a/src/mongo/stdx/thread.h b/src/mongo/stdx/thread.h
++index f8058279e3..f31f309959 100644
++--- a/src/mongo/stdx/thread.h
+++++ b/src/mongo/stdx/thread.h
++@@ -104,10 +104,7 @@ private:
++     //   .                     N   Y :      4,344 |  13,048 |     7,352
++     //   .                     Y   Y :      4,424 |  13,672 |     8,392
++     //   ( https://jira.mongodb.org/secure/attachment/233569/233569_stacktrace-writeup.txt )
++-    static constexpr std::size_t kMongoMinSignalStackSize = std::size_t{64} << 10;
++-
++-    static constexpr std::size_t kStackSize =
++-        std::max(kMongoMinSignalStackSize, std::size_t{MINSIGSTKSZ});
+++    static constexpr std::size_t kStackSize = std::size_t{64} << 10;
++     std::unique_ptr<std::byte[]> _stackStorage = std::make_unique<std::byte[]>(kStackSize);
++ 
++ #else   // !MONGO_HAS_SIGALTSTACK
++-- 
++2.31.1
++
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
+index 54178bf75a..cfa2bc18c2 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
+@@ -29,6 +29,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4 \
+            file://0001-include-needed-c-header.patch \
+            file://disable_runtime_check.patch \
+            file://ppc64_ARCH_BITS.patch \
++           file://0001-Do-not-use-MINSIGSTKSZ.patch \
+            "
+ SRC_URI_append_libc-musl ="\
+            file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
+-- 
+2.31.1
+
