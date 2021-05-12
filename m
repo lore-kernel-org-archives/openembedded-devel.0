@@ -1,75 +1,85 @@
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web11.4546.1620811921365766025
+Received: from smtp.missinglinkelectronics.com (smtp.missinglinkelectronics.com [94.130.14.54])
+ by mx.groups.io with SMTP id smtpd.web10.6612.1620824939696669799
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 May 2021 02:32:01 -0700
+ Wed, 12 May 2021 06:09:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=q5W+rHFh;
- spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f51.google.com with SMTP id u21so33937020ejo.13
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 May 2021 02:32:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=+wVrUM7eWehvlDf5ENt89pO4C8mfLic5GhFbls/ekck=;
-        b=q5W+rHFh2TtobhH/dIyRcd31kJ7Azahow3rurbIYXYF5kquGzI1XV5hA5NTG5PYRQA
-         PeOJhkzligWJuewrTFZpgewudwLmmQOFAXGOS/Xg+ahHR0OzuNeMi/HyYJ8EYp7FnPHr
-         fy0oacfAMejcYWWWGGxWcb1VuJPqmn3ClvqbknQMfrnnFJT7R/eG8pARv7VsnUz+U7Eb
-         eOzjtY7WtfPSG76aaQFTSdch8kX3v5sgLcbOjDmpU/aC9xR30H9wdjTxq/L1kr5ip47+
-         m7qm8nMIcXeBdCSySdRKcQtnoajHJhtNljj3ccC8JmTOqjkT7yeWwwkP5uEyFzNytv46
-         zM2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=+wVrUM7eWehvlDf5ENt89pO4C8mfLic5GhFbls/ekck=;
-        b=W0+ZwWTjNqOLkx9JlJLanDu7XQc7v1688P9ow4oooKBFKsZ5oD2O61nvB4JZ05KAT3
-         nD5YEqjghgyHULztDaHNfH1zSz0ofodTQxwXSSV+WCUOHOTRmLpBtCWSYPaAGzYscdf8
-         uNIiBMMnDH2V5jlpXAcis/NmA9SndORxGBYxlQ7Aj9tH4wcf4gdUolvVL7dRqwQZKxKr
-         /7WRzbKbnxzUsMQnHmYd4jf1o5gtMxNhl73UA+Qe/aaF/H3yC3b5cJGNODZLyXZzcUbA
-         zZuz81yQptBewm38pH6DoggcmbhvUAYXurvhyUF0rV8EDqFwo/8DYVtvYlezS62WGmpv
-         q58Q==
-X-Gm-Message-State: AOAM5319c6TI5FjE8JWy/dZ3YSNzv52PR1zLTQUApwIoVEH4wfQnI8IN
-	aIl6xTEJCzz82/0xEN+zNFjXKAGMrfw=
-X-Google-Smtp-Source: ABdhPJyZgvamXIFpgtmZqDxGlA38x0AJFagH7P+2PZnIr9qQP8TFcHC4VdktGAhSWuKwzQeFBB+qxA==
-X-Received: by 2002:a17:906:2408:: with SMTP id z8mr37643447eja.60.1620811919946;
-        Wed, 12 May 2021 02:31:59 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id n8sm3764071ejl.0.2021.05.12.02.31.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 May 2021 02:31:59 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+ dkim=missing; spf=pass (domain: missinglinkelectronics.com, ip: 94.130.14.54, mailfrom: stefan.wiehler@missinglinkelectronics.com)
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.missinglinkelectronics.com (Postfix) with ESMTP id 08F07205F9
+	for <openembedded-devel@lists.openembedded.org>; Wed, 12 May 2021 15:08:57 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at missinglinkelectronics.com
+Received: from smtp.missinglinkelectronics.com ([127.0.0.1])
+	by localhost (mail.missinglinkelectronics.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id QV2A-_d4Wtef; Wed, 12 May 2021 15:08:56 +0200 (CEST)
+Received: from pfanne-bionic2.mle (p578c5bfe.dip0.t-ipconnect.de [87.140.91.254])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: stefan)
+	by smtp.missinglinkelectronics.com (Postfix) with ESMTPSA id B6BB420429;
+	Wed, 12 May 2021 15:08:56 +0200 (CEST)
+From: "Stefan Wiehler" <stefan.wiehler@missinglinkelectronics.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][dunfell][PATCH] ostree: switch from default master branch to main to fix do_fetch failure
-Date: Wed, 12 May 2021 11:31:57 +0200
-Message-Id: <20210512093157.48670-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.30.2
+Cc: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
+Subject: [meta-networking][PATCH 1/2] http-parser: add recipe
+Date: Wed, 12 May 2021 15:08:40 +0200
+Message-Id: <20210512130841.51911-1-stefan.wiehler@missinglinkelectronics.com>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-* branch was renamed in upstream repo
+HTTP request/response parser for C.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
 ---
- meta-oe/recipes-extended/ostree/ostree_2020.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../http-parser/http-parser_2.9.4.bb          | 30 +++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+ create mode 100644 meta-networking/recipes-support/http-parser/http-pars=
+er_2.9.4.bb
 
-diff --git a/meta-oe/recipes-extended/ostree/ostree_2020.3.bb b/meta-oe/recipes-extended/ostree/ostree_2020.3.bb
-index 43021c5342..86407459bf 100644
---- a/meta-oe/recipes-extended/ostree/ostree_2020.3.bb
-+++ b/meta-oe/recipes-extended/ostree/ostree_2020.3.bb
-@@ -22,7 +22,7 @@ DEPENDS = " \
- PREMIRRORS = ""
- 
- SRC_URI = " \
--    gitsm://github.com/ostreedev/ostree \
-+    gitsm://github.com/ostreedev/ostree;branch=main \
-     file://run-ptest \
- "
- SRCREV = "6ed48234ba579ff73eb128af237212b0a00f2057"
--- 
-2.30.2
+diff --git a/meta-networking/recipes-support/http-parser/http-parser_2.9.=
+4.bb b/meta-networking/recipes-support/http-parser/http-parser_2.9.4.bb
+new file mode 100644
+index 000000000..2d04ded34
+--- /dev/null
++++ b/meta-networking/recipes-support/http-parser/http-parser_2.9.4.bb
+@@ -0,0 +1,30 @@
++SUMMARY =3D "HTTP request/response parser for C"
++DESCRIPTION =3D "This is a parser for HTTP messages written in C. It par=
+ses \
++              both requests and responses. The parser is designed to be =
+used \
++              in performance HTTP applications. It does not make any \
++              syscalls nor allocations, it does not buffer data, it can =
+be \
++              interrupted at anytime. Depending on your architecture, it=
+ \
++              only requires about 40 bytes of data per message stream (i=
+n a \
++              web server that is per connection)."
++AUTHOR =3D "Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>"
++HOMEPAGE =3D "https://github.com/nodejs/http-parser"
++SECTION =3D "libs"
++LICENSE =3D "MIT"
++LIC_FILES_CHKSUM =3D "file://LICENSE-MIT;md5=3D9bfa835d048c194ab30487af8=
+d7b3778"
++
++SRC_URI =3D "git://github.com/nodejs/http-parser.git"
++SRCREV =3D "2343fd6b5214b2ded2cdcf76de2bf60903bb90cd"
++
++S =3D "${WORKDIR}/git"
++
++do_configure[noexec] =3D "1"
++
++do_compile() {
++    oe_runmake library package
++}
++
++do_install() {
++    oe_runmake install DESTDIR=3D${D} PREFIX=3D${prefix}
++}
++
++BBCLASSEXTEND =3D "native nativesdk"
+--=20
+2.29.2
 
