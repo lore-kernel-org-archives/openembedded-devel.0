@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.13223.1620912238864971961
+ by mx.groups.io with SMTP id smtpd.web12.13114.1620912240981028560
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 May 2021 06:23:59 -0700
+ Thu, 13 May 2021 06:24:01 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=44224 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lhBJj-0004kU-2K; Thu, 13 May 2021 16:23:58 +0300
+	id 1lhBJm-0004kU-38; Thu, 13 May 2021 16:24:00 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 08/10] python3-pysonos: Upgrade 0.0.43 -> 0.0.46
-Date: Thu, 13 May 2021 16:23:30 +0300
-Message-Id: <20210513132332.3745-8-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 09/10] python3-rfc3339-validator: Upgrade 0.1.3 -> 0.1.4
+Date: Thu, 13 May 2021 16:23:31 +0300
+Message-Id: <20210513132332.3745-9-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210513132332.3745-1-leon.anavi@konsulko.com>
 References: <20210513132332.3745-1-leon.anavi@konsulko.com>
@@ -30,31 +30,31 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.0.46:
+Upgrade to release 0.1.4:
 
-- Expand matches for pipe-delimited metadata
+- Fix test failure on darwin
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pysonos_0.0.43.bb => python3-pysonos_0.0.46.bb}    | 2 +-
+ ...39-validator_0.1.3.bb => python3-rfc3339-validator_0.1.4.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pysonos_0.0.43.bb => python3-pysonos_0.0.46.bb} (79%)
+ rename meta-python/recipes-devtools/python/{python3-rfc3339-validator_0.1.3.bb => python3-rfc3339-validator_0.1.4.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pysonos_0.0.43.bb b/meta-python/recipes-devtools/python/python3-pysonos_0.0.46.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-pysonos_0.0.43.bb
-rename to meta-python/recipes-devtools/python/python3-pysonos_0.0.46.bb
-index dbb6a8d8f6..0dc7d8b3ca 100644
---- a/meta-python/recipes-devtools/python/python3-pysonos_0.0.43.bb
-+++ b/meta-python/recipes-devtools/python/python3-pysonos_0.0.46.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=07b0e2ca9ac77cd65cd4edf2e13367ea"
+diff --git a/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.3.bb b/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.4.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.3.bb
+rename to meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.4.bb
+index a07a094479..f1064f327d 100644
+--- a/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.3.bb
++++ b/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.4.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a21b13b5a996f08f7e0b088aa38ce9c6"
  
--SRC_URI[sha256sum] = "47be2b37defc856f15d7e7a419cfb939e9822750efe968db192156ebeba31684"
-+SRC_URI[sha256sum] = "e682b989ea6e156cc1893e573097a0a5b8401e955a1c279bb4c1d20dfa6c4d9b"
+ FILESEXTRAPATHS_prepend := "${THISDIR}/python-rfc3339-validator:"
  
- inherit pypi setuptools3
+-SRC_URI[sha256sum] = "7a578aa0740e9ee2b48356fe1f347139190c4c72e27f303b3617054efd15df32"
++SRC_URI[sha256sum] = "138a2abdf93304ad60530167e51d2dfb9549521a836871b88d7f4695d0022f6b"
+ 
+ PYPI_PACKAGE = "rfc3339_validator"
  
 -- 
 2.17.1
