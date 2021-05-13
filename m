@@ -1,67 +1,62 @@
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web10.12318.1620907612931845286
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web10.13243.1620912223381220431
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 May 2021 05:06:53 -0700
+ Thu, 13 May 2021 06:23:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ovuv0Uc3;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: andrea.adami@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id c17so21551437pfn.6
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 May 2021 05:06:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=1ualdreVbPKZKi4wL0MNzuSXR/0ccKWRzuUBO1ryqLM=;
-        b=ovuv0Uc3GTMReHr8QhcZ5LZwC34PzH3U0nSOjFpZejf95bk8yQTz6dJRDzxQdpALWJ
-         upGvkozOP7/0oN/j8LQjnzuw01VxaNbN7aKII4/m9P94psMe7l60X38izg/lN4IjkwoT
-         czPZd1Y3uoyJgTJJkT/105lRrEbTwe5pfpTGslkfriTb0toxc6u7FQp7Deq4TGIEefl+
-         QWi2QFILsFIRt+IDO5RV1f7v4jBcfJW5Xbp0J6uXNyBZ3cY6ii91uZqBoiAv9zp7GocU
-         jRPJvUkRev8LsHUdXfenKJibN6d8nGjxoucSLeni/5MLot0zS5vUdY4efsGA8lHLlcW4
-         MGNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=1ualdreVbPKZKi4wL0MNzuSXR/0ccKWRzuUBO1ryqLM=;
-        b=i7Et1rJ+7zx4xb/39+KqTHQgr6RjK8fPKbfXT9oZE+nkhvOqvApDy0/IAn7a5kTN78
-         4w+Lb4XRp/KjV7phlYQUEuDDBAuRYsL8USjjpobIlRI0OAoCpJH9ITzpQ4PI+gH7maDA
-         MaGEibTfurqBJM1/z7Jta6V2dWeV69XrFNGzw4vBpx8XLRqEkZtR6DV5NZypVt9GU+c2
-         ZB3NSeoFFnXWMVEgZO+WEibPyoflNcb8r+qcvPWSwnQDRwEB9c/4sngD1B5rgS/oqHBV
-         gs+SmAODpMLqHHVWlM7dqvtpf9jhjGoJDKZvoAuidkjNl5OQcU1s3G3WnEm59kBw2qVo
-         87qg==
-X-Gm-Message-State: AOAM530H1hOzwK0IiGdcFsYdmzki9nEe0Pibf0/9/ExmmIihHhQczE+V
-	5LD5bQ6A4jT6svm/bhkZkzFn2LiJ0FtnXyZrWf43cfp0
-X-Google-Smtp-Source: ABdhPJwW8ovAlvr2Qd0U0A6mb2gr/Gt8lljvYbEXXi/DIiFjFplH2UBFrZjs5F2oW5CtHYnpGvf2rc/P/7J3CJsPCyE=
-X-Received: by 2002:a17:90a:d90c:: with SMTP id c12mr4719797pjv.129.1620907612425;
- Thu, 13 May 2021 05:06:52 -0700 (PDT)
-MIME-Version: 1.0
-From: "Andrea Adami" <andrea.adami@gmail.com>
-Date: Thu, 13 May 2021 14:06:41 +0200
-Message-ID: <CAAQYJAsVE=pRACzk5XZxHQu49fLn3vM5USM88TYOXU2k7LR4Uw@mail.gmail.com>
-Subject: RFC: meta-oe recipes split
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=44224 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1lhBJU-0004kU-HQ; Thu, 13 May 2021 16:23:42 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 02/10] python3-watchdog: Upgrade 2.1.0 -> 2.1.1
+Date: Thu, 13 May 2021 16:23:24 +0300
+Message-Id: <20210513132332.3745-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210513132332.3745-1-leon.anavi@konsulko.com>
+References: <20210513132332.3745-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Hi,
-I was lately diving in OE-related layers used for DVB/STB devices and
-have noticed how badly anyone has moved from the OE-Classic to what
-they call OE 2.0. It was not easy.
+Upgrade to release 2.1.1:
 
-The problem now is the distros have custom layers containing
-.bbappends or different version of recipes for some good reason.
+- [mac] Fix callback exceptions when the watcher is deleted but
+  still receiving events
 
-Examples are the duplicate  recipes-support  recipes-multimedia
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../{python3-watchdog_2.1.0.bb => python3-watchdog_2.1.1.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-watchdog_2.1.0.bb => python3-watchdog_2.1.1.bb} (80%)
 
-What I have concluded is that this is in big part our fault...the
-recipes in meta-openembedded are really badly splitted here and there.
+diff --git a/meta-python/recipes-devtools/python/python3-watchdog_2.1.0.bb b/meta-python/recipes-devtools/python/python3-watchdog_2.1.1.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-watchdog_2.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-watchdog_2.1.1.bb
+index 91744d8e3c..ecace32e24 100644
+--- a/meta-python/recipes-devtools/python/python3-watchdog_2.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-watchdog_2.1.1.bb
+@@ -4,7 +4,7 @@ DEPENDS = "${PYTHON_PN}-argh"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+-SRC_URI[sha256sum] = "55316efab52f659b8b7b59730680bfb27ac003522f24c44f6bcd60c4e3736ccd"
++SRC_URI[sha256sum] = "2894440b4ea95a6ef4c5d152deedbe270cae46092682710b7028a04d6a6980f6"
+ 
+ inherit pypi setuptools3
+ 
+-- 
+2.17.1
 
-I remember we started to pull out of meta-openembedded/meta-oe and
-create meta-initramfs, meta-networking,... but never finished.
-
-I see now two options:
-1 - put all again under meta-oe
-2 - finish to split out the recipes in the parent layers
-
-I know that some layers had/have maintainers while meta-oe is more
-abandoned and I don't have almost any time  but still...
-
-My 2 cents
-A.A.
