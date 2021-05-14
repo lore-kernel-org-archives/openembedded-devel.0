@@ -1,193 +1,136 @@
-Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
- by mx.groups.io with SMTP id smtpd.web09.10326.1621006097808526803
+Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com [209.85.208.177])
+ by mx.groups.io with SMTP id smtpd.web10.10126.1621006117416366847
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 May 2021 08:28:18 -0700
+ Fri, 14 May 2021 08:28:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=WYuOiyhr;
- spf=pass (domain: gmail.com, ip: 209.85.167.48, mailfrom: athomasset@gmail.com)
-Received: by mail-lf1-f48.google.com with SMTP id h10so3057180lfm.7
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 May 2021 08:28:17 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=PMkVrKkO;
+ spf=pass (domain: gmail.com, ip: 209.85.208.177, mailfrom: athomasset@gmail.com)
+Received: by mail-lj1-f177.google.com with SMTP id 131so12913739ljj.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 May 2021 08:28:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:reply-to:from:date:message-id
-         :subject:to:cc;
-        bh=1dbWiVmU8nw4/el0QpWaHf3moQFMkfxSfbMW0W231cA=;
-        b=WYuOiyhrv74p7UgqBIKorrS6Tod5JuYiSZALLRuDApEow/KzozBDHGbGc30UzO6QTj
-         oaulJ+ODl+9EXNncbxiA1yY12p4iC500r/P7/1uqtHRYALqSj5ZinapJu7ay0BhwIxMo
-         wHhkY+nuQ+TFbNii68bR2z3j6I80iKD2yPdRQaOrGclVPjLMBY7sPGLYXrssUQ0LLR9H
-         BgzLwp1CblBhiDga6t9jINvhgTzkSieyBkCvVj3J93CACMqFGZbVpfzFMHNNdMZroPe4
-         U05quJk5tevSC7rAEdbV8TP4OKcPXoFh6wBeNjGVsv4TiOjYuAFwFXJVrFc50dief5jj
-         RG9g==
+        h=mime-version:reply-to:from:date:message-id:subject:to:cc;
+        bh=4Ukevsy4qEMRDTv5VQMoHBbFi/W/AqSDjykXIBqU9Bc=;
+        b=PMkVrKkOnmQNbpgZmC3oixjR/cgmHH5n3sOXdNeyojGEHgbK0MoniHc8Suuz77NYCb
+         vHdtMFeWRlF/MveAEhF51BEH8l4V8YTkhPX1tkwItYQiTCOTwkXX7sUrsBeBNmSj+487
+         ua7fxu0WYCqQGNpJ9gqkaAtU9Uck07af67b2/9ymJT5/rlh/H7S0gWWVouMPRQu9LiuD
+         UaZfX/DbN2AooXTgs3VCjAEixgMPUEbR1RjpAAfCnuRTeEBgbQ+Ut0b/dEmsa9malo9L
+         YCqAJAUyF2B/l5zFWOiqFl0o9+2amcKQkt4O45UdK8emHKP72l6jSxQSRkNp4yL66xlN
+         FwZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:reply-to
-         :from:date:message-id:subject:to:cc;
-        bh=1dbWiVmU8nw4/el0QpWaHf3moQFMkfxSfbMW0W231cA=;
-        b=k9Ze4iuTRKG4zs2n5lP3dtJ4bbpoeCAf5B14Fwl4997RbOuplwOPK0BQTOjhnLzojA
-         tgRBxNV3im4QGp8pj+NrnXLkREnMwSURPjqArSeoKVMexGcodaIzEWhO/Ohl/MJp3xMk
-         oUErWohjx8EBkWaheDzycjSFwhMbWvxPzIhft8tD7EfCYXLKgKgy4oeiGOLMVbXqZ9YV
-         Em2syGUW5Eful6bDss/w+wgrF32qfBUnJuKAeGrrXyoSPRrEEh9luCQaUKOmD+UtoblS
-         WADgq2kQgHQxVnJdy1XTKu0brVLyfi+omovD0bcOQmveMZSEnkG+hlnwuO6bwzh+1reH
-         iicw==
-X-Gm-Message-State: AOAM532IIPYYm63Oevu5u8Cl3XCN9OH3j/ubS//1O7fzqHROV1CzZo2L
-	BKmYHsD84SUEUeJHKxKJG/J/9NWFiCsxWYz3bRc=
-X-Google-Smtp-Source: ABdhPJwD2i0wGrEBjtTjygljxYdtifDdJDAJK5VpgGI9y+LTaMtnS5djSD80ttM7zyiqIKsVyLuVVOjMcMiTLHI0iUA=
-X-Received: by 2002:ac2:4a83:: with SMTP id l3mr32245656lfp.229.1621006095942;
- Fri, 14 May 2021 08:28:15 -0700 (PDT)
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:cc;
+        bh=4Ukevsy4qEMRDTv5VQMoHBbFi/W/AqSDjykXIBqU9Bc=;
+        b=G0aI8QCKvjbf8jNCoiIZ1vd/x9Lx1fl3J5znTe0V5lCokkFMdYW3JJFDayKk6edhxe
+         nWmIrdXoBn3sWNSVRWEyjVsFEDKXkMb0S6OP9En9UgCB3qDxZ8WQItWt6yOG3xcILvZZ
+         JIXXrmY05UeiPy7zMHZOdoSlTzOBKh54MgXKcX+jf4nFQisqGFJEJGQrQvI5UR4H2ROG
+         yxw/GL+f+9UK1wqDybnclAQUnSdicBFuBTMHYk8vIwY72tu+q/aMc4n+dgN4AHbJn5QN
+         MExXpTo8huc+2SIQkxHfGu2h7Dm57cK1pGBpR+rYfoLWim6wb0ZwrlZeaCJ5o9qv4+sd
+         1lZA==
+X-Gm-Message-State: AOAM5302u/+VgOVDuKi0M6KgFc1RV8zgQH/zJPknv5fvZWNpVBzcUvPQ
+	Zo2Bks3i+yz3o/z9afEtVlFWYyXTtjpqbYpZq451Fq5ao90qBw==
+X-Google-Smtp-Source: ABdhPJyAy95ga/+PmDP+WrcS4ZtcBovfBJZo9BEFqKH+2jlSG9tzSxYNJgZ8l8fK9j3GwvwPjl9cfVTvYDTYCi+G1vg=
+X-Received: by 2002:a05:651c:151:: with SMTP id c17mr35042135ljd.398.1621006114123;
+ Fri, 14 May 2021 08:28:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210514140722.3503198-1-adrian.thomasset@doulos.com> <c9a6745e-f7ef-74c9-5333-9a447dd14bdd@gmail.com>
-In-Reply-To: <c9a6745e-f7ef-74c9-5333-9a447dd14bdd@gmail.com>
 Reply-To: athomasset@gmail.com
 From: "Adrian Thomasset" <athomasset@gmail.com>
-Date: Fri, 14 May 2021 16:28:04 +0100
-Message-ID: <CALvjPy1ubiEO1ne3Z1vz+5EGRagyGTEUjpNCddAusPALUOEqrg@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] wireguard-tools: change path for wg-quick systemd unit
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, 
-	Adrian Thomasset <adrian.thomasset@doulos.com>
-Content-Type: multipart/alternative; boundary="00000000000087075a05c24be418"
+Date: Fri, 14 May 2021 16:28:23 +0100
+Message-ID: <CALvjPy0by0vAvNLTzJ4WyasGHpzhw4T8SKmWj-_k7v1gRzR=jg@mail.gmail.com>
+Subject: [meta-networking][dunfell][PATCH] wireguard-tools: Fix systemd service installation
+To: openembedded-devel@lists.openembedded.org
+Cc: Armin Kuster <akuster808@gmail.com>
+Content-Type: multipart/alternative; boundary="0000000000009c725205c24be514"
 
---00000000000087075a05c24be418
+--0000000000009c725205c24be514
 Content-Type: text/plain; charset="UTF-8"
 
-Hello Kehm,
+From 84681a31cfd3f7aa8cc89181c2c87ffffcbc261b Mon Sep 17 00:00:00 2001
+From: Mario Schuknecht <schuknecht@dresearch-fe.de>
+Date: Thu, 15 Oct 2020 16:53:12 +0200
+Subject: [meta-networking][dunfell][PATCH] wireguard-tools: Fix systemd
+ service installation
 
-Thanks for pointing this out, I missed the fix.
-I will ask to get this backported to dunfell now.
+Install systemd configuration file wg-quick@.service into the proper folder.
+Use 'systemd_system_unitdir' instead of 'systemd_unitdir' as the
+installation
+path.
 
-Adrian
+Signed-off-by: Mario Schuknecht <mario.schuknecht@dresearch-fe.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-kernel/wireguard/wireguard-tools_1.0.20200513.bb  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/meta-networking/recipes-kernel/wireguard/
+wireguard-tools_1.0.20200513.bb b/meta-networking/recipes-kernel/wireguard/
+wireguard-tools_1.0.20200513.bb
+index 31b33a045..3403fd943 100644
+--- a/meta-networking/recipes-kernel/wireguard/
+wireguard-tools_1.0.20200513.bb
++++ b/meta-networking/recipes-kernel/wireguard/
+wireguard-tools_1.0.20200513.bb
+@@ -9,7 +9,7 @@ DEPENDS += "libmnl"
 
+ do_install () {
+     oe_runmake DESTDIR="${D}" PREFIX="${prefix}"
+SYSCONFDIR="${sysconfdir}" \
+-        SYSTEMDUNITDIR="${systemd_unitdir}" \
++        SYSTEMDUNITDIR="${systemd_system_unitdir}" \
+         WITH_SYSTEMDUNITS=${@bb.utils.contains('DISTRO_FEATURES',
+'systemd', 'yes', '', d)} \
+         WITH_BASHCOMPLETION=yes \
+         WITH_WGQUICK=yes \
+@@ -18,7 +18,7 @@ do_install () {
 
-On Fri, May 14, 2021 at 3:21 PM Khem Raj <raj.khem@gmail.com> wrote:
+ FILES_${PN} = " \
+     ${sysconfdir} \
+-    ${systemd_unitdir} \
++    ${systemd_system_unitdir} \
+     ${bindir} \
+ "
 
-> Hello Adrian
->
-> this is already fixed in master via commit
->
-> https://git.openembedded.org/meta-openembedded/commit/?id=84681a31cfd3f7aa8cc89181c2c87ffffcbc261b
-> if you are proposing it for backport then add branch name in subject and
-> CC armin
->
-> On 5/14/21 7:07 AM, Adrian Thomasset wrote:
-> > Fix error when enabling the wg-quick unit:
-> >
-> > % systemctl enable wg-quick@wg0
-> > Failed to enable unit: Unit file wg-quick@wg0.service does not exist
-> >
-> > The wg-quick@.service template unit needs to be in /lib/systemd/system
-> >
-> > Signed-off-by: Adrian Thomasset <adrian.thomasset@doulos.com>
-> > ---
-> >   .../recipes-kernel/wireguard/wireguard-tools_1.0.20200319.bb    | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-networking/recipes-kernel/wireguard/
-> wireguard-tools_1.0.20200319.bb
-> b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20200319.bb
-> > index f698b9a9a..e769f44b7 100644
-> > --- a/meta-networking/recipes-kernel/wireguard/
-> wireguard-tools_1.0.20200319.bb
-> > +++ b/meta-networking/recipes-kernel/wireguard/
-> wireguard-tools_1.0.20200319.bb
-> > @@ -9,7 +9,7 @@ DEPENDS += "wireguard-module libmnl"
-> >
-> >   do_install () {
-> >       oe_runmake DESTDIR="${D}" PREFIX="${prefix}"
-> SYSCONFDIR="${sysconfdir}" \
-> > -        SYSTEMDUNITDIR="${systemd_unitdir}" \
-> > +        SYSTEMDUNITDIR="${systemd_unitdir}/system" \
-> >           WITH_SYSTEMDUNITS=${@bb.utils.contains('DISTRO_FEATURES',
-> 'systemd', 'yes', '', d)} \
-> >           WITH_BASHCOMPLETION=yes \
-> >           WITH_WGQUICK=yes \
-> >
-> >
-> >
-> > 
-> >
->
+--
+2.25.1
 
-
--- 
-Adrian Thomasset
-t: 0117 923 1990
-m: 0776 629 4010
-
---00000000000087075a05c24be418
+--0000000000009c725205c24be514
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div>Hello Kehm,</div><div><br></div><div>Thanks for point=
-ing this out, I missed the fix.</div><div>I will ask to get this backported=
- to dunfell now.</div><div><br></div><div>Adrian</div><div><br></div><div><=
-br></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gma=
-il_attr">On Fri, May 14, 2021 at 3:21 PM Khem Raj &lt;<a href=3D"mailto:raj=
-.khem@gmail.com">raj.khem@gmail.com</a>&gt; wrote:<br></div><blockquote cla=
-ss=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid =
-rgb(204,204,204);padding-left:1ex">Hello Adrian<br>
-<br>
-this is already fixed in master via commit <br>
-<a href=3D"https://git.openembedded.org/meta-openembedded/commit/?id=3D846=
-81a31cfd3f7aa8cc89181c2c87ffffcbc261b" rel=3D"noreferrer" target=3D"_blank"=
->https://git.openembedded.org/meta-openembedded/commit/?id=3D84681a31cfd3f7=
-aa8cc89181c2c87ffffcbc261b</a><br>
-if you are proposing it for backport then add branch name in subject and <=
-br>
-CC armin<br>
-<br>
-On 5/14/21 7:07 AM, Adrian Thomasset wrote:<br>
-&gt; Fix error when enabling the wg-quick unit:<br>
-&gt; <br>
-&gt; % systemctl enable wg-quick@wg0<br>
-&gt; Failed to enable unit: Unit file wg-quick@wg0.service does not exist<=
-br>
-&gt; <br>
-&gt; The wg-quick@.service template unit needs to be in /lib/systemd/syste=
-m<br>
-&gt; <br>
-&gt; Signed-off-by: Adrian Thomasset &lt;<a href=3D"mailto:adrian.thomasse=
-t@doulos.com" target=3D"_blank">adrian.thomasset@doulos.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 =C2=A0.../recipes-kernel/wireguard/<a href=3D"http://wireguard-=
-tools_1.0.20200319.bb" rel=3D"noreferrer" target=3D"_blank">wireguard-tools=
-_1.0.20200319.bb</a>=C2=A0 =C2=A0 | 2 +-<br>
-&gt;=C2=A0 =C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-&gt; <br>
-&gt; diff --git a/meta-networking/recipes-kernel/wireguard/<a href=3D"http=
-://wireguard-tools_1.0.20200319.bb" rel=3D"noreferrer" target=3D"_blank">wi=
-reguard-tools_1.0.20200319.bb</a> b/meta-networking/recipes-kernel/wireguar=
-d/<a href=3D"http://wireguard-tools_1.0.20200319.bb" rel=3D"noreferrer" tar=
-get=3D"_blank">wireguard-tools_1.0.20200319.bb</a><br>
-&gt; index f698b9a9a..e769f44b7 100644<br>
-&gt; --- a/meta-networking/recipes-kernel/wireguard/<a href=3D"http://wire=
-guard-tools_1.0.20200319.bb" rel=3D"noreferrer" target=3D"_blank">wireguard=
--tools_1.0.20200319.bb</a><br>
-&gt; +++ b/meta-networking/recipes-kernel/wireguard/<a href=3D"http://wire=
-guard-tools_1.0.20200319.bb" rel=3D"noreferrer" target=3D"_blank">wireguard=
--tools_1.0.20200319.bb</a><br>
-&gt; @@ -9,7 +9,7 @@ DEPENDS +=3D &quot;wireguard-module libmnl&quot;<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0do_install () {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0oe_runmake DESTDIR=3D&quot;${D}&quot; PREFI=
-X=3D&quot;${prefix}&quot; SYSCONFDIR=3D&quot;${sysconfdir}&quot; \<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 SYSTEMDUNITDIR=3D&quot;${systemd_unitdir=
-}&quot; \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 SYSTEMDUNITDIR=3D&quot;${systemd_unitdir=
-}/system&quot; \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0WITH_SYSTEMDUNITS=3D${@bb.uti=
-ls.contains(&#39;DISTRO_FEATURES&#39;, &#39;systemd&#39;, &#39;yes&#39;, &#=
-39;&#39;, d)} \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0WITH_BASHCOMPLETION=3Dyes \<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0WITH_WGQUICK=3Dyes \<br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-</blockquote></div><br clear=3D"all"><br>-- <br><div dir=3D"ltr" class=3D"=
-gmail_signature">Adrian Thomasset<br>t: 0117 923 1990<br>m: 0776 629 4010</=
-div>
+<div dir=3D"ltr">From 84681a31cfd3f7aa8cc89181c2c87ffffcbc261b Mon Sep 17 0=
+0:00:00 2001<br>From: Mario Schuknecht &lt;<a href=3D"mailto:schuknecht@dre=
+search-fe.de">schuknecht@dresearch-fe.de</a>&gt;<br>Date: Thu, 15 Oct 2020 =
+16:53:12 +0200<br>Subject: [meta-networking][dunfell][PATCH] wireguard-tool=
+s: Fix systemd<br>=C2=A0service installation<br><br>Install systemd configu=
+ration file wg-quick@.service into the proper folder.<br>Use &#39;systemd_s=
+ystem_unitdir&#39; instead of &#39;systemd_unitdir&#39; as the installation=
+<br>path.<br><br>Signed-off-by: Mario Schuknecht &lt;<a href=3D"mailto:mari=
+o.schuknecht@dresearch-fe.de">mario.schuknecht@dresearch-fe.de</a>&gt;<br>S=
+igned-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com">raj.khem@g=
+mail.com</a>&gt;<br>---<br>=C2=A0.../recipes-kernel/wireguard/<a href=3D"ht=
+tp://wireguard-tools_1.0.20200513.bb">wireguard-tools_1.0.20200513.bb</a> =
+=C2=A0| 4 ++--<br>=C2=A01 file changed, 2 insertions(+), 2 deletions(-)<br>=
+<br>diff --git a/meta-networking/recipes-kernel/wireguard/<a href=3D"http:/=
+/wireguard-tools_1.0.20200513.bb">wireguard-tools_1.0.20200513.bb</a> b/met=
+a-networking/recipes-kernel/wireguard/<a href=3D"http://wireguard-tools_1.0=
+.20200513.bb">wireguard-tools_1.0.20200513.bb</a><br>index 31b33a045..3403f=
+d943 100644<br>--- a/meta-networking/recipes-kernel/wireguard/<a href=3D"ht=
+tp://wireguard-tools_1.0.20200513.bb">wireguard-tools_1.0.20200513.bb</a><b=
+r>+++ b/meta-networking/recipes-kernel/wireguard/<a href=3D"http://wireguar=
+d-tools_1.0.20200513.bb">wireguard-tools_1.0.20200513.bb</a><br>@@ -9,7 +9,=
+7 @@ DEPENDS +=3D &quot;libmnl&quot;<br><br>=C2=A0do_install () {<br>=C2=A0=
+ =C2=A0 =C2=A0oe_runmake DESTDIR=3D&quot;${D}&quot; PREFIX=3D&quot;${prefix=
+}&quot; SYSCONFDIR=3D&quot;${sysconfdir}&quot; \<br>- =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0SYSTEMDUNITDIR=3D&quot;${systemd_unitdir}&quot; \<br>+ =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0SYSTEMDUNITDIR=3D&quot;${systemd_system_unitdir}&quot; \<br>=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0WITH_SYSTEMDUNITS=3D${@bb.utils.contains(=
+&#39;DISTRO_FEATURES&#39;, &#39;systemd&#39;, &#39;yes&#39;, &#39;&#39;, d)=
+} \<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0WITH_BASHCOMPLETION=3Dyes \<br>=C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0WITH_WGQUICK=3Dyes \<br>@@ -18,7 +18,7 @@ do=
+_install () {<br><br>=C2=A0FILES_${PN} =3D &quot; \<br>=C2=A0 =C2=A0 =C2=A0=
+${sysconfdir} \<br>- =C2=A0 =C2=A0${systemd_unitdir} \<br>+ =C2=A0 =C2=A0${=
+systemd_system_unitdir} \<br>=C2=A0 =C2=A0 =C2=A0${bindir} \<br>=C2=A0&quot=
+;<br><br>--<br><div>2.25.1</div>=C2=A0</div>
 
---00000000000087075a05c24be418--
+--0000000000009c725205c24be514--
