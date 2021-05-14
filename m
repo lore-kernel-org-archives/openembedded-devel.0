@@ -1,73 +1,72 @@
-Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com [209.85.222.182])
- by mx.groups.io with SMTP id smtpd.web12.5286.1620972651612505933
+Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com [209.85.222.175])
+ by mx.groups.io with SMTP id smtpd.web10.5043.1620972672201330888
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 May 2021 23:10:51 -0700
+ Thu, 13 May 2021 23:11:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=RvbQ//fm;
- spf=pass (domain: gmail.com, ip: 209.85.222.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f182.google.com with SMTP id i67so27812118qkc.4
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 May 2021 23:10:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=MJihccks;
+ spf=pass (domain: gmail.com, ip: 209.85.222.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f175.google.com with SMTP id f29so15574792qka.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 May 2021 23:11:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=S8ZNHM7ONXZURCZ6txes02C34YwBeG6QKo1mZgxzS+Q=;
-        b=RvbQ//fm9uDQbc8xiKVuX88pl71LaMo+r0IsHRCa65ftTTYsXQ3a3rzTBXKKZ+D0+R
-         qn7hrGgnDPnQLVaO9HdVI7TK8fxlQEFAjzkiRWXUVzurEpUP0ExpUFfPdmc+H845QJsQ
-         vrGlL8N2pvGn06unVTDCYhm6APrzE1ZPwXne/ia024Xz8UlcwzFlpjbIJgsrRkiC3Pq9
-         B8bYFep5eo0HtxGQ0XeXu80zy7fkgFtemwQZfI8dd9A54UcmKzHHp91DrPu4oNsITAmL
-         vQQsfagcptheXNf02L+2Q4MCbJ3WUNm86m8rMcLnQiKRgyLlPdfCE9a7/OZIoFveBu5M
-         IbsA==
+        bh=77zTonT7Z6Z7+0lsuGB6Ty4nUeU0Mr3081OaXuvQZ7o=;
+        b=MJihccks9934N63qK+JtyrIQfBWqX5ngEgLuDWkeVlmnn2ezhpHv+hS80+mN1T6Z1n
+         PtyePcyGIBR+aPZja20pC5TUNfFU3MqS1zG8FkV+hOenZQerAiNinnRWx3M7oqyKsVFW
+         7W7qu2BUlfb7VTIJcEsHUrYPteyRSqeTZjHaXLEWxK50CNwwFV3swWdvsE1n/k+qD1Nu
+         MG6wDhKGtNpf9fzU44gQPLqTidTo5a2iWi9O3asv1LHpVWG1iKAcOUa6oCuYW4H2SifE
+         CDIYpJht1PtPqmvArUMKBqi0Cin8tmhlLeRCioBmqluAHqNh7kEETwNjZ6SyVnfZDbCM
+         9oUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=S8ZNHM7ONXZURCZ6txes02C34YwBeG6QKo1mZgxzS+Q=;
-        b=tw98KlmcIUYMSXA8mmr2dUF1oBUqrAeq/Gdij3PXR00zUB7y9uex/QTzAcQ2jK8gWE
-         1KHAev72kwuSD3DWxhQjdTopdSM9fnYXcojk/r3Iv4yagb34NgSD1KRE/dYnQS17yy/Z
-         DdRvVx2aBzLVxu5gQgAlFkSwb/k+AbM9TJnFCUKhe2IG5E0xV3wEEzvzxY6WZveq/iht
-         LhujJSLCiq8n7N0X5DDBK4wcggAfrlAaXyMc5Jc6TTnW89N8oBpYYkNnnZTc4vFfqGW8
-         KmLo08PfyGLlFwgzDpB7k0FkoATLnmMo2Rp/NA6mYooP8umzDfAWQM2Pb+nlBcn1kbdH
-         E/HA==
-X-Gm-Message-State: AOAM533NgQMW56YIzBHSP1s0w6G+QQ3BvCyFiFtDMRZhh4L1yfZsG/Ks
-	Mk06hOHK9Bia9xW8Nhn++LNcZlMChvyB5MPyaZA=
-X-Google-Smtp-Source: ABdhPJz9Figz4Iou5sVgTvspq4nGjdY0rO43Vr6dSuoK2WWoe5VQVZfD4kRtWgET5s2+8HUTINcRt5DD7LPvSxptqiA=
-X-Received: by 2002:a05:620a:24b:: with SMTP id q11mr23482627qkn.25.1620972650699;
- Thu, 13 May 2021 23:10:50 -0700 (PDT)
+        bh=77zTonT7Z6Z7+0lsuGB6Ty4nUeU0Mr3081OaXuvQZ7o=;
+        b=HG0hVvdDda9wXeD8EkFEmujw1B0NceZSfFp+Qv/ATT07KotjT+53Wiq6GSvInwfZ2w
+         DDDGoyvvW0gnjxqq7MTOlvcgN3Dcj/B3PYh799sPNk/LpldKhi+MHIOCb2oJOnwFzyJb
+         CE54KVkiGna+zadEuLqsbyLnlEqFIWZxxQ//eksnql0SRu7AAKDxGdwvcTtsYqKbzKfN
+         z8MfXyc+5LDmT2gG5h8bjMoqWHqqom1lmaEIbvSQDnJjGAKTxAxh1Xx46UecMkWBhSjL
+         y7E1Oy14ZIZjDURbr682WZlttR/WV5xJw28HTm1WSb9zSpenX/viYYSRKqBf2+VI9Sy+
+         RCEw==
+X-Gm-Message-State: AOAM531qSLhYu9bdwb94VzUYP6rNlDaO7SlMLjCSOSjgcBffotNce3T6
+	03AGYlAkbUJfzDiEMSiq/e5Pn0SVTn9NrIr4Gzc=
+X-Google-Smtp-Source: ABdhPJzLyTyC1WI8ExwYlvYXZDWgu2r1TEIP5nciQqQLqJvHCuZGBNK2wrsajwA+F4uJPcWm6OUoqtPQySeD1e2ssV0=
+X-Received: by 2002:a37:270d:: with SMTP id n13mr41400815qkn.146.1620972671346;
+ Thu, 13 May 2021 23:11:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <53093edd-6ade-5b29-5972-179c1491fcec@gmail.com>
-In-Reply-To: <53093edd-6ade-5b29-5972-179c1491fcec@gmail.com>
+References: <418378d1-ae13-c44f-6136-ed733f1dcf40@gmail.com>
+In-Reply-To: <418378d1-ae13-c44f-6136-ed733f1dcf40@gmail.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 13 May 2021 23:10:24 -0700
-Message-ID: <CAMKF1sr-nYQXt4BsG1zC=nONaV-6ERpC9pkLs8g_VM2=PYzoGw@mail.gmail.com>
-Subject: Re: hardknott merge request May13th
+Date: Thu, 13 May 2021 23:10:45 -0700
+Message-ID: <CAMKF1soKE2wty8+QMM5XUx5oEwW8BC-bHnAomHjkW-wmCu+5ww@mail.gmail.com>
+Subject: Re: dunfell merge request May 13th
 To: akuster808 <akuster808@gmail.com>
 Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
 merged thanks
 
-On Thu, May 13, 2021 at 9:43 PM akuster808 <akuster808@gmail.com> wrote:
+On Thu, May 13, 2021 at 9:55 PM akuster808 <akuster808@gmail.com> wrote:
 >
-> The following changes since commit c3a36263f91e42302ad7c347e051cf1cd83e39f6:
+> The following changes since commit c1a50683225b0bf10f8d7a18280acefa7469ecc2:
 >
->   packagegroup-meta-webserver: remove nostromo from pkg grp (2021-04-29
-> 18:57:25 -0700)
+>   libupnp: Fix CVE-2020-13848 (2021-04-23 19:13:09 -0700)
 >
 > are available in the Git repository at:
 >
->   https://git.openembedded.org/meta-openembedded hardknott-next
+>   https://git.openembedded.org/meta-openembedded dunfell-next
 >
-> for you to fetch changes up to bbe3855ec7d7e1417a42e9d7a4d1d3d338812088:
+> for you to fetch changes up to 2915810edbb6599051e30efb3b7f805665ddcc23:
 >
 >   ostree: switch from default master branch to main to fix do_fetch
-> failure (2021-05-13 21:37:32 -0700)
+> failure (2021-05-13 21:52:34 -0700)
 >
 > ----------------------------------------------------------------
 > Martin Jansa (1):
 >       ostree: switch from default master branch to main to fix do_fetch
 > failure
 >
->  meta-oe/recipes-extended/ostree/ostree_2021.1.bb | 2 +-
+>  meta-oe/recipes-extended/ostree/ostree_2020.3.bb | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
