@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.9458.1621002231270528053
+ by mx.groups.io with SMTP id smtpd.web11.9413.1621002231821315978
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 May 2021 07:23:51 -0700
+ Fri, 14 May 2021 07:23:52 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=38054 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
 	(Exim 4.92)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lhYjF-0005Cr-Im; Fri, 14 May 2021 17:23:50 +0300
+	id 1lhYjG-0005Cr-Ij; Fri, 14 May 2021 17:23:51 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/7] python3-aiohue: Upgrade 2.3.1 -> 2.4.0
-Date: Fri, 14 May 2021 17:23:38 +0300
-Message-Id: <20210514142341.22666-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/7] python3-pyroute2: Upgrade 0.5.18 -> 0.5.19
+Date: Fri, 14 May 2021 17:23:39 +0300
+Message-Id: <20210514142341.22666-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210514142341.22666-1-leon.anavi@konsulko.com>
 References: <20210514142341.22666-1-leon.anavi@konsulko.com>
@@ -30,31 +30,35 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.4.0:
+Upgrade to release 0.5.19:
 
-- Allow listening for Hue events
+- ndb: fix default routes keys
+- mptcp: basic support
+- netlink: ext_ack support fix
+- tc: netem rate setting
+- NSPopen: fix fd leak
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-aiohue_2.3.1.bb => python3-aiohue_2.4.0.bb} | 2 +-
+ .../{python3-pyroute2_0.5.18.bb => python3-pyroute2_0.5.19.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-aiohue_2.3.1.bb => python3-aiohue_2.4.0.bb} (77%)
+ rename meta-python/recipes-devtools/python/{python3-pyroute2_0.5.18.bb => python3-pyroute2_0.5.19.bb} (90%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohue_2.3.1.bb b/meta-python/recipes-devtools/python/python3-aiohue_2.4.0.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-aiohue_2.3.1.bb
-rename to meta-python/recipes-devtools/python/python3-aiohue_2.4.0.bb
-index bb6b951b87..600a3f4b49 100644
---- a/meta-python/recipes-devtools/python/python3-aiohue_2.3.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiohue_2.4.0.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=dab31a1d28183826937f4b152143a33f"
+diff --git a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.18.bb b/meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-pyroute2_0.5.18.bb
+rename to meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb
+index 439d383f86..903bd6459c 100644
+--- a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.18.bb
++++ b/meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb
+@@ -3,7 +3,7 @@ LICENSE = "GPLv2 & Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://LICENSE.Apache.v2;md5=34281e312165f843a2b7d1f114fe65ce"
  
--SRC_URI[sha256sum] = "d592a9055b56462312fcfccf46601ed4092698db1be5f3fc30c232ea34c6bbe3"
-+SRC_URI[sha256sum] = "59ac159301064d222192f7b58891d39a2f25aab620061ed12e7cfaf1b5d1a6cc"
+-SRC_URI[sha256sum] = "08ac40cad52c0bb2e0f20087520599aa91fcce0b221dd26e9042330428810bc5"
++SRC_URI[sha256sum] = "45460d12ed2a5caf272a357a3360b36d1e346f17afe1425b66fc21d70f462b29"
  
- inherit pypi setuptools3
+ inherit setuptools3 pypi ptest
  
 -- 
 2.17.1
