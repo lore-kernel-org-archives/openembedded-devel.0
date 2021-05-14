@@ -1,60 +1,59 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.3])
- by mx.groups.io with SMTP id smtpd.web08.3565.1620958467030539501
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.115])
+ by mx.groups.io with SMTP id smtpd.web10.3439.1620958486110821396
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 May 2021 19:14:27 -0700
+ Thu, 13 May 2021 19:14:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=iic0Y0eg;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.3, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=DSTSFiE8;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.115, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1620958465; i=@fujitsu.com;
-	bh=095ITSGKaWsEt5DyrcZLbh7GqbqjgMsin1jAq4TAUSc=;
+	s=170520fj; t=1620958484; i=@fujitsu.com;
+	bh=L9DtBBeVCoyxJhm5Jj8koakx1oGonT8V7yrO7X8U8jM=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=iic0Y0eggxn8NWxiT/EjbKb7Meuh3hZIMy6Tzg9tIhdnDsKB8uIPhWVuVX8yfUMQi
-	 vIqnCPNNtCIqoKMMdGMOYA7tTqGfyw0ljI0Co3XHaGJS02ibiSPcB2VuyAeo2FckC5
-	 2W5IJY7KqAfsc0CYNDen462+qC5wsMch56msjdomPTOmls7b4gWcj9ZeWoqTILNO4+
-	 Ff2fHZ14hfaqCoP/9zc7FM7cA7qTTHQPfioJ8zHRjnIPiCIXQMLx8/EyY1OiLR8jdE
-	 F5dZxyHzCwJqqvb3hxJf09YRxrOczho7O+D7nhw6rA4JQZS2QM7snjs3GKP9HyYex/
-	 LoQcOWgIfcd+w==
-Received: from [100.112.192.143] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-a.eu-west-1.aws.symcld.net id 0C/DA-45475-00DDD906; Fri, 14 May 2021 02:14:24 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrPIsWRWlGSWpSXmKPExsViZ8MxRZfh7tw
-  EgzlvNC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1ozDB38zFXRwVcxd9Y6tgXEFZxcjF4eQwGwm
-  ieXHl7JDOMcZJfatXsDaxcjJwSagI9HxopsFxBYR0JdYOnsPM4gtLGAl8WrRbcYuRg4OFgFVi
-  fObtUDCvAJuElduLwZrlRBQkJjy8D0zRFxQ4uTMJ2BjmAUkJA6+eMEMUaMosX3nGRYIu0Jixo
-  xtbBMYeWYhaZmFpGUBI9MqRoukosz0jJLcxMwcXUMDA11DQyNdQ0sgNjLTS6zSTdRLLdUtTy0
-  u0TXUSywv1iuuzE3OSdHLSy3ZxAgMo5SCA3U7GB+8/qB3iFGSg0lJlPek5+wEIb6k/JTKjMTi
-  jPii0pzU4kOMMhwcShK832/NTRASLEpNT61Iy8wBhjRMWoKDR0mE9w9Imre4IDG3ODMdInWK0
-  ZXj2doli5g5NsxbCiT/370LJPsXHFzNzHGz/dBqZiGWvPy8VClxXuHbQM0CIM0ZpXlwo2HxeI
-  lRVkqYl5GBgUGIpyC1KDezBFX+FaM4B6OSMO9VkBN4MvNK4C54BXQcE9BxN6bPAjmuJBEhJdX
-  AVPNI6/D8nS03DCYFbrywTVdsbq8OV1/w5E6ro5pJLeJM+g8FjI46z0hnkOre90j//Psz5xPn
-  65lXWcUWeaeaH9nIGHvEt5PHTWaN8sO+fSevTbSSmzf7wv6lre+ExE9tn2a+IeT1lsKoGfqeZ
-  7JWVj1/bN8Q/yaz0mvZmyAR6/Pn0+UOa82f6/6T/V5Kt8c7P++5TGlx3x+cm64jNd1Xvs9my2
-  SD3Ro/Mwp7FohWndyo3HepyEbvhfi0z7Of/LsVl/Wq/PHhFdyWUqfk7rTcdeu4MTvxjv4ufu2
-  9X/dl8dwPdvr49Mbemjdpj69/lwjLUxfZEjFRd47NHevM9fMZ/R6ZNPo/VWC5yOTxfeOlKCWW
-  4oxEQy3mouJEAD3R4KVCAwAA
+	b=DSTSFiE8hM+IXJhbPRcfbN00FpFD+zxiF9BUHoMHBQ2BAXDEgMBU8pASsQ5Eh/ymB
+	 a1TFfsTnvJIIFki5w2tiy+l/z2HRrM+tx3hOQmymiVf+ku7GKKwPelZRxSmu9QB8fY
+	 HYyM6YD+2ddHkp3s60Nr6LUvo22d6UXKLUIzg4KrE9XA7g+ql3ReZVcoUO56litkq6
+	 8f57+SSjYD6LfFrvf2spWQiOBtt9kn7r8vqkF/2q2EjXOAKz0TI7YPMZRuDg+bXO3K
+	 bjod7GaA8P/T59IDIaS4L0iO4Ym3Mzj4E7UV9KDos5RkNceQRXvxZ/Ts9ig0Kdvr6f
+	 8j96L8QUpfWeg==
+Received: from [100.113.6.49] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-4.bemta.az-b.eu-central-1.aws.symcld.net id E4/C7-27273-41DDD906; Fri, 14 May 2021 02:14:44 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYqit8d26
+  CwYRnehYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8a+R/OYCjZyVOydeZalgXElexcjF4eQwGwm
+  ib7lP5ghnOOMEp09v1i6GDk52AR0JDpedIPZIgL6Ektn72EGsYUF7CQeL3/ACmKzCKhKXPo8G
+  aiGg4NXwE3icZskSFhCQEFiysP3YOW8AoISJ2c+ARvDLCAhcfDFC2aIGkWJ7TvPsEDYFRIzZm
+  xjm8DIMwtJyywkLQsYmVYxWiQVZaZnlOQmZuboGhoY6BoaGuuaAVl6iVW6SXqppbrJqXklRYl
+  ASb3E8mK94src5JwUvbzUkk2MwDBKKWTj2sH49PUHvUOMkhxMSqK8Jz1nJwjxJeWnVGYkFmfE
+  F5XmpBYfYpTh4FCS4P1+a26CkGBRanpqRVpmDjCkYdISHDxKIrx/QNK8xQWJucWZ6RCpU4yKU
+  uK8wreBEgIgiYzSPLg2WBxdYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCTMexVkPE9mXgnc9F
+  dAi5mAFt+YPgtkcUkiQkqqgWkab+D6fQxfjp3e9EB160S3bZ7a02zXKRtt/WXVtj1jhda2hgd
+  PRdqnmcydu8rstG9Yy0ETruU/39w6f/r7pprTJ3Rf5wU6r7kn9IX1yjxtAbsD8W2fWB99/hrZ
+  GK3mXPko4pxR08avvmULdnMs7Gif9f3ilKVRFuefr+/RmJNZaepf3n1ssrCGTsWUpScqv9Xxh
+  oufm6ucFTGjb0nfgl8bf+a5hE45JnF50SzJ7qCPhkmBh5d4CwjWpvS82hq8xaPhZM3cL9wmCS
+  8+tUgcNUnn03W/LLiat6rW/PWbu8uZtyUL3bjvsfG+0XN5wRnSpdbcWb73xQ5ERNyXE9b7EP7
+  0U/6xyJ31Mxb3GF2f7eKtxFKckWioxVxUnAgA5I5RwB4DAAA=
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-12.tower-265.messagelabs.com!1620958464!350994!1
-X-Originating-IP: [62.60.8.148]
+X-Msg-Ref: server-13.tower-248.messagelabs.com!1620958483!352116!1
+X-Originating-IP: [62.60.8.149]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.75.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 2461 invoked from network); 14 May 2021 02:14:24 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-12.tower-265.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 14 May 2021 02:14:24 -0000
+Received: (qmail 20550 invoked from network); 14 May 2021 02:14:43 -0000
+Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
+  by server-13.tower-248.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 14 May 2021 02:14:43 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 14E2EOGW010700
+	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 14E2EhO1027886
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 May 2021 03:14:24 +0100
+	for <openembedded-devel@lists.openembedded.org>; Fri, 14 May 2021 03:14:43 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 14 May 2021 03:14:22 +0100
+ (TLS) id 15.0.1497.2; Fri, 14 May 2021 03:14:41 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] cloc: upgrade 1.88 -> 1.90
-Date: Fri, 14 May 2021 10:14:16 +0800
-Message-ID: <1620958456-8102-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] gensio: upgrade 2.2.4 -> 2.2.5
+Date: Fri, 14 May 2021 10:14:35 +0800
+Message-ID: <1620958475-8164-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -64,29 +63,25 @@ Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../recipes-devtools/cloc/{cloc_1.88.bb => cloc_1.90.bb}    | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/cloc/{cloc_1.88.bb => cloc_1.90.bb} (67%)
+ .../gensio/{gensio_2.2.4.bb => gensio_2.2.5.bb}                 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-connectivity/gensio/{gensio_2.2.4.bb => gensio_2.2.5.bb} (93%)
 
-diff --git a/meta-oe/recipes-devtools/cloc/cloc_1.88.bb b/meta-oe/recipes-devtools/cloc/cloc_1.90.bb
-similarity index 67%
-rename from meta-oe/recipes-devtools/cloc/cloc_1.88.bb
-rename to meta-oe/recipes-devtools/cloc/cloc_1.90.bb
-index b6a4ae773f..d34f8c98dc 100644
---- a/meta-oe/recipes-devtools/cloc/cloc_1.88.bb
-+++ b/meta-oe/recipes-devtools/cloc/cloc_1.90.bb
-@@ -5,9 +5,9 @@ AUTHOR = "Al Danial"
- LICENSE="GPL-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=2c1c00f9d3ed9e24fa69b932b7e7aff2"
+diff --git a/meta-oe/recipes-connectivity/gensio/gensio_2.2.4.bb b/meta-oe/recipes-connectivity/gensio/gensio_2.2.5.bb
+similarity index 93%
+rename from meta-oe/recipes-connectivity/gensio/gensio_2.2.4.bb
+rename to meta-oe/recipes-connectivity/gensio/gensio_2.2.5.bb
+index a02442862c..271a668751 100644
+--- a/meta-oe/recipes-connectivity/gensio/gensio_2.2.4.bb
++++ b/meta-oe/recipes-connectivity/gensio/gensio_2.2.5.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=a0fd36908af843bcee10cb6dfc47fa67 \
+                     file://COPYING;md5=bae3019b4c6dc4138c217864bd04331f \
+                     "
  
--SRC_URI = "https://github.com/AlDanial/cloc/releases/download/${PV}/${BP}.tar.gz"
--SRC_URI[md5sum] = "9f12f29c824ef61c5eaba6cf2dd6e183"
--SRC_URI[sha256sum] = "e4e30f083bf4e4a5efbe29efa0f6cefa223ba4e841ad1337653ad1f52702dc6f"
-+SRC_URI = "https://github.com/AlDanial/cloc/releases/download/v${PV}/${BP}.tar.gz"
-+SRC_URI[md5sum] = "e2364c2c9c9eda1d20890c19911c51fb"
-+SRC_URI[sha256sum] = "152502a61d4bae4a406a05a01bf52489b310ec03dbd8c645d0bb051fa4717ddb"
+-SRCREV = "95cfb8f6d8985e2fb8ba51c4887dd70aa7551a03"
++SRCREV = "ed307629e067a9ef55d79beec9c9f67b86efbaaf"
  
- UPSTREAM_CHECK_URI = "https://github.com/AlDanial/${BPN}/releases"
+ SRC_URI = "git://github.com/cminyard/gensio;protocol=https;branch=2.2.x"
  
 -- 
 2.25.1
