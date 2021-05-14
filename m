@@ -1,64 +1,80 @@
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web08.8147.1620996345658704281
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.web10.9018.1621001285894455196
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 May 2021 05:45:45 -0700
+ Fri, 14 May 2021 07:08:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 77E981763
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 May 2021 05:45:44 -0700 (PDT)
-Received: from oss-tx204.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 227F23F73B
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 May 2021 05:45:44 -0700 (PDT)
-From: "Ross Burton" <ross@burtonini.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=EdMMdgZW;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: athomasset@gmail.com)
+Received: by mail-wm1-f47.google.com with SMTP id 82-20020a1c01550000b0290142562ff7c9so1523769wmb.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 May 2021 07:08:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=xzXxcxbfFAVZiKzcVObP+OqDJlpwqvMWdC8FICeVl6k=;
+        b=EdMMdgZWNsc45mGD96jvYzKHBcLhmy0xFOVn4JYzrjVhAv2ueRH56rkb5Gk+nVXwg7
+         +YtxcG13qRgcrCjx+REygFrgam2v5Frz9PZSPvBHhxHOkNUaNs4alBLW9tDDp+hCfwJK
+         gldwBM9+LclDFX7iOwgLZpqIpXRcGscEkH+dK8xANt4Oa0r6KOerM/tlihCHIjSsT/QT
+         IcDSytCbEWEcaEdUWAKHggOuS4ndf+nGZZu1UjLXqlwVBUb/W+XPcwrRipLtRTFromhI
+         5Ho8oqmuTE1jRqqbkInO2JiDV/eiBrRnyYWxRUqAWZiUT/7jYFyJeodzkNdmy7RzvN8u
+         jSPw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=xzXxcxbfFAVZiKzcVObP+OqDJlpwqvMWdC8FICeVl6k=;
+        b=jaP0iBpfMe9x/9j6tsZOAFBxXt4dDyY4Q7rqQ34f5RUob+U2wvlz961CpzvMkbtjbm
+         PqYbrg0qUastR+8pVyAvM1Z5NZhwSsqCP425lTQxMccps+qPCULyN4oDXYvrgYstWHZB
+         U1piH68V92DF282WkXWSV0H1tjGIultHI62SkkoXlqtfBMPaBAqsaUDfmPtfr/v3kW7/
+         011XtA02XSsxqD0eQJveJtvJ3pwtUJ/wFmhPjUFoTNK9OIBzyjiJ/EqRnd7sx5dtqe15
+         33ZBMALVMD6dGiRllbNAP8iZYD70QfVg9eQ7A1119jG8Vik/UbZZZCtmszsK63nMjGoc
+         DFLg==
+X-Gm-Message-State: AOAM533XHyp/Hr3Fs/9iTpI2VP5Ge3RDEaXQxxBSZWa/BaeMR3wRwjLX
+	XV4GSe2xx3rDfG/f9mg3A6h1hINrSBw=
+X-Google-Smtp-Source: ABdhPJztGtGxmQXeQwwVbRJBGtvmNjnZJ3Gwdw160zz3wvsgrVeTFR1y+iKEWmsevzHvsUq0gwd4qw==
+X-Received: by 2002:a1c:b403:: with SMTP id d3mr49691409wmf.79.1621001284085;
+        Fri, 14 May 2021 07:08:04 -0700 (PDT)
+Return-Path: <athomasset@gmail.com>
+Received: from localhost ([2a00:2381:f65:1::1:21])
+        by smtp.gmail.com with ESMTPSA id b8sm6898209wrx.15.2021.05.14.07.08.03
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 14 May 2021 07:08:03 -0700 (PDT)
+From: athomasset@gmail.com
+X-Google-Original-From: Adrian Thomasset <adrian.thomasset@doulos.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 2/2] nss: remove -march vs -mcpu workaround
-Date: Fri, 14 May 2021 13:45:41 +0100
-Message-Id: <20210514124541.517318-2-ross.burton@arm.com>
+Cc: Adrian Thomasset <adrian.thomasset@doulos.com>
+Subject: [meta-networking][PATCH] wireguard-tools: change path for wg-quick systemd unit
+Date: Fri, 14 May 2021 15:07:22 +0100
+Message-Id: <20210514140722.3503198-1-adrian.thomasset@doulos.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210514124541.517318-1-ross.burton@arm.com>
-References: <20210514124541.517318-1-ross.burton@arm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-NSS's build tries to be clever and passes for example -march=3Darmv8-a+cr=
-ypto
-explicitly, instead of relying on the person doing the compilation to
-set the right flags.
+Fix error when enabling the wg-quick unit:
 
-This conflicts with our compiler flags which typically pass the ideal
-tune for the target, for example -mcpu=3Dcortex-a55+crc+crypto.
+% systemctl enable wg-quick@wg0
+Failed to enable unit: Unit file wg-quick@wg0.service does not exist
 
-When this happens GCC warns that the flags conflict (which was promoted
-to an error, now fixed) and -march takes precedence over -mcpu.
+The wg-quick@.service template unit needs to be in /lib/systemd/system
 
-As there's a huge number of potential tune flags to remove to avoid the
-conflict, now that warnings are not fatal we can stop removing the flags
-and let GCC warn as the generated code is the same.
-
-Signed-off-by: Ross Burton <ross.burton@arm.com>
+Signed-off-by: Adrian Thomasset <adrian.thomasset@doulos.com>
 ---
- meta-oe/recipes-support/nss/nss_3.64.bb | 4 ----
- 1 file changed, 4 deletions(-)
+ .../recipes-kernel/wireguard/wireguard-tools_1.0.20200319.bb    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/nss/nss_3.64.bb b/meta-oe/recipes-su=
-pport/nss/nss_3.64.bb
-index 119d4ad037..fce5a856ee 100644
---- a/meta-oe/recipes-support/nss/nss_3.64.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.64.bb
-@@ -43,10 +43,6 @@ inherit siteinfo
- TD =3D "${S}/tentative-dist"
- TDS =3D "${S}/tentative-dist-staging"
-=20
--# cortex-a55 is ARMv8.2-a based but libatomic explicitly asks for -march=
-=3Darmv8.1-a
--# which caused -march conflicts in gcc
--TUNE_CCARGS_remove =3D "-mcpu=3Dcortex-a55+crc -mcpu=3Dcortex-a55 -mcpu=3D=
-cortex-a55+crc+crypto"
--
- TARGET_CC_ARCH +=3D "${LDFLAGS}"
-=20
- do_configure_prepend_libc-musl () {
---=20
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20200319.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20200319.bb
+index f698b9a9a..e769f44b7 100644
+--- a/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20200319.bb
++++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20200319.bb
+@@ -9,7 +9,7 @@ DEPENDS += "wireguard-module libmnl"
+ 
+ do_install () {
+     oe_runmake DESTDIR="${D}" PREFIX="${prefix}" SYSCONFDIR="${sysconfdir}" \
+-        SYSTEMDUNITDIR="${systemd_unitdir}" \
++        SYSTEMDUNITDIR="${systemd_unitdir}/system" \
+         WITH_SYSTEMDUNITS=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'yes', '', d)} \
+         WITH_BASHCOMPLETION=yes \
+         WITH_WGQUICK=yes \
+-- 
 2.25.1
 
