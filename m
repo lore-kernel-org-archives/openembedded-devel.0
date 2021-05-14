@@ -1,80 +1,74 @@
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.web10.9018.1621001285894455196
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web12.9397.1621001342679519548
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 May 2021 07:08:06 -0700
+ Fri, 14 May 2021 07:09:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=EdMMdgZW;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: athomasset@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 82-20020a1c01550000b0290142562ff7c9so1523769wmb.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 May 2021 07:08:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=gy1GOx4V;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id t4so16220880plc.6
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 May 2021 07:09:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=xzXxcxbfFAVZiKzcVObP+OqDJlpwqvMWdC8FICeVl6k=;
-        b=EdMMdgZWNsc45mGD96jvYzKHBcLhmy0xFOVn4JYzrjVhAv2ueRH56rkb5Gk+nVXwg7
-         +YtxcG13qRgcrCjx+REygFrgam2v5Frz9PZSPvBHhxHOkNUaNs4alBLW9tDDp+hCfwJK
-         gldwBM9+LclDFX7iOwgLZpqIpXRcGscEkH+dK8xANt4Oa0r6KOerM/tlihCHIjSsT/QT
-         IcDSytCbEWEcaEdUWAKHggOuS4ndf+nGZZu1UjLXqlwVBUb/W+XPcwrRipLtRTFromhI
-         5Ho8oqmuTE1jRqqbkInO2JiDV/eiBrRnyYWxRUqAWZiUT/7jYFyJeodzkNdmy7RzvN8u
-         jSPw==
+        bh=9M2NfIFSfPK6ix4MwPDO0ZKIXtGxmOH/hf9H/1fjMX8=;
+        b=gy1GOx4VZ2kFSDF0p3rDJV4KnRW/c6cV2yJ9CuD4DpgHbOUEvpSGBCHrtvcRl1Rbuc
+         +k7rqpj1cJthL5B4an0Vtm+ENjBsnTtAU6NhRWSPU7n7sqsVGpQ0NXu39V1KdtWPeWD4
+         kH/NCzbBKLtET1nXZwyiL6Sz0AJ1LE4Lrb08HYgeY4ajkdSb5XQPNtPatchWHEQitYKf
+         7yZvUWEQ1ZjRAT2y6MdiGpiypKNaR8s3c90TlZmLgtpx6HH87luCL/JuETXaEs8I21Fn
+         ktSPGEdxQXOw/aDRYB6+mDKj7GbaHSLG8/lC8UHRQBqp6Tbyxw5bdZUY7Ud68i2HSMBs
+         rv5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=xzXxcxbfFAVZiKzcVObP+OqDJlpwqvMWdC8FICeVl6k=;
-        b=jaP0iBpfMe9x/9j6tsZOAFBxXt4dDyY4Q7rqQ34f5RUob+U2wvlz961CpzvMkbtjbm
-         PqYbrg0qUastR+8pVyAvM1Z5NZhwSsqCP425lTQxMccps+qPCULyN4oDXYvrgYstWHZB
-         U1piH68V92DF282WkXWSV0H1tjGIultHI62SkkoXlqtfBMPaBAqsaUDfmPtfr/v3kW7/
-         011XtA02XSsxqD0eQJveJtvJ3pwtUJ/wFmhPjUFoTNK9OIBzyjiJ/EqRnd7sx5dtqe15
-         33ZBMALVMD6dGiRllbNAP8iZYD70QfVg9eQ7A1119jG8Vik/UbZZZCtmszsK63nMjGoc
-         DFLg==
-X-Gm-Message-State: AOAM533XHyp/Hr3Fs/9iTpI2VP5Ge3RDEaXQxxBSZWa/BaeMR3wRwjLX
-	XV4GSe2xx3rDfG/f9mg3A6h1hINrSBw=
-X-Google-Smtp-Source: ABdhPJztGtGxmQXeQwwVbRJBGtvmNjnZJ3Gwdw160zz3wvsgrVeTFR1y+iKEWmsevzHvsUq0gwd4qw==
-X-Received: by 2002:a1c:b403:: with SMTP id d3mr49691409wmf.79.1621001284085;
-        Fri, 14 May 2021 07:08:04 -0700 (PDT)
-Return-Path: <athomasset@gmail.com>
-Received: from localhost ([2a00:2381:f65:1::1:21])
-        by smtp.gmail.com with ESMTPSA id b8sm6898209wrx.15.2021.05.14.07.08.03
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 14 May 2021 07:08:03 -0700 (PDT)
-From: athomasset@gmail.com
-X-Google-Original-From: Adrian Thomasset <adrian.thomasset@doulos.com>
+        bh=9M2NfIFSfPK6ix4MwPDO0ZKIXtGxmOH/hf9H/1fjMX8=;
+        b=AyiKfe7tkNWk1JdV1NV+CJp0Y3u9OeKfA3jNi0ndKRFxihDUqPqgrlZfEnO3gEThCC
+         IMYVK5e8VvkGixUyOTl7ABAwy36MlH/vVWdBJy4tYr6IboNGQ4l4xWc1JzAtIiTPPAr/
+         73OlHi2OqpYcCQpbDwkhPp6KTwGWG8JvADkFTyYJ8IJqN0zbtjLGNG5cCzOvn9eYIHs8
+         WT1ZAbErnjCH8cKu5N6iKXOlNNhwKs/sAa9V4Ro7J+aBieB6zrPJwhc/ymouHrajJ33W
+         8aOCAMhFguRyhjsdljJimpB3StPT46/Xej1qfD0fPR74jAiHDEZM4ocjE+++9fzl2aiE
+         EX5A==
+X-Gm-Message-State: AOAM533op3sSkU/ZRGRAMB0OIWd1kf15fJ7FVticmv8gc0TQV6lp6xqt
+	KyOaHZRqQ3NgFNMojsNCXWRXFHzpp04lCg==
+X-Google-Smtp-Source: ABdhPJy3mAi2QJENeiZIInVSV1oM04+TJrESO8JF8bnGW4OuTClpllLBztl9x+Feb+FC/B6smysI3Q==
+X-Received: by 2002:a17:902:6b82:b029:ef:a4b7:bc6e with SMTP id p2-20020a1709026b82b02900efa4b7bc6emr6884743plk.53.1621001341949;
+        Fri, 14 May 2021 07:09:01 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a7ac])
+        by smtp.gmail.com with ESMTPSA id g6sm4193735pfr.213.2021.05.14.07.09.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 14 May 2021 07:09:01 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Adrian Thomasset <adrian.thomasset@doulos.com>
-Subject: [meta-networking][PATCH] wireguard-tools: change path for wg-quick systemd unit
-Date: Fri, 14 May 2021 15:07:22 +0100
-Message-Id: <20210514140722.3503198-1-adrian.thomasset@doulos.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-m2crypto: Fix build on riscv64
+Date: Fri, 14 May 2021 07:08:59 -0700
+Message-Id: <20210514140859.2575018-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Fix error when enabling the wg-quick unit:
+wordlen is not so easy to calculate on rv64, therefore pass the right
+ingredients so compiler does the right thing in the end
 
-% systemctl enable wg-quick@wg0
-Failed to enable unit: Unit file wg-quick@wg0.service does not exist
-
-The wg-quick@.service template unit needs to be in /lib/systemd/system
-
-Signed-off-by: Adrian Thomasset <adrian.thomasset@doulos.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-kernel/wireguard/wireguard-tools_1.0.20200319.bb    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20200319.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20200319.bb
-index f698b9a9a..e769f44b7 100644
---- a/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20200319.bb
-+++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20200319.bb
-@@ -9,7 +9,7 @@ DEPENDS += "wireguard-module libmnl"
+diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
+index ef123075c7..7de89cf86b 100644
+--- a/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
++++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
+@@ -36,6 +36,7 @@ SWIG_FEATURES_x32 = "-D__ILP32__"
  
- do_install () {
-     oe_runmake DESTDIR="${D}" PREFIX="${prefix}" SYSCONFDIR="${sysconfdir}" \
--        SYSTEMDUNITDIR="${systemd_unitdir}" \
-+        SYSTEMDUNITDIR="${systemd_unitdir}/system" \
-         WITH_SYSTEMDUNITS=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'yes', '', d)} \
-         WITH_BASHCOMPLETION=yes \
-         WITH_WGQUICK=yes \
+ SWIG_FEATURES ?= "-D__${HOST_ARCH}__ ${@['-D__ILP32__','-D__LP64__'][d.getVar('SITEINFO_BITS') != '32']}"
+ 
++SWIG_FEATURES_append_riscv64 = " -D__SIZEOF_POINTER__=${SITEINFO_BITS}/8 -D__riscv_xlen=${SITEINFO_BITS}"
+ export SWIG_FEATURES
+ 
+ BBCLASSEXTEND = "native"
 -- 
-2.25.1
+2.31.1
 
