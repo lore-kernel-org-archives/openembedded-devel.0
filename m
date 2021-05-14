@@ -1,81 +1,121 @@
-Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com [209.85.222.180])
- by mx.groups.io with SMTP id smtpd.web10.429.1621022609664641657
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.web08.120.1621030517207686994
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 May 2021 13:03:29 -0700
+ Fri, 14 May 2021 15:15:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=a+dYbq8U;
- spf=pass (domain: gmail.com, ip: 209.85.222.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f180.google.com with SMTP id a2so142029qkh.11
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 May 2021 13:03:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Q82qHbd8;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id z4so316557pgb.9
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 May 2021 15:15:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=DBOWyI5WnJh6P6bG34GmDL58zNndcy3Pu/dkIro350g=;
-        b=a+dYbq8Uml6XrFqd8U/cUuvgIEyTXYGlRrAEt9ZtFSCcQdHt3UEYWOSS5O7utGMqqY
-         qaKSWeEjHunOuTa6uB8s/xGv7+/u63c2O0IbIk7jXbwPv3MdfTm3k2DhGpvW6P2gNWrV
-         +KwGmLAvl6WsWSyov1KzsCOXLLeG8IX0gxHxhylEOr7aA6jX+QBvO7L+I+DV1xT8ZLr1
-         z0YTqb2thmQSDV4eXmsaTCMIBLrG/6eiKce8tIqY2SewTVDWZMROWMS9m7oM6GKCX/23
-         jv+kj1WwJBdD8mRw1B8Am6H27N3YxyeIyqoslhMuSJ7o7RY5gkRPVY4cIM72HtvAIQh/
-         YjRg==
+        h=subject:to:references:from:message-id:date:user-agent:mime-version
+         :in-reply-to:content-transfer-encoding:content-language;
+        bh=ohOnzE8bDTTTQTLn9Nr4/iYoJM7jSW0NLFeBjCmDd+g=;
+        b=Q82qHbd8Um5o9LZHAC0pdNGd5cYAzuTAcqpVkZWC2NDFcCW3CsTd14oO4g6ZApxgUk
+         25cKxRxS1VygyDb8xnD2LoDWebPDB7zmjUEKv5DqEME0gwLHvyOsLyTRWZ8OTCp0F9bi
+         dskRi7FJYL3/CT+YAVNbNFAAtwmtKKasLlwgvHo559YzbLtgbT5j/OmzPO0ybGaopPT9
+         HvTeOOLSPHzgKIk6io8EhpBL9y//0l/0caGmWCS2OstOY+WeZxl0uTRgWj/F8VA2STHm
+         EEvRl6lsSHKXcztxVzAn9A5ptEzMyThYsR8CrxGGaKFzO5ynASXvAaWoSX5zyY+gnGy5
+         Xs9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=DBOWyI5WnJh6P6bG34GmDL58zNndcy3Pu/dkIro350g=;
-        b=tn2TWuIzZAFbtzb2aFeTQS9fmYjZ77prnQV1dMaq7Onb7nirMopz/9ePy6VHzuVwKh
-         Hb/BkNJsoz1jLdhUJfYAxHF1UDcIQ7V3mJ3vdz+h/2SbD6R2puZ8YDLEiVnOgaSTV00Q
-         UYN5zrw8theinpKq8rCQC42XE+WJcRA2HRJzvDy9hdMfJrqJ0A5gHl0E0oLovL+uBaBy
-         9GgwJUAmx1q+iq4rONezZlC7n+9sTdIaa1RdQ2kkII5RhofI+n5wcKlJlMJYvPZ7gXZu
-         mHFcdgqe0crFTw3wCbj8maSm4w7UpMg1SLbKLLH8ZHm7qLq7uYwYJjFFLxFhESlUWVPH
-         gW/w==
-X-Gm-Message-State: AOAM533gzuFSq1UQmXZ02YG8eAn7Jsz38w19DCjgE6Ued9drReBycaIu
-	2oW8NpzNFE27emc/ngdmEQ0ELIRBSeW41ohYi0c=
-X-Google-Smtp-Source: ABdhPJz83VJqJeK/zbImqok6HAF4ksXq+1BDlck6USXytHBba5jv2tltMu69p7yjZMXD4j3Rb6qH75kcSef5b+G+SsQ=
-X-Received: by 2002:a05:620a:24b:: with SMTP id q11mr26945469qkn.25.1621022608594;
- Fri, 14 May 2021 13:03:28 -0700 (PDT)
+        h=x-gm-message-state:subject:to:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=ohOnzE8bDTTTQTLn9Nr4/iYoJM7jSW0NLFeBjCmDd+g=;
+        b=V8hi8gDDTJ8ZcfU+vtW5IKY5H1vODdqyGSlz2uTyTLZ5yDW9gLnGqbGydRzMuAbcJP
+         CFGZ0m4uC1bBUA1Nq060M7BDlquwOm+JqR1gQnlK7UF53Imq78rn+ZSyHzsIvXxj7Ec0
+         TUfv4/rxdd5OTP3bXSrEl5O0rmGLbSJQ8FEpMStD9UAnIJhoEqOAhkBBElR/wOnAJ1xX
+         9ztD53wM5XzR5IK1McP6J/wvPRup8VA3gXSZ7ykKHQTqjmu0jCqvuVNOx7cdE9/RrqT1
+         SQ2k75PwJ8B3kTgz1WYMUrq8Vd7nQXCD+zZM9hOEdB30OaaXMw8dm+C8oatjuz+H9sMw
+         Cezg==
+X-Gm-Message-State: AOAM531VEJnPdc3EXSMXxXJqghGqM1CKbEVCqKgUZNpFXk8Lfb84veMv
+	qO0cgfRbNjmnYRPj387JZY+iNpwJowk=
+X-Google-Smtp-Source: ABdhPJwHyqq4cI5A7QWDqOQzsPRKF5FhjoZsvm9unEtKL52gEOi7wpLGXgYTcBBK726zwGB0U/n3sQ==
+X-Received: by 2002:a63:d312:: with SMTP id b18mr13326123pgg.89.1621030516583;
+        Fri, 14 May 2021 15:15:16 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:e2:8f3f:6fa1:8a8b? ([2601:202:4180:a5c0:e2:8f3f:6fa1:8a8b])
+        by smtp.gmail.com with ESMTPSA id z126sm4646764pfz.130.2021.05.14.15.15.15
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 14 May 2021 15:15:16 -0700 (PDT)
+Subject: Re: [meta-networking][dunfell][PATCH] wireguard-tools: Fix systemd service installation
+To: athomasset@gmail.com, openembedded-devel@lists.openembedded.org
+References: <CALvjPy0by0vAvNLTzJ4WyasGHpzhw4T8SKmWj-_k7v1gRzR=jg@mail.gmail.com>
+From: "Armin Kuster" <akuster808@gmail.com>
+Message-ID: <13743e57-bcc5-46fe-7ccd-9add6f2332db@gmail.com>
+Date: Fri, 14 May 2021 15:15:15 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-References: <20210511171359.4534-1-brgl@bgdev.pl> <e16a45e1-34cd-b2b4-b427-ec59c0216533@gmail.com>
- <CAMRc=MeT7xOkmV2qzs6F1yrbKt3s+MkJ5=ky8j7reop0+rRZhw@mail.gmail.com>
- <e597b092-104a-13f5-c4bc-bd928272bfe7@gmail.com> <CAMKF1so8yJeEOhzA=qg-DJnxG_nuvKJ-SzGpBr+SzbEbNj=hiQ@mail.gmail.com>
- <CAMRc=Me8aGdofAXoaY4bvcgy8UPfToVmv-CytBLb2xqKHhx=fQ@mail.gmail.com>
-In-Reply-To: <CAMRc=Me8aGdofAXoaY4bvcgy8UPfToVmv-CytBLb2xqKHhx=fQ@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Fri, 14 May 2021 13:03:02 -0700
-Message-ID: <CAMKF1spLiKQXoT1=vz=5zR7H088sxD69UNDO-q2-FFR9fOW_=Q@mail.gmail.com>
-Subject: Re: [meta-python][PATCH] python3-pycocotools: new package
-To: Bartosz Golaszewski <brgl@bgdev.pl>
-Cc: Armin Kuster <akuster808@gmail.com>, Tim moto-timo Orling <TicoTimo@gmail.com>, 
-	Derek Straka <derek@asterius.io>, Trevor Gamblin <trevor.gamblin@windriver.com>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <CALvjPy0by0vAvNLTzJ4WyasGHpzhw4T8SKmWj-_k7v1gRzR=jg@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Ah I did mean to send a different link from OE builders here it is
 
-http://jenkins.nas-admin.org/view/OE/job/oe_world_qemux86/2635/consoleFull
 
-Look at the top just before it prints "Build Configuration:"
-
-Hope this helps
-
-On Fri, May 14, 2021 at 12:28 PM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+On 5/14/21 8:28 AM, Adrian Thomasset wrote:
+> From 84681a31cfd3f7aa8cc89181c2c87ffffcbc261b Mon Sep 17 00:00:00 2001
+> From: Mario Schuknecht <schuknecht@dresearch-fe.de
+> <mailto:schuknecht@dresearch-fe.de>>
+> Date: Thu, 15 Oct 2020 16:53:12 +0200
+> Subject: [meta-networking][dunfell][PATCH] wireguard-tools: Fix systemd
+>  service installation
 >
-> On Fri, May 14, 2021 at 7:47 PM Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > Hi Bartosz
-> >
-> > I am seeing following on musl
-> >
-> > https://jenkins.ccp.xcal.tv/jenkins/view/YP/job/Yocto-world-musl/3316/consoleFull
-> >
-> > Should this package depend on virtual/crypt instead ?
-> >
-> > Can you take a look
-> >
+> Install systemd configuration file wg-quick@.service into the proper
+> folder.
+> Use 'systemd_system_unitdir' instead of 'systemd_unitdir' as the
+> installation
+> path.
+
+I take it this will affect Hardknott and Gatesgarth. I will wait for
+Master to merge before propagating to those branches.
+
+-armin
 >
-> Hi Khem,
+> Signed-off-by: Mario Schuknecht <mario.schuknecht@dresearch-fe.de
+> <mailto:mario.schuknecht@dresearch-fe.de>>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com <mailto:raj.khem@gmail.com>>
+> ---
+>  .../recipes-kernel/wireguard/wireguard-tools_1.0.20200513.bb
+> <http://wireguard-tools_1.0.20200513.bb>  | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> This asks me to log into some Comcast thingy. Can you link it differently?
+> diff --git
+> a/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20200513.bb
+> <http://wireguard-tools_1.0.20200513.bb>
+> b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20200513.bb
+> <http://wireguard-tools_1.0.20200513.bb>
+> index 31b33a045..3403fd943 100644
+> ---
+> a/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20200513.bb
+> <http://wireguard-tools_1.0.20200513.bb>
+> +++
+> b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20200513.bb
+> <http://wireguard-tools_1.0.20200513.bb>
+> @@ -9,7 +9,7 @@ DEPENDS += "libmnl"
 >
-> Best Regards
-> Bartosz Golaszewski
+>  do_install () {
+>      oe_runmake DESTDIR="${D}" PREFIX="${prefix}"
+> SYSCONFDIR="${sysconfdir}" \
+> -        SYSTEMDUNITDIR="${systemd_unitdir}" \
+> +        SYSTEMDUNITDIR="${systemd_system_unitdir}" \
+>          WITH_SYSTEMDUNITS=${@bb.utils.contains('DISTRO_FEATURES',
+> 'systemd', 'yes', '', d)} \
+>          WITH_BASHCOMPLETION=yes \
+>          WITH_WGQUICK=yes \
+> @@ -18,7 +18,7 @@ do_install () {
+>
+>  FILES_${PN} = " \
+>      ${sysconfdir} \
+> -    ${systemd_unitdir} \
+> +    ${systemd_system_unitdir} \
+>      ${bindir} \
+>  "
+>
+> --
+> 2.25.1
+>  
+
