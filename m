@@ -1,60 +1,59 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.114])
- by mx.groups.io with SMTP id smtpd.web10.3457.1620958563054106934
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web11.3550.1620958582026491724
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 May 2021 19:16:03 -0700
+ Thu, 13 May 2021 19:16:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=nugGahbH;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.114, mailfrom: zhengrq.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=GB1ISn0I;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113, mailfrom: zhengrq.fnst@fujitsu.com)
 Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1620958561; i=@fujitsu.com;
-	bh=LFw5fYoWX4T1Zn/bIwm8pINjTPOgeEV5v1Hm5uNa8Y8=;
+	s=170520fj; t=1620958580; i=@fujitsu.com;
+	bh=4YJCSx4XZaTRYCVxJKEY/Ka1vc1KUVOOuPcKtVFpBQo=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=nugGahbHbWys1SnOrhpkTL+b2QayLaM+WbN+Yws2gvPhQEcA1dHpidNOrBO7tydbo
-	 S5ukZ5KNuin3BiUDF98ettoBwtfCGua1/4TUnWwsS+Ns+T5PQOKzgg5Q5jdbzSudxq
-	 dri5Uh76+4r1y4eeOP67nONO3cbiuZUxNXY1tOA3tT0LTZEAlbU9iP0cpYZz8VYHIo
-	 cSLtRo4enymprlqFkxkqgH5OzBMDSMDKoJTuRGrPXGvgkdrx4EeFpffVkoylcLe1iQ
-	 jQRoWr+LciS4mjC5ODPAk6hyAM8ugp2ErmTXTYAE3xYbNvVpP0LZDW2j+z2zqN7dSA
-	 c2pYXYtoYXVPw==
+	b=GB1ISn0I08HCbpgternmt/+Kd3jgWQ5KO+iVutZu0q9k812pkxPgCebRd4GopS+9g
+	 0pGkN2IIt8HGCt+gVU7qYtK4T/pA1mbPHsjWKBCJlTHU47gTZ805MLzv1QOs7NRJ3w
+	 IOEiiSa7RFgwdq28ZA5hjBqli7MlefnI01HKQj9L4J7hnTRbBw37axbLbUwfPgU1sS
+	 lwlHgtheWrjF5aJSe1She4lHXZuZgTNrTr8knWMVb5r2sMol2LHaxgDsKFGAaEnf+B
+	 A5ed74m9MXFWrFXg9GlgNebW6z0ACMA0owCB0gxumaWi4tWgGLqWY9wN7pB77hBJol
+	 5iWO+mqZohIMw==
 Received: from [100.113.6.49] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-b.eu-central-1.aws.symcld.net id 49/FD-38619-06DDD906; Fri, 14 May 2021 02:16:00 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrEIsWRWlGSWpSXmKPExsViZ8MxRTfh7tw
-  Eg2kPJS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1owLs++yF+xhr3j8dDNzA+Mlti5GLg4hgdlM
-  EvO2/2OFcHYzSmxfMpepi5GTg01AV+Lc47XsILaIgL7E0tl7mEFsYQF7iZ/Tb7GB2CwCqhJH9
-  kxlAbF5BTwkjs9bABaXEFCQmPLwPTNEXFDi5MwnYDXMAhISB1+8AIpzANUoSsyeLg9RXiExY8
-  Y2tgmMPLOQdMxC0rGAkWkVo2VSUWZ6RkluYmaOrqGBga6hobGuua6RqZFeYpVukl5qqW5yal5
-  JUSJQVi+xvFivuDI3OSdFLy+1ZBMjMJBSCtn/7GC8/vqD3iFGSQ4mJVHek56zE4T4kvJTKjMS
-  izPii0pzUosPMcpwcChJ8LrfmZsgJFiUmp5akZaZAwxqmLQEB4+SCK89SJq3uCAxtzgzHSJ1i
-  jGc483aJYuYOd6CybZ7d4FkO5icueDgamaOWWDyfvshIPkARAqx5OXnpUqJ87aCjBMAGZdRmg
-  e3DBa1lxhlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ80qBTOHJzCuBu+kV0LlMQOfemD4L5Ny
-  SRISUVAPTgdxH0h6Ks7Qihc0fvrpQpFXx8P+hpOXfi+Sdv2a1h0j+vbWjqPXTut/ysSk5hRbB
-  Gs8VWP22XFkc8pb7Z3/ERaVPIW8uPj7yzGDXpDntf/a/Px0gYfGGg6fYdY1h0fJJC67Jf9y6w
-  uDD/iP3Wh1/eRWsvsr/6ZXOmbp/ywXqjbU/WghoHOUTdJz4wWny+9tPrnO9vXVcQvzfFTb29t
-  76B8na20v/f3DoCFUxXrL5ebdv6oWMvLPNqQ4fQ14rXu/WvPaNt1fx49M5/OJaa6QurXpvIdJ
-  Ysdbqz64Vyle9cnxVhCy2aZ4ULrkecHDT9smiQj8CN4XU3va6WlLafcv8ZfdrhYCP6vyfJqbW
-  r+/sU2Ipzkg01GIuKk4EANdcPXVVAwAA
+	by server-2.bemta.az-b.eu-central-1.aws.symcld.net id B5/1A-15146-37DDD906; Fri, 14 May 2021 02:16:19 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+EI1S26Ozf
+  B4PdOUYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePEq3OMBVvZKx4e387ewHiGrYuRk0NIYDaT
+  xIKVnF2MXED2bkaJXXv62UESbAK6EucerwWzRQT0JZbO3sMMYgsL2EvcaN4IZrMIqEps+b0Mr
+  IZXwEPi4Ob7LCC2hICCxJSH75kh4oISJ2c+AYszC0hIHHzxAijOAVSjKDF7ujxEeYXEjBnb2C
+  Yw8sxC0jELSccCRqZVjJZJRZnpGSW5iZk5uoYGBrqGhsa6JrqGxgZ6iVW6SXqppbrJqXklRYl
+  AWb3E8mK94src5JwUvbzUkk2MwDBKKWRp2sH4+9UHvUOMkhxMSqK8Jz1nJwjxJeWnVGYkFmfE
+  F5XmpBYfYpTh4FCS4HW/MzdBSLAoNT21Ii0zBxjSMGkJDh4lEV57kDRvcUFibnFmOkTqFKOil
+  DhvK0hCACSRUZoH1waLo0uMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHmlQKbwZOaVwE1/Bb
+  SYCWjxjemzQBaXJCKkpBqYljlo3A7TDSk1NZTV7vq0Zsua5ENS7pfvbdrycMKhjMfGFQHrS8T
+  316w18v21tFlzwee7zNmP5wn84t/j8H2q57zpe39ufvvlcJtffpmHrsf8RtmMWXG9uy8a55xb
+  sP7iIf5ul9vBtV8TPkj8Fl4klFgtpbAw9bQd83K/X3s+FB5atMum5uWknfoXTJtMXwbY+uXNv
+  dq6P+DDvOanoueMGcUPHt4rr3op7YuX7r/5ES5tCxa5VPkf/F6S+5O/99i/LndLT5dl1hYvYn
+  68W3uj68iDl1Mbpf6u2yewyELaWP+2T6XBw8/Ne5wnsTYpnar7kcBwuX6Xgr3P+mdnVefmPj7
+  47fnuOoNfCd2RbxgFDyixFGckGmoxFxUnAgCntgCXHgMAAA==
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-22.tower-238.messagelabs.com!1620958559!45090!1
-X-Originating-IP: [62.60.8.148]
+X-Msg-Ref: server-22.tower-245.messagelabs.com!1620958577!196356!1
+X-Originating-IP: [62.60.8.85]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.75.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 14343 invoked from network); 14 May 2021 02:16:00 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-22.tower-238.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 14 May 2021 02:16:00 -0000
+Received: (qmail 8987 invoked from network); 14 May 2021 02:16:18 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-22.tower-245.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 14 May 2021 02:16:18 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 14E2FxtO011165
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 14E2GHM2004209
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 May 2021 03:15:59 +0100
+	for <openembedded-devel@lists.openembedded.org>; Fri, 14 May 2021 03:16:17 +0100
 Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Fri, 14 May 2021 03:15:57 +0100
+ (TLS) id 15.0.1497.2; Fri, 14 May 2021 03:16:15 +0100
 From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] libjcat: upgrade 0.1.6 -> 0.1.7
-Date: Fri, 14 May 2021 10:15:47 +0800
-Message-ID: <1620958547-16462-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libxmlb: upgrade 0.3.0 -> 0.3.1
+Date: Fri, 14 May 2021 10:16:08 +0800
+Message-ID: <1620958568-16506-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.35]
@@ -64,26 +63,26 @@ Content-Type: text/plain
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../libjcat/{libjcat_0.1.6.bb => libjcat_0.1.7.bb}              | 2 +-
+ .../libxmlb/{libxmlb_0.3.0.bb => libxmlb_0.3.1.bb}              | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-gnome/libjcat/{libjcat_0.1.6.bb => libjcat_0.1.7.bb} (94%)
+ rename meta-oe/recipes-gnome/libxmlb/{libxmlb_0.3.0.bb => libxmlb_0.3.1.bb} (90%)
 
-diff --git a/meta-oe/recipes-gnome/libjcat/libjcat_0.1.6.bb b/meta-oe/recipes-gnome/libjcat/libjcat_0.1.7.bb
-similarity index 94%
-rename from meta-oe/recipes-gnome/libjcat/libjcat_0.1.6.bb
-rename to meta-oe/recipes-gnome/libjcat/libjcat_0.1.7.bb
-index bbfba55a3d..b857cc5bd3 100644
---- a/meta-oe/recipes-gnome/libjcat/libjcat_0.1.6.bb
-+++ b/meta-oe/recipes-gnome/libjcat/libjcat_0.1.7.bb
-@@ -11,7 +11,7 @@ SRC_URI = "\
-     git://github.com/hughsie/libjcat.git \
+diff --git a/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.0.bb b/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.1.bb
+similarity index 90%
+rename from meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.0.bb
+rename to meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.1.bb
+index d677d2436f..72d3aba44f 100644
+--- a/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.0.bb
++++ b/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.1.bb
+@@ -6,7 +6,7 @@ SRC_URI = "\
+     git://github.com/hughsie/libxmlb.git \
      file://run-ptest \
  "
--SRCREV = "c4f032468c56a5750e1e15b01fa31539b5c7ae51"
-+SRCREV = "e5307885528cf07058be073d0621624749cc10df"
+-SRCREV = "8f2f28eda419dbe31cb1a9aa022f0ca9d30ecb6a"
++SRCREV = "98fc241305306de9468249301474820696acb4be"
  S = "${WORKDIR}/git"
  
- inherit gobject-introspection gtk-doc meson ptest-gnome vala
+ inherit gobject-introspection gtk-doc meson ptest-gnome
 -- 
 2.25.1
 
