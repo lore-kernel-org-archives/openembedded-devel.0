@@ -1,86 +1,102 @@
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.web10.10250.1621006628882099933
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
+ by mx.groups.io with SMTP id smtpd.web10.11382.1621011977569048204
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 May 2021 08:37:09 -0700
+ Fri, 14 May 2021 10:06:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ApKHMxlF;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id q2so24795451pfh.13
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 May 2021 08:37:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Dcky0kKA;
+ spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: quaresma.jose@gmail.com)
+Received: by mail-ej1-f43.google.com with SMTP id l4so45614840ejc.10
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 May 2021 10:06:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=tSqnpWlKCWltcwDWhvJgJQzE9ydmL0kbYwznwUYqe1Y=;
-        b=ApKHMxlF8hXguHUGXmXTUvfzm8iJ6v7ncRPQ/HjI1axLfEN5wazEdTzVY91uq6Np0n
-         QBkDOVF2MC2QQU0fX51PG2SIgX+kfktax+EAMiW9M7RFiAG/YogQmZFpxJsDSaleQ5WN
-         nPUoUOLwZ6zIihYo5kVqvTTGE6wTdDX74HPM5QqdwifAiWdgndk9Jhjo1FCdQ52Yc1DK
-         cEO+1tzP1q8kgPwHYWY/RChcKKuSd55dtIUVFSEUS1peupweWZ3k+hgV1Y5GdF7Th3ag
-         ZPI2o8jXRI8o+NgEV+rWZo+6QBqzLj5QXTmnGPvubBFFSh4iIOLSatTgN6W9rtz/0go5
-         IbhQ==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=JjLAuSMmyslDclT0dqfZ90knexvsDTJi4Z/kKcQeiV4=;
+        b=Dcky0kKA1keptvLM82qVQWcoL34X8eyArwiB9B0lW6Jzx87zwjhApEmblUnfz3UE8L
+         zYnJZ8g1Uio3nLUkwQbmXkypiteHIEPkgTK+BVGRKst8jlWgGf6vRUCPRaiYtKd0oOUB
+         EuOSt67gZxNRnVLE6c4R48x0zJ3JEdy0nN78ZO0VB4dbIRWOVAkYw15aRt3JDr81181f
+         th4AgXNEdZuC9sQM4CH/agZ0jQRFZ1cSygJaWPR8inp9mm+MmqYVvTYOom9ri8qPJu9a
+         X8Ys6lr7VCplgDxvHVtsf3KIi6S6gmcggtLVIInNSrjJV8HjsEdIxouIEQLQKJ5OR8TY
+         hQSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=tSqnpWlKCWltcwDWhvJgJQzE9ydmL0kbYwznwUYqe1Y=;
-        b=Zo7hQ4LgoDISb2efuK3gBw0eM9PapO9vGtXEcRcKHbtbyDPLFhgnCqZswt7l6ujGGn
-         xsucnilnC2Jajkhk63gMugh2Ye12JVBOaPp1nWnYni/JkdV0+GOXW5YnBK3MSkoih2wg
-         z64VVpYEIxoTBf9iPDzolaxoRhvlnKX+zFzLlJ1rJbOZGZrA65eN+zLEx8XaQdkfXyjP
-         529/tTxxqiwMq7pYri0ePrHFsKt1pfZhACMfr6Xz0CxdXyA/pehDaL9iB5ixehfy9k1a
-         CB4RJeFa/gXSJvQ79PP6hhlLzjJcKHUH2iJ8Pg6/FFAb20q2QC2Dr3eVzPHXPJ4yrlBi
-         Of1A==
-X-Gm-Message-State: AOAM5304V0G+4YyoryAJU7e8sVScHBPh1rImIfhgLxi/kOoiVtOe6vKJ
-	lAR7NIUh4iXNyzVSy7ccHxqf9Au8rqQ2Gg==
-X-Google-Smtp-Source: ABdhPJwDBm7mHe6ek8i6oW/oEf53P5LoUo3A7w2Wkdadz+1hcd543zMV2TZ/7nlboxtKw6TaAmYtrg==
-X-Received: by 2002:a65:43c9:: with SMTP id n9mr47263113pgp.19.1621006628172;
-        Fri, 14 May 2021 08:37:08 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a7ac])
-        by smtp.gmail.com with ESMTPSA id g2sm4255194pfj.218.2021.05.14.08.37.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 May 2021 08:37:07 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Subject: [meta-gnome][PATCH] nautilus: Exclude from builds
-Date: Fri, 14 May 2021 08:37:05 -0700
-Message-Id: <20210514153705.3040536-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=JjLAuSMmyslDclT0dqfZ90knexvsDTJi4Z/kKcQeiV4=;
+        b=PNNhl4nfvzXk8d4rQnTm/hM/A7gRanYbKtg3I+nUmPe354YjXYapkqWeMqyU2K1ATB
+         F2fWH3zUR9WJ/l+cm3BIp45RJrgcc/47dJuMPyK8/el6uPSoFBeADQWWTQ68gYb0yuMv
+         3JLWLV4G5ZxSS/1fmWvvNs1iVhKKNlUJ95RumClNKaatxrTQMdvAJuG5iWQcA9XyY+hc
+         hkkRN2GIXV2mUa+x+4+QHAhFqAQr0OGsvVjdodM2Pf+VmeiT2PmBXDDhEpwGLwlvC1DG
+         z1Rbzg1aCjzOT1/Tp+/6jJYZfqSjymghjdQ0WoAn3Q1mFEUqpa3qjzik1hn9j3OlNEo8
+         DoHA==
+X-Gm-Message-State: AOAM533Uq516hqIXMSsfAJ4YGrnOUnzq36URbYUgeaIyrtOKtTmtMAQQ
+	TRc4dAx7toDtYbVaKzxQ0PsVQVnhuQGZHZOrtXI=
+X-Google-Smtp-Source: ABdhPJw7gwAAMRDEMnQkXSuiRimNiOtKQasNzIaxa0NkKXJNEIiDpqcyZTUn1IiDJDsYAroTA4YBVhht0etVj054JIg=
+X-Received: by 2002:a17:907:9612:: with SMTP id gb18mr50231792ejc.408.1621011975763;
+ Fri, 14 May 2021 10:06:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20210514140722.3503198-1-adrian.thomasset@doulos.com>
+In-Reply-To: <20210514140722.3503198-1-adrian.thomasset@doulos.com>
+From: "Jose Quaresma" <quaresma.jose@gmail.com>
+Date: Fri, 14 May 2021 18:06:04 +0100
+Message-ID: <CANPvuRnkyhRY-g06Robcc4w4s82sUhc-PJ3yH=F=DDjE2wMw3A@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH] wireguard-tools: change path for wg-quick systemd unit
+To: Adrian Thomasset <athomasset@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Adrian Thomasset <adrian.thomasset@doulos.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-It does not build with latest meson upgrades from OE-core
+Hi,
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andreas Müller <schnitzeltony@gmail.com>
----
- meta-gnome/recipes-gnome/nautilus/nautilus_3.36.3.bb            | 2 ++
- .../recipes-support/packagegroups/packagegroup-gnome-apps.bb    | 1 -
- 2 files changed, 2 insertions(+), 1 deletion(-)
+Adrian Thomasset <athomasset@gmail.com> escreveu no dia sexta,
+14/05/2021 =C3=A0(s) 15:08:
+>
+> Fix error when enabling the wg-quick unit:
+>
+> % systemctl enable wg-quick@wg0
+> Failed to enable unit: Unit file wg-quick@wg0.service does not exist
+>
+> The wg-quick@.service template unit needs to be in /lib/systemd/system
+>
+> Signed-off-by: Adrian Thomasset <adrian.thomasset@doulos.com>
+> ---
+>  .../recipes-kernel/wireguard/wireguard-tools_1.0.20200319.bb    | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.=
+0.20200319.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.=
+0.20200319.bb
+> index f698b9a9a..e769f44b7 100644
+> --- a/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20200=
+319.bb
+> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20200=
+319.bb
+> @@ -9,7 +9,7 @@ DEPENDS +=3D "wireguard-module libmnl"
+>
+>  do_install () {
+>      oe_runmake DESTDIR=3D"${D}" PREFIX=3D"${prefix}" SYSCONFDIR=3D"${sy=
+sconfdir}" \
+> -        SYSTEMDUNITDIR=3D"${systemd_unitdir}" \
+> +        SYSTEMDUNITDIR=3D"${systemd_unitdir}/system" \
 
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_3.36.3.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_3.36.3.bb
-index cf138d9739..3ed472bef1 100644
---- a/meta-gnome/recipes-gnome/nautilus/nautilus_3.36.3.bb
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus_3.36.3.bb
-@@ -35,3 +35,5 @@ FILES_${PN} += " \
- # mandatory - not checked during configuration:
- # | (org.gnome.Nautilus:863): GLib-GIO-ERROR **: 21:03:52.326: Settings schema 'org.freedesktop.Tracker.Miner.Files' is not installed
- RDEPENDS_${PN} += "tracker-miners"
-+
-+PNBLACKLIST[nautilus] ?= "Does not build with latest meson, perhaps needs upgrade"
-diff --git a/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb b/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
-index 593e5866d1..b86fd03a73 100644
---- a/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
-+++ b/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
-@@ -18,6 +18,5 @@ RDEPENDS_${PN} = " \
-     gnome-photos \
-     gnome-terminal \
-     libwnck3 \
--    nautilus \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'gnome-system-monitor gnome-disk-utility', '', d)} \
- "
--- 
-2.31.1
+There is variable on bitbake for this:
 
+SYSTEMDUNITDIR=3D"${systemd_system_unitdir}"
+
+>          WITH_SYSTEMDUNITS=3D${@bb.utils.contains('DISTRO_FEATURES', 'sy=
+stemd', 'yes', '', d)} \
+>          WITH_BASHCOMPLETION=3Dyes \
+>          WITH_WGQUICK=3Dyes \
+> --
+> 2.25.1
+>
+>
+>=20
+>
+
+
+--=20
+Best regards,
+
+Jos=C3=A9 Quaresma
