@@ -1,50 +1,50 @@
-Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
- by mx.groups.io with SMTP id smtpd.web09.607.1621121959136498351
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+ by mx.groups.io with SMTP id smtpd.web08.570.1621121959956810242
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 15 May 2021 16:39:19 -0700
+ Sat, 15 May 2021 16:39:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=b/daNFRu;
- spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f52.google.com with SMTP id k10so3751331ejj.8
-        for <openembedded-devel@lists.openembedded.org>; Sat, 15 May 2021 16:39:18 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Zt11GLBE;
+ spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f50.google.com with SMTP id s22so3564425ejv.12
+        for <openembedded-devel@lists.openembedded.org>; Sat, 15 May 2021 16:39:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=PifM+X7DaMWC9RdaBxuNJkVBj8jVN/tEwR+yHYtNadY=;
-        b=b/daNFRuewf5Wv9wwitq0qKVmTGtTcE+nnuBumlTQMnbelehBpVUtAdFP5hi6VkTJH
-         QL/X+TaLyyVqGds3ROGIsYtnVz5pZJwWUU7DTGPHWCH6MgyFmJOk1qZ5O1xLTDk/0PQ+
-         LKETm7mZGhXbiPWZY7llb/VLI+929kz1UynY+P0qy2A6Ox/scSldZ8oF1GZ84mOCTSND
-         +G8XzdDBM29kGmDW6nHB3kkOis06I/Zxfk0ZwcDoKuEycZO/IcGJ9fHL00el9An1mdMb
-         hfZ3c4m/LKrqA5hUDSjQSJBtwhowHyw6eX7BrnmAlY0U0olhhyZgJFo1mUy6yx95CCTD
-         IXBw==
+        bh=nNivk+FGe2W1rNjzGFw55jURLCUbnd9csbXvkPcjRw0=;
+        b=Zt11GLBE31Hazyc2oSdZnbzOPzu60DC2Xi6Ico5yHTV2I0O6tywR0p/4KWbvFyyQ3R
+         94j/iPqio20SIniFrdxjni0d0WEobuG8WmW0cfUvZGOnFddv5hYA2VbIJvgGTdPyz5Dw
+         zIgJlVXJag05BNcLgwWK6vM0qgogkEtt4jaNJu/izvZhh9sCTq2OSheBFWH/GIlyILFd
+         K/IXHhe3pBEIac4a08Xarae+MHQ/sweQLgX9Isb6dOtoJML5L/N3mfiay3hWvtQLAAmw
+         tdoJLzhcr0iPVZ/fESJiLpK2t2wIeWVD1yxizD/Et2AWmdRVvb2cEYcDmEoqN6q3boMu
+         8aLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=PifM+X7DaMWC9RdaBxuNJkVBj8jVN/tEwR+yHYtNadY=;
-        b=AT/VsBAKnFLntlzGoeIutAcfco2nT57XqZT5IOX9Xh4+YM9MEr19SqFl4PkxQ1u3u9
-         d6CZBRkHl3sgIegQCbNGcR36s35Mo6cVCxpU9xeeEWI8y2wqDGU6dnDQ5VoD0iDYNeJP
-         0YAXBJgay2OGll2timldgQgzvXCBNpMg9lX1hsp53oo8OK7J5dRDKS08OsU4g5nWwq0k
-         UwSk3S3uo/+CKk+d4sGWQTxHfBsCpBLVY7j8GnxfZxgoa9YZ7MRsJKYAocU029eHblXp
-         38ut4QCgB/mb4an4GYpcHkzkQJZjfTJJrgqc0zjnuDWtHGUTd4YGVLqzBiXwo/DSPDJH
-         MfRg==
-X-Gm-Message-State: AOAM533V0ZPId/EAE40z9gfY+wzKE6DndxaBETyFN3js1qN4uj0gRMLU
-	s77AeujBFVnUSasEykt+brfCRTpDQlc=
-X-Google-Smtp-Source: ABdhPJxgfjY/H2n70x1wRSpPSp/I/1oQZ/zzBW4+dG/OmGkp24KpzukbY2Hs3o5zR1zhz1fNuVnIQA==
-X-Received: by 2002:a17:907:d13:: with SMTP id gn19mr10357273ejc.134.1621121957785;
-        Sat, 15 May 2021 16:39:17 -0700 (PDT)
+        bh=nNivk+FGe2W1rNjzGFw55jURLCUbnd9csbXvkPcjRw0=;
+        b=g8EsLGc7P40N5Uqc6Go6xo8Jml53RG+DKLP64JqprVEF8H4jZ+op6iAeP3Osc9PI7n
+         dxwn6R41d2k6LVM7Jk5H9hAU8WhoJODv4v/zTzqyivsiB/G2OBXfXj3nX/bLowBd8/Ge
+         dmw1U04XeXjrMLPcz0dNJHuVKD3ZPMk3kp1nVGyB9fccU0G+k1o3h+ZaXkH06tiycTpp
+         blAnIH0jDBsPFCemD77tUrWo64B3s5Xx75RoJAfOM+TQYGGzw6Z/rSX9Bu56XOdT1HQl
+         1dOshZO1mMQd5Vnlv+csMgf/UOTqShBNaSL87rSENlTtzXiWbWwJjvr0saamjBxk7M3W
+         AijQ==
+X-Gm-Message-State: AOAM531/Vl85iyKYUsbW4JatB+ur1U7LjZbRrEGXWe+PvTkcSTBLAcqC
+	lYJh8pV3y6nDlOE42msI25HRnFQ+m/0=
+X-Google-Smtp-Source: ABdhPJyC57+g4dQacBWy9+riytQ94s7FWtal08IAA5kjk5USGb6IyCQT1cmNJDXWrwkeL8Jt9KZnEQ==
+X-Received: by 2002:a17:906:4a13:: with SMTP id w19mr54520830eju.533.1621121958576;
+        Sat, 15 May 2021 16:39:18 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from thanks-buchmuellers.speedport.ip (p200300f07f174d19e31b0fdffece5e2b.dip0.t-ipconnect.de. [2003:f0:7f17:4d19:e31b:fdf:fece:5e2b])
         by smtp.gmail.com with ESMTPSA id r25sm7668986edv.78.2021.05.15.16.39.17
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 15 May 2021 16:39:17 -0700 (PDT)
+        Sat, 15 May 2021 16:39:18 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 16/20] gegl: add poppler PCAKAGECONFIG and enable it by default
-Date: Sun, 16 May 2021 01:38:49 +0200
-Message-Id: <20210515233853.583490-16-schnitzeltony@gmail.com>
+Subject: [PATCH 17/20] Revert "gimp: Disable svg icons on arm"
+Date: Sun, 16 May 2021 01:38:50 +0200
+Message-Id: <20210515233853.583490-17-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210515233853.583490-1-schnitzeltony@gmail.com>
 References: <20210515233853.583490-1-schnitzeltony@gmail.com>
@@ -52,32 +52,28 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+gimp builds without issues on armv7 / gcc 11.1.0
+
+This reverts commit 57a7c1ed7d45b28cadd70d8fabda42fe906ddff7.
+
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-gnome/recipes-gimp/gegl/gegl_0.4.30.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-gnome/recipes-gimp/gimp/gimp_2.10.24.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gimp/gegl/gegl_0.4.30.bb b/meta-gnome/recipes-gimp/gegl/gegl_0.4.30.bb
-index 06abf799e..bb0cd1f8a 100644
---- a/meta-gnome/recipes-gimp/gegl/gegl_0.4.30.bb
-+++ b/meta-gnome/recipes-gimp/gegl/gegl_0.4.30.bb
-@@ -28,7 +28,7 @@ SRC_URI = " \
- "
- SRC_URI[sha256sum] = "c112782cf4096969e23217ccdfabe42284e35d5435ff0c43d40e4c70faeca8dd"
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.24.bb b/meta-gnome/recipes-gimp/gimp/gimp_2.10.24.bb
+index 237d08a09..e729d9deb 100644
+--- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.24.bb
++++ b/meta-gnome/recipes-gimp/gimp/gimp_2.10.24.bb
+@@ -54,7 +54,7 @@ EXTRA_OECONF = "--disable-python \
+ EXTRA_OECONF_append_mipsarch = " --disable-vector-icons"
+ EXTRA_OECONF_append_libc-musl_riscv32 = " --disable-vector-icons"
+ EXTRA_OECONF_append_libc-musl_x86 = " --disable-vector-icons"
+-EXTRA_OECONF_append_arm = " --disable-vector-icons"
++EXTRA_OECONF_append_toolchain-clang_arm = " --disable-vector-icons"
  
--PACKAGECONFIG ??= "gexiv2 jpeg libpng libraw librsvg sdl2"
-+PACKAGECONFIG ??= "gexiv2 jpeg libpng libraw librsvg poppler sdl2"
- PACKAGECONFIG_class-native = "libpng librsvg"
- 
- PACKAGECONFIG[jasper] = "-Djasper=enabled,-Djasper=disabled,jasper"
-@@ -40,6 +40,7 @@ PACKAGECONFIG[libav] = "-Dlibav=enabled,-Dlibav=disabled,libav"
- PACKAGECONFIG[libpng] = "-Dlibpng=enabled,-Dlibpng=disabled,libpng"
- PACKAGECONFIG[libraw] = "-Dlibraw=enabled,-Dlibraw=disabled,libraw"
- PACKAGECONFIG[librsvg] = "-Dlibrsvg=enabled,-Dlibrsvg=disabled,librsvg"
-+PACKAGECONFIG[poppler] = "-Dpoppler=enabled,-Dpoppler=disabled,poppler"
- PACKAGECONFIG[sdl] = "-Dsdl1=enabled,-Dsdl1=disabled,virtual/libsdl"
- PACKAGECONFIG[sdl2] = "-Dsdl2=enabled,-Dsdl2=disabled,virtual/libsdl2"
- PACKAGECONFIG[tiff] = "-Dlibtiff=enabled,-Dlibtiff=disabled,tiff"
+ do_configure_append() {
+     find ${B} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
 -- 
 2.31.1
 
