@@ -1,50 +1,50 @@
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
- by mx.groups.io with SMTP id smtpd.web12.589.1621121948573625108
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web08.567.1621121949335600628
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 15 May 2021 16:39:08 -0700
+ Sat, 15 May 2021 16:39:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=OM+xes9V;
- spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ed1-f46.google.com with SMTP id f1so2634879edt.4
-        for <openembedded-devel@lists.openembedded.org>; Sat, 15 May 2021 16:39:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=l6HTCFfN;
+ spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ed1-f51.google.com with SMTP id b17so2680285ede.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 15 May 2021 16:39:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=6a58Xf19Ke1k5oDvq+wBl0iTh/0zN3F1saz6vS6Y1fE=;
-        b=OM+xes9Vupu4Qjh1AhB++iYBjl1sgcNtLJRX3mPGrsVSIk1pNvfuq+Bwn9zjsFSLkj
-         Enw5bgEv4VAJTWzmmoBBer0Eb5p0pwZVncPEQ4ASD7LIkbloFGEAKOrgxBpcQXX0MdP0
-         KvAwlj18MtNrPaAtXalznvDuSCRVypqRfzPubUrui+cRwja/ehsUQPdwK/xvgORMQgqr
-         Ml7pEf20FBgsie+RI6PfIoRnn1p2D2xgMuoMtTuB/a9n42jXMoWUMAbCq1wPE6h2RUOV
-         GpwKJKkC7KztKbDt+bQNUDddS0IKspK9Q9FNsC4kq9CL0Ke5rUNiXVMXW1ucjTNCq3DI
-         nMVQ==
+        bh=eutkNaQsZmNsTjKGp2+i2kiwmIKH7eEvFOjF9RDkEbE=;
+        b=l6HTCFfNjxgRk6aangb6wIXQ8kr9mkENZ7gP4owD5WP3kep5oP45g/ypSX/6lRbNhL
+         sCkVMsTpIuB1nscbXKTevOgAZtX3NvsGyjpD409+R/5HnXd0hhClPoCBwrQRenaSH6Go
+         icEIxXJDip6YAT00LFjCruXiwQ06gFDGnNIHpTu/BWBQsTMGyciVC24az0Nf9GV3ZsF0
+         r0OWBPBaLJJwvKFAmuDzO2H05eSuiW4PsvxeZ0oeVs0CTJRx7jx3lgybuKQV2eWxR+3A
+         2NYzGm6H2oXu21mm8j9uf2jpVFufTiCv+F/+ebKqN4lcAwlTxxE5iFE3nxzjbhFOLonp
+         DQYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=6a58Xf19Ke1k5oDvq+wBl0iTh/0zN3F1saz6vS6Y1fE=;
-        b=Sb7JurLQlHwTCsdwmfRyOenzShEwea1Ms46XcoDabqar61KWL4DFz2HwteLT9G424G
-         pCKNB2rUGwVBnKBVHvHQhbLU1zm37S1SmPoMyDqskSpLHmb2vSat8q5Lj0STsCKImcS+
-         ACra4+Xx1BR4HlWGDC7CljP6W+K/lkWRRKdPrzPaK7/YeBR8JpfObJnsCeGHh7Cgd0Eo
-         6x64S+JPgNwbcXw4YouBJQ/zBveRaIBRq5InCBE2we7zTuhT22DVyJC8zklJC5ZIUQMC
-         GBcgxVjsRJvKVSEQWPWIyJONJJ3USnUyqG+ZEvsGwxYlTEH0KCiFOJ0HSBkGqO+/UrjM
-         +vMg==
-X-Gm-Message-State: AOAM531tNCJJo2cFfV+ty6lWInzYnLpfaV+5962SR0DC+CciJvr1+YO+
-	9/+RBfk/JV6m2uFxam/55RRnf6NJIto=
-X-Google-Smtp-Source: ABdhPJxUWvlPJspiMeWHY8sphIv6n3mVp9lSroDISCKHJGWruOjsr5WCB1JXP5w8kgYj6SPj7bC7kw==
-X-Received: by 2002:aa7:c7d5:: with SMTP id o21mr63857978eds.166.1621121947218;
+        bh=eutkNaQsZmNsTjKGp2+i2kiwmIKH7eEvFOjF9RDkEbE=;
+        b=pz0K22iWyhASJLpg93+6snmDHT3ffuP76Y721VU0eRI4k8Gp0fySgajy+ldwUKWrYL
+         xJNW87BldA+x/CRGreYIvrCGcvBXXdbwYv6MbQ/0lFVE5sHsRvvwMzEea7zKai3OoxnM
+         M4D1lNDxslSGbNHhve0pjpp6aq/Jv5qNT5L4qqkqnqkW7hoAOG796MmMWdSNcfcqOrP9
+         oN/d2yvTfAP+dAahakJNJu3sKWi1he+VZ1MybZJTLMQxbYOnbXVUNSVeBfEYFmekN52w
+         E2/PcSzubDtkgeqKIju8PEym4ThpQPFWDGI93jg9/BZ9yPuuY8LO9BU1Q15Lf8qpKjbW
+         UPag==
+X-Gm-Message-State: AOAM531uYoISx7+aue4YzRQAvKi+x9Gfflq5h0sUaq6HYr5w+SUy27gs
+	UTTsCAJFqtKDabGuBdDTZi1owAOl61M=
+X-Google-Smtp-Source: ABdhPJzGEHSGb58BsAxyl96AKXCa+uOlECqr1jMl/8OL2iewv4P+9uZmKERr0nmz/o+4wsSckzS4yw==
+X-Received: by 2002:aa7:da03:: with SMTP id r3mr31244973eds.121.1621121947946;
         Sat, 15 May 2021 16:39:07 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from thanks-buchmuellers.speedport.ip (p200300f07f174d19e31b0fdffece5e2b.dip0.t-ipconnect.de. [2003:f0:7f17:4d19:e31b:fdf:fece:5e2b])
-        by smtp.gmail.com with ESMTPSA id r25sm7668986edv.78.2021.05.15.16.39.06
+        by smtp.gmail.com with ESMTPSA id r25sm7668986edv.78.2021.05.15.16.39.07
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 15 May 2021 16:39:06 -0700 (PDT)
+        Sat, 15 May 2021 16:39:07 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 02/20] tracker-miners: upgrade 2.3.5 -> 3.0.5
-Date: Sun, 16 May 2021 01:38:35 +0200
-Message-Id: <20210515233853.583490-2-schnitzeltony@gmail.com>
+Subject: [PATCH 03/20] nautilus: upgrade 3.36.3 -> 40.1
+Date: Sun, 16 May 2021 01:38:36 +0200
+Message-Id: <20210515233853.583490-3-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210515233853.583490-1-schnitzeltony@gmail.com>
 References: <20210515233853.583490-1-schnitzeltony@gmail.com>
@@ -52,93 +52,97 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* follow tracker upgrade
-* adjust PACKAGECONFIGs to new sources
+* 3.36.3 stopped building with meson 0.58.0
+* backported patch can go
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...iners_2.3.5.bb => tracker-miners_3.0.5.bb} | 25 ++++++++++---------
- 1 file changed, 13 insertions(+), 12 deletions(-)
- rename meta-gnome/recipes-gnome/tracker/{tracker-miners_2.3.5.bb => tracker-miners_3.0.5.bb} (73%)
+ .../nautilus/0001-Drop-use-of-volatile.patch  | 32 -------------------
+ .../{nautilus_3.36.3.bb => nautilus_40.1.bb}  | 14 ++++++--
+ 2 files changed, 11 insertions(+), 35 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/nautilus/nautilus/0001-Drop-use-of-volatile.patch
+ rename meta-gnome/recipes-gnome/nautilus/{nautilus_3.36.3.bb => nautilus_40.1.bb} (77%)
 
-diff --git a/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.5.bb b/meta-gnome/recipes-gnome/tracker/tracker-miners_3.0.5.bb
-similarity index 73%
-rename from meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.5.bb
-rename to meta-gnome/recipes-gnome/tracker/tracker-miners_3.0.5.bb
-index 07fa10a0e..6672195e0 100644
---- a/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.5.bb
-+++ b/meta-gnome/recipes-gnome/tracker/tracker-miners_3.0.5.bb
-@@ -13,9 +13,9 @@ DEPENDS = " \
- 
- GNOMEBASEBUILDCLASS = "meson"
- 
--inherit gnomebase gsettings gobject-introspection vala gtk-doc manpages bash-completion features_check
-+inherit gnomebase gsettings gobject-introspection vala bash-completion features_check
- 
--SRC_URI[archive.sha256sum] = "9509d37fb29acd233058f4df5bd1234b692ac6f946bc2e5f7b8dbf51dfe5b9fa"
-+SRC_URI[archive.sha256sum] = "c9be14871b1398e6e656a354a8f8f59e69e93169017f2b28308ef439324fd12b"
- SRC_URI += "file://0001-meson.build-Just-warn-if-we-build-without-libseccomp.patch"
- 
- # gobject-introspection is mandatory and cannot be configured
-@@ -24,34 +24,33 @@ UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
- 
- PACKAGECONFIG ??= " \
-     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "ffmpeg", "", d)} \
--    flac \
-     gexiv2 \
-     gstreamer \
-     icu \
-     libexif \
-     libgsf \
-     jpeg \
-+    pdf \
-     png \
-     tiff \
-     xml \
--    pdf \
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus/0001-Drop-use-of-volatile.patch b/meta-gnome/recipes-gnome/nautilus/nautilus/0001-Drop-use-of-volatile.patch
+deleted file mode 100644
+index 46831429d..000000000
+--- a/meta-gnome/recipes-gnome/nautilus/nautilus/0001-Drop-use-of-volatile.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From 9ab5acb902a38b420592931ec9e46ccd0624035a Mon Sep 17 00:00:00 2001
+-From: Ondrej Holy <oholy@redhat.com>
+-Date: Wed, 13 Jan 2021 13:22:58 +0100
+-Subject: [PATCH] Drop use of volatile
+-
+-The `fedora rawhide` CI job currently fails because of usage of the
+-`volatile` qualifier. Let's drop the `volatile` qualifier as it doesn't
+-help anyway. It was dropped in GLib as well, see:
+-https://gitlab.gnome.org/GNOME/glib/-/merge_requests/1719
+-
+-Fixes: https://gitlab.gnome.org/GNOME/nautilus/-/issues/1741
+----
+-Upstream-Status: Backport [https://github.com/GNOME/nautilus/commit/9b733dd9df9d6d9805c56749d05ada15a7560ef4]
+- src/nautilus-enum-types.c.template | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/nautilus-enum-types.c.template b/src/nautilus-enum-types.c.template
+-index 00155ca..9d8ac83 100644
+---- a/src/nautilus-enum-types.c.template
+-+++ b/src/nautilus-enum-types.c.template
+-@@ -13,7 +13,7 @@
+- GType
+- @enum_name@_get_type (void)
+- {
+--    static volatile GType type_once = 0;
+-+    static GType type_once = 0;
+- 
+-     if (g_once_init_enter (&type_once))
+-     {
+--- 
+-2.30.1
+-
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_3.36.3.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_40.1.bb
+similarity index 77%
+rename from meta-gnome/recipes-gnome/nautilus/nautilus_3.36.3.bb
+rename to meta-gnome/recipes-gnome/nautilus/nautilus_40.1.bb
+index cf138d973..09e075044 100644
+--- a/meta-gnome/recipes-gnome/nautilus/nautilus_3.36.3.bb
++++ b/meta-gnome/recipes-gnome/nautilus/nautilus_40.1.bb
+@@ -13,16 +13,23 @@ DEPENDS = " \
+     gsettings-desktop-schemas \
+     gnome-autoar \
+     tracker \
++    libhandy \
++    libportal \
  "
  
-+PACKAGECONFIG[battery]     = "-Dbattery_detection=upower,-Dbattery_detection=none,upower"
- PACKAGECONFIG[ffmpeg]     = ",,ffmpeg"
--PACKAGECONFIG[flac]       = "-Dflac=enabled,-Dflac=disabled,flac"
- PACKAGECONFIG[gexiv2]     = ",,gexiv2"
- PACKAGECONFIG[gstreamer]  = ",,gstreamer1.0 gstreamer1.0-plugins-base"
- PACKAGECONFIG[gupnp]      = ",,gupnp-dlna"
-+PACKAGECONFIG[gif]        = "-Dgif=enabled,-Dgif=disabled,giflib"
- PACKAGECONFIG[icu]        = ",,icu"
-+PACKAGECONFIG[jpeg]       = "-Djpeg=enabled,-Djpeg=disabled,jpeg"
- PACKAGECONFIG[libexif]    = "-Dexif=enabled,-Dexif=disabled,libexif"
- PACKAGECONFIG[libgsf]     = "-Dgsf=enabled,-Dgsf=disabled,libgsf"
--PACKAGECONFIG[jpeg]       = "-Djpeg=enabled,-Djpeg=disabled,jpeg"
-+PACKAGECONFIG[pdf]        = "-Dpdf=enabled,-Dpdf=disabled,poppler"
- PACKAGECONFIG[png]        = "-Dpng=enabled,-Dpng=disabled,libpng"
- PACKAGECONFIG[tiff]       = "-Dtiff=enabled,-Dtiff=disabled,tiff"
- PACKAGECONFIG[xml]        = "-Dxml=enabled,-Dxml=disabled,libxml2"
--PACKAGECONFIG[vorbis]     = "-Dvorbis=enabled,-Dvorbis=disabled,libvorbis"
--PACKAGECONFIG[pdf]        = "-Dpdf=enabled,-Dpdf=disabled,poppler"
--PACKAGECONFIG[upower]     = ",,upower"
-+PACKAGECONFIG[networkmanager] = "-Dnetwork_manager=enabled,-Dnetwork_manager=disabled,networkmanger"
+ inherit gnomebase gsettings gobject-introspection gtk-doc gettext features_check upstream-version-is-even mime-xdg
  
- # For security reasons it is strongly recommended to set add meta-security in
- # your layers and 'libseccomp' to PACKAGECONFIG".
-@@ -60,12 +59,14 @@ PACKAGECONFIG[libseccomp] = ",,libseccomp"
- PACKAGECONFIG[rss]        = "-Dminer_rss=true,-Dminer_rss=false,libgrss"
+-SRC_URI += "file://0001-Drop-use-of-volatile.patch"
+-SRC_URI[archive.md5sum] = "c3c8dbb90d8eeed6c127aa568e131395"
+-SRC_URI[archive.sha256sum] = "b6cafc7ab1e70a64383de391b6097fcccbf36b208f8502d8c46423224fd30ef8"
++def gnome_verdir(v):
++    return oe.utils.trim_version(v, 1)
++
++SRC_URI[archive.sha256sum] = "8ecfb90174a0bd5815b1ceb9cbfcd91fec0fb5e34907a4f2df2d05e5d6c99d33"
  
- EXTRA_OEMESON += " \
--    -Dsystemd_user_services=${systemd_user_unitdir} \
-+    -Dman=false \
-+    -Dsystemd_user_services=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)} \
-+    -Dsystemd_user_services_dir=${systemd_user_unitdir} \
- "
+ REQUIRED_DISTRO_FEATURES = "x11"
  
- FILES_${PN} += " \
++EXTRA_OEMESON += " \
++    -Dtests=none \
++"
++
+ PACKAGECONFIG = "extensions"
+ PACKAGECONFIG[extensions] = "-Dextensions=true,-Dextensions=false, gexiv2 gstreamer1.0-plugins-base"
+ 
+@@ -30,6 +37,7 @@ FILES_${PN} += " \
      ${datadir}/dbus-1 \
--    ${datadir}/tracker \
--    ${libdir}/tracker-miners-2.0 \
-+    ${datadir}/tracker3-miners \
-+    ${libdir}/tracker-miners-3.0 \
-     ${systemd_user_unitdir} \
+     ${datadir}/metainfo \
+     ${datadir}/gnome-shell \
++    ${datadir}/tracker3 \
  "
+ 
+ # mandatory - not checked during configuration:
 -- 
 2.31.1
 
