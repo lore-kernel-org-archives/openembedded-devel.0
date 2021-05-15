@@ -1,80 +1,59 @@
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web11.1437.1621042490230299772
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.web12.3561.1621064557783866878
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 May 2021 18:34:50 -0700
+ Sat, 15 May 2021 00:42:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=YsC2hVpZ;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id p17so238981plf.12
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 May 2021 18:34:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=gvbQpP9s;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id v11-20020a17090a6b0bb029015cba7c6bdeso957923pjj.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 15 May 2021 00:42:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=q2RQVavzAzQZhgGsNvjrUp9bbTM8qjREALby1Y8CHtk=;
-        b=YsC2hVpZ/DQlC1a5SfhfgAOyI5XzyknTOZBPTd0hLbj0mKQ8MWbiSaRI/c4gkafsQq
-         YJQt+8xja4qfDi940IGmERFyiqeLnyLFPxrRGvW4ExrApWTsXGhvKvoGAxtlhYMyFosq
-         xsHMSwNZV/bvY0R+CmU1cpSp+GSCU7V3A1pNJnJQ6vsIAOpBWgoDpMWm9BVz+6w/6fOW
-         XpO0lgQ/4QEw+OuznyubvWsL1OwposoJuJszL5brX3CW4bSLQi27kmjyJ48rpguNryDy
-         u4lGHL1FIkUWz3HJsd55kgjiLuH3AAelyA7UHpOJZewRsF3MFuegLmgE08BK9+9rMBma
-         NaIw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=aE0MZvEcEvo9Dy8ECi0ERQis5o0/NGtIxmg526fM2BM=;
+        b=gvbQpP9sODaqk3C0I+qioHWbs3qssqpWwW9AT/GLo4R9Hlqf4c2z+3x1zUgcur/jWV
+         lYu0BStbThpVurLe4W2PPwvSThAfiMP9E+eu3r3vNkq9bD70RdllrsnVkOjtV2aoTcdd
+         y8WYsmNhT0n8GHsxybRiIEnZcJuQB+nv9gHA2IMtckVGLWhKSlr1eAg7QKNxTj2Emcrq
+         4khfBm2FETSjIrKqxPNsyQePKSCvgQj9vRzVZgllHHTMR9d6tNwtvlc9FEPpU3mUOEIl
+         zF3aC7pdmxLqDvaQ407rhUn9RA3eCT93JTOFNiyza6/FZvHQeA68elPFFRXn3kIO7aiz
+         OXAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=q2RQVavzAzQZhgGsNvjrUp9bbTM8qjREALby1Y8CHtk=;
-        b=BPItfVBh8AtB5gkTS1IVZe/KOjRjk2YrQqYtnaim/jpd2sCijt9t3nYQtc58Tb0Wjc
-         JDjp6Efy0pT3dq/nFVCfqro4NaQyqkzR3mV2xF2SPxL3x99T0/Wstao+JSD6k36Djpkv
-         McNlO/cqsfcSk3equanr/+gkEWEwAi31BymgBpDzySrwSrFlbJsfxGjGYR/jhwYChqsU
-         o4bF+WJ5O3Q6ETRcZK5n0hMJB9DlJiwHXJ/3CGFEbNR1artLAgIYYapHhPbby3IOV7/7
-         Fy60q67lmbVIE84MtJP3GxpCrzz48YkennETaWmweVxveRWOhWEfiFMJC4TItNxgfysS
-         Js6A==
-X-Gm-Message-State: AOAM532BlmkFix3oQIEg5Ewo8OcsGExVjM6TDxGp6pdEk1wM13Glrk9S
-	aFtECVxvKQPv33XsfZwVq/26fZSVbSsLzA==
-X-Google-Smtp-Source: ABdhPJyga9g1VQdVg7kuw2kXPsWwIMWXRQA6RURdSzyegzLiQQNDeGxQBaU3ltXJwsCz/2N+2ZzmPw==
-X-Received: by 2002:a17:90a:d710:: with SMTP id y16mr14576854pju.86.1621042489450;
-        Fri, 14 May 2021 18:34:49 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a7ac])
-        by smtp.gmail.com with ESMTPSA id c1sm4830092pfj.128.2021.05.14.18.34.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 May 2021 18:34:49 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH v2] python3-m2crypto: Fix build on riscv and mips
-Date: Fri, 14 May 2021 18:34:47 -0700
-Message-Id: <20210515013447.2141700-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=aE0MZvEcEvo9Dy8ECi0ERQis5o0/NGtIxmg526fM2BM=;
+        b=QrHJ9FBulzpPN65YqAVhzD5RCAR2K+HqjOmNTFvgYGgwcVs3mLh5gHy1Yh2cKx4nbW
+         5U9YypDrK93gxYG9VZWZfL+AWoe39yWc0NaZ+ExhcKa601KwNGV7F1sjd8bVSaW2oAko
+         Y09/VBese0yBd1lczGFViqRSIcxGT8ML+JGN9fwkZ4JznjLEmMn1uEK4wm7ntbW4JSw5
+         RCSzc8zAuBMQcgyjrMic9Zkv38jXPcr0iS0ANrTnzTfFEPWVhPPAyNpxLEcDMzIC+sZn
+         W+JSHVJJihZu0iBW/Lwh9FNie0nq0lyiQ/iPQk7xwbN5pffVzcCeM/ssb5wo0pXayAB+
+         c7Aw==
+X-Gm-Message-State: AOAM532kNkGwC2QXlLC3tDfFBOWJu2dusl/8VjxlkTX/VGPrNMxsY2M0
+	YJlgcfr3p+Hk7cN5JsRqOmvbW62ZlQuotNYH/Bo=
+X-Google-Smtp-Source: ABdhPJw54ak+dUO3zOR3zC0mZgKFviW0OW2JruBS+PJuI5U00ptE2tAXWj9J8nsTDGf26w/ANAcMJNCyXkA/uN/4MlE=
+X-Received: by 2002:a17:90a:a78d:: with SMTP id f13mr38200650pjq.161.1621064557259;
+ Sat, 15 May 2021 00:42:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210514153705.3040536-1-raj.khem@gmail.com>
+In-Reply-To: <20210514153705.3040536-1-raj.khem@gmail.com>
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+Date: Sat, 15 May 2021 09:42:25 +0200
+Message-ID: <CALbNGRQ0O=CGu6rZUA23u0LjRJpkNcWSEEz256zPyLC4pQoNog@mail.gmail.com>
+Subject: Re: [meta-gnome][PATCH] nautilus: Exclude from builds
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-wordlen is not so easy to calculate on RISCV, therefore pass the right
-ingredients so compiler does the right thing in the end
+On Fri, May 14, 2021 at 5:37 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> It does not build with latest meson upgrades from OE-core
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Cc: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+Please wait with this. I have fixing upgrade under test.
 
-Do same for mips as well
+Cheers.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
-v2: Fix build on mips/rv32 as well
-
- meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
-index ef123075c7..e1f92928c6 100644
---- a/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
-@@ -36,6 +36,9 @@ SWIG_FEATURES_x32 = "-D__ILP32__"
- 
- SWIG_FEATURES ?= "-D__${HOST_ARCH}__ ${@['-D__ILP32__','-D__LP64__'][d.getVar('SITEINFO_BITS') != '32']}"
- 
-+SWIG_FEATURES_append_riscv64 = " -D__SIZEOF_POINTER__=${SITEINFO_BITS}/8 -D__riscv_xlen=${SITEINFO_BITS}"
-+SWIG_FEATURES_append_riscv32 = " -D__SIZEOF_POINTER__=${SITEINFO_BITS}/8 -D__riscv_xlen=${SITEINFO_BITS}"
-+SWIG_FEATURES_append_mipsarch = " -D_MIPS_SZPTR=${SITEINFO_BITS}"
- export SWIG_FEATURES
- 
- BBCLASSEXTEND = "native"
--- 
-2.31.1
-
+Andreas
