@@ -1,85 +1,66 @@
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.web12.7298.1621093436855287151
+Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com [209.85.160.169])
+ by mx.groups.io with SMTP id smtpd.web08.7578.1621093784688843061
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 15 May 2021 08:43:56 -0700
+ Sat, 15 May 2021 08:49:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=GC/GENd/;
- spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id d16so1840496pfn.12
-        for <openembedded-devel@lists.openembedded.org>; Sat, 15 May 2021 08:43:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=RjEDCiIZ;
+ spf=pass (domain: gmail.com, ip: 209.85.160.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f169.google.com with SMTP id i20so1585926qtx.4
+        for <openembedded-devel@lists.openembedded.org>; Sat, 15 May 2021 08:49:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=QqVQliSU6yCHpX6tjXQ8FMl2GroboEx+Jxb3Od5hM8w=;
-        b=GC/GENd/TYmRnDb37qXvbwsPymeCaCngzGcvwbrlrM55cgB5Y7T7Zl8tHLVTQ7MnMD
-         4cuPf7YPlKvYN2YH/lQTfoT4C0cAyte1MpzqTPJVfEMISJGYiNGeHYZiPoqCCuWeKCnJ
-         jEZfxv9Blp9SfX5P15wIDpwlrLKPt+64xK7geQIFqgqPndJNT4WfQGz3HpOc4HBxCOO1
-         IRMiaMcweaw66+fYSrkC+JqALTLLq7gwqsLjXYMujDWxwK8bA15ZaKbdKRIPcNHSe59V
-         sbK/W/sIlng6c6t9Ohq6YoW1hTWLzQIrwpOL6gWGGh4rZ7CEhW/zzd8TuNC441v01fSy
-         PKsw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=wnjqAwlRR3BtbQHUQBX3Y4M2Q0myXmj6PbHRq1WgjCI=;
+        b=RjEDCiIZy52vZSqzstKXuCAYYUXqYJwGaFXFQBM3DxDLPVO5eXpEB8pF8RliDoZ7Pq
+         I7LGCewovH93riCGiBgyqU5vfSPKhN4Ftz7xyo787ZeP5p40wQjPgI5+IjUKXe8VnWoK
+         EaM0T3e0+m+qB4hc1DEKm2chjm4KUkQ/brRMoSWP2d3PXhjxx/YVNgdp4ExBidrP0xW0
+         3cC9CVrClcCkwwy0eBOXdsyGodnE1xYk1MhSPufL+IVr0W1ir660Yc9ifilbFSVlKZ3K
+         nn7Vu71Au/3itfdbYbYyj3ZmQBerCyejYfp9oiRncb+bo1qJvptcjZ1CGFzfULZoiCdT
+         SOkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=QqVQliSU6yCHpX6tjXQ8FMl2GroboEx+Jxb3Od5hM8w=;
-        b=OJQtsJZt8dXWRjwH2rQMhMIzrXwkaXO8dTOWNcScKCkR2CFY/OetU2jNoHh59Q2WJS
-         1vuLT/Pp3QY7ueI8aHRlh3uRy3AJA0ZZfHsQ0H653mkkaVYPDe7SpU/3jkvc6+XrqgET
-         4xznbslCM851bHpEagV2bON1mEg67Z0xiywpq7hewuBGF0ofmryfG36gzSB5Ek2BIkB0
-         LowhU6hLQVax4GGwHeWc5n2cZVA9Ak3s3mduV15J2/usRMySFApDo7jGEYMtIjnsoSjc
-         LGv2QouHGSkES2uCml/v9P+lZ3eyKzI4eAkTlIxVNR+eeamRgmOXjIaNOKsqg6JYNCcI
-         woRA==
-X-Gm-Message-State: AOAM532mSrtRfcxFVFzvXbdk8KuuhSpQY5sOkq5+4s6DPoE8q7vA9e0Z
-	KPIre1jyehudYvI2sA9gSVpWNfllWcDCNA==
-X-Google-Smtp-Source: ABdhPJxjXO0xIV3nFmS5go3eATsJhO7CtU79hyW3TYbs9Vvdyc4kvCvJxrilLSjh7Rli13wjEhi7ag==
-X-Received: by 2002:a63:5d66:: with SMTP id o38mr25411547pgm.444.1621093436157;
-        Sat, 15 May 2021 08:43:56 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a7ac])
-        by smtp.gmail.com with ESMTPSA id c83sm701380pfb.10.2021.05.15.08.43.55
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 15 May 2021 08:43:55 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] googletest: Update to tip of trunk
-Date: Sat, 15 May 2021 08:43:53 -0700
-Message-Id: <20210515154353.3889108-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=wnjqAwlRR3BtbQHUQBX3Y4M2Q0myXmj6PbHRq1WgjCI=;
+        b=YN/93Riyqb0/ywlsCphydl9C9Q2EKzZIIlqonmGRA5HpRGHbkFmZhoR3v8bb6wWuZm
+         TiwVRPg69GIUWB+0Fmpn8QgLQAyORQRLyhDFZKZVaUv/Vrmqtdd6Fz6ud2CXSbwElvjH
+         l2oViNJnmdgKz/z2WBXvBOVqe5USBY5eZ+c7a43Ia7RD6QeHRIV2twCeqK5EuMvduI6G
+         M4zKhRcYPTDtg7EQXv+sh3VkQ8EBHLrgAsa+F6WaQrnOQBtRucjlsUwS3gE57w66Gxfe
+         q/5GcxLziDHo625I6HznPiEnFEIdsFwlzQjeE8gm31jE2fWsehdkr/ZO/oC78lJr7WrI
+         QAGA==
+X-Gm-Message-State: AOAM532CnzrwAI1O3uZbR/AetqVgj1hJ6PEaA7pbMxsIYcPPspC9hYgv
+	ZyYBFDLBLUEefEsaPaF9QSy8tb4UZIFpZjJnru8=
+X-Google-Smtp-Source: ABdhPJzh33QAqH2KIy6LP+IreWuJOZvj6JKGCDtp38AN7RwmLLy3ZDNaSAjn6YbWzonp8zriIWjS1McmHzTJqT+peXo=
+X-Received: by 2002:ac8:44b1:: with SMTP id a17mr48875590qto.369.1621093783832;
+ Sat, 15 May 2021 08:49:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210514153705.3040536-1-raj.khem@gmail.com> <CALbNGRQ0O=CGu6rZUA23u0LjRJpkNcWSEEz256zPyLC4pQoNog@mail.gmail.com>
+In-Reply-To: <CALbNGRQ0O=CGu6rZUA23u0LjRJpkNcWSEEz256zPyLC4pQoNog@mail.gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Sat, 15 May 2021 08:49:17 -0700
+Message-ID: <CAMKF1sp54BqLyJp9vUyBfuo2DiY=DpE10pos+6G_2Zu8GQYU9Q@mail.gmail.com>
+Subject: Re: [meta-gnome][PATCH] nautilus: Exclude from builds
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Check the top level license for checksums, as it is now available and is
-BSD-3-Clause
+On Sat, May 15, 2021 at 12:42 AM Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om> wrote:
+>
+> On Fri, May 14, 2021 at 5:37 PM Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > It does not build with latest meson upgrades from OE-core
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > Cc: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> Please wait with this. I have fixing upgrade under test.
+>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-test/googletest/googletest_git.bb | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+No worries, Andreas, once you are ready I will re-enable it right
+away, I have pushed a patch to disable it so CI can continue
 
-diff --git a/meta-oe/recipes-test/googletest/googletest_git.bb b/meta-oe/recipes-test/googletest/googletest_git.bb
-index 354e7de337..2e0fecf7a9 100644
---- a/meta-oe/recipes-test/googletest/googletest_git.bb
-+++ b/meta-oe/recipes-test/googletest/googletest_git.bb
-@@ -2,15 +2,14 @@ DESCRIPTION = "Google's framework for writing C++ tests"
- HOMEPAGE = "https://github.com/google/googletest"
- SECTION = "libs"
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://googlemock/LICENSE;md5=cbbd27594afd089daa160d3a16dd515a \
--                    file://googletest/LICENSE;md5=cbbd27594afd089daa160d3a16dd515a"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=cbbd27594afd089daa160d3a16dd515a"
- 
--PV = "1.10.0"
-+PV = "1.10.0+git${SRCPV}"
- 
- PROVIDES += "gmock gtest"
- 
- S = "${WORKDIR}/git"
--SRCREV = "703bd9caab50b139428cea1aaff9974ebee5742e"
-+SRCREV = "662fe38e44900c007eccb65a5d2ea19df7bd520e"
- SRC_URI = "git://github.com/google/googletest.git"
- 
- inherit cmake
--- 
-2.31.1
-
+> Cheers.
+>
+> Andreas
