@@ -1,101 +1,80 @@
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
- by mx.groups.io with SMTP id smtpd.web08.1258.1621127221726039280
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.web09.1362.1621127616593320619
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 15 May 2021 18:07:01 -0700
+ Sat, 15 May 2021 18:13:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=jWCD12yW;
- spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f173.google.com with SMTP id l70so2231384pga.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 15 May 2021 18:07:01 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=mMGPoUgv;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f171.google.com with SMTP id t21so1349109plo.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 15 May 2021 18:13:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:references:from:organization:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=CimF9f6BPgNnZvgbzhPlKVlWr+5ynJrlRhhdEMlHh7M=;
-        b=jWCD12yWWXBukl2vllArL7/Y5xWWKN/Ayupb4NSGg1fm4NdfTMB7+Ira2LVEJe1Fou
-         LNQr4HkiimDpc4+JhBdrcjZq4Z7EwyCHaDYCLd5i1SiOL/EMHvrPIyVpAvpqRJOtGwZP
-         /I7KVSobbHzpPU5FWMNH4jqf6LSUOJ2MvhgB8znhrK1tjIzIHUfXS6G7VCA2gPG8qVeN
-         kCTiU1pv8K69PLzixMRsa6qruUsoLwSBeQ/9N18yFvdE7+e8SlMCTdBJsMDnjnn8v67o
-         jz+bMtzGuY+C5rm+5mgVZi22U9Fcg9DDmdXMccCLeJJeGYaT4cA6r8vVHiIAJns8GAgR
-         2vEg==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Hn2wMibkvtCvn51/9/O0yhTzQTYVWmrxZxn9kasDYkI=;
+        b=mMGPoUgvQxQKZHQDk+tEmfIEvCtDIkE7ksjeeBmyxyZJxWud6viOcD52freE/3JJaK
+         MI2zcFTgSmOzgF76UYdRa9jxHxTZzn7UpviBdA1U+IsHLiR5hzgdnyJtynJBVNfC/VCW
+         un9ZjcopU9wOcOzYqebA5OY6zxtGVFXqxZJQeBAiZiwfJKMsY5q6Mp58p3r22JAWyIfC
+         KjsGmm3LeFGtDs3lJ3fUPRDQpXZ6DyL1AdlS+gXB+NoLezqubGza3yEfjf8TOg8+w4PW
+         Jsoizrzg7V94Y9Gvx8gBqrVA/DY3fgj62o0IMVxBPsRJ9zWuzwfaFKhVSb5pBL3MDYyG
+         +ySA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=CimF9f6BPgNnZvgbzhPlKVlWr+5ynJrlRhhdEMlHh7M=;
-        b=tLi1JsyFMp1uJn3urnNze7gvFYSy5DYgqk+9/HhQt+kEExHXGNuvoYl27X4XuM4fgm
-         N9XuWDy00v9lZKvi7wkQCiGoN6xws36uwz8PUwvb3uOeCF2CSPi5LXyYso48basiUWqC
-         KqoEa201IsnMXKUqCTFjo9QkmBJo4MlIMufSG4PgF7oVaV15KTSTPvPbBN7411JcOcSt
-         CSfPhk+Ilq5lclLUycigctiOqXqZ27xbgD5lDXWXuHBArjBfEszV2CHrdJRFGyW9SQ3z
-         TXzX+fKMed6OifEcmmpE+6O0pjVDOluAzDnq9G896SZAwJX6hx3M23PbmoUDplPn4y34
-         1Ydw==
-X-Gm-Message-State: AOAM5309mS90F26Kstc279H/yNlriDlX1u5H4P87dcTLyaDZ5v6UTH5B
-	z34y3P6/q/iZwydTIupTEUJhf1XaJlODeg==
-X-Google-Smtp-Source: ABdhPJx6bMcktZFMVVfgiSKH8OskJ89GPTUYMqT9M9CD6kl1VzNO5ZSRkyxv1WUlMbtNtB+WjcM5tQ==
-X-Received: by 2002:a05:6a00:198d:b029:2c5:7ce9:aa62 with SMTP id d13-20020a056a00198db02902c57ce9aa62mr29912277pfl.51.1621127220960;
-        Sat, 15 May 2021 18:07:00 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Hn2wMibkvtCvn51/9/O0yhTzQTYVWmrxZxn9kasDYkI=;
+        b=hg5EYC2nulK8qycLxf6DG9OtuojaIm96UzIf76Us685V3Vp3OxZlwIBGZpkyJU0U8n
+         R0cMONvmzKVMe5cykYhkux8gTa5Li/pvm8WT81jRTW/vw4N2huGEs5YwH2byDo0avthr
+         XqNOOXx0Jx6OFZDcWU6SFioEq+C7awDs4/B9miGuzm24QD0Py4AbKAG9z2ZE1WRCOTq4
+         n+PpdXFtHSR3pLnauTXcfMPt7n/6cKLuSj6aRny0tVZ5Zc19YSuG1WDMGULyn8OZ2BTH
+         6gcM3LIyjwIiiVkr/4SS6orie0eMvYelERFJPlqLntKKXJx5dzZE5jhQdUsg4IqJ2FPV
+         02sQ==
+X-Gm-Message-State: AOAM530DIgGT3tY+l0eG6HphaIAC2dfkS2tMTbxcX0sWfYrMSFMfK29r
+	6lFJY70O5nGHaKQnxVzjug2eiC3OXayDug==
+X-Google-Smtp-Source: ABdhPJxS0H8dBazXSvzwmxPibYPN7+OipS5NH/hFly7kQlldFIjxj3CMwPPpWBzmzYAyz9pCjt5zRg==
+X-Received: by 2002:a17:902:e8c8:b029:ee:f249:e416 with SMTP id v8-20020a170902e8c8b02900eef249e416mr52069310plg.3.1621127615979;
+        Sat, 15 May 2021 18:13:35 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:a0f0::9c7a? ([2601:646:9200:a0f0::9c7a])
-        by smtp.gmail.com with ESMTPSA id w26sm3431164pgl.50.2021.05.15.18.06.59
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 15 May 2021 18:07:00 -0700 (PDT)
-Subject: Re: [oe] [PATCH 15/20] gegl: add PACKAGECONFIG libraw and enable it by default
-To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>,
- openembedded-devel@lists.openembedded.org
-References: <20210515233853.583490-1-schnitzeltony@gmail.com>
- <20210515233853.583490-15-schnitzeltony@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a7ac])
+        by smtp.gmail.com with ESMTPSA id b6sm7075241pfb.27.2021.05.15.18.13.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 15 May 2021 18:13:35 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <104112c6-ce22-ce7f-1d35-73bde2ca6e38@gmail.com>
-Date: Sat, 15 May 2021 18:06:58 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>,
+	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Subject: [meta-oe][PATCH] libraw: Move from meta-qt5-extra to meta-oe
+Date: Sat, 15 May 2021 18:13:32 -0700
+Message-Id: <20210516011332.664389-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-In-Reply-To: <20210515233853.583490-15-schnitzeltony@gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Andreas Müller <schnitzeltony@gmail.com>
+---
+ meta-oe/recipes-support/libraw/libraw_0.20.2.bb | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libraw/libraw_0.20.2.bb
 
+diff --git a/meta-oe/recipes-support/libraw/libraw_0.20.2.bb b/meta-oe/recipes-support/libraw/libraw_0.20.2.bb
+new file mode 100644
+index 0000000000..0a7c534be2
+--- /dev/null
++++ b/meta-oe/recipes-support/libraw/libraw_0.20.2.bb
+@@ -0,0 +1,11 @@
++SUMMARY = "raw image decoder"
++LICENSE = "LGPL-2.1 | CDDL-1.0"
++LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=74c9dffdc42805f9c0de2f97df6031fc"
++
++SRC_URI = "git://github.com/LibRaw/LibRaw.git"
++SRCREV = "0209b6a2caec189e6d1a9b21c10e9e49f46e5a92"
++S = "${WORKDIR}/git"
++
++inherit autotools pkgconfig
++
++DEPENDS = "jpeg jasper lcms"
+-- 
+2.31.1
 
-On 5/15/21 4:38 PM, Andreas Müller wrote:
-> Without gnome-photos fails to start and complains:
-> | (org.gnome.Photos:952): gnome-photos-WARNING **: 08:02:54.154: Unable to find GEGL operation gegl:raw-load: Check your GEGL install
-> | (org.gnome.Photos:952): gnome-photos-CRITICAL **: 08:02:54.154: photos_application_create_window: assertion 'gegl_sanity_checked' failed
-> 
-> Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-> ---
->   meta-gnome/recipes-gimp/gegl/gegl_0.4.30.bb | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/meta-gnome/recipes-gimp/gegl/gegl_0.4.30.bb b/meta-gnome/recipes-gimp/gegl/gegl_0.4.30.bb
-> index d08a3a3c9..06abf799e 100644
-> --- a/meta-gnome/recipes-gimp/gegl/gegl_0.4.30.bb
-> +++ b/meta-gnome/recipes-gimp/gegl/gegl_0.4.30.bb
-> @@ -28,7 +28,7 @@ SRC_URI = " \
->   "
->   SRC_URI[sha256sum] = "c112782cf4096969e23217ccdfabe42284e35d5435ff0c43d40e4c70faeca8dd"
->   
-> -PACKAGECONFIG ??= "gexiv2 jpeg libpng librsvg sdl2"
-> +PACKAGECONFIG ??= "gexiv2 jpeg libpng libraw librsvg sdl2"
->   PACKAGECONFIG_class-native = "libpng librsvg"
->   
->   PACKAGECONFIG[jasper] = "-Djasper=enabled,-Djasper=disabled,jasper"
-> @@ -38,6 +38,7 @@ PACKAGECONFIG[jpeg] = "-Dlibjpeg=enabled,-Dlibjpeg=disabled,jpeg"
->   PACKAGECONFIG[lcms] = "-Dlcms=enabled,-Dlcms=disabled,lcms"
->   PACKAGECONFIG[libav] = "-Dlibav=enabled,-Dlibav=disabled,libav"
->   PACKAGECONFIG[libpng] = "-Dlibpng=enabled,-Dlibpng=disabled,libpng"
-> +PACKAGECONFIG[libraw] = "-Dlibraw=enabled,-Dlibraw=disabled,libraw"
-
-there is no libraw recipe in core or meta-oe or meta-gnome we only have 
-libraw1394
-
->   PACKAGECONFIG[librsvg] = "-Dlibrsvg=enabled,-Dlibrsvg=disabled,librsvg"
->   PACKAGECONFIG[sdl] = "-Dsdl1=enabled,-Dsdl1=disabled,virtual/libsdl"
->   PACKAGECONFIG[sdl2] = "-Dsdl2=enabled,-Dsdl2=disabled,virtual/libsdl2"
-> 
-> 
-> 
-> 
-> 
