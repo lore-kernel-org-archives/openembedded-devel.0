@@ -1,195 +1,261 @@
-Received: from mail-qv1-f45.google.com (mail-qv1-f45.google.com [209.85.219.45])
- by mx.groups.io with SMTP id smtpd.web09.3784.1621153600938584136
+Received: from mail-vs1-f49.google.com (mail-vs1-f49.google.com [209.85.217.49])
+ by mx.groups.io with SMTP id smtpd.web11.3898.1621154772381016152
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 16 May 2021 01:26:41 -0700
+ Sun, 16 May 2021 01:46:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Y/l8LhlX;
- spf=pass (domain: gmail.com, ip: 209.85.219.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f45.google.com with SMTP id v18so1714001qvx.10
-        for <openembedded-devel@lists.openembedded.org>; Sun, 16 May 2021 01:26:40 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=d77NfFpk;
+ spf=pass (domain: gmail.com, ip: 209.85.217.49, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-vs1-f49.google.com with SMTP id x13so1664369vsh.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 16 May 2021 01:46:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=0+VcTy17yT1br5JHXpEdZq1hLp9uapiWj+VqICj6uf4=;
-        b=Y/l8LhlXK3Pmyn+X6ECRqpRUZx3gKi88ntEVWEQJzZwhtVuK+d0FCOjcf1uwIcKtZT
-         d9AYX6acMkPkoYWSKS7DbKDntTrb4V282aWygsbiZlUCLx/FbCsofjENNm2GAbqef+7t
-         8YoeTBC0zAPl/SLjLzIUOqVRoesYUUETsfOLuGWi2gSYWZQSyFPvDmUlKoWLeT6pMc1c
-         0X4p2MxaoyQoBRItA3GRC7KdnPwpz233QCdaYB0S8thjltGP3vzTNIGfSwaYsZpJ+rAt
-         4UUnr3dfKBPa8bgpMxZHcvN8npJ8KG8wzNR7JL09g6MGFycTpjpOj4eDfZl4UOenUbor
-         QS9w==
+        bh=FHQ2f4eNV9h7JbmKeFNI0dlpeKYRGif3DzSpiFmNuDM=;
+        b=d77NfFpkHw3tduWXW3ZiDyl2x/8Qt78bVQHHksqetYvJSKscvcfXxrb6wsPlKAx5hg
+         TX/2PfFbYjjOEijpOQmNSXxBFsXXjBmMSFca5T+Dv+oW0lIhjhKBy/PropgJ8w2r8Z0Z
+         3d4wf4XyaBwO4LlperM3gVVOrb/QlBj8Ec6j6zGxjkWRSGFB4akOBoL5H1SoOOCutZyq
+         I25Y/Ri3IepzZhpv56/Bgha+cu/5+u8bmv/6x8x1DM4pei5p/PjxWV3dFYowugw5uMFd
+         njRIsNr87RpDde6x2yW0udqgFGg+sVCE0X+uDPRHdAXvN7yY1o/yL3T3nFdtVc9Lj/mu
+         QkCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=0+VcTy17yT1br5JHXpEdZq1hLp9uapiWj+VqICj6uf4=;
-        b=NDRNQlnG8EfjUEzjua7fOCm4u4ZR6Oi/859lDxdr4QMcitrOMVQVVAfovprLdCOdai
-         b9JkVrtdfwgHoeDRx+Aes/U2BEAHX2gI+sppNJ6OYPh7sttM6yPgc4xEI7CbNi5WDpcp
-         OxESbzeHhyHLJpb4xAcrc9OIWFWWk+w854sv/9sxLS3H2FrX55MxgKD81ZAu65/KNKtd
-         a9drVsluO77hQFGzgKdGZ68WFBGPaZ03LBIGCOLrYGfMPpRc4XFnaNmosbx9gv0AcjGd
-         syD0itg0Rw8gtaubMn7b0KFc2la/ft2sutQu8PuVvL8MyyQJF3LefyGSz16NKn6yVOjh
-         UXag==
-X-Gm-Message-State: AOAM532sp+KvwxxxC3Q7bQR+bG3BWHoek4IQkFoWVXXhHCUAITXj5uUM
-	YIhDNof45DnOgRjd1+AjGSZvRwQJPVjWsqRlxx0=
-X-Google-Smtp-Source: ABdhPJxq1BvCTYF1HadLTr4dMhU3AOE6JkXYpe/DGUhCMoOd2WXolW52IoVZikg+Hi7wy/lD6Rg7o6v/5Zx4BpueE38=
-X-Received: by 2002:a0c:ee23:: with SMTP id l3mr54504328qvs.55.1621153599979;
- Sun, 16 May 2021 01:26:39 -0700 (PDT)
+        bh=FHQ2f4eNV9h7JbmKeFNI0dlpeKYRGif3DzSpiFmNuDM=;
+        b=W03EzOhYrXGh5VIP88efNU00jVqgewc8S+nWlDKuVTO0T3w5oHc75y+GaSCqO6Xwl7
+         jylbDJiBiScHncZ9Q1RPRCMM45kHvTQ77W/PxiUNIxEnDevvKcwR+dwhQVEOkAL8zVZS
+         VMTqY7sQKY1nGD3Obwo8KjcDXTaI/YuKvgpmTR56eyfeS/fXu7xuMBbE8Q5jdzy9kJ34
+         rRmu8kCLEuzaa4wTGfvQhu/gr2Z3IJ+qld1QHuProNlZ4eVVBqkrn66fYjMLlbBe3Z00
+         YCeUcg76OBCufENXbktS55NFBs/ACuRDpnRzXSWRoZPcu1MjDrsypIiSC6ePAqhiz8RY
+         iaLw==
+X-Gm-Message-State: AOAM532agP02hIiEE0yzssfVL/rV/WNj+hnaRIAtVhEOYuebQ64bHprE
+	9ldqJdHlGTzURJpGh4D2EQIwHTLK0hLOH6ce0hw=
+X-Google-Smtp-Source: ABdhPJwfpQ+/WVMWhwCOKVOOM06j0SH2/l4ejouvsXSXBgfs/sFfVu9x3J2ZBGPzTuDLWripkxoYfuUbeJUcrznX24M=
+X-Received: by 2002:a67:1447:: with SMTP id 68mr46725091vsu.20.1621154771505;
+ Sun, 16 May 2021 01:46:11 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210515233853.583490-1-schnitzeltony@gmail.com>
- <20210515233853.583490-15-schnitzeltony@gmail.com> <104112c6-ce22-ce7f-1d35-73bde2ca6e38@gmail.com>
- <CALbNGRR3i9-6aPmAShi+GKMObDB_F3N5rgGCS7y=pWYwWv2=0Q@mail.gmail.com>
-In-Reply-To: <CALbNGRR3i9-6aPmAShi+GKMObDB_F3N5rgGCS7y=pWYwWv2=0Q@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sun, 16 May 2021 01:26:29 -0700
-Message-ID: <CAMKF1soSf6tBdAMof7VbWokEjiNx17SS2ajSqPm-MSV9yTwK6w@mail.gmail.com>
-Subject: Re: [oe] [PATCH 15/20] gegl: add PACKAGECONFIG libraw and enable it by default
+In-Reply-To: <20210515233853.583490-1-schnitzeltony@gmail.com>
+From: "Alexander Kanavin" <alex.kanavin@gmail.com>
+Date: Sun, 16 May 2021 10:46:00 +0200
+Message-ID: <CANNYZj8mfJ0txH337fGheaxdGJ-JCWR3Uc-Z2vokAKcJBmuTdQ@mail.gmail.com>
+Subject: Re: [oe] [PATCH 01/20] tracker: upgrade 2.3.6 -> 3.0.4
 To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="00000000000074023805c26e3c00"
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="00000000000048153205c26e8279"
 
---00000000000074023805c26e3c00
+--00000000000048153205c26e8279
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, May 16, 2021 at 12:57 AM Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om>
+Thanks, just want to note that the new gnome version scheme doesn't use the
+odd-even semantics anymore, so upstream-version-is-even should be dropped
+from 40.x versions.
+
+Alex
+
+On Sun, 16 May 2021 at 01:39, Andreas M=C3=BCller <schnitzeltony@gmail.com=
+>
 wrote:
 
-> On Sun, May 16, 2021 at 3:07 AM Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> >
-> >
-> > On 5/15/21 4:38 PM, Andreas M=C3=BCller wrote:
-> > > Without gnome-photos fails to start and complains:
-> > > | (org.gnome.Photos:952): gnome-photos-WARNING **: 08:02:54.154:
-> Unable to find GEGL operation gegl:raw-load: Check your GEGL install
-> > > | (org.gnome.Photos:952): gnome-photos-CRITICAL **: 08:02:54.154:
-> photos_application_create_window: assertion 'gegl_sanity_checked' failed
-> > >
-> > > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> > > ---
-> > >   meta-gnome/recipes-gimp/gegl/gegl_0.4.30.bb | 3 ++-
-> > >   1 file changed, 2 insertions(+), 1 deletion(-)
-> > >
-> > > diff --git a/meta-gnome/recipes-gimp/gegl/gegl_0.4.30.bb
-> b/meta-gnome/recipes-gimp/gegl/gegl_0.4.30.bb
-> > > index d08a3a3c9..06abf799e 100644
-> > > --- a/meta-gnome/recipes-gimp/gegl/gegl_0.4.30.bb
-> > > +++ b/meta-gnome/recipes-gimp/gegl/gegl_0.4.30.bb
-> > > @@ -28,7 +28,7 @@ SRC_URI =3D " \
-> > >   "
-> > >   SRC_URI[sha256sum] =3D
-> "c112782cf4096969e23217ccdfabe42284e35d5435ff0c43d40e4c70faeca8dd"
-> > >
-> > > -PACKAGECONFIG ??=3D "gexiv2 jpeg libpng librsvg sdl2"
-> > > +PACKAGECONFIG ??=3D "gexiv2 jpeg libpng libraw librsvg sdl2"
-> > >   PACKAGECONFIG_class-native =3D "libpng librsvg"
-> > >
-> > >   PACKAGECONFIG[jasper] =3D "-Djasper=3Denabled,-Djasper=3Ddisabled,j=
-asper"
-> > > @@ -38,6 +38,7 @@ PACKAGECONFIG[jpeg] =3D
-> "-Dlibjpeg=3Denabled,-Dlibjpeg=3Ddisabled,jpeg"
-> > >   PACKAGECONFIG[lcms] =3D "-Dlcms=3Denabled,-Dlcms=3Ddisabled,lcms"
-> > >   PACKAGECONFIG[libav] =3D "-Dlibav=3Denabled,-Dlibav=3Ddisabled,liba=
-v"
-> > >   PACKAGECONFIG[libpng] =3D "-Dlibpng=3Denabled,-Dlibpng=3Ddisabled,l=
-ibpng"
-> > > +PACKAGECONFIG[libraw] =3D "-Dlibraw=3Denabled,-Dlibraw=3Ddisabled,li=
-braw"
-> >
-> > there is no libraw recipe in core or meta-oe or meta-gnome we only have
-> > libraw1394
-> >
-> I did not check properly - it is in meta-qt5-extra. Will send V2 adding
-> libraw
+> * huge bump is required for upcoming nautilus 40.1
+> * PACKAGECONFIGS have no meson option anymore so remove them
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> ---
+>  .../{tracker_2.3.6.bb =3D> tracker_3.0.4.bb}    | 21 ++++++++++--------=
+-
+>  1 file changed, 11 insertions(+), 10 deletions(-)
+>  rename meta-gnome/recipes-gnome/tracker/{tracker_2.3.6.bb =3D>
+> tracker_3.0.4.bb} (59%)
+>
+> diff --git a/meta-gnome/recipes-gnome/tracker/tracker_2.3.6.bb
+> b/meta-gnome/recipes-gnome/tracker/tracker_3.0.4.bb
+> similarity index 59%
+> rename from meta-gnome/recipes-gnome/tracker/tracker_2.3.6.bb
+> rename to meta-gnome/recipes-gnome/tracker/tracker_3.0.4.bb
+> index 2c11976ca..82e3d006e 100644
+> --- a/meta-gnome/recipes-gnome/tracker/tracker_2.3.6.bb
+> +++ b/meta-gnome/recipes-gnome/tracker/tracker_3.0.4.bb
+> @@ -6,7 +6,6 @@ LIC_FILES_CHKSUM =3D " \
+>  "
+>
+>  DEPENDS =3D " \
+> -    libxml2-native \
+>      dbus-native \
+>      glib-2.0 \
+>      sqlite3 \
+> @@ -22,30 +21,32 @@ GNOMEBASEBUILDCLASS =3D "meson"
+>
+>  inherit gnomebase gsettings gobject-introspection vala gtk-doc manpages
+> bash-completion features_check
+>
+> -SRC_URI[archive.sha256sum] =3D
+> "bd1eb4122135296fa7b57b1c3fa0ed602cf7d06c0b8e534d0bd17ff5f97feef2"
+> +SRC_URI[archive.sha256sum] =3D
+> "c120d81f2df94aa794b1a7953b55cfa46de318ed68e6f3b5ad4fce0c729c2483"
+>
+>  # gobject-introspection is mandatory and cannot be configured
+>  REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
+>  UNKNOWN_CONFIGURE_WHITELIST_append =3D " introspection"
+>
+> -PACKAGECONFIG ??=3D "fts"
+> -PACKAGECONFIG[networkmanager] =3D
+> "-Dnetwork_manager=3Denabled,-Dnetwork_manager=3Ddisabled,networkmanger"
+> -# full text search requires sqlite3 build with PACKAGECONFIG[fts5] set
+> -PACKAGECONFIG[fts] =3D "-Dfts=3Dtrue,-Dfts=3Dfalse"
+> +# text search is not an option anymore and requires sqlite3 build with
+> +# PACKAGECONFIG[fts5] set (default)
+>
+>  # set required cross property sqlite3_has_fts5
+>  do_write_config[vardeps] +=3D "PACKAGECONFIG"
+>  do_write_config_append() {
+>      echo "[properties]" > ${WORKDIR}/meson-tracker.cross
+> -    echo "sqlite3_has_fts5 =3D '${@bb.utils.contains('PACKAGECONFIG',
+> 'fts', 'true', 'false', d)}'" >> ${WORKDIR}/meson-tracker.cross
+> +    echo "sqlite3_has_fts5 =3D 'true'" >> ${WORKDIR}/meson-tracker.cros=
+s
+>  }
+>
+> -EXTRA_OEMESON =3D "--cross-file ${WORKDIR}/meson-tracker.cross \
+> -                 -Dsystemd_user_services=3D${systemd_user_unitdir} \
+> +EXTRA_OEMESON =3D " \
+> +    --cross-file ${WORKDIR}/meson-tracker.cross \
+> +    -Dman=3Dfalse \
+> +    -Dsystemd_user_services=3D${@bb.utils.contains('DISTRO_FEATURES',
+> 'systemd', 'true', 'false', d)} \
+> +    -Dsystemd_user_services_dir=3D${systemd_user_unitdir} \
+>  "
+>
+>  FILES_${PN} +=3D " \
+>      ${datadir}/dbus-1 \
+> -    ${libdir}/tracker-2.0 \
+> +    ${datadir}/tracker3 \
+> +    ${libdir}/tracker-3.0 \
+>      ${systemd_user_unitdir} \
+>  "
+> --
+> 2.31.1
+>
+>
+>=20
+>
 >
 
-I already sent a patch
-
-
-> Cheers
->
-> Andreas
->
-
---00000000000074023805c26e3c00
+--00000000000048153205c26e8279
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Sun, May 16, 2021 at 12:57 AM Andreas M=C3=BCller &lt;<a=
- href=3D"mailto:schnitzeltony@gmail.com">schnitzeltony@gmail.com</a>&gt; wr=
-ote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left-width:1px;border-left-style:solid;padding-left:1ex;borde=
-r-left-color:rgb(204,204,204)">On Sun, May 16, 2021 at 3:07 AM Khem Raj &lt=
-;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmail.com=
-</a>&gt; wrote:<br>
-&gt;<br>
-&gt;<br>
-&gt;<br>
-&gt; On 5/15/21 4:38 PM, Andreas M=C3=BCller wrote:<br>
-&gt; &gt; Without gnome-photos fails to start and complains:<br>
-&gt; &gt; | (org.gnome.Photos:952): gnome-photos-WARNING **: 08:02:54.154: =
-Unable to find GEGL operation gegl:raw-load: Check your GEGL install<br>
-&gt; &gt; | (org.gnome.Photos:952): gnome-photos-CRITICAL **: 08:02:54.154:=
- photos_application_create_window: assertion &#39;gegl_sanity_checked&#39; =
-failed<br>
-&gt; &gt;<br>
-&gt; &gt; Signed-off-by: Andreas M=C3=BCller &lt;<a href=3D"mailto:schnitze=
-ltony@gmail.com" target=3D"_blank">schnitzeltony@gmail.com</a>&gt;<br>
-&gt; &gt; ---<br>
-&gt; &gt;=C2=A0 =C2=A0meta-gnome/recipes-gimp/gegl/<a href=3D"http://gegl_0=
-.4.30.bb" rel=3D"noreferrer" target=3D"_blank">gegl_0.4.30.bb</a> | 3 ++-<b=
-r>
-&gt; &gt;=C2=A0 =C2=A01 file changed, 2 insertions(+), 1 deletion(-)<br>
-&gt; &gt;<br>
-&gt; &gt; diff --git a/meta-gnome/recipes-gimp/gegl/<a href=3D"http://gegl_=
-0.4.30.bb" rel=3D"noreferrer" target=3D"_blank">gegl_0.4.30.bb</a> b/meta-g=
-nome/recipes-gimp/gegl/<a href=3D"http://gegl_0.4.30.bb" rel=3D"noreferrer"=
- target=3D"_blank">gegl_0.4.30.bb</a><br>
-&gt; &gt; index d08a3a3c9..06abf799e 100644<br>
-&gt; &gt; --- a/meta-gnome/recipes-gimp/gegl/<a href=3D"http://gegl_0.4.30.=
-bb" rel=3D"noreferrer" target=3D"_blank">gegl_0.4.30.bb</a><br>
-&gt; &gt; +++ b/meta-gnome/recipes-gimp/gegl/<a href=3D"http://gegl_0.4.30.=
-bb" rel=3D"noreferrer" target=3D"_blank">gegl_0.4.30.bb</a><br>
-&gt; &gt; @@ -28,7 +28,7 @@ SRC_URI =3D &quot; \<br>
-&gt; &gt;=C2=A0 =C2=A0&quot;<br>
-&gt; &gt;=C2=A0 =C2=A0SRC_URI[sha256sum] =3D &quot;c112782cf4096969e23217cc=
-dfabe42284e35d5435ff0c43d40e4c70faeca8dd&quot;<br>
-&gt; &gt;<br>
-&gt; &gt; -PACKAGECONFIG ??=3D &quot;gexiv2 jpeg libpng librsvg sdl2&quot;<=
-br>
-&gt; &gt; +PACKAGECONFIG ??=3D &quot;gexiv2 jpeg libpng libraw librsvg sdl2=
-&quot;<br>
-&gt; &gt;=C2=A0 =C2=A0PACKAGECONFIG_class-native =3D &quot;libpng librsvg&q=
-uot;<br>
-&gt; &gt;<br>
-&gt; &gt;=C2=A0 =C2=A0PACKAGECONFIG[jasper] =3D &quot;-Djasper=3Denabled,-D=
-jasper=3Ddisabled,jasper&quot;<br>
-&gt; &gt; @@ -38,6 +38,7 @@ PACKAGECONFIG[jpeg] =3D &quot;-Dlibjpeg=3Denabl=
-ed,-Dlibjpeg=3Ddisabled,jpeg&quot;<br>
-&gt; &gt;=C2=A0 =C2=A0PACKAGECONFIG[lcms] =3D &quot;-Dlcms=3Denabled,-Dlcms=
-=3Ddisabled,lcms&quot;<br>
-&gt; &gt;=C2=A0 =C2=A0PACKAGECONFIG[libav] =3D &quot;-Dlibav=3Denabled,-Dli=
-bav=3Ddisabled,libav&quot;<br>
-&gt; &gt;=C2=A0 =C2=A0PACKAGECONFIG[libpng] =3D &quot;-Dlibpng=3Denabled,-D=
-libpng=3Ddisabled,libpng&quot;<br>
-&gt; &gt; +PACKAGECONFIG[libraw] =3D &quot;-Dlibraw=3Denabled,-Dlibraw=3Ddi=
-sabled,libraw&quot;<br>
-&gt;<br>
-&gt; there is no libraw recipe in core or meta-oe or meta-gnome we only hav=
-e<br>
-&gt; libraw1394<br>
-&gt;<br>
-I did not check properly - it is in meta-qt5-extra. Will send V2 adding lib=
-raw<br>
-</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">I already sent a=
- patch=C2=A0</div><div dir=3D"auto"><br></div><blockquote class=3D"gmail_qu=
-ote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-st=
-yle:solid;padding-left:1ex;border-left-color:rgb(204,204,204)"><br>
-Cheers<br>
+<div dir=3D"ltr"><div>Thanks, just want to note that the new gnome version =
+scheme doesn&#39;t use the odd-even semantics anymore, so upstream-version-=
+is-even should be dropped from 40.x versions.</div><div><br></div><div>Alex=
+<br></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gm=
+ail_attr">On Sun, 16 May 2021 at 01:39, Andreas M=C3=BCller &lt;<a href=3D"=
+mailto:schnitzeltony@gmail.com">schnitzeltony@gmail.com</a>&gt; wrote:<br><=
+/div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bo=
+rder-left:1px solid rgb(204,204,204);padding-left:1ex">* huge bump is requi=
+red for upcoming nautilus 40.1<br>
+* PACKAGECONFIGS have no meson option anymore so remove them<br>
 <br>
-Andreas<br>
-</blockquote></div></div>
+Signed-off-by: Andreas M=C3=BCller &lt;<a href=3D"mailto:schnitzeltony@gma=
+il.com" target=3D"_blank">schnitzeltony@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0.../{<a href=3D"http://tracker_2.3.6.bb" rel=3D"noreferrer" target=
+=3D"_blank">tracker_2.3.6.bb</a> =3D&gt; <a href=3D"http://tracker_3.0.4.b=
+b" rel=3D"noreferrer" target=3D"_blank">tracker_3.0.4.bb</a>}=C2=A0 =C2=A0 =
+| 21 ++++++++++---------<br>
+=C2=A01 file changed, 11 insertions(+), 10 deletions(-)<br>
+=C2=A0rename meta-gnome/recipes-gnome/tracker/{<a href=3D"http://tracker_2=
+.3.6.bb" rel=3D"noreferrer" target=3D"_blank">tracker_2.3.6.bb</a> =3D&gt; =
+<a href=3D"http://tracker_3.0.4.bb" rel=3D"noreferrer" target=3D"_blank">tr=
+acker_3.0.4.bb</a>} (59%)<br>
+<br>
+diff --git a/meta-gnome/recipes-gnome/tracker/<a href=3D"http://tracker_2.=
+3.6.bb" rel=3D"noreferrer" target=3D"_blank">tracker_2.3.6.bb</a> b/meta-gn=
+ome/recipes-gnome/tracker/<a href=3D"http://tracker_3.0.4.bb" rel=3D"norefe=
+rrer" target=3D"_blank">tracker_3.0.4.bb</a><br>
+similarity index 59%<br>
+rename from meta-gnome/recipes-gnome/tracker/<a href=3D"http://tracker_2.3=
+.6.bb" rel=3D"noreferrer" target=3D"_blank">tracker_2.3.6.bb</a><br>
+rename to meta-gnome/recipes-gnome/tracker/<a href=3D"http://tracker_3.0.4=
+.bb" rel=3D"noreferrer" target=3D"_blank">tracker_3.0.4.bb</a><br>
+index 2c11976ca..82e3d006e 100644<br>
+--- a/meta-gnome/recipes-gnome/tracker/<a href=3D"http://tracker_2.3.6.bb"=
+ rel=3D"noreferrer" target=3D"_blank">tracker_2.3.6.bb</a><br>
++++ b/meta-gnome/recipes-gnome/tracker/<a href=3D"http://tracker_3.0.4.bb"=
+ rel=3D"noreferrer" target=3D"_blank">tracker_3.0.4.bb</a><br>
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM =3D &quot; \<br>
+=C2=A0&quot;<br>
+<br>
+=C2=A0DEPENDS =3D &quot; \<br>
+-=C2=A0 =C2=A0 libxml2-native \<br>
+=C2=A0 =C2=A0 =C2=A0dbus-native \<br>
+=C2=A0 =C2=A0 =C2=A0glib-2.0 \<br>
+=C2=A0 =C2=A0 =C2=A0sqlite3 \<br>
+@@ -22,30 +21,32 @@ GNOMEBASEBUILDCLASS =3D &quot;meson&quot;<br>
+<br>
+=C2=A0inherit gnomebase gsettings gobject-introspection vala gtk-doc manpa=
+ges bash-completion features_check<br>
+<br>
+-SRC_URI[archive.sha256sum] =3D &quot;bd1eb4122135296fa7b57b1c3fa0ed602cf7=
+d06c0b8e534d0bd17ff5f97feef2&quot;<br>
++SRC_URI[archive.sha256sum] =3D &quot;c120d81f2df94aa794b1a7953b55cfa46de3=
+18ed68e6f3b5ad4fce0c729c2483&quot;<br>
+<br>
+=C2=A0# gobject-introspection is mandatory and cannot be configured<br>
+=C2=A0REQUIRED_DISTRO_FEATURES =3D &quot;gobject-introspection-data&quot;<=
+br>
+=C2=A0UNKNOWN_CONFIGURE_WHITELIST_append =3D &quot; introspection&quot;<br=
+>
+<br>
+-PACKAGECONFIG ??=3D &quot;fts&quot;<br>
+-PACKAGECONFIG[networkmanager] =3D &quot;-Dnetwork_manager=3Denabled,-Dnet=
+work_manager=3Ddisabled,networkmanger&quot;<br>
+-# full text search requires sqlite3 build with PACKAGECONFIG[fts5] set<br=
+>
+-PACKAGECONFIG[fts] =3D &quot;-Dfts=3Dtrue,-Dfts=3Dfalse&quot;<br>
++# text search is not an option anymore and requires sqlite3 build with<br=
+>
++# PACKAGECONFIG[fts5] set (default)<br>
+<br>
+=C2=A0# set required cross property sqlite3_has_fts5<br>
+=C2=A0do_write_config[vardeps] +=3D &quot;PACKAGECONFIG&quot;<br>
+=C2=A0do_write_config_append() {<br>
+=C2=A0 =C2=A0 =C2=A0echo &quot;[properties]&quot; &gt; ${WORKDIR}/meson-tr=
+acker.cross<br>
+-=C2=A0 =C2=A0 echo &quot;sqlite3_has_fts5 =3D &#39;${@bb.utils.contains(&=
+#39;PACKAGECONFIG&#39;, &#39;fts&#39;, &#39;true&#39;, &#39;false&#39;, d)}=
+&#39;&quot; &gt;&gt; ${WORKDIR}/meson-tracker.cross<br>
++=C2=A0 =C2=A0 echo &quot;sqlite3_has_fts5 =3D &#39;true&#39;&quot; &gt;&g=
+t; ${WORKDIR}/meson-tracker.cross<br>
+=C2=A0}<br>
+<br>
+-EXTRA_OEMESON =3D &quot;--cross-file ${WORKDIR}/meson-tracker.cross \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0-Dsystemd_u=
+ser_services=3D${systemd_user_unitdir} \<br>
++EXTRA_OEMESON =3D &quot; \<br>
++=C2=A0 =C2=A0 --cross-file ${WORKDIR}/meson-tracker.cross \<br>
++=C2=A0 =C2=A0 -Dman=3Dfalse \<br>
++=C2=A0 =C2=A0 -Dsystemd_user_services=3D${@bb.utils.contains(&#39;DISTRO_=
+FEATURES&#39;, &#39;systemd&#39;, &#39;true&#39;, &#39;false&#39;, d)} \<br=
+>
++=C2=A0 =C2=A0 -Dsystemd_user_services_dir=3D${systemd_user_unitdir} \<br>
+=C2=A0&quot;<br>
+<br>
+=C2=A0FILES_${PN} +=3D &quot; \<br>
+=C2=A0 =C2=A0 =C2=A0${datadir}/dbus-1 \<br>
+-=C2=A0 =C2=A0 ${libdir}/tracker-2.0 \<br>
++=C2=A0 =C2=A0 ${datadir}/tracker3 \<br>
++=C2=A0 =C2=A0 ${libdir}/tracker-3.0 \<br>
+=C2=A0 =C2=A0 =C2=A0${systemd_user_unitdir} \<br>
+=C2=A0&quot;<br>
+-- <br>
+2.31.1<br>
+<br>
+<br>
+<br>
+<br>
+</blockquote></div>
 
---00000000000074023805c26e3c00--
+--00000000000048153205c26e8279--
