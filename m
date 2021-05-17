@@ -1,103 +1,153 @@
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
- by mx.groups.io with SMTP id smtpd.web08.21455.1621267873830379729
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.271.1621270004354255617
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 May 2021 09:11:13 -0700
+ Mon, 17 May 2021 09:46:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=U8VZs0Qh;
- spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f182.google.com with SMTP id k15so4960861pgb.10
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 May 2021 09:11:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:references:from:message-id:date:user-agent:mime-version
-         :in-reply-to:content-language:content-transfer-encoding;
-        bh=D0HVwHd4pFVwnl7yAwtcH/15b826jUBq6pcp3r/ikPw=;
-        b=U8VZs0QhXuGDJMmmueNB7bqvK0w8KvJNnftgqzUgd4nKHk7mVhok9m+zMCY1q58Cfn
-         URB4hu2s9SCTbRMyPWu8sGqaNgfB14AKMYoUZZZT7xZ42hJ3Wa3OvIhQdWlhlkGqpz2y
-         DIeev55s+D9xY9/eKM8W1h16xi/4V2URnqUqgRHoiYduZBZKKOmvJA2RJfNcerpQUxrK
-         i4oOTUCexoPDjVQmCkbuRECxJ+/jqbU+LsoCqU4m1R+VItcKNN9fqUAekNb23jycqgwY
-         zdlPSUfsBeDwxftP5xCTqqt94sY5nSdaxrdqVFS+Y+lUfHUUUHyO5g4KghCQjqSPFnPf
-         /SqA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=D0HVwHd4pFVwnl7yAwtcH/15b826jUBq6pcp3r/ikPw=;
-        b=KHIfN9u6vQSHm0qc5wkiZ8g/epAFk5UYBHonrJjMIFMRj0euSRNvo0OgbS3VYb9kl/
-         cMchGzukIkFARp0hRxdXR0jwIjQ3gQjXDHOj5zjGR5ExPRdMllKOa5SoNUqPYik6aBh7
-         VXp7G87WU8QFBtHvpwc9Fx6Dxc4ksg9SouzHFaStAF3vgw59FiQaLKZGVrt21Vvymknx
-         +W6WRmhcOHJxWJ/CZm+eizGUd9dfOTEUFjm7MM1T5mpQOdrAvIgQo28t6ggXt/WsC7io
-         IAteEWKZSZf4Zo30gwIkTuKqqLPFqddwtQ1gs+LikQ5haAHYGaxVBJMFc795RLcTZg1T
-         ZBoA==
-X-Gm-Message-State: AOAM530Q+8EnUI8YhfuN3dQfxr4+RfP8mNK8zigRhpDIzdjyVAZgQDln
-	zsm0GqKlzUhgEESFI0/iV0kYA/L9/rKnVQ==
-X-Google-Smtp-Source: ABdhPJxQb5PWmoDJVWF3FMEEQvPYv9KZ22K86TfBXvnK1xmgcjVW3mCpTUifuw92L+W07Wv3FQrgaQ==
-X-Received: by 2002:a05:6a00:84f:b029:2be:3b80:e9eb with SMTP id q15-20020a056a00084fb02902be3b80e9ebmr256943pfk.39.1621267872606;
-        Mon, 17 May 2021 09:11:12 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:a0f0:db81:2f56:60e4:2c64? ([2601:646:9200:a0f0:db81:2f56:60e4:2c64])
-        by smtp.gmail.com with ESMTPSA id l126sm11053885pga.41.2021.05.17.09.11.11
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 17 May 2021 09:11:12 -0700 (PDT)
-Subject: Re: [oe] [meta-python][PATCH 2/5] python3-javaobj-py3: Upgrade 0.4.2 -> 0.4.3
-To: Leon Anavi <leon.anavi@konsulko.com>,
- openembedded-devel@lists.openembedded.org
-References: <20210517111129.11619-1-leon.anavi@konsulko.com>
- <20210517111129.11619-2-leon.anavi@konsulko.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Message-ID: <540fd538-94d3-2f18-1bd4-740fe943da9b@gmail.com>
-Date: Mon, 17 May 2021 09:11:10 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 9BFF940C22;
+	Mon, 17 May 2021 16:46:43 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id E47bqR8_CG5D; Mon, 17 May 2021 16:46:43 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 73361407FE;
+	Mon, 17 May 2021 16:46:41 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id B1A0E1745E4; Mon, 17 May 2021 12:46:40 -0400 (EDT)
+Date: Mon, 17 May 2021 12:46:40 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>, Armin Kuster <akuster808@gmail.com>
+Subject: Re: [dunfell][PATCH] linuxptp: Fix cross build
+Message-ID: <20210517164640.GF1528@denix.org>
+References: <1620078960-57111-1-git-send-email-denis@denix.org>
 MIME-Version: 1.0
-In-Reply-To: <20210517111129.11619-2-leon.anavi@konsulko.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <1620078960-57111-1-git-send-email-denis@denix.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
+ping.
 
-
-On 5/17/21 4:11 AM, Leon Anavi wrote:
-> Upgrade to release 0.4.3:
+On Mon, May 03, 2021 at 05:56:00PM -0400, Denys Dmytriyenko wrote:
+> From: Khem Raj <raj.khem@gmail.com>
 > 
-> - Added support for TC_NULL as array sub-type in _read_field_value
-> - javaobj can now read GZipped files directly (trick done in
->    load(), which is also the underlying method used by loads())
-> - Fixed a type issue in BlockData/str content comparison
+> Adjust incdefs.sh to use cross tools to poke for system functionality
+> Re-enable using incdefs.sh
+> export KBUILD_OUTPUT to point to recipe sysroot
 > 
-> License-Update: License remains Apache License Version 2.0
+> (From meta-oe rev: b6022761d6880382c5e6ffa4b3dc6f1ec2ae1e73)
 > 
-
-thats ok, but does not explain why checksum changed
-
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Denys Dmytriyenko <denis@denix.org>
 > ---
->   ...hon3-javaobj-py3_0.4.2.bb => python3-javaobj-py3_0.4.3.bb} | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-javaobj-py3_0.4.2.bb => python3-javaobj-py3_0.4.3.bb} (75%)
+>  .../linuxptp/Use-cross-cpp-in-incdefs.patch        | 26 +++++++++++++++++++
+>  .../linuxptp/no-incdefs-using-host-headers.patch   | 29 ----------------------
+>  .../recipes-connectivity/linuxptp/linuxptp_2.0.bb  |  7 +++---
+>  3 files changed, 30 insertions(+), 32 deletions(-)
+>  create mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch
+>  delete mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
 > 
-> diff --git a/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.2.bb b/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.3.bb
-> similarity index 75%
-> rename from meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.2.bb
-> rename to meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.3.bb
-> index 2f24219812..eb93e71733 100644
-> --- a/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.3.bb
-> @@ -5,9 +5,9 @@ DESCRIPTION = "python-javaobj is a python library that provides functions\
->    representation is a standard data interchange format in Java world."
->   HOMEPAGE = "https://github.com/tcalmant/python-javaobj"
->   LICENSE = "Apache-2.0"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=d273d63619c9aeaf15cdaf76422c4f87"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
->   
-> -SRC_URI[sha256sum] = "ed3b1ffcfd39f165729cb53587cca02ab0bfa4c332c837a92d5ffe6aef5c8010"
-> +SRC_URI[sha256sum] = "38f74db3a57e9998a9774e3614afb95cb396f139f29b3fdb130c5af554435259"
->   
->   inherit pypi setuptools3
->   
+> diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch b/meta-oe/recipes-connectivity/linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch
+> new file mode 100644
+> index 0000000..8760886
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch
+> @@ -0,0 +1,26 @@
+> +From 8a4cad5e2f2cbb6a34bdc6e877fe499502b8c4c8 Mon Sep 17 00:00:00 2001
+> +From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> +Date: Fri, 23 Dec 2016 18:12:29 +0100
+> +Subject: [PATCH] linuxptp: Use cross cpp in incdefs
+> +
+> +Use cross cpp incdefs.sh shell script since we are doing cross compiling
+> +we need to ensure we use correct setttings from toolchain
+> +
+> +Upstream-Status: Inappropriate [OE-Specific]
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> +
+> + makefile | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +--- a/incdefs.sh
+> ++++ b/incdefs.sh
+> +@@ -27,7 +27,7 @@ user_flags()
+> + 	printf " -D_GNU_SOURCE"
+> + 
+> + 	# Get list of directories searched for header files.
+> +-	dirs=$(echo "" | ${CROSS_COMPILE}cpp -Wp,-v 2>&1 >/dev/null | grep ^" /")
+> ++	dirs=$(${CPP} -Wp,-v -xc /dev/null 2>&1 >/dev/null | grep ^" /")
+> + 
+> + 	# Look for clock_adjtime().
+> + 	for d in $dirs; do
+> diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch b/meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
+> deleted file mode 100644
+> index 02dbb23..0000000
+> --- a/meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
+> +++ /dev/null
+> @@ -1,29 +0,0 @@
+> -From 8a4cad5e2f2cbb6a34bdc6e877fe499502b8c4c8 Mon Sep 17 00:00:00 2001
+> -From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> -Date: Fri, 23 Dec 2016 18:12:29 +0100
+> -Subject: [PATCH] linuxptp: no incdefs using host headers
+> -
+> -Avoid using host headers via incdefs.sh shell script.
+> -
+> -Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> ----
+> -
+> - makefile | 2 +-
+> - 1 file changed, 1 insertion(+), 1 deletion(-)
+> -
+> -diff --git a/makefile b/makefile
+> -index 8cdbd15..85174b8 100644
+> ---- a/makefile
+> -+++ b/makefile
+> -@@ -33,7 +33,7 @@ OBJECTS	= $(OBJ) hwstamp_ctl.o phc2sys.o phc_ctl.o pmc.o pmc_common.o \
+> - SRC	= $(OBJECTS:.o=.c)
+> - DEPEND	= $(OBJECTS:.o=.d)
+> - srcdir	:= $(dir $(lastword $(MAKEFILE_LIST)))
+> --incdefs := $(shell $(srcdir)/incdefs.sh)
+> -+#incdefs := $(shell $(srcdir)/incdefs.sh)
+> - version := $(shell $(srcdir)/version.sh $(srcdir))
+> - VPATH	= $(srcdir)
+> - 
+> --- 
+> -2.9.3
+> -
+> diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb b/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
+> index 930c667..e80abc7 100644
+> --- a/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
+> +++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
+> @@ -4,15 +4,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+>  
+>  SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.tgz \
+>             file://build-Allow-CC-and-prefix-to-be-overriden.patch \
+> -           file://no-incdefs-using-host-headers.patch \
+> +           file://Use-cross-cpp-in-incdefs.patch \
+>             file://time_t_maybe_long_long.patch \
+>             "
+>  
+>  SRC_URI[md5sum] = "d8bb7374943bb747db7786ac26f17f11"
+>  SRC_URI[sha256sum] = "0a24d9401e87d4af023d201e234d91127d82c350daad93432106284aa9459c7d"
+>  
+> -EXTRA_OEMAKE = "ARCH=${TARGET_ARCH} \
+> -    EXTRA_CFLAGS='-D_GNU_SOURCE -DHAVE_CLOCK_ADJTIME -DHAVE_POSIX_SPAWN -DHAVE_ONESTEP_SYNC ${CFLAGS}'"
+> +EXTRA_OEMAKE = "ARCH=${TARGET_ARCH} EXTRA_CFLAGS='${CFLAGS}'"
+> +
+> +export KBUILD_OUTPUT="${RECIPE_SYSROOT}"
+>  
+>  do_install () {
+>      install -d ${D}/${bindir}
+> -- 
+> 2.7.4
 > 
-> 
-> 
-> 
-> 
+
+-- 
+Regards,
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
