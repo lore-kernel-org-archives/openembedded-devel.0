@@ -1,72 +1,101 @@
-Received: from mail-yb1-f201.google.com (mail-yb1-f201.google.com [209.85.219.201])
- by mx.groups.io with SMTP id smtpd.web12.16824.1621244693549448385
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.web08.17382.1621248728981968108
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 May 2021 02:44:53 -0700
+ Mon, 17 May 2021 03:52:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@google.com header.s=20161025 header.b=l7QosvW8;
- spf=pass (domain: flex--wak.bounces.google.com, ip: 209.85.219.201, mailfrom: 3fduiyamkab8r5fbjjbg9.7jh@flex--wak.bounces.google.com)
-Received: by mail-yb1-f201.google.com with SMTP id o12-20020a5b050c0000b02904f4a117bd74so8689061ybp.17
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 May 2021 02:44:53 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=HpYEX3be;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.42, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f42.google.com with SMTP id o6-20020a05600c4fc6b029015ec06d5269so3336095wmq.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 17 May 2021 03:52:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:message-id:mime-version:subject:from:to:cc;
-        bh=RnBACWVCQH/TH0r0k9o44G1vPU6FV282qJUVjcyTfDw=;
-        b=l7QosvW8srOKK6pTkUutXO77olw1i5xtWWVMU19IAq3XcpFiqCz67Sf/j43R41DJly
-         guc0uNx4QN2CfD/tEMl9sKIfAgWdRKVPhfBLnbMHaapkdhF0jjq5fJULSEcg2GiZJmHW
-         e7hNCRbXQR3TtZ8NiK5t8M/I1gx0yqMe45EHpEhTQj+AJxTQLIIzjHZyV5wVch89lCZU
-         dgvOqRn9IdSrzyG0P5cOFRJEh8HG8iXFi7OsjSYxKh1gvsbaLTjAyyV8QzSbVTolMIw6
-         pKQKWcRq6tXa8+GJXjASVTVsli5/OOzg70LAKL1g4lCA2kBaw+ehwaapYvoLr6CAmwJN
-         wwuA==
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=DsoYmQrxH7hrzIxxpA2BqDizdumbLE43aX07EwZ89Dk=;
+        b=HpYEX3bexd6Pb5UK1VMPEIYmNc6XzZAz/sUsE+mQH5ZsUtVFyM5A8JdkMH7LD880Qv
+         S3VXkGlyRX1qm+bMrezpexxChS1YisX0GBzAlNy8wHKIpx/wywTK+ujFf8oAt6iJ4kZB
+         7RdPZvOuXws/HmTlJP8cpJe8vwKBWmmNDu+EdfEvaUP3jumTGXmGGAGPgAmH9ehYhxUb
+         xgXPHnY2fpG3gwEYGogJJ4x1NWWifYzngtQzZ2My2+IduDmPk0OP/Ok/MR2qDdeLLmpp
+         F+gJgWdeC3Rp1YjvQ1i9rh4HKJlxVvYQToGKpXoC+XzU07oOLdyTiiO8UWJa1yMeFfle
+         GRPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
-        bh=RnBACWVCQH/TH0r0k9o44G1vPU6FV282qJUVjcyTfDw=;
-        b=DH+B3YW7W1BT9WhiPQM9DxcPt/sbQol7oxvbNaUJ+thZ95FHfNddPFLzeVQuODUdnp
-         6RQ3rz7iIrF10w3vT6aBLBm2ONfZaNBcjmaKGbKu0URN5NQD8tViOlfSHaXcTrSjxAih
-         FkQJFggEYqN7UhqlH+d6VtxPlwlILJOVJUCR94uFrXYH0q64afmHGqxX1yG8Oq1bNYSf
-         LQ3QT3sCKTpxVIYaVRKn86KnnGA6X1/IjldyObnnT3HEwRL2qZVmpBlUNfDOqpuoi+90
-         /YMpZLIMEdoDlVN2zTxItB9/ejCbuLrdvBgl/40UXoi85HQjyTPmgiCQQQy+wV8fHbmY
-         smAQ==
-X-Gm-Message-State: AOAM531dgl4F7oAfSfNMNvcKdDoveNiy1Y2iltOTJz/5KMAx0neynuba
-	afsiZmTTgHi6/OIwhrl3IG0FtAymEnCjKaD4PmcAS95xI+17clFb7/RUD7tzUo2EfJBlJZRdab+
-	0YgCcQkPPllL3DwP0l3oCrdb2VQgnu2msISaz04Fn54ay61bGt26iCb34arR1We59TOZnFNUFnx
-	20lf4=
-X-Google-Smtp-Source: ABdhPJwMcAtwRtLAtPB6qTOayCkDg9zl2RzEcuM8mQPLbALtdqoalHVKp/IagjB/wzvzkgFHR6PSZjg=
-X-Received: from wak-linux.svl.corp.google.com ([2620:15c:2c5:3:349d:7266:b0eb:443f])
- (user=wak job=sendgmr) by 2002:a25:dc4d:: with SMTP id y74mr9198693ybe.490.1621244692567;
- Mon, 17 May 2021 02:44:52 -0700 (PDT)
-Date: Mon, 17 May 2021 02:44:44 -0700
-Message-Id: <20210517094444.956896-1-wak@google.com>
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.31.1.751.gd2f1c929bd-goog
-Subject: [meta-oe][PATCH] span-lite: upgrade 0.8.1 -> 0.9.2
-From: "William A. Kennington III" <wak@google.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: "William A. Kennington III" <wak@google.com>
-Content-Type: text/plain; charset="UTF-8"
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=DsoYmQrxH7hrzIxxpA2BqDizdumbLE43aX07EwZ89Dk=;
+        b=qDDAkrtjFYEe5AXn0IjAaH87pMn+zoCo9nQ//n4BhJPgC23azNqXpa0ou79dYuxylR
+         upo8qJYq6uQFajxmc8qn58EOyZe5hoHQ7PmUzpdW0GjL+JAxjmnsRmI2MMWWnEh2RWmB
+         GK3ugHRHvEXDx8JKIOAOlEkSOKH4VpJfyBXIr5fRlwv3x0bpaiVWuUkwae7A0n+G7UtC
+         NDz5Mod4UI1n5qSub/7iMWe+L9N3nKVX2j0nG2fjjgccaVcvsTFpsH5d3yb6iCvaAHWD
+         VxjDC8ZJEwHNm/kh4Na85aMK0zIIvOoR527M2GfGOF8hzEkCmijBittZn2kIjaCLCTit
+         F1QQ==
+X-Gm-Message-State: AOAM531vlSfBswuj1CZsvPRlIDbdYT0DqgcLFXJuZc+IuhMErW8j/Y9o
+	ipYehtUQ2O+Idsa9gjE+zlTmhQ==
+X-Google-Smtp-Source: ABdhPJznfmAiwrFcjuBL3d23Nqwu4CZUu89jq5odMi3CKB8tyU3oOY0TV9c+ELuomT6c129BCeMNuw==
+X-Received: by 2002:a1c:2743:: with SMTP id n64mr22311572wmn.76.1621248727416;
+        Mon, 17 May 2021 03:52:07 -0700 (PDT)
+Return-Path: <brgl@bgdev.pl>
+Received: from debian-brgl.home (lfbn-nic-1-149-6.w2-15.abo.wanadoo.fr. [2.15.231.6])
+        by smtp.gmail.com with ESMTPSA id c7sm7688852wrs.23.2021.05.17.03.52.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 17 May 2021 03:52:07 -0700 (PDT)
+From: "Bartosz Golaszewski" <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Armin Kuster <akuster808@gmail.com>,
+	Tim moto-timo Orling <TicoTimo@gmail.com>,
+	Derek Straka <derek@asterius.io>,
+	Trevor Gamblin <trevor.gamblin@windriver.com>
+Cc: openembedded-devel@lists.openembedded.org,
+	Bartosz Golaszewski <brgl@bgdev.pl>
+Subject: [meta-python][PATCH v2] python3-pycocotools: new package
+Date: Mon, 17 May 2021 12:52:02 +0200
+Message-Id: <20210517105202.13756-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.30.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: William A. Kennington III <wak@google.com>
+Add a recipe for building pycocotools - a Python wrapper for cocapi.
+
+Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
 ---
- .../span-lite/{span-lite_0.8.1.bb => span-lite_0.9.2.bb}        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/span-lite/{span-lite_0.8.1.bb => span-lite_0.9.2.bb} (86%)
+v1 -> v2:
+- use virtual/crypt instead of libxcrypt to fix a build error with musl
 
-diff --git a/meta-oe/recipes-support/span-lite/span-lite_0.8.1.bb b/meta-oe/recipes-support/span-lite/span-lite_0.9.2.bb
-similarity index 86%
-rename from meta-oe/recipes-support/span-lite/span-lite_0.8.1.bb
-rename to meta-oe/recipes-support/span-lite/span-lite_0.9.2.bb
-index 6956f5fe6..16b7c3e54 100644
---- a/meta-oe/recipes-support/span-lite/span-lite_0.8.1.bb
-+++ b/meta-oe/recipes-support/span-lite/span-lite_0.9.2.bb
-@@ -4,7 +4,7 @@ LICENSE = "BSL-1.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
- 
- SRC_URI += "git://github.com/martinmoene/span-lite"
--SRCREV = "937262f25fb702592cbc5c772111a73a5e3c1e07"
-+SRCREV = "126453198fe2236b31ddfa7353e95d3a06c478ab"
- 
- S = "${WORKDIR}/git"
- 
+ .../packagegroups/packagegroup-meta-python.bb        |  1 +
+ .../python/python3-pycocotools_2.0.2.bb              | 12 ++++++++++++
+ 2 files changed, 13 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pycocotools_2.0.2.bb
+
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index b9ab42130..828c7fea5 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -289,6 +289,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
+     python3-pybind11-json \
+     python3-pybluez \
+     python3-pychromecast \
++    python3-pycocotools \
+     python3-pycodestyle \
+     python3-pyconnman \
+     python3-pycparser \
+diff --git a/meta-python/recipes-devtools/python/python3-pycocotools_2.0.2.bb b/meta-python/recipes-devtools/python/python3-pycocotools_2.0.2.bb
+new file mode 100644
+index 000000000..ef2a7c589
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pycocotools_2.0.2.bb
+@@ -0,0 +1,12 @@
++SUMMARY = "COCO is a large image dataset designed for object detection, segmentation, \
++           person keypoints detection, stuff segmentation, and caption generation."
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://pycocotools/coco.py;beginline=45;endline=45;md5=12cb539683cf245df8b6ce782d78f647"
++
++inherit setuptools3 pypi
++
++SRC_URI[md5sum] = "33858f23c8b99ce8116b70c32f6b6dd9"
++SRC_URI[sha256sum] = "24717a12799b4471c2e54aa210d642e6cd4028826a1d49fcc2b0e3497e041f1a"
++
++DEPENDS = "python3-cython-native python3-numpy-native virtual/crypt"
++RDEPENDS_${PN} = "python3-matplotlib python3-pillow python3-profile"
 -- 
-2.31.1.751.gd2f1c929bd-goog
+2.30.1
 
