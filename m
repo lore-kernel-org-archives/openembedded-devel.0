@@ -1,80 +1,91 @@
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web12.19748.1621261517617064600
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web12.19749.1621261518452348308
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 May 2021 07:25:17 -0700
+ Mon, 17 May 2021 07:25:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=toE+RbaK;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id cu11-20020a17090afa8bb029015d5d5d2175so2970374pjb.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 May 2021 07:25:17 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=bWIaNdUm;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id b13so1317168pfv.4
+        for <openembedded-devel@lists.openembedded.org>; Mon, 17 May 2021 07:25:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=LX58ecUQfpieNCt94AOllXrKTzjptKtY4SBVZz7owQ8=;
-        b=toE+RbaK2UcbGAQC06+++AKYBzadsanV6PPfFWCeEmqSANMNMzKQ8EnhDjmowuxNfB
-         7cF2V8wpPvr7s04Q/UuBEFSo1gvUyNADp4yKStgrBJRGQ8iFYfptcN+8sRjsfNkQZkHi
-         DS/5KH+Cc8CGu6CyUBd+LMM2yk7sKnDj6uXTStddeOoIqFANE8+GJu6ZQ/ivPl/jzoN5
-         JruiuGec0DTA6NFv1Rqto8z78c3y1oz+ZTOr1nF7wdunC+5cT75bV8RmphyPBNBsNKLv
-         JbSSIx6fMxixDek/3dgDCdX8U/ugsGSq3B9f12SaG7DCC5XnyI46Xx4SrztfLeQ0zZMD
-         00lA==
+        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+         :content-transfer-encoding;
+        bh=/4jxMolEMgWH2UaLzTwX0/DhwV+TdK421Ylr4zt3aO4=;
+        b=bWIaNdUmhGuDhZThSvvqeHhqyI6stHTZAinw+3Tbaan/Q5Yg41XWKgwPlstUAPfXxR
+         5BsbwGTJmOlC8YJg90iQ0pZZVcfx9lPdPDDGNjSBXlzoHCUew+aUJix0KP3lO4mciDds
+         SChshwEXfgDdP7a4ppQ1RsnBPegxDHVWpb7gher58TeE64AeCkvb2JQZZ93LQJCU9Y/8
+         wBFmJmjVaui3UxMt+80zmwhTnL8kk8ZQon14b/025ap72cvNmjXRhzzvqOerzf4TzlNL
+         4omp+sXHX+I95l52bbwo4+UfKtLlFr2d5G99pD8KQsQysznKW1hfJC41Toj7irdC2+D/
+         Bl9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=LX58ecUQfpieNCt94AOllXrKTzjptKtY4SBVZz7owQ8=;
-        b=mX74U6IiGlt/IXJUAZkWXVX8qLYtJgHnTPuoo4LsPV+y6wLE0njSVecsIgGewlT0P5
-         +aaooChlzfczQqugRQtx9MAnIN8W3xHu6vHT15l2yLwRKR8MZd243IkrOGMUeeLoedF2
-         DZsa0w/BpvR9e+daQKq99tLSOYtICpQxjCQjodJKKfmInjhAS0rH5+GwDIQnDLKRqj6u
-         39VWurPuUWwZP7hf3HkMw5301ZrVHDxYJTIummPi0pxxqguW0uXGlSEDxNemOe3Sm9hK
-         6Lo6N7U0g0OEeM8QJgB1qRi/iwBsTDtaNB9jDmEiAJqvZstbsMiVwVqfOpr6DX62kMI5
-         rXww==
-X-Gm-Message-State: AOAM532ykd1Q3w/VauW2Wipu7bISDWeYiUXiQAjJM5qYjp0apjHr5XJf
-	0zTbPeGPAPNZaHU2ChFxBRTyAnPjd0E=
-X-Google-Smtp-Source: ABdhPJxwIA6cbZQrtGRk+uhMayWXk5tBTbBkWamfE/VpiLN2Wx0LBgVA/hYlL1qSSQnmaCBfjTRusQ==
-X-Received: by 2002:a17:902:7407:b029:ef:a78c:a385 with SMTP id g7-20020a1709027407b02900efa78ca385mr285513pll.16.1621261517000;
+         :references:mime-version:content-transfer-encoding;
+        bh=/4jxMolEMgWH2UaLzTwX0/DhwV+TdK421Ylr4zt3aO4=;
+        b=JhLRLPsx/K5OkKoIzfUQRrDOKXXWFbXi6grwOEnAeE51vCFZzep0u1r0X7hWJ5HIW/
+         GJFJDuAOm0NW2vE55jPe2WWcZE9obSsIy9AtkQrD0HXDDBSBsDn9qwepqBjdOFbBit5K
+         2KEsk2AFaytgNRXZaf5b9BHqKMy75WcI2vnxCSnZb8BC08FWWMahk7mJe04ldpiiRFWl
+         8IrZwomV9YFPbPOBrr4Uwbw30qkUfnoYHpTde/MJGqcC/53fLffRc4SrqUZcYwRWWQWQ
+         zoYNVa14uLNfrq53NXebJBH79btu+Lp+QWTG+c8qK0DUqXuyWndvFcxhsEgPUp4iJHmM
+         GqZg==
+X-Gm-Message-State: AOAM533XyS9RJbw8RnRxQoMXFM35hLKStwMACRD97lx2xycmHmLzN7IJ
+	KLbbZsV1zot3o3gPx/0sC4DS1NML8uw=
+X-Google-Smtp-Source: ABdhPJxVb2NqwLoO0lUS0fUy+k5iVh7xCzUGWan4LYb0auHi0PGVtuYWWqryv/V9NycOZvh74OO/Wg==
+X-Received: by 2002:a63:7c57:: with SMTP id l23mr9202429pgn.429.1621261517878;
         Mon, 17 May 2021 07:25:17 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:e1a5:920e:5720:62fe])
-        by smtp.gmail.com with ESMTPSA id s16sm10872008pga.5.2021.05.17.07.25.15
+        by smtp.gmail.com with ESMTPSA id s16sm10872008pga.5.2021.05.17.07.25.17
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 17 May 2021 07:25:16 -0700 (PDT)
+        Mon, 17 May 2021 07:25:17 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 10/11] packagegroup-meta-oe: conditional remove tbb for powerpc
-Date: Mon, 17 May 2021 07:25:03 -0700
-Message-Id: <360eec5a843b3b8c9751d248e248b353fe13a35a.1621261426.git.akuster808@gmail.com>
+Subject: [hardknott 11/11] xfce4-settings: upgrade 4.16.0 -> 4.16.1
+Date: Mon, 17 May 2021 07:25:04 -0700
+Message-Id: <cf5bd6a8308108b4313a1e45ce8aa87e73125bf9.1621261426.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1621261426.git.akuster808@gmail.com>
 References: <cover.1621261426.git.akuster808@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Saul Wold <Saul.Wold@windriver.com>
+From: Andreas Müller <schnitzeltony@gmail.com>
 
-Since tbb has a COMPATIBLE_MACHINE entry to prevent it from building
-for powerpcc, let's also remove it from the meta-oe-support package
-group.
+Release notes for 4.16.1
+========================
+- display: Fix scale by rounding (Fixes #258)
+- Drop preferences-desktop-default-applications icon name
+- Also allocate terminating element
+- Translation Updates
 
-Signed-off-by: Saul Wold <saul.wold@windriver.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 564f7219544401b9bce545181a7e22000d3f7d40)
+(cherry picked from commit eb5d3362d99f64d1dd006422b819b7f646254d20)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 2 +-
+ .../{xfce4-settings_4.16.0.bb => xfce4-settings_4.16.1.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-xfce/recipes-xfce/xfce4-settings/{xfce4-settings_4.16.0.bb => xfce4-settings_4.16.1.bb} (93%)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 59908e2c0f..eb095a2374 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -921,7 +921,7 @@ RDEPENDS_packagegroup-meta-oe-support_remove_arm ="numactl"
- RDEPENDS_packagegroup-meta-oe-support_remove_mipsarch = "gperftools"
- RDEPENDS_packagegroup-meta-oe-support_remove_riscv64 = "gperftools uim"
- RDEPENDS_packagegroup-meta-oe-support_remove_riscv32 = "gperftools uim"
--RDEPENDS_packagegroup-meta-oe-support_remove_powerpc = "ssiapi"
-+RDEPENDS_packagegroup-meta-oe-support_remove_powerpc = "ssiapi tbb"
- RDEPENDS_packagegroup-meta-oe-support_remove_powerpc64le = "ssiapi"
+diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.0.bb b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.1.bb
+similarity index 93%
+rename from meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.0.bb
+rename to meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.1.bb
+index 47de8c571e..ccd55723ab 100644
+--- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.0.bb
++++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.1.bb
+@@ -9,7 +9,7 @@ inherit xfce features_check mime-xdg
+ REQUIRED_DISTRO_FEATURES = "x11"
  
- RDEPENDS_packagegroup-meta-oe-test ="\
+ SRC_URI += "file://0001-xsettings.xml-Set-default-themes.patch"
+-SRC_URI[sha256sum] = "67a1404fc754c675c6431e22a8fe0e5d79644fdfadbfe25a4523d68e1442ddc2"
++SRC_URI[sha256sum] = "bb28e1be7aa34d0edb1cfbaacc509a4267db56828b36cd6be312a202973635c6"
+ 
+ EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
+ 
 -- 
 2.17.1
 
