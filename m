@@ -1,64 +1,107 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.17575.1621249901762704996
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web09.19737.1621261508072664554
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 May 2021 04:11:42 -0700
+ Mon, 17 May 2021 07:25:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=33204 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.93)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lib9w-0007uL-Do; Mon, 17 May 2021 14:11:40 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=CeJZy3HY;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id gc22-20020a17090b3116b02901558435aec1so3792319pjb.4
+        for <openembedded-devel@lists.openembedded.org>; Mon, 17 May 2021 07:25:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=tkwl4LCh4RJSMVt5SE+NuXmIUkbYbFNazzhxxzKGd3M=;
+        b=CeJZy3HYx9n+8sVhya1tH1BfppHFWuaCsepYaMEaZV42UWQgXUfFrrIB834NGTDrF9
+         CFlLcL6BvVqQS1AeMdzTAoDxrhwurfFhLfPLpVLMw+Y7GX5raG7QSlV7YWpkIjGDUy1L
+         sp3KrMGK/QcCaHT5v89EJklqGOoJZ9tslSHz2/HZxXLBce9UbjvpdIt1dWM2mf9t7CBx
+         Zm5fdwhmBB/sYn5RTUo2TFNFj6+xcatCFl32q+T2Se7cCY4wpkPmvFzb5cmwkXgPeOEs
+         CIztj2BRMEYIW1cdkGLkiHea92PCaSx8R1tzyTXCZ70CNlHmrgex95oRJsisanzJW5Kb
+         Isow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=tkwl4LCh4RJSMVt5SE+NuXmIUkbYbFNazzhxxzKGd3M=;
+        b=IvmBq8nPzdvRzS5jegOSW+/FFlwrRe8jLMOZHadh1ip8rVudK+oFIHdWgmbfwiq8uA
+         1Qfm5Mapa5K2uIpyI5PP9jbLAr8/owhDjdQU94MXzrRpeHAVpZoGbRsTv543m9T8cPYR
+         F4xsk9XC1wEINRmv2F7QUjAb4jsjidyeoc0yKxN8nPrfJGgBMS4pWnKS/erOA7z6lg5y
+         dDHM3zEsVgaGOYXqTwCLJz/KSCRUVERUx5Lw6ON93JjUMsaLhzDzYXo2DcZ24W/n8qKy
+         hBTJpjRmICMgvXNho6wzl4NdhhbcwqEwElUWR+AZouF3KZQ76tUivhVYzTNsjPlLzTGZ
+         Y4IA==
+X-Gm-Message-State: AOAM5312nCaz031XxFiJSDw5VduWPPNyPGrwU504jrWF9TAdYY4Jqt4a
+	xBJ8BLoV9o0qQVVK7BHKeEyqZ6PHGUM=
+X-Google-Smtp-Source: ABdhPJz3xrKo573kdHCX1vwYwD0fqf6rVHphxBsYr9ZGzr01Q0Fhrc491ifuu0TLUDwOn50luHOeQw==
+X-Received: by 2002:a17:90a:9202:: with SMTP id m2mr15640081pjo.180.1621261507260;
+        Mon, 17 May 2021 07:25:07 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:e1a5:920e:5720:62fe])
+        by smtp.gmail.com with ESMTPSA id s16sm10872008pga.5.2021.05.17.07.25.06
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 17 May 2021 07:25:06 -0700 (PDT)
+From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-aiohue: Upgrade 2.4.0 -> 2.5.0
-Date: Mon, 17 May 2021 14:11:29 +0300
-Message-Id: <20210517111129.11619-5-leon.anavi@konsulko.com>
+Subject: [hardknott 00/11] Pathc review May 17
+Date: Mon, 17 May 2021 07:24:53 -0700
+Message-Id: <cover.1621261426.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210517111129.11619-1-leon.anavi@konsulko.com>
-References: <20210517111129.11619-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 2.5.0:
+Please review and have comment back by Wednesday
 
-- Store group resource
-- Make sure v2 button events are translated to v1 button events
-- Fix normalize check
-- Support remotes
+The following changes since commit bbe3855ec7d7e1417a42e9d7a4d1d3d338812088:
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../python/{python3-aiohue_2.4.0.bb => python3-aiohue_2.5.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-aiohue_2.4.0.bb => python3-aiohue_2.5.0.bb} (77%)
+  ostree: switch from default master branch to main to fix do_fetch failure (2021-05-13 21:37:32 -0700)
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohue_2.4.0.bb b/meta-python/recipes-devtools/python/python3-aiohue_2.5.0.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-aiohue_2.4.0.bb
-rename to meta-python/recipes-devtools/python/python3-aiohue_2.5.0.bb
-index 600a3f4b49..a29625acc5 100644
---- a/meta-python/recipes-devtools/python/python3-aiohue_2.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiohue_2.5.0.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=dab31a1d28183826937f4b152143a33f"
- 
--SRC_URI[sha256sum] = "59ac159301064d222192f7b58891d39a2f25aab620061ed12e7cfaf1b5d1a6cc"
-+SRC_URI[sha256sum] = "e2ae49be45261283a899cc1b95786f07fe5076be9a311d250dbe2de1b8c38f0f"
- 
- inherit pypi setuptools3
- 
+are available in the Git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib stable/hardknott-nut
+  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/hardknott-nut
+
+Andreas Müller (2):
+  zsh: reduce priority slightly to avoid conflict with bash
+  xfce4-settings: upgrade 4.16.0 -> 4.16.1
+
+Khem Raj (3):
+  aom: Match the name for AOM-Patent-License-1.0
+  libdevmapper,lvm2: Do not inherit license
+  python3-jinja2_2.%.bbappend: Delete
+
+Saul Wold (2):
+  tbb: Disable PPC as COMPATIBLE_MACHINE
+  packagegroup-meta-oe: conditional remove tbb for powerpc
+
+Silcet (1):
+  ufw: fix python shebang
+
+zangrc (3):
+  fetchmail: upgrade 6.4.18 -> 6.4.19
+  openvpn: upgrade 2.5.1 -> 2.5.2
+  wireshark: upgrade 3.4.4 -> 3.4.5
+
+ .../recipes-multimedia/aom/aom_3.0.0.bb       |  2 +-
+ ...fix-dynamic-update-of-python-shebang.patch | 57 +++++++++++++++++++
+ .../recipes-connectivity/ufw/ufw_0.33.bb      |  1 +
+ ...etchmail_6.4.18.bb => fetchmail_6.4.19.bb} |  4 +-
+ .../{openvpn_2.5.1.bb => openvpn_2.5.2.bb}    |  4 +-
+ ...{wireshark_3.4.4.bb => wireshark_3.4.5.bb} |  2 +-
+ .../packagegroups/packagegroup-meta-oe.bb     |  2 +-
+ meta-oe/recipes-shells/zsh/zsh_5.4.2.bb       |  2 +-
+ meta-oe/recipes-support/lvm2/lvm2.inc         |  5 +-
+ meta-oe/recipes-support/tbb/tbb_2021.2.0.bb   |  3 +
+ .../python/python3-jinja2_2.%.bbappend        | 13 -----
+ ...ngs_4.16.0.bb => xfce4-settings_4.16.1.bb} |  2 +-
+ 12 files changed, 72 insertions(+), 25 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/ufw/ufw/fix-dynamic-update-of-python-shebang.patch
+ rename meta-networking/recipes-support/fetchmail/{fetchmail_6.4.18.bb => fetchmail_6.4.19.bb} (83%)
+ rename meta-networking/recipes-support/openvpn/{openvpn_2.5.1.bb => openvpn_2.5.2.bb} (95%)
+ rename meta-networking/recipes-support/wireshark/{wireshark_3.4.4.bb => wireshark_3.4.5.bb} (97%)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-jinja2_2.%.bbappend
+ rename meta-xfce/recipes-xfce/xfce4-settings/{xfce4-settings_4.16.0.bb => xfce4-settings_4.16.1.bb} (93%)
+
 -- 
 2.17.1
 
