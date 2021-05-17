@@ -1,85 +1,87 @@
 Received: from smtp.missinglinkelectronics.com (smtp.missinglinkelectronics.com [94.130.14.54])
- by mx.groups.io with SMTP id smtpd.web10.15118.1621231775743361676
+ by mx.groups.io with SMTP id smtpd.web12.15386.1621231776359279833
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 16 May 2021 23:09:36 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=pass (domain: missinglinkelectronics.com, ip: 94.130.14.54, mailfrom: stefan.wiehler@missinglinkelectronics.com)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp.missinglinkelectronics.com (Postfix) with ESMTP id 9059F20304
-	for <openembedded-devel@lists.openembedded.org>; Mon, 17 May 2021 08:09:33 +0200 (CEST)
+	by smtp.missinglinkelectronics.com (Postfix) with ESMTP id EBB3720395
+	for <openembedded-devel@lists.openembedded.org>; Mon, 17 May 2021 08:09:34 +0200 (CEST)
 X-Virus-Scanned: Debian amavisd-new at missinglinkelectronics.com
 Received: from smtp.missinglinkelectronics.com ([127.0.0.1])
 	by localhost (mail.missinglinkelectronics.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id cmqlD45MeG2n; Mon, 17 May 2021 08:09:33 +0200 (CEST)
+	with ESMTP id 3yPWLHNSkz1z; Mon, 17 May 2021 08:09:34 +0200 (CEST)
 Received: from pfanne-bionic2.mle (p578c5bfe.dip0.t-ipconnect.de [87.140.91.254])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
 	(Authenticated sender: stefan)
-	by smtp.missinglinkelectronics.com (Postfix) with ESMTPSA id 4CC1E202A8;
-	Mon, 17 May 2021 08:09:33 +0200 (CEST)
+	by smtp.missinglinkelectronics.com (Postfix) with ESMTPSA id AA642202A8;
+	Mon, 17 May 2021 08:09:34 +0200 (CEST)
 From: "Stefan Wiehler" <stefan.wiehler@missinglinkelectronics.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
-Subject: [meta-networking][PATCH v2 1/2] http-parser: add recipe
-Date: Mon, 17 May 2021 08:09:19 +0200
-Message-Id: <20210517060920.109438-1-stefan.wiehler@missinglinkelectronics.com>
+Subject: [meta-networking][PATCH v2 2/2] restinio: add recipe
+Date: Mon, 17 May 2021 08:09:20 +0200
+Message-Id: <20210517060920.109438-2-stefan.wiehler@missinglinkelectronics.com>
 X-Mailer: git-send-email 2.29.2
+In-Reply-To: <20210517060920.109438-1-stefan.wiehler@missinglinkelectronics.com>
+References: <20210517060920.109438-1-stefan.wiehler@missinglinkelectronics.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 
-HTTP request/response parser for C.
+Header-only C++14 library that gives you an embedded HTTP server.
 
 Signed-off-by: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
 ---
- .../http-parser/http-parser_2.9.4.bb          | 30 +++++++++++++++++++
- 1 file changed, 30 insertions(+)
- create mode 100644 meta-networking/recipes-support/http-parser/http-pars=
-er_2.9.4.bb
+ .../restinio/restinio_0.6.13.bb               | 31 +++++++++++++++++++
+ 1 file changed, 31 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/restinio/restini=
+o_0.6.13.bb
 
-diff --git a/meta-networking/recipes-support/http-parser/http-parser_2.9.=
-4.bb b/meta-networking/recipes-support/http-parser/http-parser_2.9.4.bb
+diff --git a/meta-networking/recipes-connectivity/restinio/restinio_0.6.1=
+3.bb b/meta-networking/recipes-connectivity/restinio/restinio_0.6.13.bb
 new file mode 100644
-index 000000000..2d04ded34
+index 000000000..e3567961a
 --- /dev/null
-+++ b/meta-networking/recipes-support/http-parser/http-parser_2.9.4.bb
-@@ -0,0 +1,30 @@
-+SUMMARY =3D "HTTP request/response parser for C"
-+DESCRIPTION =3D "This is a parser for HTTP messages written in C. It par=
-ses \
-+              both requests and responses. The parser is designed to be =
-used \
-+              in performance HTTP applications. It does not make any \
-+              syscalls nor allocations, it does not buffer data, it can =
-be \
-+              interrupted at anytime. Depending on your architecture, it=
++++ b/meta-networking/recipes-connectivity/restinio/restinio_0.6.13.bb
+@@ -0,0 +1,31 @@
++SUMMARY =3D "Header-only C++14 library that gives you an embedded HTTP s=
+erver"
++DESCRIPTION =3D "Cross-platform, efficient, customizable, and robust \
++               asynchronous HTTP/WebSocket server C++14 library with the=
  \
-+              only requires about 40 bytes of data per message stream (i=
-n a \
-+              web server that is per connection)."
++               right balance between performance and ease of use"
 +AUTHOR =3D "Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>"
-+HOMEPAGE =3D "https://github.com/nodejs/http-parser"
++HOMEPAGE =3D "https://stiffstream.com/en/products/restinio.html"
 +SECTION =3D "libs"
-+LICENSE =3D "MIT"
-+LIC_FILES_CHKSUM =3D "file://LICENSE-MIT;md5=3D9bfa835d048c194ab30487af8=
-d7b3778"
++LICENSE =3D "BSD-3-Clause"
++LIC_FILES_CHKSUM =3D "file://../LICENSE;md5=3Df399b62ce0a152525d1589a5a4=
+0c0ff6"
++DEPENDS =3D "asio fmt http-parser"
 +
-+SRC_URI =3D "git://github.com/nodejs/http-parser.git"
-+SRCREV =3D "2343fd6b5214b2ded2cdcf76de2bf60903bb90cd"
++SRC_URI =3D "https://github.com/Stiffstream/restinio/releases/download/v=
+.${PV}/restinio-${PV}.tar.bz2"
++SRC_URI[md5sum] =3D "37a4310e98912030a74bdd4ed789f33c"
++SRC_URI[sha256sum] =3D "b35d696e6fafd4563ca708fcecf9d0cf6705c846d417b500=
+0f5252e0188848e7"
 +
-+S =3D "${WORKDIR}/git"
++S =3D "${WORKDIR}/${PN}-${PV}/dev"
 +
-+do_configure[noexec] =3D "1"
++inherit cmake
 +
-+do_compile() {
-+    oe_runmake library package
-+}
++EXTRA_OECMAKE +=3D "\
++                  -DRESTINIO_TEST=3DOFF \
++                  -DRESTINIO_SAMPLE=3DOFF \
++                  -DRESTINIO_BENCH=3DOFF \
++                  -DRESTINIO_FIND_DEPS=3DON \
++                  -DRESTINIO_ALLOW_SOBJECTIZER=3DOFF \
++                  -DRESTINIO_USE_EXTERNAL_HTTP_PARSER=3DON \
++                  "
 +
-+do_install() {
-+    oe_runmake install DESTDIR=3D${D} PREFIX=3D${prefix}
-+}
-+
-+BBCLASSEXTEND =3D "native nativesdk"
++# Header-only library
++RDEPENDS_${PN}-dev =3D ""
++RRECOMMENDS_${PN}-dbg =3D "${PN}-dev (=3D ${EXTENDPKGV})"
 --=20
 2.29.2
 
