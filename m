@@ -1,91 +1,76 @@
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.web12.19749.1621261518452348308
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.web09.20713.1621265562265366804
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 May 2021 07:25:18 -0700
+ Mon, 17 May 2021 08:32:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=bWIaNdUm;
- spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f171.google.com with SMTP id b13so1317168pfv.4
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 May 2021 07:25:18 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=WqA99IWI;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.49, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f49.google.com with SMTP id u4-20020a05600c00c4b02901774b80945cso1975440wmm.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 17 May 2021 08:32:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=/4jxMolEMgWH2UaLzTwX0/DhwV+TdK421Ylr4zt3aO4=;
-        b=bWIaNdUmhGuDhZThSvvqeHhqyI6stHTZAinw+3Tbaan/Q5Yg41XWKgwPlstUAPfXxR
-         5BsbwGTJmOlC8YJg90iQ0pZZVcfx9lPdPDDGNjSBXlzoHCUew+aUJix0KP3lO4mciDds
-         SChshwEXfgDdP7a4ppQ1RsnBPegxDHVWpb7gher58TeE64AeCkvb2JQZZ93LQJCU9Y/8
-         wBFmJmjVaui3UxMt+80zmwhTnL8kk8ZQon14b/025ap72cvNmjXRhzzvqOerzf4TzlNL
-         4omp+sXHX+I95l52bbwo4+UfKtLlFr2d5G99pD8KQsQysznKW1hfJC41Toj7irdC2+D/
-         Bl9w==
+        bh=U/AhvfYA5F0R3a8kQQqNkuXlG9AONgDakuISEIxrbHA=;
+        b=WqA99IWIEIh+DNSgVPaC3RJrtt+dFTg/OAT/rRz3WcmPmRmEf56gXeDCYqVI2ISfaU
+         +kR2Yydv8BfRDj1UyVFBF0OhKN06WfVsjFPcXbpXSjR915nRsx1vVC5YLGChYFsFNXYu
+         OwbBgYdy5UUs5wEovwt+n9UFg+F42U//k8wA7CPx3HlcFnMyva/G7nM9kuDL895H0E/C
+         k18zjNKfYJk4GjPi/DZp/De6nrCVRBEa9oFEbo/de1fz4xw9SND14POvzAHLVTlPu/BQ
+         /0iHEGkTGwcMmYJpC6p5lqjkH0Pmoe0nvQGY18SHLxdTWkjpJ0flMGr5O8OzBZ2KQLBG
+         pR2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=/4jxMolEMgWH2UaLzTwX0/DhwV+TdK421Ylr4zt3aO4=;
-        b=JhLRLPsx/K5OkKoIzfUQRrDOKXXWFbXi6grwOEnAeE51vCFZzep0u1r0X7hWJ5HIW/
-         GJFJDuAOm0NW2vE55jPe2WWcZE9obSsIy9AtkQrD0HXDDBSBsDn9qwepqBjdOFbBit5K
-         2KEsk2AFaytgNRXZaf5b9BHqKMy75WcI2vnxCSnZb8BC08FWWMahk7mJe04ldpiiRFWl
-         8IrZwomV9YFPbPOBrr4Uwbw30qkUfnoYHpTde/MJGqcC/53fLffRc4SrqUZcYwRWWQWQ
-         zoYNVa14uLNfrq53NXebJBH79btu+Lp+QWTG+c8qK0DUqXuyWndvFcxhsEgPUp4iJHmM
-         GqZg==
-X-Gm-Message-State: AOAM533XyS9RJbw8RnRxQoMXFM35hLKStwMACRD97lx2xycmHmLzN7IJ
-	KLbbZsV1zot3o3gPx/0sC4DS1NML8uw=
-X-Google-Smtp-Source: ABdhPJxVb2NqwLoO0lUS0fUy+k5iVh7xCzUGWan4LYb0auHi0PGVtuYWWqryv/V9NycOZvh74OO/Wg==
-X-Received: by 2002:a63:7c57:: with SMTP id l23mr9202429pgn.429.1621261517878;
-        Mon, 17 May 2021 07:25:17 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:e1a5:920e:5720:62fe])
-        by smtp.gmail.com with ESMTPSA id s16sm10872008pga.5.2021.05.17.07.25.17
-        for <openembedded-devel@lists.openembedded.org>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=U/AhvfYA5F0R3a8kQQqNkuXlG9AONgDakuISEIxrbHA=;
+        b=U51/4BSffRNgxBS5Dz4PnpB5pyVPBhLobeK0MblGsRtxB0Tex6gA/HYSAYRJP6B8JQ
+         rVkI1YjXDVVRbyhVEtd0CWb3nmAAUI/XxiJE2s6jLT597BpIWMjpc85s6+HN2tARGKqx
+         Ftrq0/CWdYjgC/jpjrZkI61IwW8Hznoab7nKL1LtLsLNPBdBZDE7K7HejEQ0ZGoCiv1Q
+         w1jVaE00lE1NHDvBgrP5v3Ha72oQvaDW2ofbsY10JYIW2H/ds76ySJwUrIGBDXz27D58
+         ud53X9ETwfzCWnK2CBGGEDq6MSBYLXosNag8o/ra6l6ww8G+PEJliwykY6gbdyKTOKgS
+         RhUA==
+X-Gm-Message-State: AOAM531fo7jMiFiJfZTrnaFuB+tFhQdMI5vXBGi6E2oKz/UQoGQ9C/Pe
+	+MpvdYE3hsp114ltFvoNWPXuiw==
+X-Google-Smtp-Source: ABdhPJwMzsKAJzx/hHbk6+rwZFtPWwmgos3Ha6doUYk5Md6Y40WNjhXpMa7Zcx0X7YLtZy7RuecG8A==
+X-Received: by 2002:a1c:1982:: with SMTP id 124mr260980wmz.148.1621265560678;
+        Mon, 17 May 2021 08:32:40 -0700 (PDT)
+Return-Path: <brgl@bgdev.pl>
+Received: from debian-brgl.home (lfbn-nic-1-149-6.w2-15.abo.wanadoo.fr. [2.15.231.6])
+        by smtp.gmail.com with ESMTPSA id a129sm4388238wmh.20.2021.05.17.08.32.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 17 May 2021 07:25:17 -0700 (PDT)
-From: "Armin Kuster" <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 11/11] xfce4-settings: upgrade 4.16.0 -> 4.16.1
-Date: Mon, 17 May 2021 07:25:04 -0700
-Message-Id: <cf5bd6a8308108b4313a1e45ce8aa87e73125bf9.1621261426.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1621261426.git.akuster808@gmail.com>
-References: <cover.1621261426.git.akuster808@gmail.com>
+        Mon, 17 May 2021 08:32:40 -0700 (PDT)
+From: "Bartosz Golaszewski" <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Armin Kuster <akuster808@gmail.com>,
+	Tim moto-timo Orling <TicoTimo@gmail.com>,
+	Derek Straka <derek@asterius.io>,
+	Trevor Gamblin <trevor.gamblin@windriver.com>
+Cc: openembedded-devel@lists.openembedded.org,
+	Bartosz Golaszewski <brgl@bgdev.pl>
+Subject: [meta-python][PATCH] python3-pydbus-manager: add runtime dependencies
+Date: Mon, 17 May 2021 17:32:37 +0200
+Message-Id: <20210517153237.12626-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.30.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Andreas Müller <schnitzeltony@gmail.com>
+This recipe is missing the runtime deps. Add them.
 
-Release notes for 4.16.1
-========================
-- display: Fix scale by rounding (Fixes #258)
-- Drop preferences-desktop-default-applications icon name
-- Also allocate terminating element
-- Translation Updates
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit eb5d3362d99f64d1dd006422b819b7f646254d20)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
 ---
- .../{xfce4-settings_4.16.0.bb => xfce4-settings_4.16.1.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-xfce/xfce4-settings/{xfce4-settings_4.16.0.bb => xfce4-settings_4.16.1.bb} (93%)
+ .../recipes-devtools/python/python3-pydbus-manager_git.bb       | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.0.bb b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.1.bb
-similarity index 93%
-rename from meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.0.bb
-rename to meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.1.bb
-index 47de8c571e..ccd55723ab 100644
---- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.0.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.1.bb
-@@ -9,7 +9,7 @@ inherit xfce features_check mime-xdg
- REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-python/recipes-devtools/python/python3-pydbus-manager_git.bb b/meta-python/recipes-devtools/python/python3-pydbus-manager_git.bb
+index ae9e42160..9fb3a485b 100644
+--- a/meta-python/recipes-devtools/python/python3-pydbus-manager_git.bb
++++ b/meta-python/recipes-devtools/python/python3-pydbus-manager_git.bb
+@@ -11,3 +11,5 @@ SRCREV = "6b576b969cbda50521dca62a7df929167207f9fc"
+ PV = "git${SRCPV}"
  
- SRC_URI += "file://0001-xsettings.xml-Set-default-themes.patch"
--SRC_URI[sha256sum] = "67a1404fc754c675c6431e22a8fe0e5d79644fdfadbfe25a4523d68e1442ddc2"
-+SRC_URI[sha256sum] = "bb28e1be7aa34d0edb1cfbaacc509a4267db56828b36cd6be312a202973635c6"
- 
- EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
- 
+ S = "${WORKDIR}/git"
++
++RDEPENDS_${PN} += "python3-pydbus"
 -- 
-2.17.1
+2.30.1
 
