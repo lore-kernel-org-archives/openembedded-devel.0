@@ -1,128 +1,103 @@
-Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
- by mx.groups.io with SMTP id smtpd.web12.21225.1621267615854995090
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.web08.21455.1621267873830379729
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 May 2021 09:06:56 -0700
+ Mon, 17 May 2021 09:11:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=iAWJ985I;
- spf=pass (domain: gmail.com, ip: 209.85.167.48, mailfrom: wickbergster@gmail.com)
-Received: by mail-lf1-f48.google.com with SMTP id m11so9613213lfg.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 May 2021 09:06:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=U8VZs0Qh;
+ spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f182.google.com with SMTP id k15so4960861pgb.10
+        for <openembedded-devel@lists.openembedded.org>; Mon, 17 May 2021 09:11:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3BN7tbaAy9IW/d9I7p3vMHMzU8tQ5uMdFNLAUVOfmh4=;
-        b=iAWJ985InNr1PrITU8V/zGxyqjmVev9SzFp/0Y12gHOcEYZLBt1x2IByC4DzDtpBz8
-         bRZlKB8h8ChYifRvrBi7VyPZrQoka2SJeHYB9JS2eFZzvludiZ9Kl8yae8BFI5KIyUQG
-         PmbtD7ercQ+qDEenC9tWp1E+QK2w03teS6bbIx48+Z0So1k2ShtaZgMkd3gZ/8m1i7DW
-         tRxAvuizBLHQV1R0RlkuJyjs7fSe3qKvm73j4Y9bF1rwxFY0uPG856UYIl+BZMUA/GVg
-         FKxE6WxXh0swULWXPMmyvCmFrckdhLNMvSRWY2SyBT4eVmWsajL1DvDbV9lAd9DSkMcA
-         9y+w==
+        h=subject:to:references:from:message-id:date:user-agent:mime-version
+         :in-reply-to:content-language:content-transfer-encoding;
+        bh=D0HVwHd4pFVwnl7yAwtcH/15b826jUBq6pcp3r/ikPw=;
+        b=U8VZs0QhXuGDJMmmueNB7bqvK0w8KvJNnftgqzUgd4nKHk7mVhok9m+zMCY1q58Cfn
+         URB4hu2s9SCTbRMyPWu8sGqaNgfB14AKMYoUZZZT7xZ42hJ3Wa3OvIhQdWlhlkGqpz2y
+         DIeev55s+D9xY9/eKM8W1h16xi/4V2URnqUqgRHoiYduZBZKKOmvJA2RJfNcerpQUxrK
+         i4oOTUCexoPDjVQmCkbuRECxJ+/jqbU+LsoCqU4m1R+VItcKNN9fqUAekNb23jycqgwY
+         zdlPSUfsBeDwxftP5xCTqqt94sY5nSdaxrdqVFS+Y+lUfHUUUHyO5g4KghCQjqSPFnPf
+         /SqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:subject:to:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
          :content-transfer-encoding;
-        bh=3BN7tbaAy9IW/d9I7p3vMHMzU8tQ5uMdFNLAUVOfmh4=;
-        b=IEiRAOg+7tUYqdYjZI4LJA6uAMA6OhUMHplK7fG8phQ9iYeCIOm9K+5HEJPO5taVgl
-         8fms9t75R2c811rWJTSPYjGw/4pWrUSAxDi5pQDkmsGKNDUr1oH3LjDrXtXYtDOW+wRy
-         Jill2YaAmU1oUjJxVXpcHi9acM6FGPb/Y1YPQPYs5fgN1D/s4rPD0eJ8apFvJ9DUNJo4
-         AhSAHG4qO2zxvyDnNJgCBvn0v0rP7Gj/6UdQvWaUvlld2NfQIN+6EtR/9OA7YjuDc0mw
-         AMEgLhYPtagbpL4SvJNhl9mlflWRmc8SbNFByZvUWcQBVkV2bkMWDMAcbCWmnMPZjc2i
-         D/Wg==
-X-Gm-Message-State: AOAM531/8p8tGe2KzS36UZt70kitcRUR5jBHNtSDqWGXhNChQfcwoVcS
-	3kfj7FVJYN6R+1wAWhk1RVr9dD7Ddmo=
-X-Google-Smtp-Source: ABdhPJwgqgZCtfx10uvZ5ugHeQoWMV4RI1135aI4iiq/pCgftaUY8tDq3OtvMsLPdQIVFJNC5IoPjg==
-X-Received: by 2002:a05:6512:3ba0:: with SMTP id g32mr448716lfv.552.1621267613779;
-        Mon, 17 May 2021 09:06:53 -0700 (PDT)
-Return-Path: <wickbergster@gmail.com>
-Received: from localhost.localdomain (dyn-13-cust157.netit.se. [85.89.70.157])
-        by smtp.gmail.com with ESMTPSA id x207sm1997942lff.234.2021.05.17.09.06.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 17 May 2021 09:06:53 -0700 (PDT)
-From: "Alexander Vickberg" <wickbergster@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Alexander Vickberg <wickbergster@gmail.com>
-Subject: [meta-oe][PATCH] hostapd: fix building with CONFIG_TLS=internal
-Date: Mon, 17 May 2021 18:03:48 +0200
-Message-Id: <20210517160347.4039330-1-wickbergster@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        bh=D0HVwHd4pFVwnl7yAwtcH/15b826jUBq6pcp3r/ikPw=;
+        b=KHIfN9u6vQSHm0qc5wkiZ8g/epAFk5UYBHonrJjMIFMRj0euSRNvo0OgbS3VYb9kl/
+         cMchGzukIkFARp0hRxdXR0jwIjQ3gQjXDHOj5zjGR5ExPRdMllKOa5SoNUqPYik6aBh7
+         VXp7G87WU8QFBtHvpwc9Fx6Dxc4ksg9SouzHFaStAF3vgw59FiQaLKZGVrt21Vvymknx
+         +W6WRmhcOHJxWJ/CZm+eizGUd9dfOTEUFjm7MM1T5mpQOdrAvIgQo28t6ggXt/WsC7io
+         IAteEWKZSZf4Zo30gwIkTuKqqLPFqddwtQ1gs+LikQ5haAHYGaxVBJMFc795RLcTZg1T
+         ZBoA==
+X-Gm-Message-State: AOAM530Q+8EnUI8YhfuN3dQfxr4+RfP8mNK8zigRhpDIzdjyVAZgQDln
+	zsm0GqKlzUhgEESFI0/iV0kYA/L9/rKnVQ==
+X-Google-Smtp-Source: ABdhPJxQb5PWmoDJVWF3FMEEQvPYv9KZ22K86TfBXvnK1xmgcjVW3mCpTUifuw92L+W07Wv3FQrgaQ==
+X-Received: by 2002:a05:6a00:84f:b029:2be:3b80:e9eb with SMTP id q15-20020a056a00084fb02902be3b80e9ebmr256943pfk.39.1621267872606;
+        Mon, 17 May 2021 09:11:12 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:a0f0:db81:2f56:60e4:2c64? ([2601:646:9200:a0f0:db81:2f56:60e4:2c64])
+        by smtp.gmail.com with ESMTPSA id l126sm11053885pga.41.2021.05.17.09.11.11
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 17 May 2021 09:11:12 -0700 (PDT)
+Subject: Re: [oe] [meta-python][PATCH 2/5] python3-javaobj-py3: Upgrade 0.4.2 -> 0.4.3
+To: Leon Anavi <leon.anavi@konsulko.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20210517111129.11619-1-leon.anavi@konsulko.com>
+ <20210517111129.11619-2-leon.anavi@konsulko.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Message-ID: <540fd538-94d3-2f18-1bd4-740fe943da9b@gmail.com>
+Date: Mon, 17 May 2021 09:11:10 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20210517111129.11619-2-leon.anavi@konsulko.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-The patch recently added for CVE-2021-30004 broke compilation with
-CONFIG_TLS=internal. This adds the necessary function to let it
-compile again.
 
-Signed-off-by: Alexander Vickberg <wickbergster@gmail.com>
----
- ...001-Prepare-for-CVE-2021-30004.patch.patch | 45 +++++++++++++++++++
- .../hostapd/hostapd_2.9.bb                    |  1 +
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0001-Prepare-for-CVE-2021-30004.patch.patch
 
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/0001-Prepare-for-CVE-2021-30004.patch.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/0001-Prepare-for-CVE-2021-30004.patch.patch
-new file mode 100644
-index 000000000..1bedb4f75
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd/0001-Prepare-for-CVE-2021-30004.patch.patch
-@@ -0,0 +1,45 @@
-+From 14fab0772db19297c82dd1b8612c9335369dce41 Mon Sep 17 00:00:00 2001
-+From: Alexander Vickberg <wickbergster@gmail.com>
-+Date: Mon, 17 May 2021 17:54:13 +0200
-+Subject: [PATCH] Prepare for CVE-2021-30004.patch
-+
-+Without this building fails for CONFIG_TLS=internal
-+
-+Signed-off-by: Alexander Vickberg <wickbergster@gmail.com>
-+---
-+ src/tls/asn1.h       | 6 ++++++
-+ src/utils/includes.h | 1 +
-+ 2 files changed, 7 insertions(+)
-+
-+diff --git a/src/tls/asn1.h b/src/tls/asn1.h
-+index 6bd7df5..77b94ef 100644
-+--- a/src/tls/asn1.h
-++++ b/src/tls/asn1.h
-+@@ -66,6 +66,12 @@ void asn1_oid_to_str(const struct asn1_oid *oid, char *buf, size_t len);
-+ unsigned long asn1_bit_string_to_long(const u8 *buf, size_t len);
-+ int asn1_oid_equal(const struct asn1_oid *a, const struct asn1_oid *b);
-+ 
-++static inline bool asn1_is_null(const struct asn1_hdr *hdr)
-++{
-++	return hdr->class == ASN1_CLASS_UNIVERSAL &&
-++		hdr->tag == ASN1_TAG_NULL;
-++}
-++
-+ extern struct asn1_oid asn1_sha1_oid;
-+ extern struct asn1_oid asn1_sha256_oid;
-+ 
-+diff --git a/src/utils/includes.h b/src/utils/includes.h
-+index 75513fc..741fc9c 100644
-+--- a/src/utils/includes.h
-++++ b/src/utils/includes.h
-+@@ -18,6 +18,7 @@
-+ 
-+ #include <stdlib.h>
-+ #include <stddef.h>
-++#include <stdbool.h>
-+ #include <stdio.h>
-+ #include <stdarg.h>
-+ #include <string.h>
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb
-index e58601868..a9780bc6d 100644
---- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb
-@@ -11,6 +11,7 @@ SRC_URI = " \
-     file://defconfig \
-     file://init \
-     file://hostapd.service \
-+    file://0001-Prepare-for-CVE-2021-30004.patch.patch \
-     file://CVE-2019-16275.patch \
-     file://CVE-2019-5061.patch \
-     file://CVE-2021-0326.patch \
--- 
-2.25.1
+On 5/17/21 4:11 AM, Leon Anavi wrote:
+> Upgrade to release 0.4.3:
+> 
+> - Added support for TC_NULL as array sub-type in _read_field_value
+> - javaobj can now read GZipped files directly (trick done in
+>    load(), which is also the underlying method used by loads())
+> - Fixed a type issue in BlockData/str content comparison
+> 
+> License-Update: License remains Apache License Version 2.0
+> 
 
+thats ok, but does not explain why checksum changed
+
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> ---
+>   ...hon3-javaobj-py3_0.4.2.bb => python3-javaobj-py3_0.4.3.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-javaobj-py3_0.4.2.bb => python3-javaobj-py3_0.4.3.bb} (75%)
+> 
+> diff --git a/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.2.bb b/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.3.bb
+> similarity index 75%
+> rename from meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.2.bb
+> rename to meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.3.bb
+> index 2f24219812..eb93e71733 100644
+> --- a/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.2.bb
+> +++ b/meta-python/recipes-devtools/python/python3-javaobj-py3_0.4.3.bb
+> @@ -5,9 +5,9 @@ DESCRIPTION = "python-javaobj is a python library that provides functions\
+>    representation is a standard data interchange format in Java world."
+>   HOMEPAGE = "https://github.com/tcalmant/python-javaobj"
+>   LICENSE = "Apache-2.0"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=d273d63619c9aeaf15cdaf76422c4f87"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+>   
+> -SRC_URI[sha256sum] = "ed3b1ffcfd39f165729cb53587cca02ab0bfa4c332c837a92d5ffe6aef5c8010"
+> +SRC_URI[sha256sum] = "38f74db3a57e9998a9774e3614afb95cb396f139f29b3fdb130c5af554435259"
+>   
+>   inherit pypi setuptools3
+>   
+> 
+> 
+> 
+> 
+> 
