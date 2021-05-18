@@ -1,94 +1,71 @@
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.web11.9175.1621347300892417458
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.web09.9113.1621347301632259172
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 May 2021 07:15:00 -0700
+ Tue, 18 May 2021 07:15:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=S1ZrjgYA;
- spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id f22so6159438pgb.9
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 May 2021 07:15:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Vcoqjliw;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f171.google.com with SMTP id z4so2960329plg.8
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 May 2021 07:15:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=K2N96tQcSDBGlXMjpBVgvWXIVvh3SPkGb1Si/SIeOzk=;
-        b=S1ZrjgYAE7Yrz56r0nUZMJLp3Yc0fOKOTGXR6F7e2oe2XN2ptzKL7k3IJi0u/BswvH
-         xtUvu55lry6kal+ZYGDv4/5qIJctF0UgbULJzxRJl5gNsCaD4P68+q3hqIN22V8TEiBB
-         L1X4lfFwC7L2xmPT3+fE72/Qu0IElPscbgvacOf0ufecj8SR38OB3hR4FzKxgWGNyaCD
-         ltVl659+iUtiQ2Wu6XSOcG5a9UUfAR7zvf4b/nfTIskUEN8/x5Blwcjl1qh8i0YThMP+
-         8sZsALSW3DXurqSyKMNmHLaS0et04wa1p7cumBQaCCPNve/+3br7uMUIYtqqS/lQQkB7
-         mu6Q==
+        h=from:to:subject:date:message-id:in-reply-to:references;
+        bh=fiLWH4wJskfFa/GlmO04HSmElVmkrV6WUU5AIAakUkg=;
+        b=Vcoqjliwh3xpylaz1JQ+7pAv/gUcbYABOzVfxktnSGfgPkCghtwHYWADQOZ9eTeUUb
+         duPy8HsTao6/Z4Ka8R/SEi/HGlIvpEoVMcnoeFMiWLiIJ+40kGI4ViUSV2do17tvNBJZ
+         7HC3A1a6Zvgz3DajCVvNgzLrJyCYm3BEUKNlAKcE5/KDXzFiup2sDpPZYz3iMVONmkU8
+         UkevDvh2ZVNI0tYeey+nrEWgC0mMU6YscdsWXmxcrFBd8HTOBrLpKL7k9bpWPMnv8kUC
+         K4K7r3lF285mEsmtNzQ/l+To4x7/IZgiGrAsfz6rDnKhXVUVFlE4bh0TcH4qHhjvLKRN
+         imVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=K2N96tQcSDBGlXMjpBVgvWXIVvh3SPkGb1Si/SIeOzk=;
-        b=gD9ABt4vzm5GeMPAnadp8WurvpAbRXhsRW1bHuTHc4flmYBkUEnxqXNdMn4l+0K1qa
-         8N33XhdP9wFUEkeAlKM/ofDSSNTRUmyxIFRu0063JkGNmyrrP+xhJGvPmy9xrzZqJ1Ec
-         MZZfnervHZJgGwUf1SK8OK0Cq59ZdILBY2GFGE4rVc3W+7I8IuSaZyYdSKYrT8LyK8px
-         WcOI3xVHOPcJhHbLnEmfCdNO0aNRrFcAAWFZyx7f7MAPwWObgzAqPpaqaqFXfpUJssbB
-         xmfEaMcG9QgpYMtb0YwDztDu07q34X9f+S71q07xcxmwBa9a4togoMzcbOvX+cM2RMbl
-         hJlA==
-X-Gm-Message-State: AOAM533Ajtpb0ZKPCQ0fWmnVxmz+0k/QvvjqU32sn0xf+GVK3v+wg3OP
-	zfJOQ5GASf0TR8ZmFWdomEYiiSZi0yY=
-X-Google-Smtp-Source: ABdhPJxRDt0HB2KNwglG1ITcvGVUEU/u9fg0om3KuCi7OsKg6ayDaLI3nuDxkINuEsPHxxzVpFRK3g==
-X-Received: by 2002:a65:50c5:: with SMTP id s5mr5299375pgp.138.1621347300059;
-        Tue, 18 May 2021 07:15:00 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+         :references;
+        bh=fiLWH4wJskfFa/GlmO04HSmElVmkrV6WUU5AIAakUkg=;
+        b=BcayCsERgTYYPJGWA3dpT82ig6RiB7hCCqHEm76NjrX+caHohXDJftGGfEszZor/pZ
+         5NOW1irRNZzdn8b4ugVwSK+deCzVR2wfYUWePBmWAnXOiPf2+TR8qHbz19+5zjzPLBQa
+         PArmRk/QwpDKsTjEh3xxW9PA+eYWCr5S0Yi9hROP3RxT1b0gzjn4eRZlpIe1cs0PkIWM
+         /Uj/TqZcoYoJSrlYMHjnYDy8gTOivfCEXIvrAUGXKB/aE5RC2b+DoaMCM46RBOiP32QD
+         A1CKh8LSdPzjyl4yO61hHLTnkgYgus+1YFWF4ZvwqL0NVXwQ0M+ionT/J20NVFGXnXJL
+         rfMw==
+X-Gm-Message-State: AOAM532JOgEsjivOp1YHWuHKQWj46BdD9EwPUWynUV+d7r/Atw/xye6t
+	SBiuyRAP3+IE+sRJgtTxlti/jKU96mQ=
+X-Google-Smtp-Source: ABdhPJzId4eDpojweAS9RvJ2iShjJYHrIp2tRX5ROLNiCqXkhyfi8OU9w/C66/ZyqXp+xUvvabxwzQ==
+X-Received: by 2002:a17:902:c104:b029:ef:836e:15d6 with SMTP id 4-20020a170902c104b02900ef836e15d6mr4881052pli.39.1621347301056;
+        Tue, 18 May 2021 07:15:01 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:7050:e80a:30c5:274])
-        by smtp.gmail.com with ESMTPSA id f5sm2103563pjp.37.2021.05.18.07.14.59
+        by smtp.gmail.com with ESMTPSA id f5sm2103563pjp.37.2021.05.18.07.15.00
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 May 2021 07:14:59 -0700 (PDT)
+        Tue, 18 May 2021 07:15:00 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 0/6] Patch review May 16th
-Date: Tue, 18 May 2021 07:14:51 -0700
-Message-Id: <cover.1621347202.git.akuster808@gmail.com>
+Subject: [dunfell 1/6] nostromo: Blacklist and exclude from world builds
+Date: Tue, 18 May 2021 07:14:52 -0700
+Message-Id: <bbf344afaf09c364a992c4f0167c9f486f2f8b2e.1621347202.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <cover.1621347202.git.akuster808@gmail.com>
+References: <cover.1621347202.git.akuster808@gmail.com>
 
-Please have comments back by Thursday
+Host site is dead.
 
-The following changes since commit 2915810edbb6599051e30efb3b7f805665ddcc23:
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-webserver/recipes-httpd/nostromo/nostromo_1.9.7.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-  ostree: switch from default master branch to main to fix do_fetch failure (2021-05-13 21:52:34 -0700)
-
-are available in the Git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib stable/dunfell-nut
-  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/dunfell-nut
-
-Armin Kuster (2):
-  nostromo: Blacklist and exclude from world builds
-  packagegroup-meta-webserver: remove nostromo from pkg grp
-
-Clément Péron (1):
-  nodejs: 12.20.2 -> 12.21.0
-
-Khem Raj (1):
-  linuxptp: Fix cross build
-
-Saloni Jain (1):
-  fuse: Whitelisted CVE-2019-14860
-
-Sean Nyekjaer (1):
-  nodejs: 12.20.1 -> 12.20.2
-
- .../recipes-support/fuse/fuse_2.9.9.bb        |  5 ++++
- .../linuxptp/Use-cross-cpp-in-incdefs.patch   | 26 +++++++++++++++++
- .../no-incdefs-using-host-headers.patch       | 29 -------------------
- .../linuxptp/linuxptp_2.0.bb                  |  7 +++--
- .../{nodejs_12.20.1.bb => nodejs_12.21.0.bb}  |  2 +-
- .../packagegroup-meta-webserver.bb            |  2 +-
- .../recipes-httpd/nostromo/nostromo_1.9.7.bb  |  3 ++
- 7 files changed, 40 insertions(+), 34 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch
- delete mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
- rename meta-oe/recipes-devtools/nodejs/{nodejs_12.20.1.bb => nodejs_12.21.0.bb} (98%)
-
+diff --git a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.7.bb b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.7.bb
+index d13ef74feb..deb76ac95c 100644
+--- a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.7.bb
++++ b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.7.bb
+@@ -62,3 +62,6 @@ pkg_postinst_${PN} () {
+         fi
+     fi
+ }
++
++PNBLACKLIST[nostromo] ?= "Host site for URI is dead"
++EXCLUDE_FROM_WORLD = "1"
 -- 
 2.17.1
 
