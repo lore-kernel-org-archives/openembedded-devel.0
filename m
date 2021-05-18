@@ -1,153 +1,112 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.271.1621270004354255617
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.web08.4513.1621315382449341542
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 May 2021 09:46:45 -0700
+ Mon, 17 May 2021 22:23:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 9BFF940C22;
-	Mon, 17 May 2021 16:46:43 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id E47bqR8_CG5D; Mon, 17 May 2021 16:46:43 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 73361407FE;
-	Mon, 17 May 2021 16:46:41 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id B1A0E1745E4; Mon, 17 May 2021 12:46:40 -0400 (EDT)
-Date: Mon, 17 May 2021 12:46:40 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=GnCLGlAE;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id q2so6536340pfh.13
+        for <openembedded-devel@lists.openembedded.org>; Mon, 17 May 2021 22:23:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=QeiTkc3PFvqBXrn0GNGtRxtv+M8xvsH9d1llCqOlfIc=;
+        b=GnCLGlAEWA7OvvPcZh8hPhP+9RgoNF/knpucjmrsvDV5jQZqSkmoDzk5jD0oLYUoC/
+         SIYFGz10CjV/JhK5WpuLDaVlGYhhRy5tlG+uDYHdnz9NNW7w0Ebdn4pUhPkLw91OukfG
+         WE1ROanccb6ZUQBTvPTQM/Nj3MOMmTfX/tQHVQKL0PUf4PDaGH3Qsu2EWTgoUAcFERvD
+         0Lo29MCJ2kXW+dt+V0kuwpczyhddvg8ZPYs3PHbyMwPLJ+sA3CxNwnIw2kjmSy19UITz
+         inwChiXbS6XC7KHd5XSzo5bGJgswjnmZnU8UDHCROeE0NPfiKuy8p8jvQs9XeZYwHH6O
+         31ew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=QeiTkc3PFvqBXrn0GNGtRxtv+M8xvsH9d1llCqOlfIc=;
+        b=qTq/ce7yXQz0Bu8+96b9WFBxbOKiMJvLDCKt3/mbSqrnGW65FAog2OfqNXYkapDH1w
+         89aV0beZaNecPM3KWztk0ULGcgYfCSLk+nMPYl8VV8eQE+w0cAZ5rOroB/A4E12QEJ80
+         M4xIBLJT9Y/mqXmQB2M3X7shIF4XQR2ygdKSmJreF3FK75m8oSMfWV6g4hBekOMGhIMz
+         tW/azitFoaNr10k2z/hxl4YsxiVYMfGAsuX1N7Hkw1NW/MWss+Cco4IF61eqTabDqRol
+         5bs9j+IC9xmTLf7Xilr+oVZIjn9B9zIYWUbZ3+ufRlZXA8E+zxhUDL5Q2fdumoU/4tqr
+         Jzew==
+X-Gm-Message-State: AOAM533r+T6OoqqselwxQ/Lr3v2j8I4YPy9+X63nPGpNghGx0tfm0TRH
+	mMInPwJfs4mena4XPFl66IH015wl+MMzgQ==
+X-Google-Smtp-Source: ABdhPJw66E2mIas5N1zIQYa1k0DiT2Is2PjCN4A1QoSLuEQuckiP0dWy//zgtLJYNqC5rkV39N9gsg==
+X-Received: by 2002:a63:e30d:: with SMTP id f13mr3298411pgh.201.1621315381577;
+        Mon, 17 May 2021 22:23:01 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0:db81:2f56:60e4:2c64])
+        by smtp.gmail.com with ESMTPSA id d129sm11080225pfa.6.2021.05.17.22.23.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 17 May 2021 22:23:01 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>, Armin Kuster <akuster808@gmail.com>
-Subject: Re: [dunfell][PATCH] linuxptp: Fix cross build
-Message-ID: <20210517164640.GF1528@denix.org>
-References: <1620078960-57111-1-git-send-email-denis@denix.org>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-haversine: Fix build with latest python/setuptools
+Date: Mon, 17 May 2021 22:22:59 -0700
+Message-Id: <20210518052259.2801919-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-In-Reply-To: <1620078960-57111-1-git-send-email-denis@denix.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-ping.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...up.py-Correct-the-license-assignment.patch | 32 +++++++++++++++++++
+ .../python/python3-haversine_2.3.0.bb         |  2 ++
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-haversine/0001-setup.py-Correct-the-license-assignment.patch
 
-On Mon, May 03, 2021 at 05:56:00PM -0400, Denys Dmytriyenko wrote:
-> From: Khem Raj <raj.khem@gmail.com>
-> 
-> Adjust incdefs.sh to use cross tools to poke for system functionality
-> Re-enable using incdefs.sh
-> export KBUILD_OUTPUT to point to recipe sysroot
-> 
-> (From meta-oe rev: b6022761d6880382c5e6ffa4b3dc6f1ec2ae1e73)
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Signed-off-by: Denys Dmytriyenko <denis@denix.org>
-> ---
->  .../linuxptp/Use-cross-cpp-in-incdefs.patch        | 26 +++++++++++++++++++
->  .../linuxptp/no-incdefs-using-host-headers.patch   | 29 ----------------------
->  .../recipes-connectivity/linuxptp/linuxptp_2.0.bb  |  7 +++---
->  3 files changed, 30 insertions(+), 32 deletions(-)
->  create mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch
->  delete mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
-> 
-> diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch b/meta-oe/recipes-connectivity/linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch
-> new file mode 100644
-> index 0000000..8760886
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch
-> @@ -0,0 +1,26 @@
-> +From 8a4cad5e2f2cbb6a34bdc6e877fe499502b8c4c8 Mon Sep 17 00:00:00 2001
-> +From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-> +Date: Fri, 23 Dec 2016 18:12:29 +0100
-> +Subject: [PATCH] linuxptp: Use cross cpp in incdefs
-> +
-> +Use cross cpp incdefs.sh shell script since we are doing cross compiling
-> +we need to ensure we use correct setttings from toolchain
-> +
-> +Upstream-Status: Inappropriate [OE-Specific]
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> +
-> + makefile | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +--- a/incdefs.sh
-> ++++ b/incdefs.sh
-> +@@ -27,7 +27,7 @@ user_flags()
-> + 	printf " -D_GNU_SOURCE"
-> + 
-> + 	# Get list of directories searched for header files.
-> +-	dirs=$(echo "" | ${CROSS_COMPILE}cpp -Wp,-v 2>&1 >/dev/null | grep ^" /")
-> ++	dirs=$(${CPP} -Wp,-v -xc /dev/null 2>&1 >/dev/null | grep ^" /")
-> + 
-> + 	# Look for clock_adjtime().
-> + 	for d in $dirs; do
-> diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch b/meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
-> deleted file mode 100644
-> index 02dbb23..0000000
-> --- a/meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
-> +++ /dev/null
-> @@ -1,29 +0,0 @@
-> -From 8a4cad5e2f2cbb6a34bdc6e877fe499502b8c4c8 Mon Sep 17 00:00:00 2001
-> -From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-> -Date: Fri, 23 Dec 2016 18:12:29 +0100
-> -Subject: [PATCH] linuxptp: no incdefs using host headers
-> -
-> -Avoid using host headers via incdefs.sh shell script.
-> -
-> -Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-> ----
-> -
-> - makefile | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/makefile b/makefile
-> -index 8cdbd15..85174b8 100644
-> ---- a/makefile
-> -+++ b/makefile
-> -@@ -33,7 +33,7 @@ OBJECTS	= $(OBJ) hwstamp_ctl.o phc2sys.o phc_ctl.o pmc.o pmc_common.o \
-> - SRC	= $(OBJECTS:.o=.c)
-> - DEPEND	= $(OBJECTS:.o=.d)
-> - srcdir	:= $(dir $(lastword $(MAKEFILE_LIST)))
-> --incdefs := $(shell $(srcdir)/incdefs.sh)
-> -+#incdefs := $(shell $(srcdir)/incdefs.sh)
-> - version := $(shell $(srcdir)/version.sh $(srcdir))
-> - VPATH	= $(srcdir)
-> - 
-> --- 
-> -2.9.3
-> -
-> diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb b/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
-> index 930c667..e80abc7 100644
-> --- a/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
-> +++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
-> @@ -4,15 +4,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
->  
->  SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.tgz \
->             file://build-Allow-CC-and-prefix-to-be-overriden.patch \
-> -           file://no-incdefs-using-host-headers.patch \
-> +           file://Use-cross-cpp-in-incdefs.patch \
->             file://time_t_maybe_long_long.patch \
->             "
->  
->  SRC_URI[md5sum] = "d8bb7374943bb747db7786ac26f17f11"
->  SRC_URI[sha256sum] = "0a24d9401e87d4af023d201e234d91127d82c350daad93432106284aa9459c7d"
->  
-> -EXTRA_OEMAKE = "ARCH=${TARGET_ARCH} \
-> -    EXTRA_CFLAGS='-D_GNU_SOURCE -DHAVE_CLOCK_ADJTIME -DHAVE_POSIX_SPAWN -DHAVE_ONESTEP_SYNC ${CFLAGS}'"
-> +EXTRA_OEMAKE = "ARCH=${TARGET_ARCH} EXTRA_CFLAGS='${CFLAGS}'"
-> +
-> +export KBUILD_OUTPUT="${RECIPE_SYSROOT}"
->  
->  do_install () {
->      install -d ${D}/${bindir}
-> -- 
-> 2.7.4
-> 
-
+diff --git a/meta-python/recipes-devtools/python/python3-haversine/0001-setup.py-Correct-the-license-assignment.patch b/meta-python/recipes-devtools/python/python3-haversine/0001-setup.py-Correct-the-license-assignment.patch
+new file mode 100644
+index 0000000000..bb5955a44e
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-haversine/0001-setup.py-Correct-the-license-assignment.patch
+@@ -0,0 +1,32 @@
++From 56b421a18ef8acb41ab9e4bde7e1f5452ec67da9 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 17 May 2021 22:17:07 -0700
++Subject: [PATCH] setup.py: Correct the license assignment
++
++latest python/2.9 + setuptools bail out otherwise
++
++lines = header.split('\n')
++| AttributeError: 'list' object has no attribute 'split'
++
++Upstream-Status: Submitted [https://github.com/mapado/haversine/pull/38]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ setup.py | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/setup.py b/setup.py
++index 549436d..9e7fb00 100755
++--- a/setup.py
+++++ b/setup.py
++@@ -15,7 +15,7 @@ setup(
++     maintainer_email='julien.deniau@mapado.com',
++     url='https://github.com/mapado/haversine',
++     packages=['haversine'],
++-    license=['MIT'],
+++    license='MIT',
++     classifiers=[
++         'Development Status :: 4 - Beta',
++         'Intended Audience :: Developers',
++-- 
++2.31.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-haversine_2.3.0.bb b/meta-python/recipes-devtools/python/python3-haversine_2.3.0.bb
+index 6e02fcf71e..624d30ca01 100644
+--- a/meta-python/recipes-devtools/python/python3-haversine_2.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-haversine_2.3.0.bb
+@@ -2,6 +2,8 @@ SUMMARY = "Calculate the distance between 2 points on Earth"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+ 
++SRC_URI += "file://0001-setup.py-Correct-the-license-assignment.patch"
++
+ SRC_URI[md5sum] = "ff2d43a74195ec00c42ccd5da2a3f3de"
+ SRC_URI[sha256sum] = "72c76855ac25e6ad054c7ed380e95c1a96803185f005dd11f40ccaa9620b551f"
+ 
 -- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+2.31.1
+
