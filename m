@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.5590.1621324894025739524
+ by mx.groups.io with SMTP id smtpd.web09.5514.1621324895148927418
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 May 2021 01:01:34 -0700
+ Tue, 18 May 2021 01:01:35 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=40250 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1liufS-00068l-8O; Tue, 18 May 2021 11:01:31 +0300
+	id 1liufU-00068l-Jx; Tue, 18 May 2021 11:01:33 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-websockets: Upgrade 9.0.1 -> 9.0.2
-Date: Tue, 18 May 2021 11:01:22 +0300
-Message-Id: <20210518080125.30656-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-pysonos: Upgrade 0.0.46 -> 0.0.48
+Date: Tue, 18 May 2021 11:01:25 +0300
+Message-Id: <20210518080125.30656-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210518080125.30656-1-leon.anavi@konsulko.com>
 References: <20210518080125.30656-1-leon.anavi@konsulko.com>
@@ -30,32 +30,31 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 9.0.2:
+Upgrade to release 0.0.48:
 
-- Restored compatibility of python -m websockets with Python < 3.9
-- Restored compatibility with mypy
+- Merge SoCo 0.22
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-websockets_9.0.1.bb => python3-websockets_9.0.2.bb} | 2 +-
+ .../{python3-pysonos_0.0.46.bb => python3-pysonos_0.0.48.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-websockets_9.0.1.bb => python3-websockets_9.0.2.bb} (79%)
+ rename meta-python/recipes-devtools/python/{python3-pysonos_0.0.46.bb => python3-pysonos_0.0.48.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-websockets_9.0.1.bb b/meta-python/recipes-devtools/python/python3-websockets_9.0.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pysonos_0.0.46.bb b/meta-python/recipes-devtools/python/python3-pysonos_0.0.48.bb
 similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-websockets_9.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-websockets_9.0.2.bb
-index 58f4f10ff7..cc9887a941 100644
---- a/meta-python/recipes-devtools/python/python3-websockets_9.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-websockets_9.0.2.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=78c2cc91e172ca96d6f8e4a76c739ec6"
+rename from meta-python/recipes-devtools/python/python3-pysonos_0.0.46.bb
+rename to meta-python/recipes-devtools/python/python3-pysonos_0.0.48.bb
+index 0dc7d8b3ca..18ff30b22a 100644
+--- a/meta-python/recipes-devtools/python/python3-pysonos_0.0.46.bb
++++ b/meta-python/recipes-devtools/python/python3-pysonos_0.0.48.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=07b0e2ca9ac77cd65cd4edf2e13367ea"
+ 
+-SRC_URI[sha256sum] = "e682b989ea6e156cc1893e573097a0a5b8401e955a1c279bb4c1d20dfa6c4d9b"
++SRC_URI[sha256sum] = "69c55bf80aae77b3ea8658ee1a80b9aafc0506931614853c926830a502230fc6"
  
  inherit pypi setuptools3
- 
--SRC_URI[sha256sum] = "2ab64e9fd18e57a66b63a8774e337d81d6366412bef65c7d71f87ad5c4faeed5"
-+SRC_URI[sha256sum] = "6550ecf06e39b7b009605d332dc58b04f3f6f8fe087d452bb2ea4712fbbdcbe6"
- 
- BBCLASSEXTEND = "native nativesdk"
  
 -- 
 2.17.1
