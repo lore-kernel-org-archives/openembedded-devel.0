@@ -1,50 +1,50 @@
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
- by mx.groups.io with SMTP id smtpd.web12.5659.1621325519968911135
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.web09.5585.1621325521677205471
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 May 2021 01:12:00 -0700
+ Tue, 18 May 2021 01:12:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gTvsZOt2;
- spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f54.google.com with SMTP id j14so7389016wrq.5
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 May 2021 01:11:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=HlPiNEPu;
+ spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wr1-f53.google.com with SMTP id v12so9132903wrq.6
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 May 2021 01:12:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=Srlrl8SFe/E4D6LogioGA+kPcAoyokbGb0uYAMo6QTI=;
-        b=gTvsZOt2dsxYkowxMciwCmyUwKYBvcIas/6P+EoHbwPpXjWRz7xUkT6nyf5WkkTsxZ
-         rV5N+hFBEbfy9zkf6bh60KqBEZjIWjF89UR4fPCntkPKmg595SUfWbtsm5W2tt+gxELI
-         oaaL2cYlPgF0DDsBpUj2MwZxD8hKe3lvPf/bMVtTTiR7I/L0JsH4SQcydkM4dWLojlnK
-         wyNzc4HCpMX3zdwzEqOWadAVIy4rvF5HtmsuB+9uclFrExEKv0PGoNM3/KAJgivz2Fs+
-         W5MSbst0AIvz6DJb8CWKjRMNw5/A2pJcmryZPH6G/PRpPugzPUZwY+Q4SkFsDlOlsUtk
-         33Jw==
+        bh=ZqIEvDXBKyiv0I4VXgTCSFjjZVIEWnjyREa0V3/z0yE=;
+        b=HlPiNEPu8rk75HSdheo5IPr9Ae6Cna2lGmtk00tu4DOn+A7S4dDGroBTOk/4T31x7H
+         wR9LibNUTOaxE1Us52hOf7T8z4pkZ3oyLPHzXwIL0jAonTm7B8FqQIlX7bKtVPTVW9oh
+         ECEmionznXC+LxcuSK1nElVyn+Wft6lb2ZVTZGvlBoTEaknR6k5mRG1Jn3B8m4VouFDO
+         uY7zAfelNxe/rcKLHTDhCP4GIC/QLFnCEB6JFgwIQ4cWJMqDU4w2O/9IWJQqcFI6Px/u
+         /rScNuVlokRdOXFjFcJWY17UHnyHm1hJs8myGPJaZxDdfzoiktygBXiHolRsHhE2Xjcj
+         zKpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=Srlrl8SFe/E4D6LogioGA+kPcAoyokbGb0uYAMo6QTI=;
-        b=WtYNjPq6HsMuKNWuJiM6YnBPuM1HMoCdH4mrRB3E6PnBxnT074q88IEuOXQKAYrUpx
-         pCwQdP9Ebca8wEywAQ/UFz4PPvlggCfeUXrc32664ocjQNUEOSs2W6TEs+t8mCB1XHQZ
-         M6Jg524C4B+K9NSlWIeeXkumTdrcWgN51ZDdJpCz0bPvYofsZ0LfAhqqJkUYMay38IY5
-         rrkuvT51Gg43vkqvUZpJO+d02ecVwxV0Fq7S2uEG1D+Q+aWNKp+cMBgYAUqQSSA/a1r1
-         go3aebBiy1GLeeGRSmPlcY0qc9Cs3D/ZbLXQLiVogm3wke3T4T9pKdaIR5A5EeAXc0wD
-         g+gQ==
-X-Gm-Message-State: AOAM531aiQLJ5vEVnNmnsjLl7tOA+lDRfRkMm6rZ1wiPH16A6fKBHT3L
-	+AFdFHKTspGVeMXQWxKPyH3R0ziY7H8=
-X-Google-Smtp-Source: ABdhPJwKlse3BlM133RSPtgeF3qhCqfb3CBP3wL4v6jalWlBLVtryYSx+fXCMPRKi/4nXiH67gWh7g==
-X-Received: by 2002:a5d:694f:: with SMTP id r15mr5099259wrw.371.1621325518580;
-        Tue, 18 May 2021 01:11:58 -0700 (PDT)
+        bh=ZqIEvDXBKyiv0I4VXgTCSFjjZVIEWnjyREa0V3/z0yE=;
+        b=nV0SUQQAszyenfM1n2admLd5TBaxnlE5UCKfSh5D1/PKfYPBIO6yz7rrF4IJTo5Hah
+         VhiA1vz8Aeyquh7cLbRAzB47D+5vvPcm9omZ9+hiiNdPWl4OZ3kOHthJbUiRAfxBZhki
+         zwW2vpZtlGN5ycFdaOQLSdMIS7xkLBnFcMzgpzifrEJDCh3RCVrfn6YvwYYo/ArxwgbE
+         YrRqmRmI51xa7EenlXQhuKsQzmHAcGGxVTlW23uTQVWGrCjDiewbO/aae0PeGNzYtZCA
+         mHJbbl8bWldkkUyaabXxh9Vlb1MifZ76/HGCKJ3J6kqmUZT+c60/30s3370hWsT97vrv
+         y9Xw==
+X-Gm-Message-State: AOAM532A4JbaIxHugxgaVCrLhmJ32djXMkbAn/WMpDPMOcG8uOumyks4
+	lr+suCF3o529thA4d+o42NoUHpdtpz8=
+X-Google-Smtp-Source: ABdhPJxMVKN9l9UWuwM/ABvgry4A7yemYAYaBla6neyIAKVYM7Pb5m4+XLoa7tbojeEFWBG6yO2ihg==
+X-Received: by 2002:a5d:4b04:: with SMTP id v4mr5278187wrq.92.1621325520301;
+        Tue, 18 May 2021 01:12:00 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from thanks-buchmuellers.speedport.ip (p200300f07f0ec830b81d2d73abc7bc58.dip0.t-ipconnect.de. [2003:f0:7f0e:c830:b81d:2d73:abc7:bc58])
-        by smtp.gmail.com with ESMTPSA id v18sm24505319wro.18.2021.05.18.01.11.57
+        by smtp.gmail.com with ESMTPSA id v18sm24505319wro.18.2021.05.18.01.11.58
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 May 2021 01:11:58 -0700 (PDT)
+        Tue, 18 May 2021 01:11:59 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 3/4] network-manager-applet: upgrade 1.18.0 -> 1.22.0
-Date: Tue, 18 May 2021 10:11:46 +0200
-Message-Id: <20210518081147.1291254-3-schnitzeltony@gmail.com>
+Subject: [PATCH 4/4] nano: upgrade 5.6 -> 5.7
+Date: Tue, 18 May 2021 10:11:47 +0200
+Message-Id: <20210518081147.1291254-4-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210518081147.1291254-1-schnitzeltony@gmail.com>
 References: <20210518081147.1291254-1-schnitzeltony@gmail.com>
@@ -52,28 +52,37 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Full changelog is found at [1]
+
+[1] https://www.nano-editor.org/dist/latest/ChangeLog
+
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...anager-applet_1.18.0.bb => network-manager-applet_1.22.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-connectivity/network-manager-applet/{network-manager-applet_1.18.0.bb => network-manager-applet_1.22.0.bb} (89%)
+ meta-oe/recipes-support/nano/{nano_5.6.bb => nano_5.7.bb} | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+ rename meta-oe/recipes-support/nano/{nano_5.6.bb => nano_5.7.bb} (81%)
 
-diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.18.0.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.22.0.bb
-similarity index 89%
-rename from meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.18.0.bb
-rename to meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.22.0.bb
-index bc3e66ca2..936f76123 100644
---- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.18.0.bb
-+++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.22.0.bb
-@@ -9,7 +9,7 @@ inherit features_check gnomebase gsettings gtk-icon-cache gettext
+diff --git a/meta-oe/recipes-support/nano/nano_5.6.bb b/meta-oe/recipes-support/nano/nano_5.7.bb
+similarity index 81%
+rename from meta-oe/recipes-support/nano/nano_5.6.bb
+rename to meta-oe/recipes-support/nano/nano_5.7.bb
+index 1ce08dd50..6a293c763 100644
+--- a/meta-oe/recipes-support/nano/nano_5.6.bb
++++ b/meta-oe/recipes-support/nano/nano_5.7.bb
+@@ -1,3 +1,4 @@
++SUMMARY = "Small and friendly console text editor"
+ DESCRIPTION = "GNU nano (Nano's ANOther editor, or \
+ Not ANOther editor) is an enhanced clone of the \
+ Pico text editor."
+@@ -12,7 +13,7 @@ RDEPENDS_${PN} = "ncurses-terminfo-base"
+ PV_MAJOR = "${@d.getVar('PV').split('.')[0]}"
  
- REQUIRED_DISTRO_FEATURES = "x11"
+ SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
+-SRC_URI[sha256sum] = "fce183e4a7034d07d219c79aa2f579005d1fd49f156db6e50f53543a87637a32"
++SRC_URI[sha256sum] = "d4b181cc2ec11def3711b4649e34f2be7a668e70ab506860514031d069cccafa"
  
--SRC_URI[archive.sha256sum] = "ddbb400ace804b59cc513611ce9701f7ef3f00de151dbbfb96284c8c1ef2b18b"
-+SRC_URI[archive.sha256sum] = "c70d80b48d40a9cb99ec967cc4389f67e7f0301528a69d481572041331a646be"
+ UPSTREAM_CHECK_URI = "https://ftp.gnu.org/gnu/nano"
  
- # We don't not have ubuntu's appindicator (yet?)
- EXTRA_OEMESON = "-Dappindicator=no"
 -- 
 2.31.1
 
