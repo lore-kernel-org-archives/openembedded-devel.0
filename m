@@ -1,77 +1,87 @@
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web09.9116.1621347303239310662
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
+ by mx.groups.io with SMTP id smtpd.web09.9119.1621347304203763969
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 May 2021 07:15:03 -0700
+ Tue, 18 May 2021 07:15:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=oQkj3ShX;
- spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id t21so5163731plo.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 May 2021 07:15:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=u6bZPwA/;
+ spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f181.google.com with SMTP id a11so5159345plh.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 May 2021 07:15:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=tVl3TX5X8STj29Vuls1+ZPL4JGi/sP6b8EVDND7yb9c=;
-        b=oQkj3ShXRqpmQdKX8597BAEoeX/Hndv/VFMmMnRd3t7hEmtlh336KFa871V5PlAWSd
-         cu5ya/s8el7H+UfweOlCVpuBghYyNxcHqlC+AeZMYOXt3UMiFMHH456zEHguZx+kLvhl
-         Cac+tVMXnu8RB4g+T2525Wm4MwaGG+MeZfuR4aiCWWs8gp0fsADWU68q6oeSV/qRpEEa
-         Lno1DR3biSZ2gxgePL5mCBUizWRUGONEBLHHfsb8U51sKy+86WDOi4Bj9xNh3SK3dM9Q
-         zBDpEOVWX9BFOxX5X5l/wjOFnOR/CbFW/czctxAO8UMZWtYT2xuvU99WFgVeFwSXM43U
-         8ocw==
+        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+         :content-transfer-encoding;
+        bh=clRsfBmLVbAZyq5GnRniNrI8tkmVjBSgh5l4LCGiD7I=;
+        b=u6bZPwA/4zvgmwvLMXVBG4jiLM9RiLKkUJYNpywOilU/OSi2SZFIihEg7Jub8CpaTl
+         yZYYfl2GL8oKX1gABbzovJW5kKMBeYr7MsIgaVpjJvtlno+V4+nYknxxeDCqEaNeEDpC
+         V41m5Qhd8W6/pubeDXZHUhzhQpSf5TDVK9uTAA7KnBhVm766eDYmWyPXyFIW6Fx8pwbW
+         P7wV0HLmIup3PmFHjL29CkBaNFlFm/WIEy/n+/y0cZHwdwKCTjpGsN8Q6xM3ZSe5sXuh
+         +t9yID3Psgd86V8symEyn1MqDKui/xskE4O7sMVTQibBi7L3KuFn9TiNVLjNi9O3tQPV
+         QT+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=tVl3TX5X8STj29Vuls1+ZPL4JGi/sP6b8EVDND7yb9c=;
-        b=XBzdEG+lOi5n0s83fEp9cZfSi41GxF4z7+PlWeSCOmY/vdB8PKB0SIQ89+qhPa0nru
-         phmqVBj8o4W70l+Q9U/cjOzQpOsnAHp+H0ooKLItBphTUelbBGAoyyo6Kh4rkosqHscF
-         hRlXjljWt8AAJJz2gqtCG3pjkdBJ7z30H4iS1J13+it/jWC101SUvLXC2eoZUfS1el7x
-         t4HI2yDAoCFxb2K2Wy/tYUXN4EjhwkAmC8haH7kJHFQhFMFS3cNLJ9nrhSHAhHZO6A4f
-         DU1QCbrd9la2Sa+nXWo1AysXCTomtY+jZDuZbMxT4mm3xn2oUhdFUsb1O06PARIHnn9B
-         gucw==
-X-Gm-Message-State: AOAM5339L6IWEOXxjoiLRssvD8qwtyJuX246io57ncpcjrQMDmmumPjr
-	Goz53acMjODcShsSyvLcCrjQXc4nnXA=
-X-Google-Smtp-Source: ABdhPJw9Egwg07HY5u9/MqtxfMo790YaydVo6EuIVv7BaktqvhHRZEPNBFG5rESEZgGue4XN/1iKhQ==
-X-Received: by 2002:a17:903:189:b029:f1:d67a:5168 with SMTP id z9-20020a1709030189b02900f1d67a5168mr4848027plg.82.1621347302709;
-        Tue, 18 May 2021 07:15:02 -0700 (PDT)
+         :references:mime-version:content-transfer-encoding;
+        bh=clRsfBmLVbAZyq5GnRniNrI8tkmVjBSgh5l4LCGiD7I=;
+        b=OZpavriS33mZ6N8QM+R5ZL/CVXH3c5VV9KjMcWxto44YPLJ1tc5u9I6RIxhLzpzS/d
+         ISYgM4vxq5LJjsOyK9B7RO7vsIENdVB4LK9K6TqhNgB+7fvYoWZhzqnAblTcWPx/bI6C
+         247fzmuOhm8JpLcaELstiWr8F2R3Qw9W/mhN8PTFobM5gAmmVG9T+NAsBNNekUKsciBu
+         unmDmyybvg+h33VLvup05WMYHnAIYSAYCazgqJLvGAvYi4X3jTu/kgPEXvtsDiUvAi3p
+         KhOI5ullvOv+MnHEVNNsGlVlr7UUS+5xeO+gVBgJbC/r0lF5xfbFmp9R9Bd4UuP4wpTt
+         dWOg==
+X-Gm-Message-State: AOAM531Cng4N63cZA2jpSR5IIBN5+Ep10CuCCVcJMh3MNSSKmK1vjWKe
+	WL1lEu3FSzLVWaB7wuVPXTL7zDl5aq0=
+X-Google-Smtp-Source: ABdhPJy1/mI3OxIYMN6eFr3Mh9ByvGnTOOPI6Qvix4FQxA3/CrplwAUl+d2JYRJQJpWotgxh1jXFTw==
+X-Received: by 2002:a17:902:ee54:b029:ef:8497:e097 with SMTP id 20-20020a170902ee54b02900ef8497e097mr4831226plo.22.1621347303639;
+        Tue, 18 May 2021 07:15:03 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:7050:e80a:30c5:274])
         by smtp.gmail.com with ESMTPSA id f5sm2103563pjp.37.2021.05.18.07.15.02
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 May 2021 07:15:02 -0700 (PDT)
+        Tue, 18 May 2021 07:15:03 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 3/6] nodejs: 12.20.1 -> 12.20.2
-Date: Tue, 18 May 2021 07:14:54 -0700
-Message-Id: <1ea5c51d98793937abde675b3701dfe90ab819d6.1621347202.git.akuster808@gmail.com>
+Subject: [dunfell 4/6] nodejs: 12.20.2 -> 12.21.0
+Date: Tue, 18 May 2021 07:14:55 -0700
+Message-Id: <d460525cd5f5bd7bd0ea9456600d279151cf040e.1621347202.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1621347202.git.akuster808@gmail.com>
 References: <cover.1621347202.git.akuster808@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Sean Nyekjaer <sean@geanix.com>
+From: Clément Péron <peron.clem@gmail.com>
 
+Fixes :
+ - CVE-2021-22883
+ - CVE-2021-22884
+ - CVE-2021-23840
+
+Signed-off-by: Clément Péron <peron.clem@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 6322c63987b1422d5a8c5e30077780b38011c89d)
-[12.x is LTS version]
+(cherry picked from commit 02feb1d9324fba08c5d3055fa34bb6200ee91520)
+[12.x LTS version]
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../nodejs/{nodejs_12.20.1.bb => nodejs_12.20.2.bb}             | 2 +-
+ .../nodejs/{nodejs_12.20.2.bb => nodejs_12.21.0.bb}             | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_12.20.1.bb => nodejs_12.20.2.bb} (98%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_12.20.2.bb => nodejs_12.21.0.bb} (98%)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_12.20.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_12.20.2.bb
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_12.20.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_12.21.0.bb
 similarity index 98%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_12.20.1.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_12.20.2.bb
-index 0673a3202d..6acc36b4fb 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_12.20.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_12.20.2.bb
+rename from meta-oe/recipes-devtools/nodejs/nodejs_12.20.2.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_12.21.0.bb
+index 6acc36b4fb..b9e3821776 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_12.20.2.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_12.21.0.bb
 @@ -26,7 +26,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
  SRC_URI_append_class-target = " \
             file://0002-Using-native-binaries.patch \
             "
--SRC_URI[sha256sum] = "e00eee325d705b2bfa9929b7d061eb2315402d7e8548945eac9870bf84321853"
-+SRC_URI[sha256sum] = "961ad600f0706c396390ebc7767fb01d5e3792a5022dc2e7774796756eec6d3c"
+-SRC_URI[sha256sum] = "961ad600f0706c396390ebc7767fb01d5e3792a5022dc2e7774796756eec6d3c"
++SRC_URI[sha256sum] = "052f37ace6f569b513b5a1154b2a45d3c4d8b07d7d7c807b79f1566db61e979d"
  
  S = "${WORKDIR}/node-v${PV}"
  
