@@ -1,89 +1,85 @@
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.web09.9119.1621347304203763969
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web11.9178.1621347304955126560
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 May 2021 07:15:04 -0700
+ Tue, 18 May 2021 07:15:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=u6bZPwA/;
- spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id a11so5159345plh.3
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ji8n0Mco;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id n3so5156022plf.7
         for <openembedded-devel@lists.openembedded.org>; Tue, 18 May 2021 07:15:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=clRsfBmLVbAZyq5GnRniNrI8tkmVjBSgh5l4LCGiD7I=;
-        b=u6bZPwA/4zvgmwvLMXVBG4jiLM9RiLKkUJYNpywOilU/OSi2SZFIihEg7Jub8CpaTl
-         yZYYfl2GL8oKX1gABbzovJW5kKMBeYr7MsIgaVpjJvtlno+V4+nYknxxeDCqEaNeEDpC
-         V41m5Qhd8W6/pubeDXZHUhzhQpSf5TDVK9uTAA7KnBhVm766eDYmWyPXyFIW6Fx8pwbW
-         P7wV0HLmIup3PmFHjL29CkBaNFlFm/WIEy/n+/y0cZHwdwKCTjpGsN8Q6xM3ZSe5sXuh
-         +t9yID3Psgd86V8symEyn1MqDKui/xskE4O7sMVTQibBi7L3KuFn9TiNVLjNi9O3tQPV
-         QT+Q==
+        h=from:to:subject:date:message-id:in-reply-to:references;
+        bh=BUl8vcjVOX1dQjF3IyzO87sukx9UwLz+RWUg5SgHsio=;
+        b=ji8n0McoFoWdgaey1YSnucv564mtVcBU87Lhg1QGE3Ik0tpthHpRWXQc5vcsttk0mY
+         hizlqpe6fpJPbpV3OnZ36V3cb9e/gGOsqcCHP1hf4v2vZFva8C/pU+M7oXfPdzkr4TNu
+         2eXiyBRdubx5Gt4/LLOm4plaEiTU3waHHf/KqGBf+KUiVzSsaTELtvEpnKRPrbBwZUU1
+         Y6A7EBXORi7Oj9nxJxLXyx3/JIruCkNo4Wr1cGASRmzbfkVSeQR/p08+3KOjpAlkFBqY
+         GZNOpGeR6if6vY8L+WENwE+kjYvj0isuPDPPIFSnfrd4uGyCUY0Fqgs/Dt4EudQ9vTCY
+         RWmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=clRsfBmLVbAZyq5GnRniNrI8tkmVjBSgh5l4LCGiD7I=;
-        b=OZpavriS33mZ6N8QM+R5ZL/CVXH3c5VV9KjMcWxto44YPLJ1tc5u9I6RIxhLzpzS/d
-         ISYgM4vxq5LJjsOyK9B7RO7vsIENdVB4LK9K6TqhNgB+7fvYoWZhzqnAblTcWPx/bI6C
-         247fzmuOhm8JpLcaELstiWr8F2R3Qw9W/mhN8PTFobM5gAmmVG9T+NAsBNNekUKsciBu
-         unmDmyybvg+h33VLvup05WMYHnAIYSAYCazgqJLvGAvYi4X3jTu/kgPEXvtsDiUvAi3p
-         KhOI5ullvOv+MnHEVNNsGlVlr7UUS+5xeO+gVBgJbC/r0lF5xfbFmp9R9Bd4UuP4wpTt
-         dWOg==
-X-Gm-Message-State: AOAM531Cng4N63cZA2jpSR5IIBN5+Ep10CuCCVcJMh3MNSSKmK1vjWKe
-	WL1lEu3FSzLVWaB7wuVPXTL7zDl5aq0=
-X-Google-Smtp-Source: ABdhPJy1/mI3OxIYMN6eFr3Mh9ByvGnTOOPI6Qvix4FQxA3/CrplwAUl+d2JYRJQJpWotgxh1jXFTw==
-X-Received: by 2002:a17:902:ee54:b029:ef:8497:e097 with SMTP id 20-20020a170902ee54b02900ef8497e097mr4831226plo.22.1621347303639;
-        Tue, 18 May 2021 07:15:03 -0700 (PDT)
+         :references;
+        bh=BUl8vcjVOX1dQjF3IyzO87sukx9UwLz+RWUg5SgHsio=;
+        b=LMmwChsfxVyyVJxUlWgAh0hvkT6E6E1XKmoZ0Jkxp4MZgtSmXJZsIXzbvaqt6c1xro
+         UOpmKVMJHoXQxdvKz6c9gAROtcpfkHB3/JBBsY3I1LqnnDTsTWDBCkd5A0v80zzjP3Kf
+         cXCs7OD+XsJvsOvlWgvVjV+HCV59/k7mHu8W2J76hf/3qsdHKMZ658am6qtYzAuShVj5
+         l9aJb08jEb/OfMGncgNQ2/0nhmp3ttsiTm8sNnAOHtkAfxqQm5AER0QfeP4ERnrMHMNI
+         7k5HRen+Z9ALREImgKKTzULc7yaf9K8TSD4aEafrVXEeSbmFlvYVtQRHuRy7fSN9SFND
+         GC5A==
+X-Gm-Message-State: AOAM532FsRgLHQWwStR09xxeMLXkWTFlI2MdC2QPWdJVMFM/MgL0F1GI
+	5dY5G7AX3CIcD0gff25x4fPZh++Lnxo=
+X-Google-Smtp-Source: ABdhPJxxjBkhS49acRJaKCDOkqAA7d/EeXiqRHBGUswvH9tmQPDyeKumMAo0vcaUimHxERSwEnHBQw==
+X-Received: by 2002:a17:90a:2:: with SMTP id 2mr5388337pja.107.1621347304395;
+        Tue, 18 May 2021 07:15:04 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:7050:e80a:30c5:274])
-        by smtp.gmail.com with ESMTPSA id f5sm2103563pjp.37.2021.05.18.07.15.02
+        by smtp.gmail.com with ESMTPSA id f5sm2103563pjp.37.2021.05.18.07.15.03
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 May 2021 07:15:03 -0700 (PDT)
+        Tue, 18 May 2021 07:15:04 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 4/6] nodejs: 12.20.2 -> 12.21.0
-Date: Tue, 18 May 2021 07:14:55 -0700
-Message-Id: <d460525cd5f5bd7bd0ea9456600d279151cf040e.1621347202.git.akuster808@gmail.com>
+Subject: [dunfell 5/6] fuse: Whitelisted CVE-2019-14860
+Date: Tue, 18 May 2021 07:14:56 -0700
+Message-Id: <f81318a4f87dbb9c9f9e0e24e68163fb797930bb.1621347202.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1621347202.git.akuster808@gmail.com>
 References: <cover.1621347202.git.akuster808@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-From: Clément Péron <peron.clem@gmail.com>
+From: Saloni Jain <Saloni.Jain@kpit.com>
 
-Fixes :
- - CVE-2021-22883
- - CVE-2021-22884
- - CVE-2021-23840
+CVE-2019-14860 is a REDHAT specific issue and
+was addressed for REDHAT Fuse products on
+Red Hat Fuse 7.4.1 and Red Hat Fuse 7.5.0.
+REDHAT has also released the fix and updated their
+security advisories after significant releases.
+Hence, whitelisted the CVE-2019-14860.
 
-Signed-off-by: Clément Péron <peron.clem@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 02feb1d9324fba08c5d3055fa34bb6200ee91520)
-[12.x LTS version]
+Link: https://access.redhat.com/security/cve/cve-2019-14860
+Link: https://access.redhat.com/errata/RHSA-2019:3244
+Link: https://access.redhat.com/errata/RHSA-2019:3892
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../nodejs/{nodejs_12.20.2.bb => nodejs_12.21.0.bb}             | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_12.20.2.bb => nodejs_12.21.0.bb} (98%)
+ meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_12.20.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_12.21.0.bb
-similarity index 98%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_12.20.2.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_12.21.0.bb
-index 6acc36b4fb..b9e3821776 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_12.20.2.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_12.21.0.bb
-@@ -26,7 +26,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
- SRC_URI_append_class-target = " \
-            file://0002-Using-native-binaries.patch \
-            "
--SRC_URI[sha256sum] = "961ad600f0706c396390ebc7767fb01d5e3792a5022dc2e7774796756eec6d3c"
-+SRC_URI[sha256sum] = "052f37ace6f569b513b5a1154b2a45d3c4d8b07d7d7c807b79f1566db61e979d"
+diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
+index 95e870691c..49682b3cd4 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
+@@ -19,6 +19,11 @@ SRC_URI = "https://github.com/libfuse/libfuse/releases/download/${BP}/${BP}.tar.
+ SRC_URI[md5sum] = "8000410aadc9231fd48495f7642f3312"
+ SRC_URI[sha256sum] = "d0e69d5d608cc22ff4843791ad097f554dd32540ddc9bed7638cc6fea7c1b4b5"
  
- S = "${WORKDIR}/node-v${PV}"
++# CVE-2019-14860 is a REDHAT specific issue and was addressed for REDHAT Fuse products on Red Hat Fuse 7.4.1 and Red Hat Fuse 7.5.0.
++# REDHAT has also released the fix and updated their security advisories after significant releases.
++CVE_PRODUCT = "fuse"
++CVE_CHECK_WHITELIST += "CVE-2019-14860"
++
+ UPSTREAM_CHECK_URI = "https://github.com/libfuse/libfuse/releases"
+ UPSTREAM_CHECK_REGEX = "fuse\-(?P<pver>2(\.\d+)+).tar.gz"
  
 -- 
 2.17.1
