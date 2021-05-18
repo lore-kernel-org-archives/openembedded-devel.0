@@ -1,253 +1,128 @@
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.web10.5641.1621325518539105116
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+ by mx.groups.io with SMTP id smtpd.web10.5642.1621325519058808093
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 May 2021 01:11:58 -0700
+ Tue, 18 May 2021 01:11:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=XmN4INeL;
- spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f46.google.com with SMTP id y14so7045480wrm.13
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=gBTepmP/;
+ spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wr1-f49.google.com with SMTP id a4so9162969wrr.2
         for <openembedded-devel@lists.openembedded.org>; Tue, 18 May 2021 01:11:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
+        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=dLfPwLmtPwxBHAXTRbwiDXKGGAQcptkdg5pqYuQYoq0=;
-        b=XmN4INeLWlZ5Owc3l2U8ZT8rCYMPf+ijdEOHTv9Qw1xH00LcJiSn/zvh1kzGolZQt4
-         Hhky0Gad3Pu+dNTcnEMw1DdK2PP5bOXUlXKZOHFEuE/eOYeDvbctw0qY91+kV3ctlAXB
-         rs3ABNFJCjcpopkUOTm1k6A0HksgBOmZ/U0m4VGho1c/FDTNKdnG5/tkc36qZLE5EhIq
-         +pZ/j85MF66hCOx+q9x7osyML/DHw3R49jiCkPJcoQ5J7ynGsFPoQau4Jifb2oHZfREQ
-         b8ub1bsgT/06Sguk1GI7fm1tvgFYmfnoT2JmhegAt4hVn7K7PTNTuVKIWlCxFT57n3hR
-         KKZA==
+        bh=y75U81p+z7lcivOPrAVZz0X/QLQyuWAgCaDYYV9Np3o=;
+        b=gBTepmP/jgJyQ7KasNgZ1i7EyOQytYEr7CrsgjaC1rIdWEhWFmFFadJNDZWBriBbdm
+         OYCshSmSgJNp0YKLrNDkKHG3d6FZ5WDCRzoy5y07ihEQmICN4qnlzviJs5REYAcRFb8B
+         56wqbsyXAOykLYImkzbjnG1E6yVNvTBhAQwf5x3FHYhlbhGB6SacJx1VvUvCUOfcoobJ
+         hGlYyXppX4qbn3GnSr/k9Ot1JcejawaDhOJWOBznwx1JYAtypT8w8xVL9bVdqlZtSeKE
+         9jIyjFgo1X6XWYLAXRs+F4O8jxoFvTY4xMyEIiLW2vHlKIhgyvh6l2y5GAu6vibNuCbV
+         qbpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=dLfPwLmtPwxBHAXTRbwiDXKGGAQcptkdg5pqYuQYoq0=;
-        b=hd/3WzaNMqketNAGBBsum2dtLkeXLJfdj1sRNTTNz4HJQNUabz5J4aZy/UnyHEcqdM
-         DTmTVsuIZMdU6ZCKJNEDzOTyLVW5tzoNP4Urq+Yd9VOhI7v20z8rivOPHgqdWCblIPuU
-         F/1xJ0WBrlwxBACbUY8JuJtGKG4DVOwJH6wdpUCwIEDytOtORlcw50nOGK3PsH+X3MTr
-         0qPqO9MyF8PnTQjlNaaVMChhALmmSKWKnWmetayJk8p+GK3YMT2n9p4ZIBdTAOsb0Y12
-         m23iweYNQAc2UfM6ONokBFWa0VempBoNOKAEaPTH3U5WJf0nrBIzbtNpavMPrXWbxM07
-         vQQQ==
-X-Gm-Message-State: AOAM531rGx00Nvs5/1sQE0Il1BZIuGtArxEoDYRlfeZRV+vR3RH/rsy2
-	ZiwXW+/m/LEIE8UovnTJNN5BtAuA8ZA=
-X-Google-Smtp-Source: ABdhPJzuC6rWzsYpjtBczmWbzo10UCgRkFoKbggw/PLkj9cSGguJLu2GtGs0f1D0yJclnFItzU0w+Q==
-X-Received: by 2002:a5d:5409:: with SMTP id g9mr5015678wrv.321.1621325516602;
-        Tue, 18 May 2021 01:11:56 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=y75U81p+z7lcivOPrAVZz0X/QLQyuWAgCaDYYV9Np3o=;
+        b=suhfdIAox00UHUoBzPPmcPq4eRn0zBamLXAw6IYDNvy+T82VNDnEQrdTwH/RH3sdyC
+         EycMiZht0Vrppt3ZdD2nGxNRGemJ2JLie+osNY4VJu3ivvcVFdrcdvkexhr4n6wQhDh4
+         wiL8ewctt4kiFDOyZN39hOqvMXTxJ/ibjAiBI2LeMx9zp+ulP8bfuQwMX1p04nyPaskX
+         hFjZcdZSSOUPwjuRMmRWZrjFRgb01Am8J2L0DjK+ZOkHmn52KnwEPr3MZy5zmvW7snI+
+         F4rxI1S9Qn1X8wk9z8v4r3G95n3Ov8eB48mwliGHRxss7E/ui5Qd9h9Py3pjnAmSk7Af
+         pf+Q==
+X-Gm-Message-State: AOAM533rrruXe7fepQ6mUPqlBEqiNAjFJPOrbviPFE8tPePujBnGcp4S
+	f8vUG64pOam+7uCYTZaRBYfvmG8ntds=
+X-Google-Smtp-Source: ABdhPJxiH7E/DQw7y/eWq9F0Jlm7dIOrmEAJ+zk6Dl3qnkjnoQ3+62/zCbvVZXQb4c4Sj0a6qI/6/Q==
+X-Received: by 2002:a5d:4b50:: with SMTP id w16mr5059408wrs.276.1621325517696;
+        Tue, 18 May 2021 01:11:57 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from thanks-buchmuellers.speedport.ip (p200300f07f0ec830b81d2d73abc7bc58.dip0.t-ipconnect.de. [2003:f0:7f0e:c830:b81d:2d73:abc7:bc58])
-        by smtp.gmail.com with ESMTPSA id v18sm24505319wro.18.2021.05.18.01.11.54
+        by smtp.gmail.com with ESMTPSA id v18sm24505319wro.18.2021.05.18.01.11.56
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 May 2021 01:11:55 -0700 (PDT)
+        Tue, 18 May 2021 01:11:57 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 1/4] portaudio-v19: upgrade 19.6.0 -> 19.7.0
-Date: Tue, 18 May 2021 10:11:44 +0200
-Message-Id: <20210518081147.1291254-1-schnitzeltony@gmail.com>
+Subject: [PATCH 2/4] mousepad: upgrade 0.5.4 -> 0.5.5
+Date: Tue, 18 May 2021 10:11:45 +0200
+Message-Id: <20210518081147.1291254-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20210518081147.1291254-1-schnitzeltony@gmail.com>
+References: <20210518081147.1291254-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* development continues on github
-* build with CMake
-* examples is a configure option -> replace (always empty) extra package by
-  PACKAGECONFIG
+* add PACKAGECONFIG for gspell - disabled by default
 
-From announcement:
+Release notes for 0.5.5
+=======================
+- New Features:
+  - Add a `.desktop` file to make Mousepad appear in Xfce settings
+    (!94)
+  - Add a command line option to open the prefs dialog (!94)
+  - Plugin support (!92)
+  - Add gspell plugin (#1, !92)
+  - Disable and wipe recent history if recent-menu-items is set to 0
+    (#112, !89)
+  - Support -ve line and column values for "Go to" location
+    (#113, !84)
 
-* support for latest Mac OS APIs
-* Jack - fixes for device names that allows use on Linux systems with PipeWire
-* WASAPI - numerous improvements
-* OSS - better format support
-* ALSA - various fixes for hangs and crashes
-* WDMKS - improved performance and fixes
-* updated build scripts
+- Appearance Changes:
+  - Switch to client-side decorations (!97)
+
+- Code Refactoring:
+  - Remove Xfconf dependency (#60, #122, !98)
+  - A general review of sanity checks
+  - A review of window lifetime management
+  - A review of document lifetime management
+  - Automate and sanitize memory management of sources
+  - A small review of GSettings use
+  - Do not use `== (TRUE|FALSE)` for boolean conditions
+
+- Bug Fixes:
+  - Fix actions to show/hide bars in fullscreen mode (#129)
+  - Fix broken "Revert" action
+  - Fix and extend "Move Lines" action (#87, #116, !96)
+  - Support for drag and drop of tabs when search is active
+  - Do a silent search when changing tabs with the search bar enabled
+  - Use get/set_real_line_offset () functions for "Paste as Column"
+    (#114, !91)
+  - Restore cursor position after transpose (#115, !88)
+  - Fix "Delete Line" action (#117, !86)
+  - Fix recent_sort function (!90)
+  - Reset line and column number if not given on command line
+    (#121, !87)
+  - menu: "Spaces to Tabs" converter converts leading spaces
+    (#118, !85)
+  - Make window require attention when opening new tabs (2) (#119)
+
+- Translation Updates
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../portaudio/files/ldflags.patch             | 51 -------------------
- .../portaudio-v19/0001-Find-jack.patch        | 32 ++++++++++++
- .../portaudio/portaudio-v19_19.7.0.bb         | 32 ++++++++++++
- .../portaudio/portaudio-v19_20161030.bb       | 32 ------------
- 4 files changed, 64 insertions(+), 83 deletions(-)
- delete mode 100644 meta-oe/recipes-support/portaudio/files/ldflags.patch
- create mode 100644 meta-oe/recipes-support/portaudio/portaudio-v19/0001-Find-jack.patch
- create mode 100644 meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb
- delete mode 100644 meta-oe/recipes-support/portaudio/portaudio-v19_20161030.bb
+ .../mousepad/{mousepad_0.5.4.bb => mousepad_0.5.5.bb}        | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+ rename meta-xfce/recipes-apps/mousepad/{mousepad_0.5.4.bb => mousepad_0.5.5.bb} (66%)
 
-diff --git a/meta-oe/recipes-support/portaudio/files/ldflags.patch b/meta-oe/recipes-support/portaudio/files/ldflags.patch
-deleted file mode 100644
-index aca93a51f..000000000
---- a/meta-oe/recipes-support/portaudio/files/ldflags.patch
-+++ /dev/null
-@@ -1,51 +0,0 @@
--Upstream forgot to pass LDFLAGS to everything apart from the main library.
--
--Upstream-Status: Pending
--Signed-off-by: Ross Burton <ross.burton@intel.com>
--
--diff --git a/Makefile.in b/Makefile.in
--index 5e1a764..61ecdd1 100644
----- a/Makefile.in
--+++ b/Makefile.in
--@@ -171,20 +171,20 @@ lib/$(PALIB): lib-stamp $(LTOBJS) $(MAKEFILE) $(PAINC)
-- 	@WITH_ASIO_TRUE@  $(LIBTOOL) --mode=link --tag=CXX $(CXX) $(PA_LDFLAGS) -o lib/$(PALIB) $(LTOBJS) $(DLL_LIBS)
-- 
-- $(ALL_TESTS): bin/%: lib/$(PALIB) $(MAKEFILE) $(PAINC) test/%.c
---	@WITH_ASIO_FALSE@ $(LIBTOOL) --mode=link $(CC) -o $@ $(CFLAGS) $(top_srcdir)/test/$*.c lib/$(PALIB) $(LIBS)
---	@WITH_ASIO_TRUE@  $(LIBTOOL) --mode=link --tag=CXX $(CXX) -o $@ $(CXXFLAGS) $(top_srcdir)/test/$*.c lib/$(PALIB) $(LIBS)
--+	@WITH_ASIO_FALSE@ $(LIBTOOL) --mode=link $(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(top_srcdir)/test/$*.c lib/$(PALIB) $(LIBS)
--+	@WITH_ASIO_TRUE@  $(LIBTOOL) --mode=link --tag=CXX $(CXX) -o $@ $(CXXFLAGS) $(LDFLAGS) $(top_srcdir)/test/$*.c lib/$(PALIB) $(LIBS)
-- 
-- $(EXAMPLES): bin/%: lib/$(PALIB) $(MAKEFILE) $(PAINC) examples/%.c
---	@WITH_ASIO_FALSE@ $(LIBTOOL) --mode=link $(CC) -o $@ $(CFLAGS) $(top_srcdir)/examples/$*.c lib/$(PALIB) $(LIBS)
---	@WITH_ASIO_TRUE@  $(LIBTOOL) --mode=link --tag=CXX $(CXX) -o $@ $(CXXFLAGS) $(top_srcdir)/examples/$*.c lib/$(PALIB) $(LIBS)
--+	@WITH_ASIO_FALSE@ $(LIBTOOL) --mode=link $(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(top_srcdir)/examples/$*.c lib/$(PALIB) $(LIBS)
--+	@WITH_ASIO_TRUE@  $(LIBTOOL) --mode=link --tag=CXX $(CXX) -o $@ $(CXXFLAGS) $(LDFLAGS) $(top_srcdir)/examples/$*.c lib/$(PALIB) $(LIBS)
-- 
-- $(SELFTESTS): bin/%: lib/$(PALIB) $(MAKEFILE) $(PAINC) qa/%.c
---	@WITH_ASIO_FALSE@ $(LIBTOOL) --mode=link $(CC) -o $@ $(CFLAGS) $(top_srcdir)/qa/$*.c lib/$(PALIB) $(LIBS)
---	@WITH_ASIO_TRUE@  $(LIBTOOL) --mode=link --tag=CXX $(CXX) -o $@ $(CXXFLAGS) $(top_srcdir)/qa/$*.c lib/$(PALIB) $(LIBS)
--+	@WITH_ASIO_FALSE@ $(LIBTOOL) --mode=link $(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(top_srcdir)/qa/$*.c lib/$(PALIB) $(LIBS)
--+	@WITH_ASIO_TRUE@  $(LIBTOOL) --mode=link --tag=CXX $(CXX) -o $@ $(CXXFLAGS) $(LDFLAGS) $(top_srcdir)/qa/$*.c lib/$(PALIB) $(LIBS)
-- 
-- bin/paloopback: lib/$(PALIB) $(MAKEFILE) $(PAINC) $(LOOPBACK_OBJS)
---	@WITH_ASIO_FALSE@ $(LIBTOOL) --mode=link $(CC) -o $@ $(CFLAGS) $(LOOPBACK_OBJS) lib/$(PALIB) $(LIBS)
---	@WITH_ASIO_TRUE@ $(LIBTOOL) --mode=link --tag=CXX $(CXX) -o $@ $(CXXFLAGS)  $(LOOPBACK_OBJS) lib/$(PALIB) $(LIBS)
--+	@WITH_ASIO_FALSE@ $(LIBTOOL) --mode=link $(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(LOOPBACK_OBJS) lib/$(PALIB) $(LIBS)
--+	@WITH_ASIO_TRUE@ $(LIBTOOL) --mode=link --tag=CXX $(CXX) -o $@ $(CXXFLAGS) $(LDFLAGS) $(LOOPBACK_OBJS) lib/$(PALIB) $(LIBS)
-- 
-- install: lib/$(PALIB) portaudio-2.0.pc
-- 	$(INSTALL) -d $(DESTDIR)$(libdir)
--@@ -224,10 +224,10 @@ distclean: clean
-- 	$(CC) -c $(CFLAGS) $< -o $@
-- 
-- %.lo: %.c $(MAKEFILE) $(PAINC)
---	$(LIBTOOL) --mode=compile $(CC) -c $(CFLAGS) $< -o $@
--+	$(LIBTOOL) --mode=compile $(CC) -c $(CFLAGS) $(LDFLAGS) $< -o $@
-- 
-- %.lo: %.cpp $(MAKEFILE) $(PAINC)
---	$(LIBTOOL) --mode=compile --tag=CXX $(CXX) -c $(CXXFLAGS) $< -o $@
--+	$(LIBTOOL) --mode=compile --tag=CXX $(CXX) -c $(CXXFLAGS) $(LDFLAGS) $< -o $@
-- 
-- %.o: %.cpp $(MAKEFILE) $(PAINC)
-- 	$(CXX) -c $(CXXFLAGS) $< -o $@
-diff --git a/meta-oe/recipes-support/portaudio/portaudio-v19/0001-Find-jack.patch b/meta-oe/recipes-support/portaudio/portaudio-v19/0001-Find-jack.patch
-new file mode 100644
-index 000000000..d6c6300ec
---- /dev/null
-+++ b/meta-oe/recipes-support/portaudio/portaudio-v19/0001-Find-jack.patch
-@@ -0,0 +1,32 @@
-+From 8ec1b100afda5b3e31f9d44af04b04b16dfff2e4 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-+Date: Tue, 18 May 2021 00:15:46 +0200
-+Subject: [PATCH] Find jack with pkgconfig
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
+diff --git a/meta-xfce/recipes-apps/mousepad/mousepad_0.5.4.bb b/meta-xfce/recipes-apps/mousepad/mousepad_0.5.5.bb
+similarity index 66%
+rename from meta-xfce/recipes-apps/mousepad/mousepad_0.5.4.bb
+rename to meta-xfce/recipes-apps/mousepad/mousepad_0.5.5.bb
+index 7a2f12b1e..830d86b8a 100644
+--- a/meta-xfce/recipes-apps/mousepad/mousepad_0.5.4.bb
++++ b/meta-xfce/recipes-apps/mousepad/mousepad_0.5.5.bb
+@@ -7,7 +7,10 @@ DEPENDS = "gtk+3 gtksourceview4 xfconf xfce4-dev-tools-native"
+ 
+ inherit xfce-app gsettings mime-xdg
+ 
+-SRC_URI[sha256sum] = "d90f492e5d0cba5f5b3b0c1eb7fd7c1701aef57e3fa244d2c457e7f9b0a42aa1"
++SRC_URI[sha256sum] = "40c35f00e0e10df50a59bd0dbba9007d2fb5574ed8a2aa73b0fc5ef40e64abe1"
 +
-+Upstream-Status: Pending
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-+---
-+ CMakeLists.txt | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 122fe93..ab7d7f5 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -274,7 +274,8 @@ ELSE()
-+ 
-+   ELSEIF(UNIX)
-+ 
-+-    FIND_PACKAGE(Jack)
-++    find_package(PkgConfig REQUIRED)
-++    pkg_check_modules (JACK jack)
-+     IF(JACK_FOUND)
-+       OPTION(PA_USE_JACK "Enable support for Jack" ON)
-+     ELSE()
-+-- 
-+2.31.1
-+
-diff --git a/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb b/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb
-new file mode 100644
-index 000000000..3a0f7894f
---- /dev/null
-+++ b/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb
-@@ -0,0 +1,32 @@
-+SUMMARY = "A portable audio library"
-+SECTION = "libs/multimedia"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=26107732c2ab637c5710446fcfaf02df"
-+
-+PV = "v190700"
-+
-+SRC_URI = " \
-+    git://github.com/PortAudio/portaudio.git \
-+    file://0001-Find-jack.patch \
-+"
-+SRCREV = "147dd722548358763a8b649b3e4b41dfffbcfbb6"
-+S = "${WORKDIR}/git"
-+
-+inherit cmake
-+
-+PACKAGECONFIG ??= "alsa jack"
-+PACKAGECONFIG[alsa] = ",,alsa-lib"
-+PACKAGECONFIG[jack] = ",,jack"
-+PACKAGECONFIG[examples] = "-DPA_BUILD_EXAMPLES=ON,-DPA_BUILD_EXAMPLES=OFF"
-+
-+do_install_append() {
-+    if [ -d ${B}/examples ]; then
-+        install -d ${D}${bindir}
-+        for example in ${B}/examples/pa*; do
-+            install -m755 $example ${D}${bindir}/
-+        done
-+    fi
-+}
-+
-+FILES_SOLIBSDEV = ""
-+FILES_${PN} += "${libdir}/libportaudio.so"
-diff --git a/meta-oe/recipes-support/portaudio/portaudio-v19_20161030.bb b/meta-oe/recipes-support/portaudio/portaudio-v19_20161030.bb
-deleted file mode 100644
-index 489f8ad9e..000000000
---- a/meta-oe/recipes-support/portaudio/portaudio-v19_20161030.bb
-+++ /dev/null
-@@ -1,32 +0,0 @@
--SUMMARY = "A portable audio library"
--SECTION = "libs/multimedia"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=26107732c2ab637c5710446fcfaf02df"
--
--PV = "v190600"
--
--SRC_URI = "http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz \
--           file://ldflags.patch"
--SRC_URI[md5sum] = "4df8224e047529ca9ad42f0521bf81a8"
--SRC_URI[sha256sum] = "f5a21d7dcd6ee84397446fa1fa1a0675bb2e8a4a6dceb4305a8404698d8d1513"
--
--S = "${WORKDIR}/portaudio"
--
--inherit autotools pkgconfig
--
--PACKAGECONFIG ??= "alsa jack"
--PACKAGECONFIG[alsa] = "--with-alsa, --without-alsa, alsa-lib,"
--PACKAGECONFIG[jack] = "--with-jack, --without-jack, jack,"
--
--EXTRA_OECONF = "--without-oss --without-asihpi"
--
--do_install_append() {
--    mkdir --parents ${D}${bindir}
--    for b in ${B}/bin/pa*; do
--        # Bit nasty, should always work
--        ${B}/*-libtool --mode install install $b ${D}${bindir}
--    done
--}
--
--PACKAGES += "portaudio-examples"
--FILES_portaudio-examples = "${bindir}"
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[spell] = "--enable-plugin-gspell,--disable-plugin-gspell,gspell"
+ 
+ FILES_${PN} += " \
+     ${datadir}/glib-2.0/schemas \
 -- 
 2.31.1
 
