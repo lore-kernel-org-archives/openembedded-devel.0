@@ -1,122 +1,87 @@
-Received: from mail-qv1-f53.google.com (mail-qv1-f53.google.com [209.85.219.53])
- by mx.groups.io with SMTP id smtpd.web11.14332.1621442252595167228
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web10.1398.1621468144111232351
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 May 2021 09:37:32 -0700
+ Wed, 19 May 2021 16:49:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=IK0jiqz3;
- spf=pass (domain: gmail.com, ip: 209.85.219.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f53.google.com with SMTP id q6so7103457qvb.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 19 May 2021 09:37:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=O2K2vgt2o0zXFkWA3HBF8pV6qToSTNi3oIX7JD4BF2k=;
-        b=IK0jiqz3RdnCJkjHIZQLie6gwtXiIE9zWHHmbYbzbQih0CfJ9N/vh+Tl/Ynl8ygY36
-         Y9zV33nfgl+rVTO1yqBQB2FvZTep6pi6PhXXhCniLv2lAD8ulatYu5M8zu/MRzVOLjIt
-         nIIxPuPo/nyn/kprwT8eGEA0TdAJhGx3U1wI+PZCwG1WU9TB9cb6h3MQHY56OO2wi2sx
-         nRd9PVyW228MFGg1h7lpnaux90miJRPvSpfSJs0GP6+cszRvfQ4k5q2iF4PCB4W21O33
-         CyKGKDeTaxH+LBJcqi5a2ZePCDoBhba7rLww0/PopjYBuvYmY15FUY9DJqsf3ayEjsDJ
-         8H1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=O2K2vgt2o0zXFkWA3HBF8pV6qToSTNi3oIX7JD4BF2k=;
-        b=JcpVkfD+9KpxLMnMoWNwJd0GxaA9NG3KlzS8HI+O12XbC9dY6LzmGLaUoL7M+3SpiT
-         UcWvNa+mIWHASWQbSYITl9Z8jHXWeBb1JCaASW6maEesOhbVBMIs2Bho2YKeeFeaBZzk
-         aY27IdL8D0QSQN5F5RSZCNkN2Dopc1hLGp0X3FBgwX8luPZxcmJdcGOBL72YvfHtbLVf
-         a+ov8CITtSuhuy9ybdGJ0eRMd6DhAP1PekcvSR/Mpo0Qr6xYkDEIdGHRq4gKrPhtLeWA
-         VBuAk/bPt/g90+yLhky6a/BSqOlTS5FArkyL9eQMkKohS/WTaE/BmKFPo1iPuwgD6uu+
-         sT8w==
-X-Gm-Message-State: AOAM533Mj9qnvmPQI9SCtrW3WNO6ia9P75e6XKWEKCvVdDGvcK7ohjZW
-	Ob5w4IT0eanJt60cW/EiqhGHVDfjOfjy8DwPhdU=
-X-Google-Smtp-Source: ABdhPJx11qEG9rfnhlYDZ54qMvGgshjU4KjeJjl4cqXE0ZeelvdPey3rCYgYcu56cG/4an0xD7u1KNLUEfIWH/isksY=
-X-Received: by 2002:ad4:4e91:: with SMTP id dy17mr323899qvb.55.1621442251499;
- Wed, 19 May 2021 09:37:31 -0700 (PDT)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=NF/r4X51;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113, mailfrom: wangmy@fujitsu.com)
+Return-Path: <wangmy@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1621468141; i=@fujitsu.com;
+	bh=mpuhEX9GZwESxveE9IRFVOVVAHuva1OS5AGmuW92FrE=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=NF/r4X515FDNBjLi6FGz5cA27JniCzyBQedfPEim6xjNUjpn0itEmghowa23QRevD
+	 cf7Ee6NtTQ/y79JLJJZADA1NEwrmORq9HsFRN9FMQ2QY4U8JcOyB/yamSuSwnx7QjC
+	 wZk0MBfi4I3dBWsJNDasOse38tUMabU/Z5sthX5pTq6OhRyLBzduXerkVyG2bsB+dQ
+	 0DWQE0PLulwoj7dDD0o0xiv3+fCJfnxFgL6PjiIZ4bF9vYharjBzsIh/HKrFgZCKJ3
+	 eQXG6JqVTYmardk9DjUEEdzYEHbESyjVnpFM3qYZ/hftcfT9dqYHg2DSEPFZoIlbnp
+	 plOh4UAUibHAw==
+Received: from [100.113.6.49] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-b.eu-central-1.aws.symcld.net id 28/6F-15146-CE3A5A06; Wed, 19 May 2021 23:49:00 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprOIsWRWlGSWpSXmKPExsViZ8MxRffN4qU
+  JBttvSlhcPLyU2YHR49zGFYwBjFGsmXlJ+RUJrBnXNh1kKTjNVtHz4QZzA+Mz1i5GLg4hgdlM
+  Er2v/7N0MXICOScYJc7fYAex2QTUJKbfusEKYosI6Essnb2HGcRmFlCRePG7B6xGWMBO4tL2e
+  UA1HBwsAqoSH26Yg4R5BZwk1qxsASuXEFCQmPLwPTNEXFDi5MwnLBBjJCQOvngBVaMoMftyMw
+  uEXSHx+vAl5gmMvLOQtMxC0rKAkWkVo2VSUWZ6RkluYmaOrqGBga6hobGuqa6RiaFeYpVukl5
+  qqW5yal5JUSJQVi+xvFivuDI3OSdFLy+1ZBMjMLxSClk/7mA89PqD3iFGSQ4mJVFes/uLEoT4
+  kvJTKjMSizPii0pzUosPMcpwcChJ8IYuWpogJFiUmp5akZaZAwx1mLQEB4+SCK/GFKA0b3FBY
+  m5xZjpE6hSjopQ4ry9InwBIIqM0D64NFl+XGGWlhHkZGRgYhHgKUotyM0tQ5V8xinMwKgnzLl
+  8INIUnM68EbvoroMVMQIv/Ny4CWVySiJCSamCKks36MlOe+VakhO/GnsADc8oOr/bul0rXv1R
+  9X6nP5qLUnqAlXv0Fib/Kw7fNCE/oEj4V2XabJYN7bqVw3sxPVxwL9lfv3Vf4lr/Vr33iv+uT
+  ba+LcHQL8Xwpff9XzFymW/XrM40zjI/PTeJfcVN9a8BGJSlF7+CZ0yUz2Xct2s050z2eU2nX7
+  46mYKePVheu7La9e1pKTr2qt/PcmocLj7q+8prwaeH9fZyz+WVfbfdae3Od6N8P9usmSOpdXd
+  iuzLor4atR18kT8x9odnUeCvVi/2DaVmV/4+2f/LmCr169Fzi8ZRlz1HP/qAAGtucN86W//We
+  cdfR3xfFApvQjYhqyfL3/Sk89S/bhyw5UYinOSDTUYi4qTgQA2IaoGyoDAAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-3.tower-248.messagelabs.com!1621468139!203688!1
+X-Originating-IP: [62.60.8.148]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.75.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 4572 invoked from network); 19 May 2021 23:49:00 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-3.tower-248.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 19 May 2021 23:49:00 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 14JNmr1P008744
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 20 May 2021 00:48:59 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Thu, 20 May 2021 00:48:51 +0100
+From: "wangmy" <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] trace-cmd: Conflict resolution
+Date: Thu, 20 May 2021 07:48:39 +0800
+Message-ID: <1621468119-21199-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <20210519060041.9004-1-nicolas.dechesne@linaro.org>
-In-Reply-To: <20210519060041.9004-1-nicolas.dechesne@linaro.org>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Wed, 19 May 2021 09:37:05 -0700
-Message-ID: <CAMKF1spip2JaKp4EM7mvgYJ-a7joLSmQe6hff8bB_HEtMrx2kw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] sysbench: upgrade to 1.0.20
-To: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Type: text/plain
 
-seeing this failure
+perf(oe-core) also uses the doc included in plugins/, so package it in own subdirs of trace-cmd.
 
-https://errors.yoctoproject.org/Errors/Details/584952/
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-On Tue, May 18, 2021 at 11:01 PM Nicolas Dechesne
-<nicolas.dechesne@linaro.org> wrote:
->
-> * Upstream moved to Github, let's use it for SRC_URI
-> * COPYING file was changed, but with no impact on license
-> * sysbench includes a copy of luajit project and it's compiled by
->   default. However the internal copy of luajit won't cross compile
->   properly, without patching it (it uses 'gcc'). So instead use the
->   'system' luajit, e.g. the one package from OE (which is what most
->   distro do anyways)
-> * Does not compile with different built folder. Lua generated files
->   have things like that:
-> unsigned char __/__/__/__/sysbench-1_0_20/src/lua/internal/sysbench_lua[] =
->
-> Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-> ---
->  ...{sysbench_0.4.12.bb => sysbench_1.0.20.bb} | 21 ++++++++++++-------
->  1 file changed, 14 insertions(+), 7 deletions(-)
->  rename meta-oe/recipes-benchmark/sysbench/{sysbench_0.4.12.bb => sysbench_1.0.20.bb} (56%)
->
-> diff --git a/meta-oe/recipes-benchmark/sysbench/sysbench_0.4.12.bb b/meta-oe/recipes-benchmark/sysbench/sysbench_1.0.20.bb
-> similarity index 56%
-> rename from meta-oe/recipes-benchmark/sysbench/sysbench_0.4.12.bb
-> rename to meta-oe/recipes-benchmark/sysbench/sysbench_1.0.20.bb
-> index 708c71f4f..555477ab0 100644
-> --- a/meta-oe/recipes-benchmark/sysbench/sysbench_0.4.12.bb
-> +++ b/meta-oe/recipes-benchmark/sysbench/sysbench_1.0.20.bb
-> @@ -2,16 +2,17 @@ SUMMARY = "System performance benchmark"
->  HOMEPAGE = "http://github.com/akopytov/sysbench"
->  SECTION = "console/tests"
->  LICENSE = "GPLv2"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
->
-> -inherit autotools
-> +DEPENDS = "luajit"
->
-> -# The project has moved from Sourceforge to Launchpad, to Github. Use the source tarball from
-> -# Launchpad until the next release is available from Github.
-> -SRC_URI = "https://launchpad.net/ubuntu/+archive/primary/+files/${BPN}_${PV}.orig.tar.gz"
-> +inherit autotools pkgconfig
->
-> -SRC_URI[md5sum] = "3a6d54fdd3fe002328e4458206392b9d"
-> -SRC_URI[sha256sum] = "83fa7464193e012c91254e595a89894d8e35b4a38324b52a5974777e3823ea9e"
-> +SRC_URI = "git://github.com/akopytov/${BPN}.git"
-> +
-> +SRCREV = "ebf1c90da05dea94648165e4f149abc20c979557"
-> +
-> +S = "${WORKDIR}/git"
->
->  PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'largefile', d)}"
->  PACKAGECONFIG[largefile] = "--enable-largefile,--disable-largefile,,"
-> @@ -21,6 +22,12 @@ PACKAGECONFIG[mysql] = "--with-mysql \
->                          --with-mysql-libs=${STAGING_LIBDIR}, \
->                          --without-mysql,mysql5"
->
-> +# the internal luajit won't cross compile
-> +EXTRA_OECONF += "--with-system-luajit"
-> +
-> +# lua.h generated files are bogus when using B != S
-> +B = "${S}"
-> +
->  do_configure_prepend() {
->      touch ${S}/NEWS ${S}/AUTHORS
->  }
-> --
-> 2.29.2
->
->
-> 
->
+diff --git a/meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb b/meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb
+index d39afff8e..906ca2c1f 100644
+--- a/meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb
++++ b/meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb
+@@ -12,6 +12,8 @@ S = "${WORKDIR}/git"
+ 
+ do_install() {
+        oe_runmake etcdir=${sysconfdir} DESTDIR=${D} install
++       mkdir -p ${D}${libdir}/traceevent/plugins/${BPN}
++       mv ${D}/${libdir}/traceevent/plugins/*.so ${D}${libdir}/traceevent/plugins/${BPN}/
+ }
+ 
+ FILES_${PN} += "${libdir}/traceevent/plugins"
+-- 
+2.25.1
+
