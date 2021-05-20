@@ -1,25 +1,22 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.11159.1621528966882678437
+ by mx.groups.io with SMTP id smtpd.web11.11175.1621528969947409607
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 May 2021 09:42:47 -0700
+ Thu, 20 May 2021 09:42:50 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=58812 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1ljlky-0007FW-OY; Thu, 20 May 2021 19:42:45 +0300
+	id 1ljlkw-0007FW-MP; Thu, 20 May 2021 19:42:44 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-click: Upgrade 8.0.0 -> 8.0.1
-Date: Thu, 20 May 2021 19:42:37 +0300
-Message-Id: <20210520164237.31557-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-pywbem: Upgrade 1.1.3 -> 1.2.0
+Date: Thu, 20 May 2021 19:42:35 +0300
+Message-Id: <20210520164237.31557-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210520164237.31557-1-leon.anavi@konsulko.com>
-References: <20210520164237.31557-1-leon.anavi@konsulko.com>
-MIME-Version: 1.0
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=-0.4
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,59 +27,68 @@ X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-Upgrade to release 8.0.1:
+Upgrade to release 1.2.0 with bug fixes and enhancements:
 
-- Mark top-level names as exported so type checking understand
-  imports in user projects.
-- Annotate Context.obj as Any so type checking allows all
-  operations on the arbitrary object.
-- Fix some types that weren’t available in Python 3.6.0.
-- Fix type checking for iterating over ProgressBar object.
-- The importlib_metadata backport package is installed on Python
-  < 3.8.
-- Arguments with nargs=-1 only use env var value if no command
-  line values are given.
-- Flag options guess their type from flag_value if given, like
-  regular options do from default.
-- Added documentation that custom parameter types may be passed
-  already valid values in addition to strings.
-- Resolving commands returns the name that was given, not
-  command.name, fixing an unintended change to help text and
-  default_map lookups. When using patterns like AliasedGroup,
-  override resolve_command to change the name that is returned
-  if needed.
-- If a default value is invalid, it does not prevent showing
-  help text.
-- Pass windows_expand_args=False when calling the main command to
-  disable pattern expansion on Windows. There is no way to escape
-  patterns in CMD, so if the program needs to pass them on as-is
-  then expansion must be disabled.
+- Finalized the pywbem mock support
+- Logging: Added a value 'off' for the log destination in the
+  pywbem.configure_logging() function that disables logging
+- Improved exception handling during the parsing of CIM-XML
+  responses received from a WBEM server
+- Reduced memory consumption of CIM objects and CIM types by
+  defining their attributes to use Python slots
+- Reduced memory consumption of CIM objects by using lazy
+  initialization of dictionary-type attributes
+- Unsupported versions for CIM infrastructure, DTD or protocol
+  version returned in CIM-XML responses from WBEM servers are
+  now raised as new exceptions pywbem
+- In the makefile, added an ignore list for issues reported by
+  safety along with the reasons why each issue is ignored
+- Improvements in the log messages of the MOFCompiler class
+- Added a conn_close() method to the pywbem.MOFCompiler class
+  that closes the underlying connection
+- Added 'make perftest' to run performance tests
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-click_8.0.0.bb => python3-click_8.0.1.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-click_8.0.0.bb => python3-click_8.0.1.bb} (91%)
+ .../{python3-pywbem_1.1.3.bb => python3-pywbem_1.2.0.bb}    | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-extended/pywbem/{python3-pywbem_1.1.3.bb => python3-pywbem_1.2.0.bb} (87%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-click_8.0.0.bb b/meta-python/recipes-devtools/python/python3-click_8.0.1.bb
-similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-click_8.0.0.bb
-rename to meta-python/recipes-devtools/python/python3-click_8.0.1.bb
-index f7af73d6d5..22c6c7903c 100644
---- a/meta-python/recipes-devtools/python/python3-click_8.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-click_8.0.1.bb
-@@ -8,7 +8,7 @@ HOMEPAGE = "http://click.pocoo.org/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=1fa98232fd645608937a0fdc82e999b8"
+diff --git a/meta-python/recipes-extended/pywbem/python3-pywbem_1.1.3.bb b/meta-python/recipes-extended/pywbem/python3-pywbem_1.2.0.bb
+similarity index 87%
+rename from meta-python/recipes-extended/pywbem/python3-pywbem_1.1.3.bb
+rename to meta-python/recipes-extended/pywbem/python3-pywbem_1.2.0.bb
+index fd73419536..988dae1335 100644
+--- a/meta-python/recipes-extended/pywbem/python3-pywbem_1.1.3.bb
++++ b/meta-python/recipes-extended/pywbem/python3-pywbem_1.2.0.bb
+@@ -16,7 +16,7 @@ HOMEPAGE = "http://pywbem.github.io"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
  
--SRC_URI[sha256sum] = "7d8c289ee437bcb0316820ccee14aefcb056e58d31830ecab8e47eda6540e136"
-+SRC_URI[sha256sum] = "8c04c11192119b1ef78ea049e0a6f0463e4c48ef00a30160c704337586f3ad7a"
+-SRC_URI[sha256sum] = "2abb6443f4debae56af7abefadb9fa5b8af9b53fc9bcf67f6c01a78db1064300"
++SRC_URI[sha256sum] = "8ef48185e0adbaeb9bd5181c4c5de951f6d58d54e2e1d7e87a9834e10eabe957"
  
- inherit pypi setuptools3 ptest
+ inherit pypi setuptools3 update-alternatives
  
+@@ -24,6 +24,7 @@ DEPENDS += " \
+     ${PYTHON_PN}-ply-native \
+     ${PYTHON_PN}-pyyaml-native \
+     ${PYTHON_PN}-six-native \
++    ${PYTHON_PN}-wheel-native \
+ "
+ 
+ RDEPENDS_${PN}_class-target += "\
+@@ -37,6 +38,9 @@ RDEPENDS_${PN}_class-target += "\
+     ${PYTHON_PN}-threading \
+     ${PYTHON_PN}-unixadmin \
+     ${PYTHON_PN}-xml \
++    ${PYTHON_PN}-nocasedict \
++    ${PYTHON_PN}-nocaselist \
++    ${PYTHON_PN}-yamlloader \
+ "
+ 
+ ALTERNATIVE_${PN} = "mof_compiler"
 -- 
 2.17.1
 
