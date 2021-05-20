@@ -1,98 +1,98 @@
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web09.8763.1621519220037529895
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.web09.9261.1621521421725449717
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 May 2021 07:00:20 -0700
+ Thu, 20 May 2021 07:37:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Lxoo8xjB;
- spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id v13so9080982ple.9
-        for <openembedded-devel@lists.openembedded.org>; Thu, 20 May 2021 07:00:19 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=LbQ78NMQ;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.50, mailfrom: brgl@bgdev.pl)
+Received: by mail-wr1-f50.google.com with SMTP id d11so17897499wrw.8
+        for <openembedded-devel@lists.openembedded.org>; Thu, 20 May 2021 07:37:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:references:from:organization:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=CYQlMb4JopMrDBK7nmdobieQGd9YeoscAjC187VAqYQ=;
-        b=Lxoo8xjBXr+XFSG6eorLbvM0GZmAfOvS9QpbUqa8eWgUkBIZ7MXZDJ5IKKrsphgFxy
-         v6g4LC/+QnGxJCJ63R2nTctOXvxb98mbteJ2J5J7kzaQrFRqn9lelKwEDcqXYUG/aLoU
-         OiB2vzq9aGb+RiKaKbWdrehNcNm2f/UEhCr1HIgHdQuS5gZhDqpYHGuoeI3lxnoMM70a
-         PBN5C8jf/WeIcW/gf5KIL+kLrt3jaru5QbRAk0tLMTiDHflzjXr78IyabWyBkkFw/EOM
-         FRZ9rSz8/FX82GoYaKqp7FbaGw6P4pKDLjK2RFnz7MNKuXNC823xsRxPpsJ8SI11WIB3
-         NNeQ==
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=IXo6zlnZplKLDJ53FikKETZTIHUn7H9+PTB3ElI4iJw=;
+        b=LbQ78NMQ+aOT5GPdHmTIH2E6KZmx45lgD1YLb/g75XUMEQPka4BzaNvaj6cxQzshXu
+         zZNg47ixAmk3dflf1FYpsb2cfMkLX+In3eWiHzH4C5sfhweBcUdyf08Rqmfk5A+ay3Uf
+         rqMOUN+dv0FrwUx7xJjtOXCPHBxUS9onrjSenA3pmhphqGYXDB1GhSaAc5WjGoScLZ7M
+         hsHQqVYvgKKevne0NgVMEySoZtpj9jYmkKXKn7sNageUrYKeZuFzhhbRyWjqNVtwJXss
+         ID83VeMgyJJ7xganzeKfDHbCnJDwOs8ObDZW5O6DLr7aE6HhyBuBr7SfUdQYYevOJBtp
+         aORQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=CYQlMb4JopMrDBK7nmdobieQGd9YeoscAjC187VAqYQ=;
-        b=PRLBDZIWFNj6dpq13fFj+6y8hm7HjMxmdvvzpwuUJ4goMVooOoC2/Apee9OussXoy1
-         XJklFgRpCs4M4zsQG7JGTwUyPC9VLk8MYmizIAHsr3TLQz97n+pgKJa6iL1f3x0u5NNa
-         dKGiXS0+vgTww2iJ6ov+wJB8qWXD19DZ7TxZUuSe1DhQdPXTlG9XyNFJe0TQOMwIynL+
-         u2rJyd3R83zBFB+af6T37yTu9tuQPEMXzIqWP8uksHdCtAX+SPjozvR/coamrMyGcIy3
-         k2pZ8di9KWVbiZWPGTV1ND6NBHrkdMXpvgAfMQBMPUF0zuMZ/ninawo2+EBNgkVsnSlb
-         29fw==
-X-Gm-Message-State: AOAM530f0LW2w04XROnvDUjnkKnJqnY++OQWuaBXQRZMlTyZiMLK8CIg
-	2ha0KXJ7r1nblA8tI6rI6wm2dvPUspqx4w==
-X-Google-Smtp-Source: ABdhPJzVeHL7E/82QhuWd/3tJExIiC1enyT3g4gSjJeX0mDsFWX0ozwDm9Qf5PwTBSuvBZEUuuxpbg==
-X-Received: by 2002:a17:902:a60a:b029:f0:ad94:70bf with SMTP id u10-20020a170902a60ab02900f0ad9470bfmr6051559plq.31.1621519219268;
-        Thu, 20 May 2021 07:00:19 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:a0f0::d20b? ([2601:646:9200:a0f0::d20b])
-        by smtp.gmail.com with ESMTPSA id n23sm2253056pff.93.2021.05.20.07.00.18
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 20 May 2021 07:00:18 -0700 (PDT)
-Subject: Re: [oe] [meta-python] [PATCH] python3-pulsectl: upgrade 21.3.4 -> 21.5.17
-To: zangrc <zangrc.fnst@fujitsu.com>,
- openembedded-devel@lists.openembedded.org
-References: <1621501868-17634-1-git-send-email-zangrc.fnst@fujitsu.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <bd196d76-c38c-0b38-8ab9-ae0e11de1fa6@gmail.com>
-Date: Thu, 20 May 2021 07:00:17 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=IXo6zlnZplKLDJ53FikKETZTIHUn7H9+PTB3ElI4iJw=;
+        b=SPl6mXZatTDGMLyyg2PqxvQ3Oe8P/oGl4twy2EoP5BMEQ033NCgM6Jt2eAefmzw+ns
+         1Hq2Jc4uuUN0uPzmIrxmQXnp42JOkzvQ+lpnV688XvJzZEe1NbkMhhbtlDH/OH/ppqnl
+         GtdqO3zwfmCOulAxaDDa/uf2RQax/mRvY1/xnleZ3j8Z5Rm1bYhqXLNfFpt5D9aLbPRb
+         EmJWdHF+0jckRivaeqbowAZpbLgXGBDeD2K/5dD8P+gwNcuUulMeqpmi0+v6e26WKPQD
+         dbF65yoV3PYIcbXCpRwCz4ncQjDgaPlNtpPE5Ce5XzbmV9C3hxWNCpCLZgdF96TqFnKV
+         3PWQ==
+X-Gm-Message-State: AOAM532dhsXr5bBBT/6h1BqQKgVMIJP8aEYmjvGQOCF+UWWGQTcxZdi0
+	RZ85G5wMQKl2mnZcZLyXxn9sEQ==
+X-Google-Smtp-Source: ABdhPJwu6xF6nOBRMUsMSznVu/jq7/5CySH8tf8M0WJrO6pS8Mp567caUHgMVWMfeX9Hu2S3oc4rdQ==
+X-Received: by 2002:a05:6000:184a:: with SMTP id c10mr4968018wri.244.1621521420167;
+        Thu, 20 May 2021 07:37:00 -0700 (PDT)
+Return-Path: <brgl@bgdev.pl>
+Received: from debian-brgl.home (lfbn-nic-1-149-6.w2-15.abo.wanadoo.fr. [2.15.231.6])
+        by smtp.gmail.com with ESMTPSA id q62sm3074618wma.42.2021.05.20.07.36.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 20 May 2021 07:36:59 -0700 (PDT)
+From: "Bartosz Golaszewski" <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Armin Kuster <akuster808@gmail.com>,
+	Tim moto-timo Orling <TicoTimo@gmail.com>,
+	Derek Straka <derek@asterius.io>,
+	Trevor Gamblin <trevor.gamblin@windriver.com>
+Cc: openembedded-devel@lists.openembedded.org,
+	Bartosz Golaszewski <brgl@bgdev.pl>
+Subject: [meta-python][PATCH] python3-asyncio-glib: new package
+Date: Thu, 20 May 2021 16:36:54 +0200
+Message-Id: <20210520143654.1258-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.30.1
 MIME-Version: 1.0
-In-Reply-To: <1621501868-17634-1-git-send-email-zangrc.fnst@fujitsu.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Thanks for your contribution
+Add a recipe for asyncio-glib - an interface between asyncio and the
+GLib event loop for Python.
 
-On 5/20/21 2:11 AM, zangrc wrote:
-> Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
-> ---
->   ...hon3-pulsectl_21.3.4.bb => python3-pulsectl_21.5.17.bb} | 7 +++++--
->   1 file changed, 5 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-pulsectl_21.3.4.bb => python3-pulsectl_21.5.17.bb} (75%)
-> 
-> diff --git a/meta-python/recipes-devtools/python/python3-pulsectl_21.3.4.bb b/meta-python/recipes-devtools/python/python3-pulsectl_21.5.17.bb
-> similarity index 75%
-> rename from meta-python/recipes-devtools/python/python3-pulsectl_21.3.4.bb
-> rename to meta-python/recipes-devtools/python/python3-pulsectl_21.5.17.bb
-> index a4455eeb1c..3c0a9c0e5b 100644
-> --- a/meta-python/recipes-devtools/python/python3-pulsectl_21.3.4.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pulsectl_21.5.17.bb
-> @@ -3,8 +3,11 @@ HOMEPAGE = "https://github.com/mk-fg/python-pulse-control"
->   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://COPYING;md5=f1d10048469ff90123263eb5e214061d"
->   
-> -SRC_URI[sha256sum] = "faa8b9336237565990298f20870e13dd1678a4586847ca5a7ff2abf10752f356"
-> +SRC_URI[sha256sum] = "3f782b3adf6d91b2398504002d248b36aa047bd04d5acd0ae5d4e2d3c8e746a0"
->   
-> -RDEPENDS_${PN} += "pulseaudio"
-> +RDEPENDS_${PN} += " \
-> +	libpulse \
-> +	python3-ctypes \
-> +"
+Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
+---
+ .../packagegroups/packagegroup-meta-python.bb         |  1 +
+ .../python/python3-asyncio-glib_0.1.bb                | 11 +++++++++++
+ 2 files changed, 12 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-asyncio-glib_0.1.bb
 
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index 0418b5930..d3f98dedb 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -38,6 +38,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
+     python3-astroid \
+     python3-asttokens \
+     python3-async-timeout \
++    python3-asyncio-glib \
+     python3-attr \
+     python3-autobahn \
+     python3-automat \
+diff --git a/meta-python/recipes-devtools/python/python3-asyncio-glib_0.1.bb b/meta-python/recipes-devtools/python/python3-asyncio-glib_0.1.bb
+new file mode 100644
+index 000000000..72da6081a
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-asyncio-glib_0.1.bb
+@@ -0,0 +1,11 @@
++SUMMARY = "An implementation of the Python 3 asyncio event loop on top of GLib"
++AUTHOR = "James Henstridge"
++LICENSE = "LGPL-2.1"
++LIC_FILES_CHKSUM = "file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c"
++
++inherit setuptools3 pypi
++
++SRC_URI[md5sum] = "60153055e76ceaacdfbaeafb03d61dd9"
++SRC_URI[sha256sum] = "fe3ceb2ba5f541330c07ca1bd7ae792468d625bad1acf5354a3a7a0b9fd87521"
++
++RDEPENDS_${PN} += "python3-asyncio python3-pygobject"
+-- 
+2.30.1
 
-it will be good to add some info to commit message to why these rdeps 
-have changed
-
->   
->   inherit pypi setuptools3
-> 
-> 
-> 
-> 
-> 
