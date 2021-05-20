@@ -1,76 +1,63 @@
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web10.10704.1621526941273817367
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web08.11131.1621528966322952104
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 May 2021 09:09:01 -0700
+ Thu, 20 May 2021 09:42:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=iroQL8G7;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id d78so11835439pfd.10
-        for <openembedded-devel@lists.openembedded.org>; Thu, 20 May 2021 09:09:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=P5+jG6hAKg7g19hPiu1akftxDV30WCkTdW+0+pQ0RWI=;
-        b=iroQL8G7joVlCVdXtXN/NrEZQ/zsr+qw64+p+iXdmSD66ETJ+8SLRmKzFef4fgw+t4
-         YQ+OiY4u0O5kbPcxbyOpi/FVFcsCZBMaAxyFpYe4xGAcS9KUnI5lfvlz51S5D6MLbAQs
-         qYpzh+F0PAwzv8ZkSooh6KYaa41whKicEhL+v9jzriJ3a9pA/SnEY3v93wt4Z04y+5w6
-         g11zr1i5XbRDIf8MGWTULs+PUuay6C6xQzqZPuZAoRgM3mffI1YfmWsQz5TVQEU20/k1
-         g9fVPZwv8C9x06YD3I5RCkn+dCN60kIER3cSyVV+ML5sov6mwRFYNNA+1M3JxiUWKFYG
-         4xAg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=P5+jG6hAKg7g19hPiu1akftxDV30WCkTdW+0+pQ0RWI=;
-        b=XDrczNivXZnIPK95PMvtMHss9Z75fLYgx7K9sFSWDegu0aNSFQxo7m89mwIrlJ3X7D
-         vWa4pAaoI2KI/MyGtMa1dsMn6+hWCMQvls7nLOl+Q8lAW6tQQ4r9Qf3wAd5wbZD+WXIN
-         WKyx5e2LTVd2JJ0B2EFYTWNLjATaeMPqR64vXKMXQGwsHhc6vdWgIpFAhOHKLbSnB77V
-         1WvFlJOXDSZgMldlKR5gIJZG+pDEjdHl6AsNDWTu6ux8Z38qbsynMWtknWNidxHIsAQQ
-         9419LgWVyRBjq4PRjAYzi8aNiFTf3cFuvHEKzejFWLlg10LXpwDpOnydWJrLn0Tr+eZ9
-         12mA==
-X-Gm-Message-State: AOAM531fky4ufcBGrnZPAE1Rl0rC7No/8rgzVlzmx19yyHbzhuP6ULqc
-	84nRPND/ZpkeSDqemPTXskCWwHaS/lQIgQ==
-X-Google-Smtp-Source: ABdhPJwMzcxhDEsQg0uwP5gfD4MCEU5ILm8sunW+iGdVysjR/UvLDP1Cl95ASgerzwEPieVV/2vwwg==
-X-Received: by 2002:aa7:9f8f:0:b029:2dc:76bc:edce with SMTP id z15-20020aa79f8f0000b02902dc76bcedcemr5218627pfr.29.1621526940378;
-        Thu, 20 May 2021 09:09:00 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a746])
-        by smtp.gmail.com with ESMTPSA id s16sm2528802pga.5.2021.05.20.09.08.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 May 2021 09:09:00 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=58812 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.93)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1ljlky-0007FW-9A; Thu, 20 May 2021 19:42:44 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] opencv: Disable tbb on riscv/musl
-Date: Thu, 20 May 2021 09:08:58 -0700
-Message-Id: <20210520160858.1809113-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/3] python3-watchdog: Upgrade 2.1.1 -> 2.1.2
+Date: Thu, 20 May 2021 19:42:36 +0300
+Message-Id: <20210520164237.31557-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210520164237.31557-1-leon.anavi@konsulko.com>
+References: <20210520164237.31557-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-getcontext|setcontext functionality is provided via libucontext for musl
-but this library is not yet ported to RISCV
+Upgrade to release 2.1.2:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+- [mac] Fix relative path handling for non-recursive watch.
+- [windows] On PyPy, events happening right after start() were
+  missed. Add a workaround for that.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-support/opencv/opencv_4.5.2.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../{python3-watchdog_2.1.1.bb => python3-watchdog_2.1.2.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-watchdog_2.1.1.bb => python3-watchdog_2.1.2.bb} (80%)
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_4.5.2.bb b/meta-oe/recipes-support/opencv/opencv_4.5.2.bb
-index 1dcd8586cd..226bad5778 100644
---- a/meta-oe/recipes-support/opencv/opencv_4.5.2.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_4.5.2.bb
-@@ -108,6 +108,9 @@ PACKAGECONFIG ??= "gapi python3 eigen jpeg png tiff v4l libv4l gstreamer samples
+diff --git a/meta-python/recipes-devtools/python/python3-watchdog_2.1.1.bb b/meta-python/recipes-devtools/python/python3-watchdog_2.1.2.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-watchdog_2.1.1.bb
+rename to meta-python/recipes-devtools/python/python3-watchdog_2.1.2.bb
+index ecace32e24..c2bf68a2d6 100644
+--- a/meta-python/recipes-devtools/python/python3-watchdog_2.1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-watchdog_2.1.2.bb
+@@ -4,7 +4,7 @@ DEPENDS = "${PYTHON_PN}-argh"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
- # TBB does not build for powerpc so disable that package config
- PACKAGECONFIG_remove_powerpc = "tbb"
-+# tbb now needs getcontect/setcontext which is not there for all arches on musl
-+PACKAGECONFIG_remove_libc-musl_riscv64 = "tbb"
-+PACKAGECONFIG_remove_libc-musl_riscv32 = "tbb"
+-SRC_URI[sha256sum] = "2894440b4ea95a6ef4c5d152deedbe270cae46092682710b7028a04d6a6980f6"
++SRC_URI[sha256sum] = "0237db4d9024859bea27d0efb59fe75eef290833fd988b8ead7a879b0308c2db"
  
- PACKAGECONFIG[gapi] = "-DWITH_ADE=ON -Dade_DIR=${STAGING_LIBDIR},-DWITH_ADE=OFF,ade"
- PACKAGECONFIG[amdblas] = "-DWITH_OPENCLAMDBLAS=ON,-DWITH_OPENCLAMDBLAS=OFF,libclamdblas,"
+ inherit pypi setuptools3
+ 
 -- 
-2.31.1
+2.17.1
 
