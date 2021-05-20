@@ -1,59 +1,59 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.114])
- by mx.groups.io with SMTP id smtpd.web10.2462.1621474028496759327
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.68])
+ by mx.groups.io with SMTP id smtpd.web08.2469.1621474042514041297
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 May 2021 18:27:08 -0700
+ Wed, 19 May 2021 18:27:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=W2zf9xK+;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.114, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=F40mDc5I;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.68, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1621474025; i=@fujitsu.com;
-	bh=JpPKBcRh2nJBQQ0lKQnkNRvHMk4rDPLzKe9nJpZ3DYg=;
+	s=170520fj; t=1621474039; i=@fujitsu.com;
+	bh=g9uPUmy26KL+vHqZNgtVf6DChupfJk+Jow4G3U75Snk=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=W2zf9xK+it8pTVy7BVLBQVVjX1YkBIaiBN5xPJYcCZvMFNOrsNS6Gu0z4ILlEo8oR
-	 hIzm8l2EO55Kp3hgomnuM5ZQ+HTrip5KjXKYK+Z5OMPDranPWhx+63fnorOOFcY4Yl
-	 t1uOPbWy8XkwFCwKBPQ+wqO1D7U2SpAxU1aDXCC7s57oQBnIQ218yG5SuhPsSMuCDh
-	 tjb5AsrpqDClPvSCGyHNaqNyeM72uHTqllmVTa1dcrIevbJa/H6n7DmaN/wLPqXqVK
-	 KrrO5T6Qu6iAUYYmzLvFLWCnnQtjSp4HJSno2yWpzeHvy8khy3TNxFRqu7CE7Xtorv
-	 KiK1Q7VmaQGKg==
-Received: from [100.113.6.49] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-b.eu-central-1.aws.symcld.net id 15/BC-38619-9EAB5A06; Thu, 20 May 2021 01:27:05 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+GYqvty19I
-  Eg2WdrBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bjoUesBUu5Kt6eOsjUwHiEs4uRi0NIYDaT
-  xOpDzUwQzglGiZUnTgA5nBxsAjoSHS+6WUBsEQF9iaWz9zCD2MICbhLrVn1mBLFZBFQlpvQsY
-  QOxeQXcJa6tmM8KYksIKEhMefieGSIuKHFy5hOwOcwCEhIHX7xghqhRlNi+8wwLhF0hMWPGNr
-  YJjDyzkLTMQtKygJFpFaNFUlFmekZJbmJmjq6hgYGuoaGxrhmQpZdYpZukl1qqm5yaV1KUCJT
-  USywv1iuuzE3OSdHLSy3ZxAgMpJRCNq4djE9ff9A7xCjJwaQkymt2f1GCEF9SfkplRmJxRnxR
-  aU5q8SFGGQ4OJQleQ2BoCgkWpaanVqRl5gCDGiYtwcGjJML7fxtQmre4IDG3ODMdInWKUVFKn
-  DdvJ1BCACSRUZoH1waLpEuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHkVQbbzZOaVwE1/Bb
-  SYCWRx4yKQxSWJCCmpBiZTBdm1u09tXTCxafoiEyPtXfnXdMw/exw+v71bYrLZt8UqHQ088je
-  E/n9acef6shkL1E638ips1H26YYvqRqbtK1oYhXSSVi5yv1BuvvvcneTlMpbL8+bOn3/MbCqz
-  ZNHmSqMrtSGrfkV++tJndWN23cQvS/naP02LYGzmPGVS/8j9c5L1nXdSjkq89zSLluz38T+pu
-  ILfXb493PS70b2nN/tdpacXGORMTFeRndX5TP1mqvDin2sZGnaXmTnt0bvHdciot27WhaP3gy
-  +kl8g2e+vZV/cVCxxda65x9s9k3xn2sX6LnF81ZlpZzbTLESo0/fVR9PavJT+UHPbOrIwpbbG
-  8qS0x4ahl5euYuK9KLMUZiYZazEXFiQDTw+ruHwMAAA==
+	b=F40mDc5IfnKxEoa/JEobWKKv6uTK/WYRlQmFRuHsU+WIe/jnLnyozJcl+vADd2L25
+	 yJqyQfOCKY16K3ct2u6wjaQGZJiycgzyBB5LngOkLyrrCoZwxJD1c3C9f2gT0TXtXK
+	 pH3Gv0zpWSkBOwu2E72kX12pBui5dfrOBk1a6EwiT0vKT2buaegBRQwyn87w2i36vk
+	 zMzAg7Gchr7r9ZCqFZ4dPQx2F5dLz7LWcQ4CN0U7xEDBTxDjJOPWZ5FcyrF7JflWqx
+	 i/dR3WKGe0fZbQCmGudNXmxrJqg5vmbyyNnrDvEtiRhvawprnlrKrF4y2EpZAHS55+
+	 kDHM2Zc9lcWvA==
+Received: from [100.112.196.73] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-4.bemta.az-b.eu-west-1.aws.symcld.net id 81/4B-62504-6FAB5A06; Thu, 20 May 2021 01:27:18 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupikeJIrShJLcpLzFFi42Kxs+EI1f22a2m
+  CQc9lDYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaO15R1LwU7OigeznBoYr3J0MXJxCAnMZpL4
+  /O4cC4RzglHi18ZjQA4nB5uAjkTHi24wW0RAX2Lp7D3MILawgJ/Er4n32UBsFgFViWV3rwPFO
+  Th4Bdwl/rzyAwlLCChITHn4HqycV0BQ4uTMJ2BjmAUkJA6+eMEMUaMosX3nGRYIu0JixoxtbB
+  MYeWYhaZmFpGUBI9MqRoukosz0jJLcxMwcXUMDA11DQyNdQ0szXSNDE73EKt0kvdRS3fLU4hJ
+  dQ73E8mK94src5JwUvbzUkk2MwCBKKThybQfjgdcf9A4xSnIwKYnymt1flCDEl5SfUpmRWJwR
+  X1Sak1p8iFGGg0NJgtcQGJZCgkWp6akVaZk5wICGSUtw8CiJ8P7fBpTmLS5IzC3OTIdInWJUl
+  BLnzdsJlBAASWSU5sG1waLoEqOslDAvIwMDgxBPQWpRbmYJqvwrRnEORiVhXkWQ7TyZeSVw01
+  8BLWYCWdy4CGRxSSJCSqqBKeTevKeuj7au3LKJ/8mBKUGTbW9F+cmu5o30sHq2KIJft2pr1Tl
+  TqzIP9+Z3YSKO6iLL1y5+cyt8zv/WAwwxsh6zXn1axKtzwGlyoGHV30SWisc7pfK2Tn/U8HH3
+  ggmB9hkcEQx/E2dIqaTfM0pc/MRikf3GYpEDHNuZ3LbsXRbJ+mWGpPahmh1/13hv+fFNsCKd0
+  6x/B5fuvxtNMz9fm/qXt/5Yf82sNzw9bFv33Z6mOZHzQGD3/4oKabv08oOJ6zlZeC288w1ePl
+  7UxvBfUPexLv93dvMrW/zuS+xY/GXzytVP4hu5fsTezzKz8w74uXeVyqXYlfJFSwVT/y3/Lcj
+  asHRt+IoXfBFFOaohJ5VYijMSDbWYi4oTAUnP3kAdAwAA
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-20.tower-248.messagelabs.com!1621474024!185047!1
-X-Originating-IP: [62.60.8.149]
+X-Msg-Ref: server-4.tower-291.messagelabs.com!1621474038!378030!1
+X-Originating-IP: [62.60.8.85]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.75.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 28595 invoked from network); 20 May 2021 01:27:05 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-20.tower-248.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 20 May 2021 01:27:04 -0000
+Received: (qmail 18896 invoked from network); 20 May 2021 01:27:18 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-4.tower-291.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 20 May 2021 01:27:18 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 14K1R4a6019463
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 14K1RISj012067
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 20 May 2021 02:27:04 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 20 May 2021 02:27:18 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 20 May 2021 02:27:03 +0100
+ (TLS) id 15.0.1497.18; Thu, 20 May 2021 02:27:16 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-perl] [PATCH] libencode-perl: upgrade 3.08 -> 3.10
-Date: Thu, 20 May 2021 09:26:56 +0800
-Message-ID: <1621474016-11186-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-xlsxwriter: upgrade 1.4.0 -> 1.4.3
+Date: Thu, 20 May 2021 09:27:10 +0800
+Message-ID: <1621474030-11233-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -63,28 +63,33 @@ Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../{libencode-perl_3.08.bb => libencode-perl_3.10.bb}        | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libencode/{libencode-perl_3.08.bb => libencode-perl_3.10.bb} (95%)
+ ...xlsxwriter_1.4.0.bb => python3-xlsxwriter_1.4.3.bb} | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-xlsxwriter_1.4.0.bb => python3-xlsxwriter_1.4.3.bb} (59%)
 
-diff --git a/meta-perl/recipes-perl/libencode/libencode-perl_3.08.bb b/meta-perl/recipes-perl/libencode/libencode-perl_3.10.bb
-similarity index 95%
-rename from meta-perl/recipes-perl/libencode/libencode-perl_3.08.bb
-rename to meta-perl/recipes-perl/libencode/libencode-perl_3.10.bb
-index 3f1d35be8a..94f5a08259 100644
---- a/meta-perl/recipes-perl/libencode/libencode-perl_3.08.bb
-+++ b/meta-perl/recipes-perl/libencode/libencode-perl_3.10.bb
-@@ -15,8 +15,8 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
- LIC_FILES_CHKSUM = "file://META.json;beginline=8;endline=10;md5=b12e3be1e17a7e99ca4f429ff32c28b5"
+diff --git a/meta-python/recipes-devtools/python/python3-xlsxwriter_1.4.0.bb b/meta-python/recipes-devtools/python/python3-xlsxwriter_1.4.3.bb
+similarity index 59%
+rename from meta-python/recipes-devtools/python/python3-xlsxwriter_1.4.0.bb
+rename to meta-python/recipes-devtools/python/python3-xlsxwriter_1.4.3.bb
+index b5e15f14c9..e6b196956e 100644
+--- a/meta-python/recipes-devtools/python/python3-xlsxwriter_1.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-xlsxwriter_1.4.3.bb
+@@ -8,6 +8,14 @@ inherit pypi setuptools3
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/DANKOGAI/Encode-${PV}.tar.gz"
--SRC_URI[md5sum] = "3889cf6d1b75e486d54f9fd6517a02b4"
--SRC_URI[sha256sum] = "ed063d01d01a140a3a3ec0aeba2f2b4849a35c18ca96ac231a5d7c7d54d17b5b"
-+SRC_URI[md5sum] = "7377c8694a7afeeaa46ee035d0d7335c"
-+SRC_URI[sha256sum] = "c2d7906af17664d6b6f16bf76572c95c16c30ad096b7dd980c08c3de33e319a9"
+ PYPI_PACKAGE = "XlsxWriter"
  
- UPSTREAM_CHECK_REGEX = "Encode\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
+-SRC_URI[sha256sum] = "82be5a58c09bdc2ff8afc25acc815c465275239ddfc56d6e7b2a7e6c5d2e213b"
++RDEPENDS_${PN} += " \
++	python3-crypt \
++	python3-datetime \
++	python3-compression \
++	python3-numbers \
++	python3-io \
++"
++
++SRC_URI[sha256sum] = "641db6e7b4f4982fd407a3f372f45b878766098250d26963e95e50121168cbe2"
  
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.25.1
 
