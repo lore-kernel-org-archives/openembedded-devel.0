@@ -1,101 +1,92 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web12.6620.1621587404843077849
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web10.912.1621621888282219048
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 May 2021 01:56:45 -0700
+ Fri, 21 May 2021 11:31:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: changqing.li@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 14L8uhjY019462
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 21 May 2021 01:56:43 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.4; Fri, 21 May 2021 01:56:42 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.4 via Frontend Transport; Fri, 21 May 2021 01:56:41 -0700
-From: "Changqing Li" <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-gnome][PATCH] libgtop: fix do_compile error
-Date: Fri, 21 May 2021 16:55:24 +0800
-Message-ID: <20210521085524.31284-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=BjsV5rPC;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id ne24-20020a17090b3758b029015f2dafecb0so6462816pjb.4
+        for <openembedded-devel@lists.openembedded.org>; Fri, 21 May 2021 11:31:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=yC0DT6/JeSO1zibtNJlyIvytHZShckZIoVhqaU51RTo=;
+        b=BjsV5rPCiMqsoxtRGks4tgo5BYjAk2ag6+HGsIIswjpOHen/Lz+dOb2uHE7Ezhavcy
+         UN1g4bxL0dJRHkVIXJOAE4YNVCIwtDlJkboMNpmi8ovy0uWbhWPga8OQm/vOjrg+7sEj
+         xtDA0z58Z+lt7OQ4np3WbXJqZemXl6CdzsIqwQkeGYjNVvyMkn53WyxwsmA9pB5ABzMb
+         vqAlkpO9gUByeLi4oDTJ5Oqky4Zau8QYdzsvq3OXElQLFXIW2YCk7C4dAOOOWeUsB3UQ
+         N4Io2SV9cmcnFyjYMJ4vCJshVrGB0xq03RtCaa+vRULdY2g+OVDZwzjeQs/Yhe1rwyfx
+         mH8A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=yC0DT6/JeSO1zibtNJlyIvytHZShckZIoVhqaU51RTo=;
+        b=kRJ6QLq6bk9lYVQ9FG9Yb6hQXJcj+M8FpuTGzqNcq3EvJouYTSZwgeK6Nq7wQ2RIWW
+         IIiP8XqyecdfG+2ap++zUp0qs7EE794tBtlxVzg2Y2+ajyV5cjGvF3/f2Y0cN0bHFdpU
+         pHEak1qdt7rPrWP4jwKLu3FDNGHgHQJobUZlvBcYgIL8dBNbaGvTDaXr8IZT7YavdZRk
+         vi/pxBgBww7NB91740CQDONU5havXzh7+34auOAVffoSTEm2TaJTiCXQiX+INMIJpX2z
+         9dInf6bcwRalUEjR0G2z9MbqxFPWPtJW8m+4WtS1800q90/PAgLacdn4DLvvVSP3MGJd
+         JsQQ==
+X-Gm-Message-State: AOAM5319KweYAAxolPwjIjRc0MRBrvLuSzVbNnAgPLpGYklm8dAkh0pg
+	iY0DuNByBhgbU8eQJutySqvjIlFkFuiyPg==
+X-Google-Smtp-Source: ABdhPJzZjjioC9DbGRk3T/PZ2kkgfnhCKY0jeNcE0eNcFOiNkRbuuV1MltGbPKn+dF1QErYDwoqTIA==
+X-Received: by 2002:a17:90b:341:: with SMTP id fh1mr12110497pjb.136.1621621887530;
+        Fri, 21 May 2021 11:31:27 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a746])
+        by smtp.gmail.com with ESMTPSA id m1sm1234257pgd.78.2021.05.21.11.31.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 21 May 2021 11:31:27 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] rdma-core: Upgrade to 35.0
+Date: Fri, 21 May 2021 11:31:24 -0700
+Message-Id: <20210521183124.485947-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-From: Changqing Li <changqing.li@windriver.com>
+Native python is being probed on some builds
 
-On some distros, such as fedora32, cross compile failed with following
-error since host library is used. undefined reference to
-`stat64@GLIBC_2.33'
+Fixes
+recipe-sysroot-native/usr/share/cmake-3.20/Modules/FindPackageHandleStandardArgs.cmake:230 (message):
+  Could NOT find PythonLibs (missing: PYTHON_LIBRARIES PYTHON_INCLUDE_DIRS)
+  (Required is exact version "3.8")
 
-According doc of ld, set searchdir begins with "=", but not hardcoded
-locations.
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-fix-compile-error-for-cross-compile.patch | 37 +++++++++++++++++++
- .../recipes-gnome/libgtop/libgtop_2.40.0.bb   |  2 +
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/libgtop/libgtop/0001-fix-compile-error-for-cross-compile.patch
+ .../rdma-core/{rdma-core_33.0.bb => rdma-core_35.0.bb}        | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/rdma-core/{rdma-core_33.0.bb => rdma-core_35.0.bb} (91%)
 
-diff --git a/meta-gnome/recipes-gnome/libgtop/libgtop/0001-fix-compile-error-for-cross-compile.patch b/meta-gnome/recipes-gnome/libgtop/libgtop/0001-fix-compile-error-for-cross-compile.patch
-new file mode 100644
-index 000000000..1bd6e101b
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/libgtop/libgtop/0001-fix-compile-error-for-cross-compile.patch
-@@ -0,0 +1,37 @@
-+From e865a93000913b4597607289356114cd159f4e28 Mon Sep 17 00:00:00 2001
-+From: Your Name <you@example.com>
-+Date: Fri, 21 May 2021 03:02:29 +0000
-+Subject: [PATCH] fix compile error for cross compile
-+
-+On some distros, such as fedora32, cross compile failed with following
-+error since host library is used. undefined reference to
-+`stat64@GLIBC_2.33'
-+
-+According doc of ld, set searchdir begins with "=", but not hardcoded
-+locations.
-+
-+Upstream-Status: Submitted [https://gitlab.gnome.org/GNOME/libgtop/-/merge_requests/26]
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ configure.ac | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 472f44b..ed6a4d7 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -270,8 +270,8 @@ AC_ARG_ENABLE(fatal-warnings,
-+                         [Define to enable fatal warnings]))
-+ 
-+ dnl These definitions are expanded in make.
-+-LIBGTOP_LIBS='-L$(libdir)'
-+-LIBGTOP_INCS='-I$(includedir)/libgtop-2.0'
-++LIBGTOP_LIBS='-L=$(libdir)'
-++LIBGTOP_INCS='-I=$(includedir)/libgtop-2.0'
-+ 
-+ if test x$libgtop_have_sysinfo = xyes ; then
-+   LIBGTOP_INCS="$LIBGTOP_INCS -DHAVE_LIBGTOP_SYSINFO"
-+-- 
-+2.26.2
-+
-diff --git a/meta-gnome/recipes-gnome/libgtop/libgtop_2.40.0.bb b/meta-gnome/recipes-gnome/libgtop/libgtop_2.40.0.bb
-index 63615e433..6d9398f4e 100644
---- a/meta-gnome/recipes-gnome/libgtop/libgtop_2.40.0.bb
-+++ b/meta-gnome/recipes-gnome/libgtop/libgtop_2.40.0.bb
-@@ -8,6 +8,8 @@ inherit gnomebase lib_package gtk-doc gobject-introspection gettext upstream-ver
- inherit features_check
- REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-networking/recipes-support/rdma-core/rdma-core_33.0.bb b/meta-networking/recipes-support/rdma-core/rdma-core_35.0.bb
+similarity index 91%
+rename from meta-networking/recipes-support/rdma-core/rdma-core_33.0.bb
+rename to meta-networking/recipes-support/rdma-core/rdma-core_35.0.bb
+index 1c1569cfb0..af4b3788ba 100644
+--- a/meta-networking/recipes-support/rdma-core/rdma-core_33.0.bb
++++ b/meta-networking/recipes-support/rdma-core/rdma-core_35.0.bb
+@@ -6,7 +6,7 @@ DEPENDS = "libnl"
+ RDEPENDS_${PN} = "bash perl"
  
-+SRC_URI += "file://0001-fix-compile-error-for-cross-compile.patch"
-+
- SRC_URI[archive.sha256sum] = "78f3274c0c79c434c03655c1b35edf7b95ec0421430897fb1345a98a265ed2d4"
+ SRC_URI = "git://github.com/linux-rdma/rdma-core.git"
+-SRCREV = "e66ca0832e58dafac7af7ad9e6799eaef438061a"
++SRCREV = "e29a698e99028e9a092bb00c03ee4bfa31ae0cf3"
+ S = "${WORKDIR}/git"
  
- DEPENDS = "glib-2.0 libxau"
+ #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
+@@ -26,7 +26,7 @@ FILES_SOLIBSDEV = ""
+ FILES_${PN} += "${libdir}/*"
+ INSANE_SKIP_${PN} += "dev-so"
+ 
+-inherit cmake cpan-base systemd
++inherit cmake cpan-base python3native systemd
+ 
+ SYSTEMD_SERVICE_${PN} = " \
+     srp_daemon.service \
 -- 
-2.17.1
+2.31.1
 
