@@ -1,21 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.1863.1621626238779644146
+ by mx.groups.io with SMTP id smtpd.web11.1865.1621626241783520178
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 May 2021 12:43:59 -0700
+ Fri, 21 May 2021 12:44:02 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=43814 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lkB3o-00060E-Em; Fri, 21 May 2021 22:43:54 +0300
+	id 1lkB3q-00060E-FX; Fri, 21 May 2021 22:43:59 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/2] python3-pysonos: Upgrade 0.0.48 -> 0.0.49
-Date: Fri, 21 May 2021 22:43:41 +0300
-Message-Id: <20210521194342.6448-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/2] python3-pytest-runner: Upgrade 5.3.0 -> 5.3.1
+Date: Fri, 21 May 2021 22:43:42 +0300
+Message-Id: <20210521194342.6448-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210521194342.6448-1-leon.anavi@konsulko.com>
+References: <20210521194342.6448-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,31 +30,29 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.0.49:
+Upgrade to release 5.3.1:
 
-- Cleanup async_events renewal logging and exceptions
-- Add a pypi release action
-- Add next-version script for incrementing the version
+- Refreshed package metadata.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pysonos_0.0.48.bb => python3-pysonos_0.0.49.bb}    | 2 +-
+ ...n3-pytest-runner_5.3.0.bb => python3-pytest-runner_5.3.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pysonos_0.0.48.bb => python3-pysonos_0.0.49.bb} (79%)
+ rename meta-python/recipes-devtools/python/{python3-pytest-runner_5.3.0.bb => python3-pytest-runner_5.3.1.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pysonos_0.0.48.bb b/meta-python/recipes-devtools/python/python3-pysonos_0.0.49.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-pysonos_0.0.48.bb
-rename to meta-python/recipes-devtools/python/python3-pysonos_0.0.49.bb
-index 18ff30b22a..77ea6c08c0 100644
---- a/meta-python/recipes-devtools/python/python3-pysonos_0.0.48.bb
-+++ b/meta-python/recipes-devtools/python/python3-pysonos_0.0.49.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-runner_5.3.0.bb b/meta-python/recipes-devtools/python/python3-pytest-runner_5.3.1.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-pytest-runner_5.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-pytest-runner_5.3.1.bb
+index 35f6c6c0a0..fcbd29050e 100644
+--- a/meta-python/recipes-devtools/python/python3-pytest-runner_5.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pytest-runner_5.3.1.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Invoke py.test as distutils command with dependency resolution"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=07b0e2ca9ac77cd65cd4edf2e13367ea"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=7a7126e068206290f3fe9f8d6c713ea6"
  
--SRC_URI[sha256sum] = "69c55bf80aae77b3ea8658ee1a80b9aafc0506931614853c926830a502230fc6"
-+SRC_URI[sha256sum] = "77b8987ddbc69ea5c28ec1dee09cd6c30267e196521b1847e43cdea77bce4f09"
+-SRC_URI[sha256sum] = "ca3f58ff4957e8be6c54c55d575b235725cbbcf4dc0d5091c29c6444cfc8a5fe"
++SRC_URI[sha256sum] = "0fce5b8dc68760f353979d99fdd6b3ad46330b6b1837e2077a89ebcf204aac91"
  
  inherit pypi setuptools3
  
