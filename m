@@ -1,103 +1,101 @@
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
- by mx.groups.io with SMTP id smtpd.web08.6317.1621583467042762021
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web12.6620.1621587404843077849
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 May 2021 00:51:08 -0700
+ Fri, 21 May 2021 01:56:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: siemens.com, ip: 192.35.17.2, mailfrom: andrej.kozemcak@siemens.com)
-Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id 14L7p4md010526
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 21 May 2021 09:51:04 +0200
-Received: from dev.vm7.ccp.siemens.com ([144.145.220.58])
-	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id 14L7p3Zx025515;
-	Fri, 21 May 2021 09:51:04 +0200
-Received: from dev.vm7.ccp.siemens.com (localhost [127.0.0.1])
-	by dev.vm7.ccp.siemens.com (Postfix) with ESMTP id 7D8DC303F8FC;
-	Fri, 21 May 2021 09:51:03 +0200 (CEST)
-From: "Andrej Kozemcak" <andrej.kozemcak@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Andrej Kozemcak <andrej.kozemcak@siemens.com>
-Subject: [meta-networking][PATCH] squid: upgrade 4.14 -> 4.15
-Date: Fri, 21 May 2021 09:50:14 +0200
-Message-Id: <20210521075014.10053-1-andrej.kozemcak@siemens.com>
-X-Mailer: git-send-email 2.20.1
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: changqing.li@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 14L8uhjY019462
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 21 May 2021 01:56:43 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.4; Fri, 21 May 2021 01:56:42 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.4 via Frontend Transport; Fri, 21 May 2021 01:56:41 -0700
+From: "Changqing Li" <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-gnome][PATCH] libgtop: fix do_compile error
+Date: Fri, 21 May 2021 16:55:24 +0800
+Message-ID: <20210521085524.31284-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Changes are found at: http://www.squid-cache.org/Versions/v4/changesets
+From: Changqing Li <changqing.li@windriver.com>
 
-Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
+On some distros, such as fedora32, cross compile failed with following
+error since host library is used. undefined reference to
+`stat64@GLIBC_2.33'
+
+According doc of ld, set searchdir begins with "=", but not hardcoded
+locations.
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- ...0001-Fix-build-on-Fedora-Rawhide-772.patch | 25 +------------------
- .../squid/{squid_4.14.bb => squid_4.15.bb}    |  2 +-
- 2 files changed, 2 insertions(+), 25 deletions(-)
- rename meta-networking/recipes-daemons/squid/{squid_4.14.bb => squid_4.15.bb} (98%)
+ ...-fix-compile-error-for-cross-compile.patch | 37 +++++++++++++++++++
+ .../recipes-gnome/libgtop/libgtop_2.40.0.bb   |  2 +
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/libgtop/libgtop/0001-fix-compile-error-for-cross-compile.patch
 
-diff --git a/meta-networking/recipes-daemons/squid/files/0001-Fix-build-on-Fedora-Rawhide-772.patch b/meta-networking/recipes-daemons/squid/files/0001-Fix-build-on-Fedora-Rawhide-772.patch
-index 28a410c26..ff51f5344 100644
---- a/meta-networking/recipes-daemons/squid/files/0001-Fix-build-on-Fedora-Rawhide-772.patch
-+++ b/meta-networking/recipes-daemons/squid/files/0001-Fix-build-on-Fedora-Rawhide-772.patch
-@@ -11,10 +11,8 @@ Upstream-Status: Backport [https://github.com/kraj/squid/commit/1f8b5f0e1cc27634
-  src/Makefile.am               | 4 ++++
-  src/ip/QosConfig.cc           | 1 +
-  src/ipc/mem/PageStack.cc      | 1 +
-- src/proxyp/Parser.cc          | 1 +
-- src/security/ServerOptions.cc | 2 ++
-  src/ssl/helper.cc             | 2 ++
-- 6 files changed, 11 insertions(+)
-+ 4 files changed, 8 insertions(+)
+diff --git a/meta-gnome/recipes-gnome/libgtop/libgtop/0001-fix-compile-error-for-cross-compile.patch b/meta-gnome/recipes-gnome/libgtop/libgtop/0001-fix-compile-error-for-cross-compile.patch
+new file mode 100644
+index 000000000..1bd6e101b
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/libgtop/libgtop/0001-fix-compile-error-for-cross-compile.patch
+@@ -0,0 +1,37 @@
++From e865a93000913b4597607289356114cd159f4e28 Mon Sep 17 00:00:00 2001
++From: Your Name <you@example.com>
++Date: Fri, 21 May 2021 03:02:29 +0000
++Subject: [PATCH] fix compile error for cross compile
++
++On some distros, such as fedora32, cross compile failed with following
++error since host library is used. undefined reference to
++`stat64@GLIBC_2.33'
++
++According doc of ld, set searchdir begins with "=", but not hardcoded
++locations.
++
++Upstream-Status: Submitted [https://gitlab.gnome.org/GNOME/libgtop/-/merge_requests/26]
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ configure.ac | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index 472f44b..ed6a4d7 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -270,8 +270,8 @@ AC_ARG_ENABLE(fatal-warnings,
++                         [Define to enable fatal warnings]))
++ 
++ dnl These definitions are expanded in make.
++-LIBGTOP_LIBS='-L$(libdir)'
++-LIBGTOP_INCS='-I$(includedir)/libgtop-2.0'
+++LIBGTOP_LIBS='-L=$(libdir)'
+++LIBGTOP_INCS='-I=$(includedir)/libgtop-2.0'
++ 
++ if test x$libgtop_have_sysinfo = xyes ; then
++   LIBGTOP_INCS="$LIBGTOP_INCS -DHAVE_LIBGTOP_SYSINFO"
++-- 
++2.26.2
++
+diff --git a/meta-gnome/recipes-gnome/libgtop/libgtop_2.40.0.bb b/meta-gnome/recipes-gnome/libgtop/libgtop_2.40.0.bb
+index 63615e433..6d9398f4e 100644
+--- a/meta-gnome/recipes-gnome/libgtop/libgtop_2.40.0.bb
++++ b/meta-gnome/recipes-gnome/libgtop/libgtop_2.40.0.bb
+@@ -8,6 +8,8 @@ inherit gnomebase lib_package gtk-doc gobject-introspection gettext upstream-ver
+ inherit features_check
+ REQUIRED_DISTRO_FEATURES = "x11"
  
- --- a/src/Makefile.am
- +++ b/src/Makefile.am
-@@ -70,17 +68,6 @@ Upstream-Status: Backport [https://github.com/kraj/squid/commit/1f8b5f0e1cc27634
-  
-  /// used to mark a stack slot available for storing free page offsets
-  const Ipc::Mem::PageStack::Value Writable = 0;
----- a/src/security/ServerOptions.cc
--+++ b/src/security/ServerOptions.cc
--@@ -24,6 +24,8 @@
-- #endif
-- #endif
-- 
--+#include <limits>
--+
-- Security::ServerOptions &
-- Security::ServerOptions::operator =(const Security::ServerOptions &old) {
--     if (this != &old) {
- --- a/src/ssl/helper.cc
- +++ b/src/ssl/helper.cc
- @@ -19,6 +19,8 @@
-@@ -92,14 +79,4 @@ Upstream-Status: Backport [https://github.com/kraj/squid/commit/1f8b5f0e1cc27634
-  Ssl::CertValidationHelper::LruCache *Ssl::CertValidationHelper::HelperCache = nullptr;
-  
-  #if USE_SSL_CRTD
----- a/src/acl/ConnMark.cc
--+++ b/src/acl/ConnMark.cc
--@@ -16,6 +16,8 @@
-- #include "http/Stream.h"
-- #include "sbuf/Stream.h"
-  
--+#include <limits>
--+
-- bool
-- Acl::ConnMark::empty() const
-- {
-diff --git a/meta-networking/recipes-daemons/squid/squid_4.14.bb b/meta-networking/recipes-daemons/squid/squid_4.15.bb
-similarity index 98%
-rename from meta-networking/recipes-daemons/squid/squid_4.14.bb
-rename to meta-networking/recipes-daemons/squid/squid_4.15.bb
-index 6d154c87e..8ba10674c 100644
---- a/meta-networking/recipes-daemons/squid/squid_4.14.bb
-+++ b/meta-networking/recipes-daemons/squid/squid_4.15.bb
-@@ -29,7 +29,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2
++SRC_URI += "file://0001-fix-compile-error-for-cross-compile.patch"
++
+ SRC_URI[archive.sha256sum] = "78f3274c0c79c434c03655c1b35edf7b95ec0421430897fb1345a98a265ed2d4"
  
- SRC_URI_remove_toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
- 
--SRC_URI[sha256sum] = "4ad08884f065f8e1dac166aa13db6a872cde419a1717dff4c82c2c5337ee5756"
-+SRC_URI[sha256sum] = "71635811e766ce8b155225a9e3c7757cfc7ff93df26b28d82e5e6fc021b9a605"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://errors/COPYRIGHT;md5=0e03cd976052c45697ad5d96e7dff8dc \
+ DEPENDS = "glib-2.0 libxau"
 -- 
-2.20.1
+2.17.1
 
