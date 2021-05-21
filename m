@@ -1,92 +1,61 @@
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web10.912.1621621888282219048
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web11.1863.1621626238779644146
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 May 2021 11:31:28 -0700
+ Fri, 21 May 2021 12:43:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=BjsV5rPC;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id ne24-20020a17090b3758b029015f2dafecb0so6462816pjb.4
-        for <openembedded-devel@lists.openembedded.org>; Fri, 21 May 2021 11:31:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=yC0DT6/JeSO1zibtNJlyIvytHZShckZIoVhqaU51RTo=;
-        b=BjsV5rPCiMqsoxtRGks4tgo5BYjAk2ag6+HGsIIswjpOHen/Lz+dOb2uHE7Ezhavcy
-         UN1g4bxL0dJRHkVIXJOAE4YNVCIwtDlJkboMNpmi8ovy0uWbhWPga8OQm/vOjrg+7sEj
-         xtDA0z58Z+lt7OQ4np3WbXJqZemXl6CdzsIqwQkeGYjNVvyMkn53WyxwsmA9pB5ABzMb
-         vqAlkpO9gUByeLi4oDTJ5Oqky4Zau8QYdzsvq3OXElQLFXIW2YCk7C4dAOOOWeUsB3UQ
-         N4Io2SV9cmcnFyjYMJ4vCJshVrGB0xq03RtCaa+vRULdY2g+OVDZwzjeQs/Yhe1rwyfx
-         mH8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=yC0DT6/JeSO1zibtNJlyIvytHZShckZIoVhqaU51RTo=;
-        b=kRJ6QLq6bk9lYVQ9FG9Yb6hQXJcj+M8FpuTGzqNcq3EvJouYTSZwgeK6Nq7wQ2RIWW
-         IIiP8XqyecdfG+2ap++zUp0qs7EE794tBtlxVzg2Y2+ajyV5cjGvF3/f2Y0cN0bHFdpU
-         pHEak1qdt7rPrWP4jwKLu3FDNGHgHQJobUZlvBcYgIL8dBNbaGvTDaXr8IZT7YavdZRk
-         vi/pxBgBww7NB91740CQDONU5havXzh7+34auOAVffoSTEm2TaJTiCXQiX+INMIJpX2z
-         9dInf6bcwRalUEjR0G2z9MbqxFPWPtJW8m+4WtS1800q90/PAgLacdn4DLvvVSP3MGJd
-         JsQQ==
-X-Gm-Message-State: AOAM5319KweYAAxolPwjIjRc0MRBrvLuSzVbNnAgPLpGYklm8dAkh0pg
-	iY0DuNByBhgbU8eQJutySqvjIlFkFuiyPg==
-X-Google-Smtp-Source: ABdhPJzZjjioC9DbGRk3T/PZ2kkgfnhCKY0jeNcE0eNcFOiNkRbuuV1MltGbPKn+dF1QErYDwoqTIA==
-X-Received: by 2002:a17:90b:341:: with SMTP id fh1mr12110497pjb.136.1621621887530;
-        Fri, 21 May 2021 11:31:27 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a746])
-        by smtp.gmail.com with ESMTPSA id m1sm1234257pgd.78.2021.05.21.11.31.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 May 2021 11:31:27 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=43814 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.93)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1lkB3o-00060E-Em; Fri, 21 May 2021 22:43:54 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] rdma-core: Upgrade to 35.0
-Date: Fri, 21 May 2021 11:31:24 -0700
-Message-Id: <20210521183124.485947-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-pysonos: Upgrade 0.0.48 -> 0.0.49
+Date: Fri, 21 May 2021 22:43:41 +0300
+Message-Id: <20210521194342.6448-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Native python is being probed on some builds
+Upgrade to release 0.0.49:
 
-Fixes
-recipe-sysroot-native/usr/share/cmake-3.20/Modules/FindPackageHandleStandardArgs.cmake:230 (message):
-  Could NOT find PythonLibs (missing: PYTHON_LIBRARIES PYTHON_INCLUDE_DIRS)
-  (Required is exact version "3.8")
+- Cleanup async_events renewal logging and exceptions
+- Add a pypi release action
+- Add next-version script for incrementing the version
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../rdma-core/{rdma-core_33.0.bb => rdma-core_35.0.bb}        | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/rdma-core/{rdma-core_33.0.bb => rdma-core_35.0.bb} (91%)
+ .../{python3-pysonos_0.0.48.bb => python3-pysonos_0.0.49.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pysonos_0.0.48.bb => python3-pysonos_0.0.49.bb} (79%)
 
-diff --git a/meta-networking/recipes-support/rdma-core/rdma-core_33.0.bb b/meta-networking/recipes-support/rdma-core/rdma-core_35.0.bb
-similarity index 91%
-rename from meta-networking/recipes-support/rdma-core/rdma-core_33.0.bb
-rename to meta-networking/recipes-support/rdma-core/rdma-core_35.0.bb
-index 1c1569cfb0..af4b3788ba 100644
---- a/meta-networking/recipes-support/rdma-core/rdma-core_33.0.bb
-+++ b/meta-networking/recipes-support/rdma-core/rdma-core_35.0.bb
-@@ -6,7 +6,7 @@ DEPENDS = "libnl"
- RDEPENDS_${PN} = "bash perl"
+diff --git a/meta-python/recipes-devtools/python/python3-pysonos_0.0.48.bb b/meta-python/recipes-devtools/python/python3-pysonos_0.0.49.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-pysonos_0.0.48.bb
+rename to meta-python/recipes-devtools/python/python3-pysonos_0.0.49.bb
+index 18ff30b22a..77ea6c08c0 100644
+--- a/meta-python/recipes-devtools/python/python3-pysonos_0.0.48.bb
++++ b/meta-python/recipes-devtools/python/python3-pysonos_0.0.49.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=07b0e2ca9ac77cd65cd4edf2e13367ea"
  
- SRC_URI = "git://github.com/linux-rdma/rdma-core.git"
--SRCREV = "e66ca0832e58dafac7af7ad9e6799eaef438061a"
-+SRCREV = "e29a698e99028e9a092bb00c03ee4bfa31ae0cf3"
- S = "${WORKDIR}/git"
+-SRC_URI[sha256sum] = "69c55bf80aae77b3ea8658ee1a80b9aafc0506931614853c926830a502230fc6"
++SRC_URI[sha256sum] = "77b8987ddbc69ea5c28ec1dee09cd6c30267e196521b1847e43cdea77bce4f09"
  
- #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
-@@ -26,7 +26,7 @@ FILES_SOLIBSDEV = ""
- FILES_${PN} += "${libdir}/*"
- INSANE_SKIP_${PN} += "dev-so"
+ inherit pypi setuptools3
  
--inherit cmake cpan-base systemd
-+inherit cmake cpan-base python3native systemd
- 
- SYSTEMD_SERVICE_${PN} = " \
-     srp_daemon.service \
 -- 
-2.31.1
+2.17.1
 
