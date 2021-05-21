@@ -1,98 +1,53 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.5])
- by mx.groups.io with SMTP id smtpd.web10.3773.1621561221140785942
+Received: from relay12.mail.gandi.net (relay12.mail.gandi.net [217.70.178.232])
+ by mx.groups.io with SMTP id smtpd.web09.4355.1621567182061246065
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 May 2021 18:40:21 -0700
+ Thu, 20 May 2021 20:19:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=pcCyFfrC;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.5, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1621561219; i=@fujitsu.com;
-	bh=AfrjsLJndPXG5pfflfLxjWqnLRBA5X8blKETYGNzm7s=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=pcCyFfrCmQGNkkzcmxK0aiqPbSbDWgrzNggOP7Ti6GEKVsi1990E/wRBdUPk6Edxa
-	 nPC0SJVpSpaxCIwxsQxXbeOFJ97GdA9WZmJzqagVuSo9MnosIQiqik5qgkGb2PNXFq
-	 Pz5NdhTCps1DBJdst6VYntOoj8+zCBbzzDED2V4zCTeEY3yfan2KlP2HF0wQ5nviyT
-	 25JpX7fQXaZxqaGirWlZ687VNb02yDGGT9/7cvS/OY2jyeXCkZLkWNmzvpoytAAsl5
-	 PMisi/LVMpHCywrd2a8qGoK272jjgH4ZarbyAsF26WYn5+h3kc162VVg28EX+ziqYF
-	 2QNehpUEcjFcw==
-Received: from [100.112.195.21] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-5.bemta.az-a.eu-west-1.aws.symcld.net id 32/EF-34775-38F07A06; Fri, 21 May 2021 01:40:19 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrPIsWRWlGSWpSXmKPExsViZ8MxVbeJf3m
-  CQe8nfYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePx8X3MBWe5KhY+OMPWwHiPs4uRi0NIYDaT
-  xPz+SWxdjJxAzglGia2X/EFsNgEdiY4X3SwgtoiAvsTS2XuYQWxhAV+Jpx83sILYLAKqEvvbz
-  4PFeQXcJO7c2M0OYksIKEhMefgeKi4ocXLmE7A5zAISEgdfvGCGqFGU2L7zDAuEXSExY8Y2tg
-  mMPLOQtMxC0rKAkWkVo0VSUWZ6RkluYmaOrqGBga6hoZGuoSUQG5npJVbpJuqlluqWpxaX6Br
-  qJZYX6xVX5ibnpOjlpZZsYgSGUUrBgbodjA9ef9A7xCjJwaQkyst0eVmCEF9SfkplRmJxRnxR
-  aU5q8SFGGQ4OJQleL97lCUKCRanpqRVpmTnAkIZJS3DwKInwMnMApXmLCxJzizPTIVKnGF05n
-  q1dsoiZY8O8pUDy/927QLJ/wcHVzBw32w+tZhZiycvPS5US590FMlsApDmjNA9uNCweLzHKSg
-  nzMjIwMAjxFKQW5WaWoMq/YhTnYFQS5pXmA5rCk5lXAnfBK6DjmICOcy9fBnJcSSJCSqqByXl
-  1nkTVPmtvt9dOzUHvIu+dkLO/sNZQ6oJx4ZbmKd7rFjz89OsFO+OFb4XL3p/ZvbM1uMFW4/Dt
-  G11l3JdeX/90b967jvTvd3L4pWIOZW2UbpqmnavSPuERe3ye+rEFckV8JnbJK51NbrR5Gr6MN
-  c6VWDnbMWVOaVFeUlStsFDhK03PPqNyrvcCtwKdTq3s5X1vEHLpQNyGrW5yd/t1EtKu3fJYvP
-  acTtGtD/8E5q7b5/ggYk178omi2s7LcT4hQZ51K2TTs2u2mRd0yt7bOePBkkqzz93WX/Yxs1b
-  USwnOTz/eLlB7cbKWk5qEnX3ah5/Ln8QJFfBeW93WtzZ4lUjBmVlxGmvdX8Yyl+5RYinOSDTU
-  Yi4qTgQAr17oLkIDAAA=
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-2.tower-265.messagelabs.com!1621561218!336878!1
-X-Originating-IP: [62.60.8.149]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.75.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 6557 invoked from network); 21 May 2021 01:40:18 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-2.tower-265.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 21 May 2021 01:40:18 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 14L1eI9N014336
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 21 May 2021 02:40:18 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 21 May 2021 02:40:17 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-engineio: upgrade 3.13.0 -> 4.2.0
-Date: Fri, 21 May 2021 21:40:10 +0800
-Message-ID: <1621604410-7149-1-git-send-email-zangrc.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+ dkim=missing; spf=none, err=permanent DNS error (domain: redrectangle.org, ip: 217.70.178.232, mailfrom: robert.joslyn@redrectangle.org)
+Received: (Authenticated sender: robert.joslyn@redrectangle.org)
+	by relay12.mail.gandi.net (Postfix) with ESMTPSA id 6FCDE200002;
+	Fri, 21 May 2021 03:19:39 +0000 (UTC)
+Mime-Version: 1.0 (Mac OS X Mail 14.0 \(3654.80.0.2.43\))
+Subject: Re: [oe] [meta-oe][PATCH] ctags: Recipe cleanup
+From: "Robert Joslyn" <robert.joslyn@redrectangle.org>
+In-Reply-To: <CAMKF1sqgn11fpRWTmJrHX+okNSx=-4Ay1Us=gb=F-_OcPT73ag@mail.gmail.com>
+Date: Thu, 20 May 2021 20:19:36 -0700
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Message-Id: <7A70D5A5-893A-4894-BF7C-4FDB07580879@redrectangle.org>
+References: <20210521012342.2205595-1-robert.joslyn@redrectangle.org>
+ <CAMKF1sqgn11fpRWTmJrHX+okNSx=-4Ay1Us=gb=F-_OcPT73ag@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Mailer: Apple Mail (2.3654.80.0.2.43)
+Content-Type: text/plain;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Add runtime dependency to resolve errors that occurred when import engineio.
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
----
- ...-engineio_3.13.0.bb => python3-engineio_4.2.0.bb} | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-engineio_3.13.0.bb => python3-engineio_4.2.0.bb} (50%)
+> On May 20, 2021, at 6:34 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>=20
+> On Thu, May 20, 2021 at 6:25 PM Robert Joslyn
+> <robert.joslyn@redrectangle.org> wrote:
+>>=20
+>> The configure script does not have a manpages option, resulting in a
+>> warning:
+>>        ctags-5.9.20210502.0-r0 do_configure: QA Issue: ctags: invalid =
+PACKAGECONFIG: manpages [invalid-packageconfig]
+>>=20
+>> Since there does not seem to be any man pages or documentation =
+related
+>> configuration options, remove the manpages class.
+>>=20
+>=20
+> so it seems it will be using python-docutils for generating manpages ?
 
-diff --git a/meta-python/recipes-devtools/python/python3-engineio_3.13.0.bb b/meta-python/recipes-devtools/python/python3-engineio_4.2.0.bb
-similarity index 50%
-rename from meta-python/recipes-devtools/python/python3-engineio_3.13.0.bb
-rename to meta-python/recipes-devtools/python/python3-engineio_4.2.0.bb
-index 51f853390c..15b321c359 100644
---- a/meta-python/recipes-devtools/python/python3-engineio_3.13.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-engineio_4.2.0.bb
-@@ -9,5 +9,13 @@ inherit pypi setuptools3
- 
- PYPI_PACKAGE = "python-engineio"
- 
--SRC_URI[md5sum] = "822b5dba0308dde6b8cbfd022daae0e4"
--SRC_URI[sha256sum] = "2da5e1e5565e170a17169d1a76eb6a099cc96f0a25a5b1e0f9785f151485daea"
-+RDEPENDS_${PN} += " \
-+	python3-netclient \
-+	python3-json \
-+	python3-logging \
-+	python3-compression \
-+	python3-asyncio \
-+"
-+
-+SRC_URI[md5sum] = "1fa937ec2a9f6feac27e9f65824c5781"
-+SRC_URI[sha256sum] = "4e97c1189c23923858f5bb6dc47cfcd915005383c3c039ff01c89f2c00d62077"
--- 
-2.25.1
+Yes, it uses rst2man.py, which is part of python3-docutils. It looks =
+like the configure script checks for a few rst2man varieties to =
+determine if it should generate the man pages or not.
 
+Perhaps a better way to do this is to add the manpages class back, and =
+pull in the dependency with:
+
+PACKAGECONFIG[manpages] =3D =E2=80=9C,,python3-docutils-native"
+
+Thanks,
+Robert=
