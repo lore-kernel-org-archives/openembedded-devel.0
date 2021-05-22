@@ -1,88 +1,55 @@
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web09.4722.1621674541916752753
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.web12.4668.1621674617453847350
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 22 May 2021 02:09:02 -0700
+ Sat, 22 May 2021 02:10:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=aSzqnktk;
- spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f48.google.com with SMTP id lz27so33919360ejb.11
-        for <openembedded-devel@lists.openembedded.org>; Sat, 22 May 2021 02:09:01 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=YiW00pSJ;
+ spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-pf1-f179.google.com with SMTP id x18so12429375pfi.9
+        for <openembedded-devel@lists.openembedded.org>; Sat, 22 May 2021 02:10:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=KC125xIHEmYXJZ3TcP9wo0NtAl6RGPJeeIGlXbxsNw4=;
-        b=aSzqnktkhRivy1nlPC1hqvU0ix1LWvl/NCXhlDdhtdVzpwHFofwm8x/ezxvuIWRBVn
-         Ou1cm3vFNXD711tgOyP/JbAbRjxmZEYXq/a9Z1HNwavWlX+feiLzOjl1FE72iJSBXh4s
-         XAuoqafsc/ujOtqbQIphjYe2X0PqQnXIAPV0E/7BjENvVXd3pEvlZmNbAmMjZkJJjPPf
-         Vb3KG9II6rJYjGSAcvo6LWv4zDroc2ERT+rQj90wJGBaE3gxCxj5asr/imZeJlBvNUup
-         6fGkiR3/FBCfJ+LHihFSxJswDiSSuUzFqDIzbo6+U5H8qpGAfPnAHXmutlZq8MndtggA
-         E10g==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=ly/4fcn4IMUzqqjLip9cTmK6KElKM6uLM30HzZ047JY=;
+        b=YiW00pSJ/UVWidf+/QmykDN8kBrFAlpevk5k1K6OXyOj1o0Ni/w0l1rmdb8ylZqgMO
+         U3F6vY0brZqBkczXtUCwDCp25KJO5AYdxl0myO3Ka5LLk/LDjuDdPptwCX+xgUEXeQrK
+         4VCw7dxjAlzGDqZJGabStGBCdM9wHHG6qHDCABHcgYRcLDcZGCvtcL4+YNq5XsTgp9Q0
+         B3hwNJNa5vXXvc/OdsLN5wYf5b4aN6ABFUryjqqeboa/qYT2WYk0HH1xobt3VjufxDBW
+         Opk1IWfEBNPQIMbM5HYOVq7pC0M+vmRJEbDoeo38le3n8RqWBUUTjTnxchkO1XNKVqAX
+         GW8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=KC125xIHEmYXJZ3TcP9wo0NtAl6RGPJeeIGlXbxsNw4=;
-        b=bjIHNeTLiG8zj0WJtwgnA/JIs89sRJsRxmFCfNoFyeZ9ycrEJUFaM75+Gj1FNXehMM
-         GWNUUOOsziTbYpmfvjZoIkqaR0c+cLsqiUfdmNDzGbnOFIED2MZl1aaN/sIwZMWrpwTd
-         cxPPq8LEryJBzIMU3/65a+U9o9KEFyq6tq8vjiGttyrRiWRA/+OeTEzkfNYkcZxKH2Gq
-         8E4793J6SyLKyL3ofP6j7Ywoim+JDf8IEsHqAos5We7uPWNyK7X9wZXgCKgJysUXYBP+
-         z/9+iiQpltyRCbPX8y2LG+Qp22uU7a8L9oJvuA4tla8BSoid5p17k6H0EihXittPByPt
-         /TrQ==
-X-Gm-Message-State: AOAM5314x427c2cks01sKbQXdXTMwJ3H4WXWvzawySeKKlpMs4G4puPs
-	ZffujiXBrIbR7e0UjmZDZr2+bA6zZiY=
-X-Google-Smtp-Source: ABdhPJwifd6d7H0I9PxAApbPjGILMbs2GX/2R86jOytUH7tek9z+Lw7oAq/AVHVDImq0yGh//nQMxw==
-X-Received: by 2002:a17:906:fa0d:: with SMTP id lo13mr14398976ejb.477.1621674540299;
-        Sat, 22 May 2021 02:09:00 -0700 (PDT)
-Return-Path: <schnitzeltony@gmail.com>
-Received: from thanks-buchmuellers.speedport.ip (p200300f07f1a3b6614c38748203e05ff.dip0.t-ipconnect.de. [2003:f0:7f1a:3b66:14c3:8748:203e:5ff])
-        by smtp.gmail.com with ESMTPSA id q16sm5939436edw.87.2021.05.22.02.08.59
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 22 May 2021 02:08:59 -0700 (PDT)
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH][v2] libeigen: upgrade 3.3.7 -> 3.3.9
-Date: Sat, 22 May 2021 11:08:51 +0200
-Message-Id: <20210522090851.17582-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.31.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=ly/4fcn4IMUzqqjLip9cTmK6KElKM6uLM30HzZ047JY=;
+        b=a43JtuX+PwlP4JqXyN8bD2Tc/Rg97sasUN8bf7LeM4uQL7RsPRI3EwtTW9nM8zIZo1
+         Cl/x6CWD0uRGjISFETlXxJuqmUw9ZzdpjJ71L+YV3CXtaTPnCClfiFHjaW1yJ35JRsi9
+         wMmMForsq8z7kk0QVzedIDVsBGEeXMBLBCyTPhr0TOqYuIqRzTWocsnv31y8rBDHpx9M
+         wGSuI9JC+ClASV/uPMh4g5O2WFz7lgGYn2i0UWxp6lGO+rlz5PLqJcqIs6q5gzHtE5ag
+         HKYXgpmbKPURPq85SyN6LzmHLSmIAszVdav9bxJG5E4KubcnxRkPvYP9Wh/Cb1ABtpqC
+         K8YQ==
+X-Gm-Message-State: AOAM530u4Ef50QvRwZWMSlvywFglu2aBGbE7KToW/FaqJRu62gxbSMfS
+	PdrfFKCjtxTqdxxV56urvyGpyyMfQI+B0h49t0c=
+X-Google-Smtp-Source: ABdhPJwP8BLxxEAuGMtvJf6IoOkr2K1hEHeAzRunVJ8AojUSegye+1OOFYG5LoQulzJ2qoxqAC8BFyO6baX+CZKvzZU=
+X-Received: by 2002:a62:148e:0:b029:2e4:e5a5:7e33 with SMTP id
+ 136-20020a62148e0000b02902e4e5a57e33mr6224519pfu.9.1621674616989; Sat, 22 May
+ 2021 02:10:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20210522013521.588774-1-schnitzeltony@gmail.com>
+ <20210522013521.588774-16-schnitzeltony@gmail.com> <CANPvuRniA5iXtmnuwpK5oJSrFZCV=gd3ZAszkPNKJT4JY0qajw@mail.gmail.com>
+In-Reply-To: <CANPvuRniA5iXtmnuwpK5oJSrFZCV=gd3ZAszkPNKJT4JY0qajw@mail.gmail.com>
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+Date: Sat, 22 May 2021 11:10:05 +0200
+Message-ID: <CALbNGRT49k3YZ=MnXMEQSNvCFEZDn9zWaJ3GOED+kK1dJTu4pA@mail.gmail.com>
+Subject: Re: [oe] [PATCH 16/17] libeigen: upgrade 3.3.7 -> 3.3.7
+To: Jose Quaresma <quaresma.jose@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Simplify packaging a bit
+On Sat, May 22, 2021 at 10:36 AM Jose Quaresma <quaresma.jose@gmail.com> wrote:
+>
+> Typo in commit  message, new version should be 3.3.9
+Indeed - thanks - just sent v2
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
-V2: Fix typo in commit message
- .../libeigen/{libeigen_3.3.7.bb => libeigen_3.3.9.bb}        | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/libeigen/{libeigen_3.3.7.bb => libeigen_3.3.9.bb} (77%)
-
-diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb b/meta-oe/recipes-support/libeigen/libeigen_3.3.9.bb
-similarity index 77%
-rename from meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
-rename to meta-oe/recipes-support/libeigen/libeigen_3.3.9.bb
-index 6ce318d0b..d6ef98f94 100644
---- a/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
-+++ b/meta-oe/recipes-support/libeigen/libeigen_3.3.9.bb
-@@ -6,14 +6,13 @@ LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad"
- 
- SRC_URI = "git://gitlab.com/libeigen/eigen.git;protocol=http;nobranch=1"
- 
--SRCREV = "21ae2afd4edaa1b69782c67a54182d34efe43f9c"
-+SRCREV = "0fd6b4f71dd85b2009ee4d1aeb296e2c11fc9d68"
- 
- S = "${WORKDIR}/git"
- 
- inherit cmake
- 
--FILES_${PN} = "${libdir}"
--FILES_${PN}-dev = "${includedir} ${datadir}/eigen3/cmake ${datadir}/cmake/Modules ${datadir}/pkgconfig"
-+FILES_${PN}-dev += "${datadir}/eigen3/cmake"
- 
- # ${PN} is empty so we need to tweak -dev and -dbg package dependencies
- RDEPENDS_${PN}-dev = ""
--- 
-2.31.1
-
+Andreas
