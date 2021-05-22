@@ -1,50 +1,50 @@
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
- by mx.groups.io with SMTP id smtpd.web11.1934.1621647341296717725
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+ by mx.groups.io with SMTP id smtpd.web12.1842.1621647341984219865
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 May 2021 18:35:41 -0700
+ Fri, 21 May 2021 18:35:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=VHIUl1vK;
- spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ed1-f48.google.com with SMTP id y7so7771465eda.2
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=CxS63YmA;
+ spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f54.google.com with SMTP id lg14so32993821ejb.9
         for <openembedded-devel@lists.openembedded.org>; Fri, 21 May 2021 18:35:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=ymqajHDwbgSWlWXT+p5HiW1jPJ4i3pNAx1hwqya6Rws=;
-        b=VHIUl1vKIckLlKuyozIKNPS99mJAa5CajNdqXsIKaSOFkkR8QoAItReIyNMh7/jGyb
-         zyecpJH3NqLWCat/dkEFwgcWyeImpl8ukxDVJVXrQQDb4SUud1O9cxSvqetQvYWAlA+s
-         4g3wbjf8dnGOohAMc7siu6RWJLj5M/5SLDpkAcZSDXS4Tlf+oufM2Lne5oV+Or0JY9NK
-         lmVYi8+aAun5LaXtUarIk2flBMd9W1gkwWV1oNNuJjUgEYT1EeHAaOUzoA9rtJAfBIVJ
-         +jJFUMDlWFMybkrR7Jkk5gTIJmw/OnuxHlcxt1gCZPA31LlLgruz5T3Og67zmWFPE8Vh
-         Ogkw==
+        bh=qMB44/04+HS2yoRRV6SbZK0scZNLS/lm1z0AUdMVrW0=;
+        b=CxS63YmAi8Uf5hfvGoOLhlfXJOHrbK2qsnwGoYWq6KOWVQREZ+T+GvAPWd6f0FkAnU
+         OBgttuO3YdEjaT1pPVX3QJ5r9qD6YihBY+vcRu4KvKfBiziPcpZtuzzbVVYuwDk/EvwC
+         /pkszNKi0AwHhNiE2h94Uk+xQJ6/3zv79RCl6TtacJw/EH55h+6zUABkuWqCNyw/ijCL
+         dWEYxqt+EYRXpawFEy/uqG9X/L+zjALWGI8JSSt6Xsk2NqQF84QLZB5YozZNONkiouum
+         f7FDsGypdkuI6IY4I8z8fDPYNbCSnTQ/4/Z0G1G3QSo5y6V5uF1DJ4MnVj/lVp6J7VS/
+         UJNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=ymqajHDwbgSWlWXT+p5HiW1jPJ4i3pNAx1hwqya6Rws=;
-        b=B7rMUisfPYxzfKIM+AN8hMPd0gRjdgrVxkE6Ax/pSDA9zgUQGpJvVjBsJ9Hfb/xg4F
-         9TLWh18NwT6LzdjM1o+9//eZ7iYx37XN0YDvrcxQHmoa8Z/5Z/b76WzG/gRS9rX6nDtt
-         0iycThcgS70cyE+lGuLxqzwLGUZi8yYCgqV1vzZon5a1aX0Y0YLhcuXE6IruMvx1j1HX
-         mbFR99EiDN//WNY9tq1qn2/xr8Z4frls7ALb3halXDlmGTZMeYQNrQSMjoJ8zNN1wg7P
-         1Yz81/N3iuWkypej9WvNkGPko1Dct5cvaWjD6jaeso8nx7ojFMCHC7ryStdFuS+dnPA9
-         AOVQ==
-X-Gm-Message-State: AOAM531eCk46cGnKVEif7HDu0gAemiyjvuqESpcoBWAoGDK4araCEzP1
-	BrZobmA7uvlNe1U1QvhUPw2mwyQS1sE=
-X-Google-Smtp-Source: ABdhPJwHE2UlwTeoV89KSo52/SElTFP3DeDbX1BqdlLyqLp/1XX7O33ucKd5QClwDi5tRsLU9L3JbA==
-X-Received: by 2002:aa7:cc10:: with SMTP id q16mr14243873edt.53.1621647339886;
-        Fri, 21 May 2021 18:35:39 -0700 (PDT)
+        bh=qMB44/04+HS2yoRRV6SbZK0scZNLS/lm1z0AUdMVrW0=;
+        b=tRC09jtHsQBN43NdSIiol44o8a7ne9G60rWJ/uOLFjAKJtgxe7zPXICgVkF8sLqw1O
+         0hhRim6U+ubOOyBgcH09CRS7rc9GYAvUzE1Ws/yqLfxlHUIoR6UpBb5hJhVfnaLTvn4x
+         6lW1gW9v4CZ9WN06Hnv+t5EpryJCQ6ISD8AyU2b3N962NJWZ+6xqmaG8HoSNTmTjv0e7
+         aKZsTwJNJ31gt7pJhbYnC1ACgGpc+EyZ+Xs0w3MqbU10L4jtn8pVHywsUkPZJE/1dJI1
+         b/mzSeFlwPXoYbMbGrg44jqEXwMNFZVOuebPVkos02nbuOlWlX5dBFh1xJWerOMKgXlO
+         f+2Q==
+X-Gm-Message-State: AOAM530fAe1csDklyZil9K/gs6A+s+BRrZBseqm7oYwBA/3NMtciHynO
+	UOVcXLA1i/8uRV440+GBD9c4gWt+/LA=
+X-Google-Smtp-Source: ABdhPJw0B25JqJT/1B/Se+fV/MKmH0dKK4fNP2R5cB1dHOsssiSd9VYIhCx9uuXz/5/jWe3YTD2+7w==
+X-Received: by 2002:a17:906:e0d0:: with SMTP id gl16mr12937177ejb.509.1621647340646;
+        Fri, 21 May 2021 18:35:40 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from thanks-buchmuellers.speedport.ip (p200300f07f1a3b69456ae2a4ae47bbb1.dip0.t-ipconnect.de. [2003:f0:7f1a:3b69:456a:e2a4:ae47:bbb1])
         by smtp.gmail.com with ESMTPSA id p9sm5361337edu.79.2021.05.21.18.35.39
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 May 2021 18:35:39 -0700 (PDT)
+        Fri, 21 May 2021 18:35:40 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 12/17] protobuf: upgrade 3.15.2 -> 3.17.0
-Date: Sat, 22 May 2021 03:35:16 +0200
-Message-Id: <20210522013521.588774-12-schnitzeltony@gmail.com>
+Subject: [PATCH 13/17] protobuf-c: upgrade 1.3.3 -> 1.4.0
+Date: Sat, 22 May 2021 03:35:17 +0200
+Message-Id: <20210522013521.588774-13-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210522013521.588774-1-schnitzeltony@gmail.com>
 References: <20210522013521.588774-1-schnitzeltony@gmail.com>
@@ -54,26 +54,54 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../protobuf/{protobuf_3.15.2.bb => protobuf_3.17.0.bb}         | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/protobuf/{protobuf_3.15.2.bb => protobuf_3.17.0.bb} (98%)
+ .../protobuf-c/0001-avoid-race-condition.patch         | 10 +++++-----
+ .../{protobuf-c_1.3.3.bb => protobuf-c_1.4.0.bb}       |  2 +-
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-devtools/protobuf/{protobuf-c_1.3.3.bb => protobuf-c_1.4.0.bb} (96%)
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.15.2.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.17.0.bb
-similarity index 98%
-rename from meta-oe/recipes-devtools/protobuf/protobuf_3.15.2.bb
-rename to meta-oe/recipes-devtools/protobuf/protobuf_3.17.0.bb
-index 0392f9339..81af2d50f 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf_3.15.2.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.17.0.bb
-@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
- DEPENDS = "zlib"
- DEPENDS_append_class-target = " protobuf-native"
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
+index 4fc7703d8..17fa14092 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
++++ b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
+@@ -20,17 +20,17 @@ Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+  1 file changed, 1 insertion(+)
  
--SRCREV = "d7e943b8d2bc444a8c770644e73d090b486f8b37"
-+SRCREV = "652d99a8ee8aa6b801e11977951fbf444cfccc8f"
+ diff --git a/Makefile.am b/Makefile.am
+-index b0cb065..1608ae0 100644
++index c7339ef..882756d 100644
+ --- a/Makefile.am
+ +++ b/Makefile.am
+-@@ -156,6 +156,7 @@ noinst_PROGRAMS += \
+- t_generated_code2_cxx_generate_packed_data_SOURCES = \
++@@ -166,6 +166,7 @@ t_generated_code2_cxx_generate_packed_data_SOURCES = \
+  	t/generated-code2/cxx-generate-packed-data.cc \
+- 	t/test-full.pb.cc
++ 	t/test-full.pb.cc \
++ 	protobuf-c/protobuf-c.pb.cc
+ +t/generated-code2/cxx-generate-packed-data.cc: t/test-full.pb.h
+  $(t_generated_code2_cxx_generate_packed_data_OBJECTS): t/test-full.pb.h
+  t_generated_code2_cxx_generate_packed_data_CXXFLAGS = \
+  	$(AM_CXXFLAGS) \
+ -- 
+-2.17.1
++2.31.1
  
- SRC_URI = "git://github.com/protocolbuffers/protobuf.git \
-            file://run-ptest \
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.3.bb b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
+similarity index 96%
+rename from meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.3.bb
+rename to meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
+index 6fef0bed2..85172047a 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.3.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cb901168715f4782a2b06c3ddaefa558"
+ 
+ DEPENDS = "protobuf-native protobuf"
+ 
+-SRCREV = "f20a3fa131c275a0e795d99a28f94b4dbbb5af26"
++SRCREV = "f224ab2eeb648a818eb20687d7150a285442c907"
+ 
+ SRC_URI = "git://github.com/protobuf-c/protobuf-c.git \
+            file://0001-avoid-race-condition.patch \
 -- 
 2.31.1
 
