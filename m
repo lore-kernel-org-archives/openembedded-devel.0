@@ -1,119 +1,157 @@
-Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com [209.85.160.169])
- by mx.groups.io with SMTP id smtpd.web08.6265.1621687500992225939
+Received: from mail-qv1-f52.google.com (mail-qv1-f52.google.com [209.85.219.52])
+ by mx.groups.io with SMTP id smtpd.web10.6209.1621687702208437897
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 22 May 2021 05:45:01 -0700
+ Sat, 22 May 2021 05:48:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=DrLUx9zt;
- spf=pass (domain: gmail.com, ip: 209.85.160.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f169.google.com with SMTP id v4so17335775qtp.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 22 May 2021 05:45:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=t5MWJOUz;
+ spf=pass (domain: gmail.com, ip: 209.85.219.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f52.google.com with SMTP id e8so8624360qvp.7
+        for <openembedded-devel@lists.openembedded.org>; Sat, 22 May 2021 05:48:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc:content-transfer-encoding;
-        bh=jN4vc6SpF6nADuYYDRk716dxxpxwzp/OzakdZm5A/7A=;
-        b=DrLUx9ztVpyhsKj99uW3Uyc/5NwdHHNIwYx2githEuYFm1A/NFGrh/NFqzsIoFPmqH
-         hZrITWjpV08LTmvTfkxXP9EWQFNyAqhtajiDnMHC5CvSBVJcJHkU2gVpdzoNX7egfVjB
-         P1EbNTnSX+uM/iCl8t2h9Xa/uImUo/uGvI8pQx4Lk4PsRLwLbx6NrI2I8W4iLKVH3Kw9
-         11ju8MRhJLnkj+/+W3lLyXalb6rOj2/eNGEXqHUv4kybFQGlU26Vm0Ej8/0TCqSpoJHR
-         GBaRF8CkQnjEvweIHcFxuFDzsp6IhgvASmubb0NmYcdc+r8r6HEKxbTJRHvglTkO6dzh
-         0BQg==
+        bh=vlBTB3TUfEGgM3j6PQKEPPcxDgi4ggd2NpytOT/wbPA=;
+        b=t5MWJOUzlIrmg585wuFKa81vbUP/lfYHXNAkT/ILSeUXqP/7ilbeGick7FuzA7IYJ1
+         T5758Meir1OeDIvY1He5jTsq7XQgfQBxLQ0ahQx/3VrzAvFG3MAqtmtzliXamc5oKKOY
+         gVkxeXwgJT4VaB5LLmC7h0Vk9yrxB2KQTan8YmZD0wYD6jMdRBFyi/t+2F7a4UqB8q8d
+         40nu/y/l/IKgYcIiaEeS1MgJw9WOyoscxQn1m6MimmqMiuQhC4BYS0XGdYz9d3PEUzOC
+         xpGMn4xmYtu5E0elCFLYoHwVhzPe2C2v2zqNVmbcUfWHgcMBBMNnKby85e8MLhSUZpY2
+         AO6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc:content-transfer-encoding;
-        bh=jN4vc6SpF6nADuYYDRk716dxxpxwzp/OzakdZm5A/7A=;
-        b=tzj4ycw3utCzp1RmD8mLzC2KgsSjGp+7Jrqc6ZOVTgfufy1gaGg2a1uNgpqcIAANbK
-         HDT1QqO6pA+f4sl1pZD0KJzadYs1nZtmsRD8MDoASXCu3uEHZOSiylZwekBByPqaEqnc
-         HbgnJXB/L+xvq5e+6TsbCD5HCuMusbw55yaMTqjRCuUee+X0dVtn+4NccrpZgriWo5CR
-         iaEG/WxPu+qOaBwnLsBWY7wpomTH6lGNbYciSNDZmsVYYCfPs/bzh7aplg5AWbiSz3Dx
-         PMKgdtDHZS5RUVRthTlARz7M8IADn+Xs5Hu/w29lD+BR3oCYNIOEX31nz+90l++Mi/x3
-         6iDQ==
-X-Gm-Message-State: AOAM530X1hjph09M5MhSDYLgRKaUeln5cQIULhLpw1+07fXyda9QjZcX
-	L4C9I7kq/z6tVG7JKVfPRI42lIElrIemZ29Io5M=
-X-Google-Smtp-Source: ABdhPJwYrUYYsJMIFM3vHunQXu+ePduOeU2bl6Snf0eIoolCZpDPAHI9LmCPmmbC01uSD2UO7g9N1gD8Pi8oQDDOm5A=
-X-Received: by 2002:ac8:4252:: with SMTP id r18mr13956750qtm.82.1621687500128;
- Sat, 22 May 2021 05:45:00 -0700 (PDT)
+        bh=vlBTB3TUfEGgM3j6PQKEPPcxDgi4ggd2NpytOT/wbPA=;
+        b=NUJd9ZSUfEBibpbKywRAEQxpqtBARLT3Ot4jPuYm9g4BZr6zD5Oi4AjWA8kzpySmaZ
+         frpXzNqGhYzUEweFNFgClmeZuTABY2pqRyvzzZh+TDGxd/WgbAIDo0VodjRYEVkaS5lv
+         667Kv3h9uTWEXtTdJ5R9hpTXwqAVLOBXiIXWopEra6V08A1Y9bshNseOC2R0K5WIlEQs
+         Ro7N0tzLYw+pIylDqFfDzgBEIjhdc7L9Y9tvd9C4MOoyq2Asqlgdf2/pf4Fhz0UauIJc
+         jK4E3yBUV/KNsTFk05ehTQZy1EnHswcYF9xwqCsguOY9UkElnrgjOYcnVtFQ+55i4Yd6
+         ITGA==
+X-Gm-Message-State: AOAM530vNeAB/MbSm03AwMtejSvYgwPp8y2lTIgwzXHxQK7ti4QX18JR
+	D5FDFtdTSkA9DLuvbBVWUP8Tsh58J+xde/C2SZs=
+X-Google-Smtp-Source: ABdhPJzcqsmqf1TCMIC0TbX6g5SS52HrFgsC8TxiSuTPkuX+Uq2WvifKWiud+FBxruXBe9Hy+/8M1SvVGE+EE6uowzs=
+X-Received: by 2002:a05:6214:258d:: with SMTP id fq13mr19226817qvb.50.1621687701302;
+ Sat, 22 May 2021 05:48:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210522013521.588774-1-schnitzeltony@gmail.com> <20210522013521.588774-13-schnitzeltony@gmail.com>
-In-Reply-To: <20210522013521.588774-13-schnitzeltony@gmail.com>
+References: <20210522082605.16975-1-schnitzeltony@gmail.com>
+In-Reply-To: <20210522082605.16975-1-schnitzeltony@gmail.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sat, 22 May 2021 05:44:34 -0700
-Message-ID: <CAMKF1srHF+Wj8EzoqjQ9AfmoPVvnp-GH_49fMYHod0DZ7WN3rA@mail.gmail.com>
-Subject: Re: [oe] [PATCH 13/17] protobuf-c: upgrade 1.3.3 -> 1.4.0
+Date: Sat, 22 May 2021 05:47:54 -0700
+Message-ID: <CAMKF1spxUhja3kvLhyW_hSLFTXwXoFApC558-un3Sc2xAsdP=g@mail.gmail.com>
+Subject: Re: [oe] [PATCH][v2] giflib: upgrade 5.1.4 -> 5.2.1
 To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-seeing errors
+On Sat, May 22, 2021 at 1:26 AM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m> wrote:
+>
+> * Project removed autotools configuration files. So it is now a pure Mak=
+efile
+>   build which requires autotools-brokensep
 
-https://errors.yoctoproject.org/Errors/Details/585453/
-https://errors.yoctoproject.org/Errors/Details/585452/
+if autotools support is removed then I wonder if using any of
+autotools classes is the right thing to do
 
-On Fri, May 21, 2021 at 6:35 PM Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om> wrote:
+> * Checked sources: Back ported CVE-patch can go
 >
 > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
 > ---
->  .../protobuf-c/0001-avoid-race-condition.patch         | 10 +++++-----
->  .../{protobuf-c_1.3.3.bb =3D> protobuf-c_1.4.0.bb}       |  2 +-
->  2 files changed, 6 insertions(+), 6 deletions(-)
->  rename meta-oe/recipes-devtools/protobuf/{protobuf-c_1.3.3.bb =3D> prot=
-obuf-c_1.4.0.bb} (96%)
+> V2:
+> * explain autotool -> -brokensep in commit message
+> * add comment in do_install explaining why we tailored it
+>  .../giflib/files/CVE-2019-15133.patch         | 23 -------------------
+>  .../{giflib_5.1.4.bb =3D> giflib_5.2.1.bb}      | 20 ++++++++--------
+>  2 files changed, 11 insertions(+), 32 deletions(-)
+>  delete mode 100644 meta-oe/recipes-devtools/giflib/files/CVE-2019-15133=
+.patch
+>  rename meta-oe/recipes-devtools/giflib/{giflib_5.1.4.bb =3D> giflib_5.2=
+.1.bb} (50%)
 >
-> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-rac=
-e-condition.patch b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid=
--race-condition.patch
-> index 4fc7703d8..17fa14092 100644
-> --- a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condi=
-tion.patch
-> +++ b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condi=
-tion.patch
-> @@ -20,17 +20,17 @@ Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
->   1 file changed, 1 insertion(+)
->
->  diff --git a/Makefile.am b/Makefile.am
-> -index b0cb065..1608ae0 100644
-> +index c7339ef..882756d 100644
->  --- a/Makefile.am
->  +++ b/Makefile.am
-> -@@ -156,6 +156,7 @@ noinst_PROGRAMS +=3D \
-> - t_generated_code2_cxx_generate_packed_data_SOURCES =3D \
-> +@@ -166,6 +166,7 @@ t_generated_code2_cxx_generate_packed_data_SOURCES =
+> diff --git a/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch =
+b/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
+> deleted file mode 100644
+> index 9957be82f..000000000
+> --- a/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
+> +++ /dev/null
+> @@ -1,23 +0,0 @@
+> -From 799eb6a3af8a3dd81e2429bf11a72a57e541f908 Mon Sep 17 00:00:00 2001
+> -From: "Eric S. Raymond" <esr@thyrsus.com>
+> -Date: Sun, 17 Mar 2019 12:37:21 -0400
+> -Subject: [PATCH] Address SF bug #119: MemorySanitizer: FPE on unknown a=
+ddress
+> -
+> ----
+> - dgif_lib.c | 2 +-
+> - 1 file changed, 1 insertion(+), 1 deletion(-)
+> -
+> -Upstream-status: Backport [https://sourceforge.net/p/giflib/code/ci/799=
+eb6a3af8a3dd81e2429bf11a72a57e541f908/]
+> -CVE: CVE-2019-15133
+> -
+> ---- a/lib/dgif_lib.c   2021-01-13 19:28:18.923493586 +0100
+> -+++ b/lib/dgif_lib.c   2021-01-13 19:28:55.245863085 +0100
+> -@@ -1099,7 +1099,7 @@ DGifSlurp(GifFileType *GifFile)
+> -
+> -               sp =3D &GifFile->SavedImages[GifFile->ImageCount - 1];
+> -               /* Allocate memory for the image */
+> --              if (sp->ImageDesc.Width < 0 && sp->ImageDesc.Height < 0 =
+&&
+> -+              if (sp->ImageDesc.Width <=3D 0 && sp->ImageDesc.Height <=
 =
-=3D \
->         t/generated-code2/cxx-generate-packed-data.cc \
-> -       t/test-full.pb.cc
-> +       t/test-full.pb.cc \
-> +       protobuf-c/protobuf-c.pb.cc
->  +t/generated-code2/cxx-generate-packed-data.cc: t/test-full.pb.h
->   $(t_generated_code2_cxx_generate_packed_data_OBJECTS): t/test-full.pb.=
-h
->   t_generated_code2_cxx_generate_packed_data_CXXFLAGS =3D \
->         $(AM_CXXFLAGS) \
->  --
-> -2.17.1
-> +2.31.1
+=3D 0 &&
+> -                       sp->ImageDesc.Width > (INT_MAX / sp->ImageDesc.H=
+eight)) {
+> -                   return GIF_ERROR;
+> -               }
+> diff --git a/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb b/meta-oe/r=
+ecipes-devtools/giflib/giflib_5.2.1.bb
+> similarity index 50%
+> rename from meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
+> rename to meta-oe/recipes-devtools/giflib/giflib_5.2.1.bb
+> index 1871bab46..d8757ef58 100644
+> --- a/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
+> +++ b/meta-oe/recipes-devtools/giflib/giflib_5.2.1.bb
+> @@ -3,14 +3,19 @@ SECTION =3D "libs"
+>  LICENSE =3D "MIT"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dae11c61b04b2917be39b11f78d71=
+519a"
 >
-> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.3.bb b/met=
-a-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
-> similarity index 96%
-> rename from meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.3.bb
-> rename to meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
-> index 6fef0bed2..85172047a 100644
-> --- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.3.bb
-> +++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
-> @@ -12,7 +12,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dcb901168715=
-f4782a2b06c3ddaefa558"
+> -SRC_URI =3D " \
+> -    ${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2 \
+> -    file://CVE-2019-15133.patch \
+> -"
+> -
+>  CVE_PRODUCT =3D "giflib_project:giflib"
 >
->  DEPENDS =3D "protobuf-native protobuf"
+> -inherit autotools
+> +DEPENDS =3D "xmlto-native"
+> +
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.gz"
+> +SRC_URI[sha256sum] =3D "31da5562f44c5f15d63340a09a4fd62b48c45620cd302f7=
+7a6d9acf0077879bd"
+> +
+> +inherit autotools-brokensep
+> +
+> +do_install() {
+> +    # using autotools's default will end up in /usr/local
+> +    oe_runmake DESTDIR=3D${D} PREFIX=3D${prefix} LIBDIR=3D${libdir} ins=
+tall
+> +}
 >
-> -SRCREV =3D "f20a3fa131c275a0e795d99a28f94b4dbbb5af26"
-> +SRCREV =3D "f224ab2eeb648a818eb20687d7150a285442c907"
+>  PACKAGES +=3D "${PN}-utils"
+>  FILES_${PN} =3D "${libdir}/libgif.so.*"
+> @@ -19,6 +24,3 @@ FILES_${PN}-utils =3D "${bindir}"
+>  BBCLASSEXTEND =3D "native"
 >
->  SRC_URI =3D "git://github.com/protobuf-c/protobuf-c.git \
->             file://0001-avoid-race-condition.patch \
+>  RDEPENDS_${PN}-utils =3D "perl"
+> -
+> -SRC_URI[md5sum] =3D "2c171ced93c0e83bb09e6ccad8e3ba2b"
+> -SRC_URI[sha256sum] =3D "df27ec3ff24671f80b29e6ab1c4971059c14ac3db954068=
+84fc26574631ba8d5"
 > --
 > 2.31.1
 >
