@@ -1,50 +1,50 @@
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
- by mx.groups.io with SMTP id smtpd.web10.1827.1621647338238865531
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+ by mx.groups.io with SMTP id smtpd.web12.1841.1621647339093505069
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 May 2021 18:35:38 -0700
+ Fri, 21 May 2021 18:35:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=nN84VM+H;
- spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f43.google.com with SMTP id gb17so14978819ejc.8
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Lm2tanaU;
+ spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ed1-f42.google.com with SMTP id b17so25316066ede.0
         for <openembedded-devel@lists.openembedded.org>; Fri, 21 May 2021 18:35:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=kq4g5YdDDykE8hgXB4qu2sTmbZW5Ral/WSiurYEnljA=;
-        b=nN84VM+HW+d6LIrn36aSDJUG3lRlp3lx5p6zM5kpYM5slMmut+Xt3JhsGcoqxnb/1f
-         0bqR9NyUuX80lRzZIl/Q9GHuRvfvEi+sTgOOTDov/8h0WhzvqvZHZA7RVQ5+4kP0JC0Y
-         WUggHRl1HbmVucS6DJGBDMK/D/7JEAbAg6JvO2Uy0fbUzZC6PIZbtA6aruVMFM+7AB7+
-         wpgNQM+2ddCQ9Wv7/rla0limtxx1X7pIabKq8f4XbJjt7UpxMNR56PGiuhGN4wtt+xGV
-         WoJefCtloJdKLydz0d/XDLjcz+sMiaz6KjVaPbMDNrQDCe7TL/mR0MtP5iDEWBS68Vs+
-         hGWw==
+        bh=S0Q4hKAcOuT+mjYi9s1Y34Aerg0DUnbqooz1Aj69mFg=;
+        b=Lm2tanaULFwqqkkn8gtz246uGZMsNY5hF/uR6uo0Y8dw84XDKi5JWYJF6wZtkM029T
+         KxK9HbPvcb22UdpNIg+j7PaLmjG5C3b1ub1gIjsFqybY696GwfQ5K6Qc/BiGOcq3YYvO
+         OH/2B2W58KGeykdfZGV9f+qXK/H38q9WqK8bEyCiING2uSwkVzFQDeS1YY+OhkoFGHy4
+         vZGVjx1T6aTjAxiw/cQbj9PORe8kYSJ5N5Elb612ylHszkbuLJ7ERRxGR5TyOOFxE8jJ
+         ly/v8S+wlNeXJ1kz9g/JEmF4mFYgbIauD17sHNA6QgXz+doCYP1teJQhoZbdr/sJjJTk
+         B5ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=kq4g5YdDDykE8hgXB4qu2sTmbZW5Ral/WSiurYEnljA=;
-        b=EVbVk3WS7CVgi97K2RYsmPvd8pl6+CniZiW1tfQLF5wgLxEBDRq+7emapraDO3znX1
-         V7qZSRrAXZRI2z8EKMaBt1k+y6qZ+2pVFEPa/jXkH9JRvB21Q0KnOj1EyxCAaMhmjaLS
-         eUR6t6bAjyUTtpT83QoqOdOM4B98HdVK4NXxIDBCQlx/qVo+I/scheFXrMya1DOy5yh6
-         8CKQ/TQfpux5FF3aZjus7SQTBKkZ3zqY+3jtuBc7Os4JjTrW2azHDPuBrn5//H/DDDDk
-         nwmGiTdajrhi5/lCbUcJKGd64Z/kU4Pmvu0u8VVHFj6DQa518MNYvEhaXH3FaWh6g58o
-         d6AQ==
-X-Gm-Message-State: AOAM532c+OAKscD4adKPnS4qJ3zCHg0D9fR7/TsUThuyV5DC3zHiPHRl
-	INvCBUe5KG1ruAKUtgM8ZbsipXZ6deE=
-X-Google-Smtp-Source: ABdhPJygCdRnJtfGyB6qafTmgkxwDU1YER2XY2ucRNk3b4WYDLBGyIKFgfewX22VPTAAiz+jZDTIkA==
-X-Received: by 2002:a17:906:fa93:: with SMTP id lt19mr12858419ejb.14.1621647336842;
-        Fri, 21 May 2021 18:35:36 -0700 (PDT)
+        bh=S0Q4hKAcOuT+mjYi9s1Y34Aerg0DUnbqooz1Aj69mFg=;
+        b=EH8cZ8VBa3gUkGXvZh1eimuotueaTCNvFlGjisOqKRyF3v1SN8Wanr0232Lv54RUCp
+         r4BjXOCNMWN1HWdEs5vJu/PqzoPdD+Q+fM7y0UduLh1PGUDTu0CCRArMQ8kPljgABBSa
+         zOZNzpg8kDfCrbQGd1Xr0rVaDyF9hcUpbXgC4PND2qFRnwKetATJegfcmYTRrMNxH+FZ
+         qNH3KnKlamXGwBhtKG8R2L0h9vjTFG99KXAhW/uLKt7jnH2kaHX+c4dXfP82kLnerKSn
+         qi7JQAEkDyD1J6fhDYeh3lhKP+YjhcqBcoVvAstIKs3+XnjaMu1FaAwyJB8gumz2puO8
+         rXoQ==
+X-Gm-Message-State: AOAM531t3JB+A0DPqnOEKYrLp8GtQrajwR24cO+gUHMYIQDD1IPRDhlq
+	datM12EenfA5RwwS8/w7p+0UjKZDCjU=
+X-Google-Smtp-Source: ABdhPJzUSgbFjeT9FoHjwbRsYzU4c342/zqo8ZyIGQObiM+U1e/npLxw3rkJpaiwwK1ltOoM0EptBA==
+X-Received: by 2002:a05:6402:896:: with SMTP id e22mr14088103edy.256.1621647337736;
+        Fri, 21 May 2021 18:35:37 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from thanks-buchmuellers.speedport.ip (p200300f07f1a3b69456ae2a4ae47bbb1.dip0.t-ipconnect.de. [2003:f0:7f1a:3b69:456a:e2a4:ae47:bbb1])
         by smtp.gmail.com with ESMTPSA id p9sm5361337edu.79.2021.05.21.18.35.36
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 May 2021 18:35:36 -0700 (PDT)
+        Fri, 21 May 2021 18:35:37 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 08/17] remmina: upgrade 1.4.11 -> 1.4.17
-Date: Sat, 22 May 2021 03:35:12 +0200
-Message-Id: <20210522013521.588774-8-schnitzeltony@gmail.com>
+Subject: [PATCH 09/17] libpeas: upgrade 1.26.0 -> 1.30.0
+Date: Sat, 22 May 2021 03:35:13 +0200
+Message-Id: <20210522013521.588774-9-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210522013521.588774-1-schnitzeltony@gmail.com>
 References: <20210522013521.588774-1-schnitzeltony@gmail.com>
@@ -52,83 +52,109 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* 1.4.11 fails to fetch
-* do_install_append can go the only path left is metainfo and mime
+(Identical) patches have been applied upstream
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{remmina_1.4.11.bb => remmina_1.4.17.bb}  | 40 +++++++++++--------
- 1 file changed, 24 insertions(+), 16 deletions(-)
- rename meta-oe/recipes-support/remmina/{remmina_1.4.11.bb => remmina_1.4.17.bb} (56%)
+ ...ts-when-introspection-is-disabled-mi.patch | 36 -------------------
+ .../libpeas/add_missing_locale_include.patch  | 21 -----------
+ .../{libpeas_1.26.0.bb => libpeas_1.30.0.bb}  |  8 +----
+ 3 files changed, 1 insertion(+), 64 deletions(-)
+ delete mode 100644 meta-oe/recipes-gnome/libpeas/libpeas/0001-Do-not-build-tests-when-introspection-is-disabled-mi.patch
+ delete mode 100644 meta-oe/recipes-gnome/libpeas/libpeas/add_missing_locale_include.patch
+ rename meta-oe/recipes-gnome/libpeas/{libpeas_1.26.0.bb => libpeas_1.30.0.bb} (70%)
 
-diff --git a/meta-oe/recipes-support/remmina/remmina_1.4.11.bb b/meta-oe/recipes-support/remmina/remmina_1.4.17.bb
-similarity index 56%
-rename from meta-oe/recipes-support/remmina/remmina_1.4.11.bb
-rename to meta-oe/recipes-support/remmina/remmina_1.4.17.bb
-index 38fcf45c4..ef7876786 100644
---- a/meta-oe/recipes-support/remmina/remmina_1.4.11.bb
-+++ b/meta-oe/recipes-support/remmina/remmina_1.4.17.bb
-@@ -3,36 +3,44 @@ HOMEPAGE = "https://remmina.org"
- SECTION = "Support"
- LICENSE = "GPLv2 & openssl"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=dab7215512044d49037272ce1ac4ea8f file://LICENSE.OpenSSL;md5=c1eb3cee0a4dea27503c531267a69769"
--DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt libsodium libssh vte json-glib libsoup-2.4 libvncserver libsecret libxkbfile"
+diff --git a/meta-oe/recipes-gnome/libpeas/libpeas/0001-Do-not-build-tests-when-introspection-is-disabled-mi.patch b/meta-oe/recipes-gnome/libpeas/libpeas/0001-Do-not-build-tests-when-introspection-is-disabled-mi.patch
+deleted file mode 100644
+index 86586fe71..000000000
+--- a/meta-oe/recipes-gnome/libpeas/libpeas/0001-Do-not-build-tests-when-introspection-is-disabled-mi.patch
++++ /dev/null
+@@ -1,36 +0,0 @@
+-From 53a4f19887d9ae4e77f32dd6d71c8a7b516b4d5d Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+-Date: Mon, 10 Aug 2020 21:53:33 +0200
+-Subject: [PATCH] Do not build tests when introspection is disabled/missing
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-Fixes:
+-| ../libpeas-1.26.0/tests/libpeas/introspection/meson.build:47:0: ERROR: Unknown variable "libpeas_gir".
+-
+-Upstrem-Status: Submitted[https://gitlab.gnome.org/GNOME/libpeas/-/merge_requests/28]
+-
+-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+----
+- meson.build | 4 +++-
+- 1 file changed, 3 insertions(+), 1 deletion(-)
+-
+-diff --git a/meson.build b/meson.build
+-index 8322fea..43fb062 100644
+---- a/meson.build
+-+++ b/meson.build
+-@@ -254,7 +254,9 @@ subdir('loaders')
+- if build_demos == true
+-   subdir('peas-demo')
+- endif
+--subdir('tests')
+-+if generate_gir == true
+-+  subdir('tests')
+-+endif
+- 
+- summary = [
+-   '',
+--- 
+-2.26.2
+-
+diff --git a/meta-oe/recipes-gnome/libpeas/libpeas/add_missing_locale_include.patch b/meta-oe/recipes-gnome/libpeas/libpeas/add_missing_locale_include.patch
+deleted file mode 100644
+index 664693128..000000000
+--- a/meta-oe/recipes-gnome/libpeas/libpeas/add_missing_locale_include.patch
++++ /dev/null
+@@ -1,21 +0,0 @@
+-From 3cc69f1eaa86163c3816265fa64cb660f4def364 Mon Sep 17 00:00:00 2001
+-From: Christian Hergert <chergert@redhat.com>
+-Date: Fri, 13 Mar 2020 10:32:21 -0700
+-Subject: [PATCH] demo: add missing locale.h include
+-
+-Fixes #39
+-
+-Upstream-Status: backport
+-
+-diff --git a/peas-demo/peas-demo.c b/peas-demo/peas-demo.c
+-index 47ac005..466a392 100644
+---- a/peas-demo/peas-demo.c
+-+++ b/peas-demo/peas-demo.c
+-@@ -26,6 +26,7 @@
+- #include <girepository.h>
+- #include <glib/gi18n.h>
+- #include <gtk/gtk.h>
+-+#include <locale.h>
+- 
+- #include <libpeas/peas.h>
+- #include <libpeas-gtk/peas-gtk.h>
+diff --git a/meta-oe/recipes-gnome/libpeas/libpeas_1.26.0.bb b/meta-oe/recipes-gnome/libpeas/libpeas_1.30.0.bb
+similarity index 70%
+rename from meta-oe/recipes-gnome/libpeas/libpeas_1.26.0.bb
+rename to meta-oe/recipes-gnome/libpeas/libpeas_1.30.0.bb
+index fd4ce7de5..316a92784 100644
+--- a/meta-oe/recipes-gnome/libpeas/libpeas_1.26.0.bb
++++ b/meta-oe/recipes-gnome/libpeas/libpeas_1.30.0.bb
+@@ -12,13 +12,7 @@ inherit gnomebase gobject-introspection gtk-doc gtk-icon-cache features_check
  
-+DEPENDS = " \
-+    glib-2.0-native \
-+    openssl \
-+    freerdp \
-+    gtk+3 \
-+    gdk-pixbuf \
-+    atk \
-+    libgcrypt \
-+    libsodium \
-+    libssh \
-+    vte \
-+    json-glib \
-+    libsoup-2.4 \
-+    libvncserver \
-+    libsecret \
-+    libxkbfile \
-+"
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
  
- DEPENDS_append_libc-musl = " libexecinfo"
- LDFLAGS_append_libc-musl = " -lexecinfo"
- 
--SRCREV = "6a8737111adebf571c46f35599cc62e7f7b0bd65"
--SRC_URI = "git://gitlab.com/Remmina/Remmina;protocol=https;branch=rel/v1.4.11 \
+-SRC_URI += " \
+-    file://add_missing_locale_include.patch \
+-    file://0001-Do-not-build-tests-when-introspection-is-disabled-mi.patch \
 -"
 -
--PV .= "+git${SRCPV}"
--
-+SRCREV = "0ef1621b3e16b3168213147a2bfca39da2c2668f"
-+SRC_URI = "git://gitlab.com/Remmina/Remmina;protocol=https"
- S = "${WORKDIR}/git"
+-SRC_URI[archive.md5sum] = "f7723bf8433b7984121157e1e9a629b5"
+-SRC_URI[archive.sha256sum] = "a976d77e20496479a8e955e6a38fb0e5c5de89cf64d9f44e75c2213ee14f7376"
++SRC_URI[archive.sha256sum] = "0bf5562e9bfc0382a9dcb81f64340787542568762a3a367d9d90f6185898b9a3"
  
--inherit cmake features_check mime-xdg
-+inherit cmake features_check mime mime-xdg gtk-icon-cache
- REQUIRED_DISTRO_FEATURES = "x11"
+ PACKAGECONFIG[python3] = "-Dpython3=true,-Dpython3=false,python3-pygobject"
  
- EXTRA_OECMAKE += "-DWITH_APPINDICATOR=OFF -DWITH_GETTEXT=OFF -DWITH_TRANSLATIONS=OFF"
- 
--do_install_append(){
--    # We dont need the extra stuff form other desktop environments
--    rm -rf ${D}/${datadir}/xsessions
--    rm -rf ${D}/${datadir}/metainfo
--    rm -rf ${D}/${datadir}/gnome-session
--}
--
- PACKAGECONFIG[spice] = "-DWITH_SPICE=ON, -DWITH_SPICE=OFF, spice spice-protocol"
- # Switch on gtk support in avahi recipe if you want to enable avahi support
- PACKAGECONFIG[avahi] = "-DWITH_AVAHI=ON, -DWITH_AVAHI=OFF, avahi"
- 
- RDEPENDS_${PN} = "bash"
- 
--FILES_${PN}_append = " ${datadir}/icons/hicolor/*"
-+FILES_${PN}+= " \
-+    ${datadir}/metainfo \
-+    ${datadir}/mime \
-+"
 -- 
 2.31.1
 
