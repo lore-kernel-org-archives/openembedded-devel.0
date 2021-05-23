@@ -1,145 +1,134 @@
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.web12.6044.1621739529850352677
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+ by mx.groups.io with SMTP id smtpd.web12.8291.1621762733273354968
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 22 May 2021 20:12:09 -0700
+ Sun, 23 May 2021 02:38:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=JVecCYfQ;
- spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id q15so17482688pgg.12
-        for <openembedded-devel@lists.openembedded.org>; Sat, 22 May 2021 20:12:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Pm6UnJyG;
+ spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f52.google.com with SMTP id gb17so19039244ejc.8
+        for <openembedded-devel@lists.openembedded.org>; Sun, 23 May 2021 02:38:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:organization:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=FcKAmJyFl++EfewcJkj40ewp0TPbLtm9Lkn73fBGRj4=;
-        b=JVecCYfQqkS5JqQq6xess8uRZGw7/B1ER+/k0xPQUzmGLbIWF0vfcLmm7oaWsBFXhM
-         QVDfOIt/t3ReEkrwfLsJLE1hPXtF2w4LZxxSb3wHRXToaG1HXTlDj6Dl3d2WVsgrPfMM
-         mmkZsxKa8sfxVs1xSN6g54h7bSLoZ71qBLQ8+6jm0imDPtGcml4BD/ldrYdq2YQD/1z8
-         xr1UihCvqVco7/i0SibstahWvTcGs8QO+WBKv8av9lQM77dj7mKJWzvSoPj3isWo3oQ5
-         tuL6K5CMXpqdjvGHrgSNn8wW/5zwvNnKCmhlybVR9xAbi4d/jFldDnSxIbazqeX9Rztn
-         cA6A==
+        bh=7PCRAhiE5wLCgDat6JM9ZXRm6jnTXJQd5TkYmtyATBY=;
+        b=Pm6UnJyGqKY29ickcsT7hcbA5SGQ+derZ+rL2d+NyIGy/Ci9bp36IerEZcDD6OmIgU
+         j8FL9jod3PK4bgxtUYlKwgfid1pxwtkAHcnUikfIldbu2Q/5/veIrY3OQ/ewiRA1QYsm
+         K51eXgpMBwApFZTK5ajDXZAxhH5eWVfPi2X9dqdBthHYidEuuSIrNFoF1XdnjgK9xPca
+         ZjImVpxNOFKhHnDqxshff7r7tXvl/D6SBtygfHe8T0kN0FWgouYVJOWUFf4u0z+kpsWV
+         Din5r3lhba6I6wZh8IgVjGTSva8VKWsrYWjEhD5/jrA8siyScc7xbIUtyLGqzlzqxEBh
+         4E8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=FcKAmJyFl++EfewcJkj40ewp0TPbLtm9Lkn73fBGRj4=;
-        b=l/6+NLoiersODN1hgryWHxx5yrxM1wxaASSenFjvGOdjiBS+5f4bDF7ruMXxohALx/
-         /HLqergJyC/+ZK04ddhkkDeoaM6S583N1BHd2/5bHSjjZYJfgT/N6no05DcFc/YpgesK
-         iSY1JeVIs4Mi9X+eTqYsKbc8oCEfsMN8YYhYA/OJ/85DlH7xl8YB9fl0WoFBdqLrOYcb
-         sV3kbyLYhxAJ31M28BqUqlp1yqgfS8by3OzdEbYKeHGC40QrrXnOq7b01jdsK+K3HHE9
-         HmE8YEE1wbH+7pQoekL5xnKRZboCVU8t00pyyY1MebK2W/r545qggY+9iq3ZCFeun1y0
-         uMSA==
-X-Gm-Message-State: AOAM533gBTtMcYwv4URJ/EWVoDBEAL+QJNBj+XVHiYISq/XR0gLwD9U1
-	DsU5Thyt9isa9TF3Ssmevpfe1r6CZ301wQ==
-X-Google-Smtp-Source: ABdhPJyYB9TrKnDYI4llq3rs/H5WdPKn4z1+J/32dffL93mzE57HCmlL/9WwY8x8h8qocUX6XsUkKA==
-X-Received: by 2002:a63:f40e:: with SMTP id g14mr6927451pgi.402.1621739529114;
-        Sat, 22 May 2021 20:12:09 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:a0f0::d04c? ([2601:646:9200:a0f0::d04c])
-        by smtp.gmail.com with ESMTPSA id t1sm8029928pgq.47.2021.05.22.20.12.08
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 22 May 2021 20:12:08 -0700 (PDT)
-Subject: Re: [oe] Dunfell merge request May 22nd
-To: akuster808 <akuster808@gmail.com>,
- Alexander Vickberg <wickbergster@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-References: <21dba787-e5dd-bdac-bcf0-1b0ec84e1e77@gmail.com>
- <CAAxSGfZztRjKVJ5xRSMLY2p1so-L_7tmFdsX1g-4o5hj3qH9-g@mail.gmail.com>
- <5fa692a2-d007-a109-2551-0203f2569b30@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <36733192-0090-0017-4f13-e0a2f427b84f@gmail.com>
-Date: Sat, 22 May 2021 20:12:07 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.2
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=7PCRAhiE5wLCgDat6JM9ZXRm6jnTXJQd5TkYmtyATBY=;
+        b=PS21IkU0evR+n1FE9YPxoGgLgZUIYB3Bhxx8Eaiz4UhoAXTDLFOSXO6DZoEoQfb2k0
+         Louw4U83TfkwETRs5Smsq1hB8qrhJKXB2wXRXQB/y7D/QlOT/kgBjOsp9tQidwYlXMu4
+         9jaWl2gOUiulB5o3BN9lasaYGLct7Q6QGzEeYdNgt1T3bVfhL+1JMYZC2kdWaaQ2xDyS
+         2QfGeuQ5iHxPL4rJMm+TCEffDatyD4vWGcYdnC4WEDraTVPJg1p4yf85VmVpyAAphPis
+         Hy08N2WP2kMhYqOdLo9HCWLB2MFu1ITy5HGJtjnS3piBcT8u6llb5sXCH8JzDi+tEBXJ
+         aVXQ==
+X-Gm-Message-State: AOAM530e+Y5YoTBNHcgLXPFd4NfHLIzzdhU91rD2rljcMIN0YHV45jX3
+	a1g8B0FhdrFq/ZPcuV0z8Q219iJXE4g=
+X-Google-Smtp-Source: ABdhPJxSV+PhfJ74yh4J5CFdlVP7bsU1rQJRmf+o+PLJiLksMAZp9Q7x+zkTKzRqENor4S8hdA80Kg==
+X-Received: by 2002:a17:907:264d:: with SMTP id ar13mr18197740ejc.279.1621762731212;
+        Sun, 23 May 2021 02:38:51 -0700 (PDT)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from thanks-buchmuellers.speedport.ip (p200300f07f1a3b826a24e63b238b2037.dip0.t-ipconnect.de. [2003:f0:7f1a:3b82:6a24:e63b:238b:2037])
+        by smtp.gmail.com with ESMTPSA id cf15sm7454654edb.62.2021.05.23.02.38.50
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 23 May 2021 02:38:50 -0700 (PDT)
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] giflib: upgrade 5.1.4 -> 5.2.1
+Date: Sun, 23 May 2021 11:38:44 +0200
+Message-Id: <20210523093844.3418-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-In-Reply-To: <5fa692a2-d007-a109-2551-0203f2569b30@gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-this is now merged.
+* Project removed autotools configuration files. It is now a pure Makefile
+  build so autotools are not required any more
+* Checked sources: Back ported CVE-patch can go
 
-On 5/22/21 4:20 PM, akuster808 wrote:
-> 
-> 
-> On 5/22/21 12:43 PM, Alexander Vickberg wrote:
->> Hi,
->>
->> It would be nice if hostapd
->> fix d6ef4170747d6668fa940328334055eef3e1e1d6 from master could be
->> included.
-> ah, right. just picked it up for hardknott and dunfell.
-> 
-> thanks for ponting it out.
-> 
-> -armin
->>
->> Best regards
->> Alexander Vickberg
->>
->> Den lör 22 maj 2021 kl 21:06 skrev Armin Kuster <akuster808@gmail.com
->> <mailto:akuster808@gmail.com>>:
->>
->>      The following changes since commit
->>      2915810edbb6599051e30efb3b7f805665ddcc23:
->>
->>        ostree: switch from default master branch to main to fix do_fetch
->>      failure (2021-05-13 21:52:34 -0700)
->>
->>      are available in the Git repository at:
->>
->>        https://git.openembedded.org/meta-openembedded dunfell-next
->>
->>      for you to fetch changes up to
->>      11eae114522a6befa06c7f4021a83bc016133543:
->>
->>        linuxptp: Fix cross build (2021-05-14 10:03:51 -0700)
->>
->>      ----------------------------------------------------------------
->>      Armin Kuster (2):
->>            nostromo: Blacklist and exclude from world builds
->>            packagegroup-meta-webserver: remove nostromo from pkg grp
->>
->>      Clément Péron (1):
->>            nodejs: 12.20.2 -> 12.21.0
->>
->>      Khem Raj (1):
->>            linuxptp: Fix cross build
->>
->>      Saloni Jain (1):
->>            fuse: Whitelisted CVE-2019-14860
->>
->>      Sean Nyekjaer (1):
->>            nodejs: 12.20.1 -> 12.20.2
->>
->>       meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
->>      <http://fuse_2.9.9.bb>             |  5 +++++
->>       .../linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch            | 26
->>      ++++++++++++++++++++++++++
->>       .../linuxptp/linuxptp/no-incdefs-using-host-headers.patch       | 29
->>      -----------------------------
->>       meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
->>      <http://linuxptp_2.0.bb>           |  7
->>      ++++---
->>       .../nodejs/{nodejs_12.20.1.bb <http://nodejs_12.20.1.bb> =>
->>      nodejs_12.21.0.bb <http://nodejs_12.21.0.bb>}             |  2 +-
->>       .../recipes-core/packagesgroups/packagegroup-meta-webserver.bb
->>      <http://packagegroup-meta-webserver.bb>  |  2 +-
->>       meta-webserver/recipes-httpd/nostromo/nostromo_1.9.7.bb
->>      <http://nostromo_1.9.7.bb>         |  3 +++
->>       7 files changed, 40 insertions(+), 34 deletions(-)
->>       create mode 100644
->>      meta-oe/recipes-connectivity/linuxptp/linuxptp/Use-cross-cpp-in-incdefs.patch
->>       delete mode 100644
->>      meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
->>       rename meta-oe/recipes-devtools/nodejs/{nodejs_12.20.1.bb
->>      <http://nodejs_12.20.1.bb> =>
->>      nodejs_12.21.0.bb <http://nodejs_12.21.0.bb>} (98%)
->>
->>
->>      
->>
-> 
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ .../giflib/files/CVE-2019-15133.patch         | 23 -------------------
+ .../{giflib_5.1.4.bb => giflib_5.2.1.bb}      | 18 +++++++--------
+ 2 files changed, 9 insertions(+), 32 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
+ rename meta-oe/recipes-devtools/giflib/{giflib_5.1.4.bb => giflib_5.2.1.bb} (52%)
+
+diff --git a/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch b/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
+deleted file mode 100644
+index 9957be82f..000000000
+--- a/meta-oe/recipes-devtools/giflib/files/CVE-2019-15133.patch
++++ /dev/null
+@@ -1,23 +0,0 @@
+-From 799eb6a3af8a3dd81e2429bf11a72a57e541f908 Mon Sep 17 00:00:00 2001
+-From: "Eric S. Raymond" <esr@thyrsus.com>
+-Date: Sun, 17 Mar 2019 12:37:21 -0400
+-Subject: [PATCH] Address SF bug #119: MemorySanitizer: FPE on unknown address
+-
+----
+- dgif_lib.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-Upstream-status: Backport [https://sourceforge.net/p/giflib/code/ci/799eb6a3af8a3dd81e2429bf11a72a57e541f908/]
+-CVE: CVE-2019-15133
+-
+---- a/lib/dgif_lib.c	2021-01-13 19:28:18.923493586 +0100
+-+++ b/lib/dgif_lib.c	2021-01-13 19:28:55.245863085 +0100
+-@@ -1099,7 +1099,7 @@ DGifSlurp(GifFileType *GifFile)
+- 
+-               sp = &GifFile->SavedImages[GifFile->ImageCount - 1];
+-               /* Allocate memory for the image */
+--              if (sp->ImageDesc.Width < 0 && sp->ImageDesc.Height < 0 &&
+-+              if (sp->ImageDesc.Width <= 0 && sp->ImageDesc.Height <= 0 &&
+-                       sp->ImageDesc.Width > (INT_MAX / sp->ImageDesc.Height)) {
+-                   return GIF_ERROR;
+-               }
+diff --git a/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb b/meta-oe/recipes-devtools/giflib/giflib_5.2.1.bb
+similarity index 52%
+rename from meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
+rename to meta-oe/recipes-devtools/giflib/giflib_5.2.1.bb
+index 1871bab46..105c53eab 100644
+--- a/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
++++ b/meta-oe/recipes-devtools/giflib/giflib_5.2.1.bb
+@@ -3,14 +3,17 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=ae11c61b04b2917be39b11f78d71519a"
+ 
+-SRC_URI = " \
+-    ${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2 \
+-    file://CVE-2019-15133.patch \
+-"
+-
+ CVE_PRODUCT = "giflib_project:giflib"
+ 
+-inherit autotools
++DEPENDS = "xmlto-native"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.gz"
++SRC_URI[sha256sum] = "31da5562f44c5f15d63340a09a4fd62b48c45620cd302f77a6d9acf0077879bd"
++
++do_install() {
++    # using autotools's default will end up in /usr/local
++    oe_runmake DESTDIR=${D} PREFIX=${prefix} LIBDIR=${libdir} install
++}
+ 
+ PACKAGES += "${PN}-utils"
+ FILES_${PN} = "${libdir}/libgif.so.*"
+@@ -19,6 +22,3 @@ FILES_${PN}-utils = "${bindir}"
+ BBCLASSEXTEND = "native"
+ 
+ RDEPENDS_${PN}-utils = "perl"
+-
+-SRC_URI[md5sum] = "2c171ced93c0e83bb09e6ccad8e3ba2b"
+-SRC_URI[sha256sum] = "df27ec3ff24671f80b29e6ab1c4971059c14ac3db95406884fc26574631ba8d5"
+-- 
+2.31.1
+
