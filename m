@@ -1,50 +1,50 @@
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web08.15905.1621809246740567904
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web10.15922.1621809247493040933
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 23 May 2021 15:34:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=EazW20WQ;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id b9so3574932ejc.13
-        for <openembedded-devel@lists.openembedded.org>; Sun, 23 May 2021 15:34:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=BSWb8yo6;
+ spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f51.google.com with SMTP id b9so3574950ejc.13
+        for <openembedded-devel@lists.openembedded.org>; Sun, 23 May 2021 15:34:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=ugPwOk/MwEcLlspr6FK8i7hrFl4Xc7lQ18x6ZsbXvyc=;
-        b=EazW20WQUgHPkrHNIPkV0+nhSaXII9tZQxf6S2I8Ysc3dNguE/bzg885PCsLTwwoGN
-         bz7N1gyXzHeln+Qz+OrHc+VmbbsNKiQE3/eqC17lG4WgZDa8+zsdhyM4rEFlgA9+mW9p
-         Yl1ZIVylk2z+yvQhJAHvmngKxB3zIa9BjOSTKl/UImH34NBB3NQGT4I77TzdGsZSYu3U
-         CNY7Jdz2C8dmM5Cm2g54zuvmm1EM+AlybXkjuAw0Oip0bMF7LBBmVD065rNxA2XTTHE/
-         TX9HHT88xAVWBcMlQPJuu3jftqNxF5NzpEFD0fmBGXbFuQv3FKS1D5xNKffHZ49HNsKY
-         7Scw==
+        bh=Z4RtGHlA+jA05pefjCuR0yZDDcfOEPaB6iZ9yDIx7yU=;
+        b=BSWb8yo6ZU9MqsXgP5ztbNwQ1X/wvnA0WcG4FI7oTCmU08uzvsosGR2ei1V/IZPThk
+         sSEKh1dZHR4DXye3Zv4lHK4NV84tcjp8llJt9ym7s+1iqAknv1MBEDZhk14P4WQBhO1H
+         TvzgKNoJpnoLTUmD+Sa3brMSDMC5b7NsWY0cAP6FZctLR+P6wV1VnMUildf1gQ16TukL
+         ImG02OMw/a6Kf09Bdcw/9CaWy/XsRkpN48UwM45gXQ6JclBrY9epibDDnkbOxxYky1xi
+         Evatxu8EqRP29gAQMqLQ5NzJwJXjl8nOoeC5xSWFl5lJFKt67BN/TYQIDgX8c5liKItC
+         D1Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=ugPwOk/MwEcLlspr6FK8i7hrFl4Xc7lQ18x6ZsbXvyc=;
-        b=hJkcq+fCcWqnv0HSZoGC4Emqy8pBwwJL5tf5p2xZZ3CRaSEu63LYi3k+UJVbLXALai
-         NiR/AQiBlMuI6yFKF1opxRuAAqo1effjhfJu0wBbc1ImmoZPxx76T7Al6KsSlWz7hEoU
-         RK6G03Pu3V5+gXHNr3W/GzX8QVyoohKoUjzDd/yvseyrrM6qhSAXuDXtsXE/hv+rf+a6
-         JNIhZN5K86ExXDODJeB7ASQX/tl2xXW55gTDxLKNHNfsq0KK6tGFC7nkN9JSgbxsHqFG
-         rxARyLDWZut7QEcmIOY6bhGz4tHfoqjWB4x/YAO1jMZdDYNaka7vYky6Oz9hEg5Ros8b
-         cBlA==
-X-Gm-Message-State: AOAM533iZ2kUC7w/UA1IOKWe0N+u9i+nrZ8TVPLVgt/tB6GYNi6gwoXJ
-	X7VeJ3sd5tNbYJdOmA3pk7vNnjyap48=
-X-Google-Smtp-Source: ABdhPJz/pf5TW6a7N1rtrIVJ331F0fy0kc9eY66FDN5xPiz3wHkIvkldq71C5NsdEFSdG6S2hznhbw==
-X-Received: by 2002:a17:906:3da9:: with SMTP id y9mr20120111ejh.303.1621809245408;
-        Sun, 23 May 2021 15:34:05 -0700 (PDT)
+        bh=Z4RtGHlA+jA05pefjCuR0yZDDcfOEPaB6iZ9yDIx7yU=;
+        b=XxQ2WkOrAwdJ0JTgisYowh3rEh8v3hOAhbKqqoSlNxt9uyl/7drT+Pl2RoNR9qdnAW
+         tocQYT07XkcZAKmz3N0eJERdz2HU+YkO1XwMG27mnlLWdImxJmR5y2bVbi0E4E56A5Ot
+         mrcHhQuMXJ69vdvq2EfWf24QzhdcTYJbhXSs73qsCMfeyDJyJAd4An7WLczTcGDsN9k5
+         L1zhqks69Dlvo12xQBXYqWm80LB12uMudHGgIydf+irk0QzcwRFPpsnj8+idKirA3Bm4
+         GMeP2b8GW8g9Z7d8hvcVquvG/WbOTJRGuromnLtRk2aba/DJd4X+4DsDIeaPNcdRaZDg
+         Yf2A==
+X-Gm-Message-State: AOAM533BvKr5WKJ6iYS6FKoSQVNN2fRK3D2pOA4OHkzRalcvaa4sQJXy
+	2GSltpwkrooamv5mbuL/wIGXNVjg+XM=
+X-Google-Smtp-Source: ABdhPJxPMC2kbmHt7XePHpOxFf8Ec9eGsMJfxGR/JfvTmv7fITq1DVRvlrVsKIcetbkVH10XZZ78RA==
+X-Received: by 2002:a17:906:40d1:: with SMTP id a17mr20074143ejk.43.1621809246152;
+        Sun, 23 May 2021 15:34:06 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from thanks-buchmuellers.speedport.ip (p200300f07f1a3b826a24e63b238b2037.dip0.t-ipconnect.de. [2003:f0:7f1a:3b82:6a24:e63b:238b:2037])
-        by smtp.gmail.com with ESMTPSA id t19sm8682032eds.4.2021.05.23.15.34.04
+        by smtp.gmail.com with ESMTPSA id t19sm8682032eds.4.2021.05.23.15.34.05
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 23 May 2021 15:34:04 -0700 (PDT)
+        Sun, 23 May 2021 15:34:05 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 5/7] flatbuffers: upgrade 1.12.0 -> 2.0.0
-Date: Mon, 24 May 2021 00:33:51 +0200
-Message-Id: <20210523223353.2576671-5-schnitzeltony@gmail.com>
+Subject: [PATCH 6/7] gtkwave: upgrade 3.3.108 -> 3.3.109 / move to gtk3 / tidy up recipe
+Date: Mon, 24 May 2021 00:33:52 +0200
+Message-Id: <20210523223353.2576671-6-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210523223353.2576671-1-schnitzeltony@gmail.com>
 References: <20210523223353.2576671-1-schnitzeltony@gmail.com>
@@ -54,38 +54,62 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{flatbuffers_1.12.0.bb => flatbuffers_2.0.0.bb}         | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-devtools/flatbuffers/{flatbuffers_1.12.0.bb => flatbuffers_2.0.0.bb} (95%)
+ ...{gtkwave_3.3.108.bb => gtkwave_3.3.109.bb} | 33 ++++++++++++++-----
+ 1 file changed, 25 insertions(+), 8 deletions(-)
+ rename meta-oe/recipes-graphics/gtkwave/{gtkwave_3.3.108.bb => gtkwave_3.3.109.bb} (47%)
 
-diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
-similarity index 95%
-rename from meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb
-rename to meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
-index bbc2a4a1d..f4f08012b 100644
---- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb
-+++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
-@@ -13,9 +13,9 @@ RDEPENDS_${PN}-dev += "${PN}-compiler"
+diff --git a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.108.bb b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.109.bb
+similarity index 47%
+rename from meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.108.bb
+rename to meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.109.bb
+index d9b6886ec..2b572f7e2 100644
+--- a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.108.bb
++++ b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.109.bb
+@@ -5,19 +5,36 @@ HOMEPAGE = "http://gtkwave.sourceforge.net/"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
  
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
+-SRC_URI = "http://gtkwave.sourceforge.net/${BP}.tar.gz"
++SRC_URI = "http://gtkwave.sourceforge.net/gtkwave-gtk3-${PV}.tar.gz"
++SRC_URI[sha256sum] = "35461eccd9b8b4470caa78ab9a8f14ecacbcc9eff63033d8dce58093e786deb7"
++S = "${WORKDIR}/${BPN}-gtk3-${PV}"
  
--SRCREV = "6df40a2471737b27271bdd9b900ab5f3aec746c7"
--
-+SRCREV = "a9a295fecf3fbd5a4f571f53b01f63202a3e2113"
- SRC_URI = "git://github.com/google/flatbuffers.git"
-+S = "${WORKDIR}/git"
+-SRC_URI[md5sum] = "dd40f09f44d7aed937e63c29b63cd3af"
+-SRC_URI[sha256sum] = "ece447340442e7ad029713789552e8392b75dd3808c882ac5193d42fce55eb3b"
++DEPENDS = " \
++    gperf-native \
++    gtk+3 \
++    gdk-pixbuf \
++    tcl \
++    tk \
++    bzip2 \
++    xz \
++    pango \
++    zlib \
++"
  
- CVE_CHECK_WHITELIST += "CVE-2020-35864"
+ inherit pkgconfig autotools gettext texinfo mime mime-xdg
+-DEPENDS += "tcl tk gperf-native bzip2 xz pango zlib gtk+ gdk-pixbuf glib-2.0"
+-RDEPENDS_${PN} += "tk-lib"
  
-@@ -31,8 +31,6 @@ EXTRA_OECMAKE += "\
+-# depends on gtk+ which has this restriction
++# depends on gtk+3 which has this restriction
+ inherit features_check
+-ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
++ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
  
- inherit cmake
+-EXTRA_OECONF = "--with-tcl=${STAGING_BINDIR_CROSS} --with-tk=${STAGING_BINDIR_CROSS} --with-tirpc --disable-mime-update"
++EXTRA_OECONF = " \
++    --enable-gtk3 \
++    --with-tcl=${STAGING_BINDIR_CROSS} \
++    --with-tk=${STAGING_BINDIR_CROSS} \
++    --with-tirpc \
++    --disable-mime-update \
++"
  
--S = "${WORKDIR}/git"
--
- do_install_append() {
-     install -d ${D}${PYTHON_SITEPACKAGES_DIR}
-     cp -rf ${S}/python/flatbuffers ${D}${PYTHON_SITEPACKAGES_DIR}
+ FILES_${PN} = "${bindir} ${datadir}"
++
++RDEPENDS_${PN} += "tk-lib"
 -- 
 2.31.1
 
