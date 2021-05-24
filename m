@@ -1,148 +1,160 @@
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web09.24733.1621870179651150478
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
+ by mx.groups.io with SMTP id smtpd.web09.25378.1621872529693266280
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 May 2021 08:29:39 -0700
+ Mon, 24 May 2021 09:08:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=ERNNhYNI;
- spf=pass (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=0778c2e939=saul.wold@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id 14OFB5lX011856;
-	Mon, 24 May 2021 15:29:38 GMT
-Received: from nam10-mw2-obe.outbound.protection.outlook.com (mail-mw2nam10lp2109.outbound.protection.outlook.com [104.47.55.109])
-	by mx0a-0064b401.pphosted.com with ESMTP id 38qjghrtu2-2
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Mon, 24 May 2021 15:29:38 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=W522P69iHbFr/kgSlVXqFw1Cg0ylb7EjzX7JwFPAIHi3bgWwI1FpvjaXb8ATmR4Ww6N38qauyxSv4RHF2KjdsKhhkQxQ+6OHHBan+7GLCExJZCqrHNK97X0k5byz0ckFtGhKVYbI6WPIDPv0c+vwDd/KN0PhwUQ0vdGOiEPtg04sJ49edcRdUS1QsDbEjk4OtZTOZTMyn2fTyv7JqPW+WVLGfhWiBuKltaqNiDSeIBXOI7dSwoSicjMHfAcBDE7QQ47V49xEXX9Vib7zxKiMjde8FT2Hs/S5WNiypSENrMrK2lHOXXDtvFDjYBTT7Dggu4kSyJ2lDuSgvwPinm298Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iiOY/02nTS5A8eKtJjFemGpNEZH20zWuPTY5NVCrkOE=;
- b=KVZKz6cxgzY3SJYXrmlNXNWoWVpYeOFAu6tNQnXUiWo/Gri5Ca9u8VGmoFMVtWQYoxWZ2uLXcNQ0Miuo0EulyJwl6xgbTGr0REL/SsbillQetg7CPGvKyNkRb1TzSVGU4AOk8VlFwD+IQUH/o+21R/RmIg029LuZ5ERyTblZb2bLic0Z8gLDQh644L6xKNtKWYBPoBsizJg1lpJ95JU3flX6To2S41BgMKk7mI4xV4rNLMxQHiotZTPqUEqzXP87BiIfw4NYcfDsy6+kewkXAwY1hBJczzI8jjgjAtdzTLcboZnXJNf8bDO/FpgLI5U9pt1mZnF9HKY5aShqLundxA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=fFeR37JR;
+ spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ed1-f46.google.com with SMTP id b17so32651985ede.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 24 May 2021 09:08:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iiOY/02nTS5A8eKtJjFemGpNEZH20zWuPTY5NVCrkOE=;
- b=ERNNhYNIUMOsYAyLM5O+W8G6n1myM2k8t4iFc2IpGkesLcFLJxK86vUmSkpUDDnreVuZoOf10JzOvW8Pdp3t6z8/emkjolXTIYPetBDuH2RMIdKOf+9Yk2s8/wHN4bUJ9L3me68zJ6D0CQ7MBilLdJmqdRxMvPIICBp2Heg2mGA=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from CO1PR11MB5076.namprd11.prod.outlook.com (2603:10b6:303:90::7)
- by CO1PR11MB5073.namprd11.prod.outlook.com (2603:10b6:303:92::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4150.23; Mon, 24 May
- 2021 15:29:34 +0000
-Received: from CO1PR11MB5076.namprd11.prod.outlook.com
- ([fe80::fda5:ca87:9468:ad8]) by CO1PR11MB5076.namprd11.prod.outlook.com
- ([fe80::fda5:ca87:9468:ad8%8]) with mapi id 15.20.4150.027; Mon, 24 May 2021
- 15:29:34 +0000
-From: "Saul Wold" <Saul.Wold@windriver.com>
-To: openembedded-devel@lists.openembedded.org, akuster808@gmail.com
-Cc: Saul Wold <Saul.Wold@windriver.com>, Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][hardknott 2/2] sysdig: disable building for ppc
-Date: Mon, 24 May 2021 08:29:23 -0700
-Message-Id: <20210524152923.3299258-2-saul.wold@windriver.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210524152923.3299258-1-saul.wold@windriver.com>
-References: <20210524152923.3299258-1-saul.wold@windriver.com>
-X-Originating-IP: [71.238.119.71]
-X-ClientProxiedBy: MW4PR03CA0123.namprd03.prod.outlook.com
- (2603:10b6:303:8c::8) To CO1PR11MB5076.namprd11.prod.outlook.com
- (2603:10b6:303:90::7)
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=LcnoVbFar24XKsMmh/atm7PA1k8Zk35q5RK+ejz3UB4=;
+        b=fFeR37JRHS8WPzwWGQcQe31AL6i70i4xSZv+onTnAloWhlFLXM/1Ne4rDNR048l27C
+         n6QtvoajlUnfldWDQL+ar90VByFRKedOlKoXDfHbFoosHbw8yVw7y7wtTakyextokl3z
+         2x93Xu1c/oQ8DWEe0Ybw5sEb86svtmTWk+YoaPpmPkwHeXpcHW3sVaWv6/sfd+p77A1x
+         6Do3NAqD3pHknb7I2qYeMoecY59vLVZY+zozmaFkzd+zv9p+Iy4/c2AM6gRoulSApB2g
+         Nn97QqtiRxazuDDetaO2hfrWmVe+km9ikvJCshsdMu0HpdalTiu5+ytpFzS37FEDq80R
+         +RIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=LcnoVbFar24XKsMmh/atm7PA1k8Zk35q5RK+ejz3UB4=;
+        b=I482xqEXOMBCbkCUv5bsiLl4xJvkogbNrK+vhErYNOdxPqf8j2Wlwd+o0dvCRn603C
+         9GLbHmcwU5LhBf0xS5UDt7h96bOP045IxNV+7A9nqWG9CxmdWatCCn/PPE0n/UloCXDj
+         VL7k8qPtAKykSUVDdyr2wcN8ekshZ03a1bqsGsZ0IrUfxL/K8yzJvSpPiainT2pCMVdG
+         vvo4la0gC/fXHx23i8G7gvbPlY+WO9R2n5ryr+1+KEouunw8kFsuU4dfM+ZYPLkYY0I1
+         Av2uG9eNV0WVjfUerOZX17iywz58ZddrVBWdJs2bbpRJzZ4L+HAX3YmlxByBQmQ39aDH
+         ULqw==
+X-Gm-Message-State: AOAM5317uz8SLhbVjTndDvBUXle0sLBSDP16cvKV1Yl+UHuedMHZD2if
+	LJPxb7TFChudULFU6LwhbJf1s5Q3mxs=
+X-Google-Smtp-Source: ABdhPJwgSCEHOfXkQ5T6QSxvEQxmvKe23jFZQA05xJ2pQ91nCP3aoSIlwEYk0YAt0rfX3oqgERONyg==
+X-Received: by 2002:a50:9e63:: with SMTP id z90mr26735785ede.342.1621872528030;
+        Mon, 24 May 2021 09:08:48 -0700 (PDT)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from thanks-buchmuellers.speedport.ip (p200300f07f1a3b189e31b9623dc41a84.dip0.t-ipconnect.de. [2003:f0:7f1a:3b18:9e31:b962:3dc4:1a84])
+        by smtp.gmail.com with ESMTPSA id k22sm7953470eja.33.2021.05.24.09.08.47
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 24 May 2021 09:08:47 -0700 (PDT)
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH 1/4] mime-support: upgrade 3.48 -> 3.62
+Date: Mon, 24 May 2021 18:08:37 +0200
+Message-Id: <20210524160840.194431-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from yocto-hs.bigsur.com.bigsur.com (71.238.119.71) by MW4PR03CA0123.namprd03.prod.outlook.com (2603:10b6:303:8c::8) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4150.26 via Frontend Transport; Mon, 24 May 2021 15:29:34 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: b525c99f-2dbb-44e2-4efe-08d91ec8bbfa
-X-MS-TrafficTypeDiagnostic: CO1PR11MB5073:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<CO1PR11MB50730F642C0D14E3BB2CB75FEE269@CO1PR11MB5073.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1227;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	9KRe2P5oDqS3IimFqgrVC7P4c1R+ADyFQfWSHinq+rZbQ7v2SV5IXoPhYIJ+cIChVHkYz2gOtjOXw/w0aUuC3Q4RUcFM52OEDOMnU4G9Dy3AXEwiC1Wv/hMYbLoyJHvDoFXhzPB0zIxeXUd1UpVI7gvyOzyhZGZEIdYnKwmnB5VXD4VpzrLdmOuemDOi1NT4VTb2JeZVwAMAfM9T+7btDdhoACmj9YcnZvM+qyLMc5JN94EpF+Q/GVLwS9JfYLJS0VixUclVUz6bIMu2RdFUJCjvVaWYt27tL1CLPyrR7JUxau2J+4Hqzfl8u97TE3Ur16Ja95Zy2wm1FOp+gT3ZUK575E3oU8MEZrdYqvcpZwWDQiMc7vDLHT3PB/Bm5fLMd5g6sCerm9IFDjqWhcgapkBF7NYIafKNuNsD2fr3intuviXnRbdR0PJsCSV0Kle9U6jHVRzxy8+2np3binAK/HFBk5/ERvYWjf4ktAfpiJV35KS3TD47MSF+5bD/TwOjfftrU6152hkjyXiYTTxAq4Joh+S+HfkkjyyBj5dUI1J/qhx5ZWI5q3bEilP/OdxcUYbeN3jC3CtxxRgu3SEIc/UKFOVJoR7aa9CpbqFDUdv/m3Z+hBskVdWgN88k07UEAPnQ0JVNgJhyB25/zdFE8Lp47WXkNHqDCUaIjA3wjLg=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB5076.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(39850400004)(366004)(346002)(376002)(396003)(26005)(16526019)(478600001)(186003)(4326008)(52116002)(6506007)(38100700002)(38350700002)(6486002)(2616005)(4744005)(8676002)(956004)(316002)(66556008)(5660300002)(1076003)(86362001)(44832011)(66946007)(2906002)(6666004)(6512007)(8936002)(66476007)(36756003)(54906003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?uf9rfw5bhOfnWNMjx9D0wyTGH1L7xKQO+8QczeCqUQKIhwGCqsKQgauitaiI?=
- =?us-ascii?Q?LkGjaI1o3fLlzqUnl+13JfYOD5bv4ovV5YPtLalNbN/dN4gN2S40Lx7Vf6Jk?=
- =?us-ascii?Q?m2jc4nWJvbn1GDbev8TWB//DoJxu/ic8rOFPEMNwMKTdbmcqdSD/AwooWUAl?=
- =?us-ascii?Q?hwLHpIA9R8rBKj51f+w6y7bgaJSH5lAqLRRGI1Ac87OsqTD8HRumZnXxbOnW?=
- =?us-ascii?Q?+q3XfH6ItCW4Od+U8kEqU2Ugp04Bpydgp/zlylgSitcaf22IqNaxHImYmfFk?=
- =?us-ascii?Q?sl3Sg4IDN0O8FbrAcxK5HIsFfOugf7HBSLW1spspB8kR2qaSG4qurOZtHewM?=
- =?us-ascii?Q?t0wCz4NIKh70edjEnKNk6EFWp1IOouYynV441UTP62/rFhy7cz+KlQIqGKKg?=
- =?us-ascii?Q?qeWbSizivEerzkb//78gnBh4eboBUE5gNFNQqdDxCunkz08iFTHf+AeeD5h1?=
- =?us-ascii?Q?LeEhWC9LHFoakfNiMCquzMHgJ4chP9sFa95SFUnm+suAAiyJb2mnlN3e1aRB?=
- =?us-ascii?Q?SKjCArclKenAgwVj/i8ktn3Zyvnri+imA1+RNFlBossK4gQgg3OUfIhPUZd8?=
- =?us-ascii?Q?/m12dr1Bpe1/cJuWOtJdOIGxzbpnhl2+ENRzqWtsh3LW9P0On7diAj7FDGHX?=
- =?us-ascii?Q?vVGObe2vZakN4z8hacJAd1IZTLUdvzRdZa4kkgtXQpXkmisl7vyGD4UuauZQ?=
- =?us-ascii?Q?oktcKEv7AjNWopsZmPtLZ3/WubbEbiTAA8+XFcmyqH40yAA58H4dR5wdjf1p?=
- =?us-ascii?Q?GijC7W4XqLqNSBQJdYGYB8dKv8s697HAcwVdpLv2Lb0F2FP+8J7HOFIU9D7W?=
- =?us-ascii?Q?NoNeHjErIozDGpenp3arT5gDdVyPvaq/obVEnJKIghJgovhF+yFTgwsRDWu5?=
- =?us-ascii?Q?9R3ti1cqCEgLrbXG8unxCL5K0eee8vwhn/99dbxsgO8uOBlIcs/zOkeFhUWy?=
- =?us-ascii?Q?U04QMUVHUerN3txYccpxtgT/xnYEnWTtDgfgjPJAQzXS8SpgLhtLogK1M7hK?=
- =?us-ascii?Q?mMN1nqfxJgRt5dNbiX2MLGhgvojlJ9HtM6ddbwFZebu0rMS4OnOj/3h8zeNz?=
- =?us-ascii?Q?HLy7n2lbN2nMdvrxpg52jAsB2RFiq8yBIIQidK7Fy2in+g6WG7V1xkr2Vbat?=
- =?us-ascii?Q?a89ijMHAnLDl6RZmk7rKtJ2Aor/TD5kfGRNwufcRH0qtMt3Deef4vaXoo+6E?=
- =?us-ascii?Q?FkmeSdASQ7qYmh0JZa+tvCb8Qs0JvdPzc71PWL+z037hH+bESzBLaignPCMu?=
- =?us-ascii?Q?N49aUe+irE0gvR1wS6O8kaB1FKLKMzdgkTBwL4DF0xlQGAwZvjCQP3Cp/LGF?=
- =?us-ascii?Q?hVnEHIozQ/cC9pO0A/y3CU2a?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b525c99f-2dbb-44e2-4efe-08d91ec8bbfa
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB5076.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 May 2021 15:29:34.6936
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: xUNqailZxr6IR2ndrq35jB8VbDUAD2AGAEph4zdVP/Ale/6X3WidFGwMgsUPZYDvrTYbogmAUi7bLP2ser8qCQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR11MB5073
-X-Proofpoint-GUID: 4DtRD7nvJ7eKGHgqaOjzuaZ7s6aLSGrp
-X-Proofpoint-ORIG-GUID: 4DtRD7nvJ7eKGHgqaOjzuaZ7s6aLSGrp
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391,18.0.761
- definitions=2021-05-24_08:2021-05-24,2021-05-24 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 suspectscore=0
- adultscore=0 bulkscore=0 mlxlogscore=529 spamscore=0 lowpriorityscore=0
- impostorscore=0 mlxscore=0 malwarescore=0 priorityscore=1501 clxscore=1015
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2104190000
- definitions=main-2105240094
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-From: Saul Wold <Saul.Wold@windriver.com>
+* Many changes since 2009 (!!!) - most notable:
+  CVE-2014-7209: run-mailcap shellcommand injection.
+* They added Bellcore license for mailcap.man
+* There is a later version 3.66 available but tarball is almost empty because
+  with 3.65 they splitted mime-support into several packages
 
-Sysdig depends on tbb which no longer builds for powerpc
-
-Signed-off-by: Saul Wold <saul.wold@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-oe/recipes-extended/sysdig/sysdig_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/licenses/Bellcore                     | 13 +++++++
+ ...e-support_3.48.bb => mime-support_3.62.bb} | 35 ++++++++++---------
+ 2 files changed, 31 insertions(+), 17 deletions(-)
+ create mode 100644 meta-oe/licenses/Bellcore
+ rename meta-oe/recipes-support/mime-support/{mime-support_3.48.bb => mime-support_3.62.bb} (62%)
 
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig_git.bb b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-index d9da19057..f1b77070c 100644
---- a/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-+++ b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-@@ -14,6 +14,7 @@ JIT_mipsarchn32 = ""
- JIT_mipsarchn64 = ""
- JIT_riscv64 = ""
- JIT_riscv32 = ""
-+JIT_powerpc = ""
+diff --git a/meta-oe/licenses/Bellcore b/meta-oe/licenses/Bellcore
+new file mode 100644
+index 000000000..6bbbf94e6
+--- /dev/null
++++ b/meta-oe/licenses/Bellcore
+@@ -0,0 +1,13 @@
++Copyright: (c) 1991 Bell Communications Research, Inc. (Bellcore)
++License: Bellcore
++ Permission to use, copy, modify, and distribute this material 
++ for any purpose and without fee is hereby granted, provided 
++ that the above copyright notice and this permission notice 
++ appear in all copies, and that the name of Bellcore not be 
++ used in advertising or publicity pertaining to this 
++ material without the specific, prior written permission 
++ of an authorized representative of Bellcore.  BELLCORE 
++ MAKES NO REPRESENTATIONS ABOUT THE ACCURACY OR SUITABILITY 
++ OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED "AS IS", 
++ WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES.
++
+diff --git a/meta-oe/recipes-support/mime-support/mime-support_3.48.bb b/meta-oe/recipes-support/mime-support/mime-support_3.62.bb
+similarity index 62%
+rename from meta-oe/recipes-support/mime-support/mime-support_3.48.bb
+rename to meta-oe/recipes-support/mime-support/mime-support_3.62.bb
+index 1137f5012..858521b65 100644
+--- a/meta-oe/recipes-support/mime-support/mime-support_3.48.bb
++++ b/meta-oe/recipes-support/mime-support/mime-support_3.62.bb
+@@ -1,13 +1,17 @@
+ SECTION = "base"
+ SUMMARY = "MIME files 'mime.types' & 'mailcap', and support programs"
+-LICENSE = "PD"
+-LIC_FILES_CHKSUM = "file://debian/README;md5=36bbe2ace0a05c3fb684b73208fbf30b"
++LICENSE = "PD & Bellcore"
++LICENSE_${PN} = "PD"
++# mailcap.man's license is Bellcore
++LICENSE_${PN}-doc = "PD & Bellcore"
++LIC_FILES_CHKSUM = "file://debian/copyright;md5=53c851e31d27c3ea8a6217073a5ff01c"
  
- DEPENDS += "libb64 lua${JIT} zlib c-ares grpc-native grpc curl ncurses jsoncpp tbb jq openssl elfutils protobuf protobuf-native jq-native"
- RDEPENDS_${PN} = "bash"
-@@ -49,3 +50,4 @@ COMPATIBLE_HOST_libc-musl = "null"
- COMPATIBLE_HOST_mips = "null"
- COMPATIBLE_HOST_riscv64 = "null"
- COMPATIBLE_HOST_riscv32 = "null"
-+COMPATIBLE_HOST_powerpc = "null"
+ DEPENDS = "file"
+ RDEPENDS_${PN} = "perl"
+ RRECOMMENDS_${PN} = "file"
+ 
+-SRC_URI = "${DEBIAN_MIRROR}/main/m/mime-support/mime-support_${PV}-1.tar.gz"
++SRC_URI = "${DEBIAN_MIRROR}/main/m/mime-support/mime-support_${PV}.tar.gz"
++SRC_URI[sha256sum] = "54e0a03e0cd63c7c9fe68a18ead0a2143fd3c327604215f989d85484d0409f4a"
+ S = "${WORKDIR}/${BPN}"
+ 
+ inherit update-alternatives
+@@ -27,22 +31,22 @@ do_install () {
+     install -d ${D}${mandir}/man8
+     install -m 644 mime.types         ${D}${sysconfdir}/
+     install -m 644 mailcap            ${D}${libdir}/mime/
+-    install -m 644 mailcap.order           ${D}${sysconfdir}/
++    install -m 644 mailcap.order      ${D}${sysconfdir}/
+     install -m 644 mailcap.man        ${D}${mandir}/man5/mailcap.5
+-    install -m 644 mailcap.order.man    ${D}${mandir}/man5/mailcap.order.5
+-#    install -m 755 install-mime        ${D}${sbindir}/
+-#    install -m 644 install-mime.man        ${D}${mandir}/man8/install-mime.8
++    install -m 644 mailcap.order.man  ${D}${mandir}/man5/mailcap.order.5
++#    install -m 755 install-mime       ${D}${sbindir}/
++#    install -m 644 install-mime.man   ${D}${mandir}/man8/install-mime.8
+     install -m 755 update-mime        ${D}${sbindir}/
+-    install -m 644 update-mime.man        ${D}${mandir}/man8/update-mime.8
++    install -m 644 update-mime.man    ${D}${mandir}/man8/update-mime.8
+     install -m 755 run-mailcap        ${D}${bindir}/
+-    install -m 644 run-mailcap.man        ${D}${mandir}/man1/run-mailcap.1
+-#    install -m 644 rfcs/*            ${D}${docdir}/
+-    install -m 644 debian/changelog        ${D}${docdir}/changelog.Debian
+-    install -m 644 debian/README        ${D}${docdir}/copyright
++    install -m 644 run-mailcap.man    ${D}${mandir}/man1/run-mailcap.1
++#    install -m 644 rfcs/*             ${D}${docdir}/
++    install -m 644 debian/changelog   ${D}${docdir}/changelog.Debian
++    install -m 644 debian/copyright   ${D}${docdir}/copyright
+     install -m 755 debian-view        ${D}${libdir}/mime/
+-    install -m 755 playaudio        ${D}${libdir}/mime/
++    install -m 755 playaudio          ${D}${libdir}/mime/
+     install -m 755 playdsp            ${D}${libdir}/mime/
+-    install -m 644 mailcap.entries        ${D}${libdir}/mime/packages/mime-support
++    install -m 644 mailcap.entries    ${D}${libdir}/mime/packages/mime-support
+     cd ${D}${mandir}; gzip -9fv */*
+     cd ${D}${docdir}; gzip -9v *
+     cd ${D}${docdir}; gunzip copyright.gz
+@@ -56,9 +60,6 @@ do_install () {
+     cd ${D}${mandir}/man1; ln -s run-mailcap.1.gz print.1.gz
+ }
+ 
+-SRC_URI[md5sum] = "d6e5d715e331147352c50c158dbdec6d"
+-SRC_URI[sha256sum] = "a529c7892cb786f514af71f4ca5a4c3ebc58b538a49ff959c0d97592d38f040a"
+-
+ ALTERNATIVE_PRIORITY = "90"
+ ALTERNATIVE_${PN} = "mime.types"
+ ALTERNATIVE_LINK_NAME[mime.types] = "${sysconfdir}/mime.types"
 -- 
-2.25.1
+2.31.1
 
