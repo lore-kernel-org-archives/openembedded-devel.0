@@ -1,246 +1,269 @@
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.web09.23630.1621865824123811459
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.web08.23798.1621866240694845746
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 May 2021 07:17:04 -0700
+ Mon, 24 May 2021 07:24:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=RvYjX8KH;
- spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f50.google.com with SMTP id v12so28720618wrq.6
-        for <openembedded-devel@lists.openembedded.org>; Mon, 24 May 2021 07:17:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=QaEY2Fqk;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f171.google.com with SMTP id v13so14683494ple.9
+        for <openembedded-devel@lists.openembedded.org>; Mon, 24 May 2021 07:24:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:date:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=PghhZ0CwOCZXE4cb7XC6YFzIgHmbfTFaDoKkqvQJT48=;
-        b=RvYjX8KHU4BLyEIuMC/QhuYiarBFERlQbyvq0yxV+N66XpSIZMlzO3/0KFZGxR6V4a
-         y/Mil+HyZuYIyhTEhrcEIQ1fHcW79RN5rF83sXT2kIqOTpUPnB0NV8bcZEfAfQkyy8Ds
-         uS6e1j/A69n03Phyg1PrLg9s5RDvhsCdPi3EL556fw8YEdCJaXaYiVUnLElga+EmEbFf
-         vMUZrlr1jNtMC2VkwcFJHraFVFIg5SA3vK8mDwUvpe//C4YQ10b43W1k87Y8MRO+5OHZ
-         3UG4triIFRp3L2D09qpTj322v5FBU84q/WYtp0M6pH8+btr3VTKhYdbcN4JREBr70ZCH
-         ch5w==
+        h=subject:to:references:from:organization:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=tIsco+XUuQ4rXAXWKDLMct7rtDfIpOIWN/OFed7+a8I=;
+        b=QaEY2FqkAedCYC5iG75lMEghVObwAOgj2U2VAvWvzyCGNyeDlIcO8ssTiycyd+S93b
+         oIkrqbnoZrGQ+t42ew0zevroAxvE2Ayzua1xS000DaXBP1YxonObavq4/TIZ9AupPbnO
+         6+cJ1GDKhHJsUckkv520RdEo6crVFnmljKxfIAn3t6sJSLUSzQngHeLB6cjcZDq6LcJw
+         7NI3rv8ywoyk9PKYJdJ3649yQHoeKD++k3ghFn7oIInve3B6+EmlXQWK8Ycczt2Zxv3Y
+         0TRKKuL9ZYITd684XzO7ccumMEgUJt9RrS8XXsPK5PVfOlmcCEzaGG+VgihRNa+M5tmq
+         MzbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=PghhZ0CwOCZXE4cb7XC6YFzIgHmbfTFaDoKkqvQJT48=;
-        b=NNqCUOE75UpRpUj6FvumdhfA4l6EEojLO0GKHSeg5SEP0f0O1yvRRnH0D9lwD+ZUl9
-         6bLXDYr0+Z57XcaQwCEqZER68YzH2FOI2oCWr/tLtMdzWooWZKC0Rs4hChXu+w8MQIwo
-         hrzI0Z1mbrFBX4j5ZaeXIp2yvtDIQZrcxq8v0Rpp2sSu51jDtKJd/Yc9zwtHTFu+ILwS
-         vZb/32wTKK/WT7B83GtPO3RaIpqylPvgMmg/7JPJpE8B/dAFapxXTfVzP2dGjarcEP1u
-         +FIls64JwgA1H0EpiucewXMphSh9R+styktFsId24I8tnNrEG7QaiczL93OQL8DmhRLX
-         ndQw==
-X-Gm-Message-State: AOAM532d4CLv9nrzWKp5W+p/6xkazfGM61/vZYN/tgbXh64CA4xjtNYv
-	Vr6hJLoscl4PKH4MDaBmLj0=
-X-Google-Smtp-Source: ABdhPJxsWu1q2iG3MW7qIMgjKlAGhwytA0OaoZ7y8Y8QauQ2MFxMoPOBINPqyGD61sHEkJ+pIDqztg==
-X-Received: by 2002:adf:fa42:: with SMTP id y2mr22358431wrr.12.1621865822531;
-        Mon, 24 May 2021 07:17:02 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id c64sm8216925wma.15.2021.05.24.07.17.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 24 May 2021 07:17:01 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 24 May 2021 16:17:01 +0200
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe][PATCH 1/2] snappy: explicity disable building tests and benchmark
-Message-ID: <20210524141701.spau4sax34ckndza@jama>
-References: <20210524085554.4128366-1-Martin.Jansa@gmail.com>
- <CAMKF1sopj=TPavxz59VtO4BNZ9nqQAg8kcPEF7NQkcGYkGq4mw@mail.gmail.com>
+        h=x-gm-message-state:subject:to:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=tIsco+XUuQ4rXAXWKDLMct7rtDfIpOIWN/OFed7+a8I=;
+        b=dQjPjp4fT9zYRpakrMDT9krB3ppEDV/0H59J/A3q2/CWODr5p7ZFhcDHIYbiw5TOAq
+         2JalzyYQV0ZNOZKhnpGrePn3rfkrZEoFAgVp64Eocp0NgEp3jomLs2TiMo1/AW19p3bi
+         1k1XxlFHEobJ9r9uzxef6EStowfoxCBpY1mx5+Z2uAk8xK8baM2qUYNzplrRLnuplmIU
+         6yALVGvglcvQQOr8MJb4XyKWg8Sd7XqfcL+8KYXPtejtnxTOx/DqyvdOciawoDjZaFbk
+         vXw/1WNAh0Xftdr58aXBlHvSGfWz4gRYHKKewduL3CS9TXk8+4ekGWhrFA17Kbu/l5Iq
+         ny+w==
+X-Gm-Message-State: AOAM5304Mpr7ggzH6Ww61DdEgsCv10Pyt6UZzH8rbSURwzWH5oYVyyOy
+	5CZHVmpJ7kBg2o3gneeIuat5yaa90/BU3A==
+X-Google-Smtp-Source: ABdhPJzOcIwbIHD18o2AnK6YQQt1QVxEXtbuV/gleNYu6xhD2GxcAvCZu+ISMrSdEbV1ZGzzJDPweA==
+X-Received: by 2002:a17:90a:950c:: with SMTP id t12mr24646963pjo.135.1621866239750;
+        Mon, 24 May 2021 07:23:59 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:a0f0::9c7a? ([2601:646:9200:a0f0::9c7a])
+        by smtp.gmail.com with ESMTPSA id n6sm12021637pgm.79.2021.05.24.07.23.58
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 24 May 2021 07:23:59 -0700 (PDT)
+Subject: Re: [oe] [meta-networking][PATCH] dhcp-relay: add recipe
+To: Yi Zhao <yi.zhao@windriver.com>, openembedded-devel@lists.openembedded.org
+References: <167FC4DDC2069D52.24037@lists.openembedded.org>
+ <931b389f-1994-22ef-2eba-d20dbf6ff8b4@windriver.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <f8d57238-0030-f053-fed2-47aa916bb682@gmail.com>
+Date: Mon, 24 May 2021 07:23:58 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.2
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sopj=TPavxz59VtO4BNZ9nqQAg8kcPEF7NQkcGYkGq4mw@mail.gmail.com>
-X-Groupsio-MsgNum: 91494
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="wqvlf5i5o6sdqati"
-Content-Disposition: inline
+In-Reply-To: <931b389f-1994-22ef-2eba-d20dbf6ff8b4@windriver.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
---wqvlf5i5o6sdqati
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Can you resend this patch ? secondly, I worry that since kea is way
+to go we are adding a package which perhaps is virtually going to be
+dead soon. Is there any work on kea itself providing similar functionality?
 
-On Mon, May 24, 2021 at 07:07:16AM -0700, Khem Raj wrote:
-> its not clear what is the advantage of turning DBUILD_SHARED_LIBS on.
-
-that was already there.
-
-> Disabling tests may get over the issue but perhaps having tests is
-> also good
-> so turning it into a packageconfig which can be enabled with ptest
-> might be a better option.
-
-Building and installing tests for snappy would be fine, but even
-with it controlled by ptest you don't want snappy to install
-gtest/gmock/google-benchmark frameworks which are provided by their
-respective recipes:
-
-http://cgit.openembedded.org/meta-openembedded/tree/meta-oe/recipes-test/googletest/googletest_git.bb?h=master
-https://github.com/ros/meta-ros/blob/master/meta-ros2/recipes-benchmark/google-benchmark/google-benchmark_git.bb
-
-If someone is really interested in snappy tests then it could be
-improved, but right now it's broken and this change just restores the
-behavior from 1.1.8. (the same does apply for the libtinyxml2 change).
-
-Regards,
-
-> On Mon, May 24, 2021 at 1:56 AM Martin Jansa <Martin.Jansa@gmail.com> wrote:
-> >
-> > * with these changes introduced in 1.1.9:
-> >   https://github.com/google/snappy/commit/549685a
-> >   https://github.com/google/snappy/commit/4ebd8b2
-> >   it now installs gtest,gmock,benchmark with snappy which
-> >   causes conflicts when something depends on both snappy and googletest
-> >   or google-benchmark, e.g. leveldb-tl.do_prepare_recipe_sysroot:
-> >     ERROR: The file /usr/lib/pkgconfig/gmock_main.pc is installed by both snappy and googletest, aborting
-> >
-> > * looking at buildhistory the 1.1.9 upgrade added a lot of files to snappy:
-> >
-> >     diff --git a/packages/core2-64-webos-linux/snappy/snappy-dev/files-in-package.txt b/packages/core2-64-webos-linux/snappy/snappy-dev/files-in-package.txt
-> >     index 4bb97db2..559c84fc 100644
-> >     --- a/packages/core2-64-webos-linux/snappy/snappy-dev/files-in-package.txt
-> >     +++ b/packages/core2-64-webos-linux/snappy/snappy-dev/files-in-package.txt
-> >     @@ -1,14 +1,85 @@
-> >      drwxr-xr-x root       root             4096 ./usr
-> >      drwxr-xr-x root       root             4096 ./usr/include
-> >     +drwxr-xr-x root       root             4096 ./usr/include/benchmark
-> >     +-rw-r--r-- root       root            56897 ./usr/include/benchmark/benchmark.h
-> >     +drwxr-xr-x root       root             4096 ./usr/include/gmock
-> >     +-rw-r--r-- root       root            61607 ./usr/include/gmock/gmock-actions.h
-> >     +-rw-r--r-- root       root             6037 ./usr/include/gmock/gmock-cardinalities.h
-> >     +-rw-r--r-- root       root            24223 ./usr/include/gmock/gmock-function-mocker.h
-> >     +-rw-r--r-- root       root            30996 ./usr/include/gmock/gmock-generated-actions.h
-> >     +-rw-r--r-- root       root            15545 ./usr/include/gmock/gmock-generated-actions.h.pump
-> >     +-rw-r--r-- root       root             3711 ./usr/include/gmock/gmock.h
-> >     +-rw-r--r-- root       root           200261 ./usr/include/gmock/gmock-matchers.h
-> >     +-rw-r--r-- root       root             3341 ./usr/include/gmock/gmock-more-matchers.h
-> >     +-rw-r--r-- root       root             8967 ./usr/include/gmock/gmock-nice-strict.h
-> >     +-rw-r--r-- root       root            76003 ./usr/include/gmock/gmock-spec-builders.h
-> >     +drwxr-xr-x root       root             4096 ./usr/include/gmock/internal
-> >     +drwxr-xr-x root       root             4096 ./usr/include/gmock/internal/custom
-> >     +-rw-r--r-- root       root              365 ./usr/include/gmock/internal/custom/gmock-generated-actions.h
-> >     +-rw-r--r-- root       root              451 ./usr/include/gmock/internal/custom/gmock-generated-actions.h.pump
-> >     +-rw-r--r-- root       root             1861 ./usr/include/gmock/internal/custom/gmock-matchers.h
-> >     +-rw-r--r-- root       root             1894 ./usr/include/gmock/internal/custom/gmock-port.h
-> >     +-rw-r--r-- root       root              439 ./usr/include/gmock/internal/custom/README.md
-> >     +-rw-r--r-- root       root            17975 ./usr/include/gmock/internal/gmock-internal-utils.h
-> >     +-rw-r--r-- root       root             3788 ./usr/include/gmock/internal/gmock-port.h
-> >     +-rw-r--r-- root       root            13530 ./usr/include/gmock/internal/gmock-pp.h
-> >     +drwxr-xr-x root       root             4096 ./usr/include/gtest
-> >     +-rw-r--r-- root       root            14374 ./usr/include/gtest/gtest-death-test.h
-> >     +-rw-r--r-- root       root            94367 ./usr/include/gtest/gtest.h
-> >     +-rw-r--r-- root       root            27455 ./usr/include/gtest/gtest-matchers.h
-> >     +-rw-r--r-- root       root             8030 ./usr/include/gtest/gtest-message.h
-> >     +-rw-r--r-- root       root            22681 ./usr/include/gtest/gtest-param-test.h
-> >     +-rw-r--r-- root       root            14850 ./usr/include/gtest/gtest_pred_impl.h
-> >     +-rw-r--r-- root       root            32033 ./usr/include/gtest/gtest-printers.h
-> >     +-rw-r--r-- root       root             2519 ./usr/include/gtest/gtest_prod.h
-> >     +-rw-r--r-- root       root            10097 ./usr/include/gtest/gtest-spi.h
-> >     +-rw-r--r-- root       root             6853 ./usr/include/gtest/gtest-test-part.h
-> >     +-rw-r--r-- root       root            15988 ./usr/include/gtest/gtest-typed-test.h
-> >     +drwxr-xr-x root       root             4096 ./usr/include/gtest/internal
-> >     +drwxr-xr-x root       root             4096 ./usr/include/gtest/internal/custom
-> >     +-rw-r--r-- root       root             1843 ./usr/include/gtest/internal/custom/gtest.h
-> >     +-rw-r--r-- root       root             1858 ./usr/include/gtest/internal/custom/gtest-port.h
-> >     +-rw-r--r-- root       root             2079 ./usr/include/gtest/internal/custom/gtest-printers.h
-> >     +-rw-r--r-- root       root             1682 ./usr/include/gtest/internal/custom/README.md
-> >     +-rw-r--r-- root       root            13436 ./usr/include/gtest/internal/gtest-death-test-internal.h
-> >     +-rw-r--r-- root       root             9764 ./usr/include/gtest/internal/gtest-filepath.h
-> >     +-rw-r--r-- root       root            61757 ./usr/include/gtest/internal/gtest-internal.h
-> >     +-rw-r--r-- root       root            35114 ./usr/include/gtest/internal/gtest-param-util.h
-> >     +-rw-r--r-- root       root             4090 ./usr/include/gtest/internal/gtest-port-arch.h
-> >     +-rw-r--r-- root       root            84530 ./usr/include/gtest/internal/gtest-port.h
-> >     +-rw-r--r-- root       root             7213 ./usr/include/gtest/internal/gtest-string.h
-> >     +-rw-r--r-- root       root             6270 ./usr/include/gtest/internal/gtest-type-util.h
-> >      -rw-r--r-- root       root             5414 ./usr/include/snappy-c.h
-> >     --rw-r--r-- root       root             9885 ./usr/include/snappy.h
-> >     --rw-r--r-- root       root             7256 ./usr/include/snappy-sinksource.h
-> >     --rw-r--r-- root       root             2845 ./usr/include/snappy-stubs-public.h
-> >     +-rw-r--r-- root       root             9909 ./usr/include/snappy.h
-> >     +-rw-r--r-- root       root             7265 ./usr/include/snappy-sinksource.h
-> >     +-rw-r--r-- root       root             2579 ./usr/include/snappy-stubs-public.h
-> >      drwxr-xr-x root       root             4096 ./usr/lib
-> >      drwxr-xr-x root       root             4096 ./usr/lib/cmake
-> >     +drwxr-xr-x root       root             4096 ./usr/lib/cmake/benchmark
-> >     +-rw-r--r-- root       root               60 ./usr/lib/cmake/benchmark/benchmarkConfig.cmake
-> >     +-rw-r--r-- root       root             2742 ./usr/lib/cmake/benchmark/benchmarkConfigVersion.cmake
-> >     +-rw-r--r-- root       root             4247 ./usr/lib/cmake/benchmark/benchmarkTargets.cmake
-> >     +-rw-r--r-- root       root             1380 ./usr/lib/cmake/benchmark/benchmarkTargets-noconfig.cmake
-> >     +drwxr-xr-x root       root             4096 ./usr/lib/cmake/GTest
-> >     +-rw-r--r-- root       root             1438 ./usr/lib/cmake/GTest/GTestConfig.cmake
-> >     +-rw-r--r-- root       root             1978 ./usr/lib/cmake/GTest/GTestConfigVersion.cmake
-> >     +-rw-r--r-- root       root             4958 ./usr/lib/cmake/GTest/GTestTargets.cmake
-> >     +-rw-r--r-- root       root             2525 ./usr/lib/cmake/GTest/GTestTargets-noconfig.cmake
-> >      drwxr-xr-x root       root             4096 ./usr/lib/cmake/Snappy
-> >      -rw-r--r-- root       root             2864 ./usr/lib/cmake/Snappy/SnappyConfig.cmake
-> >      -rw-r--r-- root       root             2742 ./usr/lib/cmake/Snappy/SnappyConfigVersion.cmake
-> >      -rw-r--r-- root       root             3616 ./usr/lib/cmake/Snappy/SnappyTargets.cmake
-> >      -rw-r--r-- root       root              806 ./usr/lib/cmake/Snappy/SnappyTargets-noconfig.cmake
-> >     +lrwxrwxrwx root       root               22 ./usr/lib/libbenchmark_main.so -> libbenchmark_main.so.1
-> >     +lrwxrwxrwx root       root               17 ./usr/lib/libbenchmark.so -> libbenchmark.so.1
-> >     +lrwxrwxrwx root       root               23 ./usr/lib/libgmock_main.so -> libgmock_main.so.1.10.0
-> >     +lrwxrwxrwx root       root               18 ./usr/lib/libgmock.so -> libgmock.so.1.10.0
-> >     +lrwxrwxrwx root       root               23 ./usr/lib/libgtest_main.so -> libgtest_main.so.1.10.0
-> >     +lrwxrwxrwx root       root               18 ./usr/lib/libgtest.so -> libgtest.so.1.10.0
-> >      lrwxrwxrwx root       root               14 ./usr/lib/libsnappy.so -> libsnappy.so.1
-> >     +drwxr-xr-x root       root             4096 ./usr/lib/pkgconfig
-> >     +-rw-r--r-- root       root              240 ./usr/lib/pkgconfig/benchmark.pc
-> >     +-rw-r--r-- root       root              275 ./usr/lib/pkgconfig/gmock_main.pc
-> >     +-rw-r--r-- root       root              268 ./usr/lib/pkgconfig/gmock.pc
-> >     +-rw-r--r-- root       root              275 ./usr/lib/pkgconfig/gtest_main.pc
-> >     +-rw-r--r-- root       root              243 ./usr/lib/pkgconfig/gtest.pc
-> >     diff --git a/packages/core2-64-webos-linux/snappy/snappy-dev/latest b/packages/core2-64-webos-linux/snappy/snappy-dev/latest
-> >     index 0cc143d2..19a23796 100644
-> >     --- a/packages/core2-64-webos-linux/snappy/snappy-dev/latest
-> >     +++ b/packages/core2-64-webos-linux/snappy/snappy-dev/latest
-> >     @@ -1,9 +1,8 @@
-> >     -PV = 1.1.8
-> >     +PV = 1.1.9
-> >      PR = r0
-> >     -PKG = libsnappy-dev
-> >     -RPROVIDES = snappy-dev (=1.1.8)
-> >     -RDEPENDS = snappy (= 1.1.8-r0)
-> >     +RPROVIDES =
-> >     +RDEPENDS = snappy (= 1.1.9-r0)
-> >      RRECOMMENDS = glibc-dev libgcc-dev libstdc++-dev snappy-lic
-> >     -PKGSIZE = 35442
-> >     +PKGSIZE = 1062733
-> >      FILES = /usr/include /lib/lib*.so /usr/lib/lib*.so /usr/lib/*.la /usr/lib/*.o /usr/lib/pkgconfig /usr/share/pkgconfig /usr/share/aclocal /lib/*.o /usr/lib/snappy/*.la /lib/*.la /usr/lib/cmake /usr/share/cmake
-> >     -FILELIST = /usr/lib/libsnappy.so.1 /usr/lib/libsnappy.so.1.1.8
-> >     +FILELIST = /usr/lib/libbenchmark.so.1 /usr/lib/libbenchmark.so.1.5.2 /usr/lib/libbenchmark_main.so.1 /usr/lib/libbenchmark_main.so.1.5.2 /usr/lib/libgmock.so.1.10.0 /usr/lib/libgmock_main.so.1.10.0 /usr/lib/libgtest.so.1.10.0 /usr/lib/libgtest_main.so.1.10.0 /usr/lib/libsnappy.so.1 /usr/lib/libsnappy.so.1.1.9
-> >
-> > * disable tests and benchmarks to install only the files 1.1.8 version used to install
-> >
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> >  meta-oe/recipes-extended/snappy/snappy_1.1.9.bb | 3 +--
-> >  1 file changed, 1 insertion(+), 2 deletions(-)
-> >
-> > diff --git a/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb b/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb
-> > index 2ebe3760a5..151c4ddc38 100644
-> > --- a/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb
-> > +++ b/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb
-> > @@ -21,5 +21,4 @@ PACKAGECONFIG ??= ""
-> >  PACKAGECONFIG[lzo] = "-DHAVE_LIBLZO2=1,-DHAVE_LIBLZO2=0,lzo,"
-> >  TARGET_CFLAGS += "-fPIC"
-> >
-> > -EXTRA_OECMAKE += '-DBUILD_SHARED_LIBS="ON" \
-> > -                  '
-> > +EXTRA_OECMAKE += '-DBUILD_SHARED_LIBS="ON" -DSNAPPY_BUILD_TESTS="OFF" -DSNAPPY_BUILD_BENCHMARKS="OFF"'
-> > --
-> > 2.30.2
-> >
-> >
-> > 
-> >
-
---wqvlf5i5o6sdqati
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EABECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCYKu1WwAKCRA3VSO3ZXaA
-HA/hAKCsCB82E5yq5ILkCWDbMr6C6hvHlACggVMfWi06OUgIHBlUESmLjZZ4M8E=
-=9Qcm
------END PGP SIGNATURE-----
-
---wqvlf5i5o6sdqati--
+On 5/23/21 11:36 PM, Yi Zhao wrote:
+> Ping ...
+> 
+> 
+> //Yi
+> 
+> 
+> On 5/17/21 1:53 PM, Yi Zhao wrote:
+>> The current default dhcp server kea in oe-core doesn't provide
+>> dhcp-relay tool. Add a recipe to provide dhcrelay which is from dhcp.
+>> This patch is picked up from dhcp recipe with some tweaks. In order to
+>> fix the build dependency, we use bundled bind instead of external bind.
+>>
+>> Signed-off-by: Yi Zhao<yi.zhao@windriver.com>
+>> ---
+>>   .../dhcp/dhcp-relay_4.4.2.bb                  | 62 +++++++++++++++++++
+>>   ...0001-Makefile.am-only-build-dhcrelay.patch | 30 +++++++++
+>>   .../dhcp/files/default-relay                  | 12 ++++
+>>   .../dhcp/files/dhcrelay.service               | 10 +++
+>>   .../dhcp/files/init-relay                     | 44 +++++++++++++
+>>   5 files changed, 158 insertions(+)
+>>   create mode 100644 meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.2.bb
+>>   create mode 100644 meta-networking/recipes-connectivity/dhcp/files/0001-Makefile.am-only-build-dhcrelay.patch
+>>   create mode 100644 meta-networking/recipes-connectivity/dhcp/files/default-relay
+>>   create mode 100644 meta-networking/recipes-connectivity/dhcp/files/dhcrelay.service
+>>   create mode 100644 meta-networking/recipes-connectivity/dhcp/files/init-relay
+>>
+>> diff --git a/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.2.bb b/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.2.bb
+>> new file mode 100644
+>> index 000000000..bd816106c
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.2.bb
+>> @@ -0,0 +1,62 @@
+>> +SECTION = "console/network"
+>> +SUMMARY = "Internet Software Consortium DHCP Relay Agent"
+>> +DESCRIPTION = "A DHCP relay agent passes DHCP requests from one \
+>> +LAN to another, so that a DHCP server is not needed on every LAN."
+>> +
+>> +HOMEPAGE ="http://www.isc.org/"
+>> +
+>> +LICENSE = "ISC"
+>> +LIC_FILES_CHKSUM ="file://LICENSE;beginline=4;md5=004a4db50a1e20972e924a8618747c01"
+>> +
+>> +DEPENDS = "openssl libcap zlib"
+>> +
+>> +SRC_URI ="https://ftp.isc.org/isc/dhcp/${PV}/dhcp-${PV}.tar.gz \ + 
+>> file://default-relay \ + file://init-relay \ + file://dhcrelay.service 
+>> \ + file://0001-Makefile.am-only-build-dhcrelay.patch \ + "
+>> +
+>> +SRC_URI[md5sum] = "2afdaf8498dc1edaf3012efdd589b3e1"
+>> +SRC_URI[sha256sum] = "1a7ccd64a16e5e68f7b5e0f527fd07240a2892ea53fe245620f4f5f607004521"
+>> +
+>> +UPSTREAM_CHECK_URI ="http://ftp.isc.org/isc/dhcp/"
+>> +UPSTREAM_CHECK_REGEX = "(?P<pver>\d+\.\d+\.(\d+?))/"
+>> +
+>> +S = "${WORKDIR}/dhcp-${PV}"
+>> +
+>> +inherit autotools-brokensep systemd
+>> +
+>> +SYSTEMD_SERVICE_${PN} = "dhcrelay.service"
+>> +SYSTEMD_AUTO_ENABLE_${PN} = "disable"
+>> +
+>> +CFLAGS += "-D_GNU_SOURCE -fcommon"
+>> +LDFLAGS_append = " -pthread"
+>> +
+>> +EXTRA_OECONF = "--enable-paranoia \
+>> +                --disable-static \
+>> +                --enable-libtool \
+>> +                --with-randomdev=/dev/random \
+>> +" + +# Enable shared libs per dhcp README +do_configure_prepend () { + 
+>> cp configure.ac+lt configure.ac +} + +do_install_append () { + install 
+>> -d ${D}${sysconfdir}/default + install -m 0644 
+>> ${WORKDIR}/default-relay ${D}${sysconfdir}/default/dhcp-relay + + if 
+>> ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; 
+>> then + install -d ${D}${systemd_unitdir}/system + install -m 0644 
+>> ${WORKDIR}/dhcrelay.service ${D}${systemd_unitdir}/system + sed -i -e 
+>> 's,@SBINDIR@,${sbindir},g' 
+>> ${D}${systemd_unitdir}/system/dhcrelay.service + sed -i -e 
+>> 's,@SYSCONFDIR@,${sysconfdir},g' 
+>> ${D}${systemd_unitdir}/system/dhcrelay.service + else + install -d 
+>> ${D}${sysconfdir}/init.d + install -m 0755 ${WORKDIR}/init-relay 
+>> ${D}${sysconfdir}/init.d/dhcp-relay + fi +} + +PARALLEL_MAKE = ""
+>> diff --git a/meta-networking/recipes-connectivity/dhcp/files/0001-Makefile.am-only-build-dhcrelay.patch b/meta-networking/recipes-connectivity/dhcp/files/0001-Makefile.am-only-build-dhcrelay.patch
+>> new file mode 100644
+>> index 000000000..fed85d2a8
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-connectivity/dhcp/files/0001-Makefile.am-only-build-dhcrelay.patch
+>> @@ -0,0 +1,30 @@
+>> +From 17cc080e58894644dd18664ac6f3451096d5f065 Mon Sep 17 00:00:00 2001
+>> +From: Yi Zhao<yi.zhao@windriver.com>
+>> +Date: Thu, 13 May 2021 15:23:16 +0800
+>> +Subject: [PATCH] Makefile.am: only build dhcrelay
+>> +
+>> +Drop client and server build as we don't need them.
+>> +
+>> +Upstream-Status: Inappropriate [embedded specific]
+>> +
+>> +Signed-off-by: Yi Zhao<yi.zhao@windriver.com>
+>> +---
+>> + Makefile.am | 2 +-
+>> + 1 file changed, 1 insertion(+), 1 deletion(-)
+>> +
+>> +diff --git a/Makefile.am b/Makefile.am
+>> +index ed692a5..34f9772 100644
+>> +--- a/Makefile.am
+>> ++++ b/Makefile.am
+>> +@@ -38,7 +38,7 @@ endif
+>> +
+>> + # Use an autoconf substitution vs an automake conditional here
+>> + # to fool automake when the bind directory does not exist.
+>> +-SUBDIRS = @BINDSUBDIR@ includes tests common omapip client dhcpctl relay server
+>> ++SUBDIRS = @BINDSUBDIR@ includes common omapip relay
+>> +
+>> + DIST_SUBDIRS = $(SUBDIRS) keama
+>> +
+>> +--
+>> +2.17.1
+>> +
+>> diff --git a/meta-networking/recipes-connectivity/dhcp/files/default-relay b/meta-networking/recipes-connectivity/dhcp/files/default-relay
+>> new file mode 100644
+>> index 000000000..7961f014b
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-connectivity/dhcp/files/default-relay
+>> @@ -0,0 +1,12 @@
+>> +# Defaults for dhcp-relay initscript
+>> +# sourced by /etc/init.d/dhcp-relay
+>> +
+>> +# What servers should the DHCP relay forward requests to?
+>> +# e.g: SERVERS="192.168.0.1"
+>> +SERVERS=""
+>> +
+>> +# On what interfaces should the DHCP relay (dhrelay) serve DHCP requests?
+>> +INTERFACES=""
+>> +
+>> +# Additional options that are passed to the DHCP relay daemon?
+>> +OPTIONS=""
+>> diff --git a/meta-networking/recipes-connectivity/dhcp/files/dhcrelay.service b/meta-networking/recipes-connectivity/dhcp/files/dhcrelay.service
+>> new file mode 100644
+>> index 000000000..15ff927d3
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-connectivity/dhcp/files/dhcrelay.service
+>> @@ -0,0 +1,10 @@
+>> +[Unit]
+>> +Description=DHCP Relay Agent Daemon
+>> +After=network.target
+>> +
+>> +[Service]
+>> +EnvironmentFile=@SYSCONFDIR@/default/dhcp-relay
+>> +ExecStart=@SBINDIR@/dhcrelay -d --no-pid -q $SERVERS
+>> +
+>> +[Install]
+>> +WantedBy=multi-user.target
+>> diff --git a/meta-networking/recipes-connectivity/dhcp/files/init-relay b/meta-networking/recipes-connectivity/dhcp/files/init-relay
+>> new file mode 100644
+>> index 000000000..019a7e84c
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-connectivity/dhcp/files/init-relay
+>> @@ -0,0 +1,44 @@
+>> +#!/bin/sh
+>> +#
+>> +# $Id: dhcp3-relay,v 1.1 2004/04/16 15:41:08 ml Exp $
+>> +#
+>> +
+>> +# It is not safe to start if we don't have a default configuration...
+>> +if [ ! -f /etc/default/dhcp-relay ]; then
+>> +	echo "/etc/default/dhcp-relay does not exist! - Aborting..."
+>> +	echo "create this file to fix the problem."
+>> +	exit 1
+>> +fi
+>> +
+>> +# Read init script configuration (interfaces the daemon should listen on
+>> +# and the DHCP server we should forward requests to.)
+>> +. /etc/default/dhcp-relay
+>> +
+>> +# Build command line for interfaces (will be passed to dhrelay below.)
+>> +IFCMD=""
+>> +if test "$INTERFACES" != ""; then
+>> +	for I in $INTERFACES; do
+>> +		IFCMD=${IFCMD}"-i "${I}" "
+>> +	done
+>> +fi
+>> +
+>> +DHCRELAYPID=/var/run/dhcrelay.pid
+>> +
+>> +case "$1" in
+>> +	start)
+>> +		start-stop-daemon -S -x /usr/sbin/dhcrelay -- -q $OPTIONS $IFCMD $SERVERS
+>> +		;;
+>> +	stop)
+>> +		start-stop-daemon -K -x /usr/sbin/dhcrelay
+>> +		;;
+>> +	restart | force-reload)
+>> +		$0 stop
+>> +		sleep 2
+>> +		$0 start
+>> +		;;
+>> +	*)
+>> +		echo "Usage: /etc/init.d/dhcp-relay {start|stop|restart|force-reload}"
+>> +		exit 1
+>> +esac
+>> +
+>> +exit 0
+>>
+> 
+> 
+> 
+> 
