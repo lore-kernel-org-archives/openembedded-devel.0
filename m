@@ -1,272 +1,189 @@
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.web08.10299.1621951302626090396
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.web08.11295.1621955701524804519
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 May 2021 07:01:42 -0700
+ Tue, 25 May 2021 08:15:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=OKcqbI6W;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id f22so15312453pfn.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 25 May 2021 07:01:42 -0700 (PDT)
+ dkim=pass header.i=@smile-fr.20150623.gappssmtp.com header.s=20150623 header.b=kLhk+AU+;
+ spf=pass (domain: smile.fr, ip: 209.85.221.50, mailfrom: romain.naour@smile.fr)
+Received: by mail-wr1-f50.google.com with SMTP id n4so6719953wrw.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 25 May 2021 08:15:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:references:from:organization:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=y5Vc8nYhvXHLlEuOzEjop2H6n3+wV+4HUq9TotAZLng=;
-        b=OKcqbI6W0plap49sB7Oub5MWpp6d6JXqzulIo5aBgHttF0B7FjMhsks53mMowljjhV
-         R5Mcc3uwXxRLlWOcz2NOkPao3qo+6/AofKSqegZUMVahxGAR5I3sdD72bfvh8tQ2SUX5
-         +5SJ5nSvbXIN34iGB2qxo8IrdRcyuqLr6LGDnBRtyoYnqIpaEryDqXxXEclJAzKZa4XY
-         XGF9/+5xE58LkcbFdzs5Nhj3yablveCHao141SopezPZ4YNTT+IXKHhbi3Dra35kFhRV
-         6amTILKPTIEMMaQQHUGtpWkWBZB/Qh+UPYLZ7fLPFeRp622/3Lq9CTBGJ2jFqQ3xYlH/
-         YB3A==
+        d=smile-fr.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=L0X+WK79RJZnAdrQA2A1kRM1oAuOZspLF9Q4XSXTWzk=;
+        b=kLhk+AU+BvPgULKrCeiWloCKDhQgTBctfuIkWuyeb+aGgCw9ZhwYZlSoLFs5R2aKS1
+         RKON0xlnz1+gEqXmDBY2e/dHMPBBOzT0Zq88E3gHKiW0a6qYwFlkCsFm/gEF8hOMVti9
+         min8dAPGt8MFWZmevCgdqxc2kuWloqZFuTxKa9YPs7THxxGFQ7v2RfJAKpfm3deXe651
+         Qo+ETyxp86iSrIe/LaV+Nnh9dXsY1e5XCyolB+MTeeHcPNxjBFd9wsz6Sdlsqu0hHzum
+         +hGK8sHYvrStvHKKmBzxISTkSAYqWoI6pH3jreJvKmj6+llWjHx46NQQRJ715G88oiJG
+         xzbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=y5Vc8nYhvXHLlEuOzEjop2H6n3+wV+4HUq9TotAZLng=;
-        b=EjStkjW2ILRxo7pyXIbovKgJNaPCTXsmryi0d3/xZ1j0JCz2ioscaTOzRFWnpciRLJ
-         eI5/1fj8rJyuyVpC75tOWZDXFtGASb5IAheDrkHK19zCkC1CK//0wgMjHzcTHBdn/2B0
-         BpP0nP0yx61pwuEX7e5yxF9iy4OpFWUBqTOHeLif5Hy7uAvZFW8/Owjz1jXf5Wmyad7r
-         cPZ//mOYWMF2no3dwKRcuoBnlqXvxUGTM3eqqekFekxiQGXW84wN3Ng+QYuemwLs4k8q
-         DpKREcSczCX3TqmtcYmM6kNVTyrgrvqaNfOVYhzKRbok1YjXsxI5w23KD8P1QANooWxD
-         J+cQ==
-X-Gm-Message-State: AOAM531r3BpflEk2jPePA6qyHizVZSmLcL3YfUJRL9QBzFyWxdgE93CA
-	SvYd4bLXDB3/78ta39DSz0TWsw7C8DAj4Q==
-X-Google-Smtp-Source: ABdhPJzBtJCrU4RzendEATEgEbMi4hjvNSrDIG/RWZSGhUihdxyOBjmdEt0F2Zg7NNTb648dZoon6Q==
-X-Received: by 2002:a63:f40d:: with SMTP id g13mr19495292pgi.290.1621951301410;
-        Tue, 25 May 2021 07:01:41 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:a0f0::2290? ([2601:646:9200:a0f0::2290])
-        by smtp.gmail.com with ESMTPSA id n28sm7366359pfq.139.2021.05.25.07.01.40
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 25 May 2021 07:01:41 -0700 (PDT)
-Subject: Re: [meta-networking][RESEND][PATCH] dhcp-relay: add recipe
-To: Yi Zhao <yi.zhao@windriver.com>, openembedded-devel@lists.openembedded.org
-References: <f8d57238-0030-f053-fed2-47aa916bb682@gmail.com>
- <20210525085615.174480-1-yi.zhao@windriver.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <99f83f04-b224-efa4-5435-865a3fa56cb0@gmail.com>
-Date: Tue, 25 May 2021 07:01:39 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.2
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=L0X+WK79RJZnAdrQA2A1kRM1oAuOZspLF9Q4XSXTWzk=;
+        b=uGe7uRTUgYUnkQr8ayX4s7SjqHoAg6e2RVQIkRu0c9MNuUZzBj/Bv7DWN3KT+nT6ur
+         rgicIJua0a3EOP5EojjjY3swt1YfOYkyVrdctcWjxZ+lfXBB6YgWN0QoZkdV+2U1gyGt
+         XPojAa58DFJaRMFGPzyMGEWPVTEKVbMOtkco41W5lVRaaNtwIUJ+ezL3lQjisMvIzOrA
+         mDfvbJ76h7BDqKZ5F90s7eUxUhj9fO3YoGQbGjSqT+ZIVircxlbbC4VgpweqAyGhKwQJ
+         nz3UcFsYJdGSQh7wX3FIXuX5R1v7HdQCJlbAIqeHpIS6rkmhPh+05X8BNVEKYzJAhVid
+         acjQ==
+X-Gm-Message-State: AOAM531NKf5qqs2f9Q6Wb2OetgM9WlQxaYVykuw6kAJ1ZL5q+NA/BM0J
+	TslOE2yfZwBM2imy0zyY5UqT0+EfT3GFaw==
+X-Google-Smtp-Source: ABdhPJzPeBkFe2RjakmBO3mEQemc6CcPSPgd/i8dohgwIjjZ65KVC6Tx7H6qumKeETLDJHG/tIFmfg==
+X-Received: by 2002:a5d:58ce:: with SMTP id o14mr27951999wrf.405.1621955699945;
+        Tue, 25 May 2021 08:14:59 -0700 (PDT)
+Return-Path: <romain.naour@smile.fr>
+Received: from P-NTS-Evian.home (2a01cb058f8a180041413d5f65a5e97b.ipv6.abo.wanadoo.fr. [2a01:cb05:8f8a:1800:4141:3d5f:65a5:e97b])
+        by smtp.gmail.com with ESMTPSA id i5sm16868409wrw.29.2021.05.25.08.14.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 25 May 2021 08:14:59 -0700 (PDT)
+From: "Romain Naour" <romain.naour@smile.fr>
+To: openembedded-devel@lists.openembedded.org
+Cc: Romain Naour <romain.naour@smile.fr>
+Subject: [meta-networking][PATCH] libiec61850: Upgrade to 1.5.0
+Date: Tue, 25 May 2021 17:14:56 +0200
+Message-Id: <20210525151456.1720172-1-romain.naour@smile.fr>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-In-Reply-To: <20210525085615.174480-1-yi.zhao@windriver.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
+Remove all upstream patches
+Rename patch 0003 -> 0001
 
+Signed-off-by: Romain Naour <romain.naour@smile.fr>
+---
+ ...break-CMAKE_INSTALL_PATH-by-trying-.patch} |  4 +--
+ ...001-use-poll.h-instead-of-sys-poll.h.patch | 33 -------------------
+ ...linux-Add-missing-include-sys-time.h.patch | 32 ------------------
+ ...c61850_1.4.2.1.bb => libiec61850_1.5.0.bb} |  8 ++---
+ 4 files changed, 5 insertions(+), 72 deletions(-)
+ rename meta-networking/recipes-connectivity/libiec61850/files/{0003-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch => 0001-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch} (95%)
+ delete mode 100644 meta-networking/recipes-connectivity/libiec61850/files/0001-use-poll.h-instead-of-sys-poll.h.patch
+ delete mode 100644 meta-networking/recipes-connectivity/libiec61850/files/0002-serial_port_linux-Add-missing-include-sys-time.h.patch
+ rename meta-networking/recipes-connectivity/libiec61850/{libiec61850_1.4.2.1.bb => libiec61850_1.5.0.bb} (77%)
 
-On 5/25/21 1:56 AM, Yi Zhao wrote:
-> The current default dhcp server kea in oe-core doesn't provide
-> dhcp-relay tool. Add a recipe to provide dhcrelay which is from dhcp.
-> This patch is picked up from dhcp recipe with some tweaks. In order to
-> fix the build dependency, we use bundled bind instead of external bind.
-> 
+diff --git a/meta-networking/recipes-connectivity/libiec61850/files/0003-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch b/meta-networking/recipes-connectivity/libiec61850/files/0001-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch
+similarity index 95%
+rename from meta-networking/recipes-connectivity/libiec61850/files/0003-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch
+rename to meta-networking/recipes-connectivity/libiec61850/files/0001-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch
+index 65567610b..2168a0713 100644
+--- a/meta-networking/recipes-connectivity/libiec61850/files/0003-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch
++++ b/meta-networking/recipes-connectivity/libiec61850/files/0001-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch
+@@ -1,4 +1,4 @@
+-From 89f326a427c7ad13c115e2d3f2ac27807aa5a795 Mon Sep 17 00:00:00 2001
++From d4ddfc7a350011b7944ed8d6bca80f164dfd1387 Mon Sep 17 00:00:00 2001
+ From: Romain Naour <romain.naour@smile.fr>
+ Date: Fri, 10 Jul 2020 17:08:34 +0200
+ Subject: [PATCH] pyiec61850: don't break CMAKE_INSTALL_PATH by trying to find
+@@ -33,5 +33,5 @@ index 159ef4b..d1732a1 100644
+  
+  add_test(test_pyiec61850 ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/test_pyiec61850.py)
+ -- 
+-2.21.3
++2.31.1
+ 
+diff --git a/meta-networking/recipes-connectivity/libiec61850/files/0001-use-poll.h-instead-of-sys-poll.h.patch b/meta-networking/recipes-connectivity/libiec61850/files/0001-use-poll.h-instead-of-sys-poll.h.patch
+deleted file mode 100644
+index a04473d21..000000000
+--- a/meta-networking/recipes-connectivity/libiec61850/files/0001-use-poll.h-instead-of-sys-poll.h.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-From 4cad505fc98240eb66eaabfae61a9694f8158dda Mon Sep 17 00:00:00 2001
+-From: Romain Naour <romain.naour@smile.fr>
+-Date: Tue, 7 Apr 2020 20:58:37 +0200
+-Subject: [PATCH] use <poll.h> instead of <sys/poll.h>
+-
+-The manpage of poll(2) states that the prototype of poll is defined
+-in <poll.h>. Use that header file instead of <sys/poll.h> to allow
+-compilation against musl-libc.
+-
+-Upstream status: Pending
+-https://github.com/mz-automation/libiec61850/pull/228
+-
+-Signed-off-by: Romain Naour <romain.naour@smile.fr>
+----
+- hal/ethernet/linux/ethernet_linux.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/hal/ethernet/linux/ethernet_linux.c b/hal/ethernet/linux/ethernet_linux.c
+-index c3ab2e2..9aa5c28 100644
+---- a/hal/ethernet/linux/ethernet_linux.c
+-+++ b/hal/ethernet/linux/ethernet_linux.c
+-@@ -23,7 +23,7 @@
+- 
+- #include <sys/socket.h>
+- #include <sys/ioctl.h>
+--#include <sys/poll.h>
+-+#include <poll.h>
+- #include <linux/if_packet.h>
+- #include <linux/if_ether.h>
+- #include <linux/if_arp.h>
+--- 
+-2.21.1
+-
+diff --git a/meta-networking/recipes-connectivity/libiec61850/files/0002-serial_port_linux-Add-missing-include-sys-time.h.patch b/meta-networking/recipes-connectivity/libiec61850/files/0002-serial_port_linux-Add-missing-include-sys-time.h.patch
+deleted file mode 100644
+index e1b8ca15b..000000000
+--- a/meta-networking/recipes-connectivity/libiec61850/files/0002-serial_port_linux-Add-missing-include-sys-time.h.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From 661405eb6066b67dfe51d5ff9635e29f86bdd238 Mon Sep 17 00:00:00 2001
+-From: Romain Naour <romain.naour@smile.fr>
+-Date: Tue, 7 Apr 2020 21:02:54 +0200
+-Subject: [PATCH] serial_port_linux: Add missing include sys/time.h
+-
+-POSIX says `struct timeval` is defined if <sys/time.h> is included.
+-
+-Adding this header allow to build against musl-libc.
+-
+-Upstream status: Pending
+-https://github.com/mz-automation/libiec61850/pull/228
+-
+-Signed-off-by: Romain Naour <romain.naour@smile.fr>
+----
+- hal/serial/linux/serial_port_linux.c | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/hal/serial/linux/serial_port_linux.c b/hal/serial/linux/serial_port_linux.c
+-index e6308c0..15e5794 100644
+---- a/hal/serial/linux/serial_port_linux.c
+-+++ b/hal/serial/linux/serial_port_linux.c
+-@@ -29,6 +29,7 @@
+- #include <termios.h>
+- #include <fcntl.h>
+- #include <unistd.h>
+-+#include <sys/time.h>
+- 
+- #include "hal_serial.h"
+- #include "hal_time.h"
+--- 
+-2.21.1
+-
+diff --git a/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.4.2.1.bb b/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.0.bb
+similarity index 77%
+rename from meta-networking/recipes-connectivity/libiec61850/libiec61850_1.4.2.1.bb
+rename to meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.0.bb
+index 18cb0cd8e..18e299283 100644
+--- a/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.4.2.1.bb
++++ b/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.0.bb
+@@ -13,12 +13,10 @@ SECTION = "console/network"
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ DEPENDS = "swig-native python3"
+-SRCREV = "d798814fb463115a835da597535a625b68a39cff"
++SRCREV = "fcefc746fea286aeaa40d2f62240216da81c85e5"
+ 
+-SRC_URI = "git://github.com/mz-automation/${BPN}.git;branch=v1.4 \
+-           file://0001-use-poll.h-instead-of-sys-poll.h.patch \
+-           file://0002-serial_port_linux-Add-missing-include-sys-time.h.patch \
+-           file://0003-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch \
++SRC_URI = "git://github.com/mz-automation/${BPN}.git;branch=v1.5 \
++           file://0001-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch \
+ "
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.31.1
 
-also send a patch to add it to packagegroups-meta-networking
-
-> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> ---
->   .../dhcp/dhcp-relay_4.4.2.bb                  | 62 +++++++++++++++++++
->   ...0001-Makefile.am-only-build-dhcrelay.patch | 30 +++++++++
->   .../dhcp/files/default-relay                  | 12 ++++
->   .../dhcp/files/dhcrelay.service               | 10 +++
->   .../dhcp/files/init-relay                     | 44 +++++++++++++
->   5 files changed, 158 insertions(+)
->   create mode 100644 meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.2.bb
->   create mode 100644 meta-networking/recipes-connectivity/dhcp/files/0001-Makefile.am-only-build-dhcrelay.patch
->   create mode 100644 meta-networking/recipes-connectivity/dhcp/files/default-relay
->   create mode 100644 meta-networking/recipes-connectivity/dhcp/files/dhcrelay.service
->   create mode 100644 meta-networking/recipes-connectivity/dhcp/files/init-relay
-> 
-> diff --git a/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.2.bb b/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.2.bb
-> new file mode 100644
-> index 000000000..bd816106c
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.2.bb
-> @@ -0,0 +1,62 @@
-> +SECTION = "console/network"
-> +SUMMARY = "Internet Software Consortium DHCP Relay Agent"
-> +DESCRIPTION = "A DHCP relay agent passes DHCP requests from one \
-> +LAN to another, so that a DHCP server is not needed on every LAN."
-> +
-> +HOMEPAGE = "http://www.isc.org/"
-> +
-> +LICENSE = "ISC"
-> +LIC_FILES_CHKSUM = "file://LICENSE;beginline=4;md5=004a4db50a1e20972e924a8618747c01"
-> +
-> +DEPENDS = "openssl libcap zlib"
-> +
-> +SRC_URI = "https://ftp.isc.org/isc/dhcp/${PV}/dhcp-${PV}.tar.gz \
-> +           file://default-relay \
-> +           file://init-relay \
-> +           file://dhcrelay.service \
-> +           file://0001-Makefile.am-only-build-dhcrelay.patch \
-> +           "
-> +
-> +SRC_URI[md5sum] = "2afdaf8498dc1edaf3012efdd589b3e1"
-> +SRC_URI[sha256sum] = "1a7ccd64a16e5e68f7b5e0f527fd07240a2892ea53fe245620f4f5f607004521"
-> +
-> +UPSTREAM_CHECK_URI = "http://ftp.isc.org/isc/dhcp/"
-> +UPSTREAM_CHECK_REGEX = "(?P<pver>\d+\.\d+\.(\d+?))/"
-> +
-> +S = "${WORKDIR}/dhcp-${PV}"
-> +
-> +inherit autotools-brokensep systemd
-> +
-> +SYSTEMD_SERVICE_${PN} = "dhcrelay.service"
-> +SYSTEMD_AUTO_ENABLE_${PN} = "disable"
-> +
-> +CFLAGS += "-D_GNU_SOURCE -fcommon"
-> +LDFLAGS_append = " -pthread"
-> +
-> +EXTRA_OECONF = "--enable-paranoia \
-> +                --disable-static \
-> +                --enable-libtool \
-> +                --with-randomdev=/dev/random \
-> +               "
-> +
-> +# Enable shared libs per dhcp README
-> +do_configure_prepend () {
-> +    cp configure.ac+lt configure.ac
-> +}
-> +
-> +do_install_append () {
-> +    install -d ${D}${sysconfdir}/default
-> +    install -m 0644 ${WORKDIR}/default-relay ${D}${sysconfdir}/default/dhcp-relay
-> +
-> +    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-> +        install -d ${D}${systemd_unitdir}/system
-> +        install -m 0644 ${WORKDIR}/dhcrelay.service ${D}${systemd_unitdir}/system
-> +        sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/dhcrelay.service
-> +        sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir}/system/dhcrelay.service
-> +    else
-> +        install -d ${D}${sysconfdir}/init.d
-> +        install -m 0755 ${WORKDIR}/init-relay ${D}${sysconfdir}/init.d/dhcp-relay
-> +    fi
-> +}
-> +
-> +PARALLEL_MAKE = ""
-> diff --git a/meta-networking/recipes-connectivity/dhcp/files/0001-Makefile.am-only-build-dhcrelay.patch b/meta-networking/recipes-connectivity/dhcp/files/0001-Makefile.am-only-build-dhcrelay.patch
-> new file mode 100644
-> index 000000000..fed85d2a8
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/dhcp/files/0001-Makefile.am-only-build-dhcrelay.patch
-> @@ -0,0 +1,30 @@
-> +From 17cc080e58894644dd18664ac6f3451096d5f065 Mon Sep 17 00:00:00 2001
-> +From: Yi Zhao <yi.zhao@windriver.com>
-> +Date: Thu, 13 May 2021 15:23:16 +0800
-> +Subject: [PATCH] Makefile.am: only build dhcrelay
-> +
-> +Drop client and server build as we don't need them.
-> +
-> +Upstream-Status: Inappropriate [embedded specific]
-> +
-> +Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> +---
-> + Makefile.am | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/Makefile.am b/Makefile.am
-> +index ed692a5..34f9772 100644
-> +--- a/Makefile.am
-> ++++ b/Makefile.am
-> +@@ -38,7 +38,7 @@ endif
-> +
-> + # Use an autoconf substitution vs an automake conditional here
-> + # to fool automake when the bind directory does not exist.
-> +-SUBDIRS = @BINDSUBDIR@ includes tests common omapip client dhcpctl relay server
-> ++SUBDIRS = @BINDSUBDIR@ includes common omapip relay
-> +
-> + DIST_SUBDIRS = $(SUBDIRS) keama
-> +
-> +--
-> +2.17.1
-> +
-> diff --git a/meta-networking/recipes-connectivity/dhcp/files/default-relay b/meta-networking/recipes-connectivity/dhcp/files/default-relay
-> new file mode 100644
-> index 000000000..7961f014b
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/dhcp/files/default-relay
-> @@ -0,0 +1,12 @@
-> +# Defaults for dhcp-relay initscript
-> +# sourced by /etc/init.d/dhcp-relay
-> +
-> +# What servers should the DHCP relay forward requests to?
-> +# e.g: SERVERS="192.168.0.1"
-> +SERVERS=""
-> +
-> +# On what interfaces should the DHCP relay (dhrelay) serve DHCP requests?
-> +INTERFACES=""
-> +
-> +# Additional options that are passed to the DHCP relay daemon?
-> +OPTIONS=""
-> diff --git a/meta-networking/recipes-connectivity/dhcp/files/dhcrelay.service b/meta-networking/recipes-connectivity/dhcp/files/dhcrelay.service
-> new file mode 100644
-> index 000000000..15ff927d3
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/dhcp/files/dhcrelay.service
-> @@ -0,0 +1,10 @@
-> +[Unit]
-> +Description=DHCP Relay Agent Daemon
-> +After=network.target
-> +
-> +[Service]
-> +EnvironmentFile=@SYSCONFDIR@/default/dhcp-relay
-> +ExecStart=@SBINDIR@/dhcrelay -d --no-pid -q $SERVERS
-> +
-> +[Install]
-> +WantedBy=multi-user.target
-> diff --git a/meta-networking/recipes-connectivity/dhcp/files/init-relay b/meta-networking/recipes-connectivity/dhcp/files/init-relay
-> new file mode 100644
-> index 000000000..019a7e84c
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/dhcp/files/init-relay
-> @@ -0,0 +1,44 @@
-> +#!/bin/sh
-> +#
-> +# $Id: dhcp3-relay,v 1.1 2004/04/16 15:41:08 ml Exp $
-> +#
-> +
-> +# It is not safe to start if we don't have a default configuration...
-> +if [ ! -f /etc/default/dhcp-relay ]; then
-> +	echo "/etc/default/dhcp-relay does not exist! - Aborting..."
-> +	echo "create this file to fix the problem."
-> +	exit 1
-> +fi
-> +
-> +# Read init script configuration (interfaces the daemon should listen on
-> +# and the DHCP server we should forward requests to.)
-> +. /etc/default/dhcp-relay
-> +
-> +# Build command line for interfaces (will be passed to dhrelay below.)
-> +IFCMD=""
-> +if test "$INTERFACES" != ""; then
-> +	for I in $INTERFACES; do
-> +		IFCMD=${IFCMD}"-i "${I}" "
-> +	done
-> +fi
-> +
-> +DHCRELAYPID=/var/run/dhcrelay.pid
-> +
-> +case "$1" in
-> +	start)
-> +		start-stop-daemon -S -x /usr/sbin/dhcrelay -- -q $OPTIONS $IFCMD $SERVERS
-> +		;;
-> +	stop)
-> +		start-stop-daemon -K -x /usr/sbin/dhcrelay
-> +		;;
-> +	restart | force-reload)
-> +		$0 stop
-> +		sleep 2
-> +		$0 start
-> +		;;
-> +	*)
-> +		echo "Usage: /etc/init.d/dhcp-relay {start|stop|restart|force-reload}"
-> +		exit 1
-> +esac
-> +
-> +exit 0
-> 
