@@ -1,78 +1,95 @@
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.web10.6277.1622029985531213884
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.web10.6278.1622029986247796418
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 May 2021 04:53:05 -0700
+ Wed, 26 May 2021 04:53:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=b+BVqopj;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id ne24-20020a17090b3758b029015f2dafecb0so196734pjb.4
-        for <openembedded-devel@lists.openembedded.org>; Wed, 26 May 2021 04:53:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=mMA7o0hI;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id q25so745917pfn.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 26 May 2021 04:53:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=MMFX6ZHKw9OOIr/FqUoXNFmx3AxJWBSB1UC2XsRvh9g=;
-        b=b+BVqopj09z93IxGsNzWNCbvJBchCKNOBZK5YqLyMxRoEBYOkeEU8sXLhJodRMmriG
-         J2VsgXe1Wcwt4TI9pliflADPjCvlnSNSDQ1HPXMpitzv8ibjtUuReHt+crWKVSN9fGdl
-         dCaMAZjAIXtCtoGBLbFgfsX5XHM/sNPJhVHUj99zxjkcvRm6gRm2z10ecZyyY+9Crjfj
-         jNPIuYLlueko8R/3xzzR4U6bt6jdWKq81rYVaJFs/92oYWZMKLcsgSNEf0A0Qm7vhKjM
-         RJqny8M8AttZ6aWTB6vIuUByms8E1Vo881+57/YDl+WpYDayT5u0Yej9tpPRjKIObw00
-         Joug==
+        bh=PcndndtMOOmfGlqhT2juaFltQaSlh8hly6eBWUF+d7k=;
+        b=mMA7o0hI8A8E60HbtXYj66f9QEBUImk/JPpFsazPXI+sI8FiN1Kuk+yoXgwph/wnCw
+         xd1vHPo+dE0SRu42Ryd0Kr4jk1RZgi+TQWbuW9HVMBvKPMVe90CQWdhvsl23wR9IHqZv
+         UrF2QQvRKT8M1gfS5WNHjJQCJre+bNqm1aftzmRZ5Kwnoe4vgEM0XGOK3AkBN6b6BnzZ
+         lRpFlv2iqR9UNa53gd1jSSk/TtaLguTyYbHNEMIU+YMffMlTxbaCdj7xHEA5ncsRbuqg
+         C7J66Fkni7hCkdEYu66PxQhZUM06jJ20oMqjMH53tlPdxmAXJOVHfI9cTGGhiNqTUaXF
+         uF3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=MMFX6ZHKw9OOIr/FqUoXNFmx3AxJWBSB1UC2XsRvh9g=;
-        b=fvT22bf4aKsVAcc0onKXkU7RpELAjPOyTe0O7G+GhoLvg4EXrPU7WPjW56yGoNfqsf
-         H5EfJU9TnkrLUBS6MaBtS7q+Wnt8EnDLYGjnIBzXJJESI8P091L7KrcUgHlbf6Me27nx
-         SYen0Jn7YLtJSeeGp+9/10O8g/c6xYQRJBFFsaspAkTZIcmANwdM5oI4Fwp5uR3exUt6
-         6biLSS1KyYlCQSZxBH5C2ZupfK2IfcIFB6TltQtOiS43tYJYc2Fu8gF3YBX0hYTUOEcS
-         qOaeAsIxjb/7LWNLhp6o4fRX2yEKAZHsS7r7b7zChoDYZ6vuqF+F/iePRxNTPCLeNt+t
-         ff1w==
-X-Gm-Message-State: AOAM532sVEa5YWTGD3qySSghwMdueOFxLEN+Rp+mx6UZAUALC7URV3ce
-	QjNmCwpqFoSPveKG1WOth93u+uJiv0LrpQ==
-X-Google-Smtp-Source: ABdhPJxzkqUQccNe7Vh354oU4vqFbxjNXNn1qqSdw+4Dlh3FXli1Vc4Xb6Ht733y7/+L2CulahfgoA==
-X-Received: by 2002:a17:90a:1982:: with SMTP id 2mr32209157pji.185.1622029985001;
+        bh=PcndndtMOOmfGlqhT2juaFltQaSlh8hly6eBWUF+d7k=;
+        b=cfnW8jGdXRBB9gicbxNLUs1ZrsXRmG1XR7BxPDkg/OpnOWZ7sToqZ4XtYrT0gNz/Yh
+         zQldRfwYSgf3jyz/iXGhUp71Tz8YjjwN4wmHmMshPrAT8vkbnLpqOSdJNRi9Bs2wZrrv
+         B8LEHADX8EZzOxqV3MJQptJKW3IbEU1BIxyJ38/IDPFBjlUv2MRlQMl5ooHrVPHmxeHh
+         9DK+G3idsAxa+M+wC/9E2PD04IwUUT2YK+b52rmqZnMZv1K9/AY0XlYFGoVvppAhy4Kr
+         S+YGcWGv+kQjAzl6lKK3W+xus0GeOfh3SNj6Eb3IW9Yniv3tvXMDFQt03v3uRzBBKnA7
+         3Q2Q==
+X-Gm-Message-State: AOAM531STkVNSDpaMnJLf6vlMpWt7QVzQuwcJU/t/QD8tZlkq0PQbYd0
+	hpw/Sbb1Z/mcaxKChMRHeHHxd79CBdTilw==
+X-Google-Smtp-Source: ABdhPJzLKkd1DqwT6wr9DLytuMOlo6C089eVEpr8lb2+27/lFZEUXJXrgunaIaG+mhFryq93h2oYJA==
+X-Received: by 2002:a62:ab10:0:b029:2e8:d5a8:d635 with SMTP id p16-20020a62ab100000b02902e8d5a8d635mr17133008pff.74.1622029985680;
         Wed, 26 May 2021 04:53:05 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:68d3:e59c:b64:76e3])
-        by smtp.gmail.com with ESMTPSA id h22sm15408818pfn.55.2021.05.26.04.53.04
+        by smtp.gmail.com with ESMTPSA id h22sm15408818pfn.55.2021.05.26.04.53.05
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 May 2021 04:53:04 -0700 (PDT)
+        Wed, 26 May 2021 04:53:05 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [harkknott 19/23] trace-cmd: Conflict resolution
-Date: Wed, 26 May 2021 04:52:34 -0700
-Message-Id: <15938ed77bfb3acf1c66e30782cc82b7da10bc44.1622029873.git.akuster808@gmail.com>
+Subject: [harkknott 20/23] postgresql: upgrade 13.2 -> 13.3
+Date: Wed, 26 May 2021 04:52:35 -0700
+Message-Id: <5aa0e96d7ab3b2734335e6a9ba57a1ee34139d55.1622029873.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1622029873.git.akuster808@gmail.com>
 References: <cover.1622029873.git.akuster808@gmail.com>
 
-From: wangmy <wangmy@fujitsu.com>
+From: zangrc <zangrc.fnst@fujitsu.com>
 
-perf(oe-core) also uses the doc included in plugins/, so package it in own subdirs of trace-cmd.
+Refresh the following patch:
+0001-configure.in-bypass-autoconf-2.69-version-check.patch
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit d8402fdd6f6710effd763a0a9c06c83255e39722)
+(cherry picked from commit 48cb359db26f4fa0efb811c24a6306a56bf60483)
+[Bug fix update]
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../0001-configure.in-bypass-autoconf-2.69-version-check.patch  | 2 +-
+ .../postgresql/{postgresql_13.2.bb => postgresql_13.3.bb}       | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-dbs/postgresql/{postgresql_13.2.bb => postgresql_13.3.bb} (78%)
 
-diff --git a/meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb b/meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb
-index d39afff8e4..906ca2c1f3 100644
---- a/meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb
-+++ b/meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb
-@@ -12,6 +12,8 @@ S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-configure.in-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0001-configure.in-bypass-autoconf-2.69-version-check.patch
+index 970d750b13..45f283a02b 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0001-configure.in-bypass-autoconf-2.69-version-check.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0001-configure.in-bypass-autoconf-2.69-version-check.patch
+@@ -16,7 +16,7 @@ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+ +++ b/configure.in
+ @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch un
+  
+- AC_INIT([PostgreSQL], [13.2], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
++ AC_INIT([PostgreSQL], [13.3], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
+  
+ -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
+ -Untested combinations of 'autoconf' and PostgreSQL versions are not
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_13.2.bb b/meta-oe/recipes-dbs/postgresql/postgresql_13.3.bb
+similarity index 78%
+rename from meta-oe/recipes-dbs/postgresql/postgresql_13.2.bb
+rename to meta-oe/recipes-dbs/postgresql/postgresql_13.3.bb
+index ca8a6c7cee..862dd61bd6 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_13.2.bb
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_13.3.bb
+@@ -9,4 +9,4 @@ SRC_URI += "\
+    file://0001-configure.in-bypass-autoconf-2.69-version-check.patch \
+ "
  
- do_install() {
-        oe_runmake etcdir=${sysconfdir} DESTDIR=${D} install
-+       mkdir -p ${D}${libdir}/traceevent/plugins/${BPN}
-+       mv ${D}/${libdir}/traceevent/plugins/*.so ${D}${libdir}/traceevent/plugins/${BPN}/
- }
- 
- FILES_${PN} += "${libdir}/traceevent/plugins"
+-SRC_URI[sha256sum] = "5fd7fcd08db86f5b2aed28fcfaf9ae0aca8e9428561ac547764c2a2b0f41adfc"
++SRC_URI[sha256sum] = "3cd9454fa8c7a6255b6743b767700925ead1b9ab0d7a0f9dcb1151010f8eb4a1"
 -- 
 2.17.1
 
