@@ -1,82 +1,78 @@
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web08.6309.1622029984491647659
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.web10.6277.1622029985531213884
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 May 2021 04:53:04 -0700
+ Wed, 26 May 2021 04:53:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=SNXLwWph;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id kr9so639777pjb.5
-        for <openembedded-devel@lists.openembedded.org>; Wed, 26 May 2021 04:53:04 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=b+BVqopj;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id ne24-20020a17090b3758b029015f2dafecb0so196734pjb.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 26 May 2021 04:53:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=jtBWWLcD1262c9T40nWjr7cBvsClwHrB8/jhHTjWRGc=;
-        b=SNXLwWphKX3iquyNhzDg4mbMtatG1nTqRlH8UEBBdzwx2DWkeWZG3qZ/Vc8YLY+6yS
-         ccgBpQgopopgV/P7dVeWfu+QiM+L9m1GuSb5gwpRbZRJtdv9EpQH9R2c4sKumVbrhyZf
-         uZHkoMl6JVhYJo7fUMFdqFoI7XFj2dVf8nu0CzawmX/JTsS5UMh/jsiS3PZizIgED/kg
-         IFqARnMrQFGRXsuXjeY/vkJRyRuom1R7THIT+gNyndmTeivCekKKj+9tU8My0603Pu9C
-         Vc57XdWHYnlSxzQ+6FfY9F+KuSKkE/zXhIdaZt6j8bzXWEwSlSYvmA4o+dvsBTZZ9VFk
-         kbtA==
+        bh=MMFX6ZHKw9OOIr/FqUoXNFmx3AxJWBSB1UC2XsRvh9g=;
+        b=b+BVqopj09z93IxGsNzWNCbvJBchCKNOBZK5YqLyMxRoEBYOkeEU8sXLhJodRMmriG
+         J2VsgXe1Wcwt4TI9pliflADPjCvlnSNSDQ1HPXMpitzv8ibjtUuReHt+crWKVSN9fGdl
+         dCaMAZjAIXtCtoGBLbFgfsX5XHM/sNPJhVHUj99zxjkcvRm6gRm2z10ecZyyY+9Crjfj
+         jNPIuYLlueko8R/3xzzR4U6bt6jdWKq81rYVaJFs/92oYWZMKLcsgSNEf0A0Qm7vhKjM
+         RJqny8M8AttZ6aWTB6vIuUByms8E1Vo881+57/YDl+WpYDayT5u0Yej9tpPRjKIObw00
+         Joug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=jtBWWLcD1262c9T40nWjr7cBvsClwHrB8/jhHTjWRGc=;
-        b=UljORQjAofc+1PoBTlkxPWAKwl2Fqn/DhoowCZssHz6xpFAp/pvhMYDP0qyjZilXmC
-         fshPOLU2hcKi+KSJPuRqQjPf7A87XrcRTWgluNdz7jCUfewb0q0YB4yvvxZt+ujLnO2C
-         b4PGuAISQr2PxQUq+9vb3CGxxBVKiMnJNWwM2CaDtS3NKDcdDJ6INGoSKeq52hucNVQa
-         HEd31iEVvgqTp71XW2BCQ0uz29GDJtk1nVGYn0UwSVts8Ip9k03GmZq/hpHOgaWimTA7
-         1O5LtmveMTJnpiWoHflHE0ZWus1etTy+AcrhgcLf+jXR/imq0+wRZyOcuya0+t8PaD0D
-         n8hw==
-X-Gm-Message-State: AOAM531nltZyBSDo+ve2yLkyHuI5di2uCWTkpe1EB9N2d2yF4trDq2/E
-	ApwSm3BG8B56CUtnBThR/PEgeh1vl/1LaA==
-X-Google-Smtp-Source: ABdhPJy1p4/qY/poHzWyk7YPVua8rEX31Iq9S6fA9STDwV/oSofL8Apsn60DeHJGl8Cg6OJVwiFH/A==
-X-Received: by 2002:a17:903:22d1:b029:f2:67be:82fb with SMTP id y17-20020a17090322d1b02900f267be82fbmr35305135plg.15.1622029983904;
-        Wed, 26 May 2021 04:53:03 -0700 (PDT)
+        bh=MMFX6ZHKw9OOIr/FqUoXNFmx3AxJWBSB1UC2XsRvh9g=;
+        b=fvT22bf4aKsVAcc0onKXkU7RpELAjPOyTe0O7G+GhoLvg4EXrPU7WPjW56yGoNfqsf
+         H5EfJU9TnkrLUBS6MaBtS7q+Wnt8EnDLYGjnIBzXJJESI8P091L7KrcUgHlbf6Me27nx
+         SYen0Jn7YLtJSeeGp+9/10O8g/c6xYQRJBFFsaspAkTZIcmANwdM5oI4Fwp5uR3exUt6
+         6biLSS1KyYlCQSZxBH5C2ZupfK2IfcIFB6TltQtOiS43tYJYc2Fu8gF3YBX0hYTUOEcS
+         qOaeAsIxjb/7LWNLhp6o4fRX2yEKAZHsS7r7b7zChoDYZ6vuqF+F/iePRxNTPCLeNt+t
+         ff1w==
+X-Gm-Message-State: AOAM532sVEa5YWTGD3qySSghwMdueOFxLEN+Rp+mx6UZAUALC7URV3ce
+	QjNmCwpqFoSPveKG1WOth93u+uJiv0LrpQ==
+X-Google-Smtp-Source: ABdhPJxzkqUQccNe7Vh354oU4vqFbxjNXNn1qqSdw+4Dlh3FXli1Vc4Xb6Ht733y7/+L2CulahfgoA==
+X-Received: by 2002:a17:90a:1982:: with SMTP id 2mr32209157pji.185.1622029985001;
+        Wed, 26 May 2021 04:53:05 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:68d3:e59c:b64:76e3])
-        by smtp.gmail.com with ESMTPSA id h22sm15408818pfn.55.2021.05.26.04.53.03
+        by smtp.gmail.com with ESMTPSA id h22sm15408818pfn.55.2021.05.26.04.53.04
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 May 2021 04:53:03 -0700 (PDT)
+        Wed, 26 May 2021 04:53:04 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [harkknott 18/23] sysdig: disable building for ppc
-Date: Wed, 26 May 2021 04:52:33 -0700
-Message-Id: <bf945de831db67832b1c4deff8033c70ef5831c2.1622029873.git.akuster808@gmail.com>
+Subject: [harkknott 19/23] trace-cmd: Conflict resolution
+Date: Wed, 26 May 2021 04:52:34 -0700
+Message-Id: <15938ed77bfb3acf1c66e30782cc82b7da10bc44.1622029873.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1622029873.git.akuster808@gmail.com>
 References: <cover.1622029873.git.akuster808@gmail.com>
 
-From: Saul Wold <Saul.Wold@windriver.com>
+From: wangmy <wangmy@fujitsu.com>
 
-Sysdig depends on tbb which no longer builds for powerpc
+perf(oe-core) also uses the doc included in plugins/, so package it in own subdirs of trace-cmd.
 
-Signed-off-by: Saul Wold <saul.wold@windriver.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 433603cb7dd0243856509a552ff354dbc0fccd95)
+(cherry picked from commit d8402fdd6f6710effd763a0a9c06c83255e39722)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-extended/sysdig/sysdig_git.bb | 2 ++
+ meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig_git.bb b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-index d9da190578..f1b77070c1 100644
---- a/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-+++ b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-@@ -14,6 +14,7 @@ JIT_mipsarchn32 = ""
- JIT_mipsarchn64 = ""
- JIT_riscv64 = ""
- JIT_riscv32 = ""
-+JIT_powerpc = ""
+diff --git a/meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb b/meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb
+index d39afff8e4..906ca2c1f3 100644
+--- a/meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb
++++ b/meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb
+@@ -12,6 +12,8 @@ S = "${WORKDIR}/git"
  
- DEPENDS += "libb64 lua${JIT} zlib c-ares grpc-native grpc curl ncurses jsoncpp tbb jq openssl elfutils protobuf protobuf-native jq-native"
- RDEPENDS_${PN} = "bash"
-@@ -49,3 +50,4 @@ COMPATIBLE_HOST_libc-musl = "null"
- COMPATIBLE_HOST_mips = "null"
- COMPATIBLE_HOST_riscv64 = "null"
- COMPATIBLE_HOST_riscv32 = "null"
-+COMPATIBLE_HOST_powerpc = "null"
+ do_install() {
+        oe_runmake etcdir=${sysconfdir} DESTDIR=${D} install
++       mkdir -p ${D}${libdir}/traceevent/plugins/${BPN}
++       mv ${D}/${libdir}/traceevent/plugins/*.so ${D}${libdir}/traceevent/plugins/${BPN}/
+ }
+ 
+ FILES_${PN} += "${libdir}/traceevent/plugins"
 -- 
 2.17.1
 
