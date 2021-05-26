@@ -1,897 +1,228 @@
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web11.8428.1622039769752099310
+Received: from IND01-BO1-obe.outbound.protection.outlook.com (IND01-BO1-obe.outbound.protection.outlook.com [40.107.139.49])
+ by mx.groups.io with SMTP id smtpd.web11.503.1622050376524261783
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 May 2021 07:36:10 -0700
+ Wed, 26 May 2021 10:32:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 52B7F1516
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 May 2021 07:36:09 -0700 (PDT)
-Received: from oss-tx204.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B8E4F3F73D
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 May 2021 07:36:08 -0700 (PDT)
-From: "Ross Burton" <ross@burtonini.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH][meta-gnome] meta-gnome: add Cogl/Clutter from oe-core
-Date: Wed, 26 May 2021 15:36:04 +0100
-Message-Id: <20210526143604.3921863-1-ross.burton@arm.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@kpit.com header.s=selector1 header.b=bkqf1bWj;
+ spf=pass (domain: kpit.com, ip: 40.107.139.49, mailfrom: nisha.parrakat@kpit.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=AVfqfjyFWWDvtS95/4xx+iqfzCvSKh06Lo/gVpvGSXNbsLolw/ICoN/3AHopEP4ZuyHbf8Tb3IBaywmY3Lj3ynuNUFvdso7wjnVPW5xrkWpgiC3zDXJiVwMaqAzA9wESH1+OOu2V+TIhEmw5TvmDYHwvEKAaB82xGY7Hesgjgz6Bs3av5oOoktbIWEpyF0eNMy7wDDBTRzGTYcR+Mx84xg7zP3+d/4PLeA7+BKBUIgiiW6ZHtiL7ZNIT2xeTfkMhM2hbGGTs1NWyEf3DY3YDSsa+u301u6tWYti58dJr95+uzn/WrNQ9yOQf1VrpWUc264DIYpveY+qFQRJx1GyTww==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Pctp45vmv7KzpS0vCjNfg+NaJkfCkkVLU/XHqKJVZRQ=;
+ b=jnqr6lE59JLZITuRN5E43MOhavk0dqJXHhPB8pbSJUXWpEtb1b3ZcS2G9/MtnSxRipHFm00Kz908tq2buevsjGlqvOOKjL20DU4DJvDqc9j8oZlBHskO4/Df+/WZeJCFpoFgXpBwwwhQCLsFVY+swp8UEXu7KJ1MvRI/2mL5XaoakvNNWH+n3l8iTX21QJHhbxMTDgCdLum7Dtw8xui0m4UAdt+yWIifGlJNTrDDDGMtN64SmfWbvAzoloIyCM+qU5QdQdfHsHdo+Gp/vIYzW5iOp2711mRv+CsU238GmrTJrKy3bd1At7fraupv6AwRiiur1iGK0abTjO0W0d8zTA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=kpit.com; dmarc=pass action=none header.from=kpit.com;
+ dkim=pass header.d=kpit.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Pctp45vmv7KzpS0vCjNfg+NaJkfCkkVLU/XHqKJVZRQ=;
+ b=bkqf1bWj7rYbojzw3iLZficoxS7VctBLA/Ilx2+ahsprzigf5gjuja33GXHXpDv+j/dS53MapoDG8yHn+RPLObHsvigUIoXUYFqRjj9QPmtHHlZWf38LBHA9HhjHAruSXeQxaqjYlseJctq5zK4SbVBb/EauqCJEqXk8NbE6kVI=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=kpit.com;
+Received: from PN0PR01MB5283.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:36::6)
+ by PNYPR01MB5164.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:52::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4173.20; Wed, 26 May
+ 2021 17:32:50 +0000
+Received: from PN0PR01MB5283.INDPRD01.PROD.OUTLOOK.COM
+ ([fe80::8d5b:7904:5e3b:7167]) by PN0PR01MB5283.INDPRD01.PROD.OUTLOOK.COM
+ ([fe80::8d5b:7904:5e3b:7167%3]) with mapi id 15.20.4150.027; Wed, 26 May 2021
+ 17:32:50 +0000
+From: "Nisha Parrakat" <Nisha.Parrakat@kpit.com>
+To: openembedded-devel@lists.openembedded.org,
+	raj.khem@gmail.com
+Cc: nisha.parrakat@kpit.com
+Subject: [meta-oe][master][PATCH 1/2] p7zip: build and package lib7z.so needed for fastboot
+Date: Wed, 26 May 2021 17:32:28 +0000
+Message-Id: <20210526173229.553-1-Nisha.Parrakat@kpit.com>
+X-Mailer: git-send-email 2.17.1
+X-Originating-IP: [2003:c0:f3b:b059:3a22:e2ff:fe1a:a816]
+X-ClientProxiedBy: PR3P189CA0024.EURP189.PROD.OUTLOOK.COM
+ (2603:10a6:102:52::29) To PN0PR01MB5283.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:c01:36::6)
+Return-Path: Nisha.Parrakat@kpit.com
 MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from bsys_traas.speedport.ip (2003:c0:f3b:b059:3a22:e2ff:fe1a:a816) by PR3P189CA0024.EURP189.PROD.OUTLOOK.COM (2603:10a6:102:52::29) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4173.21 via Frontend Transport; Wed, 26 May 2021 17:32:48 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 9dc552e6-6e3a-40dc-beef-08d9206c4860
+X-MS-TrafficTypeDiagnostic: PNYPR01MB5164:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: 
+	<PNYPR01MB5164C3E4E54B586BAB424A96EE249@PNYPR01MB5164.INDPRD01.PROD.OUTLOOK.COM>
+X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	NRXDODwDC1ZVuaE03BuLc0UwxI8HBJH/pPQbsbmPhtvyGboAwLyx7cpAyb+kVdGotOsuIYtBSb74iFjqRI59Jwo6B2NW/rvSZJHEct8zVOJsG1l+WbWoJar4P2TtG0YyJSNxanmyoNW2R0Km3r0hMPyb2geJVZDFCjLI6g9jfacJYDcRHH7cFex8WHEGs2n8pHKey6yYtEhrC+cw7YAlVoT6X2CdDFoZQUpsWtSxJGv4QyNjnSxM5xSUFEKKcOPF3sX+Ficxfg0X0Wsn/jWXeQaNb0qGVpku14Vap9yoRc5KTJUH8CRt1h/OGTQQbtCBoplI9I3ilqg3AKeYWhiaKaszDz5Xx5kuKxpU7qWSMsYiVvh8XjrCgZNPup3B7VlrweXqS10ilVkTTAUa1Pr9o84MTzsRrWag+hSM7kdRsk88RC+19T6FtTWfrY1n4aIuDqqwykKJAkMI8Do1a/KLNEvjaDfcorKd9/QMown3qvj/+AFwxCb8SLYycpmRFwpEc0aEJWPQwRJZp3TCHSPXQolub6r6yRb8LJlA8q/laM/ifZRBRiowFS6cTVpJlKwR/pn1joeVextRihF9dp7i5Yltn5hRxYA0okh3LQtD2FTH0Eghg51UyzGlJmO5A7ksoLGbPH71DXGZZHDs5FBH/6lWev8quhtpCRhGg+Lx3maDBpKy0t8150LvpRpXJYH9dmTvNAu/cVTjvalPV3P5fA==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN0PR01MB5283.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(366004)(498600001)(52116002)(107886003)(8936002)(86362001)(4326008)(66946007)(66476007)(66574015)(5660300002)(6512007)(6506007)(6486002)(1076003)(66556008)(19627235002)(2616005)(2906002)(38100700002)(83380400001)(6666004)(186003)(16526019)(8676002)(36756003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	=?us-ascii?Q?F7hqazST6H3/1ao9yIYXXbCBzbTX0SJe77UGrsNBBn4F2HILsi1kUFkcxVWb?=
+ =?us-ascii?Q?aRNuddva8hdnkiQUR7YPi+92zGY96fcMbMjkT2Nmarp9gd+xROrgX6k8otFO?=
+ =?us-ascii?Q?biPQ1vQ19GaHcremRL63h/Jcq3SLU3CHRMxH1lKmZmxP1xjwNdplpRjYtGNv?=
+ =?us-ascii?Q?9FF11fctirxfoYzYYcxyAA3OwWMQM/GD2ijMGT38S6dDIieBcJUMACGHv9kj?=
+ =?us-ascii?Q?iJ4ZKTkRrayTedZdMUPLxLxo0EMfmTxn50uCKdQQZ5HwzXy2XIzKWYz8aZOA?=
+ =?us-ascii?Q?6mQm2COSFBPzMUbpioQ8voT5My2eq6NxszwE0OeRdUSfewUIhv0w87XdDSa6?=
+ =?us-ascii?Q?mxU0CZiRV0g0bQnXLxGiUPJ9CvygU9FBqOF2twHokahtBydeMx2sQCNm/9rN?=
+ =?us-ascii?Q?R24sRyQIIoP47ugexcIqKdf6BXb3ZMlnrmdZKiPWxhpelikYCw5deciX4b9c?=
+ =?us-ascii?Q?gdgys9X4UGpajvzV9js45n1FnnV4wGnkP3vb51eBQAIGE3mjgQwuauGarO3G?=
+ =?us-ascii?Q?gpyy6VMKfNtwdtNhtVdaMz1nuYJadIGPI6e2kyNNU89UpLW6f9pEgZRzZBuT?=
+ =?us-ascii?Q?y9FJJU8EJzw75TPt2rDeyDFfrC0EVnZ1wGTgB/Qi527GR2YZytAVjVQUrPl4?=
+ =?us-ascii?Q?HuhbEmhsoYLkkBTMlTNJFhrmVKV3xrHMy9PUxvuiU2n1V9fI8pDPmxBWWcBe?=
+ =?us-ascii?Q?aBUsAaYoWQVJqpSY7/ESGaOZLZ8PZnFMPUkJ7VoRzVENKw0ZC4oO/+Ob/Rod?=
+ =?us-ascii?Q?jVXAoL13okDZtt60i7OwY2ZpXWXSg5siXR2tPHFrkyU8WEb0qDDbZ8vxN40A?=
+ =?us-ascii?Q?AXXTMaSRD7GFq55sMhYfyM9C+WZnExBd1c8dhTPyhqMVh1GLNyW4+/xqVWIH?=
+ =?us-ascii?Q?fBvRvgIhWfVn8uVpg1Fy5j+GFXBWu+QhDOBRQszcl/OXOZvJvB1DR+YCzzbV?=
+ =?us-ascii?Q?r7iMVpwmbNEeqEvrIbFoGczqbYTtCXomWjBRTCqosqJJUUV9iNE6pZLgJvZo?=
+ =?us-ascii?Q?KsWIVpEGijfmFl8k0gOcxxOviooRG1Tg1R/XJ0E+UEY3bTjLZw+aAds3dF6H?=
+ =?us-ascii?Q?v+QrbK1zjrNZyEkHw+vbGtQEe5BZU9U/fjSZhHsXiidOb8TIG363pRBs5VnB?=
+ =?us-ascii?Q?9Sr8+cCuhmDbcFc3Ywoznh5yA8DBYC/wZxZSuuPE1fzSpjWpxunvyKKvpn3h?=
+ =?us-ascii?Q?pUrEJwBmLGXlHEgcGCu74hapjmlnFkbugAnOtI+wK+QOyKzV95CIGQNKm5YH?=
+ =?us-ascii?Q?dxvaA2Mw2jszMx9fFUvgGn5Et2C/N5Sd5+40p5fJDgjDt8nOwtqS1/l7Vvcp?=
+ =?us-ascii?Q?H89qMux4RcG/O2wRJe9+GTsOVMZ7SklzOAvnBB/UcSjhaaqVi+l9qIRAyZEw?=
+ =?us-ascii?Q?xsUl6lpNflIG7N4uh1MJ7/dm2/Ki?=
+X-OriginatorOrg: kpit.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9dc552e6-6e3a-40dc-beef-08d9206c4860
+X-MS-Exchange-CrossTenant-AuthSource: PN0PR01MB5283.INDPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2021 17:32:49.5071
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3539451e-b46e-4a26-a242-ff61502855c7
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: D3+vuh2My0bHyUAVhZYfA51Et2z+J9r4rs+fMAimFecEDx9audTYB4LA+S+QBJBF
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PNYPR01MB5164
+Content-Type: text/plain
 Content-Transfer-Encoding: quoted-printable
 
-Nothing in openembedded-core needs Clutter now, and Clutter is abandoned
-upstream.  Move it to meta-gnome as there are still a few users of
-Clutter in Gnome.
+From: Nisha Parrakat <nisha.parrakat@kpit.com>
 
-Signed-off-by: Ross Burton <ross.burton@arm.com>
+a) use option 7z to build the lib7z.so library
+This is needed for android-tools for building fastboot
+from android-tools
+
+b) Packaged the lib7z.so and codec libraries as a part of this recipe
+Fastboot RDepends on it lib7z.so
+
+c) Fixed a C++17 forbidden error when lib7z.so is built
+
+fixes the below error
+
+| ../../../../CPP/7zip/Archive/Wim/WimHandler.cpp: In member function 'virt=
+ual LONG NArchive::NWim::CHandler::GetArchiveProperty(PROPID, PROPVARIANT*)=
+':
+| ../../../../CPP/7zip/Archive/Wim/WimHandler.cpp:308:11: error: use of an =
+operand of type 'bool' in 'operator++' is forbidden in C++17
+|   308 |           numMethods++;
+|       |           ^~~~~~~~~~
+| ../../../../CPP/7zip/Archive/Wim/WimHandler.cpp:318:9: error: use of an o=
+perand of type 'bool' in 'operator++' is forbidden in C++17
+|   318 |         numMethods++;
+
+Signed-off-by: Nisha Parrakat <Nisha.Parrakat@kpit.com>
 ---
- meta-gnome/classes/clutter.bbclass            |  18 +++
- .../recipes-graphics/clutter/clutter-1.0.inc  |  49 ++++++
- ...ypes-as-it-is-build-configuration-sp.patch | 143 ++++++++++++++++++
- .../clutter-1.0/install-examples.patch        |  19 +++
- .../run-installed-tests-with-tap-output.patch |  30 ++++
- .../clutter/clutter-1.0/run-ptest             |   3 +
- .../clutter/clutter-1.0_1.26.4.bb             |  10 ++
- .../clutter/clutter-gst-3.0.inc               |  23 +++
- ...binary-needed-for-core-image-clutter.patch |  33 ++++
- .../clutter/clutter-gst-3.0_3.0.27.bb         |   7 +
- .../clutter/clutter-gtk-1.0.inc               |  23 +++
- ...iable-for-enabling-disabling-introsp.patch |  37 +++++
- .../clutter/clutter-gtk-1.0_1.8.4.bb          |   7 +
- meta-gnome/recipes-graphics/cogl/cogl-1.0.inc |  84 ++++++++++
- ...figure.ac-don-t-require-eglmesaext.h.patch |  92 +++++++++++
- .../recipes-graphics/cogl/cogl-1.0_1.22.8.bb  |   6 +
- .../packagegroup-core-clutter.bb              |  22 +++
- 17 files changed, 606 insertions(+)
- create mode 100644 meta-gnome/classes/clutter.bbclass
- create mode 100644 meta-gnome/recipes-graphics/clutter/clutter-1.0.inc
- create mode 100644 meta-gnome/recipes-graphics/clutter/clutter-1.0/0001-=
-Remove-clutter.types-as-it-is-build-configuration-sp.patch
- create mode 100644 meta-gnome/recipes-graphics/clutter/clutter-1.0/insta=
-ll-examples.patch
- create mode 100644 meta-gnome/recipes-graphics/clutter/clutter-1.0/run-i=
-nstalled-tests-with-tap-output.patch
- create mode 100644 meta-gnome/recipes-graphics/clutter/clutter-1.0/run-p=
-test
- create mode 100644 meta-gnome/recipes-graphics/clutter/clutter-1.0_1.26.=
-4.bb
- create mode 100644 meta-gnome/recipes-graphics/clutter/clutter-gst-3.0.i=
-nc
- create mode 100644 meta-gnome/recipes-graphics/clutter/clutter-gst-3.0/0=
-001-Install-example-binary-needed-for-core-image-clutter.patch
- create mode 100644 meta-gnome/recipes-graphics/clutter/clutter-gst-3.0_3=
-.0.27.bb
- create mode 100644 meta-gnome/recipes-graphics/clutter/clutter-gtk-1.0.i=
-nc
- create mode 100644 meta-gnome/recipes-graphics/clutter/clutter-gtk-1.0/0=
-001-Add-a-config-variable-for-enabling-disabling-introsp.patch
- create mode 100644 meta-gnome/recipes-graphics/clutter/clutter-gtk-1.0_1=
-.8.4.bb
- create mode 100644 meta-gnome/recipes-graphics/cogl/cogl-1.0.inc
- create mode 100644 meta-gnome/recipes-graphics/cogl/cogl-1.0/0001-config=
-ure.ac-don-t-require-eglmesaext.h.patch
- create mode 100644 meta-gnome/recipes-graphics/cogl/cogl-1.0_1.22.8.bb
- create mode 100644 meta-gnome/recipes-graphics/packagegroups/packagegrou=
-p-core-clutter.bb
+ ...nge_numMethods_from_bool_to_unsigned.patch | 25 +++++++++++++++++++
+ meta-oe/recipes-extended/p7zip/p7zip_16.02.bb | 21 ++++++++++++++--
+ 2 files changed, 44 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/p7zip/files/change_numMethods_=
+from_bool_to_unsigned.patch
 
-diff --git a/meta-gnome/classes/clutter.bbclass b/meta-gnome/classes/clut=
-ter.bbclass
+diff --git a/meta-oe/recipes-extended/p7zip/files/change_numMethods_from_bo=
+ol_to_unsigned.patch b/meta-oe/recipes-extended/p7zip/files/change_numMetho=
+ds_from_bool_to_unsigned.patch
 new file mode 100644
-index 0000000000..24b53a13e4
+index 000000000..edde52593
 --- /dev/null
-+++ b/meta-gnome/classes/clutter.bbclass
-@@ -0,0 +1,18 @@
-+def get_minor_dir(v):
-+    import re
-+    m =3D re.match(r"^([0-9]+)\.([0-9]+)", v)
-+    return "%s.%s" % (m.group(1), m.group(2))
++++ b/meta-oe/recipes-extended/p7zip/files/change_numMethods_from_bool_to_u=
+nsigned.patch
+@@ -0,0 +1,25 @@
++fixes the below error
 +
-+def get_real_name(n):
-+    import re
-+    m =3D re.match(r"^([a-z]+(-[a-z]+)?)(-[0-9]+\.[0-9]+)?", n)
-+    return "%s" % (m.group(1))
++| ../../../../CPP/7zip/Archive/Wim/WimHandler.cpp: In member function 'vir=
+tual LONG NArchive::NWim::CHandler::GetArchiveProperty(PROPID, PROPVARIANT*=
+)':
++| ../../../../CPP/7zip/Archive/Wim/WimHandler.cpp:308:11: error: use of an=
+ operand of type 'bool' in 'operator++' is forbidden in C++17
++|   308 |           numMethods++;
++|       |           ^~~~~~~~~~
++| ../../../../CPP/7zip/Archive/Wim/WimHandler.cpp:318:9: error: use of an =
+operand of type 'bool' in 'operator++' is forbidden in C++17
++|   318 |         numMethods++;
 +
-+VERMINOR =3D "${@get_minor_dir("${PV}")}"
-+REALNAME =3D "${@get_real_name("${BPN}")}"
 +
-+SRC_URI =3D "${GNOME_MIRROR}/${REALNAME}/${VERMINOR}/${REALNAME}-${PV}.t=
-ar.xz;name=3Darchive"
-+S =3D "${WORKDIR}/${REALNAME}-${PV}"
-+
-+CLUTTERBASEBUILDCLASS ??=3D "autotools"
-+inherit ${CLUTTERBASEBUILDCLASS} pkgconfig gtk-doc gettext
-diff --git a/meta-gnome/recipes-graphics/clutter/clutter-1.0.inc b/meta-g=
-nome/recipes-graphics/clutter/clutter-1.0.inc
-new file mode 100644
-index 0000000000..80472178be
---- /dev/null
-+++ b/meta-gnome/recipes-graphics/clutter/clutter-1.0.inc
-@@ -0,0 +1,49 @@
-+SUMMARY =3D "Graphics library for creating hardware-accelerated user int=
-erfaces"
-+DESCRIPTION =3D "Clutter is an Open GL based interactive canvas library,=
- \
-+designed for creating fast, mainly 2D single window applications such as=
- media \
-+box UIs, presentations, kiosk style applications and so on."
-+HOMEPAGE =3D "http://www.clutter-project.org/"
-+LICENSE =3D "LGPLv2.1+"
-+
-+inherit clutter ptest-gnome features_check upstream-version-is-even gobj=
-ect-introspection
-+# depends on cogl-1.0 which needs opengl
-+REQUIRED_DISTRO_FEATURES ?=3D "opengl"
-+
-+DEPENDS =3D "pango glib-2.0 json-glib atk udev cogl-1.0"
-+PACKAGE_BEFORE_PN +=3D "${PN}-examples"
-+AUTOTOOLS_AUXDIR =3D "${S}/build-aux"
-+
-+EDEPENDS_X11 =3D "virtual/libx11 libxi libxfixes"
-+EDEPENDS_GLX =3D "virtual/libgl"
-+EDEPENDS_EGL =3D "virtual/egl"
-+EDEPENDS_WAYLAND =3D "wayland libxkbcommon gdk-pixbuf"
-+
-+EDEPENDS_EVDEV =3D "libxkbcommon"
-+ERDEPENDS_EVDEV =3D "xkeyboard-config"
-+
-+# Disable pretty much everything, override in platform specific set up
-+EXTRA_OECONF +=3D "--disable-quartz-backend	\
-+	     	 --disable-win32-backend	\
-+	     	 --disable-cex100-backend	\
-+	     	 --disable-tslib-input		\
-+	    	"
-+
-+PACKAGECONFIG[gdk] =3D "--enable-gdk-backend,--disable-gdk-backend,gtk+3=
-"
-+PACKAGECONFIG[x11] =3D "--enable-x11-backend,--disable-x11-backend,${EDE=
-PENDS_X11}"
-+PACKAGECONFIG[glx] =3D ",,${EDEPENDS_X11} ${EDEPENDS_GLX}"
-+PACKAGECONFIG[egl] =3D "--enable-egl-backend,--disable-egl-backend,${EDE=
-PENDS_EGL}"
-+PACKAGECONFIG[evdev] =3D "--enable-evdev-input,--disable-evdev-input,${E=
-DEPENDS_EVDEV},${ERDEPENDS_EVDEV}"
-+PACKAGECONFIG[wayland] =3D "--enable-wayland-backend,--disable-wayland-b=
-ackend,${EDEPENDS_WAYLAND}"
-+PACKAGECONFIG[wayland-compositor] =3D "--enable-wayland-compositor,--dis=
-able-wayland-compositor,wayland"
-+
-+# Default configuration, distros might want to override
-+PACKAGECONFIG ??=3D "egl gdk \
-+                   ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)} =
-\
-+                   ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'glx x=
-11', '', d)}"
-+
-+FILES_${PN}-examples =3D "${libdir}/clutter/examples"
-+
-+do_configure_prepend() {
-+	# see https://bugzilla.gnome.org/show_bug.cgi?id=3D661128 for this
-+	touch -t 200001010000 ${S}/po/clutter-1.0.pot
-+}
-diff --git a/meta-gnome/recipes-graphics/clutter/clutter-1.0/0001-Remove-=
-clutter.types-as-it-is-build-configuration-sp.patch b/meta-gnome/recipes-=
-graphics/clutter/clutter-1.0/0001-Remove-clutter.types-as-it-is-build-con=
-figuration-sp.patch
-new file mode 100644
-index 0000000000..7b3c1980b6
---- /dev/null
-+++ b/meta-gnome/recipes-graphics/clutter/clutter-1.0/0001-Remove-clutter=
-.types-as-it-is-build-configuration-sp.patch
-@@ -0,0 +1,143 @@
-+From 3a0404dfbc65c6a864e01d1200a48074e19d5def Mon Sep 17 00:00:00 2001
-+From: Alexander Kanavin <alex.kanavin@gmail.com>
-+Date: Fri, 2 Sep 2016 14:28:38 +0300
-+Subject: [PATCH] Remove clutter.types as it is build configuration-speci=
-fic.
++use unsigned instead of bool
++Signed-off-by: Nisha Parrakat <Nisha.Parrakat@kpit.com>
 +
 +Upstream-Status: Pending
-+Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
-+---
-+ doc/reference/clutter.types | 122 -------------------------------------=
--------
-+ 1 file changed, 122 deletions(-)
-+ delete mode 100644 doc/reference/clutter.types
-+
-+diff --git a/doc/reference/clutter.types b/doc/reference/clutter.types
-+deleted file mode 100644
-+index 0037acc..0000000
-+--- a/doc/reference/clutter.types
-++++ /dev/null
-+@@ -1,122 +0,0 @@
-+-cally_actor_get_type
-+-cally_clone_get_type
-+-cally_group_get_type
-+-cally_rectangle_get_type
-+-cally_root_get_type
-+-cally_stage_get_type
-+-cally_text_get_type
-+-cally_texture_get_type
-+-cally_util_get_type
-+-clutter_action_get_type
-+-clutter_actor_box_get_type
-+-clutter_actor_get_type
-+-clutter_actor_meta_get_type
-+-clutter_align_constraint_get_type
-+-clutter_alpha_get_type
-+-clutter_animatable_get_type
-+-clutter_animation_get_type
-+-clutter_animator_get_type
-+-clutter_animator_key_get_type
-+-clutter_backend_get_type
-+-clutter_behaviour_depth_get_type
-+-clutter_behaviour_ellipse_get_type
-+-clutter_behaviour_get_type
-+-clutter_behaviour_opacity_get_type
-+-clutter_behaviour_path_get_type
-+-clutter_behaviour_rotate_get_type
-+-clutter_behaviour_scale_get_type
-+-clutter_bin_layout_get_type
-+-clutter_bind_constraint_get_type
-+-clutter_binding_pool_get_type
-+-clutter_blur_effect_get_type
-+-clutter_box_get_type
-+-clutter_box_layout_get_type
-+-clutter_brightness_contrast_effect_get_type
-+-clutter_cairo_texture_get_type
-+-clutter_canvas_get_type
-+-clutter_child_meta_get_type
-+-clutter_click_action_get_type
-+-clutter_clip_node_get_type
-+-clutter_clone_get_type
-+-clutter_color_get_type
-+-clutter_color_node_get_type
-+-clutter_colorize_effect_get_type
-+-clutter_constraint_get_type
-+-clutter_container_get_type
-+-clutter_content_get_type
-+-clutter_deform_effect_get_type
-+-clutter_desaturate_effect_get_type
-+-clutter_device_manager_get_type
-+-clutter_drag_action_get_type
-+-clutter_drop_action_get_type
-+-clutter_effect_get_type
-+-clutter_event_get_type
-+-clutter_event_sequence_get_type
-+-clutter_fixed_layout_get_type
-+-clutter_flow_layout_get_type
-+-clutter_fog_get_type
-+-clutter_geometry_get_type
-+-clutter_gesture_action_get_type
-+-clutter_glx_texture_pixmap_get_type
-+-clutter_grid_layout_get_type
-+-clutter_group_get_type
-+-clutter_image_get_type
-+-clutter_input_device_get_type
-+-clutter_interval_get_type
-+-clutter_keyframe_transition_get_type
-+-clutter_knot_get_type
-+-clutter_layout_manager_get_type
-+-clutter_layout_meta_get_type
-+-clutter_list_model_get_type
-+-clutter_margin_get_type
-+-clutter_media_get_type
-+-clutter_model_get_type
-+-clutter_model_iter_get_type
-+-clutter_offscreen_effect_get_type
-+-clutter_page_turn_effect_get_type
-+-clutter_paint_node_get_type
-+-clutter_paint_volume_get_type
-+-clutter_pan_action_get_type
-+-clutter_param_color_get_type
-+-clutter_param_fixed_get_type
-+-clutter_param_units_get_type
-+-clutter_path_constraint_get_type
-+-clutter_path_get_type
-+-clutter_path_node_get_type
-+-clutter_perspective_get_type
-+-clutter_pipeline_node_get_type
-+-clutter_point_get_type
-+-clutter_property_transition_get_type
-+-clutter_rect_get_type
-+-clutter_rectangle_get_type
-+-clutter_rotate_action_get_type
-+-clutter_score_get_type
-+-clutter_script_get_type
-+-clutter_scriptable_get_type
-+-clutter_scroll_actor_get_type
-+-clutter_settings_get_type
-+-clutter_shader_effect_get_type
-+-clutter_shader_float_get_type
-+-clutter_shader_get_type
-+-clutter_shader_int_get_type
-+-clutter_shader_matrix_get_type
-+-clutter_size_get_type
-+-clutter_snap_constraint_get_type
-+-clutter_stage_get_type
-+-clutter_stage_manager_get_type
-+-clutter_state_get_type
-+-clutter_state_key_get_type
-+-clutter_swipe_action_get_type
-+-clutter_table_layout_get_type
-+-clutter_tap_action_get_type
-+-clutter_text_buffer_get_type
-+-clutter_text_get_type
-+-clutter_text_node_get_type
-+-clutter_texture_get_type
-+-clutter_texture_node_get_type
-+-clutter_timeline_get_type
-+-clutter_transition_get_type
-+-clutter_transition_group_get_type
-+-clutter_units_get_type
-+-clutter_vertex_get_type
-+-clutter_zoom_action_get_type
-+--=20
-+2.9.3
-+
-diff --git a/meta-gnome/recipes-graphics/clutter/clutter-1.0/install-exam=
-ples.patch b/meta-gnome/recipes-graphics/clutter/clutter-1.0/install-exam=
-ples.patch
-new file mode 100644
-index 0000000000..ce9ab3a248
---- /dev/null
-+++ b/meta-gnome/recipes-graphics/clutter/clutter-1.0/install-examples.pa=
-tch
-@@ -0,0 +1,19 @@
-+Install the examples to $libdir/clutter/.
-+
-+Signed-off-by: Ross Burton <ross.burton@intel.com>
-+Upstream-Status: Inappropriate
-+
-+Index: clutter-1.26.2/examples/Makefile.am
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+--- clutter-1.26.2.orig/examples/Makefile.am
-++++ clutter-1.26.2/examples/Makefile.am
-+@@ -33,7 +33,8 @@ AM_CPPFLAGS =3D \
-+ 	-I$(top_srcdir)/clutter \
-+ 	-I$(top_builddir)/clutter
-+=20
-+-noinst_PROGRAMS =3D $(all_examples)
-++exampledir =3D $(pkglibdir)/examples
-++example_PROGRAMS =3D $(all_examples)
-+=20
-+ EXTRA_DIST =3D redhand.png
-+=20
-diff --git a/meta-gnome/recipes-graphics/clutter/clutter-1.0/run-installe=
-d-tests-with-tap-output.patch b/meta-gnome/recipes-graphics/clutter/clutt=
-er-1.0/run-installed-tests-with-tap-output.patch
-new file mode 100644
-index 0000000000..fef82eaf92
---- /dev/null
-+++ b/meta-gnome/recipes-graphics/clutter/clutter-1.0/run-installed-tests=
--with-tap-output.patch
-@@ -0,0 +1,30 @@
-+From d6ceb5a44b28e0e50ede22b84984d8516897de4b Mon Sep 17 00:00:00 2001
-+From: Jussi Kukkonen <jussi.kukkonen@intel.com>
-+Date: Mon, 27 Apr 2015 20:12:33 +0300
-+Subject: [PATCH] Run installed tests with tap output
-+
-+Configure output from installed-tests to be TAP compliant such that
-+gnome-desktop-testing-runner properly interprets the results.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Tim Orling <TicoTimo@gmail.com>
-+
-+---
-+ build-aux/autotools/glib-tap.mk | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/build-aux/autotools/glib-tap.mk b/build-aux/autotools/glib-=
-tap.mk
-+index a4f0dad..51cfa31 100644
-+--- a/build-aux/autotools/glib-tap.mk
-++++ b/build-aux/autotools/glib-tap.mk
-+@@ -127,7 +127,8 @@ installed_test_meta_DATA =3D $(installed_testcases:=3D=
-.test)
-+ %.test: %$(EXEEXT) Makefile
-+ 	$(AM_V_GEN) (echo '[Test]' > $@.tmp; \
-+ 	echo 'Type=3Dsession' >> $@.tmp; \
-+-	echo 'Exec=3Denv G_ENABLE_DIAGNOSTIC=3D0 CLUTTER_ENABLE_DIAGNOSTIC=3D0=
- $(installed_testdir)/$<' >> $@.tmp; \
-++	echo 'Exec=3Denv G_ENABLE_DIAGNOSTIC=3D0 CLUTTER_ENABLE_DIAGNOSTIC=3D0=
- $(installed_testdir)/$< --tap' >> $@.tmp; \
-++	echo 'Output=3DTAP' >> $@.tmp; \
-+ 	mv $@.tmp $@)
-+=20
-+ CLEANFILES +=3D $(installed_test_meta_DATA)
-diff --git a/meta-gnome/recipes-graphics/clutter/clutter-1.0/run-ptest b/=
-meta-gnome/recipes-graphics/clutter/clutter-1.0/run-ptest
-new file mode 100644
-index 0000000000..98877e5226
---- /dev/null
-+++ b/meta-gnome/recipes-graphics/clutter/clutter-1.0/run-ptest
-@@ -0,0 +1,3 @@
-+#! /bin/sh
-+
-+gnome-desktop-testing-runner clutter
-diff --git a/meta-gnome/recipes-graphics/clutter/clutter-1.0_1.26.4.bb b/=
-meta-gnome/recipes-graphics/clutter/clutter-1.0_1.26.4.bb
-new file mode 100644
-index 0000000000..ee549fbdd5
---- /dev/null
-+++ b/meta-gnome/recipes-graphics/clutter/clutter-1.0_1.26.4.bb
-@@ -0,0 +1,10 @@
-+require clutter-1.0.inc
-+
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
-16c"
-+
-+SRC_URI[archive.md5sum] =3D "624dd776a5159de0267587b1df6b97b2"
-+SRC_URI[archive.sha256sum] =3D "8b48fac159843f556d0a6be3dbfc6b083fc6d9c5=
-8a20a49a6b4919ab4263c4e6"
-+SRC_URI +=3D "file://install-examples.patch \
-+            file://run-installed-tests-with-tap-output.patch \
-+            file://0001-Remove-clutter.types-as-it-is-build-configuratio=
-n-sp.patch \
-+            file://run-ptest"
-diff --git a/meta-gnome/recipes-graphics/clutter/clutter-gst-3.0.inc b/me=
-ta-gnome/recipes-graphics/clutter/clutter-gst-3.0.inc
-new file mode 100644
-index 0000000000..73315c97ec
---- /dev/null
-+++ b/meta-gnome/recipes-graphics/clutter/clutter-gst-3.0.inc
-@@ -0,0 +1,23 @@
-+SUMMARY =3D "GStreamer integration library for Clutter"
-+DESCRIPTION =3D "Clutter-Gst is an integration library for using GStream=
-er with Clutter. \
-+It provides a GStreamer sink to upload frames to GL and an actor that \
-+implements the ClutterGstPlayer interface using playbin."
-+HOMEPAGE =3D "http://www.clutter-project.org/"
-+BUGTRACKER =3D "https://gitlab.gnome.org/GNOME/clutter-gst/-/issues"
-+LICENSE =3D "LGPLv2+"
-+
-+inherit clutter features_check upstream-version-is-even gobject-introspe=
-ction
-+# depends on clutter-1.0 which depends on cogl-1.0
-+REQUIRED_DISTRO_FEATURES ?=3D "opengl"
-+
-+export GST_PLUGIN_SCANNER_1_0=3D"${S}/gst-plugin-scanner-dummy"
-+
-+SRC_URI +=3D "file://0001-Install-example-binary-needed-for-core-image-c=
-lutter.patch"
-+
-+DEPENDS =3D "gstreamer1.0-plugins-base gstreamer1.0-plugins-bad clutter-=
-1.0 libgudev"
-+RDEPENDS_${PN} +=3D "gstreamer1.0-meta-base"
-+PACKAGES  =3D+ "${PN}-examples"
-+
-+FILES_${PN}          +=3D "${libdir}/gstreamer-1.0/lib*.so"
-+FILES_${PN}-dev      +=3D "${libdir}/gstreamer-1.0/*.la"
-+FILES_${PN}-examples  =3D "${bindir}/video-player ${bindir}/video-sink"
-diff --git a/meta-gnome/recipes-graphics/clutter/clutter-gst-3.0/0001-Ins=
-tall-example-binary-needed-for-core-image-clutter.patch b/meta-gnome/reci=
-pes-graphics/clutter/clutter-gst-3.0/0001-Install-example-binary-needed-f=
-or-core-image-clutter.patch
-new file mode 100644
-index 0000000000..0b26b990d7
---- /dev/null
-+++ b/meta-gnome/recipes-graphics/clutter/clutter-gst-3.0/0001-Install-ex=
-ample-binary-needed-for-core-image-clutter.patch
-@@ -0,0 +1,33 @@
-+From d77c711277bf075ce0545c19b322f040c49c778a Mon Sep 17 00:00:00 2001
-+From: Alexander Kanavin <alex.kanavin@gmail.com>
-+Date: Thu, 30 Apr 2015 12:19:13 +0300
-+Subject: [PATCH] Install example binary needed for core-image-clutter
-+
-+Signed-off-by: Zhai Edwin <edwin.zhai@intel.com>
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+Imported from clutter-gst-1.8 package, git://git.openembedded.org/openem=
-bedded,
-+commit ae28ee3f7a060b9e0d13154a84f2444a98490b5b, updated for clutter-gst=
- 3.0
-+
-+Signed-off-by: Tomas Frydrych <tomas@sleepfive.com>
-+Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
-+---
-+ examples/Makefile.am | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/examples/Makefile.am b/examples/Makefile.am
-+index bfbc1b5..09655e3 100644
-+--- a/examples/Makefile.am
-++++ b/examples/Makefile.am
-+@@ -1,6 +1,6 @@
-+ NULL =3D #
-+=20
-+-noinst_PROGRAMS =3D camera-player video-player video-sink video-sink-na=
-vigation video-content
-++bin_PROGRAMS =3D camera-player video-player video-sink video-sink-navig=
-ation video-content
-+=20
-+ AM_CPPFLAGS =3D -I$(top_srcdir) \
-+ 		$(MAINTAINER_CFLAGS) \
-+--=20
-+2.1.4
-+
-diff --git a/meta-gnome/recipes-graphics/clutter/clutter-gst-3.0_3.0.27.b=
-b b/meta-gnome/recipes-graphics/clutter/clutter-gst-3.0_3.0.27.bb
-new file mode 100644
-index 0000000000..35382453c2
---- /dev/null
-+++ b/meta-gnome/recipes-graphics/clutter/clutter-gst-3.0_3.0.27.bb
-@@ -0,0 +1,7 @@
-+require clutter-gst-3.0.inc
-+
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
-16c \
-+                    file://clutter-gst/clutter-gst.h;beginline=3D1;endli=
-ne=3D24;md5=3D95baacba194e814c110ea3bdf25ddbf4"
-+
-+SRC_URI[archive.md5sum] =3D "2bf9d7ca146c9d71e86c45cd00e9a28e"
-+SRC_URI[archive.sha256sum] =3D "fe69bd6c659d24ab30da3f091eb91cd1970026d4=
-31179b0724f13791e8ad9f9d"
-diff --git a/meta-gnome/recipes-graphics/clutter/clutter-gtk-1.0.inc b/me=
-ta-gnome/recipes-graphics/clutter/clutter-gtk-1.0.inc
-new file mode 100644
-index 0000000000..9a28b5219b
---- /dev/null
-+++ b/meta-gnome/recipes-graphics/clutter/clutter-gtk-1.0.inc
-@@ -0,0 +1,23 @@
-+SUMMARY =3D "Library for embedding a Clutter canvas in a GTK+ applicatio=
-n"
-+DESCRIPTION =3D "Clutter-GTK is a library providing facilities to integr=
-ate Clutter into GTK+ \
-+applications and vice versa. It provides a GTK+ widget, GtkClutterEmbed,=
- for embedding the \
-+a Clutter stage into any GtkContainer; and GtkClutterActor, a Clutter \
-+actor for embedding any GtkWidget inside a Clutter stage."
-+HOMEPAGE =3D "http://www.clutter-project.org/"
-+BUGTRACKER =3D "https://gitlab.gnome.org/GNOME/clutter/-/issues"
-+LICENSE =3D "LGPLv2+"
-+
-+CLUTTERBASEBUILDCLASS =3D "meson"
-+inherit clutter features_check upstream-version-is-even gobject-introspe=
-ction gtk-doc
-+
-+# depends on clutter-1.0 which depends on cogl-1.0
-+REQUIRED_DISTRO_FEATURES ?=3D "opengl"
-+# depends on gtk+3
-+ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
-+
-+DEPENDS =3D "clutter-1.0 gtk+3"
-+PACKAGES  =3D+ "${PN}-examples"
-+
-+GTKDOC_MESON_OPTION =3D "enable_docs"
-+
-+GIR_MESON_OPTION =3D 'enable_gi'
-diff --git a/meta-gnome/recipes-graphics/clutter/clutter-gtk-1.0/0001-Add=
--a-config-variable-for-enabling-disabling-introsp.patch b/meta-gnome/reci=
-pes-graphics/clutter/clutter-gtk-1.0/0001-Add-a-config-variable-for-enabl=
-ing-disabling-introsp.patch
-new file mode 100644
-index 0000000000..e21c6fd903
---- /dev/null
-+++ b/meta-gnome/recipes-graphics/clutter/clutter-gtk-1.0/0001-Add-a-conf=
-ig-variable-for-enabling-disabling-introsp.patch
-@@ -0,0 +1,37 @@
-+From 7233883c6bd4e80c0e91b29b5c76fe798023e9fe Mon Sep 17 00:00:00 2001
-+From: Alexander Kanavin <alex.kanavin@gmail.com>
-+Date: Mon, 11 Feb 2019 16:41:13 +0100
-+Subject: [PATCH] Add a config variable for enabling/disabling introspect=
-ion
-+
-+Upstream-Status: Pending
-+Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
-+---
-+ clutter-gtk/meson.build | 2 +-
-+ meson_options.txt       | 4 ++++
-+ 2 files changed, 5 insertions(+), 1 deletion(-)
-+
-+diff --git a/clutter-gtk/meson.build b/clutter-gtk/meson.build
-+index 5d6847d..5d934b6 100644
-+--- a/clutter-gtk/meson.build
-++++ b/clutter-gtk/meson.build
-+@@ -49,7 +49,7 @@ clutter_gtk_dep =3D declare_dependency(link_with: clut=
-ter_gtk,
-+                                      dependencies: [ mathlib_dep, clutt=
-er_dep, gtk_dep ],
-+                                      include_directories: include_direc=
-tories('.'))
-+=20
-+-if not meson.is_cross_build()
-++if get_option('enable_gi')
-+   gnome.generate_gir(clutter_gtk,
-+                      sources: clutter_gtk_headers + clutter_gtk_sources=
-,
-+                      namespace: 'GtkClutter',
-+diff --git a/meson_options.txt b/meson_options.txt
-+index aaf59f1..b7e51c3 100644
-+--- a/meson_options.txt
-++++ b/meson_options.txt
-+@@ -2,3 +2,7 @@ option('enable_docs',
-+        type: 'boolean',
-+        value: false,
-+        description: 'Enable generating the API reference (depends on GT=
-K-Doc)')
-++option('enable_gi',
-++       type: 'boolean',
-++       value: false,
-++       description: 'Enable gobject introspection')
-diff --git a/meta-gnome/recipes-graphics/clutter/clutter-gtk-1.0_1.8.4.bb=
- b/meta-gnome/recipes-graphics/clutter/clutter-gtk-1.0_1.8.4.bb
-new file mode 100644
-index 0000000000..53948c8944
---- /dev/null
-+++ b/meta-gnome/recipes-graphics/clutter/clutter-gtk-1.0_1.8.4.bb
-@@ -0,0 +1,7 @@
-+require clutter-gtk-1.0.inc
-+
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7fbc338309ac38fefcd64b04bb903=
-e34"
-+
-+SRC_URI +=3D " file://0001-Add-a-config-variable-for-enabling-disabling-=
-introsp.patch"
-+SRC_URI[archive.md5sum] =3D "b363ac9878e2337be887b8ee9e1da00e"
-+SRC_URI[archive.sha256sum] =3D "521493ec038973c77edcb8bc5eac23eed4164511=
-7894aaee7300b2487cb42b06"
-diff --git a/meta-gnome/recipes-graphics/cogl/cogl-1.0.inc b/meta-gnome/r=
-ecipes-graphics/cogl/cogl-1.0.inc
-new file mode 100644
-index 0000000000..d581ad1c04
---- /dev/null
-+++ b/meta-gnome/recipes-graphics/cogl/cogl-1.0.inc
-@@ -0,0 +1,84 @@
-+SUMMARY =3D "Modern 3D graphics API with associated utility APIs"
-+DESCRIPTION =3D "Cogl is a small open source library for using 3D graphi=
-cs \
-+hardware for rendering. The API departs from the flat state machine styl=
-e of \
-+OpenGL and is designed to make it easy to write orthogonal components th=
-at \
-+can render without stepping on each others toes."
-+HOMEPAGE =3D "https://gitlab.gnome.org/GNOME/cogl"
-+LICENSE =3D "MIT"
-+
-+inherit clutter features_check upstream-version-is-even gobject-introspe=
-ction
-+# cogl-1.0 needs opengl to build
-+REQUIRED_DISTRO_FEATURES ?=3D "opengl"
-+
-+DEPENDS =3D "glib-2.0 gdk-pixbuf"
-+PACKAGES =3D+ "${PN}-examples \
-+             libcogl libcogl-gles2 libcogl-pango libcogl-path \
-+            "
-+AUTOTOOLS_AUXDIR =3D "${S}/build"
-+
-+# Extra DEPENDS for PACKAGECONFIG
-+EDEPENDS_GL =3D "virtual/libgl libdrm"
-+EDEPENDS_GLES2 =3D "virtual/libgles2"
-+EDEPENDS_KMS =3D "libdrm virtual/egl"
-+EDEPENDS_EGL =3D "virtual/egl"
-+EDEPENDS_X11 =3D "virtual/libx11 libxcomposite libxdamage libxfixes libx=
-randr"
-+EDEPENDS_WAYLAND =3D "virtual/egl virtual/libgles2 wayland"
-+
-+# Extra RDEPENDS for PACKAGECONFIG
-+# This has to be explictly listed, because cogl dlopens the backends
-+ERDEPENDS_GL    =3D "libgl"
-+ERDEPENDS_GLES2 =3D "libgles2"
-+
-+# GLESv1 is rarely tested, so disable it
-+EXTRA_OECONF +=3D "--enable-examples-install	\
-+	       	 --enable-debug		 	\
-+	       	 --disable-gles1		\
-+	         --disable-cairo                \
-+	    	"
-+DEBUG_OPTIMIZATION_append =3D " -Wno-error=3Dmaybe-uninitialized"
-+
-+# OpenGL/GLX
-+PACKAGECONFIG[glx] =3D "--enable-gl --enable-glx,--disable-gl --disable-=
-glx,${EDEPENDS_GL} ${EDEPENDS_X11},${ERDEPENDS_GL}"
-+
-+# GLESv2
-+PACKAGECONFIG[gles2] =3D "--enable-gles2,--disable-gles2,${EDEPENDS_GLES=
-2}, ${ERDEPENDS_GLES2}"
-+
-+# EGL backends
-+PACKAGECONFIG[egl-kms] =3D "--enable-kms-egl-platform,--disable-kms-egl-=
-platform,${EDEPENDS_KMS}"
-+PACKAGECONFIG[egl-null] =3D "--enable-null-egl-platform,--disable-null-e=
-gl-platform"
-+PACKAGECONFIG[egl-x11] =3D "--enable-xlib-egl-platform,--disable-xlib-eg=
-l-platform,${EDEPENDS_X11} ${EDEPENDS_EGL}"
-+PACKAGECONFIG[egl-wayland] =3D "--enable-wayland-egl-platform,--disable-=
-wayland-egl-platform,${EDEPENDS_WAYLAND}"
-+
-+# Wayland (server-side)
-+PACKAGECONFIG[wayland-server] =3D "--enable-wayland-egl-server,--disable=
--wayland-egl-server,${EDEPENDS_WAYLAND}"
-+
-+# Support rendering text directly with Pango
-+PACKAGECONFIG[cogl-pango] =3D "--enable-cogl-pango,--disable-cogl-pango,=
-pango"
-+
-+# Respect the DISTRO_FEATURES to pull in GLX or Wayland as appropriate b=
-y
-+# default.
-+PACKAGECONFIG ??=3D "cogl-pango gles2 \
-+                   ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'e=
-gl-wayland', '', d)} \
-+                   ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'glx e=
-gl-x11', '', d)} \
-+                   "
-+
-+do_compile_prepend() {
-+        export GIR_EXTRA_LIBS_PATH=3D"${B}/cogl/.libs"
-+}
-+
-+FILES_${PN} =3D ""
-+FILES_${PN}-examples =3D "${bindir}/* ${datadir}/cogl/examples-data/*"
-+FILES_libcogl =3D "${libdir}/libcogl${SOLIBS} ${libdir}/girepository-1.0=
-/Cogl-*.typelib"
-+FILES_libcogl-gles2 =3D "${libdir}/libcogl-gles2${SOLIBS}"
-+FILES_libcogl-pango =3D "${libdir}/libcogl-pango${SOLIBS} ${libdir}/gire=
-pository-1.0/CoglPango*.typelib"
-+
-+FILES_libcogl-path =3D "${libdir}/libcogl-path${SOLIBS}"
-+
-+# For backwards compatibility after Debian-renaming
-+RPROVIDES_libcogl =3D "cogl-1.0"
-+RCONFLICTS_libcogl =3D "cogl-1.0"
-+RREPLACES_libcogl =3D "cogl-1.0"
-+
-+RDEPENDS_${PN}-dev =3D "libcogl"
-+
-+COMPATIBLE_HOST_armv4 =3D 'null'
-diff --git a/meta-gnome/recipes-graphics/cogl/cogl-1.0/0001-configure.ac-=
-don-t-require-eglmesaext.h.patch b/meta-gnome/recipes-graphics/cogl/cogl-=
-1.0/0001-configure.ac-don-t-require-eglmesaext.h.patch
-new file mode 100644
-index 0000000000..328984a63f
---- /dev/null
-+++ b/meta-gnome/recipes-graphics/cogl/cogl-1.0/0001-configure.ac-don-t-r=
-equire-eglmesaext.h.patch
-@@ -0,0 +1,92 @@
-+From bb9765a926588ebfe1eb324fbbe8fc22d419eebe Mon Sep 17 00:00:00 2001
-+From: Max Krummenacher <max.krummenacher@toradex.com>
-+Date: Thu, 25 Jun 2020 11:27:40 +0000
-+Subject: [PATCH] configure.ac: don't require eglmesaext.h
-+
-+E.g. the Vivante EGL implementation does not provide eglmesaext.h.
-+
-+The commit moves the check for header file existence outside of the
-+check for existence of a egl packageconfig and makes the existence
-+of eglmesaext.h optional.
-+
-+fixes commit fb1acfec ("Fix building against libglvnd-provided EGL heade=
-rs")
-+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
-+
-+Upstream-Status: Submitted [https://gitlab.gnome.org/GNOME/cogl/-/merge_=
-requests/28]
-+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
-+---
-+ configure.ac | 51 ++++++++++++++++++++++++++++++++-------------------
-+ 1 file changed, 32 insertions(+), 19 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index b7ba95d..0d1d8de 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -1212,22 +1212,6 @@ AS_IF([test "x$NEED_EGL" =3D "xyes" && test "x$EG=
-L_CHECKED" !=3D "xyes"],
-+         PKG_CHECK_EXISTS([egl],
-+           [COGL_PKG_REQUIRES=3D"$COGL_PKG_REQUIRES egl"],
-+           [
-+-            AC_CHECK_HEADERS(
-+-              [EGL/egl.h],
-+-              [],
-+-              [AC_MSG_ERROR([Unable to locate required EGL headers])])
-+-            AC_CHECK_HEADERS(
-+-              [EGL/eglext.h],
-+-              [],
-+-              [AC_MSG_ERROR([Unable to locate required EGL headers])],
-+-              [#include <EGL/egl.h>])
-+-            AC_CHECK_HEADERS(
-+-              [EGL/eglmesaext.h],
-+-              [],
-+-              [AC_MSG_ERROR([Unable to locate required EGL headers])],
-+-              [#include <EGL/egl.h>
-+-#include <EGL/eglext.h>])
-+-
-+             AC_CHECK_LIB(EGL, [eglInitialize],
-+               [COGL_EXTRA_LDFLAGS=3D"$COGL_EXTRA_LDFLAGS -lEGL"],
-+               [AC_MSG_ERROR([Unable to locate required EGL library])])
-+@@ -1236,9 +1220,38 @@ AS_IF([test "x$NEED_EGL" =3D "xyes" && test "x$EG=
-L_CHECKED" !=3D "xyes"],
-+           ]
-+           )
-+=20
-+-        COGL_EGL_INCLUDES=3D"#include <EGL/egl.h>
-+-#include <EGL/eglext.h>
-+-#include <EGL/eglmesaext.h>"
-++dnl Test for the existence of egl headers.
-++dnl egl*.h includes eglplatform.h which on __unix__ defaults to a X11 p=
-latform.
-++dnl In that case AC_CHECK_HEADERS failes if X11 headers are not availab=
-le.
-++dnl Set the usual include guard define and, if the EGL implementation d=
-oesn't
-++dnl use that guard fall back to USE_OZONE and EGL_NO_X11 platforms whic=
-h don't
-++dnl require additional headers.
-++        AC_CHECK_HEADERS(
-++          [EGL/egl.h],
-++          [COGL_EGL_INCLUDES=3D"#include <EGL/egl.h>"],
-++          [AC_MSG_ERROR([Unable to locate required EGL headers])],
-++          [#define __egl_h_
-++ #define USE_OZONE
-++ #define EGL_NO_X11])
-++        AC_CHECK_HEADERS(
-++          [EGL/eglext.h],
-++          [COGL_EGL_INCLUDES=3D"$COGL_EGL_INCLUDES
-++#include <EGL/eglext.h>"],
-++          [AC_MSG_ERROR([Unable to locate required EGL headers])],
-++          [#define __eglext_h_
-++ #define USE_OZONE
-++ #define EGL_NO_X11
-++$COGL_EGL_INCLUDES])
-++        AC_CHECK_HEADERS(
-++          [EGL/eglmesaext.h],
-++          [COGL_EGL_INCLUDES=3D"$COGL_EGL_INCLUDES
-++#include <EGL/eglmesaext.h>"],
-++          [],
-++          [#define __eglmesaext_h_
-++#define USE_OZONE
-++#define EGL_NO_X11
-++$COGL_EGL_INCLUDES])
-++
-+         AC_SUBST([COGL_EGL_INCLUDES])
-+       ])
-+=20
-+--=20
-+2.20.1
-+
-diff --git a/meta-gnome/recipes-graphics/cogl/cogl-1.0_1.22.8.bb b/meta-g=
-nome/recipes-graphics/cogl/cogl-1.0_1.22.8.bb
-new file mode 100644
-index 0000000000..b9446fab38
---- /dev/null
-+++ b/meta-gnome/recipes-graphics/cogl/cogl-1.0_1.22.8.bb
-@@ -0,0 +1,6 @@
-+require cogl-1.0.inc
-+
-+SRC_URI +=3D "file://0001-configure.ac-don-t-require-eglmesaext.h.patch"
-+SRC_URI[archive.sha256sum] =3D "a805b2b019184710ff53d0496f9f0ce6dcca420c=
-141a0f4f6fcc02131581d759"
-+
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D1b1a508d91d25ca607c83f92f3e31=
-c84"
-diff --git a/meta-gnome/recipes-graphics/packagegroups/packagegroup-core-=
-clutter.bb b/meta-gnome/recipes-graphics/packagegroups/packagegroup-core-=
-clutter.bb
-new file mode 100644
-index 0000000000..2e7b47dd40
---- /dev/null
-+++ b/meta-gnome/recipes-graphics/packagegroups/packagegroup-core-clutter=
-.bb
-@@ -0,0 +1,22 @@
-+#
-+# Copyright (C) 2007 OpenedHand Ltd.
-+#
-+
-+SUMMARY =3D "Clutter package groups"
-+
-+PR =3D "r6"
-+
-+inherit packagegroup features_check
-+# rdepends on clutter-*
-+REQUIRED_DISTRO_FEATURES =3D "opengl"
-+
-+PACKAGES =3D "\
-+    ${PN}-core \
-+    "
-+
-+SUMMARY_${PN}-core =3D "Clutter graphics library"
-+RDEPENDS_${PN}-core =3D "\
-+    clutter-1.0 \
-+    clutter-gst-3.0 \
-+    clutter-gtk-1.0 \
-+    "
---=20
-2.25.1
++--- ./CPP/7zip/Archive/Wim/WimHandler.cpp       2021-05-20 10:51:56.997402=
+701 +0000
+++++ ./CPP/7zip/Archive/Wim/WimHandler.cpp       2021-05-20 10:52:16.665604=
+125 +0000
++@@ -298,7 +298,7 @@
++
++       AString res;
++
++-      bool numMethods =3D 0;
+++      unsigned numMethods =3D 0;
++       for (unsigned i =3D 0; i < ARRAY_SIZE(k_Methods); i++)
++       {
++         if (methodMask & ((UInt32)1 << i
+diff --git a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb b/meta-oe/recipe=
+s-extended/p7zip/p7zip_16.02.bb
+index 13479a90f..ada49114c 100644
+--- a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
++++ b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
+@@ -9,6 +9,7 @@ SRC_URI =3D "http://downloads.sourceforge.net/p7zip/p7zip/$=
+{PV}/p7zip_${PV}_src_al
+            file://do_not_override_compiler_and_do_not_strip.patch \
+            file://CVE-2017-17969.patch \
+            file://0001-Fix-narrowing-errors-Wc-11-narrowing.patch \
++           file://change_numMethods_from_bool_to_unsigned.patch \
+            "
 
+ SRC_URI[md5sum] =3D "a0128d661cfe7cc8c121e73519c54fbf"
+@@ -16,10 +17,26 @@ SRC_URI[sha256sum] =3D "5eb20ac0e2944f6cb9c2d51dd6c4518=
+941c185347d4089ea89087ffdd6
+
+ S =3D "${WORKDIR}/${BPN}_${PV}"
+
++do_compile_append() {
++    oe_runmake 7z
++}
++FILES_${PN} +=3D "${libdir}/* ${bindir}/7z"
++
++FILES_SOLIBSDEV =3D ""
++INSANE_SKIP_${PN} +=3D "dev-so"
++
+ do_install() {
+        install -d ${D}${bindir}
+-       install -m 0755 ${S}/bin/* ${D}${bindir}
++       install -d ${D}${bindir}/Codecs
++       install -d ${D}${libdir}
++       install -d ${D}${libdir}/Codecs
++       install -m 0755 ${S}/bin/7za ${D}${bindir}
+        ln -s 7za ${D}${bindir}/7z
++       install -m 0755 ${S}/bin/Codecs/* ${D}${libdir}/Codecs/
++       install -m 0755 ${S}/bin/7z.so ${D}${libdir}/lib7z.so
+ }
+
+-BBCLASSEXTEND =3D "native"
++RPROVIDES_${PN} +=3D "lib7z.so()(64bit) 7z lib7z.so"
++RPROVIDES_${PN}-dev +=3D "lib7z.so()(64bit) 7z lib7z.so"
++
++BBCLASSEXTEND =3D "native nativesdk"
+--
+2.17.1
+
+This message contains information that may be privileged or confidential an=
+d is the property of the KPIT Technologies Ltd. It is intended only for the=
+ person to whom it is addressed. If you are not the intended recipient, you=
+ are not authorized to read, print, retain copy, disseminate, distribute, o=
+r use this message or any part thereof. If you receive this message in erro=
+r, please notify the sender immediately and delete all copies of this messa=
+ge. KPIT Technologies Ltd. does not accept any liability for virus infected=
+ mails.
