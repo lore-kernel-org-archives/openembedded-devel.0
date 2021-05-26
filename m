@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.3797.1622064791269017166
+ by mx.groups.io with SMTP id smtpd.web08.3857.1622064791744970959
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 May 2021 14:33:11 -0700
+ Wed, 26 May 2021 14:33:12 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=46114 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lm19H-0000vH-NM; Thu, 27 May 2021 00:33:09 +0300
+	id 1lm19J-0000vH-Pc; Thu, 27 May 2021 00:33:10 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/7] python3-flask-wtf: Upgrade 0.14.3 -> 0.15.1
-Date: Thu, 27 May 2021 00:32:44 +0300
-Message-Id: <20210526213248.10348-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/7] python3-flask-socketio: Upgrade 5.0.1 -> 5.0.3
+Date: Thu, 27 May 2021 00:32:45 +0300
+Message-Id: <20210526213248.10348-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210526213248.10348-1-leon.anavi@konsulko.com>
 References: <20210526213248.10348-1-leon.anavi@konsulko.com>
@@ -30,40 +30,35 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.15.1:
+Upgrade to release 5.0.3:
 
-- Add python_requires metadata to avoid installing on unsupported
-  Python versions.
-- Drop support for Python < 3.6.
-- FileSize validator.
-- Extra requirement email installs the email_validator package.
-- Fixed Flask 2.0 warnings.
-- Various documentation fixes.
-- Various CI fixes.
+- Document the use of simple-websocket with the development web
+  server
+- Show transport in example apps
+- Added Open Collective funding option
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...python3-flask-wtf_0.14.3.bb => python3-flask-wtf_0.15.1.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-flask-wtf_0.14.3.bb => python3-flask-wtf_0.15.1.bb} (70%)
+ ...-flask-socketio_5.0.1.bb => python3-flask-socketio_5.0.3.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-flask-socketio_5.0.1.bb => python3-flask-socketio_5.0.3.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-flask-wtf_0.14.3.bb b/meta-python/recipes-devtools/python/python3-flask-wtf_0.15.1.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-flask-wtf_0.14.3.bb
-rename to meta-python/recipes-devtools/python/python3-flask-wtf_0.15.1.bb
-index 213a0b58b..84b2a9e27 100644
---- a/meta-python/recipes-devtools/python/python3-flask-wtf_0.14.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask-wtf_0.15.1.bb
-@@ -2,8 +2,7 @@ DESCRIPTION = "Simple integration of Flask and WTForms."
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3ca6bb31670492f791e6a9f2fb9f8a80"
+diff --git a/meta-python/recipes-devtools/python/python3-flask-socketio_5.0.1.bb b/meta-python/recipes-devtools/python/python3-flask-socketio_5.0.3.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-flask-socketio_5.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-flask-socketio_5.0.3.bb
+index 4c5d0a3fb..5def7621e 100644
+--- a/meta-python/recipes-devtools/python/python3-flask-socketio_5.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-flask-socketio_5.0.3.bb
+@@ -9,7 +9,7 @@ inherit pypi setuptools3
  
--SRC_URI[md5sum] = "1b60b7dd1245b0d0173c21123717af61"
--SRC_URI[sha256sum] = "d417e3a0008b5ba583da1763e4db0f55a1269d9dd91dcc3eb3c026d3c5dbd720"
-+SRC_URI[sha256sum] = "ff177185f891302dc253437fe63081e7a46a4e99aca61dfe086fb23e54fff2dc"
+ PYPI_PACKAGE = "Flask-SocketIO"
  
- PYPI_PACKAGE = "Flask-WTF"
+-SRC_URI[sha256sum] = "5c4319f5214ada20807857dc8fdf3dc7d2afe8d6dd38f5c516c72e2be47d2227"
++SRC_URI[sha256sum] = "4fb968c43bc384f184cd1a25c1842297c2e3d6efc2f755a61be6d4406858220f"
  
+ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-flask \
 -- 
 2.17.1
 
