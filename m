@@ -1,132 +1,79 @@
 Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web10.6275.1622029983039204112
+ by mx.groups.io with SMTP id smtpd.web10.6276.1622029983898713822
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 May 2021 04:53:03 -0700
+ Wed, 26 May 2021 04:53:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=X6VXccMs;
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=qH6tuo/h;
  spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id ne24-20020a17090b3758b029015f2dafecb0so196688pjb.4
-        for <openembedded-devel@lists.openembedded.org>; Wed, 26 May 2021 04:53:02 -0700 (PDT)
+Received: by mail-pj1-f52.google.com with SMTP id ep16-20020a17090ae650b029015d00f578a8so200496pjb.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 26 May 2021 04:53:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=PwcjOQKCh9cBxbHJ47D95nYWB51p/5PJEUy2PT9wnXE=;
-        b=X6VXccMsBbGpIMy37CQYyCSiBigdJuSCqwk7v9MOcgdKL7rQCif74PmYvgTfg9lXwR
-         5YqFBwa/gcRDdfWp2Nj2SNEB0NEJUTAUYoA9TqkXFz1g8SluO+BccmUxsjuyPcFYSOM6
-         kQW18ZQ3iTrD+3vKstz0A5Ik46zUjugV7GoSgKNLLW2DRxKrfe5qfd1O7xjlNgNWPnbX
-         MMQ4JolkSyxtIEqqYx2zGv1rDwnm3o00IRK7aIabITHWcKocCJqkc5d+wa9oGa6qaKPZ
-         kcvo6d+EMvFESvcBHlMJ9CVpqFYL+CW/KiKuLmdqh92HdMkvCK0698RyHJJPREKcw865
-         JGnw==
+        bh=o0JufDNMgBUYFzW5fsndxWIkjCJKULBXtBBLA3pYlvQ=;
+        b=qH6tuo/hxhJcs+KaT/VhKgZpwrTNHJo3T0FbCMRgkosYnJYY/i0k7OsRG2XFeZqcx5
+         ftccBKSBNKjm5jtDYRKD5EMvChQMfQXMoCs2mka/XAPbPrrCHPAtrU6gpi5GNU84zLtW
+         4l9DOKWCEG9shcMKUVdIgKdhoMjCg/v9VfN7TjK7+p8uDW8QIj/WrbPrAhPHrlhq1lZ/
+         SulFJXuZRqCrQuhrIpz9GD0kGs5tpwp7BUWqVd0sQBJ6u7P5b5A4h+cb/j6u6eAthVTF
+         W+ITQpnfnlKLM5Xy1L3/PwBD0Opu8Q68XYmKfy/89BAx8xM/Ub59ybhC3pg37r/X6qJu
+         nATA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=PwcjOQKCh9cBxbHJ47D95nYWB51p/5PJEUy2PT9wnXE=;
-        b=hlW0wCUovrMqRPVfVKN19H9ANM75+HtAeW3vhhEGGXP9D6EK08WSbGMWQqQaGXQ7hO
-         PLqyXXY6dpmtnKvgnCne0zmTluXjlXg5wmNep+yvtrHaa6DLlWVsnia8cbLvCEgY8J2T
-         wIwWPu9V6dlH+IxfqF+YRBvDrgna8yKNhZhuO65Azz4PEqEYJUO63EIOQ3m4qaWRH2Zu
-         wA9OHnQQBGn6B1p28vQ7I9phLDUO4JvsFy88NLa7ch4duvqrPJLjd+7EbAhDeJ+foj9z
-         sePdKiJDMkzLBxWCygY2YHO5EH9wdtWIt4M6vcAQ8MO5mugFv6Ji7tpOsHaQ2ETrUtkt
-         xDIQ==
-X-Gm-Message-State: AOAM5313Y698qTQFnlyxUBofxNaRTA+uHzrhmrpeJ+l2wyy02hABkTkj
-	i0yReyoq4Iqoj8YsrWmRe5QBTftz6RL0CA==
-X-Google-Smtp-Source: ABdhPJw6ngFbarJem05qjQEKrY7gfkXcAhD9m2bVuh3aOIp0Q6Me9sKfuj9xyNzhrspPiKC7iept1g==
-X-Received: by 2002:a17:90a:6b4f:: with SMTP id x15mr3448323pjl.25.1622029982458;
-        Wed, 26 May 2021 04:53:02 -0700 (PDT)
+        bh=o0JufDNMgBUYFzW5fsndxWIkjCJKULBXtBBLA3pYlvQ=;
+        b=kTlvmA4hHvNO3ziM78TNTugIwgT/MNR6d00A4GbaIKeVW7rykd/ffFbgPJqC1Aqj6M
+         XwkupTINLOLfc5sfIMEmXIiReWLRLyBE5RmPyfpOmhd1BXNP9m/6T+IY2qhPaKhLgO0z
+         PwizMpwzwX9wT9NSDsNAHp7rHY1Y3WGwqvauutV7F6gQ0WVQU/7oT/EbP5Pi88uHkiPZ
+         5diwb9w9EtfjbFJKOYmb/ueYrEprHcw1sF9zj8876ZvHZDf0G0xezFlCI8lT1XVbDirH
+         dnvmEBsniBQ+exGhSz8MZZLlh9ikVg3RoCLDwIhjpju/DsBa7svfZE1GYCc9Grtsalr+
+         LWeQ==
+X-Gm-Message-State: AOAM533davm9aI/7anU0y0k2QsGGFsYdQL1gCpj+uYsqUnlttNb5kcYn
+	7wgdMBkCJP9iJp3MUgP1wfijnBVXdy9LRA==
+X-Google-Smtp-Source: ABdhPJwjSIQG3t6TG7XcduosC5xkbuY1FtDWezY+WKKw5PF6yxyUKVUNe0oMV/PqD4zCuinGZHQRfQ==
+X-Received: by 2002:a17:902:6f09:b029:f9:173e:847d with SMTP id w9-20020a1709026f09b02900f9173e847dmr18343606plk.35.1622029983211;
+        Wed, 26 May 2021 04:53:03 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:68d3:e59c:b64:76e3])
-        by smtp.gmail.com with ESMTPSA id h22sm15408818pfn.55.2021.05.26.04.53.01
+        by smtp.gmail.com with ESMTPSA id h22sm15408818pfn.55.2021.05.26.04.53.02
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Wed, 26 May 2021 04:53:02 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [harkknott 16/23] hostapd: fix building with CONFIG_TLS=internal
-Date: Wed, 26 May 2021 04:52:31 -0700
-Message-Id: <26c88bf3ebcade64e8fe7693da89d9c2d298d90d.1622029873.git.akuster808@gmail.com>
+Subject: [harkknott 17/23] opencv: remove tbb packageconfig for powerpc
+Date: Wed, 26 May 2021 04:52:32 -0700
+Message-Id: <c7c0a292cf5089dcbd7840b01027d636fb29c831.1622029873.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1622029873.git.akuster808@gmail.com>
 References: <cover.1622029873.git.akuster808@gmail.com>
 
-From: Alexander Vickberg <wickbergster@gmail.com>
+From: Saul Wold <Saul.Wold@windriver.com>
 
-The patch recently added for CVE-2021-30004 broke compilation with
-CONFIG_TLS=internal. This adds the necessary function to let it
-compile again.
+Since tbb does not build for powerpc remove it from the enabled list
 
-Signed-off-by: Alexander Vickberg <wickbergster@gmail.com>
+Signed-off-by: Saul Wold <saul.wold@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit d6ef4170747d6668fa940328334055eef3e1e1d6)
+(cherry picked from commit e0581ad12f42427932e24abad97399c54f4b75f7)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...001-Prepare-for-CVE-2021-30004.patch.patch | 45 +++++++++++++++++++
- .../hostapd/hostapd_2.9.bb                    |  1 +
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0001-Prepare-for-CVE-2021-30004.patch.patch
+ meta-oe/recipes-support/opencv/opencv_4.5.2.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/0001-Prepare-for-CVE-2021-30004.patch.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/0001-Prepare-for-CVE-2021-30004.patch.patch
-new file mode 100644
-index 0000000000..1bedb4f753
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd/0001-Prepare-for-CVE-2021-30004.patch.patch
-@@ -0,0 +1,45 @@
-+From 14fab0772db19297c82dd1b8612c9335369dce41 Mon Sep 17 00:00:00 2001
-+From: Alexander Vickberg <wickbergster@gmail.com>
-+Date: Mon, 17 May 2021 17:54:13 +0200
-+Subject: [PATCH] Prepare for CVE-2021-30004.patch
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.5.2.bb b/meta-oe/recipes-support/opencv/opencv_4.5.2.bb
+index 311355bd7a..1dcd8586cd 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.5.2.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.5.2.bb
+@@ -106,6 +106,9 @@ PACKAGECONFIG ??= "gapi python3 eigen jpeg png tiff v4l libv4l gstreamer samples
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)} \
+     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libav", "", d)}"
+ 
++# TBB does not build for powerpc so disable that package config
++PACKAGECONFIG_remove_powerpc = "tbb"
 +
-+Without this building fails for CONFIG_TLS=internal
-+
-+Signed-off-by: Alexander Vickberg <wickbergster@gmail.com>
-+---
-+ src/tls/asn1.h       | 6 ++++++
-+ src/utils/includes.h | 1 +
-+ 2 files changed, 7 insertions(+)
-+
-+diff --git a/src/tls/asn1.h b/src/tls/asn1.h
-+index 6bd7df5..77b94ef 100644
-+--- a/src/tls/asn1.h
-++++ b/src/tls/asn1.h
-+@@ -66,6 +66,12 @@ void asn1_oid_to_str(const struct asn1_oid *oid, char *buf, size_t len);
-+ unsigned long asn1_bit_string_to_long(const u8 *buf, size_t len);
-+ int asn1_oid_equal(const struct asn1_oid *a, const struct asn1_oid *b);
-+ 
-++static inline bool asn1_is_null(const struct asn1_hdr *hdr)
-++{
-++	return hdr->class == ASN1_CLASS_UNIVERSAL &&
-++		hdr->tag == ASN1_TAG_NULL;
-++}
-++
-+ extern struct asn1_oid asn1_sha1_oid;
-+ extern struct asn1_oid asn1_sha256_oid;
-+ 
-+diff --git a/src/utils/includes.h b/src/utils/includes.h
-+index 75513fc..741fc9c 100644
-+--- a/src/utils/includes.h
-++++ b/src/utils/includes.h
-+@@ -18,6 +18,7 @@
-+ 
-+ #include <stdlib.h>
-+ #include <stddef.h>
-++#include <stdbool.h>
-+ #include <stdio.h>
-+ #include <stdarg.h>
-+ #include <string.h>
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb
-index e586018685..a9780bc6db 100644
---- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb
-@@ -11,6 +11,7 @@ SRC_URI = " \
-     file://defconfig \
-     file://init \
-     file://hostapd.service \
-+    file://0001-Prepare-for-CVE-2021-30004.patch.patch \
-     file://CVE-2019-16275.patch \
-     file://CVE-2019-5061.patch \
-     file://CVE-2021-0326.patch \
+ PACKAGECONFIG[gapi] = "-DWITH_ADE=ON -Dade_DIR=${STAGING_LIBDIR},-DWITH_ADE=OFF,ade"
+ PACKAGECONFIG[amdblas] = "-DWITH_OPENCLAMDBLAS=ON,-DWITH_OPENCLAMDBLAS=OFF,libclamdblas,"
+ PACKAGECONFIG[amdfft] = "-DWITH_OPENCLAMDFFT=ON,-DWITH_OPENCLAMDFFT=OFF,libclamdfft,"
 -- 
 2.17.1
 
