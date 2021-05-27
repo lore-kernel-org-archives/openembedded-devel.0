@@ -1,60 +1,59 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.2])
- by mx.groups.io with SMTP id smtpd.web12.3519.1622097779565655672
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web11.3398.1622097910201411344
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 May 2021 23:43:00 -0700
+ Wed, 26 May 2021 23:45:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Zq6QotPy;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.2, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=tg1AQVYb;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1622097777; i=@fujitsu.com;
-	bh=fsOgKY1bonjPH6YKosTcH6PcmWxG0tQ3KjhVWoc9Sa4=;
+	s=170520fj; t=1622097908; i=@fujitsu.com;
+	bh=2pOS5j8e2kkz/hk9u9dxLgPh05jeR/oZ/yskjcx/lYM=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=Zq6QotPy0ALHhnztINs7ILU+NCq/DrvoQcQRNDGnaGC1/ks0m3IZ4Ap+q72s2spSu
-	 J86WfjHRLbP5G3VdA8FzMTkOrWV0L5LUE3UnrmqTlqr1wHwan7s+PdvJQRli887XEf
-	 T0wdNvYh7PF63dFWl/t4PmXFRJ5cql8x4rD2BF8iWZGWUIapjGMrXkJZ0DbOk2WS7F
-	 FpiNkEwMrlnxakHkKmZqjMxKkebzrSXzOrRWRrU0EzBxH6szcL70c1K1jH+QQBcHRi
-	 bsgoL6iv+h+T+9EtE7x/6PWWLwXmCCQEitVp/YFc+T20aUY4Fb2C/JDQUCPofe3NtC
-	 kMMJrhQGdvb5w==
-Received: from [100.113.1.143] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-central-1.aws.symcld.net id 82/A7-63525-07F3FA06; Thu, 27 May 2021 06:42:56 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrJIsWRWlGSWpSXmKPExsViZ8MxRbfAfn2
-  Cwa4vihYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8ad1z/YC+ZyVcw5spqtgXE/ZxcjF4eQwGwm
-  idOzFjN3MXICOScYJT6214PYbAI6Eh0vullAbBEBfYmls/eA1QgL+Eg839rD1sXIwcEioCrx/
-  5cVSJhXwF3i2roLYOUSAgoSUx6+Z4aIC0qcnPkELM4sICFx8MULZogaRYntO89A1VdIzJixjW
-  0CI88sJC2zkLQsYGRaxWiZVJSZnlGSm5iZo2toYKBraGisa6hrZGCul1ilm6iXWqqbnJpXUpQ
-  IlNVLLC/WK67MTc5J0ctLLdnECAyjlELG8zsYp775oHeIUZKDSUmUd4LO+gQhvqT8lMqMxOKM
-  +KLSnNTiQ4wyHBxKErwL7YBygkWp6akVaZk5wJCGSUtw8CiJ8E60BkrzFhck5hZnpkOkTjHac
-  7xcu2QRM0fTvbtAcsqCg6uZOe60H1rNLMSSl5+XKiXOe8MWqE0ApC2jNA9uKCwGLzHKSgnzMj
-  IwMAjxFKQW5WaWoMq/YhTnYFQS5s0GuY0nM68EbvcroLOYgM4SSlwHclZJIkJKqoGpf13pryf
-  h/cUzhJp2Vcbv8/i46HRA9441tf71d9q5oyZpT53OH7Rgp/3sXa38dS3W3+Rv799+/87UczWh
-  k3UjNR9/2+8YIlN7+t/DSYmtv32ii+8fSU9212C543qgm6U1N076wwXV11kKqSz9a1UztgkdO
-  rc6R1264+OZgn/O/1r9mfxvWJlxJV1hUQi8sc568bTMD1/6J/18Il1hUj5na3ik+lpfvnkvTK
-  s/C59adye7wmZqgHLyj2v6Xfbf9cNee5uXLZVXfuvy+8GFSL5VrzS+r/48Z8WaFLXJ5+TF3qU
-  fZuqJkgt1fLn42w1+1YX5y+KPqKr9vaeSE7csiF3lF5NfS8Gbxk7zuY27iiYqsRRnJBpqMRcV
-  JwIAGvgG/DwDAAA=
+	b=tg1AQVYbfNk/0zKHhuPeoAF46AVLFtf1Da9qc2cNDsT6em8K7iu6ReD7of3Q1Gm0h
+	 1n6izx6TA+0Pv0ltFQ9vWr50LvGSdfDV+BylmiIa5ALwxMwrL8pcdYnhY8D2C7HGim
+	 zlCUgSro6+Tpx6fnjHP8pSK7kVngJ3PwhrdEaJe72KAMv9X3R3rWWQOdDoAU9XZbQ8
+	 ppPjjQLm3W1NMxFkZ9vlYAqTchIqTkvnKjXtVV329W1WGjiQlvhkoEGugpL3S2rwHb
+	 A+QpzMs0jBtVOHonwhIgwWnVeqB6I/6x5zgfZlgKGuW4DPN3O5OiZmqgCz1nzL4V9x
+	 torKf7Any+c3g==
+Received: from [100.113.5.216] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-b.eu-central-1.aws.symcld.net id 5E/2D-15146-4FF3FA06; Thu, 27 May 2021 06:45:08 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+EI1f1svz7
+  B4OMxA4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeNCy07GglNcFVeOP2RsYLzH2cXIxSEkMJtJ
+  YvqBdsYuRk4g5wSjxNLpwiA2m4CORMeLbhYQW0RAX2Lp7D3MILawgIdE59xPrCA2i4CqxLF1s
+  9lAbF4Bd4m2BdfB5kgIKEhMefieGSIuKHFy5hOwOcwCEhIHX7xghqhRlNi+8wwLhF0hMWPGNr
+  YJjDyzkLTMQtKygJFpFaNlUlFmekZJbmJmjq6hgYGuoaGxrqmuoamxXmKVbpJeaqlucmpeSVE
+  iUFYvsbxYr7gyNzknRS8vtWQTIzCQUgpZZ+5g/PT6g94hRkkOJiVR3gk66xOE+JLyUyozEosz
+  4otKc1KLDzHKcHAoSfAutAPKCRalpqdWpGXmAIMaJi3BwaMkwjvRGijNW1yQmFucmQ6ROsWoK
+  CXOe8MWKCEAksgozYNrg0XSJUZZKWFeRgYGBiGegtSi3MwSVPlXjOIcjErCvNkg23ky80rgpr
+  8CWswEtFgocR3I4pJEhJRUA1N8782v3F/CpbSjV81mvD/X/EKjRdzPSf6+MrPOtS+6ym9QdO/
+  rvHrTy+rv1+bFe17y2fhGrX35xq0i544s2z/PbUfvPqPprgZaH4xzTrNtaBbpMdAN2134wqKy
+  5pYl49rVy2Z1qMvnzOT6fXv3ZV23Z7uOPph4XsTs662rdyo/t31oq4kIPbFy0YJjtUkix5V2r
+  hI8/WrXZ+e5LDxbN0zirrf/IyW/W4zdJmkaR0Zy1P1aD41dvtwn6rUKuP9xWLC3Ppv3cnGEsb
+  n3/xsXp6gcrf+mtj+Ik7++59HtqUeCri+uePSgM9DpxoyDyedWmd9NyH4rOm138rzNFy8ttb9
+  R5vcxZfKp3PSGCZGLwtqMlFiKMxINtZiLihMBkiRBXB8DAAA=
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-10.tower-232.messagelabs.com!1622097775!77365!1
-X-Originating-IP: [62.60.8.148]
+X-Msg-Ref: server-4.tower-245.messagelabs.com!1622097907!119007!1
+X-Originating-IP: [62.60.8.85]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.75.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 19846 invoked from network); 27 May 2021 06:42:56 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-10.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 27 May 2021 06:42:56 -0000
+Received: (qmail 8163 invoked from network); 27 May 2021 06:45:07 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-4.tower-245.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 27 May 2021 06:45:07 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 14R6gt7N018205
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 14R6j7tU023715
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 27 May 2021 07:42:55 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 27 May 2021 07:45:07 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 27 May 2021 07:42:54 +0100
+ (TLS) id 15.0.1497.18; Thu, 27 May 2021 07:45:05 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-gnome] [PATCH] gnome-bluetooth: upgrade 3.34.1 -> 3.34.5
-Date: Thu, 27 May 2021 14:42:47 +0800
-Message-ID: <1622097767-10482-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] libgweather: upgrade 3.36.1 -> 3.36.2
+Date: Thu, 27 May 2021 14:44:59 +0800
+Message-ID: <1622097899-10570-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -64,27 +63,28 @@ Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../{gnome-bluetooth_3.34.1.bb => gnome-bluetooth_3.34.5.bb}  | 4 ++--
+ .../{libgweather_3.36.1.bb => libgweather_3.36.2.bb}          | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/gnome-bluetooth/{gnome-bluetooth_3.34.1.bb => gnome-bluetooth_3.34.5.bb} (79%)
+ rename meta-gnome/recipes-gnome/libgweather/{libgweather_3.36.1.bb => libgweather_3.36.2.bb} (79%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.34.1.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.34.5.bb
+diff --git a/meta-gnome/recipes-gnome/libgweather/libgweather_3.36.1.bb b/meta-gnome/recipes-gnome/libgweather/libgweather_3.36.2.bb
 similarity index 79%
-rename from meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.34.1.bb
-rename to meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.34.5.bb
-index 77c89d95c2..31d3bf6eb7 100644
---- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.34.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.34.5.bb
-@@ -18,7 +18,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
- # gtk-icon-cache bbclass will take care of this for us.
- EXTRA_OEMESON = "-Dicon_update=false"
+rename from meta-gnome/recipes-gnome/libgweather/libgweather_3.36.1.bb
+rename to meta-gnome/recipes-gnome/libgweather/libgweather_3.36.2.bb
+index 3ee382937e..c2cb2f19be 100644
+--- a/meta-gnome/recipes-gnome/libgweather/libgweather_3.36.1.bb
++++ b/meta-gnome/recipes-gnome/libgweather/libgweather_3.36.2.bb
+@@ -7,8 +7,8 @@ GNOMEBASEBUILDCLASS = "meson"
  
--SRC_URI[archive.md5sum] = "09b6bab7ceaafb35da766a5476fbc466"
--SRC_URI[archive.sha256sum] = "3ec91076c2822cd1f9abdc8e27663c3bda4c9c8a7a9773f9e92bfbf2b745d386"
-+SRC_URI[archive.md5sum] = "d83faa54abaf64bb40b5313bc233e74e"
-+SRC_URI[archive.sha256sum] = "6c949e52c8becc2054daacd604901f66ce5cf709a5fa91c4bb7cacc939b53ea9"
+ inherit gnomebase gsettings gobject-introspection gettext gtk-doc vala features_check upstream-version-is-even
  
- RDEPENDS_${PN} += "bluez5"
+-SRC_URI[archive.md5sum] = "d6081108f9c224c5cb594f8ccb025db9"
+-SRC_URI[archive.sha256sum] = "de2709f0ee233b20116d5fa9861d406071798c4aa37830ca25f5ef2c0083e450"
++SRC_URI[archive.md5sum] = "ff399cf89e97a3e574ae05db5617b96b"
++SRC_URI[archive.sha256sum] = "ee1201a8fc25c14e940d3b26db49a34947c8aebf67dee01ee67fbcb06ecb37a0"
+ 
+ # gobject-introspection is mandatory and cannot be configured
+ REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 -- 
 2.25.1
 
