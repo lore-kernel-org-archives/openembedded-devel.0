@@ -1,113 +1,66 @@
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.web11.5669.1622190599008766399
+Received: from smtp-8fad.mail.infomaniak.ch (smtp-8fad.mail.infomaniak.ch [83.166.143.173])
+ by mx.groups.io with SMTP id smtpd.web08.6527.1622197759122559744
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 May 2021 01:29:59 -0700
+ Fri, 28 May 2021 03:29:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Qnym1GaS;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id z17so2413969wrq.7
-        for <openembedded-devel@lists.openembedded.org>; Fri, 28 May 2021 01:29:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:date:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=mLA3HxRYvtNNwKKtH5+it8jLAn8sOd9zQpPPTpaSY7g=;
-        b=Qnym1GaSPURvOL3mADeJRSxwFt6sAdQ11mN6blR29U0KAhQ6BprwMGkIxfxznU7OGZ
-         Seh81JfbtpIMINFJWG0PArBemLPb7dAFQc5JSola1GWOzS2N9h2rMgPEY2nksw4KkXUW
-         TfpbAsr55bSiyl0I+1DS7DGqrtH+mG6bFivI8OFRg9Ow4BQ7eFVr0DFj1qGfTdKnOSkn
-         c1zATFb7CFHnv5pQPtiwtxDnMmSJEKWtuQv9tgXk5W+OMgXauvkBZGx1fc3+p5X/Jcty
-         y+qSNtIgzCG5RXJ9GeNM4I2jTk+3ed6pAdmkjpjameDGrVukQKi420FqI2tYddYFacgi
-         X3+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=mLA3HxRYvtNNwKKtH5+it8jLAn8sOd9zQpPPTpaSY7g=;
-        b=tIwDpbUwbnn44rEiWG2EfXI2smIDDlWL2BUmu82V6+iVoupNahknxjjkktzIPsFDQ5
-         hrhGaX27KVokHhKAl0pbamQ84Zu2McLQDpbAbd56mxhjE933GJn5/5AuYrnW+NDpTLnb
-         3N9Z1zQjYgdjFynzRtL55N0PrzNkE440ill6slc9DOjjxEe734PlG1t8wYVn7IlN4FA+
-         i6itF1QzsGZlBGZEOqKMGsi7EaLHWd8Ep2e8jsscuz0W/2D+nblFHVg5OFJADQkAnqvc
-         nSo++DA1T9ggbl2mIa6sY0QlDCSXfW4mi+OAZghh4AyTFhC1Riakj/cSaSiUGeqk3eYX
-         h2aA==
-X-Gm-Message-State: AOAM533dDVKzxAq3hDAciSKp/pO4grd3OMgX9dsP1nvgI1Xa9qhyB1+5
-	eJ26O6RKERScQ2nImapumJo=
-X-Google-Smtp-Source: ABdhPJwtofxGyOkwWgKz6RW7GTq5XSL6hFHF5oNcc+/4gHT9R1Puo7B05y+/nwW0Iz5KOKj1Mj4lAQ==
-X-Received: by 2002:a5d:5109:: with SMTP id s9mr7327218wrt.231.1622190597242;
-        Fri, 28 May 2021 01:29:57 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id b188sm577188wmh.18.2021.05.28.01.29.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 28 May 2021 01:29:56 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 28 May 2021 10:29:56 +0200
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-oe][PATCH v2 2/2] sdbus-cpp: Do not fetch googletest on the fly
-Message-ID: <20210528082956.c6fvgcrkk5rvnd7m@jama>
-References: <20210528003936.568907-1-raj.khem@gmail.com>
- <20210528003936.568907-2-raj.khem@gmail.com>
+ dkim=fail reason="body hash did not verify" header.i=@guy-morand.ch header.s=20191114 header.b=PFyXgP4U;
+ spf=pass (domain: guy-morand.ch, ip: 83.166.143.173, mailfrom: guy@guy-morand.ch)
+Received: from smtp-2-0001.mail.infomaniak.ch (unknown [10.5.36.108])
+	by smtp-2-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Fs1BW1kNSzMppH8;
+	Fri, 28 May 2021 12:29:07 +0200 (CEST)
+Received: from morandg-desktop.localdomain (unknown [185.72.66.106])
+	by smtp-2-0001.mail.infomaniak.ch (Postfix) with ESMTPA id 4Fs1BV74gjzlh8jW;
+	Fri, 28 May 2021 12:29:06 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=guy-morand.ch;
+	s=20191114; t=1622197747;
+	bh=Pd0dFuSTbM/ZbPyMwcmNbTY2KCPIvLJQHWkTUBOAgho=;
+	h=From:To:Cc:Subject:Date:From;
+	b=PFyXgP4UjxoumZ0wx0VAydYCaJFx/aqViSW4QeK51diuUPxg7uNFDyGkFvhjYLXrD
+	 hcJ83r+C6QoeEVyzmjcLKGmR1nkCPy9Tc4rdSB3wf6vVXuJMc+7oglaxR40cIXxhcc
+	 FlDqnE3QCWzKJEwUPtt7ouXN1pFVF4VADelLRwmU=
+From: "Guy Morand" <guy@guy-morand.ch>
+To: openembedded-devel@lists.openembedded.org
+Cc: Guy Morand <guy@guy-morand.ch>
+Subject: [meta-oe][PATCH] fish: add fish recipe
+Date: Fri, 28 May 2021 12:29:02 +0200
+Message-Id: <20210528102902.13676-1-guy@guy-morand.ch>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-In-Reply-To: <20210528003936.568907-2-raj.khem@gmail.com>
-X-Groupsio-MsgNum: 91601
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="i7mwfj4geok4pfsu"
-Content-Disposition: inline
-
---i7mwfj4geok4pfsu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, May 27, 2021 at 05:39:36PM -0700, Khem Raj wrote:
-> This package downloads code ( gtest ) post do_fetch task
->=20
-> Now this is checked out by bitbake fetcher into decided source directory,
-> this ensures reproducibility
->=20
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
-> v2: Fetch googletest via bitbake
->=20
->  ...-Do-not-download-gtest-automatically.patch | 44 +++++++++++++++++++
->  .../recipes-core/sdbus-c++/sdbus-c++_0.8.3.bb | 10 ++++-
->  2 files changed, 52 insertions(+), 2 deletions(-)
->  create mode 100644 meta-oe/recipes-core/sdbus-c++/sdbus-c++-0.8.3/0001-D=
-o-not-download-gtest-automatically.patch
->=20
-> diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.8.3.bb b/meta-oe/=
-recipes-core/sdbus-c++/sdbus-c++_0.8.3.bb
-> index 98829765c2..91cf70c911 100644
-> --- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.8.3.bb
-> +++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.8.3.bb
-> @@ -9,7 +9,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D1803fa9c2c3ce8=
-cb06b4861d75310742"
->  inherit cmake pkgconfig systemd ptest
-> =20
->  PACKAGECONFIG ??=3D "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', =
-'with-external-libsystemd', 'with-builtin-libsystemd', d)} \
-> -                   ${@bb.utils.contains('PTEST_ENABLED', '1', 'with-test=
-s', '', d)}"
-> +                   ${@bb.utils.contains('PTEST_ENABLED', '0', 'with-test=
-s', '', d)}"
+Signed-off-by: Guy Morand <guy@guy-morand.ch>
+---
+ meta-oe/recipes-shells/fish/fish_3.2.2.bb | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-oe/recipes-shells/fish/fish_3.2.2.bb
 
-^ is this change intentional?
+diff --git a/meta-oe/recipes-shells/fish/fish_3.2.2.bb b/meta-oe/recipes-=
+shells/fish/fish_3.2.2.bb
+new file mode 100644
+index 000000000..6bbe92088
+--- /dev/null
++++ b/meta-oe/recipes-shells/fish/fish_3.2.2.bb
+@@ -0,0 +1,17 @@
++SUMMARY =3D "Finally, a command line shell for the 90s"
++DESCRIPTION =3D "fish is a smart and user-friendly command line shell \
++for Linux, macOS, and the rest of the family."
++HOMEPAGE =3D "https://fishshell.com/"
++AUTHOR =3D "fish-shell contributors"
++LICENSE =3D "GPLv2"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D9dbc95a48a7b8859e3c6db4c9396f=
+053"
++
++inherit cmake
++
++DEPENDS =3D " \
++    ncurses \
++    "
++
++SRC_URI =3D "https://github.com/fish-shell/fish-shell/releases/download/=
+${PV}/fish-${PV}.tar.xz"
++SRC_URI[md5sum] =3D "606253699ce41991b03a93bcc6047d51"
++SRC_URI[sha256sum] =3D "5944da1a8893d11b0828a4fd9136ee174549daffb3d0adfd=
+d8917856fe6b4009"
+--=20
+2.31.1
 
->  PACKAGECONFIG[with-builtin-libsystemd] =3D ",,sdbus-c++-libsystemd,libca=
-p"
->  PACKAGECONFIG[with-external-libsystemd] =3D ",,systemd,libsystemd"
->  PACKAGECONFIG[with-tests] =3D "-DBUILD_TESTS=3DON -DTESTS_INSTALL_PATH=
-=3D${libdir}/${BPN}/tests,-DBUILD_TESTS=3DOFF"
-
---i7mwfj4geok4pfsu
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EABECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCYLCqAQAKCRA3VSO3ZXaA
-HKlbAJ0WKsmVHLuEdatLeCZ/1Saj4KzlRgCfW2nkpcf8l2BVSbgwdix06UNBn98=
-=ZgqC
------END PGP SIGNATURE-----
-
---i7mwfj4geok4pfsu--
