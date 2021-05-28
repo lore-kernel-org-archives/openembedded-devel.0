@@ -1,24 +1,22 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.6808.1622200148190310543
+ by mx.groups.io with SMTP id smtpd.web10.6673.1622200151799215464
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 May 2021 04:09:08 -0700
+ Fri, 28 May 2021 04:09:12 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=57792 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lmaMQ-0001Il-4h; Fri, 28 May 2021 14:09:02 +0300
+	id 1lmaMO-0001Il-0Z; Fri, 28 May 2021 14:09:00 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-pyzmq: Upgrade 22.0.3 -> 22.1.0
-Date: Fri, 28 May 2021 14:08:50 +0300
-Message-Id: <20210528110850.22402-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-flask: Extend RDEPENDS
+Date: Fri, 28 May 2021 14:08:46 +0300
+Message-Id: <20210528110850.22402-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210528110850.22402-1-leon.anavi@konsulko.com>
-References: <20210528110850.22402-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
+X-OutGoing-Spam-Status: No, score=-1.0
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -30,37 +28,29 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 22.1.0:
-
-- asyncio: experimental support for Proactor eventloop if tornado
-  6.1 is available by running a selector in a background thread.
-- Windows: fix type of `socket.FD` option in win-amd64
-- asyncio: Cancel timers when using HWM with async Sockets
-- Windows: update bundled libzmq dll URLs for Windows.
-- adopt pre-commit for formatting, linting
+Extend RDEPENDS and add python3-profile to them.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-pyzmq_22.0.3.bb => python3-pyzmq_22.1.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pyzmq_22.0.3.bb => python3-pyzmq_22.1.0.bb} (91%)
+ .../recipes-devtools/python/python3-flask_2.0.1.bb        | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_22.0.3.bb b/meta-python/recipes-devtools/python/python3-pyzmq_22.1.0.bb
-similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-pyzmq_22.0.3.bb
-rename to meta-python/recipes-devtools/python/python3-pyzmq_22.1.0.bb
-index dbf8e6446..f213131da 100644
---- a/meta-python/recipes-devtools/python/python3-pyzmq_22.0.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyzmq_22.1.0.bb
-@@ -8,7 +8,7 @@ DEPENDS = "zeromq"
- FILESEXTRAPATHS_prepend := "${THISDIR}/python-pyzmq:"
+diff --git a/meta-python/recipes-devtools/python/python3-flask_2.0.1.bb b/meta-python/recipes-devtools/python/python3-flask_2.0.1.bb
+index 2c94f82da..6c63a388a 100644
+--- a/meta-python/recipes-devtools/python/python3-flask_2.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-flask_2.0.1.bb
+@@ -14,4 +14,10 @@ inherit pypi setuptools3
  
- SRC_URI += "file://club-rpath-out.patch"
--SRC_URI[sha256sum] = "f7f63ce127980d40f3e6a5fdb87abf17ce1a7c2bd8bf2c7560e1bbce8ab1f92d"
-+SRC_URI[sha256sum] = "7040d6dd85ea65703904d023d7f57fab793d7ffee9ba9e14f3b897f34ff2415d"
+ CLEANBROKEN = "1"
  
- inherit pypi pkgconfig setuptools3
- 
+-RDEPENDS_${PN} = "${PYTHON_PN}-werkzeug ${PYTHON_PN}-jinja2 ${PYTHON_PN}-itsdangerous ${PYTHON_PN}-click"
++RDEPENDS_${PN} = " \
++    ${PYTHON_PN}-werkzeug \
++    ${PYTHON_PN}-jinja2 \
++    ${PYTHON_PN}-itsdangerous \
++    ${PYTHON_PN}-click \
++    ${PYTHON_PN}-profile \
++"
 -- 
 2.17.1
 
