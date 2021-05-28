@@ -1,68 +1,66 @@
-Received: from smtp-bc09.mail.infomaniak.ch (smtp-bc09.mail.infomaniak.ch [45.157.188.9])
- by mx.groups.io with SMTP id smtpd.web09.6572.1622198587259588609
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web08.6808.1622200148190310543
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 May 2021 03:43:13 -0700
+ Fri, 28 May 2021 04:09:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@guy-morand.ch header.s=20191114 header.b=Jet5+ez/;
- spf=pass (domain: guy-morand.ch, ip: 45.157.188.9, mailfrom: guy@guy-morand.ch)
-Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
-	by smtp-2-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Fs1Vd0jp0zMpp4d;
-	Fri, 28 May 2021 12:43:05 +0200 (CEST)
-Received: from morandg-desktop.localdomain (unknown [185.72.66.106])
-	by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA id 4Fs1Vc61fkzlh8T2;
-	Fri, 28 May 2021 12:43:04 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=guy-morand.ch;
-	s=20191114; t=1622198585;
-	bh=RZVCuJf/G9caZQMHkJKmBPChdIRPS/qv8ndrtoGUqqM=;
-	h=From:To:Cc:Subject:Date:From;
-	b=Jet5+ez/dfTHmUVJ9kTxUYWTuIRzdt1fim9/l5Or7og8BJr4ZoSXimIfiq0AT3yMH
-	 j0orU+P31OAdCpQxDapD0wNHwqvdh5ohSTVyJXJ8yd3K2Ib5QGdFMV+IZOwlRg3eiR
-	 oerI3g1TRqxmcAjIOBv0LnOWc67iQZEmC8aLyfS8=
-From: "Guy Morand" <guy@guy-morand.ch>
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=57792 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.93)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1lmaMQ-0001Il-4h; Fri, 28 May 2021 14:09:02 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Guy Morand <guy@guy-morand.ch>
-Subject: [meta-oe][PATCH] qperf: add qperf recipe
-Date: Fri, 28 May 2021 12:42:59 +0200
-Message-Id: <20210528104259.21756-1-guy@guy-morand.ch>
-X-Mailer: git-send-email 2.31.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-pyzmq: Upgrade 22.0.3 -> 22.1.0
+Date: Fri, 28 May 2021 14:08:50 +0300
+Message-Id: <20210528110850.22402-5-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210528110850.22402-1-leon.anavi@konsulko.com>
+References: <20210528110850.22402-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Signed-off-by: Guy Morand <guy@guy-morand.ch>
+Upgrade to release 22.1.0:
+
+- asyncio: experimental support for Proactor eventloop if tornado
+  6.1 is available by running a selector in a background thread.
+- Windows: fix type of `socket.FD` option in win-amd64
+- asyncio: Cancel timers when using HWM with async Sockets
+- Windows: update bundled libzmq dll URLs for Windows.
+- adopt pre-commit for formatting, linting
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-benchmark/qperf/qperf_0.4.11.bb   | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/qperf/qperf_0.4.11.bb
+ .../python/{python3-pyzmq_22.0.3.bb => python3-pyzmq_22.1.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pyzmq_22.0.3.bb => python3-pyzmq_22.1.0.bb} (91%)
 
-diff --git a/meta-oe/recipes-benchmark/qperf/qperf_0.4.11.bb b/meta-oe/re=
-cipes-benchmark/qperf/qperf_0.4.11.bb
-new file mode 100644
-index 000000000..f21af4b80
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/qperf/qperf_0.4.11.bb
-@@ -0,0 +1,19 @@
-+SUMMARY =3D "Measure socket and RDMA performance"
-+DESCRIPTION =3D "qperf measures bandwidth and latency between two nodes.=
-"
-+HOMEPAGE =3D "https://github.com/linux-rdma/qperf"
-+AUTHOR =3D "Johann George"
-+LICENSE =3D "GPLv2"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
-bbe"
-+
-+inherit autotools-brokensep
-+
-+SRCREV =3D "c706363815a38ff2c5cbc07b73e2cfaaa59bae0f"
-+SRC_URI =3D "git://github.com/linux-rdma/qperf.git;protocol=3Dhttps;bran=
-ch=3Dmaster"
-+
-+S =3D "${WORKDIR}/git"
-+
-+do_configure() {
-+  ./cleanup
-+  ./autogen.sh
-+  oe_runconf
-+}
---=20
-2.31.1
+diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_22.0.3.bb b/meta-python/recipes-devtools/python/python3-pyzmq_22.1.0.bb
+similarity index 91%
+rename from meta-python/recipes-devtools/python/python3-pyzmq_22.0.3.bb
+rename to meta-python/recipes-devtools/python/python3-pyzmq_22.1.0.bb
+index dbf8e6446..f213131da 100644
+--- a/meta-python/recipes-devtools/python/python3-pyzmq_22.0.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pyzmq_22.1.0.bb
+@@ -8,7 +8,7 @@ DEPENDS = "zeromq"
+ FILESEXTRAPATHS_prepend := "${THISDIR}/python-pyzmq:"
+ 
+ SRC_URI += "file://club-rpath-out.patch"
+-SRC_URI[sha256sum] = "f7f63ce127980d40f3e6a5fdb87abf17ce1a7c2bd8bf2c7560e1bbce8ab1f92d"
++SRC_URI[sha256sum] = "7040d6dd85ea65703904d023d7f57fab793d7ffee9ba9e14f3b897f34ff2415d"
+ 
+ inherit pypi pkgconfig setuptools3
+ 
+-- 
+2.17.1
 
