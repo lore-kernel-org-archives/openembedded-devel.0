@@ -1,51 +1,51 @@
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
- by mx.groups.io with SMTP id smtpd.web09.22435.1622305658184949014
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
+ by mx.groups.io with SMTP id smtpd.web08.22411.1622305667117917828
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 29 May 2021 09:27:38 -0700
+ Sat, 29 May 2021 09:27:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Rt+sfVgv;
- spf=pass (domain: gmail.com, ip: 209.85.208.54, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f54.google.com with SMTP id r11so8331657edt.13
-        for <openembedded-devel@lists.openembedded.org>; Sat, 29 May 2021 09:27:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=JMggChBj;
+ spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f49.google.com with SMTP id s6so8336897edu.10
+        for <openembedded-devel@lists.openembedded.org>; Sat, 29 May 2021 09:27:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
         bh=aw0NQwX113qBRuCmKH2lawfCr1BvXjwdi1HEbFcEfko=;
-        b=Rt+sfVgvCYZpQ4uO2m4HO2mcT5EogTFuyRbmRtRkxxdCR1deDVVvX9tNKfXZNaQv1N
-         QmCgAy+/5X6MECG1VWh0ec1qXX0Se+K82BCUfuNBgB/uPlCUYZVzyDKihYwUJizv2q5y
-         Z4FLvtwm4rOqbncG9Lcs5xIXGkDAqVtbO2ReJ0ikQLphtgvf9c62Ee0JMcZ3bVLFj12U
-         iKjIpKKSGpeZRq0BxLXLtAJRYIPqvHBd8Q5CLbajxFxVGTuN3qdUXdKuHBm981YPkAnQ
-         ov9mV1D/2Fkn8/e+J+OWIbn45/qWzoLIChKVC9b0uZ3n/9ZEYtqitBcttDBaPI5/ooSf
-         QDWA==
+        b=JMggChBjjAiXCRw4PQOf6r5z2iQGfxTZ7HdhTscVt3IQbvJltsCAiridde23sRPtpd
+         N0QxswtEb54umJoOtr+tTeFevPsnG0MocJTMp00gnZq29jlKbhmgODY9knsxLujR/UmJ
+         nCH+5OQdbEYhrAqqoM1T9aHkSe7pQp/7d/vBy8NKmqrHD6IGuW+PvKTOtbVxmB1hRXX0
+         Aez4MzjIx2Hyp8t4Kis9BN0aMeIFqeunaQoP+sGT8SIXieo8Q3oYqeyzpy6nYGgHHZSd
+         lgSGxPmQs1sS3vnA69rIjjsZOr3SguSp7ShZ/K/8BkfAdwYbKIiwInqItYJ6xdjGW3EM
+         A42Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
         bh=aw0NQwX113qBRuCmKH2lawfCr1BvXjwdi1HEbFcEfko=;
-        b=kJiENi5eVYv9poFwPgcXaH3qpe+5ehQCSYo/+oaGnzDtSPjkawWyPWf6AIdMseTaFP
-         YbUuJFcKQYnpPTjb64mXdQ3UvupdLyIyU770vScA9HjVyqBlvMDUplxb2JrakwNzm5bQ
-         u/v+8RnFer6jPezbBJo4H+9Ge9BwfccnfOK9Ex67Ca1EMuNh8sOPs4+0KLGdWDu/qgMH
-         nkJw2FatOwamvJxzrEdsCkZDlvTfr1VVwXWYF3FDiBT8BMOYyjleSgwijWcS3ra9T+x9
-         JKxSRon5ocfqpQ3NIuPT4PmtJPwf/Vn3TmY/Zy4me3x13yW+aMAn/uNCvnhvFi2RbvwJ
-         oJTA==
-X-Gm-Message-State: AOAM531eq/QyvOB0RY+5QQHua0o3rThs2thlvIeCLfdaMhjjUHxlKlUc
-	gQZkwYSfdsG2AuIq/JdzoMmkNLA86ig=
-X-Google-Smtp-Source: ABdhPJwQcwDrkyWa+LDfDiSdE9G5ggC12GeL8vQBa3y0zNGr8XRtYu7/XoHlul+p5GqPwuA+9JQ+jg==
-X-Received: by 2002:a05:6402:5a:: with SMTP id f26mr16550228edu.306.1622305656599;
-        Sat, 29 May 2021 09:27:36 -0700 (PDT)
+        b=sa9XSHyO0GXonNpSwDes6palXQEgAufOw3HtaEOntSDiO2LU2M2vOu2Mnq2Uyxmvuj
+         UbEmznB7ft4AoHqu9k7Vp+/wEZE6acdysdBs0DFPvPQYDuOgu/FJce8cqAKdFEBv4kjb
+         LhzAmIUBvaad2hG4i1MR8LC+0RuVQz50K/xvnB3JI9dHl1kFJhpeavGvb2HAwSE23oyp
+         Fcu+BkGYbwciSpKozuFP4DXSirqjJnQ+MLLgeOSF7y7mNnqgcuTcvh49ALLLpbgSbT0o
+         eI0yKGWhIhuOJbFJ8YBvf3VddoNdE8ZeXZYWYEI1V7Y8AyiBomKSPuEkW3ak136jsj8X
+         gvUg==
+X-Gm-Message-State: AOAM532DmioF1gOeHdy/uLyOdm4DFiP++pkGiRwkThnC7Syl8ohf/e/k
+	GtHRk2SQqaDsM6rllvr4grCzp//ZuNY=
+X-Google-Smtp-Source: ABdhPJxtEdpv18+g3kS8WUHPCfnG/3xY3GzryGEzfCTjPT4Nt3GlH6UcJ95D/bikuYIqd5fJ9H4prA==
+X-Received: by 2002:a05:6402:8d4:: with SMTP id d20mr4663989edz.117.1622305665700;
+        Sat, 29 May 2021 09:27:45 -0700 (PDT)
 Return-Path: <martin.jansa@gmail.com>
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id v1sm3665306ejw.117.2021.05.29.09.27.36
+        by smtp.gmail.com with ESMTPSA id t19sm4440425eds.4.2021.05.29.09.27.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 29 May 2021 09:27:36 -0700 (PDT)
+        Sat, 29 May 2021 09:27:45 -0700 (PDT)
 From: "Martin Jansa" <Martin.Jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] gtkwave: set REQUIRED_DISTRO_FEATURES only to wayland
-Date: Sat, 29 May 2021 18:27:34 +0200
-Message-Id: <20210529162734.1681055-1-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCHv2] gtkwave: set REQUIRED_DISTRO_FEATURES only to wayland
+Date: Sat, 29 May 2021 18:27:43 +0200
+Message-Id: <20210529162743.1681123-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <16839630F438851A.19130@lists.openembedded.org>
 References: <16839630F438851A.19130@lists.openembedded.org>
