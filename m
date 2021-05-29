@@ -1,209 +1,104 @@
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web08.19218.1622281883819850852
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+ by mx.groups.io with SMTP id smtpd.web08.19219.1622281884378460495
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 29 May 2021 02:51:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=U582aGcO;
- spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f51.google.com with SMTP id qq22so685234ejb.9
-        for <openembedded-devel@lists.openembedded.org>; Sat, 29 May 2021 02:51:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=DGHVIuOZ;
+ spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f53.google.com with SMTP id gb17so8930943ejc.8
+        for <openembedded-devel@lists.openembedded.org>; Sat, 29 May 2021 02:51:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=+LAyOCwk6SHyqEw/rKDjXSU/9YXx3KMLTk7aU6n0oBI=;
-        b=U582aGcO6mPnb0nyIMCuDD8DfN+q8ce7xHnHVAB7y4vu7TgmqnQRqUvbRd07FUHDjU
-         U1GYSlkfkAdABzcYQrHQAVNiWcn3o6hp8BXS5W0FlxIDEVq+RuWs7MYEXiRhrY116jMF
-         3k+xZHg6G+Rk6cW1GGho6jZ0FwpjxfWkc1G31Dj3yOnt5KpFJi5ILg1m2pGyA6rUdCar
-         Nd+ZZxysgZia1iiVSumG6ajbrhsCosBpAbIMA0JZHSbO3p80FqW1F7+in6sj44XylcZN
-         xZGWIF0rFMZcSbk7IbHa+tgtMYQxVSxQIpyMQQ575qIm0qM8lmEspifutD/WFGEdieUv
-         MfVA==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=/HUgC6+DfezVRXVlvrqqiuZUuzFH/dEhiI87XZTQfFg=;
+        b=DGHVIuOZCGYmA00RqlMGijcBjKaUVCmZQdl4G7jIrM/fDwWEjUfbNbbyxCbpchrOsw
+         3rT97fgn+pr3kikk7S9uT7+bLGjCojGIKt0O++qYrxCWJ/KF0/uNjq69yLv9eNp2lv5T
+         kTYr6tGsm/aoxCOwBdIMl88VUaKrwri8AfRiCdcpYOuSHTgKAAz3N6lOyqt8Yr8r8d05
+         dLbvC3ncK+oBbwIVcWr86fJSRqN5GWbts5goKOaWRiA/GuwK/Uvf/FOYvKJJ66g2/Hfz
+         Lh1+wFAWzEXiiG/FwoFNv8Nbu3PKfvfkS10qgaRfsHBtVBsiDFsti78Ie0eOt18tDxkY
+         6z+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=+LAyOCwk6SHyqEw/rKDjXSU/9YXx3KMLTk7aU6n0oBI=;
-        b=E0/xJfDaRX+ucBFvyuDVLEYtXqg7RfuG/0y2drEZyI0dMEZuf5rJ6pX4C8Y3lR319b
-         KiSCE0surY0wN/Fo8QSqq98UXFFvegzYqTZQIOqGsJCWrghNAyep6nBrxeI1qzCtzksR
-         KwSl0MxylziUw2U5xSCOW9+NGUUncvRihVPqiberXb2mBLOKCcecohgvGU53qvOJkqQU
-         kbXIUgs6PLfqUNGWwb7knWiBQAuRk/D3y9qGKE0IrpUayfidButF85B6+KCNySqynDwd
-         IGw3AcvpGpBrify9391LCcmKJ5nKgc2JXBybvvN537E89hGX+ZZ93Ewbwg7v7+yVd2qv
-         Z+TQ==
-X-Gm-Message-State: AOAM5315r/yJ8+TaNKCbQd5U/0Kk7mC+0jnNQCj7Qi6NkgRcyyUCrqWg
-	UUoxvfM+WnRmYixHIjUl/EMlk75m5JA=
-X-Google-Smtp-Source: ABdhPJwSx/SKwp0/iUhLcWy0CUmm5bUzkrAFniomfl421zpuHmMUx0gpbjzSStzlRPvB7YlotSGpuQ==
-X-Received: by 2002:a17:906:49ce:: with SMTP id w14mr13462060ejv.273.1622281882160;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=/HUgC6+DfezVRXVlvrqqiuZUuzFH/dEhiI87XZTQfFg=;
+        b=NibVk0oPtvs3pF+eCQskKnkf9GKJ3A73hkWB6sFCKKy2rcKZ/bCj/duwiF1OeHjh53
+         ifTFMNp93HstOfMFpJHyRI+0NlUy0GwF1kFeG76QjLd74uGiif80cEj1aeor4Mpw9PaO
+         pPOvQh1LhbdLbifZAL+PtCfQyScddZYAZPFHM1d3yfiBqtJSyH1ZwtxoJncyyxq3dCZ5
+         gWwc0QPx66kPEN/TD0jaEbQbIgU5/DFnaCV4JU4g65qth6DD38fEav8NmZqdAGY8+aGz
+         F5oqofcmTtJFcnvoqWep2wHlQi2CoRU7yw/xtkbGqI9krxZ0sENjQzsYOHh93fVkjIEf
+         6L7w==
+X-Gm-Message-State: AOAM531VkqvvwaHKt+9L76mXMfCQjA32yMLeEwzhOL82pjw3a2PzhGpc
+	hKa8rFtrZDgpQU0pw6bhmVd8YSl7EUs=
+X-Google-Smtp-Source: ABdhPJxNy4UUlz6ISDsUb0F7TzcEnntzD1oSk/j4RGf8+DAS6ZVSR28pKH/akCdkCxw6Z0FGI/Tv1g==
+X-Received: by 2002:a17:906:68ca:: with SMTP id y10mr13332837ejr.318.1622281882889;
         Sat, 29 May 2021 02:51:22 -0700 (PDT)
 Return-Path: <martin.jansa@gmail.com>
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id q16sm3421425ejm.12.2021.05.29.02.51.21
+        by smtp.gmail.com with ESMTPSA id n15sm373ejz.36.2021.05.29.02.51.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 29 May 2021 02:51:21 -0700 (PDT)
+        Sat, 29 May 2021 02:51:22 -0700 (PDT)
 From: "Martin Jansa" <Martin.Jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 1/2] p7zip: refresh patches with devtool to apply cleanly
-Date: Sat, 29 May 2021 11:51:19 +0200
-Message-Id: <20210529095120.2135584-1-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 2/2] gtkwave: set REQUIRED_DISTRO_FEATURES only to wayland
+Date: Sat, 29 May 2021 11:51:20 +0200
+Message-Id: <20210529095120.2135584-2-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20210529095120.2135584-1-Martin.Jansa@gmail.com>
+References: <20210529095120.2135584-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-change_numMethods_from_bool_to_unsigned.patch added in:
-https://git.openembedded.org/meta-openembedded/commit/?id=3c36a8efe2a964c3aa9bfcd836cee3f80a837fcd
-doesn't apply cleanly:
+* after the migration to gtk3 in:
+  https://git.openembedded.org/meta-openembedded/commit/?id=8221db74e300619d002e2b385d12a5fe13e8999a
+  this was now failing with:
 
-ERROR: p7zip-16.02-r0 do_patch: Fuzz detected:
+| In file included from ../../gtkwave-gtk3-3.3.109/src/debug.h:17,
+|                  from ../../gtkwave-gtk3-3.3.109/src/vlist.h:18,
+|                  from ../../gtkwave-gtk3-3.3.109/src/analyzer.h:18,
+|                  from ../../gtkwave-gtk3-3.3.109/src/symbol.h:20,
+|                  from ../../gtkwave-gtk3-3.3.109/src/vcd.h:32,
+|                  from ../../gtkwave-gtk3-3.3.109/src/ae2.h:16,
+|                  from ../../gtkwave-gtk3-3.3.109/src/globals.h:27,
+|                  from ../../gtkwave-gtk3-3.3.109/src/timeentry.c:11:
+| ../../gtkwave-gtk3-3.3.109/src/gtk23compat.h:12:10: fatal error: gdk/gdkwayland.h: No such file or directory
+|    12 | #include <gdk/gdkwayland.h>
+|       |          ^~~~~~~~~~~~~~~~~~
 
-Applying patch change_numMethods_from_bool_to_unsigned.patch
-patching file CPP/7zip/Archive/Wim/WimHandler.cpp
-Hunk #1 succeeded at 298 with fuzz 1.
+  for distributions without wayland in DISTRO_FEATURES.
 
-The context lines in the patches can be updated with devtool:
+* because https://github.com/gtkwave/gtkwave/blob/f9d82a82aa3ddc30ca47984278371f62c9a3bd81/gtkwave3-gtk3/src/gtk23compat.h#L10
+  explicitly includes gdk/gdkwayland.h for gtk-3.22.26 and newer (oe-core currently has 3.24.29)
 
-    devtool modify p7zip
-    devtool finish --force-patch-refresh p7zip <layer_path>
-
-Don't forget to review changes done by devtool!
-
-ERROR: p7zip-16.02-r0 do_patch: QA Issue: Patch log indicates that patches do not apply cleanly. [patch-fuzz]
+* restrict REQUIRED_DISTRO_FEATURES to wayland only (instead of GTK3DISTROFEATURES which includes x11 as well).
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...Fix-narrowing-errors-Wc-11-narrowing.patch |  3 ++-
- .../p7zip/files/CVE-2017-17969.patch          | 13 +++++++++--
- ...nge_numMethods_from_bool_to_unsigned.patch | 23 +++++++++++++------
- ...t_override_compiler_and_do_not_strip.patch | 16 +++++++++----
- 4 files changed, 41 insertions(+), 14 deletions(-)
+ meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.109.bb | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/p7zip/files/0001-Fix-narrowing-errors-Wc-11-narrowing.patch b/meta-oe/recipes-extended/p7zip/files/0001-Fix-narrowing-errors-Wc-11-narrowing.patch
-index ae27517458..1f08d1603a 100644
---- a/meta-oe/recipes-extended/p7zip/files/0001-Fix-narrowing-errors-Wc-11-narrowing.patch
-+++ b/meta-oe/recipes-extended/p7zip/files/0001-Fix-narrowing-errors-Wc-11-narrowing.patch
-@@ -1,4 +1,4 @@
--From b6b1782af4aa7f9084d32e4144738dc2535c8d6f Mon Sep 17 00:00:00 2001
-+From 653674e11872465dd5edf1c1e8413ea813d7e086 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Mon, 23 Apr 2018 23:07:21 -0700
- Subject: [PATCH] Fix narrowing errors -Wc++11-narrowing
-@@ -17,6 +17,7 @@ also reported here https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=224930
- Upstream-Status: Pending
+diff --git a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.109.bb b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.109.bb
+index 2b572f7e2f..c8d7e959c1 100644
+--- a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.109.bb
++++ b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.109.bb
+@@ -23,9 +23,12 @@ DEPENDS = " \
  
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- ---
-  CPP/Windows/ErrorMsg.cpp | 14 +++++++-------
-  1 file changed, 7 insertions(+), 7 deletions(-)
-diff --git a/meta-oe/recipes-extended/p7zip/files/CVE-2017-17969.patch b/meta-oe/recipes-extended/p7zip/files/CVE-2017-17969.patch
-index 177d1455f8..9ba1078071 100644
---- a/meta-oe/recipes-extended/p7zip/files/CVE-2017-17969.patch
-+++ b/meta-oe/recipes-extended/p7zip/files/CVE-2017-17969.patch
-@@ -1,4 +1,7 @@
--p7zip: Fix CVE-2017-17969
-+From 7f2da4f810b429ddb7afa0e252e3d02ced0eba87 Mon Sep 17 00:00:00 2001
-+From: Radovan Scasny <radovan.scasny@siemens.com>
-+Date: Tue, 20 Feb 2018 12:08:13 +0100
-+Subject: [PATCH] p7zip: Fix CVE-2017-17969
+ inherit pkgconfig autotools gettext texinfo mime mime-xdg
  
- [No upstream tracking] -- https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=888297
+-# depends on gtk+3 which has this restriction
+ inherit features_check
+-ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
++# depends on gtk+3 which has this restriction
++# ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
++# but https://github.com/gtkwave/gtkwave/blob/f9d82a82aa3ddc30ca47984278371f62c9a3bd81/gtkwave3-gtk3/src/gtk23compat.h#L10
++# explicitly includes gdk/gdkwayland.h for gtk-3.22.26 and newer (oe-core currently has 3.24.29)
++REQUIRED_DISTRO_FEATURES = "wayland"
  
-@@ -8,12 +11,18 @@ Compress/ShrinkDecoder.cpp: Heap-based buffer overflow
- in the NCompress::NShrink::CDecoder::CodeReal method
- in 7-Zip before 18.00 and p7zip allows remote attackers
- to cause a denial of service (out-of-bounds write)
--or potentially execute arbitrary code via a crafted ZIP archive. 
-+or potentially execute arbitrary code via a crafted ZIP archive.
- 
- Upstream-Status: Backport [https://sourceforge.net/p/p7zip/bugs/_discuss/thread/0920f369/8316/attachment/CVE-2017-17969.patch]
- CVE: CVE-2017-17969
- Signed-off-by: Radovan Scasny <radovan.scasny@siemens.com>
- 
-+---
-+ CPP/7zip/Compress/ShrinkDecoder.cpp | 5 +++++
-+ 1 file changed, 5 insertions(+)
-+
-+diff --git a/CPP/7zip/Compress/ShrinkDecoder.cpp b/CPP/7zip/Compress/ShrinkDecoder.cpp
-+index 80b7e67..5bb0559 100644
- --- a/CPP/7zip/Compress/ShrinkDecoder.cpp
- +++ b/CPP/7zip/Compress/ShrinkDecoder.cpp
- @@ -121,7 +121,12 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
-diff --git a/meta-oe/recipes-extended/p7zip/files/change_numMethods_from_bool_to_unsigned.patch b/meta-oe/recipes-extended/p7zip/files/change_numMethods_from_bool_to_unsigned.patch
-index edde525933..93eb0588c0 100644
---- a/meta-oe/recipes-extended/p7zip/files/change_numMethods_from_bool_to_unsigned.patch
-+++ b/meta-oe/recipes-extended/p7zip/files/change_numMethods_from_bool_to_unsigned.patch
-@@ -1,4 +1,7 @@
--fixes the below error
-+From 0820ef4b9238c1e39ae5bda32cc08cce3fd3ce89 Mon Sep 17 00:00:00 2001
-+From: Nisha Parrakat <Nisha.Parrakat@kpit.com>
-+Date: Wed, 26 May 2021 19:59:28 +0000
-+Subject: [PATCH] fixes the below error
- 
- | ../../../../CPP/7zip/Archive/Wim/WimHandler.cpp: In member function 'virtual LONG NArchive::NWim::CHandler::GetArchiveProperty(PROPID, PROPVARIANT*)':
- | ../../../../CPP/7zip/Archive/Wim/WimHandler.cpp:308:11: error: use of an operand of type 'bool' in 'operator++' is forbidden in C++17
-@@ -7,19 +10,25 @@ fixes the below error
- | ../../../../CPP/7zip/Archive/Wim/WimHandler.cpp:318:9: error: use of an operand of type 'bool' in 'operator++' is forbidden in C++17
- |   318 |         numMethods++;
- 
--
- use unsigned instead of bool
- Signed-off-by: Nisha Parrakat <Nisha.Parrakat@kpit.com>
- 
- Upstream-Status: Pending
----- ./CPP/7zip/Archive/Wim/WimHandler.cpp       2021-05-20 10:51:56.997402701 +0000
--+++ ./CPP/7zip/Archive/Wim/WimHandler.cpp       2021-05-20 10:52:16.665604125 +0000
--@@ -298,7 +298,7 @@
- 
--       AString res;
-+---
-+ CPP/7zip/Archive/Wim/WimHandler.cpp | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
- 
-+diff --git a/CPP/7zip/Archive/Wim/WimHandler.cpp b/CPP/7zip/Archive/Wim/WimHandler.cpp
-+index 27d3298..4ff5cfe 100644
-+--- a/CPP/7zip/Archive/Wim/WimHandler.cpp
-++++ b/CPP/7zip/Archive/Wim/WimHandler.cpp
-+@@ -298,7 +298,7 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
-+ 
-+       AString res;
-+ 
- -      bool numMethods = 0;
- +      unsigned numMethods = 0;
-        for (unsigned i = 0; i < ARRAY_SIZE(k_Methods); i++)
-        {
--         if (methodMask & ((UInt32)1 << i
-+         if (methodMask & ((UInt32)1 << i))
-diff --git a/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler_and_do_not_strip.patch b/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler_and_do_not_strip.patch
-index b0a560fe98..2636e7f6f4 100644
---- a/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler_and_do_not_strip.patch
-+++ b/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler_and_do_not_strip.patch
-@@ -1,4 +1,7 @@
--do not override compiler and do not strip
-+From b2aa209dfc5e59d6329b55b9764782334b63dbe8 Mon Sep 17 00:00:00 2001
-+From: Raphael Freudiger <raphael.freudiger@siemens.com>
-+Date: Wed, 11 Feb 2015 09:11:47 +0100
-+Subject: [PATCH] do not override compiler and do not strip
- 
- The default makefile sets the compiler to g++ or gcc. This leads to a wrong architecture when cross-compiling.
- Remove the hardcoded compiler and just append the flags to CXX and CC.
-@@ -7,9 +10,14 @@ Upstream-Status: Pending
- Signed-off-by: Raphael Freudiger <raphael.freudiger@siemens.com>
- Reviewed-By: Pascal Bach <pascal.bach@siemens.com>
- 
--diff -Nurp p7zip_15.14.1_orig/makefile.machine p7zip_15.14.1/makefile.machine
----- p7zip_15.14.1_orig/makefile.machine	2016-03-23 20:37:47.000000000 +0100
--+++ p7zip_15.14.1/makefile.machine	2016-06-17 15:33:39.720454477 +0200
-+---
-+ makefile.machine | 4 +---
-+ 1 file changed, 1 insertion(+), 3 deletions(-)
-+
-+diff --git a/makefile.machine b/makefile.machine
-+index 9e34c34..e9244d9 100644
-+--- a/makefile.machine
-++++ b/makefile.machine
- @@ -2,7 +2,7 @@
-  # makefile for Linux (x86, PPC, alpha ...)
-  #
+ EXTRA_OECONF = " \
+     --enable-gtk3 \
 -- 
 2.30.2
 
