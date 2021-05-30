@@ -1,96 +1,71 @@
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web09.33931.1622393768027025146
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web12.33874.1622393932528889381
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 May 2021 09:56:08 -0700
+ Sun, 30 May 2021 09:58:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=eecVKA/f;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id d20so3993654pls.13
-        for <openembedded-devel@lists.openembedded.org>; Sun, 30 May 2021 09:56:07 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Gdj+N3ms;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id q25so7230896pfn.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 30 May 2021 09:58:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:references:from:organization:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=L/ClhbdZZi4Zpr+ph6ZBSJbxJenv8G1p5MxfExxHg94=;
-        b=eecVKA/fG0YW6xeEH1MexuGYCU54hMKIksOir6EqBI9bFc0O3Y1fvroemElPMzhxgJ
-         rA715QHWiePI3zL+D4zMNY3hlkNxsehyIvyiiQk2HnBGzqo9493pNN75lscbm7Kisb/f
-         BZsEypsn048eEcGIBYHsvgzqS5WgTfykR2Iq2VFvGEaBrMRDgRhYDMXxfFkQjbdKncZ5
-         SRqs3jLfUbszBExKkgViVm6eRndKKZBBwpPxGF7EsCj8ImTRp1b9bkTlkRrPNS//y0+q
-         Y41kB7UKp0w/WxWB7rJw3Cvgz0vva4ouFxOy1afNpbXg9WFtUOsJLxCX/UXiMXhoEz4A
-         XnYA==
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=JC+c5a0Vt33k43Bs4b4RJBpHrkCqUk5KYOwUHZRzM9U=;
+        b=Gdj+N3ms6DGmWD3KRtir/7hgDXZ/HOp67CBINJb8IIhI6FKXwGfN7uvMlRNptNbo/O
+         fl7jVFFV/iszgU99xpb71WAqSygcdF6bUC5o2KFSxjHJ+9OaSyEp9NH2dIz2u3qXU1BR
+         SHylNdJYfVN7x+TJh+Ek4lTREAH7VXiB9GU+AINdj9xGYhkRKWFrTFdNWMY0/37nujpp
+         7Ju+vfCEN21lFfjsRcukkAiz/TI5aMF8Bw5P1gWMuSQ2ahdJwlaMxU3B9fbU+kTaiFSD
+         XfvEBzi/tIJYNLL0LaJoVda8aAeRyJtGA5VoYg7mdUHvpFkZv9WVFOkLILz6BX74eG2t
+         YrNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=L/ClhbdZZi4Zpr+ph6ZBSJbxJenv8G1p5MxfExxHg94=;
-        b=UXliqgRuCEMzlwMXqJIS4uGe78e9E8CH0dyx8XVw73+mEQLm/tvQ/+n5JWK36PI1/g
-         ZTZmuTjGohmKW82sExdVwZr1i8q/DP3PKx64OWFlendzwqStI/MLS/YYwHVs4gZfVVL8
-         VLPhMg9h/3ETOeN7LjsPv5fT/FJG83FheQ7kuLMnWojQVtA/9iE3aA3rPTepRUaFivWa
-         Pk5EIbc2/dog+9yPjm8ctL1TPc6FqIwjlRAmpgFy2erT3csHMyd+7kUk3ioWvLSt04vU
-         w4Nx4WlgcUyzYJNFcAg/doX5yXryOsso2p2nz28RHWjAiFgzcc/abMYMJ354IDDUn8vt
-         tb4Q==
-X-Gm-Message-State: AOAM5305oqXU8Pt5Tp1tIsgEF7XlVnIySLPyIiCOVvhV0LmIcz/ji6gp
-	/7MNHm1KYxxq3d58QVpjJAEAPSQNhX5aMg==
-X-Google-Smtp-Source: ABdhPJzG+ztRyrfZv4xYzKE6kSKC2theyhvd4eui6Eb0DFU1fdsn/SXNe2D2uCld6RQk8yiw7UkKvQ==
-X-Received: by 2002:a17:90a:4308:: with SMTP id q8mr14698812pjg.78.1622393767391;
-        Sun, 30 May 2021 09:56:07 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:a0f0::6bc9? ([2601:646:9200:a0f0::6bc9])
-        by smtp.gmail.com with ESMTPSA id f3sm8625216pfd.21.2021.05.30.09.56.06
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 30 May 2021 09:56:07 -0700 (PDT)
-Subject: Re: [oe] [meta-python][v2][PATCH] python3-scapy: drop this recipe
-To: Armin Kuster <akuster808@gmail.com>,
- openembedded-devel@lists.openembedded.org
-References: <20210530165040.547348-1-akuster808@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <061d412b-55cf-07d8-5be7-9e150fc3aa98@gmail.com>
-Date: Sun, 30 May 2021 09:56:05 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.2
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=JC+c5a0Vt33k43Bs4b4RJBpHrkCqUk5KYOwUHZRzM9U=;
+        b=GDOcDkmr7S/ZA6qA2F9LN52FtkZe1q2laJBC29imGJgSrpJccqETpSLdE/+IXwi4Wp
+         Kk0JAthc9QlOjBKOS90xI6luxzJSQxgHBlyLSSRWpqbUCVVDHOBiDd5yzroh1UxJHl+Y
+         SuAAQPaH4OF+laTHC7Kfxqhoi4WmjPIOLr72U9tkH6FyNZigD+R7Qz48ujN9h6l2WHdX
+         UFSfUbr9qLtEWVkEAVzcFiUqGsKg+HuOlLS84q9IFenOftlA4jGqBhBrLM1hCtkL7Zeh
+         5wyUqiakln/Mbbe/E5atXsqzoU/ViqqhroL0py8CrydNsSmBLffs+yRcsGv/vzvaF9N0
+         W5OQ==
+X-Gm-Message-State: AOAM533Jfk90Jj+5LP66P8ny3hTcB31HKjg1gBg5dv6yWVbSXVTDRVDq
+	CjxvrHh6cdZj0auptkRFuIbLJ4K1L5JXZg==
+X-Google-Smtp-Source: ABdhPJwR/XStroUsQV/pZITHmjnVd1BOcUf7nYCGXWQVg3yEq45SssSQ34+7f/ZG/IWdI8DIe0Qycw==
+X-Received: by 2002:a63:1443:: with SMTP id 3mr19020030pgu.69.1622393931993;
+        Sun, 30 May 2021 09:58:51 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from hilo.hsdl.ca.comcast.net (c-67-181-203-136.hsd1.ca.comcast.net. [67.181.203.136])
+        by smtp.gmail.com with ESMTPSA id m1sm9068641pfb.14.2021.05.30.09.58.51
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 30 May 2021 09:58:51 -0700 (PDT)
+From: "Armin Kuster" <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-openembedded[PATCH 1/2] python3-scapy: add pkg to pkg grp
+Date: Sun, 30 May 2021 16:58:49 +0000
+Message-Id: <20210530165850.554590-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.24.3
 MIME-Version: 1.0
-In-Reply-To: <20210530165040.547348-1-akuster808@gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-needs to be removed from 
-meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb as well.
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../recipes-core/packagegroups/packagegroup-meta-networking.bb   | 1 +
+ 1 file changed, 1 insertion(+)
 
-On 5/30/21 9:50 AM, Armin Kuster wrote:
-> This recipe points to an unmaintained uri
-> Switch to the official project.
-> Moved package to meta-networking
-> 
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->   .../recipes-devtools/python/python3-scapy_0.26.bb   | 13 -------------
->   1 file changed, 13 deletions(-)
->   delete mode 100644 meta-python/recipes-devtools/python/python3-scapy_0.26.bb
-> 
-> diff --git a/meta-python/recipes-devtools/python/python3-scapy_0.26.bb b/meta-python/recipes-devtools/python/python3-scapy_0.26.bb
-> deleted file mode 100644
-> index 31c88942d..000000000
-> --- a/meta-python/recipes-devtools/python/python3-scapy_0.26.bb
-> +++ /dev/null
-> @@ -1,13 +0,0 @@
-> -DESCRIPTION = "Packet crafting/sending/sniffing, PCAP processing tool,\
-> -based on scapy with python3 compatibility"
-> -SECTION = "devel/python"
-> -HOMEPAGE = "https://github.com/phaethon/scapy"
-> -LICENSE = "GPLv2"
-> -LIC_FILES_CHKSUM = "file://PKG-INFO;md5=a88f5c4e1c935f295ebeaf51fc8644ef"
-> -
-> -inherit pypi setuptools3
-> -
-> -PYPI_PACKAGE = "scapy-python3"
-> -
-> -SRC_URI[md5sum] = "513469447735a4a416d495f63e28aa4b"
-> -SRC_URI[sha256sum] = "81e4f5522d38c136fd3f1be4e35ffe4fd1f4c2091db3c021d95f8b9d5978b9eb"
-> 
-> 
-> 
-> 
-> 
+diff --git a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
+index 67a93e17b..24b9a1b49 100644
+--- a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
++++ b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
+@@ -100,6 +100,7 @@ RDEPENDS_packagegroup-meta-networking-daemons_remove_libc-musl = "opensaf"
+ 
+ RDEPENDS_packagegroup-meta-networking-devtools = "\
+     python3-ldap \
++    python3-scapy \
+ "
+ 
+ RDEPENDS_packagegroup-meta-networking-extended = "\
+-- 
+2.24.3
+
