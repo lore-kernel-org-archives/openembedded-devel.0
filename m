@@ -1,132 +1,165 @@
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.web09.34932.1622399681537774935
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.web08.34853.1622399682386162251
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 May 2021 11:34:41 -0700
+ Sun, 30 May 2021 11:34:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=XpJff9UM;
- spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id y15so3374665pfl.4
-        for <openembedded-devel@lists.openembedded.org>; Sun, 30 May 2021 11:34:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=DJV8kqfo;
+ spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f172.google.com with SMTP id 29so6661266pgu.11
+        for <openembedded-devel@lists.openembedded.org>; Sun, 30 May 2021 11:34:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=PwcjOQKCh9cBxbHJ47D95nYWB51p/5PJEUy2PT9wnXE=;
-        b=XpJff9UMfjgXeEJak3YX58gbonj/FRLA29CrNnLqug2gHDYMXxTBhfy3911A9BIOV0
-         boIvtpRvEv16jqwnyx6x6lKpb0RM71A1NlsM8WbYjzQuijwqAhjeYT6RrpGX4lx0bbdC
-         9u5PsYntWC0YXDvJJFb0g0MbndZvBnmc84LObeHB7Sg1xEXqn/LSniq4s1uPKj/avNfZ
-         W6uQCRZ30tzrLIJvY8Ao0X2LuoseHufh63bgGwKOX4dfa2nuxk0ciYg4aMxpE4+5k2pk
-         ebDASWcc1ga7k71p1sI28DZh8Fu4sEh63baVsAmCN97vtCy2WRRNBa0u1+gftNyOPVsN
-         3HEw==
+        bh=Y/s9+LUx7ULyMiNVumVHeqzFc9WAfgEu9XE1G/24u7g=;
+        b=DJV8kqfoOkEYrB4msTxpJJPAEeTJXBJxxpxhVl2sWVmHDi2bCNQrrRhxsyk/Cl2W3J
+         sbqm6/unISnG8DuhS7rYEEeYY4z3Vi+8ANjIXHehSvqi7Sx6cfgRPUyBn950VYfVenRM
+         9vJ81J2p5IwIzTIHpuOYCFysTrwK9ug2fT+V3RgX2KHPQKfFj+ExrAFlK5ti1gb+XSlD
+         GrPZDHfWEwFIYqarPH0WZ78qwLecKFA28eKo0/TnVrpuOmJ4s0UCbLHNe0cnbgHuJrin
+         ObobkKJtnSJp3Mz96maxWWDOZiE4+vGkuXsMSh1KcGFbzsCxFmvem49NNv+q6JxzDU8P
+         0vjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=PwcjOQKCh9cBxbHJ47D95nYWB51p/5PJEUy2PT9wnXE=;
-        b=OEWyUog+I1THu1p+p4uQqHbreZqlLfUXJpGMXLJaL6zw2kY7973BlFFu1YD7WuSzMI
-         pnSsVps5XZNdbPpcnM0xe0o9/HaaSNVNnP8tBdzUuf4oxOlxm7KbNaGNzQoNR+veAWag
-         BX8conQZSImkJbkztyAVSgl1+U6gTmEt85J2EEiSrdm/+Pa+Zb3yQn6aBSRAQ6ht8L9R
-         wfL9fLl/oM1muqytmV0myYb5dkTA2E9utzFgQA5MUV96Sl9fXG4slqLb0dcX71S3o+jP
-         uMloApJpz+spTVDG0L9XmyUhPuOZRPWL2Qep2GBr77MNo9HkOvJspdq6DWxIioizvhOn
-         j8kg==
-X-Gm-Message-State: AOAM533TQHDcubbOvCyoTdOL4bzVRP9X2DCogTredc2Y5uEjQ9HNtS+o
-	PNOg7kHkEEOPwCownX62NAxZIbBj3LvBWQ==
-X-Google-Smtp-Source: ABdhPJwg6rPh6rHbMLBHigBQI2ti+gClPM7FY7PBIgK2QMpbHudNEyfWI9INzqa5dmIJrc0I5dPAwA==
-X-Received: by 2002:a62:1796:0:b029:2d5:91b4:642d with SMTP id 144-20020a6217960000b02902d591b4642dmr13330200pfx.7.1622399680969;
-        Sun, 30 May 2021 11:34:40 -0700 (PDT)
+        bh=Y/s9+LUx7ULyMiNVumVHeqzFc9WAfgEu9XE1G/24u7g=;
+        b=JoO7bfRFMAa4Jx9waUqzNzakX7XyaBCSVSlL7M3nE49juHRcKvZrpOnvpN00u0hyno
+         qRKBWXmtJPBtBYN3vlLWvHwjaFoXrmdAj1sOLU/KJNRyf7k3JwF9hnkXWXKiomKj6L4m
+         Y6opsxSgOnHX31qF0DofMi022Xh5V3H9U2TXR0NmilDG0aVyS8y+W8ZXMKog4ZiG3rYe
+         9+ZBMKJZ/6xhBXseXal9d8NN3yBBfsYVkRTRmb2W4GKouf15wsMY9/XP41UKPg+TWXx6
+         eEpmYAs0harBWJeTXsRdtLkhOXzSl78s1tWm5VbUi0uvsZCwJk+ufzwE+dTaNXLWm9yJ
+         gHLw==
+X-Gm-Message-State: AOAM533pp9d0W/28g6tVPNyMHdULWcRaes8EEQBvqfwGyZMRGbDEuxgt
+	OXQxZ7sDzWssCYwmh8ltT0emxE7OfXykXA==
+X-Google-Smtp-Source: ABdhPJwcJrGvTHlb9Gu9/BCUicEU5WAzszqSIjxC7PfA1iMDmWj6+EcwwOr7x9FMt64wDR6q07PJtQ==
+X-Received: by 2002:a63:ff18:: with SMTP id k24mr19658094pgi.134.1622399681806;
+        Sun, 30 May 2021 11:34:41 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:417e:d6cd:22c6:4534])
-        by smtp.gmail.com with ESMTPSA id z19sm8828696pjq.11.2021.05.30.11.34.40
+        by smtp.gmail.com with ESMTPSA id z19sm8828696pjq.11.2021.05.30.11.34.41
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 30 May 2021 11:34:40 -0700 (PDT)
+        Sun, 30 May 2021 11:34:41 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 09/12] hostapd: fix building with CONFIG_TLS=internal
-Date: Sun, 30 May 2021 11:34:19 -0700
-Message-Id: <f56fb13a2c5efe0802fca883f321bc6ea064d70f.1622399528.git.akuster808@gmail.com>
+Subject: [dunfell 10/12] opencv: Add fix for CVE-2019-5063 and CVE-2019-5064
+Date: Sun, 30 May 2021 11:34:20 -0700
+Message-Id: <943f5560aa3b34f1c0baa0b8093fe978d5db558d.1622399528.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1622399528.git.akuster808@gmail.com>
 References: <cover.1622399528.git.akuster808@gmail.com>
 
-From: Alexander Vickberg <wickbergster@gmail.com>
+From: "akash.hadke" <akash.hadke@kpit.com>
 
-The patch recently added for CVE-2021-30004 broke compilation with
-CONFIG_TLS=internal. This adds the necessary function to let it
-compile again.
+Added fix for below CVE's
 
-Signed-off-by: Alexander Vickberg <wickbergster@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit d6ef4170747d6668fa940328334055eef3e1e1d6)
+CVE-2019-5063
+CVE-2019-5064
+Link: https://github.com/opencv/opencv/commit/f42d5399aac80d371b17d689851406669c9b9111.patch
+
+Signed-off-by: akash hadke <akash.hadke@kpit.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...001-Prepare-for-CVE-2021-30004.patch.patch | 45 +++++++++++++++++++
- .../hostapd/hostapd_2.9.bb                    |  1 +
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0001-Prepare-for-CVE-2021-30004.patch.patch
+ .../opencv/CVE-2019-5063_and_2019-5064.patch  | 78 +++++++++++++++++++
+ .../recipes-support/opencv/opencv_4.1.0.bb    |  1 +
+ 2 files changed, 79 insertions(+)
+ create mode 100644 meta-oe/recipes-support/opencv/opencv/CVE-2019-5063_and_2019-5064.patch
 
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/0001-Prepare-for-CVE-2021-30004.patch.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/0001-Prepare-for-CVE-2021-30004.patch.patch
+diff --git a/meta-oe/recipes-support/opencv/opencv/CVE-2019-5063_and_2019-5064.patch b/meta-oe/recipes-support/opencv/opencv/CVE-2019-5063_and_2019-5064.patch
 new file mode 100644
-index 0000000000..1bedb4f753
+index 0000000000..b4d5e6dc44
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd/0001-Prepare-for-CVE-2021-30004.patch.patch
-@@ -0,0 +1,45 @@
-+From 14fab0772db19297c82dd1b8612c9335369dce41 Mon Sep 17 00:00:00 2001
-+From: Alexander Vickberg <wickbergster@gmail.com>
-+Date: Mon, 17 May 2021 17:54:13 +0200
-+Subject: [PATCH] Prepare for CVE-2021-30004.patch
++++ b/meta-oe/recipes-support/opencv/opencv/CVE-2019-5063_and_2019-5064.patch
+@@ -0,0 +1,78 @@
++From f42d5399aac80d371b17d689851406669c9b9111 Mon Sep 17 00:00:00 2001
++From: Alexander Alekhin <alexander.alekhin@intel.com>
++Date: Thu, 7 Nov 2019 14:01:51 +0300
++Subject: [PATCH] core(persistence): add more checks for implementation
++ limitations
 +
-+Without this building fails for CONFIG_TLS=internal
-+
-+Signed-off-by: Alexander Vickberg <wickbergster@gmail.com>
++Signed-off-by: akash hadke <akash.hadke@kpit.com>
 +---
-+ src/tls/asn1.h       | 6 ++++++
-+ src/utils/includes.h | 1 +
-+ 2 files changed, 7 insertions(+)
-+
-+diff --git a/src/tls/asn1.h b/src/tls/asn1.h
-+index 6bd7df5..77b94ef 100644
-+--- a/src/tls/asn1.h
-++++ b/src/tls/asn1.h
-+@@ -66,6 +66,12 @@ void asn1_oid_to_str(const struct asn1_oid *oid, char *buf, size_t len);
-+ unsigned long asn1_bit_string_to_long(const u8 *buf, size_t len);
-+ int asn1_oid_equal(const struct asn1_oid *a, const struct asn1_oid *b);
-+ 
-++static inline bool asn1_is_null(const struct asn1_hdr *hdr)
-++{
-++	return hdr->class == ASN1_CLASS_UNIVERSAL &&
-++		hdr->tag == ASN1_TAG_NULL;
-++}
-++
-+ extern struct asn1_oid asn1_sha1_oid;
-+ extern struct asn1_oid asn1_sha256_oid;
-+ 
-+diff --git a/src/utils/includes.h b/src/utils/includes.h
-+index 75513fc..741fc9c 100644
-+--- a/src/utils/includes.h
-++++ b/src/utils/includes.h
-+@@ -18,6 +18,7 @@
-+ 
-+ #include <stdlib.h>
-+ #include <stddef.h>
-++#include <stdbool.h>
-+ #include <stdio.h>
-+ #include <stdarg.h>
-+ #include <string.h>
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb
-index e586018685..a9780bc6db 100644
---- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb
-@@ -11,6 +11,7 @@ SRC_URI = " \
-     file://defconfig \
-     file://init \
-     file://hostapd.service \
-+    file://0001-Prepare-for-CVE-2021-30004.patch.patch \
-     file://CVE-2019-16275.patch \
-     file://CVE-2019-5061.patch \
-     file://CVE-2021-0326.patch \
++ modules/core/src/persistence_json.cpp | 8 ++++++++
++ modules/core/src/persistence_xml.cpp  | 6 ++++--
++ 2 files changed, 12 insertions(+), 2 deletions(-)
++---
++CVE: CVE-2019-5063
++CVE: CVE-2019-5064
++Upstream-Status: Backport [https://github.com/opencv/opencv/commit/f42d5399aac80d371b17d689851406669c9b9111.patch]
++---
++diff --git a/modules/core/src/persistence_json.cpp b/modules/core/src/persistence_json.cpp
++index 89914e6534f..2efdf17d3f5 100644
++--- a/modules/core/src/persistence_json.cpp
+++++ b/modules/core/src/persistence_json.cpp
++@@ -578,10 +578,14 @@ class JSONParser : public FileStorageParser
++                             sz = (int)(ptr - beg);
++                             if( sz > 0 )
++                             {
+++                                if (i + sz >= CV_FS_MAX_LEN)
+++                                    CV_PARSE_ERROR_CPP("string is too long");
++                                 memcpy(buf + i, beg, sz);
++                                 i += sz;
++                             }
++                             ptr++;
+++                            if (i + 1 >= CV_FS_MAX_LEN)
+++                                CV_PARSE_ERROR_CPP("string is too long");
++                             switch ( *ptr )
++                             {
++                             case '\\':
++@@ -605,6 +609,8 @@ class JSONParser : public FileStorageParser
++                             sz = (int)(ptr - beg);
++                             if( sz > 0 )
++                             {
+++                                if (i + sz >= CV_FS_MAX_LEN)
+++                                    CV_PARSE_ERROR_CPP("string is too long");
++                                 memcpy(buf + i, beg, sz);
++                                 i += sz;
++                             }
++@@ -620,6 +626,8 @@ class JSONParser : public FileStorageParser
++                             sz = (int)(ptr - beg);
++                             if( sz > 0 )
++                             {
+++                                if (i + sz >= CV_FS_MAX_LEN)
+++                                    CV_PARSE_ERROR_CPP("string is too long");
++                                 memcpy(buf + i, beg, sz);
++                                 i += sz;
++                             }
++diff --git a/modules/core/src/persistence_xml.cpp b/modules/core/src/persistence_xml.cpp
++index 89876dd3da8..52b53744254 100644
++--- a/modules/core/src/persistence_xml.cpp
+++++ b/modules/core/src/persistence_xml.cpp
++@@ -627,6 +627,8 @@ class XMLParser : public FileStorageParser
++                                         c = '\"';
++                                     else
++                                     {
+++                                        if (len + 2 + i >= CV_FS_MAX_LEN)
+++                                            CV_PARSE_ERROR_CPP("string is too long");
++                                         memcpy( strbuf + i, ptr-1, len + 2 );
++                                         i += len + 2;
++                                     }
++@@ -635,9 +637,9 @@ class XMLParser : public FileStorageParser
++                                 CV_PERSISTENCE_CHECK_END_OF_BUFFER_BUG_CPP();
++                             }
++                         }
+++                        if (i + 1 >= CV_FS_MAX_LEN)
+++                            CV_PARSE_ERROR_CPP("Too long string literal");
++                         strbuf[i++] = c;
++-                        if( i >= CV_FS_MAX_LEN )
++-                            CV_PARSE_ERROR_CPP( "Too long string literal" );
++                     }
++                     elem->setValue(FileNode::STRING, strbuf, i);
++                 }
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
+index de708fd06d..19d5d0c891 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
+@@ -54,6 +54,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
+            file://CVE-2019-14493.patch \
+            file://CVE-2019-15939.patch \
+            file://CVE-2019-19624.patch \
++           file://CVE-2019-5063_and_2019-5064.patch \
+            "
+ PV = "4.1.0"
+ 
 -- 
 2.17.1
 
