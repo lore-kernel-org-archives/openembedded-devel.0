@@ -1,91 +1,144 @@
-Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com [209.85.222.169])
- by mx.groups.io with SMTP id smtpd.web09.25160.1622321979678190758
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web08.33029.1622389556320079530
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 29 May 2021 13:59:39 -0700
+ Sun, 30 May 2021 08:45:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=oXL8S2Oa;
- spf=pass (domain: gmail.com, ip: 209.85.222.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f169.google.com with SMTP id i67so7667950qkc.4
-        for <openembedded-devel@lists.openembedded.org>; Sat, 29 May 2021 13:59:39 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=HZmwtA5o;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id k7so338843pjf.5
+        for <openembedded-devel@lists.openembedded.org>; Sun, 30 May 2021 08:45:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=/TijWKeK2Gj5MeqL8upYv1XSehsRpPSpXib7epjGP8w=;
-        b=oXL8S2OazHMONeUxpHJ8ICRVo0YlGAMIM2Ghpb6VmjR93YDgKQ26bZDoRTBBRe5gnT
-         7BmfrEDW/19A08Va36YdTGv4krAWoh8R6PMfmmhxOoGleRvOyflkEfjYRFzOUa8vw+x9
-         90SfKbvw3zfG868bdy7wuLPAjdMf56joq3UOBHwrtOHx8PRzHiJiT7FRMCqMpKB4+9FS
-         8J2UPTF8p+rYPrd7RVEU4QtFEMSvcxuN3XGiM+d/9jeY4KGHHt1nFSlAYj1xqbIA+3w+
-         WZppBUORO/1+uNJhLhJsqHydSbXThZfqafEngAftmUYsO2i/5ctHKQIqS+5Z4zU0yppW
-         4dqA==
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=SNrUnF31H+IvjBHUfbbzfL24A9S2LKyR9M+NqeEzGU8=;
+        b=HZmwtA5oMCaF3Fa/s6TG2O2TGmC1/kufq9Uv+MNzUtEuWO16Fu9xx9kefrlHCNjST0
+         RGkTBd2O/P8YmQq04embogWKbf8AEmJHd+FTp443fDDof5J73lQjIa1gpTrtFbJWoadU
+         sVkTnYzi8F0LHbDVENhrwQgDXWMWQRTK648dl1qrmZHae6DGLOxqXehxczExYh1lMkGH
+         QYvs6kiLeo0h7Hwe1p5fUYFiOzJbiEN+9VpNuLGFRw1X/psakgA4PnfNTRI7EjzJkouK
+         y7snZm4J+g1dd5L9JfMT633Ypmt5TwVpvE/DMwgKHPZVSOQ8TPXM/11SWGlXJaXAxo2D
+         xtAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=/TijWKeK2Gj5MeqL8upYv1XSehsRpPSpXib7epjGP8w=;
-        b=APqnNPQMJvLBhbMgYsImrHU8X96+Xpa3T5U70tZe5lHFI8GCCheaWrb16euhVGb53A
-         j6PhICLzS8kqku/AE7Aahq7ALBaLRY1yA7fp3sKPyoFY9QSnKYyDziHmmVob/hqwEEmP
-         znqu5E2vjJAQCsSF+zn3FBODsbv7pfFUBEIr0+Syg9EtKbl366UfpaUgj4v9azYyxJmG
-         AQ7Wcw6NiwcJtdfmAV15deKAcjff0gjsYyt2leXzSWy4s+0/aRSfRGlEiKLA5T9KqVSo
-         aCGxcmDqpFxFHMn1rnvqQZpBYV5SQ9hHyUkZPfmTvkoRu0speQub9gdBL2a/z0Ee1JEO
-         Kx+A==
-X-Gm-Message-State: AOAM5312OvZBkhpicEs44mdnIyJVuDdazWC4AI4ln3gofJNRI/MHmmvU
-	05kptmJAZEQqQgLR5XNIfwLqX49tL2ejTETc7Tyodbb4+JXm/w==
-X-Google-Smtp-Source: ABdhPJxye8xQwLLCHBHPKStAF4YC48924Zd2Mjs6pwIsgpKu6nMKpZmTxylONPlP8fQYE+r9raFuYYNo54vMDyqwdpE=
-X-Received: by 2002:ae9:e40f:: with SMTP id q15mr3108952qkc.125.1622321978755;
- Sat, 29 May 2021 13:59:38 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=SNrUnF31H+IvjBHUfbbzfL24A9S2LKyR9M+NqeEzGU8=;
+        b=a6nVCS77TVay/FVf8ZXUIG6ffkZLU6LeaDHTjlhq8yUFVQw52w9c13hXcyMAfPZxfs
+         lbYyJVXxNPx+CR+KEe9L9l6AzIwsgW6h8PCdtNOl4UBwu8bmwfOnKMOW5vS2QldY0doX
+         AGY/gN6NJqDDwirNsaNraYq2unkAX8OY8Alb47nhunt6vw+5XhCfQxMi52771DgHvKb6
+         eLhuORjT/v6ysFOq+FvaR9+s8lykrvvfDgzkIk0s60pop+d20Ygc6plRq0LL1JzhnSdZ
+         mOlwildk2XZqMonM1Mv3RaAwBjaSZuIbJlVfCgP4cuFl2hFKBUumWsrrOPQuPOSKAIlI
+         Tmeg==
+X-Gm-Message-State: AOAM531USCYR4S7pDeHRYo7n7NkS37UeJXq02hucXi933t/ksIP0LZYa
+	cRfWvnm3jCEJrKOUDgKFUkjT6RQfi8pA8w==
+X-Google-Smtp-Source: ABdhPJzc+KccQ/BvUe/zAAdvjaxIMkZh8dbQYoDF4Aj2J4VF17Wxz+jYaVtrDM51YvdDrQDkEs1c8g==
+X-Received: by 2002:a17:902:7043:b029:104:8fa9:7443 with SMTP id h3-20020a1709027043b02901048fa97443mr2087236plt.64.1622389555393;
+        Sun, 30 May 2021 08:45:55 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from hilo.hsdl.ca.comcast.net (c-67-181-203-136.hsd1.ca.comcast.net. [67.181.203.136])
+        by smtp.gmail.com with ESMTPSA id q91sm1763099pja.50.2021.05.30.08.45.54
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 30 May 2021 08:45:55 -0700 (PDT)
+From: "Armin Kuster" <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH] python3-scapy: move from meta-security
+Date: Sun, 30 May 2021 15:45:53 +0000
+Message-Id: <20210530154553.434976-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.24.3
 MIME-Version: 1.0
-References: <20210528102902.13676-1-guy@guy-morand.ch>
-In-Reply-To: <20210528102902.13676-1-guy@guy-morand.ch>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sat, 29 May 2021 13:59:12 -0700
-Message-ID: <CAMKF1spqeRFGOzx5uKq=anc9pJ++BGx-rkcX5wM8yz407hD6Dg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] fish: add fish recipe
-To: Guy Morand <guy@guy-morand.ch>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-Hello Guy
+Update to the official 2.4.5 pkg
+The original package has not been updated in years.
+Include ptest
 
-Thanks for patch, it does not build in some configs e.g. with
-clang/arm64 I am seeing
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../python/python3-scapy/run-ptest            |  4 ++
+ .../python/python3-scapy_0.26.bb              | 13 ------
+ .../python/python3-scapy_2.4.5.bb             | 41 +++++++++++++++++++
+ 3 files changed, 45 insertions(+), 13 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-scapy/run-ptest
+ delete mode 100644 meta-python/recipes-devtools/python/python3-scapy_0.26.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-scapy_2.4.5.bb
 
-https://errors.yoctoproject.org/Errors/Details/585823/
+diff --git a/meta-python/recipes-devtools/python/python3-scapy/run-ptest b/meta-python/recipes-devtools/python/python3-scapy/run-ptest
+new file mode 100644
+index 000000000..797d8ecf7
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-scapy/run-ptest
+@@ -0,0 +1,4 @@
++#!/bin/sh
++UTscapy3 -t regression.uts -f text -l -C \
++    -o @PTEST_PATH@/scapy_ptest_$(date +%Y%m%d-%H%M%S).log \
++    2>&1 | sed -e 's/^passed None/PASS:/' -e 's/^failed None/FAIL:/'
+diff --git a/meta-python/recipes-devtools/python/python3-scapy_0.26.bb b/meta-python/recipes-devtools/python/python3-scapy_0.26.bb
+deleted file mode 100644
+index 31c88942d..000000000
+--- a/meta-python/recipes-devtools/python/python3-scapy_0.26.bb
++++ /dev/null
+@@ -1,13 +0,0 @@
+-DESCRIPTION = "Packet crafting/sending/sniffing, PCAP processing tool,\
+-based on scapy with python3 compatibility"
+-SECTION = "devel/python"
+-HOMEPAGE = "https://github.com/phaethon/scapy"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=a88f5c4e1c935f295ebeaf51fc8644ef"
+-
+-inherit pypi setuptools3
+-
+-PYPI_PACKAGE = "scapy-python3"
+-
+-SRC_URI[md5sum] = "513469447735a4a416d495f63e28aa4b"
+-SRC_URI[sha256sum] = "81e4f5522d38c136fd3f1be4e35ffe4fd1f4c2091db3c021d95f8b9d5978b9eb"
+diff --git a/meta-python/recipes-devtools/python/python3-scapy_2.4.5.bb b/meta-python/recipes-devtools/python/python3-scapy_2.4.5.bb
+new file mode 100644
+index 000000000..b1b9bcbd6
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-scapy_2.4.5.bb
+@@ -0,0 +1,41 @@
++SUMMARY = "Network scanning and manipulation tool"
++DESCRIPTION = "Scapy is a powerful interactive packet manipulation program. \
++It is able to forge or decode packets of a wide number of protocols, send them \
++on the wire, capture them, match requests and replies, and much more. It can \
++easily handle most classical tasks like scanning, tracerouting, probing, unit tests, \
++attacks or network discovery (it can replace hping, 85% of nmap, arpspoof, arp-sk, \
++arping, tcpdump, tethereal, p0f, etc.). It also performs very well at a lot of other \
++specific tasks that most other tools can't handle, like sending invalid frames, \
++injecting your own 802.11 frames, combining technics (VLAN hopping+ARP cache poisoning, \
++VOIP decoding on WEP encrypted channel, ...), etc."
++SECTION = "security"
++LICENSE = "GPLv2"
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++# If you want ptest support, use the git repo
++# UTscapy does not exist in the pypi pkg
++#
++SRCREV = "32cd7eb0f620d9adf171c48d55514e8326a538d7"
++SRC_URI = "git://github.com/secdev/scapy.git \
++           file://run-ptest"
++
++S = "${WORKDIR}/git"
++
++UPSTREAM_CHECK_COMMITS = "1"
++
++inherit setuptools3 ptest
++
++do_install_append() {
++        mv ${D}${bindir}/scapy ${D}${bindir}/scapy3
++        mv ${D}${bindir}/UTscapy ${D}${bindir}/UTscapy3
++}
++
++do_install_ptest() {
++    install -m 0644 ${S}/test/regression.uts ${D}${PTEST_PATH}
++    sed -i 's,@PTEST_PATH@,${PTEST_PATH},' ${D}${PTEST_PATH}/run-ptest
++}
++
++RDEPENDS_${PN} = "tcpdump ${PYTHON_PN}-compression ${PYTHON_PN}-cryptography ${PYTHON_PN}-netclient  \
++                  ${PYTHON_PN}-netserver ${PYTHON_PN}-pydoc ${PYTHON_PN}-pkgutil ${PYTHON_PN}-shell \
++                  ${PYTHON_PN}-threading ${PYTHON_PN}-numbers ${PYTHON_PN}-pycrypto"
+-- 
+2.24.3
 
-On Fri, May 28, 2021 at 3:29 AM Guy Morand <guy@guy-morand.ch> wrote:
->
-> Signed-off-by: Guy Morand <guy@guy-morand.ch>
-> ---
->  meta-oe/recipes-shells/fish/fish_3.2.2.bb | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
->  create mode 100644 meta-oe/recipes-shells/fish/fish_3.2.2.bb
->
-> diff --git a/meta-oe/recipes-shells/fish/fish_3.2.2.bb b/meta-oe/recipes-shells/fish/fish_3.2.2.bb
-> new file mode 100644
-> index 000000000..6bbe92088
-> --- /dev/null
-> +++ b/meta-oe/recipes-shells/fish/fish_3.2.2.bb
-> @@ -0,0 +1,17 @@
-> +SUMMARY = "Finally, a command line shell for the 90s"
-> +DESCRIPTION = "fish is a smart and user-friendly command line shell \
-> +for Linux, macOS, and the rest of the family."
-> +HOMEPAGE = "https://fishshell.com/"
-> +AUTHOR = "fish-shell contributors"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=9dbc95a48a7b8859e3c6db4c9396f053"
-> +
-> +inherit cmake
-> +
-> +DEPENDS = " \
-> +    ncurses \
-> +    "
-> +
-> +SRC_URI = "https://github.com/fish-shell/fish-shell/releases/download/${PV}/fish-${PV}.tar.xz"
-> +SRC_URI[md5sum] = "606253699ce41991b03a93bcc6047d51"
-> +SRC_URI[sha256sum] = "5944da1a8893d11b0828a4fd9136ee174549daffb3d0adfdd8917856fe6b4009"
-> --
-> 2.31.1
->
->
-> 
->
