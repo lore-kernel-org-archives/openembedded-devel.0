@@ -1,162 +1,122 @@
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.web12.34859.1622399678347338556
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.web08.34851.1622399679118784437
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 May 2021 11:34:38 -0700
+ Sun, 30 May 2021 11:34:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=I4CQBcSg;
- spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id k15so1021878pfp.6
-        for <openembedded-devel@lists.openembedded.org>; Sun, 30 May 2021 11:34:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Kh2dHCVx;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f170.google.com with SMTP id x73so107677pfc.8
+        for <openembedded-devel@lists.openembedded.org>; Sun, 30 May 2021 11:34:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=oIPHsZCVOxC2Ne8LeS58XcGG8AZ6gtk+Av7avh1rAL0=;
-        b=I4CQBcSgnAKL8C1uslb/jYE7dhMJqQACNSWDKXhaqxle0UDWuwMKLuqJD/FEzADp9h
-         bwMXG6ORY85URWLWCZillN8HxBKlEw+0wNYGvLAm/qa8i3bC1v5QeePsHREGfJXXJNWa
-         rRdw/7VHKuwgUEFLIwjxr0FPpKm0CkXkP6Z9J2a4jrIhyh7Xg8Prs/XstSIPRsRZWbBE
-         GBEQw7xG7CNkdxvAJsuGlApJGKKfRm+pnFCq4hP1Is7a3D/26ueRHooLQSXlE6L+lqYK
-         lM2T7Mi1H+0OpYehteeR9zkv3HUHhrLw0dVTZ7qo2XNL1GNNrsq5gSPfFGNKouFrtAqR
-         CQfQ==
+        bh=Kx2hhyBUKL8sH0BBfFm0JosxarFiHdhzI8LQ70hpIBY=;
+        b=Kh2dHCVxEzVGrAZatg8W2Bxv7A1nfmD4KUUXtX6iPQr+biDxYETJk3PRwNZk3zakFz
+         NVfPLOoNfV7MLcrn06GN9k+Gwd2h2Pujo2KQrbwAu/PHI9iwIapgaUWcIIn/uNlfleqH
+         FP+vZQ08hjXp4mBj8cUEtT4qvkI6NY0YZtV6RuU877V9k+Saf3rupQtTExWpkENxRVLC
+         TWvOuIIvHIy0cUSO1cTL6Om1vAvCvU3ZqgORn14T5J4NMCh13wSxc+6yniXqdkztcJ3G
+         i+VqiZuOjKZ/chEzSiUHxa4CWOFX1Swl7OHNw0R+9bI8zzOv+Xy3RJ9c0w2efOhXsQtY
+         fYIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=oIPHsZCVOxC2Ne8LeS58XcGG8AZ6gtk+Av7avh1rAL0=;
-        b=V85HTr6WoVlt79aqatNI/wI8F5sv7m6/cBaK7aFIC5e8Yvhk04VaWd/DCMD4iHJ8Aa
-         8BP2FFSmOEshxvQCgmXQp0w/D05TwBYEasfJrdz8jKoMy78ZBejuYKvq01m9yZdcOdVK
-         yE4ARApD4CBeFhcyou4IsHsomFczsp+K3kGc0NR+p1RU6h4qb3GkEFEqAKTPbWyxK9FO
-         Qh1HBnn0Ju5MAyf0XbS5Y1G+I9E5Aab+OJnfw38Mmq/A3xrnLcfLh/WPEr+mexqZLLn3
-         hb1ky9SzisxUP10/MZwYGNuOoFKTlkpA88vxrTDpp/8GXTDIKI0y227ZURPEX2b36yq5
-         sL1Q==
-X-Gm-Message-State: AOAM53271FWIv68x+Jqzk+HKwEW0bIZ3g3KMAcrac4ixGRhJh8SIuHIq
-	ptogwC6qo9OZlue76Ps5LJjl1MD09l/WGw==
-X-Google-Smtp-Source: ABdhPJxDTmuKUhfKRnn2oHzFwGarNyrdAw3tUgFHzSU9+mjWgv2VirJX7LxyGl5+5Qi70pG5H2AwVw==
-X-Received: by 2002:a63:3c0c:: with SMTP id j12mr3229266pga.377.1622399677792;
-        Sun, 30 May 2021 11:34:37 -0700 (PDT)
+        bh=Kx2hhyBUKL8sH0BBfFm0JosxarFiHdhzI8LQ70hpIBY=;
+        b=LsBuPYBXiV5NT4exj2fkSzLNhgfSA9va6HAORaj6BUBCjNl68gD2GLEtBHCkNvhyzH
+         wrCvD946AAq/7vQSn1BqCyrIKV7ZTurhOcfbzBM+FMUbe9vE0e4q9QjitLYsLJxxGmIj
+         KD6YzJph5+1/wSVy+QuoqKs+6RZSlUzNguUFGgvR3AH7321+diPdyzkGHJBwLr93A2vg
+         ofKIc7z+VpkjVm6vCj3TPq16Jm9L8RdKjt/Li7Y+Wtt28NZPiqbw560pfhalF/IZX5yz
+         Oi8lwPWgNSEkXcahQwTfRf4v0swkFRGTjiLbAzV3nxryTLfexrPfAlNMISZ9BsursT18
+         MHvA==
+X-Gm-Message-State: AOAM5305xmDxT/gaReADSYQlBujZGO+JAm2JJZ7uEdo9gsDErMuB2Lpy
+	KkNZapHLru0kNPZkhyElz5auE4BEzMVa/Q==
+X-Google-Smtp-Source: ABdhPJynxedF4UTlcNzuuQaFUXTN7jPH1iDOIjYeKBk1TiMhGEfcyT55ibkFw4lDbFOoeHzrySCN1Q==
+X-Received: by 2002:a63:63c5:: with SMTP id x188mr5625553pgb.46.1622399678524;
+        Sun, 30 May 2021 11:34:38 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:417e:d6cd:22c6:4534])
         by smtp.gmail.com with ESMTPSA id z19sm8828696pjq.11.2021.05.30.11.34.37
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 30 May 2021 11:34:37 -0700 (PDT)
+        Sun, 30 May 2021 11:34:38 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 05/12] exiv2: Fix CVE-2021-29464
-Date: Sun, 30 May 2021 11:34:15 -0700
-Message-Id: <29953069d9d9c2868d831492ccec7b171403ac04.1622399528.git.akuster808@gmail.com>
+Subject: [dunfell 06/12] exiv2: Fix CVE-2021-29470
+Date: Sun, 30 May 2021 11:34:16 -0700
+Message-Id: <8ac16502753b72fd1df1d88d5773ab5077d868b8.1622399528.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1622399528.git.akuster808@gmail.com>
 References: <cover.1622399528.git.akuster808@gmail.com>
 
 From: wangmy <wangmy@fujitsu.com>
 
-          References
-          https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-29464
+      References
+      https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-29470
 
-          The heap overflow is triggered when Exiv2 is used to write metadata into a crafted image file.
-          An attacker could potentially exploit the vulnerability to gain code execution, if they can
-          trick the victim into running Exiv2 on a crafted image file.
+      The out-of-bounds read is triggered when Exiv2 is used to write metadata into a crafted image file.
+      An attacker could potentially exploit the vulnerability to cause a denial of service by crashing Exiv2,
+      if they can trick the victim into running Exiv2 on a crafted image file.
 
-          Upstream-Status: Accepted [https://github.com/Exiv2/exiv2/commit/f9308839198aca5e68a65194f151a1de92398f54]
-          CVE: CVE-2021-29464
+      Upstream-Status: Accepted [https://github.com/Exiv2/exiv2/pull/1581/commits/6628a69c036df2aa036290e6cd71767c159c79ed]
+      CVE: CVE-2021-29470
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 8c9470bdfaa1d33347ffaf25b3e18d2163667e18)
+(cherry picked from commit bb1400efda77a7289ca20782172bfbe1f457f161)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../exiv2/exiv2/CVE-2021-29464.patch          | 72 +++++++++++++++++++
+ .../exiv2/exiv2/CVE-2021-29470.patch          | 32 +++++++++++++++++++
  meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb |  1 +
- 2 files changed, 73 insertions(+)
- create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29464.patch
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29470.patch
 
-diff --git a/meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29464.patch b/meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29464.patch
+diff --git a/meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29470.patch b/meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29470.patch
 new file mode 100644
-index 0000000000..f0c482450c
+index 0000000000..eedf9d79aa
 --- /dev/null
-+++ b/meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29464.patch
-@@ -0,0 +1,72 @@
-+From 61734d8842cb9cc59437463e3bac54d6231d9487 Mon Sep 17 00:00:00 2001
-+From: Wang Mingyu <wangmy@fujitsu.com>
-+Date: Tue, 18 May 2021 10:52:54 +0900
-+Subject: [PATCH] modify
-+
-+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
++++ b/meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29470.patch
+@@ -0,0 +1,32 @@
++From 6628a69c036df2aa036290e6cd71767c159c79ed Mon Sep 17 00:00:00 2001
++From: Kevin Backhouse <kevinbackhouse@github.com>
++Date: Wed, 21 Apr 2021 12:06:04 +0100
++Subject: [PATCH] Add more bounds checks in Jp2Image::encodeJp2Header
 +---
-+ src/jp2image.cpp | 14 +++++++++-----
-+ 1 file changed, 9 insertions(+), 5 deletions(-)
++ src/jp2image.cpp | 3 +++
++ 1 file changed, 3 insertions(+)
 +
 +diff --git a/src/jp2image.cpp b/src/jp2image.cpp
-+index 52723a4..0ac4f50 100644
++index b424225..349a9f0 100644
 +--- a/src/jp2image.cpp
 ++++ b/src/jp2image.cpp
-+@@ -643,11 +643,11 @@ static void boxes_check(size_t b,size_t m)
-+     void Jp2Image::encodeJp2Header(const DataBuf& boxBuf,DataBuf& outBuf)
-+     {
++@@ -645,13 +645,16 @@ static void boxes_check(size_t b,size_t m)
 +         DataBuf output(boxBuf.size_ + iccProfile_.size_ + 100); // allocate sufficient space
-+-        int     outlen = sizeof(Jp2BoxHeader) ; // now many bytes have we written to output?
-+-        int      inlen = sizeof(Jp2BoxHeader) ; // how many bytes have we read from boxBuf?
-++        long    outlen = sizeof(Jp2BoxHeader) ; // now many bytes have we written to output?
-++        long    inlen = sizeof(Jp2BoxHeader) ; // how many bytes have we read from boxBuf?
++         long    outlen = sizeof(Jp2BoxHeader) ; // now many bytes have we written to output?
++         long    inlen = sizeof(Jp2BoxHeader) ; // how many bytes have we read from boxBuf?
+++        enforce(sizeof(Jp2BoxHeader) <= static_cast<size_t>(output.size_), Exiv2::kerCorruptedMetadata);
 +         Jp2BoxHeader* pBox   = (Jp2BoxHeader*) boxBuf.pData_;
-+-        int32_t       length = getLong((byte*)&pBox->length, bigEndian);
-+-        int32_t       count  = sizeof (Jp2BoxHeader);
-++        uint32_t      length = getLong((byte*)&pBox->length, bigEndian);
-++        uint32_t      count  = sizeof (Jp2BoxHeader);
++         uint32_t      length = getLong((byte*)&pBox->length, bigEndian);
+++        enforce(length <= static_cast<size_t>(output.size_), Exiv2::kerCorruptedMetadata);
++         uint32_t      count  = sizeof (Jp2BoxHeader);
 +         char*         p      = (char*) boxBuf.pData_;
 +         bool          bWroteColor = false ;
 + 
-+@@ -664,6 +664,7 @@ static void boxes_check(size_t b,size_t m)
-+ #ifdef EXIV2_DEBUG_MESSAGES
-+                 std::cout << "Jp2Image::encodeJp2Header subbox: "<< toAscii(subBox.type) << " length = " << subBox.length << std::endl;
-+ #endif
-++                enforce(subBox.length <= length - count, Exiv2::kerCorruptedMetadata);
-+                 count        += subBox.length;
-+                 newBox.type   = subBox.type;
-+             } else {
-+@@ -672,12 +673,13 @@ static void boxes_check(size_t b,size_t m)
-+                 count = length;
-+             }
++         while ( count < length || !bWroteColor ) {
+++            enforce(sizeof(Jp2BoxHeader) <= length - count, Exiv2::kerCorruptedMetadata);
++             Jp2BoxHeader* pSubBox = (Jp2BoxHeader*) (p+count) ;
 + 
-+-            int32_t newlen = subBox.length;
-++            uint32_t newlen = subBox.length;
-+             if ( newBox.type == kJp2BoxTypeColorHeader ) {
-+                 bWroteColor = true ;
-+                 if ( ! iccProfileDefined() ) {
-+                     const char* pad   = "\x01\x00\x00\x00\x00\x00\x10\x00\x00\x05\x1cuuid";
-+                     uint32_t    psize = 15;
-++                    enforce(newlen <= output.size_ - outlen, Exiv2::kerCorruptedMetadata);
-+                     ul2Data((byte*)&newBox.length,psize      ,bigEndian);
-+                     ul2Data((byte*)&newBox.type  ,newBox.type,bigEndian);
-+                     ::memcpy(output.pData_+outlen                     ,&newBox            ,sizeof(newBox));
-+@@ -686,6 +688,7 @@ static void boxes_check(size_t b,size_t m)
-+                 } else {
-+                     const char* pad   = "\0x02\x00\x00";
-+                     uint32_t    psize = 3;
-++                    enforce(newlen <= output.size_ - outlen, Exiv2::kerCorruptedMetadata);
-+                     ul2Data((byte*)&newBox.length,psize+iccProfile_.size_,bigEndian);
-+                     ul2Data((byte*)&newBox.type,newBox.type,bigEndian);
-+                     ::memcpy(output.pData_+outlen                     ,&newBox            ,sizeof(newBox)  );
-+@@ -694,6 +697,7 @@ static void boxes_check(size_t b,size_t m)
-+                     newlen = psize + iccProfile_.size_;
-+                 }
-+             } else {
-++                enforce(newlen <= output.size_ - outlen, Exiv2::kerCorruptedMetadata);
-+                 ::memcpy(output.pData_+outlen,boxBuf.pData_+inlen,subBox.length);
-+             }
-+ 
++             // copy data.  pointer could be into a memory mapped file which we will decode!
 +-- 
 +2.25.1
 +
 diff --git a/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb b/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
-index 8c4c81799b..024f4c794a 100644
+index 024f4c794a..2419bab352 100644
 --- a/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
 +++ b/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
-@@ -13,6 +13,7 @@ SRC_URI += "file://0001-Use-compiler-fcf-protection-only-if-compiler-arch-su.pat
-             file://CVE-2021-29457.patch \
+@@ -14,6 +14,7 @@ SRC_URI += "file://0001-Use-compiler-fcf-protection-only-if-compiler-arch-su.pat
              file://CVE-2021-29458.patch \
              file://CVE-2021-29463.patch \
-+            file://CVE-2021-29464.patch \
+             file://CVE-2021-29464.patch \
++            file://CVE-2021-29470.patch \
              file://CVE-2021-3482.patch"
  
  S = "${WORKDIR}/${BPN}-${PV}-Source"
