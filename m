@@ -1,114 +1,118 @@
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.web10.34937.1622399679900733906
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
+ by mx.groups.io with SMTP id smtpd.web10.34938.1622399680729462942
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 30 May 2021 11:34:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=QL3EYGA7;
- spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id 133so1638628pgf.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 30 May 2021 11:34:39 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=tdSwJm0L;
+ spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f181.google.com with SMTP id x188so7325336pfd.7
+        for <openembedded-devel@lists.openembedded.org>; Sun, 30 May 2021 11:34:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=EkwHp9yOleC05X1KG9pMHA/ejD7AlxUnAjXMmZhe06U=;
-        b=QL3EYGA7d+woYjokfqsqDNZ/7/adipoz3xWHslRvy/tuIuYBLiIcbyjbosZafappB3
-         Wsi0UzIXSFUPsk6EEqUmuwRSv6zz4SlDtQr5A9VSpLX6e24BPZ0L4QMFspimEPJOM0PI
-         6zZ0xTtArSMgagKNVscf2+KpNLE6iPduM0eNE59MUO1pNU9QezyKGoB8NFcGRXVu0cWx
-         YXuxppsA0oYGPvZYoVZpmG3qOWBamtH1e/0MzqCd8K2lLZ2kwHO+CieMIkT730ZgM3EE
-         RuTlox0XC5XT2IHPDHtLnpCJXVmQqRKQwgunxaxJcbfCLY9yasAY6bQyT+4aGy36SwcR
-         Vzdg==
+        bh=KT8tvq4aXzY17zX4uAqgRNfUHPX/4ZjWo6opcQswXnA=;
+        b=tdSwJm0Lc3A+AMn1+NE6yfjr5p7pxhjq0jhbjvXCGAialZiTYk32ytZM6+AMDIIBE8
+         IKBRw6Nbc2iSYlRp8sup9bE4iA4PQlrJVevNhTD54f8Y5Obpi84DTXWjkqIpIUTKz+KE
+         OGAQSu7hOR8jCuaTcRamoS4h2wfd6hxiZ+D4OYEiKjsD+hoWpdbzf/C22+J9SeZ3HonH
+         ocVSZi+tdwlV4IkCJ442WEVI5sRkAxI7KpLIkXoEO0tV6LGeqwk8MHGf8ZzEtMylGh1d
+         9bwzB/JZS9WiAX7rV78uXPMRxp/7qVZHbUEjB0KXwGJZ51lTZ+wsKbEAG0wFKHxywrkf
+         vWIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=EkwHp9yOleC05X1KG9pMHA/ejD7AlxUnAjXMmZhe06U=;
-        b=AEq6Y6jHgo7ivARpWh+7hOTsgdvezk5OuBUSmwfPdWHHdxBZW7U6jKrmqhcpMBh7Tl
-         VJbNTnf14wSjRxPLER70qNyPJYBg5lbN7UBhN1sHZrrcDxhJUa0rZ0/awGgNvt/o/C/p
-         FcAHIpAUklZ2pDJ4htqzOF7zrcJslWDD7CWboeP4mneoxbJ7yW3LhMar9XKKb8lI97mk
-         rsxVYvu0z/synNDtH/KFtws7Xpb6eDTTGCbory/VneFCA6Ns7rffaRHQ8CQLDaalSKZR
-         tf2QSgnqLyuk6kZt56/XTYahX3llhg6g6z987NHhkHnDeb9lQQLUmfTeyexnA3OuTUcf
-         m38A==
-X-Gm-Message-State: AOAM5323yqc2t2qH3acam9oC8BupczDHFoaK8Qmn3KrXw/XtNpX1tKTD
-	A0adZ+0CfRuvESobDkKFqWjKfHpW99VrRA==
-X-Google-Smtp-Source: ABdhPJxg3y44GMSkc81X0OTvvd5cT7dyaZCDI2bcJERkQ9MZGAtvqAgM2BGGPQxZWyUU4FpynhbWcQ==
-X-Received: by 2002:a62:7587:0:b029:2e9:a997:1449 with SMTP id q129-20020a6275870000b02902e9a9971449mr7782482pfc.57.1622399679327;
-        Sun, 30 May 2021 11:34:39 -0700 (PDT)
+        bh=KT8tvq4aXzY17zX4uAqgRNfUHPX/4ZjWo6opcQswXnA=;
+        b=QECx5q8H8JEiZkx25L1SP/3genNfWlj0tCLYtBkMg2CyBJXwWZm2oKDVXjHxkQaKvS
+         eLZDxXLd1gKFQ4seiL1JKXZ92LF0oigKMjjUN7s0koGE+RcnPUYi9gNzGMBt+D24oaGW
+         TWLztiOP5D43LZGLSAG6XwkPAPJAPF35MzVvIHiOFZkKX9Lo27tOs5JV7PwUernsgdHf
+         CV25Fdqgfk4omFK0MYTB+Yf7ljr52lnw1UIpTleTbEjxDvBc9H+WSX5dM+AE9uQDV45n
+         pCjJzo9B2bSkgHcBp3VDjem2WlDFzvnXfyBZrPIjHDwrvc5O4tLiDYKuwLdFNaQccF6J
+         oYtw==
+X-Gm-Message-State: AOAM533hHB3nkcI9Sc0HU6We0qaqlUifcZRNYbui8fD0/RXD4I8GKfS1
+	Ldm7pHU2+dn8dTsYtBx24ans20bbtzU/WA==
+X-Google-Smtp-Source: ABdhPJx9sonaic1qHCF9S8Q2XPiNRLaBK0L3REqZASQEW5eBZbiG1lZzWRbu92tJp8V4nzR2Dptwow==
+X-Received: by 2002:a63:7945:: with SMTP id u66mr7318474pgc.200.1622399680133;
+        Sun, 30 May 2021 11:34:40 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:417e:d6cd:22c6:4534])
-        by smtp.gmail.com with ESMTPSA id z19sm8828696pjq.11.2021.05.30.11.34.38
+        by smtp.gmail.com with ESMTPSA id z19sm8828696pjq.11.2021.05.30.11.34.39
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sun, 30 May 2021 11:34:39 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 07/12] exiv2: Fix CVE-2021-29473
-Date: Sun, 30 May 2021 11:34:17 -0700
-Message-Id: <a3a0e023193ee465f8a4d408339352c85a20e80d.1622399528.git.akuster808@gmail.com>
+Subject: [dunfell 08/12] libsdl: Fix CVE-2019-13616
+Date: Sun, 30 May 2021 11:34:18 -0700
+Message-Id: <9d50b9f99509147613bfcee420b1718cd856c390.1622399528.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1622399528.git.akuster808@gmail.com>
 References: <cover.1622399528.git.akuster808@gmail.com>
 
 From: wangmy <wangmy@fujitsu.com>
 
-      References
-      https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-29473
+  References
+  https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13616
 
-      The out-of-bounds read is triggered when Exiv2 is used to write metadata into a crafted image file.
-      An attacker could potentially exploit the vulnerability to cause a denial of service by crashing Exiv2,
-      if they can trick the victim into running Exiv2 on a crafted image file.
+  SDL (Simple DirectMedia Layer) through 1.2.15 and 2.x through 2.0.9 has a heap-based buffer over-read
+  in BlitNtoN in video/SDL_blit_N.c when called from SDL_SoftBlit in video/SDL_blit.c.
 
-      Upstream-Status: Accepted [https://github.com/Exiv2/exiv2/pull/1587/commits/e6a0982f7cd9282052b6e3485a458d60629ffa0b]
-      CVE: CVE-2021-29473
+  Upstream-Status: Backport [https://github.com/libsdl-org/SDL/commit/97fefd050976bbbfca9608499f6a7d9fb86e70db]
+  CVE: CVE-2019-13616
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit a9aecd2c32fc8f238f62ef70813e032b6b52c2f2)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../exiv2/exiv2/CVE-2021-29473.patch          | 21 +++++++++++++++++++
- meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb |  1 +
- 2 files changed, 22 insertions(+)
- create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29473.patch
+ .../libsdl/libsdl-1.2.15/CVE-2019-13616.patch | 27 +++++++++++++++++++
+ .../recipes-graphics/libsdl/libsdl_1.2.15.bb  |  1 +
+ 2 files changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-13616.patch
 
-diff --git a/meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29473.patch b/meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29473.patch
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-13616.patch b/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-13616.patch
 new file mode 100644
-index 0000000000..4afedf8e59
+index 0000000000..2db67966cf
 --- /dev/null
-+++ b/meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29473.patch
-@@ -0,0 +1,21 @@
-+From e6a0982f7cd9282052b6e3485a458d60629ffa0b Mon Sep 17 00:00:00 2001
-+From: Kevin Backhouse <kevinbackhouse@github.com>
-+Date: Fri, 23 Apr 2021 11:44:44 +0100
-+Subject: [PATCH] Add bounds check in Jp2Image::doWriteMetadata().
-+
++++ b/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-13616.patch
+@@ -0,0 +1,27 @@
++From 97fefd050976bbbfca9608499f6a7d9fb86e70db Mon Sep 17 00:00:00 2001
++From: Sam Lantinga <slouken@libsdl.org>
++Date: Tue, 30 Jul 2019 11:00:00 -0700
++Subject: [PATCH] Fixed bug 4538 - validate image size when loading BMP files
 +---
-+ src/jp2image.cpp | 1 +
-+ 1 file changed, 1 insertion(+)
++ src/video/SDL_bmp.c | 5 +++++
++ 1 file changed, 5 insertions(+)
 +
-+diff --git a/src/jp2image.cpp b/src/jp2image.cpp
-+index 1694fed27..ca8c9ddbb 100644
-+--- a/src/jp2image.cpp
-++++ b/src/jp2image.cpp
-+@@ -908,6 +908,7 @@ static void boxes_check(size_t b,size_t m)
++diff --git a/src/video/SDL_bmp.c b/src/video/SDL_bmp.c
++index 8eadc5f..5b5e12c 100644
++--- a/src/video/SDL_bmp.c
+++++ b/src/video/SDL_bmp.c
++@@ -143,6 +143,11 @@ SDL_Surface * SDL_LoadBMP_RW (SDL_RWops *src, int freesrc)
++ 	(void) biYPelsPerMeter;
++ 	(void) biClrImportant;
 + 
-+                 case kJp2BoxTypeUuid:
-+                 {
-++                    enforce(boxBuf.size_ >= 24, Exiv2::kerCorruptedMetadata);
-+                     if(memcmp(boxBuf.pData_ + 8, kJp2UuidExif, 16) == 0)
-+                     {
-+ #ifdef EXIV2_DEBUG_MESSAGES
-diff --git a/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb b/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
-index 2419bab352..d5d9e62ff2 100644
---- a/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
-+++ b/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
-@@ -15,6 +15,7 @@ SRC_URI += "file://0001-Use-compiler-fcf-protection-only-if-compiler-arch-su.pat
-             file://CVE-2021-29463.patch \
-             file://CVE-2021-29464.patch \
-             file://CVE-2021-29470.patch \
-+            file://CVE-2021-29473.patch \
-             file://CVE-2021-3482.patch"
+++        if (biWidth <= 0 || biHeight == 0) {
+++            SDL_SetError("BMP file with bad dimensions (%dx%d)", biWidth, biHeight);
+++            was_error = SDL_TRUE;
+++            goto done;
+++        }
++ 	if (biHeight < 0) {
++ 		topDown = SDL_TRUE;
++ 		biHeight = -biHeight;
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl_1.2.15.bb b/meta-oe/recipes-graphics/libsdl/libsdl_1.2.15.bb
+index 7a01908322..d91a1856b4 100644
+--- a/meta-oe/recipes-graphics/libsdl/libsdl_1.2.15.bb
++++ b/meta-oe/recipes-graphics/libsdl/libsdl_1.2.15.bb
+@@ -27,6 +27,7 @@ SRC_URI = "http://www.libsdl.org/release/SDL-${PV}.tar.gz \
+            file://CVE-2019-7637.patch \
+            file://CVE-2019-7638.patch \
+            file://CVE-2019-7576.patch \
++           file://CVE-2019-13616.patch \
+           "
  
- S = "${WORKDIR}/${BPN}-${PV}-Source"
+ UPSTREAM_CHECK_REGEX = "SDL-(?P<pver>\d+(\.\d+)+)\.tar"
 -- 
 2.17.1
 
