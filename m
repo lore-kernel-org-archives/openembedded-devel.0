@@ -1,165 +1,109 @@
-Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
- by mx.groups.io with SMTP id smtpd.web08.34853.1622399682386162251
+Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
+ by mx.groups.io with SMTP id smtpd.web10.34940.1622399683200165066
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 May 2021 11:34:42 -0700
+ Sun, 30 May 2021 11:34:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=DJV8kqfo;
- spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f172.google.com with SMTP id 29so6661266pgu.11
-        for <openembedded-devel@lists.openembedded.org>; Sun, 30 May 2021 11:34:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=OLW5Az8N;
+ spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f177.google.com with SMTP id t8so471878pgb.9
+        for <openembedded-devel@lists.openembedded.org>; Sun, 30 May 2021 11:34:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=Y/s9+LUx7ULyMiNVumVHeqzFc9WAfgEu9XE1G/24u7g=;
-        b=DJV8kqfoOkEYrB4msTxpJJPAEeTJXBJxxpxhVl2sWVmHDi2bCNQrrRhxsyk/Cl2W3J
-         sbqm6/unISnG8DuhS7rYEEeYY4z3Vi+8ANjIXHehSvqi7Sx6cfgRPUyBn950VYfVenRM
-         9vJ81J2p5IwIzTIHpuOYCFysTrwK9ug2fT+V3RgX2KHPQKfFj+ExrAFlK5ti1gb+XSlD
-         GrPZDHfWEwFIYqarPH0WZ78qwLecKFA28eKo0/TnVrpuOmJ4s0UCbLHNe0cnbgHuJrin
-         ObobkKJtnSJp3Mz96maxWWDOZiE4+vGkuXsMSh1KcGFbzsCxFmvem49NNv+q6JxzDU8P
-         0vjQ==
+        bh=vXNn8udisJfiVQpMdV5yRMIsIoLYmU91/2Mc4L4dGEk=;
+        b=OLW5Az8NzmxAk252E3PIPWeulMdnK9z0xZtpVyG/tDzSxioY/AgvyaKrT4xEuH/bGV
+         tFsoCqPASixVoO18CphyrvSjIorOQA64hueVF7jzsCdHhP7nknSpDe2nPTgBKO6I/Fxd
+         16yZ6W5rw6dHz95KzHvp3scKgLVXxrbdCaXu35MK80u8lhcPeySHqrNj+zj9E9trhpzj
+         moj+lT+LTaQyvJ4n/ne2mQyFW5UJWSythFP3glASKvAPjFjGuyeAhg6Y0lD2pTE0QuQb
+         7ekOcIqe9CHl3vuVXqfIpHF6YjRy+n9iLgJnmx8uM2ZXiD6KRIgAMMpC7wF78vgpZfiA
+         sj4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=Y/s9+LUx7ULyMiNVumVHeqzFc9WAfgEu9XE1G/24u7g=;
-        b=JoO7bfRFMAa4Jx9waUqzNzakX7XyaBCSVSlL7M3nE49juHRcKvZrpOnvpN00u0hyno
-         qRKBWXmtJPBtBYN3vlLWvHwjaFoXrmdAj1sOLU/KJNRyf7k3JwF9hnkXWXKiomKj6L4m
-         Y6opsxSgOnHX31qF0DofMi022Xh5V3H9U2TXR0NmilDG0aVyS8y+W8ZXMKog4ZiG3rYe
-         9+ZBMKJZ/6xhBXseXal9d8NN3yBBfsYVkRTRmb2W4GKouf15wsMY9/XP41UKPg+TWXx6
-         eEpmYAs0harBWJeTXsRdtLkhOXzSl78s1tWm5VbUi0uvsZCwJk+ufzwE+dTaNXLWm9yJ
-         gHLw==
-X-Gm-Message-State: AOAM533pp9d0W/28g6tVPNyMHdULWcRaes8EEQBvqfwGyZMRGbDEuxgt
-	OXQxZ7sDzWssCYwmh8ltT0emxE7OfXykXA==
-X-Google-Smtp-Source: ABdhPJwcJrGvTHlb9Gu9/BCUicEU5WAzszqSIjxC7PfA1iMDmWj6+EcwwOr7x9FMt64wDR6q07PJtQ==
-X-Received: by 2002:a63:ff18:: with SMTP id k24mr19658094pgi.134.1622399681806;
-        Sun, 30 May 2021 11:34:41 -0700 (PDT)
+        bh=vXNn8udisJfiVQpMdV5yRMIsIoLYmU91/2Mc4L4dGEk=;
+        b=GlH09N8hxgifYoeKH5GPk7fAS4GM8aANK3DwWRQnWhgM7KIj4yUNEY2Ng7DNxaWWnD
+         bcJoYv2qiQkyRSjEXqrsR7NmHzQUV+jtTtCribDwm8vRM9NwmEB0bK++/vB5kr2MdxeQ
+         EDsKR780t6vyu7jQPHL23h9ZQlFRrfslZV92HLQzicNmd3aLFDJS7/GcYFYXAKs7hmsP
+         0baULuJMfMr87gnGnGzO1Mqcf4jrpZnL8XKrnH6AGdrgO5OCVinglwtatIpVERkgaJV/
+         9GrHBY04CGN5u7EI4umVUVS3FfWLaXofkpxUm7PaY0MHk/r1f+nQjgCqcfKwSFyaItb7
+         WvcA==
+X-Gm-Message-State: AOAM532+PA4+MSdQt4z3H9yT9Kw0V9FjLVkQ2g1f1XzdW72cQ2SNio0o
+	lwosAP1nKLBq1mbKEiCrLqyUhzykqq4oxg==
+X-Google-Smtp-Source: ABdhPJxFF05tHdMo7rkeS4Q0UL8GnedbF1Hbuke7ijbQa6dmEmXCioFAqJ6tQ7aKEkM4iSbTdXwjvg==
+X-Received: by 2002:a05:6a00:c91:b029:2dd:4fff:204 with SMTP id a17-20020a056a000c91b02902dd4fff0204mr13555391pfv.46.1622399682551;
+        Sun, 30 May 2021 11:34:42 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:417e:d6cd:22c6:4534])
         by smtp.gmail.com with ESMTPSA id z19sm8828696pjq.11.2021.05.30.11.34.41
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 30 May 2021 11:34:41 -0700 (PDT)
+        Sun, 30 May 2021 11:34:42 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 10/12] opencv: Add fix for CVE-2019-5063 and CVE-2019-5064
-Date: Sun, 30 May 2021 11:34:20 -0700
-Message-Id: <943f5560aa3b34f1c0baa0b8093fe978d5db558d.1622399528.git.akuster808@gmail.com>
+Subject: [dunfell 11/12] ebtables: use bitbake optimization levels
+Date: Sun, 30 May 2021 11:34:21 -0700
+Message-Id: <587fe58949c7efae60c6eee580bda3233621245e.1622399528.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1622399528.git.akuster808@gmail.com>
 References: <cover.1622399528.git.akuster808@gmail.com>
 
-From: "akash.hadke" <akash.hadke@kpit.com>
+From: Mikko Rapeli <mikko.rapeli@bmw.de>
 
-Added fix for below CVE's
+Don't overwrite with O3 optimization. Reduces ebtables
+binary package size from 416241 to 412145 bytes, and
+enables further optimizations with e.g. -Os flags
+via bitbake distro wide settings.
 
-CVE-2019-5063
-CVE-2019-5064
-Link: https://github.com/opencv/opencv/commit/f42d5399aac80d371b17d689851406669c9b9111.patch
+Only ebtables versions up to 2.0.10-4 and dunfell are affected.
+The version 2.0.11 from hardknott and master branch use system
+wide flags already.
 
-Signed-off-by: akash hadke <akash.hadke@kpit.com>
+Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../opencv/CVE-2019-5063_and_2019-5064.patch  | 78 +++++++++++++++++++
- .../recipes-support/opencv/opencv_4.1.0.bb    |  1 +
- 2 files changed, 79 insertions(+)
- create mode 100644 meta-oe/recipes-support/opencv/opencv/CVE-2019-5063_and_2019-5064.patch
+ .../ebtables_optimizations.patch              | 19 +++++++++++++++++++
+ .../ebtables/ebtables_2.0.10-4.bb             |  1 +
+ 2 files changed, 20 insertions(+)
+ create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables_optimizations.patch
 
-diff --git a/meta-oe/recipes-support/opencv/opencv/CVE-2019-5063_and_2019-5064.patch b/meta-oe/recipes-support/opencv/opencv/CVE-2019-5063_and_2019-5064.patch
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables_optimizations.patch b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables_optimizations.patch
 new file mode 100644
-index 0000000000..b4d5e6dc44
+index 0000000000..21d4cfd822
 --- /dev/null
-+++ b/meta-oe/recipes-support/opencv/opencv/CVE-2019-5063_and_2019-5064.patch
-@@ -0,0 +1,78 @@
-+From f42d5399aac80d371b17d689851406669c9b9111 Mon Sep 17 00:00:00 2001
-+From: Alexander Alekhin <alexander.alekhin@intel.com>
-+Date: Thu, 7 Nov 2019 14:01:51 +0300
-+Subject: [PATCH] core(persistence): add more checks for implementation
-+ limitations
++++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables_optimizations.patch
+@@ -0,0 +1,19 @@
++ebtables: use optimizations from bitbake
 +
-+Signed-off-by: akash hadke <akash.hadke@kpit.com>
-+---
-+ modules/core/src/persistence_json.cpp | 8 ++++++++
-+ modules/core/src/persistence_xml.cpp  | 6 ++++--
-+ 2 files changed, 12 insertions(+), 2 deletions(-)
-+---
-+CVE: CVE-2019-5063
-+CVE: CVE-2019-5064
-+Upstream-Status: Backport [https://github.com/opencv/opencv/commit/f42d5399aac80d371b17d689851406669c9b9111.patch]
-+---
-+diff --git a/modules/core/src/persistence_json.cpp b/modules/core/src/persistence_json.cpp
-+index 89914e6534f..2efdf17d3f5 100644
-+--- a/modules/core/src/persistence_json.cpp
-++++ b/modules/core/src/persistence_json.cpp
-+@@ -578,10 +578,14 @@ class JSONParser : public FileStorageParser
-+                             sz = (int)(ptr - beg);
-+                             if( sz > 0 )
-+                             {
-++                                if (i + sz >= CV_FS_MAX_LEN)
-++                                    CV_PARSE_ERROR_CPP("string is too long");
-+                                 memcpy(buf + i, beg, sz);
-+                                 i += sz;
-+                             }
-+                             ptr++;
-++                            if (i + 1 >= CV_FS_MAX_LEN)
-++                                CV_PARSE_ERROR_CPP("string is too long");
-+                             switch ( *ptr )
-+                             {
-+                             case '\\':
-+@@ -605,6 +609,8 @@ class JSONParser : public FileStorageParser
-+                             sz = (int)(ptr - beg);
-+                             if( sz > 0 )
-+                             {
-++                                if (i + sz >= CV_FS_MAX_LEN)
-++                                    CV_PARSE_ERROR_CPP("string is too long");
-+                                 memcpy(buf + i, beg, sz);
-+                                 i += sz;
-+                             }
-+@@ -620,6 +626,8 @@ class JSONParser : public FileStorageParser
-+                             sz = (int)(ptr - beg);
-+                             if( sz > 0 )
-+                             {
-++                                if (i + sz >= CV_FS_MAX_LEN)
-++                                    CV_PARSE_ERROR_CPP("string is too long");
-+                                 memcpy(buf + i, beg, sz);
-+                                 i += sz;
-+                             }
-+diff --git a/modules/core/src/persistence_xml.cpp b/modules/core/src/persistence_xml.cpp
-+index 89876dd3da8..52b53744254 100644
-+--- a/modules/core/src/persistence_xml.cpp
-++++ b/modules/core/src/persistence_xml.cpp
-+@@ -627,6 +627,8 @@ class XMLParser : public FileStorageParser
-+                                         c = '\"';
-+                                     else
-+                                     {
-++                                        if (len + 2 + i >= CV_FS_MAX_LEN)
-++                                            CV_PARSE_ERROR_CPP("string is too long");
-+                                         memcpy( strbuf + i, ptr-1, len + 2 );
-+                                         i += len + 2;
-+                                     }
-+@@ -635,9 +637,9 @@ class XMLParser : public FileStorageParser
-+                                 CV_PERSISTENCE_CHECK_END_OF_BUFFER_BUG_CPP();
-+                             }
-+                         }
-++                        if (i + 1 >= CV_FS_MAX_LEN)
-++                            CV_PARSE_ERROR_CPP("Too long string literal");
-+                         strbuf[i++] = c;
-+-                        if( i >= CV_FS_MAX_LEN )
-+-                            CV_PARSE_ERROR_CPP( "Too long string literal" );
-+                     }
-+                     elem->setValue(FileNode::STRING, strbuf, i);
-+                 }
-diff --git a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-index de708fd06d..19d5d0c891 100644
---- a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-@@ -54,6 +54,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
-            file://CVE-2019-14493.patch \
-            file://CVE-2019-15939.patch \
-            file://CVE-2019-19624.patch \
-+           file://CVE-2019-5063_and_2019-5064.patch \
++Enables building with O2 or Os to create smaller binaries.
++
++Upstream-Status: Inappropriate [configuration]
++
++Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
++
++--- a/Makefile	2021-04-16 12:43:40.475431286 +0000
+++++ b/Makefile	2021-04-16 12:45:23.654597711 +0000
++@@ -18,7 +18,7 @@ SYSCONFIGDIR:=/etc/sysconfig
++ DESTDIR:=
++ 
++ CFLAGS:=-Wall -Wunused -Werror
++-CFLAGS_SH_LIB:=-fPIC -O3
+++CFLAGS_SH_LIB:=-fPIC
++ CC:=gcc
++ 
++ ifeq ($(shell uname -m),sparc64)
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+index 276784009f..8b6dcea439 100644
+--- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
++++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+@@ -31,6 +31,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
+            file://0007-extensions-Use-stdint-types.patch \
+            file://0008-ethernetdb.h-Remove-C-specific-compiler-hint-macro-_.patch \
+            file://0009-ebtables-Allow-RETURN-target-rules-in-user-defined-c.patch \
++           file://ebtables_optimizations.patch \
             "
- PV = "4.1.0"
  
+ SRC_URI_append_libc-musl = " file://0010-Adjust-header-include-sequence.patch"
 -- 
 2.17.1
 
