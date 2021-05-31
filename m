@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.46989.1622481248365241946
+ by mx.groups.io with SMTP id smtpd.web10.46861.1622481252267937950
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 31 May 2021 10:14:08 -0700
+ Mon, 31 May 2021 10:14:12 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=37512 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lnlUK-00054C-R8; Mon, 31 May 2021 20:14:08 +0300
+	id 1lnlUO-00054C-5u; Mon, 31 May 2021 20:14:12 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-netifaces: Upgrade 0.10.9 -> 0.11.0
-Date: Mon, 31 May 2021 20:13:49 +0300
-Message-Id: <20210531171350.11059-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-certifi: Upgrade 2020.12.5 -> 2021.5.30
+Date: Mon, 31 May 2021 20:13:50 +0300
+Message-Id: <20210531171350.11059-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210531171350.11059-1-leon.anavi@konsulko.com>
 References: <20210531171350.11059-1-leon.anavi@konsulko.com>
@@ -30,38 +30,38 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.11.0:
+Upgrade to release 2021.5.30:
 
-- Added notice about needing a new maintainer.
-- Fixed link to Travis CI.
-- Added test.py to the source distribution.
-- Fixed netmask calculation for IPv6.
-- Fixes to gateway detection in some edge cases.
-- Build CPython 2.7 wheels for 64-bit Windows (yes, you should be
-  using Python 3 now, but still).
+- Update certificates
+- Fix typos
+
+License-Update: Fix typos
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...python3-netifaces_0.10.9.bb => python3-netifaces_0.11.0.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-netifaces_0.10.9.bb => python3-netifaces_0.11.0.bb} (62%)
+ ...hon3-certifi_2020.12.5.bb => python3-certifi_2021.5.30.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-certifi_2020.12.5.bb => python3-certifi_2021.5.30.bb} (74%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-netifaces_0.10.9.bb b/meta-python/recipes-devtools/python/python3-netifaces_0.11.0.bb
-similarity index 62%
-rename from meta-python/recipes-devtools/python/python3-netifaces_0.10.9.bb
-rename to meta-python/recipes-devtools/python/python3-netifaces_0.11.0.bb
-index 7edb7e7fb..09e54b0ba 100644
---- a/meta-python/recipes-devtools/python/python3-netifaces_0.10.9.bb
-+++ b/meta-python/recipes-devtools/python/python3-netifaces_0.11.0.bb
-@@ -4,7 +4,6 @@ SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=a53cbc7cb75660694e138ba973c148df"
+diff --git a/meta-python/recipes-devtools/python/python3-certifi_2020.12.5.bb b/meta-python/recipes-devtools/python/python3-certifi_2021.5.30.bb
+similarity index 74%
+rename from meta-python/recipes-devtools/python/python3-certifi_2020.12.5.bb
+rename to meta-python/recipes-devtools/python/python3-certifi_2021.5.30.bb
+index dd2f6a2f6..ef2c66b14 100644
+--- a/meta-python/recipes-devtools/python/python3-certifi_2020.12.5.bb
++++ b/meta-python/recipes-devtools/python/python3-certifi_2021.5.30.bb
+@@ -5,9 +5,9 @@ which ships with the Requests codebase, and is derived from Mozilla Firefox's ca
+ HOMEPAGE = " http://certifi.io/"
  
--SRC_URI[md5sum] = "de92cc322b4f56047c073f802ad77860"
--SRC_URI[sha256sum] = "2dee9ffdd16292878336a58d04a20f0ffe95555465fee7c9bd23b3490ef2abf3"
-+SRC_URI[sha256sum] = "043a79146eb2907edf439899f262b3dfe41717d34124298ed281139a8b93ca32"
+ LICENSE = "ISC"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=f77f61d14ee6feac4228d3ebd26cc1f1"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=67da0714c3f9471067b729eca6c9fbe8"
+ 
+-SRC_URI[sha256sum] = "1a4995114262bffbc2413b159f2a1a480c969de6e6eb13ee966d470af86af59c"
++SRC_URI[sha256sum] = "2bbf76fd432960138b3ef6dda3dde0544f27cbf8546c458e60baf371917ba9ee"
  
  inherit pypi setuptools3
+ 
 -- 
 2.17.1
 
