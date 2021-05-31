@@ -1,89 +1,92 @@
-Received: from smtp-190e.mail.infomaniak.ch (smtp-190e.mail.infomaniak.ch [185.125.25.14])
- by mx.groups.io with SMTP id smtpd.web10.41491.1622447747952270444
+Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com [209.85.160.181])
+ by mx.groups.io with SMTP id smtpd.web10.45091.1622472375853414431
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 31 May 2021 00:55:49 -0700
+ Mon, 31 May 2021 07:46:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@guy-morand.ch header.s=20191114 header.b=jKgCXddQ;
- spf=pass (domain: guy-morand.ch, ip: 185.125.25.14, mailfrom: guy@guy-morand.ch)
-Received: from smtp-2-0000.mail.infomaniak.ch (unknown [10.5.36.107])
-	by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Ftnf96JmxzMprpj;
-	Mon, 31 May 2021 09:55:45 +0200 (CEST)
-Received: from [10.10.254.185] (unknown [185.72.66.106])
-	by smtp-2-0000.mail.infomaniak.ch (Postfix) with ESMTPA id 4Ftnf94bstzlh8TG;
-	Mon, 31 May 2021 09:55:45 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=guy-morand.ch;
-	s=20191114; t=1622447745;
-	bh=SZ/YGb0t6dGyuWgY1Yd229ZPTwH24rVsQT7tjHRtJQ0=;
-	h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
-	b=jKgCXddQkHe30v83ve3KD/jSkRIsbRHcrzJb1jvELRt84YLDH0tHpNK0HVJASxzD1
-	 dDAmSBLzVfaAOH3lHbVij2z7/WvdQw5rtYePzP5s67g2h5c3CGXWx9/GmwH2gUgthw
-	 LlIPq+888p73fknAcnZ8YJaCYHHGGfaWw6Y8suFE=
-Subject: Re: [oe] [meta-oe][PATCH] fish: add fish recipe
-To: Khem Raj <raj.khem@gmail.com>, Guy Morand <guy@guy-morand.ch>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-References: <20210528102902.13676-1-guy@guy-morand.ch>
- <CAMKF1spqeRFGOzx5uKq=anc9pJ++BGx-rkcX5wM8yz407hD6Dg@mail.gmail.com>
-From: "Guy Morand" <guy@guy-morand.ch>
-Message-ID: <e967bf7e-b038-dfc9-b41b-6b86d5d1b50f@guy-morand.ch>
-Date: Mon, 31 May 2021 09:55:34 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.2
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=G/VkTbQM;
+ spf=pass (domain: gmail.com, ip: 209.85.160.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f181.google.com with SMTP id c10so8039703qtx.10
+        for <openembedded-devel@lists.openembedded.org>; Mon, 31 May 2021 07:46:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=H2Kl79sG+FKWpa31SxEj4bQPZO/vdu8KiCsfosI1L4c=;
+        b=G/VkTbQMJQLI2yGjrXOvBUMRBw4ZvRhKnW61wvfTdVHCnW/vkGjJ3vR2STQTKNGKkI
+         3wTB5EY4CpuHgOyxGrPykxFtz4SZNdk7iH2TZNPDcyqJFFMedcb6JWB+F195mRkVg6e6
+         +83zLIUzlbq9SdOKTbhWXmOZRxRdLriozvCK8bpL1uJfp7ZaEe9kXby+RXEp9SEpFx0h
+         TuBik0mjNAceTknXdKVybx+ZPq8nwprLsr4kaJd5EZLRIBuQhZqU6+MkspneRBPY/okG
+         goz8kOFDmjAW3ASEVngd8oyl9QfOJV2GQgRld7EFAcE5QoTDBr77IlQ6+yQpRnH1Y2nc
+         ACSg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=H2Kl79sG+FKWpa31SxEj4bQPZO/vdu8KiCsfosI1L4c=;
+        b=oL3DlXlPjf9s2B3dDtlBJYComUcwwrphgOusqEWZt57bH65jr1sLxvHRxNcAxFhI6A
+         2U8zc89YYJy1MREvX+mhjyeazJxiQF81fyIGo573Ou7IOj+GUjqxKjbe3UkQ07mRBhci
+         v3bZ2V2pZjCvfl9AAvqdjIEJPkdUcoi39dx26i0oUCT60+vZ7SLvQM3FErIlt40NnHTm
+         z5MEyLrsDukHHcFVMljuR4t9rltSDmoOP2vL2lG6BEBroXvFNQl5p500ucMDlM8MtIXr
+         6KjQmfF9L3k3yqE4r5G0uRlvKI49NmVdfFb1qiC78OuJbAwEIrDX6QnQkVa5UkvfafJy
+         HYBQ==
+X-Gm-Message-State: AOAM531k/9bHhOzJ0GZiFN56zVU1vSibByfucUREOU1zib2Gu88R8kpx
+	3xG0Npe7nTMOCfPUGnzNd1+kRHK7U1o3aq2AhRio9Y5ojE8=
+X-Google-Smtp-Source: ABdhPJxP8tKnl+0zvBo5so/9kAcezpUdW9ja4d6fz9WrZ9oOSh0oEJGcGRVLZDY3faEkycoGkRuaYk45cMWabFQsVVA=
+X-Received: by 2002:a05:622a:148a:: with SMTP id t10mr15067216qtx.214.1622472374826;
+ Mon, 31 May 2021 07:46:14 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1spqeRFGOzx5uKq=anc9pJ++BGx-rkcX5wM8yz407hD6Dg@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+References: <20210530172125.16258-1-ayoub.zaki@embexus.com>
+In-Reply-To: <20210530172125.16258-1-ayoub.zaki@embexus.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Mon, 31 May 2021 07:45:48 -0700
+Message-ID: <CAMKF1sq56JqYJ6+R8On3zc_HnUO4VwvAP91QNASS8y_P7AZCgw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] evemu-tools: Add initial recipe
+To: Ayoub Zaki <ayoub.zaki@embexus.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Khem,
-
-Thanks for the feedback, very nice CI you have there, I will see if I 
-can reproduce and fix the.
-
-Best regards,
-
-Guy
-
-On 5/29/21 10:59 PM, Khem Raj wrote:
-> Hello Guy
+On Sun, May 30, 2021 at 10:21 AM Ayoub Zaki <ayoub.zaki@embexus.com> wrote:
 >
-> Thanks for patch, it does not build in some configs e.g. with
-> clang/arm64 I am seeing
+> ---
+>  .../evemu-tools/evemu-tools_git.bb            | 23 +++++++++++++++++++
+>  1 file changed, 23 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/evemu-tools/evemu-tools_git.bb
 >
-> https://errors.yoctoproject.org/Errors/Details/585823/
+> diff --git a/meta-oe/recipes-support/evemu-tools/evemu-tools_git.bb b/meta-oe/recipes-support/evemu-tools/evemu-tools_git.bb
+> new file mode 100644
+> index 000000000..f1172b0ef
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/evemu-tools/evemu-tools_git.bb
+> @@ -0,0 +1,23 @@
+> +SUMMARY = "Kernel evdev device emulation"
+> +DESCRIPTION = "The evemu library and tools are used to describe devices, record data, create devices and replay data from kernel evdev devices."
+> +HOMEPAGE = "https://www.freedesktop.org/wiki/Evemu"
+> +
+> +LICENSE = "GPLv3"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=e6a600fd5e1d9cbde2d983680233ad02"
+> +
+> +DEPENDS = "libevdev"
+> +
+> +SRCREV = "86a5627dbeac8d9d9bc34326a758d6a477e876e4"
+> +SRC_URI = "git://git@gitlab.freedesktop.org/libevdev/evemu.git;protocol=https;branch=master"
+> +
+> +S = "${WORKDIR}/git"
+> +PV = "gitr${SRCPV}"
+> +
+> +inherit autotools pkgconfig
+> +
+> +EXTRA_OECONF_append = " --prefix=/usr"
+
+why do we need this
+
+> +
+> +PACKAGES =+ "${PN}-python"
+> +FILES_${PN}-python = "${libdir}/python*/site-packages/*"
+> +RDEPENDS_${PN}-python = "python3"
+> +
+> --
+> 2.17.1
 >
-> On Fri, May 28, 2021 at 3:29 AM Guy Morand <guy@guy-morand.ch> wrote:
->> Signed-off-by: Guy Morand <guy@guy-morand.ch>
->> ---
->>   meta-oe/recipes-shells/fish/fish_3.2.2.bb | 17 +++++++++++++++++
->>   1 file changed, 17 insertions(+)
->>   create mode 100644 meta-oe/recipes-shells/fish/fish_3.2.2.bb
->>
->> diff --git a/meta-oe/recipes-shells/fish/fish_3.2.2.bb b/meta-oe/recipes-shells/fish/fish_3.2.2.bb
->> new file mode 100644
->> index 000000000..6bbe92088
->> --- /dev/null
->> +++ b/meta-oe/recipes-shells/fish/fish_3.2.2.bb
->> @@ -0,0 +1,17 @@
->> +SUMMARY = "Finally, a command line shell for the 90s"
->> +DESCRIPTION = "fish is a smart and user-friendly command line shell \
->> +for Linux, macOS, and the rest of the family."
->> +HOMEPAGE = "https://fishshell.com/"
->> +AUTHOR = "fish-shell contributors"
->> +LICENSE = "GPLv2"
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=9dbc95a48a7b8859e3c6db4c9396f053"
->> +
->> +inherit cmake
->> +
->> +DEPENDS = " \
->> +    ncurses \
->> +    "
->> +
->> +SRC_URI = "https://github.com/fish-shell/fish-shell/releases/download/${PV}/fish-${PV}.tar.xz"
->> +SRC_URI[md5sum] = "606253699ce41991b03a93bcc6047d51"
->> +SRC_URI[sha256sum] = "5944da1a8893d11b0828a4fd9136ee174549daffb3d0adfdd8917856fe6b4009"
->> --
->> 2.31.1
->>
->>
->> 
->>
+>
+> 
+>
