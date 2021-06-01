@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.55667.1622541999593275497
+ by mx.groups.io with SMTP id smtpd.web12.55568.1622542000089470506
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 01 Jun 2021 03:06:40 -0700
 Authentication-Results: mx.groups.io;
@@ -8,17 +8,16 @@ Received: from [78.130.197.211] (port=49790 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lo1IE-0002gA-Bh; Tue, 01 Jun 2021 13:06:38 +0300
+	id 1lo1IE-0002gA-RQ; Tue, 01 Jun 2021 13:06:39 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-ipython: Upgrade 7.23.1 -> 7.24.0
-Date: Tue,  1 Jun 2021 13:06:30 +0300
-Message-Id: <20210601100631.3277-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-ruamel-yaml: Upgrade 0.17.4 -> 0.17.7
+Date: Tue,  1 Jun 2021 13:06:31 +0300
+Message-Id: <20210601100631.3277-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210601100631.3277-1-leon.anavi@konsulko.com>
 References: <20210601100631.3277-1-leon.anavi@konsulko.com>
-MIME-Version: 1.0
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -30,38 +29,38 @@ X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-Upgrade to release 7.24.0:
+Upgrade to release 0.17.7:
 
-- Fix an issue where %recall would both succeeded and print an
-  error message it failed
-- Drop support for NumPy 1.16 – practically has no effect beyond
-  indicating in package metadata that we do not support it
+- issue 385 also affected other deprecated loaders
+- merged type annotations update provided by Jochen Sprickerhof
+- fix for issue 385: deprecated round_trip_loader function not
+  working
+- fix for issue 384 !!set with aliased entry resulting in broken
+  YAML on rt
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-ipython_7.23.1.bb => python3-ipython_7.24.0.bb}    | 2 +-
+ ...hon3-ruamel-yaml_0.17.4.bb => python3-ruamel-yaml_0.17.7.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-ipython_7.23.1.bb => python3-ipython_7.24.0.bb} (89%)
+ rename meta-python/recipes-devtools/python/{python3-ruamel-yaml_0.17.4.bb => python3-ruamel-yaml_0.17.7.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ipython_7.23.1.bb b/meta-python/recipes-devtools/python/python3-ipython_7.24.0.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-ipython_7.23.1.bb
-rename to meta-python/recipes-devtools/python/python3-ipython_7.24.0.bb
-index 492d922b9..1c11eeca0 100644
---- a/meta-python/recipes-devtools/python/python3-ipython_7.23.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-ipython_7.24.0.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
+diff --git a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.4.bb b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.7.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.4.bb
+rename to meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.7.bb
+index 2543269fc..5da0ac3fc 100644
+--- a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.4.bb
++++ b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.7.bb
+@@ -10,7 +10,7 @@ inherit pypi setuptools3
  
- PYPI_PACKAGE = "ipython"
+ BBCLASSEXTEND = "native nativesdk"
  
--SRC_URI[sha256sum] = "714810a5c74f512b69d5f3b944c86e592cee0a5fb9c728e582f074610f6cf038"
-+SRC_URI[sha256sum] = "a171caa3d3d4c819a1c0742e3abecfd5a2b8ab525ca1c9f114b40b76b0679ab1"
+-SRC_URI[sha256sum] = "44bc6b54fddd45e4bc0619059196679f9e8b79c027f4131bb072e6a22f4d5e28"
++SRC_URI[sha256sum] = "5c3fa739bbedd2f23769656784e671c6335d17a5bf163c3c3901d8663c0af287"
  
- RDEPENDS_${PN} = "\
-     ${PYTHON_PN}-setuptools \
+ do_install_prepend() {
+     export RUAMEL_NO_PIP_INSTALL_CHECK=1
 -- 
 2.17.1
 
