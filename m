@@ -1,89 +1,119 @@
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.web08.50111.1622498448358168181
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
+ by mx.groups.io with SMTP id smtpd.web10.51684.1622508809259492605
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 31 May 2021 15:00:48 -0700
+ Mon, 31 May 2021 17:53:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=YuYteS8X;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id c12so9880007pfl.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 31 May 2021 15:00:48 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=JBUXkGRb;
+ spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f169.google.com with SMTP id v14so9442953pgi.6
+        for <openembedded-devel@lists.openembedded.org>; Mon, 31 May 2021 17:53:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=hl9oLhMlSY1ezfCx8DmLV8iassOm21hpkAuAJhzo7G8=;
-        b=YuYteS8X2BnPhxQrfw2QP0ckaQRYDAcNAjbcA4419tRAY65Ugo04K0ob32fT8bveH5
-         tfQYDrSyHzfqjSV2rXsc0WzIc3Yh2yt4yv91a+R7CFnbfFYWIQqB+HeAGq1otrhUbnYb
-         xwYwdb1TTF16+ZUh0s179hnEtFiIyQdFTjx/+UZlh34b2LHAM4vK4FXziybINdMzNLZP
-         rTv82GNA+zzgoUxm5ri0r+sGtSOU0O8lNMiaYpkkHhGELRJ2G45Xy+rFrRSOZFWATVjd
-         Wlkwz0hPWn0/9YbuMDpVoqLJjdL7oNejwyd2ewCujgL7L/Kq23cBgyrW4rzl817Ucbgv
-         M5UA==
+        bh=V73xPzUEgW9MrZz8nwNmbw/aSeH6oMEydQVPSf5/xE0=;
+        b=JBUXkGRbP8o81rjqGscvCwxsm7TIi+qNMAoXrevk17xTOyjvqowEU1FDsCEgOtd/Xj
+         kxQhtTHCFEm134jT6iRPdrnLl9QZiv2B0CzA35zHEspLsFjkb0GMBUQVYqjwog75QZZa
+         C9NuJJRNr1WGtzOCbTM2yN3Mk/5PaEKQrisvgW0ocWsOCxbH8gCpms8m8AWNITYqF8cR
+         4RBgLtbalMj6MyKYOvaPt4v/msIi9pNCpVeE/7QgjFi8c8vBtVhrP24JRP4DfLpbTPQ3
+         BvO/EJBiUwuIe9I2otsNyDsY8m8OaJ3T+AxBMtPP7SvRi0BSVKVeigdbg80NmqD9/XPp
+         AIkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=hl9oLhMlSY1ezfCx8DmLV8iassOm21hpkAuAJhzo7G8=;
-        b=KLPcK054fCHGkYptxp71t8Witu5ZMhtTfIJ3UGv+xDmUXZxawBdqTEZHXH772yWM9q
-         ETHqO/t4v2mSmnTtZ7p/aACDInWcP4zoGPL565xcxGt3PFUgSmd9oG1F/sLKVDCMPXT9
-         f1HEtLCKh4zBEcsL8G4cuJAH5ACRxloqIEke6D7pU1xY4xjdnkHd6RPs2RNPAiZ7Q00s
-         aLVxt5qyoIRV1LndDa2NHVItScSXy+sRqX8UKJJ9xrZiXLKN0q9CwsKJHGvg/sw+zUMF
-         DQGcSAb0jrTZANNY6Z0sXd9ewmefAMKQpCXfQBc4YHQakGDzMV1HJ5wizrAl6+bqMIyL
-         aZlw==
-X-Gm-Message-State: AOAM533oX+QsstnnDMj/+3LpEt5/mTruwQNdJZAqO29CL6ADuw75P6xh
-	/7jlvJNsctVLq9Kp2N24iAxFpt5f8Gyyww==
-X-Google-Smtp-Source: ABdhPJxLjkjD2NftYbSw4xDOtuPv8rsB5rlx5MwxYewNHlzSPOnpLxvBr49ymcsL8yRqGSYAwM0zEw==
-X-Received: by 2002:a63:489:: with SMTP id 131mr1194410pge.411.1622498447429;
-        Mon, 31 May 2021 15:00:47 -0700 (PDT)
+        bh=V73xPzUEgW9MrZz8nwNmbw/aSeH6oMEydQVPSf5/xE0=;
+        b=etFjN4IqfqvHPGB+T2bYaeCX1q0g+3Eix0ERE3+JjPGeafKdn5iOcwXXkD54HfX+q4
+         liE9ZL+b1TdngsQfYJ6w0KtpQjzEHM4ljBsc+HkPk+G0h32BUWj7kW3vhKa/9MUbXqRq
+         bjhCGOVPWfXLLdDVDyVTnEd20CwhQmjCNUbTiu17Ib0tU12cuXmhYhzitiO7jOLXVxkz
+         N4nk+c+367cLp6S2RmdRB8VdUuU31Tb+JvazxaZApWHOI5FnBPoGbI++qhWJ2GwXVNne
+         ioXKhyGWzj+US0otDCl1MVLl0SLC1D6COs3TGuvmICyPjMRPnKs9LzB0OLVeTLDGKVF7
+         pZmg==
+X-Gm-Message-State: AOAM530xFIDm+NH+KKqdARjpkOY1knndTb5Ktqk8S9zw96N8fvRL6CyQ
+	a8WsASt+YnznuN7dGg6iwzylvNzX8yC+Cw==
+X-Google-Smtp-Source: ABdhPJyFXbifyzi4arYfivdCwIfi+nyrGEXY1gQBOFwq6R05KyH/xjgoph8pl6o/mLmcPudyQV4pUw==
+X-Received: by 2002:a65:4d4e:: with SMTP id j14mr15219268pgt.343.1622508808270;
+        Mon, 31 May 2021 17:53:28 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a054])
-        by smtp.gmail.com with ESMTPSA id d12sm2839170pfo.113.2021.05.31.15.00.46
+        by smtp.gmail.com with ESMTPSA id q4sm5194301pgg.0.2021.05.31.17.53.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 31 May 2021 15:00:46 -0700 (PDT)
+        Mon, 31 May 2021 17:53:27 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] mpich: Upgrade to 3.4.2
-Date: Mon, 31 May 2021 15:00:44 -0700
-Message-Id: <20210531220044.2590652-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] vk-gl-cts: Fix O_TRUNC conflict with fcntl.h
+Date: Mon, 31 May 2021 17:53:25 -0700
+Message-Id: <20210601005325.2913482-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Explicitly link with libgcc for __addtf3, __multf3 etc 128bit builtins
-on x86_64 as they are not available with compiler-rt and when using
-compiler-rt the link would fail
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-devtools/mpich/{mpich_3.4.1.bb => mpich_3.4.2.bb} | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/mpich/{mpich_3.4.1.bb => mpich_3.4.2.bb} (93%)
+ .../vk-gl-cts/files/0001-vulkancts.patch      | 40 +++++++++++++++++++
+ .../vk-gl-cts/khronos-cts.inc                 |  1 +
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/vk-gl-cts/files/0001-vulkancts.patch
 
-diff --git a/meta-oe/recipes-devtools/mpich/mpich_3.4.1.bb b/meta-oe/recipes-devtools/mpich/mpich_3.4.2.bb
-similarity index 93%
-rename from meta-oe/recipes-devtools/mpich/mpich_3.4.1.bb
-rename to meta-oe/recipes-devtools/mpich/mpich_3.4.2.bb
-index 77e080c8b8..0ee02d685c 100644
---- a/meta-oe/recipes-devtools/mpich/mpich_3.4.1.bb
-+++ b/meta-oe/recipes-devtools/mpich/mpich_3.4.2.bb
-@@ -6,7 +6,7 @@ LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=bd4d7ab13df98988b1ca2a4e01c8c163"
- 
- SRC_URI = "http://www.mpich.org/static/downloads/${PV}/mpich-${PV}.tar.gz"
--SRC_URI[sha256sum] = "8836939804ef6d492bcee7d54abafd6477d2beca247157d92688654d13779727"
-+SRC_URI[sha256sum] = "5c19bea8b84e8d74cca5f047e82b147ff3fba096144270e3911ad623d6c587bf"
- 
- RDEPENDS_${PN} += "bash perl libxml2"
- 
-@@ -31,6 +31,8 @@ PACKAGECONFIG += " \
- "
- PACKAGECONFIG[x11] = "--with-x --x-includes=${STAGING_INCDIR} --x-libraries=${STAGING_LIBDIR},--without-x,virtual/libx11"
- 
-+LDFLAGS_append_x86-64 = " -lgcc"
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/files/0001-vulkancts.patch b/meta-oe/recipes-graphics/vk-gl-cts/files/0001-vulkancts.patch
+new file mode 100644
+index 0000000000..2fd1d7123a
+--- /dev/null
++++ b/meta-oe/recipes-graphics/vk-gl-cts/files/0001-vulkancts.patch
+@@ -0,0 +1,40 @@
++From 273df2423d9226093310cbcaa8b924bb6b5d6586 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 31 May 2021 17:31:33 -0700
++Subject: [PATCH] vulkancts:
 +
- inherit autotools gettext pkgconfig
++O_TRUNC value in OperationId enum collides with the macro O_TRUNC
++defined in the POSIX header fnctl.h. To avoid the collision undefine
++O_TRUNC in this particular sourcefile before its is used in enums
++down below.
++
++This is fixed upstream differently
++https://github.com/KhronosGroup/VK-GL-CTS/commit/564c6062f72fe7ecd92b4aea1558c441e651c76b
++
++But until we get this module uprev'ed to that, lets use a simpler
++workaround
++
++Upstream-Status: Inappropriate [Fixed Differently]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ .../vulkan/spirv_assembly/vktSpvAsmFloatControlsTests.cpp     | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/external/vulkancts/modules/vulkan/spirv_assembly/vktSpvAsmFloatControlsTests.cpp b/external/vulkancts/modules/vulkan/spirv_assembly/vktSpvAsmFloatControlsTests.cpp
++index 22e6c75fa..db7f4b54a 100644
++--- a/external/vulkancts/modules/vulkan/spirv_assembly/vktSpvAsmFloatControlsTests.cpp
+++++ b/external/vulkancts/modules/vulkan/spirv_assembly/vktSpvAsmFloatControlsTests.cpp
++@@ -38,6 +38,10 @@
++ #include <limits>
++ #include <fenv.h>
++ 
+++#ifdef O_TRUNC
+++#undef O_TRUNC
+++#endif
+++
++ namespace vkt
++ {
++ namespace SpirVAssembly
++-- 
++2.31.1
++
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
+index d0f0e23429..dc38bd1697 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
++++ b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
+@@ -24,6 +24,7 @@ DEPENDS += "libpng zlib virtual/libgles2 virtual/egl"
  
- do_configure() {
+ SRC_URI += "file://0001-Workaround-for-GCC-11-uninit-variable-warnings-946.patch;patchdir=external/amber/src \
+             file://0001-Include-limits-header-for-numeric_limits.patch;patchdir=external/vulkancts \
++            file://0001-vulkancts.patch \
+ "
+ 
+ SRC_URI_append_libc-musl = "\
 -- 
 2.31.1
 
