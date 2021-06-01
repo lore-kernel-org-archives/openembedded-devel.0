@@ -1,119 +1,86 @@
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.web10.51684.1622508809259492605
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web10.53020.1622518172497281227
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 31 May 2021 17:53:29 -0700
+ Mon, 31 May 2021 20:29:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=JBUXkGRb;
- spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id v14so9442953pgi.6
-        for <openembedded-devel@lists.openembedded.org>; Mon, 31 May 2021 17:53:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=OrbRHvJJ;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id o17-20020a17090a9f91b029015cef5b3c50so614027pjp.4
+        for <openembedded-devel@lists.openembedded.org>; Mon, 31 May 2021 20:29:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=V73xPzUEgW9MrZz8nwNmbw/aSeH6oMEydQVPSf5/xE0=;
-        b=JBUXkGRbP8o81rjqGscvCwxsm7TIi+qNMAoXrevk17xTOyjvqowEU1FDsCEgOtd/Xj
-         kxQhtTHCFEm134jT6iRPdrnLl9QZiv2B0CzA35zHEspLsFjkb0GMBUQVYqjwog75QZZa
-         C9NuJJRNr1WGtzOCbTM2yN3Mk/5PaEKQrisvgW0ocWsOCxbH8gCpms8m8AWNITYqF8cR
-         4RBgLtbalMj6MyKYOvaPt4v/msIi9pNCpVeE/7QgjFi8c8vBtVhrP24JRP4DfLpbTPQ3
-         BvO/EJBiUwuIe9I2otsNyDsY8m8OaJ3T+AxBMtPP7SvRi0BSVKVeigdbg80NmqD9/XPp
-         AIkQ==
+        bh=QWY5hofX0CFtRX8RO+OHMbGElij+xxQ+Dxz9S1mnWwo=;
+        b=OrbRHvJJiwJQXcjsGdOiTyetqr/NCthuVyH0PmQFkFJ7VxEOQDUtD6nd4LBx00C8Oj
+         gBS18Qn4CTiEe6azt+v+1Ovp+flMbYhdNAMokL+bIZJIwGFK/vtnwCFmA0NS6AaA7AsH
+         tg0S89YYsbUh662HmVfi63w/CR/vo19eDTeMT201hQqu5J4EAhkyGUR6tu1mD9nNt5hZ
+         ZLZv3yehupG4zzGx8mZsJLV7AkFxK05Egm8dMOCuxsN9IpGreIm3/CTdBlR7DaSBUBf7
+         erWjmWd6ehkHTUYUL4zjZk/UP8ndl/cYBi4oxK6ADQxE9FhPrrH/Xfo62BUhUt74xabT
+         lZlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=V73xPzUEgW9MrZz8nwNmbw/aSeH6oMEydQVPSf5/xE0=;
-        b=etFjN4IqfqvHPGB+T2bYaeCX1q0g+3Eix0ERE3+JjPGeafKdn5iOcwXXkD54HfX+q4
-         liE9ZL+b1TdngsQfYJ6w0KtpQjzEHM4ljBsc+HkPk+G0h32BUWj7kW3vhKa/9MUbXqRq
-         bjhCGOVPWfXLLdDVDyVTnEd20CwhQmjCNUbTiu17Ib0tU12cuXmhYhzitiO7jOLXVxkz
-         N4nk+c+367cLp6S2RmdRB8VdUuU31Tb+JvazxaZApWHOI5FnBPoGbI++qhWJ2GwXVNne
-         ioXKhyGWzj+US0otDCl1MVLl0SLC1D6COs3TGuvmICyPjMRPnKs9LzB0OLVeTLDGKVF7
-         pZmg==
-X-Gm-Message-State: AOAM530xFIDm+NH+KKqdARjpkOY1knndTb5Ktqk8S9zw96N8fvRL6CyQ
-	a8WsASt+YnznuN7dGg6iwzylvNzX8yC+Cw==
-X-Google-Smtp-Source: ABdhPJyFXbifyzi4arYfivdCwIfi+nyrGEXY1gQBOFwq6R05KyH/xjgoph8pl6o/mLmcPudyQV4pUw==
-X-Received: by 2002:a65:4d4e:: with SMTP id j14mr15219268pgt.343.1622508808270;
-        Mon, 31 May 2021 17:53:28 -0700 (PDT)
+        bh=QWY5hofX0CFtRX8RO+OHMbGElij+xxQ+Dxz9S1mnWwo=;
+        b=JCylEs8A0nD5kkGX5x62WHMoCMcoTG+9qUuSmcAuykuxZdB0Tr5eJlJRtJd8rfdH8n
+         3crBkyMuRCPSWh2yTr6p7YiaRaUGlG4WzJSzrIZeYF3o9OjCQse2AozZ55zqonrT5zc1
+         +Mfj60ZuO98BLsqjEBoXWaPZe0H0L949E2hngsHcKtR/t+nD/ZNTvj+nlA8xkbeEK1Tt
+         ho/1Hz76lluHX1woDJulpP9C5gznGOKVk6yz7uCELgDuJyTaXvHjC7WUoyjhqRAFMtio
+         /GnfhIW81XRWZzGNq4TqD/4sWblsQgefZZ4GfI1oj4TKHclsnnnXHjmU+EwS/xZYqGQN
+         fJ9g==
+X-Gm-Message-State: AOAM5316xV7Zbnvq55jlVgRnOiCB6O0bRB7kX4xMuO17o6ORmUdoWA5I
+	MDHcyYgV3/qxqr1ktrAL+WwsIa4WWU5LrQ==
+X-Google-Smtp-Source: ABdhPJwP1i1nzXRNiBnsS/abeCHLc/TB3GCUzvh0K7dQlC6xhcI+EROR5gigCeHKQBxbtyb4ufegRg==
+X-Received: by 2002:a17:90b:4a12:: with SMTP id kk18mr22685810pjb.99.1622518171713;
+        Mon, 31 May 2021 20:29:31 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a054])
-        by smtp.gmail.com with ESMTPSA id q4sm5194301pgg.0.2021.05.31.17.53.27
+        by smtp.gmail.com with ESMTPSA id r11sm12549316pgl.34.2021.05.31.20.29.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 31 May 2021 17:53:27 -0700 (PDT)
+        Mon, 31 May 2021 20:29:31 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] vk-gl-cts: Fix O_TRUNC conflict with fcntl.h
-Date: Mon, 31 May 2021 17:53:25 -0700
-Message-Id: <20210601005325.2913482-1-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] dhcp-relay: Fix libtool files for internal bind build
+Date: Mon, 31 May 2021 20:29:29 -0700
+Message-Id: <20210601032929.3873073-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+The bundled libtool files are arcane and do not work in OE cross build
+environment, resulting in creating wrong entried in DT_NEEDED section
+as well as emitting build paths into rpaths into ELF files, therefore
+copy the OE provided libtool files to fix this issue
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../vk-gl-cts/files/0001-vulkancts.patch      | 40 +++++++++++++++++++
- .../vk-gl-cts/khronos-cts.inc                 |  1 +
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/vk-gl-cts/files/0001-vulkancts.patch
+ meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.2.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/files/0001-vulkancts.patch b/meta-oe/recipes-graphics/vk-gl-cts/files/0001-vulkancts.patch
-new file mode 100644
-index 0000000000..2fd1d7123a
---- /dev/null
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/files/0001-vulkancts.patch
-@@ -0,0 +1,40 @@
-+From 273df2423d9226093310cbcaa8b924bb6b5d6586 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 31 May 2021 17:31:33 -0700
-+Subject: [PATCH] vulkancts:
-+
-+O_TRUNC value in OperationId enum collides with the macro O_TRUNC
-+defined in the POSIX header fnctl.h. To avoid the collision undefine
-+O_TRUNC in this particular sourcefile before its is used in enums
-+down below.
-+
-+This is fixed upstream differently
-+https://github.com/KhronosGroup/VK-GL-CTS/commit/564c6062f72fe7ecd92b4aea1558c441e651c76b
-+
-+But until we get this module uprev'ed to that, lets use a simpler
-+workaround
-+
-+Upstream-Status: Inappropriate [Fixed Differently]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ .../vulkan/spirv_assembly/vktSpvAsmFloatControlsTests.cpp     | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/external/vulkancts/modules/vulkan/spirv_assembly/vktSpvAsmFloatControlsTests.cpp b/external/vulkancts/modules/vulkan/spirv_assembly/vktSpvAsmFloatControlsTests.cpp
-+index 22e6c75fa..db7f4b54a 100644
-+--- a/external/vulkancts/modules/vulkan/spirv_assembly/vktSpvAsmFloatControlsTests.cpp
-++++ b/external/vulkancts/modules/vulkan/spirv_assembly/vktSpvAsmFloatControlsTests.cpp
-+@@ -38,6 +38,10 @@
-+ #include <limits>
-+ #include <fenv.h>
-+ 
-++#ifdef O_TRUNC
-++#undef O_TRUNC
-++#endif
-++
-+ namespace vkt
-+ {
-+ namespace SpirVAssembly
-+-- 
-+2.31.1
-+
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
-index d0f0e23429..dc38bd1697 100644
---- a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
-@@ -24,6 +24,7 @@ DEPENDS += "libpng zlib virtual/libgles2 virtual/egl"
+diff --git a/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.2.bb b/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.2.bb
+index 2af41b217a..b178180ec8 100644
+--- a/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.2.bb
++++ b/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.2.bb
+@@ -38,6 +38,7 @@ EXTRA_OECONF = "--enable-paranoia \
+                 --enable-libtool \
+                 --with-randomdev=/dev/random \
+                "
++EXTRA_OEMAKE += "LIBTOOL='${S}/${HOST_SYS}-libtool'"
  
- SRC_URI += "file://0001-Workaround-for-GCC-11-uninit-variable-warnings-946.patch;patchdir=external/amber/src \
-             file://0001-Include-limits-header-for-numeric_limits.patch;patchdir=external/vulkancts \
-+            file://0001-vulkancts.patch \
- "
+ # Enable shared libs per dhcp README
+ do_configure_prepend () {
+@@ -48,6 +49,9 @@ do_compile_prepend() {
+     tar xf ${S}/bind/bind.tar.gz -C ${S}/bind
+     install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}/bind/bind-9.11.14/
+     install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}/bind/bind-9.11.14/
++    cp -fpR ${S}/m4/*.m4 ${S}/bind/bind-9.11.14/libtool.m4/
++    rm -rf ${S}/bind/bind-9.11.14/libtool
++    install -m 0755 ${S}/${HOST_SYS}-libtool ${S}/bind/bind-9.11.14/
+ }
  
- SRC_URI_append_libc-musl = "\
+ do_install_append () {
 -- 
 2.31.1
 
