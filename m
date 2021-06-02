@@ -1,79 +1,129 @@
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.web10.13608.1622643310096186184
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.web08.13817.1622643310841327073
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Jun 2021 07:15:10 -0700
+ Wed, 02 Jun 2021 07:15:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=fr7KgSov;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.47, mailfrom: brgl@bgdev.pl)
-Received: by mail-wm1-f47.google.com with SMTP id r13so1413442wmq.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Jun 2021 07:15:09 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=QpWZpG+I;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.54, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f54.google.com with SMTP id t4-20020a1c77040000b029019d22d84ebdso3869695wmi.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Jun 2021 07:15:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=Gut1layMCv99kq1k1smuIdk94eLGzXQvV+lcbEFhN9M=;
-        b=fr7KgSovRuh6lpOrC+AvxYbOajxuao/xOea5IkvUo37xsg9QlvGUcd7fbv/80vI7Os
-         xOpeP2xF8DcQhQa+1klwDrnvMiyN+EluxJSkUweuQGgLJy14dzgVSBD47SEEn8l99ZiQ
-         jG/0o+s10LiGbihHoJPSGP/Ve2Z/ame+m5E1VG8eghIFh00iWQBEk4+GfLhDrr7B+WLo
-         jUOvK8sd/Vr9XfuxbbfpoEkB3zubmcflCSafOWdKfDAg59v4UD5+ASUdxIBOTsNVSN0J
-         Rl5dCRstykUGhijVFN08InD60yb15QmHLkw/rk15qdwGvJ1jub3D4elNT98gjYJ08pb4
-         JkTQ==
+        bh=sOZtExqOkhpwJtsX0O0Vh/BI27QDXKX3OQCVaN+9Ums=;
+        b=QpWZpG+Iiz2AYaVWQw+LxbAXHdBsq4huD/1e6iP2I5tXpcq9Ps+zTqdEFuNNSdNHSJ
+         wuO5UbkqGo5OxyrXcReIkyZgBPAgJx3yvmmqfnSvvR13NdfZFq7jOWPMgrZOQg4KjZiV
+         gjzLbBecedD3Uh0OSvH8hDBLIi1Hxc2uLrEMxV8vY05ip2H7/ssHmWlJsFJgemPF6IT7
+         w7Wp8DqOyLQ2sYlWAnjaYXEZoGJLdKFddiT3MtPS1lN9JwTOZuXFZukQRhNWFAUPv7ab
+         f2j7YCKfOR91kXzEgMl0+BQo70wNpCSrlFd1IEe9cJIa3KA4O3uJOHEzzg67+8SMCeuF
+         AFow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=Gut1layMCv99kq1k1smuIdk94eLGzXQvV+lcbEFhN9M=;
-        b=Lu+mMxsrcuTO7mgW4BQZ0Cey9aok81h3sCMg1nKRjRnma724d9JvLDieb0JfDYpIbR
-         OBaeyk9cudHPXXyodC3cRvhqKHZtnk4mzQeirVaJ9gil1IqA4ZmIuvF2wuGXZjI6hk5Z
-         lJlGfZ/qJcVYy+F/vSTtfcQjK3sx/xAYfdPIARlCjHLftRgzV4xLgcVklEIHtMx5hmae
-         i71hluBTskudUt1V1nhxCaCbIuurk4Lx2epyonGytSERwMYIueyje0vDzaqEnRn1mQW5
-         7cCmGGmp61/7ukam+71ESowtNpM/WZbijkSFXlitY2noEufaXphXpoX+LfncmLrDo/ZJ
-         8Baw==
-X-Gm-Message-State: AOAM533VvZM8mN+hn1NPRbdeumM2GjuEsChWysgWJ8cM5ic8piGKqPjR
-	Yl3My2qWAMLz8zSNI7D0XAg8C7QoNORRNw==
-X-Google-Smtp-Source: ABdhPJx8Ze6/6dnDlEe8kRIhbUSKOrz/W9QZUXduRJ6Lw7NFeylYmUYEUOKxhPfEBEGZ7KobMn+gog==
-X-Received: by 2002:a05:600c:19d3:: with SMTP id u19mr377600wmq.100.1622643308731;
-        Wed, 02 Jun 2021 07:15:08 -0700 (PDT)
+        bh=sOZtExqOkhpwJtsX0O0Vh/BI27QDXKX3OQCVaN+9Ums=;
+        b=oz4jL6IrJ6xYEupI4AYR1yEgPqt26hIuPMaPo5Q1gUMi+hvntwZZvUMKkAOby9r8RU
+         767pUSuiVcqD2ye78pCVSJ55/nVZtwzoCD9w63YGg1qpbc/rZSHNkUsCESnI/Dqb4sHM
+         gWatOikxggmdOkESgfWGM7/SgOex4hRMvp8IVVJ1m5nHPFm4iHHuKtbNJG/9WRkyD2Km
+         iwnwotZMscz+G2otfpKIylpos0427zVtdmak13dysvV/0EAh8EDHPDDWMHEpZCxYSm19
+         Dp8BDWKkNJuQnDyHJP7EEabdiU3sayaZE/IliFR4Z0/VkFmoQpGSOkxTWzsAy0WfyrIE
+         qv6Q==
+X-Gm-Message-State: AOAM531ME/ChBjiJnfY7X1BFLV8OjHhRz2LvBct5rxzLIWWeTzhVUNb3
+	O7ZovGmGBWFj+ibTwUJdxLRkGg==
+X-Google-Smtp-Source: ABdhPJwqXL8grjXRJECJm0gSUpP8XyU6UgE1cakpTCSwfOoy+DjBi27NyqDTOiYA4TFNYcFKPjsVUA==
+X-Received: by 2002:a1c:9807:: with SMTP id a7mr5414935wme.10.1622643309376;
+        Wed, 02 Jun 2021 07:15:09 -0700 (PDT)
 Return-Path: <brgl@bgdev.pl>
 Received: from debian-brgl.home (lfbn-nic-1-149-6.w2-15.abo.wanadoo.fr. [2.15.231.6])
         by smtp.gmail.com with ESMTPSA id i12sm2824697wmq.7.2021.06.02.07.15.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Jun 2021 07:15:08 -0700 (PDT)
+        Wed, 02 Jun 2021 07:15:09 -0700 (PDT)
 From: "Bartosz Golaszewski" <brgl@bgdev.pl>
 To: Khem Raj <raj.khem@gmail.com>,
 	Armin Kuster <akuster808@gmail.com>,
 	openembedded-devel@lists.openembedded.org
 Cc: Bartosz Golaszewski <brgl@bgdev.pl>
-Subject: [meta-oe][PATCH 6/9] libgpiod: redirect stdout from the ptest executable to a file
-Date: Wed,  2 Jun 2021 16:14:58 +0200
-Message-Id: <20210602141501.6174-7-brgl@bgdev.pl>
+Subject: [meta-oe][PATCH 7/9] libgpiod: ptest: run all test-suites if possible
+Date: Wed,  2 Jun 2021 16:14:59 +0200
+Message-Id: <20210602141501.6174-8-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.30.1
 In-Reply-To: <20210602141501.6174-1-brgl@bgdev.pl>
 References: <20210602141501.6174-1-brgl@bgdev.pl>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Most tests redirect their standard output to a file. Let's make libgpiod
-consistent with this pattern.
+We have four test-suites total in libgpiod: for the core C library,
+gpio-tools and for C++ and Python bindings. Modify the recipe to install
+all of them depending on build settings and make run-ptest execute them
+if available.
 
 Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
 ---
- meta-oe/recipes-support/libgpiod/files/run-ptest | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-support/libgpiod/files/run-ptest  | 21 ++++++++++++-------
+ .../libgpiod/libgpiod_1.6.3.bb                | 20 +++++++++++++++++-
+ 2 files changed, 33 insertions(+), 8 deletions(-)
 
 diff --git a/meta-oe/recipes-support/libgpiod/files/run-ptest b/meta-oe/recipes-support/libgpiod/files/run-ptest
-index 4cda05d44..3ad737dfc 100644
+index 3ad737dfc..60c661fc1 100644
 --- a/meta-oe/recipes-support/libgpiod/files/run-ptest
 +++ b/meta-oe/recipes-support/libgpiod/files/run-ptest
-@@ -4,7 +4,7 @@ testbin="gpiod-test"
+@@ -1,12 +1,19 @@
+ #!/bin/sh
+ 
+-testbin="gpiod-test"
++testbins="gpiod-test gpio-tools-test gpiod-cxx-test gpiod_py_test.py"
++
  ptestdir=$(dirname "$(readlink -f "$0")")
  cd $ptestdir/tests
  
--./$testbin
-+./$testbin > ./$testbin.out
- if [ $? -ne 0 ]; then
- 	echo "FAIL: $testbin"
- else
+-./$testbin > ./$testbin.out
+-if [ $? -ne 0 ]; then
+-	echo "FAIL: $testbin"
+-else
+-	echo "PASS: $testbin"
+-fi
++for testbin in $testbins; do
++	if test -e ./$testbin; then
++		./$testbin > ./$testbin.out
++		if [ $? -ne 0 ]; then
++			echo "FAIL: $testbin"
++		else
++			echo "PASS: $testbin"
++		fi
++	else
++		echo "SKIP: $testbin"
++	fi
++done
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
+index c0ebb8aa5..874453fbd 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
+@@ -53,5 +53,23 @@ PACKAGECONFIG_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'tests
+ 
+ do_install_ptest() {
+     install -d ${D}${PTEST_PATH}/tests
+-    cp ${B}/tests/.libs/gpiod-test ${D}${PTEST_PATH}/tests/
++
++    # These are the core C library tests
++    install -m 0755 ${B}/tests/.libs/gpiod-test ${D}${PTEST_PATH}/tests/
++
++    # Tools are always built so let's always install them for ptest even if
++    # we're not selecting libgpiod-tools.
++    install -m 0755 ${S}/tools/gpio-tools-test ${D}${PTEST_PATH}/tests/
++    install -m 0755 ${S}/tools/gpio-tools-test.bats ${D}${PTEST_PATH}/tests/
++    for tool in ${FILES_${PN}-tools}; do
++        install ${B}/tools/.libs/$(basename $tool) ${D}${PTEST_PATH}/tests/
++    done
++
++    if ${@bb.utils.contains('PACKAGECONFIG', 'cxx', 'true', 'false', d)}; then
++        install -m 0755 ${B}/bindings/cxx/tests/.libs/gpiod-cxx-test ${D}${PTEST_PATH}/tests/
++    fi
++
++    if ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'true', 'false', d)}; then
++        install -m 0755 ${S}/bindings/python/tests/gpiod_py_test.py ${D}${PTEST_PATH}/tests/
++    fi
+ }
 -- 
 2.30.1
 
