@@ -1,114 +1,97 @@
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web09.60152.1622563223169754157
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web11.9215.1622612766344975396
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Jun 2021 09:00:23 -0700
+ Tue, 01 Jun 2021 22:46:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=MlFJYIOY;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id h16so4857325pjv.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Jun 2021 09:00:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=O1xoK5Q4ZKtPDAWP7URbonAhaZaz11guFq6XbG3KtZo=;
-        b=MlFJYIOY7zJopyBfGTZCsmcvg6lysbktNxSqZPaNZivg+0HqO6uC56BjHgCjSits+G
-         VoHSWL9/ujKeLhdRxSAMm5dghe5Y8gFNE4esfurmKo1hU6bYF2nmJBS9lIddRT05udpN
-         p74YmZBoIvDR76jEgBNTDIiA1lfRyebtyZU8yqs9bTTGgbJmLdQ2BwMp4b6dtBqI+Sif
-         Tj4kMNLIZ3JYZ3PE2G8skAR8BGKOGY6iH2hoAHVmu+hcwT8lAKzpM9TPiFd7e96saz3j
-         +/ANfzA3/NZr/06LHUCk9z6QJjRDPW7YmDw/d19jkTBwoG1x9irHPs3R7MYm9GdDpLjU
-         063w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=O1xoK5Q4ZKtPDAWP7URbonAhaZaz11guFq6XbG3KtZo=;
-        b=SkHXD11PU59quciIW0QfUmw7hZx+ci42r7dQbJpCB9nZMZS+1ni5Le9Dyfx7q6BdPs
-         9+aJ8le96WX6I2s47mWu0PQJwKAtFbrSzv7ZYSLcjvsRIiEAhcWu96quoJVTOQl5eufn
-         2d23M8IoYTw56SvHjOPt3XnVN/HQVzlowQIyDzMTdwJxh9Q72aoY6zMScgAl75BK2OVj
-         hHbKkkryrY9UNJ+A/gO4lA+IM+uz+OM9c+Tt3MhcsWNFxJOlfY9fXWXTyYPK86Z84BEt
-         wxp8Cfku+DMzbTNTECh+ZwFgsmmSmiJ9xAJUZaM7ngHfr+4Zcl0hP8sciVKJq9oZExWq
-         Misw==
-X-Gm-Message-State: AOAM533gdi/O7mPH/jCyiMOrheQ7YoRiSk5lSyc4VGA3TphYFSCQr+Sk
-	kq3hQaE5C3bcSK9VgoDa7IwhD+e2TZzARA==
-X-Google-Smtp-Source: ABdhPJyTg+E5ffWgAiGYag7NHeWzxXA7MAFO/kmGqcx3uli9u1WoR7FENdfLt3ywhrm6UUJEN9Cj+Q==
-X-Received: by 2002:a17:902:6b8c:b029:ea:f54f:c330 with SMTP id p12-20020a1709026b8cb02900eaf54fc330mr26923621plk.10.1622563222237;
-        Tue, 01 Jun 2021 09:00:22 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a054])
-        by smtp.gmail.com with ESMTPSA id f9sm13211752pfc.42.2021.06.01.09.00.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Jun 2021 09:00:21 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] mongodb: Fix -Wc++11-narrowing warning on 32bit
-Date: Tue,  1 Jun 2021 09:00:17 -0700
-Message-Id: <20210601160017.3005343-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: hongxu.jia@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 1525k37k016547
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 1 Jun 2021 22:46:03 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.10; Tue, 1 Jun 2021 22:46:02 -0700
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.10 via Frontend Transport; Tue, 1 Jun 2021 22:46:01 -0700
+From: "hongxu" <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+CC: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] debootstrap: fix runtime failure on nativesdk
+Date: Wed, 2 Jun 2021 13:46:00 +0800
+Message-ID: <20210602054600.33711-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+While calling debootstrap in sdk, if host does not install dpkg package,
+the full path calling will fail
+
+Do not hardcode the full path of dpkg, then the sdk's dpkg will be used.
+
+In Yocto, for debootstrap, only dpkg is used, so the fix do not take care
+of other utilities (such as /usr/bin/udpkg)
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- ...0001-Use-explicit-typecast-to-size_t.patch | 35 +++++++++++++++++++
- .../recipes-dbs/mongodb/mongodb_git.bb        |  1 +
- 2 files changed, 36 insertions(+)
- create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Use-explicit-typecast-to-size_t.patch
+ ...o-not-hardcode-the-full-path-of-dpkg.patch | 33 +++++++++++++++++++
+ .../debootstrap/debootstrap_1.0.124.bb        |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/debootstrap/debootstrap/0001-do-not-hardcode-the-full-path-of-dpkg.patch
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Use-explicit-typecast-to-size_t.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Use-explicit-typecast-to-size_t.patch
+diff --git a/meta-oe/recipes-devtools/debootstrap/debootstrap/0001-do-not-hardcode-the-full-path-of-dpkg.patch b/meta-oe/recipes-devtools/debootstrap/debootstrap/0001-do-not-hardcode-the-full-path-of-dpkg.patch
 new file mode 100644
-index 0000000000..5b724ff8aa
+index 000000000..2a5f23316
 --- /dev/null
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-Use-explicit-typecast-to-size_t.patch
-@@ -0,0 +1,35 @@
-+From 6fdb2d304e05a17e57b2efd7f8252794a8722dbe Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 1 Jun 2021 08:25:36 -0700
-+Subject: [PATCH] Use explicit typecast to size_t
++++ b/meta-oe/recipes-devtools/debootstrap/debootstrap/0001-do-not-hardcode-the-full-path-of-dpkg.patch
+@@ -0,0 +1,33 @@
++From e735fb23f46f0c3c7a1144ba6b4050bfc0015a05 Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Wed, 2 Jun 2021 13:34:35 +0800
++Subject: [PATCH] do not hardcode the full path of dpkg
 +
-+maxMemoryUsageBytes is size_t type which may not match long long value
-+internalDocumentSourceGroupMaxMemoryBytes.load() returns, so typecast it
-+to avoid narrowing warning from clang
++While calling debootstrap in sdk, if host does not install dpkg package,
++the full path calling will fail
 +
-+document_source_group.cpp:378:22: error: non-constant-expression cannot be narrowed from type 'long long' to 'size_t' (aka 'unsigned int') in initializer list [-Wc++11-narrowing]
-+                     maxMemoryUsageBytes ? *maxMemoryUsageBytes
-+                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++Do not hardcode the full path of dpkg, then then sdk's dpkg will be used.
 +
-+Upstream-Status: Submitted [https://github.com/mongodb/mongo/pull/1405]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Upstream-Status: Inappropriate [oe specific]
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 +---
-+ src/mongo/db/pipeline/document_source_group.cpp | 2 +-
++ debootstrap | 2 +-
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/mongo/db/pipeline/document_source_group.cpp b/src/mongo/db/pipeline/document_source_group.cpp
-+index c7bf44e72e..a52906a940 100644
-+--- a/src/mongo/db/pipeline/document_source_group.cpp
-++++ b/src/mongo/db/pipeline/document_source_group.cpp
-+@@ -376,7 +376,7 @@ DocumentSourceGroup::DocumentSourceGroup(const intrusive_ptr<ExpressionContext>&
-+       _doingMerge(false),
-+       _memoryTracker{pExpCtx->allowDiskUse && !pExpCtx->inMongos,
-+                      maxMemoryUsageBytes ? *maxMemoryUsageBytes
-+-                                         : internalDocumentSourceGroupMaxMemoryBytes.load()},
-++                                         : (size_t)internalDocumentSourceGroupMaxMemoryBytes.load()},
-+       _initialized(false),
-+       _groups(pExpCtx->getValueComparator().makeUnorderedValueMap<Accumulators>()),
-+       _spilled(false) {
++diff --git a/debootstrap b/debootstrap
++index a3cf3af..5e96c3e 100755
++--- a/debootstrap
+++++ b/debootstrap
++@@ -538,7 +538,7 @@ fi
++ 
++ if in_path dpkg && \
++      dpkg --print-architecture >/dev/null 2>&1; then
++-	HOST_ARCH=$(/usr/bin/dpkg --print-architecture)
+++	HOST_ARCH=$(dpkg --print-architecture)
++ elif in_path udpkg && \
++      udpkg --print-architecture >/dev/null 2>&1; then
++ 	HOST_ARCH=$(/usr/bin/udpkg --print-architecture)
 +-- 
-+2.31.1
++2.27.0
 +
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-index ba6d052e43..95e0cf7a88 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-@@ -30,6 +30,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4 \
-            file://disable_runtime_check.patch \
-            file://ppc64_ARCH_BITS.patch \
-            file://0001-Do-not-use-MINSIGSTKSZ.patch \
-+           file://0001-Use-explicit-typecast-to-size_t.patch \
-            "
- SRC_URI_append_libc-musl ="\
-            file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
+diff --git a/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.124.bb b/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.124.bb
+index 300c98f91..4fc59adfb 100644
+--- a/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.124.bb
++++ b/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.124.bb
+@@ -8,6 +8,7 @@ SRC_URI  = "\
+     http://http.debian.net/debian/pool/main/d/debootstrap/debootstrap_${PV}.tar.gz \
+     file://0001-support-to-override-usr-sbin-and-usr-share.patch \
+     file://0002-support-to-override-usr-bin-arch-test.patch \
++    file://0001-do-not-hardcode-the-full-path-of-dpkg.patch \
+ "
+ 
+ SRC_URI[md5sum] = "8a5e97f60236c3a63f715c056a5f0e29"
 -- 
-2.31.1
+2.27.0
 
