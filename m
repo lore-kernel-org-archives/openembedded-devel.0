@@ -1,65 +1,78 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.13019.1622640984693669523
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.web10.13604.1622643306786743526
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Jun 2021 06:36:25 -0700
+ Wed, 02 Jun 2021 07:15:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=58062 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.93)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1loR2i-0005Zl-Mt; Wed, 02 Jun 2021 16:36:24 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-sqlalchemy: Upgrade 1.4.15 -> 1.4.17
-Date: Wed,  2 Jun 2021 16:36:03 +0300
-Message-Id: <20210602133603.32509-3-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210602133603.32509-1-leon.anavi@konsulko.com>
-References: <20210602133603.32509-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=W88z3qRZ;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.51, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f51.google.com with SMTP id o127so1402822wmo.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Jun 2021 07:15:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=7GGO+I5auS15jQ18f5c1Gn3V2TX1OMh6CmmH5QKoT+w=;
+        b=W88z3qRZ958FCAblmN18+bUyertcHDfYYjsWgRFyAkmM+wqVuYJnA4sqgRv4bMPNJJ
+         yMZacqMlAJRcPj9KiEGUrsrdzjUX5H/FNbrTLD2lJDgOvpy9ZjJeoNvyUq6Y4pMA9+Z5
+         Qq+Os6EH82ZMbf4jyQYhma7tCxLPYn+9+T7mOzX/ksDFkIaJ2lNOM3YKwopclx5Fp11x
+         yKe6afa+d0I21nK3lMHhn62M128es0sIYD4Wtdw82qCqOUida6aDtPmAzbP20w4eIMDd
+         1ru2M0p1TOuRJsPYrfQUgZOfn6DH4o/ifjmpKd/EmpGLA2ubsLmNS18+Fnm2zzz+c/qQ
+         gusA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=7GGO+I5auS15jQ18f5c1Gn3V2TX1OMh6CmmH5QKoT+w=;
+        b=CvXw6tIUwOE0Owr4BqUDvnBA+m3FPa5FtFy/tc+8WpkRez11GfeHXAXvwhf75coyfL
+         0JGaZ5B0y8pf7NXwCTsDrss/a6Kp5kReBpXmqcIzkDC896fzlepaJ+7EQnL+DZ5RAgSw
+         MVt8jkwamtuEt45pWdjWGRMvu+95gzOgZqpG1Ny4RAZ5VZHOZjWsxZTI4REJmxfZChHQ
+         pUPV3DKhSKGq8+t47SdP1a1ugf5OuJBTj8VBVJZWhmyjqFjodg4BHqPexUpwaJW1wX0z
+         1AiDgv7ZAXUf9j7G6coQz1r36ofgGq/sEMjk7vU4+easVKWU8LfxsY0alV3sQ22glLdF
+         6Xyw==
+X-Gm-Message-State: AOAM53207571puVFKMInfB1oc6xateA/PXFYL8Q6pyYKvXpreFd+8h0g
+	HK2M00cVraRaXQTrveOjBfLnbw==
+X-Google-Smtp-Source: ABdhPJweKB3ksYqFzGk+fUhws3nG/QJn+izfYxVxWX6DjaGLgohUOvBfl9IewlY8BZUSBQHAXiFgAw==
+X-Received: by 2002:a1c:cc17:: with SMTP id h23mr31699132wmb.129.1622643304814;
+        Wed, 02 Jun 2021 07:15:04 -0700 (PDT)
+Return-Path: <brgl@bgdev.pl>
+Received: from debian-brgl.home (lfbn-nic-1-149-6.w2-15.abo.wanadoo.fr. [2.15.231.6])
+        by smtp.gmail.com with ESMTPSA id i12sm2824697wmq.7.2021.06.02.07.15.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 02 Jun 2021 07:15:04 -0700 (PDT)
+From: "Bartosz Golaszewski" <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Armin Kuster <akuster808@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: [meta-oe][PATCH 0/9] libgpiod: ptest improvements
+Date: Wed,  2 Jun 2021 16:14:52 +0200
+Message-Id: <20210602141501.6174-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.30.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 1.4.17:
+From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-orm:
-- Fixed regression caused by just-released performance fix
-  mentioned in #6550 where a query.join() to a relationship could
-  produce an AttributeError if the query were made against non-ORM
-  structures only, a fairly unusual calling pattern.
+This series improves the recipe for libgpiod with primary focus on ptest
+parts. We bring in support for all test-suites available in the package.
+We also tweak the recipe in other places to make it more readable and
+robust in general.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- ...ython3-sqlalchemy_1.4.15.bb => python3-sqlalchemy_1.4.17.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-sqlalchemy_1.4.15.bb => python3-sqlalchemy_1.4.17.bb} (86%)
+Bartosz Golaszewski (9):
+  libgpiod: coding style fixes
+  libgpiod: list all packages in a single assignment
+  libgpiod: fix RRECOMMENDS for python bindings
+  libgpiod: correctly split output files into packages
+  libgpiod: add RDEPENDS for tests
+  libgpiod: redirect stdout from the ptest executable to a file
+  libgpiod: ptest: run all test-suites if possible
+  libgpiod: ptest: warn if the gpio-mockup kernel module is not selected
+  libgpiod: ptest: add kernel-modules to RRECOMMENDS
 
-diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.15.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.17.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.15.bb
-rename to meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.17.bb
-index 2d7273bb2..5b881ea0b 100644
---- a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.15.bb
-+++ b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.17.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.sqlalchemy.org/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3359ed561ac16aaa25b6c6eff84df595"
- 
--SRC_URI[sha256sum] = "0ff100c75cd175f35f4d24375a0b3d82461f5b1af5fc8d112ef0e5ceea8049e6"
-+SRC_URI[sha256sum] = "651cdb3adcee13624ba22d5ff3e96f91e16a115d2ca489ddc16a8e4c217e8509"
- 
- PYPI_PACKAGE = "SQLAlchemy"
- inherit pypi setuptools3
+ .../recipes-support/libgpiod/files/run-ptest  | 21 ++++---
+ .../libgpiod/libgpiod_1.6.3.bb                | 61 +++++++++++++++----
+ 2 files changed, 64 insertions(+), 18 deletions(-)
+
 -- 
-2.17.1
+2.30.1
 
