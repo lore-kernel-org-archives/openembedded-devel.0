@@ -1,82 +1,94 @@
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.web08.13813.1622643308272020897
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+ by mx.groups.io with SMTP id smtpd.web09.13764.1622643308873227081
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Jun 2021 07:15:08 -0700
+ Wed, 02 Jun 2021 07:15:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=02luTbuX;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.51, mailfrom: brgl@bgdev.pl)
-Received: by mail-wm1-f51.google.com with SMTP id u5-20020a7bc0450000b02901480e40338bso1337358wmc.1
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=jhsJ4u+7;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.41, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f41.google.com with SMTP id o2-20020a05600c4fc2b029019a0a8f959dso1789443wmq.1
         for <openembedded-devel@lists.openembedded.org>; Wed, 02 Jun 2021 07:15:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=FXwQC96Vt9sVKZnYTjgvjI4sKEzRadg7CB0LlhiPTV8=;
-        b=02luTbuXHAxJwwk7FxzTa4wuhy2HtMvRrVvOJo5vAwHTg2U3XogR/LrZnc1mHzw8fu
-         LFHE0bEPsmQYeiiDBadP8jc5ZeDNOAog1xJGRTspZpLESKW7ZYHEhmMRQYV+0BPQ/oYe
-         wJGHxk64x0bb0XZofMfenVNKoRwUzJiwLafICtkxLUVWBO6RV2jFrY/mPwj0eqiQ2yVt
-         T29vPC0ci5JczgNSkyttWjWuoY/QY2bBTZZWBAkLIraGebuMPg2rL8gE3YnStXO0CM3l
-         78nm4g1Ercmg7pdBO38nxjQSgjSRnd3pnKrUJI0i6V6OSKn9kOnKEzzKiQN/o4a0nWwb
-         ldTQ==
+        bh=hC+SxWuwRezWTKeWdDEKJntvKyd4KpwVI1FCT8Bejpo=;
+        b=jhsJ4u+7ZScwSuvAVn/IXVx+BH8wqYDvPwEx3rKWurhW30Tjf55XrTn3Znq4xIgSL3
+         soHehY2qV6vTyGmzlecZ/4yUXhINzUMRpmQgPDCBLJETeYQRGe07J/0fra4ryOkwx+CM
+         hfGaRm9fA7eDq3TW7V85DajwycUwap90MsAw4ZLUWfl9Jif2EcceFYzBBL9gm7wmgGJD
+         YGqCH3urwyMFkSacTUqfTsbI+qz+ktG/acYi4D91c95qbeeAWjs8U7uF69zC44QNqdiK
+         VjhBlNdxTxErQqSvA96xUZER6LtvHzOEIxau7y/Rt/N7GOVCDxI8sNZ0eipD7XQJZUAf
+         xS0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=FXwQC96Vt9sVKZnYTjgvjI4sKEzRadg7CB0LlhiPTV8=;
-        b=LJZ+ShtPDsYesNpydgh1tAp3kj10wMXY82x2PSxn/Y9UeWCjfn/QNaK6uGUHRgN19T
-         2A9SIH7WBUqZgXQjZCrK4YuuzRVpzpILeYVLYrUvk5SoIwLUl2hXei9+iAyWxcb3v821
-         4Yeef2XYK8NybRasjIRqWccI9NYYNu66YsWjbe8efChejpXwwbqCQs8TBCTVkPJAjA0v
-         iLWrEl5KInvzm68SGrA3d2jDwtU6+/mWqhzonBF/TKkynpse18jVGQujkz5EgVQ2VTDT
-         yKDd0bRDZDb6ZdTjJqZJfjJXlgn+igynzP+COdLZYHTCJH3BxOjGLo2rmABoNXBnU1lr
-         VhVg==
-X-Gm-Message-State: AOAM531UbrdOu1s125tcaxKIDYomvNF5kH5CjazQb/WuXfm1TBFjjMYo
-	+0l0aJcNRL32tUG2QX4sNmvpAg==
-X-Google-Smtp-Source: ABdhPJxA1wMIZIGUgtuPkpdY/RAktbpTizjH8KR7cITvqOiqvQ5yVf255rFMO6LUDAOhYY4KuLweGQ==
-X-Received: by 2002:a7b:c3d8:: with SMTP id t24mr5440609wmj.77.1622643306941;
-        Wed, 02 Jun 2021 07:15:06 -0700 (PDT)
+        bh=hC+SxWuwRezWTKeWdDEKJntvKyd4KpwVI1FCT8Bejpo=;
+        b=I/ZV8usODxjNdnqlFlw2evW16TuNuw5BEaR0YAl15IfBfnBVYkfL2aLYh4WVuIYyru
+         sLz/YjLhCUTtO8k0KPBZ35KoNfgX/ZvjN6P16TA+94WVbM1EKSiJ4uSTT6367f49oB2Z
+         MfWC9JcZNH+TSwjryOrVQWoKKBflp5T1vPSWz521H1l4urhIUicHigXxnr4jWMhdaaX0
+         s4G5Y54QWO1d1halLh6PAGhmigkxQOayhvo7I2usT2kxaonBNgdSoGysvEqcJdk0jwXt
+         j1pjwvE776dvkYDlBEmT+Ce2hU2dSsydtkSpGNa4SF1onPunpJiqxoMpcUkaAYcFEJGZ
+         SkCA==
+X-Gm-Message-State: AOAM531CAbhZyWS9fQyJ9IQNsw7OPYC22VqjIo73UxZRgsyZ7zF/Trnt
+	ih3PRKYZunYH9O2gbx3MInNSVw==
+X-Google-Smtp-Source: ABdhPJxNTIep3BfWiZ/TEKm6FnJfri8P12PxY5q//fNJe5yUtwBkbImSTqEv1ekVydVZWfMLAyHCVw==
+X-Received: by 2002:a1c:df85:: with SMTP id w127mr5462204wmg.130.1622643307565;
+        Wed, 02 Jun 2021 07:15:07 -0700 (PDT)
 Return-Path: <brgl@bgdev.pl>
 Received: from debian-brgl.home (lfbn-nic-1-149-6.w2-15.abo.wanadoo.fr. [2.15.231.6])
-        by smtp.gmail.com with ESMTPSA id i12sm2824697wmq.7.2021.06.02.07.15.06
+        by smtp.gmail.com with ESMTPSA id i12sm2824697wmq.7.2021.06.02.07.15.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Jun 2021 07:15:06 -0700 (PDT)
+        Wed, 02 Jun 2021 07:15:07 -0700 (PDT)
 From: "Bartosz Golaszewski" <brgl@bgdev.pl>
 To: Khem Raj <raj.khem@gmail.com>,
 	Armin Kuster <akuster808@gmail.com>,
 	openembedded-devel@lists.openembedded.org
 Cc: Bartosz Golaszewski <brgl@bgdev.pl>
-Subject: [meta-oe][PATCH 3/9] libgpiod: fix RRECOMMENDS for python bindings
-Date: Wed,  2 Jun 2021 16:14:55 +0200
-Message-Id: <20210602141501.6174-4-brgl@bgdev.pl>
+Subject: [meta-oe][PATCH 4/9] libgpiod: correctly split output files into packages
+Date: Wed,  2 Jun 2021 16:14:56 +0200
+Message-Id: <20210602141501.6174-5-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.30.1
 In-Reply-To: <20210602141501.6174-1-brgl@bgdev.pl>
 References: <20210602141501.6174-1-brgl@bgdev.pl>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-RRECOMMENDS for the python module doesn't work because it specifies
-the module itself as its own RRECOMMENDS. Fix it to recommend the python
-package if python3 is in PACKAGECONFIG for the main package.
+Currently, the files that should go into libgpiod-ptest are part of
+either the main library package of libgpiod-tools. Use more fine-grained
+values for package files variables.
 
 Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
 ---
- meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../recipes-support/libgpiod/libgpiod_1.6.3.bb   | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
 
 diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
-index e1c0e8922..43264782e 100644
+index 43264782e..9e4bef7b4 100644
 --- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
 +++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
-@@ -32,8 +32,8 @@ FILES_${PN}-tools = "${bindir}/*"
+@@ -28,7 +28,21 @@ EXTRA_OECONF = "--enable-tools"
+ DEPENDS += "autoconf-archive-native"
+ 
+ PACKAGES =+ "${PN}-tools libgpiodcxx ${PN}-python"
+-FILES_${PN}-tools = "${bindir}/*"
++FILES_${PN}-tools = " \
++    ${bindir}/gpiodetect \
++    ${bindir}/gpioinfo \
++    ${bindir}/gpioget \
++    ${bindir}/gpioset \
++    ${bindir}/gpiofind \
++    ${bindir}/gpiomon \
++"
++FILES_${PN}-ptest += " \
++    ${bindir}/gpiod-test \
++    ${bindir}/gpio-tools-test \
++    ${bindir}/gpio-tools-test.bats \
++    ${bindir}/gpiod-cxx-test \
++    ${libdir}/libgpiomockup.so.* \
++"
  FILES_libgpiodcxx = "${libdir}/libgpiodcxx.so.*"
  FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}/*.so"
  FILES_${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/*.a"
--RRECOMMENDS_PYTHON = "${@bb.utils.contains('PACKAGECONFIG', 'python3', '${PN}-python', '',d)}"
--RRECOMMENDS_${PN}-python += "${RRECOMMENDS_PYTHON}"
-+
-+RRECOMMENDS_${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'python3', '${PN}-python', '', d)}"
- 
- PACKAGECONFIG_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'tests', '', d)}"
- 
 -- 
 2.30.1
 
