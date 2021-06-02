@@ -1,84 +1,67 @@
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
- by mx.groups.io with SMTP id smtpd.web09.9494.1622615525019214219
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web08.13283.1622640978407938857
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Jun 2021 23:32:05 -0700
+ Wed, 02 Jun 2021 06:36:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=pecXir6c;
- spf=pass (domain: gmail.com, ip: 209.85.208.54, mailfrom: jacob.kroon@gmail.com)
-Received: by mail-ed1-f54.google.com with SMTP id u24so1508442edy.11;
-        Tue, 01 Jun 2021 23:32:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=to:from:subject:message-id:date:user-agent:mime-version
-         :content-language:content-transfer-encoding;
-        bh=JMkOOeOoy4CuxN2fjwRuzI8VekuOxj1uEuaRO7FQr18=;
-        b=pecXir6c6vt21yJX+HgiLJMYspsoK/aNOhpkS1JBet5wdOiGho0ABtyZlAecYFg+pB
-         QE3Kd4UglRxLoo33W2GQaEYBtNBAomSEz+N5poTo9neRr+ruiSv82B56Khlbm2wUs19h
-         40A5VY5enqIKTzkXVHzNOZdvr8f13kPMLzxg+XtVnxKCbRMExfpw0DjT34xySGYdThrs
-         OsiqEmt0BBv9OzuiRYGUC3f0ilh33ITYs11nRVf3qajL6hPu9rDLpoEVVctUG6HP0ZI8
-         +3JI186YrG8RE2Oshux3qC5o8W+9itDV2zOcqalLWF8w8qCdLoxS6Nh9Nzihi2i8vnR5
-         REnA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:to:from:subject:message-id:date:user-agent
-         :mime-version:content-language:content-transfer-encoding;
-        bh=JMkOOeOoy4CuxN2fjwRuzI8VekuOxj1uEuaRO7FQr18=;
-        b=cLOsLrp8OC16sQ3zU/3veis5kkMxygvaAgk9ocneF8IpFb7fVWqkViufmni3zGIj55
-         XFPkSbxil01pKfScOOupp0N3cXmGGo/ZMFCwmXMjgMPNNoNAh/hztGYfPZ9WItmt/0Lu
-         DwyHpeIJ3b/9FS25Xlb2cGsNu4pv3PuohTsql0TWh50abfksS/+nVDY8wDX7BS4UTZr7
-         2kStizXB/mZ9+vk/SrMVxMcYX8GBHUSE3ZnUDBUHkz84cxcrh5f1nKZn35hj6ilyUeqP
-         H34u4wFWHz0Dic//2U0tkmivJGBmTl1v57KTqu32xcQ/TcpSBvhaPSVi2uEsgEzGkiss
-         LgjA==
-X-Gm-Message-State: AOAM531utsqhBea6BFrhnyPN/CiL1qbnCuWt/fS4YazVCHQiq0V2nyaf
-	LfdNu/E6KpykzOuI2S5H0E5J/DjQQTSEA6XG
-X-Google-Smtp-Source: ABdhPJwGw0ZkVdX5MmZtytLeOJ1kgWy4nJEv+2xNxocwARrBuBflvyEZjnsn7azRFng1/l2wFFKf4A==
-X-Received: by 2002:aa7:c983:: with SMTP id c3mr14930733edt.58.1622615523418;
-        Tue, 01 Jun 2021 23:32:03 -0700 (PDT)
-Return-Path: <jacob.kroon@gmail.com>
-Received: from [192.168.10.102] (37-247-29-68.customers.ownit.se. [37.247.29.68])
-        by smtp.gmail.com with ESMTPSA id v21sm670669edt.48.2021.06.01.23.32.02
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 01 Jun 2021 23:32:02 -0700 (PDT)
-To: openembedded-core@lists.openembedded.org,
- openembedded-devel@lists.openembedded.org
-From: "Jacob Kroon" <jacob.kroon@gmail.com>
-Subject: Fedora 34, shadow-native/icedtea7-native, umask problems ?
-Message-ID: <a5983cc8-81e4-9947-d1c1-45791de79806@gmail.com>
-Date: Wed, 2 Jun 2021 08:32:01 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=58062 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.93)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1loR2b-0005Zl-FI; Wed, 02 Jun 2021 16:36:16 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-oauthlib: Upgrade 3.1.0 -> 3.1.1
+Date: Wed,  2 Jun 2021 16:36:01 +0300
+Message-Id: <20210602133603.32509-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Hi,
+Upgrade to release 3.1.1:
 
-I'm using Fedora 34 and OE-Core/Bitbake/layers from git master as of 
-today, with reproducible builds. Sometimes when rebuilding my image I 
-see sudden changes in file permissions (jumping back and forth) in the 
-buildhistory output for two native recipes:
+- OAuth2.0 Provider - Bugfixes
+- OAuth2.0 Client - Bugfixes
+- improved skeleton validator for public vs private client
+- replace mock library with standard unittest.mock
+- build isort integration
+- python2 code removal
+- add python3.8 support
+- bump minimum versions of pyjwt and cryptography
 
-shadow-native: (OE-Core)
-> -drwxr-xr-x -          -                  40 ./var/spool/mail
-> +drwxrwxr-x -          -                  40 ./var/spool/mail
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../{python3-oauthlib_3.1.0.bb => python3-oauthlib_3.1.1.bb}   | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-oauthlib_3.1.0.bb => python3-oauthlib_3.1.1.bb} (88%)
 
-icedtea7-native: (meta-java)
-> -drwxrwxr-x -          -                 120 ./usr/lib/jvm/icedtea7-native
-> -drwxrwxr-x -          -                 800 ./usr/lib/jvm/icedtea7-native/bin
-> --rwxrwxr-x -          -               15016 ./usr/lib/jvm/icedtea7-native/bin/apt
-> --rwxrwxr-x -          -               15016 ./usr/lib/jvm/icedtea7-native/bin/extcheck
-> --rwxrwxr-x -          -               15016 ./usr/lib/jvm/icedtea7-native/bin/idlj
-...
-> +drwxr-xr-x -          -                 120 ./usr/lib/jvm/icedtea7-native
-> +drwxr-xr-x -          -                 800 ./usr/lib/jvm/icedtea7-native/bin
-> +-rwxr-xr-x -          -               15016 ./usr/lib/jvm/icedtea7-native/bin/apt
-> +-rwxr-xr-x -          -               15016 ./usr/lib/jvm/icedtea7-native/bin/extcheck
-> +-rwxr-xr-x -          -               15016 ./usr/lib/jvm/icedtea7-native/bin/idlj
-...
+diff --git a/meta-python/recipes-devtools/python/python3-oauthlib_3.1.0.bb b/meta-python/recipes-devtools/python/python3-oauthlib_3.1.1.bb
+similarity index 88%
+rename from meta-python/recipes-devtools/python/python3-oauthlib_3.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-oauthlib_3.1.1.bb
+index fe27e8e50..e11786349 100644
+--- a/meta-python/recipes-devtools/python/python3-oauthlib_3.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-oauthlib_3.1.1.bb
+@@ -4,8 +4,7 @@ HOMEPAGE = "https://github.com/idan/oauthlib"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=abd2675e944a2011aed7e505290ba482"
+ 
+-SRC_URI[md5sum] = "43cb2b5bac983712ee55076b61181cc2"
+-SRC_URI[sha256sum] = "bee41cc35fcca6e988463cacc3bcb8a96224f470ca547e697b604cc697b2f889"
++SRC_URI[sha256sum] = "8f0215fcc533dd8dd1bee6f4c412d4f0cd7297307d43ac61666389e3bc3198a3"
+ 
+ inherit pypi setuptools3
+ 
+-- 
+2.17.1
 
-Before I start debugging them, does anyone have an obvious fix or hint 
-for any of these ?
-
-Regards,
-Jacob
