@@ -1,59 +1,60 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.4])
- by mx.groups.io with SMTP id smtpd.web11.5706.1622714323370554474
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.1])
+ by mx.groups.io with SMTP id smtpd.web08.5700.1622714343175268117
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Jun 2021 02:58:43 -0700
+ Thu, 03 Jun 2021 02:59:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=OOyp/qSe;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.4, mailfrom: zhengrq.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=DIwTjzOO;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.1, mailfrom: zhengrq.fnst@fujitsu.com)
 Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1622714321; i=@fujitsu.com;
-	bh=yUv6tGji3LMKkYv2MJqoPAh7ZehrQT2FWhrjCv0JrgA=;
+	s=170520fj; t=1622714341; i=@fujitsu.com;
+	bh=tCI1VW6Foqsnx5d/gH9zS3zrmZXWtF+pHchuVHk7Zrw=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=OOyp/qSeCKooqyQ/OB28KNp5sNQVT9JI+HrDoy22+PcqZgSKjr8W4o2bczCXlN+HT
-	 Q/72bM6NlzlhbRXVBoDUeYxJtEjr53GcCEagWE23C//v53Wlnu4r48ANDHwTuHNEwE
-	 TnjfX7f9JAHEfjfBMcP9sP2jK/0pCgt3tSRelSD3maSzSi6Fbu+a7yCAWJVVLhyuHP
-	 QJsk+rfTfDwLxxlxx/EgsAv3ol41RCCq9AOGwkgL2X27sHs05PefC4lwoGVFviwknB
-	 B/QUcMYugMRvR6fgkksGoTbKShljuIDq6BA+iMwWO7Uc/EWPum6zdhu64asZuiq6zk
-	 3bGv0nAeqbd9Q==
+	b=DIwTjzOOkQWx2YAgE8qhOxd7Rgv+Y/fslWoO1EJN9TtvJHbVWF01PkgOwTs9lP5ee
+	 RiH3JZOzl2SfSno34nSBI/02s6JyQO35cFghoutbTNM/issdtrAMwqzSc3VXzAu+X5
+	 LCf5l/Ay6ZZe2sfXWKjR7tBrj8IfMX9x9E7cLWR2X/TUoEwXP/ODvjgt+UXaeOq+k5
+	 OVopPRhqr8KsTCHUEahgg+9OsoUD8oU+yHw1Gge71Zw02WNmB6zEFXvGYgJGK8S9ct
+	 BaO4hW71eyKLaHQT64ED+cCtNNaWyDbUuTr3/ILMaX9h0M3CFppZCHx71AXKtKuVVp
+	 tsC+rbAvpeG2g==
 Received: from [100.112.194.111] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-a.eu-west-1.aws.symcld.net id 62/08-02276-0D7A8B06; Thu, 03 Jun 2021 09:58:40 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupkkeJIrShJLcpLzFFi42Kxs+GYonth+Y4
-  Eg6UHVSwuHl7K7MDocW7jCsYAxijWzLyk/IoE1owJJwMLNnFUXNq3jbWBcRV7FyMnh5DALCaJ
-  L3eNuxi5gOzdjBL/GhazgCTYBHQlzj1eC1YkIqAvsXT2HmYQW1jATmLykWNgNouAisTKw8/B6
-  nkF3CVuPmgAsyUEFCSmPHzPDBEXlDg58wlYnFlAQuLgixdAcQ6gGkWJ2dPlIcorJGbM2MY2gZ
-  FnFpKOWUg6FjAyrWK0SCrKTM8oyU3MzNE1NDDQNTQ00jW0NNI1MjDRS6zSTdRLLdUtTy0u0TX
-  USywv1iuuzE3OSdHLSy3ZxAgMoZSCA2d2MJ56/UHvEKMkB5OSKO+d9h0JQnxJ+SmVGYnFGfFF
-  pTmpxYcYZTg4lCR4LZcB5QSLUtNTK9Iyc4DhDJOW4OBREuGdshgozVtckJhbnJkOkTrFqCglz
-  lsF0icAksgozYNrg8XQJUZZKWFeRgYGBiGegtSi3MwSVPlXjOIcjErCvF4gU3gy80rgpr8CWs
-  wEtFjAaxvI4pJEhJRUA1OQUvXKO/NyeYuX6IdzB78+rNkm2KS8giNKY1OCyFbN2m2NRsoHL1Z
-  Ub1LYIOt6csNq5tq5R+/vyrzSXpPlbJ/XlSK+p7Bs8terWxQXnH9wsW3tH0H7awcfhl6cXrE/
-  kEejwCVCsd0ky/yemu/v/8XKXHfeH2jaOlV9/8+tnI94o9tkurW1BQuj9ihP//h/noRK7FRGd
-  5abfT825Lg9zC58a6t5mP/kQ5e4k6cXqXXf5gmc/eZc9FnhGqFD9uq/mDfGOZ60Lj2bVxQmr/
-  JGurgt9tpvbulF72uOtgZOjzn58XXdr4eKzSIBdeZZlTeNJSqzpD7cXDmdd8YHP27RGSHZX1W
-  FxCdZHpuoLVtYp8RSnJFoqMVcVJwIADH4nVAcAwAA
+	by server-1.bemta.az-a.eu-west-1.aws.symcld.net id A8/9C-27560-5E7A8B06; Thu, 03 Jun 2021 09:59:01 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrAIsWRWlGSWpSXmKPExsViZ8MRqvt0+Y4
+  Eg08TuC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1ox7m5pYC/5wVXy6283SwHiJs4uRi0NIYBaT
+  RN/UDkYIZzejxO0dHWxdjJwcbAK6Eucer2UHsUUE9CWWzt7DDGILCzhLtLxbBGRzcLAIqEhM/
+  ysOEuYVcJfY8+AjC4gtIaAgMeXhe2aIuKDEyZlPwOLMAhISB1+8AGuVEFCUmD1dHqK8QmLGjG
+  1sExh5ZiHpmIWkYwEj0ypGi6SizPSMktzEzBxdQwMDXUNDI11DS1NdQ1NDvcQq3US91FLd8tT
+  iEl0gt7xYr7gyNzknRS8vtWQTIzCIUgoOT9/B2P/mg94hRkkOJiVR3jvtOxKE+JLyUyozEosz
+  4otKc1KLDzHKcHAoSfBaLgPKCRalpqdWpGXmAAMaJi3BwaMkwjtlMVCat7ggMbc4Mx0idYoxn
+  OPN2iWLmDnegsm2e3eBZDuYnLng4Gpmjllg8n77ISD5AEQKseTl56VKifNWgWwTABmXUZoHtw
+  wWsZcYZaWEeRkZGBiEeApSi3IzS1DlXzGKczAqCfN6gUzhycwrgbvpFdC5TEDnCnhtAzm3JBE
+  hJdXAFCvQEHPS/tK3UI364NB21cCMD5UnnNX6VjBMZJbqrLu9ynal1Cl9bY+iJ9GbE36eszvV
+  +Ofz7tN9sXOYH23ZNr0oOWVdoJ/m6z4fzbuO62/w2zq3KkUJtoekxPU4a90/OWP1lotPtm40f
+  WOa/uDH9T87Dx0svBPk3Gv1bVPEkfVKy3tNUhZOvNfs7Wlw0uWvwfLyuXfmOIa83nc5wkyExz
+  xQ2Gfaqk0yDdp3Yx022bmezQ1Sk224oCB/fPtaBunsiaZrf8SIuQt7XwsOmp/dHH5NUHTp1eB
+  5Z97PjbyprjLnrt/y16YzlIIf5gSyxrgWtsr5lOUniEoWPeXKvXhOILtev6M9eZ8eg3j3Tkcl
+  luKMREMt5qLiRACwFO0NUwMAAA==
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-3.tower-267.messagelabs.com!1622714320!146060!1
-X-Originating-IP: [62.60.8.148]
+X-Msg-Ref: server-11.tower-265.messagelabs.com!1622714340!15357!1
+X-Originating-IP: [62.60.8.85]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.75.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 32469 invoked from network); 3 Jun 2021 09:58:40 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-3.tower-267.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 3 Jun 2021 09:58:40 -0000
+Received: (qmail 2801 invoked from network); 3 Jun 2021 09:59:01 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-11.tower-265.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 3 Jun 2021 09:59:01 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1539wX2I029834
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1539x0re016200
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 3 Jun 2021 10:58:40 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 3 Jun 2021 10:59:00 +0100
 Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 3 Jun 2021 10:58:38 +0100
+ (TLS) id 15.0.1497.18; Thu, 3 Jun 2021 10:58:59 +0100
 From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] gensio: upgrade 2.2.5 -> 2.2.7
-Date: Fri, 4 Jun 2021 02:58:28 +0800
-Message-ID: <1622746708-4409-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [PATCH] [oe] [meta-oe] [PATCH] iperf3: upgrade 3.9 -> 3.10
+Date: Fri, 4 Jun 2021 02:58:52 +0800
+Message-ID: <1622746732-4446-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.35]
@@ -61,27 +62,37 @@ X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
+-License-Update: Copyright year updated to 2021.
+
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../gensio/{gensio_2.2.5.bb => gensio_2.2.7.bb}                 | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/gensio/{gensio_2.2.5.bb => gensio_2.2.7.bb} (93%)
+ .../iperf3/{iperf3_3.9.bb => iperf3_3.10.bb}                  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-benchmark/iperf3/{iperf3_3.9.bb => iperf3_3.10.bb} (89%)
 
-diff --git a/meta-oe/recipes-connectivity/gensio/gensio_2.2.5.bb b/meta-oe/recipes-connectivity/gensio/gensio_2.2.7.bb
-similarity index 93%
-rename from meta-oe/recipes-connectivity/gensio/gensio_2.2.5.bb
-rename to meta-oe/recipes-connectivity/gensio/gensio_2.2.7.bb
-index 271a668751..f2a2a5fc80 100644
---- a/meta-oe/recipes-connectivity/gensio/gensio_2.2.5.bb
-+++ b/meta-oe/recipes-connectivity/gensio/gensio_2.2.7.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=a0fd36908af843bcee10cb6dfc47fa67 \
-                     file://COPYING;md5=bae3019b4c6dc4138c217864bd04331f \
-                     "
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.9.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.10.bb
+similarity index 89%
+rename from meta-oe/recipes-benchmark/iperf3/iperf3_3.9.bb
+rename to meta-oe/recipes-benchmark/iperf3/iperf3_3.10.bb
+index be75837beb..6fe87353dd 100644
+--- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.9.bb
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.10.bb
+@@ -9,14 +9,14 @@ SECTION = "console/network"
+ BUGTRACKER = "https://github.com/esnet/iperf/issues"
+ AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport@lbl.gov>"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=b7fb682e9941a49f1214dcd7441410d7"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=4991c26fb646b69589d1eff3e958b06a"
  
--SRCREV = "ed307629e067a9ef55d79beec9c9f67b86efbaaf"
-+SRCREV = "35c82812f2d6bb41686d49987e052b75e1836afd"
+ SRC_URI = "git://github.com/esnet/iperf.git \
+            file://0002-Remove-pg-from-profile_CFLAGS.patch \
+            file://0001-configure.ac-check-for-CPP-prog.patch \
+            "
  
- SRC_URI = "git://github.com/cminyard/gensio;protocol=https;branch=2.2.x"
+-SRCREV = "1f8fb13297f3e3e40169ebcd12e171167e394473"
++SRCREV = "c159c741243441be84f91d3130cbeef1e1d579e8"
+ 
+ S = "${WORKDIR}/git"
  
 -- 
 2.25.1
