@@ -1,26 +1,26 @@
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by mx.groups.io with SMTP id smtpd.web12.61.1622740249391145687
+ by mx.groups.io with SMTP id smtpd.web09.93.1622740403629764599
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Jun 2021 10:10:50 -0700
+ Thu, 03 Jun 2021 10:13:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@denx.de header.s=phobos-20191101 header.b=ZseR305n;
+ dkim=fail reason="body hash did not verify" header.i=@denx.de header.s=phobos-20191101 header.b=w41/BB7i;
  spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
 Received: from tr.lan (ip-89-176-112-137.net.upcbroadband.cz [89.176.112.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
 	(No client certificate requested)
 	(Authenticated sender: marex@denx.de)
-	by phobos.denx.de (Postfix) with ESMTPSA id 4ADF482CA0;
-	Thu,  3 Jun 2021 19:10:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTPSA id EF61282CA0;
+	Thu,  3 Jun 2021 19:13:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1622740246;
-	bh=U1vo5DPI/xQ84aJkVjWlPs3Em8z/bND3FcQVG+vGULw=;
+	s=phobos-20191101; t=1622740402;
+	bh=eQ9MVBoVgw4vZmJCcpLSZCI/l1deaK9nl13fyBVvEiE=;
 	h=From:To:Cc:Subject:Date:From;
-	b=ZseR305nIMdNT+YEVNOtkWxBa66+s4E4D/zsTRsv1R3nEn40QXzEPCpfJODGZb7hW
-	 064DoLNGgE30WA8l5WEG6+hYIQW+JLtu7wmv+QKepJV4lc+0DUieustAIJgAO3IQa4
-	 l33iW1IZj4gQL8lksGF7tJfFhTPVtkutSvAvWQJJwVOrxsD6jg1n8dbXj2Nsc5fEeV
-	 INjIsALeP7jeJHIQfmwRiCiAVWqrK748VfkfYN2bPs7egi5z9d2C0ay+LpdlOiIVc4
-	 xJx8TXhVvuPPAEQVOAMHWYvd0IM4EXxgRr6blL9U+OhquHFk0njQ19c0HoFPVUlAVq
-	 CcoGCu7Ix4F9Q==
+	b=w41/BB7il+xGn1+htcnm9vbXeFLqnNiakJA7hin1zQ3KzfQJ8Oa6h7Z70UQKWnzoD
+	 m3g3XhVkmES1xKieo2IGHo3qgAJVPLj+DxgmoCt6GBZgKP5iRKrYJrlV4aEoEhz37y
+	 D267UZT3/fVD7jIie84+84I5wwYME7KTfUhZnkCGRAdrRajYs6hIjQDGV77WlAH3DL
+	 uiBMrs3G+/+FlLXGawtABeMLwIXCfMPnL9q+79FeATleuvESZywEUYp93pco+ez5/K
+	 8pcaKRuq94zL55wLKKRw09YlL94zmS0JjdwkUJlRqoVqXwP2kQRx2ZF/mdlnaJrR1e
+	 ZFF+3Z9XcYsEA==
 From: "Marek Vasut" <marex@denx.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Marek Vasut <marex@denx.de>,
@@ -29,9 +29,9 @@ Cc: Marek Vasut <marex@denx.de>,
 	Khem Raj <raj.khem@gmail.com>,
 	Richard Purdie <richard.purdie@linuxfoundation.org>,
 	Ross Burton <ross.burton@arm.com>
-Subject: [meta-oe][PATCH] nss: Fix build on Centos 7
-Date: Thu,  3 Jun 2021 19:10:40 +0200
-Message-Id: <20210603171040.105283-1-marex@denx.de>
+Subject: [meta-oe][dunfell][PATCH] nss: Fix build on Centos 7
+Date: Thu,  3 Jun 2021 19:13:16 +0200
+Message-Id: <20210603171316.105842-1-marex@denx.de>
 X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 X-Virus-Scanned: clamav-milter 0.102.4 at phobos.denx.de
@@ -61,15 +61,16 @@ Cc: Khem Raj <raj.khem@gmail.com>
 Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
 Cc: Ross Burton <ross.burton@arm.com>
 ---
- meta-oe/recipes-support/nss/nss_3.64.bb | 2 ++
+ meta-oe/recipes-support/nss/nss_3.51.1.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/nss/nss_3.64.bb b/meta-oe/recipes-su=
-pport/nss/nss_3.64.bb
-index fce5a856e..d4d7a8733 100644
---- a/meta-oe/recipes-support/nss/nss_3.64.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.64.bb
-@@ -45,6 +45,8 @@ TDS =3D "${S}/tentative-dist-staging"
+diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-=
+support/nss/nss_3.51.1.bb
+index 0e127975b..30370573d 100644
+--- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
++++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+@@ -55,6 +55,8 @@ TUNE_CCARGS_remove =3D "-mcpu=3Dcortex-a55+crc -mcpu=3D=
+cortex-a55 -mcpu=3Dcortex-a55+crc
 =20
  TARGET_CC_ARCH +=3D "${LDFLAGS}"
 =20
