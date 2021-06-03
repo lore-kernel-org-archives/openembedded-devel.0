@@ -1,90 +1,83 @@
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.web09.157.1622755630547169864
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
+ by mx.groups.io with SMTP id smtpd.web09.311.1622756354319641192
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Jun 2021 14:27:10 -0700
+ Thu, 03 Jun 2021 14:39:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=eFRIB19U;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id u18so5874213pfk.11
-        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Jun 2021 14:27:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=RLS6HkBK;
+ spf=pass (domain: gmail.com, ip: 209.85.208.53, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ed1-f53.google.com with SMTP id u24so8742767edy.11
+        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Jun 2021 14:39:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=jnFodnZoO3xAbGui/Sgx6ilgKRwzvacuS552O+yT/2w=;
-        b=eFRIB19UhFqbSid/KktEnUQAhDQ6kLlOAy1h1fpWbxF55yrcBzCjPhSzmIsWg6oEDH
-         VlxTe+x14MBP0c9+WS6/peH56Cdd8PCm8/BzDD01MMoLTG8gPUEs/NL7U/Qd23jNcan2
-         nds1MWdnfuR6WNdB1mg3ElE2TLAr4vdmmrUXw9oiEAVlYDhEvJOmYpLnOD2qBQYqvKoT
-         gIIT+NAJp7+7/U/jKHsTG68h3UTPdwT//ODPwWW8c7LOiXOhSlBfHRdL61iPBj09aap9
-         GMtl1FdjgRWAAwIpfgAPzj7CiL9Y2Fw8T8V31XELiRZap73Nc294OrOKt8NjE0AOI30p
-         P8hg==
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=0DoTFLuPBX53nv/HEGmzwjc1YbD48/c6/4hSBexkMSA=;
+        b=RLS6HkBKRZcl8uYg5+HCgPNW09KclpC2pFoZ7j2Gy5oahh0IbpdMDo5eyoM1p/IJK9
+         Aa6i6vdU1kAXpmls617raxRu7nJeFP8g5j0xk4PFmSGfUfe1dVSkArPgoLnS9WSDEfit
+         Ld8HLYoN6W9DrfhO+qnzCXuXenuwH/vKvf6GlsaJ+qm5Bmk8qi9SCI8zLOgPKKKr9AZ4
+         kIUA/fjkXqzew072/jUFBrq3+/cBxXxiV9EsvBNgvmHcnwNMVOS1LOQSleuoS0hpRF6X
+         ar/QzwxDS9BSaXu3Lc26t2cCjTxQsrmxrnj5rCk9QluFYsiBHwelfnPL+VDTpQf6uwIs
+         gjKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=jnFodnZoO3xAbGui/Sgx6ilgKRwzvacuS552O+yT/2w=;
-        b=YeEyqvnBxZqRDrnoTUv6z3RJByt5ZNVwntSfDbH5Tibp+8crcsxnGS49TQGnUt4Au0
-         d0R+FKy2weR9Z4EqKqT9L4cBLJjKh1W9LfjamdfP/+0K701iTFw7pLuDIx0jocGAtshG
-         hzVb7cD8LW6TJc9bRkjhoq7O9S7JV/f03mnzhbJciuM+JpTBRA00pectZp2/TUC356h4
-         K9u3BEqcR5HrD5j4sYoIlIQPciILAkIZ7/XTgHofOEvrk6/hJBsP3B2fLupqKqZjlO5s
-         Q1QwJJRrgYcnz5mUDkNzHOuEwEmZOnSQL+5t9Rkay+WSAitLfeQF9+UekzLTnKdLf1uH
-         2gPw==
-X-Gm-Message-State: AOAM532/DJAccKivBJo4LEyeII43aaKs1JUJfd5TSmPRL+GJeibQePL1
-	NcU2DVsnyM7ck8DoGbz4v04srHTkcouAA0T1tyg=
-X-Google-Smtp-Source: ABdhPJwhqYo2Nha5gjghKFaXre0WvoUBxvJHXcjYpixEKshCIEmf/ZuJYgKR3R6ri99tXGf3tv53g8MrZiSSvZ3wfXU=
-X-Received: by 2002:aa7:8888:0:b029:2ec:763f:4bcc with SMTP id
- z8-20020aa788880000b02902ec763f4bccmr1288315pfe.35.1622755629912; Thu, 03 Jun
- 2021 14:27:09 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210603210531.2314701-1-schnitzeltony@gmail.com> <16852E7A607BB2E4.32687@lists.openembedded.org>
-In-Reply-To: <16852E7A607BB2E4.32687@lists.openembedded.org>
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=0DoTFLuPBX53nv/HEGmzwjc1YbD48/c6/4hSBexkMSA=;
+        b=DmUjy58bC4EietZ5aOhPu1Jq/gw4lISFOSVTCv+dnPkjYSPaUlYliGuD7mJM02GjsL
+         P7lUSJEZyoZ5dTFNQhBDP97W0UhXM22X9NIlRpMivsiZ2egaIbmPVrqCHCS2e/C2vj81
+         jn2wMTLTqsHxwJj78ngV4Re7psPWqrfK2+KE/eoSvg3I/mpMFNabvjMK95Zh1njKN3Je
+         kkwVBJSbMK5VxhcBPPOM38IGI8WExkKsvTdd5BscAkmmolkVYUkJk1vZksQM4kW0MrZ5
+         vzO8rKHnVbFpvrV2hkn641c+bY2o8Gi8tMa1tT1zSknyZoR95Wh16rrjUFdiVtH+T2es
+         XBJA==
+X-Gm-Message-State: AOAM530Y4kSjwmpD8O51tZIibNWbUqzkdZ078BDxr4eYMyHbb5kM/C1b
+	ak4vrhPijREBh4bd3WGoeq0QxnmlDfNWFg==
+X-Google-Smtp-Source: ABdhPJyiCa4x0jJHo62nm5mWnHtKURltfycXVe111c0NIgu0FASiO8c7DPG5SZH6WUvffXPfVbjYXA==
+X-Received: by 2002:aa7:cd19:: with SMTP id b25mr1470803edw.84.1622756352575;
+        Thu, 03 Jun 2021 14:39:12 -0700 (PDT)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from thanks-buchmuellers.speedport.ip (p200300f07f11f861d707ea86d7bc33dd.dip0.t-ipconnect.de. [2003:f0:7f11:f861:d707:ea86:d7bc:33dd])
+        by smtp.gmail.com with ESMTPSA id n18sm1998492ejx.41.2021.06.03.14.39.11
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 03 Jun 2021 14:39:12 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-Date: Thu, 3 Jun 2021 23:26:58 +0200
-Message-ID: <CALbNGRT+anFr8rXG+BB+BCTOWTx8kspY0LfgcNEaMCPDHM566A@mail.gmail.com>
-Subject: Re: [oe] [PATCH 4/5] nss: upgrade 3.64 -> 3.66
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] poppler: upgrade 21.06.0 -> 21.06.1
+Date: Thu,  3 Jun 2021 23:39:03 +0200
+Message-Id: <20210603213903.2526389-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.31.1
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jun 3, 2021 at 11:06 PM Andreas M=C3=BCller via
-lists.openembedded.org
-<schnitzeltony=3Dgmail.com@lists.openembedded.org> wrote:
-Please ignore this one for now- it breaks pkcs11-helper
+This came in right after 21.06.0 and fixes a regression just introduced:
 
-Andreas
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> ---
->  meta-oe/recipes-support/nss/{nss_3.64.bb =3D> nss_3.66.bb} | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-oe/recipes-support/nss/{nss_3.64.bb =3D> nss_3.66.bb} (99%)
->
-> diff --git a/meta-oe/recipes-support/nss/nss_3.64.bb b/meta-oe/recipes-s=
-upport/nss/nss_3.66.bb
-> similarity index 99%
-> rename from meta-oe/recipes-support/nss/nss_3.64.bb
-> rename to meta-oe/recipes-support/nss/nss_3.66.bb
-> index fce5a856e..b5edc2b00 100644
-> --- a/meta-oe/recipes-support/nss/nss_3.64.bb
-> +++ b/meta-oe/recipes-support/nss/nss_3.66.bb
-> @@ -33,7 +33,7 @@ SRC_URI =3D "http://ftp.mozilla.org/pub/mozilla.org/se=
-curity/nss/releases/${VERSIO
->             file://nss-fix-nsinstall-build.patch \
->             file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-=
-cryp.patch \
->             "
-> -SRC_URI[sha256sum] =3D "d3175427172e9c3a6f1ebc74452cb791590f28191c6a1a4=
-43dbc0d87c9df1126"
-> +SRC_URI[sha256sum] =3D "89a79e3a756cf0ac9ba645f4d4c0fc58d4133134401fb0b=
-6c8a74c420bb4cdc9"
->
->  UPSTREAM_CHECK_URI =3D "https://developer.mozilla.org/en-US/docs/Mozill=
-a/Projects/NSS/NSS_Releases"
->  UPSTREAM_CHECK_REGEX =3D "NSS_(?P<pver>.+)_release_notes"
-> --
-> 2.31.1
->
->
->=20
->
+Release 21.06.1
+glib:
+ * fix poppler_rectangle_free() regression. Issue #1087
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ .../poppler/{poppler_21.06.0.bb => poppler_21.06.1.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/poppler/{poppler_21.06.0.bb => poppler_21.06.1.bb} (96%)
+
+diff --git a/meta-oe/recipes-support/poppler/poppler_21.06.0.bb b/meta-oe/recipes-support/poppler/poppler_21.06.1.bb
+similarity index 96%
+rename from meta-oe/recipes-support/poppler/poppler_21.06.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_21.06.1.bb
+index 90fd8f87f..6b6a2a133 100644
+--- a/meta-oe/recipes-support/poppler/poppler_21.06.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_21.06.1.bb
+@@ -7,7 +7,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://0001-Do-not-overwrite-all-our-build-flags.patch \
+            file://basename-include.patch \
+            "
+-SRC_URI[sha256sum] = "4b440708eafdf07a1405e06744c66ac54a5af51a0e38ab17a46fbaff47278342"
++SRC_URI[sha256sum] = "86b09e5a02de40081a3916ef8711c5128eaf4b1fc59d5f87d0ec66f04f595db4"
+ 
+ DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
+ 
+-- 
+2.31.1
+
