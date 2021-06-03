@@ -1,50 +1,50 @@
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
- by mx.groups.io with SMTP id smtpd.web09.4.1622754342527176996
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web11.7.1622754343365541183
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Jun 2021 14:05:42 -0700
+ Thu, 03 Jun 2021 14:05:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=IrM/pEzE;
- spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f44.google.com with SMTP id k7so11219734ejv.12
-        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Jun 2021 14:05:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=umuZLr8d;
+ spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f51.google.com with SMTP id g8so11313789ejx.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Jun 2021 14:05:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=vMWeyyWi0TPoNXJAC8DrvsvT+xpnKShR2HGjiIURRDU=;
-        b=IrM/pEzENm7UFpLjMRgoYqQYaMtmn4FJG7fBiOqZfdcSuP+Wsjap+7W/9mGDBf1Ixt
-         lJU2tPrKbz9yaOhV3hK0pkISF3/Ws6oCS+5ZkMR6JlxySL/w8UpFX7V688KnTYrUbSNP
-         P5qLbJqy+ZCs+3wfYKFXxZCYizH2/CtNxdsiW+ABzsmtGMTMu/0UO7g7xvGqGjEWHmHi
-         pUqAnljKJDeyNq+LvpsAUbOjzRJyme5l25TlrJhfb247vOisC57MpRqK92vaoZQ2nw/l
-         Z/2my9wlMYwPPZFoSSLDDaMdGCVn2+0eoxJtcTbwPO0F6ZkSAZQz6OBi5eEsu3EAyGW2
-         DQdw==
+        bh=JGHTEbMXeJc6Rtbn4fJ4fFRf6n0kgJIF9D9+ZOPnY0s=;
+        b=umuZLr8dpf0WGWYTd2vezpKm5LP4OHRBImIfbbYrD37hYwIftVt0mHl+b3mqGmo3+7
+         TCiPqDj39JkFsPG/GIpKLi/V/eJiBC2QVLpuJlABueU8sQ0aEvjQ3cNrI0zfQWAQCFMO
+         XnKFZSvd8yeRXp58zhiXZyvzLdc3eOvrE8054jX/SHxfZ3yk+sZmtdUuBwSRnFdMODWK
+         oaypCGx/NRMEeUMVFeG9urzdbzPVMu0Qcu+Bm95gvT1Mkk0hfj3V3lZXuBIA9TusWOBl
+         Wb1n2X+F8SNHOe+ws/JTNF+mLp5YhAlmf7EKtbyx8pHIDsdjuUpPhGsOUvQbSWATO1MS
+         gj2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=vMWeyyWi0TPoNXJAC8DrvsvT+xpnKShR2HGjiIURRDU=;
-        b=MIsOYCe7R+9hSJgzTF1B79WkqOapPUVv1InbP6xkjQqhY/qijIzeaV0CVjQH7Z3G5z
-         QLykeGtB/lAOGnuFiwQ6Yv5t7GRt+fyGXEm0S00z0RIuwiwZ3VHAV3F/XdyyO0M09Bot
-         BWk+CVhSINW1fRb5B8kig5/QK7HFF43k2UK+ivdBF7xBw2+YCH2sClV4wHiPyfUPSCgX
-         02Jg503Kpube52Rwjdgq74Ryg+JtyM+Khq0/GosU7IP68AmWG7zQXJh1/jIic0TNAY0J
-         3GBQMXieO48iwHnf8w5ccEeZJpuTcF0zGeoQqy+iLnBLJSUoGMDuI5VyoCWJG6zGVC+o
-         99hA==
-X-Gm-Message-State: AOAM533m1gBdOH3O/O75oMcSyfa1pySMorLM7eaJ3g8e171cxZ8lByjN
-	A0ttbEYcRVjeuqSEnbdQR0EKXYFRKLueiQ==
-X-Google-Smtp-Source: ABdhPJyBEMkfiO6nPL+TJ6j/9JoaLxoWCvkARqKQJLo/46GuHG9hX2zKrR+dPg6n3duFgAyrPfF9eQ==
-X-Received: by 2002:a17:906:39c6:: with SMTP id i6mr1129925eje.334.1622754341183;
+        bh=JGHTEbMXeJc6Rtbn4fJ4fFRf6n0kgJIF9D9+ZOPnY0s=;
+        b=Dvs+T7nkuscITYL1EBbYDEmORTGWv5D+v6JyJv47oPCo59KDui6rLaBdQM4Ec7sliC
+         iMgaEXqzUICcS7qgUnmXQvYGvrCO5LdTc5TZK81jUCbPbixt8Ia85MW12QEBIle0j0Rd
+         aqxa0hxM3qQKhNf+mdKa49r2UJ80O+rzzVRvqb5vJnbXIditMp7T2OdjCT7Ii/fpEOxa
+         qXQupCtWKiLwOZ/LYcuJfSC+6y4N2ijjzB9EjnwSqmqmHARp6wecMpck2HlOwRPUpgRq
+         NqioXdoeGyXIOoELTU9IFoGRUV0uauuRFPpnT5Eqd434avMacuyz9Q/UIe3GwQmN0hUD
+         gbdw==
+X-Gm-Message-State: AOAM531gZgKw0LaQUZA9G23Aalcxpoz2MYLRuaiAGetAbRnzjctFL0i2
+	lN1HUfab6mNGTeQtasi/NOCL/jjS01Jh5A==
+X-Google-Smtp-Source: ABdhPJyNGuDO9rbjU7vAQVw40wSyW4avWs/JchKOMVOpZ01uvBpru+5lG2QV9/vH4QU46ksaHT9Msw==
+X-Received: by 2002:a17:906:919:: with SMTP id i25mr1049516ejd.171.1622754341930;
         Thu, 03 Jun 2021 14:05:41 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from thanks-buchmuellers.speedport.ip (p200300f07f11f861d707ea86d7bc33dd.dip0.t-ipconnect.de. [2003:f0:7f11:f861:d707:ea86:d7bc:33dd])
-        by smtp.gmail.com with ESMTPSA id j22sm2020050ejt.11.2021.06.03.14.05.40
+        by smtp.gmail.com with ESMTPSA id j22sm2020050ejt.11.2021.06.03.14.05.41
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Jun 2021 14:05:40 -0700 (PDT)
+        Thu, 03 Jun 2021 14:05:41 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 3/5] libmbim: upgrade 1.24.6 -> 1.24.8
-Date: Thu,  3 Jun 2021 23:05:29 +0200
-Message-Id: <20210603210531.2314701-3-schnitzeltony@gmail.com>
+Subject: [PATCH 4/5] nss: upgrade 3.64 -> 3.66
+Date: Thu,  3 Jun 2021 23:05:30 +0200
+Message-Id: <20210603210531.2314701-4-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210603210531.2314701-1-schnitzeltony@gmail.com>
 References: <20210603210531.2314701-1-schnitzeltony@gmail.com>
@@ -54,25 +54,26 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../libmbim/{libmbim_1.24.6.bb => libmbim_1.24.8.bb}          | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
- rename meta-oe/recipes-connectivity/libmbim/{libmbim_1.24.6.bb => libmbim_1.24.8.bb} (82%)
+ meta-oe/recipes-support/nss/{nss_3.64.bb => nss_3.66.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/nss/{nss_3.64.bb => nss_3.66.bb} (99%)
 
-diff --git a/meta-oe/recipes-connectivity/libmbim/libmbim_1.24.6.bb b/meta-oe/recipes-connectivity/libmbim/libmbim_1.24.8.bb
-similarity index 82%
-rename from meta-oe/recipes-connectivity/libmbim/libmbim_1.24.6.bb
-rename to meta-oe/recipes-connectivity/libmbim/libmbim_1.24.8.bb
-index 6fe6a2e4f..6a8d2405e 100644
---- a/meta-oe/recipes-connectivity/libmbim/libmbim_1.24.6.bb
-+++ b/meta-oe/recipes-connectivity/libmbim/libmbim_1.24.8.bb
-@@ -12,6 +12,4 @@ DEPENDS = "glib-2.0 glib-2.0-native libgudev"
- inherit autotools pkgconfig bash-completion gobject-introspection
+diff --git a/meta-oe/recipes-support/nss/nss_3.64.bb b/meta-oe/recipes-support/nss/nss_3.66.bb
+similarity index 99%
+rename from meta-oe/recipes-support/nss/nss_3.64.bb
+rename to meta-oe/recipes-support/nss/nss_3.66.bb
+index fce5a856e..b5edc2b00 100644
+--- a/meta-oe/recipes-support/nss/nss_3.64.bb
++++ b/meta-oe/recipes-support/nss/nss_3.66.bb
+@@ -33,7 +33,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
+            file://nss-fix-nsinstall-build.patch \
+            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
+            "
+-SRC_URI[sha256sum] = "d3175427172e9c3a6f1ebc74452cb791590f28191c6a1a443dbc0d87c9df1126"
++SRC_URI[sha256sum] = "89a79e3a756cf0ac9ba645f4d4c0fc58d4133134401fb0b6c8a74c420bb4cdc9"
  
- SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
--
--SRC_URI[md5sum] = "38d228548eae3ee144e19a42b028eab0"
--SRC_URI[sha256sum] = "760465caaa1ccd699c14290e9791da456d5300dd11ebf4c1486151033e875dfd"
-+SRC_URI[sha256sum] = "02590736163fff10e5732191fccc1b9920969616ddc59613a003052a116a3c25"
+ UPSTREAM_CHECK_URI = "https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS/NSS_Releases"
+ UPSTREAM_CHECK_REGEX = "NSS_(?P<pver>.+)_release_notes"
 -- 
 2.31.1
 
