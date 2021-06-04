@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.702.1622820733889183196
+ by mx.groups.io with SMTP id smtpd.web10.671.1622820734381209675
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 04 Jun 2021 08:32:14 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=53150 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lpBnw-0008SE-EW; Fri, 04 Jun 2021 18:32:12 +0300
+	id 1lpBnw-0008SE-Uk; Fri, 04 Jun 2021 18:32:13 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/5] python3-cbor2: Upgrade 5.3.0 -> 5.4.0
-Date: Fri,  4 Jun 2021 18:31:58 +0300
-Message-Id: <20210604153200.20570-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/5] python3-ipython: Upgrade 7.24.0 -> 7.24.1
+Date: Fri,  4 Jun 2021 18:31:59 +0300
+Message-Id: <20210604153200.20570-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210604153200.20570-1-leon.anavi@konsulko.com>
 References: <20210604153200.20570-1-leon.anavi@konsulko.com>
@@ -30,36 +30,33 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 5.4.0:
+Upgrade to release 7.24.1:
 
-- Added new feature stringrefs, which makes repetitive dictionary
-  structures more compact. Use with care since support for this
-  is rare in other CBOR implementations.
-- Bugfixes around decoding invalid data, which may improve
-  security on decoding untrusted data
+- Allow to control if reporting hidden frames
+- Fix typo in IPython.lib.pretty._seq_pprinter_factory doc
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-cbor2_5.3.0.bb => python3-cbor2_5.4.0.bb}   | 2 +-
+ .../{python3-ipython_7.24.0.bb => python3-ipython_7.24.1.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-cbor2_5.3.0.bb => python3-cbor2_5.4.0.bb} (87%)
+ rename meta-python/recipes-devtools/python/{python3-ipython_7.24.0.bb => python3-ipython_7.24.1.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cbor2_5.3.0.bb b/meta-python/recipes-devtools/python/python3-cbor2_5.4.0.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-cbor2_5.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-cbor2_5.4.0.bb
-index 32d2016e59..b791588b42 100644
---- a/meta-python/recipes-devtools/python/python3-cbor2_5.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-cbor2_5.4.0.bb
-@@ -4,7 +4,7 @@ DEPENDS +="${PYTHON_PN}-setuptools-scm-native"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
+diff --git a/meta-python/recipes-devtools/python/python3-ipython_7.24.0.bb b/meta-python/recipes-devtools/python/python3-ipython_7.24.1.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-ipython_7.24.0.bb
+rename to meta-python/recipes-devtools/python/python3-ipython_7.24.1.bb
+index 1c11eeca08..96d50b76db 100644
+--- a/meta-python/recipes-devtools/python/python3-ipython_7.24.0.bb
++++ b/meta-python/recipes-devtools/python/python3-ipython_7.24.1.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
  
--SRC_URI[sha256sum] = "462b3604d9579458a79e6ca350943c49aabbc98c794c111a79b98720b9164336"
-+SRC_URI[sha256sum] = "a7926f7244b08c413f1a4fa71a81aa256771c75bdf1a4fd77308547a2d63dd48"
+ PYPI_PACKAGE = "ipython"
  
- inherit pypi setuptools3 ptest
+-SRC_URI[sha256sum] = "a171caa3d3d4c819a1c0742e3abecfd5a2b8ab525ca1c9f114b40b76b0679ab1"
++SRC_URI[sha256sum] = "9bc24a99f5d19721fb8a2d1408908e9c0520a17fff2233ffe82620847f17f1b6"
  
+ RDEPENDS_${PN} = "\
+     ${PYTHON_PN}-setuptools \
 -- 
 2.17.1
 
