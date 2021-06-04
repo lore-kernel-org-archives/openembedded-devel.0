@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.671.1622820734381209675
+ by mx.groups.io with SMTP id smtpd.web12.693.1622820737401126651
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Jun 2021 08:32:14 -0700
+ Fri, 04 Jun 2021 08:32:17 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=53150 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lpBnw-0008SE-Uk; Fri, 04 Jun 2021 18:32:13 +0300
+	id 1lpBnx-0008SE-ER; Fri, 04 Jun 2021 18:32:16 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-ipython: Upgrade 7.24.0 -> 7.24.1
-Date: Fri,  4 Jun 2021 18:31:59 +0300
-Message-Id: <20210604153200.20570-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-pkgconfig: Upgrade 1.5.2 -> 1.5.4
+Date: Fri,  4 Jun 2021 18:32:00 +0300
+Message-Id: <20210604153200.20570-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210604153200.20570-1-leon.anavi@konsulko.com>
 References: <20210604153200.20570-1-leon.anavi@konsulko.com>
@@ -30,33 +30,32 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 7.24.1:
+Upgrade to release 1.5.4:
 
-- Allow to control if reporting hidden frames
-- Fix typo in IPython.lib.pretty._seq_pprinter_factory doc
+- Drop 2.7 support from metadata
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-ipython_7.24.0.bb => python3-ipython_7.24.1.bb}    | 2 +-
+ .../{python3-pkgconfig_1.5.2.bb => python3-pkgconfig_1.5.4.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-ipython_7.24.0.bb => python3-ipython_7.24.1.bb} (89%)
+ rename meta-python/recipes-devtools/python/{python3-pkgconfig_1.5.2.bb => python3-pkgconfig_1.5.4.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ipython_7.24.0.bb b/meta-python/recipes-devtools/python/python3-ipython_7.24.1.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-ipython_7.24.0.bb
-rename to meta-python/recipes-devtools/python/python3-ipython_7.24.1.bb
-index 1c11eeca08..96d50b76db 100644
---- a/meta-python/recipes-devtools/python/python3-ipython_7.24.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-ipython_7.24.1.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
+diff --git a/meta-python/recipes-devtools/python/python3-pkgconfig_1.5.2.bb b/meta-python/recipes-devtools/python/python3-pkgconfig_1.5.4.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-pkgconfig_1.5.2.bb
+rename to meta-python/recipes-devtools/python/python3-pkgconfig_1.5.4.bb
+index 7a98ef2884..852b27816a 100644
+--- a/meta-python/recipes-devtools/python/python3-pkgconfig_1.5.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pkgconfig_1.5.4.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=faa7f82be8f220bff6156be4790344fc"
  
- PYPI_PACKAGE = "ipython"
+-SRC_URI[sha256sum] = "38d612488f0633755a2e7a8acab6c01d20d63dbc31af75e2a9ac98a6f638ca94"
++SRC_URI[sha256sum] = "c34503829fd226822fd93c902b1cf275516908a023a24be0a02ba687f3a00399"
  
--SRC_URI[sha256sum] = "a171caa3d3d4c819a1c0742e3abecfd5a2b8ab525ca1c9f114b40b76b0679ab1"
-+SRC_URI[sha256sum] = "9bc24a99f5d19721fb8a2d1408908e9c0520a17fff2233ffe82620847f17f1b6"
- 
- RDEPENDS_${PN} = "\
-     ${PYTHON_PN}-setuptools \
+ RDEPENDS_${PN} = "pkgconfig \
+                  ${PYTHON_PN}-shell \
 -- 
 2.17.1
 
