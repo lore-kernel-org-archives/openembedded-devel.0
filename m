@@ -1,109 +1,167 @@
-Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
- by mx.groups.io with SMTP id smtpd.web11.1738.1622764020146134693
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web09.2927.1622771083014402514
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Jun 2021 16:47:00 -0700
+ Thu, 03 Jun 2021 18:44:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=QtUld+p0;
- spf=pass (domain: gmail.com, ip: 209.85.160.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f178.google.com with SMTP id i12so5725650qtr.7
-        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Jun 2021 16:47:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=bZeg/nWdq8rTQZqicN0MtbPOM4tUoSRdaIhNPGTIlHQ=;
-        b=QtUld+p0dZlFAf20ByK/o/4NpO7ZwF9VONhau4heCkafOomv4EGgw0N1Ll6fiQL0rl
-         3+J3gRvgLI9r7iM4soJFYDLK86wPf2cgJqvbRAe7Aq+CmQtqtnXyv0TSpmIus2CAcUtG
-         ayCr50O1VLzlna8jM2FamWzOAaUmu0gMZI/d7fc/q4e7REiFMZCkFikPbd8MeOMsDopk
-         uzXldJJnE94rM+HIX4lY2LqPyxqwIQ44uQEqnnzM71sOWmU6LBAVfzUEMZWcM0N364Jt
-         u2+NkH00KabZww0lZJQVDRG/Df61V3qNJOWPDsaHkCDtn+TGw08x5zWvitcpB6ichaNq
-         smVw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=bZeg/nWdq8rTQZqicN0MtbPOM4tUoSRdaIhNPGTIlHQ=;
-        b=Gn1FN2zO2d7brmRJWXdz3/r+sNxT9D5EQ9pyo1Et5RCvY+bSzSODu+3RYXOZj+F8CN
-         F4H67texPlvgsvWlKOiyHpXry6wwb/3wN2rCMhxUevY20Ih1Yn+tStR+zUKCSR4CzzFU
-         0F+QjjxQMleRZsay3tQfL/1OmAzjw2FH1yBtxQIN8rSYddwgwlmH1Q/fvPe2b7h3xFuD
-         M0xkS5cgmt4dPdIPFKLKo64SKHBC0KdLNo84zMUjJ+u3MOIMdIZnYAQegTMOyeantFzp
-         31tHCuwpdfUgMsB0azo8cQwT5LHTRfZQXEEODYJXO30Q4V4XtEMI2efSkkHeSrGXmYAT
-         O0kg==
-X-Gm-Message-State: AOAM532219awfDRTL1I+ba5asJprq4iWwcT+C3m8GMfj15Kwx1KgWW8Z
-	LEm0Q3pPQSwQ/9nLmYqwvF1OF5ILFHLP+e8gcik=
-X-Google-Smtp-Source: ABdhPJwDYowTXuFBMkCFOtqAjN/p9tM7GD/1aAvZQeLEVc6dSY9hVRgTzmZZfuMJAU47O4FZczH3PCLTvkxp+74CW5Y=
-X-Received: by 2002:ac8:5d93:: with SMTP id d19mr2028853qtx.289.1622764019289;
- Thu, 03 Jun 2021 16:46:59 -0700 (PDT)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: kai.kang@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 1541ifkm005415
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 3 Jun 2021 18:44:41 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.10; Thu, 3 Jun 2021 18:44:41 -0700
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.10 via Frontend Transport; Thu, 3 Jun 2021 18:44:40 -0700
+From: "kai" <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH] layers: set LAYERSERIES_COMPAT with honister
+Date: Fri, 4 Jun 2021 09:44:38 +0800
+Message-ID: <20210604014438.33958-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <1622746732-4446-1-git-send-email-zhengrq.fnst@fujitsu.com>
-In-Reply-To: <1622746732-4446-1-git-send-email-zhengrq.fnst@fujitsu.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 3 Jun 2021 16:46:33 -0700
-Message-ID: <CAMKF1sptZgYTqHXBs7rTF5wUx9fDmPfZZnE4Q-RCL3PSP2bH9g@mail.gmail.com>
-Subject: Re: [PATCH] [oe] [meta-oe] [PATCH] iperf3: upgrade 3.9 -> 3.10
-To: zhengruoqin <zhengrq.fnst@fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
 
-I am seeing some patch fuzz errors
+From: Kai Kang <kai.kang@windriver.com>
 
-ERROR: iperf3-3.10-r0 do_patch: Fuzz detected:
+Set LAYERSERIES_COMPAT with 'honister' which align with oe-core.
 
-Applying patch 0001-configure.ac-check-for-CPP-prog.patch
-patching file configure.ac
-Hunk #1 succeeded at 47 with fuzz 1.
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ meta-filesystems/conf/layer.conf | 2 +-
+ meta-gnome/conf/layer.conf       | 2 +-
+ meta-initramfs/conf/layer.conf   | 2 +-
+ meta-multimedia/conf/layer.conf  | 2 +-
+ meta-networking/conf/layer.conf  | 2 +-
+ meta-oe/conf/layer.conf          | 2 +-
+ meta-perl/conf/layer.conf        | 2 +-
+ meta-python/conf/layer.conf      | 2 +-
+ meta-webserver/conf/layer.conf   | 2 +-
+ meta-xfce/conf/layer.conf        | 2 +-
+ 10 files changed, 10 insertions(+), 10 deletions(-)
 
+diff --git a/meta-filesystems/conf/layer.conf b/meta-filesystems/conf/layer.conf
+index ae93a36b4..6a9357d2a 100644
+--- a/meta-filesystems/conf/layer.conf
++++ b/meta-filesystems/conf/layer.conf
+@@ -15,4 +15,4 @@ LAYERVERSION_filesystems-layer = "1"
+ 
+ LAYERDEPENDS_filesystems-layer = "core openembedded-layer"
+ 
+-LAYERSERIES_COMPAT_filesystems-layer = " hardknott"
++LAYERSERIES_COMPAT_filesystems-layer = "honister"
+diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
+index ba2d59948..09b2ecf70 100644
+--- a/meta-gnome/conf/layer.conf
++++ b/meta-gnome/conf/layer.conf
+@@ -17,7 +17,7 @@ LAYERVERSION_gnome-layer = "1"
+ 
+ LAYERDEPENDS_gnome-layer = "core openembedded-layer networking-layer"
+ 
+-LAYERSERIES_COMPAT_gnome-layer = " hardknott"
++LAYERSERIES_COMPAT_gnome-layer = "honister"
+ 
+ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += "\
+   faenza-icon-theme->gdk-pixbuf \
+diff --git a/meta-initramfs/conf/layer.conf b/meta-initramfs/conf/layer.conf
+index d1d669373..11dd43178 100644
+--- a/meta-initramfs/conf/layer.conf
++++ b/meta-initramfs/conf/layer.conf
+@@ -16,7 +16,7 @@ BBFILE_PATTERN_meta-initramfs := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_meta-initramfs = "8"
+ LAYERDEPENDS_meta-initramfs = "core"
+ 
+-LAYERSERIES_COMPAT_meta-initramfs = " hardknott"
++LAYERSERIES_COMPAT_meta-initramfs = "honister"
+ 
+ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
+   dracut->virtual/kernel \
+diff --git a/meta-multimedia/conf/layer.conf b/meta-multimedia/conf/layer.conf
+index 6d3de7c11..5a17a5048 100644
+--- a/meta-multimedia/conf/layer.conf
++++ b/meta-multimedia/conf/layer.conf
+@@ -31,4 +31,4 @@ LAYERVERSION_multimedia-layer = "1"
+ 
+ LAYERDEPENDS_multimedia-layer = "core meta-python"
+ 
+-LAYERSERIES_COMPAT_multimedia-layer = " hardknott"
++LAYERSERIES_COMPAT_multimedia-layer = "honister"
+diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
+index 968b21601..67fcda3d9 100644
+--- a/meta-networking/conf/layer.conf
++++ b/meta-networking/conf/layer.conf
+@@ -17,7 +17,7 @@ LAYERDEPENDS_networking-layer = "core"
+ LAYERDEPENDS_networking-layer += "openembedded-layer"
+ LAYERDEPENDS_networking-layer += "meta-python"
+ 
+-LAYERSERIES_COMPAT_networking-layer = " hardknott"
++LAYERSERIES_COMPAT_networking-layer = "honister"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index d3aeaba3d..2f0a49e22 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -42,7 +42,7 @@ LAYERVERSION_openembedded-layer = "1"
+ 
+ LAYERDEPENDS_openembedded-layer = "core"
+ 
+-LAYERSERIES_COMPAT_openembedded-layer = " hardknott"
++LAYERSERIES_COMPAT_openembedded-layer = "honister"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
+diff --git a/meta-perl/conf/layer.conf b/meta-perl/conf/layer.conf
+index 87bb91f61..6a2dd7ff9 100644
+--- a/meta-perl/conf/layer.conf
++++ b/meta-perl/conf/layer.conf
+@@ -15,4 +15,4 @@ LAYERVERSION_perl-layer = "1"
+ 
+ LAYERDEPENDS_perl-layer = "core openembedded-layer"
+ 
+-LAYERSERIES_COMPAT_perl-layer = " hardknott"
++LAYERSERIES_COMPAT_perl-layer = "honister"
+diff --git a/meta-python/conf/layer.conf b/meta-python/conf/layer.conf
+index ab66ffd8e..ffad953f9 100644
+--- a/meta-python/conf/layer.conf
++++ b/meta-python/conf/layer.conf
+@@ -14,6 +14,6 @@ LAYERVERSION_meta-python = "1"
+ 
+ LAYERDEPENDS_meta-python = "core (>= 12) openembedded-layer"
+ 
+-LAYERSERIES_COMPAT_meta-python = " hardknott"
++LAYERSERIES_COMPAT_meta-python = "honister"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+diff --git a/meta-webserver/conf/layer.conf b/meta-webserver/conf/layer.conf
+index 7bb497892..46d5a872a 100644
+--- a/meta-webserver/conf/layer.conf
++++ b/meta-webserver/conf/layer.conf
+@@ -17,7 +17,7 @@ LAYERVERSION_webserver = "1"
+ 
+ LAYERDEPENDS_webserver = "core openembedded-layer"
+ 
+-LAYERSERIES_COMPAT_webserver = " hardknott"
++LAYERSERIES_COMPAT_webserver = "honister"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
+diff --git a/meta-xfce/conf/layer.conf b/meta-xfce/conf/layer.conf
+index b1240b06e..81e7dc5ad 100644
+--- a/meta-xfce/conf/layer.conf
++++ b/meta-xfce/conf/layer.conf
+@@ -19,7 +19,7 @@ LAYERDEPENDS_xfce-layer += "multimedia-layer"
+ LAYERDEPENDS_xfce-layer += "meta-python"
+ LAYERDEPENDS_xfce-layer += "networking-layer"
+ 
+-LAYERSERIES_COMPAT_xfce-layer = " hardknott"
++LAYERSERIES_COMPAT_xfce-layer = "honister"
+ 
+ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += "\
+   openzone->gdk-pixbuf \
+-- 
+2.17.1
 
-The context lines in the patches can be updated with devtool:
-
-    devtool modify iperf3
-    devtool finish --force-patch-refresh iperf3 <layer_path>
-
-Don't forget to review changes done by devtool!
-
-ERROR: iperf3-3.10-r0 do_patch: QA Issue: Patch log indicates that
-patches do not apply cleanly. [patch-fuzz]
-
-
-Please fix them and resend
-
-On Thu, Jun 3, 2021 at 2:59 AM zhengruoqin <zhengrq.fnst@fujitsu.com> wrote:
->
-> -License-Update: Copyright year updated to 2021.
->
-> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
-> ---
->  .../iperf3/{iperf3_3.9.bb => iperf3_3.10.bb}                  | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-benchmark/iperf3/{iperf3_3.9.bb => iperf3_3.10.bb} (89%)
->
-> diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.9.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.10.bb
-> similarity index 89%
-> rename from meta-oe/recipes-benchmark/iperf3/iperf3_3.9.bb
-> rename to meta-oe/recipes-benchmark/iperf3/iperf3_3.10.bb
-> index be75837beb..6fe87353dd 100644
-> --- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.9.bb
-> +++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.10.bb
-> @@ -9,14 +9,14 @@ SECTION = "console/network"
->  BUGTRACKER = "https://github.com/esnet/iperf/issues"
->  AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport@lbl.gov>"
->  LICENSE = "BSD-3-Clause"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=b7fb682e9941a49f1214dcd7441410d7"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=4991c26fb646b69589d1eff3e958b06a"
->
->  SRC_URI = "git://github.com/esnet/iperf.git \
->             file://0002-Remove-pg-from-profile_CFLAGS.patch \
->             file://0001-configure.ac-check-for-CPP-prog.patch \
->             "
->
-> -SRCREV = "1f8fb13297f3e3e40169ebcd12e171167e394473"
-> +SRCREV = "c159c741243441be84f91d3130cbeef1e1d579e8"
->
->  S = "${WORKDIR}/git"
->
-> --
-> 2.25.1
->
->
-> 
->
