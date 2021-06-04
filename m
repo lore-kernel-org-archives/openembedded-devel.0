@@ -1,77 +1,73 @@
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.web09.3359.1622773922840625258
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web11.3599.1622775794474075498
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Jun 2021 19:32:02 -0700
+ Thu, 03 Jun 2021 20:03:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=LDcXa3fP;
- spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id k15so6373267pfp.6
-        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Jun 2021 19:32:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=VTQTivmU;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id l23-20020a17090a0717b029016ae774f973so4415992pjl.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Jun 2021 20:03:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=ysD+7REa14U8hoinMhF4anLMvEK8GFSIMWU5YCmSg58=;
-        b=LDcXa3fP+9NyoQ2lZnidFRQD5rFxaPaKowyY13Tjf0Ve0EPgt8McQaCcSh0zBqs8j2
-         EyVkK9WK0OI8jBeAfFKcY/BcvywEqBExmeauk13d70VIyO+LajLqrKj0H44OskoQ+Qmx
-         QjHZLUy5NQgSdx2dqGBPNg0LVwguF2iYmMnSj++kk6zgDESpq2WVJZhXlnlrM9gyGI8H
-         KFYpLo0AZF7p2oLDuwJgSnAUKsdSjKY5eoIUn6s9SKtZo1PSiqt6o6iIIQIOiVydYDzy
-         gw11gnZAjLv5cLFx1nLya1i/P6nqZsfL+dOixPf+Phsmjaes9KVownzg/eksfY0tZ78Y
-         bA9g==
+        bh=qfCuJHrQekC/yIb8fRe91+ywkKmWt30JZK4sRdHJzSI=;
+        b=VTQTivmUv7a1w9Dt7mySJegkQRNtkKBRwyFl0DHunRhv0X9IhJiV2usqSg/XJK0BOD
+         q6ZeqiXeVIbhv0NCnKNaMV+nCHgBFgLEu5BVYYSNej7BHMolFIJ1n1dNsHmOToyPS/fl
+         3qqw052zujIV29FiyzQEu6N/R4zeCgZqx/0jQQJb7qjFUWxU415cch8+B7GPpAX50eKF
+         wR/xwpVV4s6v2GjKUNb2QnXHIRDysPoHfykXVaI3cn+rUqpbPQqwph+2UqXErI/BY6CT
+         9d6oGYhHS9/73F+fnO+y1X3gozoRNVEkaEny5+oO6dRX9StFNT3PhdFHkFmTIzgIrXk2
+         uZbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=ysD+7REa14U8hoinMhF4anLMvEK8GFSIMWU5YCmSg58=;
-        b=qm3+Mm4zBMC7xA1eKm1HzCbDHL6sffsnR4QwCOMFEbrIpr866Oz5QzrwdpIx69+54e
-         nPR5biROX55UbzvHUFAKrnP/Bpi00VPJkqHPqg7k+0+9POQo7mMir1NIPtBsvUzD3bV2
-         QJA39+ijLUBsaYw8SChFLHZe7So9B5+hnFF56bIjyj8FBnSQp0kuzy97iPHZelOOfULm
-         OaqXnyBmfuT7Hs+AXSa/7NVfSrvOU18u4NYnkbUzRGzR9bD3jZVFX61mDRPQdqKJelY8
-         gJSpgyBi8ZV/xEmQMnzGWm3AxF1QKLutZIGM9BVPtFFJQvsOev+oUR2usNkBhUwv8M3Y
-         yeXA==
-X-Gm-Message-State: AOAM532CJKz8/ngxSZRccrMnocnlQ4W89Izix9bc5lUMOSUessZKqnuA
-	JobAyBzT4zXgZuK7UcmYAdyIJw7dWDg2Fg==
-X-Google-Smtp-Source: ABdhPJxii/PR5hz8CQRcHPADEcg2UXSb92Q+Uw6/U5KuhcvSGJaJiG95GZWFGwpwxH0TW6vVJQJM6Q==
-X-Received: by 2002:a63:5f46:: with SMTP id t67mr2578533pgb.37.1622773921976;
-        Thu, 03 Jun 2021 19:32:01 -0700 (PDT)
+        bh=qfCuJHrQekC/yIb8fRe91+ywkKmWt30JZK4sRdHJzSI=;
+        b=nM5kYAg+sMD2LgebuR53ulbKACMsTCJjkmT6z5GUkKRmU6vNCBFF5QftM0f3fL6wCW
+         ZM3bUHC1aKYLGfzmp5szoDszutGsg44LlavixxyZFXjf9TN00D9iX6fuLlXh+vOaM+Cf
+         GJXnPqmMxtm99MzxwD6jGtTjBxqv5IRA446BFVCcfywGWgrPRvrXPZueDbQ5yreCVLNe
+         7HsKsa+++f92rL5SQGb0bRCRNlSH2PSzqB21VimE/jPy3nQiNzF2n6Vf+u5WA3qf0fUy
+         4M9vAKP8HyZ2aCwfz14tzT/QibsZFAGwogrZO7+DPcMt/p15rPTtIw+0x+kd0G4Gk6HF
+         g2ZA==
+X-Gm-Message-State: AOAM532rpBpLhXMwlh5Hd2PdmVXlCUm4g/5LBd5WofNp2cJnwvBK41ER
+	IABdjh8aF3RnWTPi5juFeo3F63uNq9VMMQ==
+X-Google-Smtp-Source: ABdhPJw+c5TrQX8Qf06VntgfM6O+h1WAFfkk5NXZCXMZ+WrkssUFLFAGaGV3eD+6h3XBQgAt+lXBwg==
+X-Received: by 2002:a17:90b:14cc:: with SMTP id jz12mr2567095pjb.210.1622775793621;
+        Thu, 03 Jun 2021 20:03:13 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a054])
-        by smtp.gmail.com with ESMTPSA id q24sm370130pgk.32.2021.06.03.19.32.01
+        by smtp.gmail.com with ESMTPSA id 203sm364496pfw.124.2021.06.03.20.03.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Jun 2021 19:32:01 -0700 (PDT)
+        Thu, 03 Jun 2021 20:03:13 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] mbedtls: Upgrade to 2.26.0
-Date: Thu,  3 Jun 2021 19:31:59 -0700
-Message-Id: <20210604023159.1670778-1-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] mbedtls: Add packageconfig for warning-as-errors
+Date: Thu,  3 Jun 2021 20:03:11 -0700
+Message-Id: <20210604030311.1994627-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-https://github.com/ARMmbed/mbedtls/releases/tag/v2.26.0
+Disable the options by default, as we use different compilers there are
+more warnings to handle then upstream
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../mbedtls/{mbedtls_2.25.0.bb => mbedtls_2.26.0.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_2.25.0.bb => mbedtls_2.26.0.bb} (97%)
+ meta-networking/recipes-connectivity/mbedtls/mbedtls_2.26.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.25.0.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.26.0.bb
-similarity index 97%
-rename from meta-networking/recipes-connectivity/mbedtls/mbedtls_2.25.0.bb
-rename to meta-networking/recipes-connectivity/mbedtls/mbedtls_2.26.0.bb
-index 481e7ea949..8c2457ce06 100644
---- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.25.0.bb
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.26.0.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.26.0.bb
+index 8c2457ce06..3c7df44513 100644
+--- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.26.0.bb
 +++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.26.0.bb
-@@ -23,7 +23,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- SECTION = "libs"
+@@ -32,6 +32,7 @@ inherit cmake
+ PACKAGECONFIG ??= "shared-libs programs"
+ PACKAGECONFIG[shared-libs] = "-DUSE_SHARED_MBEDTLS_LIBRARY=ON,-DUSE_SHARED_MBEDTLS_LIBRARY=OFF"
+ PACKAGECONFIG[programs] = "-DENABLE_PROGRAMS=ON,-DENABLE_PROGRAMS=OFF"
++PACKAGECONFIG[werror] = "-DMBEDTLS_FATAL_WARNINGS=ON,-DMBEDTLS_FATAL_WARNINGS=OFF"
  
- S = "${WORKDIR}/git"
--SRCREV = "1c54b5410fd48d6bcada97e30cac417c5c7eea67"
-+SRCREV = "e483a77c85e1f9c1dd2eb1c5a8f552d2617fe400"
- SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=development"
- SRC_URI += "file://0001-ssl_tls-Increase-size-of-padbuf-to-64.patch"
+ EXTRA_OECMAKE = "-DENABLE_TESTING=OFF -DLIB_INSTALL_DIR:STRING=${libdir}"
  
 -- 
 2.31.1
