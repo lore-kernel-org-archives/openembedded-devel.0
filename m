@@ -1,74 +1,80 @@
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.web11.3599.1622775794474075498
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web12.5577.1622793896657329261
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Jun 2021 20:03:14 -0700
+ Fri, 04 Jun 2021 01:04:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=VTQTivmU;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id l23-20020a17090a0717b029016ae774f973so4415992pjl.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Jun 2021 20:03:14 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=WyOrQhk+;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.218.41, mailfrom: brgl@bgdev.pl)
+Received: by mail-ej1-f41.google.com with SMTP id c10so13098150eja.11
+        for <openembedded-devel@lists.openembedded.org>; Fri, 04 Jun 2021 01:04:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=qfCuJHrQekC/yIb8fRe91+ywkKmWt30JZK4sRdHJzSI=;
-        b=VTQTivmUv7a1w9Dt7mySJegkQRNtkKBRwyFl0DHunRhv0X9IhJiV2usqSg/XJK0BOD
-         q6ZeqiXeVIbhv0NCnKNaMV+nCHgBFgLEu5BVYYSNej7BHMolFIJ1n1dNsHmOToyPS/fl
-         3qqw052zujIV29FiyzQEu6N/R4zeCgZqx/0jQQJb7qjFUWxU415cch8+B7GPpAX50eKF
-         wR/xwpVV4s6v2GjKUNb2QnXHIRDysPoHfykXVaI3cn+rUqpbPQqwph+2UqXErI/BY6CT
-         9d6oGYhHS9/73F+fnO+y1X3gozoRNVEkaEny5+oO6dRX9StFNT3PhdFHkFmTIzgIrXk2
-         uZbQ==
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=jRXY4Pik4FTMG9xnkJoWG4hJ+Z84id5DEtdjc3EsKK8=;
+        b=WyOrQhk+GF4HylIaeY9hE9K84Df6APLLPdrIlIvroQLZ9zCO+3Y/pNxTtfn5gurRr3
+         eSyP6VhPJ0T0Eg2Em195VPi1KoGNkR+Ys97FMbjmHd3svkAqm4et8kZj0XAVbuGoBvbr
+         3AGr5plp0/70Kov6mIRxuT6df3ZhtvpUKDuFwNm9F7cfvl6M9xwyU6A1EO2DGwv+zrbh
+         +xc6sABXK+EyoKsNQC0dEUa8B5Bt8yRCMG97/Ri1BNbFgqdt83rZ/UfXR/xUH7Q0g6VV
+         7lkq/TVou+hemYK8j/ltwKFkENnsezutd7b6NZJomSQYWl1z/rBLqv7Qf92IF9XBByMk
+         dPPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=qfCuJHrQekC/yIb8fRe91+ywkKmWt30JZK4sRdHJzSI=;
-        b=nM5kYAg+sMD2LgebuR53ulbKACMsTCJjkmT6z5GUkKRmU6vNCBFF5QftM0f3fL6wCW
-         ZM3bUHC1aKYLGfzmp5szoDszutGsg44LlavixxyZFXjf9TN00D9iX6fuLlXh+vOaM+Cf
-         GJXnPqmMxtm99MzxwD6jGtTjBxqv5IRA446BFVCcfywGWgrPRvrXPZueDbQ5yreCVLNe
-         7HsKsa+++f92rL5SQGb0bRCRNlSH2PSzqB21VimE/jPy3nQiNzF2n6Vf+u5WA3qf0fUy
-         4M9vAKP8HyZ2aCwfz14tzT/QibsZFAGwogrZO7+DPcMt/p15rPTtIw+0x+kd0G4Gk6HF
-         g2ZA==
-X-Gm-Message-State: AOAM532rpBpLhXMwlh5Hd2PdmVXlCUm4g/5LBd5WofNp2cJnwvBK41ER
-	IABdjh8aF3RnWTPi5juFeo3F63uNq9VMMQ==
-X-Google-Smtp-Source: ABdhPJw+c5TrQX8Qf06VntgfM6O+h1WAFfkk5NXZCXMZ+WrkssUFLFAGaGV3eD+6h3XBQgAt+lXBwg==
-X-Received: by 2002:a17:90b:14cc:: with SMTP id jz12mr2567095pjb.210.1622775793621;
-        Thu, 03 Jun 2021 20:03:13 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a054])
-        by smtp.gmail.com with ESMTPSA id 203sm364496pfw.124.2021.06.03.20.03.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Jun 2021 20:03:13 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] mbedtls: Add packageconfig for warning-as-errors
-Date: Thu,  3 Jun 2021 20:03:11 -0700
-Message-Id: <20210604030311.1994627-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=jRXY4Pik4FTMG9xnkJoWG4hJ+Z84id5DEtdjc3EsKK8=;
+        b=UHz3LeQUwoYHybBwtVMJR//ECTFPMx390HRYymCUgXxZZnOj8hzYqpe4i+jmgVdugR
+         VwLr42zShYSCKpL8saHNAU4P17DBOgO3GgDVxThYSgGxLMC/laqqGMCk5nGZGKgbrs4p
+         PXJmTE57ymRxj0YMNi0Kq47SBRNpX4Bfs8/5RG1UKjyLwiXvTc4oHeDjSBd+QoT1glub
+         wyjTmBsF9bLDwCdXkEKlgOPaim0Gkx+A51ol+CNFWUPbjQ6PQ66QAbtFJFPu9rNBTvJp
+         wdgT2+/Ib8pg7YpeCm0TlG39zoCTZg4sWSqN2KIRxa3gGffkucM/nK4+0+/VmyZtuHwe
+         hG1A==
+X-Gm-Message-State: AOAM530q+D79M69GQRwNX1XjL8QNgGF4ob1N1oQVMmbfspUUONOvIxbO
+	HMgJ+tQBjgwyA62qWYQqYYxDEDIJbiG5U4UiloxI8A==
+X-Google-Smtp-Source: ABdhPJxImHRDKvybL/CqlvXB9WP7OK/02RivQdHbDuq4/UjW5XVFRTX/yPo381B/0naQN3iv26PJmKfBsPDBDPf+jhY=
+X-Received: by 2002:a17:906:c141:: with SMTP id dp1mr3121508ejc.87.1622793894852;
+ Fri, 04 Jun 2021 01:04:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210602141501.6174-1-brgl@bgdev.pl> <20210602141501.6174-10-brgl@bgdev.pl>
+ <CAMKF1sqMDM3xW68nGQa3A8NJaSsuvBvVw7GiDkyNWrfC3V=iYw@mail.gmail.com>
+In-Reply-To: <CAMKF1sqMDM3xW68nGQa3A8NJaSsuvBvVw7GiDkyNWrfC3V=iYw@mail.gmail.com>
+From: "Bartosz Golaszewski" <brgl@bgdev.pl>
+Date: Fri, 4 Jun 2021 10:04:44 +0200
+Message-ID: <CAMRc=MdoDoNcDNAMe6KwZE306fVaU=d20gHprxr3ihvHx_xpmA@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH 9/9] libgpiod: ptest: add kernel-modules to RRECOMMENDS
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Armin Kuster <akuster808@gmail.com>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Disable the options by default, as we use different compilers there are
-more warnings to handle then upstream
+On Thu, Jun 3, 2021 at 6:48 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Wed, Jun 2, 2021 at 7:15 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+> >
+> > libgpiod needs the gpio-mockup kernel module to be loadable (not
+> > built-in). Add kernel-modules to RRECOMMENDS.
+> >
+> > Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
+> > ---
+> >  meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
+> > index febf625a6..8dda8a2a6 100644
+> > --- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
+> > +++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
+> > @@ -48,6 +48,7 @@ FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}/*.so"
+> >  FILES_${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/*.a"
+> >
+> >  RRECOMMENDS_${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'python3', '${PN}-python', '', d)}"
+> > +RRECOMMENDS_${PN}-ptest += "kernel-modules"
+> >
+>
+> do we need full swath of modules ? or can we be surgical ?
+>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-networking/recipes-connectivity/mbedtls/mbedtls_2.26.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+No, we don't - all we need is kernel-module-gpio-mockup. I wasn't
+aware that each module is packaged separately. I will send a follow-up
+just for this patch.
 
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.26.0.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.26.0.bb
-index 8c2457ce06..3c7df44513 100644
---- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.26.0.bb
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.26.0.bb
-@@ -32,6 +32,7 @@ inherit cmake
- PACKAGECONFIG ??= "shared-libs programs"
- PACKAGECONFIG[shared-libs] = "-DUSE_SHARED_MBEDTLS_LIBRARY=ON,-DUSE_SHARED_MBEDTLS_LIBRARY=OFF"
- PACKAGECONFIG[programs] = "-DENABLE_PROGRAMS=ON,-DENABLE_PROGRAMS=OFF"
-+PACKAGECONFIG[werror] = "-DMBEDTLS_FATAL_WARNINGS=ON,-DMBEDTLS_FATAL_WARNINGS=OFF"
- 
- EXTRA_OECMAKE = "-DENABLE_TESTING=OFF -DLIB_INSTALL_DIR:STRING=${libdir}"
- 
--- 
-2.31.1
-
+Bart
