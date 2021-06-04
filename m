@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.706.1622820733412337600
+ by mx.groups.io with SMTP id smtpd.web09.702.1622820733889183196
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Jun 2021 08:32:13 -0700
+ Fri, 04 Jun 2021 08:32:14 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=53150 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lpBnt-0008SE-Lb; Fri, 04 Jun 2021 18:32:12 +0300
+	id 1lpBnw-0008SE-EW; Fri, 04 Jun 2021 18:32:12 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-typeguard: Upgrade 2.12.0 -> 2.12.1
-Date: Fri,  4 Jun 2021 18:31:57 +0300
-Message-Id: <20210604153200.20570-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-cbor2: Upgrade 5.3.0 -> 5.4.0
+Date: Fri,  4 Jun 2021 18:31:58 +0300
+Message-Id: <20210604153200.20570-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210604153200.20570-1-leon.anavi@konsulko.com>
 References: <20210604153200.20570-1-leon.anavi@konsulko.com>
@@ -30,30 +30,33 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.12.1:
+Upgrade to release 5.4.0:
 
-- Fixed AttributeError when __code__ is missing from the checked
-  callable
+- Added new feature stringrefs, which makes repetitive dictionary
+  structures more compact. Use with care since support for this
+  is rare in other CBOR implementations.
+- Bugfixes around decoding invalid data, which may improve
+  security on decoding untrusted data
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-typeguard_2.12.0.bb => python3-typeguard_2.12.1.bb} | 2 +-
+ .../python/{python3-cbor2_5.3.0.bb => python3-cbor2_5.4.0.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-typeguard_2.12.0.bb => python3-typeguard_2.12.1.bb} (87%)
+ rename meta-python/recipes-devtools/python/{python3-cbor2_5.3.0.bb => python3-cbor2_5.4.0.bb} (87%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-typeguard_2.12.0.bb b/meta-python/recipes-devtools/python/python3-typeguard_2.12.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cbor2_5.3.0.bb b/meta-python/recipes-devtools/python/python3-cbor2_5.4.0.bb
 similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-typeguard_2.12.0.bb
-rename to meta-python/recipes-devtools/python/python3-typeguard_2.12.1.bb
-index 148806e101..803067651a 100644
---- a/meta-python/recipes-devtools/python/python3-typeguard_2.12.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-typeguard_2.12.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/typeguard/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f0e423eea5c91e7aa21bdb70184b3e53"
+rename from meta-python/recipes-devtools/python/python3-cbor2_5.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-cbor2_5.4.0.bb
+index 32d2016e59..b791588b42 100644
+--- a/meta-python/recipes-devtools/python/python3-cbor2_5.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-cbor2_5.4.0.bb
+@@ -4,7 +4,7 @@ DEPENDS +="${PYTHON_PN}-setuptools-scm-native"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
  
--SRC_URI[sha256sum] = "fca77fd4ccba63465b421cdbbab5a1a8e3994e6d6f18b45da2bb475c09f147ef"
-+SRC_URI[sha256sum] = "c2af8b9bdd7657f4bd27b45336e7930171aead796711bc4cfc99b4731bb9d051"
+-SRC_URI[sha256sum] = "462b3604d9579458a79e6ca350943c49aabbc98c794c111a79b98720b9164336"
++SRC_URI[sha256sum] = "a7926f7244b08c413f1a4fa71a81aa256771c75bdf1a4fd77308547a2d63dd48"
  
  inherit pypi setuptools3 ptest
  
