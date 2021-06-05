@@ -1,155 +1,204 @@
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
- by mx.groups.io with SMTP id smtpd.web12.7498.1622857171296137551
+Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com [209.85.222.180])
+ by mx.groups.io with SMTP id smtpd.web08.7618.1622857342775281461
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Jun 2021 18:39:31 -0700
+ Fri, 04 Jun 2021 18:42:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=UVuUQ2uc;
- spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f182.google.com with SMTP id n12so9189283pgs.13
-        for <openembedded-devel@lists.openembedded.org>; Fri, 04 Jun 2021 18:39:31 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=i/WbGpOR;
+ spf=pass (domain: gmail.com, ip: 209.85.222.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f180.google.com with SMTP id 76so11216714qkn.13
+        for <openembedded-devel@lists.openembedded.org>; Fri, 04 Jun 2021 18:42:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=fsNlOx3OtgABDHvwszodR13LYyyNhe8bjwpKbw4aczg=;
-        b=UVuUQ2ucIIMALPaDWLc0XVSaNHTe5Pv3BBtfN93zTLHqWj8VCIfkLJ5HGybUesDIB2
-         GjWdHqLx6wi/8Sjm8CAWSR6xvz3PQUDeV7czf9cPqsQQ+6yAhtw4a0VGA+45Q+7zLRsV
-         WB4jkJ0AeOjaFGVITmERx1Q5qM+4RDppCE5JUWQCs+bkkpk9QWy8R2R/o0cU9rer2zCo
-         yzDV65o9Hh10TfJIwx6jAeBzxo+PKOR7e6MUYyGv3+YKIsT62iRvaXT6GV9nzZ1A/wV1
-         ywmsfhTpiAlPmVAXc82x0M9ogOLB8QI34BHVi98ArINGPodOzwZWh7931mypXGsNvxG3
-         92BQ==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=qXmkWoAIxDv9rSkxWLxWRfBARYpYdjNf3cPYNmGSfao=;
+        b=i/WbGpORYBAwHqU6fI7gUBcpn+J0CHoke/lcTGloKbLL3sApVpDddfuHIT4wCnfNs6
+         jJQuOO/mlPfVIblavgRDZcrnLsUOVEdpbze9q7mwWHmBJ93Aok2mlDxaP1XJf5zVxi2p
+         PdbVDC5Sq5wh+FQKe5d1pcsWBsL5wr1TkmxnByqWDh5cMuhtTcF66llusT4mJM4vfZYr
+         6hoi2XB589TOEFxsvdus3JUl0r5RFpb//I9b868MvfUuodOLXiSgkb6Kl5K6/TtkqiAc
+         XXuUQxJuFwSxndR/lwnZ3V2Gm4a4IVbZiKz7zyTNJg0CSg5X60dqcozK9S7mojOoJNb6
+         rIDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=fsNlOx3OtgABDHvwszodR13LYyyNhe8bjwpKbw4aczg=;
-        b=YLUwCbbONKsyvqk5xVvKorY/XzYa6/vYId2w0DkCi6THsv4U3HEq5QVaRB1yn5SKlf
-         eEspKBxXpZJjvzPx010xDDUgAGtxTj7EknqIjmI4r6yaETlMz4ZiHcylH61OoMcvsEd4
-         MiIOLF95E6xIHaRpH9BTzEzRiG43BBOhv60WXkl7kJxN8Xbcgw3jcyaY+gGRAqciy/2n
-         YkgmZnPsflu7cf4ryI8f0JnUMvCRpf8mBtQKgRaVcYljTYZfw0xbfed0Tn1x6YsZCxUW
-         hlaSz0TwMuu9bjsETGzsKhE9QxHFDN6H8T6FFl4zfNNVSkDuKNXBsn+YiFlyjkTJ7JLu
-         mXXw==
-X-Gm-Message-State: AOAM533sDO+BlpPHh38RucU2a9/S3QjdbJWw7tfXt9D/VSfCXi/J0s4R
-	ytWGb5qCVEHbsh/Z0OL0VloRQxQ6BncVvA==
-X-Google-Smtp-Source: ABdhPJz0f/UnyeJ2ci1zjhBs7RoZgxV/HxJjKuPPeUqDgqdu12fCdslGENBJLIeOgV7EJFU4XO61JA==
-X-Received: by 2002:a63:6841:: with SMTP id d62mr7647106pgc.7.1622857170250;
-        Fri, 04 Jun 2021 18:39:30 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a054])
-        by smtp.gmail.com with ESMTPSA id 15sm2654433pfv.1.2021.06.04.18.39.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 04 Jun 2021 18:39:29 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH v2 5/5] libwebsockets: Update to latest on v4.2-stable
-Date: Fri,  4 Jun 2021 18:39:27 -0700
-Message-Id: <20210605013927.983056-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.31.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=qXmkWoAIxDv9rSkxWLxWRfBARYpYdjNf3cPYNmGSfao=;
+        b=GrVN1qHkIgFRerkxsxnLNwgqwZe6PO+1zh1JDr9RE2+Ik+/EhnG5xNuo7bYxVKpkPI
+         /HALG56NJtwBi+UDC4SnA8WwGaL4ijkz3p066fec7IJYwNFgI2oVAwZeHYFMVZDiUXfc
+         3bY3f+y81O8LMl1oMFdL9qms7lBWg4ojBsKxJF39YkpcUDftze3CsL7K5kayBTuJtMWA
+         a6/ulGXh4P2DkXoJ0QjQaI1TD0yM8HN31ih/QBZUxR/hYTim6zXXBFTyIyehd9NHG9d8
+         vvypIze3QgLLbEFBsG3ESzWR/Jr6yQOX2mJcb7kerDNym12jts6NI0XacQiIgTtlgAcP
+         Mj2g==
+X-Gm-Message-State: AOAM531P+mKJSpP/JmdbpwdIcJYtmb1hDGr6Zbmn8ACbIc2yrDNJZRW+
+	wZyVok/MEjGxADhSgSztq5p8b32JEVU2TGq17fo=
+X-Google-Smtp-Source: ABdhPJx6FaUqfnB9i99G3Ig8Im/TjICZvRcyvkYD4oJuXvcaRf3/48Ix9UZR7/0WP2V5lh1ImjjOMgray5FUjboUCXA=
+X-Received: by 2002:ae9:e40f:: with SMTP id q15mr7132514qkc.125.1622857341788;
+ Fri, 04 Jun 2021 18:42:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210604135143.1215766-1-trevor.gamblin@windriver.com>
+In-Reply-To: <20210604135143.1215766-1-trevor.gamblin@windriver.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 4 Jun 2021 18:41:56 -0700
+Message-ID: <CAMKF1srh94uNbM85ffaoEE_0RvoOO8xWT3WTU5TTqk0Z64+xTQ@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-yappi: fix ptests
+To: Trevor Gamblin <trevor.gamblin@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Remove unused variable which is flagged by clang
+Fails to patch
 
-License-Update: copy secondary license texts into LICENSE as a convenience
+https://errors.yoctoproject.org/Errors/Details/586001/
 
-Add Apache-2.0 as well since lib/tls/mbedtls/wrapper is using it
-
-[1] https://github.com/warmcat/libwebsockets/commit/a12d5ebed672a28c16484d983885474be606cc21#diff-c693279643b8cd5d248172d9c22cb7cf4ed163a3c98c8a3f69c2717edd3eacb7
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
-v2: Document License changes
-
- ...0001-core-net-Remove-unused-variable.patch | 54 +++++++++++++++++++
- .../libwebsockets/libwebsockets_4.2.0.bb      | 10 ++--
- 2 files changed, 60 insertions(+), 4 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/libwebsockets/libwebsockets/0001-core-net-Remove-unused-variable.patch
-
-diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/0001-core-net-Remove-unused-variable.patch b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/0001-core-net-Remove-unused-variable.patch
-new file mode 100644
-index 0000000000..d648c284b5
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets/0001-core-net-Remove-unused-variable.patch
-@@ -0,0 +1,54 @@
-+From cfa40cc1c2df6c64fb53bb4a2a56eb09e3e1309c Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 4 Jun 2021 18:21:58 -0700
-+Subject: [PATCH] core-net: Remove unused variable
-+
-+variable 'n' is being set but it is not used anywhere, latest clang is
-+able to detect this and flags it
-+
-+Fixes
-+
-+lib/core-net/route.c:41:6: error: variable 'n' set but not used [-Werror,-Wunused-but-set-variable]
-+|         int n = 0;
-+|             ^
-+
-+Upstream-Status: Submitted [https://github.com/warmcat/libwebsockets/pull/2320]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ lib/core-net/route.c | 7 +++----
-+ 1 file changed, 3 insertions(+), 4 deletions(-)
-+
-+diff --git a/lib/core-net/route.c b/lib/core-net/route.c
-+index efe08ba1..6be93d62 100644
-+--- a/lib/core-net/route.c
-++++ b/lib/core-net/route.c
-+@@ -38,23 +38,22 @@ void
-+ _lws_routing_entry_dump(lws_route_t *rou)
-+ {
-+ 	char sa[48], fin[192], *end = &fin[sizeof(fin)];
-+-	int n = 0;
-+ 
-+ 	if (rou->dest.sa4.sin_family) {
-+ 		lws_sa46_write_numeric_address(&rou->dest, sa, sizeof(sa));
-+-		n += lws_snprintf(fin, lws_ptr_diff_size_t(end, fin),
-++		lws_snprintf(fin, lws_ptr_diff_size_t(end, fin),
-+ 				  "dst: %s/%d, ", sa, rou->dest_len);
-+ 	}
-+ 
-+ 	if (rou->src.sa4.sin_family) {
-+ 		lws_sa46_write_numeric_address(&rou->src, sa, sizeof(sa));
-+-		n += lws_snprintf(fin, lws_ptr_diff_size_t(end, fin),
-++		lws_snprintf(fin, lws_ptr_diff_size_t(end, fin),
-+ 				  "src: %s/%d, ", sa, rou->src_len);
-+ 	}
-+ 
-+ 	if (rou->gateway.sa4.sin_family) {
-+ 		lws_sa46_write_numeric_address(&rou->gateway, sa, sizeof(sa));
-+-		n += lws_snprintf(fin, lws_ptr_diff_size_t(end, fin),
-++		lws_snprintf(fin, lws_ptr_diff_size_t(end, fin),
-+ 				  "gw: %s, ", sa);
-+ 	}
-+ 
-+-- 
-+2.31.1
-+
-diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.0.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.0.bb
-index 89c98fec02..18b72ae8f5 100644
---- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.0.bb
-+++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.0.bb
-@@ -1,13 +1,15 @@
- SUMMARY = "Canonical libwebsockets.org websocket library"
- HOMEPAGE = "https://libwebsockets.org/"
--LICENSE = "MIT & Zlib & BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=8c47b078124308a4e1354e8d59f606b7"
-+LICENSE = "MIT & Zlib & BSD-3-Clause & Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=c8bea43a2eb5d713c338819a0be07797"
- 
- DEPENDS = "zlib"
- 
- S = "${WORKDIR}/git"
--SRCREV = "1367c11e1ee44d9e19daa50e1d015365bae17354"
--SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.2-stable"
-+SRCREV = "4b6a7982b6833c8ccac1f35caaf9e8ccc605ff9a"
-+SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.2-stable \
-+           file://0001-core-net-Remove-unused-variable.patch \
-+          "
- 
- UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
--- 
-2.31.1
-
+On Fri, Jun 4, 2021 at 6:52 AM Trevor Gamblin
+<trevor.gamblin@windriver.com> wrote:
+>
+> - Add a patch to fix imports in unit tests
+> - Add python3-gevent and python3-zopeinterface to ptest RDEPENDS
+> - Sort ptest RDEPENDS alphabetically
+>
+> Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> ---
+>  .../0001-Fix-imports-for-ptests.patch         | 102 ++++++++++++++++++
+>  .../python/python3-yappi_1.3.2.bb             |   5 +-
+>  2 files changed, 106 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-yappi/0001-Fix-imports-for-ptests.patch
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-yappi/0001-Fix-imports-for-ptests.patch b/meta-python/recipes-devtools/python/python3-yappi/0001-Fix-imports-for-ptests.patch
+> new file mode 100644
+> index 000000000..e00b7a818
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-yappi/0001-Fix-imports-for-ptests.patch
+> @@ -0,0 +1,102 @@
+> +From f27b40e9824615ce5b61b37f58a279703ee04712 Mon Sep 17 00:00:00 2001
+> +From: Trevor Gamblin <trevor.gamblin@windriver.com>
+> +Date: Fri, 4 Jun 2021 09:17:38 -0400
+> +Subject: [PATCH] Fix imports for ptests
+> +
+> +yappi's ptests are failing because the import statements for the "utils"
+> +module are not properly given as relative imports and/or aliased. Fix
+> +this here for 1.3.2 while trying to get it submitted upstream.
+> +
+> +Upstream-Status: Submitted (https://github.com/sumerc/yappi/pull/84)
+> +
+> +Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> +---
+> + tests/test_asyncio.py              | 2 +-
+> + tests/test_asyncio_context_vars.py | 2 +-
+> + tests/test_functionality.py        | 2 +-
+> + tests/test_gevent.py               | 2 +-
+> + tests/test_hooks.py                | 2 +-
+> + tests/test_tags.py                 | 2 +-
+> + 6 files changed, 6 insertions(+), 6 deletions(-)
+> +
+> +diff --git a/tests/test_asyncio.py b/tests/test_asyncio.py
+> +index 4ac4c5f..4de94cf 100644
+> +--- a/tests/test_asyncio.py
+> ++++ b/tests/test_asyncio.py
+> +@@ -2,7 +2,7 @@ import unittest
+> + import yappi
+> + import asyncio
+> + import threading
+> +-from utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io
+> ++from .utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io
+> +
+> +
+> + @asyncio.coroutine
+> +diff --git a/tests/test_asyncio_context_vars.py b/tests/test_asyncio_context_vars.py
+> +index 5bd750c..9a253c0 100644
+> +--- a/tests/test_asyncio_context_vars.py
+> ++++ b/tests/test_asyncio_context_vars.py
+> +@@ -5,7 +5,7 @@ import contextvars
+> + import functools
+> + import time
+> + import os
+> +-import utils
+> ++import tests.utils as utils
+> + import yappi
+> +
+> + async_context_id = contextvars.ContextVar('async_context_id')
+> +diff --git a/tests/test_functionality.py b/tests/test_functionality.py
+> +index a73cb63..2ab273f 100644
+> +--- a/tests/test_functionality.py
+> ++++ b/tests/test_functionality.py
+> +@@ -5,7 +5,7 @@ import threading
+> + import unittest
+> + import yappi
+> + import _yappi
+> +-import utils
+> ++import tests.utils as utils
+> + import multiprocessing  # added to fix http://bugs.python.org/issue15881 for > Py2.6
+> + import subprocess
+> +
+> +diff --git a/tests/test_gevent.py b/tests/test_gevent.py
+> +index 8569712..fe15b29 100644
+> +--- a/tests/test_gevent.py
+> ++++ b/tests/test_gevent.py
+> +@@ -4,7 +4,7 @@ import yappi
+> + import gevent
+> + from gevent.event import Event
+> + import threading
+> +-from utils import (
+> ++from .utils import (
+> +     YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io,
+> +     burn_io_gevent
+> + )
+> +diff --git a/tests/test_hooks.py b/tests/test_hooks.py
+> +index a96a4f1..e4177ba 100644
+> +--- a/tests/test_hooks.py
+> ++++ b/tests/test_hooks.py
+> +@@ -5,7 +5,7 @@ import unittest
+> + import time
+> +
+> + import yappi
+> +-import utils
+> ++import tests.utils as utils
+> +
+> +
+> + def a():
+> +diff --git a/tests/test_tags.py b/tests/test_tags.py
+> +index b0b531d..1928888 100644
+> +--- a/tests/test_tags.py
+> ++++ b/tests/test_tags.py
+> +@@ -2,7 +2,7 @@ import unittest
+> + import yappi
+> + import threading
+> + import time
+> +-from utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io
+> ++from .utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io
+> +
+> +
+> + class MultiThreadTests(YappiUnitTestCase):
+> +--
+> +2.31.1
+> +
+> diff --git a/meta-python/recipes-devtools/python/python3-yappi_1.3.2.bb b/meta-python/recipes-devtools/python/python3-yappi_1.3.2.bb
+> index 7c3f0fd4b..8a1aca21f 100644
+> --- a/meta-python/recipes-devtools/python/python3-yappi_1.3.2.bb
+> +++ b/meta-python/recipes-devtools/python/python3-yappi_1.3.2.bb
+> @@ -8,6 +8,7 @@ SRC_URI[sha256sum] = "a51d3e6e5563cc74b5bb82ed6e7bd44a9c1a7eae3d97e4d52e9465edb3
+>
+>  SRC_URI += " \
+>      file://run-ptest \
+> +    file://0001-Fix-imports-for-ptests.patch \
+>  "
+>
+>  inherit pypi setuptools3 ptest
+> @@ -19,9 +20,11 @@ RDEPENDS_${PN} += "\
+>  "
+>
+>  RDEPENDS_${PN}-ptest += " \
+> -    ${PYTHON_PN}-pytest \
+> +    ${PYTHON_PN}-gevent \
+>      ${PYTHON_PN}-multiprocessing \
+> +    ${PYTHON_PN}-pytest \
+>      ${PYTHON_PN}-profile \
+> +    ${PYTHON_PN}-zopeinterface \
+>  "
+>
+>  do_install_ptest() {
+> --
+> 2.31.1
+>
+>
+> 
+>
