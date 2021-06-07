@@ -1,91 +1,88 @@
-Received: from mail-yb1-f178.google.com (mail-yb1-f178.google.com [209.85.219.178])
- by mx.groups.io with SMTP id smtpd.web08.19373.1622947348447613320
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.66])
+ by mx.groups.io with SMTP id smtpd.web08.33011.1623053476536398224
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Jun 2021 19:42:28 -0700
+ Mon, 07 Jun 2021 01:11:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ok91CjqO;
- spf=pass (domain: gmail.com, ip: 209.85.219.178, mailfrom: jupiter.hce@gmail.com)
-Received: by mail-yb1-f178.google.com with SMTP id i4so19695183ybe.2;
-        Sat, 05 Jun 2021 19:42:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=gGvJXY/5S5lD3qhoQR1VpChZke3NCBHRCrwfn+WuCJM=;
-        b=Ok91CjqOsK4QP9gwPvDvpNUk4T2H4ZBlWwpHxZIZCjrYQiOca6Un50ihyQnrdHOn5m
-         ZCWOwodD9ou/7FEPtDNor4/9y1XaV+Rq5A9s+9hLC1H3oZCmHzPPsZBNZJkNvw/e9p6z
-         6wL7vaMo15rYo2a/yQrjwJiz81asTv+qCB2yvGerwNcRANTYP6vP4q19R5ryIKDJAFrl
-         VFxpRpUrHjY8r67o78VU2PoR2PdL1i5F7woDsOs868d6Dzkaz9WZAVhYoX/2uMLXaZDW
-         Fn7l9h5Kf1l0WOLXSTvOqsFAejuFhFagRz8y5G4vqV50my1RQDzlaxgEx8a3fuyBrprr
-         Qxwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=gGvJXY/5S5lD3qhoQR1VpChZke3NCBHRCrwfn+WuCJM=;
-        b=DtZ1DmHk0JJlXXYGM7InP72tFHxn/ojiIhS0lIu/o7p4BU7RXM4IV3OAh676atuoxZ
-         6lTidC+hUI+wLvj2qNfl28SEyeNRNlly9vDKNWq7cx9TR+OCsOzhRtI2RO3DY2GXSoKh
-         OqY08Vs2am+/I9LoJ00LhNnt27CB13UN03UK55zn0nUSNsQs8rnVhq8EY3vJ/QeMs6bu
-         8FhNbAVjMXOcxW6JYOIYEobMkAykDR3feF38LObsajudUro1FMT9pdAjtbqjSHtRwpD5
-         W4NCyDCVVBMnBrN2sas0B3yqO2PbhOXN1qqgr/fJq7KifWKm9hB5j9EKAnw4lu5dreMh
-         sIaA==
-X-Gm-Message-State: AOAM533xXWCVCii/CgpE/xZJSKPR41WohuhMogUS/ShN1+F7R1glGayG
-	T7Yb88dgJNH/un88bXGjXETyPdOkOtCI1RBOwcs=
-X-Google-Smtp-Source: ABdhPJxEWI3sSMO5bSzfaZF3dbNR5hsA+aImVco/BbzjaL4CRE9fTNSCbLb/g6ulr8c0MqqbmPow1irmfTPPZIToQq4=
-X-Received: by 2002:a25:f208:: with SMTP id i8mr14630719ybe.340.1622947347590;
- Sat, 05 Jun 2021 19:42:27 -0700 (PDT)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ZP/PU1x6;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.66, mailfrom: zangrc.fnst@fujitsu.com)
+Return-Path: <zangrc.fnst@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1623053474; i=@fujitsu.com;
+	bh=yAE/gJo7pb8fClpOwtD+nU66zp1CNx10HGHX9UEgDcs=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=ZP/PU1x6lTCCeOwGmOHS0CfTqojnl091x21/lF2A646ycdIgPA3vV1BQMb9MIcgQb
+	 tea0RnXTZJi2e3MRMY1e6OaqgeVEf7o9GMqbivs8VAmCwsswJykr/87TFHrcqyZiTd
+	 +g+XeTHNU3qvgY7TSAln8ZQz8kfRxM5OZZQP1OIm7CmGZT7BugQ/NA3gfqe7KVVjC6
+	 cbk7Mn6DPU9XBG55liUKTLtwWKuW8f1nOj0O+IwN/zrVREe8plLGI8te+hbSiq3QcU
+	 Iil220IphQMj6ovt3OVlz6J/3+fGNXXk/xaomhwhxxkYShuqWL57gUR6fxB3JGMge3
+	 EBE4Hm+k1RMnA==
+Received: from [100.112.199.57] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-b.eu-west-1.aws.symcld.net id 09/A1-25406-2A4DDB06; Mon, 07 Jun 2021 08:11:14 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYorvoyt4
+  EgzP/+S0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oyHvx+xFzRwVvx58YCxgXEaRxcjF4eQwCwm
+  icbPv9kgnOOMEht/H2TsYuTkYBPQkeh40c0CYosI6Essnb2HuYuRg0NYwE+itakKJMwioCIxf
+  9Y0sBJeAXeJS3tamEBsCQEFiSkP3zNDxAUlTs58AlbDLCAhcfDFC2aIGkWJ7TvPsEDYFRIzZm
+  xjm8DIMwtJyywkLQsYmVYxWiQVZaZnlOQmZuboGhoY6BoaGukaWlrqGhmZ6yVW6SbppZbqlqc
+  Wl+ga6iWWF+sVV+Ym56To5aWWbGIEhlFKwfHHOxhXvPmgd4hRkoNJSZSX7fjuBCG+pPyUyozE
+  4oz4otKc1OJDjDIcHEoSvEyX9yYICRalpqdWpGXmAEMaJi3BwaMkwvsNJM1bXJCYW5yZDpE6x
+  agoJc57GyQhAJLIKM2Da4PF0SVGWSlhXkYGBgYhnoLUotzMElT5V4ziHIxKwrxswKgU4snMK4
+  Gb/gpoMRPQ4mr7XSCLSxIRUlINTPEJGvcYz1eY3n+8vlysW8TvDfOkgzayDdNeNsfYPPpRq3i
+  j8a/0Jut/njEvF/MGaq6Ojai723P73d69N1jWZ/zZtT9R0SE/g+lrhl+EbvB3tfzIlLNLWVX/
+  skYofm+RsBa+scpuukXOKl8j48KORLlTp421P53s2hr15G+cxPqcLSdTl6hvapq2dIHhkbD1H
+  QLC715Mnu6scKVU69nViLVFJxLvpZx2C5pwlnXCTv2S5e/in3A9YjLf9+Gt075LquKmx0UlHn
+  Z6vVrVPO1E1tY94cZyHtGy8VyPWXf/O6O0dC/3+WdNp7YsD9az+FBu1qcvVNtd4h7VnSN06UF
+  9ksSLe+uWLZ22qj/SositUImlOCPRUIu5qDgRAFtTcQMeAwAA
+X-Env-Sender: zangrc.fnst@fujitsu.com
+X-Msg-Ref: server-11.tower-287.messagelabs.com!1623053473!7606!1
+X-Originating-IP: [62.60.8.148]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.75.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 1717 invoked from network); 7 Jun 2021 08:11:14 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-11.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 7 Jun 2021 08:11:14 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1578BAvQ005998
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 7 Jun 2021 09:11:13 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Mon, 7 Jun 2021 09:11:09 +0100
+From: "zangrc" <zangrc.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH 1/2] [oe] [meta-gnome] [PATCH] tracker: upgrade 3.0.4 -> 3.1.1
+Date: Mon, 7 Jun 2021 16:11:01 +0800
+Message-ID: <1623053461-20727-1-git-send-email-zangrc.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <CAA=hcWQ7vordSRwq-O2+8b5FV79EKHZM6s-dq49EWt6Ra5Owdg@mail.gmail.com>
- <06B2DF82-ACFE-4503-8174-39163A7DF959@0leil.net>
-In-Reply-To: <06B2DF82-ACFE-4503-8174-39163A7DF959@0leil.net>
-From: "JH" <jupiter.hce@gmail.com>
-Date: Sun, 6 Jun 2021 12:41:51 +1000
-Message-ID: <CAA=hcWQT-G5+92u8=4=u_aBLmREMUkNLm+y0hNvCOkvAu4_g6Q@mail.gmail.com>
-Subject: Re: [yocto] Is it a bug or it does not support device tree /delete-node/?
-To: Quentin Schulz <foss@0leil.net>
-Cc: yocto <yocto@lists.yoctoproject.org>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	Patches and discussions about the oe-core layer <openembedded-core@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Type: text/plain
 
-Thanks Quentin, that did the trick.
+Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+---
+ .../tracker/{tracker_3.0.4.bb => tracker_3.1.1.bb}              | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/tracker/{tracker_3.0.4.bb => tracker_3.1.1.bb} (93%)
 
+diff --git a/meta-gnome/recipes-gnome/tracker/tracker_3.0.4.bb b/meta-gnome/recipes-gnome/tracker/tracker_3.1.1.bb
+similarity index 93%
+rename from meta-gnome/recipes-gnome/tracker/tracker_3.0.4.bb
+rename to meta-gnome/recipes-gnome/tracker/tracker_3.1.1.bb
+index 82e3d006e..7d9fe9b8e 100644
+--- a/meta-gnome/recipes-gnome/tracker/tracker_3.0.4.bb
++++ b/meta-gnome/recipes-gnome/tracker/tracker_3.1.1.bb
+@@ -21,7 +21,7 @@ GNOMEBASEBUILDCLASS = "meson"
+ 
+ inherit gnomebase gsettings gobject-introspection vala gtk-doc manpages bash-completion features_check
+ 
+-SRC_URI[archive.sha256sum] = "c120d81f2df94aa794b1a7953b55cfa46de318ed68e6f3b5ad4fce0c729c2483"
++SRC_URI[archive.sha256sum] = "4376e2e98454066f44f7a242e45b99b3bfe4c03b67fab19abb0ed586ca748ae7"
+ 
+ # gobject-introspection is mandatory and cannot be configured
+ REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+-- 
+2.25.1
 
-On 6/5/21, Quentin Schulz <foss@0leil.net> wrote:
-> Hi,
->
-> On June 5, 2021 12:43:19 AM UTC, JH <jupiter.hce@gmail.com> wrote:
->>Hi,
->>
->>I am building following imx6ulz-kobs.dts file to a dtb in zeus:
->>
->>$ cat imx6ulz-kobs.dts
->>
->>#include "imx6ulz.dts"
->>
->>/{
->>  model = "customized imx6ull";
->>  compatible = "fsl,imx6ull";
->>};
->>
->>&gpmi {
->>    /delete-node/ fsl,use-minimum-ecc;
->>};
->>
->>The building process was fine, but that fsl,use-minimum-ecc in dtb was
->>not deleted, is it a bug or it does not support  /delete-node/?
->>
->
-> fsl,use-minimum-ecc is a property not a node, you need to use
-> /delete-property/ instead, c.f.
-> https://devicetree-specification.readthedocs.io/en/latest/chapter6-source-language.html?highlight=delete-property#node-and-property-definitions.
->
-> Cheers,
-> Quentin
->
-
-
---
-"A man can fail many times, but he isn't a failure until he begins to
-blame somebody else."
--- John Burroughs
