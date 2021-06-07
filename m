@@ -1,206 +1,185 @@
-Received: from mail3.bemta25.messagelabs.com (mail3.bemta25.messagelabs.com [195.245.230.81])
- by mx.groups.io with SMTP id smtpd.web08.33020.1623053556465495731
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+ by mx.groups.io with SMTP id smtpd.web11.33188.1623054076331626350
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Jun 2021 01:12:37 -0700
+ Mon, 07 Jun 2021 01:21:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=bf7iRrV3;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.81, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1623053554; i=@fujitsu.com;
-	bh=6mgTAr7LZFkP+u6TTymXFpWfO8GzUY8iz3cGIkUcFts=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=bf7iRrV3yHIOOwdZcstsGxqSgYpzEX3P33uhpZ4qGrRYn7oc8K5dSza7NSjuPeFSN
-	 ueQAhLSEityaX/KA4u7sdaDejVhCxzFAiXLQKl5eOnBjMaY3ZsWfvAu4FsTaa6yn6c
-	 U8G2ZZbpmEK5v3xd32gehGgjNL52zYrs+InAGg9p0buwP25NyeBIzYVRlnB3GmKfnL
-	 8UHz4Ku0AjjltkI3yA/d4or1ZuXACidedhFNnFZ9qU9GanFC3MFwzxpT0E/h6Hh9h8
-	 g067zsvIi/6gBchl5xRQ4gdINotVYRh3AQbYQFjMNR5d+LdoGGa/HgPnGDzedRbtgW
-	 gh+PMfJEk5J2A==
-Received: from [100.112.198.228] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-b.eu-west-1.aws.symcld.net id 56/81-00056-2F4DDB06; Mon, 07 Jun 2021 08:12:34 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprGIsWRWlGSWpSXmKPExsViZ8MRqvvxyt4
-  Eg+6lNhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bHd9mCbXoVq94dYm5g/K/RxcjFISQwi0ni
-  w4EJbBDOcUaJrtNngRxODjYBHYmOF90sILaIgL7E0tl7mEFsYQF3iTXXZjGC2CwCKhKdT26wd
-  zFycPACxR/254CEJQQUJKY8fA9WzisgKHFy5hOwMcwCEhIHX7xghqhRlNi+8wwLhF0hMWPGNr
-  YJjDyzkLTMQtKygJFpFaNFUlFmekZJbmJmjq6hgYGuoaGRrqGlha6hhZleYpVukl5qqW55anG
-  JrqFeYnmxXnFlbnJOil5easkmRmAQpRQc27WD8e3rD3qHGCU5mJREedmO704Q4kvKT6nMSCzO
-  iC8qzUktPsQow8GhJMHLdHlvgpBgUWp6akVaZg4woGHSEhw8SiK830DSvMUFibnFmekQqVOMu
-  hzvfi5exCzEkpeflyolznsbpEgApCijNA9uBCy6LjHKSgnzMjIwMAjxFKQW5WaWoMq/YhTnYF
-  QS5mUDxqoQT2ZeCdymV0BHMAEdUW2/C+SIkkSElFQDkxSnYI/Mgx/1bYxRkR+qDx6f+qqs4BL
-  X582dqu7M/orPFANbDBkNpyze8GsCY7p72n31h/t4fB09D3c/b5v3ZcGu0gmn8te8yvob9cC7
-  V0hYcGnokq47rZU6B3aKOZxLq5Lg9/HeItn55s+7IMWj0a8PfToZ1Lqpj2+27Ge1381BPKJpV
-  y6JVx8VCLoQ98Z8Icd/rycvomr/ui7+bezyRYp9v+g0xpIvO+fdmHIhd3rq2reh0rrBJ95/Cl
-  nNOd3o7o65G6Q5GV965DDdsMg/s7GSwWTXAbUzp78IqBucuzH5QdiKjPqDWQ+3Ciu3z34w947
-  lvXtOKx8suva9eJur2i2RwrM1s22rZvy4c39h+ColluKMREMt5qLiRABxIKdSKQMAAA==
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-7.tower-285.messagelabs.com!1623053553!189!1
-X-Originating-IP: [62.60.8.85]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.75.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 31966 invoked from network); 7 Jun 2021 08:12:33 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-7.tower-285.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 7 Jun 2021 08:12:33 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1578CXDQ025998
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 7 Jun 2021 09:12:33 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Mon, 7 Jun 2021 09:12:32 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-networking] [PATCH] netplan: upgrade 0.101 -> 0.102
-Date: Mon, 7 Jun 2021 16:12:26 +0800
-Message-ID: <1623053546-20819-1-git-send-email-zangrc.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=WRFBkAF3;
+ spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f42.google.com with SMTP id i13so19274273edb.9
+        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Jun 2021 01:21:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=dhW42yQex2PUKnw3c8clp/KmlhEpZaZWkMs4wBe3ikI=;
+        b=WRFBkAF3M48mBLZ21D75wGgNZ/X3tIjVyws2opFhftthZP0S7OvcvY7omdPRyfZKQR
+         klxJMenCgOJpbtdWYtsq805uJfTepo2cU+Hhd2hqJZjU3aSPaBK/S7mVr4Ejxw6OKzyU
+         AU7jUJE0dxaLYuSniISi4K5n6gUO/9K70I9HFBY4W1G7ctXFTp5Q7eJx6YhSNNW9idb5
+         A3fhmP+N46CHzL0bllerZicIxlwH8BcICVaaNlp1WDakhtjFPclJ4/Qgtgz2iegnKOO8
+         y7orj7BBAxKfbD5WMjsDF/N1BO7rkAN3LM8OooT3Mw65GRDhMPPqZMsORZXPOKpz9Glx
+         M4KA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=dhW42yQex2PUKnw3c8clp/KmlhEpZaZWkMs4wBe3ikI=;
+        b=TwDfys895QmWmObnNSH4iwOfZQF/KMVpmxN/aSk9YYHlQSuTJg0p5DB6KMAp2RvDbE
+         c0azk/dh+AjG4T0Oc5pvYVdkdCGfnX25J5kBdoNGkY9F590AwEFioc+EnoBwu6i45wL/
+         PT6HzJenDPtJE4owJyw8a8kU1Dw8JFcDU4XdYibeVU4e292ecWkfvwKsKzgcocDFv/+k
+         biE4kQ+Df9ILqKEzZwYL6TnnU8JaY/RMtGc5RnyzyqpxqIOWxGlWzrpZojUSYSkSOYMv
+         d2lQnsAo/us/B+bmyShaYRstV6L9mP+P9uRKHb0jPefSgKYmXsFoEu6lv2uhwbGl7vI/
+         TYpQ==
+X-Gm-Message-State: AOAM531vK0lJ2A62HV7oDQiERZtYjibGBtsC1fGyfsTyjS9/UagKg34Z
+	L/j82I2xjgS1SX9TuS4WsT66qQ1Q0kCf2yVg6EM=
+X-Google-Smtp-Source: ABdhPJzb6Y/Xn7Dbz4/ZuqVPnFSkp/gDcj5A5MjfVxDWPA1jkd4hglmjhBQodg67XWV8Jv0KZjpR25cQTFa4jVozD1I=
+X-Received: by 2002:a05:6402:754:: with SMTP id p20mr18320020edy.311.1623054074710;
+ Mon, 07 Jun 2021 01:21:14 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+References: <20210604014438.33958-1-kai.kang@windriver.com>
+ <CA+chaQf3SGiUJSg57umnwTQ8gMtAmrFLTSsTw=xeB2GYzaRSpQ@mail.gmail.com> <b47a52f7-6946-9be0-a22c-8526047215a5@windriver.com>
+In-Reply-To: <b47a52f7-6946-9be0-a22c-8526047215a5@windriver.com>
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+Date: Mon, 7 Jun 2021 10:21:02 +0200
+Message-ID: <CA+chaQcxyMhVhHrnfEJjp0iKcrT7EpLUdy0E3vM5xRDHiiqADg@mail.gmail.com>
+Subject: Re: [oe] [PATCH] layers: set LAYERSERIES_COMPAT with honister
+To: Kai <kai.kang@windriver.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000930ee405c428b9d5"
 
-0001-dbus-Remove-unused-variabes.patch
-0002-Makefile-Exclude-.h-files-from-target-rule.patch
-Removed since these are included in 0.102.
+--000000000000930ee405c428b9d5
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
----
- .../0001-dbus-Remove-unused-variabes.patch    | 59 -------------------
- ...le-Exclude-.h-files-from-target-rule.patch | 32 ----------
- .../{netplan_0.101.bb => netplan_0.102.bb}    |  6 +-
- 3 files changed, 2 insertions(+), 95 deletions(-)
- delete mode 100644 meta-networking/recipes-connectivity/netplan/netplan/0001-dbus-Remove-unused-variabes.patch
- delete mode 100644 meta-networking/recipes-connectivity/netplan/netplan/0002-Makefile-Exclude-.h-files-from-target-rule.patch
- rename meta-networking/recipes-connectivity/netplan/{netplan_0.101.bb => netplan_0.102.bb} (93%)
+Then I believe layer index should be fixed to support longer values, there
+are layers which are compatible with multiple releases and it works fine
+with bitbake/oe-core, layer index parsing shouldn't be more strict than the
+mechanism which is using these variables.
 
-diff --git a/meta-networking/recipes-connectivity/netplan/netplan/0001-dbus-Remove-unused-variabes.patch b/meta-networking/recipes-connectivity/netplan/netplan/0001-dbus-Remove-unused-variabes.patch
-deleted file mode 100644
-index 407e24ca0..000000000
---- a/meta-networking/recipes-connectivity/netplan/netplan/0001-dbus-Remove-unused-variabes.patch
-+++ /dev/null
-@@ -1,59 +0,0 @@
--Subject: [PATCH 1/2] dbus: Remove unused variabes
--
--This issue is seen when using clang to compile it
--
--Same fix is needed for parse.c and networkd.c,
--
--Fixes
--src/dbus.c:49:23: error: unused variable 'stdout' [-Werror,-Wunused-variable]
--g_autofree gchar *stdout = NULL;
--^
--Upstream-Status: Submitted [https://github.com/CanonicalLtd/netplan/pull/175]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/dbus.c     | 3 ---
-- src/networkd.c | 1 -
-- src/parse.c    | 1 -
-- 3 files changed, 5 deletions(-)
--
--diff --git a/src/dbus.c b/src/dbus.c
--index 9606fea..8e1ed9d 100644
----- a/src/dbus.c
--+++ b/src/dbus.c
--@@ -242,9 +242,6 @@ static int
-- method_info(sd_bus_message *m, void *userdata, sd_bus_error *ret_error)
-- {
--     sd_bus_message *reply = NULL;
---    g_autoptr(GError) err = NULL;
---    g_autofree gchar *stdout = NULL;
---    g_autofree gchar *stderr = NULL;
--     gint exit_status = 0;
-- 
--     exit_status = sd_bus_message_new_method_return(m, &reply);
--diff --git a/src/networkd.c b/src/networkd.c
--index 7c86cd6..7200740 100644
----- a/src/networkd.c
--+++ b/src/networkd.c
--@@ -897,7 +897,6 @@ append_wpa_auth_conf(GString* s, const NetplanAuthenticationSettings* auth, cons
-- static void
-- write_wpa_unit(const NetplanNetDefinition* def, const char* rootdir)
-- {
---    g_autoptr(GError) err = NULL;
--     g_autofree gchar *stdouth = NULL;
-- 
--     stdouth = systemd_escape(def->id);
--diff --git a/src/parse.c b/src/parse.c
--index 033c657..faca27f 100644
----- a/src/parse.c
--+++ b/src/parse.c
--@@ -1899,7 +1899,6 @@ handle_wireguard_peers(yaml_document_t* doc, yaml_node_t* node, const void* _, G
--     }
-- 
--     for (yaml_node_item_t *i = node->data.sequence.items.start; i < node->data.sequence.items.top; i++) {
---        g_autofree char* addr = NULL;
--         yaml_node_t *entry = yaml_document_get_node(doc, *i);
--         assert_type(entry, YAML_MAPPING_NODE);
-- 
---- 
--2.25.1
--
-diff --git a/meta-networking/recipes-connectivity/netplan/netplan/0002-Makefile-Exclude-.h-files-from-target-rule.patch b/meta-networking/recipes-connectivity/netplan/netplan/0002-Makefile-Exclude-.h-files-from-target-rule.patch
-deleted file mode 100644
-index 68aabd6a4..000000000
---- a/meta-networking/recipes-connectivity/netplan/netplan/0002-Makefile-Exclude-.h-files-from-target-rule.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--Subject: [PATCH 2/2] Makefile: Exclude .h files from target rule
--
--This ensures that src/_features.h is not added to compiler cmdline which
--can confuse the compilers e.g. clang as it may not like .h as valid input
--and complain
--
--| clang-11: error: cannot specify -o when generating multiple output files
--| make: *** [Makefile:50: netplan-dbus] Error 1
--| make: *** Waiting for unfinished jobs....
--
--Upstream-Status: Submitted [https://github.com/CanonicalLtd/netplan/pull/175]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- Makefile | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/Makefile b/Makefile
--index 4fa6bd8..567d326 100644
----- a/Makefile
--+++ b/Makefile
--@@ -46,7 +46,7 @@ generate: libnetplan.so.$(NETPLAN_SOVER) nm.o networkd.o openvswitch.o generate.
-- 	$(CC) $(BUILDFLAGS) $(CFLAGS) $(LDFLAGS) -o $@ $^ -L. -lnetplan `pkg-config --cflags --libs glib-2.0 gio-2.0 yaml-0.1 uuid`
-- 
-- netplan-dbus: src/dbus.c src/_features.h util.o
---	$(CC) $(BUILDFLAGS) $(CFLAGS) $(LDFLAGS) -o $@ $^ `pkg-config --cflags --libs libsystemd glib-2.0 gio-2.0`
--+	$(CC) $(BUILDFLAGS) $(CFLAGS) $(LDFLAGS) -o $@ $(patsubst %.h,,$^) `pkg-config --cflags --libs libsystemd glib-2.0 gio-2.0`
-- 
-- src/_features.h: src/[^_]*.[hc]
-- 	printf "#include <stddef.h>\nstatic const char *feature_flags[] __attribute__((__unused__)) = {\n" > $@
---- 
--2.25.1
--
-diff --git a/meta-networking/recipes-connectivity/netplan/netplan_0.101.bb b/meta-networking/recipes-connectivity/netplan/netplan_0.102.bb
-similarity index 93%
-rename from meta-networking/recipes-connectivity/netplan/netplan_0.101.bb
-rename to meta-networking/recipes-connectivity/netplan/netplan_0.102.bb
-index a3afcd2d5..81b58ab90 100644
---- a/meta-networking/recipes-connectivity/netplan/netplan_0.101.bb
-+++ b/meta-networking/recipes-connectivity/netplan/netplan_0.102.bb
-@@ -11,13 +11,11 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- S = "${WORKDIR}/git"
--SRCREV = "e445b87b9dff439ec564c245d030b03d61eb0f24"
--PV = "0.101+git${SRCPV}"
-+SRCREV = "62701436991e42606c4e9e8dbdcdc5067d64f69b"
-+PV = "0.102+git${SRCPV}"
- 
- SRC_URI = " \
-         git://github.com/CanonicalLtd/netplan.git \
--        file://0001-dbus-Remove-unused-variabes.patch \
--        file://0002-Makefile-Exclude-.h-files-from-target-rule.patch \
- "
- SRC_URI_append_libc-musl = " file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch"
- 
--- 
-2.25.1
+On Fri, Jun 4, 2021 at 11:26 AM Kai <kai.kang@windriver.com> wrote:
 
+> On 6/4/21 4:52 PM, Martin Jansa wrote:
+>
+> On Fri, Jun 4, 2021 at 3:44 AM kai <kai.kang@windriver.com> wrote:
+>
+>> From: Kai Kang <kai.kang@windriver.com>
+>>
+>> Set LAYERSERIES_COMPAT with 'honister' which align with oe-core.
+>>
+>>
+> I think it's bad practice to claim honister support this early in its
+> development cycle. It won't happen with well-maintained layers like
+> meta-oe, but if some less frequently updated layer sets the compatibility
+> with honister now and then doesn't get necessary updates to stay compatible
+> with honister in next 4 months, then whole purpose of LAYERSERIES_COMPAT
+> will get broken just by claiming the compatibility too soon (without even
+> knowing what final honister will contain).
+>
+> Changing it after release freeze in oe-core seems much better time to do
+> it.
+>
+> The same does apply on the meta-qt5 PR you've sent today
+> https://github.com/meta-qt5/meta-qt5/pull/416/commits
+> <https://urldefense.com/v3/__https://github.com/meta-qt5/meta-qt5/pull/416/commits__;!!AjveYdw8EvQ!Kd76LvM-JcgNBu85RB8Bu2U6MF7jgfI31fh0o1hXL0VPVFMaEEBpol_tM3o5gwAD5A$>
+>
+> Cheers,
+>
+> Got it. Thanks very much.
+>
+> I've comment on the meta-qt5 PR that too long strings in
+> LAYERSERIES_COMPAT will cause layer index complains:
+>
+> WARNING: YPCompatibleVersion.name: dunfell gatesgarth hardknott: length 28
+> exceeds maximum (25), truncating
+>
+> So what is policy to keep old codenames in LAYERSERIES_COMPAT? Is  that ok
+> to keep latest 2(hardknott and honister), please?
+>
+> Regards,
+>
+> --
+> Kai Kang
+> Wind River Linux
+>
+>
+
+--000000000000930ee405c428b9d5
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Then I believe layer index should be fixed to support long=
+er values, there are layers which are compatible with multiple releases and=
+ it works fine with bitbake/oe-core, layer index parsing shouldn&#39;t be m=
+ore strict than the mechanism which is using these variables.<br></div><br>=
+<div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Ju=
+n 4, 2021 at 11:26 AM Kai &lt;<a href=3D"mailto:kai.kang@windriver.com">kai=
+.kang@windriver.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quot=
+e" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204)=
+;padding-left:1ex">
+
+ =20
+  <div>
+    <div>On 6/4/21 4:52 PM, Martin Jansa wrote:<br>
+    </div>
+    <blockquote type=3D"cite">
+     =20
+      <div dir=3D"ltr">
+        <div dir=3D"ltr">On Fri, Jun 4, 2021 at 3:44 AM kai &lt;<a href=3D"=
+mailto:kai.kang@windriver.com" target=3D"_blank">kai.kang@windriver.com</a>=
+&gt;
+          wrote:<br>
+        </div>
+        <div class=3D"gmail_quote">
+          <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
+ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">From: Kai Kang =
+&lt;<a href=3D"mailto:kai.kang@windriver.com" target=3D"_blank">kai.kang@wi=
+ndriver.com</a>&gt;<br>
+            <br>
+            Set LAYERSERIES_COMPAT with &#39;honister&#39; which align with
+            oe-core.<br>
+            <br>
+          </blockquote>
+          <div><br>
+          </div>
+          <div>I think it&#39;s bad practice to claim honister support this
+            early in its development cycle. It won&#39;t happen with
+            well-maintained layers like meta-oe, but if some less
+            frequently updated layer sets the compatibility with
+            honister now and then doesn&#39;t get necessary updates to stay
+            compatible with honister in next 4 months, then whole
+            purpose of LAYERSERIES_COMPAT will get broken just by
+            claiming the compatibility too soon (without even knowing
+            what final honister will contain).</div>
+          <div><br>
+          </div>
+          <div>Changing it after release freeze in oe-core seems much
+            better time to do it.</div>
+          <div><br>
+          </div>
+          <div>The same does apply on the meta-qt5 PR you&#39;ve sent today=
+=C2=A0<a href=3D"https://urldefense.com/v3/__https://github.com/meta-qt5/me=
+ta-qt5/pull/416/commits__;!!AjveYdw8EvQ!Kd76LvM-JcgNBu85RB8Bu2U6MF7jgfI31fh=
+0o1hXL0VPVFMaEEBpol_tM3o5gwAD5A$" target=3D"_blank">https://github.com/meta=
+-qt5/meta-qt5/pull/416/commits</a></div>
+          <div><br>
+          </div>
+          <div>Cheers,</div>
+        </div>
+      </div>
+    </blockquote>
+    <p>Got it. Thanks very much.</p>
+    <p>I&#39;ve comment on the meta-qt5 PR that too long strings in
+      LAYERSERIES_COMPAT will cause layer index complains:</p>
+    <p>WARNING: YPCompatibleVersion.name: dunfell gatesgarth hardknott:
+      length 28 exceeds maximum (25), truncating</p>
+    <p>So what is policy to keep old codenames in LAYERSERIES_COMPAT?
+      Is=C2=A0 that ok to keep latest 2(hardknott and honister), please?</p=
+>
+    <p>Regards,<br>
+    </p>
+    <pre cols=3D"72">--=20
+Kai Kang
+Wind River Linux</pre>
+  </div>
+
+</blockquote></div>
+
+--000000000000930ee405c428b9d5--
