@@ -1,60 +1,148 @@
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web11.88.1623174130121090066
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
+ by mx.groups.io with SMTP id smtpd.web08.1930.1623182418703814409
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Jun 2021 10:42:10 -0700
+ Tue, 08 Jun 2021 13:00:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Vb7jk+SD;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id 22-20020a17090a0c16b0290164a5354ad0so14527878pjs.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jun 2021 10:42:10 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=bhkxNsOP;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.208.47, mailfrom: brgl@bgdev.pl)
+Received: by mail-ed1-f47.google.com with SMTP id f5so20933547eds.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jun 2021 13:00:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=zf8lZAsrhr7TzDF31MWd5vfhImTuJ/j/ImS2M0klX0s=;
-        b=Vb7jk+SDtVkRblBnhStVoFkLcX5gtyZCl14N7b4JqLR4NceYjxc+U2cw0Gwk3WfEra
-         RgOEaZBhD61OfupCRC+vvGQf7MxXGZB8KoOsUZF3Wtp4PvDb6AWQLd6QGHCsIA1+uv95
-         4P4+/FvWcJH8MRLqmpfS4xjj3lAis8miuSH9qaV0c7uamvnlnyk+8KoSMSf9gqtnavBi
-         vt8wjLPJ2KlPaMBPVTFxpil9A6BqR7Di8sSFBKB0GsWgR3+StNJYc7AyZ3U8+M0wNuYy
-         NGlHWlOHOlHcAj/g2Pov6TY46i7yA7oPRFfyAHDgWuRDqji7eVJGy9W4GTxBBMaf+bfB
-         xNBg==
+        bh=VDO86UYWtIofClTLo16jQaxl75M0uYI+ejDc1pqUMdQ=;
+        b=bhkxNsOPb2jSviS4iIZBPTmvAZ+2A4520dXJckmDFkjBX3d7rx4DLo0sM9LTn8Un8s
+         HMmTi9QPhz3AL/Ia66s/ndkAnGx+70iGK3fdyVHlXMI5gkmHmIwx6SAW3arZhw4gzjqc
+         /u9H6uqOV4BvC8/gFuEfB6l2S66UkmZAdRl8zXaJ2lQ6094dpAWBA+RrY95KzUDCmIxq
+         gXe2g3vkf3C9sLbffuqQCy0B/ywMq/SScF92Tjw8o7oF8nXDaJqq681T5O1zMyu8kzUy
+         WsKSxuqCqVXb6NdtuemEaJYf9u8Rfmju4UdfLUBX6O8sxbAZwWimrDJmWiLvJoah7rlx
+         iLbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=zf8lZAsrhr7TzDF31MWd5vfhImTuJ/j/ImS2M0klX0s=;
-        b=syhr/k3M903anKFenj+HSbDQVSZcOgrad6nPahxIMK0z2qGTLK+o1HNTSWDgtYGMYD
-         t6j9+2lljLJmT7WCBE9gsb5Nar7IDHbr4lvc101vHk1GJXowIEx1mQAkU58GieXB3U2E
-         V/BLF8fg75OoJcwo3Gik7ECY9TgCFJIZLr/Mai8RyRUiY/8n34gCRBSq7qHhBC2BTMgv
-         lEg1EHcT9gO5KpN6u6wd/n77VkG/+DRt93X55PiZuhlFXd4N9tHVh0P0SR+rw2rnOTBy
-         lnjIuU7ciIWcKRAggUh7BPnXZTfSvESY2kosYwt+B2nUGZwXJ09KDuxk6o3i0lkD7/LC
-         1+fw==
-X-Gm-Message-State: AOAM5316Jl9Vebk4DS8nNuA5tK1d6NB8wc7/NjkHzgVpVIuSy4KRohne
-	9IltKhC827In0fooC2pU1x4BvQvhGcIojSFpQiw=
-X-Google-Smtp-Source: ABdhPJy8cjN/dlWHFzolpqsh2lP/8TKGfgJkwmTPMq7o0ON3HdFOtB1uY0p181wEB7DuUj28MCv9XisP7S4Q5XJthBQ=
-X-Received: by 2002:a17:902:ed0c:b029:104:8397:3376 with SMTP id
- b12-20020a170902ed0cb029010483973376mr797678pld.60.1623174129465; Tue, 08 Jun
- 2021 10:42:09 -0700 (PDT)
+        bh=VDO86UYWtIofClTLo16jQaxl75M0uYI+ejDc1pqUMdQ=;
+        b=VmSzvLpFxbHF5JCcukUlts4tkqGcRHgZ8yYgoCHpqmwVdn5kXe7bQCNFnznpCJXy3j
+         zCxLJBYfWNwJaRqzc9iRzzdfB2qTe3LlfANeBgYzbgXJ3p41ZnaGKAxLcVRDm2TW2Ifh
+         2ehmaz2zNC2qf6TOaEHFMIf8PN9H9xIobvjLQS88LhPcQqD16o9Z++1q7xlQwTApTX9H
+         6GSwxy07Y9PaRotmZuRvuJNfL8H0+xpMP9iIRr48CFarvAC2dRQbNj5a6lW+D99VDBXx
+         Pjh4z3GSQHS4Q8Ev+ipMx7ucpkNfXlWaUO4JRivJlXGW6oaKgdjRywTaCi9V3APlJiPJ
+         iZjA==
+X-Gm-Message-State: AOAM5308NKphZaPZISt62uOb/4XaEcatITTFy6i6fHBKz1RxskNxxJWT
+	60bVZxs/iJmRKP9QplsfHvMHQGa8z+jhcRP0xJlC0w==
+X-Google-Smtp-Source: ABdhPJy7HPvMP/EiEh8VdU//L20gZPRosuTgswUULtWLcXRvZfPZ6jTyBp1zlTAgFr2bPItK1IERr5OrkgSrW7vLZx0=
+X-Received: by 2002:a05:6402:3082:: with SMTP id de2mr14948583edb.214.1623182417060;
+ Tue, 08 Jun 2021 13:00:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210608062212.2887426-1-schnitzeltony@gmail.com>
- <20210608062212.2887426-4-schnitzeltony@gmail.com> <CAMKF1srWuzL8WW31Nz0cj5JO=EGj106+8xkeh+dZVkTW6NiguA@mail.gmail.com>
-In-Reply-To: <CAMKF1srWuzL8WW31Nz0cj5JO=EGj106+8xkeh+dZVkTW6NiguA@mail.gmail.com>
-From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
-Date: Tue, 8 Jun 2021 19:41:56 +0200
-Message-ID: <CALbNGRREy5qbGSHC_m95j9b9jUkYFpnmutjtj10E5yktB1CFRQ@mail.gmail.com>
-Subject: Re: [oe] [PATCH 4/4] gthumb: initial add 3.10.3
+References: <20210602141501.6174-1-brgl@bgdev.pl> <20210602141501.6174-9-brgl@bgdev.pl>
+ <CAMKF1spd2yzEBiStsv-+sqaCMe7HG-6iUKXcKkc+4MfZ5waG7Q@mail.gmail.com>
+ <CAMRc=McX9H6GxvM9ejxUs4Eet6cSXxf63Ln0CkHO27M6iwRquw@mail.gmail.com>
+ <CAMKF1spmuj6ujbKF5JVWeixGmGtiY_zvjE32TVF79+3MKeTpxQ@mail.gmail.com>
+ <CAMRc=MddYH52i7LrbJ7P6_UyXyQdB__vf6fEsrBAw2Am5d9gZg@mail.gmail.com> <CAMKF1srz76pasLrCu93k3zuqLUJFThuFqgqWKcVg0jLXEMTkSg@mail.gmail.com>
+In-Reply-To: <CAMKF1srz76pasLrCu93k3zuqLUJFThuFqgqWKcVg0jLXEMTkSg@mail.gmail.com>
+From: "Bartosz Golaszewski" <brgl@bgdev.pl>
+Date: Tue, 8 Jun 2021 22:00:06 +0200
+Message-ID: <CAMRc=McH+7DZUppWK-TCMBhQk9KZ1Ojnd4t3VwZHdo9ogu0vng@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH 8/9] libgpiod: ptest: warn if the gpio-mockup kernel module is not selected
 To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Cc: Armin Kuster <akuster808@gmail.com>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Jun 8, 2021 at 7:20 PM Khem Raj <raj.khem@gmail.com> wrote:
+On Tue, Jun 8, 2021 at 2:31 AM Khem Raj <raj.khem@gmail.com> wrote:
 >
-> seeing this errors
+> On Mon, Jun 7, 2021 at 8:54 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+> >
+> > On Mon, Jun 7, 2021 at 5:14 PM Khem Raj <raj.khem@gmail.com> wrote:
+> > >
+> > >
+> > >
+> > > On Mon, Jun 7, 2021 at 1:55 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+> > >>
+> > >> On Sun, Jun 6, 2021 at 12:17 AM Khem Raj <raj.khem@gmail.com> wrote:
+> > >> >
+> > >> > On Wed, Jun 2, 2021 at 7:15 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+> > >> > >
+> > >> > > libgpiod test-suites work with the gpio-mockup kernel module. When using
+> > >> > > linux-yocto, it's enabled using the gpio/mockup.scc kernel feature. Check
+> > >> > > if this feature is present in KERNEL_FEATURE and warn if not.
+> > >> > >
+> > >> > > Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
+> > >> > > ---
+> > >> > >  meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb | 7 +++++++
+> > >> > >  1 file changed, 7 insertions(+)
+> > >> > >
+> > >> > > diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
+> > >> > > index 874453fbd..febf625a6 100644
+> > >> > > --- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
+> > >> > > +++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
+> > >> > > @@ -52,6 +52,13 @@ RRECOMMENDS_${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'python3', '${PN}-py
+> > >> > >  PACKAGECONFIG_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'tests', '', d)}"
+> > >> > >
+> > >> > >  do_install_ptest() {
+> > >> > > +    if [ "${PREFERRED_PROVIDER_virtual/kernel}" = "linux-yocto" ] && \
+> > >> > > +       ${@bb.utils.contains('KERNEL_FEATURES', 'features/gpio/mockup.scc', 'false', 'true',d)}; then
+> > >> > > +        bbwarn "libgpiod test-suites need the gpio-mockup
+> > >> > > +module and will not work without it. Consider adding
+> > >> > > +'features/gpio/mockup.scc' to KERNEL_FEATURES"
+> > >> > > +    fi
+> > >> > > +
+> > >> >
+> > >> > perhaps turn this into a bbnote something like what libbpf is doing see
+> > >> > http://cgit.openembedded.org/meta-openembedded/tree/meta-oe/recipes-kernel/libbpf/libbpf_0.3.bb?h=master
+> > >> >
+> > >>
+> > >> I really think that a warning is in order here. The ptests won't work
+> > >> without this module. At the same time we can't really skip the package
+> > >> altogether because the build may be using a different kernel recipe
+> > >> with its own defconfig - this is why we first check if we're using
+> > >> linux-yocto.
+> > >
+> > >
+> > > It should check for module being built in kernel irrespective of Linux yocto that is right but we perhaps need a logic to consider the case where I might have a kernel without this option and distro is using ptest feature
+> >
+> > No, we should not check for the module if we're not using linux-yocto
+> > because in this case we most likely won't be using yocto-linux-cache.
+> >
+> > For the second part - a warning doesn't really stop the build - do you
+> > really think it's too much? I mean, I can change it into a bbnote but
+> > I don't see why.
 >
-> https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1314
+> I don't like warnings they mean same as errors in some ways, So either
+> have linux-yocto enable this module or turn it into a note
+> see AB https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1309
+> it should be green :)
+>
 
-If I interpret error correctly, gthumb needs same required features as colord.
+So I went on to add it to OE-core and noticed this:
 
-Will send a follow up in next series
+4e03f041396121f6143fd81bf5e429015146bfdc
+Author: Sakib Sajal <sakib.sajal@windriver.com>
+Date:   Wed Jan 27 13:03:32 2021 -0500
 
-Andreas
+    linux-yocto*: add features/gpio/mockup.scc to KERNEL_FEATURES
+
+    add features/gpio/mockup.scc to KERNEL_FEATURES when ptest
+    is enabled as it is required for testing libgpiod.
+
+    (From OE-Core rev: 906cde06bee319e788c76abb8f8295ed9921ccb1)
+
+    Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
+    Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+
+So I wonder - why do I see my warning if I don't add gpio-mockup to
+kernel features myself? A quick check shows this:
+
+$ bitbake -e core-image-minimal | grep ^DISTRO_FEATURES=
+DISTRO_FEATURES="acl alsa argp bluetooth debuginfod ext2 ipv4 ipv6
+largefile pcmcia usbgadget usbhost wifi xattr nfs zeroconf pci 3g nfc
+x11 vfat seccomp largefile opengl ptest multiarch wayland vulkan
+systemd pam pulseaudio gobject-introspection-data ldconfig"
+$ bitbake -e core-image-minimal | grep ^KERNEL_FEATURES=
+KERNEL_FEATURES=""
+
+I don't have the time to debug this today but it looks like a bug -
+the feature should actually be pulled in automatically.
+
+Bart
