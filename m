@@ -1,151 +1,154 @@
-Received: from IND01-BO1-obe.outbound.protection.outlook.com (IND01-BO1-obe.outbound.protection.outlook.com [40.107.139.43])
- by mx.groups.io with SMTP id smtpd.web10.11268.1623153483736217730
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web12.12437.1623160260506030805
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Jun 2021 04:58:04 -0700
+ Tue, 08 Jun 2021 06:51:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@kpit.com header.s=selector1 header.b=OuYIXBDU;
- spf=pass (domain: kpit.com, ip: 40.107.139.43, mailfrom: akash.hadke@kpit.com)
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=DhJFf1O2;
+ spf=pass (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=179390addc=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id 158Dliki001982
+	for <openembedded-devel@lists.openembedded.org>; Tue, 8 Jun 2021 13:50:59 GMT
+Received: from nam11-bn8-obe.outbound.protection.outlook.com (mail-bn8nam11lp2174.outbound.protection.outlook.com [104.47.58.174])
+	by mx0a-0064b401.pphosted.com with ESMTP id 3929drg0m2-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jun 2021 13:50:59 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=h6uutL8I+vp9H32IlLvKF3Z2vrvN5cp49v9uxen3m86WNTYzT/U5v5oc7PJp+6ROOvkwcEI0gS3gxycjrKWD2v5S38ppwcN8ot9vK0CpSodIquiyoyysP06W0nlCiJt3491MpKowlm7Eqp84k3ZSy1/0sB0qA7Q08oF/cXqA4wwynlo02qMqIe3TQYbXzP/dtOhSvnbRKq1ppkLF0XIOH6GEc6JleQ35eFSHjI/89+5fRORNX45KeSMH/a5Lp2l4DCZm2iIxgAyeNXmR0ILAzUuK9LTPx3qMoIzPMY1Ntm2VS/Vj4/rcjWf+KDV0IhKfzC+TbPchKAdJMCT+TcmFTg==
+ b=U3wSHqeXcR/VWKg50/7Jeknm3pOtbXzspBvs1u6r81XAKUF1DBMQs/Z1Su896mQ2WtVUQKdAcyWlw2GpMjEYjrdSRRKaYqH3iPH0FVTocgQvW2cPve9Kx8FBui5UFl7SxfEPpk9Es0PwFTY1dS8PBxf9k3QFkSQDUl6aIb8vrEP8/j8/nuR0j1IUOaNHnKieEG4uzKWYi8Xj87oAMp8TcCnI1WJmhUlXcODdp74hugQPpYGC9L0aUHTZ/vUWfIjsZ6TPlbifoDb+gk8gtdkHYzHxnPY050NkWoSy8i5mBSKYTQPdb5EREJG5HEGe7OEnnP8TaCtSDAV7vBj6+zG8hA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jgxKWUWmTrlHzfn9NYQARdPOUsxeT4BOogZWsiM15LQ=;
- b=i78bWjFdpggnlceWxtwRvglBbCU+KLF5OqX6sXVEdLhqnvljBcPw+KJjrt6PWaQzJhXvFRm4rQuEMf2NDPYny0oeyfpKy5wvmsJhHf2/uyod+nDUxjT/rgPHSTw2y7xs6U+dU+O7wuNIZyz8oweDfIwnLPPxBljkkGEfpb94e1iw6OuEG1PX8XWA7G1wtUM0LNAZvGzAh0xm7asgXc9xMgfy7x/AJdKl9QvnndHAfSWjFzaVOwZuT63ezcwXz3FNGNLA+9ekiIv13VcAH/iwdCzA57asczzkrYeL4i4ei/JEu9c9pCyb36BsAvF04RKi1BZlfofCsc76x2jVtNjbnA==
+ bh=5PNziHBxY0ESIy+JqQHfVpzQ9rSHyI+vD4X4o1YhzOY=;
+ b=oJ/WcrpvhH/DMgRZ0awTiI9+gi3F5kDtk3TA6766Xg3Lg5OvxTYy3yUuoSboriMGTBIKhE9ZG34uXuBziLHwTGed/gvJp531PJC/q7Y8W7t1EffwyfukMVsdn/FYmCLSu36G8d+cJM+E5fRfdn9kknaf0m+FgUIf0g0ZHjlQDw06LTV5rY2PckPGlcPtCtrCYLDeEyqRHLvB7/tB9qUkIxDEMkL7VSRrP804MXA+lr9HjgvFKZ9m7BuvkG/VBs6VLUOg1fMaNgkS2+qA52Ynim8Cx9F46QxkHWZq5gH92GpOW1dVT/qi7EcTyqsE/QF281FjHyAaM6lvLZQuWYIe+Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=kpit.com; dmarc=pass action=none header.from=kpit.com;
- dkim=pass header.d=kpit.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1;
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jgxKWUWmTrlHzfn9NYQARdPOUsxeT4BOogZWsiM15LQ=;
- b=OuYIXBDU52e7OMT6HIEPgB+xIacoYNCyxZE6ENIVVrnLrKXIqFnZK1snsjWgBsSC24d8pGSkaHs/aGU3FipBvjswsISn9EYTSPDMQVFaUg9ZIqP9OKZLsqspalszqfoJ4eBho6x461Vjgls8vUrxx6J0E/tzixxjyz9t/VSpECY=
+ bh=5PNziHBxY0ESIy+JqQHfVpzQ9rSHyI+vD4X4o1YhzOY=;
+ b=DhJFf1O2K83ahpiGqnqXriVuJqap13ZlWPocNY2zq6UzJA/p6Mulq368/gK4p8wjtg72NmMDrKl/4bfXpbFpDfDMROIa4bNHgS9KUQsGpHdihyIxnSCTbliEO0S8uDniS2uyj77JO8Hi2Ld3rX29DGhmyJLQtbhTgJRPKA8vXIs=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=kpit.com;
-Received: from PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:a::14)
- by PN1PR0101MB1615.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c00:19::20) with
+ header.from=windriver.com;
+Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
+ by MW3PR11MB4762.namprd11.prod.outlook.com (2603:10b6:303:5d::21) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4195.23; Tue, 8 Jun
- 2021 11:57:57 +0000
-Received: from PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::c962:e30e:1f2:44e7]) by PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::c962:e30e:1f2:44e7%7]) with mapi id 15.20.4195.030; Tue, 8 Jun 2021
- 11:57:57 +0000
-From: "akash hadke" <akash.hadke@kpit.com>
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4195.24; Tue, 8 Jun
+ 2021 13:50:56 +0000
+Received: from CO1PR11MB4867.namprd11.prod.outlook.com
+ ([fe80::55fe:763e:6961:7bbf]) by CO1PR11MB4867.namprd11.prod.outlook.com
+ ([fe80::55fe:763e:6961:7bbf%4]) with mapi id 15.20.4195.030; Tue, 8 Jun 2021
+ 13:50:56 +0000
+From: "Yi Zhao" <yi.zhao@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-CC: nisha.parrakat@kpit.com,
-	harpritkaur.bhandari@kpit.com,
-	Khem Raj <raj.khem@gmail.com>,
-	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Subject: [meta-gnome][dunfell][PATCH] sysprof: Enable sysprofd/libsysprof only when polkit in DISTRO_FEATURES
-Date: Tue,  8 Jun 2021 17:27:44 +0530
-Message-ID: <1623153464-18648-1-git-send-email-akash.hadke@kpit.com>
-X-Mailer: git-send-email 2.7.4
-X-Originating-IP: [103.110.167.10]
-X-ClientProxiedBy: PN2PR01CA0146.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c01:6::31) To PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c01:a::14)
-Return-Path: akash.hadke@kpit.com
+Subject: [meta-networking][PATCH 1/2] samba: disable check fcntl RW_HINTS when configure
+Date: Tue,  8 Jun 2021 21:50:43 +0800
+Message-Id: <20210608135044.42608-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.25.1
+X-Originating-IP: [60.247.85.82]
+X-ClientProxiedBy: HK2PR04CA0086.apcprd04.prod.outlook.com
+ (2603:1096:202:15::30) To CO1PR11MB4867.namprd11.prod.outlook.com
+ (2603:10b6:303:9a::13)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from L-12026.iballbatonwifi.com (103.110.167.10) by PN2PR01CA0146.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:6::31) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.20.4195.15 via Frontend Transport; Tue, 8 Jun 2021 11:57:57 +0000
+Received: from pek-yzhao1-d1.wrs.com (60.247.85.82) by HK2PR04CA0086.apcprd04.prod.outlook.com (2603:1096:202:15::30) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4219.20 via Frontend Transport; Tue, 8 Jun 2021 13:50:55 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 5cf12f94-bdc8-4932-7623-08d92a74a807
-X-MS-TrafficTypeDiagnostic: PN1PR0101MB1615:
-X-MS-Exchange-Transport-Forked: True
+X-MS-Office365-Filtering-Correlation-Id: 15a0cb4d-027d-4bbe-c6f5-08d92a847091
+X-MS-TrafficTypeDiagnostic: MW3PR11MB4762:
 X-Microsoft-Antispam-PRVS: 
-	<PN1PR0101MB16152199D73000514EA917BD8E379@PN1PR0101MB1615.INDPRD01.PROD.OUTLOOK.COM>
-X-MS-Oob-TLC-OOBClassifiers: OLM:6430;
+	<MW3PR11MB47627FB2A38F99C706784C92F9379@MW3PR11MB4762.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2201;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	jYPQRA7VDjrC4RmMeNNVjycF8oXFzAB54BKMvRKzUqwxjxX5YTi/mrRlHRig+774P+haQrJmt1rmuIfn6BqwwG1GzfiM6R+G6AA+uaziloR9yCuSOvExqOXMvWRdF4l+A7Mreq3xDgmaw2BNrRnaXRqe2kmExEEvbQ5wqhZW/cpG9A/9CtHh+4kIkxzu6wnzLwY8IJMWNWRID50cRMhw5SXkLUa/7JionA7ychWjELcaDjlSrcst5mFxTMZpYNcIJ51226OiOCY5EdLo6ejqHczwkZjcexgR1PQZ31q4f0QHT9p8xjanI9pNa4ESuL5dH+9mgI0FE2zfZy+JPPH90B22WLAT68TgL1fIaOROHlfrJofBUEwHCn71nWjl9QqN9HYQMXu+egogCNxFbp2Ck7yURpya4xFklbnyR6HaCxGttYaYXCXazSAB/Ilx1s4xLKrxd9WoyE+9rq2u6ErltQL5kMnP35sjlXEFgTvI3URRmZtSmMzQm9vejU8QibAG5Blv+mMs/IGnSu5LzpV0X0rsGeCurUzvoRmg+gRZaY3K2fyPHDUyusVQhPW5nBHHRrmFkVTTpLe2AdOPssQKPOViSp6DB7k1wcMNp8fWWs2wr8XKCgGEK6G8elfKb2CNa8Frwndb5wRXrIhD6SqowU5348dLuxUhHhMeerCLvms=
+	J10aygIwelqPARIQwWcPZQ28SCKUBOm7ZBoILA+atp4Lo1s1XF7PVc6gpWLZ9IHyzg18/D9H1USU2UQ6nXa+rtNc1m//swXohcdABEPvdeaGr5yaLIh1qB2840/JXCem30MDe4VjYwGpJDdIZIW1SJL14NbS7HzFZ/8wJpyNxwiQYZbIPvFi/ercDPDcNR69LDWmaZDwF4TPKerQiCmbUdtrVNmG+q/BmyBUKfR5NQ4XXrO2/eU4kQFxK4ldLGgzpgq4Tj7hveapD+v0AmOLSPxF+G31fV30ei3TthqGcm9QrRQG91LnVN/MXNy8cfdNcoTl7eQT73VcM4QSg/gulMqY735xZ616JnR/CFXfYPe6PbM+UO0LlqS7YCwz9gzubnJKiWNKCINKat0MnFDkVVg0lYPA/AhqqKMEekoizzM4O6asx6EczKEDyQ2C0+NxkfP+ooFQSvae1M6pE4Y6WuEH3YhMDc/kBeJrvtEqr0eW3poSDFGZC7434Wk+k4xaLgn0pUQd59P/1S/z78H1xpNo4oTT+shJrx6eT/PQwaJTSHAqR/OjAmW8QfsA4J6r6XPLam0CNQ33MuxKvQP+dD3iuFNZdqfDPWyMdmZq/xspDn4J8z9kwNA6aN1pB/xx3u9psfGptL7fYxaHn7yAmw==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(366004)(26005)(6486002)(4326008)(6916009)(38100700002)(38350700002)(186003)(36756003)(2906002)(16526019)(6512007)(6506007)(83380400001)(54906003)(956004)(5660300002)(66476007)(66946007)(66574015)(498600001)(8936002)(86362001)(8676002)(2616005)(52116002)(66556008)(6666004);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?4MbKg0baALJDCHndlHdBAk+awikTlAQE/QlaMWyyG/JHxjgilY3+ndeEeW0Y?=
- =?us-ascii?Q?+R7mLWfTM7lyOyas/GevtJ/7qzbhApC+yslA+4JGVRllU64qvVJp7edqsVr5?=
- =?us-ascii?Q?XyLPv7Cq1BXohk03P/nZTdvwre/eL92od/+/Ve5Of3/IQOExu/aBdqdeFTt+?=
- =?us-ascii?Q?FZU/LKJ+LkWzC4GmuH4hfrnm+ojHQQqsPYHTNHyWwa5bxu74V7QUOdaSF82J?=
- =?us-ascii?Q?MAfDrrgQ7Gyup71MBU06rDSmqQRSbM0NS5M+JlShA3/8uGlTXUZKCnYjfROD?=
- =?us-ascii?Q?J+tAVplzp9Q3xQZvEQok5R1F18ZS2S2YGsJTWNQx3cMUsyM+mS2R8nWPf93Q?=
- =?us-ascii?Q?i6HgzwQVujEfi/qfbMFyeyQj31bqVvVlqn5fhs6nXbv/ilO6E//p/eO8wuFw?=
- =?us-ascii?Q?i/kGhRgPp6Stfh6SMwztCKhqvuNTeMcpQr5HHJ5wCWf8wZt2JR8ct1CycdK1?=
- =?us-ascii?Q?lxAA7fUSZiv1OC2e8rtS9OHTxVxKeSbDdF8RQBCUanwSLBT9CV5kzlpddzur?=
- =?us-ascii?Q?cmYBBwVZyVuaKJWJCBy1PWSFbY7+FzK/2STgTN/twhdavJWYsSaTDnmIYdqI?=
- =?us-ascii?Q?ZEJodgqcq82EFd6bKLYhzuFhTBBl3Ga39Zh4wyqjIXG5aaRQkLrS31PxKTPS?=
- =?us-ascii?Q?ulgM96yAEGg4g/Wmqa+U+gujtR75kKzVkFkEkRM3bXx2l/nkI43pzHutfF4O?=
- =?us-ascii?Q?MRPfK6U4zjiBZxEY0G2BH+pZ7/nl5h7204agCbmmHcE0RYvzLK7SdWDzjzp4?=
- =?us-ascii?Q?P57E4x7kngsf2XvmuiOAD1mMYtrgYGN+F7H2uT05Si6k9dzBhTiSS1UjGzAB?=
- =?us-ascii?Q?YfYv31MAYOzysNXf3bHG3Ft9/F5m7p9RX1rokIP/x15S8u+YPw4kZjt1i47I?=
- =?us-ascii?Q?JcHktSiNQRUut4tpzZSDheZXM/pg9BqkqCHr7QsXoLB0MXFb0vMHD8ix0vVx?=
- =?us-ascii?Q?la8TlKFoesgrv4JkPsPSpCKH3s6sw4csgN6zbdPjetGE5v2umfKygQsCiBAi?=
- =?us-ascii?Q?WgL/SWSmEKaxceLZ69J+Ysr5vM+s+rNAJRsh5UNj/S6Te9DOarJg6nqr6ql4?=
- =?us-ascii?Q?OHB1mWqB7+yaJO5PvYtygSfwq0CxYpCoPjxP09K0syNNJBQX0sOUb2EvP6Nb?=
- =?us-ascii?Q?y9CBHaafxIoND+NUXwp1CINpMgRBz+DaHENo8gioA4caaMZrosTsdzVHQMI8?=
- =?us-ascii?Q?o+bLFePksKLoWOfpLnf3cttBkBBlgTOsCsf7jhLi98Bb9qGDNyg9H0d3rhcV?=
- =?us-ascii?Q?nYGxKN2J09k6ZBHNfzlcK5RXVpIeywYX6UrFolHiNAPBxHunmLMtF/Gk7xNp?=
- =?us-ascii?Q?c3pk6RQgfvghrqP6Br4CHU4t?=
-X-OriginatorOrg: kpit.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5cf12f94-bdc8-4932-7623-08d92a74a807
-X-MS-Exchange-CrossTenant-AuthSource: PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(396003)(136003)(39840400004)(366004)(376002)(186003)(8676002)(2616005)(16526019)(26005)(956004)(44832011)(8936002)(66476007)(66556008)(316002)(2906002)(66946007)(6506007)(36756003)(52116002)(6666004)(478600001)(38100700002)(38350700002)(6916009)(5660300002)(86362001)(6486002)(83380400001)(6512007)(1076003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?1qyG9WPg2Ev93PjPTxOsQolM90C4snxpLeg3GBPa3CJUKH1QH/XyDRsja/k3?=
+ =?us-ascii?Q?IrLEoIkBhhWUwGPKKy67idGcc86JWCv1Cf5oiw/sp4cpPJxvAQsidV/AcZSk?=
+ =?us-ascii?Q?Y1nS3HEWuePo30iHP+SXkMPvnkmYXfA3n0w/47Cq80N8wBLnvvV2Sx7HbdYz?=
+ =?us-ascii?Q?CSVX5BYGoFpxCm8uNmIIeKbulcXzRyRd57s+aJyg+GLrofLvZtAQTs5/69uj?=
+ =?us-ascii?Q?7HkEQfNfjsMbSXvvVUwoKW864YJMm4xCRgNDfYd4YgmV+Anw4+XcJS9JEaIT?=
+ =?us-ascii?Q?XV2KP+haSPCOXeOihqmhymfrP/20b3F+LfAnnQaMu7dyQmgbInX7V4DwZvaw?=
+ =?us-ascii?Q?vAi5TISkd8JqwSorY/ecZ23gpgNKI+EmZxNrpD18ar6sLygoJ+LjqkiXUKIx?=
+ =?us-ascii?Q?WoS+tdw01oRspnjSEBa2QiZ/69Ggd8CKtkdOmEqhLXr095UF4oKlETGdpfrP?=
+ =?us-ascii?Q?YkOslN+nt1EC6HHZicxWG1z3gem3DjhUMGJiqbtLh5OPigXcY0insRsehGLc?=
+ =?us-ascii?Q?Rwo7Wi8wnI/eyboJV9JyAU4eWcxPDAuADjetk1ONs2z3LhrPQ+NcVQZ3ygRD?=
+ =?us-ascii?Q?MQ4z83QqfJJB8IaebzYKpT/a04UE1JxZd4z1G/PfJHDKHyCV+RBTXlgdivp0?=
+ =?us-ascii?Q?hqf0ib3I25nsnZN2JzmVmRa3qRzEOqesWRZN3VkZuJwshoOp0I7ILeyswNBs?=
+ =?us-ascii?Q?df7azA3fhLYXZLT4oI4COr7pa7NgFr0pdG2F90C2wmmFpymdExjwyK8DrVsg?=
+ =?us-ascii?Q?w/c2eSbyAOH1Z6Ws5Z7cwfOzn8peYCb5+hbyNQ8kBOEv/dRjxyccOT6pvZ5e?=
+ =?us-ascii?Q?zUhQDrxouRxV1oKsJUau+fdaBrFcgVjaV8NoSlxEcgWzy2+qh1Vnzz4yglfZ?=
+ =?us-ascii?Q?XKbFN5CEJEk1du/o4/IL46S/9/orPgvtM++/AoaDmHeanVZKIkU86IlreXxZ?=
+ =?us-ascii?Q?5t9CENrmtJvXlRICnV1OqpvH0FjqSvK6/LjWU+BuIx1RrTDBKW7EpzzwQv7S?=
+ =?us-ascii?Q?7oEbiQ47njgrFCYYdbroVy4C7bXuq5AF120brTqghwezu1q4vuyEv1uHB3Eu?=
+ =?us-ascii?Q?cCktQBAdQM1kAQh5yfb1JR1wHdgqqkCzgtX0XA7zsthiqgecRpzNR7c3SrQi?=
+ =?us-ascii?Q?dOvWP/hV3AWJoB5XMTCs5eLX/ui/B+qiBWBdjsXtq8hQ3HNkL+Rv7/rlIoo2?=
+ =?us-ascii?Q?G0JbIbq86/+MJmNMpQZI31qHZh9lvK8LP5v6qLvM90qeFfoNnS0yu2D5P3D4?=
+ =?us-ascii?Q?ybtKSiUUYiSUy292rwjk7DFTFWLCv1CIzwTVl991XVZ2abzLlIeJmR+CpGTH?=
+ =?us-ascii?Q?Vm1cAsLkeHa1e+GzMfI6tQ+B?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 15a0cb4d-027d-4bbe-c6f5-08d92a847091
+X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2021 11:57:57.5348
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2021 13:50:56.4318
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3539451e-b46e-4a26-a242-ff61502855c7
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /TZvpLrXoJjx5n3Nk6TNSrbBXc9wRIp4nfFyCI1A91BBvkAjL0EAM1pUoEUBSUKhdIP3of1GiH9b7FxhAG2WZQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN1PR0101MB1615
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-CrossTenant-UserPrincipalName: 1ZuM+ib4GgQmd98Hafhmmr00v9I3YMbgrKMFjNcJpvzZ/lke6wbCnVehW/9qzrTiGfvJT01Qqie+EUcI8d2PDw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR11MB4762
+X-Proofpoint-ORIG-GUID: SGDsuKFXOSjER0tUAcjj4wszycj7nFVt
+X-Proofpoint-GUID: SGDsuKFXOSjER0tUAcjj4wszycj7nFVt
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391,18.0.761
+ definitions=2021-06-08_09:2021-06-04,2021-06-08 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ suspectscore=0 bulkscore=0 adultscore=0 spamscore=0 clxscore=1015
+ phishscore=0 mlxscore=0 mlxlogscore=999 malwarescore=0 lowpriorityscore=0
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2104190000 definitions=main-2106080090
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-From: Khem Raj <raj.khem@gmail.com>
+This fails on cross-compilation for musl and clang.
 
-This change is cherry-picked from upstream/master.
+Fixes configure error:
+Checking whether fcntl supports setting/geting hints: UNKNOWN
 
-It fixes yocto-check-layer error:
-
-ERROR: Nothing PROVIDES 'polkit' (but /home/builder/src/base/meta-openembed=
-ded/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb DEPENDS on or other=
-wise requires it)
-polkit was skipped: missing required distro feature 'polkit' (not in DISTRO=
-_FEATURES)
-ERROR: Required build target 'meta-world-pkgdata' has no buildable provider=
-s.
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-Signed-off-by: akash hadke <akash.hadke@kpit.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ ... => 0009-source3-wscript-disable-check-fcntl-RW_HINTS.patch} | 0
+ meta-networking/recipes-connectivity/samba/samba_4.14.4.bb      | 2 +-
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-connectivity/samba/samba/{source3-wscript-disable-check-fcntl-RW_HINTS.patch => 0009-source3-wscript-disable-check-fcntl-RW_HINTS.patch} (100%)
 
-diff --git a/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb b/meta-gno=
-me/recipes-kernel/sysprof/sysprof_3.34.1.bb
-index ad69ab6..cee4ed4 100644
---- a/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb
-+++ b/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb
-@@ -16,7 +16,9 @@ SRC_URI +=3D "file://0001-sysprof-Define-NT_GNU_BUILD_ID-=
-if-undefined.patch \
-             file://0001-libsysprof-ui-Rename-environ-to-sys_environ.patch =
-\
-             "
-=20
--PACKAGECONFIG ?=3D "sysprofd libsysprof ${@bb.utils.contains_any('DISTRO_F=
-EATURES', '${GTK3DISTROFEATURES}', 'gtk', '', d)}"
-+PACKAGECONFIG ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'sys=
-profd', '', d)} \
-+                  ${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'libsy=
-sprof', '', d)} \
-+                  ${@bb.utils.contains_any('DISTRO_FEATURES', '${GTK3DISTR=
-OFEATURES}', 'gtk', '', d)}"
- PACKAGECONFIG[gtk] =3D "-Denable_gtk=3Dtrue,-Denable_gtk=3Dfalse,gtk+3 lib=
-dazzle"
- PACKAGECONFIG[sysprofd] =3D "-Dwith_sysprofd=3Dbundled,-Dwith_sysprofd=3Dn=
-one,polkit"
- PACKAGECONFIG[libsysprof] =3D "-Dlibsysprof=3Dtrue,-Dlibsysprof=3Dfalse,po=
-lkit"
---=20
-2.7.4
+diff --git a/meta-networking/recipes-connectivity/samba/samba/source3-wscript-disable-check-fcntl-RW_HINTS.patch b/meta-networking/recipes-connectivity/samba/samba/0009-source3-wscript-disable-check-fcntl-RW_HINTS.patch
+similarity index 100%
+rename from meta-networking/recipes-connectivity/samba/samba/source3-wscript-disable-check-fcntl-RW_HINTS.patch
+rename to meta-networking/recipes-connectivity/samba/samba/0009-source3-wscript-disable-check-fcntl-RW_HINTS.patch
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.14.4.bb b/meta-networking/recipes-connectivity/samba/samba_4.14.4.bb
+index 2e0bdceab..0e6f134c2 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.14.4.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.14.4.bb
+@@ -23,6 +23,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
+            file://0006-samba-defeat-iconv-test.patch \
+            file://0007-wscript_configure_system_gnutls-disable-check-gnutls.patch \
+            file://0008-source3-wscript-disable-check-fcntl-F_OWNER_EX.patch \
++           file://0009-source3-wscript-disable-check-fcntl-RW_HINTS.patch \
+            "
+ 
+ SRC_URI_append_libc-musl = " \
+@@ -31,7 +32,6 @@ SRC_URI_append_libc-musl = " \
+            file://samba-4.3.9-remove-getpwent_r.patch \
+            file://cmocka-uintptr_t.patch \
+            file://samba-fix-musl-lib-without-innetgr.patch \
+-           file://source3-wscript-disable-check-fcntl-RW_HINTS.patch \
+            "
+ 
+ SRC_URI[md5sum] = "171629ad42b4b303107e8b0fff942a1f"
+-- 
+2.25.1
 
