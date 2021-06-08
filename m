@@ -1,134 +1,134 @@
-Received: from IND01-BO1-obe.outbound.protection.outlook.com (IND01-BO1-obe.outbound.protection.outlook.com [40.107.139.54])
- by mx.groups.io with SMTP id smtpd.web09.8268.1623126574289624149
+Received: from IND01-BO1-obe.outbound.protection.outlook.com (IND01-BO1-obe.outbound.protection.outlook.com [40.107.139.40])
+ by mx.groups.io with SMTP id smtpd.web09.8284.1623126675386587760
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Jun 2021 21:29:34 -0700
+ Mon, 07 Jun 2021 21:31:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kpit.com header.s=selector1 header.b=Owked+S6;
- spf=pass (domain: kpit.com, ip: 40.107.139.54, mailfrom: akash.hadke@kpit.com)
+ dkim=pass header.i=@kpit.com header.s=selector1 header.b=kGcdq5uU;
+ spf=pass (domain: kpit.com, ip: 40.107.139.40, mailfrom: akash.hadke@kpit.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jl5rraXgFWVr3/+1JX2FhLuHXWck7M82RQF85UgUb1yvNA2/pDsnW1pqn++62Tzh2FAWLjjc5CXLEZD6Ibb8eJgxFc7BDFfDzvJPm35QE3HKVgbG3Gab/5ZM0qBvV+1uokIMDN8n81IZdbGHtMt++ILDAeQflcza0mTHsW0Pyzo7bC2lrd660jl2bnRFOKwyI3dWMZsiEnayLDTQ/SvIkyA/MYKKCRKZiCwQF/y9YlXHvOXIus9VJKwnuh1FyPI2HaQuh6BJcssX5IMXxwfa3VAeKP7a42htcHSdRs8Q2idatzEJRx/W8UWXyUYXtnNHGxRtpEs2ReKW+7I6g8uEDQ==
+ b=Y+8yV7QFsKZInsaOm9n8Nry/Cf8+dTMonaXc8oD8rhiIwpTrUOIT+R3J8MEUES2l2m7iNQjwAzGg0YjbGzL1kb2LXP7AfH0hS/OwoCFkmqU2ppdYhdgXG/S1P3fidHzmmdN1z7fEekh+0H3iLwJ9Ah7aQo2M4QrnWA+dnOst5UjfdQLRhHdWX0VNUC3GXL0DITabWVJHDOKSn96YdCrK3C+pu/v3wKDXigYMnBNhqTNUKwRVWfVDdNQ+UOcQVQyuNsahwG39QmKhs2zW8JXzj1U9muQ4yxEZ724awcquMWqA8+NLxGNQJogzrfotwp6AowFWz++01EX4yEDuucbN5w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bjNWxz1GiqUq3DfM5PFWiIlEEM1ZxR38lxZMM5KD2/4=;
- b=nls1M/Qbz5OxewMy7KvvQu2FjAwgydR19qDTadRhJC2cVNUrEkxtmPlTF0g0JZI2cfdRsgw7NWrErsvss4OpitFDEWjVXC8K/qrXoXgzeJxy/lpGHwOOyUuLKtsSxp0V3YNcMiQNYJDHLs1c1zvrmOs3vEnHElhJBbFoIHzr7srU/23IXoNJLkfBCs79dpxZOlBuhZrm5dDZiFyM768RPLmg7cLlKjkmMYrXKEDMaetlS4ylzCNP+KZ2oWWc78OnbQqVvAhTGYN8XODyshsqIKUM6JbY1o9S4p1xO+0DTBCE3eycSPlKWwoFqR/DjEtoUtGI9EUXGX0bSmxvssjZ2w==
+ bh=D8rTYnKxu+YgSZby4o3PPm+/9siIhkNfI/cca5kXbU8=;
+ b=NVQnXA0Augys2tldCYpzHV9hmqPRC+EXNRma2LrSY9+cTFQzpLNgFIeEIZe3H6LiHOpsbUQhL20YOFWO8eJpBY52A6PzEVpSYj3M8oXLw6riuOirVOvlA2zQyf2cfbqBjp/JKh2s+R27/PVPYjIo0dlhOTRTNe79qaWpE7nmgGUDl1poEenpDEjprEbticURTG5lPhsOnDyH2rl2lkVAk/s5TTFjH2/JX6bdRlu8kQPowMNpOX+eztQwnVs3/iJkUw6WPYP1EcUb77yH9mxn9RIVzxESBt2af6V+/LCcE+sJVE6xWSaNHZKSIPFoiDw5Qxkl5RTUNk6RgP4eB43YJg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=kpit.com; dmarc=pass action=none header.from=kpit.com;
  dkim=pass header.d=kpit.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bjNWxz1GiqUq3DfM5PFWiIlEEM1ZxR38lxZMM5KD2/4=;
- b=Owked+S6n0R/ad2vS5dn0uQNmjZUc9pZxopwvobLPp3wJpFQvKg7VbUJb1Lula2TQdtDR+V/CAjefAu0OdAP+gKeK7L/YMkMIG5gcSh3stvHVJs6904j99qIl8xE/3SIe8ubHVs34nYRnELGs+IVQjTMyfKx9HNJCTik0mLpkmQ=
+ bh=D8rTYnKxu+YgSZby4o3PPm+/9siIhkNfI/cca5kXbU8=;
+ b=kGcdq5uUaOlR900vD8Az/65KBfNNT3QFbm4q1QkBt8Kt2Zxmi9zyu6944lmRs8G/s2gnsOFxMgk9B6ZBiGLXdlhAR07EORuacQUO1Tp8g+1zRpwQKZtD3YNZii3ILKAx3HrDfNgHXiaklQNnT6/qmCLmUnD7iO3ecnztx+KqCps=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=kpit.com;
 Received: from PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:a::14)
- by PN2PR01MB4907.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:f::11) with
+ by PN2PR01MB4891.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:d::11) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4195.20; Tue, 8 Jun
- 2021 04:29:23 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4195.29; Tue, 8 Jun
+ 2021 04:31:04 +0000
 Received: from PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM
  ([fe80::c962:e30e:1f2:44e7]) by PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM
  ([fe80::c962:e30e:1f2:44e7%7]) with mapi id 15.20.4195.030; Tue, 8 Jun 2021
- 04:29:23 +0000
+ 04:31:04 +0000
 From: "akash hadke" <akash.hadke@kpit.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: nisha.parrakat@kpit.com,
 	harpritkaur.bhandari@kpit.com,
 	Mikko Rapeli <mikko.rapeli@bmw.de>
-Subject: [meta-gnome][dunfell][PATCH] sysprof: depend on polkit only if DISTRO_FEATURES has it
-Date: Tue,  8 Jun 2021 09:58:59 +0530
-Message-Id: <1623126539-9671-1-git-send-email-akash.hadke@kpit.com>
+Subject: [meta-gnome][dunfell][PATCH] tracker-miners: enable ffmpeg dependency only if its whitelisted
+Date: Tue,  8 Jun 2021 10:00:46 +0530
+Message-Id: <1623126646-9867-1-git-send-email-akash.hadke@kpit.com>
 X-Mailer: git-send-email 2.7.4
 X-Originating-IP: [2402:3a80:cb1:1876:861f:8f19:371b:f6bc]
-X-ClientProxiedBy: BM1PR01CA0137.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:b00:40::31) To PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM
+X-ClientProxiedBy: BM1PR0101CA0034.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:b00:1a::20) To PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM
  (2603:1096:c01:a::14)
 Return-Path: akash.hadke@kpit.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from localhost.localdomain (2402:3a80:cb1:1876:861f:8f19:371b:f6bc) by BM1PR01CA0137.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:40::31) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.20.4195.21 via Frontend Transport; Tue, 8 Jun 2021 04:29:22 +0000
+Received: from localhost.localdomain (2402:3a80:cb1:1876:861f:8f19:371b:f6bc) by BM1PR0101CA0034.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:1a::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.20.4195.21 via Frontend Transport; Tue, 8 Jun 2021 04:31:03 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 90cd041e-9247-4e54-5926-08d92a35fdbe
-X-MS-TrafficTypeDiagnostic: PN2PR01MB4907:
+X-MS-Office365-Filtering-Correlation-Id: d24b2efa-7c7c-4665-565f-08d92a3639eb
+X-MS-TrafficTypeDiagnostic: PN2PR01MB4891:
 X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<PN2PR01MB49077734A263F9E4EB41AB938E379@PN2PR01MB4907.INDPRD01.PROD.OUTLOOK.COM>
-X-MS-Oob-TLC-OOBClassifiers: OLM:5797;
+	<PN2PR01MB489162D902D38857EA3564378E379@PN2PR01MB4891.INDPRD01.PROD.OUTLOOK.COM>
+X-MS-Oob-TLC-OOBClassifiers: OLM:4303;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	Ke9pL3Jo5KP8UR+hPBgsgN9DGkvlaI5MJNlPba8PSLuFCLvdf1ZDeXrbDqYowlcm3goeMvb3Xt9HrOmbCmm1+CUpkfCV8Ae7W2hl2qll+VJ31BCJV7/4nkkGZT3k/4IKOLd8wcwJzjNV2ex0BvJ0wlyz79m6APoqaxS/qmjBicGRC5oi8qtmL3iA5+IVha6I1gFo4v8OjSWilq0VlmuH73TrTktHFMzE8GgmSNoHSJ0PZL0NWM6p0bsjACUJCMU6oc71q61HsqeP7A4a9A3uYdFJcUNlSaZH3gwqx+xOSxMv5QYO9/WhNc6J0TuZTjIwiBEYKZ+RiIJPLcUai52MBBrLIcBLZh/0SXIwTuhjl9WRKZfiO6brv4ipXZRYW/iXx6PmWDtvCbBTMyw5Z1XTro4ZxSZr2+l2JuGVTvIVYw3SvsI/8yAZso/1/Z13bRbmO+UcvMlfu6eNjepmOafstJIvuSi//0gYd80bt/0E12ITsyM66j9MecUK+FQXrFAcSMJqGO6BH8o9IiJMqfTZQ/zriNZodsuOii4yWTEz6HWFkwpRodWFwea4QAR7M+iDkw2gemBc8e7cmahYn0wXfDSLm1aWAOXjsRhiwV0cpEMAA9wUgU/G3yIlfxQMh0bB2pbOfa5o83Diibc29RGG14GBVaiIsW9LxGFfUMiUA7o=
+	rSETFaS9XKABlIYn7F1IOE3y0CkQw5DAH0RK1JFA6JU4rCGmLj+cO+Mrxn6qrbtWZYNqeS3O5op+ijYNNNHT+rGHTJfdsbhavtz/ydgg0S6hUtGF57SDliK78aiVi15uAN/O+tyBRKCYZW5TsP12UBqIMfXnrxuxcYTG6Xf4lvBuwuA9FWwDn6aEq2vaOgbGSBom0KpUpyy8q5+qTHZv5lm0ruZ6zTb4eUJEJonegw0UmvhcARE8vJ69sbGV4qILlNh1B+D3oJbrMjNGZJCnqXIdVSByOH7KiMODRL1THxaSF8P0GPXzFlriUtgiwBixq9mYG3nGXmUVzlUdI/U2Yp3aE/skhPBT1U4QPZyMMhxi3AujHmFMTqzJs6GlRuzg61tOWf3T9ag55lVKeYGF1+Fca+nlqvIqSGR+GGQl98O/zf93ZTZyqTN9yltRo21bf7ydUA/EYTSQwcQQ8XLtio+WbRl2/gJEIM6Ga92YnPVo3MNvWA1pzsSLXRLCjDOoRriD8vZR3GPnHlPWra55jC1/67elvqg33O+YpA+5EF4TuZFZrUaXhzxbBjVuxxvy3ceFmBiAMxZyLZMjqqnxoF2HphZONkj2cmKeOBd4ZhufWcsFj1F9kMugcDXma0j7jSPx6LMGBW8k1pfllqsQTSwe5X1W040nbNCMwQybbcw=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(396003)(366004)(39850400004)(136003)(376002)(346002)(66476007)(6916009)(2616005)(4326008)(8936002)(52116002)(316002)(6512007)(6506007)(66556008)(38100700002)(66946007)(36756003)(5660300002)(86362001)(83380400001)(8676002)(186003)(6666004)(2906002)(6486002)(478600001)(16526019)(69590400013);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(396003)(136003)(376002)(366004)(346002)(36756003)(6486002)(4326008)(52116002)(2616005)(6666004)(6916009)(186003)(6506007)(16526019)(6512007)(316002)(86362001)(2906002)(38100700002)(478600001)(8676002)(5660300002)(8936002)(83380400001)(66476007)(66946007)(66556008)(69590400013);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?PfjWJba/aigFL7WwRjZTcsZT19Fk8kXmKoLdWBGVYaf0bN8MnDcUFUijyqq7?=
- =?us-ascii?Q?LxZ9u/hCvcSXjJlBa3JB9CgIesGOZruCIfD49E9koK/O6LolaGD7ctVISZXI?=
- =?us-ascii?Q?mA4P0KBgz5HXr3rsPwObtSm5SSI0JvvtEBJTfPCBRH8/duxhV9goW7B6DvAk?=
- =?us-ascii?Q?FMjaK5971XQP/CS5BnpJ3/qga/pB4ca1Rcku3wnn7L7tdx4nvjn4OjRebSI9?=
- =?us-ascii?Q?6igxrlRQl6vIjorT8g+uH/qddk/s5hPBX/mO+fhOfgRc9zZT9IgtVRg76+bZ?=
- =?us-ascii?Q?UoI/uUhPYMt+rI91JvTMDbtghIadkh1NNSXLRRKWhoziZAuQr+R+AY7iYM9E?=
- =?us-ascii?Q?EV8GaR3/8OWu5SttuZIajCJHz1Pm93Htc2VW+NJg1Ek2DpQA46AOQU6nDRDM?=
- =?us-ascii?Q?ObqQXEmjCs0FRw3izK5PZJBM/a9/PF+ISWGPUY4rePACJLd/supIc0L2+O+Z?=
- =?us-ascii?Q?hb0kANPEWJ5BRJ2VZHDCMR1r0JugiHTDuz4l24hh1jqfo3O8gb3/SQZ2ijOD?=
- =?us-ascii?Q?tz3DalBZkBT1zjQjkdkCaNEFO7C6Jjg+BzuNQ7caE1w4+3cbV5s+M1Sk+MX2?=
- =?us-ascii?Q?Fau2K6WQNWJyvJ4n7n1LoI6QCd312oolr2jkZ3BdPC/oiuoiFCcHXifdpl3C?=
- =?us-ascii?Q?bOCtygvu1y0Xa4c7YD69grfLknY7Xql7u8grISs7UFdyB9qMQ2MWeka3pjgc?=
- =?us-ascii?Q?M1o9tOKzGUWkjrTCbbpkHXA5uL5kEBSdt4YZyicb+Vb0ONdrhGFjh2VvesGu?=
- =?us-ascii?Q?3YrtMrzJOj1q2Fj7hHmX0Z3WPK9jsMbf8eEr9JUjKDjLX0fUKnj3E/sc+ry+?=
- =?us-ascii?Q?2l3Et8mglL3qI0/lP1Y+Th7NzO+AwDjgZzXvPxgO7F0AMlyYJ6Peko8H0lhf?=
- =?us-ascii?Q?Amda/Dprg6mqavnoeSD/yshkcRlAvNMMiGi/DqgAAF+5DpkbQWOFmKMdK7sF?=
- =?us-ascii?Q?Jf/Pmr/RUtf8RgdlkrwkjVw2WoyPPwlXvtc56m9iBOhFcevIsX2hUcKik0BL?=
- =?us-ascii?Q?1aFldNh3e2q6d7NTi1qwR0/5eNzAg5UWPEmCW/eI2vI0ozb908npiEv3trdC?=
- =?us-ascii?Q?2bTJcCPWZIw2XkdAdoWdZ/ktsLFfrHvQrmUj8eF9Mg8HsnQkVicHdEnw8IiD?=
- =?us-ascii?Q?g7wj294TXGoGNK2fcLECezVGYzVuDFDl7sDx9cIN4TfvJQEoIM4aI40Y1Pim?=
- =?us-ascii?Q?SC74H0ysZRUFnunphyuJXGaXwxoWL6009l9irSs0KvfAK06f8pFX3qgAcfzT?=
- =?us-ascii?Q?9sKSJKAbl48ZnauEkzIncO4Q31IAViYR8sInN24HJOVtPEqI/jW8GWFlXR7w?=
- =?us-ascii?Q?EbJfho+K688wjX01OL/o0+juq7oNfPZE6FOLycTpG+3UGivhNrvFaLmTHkM5?=
- =?us-ascii?Q?tPaEizKblCrCbS8qsQ6Nzxuttber?=
+	=?us-ascii?Q?yxpJ5xqDYc7qLMBKcjk34aNdtfklEhTrppPVM4t6ac91gE+5fhuI/NN+lG05?=
+ =?us-ascii?Q?LSGYNbKfvhizxhzV0gGI8/fNNAcakPuxmhVWm6J3yjaRD/6K4BsjBz/kmTcF?=
+ =?us-ascii?Q?toRQX/jFL1BeD46ch7znUnKfdB2o1UrjsABjPFC4wDO19YCmAn6YrIearYzq?=
+ =?us-ascii?Q?Ce6dUeutsuS1cMu+1zwtG8TeKDY5MGF4+1OUKsxlXG3vFBeQcys3wf2sUiDP?=
+ =?us-ascii?Q?Gmz4fmUFeruR898aBMaBDzLwTyEgJ3mo0s1gyMcMqipBUvHJVcktjnGcllPR?=
+ =?us-ascii?Q?sn1+kAnezeidKXqt52sMPaKlmrJRbo3XPXNbriDWmyt4M2Tj555zpLmxvs1E?=
+ =?us-ascii?Q?4AEY1/OFZqUmFXLNiv8D0qx+t0o6ZMVYyQGrsVdUfzjqvCojFRccG6ghwtRw?=
+ =?us-ascii?Q?8cNJuaajymd5Hy+DCAs2uPCRdg03ciquWmCTWPcPEF+ZCXpgx2Muusy7ERMm?=
+ =?us-ascii?Q?yweWGyB+kuXDqesy1QU/qGBlg1Y9MiXaayz+u1378DbiKNwfQbNFFkDDS0/i?=
+ =?us-ascii?Q?mcQ+j2Grbp3BLNlBAyZgq6YKhROaJ7bnodXllkYMlUt83301Iw6gX8jpDegs?=
+ =?us-ascii?Q?9VQ+ul8txxMWf2BEEl/pGvfWoRMI1+nGOi0VWX6NdQTd90BZ6PiK8AukQqo4?=
+ =?us-ascii?Q?D0WA9oUZ9Topl7Fo4Z4W8m+heiBb+ksqp7apdpuefAyF6spBec2dW3ZLz1tN?=
+ =?us-ascii?Q?TVDRRB20WeLjgKTGp16vYlAYKX2lenI71cJ98dLOwzNDLE6vLdS0nB0rxMxe?=
+ =?us-ascii?Q?TK/jz4z4ccAwup94/aAZ6hCZbgbU596WBnmjJxZzsbcvQxkJ5KJFLgra+pW0?=
+ =?us-ascii?Q?Rg/BWDKl4Lp1D2QMbqlOmuz8egvkSkpDWJTI9A0ciIBd1TkU4z6ehDJS0d1U?=
+ =?us-ascii?Q?42b7b5kmN10W7YFwfSirr4sCYVNfx4WMC2M/WK9YBDENipcRWjFAIY32M8XY?=
+ =?us-ascii?Q?m6PAKhkYSuvvProE/UCEOlozSPpTD/GMYbj7/Lb57aQKgInBGQu7rLQ4eiys?=
+ =?us-ascii?Q?njVEMk2T7iQ3OURo9vYP+Bj4vLXv8oz7u+ACGyOTVL0EAh1cRKj5x8CXjSrU?=
+ =?us-ascii?Q?hJ1tGfRavwzDh42xH6HlGE1XYt3aYZhdAE+0WpZAKK2snqfXzhZCMGLhk7jb?=
+ =?us-ascii?Q?1YDsFDAjtJ2EAH1yFNHin9bPrcn2/zIQnY5CB0M27JWJJtW35TRoXL7NQqlH?=
+ =?us-ascii?Q?Kv4xsXqEadXxCNtYIcX9XxoSR4uZHDACLRAJH2wZ3ce0A9b0ZMYQ3zqT/GFU?=
+ =?us-ascii?Q?DVbI3Rmvk+/7wudJKeMEG2czLt9DQR2DmlbeV1UVkTfpAAZkwPZl9zS3Fu6I?=
+ =?us-ascii?Q?2tJLbxq41JJ1H58Jim5R4slbkv7CF7A9+FGahLkz9A/pU0n9UVR3mHomev0B?=
+ =?us-ascii?Q?kDD2zmi1tTsmKXGK0WgZV9efVuPQ?=
 X-OriginatorOrg: kpit.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 90cd041e-9247-4e54-5926-08d92a35fdbe
+X-MS-Exchange-CrossTenant-Network-Message-Id: d24b2efa-7c7c-4665-565f-08d92a3639eb
 X-MS-Exchange-CrossTenant-AuthSource: PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2021 04:29:23.0848
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2021 04:31:04.0659
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3539451e-b46e-4a26-a242-ff61502855c7
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gvjsKsODKtoPNMM21uq1l+Nr/YsFimthoXGrztx5Ifwyf3pvjiVDZBFD7UZs3TzVwhh+Roo/AK3CcOsfEtyhng==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN2PR01MB4907
+X-MS-Exchange-CrossTenant-UserPrincipalName: /RoiG4lUYH2m2Z21cFr33Qxb3isXF2TzjfFXDZz/gXzmr/IqnSe0HYSwgfXoQkHoP9ML1wX3I15MpkYj1uMwvg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN2PR01MB4891
 Content-Type: text/plain
 
 From: Mikko Rapeli <mikko.rapeli@bmw.de>
 
-Fixes yocto-check-layer error:
+ffmpeg isn't enabled by default. Fixes yocto-layer-check error:
 
-ERROR: Nothing PROVIDES 'polkit' (but /home/builder/src/base/meta-openembedded/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb DEPENDS on or otherwise requires it)
-polkit was skipped: missing required distro feature 'polkit' (not in DISTRO_FEATURES)
+ERROR: Nothing PROVIDES 'ffmpeg' (but /home/builder/src/base/meta-openembedded/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.3.bb DEPENDS on or otherwise requires it)
+ffmpeg was skipped: because it has a restricted license 'commercial'. Which is not whitelisted in LICENSE_FLAGS_WHITELIST
 ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
+Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'tracker-miners', 'ffmpeg']
+
+Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
 
 Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
 Signed-off-by: akash hadke <akash.hadke@kpit.com>
 ---
- meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb b/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb
-index ad69ab6..87acb29 100644
---- a/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb
-+++ b/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb
-@@ -16,7 +16,10 @@ SRC_URI += "file://0001-sysprof-Define-NT_GNU_BUILD_ID-if-undefined.patch \
-             file://0001-libsysprof-ui-Rename-environ-to-sys_environ.patch \
-             "
+diff --git a/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.3.bb b/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.3.bb
+index e2ced39..ccd22a0 100644
+--- a/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.3.bb
++++ b/meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.3.bb
+@@ -24,7 +24,7 @@ REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+ UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
  
--PACKAGECONFIG ?= "sysprofd libsysprof ${@bb.utils.contains_any('DISTRO_FEATURES', '${GTK3DISTROFEATURES}', 'gtk', '', d)}"
-+PACKAGECONFIG ?= " \
-+     ${@bb.utils.contains_any('DISTRO_FEATURES', 'polkit', 'sysprofd libsysprof', '', d)} \
-+     ${@bb.utils.contains_any('DISTRO_FEATURES', '${GTK3DISTROFEATURES}', 'gtk', '', d)} \
-+"
- PACKAGECONFIG[gtk] = "-Denable_gtk=true,-Denable_gtk=false,gtk+3 libdazzle"
- PACKAGECONFIG[sysprofd] = "-Dwith_sysprofd=bundled,-Dwith_sysprofd=none,polkit"
- PACKAGECONFIG[libsysprof] = "-Dlibsysprof=true,-Dlibsysprof=false,polkit"
+ PACKAGECONFIG ??= " \
+-    ffmpeg \
++    ${@bb.utils.contains_any('LICENSE_FLAGS_WHITELIST', 'commercial', 'ffmpeg', '', d)} \
+     flac \
+     gexiv2 \
+     gstreamer \
 -- 
 2.7.4
 
