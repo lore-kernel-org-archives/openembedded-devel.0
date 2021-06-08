@@ -1,136 +1,164 @@
-Received: from IND01-BO1-obe.outbound.protection.outlook.com (IND01-BO1-obe.outbound.protection.outlook.com [40.107.139.75])
- by mx.groups.io with SMTP id smtpd.web11.8370.1623126739272195196
+Received: from IND01-BO1-obe.outbound.protection.outlook.com (IND01-BO1-obe.outbound.protection.outlook.com [40.107.139.80])
+ by mx.groups.io with SMTP id smtpd.web09.8308.1623126943685264505
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Jun 2021 21:32:19 -0700
+ Mon, 07 Jun 2021 21:35:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kpit.com header.s=selector1 header.b=r3oqHn66;
- spf=pass (domain: kpit.com, ip: 40.107.139.75, mailfrom: akash.hadke@kpit.com)
+ dkim=pass header.i=@kpit.com header.s=selector1 header.b=fhHpmGXq;
+ spf=pass (domain: kpit.com, ip: 40.107.139.80, mailfrom: akash.hadke@kpit.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Lqia5+UYwTdygdcRbbCfVWl7PecQMyDntW1Iie7g/GOt7aLRGZYiysZTjX16h24OGABvFl0WOj8eGiprsLAHI0fZ6CnerI6eBwqnnG9044mxVi0L7/kPYqcGOCcrEX33F9P3XpfXkyQhi9HlQkioKyklTsPZIaenGKH/1Rz3bASMHsgWZPv4Mgv7GjQj/oPAo+G6wvIbnYFU5gIilechKK7n9Is6pQc0JSOsJz96dGz5a/TdjXwCYtzvg7+gLBXqUFmqkk1Xc1RXRvFVAbwvwRfO4M0YobmaeKGD1o9jRN8Yi77Ssn0BJYxyCcuPuQa6q8f1XEf1EAw0dW8TmS/22A==
+ b=cfT1yVdm2U2JnZcymNFAeVR77adV2eXwoGR3X/e8gyzsnU/6ClbMuVa3ebsVNJMqbG1dfxlQNaZP3x+IURwQu8oijEowp/0Li57S+l0Qpv/Onhr3A4q7etiJUAUE5FVMuyw4ccN9M/qq4u5/V9BTYdFHqYaNI0GZ26SwNt7Vu+nV96EY7WxUsQW1JyuPEJf04Y0Xd6vG3VFPnB/bT3NAZH7e2acyezT5KoXSFdJ923iNoNWQYkxsT2yes19MElDauCouxNSCYwm4go8YdVZRmuWNELa4Uc9dhNOaG5P1YfQ1gtSKs6a2vWjVqx4q/FN/5Qhsr7WtzxmOr5q6wef6iQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zdS6pZz9uA+Ww+CLPF8CqZ8MsFmJPbOmmlmjq+tYzb8=;
- b=WCozmAi/KhyQANCG8lbJuuBl68dF/q6fdmD83E5Nv+6gcyz4d2fGPpy6Jg65OebvXt9qb+EQvX/r1A+IDsZ8OjcqtDH22azjCQbdkXtMieY5EbsdRwo7NKumR6tG8bijRDcCGv0hvx8XAB65V5m3GuygpILYpt9KEZvRk0X2clDi584+S5nl+zKl9tv0s8WC/uD578O492AGXYqPr/4gAuQXpNy4i0NxE7CcsOifuHwaJVIIknUtRTSwmha58lG7AxZd6zqDa3MfPNcNe+xADUmMDtfheBnQJdKi6idDkXX3v9gnt+KD9P3Glc72aRsM3w6JzUw8UJuxBhoUiyeuDA==
+ bh=vExj78Vsxc3Xj1ilL7lkBilvAaiQFpuNge+YBj4We2I=;
+ b=lDoZFXpSepIpiX5IDwKfdiByC1fJxmoMigl+2yjCcZ4WyUJhkGmCrMwp9wezw+AvxZrPCidhB3+ECHuSSEY6IDxTagEaI+UAWG6b08i3qWKyY+Pkzne1dmtdIxT992Ixc4ppv1WRkJzNbDhYZsmGxRsY9+5g7VHlwhIiuNQlQbILjdiA4JtsgCwmchClLUz/QDrCCUhSvebsn0Y4Y0AwKK5ErIll/PFJKDyx9nL7CpBrn7mV2WL5LEc7T9MbLQxg3qbNahrU/bhnai1R4/KHdkleOmxlxXFda4d3Ts5IQtWVXLIDM4yUqoPoNXT2TzqgImB85wRWRieK9YExcmueQA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=kpit.com; dmarc=pass action=none header.from=kpit.com;
  dkim=pass header.d=kpit.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zdS6pZz9uA+Ww+CLPF8CqZ8MsFmJPbOmmlmjq+tYzb8=;
- b=r3oqHn66jLmqaevXLnJsfTscrHCXTRn8Nzn2oSlCu5L1d/T8Q/T6yr1TeoiQXAt1pDoSnkPjnVvEDyjfig9SuNblhJgD1twugyYGtIG6JTYK42PnE2UaP5V5P6tS6/MfBImTBfLKeJem0WgdSeZETxMXADwCvzqSD8DC78GYsX0=
+ bh=vExj78Vsxc3Xj1ilL7lkBilvAaiQFpuNge+YBj4We2I=;
+ b=fhHpmGXqKEc2NT5D9wCBolb7NTUwLhawlrnJuA5w5iGX2Zz2PCtyqNKOhGBH3I/DTJjvSyVheLgf0Ozb8ZY4qlCsBHg3QBlFhNdAEZIOM2u5BHTCvkBVGrk+JLAgWcX/be0qZmfQV7ulKHioeHZ00m/AULj00pAz0xwE6rnyXrw=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=kpit.com;
 Received: from PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:a::14)
- by PN2PR01MB5077.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:4c::13) with
+ by PNZPR01MB4670.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:2f::8) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4195.22; Tue, 8 Jun
- 2021 04:32:08 +0000
+ 2021 04:35:38 +0000
 Received: from PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM
  ([fe80::c962:e30e:1f2:44e7]) by PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM
  ([fe80::c962:e30e:1f2:44e7%7]) with mapi id 15.20.4195.030; Tue, 8 Jun 2021
- 04:32:08 +0000
+ 04:35:38 +0000
 From: "akash hadke" <akash.hadke@kpit.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: nisha.parrakat@kpit.com,
 	harpritkaur.bhandari@kpit.com,
-	Mikko Rapeli <mikko.rapeli@bmw.de>
-Subject: [meta-oe][dunfell][PATCH] meta-oe/conf/layer.conf: depend on meta-python
-Date: Tue,  8 Jun 2021 10:01:55 +0530
-Message-Id: <1623126715-9975-1-git-send-email-akash.hadke@kpit.com>
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][dunfell][PATCH] libdevmapper,lvm2: Do not inherit license
+Date: Tue,  8 Jun 2021 10:05:15 +0530
+Message-Id: <1623126915-10271-1-git-send-email-akash.hadke@kpit.com>
 X-Mailer: git-send-email 2.7.4
 X-Originating-IP: [2402:3a80:cb1:1876:861f:8f19:371b:f6bc]
-X-ClientProxiedBy: PN1PR0101CA0020.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c00:e::30) To PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM
+X-ClientProxiedBy: BMXPR01CA0064.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:b00:2c::28) To PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM
  (2603:1096:c01:a::14)
 Return-Path: akash.hadke@kpit.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from localhost.localdomain (2402:3a80:cb1:1876:861f:8f19:371b:f6bc) by PN1PR0101CA0020.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c00:e::30) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.20.4195.22 via Frontend Transport; Tue, 8 Jun 2021 04:32:07 +0000
+Received: from localhost.localdomain (2402:3a80:cb1:1876:861f:8f19:371b:f6bc) by BMXPR01CA0064.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:2c::28) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.20.4195.22 via Frontend Transport; Tue, 8 Jun 2021 04:35:36 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 1916e019-8b96-4edb-7e4f-08d92a365ff3
-X-MS-TrafficTypeDiagnostic: PN2PR01MB5077:
+X-MS-Office365-Filtering-Correlation-Id: 4de94158-4d16-48f3-a768-08d92a36dd02
+X-MS-TrafficTypeDiagnostic: PNZPR01MB4670:
 X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<PN2PR01MB5077BD877AB889949D703E988E379@PN2PR01MB5077.INDPRD01.PROD.OUTLOOK.COM>
-X-MS-Oob-TLC-OOBClassifiers: OLM:972;
+	<PNZPR01MB46702001A01B5B605DE3C9FF8E379@PNZPR01MB4670.INDPRD01.PROD.OUTLOOK.COM>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1201;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	WRKbRtXR6Z4k8dUuOmCoB0XMoUT2ouDTNBshsHltKW7MpyVp7wFeNDczxs4XvZmCpV+St3sbL0mCt21XdIoTaMWRuZVHcQpqsUct0pZh1mu2hFubLaZ8S2ejubgOcwdWN8PbtzO3L1nAAvfg3QGx7UVHhkzP0NAYJ1rBnv6jF0VyvECH8ur7o4T7kMKM33ZzCmHk3DZi1wa02e7Sn+9bIAbTvkJCygQbeIvwnxociTGKiudpG3cJTlO3sij2EFwx5vnTnvdPJ3iBbsJoovP27o+NMtuPl/ZqqUELhboCtrzsSF/VINPmBb70XB38cGU73mIxe2BhXhGOgwkHaQY+UxEzD4bX+L/t6NKeHB+0b0rSQXi9NbEoLtYP+IAmXZlu7Hlhyl8aPAOYhq3OkH78ee7mcPHU3nsDUAiVoPau82fOAFLUMrQ4um24+QAeyB9JGaVqcVmVZipzxsHtddV5Yza6Xg9UQr8y6JeHYTSTbS1Ka6Hpkbs6sprKh64FOxLSCHXTk/oAMVo2dVOkNzgpgPOKH+TfhgPPcF88Evqq0wOjtucMoIEz7K+g0ot/u2iOdx09WmsRMv/EtHeYPfA+Ltfb8AkYOLLrohZ+r0rvzIIQsSFDwdFTHoYNV1URmPSB0Q9+CDALeOSdf64wzlcwl4ld5hjzif7ClfMn9aTByBM=
+	timAQiR0wRhTnKohvCWcmt3IEyK+YPWn5HgV9KLjW8zDKeM2y3rPQeDIP/8hMRMiVV3ZqohgCmdnGLlEzjsIxWcU08qiv1qno45krERfFtMbA/MNJKqWl9xE48Nv4tsqHtn1nB8s6O52hL0i9P6Viscf34H48/vwtnhzkY1Ry9WVZj/gjP4JU4Kgmf+YGAFGJd6L+zHvKjgySyAgFbGMku30IkzLs1XkbU4c2OA35dMzCrQ3G1xUkSeLJvLhORmtRfupGiP47LCsx8dNJLuRaNEHySBjBY2J2fvrxGI+7Q7PmSvvQgWuEAe54nj+4B+bJ1FGIHJVTXFS7CGbVcCd2qRgB+RIv/OMjfFj2ZUuKfmpFt0KmKq8ejX4LgNFqSA4QLnvYWtjfw2+Q9N0nVeqgjlv825NgP9GUB9L1TP6fVXoxU7p5wKtLXm67Ppq/ZHjuTS7BdBpsIUXmNMTaSCywfMdUcsfj3OfsAX2M41mLcZluthaKx5ddC45vTw7seturQB9QIMcvV7d/oNERbLyeqN8G1h3h3JSxTIvIyYFDgdARb45UV/1/pOOT/195RKedBVR264Nf6w5HHlKm3NMpKwumsi4we853JzknEt7St0ZXJSiWZACxmDshhdTRKiF70kN7/EeuiLgJ5D0NufhTrN9we+n8oGyzOZeP8jjdrQ=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(136003)(396003)(376002)(366004)(39850400004)(346002)(8936002)(8676002)(316002)(2616005)(52116002)(6512007)(478600001)(83380400001)(36756003)(186003)(16526019)(6506007)(66476007)(66946007)(66556008)(86362001)(4326008)(2906002)(6666004)(5660300002)(6916009)(6486002)(38100700002)(69590400013);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(346002)(396003)(39850400004)(136003)(366004)(376002)(2906002)(478600001)(6512007)(4326008)(16526019)(83380400001)(186003)(6666004)(52116002)(6506007)(316002)(38100700002)(86362001)(8936002)(66476007)(6486002)(66556008)(66946007)(8676002)(6916009)(2616005)(36756003)(5660300002)(69590400013);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?qoPyFd+G9SkILRKdb/R43AnkGsgN5ykpA8tDNlUBXBgLsfN27S+rqybav/e7?=
- =?us-ascii?Q?4TXTGjWolrmuPrA7rHeja81LVXfwkO3nu3Q0GYHRkykipwnCqTwz0MUut51D?=
- =?us-ascii?Q?RYrMhXnA7/EDBgTgAIYg4VvTU7UAvcN0odJe1sx/xiYEJzjD5F4TINaxdRsj?=
- =?us-ascii?Q?Rw+hA09uZll+FRu9s4O3zzFeu+5tz69tCSL4k28i0Hof5mV0OpB1odkE8h38?=
- =?us-ascii?Q?kXD6G1sz8se1jd/sRMCZL2kulR0KbEpNb9JbNMoQFQHGc+W2lLrGyfvsHsP4?=
- =?us-ascii?Q?afrnmYH0XPNbQZo8hMk9qieFKRiOeGCLXRS9h5uS+1UgQO0ZGkg0+dek0P+s?=
- =?us-ascii?Q?cqAnmVST/pfwVDr/PUbRJLYiVXAAK83izCVOXzOOwkqjb46nEzmR5Orlcl+j?=
- =?us-ascii?Q?007nO0j01MlNgr+BjYCiES+z0nXQ8yZGIiBU157Ea9l26L+klQAv0r3IB812?=
- =?us-ascii?Q?L4I/3G5ugRdbdckk5gvMg/cZ53BvQKVnoULlezG5VzQNTVqhmQdZXCnrEh2W?=
- =?us-ascii?Q?bP7EJUulFTV5AEZRb6bHR20Uh4pWdqmpjtRr4sbWhDNVNpbWUbL4vrrUaC0F?=
- =?us-ascii?Q?wHgDW+M0MewuAigXF96mPFVa7SO40nerskfBfRqda6IrP1JxqJniiX4TExUC?=
- =?us-ascii?Q?scslndA9w3gB4JCSqqUB/4HL2z92+hvq+mNhpfzXfb2aI5UpkUFNTVuA389q?=
- =?us-ascii?Q?9wdBQcQIdokyopAeQyOtBW2lxApzUkJy0C5zijoQxMHcVAXzADMK1o4piKRg?=
- =?us-ascii?Q?emFm50KjM+yOti9BYXKtLGPKXzxKjIGd1gZWdUgB5ON3JtODB0vJgmgR0ice?=
- =?us-ascii?Q?HTqA/jYtFeU3rXiJbbhHfKkE2/ckIBYFKRUwrn4X+g1jj9Cqk3K1qtLaHX3C?=
- =?us-ascii?Q?OdxYbogtbDKDnu1mEHegC9h4350yDQaAeQrj1Wue9DKXsxed0WMdhp65nTUl?=
- =?us-ascii?Q?M1IkCZhLhPKDh6FgKwvUnwO400pfTzOn/lFvrS1m7pqN17hK2GabdH8NbVu+?=
- =?us-ascii?Q?TkPts2kAo4x0W0p1b9jS97zws2Gso6L+i0asojm2Gx1TlWJszbkiYUHIsbG8?=
- =?us-ascii?Q?IbvEb+vOn8MHqcNChDWYewBbHuqeBMoiA9Gyh67wJLxgbB/GBlDeuhzU14Dl?=
- =?us-ascii?Q?hWukVjH6C5N7YSozvpf6lTWH7j+y0PGSzutmkTLCpaZte+fRP61uRosK04G7?=
- =?us-ascii?Q?2xLK0fIa3IHM8VWvAaprf2zXXmAduJ8qSGNlT+M7t1x25P9Ud2WJLDYePFSS?=
- =?us-ascii?Q?4/pqsV9e6asZVb9CWUT7b+80z2KqNim3p6NZm1hjRmOtSnshpsNY9/YkKO2p?=
- =?us-ascii?Q?zXyDHPWxuwXoC7fpmki3hnM5ONTf2d40NtVMzLtNoL1zdWHbBnfODpIMcuGb?=
- =?us-ascii?Q?l6Kj1OvktVmhWNznfdm9CEF72Xxv?=
+	=?us-ascii?Q?BgXWkddAyFXzdXhRi/HkO2FG6lQcGoJInBNGhGQF/24pocchSTlEtSyPCapc?=
+ =?us-ascii?Q?ESEWYb6bDyQovZGLLqNydr+k3DTr44EGSwxbifxY+Gi/5VMHHAYXgbNoa+Io?=
+ =?us-ascii?Q?UdbDo9Jx9pXQ134hCz641Dos9U5xBgO61s30U62sPEfFkI/vpT93v71LB7Bm?=
+ =?us-ascii?Q?ebbPNuyfdoVxSRpCuN8cCV1/6UC/qGQIIPE3Yx3EJO+lgf//EYdlfeg+p2HD?=
+ =?us-ascii?Q?0W0s+/0j2m5eEn434FIdCSREGNUDOceR/Jh6PByEUaaZg0E4SsNlWc/CxEX4?=
+ =?us-ascii?Q?P7PQZs3leG1P9+k4H8Qlj1SITrCQE0iwm1Dh2OAacvDyP/0FfPvj2hykSPkx?=
+ =?us-ascii?Q?6GSngKq/w7j+Mq7dxmlYqads70MYF8sVLETH4ZBtNfCxQoef91GLu6qB4BwY?=
+ =?us-ascii?Q?7I3ZFJ7UxC0E54/j9yZ7WqDGADd4BwJjFgpK5Z0hGJAs8lnOmAKdYXBvtKZY?=
+ =?us-ascii?Q?KGuQ7sV1tHV8SvaCgelF0IVQjboyREQP4oE03WiEnirkjwdsSiKLCN85NX+N?=
+ =?us-ascii?Q?W5/qISrkF58pmXk4+5Sev0+xK7guZw6xJtgQ3SQyRrNgcXKNySn+0ETircwv?=
+ =?us-ascii?Q?BKVpdAvtW1sWODdeHjz4hyLraJ+AqLmVDdTsPP0dgPgz0HHFfEGJFRbFt70Q?=
+ =?us-ascii?Q?HFkepU/qCiFs7+XPRP/gODXVLZ7ETBvS3obDz2I9jiBaOJbD86TXno8i2Lds?=
+ =?us-ascii?Q?uFwkqWiDYhVAJaNknw2luPGu2ihucfubYyCiDCfjenQEjTqOV+g3X5Yjsame?=
+ =?us-ascii?Q?gzJ6GzsDA9dkfC3mfl/HMP2hiqOHANJcw+zOR64IJLuhRWlNusC0UQlr3fBw?=
+ =?us-ascii?Q?DK3vDB/QWUPoE8xg09C2nzl24k/7tN1Bt1IatxSBuJ69nginm/87nn2EiOpl?=
+ =?us-ascii?Q?ExhLoa2Ez6TcBSNNGPD/kuzdvkXZKDdAhlafXYCKMzVGgpNSWge1vUpvVyWF?=
+ =?us-ascii?Q?jjlohurvCg0ICJDAfFT2YLfKEG2Hniwn1uWWRdMCPsg0JvY9afKM8unK480x?=
+ =?us-ascii?Q?ZMjbJK8yS2PRB56Ztx8RIyl6/YvbwXExosiXDPvyB0mcutAG7FscRM1/n67I?=
+ =?us-ascii?Q?+Qb2WXbJIOiVCsCOmKc6HVbTjcBpUblICAwvYuSeQxhDkej+Zh153RsUkuW4?=
+ =?us-ascii?Q?YWUeISDP44os4RqKSvPs/D2orfySYokxWmmxOD0qS1NaeCq3Vak8l09JYUzk?=
+ =?us-ascii?Q?RmOulkW7xO0QhM+1fDz+NfBFPuvTZzcndW9tzBzr5H/6AIcLwwPqwgJMw0//?=
+ =?us-ascii?Q?tCRzr/e15SAsDIkHCdFBq6ZUpWKCDZDAzDlHeKBAyye6xQWQS+4lMpLjiji9?=
+ =?us-ascii?Q?jBJA4x1Cfy5vLwe5g9mg6ze4GIpi797p6C/sdQIi5uUbHuRHbM5kDWR41aS/?=
+ =?us-ascii?Q?4uN1U5agWzYYHKSypocOzkrELCUd?=
 X-OriginatorOrg: kpit.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1916e019-8b96-4edb-7e4f-08d92a365ff3
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4de94158-4d16-48f3-a768-08d92a36dd02
 X-MS-Exchange-CrossTenant-AuthSource: PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2021 04:32:07.8917
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2021 04:35:37.7892
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3539451e-b46e-4a26-a242-ff61502855c7
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dZCD5CIobhS433rCYE/HBPSelvCvvqhx4EbaRwRXlrN3UieDdiqHwD/HYqJMp1dujQA6EivXIoNpK0HBNq54kA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN2PR01MB5077
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7voaMXAUihgPTUBjxmQXSZf9s48kdUEYH65HkeN/Q7en/UtxaeO2OI3OnhFt7XbyirPpfBsPLfGmbgU5wFAzmA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PNZPR01MB4670
 Content-Type: text/plain
 
-From: Mikko Rapeli <mikko.rapeli@bmw.de>
+From: Khem Raj <raj.khem@gmail.com>
 
-Fixes yocto-layers-check error:
+inheriting license class which brings in
+AVAILABLE_LICENSES into do_configure task checksums class since it wants to
+enable thin-provisioning-tools if distro allows GPL-3 automatically, but this
+brings issues when other layers which have additional licenses are
+provided which ends up in signature mismatches so leave that setting to end-user and keep it disabled by
+default with a comment in recipes stating that if needed then the user should enable it via
+config metadata or bbappends.
 
-ERROR: Nothing RPROVIDES 'python3-pyyaml' (but /home/builder/src/base/meta-openembedded/meta-oe/recipes-extended/ostree/ostree_2020.3.bb
- RDEPENDS on or otherwise requires it)
-NOTE: Runtime target 'python3-pyyaml' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['python3-pyyaml']
-ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
-Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'ostree', 'python3-pyyaml']
+This commit is cherry-picked from upstream/master to
+fix the below yocto-check-layer error.
 
-Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
+bitbake-diffsigs --task libdevmapper do_configure --signature
+f6a95f0cfe6789254c94484dcd7d895e3a83c7d8e80f7a45e80328ed3d58e981
+87aa98db4256768cf62c48703d9a857b878e257aaa6ee463ea17e5004215d5de
+NOTE: Starting bitbake server...
+basehash changed from
+f4b6194b76e01b7dcb9e87f36156a9077b65f56e08f4841ad57321faec03a54c
+to ba9681d39513fd8ed22438ac25811535401a56d9ec23a8553978cf421c268b88
 
-Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
+Variable AVAILABLE_LICENSES value changed.
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: akash hadke <akash.hadke@kpit.com>
 ---
- meta-oe/conf/layer.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/lvm2/lvm2.inc | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index adcec83..efdd04a 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -34,7 +34,7 @@ perl-layer:${LAYERDIR}/dynamic-layers/perl-layer/recipes-*/*/*.bb \
- # cause compatibility issues with other layers
- LAYERVERSION_openembedded-layer = "1"
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index 01c9df4..2fe97d5 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -19,12 +19,11 @@ SRC_URI = "git://sourceware.org/git/lvm2.git \
+ SRCREV = "b9391b1b9f0b73303fa21f8f92574d17ce4c2b02"
+ S = "${WORKDIR}/git"
  
--LAYERDEPENDS_openembedded-layer = "core"
-+LAYERDEPENDS_openembedded-layer = "core meta-python"
+-inherit autotools-brokensep pkgconfig systemd license
++inherit autotools-brokensep pkgconfig systemd
  
- LAYERSERIES_COMPAT_openembedded-layer = "thud warrior zeus dunfell"
+ LVM2_PACKAGECONFIG = "dmeventd"
+ LVM2_PACKAGECONFIG_append_class-target = " \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)} \
+-    ${@incompatible_license_contains('GPLv3', '', 'thin-provisioning-tools', d)} \
+ "
  
+ # odirect is always enabled because there currently is a bug in
+@@ -37,6 +36,7 @@ PACKAGECONFIG[dmeventd] = "--enable-dmeventd,--disable-dmeventd"
+ PACKAGECONFIG[odirect] = "--enable-o_direct,--disable-o_direct"
+ PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
+ PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
++# NOTE: Add thin-provisioning-tools only if your distro policy allows GPL-3.0 license
+ PACKAGECONFIG[thin-provisioning-tools] = "--with-thin=internal,--with-thin=none,,thin-provisioning-tools"
+ 
+ # Unset user/group to unbreak install.
+@@ -53,4 +53,3 @@ EXTRA_OECONF = "--with-user= \
+                 --with-thin-repair=${sbindir}/thin_repair \
+                 --with-thin-restore=${sbindir}/thin_restore \
+ "
+-
 -- 
 2.7.4
 
