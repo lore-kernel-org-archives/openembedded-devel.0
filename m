@@ -1,145 +1,113 @@
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web12.1144.1623168887640060110
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
+ by mx.groups.io with SMTP id smtpd.web12.1416.1623169988228922020
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Jun 2021 09:14:47 -0700
+ Tue, 08 Jun 2021 09:33:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=XPqkROBB;
- spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id b15-20020a17090a550fb029015dad75163dso2624293pji.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jun 2021 09:14:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=VddM7B8s;
+ spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f172.google.com with SMTP id g6so16123656pfq.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jun 2021 09:33:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=BtqViM4WhIMPfawbizwq7ncU+DdqU5bOuYO2aahfgoc=;
-        b=XPqkROBB3Zb1wFn2rMYZ/xRhN+OAQ/LP2ydBXGp8nYz4RuffMPkbUs9i5GeoC76jSB
-         VdvVlRPK34ALQssyRnr9P8ty56DgOEWBXxsBFaWOThU1HH7TtoDcBFRZhRyaH0zi8s02
-         Sn7KBkbW0C0LxI5y3Yxm3NPWNb6CzqkP/dtnTKc9KvyZA72EzfGlTiBVIHt/qjrvSu7d
-         RZXhlxlZMTZES9Iu4WAbQET3gAnp6YcZPzmvPvXO7AlTitB8QGFxAAXbJ7KwoM9BtQIT
-         0HsjflGvGsgMponmBEAlEZq3xyZFa76XdKeXxMSbtHVORPfTCYf2Ff5pldXSoZR0ugUw
-         ao+Q==
+        bh=nT3hNOPD02opDxSShYX8DPnE0D3Rlk/rC54G8jLPEeo=;
+        b=VddM7B8snHvceaopfVq7rvYQ+CfEE0QRHTCops2oNeLI86mOXB0FTxC3moEI2ltZvT
+         fCXboHljp+xm+i0hTu4/q3yTKph+vHKDSfYFL6VvAWWWG2qwRlOApU5KDWYGe9nHhLUJ
+         DFLBe4unjWAbYJ2ZeuLKlrJXa153X6wa/7bpeELbcby2CZKHXIzhm7N4QXTilq3cJR80
+         HMJQ0hzQDuqjyjh+GfmkP5b5YhHXxM8/Lq8bp/6LkiQDvkwpFN5A2LkwuFvdDWMNpeie
+         fo276sjM4mEChH1sVCc7rqFMOLSMa9R3A5UJFwPiFHJSMFtMJ1k0nZ9WWbm1zhXJjpdV
+         4teA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=BtqViM4WhIMPfawbizwq7ncU+DdqU5bOuYO2aahfgoc=;
-        b=h3ZHZDwkU8zGC/g7jA0nNlMnPrcc01Ejr0rMY3Sv8Ae4hEwCrPr9AdX3icslSczq+e
-         5yCIvPPNve5MOWQL0OZVmYF3c/I9TCRqhaebOr2O9s5BgB2PBUmbpG2RDEJkC1/ZZxYg
-         IUvS5okeKBIj4lxh/83eFu9Z/EFgepDPi4bfIfYqXamRknXULpRLI/VwHlJyUqwuNRVQ
-         XNWCwZ5y+s1bxZB4IbxCSqtfLwe87jb924oh5Ct4l8vlBbLJoFZooxqEP38KXZIhQ/2b
-         2RIKHINsSZApDBqzU5Dz9Ukp9atemrzzuvW57qdAtTcBF6C3zYqRHKzd+x8WNSD/Vcyk
-         rIRA==
-X-Gm-Message-State: AOAM532Il/phZSn1tCoWO9P7us8apJsgHXUyTR9EAOCXRDJt//1JBaYF
-	QQ+fMfAKw8lgBHfNCU1WeYMf68oWyqrcsQ==
-X-Google-Smtp-Source: ABdhPJyRESU97suSflj/HIvAeKphWE+zH358/Zs0icgzWuu9R1VNvwRYGCDubY1dhMa8sFPYK0Tzeg==
-X-Received: by 2002:a17:902:ee4c:b029:10e:f98c:2b83 with SMTP id 12-20020a170902ee4cb029010ef98c2b83mr386574plo.62.1623168886765;
-        Tue, 08 Jun 2021 09:14:46 -0700 (PDT)
+        bh=nT3hNOPD02opDxSShYX8DPnE0D3Rlk/rC54G8jLPEeo=;
+        b=cYchfNgUcBUaYNxc9ZRwPY+Gm0gHBuppJNT0kOpDL7JDMixv8lZTOSYafWJMo0uRve
+         8Ox0i0HiAJlLO1lpDEcFONI0yG1SIx70cVv0rpFJ4vCTH73JwIKHIhxkssYgLVpZ6b9l
+         CSb0qcicWeVdOEtE2ecF6ntfiq0mZ/2rTCbQzBUAKw3gSMBC5myNO1BplGOXgwWhLgER
+         YZfpOiBseb6VZYGYstVKsBve3B9mCU1IM3RwjyiDLpZduH9RDN1XfliOK0IfVhFXjacC
+         x215VaZ8fFjDsyGDLYNb2TEa+MBKL9ePuyNF/MGHvjtmNcr6yMLKzJOGj3ogrOWnrGp8
+         6C0Q==
+X-Gm-Message-State: AOAM530bLejQk+xQ2ooZ3TkxgRKrgQ3wxJgMrvd3WLKfuPgxGzd/OcYK
+	th0LY+wDsr/V6csSwh2Vm81SHmYbmSckog==
+X-Google-Smtp-Source: ABdhPJx5lKcUBS/X9dISD+wn9B48A2p4kaappNszlk8Wc2ff+eXPE1gDkichkbA1x6rA47OR4CPV/w==
+X-Received: by 2002:a63:be44:: with SMTP id g4mr23697501pgo.425.1623169987424;
+        Tue, 08 Jun 2021 09:33:07 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a054])
-        by smtp.gmail.com with ESMTPSA id j5sm9646662pgl.70.2021.06.08.09.14.45
+        by smtp.gmail.com with ESMTPSA id ga23sm3038525pjb.0.2021.06.08.09.33.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Jun 2021 09:14:46 -0700 (PDT)
+        Tue, 08 Jun 2021 09:33:07 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>,
-	Zang Ruochen <zangrc.fnst@fujitsu.com>
-Subject: [meta-networking][PATCH] netplan: Fix a warning with clang
-Date: Tue,  8 Jun 2021 09:14:44 -0700
-Message-Id: <20210608161444.1212225-1-raj.khem@gmail.com>
+	Ross Burton <ross.burton@arm.com>
+Subject: [meta-oe][PATCH] zsync: Fix build on musl
+Date: Tue,  8 Jun 2021 09:33:04 -0700
+Message-Id: <20210608163304.1223962-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Refresh musl patch to avoid fuzz
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Zang Ruochen <zangrc.fnst@fujitsu.com>
+Cc: Ross Burton <ross.burton@arm.com>
 ---
- .../0001-Handle-enum-element-override.patch   | 34 +++++++++++++++++++
- ...-t-fail-if-GLOB_BRACE-is-not-defined.patch |  9 ++---
- .../netplan/netplan_0.102.bb                  |  1 +
- 3 files changed, 37 insertions(+), 7 deletions(-)
- create mode 100644 meta-networking/recipes-connectivity/netplan/netplan/0001-Handle-enum-element-override.patch
+ ...0001-sha1-Include-unistd.h-for-off_t.patch | 29 +++++++++++++++++++
+ meta-oe/recipes-extended/zsync/zsync_0.6.2.bb |  4 ++-
+ 2 files changed, 32 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/zsync/zsync/0001-sha1-Include-unistd.h-for-off_t.patch
 
-diff --git a/meta-networking/recipes-connectivity/netplan/netplan/0001-Handle-enum-element-override.patch b/meta-networking/recipes-connectivity/netplan/netplan/0001-Handle-enum-element-override.patch
+diff --git a/meta-oe/recipes-extended/zsync/zsync/0001-sha1-Include-unistd.h-for-off_t.patch b/meta-oe/recipes-extended/zsync/zsync/0001-sha1-Include-unistd.h-for-off_t.patch
 new file mode 100644
-index 0000000000..dfc6f90c4c
+index 0000000000..60bcd8166f
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/netplan/netplan/0001-Handle-enum-element-override.patch
-@@ -0,0 +1,34 @@
-+From 6d284f1ff81494a5fca91a399b92b218ea1a9ea8 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-extended/zsync/zsync/0001-sha1-Include-unistd.h-for-off_t.patch
+@@ -0,0 +1,29 @@
++From 72ad6dd95441836afb1f113697339b3c694d0e69 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 8 Jun 2021 08:53:30 -0700
-+Subject: [PATCH] Handle enum element override
++Date: Tue, 8 Jun 2021 09:26:32 -0700
++Subject: [PATCH] sha1: Include unistd.h for off_t
 +
-+NETPLAN_DEF_TYPE_VIRTUAL and NETPLAN_DEF_TYPE_BRIDGE point
-+to same value in enum, however here they are assigned individually
-+which results in overriding the initialization of the objects
++Musl systems do not get this definition indirectly like what happens
++on glibc, therefore include unistd.h to get the definition
 +
-+Fixes
-+src/netplan.h:85:33: error: initializer overrides prior initialization of this subobject [-Werror,-Winitializer-overrides]
-+    [NETPLAN_DEF_TYPE_BRIDGE] = "bridges",
-+                                ^~~~~~~~~
-+Upstream-Status: Submitted [https://github.com/canonical/netplan/pull/213]
++Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/netplan.h | 1 -
-+ 1 file changed, 1 deletion(-)
++ libzsync/sha1.h | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+diff --git a/src/netplan.h b/src/netplan.h
-+index d2c538b..26574f8 100644
-+--- a/src/netplan.h
-++++ b/src/netplan.h
-+@@ -81,7 +81,6 @@ static const char* const netplan_def_type_to_str[NETPLAN_DEF_TYPE_MAX_] = {
-+     [NETPLAN_DEF_TYPE_ETHERNET] = "ethernets",
-+     [NETPLAN_DEF_TYPE_WIFI] = "wifis",
-+     [NETPLAN_DEF_TYPE_MODEM] = "modems",
-+-    [NETPLAN_DEF_TYPE_VIRTUAL] = NULL,
-+     [NETPLAN_DEF_TYPE_BRIDGE] = "bridges",
-+     [NETPLAN_DEF_TYPE_BOND] = "bonds",
-+     [NETPLAN_DEF_TYPE_VLAN] = "vlans",
++diff --git a/libzsync/sha1.h b/libzsync/sha1.h
++index 3946505..23d9434 100644
++--- a/libzsync/sha1.h
+++++ b/libzsync/sha1.h
++@@ -16,6 +16,7 @@
++ #else
++ #include <sys/types.h>
++ #endif
+++#include <unistd.h>
++ 
++ #define	SHA1_BLOCK_LENGTH		64
++ #define	SHA1_DIGEST_LENGTH		20
 +-- 
 +2.32.0
 +
-diff --git a/meta-networking/recipes-connectivity/netplan/netplan/0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch b/meta-networking/recipes-connectivity/netplan/netplan/0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch
-index dab8693c71..0fa6ba48a4 100644
---- a/meta-networking/recipes-connectivity/netplan/netplan/0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch
-+++ b/meta-networking/recipes-connectivity/netplan/netplan/0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch
-@@ -8,13 +8,11 @@ Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-  src/util.c | 6 ++++++
-  1 file changed, 6 insertions(+)
+diff --git a/meta-oe/recipes-extended/zsync/zsync_0.6.2.bb b/meta-oe/recipes-extended/zsync/zsync_0.6.2.bb
+index c61e26309d..b80bf9cded 100644
+--- a/meta-oe/recipes-extended/zsync/zsync_0.6.2.bb
++++ b/meta-oe/recipes-extended/zsync/zsync_0.6.2.bb
+@@ -5,7 +5,9 @@ LICENSE = "Artistic-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=71c0ac4d86266533509aa0825b8d323c"
  
--diff --git a/src/util.c b/src/util.c
--index 7e59985..eb8e573 100644
- --- a/src/util.c
- +++ b/src/util.c
--@@ -23,6 +23,12 @@
-- 
-+@@ -24,6 +24,12 @@
-  #include "util.h"
-+ #include "netplan.h"
-  
- +/* Don't fail if the standard library
- + * doesn't provide brace expansion */
-@@ -25,6 +23,3 @@ index 7e59985..eb8e573 100644
-  GHashTable* wifi_frequency_24;
-  GHashTable* wifi_frequency_5;
-  
---- 
--2.25.1
--
-diff --git a/meta-networking/recipes-connectivity/netplan/netplan_0.102.bb b/meta-networking/recipes-connectivity/netplan/netplan_0.102.bb
-index 81b58ab904..3328dfbbb9 100644
---- a/meta-networking/recipes-connectivity/netplan/netplan_0.102.bb
-+++ b/meta-networking/recipes-connectivity/netplan/netplan_0.102.bb
-@@ -16,6 +16,7 @@ PV = "0.102+git${SRCPV}"
+ SRC_URI = "http://zsync.moria.org.uk/download/${BP}.tar.bz2 \
+-           file://out-of-tree.patch"
++           file://out-of-tree.patch \
++           file://0001-sha1-Include-unistd.h-for-off_t.patch \
++           "
+ SRC_URI[sha256sum] = "0b9d53433387aa4f04634a6c63a5efa8203070f2298af72a705f9be3dda65af2"
  
- SRC_URI = " \
-         git://github.com/CanonicalLtd/netplan.git \
-+        file://0001-Handle-enum-element-override.patch \
- "
- SRC_URI_append_libc-musl = " file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch"
- 
+ inherit autotools
 -- 
 2.32.0
 
