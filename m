@@ -1,77 +1,78 @@
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.web09.3.1623267107377195991
+Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com [209.85.222.180])
+ by mx.groups.io with SMTP id smtpd.web10.340.1623268523019855223
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Jun 2021 12:31:47 -0700
+ Wed, 09 Jun 2021 12:55:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=uxbwGFeJ;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.54, mailfrom: brgl@bgdev.pl)
-Received: by mail-wm1-f54.google.com with SMTP id u5-20020a7bc0450000b02901480e40338bso3698040wmc.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jun 2021 12:31:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=bNVH78Cv;
+ spf=pass (domain: gmail.com, ip: 209.85.222.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f180.google.com with SMTP id c124so24956325qkd.8
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jun 2021 12:55:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=yNwDP8Rlpzaz6LNNdDVwr4694ag39yMIyPQf6on3dvk=;
-        b=uxbwGFeJDuXgfGtvfdbs8MuTq7FjHqYFzX1LoO3cgZnAtKwylcA+TtGhV1d7uWGobf
-         JYFHyJ+uOTPDQr5+v3nf8cnK7wVeB7U3V0VFMZYUdX/gWWAsESE6E7k5uhfR+yCDJbXt
-         oahuqBHgh6zdRZKz6BRkDatz0SZgvOnHBX9IQRbAlV3wxo3yIoqHT+5F65HX0BztdwAW
-         TixEiKIEHmWDjqfyhXQ9rAhINrl34NSa5qIisBjvEmCEAPyi3b6dj8lOxzuQOzyNdDKC
-         gJ4lvV3r6WN/WM12tfgGXxdc2nlCUJNAzCuldNKuWQukJV2yotu9vQcJHHlckdU1SmP5
-         UfwQ==
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=ewLZkNOBug9LMObs7eMVQowTRP/aCGXwycXy3jIy1SA=;
+        b=bNVH78Cv0aejlB30ldqhWHYflJV71V879ZvoJTx+Kjf8UpzYAox0c1GtNEOuS2ksXF
+         0QdeK8HpQvUoX804e4Zzm6H8bMBgG5yZmR79LOLrO0/ndIKiORtsNM50hR4qX+wfMhpp
+         quiK0YMfF7xGMz6FpCIwbAR1VBvvDptvme7rMJ3u/Qg5HnLlF/Sun/02rshoPZNtlaeU
+         TaZfs6ggcnwylOWlZnmsKptEkNJkJdI0HGw1pLNdvatQJren59x6HsQdz67zDj6/naye
+         lSCJYRTIluoQon3A/2qnX4LehnnfY8170+vScZ5mno/xxAG+mArVR7/9AuL73rSlPBNS
+         sN8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=yNwDP8Rlpzaz6LNNdDVwr4694ag39yMIyPQf6on3dvk=;
-        b=dViYi9Ougqlr2GqLfi0tqmzPrZJApecUgG8XuQM7/eadhkTWMJlRv5o1GZ++c6HzNf
-         GVgofqV1dJSEL6BLJfXWVtzDRjm4Ej71J4L+FWAoP9gMft84k8rQ27PiVurPUEgQXJxs
-         9+p23arxYBKPn1kGH9lBnooOrKeD/XHHaczUziINmEBxjkMCra1pMZvZpgqsnDlQUjaF
-         G0PViPLw0JG3xARMbP0QCwSGBOD2tCrVVqyuiiOLy3YdyrJHmJC2CryrdHNsRq0kmfeY
-         aVq3SVZg9rZluTrmfLThU1jWgQAIQy5+txGaBKECrIum+ar4UT9Kw0lTcjw+dKNsKo+x
-         5kkQ==
-X-Gm-Message-State: AOAM5303LFYl/BWyB61frMBl6xJBKNO6uac6eMYbsS2o29rkNfGTifWN
-	kkQ352nHU9v3aty+9AY3iXJAmw==
-X-Google-Smtp-Source: ABdhPJwuGl6dfOkm+//NOrSUX4Jt3/4W/fabu1bClXUPWYuS+K3V0fpbazTjiqEDtJFVbLzkMTGilA==
-X-Received: by 2002:a1c:e441:: with SMTP id b62mr1442272wmh.36.1623267105924;
-        Wed, 09 Jun 2021 12:31:45 -0700 (PDT)
-Return-Path: <brgl@bgdev.pl>
-Received: from debian-brgl.home (lfbn-nic-1-149-6.w2-15.abo.wanadoo.fr. [2.15.231.6])
-        by smtp.gmail.com with ESMTPSA id i2sm633262wmo.40.2021.06.09.12.31.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Jun 2021 12:31:45 -0700 (PDT)
-From: "Bartosz Golaszewski" <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>,
-	Armin Kuster <akuster808@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [PATCH] libgpiod: update my email address
-Date: Wed,  9 Jun 2021 21:31:44 +0200
-Message-Id: <20210609193144.25592-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.30.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=ewLZkNOBug9LMObs7eMVQowTRP/aCGXwycXy3jIy1SA=;
+        b=KAoYFDXK2HWzSd/faf4H+JazbprMIJmaUO+DUo/trd56L82oRkjXMSEaVdy9QMZ4B0
+         dP9FMTqOKvTTkv+LJvdSSLcPZDJHGN/Fa40xMm6LtyxtPKEHeti2RjtxXOBpEpYE3xj7
+         /bIwbNRnSuQDK0p2gGxeu1JMpLncbyVV0vw/TgbI5eVVuUK6dKqJW+jCEHlJ8wQCqVHL
+         bdm2dpyeayTV0hI9V5AQpvvBaOmolHinwrtvrNdXJqafyxpeiPoEmzvzB70aYEJI2cxl
+         hlMenLyxPRRkZIYicNQ0jqfBm0R4t+ylotWou8vTIcsi9qxz/Mr4//tFT4y+66AP6uLA
+         yzgw==
+X-Gm-Message-State: AOAM532vjBQRwITfxjmzHPdA7Rl+pYn0RwQP8gJyVSrRNn042FjIiAF7
+	ycZJoUTozlDQzRxAdMsr6AHjH8jOuLiAy7M8JyE=
+X-Google-Smtp-Source: ABdhPJybsTc0gdPXDy0BxNbmEtHCmpg+Yz7bnTCaSQmIg+is8Ex58kR1FRFQ5H67R5lwXcQtMdl3VBl0+oHEpqrNGl0=
+X-Received: by 2002:a37:855:: with SMTP id 82mr1345735qki.25.1623268522052;
+ Wed, 09 Jun 2021 12:55:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210609193144.25592-1-brgl@bgdev.pl>
+In-Reply-To: <20210609193144.25592-1-brgl@bgdev.pl>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Wed, 9 Jun 2021 12:54:55 -0700
+Message-ID: <CAMKF1spCeKarT1kcVtbyorKjwjzV6Ydx5t8TLiJH6zUbwmPbmQ@mail.gmail.com>
+Subject: Re: [PATCH] libgpiod: update my email address
+To: Bartosz Golaszewski <brgl@bgdev.pl>
+Cc: Armin Kuster <akuster808@gmail.com>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
 
-From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+On Wed, Jun 9, 2021 at 12:31 PM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+>
+> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+>
+> I now maintain the project and this recipe in my own time. Update my
+> email address in the AUTHOR field.
+>
+> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> ---
+>  meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
+> index bb586b681..2d63d83e9 100644
+> --- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
+> +++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
+> @@ -1,5 +1,5 @@
+>  SUMMARY = "C library and tools for interacting with the linux GPIO character device"
+> -AUTHOR = "Bartosz Golaszewski <bgolaszewski@baylibre.com>"
+> +AUTHOR = "Bartosz Golaszewski <brgl@bgdev.pl>
 
-I now maintain the project and this recipe in my own time. Update my
-email address in the AUTHOR field.
+its missing closing quote, I have fixed it locally and staged it.
 
-Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
----
- meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
-index bb586b681..2d63d83e9 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "C library and tools for interacting with the linux GPIO character device"
--AUTHOR = "Bartosz Golaszewski <bgolaszewski@baylibre.com>"
-+AUTHOR = "Bartosz Golaszewski <brgl@bgdev.pl>
- 
- LICENSE = "LGPLv2.1+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
--- 
-2.30.1
-
+>
+>  LICENSE = "LGPLv2.1+"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
+> --
+> 2.30.1
+>
