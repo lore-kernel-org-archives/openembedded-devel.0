@@ -1,50 +1,50 @@
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
- by mx.groups.io with SMTP id smtpd.web08.4381.1623220725586865719
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+ by mx.groups.io with SMTP id smtpd.web09.4346.1623220726129408995
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Jun 2021 23:38:45 -0700
+ Tue, 08 Jun 2021 23:38:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=aO09iv67;
- spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ed1-f46.google.com with SMTP id i13so27440006edb.9
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=AZj7TtN/;
+ spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f50.google.com with SMTP id he7so17226037ejc.13
         for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jun 2021 23:38:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=xcxeBrhmCDglo5TG13TThxZlJt9301chtPj7Wm2s7sw=;
-        b=aO09iv67LD7E3CE3TV897g4v5l3U9WPoYvUr3D7e+El5QaGYR1DL5XKoEptVIW9VDY
-         xB2bO5QsSADfyHyedUtuyAy84/nVwU76PAdsKfVLjTY6GRBcm+6qs7aVT1mbM2GSesyi
-         3Cs592NJF5GSnumeiriZIwOv2Vkk40urhVSvJj07wFnqqTyCoq/JV7+8m8Q7yyjIwnsj
-         s4iiKJmDZcuBvNKCbDgQNHvkh4yK7qkiz1Rj23dJWVRhtR37ZtFXDooLXjCYXL8EuP2x
-         QCKZx9ziJTeqaAVjO9xDlumQnZJVLPRKJCDKw94qBZcxPJ6HcL9ZzuYrqsXkf5JjHY+4
-         KQ3Q==
+        bh=JWeOCVGxki+pMKcwzUIV4rrmTzt3yw0UWTW6XMcjPFE=;
+        b=AZj7TtN/LQTBYrLlNvpXkwvdvSN8z+PuiiPsE/2EIh2+Yu+40JATr7argMVNg6vU55
+         /9O8XGzCzZCI6g4EtVfkcCBJdSgairOVCdRwjj3kvXhpRoxOKqP2brv2EtAdcGmnEhD2
+         XDQQfIstL/3yFQMJYFhjuXSInrqkhpGhzPL8I8vhZzYQ//fVnCR/4noDsjzIPV1qBJAc
+         66DcSB5rhZY/yJrsJD/rUkC0RGXMKZ8jKJLJPvq+iHFenVWjnTGiv9mQ4MIlOlf4u1kj
+         ej9/XYpLyviFjqka7AAt4zLfm8pTrGfp2IGLNS0mWI1gg9tRMEUS/tyKhG3JP0T5HaxT
+         Bmqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=xcxeBrhmCDglo5TG13TThxZlJt9301chtPj7Wm2s7sw=;
-        b=NORnJHUVN9IUJac82QADkVr0wVF+V0rU3XuficXALk7UVTC+Te7VLmYOMsw9U5ytmS
-         iYQ9dshD2bX4FzdMHq10zcZIMXnFRJlXFb6zkMgcWxX4IspHXTPlect1alSCroWshbzV
-         EreNNnySrLyfybAURkQR9rkiedGXRODmYolX0b8ZxBrtwIFhP449oUCGjjbB9yMtz7yt
-         2NRqYKe94pCMU+W56dkF1Gg792qZxGV3JKTH0tqJVExmZdicyQepXTiC6PZsKBNEKlmK
-         CDxg5MusUREj7hQafXWo1Pnh1ahmET4r7UxzhYgLHGOwkUWpJUNWm3FQY1vQL1Fqn5VS
-         RKaA==
-X-Gm-Message-State: AOAM532IiptrcUo6GWZrf3YB/auYzArqEn2BoSCAFKCKameX9WISGXsa
-	FwaSST9gO3IhqgbqWCsiCi5T9rtUf5Jh5w==
-X-Google-Smtp-Source: ABdhPJxKBFtXSTCCHPuJ/jO0DhCpesjN+MdbvXsd5XyOpF5daXNbdpDwdLIR0DiAJqefX0RPx6eCIA==
-X-Received: by 2002:aa7:cd42:: with SMTP id v2mr29705220edw.245.1623220724029;
+        bh=JWeOCVGxki+pMKcwzUIV4rrmTzt3yw0UWTW6XMcjPFE=;
+        b=A6t0zFgFjKiB2HJBcY4Ab5VOlGRvUVRwJmX/qlqJ/W59SC3V8O6s+LK9NbScGJ5Ymg
+         gqy0fOEKSlA1FTPJMU2DTfeiQHMRtcVR5Do6vPtEtMSCcFy3vLkQCh4+6CjuMCxC8xDB
+         EgC03zRIDLSzIqpx+gPPTXnugzIK0y3Tkl1C8Fw43jtEeufEN5bvyUl89DWAAj5syVCy
+         ACLLhHEhJR4D8HZJcTBeEERfu/rO9KzV7aMsdllqK4OLRNBkJHJSIVK94xtb+MMRM+XA
+         qXbpI8DPMDpDcBM/RbVA2g7A9IyVRiOl91nPkc+rbOSPKGjWLVrc2RyZKeJt5a0mGmY+
+         pjzw==
+X-Gm-Message-State: AOAM532KY0emJZoTNc0Y7qdg3R8i1WTmPp5zQo1+633pKJnsKAPdLG2D
+	uoPaB7KcWlpJBVWbEr0BvwfzdXF6WcXP6A==
+X-Google-Smtp-Source: ABdhPJyqs8D+o+ROi/kquWYpHJa27PaELBuJrGN4HOVOZ1VUMzINxer28swQx7kffBiaEJFkE3zdvA==
+X-Received: by 2002:a17:906:2b85:: with SMTP id m5mr27608255ejg.141.1623220724725;
         Tue, 08 Jun 2021 23:38:44 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from thanks-buchmuellers.speedport.ip (p200300f07f297e89b85a8a6897bdbe62.dip0.t-ipconnect.de. [2003:f0:7f29:7e89:b85a:8a68:97bd:be62])
-        by smtp.gmail.com with ESMTPSA id o4sm690810edc.94.2021.06.08.23.38.43
+        by smtp.gmail.com with ESMTPSA id o4sm690810edc.94.2021.06.08.23.38.44
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Jun 2021 23:38:43 -0700 (PDT)
+        Tue, 08 Jun 2021 23:38:44 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 02/28] atkmm: build with meson
-Date: Wed,  9 Jun 2021 08:38:05 +0200
-Message-Id: <20210609063831.3400611-2-schnitzeltony@gmail.com>
+Subject: [PATCH 03/28] dconf: upgrade 0.38.0 -> 0.40.0
+Date: Wed,  9 Jun 2021 08:38:06 +0200
+Message-Id: <20210609063831.3400611-3-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210609063831.3400611-1-schnitzeltony@gmail.com>
 References: <20210609063831.3400611-1-schnitzeltony@gmail.com>
@@ -52,32 +52,52 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Changes in dconf 0.40.0
+=======================
+
+ - common: Add missing G_BEGIN/END_DECLS to allow use of headers from C++
+   code (Philip Withnall, !67)
+
+Changes in dconf 0.39.1
+=======================
+
+ - build: improve libdconf visible symbols (Inigo Martinez, Daniel Playfair
+   Cal, !59)
+ - engine: do not emit optimistic change notifications unless the local value
+   is different (Daniel Playfair Cal, !2)
+ - build: minor fixes to bash completion script (Philip Withnall, !64)
+ - service: add a systemd unit for D-Bus activation (Simon McVittie, !63)
+
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-oe/recipes-gnome/atk/atkmm_2.28.2.bb | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ .../recipes-gnome/dconf/{dconf_0.38.0.bb => dconf_0.40.0.bb}   | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/dconf/{dconf_0.38.0.bb => dconf_0.40.0.bb} (83%)
 
-diff --git a/meta-oe/recipes-gnome/atk/atkmm_2.28.2.bb b/meta-oe/recipes-gnome/atk/atkmm_2.28.2.bb
-index edcc4769a..a3e8bbf49 100644
---- a/meta-oe/recipes-gnome/atk/atkmm_2.28.2.bb
-+++ b/meta-oe/recipes-gnome/atk/atkmm_2.28.2.bb
-@@ -7,12 +7,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+diff --git a/meta-gnome/recipes-gnome/dconf/dconf_0.38.0.bb b/meta-gnome/recipes-gnome/dconf/dconf_0.40.0.bb
+similarity index 83%
+rename from meta-gnome/recipes-gnome/dconf/dconf_0.38.0.bb
+rename to meta-gnome/recipes-gnome/dconf/dconf_0.40.0.bb
+index 162748d30..b1604e8df 100644
+--- a/meta-gnome/recipes-gnome/dconf/dconf_0.38.0.bb
++++ b/meta-gnome/recipes-gnome/dconf/dconf_0.40.0.bb
+@@ -3,7 +3,7 @@ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+ SECTION = "x11/gnome"
  
- DEPENDS = "atk glibmm"
+-SRC_URI[archive.sha256sum] = "45f60f41330d27715cce1315af123f94f1c2cdedb68b6bed3b309866eec44f58"
++SRC_URI[archive.sha256sum] = "cf7f22a4c9200421d8d3325c5c1b8b93a36843650c9f95d6451e20f0bcb24533"
  
--inherit features_check gnomebase autotools pkgconfig
-+GNOMEBASEBUILDCLASS = "meson"
-+
-+inherit gnomebase features_check
+ DEPENDS = "dbus glib-2.0 intltool-native"
  
- REQUIRED_DISTRO_FEATURES = "x11"
+@@ -18,6 +18,7 @@ EXTRA_OEMESON_append_class-native = " -Dbash_completion=false"
  
- SRC_URI[archive.sha256sum] = "a0bb49765ceccc293ab2c6735ba100431807d384ffa14c2ebd30e07993fd2fa4"
+ FILES_${PN} += " \
+     ${datadir}/dbus-1 \
++    ${systemd_user_unitdir} \
+     ${libdir}/gio/modules/*.so \
+ "
  
--EXTRA_OECONF = " --disable-documentation "
-+EXTRA_OEMESON = "-Dbuild-documentation=false"
- 
- FILES_${PN}-dev += "${libdir}/*/include ${libdir}/*/proc/m4"
 -- 
 2.31.1
 
