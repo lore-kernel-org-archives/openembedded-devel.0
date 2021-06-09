@@ -1,50 +1,50 @@
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
- by mx.groups.io with SMTP id smtpd.web10.4381.1623220737988462140
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+ by mx.groups.io with SMTP id smtpd.web11.4433.1623220738666271176
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Jun 2021 23:38:58 -0700
+ Tue, 08 Jun 2021 23:38:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=rKYOOXA0;
- spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ed1-f49.google.com with SMTP id dj8so27435541edb.6
-        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jun 2021 23:38:57 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=i/2/k/x6;
+ spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f54.google.com with SMTP id ci15so36650486ejc.10
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jun 2021 23:38:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=6yEbRYQW9sZfGQyg5MMUbY+qBc6oxMPEro5wHZMe8QA=;
-        b=rKYOOXA0rMXyOKmILIlxCRHMlcYCSDrbopMuZKQ3sxKu6mlxYMtLIHksZ/+9xLxZWK
-         /B3zTp8Fr5guaQRUcESEhykE5e5oPNydjy31EjnVt4IFGIGWnOfKpSxQBlDpiWY7h0En
-         7pCWF7d2nWC5oJiVGRDvxzbbAvQbafABuJ1NDte6/z8ShOEb5cnXqiJjSCDKjTZJPoZp
-         QHcQdcmThO8cVlrLRW8wKwYiNxfd6Ja4QPyUR57fzQk/JHxlYITwmgPY4r2c2p8kPTqa
-         6tgpc7YCPykH6NHJ1/BEbDbNdozPqitGK5PUKnyUms/LOm29wzW1IsoFjU3UDyV3LqWh
-         8kog==
+        bh=/mWdZmarwkRIMwx2B0L5zaveqtBWJuzveYs9cMNXw6o=;
+        b=i/2/k/x6iu8DgQMjItBrlJas296nIuQd2rjEHG60QiAI0YcxvQFbLsctft5e6Ncg1w
+         u+7jWx+Uspdc2gL8Is7nbHirK5YhZWgicJov31jD9Ae7DSHx3jr/6GwLLaOnBLjLTtho
+         ap7LNsAcKTgpLO/lSLXX7LyA/5loYhBDW5CLtTaZNubVQw7ai6rs0Cx3g4+1tdu/eXfp
+         pg8SpuJJWSHDIO/FJTOZzUJ77ueQDZA8VScw9YtGKCrxydyEbv9wj1QsjU3Zda/twlu4
+         Iuz+G1JilqAN9DpcPYQADs0T7CeN5Ezlsl/49fEXhMB+TnN+hDn0Pj3H4w0NNt16I26E
+         Lbjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=6yEbRYQW9sZfGQyg5MMUbY+qBc6oxMPEro5wHZMe8QA=;
-        b=SgGtbKxb+XV5Jv1cdBIgOUh1mcL91O5paeiV/up9LFDYP7bRpeMOCMkLAnrd41kuc7
-         BnmFhTZIu7EfcuivtbO51cmW42zCYg6tb17Og7kpy8hHvYnhQJfIvGZmsZcZxCdGDUV7
-         V5Hj3G/m2eHiXUEkkFrB4eMvxtyh3Uw0Js2ZYVJKZ4mDIu4YH4UJAanD/b7CmU1E9v8Y
-         +nKTAsJEEFfDqyQ7oB24YoM9mw8nYrNA/vbOxI+eAJwHnYJeiyGjbkSrixE+LA5bDf40
-         BjYYBfvlpZRFsAxPfEVIq6MhAO6oFRzoY+/VVLgPJdBsqUHyEhrpKDSf+SIvHbpHktDF
-         8u4g==
-X-Gm-Message-State: AOAM532kZZo7KuyCagSaCBRj6E3EWGX5mN6v5Y3sEWzLHjbykfPnZOPH
-	+9vz3ZBWGaE5+nwerqIBm1SlbYtFGCzF7w==
-X-Google-Smtp-Source: ABdhPJyRn6d2UhubBlegu4nEdBUnkZQXOCnddX1ozkHDL4iVXtbW7MX7a8UyShd2Za3ag6klxmsBIA==
-X-Received: by 2002:aa7:d555:: with SMTP id u21mr21225776edr.84.1623220736567;
-        Tue, 08 Jun 2021 23:38:56 -0700 (PDT)
+        bh=/mWdZmarwkRIMwx2B0L5zaveqtBWJuzveYs9cMNXw6o=;
+        b=UWO7X/QT2YyNHI8vmqq9qscFBMpvDgfMwqHAOBNKq90AdxGHJGoe/3b6BMe8O4DGZW
+         PI8QSMhXUGYZ7YrkBuPSIvpUwyoIiFXIFlOMNqmOZDoN8UXUv2vaPV5MpXd1R5K11VqV
+         ioI3OBkq/GpRt3OhN2RyHQMTETDlfKfJiLDxDns/mHOQR9zFH4F43992JonpjX8lyv7l
+         sOYi7KF2qdZ6zms2DAhJ4agNZV9LI2NpoB2vlN6ncg/z1wX6z6+3/1UR7waEGRUIhssx
+         7o+GuAOTjRgmB44P5CRtBmORPQEIK0w+/ZfF6R0BezB7o9IOTafXHp2XYebuQPCFeYU3
+         eXLg==
+X-Gm-Message-State: AOAM531+JVJV5z0EscUXujihVEzVq8A9nisX3y6txCb7VbDEAsIX6Gxo
+	ttGKysxj1KJspllMgCfUzob7vVPGXo5uIQ==
+X-Google-Smtp-Source: ABdhPJxKKErr4e6MfBR5wL1itb1XS7WrLiamLIlhLegLvJvVzk/dnUY26UKjKtOGwfkWGL312aPkGw==
+X-Received: by 2002:a17:906:a294:: with SMTP id i20mr27335427ejz.330.1623220737254;
+        Tue, 08 Jun 2021 23:38:57 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from thanks-buchmuellers.speedport.ip (p200300f07f297e89b85a8a6897bdbe62.dip0.t-ipconnect.de. [2003:f0:7f29:7e89:b85a:8a68:97bd:be62])
-        by smtp.gmail.com with ESMTPSA id o4sm690810edc.94.2021.06.08.23.38.55
+        by smtp.gmail.com with ESMTPSA id o4sm690810edc.94.2021.06.08.23.38.56
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Tue, 08 Jun 2021 23:38:56 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 19/28] libmediaart-2.0: upgrade 1.9.4 -> 1.9.5 / merge inc file / build with meson
-Date: Wed,  9 Jun 2021 08:38:22 +0200
-Message-Id: <20210609063831.3400611-19-schnitzeltony@gmail.com>
+Subject: [PATCH 20/28] libsigc++-2.0: upgrade 2.10.6 -> 2.10.7
+Date: Wed,  9 Jun 2021 08:38:23 +0200
+Message-Id: <20210609063831.3400611-20-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210609063831.3400611-1-schnitzeltony@gmail.com>
 References: <20210609063831.3400611-1-schnitzeltony@gmail.com>
@@ -52,86 +52,47 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-NEW in 1.9.5 - 2021-05-22
-=========================
-  * libmediaart: Remove QT4 support
-  * libmediaart: Mandate that input strings are UTF8
-  * extract: Remove local storage
-  * build: Drop autotools support
-  * build: Update to recent glib API
-  * build: introspection fixes
-  * build: Added CI
+2.10.7 (stable)
+
+Meson build:
+* Make it possible to use sigc++ as a subproject
+  (Kjell Ahlstedt)
+* Fix dependency on files generated from .h.m4 files
+  (Kjell Ahlstedt)
+* No implicit_include_directories
+  (Kjell Ahlstedt)
+* Make quiet installations possible
+  (Kjell Ahlstedt)
+* Fix build as subproject without building documentation
+  (Kjell Ahlstedt) Issue #71 (Xavier Claessens)
+
+Documentation:
+* Links to *.gnome.org refer to sigc++-2.0 and gtkmm-3.0 versions
+  instead of latest versions
+  (Kjell Ahlstedt)
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../libmediaart/libmediaart-2.0_1.9.4.bb      |  7 ------
- .../libmediaart/libmediaart-2.0_1.9.5.bb      | 23 +++++++++++++++++++
- .../libmediaart/libmediaart.inc               | 12 ----------
- 3 files changed, 23 insertions(+), 19 deletions(-)
- delete mode 100644 meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.4.bb
- create mode 100644 meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.5.bb
- delete mode 100644 meta-multimedia/recipes-support/libmediaart/libmediaart.inc
+ .../{libsigc++-2.0_2.10.6.bb => libsigc++-2.0_2.10.7.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-core/libsigc++-2.0/{libsigc++-2.0_2.10.6.bb => libsigc++-2.0_2.10.7.bb} (84%)
 
-diff --git a/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.4.bb b/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.4.bb
-deleted file mode 100644
-index 56a7873fc..000000000
---- a/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.4.bb
-+++ /dev/null
-@@ -1,7 +0,0 @@
--require libmediaart.inc
--
--SRC_URI = "${GNOME_MIRROR}/libmediaart/1.9/libmediaart-${PV}.tar.xz"
--SRC_URI[md5sum] = "9b960a6a764fba38135fb57219f2e6b4"
--SRC_URI[sha256sum] = "a57be017257e4815389afe4f58fdacb6a50e74fd185452b23a652ee56b04813d"
--
--S = "${WORKDIR}/libmediaart-${PV}"
-diff --git a/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.5.bb b/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.5.bb
-new file mode 100644
-index 000000000..31fe43bfa
---- /dev/null
-+++ b/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.5.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "Library tasked with managing, extracting and handling media art caches"
-+
-+LICENSE = "LGPLv2+ & GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c \
-+                    file://libmediaart/extract.c;endline=18;md5=dff2b6328ab067b5baadc135f9876c36 \
-+                    file://tests/mediaarttest.c;endline=18;md5=067106eaa1f7a9d918759a096667f18e"
-+
-+DEPENDS = "glib-2.0 gdk-pixbuf"
-+
-+GNOMEBASEBUILDCLASS = "meson"
-+
-+inherit gnomebase gobject-introspection vala features_check
-+
-+SRC_URI = "${GNOME_MIRROR}/libmediaart/1.9/libmediaart-${PV}.tar.xz"
-+SRC_URI[sha256sum] = "07def5a42c482ae71d3e1f77a4d0fdc337f74226059a65284d6d5a241f0e9cd6"
-+
-+S = "${WORKDIR}/libmediaart-${PV}"
-+
-+# gobject-introspection is mandatory and cannot be configured
-+REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
-+UNKNOWN_CONFIGURE_WHITELIST = "introspection"
-+
-+EXTRA_OEMESON = "-Dimage_library=gdk-pixbuf"
-diff --git a/meta-multimedia/recipes-support/libmediaart/libmediaart.inc b/meta-multimedia/recipes-support/libmediaart/libmediaart.inc
-deleted file mode 100644
-index c7b368de3..000000000
---- a/meta-multimedia/recipes-support/libmediaart/libmediaart.inc
-+++ /dev/null
-@@ -1,12 +0,0 @@
--SUMMARY = "Library tasked with managing, extracting and handling media art caches"
--
--LICENSE = "LGPLv2+ & GPLv2+"
--LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c \
--                    file://libmediaart/extract.c;endline=18;md5=dff2b6328ab067b5baadc135f9876c36 \
--                    file://tests/mediaarttest.c;endline=18;md5=067106eaa1f7a9d918759a096667f18e"
--
--DEPENDS = "glib-2.0 gdk-pixbuf"
--
--inherit gnomebase gtk-doc gobject-introspection
--
--EXTRA_OECONF = "--disable-qt --enable-gdkpixbuf"
+diff --git a/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.10.6.bb b/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.10.7.bb
+similarity index 84%
+rename from meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.10.6.bb
+rename to meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.10.7.bb
+index f4c5aa396..de1aa4ea3 100644
+--- a/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.10.6.bb
++++ b/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.10.7.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499"
+ DEPENDS = "mm-common"
+ 
+ SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libsigc++/2.10/libsigc++-${PV}.tar.xz"
+-SRC_URI[sha256sum] = "dda176dc4681bda9d5a2ac1bc55273bdd381662b7a6d49e918267d13e8774e1b"
++SRC_URI[sha256sum] = "d082a2ce72c750f66b1a415abe3e852df2eae1e8af53010f4ac2ea261a478832"
+ 
+ S = "${WORKDIR}/libsigc++-${PV}"
+ 
 -- 
 2.31.1
 
