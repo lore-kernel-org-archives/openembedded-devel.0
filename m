@@ -1,50 +1,50 @@
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web11.4431.1623220733528542879
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+ by mx.groups.io with SMTP id smtpd.web10.4379.1623220734225267945
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Jun 2021 23:38:53 -0700
+ Tue, 08 Jun 2021 23:38:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=buvqtEnf;
- spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ej1-f49.google.com with SMTP id my49so19971735ejc.7
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZcAR3rom;
+ spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f50.google.com with SMTP id ci15so36650247ejc.10
         for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jun 2021 23:38:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=WXcsqq3zwgYv1L64SpVGpk+dQf6ZI+05r7OzxkNe49M=;
-        b=buvqtEnfUx1rboCVPOWuYTTHTGjUDwmPejp9Y2Sjgp59nPSAWzPy/QrJU88BbaWigg
-         +rApHDpFidIbqjqBXvoiFyfcdzAFxIDJGmaXOZCdGw8fZcaxdI0dhiedWVeBUz1Dq2g0
-         6aLYXDFdo3Hff+KhNVv/bcU0D9mW5rJd3cdxFPbMNt0XmuPZqBvlkW3K45SLTD1C+rhX
-         82WqlSRLfbT0RxadICDPMwyxyvuTGSDFM2gTw3m1ucteY6PVjKD/UHDL8pguZR8WMiZD
-         naeIUEaJy3ELyyrlNLB7OpPj37jkDO2xS7W1SwrvByGjVELfgxcojcStzwfJP2iq+W96
-         kCqw==
+        bh=jFSayw5ZaxlXxnu2M2bJi/Ie2vBbNBYa1knSAhH04Ys=;
+        b=ZcAR3romq551VvXOrpyCvUNrd9L5hnGvJf0IcOW2ANtMEIITSCnhz3JRT9dTKemtuQ
+         L+Y9Nl79xzDv9lber5B5H82lzd3xraWHqdvvPeW7lFmDZTs1F7DjQhXMX9Fbd4ITs62W
+         0iOSQTqhUyBuO4n8lps8T5MWsr3jwMDJxu23UlMIEVvR4QijeCXmlQsOzl8UUDGiTaDT
+         mpY7mfKbdSh4zkYoVd+sq0J2jj2tHAB7JY/1g1GUbkcu9//dD9OvK7m6RfEOrTs2ObNx
+         /L9BLhKSu0VDgVjQNM4T3/HFLvQHbdIEWgX/IFyr0EJJNOomGvvsZh5qxPVVZsoQzC0i
+         cpXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=WXcsqq3zwgYv1L64SpVGpk+dQf6ZI+05r7OzxkNe49M=;
-        b=lhIaVAensUO4KLVS8hvybm89eBdmDDNcbTA+3zYv938llc8sRuz8dxd3czhslq1qRZ
-         /31iqci5AT82Dgf1st7SOzG9EpObGqS80/imOsG2SuWe0deHK7x6kFN1rEduVjwCe7Br
-         xgyLukfXFAvqaQNFkGJfWpBm/VWt6lZOI6MKzD3pShXFUvl1nVe8NKtmiKCohJd96/WF
-         o8Lgop504COHd4Enhx1LhNOLe8GvrVE5XXKVZZ/5F6+V4tD9yduR2YMLtNLLMdaBl+c1
-         ds4QXD01zKt+64jeXiUdQe5zg8TmrqtBNqLVUoU5L59UrEr0lijYOK+DbjlwYItQjcLq
-         9WRQ==
-X-Gm-Message-State: AOAM530DO/PsDPXGCUL8izvRWojbLhqTs9EBGeLBiUThMo3KddKo94Ej
-	613pFtuHBibbVihIVwo1ZbIss14xfuRZ+w==
-X-Google-Smtp-Source: ABdhPJyIs2eV0iuesvdMGC7xd0FdkWS9pdQi1+nQpZZKmcKRWNoFT2SJs31Mc0LXANV+Yd8SEb4Azg==
-X-Received: by 2002:a17:906:b754:: with SMTP id fx20mr25638301ejb.201.1623220732058;
+        bh=jFSayw5ZaxlXxnu2M2bJi/Ie2vBbNBYa1knSAhH04Ys=;
+        b=mSxWT4mxFqszgV5eFFNSX0twb7WwmfnzfloLP+bkayo4BYAmqKoF/zjcQWkLhiRyY2
+         B3TRodlRV4Bqw5GRDwkf3vjPblfFtVHB8YVQn7g+FiadHi+5f8GNrDbBV8zxwIvmmZsj
+         WYu4MkPkVgiD5Rj04KP/4msMf/iI4gKLH8YeVgaoorwCyxzUgxV2OsI9Kt0grIkgUGAB
+         YetZmFcJEcxSsthaX+ORhMbpBuTzExvEF7SDHvxZYX4evld+DSQKiFffJCO1cyXiAdjg
+         RAXCqOOp98tWul8Z0Py6tCkfF+Kbvgv0aGpZpGEOGokFLObBZ7rZfrLIgR7xDtj2T182
+         ty3A==
+X-Gm-Message-State: AOAM532CoxwpO5x41bJEaSrAkKYAP3p+nyMoi5W6c/+/a/VpApI68fBK
+	bXG6qE+w2wCgX2roH18Z4lPI5dTtdmuPlw==
+X-Google-Smtp-Source: ABdhPJxlTT6lO3mT1k4MN9JkO4M2fNeF1JJBhLRXzFaU4eJmLr4eRa7QMfEGcaxrmqzH4ioYXiJCXQ==
+X-Received: by 2002:a17:907:35d1:: with SMTP id ap17mr20226866ejc.79.1623220732743;
         Tue, 08 Jun 2021 23:38:52 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from thanks-buchmuellers.speedport.ip (p200300f07f297e89b85a8a6897bdbe62.dip0.t-ipconnect.de. [2003:f0:7f29:7e89:b85a:8a68:97bd:be62])
-        by smtp.gmail.com with ESMTPSA id o4sm690810edc.94.2021.06.08.23.38.51
+        by smtp.gmail.com with ESMTPSA id o4sm690810edc.94.2021.06.08.23.38.52
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Jun 2021 23:38:51 -0700 (PDT)
+        Tue, 08 Jun 2021 23:38:52 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 13/28] gtkmm3: upgrade 3.24.3 -> 3.24.5
-Date: Wed,  9 Jun 2021 08:38:16 +0200
-Message-Id: <20210609063831.3400611-13-schnitzeltony@gmail.com>
+Subject: [PATCH 14/28] gtksourceview4: upgrade 4.6.1 -> 4.8.1
+Date: Wed,  9 Jun 2021 08:38:17 +0200
+Message-Id: <20210609063831.3400611-14-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210609063831.3400611-1-schnitzeltony@gmail.com>
 References: <20210609063831.3400611-1-schnitzeltony@gmail.com>
@@ -52,122 +52,48 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Submitted patch was applied
+News in 4.8.1, 2021-03-02
+-------------------------
+* Fix highlighting in presence of byte-order-marks (BOM)
+* meson.lang: Update keywords to 0.55.3 syntax
+* cmake.lang: Update keywords to 3.18.2 syntax
+* go.lang: make "0i" syntax highlight as integer
+* Translation updates
 
-3.24.5 (stable):
-
-Gtk:
-* TreeValueProxy: Mark the copy assignment operator as deleted
-  (Daniel Boles) Issue #94, merge request !63
-
-Build:
-* Meson build: Use relative paths to untracked/
-  (Mingli Yu) Merge request !61
-* [gdk|gtk]mmconfig.h.*: Don't dllimport on MinGW
-  (Chun-wei Fan) Issue #90 (Lukas K.)
-* Meson build: Make it possible to use gtkmm as a subproject
-  (Kjell Ahlstedt) Merge request !62 (BogDan Vatra)
-* Meson build: No implicit_include_directories
-  (Kjell Ahlstedt)
-* MSVC build: Gtk::TreeModelColumnRecord: Export class selectively
-  (Chun-wei Fan)
-
-3.24.4 (stable):
-
-The tarball for 3.24.4 has been created with 'meson dist'.
-If you build with Autotools from the tarball, please read the relevant
-part of the README file.
-
-Build on Windows:
-* Gtk::TreePath: Export comparison operators
-  (Chun-wei Fan) Issue #88 (Patrick Storz)
-  (Chun-wei Fan) Merge request !58
+News in 4.7.90, 2020-08-07
+--------------------------
+* Bump GTK requirement to 3.24 for gdk_window_move_to_rect()
+* Use gdk_window_move_to_rect() to more reliably position completion windows
+* erb.lang: initial support for ERB
+* javascript.lang, typescript.lang: various correctness and performance
+  improvements.
+* Translation updates
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../0001-meson.build-use-relative-path.patch  | 52 -------------------
- .../{gtkmm3_3.24.3.bb => gtkmm3_3.24.5.bb}    |  5 +-
- 2 files changed, 1 insertion(+), 56 deletions(-)
- delete mode 100644 meta-oe/recipes-gnome/gtk+/gtkmm/0001-meson.build-use-relative-path.patch
- rename meta-oe/recipes-gnome/gtk+/{gtkmm3_3.24.3.bb => gtkmm3_3.24.5.bb} (77%)
+ .../{gtksourceview4_4.6.1.bb => gtksourceview4_4.8.1.bb}     | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-gnome/recipes-gnome/gtksourceview/{gtksourceview4_4.6.1.bb => gtksourceview4_4.8.1.bb} (72%)
 
-diff --git a/meta-oe/recipes-gnome/gtk+/gtkmm/0001-meson.build-use-relative-path.patch b/meta-oe/recipes-gnome/gtk+/gtkmm/0001-meson.build-use-relative-path.patch
-deleted file mode 100644
-index 46a691643..000000000
---- a/meta-oe/recipes-gnome/gtk+/gtkmm/0001-meson.build-use-relative-path.patch
-+++ /dev/null
-@@ -1,52 +0,0 @@
--From 152d295a28567ac87b0e6db2e62c0d914b1d7ef9 Mon Sep 17 00:00:00 2001
--From: Mingli Yu <mingli.yu@windriver.com>
--Date: Tue, 23 Feb 2021 08:47:54 +0000
--Subject: [PATCH] meson.build: use relative path
--
--Fixes:
--Fatal error: can't create
--gdk/gdkmm/libgdkmm-3.0.so.1.1.0.p/_buildarea1_master-wr_build_Userspace_auto-usrmerge_standalone_usrmerge_next_210222_lxbuilds_Har12345_platform_up_intel-x86-64-standard-glibc-std_wrlinux_build_tmp-glibc_work_corei7-64-wrs-linux_gtkmm3_3.24.3-r0_gtkmm-3.24.3_untracked_gdk_gdkmm_timecoord.cc.o: File name too long
--
--Upstream-Status: Submitted [https://gitlab.gnome.org/GNOME/gtkmm/-/merge_requests/61]
--
--Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-----
-- gdk/gdkmm/meson.build | 4 ++--
-- gtk/gtkmm/meson.build | 4 ++--
-- 2 files changed, 4 insertions(+), 4 deletions(-)
--
--diff --git a/gdk/gdkmm/meson.build b/gdk/gdkmm/meson.build
--index afccaea..240ce4d 100644
----- a/gdk/gdkmm/meson.build
--+++ b/gdk/gdkmm/meson.build
--@@ -200,9 +200,9 @@ else # not maintainer_mode
--     gdkmm_hg_ccg_basenames,
--   )
-- 
---  built_cc_files = [ src_untracked_gdkmm / 'wrap_init.cc' ]
--+  built_cc_files = [ '../..' / untracked_gdkmm / 'wrap_init.cc' ]
--   foreach file : gdkmm_used_hg_ccg_basenames
---    built_cc_files += src_untracked_gdkmm / file + '.cc'
--+    built_cc_files += '../..' / untracked_gdkmm / file + '.cc'
--   endforeach
-- 
--   gdk_gen_sources = built_cc_files
--diff --git a/gtk/gtkmm/meson.build b/gtk/gtkmm/meson.build
--index ab96a22..cc0c050 100644
----- a/gtk/gtkmm/meson.build
--+++ b/gtk/gtkmm/meson.build
--@@ -464,9 +464,9 @@ else # not maintainer_mode
--     gtkmm_hg_ccg_basenames,
--   )
-- 
---  built_cc_files = [ src_untracked_gtkmm / 'wrap_init.cc' ]
--+  built_cc_files = [ '../..' / untracked_gtkmm / 'wrap_init.cc' ]
--   foreach file : gtkmm_used_hg_ccg_basenames
---    built_cc_files += src_untracked_gtkmm / file + '.cc'
--+    built_cc_files += '../..' / untracked_gtkmm / file + '.cc'
--   endforeach
-- 
--   gtk_gen_sources = built_cc_files
---- 
--2.29.2
--
-diff --git a/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.3.bb b/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.5.bb
-similarity index 77%
-rename from meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.3.bb
-rename to meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.5.bb
-index 1648e37fa..2c5012cb2 100644
---- a/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.3.bb
-+++ b/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.5.bb
-@@ -16,10 +16,7 @@ inherit gnomebase features_check
+diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.6.1.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.1.bb
+similarity index 72%
+rename from meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.6.1.bb
+rename to meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.1.bb
+index 5a420e615..f7d040d73 100644
+--- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.6.1.bb
++++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.1.bb
+@@ -16,9 +16,8 @@ inherit gnomebase lib_package gettext features_check gtk-doc gobject-introspecti
  
  REQUIRED_DISTRO_FEATURES = "x11"
  
--SRC_URI += "file://0001-meson.build-use-relative-path.patch \
--"
--
--SRC_URI[archive.sha256sum] = "60497c4f7f354c3bd2557485f0254f8b7b4cf4bebc9fee0be26a77744eacd435"
-+SRC_URI[archive.sha256sum] = "856333de86689f6a81c123f2db15d85db9addc438bc3574c36f15736aeae22e6"
+-SRC_URI = "http://ftp.gnome.org/pub/gnome/sources/gtksourceview/4.6/${PNAME}-${PV}.tar.xz"
+-SRC_URI[md5sum] = "4d4cff3a57a371bff4793e97d50404ef"
+-SRC_URI[sha256sum] = "63f487a7ab59612ffa9e7be1883dbd274ab1016afcede3239b93b0fc384df874"
++SRC_URI = "https://download.gnome.org/sources/gtksourceview/4.8/${PNAME}-${PV}.tar.xz"
++SRC_URI[sha256sum] = "d163d71b5fcafbc5b1eec6dd841edbdbcddd3a7511cd5fdcffd86b8bbfe69ac1"
  
- EXTRA_OEMESON = "-Dbuild-demos=false"
- 
+ GIR_MESON_OPTION = 'gir'
+ GTKDOC_MESON_OPTION = "gtk_doc"
 -- 
 2.31.1
 
