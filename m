@@ -1,86 +1,73 @@
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- by mx.groups.io with SMTP id smtpd.web10.6805.1623240474290235197
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.web12.7673.1623244492248929829
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Jun 2021 05:07:54 -0700
+ Wed, 09 Jun 2021 06:14:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@mailbox.org header.s=mail20150812 header.b=o/bVepN1;
- spf=pass (domain: mailbox.org, ip: 80.241.56.161, mailfrom: crg7475@mailbox.org)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [IPv6:2001:67c:2050:105:465:1:2:0])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4G0Qpv4FqZzQk2L
-	for <openembedded-devel@lists.openembedded.org>; Wed,  9 Jun 2021 14:07:51 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=mailbox.org; h=
-	content-transfer-encoding:mime-version:message-id:date:date
-	:subject:subject:from:from:received; s=mail20150812; t=
-	1623240466; bh=m6QJ/kT1FGCSiOYjYD94XqYWfL48Hw1RGAIblI9cGv8=; b=o
-	/bVepN1hQp6/a2ayQlQgDr46eG+SJtD2AqeQ0curnafVaV8fAFiSp4i8aBD/p3oi
-	LYHN+mF1yjQnCiHOedmSRxa8H4u7jn5oqIGzqmv9zmU6OvuVAnsr4mDCBF4MjRlm
-	yx5yq5yPPDjLybPNw8x5FvPFJt1vpmAtMGpXrK+A9ElCTeOacgRpeSjf/M1kVsaI
-	kykv0EcRc0XRcalE1qLyo08MgFRnx+D+GUUJmqRY6t+pMzGPmsw9Qk+aV6KWKMdm
-	/ah4KQ/DQL6VHCqyz42JNLiA2IRvu1PWTL4hnuQMWgt/QTaVrNjoNllzmj6b7xsF
-	5ZEb5p0wBC+Jj6hfcO0eQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1623240471;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=Tm3ROD5DypAUHOqIDnzreb4D4Q+nsxPRTseDGD8Fwas=;
-	b=usu9eQfwo5GZk+9Bdc/eTdioO6NnZ8boMMdjpV4Z0nVz/HOUTq9jS6u9085qaJsEwCuMb7
-	2L2iinrzevhKgBUdldErVLorybuW+wIH56Po+iVUwYBp+cYVjYEt+RSEDi5eO6FeZImYBQ
-	Wnf0E2nDKnIBmdczilJnRsCT8ZWQeUMYG8QzUtG6xuJcSjZkf2xe29NaT3rE7KCgBIWsai
-	OaRaonpArV96fINdIUcK5DsyfOqxuM4Tbo5JeBK7kzQjCVq3gInZUKUO57US9gxsvYyfLN
-	1sqbw0Si9PB2uRvZ3K+w6iyjTXECPYePETNyBJtmYyNo3n40iLFzcx1ZsGLCEw==
-X-Virus-Scanned: amavisd-new at heinlein-support.de
-Received: from smtp2.mailbox.org ([80.241.60.241])
-	by spamfilter02.heinlein-hosting.de (spamfilter02.heinlein-hosting.de [80.241.56.116]) (amavisd-new, port 10030)
-	with ESMTP id 9EjC43yJ2BXM
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Jun 2021 14:07:46 +0200 (CEST)
-From: "Carlos Rafael Giani" <crg7475@mailbox.org>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=IMNBSNS3;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: luca.boccassi@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id l7-20020a05600c1d07b02901b0e2ebd6deso4187535wms.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jun 2021 06:14:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=xokxJmqJ7DRgiCjl1Q+/gy7CAfKIKSzFUp72AgwjVME=;
+        b=IMNBSNS3/MLuUlHR8tZEFe7pbXfmvtIeJyLJTANUV32DZyRtVdYpok8fMJg5Wa1Rxt
+         bKsEBNwPVMRefEwuM/N2U7objeLloE7pnHFQU3RiyBxQQOLLBc/1U1+CvfdHnKzv8KVO
+         uLBsgT9sMyZfk7PJeN0FQpBCtAs3iG3/iQOvqHzRR3PXZ0ZUAIzDBWeoYhVJxllr5PPG
+         CQG7rzNesCShUa0+AatqHYxlX66JN0KutpwW4wYcjnP2hlAd3znQxeXqlhy9zMDVowYI
+         nyLtCUpawCZ3aMlNuy+8086RohvPb7t5nug9d2GKOUGTExbdZxZHNvl++XMXAUS0Myq4
+         5BKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=xokxJmqJ7DRgiCjl1Q+/gy7CAfKIKSzFUp72AgwjVME=;
+        b=p+BriFbgFr83WtbfQZMwNNODtKBUTrqDeB9WUYkt9FU35kp4K+ffDTYnb4zB/HswFH
+         rVK/RKLp1t7Iy+mPIoGNK1zcttOpAKa84TVJmXG2eTSmyeLrJVgXIBzQbzdLxIA+I5D3
+         hyt9tCivUuxcqcFbCzfiqnBI2M4vZgYve0kQPytS1Nmc06Cs3Qq+EQQJO/T6OXraRxGG
+         qJEX/56RITWI1uicTmAZBn/aGnGRqez9lMcBpBmM/nUJ5y+l9D8siY/vdrQlpWFi7STu
+         PQPPzoQ5P4lzOchWDKmfauImhjlpTbtkPhTU191n/PXF0eeUZScn+t+HjXIg+5xdED8A
+         OU7g==
+X-Gm-Message-State: AOAM532xzY1N+fbDNkIdRFam8Z1VBPkwGP8qR4ufMpzvwYSk/6pPNCQW
+	qS8ll+BGwDYTOWL5H9Q9ZAasLDBxWBbm23il
+X-Google-Smtp-Source: ABdhPJyJoBTF9jMqmASkgP1w+m0LReFjOpaUJoB1NCCDY3dZmtWX8IbxA3iLPyhwUWDR2H3JOcB+Ng==
+X-Received: by 2002:a7b:c346:: with SMTP id l6mr27308886wmj.109.1623244490091;
+        Wed, 09 Jun 2021 06:14:50 -0700 (PDT)
+Return-Path: <luca.boccassi@gmail.com>
+Received: from localhost ([137.220.125.106])
+        by smtp.gmail.com with ESMTPSA id 30sm25327720wrl.37.2021.06.09.06.14.49
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 09 Jun 2021 06:14:49 -0700 (PDT)
+From: "Luca Bocassi" <luca.boccassi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] pipewire: Add filter-chain files to modules-filter-chain package
-Date: Wed,  9 Jun 2021 14:07:19 +0200
-Message-Id: <20210609120720.1664946-1-crg7475@mailbox.org>
+Subject: [meta-oe][PATCH 1/2] dbus-broker: remove deprecated linux-4-17 option
+Date: Wed,  9 Jun 2021 14:14:45 +0100
+Message-Id: <20210609131446.783106-1-luca.boccassi@gmail.com>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-X-MBO-SPAM-Probability: ***
-X-Rspamd-Score: 3.14 / 15.00 / 15.00
-X-Rspamd-Queue-Id: 4FA36181A
-X-Rspamd-UID: 281d4a
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Carlos Rafael Giani <crg7475@mailbox.org>
+From: Luca Boccassi <luca.boccassi@microsoft.com>
+
+Removed in v29
+
+Signed-off-by: Luca Boccassi <luca.boccassi@microsoft.com>
 ---
- .../recipes-multimedia/pipewire/pipewire_0.3.29.bb          | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ meta-oe/recipes-core/dbus/dbus-broker_29.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.29.=
-bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.29.bb
-index 6c52674ca..ef4d31c95 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.29.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.29.bb
-@@ -192,7 +192,6 @@ SYSTEMD_SERVICE_${PN} =3D "pipewire.service"
- CONFFILES_${PN} +=3D "${datadir}/pipewire/pipewire.conf"
- FILES_${PN} =3D " \
-     ${datadir}/pipewire/pipewire.conf \
--    ${datadir}/pipewire/filter-chain \
-     ${systemd_user_unitdir}/pipewire.* \
-     ${bindir}/pipewire \
- "
-@@ -271,6 +270,11 @@ FILES_${PN}-modules-rtkit +=3D " \
-     ${datadir}/pipewire/client-rt.conf \
-     "
-=20
-+CONFFILES_${PN}-modules-filter-chain =3D "${datadir}/pipewire/filter-cha=
-in/*"
-+FILES_${PN}-modules-filter-chain +=3D " \
-+    ${datadir}/pipewire/filter-chain/* \
-+"
-+
- FILES_${PN}-alsa-card-profile =3D " \
-     ${datadir}/alsa-card-profile/* \
-     ${nonarch_base_libdir}/udev/rules.d/90-pipewire-alsa.rules \
---=20
-2.25.1
+diff --git a/meta-oe/recipes-core/dbus/dbus-broker_29.bb b/meta-oe/recipes-core/dbus/dbus-broker_29.bb
+index 49ba16911..c59809f53 100644
+--- a/meta-oe/recipes-core/dbus/dbus-broker_29.bb
++++ b/meta-oe/recipes-core/dbus/dbus-broker_29.bb
+@@ -29,5 +29,4 @@ FILES_${PN} += "${nonarch_libdir}/systemd/catalog"
+ 
+ EXTRA_OEMESON += " -Dselinux=${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'true', 'false', d)}"
+ EXTRA_OEMESON += " -Daudit=${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'true', 'false', d)}"
+-EXTRA_OEMESON += " -Dlinux-4-17=true"
+ 
+-- 
+2.29.2
 
