@@ -1,85 +1,100 @@
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
- by mx.groups.io with SMTP id smtpd.web12.549.1623269496110813861
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
+ by mx.groups.io with SMTP id smtpd.web12.2466.1623278084946169572
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Jun 2021 13:11:36 -0700
+ Wed, 09 Jun 2021 15:34:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=GFiqoMva;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.208.49, mailfrom: brgl@bgdev.pl)
-Received: by mail-ed1-f49.google.com with SMTP id cb9so30008926edb.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jun 2021 13:11:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=WeyWFEsv;
+ spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-pg1-f170.google.com with SMTP id t17so4376878pga.5
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jun 2021 15:34:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+        d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=i4OwQZRCR1oYdHbUrQ9SbGDzVM3i3HGz+2aYNDVfkEY=;
-        b=GFiqoMvaLVZuUwjwTyyA0tGj92c0LlUwBn3JltGxjvvLjrNvuNPKIxPn9MkUQfYCeo
-         wHKWOvcV0sZcEyGLlEOt64+nb5JeDu8zqpDo4J5b2BqMUCdhBomFXE6tWw/TLCtOg5QR
-         z0HfBcIgJmycAJuwP4/VcAKEyCvQqZqUDGENZeWVEKT6lFXQIPC2U3oSBbDcZP99BFBZ
-         I5AjD0MpMWiaxHh/XQnDJTMEBlGsKi/Q6wb19ojdQbqJdV2uav3JHpW0iyV2F0SXG6Ro
-         ecVZrFudWlJ0ds429IRKtgd+HVdtIs26KyuazDObGxMEInIAOSh6DOlA+xmov0XQVpvg
-         424Q==
+        bh=kkFI1f6q6KQ4vl8gB91GlAi9jRuehED/mzj07A+Ta9U=;
+        b=WeyWFEsvN5QTa9hN1oN/f39Do7zNZvyXtxrQ+dc0GoKntVCN9wRfE3c9eONsOhxCjf
+         q5leXDOLekV14o8j2ZHPLPl4wFxiszQvv2Cizpe9vd/fKuJwvrEexqlofXuuz80NrCEd
+         GzKxsSBbdwqYglsJvXSr+lPqznI0eLxiZD9cZ3eoEgDFfmumUuZiTUr80VTGUazEl2fv
+         j0EsahAcmuo76eVKoE0aPJ0mmHh3EnBhlhLKXMOCFeZJQW0fuV1x33wa2AvDuwZ8R82w
+         hBCGaa3SV3yctjxsVWWkzouIY49MAg+i3H7lkNNqgArpug8zgD3trZB51LVTzBxpIyfo
+         ndoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=i4OwQZRCR1oYdHbUrQ9SbGDzVM3i3HGz+2aYNDVfkEY=;
-        b=ZxmhKj7rr3dRlY+YObYFmqajuSOHcYaVy3tQVKsZLnHN6k8+TNBUdMHvfeaiCfBE/t
-         TFf4GnDZigFPoPNNayKYAVnE3BL03iC5qwoN1jVhAfg7z+d2rQ8crN6Jx1sij2WSUgPc
-         hN072XbcKgGdH1wF9QLpIq53JNeGq9gHkBTMBdkqrHPyKXvTMOGCkOUi5p6KMgE1JQNd
-         EYaEnqVILAIzTyRTNVvU6cTyJ6+JDFMv6HBbK3IVItaoi81Yq8lZN6n7fI1jtKBPrcYs
-         3xxjPHtN3YjoZ1mo6yHppWvfcQFrKiejdHjMI8wfEKDr0vjInrdfk8PmaTndeUYK3+7u
-         0v4A==
-X-Gm-Message-State: AOAM533yowTi0BZaqbwQm7FGGBEJDx093Lw/qRIVl72e1qkHtSb5cAQZ
-	5GDxIFFGMNfiMvHDadwmvipoE8rhjorjSPpBfLzv0w==
-X-Google-Smtp-Source: ABdhPJxUHt7To+pvJvszOWKusdOFV5SwKE0M7NqF7Mt3480szJrXdjp/ryp10mlH29To2DTLtKFVx9/vB0rAA2LPOI4=
-X-Received: by 2002:a05:6402:26c2:: with SMTP id x2mr1167903edd.124.1623269494296;
- Wed, 09 Jun 2021 13:11:34 -0700 (PDT)
+        bh=kkFI1f6q6KQ4vl8gB91GlAi9jRuehED/mzj07A+Ta9U=;
+        b=PJmHioHVZMZwOip7tByQ78v6Uaz7XiZhnwM3B29P26dWkLNO4RQhZEi4mjzsvjQl3W
+         znBUNr1QuPQ/B1cY4pNS1UxKWV9H9o4vflKWssEqR4ZlUKs/HjnKUEiydc91lOZFDHXI
+         QrlY8/MFU1me4y22wuWWOU3MfhIln15QQYkHH9exAJW+O/32mvnAdso1X5yhfWpNC/ra
+         /53kaFgIxGf9MNqZhBep8XdP2vlx5RxH3XcQ043I+1KTXTGwzPhNsJmOj5FjpJiYnscC
+         1W0EeNKnA/R5FocujwrLL/JEeWgyDg2GF5+a0piQO1As7CWac6mcfmAdpjBlnv0JpUet
+         AINA==
+X-Gm-Message-State: AOAM5336f6Naz/+XZjYvxyqmNFLl0H26ZDxe8J0CdFN0eiwHGaGOzyMX
+	lZZr7WeR1tqUOtTZt/V4HP4a/Stz3POQOtcDMdQ=
+X-Google-Smtp-Source: ABdhPJxq09MSjwnippcfvJ74PGxAwkk/a2QcnAtAMe/NtvditHEcmPEqlHgWzcvl2KF5bwgiciB46Wpqg/qVgpiKE9o=
+X-Received: by 2002:aa7:8888:0:b029:2ec:763f:4bcc with SMTP id
+ z8-20020aa788880000b02902ec763f4bccmr1833714pfe.35.1623278084474; Wed, 09 Jun
+ 2021 15:34:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210609193144.25592-1-brgl@bgdev.pl> <CAMKF1spCeKarT1kcVtbyorKjwjzV6Ydx5t8TLiJH6zUbwmPbmQ@mail.gmail.com>
-In-Reply-To: <CAMKF1spCeKarT1kcVtbyorKjwjzV6Ydx5t8TLiJH6zUbwmPbmQ@mail.gmail.com>
-From: "Bartosz Golaszewski" <brgl@bgdev.pl>
-Date: Wed, 9 Jun 2021 22:11:23 +0200
-Message-ID: <CAMRc=Mfy8NDdmM32pYUSJUTDTm41VQ64scO-DSOEcNBE3qnCfg@mail.gmail.com>
-Subject: Re: [PATCH] libgpiod: update my email address
+References: <20210515233853.583490-1-schnitzeltony@gmail.com>
+ <20210515233853.583490-17-schnitzeltony@gmail.com> <CAMKF1sq89Sg8RQTU6nY-gP-7pmi=_pCPt5VCfQRZ=Dz4O=1Fjg@mail.gmail.com>
+In-Reply-To: <CAMKF1sq89Sg8RQTU6nY-gP-7pmi=_pCPt5VCfQRZ=Dz4O=1Fjg@mail.gmail.com>
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+Date: Thu, 10 Jun 2021 00:34:33 +0200
+Message-ID: <CALbNGRRRfBE0msHyE9GUiewQhmH7VY-qm4ZanXebhsCqKm0eRw@mail.gmail.com>
+Subject: Re: [oe] [PATCH 17/20] Revert "gimp: Disable svg icons on arm"
 To: Khem Raj <raj.khem@gmail.com>
-Cc: Armin Kuster <akuster808@gmail.com>, 
-	openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-On Wed, Jun 9, 2021 at 9:55 PM Khem Raj <raj.khem@gmail.com> wrote:
+On Sun, May 16, 2021 at 2:11 AM Khem Raj <raj.khem@gmail.com> wrote:
+> > diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.24.bb b/meta-gnome/recipes-gimp/gimp/gimp_2.10.24.bb
+> > index 237d08a09..e729d9deb 100644
+> > --- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.24.bb
+> > +++ b/meta-gnome/recipes-gimp/gimp/gimp_2.10.24.bb
+> > @@ -54,7 +54,7 @@ EXTRA_OECONF = "--disable-python \
+> >  EXTRA_OECONF_append_mipsarch = " --disable-vector-icons"
+> >  EXTRA_OECONF_append_libc-musl_riscv32 = " --disable-vector-icons"
+> >  EXTRA_OECONF_append_libc-musl_x86 = " --disable-vector-icons"
+> > -EXTRA_OECONF_append_arm = " --disable-vector-icons"
+> > +EXTRA_OECONF_append_toolchain-clang_arm = " --disable-vector-icons"
 >
-> On Wed, Jun 9, 2021 at 12:31 PM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
-> >
-> > From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> >
-> > I now maintain the project and this recipe in my own time. Update my
-> > email address in the AUTHOR field.
-> >
-> > Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> > ---
-> >  meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
-> > index bb586b681..2d63d83e9 100644
-> > --- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
-> > +++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
-> > @@ -1,5 +1,5 @@
-> >  SUMMARY = "C library and tools for interacting with the linux GPIO character device"
-> > -AUTHOR = "Bartosz Golaszewski <bgolaszewski@baylibre.com>"
-> > +AUTHOR = "Bartosz Golaszewski <brgl@bgdev.pl>
->
-> its missing closing quote, I have fixed it locally and staged it.
+> thanks. I will verify it on gcc/musl and clang/musl scenarios and
+> perhaps its really the musl piece which is problematic
+> issue is qemu segfaults :(, qemu is also upgraded in master-next so
+> maybe even musl will start to work.
 >
 > >
-> >  LICENSE = "LGPLv2.1+"
-> >  LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
-> > --
-> > 2.30.1
-> >
+Hi Khem,
 
+This starts getting interesting: Currently I see build failures on
+gimp. This time not on svg conversion but for png. Something like
 
-Thank you and sorry.
+| mkdir -p `dirname 16/gimp-dashboard.png` && GEGL_USE_OPENCL=no
+GEGL_SWAP=ram /home/superandy/tmp/oe-core-musl/work/cortexa72-mortsgna-linux-musl/gimp/2.10.24-r0/recipe-sysroot-native/usr/bin/gegl
+../../../gimp-2.10.24/icons/Symbolic/16/gimp-dashboard.png -o
+16/gimp-dashboard.png -- cast-format input-format="R'G'B'A float"
+output-format="RGBA float" brightness-contrast contrast=1.5
+cast-format input-format="RGBA float" output-format="R'G'B'A float"
+| Fontconfig error: Cannot load default config file
+| make[3]: *** [Makefile:2409: 16/gimp-dashboard.png] Segmentation
+fault (core dumped)
 
-Bart
+This looks very similar to what you reported when all these
+'--disable-vector-icons' started to come in.
+
+Looked into and am convinced that this is not a architectural/musl
+problem (btw - it is native gegl that crashes) but a race. GIMP-build
+intended 2 steps:
+
+1. create png/svg in ${B}/icons
+2. let gegl convert these icons to *.c / *.xml
+
+I think step 1 is not completed before step2 starts because on each
+run segfault happens at different icon.
+
+Long talk: Am working on this...
+
+Cheers
+
+Andreas
