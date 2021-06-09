@@ -1,118 +1,100 @@
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
- by mx.groups.io with SMTP id smtpd.web12.1409.1623197729383545455
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.web09.3511.1623212828515157310
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Jun 2021 17:15:29 -0700
+ Tue, 08 Jun 2021 21:27:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=KLZZsTAR;
- spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f181.google.com with SMTP id n12so17883380pgs.13
-        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jun 2021 17:15:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=mqsiLLCi;
+ spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f179.google.com with SMTP id c12so17466742pfl.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jun 2021 21:27:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=2ZVTneoNVsHsaNC7WxgS5vcthq3vBX+FO3CfhYHpkrc=;
-        b=KLZZsTARQq5CwlKF8IEvrM0UoC+pr17bLxv6q3mN6uf5JFPY6XKn3GU5MPFcHnRVSY
-         unjCcwMhoa8SlCqnrBn3zZADBoIoa9hRaI0DNDwMDKD7X9yPO3BJ7g+XI4VKwN+DhQiP
-         tH6M4gf5OzBG6RHQBAcQh7AjXRp8+sok7jTMSSrves52AGOuhqLWVpff8b5jVezBERdN
-         QCFmGwVy1zsxkZ6ONj63dqzfto/wFMKPFslsFwJKlbfxIeUI03NjsYPq4oqZtWBJ0meN
-         ArqviBoSaAPtMZG7+YH8/c4zDDwmdgjDSOdIINCjVzT2ZwR2PqB/z2N8j8Uv9M9L7Cx+
-         QZ6Q==
+        bh=bw2OHR2Z+ylIYakpaizQYkYOF78XOhBe7Y+PjG3VS9M=;
+        b=mqsiLLCiBP3eCT19dfK5bWqpnhpCcuHQ5ojqb7vwX2FB4r46qNrmT0OqOu303XGDv0
+         CINwyvvICujJeJTxcsKScP07bV7CnzU6Nij3O/zyOdn+AYuukHVrsTCfmDjGaZ3TMwR9
+         xh6WtMBpdA4vh17Q9QsTW4thMep0+V6u0cKzhT258k+Hlx4k7eX5EFAXIDLKwapVN7fs
+         +M/FB+pOx+9hUX9LiH4hB8O26wKcMMRiGhnw20BZdN44k1+tPwm+Shw1AdwwlelAjF21
+         glqrGNsGPXl3nSnoPiPjy0gMC8Baw9x71058HEe2cBn0kCY0LHxHy20+NnG5qrQxjlbz
+         kxPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=2ZVTneoNVsHsaNC7WxgS5vcthq3vBX+FO3CfhYHpkrc=;
-        b=DAwdCRpHmJIaBZemucYEJIzG106AxaY2SxM/E1A4ZrVXLRc/ZbQDhFls1TyvaoYu8W
-         Mam/icpseSMila3espjIRAk9h8n7pTk0LRXq4FKME4lL3jHfiL6aRxFgHVlwn9xmnCxY
-         N4AADhE18bCBLXlWroTqtra9heKGPrlAVnT/V7p1AdpFjD/nWA5AaUPaskpw5WamVss0
-         w7SurqVfucBVykjc8As2a65H9A7Ch7l30UDW163HqaeBD66ZTps2uDjpP6Z14IQ9gSBx
-         31N93+IXjebcztb+OO6OhaQFOPDdKCvba7cxZPawwRfByfMZBPoIO0GddKQ1TKVHxvFv
-         pyAw==
-X-Gm-Message-State: AOAM533SZ5Fq4tD2XDJvBC50sjznNHcZdWt5WfpPO95W98PXi6w5gpLo
-	OpdYgbKiMf6Hk3oxcIRKH9WtwdG0htHdhw==
-X-Google-Smtp-Source: ABdhPJy6Ik2NCpZ8ZWh+ixCYDp8x/+7ndGknvpLnckHW8UR6nMOJIrRP398+dGK0oQhNkqLGnINzeg==
-X-Received: by 2002:a05:6a00:d44:b029:2ee:12e1:5781 with SMTP id n4-20020a056a000d44b02902ee12e15781mr2525826pfv.75.1623197728418;
-        Tue, 08 Jun 2021 17:15:28 -0700 (PDT)
+        bh=bw2OHR2Z+ylIYakpaizQYkYOF78XOhBe7Y+PjG3VS9M=;
+        b=uDwOkiQtMyUqfqKFScOq8XjNtP2fRN+Wgr1/SOOGkC9muHKidlGnbBZvdWia/r6x6c
+         FnDE313ipeeWWJMk5qHRdMZ8YpEMWrOCnjOZUTg1YsqYGeh94LMpaTLocx+BqEgDC+yo
+         bBrS2eBgK/g+0Iuj+iFLYls1O0nDJbLx+dTjZ1G720mxzGkTxOQHWkWYEoX6Dg5FFyLC
+         GRgB6jCRguRMnpTK5I8lEq44YA4hVQqgq5YcEM0eLnpWvxcgZ6UhT83T5Tk//pO9EQ/V
+         8gUvZF9TVNGN/aDcaJB9o9bDpMvCnHKv/ll4/ng651e7Vhw1iRnuGZP8LAgNkXv580j6
+         OaHQ==
+X-Gm-Message-State: AOAM533cJsDwk3QkG3/CbNF/DnBSk8lh7dEad5Vx67tbUW9hUFkwAvHF
+	yBRloAUWH677CDWtjIwVlAL8kJzcnh9qiA==
+X-Google-Smtp-Source: ABdhPJztxQqZgBtRrQog9BS7RKAXiMZ4eyypsfv6PeLGIFnG6R25rc44DCj+y2sdUtQA7Xcnk6tsYw==
+X-Received: by 2002:a05:6a00:26d8:b029:2ea:1101:8acf with SMTP id p24-20020a056a0026d8b02902ea11018acfmr3347169pfw.67.1623212827481;
+        Tue, 08 Jun 2021 21:27:07 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a054])
-        by smtp.gmail.com with ESMTPSA id z6sm12429433pfr.99.2021.06.08.17.15.27
+        by smtp.gmail.com with ESMTPSA id k25sm12034231pfk.33.2021.06.08.21.27.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Jun 2021 17:15:28 -0700 (PDT)
+        Tue, 08 Jun 2021 21:27:07 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: zangrc <zangrc.fnst@fujitsu.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH v2] tracker-miners: upgrade 3.0.5 -> 3.1.1
-Date: Tue,  8 Jun 2021 17:15:25 -0700
-Message-Id: <20210609001525.2993968-1-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>,
+	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Subject: [meta-gnome][PATCH] gthumb_3.10.3.bb: Make polkit and GI as required distro features
+Date: Tue,  8 Jun 2021 21:27:04 -0700
+Message-Id: <20210609042704.823258-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: zangrc <zangrc.fnst@fujitsu.com>
+it depends on colord which needs these features to compile
 
-Refresh the following patch:
-0001-meson.build-Just-warn-if-we-build-without-libseccomp.patch
-
-Enable seccomp if distro feature is on
-
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...eson.build-Just-warn-if-we-build-without-libseccomp.patch | 4 ++--
- .../{tracker-miners_3.0.5.bb => tracker-miners_3.1.1.bb}     | 5 +++--
- 2 files changed, 5 insertions(+), 4 deletions(-)
- rename meta-gnome/recipes-gnome/tracker/{tracker-miners_3.0.5.bb => tracker-miners_3.1.1.bb} (92%)
+ meta-gnome/recipes-gnome/gthumb/gthumb_3.10.3.bb              | 4 +++-
+ .../recipes-support/packagegroups/packagegroup-gnome-apps.bb  | 2 +-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/tracker/tracker-miners/0001-meson.build-Just-warn-if-we-build-without-libseccomp.patch b/meta-gnome/recipes-gnome/tracker/tracker-miners/0001-meson.build-Just-warn-if-we-build-without-libseccomp.patch
-index c9eb7994e6..53c5f2664e 100644
---- a/meta-gnome/recipes-gnome/tracker/tracker-miners/0001-meson.build-Just-warn-if-we-build-without-libseccomp.patch
-+++ b/meta-gnome/recipes-gnome/tracker/tracker-miners/0001-meson.build-Just-warn-if-we-build-without-libseccomp.patch
-@@ -23,8 +23,8 @@ diff --git a/meson.build b/meson.build
- index 71a9df4..1eaa1a0 100644
- --- a/meson.build
- +++ b/meson.build
--@@ -279,7 +279,7 @@ cpu_supports_seccomp = not unsupported_cpus.contains(host_cpu)
-- seccomp_required = system_supports_seccomp and cpu_supports_seccomp
-+@@ 299,7 +299,7 @@ cpu_supports_seccomp = not unsupported_cpus.contains(host_cpu)
-+ seccomp_required = system_supports_seccomp and cpu_supports_seccomp and get_option('seccomp') and get_option('extract')
-  
-  if not libseccomp.found() and seccomp_required
- -  error('Libseccomp is mandatory for sandboxed metadata extraction')
-diff --git a/meta-gnome/recipes-gnome/tracker/tracker-miners_3.0.5.bb b/meta-gnome/recipes-gnome/tracker/tracker-miners_3.1.1.bb
-similarity index 92%
-rename from meta-gnome/recipes-gnome/tracker/tracker-miners_3.0.5.bb
-rename to meta-gnome/recipes-gnome/tracker/tracker-miners_3.1.1.bb
-index 6672195e00..15a6faa71e 100644
---- a/meta-gnome/recipes-gnome/tracker/tracker-miners_3.0.5.bb
-+++ b/meta-gnome/recipes-gnome/tracker/tracker-miners_3.1.1.bb
-@@ -15,7 +15,7 @@ GNOMEBASEBUILDCLASS = "meson"
+diff --git a/meta-gnome/recipes-gnome/gthumb/gthumb_3.10.3.bb b/meta-gnome/recipes-gnome/gthumb/gthumb_3.10.3.bb
+index 94cac89a91..00b1873455 100644
+--- a/meta-gnome/recipes-gnome/gthumb/gthumb_3.10.3.bb
++++ b/meta-gnome/recipes-gnome/gthumb/gthumb_3.10.3.bb
+@@ -4,6 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
  
- inherit gnomebase gsettings gobject-introspection vala bash-completion features_check
+ GNOMEBASEBUILDCLASS = "meson"
  
--SRC_URI[archive.sha256sum] = "c9be14871b1398e6e656a354a8f8f59e69e93169017f2b28308ef439324fd12b"
-+SRC_URI[archive.sha256sum] = "e4d361351b156f2862a524415fbebf0539c781cd87c6629662f0265b4803b8b8"
- SRC_URI += "file://0001-meson.build-Just-warn-if-we-build-without-libseccomp.patch"
- 
- # gobject-introspection is mandatory and cannot be configured
-@@ -34,6 +34,7 @@ PACKAGECONFIG ??= " \
-     png \
-     tiff \
-     xml \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'seccomp', d)} \
++REQUIRED_DISTRO_FEATURES = "polkit gobject-introspection-data"
++
+ DEPENDS = " \
+     glib-2.0-native \
+     bison-native \
+@@ -22,7 +24,7 @@ DEPENDS = " \
+     libsecret \
  "
  
- PACKAGECONFIG[battery]     = "-Dbattery_detection=upower,-Dbattery_detection=none,upower"
-@@ -54,7 +55,7 @@ PACKAGECONFIG[networkmanager] = "-Dnetwork_manager=enabled,-Dnetwork_manager=dis
+-inherit gnomebase gnome-help gsettings itstool mime-xdg
++inherit features_check gnomebase gnome-help gsettings itstool mime-xdg
  
- # For security reasons it is strongly recommended to set add meta-security in
- # your layers and 'libseccomp' to PACKAGECONFIG".
--PACKAGECONFIG[libseccomp] = ",,libseccomp"
-+PACKAGECONFIG[seccomp] = ",,libseccomp"
- # not yet in meta-gnome
- PACKAGECONFIG[rss]        = "-Dminer_rss=true,-Dminer_rss=false,libgrss"
+ SRC_URI[archive.sha256sum] = "dab73f77cc2963ebe90112972c301441d228af3003cfef3f8b7300a6d5d3c212"
  
+diff --git a/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb b/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
+index 8771cb3685..a45dfdeda2 100644
+--- a/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
++++ b/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
+ 
+ inherit packagegroup features_check
+ 
+-REQUIRED_DISTRO_FEATURES = "x11"
++REQUIRED_DISTRO_FEATURES = "x11 polkit gobject-introspection-data"
+ 
+ RDEPENDS_${PN} = " \
+     evolution-data-server \
 -- 
 2.32.0
 
