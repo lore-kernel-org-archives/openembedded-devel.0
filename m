@@ -1,81 +1,90 @@
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.web09.7573.1623244493488005004
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
+ by mx.groups.io with SMTP id smtpd.web11.8556.1623249103018050806
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Jun 2021 06:14:53 -0700
+ Wed, 09 Jun 2021 07:31:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=cgjjHFwZ;
- spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: luca.boccassi@gmail.com)
-Received: by mail-wm1-f41.google.com with SMTP id u5-20020a7bc0450000b02901480e40338bso3184579wmc.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jun 2021 06:14:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=hKYLpRRT;
+ spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: jpewhacker@gmail.com)
+Received: by mail-oi1-f175.google.com with SMTP id t40so12267861oiw.8
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jun 2021 07:31:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=QP3jWPVMXneWp1+tNdb5EI/nRiCeUS0wY7YcmqIFdok=;
-        b=cgjjHFwZjkyAePUsQm+uvPuRxJ1xpU1bfTfuyyeuj1XVzWjVQGSI4i7bRD8ywlpn2l
-         sa4AXhwoT6sYagNsa3g8zD8m+KjbeYmyQ3fIaqQCELoYKRTRA7QI1850Swd7d7P2dzY5
-         KjtnoFhHxhEhisZSLcpqtM59QFK9JsnAhwpQj9nzAh+KtwLRFZhsO1T2VejS+a6A9agC
-         GWRx5YUhsmc2+dp2jwX2Vy+OX28WG5OaAeBsUlc1N8P9KnA0Kbynj53QsOTVdQWbU2C/
-         KoEFNYNj9fwi9p3JKEkiJe5xce1TIoSbB5+ZV+MWRqrlusyFpNGStyjavfuqbQeV1Mj2
-         OELQ==
+        bh=gBqipS3Mk4iWHu2LfxzTeGwImD5KV9Vph0hFzkeje4A=;
+        b=hKYLpRRTuqpFsJCMsibfNrv75E7lZcGFo+7KKC7B7ieCLJy1I8GA433juu0DnxnegF
+         q8FnCbrFiGZJhPRY+vHwi55VUZ70NBpedKVzzKhkQYhwgTCi0xsPJF0Ef9KYH1PiX6It
+         PG0PD1/R0wUrHUnv3sajVq2+3SVU3xlSVCRR8i8MfanTce/vYCo/96aA4lylNHLiwS/m
+         cJuu2+kNG7aXqAIMC8UNGEX/P7HE9cfXQnlOfWoz/tKvkM7Nyidy5KpxmI83z665PiPL
+         VMge2KL/rX6WBwCE78N7seT49CQF4kwEttBt04VZAzuKW3OE1cQxxDIDmI5AdggLwgk3
+         fk7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=QP3jWPVMXneWp1+tNdb5EI/nRiCeUS0wY7YcmqIFdok=;
-        b=QqkGP9opDT6Zu1m/ioESOLftx+SZvZbaDMROy/vShFord/hAvscJuR7aO/irEDRj6V
-         WZRcJxo0tEBkx9Tvs33MdcFxWJUK8AYa+53BoVpgSARRmKA8m9MjlE3ZwhhTexzZhqZs
-         /LILDC8ggAaBO7FwV4mLpoA5CgJ8Wtl7CLHy22YYuAG42F7+cNGwncdP7IHjTxfzh7wu
-         yA5uO6CUKb/vOM/NE7OO9Df9w6g0hfYopZjK0Jvr/NIOTgv93xLsIfDaJCOcG9ZdymCO
-         dG3Coqb9aHezTC8Jx35X9K+vp0VckvqOmNkE703+vxu8fiPKZnRduqn/p1wevjQhpOiY
-         +c5w==
-X-Gm-Message-State: AOAM5311alYDn+wj4Z0atDop1HyfzXFd2gB96VBDgUlaznr8Gb2CGuLf
-	pQXxSMZcFW+BmyeTT69UdYdcNU5YkLwoE7p+
-X-Google-Smtp-Source: ABdhPJw5mm04AuAMR9QyJdBG8p17KLBF43eOC+4kIutD4cm64116xCdIT9CRl24fHLHbyaJdXiCuLA==
-X-Received: by 2002:a1c:282:: with SMTP id 124mr10013712wmc.82.1623244491723;
-        Wed, 09 Jun 2021 06:14:51 -0700 (PDT)
-Return-Path: <luca.boccassi@gmail.com>
-Received: from localhost ([137.220.125.106])
-        by smtp.gmail.com with ESMTPSA id v8sm26161511wrc.29.2021.06.09.06.14.51
-        for <openembedded-devel@lists.openembedded.org>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=gBqipS3Mk4iWHu2LfxzTeGwImD5KV9Vph0hFzkeje4A=;
+        b=Q1fsiFMqsoMz2ulNpYxdl5avaCKETnLsHS96v5ZnabsStJXP2619qVL/jSzYAWOYfr
+         U5csr7rvtW3DDN3qYdlJIOdZMBOoKbrJAjqHJsyE42EsKeRGaRi6wj3fW+D1I+9JuWZG
+         b9dFYJDw+sLkzliax2rCEYAooVIYTiW47fQZ7DMeCINQV9x4UJ90FD4zAd9fZSzoAbxh
+         dawMLhso89pkEvMoSN3vr0jXJBzb5MAe/4Neto/1JeXyg0bdS4/roj/sNdmoqd97a03N
+         tCMzNIUd1SGPGIdz0/5+XtybPEt5TXjE5DTfLzBhdyareNYPsQei33l0+RStYYi9H7Ol
+         Tg+g==
+X-Gm-Message-State: AOAM532UwhI1xtNXKgyOYYN5G/ivSABOXAU0aCNaqZ2hXP3zkjv+Z4nj
+	e/p+1+lda+g5MTeOsuUkq9MZSMIkSuw=
+X-Google-Smtp-Source: ABdhPJyafqPy5gjPnImhFVycHnslKrddSWlTw58Mp6B9m0vAQA3RLnZzWgSQNIhAWd+pwX6TCFrg/g==
+X-Received: by 2002:a05:6808:145:: with SMTP id h5mr4004038oie.24.1623249102122;
+        Wed, 09 Jun 2021 07:31:42 -0700 (PDT)
+Return-Path: <jpewhacker@gmail.com>
+Received: from localhost.localdomain ([2605:a601:ac3d:c100:e3e8:d9:3a56:e27d])
+        by smtp.gmail.com with ESMTPSA id f2sm3454984ooj.22.2021.06.09.07.31.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Jun 2021 06:14:51 -0700 (PDT)
-From: "Luca Bocassi" <luca.boccassi@gmail.com>
+        Wed, 09 Jun 2021 07:31:41 -0700 (PDT)
+From: "Joshua Watt" <JPEWhacker@gmail.com>
+X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] dbus-broker: enforce required versions of libselinux and libaudit
-Date: Wed,  9 Jun 2021 14:14:46 +0100
-Message-Id: <20210609131446.783106-2-luca.boccassi@gmail.com>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20210609131446.783106-1-luca.boccassi@gmail.com>
-References: <20210609131446.783106-1-luca.boccassi@gmail.com>
+Cc: ticotimo@gmail.com,
+	Joshua Watt <JPEWhacker@gmail.com>
+Subject: [meta-gnome][RFC] gnome: gnome-shell: Move gsettings to their own package
+Date: Wed,  9 Jun 2021 09:31:33 -0500
+Message-Id: <20210609143133.31680-1-JPEWhacker@gmail.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Luca Boccassi <luca.boccassi@microsoft.com>
+Moves the gnome-shell-gsettings package to it's own package so that
+other desktop environments that depends on it can pull it in without
+pulling in all of gnome-shell
 
-v29 requires libselinux >= 3.2 and libaudit >= 3.0, set them as such
-in DEPENDS
-
-Signed-off-by: Luca Boccassi <luca.boccassi@microsoft.com>
+Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
 ---
- meta-oe/recipes-core/dbus/dbus-broker_29.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-gnome/recipes-gnome/gnome-shell/gnome-shell_3.34.5.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-core/dbus/dbus-broker_29.bb b/meta-oe/recipes-core/dbus/dbus-broker_29.bb
-index c59809f53..8fcdb8c66 100644
---- a/meta-oe/recipes-core/dbus/dbus-broker_29.bb
-+++ b/meta-oe/recipes-core/dbus/dbus-broker_29.bb
-@@ -14,8 +14,8 @@ UPSTREAM_CHECK_URI = "https://github.com/bus1/${BPN}/releases"
- inherit meson pkgconfig systemd features_check
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_3.34.5.bb b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_3.34.5.bb
+index 9619628c8..77b9015d4 100644
+--- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_3.34.5.bb
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_3.34.5.bb
+@@ -49,6 +49,8 @@ do_install_append() {
+     done
+ }
  
- DEPENDS = "expat systemd"
--DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'libselinux', '', d)}"
--DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'audit', '', d)}"
-+DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'libselinux (>= 3.2)', '', d)}"
-+DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'audit (>= 3.0)', '', d)}"
++GSETTINGS_PACKAGE = "${PN}-gsettings"
++
+ FILES_${PN} += " \
+     ${datadir}/dbus-1 \
+     ${datadir}/gnome-control-center \
+@@ -56,9 +58,9 @@ FILES_${PN} += " \
+     ${systemd_user_unitdir} \
+ "
  
- RDEPENDS_${PN} += "dbus-common"
+-RDEPENDS_${PN} += "gsettings-desktop-schemas gdm-base librsvg-gtk"
++RDEPENDS_${PN} += "gsettings-desktop-schemas gdm-base librsvg-gtk ${PN}-gsettings"
+ 
+-PACKAGES =+ "${PN}-tools"
++PACKAGES =+ "${PN}-tools ${PN}-gsettings"
+ FILES_${PN}-tools = "${bindir}/*-tool"
+ RDEPENDS_${PN}-tools = "python3-core"
  
 -- 
-2.29.2
+2.31.1
 
