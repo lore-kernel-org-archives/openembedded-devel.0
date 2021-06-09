@@ -1,164 +1,4069 @@
-Received: from IND01-BO1-obe.outbound.protection.outlook.com (IND01-BO1-obe.outbound.protection.outlook.com [40.107.139.80])
- by mx.groups.io with SMTP id smtpd.web09.8308.1623126943685264505
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
+ by mx.groups.io with SMTP id smtpd.web08.45.1623266275974580846
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Jun 2021 21:35:44 -0700
+ Wed, 09 Jun 2021 12:17:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kpit.com header.s=selector1 header.b=fhHpmGXq;
- spf=pass (domain: kpit.com, ip: 40.107.139.80, mailfrom: akash.hadke@kpit.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cfT1yVdm2U2JnZcymNFAeVR77adV2eXwoGR3X/e8gyzsnU/6ClbMuVa3ebsVNJMqbG1dfxlQNaZP3x+IURwQu8oijEowp/0Li57S+l0Qpv/Onhr3A4q7etiJUAUE5FVMuyw4ccN9M/qq4u5/V9BTYdFHqYaNI0GZ26SwNt7Vu+nV96EY7WxUsQW1JyuPEJf04Y0Xd6vG3VFPnB/bT3NAZH7e2acyezT5KoXSFdJ923iNoNWQYkxsT2yes19MElDauCouxNSCYwm4go8YdVZRmuWNELa4Uc9dhNOaG5P1YfQ1gtSKs6a2vWjVqx4q/FN/5Qhsr7WtzxmOr5q6wef6iQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vExj78Vsxc3Xj1ilL7lkBilvAaiQFpuNge+YBj4We2I=;
- b=lDoZFXpSepIpiX5IDwKfdiByC1fJxmoMigl+2yjCcZ4WyUJhkGmCrMwp9wezw+AvxZrPCidhB3+ECHuSSEY6IDxTagEaI+UAWG6b08i3qWKyY+Pkzne1dmtdIxT992Ixc4ppv1WRkJzNbDhYZsmGxRsY9+5g7VHlwhIiuNQlQbILjdiA4JtsgCwmchClLUz/QDrCCUhSvebsn0Y4Y0AwKK5ErIll/PFJKDyx9nL7CpBrn7mV2WL5LEc7T9MbLQxg3qbNahrU/bhnai1R4/KHdkleOmxlxXFda4d3Ts5IQtWVXLIDM4yUqoPoNXT2TzqgImB85wRWRieK9YExcmueQA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=kpit.com; dmarc=pass action=none header.from=kpit.com;
- dkim=pass header.d=kpit.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vExj78Vsxc3Xj1ilL7lkBilvAaiQFpuNge+YBj4We2I=;
- b=fhHpmGXqKEc2NT5D9wCBolb7NTUwLhawlrnJuA5w5iGX2Zz2PCtyqNKOhGBH3I/DTJjvSyVheLgf0Ozb8ZY4qlCsBHg3QBlFhNdAEZIOM2u5BHTCvkBVGrk+JLAgWcX/be0qZmfQV7ulKHioeHZ00m/AULj00pAz0xwE6rnyXrw=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=kpit.com;
-Received: from PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:a::14)
- by PNZPR01MB4670.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:2f::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4195.22; Tue, 8 Jun
- 2021 04:35:38 +0000
-Received: from PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::c962:e30e:1f2:44e7]) by PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::c962:e30e:1f2:44e7%7]) with mapi id 15.20.4195.030; Tue, 8 Jun 2021
- 04:35:38 +0000
-From: "akash hadke" <akash.hadke@kpit.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=egtYfnA5;
+ spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f181.google.com with SMTP id p13so9688224pfw.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jun 2021 12:17:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=/AL+YU3wZJy6RHA2SMXKGMEl0iExqxOvspdxlvzpNFM=;
+        b=egtYfnA5Zx7oR2Ud0UZakqa4zr6L/41sDtQ3TZp+VPRU2ZGG6e6JQZwh5FUoQCcnWJ
+         BOcgi0Anb7yJnxUwVYLl63sEmaCSkkUIzGSFpmFvaZc2XkyOx6Phe8tDaDFqqmaimndc
+         /g1/nqbFh+ruKtfC8AJPnKNva+ab/OUBuMcphi1fGf77Q5UuRHisChR1pS3EIazsOi4X
+         sjo4wi8uw1bW4lUz6AWXUCqKvRJJ6Uw0A1IYtd4ZwA+qXGx2KowG3MOKbj3wS78U3wEI
+         A+KtSGZgIPZBOnfG1dtgsurk6zKamK3fHFHtBlL/hznacTEhQIDysyFc1p1IMWl6ltQO
+         DnRg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=/AL+YU3wZJy6RHA2SMXKGMEl0iExqxOvspdxlvzpNFM=;
+        b=BtRWjpSPQ0me/jfX01WxrBCOyTVmesd0pIcPZOgPyyCWSzUaMCve1P1PJwYdc4+rtZ
+         EFCLQzp6diZWuJNtWrjRKK1qPio3POtaBPygBhRiLXso28QPubIZLko9Il0DSbvsEF5F
+         WHxKR6Ps3TfIHsLmPm38Dngt4blVHL/M0kkHhfNcQHsxmq25+GXNonZl6ZKvvTP6YxRw
+         +SLIbB2zq6WURIi4nOQwvfzAOiYLsHOLIZ6GMfTiUwjQDVgrb3rtg8WiPAO5196KgV8f
+         Z8WUhbPgfSRjedoPMslYFnCrx8IH4M0ypveExZWy3zQqmK1R/bVsoos4g+faZ6rWj4p+
+         Vmdw==
+X-Gm-Message-State: AOAM531yyLksjpsC9M0OfDljrnMfh2jk3ThW+uyxZPvO31pOThGSacj1
+	28Z6E4olVtdfQwxmMtLRdv83dNQK+vlsnQ==
+X-Google-Smtp-Source: ABdhPJz1wh+uzbC3cuBwtkpgEV5/+LVkFccb9LT5+S+3n2SldvJ8vS6zetVxUizx5vF3cWHh8ygwwA==
+X-Received: by 2002:a63:1224:: with SMTP id h36mr1200517pgl.296.1623266273332;
+        Wed, 09 Jun 2021 12:17:53 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a054])
+        by smtp.gmail.com with ESMTPSA id 92sm2681733pjv.29.2021.06.09.12.17.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 09 Jun 2021 12:17:52 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: nisha.parrakat@kpit.com,
-	harpritkaur.bhandari@kpit.com,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][dunfell][PATCH] libdevmapper,lvm2: Do not inherit license
-Date: Tue,  8 Jun 2021 10:05:15 +0530
-Message-Id: <1623126915-10271-1-git-send-email-akash.hadke@kpit.com>
-X-Mailer: git-send-email 2.7.4
-X-Originating-IP: [2402:3a80:cb1:1876:861f:8f19:371b:f6bc]
-X-ClientProxiedBy: BMXPR01CA0064.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:b00:2c::28) To PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c01:a::14)
-Return-Path: akash.hadke@kpit.com
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-yappi: Fix patching errors
+Date: Wed,  9 Jun 2021 12:17:50 -0700
+Message-Id: <20210609191750.1253764-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from localhost.localdomain (2402:3a80:cb1:1876:861f:8f19:371b:f6bc) by BMXPR01CA0064.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:2c::28) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.20.4195.22 via Frontend Transport; Tue, 8 Jun 2021 04:35:36 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 4de94158-4d16-48f3-a768-08d92a36dd02
-X-MS-TrafficTypeDiagnostic: PNZPR01MB4670:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<PNZPR01MB46702001A01B5B605DE3C9FF8E379@PNZPR01MB4670.INDPRD01.PROD.OUTLOOK.COM>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1201;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	timAQiR0wRhTnKohvCWcmt3IEyK+YPWn5HgV9KLjW8zDKeM2y3rPQeDIP/8hMRMiVV3ZqohgCmdnGLlEzjsIxWcU08qiv1qno45krERfFtMbA/MNJKqWl9xE48Nv4tsqHtn1nB8s6O52hL0i9P6Viscf34H48/vwtnhzkY1Ry9WVZj/gjP4JU4Kgmf+YGAFGJd6L+zHvKjgySyAgFbGMku30IkzLs1XkbU4c2OA35dMzCrQ3G1xUkSeLJvLhORmtRfupGiP47LCsx8dNJLuRaNEHySBjBY2J2fvrxGI+7Q7PmSvvQgWuEAe54nj+4B+bJ1FGIHJVTXFS7CGbVcCd2qRgB+RIv/OMjfFj2ZUuKfmpFt0KmKq8ejX4LgNFqSA4QLnvYWtjfw2+Q9N0nVeqgjlv825NgP9GUB9L1TP6fVXoxU7p5wKtLXm67Ppq/ZHjuTS7BdBpsIUXmNMTaSCywfMdUcsfj3OfsAX2M41mLcZluthaKx5ddC45vTw7seturQB9QIMcvV7d/oNERbLyeqN8G1h3h3JSxTIvIyYFDgdARb45UV/1/pOOT/195RKedBVR264Nf6w5HHlKm3NMpKwumsi4we853JzknEt7St0ZXJSiWZACxmDshhdTRKiF70kN7/EeuiLgJ5D0NufhTrN9we+n8oGyzOZeP8jjdrQ=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(346002)(396003)(39850400004)(136003)(366004)(376002)(2906002)(478600001)(6512007)(4326008)(16526019)(83380400001)(186003)(6666004)(52116002)(6506007)(316002)(38100700002)(86362001)(8936002)(66476007)(6486002)(66556008)(66946007)(8676002)(6916009)(2616005)(36756003)(5660300002)(69590400013);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?us-ascii?Q?BgXWkddAyFXzdXhRi/HkO2FG6lQcGoJInBNGhGQF/24pocchSTlEtSyPCapc?=
- =?us-ascii?Q?ESEWYb6bDyQovZGLLqNydr+k3DTr44EGSwxbifxY+Gi/5VMHHAYXgbNoa+Io?=
- =?us-ascii?Q?UdbDo9Jx9pXQ134hCz641Dos9U5xBgO61s30U62sPEfFkI/vpT93v71LB7Bm?=
- =?us-ascii?Q?ebbPNuyfdoVxSRpCuN8cCV1/6UC/qGQIIPE3Yx3EJO+lgf//EYdlfeg+p2HD?=
- =?us-ascii?Q?0W0s+/0j2m5eEn434FIdCSREGNUDOceR/Jh6PByEUaaZg0E4SsNlWc/CxEX4?=
- =?us-ascii?Q?P7PQZs3leG1P9+k4H8Qlj1SITrCQE0iwm1Dh2OAacvDyP/0FfPvj2hykSPkx?=
- =?us-ascii?Q?6GSngKq/w7j+Mq7dxmlYqads70MYF8sVLETH4ZBtNfCxQoef91GLu6qB4BwY?=
- =?us-ascii?Q?7I3ZFJ7UxC0E54/j9yZ7WqDGADd4BwJjFgpK5Z0hGJAs8lnOmAKdYXBvtKZY?=
- =?us-ascii?Q?KGuQ7sV1tHV8SvaCgelF0IVQjboyREQP4oE03WiEnirkjwdsSiKLCN85NX+N?=
- =?us-ascii?Q?W5/qISrkF58pmXk4+5Sev0+xK7guZw6xJtgQ3SQyRrNgcXKNySn+0ETircwv?=
- =?us-ascii?Q?BKVpdAvtW1sWODdeHjz4hyLraJ+AqLmVDdTsPP0dgPgz0HHFfEGJFRbFt70Q?=
- =?us-ascii?Q?HFkepU/qCiFs7+XPRP/gODXVLZ7ETBvS3obDz2I9jiBaOJbD86TXno8i2Lds?=
- =?us-ascii?Q?uFwkqWiDYhVAJaNknw2luPGu2ihucfubYyCiDCfjenQEjTqOV+g3X5Yjsame?=
- =?us-ascii?Q?gzJ6GzsDA9dkfC3mfl/HMP2hiqOHANJcw+zOR64IJLuhRWlNusC0UQlr3fBw?=
- =?us-ascii?Q?DK3vDB/QWUPoE8xg09C2nzl24k/7tN1Bt1IatxSBuJ69nginm/87nn2EiOpl?=
- =?us-ascii?Q?ExhLoa2Ez6TcBSNNGPD/kuzdvkXZKDdAhlafXYCKMzVGgpNSWge1vUpvVyWF?=
- =?us-ascii?Q?jjlohurvCg0ICJDAfFT2YLfKEG2Hniwn1uWWRdMCPsg0JvY9afKM8unK480x?=
- =?us-ascii?Q?ZMjbJK8yS2PRB56Ztx8RIyl6/YvbwXExosiXDPvyB0mcutAG7FscRM1/n67I?=
- =?us-ascii?Q?+Qb2WXbJIOiVCsCOmKc6HVbTjcBpUblICAwvYuSeQxhDkej+Zh153RsUkuW4?=
- =?us-ascii?Q?YWUeISDP44os4RqKSvPs/D2orfySYokxWmmxOD0qS1NaeCq3Vak8l09JYUzk?=
- =?us-ascii?Q?RmOulkW7xO0QhM+1fDz+NfBFPuvTZzcndW9tzBzr5H/6AIcLwwPqwgJMw0//?=
- =?us-ascii?Q?tCRzr/e15SAsDIkHCdFBq6ZUpWKCDZDAzDlHeKBAyye6xQWQS+4lMpLjiji9?=
- =?us-ascii?Q?jBJA4x1Cfy5vLwe5g9mg6ze4GIpi797p6C/sdQIi5uUbHuRHbM5kDWR41aS/?=
- =?us-ascii?Q?4uN1U5agWzYYHKSypocOzkrELCUd?=
-X-OriginatorOrg: kpit.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4de94158-4d16-48f3-a768-08d92a36dd02
-X-MS-Exchange-CrossTenant-AuthSource: PN2PR01MB4619.INDPRD01.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2021 04:35:37.7892
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3539451e-b46e-4a26-a242-ff61502855c7
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7voaMXAUihgPTUBjxmQXSZf9s48kdUEYH65HkeN/Q7en/UtxaeO2OI3OnhFt7XbyirPpfBsPLfGmbgU5wFAzmA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PNZPR01MB4670
-Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-From: Khem Raj <raj.khem@gmail.com>
-
-inheriting license class which brings in
-AVAILABLE_LICENSES into do_configure task checksums class since it wants to
-enable thin-provisioning-tools if distro allows GPL-3 automatically, but this
-brings issues when other layers which have additional licenses are
-provided which ends up in signature mismatches so leave that setting to end-user and keep it disabled by
-default with a comment in recipes stating that if needed then the user should enable it via
-config metadata or bbappends.
-
-This commit is cherry-picked from upstream/master to
-fix the below yocto-check-layer error.
-
-bitbake-diffsigs --task libdevmapper do_configure --signature
-f6a95f0cfe6789254c94484dcd7d895e3a83c7d8e80f7a45e80328ed3d58e981
-87aa98db4256768cf62c48703d9a857b878e257aaa6ee463ea17e5004215d5de
-NOTE: Starting bitbake server...
-basehash changed from
-f4b6194b76e01b7dcb9e87f36156a9077b65f56e08f4841ad57321faec03a54c
-to ba9681d39513fd8ed22438ac25811535401a56d9ec23a8553978cf421c268b88
-
-Variable AVAILABLE_LICENSES value changed.
+Fixes
+patching file tests/test_functionality.py
+Hunk #1 FAILED at 5 (different line endings).
+1 out of 1 hunk FAILED -- rejects in file tests/test_functionality.py
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: akash hadke <akash.hadke@kpit.com>
 ---
- meta-oe/recipes-support/lvm2/lvm2.inc | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ .../0001-Fix-imports-for-ptests.patch         | 3855 ++++++++++++++++-
+ 1 file changed, 3832 insertions(+), 23 deletions(-)
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index 01c9df4..2fe97d5 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -19,12 +19,11 @@ SRC_URI = "git://sourceware.org/git/lvm2.git \
- SRCREV = "b9391b1b9f0b73303fa21f8f92574d17ce4c2b02"
- S = "${WORKDIR}/git"
- 
--inherit autotools-brokensep pkgconfig systemd license
-+inherit autotools-brokensep pkgconfig systemd
- 
- LVM2_PACKAGECONFIG = "dmeventd"
- LVM2_PACKAGECONFIG_append_class-target = " \
-     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)} \
--    ${@incompatible_license_contains('GPLv3', '', 'thin-provisioning-tools', d)} \
- "
- 
- # odirect is always enabled because there currently is a bug in
-@@ -37,6 +36,7 @@ PACKAGECONFIG[dmeventd] = "--enable-dmeventd,--disable-dmeventd"
- PACKAGECONFIG[odirect] = "--enable-o_direct,--disable-o_direct"
- PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
- PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
-+# NOTE: Add thin-provisioning-tools only if your distro policy allows GPL-3.0 license
- PACKAGECONFIG[thin-provisioning-tools] = "--with-thin=internal,--with-thin=none,,thin-provisioning-tools"
- 
- # Unset user/group to unbreak install.
-@@ -53,4 +53,3 @@ EXTRA_OECONF = "--with-user= \
-                 --with-thin-repair=${sbindir}/thin_repair \
-                 --with-thin-restore=${sbindir}/thin_restore \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-yappi/0001-Fix-imp=
+orts-for-ptests.patch b/meta-python/recipes-devtools/python/python3-yappi/0=
+001-Fix-imports-for-ptests.patch
+index 714b2a2d34..fa58897e68 100644
+--- a/meta-python/recipes-devtools/python/python3-yappi/0001-Fix-imports-fo=
+r-ptests.patch
++++ b/meta-python/recipes-devtools/python/python3-yappi/0001-Fix-imports-fo=
+r-ptests.patch
+@@ -13,8 +13,6 @@ Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.c=
+om>
+  tests/test_tags.py                 | 2 +-
+  6 files changed, 6 insertions(+), 6 deletions(-)
+=20
+-diff --git a/tests/test_asyncio.py b/tests/test_asyncio.py
+-index 4ac4c5f..4de94cf 100644
+ --- a/tests/test_asyncio.py
+ +++ b/tests/test_asyncio.py
+ @@ -2,7 +2,7 @@ import unittest
+@@ -26,8 +24,6 @@ index 4ac4c5f..4de94cf 100644
+=20=20
+=20=20
+  @asyncio.coroutine
+-diff --git a/tests/test_asyncio_context_vars.py b/tests/test_asyncio_conte=
+xt_vars.py
+-index 5bd750c..9a253c0 100644
+ --- a/tests/test_asyncio_context_vars.py
+ +++ b/tests/test_asyncio_context_vars.py
+ @@ -5,7 +5,7 @@ import contextvars
+@@ -39,21 +35,3841 @@ index 5bd750c..9a253c0 100644
+  import yappi
+=20=20
+  async_context_id =3D contextvars.ContextVar('async_context_id')
+-diff --git a/tests/test_functionality.py b/tests/test_functionality.py
+-index a73cb63..2ab273f 100644
+ --- a/tests/test_functionality.py
+ +++ b/tests/test_functionality.py
+-@@ -5,7 +5,7 @@ import threading
+- import unittest
+- import yappi
+- import _yappi
+--import utils
++@@ -1,1916 +1,1916 @@
++-import os=0D
++-import sys=0D
++-import time=0D
++-import threading=0D
++-import unittest=0D
++-import yappi=0D
++-import _yappi=0D
++-import utils=0D
++-import multiprocessing  # added to fix http://bugs.python.org/issue15881 =
+for > Py2.6=0D
++-import subprocess=0D
++-=0D
++-_counter =3D 0=0D
++-=0D
++-=0D
++-class BasicUsage(utils.YappiUnitTestCase):=0D
++-=0D
++-    def test_callback_function_int_return_overflow(self):=0D
++-        # this test is just here to check if any errors are generated, as=
+ the err=0D
++-        # is printed in C side, I did not include it here. THere are ways=
+ to test=0D
++-        # this deterministically, I did not bother=0D
++-        import ctypes=0D
++-=0D
++-        def _unsigned_overflow_margin():=0D
++-            return 2**(ctypes.sizeof(ctypes.c_void_p) * 8) - 1=0D
++-=0D
++-        def foo():=0D
++-            pass=0D
++-=0D
++-        #with utils.captured_output() as (out, err):=0D
++-        yappi.set_context_id_callback(_unsigned_overflow_margin)=0D
++-        yappi.set_tag_callback(_unsigned_overflow_margin)=0D
++-        yappi.start()=0D
++-        foo()=0D
++-=0D
++-    def test_issue60(self):=0D
++-=0D
++-        def foo():=0D
++-            buf =3D bytearray()=0D
++-            buf +=3D b't' * 200=0D
++-            view =3D memoryview(buf)[10:]=0D
++-            view =3D view.tobytes()=0D
++-            del buf[:10]  # this throws exception=0D
++-            return view=0D
++-=0D
++-        yappi.start(builtins=3DTrue)=0D
++-        foo()=0D
++-        self.assertTrue(=0D
++-            len(=0D
++-                yappi.get_func_stats(=0D
++-                    filter_callback=3Dlambda x: yappi.=0D
++-                    func_matches(x, [memoryview.tobytes])=0D
++-                )=0D
++-            ) > 0=0D
++-        )=0D
++-        yappi.stop()=0D
++-=0D
++-    def test_issue54(self):=0D
++-=0D
++-        def _tag_cbk():=0D
++-            global _counter=0D
++-            _counter +=3D 1=0D
++-            return _counter=0D
++-=0D
++-        def a():=0D
++-            pass=0D
++-=0D
++-        def b():=0D
++-            pass=0D
++-=0D
++-        yappi.set_tag_callback(_tag_cbk)=0D
++-        yappi.start()=0D
++-        a()=0D
++-        a()=0D
++-        a()=0D
++-        yappi.stop()=0D
++-        stats =3D yappi.get_func_stats()=0D
++-        self.assertEqual(stats.pop().ncall, 3)  # aggregated if no tag is=
+ given=0D
++-        stats =3D yappi.get_func_stats(tag=3D1)=0D
++-=0D
++-        for i in range(1, 3):=0D
++-            stats =3D yappi.get_func_stats(tag=3Di)=0D
++-            stats =3D yappi.get_func_stats(=0D
++-                tag=3Di, filter_callback=3Dlambda x: yappi.func_matches(x=
+, [a])=0D
++-            )=0D
++-=0D
++-            stat =3D stats.pop()=0D
++-            self.assertEqual(stat.ncall, 1)=0D
++-=0D
++-        yappi.set_tag_callback(None)=0D
++-        yappi.clear_stats()=0D
++-        yappi.start()=0D
++-        b()=0D
++-        b()=0D
++-        stats =3D yappi.get_func_stats()=0D
++-        self.assertEqual(len(stats), 1)=0D
++-        stat =3D stats.pop()=0D
++-        self.assertEqual(stat.ncall, 2)=0D
++-=0D
++-    def test_filter(self):=0D
++-=0D
++-        def a():=0D
++-            pass=0D
++-=0D
++-        def b():=0D
++-            a()=0D
++-=0D
++-        def c():=0D
++-            b()=0D
++-=0D
++-        _TCOUNT =3D 5=0D
++-=0D
++-        ts =3D []=0D
++-        yappi.start()=0D
++-        for i in range(_TCOUNT):=0D
++-            t =3D threading.Thread(target=3Dc)=0D
++-            t.start()=0D
++-            ts.append(t)=0D
++-=0D
++-        for t in ts:=0D
++-            t.join()=0D
++-=0D
++-        yappi.stop()=0D
++-=0D
++-        ctx_ids =3D []=0D
++-        for tstat in yappi.get_thread_stats():=0D
++-            if tstat.name =3D=3D '_MainThread':=0D
++-                main_ctx_id =3D tstat.id=0D
++-            else:=0D
++-                ctx_ids.append(tstat.id)=0D
++-=0D
++-        fstats =3D yappi.get_func_stats(filter=3D{"ctx_id": 9})=0D
++-        self.assertTrue(fstats.empty())=0D
++-        fstats =3D yappi.get_func_stats(=0D
++-            filter=3D{=0D
++-                "ctx_id": main_ctx_id,=0D
++-                "name": "c"=0D
++-            }=0D
++-        )  # main thread=0D
++-        self.assertTrue(fstats.empty())=0D
++-=0D
++-        for i in ctx_ids:=0D
++-            fstats =3D yappi.get_func_stats(=0D
++-                filter=3D{=0D
++-                    "ctx_id": i,=0D
++-                    "name": "a",=0D
++-                    "ncall": 1=0D
++-                }=0D
++-            )=0D
++-            self.assertEqual(fstats.pop().ncall, 1)=0D
++-            fstats =3D yappi.get_func_stats(filter=3D{"ctx_id": i, "name"=
+: "b"})=0D
++-            self.assertEqual(fstats.pop().ncall, 1)=0D
++-            fstats =3D yappi.get_func_stats(filter=3D{"ctx_id": i, "name"=
+: "c"})=0D
++-            self.assertEqual(fstats.pop().ncall, 1)=0D
++-=0D
++-        yappi.clear_stats()=0D
++-        yappi.start(builtins=3DTrue)=0D
++-        time.sleep(0.1)=0D
++-        yappi.stop()=0D
++-        fstats =3D yappi.get_func_stats(filter=3D{"module": "time"})=0D
++-        self.assertEqual(len(fstats), 1)=0D
++-=0D
++-        # invalid filters`=0D
++-        self.assertRaises(=0D
++-            Exception, yappi.get_func_stats, filter=3D{'tag': "sss"}=0D
++-        )=0D
++-        self.assertRaises(=0D
++-            Exception, yappi.get_func_stats, filter=3D{'ctx_id': "None"}=
+=0D
++-        )=0D
++-=0D
++-    def test_filter_callback(self):=0D
++-=0D
++-        def a():=0D
++-            time.sleep(0.1)=0D
++-=0D
++-        def b():=0D
++-            a()=0D
++-=0D
++-        def c():=0D
++-            pass=0D
++-=0D
++-        def d():=0D
++-            pass=0D
++-=0D
++-        yappi.set_clock_type("wall")=0D
++-        yappi.start(builtins=3DTrue)=0D
++-        a()=0D
++-        b()=0D
++-        c()=0D
++-        d()=0D
++-        stats =3D yappi.get_func_stats(=0D
++-            filter_callback=3Dlambda x: yappi.func_matches(x, [a, b])=0D
++-        )=0D
++-        #stats.print_all()=0D
++-        r1 =3D '''=0D
++-        tests/test_functionality.py:98 a      2      0.000000  0.200350  =
+0.100175=0D
++-        tests/test_functionality.py:101 b     1      0.000000  0.120000  =
+0.100197=0D
++-        '''=0D
++-        self.assert_traces_almost_equal(r1, stats)=0D
++-        self.assertEqual(len(stats), 2)=0D
++-        stats =3D yappi.get_func_stats(=0D
++-            filter_callback=3Dlambda x: yappi.=0D
++-            module_matches(x, [sys.modules[__name__]])=0D
++-        )=0D
++-        r1 =3D '''=0D
++-        tests/test_functionality.py:98 a      2      0.000000  0.230130  =
+0.115065=0D
++-        tests/test_functionality.py:101 b     1      0.000000  0.120000  =
+0.109011=0D
++-        tests/test_functionality.py:104 c     1      0.000000  0.000002  =
+0.000002=0D
++-        tests/test_functionality.py:107 d     1      0.000000  0.000001  =
+0.000001=0D
++-        '''=0D
++-        self.assert_traces_almost_equal(r1, stats)=0D
++-        self.assertEqual(len(stats), 4)=0D
++-=0D
++-        stats =3D yappi.get_func_stats(=0D
++-            filter_callback=3Dlambda x: yappi.func_matches(x, [time.sleep=
+])=0D
++-        )=0D
++-        self.assertEqual(len(stats), 1)=0D
++-        r1 =3D '''=0D
++-        time.sleep                            2      0.206804  0.220000  =
+0.103402=0D
++-        '''=0D
++-        self.assert_traces_almost_equal(r1, stats)=0D
++-=0D
++-    def test_print_formatting(self):=0D
++-=0D
++-        def a():=0D
++-            pass=0D
++-=0D
++-        def b():=0D
++-            a()=0D
++-=0D
++-        func_cols =3D {=0D
++-            1: ("name", 48),=0D
++-            0: ("ncall", 5),=0D
++-            2: ("tsub", 8),=0D
++-        }=0D
++-        thread_cols =3D {=0D
++-            1: ("name", 48),=0D
++-            0: ("ttot", 8),=0D
++-        }=0D
++-=0D
++-        yappi.start()=0D
++-        a()=0D
++-        b()=0D
++-        yappi.stop()=0D
++-        fs =3D yappi.get_func_stats()=0D
++-        cs =3D fs[1].children=0D
++-        ts =3D yappi.get_thread_stats()=0D
++-        #fs.print_all(out=3Dsys.stderr, columns=3D{1:("name", 70), })=0D
++-        #cs.print_all(out=3Dsys.stderr, columns=3Dfunc_cols)=0D
++-        #ts.print_all(out=3Dsys.stderr, columns=3Dthread_cols)=0D
++-        #cs.print_all(out=3Dsys.stderr, columns=3D{})=0D
++-=0D
++-        self.assertRaises(=0D
++-            yappi.YappiError, fs.print_all, columns=3D{1: ("namee", 9)}=0D
++-        )=0D
++-        self.assertRaises(=0D
++-            yappi.YappiError, cs.print_all, columns=3D{1: ("dd", 0)}=0D
++-        )=0D
++-        self.assertRaises(=0D
++-            yappi.YappiError, ts.print_all, columns=3D{1: ("tidd", 0)}=0D
++-        )=0D
++-=0D
++-    def test_get_clock(self):=0D
++-        yappi.set_clock_type('cpu')=0D
++-        self.assertEqual('cpu', yappi.get_clock_type())=0D
++-        clock_info =3D yappi.get_clock_info()=0D
++-        self.assertTrue('api' in clock_info)=0D
++-        self.assertTrue('resolution' in clock_info)=0D
++-=0D
++-        yappi.set_clock_type('wall')=0D
++-        self.assertEqual('wall', yappi.get_clock_type())=0D
++-=0D
++-        t0 =3D yappi.get_clock_time()=0D
++-        time.sleep(0.1)=0D
++-        duration =3D yappi.get_clock_time() - t0=0D
++-        self.assertTrue(0.05 < duration < 0.3)=0D
++-=0D
++-    def test_profile_decorator(self):=0D
++-=0D
++-        def aggregate(func, stats):=0D
++-            fname =3D "tests/%s.profile" % (func.__name__)=0D
++-            try:=0D
++-                stats.add(fname)=0D
++-            except IOError:=0D
++-                pass=0D
++-            stats.save(fname)=0D
++-            raise Exception("messing around")=0D
++-=0D
++-        @yappi.profile(return_callback=3Daggregate)=0D
++-        def a(x, y):=0D
++-            if x + y =3D=3D 25:=0D
++-                raise Exception("")=0D
++-            return x + y=0D
++-=0D
++-        def b():=0D
++-            pass=0D
++-=0D
++-        try:=0D
++-            os.remove(=0D
++-                "tests/a.profile"=0D
++-            )  # remove the one from prev test, if available=0D
++-        except:=0D
++-            pass=0D
++-=0D
++-        # global profile is on to mess things up=0D
++-        yappi.start()=0D
++-        b()=0D
++-=0D
++-        # assert functionality and call function at same time=0D
++-        try:=0D
++-            self.assertEqual(a(1, 2), 3)=0D
++-        except:=0D
++-            pass=0D
++-        try:=0D
++-            self.assertEqual(a(2, 5), 7)=0D
++-        except:=0D
++-            pass=0D
++-        try:=0D
++-            a(4, 21)=0D
++-        except:=0D
++-            pass=0D
++-        stats =3D yappi.get_func_stats().add("tests/a.profile")=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
++-        self.assertEqual(fsa.ncall, 3)=0D
++-        self.assertEqual(len(stats), 1)  # b() should be cleared out.=0D
++-=0D
++-        @yappi.profile(return_callback=3Daggregate)=0D
++-        def count_down_rec(n):=0D
++-            if n =3D=3D 0:=0D
++-                return=0D
++-            count_down_rec(n - 1)=0D
++-=0D
++-        try:=0D
++-            os.remove(=0D
++-                "tests/count_down_rec.profile"=0D
++-            )  # remove the one from prev test, if available=0D
++-        except:=0D
++-            pass=0D
++-=0D
++-        try:=0D
++-            count_down_rec(4)=0D
++-        except:=0D
++-            pass=0D
++-        try:=0D
++-            count_down_rec(3)=0D
++-        except:=0D
++-            pass=0D
++-=0D
++-        stats =3D yappi.YFuncStats("tests/count_down_rec.profile")=0D
++-        fsrec =3D utils.find_stat_by_name(stats, 'count_down_rec')=0D
++-        self.assertEqual(fsrec.ncall, 9)=0D
++-        self.assertEqual(fsrec.nactualcall, 2)=0D
++-=0D
++-    def test_strip_dirs(self):=0D
++-=0D
++-        def a():=0D
++-            pass=0D
++-=0D
++-        stats =3D utils.run_and_get_func_stats(a, )=0D
++-        stats.strip_dirs()=0D
++-        fsa =3D utils.find_stat_by_name(stats, "a")=0D
++-        self.assertEqual(fsa.module, os.path.basename(fsa.module))=0D
++-=0D
++-    @unittest.skipIf(os.name =3D=3D "nt", "do not run on Windows")=0D
++-    def test_run_as_script(self):=0D
++-        import re=0D
++-        p =3D subprocess.Popen(=0D
++-            ['yappi', os.path.join('./tests', 'run_as_script.py')],=0D
++-            stdout=3Dsubprocess.PIPE=0D
++-        )=0D
++-        out, err =3D p.communicate()=0D
++-        self.assertEqual(p.returncode, 0)=0D
++-        func_stats, thread_stats =3D re.split(=0D
++-            b'name\\s+id\\s+tid\\s+ttot\\s+scnt\\s*\n', out=0D
++-        )=0D
++-        self.assertTrue(b'FancyThread' in thread_stats)=0D
++-=0D
++-    def test_yappi_overhead(self):=0D
++-        LOOP_COUNT =3D 100000=0D
++-=0D
++-        def a():=0D
++-            pass=0D
++-=0D
++-        def b():=0D
++-            for i in range(LOOP_COUNT):=0D
++-                a()=0D
++-=0D
++-        t0 =3D time.time()=0D
++-        yappi.start()=0D
++-        b()=0D
++-        yappi.stop()=0D
++-        time_with_yappi =3D time.time() - t0=0D
++-        t0 =3D time.time()=0D
++-        b()=0D
++-        time_without_yappi =3D time.time() - t0=0D
++-        if time_without_yappi =3D=3D 0:=0D
++-            time_without_yappi =3D 0.000001=0D
++-=0D
++-        # in latest v0.82, I calculated this as close to "7.0" in my mach=
+ine.=0D
++-        # however, %83 of this overhead is coming from tickcount(). The o=
+ther %17=0D
++-        # seems to have been evenly distributed to the internal bookkeepi=
+ng=0D
++-        # structures/algorithms which seems acceptable. Note that our tes=
+t only=0D
++-        # tests one function being profiled at-a-time in a short interval=
+.=0D
++-        # profiling high number of functions in a small time=0D
++-        # is a different beast, (which is pretty unlikely in most applica=
+tions)=0D
++-        # So as a conclusion: I cannot see any optimization window for Ya=
+ppi that=0D
++-        # is worth implementing as we will only optimize %17 of the time.=
+=0D
++-        sys.stderr.write("\r\nYappi puts %0.1f times overhead to the prof=
+iled application in average.\r\n" % \=0D
++-            (time_with_yappi / time_without_yappi))=0D
++-=0D
++-    def test_clear_stats_while_running(self):=0D
++-=0D
++-        def a():=0D
++-            pass=0D
++-=0D
++-        yappi.start()=0D
++-        a()=0D
++-        yappi.clear_stats()=0D
++-        a()=0D
++-        stats =3D yappi.get_func_stats()=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
++-        self.assertEqual(fsa.ncall, 1)=0D
++-=0D
++-    def test_generator(self):=0D
++-=0D
++-        def _gen(n):=0D
++-            while (n > 0):=0D
++-                yield n=0D
++-                n -=3D 1=0D
++-=0D
++-        yappi.start()=0D
++-        for x in _gen(5):=0D
++-            pass=0D
++-        self.assertTrue(=0D
++-            yappi.convert2pstats(yappi.get_func_stats()) is not None=0D
++-        )=0D
++-=0D
++-    def test_slice_child_stats_and_strip_dirs(self):=0D
++-=0D
++-        def b():=0D
++-            for i in range(10000000):=0D
++-                pass=0D
++-=0D
++-        def a():=0D
++-            b()=0D
++-=0D
++-        yappi.start(builtins=3DTrue)=0D
++-        a()=0D
++-        stats =3D yappi.get_func_stats()=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
++-        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
++-        self.assertTrue(fsa.children[0:1] is not None)=0D
++-        prev_afullname =3D fsa.full_name=0D
++-        prev_bchildfullname =3D fsa.children[fsb].full_name=0D
++-        stats.strip_dirs()=0D
++-        self.assertTrue(len(prev_afullname) > len(fsa.full_name))=0D
++-        self.assertTrue(=0D
++-            len(prev_bchildfullname) > len(fsa.children[fsb].full_name)=0D
++-        )=0D
++-=0D
++-    def test_children_stat_functions(self):=0D
++-        _timings =3D {"a_1": 5, "b_1": 3, "c_1": 1}=0D
++-        _yappi._set_test_timings(_timings)=0D
++-=0D
++-        def b():=0D
++-            pass=0D
++-=0D
++-        def c():=0D
++-            pass=0D
++-=0D
++-        def a():=0D
++-            b()=0D
++-            c()=0D
++-=0D
++-        yappi.start()=0D
++-        a()=0D
++-        b()  # non-child call=0D
++-        c()  # non-child call=0D
++-        stats =3D yappi.get_func_stats()=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
++-        childs_of_a =3D fsa.children.get().sort("tavg", "desc")=0D
++-        prev_item =3D None=0D
++-        for item in childs_of_a:=0D
++-            if prev_item:=0D
++-                self.assertTrue(prev_item.tavg > item.tavg)=0D
++-            prev_item =3D item=0D
++-        childs_of_a.sort("name", "desc")=0D
++-        prev_item =3D None=0D
++-        for item in childs_of_a:=0D
++-            if prev_item:=0D
++-                self.assertTrue(prev_item.name > item.name)=0D
++-            prev_item =3D item=0D
++-        childs_of_a.clear()=0D
++-        self.assertTrue(childs_of_a.empty())=0D
++-=0D
++-    def test_no_stats_different_clock_type_load(self):=0D
++-=0D
++-        def a():=0D
++-            pass=0D
++-=0D
++-        yappi.start()=0D
++-        a()=0D
++-        yappi.stop()=0D
++-        yappi.get_func_stats().save("tests/ystats1.ys")=0D
++-        yappi.clear_stats()=0D
++-        yappi.set_clock_type("WALL")=0D
++-        yappi.start()=0D
++-        yappi.stop()=0D
++-        stats =3D yappi.get_func_stats().add("tests/ystats1.ys")=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
++-        self.assertTrue(fsa is not None)=0D
++-=0D
++-    def test_subsequent_profile(self):=0D
++-        _timings =3D {"a_1": 1, "b_1": 1}=0D
++-        _yappi._set_test_timings(_timings)=0D
++-=0D
++-        def a():=0D
++-            pass=0D
++-=0D
++-        def b():=0D
++-            pass=0D
++-=0D
++-        yappi.start()=0D
++-        a()=0D
++-        yappi.stop()=0D
++-        yappi.start()=0D
++-        b()=0D
++-        yappi.stop()=0D
++-        stats =3D yappi.get_func_stats()=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
++-        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
++-        self.assertTrue(fsa is not None)=0D
++-        self.assertTrue(fsb is not None)=0D
++-        self.assertEqual(fsa.ttot, 1)=0D
++-        self.assertEqual(fsb.ttot, 1)=0D
++-=0D
++-    def test_lambda(self):=0D
++-        f =3D lambda: time.sleep(0.3)=0D
++-        yappi.set_clock_type("wall")=0D
++-        yappi.start()=0D
++-        f()=0D
++-        stats =3D yappi.get_func_stats()=0D
++-        fsa =3D utils.find_stat_by_name(stats, '<lambda>')=0D
++-        self.assertTrue(fsa.ttot > 0.1)=0D
++-=0D
++-    def test_module_stress(self):=0D
++-        self.assertEqual(yappi.is_running(), False)=0D
++-=0D
++-        yappi.start()=0D
++-        yappi.clear_stats()=0D
++-        self.assertRaises(_yappi.error, yappi.set_clock_type, "wall")=0D
++-=0D
++-        yappi.stop()=0D
++-        yappi.clear_stats()=0D
++-        yappi.set_clock_type("cpu")=0D
++-        self.assertRaises(yappi.YappiError, yappi.set_clock_type, "dummy"=
+)=0D
++-        self.assertEqual(yappi.is_running(), False)=0D
++-        yappi.clear_stats()=0D
++-        yappi.clear_stats()=0D
++-=0D
++-    def test_stat_sorting(self):=0D
++-        _timings =3D {"a_1": 13, "b_1": 10, "a_2": 6, "b_2": 1}=0D
++-        _yappi._set_test_timings(_timings)=0D
++-=0D
++-        self._ncall =3D 1=0D
++-=0D
++-        def a():=0D
++-            b()=0D
++-=0D
++-        def b():=0D
++-            if self._ncall =3D=3D 2:=0D
++-                return=0D
++-            self._ncall +=3D 1=0D
++-            a()=0D
++-=0D
++-        stats =3D utils.run_and_get_func_stats(a)=0D
++-        stats =3D stats.sort("totaltime", "desc")=0D
++-        prev_stat =3D None=0D
++-        for stat in stats:=0D
++-            if prev_stat:=0D
++-                self.assertTrue(prev_stat.ttot >=3D stat.ttot)=0D
++-            prev_stat =3D stat=0D
++-        stats =3D stats.sort("totaltime", "asc")=0D
++-        prev_stat =3D None=0D
++-        for stat in stats:=0D
++-            if prev_stat:=0D
++-                self.assertTrue(prev_stat.ttot <=3D stat.ttot)=0D
++-            prev_stat =3D stat=0D
++-        stats =3D stats.sort("avgtime", "asc")=0D
++-        prev_stat =3D None=0D
++-        for stat in stats:=0D
++-            if prev_stat:=0D
++-                self.assertTrue(prev_stat.tavg <=3D stat.tavg)=0D
++-            prev_stat =3D stat=0D
++-        stats =3D stats.sort("name", "asc")=0D
++-        prev_stat =3D None=0D
++-        for stat in stats:=0D
++-            if prev_stat:=0D
++-                self.assertTrue(prev_stat.name <=3D stat.name)=0D
++-            prev_stat =3D stat=0D
++-        stats =3D stats.sort("subtime", "asc")=0D
++-        prev_stat =3D None=0D
++-        for stat in stats:=0D
++-            if prev_stat:=0D
++-                self.assertTrue(prev_stat.tsub <=3D stat.tsub)=0D
++-            prev_stat =3D stat=0D
++-=0D
++-        self.assertRaises(=0D
++-            yappi.YappiError, stats.sort, "invalid_func_sorttype_arg"=0D
++-        )=0D
++-        self.assertRaises(=0D
++-            yappi.YappiError, stats.sort, "totaltime",=0D
++-            "invalid_func_sortorder_arg"=0D
++-        )=0D
++-=0D
++-    def test_start_flags(self):=0D
++-        self.assertEqual(_yappi._get_start_flags(), None)=0D
++-        yappi.start()=0D
++-=0D
++-        def a():=0D
++-            pass=0D
++-=0D
++-        a()=0D
++-        self.assertEqual(_yappi._get_start_flags()["profile_builtins"], 0=
+)=0D
++-        self.assertEqual(_yappi._get_start_flags()["profile_multicontext"=
+], 1)=0D
++-        self.assertEqual(len(yappi.get_thread_stats()), 1)=0D
++-=0D
++-    def test_builtin_profiling(self):=0D
++-=0D
++-        def a():=0D
++-            time.sleep(0.4)  # is a builtin function=0D
++-=0D
++-        yappi.set_clock_type('wall')=0D
++-=0D
++-        yappi.start(builtins=3DTrue)=0D
++-        a()=0D
++-        stats =3D yappi.get_func_stats()=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'sleep')=0D
++-        self.assertTrue(fsa is not None)=0D
++-        self.assertTrue(fsa.ttot > 0.3)=0D
++-        yappi.stop()=0D
++-        yappi.clear_stats()=0D
++-=0D
++-        def a():=0D
++-            pass=0D
++-=0D
++-        yappi.start()=0D
++-        t =3D threading.Thread(target=3Da)=0D
++-        t.start()=0D
++-        t.join()=0D
++-        stats =3D yappi.get_func_stats()=0D
++-=0D
++-    def test_singlethread_profiling(self):=0D
++-        yappi.set_clock_type('wall')=0D
++-=0D
++-        def a():=0D
++-            time.sleep(0.2)=0D
++-=0D
++-        class Worker1(threading.Thread):=0D
++-=0D
++-            def a(self):=0D
++-                time.sleep(0.3)=0D
++-=0D
++-            def run(self):=0D
++-                self.a()=0D
++-=0D
++-        yappi.start(profile_threads=3DFalse)=0D
++-=0D
++-        c =3D Worker1()=0D
++-        c.start()=0D
++-        c.join()=0D
++-        a()=0D
++-        stats =3D yappi.get_func_stats()=0D
++-        fsa1 =3D utils.find_stat_by_name(stats, 'Worker1.a')=0D
++-        fsa2 =3D utils.find_stat_by_name(stats, 'a')=0D
++-        self.assertTrue(fsa1 is None)=0D
++-        self.assertTrue(fsa2 is not None)=0D
++-        self.assertTrue(fsa2.ttot > 0.1)=0D
++-=0D
++-    def test_run(self):=0D
++-=0D
++-        def profiled():=0D
++-            pass=0D
++-=0D
++-        yappi.clear_stats()=0D
++-        try:=0D
++-            with yappi.run():=0D
++-                profiled()=0D
++-            stats =3D yappi.get_func_stats()=0D
++-        finally:=0D
++-            yappi.clear_stats()=0D
++-=0D
++-        self.assertIsNotNone(utils.find_stat_by_name(stats, 'profiled'))=
+=0D
++-=0D
++-    def test_run_recursive(self):=0D
++-=0D
++-        def profiled():=0D
++-            pass=0D
++-=0D
++-        def not_profiled():=0D
++-            pass=0D
++-=0D
++-        yappi.clear_stats()=0D
++-        try:=0D
++-            with yappi.run():=0D
++-                with yappi.run():=0D
++-                    profiled()=0D
++-                # Profiling stopped here=0D
++-                not_profiled()=0D
++-            stats =3D yappi.get_func_stats()=0D
++-        finally:=0D
++-            yappi.clear_stats()=0D
++-=0D
++-        self.assertIsNotNone(utils.find_stat_by_name(stats, 'profiled'))=
+=0D
++-        self.assertIsNone(utils.find_stat_by_name(stats, 'not_profiled'))=
+=0D
++-=0D
++-=0D
++-class StatSaveScenarios(utils.YappiUnitTestCase):=0D
++-=0D
++-    def test_pstats_conversion(self):=0D
++-=0D
++-        def pstat_id(fs):=0D
++-            return (fs.module, fs.lineno, fs.name)=0D
++-=0D
++-        def a():=0D
++-            d()=0D
++-=0D
++-        def b():=0D
++-            d()=0D
++-=0D
++-        def c():=0D
++-            pass=0D
++-=0D
++-        def d():=0D
++-            pass=0D
++-=0D
++-        _timings =3D {"a_1": 12, "b_1": 7, "c_1": 5, "d_1": 2}=0D
++-        _yappi._set_test_timings(_timings)=0D
++-        stats =3D utils.run_and_get_func_stats(a, )=0D
++-        stats.strip_dirs()=0D
++-        stats.save("tests/a1.pstats", type=3D"pstat")=0D
++-        fsa_pid =3D pstat_id(utils.find_stat_by_name(stats, "a"))=0D
++-        fsd_pid =3D pstat_id(utils.find_stat_by_name(stats, "d"))=0D
++-        yappi.clear_stats()=0D
++-        _yappi._set_test_timings(_timings)=0D
++-        stats =3D utils.run_and_get_func_stats(a, )=0D
++-        stats.strip_dirs()=0D
++-        stats.save("tests/a2.pstats", type=3D"pstat")=0D
++-        yappi.clear_stats()=0D
++-        _yappi._set_test_timings(_timings)=0D
++-        stats =3D utils.run_and_get_func_stats(b, )=0D
++-        stats.strip_dirs()=0D
++-        stats.save("tests/b1.pstats", type=3D"pstat")=0D
++-        fsb_pid =3D pstat_id(utils.find_stat_by_name(stats, "b"))=0D
++-        yappi.clear_stats()=0D
++-        _yappi._set_test_timings(_timings)=0D
++-        stats =3D utils.run_and_get_func_stats(c, )=0D
++-        stats.strip_dirs()=0D
++-        stats.save("tests/c1.pstats", type=3D"pstat")=0D
++-        fsc_pid =3D pstat_id(utils.find_stat_by_name(stats, "c"))=0D
++-=0D
++-        # merge saved stats and check pstats values are correct=0D
++-        import pstats=0D
++-        p =3D pstats.Stats(=0D
++-            'tests/a1.pstats', 'tests/a2.pstats', 'tests/b1.pstats',=0D
++-            'tests/c1.pstats'=0D
++-        )=0D
++-        p.strip_dirs()=0D
++-        # ct =3D ttot, tt =3D tsub=0D
++-        (cc, nc, tt, ct, callers) =3D p.stats[fsa_pid]=0D
++-        self.assertEqual(cc, nc, 2)=0D
++-        self.assertEqual(tt, 20)=0D
++-        self.assertEqual(ct, 24)=0D
++-        (cc, nc, tt, ct, callers) =3D p.stats[fsd_pid]=0D
++-        self.assertEqual(cc, nc, 3)=0D
++-        self.assertEqual(tt, 6)=0D
++-        self.assertEqual(ct, 6)=0D
++-        self.assertEqual(len(callers), 2)=0D
++-        (cc, nc, tt, ct) =3D callers[fsa_pid]=0D
++-        self.assertEqual(cc, nc, 2)=0D
++-        self.assertEqual(tt, 4)=0D
++-        self.assertEqual(ct, 4)=0D
++-        (cc, nc, tt, ct) =3D callers[fsb_pid]=0D
++-        self.assertEqual(cc, nc, 1)=0D
++-        self.assertEqual(tt, 2)=0D
++-        self.assertEqual(ct, 2)=0D
++-=0D
++-    def test_merge_stats(self):=0D
++-        _timings =3D {=0D
++-            "a_1": 15,=0D
++-            "b_1": 14,=0D
++-            "c_1": 12,=0D
++-            "d_1": 10,=0D
++-            "e_1": 9,=0D
++-            "f_1": 7,=0D
++-            "g_1": 6,=0D
++-            "h_1": 5,=0D
++-            "i_1": 1=0D
++-        }=0D
++-        _yappi._set_test_timings(_timings)=0D
++-=0D
++-        def a():=0D
++-            b()=0D
++-=0D
++-        def b():=0D
++-            c()=0D
++-=0D
++-        def c():=0D
++-            d()=0D
++-=0D
++-        def d():=0D
++-            e()=0D
++-=0D
++-        def e():=0D
++-            f()=0D
++-=0D
++-        def f():=0D
++-            g()=0D
++-=0D
++-        def g():=0D
++-            h()=0D
++-=0D
++-        def h():=0D
++-            i()=0D
++-=0D
++-        def i():=0D
++-            pass=0D
++-=0D
++-        yappi.start()=0D
++-        a()=0D
++-        a()=0D
++-        yappi.stop()=0D
++-        stats =3D yappi.get_func_stats()=0D
++-        self.assertRaises(=0D
++-            NotImplementedError, stats.save, "", "INVALID_SAVE_TYPE"=0D
++-        )=0D
++-        stats.save("tests/ystats2.ys")=0D
++-        yappi.clear_stats()=0D
++-        _yappi._set_test_timings(_timings)=0D
++-        yappi.start()=0D
++-        a()=0D
++-        stats =3D yappi.get_func_stats().add("tests/ystats2.ys")=0D
++-        fsa =3D utils.find_stat_by_name(stats, "a")=0D
++-        fsb =3D utils.find_stat_by_name(stats, "b")=0D
++-        fsc =3D utils.find_stat_by_name(stats, "c")=0D
++-        fsd =3D utils.find_stat_by_name(stats, "d")=0D
++-        fse =3D utils.find_stat_by_name(stats, "e")=0D
++-        fsf =3D utils.find_stat_by_name(stats, "f")=0D
++-        fsg =3D utils.find_stat_by_name(stats, "g")=0D
++-        fsh =3D utils.find_stat_by_name(stats, "h")=0D
++-        fsi =3D utils.find_stat_by_name(stats, "i")=0D
++-        self.assertEqual(fsa.ttot, 45)=0D
++-        self.assertEqual(fsa.ncall, 3)=0D
++-        self.assertEqual(fsa.nactualcall, 3)=0D
++-        self.assertEqual(fsa.tsub, 3)=0D
++-        self.assertEqual(fsa.children[fsb].ttot, fsb.ttot)=0D
++-        self.assertEqual(fsa.children[fsb].tsub, fsb.tsub)=0D
++-        self.assertEqual(fsb.children[fsc].ttot, fsc.ttot)=0D
++-        self.assertEqual(fsb.children[fsc].tsub, fsc.tsub)=0D
++-        self.assertEqual(fsc.tsub, 6)=0D
++-        self.assertEqual(fsc.children[fsd].ttot, fsd.ttot)=0D
++-        self.assertEqual(fsc.children[fsd].tsub, fsd.tsub)=0D
++-        self.assertEqual(fsd.children[fse].ttot, fse.ttot)=0D
++-        self.assertEqual(fsd.children[fse].tsub, fse.tsub)=0D
++-        self.assertEqual(fse.children[fsf].ttot, fsf.ttot)=0D
++-        self.assertEqual(fse.children[fsf].tsub, fsf.tsub)=0D
++-        self.assertEqual(fsf.children[fsg].ttot, fsg.ttot)=0D
++-        self.assertEqual(fsf.children[fsg].tsub, fsg.tsub)=0D
++-        self.assertEqual(fsg.ttot, 18)=0D
++-        self.assertEqual(fsg.tsub, 3)=0D
++-        self.assertEqual(fsg.children[fsh].ttot, fsh.ttot)=0D
++-        self.assertEqual(fsg.children[fsh].tsub, fsh.tsub)=0D
++-        self.assertEqual(fsh.ttot, 15)=0D
++-        self.assertEqual(fsh.tsub, 12)=0D
++-        self.assertEqual(fsh.tavg, 5)=0D
++-        self.assertEqual(fsh.children[fsi].ttot, fsi.ttot)=0D
++-        self.assertEqual(fsh.children[fsi].tsub, fsi.tsub)=0D
++-        #stats.debug_print()=0D
++-=0D
++-    def test_merge_multithreaded_stats(self):=0D
++-        import _yappi=0D
++-        timings =3D {"a_1": 2, "b_1": 1}=0D
++-        _yappi._set_test_timings(timings)=0D
++-=0D
++-        def a():=0D
++-            pass=0D
++-=0D
++-        def b():=0D
++-            pass=0D
++-=0D
++-        yappi.start()=0D
++-        t =3D threading.Thread(target=3Da)=0D
++-        t.start()=0D
++-        t.join()=0D
++-        t =3D threading.Thread(target=3Db)=0D
++-        t.start()=0D
++-        t.join()=0D
++-        yappi.get_func_stats().save("tests/ystats1.ys")=0D
++-        yappi.clear_stats()=0D
++-        _yappi._set_test_timings(timings)=0D
++-        self.assertEqual(len(yappi.get_func_stats()), 0)=0D
++-        self.assertEqual(len(yappi.get_thread_stats()), 1)=0D
++-        t =3D threading.Thread(target=3Da)=0D
++-        t.start()=0D
++-        t.join()=0D
++-=0D
++-        self.assertEqual(_yappi._get_start_flags()["profile_builtins"], 0=
+)=0D
++-        self.assertEqual(_yappi._get_start_flags()["profile_multicontext"=
+], 1)=0D
++-        yappi.get_func_stats().save("tests/ystats2.ys")=0D
++-=0D
++-        stats =3D yappi.YFuncStats([=0D
++-            "tests/ystats1.ys",=0D
++-            "tests/ystats2.ys",=0D
++-        ])=0D
++-        fsa =3D utils.find_stat_by_name(stats, "a")=0D
++-        fsb =3D utils.find_stat_by_name(stats, "b")=0D
++-        self.assertEqual(fsa.ncall, 2)=0D
++-        self.assertEqual(fsb.ncall, 1)=0D
++-        self.assertEqual(fsa.tsub, fsa.ttot, 4)=0D
++-        self.assertEqual(fsb.tsub, fsb.ttot, 1)=0D
++-=0D
++-    def test_merge_load_different_clock_types(self):=0D
++-        yappi.start(builtins=3DTrue)=0D
++-=0D
++-        def a():=0D
++-            b()=0D
++-=0D
++-        def b():=0D
++-            c()=0D
++-=0D
++-        def c():=0D
++-            pass=0D
++-=0D
++-        t =3D threading.Thread(target=3Da)=0D
++-        t.start()=0D
++-        t.join()=0D
++-        yappi.get_func_stats().sort("name", "asc").save("tests/ystats1.ys=
+")=0D
++-        yappi.stop()=0D
++-        yappi.clear_stats()=0D
++-        yappi.start(builtins=3DFalse)=0D
++-        t =3D threading.Thread(target=3Da)=0D
++-        t.start()=0D
++-        t.join()=0D
++-        yappi.get_func_stats().save("tests/ystats2.ys")=0D
++-        yappi.stop()=0D
++-        self.assertRaises(_yappi.error, yappi.set_clock_type, "wall")=0D
++-        yappi.clear_stats()=0D
++-        yappi.set_clock_type("wall")=0D
++-        yappi.start()=0D
++-        t =3D threading.Thread(target=3Da)=0D
++-        t.start()=0D
++-        t.join()=0D
++-        yappi.get_func_stats().save("tests/ystats3.ys")=0D
++-        self.assertRaises(=0D
++-            yappi.YappiError,=0D
++-            yappi.YFuncStats().add("tests/ystats1.ys").add, "tests/ystats=
+3.ys"=0D
++-        )=0D
++-        stats =3D yappi.YFuncStats(["tests/ystats1.ys",=0D
++-                                  "tests/ystats2.ys"]).sort("name")=0D
++-        fsa =3D utils.find_stat_by_name(stats, "a")=0D
++-        fsb =3D utils.find_stat_by_name(stats, "b")=0D
++-        fsc =3D utils.find_stat_by_name(stats, "c")=0D
++-        self.assertEqual(fsa.ncall, 2)=0D
++-        self.assertEqual(fsa.ncall, fsb.ncall, fsc.ncall)=0D
++-=0D
++-    def test_merge_aabab_aabbc(self):=0D
++-        _timings =3D {=0D
++-            "a_1": 15,=0D
++-            "a_2": 14,=0D
++-            "b_1": 12,=0D
++-            "a_3": 10,=0D
++-            "b_2": 9,=0D
++-            "c_1": 4=0D
++-        }=0D
++-        _yappi._set_test_timings(_timings)=0D
++-=0D
++-        def a():=0D
++-            if self._ncall =3D=3D 1:=0D
++-                self._ncall +=3D 1=0D
++-                a()=0D
++-            elif self._ncall =3D=3D 5:=0D
++-                self._ncall +=3D 1=0D
++-                a()=0D
++-            else:=0D
++-                b()=0D
++-=0D
++-        def b():=0D
++-            if self._ncall =3D=3D 2:=0D
++-                self._ncall +=3D 1=0D
++-                a()=0D
++-            elif self._ncall =3D=3D 6:=0D
++-                self._ncall +=3D 1=0D
++-                b()=0D
++-            elif self._ncall =3D=3D 7:=0D
++-                c()=0D
++-            else:=0D
++-                return=0D
++-=0D
++-        def c():=0D
++-            pass=0D
++-=0D
++-        self._ncall =3D 1=0D
++-        stats =3D utils.run_and_get_func_stats(a, )=0D
++-        stats.save("tests/ystats1.ys")=0D
++-        yappi.clear_stats()=0D
++-        _yappi._set_test_timings(_timings)=0D
++-        #stats.print_all()=0D
++-=0D
++-        self._ncall =3D 5=0D
++-        stats =3D utils.run_and_get_func_stats(a, )=0D
++-        stats.save("tests/ystats2.ys")=0D
++-=0D
++-        #stats.print_all()=0D
++-=0D
++-        def a():  # same name but another function(code object)=0D
++-            pass=0D
++-=0D
++-        yappi.start()=0D
++-        a()=0D
++-        stats =3D yappi.get_func_stats().add(=0D
++-            ["tests/ystats1.ys", "tests/ystats2.ys"]=0D
++-        )=0D
++-        #stats.print_all()=0D
++-        self.assertEqual(len(stats), 4)=0D
++-=0D
++-        fsa =3D None=0D
++-        for stat in stats:=0D
++-            if stat.name =3D=3D "a" and stat.ttot =3D=3D 45:=0D
++-                fsa =3D stat=0D
++-                break=0D
++-        self.assertTrue(fsa is not None)=0D
++-=0D
++-        self.assertEqual(fsa.ncall, 7)=0D
++-        self.assertEqual(fsa.nactualcall, 3)=0D
++-        self.assertEqual(fsa.ttot, 45)=0D
++-        self.assertEqual(fsa.tsub, 10)=0D
++-        fsb =3D utils.find_stat_by_name(stats, "b")=0D
++-        fsc =3D utils.find_stat_by_name(stats, "c")=0D
++-        self.assertEqual(fsb.ncall, 6)=0D
++-        self.assertEqual(fsb.nactualcall, 3)=0D
++-        self.assertEqual(fsb.ttot, 36)=0D
++-        self.assertEqual(fsb.tsub, 27)=0D
++-        self.assertEqual(fsb.tavg, 6)=0D
++-        self.assertEqual(fsc.ttot, 8)=0D
++-        self.assertEqual(fsc.tsub, 8)=0D
++-        self.assertEqual(fsc.tavg, 4)=0D
++-        self.assertEqual(fsc.nactualcall, fsc.ncall, 2)=0D
++-=0D
++-=0D
++-class MultithreadedScenarios(utils.YappiUnitTestCase):=0D
++-=0D
++-    def test_issue_32(self):=0D
++-        '''=0D
++-        Start yappi from different thread and we get Internal Error(15) a=
+s =0D
++-        the current_ctx_id() called while enumerating the threads in star=
+t() =0D
++-        and as it does not swap to the enumerated ThreadState* the THread=
+State_GetDict()=0D
++-        returns wrong object and thus sets an invalid id for the _ctx str=
+ucture.=0D
++-=0D
++-        When this issue happens multiple Threads have same tid as the int=
+ernal ts_ptr=0D
++-        will be same for different contexts. So, let's see if that happen=
+s=0D
++-        '''=0D
++-=0D
++-        def foo():=0D
++-            time.sleep(0.2)=0D
++-=0D
++-        def bar():=0D
++-            time.sleep(0.1)=0D
++-=0D
++-        def thread_func():=0D
++-            yappi.set_clock_type("wall")=0D
++-            yappi.start()=0D
++-=0D
++-            bar()=0D
++-=0D
++-        t =3D threading.Thread(target=3Dthread_func)=0D
++-        t.start()=0D
++-        t.join()=0D
++-=0D
++-        foo()=0D
++-=0D
++-        yappi.stop()=0D
++-=0D
++-        thread_ids =3D set()=0D
++-        for tstat in yappi.get_thread_stats():=0D
++-            self.assertTrue(tstat.tid not in thread_ids)=0D
++-            thread_ids.add(tstat.tid)=0D
++-=0D
++-    def test_subsequent_profile(self):=0D
++-        WORKER_COUNT =3D 5=0D
++-=0D
++-        def a():=0D
++-            pass=0D
++-=0D
++-        def b():=0D
++-            pass=0D
++-=0D
++-        def c():=0D
++-            pass=0D
++-=0D
++-        _timings =3D {=0D
++-            "a_1": 3,=0D
++-            "b_1": 2,=0D
++-            "c_1": 1,=0D
++-        }=0D
++-=0D
++-        yappi.start()=0D
++-=0D
++-        def g():=0D
++-            pass=0D
++-=0D
++-        g()=0D
++-        yappi.stop()=0D
++-        yappi.clear_stats()=0D
++-        _yappi._set_test_timings(_timings)=0D
++-        yappi.start()=0D
++-=0D
++-        _dummy =3D []=0D
++-        for i in range(WORKER_COUNT):=0D
++-            t =3D threading.Thread(target=3Da)=0D
++-            t.start()=0D
++-            t.join()=0D
++-        for i in range(WORKER_COUNT):=0D
++-            t =3D threading.Thread(target=3Db)=0D
++-            t.start()=0D
++-            _dummy.append(t)=0D
++-            t.join()=0D
++-        for i in range(WORKER_COUNT):=0D
++-            t =3D threading.Thread(target=3Da)=0D
++-            t.start()=0D
++-            t.join()=0D
++-        for i in range(WORKER_COUNT):=0D
++-            t =3D threading.Thread(target=3Dc)=0D
++-            t.start()=0D
++-            t.join()=0D
++-        yappi.stop()=0D
++-        yappi.start()=0D
++-=0D
++-        def f():=0D
++-            pass=0D
++-=0D
++-        f()=0D
++-        stats =3D yappi.get_func_stats()=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
++-        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
++-        fsc =3D utils.find_stat_by_name(stats, 'c')=0D
++-        self.assertEqual(fsa.ncall, 10)=0D
++-        self.assertEqual(fsb.ncall, 5)=0D
++-        self.assertEqual(fsc.ncall, 5)=0D
++-        self.assertEqual(fsa.ttot, fsa.tsub, 30)=0D
++-        self.assertEqual(fsb.ttot, fsb.tsub, 10)=0D
++-        self.assertEqual(fsc.ttot, fsc.tsub, 5)=0D
++-=0D
++-        # MACOSx optimizes by only creating one worker thread=0D
++-        self.assertTrue(len(yappi.get_thread_stats()) >=3D 2)=0D
++-=0D
++-    def test_basic(self):=0D
++-        yappi.set_clock_type('wall')=0D
++-=0D
++-        def dummy():=0D
++-            pass=0D
++-=0D
++-        def a():=0D
++-            time.sleep(0.2)=0D
++-=0D
++-        class Worker1(threading.Thread):=0D
++-=0D
++-            def a(self):=0D
++-                time.sleep(0.3)=0D
++-=0D
++-            def run(self):=0D
++-                self.a()=0D
++-=0D
++-        yappi.start(builtins=3DFalse, profile_threads=3DTrue)=0D
++-=0D
++-        c =3D Worker1()=0D
++-        c.start()=0D
++-        c.join()=0D
++-        a()=0D
++-        stats =3D yappi.get_func_stats()=0D
++-        fsa1 =3D utils.find_stat_by_name(stats, 'Worker1.a')=0D
++-        fsa2 =3D utils.find_stat_by_name(stats, 'a')=0D
++-        self.assertTrue(fsa1 is not None)=0D
++-        self.assertTrue(fsa2 is not None)=0D
++-        self.assertTrue(fsa1.ttot > 0.2)=0D
++-        self.assertTrue(fsa2.ttot > 0.1)=0D
++-        tstats =3D yappi.get_thread_stats()=0D
++-        self.assertEqual(len(tstats), 2)=0D
++-        tsa =3D utils.find_stat_by_name(tstats, 'Worker1')=0D
++-        tsm =3D utils.find_stat_by_name(tstats, '_MainThread')=0D
++-        dummy()  # call dummy to force ctx name to be retrieved again.=0D
++-        self.assertTrue(tsa is not None)=0D
++-        # TODO: I put dummy() to fix below, remove the comments after a w=
+hile.=0D
++-        self.assertTrue( # FIX: I see this fails sometimes?=0D
++-            tsm is not None,=0D
++-            'Could not find "_MainThread". Found: %s' % (', '.join(utils.=
+get_stat_names(tstats))))=0D
++-=0D
++-    def test_ctx_stats(self):=0D
++-        from threading import Thread=0D
++-        DUMMY_WORKER_COUNT =3D 5=0D
++-        yappi.start()=0D
++-=0D
++-        class DummyThread(Thread):=0D
++-            pass=0D
++-=0D
++-        def dummy():=0D
++-            pass=0D
++-=0D
++-        def dummy_worker():=0D
++-            pass=0D
++-=0D
++-        for i in range(DUMMY_WORKER_COUNT):=0D
++-            t =3D DummyThread(target=3Ddummy_worker)=0D
++-            t.start()=0D
++-            t.join()=0D
++-        yappi.stop()=0D
++-        stats =3D yappi.get_thread_stats()=0D
++-        tsa =3D utils.find_stat_by_name(stats, "DummyThread")=0D
++-        self.assertTrue(tsa is not None)=0D
++-        yappi.clear_stats()=0D
++-        time.sleep(1.0)=0D
++-        _timings =3D {=0D
++-            "a_1": 6,=0D
++-            "b_1": 5,=0D
++-            "c_1": 3,=0D
++-            "d_1": 1,=0D
++-            "a_2": 4,=0D
++-            "b_2": 3,=0D
++-            "c_2": 2,=0D
++-            "d_2": 1=0D
++-        }=0D
++-        _yappi._set_test_timings(_timings)=0D
++-=0D
++-        class Thread1(Thread):=0D
++-            pass=0D
++-=0D
++-        class Thread2(Thread):=0D
++-            pass=0D
++-=0D
++-        def a():=0D
++-            b()=0D
++-=0D
++-        def b():=0D
++-            c()=0D
++-=0D
++-        def c():=0D
++-            d()=0D
++-=0D
++-        def d():=0D
++-            time.sleep(0.6)=0D
++-=0D
++-        yappi.set_clock_type("wall")=0D
++-        yappi.start()=0D
++-        t1 =3D Thread1(target=3Da)=0D
++-        t1.start()=0D
++-        t2 =3D Thread2(target=3Da)=0D
++-        t2.start()=0D
++-        t1.join()=0D
++-        t2.join()=0D
++-        stats =3D yappi.get_thread_stats()=0D
++-=0D
++-        # the fist clear_stats clears the context table?=0D
++-        tsa =3D utils.find_stat_by_name(stats, "DummyThread")=0D
++-        self.assertTrue(tsa is None)=0D
++-=0D
++-        tst1 =3D utils.find_stat_by_name(stats, "Thread1")=0D
++-        tst2 =3D utils.find_stat_by_name(stats, "Thread2")=0D
++-        tsmain =3D utils.find_stat_by_name(stats, "_MainThread")=0D
++-        dummy()  # call dummy to force ctx name to be retrieved again.=0D
++-        self.assertTrue(len(stats) =3D=3D 3)=0D
++-        self.assertTrue(tst1 is not None)=0D
++-        self.assertTrue(tst2 is not None)=0D
++-        # TODO: I put dummy() to fix below, remove the comments after a w=
+hile.=0D
++-        self.assertTrue( # FIX: I see this fails sometimes=0D
++-            tsmain is not None,=0D
++-            'Could not find "_MainThread". Found: %s' % (', '.join(utils.=
+get_stat_names(stats))))=0D
++-        self.assertTrue(1.0 > tst2.ttot >=3D 0.5)=0D
++-        self.assertTrue(1.0 > tst1.ttot >=3D 0.5)=0D
++-=0D
++-        # test sorting of the ctx stats=0D
++-        stats =3D stats.sort("totaltime", "desc")=0D
++-        prev_stat =3D None=0D
++-        for stat in stats:=0D
++-            if prev_stat:=0D
++-                self.assertTrue(prev_stat.ttot >=3D stat.ttot)=0D
++-            prev_stat =3D stat=0D
++-        stats =3D stats.sort("totaltime", "asc")=0D
++-        prev_stat =3D None=0D
++-        for stat in stats:=0D
++-            if prev_stat:=0D
++-                self.assertTrue(prev_stat.ttot <=3D stat.ttot)=0D
++-            prev_stat =3D stat=0D
++-        stats =3D stats.sort("schedcount", "desc")=0D
++-        prev_stat =3D None=0D
++-        for stat in stats:=0D
++-            if prev_stat:=0D
++-                self.assertTrue(prev_stat.sched_count >=3D stat.sched_cou=
+nt)=0D
++-            prev_stat =3D stat=0D
++-        stats =3D stats.sort("name", "desc")=0D
++-        prev_stat =3D None=0D
++-        for stat in stats:=0D
++-            if prev_stat:=0D
++-                self.assertTrue(prev_stat.name.lower() >=3D stat.name.low=
+er())=0D
++-            prev_stat =3D stat=0D
++-        self.assertRaises(=0D
++-            yappi.YappiError, stats.sort, "invalid_thread_sorttype_arg"=0D
++-        )=0D
++-        self.assertRaises(=0D
++-            yappi.YappiError, stats.sort, "invalid_thread_sortorder_arg"=
+=0D
++-        )=0D
++-=0D
++-    def test_ctx_stats_cpu(self):=0D
++-=0D
++-        def get_thread_name():=0D
++-            try:=0D
++-                return threading.current_thread().name=0D
++-            except AttributeError:=0D
++-                return "Anonymous"=0D
++-=0D
++-        def burn_cpu(sec):=0D
++-            t0 =3D yappi.get_clock_time()=0D
++-            elapsed =3D 0=0D
++-            while (elapsed < sec):=0D
++-                for _ in range(1000):=0D
++-                    pass=0D
++-                elapsed =3D yappi.get_clock_time() - t0=0D
++-=0D
++-        def test():=0D
++-=0D
++-            ts =3D []=0D
++-            for i in (0.01, 0.05, 0.1):=0D
++-                t =3D threading.Thread(target=3Dburn_cpu, args=3D(i, ))=0D
++-                t.name =3D "burn_cpu-%s" % str(i)=0D
++-                t.start()=0D
++-                ts.append(t)=0D
++-            for t in ts:=0D
++-                t.join()=0D
++-=0D
++-        yappi.set_clock_type("cpu")=0D
++-        yappi.set_context_name_callback(get_thread_name)=0D
++-=0D
++-        yappi.start()=0D
++-=0D
++-        test()=0D
++-=0D
++-        yappi.stop()=0D
++-=0D
++-        tstats =3D yappi.get_thread_stats()=0D
++-        r1 =3D '''=0D
++-        burn_cpu-0.1      3      123145356058624  0.100105  8=0D
++-        burn_cpu-0.05     2      123145361313792  0.050149  8=0D
++-        burn_cpu-0.01     1      123145356058624  0.010127  2=0D
++-        MainThread        0      4321620864       0.001632  6=0D
++-        '''=0D
++-        self.assert_ctx_stats_almost_equal(r1, tstats)=0D
++-=0D
++-    def test_producer_consumer_with_queues(self):=0D
++-        # we currently just stress yappi, no functionality test is done h=
+ere.=0D
++-        yappi.start()=0D
++-        if utils.is_py3x():=0D
++-            from queue import Queue=0D
++-        else:=0D
++-            from Queue import Queue=0D
++-        from threading import Thread=0D
++-        WORKER_THREAD_COUNT =3D 50=0D
++-        WORK_ITEM_COUNT =3D 2000=0D
++-=0D
++-        def worker():=0D
++-            while True:=0D
++-                item =3D q.get()=0D
++-                # do the work with item=0D
++-                q.task_done()=0D
++-=0D
++-        q =3D Queue()=0D
++-        for i in range(WORKER_THREAD_COUNT):=0D
++-            t =3D Thread(target=3Dworker)=0D
++-            t.daemon =3D True=0D
++-            t.start()=0D
++-=0D
++-        for item in range(WORK_ITEM_COUNT):=0D
++-            q.put(item)=0D
++-        q.join()  # block until all tasks are done=0D
++-        #yappi.get_func_stats().sort("callcount").print_all()=0D
++-        yappi.stop()=0D
++-=0D
++-    def test_temporary_lock_waiting(self):=0D
++-        yappi.start()=0D
++-        _lock =3D threading.Lock()=0D
++-=0D
++-        def worker():=0D
++-            _lock.acquire()=0D
++-            try:=0D
++-                time.sleep(1.0)=0D
++-            finally:=0D
++-                _lock.release()=0D
++-=0D
++-        t1 =3D threading.Thread(target=3Dworker)=0D
++-        t2 =3D threading.Thread(target=3Dworker)=0D
++-        t1.start()=0D
++-        t2.start()=0D
++-        t1.join()=0D
++-        t2.join()=0D
++-        #yappi.get_func_stats().sort("callcount").print_all()=0D
++-        yappi.stop()=0D
++-=0D
++-    @unittest.skipIf(os.name !=3D "posix", "requires Posix compliant OS")=
+=0D
++-    def test_signals_with_blocking_calls(self):=0D
++-        import signal, os, time=0D
++-=0D
++-        # just to verify if signal is handled correctly and stats/yappi a=
+re not corrupted.=0D
++-        def handler(signum, frame):=0D
++-            raise Exception("Signal handler executed!")=0D
++-=0D
++-        yappi.start()=0D
++-        signal.signal(signal.SIGALRM, handler)=0D
++-        signal.alarm(1)=0D
++-        self.assertRaises(Exception, time.sleep, 2)=0D
++-        stats =3D yappi.get_func_stats()=0D
++-        fsh =3D utils.find_stat_by_name(stats, "handler")=0D
++-        self.assertTrue(fsh is not None)=0D
++-=0D
++-    @unittest.skipIf(not sys.version_info >=3D (3, 2), "requires Python 3=
+.2")=0D
++-    def test_concurrent_futures(self):=0D
++-        yappi.start()=0D
++-        from concurrent.futures import ThreadPoolExecutor=0D
++-        with ThreadPoolExecutor(max_workers=3D5) as executor:=0D
++-            f =3D executor.submit(pow, 5, 2)=0D
++-            self.assertEqual(f.result(), 25)=0D
++-        time.sleep(1.0)=0D
++-        yappi.stop()=0D
++-=0D
++-    @unittest.skipIf(not sys.version_info >=3D (3, 2), "requires Python 3=
+.2")=0D
++-    def test_barrier(self):=0D
++-        yappi.start()=0D
++-        b =3D threading.Barrier(2, timeout=3D1)=0D
++-=0D
++-        def worker():=0D
++-            try:=0D
++-                b.wait()=0D
++-            except threading.BrokenBarrierError:=0D
++-                pass=0D
++-            except Exception:=0D
++-                raise Exception("BrokenBarrierError not raised")=0D
++-=0D
++-        t1 =3D threading.Thread(target=3Dworker)=0D
++-        t1.start()=0D
++-        #b.wait()=0D
++-        t1.join()=0D
++-        yappi.stop()=0D
++-=0D
++-=0D
++-class NonRecursiveFunctions(utils.YappiUnitTestCase):=0D
++-=0D
++-    def test_abcd(self):=0D
++-        _timings =3D {"a_1": 6, "b_1": 5, "c_1": 3, "d_1": 1}=0D
++-        _yappi._set_test_timings(_timings)=0D
++-=0D
++-        def a():=0D
++-            b()=0D
++-=0D
++-        def b():=0D
++-            c()=0D
++-=0D
++-        def c():=0D
++-            d()=0D
++-=0D
++-        def d():=0D
++-            pass=0D
++-=0D
++-        stats =3D utils.run_and_get_func_stats(a)=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
++-        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
++-        fsc =3D utils.find_stat_by_name(stats, 'c')=0D
++-        fsd =3D utils.find_stat_by_name(stats, 'd')=0D
++-        cfsab =3D fsa.children[fsb]=0D
++-        cfsbc =3D fsb.children[fsc]=0D
++-        cfscd =3D fsc.children[fsd]=0D
++-=0D
++-        self.assertEqual(fsa.ttot, 6)=0D
++-        self.assertEqual(fsa.tsub, 1)=0D
++-        self.assertEqual(fsb.ttot, 5)=0D
++-        self.assertEqual(fsb.tsub, 2)=0D
++-        self.assertEqual(fsc.ttot, 3)=0D
++-        self.assertEqual(fsc.tsub, 2)=0D
++-        self.assertEqual(fsd.ttot, 1)=0D
++-        self.assertEqual(fsd.tsub, 1)=0D
++-        self.assertEqual(cfsab.ttot, 5)=0D
++-        self.assertEqual(cfsab.tsub, 2)=0D
++-        self.assertEqual(cfsbc.ttot, 3)=0D
++-        self.assertEqual(cfsbc.tsub, 2)=0D
++-        self.assertEqual(cfscd.ttot, 1)=0D
++-        self.assertEqual(cfscd.tsub, 1)=0D
++-=0D
++-    def test_stop_in_middle(self):=0D
++-        _timings =3D {"a_1": 6, "b_1": 4}=0D
++-        _yappi._set_test_timings(_timings)=0D
++-=0D
++-        def a():=0D
++-            b()=0D
++-            yappi.stop()=0D
++-=0D
++-        def b():=0D
++-            time.sleep(0.2)=0D
++-=0D
++-        yappi.start()=0D
++-        a()=0D
++-        stats =3D yappi.get_func_stats()=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
++-        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
++-=0D
++-        self.assertEqual(fsa.ncall, 1)=0D
++-        self.assertEqual(fsa.nactualcall, 0)=0D
++-        self.assertEqual(fsa.ttot, 0)  # no call_leave called=0D
++-        self.assertEqual(fsa.tsub, 0)  # no call_leave called=0D
++-        self.assertEqual(fsb.ttot, 4)=0D
++-=0D
++-=0D
++-class RecursiveFunctions(utils.YappiUnitTestCase):=0D
++-=0D
++-    def test_fibonacci(self):=0D
++-=0D
++-        def fib(n):=0D
++-            if n > 1:=0D
++-                return fib(n - 1) + fib(n - 2)=0D
++-            else:=0D
++-                return n=0D
++-=0D
++-        stats =3D utils.run_and_get_func_stats(fib, 22)=0D
++-        fs =3D utils.find_stat_by_name(stats, 'fib')=0D
++-        self.assertEqual(fs.ncall, 57313)=0D
++-        self.assertEqual(fs.ttot, fs.tsub)=0D
++-=0D
++-    def test_abcadc(self):=0D
++-        _timings =3D {=0D
++-            "a_1": 20,=0D
++-            "b_1": 19,=0D
++-            "c_1": 17,=0D
++-            "a_2": 13,=0D
++-            "d_1": 12,=0D
++-            "c_2": 10,=0D
++-            "a_3": 5=0D
++-        }=0D
++-        _yappi._set_test_timings(_timings)=0D
++-=0D
++-        def a(n):=0D
++-            if n =3D=3D 3:=0D
++-                return=0D
++-            if n =3D=3D 1 + 1:=0D
++-                d(n)=0D
++-            else:=0D
++-                b(n)=0D
++-=0D
++-        def b(n):=0D
++-            c(n)=0D
++-=0D
++-        def c(n):=0D
++-            a(n + 1)=0D
++-=0D
++-        def d(n):=0D
++-            c(n)=0D
++-=0D
++-        stats =3D utils.run_and_get_func_stats(a, 1)=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
++-        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
++-        fsc =3D utils.find_stat_by_name(stats, 'c')=0D
++-        fsd =3D utils.find_stat_by_name(stats, 'd')=0D
++-        self.assertEqual(fsa.ncall, 3)=0D
++-        self.assertEqual(fsa.nactualcall, 1)=0D
++-        self.assertEqual(fsa.ttot, 20)=0D
++-        self.assertEqual(fsa.tsub, 7)=0D
++-        self.assertEqual(fsb.ttot, 19)=0D
++-        self.assertEqual(fsb.tsub, 2)=0D
++-        self.assertEqual(fsc.ttot, 17)=0D
++-        self.assertEqual(fsc.tsub, 9)=0D
++-        self.assertEqual(fsd.ttot, 12)=0D
++-        self.assertEqual(fsd.tsub, 2)=0D
++-        cfsca =3D fsc.children[fsa]=0D
++-        self.assertEqual(cfsca.nactualcall, 0)=0D
++-        self.assertEqual(cfsca.ncall, 2)=0D
++-        self.assertEqual(cfsca.ttot, 13)=0D
++-        self.assertEqual(cfsca.tsub, 6)=0D
++-=0D
++-    def test_aaaa(self):=0D
++-        _timings =3D {"d_1": 9, "d_2": 7, "d_3": 3, "d_4": 2}=0D
++-        _yappi._set_test_timings(_timings)=0D
++-=0D
++-        def d(n):=0D
++-            if n =3D=3D 3:=0D
++-                return=0D
++-            d(n + 1)=0D
++-=0D
++-        stats =3D utils.run_and_get_func_stats(d, 0)=0D
++-        fsd =3D utils.find_stat_by_name(stats, 'd')=0D
++-        self.assertEqual(fsd.ncall, 4)=0D
++-        self.assertEqual(fsd.nactualcall, 1)=0D
++-        self.assertEqual(fsd.ttot, 9)=0D
++-        self.assertEqual(fsd.tsub, 9)=0D
++-        cfsdd =3D fsd.children[fsd]=0D
++-        self.assertEqual(cfsdd.ttot, 7)=0D
++-        self.assertEqual(cfsdd.tsub, 7)=0D
++-        self.assertEqual(cfsdd.ncall, 3)=0D
++-        self.assertEqual(cfsdd.nactualcall, 0)=0D
++-=0D
++-    def test_abcabc(self):=0D
++-        _timings =3D {=0D
++-            "a_1": 20,=0D
++-            "b_1": 19,=0D
++-            "c_1": 17,=0D
++-            "a_2": 13,=0D
++-            "b_2": 11,=0D
++-            "c_2": 9,=0D
++-            "a_3": 6=0D
++-        }=0D
++-        _yappi._set_test_timings(_timings)=0D
++-=0D
++-        def a(n):=0D
++-            if n =3D=3D 3:=0D
++-                return=0D
++-            else:=0D
++-                b(n)=0D
++-=0D
++-        def b(n):=0D
++-            c(n)=0D
++-=0D
++-        def c(n):=0D
++-            a(n + 1)=0D
++-=0D
++-        stats =3D utils.run_and_get_func_stats(a, 1)=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
++-        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
++-        fsc =3D utils.find_stat_by_name(stats, 'c')=0D
++-        self.assertEqual(fsa.ncall, 3)=0D
++-        self.assertEqual(fsa.nactualcall, 1)=0D
++-        self.assertEqual(fsa.ttot, 20)=0D
++-        self.assertEqual(fsa.tsub, 9)=0D
++-        self.assertEqual(fsb.ttot, 19)=0D
++-        self.assertEqual(fsb.tsub, 4)=0D
++-        self.assertEqual(fsc.ttot, 17)=0D
++-        self.assertEqual(fsc.tsub, 7)=0D
++-        cfsab =3D fsa.children[fsb]=0D
++-        cfsbc =3D fsb.children[fsc]=0D
++-        cfsca =3D fsc.children[fsa]=0D
++-        self.assertEqual(cfsab.ttot, 19)=0D
++-        self.assertEqual(cfsab.tsub, 4)=0D
++-        self.assertEqual(cfsbc.ttot, 17)=0D
++-        self.assertEqual(cfsbc.tsub, 7)=0D
++-        self.assertEqual(cfsca.ttot, 13)=0D
++-        self.assertEqual(cfsca.tsub, 8)=0D
++-=0D
++-    def test_abcbca(self):=0D
++-        _timings =3D {"a_1": 10, "b_1": 9, "c_1": 7, "b_2": 4, "c_2": 2, =
+"a_2": 1}=0D
++-        _yappi._set_test_timings(_timings)=0D
++-        self._ncall =3D 1=0D
++-=0D
++-        def a():=0D
++-            if self._ncall =3D=3D 1:=0D
++-                b()=0D
++-            else:=0D
++-                return=0D
++-=0D
++-        def b():=0D
++-            c()=0D
++-=0D
++-        def c():=0D
++-            if self._ncall =3D=3D 1:=0D
++-                self._ncall +=3D 1=0D
++-                b()=0D
++-            else:=0D
++-                a()=0D
++-=0D
++-        stats =3D utils.run_and_get_func_stats(a)=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
++-        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
++-        fsc =3D utils.find_stat_by_name(stats, 'c')=0D
++-        cfsab =3D fsa.children[fsb]=0D
++-        cfsbc =3D fsb.children[fsc]=0D
++-        cfsca =3D fsc.children[fsa]=0D
++-        self.assertEqual(fsa.ttot, 10)=0D
++-        self.assertEqual(fsa.tsub, 2)=0D
++-        self.assertEqual(fsb.ttot, 9)=0D
++-        self.assertEqual(fsb.tsub, 4)=0D
++-        self.assertEqual(fsc.ttot, 7)=0D
++-        self.assertEqual(fsc.tsub, 4)=0D
++-        self.assertEqual(cfsab.ttot, 9)=0D
++-        self.assertEqual(cfsab.tsub, 2)=0D
++-        self.assertEqual(cfsbc.ttot, 7)=0D
++-        self.assertEqual(cfsbc.tsub, 4)=0D
++-        self.assertEqual(cfsca.ttot, 1)=0D
++-        self.assertEqual(cfsca.tsub, 1)=0D
++-        self.assertEqual(cfsca.ncall, 1)=0D
++-        self.assertEqual(cfsca.nactualcall, 0)=0D
++-=0D
++-    def test_aabccb(self):=0D
++-        _timings =3D {=0D
++-            "a_1": 13,=0D
++-            "a_2": 11,=0D
++-            "b_1": 9,=0D
++-            "c_1": 5,=0D
++-            "c_2": 3,=0D
++-            "b_2": 1=0D
++-        }=0D
++-        _yappi._set_test_timings(_timings)=0D
++-        self._ncall =3D 1=0D
++-=0D
++-        def a():=0D
++-            if self._ncall =3D=3D 1:=0D
++-                self._ncall +=3D 1=0D
++-                a()=0D
++-            else:=0D
++-                b()=0D
++-=0D
++-        def b():=0D
++-            if self._ncall =3D=3D 3:=0D
++-                return=0D
++-            else:=0D
++-                c()=0D
++-=0D
++-        def c():=0D
++-            if self._ncall =3D=3D 2:=0D
++-                self._ncall +=3D 1=0D
++-                c()=0D
++-            else:=0D
++-                b()=0D
++-=0D
++-        stats =3D utils.run_and_get_func_stats(a)=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
++-        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
++-        fsc =3D utils.find_stat_by_name(stats, 'c')=0D
++-        cfsaa =3D fsa.children[fsa.index]=0D
++-        cfsab =3D fsa.children[fsb]=0D
++-        cfsbc =3D fsb.children[fsc.full_name]=0D
++-        cfscc =3D fsc.children[fsc]=0D
++-        cfscb =3D fsc.children[fsb]=0D
++-        self.assertEqual(fsb.ttot, 9)=0D
++-        self.assertEqual(fsb.tsub, 5)=0D
++-        self.assertEqual(cfsbc.ttot, 5)=0D
++-        self.assertEqual(cfsbc.tsub, 2)=0D
++-        self.assertEqual(fsa.ttot, 13)=0D
++-        self.assertEqual(fsa.tsub, 4)=0D
++-        self.assertEqual(cfsab.ttot, 9)=0D
++-        self.assertEqual(cfsab.tsub, 4)=0D
++-        self.assertEqual(cfsaa.ttot, 11)=0D
++-        self.assertEqual(cfsaa.tsub, 2)=0D
++-        self.assertEqual(fsc.ttot, 5)=0D
++-        self.assertEqual(fsc.tsub, 4)=0D
++-=0D
++-    def test_abaa(self):=0D
++-        _timings =3D {"a_1": 13, "b_1": 10, "a_2": 9, "a_3": 5}=0D
++-        _yappi._set_test_timings(_timings)=0D
++-=0D
++-        self._ncall =3D 1=0D
++-=0D
++-        def a():=0D
++-            if self._ncall =3D=3D 1:=0D
++-                b()=0D
++-            elif self._ncall =3D=3D 2:=0D
++-                self._ncall +=3D 1=0D
++-                a()=0D
++-            else:=0D
++-                return=0D
++-=0D
++-        def b():=0D
++-            self._ncall +=3D 1=0D
++-            a()=0D
++-=0D
++-        stats =3D utils.run_and_get_func_stats(a)=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
++-        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
++-        cfsaa =3D fsa.children[fsa]=0D
++-        cfsba =3D fsb.children[fsa]=0D
++-        self.assertEqual(fsb.ttot, 10)=0D
++-        self.assertEqual(fsb.tsub, 1)=0D
++-        self.assertEqual(fsa.ttot, 13)=0D
++-        self.assertEqual(fsa.tsub, 12)=0D
++-        self.assertEqual(cfsaa.ttot, 5)=0D
++-        self.assertEqual(cfsaa.tsub, 5)=0D
++-        self.assertEqual(cfsba.ttot, 9)=0D
++-        self.assertEqual(cfsba.tsub, 4)=0D
++-=0D
++-    def test_aabb(self):=0D
++-        _timings =3D {"a_1": 13, "a_2": 10, "b_1": 9, "b_2": 5}=0D
++-        _yappi._set_test_timings(_timings)=0D
++-=0D
++-        self._ncall =3D 1=0D
++-=0D
++-        def a():=0D
++-            if self._ncall =3D=3D 1:=0D
++-                self._ncall +=3D 1=0D
++-                a()=0D
++-            elif self._ncall =3D=3D 2:=0D
++-                b()=0D
++-            else:=0D
++-                return=0D
++-=0D
++-        def b():=0D
++-            if self._ncall =3D=3D 2:=0D
++-                self._ncall +=3D 1=0D
++-                b()=0D
++-            else:=0D
++-                return=0D
++-=0D
++-        stats =3D utils.run_and_get_func_stats(a)=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
++-        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
++-        cfsaa =3D fsa.children[fsa]=0D
++-        cfsab =3D fsa.children[fsb]=0D
++-        cfsbb =3D fsb.children[fsb]=0D
++-        self.assertEqual(fsa.ttot, 13)=0D
++-        self.assertEqual(fsa.tsub, 4)=0D
++-        self.assertEqual(fsb.ttot, 9)=0D
++-        self.assertEqual(fsb.tsub, 9)=0D
++-        self.assertEqual(cfsaa.ttot, 10)=0D
++-        self.assertEqual(cfsaa.tsub, 1)=0D
++-        self.assertEqual(cfsab.ttot, 9)=0D
++-        self.assertEqual(cfsab.tsub, 4)=0D
++-        self.assertEqual(cfsbb.ttot, 5)=0D
++-        self.assertEqual(cfsbb.tsub, 5)=0D
++-=0D
++-    def test_abbb(self):=0D
++-        _timings =3D {"a_1": 13, "b_1": 10, "b_2": 6, "b_3": 1}=0D
++-        _yappi._set_test_timings(_timings)=0D
++-=0D
++-        self._ncall =3D 1=0D
++-=0D
++-        def a():=0D
++-            if self._ncall =3D=3D 1:=0D
++-                b()=0D
++-=0D
++-        def b():=0D
++-            if self._ncall =3D=3D 3:=0D
++-                return=0D
++-            self._ncall +=3D 1=0D
++-            b()=0D
++-=0D
++-        stats =3D utils.run_and_get_func_stats(a)=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
++-        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
++-        cfsab =3D fsa.children[fsb]=0D
++-        cfsbb =3D fsb.children[fsb]=0D
++-        self.assertEqual(fsa.ttot, 13)=0D
++-        self.assertEqual(fsa.tsub, 3)=0D
++-        self.assertEqual(fsb.ttot, 10)=0D
++-        self.assertEqual(fsb.tsub, 10)=0D
++-        self.assertEqual(fsb.ncall, 3)=0D
++-        self.assertEqual(fsb.nactualcall, 1)=0D
++-        self.assertEqual(cfsab.ttot, 10)=0D
++-        self.assertEqual(cfsab.tsub, 4)=0D
++-        self.assertEqual(cfsbb.ttot, 6)=0D
++-        self.assertEqual(cfsbb.tsub, 6)=0D
++-        self.assertEqual(cfsbb.nactualcall, 0)=0D
++-        self.assertEqual(cfsbb.ncall, 2)=0D
++-=0D
++-    def test_aaab(self):=0D
++-        _timings =3D {"a_1": 13, "a_2": 10, "a_3": 6, "b_1": 1}=0D
++-        _yappi._set_test_timings(_timings)=0D
++-=0D
++-        self._ncall =3D 1=0D
++-=0D
++-        def a():=0D
++-            if self._ncall =3D=3D 3:=0D
++-                b()=0D
++-                return=0D
++-            self._ncall +=3D 1=0D
++-            a()=0D
++-=0D
++-        def b():=0D
++-            return=0D
++-=0D
++-        stats =3D utils.run_and_get_func_stats(a)=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
++-        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
++-        cfsaa =3D fsa.children[fsa]=0D
++-        cfsab =3D fsa.children[fsb]=0D
++-        self.assertEqual(fsa.ttot, 13)=0D
++-        self.assertEqual(fsa.tsub, 12)=0D
++-        self.assertEqual(fsb.ttot, 1)=0D
++-        self.assertEqual(fsb.tsub, 1)=0D
++-        self.assertEqual(cfsaa.ttot, 10)=0D
++-        self.assertEqual(cfsaa.tsub, 9)=0D
++-        self.assertEqual(cfsab.ttot, 1)=0D
++-        self.assertEqual(cfsab.tsub, 1)=0D
++-=0D
++-    def test_abab(self):=0D
++-        _timings =3D {"a_1": 13, "b_1": 10, "a_2": 6, "b_2": 1}=0D
++-        _yappi._set_test_timings(_timings)=0D
++-=0D
++-        self._ncall =3D 1=0D
++-=0D
++-        def a():=0D
++-            b()=0D
++-=0D
++-        def b():=0D
++-            if self._ncall =3D=3D 2:=0D
++-                return=0D
++-            self._ncall +=3D 1=0D
++-            a()=0D
++-=0D
++-        stats =3D utils.run_and_get_func_stats(a)=0D
++-        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
++-        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
++-        cfsab =3D fsa.children[fsb]=0D
++-        cfsba =3D fsb.children[fsa]=0D
++-        self.assertEqual(fsa.ttot, 13)=0D
++-        self.assertEqual(fsa.tsub, 8)=0D
++-        self.assertEqual(fsb.ttot, 10)=0D
++-        self.assertEqual(fsb.tsub, 5)=0D
++-        self.assertEqual(cfsab.ttot, 10)=0D
++-        self.assertEqual(cfsab.tsub, 5)=0D
++-        self.assertEqual(cfsab.ncall, 2)=0D
++-        self.assertEqual(cfsab.nactualcall, 1)=0D
++-        self.assertEqual(cfsba.ttot, 6)=0D
++-        self.assertEqual(cfsba.tsub, 5)=0D
++-=0D
++-=0D
++-if __name__ =3D=3D '__main__':=0D
++-    #     import sys;sys.argv =3D ['', 'BasicUsage.test_run_as_script']=0D
++-    #     import sys;sys.argv =3D ['', 'MultithreadedScenarios.test_subse=
+quent_profile']=0D
++-    unittest.main()=0D
+++import os
+++import sys
+++import time
+++import threading
+++import unittest
+++import yappi
+++import _yappi
+ +import tests.utils as utils
+- import multiprocessing  # added to fix http://bugs.python.org/issue15881 =
+for > Py2.6
+- import subprocess
+-=20
+-diff --git a/tests/test_gevent.py b/tests/test_gevent.py
+-index 8569712..fe15b29 100644
+++import multiprocessing  # added to fix http://bugs.python.org/issue15881 =
+for > Py2.6
+++import subprocess
+++
+++_counter =3D 0
+++
+++
+++class BasicUsage(utils.YappiUnitTestCase):
+++
+++    def test_callback_function_int_return_overflow(self):
+++        # this test is just here to check if any errors are generated, as=
+ the err
+++        # is printed in C side, I did not include it here. THere are ways=
+ to test
+++        # this deterministically, I did not bother
+++        import ctypes
+++
+++        def _unsigned_overflow_margin():
+++            return 2**(ctypes.sizeof(ctypes.c_void_p) * 8) - 1
+++
+++        def foo():
+++            pass
+++
+++        #with utils.captured_output() as (out, err):
+++        yappi.set_context_id_callback(_unsigned_overflow_margin)
+++        yappi.set_tag_callback(_unsigned_overflow_margin)
+++        yappi.start()
+++        foo()
+++
+++    def test_issue60(self):
+++
+++        def foo():
+++            buf =3D bytearray()
+++            buf +=3D b't' * 200
+++            view =3D memoryview(buf)[10:]
+++            view =3D view.tobytes()
+++            del buf[:10]  # this throws exception
+++            return view
+++
+++        yappi.start(builtins=3DTrue)
+++        foo()
+++        self.assertTrue(
+++            len(
+++                yappi.get_func_stats(
+++                    filter_callback=3Dlambda x: yappi.
+++                    func_matches(x, [memoryview.tobytes])
+++                )
+++            ) > 0
+++        )
+++        yappi.stop()
+++
+++    def test_issue54(self):
+++
+++        def _tag_cbk():
+++            global _counter
+++            _counter +=3D 1
+++            return _counter
+++
+++        def a():
+++            pass
+++
+++        def b():
+++            pass
+++
+++        yappi.set_tag_callback(_tag_cbk)
+++        yappi.start()
+++        a()
+++        a()
+++        a()
+++        yappi.stop()
+++        stats =3D yappi.get_func_stats()
+++        self.assertEqual(stats.pop().ncall, 3)  # aggregated if no tag is=
+ given
+++        stats =3D yappi.get_func_stats(tag=3D1)
+++
+++        for i in range(1, 3):
+++            stats =3D yappi.get_func_stats(tag=3Di)
+++            stats =3D yappi.get_func_stats(
+++                tag=3Di, filter_callback=3Dlambda x: yappi.func_matches(x=
+, [a])
+++            )
+++
+++            stat =3D stats.pop()
+++            self.assertEqual(stat.ncall, 1)
+++
+++        yappi.set_tag_callback(None)
+++        yappi.clear_stats()
+++        yappi.start()
+++        b()
+++        b()
+++        stats =3D yappi.get_func_stats()
+++        self.assertEqual(len(stats), 1)
+++        stat =3D stats.pop()
+++        self.assertEqual(stat.ncall, 2)
+++
+++    def test_filter(self):
+++
+++        def a():
+++            pass
+++
+++        def b():
+++            a()
+++
+++        def c():
+++            b()
+++
+++        _TCOUNT =3D 5
+++
+++        ts =3D []
+++        yappi.start()
+++        for i in range(_TCOUNT):
+++            t =3D threading.Thread(target=3Dc)
+++            t.start()
+++            ts.append(t)
+++
+++        for t in ts:
+++            t.join()
+++
+++        yappi.stop()
+++
+++        ctx_ids =3D []
+++        for tstat in yappi.get_thread_stats():
+++            if tstat.name =3D=3D '_MainThread':
+++                main_ctx_id =3D tstat.id
+++            else:
+++                ctx_ids.append(tstat.id)
+++
+++        fstats =3D yappi.get_func_stats(filter=3D{"ctx_id": 9})
+++        self.assertTrue(fstats.empty())
+++        fstats =3D yappi.get_func_stats(
+++            filter=3D{
+++                "ctx_id": main_ctx_id,
+++                "name": "c"
+++            }
+++        )  # main thread
+++        self.assertTrue(fstats.empty())
+++
+++        for i in ctx_ids:
+++            fstats =3D yappi.get_func_stats(
+++                filter=3D{
+++                    "ctx_id": i,
+++                    "name": "a",
+++                    "ncall": 1
+++                }
+++            )
+++            self.assertEqual(fstats.pop().ncall, 1)
+++            fstats =3D yappi.get_func_stats(filter=3D{"ctx_id": i, "name"=
+: "b"})
+++            self.assertEqual(fstats.pop().ncall, 1)
+++            fstats =3D yappi.get_func_stats(filter=3D{"ctx_id": i, "name"=
+: "c"})
+++            self.assertEqual(fstats.pop().ncall, 1)
+++
+++        yappi.clear_stats()
+++        yappi.start(builtins=3DTrue)
+++        time.sleep(0.1)
+++        yappi.stop()
+++        fstats =3D yappi.get_func_stats(filter=3D{"module": "time"})
+++        self.assertEqual(len(fstats), 1)
+++
+++        # invalid filters`
+++        self.assertRaises(
+++            Exception, yappi.get_func_stats, filter=3D{'tag': "sss"}
+++        )
+++        self.assertRaises(
+++            Exception, yappi.get_func_stats, filter=3D{'ctx_id': "None"}
+++        )
+++
+++    def test_filter_callback(self):
+++
+++        def a():
+++            time.sleep(0.1)
+++
+++        def b():
+++            a()
+++
+++        def c():
+++            pass
+++
+++        def d():
+++            pass
+++
+++        yappi.set_clock_type("wall")
+++        yappi.start(builtins=3DTrue)
+++        a()
+++        b()
+++        c()
+++        d()
+++        stats =3D yappi.get_func_stats(
+++            filter_callback=3Dlambda x: yappi.func_matches(x, [a, b])
+++        )
+++        #stats.print_all()
+++        r1 =3D '''
+++        tests/test_functionality.py:98 a      2      0.000000  0.200350  =
+0.100175
+++        tests/test_functionality.py:101 b     1      0.000000  0.120000  =
+0.100197
+++        '''
+++        self.assert_traces_almost_equal(r1, stats)
+++        self.assertEqual(len(stats), 2)
+++        stats =3D yappi.get_func_stats(
+++            filter_callback=3Dlambda x: yappi.
+++            module_matches(x, [sys.modules[__name__]])
+++        )
+++        r1 =3D '''
+++        tests/test_functionality.py:98 a      2      0.000000  0.230130  =
+0.115065
+++        tests/test_functionality.py:101 b     1      0.000000  0.120000  =
+0.109011
+++        tests/test_functionality.py:104 c     1      0.000000  0.000002  =
+0.000002
+++        tests/test_functionality.py:107 d     1      0.000000  0.000001  =
+0.000001
+++        '''
+++        self.assert_traces_almost_equal(r1, stats)
+++        self.assertEqual(len(stats), 4)
+++
+++        stats =3D yappi.get_func_stats(
+++            filter_callback=3Dlambda x: yappi.func_matches(x, [time.sleep=
+])
+++        )
+++        self.assertEqual(len(stats), 1)
+++        r1 =3D '''
+++        time.sleep                            2      0.206804  0.220000  =
+0.103402
+++        '''
+++        self.assert_traces_almost_equal(r1, stats)
+++
+++    def test_print_formatting(self):
+++
+++        def a():
+++            pass
+++
+++        def b():
+++            a()
+++
+++        func_cols =3D {
+++            1: ("name", 48),
+++            0: ("ncall", 5),
+++            2: ("tsub", 8),
+++        }
+++        thread_cols =3D {
+++            1: ("name", 48),
+++            0: ("ttot", 8),
+++        }
+++
+++        yappi.start()
+++        a()
+++        b()
+++        yappi.stop()
+++        fs =3D yappi.get_func_stats()
+++        cs =3D fs[1].children
+++        ts =3D yappi.get_thread_stats()
+++        #fs.print_all(out=3Dsys.stderr, columns=3D{1:("name", 70), })
+++        #cs.print_all(out=3Dsys.stderr, columns=3Dfunc_cols)
+++        #ts.print_all(out=3Dsys.stderr, columns=3Dthread_cols)
+++        #cs.print_all(out=3Dsys.stderr, columns=3D{})
+++
+++        self.assertRaises(
+++            yappi.YappiError, fs.print_all, columns=3D{1: ("namee", 9)}
+++        )
+++        self.assertRaises(
+++            yappi.YappiError, cs.print_all, columns=3D{1: ("dd", 0)}
+++        )
+++        self.assertRaises(
+++            yappi.YappiError, ts.print_all, columns=3D{1: ("tidd", 0)}
+++        )
+++
+++    def test_get_clock(self):
+++        yappi.set_clock_type('cpu')
+++        self.assertEqual('cpu', yappi.get_clock_type())
+++        clock_info =3D yappi.get_clock_info()
+++        self.assertTrue('api' in clock_info)
+++        self.assertTrue('resolution' in clock_info)
+++
+++        yappi.set_clock_type('wall')
+++        self.assertEqual('wall', yappi.get_clock_type())
+++
+++        t0 =3D yappi.get_clock_time()
+++        time.sleep(0.1)
+++        duration =3D yappi.get_clock_time() - t0
+++        self.assertTrue(0.05 < duration < 0.3)
+++
+++    def test_profile_decorator(self):
+++
+++        def aggregate(func, stats):
+++            fname =3D "tests/%s.profile" % (func.__name__)
+++            try:
+++                stats.add(fname)
+++            except IOError:
+++                pass
+++            stats.save(fname)
+++            raise Exception("messing around")
+++
+++        @yappi.profile(return_callback=3Daggregate)
+++        def a(x, y):
+++            if x + y =3D=3D 25:
+++                raise Exception("")
+++            return x + y
+++
+++        def b():
+++            pass
+++
+++        try:
+++            os.remove(
+++                "tests/a.profile"
+++            )  # remove the one from prev test, if available
+++        except:
+++            pass
+++
+++        # global profile is on to mess things up
+++        yappi.start()
+++        b()
+++
+++        # assert functionality and call function at same time
+++        try:
+++            self.assertEqual(a(1, 2), 3)
+++        except:
+++            pass
+++        try:
+++            self.assertEqual(a(2, 5), 7)
+++        except:
+++            pass
+++        try:
+++            a(4, 21)
+++        except:
+++            pass
+++        stats =3D yappi.get_func_stats().add("tests/a.profile")
+++        fsa =3D utils.find_stat_by_name(stats, 'a')
+++        self.assertEqual(fsa.ncall, 3)
+++        self.assertEqual(len(stats), 1)  # b() should be cleared out.
+++
+++        @yappi.profile(return_callback=3Daggregate)
+++        def count_down_rec(n):
+++            if n =3D=3D 0:
+++                return
+++            count_down_rec(n - 1)
+++
+++        try:
+++            os.remove(
+++                "tests/count_down_rec.profile"
+++            )  # remove the one from prev test, if available
+++        except:
+++            pass
+++
+++        try:
+++            count_down_rec(4)
+++        except:
+++            pass
+++        try:
+++            count_down_rec(3)
+++        except:
+++            pass
+++
+++        stats =3D yappi.YFuncStats("tests/count_down_rec.profile")
+++        fsrec =3D utils.find_stat_by_name(stats, 'count_down_rec')
+++        self.assertEqual(fsrec.ncall, 9)
+++        self.assertEqual(fsrec.nactualcall, 2)
+++
+++    def test_strip_dirs(self):
+++
+++        def a():
+++            pass
+++
+++        stats =3D utils.run_and_get_func_stats(a, )
+++        stats.strip_dirs()
+++        fsa =3D utils.find_stat_by_name(stats, "a")
+++        self.assertEqual(fsa.module, os.path.basename(fsa.module))
+++
+++    @unittest.skipIf(os.name =3D=3D "nt", "do not run on Windows")
+++    def test_run_as_script(self):
+++        import re
+++        p =3D subprocess.Popen(
+++            ['yappi', os.path.join('./tests', 'run_as_script.py')],
+++            stdout=3Dsubprocess.PIPE
+++        )
+++        out, err =3D p.communicate()
+++        self.assertEqual(p.returncode, 0)
+++        func_stats, thread_stats =3D re.split(
+++            b'name\\s+id\\s+tid\\s+ttot\\s+scnt\\s*\n', out
+++        )
+++        self.assertTrue(b'FancyThread' in thread_stats)
+++
+++    def test_yappi_overhead(self):
+++        LOOP_COUNT =3D 100000
+++
+++        def a():
+++            pass
+++
+++        def b():
+++            for i in range(LOOP_COUNT):
+++                a()
+++
+++        t0 =3D time.time()
+++        yappi.start()
+++        b()
+++        yappi.stop()
+++        time_with_yappi =3D time.time() - t0
+++        t0 =3D time.time()
+++        b()
+++        time_without_yappi =3D time.time() - t0
+++        if time_without_yappi =3D=3D 0:
+++            time_without_yappi =3D 0.000001
+++
+++        # in latest v0.82, I calculated this as close to "7.0" in my mach=
+ine.
+++        # however, %83 of this overhead is coming from tickcount(). The o=
+ther %17
+++        # seems to have been evenly distributed to the internal bookkeepi=
+ng
+++        # structures/algorithms which seems acceptable. Note that our tes=
+t only
+++        # tests one function being profiled at-a-time in a short interval.
+++        # profiling high number of functions in a small time
+++        # is a different beast, (which is pretty unlikely in most applica=
+tions)
+++        # So as a conclusion: I cannot see any optimization window for Ya=
+ppi that
+++        # is worth implementing as we will only optimize %17 of the time.
+++        sys.stderr.write("\r\nYappi puts %0.1f times overhead to the prof=
+iled application in average.\r\n" % \
+++            (time_with_yappi / time_without_yappi))
+++
+++    def test_clear_stats_while_running(self):
+++
+++        def a():
+++            pass
+++
+++        yappi.start()
+++        a()
+++        yappi.clear_stats()
+++        a()
+++        stats =3D yappi.get_func_stats()
+++        fsa =3D utils.find_stat_by_name(stats, 'a')
+++        self.assertEqual(fsa.ncall, 1)
+++
+++    def test_generator(self):
+++
+++        def _gen(n):
+++            while (n > 0):
+++                yield n
+++                n -=3D 1
+++
+++        yappi.start()
+++        for x in _gen(5):
+++            pass
+++        self.assertTrue(
+++            yappi.convert2pstats(yappi.get_func_stats()) is not None
+++        )
+++
+++    def test_slice_child_stats_and_strip_dirs(self):
+++
+++        def b():
+++            for i in range(10000000):
+++                pass
+++
+++        def a():
+++            b()
+++
+++        yappi.start(builtins=3DTrue)
+++        a()
+++        stats =3D yappi.get_func_stats()
+++        fsa =3D utils.find_stat_by_name(stats, 'a')
+++        fsb =3D utils.find_stat_by_name(stats, 'b')
+++        self.assertTrue(fsa.children[0:1] is not None)
+++        prev_afullname =3D fsa.full_name
+++        prev_bchildfullname =3D fsa.children[fsb].full_name
+++        stats.strip_dirs()
+++        self.assertTrue(len(prev_afullname) > len(fsa.full_name))
+++        self.assertTrue(
+++            len(prev_bchildfullname) > len(fsa.children[fsb].full_name)
+++        )
+++
+++    def test_children_stat_functions(self):
+++        _timings =3D {"a_1": 5, "b_1": 3, "c_1": 1}
+++        _yappi._set_test_timings(_timings)
+++
+++        def b():
+++            pass
+++
+++        def c():
+++            pass
+++
+++        def a():
+++            b()
+++            c()
+++
+++        yappi.start()
+++        a()
+++        b()  # non-child call
+++        c()  # non-child call
+++        stats =3D yappi.get_func_stats()
+++        fsa =3D utils.find_stat_by_name(stats, 'a')
+++        childs_of_a =3D fsa.children.get().sort("tavg", "desc")
+++        prev_item =3D None
+++        for item in childs_of_a:
+++            if prev_item:
+++                self.assertTrue(prev_item.tavg > item.tavg)
+++            prev_item =3D item
+++        childs_of_a.sort("name", "desc")
+++        prev_item =3D None
+++        for item in childs_of_a:
+++            if prev_item:
+++                self.assertTrue(prev_item.name > item.name)
+++            prev_item =3D item
+++        childs_of_a.clear()
+++        self.assertTrue(childs_of_a.empty())
+++
+++    def test_no_stats_different_clock_type_load(self):
+++
+++        def a():
+++            pass
+++
+++        yappi.start()
+++        a()
+++        yappi.stop()
+++        yappi.get_func_stats().save("tests/ystats1.ys")
+++        yappi.clear_stats()
+++        yappi.set_clock_type("WALL")
+++        yappi.start()
+++        yappi.stop()
+++        stats =3D yappi.get_func_stats().add("tests/ystats1.ys")
+++        fsa =3D utils.find_stat_by_name(stats, 'a')
+++        self.assertTrue(fsa is not None)
+++
+++    def test_subsequent_profile(self):
+++        _timings =3D {"a_1": 1, "b_1": 1}
+++        _yappi._set_test_timings(_timings)
+++
+++        def a():
+++            pass
+++
+++        def b():
+++            pass
+++
+++        yappi.start()
+++        a()
+++        yappi.stop()
+++        yappi.start()
+++        b()
+++        yappi.stop()
+++        stats =3D yappi.get_func_stats()
+++        fsa =3D utils.find_stat_by_name(stats, 'a')
+++        fsb =3D utils.find_stat_by_name(stats, 'b')
+++        self.assertTrue(fsa is not None)
+++        self.assertTrue(fsb is not None)
+++        self.assertEqual(fsa.ttot, 1)
+++        self.assertEqual(fsb.ttot, 1)
+++
+++    def test_lambda(self):
+++        f =3D lambda: time.sleep(0.3)
+++        yappi.set_clock_type("wall")
+++        yappi.start()
+++        f()
+++        stats =3D yappi.get_func_stats()
+++        fsa =3D utils.find_stat_by_name(stats, '<lambda>')
+++        self.assertTrue(fsa.ttot > 0.1)
+++
+++    def test_module_stress(self):
+++        self.assertEqual(yappi.is_running(), False)
+++
+++        yappi.start()
+++        yappi.clear_stats()
+++        self.assertRaises(_yappi.error, yappi.set_clock_type, "wall")
+++
+++        yappi.stop()
+++        yappi.clear_stats()
+++        yappi.set_clock_type("cpu")
+++        self.assertRaises(yappi.YappiError, yappi.set_clock_type, "dummy")
+++        self.assertEqual(yappi.is_running(), False)
+++        yappi.clear_stats()
+++        yappi.clear_stats()
+++
+++    def test_stat_sorting(self):
+++        _timings =3D {"a_1": 13, "b_1": 10, "a_2": 6, "b_2": 1}
+++        _yappi._set_test_timings(_timings)
+++
+++        self._ncall =3D 1
+++
+++        def a():
+++            b()
+++
+++        def b():
+++            if self._ncall =3D=3D 2:
+++                return
+++            self._ncall +=3D 1
+++            a()
+++
+++        stats =3D utils.run_and_get_func_stats(a)
+++        stats =3D stats.sort("totaltime", "desc")
+++        prev_stat =3D None
+++        for stat in stats:
+++            if prev_stat:
+++                self.assertTrue(prev_stat.ttot >=3D stat.ttot)
+++            prev_stat =3D stat
+++        stats =3D stats.sort("totaltime", "asc")
+++        prev_stat =3D None
+++        for stat in stats:
+++            if prev_stat:
+++                self.assertTrue(prev_stat.ttot <=3D stat.ttot)
+++            prev_stat =3D stat
+++        stats =3D stats.sort("avgtime", "asc")
+++        prev_stat =3D None
+++        for stat in stats:
+++            if prev_stat:
+++                self.assertTrue(prev_stat.tavg <=3D stat.tavg)
+++            prev_stat =3D stat
+++        stats =3D stats.sort("name", "asc")
+++        prev_stat =3D None
+++        for stat in stats:
+++            if prev_stat:
+++                self.assertTrue(prev_stat.name <=3D stat.name)
+++            prev_stat =3D stat
+++        stats =3D stats.sort("subtime", "asc")
+++        prev_stat =3D None
+++        for stat in stats:
+++            if prev_stat:
+++                self.assertTrue(prev_stat.tsub <=3D stat.tsub)
+++            prev_stat =3D stat
+++
+++        self.assertRaises(
+++            yappi.YappiError, stats.sort, "invalid_func_sorttype_arg"
+++        )
+++        self.assertRaises(
+++            yappi.YappiError, stats.sort, "totaltime",
+++            "invalid_func_sortorder_arg"
+++        )
+++
+++    def test_start_flags(self):
+++        self.assertEqual(_yappi._get_start_flags(), None)
+++        yappi.start()
+++
+++        def a():
+++            pass
+++
+++        a()
+++        self.assertEqual(_yappi._get_start_flags()["profile_builtins"], 0)
+++        self.assertEqual(_yappi._get_start_flags()["profile_multicontext"=
+], 1)
+++        self.assertEqual(len(yappi.get_thread_stats()), 1)
+++
+++    def test_builtin_profiling(self):
+++
+++        def a():
+++            time.sleep(0.4)  # is a builtin function
+++
+++        yappi.set_clock_type('wall')
+++
+++        yappi.start(builtins=3DTrue)
+++        a()
+++        stats =3D yappi.get_func_stats()
+++        fsa =3D utils.find_stat_by_name(stats, 'sleep')
+++        self.assertTrue(fsa is not None)
+++        self.assertTrue(fsa.ttot > 0.3)
+++        yappi.stop()
+++        yappi.clear_stats()
+++
+++        def a():
+++            pass
+++
+++        yappi.start()
+++        t =3D threading.Thread(target=3Da)
+++        t.start()
+++        t.join()
+++        stats =3D yappi.get_func_stats()
+++
+++    def test_singlethread_profiling(self):
+++        yappi.set_clock_type('wall')
+++
+++        def a():
+++            time.sleep(0.2)
+++
+++        class Worker1(threading.Thread):
+++
+++            def a(self):
+++                time.sleep(0.3)
+++
+++            def run(self):
+++                self.a()
+++
+++        yappi.start(profile_threads=3DFalse)
+++
+++        c =3D Worker1()
+++        c.start()
+++        c.join()
+++        a()
+++        stats =3D yappi.get_func_stats()
+++        fsa1 =3D utils.find_stat_by_name(stats, 'Worker1.a')
+++        fsa2 =3D utils.find_stat_by_name(stats, 'a')
+++        self.assertTrue(fsa1 is None)
+++        self.assertTrue(fsa2 is not None)
+++        self.assertTrue(fsa2.ttot > 0.1)
+++
+++    def test_run(self):
+++
+++        def profiled():
+++            pass
+++
+++        yappi.clear_stats()
+++        try:
+++            with yappi.run():
+++                profiled()
+++            stats =3D yappi.get_func_stats()
+++        finally:
+++            yappi.clear_stats()
+++
+++        self.assertIsNotNone(utils.find_stat_by_name(stats, 'profiled'))
+++
+++    def test_run_recursive(self):
+++
+++        def profiled():
+++            pass
+++
+++        def not_profiled():
+++            pass
+++
+++        yappi.clear_stats()
+++        try:
+++            with yappi.run():
+++                with yappi.run():
+++                    profiled()
+++                # Profiling stopped here
+++                not_profiled()
+++            stats =3D yappi.get_func_stats()
+++        finally:
+++            yappi.clear_stats()
+++
+++        self.assertIsNotNone(utils.find_stat_by_name(stats, 'profiled'))
+++        self.assertIsNone(utils.find_stat_by_name(stats, 'not_profiled'))
+++
+++
+++class StatSaveScenarios(utils.YappiUnitTestCase):
+++
+++    def test_pstats_conversion(self):
+++
+++        def pstat_id(fs):
+++            return (fs.module, fs.lineno, fs.name)
+++
+++        def a():
+++            d()
+++
+++        def b():
+++            d()
+++
+++        def c():
+++            pass
+++
+++        def d():
+++            pass
+++
+++        _timings =3D {"a_1": 12, "b_1": 7, "c_1": 5, "d_1": 2}
+++        _yappi._set_test_timings(_timings)
+++        stats =3D utils.run_and_get_func_stats(a, )
+++        stats.strip_dirs()
+++        stats.save("tests/a1.pstats", type=3D"pstat")
+++        fsa_pid =3D pstat_id(utils.find_stat_by_name(stats, "a"))
+++        fsd_pid =3D pstat_id(utils.find_stat_by_name(stats, "d"))
+++        yappi.clear_stats()
+++        _yappi._set_test_timings(_timings)
+++        stats =3D utils.run_and_get_func_stats(a, )
+++        stats.strip_dirs()
+++        stats.save("tests/a2.pstats", type=3D"pstat")
+++        yappi.clear_stats()
+++        _yappi._set_test_timings(_timings)
+++        stats =3D utils.run_and_get_func_stats(b, )
+++        stats.strip_dirs()
+++        stats.save("tests/b1.pstats", type=3D"pstat")
+++        fsb_pid =3D pstat_id(utils.find_stat_by_name(stats, "b"))
+++        yappi.clear_stats()
+++        _yappi._set_test_timings(_timings)
+++        stats =3D utils.run_and_get_func_stats(c, )
+++        stats.strip_dirs()
+++        stats.save("tests/c1.pstats", type=3D"pstat")
+++        fsc_pid =3D pstat_id(utils.find_stat_by_name(stats, "c"))
+++
+++        # merge saved stats and check pstats values are correct
+++        import pstats
+++        p =3D pstats.Stats(
+++            'tests/a1.pstats', 'tests/a2.pstats', 'tests/b1.pstats',
+++            'tests/c1.pstats'
+++        )
+++        p.strip_dirs()
+++        # ct =3D ttot, tt =3D tsub
+++        (cc, nc, tt, ct, callers) =3D p.stats[fsa_pid]
+++        self.assertEqual(cc, nc, 2)
+++        self.assertEqual(tt, 20)
+++        self.assertEqual(ct, 24)
+++        (cc, nc, tt, ct, callers) =3D p.stats[fsd_pid]
+++        self.assertEqual(cc, nc, 3)
+++        self.assertEqual(tt, 6)
+++        self.assertEqual(ct, 6)
+++        self.assertEqual(len(callers), 2)
+++        (cc, nc, tt, ct) =3D callers[fsa_pid]
+++        self.assertEqual(cc, nc, 2)
+++        self.assertEqual(tt, 4)
+++        self.assertEqual(ct, 4)
+++        (cc, nc, tt, ct) =3D callers[fsb_pid]
+++        self.assertEqual(cc, nc, 1)
+++        self.assertEqual(tt, 2)
+++        self.assertEqual(ct, 2)
+++
+++    def test_merge_stats(self):
+++        _timings =3D {
+++            "a_1": 15,
+++            "b_1": 14,
+++            "c_1": 12,
+++            "d_1": 10,
+++            "e_1": 9,
+++            "f_1": 7,
+++            "g_1": 6,
+++            "h_1": 5,
+++            "i_1": 1
+++        }
+++        _yappi._set_test_timings(_timings)
+++
+++        def a():
+++            b()
+++
+++        def b():
+++            c()
+++
+++        def c():
+++            d()
+++
+++        def d():
+++            e()
+++
+++        def e():
+++            f()
+++
+++        def f():
+++            g()
+++
+++        def g():
+++            h()
+++
+++        def h():
+++            i()
+++
+++        def i():
+++            pass
+++
+++        yappi.start()
+++        a()
+++        a()
+++        yappi.stop()
+++        stats =3D yappi.get_func_stats()
+++        self.assertRaises(
+++            NotImplementedError, stats.save, "", "INVALID_SAVE_TYPE"
+++        )
+++        stats.save("tests/ystats2.ys")
+++        yappi.clear_stats()
+++        _yappi._set_test_timings(_timings)
+++        yappi.start()
+++        a()
+++        stats =3D yappi.get_func_stats().add("tests/ystats2.ys")
+++        fsa =3D utils.find_stat_by_name(stats, "a")
+++        fsb =3D utils.find_stat_by_name(stats, "b")
+++        fsc =3D utils.find_stat_by_name(stats, "c")
+++        fsd =3D utils.find_stat_by_name(stats, "d")
+++        fse =3D utils.find_stat_by_name(stats, "e")
+++        fsf =3D utils.find_stat_by_name(stats, "f")
+++        fsg =3D utils.find_stat_by_name(stats, "g")
+++        fsh =3D utils.find_stat_by_name(stats, "h")
+++        fsi =3D utils.find_stat_by_name(stats, "i")
+++        self.assertEqual(fsa.ttot, 45)
+++        self.assertEqual(fsa.ncall, 3)
+++        self.assertEqual(fsa.nactualcall, 3)
+++        self.assertEqual(fsa.tsub, 3)
+++        self.assertEqual(fsa.children[fsb].ttot, fsb.ttot)
+++        self.assertEqual(fsa.children[fsb].tsub, fsb.tsub)
+++        self.assertEqual(fsb.children[fsc].ttot, fsc.ttot)
+++        self.assertEqual(fsb.children[fsc].tsub, fsc.tsub)
+++        self.assertEqual(fsc.tsub, 6)
+++        self.assertEqual(fsc.children[fsd].ttot, fsd.ttot)
+++        self.assertEqual(fsc.children[fsd].tsub, fsd.tsub)
+++        self.assertEqual(fsd.children[fse].ttot, fse.ttot)
+++        self.assertEqual(fsd.children[fse].tsub, fse.tsub)
+++        self.assertEqual(fse.children[fsf].ttot, fsf.ttot)
+++        self.assertEqual(fse.children[fsf].tsub, fsf.tsub)
+++        self.assertEqual(fsf.children[fsg].ttot, fsg.ttot)
+++        self.assertEqual(fsf.children[fsg].tsub, fsg.tsub)
+++        self.assertEqual(fsg.ttot, 18)
+++        self.assertEqual(fsg.tsub, 3)
+++        self.assertEqual(fsg.children[fsh].ttot, fsh.ttot)
+++        self.assertEqual(fsg.children[fsh].tsub, fsh.tsub)
+++        self.assertEqual(fsh.ttot, 15)
+++        self.assertEqual(fsh.tsub, 12)
+++        self.assertEqual(fsh.tavg, 5)
+++        self.assertEqual(fsh.children[fsi].ttot, fsi.ttot)
+++        self.assertEqual(fsh.children[fsi].tsub, fsi.tsub)
+++        #stats.debug_print()
+++
+++    def test_merge_multithreaded_stats(self):
+++        import _yappi
+++        timings =3D {"a_1": 2, "b_1": 1}
+++        _yappi._set_test_timings(timings)
+++
+++        def a():
+++            pass
+++
+++        def b():
+++            pass
+++
+++        yappi.start()
+++        t =3D threading.Thread(target=3Da)
+++        t.start()
+++        t.join()
+++        t =3D threading.Thread(target=3Db)
+++        t.start()
+++        t.join()
+++        yappi.get_func_stats().save("tests/ystats1.ys")
+++        yappi.clear_stats()
+++        _yappi._set_test_timings(timings)
+++        self.assertEqual(len(yappi.get_func_stats()), 0)
+++        self.assertEqual(len(yappi.get_thread_stats()), 1)
+++        t =3D threading.Thread(target=3Da)
+++        t.start()
+++        t.join()
+++
+++        self.assertEqual(_yappi._get_start_flags()["profile_builtins"], 0)
+++        self.assertEqual(_yappi._get_start_flags()["profile_multicontext"=
+], 1)
+++        yappi.get_func_stats().save("tests/ystats2.ys")
+++
+++        stats =3D yappi.YFuncStats([
+++            "tests/ystats1.ys",
+++            "tests/ystats2.ys",
+++        ])
+++        fsa =3D utils.find_stat_by_name(stats, "a")
+++        fsb =3D utils.find_stat_by_name(stats, "b")
+++        self.assertEqual(fsa.ncall, 2)
+++        self.assertEqual(fsb.ncall, 1)
+++        self.assertEqual(fsa.tsub, fsa.ttot, 4)
+++        self.assertEqual(fsb.tsub, fsb.ttot, 1)
+++
+++    def test_merge_load_different_clock_types(self):
+++        yappi.start(builtins=3DTrue)
+++
+++        def a():
+++            b()
+++
+++        def b():
+++            c()
+++
+++        def c():
+++            pass
+++
+++        t =3D threading.Thread(target=3Da)
+++        t.start()
+++        t.join()
+++        yappi.get_func_stats().sort("name", "asc").save("tests/ystats1.ys=
+")
+++        yappi.stop()
+++        yappi.clear_stats()
+++        yappi.start(builtins=3DFalse)
+++        t =3D threading.Thread(target=3Da)
+++        t.start()
+++        t.join()
+++        yappi.get_func_stats().save("tests/ystats2.ys")
+++        yappi.stop()
+++        self.assertRaises(_yappi.error, yappi.set_clock_type, "wall")
+++        yappi.clear_stats()
+++        yappi.set_clock_type("wall")
+++        yappi.start()
+++        t =3D threading.Thread(target=3Da)
+++        t.start()
+++        t.join()
+++        yappi.get_func_stats().save("tests/ystats3.ys")
+++        self.assertRaises(
+++            yappi.YappiError,
+++            yappi.YFuncStats().add("tests/ystats1.ys").add, "tests/ystats=
+3.ys"
+++        )
+++        stats =3D yappi.YFuncStats(["tests/ystats1.ys",
+++                                  "tests/ystats2.ys"]).sort("name")
+++        fsa =3D utils.find_stat_by_name(stats, "a")
+++        fsb =3D utils.find_stat_by_name(stats, "b")
+++        fsc =3D utils.find_stat_by_name(stats, "c")
+++        self.assertEqual(fsa.ncall, 2)
+++        self.assertEqual(fsa.ncall, fsb.ncall, fsc.ncall)
+++
+++    def test_merge_aabab_aabbc(self):
+++        _timings =3D {
+++            "a_1": 15,
+++            "a_2": 14,
+++            "b_1": 12,
+++            "a_3": 10,
+++            "b_2": 9,
+++            "c_1": 4
+++        }
+++        _yappi._set_test_timings(_timings)
+++
+++        def a():
+++            if self._ncall =3D=3D 1:
+++                self._ncall +=3D 1
+++                a()
+++            elif self._ncall =3D=3D 5:
+++                self._ncall +=3D 1
+++                a()
+++            else:
+++                b()
+++
+++        def b():
+++            if self._ncall =3D=3D 2:
+++                self._ncall +=3D 1
+++                a()
+++            elif self._ncall =3D=3D 6:
+++                self._ncall +=3D 1
+++                b()
+++            elif self._ncall =3D=3D 7:
+++                c()
+++            else:
+++                return
+++
+++        def c():
+++            pass
+++
+++        self._ncall =3D 1
+++        stats =3D utils.run_and_get_func_stats(a, )
+++        stats.save("tests/ystats1.ys")
+++        yappi.clear_stats()
+++        _yappi._set_test_timings(_timings)
+++        #stats.print_all()
+++
+++        self._ncall =3D 5
+++        stats =3D utils.run_and_get_func_stats(a, )
+++        stats.save("tests/ystats2.ys")
+++
+++        #stats.print_all()
+++
+++        def a():  # same name but another function(code object)
+++            pass
+++
+++        yappi.start()
+++        a()
+++        stats =3D yappi.get_func_stats().add(
+++            ["tests/ystats1.ys", "tests/ystats2.ys"]
+++        )
+++        #stats.print_all()
+++        self.assertEqual(len(stats), 4)
+++
+++        fsa =3D None
+++        for stat in stats:
+++            if stat.name =3D=3D "a" and stat.ttot =3D=3D 45:
+++                fsa =3D stat
+++                break
+++        self.assertTrue(fsa is not None)
+++
+++        self.assertEqual(fsa.ncall, 7)
+++        self.assertEqual(fsa.nactualcall, 3)
+++        self.assertEqual(fsa.ttot, 45)
+++        self.assertEqual(fsa.tsub, 10)
+++        fsb =3D utils.find_stat_by_name(stats, "b")
+++        fsc =3D utils.find_stat_by_name(stats, "c")
+++        self.assertEqual(fsb.ncall, 6)
+++        self.assertEqual(fsb.nactualcall, 3)
+++        self.assertEqual(fsb.ttot, 36)
+++        self.assertEqual(fsb.tsub, 27)
+++        self.assertEqual(fsb.tavg, 6)
+++        self.assertEqual(fsc.ttot, 8)
+++        self.assertEqual(fsc.tsub, 8)
+++        self.assertEqual(fsc.tavg, 4)
+++        self.assertEqual(fsc.nactualcall, fsc.ncall, 2)
+++
+++
+++class MultithreadedScenarios(utils.YappiUnitTestCase):
+++
+++    def test_issue_32(self):
+++        '''
+++        Start yappi from different thread and we get Internal Error(15) as
+++        the current_ctx_id() called while enumerating the threads in star=
+t()
+++        and as it does not swap to the enumerated ThreadState* the THread=
+State_GetDict()
+++        returns wrong object and thus sets an invalid id for the _ctx str=
+ucture.
+++
+++        When this issue happens multiple Threads have same tid as the int=
+ernal ts_ptr
+++        will be same for different contexts. So, let's see if that happens
+++        '''
+++
+++        def foo():
+++            time.sleep(0.2)
+++
+++        def bar():
+++            time.sleep(0.1)
+++
+++        def thread_func():
+++            yappi.set_clock_type("wall")
+++            yappi.start()
+++
+++            bar()
+++
+++        t =3D threading.Thread(target=3Dthread_func)
+++        t.start()
+++        t.join()
+++
+++        foo()
+++
+++        yappi.stop()
+++
+++        thread_ids =3D set()
+++        for tstat in yappi.get_thread_stats():
+++            self.assertTrue(tstat.tid not in thread_ids)
+++            thread_ids.add(tstat.tid)
+++
+++    def test_subsequent_profile(self):
+++        WORKER_COUNT =3D 5
+++
+++        def a():
+++            pass
+++
+++        def b():
+++            pass
+++
+++        def c():
+++            pass
+++
+++        _timings =3D {
+++            "a_1": 3,
+++            "b_1": 2,
+++            "c_1": 1,
+++        }
+++
+++        yappi.start()
+++
+++        def g():
+++            pass
+++
+++        g()
+++        yappi.stop()
+++        yappi.clear_stats()
+++        _yappi._set_test_timings(_timings)
+++        yappi.start()
+++
+++        _dummy =3D []
+++        for i in range(WORKER_COUNT):
+++            t =3D threading.Thread(target=3Da)
+++            t.start()
+++            t.join()
+++        for i in range(WORKER_COUNT):
+++            t =3D threading.Thread(target=3Db)
+++            t.start()
+++            _dummy.append(t)
+++            t.join()
+++        for i in range(WORKER_COUNT):
+++            t =3D threading.Thread(target=3Da)
+++            t.start()
+++            t.join()
+++        for i in range(WORKER_COUNT):
+++            t =3D threading.Thread(target=3Dc)
+++            t.start()
+++            t.join()
+++        yappi.stop()
+++        yappi.start()
+++
+++        def f():
+++            pass
+++
+++        f()
+++        stats =3D yappi.get_func_stats()
+++        fsa =3D utils.find_stat_by_name(stats, 'a')
+++        fsb =3D utils.find_stat_by_name(stats, 'b')
+++        fsc =3D utils.find_stat_by_name(stats, 'c')
+++        self.assertEqual(fsa.ncall, 10)
+++        self.assertEqual(fsb.ncall, 5)
+++        self.assertEqual(fsc.ncall, 5)
+++        self.assertEqual(fsa.ttot, fsa.tsub, 30)
+++        self.assertEqual(fsb.ttot, fsb.tsub, 10)
+++        self.assertEqual(fsc.ttot, fsc.tsub, 5)
+++
+++        # MACOSx optimizes by only creating one worker thread
+++        self.assertTrue(len(yappi.get_thread_stats()) >=3D 2)
+++
+++    def test_basic(self):
+++        yappi.set_clock_type('wall')
+++
+++        def dummy():
+++            pass
+++
+++        def a():
+++            time.sleep(0.2)
+++
+++        class Worker1(threading.Thread):
+++
+++            def a(self):
+++                time.sleep(0.3)
+++
+++            def run(self):
+++                self.a()
+++
+++        yappi.start(builtins=3DFalse, profile_threads=3DTrue)
+++
+++        c =3D Worker1()
+++        c.start()
+++        c.join()
+++        a()
+++        stats =3D yappi.get_func_stats()
+++        fsa1 =3D utils.find_stat_by_name(stats, 'Worker1.a')
+++        fsa2 =3D utils.find_stat_by_name(stats, 'a')
+++        self.assertTrue(fsa1 is not None)
+++        self.assertTrue(fsa2 is not None)
+++        self.assertTrue(fsa1.ttot > 0.2)
+++        self.assertTrue(fsa2.ttot > 0.1)
+++        tstats =3D yappi.get_thread_stats()
+++        self.assertEqual(len(tstats), 2)
+++        tsa =3D utils.find_stat_by_name(tstats, 'Worker1')
+++        tsm =3D utils.find_stat_by_name(tstats, '_MainThread')
+++        dummy()  # call dummy to force ctx name to be retrieved again.
+++        self.assertTrue(tsa is not None)
+++        # TODO: I put dummy() to fix below, remove the comments after a w=
+hile.
+++        self.assertTrue( # FIX: I see this fails sometimes?
+++            tsm is not None,
+++            'Could not find "_MainThread". Found: %s' % (', '.join(utils.=
+get_stat_names(tstats))))
+++
+++    def test_ctx_stats(self):
+++        from threading import Thread
+++        DUMMY_WORKER_COUNT =3D 5
+++        yappi.start()
+++
+++        class DummyThread(Thread):
+++            pass
+++
+++        def dummy():
+++            pass
+++
+++        def dummy_worker():
+++            pass
+++
+++        for i in range(DUMMY_WORKER_COUNT):
+++            t =3D DummyThread(target=3Ddummy_worker)
+++            t.start()
+++            t.join()
+++        yappi.stop()
+++        stats =3D yappi.get_thread_stats()
+++        tsa =3D utils.find_stat_by_name(stats, "DummyThread")
+++        self.assertTrue(tsa is not None)
+++        yappi.clear_stats()
+++        time.sleep(1.0)
+++        _timings =3D {
+++            "a_1": 6,
+++            "b_1": 5,
+++            "c_1": 3,
+++            "d_1": 1,
+++            "a_2": 4,
+++            "b_2": 3,
+++            "c_2": 2,
+++            "d_2": 1
+++        }
+++        _yappi._set_test_timings(_timings)
+++
+++        class Thread1(Thread):
+++            pass
+++
+++        class Thread2(Thread):
+++            pass
+++
+++        def a():
+++            b()
+++
+++        def b():
+++            c()
+++
+++        def c():
+++            d()
+++
+++        def d():
+++            time.sleep(0.6)
+++
+++        yappi.set_clock_type("wall")
+++        yappi.start()
+++        t1 =3D Thread1(target=3Da)
+++        t1.start()
+++        t2 =3D Thread2(target=3Da)
+++        t2.start()
+++        t1.join()
+++        t2.join()
+++        stats =3D yappi.get_thread_stats()
+++
+++        # the fist clear_stats clears the context table?
+++        tsa =3D utils.find_stat_by_name(stats, "DummyThread")
+++        self.assertTrue(tsa is None)
+++
+++        tst1 =3D utils.find_stat_by_name(stats, "Thread1")
+++        tst2 =3D utils.find_stat_by_name(stats, "Thread2")
+++        tsmain =3D utils.find_stat_by_name(stats, "_MainThread")
+++        dummy()  # call dummy to force ctx name to be retrieved again.
+++        self.assertTrue(len(stats) =3D=3D 3)
+++        self.assertTrue(tst1 is not None)
+++        self.assertTrue(tst2 is not None)
+++        # TODO: I put dummy() to fix below, remove the comments after a w=
+hile.
+++        self.assertTrue( # FIX: I see this fails sometimes
+++            tsmain is not None,
+++            'Could not find "_MainThread". Found: %s' % (', '.join(utils.=
+get_stat_names(stats))))
+++        self.assertTrue(1.0 > tst2.ttot >=3D 0.5)
+++        self.assertTrue(1.0 > tst1.ttot >=3D 0.5)
+++
+++        # test sorting of the ctx stats
+++        stats =3D stats.sort("totaltime", "desc")
+++        prev_stat =3D None
+++        for stat in stats:
+++            if prev_stat:
+++                self.assertTrue(prev_stat.ttot >=3D stat.ttot)
+++            prev_stat =3D stat
+++        stats =3D stats.sort("totaltime", "asc")
+++        prev_stat =3D None
+++        for stat in stats:
+++            if prev_stat:
+++                self.assertTrue(prev_stat.ttot <=3D stat.ttot)
+++            prev_stat =3D stat
+++        stats =3D stats.sort("schedcount", "desc")
+++        prev_stat =3D None
+++        for stat in stats:
+++            if prev_stat:
+++                self.assertTrue(prev_stat.sched_count >=3D stat.sched_cou=
+nt)
+++            prev_stat =3D stat
+++        stats =3D stats.sort("name", "desc")
+++        prev_stat =3D None
+++        for stat in stats:
+++            if prev_stat:
+++                self.assertTrue(prev_stat.name.lower() >=3D stat.name.low=
+er())
+++            prev_stat =3D stat
+++        self.assertRaises(
+++            yappi.YappiError, stats.sort, "invalid_thread_sorttype_arg"
+++        )
+++        self.assertRaises(
+++            yappi.YappiError, stats.sort, "invalid_thread_sortorder_arg"
+++        )
+++
+++    def test_ctx_stats_cpu(self):
+++
+++        def get_thread_name():
+++            try:
+++                return threading.current_thread().name
+++            except AttributeError:
+++                return "Anonymous"
+++
+++        def burn_cpu(sec):
+++            t0 =3D yappi.get_clock_time()
+++            elapsed =3D 0
+++            while (elapsed < sec):
+++                for _ in range(1000):
+++                    pass
+++                elapsed =3D yappi.get_clock_time() - t0
+++
+++        def test():
+++
+++            ts =3D []
+++            for i in (0.01, 0.05, 0.1):
+++                t =3D threading.Thread(target=3Dburn_cpu, args=3D(i, ))
+++                t.name =3D "burn_cpu-%s" % str(i)
+++                t.start()
+++                ts.append(t)
+++            for t in ts:
+++                t.join()
+++
+++        yappi.set_clock_type("cpu")
+++        yappi.set_context_name_callback(get_thread_name)
+++
+++        yappi.start()
+++
+++        test()
+++
+++        yappi.stop()
+++
+++        tstats =3D yappi.get_thread_stats()
+++        r1 =3D '''
+++        burn_cpu-0.1      3      123145356058624  0.100105  8
+++        burn_cpu-0.05     2      123145361313792  0.050149  8
+++        burn_cpu-0.01     1      123145356058624  0.010127  2
+++        MainThread        0      4321620864       0.001632  6
+++        '''
+++        self.assert_ctx_stats_almost_equal(r1, tstats)
+++
+++    def test_producer_consumer_with_queues(self):
+++        # we currently just stress yappi, no functionality test is done h=
+ere.
+++        yappi.start()
+++        if utils.is_py3x():
+++            from queue import Queue
+++        else:
+++            from Queue import Queue
+++        from threading import Thread
+++        WORKER_THREAD_COUNT =3D 50
+++        WORK_ITEM_COUNT =3D 2000
+++
+++        def worker():
+++            while True:
+++                item =3D q.get()
+++                # do the work with item
+++                q.task_done()
+++
+++        q =3D Queue()
+++        for i in range(WORKER_THREAD_COUNT):
+++            t =3D Thread(target=3Dworker)
+++            t.daemon =3D True
+++            t.start()
+++
+++        for item in range(WORK_ITEM_COUNT):
+++            q.put(item)
+++        q.join()  # block until all tasks are done
+++        #yappi.get_func_stats().sort("callcount").print_all()
+++        yappi.stop()
+++
+++    def test_temporary_lock_waiting(self):
+++        yappi.start()
+++        _lock =3D threading.Lock()
+++
+++        def worker():
+++            _lock.acquire()
+++            try:
+++                time.sleep(1.0)
+++            finally:
+++                _lock.release()
+++
+++        t1 =3D threading.Thread(target=3Dworker)
+++        t2 =3D threading.Thread(target=3Dworker)
+++        t1.start()
+++        t2.start()
+++        t1.join()
+++        t2.join()
+++        #yappi.get_func_stats().sort("callcount").print_all()
+++        yappi.stop()
+++
+++    @unittest.skipIf(os.name !=3D "posix", "requires Posix compliant OS")
+++    def test_signals_with_blocking_calls(self):
+++        import signal, os, time
+++
+++        # just to verify if signal is handled correctly and stats/yappi a=
+re not corrupted.
+++        def handler(signum, frame):
+++            raise Exception("Signal handler executed!")
+++
+++        yappi.start()
+++        signal.signal(signal.SIGALRM, handler)
+++        signal.alarm(1)
+++        self.assertRaises(Exception, time.sleep, 2)
+++        stats =3D yappi.get_func_stats()
+++        fsh =3D utils.find_stat_by_name(stats, "handler")
+++        self.assertTrue(fsh is not None)
+++
+++    @unittest.skipIf(not sys.version_info >=3D (3, 2), "requires Python 3=
+.2")
+++    def test_concurrent_futures(self):
+++        yappi.start()
+++        from concurrent.futures import ThreadPoolExecutor
+++        with ThreadPoolExecutor(max_workers=3D5) as executor:
+++            f =3D executor.submit(pow, 5, 2)
+++            self.assertEqual(f.result(), 25)
+++        time.sleep(1.0)
+++        yappi.stop()
+++
+++    @unittest.skipIf(not sys.version_info >=3D (3, 2), "requires Python 3=
+.2")
+++    def test_barrier(self):
+++        yappi.start()
+++        b =3D threading.Barrier(2, timeout=3D1)
+++
+++        def worker():
+++            try:
+++                b.wait()
+++            except threading.BrokenBarrierError:
+++                pass
+++            except Exception:
+++                raise Exception("BrokenBarrierError not raised")
+++
+++        t1 =3D threading.Thread(target=3Dworker)
+++        t1.start()
+++        #b.wait()
+++        t1.join()
+++        yappi.stop()
+++
+++
+++class NonRecursiveFunctions(utils.YappiUnitTestCase):
+++
+++    def test_abcd(self):
+++        _timings =3D {"a_1": 6, "b_1": 5, "c_1": 3, "d_1": 1}
+++        _yappi._set_test_timings(_timings)
+++
+++        def a():
+++            b()
+++
+++        def b():
+++            c()
+++
+++        def c():
+++            d()
+++
+++        def d():
+++            pass
+++
+++        stats =3D utils.run_and_get_func_stats(a)
+++        fsa =3D utils.find_stat_by_name(stats, 'a')
+++        fsb =3D utils.find_stat_by_name(stats, 'b')
+++        fsc =3D utils.find_stat_by_name(stats, 'c')
+++        fsd =3D utils.find_stat_by_name(stats, 'd')
+++        cfsab =3D fsa.children[fsb]
+++        cfsbc =3D fsb.children[fsc]
+++        cfscd =3D fsc.children[fsd]
+++
+++        self.assertEqual(fsa.ttot, 6)
+++        self.assertEqual(fsa.tsub, 1)
+++        self.assertEqual(fsb.ttot, 5)
+++        self.assertEqual(fsb.tsub, 2)
+++        self.assertEqual(fsc.ttot, 3)
+++        self.assertEqual(fsc.tsub, 2)
+++        self.assertEqual(fsd.ttot, 1)
+++        self.assertEqual(fsd.tsub, 1)
+++        self.assertEqual(cfsab.ttot, 5)
+++        self.assertEqual(cfsab.tsub, 2)
+++        self.assertEqual(cfsbc.ttot, 3)
+++        self.assertEqual(cfsbc.tsub, 2)
+++        self.assertEqual(cfscd.ttot, 1)
+++        self.assertEqual(cfscd.tsub, 1)
+++
+++    def test_stop_in_middle(self):
+++        _timings =3D {"a_1": 6, "b_1": 4}
+++        _yappi._set_test_timings(_timings)
+++
+++        def a():
+++            b()
+++            yappi.stop()
+++
+++        def b():
+++            time.sleep(0.2)
+++
+++        yappi.start()
+++        a()
+++        stats =3D yappi.get_func_stats()
+++        fsa =3D utils.find_stat_by_name(stats, 'a')
+++        fsb =3D utils.find_stat_by_name(stats, 'b')
+++
+++        self.assertEqual(fsa.ncall, 1)
+++        self.assertEqual(fsa.nactualcall, 0)
+++        self.assertEqual(fsa.ttot, 0)  # no call_leave called
+++        self.assertEqual(fsa.tsub, 0)  # no call_leave called
+++        self.assertEqual(fsb.ttot, 4)
+++
+++
+++class RecursiveFunctions(utils.YappiUnitTestCase):
+++
+++    def test_fibonacci(self):
+++
+++        def fib(n):
+++            if n > 1:
+++                return fib(n - 1) + fib(n - 2)
+++            else:
+++                return n
+++
+++        stats =3D utils.run_and_get_func_stats(fib, 22)
+++        fs =3D utils.find_stat_by_name(stats, 'fib')
+++        self.assertEqual(fs.ncall, 57313)
+++        self.assertEqual(fs.ttot, fs.tsub)
+++
+++    def test_abcadc(self):
+++        _timings =3D {
+++            "a_1": 20,
+++            "b_1": 19,
+++            "c_1": 17,
+++            "a_2": 13,
+++            "d_1": 12,
+++            "c_2": 10,
+++            "a_3": 5
+++        }
+++        _yappi._set_test_timings(_timings)
+++
+++        def a(n):
+++            if n =3D=3D 3:
+++                return
+++            if n =3D=3D 1 + 1:
+++                d(n)
+++            else:
+++                b(n)
+++
+++        def b(n):
+++            c(n)
+++
+++        def c(n):
+++            a(n + 1)
+++
+++        def d(n):
+++            c(n)
+++
+++        stats =3D utils.run_and_get_func_stats(a, 1)
+++        fsa =3D utils.find_stat_by_name(stats, 'a')
+++        fsb =3D utils.find_stat_by_name(stats, 'b')
+++        fsc =3D utils.find_stat_by_name(stats, 'c')
+++        fsd =3D utils.find_stat_by_name(stats, 'd')
+++        self.assertEqual(fsa.ncall, 3)
+++        self.assertEqual(fsa.nactualcall, 1)
+++        self.assertEqual(fsa.ttot, 20)
+++        self.assertEqual(fsa.tsub, 7)
+++        self.assertEqual(fsb.ttot, 19)
+++        self.assertEqual(fsb.tsub, 2)
+++        self.assertEqual(fsc.ttot, 17)
+++        self.assertEqual(fsc.tsub, 9)
+++        self.assertEqual(fsd.ttot, 12)
+++        self.assertEqual(fsd.tsub, 2)
+++        cfsca =3D fsc.children[fsa]
+++        self.assertEqual(cfsca.nactualcall, 0)
+++        self.assertEqual(cfsca.ncall, 2)
+++        self.assertEqual(cfsca.ttot, 13)
+++        self.assertEqual(cfsca.tsub, 6)
+++
+++    def test_aaaa(self):
+++        _timings =3D {"d_1": 9, "d_2": 7, "d_3": 3, "d_4": 2}
+++        _yappi._set_test_timings(_timings)
+++
+++        def d(n):
+++            if n =3D=3D 3:
+++                return
+++            d(n + 1)
+++
+++        stats =3D utils.run_and_get_func_stats(d, 0)
+++        fsd =3D utils.find_stat_by_name(stats, 'd')
+++        self.assertEqual(fsd.ncall, 4)
+++        self.assertEqual(fsd.nactualcall, 1)
+++        self.assertEqual(fsd.ttot, 9)
+++        self.assertEqual(fsd.tsub, 9)
+++        cfsdd =3D fsd.children[fsd]
+++        self.assertEqual(cfsdd.ttot, 7)
+++        self.assertEqual(cfsdd.tsub, 7)
+++        self.assertEqual(cfsdd.ncall, 3)
+++        self.assertEqual(cfsdd.nactualcall, 0)
+++
+++    def test_abcabc(self):
+++        _timings =3D {
+++            "a_1": 20,
+++            "b_1": 19,
+++            "c_1": 17,
+++            "a_2": 13,
+++            "b_2": 11,
+++            "c_2": 9,
+++            "a_3": 6
+++        }
+++        _yappi._set_test_timings(_timings)
+++
+++        def a(n):
+++            if n =3D=3D 3:
+++                return
+++            else:
+++                b(n)
+++
+++        def b(n):
+++            c(n)
+++
+++        def c(n):
+++            a(n + 1)
+++
+++        stats =3D utils.run_and_get_func_stats(a, 1)
+++        fsa =3D utils.find_stat_by_name(stats, 'a')
+++        fsb =3D utils.find_stat_by_name(stats, 'b')
+++        fsc =3D utils.find_stat_by_name(stats, 'c')
+++        self.assertEqual(fsa.ncall, 3)
+++        self.assertEqual(fsa.nactualcall, 1)
+++        self.assertEqual(fsa.ttot, 20)
+++        self.assertEqual(fsa.tsub, 9)
+++        self.assertEqual(fsb.ttot, 19)
+++        self.assertEqual(fsb.tsub, 4)
+++        self.assertEqual(fsc.ttot, 17)
+++        self.assertEqual(fsc.tsub, 7)
+++        cfsab =3D fsa.children[fsb]
+++        cfsbc =3D fsb.children[fsc]
+++        cfsca =3D fsc.children[fsa]
+++        self.assertEqual(cfsab.ttot, 19)
+++        self.assertEqual(cfsab.tsub, 4)
+++        self.assertEqual(cfsbc.ttot, 17)
+++        self.assertEqual(cfsbc.tsub, 7)
+++        self.assertEqual(cfsca.ttot, 13)
+++        self.assertEqual(cfsca.tsub, 8)
+++
+++    def test_abcbca(self):
+++        _timings =3D {"a_1": 10, "b_1": 9, "c_1": 7, "b_2": 4, "c_2": 2, =
+"a_2": 1}
+++        _yappi._set_test_timings(_timings)
+++        self._ncall =3D 1
+++
+++        def a():
+++            if self._ncall =3D=3D 1:
+++                b()
+++            else:
+++                return
+++
+++        def b():
+++            c()
+++
+++        def c():
+++            if self._ncall =3D=3D 1:
+++                self._ncall +=3D 1
+++                b()
+++            else:
+++                a()
+++
+++        stats =3D utils.run_and_get_func_stats(a)
+++        fsa =3D utils.find_stat_by_name(stats, 'a')
+++        fsb =3D utils.find_stat_by_name(stats, 'b')
+++        fsc =3D utils.find_stat_by_name(stats, 'c')
+++        cfsab =3D fsa.children[fsb]
+++        cfsbc =3D fsb.children[fsc]
+++        cfsca =3D fsc.children[fsa]
+++        self.assertEqual(fsa.ttot, 10)
+++        self.assertEqual(fsa.tsub, 2)
+++        self.assertEqual(fsb.ttot, 9)
+++        self.assertEqual(fsb.tsub, 4)
+++        self.assertEqual(fsc.ttot, 7)
+++        self.assertEqual(fsc.tsub, 4)
+++        self.assertEqual(cfsab.ttot, 9)
+++        self.assertEqual(cfsab.tsub, 2)
+++        self.assertEqual(cfsbc.ttot, 7)
+++        self.assertEqual(cfsbc.tsub, 4)
+++        self.assertEqual(cfsca.ttot, 1)
+++        self.assertEqual(cfsca.tsub, 1)
+++        self.assertEqual(cfsca.ncall, 1)
+++        self.assertEqual(cfsca.nactualcall, 0)
+++
+++    def test_aabccb(self):
+++        _timings =3D {
+++            "a_1": 13,
+++            "a_2": 11,
+++            "b_1": 9,
+++            "c_1": 5,
+++            "c_2": 3,
+++            "b_2": 1
+++        }
+++        _yappi._set_test_timings(_timings)
+++        self._ncall =3D 1
+++
+++        def a():
+++            if self._ncall =3D=3D 1:
+++                self._ncall +=3D 1
+++                a()
+++            else:
+++                b()
+++
+++        def b():
+++            if self._ncall =3D=3D 3:
+++                return
+++            else:
+++                c()
+++
+++        def c():
+++            if self._ncall =3D=3D 2:
+++                self._ncall +=3D 1
+++                c()
+++            else:
+++                b()
+++
+++        stats =3D utils.run_and_get_func_stats(a)
+++        fsa =3D utils.find_stat_by_name(stats, 'a')
+++        fsb =3D utils.find_stat_by_name(stats, 'b')
+++        fsc =3D utils.find_stat_by_name(stats, 'c')
+++        cfsaa =3D fsa.children[fsa.index]
+++        cfsab =3D fsa.children[fsb]
+++        cfsbc =3D fsb.children[fsc.full_name]
+++        cfscc =3D fsc.children[fsc]
+++        cfscb =3D fsc.children[fsb]
+++        self.assertEqual(fsb.ttot, 9)
+++        self.assertEqual(fsb.tsub, 5)
+++        self.assertEqual(cfsbc.ttot, 5)
+++        self.assertEqual(cfsbc.tsub, 2)
+++        self.assertEqual(fsa.ttot, 13)
+++        self.assertEqual(fsa.tsub, 4)
+++        self.assertEqual(cfsab.ttot, 9)
+++        self.assertEqual(cfsab.tsub, 4)
+++        self.assertEqual(cfsaa.ttot, 11)
+++        self.assertEqual(cfsaa.tsub, 2)
+++        self.assertEqual(fsc.ttot, 5)
+++        self.assertEqual(fsc.tsub, 4)
+++
+++    def test_abaa(self):
+++        _timings =3D {"a_1": 13, "b_1": 10, "a_2": 9, "a_3": 5}
+++        _yappi._set_test_timings(_timings)
+++
+++        self._ncall =3D 1
+++
+++        def a():
+++            if self._ncall =3D=3D 1:
+++                b()
+++            elif self._ncall =3D=3D 2:
+++                self._ncall +=3D 1
+++                a()
+++            else:
+++                return
+++
+++        def b():
+++            self._ncall +=3D 1
+++            a()
+++
+++        stats =3D utils.run_and_get_func_stats(a)
+++        fsa =3D utils.find_stat_by_name(stats, 'a')
+++        fsb =3D utils.find_stat_by_name(stats, 'b')
+++        cfsaa =3D fsa.children[fsa]
+++        cfsba =3D fsb.children[fsa]
+++        self.assertEqual(fsb.ttot, 10)
+++        self.assertEqual(fsb.tsub, 1)
+++        self.assertEqual(fsa.ttot, 13)
+++        self.assertEqual(fsa.tsub, 12)
+++        self.assertEqual(cfsaa.ttot, 5)
+++        self.assertEqual(cfsaa.tsub, 5)
+++        self.assertEqual(cfsba.ttot, 9)
+++        self.assertEqual(cfsba.tsub, 4)
+++
+++    def test_aabb(self):
+++        _timings =3D {"a_1": 13, "a_2": 10, "b_1": 9, "b_2": 5}
+++        _yappi._set_test_timings(_timings)
+++
+++        self._ncall =3D 1
+++
+++        def a():
+++            if self._ncall =3D=3D 1:
+++                self._ncall +=3D 1
+++                a()
+++            elif self._ncall =3D=3D 2:
+++                b()
+++            else:
+++                return
+++
+++        def b():
+++            if self._ncall =3D=3D 2:
+++                self._ncall +=3D 1
+++                b()
+++            else:
+++                return
+++
+++        stats =3D utils.run_and_get_func_stats(a)
+++        fsa =3D utils.find_stat_by_name(stats, 'a')
+++        fsb =3D utils.find_stat_by_name(stats, 'b')
+++        cfsaa =3D fsa.children[fsa]
+++        cfsab =3D fsa.children[fsb]
+++        cfsbb =3D fsb.children[fsb]
+++        self.assertEqual(fsa.ttot, 13)
+++        self.assertEqual(fsa.tsub, 4)
+++        self.assertEqual(fsb.ttot, 9)
+++        self.assertEqual(fsb.tsub, 9)
+++        self.assertEqual(cfsaa.ttot, 10)
+++        self.assertEqual(cfsaa.tsub, 1)
+++        self.assertEqual(cfsab.ttot, 9)
+++        self.assertEqual(cfsab.tsub, 4)
+++        self.assertEqual(cfsbb.ttot, 5)
+++        self.assertEqual(cfsbb.tsub, 5)
+++
+++    def test_abbb(self):
+++        _timings =3D {"a_1": 13, "b_1": 10, "b_2": 6, "b_3": 1}
+++        _yappi._set_test_timings(_timings)
+++
+++        self._ncall =3D 1
+++
+++        def a():
+++            if self._ncall =3D=3D 1:
+++                b()
+++
+++        def b():
+++            if self._ncall =3D=3D 3:
+++                return
+++            self._ncall +=3D 1
+++            b()
+++
+++        stats =3D utils.run_and_get_func_stats(a)
+++        fsa =3D utils.find_stat_by_name(stats, 'a')
+++        fsb =3D utils.find_stat_by_name(stats, 'b')
+++        cfsab =3D fsa.children[fsb]
+++        cfsbb =3D fsb.children[fsb]
+++        self.assertEqual(fsa.ttot, 13)
+++        self.assertEqual(fsa.tsub, 3)
+++        self.assertEqual(fsb.ttot, 10)
+++        self.assertEqual(fsb.tsub, 10)
+++        self.assertEqual(fsb.ncall, 3)
+++        self.assertEqual(fsb.nactualcall, 1)
+++        self.assertEqual(cfsab.ttot, 10)
+++        self.assertEqual(cfsab.tsub, 4)
+++        self.assertEqual(cfsbb.ttot, 6)
+++        self.assertEqual(cfsbb.tsub, 6)
+++        self.assertEqual(cfsbb.nactualcall, 0)
+++        self.assertEqual(cfsbb.ncall, 2)
+++
+++    def test_aaab(self):
+++        _timings =3D {"a_1": 13, "a_2": 10, "a_3": 6, "b_1": 1}
+++        _yappi._set_test_timings(_timings)
+++
+++        self._ncall =3D 1
+++
+++        def a():
+++            if self._ncall =3D=3D 3:
+++                b()
+++                return
+++            self._ncall +=3D 1
+++            a()
+++
+++        def b():
+++            return
+++
+++        stats =3D utils.run_and_get_func_stats(a)
+++        fsa =3D utils.find_stat_by_name(stats, 'a')
+++        fsb =3D utils.find_stat_by_name(stats, 'b')
+++        cfsaa =3D fsa.children[fsa]
+++        cfsab =3D fsa.children[fsb]
+++        self.assertEqual(fsa.ttot, 13)
+++        self.assertEqual(fsa.tsub, 12)
+++        self.assertEqual(fsb.ttot, 1)
+++        self.assertEqual(fsb.tsub, 1)
+++        self.assertEqual(cfsaa.ttot, 10)
+++        self.assertEqual(cfsaa.tsub, 9)
+++        self.assertEqual(cfsab.ttot, 1)
+++        self.assertEqual(cfsab.tsub, 1)
+++
+++    def test_abab(self):
+++        _timings =3D {"a_1": 13, "b_1": 10, "a_2": 6, "b_2": 1}
+++        _yappi._set_test_timings(_timings)
+++
+++        self._ncall =3D 1
+++
+++        def a():
+++            b()
+++
+++        def b():
+++            if self._ncall =3D=3D 2:
+++                return
+++            self._ncall +=3D 1
+++            a()
+++
+++        stats =3D utils.run_and_get_func_stats(a)
+++        fsa =3D utils.find_stat_by_name(stats, 'a')
+++        fsb =3D utils.find_stat_by_name(stats, 'b')
+++        cfsab =3D fsa.children[fsb]
+++        cfsba =3D fsb.children[fsa]
+++        self.assertEqual(fsa.ttot, 13)
+++        self.assertEqual(fsa.tsub, 8)
+++        self.assertEqual(fsb.ttot, 10)
+++        self.assertEqual(fsb.tsub, 5)
+++        self.assertEqual(cfsab.ttot, 10)
+++        self.assertEqual(cfsab.tsub, 5)
+++        self.assertEqual(cfsab.ncall, 2)
+++        self.assertEqual(cfsab.nactualcall, 1)
+++        self.assertEqual(cfsba.ttot, 6)
+++        self.assertEqual(cfsba.tsub, 5)
+++
+++
+++if __name__ =3D=3D '__main__':
+++    #     import sys;sys.argv =3D ['', 'BasicUsage.test_run_as_script']
+++    #     import sys;sys.argv =3D ['', 'MultithreadedScenarios.test_subse=
+quent_profile']
+++    unittest.main()
+ --- a/tests/test_gevent.py
+ +++ b/tests/test_gevent.py
+ @@ -4,7 +4,7 @@ import yappi
+@@ -65,8 +3881,6 @@ index 8569712..fe15b29 100644
+      YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io,
+      burn_io_gevent
+  )
+-diff --git a/tests/test_hooks.py b/tests/test_hooks.py
+-index a96a4f1..e4177ba 100644
+ --- a/tests/test_hooks.py
+ +++ b/tests/test_hooks.py
+ @@ -5,7 +5,7 @@ import unittest
+@@ -78,8 +3892,6 @@ index a96a4f1..e4177ba 100644
+=20=20
+=20=20
+  def a():
+-diff --git a/tests/test_tags.py b/tests/test_tags.py
+-index b0b531d..1928888 100644
+ --- a/tests/test_tags.py
+ +++ b/tests/test_tags.py
+ @@ -2,7 +2,7 @@ import unittest
+@@ -91,6 +3903,3 @@ index b0b531d..1928888 100644
+=20=20
+=20=20
+  class MultiThreadTests(YappiUnitTestCase):
+---=20
+-2.31.1
 -
--- 
-2.7.4
+--=20
+2.32.0
 
