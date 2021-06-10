@@ -1,55 +1,55 @@
-Received: from mail-qv1-f50.google.com (mail-qv1-f50.google.com [209.85.219.50])
- by mx.groups.io with SMTP id smtpd.web09.2638.1623278864831833886
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.web11.3420.1623283377668393352
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Jun 2021 15:47:45 -0700
+ Wed, 09 Jun 2021 17:02:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=u/LOYUh1;
- spf=pass (domain: gmail.com, ip: 209.85.219.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f50.google.com with SMTP id l3so6683844qvl.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jun 2021 15:47:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=n/tlqI3s;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id k5so2574455pjj.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jun 2021 17:02:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc:content-transfer-encoding;
-        bh=nudxOH4iY92f+navSjwGiBtH2qFgwkxut5sbjtkrWQU=;
-        b=u/LOYUh1TsXNP7nOFKlyw8xPlTZYxet4Jzx050VXSJbRrTAn+J0zwMPIanlpju1Uju
-         xkgtNwdnueqY/OZLLuo5fvI4eKRUD5vypNswiOx7SJheiBz0fAKsIy3t0JI/DXW8cq8R
-         cyFQT3wum43nBdaFvWkj6KUsbcMFQIiaKbfPsc82VEMDHirimp1cj1YtIcpDJcAcICRd
-         UfDX7lszIL3sIq6JpnmyFBjXyfjs1WSad6dBfE+m2VbUwu3zEabZGcFjl0BjN4VPFT91
-         OEGyECAxggr+pJmKWoATXS5o2BFKt8OavK2PalB+Tp+RRkbLwRJPAekU/nC+C7z+Oiyu
-         jI5A==
+        bh=IV33CiJn4TsyPYchKagbzAB9hBP174AR4FxcFfXruwI=;
+        b=n/tlqI3sG9wEvqyN+yZWEeyxDrnFf2e8RuYYG9Oaz5FLFpR8kMd92LfpjfAZLc0pYo
+         MuYkABjL0f2WjyYj6NITQuoSK/ViGtWPTV6OlLXQRMJWNCbI7bIRo0ZdEnkftwMWEm9D
+         T/kkxZmipXImYIbR8JWYhkPsp3ueasNY8OyHMTx1JpTdECnNanlnsu7qwSBfJQw4oznK
+         Zb573kchUesoIPH7eptcdL7Nd4DdYUvch6naEwxcgyBGbLMpgzVmdwC9vNF/AbiYcPQg
+         V72Q5NJV4gVbki7ltuZoNqSuyCaME6UtB8p4Ro8ABGw5Sw8YUtAUh8s6r00p72V5QqLd
+         sKYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc:content-transfer-encoding;
-        bh=nudxOH4iY92f+navSjwGiBtH2qFgwkxut5sbjtkrWQU=;
-        b=jbaEdRdpJVf4gHhsPI4SbTNYzyTxAHuigUX2ebP5ABTecFgoevS8/SPlwXlYPhtt9i
-         NwyORNNi1OC+UxCECQQipOKJ8G+2LXSD2YN3vZdeEFGe/Cwj9/4gPmwrAZGN1iKbWmik
-         Ukan6njenw+aSZYQbQdiG83DAlfDTZePJu1xS0A3cT97QdzUbmEuwMbKTR3imGvMH+xG
-         vWYlLEF3G4iCvWlUA5JOP1Bkzq0ku+ou+biiEZSWJ4JoRWT10Y4/BkQq2EKRR0FBF8g7
-         tQp0URBa2zc8hUn3CoAMYcO1EU1hxt1hCWwV2zBPObsv0kdsfQJbCtBloS754Eok+yvT
-         hdHQ==
-X-Gm-Message-State: AOAM533POdPJbNcPlm0vSFg2f38G6Nq/sZDD4C5m+n9yaWwzG3lxmqmN
-	eADx0FAx4mjSCO6c5Z5SMatE6k4r/qECfjMnZvc=
-X-Google-Smtp-Source: ABdhPJxGgLTq8xfwivqsxahksVNuyWBXmc4I+H7cIOTkpraRl1E2oOZ/CPYBA5KJyLb3M7BXA8FSB078FMsIO5QeQSY=
-X-Received: by 2002:a05:6214:1869:: with SMTP id eh9mr2371991qvb.16.1623278863865;
- Wed, 09 Jun 2021 15:47:43 -0700 (PDT)
+        bh=IV33CiJn4TsyPYchKagbzAB9hBP174AR4FxcFfXruwI=;
+        b=JqZZSHfeUIOWxwCVYi9gskRpvJuvaLJbOk0CiyyMTMyn6U8bEuayGz+RImvVG56IzN
+         DlVvvqdbmViuKBlxNOxgCtWUlpMOXUr7PHfw5WmXu3s8CXCuxaRPhAGv31vAeHlhqrQ4
+         2XhQTGEaWCWQ2j+TxkMzHrC3tUgFzNhBIodm6NetQHYHLUCbplId9MBYiDj67G6DkwB4
+         WAgbQSk3k1/Uv0MU834vCPblBlM3We/r/nSRvqQF+Ijl0QmQDqg8DUoendDG/Ew7Z+BI
+         qCK27uIdK00Ha+rBPDNPDhHVHA/rh92R/zARPNpSznQP/uakwNuxB5KRKEcaDkzP3EH6
+         vM8Q==
+X-Gm-Message-State: AOAM5311ueOOilCnOm0bbxdF+xuB3lVXP+vmA68AmkEHaAQbsgJuLtCx
+	YQCDNBtrH2GQz5cdBaVmOoRodVJZzXkC7WRLmjw=
+X-Google-Smtp-Source: ABdhPJzSedXHUyxODbS1FXbyiDWqsLkIA/pUqhIKRu+Gqeipmy3LygmI4YU7l9Pe4xtUnbRFjheZo4Uhburtd5R5mJs=
+X-Received: by 2002:a17:90a:4b0d:: with SMTP id g13mr261872pjh.77.1623283377186;
+ Wed, 09 Jun 2021 17:02:57 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210515233853.583490-1-schnitzeltony@gmail.com>
  <20210515233853.583490-17-schnitzeltony@gmail.com> <CAMKF1sq89Sg8RQTU6nY-gP-7pmi=_pCPt5VCfQRZ=Dz4O=1Fjg@mail.gmail.com>
  <CALbNGRRRfBE0msHyE9GUiewQhmH7VY-qm4ZanXebhsCqKm0eRw@mail.gmail.com>
 In-Reply-To: <CALbNGRRRfBE0msHyE9GUiewQhmH7VY-qm4ZanXebhsCqKm0eRw@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Wed, 9 Jun 2021 15:47:17 -0700
-Message-ID: <CAMKF1sqMFzEz1jic3J_2DYuLGqwzA3i5LiQmaUz3xDgBakz=NA@mail.gmail.com>
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+Date: Thu, 10 Jun 2021 02:02:45 +0200
+Message-ID: <CALbNGRQ5aux16KUTDZ9Fxih=FcOkUR1jW+wyvRayC6S8nyw0OA@mail.gmail.com>
 Subject: Re: [oe] [PATCH 17/20] Revert "gimp: Disable svg icons on arm"
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 9, 2021 at 3:34 PM Andreas M=C3=BCller <schnitzeltony@gmail.com=
-> wrote:
+On Thu, Jun 10, 2021 at 12:34 AM Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om> wrote:
 >
 > On Sun, May 16, 2021 at 2:11 AM Khem Raj <raj.khem@gmail.com> wrote:
 > > > diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.24.bb b/meta-gnom=
@@ -91,20 +91,11 @@ linux-musl/gimp/2.10.24-r0/recipe-sysroot-native/usr/bin/gegl
 > '--disable-vector-icons' started to come in.
 >
 > Looked into and am convinced that this is not a architectural/musl
-> problem (btw - it is native gegl that crashes) but a race. GIMP-build
-> intended 2 steps:
->
-> 1. create png/svg in ${B}/icons
-> 2. let gegl convert these icons to *.c / *.xml
->
-> I think step 1 is not completed before step2 starts because on each
-> run segfault happens at different icon.
->
-> Long talk: Am working on this...
->
+> problem
+* Changed state from convinced to sure: repeating 'bitbake gimp' few
+times without any changes finally turns build green
+* Tested: Common workaround 'PARALLEL_MAKE =3D ""' does not help this
+time. We need a proper fix - sigh
+ To be continued... time for zzz...
 
-thats cool Andreas let me know how can I help.
-
-> Cheers
->
-> Andreas
+Andreas
