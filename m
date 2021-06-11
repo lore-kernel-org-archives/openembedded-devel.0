@@ -1,88 +1,89 @@
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.web12.3269.1623379370113620685
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.65])
+ by mx.groups.io with SMTP id smtpd.web11.3348.1623379395620538009
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Jun 2021 19:42:50 -0700
+ Thu, 10 Jun 2021 19:43:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=YdxsgxAi;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id e1so2067802plh.8
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jun 2021 19:42:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=/pkQOp+0y4gMXULi4BaphJp+QuFpLtUrix8Jm2B9htE=;
-        b=YdxsgxAiF/7vR5dXdQ3Oki2d2h/oZ0zNbwNPwiZc76wPIqhcrzlzbVjxqTc4fMOxCi
-         ivARcSZuh95qLU6YMNaoTJn0dAc0QNjrqaPZZiA4VYdmLUks1fwOcTAIRMP4dmi3tqmB
-         T8IMG20pyLgaK3a2XkEvEUXlSePFLtJJsYhE54xkH2sPu3bfyTUra1S+HAsx8niARav9
-         iPxvf8aYr05Tee7pp8L0YtgEz5RCvU9VCNO/DA3nIf5Iawkfq6Q6yU/dx0LXxszflLGe
-         sj2U15pM9L0g8zHeVFm+qV8S/nnZ42RHYJCcIBhAA0Lhg1K4wKm3lexYEmjOeJxKXV9G
-         ghPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=/pkQOp+0y4gMXULi4BaphJp+QuFpLtUrix8Jm2B9htE=;
-        b=Jd44KgYkPawuVwfDi15wgN9yjLT0QSUol7DhcX+qbntczHdZAgX2bp6iaa+073bSs0
-         ta2xKcCcMKfxVfEkx/YdyE2red0Xju3srFgzyA5tb9XB6pkeL2wEsZVsNfa9RDtrCFHb
-         w/EQzYTpo4IHBPt3JEEx9uy2Qe+4LKCMmT7/cI58wobs8ECNVqVFhlBBLV8lBNju/RRj
-         8ugJqcTwl+OIzxp9b8qC23uJlJx/s7S2R6ny8tqkxixCW2joP4mHR6GPtNuZpBwPf1Dg
-         I3YrbgQN4RvNtrX0DiyPnxg5uPt5QwCDY/XofwjehuwTFVpaI4VlNHf2OCFHVbjsg2hc
-         0mLQ==
-X-Gm-Message-State: AOAM531OUhuWV+8bPZlDrpoJjjmcO4Ub4H2HNNtZsaQl2nl40BLVvW8S
-	NVVBFUk1JPGMaogduh19BkZkE7+pJT/9+Q==
-X-Google-Smtp-Source: ABdhPJyAh46LSC8qxe/OGwMYLxPQLTf4/ni5yOTxGGbFjEFRTjjMf3PH5HQB2C70A7h2e2+CTqpMZQ==
-X-Received: by 2002:a17:902:7d8c:b029:105:2b81:3915 with SMTP id a12-20020a1709027d8cb02901052b813915mr1739330plm.71.1623379369324;
-        Thu, 10 Jun 2021 19:42:49 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0:db81:2f56:60e4:2c64])
-        by smtp.gmail.com with ESMTPSA id o8sm3511257pfp.48.2021.06.10.19.42.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Jun 2021 19:42:48 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Andrea Adami <andrea.adami@gmail.com>
-Subject: [meta-initramfs][PATCH] klibc: Add clang's -rtlib to known options
-Date: Thu, 10 Jun 2021 19:42:46 -0700
-Message-Id: <20210611024246.2108884-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.32.0
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=rrBUkULd;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.65, mailfrom: zangrc.fnst@fujitsu.com)
+Return-Path: <zangrc.fnst@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1623379393; i=@fujitsu.com;
+	bh=yIVgpwtknrxzkHztCSK9qM87u4YkJ09CuXGRJEjy1RE=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=rrBUkULdg43FhaEqKJbMsC/bur/AtX9wA25ZW3S7fdRgc6Z/8tBqVi/puFmAutt6U
+	 mUR8/KBBezsEqO30GZiteA8HnRbVDbKZoEN4g5h2/gMKNCdFCHvv0HI6aO2sihQofo
+	 ND26PjOxsowwH0ELC+qk45nPQlfgfR1VGBYzqBvGGp+X4N7x3DW4OUNSCBnaw1aB7Y
+	 K7oyI66lzVPoQBxq/WZhyII/1mefnM7mcQIKKq2pKxL+aIoUuYiryKptxtU9o1HfBR
+	 RtQirZX8v3/PBETvRZhB7pD0nFlwGeoGO3sus+TBk57jOoZE4+VeoB/5Nquj/g1v3P
+	 UhsKag3YZBCNg==
+Received: from [100.112.199.57] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-b.eu-west-1.aws.symcld.net id A1/D6-00056-1CDC2C06; Fri, 11 Jun 2021 02:43:13 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrEIsWRWlGSWpSXmKPExsViZ8MRonvw7KE
+  EgyPnuSwuHl7K7MDocW7jCsYAxijWzLyk/IoE1ozdn7azFnzirOh+eYK1gXEGZxcjF4eQwGwm
+  ibkPrjJDOCcYJV5dm8jUxcjJwSagI9HxopsFxBYR0JdYOnsPM4gtLOAqMen6AzCbRUBVYtWb2
+  YwgNq+Au8T8twfZQGwJAQWJKQ/fM0PEBSVOznwCNodZQELi4IsXzBA1ihLbd55hgbArJGbM2M
+  Y2gZFnFpKWWUhaFjAyrWK0SCrKTM8oyU3MzNE1NDDQNTQ00jW0NNc1NDbXS6zSTdJLLdUtTy0
+  u0TXUSywv1iuuzE3OSdHLSy3ZxAgMpJSCo507GH+9+qB3iFGSg0lJlDfn4KEEIb6k/JTKjMTi
+  jPii0pzU4kOMMhwcShK86meAcoJFqempFWmZOcCghklLcPAoifBmHwdK8xYXJOYWZ6ZDpE4xh
+  nO8WbtkETPHWzDZdu8ukGwHkzMXHFzNzDELTN5vPwQkH4BIIZa8/LxUKXFeDpBtAiDjMkrz4J
+  bBovYSo6yUMC8jAwODEE9BalFuZgmq/CtGcQ5GJWFeWZApPJl5JXA3vQI6lwnoXGYNsHNLEhF
+  SUg1Mh1/+WXqp/vXp/N6DMsGBU2RS35socnwJFCuXvXSeN8HiGYtS0iXJjM3nd5qaX4y/lVFh
+  MHHzjSjRxi0v3t/1NtA/J3LJbFuH8DzN7b2nrrz7et1HzeTfJzujo0dPv+P6b29/YeXejfGiA
+  qcV/sobXX3yVpUpbwerm4bhPtlfmhdeTF61seZmk5fVhRJezvfxqxfx1Py3ZjzmdCRcIj0h9p
+  mhtEnBlu18zz30EhMKGaeZrxT+MOvHXonFq7+WSk22f3C8s8I6xUx1t6vZY/u4yw0ZIvqi6ob
+  Wqfqne3Vy6n6d3hMv4eov8bScs6Kw28YxcXfH9tl6HTbyzer7eBl/x0y5LmEgfeBlvtnur6xK
+  LMUZiYZazEXFiQB7lMSOVQMAAA==
+X-Env-Sender: zangrc.fnst@fujitsu.com
+X-Msg-Ref: server-9.tower-291.messagelabs.com!1623379392!34447!1
+X-Originating-IP: [62.60.8.84]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.75.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 19082 invoked from network); 11 Jun 2021 02:43:13 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-9.tower-291.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 11 Jun 2021 02:43:13 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15B2h7Yx018439
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jun 2021 03:43:12 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Fri, 11 Jun 2021 03:43:05 +0100
+From: "zangrc" <zangrc.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-oe] [PATCH] speedtest-cli: upgrade 2.1.2 -> 2.1.3
+Date: Fri, 11 Jun 2021 10:42:56 +0800
+Message-ID: <1623379376-46033-1-git-send-email-zangrc.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Type: text/plain
 
-This helps in ensuring that we always link klibc apps with libgcc as
-compiler-rt does not work for klibc due to missing libssp functions e.g.
-__stack_chk_guard and __stack_chk_guard which it expects in libc
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andrea Adami <andrea.adami@gmail.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../klibc/files/klcc-cross-accept-clang-options.patch        | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ .../{speedtest-cli_2.1.2.bb => speedtest-cli_2.1.3.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/dynamic-layers/meta-python/recipes-benchmark/speedtest-cli/{speedtest-cli_2.1.2.bb => speedtest-cli_2.1.3.bb} (87%)
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch b/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch
-index 56905a5159..431c75e3af 100644
---- a/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch
-+++ b/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch
-@@ -5,7 +5,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-benchmark/speedtest-cli/speedtest-cli_2.1.2.bb b/meta-oe/dynamic-layers/meta-python/recipes-benchmark/speedtest-cli/speedtest-cli_2.1.3.bb
+similarity index 87%
+rename from meta-oe/dynamic-layers/meta-python/recipes-benchmark/speedtest-cli/speedtest-cli_2.1.2.bb
+rename to meta-oe/dynamic-layers/meta-python/recipes-benchmark/speedtest-cli/speedtest-cli_2.1.3.bb
+index de4fa16426..949b45ba8e 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-benchmark/speedtest-cli/speedtest-cli_2.1.2.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-benchmark/speedtest-cli/speedtest-cli_2.1.3.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ inherit setuptools3
  
- --- a/klcc/klcc.in
- +++ b/klcc/klcc.in
--@@ -207,6 +207,24 @@ while ( defined($a = shift(@ARGV)) ) {
-+@@ -207,6 +207,27 @@ while ( defined($a = shift(@ARGV)) ) {
-      } elsif ( $a =~ /^--([sysroot=])(.*)$/ ) {
-  	# Override gcc encoded sysroot
-  	push(@ccopt, $a);
-@@ -26,6 +26,9 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
- +	push(@ccopt, $a);
- +    } elsif ( $a =~ '--unwindlib=.*' ) {
- +	# Allow clang options
-++	push(@ccopt, $a);
-++    } elsif ( $a =~ '-rtlib=.*' ) {
-++	# Allow clang options
- +	push(@ccopt, $a);
-      } else {
-  	die "$0: unknown option: $a\n";
+ SRC_URI = "git://github.com/sivel/speedtest-cli.git"
+-SRCREV = "c58ad3367bf27f4b4a4d5b1bca29ebd574731c5d"
++SRCREV = "42e96b13dda2afabbcec2622612d13495a415caa"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.32.0
+2.25.1
 
