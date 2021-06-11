@@ -1,235 +1,153 @@
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.3677.1623381194934306662
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.2])
+ by mx.groups.io with SMTP id smtpd.web10.3706.1623381370757207343
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Jun 2021 20:13:20 -0700
+ Thu, 10 Jun 2021 20:16:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=jVjXd/7B;
- spf=pass (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=179608fda6=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id 15B3DE82031427
-	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jun 2021 20:13:14 -0700
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com with ESMTP id 393bk20v6q-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jun 2021 20:13:14 -0700
-Received: from m0250809.ppops.net (m0250809.ppops.net [127.0.0.1])
-	by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 15B3DDpC031422
-	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jun 2021 20:13:13 -0700
-Received: from nam11-dm6-obe.outbound.protection.outlook.com (mail-dm6nam11lp2175.outbound.protection.outlook.com [104.47.57.175])
-	by mx0a-0064b401.pphosted.com with ESMTP id 393bk20v6n-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 10 Jun 2021 20:13:13 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=MWsmvdeMr0MFNqijWXZd996b3w0fjJzcAbi/pYyUZnOhJlKqpxIYxUCbklbaV/YuH8u/PErEnN+l1OTb8vNdSWyhyk75HIiAiYKGZ5HvMXgJdIOOYAz0PjKz1+i0pcJW/gKv57V+LTUkjUWPDVZX0VEF4dGXi07PmJNu7eTMeCh26z5okVpcwLtZL9d1d0qkZY837Dxy/4WU93v28YDLuatMFrSOQfGu9uR/fEOwFiigctc1oZGM/M8kZIJFuOXIJOY7R2OIm7Ox38X/BpbIYhLz6gdR7djac5fDtASKaAF8OvQ1odzwf6UQMtAGZQz/zih0yMbbRA1SXW0uc2NIvA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RybISXudPdLw5oZ1pIHh368frUCaND8KD9iE3JxBnmw=;
- b=CvaUylqzneGT8poG4titU/JFc9l6bw4FEgmH1Xen46NPjjOQcPr1DmxElvL5rQ2iBoMZh5mKpAzYu90MYOjT6AUnWwYkodcYLSnOtouFaWynmEsFscrEyuWR+piGk6GDB4/qPbxkeUWmm9DaCMF1VUcvMqLz1Tl2DpgGJPjrXc+qro16bHKriyDinmbYC3ICWgZaXJS4ehhaX8t/4/VLliilXcl+c4gsvV6vnEZuLjPMLNxhh7uSVPqnfjcqSIbS80TbNJ5HSpaoDdEJAAHTlpl5pqZM83/3tCY4D8TH57DvZ0vfvh8f8SatHVZBVJqIsU3djv+9TahpSwa6m/LIKw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RybISXudPdLw5oZ1pIHh368frUCaND8KD9iE3JxBnmw=;
- b=jVjXd/7B84LFv9xwhhOMouB+kYJlRzqPz7kxDMSsl2vtJKv52idOuI0qaRdCj2EzhZX2tbGSjT8BnWVOrw/yqZQXzzAx/dib5iOhdD6Em0FARemkrr0Aa+os3EA2Jc6D368fsaFQNCCTeGQpVbJX4id2h3uvboByVuhiTxWxfDE=
-Authentication-Results: gmail.com; dkim=none (message not signed)
- header.d=none;gmail.com; dmarc=none action=none header.from=windriver.com;
-Received: from CO1PR11MB5009.namprd11.prod.outlook.com (2603:10b6:303:9e::11)
- by MW3PR11MB4650.namprd11.prod.outlook.com (2603:10b6:303:54::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4195.24; Fri, 11 Jun
- 2021 03:13:11 +0000
-Received: from CO1PR11MB5009.namprd11.prod.outlook.com
- ([fe80::ed6b:a25f:3a16:3127]) by CO1PR11MB5009.namprd11.prod.outlook.com
- ([fe80::ed6b:a25f:3a16:3127%7]) with mapi id 15.20.4219.022; Fri, 11 Jun 2021
- 03:13:11 +0000
-Subject: Re: [oe] [meta-oe][PATCH] nspr: Fix build with nativesdk-gcc from buildtools-extended-tarball
-To: Robert Yang <liezhi.yang@windriver.com>,
-        openembedded-devel@lists.openembedded.org, raj.khem@gmail.com
-References: <20210106121440.84402-1-liezhi.yang@windriver.com>
-From: "Yu, Mingli" <mingli.yu@windriver.com>
-Message-ID: <f0c3e5e1-0baa-724f-9056-2a154d453e28@windriver.com>
-Date: Fri, 11 Jun 2021 11:19:39 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-In-Reply-To: <20210106121440.84402-1-liezhi.yang@windriver.com>
-X-Originating-IP: [60.247.85.82]
-X-ClientProxiedBy: HK0PR01CA0067.apcprd01.prod.exchangelabs.com
- (2603:1096:203:a6::31) To CO1PR11MB5009.namprd11.prod.outlook.com
- (2603:10b6:303:9e::11)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=iUCm82Mw;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: zangrc.fnst@fujitsu.com)
+Return-Path: <zangrc.fnst@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1623381369; i=@fujitsu.com;
+	bh=T+YyGEUkEGOsfKzP72BBxO7HSeG27MdMjY52TTnabMk=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=iUCm82MwPo99nPiiPrOrEU6PYgjMM91+EjNyE8Oiq5OG6x1yGIqVCUedWav4hpCel
+	 aFQXYhvzIHA5EgNh+TSBKDFVI2GcfsEiTf2jLLsOAWxzTJ0KxifwhEvh4b/N3DkaTd
+	 pp3T4WraJ1XPd2DuDTCMDWiw3Q0p0js8+BjUcQKNhE4IXpoxIJ9gA9qyf6yf5jBIW/
+	 16GmFTvYSdxPY/9Cs896ZnAmy8D6m5P4mUJ3efZ4fma0vBZkVmP7bvp4Tdv063JZN7
+	 pXlCLza92HLLMAE7jctvJPpMegVRtIiO3jnB4V+5Sz0thjOGAFoxjUSvKJ6Q8+e+Z1
+	 V/MFhhqHnv04Q==
+Received: from [100.112.192.137] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-a.eu-west-1.aws.symcld.net id C7/AB-28327-875D2C06; Fri, 11 Jun 2021 03:16:08 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrIIsWRWlGSWpSXmKPExsViZ8MxVbfi6qE
+  Eg3kPBC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oyehgNMBY3yFb2vVrI1MM6V7mLk5BASmM0k
+  ceN4eRcjF5B9glFi5e3l7CAJNgEdiY4X3SwgtoiAvsTS2XuYQWxhAS+JD69+gtksAqoSJx71s
+  IHYvALuEkcurWcFsSUEFCSmPHzPDBEXlDg58wnYHGYBCYmDL14wQ9QoSmzfeYYFwq6QmDFjG9
+  sERp5ZSFpmIWlZwMi0itEiqSgzPaMkNzEzR9fQwEDX0NBI19ASiE1M9BKrdBP1Ukt1y1OLS3Q
+  N9RLLi/WKK3OTc1L08lJLNjECwyil4MCEHYz7X3/QO8QoycGkJMqbc/BQghBfUn5KZUZicUZ8
+  UWlOavEhRhkODiUJ3u1XgHKCRanpqRVpmTnAkIZJS3DwKInwnroIlOYtLkjMLc5Mh0idYgzne
+  LN2ySJmjrdgsu3eXSDZDiZnLji4mpljFpi8334ISD4AkUIsefl5qVLivEcuA40TABmXUZoHtw
+  wWs5cYZaWEeRkZGBiEeApSi3IzS1DlXzGKczAqCfNuBZnCk5lXAnfTK6BzmYDOZdYAO7ckESE
+  l1cAUfCr+xrGi4y3eRZ9sbl03ny+zfa7E9zjtb18aDj1RPr41YAO7y4nFvdZLmRxqRYIffgvj
+  NV/ktTUyMez0iW/q1+0WKuc+SC5nY18dvWnl6/CIuY6LrBs+2PU0c3+QnPjgRMnjW2uFQmz2J
+  jE1HKz5d8W7T4OrrKBBdR2bYd2CC54LWNyyJl+VdZTov1q7UqzquW3QO5lZq8R2Fcv2lfeHhR
+  w0amdvFk76e3abLt/N6oBtC+IsdnGnX3/hIxSzhuPCCrlTm//KK1p4skQyWh6rTDv3s+Ouioy
+  sk21pyG6TmqfnVue/2ia/Y3uOQs78lOXFAatMhSQcCgyO/F9j/irHeOL7DUYpZ+USvrL0Miqx
+  FGckGmoxFxUnAgCmgrUiVAMAAA==
+X-Env-Sender: zangrc.fnst@fujitsu.com
+X-Msg-Ref: server-18.tower-271.messagelabs.com!1623381367!71898!1
+X-Originating-IP: [62.60.8.149]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.75.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 11577 invoked from network); 11 Jun 2021 03:16:08 -0000
+Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
+  by server-18.tower-271.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 11 Jun 2021 03:16:08 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15B3G4lq002021
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jun 2021 04:16:07 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Fri, 11 Jun 2021 04:16:03 +0100
+From: "zangrc" <zangrc.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-oe] [PATCH] abseil-cpp: upgrade 20210324 -> 20210324.2
+Date: Fri, 11 Jun 2021 11:15:55 +0800
+Message-ID: <1623381355-46721-1-git-send-email-zangrc.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [128.224.162.140] (60.247.85.82) by HK0PR01CA0067.apcprd01.prod.exchangelabs.com (2603:1096:203:a6::31) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4219.21 via Frontend Transport; Fri, 11 Jun 2021 03:13:10 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 06d9f43f-9d10-43a6-a671-08d92c86d805
-X-MS-TrafficTypeDiagnostic: MW3PR11MB4650:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<MW3PR11MB465098149BD0D82BF0DE38CEF1349@MW3PR11MB4650.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:6430;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	ckkRjWhX6sRlH6tH1HJVVS2JgRDYgreNUDZtR2DsbJliSkDDq5xjxLkDITrU20GQPIb1N4Rg7g7jqSTw4BJGL6U0/fkLjMuTVp8pTdHKVVsfWt5Ll9sRFRL8IbMH4lGJjc0q3WfwzAgp2ZrUI3skhewVGK5U+V+ac/w4QJTgTVD1as7A6NY8C/8+R55Kf5h1Akdnd0xpVu+I25eRbq6Zm6Xh8Ekuo336mZL1q+SfQ+jWDQdBc1VEhTlWq5M4zwr0SQ8zhjyZ4Iy+G4G1ZJLYgRfR5KEfAL5pfV1FFrEZyM5bHbfUvTAXcP6qliXBWAD4xQiDp3h3J6lvSv35rQJi59POrPdrtyI02d7stJOcfM0jcaA0lS4WmReLP+icmc7jUSZ/xliCFSsMqUqHPxHxmlyTfMFRBmzM01OtRKDPPMh/Njb+d3IK6QbkeoTFHQ4zmMNUtq08bR8FjQcOBGG5t5QgnHcWcRhRxwF1mKJnJXU5p5fcZ5xfCsgk5MnJxCkigrjUnvI8wLt3nNkMZuQJq9bglcC06sKLddIg/g0y2YVHz0SzJSuF38XcBDUrh0LtWfRsBR3TF2XE7uU8dvWpNdMkzjec8FSfwnmz6/vSyz7BgnQAOihLP4OYQW4x70yCOdYrFq5slIIn5JzB576nfEHV4j+VKPfrMWgpfUTsRAixpJyKnUhCnCFrndRv6tijVJ9t7dGSopx8ngyeEbcTrlTv8C70xJ3dg1IHr1DB9SyuvGPIhwv+xJSG585LadIHNsHHrNi+sUAtDoDfkrebj2tvltTgDO6p4j20AjD3MAxXkgDFLfauGDCnqT8PWngS5BKRmSjS9zwn+fgeEkaCf3Ks2lIEmePV/jIjUOe1FPI=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB5009.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(136003)(39850400004)(376002)(366004)(346002)(6666004)(16576012)(316002)(86362001)(16526019)(2616005)(8676002)(6706004)(186003)(53546011)(6486002)(83380400001)(478600001)(26005)(52116002)(66476007)(956004)(5660300002)(31696002)(66556008)(8936002)(66946007)(966005)(36756003)(38100700002)(31686004)(38350700002)(2906002)(78286007)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?ZjF0KzJoWkN4OGtjTVNjb1RoZlU1NHhrZ1pqcFQ5TjlWR3hSOW5RVGZMa1lk?=
- =?utf-8?B?VnBvbERFMDRzaDZhcS9VVXp2L2lwS3k5VWdQclNoMG4zVCtHaDFpS3c1Q1ZM?=
- =?utf-8?B?QXhyRDNsdzRiMXRXTlBDZmZjVXJHbkt2cUkwcHZMM2xRQ0RzRzFLTDJRUUlU?=
- =?utf-8?B?QzVYdVlDR3h3bUs0WE5vb0x3QjV6dGhtMWFGREtJSUp4ODVZZ1JNZFZPR1ln?=
- =?utf-8?B?MWd1UVNRNTROVlFhODJNQ3BuOGlIMTRaZHFuYnYxdit2V3Nod0ZUZzZIRm5E?=
- =?utf-8?B?bmVQNW9rMVEwVVZpT0lvNHJxdFpKK25MK2FrTlhtaUwvMEJIQkhUY3ZxZHIx?=
- =?utf-8?B?NnNPQlFhRWRTRXYyS2ZNTnFCSEJ5QzMvNjJHbnNMM1B3RlYrOFFvRnRnbmtl?=
- =?utf-8?B?VGhmVEdPdGlHcVhMcTNzdVZKMkkxMTFyVG9hUkZKd0tkV2pSeldhQW4xUmV0?=
- =?utf-8?B?ZWc0TEpRMDlSTmtXSHlOMnpXbXFmTkNRU1NFRUtxc2xIelhPR3B4NHNXV2dY?=
- =?utf-8?B?bll5S2lRcnNHV3crQWpFZjlLdTBTQVBtUVZJNjRVRExnT1ZxRnhYZzIvMUw2?=
- =?utf-8?B?b1pHcVFIeFQ4d1QyOXBJK1hyaE1mNklFM2RDQTdWc0NBRXlDbzlPWUtaMkRq?=
- =?utf-8?B?dXdpMXJld0VxVjdlTWNuR0lSRGk3RmFSRm12R2tKWHZBWElyTFpURThmd1JX?=
- =?utf-8?B?R1VCT3RrKzd2bHloK1FjQzFDL2R4aVo0UDROY0xFK0h4M2JIL2hsbHR5TVl1?=
- =?utf-8?B?a1dON1VPT3FpZHdndWtXcHl3MmNJUHlrdUJyNDdKWUdTZ2VpRGEwa21zcU5l?=
- =?utf-8?B?OHJwWTRRVjRzSElPdVhwYnNodEhnUDlkd0cyUE9vbURnVFBnNlc5blBsNW9N?=
- =?utf-8?B?cUV4SWRWQ1FKblV1eGpQL2pYajlKNXJFeUFiQlc3bnY5cnd4M1pyQVZteVRP?=
- =?utf-8?B?ZGg2SXJOVGs1Um5MNlc1RERLOFJQZDRMZ0t6TktYM010b3dZRU5PQVppeHhN?=
- =?utf-8?B?VmlmSnpnamkya3FLMjR3dFBmK0w1azhhYUJ6S3NqU082M29LWGVqaUh2ZnY4?=
- =?utf-8?B?K1hMbkJGNEFwdHZDd2RjaGljOFRqelhQS3d0enlZZWRudDY0ditFa0FyZWZX?=
- =?utf-8?B?WWo0S1ZlTzIzaDZPUDhjRGUwWDhCQ1ZXaEpmUnFrYkhKMThlQkFuQTE2UEtJ?=
- =?utf-8?B?MkxvcjlUVU9RWmFid1ZOc1JreXFoNFdPT1NyZktaV1BGVDhwNzU3QTRscmtT?=
- =?utf-8?B?c2FQOWdvOGVRMTl0bWdvVWZTOVBzODNhVlRnNzFsM3RFTU0rSDY2U3BmNkhu?=
- =?utf-8?B?VEZYYUdISmo0R2hXMmkzV3hQYWVvUlU2OXhnTjhvRmpzQWw4d0toQ0FEcW9q?=
- =?utf-8?B?M2lSSXNDT0IyeWIra1ZWeDB0WkRGYkt1WHJBU3dYcWpUV0ZoU3VOTkZxcGhz?=
- =?utf-8?B?MFRENmVuZitPd1NsODEvWVBjSTlNZitNVjRlZ3d4dlB0ekg4YURHRUxWUENn?=
- =?utf-8?B?N3lhZTJFa3hmUisyS1UyZmlHUjV3c0JhSGVxRGoxa0gvTnB4cU44M2JmYS9D?=
- =?utf-8?B?SmZWZG1DZEJlVjZ3eURNMjJ4Y3VscWw2OXlDZWhvWnR3M0p3aGN2L3hiM0h0?=
- =?utf-8?B?VHU1aXFpMDUwajNwV1BZTUhLOUV3emp1am5xWldhMnFhVlFpekxmSVFXT012?=
- =?utf-8?B?djJnbXZWT2FiU1FqUS9yd2hXSHVTVk1EVW56NXV6TTNyNWRlN0cyUFgwOTZl?=
- =?utf-8?Q?kTJfXtWPSuhiSXIMw5FblawzRHUuZLlkp+/AkWe?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 06d9f43f-9d10-43a6-a671-08d92c86d805
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB5009.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jun 2021 03:13:11.2886
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: UH6HmUqbNOFyAfu9+L77pbXNtC0ZR7FVcdiDa9Qxschc0kqhij9cmh9NEl6PptE1aMzjpTHwUhmfn81rA8q5hg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR11MB4650
-X-Proofpoint-ORIG-GUID: uSQak_-TZGVhhLt_HfIhccVqFs1Kn8G6
-X-Proofpoint-GUID: 2-ArVBYBOcfQlp_-QHZwRTEDh0VPKRVR
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391,18.0.761
- definitions=2021-06-10_14:2021-06-10,2021-06-10 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 adultscore=0
- phishscore=0 spamscore=0 bulkscore=0 malwarescore=0 priorityscore=1501
- mlxlogscore=999 impostorscore=0 clxscore=1011 suspectscore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2104190000 definitions=main-2106110019
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Type: text/plain
 
-ping.
+Refresh the following patch:
+0001-Export-of-internal-Abseil-changes.patch
 
-Thanks,
+Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+---
+ ...01-Export-of-internal-Abseil-changes.patch | 29 +++++--------------
+ .../abseil-cpp/abseil-cpp_git.bb              |  4 +--
+ 2 files changed, 10 insertions(+), 23 deletions(-)
 
-On 1/6/21 8:14 PM, Robert Yang wrote:
-> Fixed when built with nativesdk-gcc from buildtools-extended-tarball:
-> $ bitbake nspr-native
-> 
-> gcc   abstract.o -Xlinker -L../../dist/lib -lplc4 -L../../dist/lib -lnspr4 -lpthread -o abstract
-> /path/to/x86_64-wrlinuxsdk-linux/bin/ld:
-> /lib/x86_64-linux-gnu/librt.so.1: undefined reference to `__clock_getcpuclockid@GLIBC_PRIVATE'
-> /path/to/x86_64-wrlinuxsdk-linux/bin/ld:
-> /lib/x86_64-linux-gnu/librt.so.1: undefined reference to `__clock_nanosleep@GLIBC_PRIVATE'
-> /path/to/x86_64-wrlinuxsdk-linux/bin/ld:
-> /lib/x86_64-linux-gnu/librt.so.1: undefined reference to `__clock_settime@GLIBC_PRIVATE'
-> /path/to/x86_64-wrlinuxsdk-linux/bin/ld:
-> /lib/x86_64-linux-gnu/librt.so.1: undefined reference to `__clock_getres@GLIBC_PRIVATE'
-> 
-> Referred to:
-> https://github.com/linux-test-project/ltp/issues/255
-> 
-> There should be a bug hidden in nativesdk-gcc or other toolchains, but it's
-> very had to figure it out. The quick workaround is using "-lpthread -lrt"
-> 
-> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-> ---
->   ...ts-Makefile.in-Add-lrt-to-EXTRA_LIBS.patch | 47 +++++++++++++++++++
->   meta-oe/recipes-support/nspr/nspr_4.29.bb     |  1 +
->   2 files changed, 48 insertions(+)
->   create mode 100644 meta-oe/recipes-support/nspr/nspr/0001-nspr-pr-tests-Makefile.in-Add-lrt-to-EXTRA_LIBS.patch
-> 
-> diff --git a/meta-oe/recipes-support/nspr/nspr/0001-nspr-pr-tests-Makefile.in-Add-lrt-to-EXTRA_LIBS.patch b/meta-oe/recipes-support/nspr/nspr/0001-nspr-pr-tests-Makefile.in-Add-lrt-to-EXTRA_LIBS.patch
-> new file mode 100644
-> index 000000000..c71871c34
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/nspr/nspr/0001-nspr-pr-tests-Makefile.in-Add-lrt-to-EXTRA_LIBS.patch
-> @@ -0,0 +1,47 @@
-> +From 4441e9c15684623adb3d5cbd6c2f27c1f3d212ac Mon Sep 17 00:00:00 2001
-> +From: Robert Yang <liezhi.yang@windriver.com>
-> +Date: Tue, 29 Dec 2020 03:57:07 +0000
-> +Subject: [PATCH] nspr/pr/tests/Makefile.in: Add -lrt to EXTRA_LIBS
-> +
-> +Fixed when built with nativesdk-gcc from buildtools-extended-tarball:
-> +$ bitbake nspr-native
-> +
-> +gcc   abstract.o -Xlinker -L../../dist/lib -lplc4 -L../../dist/lib -lnspr4 -lpthread -o abstract
-> +/path/to/x86_64-wrlinuxsdk-linux/bin/ld:
-> +/lib/x86_64-linux-gnu/librt.so.1: undefined reference to `__clock_getcpuclockid@GLIBC_PRIVATE'
-> +/path/to/x86_64-wrlinuxsdk-linux/bin/ld:
-> +/lib/x86_64-linux-gnu/librt.so.1: undefined reference to `__clock_nanosleep@GLIBC_PRIVATE'
-> +/path/to/x86_64-wrlinuxsdk-linux/bin/ld:
-> +/lib/x86_64-linux-gnu/librt.so.1: undefined reference to `__clock_settime@GLIBC_PRIVATE'
-> +/path/to/x86_64-wrlinuxsdk-linux/bin/ld:
-> +/lib/x86_64-linux-gnu/librt.so.1: undefined reference to `__clock_getres@GLIBC_PRIVATE'
-> +
-> +Referred to:
-> +https://github.com/linux-test-project/ltp/issues/255
-> +
-> +There should be a bug hidden in nativesdk-gcc or other toolchains, but it's
-> +very had to figure it out. The quick workaround is using "-lpthread -lrt"
-> +
-> +Upstream-Status: Inappropriate [OE specific]
-> +
-> +Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-> +---
-> + nspr/pr/tests/Makefile.in | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/pr/tests/Makefile.in b/pr/tests/Makefile.in
-> +index 2ccb992..45270e9 100644
-> +--- a/pr/tests/Makefile.in
-> ++++ b/pr/tests/Makefile.in
-> +@@ -274,7 +274,7 @@ endif # SunOS
-> + ifeq (,$(filter-out Linux GNU GNU_%,$(OS_ARCH)))
-> +     LDOPTS += -Xlinker
-> +     ifeq ($(USE_PTHREADS),1)
-> +-        EXTRA_LIBS = -lpthread
-> ++        EXTRA_LIBS = -lpthread -lrt
-> +     endif
-> + endif
-> +
-> +--
-> +2.29.2
-> +
-> diff --git a/meta-oe/recipes-support/nspr/nspr_4.29.bb b/meta-oe/recipes-support/nspr/nspr_4.29.bb
-> index 6307c159e..fa05bc022 100644
-> --- a/meta-oe/recipes-support/nspr/nspr_4.29.bb
-> +++ b/meta-oe/recipes-support/nspr/nspr_4.29.bb
-> @@ -13,6 +13,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/nspr/releases/v${PV}/src/nspr-${PV}.tar.gz
->              file://0001-md-Fix-build-with-musl.patch \
->              file://Makefile.in-remove-_BUILD_STRING-and-_BUILD_TIME.patch \
->              file://nspr.pc.in \
-> +           file://0001-nspr-pr-tests-Makefile.in-Add-lrt-to-EXTRA_LIBS.patch \
->   "
->   
->   CACHED_CONFIGUREVARS_append_libc-musl = " CFLAGS='${CFLAGS} -D_PR_POLL_AVAILABLE \
-> 
-> 
-> 
-> 
-> 
+diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Export-of-internal-Abseil-changes.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Export-of-internal-Abseil-changes.patch
+index 52d4f42d52..680d0915eb 100644
+--- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Export-of-internal-Abseil-changes.patch
++++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Export-of-internal-Abseil-changes.patch
+@@ -1,6 +1,6 @@
+-From a9831f1cbf93fb18dd951453635f488037454ce9 Mon Sep 17 00:00:00 2001
+-From: Abseil Team <absl-team@google.com>
+-Date: Mon, 3 May 2021 07:37:39 -0700
++From c9250af98f48e4aa734cab0e2f5ae1f780c05ad0 Mon Sep 17 00:00:00 2001
++From: Zang Ruochen <zangrc.fnst@fujitsu.com>
++Date: Fri, 11 Jun 2021 10:53:37 +0900
+ Subject: [PATCH] Export of internal Abseil changes
+ 
+ --
+@@ -27,15 +27,16 @@ Cmake builds should only install pkg-config when explicitly requested.
+ PiperOrigin-RevId: 371403419
+ GitOrigin-RevId: cf88f9cf40eab54c06bca7f20795352ec23bb583
+ Change-Id: I4360a18c638a4d901ff44ab1e0a9d8f321c302ea
++
++Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+ ---
+  CMake/AbseilHelpers.cmake                        | 3 ++-
+- absl/debugging/failure_signal_handler.cc         | 3 ++-
+  absl/strings/internal/str_format/arg.h           | 8 ++++++++
+  absl/strings/internal/str_format/convert_test.cc | 3 +++
+- 4 files changed, 15 insertions(+), 2 deletions(-)
++ 3 files changed, 13 insertions(+), 1 deletion(-)
+ 
+ diff --git a/CMake/AbseilHelpers.cmake b/CMake/AbseilHelpers.cmake
+-index 1f754392..1a80b5b4 100644
++index 54fb8df3..a32b94d5 100644
+ --- a/CMake/AbseilHelpers.cmake
+ +++ b/CMake/AbseilHelpers.cmake
+ @@ -141,7 +141,8 @@ function(absl_cc_library)
+@@ -48,20 +49,6 @@ index 1f754392..1a80b5b4 100644
+      if(NOT ABSL_CC_LIB_TESTONLY)
+        if(absl_VERSION)
+          set(PC_VERSION "${absl_VERSION}")
+-diff --git a/absl/debugging/failure_signal_handler.cc b/absl/debugging/failure_signal_handler.cc
+-index e458a795..689e5979 100644
+---- a/absl/debugging/failure_signal_handler.cc
+-+++ b/absl/debugging/failure_signal_handler.cc
+-@@ -136,7 +136,8 @@ static bool SetupAlternateStackOnce() {
+- #else
+-   const size_t page_mask = sysconf(_SC_PAGESIZE) - 1;
+- #endif
+--  size_t stack_size = (std::max(SIGSTKSZ, 65536) + page_mask) & ~page_mask;
+-+  size_t stack_size =
+-+      (std::max<size_t>(SIGSTKSZ, 65536) + page_mask) & ~page_mask;
+- #if defined(ABSL_HAVE_ADDRESS_SANITIZER) || \
+-     defined(ABSL_HAVE_MEMORY_SANITIZER) || defined(ABSL_HAVE_THREAD_SANITIZER)
+-   // Account for sanitizer instrumentation requiring additional stack space.
+ diff --git a/absl/strings/internal/str_format/arg.h b/absl/strings/internal/str_format/arg.h
+ index 7040c866..3c91be70 100644
+ --- a/absl/strings/internal/str_format/arg.h
+@@ -96,5 +83,5 @@ index 926283cf..91e03609 100644
+  
+  TEST_F(FormatConvertTest, NullString) {
+ -- 
+-2.31.1
++2.25.1
+ 
+diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+index 01dd9f550e..3f89df558b 100644
+--- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
++++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+@@ -7,8 +7,8 @@ SECTION = "libs"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=df52c6edb7adc22e533b2bacc3bd3915"
+ 
+-PV = "20210324+git${SRCPV}"
+-SRCREV = "e1d388e7e74803050423d035e4374131b9b57919"
++PV = "20210324.2+git${SRCPV}"
++SRCREV = "278e0a071885a22dcd2fd1b5576cc44757299343"
+ BRANCH = "lts_2021_03_24"
+ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH}         \
+            file://0001-absl-always-use-asm-sgidefs.h.patch             \
+-- 
+2.25.1
+
