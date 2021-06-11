@@ -1,56 +1,60 @@
-Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
- by mx.groups.io with SMTP id smtpd.web11.5716.1623400371461153132
+Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
+ by mx.groups.io with SMTP id smtpd.web11.5722.1623400411313155014
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Jun 2021 01:32:52 -0700
+ Fri, 11 Jun 2021 01:33:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=neutral (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: ito-yuichi@fujitsu.com)
-IronPort-SDR: JUVGXFMjaZ2iWwkoIGbyZbc0KrdTUT8B3hTTttO0DQO9FfQI12RuB6GSK1y36Jv2A0WpAymeWt
- D7DurywlIIN6hf2M6vGw761OLVjh3gFK0X4VA2xscgSn8pHf8DBO+A+eLTLrmbTCrB5opVoxmt
- FpMrab9dmy/tv4+zjvBelokyL19IjWaqfltNFDZdEp3ZLwnquwdWmphJ3H/2a7KcjbNJWXqPWj
- Sfk3hx4el/fGJ5s8kZwfUg7bf7t54pmEcdorSFuK0xD5rIpzlF0ufHRKk1Tdg+xuMdgoOFbtY4
- 2CM=
-X-IronPort-AV: E=McAfee;i="6200,9189,10011"; a="20756643"
+ dkim=missing; spf=neutral (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: sekine.shigeki@fujitsu.com)
+IronPort-SDR: looApbPBeTZTf5EXJ+AL/peMqhXAx54Lh6iOHzvmgZoGMSE4vxyrgKebzMnVt0WSLDdOd+nmxI
+ sbv6WvN7FICg28TLcwexA+YowNqDEZCULBdpBTUpU1c5EEn1BlPEAekcrTBKGrXJ0kDa54vqcP
+ OlUOT6N3O0kuK5IEnOVP8OJ6VeDjwI3BASwI0zp6XxUW0TAXbqDnkB7XNZpB1SZu2NXvRy4OXl
+ xzDAb5QgbXsb+Hlj63MIk5ZnpIV8QZp3FO3Ug3KYKdOQTHSawgIzAaEB1Qn67KSVzhwZeaavwo
+ 0xA=
+X-IronPort-AV: E=McAfee;i="6200,9189,10011"; a="12794699"
 X-IronPort-AV: E=Sophos;i="5.83,265,1616425200"; 
-   d="scan'208";a="20756643"
+   d="scan'208";a="12794699"
 Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
-  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP; 11 Jun 2021 17:32:48 +0900
-Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 2246BA80C1
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jun 2021 17:32:48 +0900 (JST)
-Received: from yto-om1.fujitsu.com (yto-om1.o.css.fujitsu.com [10.128.89.162])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 7829E9B606
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jun 2021 17:32:47 +0900 (JST)
-Received: from pumpkin.openstacklocal (pumpkin.fct.css.fujitsu.com [10.130.70.189])
-	by yto-om1.fujitsu.com (Postfix) with ESMTP id 6C4CC405733AD
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jun 2021 17:32:47 +0900 (JST)
-From: "ito-yuichi@fujitsu.com" <ito-yuichi@fujitsu.com>
+  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP; 11 Jun 2021 17:33:27 +0900
+Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
+	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 12F12A80C6
+	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jun 2021 17:33:26 +0900 (JST)
+Received: from yto-om4.fujitsu.com (yto-om4.o.css.fujitsu.com [10.128.89.165])
+	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 3FC28583E4B
+	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jun 2021 17:33:25 +0900 (JST)
+Received: from 7d162709cefb.openstacklocal (bakeccha.fct.css.fujitsu.com [10.126.195.136])
+	by yto-om4.fujitsu.com (Postfix) with ESMTP id 2DCB0400D506B
+	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jun 2021 17:33:25 +0900 (JST)
+From: sekine.shigeki@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] cyrus-sasl: add CVE-2020-8032 to allowlist
-Date: Fri, 11 Jun 2021 17:32:45 +0900
-Message-Id: <20210611083245.45849-1-ito-yuichi@fujitsu.com>
+Subject: [PATCH] add CVE-2011-2411 to allowlist
+Date: Fri, 11 Jun 2021 17:32:34 +0900
+Message-Id: <20210611083234.2399-1-sekine.shigeki@fujitsu.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 X-TM-AS-GCONF: 00
 Content-Transfer-Encoding: 8bit
 
-This affects only openSUSE, so add it to allowlist.
+This affects only on HP NonStop Server, so add it to allowlist.
 
-Signed-off-by: Yuichi Ito <ito-yuichi@fujitsu.com>
+Signed-off-by: Sekine Shigeki <sekine.shigeki@fujitsu.com>
 ---
- .../recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb            | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-networking/recipes-connectivity/samba/samba_4.14.4.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
-index 33de8ca7e..c4b41ace8 100644
---- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
-+++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
-@@ -96,3 +96,6 @@ FILES_${PN}-dbg       += "${libdir}/sasl2/.debug"
- FILES_${PN}-staticdev += "${libdir}/sasl2/*.a"
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.14.4.bb b/meta-networking/recipes-connectivity/samba/samba_4.14.4.bb
+index 2e0bdceab..0833a9146 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.14.4.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.14.4.bb
+@@ -40,6 +40,10 @@ SRC_URI[sha256sum] = "89af092a0b00f5354ed287f0aa37b8c2cf9ba2ce67ea6464192e2c1852
+ UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.14(\.\d+)+).tar.gz"
  
- INSANE_SKIP_${PN} += "dev-so"
+ inherit systemd waf-samba cpan-base perlnative update-rc.d
 +
-+# CVE-2020-8032 affects only openSUSE
-+CVE_CHECK_WHITELIST += "CVE-2020-8032"
++# CVE-2011-2411 is valnerble only on HP NonStop Servers.
++CVE_CHECK_WHITELIST += "CVE-2011-2411" 
++
+ # remove default added RDEPENDS on perl
+ RDEPENDS_${PN}_remove = "perl"
+ 
 -- 
 2.25.1
 
