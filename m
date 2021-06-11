@@ -1,153 +1,156 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.2])
- by mx.groups.io with SMTP id smtpd.web10.3706.1623381370757207343
+Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com [209.85.222.179])
+ by mx.groups.io with SMTP id smtpd.web10.3766.1623381907348576895
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Jun 2021 20:16:11 -0700
+ Thu, 10 Jun 2021 20:25:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=iUCm82Mw;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1623381369; i=@fujitsu.com;
-	bh=T+YyGEUkEGOsfKzP72BBxO7HSeG27MdMjY52TTnabMk=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=iUCm82MwPo99nPiiPrOrEU6PYgjMM91+EjNyE8Oiq5OG6x1yGIqVCUedWav4hpCel
-	 aFQXYhvzIHA5EgNh+TSBKDFVI2GcfsEiTf2jLLsOAWxzTJ0KxifwhEvh4b/N3DkaTd
-	 pp3T4WraJ1XPd2DuDTCMDWiw3Q0p0js8+BjUcQKNhE4IXpoxIJ9gA9qyf6yf5jBIW/
-	 16GmFTvYSdxPY/9Cs896ZnAmy8D6m5P4mUJ3efZ4fma0vBZkVmP7bvp4Tdv063JZN7
-	 pXlCLza92HLLMAE7jctvJPpMegVRtIiO3jnB4V+5Sz0thjOGAFoxjUSvKJ6Q8+e+Z1
-	 V/MFhhqHnv04Q==
-Received: from [100.112.192.137] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-west-1.aws.symcld.net id C7/AB-28327-875D2C06; Fri, 11 Jun 2021 03:16:08 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrIIsWRWlGSWpSXmKPExsViZ8MxVbfi6qE
-  Eg3kPBC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oyehgNMBY3yFb2vVrI1MM6V7mLk5BASmM0k
-  ceN4eRcjF5B9glFi5e3l7CAJNgEdiY4X3SwgtoiAvsTS2XuYQWxhAS+JD69+gtksAqoSJx71s
-  IHYvALuEkcurWcFsSUEFCSmPHzPDBEXlDg58wnYHGYBCYmDL14wQ9QoSmzfeYYFwq6QmDFjG9
-  sERp5ZSFpmIWlZwMi0itEiqSgzPaMkNzEzR9fQwEDX0NBI19ASiE1M9BKrdBP1Ukt1y1OLS3Q
-  N9RLLi/WKK3OTc1L08lJLNjECwyil4MCEHYz7X3/QO8QoycGkJMqbc/BQghBfUn5KZUZicUZ8
-  UWlOavEhRhkODiUJ3u1XgHKCRanpqRVpmTnAkIZJS3DwKInwnroIlOYtLkjMLc5Mh0idYgzne
-  LN2ySJmjrdgsu3eXSDZDiZnLji4mpljFpi8334ISD4AkUIsefl5qVLivEcuA40TABmXUZoHtw
-  wWs5cYZaWEeRkZGBiEeApSi3IzS1DlXzGKczAqCfNuBZnCk5lXAnfTK6BzmYDOZdYAO7ckESE
-  l1cAUfCr+xrGi4y3eRZ9sbl03ny+zfa7E9zjtb18aDj1RPr41YAO7y4nFvdZLmRxqRYIffgvj
-  NV/ktTUyMez0iW/q1+0WKuc+SC5nY18dvWnl6/CIuY6LrBs+2PU0c3+QnPjgRMnjW2uFQmz2J
-  jE1HKz5d8W7T4OrrKBBdR2bYd2CC54LWNyyJl+VdZTov1q7UqzquW3QO5lZq8R2Fcv2lfeHhR
-  w0amdvFk76e3abLt/N6oBtC+IsdnGnX3/hIxSzhuPCCrlTm//KK1p4skQyWh6rTDv3s+Ouioy
-  sk21pyG6TmqfnVue/2ia/Y3uOQs78lOXFAatMhSQcCgyO/F9j/irHeOL7DUYpZ+USvrL0Miqx
-  FGckGmoxFxUnAgCmgrUiVAMAAA==
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-18.tower-271.messagelabs.com!1623381367!71898!1
-X-Originating-IP: [62.60.8.149]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.75.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 11577 invoked from network); 11 Jun 2021 03:16:08 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-18.tower-271.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 11 Jun 2021 03:16:08 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15B3G4lq002021
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jun 2021 04:16:07 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 11 Jun 2021 04:16:03 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] abseil-cpp: upgrade 20210324 -> 20210324.2
-Date: Fri, 11 Jun 2021 11:15:55 +0800
-Message-ID: <1623381355-46721-1-git-send-email-zangrc.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=uiab9wU4;
+ spf=pass (domain: gmail.com, ip: 209.85.222.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f179.google.com with SMTP id c138so16776732qkg.5
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jun 2021 20:25:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=NPmo1EMMYKTRQV62rU+uSTMdw572k3t/W1bgSA7MfnQ=;
+        b=uiab9wU4r+blCXtQC6pqVmALG6g0q3oY8RY+GKwl/rIVHmV4EWrm/dZsYKBsw2c5SW
+         POt4P7ixAw9Cc/T68I/rfR9tkdTXT/HpmDcj68+f3LGlNh9C8ECrZZV+LBxgydVcWylh
+         CXcVIxC/gLAPCbEa0aMtsyKvxi/zA8teSADiQpikZMNcyvm9bHORifTpYq5LxgKICOmg
+         /O59mefaSct18PaXswsB/5qIpa5dfvk9xsu2Ay2m/BoJRR8eFzzzk/H1f1nHUPlN27AS
+         7fZqFb2MZHErPOevyBkz7r0ZeeKXu3Iz/owNVZUub0SLmlZbdAMXfLmjXtOCURvBvb1C
+         822A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=NPmo1EMMYKTRQV62rU+uSTMdw572k3t/W1bgSA7MfnQ=;
+        b=nYRJPKrZ3k4ob+zUiYJP6opi819ieICt+VkPcC5Gf3Fj3H9b06W8Ax4j9CYIHqNk3n
+         /KsL4V3pqqPdu4NYqvacLc2M+BficRiph7f3p7Z5nOW7TO2fQftOaOQ3if1folgUYjKe
+         vXQTu30/ZFs5IDApua9RT1m0icot/LCn3D1qQYtpFbcj4/pPMnrqlkRgU1DnvOtlY8bn
+         6lxdHvOr5dPodi8gtFH1bZmc8R4kaFdTBob0m2XxpoRd+QiD4abpZwkfH1XlnHUMm4ie
+         Emn6FsdnBsn3gOIrn3kEI3jIEZutbq4xnMDpwdNGOzeHEdHpIqTDXfQFtHWuqhC6MhSs
+         Qvuw==
+X-Gm-Message-State: AOAM533YBucMR8eGbzm3K/TKtQ9PLVBAeBYdzUAHrfqBDXV7POliMM5P
+	4H7aQbbY3jvKzYeySe0aFhwjjlWzHgSaRcR0QIQ=
+X-Google-Smtp-Source: ABdhPJyeCW+oSCr6l3dsqMz5ecICO15DfVrczfGdwJWMc6vw2eCkuBDvulKYViHBpRyPNg0cKA+UmImI7AzJ5TRM/FQ=
+X-Received: by 2002:a37:bb82:: with SMTP id l124mr1860067qkf.119.1623381906270;
+ Thu, 10 Jun 2021 20:25:06 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+References: <20210106121440.84402-1-liezhi.yang@windriver.com> <f0c3e5e1-0baa-724f-9056-2a154d453e28@windriver.com>
+In-Reply-To: <f0c3e5e1-0baa-724f-9056-2a154d453e28@windriver.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 10 Jun 2021 20:24:40 -0700
+Message-ID: <CAMKF1so9_QYLytL+zUharedUbOs8tp=nvp5SLUP-ppsbFij-4w@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] nspr: Fix build with nativesdk-gcc from buildtools-extended-tarball
+To: "Yu, Mingli" <mingli.yu@windriver.com>
+Cc: Robert Yang <liezhi.yang@windriver.com>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Refresh the following patch:
-0001-Export-of-internal-Abseil-changes.patch
+can you check who is passing librt to it. It seems to be linking librt
+from host in failing case. I wonder when using -lrt how does it work?
+I guess it then links in nativesdk-glibc version but perhaps
+gcc -v in failing link cmdline can reveal some more.
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
----
- ...01-Export-of-internal-Abseil-changes.patch | 29 +++++--------------
- .../abseil-cpp/abseil-cpp_git.bb              |  4 +--
- 2 files changed, 10 insertions(+), 23 deletions(-)
-
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Export-of-internal-Abseil-changes.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Export-of-internal-Abseil-changes.patch
-index 52d4f42d52..680d0915eb 100644
---- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Export-of-internal-Abseil-changes.patch
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Export-of-internal-Abseil-changes.patch
-@@ -1,6 +1,6 @@
--From a9831f1cbf93fb18dd951453635f488037454ce9 Mon Sep 17 00:00:00 2001
--From: Abseil Team <absl-team@google.com>
--Date: Mon, 3 May 2021 07:37:39 -0700
-+From c9250af98f48e4aa734cab0e2f5ae1f780c05ad0 Mon Sep 17 00:00:00 2001
-+From: Zang Ruochen <zangrc.fnst@fujitsu.com>
-+Date: Fri, 11 Jun 2021 10:53:37 +0900
- Subject: [PATCH] Export of internal Abseil changes
- 
- --
-@@ -27,15 +27,16 @@ Cmake builds should only install pkg-config when explicitly requested.
- PiperOrigin-RevId: 371403419
- GitOrigin-RevId: cf88f9cf40eab54c06bca7f20795352ec23bb583
- Change-Id: I4360a18c638a4d901ff44ab1e0a9d8f321c302ea
-+
-+Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
- ---
-  CMake/AbseilHelpers.cmake                        | 3 ++-
-- absl/debugging/failure_signal_handler.cc         | 3 ++-
-  absl/strings/internal/str_format/arg.h           | 8 ++++++++
-  absl/strings/internal/str_format/convert_test.cc | 3 +++
-- 4 files changed, 15 insertions(+), 2 deletions(-)
-+ 3 files changed, 13 insertions(+), 1 deletion(-)
- 
- diff --git a/CMake/AbseilHelpers.cmake b/CMake/AbseilHelpers.cmake
--index 1f754392..1a80b5b4 100644
-+index 54fb8df3..a32b94d5 100644
- --- a/CMake/AbseilHelpers.cmake
- +++ b/CMake/AbseilHelpers.cmake
- @@ -141,7 +141,8 @@ function(absl_cc_library)
-@@ -48,20 +49,6 @@ index 1f754392..1a80b5b4 100644
-      if(NOT ABSL_CC_LIB_TESTONLY)
-        if(absl_VERSION)
-          set(PC_VERSION "${absl_VERSION}")
--diff --git a/absl/debugging/failure_signal_handler.cc b/absl/debugging/failure_signal_handler.cc
--index e458a795..689e5979 100644
----- a/absl/debugging/failure_signal_handler.cc
--+++ b/absl/debugging/failure_signal_handler.cc
--@@ -136,7 +136,8 @@ static bool SetupAlternateStackOnce() {
-- #else
--   const size_t page_mask = sysconf(_SC_PAGESIZE) - 1;
-- #endif
---  size_t stack_size = (std::max(SIGSTKSZ, 65536) + page_mask) & ~page_mask;
--+  size_t stack_size =
--+      (std::max<size_t>(SIGSTKSZ, 65536) + page_mask) & ~page_mask;
-- #if defined(ABSL_HAVE_ADDRESS_SANITIZER) || \
--     defined(ABSL_HAVE_MEMORY_SANITIZER) || defined(ABSL_HAVE_THREAD_SANITIZER)
--   // Account for sanitizer instrumentation requiring additional stack space.
- diff --git a/absl/strings/internal/str_format/arg.h b/absl/strings/internal/str_format/arg.h
- index 7040c866..3c91be70 100644
- --- a/absl/strings/internal/str_format/arg.h
-@@ -96,5 +83,5 @@ index 926283cf..91e03609 100644
-  
-  TEST_F(FormatConvertTest, NullString) {
- -- 
--2.31.1
-+2.25.1
- 
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-index 01dd9f550e..3f89df558b 100644
---- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-@@ -7,8 +7,8 @@ SECTION = "libs"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=df52c6edb7adc22e533b2bacc3bd3915"
- 
--PV = "20210324+git${SRCPV}"
--SRCREV = "e1d388e7e74803050423d035e4374131b9b57919"
-+PV = "20210324.2+git${SRCPV}"
-+SRCREV = "278e0a071885a22dcd2fd1b5576cc44757299343"
- BRANCH = "lts_2021_03_24"
- SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH}         \
-            file://0001-absl-always-use-asm-sgidefs.h.patch             \
--- 
-2.25.1
-
+On Thu, Jun 10, 2021 at 8:13 PM Yu, Mingli <mingli.yu@windriver.com> wrote:
+>
+> ping.
+>
+> Thanks,
+>
+> On 1/6/21 8:14 PM, Robert Yang wrote:
+> > Fixed when built with nativesdk-gcc from buildtools-extended-tarball:
+> > $ bitbake nspr-native
+> >
+> > gcc   abstract.o -Xlinker -L../../dist/lib -lplc4 -L../../dist/lib -lnspr4 -lpthread -o abstract
+> > /path/to/x86_64-wrlinuxsdk-linux/bin/ld:
+> > /lib/x86_64-linux-gnu/librt.so.1: undefined reference to `__clock_getcpuclockid@GLIBC_PRIVATE'
+> > /path/to/x86_64-wrlinuxsdk-linux/bin/ld:
+> > /lib/x86_64-linux-gnu/librt.so.1: undefined reference to `__clock_nanosleep@GLIBC_PRIVATE'
+> > /path/to/x86_64-wrlinuxsdk-linux/bin/ld:
+> > /lib/x86_64-linux-gnu/librt.so.1: undefined reference to `__clock_settime@GLIBC_PRIVATE'
+> > /path/to/x86_64-wrlinuxsdk-linux/bin/ld:
+> > /lib/x86_64-linux-gnu/librt.so.1: undefined reference to `__clock_getres@GLIBC_PRIVATE'
+> >
+> > Referred to:
+> > https://github.com/linux-test-project/ltp/issues/255
+> >
+> > There should be a bug hidden in nativesdk-gcc or other toolchains, but it's
+> > very had to figure it out. The quick workaround is using "-lpthread -lrt"
+> >
+> > Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> > ---
+> >   ...ts-Makefile.in-Add-lrt-to-EXTRA_LIBS.patch | 47 +++++++++++++++++++
+> >   meta-oe/recipes-support/nspr/nspr_4.29.bb     |  1 +
+> >   2 files changed, 48 insertions(+)
+> >   create mode 100644 meta-oe/recipes-support/nspr/nspr/0001-nspr-pr-tests-Makefile.in-Add-lrt-to-EXTRA_LIBS.patch
+> >
+> > diff --git a/meta-oe/recipes-support/nspr/nspr/0001-nspr-pr-tests-Makefile.in-Add-lrt-to-EXTRA_LIBS.patch b/meta-oe/recipes-support/nspr/nspr/0001-nspr-pr-tests-Makefile.in-Add-lrt-to-EXTRA_LIBS.patch
+> > new file mode 100644
+> > index 000000000..c71871c34
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-support/nspr/nspr/0001-nspr-pr-tests-Makefile.in-Add-lrt-to-EXTRA_LIBS.patch
+> > @@ -0,0 +1,47 @@
+> > +From 4441e9c15684623adb3d5cbd6c2f27c1f3d212ac Mon Sep 17 00:00:00 2001
+> > +From: Robert Yang <liezhi.yang@windriver.com>
+> > +Date: Tue, 29 Dec 2020 03:57:07 +0000
+> > +Subject: [PATCH] nspr/pr/tests/Makefile.in: Add -lrt to EXTRA_LIBS
+> > +
+> > +Fixed when built with nativesdk-gcc from buildtools-extended-tarball:
+> > +$ bitbake nspr-native
+> > +
+> > +gcc   abstract.o -Xlinker -L../../dist/lib -lplc4 -L../../dist/lib -lnspr4 -lpthread -o abstract
+> > +/path/to/x86_64-wrlinuxsdk-linux/bin/ld:
+> > +/lib/x86_64-linux-gnu/librt.so.1: undefined reference to `__clock_getcpuclockid@GLIBC_PRIVATE'
+> > +/path/to/x86_64-wrlinuxsdk-linux/bin/ld:
+> > +/lib/x86_64-linux-gnu/librt.so.1: undefined reference to `__clock_nanosleep@GLIBC_PRIVATE'
+> > +/path/to/x86_64-wrlinuxsdk-linux/bin/ld:
+> > +/lib/x86_64-linux-gnu/librt.so.1: undefined reference to `__clock_settime@GLIBC_PRIVATE'
+> > +/path/to/x86_64-wrlinuxsdk-linux/bin/ld:
+> > +/lib/x86_64-linux-gnu/librt.so.1: undefined reference to `__clock_getres@GLIBC_PRIVATE'
+> > +
+> > +Referred to:
+> > +https://github.com/linux-test-project/ltp/issues/255
+> > +
+> > +There should be a bug hidden in nativesdk-gcc or other toolchains, but it's
+> > +very had to figure it out. The quick workaround is using "-lpthread -lrt"
+> > +
+> > +Upstream-Status: Inappropriate [OE specific]
+> > +
+> > +Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> > +---
+> > + nspr/pr/tests/Makefile.in | 2 +-
+> > + 1 file changed, 1 insertion(+), 1 deletion(-)
+> > +
+> > +diff --git a/pr/tests/Makefile.in b/pr/tests/Makefile.in
+> > +index 2ccb992..45270e9 100644
+> > +--- a/pr/tests/Makefile.in
+> > ++++ b/pr/tests/Makefile.in
+> > +@@ -274,7 +274,7 @@ endif # SunOS
+> > + ifeq (,$(filter-out Linux GNU GNU_%,$(OS_ARCH)))
+> > +     LDOPTS += -Xlinker
+> > +     ifeq ($(USE_PTHREADS),1)
+> > +-        EXTRA_LIBS = -lpthread
+> > ++        EXTRA_LIBS = -lpthread -lrt
+> > +     endif
+> > + endif
+> > +
+> > +--
+> > +2.29.2
+> > +
+> > diff --git a/meta-oe/recipes-support/nspr/nspr_4.29.bb b/meta-oe/recipes-support/nspr/nspr_4.29.bb
+> > index 6307c159e..fa05bc022 100644
+> > --- a/meta-oe/recipes-support/nspr/nspr_4.29.bb
+> > +++ b/meta-oe/recipes-support/nspr/nspr_4.29.bb
+> > @@ -13,6 +13,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/nspr/releases/v${PV}/src/nspr-${PV}.tar.gz
+> >              file://0001-md-Fix-build-with-musl.patch \
+> >              file://Makefile.in-remove-_BUILD_STRING-and-_BUILD_TIME.patch \
+> >              file://nspr.pc.in \
+> > +           file://0001-nspr-pr-tests-Makefile.in-Add-lrt-to-EXTRA_LIBS.patch \
+> >   "
+> >
+> >   CACHED_CONFIGUREVARS_append_libc-musl = " CFLAGS='${CFLAGS} -D_PR_POLL_AVAILABLE \
+> >
+> >
+> >
+> > 
+> >
