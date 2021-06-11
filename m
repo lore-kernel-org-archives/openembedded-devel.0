@@ -1,162 +1,88 @@
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web09.4194.1623385647818265686
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.66])
+ by mx.groups.io with SMTP id smtpd.web08.4762.1623389374911193697
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Jun 2021 21:27:27 -0700
+ Thu, 10 Jun 2021 22:29:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=J5aRrXOi;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id x10so2192410plg.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jun 2021 21:27:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:references:from:message-id:date:user-agent:mime-version
-         :in-reply-to:content-transfer-encoding:content-language;
-        bh=R6PXwteKFRda2WUkxRGi5n2LlikSaFifG40adlQWNX8=;
-        b=J5aRrXOikNn5ONnwuXwFEwdqdDPDHP/O4FY48gINQoquDzNjXaAf6DGzwu/OxK9NGc
-         +zW2RybH6YeCtVnFIJ26yPqr+YtIac/ZphaX1WsNokY7kzUi3nCVqAZswu/tla174PMX
-         KxT7trTePgcMig636+/0KcnwLoMs8hE2ZVjO4vXeKZddncCLVNsqAomFHRAqtK2H2Dpn
-         y+3Gxsh2O54E8HpGzDCxwtBPIJfv8sro6DKqDd2U52LqFFNtQP3vpYjYbtUYBsMHcIlJ
-         kHv2i78iwyoUzDwlLfaWx/xdFddGjebxXwPZXV77an8PmnvL6K/wYbNXOx6bmBCk7rpv
-         pneA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=R6PXwteKFRda2WUkxRGi5n2LlikSaFifG40adlQWNX8=;
-        b=FkX/+0KCgKzmYz5S5CROxbXpGA5fiY0jQo3r9M09j/gZnJcFQIbMPpzELcLljo7TcJ
-         ugBk6K3aOPfAOYzNliZqWZm/4Ew/mMnlW++dcaz1bUS+HzbNa76ITqL8HQLyH2zEFaVG
-         hhpGq27mneT8x8hpsWMbIqUYnvQHEBwKZTQMkDbJ5dNkcNBf6/eFfRIhTBjnwmMjUKpw
-         2kyzg2bxoO1tvBGcNyCyABcVHx3UP1Yg9DIQabOszu1vigFEIjkj+cTPiZ0dIhTikRtI
-         BpTNpr/pLE0LPFCd8kU/C0n2mT1lhp9oFoVDKxNnm5bk8luLFfS5+DZXCumKj8u3jUUn
-         Gk8Q==
-X-Gm-Message-State: AOAM532mZjBhp3c8xzHnvW7NZw/n/M9F2K+csjnY+IwwBPZe7I3fv/Xh
-	JhQPFBV6Q85AW5O1YB2ApqU=
-X-Google-Smtp-Source: ABdhPJzh9nYzoYf9k0Y8lpTFT+SOIC6d4SPM53H4uKyBhFRRwTGmCkS6RfO306R2LKFQome1Lgf4Ow==
-X-Received: by 2002:a17:902:b482:b029:114:7531:a52e with SMTP id y2-20020a170902b482b02901147531a52emr2117345plr.70.1623385647099;
-        Thu, 10 Jun 2021 21:27:27 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0:dd6e:8cde:9267:da1? ([2601:202:4180:a5c0:dd6e:8cde:9267:da1])
-        by smtp.gmail.com with ESMTPSA id b21sm1191124pgj.74.2021.06.10.21.27.26
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 10 Jun 2021 21:27:26 -0700 (PDT)
-Subject: Re: [oe] dunfell merge request June 2
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
- Khem Raj <raj.khem@gmail.com>
-References: <1684CA9392B80A90.9760@lists.openembedded.org>
-From: "Armin Kuster" <akuster808@gmail.com>
-Message-ID: <2bb803e7-baec-2d98-b62c-f6a0173d970a@gmail.com>
-Date: Thu, 10 Jun 2021 21:27:25 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=bUrs/gT7;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.66, mailfrom: zangrc.fnst@fujitsu.com)
+Return-Path: <zangrc.fnst@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1623389368; i=@fujitsu.com;
+	bh=3oO3U4JlLjwesD4HlUIgCb6RxAAIdzhlssSaqeQuEq0=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=bUrs/gT706fZ9Rx3XUCQc/WGUXeqDHV8iftfNdnLx1qsAZp+JbDNIyqDd9uRd13lu
+	 TSgl8+c4QNqEW0Y6S58WfB7g+6A32TsRTLI4bVE7Tzy240iRWdDZChsibjls0+Rbwu
+	 q8oadZCSO/bMA+fj1uheFfoq92rLGOidb3hsRj3NauYLp4ESF8k8oluS5QZeHgcZlz
+	 TB/HpW2NuNdMpSvMaMq5SsTjY05MZCrSzksS3M7VM5I0Jmqgl62I3OTHnYzM1QyYf+
+	 +13LGQMrOYvbyO1fBdrkFNYbA0rFqvjYnXfPW/NNhLdv8GOb6DQoh6PUA1Q9UzBlXt
+	 8sJSfz6edo7sQ==
+Received: from [100.112.199.60] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-b.eu-west-1.aws.symcld.net id 7C/C3-25406-7B4F2C06; Fri, 11 Jun 2021 05:29:27 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+EI0d305VC
+  Cwf3JxhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bn7iOsBTM5Ko5O7GdsYDzK3sXIxSEkMJtJ
+  ontlDzOEc4JRYmbXRCCHk4NNQEei40U3C4gtIqAvsXT2HrC4sIC/xOu5R8HiLAKqEi2P5rOC2
+  LwC7hLX555kA7ElBBQkpjx8zwwRF5Q4OfMJWD2zgITEwRcvmCFqFCW27zzDAmFXSMyYsY1tAi
+  PPLCQts5C0LGBkWsVokVSUmZ5RkpuYmaNraGCga2hopGtoaa5raGyul1ilm6SXWqpbnlpcomu
+  ol1herFdcmZuck6KXl1qyiREYSCkFRzt3MP569UHvEKMkB5OSKO+Uu4cShPiS8lMqMxKLM+KL
+  SnNSiw8xynBwKEnwHnkPlBMsSk1PrUjLzAEGNUxagoNHSYQ37zNQmre4IDG3ODMdInWKUVFKn
+  PfTJ6CEAEgiozQPrg0WSZcYZaWEeRkZGBiEeApSi3IzS1DlXzGKczAqCfOuBpnCk5lXAjf9Fd
+  BiJqDFzBpgi0sSEVJSDUz8MyWN//6Z39CYv1tjKfuLb2v52aZnPlf6sXjpVN0eX/eCJWsP32E
+  597n1subz6dkOYgpF3wIP1N9coFDx6abXsrwjW2aoJNSesdi9z5dZUMfwWv7FzNLijdfvZH6w
+  LVk5/5DQ23STBM5pLrHT1px25O6Ot5ves8ztvdBdlf0S9eVzdV3z7bxktpjUlkfN+9jr7PyoY
+  vvri6fUN8jdbbPyU2f9tOaNksWfRT85NJoltxQc0zl7VFijUjrN4/HjFd6qSbqv0toNfvpUfI
+  1j79pT5XsvJu35Exvein9nRbxfl86rlvf3ila91+91RXhDzLslftvlryklSxdIrN1dmMkmyio
+  0bYW26rO52Q8Or1ZiKc5INNRiLipOBABs4FnCHwMAAA==
+X-Env-Sender: zangrc.fnst@fujitsu.com
+X-Msg-Ref: server-5.tower-287.messagelabs.com!1623389356!285435!1
+X-Originating-IP: [62.60.8.84]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.75.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 5471 invoked from network); 11 Jun 2021 05:29:20 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-5.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 11 Jun 2021 05:29:20 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15B5T9pv021738
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jun 2021 06:29:16 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Fri, 11 Jun 2021 06:29:08 +0100
+From: "zangrc" <zangrc.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-oe] [PATCH] ctags: upgrade 5.9.20210502.0 -> 5.9.20210606.0
+Date: Fri, 11 Jun 2021 13:29:00 +0800
+Message-ID: <1623389340-48664-1-git-send-email-zangrc.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-In-Reply-To: <1684CA9392B80A90.9760@lists.openembedded.org>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Type: text/plain
 
+Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+---
+ .../ctags/{ctags_5.9.20210502.0.bb => ctags_5.9.20210606.0.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/ctags/{ctags_5.9.20210502.0.bb => ctags_5.9.20210606.0.bb} (95%)
 
-
-On 6/2/21 7:34 AM, Armin Kuster via lists.openembedded.org wrote:
-> The following changes since commit 11eae114522a6befa06c7f4021a83bc016133543:
->
->   linuxptp: Fix cross build (2021-05-14 10:03:51 -0700)
->
-> are available in the Git repository at:
->
->   https://git.openembedded.org/meta-openembedded dunfell-next
->
-> for you to fetch changes up to c38d2a74f762a792046f3d3c377827b08aade513:
-
-Let me know if there are any issues with this merge request. I may have
-missed a response.
-
--armin
->
->   dnsmasq: Add fixes for CVEs reported for dnsmasq (2021-05-29 11:41:45
-> -0700)
->
-> ----------------------------------------------------------------
-> Alexander Vickberg (1):
->       hostapd: fix building with CONFIG_TLS=internal
->
-> Mikko Rapeli (1):
->       ebtables: use bitbake optimization levels
->
-> Sana Kazi (1):
->       dnsmasq: Add fixes for CVEs reported for dnsmasq
->
-> akash.hadke (1):
->       opencv: Add fix for CVE-2019-5063 and CVE-2019-5064
->
-> wangmy (8):
->       exiv2: Fix CVE-2021-29457
->       exiv2: Fix CVE-2021-29458
->       exiv2: Fix CVE-2021-29463
->       exiv2: Fix CVE-2021-3482
->       exiv2: Fix CVE-2021-29464
->       exiv2: Fix CVE-2021-29470
->       exiv2: Fix CVE-2021-29473
->       libsdl: Fix CVE-2019-13616
->
->  .../ebtables/ebtables-2.0.10-4/ebtables_optimizations.patch     |  19 +
->  meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb    |   1 +
->  meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb         |   7 +-
->  .../recipes-support/dnsmasq/files/CVE-2020-25681.patch          | 370
-> ++++++++++++++++++
->  .../recipes-support/dnsmasq/files/CVE-2020-25684.patch          |  98 +++++
->  .../recipes-support/dnsmasq/files/CVE-2020-25685-1.patch        | 587
-> ++++++++++++++++++++++++++++
->  .../recipes-support/dnsmasq/files/CVE-2020-25685-2.patch        | 175
-> +++++++++
->  .../recipes-support/dnsmasq/files/CVE-2020-25686-1.patch        | 332
-> ++++++++++++++++
->  .../recipes-support/dnsmasq/files/CVE-2020-25686-2.patch        |  63 +++
->  .../hostapd/hostapd/0001-Prepare-for-CVE-2021-30004.patch.patch |  45 +++
->  meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb             |   1 +
->  .../recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-13616.patch  |  27 ++
->  meta-oe/recipes-graphics/libsdl/libsdl_1.2.15.bb                |   1 +
->  meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29457.patch        |  26 ++
->  meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29458.patch        |  37 ++
->  meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29463.patch        | 120
-> ++++++
->  meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29464.patch        |  72 ++++
->  meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29470.patch        |  32 ++
->  meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29473.patch        |  21 +
->  meta-oe/recipes-support/exiv2/exiv2/CVE-2021-3482.patch         |  54 +++
->  meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb                   |   9 +-
->  .../opencv/opencv/CVE-2019-5063_and_2019-5064.patch             |  78 ++++
->  meta-oe/recipes-support/opencv/opencv_4.1.0.bb                  |   1 +
->  23 files changed, 2174 insertions(+), 2 deletions(-)
->  create mode 100644
-> meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables_optimizations.patch
->  create mode 100644
-> meta-networking/recipes-support/dnsmasq/files/CVE-2020-25681.patch
->  create mode 100644
-> meta-networking/recipes-support/dnsmasq/files/CVE-2020-25684.patch
->  create mode 100644
-> meta-networking/recipes-support/dnsmasq/files/CVE-2020-25685-1.patch
->  create mode 100644
-> meta-networking/recipes-support/dnsmasq/files/CVE-2020-25685-2.patch
->  create mode 100644
-> meta-networking/recipes-support/dnsmasq/files/CVE-2020-25686-1.patch
->  create mode 100644
-> meta-networking/recipes-support/dnsmasq/files/CVE-2020-25686-2.patch
->  create mode 100644
-> meta-oe/recipes-connectivity/hostapd/hostapd/0001-Prepare-for-CVE-2021-30004.patch.patch
->  create mode 100644
-> meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-13616.patch
->  create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29457.patch
->  create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29458.patch
->  create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29463.patch
->  create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29464.patch
->  create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29470.patch
->  create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29473.patch
->  create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2021-3482.patch
->  create mode 100644
-> meta-oe/recipes-support/opencv/opencv/CVE-2019-5063_and_2019-5064.patch
->
->
-> 
->
+diff --git a/meta-oe/recipes-devtools/ctags/ctags_5.9.20210502.0.bb b/meta-oe/recipes-devtools/ctags/ctags_5.9.20210606.0.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/ctags/ctags_5.9.20210502.0.bb
+rename to meta-oe/recipes-devtools/ctags/ctags_5.9.20210606.0.bb
+index 273d6e5730..471b8edce0 100644
+--- a/meta-oe/recipes-devtools/ctags/ctags_5.9.20210502.0.bb
++++ b/meta-oe/recipes-devtools/ctags/ctags_5.9.20210606.0.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+ 
+ inherit autotools-brokensep pkgconfig manpages
+ 
+-SRCREV = "6df08b82d4845d1b9420d9268f24d5db16ee4480"
++SRCREV = "92b49e2ef6961d6b39890f430a56478ec9e5e82f"
+ SRC_URI = "git://github.com/universal-ctags/ctags"
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.25.1
 
