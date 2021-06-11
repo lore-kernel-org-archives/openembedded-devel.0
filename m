@@ -1,60 +1,91 @@
-Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
- by mx.groups.io with SMTP id smtpd.web11.5722.1623400411313155014
+Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
+ by mx.groups.io with SMTP id smtpd.web08.5906.1623400481255983426
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Jun 2021 01:33:31 -0700
+ Fri, 11 Jun 2021 01:34:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=neutral (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: sekine.shigeki@fujitsu.com)
-IronPort-SDR: looApbPBeTZTf5EXJ+AL/peMqhXAx54Lh6iOHzvmgZoGMSE4vxyrgKebzMnVt0WSLDdOd+nmxI
- sbv6WvN7FICg28TLcwexA+YowNqDEZCULBdpBTUpU1c5EEn1BlPEAekcrTBKGrXJ0kDa54vqcP
- OlUOT6N3O0kuK5IEnOVP8OJ6VeDjwI3BASwI0zp6XxUW0TAXbqDnkB7XNZpB1SZu2NXvRy4OXl
- xzDAb5QgbXsb+Hlj63MIk5ZnpIV8QZp3FO3Ug3KYKdOQTHSawgIzAaEB1Qn67KSVzhwZeaavwo
- 0xA=
-X-IronPort-AV: E=McAfee;i="6200,9189,10011"; a="12794699"
-X-IronPort-AV: E=Sophos;i="5.83,265,1616425200"; 
-   d="scan'208";a="12794699"
-Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
-  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP; 11 Jun 2021 17:33:27 +0900
-Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
-	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 12F12A80C6
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jun 2021 17:33:26 +0900 (JST)
-Received: from yto-om4.fujitsu.com (yto-om4.o.css.fujitsu.com [10.128.89.165])
-	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 3FC28583E4B
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jun 2021 17:33:25 +0900 (JST)
-Received: from 7d162709cefb.openstacklocal (bakeccha.fct.css.fujitsu.com [10.126.195.136])
-	by yto-om4.fujitsu.com (Postfix) with ESMTP id 2DCB0400D506B
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jun 2021 17:33:25 +0900 (JST)
-From: sekine.shigeki@fujitsu.com
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] add CVE-2011-2411 to allowlist
-Date: Fri, 11 Jun 2021 17:32:34 +0900
-Message-Id: <20210611083234.2399-1-sekine.shigeki@fujitsu.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=vETjm69B;
+ spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: andrea.adami@gmail.com)
+Received: by mail-ej1-f49.google.com with SMTP id ci15so3333344ejc.10
+        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jun 2021 01:34:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=4qTbmRkmRcqffRm9+EynmYxI0zhOC5whS0wAvPobN4M=;
+        b=vETjm69B/qsE/B0iFWXCYf8NPBzLnlbRF7pPsjPeqd0d2CdecKWZcGVV/39h15BBit
+         4KvuzVYCO3px4i8dloojE3bj+uCjjeXVXQhso4RQg4GTJJmoqLLSmRyovhKi6gCFs5mb
+         TSkwGq0ihV6ftmehiX+JU1bX4nORwfWwYfhMyCGQw/9esMb7gps9g9lKyZcq2dmdmWg2
+         32RBLFzU/IchUqi+3QeM1tXHstDKE/5D7oKtjsNgRdBrEtqygGqzVjqn7RYXkoVGgOSt
+         WaZgp/3Hj33fJP8KBlqM+zZY+8wZMKbN7/bBuma07WqKTOUyHBM9Qk0+s8o0KhEtGU7C
+         I1Ag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=4qTbmRkmRcqffRm9+EynmYxI0zhOC5whS0wAvPobN4M=;
+        b=JTgEtcBNqJFBzGyfxrT3gC1WZjmGesrN9TKc7C/xnaL2ujcIcvX5rHg9SUVL0dckHB
+         ViuD7suGV1sjwtr9yGrjoJ7uR/32CYXUV9md75bqWjDmYYbsxqQA4TpwOtswcpoPRXqJ
+         xe4/i1xqQks/nuO29waSIEOqSN73Gn+Wb1r87vD8CzZIg18b6oTJJXRR1uOnlgldm8/R
+         U/GG185pCPOx15wwx6Arni5bOUb2g/fL5/Ls2LTQ+WmGoNDcvEAmxAgtXEg9YjwLAVh7
+         iFaFACRy26cKR6vU1MNQFEYPwexZfjqMZ81mEFhrxnPzaeG7JD+Xcw0BV2aIMajCdsM+
+         Al8Q==
+X-Gm-Message-State: AOAM531rer1OmwhWGmVl3tw7PhSYr0CkMSJnCEkGHB/8ydNi734nyHN1
+	NKbjl1bkW6f0NS4EmXUvOeMRup8VR8jImIo2N6k=
+X-Google-Smtp-Source: ABdhPJzaNYFDML5eB8+L78R5SxLz+5fuOpU2PoKTABxbtqy5KvevfrgJwT6cy5R1NnoNYb1JdK6fCjLHG91Z4XdyB8I=
+X-Received: by 2002:a17:906:4f10:: with SMTP id t16mr2526562eju.337.1623400479716;
+ Fri, 11 Jun 2021 01:34:39 -0700 (PDT)
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-Content-Transfer-Encoding: 8bit
+References: <20210611024246.2108884-1-raj.khem@gmail.com>
+In-Reply-To: <20210611024246.2108884-1-raj.khem@gmail.com>
+From: "Andrea Adami" <andrea.adami@gmail.com>
+Date: Fri, 11 Jun 2021 10:34:28 +0200
+Message-ID: <CAAQYJAtOrLFX1WQ+_jnz+=VSVnvOZEd7WnB4=zhWR+6PPv9hAQ@mail.gmail.com>
+Subject: Re: [meta-initramfs][PATCH] klibc: Add clang's -rtlib to known options
+To: Khem Raj <raj.khem@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-This affects only on HP NonStop Server, so add it to allowlist.
+Thanks, I'll plan to do more testing with clang/llvm.
 
-Signed-off-by: Sekine Shigeki <sekine.shigeki@fujitsu.com>
----
- meta-networking/recipes-connectivity/samba/samba_4.14.4.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+BTW there is now klibc 2.0.9.
+Cheers
+Andrea
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.14.4.bb b/meta-networking/recipes-connectivity/samba/samba_4.14.4.bb
-index 2e0bdceab..0833a9146 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.14.4.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.14.4.bb
-@@ -40,6 +40,10 @@ SRC_URI[sha256sum] = "89af092a0b00f5354ed287f0aa37b8c2cf9ba2ce67ea6464192e2c1852
- UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.14(\.\d+)+).tar.gz"
- 
- inherit systemd waf-samba cpan-base perlnative update-rc.d
-+
-+# CVE-2011-2411 is valnerble only on HP NonStop Servers.
-+CVE_CHECK_WHITELIST += "CVE-2011-2411" 
-+
- # remove default added RDEPENDS on perl
- RDEPENDS_${PN}_remove = "perl"
- 
--- 
-2.25.1
-
+On Fri, Jun 11, 2021 at 4:42 AM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> This helps in ensuring that we always link klibc apps with libgcc as
+> compiler-rt does not work for klibc due to missing libssp functions e.g.
+> __stack_chk_guard and __stack_chk_guard which it expects in libc
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Cc: Andrea Adami <andrea.adami@gmail.com>
+> ---
+>  .../klibc/files/klcc-cross-accept-clang-options.patch        | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch b/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch
+> index 56905a5159..431c75e3af 100644
+> --- a/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch
+> +++ b/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch
+> @@ -5,7 +5,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>
+>  --- a/klcc/klcc.in
+>  +++ b/klcc/klcc.in
+> -@@ -207,6 +207,24 @@ while ( defined($a = shift(@ARGV)) ) {
+> +@@ -207,6 +207,27 @@ while ( defined($a = shift(@ARGV)) ) {
+>       } elsif ( $a =~ /^--([sysroot=])(.*)$/ ) {
+>         # Override gcc encoded sysroot
+>         push(@ccopt, $a);
+> @@ -26,6 +26,9 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>  +      push(@ccopt, $a);
+>  +    } elsif ( $a =~ '--unwindlib=.*' ) {
+>  +      # Allow clang options
+> ++      push(@ccopt, $a);
+> ++    } elsif ( $a =~ '-rtlib=.*' ) {
+> ++      # Allow clang options
+>  +      push(@ccopt, $a);
+>       } else {
+>         die "$0: unknown option: $a\n";
+> --
+> 2.32.0
+>
