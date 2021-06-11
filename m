@@ -1,88 +1,156 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.5])
- by mx.groups.io with SMTP id smtpd.web10.5885.1623402129874325348
+Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com [209.85.222.179])
+ by mx.groups.io with SMTP id smtpd.web11.5920.1623402260178574925
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Jun 2021 02:02:10 -0700
+ Fri, 11 Jun 2021 02:04:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=g/tAf1Dk;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.5, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1623402128; i=@fujitsu.com;
-	bh=spKj8TOMGpMEDeBFQ1UdU5Yzoe2YnvuBY86rrqWsNgY=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=g/tAf1Dk2FdgTVlWNwiUyzaQogYkZLgq8b4XboPpK6Ph8c+t8956xdJPW9ygMfFEn
-	 SfJ2MyEb64flCQXo14QOUE2ZASqORfBFrASKG5h4yccrREp3ChBJFyJReeizznZXm0
-	 hWtop9Q/eMAVzOKsFrTSreiZNduBJNytqU1I0O8LyJ6Adv0bF4pfWw3ovVwJ+LuHrW
-	 LpnW2BtT7vNCFJFDBBg+zr+P2KETMroCTZWKgWimXMEbQ4Vt8lv3kkM9MfVraEXv0P
-	 MQLHHaTg/SdXvtkmAenLoFwUeKAHK6lWK3JGvjPW1z7BDrIIZILX2QxD/qyopsIkGZ
-	 Su58EhJ2JRQYg==
-Received: from [100.112.192.137] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-5.bemta.az-a.eu-west-1.aws.symcld.net id E7/21-34775-F8623C06; Fri, 11 Jun 2021 09:02:07 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+EI0e1XO5x
-  g8PSTnMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnH3QB9zwSX2ij9PExoYP7N1MXJxCAnMZpK4
-  9/wKK4RzglFi25tupi5GTg42AR2JjhfdLCC2iIC+xNLZe5hBbGEBO4l3x5+B1bAIqEp8ujIBr
-  IZXwF1i//yljCC2hICCxJSH75kh4oISJ2c+AathFpCQOPjiBTNEjaLE9p1nWCDsCokZM7axTW
-  DkmYWkZRaSlgWMTKsYLZKKMtMzSnITM3N0DQ0MdA0NjXQNLY11jYxN9BKrdBP1Ukt1y1OLS3Q
-  N9RLLi/WKK3OTc1L08lJLNjECwyil4OCrHYwr33zQO8QoycGkJMo7ke1wghBfUn5KZUZicUZ8
-  UWlOavEhRhkODiUJ3luqQDnBotT01Iq0zBxgSMOkJTh4lER4J6sApXmLCxJzizPTIVKnGBWlx
-  HmFQPoEQBIZpXlwbbA4usQoKyXMy8jAwCDEU5BalJtZgir/ilGcg1FJmFcTZApPZl4J3PRXQI
-  uZgBYzaxwCWVySiJCSamDK9A6R3N76f8KVpYY3HXY+1bqyptnh9tnrCyQZ+icwLj2xNmFmwIS
-  /Ow80l1bJVVwrO1r5aeHBe+5iky/lu57pP3pTfaX2XOEP7mHmhV9Lk1inTGJPPrFBNED3plIY
-  2zx1NcbjUlfNXE/mRC/15VXsMXt/2mtJwapF2/S2xWW/nJ961fnOzlfOUjVzZm7kP7Hl56PY0
-  MKbeocOKac/jRNhZtrN0LyD4f7ryHu7F+3lf6ak42/+/YlWnpal1IVa8Wbb7CO/Pk2/PJcp3/
-  3Ys17Z/DWHf18scU8y7mSJnqRUrKGax/TTvuV84I6thV8Vav/s10/aqunSvY73DMvBq1zWnKe
-  /Tq8uesPybvv8NWrMSizFGYmGWsxFxYkA3cmvJx4DAAA=
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-15.tower-271.messagelabs.com!1623402127!20610!1
-X-Originating-IP: [62.60.8.84]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.75.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 2791 invoked from network); 11 Jun 2021 09:02:07 -0000
-Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-15.tower-271.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 11 Jun 2021 09:02:07 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15B921gs005608
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jun 2021 10:02:07 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 11 Jun 2021 10:01:59 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] toybox: upgrade 0.8.4 -> 0.8.5
-Date: Fri, 11 Jun 2021 17:01:51 +0800
-Message-ID: <1623402111-51803-1-git-send-email-zangrc.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=gC62d2R4;
+ spf=pass (domain: gmail.com, ip: 209.85.222.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f179.google.com with SMTP id k11so28600998qkk.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jun 2021 02:04:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=bjy28MIcPdR4uOqstUidCMpj9lW3biHTYMX201He9sE=;
+        b=gC62d2R4k6EiA77WEDiOM0xbTeF5gk4Mh5AtQ0GRIgM0In9oxYvo/QrypU7LCyAij4
+         RKHpsgDwPPgYaVTgi9VjMUjaK213bjIAMOy7UG/kL8g9xZ044hq+SF1dkmHtyYhUxFUq
+         Hndo32YPRDkPAkw2nHeYO1uiTsr/aXfYjhN1jbLPhhW2CHiiAt2L4FfbKP5/WMme2CE9
+         jfy1t2dG2kdZizherepDIViRCBmJ9AXDCHRw2LI6aKhhqxmMOPrk3VSwP3r9OvRfM2y5
+         MPdqw1jyp00o5dGcaryjOZVG7dh5pOLuXZYGmH2/SDGDoTdl6vjrk9e4Pso2ZvOQbURd
+         RNwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=bjy28MIcPdR4uOqstUidCMpj9lW3biHTYMX201He9sE=;
+        b=A+xa+ozyT3wLHgfEiajoCqzIgjc97jYLwaQR6jq7EM7KYNuWkY8i52A+zgH4bjB1WI
+         8g/UcaSvMrWf3/vtbMS0sxX0izLyAx2VU2Gvym314Vqk2/kpXVL7HEWu9G7MakV9qdB7
+         mQurqEVZZjv3QCBNWA42sH0DtRN4wbmmReiunIAowqHKve0JjzDiawQ8XSG6S84q/r1u
+         h8sSEjETSO2TOeMf80Bidevr+E5L2Z9p0i0gK9iNB+LWJjuCyZocsCwVewe7JN4rOBa7
+         Ior7IlfQRzPzvMm6iQTBkGIZNREY7QoXkbSNiUFxsFSFdn5kR25v1fruYmbDjZX4VnsU
+         gQaA==
+X-Gm-Message-State: AOAM530Bl9dv3HJq6vAyaZDnzqslo/YG+x8cQZnm97N/TNjp/mmGnE5a
+	v6PxCsIuvyWof5qgnArDKJuG7qiL3WVfMyIXZjI=
+X-Google-Smtp-Source: ABdhPJzeMjcOHNDXuLykVFQTdKQAUV6LF8AURPufXkeF383b94SceCqkCXPGessTA3Pw+MFopgqRO+tKDNCd8VxPGdY=
+X-Received: by 2002:a37:855:: with SMTP id 82mr2807334qki.25.1623402259218;
+ Fri, 11 Jun 2021 02:04:19 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+References: <1684CA9392B80A90.9760@lists.openembedded.org> <2bb803e7-baec-2d98-b62c-f6a0173d970a@gmail.com>
+In-Reply-To: <2bb803e7-baec-2d98-b62c-f6a0173d970a@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 11 Jun 2021 02:03:51 -0700
+Message-ID: <CAMKF1spYSt4M=NemeQuB0bv9eV75EZ4tt-Eh0dJe-AmSZVnk-A@mail.gmail.com>
+Subject: Re: [oe] dunfell merge request June 2
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
----
- .../recipes-core/toybox/{toybox_0.8.4.bb => toybox_0.8.5.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-core/toybox/{toybox_0.8.4.bb => toybox_0.8.5.bb} (97%)
+It should be upstream now sorry for delay,
 
-diff --git a/meta-oe/recipes-core/toybox/toybox_0.8.4.bb b/meta-oe/recipes-core/toybox/toybox_0.8.5.bb
-similarity index 97%
-rename from meta-oe/recipes-core/toybox/toybox_0.8.4.bb
-rename to meta-oe/recipes-core/toybox/toybox_0.8.5.bb
-index cc98b9ec07..90a0ad6c73 100644
---- a/meta-oe/recipes-core/toybox/toybox_0.8.4.bb
-+++ b/meta-oe/recipes-core/toybox/toybox_0.8.5.bb
-@@ -9,7 +9,7 @@ inherit cml1 update-alternatives
- 
- SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
-            "
--SRC_URI[sha256sum] = "cb2a565a8d30015d08d73628795dca51a85b99b149aeabbbecd9e8dbdbd8fddc"
-+SRC_URI[sha256sum] = "bfd230c187726347f7e31a1fc5841705871dfe4f3cbc6628f512b54e57360949"
- 
- SECTION = "base"
- 
--- 
-2.25.1
-
+On Thu, Jun 10, 2021 at 9:27 PM akuster808 <akuster808@gmail.com> wrote:
+>
+>
+>
+> On 6/2/21 7:34 AM, Armin Kuster via lists.openembedded.org wrote:
+> > The following changes since commit 11eae114522a6befa06c7f4021a83bc016133543:
+> >
+> >   linuxptp: Fix cross build (2021-05-14 10:03:51 -0700)
+> >
+> > are available in the Git repository at:
+> >
+> >   https://git.openembedded.org/meta-openembedded dunfell-next
+> >
+> > for you to fetch changes up to c38d2a74f762a792046f3d3c377827b08aade513:
+>
+> Let me know if there are any issues with this merge request. I may have
+> missed a response.
+>
+> -armin
+> >
+> >   dnsmasq: Add fixes for CVEs reported for dnsmasq (2021-05-29 11:41:45
+> > -0700)
+> >
+> > ----------------------------------------------------------------
+> > Alexander Vickberg (1):
+> >       hostapd: fix building with CONFIG_TLS=internal
+> >
+> > Mikko Rapeli (1):
+> >       ebtables: use bitbake optimization levels
+> >
+> > Sana Kazi (1):
+> >       dnsmasq: Add fixes for CVEs reported for dnsmasq
+> >
+> > akash.hadke (1):
+> >       opencv: Add fix for CVE-2019-5063 and CVE-2019-5064
+> >
+> > wangmy (8):
+> >       exiv2: Fix CVE-2021-29457
+> >       exiv2: Fix CVE-2021-29458
+> >       exiv2: Fix CVE-2021-29463
+> >       exiv2: Fix CVE-2021-3482
+> >       exiv2: Fix CVE-2021-29464
+> >       exiv2: Fix CVE-2021-29470
+> >       exiv2: Fix CVE-2021-29473
+> >       libsdl: Fix CVE-2019-13616
+> >
+> >  .../ebtables/ebtables-2.0.10-4/ebtables_optimizations.patch     |  19 +
+> >  meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb    |   1 +
+> >  meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb         |   7 +-
+> >  .../recipes-support/dnsmasq/files/CVE-2020-25681.patch          | 370
+> > ++++++++++++++++++
+> >  .../recipes-support/dnsmasq/files/CVE-2020-25684.patch          |  98 +++++
+> >  .../recipes-support/dnsmasq/files/CVE-2020-25685-1.patch        | 587
+> > ++++++++++++++++++++++++++++
+> >  .../recipes-support/dnsmasq/files/CVE-2020-25685-2.patch        | 175
+> > +++++++++
+> >  .../recipes-support/dnsmasq/files/CVE-2020-25686-1.patch        | 332
+> > ++++++++++++++++
+> >  .../recipes-support/dnsmasq/files/CVE-2020-25686-2.patch        |  63 +++
+> >  .../hostapd/hostapd/0001-Prepare-for-CVE-2021-30004.patch.patch |  45 +++
+> >  meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb             |   1 +
+> >  .../recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-13616.patch  |  27 ++
+> >  meta-oe/recipes-graphics/libsdl/libsdl_1.2.15.bb                |   1 +
+> >  meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29457.patch        |  26 ++
+> >  meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29458.patch        |  37 ++
+> >  meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29463.patch        | 120
+> > ++++++
+> >  meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29464.patch        |  72 ++++
+> >  meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29470.patch        |  32 ++
+> >  meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29473.patch        |  21 +
+> >  meta-oe/recipes-support/exiv2/exiv2/CVE-2021-3482.patch         |  54 +++
+> >  meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb                   |   9 +-
+> >  .../opencv/opencv/CVE-2019-5063_and_2019-5064.patch             |  78 ++++
+> >  meta-oe/recipes-support/opencv/opencv_4.1.0.bb                  |   1 +
+> >  23 files changed, 2174 insertions(+), 2 deletions(-)
+> >  create mode 100644
+> > meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables_optimizations.patch
+> >  create mode 100644
+> > meta-networking/recipes-support/dnsmasq/files/CVE-2020-25681.patch
+> >  create mode 100644
+> > meta-networking/recipes-support/dnsmasq/files/CVE-2020-25684.patch
+> >  create mode 100644
+> > meta-networking/recipes-support/dnsmasq/files/CVE-2020-25685-1.patch
+> >  create mode 100644
+> > meta-networking/recipes-support/dnsmasq/files/CVE-2020-25685-2.patch
+> >  create mode 100644
+> > meta-networking/recipes-support/dnsmasq/files/CVE-2020-25686-1.patch
+> >  create mode 100644
+> > meta-networking/recipes-support/dnsmasq/files/CVE-2020-25686-2.patch
+> >  create mode 100644
+> > meta-oe/recipes-connectivity/hostapd/hostapd/0001-Prepare-for-CVE-2021-30004.patch.patch
+> >  create mode 100644
+> > meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-13616.patch
+> >  create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29457.patch
+> >  create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29458.patch
+> >  create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29463.patch
+> >  create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29464.patch
+> >  create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29470.patch
+> >  create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2021-29473.patch
+> >  create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2021-3482.patch
+> >  create mode 100644
+> > meta-oe/recipes-support/opencv/opencv/CVE-2019-5063_and_2019-5064.patch
+> >
+> >
+> > 
+> >
+>
