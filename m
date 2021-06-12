@@ -1,51 +1,51 @@
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
- by mx.groups.io with SMTP id smtpd.web12.10125.1623528564532257391
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web08.9909.1623528623766533779
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 12 Jun 2021 13:09:24 -0700
+ Sat, 12 Jun 2021 13:10:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=k/9RP7OK;
- spf=pass (domain: gmail.com, ip: 209.85.218.42, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f42.google.com with SMTP id my49so9737925ejc.7
-        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Jun 2021 13:09:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=MOTYfCnk;
+ spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f41.google.com with SMTP id k25so9720152eja.9
+        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Jun 2021 13:10:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=6SduHpxfo7FAlRoKfO/qkaoV18jEFEPPcQA1khpln/s=;
-        b=k/9RP7OKVCcebEY0JzZ3CJkpA6Y0fWdzUSZu3mDPdXHRIao8voV7o7wENewvnYdpyZ
-         GgLHmMkJGTOf/Re0hxnNXKoUmyoldjEe1wh0swpSuYm1Ycnds2Ewqp3Zq3Tft1o9SoKT
-         h3VLLKtSIpZRUuaqfSf1w9P8urb9Yv4S/sKqVYqtKb8PRfGZlUmqDpigLvviqJ0sO5ij
-         v1+64CICgqWoFM43OHLkRB5eMqkNNH5ddfFzaIz310oa2gxRvDRR71N80biMZDWTnu3S
-         ZoDH2h5/EaepPogNN+VWgu4aK6rjLy7xM06NkGA/NeZMe2R0hIzRA+gWnEVO2Au52dtq
-         VM0g==
+        bh=Fcx3cPAA6Hdj4d7w3XgM2jbmBW6fhEA7nwi2dXjVkdo=;
+        b=MOTYfCnk7kKOG3tQ2VpMOamVPh2cJJWA96FVO5QuTpZUdmAAkDZx3U8rqbnGA4QD1c
+         ufflSIAh1TT2qXFvDMUCJGHYSVOn+TsYYj2qfAIG8tBy3zEttonAI610XO+/9VVychOm
+         kD+HkLWTez4m0AoBmlq6oJSgjPGAsUyu3NKVDR+DtEU8+uLNWBJPOGZWCeCOlb2FqdsN
+         iFzdfAXlLY7mUYEaXlqe867R770Db46bKcTLorFe2hmE1qqpHmnX7xjB8m/L8HecN20q
+         xr+y6xtZyWbZNf5ZFWMBtHrO0ENvCWLGf2djyef/7tp6g9of4Z8lDNWtwQ6hBuxzCFtw
+         7JPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=6SduHpxfo7FAlRoKfO/qkaoV18jEFEPPcQA1khpln/s=;
-        b=HhQuzanYyfS74aql3954tHKkHkTx4sriyyu2QSYG5Ylh8DQ+GJ1q6Lt9sIUR1rqMC+
-         cJv0XMoBAdun6GJZw9I/6Umskfxf+03xv6nQsXgt5LUTbzwPeV0XQ/CiuLhXmELD6OYS
-         phVvq89QoAEVR+M51CMeqgi0AtZ2CdVj16H/iGRdv5OZTqzWMu6pXCcHLITW8WCBdQrO
-         MRDEzs7gginZD3Hb023SX3LqDhAfd4CCHdqI6w5CZ1Hs4/QF1u2cih+uDcJBiCzf/V99
-         mrvw9YOCirklipTEaEWkOai+qZwC8FZhTjSYCRTQnJoKoY/d6FlhWOBloLWMh8zrLmxF
-         o99g==
-X-Gm-Message-State: AOAM530J5zVH/wCesrsxxUj761JkZAn4sN05Z0Ud2ddoagDd/A9obDc4
-	F7/S/xtVdQ6LFBxpD+27g024lQccRz4=
-X-Google-Smtp-Source: ABdhPJyQUB2aM1NAYIuDidY9aCXugGRrbFarae89RmlKo8J8uazp6zf7+nQNNCzVJA/7nDDseqIXww==
-X-Received: by 2002:a17:906:b190:: with SMTP id w16mr9007961ejy.332.1623528562671;
-        Sat, 12 Jun 2021 13:09:22 -0700 (PDT)
+        bh=Fcx3cPAA6Hdj4d7w3XgM2jbmBW6fhEA7nwi2dXjVkdo=;
+        b=iAP/MlYDvP0DrBQppJSDa6pMfTTPdLTT1CrfSsp/pxpzJ3DJaxC6aSIaiuqnLq/4Pg
+         MwxHo9zQRe6346k4oZsEaLq30z7sHS36iDjAzlgxBPx7dL8SvtSXjuR4+NZBNwLWZyMS
+         toNY1IsyqgUE9e5LAgXKE1P2/4IAOW6+JQ9i2eKv7SQI5rze/X82apDy0RS50+7aOJZu
+         0MIyNooGReHvpJ7VSBWnWTOZe4cULnv33jRVN+IGIyzkS6vB7pRYk9UZN+qsjH5Ezq+X
+         f6iFO1zshBodFTFifCJyWIAi7j+Ll5KQyO2YxYF7vlQeYpx69IJ2x8Np2qHwbSor98Dd
+         l2QQ==
+X-Gm-Message-State: AOAM533pSJbJaRKo2eY4tYqn68mgOswZ+xerUZpsn/iUDpjoiLjuzE9L
+	mpdGJOkkauVBiPgZwwjb2+Pvc2Ur5s8=
+X-Google-Smtp-Source: ABdhPJz+bChyV3285AK1L9HCPQAyPM9SziA6jEmjhig8K8Z9nbT5hB8FAMT0RmmJRe/dz5OCBfLMUg==
+X-Received: by 2002:a17:906:d20b:: with SMTP id w11mr8122439ejz.242.1623528622206;
+        Sat, 12 Jun 2021 13:10:22 -0700 (PDT)
 Return-Path: <martin.jansa@gmail.com>
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id n15sm4331689eds.28.2021.06.12.13.09.22
+        by smtp.gmail.com with ESMTPSA id d25sm1066209edu.83.2021.06.12.13.10.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 12 Jun 2021 13:09:22 -0700 (PDT)
+        Sat, 12 Jun 2021 13:10:21 -0700 (PDT)
 From: "Martin Jansa" <Martin.Jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] rygel: require gobject-introspection-data in DISTRO_FEATURES
-Date: Sat, 12 Jun 2021 22:09:20 +0200
-Message-Id: <20210612200920.1389806-1-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCHv2] rygel: require gobject-introspection-data in DISTRO_FEATURES
+Date: Sat, 12 Jun 2021 22:10:19 +0200
+Message-Id: <20210612201019.1390144-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <1687EE4C27574B0C.10009@lists.openembedded.org>
 References: <1687EE4C27574B0C.10009@lists.openembedded.org>
@@ -78,7 +78,7 @@ index 3fc8450513..01705a8f71 100644
  SRC_URI[archive.md5sum] = "7f95401903a3f855b464d5152b9d4c07"
  SRC_URI[archive.sha256sum] = "08c21a577f7bdad26446a75ffa32778b26842c3b1188165f0b19818559747d00"
 diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-index 73b852a4a9..852295b983 100644
+index b9f90d2c7f..0601cdd99b 100644
 --- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
 +++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
 @@ -85,7 +85,7 @@ RDEPENDS_packagegroup-meta-multimedia-connectivity = "\
@@ -96,9 +96,9 @@ index 73b852a4a9..852295b983 100644
      crossguid \
 -    libmediaart-2.0 \
 +    ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "libmediaart-2.0", "", d)} \
-     libmediaart \
      gst-instruments \
      libsrtp \
+     srt \
 -- 
 2.30.2
 
