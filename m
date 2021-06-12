@@ -1,104 +1,84 @@
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
- by mx.groups.io with SMTP id smtpd.web08.9909.1623528623766533779
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web08.11383.1623538447269376899
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 12 Jun 2021 13:10:24 -0700
+ Sat, 12 Jun 2021 15:54:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=MOTYfCnk;
- spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f41.google.com with SMTP id k25so9720152eja.9
-        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Jun 2021 13:10:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=NsJOUZ4N;
+ spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: andrea.adami@gmail.com)
+Received: by mail-ed1-f51.google.com with SMTP id ba2so39706729edb.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Jun 2021 15:54:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=Fcx3cPAA6Hdj4d7w3XgM2jbmBW6fhEA7nwi2dXjVkdo=;
-        b=MOTYfCnk7kKOG3tQ2VpMOamVPh2cJJWA96FVO5QuTpZUdmAAkDZx3U8rqbnGA4QD1c
-         ufflSIAh1TT2qXFvDMUCJGHYSVOn+TsYYj2qfAIG8tBy3zEttonAI610XO+/9VVychOm
-         kD+HkLWTez4m0AoBmlq6oJSgjPGAsUyu3NKVDR+DtEU8+uLNWBJPOGZWCeCOlb2FqdsN
-         iFzdfAXlLY7mUYEaXlqe867R770Db46bKcTLorFe2hmE1qqpHmnX7xjB8m/L8HecN20q
-         xr+y6xtZyWbZNf5ZFWMBtHrO0ENvCWLGf2djyef/7tp6g9of4Z8lDNWtwQ6hBuxzCFtw
-         7JPA==
+        h=from:to:cc:subject:date:message-id;
+        bh=C/MkPtA/h9XRQ4ZIfQE5nkz3ruUhRVzJ0p4EZ05+Pdc=;
+        b=NsJOUZ4N3lGDUxnLo3YXCQ9XwWbtzG591vylQdi7CzF5BSdZ/pSqPFp4UuQqt9GcVd
+         jHL1xE7S36aCl+xSZ315h4JySkO6w1vm5zPmbPgfSHHGdLBtAKUOgoNcCO5K/VgCr1zZ
+         whODjyjKzCyIizLTpxnzar4kdIp2wDwvdhC5iuWR+HWX6BgItCAVPZeYwSdu1L6YISoW
+         U7R+HtK8dl6Q+WsM1pQfB/I+LjbJrGcOTDQUB3ZvlzoEJEvkEZ7hrNSeGOFROgTDMwdW
+         vV5nchT2KE/X5+nEOxpnkHnNkLTam0Az0zmXrSzJgOAkJkhlJAv8BUtUGX0Y61EMY5ma
+         Z7Zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=Fcx3cPAA6Hdj4d7w3XgM2jbmBW6fhEA7nwi2dXjVkdo=;
-        b=iAP/MlYDvP0DrBQppJSDa6pMfTTPdLTT1CrfSsp/pxpzJ3DJaxC6aSIaiuqnLq/4Pg
-         MwxHo9zQRe6346k4oZsEaLq30z7sHS36iDjAzlgxBPx7dL8SvtSXjuR4+NZBNwLWZyMS
-         toNY1IsyqgUE9e5LAgXKE1P2/4IAOW6+JQ9i2eKv7SQI5rze/X82apDy0RS50+7aOJZu
-         0MIyNooGReHvpJ7VSBWnWTOZe4cULnv33jRVN+IGIyzkS6vB7pRYk9UZN+qsjH5Ezq+X
-         f6iFO1zshBodFTFifCJyWIAi7j+Ll5KQyO2YxYF7vlQeYpx69IJ2x8Np2qHwbSor98Dd
-         l2QQ==
-X-Gm-Message-State: AOAM533pSJbJaRKo2eY4tYqn68mgOswZ+xerUZpsn/iUDpjoiLjuzE9L
-	mpdGJOkkauVBiPgZwwjb2+Pvc2Ur5s8=
-X-Google-Smtp-Source: ABdhPJz+bChyV3285AK1L9HCPQAyPM9SziA6jEmjhig8K8Z9nbT5hB8FAMT0RmmJRe/dz5OCBfLMUg==
-X-Received: by 2002:a17:906:d20b:: with SMTP id w11mr8122439ejz.242.1623528622206;
-        Sat, 12 Jun 2021 13:10:22 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id d25sm1066209edu.83.2021.06.12.13.10.21
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=C/MkPtA/h9XRQ4ZIfQE5nkz3ruUhRVzJ0p4EZ05+Pdc=;
+        b=ZxFrW8CzJP7O7sdS0ls7Eci2WIjmuNRVjVSFgri0Y5XU3h3InxlPzN2ivSL8qKZVUZ
+         z40i9KXF9dutLS+voIVjklvK5T9WrTeW4VaOdlm7JXrZL9FzQjAmpNDN423YM8vI6/jP
+         mxaOrXsr/p74JZfXxPIq4YOokTGgomea3GoGxKenU4+MOT9pdStZJ561FghVHc+lVbUc
+         Ftq+x5JNakJJRFzoze1Hq6RO9YtKP5R1RYRcdHV+ntIvrKp4OONzSrsqKqP/+mAKiSYp
+         +9phJ7J8csueaPZyCbz1gGp9jXxDNE46uCs/8S4p4r13aehUHdzCd2aVNHqVYfEffGak
+         /Csg==
+X-Gm-Message-State: AOAM531AxQ0eYcLJBoR9ekL+Wmompmx81Dm5rRB9w3iQSce5wCtQyOmM
+	Kkb6tuY9w0AF85P+hx0VwbopuCGid2UIuZ7y
+X-Google-Smtp-Source: ABdhPJxCn6o65qJZjANg6fzJzpkKyDqfXX6mOhbbZITR5ZDo4lhAuVpSdLHZN8dohDpHWUOBLCzgKw==
+X-Received: by 2002:aa7:d305:: with SMTP id p5mr10115484edq.167.1623538445671;
+        Sat, 12 Jun 2021 15:54:05 -0700 (PDT)
+Return-Path: <andrea.adami@gmail.com>
+Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it (host-87-0-253-36.retail.telecomitalia.it. [87.0.253.36])
+        by smtp.gmail.com with ESMTPSA id h22sm4526132edv.0.2021.06.12.15.54.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 12 Jun 2021 13:10:21 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+        Sat, 12 Jun 2021 15:54:05 -0700 (PDT)
+From: "Andrea Adami" <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCHv2] rygel: require gobject-introspection-data in DISTRO_FEATURES
-Date: Sat, 12 Jun 2021 22:10:19 +0200
-Message-Id: <20210612201019.1390144-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <1687EE4C27574B0C.10009@lists.openembedded.org>
-References: <1687EE4C27574B0C.10009@lists.openembedded.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Andrea Adami <andrea.adami@gmail.com>
+Subject: [meta-initramfs][PATCH 1/2] initramfs-kexecboot-image: support cases where machines override IMAGE_FSTYPES
+Date: Sun, 13 Jun 2021 00:53:58 +0200
+Message-Id: <20210612225359.25688-1-andrea.adami@gmail.com>
+X-Mailer: git-send-email 2.17.1
 
-* introduced in libmediaart-2.0 with:
-  https://git.openembedded.org/meta-openembedded/commit/?id=2b90058c346a5a56dced3c1b7413068027a884f1
+test case: zaurus.inc
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+IMAGE_FSTYPES ?= "tar.gz jffs2 jffs2.sum ubi ubifs"
+IMAGE_FSTYPES_collie ?= "tar.gz jffs2 jffs2.sum"
+INITRAMFS_FSTYPES ?= "cpio.gz cpio.xz"
+
+The last assignment IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}" did in fact
+reset the value to IMAGE_FSTYPES_collie, thus not producing cpio.gz / cpio.xz.
+
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-multimedia/recipes-connectivity/rygel/rygel_0.38.3.bb   | 5 ++++-
- .../packagegroups/packagegroup-meta-multimedia.bb            | 4 ++--
- 2 files changed, 6 insertions(+), 3 deletions(-)
+ .../recipes-core/images/initramfs-kexecboot-image.bb      | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/meta-multimedia/recipes-connectivity/rygel/rygel_0.38.3.bb b/meta-multimedia/recipes-connectivity/rygel/rygel_0.38.3.bb
-index 3fc8450513..01705a8f71 100644
---- a/meta-multimedia/recipes-connectivity/rygel/rygel_0.38.3.bb
-+++ b/meta-multimedia/recipes-connectivity/rygel/rygel_0.38.3.bb
-@@ -12,7 +12,10 @@ DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 gstream
- RDEPENDS_${PN} = "gstreamer1.0-plugins-base-playback shared-mime-info"
- RRECOMMENDS_${PN} = "rygel-plugin-media-export"
+diff --git a/meta-initramfs/recipes-core/images/initramfs-kexecboot-image.bb b/meta-initramfs/recipes-core/images/initramfs-kexecboot-image.bb
+index 9a686f366f..dd082ba529 100644
+--- a/meta-initramfs/recipes-core/images/initramfs-kexecboot-image.bb
++++ b/meta-initramfs/recipes-core/images/initramfs-kexecboot-image.bb
+@@ -1,9 +1,13 @@
+ SUMMARY = "Initramfs image for kexecboot kernel"
+ DESCRIPTION = "This image provides kexecboot (linux as bootloader) and helpers."
  
--inherit gnomebase vala gobject-introspection gettext systemd
-+inherit gnomebase vala gobject-introspection gettext systemd features_check
-+
-+# gobject-introspection is mandatory for libmediaart-2.0 and cannot be configured
-+REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+-inherit image
++# Some BSPs use IMAGE_FSTYPES_<machine override> which would override
++# an assignment to IMAGE_FSTYPES so we need anon python
++python () {
++    d.setVar("IMAGE_FSTYPES", d.getVar("INITRAMFS_FSTYPES"))
++}
  
- SRC_URI[archive.md5sum] = "7f95401903a3f855b464d5152b9d4c07"
- SRC_URI[archive.sha256sum] = "08c21a577f7bdad26446a75ffa32778b26842c3b1188165f0b19818559747d00"
-diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-index b9f90d2c7f..0601cdd99b 100644
---- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-+++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-@@ -85,7 +85,7 @@ RDEPENDS_packagegroup-meta-multimedia-connectivity = "\
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gupnp-tools", "", d)} \
-     gupnp \
-     libupnp \
--    rygel \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "rygel", "", d)} \
- "
- RDEPENDS_packagegroup-meta-multimedia-dvb = "\
-     oscam \
-@@ -99,7 +99,7 @@ RDEPENDS_packagegroup-meta-multimedia-mkv = "\
+-IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
++inherit image
  
- RDEPENDS_packagegroup-meta-multimedia-support = "\
-     crossguid \
--    libmediaart-2.0 \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "libmediaart-2.0", "", d)} \
-     gst-instruments \
-     libsrtp \
-     srt \
+ # avoid circular dependencies
+ EXTRA_IMAGEDEPENDS = ""
 -- 
-2.30.2
+2.17.1
 
