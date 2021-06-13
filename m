@@ -1,132 +1,97 @@
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
- by mx.groups.io with SMTP id smtpd.web08.23265.1623627169277881580
+Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
+ by mx.groups.io with SMTP id smtpd.web12.23470.1623627170022192622
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 13 Jun 2021 16:32:49 -0700
+ Sun, 13 Jun 2021 16:32:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=hrYb3N5V;
- spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f50.google.com with SMTP id h16so8702358pjv.2
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=n5Nnb7+S;
+ spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f177.google.com with SMTP id y11so7205742pgp.11
         for <openembedded-devel@lists.openembedded.org>; Sun, 13 Jun 2021 16:32:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=5pgCGo/uZAF4DdAIRzU60rlEs/houXAsZ99vQplq3Pc=;
-        b=hrYb3N5VQ2pQ3wDZQCYgT9bHvfKMuQVuw5JA4wNCP5O/aKsuVcKaub+NzhfwMT7Rh8
-         Wn1PPazAta76qUO/XrwjbtfV6J1mzP5xMPGc8T+FoYIPOeljpyE7s1wC7eWVe+LRLc5V
-         1fJ+tm9GqPoSlhMDy83LjToS6xhcG6+bJuFsiPuGkTkBMxie8oNR/vZCzwmLTt55YGXg
-         tZfa0zhmqU4PWMGuObbHAKl1KIFwpeZU/i2Cu+yhlwLyjcMh7RdoojI62aGwsWwxrMFz
-         fYjxu/bgU4JQf3oe0n+Q/sHFgtU4aaq4L8iiOcD1F8nIl3y2mfwNeRewnLapbHhWmlCG
-         JalA==
+        bh=kZ2Z6OdqyfhKsOPMaA9ASj1bWTw/NQwIfidKCdm5Gws=;
+        b=n5Nnb7+SJNDVCGx9OMvxLVusdoc8fzMVzufBd/BvuXBS1n/h/3kfyu5S0UX8HerwIK
+         0W/QJzFX/+zEpYRu0ahgiPHRASa7TfTiEY7lvxUGzyTSzg9Bs+Es4v180YanL0t0o1rR
+         R9xEBY55zJycD8HoqZ/sN3xkNunjSeIeXTK0QrRzpQIyJLy5+wzz+9f8mMhY04MDT+48
+         UgcjWF6p6VPQQXZNzdd9G2G/4ptKeb8nbj5Z+y8wgQntVBHwgsbPPlnqxU6hoq0egA0k
+         wJBZr6ncCE2kiHEiJwYtktut1z9fVYSdwP4Bn5OnzYyOJJ7aymRg4vfXFhE6fO7+OcPi
+         Qnsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=5pgCGo/uZAF4DdAIRzU60rlEs/houXAsZ99vQplq3Pc=;
-        b=bPq4O63Fkl6EL6BsNPQn3XYlVlSc+FETFnZNyY7bPWRtcEPniL5zVChgl/mYeC/fUu
-         HBy8O7qzzvlloY60c51mvxYI+c6S5qbZPs4lUmBClMv54N1wevZLqudCafRE6q4Vo/oI
-         sHiI/6ifLQ8Vu69Vwb59hsebgyleKRN3zjcSAJOjjzSD3SruzLmua9I5oS2fK/mGBDMz
-         oHmJ8Efms0Ff49hFZsUM1VCRNfm0CdK53xr+WkchsxMVo18nlF1rD2r15zMxJyQ6GK1y
-         zUk8zq+ueuSYXC+Js32jLSliJWE8voxBNp2A7o+BQdfuoYIw7ZoKX9ezZpoXA8V4myjk
-         PaIA==
-X-Gm-Message-State: AOAM532v1wWOEdFreouErQlytEVs5Hruih942q6jpQpbNgCg6Wrleaxs
-	KAak752n7iXSFztpvTjIuXi7qWc09kJj7w==
-X-Google-Smtp-Source: ABdhPJz7+AvFZqc8vfgl4D2oI+5//XUlNQfav/ZnqUVAZwvDG7PHOcvqhNgyzLav7yPxugIRyFO56A==
-X-Received: by 2002:a17:90a:a509:: with SMTP id a9mr15611477pjq.190.1623627168576;
-        Sun, 13 Jun 2021 16:32:48 -0700 (PDT)
+        bh=kZ2Z6OdqyfhKsOPMaA9ASj1bWTw/NQwIfidKCdm5Gws=;
+        b=kOFSS/KXSqygFfgliD+t3UhRUYLg411Ee/OvLTb4ElCojUnZcza5G5riuJ26iEefMm
+         75rHIGf3L7BgwFK4uE0OfWkQXDcb4JhL1XrmWy4KwuB44YtGffoxO53iM6P3Z31VLS8E
+         L10fsnoDZInuAmaqIqhFsqe7L0q2Kd2Wac6ODjdfsdcC5WTUIwOMWooNjGHC2w+MrFjz
+         vqrRjjwvRBC2XxbJ6xid8Jl5ZCf2CwWLQYo1KR5SOJ9pJVXr1t+rs0ApoQB/nPB15eER
+         /Vg9pSAuH3S4MEPvUhf6uJE+62ZZGLKB7kIfQjmloJEBTkVa2ytgT0xTjD4R1x09NihL
+         /jFw==
+X-Gm-Message-State: AOAM5311N6QEFRkeVBIaf3+7o+/bfmxFrCZ0nToXhIn0f8ayDQBpiN/u
+	PGLvQ7KMShgWj8c6Ps1dy9uvNag6k9jpkQ==
+X-Google-Smtp-Source: ABdhPJy/sQRa+cT8A6T+VjcQ/d3jD+WeyTzlbyJuL1Z6/uAwkjnT6feigvrYJuOoRFOPN6PRBdTYeg==
+X-Received: by 2002:a65:46c8:: with SMTP id n8mr14778419pgr.301.1623627169295;
+        Sun, 13 Jun 2021 16:32:49 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.mvista.com ([2601:202:4180:a5c0:ed93:eb87:6dc9:a518])
-        by smtp.gmail.com with ESMTPSA id gd10sm9933924pjb.0.2021.06.13.16.32.47
+        by smtp.gmail.com with ESMTPSA id gd10sm9933924pjb.0.2021.06.13.16.32.48
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sun, 13 Jun 2021 16:32:48 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [Hardknott 1/5] squid: upgrade 4.14 -> 4.15
-Date: Sun, 13 Jun 2021 16:32:40 -0700
-Message-Id: <9362c5078db4ac2a21b698a65ca92b87e87164d0.1623627089.git.akuster808@gmail.com>
+Subject: [Hardknott 2/5] nss: Fix build on Centos 7
+Date: Sun, 13 Jun 2021 16:32:41 -0700
+Message-Id: <f8bd86c9b2f7ed5d15e04af585258987410ab89e.1623627089.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1623627089.git.akuster808@gmail.com>
 References: <cover.1623627089.git.akuster808@gmail.com>
 
-From: Andrej Kozemcak <andrej.kozemcak@siemens.com>
+From: Marek Vasut <marex@denx.de>
 
-Changes are found at: http://www.squid-cache.org/Versions/v4/changesets
+Centos 7 has glibc 2.18 and nss-native build fails due to implicit
+declaration of function putenv during build. This is because of the
+Feature Test Macro Requirements for glibc (see feature_test_macros(7)):
 
-Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
+  putenv(): _XOPEN_SOURCE
+      || /* Glibc since 2.19: */ _DEFAULT_SOURCE
+      || /* Glibc versions <= 2.19: */ _SVID_SOURCE
+
+and because nss coreconf/Linux.mk only defines
+
+ -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_POSIX_SOURCE
+
+So on such system with glibc 2.18, neither macro makes putenv()
+available. Add -D_XOPEN_SOURCE for the Centos 7 and glibc 2.18
+native build case.
+
+Signed-off-by: Marek Vasut <marex@denx.de>
+Cc: Armin Kuster <akuster808@gmail.com>
+Cc: Armin Kuster <akuster@mvista.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
+Cc: Ross Burton <ross.burton@arm.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 77e614754553e64c4bc554ae802dc09e56eb6209)
+(cherry picked from commit 30148b33b5d750702d7749ac59d8d740d8cb7024)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...0001-Fix-build-on-Fedora-Rawhide-772.patch | 25 +------------------
- .../squid/{squid_4.14.bb => squid_4.15.bb}    |  2 +-
- 2 files changed, 2 insertions(+), 25 deletions(-)
- rename meta-networking/recipes-daemons/squid/{squid_4.14.bb => squid_4.15.bb} (98%)
+ meta-oe/recipes-support/nss/nss_3.64.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-daemons/squid/files/0001-Fix-build-on-Fedora-Rawhide-772.patch b/meta-networking/recipes-daemons/squid/files/0001-Fix-build-on-Fedora-Rawhide-772.patch
-index 28a410c26f..ff51f53448 100644
---- a/meta-networking/recipes-daemons/squid/files/0001-Fix-build-on-Fedora-Rawhide-772.patch
-+++ b/meta-networking/recipes-daemons/squid/files/0001-Fix-build-on-Fedora-Rawhide-772.patch
-@@ -11,10 +11,8 @@ Upstream-Status: Backport [https://github.com/kraj/squid/commit/1f8b5f0e1cc27634
-  src/Makefile.am               | 4 ++++
-  src/ip/QosConfig.cc           | 1 +
-  src/ipc/mem/PageStack.cc      | 1 +
-- src/proxyp/Parser.cc          | 1 +
-- src/security/ServerOptions.cc | 2 ++
-  src/ssl/helper.cc             | 2 ++
-- 6 files changed, 11 insertions(+)
-+ 4 files changed, 8 insertions(+)
+diff --git a/meta-oe/recipes-support/nss/nss_3.64.bb b/meta-oe/recipes-support/nss/nss_3.64.bb
+index 1863db131b..9c4c03df99 100644
+--- a/meta-oe/recipes-support/nss/nss_3.64.bb
++++ b/meta-oe/recipes-support/nss/nss_3.64.bb
+@@ -49,6 +49,8 @@ TUNE_CCARGS_remove = "-mcpu=cortex-a55+crc -mcpu=cortex-a55 -mcpu=cortex-a55+crc
  
- --- a/src/Makefile.am
- +++ b/src/Makefile.am
-@@ -70,17 +68,6 @@ Upstream-Status: Backport [https://github.com/kraj/squid/commit/1f8b5f0e1cc27634
-  
-  /// used to mark a stack slot available for storing free page offsets
-  const Ipc::Mem::PageStack::Value Writable = 0;
----- a/src/security/ServerOptions.cc
--+++ b/src/security/ServerOptions.cc
--@@ -24,6 +24,8 @@
-- #endif
-- #endif
-- 
--+#include <limits>
--+
-- Security::ServerOptions &
-- Security::ServerOptions::operator =(const Security::ServerOptions &old) {
--     if (this != &old) {
- --- a/src/ssl/helper.cc
- +++ b/src/ssl/helper.cc
- @@ -19,6 +19,8 @@
-@@ -92,14 +79,4 @@ Upstream-Status: Backport [https://github.com/kraj/squid/commit/1f8b5f0e1cc27634
-  Ssl::CertValidationHelper::LruCache *Ssl::CertValidationHelper::HelperCache = nullptr;
-  
-  #if USE_SSL_CRTD
----- a/src/acl/ConnMark.cc
--+++ b/src/acl/ConnMark.cc
--@@ -16,6 +16,8 @@
-- #include "http/Stream.h"
-- #include "sbuf/Stream.h"
-  
--+#include <limits>
--+
-- bool
-- Acl::ConnMark::empty() const
-- {
-diff --git a/meta-networking/recipes-daemons/squid/squid_4.14.bb b/meta-networking/recipes-daemons/squid/squid_4.15.bb
-similarity index 98%
-rename from meta-networking/recipes-daemons/squid/squid_4.14.bb
-rename to meta-networking/recipes-daemons/squid/squid_4.15.bb
-index 6d154c87e0..8ba10674c9 100644
---- a/meta-networking/recipes-daemons/squid/squid_4.14.bb
-+++ b/meta-networking/recipes-daemons/squid/squid_4.15.bb
-@@ -29,7 +29,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2
+ TARGET_CC_ARCH += "${LDFLAGS}"
  
- SRC_URI_remove_toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
- 
--SRC_URI[sha256sum] = "4ad08884f065f8e1dac166aa13db6a872cde419a1717dff4c82c2c5337ee5756"
-+SRC_URI[sha256sum] = "71635811e766ce8b155225a9e3c7757cfc7ff93df26b28d82e5e6fc021b9a605"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://errors/COPYRIGHT;md5=0e03cd976052c45697ad5d96e7dff8dc \
++CFLAGS_append_class-native = " -D_XOPEN_SOURCE "
++
+ do_configure_prepend_libc-musl () {
+     sed -i -e '/-DHAVE_SYS_CDEFS_H/d' ${S}/nss/lib/dbm/config/config.mk
+ }
 -- 
 2.17.1
 
