@@ -1,79 +1,80 @@
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
- by mx.groups.io with SMTP id smtpd.web11.11501.1623538450462764241
+Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
+ by mx.groups.io with SMTP id smtpd.web10.15173.1623574073577885295
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 12 Jun 2021 15:54:10 -0700
+ Sun, 13 Jun 2021 01:47:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=T2XP9mJv;
- spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: andrea.adami@gmail.com)
-Received: by mail-ed1-f52.google.com with SMTP id t3so41488184edc.7
-        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Jun 2021 15:54:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=PWbM8UHv;
+ spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: andrea.adami@gmail.com)
+Received: by mail-ed1-f41.google.com with SMTP id w21so42321193edv.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 13 Jun 2021 01:47:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=8N4bY2Fj/dKP9k5te+tJjBmz5N+amHpZJX65BWd/waQ=;
-        b=T2XP9mJvhLEsbUQpfDX7/fHT45vz4WMUNFPBdXdanTRd1w3UA6yQo4dqTWgetItQW1
-         PjXAjpdarzt3VzTfolz/Jy2uruo0IZvjizk2+tdGJwbHNoNLQf0ZdKVrC2uule9Npxa5
-         CbPYfooiOxWM4zOOsrmQRJhZb1ne/7YhrbXIDiGJHTgZt0lPagfRDKRYahPUx7q6KF2X
-         8QX5DpUt236DO9yeyXdzd/vBz86px8RuPnFBn/smD2CfD7VEjqtSkfbrlBDUWGTK2QsF
-         odbVRG1qJPLVF/d6z3fZCGYxIwkWlxLRy0kmx5NfUvkkv/gusll5guVKgN5RLzV9UExh
-         +T2Q==
+        h=from:to:cc:subject:date:message-id;
+        bh=cKb+7yY8AAtnKsnDhbrJQ+GCyMFPBf4IZInu6V1fjgY=;
+        b=PWbM8UHv2+hzEOCbSXH+FRzpr9mFawUeTZEXiOKuJXsRFwj4w0JsUF5eljLCyADHiT
+         Z8murVOv0Nz6hnMXk6Cwc44jltXCFaHqs9+NUzQRbN+hBpstMYurHN2EHdsmZoJTKQCo
+         oZCimnLt7dS86xYyJusN+ZuE1XgRPziPqWIF7yizMFgrGlLxSl6PotJ6T4kfGldnEx8J
+         FETeFZNleLt//HK82TdXGZ5naix9HWG6KbZjsimcUDr3sV4bYF2yIO9YccN+KdNokvDp
+         YvIz4puBOiOiYsnyoN6i8sPua5gUoHnP3tThEeJvoZOeCgGgzW2cRIkob7wyvxTktoDH
+         19/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=8N4bY2Fj/dKP9k5te+tJjBmz5N+amHpZJX65BWd/waQ=;
-        b=nADFSt4ulpSOKB3QY+9PGsXguyT/+ypbeXpf4yZSEeWD1PDfVgutibhUkdXOVeptzN
-         /WDlzC+6bSudR5yHsCgkh+ciOc3RssSFRj4IhzUV/qw9Uc1zYivuucYdrywCUjlMl6zJ
-         YN4fE4mpAF3NVC5IrzYLcVCb5NyRm5VQmTLJmkldjoHViDhJxmy9XmWDwtR79SMayxbf
-         McoFjwuBuYhJRj9/lN8Duq2qlHQCzePc8SoaoHCa/ezbnCgS6HfqsXgaB9zhqEshuZHQ
-         fNcr2hHS8u8HtSTWMCBElkboLLll1MUkCrDZx89E+ye6fvESHAYV9HI4plC7X8bjg763
-         vraA==
-X-Gm-Message-State: AOAM533Pa/F31hHtHNfSb+TCBLnmz7FHTn/xasiIfQvf2pWYFSHJpySA
-	3asWfQ5/y2RDJ3WA2119qwApNIHTMaY03/gb
-X-Google-Smtp-Source: ABdhPJz3qbwvhJcQF4IMoDd/5J7sBEb631faOeHP/nulrj2S6gcKt+sj+eimrKWsCt9mywBRSFiPAQ==
-X-Received: by 2002:a05:6402:10cc:: with SMTP id p12mr10347708edu.328.1623538449098;
-        Sat, 12 Jun 2021 15:54:09 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=cKb+7yY8AAtnKsnDhbrJQ+GCyMFPBf4IZInu6V1fjgY=;
+        b=V6RGTJ8umfUlwggiEk3vBs8HdUiGEZTS5oNCDggdeT2XbW8qdQ8uaXPCw1Pwq8GeTC
+         Q8s13gQuRA0SPIbyx1SENVchB6idecw6fT+BHljb/xOg2B/tAYPXiHLOvq5+YtiLpwwl
+         QM776ma6kpX7355J1LEFlfeHnIHsgp6FuPQXou/GQwGhMKz+yYP3vfRh81VUAGAWtzTq
+         6weC/bHT8UXTMiBlmZwAUnKbNkAk/8N55366lDU+lGQC1vhJ64Ew50UQT4Yu93nI1Izc
+         S1D2ypW4tox8YlLEfUKkTb03OqjVssJrZnJ2y0780PWIlhWdaG6IDhwTVTSTtx+FODR7
+         M9zA==
+X-Gm-Message-State: AOAM533thz1L41xJVpYo+K8NFPwD7vyHshfqoc1X+y9NNLf9PmWv2+OH
+	/fCPcje3DJG7QgOhh8AhuXEU1eVv3kb3vM4T
+X-Google-Smtp-Source: ABdhPJz/1caI5Jfc07viPzh9m5RpH87WSOOT+dlL18kNr8w3GUcp54JiW2FBpBcKfh6PhfaZW/0jtw==
+X-Received: by 2002:a05:6402:4395:: with SMTP id o21mr11943334edc.163.1623574071939;
+        Sun, 13 Jun 2021 01:47:51 -0700 (PDT)
 Return-Path: <andrea.adami@gmail.com>
 Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it (host-87-0-253-36.retail.telecomitalia.it. [87.0.253.36])
-        by smtp.gmail.com with ESMTPSA id h22sm4526132edv.0.2021.06.12.15.54.08
+        by smtp.gmail.com with ESMTPSA id cw10sm4332079ejb.62.2021.06.13.01.47.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 12 Jun 2021 15:54:08 -0700 (PDT)
+        Sun, 13 Jun 2021 01:47:51 -0700 (PDT)
 From: "Andrea Adami" <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Andrea Adami <andrea.adami@gmail.com>
-Subject: [meta-initramfs][PATCH 2/2] initramfs-debug-image: support cases where machines override IMAGE_FSTYPES
-Date: Sun, 13 Jun 2021 00:53:59 +0200
-Message-Id: <20210612225359.25688-2-andrea.adami@gmail.com>
+Subject: [meta-oe][PATCH 1/1] rapidjson: remove stale LIB_INSTALL_DIR
+Date: Sun, 13 Jun 2021 10:47:48 +0200
+Message-Id: <20210613084748.31493-1-andrea.adami@gmail.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210612225359.25688-1-andrea.adami@gmail.com>
-References: <20210612225359.25688-1-andrea.adami@gmail.com>
 
-As done for initramfs-kexecboot-image we need to use python to get the
-desired value for IMAGE_FSTYPES.
+This was introduced with commit:
+ 2e0fd78
+ rapidjson: fix cmake artifacts installation for non-default BASELIB case
+
+and should have been removed with commit:
+ 5aa127a
+ rapidjson: Remove unwanted patches
+
+
+NOTE: such multilib fixes are not needed after this commit in oe-core:
+ 24f630c cmake.bbclass: Define LIB_SUFFIX
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../recipes-core/images/initramfs-debug-image.bb           | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-initramfs/recipes-core/images/initramfs-debug-image.bb b/meta-initramfs/recipes-core/images/initramfs-debug-image.bb
-index c3dcd2b821..601056b7e5 100644
---- a/meta-initramfs/recipes-core/images/initramfs-debug-image.bb
-+++ b/meta-initramfs/recipes-core/images/initramfs-debug-image.bb
-@@ -11,7 +11,12 @@ IMAGE_FEATURES = ""
- export IMAGE_BASENAME = "initramfs-debug-image"
- IMAGE_LINGUAS = ""
+diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+index 5b5c8b2570..ac803294e0 100644
+--- a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
++++ b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+@@ -14,7 +14,7 @@ S = "${WORKDIR}/git"
  
--IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
-+# Some BSPs use IMAGE_FSTYPES_<machine override> which would override
-+# an assignment to IMAGE_FSTYPES so we need anon python
-+python () {
-+    d.setVar("IMAGE_FSTYPES", d.getVar("INITRAMFS_FSTYPES"))
-+}
-+
- inherit core-image
+ inherit cmake
  
- IMAGE_ROOTFS_SIZE = "8192"
+-EXTRA_OECMAKE += "-DRAPIDJSON_BUILD_DOC=OFF -DRAPIDJSON_BUILD_TESTS=OFF -DRAPIDJSON_BUILD_EXAMPLES=OFF -DLIB_INSTALL_DIR:STRING=${libdir}"
++EXTRA_OECMAKE += "-DRAPIDJSON_BUILD_DOC=OFF -DRAPIDJSON_BUILD_TESTS=OFF -DRAPIDJSON_BUILD_EXAMPLES=OFF"
+ 
+ # RapidJSON is a header-only C++ library, so the main package will be empty.
+ 
 -- 
 2.17.1
 
