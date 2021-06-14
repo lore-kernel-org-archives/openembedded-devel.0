@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.29649.1623677096355261007
+ by mx.groups.io with SMTP id smtpd.web10.29650.1623677100258012938
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Jun 2021 06:24:56 -0700
+ Mon, 14 Jun 2021 06:25:00 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=38640 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lsmaA-0004QX-75; Mon, 14 Jun 2021 16:24:55 +0300
+	id 1lsmaF-0004QX-81; Mon, 14 Jun 2021 16:24:59 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/5] python3-pysonos: Upgrade 0.0.50 -> 0.0.51
-Date: Mon, 14 Jun 2021 16:24:35 +0300
-Message-Id: <20210614132437.20878-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/5] python3-dill: Upgrade 0.3.3 -> 0.3.4
+Date: Mon, 14 Jun 2021 16:24:36 +0300
+Message-Id: <20210614132437.20878-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210614132437.20878-1-leon.anavi@konsulko.com>
 References: <20210614132437.20878-1-leon.anavi@konsulko.com>
@@ -30,33 +30,59 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.0.51:
+Upgrade to release 0.3.4:
 
-- More logging adjustments
-- Fix event unsubscription logic v2
+- fix typos and formatting
+- update legacy links
+- rename Examples in README
+
+License-Update: Update year
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pysonos_0.0.50.bb => python3-pysonos_0.0.51.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pysonos_0.0.50.bb => python3-pysonos_0.0.51.bb} (79%)
+ .../recipes-devtools/python/python3-dill_0.3.3.bb  | 11 -----------
+ .../recipes-devtools/python/python3-dill_0.3.4.bb  | 14 ++++++++++++++
+ 2 files changed, 14 insertions(+), 11 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-dill_0.3.3.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-dill_0.3.4.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-pysonos_0.0.50.bb b/meta-python/recipes-devtools/python/python3-pysonos_0.0.51.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-pysonos_0.0.50.bb
-rename to meta-python/recipes-devtools/python/python3-pysonos_0.0.51.bb
-index cfa0d6ef09..53465f5398 100644
---- a/meta-python/recipes-devtools/python/python3-pysonos_0.0.50.bb
-+++ b/meta-python/recipes-devtools/python/python3-pysonos_0.0.51.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=07b0e2ca9ac77cd65cd4edf2e13367ea"
- 
--SRC_URI[sha256sum] = "15a583b819c1e758cca72d5e148d59dd3bf7c9d59f19b5e79ab38c743c3e0738"
-+SRC_URI[sha256sum] = "828ad17a671dca2c52976efd9404254ad667f75482e33ce2de2e68e89d0e56ef"
- 
- inherit pypi setuptools3
- 
+diff --git a/meta-python/recipes-devtools/python/python3-dill_0.3.3.bb b/meta-python/recipes-devtools/python/python3-dill_0.3.3.bb
+deleted file mode 100644
+index bf26ba30b5..0000000000
+--- a/meta-python/recipes-devtools/python/python3-dill_0.3.3.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-SUMMARY = "Serialize all of python"
+-HOMEPAGE = "https://pypi.org/project/dill/"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=90fee9f98d11d59df3f8aa813ff9a3de"
+-
+-SRC_URI[md5sum] = "99c878e2e4e924f3234c0efcbcff6abf"
+-SRC_URI[sha256sum] = "efb7f6cb65dba7087c1e111bb5390291ba3616741f96840bfc75792a1a9b5ded"
+-
+-inherit pypi setuptools3
+-
+-PYPI_PACKAGE_EXT = "zip"
+diff --git a/meta-python/recipes-devtools/python/python3-dill_0.3.4.bb b/meta-python/recipes-devtools/python/python3-dill_0.3.4.bb
+new file mode 100644
+index 0000000000..0634e17f5e
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-dill_0.3.4.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "Serialize all of python"
++HOMEPAGE = "https://pypi.org/project/dill/"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=41adceb584fdde8323ddf9ad23c07fe5"
++
++SRC_URI[sha256sum] = "9f9734205146b2b353ab3fec9af0070237b6ddae78452af83d2fca84d739e675"
++
++inherit pypi setuptools3
++
++PYPI_PACKAGE_EXT = "zip"
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-multiprocessing \
++"
 -- 
 2.17.1
 
