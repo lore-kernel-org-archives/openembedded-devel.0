@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.29650.1623677100258012938
+ by mx.groups.io with SMTP id smtpd.web08.29590.1623677104222622997
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Jun 2021 06:25:00 -0700
+ Mon, 14 Jun 2021 06:25:04 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=38640 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lsmaF-0004QX-81; Mon, 14 Jun 2021 16:24:59 +0300
+	id 1lsmaJ-0004QX-4j; Mon, 14 Jun 2021 16:25:03 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-dill: Upgrade 0.3.3 -> 0.3.4
-Date: Mon, 14 Jun 2021 16:24:36 +0300
-Message-Id: <20210614132437.20878-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-humanfriendly: Upgrade 9.1 -> 9.2
+Date: Mon, 14 Jun 2021 16:24:37 +0300
+Message-Id: <20210614132437.20878-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210614132437.20878-1-leon.anavi@konsulko.com>
 References: <20210614132437.20878-1-leon.anavi@konsulko.com>
@@ -30,59 +30,44 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.3.4:
+Upgrade to release 9.2:
 
-- fix typos and formatting
-- update legacy links
-- rename Examples in README
+- Fix several flake8 warnings.
+- Mark Python 3.9 support final.
+- Help to stabilize the test suite.
+- Update the humanfriendly.sphinx module to include Sphinx
+  extension metadata that has become mandatory in a recent Sphinx
+  release. Add additional metadata including the version.
 
-License-Update: Update year
+License-Update: Bump copyright years
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python3-dill_0.3.3.bb  | 11 -----------
- .../recipes-devtools/python/python3-dill_0.3.4.bb  | 14 ++++++++++++++
- 2 files changed, 14 insertions(+), 11 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-dill_0.3.3.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-dill_0.3.4.bb
+ ...hon3-humanfriendly_9.1.bb => python3-humanfriendly_9.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-humanfriendly_9.1.bb => python3-humanfriendly_9.2.bb} (74%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-dill_0.3.3.bb b/meta-python/recipes-devtools/python/python3-dill_0.3.3.bb
-deleted file mode 100644
-index bf26ba30b5..0000000000
---- a/meta-python/recipes-devtools/python/python3-dill_0.3.3.bb
-+++ /dev/null
-@@ -1,11 +0,0 @@
--SUMMARY = "Serialize all of python"
--HOMEPAGE = "https://pypi.org/project/dill/"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=90fee9f98d11d59df3f8aa813ff9a3de"
--
--SRC_URI[md5sum] = "99c878e2e4e924f3234c0efcbcff6abf"
--SRC_URI[sha256sum] = "efb7f6cb65dba7087c1e111bb5390291ba3616741f96840bfc75792a1a9b5ded"
--
--inherit pypi setuptools3
--
--PYPI_PACKAGE_EXT = "zip"
-diff --git a/meta-python/recipes-devtools/python/python3-dill_0.3.4.bb b/meta-python/recipes-devtools/python/python3-dill_0.3.4.bb
-new file mode 100644
-index 0000000000..0634e17f5e
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-dill_0.3.4.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "Serialize all of python"
-+HOMEPAGE = "https://pypi.org/project/dill/"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=41adceb584fdde8323ddf9ad23c07fe5"
-+
-+SRC_URI[sha256sum] = "9f9734205146b2b353ab3fec9af0070237b6ddae78452af83d2fca84d739e675"
-+
-+inherit pypi setuptools3
-+
-+PYPI_PACKAGE_EXT = "zip"
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-multiprocessing \
-+"
+diff --git a/meta-python/recipes-devtools/python/python3-humanfriendly_9.1.bb b/meta-python/recipes-devtools/python/python3-humanfriendly_9.2.bb
+similarity index 74%
+rename from meta-python/recipes-devtools/python/python3-humanfriendly_9.1.bb
+rename to meta-python/recipes-devtools/python/python3-humanfriendly_9.2.bb
+index fb6a7e3b6d..6be27f7606 100644
+--- a/meta-python/recipes-devtools/python/python3-humanfriendly_9.1.bb
++++ b/meta-python/recipes-devtools/python/python3-humanfriendly_9.2.bb
+@@ -2,11 +2,11 @@ DESCRIPTION = "Human friendly output for text interfaces using Python"
+ HOMEPAGE = "https://humanfriendly.readthedocs.io/"
+ SECTION = "devel/python"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=764e737b117a38d773609885e8d04f0b"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5d178009f806c2bdd498a19be0013a7a"
+ 
+ PYPI_PACKAGE = "humanfriendly"
+ 
+-SRC_URI[sha256sum] = "066562956639ab21ff2676d1fda0b5987e985c534fc76700a19bd54bcb81121d"
++SRC_URI[sha256sum] = "f7dba53ac7935fd0b4a2fc9a29e316ddd9ea135fb3052d3d0279d10c18ff9c48"
+ 
+ inherit pypi setuptools3
+ 
 -- 
 2.17.1
 
