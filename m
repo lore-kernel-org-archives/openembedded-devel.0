@@ -1,73 +1,100 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.29590.1623677104222622997
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
+ by mx.groups.io with SMTP id smtpd.web09.32108.1623685949116315831
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Jun 2021 06:25:04 -0700
+ Mon, 14 Jun 2021 08:52:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=38640 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.93)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lsmaJ-0004QX-4j; Mon, 14 Jun 2021 16:25:03 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-humanfriendly: Upgrade 9.1 -> 9.2
-Date: Mon, 14 Jun 2021 16:24:37 +0300
-Message-Id: <20210614132437.20878-5-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210614132437.20878-1-leon.anavi@konsulko.com>
-References: <20210614132437.20878-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=pAxe7sp1;
+ spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f176.google.com with SMTP id e20so9019673pgg.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Jun 2021 08:52:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=q/DjsgbDIPGjahXlkL8hzzLNIUGVxGjwRRTzKFYohdM=;
+        b=pAxe7sp1VNa5QapM8b8uFXFKnfNeQbMRDwQxMkU7MVY9tucvUTNrcOiUI7DHFFjAJM
+         y+5/EWeaAaRUqHb1+HRpRhzUYlG9Tw2Uf9c4hbKhJm0D6//ihMsK9xWCABwDluiBoPHy
+         Q2ZXCk6fFLDjS+zyP8dTITTe2U04NLWPUKjNQO8FqScanldfnROTIZVp6nb+5ELOawhB
+         S23fHY813G/eAsG/G9LpUIUia09gHZUz/knJykHvg7wuBrgY3yJ6zTiJ4cbIqZOpSaBc
+         zekA2kdq2w60UOh6jeO6LPUyz4nc4HWOJgSbpa98B6NAsSwd4d/agc8zmqQh9WWu4d2G
+         ZCsg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=q/DjsgbDIPGjahXlkL8hzzLNIUGVxGjwRRTzKFYohdM=;
+        b=LoE+zhosz6TzCd1I5Cryf1UhmgFcpOwq2J4lqKz8jm9v/zLlXzAZr1Q/pljWfDb88w
+         X4hfb+x+ZZ15YfCkU8GEokHEqR6Sl2xw8YfEJasL9ihbKZFnYdiFc2gqiYuJGG45InYV
+         CEpLoLnzqYbaJWCBzgOcCizUvkJB8qcjbCm507Ba6maWMPSngSH92ZEbh5HihSaLdZjG
+         FSokQBKMycf9lvEOc2X/JCiQT/VH8CHKVUcCz8ECUVAoI7pFlMwfVNR8PKWXdPN9vxF4
+         6aqENXAGUNyp7D/AyDTN51xJ2qtUtFxe0FT+tBe4InPyXhUBCvpPjHmhPj7VMV7Q5RbH
+         gMWQ==
+X-Gm-Message-State: AOAM5315wumbjaGDU2YolSQBcYazpH8fEMEPSoZsLUQwJkPFdqfq4WrN
+	q6d5CKNbLQR9vAD5RG9eE6o=
+X-Google-Smtp-Source: ABdhPJxMlg839893b5XF1covJsETAjZdxEmXDUmfMJuPN2Qwv/m7doKxzXIv7Sn85xg9mv3sjqReYg==
+X-Received: by 2002:a63:81c3:: with SMTP id t186mr18040190pgd.123.1623685948670;
+        Mon, 14 Jun 2021 08:52:28 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:ed93:eb87:6dc9:a518? ([2601:202:4180:a5c0:ed93:eb87:6dc9:a518])
+        by smtp.gmail.com with ESMTPSA id d8sm13302068pfq.198.2021.06.14.08.52.27
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 14 Jun 2021 08:52:28 -0700 (PDT)
+Subject: Re: [OE-core] [meta-oe][dunfell][PATCH] protobuf: Whitelist CVE-2015-5237
+To: RAHUL taya <rahultaya96@gmail.com>, raj.khem@gmail.com,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: nisha.parrakat@kpit.com, purushottam.choudhary@kpit.com
+References: <20210614111515.21348-1-Rahultaya96@gmail.com>
+From: "Armin Kuster" <akuster808@gmail.com>
+Message-ID: <090d4e01-c395-fc87-66ee-06fba6d691d1@gmail.com>
+Date: Mon, 14 Jun 2021 08:52:27 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
+MIME-Version: 1.0
+In-Reply-To: <20210614111515.21348-1-Rahultaya96@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Upgrade to release 9.2:
 
-- Fix several flake8 warnings.
-- Mark Python 3.9 support final.
-- Help to stabilize the test suite.
-- Update the humanfriendly.sphinx module to include Sphinx
-  extension metadata that has become mandatory in a recent Sphinx
-  release. Add additional metadata including the version.
 
-License-Update: Bump copyright years
+On 6/14/21 4:15 AM, RAHUL taya wrote:
+> As per below reference links this CVE issue seems to be minor and
+> harmless and as per upstream this is not a real issue in practice.
+>
+> And as per red hat this issue is marked as low severity.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- ...hon3-humanfriendly_9.1.bb => python3-humanfriendly_9.2.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-humanfriendly_9.1.bb => python3-humanfriendly_9.2.bb} (74%)
+Does this affect Hardknott?
 
-diff --git a/meta-python/recipes-devtools/python/python3-humanfriendly_9.1.bb b/meta-python/recipes-devtools/python/python3-humanfriendly_9.2.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python3-humanfriendly_9.1.bb
-rename to meta-python/recipes-devtools/python/python3-humanfriendly_9.2.bb
-index fb6a7e3b6d..6be27f7606 100644
---- a/meta-python/recipes-devtools/python/python3-humanfriendly_9.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-humanfriendly_9.2.bb
-@@ -2,11 +2,11 @@ DESCRIPTION = "Human friendly output for text interfaces using Python"
- HOMEPAGE = "https://humanfriendly.readthedocs.io/"
- SECTION = "devel/python"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=764e737b117a38d773609885e8d04f0b"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5d178009f806c2bdd498a19be0013a7a"
- 
- PYPI_PACKAGE = "humanfriendly"
- 
--SRC_URI[sha256sum] = "066562956639ab21ff2676d1fda0b5987e985c534fc76700a19bd54bcb81121d"
-+SRC_URI[sha256sum] = "f7dba53ac7935fd0b4a2fc9a29e316ddd9ea135fb3052d3d0279d10c18ff9c48"
- 
- inherit pypi setuptools3
- 
--- 
-2.17.1
+-armin
+>
+> 1. https://bugzilla.suse.com/show_bug.cgi?id=CVE-2015-5237
+> 2. https://security-tracker.debian.org/tracker/CVE-2015-5237
+> 3. https://ubuntu.com/security/CVE-2015-5237
+> 4. https://github.com/protocolbuffers/protobuf/issues/760
+>
+> Signed-off-by: Rahul Taya <Rahultaya96@gmail.com>
+> ---
+>  meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>
+> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
+> index 4d6c5b255..f845a72a0 100644
+> --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
+> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
+> @@ -88,3 +88,11 @@ LDFLAGS_append_arm = " -latomic"
+>  LDFLAGS_append_mips = " -latomic"
+>  LDFLAGS_append_powerpc = " -latomic"
+>  LDFLAGS_append_mipsel = " -latomic"
+> +
+> +# As per below links this issue is minor and harmless and
+> +# as per upstream this is not a real issue in practice.
+> +# https://bugzilla.suse.com/show_bug.cgi?id=CVE-2015-5237
+> +# https://security-tracker.debian.org/tracker/CVE-2015-5237
+> +# https://ubuntu.com/security/CVE-2015-5237
+> +# https://github.com/protocolbuffers/protobuf/issues/760
+> +CVE_CHECK_WHITELIST += "CVE-2015-5237"
+>
+> 
+>
 
