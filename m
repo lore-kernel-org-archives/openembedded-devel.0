@@ -1,21 +1,23 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.29883.1623677088974519231
+ by mx.groups.io with SMTP id smtpd.web12.29883.1623677091326152525
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Jun 2021 06:24:49 -0700
+ Mon, 14 Jun 2021 06:24:51 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=38640 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lsma2-0004QX-2A; Mon, 14 Jun 2021 16:24:45 +0300
+	id 1lsma5-0004QX-86; Mon, 14 Jun 2021 16:24:50 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-bitarray: Upgrade 2.1.0 -> 2.1.2
-Date: Mon, 14 Jun 2021 16:24:33 +0300
-Message-Id: <20210614132437.20878-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-coloredlogs: Upgrade 15.0 -> 15.0.1
+Date: Mon, 14 Jun 2021 16:24:34 +0300
+Message-Id: <20210614132437.20878-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210614132437.20878-1-leon.anavi@konsulko.com>
+References: <20210614132437.20878-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,33 +30,31 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.1.2:
+Upgrade to release 15.0.1:
 
-- support type hinting for all Python 3 versions (that bitarray
-  supports, 3.5 and higher currently)
-- add explicit endianness to two tests
+- Bug fix: Restore StandardErrorHandler functionality
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-bitarray_2.1.0.bb => python3-bitarray_2.1.2.bb}    | 2 +-
+ ...ython3-coloredlogs_15.0.bb => python3-coloredlogs_15.0.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-bitarray_2.1.0.bb => python3-bitarray_2.1.2.bb} (77%)
+ rename meta-python/recipes-devtools/python/{python3-coloredlogs_15.0.bb => python3-coloredlogs_15.0.1.bb} (84%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_2.1.0.bb b/meta-python/recipes-devtools/python/python3-bitarray_2.1.2.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-bitarray_2.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-bitarray_2.1.2.bb
-index 12de2c97ae..bc5c86631b 100644
---- a/meta-python/recipes-devtools/python/python3-bitarray_2.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-bitarray_2.1.2.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
- LICENSE = "PSF"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
+diff --git a/meta-python/recipes-devtools/python/python3-coloredlogs_15.0.bb b/meta-python/recipes-devtools/python/python3-coloredlogs_15.0.1.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-coloredlogs_15.0.bb
+rename to meta-python/recipes-devtools/python/python3-coloredlogs_15.0.1.bb
+index daeda6b2ee..5de59d5b45 100644
+--- a/meta-python/recipes-devtools/python/python3-coloredlogs_15.0.bb
++++ b/meta-python/recipes-devtools/python/python3-coloredlogs_15.0.1.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=764e737b117a38d773609885e8d04f0b"
  
--SRC_URI[sha256sum] = "97224a19325ecee49a3bf4df3ee0531d3af9cf288b67d089a7ef44a3c4ea3839"
-+SRC_URI[sha256sum] = "8745782cb201295963edbd7073072198e001dbe5132718234860b853c901ef66"
+-SRC_URI[sha256sum] = "5e78691e2673a8e294499e1832bb13efcfb44a86b92e18109fa18951093218ab"
++SRC_URI[sha256sum] = "7c991aa71a4577af2f82600d8f8f3a89f936baeaf9b50a9c197da014e5bf16b0"
  
- inherit setuptools3 pypi
+ inherit pypi setuptools3
  
 -- 
 2.17.1
