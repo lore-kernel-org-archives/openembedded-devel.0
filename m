@@ -1,54 +1,88 @@
-Received: from mail-io1-f51.google.com (mail-io1-f51.google.com [209.85.166.51])
- by mx.groups.io with SMTP id smtpd.web08.6088.1623741513793632808
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.web10.6039.1623741604803704765
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 15 Jun 2021 00:18:34 -0700
+ Tue, 15 Jun 2021 00:20:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=NuxmUpuK;
- spf=pass (domain: gmail.com, ip: 209.85.166.51, mailfrom: rahultaya96@gmail.com)
-Received: by mail-io1-f51.google.com with SMTP id q7so42394249iob.4;
-        Tue, 15 Jun 2021 00:18:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ksa0Yi8A;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: rahultaya96@gmail.com)
+Received: by mail-pf1-f170.google.com with SMTP id u18so12553534pfk.11
+        for <openembedded-devel@lists.openembedded.org>; Tue, 15 Jun 2021 00:20:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=UZPtFN1x1yoA4/ORdHSFs1BhujPmN7f12dwxk0RWK6I=;
-        b=NuxmUpuKhq5o67rZkvCm0acZIJQxj4dGLkBV5QvjBpHHSRTmCbd95FxaFDQvW/1/NG
-         4PZPC/I0CJtmnFZ8gKrQ49q9l2HYOvUXEKH1F4NkwGZiOAzVPafU3Xg2HGn9ZQz7RCFT
-         Fr7i9ZusLe7F9xvxQk7aDIbYnMhFc77wy8MiVvkkI4NXk2uwa+CXULHWzbzdJ3seLmx+
-         w2j1ICS3B1XzDw4a1IqLS1/2WWokYAfokh2LoMdEn+PAgQ/t3g0g62A15yL2iDLhDvCI
-         vfwta7fqbE0h5tMYvK/ZQa36uDlyXcOXq9OyCrhsP9tfpOVMoJTXG/KUQVY7xqv8qS1X
-         JhlQ==
+        h=from:to:cc:subject:date:message-id;
+        bh=Hmm2z1ctWQGgiQOlAT98VcUA2DNKJKLjf44uWrcI7E0=;
+        b=Ksa0Yi8AVA54j5QycfSnmlHmRRGrR9Ihoki5G7GxnT84MUslJKG/mXfRvTUkouYXxU
+         rv4hQxph8DyT5WwkhtjmDcB49lSxDOF5pg8TKHwA2iarg1DEfQ4fwXmogad8cEWU4EnT
+         xAa9X2EAy8DO22j7BgM/QCfjNHXZ8MErvKPKExaU5YOwHCOvEa4ATBoeunW7KZZCE2Qv
+         LvhmRGQL1a/jTNhuyimjJzOSlQ1gGP0jEvDmzuER1DHfXcW6ALQZp0E9uCG2HLKdi/4a
+         mcN+jJ+yYV6fJSqU8yyL72s7Vsgw+YiZsyLf78d8EIXUjPxlujW/LOehmMeWQOEGF908
+         j/Uw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=UZPtFN1x1yoA4/ORdHSFs1BhujPmN7f12dwxk0RWK6I=;
-        b=Cslfbdz1kEuSBRU7xBi/9q8Nk3QwtN1IsYVSJ0vVz8TVubySfrR4tGlRP66S6KSjK8
-         FfyUJwfSq0q3+NKLJa/PJU4yR25zYv/K0wTFT4TTZfT7PHf5cNITaZ6qx4j/12/WuVoe
-         1I2aYsRzqMsPZnZo8NpxEasha2FpaQoeMkgYvNxJJT+0bzKjDCIw0Sd0NZioTTIU5D2H
-         edrrlAwdBkBG05bctOxbMgh9S6XrXpcI6pw3MmqUNXewVNsbhSZzY9T83eXEspiBngA1
-         TGvNHNLl5AArP2aYZhYhBJxELRLx35GytFka0mv4jmzjuN4Z+ieQS6ahhb3ojGlgc9W/
-         DUiw==
-X-Gm-Message-State: AOAM531GwzucfGJlhMCaOaT8dAqHCJJqZ2oV23uuWkEk4JEvt8lllDc+
-	tOxJgy4cic+3e86RdDd13dNAlthqkRfqrkEZyGcBz361t2mZqw==
-X-Google-Smtp-Source: ABdhPJx5eTSW8an+KpuIgzfsqi6iW4+3eA6lBoSmSyoB0AwrxCLilZTd9jr8faW63wNRoh2ZvajAJpAAQxRGEMSK2g4=
-X-Received: by 2002:a6b:b74d:: with SMTP id h74mr1242109iof.58.1623741512939;
- Tue, 15 Jun 2021 00:18:32 -0700 (PDT)
-MIME-Version: 1.0
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=Hmm2z1ctWQGgiQOlAT98VcUA2DNKJKLjf44uWrcI7E0=;
+        b=j4Dq8sAaqEr4ZR4FHHfAEi5pKydRJCrL2Oj9ocSuP2DxBBW7A/UEYyPTtbKr58CBqZ
+         Z0D3PQNYqg5gzxyBykgVlHwgPjWIkMXzjnXleTUT4kqoZAHngg+5mLydW+r44YM9Kvvz
+         AiIPr+5C8jR6jf1ZGDf2LXRGf1kpfhimSihfL8Klr8oimv4pra28VStoMj4RmzRIV7go
+         dsDdpNUU4/W2j5CZ32ukv4O1iBBavmt5mNljrn2+jXEYi1Yj9wygIMFYJZzVZQ6fPw4L
+         4ULy/pB4pTgyolMmZKlC3NiccJhwtEkLUW5fdlbsNodfJPQdtpsoIVk4QThYauyR6yAo
+         Ukwg==
+X-Gm-Message-State: AOAM5328dEDx07UMy7/38yWRwCU/4OeEV10usXxF38ZvdnJfY0VUPEjh
+	hYuf0Z4Dchz5h2iGX5Y/BDLqwI9iXwYGLkut
+X-Google-Smtp-Source: ABdhPJxvutD7NGONbuprjmyunMj+V9lWqEiFLEnvYEHJoMo1YP1mFRnXpN5sf7tiPUf6zL+A2G3Bhg==
+X-Received: by 2002:a63:981:: with SMTP id 123mr20860359pgj.187.1623741604137;
+        Tue, 15 Jun 2021 00:20:04 -0700 (PDT)
+Return-Path: <rahultaya96@gmail.com>
+Received: from L-11851.local ([103.93.114.219])
+        by smtp.gmail.com with ESMTPSA id j12sm14902630pgs.83.2021.06.15.00.20.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 15 Jun 2021 00:20:03 -0700 (PDT)
 From: "RAHUL taya" <rahultaya96@gmail.com>
-Date: Tue, 15 Jun 2021 12:48:21 +0530
-Message-ID: <CAM-oLx6va6JC6+Cm5h4EmZ7nswJ1zHOpq=zCYrKEqgC42YT_SQ@mail.gmail.com>
-Subject: Subscribe
-To: openembedded-devel@lists.openembedded.org, 
-	openembedded-devel+subscribe@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000015fbf405c4c8c8a6"
+X-Google-Original-From: Rahul <Rahultaya96@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	raj.khem@gmail.com
+Cc: nisha.parrakat@kpit.com,
+	purushottam.choudhary@kpit.com,
+	Rahul Taya <Rahultaya96@gmail.com>
+Subject: [meta-oe][dunfell][PATCH] protobuf: Whitelist CVE-2015-5237
+Date: Tue, 15 Jun 2021 12:49:50 +0530
+Message-Id: <20210615071950.12684-1-Rahultaya96@gmail.com>
+X-Mailer: git-send-email 2.17.1
 
---00000000000015fbf405c4c8c8a6
-Content-Type: text/plain; charset="UTF-8"
+As per below reference links this CVE issue seems to be minor and
+harmless and as per upstream this is not a real issue in practice.
 
+And as per red hat this issue is marked as low severity.
 
+1. https://bugzilla.suse.com/show_bug.cgi?id=CVE-2015-5237
+2. https://security-tracker.debian.org/tracker/CVE-2015-5237
+3. https://ubuntu.com/security/CVE-2015-5237
+4. https://github.com/protocolbuffers/protobuf/issues/760
 
---00000000000015fbf405c4c8c8a6
-Content-Type: text/html; charset="UTF-8"
+As per NVD link: https://nvd.nist.gov/vuln/detail/CVE-2015-5237#range-6634983
+it affects version upto 3.1(including)
 
-<div dir="ltr"><br></div>
+Signed-off-by: Rahul Taya <Rahultaya96@gmail.com>
+---
+ meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
---00000000000015fbf405c4c8c8a6--
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
+index 4d6c5b255..f845a72a0 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
+@@ -88,3 +88,11 @@ LDFLAGS_append_arm = " -latomic"
+ LDFLAGS_append_mips = " -latomic"
+ LDFLAGS_append_powerpc = " -latomic"
+ LDFLAGS_append_mipsel = " -latomic"
++
++# As per below links this issue is minor and harmless and
++# as per upstream this is not a real issue in practice.
++# https://bugzilla.suse.com/show_bug.cgi?id=CVE-2015-5237
++# https://security-tracker.debian.org/tracker/CVE-2015-5237
++# https://ubuntu.com/security/CVE-2015-5237
++# https://github.com/protocolbuffers/protobuf/issues/760
++CVE_CHECK_WHITELIST += "CVE-2015-5237"
+-- 
+2.17.1
+
