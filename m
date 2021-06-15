@@ -1,343 +1,65 @@
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web12.6283.1623743252391402848
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web08.6812.1623748906379748032
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 15 Jun 2021 00:47:32 -0700
+ Tue, 15 Jun 2021 02:21:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: changqing.li@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 15F7lU7k009847
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 15 Jun 2021 00:47:31 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 15F7lUTb024341
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 15 Jun 2021 00:47:30 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.10; Tue, 15 Jun 2021 00:47:30 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.10 via Frontend Transport; Tue, 15 Jun 2021 00:47:29 -0700
-From: "Changqing Li" <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-xfce][PATCH] mousepad: fix warning during postinst
-Date: Tue, 15 Jun 2021 15:45:01 +0800
-Message-ID: <20210615074501.44131-1-changqing.li@windriver.com>
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=54390 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.93)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1lt5GQ-0006XG-BW; Tue, 15 Jun 2021 12:21:43 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-zeroconf: Add recipe
+Date: Tue, 15 Jun 2021 12:21:30 +0300
+Message-Id: <20210615092132.6539-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain
+X-OutGoing-Spam-Status: No, score=-1.0
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-From: Changqing Li <changqing.li@windriver.com>
+This is a pure Python multicast DNS service discovery library.
+Compatible with Bonjour/Avahi.
 
-fix below warning during do_rootfs:
-[log_check] Warning: undefined reference to <schema id='org.xfce.mousepad.plugins'/>
+Version 0.31.0 brings:
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+- Separated cache loading from I/O in ServiceInfo and fixed cache
+  lookup
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...port-Properly-handle-plugin-settings.patch | 279 ++++++++++++++++++
- .../recipes-apps/mousepad/mousepad_0.5.5.bb   |   2 +
- 2 files changed, 281 insertions(+)
- create mode 100644 meta-xfce/recipes-apps/mousepad/files/0001-Plugin-support-Properly-handle-plugin-settings.patch
+ .../python/python3-zeroconf_0.31.0.bb                | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-zeroconf_0.31.0.bb
 
-diff --git a/meta-xfce/recipes-apps/mousepad/files/0001-Plugin-support-Properly-handle-plugin-settings.patch b/meta-xfce/recipes-apps/mousepad/files/0001-Plugin-support-Properly-handle-plugin-settings.patch
+diff --git a/meta-python/recipes-devtools/python/python3-zeroconf_0.31.0.bb b/meta-python/recipes-devtools/python/python3-zeroconf_0.31.0.bb
 new file mode 100644
-index 000000000..0ace907c4
+index 0000000000..cb4c03329d
 --- /dev/null
-+++ b/meta-xfce/recipes-apps/mousepad/files/0001-Plugin-support-Properly-handle-plugin-settings.patch
-@@ -0,0 +1,279 @@
-+From 6d1800a305698f801236a2d73ebe178fa2d1139d Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Ga=C3=ABl=20Bonithon?= <gael@xfce.org>
-+Date: Sat, 12 Jun 2021 16:45:56 +0200
-+Subject: [PATCH] Plugin support: Properly handle plugin settings
++++ b/meta-python/recipes-devtools/python/python3-zeroconf_0.31.0.bb
+@@ -0,0 +1,12 @@
++SUMMARY = "Pure Python Multicast DNS Service Discovery Library (Bonjour/Avahi compatible)"
++HOMEPAGE = "https://github.com/jstasiak/python-zeroconf"
++LICENSE = "LGPL-2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=27818cd7fd83877a8e3ef82b82798ef4"
 +
-+What was done in !92 was strictly speaking only suitable for one plugin.
-+This could be extended to several plugins by adding a `.gschema.xml`
-+file in `plugins/`, intermediate between the one of the application and
-+those of the plugins, or by refactoring the Makefiles with inclusions
-+and a single call to `@GSETTINGS_RULES@`.
++SRC_URI[sha256sum] = "53a180248471c6f81bd1fffcbce03ed93d7d8eaf10905c9121ac1ea996d19844"
 +
-+But in any case, due to the relative rigidity of the `.gschema.xml` file
-+format and the internal workings of `glib-compile-schemas`, this would
-+only be suitable for plugins that are present at compile time, i.e.
-+"fake plugins".
++inherit pypi setuptools3
 +
-+Instead, this commit adds the plugin settings at load time, as is
-+natural and as the `GSettingsSchema` documentation states. To do this,
-+the setting store is extended to contain several roots: the application
-+root and the plugin roots.
-+
-+For the latter, a unified naming convention is preserved, with the
-+prefix `org.xfce.mousepad.plugins.`, but they are in fact completely
-+independent of each other and independent of the application root.
-+
-+Fixes #136, related to !92.
-+
-+Upstream-Status: Backport [https://gitlab.xfce.org/apps/mousepad/-/commit/0d9d4f05aace800118d0a390e4e5dc5ebb940ca5]
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ mousepad/mousepad-application.c               | 12 +++-
-+ mousepad/mousepad-settings-store.c            | 70 ++++++++++++-------
-+ mousepad/mousepad-settings-store.h            |  3 +
-+ mousepad/mousepad-settings.c                  | 14 +++-
-+ mousepad/mousepad-settings.h                  |  1 +
-+ mousepad/org.xfce.mousepad.gschema.xml        |  1 -
-+ ...g.xfce.mousepad.plugins.gspell.gschema.xml |  4 --
-+ 7 files changed, 71 insertions(+), 34 deletions(-)
-+
-+diff --git a/mousepad/mousepad-application.c b/mousepad/mousepad-application.c
-+index d9a64ff..378d78e 100644
-+--- a/mousepad/mousepad-application.c
-++++ b/mousepad/mousepad-application.c
-+@@ -721,7 +721,7 @@ mousepad_application_load_plugins (MousepadApplication *application)
-+   GError                  *error = NULL;
-+   GDir                    *dir;
-+   const gchar             *basename;
-+-  gchar                   *provider_name;
-++  gchar                   *provider_name, *schema_id;
-+   gchar                  **strs;
-+   gsize                    n_strs;
-+ 
-+@@ -775,6 +775,16 @@ mousepad_application_load_plugins (MousepadApplication *application)
-+                                            application, G_CONNECT_SWAPPED);
-+           g_action_map_add_action (G_ACTION_MAP (application), G_ACTION (action));
-+ 
-++          /* add its settings to the setting store */
-++          if (g_str_has_prefix (provider_name, "mousepad-plugin-"))
-++            schema_id = provider_name + 16;
-++          else
-++            schema_id = provider_name;
-++
-++          schema_id = g_strconcat (MOUSEPAD_ID, ".plugins.", schema_id, NULL);
-++          mousepad_settings_add_root (schema_id);
-++          g_free (schema_id);
-++
-+           /* instantiate this provider types and initialize its action state */
-+           if (g_strv_contains ((const gchar *const *) strs, provider_name))
-+             {
-+diff --git a/mousepad/mousepad-settings-store.c b/mousepad/mousepad-settings-store.c
-+index de989bd..d117c53 100644
-+--- a/mousepad/mousepad-settings-store.c
-++++ b/mousepad/mousepad-settings-store.c
-+@@ -29,9 +29,11 @@
-+ 
-+ struct MousepadSettingsStore_
-+ {
-+-  GObject     parent;
-+-  GSettings  *root;
-+-  GHashTable *keys;
-++  GObject parent;
-++
-++  GSettingsBackend *backend;
-++  GList            *roots;
-++  GHashTable       *keys;
-+ };
-+ 
-+ 
-+@@ -76,8 +78,10 @@ mousepad_setting_key_new (const gchar *key_name,
-+ 
-+ 
-+ static void
-+-mousepad_setting_key_free (MousepadSettingKey *key)
-++mousepad_setting_key_free (gpointer data)
-+ {
-++  MousepadSettingKey *key = data;
-++
-+   if (G_LIKELY (key != NULL))
-+     {
-+       g_object_unref (key->settings);
-+@@ -138,16 +142,16 @@ mousepad_settings_store_class_init (MousepadSettingsStoreClass *klass)
-+ static void
-+ mousepad_settings_store_finalize (GObject *object)
-+ {
-+-  MousepadSettingsStore *self;
-++  MousepadSettingsStore *self = MOUSEPAD_SETTINGS_STORE (object);
-+ 
-+   g_return_if_fail (MOUSEPAD_IS_SETTINGS_STORE (object));
-+ 
-+-  self = MOUSEPAD_SETTINGS_STORE (object);
-++  if (self->backend != NULL)
-++    g_object_unref (self->backend);
-+ 
-++  g_list_free_full (self->roots, g_object_unref);
-+   g_hash_table_destroy (self->keys);
-+ 
-+-  g_object_unref (self->root);
-+-
-+   G_OBJECT_CLASS (mousepad_settings_store_parent_class)->finalize (object);
-+ }
-+ 
-+@@ -212,28 +216,19 @@ static void
-+ mousepad_settings_store_init (MousepadSettingsStore *self)
-+ {
-+ #ifdef MOUSEPAD_SETTINGS_KEYFILE_BACKEND
-+-  GSettingsBackend *backend;
-+-  gchar            *conf_file;
-+-  conf_file = g_build_filename (g_get_user_config_dir (),
-+-                                "Mousepad",
-+-                                "settings.conf",
-+-                                NULL);
-+-  backend = g_keyfile_settings_backend_new (conf_file, "/", NULL);
-++  gchar *conf_file;
-++
-++  conf_file = g_build_filename (g_get_user_config_dir (), "Mousepad", "settings.conf", NULL);
-++  self->backend = g_keyfile_settings_backend_new (conf_file, "/", NULL);
-+   g_free (conf_file);
-+-  self->root = g_settings_new_with_backend (MOUSEPAD_ID, backend);
-+-  g_object_unref (backend);
-+ #else
-+-  self->root = g_settings_new (MOUSEPAD_ID);
-++  self->backend = NULL;
-+ #endif
-+ 
-+-  self->keys = g_hash_table_new_full (g_str_hash,
-+-                                      g_str_equal,
-+-                                      NULL,
-+-                                      (GDestroyNotify) mousepad_setting_key_free);
-++  self->roots = NULL;
-++  self->keys = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, mousepad_setting_key_free);
-+ 
-+-  mousepad_settings_store_add_settings (self, MOUSEPAD_ID,
-+-                                        g_settings_schema_source_get_default (),
-+-                                        self->root);
-++  mousepad_settings_store_add_root (self, MOUSEPAD_ID);
-+ }
-+ 
-+ 
-+@@ -246,6 +241,31 @@ mousepad_settings_store_new (void)
-+ 
-+ 
-+ 
-++void
-++mousepad_settings_store_add_root (MousepadSettingsStore *self,
-++                                  const gchar           *schema_id)
-++{
-++  GSettingsSchemaSource *source;
-++  GSettingsSchema       *schema;
-++  GSettings             *root;
-++
-++  source = g_settings_schema_source_get_default ();
-++  schema = g_settings_schema_source_lookup (source, schema_id, TRUE);
-++
-++  /* exit silently if no schema is found: plugins may have settings or not */
-++  if (schema == NULL)
-++    return;
-++
-++  root = g_settings_new_full (schema, self->backend, NULL);
-++  g_settings_schema_unref (schema);
-++
-++  self->roots = g_list_prepend (self->roots, root);
-++
-++  mousepad_settings_store_add_settings (self, schema_id, source, root);
-++}
-++
-++
-++
-+ const gchar *
-+ mousepad_settings_store_lookup_key_name (MousepadSettingsStore *self,
-+                                          const gchar           *setting)
-+diff --git a/mousepad/mousepad-settings-store.h b/mousepad/mousepad-settings-store.h
-+index 3f5cae1..4842036 100644
-+--- a/mousepad/mousepad-settings-store.h
-++++ b/mousepad/mousepad-settings-store.h
-+@@ -38,6 +38,9 @@ GType                  mousepad_settings_store_get_type        (void);
-+ 
-+ MousepadSettingsStore *mousepad_settings_store_new             (void);
-+ 
-++void                   mousepad_settings_store_add_root        (MousepadSettingsStore  *store,
-++                                                                const gchar            *schema_id);
-++
-+ const gchar           *mousepad_settings_store_lookup_key_name (MousepadSettingsStore  *store,
-+                                                                 const gchar            *setting);
-+ 
-+diff --git a/mousepad/mousepad-settings.c b/mousepad/mousepad-settings.c
-+index d071de6..66b338d 100644
-+--- a/mousepad/mousepad-settings.c
-++++ b/mousepad/mousepad-settings.c
-+@@ -24,6 +24,15 @@ static MousepadSettingsStore *settings_store = NULL;
-+ 
-+ 
-+ 
-++void
-++mousepad_settings_init (void)
-++{
-++  if (settings_store == NULL)
-++    settings_store = mousepad_settings_store_new ();
-++}
-++
-++
-++
-+ void
-+ mousepad_settings_finalize (void)
-+ {
-+@@ -39,10 +48,9 @@ mousepad_settings_finalize (void)
-+ 
-+ 
-+ void
-+-mousepad_settings_init (void)
-++mousepad_settings_add_root (const gchar *schema_id)
-+ {
-+-  if (settings_store == NULL)
-+-    settings_store = mousepad_settings_store_new ();
-++  mousepad_settings_store_add_root (settings_store, schema_id);
-+ }
-+ 
-+ 
-+diff --git a/mousepad/mousepad-settings.h b/mousepad/mousepad-settings.h
-+index bc63d11..615be51 100644
-+--- a/mousepad/mousepad-settings.h
-++++ b/mousepad/mousepad-settings.h
-+@@ -87,6 +87,7 @@ G_BEGIN_DECLS
-+ 
-+ void       mousepad_settings_init          (void);
-+ void       mousepad_settings_finalize      (void);
-++void       mousepad_settings_add_root      (const gchar        *schema_id);
-+ 
-+ void       mousepad_setting_bind           (const gchar        *setting,
-+                                             gpointer            object,
-+diff --git a/mousepad/org.xfce.mousepad.gschema.xml b/mousepad/org.xfce.mousepad.gschema.xml
-+index e802719..8509ee3 100644
-+--- a/mousepad/org.xfce.mousepad.gschema.xml
-++++ b/mousepad/org.xfce.mousepad.gschema.xml
-+@@ -39,7 +39,6 @@
-+ 
-+   <!-- generic schemas -->
-+   <schema id="org.xfce.mousepad" path="/org/xfce/mousepad/" gettext-domain="mousepad">
-+-    <child name="plugins" schema="org.xfce.mousepad.plugins"/>
-+     <child name="preferences" schema="org.xfce.mousepad.preferences"/>
-+     <child name="state" schema="org.xfce.mousepad.state"/>
-+   </schema>
-+diff --git a/plugins/gspell-plugin/org.xfce.mousepad.plugins.gspell.gschema.xml b/plugins/gspell-plugin/org.xfce.mousepad.plugins.gspell.gschema.xml
-+index 6db65b6..95295ba 100644
-+--- a/plugins/gspell-plugin/org.xfce.mousepad.plugins.gspell.gschema.xml
-++++ b/plugins/gspell-plugin/org.xfce.mousepad.plugins.gspell.gschema.xml
-+@@ -1,9 +1,5 @@
-+ <schemalist>
-+ 
-+-  <schema id="org.xfce.mousepad.plugins" path="/org/xfce/mousepad/plugins/" gettext-domain="mousepad">
-+-    <child name="gspell" schema="org.xfce.mousepad.plugins.gspell"/>
-+-  </schema>
-+-
-+   <schema id="org.xfce.mousepad.plugins.gspell" path="/org/xfce/mousepad/plugins/gspell/" gettext-domain="mousepad">
-+     <child name="preferences" schema="org.xfce.mousepad.plugins.gspell.preferences"/>
-+   </schema>
-+-- 
-+2.17.1
-+
-diff --git a/meta-xfce/recipes-apps/mousepad/mousepad_0.5.5.bb b/meta-xfce/recipes-apps/mousepad/mousepad_0.5.5.bb
-index 830d86b8a..a93ff551b 100644
---- a/meta-xfce/recipes-apps/mousepad/mousepad_0.5.5.bb
-+++ b/meta-xfce/recipes-apps/mousepad/mousepad_0.5.5.bb
-@@ -7,6 +7,8 @@ DEPENDS = "gtk+3 gtksourceview4 xfconf xfce4-dev-tools-native"
- 
- inherit xfce-app gsettings mime-xdg
- 
-+SRC_URI += "file://0001-Plugin-support-Properly-handle-plugin-settings.patch"
-+
- SRC_URI[sha256sum] = "40c35f00e0e10df50a59bd0dbba9007d2fb5574ed8a2aa73b0fc5ef40e64abe1"
- 
- PACKAGECONFIG ??= ""
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-ifaddr \
++"
 -- 
 2.17.1
 
