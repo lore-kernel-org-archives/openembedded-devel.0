@@ -1,56 +1,125 @@
-Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
- by mx.groups.io with SMTP id smtpd.web12.5566.1623735374066544822
- for <Openembedded-devel@lists.openembedded.org>;
- Mon, 14 Jun 2021 22:36:14 -0700
+Received: from mail-vk1-f177.google.com (mail-vk1-f177.google.com [209.85.221.177])
+ by mx.groups.io with SMTP id smtpd.web08.5909.1623740019346572426
+ for <openembedded-devel@lists.openembedded.org>;
+ Mon, 14 Jun 2021 23:53:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: hayashi.satoshi@fujitsu.com)
-IronPort-SDR: ShAN2NzahAfIBAsp6XcFuEUD9cN63VZsF9C0YPmfRaZlu5V05kuILzd7kdaaSn8PT+MuTYd465
- ol2qqpmLrDLfk+rvhE2/HHIKw1mVx+mWHUbpkXxTURIHi7Xz88UsYODPUB88tugMlSeyObzTYC
- cF2igXxFCUuUAsmgJqRD5OkVUUJpdjyv3ukJyqu15kox2ej1nqt3wwri1YoAMNGRjTitdO9iiv
- 1tLmj6f3YC0/w4mi0rA3cCNnSotR//B76IBcR7O8NQqPsnbvm0MSRQZSS5OMB08SzAi39z8OZK
- Z8U=
-X-IronPort-AV: E=McAfee;i="6200,9189,10015"; a="33149612"
-X-IronPort-AV: E=Sophos;i="5.83,275,1616425200"; 
-   d="scan'208";a="33149612"
-Received: from unknown (HELO oym-r1.gw.nic.fujitsu.com) ([210.162.30.89])
-  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP; 15 Jun 2021 14:36:11 +0900
-Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
-	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id E8271DF250
-	for <Openembedded-devel@lists.openembedded.org>; Tue, 15 Jun 2021 14:36:10 +0900 (JST)
-Received: from yto-om4.fujitsu.com (yto-om4.o.css.fujitsu.com [10.128.89.165])
-	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 30EDF3273B7
-	for <Openembedded-devel@lists.openembedded.org>; Tue, 15 Jun 2021 14:36:10 +0900 (JST)
-Received: from pumpkin.openstacklocal (pumpkin.fct.css.fujitsu.com [10.130.70.189])
-	by yto-om4.fujitsu.com (Postfix) with ESMTP id 0F79D4007EB20
-	for <Openembedded-devel@lists.openembedded.org>; Tue, 15 Jun 2021 14:36:10 +0900 (JST)
-From: "hayashi.satoshi@fujitsu.com" <hayashi.satoshi@fujitsu.com>
-To: Openembedded-devel@lists.openembedded.org
-Subject: [PATCH] dracut: add CVE-2010-4176 to allowlist
-Date: Tue, 15 Jun 2021 14:36:06 +0900
-Message-Id: <20210615053606.855233-1-hayashi.satoshi@fujitsu.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=TlSfPA9a;
+ spf=pass (domain: gmail.com, ip: 209.85.221.177, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-vk1-f177.google.com with SMTP id i17so4724443vkd.7
+        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Jun 2021 23:53:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=npDCZZyO0yBu+KiZJQxzGOIzop2b88wa0FiFoYoh7pE=;
+        b=TlSfPA9aNTs5MEChYI7R7CfD5iKG6uF2Z7r6BoC/dX3nWWVQ2+Nr2vCuOO0GzXnSLs
+         3Ytprir9adP8PHhp9/y/MT8XZw5MHglrJ23fp1XjTX4HP3nrExLTeLqF7rbS25pamU4k
+         2bS81e2vTBkBsWDmwKA5urJosT0+Q7SpcyDKQh12UgVNF5tyszBGw8eLzsq6ZhERA6jB
+         mQrIa7RHzWMC2p/6vNZtEZMNgmQ2ZYILt3gg43/NHgTxfhofLoGg+KrSNfpqKqHX1UAb
+         Jd8YvWyJ6YWxBvz1YHtnkdtq4qBvmxETdvnqqMeQsKhkEDNVxEZHl3aNbHbqY+hS+hzK
+         MNKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=npDCZZyO0yBu+KiZJQxzGOIzop2b88wa0FiFoYoh7pE=;
+        b=MtPBvJ54vhM7pXJa/237hLf72xXtJ//LZMUMB6ZpvK/jDCuGWc3kyTMkiaapk9gmM/
+         qz57jWWEc5D6sVr6NT/70lMoDUKTieoY6ExVNEpgZM8GffFXuHeaDFdNKr+JYIDEs+bC
+         WpkqD2Zg2m+0zBNkJ4Uo7Hxw6gX/fOKoWnT3Wy4hmAEvvbG7Ua8PHBA8IZ6kb6PMcBx2
+         c3PUs4Pf/JF8IK2W+7u7K/+Mxk16GkKWtQgcr83BA3xEcvUlUqY4cRtNp2VYcArwQXH5
+         xo4c2uqRkCA/dMfPUZYPX/FUhE+2Nd6kN7qhNp+I8UsE4RIXz0ZD68nr+klUlnA357b4
+         Qlzw==
+X-Gm-Message-State: AOAM530kYn3u2wubZtkIloRZNCgvb6wYT0oX5l0U4D63ZPcBnNtLmmX0
+	85IxML1ZgnNDYdfVtP+qP/C/SayCBWWBcBajAcw=
+X-Google-Smtp-Source: ABdhPJzg7K8B+MWQ9re6oG0Y2EKd6T+A8ND6lLA8NbFLE8P4uaZ1aqzBO0RVfefvt5oKJH6yJSxbmEXmnHTAexAg7RQ=
+X-Received: by 2002:ac5:cbc5:: with SMTP id h5mr2649948vkn.7.1623740018278;
+ Mon, 14 Jun 2021 23:53:38 -0700 (PDT)
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-Content-Transfer-Encoding: 8bit
+References: <98hT.1623132594082542882.bzIp@lists.yoctoproject.org>
+ <CANNYZj9r_eZ8ZHEo801viRNuBekefmvKuqtLfKsKTQncw+uw-w@mail.gmail.com>
+ <YMe6JtmeJc1NiRYZ@brokenbit> <ec0d85da208aa26517a50ea998b855a5aa0d1455.camel@linuxfoundation.org>
+ <YMfKw9F6qY7daERE@brokenbit>
+In-Reply-To: <YMfKw9F6qY7daERE@brokenbit>
+From: "Alexander Kanavin" <alex.kanavin@gmail.com>
+Date: Tue, 15 Jun 2021 08:53:26 +0200
+Message-ID: <CANNYZj8DDhPseB_Vzr4oboJgQn6VY5LbRym6-Tp7=peHfKTJvw@mail.gmail.com>
+Subject: Re: [yocto] [meta-java] icedtea7 fetching error
+To: Richard Leitner - SKIDATA <Richard.Leitner@skidata.com>
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>, 
+	"George.Mocanu@rinftech.com" <George.Mocanu@rinftech.com>, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>, 
+	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000ff44d005c4c86e26"
 
-CVE-2010-4176 affects only using plymouth-pretrigger.sh script on Fedora.
+--000000000000ff44d005c4c86e26
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Satoshi Hayashi <hayashi.satoshi@fujitsu.com>
----
- meta-initramfs/recipes-devtools/dracut/dracut_git.bb | 3 +++
- 1 file changed, 3 insertions(+)
+On Mon, 14 Jun 2021 at 23:31, Richard Leitner - SKIDATA <
+Richard.Leitner@skidata.com> wrote:
 
-diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-index ce975f5a1..4d702dc56 100644
---- a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-+++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-@@ -66,3 +66,6 @@ RRECOMMENDS_${PN} = " \
-                      busybox \
-                      coreutils \
-                     "
-+
-+# CVE-2010-4176 affects only Fedora
-+CVE_CHECK_WHITELIST += "CVE-2010-4176"
--- 
-2.25.1
+> Thank you very much Richard!
+> The openjdk8 tarballs are now hosted at
+> https://downloads.yoctoproject.org/mirror/sources/
+> with their local download names.
+>
+> Unfortunately I currently don't have the time and resources to provide a
+> patch for fixing the URLs and adding the mirror.
+> So help is greatly appreciated!
+>
 
+Unfortunately I think you mirrored the wrong tarballs. The problematic ones
+are specifically the six tarballs coming from
+http://icedtea.classpath.org/hg/
+and I am not seeing them mirrored. See the original error at the start of
+this thread:
+
+--2021-06-07 17:24:33--
+http://icedtea.classpath.org/hg/release/icedtea7-forest-2.1/archive/f89009ada191.tar.bz2
+Resolving icedtea.classpath.org (icedtea.classpath.org)... 172.104.137.120
+Connecting to icedtea.classpath.org
+(icedtea.classpath.org)|172.104.137.120|:80... connected.
+HTTP request sent, awaiting response... 404 Not Found
+2021-06-07 16:21:05 ERROR 404: Not Found.
+
+
+Alex
+
+--000000000000ff44d005c4c86e26
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail=
+_attr">On Mon, 14 Jun 2021 at 23:31, Richard Leitner - SKIDATA &lt;<a href=
+=3D"mailto:Richard.Leitner@skidata.com">Richard.Leitner@skidata.com</a>&gt;=
+ wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
+0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Thank yo=
+u very much Richard!<br>
+The openjdk8 tarballs are now hosted at <a href=3D"https://downloads.yoctop=
+roject.org/mirror/sources/" rel=3D"noreferrer" target=3D"_blank">https://do=
+wnloads.yoctoproject.org/mirror/sources/</a><br>
+with their local download names.<br>
+<br>
+Unfortunately I currently don&#39;t have the time and resources to provide =
+a<br>
+patch for fixing the URLs and adding the mirror.<br>
+So help is greatly appreciated!<br>
+</blockquote><div><br></div><div>Unfortunately I think you mirrored the wro=
+ng tarballs. The problematic ones are specifically the six tarballs coming =
+from <a href=3D"http://icedtea.classpath.org/hg/">http://icedtea.classpath.=
+org/hg/</a></div><div>and I am not seeing them mirrored. See the original e=
+rror at the start of this thread:</div><div><br></div><div><pre><span>--202=
+1-06-07 17:24:33--  <a href=3D"http://icedtea.classpath.org/hg/release/iced=
+tea7-forest-2.1/archive/f89009ada191.tar.bz2" target=3D"_blank">http://iced=
+tea.classpath.org/hg/release/icedtea7-forest-2.1/archive/f89009ada191.tar.b=
+z2</a>
+Resolving <a href=3D"http://icedtea.classpath.org" target=3D"_blank">icedte=
+a.classpath.org</a> (<a href=3D"http://icedtea.classpath.org" target=3D"_bl=
+ank">icedtea.classpath.org</a>)... 172.104.137.120<br>Connecting to <a href=
+=3D"http://icedtea.classpath.org" target=3D"_blank">icedtea.classpath.org</=
+a> (<a href=3D"http://icedtea.classpath.org" target=3D"_blank">icedtea.clas=
+spath.org</a>)|172.104.137.120|:80... connected.<br>HTTP request sent, awai=
+ting response... 404 Not Found<br>2021-06-07 16:21:05 ERROR 404: Not Found.=
+</span></pre></div><div><br></div><div>Alex<br></div><div><br></div><div><b=
+r></div></div></div>
+
+--000000000000ff44d005c4c86e26--
