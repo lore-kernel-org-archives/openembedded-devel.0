@@ -1,77 +1,167 @@
-Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
- by mx.groups.io with SMTP id smtpd.web12.317.1623866387005975974
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web10.593.1623867688682702344
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Jun 2021 10:59:47 -0700
+ Wed, 16 Jun 2021 11:21:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=lBU0UDAF;
- spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f179.google.com with SMTP id v7so2641925pgl.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Jun 2021 10:59:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=Khe1XzwPltve568eYig6aBqw1K8PlyOu0GjoQcS3rKE=;
-        b=lBU0UDAFOCi2ogHQeQCCWPMCNHLbP60z9kYPelJq2JdL5kwEmyT2h1k2VICYPlyTE8
-         ZckSLF0Zpf7ghvnuSlYV81rgTAKmPxj/Uzh/pcsrkQJlT0meCYUyxE00SVycZKhBjK9c
-         jrb0lGwOx4qLwjQbDYWiCzbvByEcKWg5eHWr+vsRTxWaFK2LtQz5BZGrCOTQoyiAg8DY
-         hn7jgibEYet8CTnIfjg/BxjDN8DUycxrZ9lCHOm8YIOYR+Qnoucw64GUEOeQVUyBExD0
-         bwGMEw8ChEKvjmlMLtwolJgp/SaWVyxkZNlJEWEMGwelgVRPu2XCKq8HFWqmqx6XmVw/
-         nL0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=Khe1XzwPltve568eYig6aBqw1K8PlyOu0GjoQcS3rKE=;
-        b=jUFQwetbCWs/xrGx+3K1GzP83SmUsn/0c9P3GWTtuYywg2G288LfrgsVkEpbgF88PZ
-         G/41/qqQYWl4lu71jVUxTwnbilAXKMHt64tZhmW2U1Yt+VSxvnKqpvBwF5i+N+idKjAT
-         IOSG3ZaCuB7t0TBwT5VqNi277OEmR9NCs1lIXMl+jseCcksLVFNejlgbkoS5Mb3vmax1
-         nifAUC1Fx9m84BSPWBXIc0CHu/n5rJzd1PQKjKWplagC5babW8KySz119pgmJN9N6DOf
-         osaReXBkbatenZku5mMM/krsdvnKvZjjMcDSovOrAovnFKW4ftZYGGfFvLxgprI3dXG3
-         fH7w==
-X-Gm-Message-State: AOAM533gxpeDB9Jva8NUV0F5cXY/d4E+/XttrH8M0KPSQ4G0YRa5Y+Pn
-	+6Efs5x2vQcW1gw73gSAy0E7+7dtYWGd1g==
-X-Google-Smtp-Source: ABdhPJxI6D0z+DYVK4tMqCUnvMKup7vEfW2O5gGbFBGSm/w0NU2AZClqO+JD+zjWTOle/+HgfIRPpg==
-X-Received: by 2002:a63:ec43:: with SMTP id r3mr818284pgj.344.1623866386106;
-        Wed, 16 Jun 2021 10:59:46 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a054])
-        by smtp.gmail.com with ESMTPSA id y7sm2872982pfy.153.2021.06.16.10.59.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Jun 2021 10:59:45 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 9/9] rocksdb: Disable on riscv architectures
-Date: Wed, 16 Jun 2021 10:59:37 -0700
-Message-Id: <20210616175937.323664-9-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.32.0
-In-Reply-To: <20210616175937.323664-1-raj.khem@gmail.com>
-References: <20210616175937.323664-1-raj.khem@gmail.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: sakib.sajal@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 15GILRpq026901
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Jun 2021 11:21:27 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.10; Wed, 16 Jun 2021 11:21:27 -0700
+Received: from localhost.localdomain (128.224.73.109) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.10 via Frontend Transport; Wed, 16 Jun 2021 11:21:26 -0700
+From: "Sakib Sajal" <sakib.sajal@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] lmdb: add recipe
+Date: Wed, 16 Jun 2021 14:21:23 -0400
+Message-ID: <20210616182123.45393-1-sakib.sajal@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Errors are
-utilities/transactions/lock/range/range_tree/lib/locktree/../portability/toku_time.h:137:2: error: #error No timer implementation for this platform
-  137 | #error No timer implementation for this platform
-      |  ^~~~~
+lmdb provides a high-performance embedded transactional
+database in the form of a key-value store.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Recipe is ported from meta-qt5-extra layer.
+
+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
 ---
- meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../files/0001-Patch-the-main-Makefile.patch  | 90 +++++++++++++++++++
+ meta-oe/recipes-dbs/lmdb/lmdb_git.bb          | 22 +++++
+ 2 files changed, 112 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/lmdb/files/0001-Patch-the-main-Makefile.patch
+ create mode 100644 meta-oe/recipes-dbs/lmdb/lmdb_git.bb
 
-diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
-index ded454e167..f5b2946cd5 100644
---- a/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
-+++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
-@@ -43,3 +43,6 @@ do_install_append() {
- }
- 
- LDFLAGS_append_riscv64 = " -pthread"
+diff --git a/meta-oe/recipes-dbs/lmdb/files/0001-Patch-the-main-Makefile.patch b/meta-oe/recipes-dbs/lmdb/files/0001-Patch-the-main-Makefile.patch
+new file mode 100644
+index 000000000..9ba626101
+--- /dev/null
++++ b/meta-oe/recipes-dbs/lmdb/files/0001-Patch-the-main-Makefile.patch
+@@ -0,0 +1,90 @@
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Tue, 1 Sep 2015 22:54:31 +0200
++Subject: [PATCH] Patch the main Makefile to allow for a build that complies to packaging guidelines.
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
 +
-+COMPATIBLE_HOST_riscv64 = "null"
-+COMPATIBLE_HOST_riscv32 = "null"
++Taken from [1]
++
++[1] https://src.fedoraproject.org/rpms/lmdb/raw/master/f/lmdb-make.patch
++
++Upstream-Status: Pending
++
++
++diff --git a/Makefile b/Makefile
++--- a/Makefile
+++++ b/Makefile
++@@ -26,6 +26,7 @@ OPT = -O2 -g
++ CFLAGS	= $(THREADS) $(OPT) $(W) $(XCFLAGS)
++ LDLIBS	=
++ SOLIBS	=
+++SOVERSION	= 0.0.0
++ SOEXT	= .so
++ prefix	= /usr/local
++ exec_prefix = $(prefix)
++@@ -38,7 +39,7 @@ mandir = $(datarootdir)/man
++ ########################################################################
++ 
++ IHDRS	= lmdb.h
++-ILIBS	= liblmdb.a liblmdb$(SOEXT)
+++ILIBS	= liblmdb$(SOEXT) liblmdb$(SOEXT).$(SOVERSION)
++ IPROGS	= mdb_stat mdb_copy mdb_dump mdb_load
++ IDOCS	= mdb_stat.1 mdb_copy.1 mdb_dump.1 mdb_load.1
++ PROGS	= $(IPROGS) mtest mtest2 mtest3 mtest4 mtest5
++@@ -49,13 +50,13 @@ install: $(ILIBS) $(IPROGS) $(IHDRS)
++ 	mkdir -p $(DESTDIR)$(libdir)
++ 	mkdir -p $(DESTDIR)$(includedir)
++ 	mkdir -p $(DESTDIR)$(mandir)/man1
++-	for f in $(IPROGS); do cp $$f $(DESTDIR)$(bindir); done
++-	for f in $(ILIBS); do cp $$f $(DESTDIR)$(libdir); done
++-	for f in $(IHDRS); do cp $$f $(DESTDIR)$(includedir); done
++-	for f in $(IDOCS); do cp $$f $(DESTDIR)$(mandir)/man1; done
+++	for f in $(IPROGS); do cp -a $$f $(DESTDIR)$(bindir); done
+++	for f in $(ILIBS); do cp -a $$f $(DESTDIR)$(libdir); done
+++	for f in $(IHDRS); do cp -a $$f $(DESTDIR)$(includedir); done
+++	for f in $(IDOCS); do cp -a $$f $(DESTDIR)$(mandir)/man1; done
++ 
++ clean:
++-	rm -rf $(PROGS) *.[ao] *.[ls]o *~ testdb
+++	rm -rf $(PROGS) *.[ao] *.[ls]o* *~ testdb
++ 
++ test:	all
++ 	rm -rf testdb && mkdir testdb
++@@ -64,20 +65,24 @@ test:	all
++ liblmdb.a:	mdb.o midl.o
++ 	$(AR) rs $@ mdb.o midl.o
++ 
++-liblmdb$(SOEXT):	mdb.lo midl.lo
+++liblmdb$(SOEXT):	liblmdb$(SOEXT).$(SOVERSION)
+++	rm -f $@
+++	ln -s $< $@
+++
+++liblmdb$(SOEXT).$(SOVERSION):	mdb.lo midl.lo
++ #	$(CC) $(LDFLAGS) -pthread -shared -Wl,-Bsymbolic -o $@ mdb.o midl.o $(SOLIBS)
++-	$(CC) $(LDFLAGS) -pthread -shared -o $@ mdb.lo midl.lo $(SOLIBS)
+++	$(CC) $(LDFLAGS) -pthread -shared -Wl,-soname,$@ -o $@ mdb.lo midl.lo $(SOLIBS)
++ 
++-mdb_stat: mdb_stat.o liblmdb.a
++-mdb_copy: mdb_copy.o liblmdb.a
++-mdb_dump: mdb_dump.o liblmdb.a
++-mdb_load: mdb_load.o liblmdb.a
++-mtest:    mtest.o    liblmdb.a
++-mtest2:	mtest2.o liblmdb.a
++-mtest3:	mtest3.o liblmdb.a
++-mtest4:	mtest4.o liblmdb.a
++-mtest5:	mtest5.o liblmdb.a
++-mtest6:	mtest6.o liblmdb.a
+++mdb_stat: mdb_stat.o liblmdb.so
+++mdb_copy: mdb_copy.o liblmdb.so
+++mdb_dump: mdb_dump.o liblmdb.so
+++mdb_load: mdb_load.o liblmdb.so
+++mtest:    mtest.o    liblmdb.so
+++mtest2:	mtest2.o liblmdb.so
+++mtest3:	mtest3.o liblmdb.so
+++mtest4:	mtest4.o liblmdb.so
+++mtest5:	mtest5.o liblmdb.so
+++mtest6:	mtest6.o liblmdb.so
++ 
++ mdb.o: mdb.c lmdb.h midl.h
++ 	$(CC) $(CFLAGS) $(CPPFLAGS) -c mdb.c
+diff --git a/meta-oe/recipes-dbs/lmdb/lmdb_git.bb b/meta-oe/recipes-dbs/lmdb/lmdb_git.bb
+new file mode 100644
+index 000000000..22db6d44b
+--- /dev/null
++++ b/meta-oe/recipes-dbs/lmdb/lmdb_git.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "Symas Lightning Memory-Mapped Database (LMDB)"
++HOMEPAGE = "http://symas.com/mdb/"
++LICENSE = "OLDAP-2.8"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972"
++
++SRC_URI = " \
++    git://github.com/LMDB/lmdb.git;nobranch=1 \
++    file://0001-Patch-the-main-Makefile.patch \
++"
++SRCREV = "8ad7be2510414b9506ec9f9e24f24d04d9b04a1a"
++S = "${WORKDIR}/git/libraries/liblmdb"
++PV = "0.9.29"
++
++do_compile() {
++    oe_runmake "CC=${CC}"
++}
++
++do_install() {
++    oe_runmake DESTDIR=${D} prefix=${prefix} libdir=${libdir} mandir=${mandir} install
++    chown -R root:root ${D}${bindir}
++    chown -R root:root ${D}${libdir}
++}
 -- 
-2.32.0
+2.25.1
 
