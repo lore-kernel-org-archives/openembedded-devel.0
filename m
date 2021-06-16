@@ -1,101 +1,62 @@
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web11.66.1623774905426294547
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web10.5251.1623836058675133842
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 15 Jun 2021 09:35:05 -0700
+ Wed, 16 Jun 2021 02:34:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Bz9l3C6e;
- spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id z26so13675889pfj.5
-        for <openembedded-devel@lists.openembedded.org>; Tue, 15 Jun 2021 09:35:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:organization:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=UEfWh6Fk6bPHuPMxgJnu2a3KXQYkP26g8h+slREzSmA=;
-        b=Bz9l3C6erlaMvwFLHlE/MfnwYrMrxqYJmCXZIcCNugTnVQ/m8NLGmt16xiJchmVZz3
-         40dt4+WM7oDJHNUvOgOdpmHnJ/Ibuvj57Wyllu4k7vFyoybFbi6Gr1a1Ctaw92EPDvtC
-         EMLzfsTOGKxTQ0AIFZ6M3M39TQNI6CL0BfPysAy5fW/1eYxCzYcvIuCksobLtAHH8zFK
-         fo2Jl63mAhvQ7tp9Up1rNAoLcGcqbJcgFh2gJdwkvt59p/zeRlgJVCU/gcFWDpMDoxYy
-         I/IpkevyP3GI1iA10LMfLnRUXG5a80Ji5kmL4YA8uBfWMmod4ibzNvyDhxySka9NsZL0
-         4HHQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=UEfWh6Fk6bPHuPMxgJnu2a3KXQYkP26g8h+slREzSmA=;
-        b=SJp+4qGyO2Rk6wmsMa0iwuAlTewQzTHeLi89dQzYpdCL567kDSBLoaRSUnk1Xg725K
-         90TUMDfnMKUik5vrwC0XRsrBpmzC9rzvy93HmcrIdFSCAlC5Vhv5IqsQOH6cHvtHohMx
-         fxz2HaFxDqDnkBALMUKgbrm/c5+LoQlA9s34mBpedJeBeRGr2G/rqKkCnCYPF3UJA+5/
-         LeS00MY9LqpI7f5AhER44XcTWGBYyg8ihQziFEh5wc1h5XTy9FbeuooeqQPv4NVwrxxz
-         xxYI5vj9BLLUrpwfa4LFUgA54vw/jcH9iMn7xxB4B/XVju6VrPO5PmE4blyooBCV4nsF
-         dnuA==
-X-Gm-Message-State: AOAM530vVvZkDnPzKC8T8sPOq0z8HNT+b0BjsGPWvj3VWgRg3iq1lxUa
-	C4XrzBAVTSSeivnlYNSpbws=
-X-Google-Smtp-Source: ABdhPJzYdrU+htZysKg45pOWB49LKvtV1l88MDkSxgcr7xh/FArzZhEiwsveOmzSmZBmWTDZkipCLg==
-X-Received: by 2002:aa7:9515:0:b029:2e9:c6f4:2c44 with SMTP id b21-20020aa795150000b02902e9c6f42c44mr5419974pfp.28.1623774904686;
-        Tue, 15 Jun 2021 09:35:04 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:a0f0:d088:fa89:ac40:a9cc? ([2601:646:9200:a0f0:d088:fa89:ac40:a9cc])
-        by smtp.gmail.com with ESMTPSA id x36sm15951362pfu.39.2021.06.15.09.35.03
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 15 Jun 2021 09:35:04 -0700 (PDT)
-Subject: Re: [meta-openwrt][PATCH 0/7] Use meta-openwrt for i.MX6 with Poky
-To: Mark Jonas <mark.jonas@de.bosch.com>,
- openembedded-devel@lists.openembedded.org
-Cc: kevin.zhang3@cn.bosch.com
-References: <20210615154049.173769-1-mark.jonas@de.bosch.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <fbdcc3ca-e4d4-732a-f1a4-5d0a6fe79f38@gmail.com>
-Date: Tue, 15 Jun 2021 09:35:02 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.11.0
-MIME-Version: 1.0
-In-Reply-To: <20210615154049.173769-1-mark.jonas@de.bosch.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=47840 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.93)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1ltRw8-0004CE-W2; Wed, 16 Jun 2021 12:34:17 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/5] python3-humanize: Upgrade 3.7.1 -> 3.9.0
+Date: Wed, 16 Jun 2021 12:34:07 +0300
+Message-Id: <20210616093408.19873-4-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210616093408.19873-1-leon.anavi@konsulko.com>
+References: <20210616093408.19873-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
+Upgrade to release 3.9.0:
 
+- Move vi_VI to vi_VN and update some translations
+- Add Slovenian translation
 
-On 6/15/21 8:40 AM, Mark Jonas wrote:
-> We made an experiment to build OpenWRT using meta-openwrt and Poky
-> Dunfell on a i.MX6 Solo platform. For making it build and run we had to
-> apply the following patches. We hope that the patches help the further
-> development of meta-openwrt and maybe we get helpful feedback in return.
-> 
-> Kevin Zhang (7):
->    layer.conf: Add dunfell to compatible releases
->    netifd: Remove dependency on bridge module
->    base-files: Do not use /etc/group from OpenWrt
->    base-files: Create /run/lock directory
->    busybox: Supply patches for different versions
->    lucihttp: Add recipe
->    luci: Fix error module 'luci.util' not found
-> 
->   conf/layer.conf                               |  2 +-
->   recipes-core/netifd/netifd_git.bb             |  1 -
->   recipes-extended/luci/luci/cmake.patch        | 15 +++++-
->   recipes-extended/luci/luci_git.bb             |  2 +-
->   recipes-extended/lucihttp/lucihttp.bb         | 23 +++++++++
->   .../base-files/base-files_3.%.bbappend        |  8 +++-
->   ...t_misdetection_triggered_without_LFS.patch | 47 +++++++++++++++++++
->   ...t_misdetection_triggered_without_LFS.patch |  0
->   ...t_misdetection_triggered_without_LFS.patch | 46 ++++++++++++++++++
->   recipes-tweaks/busybox/busybox_%.bbappend     |  1 -
->   .../busybox/busybox_1.31.%.bbappend           |  7 +++
->   .../busybox/busybox_1.32.%.bbappend           |  7 +++
->   .../busybox/busybox_1.33.%.bbappend           |  7 +++
->   13 files changed, 160 insertions(+), 6 deletions(-)
->   create mode 100644 recipes-extended/lucihttp/lucihttp.bb
->   create mode 100644 recipes-tweaks/busybox/busybox-1.31.%/z300-fix_off_t_misdetection_triggered_without_LFS.patch
->   rename recipes-tweaks/busybox/{busybox => busybox-1.32.%}/z300-fix_off_t_misdetection_triggered_without_LFS.patch (100%)
->   create mode 100644 recipes-tweaks/busybox/busybox-1.33.%/z300-fix_off_t_misdetection_triggered_without_LFS.patch
->   create mode 100644 recipes-tweaks/busybox/busybox_1.31.%.bbappend
->   create mode 100644 recipes-tweaks/busybox/busybox_1.32.%.bbappend
->   create mode 100644 recipes-tweaks/busybox/busybox_1.33.%.bbappend
-> 
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../{python3-humanize_3.7.1.bb => python3-humanize_3.9.0.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-humanize_3.7.1.bb => python3-humanize_3.9.0.bb} (82%)
 
-Looks good. Can you create a GH pull for this please ?
+diff --git a/meta-python/recipes-devtools/python/python3-humanize_3.7.1.bb b/meta-python/recipes-devtools/python/python3-humanize_3.9.0.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-humanize_3.7.1.bb
+rename to meta-python/recipes-devtools/python/python3-humanize_3.9.0.bb
+index 977b6ebfec..f3a11745e1 100644
+--- a/meta-python/recipes-devtools/python/python3-humanize_3.7.1.bb
++++ b/meta-python/recipes-devtools/python/python3-humanize_3.9.0.bb
+@@ -5,7 +5,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d"
+ 
+-SRC_URI[sha256sum] = "b8e7878f3063174b212bb82b9e5bee3b24bc47931e44df0bd34bcb1d8e0acf2f"
++SRC_URI[sha256sum] = "892a5b7b87763c4c6997a58382c2b1f4614048a2e01c23ef1bb0456e6f9d4d5d"
+ 
+ inherit pypi setuptools3
+ 
+-- 
+2.17.1
+
