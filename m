@@ -1,90 +1,107 @@
-Received: from mail-qv1-f50.google.com (mail-qv1-f50.google.com [209.85.219.50])
- by mx.groups.io with SMTP id smtpd.web11.3777.1623908346180969771
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web10.4158.1623910689003032429
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Jun 2021 22:39:06 -0700
+ Wed, 16 Jun 2021 23:18:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZlueKB/v;
- spf=pass (domain: gmail.com, ip: 209.85.219.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f50.google.com with SMTP id 5so1062897qvf.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Jun 2021 22:39:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=H8BoqQBL;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id x22so825894pll.11
+        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Jun 2021 23:18:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=a72J/geVR6xi2mxVeX1kxu+9ZNsZDhHtotnDIZeT+hI=;
-        b=ZlueKB/vRQZZehAzTe9O2/RJC0SHh1E86DPRoloEvIBoaLDiX6vAP373HJNNV+DQew
-         jBK6/fg4688ta2jD3yUwsmn1JAxD82AI7i+rnDEbIlgq0UYxX8cbXpdRul0LEikU9l4B
-         zIwF8hYGIFPvcXesuUwNxh7JaTAIKyUXoQvbYmtJDxek3jOq82SOWgprJR+1sf2kCGMN
-         mUkz2dldoLcbrM7RbBew1xWlcJLQdfLCBKWGHaR+Lo1y6aHC4m+QxeyOiKTxK6f+4Hzx
-         zxBsapNgFiIaXiEfKUG6dgX9qC88ujCcDaYBr5SlI/SuOSRSBtAJgqqIvFG17Bo/Y9pH
-         M/Dg==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Xt/F7hqfucR8Td9NNko5JoqBIlDHXEfmqCECEs0ViP0=;
+        b=H8BoqQBLQJQl1BKCL9V+sOT2bRbSnTO7ojzIuoJS1WYduTri7cE4akdPIpdrQt7n39
+         tX/38GB3pQm1Kq9FLFIJwXyDFe7P4GfkqAT3jwrVeIk7EPn+mkWT1ts81aJhT8fn9DQH
+         tfQa5g/ZtVg1MsX58bekUAhkrQDp9xGCSQlcmoOyGNQ/v8yVU472xwlOeLwU9fwe5uSk
+         LSFgIBcYdHxZ61zTtD28P0TlxNQHs0rCCd3JtWljHZTzWCVzHMm+UEQLibHUq0APOLOU
+         h77QQLJoLDIF+h/9ovxdys+EV/HTdS4RkB22wwGGC1CtKjsUVGP2YdhYQKXPNA9bEOvo
+         18EA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=a72J/geVR6xi2mxVeX1kxu+9ZNsZDhHtotnDIZeT+hI=;
-        b=ZpK4q90phcAJZbOVYJvavOkl2oePAwTHY/iKIUEhHyaoFIQBqwvRDvMmg5B3EHBHBa
-         goEIV6S+HyEQp4vlH/RI6Ug9OfvPAo6PP6nO84mmGP//1TWwzmYdHVx6sIPicoZBosXp
-         E8ueU9vIWQ7tCYeeFYeDaCKT784flm2me7/JGNFzB9oBbzPZyXkRIFFA9bArCE4+HxHa
-         h8bLn5osnuswTxHKoUY8ECL3QOhmm/sTZ7NpPyxdUP9tnE58Af1HAeBp1fr9dWEehCYl
-         IW/N4p5lSGC4VybBKGsI4VkKOLxVvZ6/NFDpgefyGZeyAVUI59xoBsmyYzzue6M2DmOY
-         81og==
-X-Gm-Message-State: AOAM532X2YRxJz/mqNQdN3Tuban0k64ek6UzUdeSmzZ3ksd0k8eRK/0v
-	6nb2C7jvth+r2XJP6GtGz08cDzNdWhdbMK1RCJA=
-X-Google-Smtp-Source: ABdhPJwerUF7hRa5944PrmuaV6kCDFVe+KUw3BkbYTeK+ixIvpR2dJxQdB2Zrfe5a8aTdxcSNU7XKNqJeXODLpRE6gc=
-X-Received: by 2002:a0c:f089:: with SMTP id g9mr4229579qvk.50.1623908345246;
- Wed, 16 Jun 2021 22:39:05 -0700 (PDT)
-MIME-Version: 1.0
-References: <16877A0991CEE112.8333@lists.openembedded.org> <TYCPR01MB5599FD7F21812AFB694953FF8F0E9@TYCPR01MB5599.jpnprd01.prod.outlook.com>
-In-Reply-To: <TYCPR01MB5599FD7F21812AFB694953FF8F0E9@TYCPR01MB5599.jpnprd01.prod.outlook.com>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Xt/F7hqfucR8Td9NNko5JoqBIlDHXEfmqCECEs0ViP0=;
+        b=M8mwtouZviOzUZCV7D6WfFOSNONu2M91nn8ZF+EhfFelTL+t6mkeTxbPWQtL+21Oo2
+         eXqCHziBBPzCUwaCW/D9kOE8iK1XHvfVqED7IY1yYJZXyfhYNUbEjXzTQE4gnmFK7Qu4
+         DDdG/NBjHrCZEqaNfyfffaWsqwdlS8Qly8i3Iy2wmmsl0GzteuHNLPvOfysC6EXr7EgT
+         Fl6htV+VjVCl6/+gEKs7OBn+nYXED/A0wTpjB0sYXNY9ludRIYgdk6QlzFxsWIVo/D8b
+         lbhOjJJ1WVBUefjvNuyztR1qe70GxKYQEZ8mtytj+OCimrzY7aIqZQ8zPaTLRJ3G6ZC0
+         2axg==
+X-Gm-Message-State: AOAM532ruRKcsFMuZ1HpbSAX2L6WAAQYpT/mdXzPpDL0ycu9oCCZO/wN
+	8wj4LBm+vHRDlZiSe6344NIy0900zjBYNA==
+X-Google-Smtp-Source: ABdhPJxohQSoA+xVf+UR/ltUUSLyhXyOay1ehh8c/mC1Jzfwzse2SWWleT4yxNr/DJepY5xsLEv61Q==
+X-Received: by 2002:a17:903:4a:b029:11e:7c15:a597 with SMTP id l10-20020a170903004ab029011e7c15a597mr3155647pla.6.1623910688148;
+        Wed, 16 Jun 2021 23:18:08 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a054])
+        by smtp.gmail.com with ESMTPSA id n23sm4131651pgv.76.2021.06.16.23.18.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 16 Jun 2021 23:18:07 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Wed, 16 Jun 2021 22:38:38 -0700
-Message-ID: <CAMKF1sqjpcaTA=jgHwfQS8-eS6GNbVtoUpOfuyif-pGz4WkTig@mail.gmail.com>
-Subject: Re: [oe] [PATCH] cyrus-sasl: add CVE-2020-8032 to allowlist
-To: "ito-yuichi@fujitsu.com" <ito-yuichi@fujitsu.com>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] rocksdb: Fix build with ppc64/musl
+Date: Wed, 16 Jun 2021 23:18:05 -0700
+Message-Id: <20210617061805.2077289-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.32.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-this is also in master already, thanks for your contribution
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-dbs/rocksdb/files/ppc64.patch | 28 +++++++++++++++++++
+ meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb |  1 +
+ 2 files changed, 29 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/rocksdb/files/ppc64.patch
 
-On Wed, Jun 16, 2021 at 9:10 PM ito-yuichi@fujitsu.com
-<ito-yuichi@fujitsu.com> wrote:
->
-> Hi,
->
-> I would appreciate if you have any advice on this patch.
->
-> > -----Original Message-----
-> > From: openembedded-devel@lists.openembedded.org
-> > <openembedded-devel@lists.openembedded.org> On Behalf Of
-> > ito-yuichi@fujitsu.com
-> > Sent: Friday, June 11, 2021 5:33 PM
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: [oe] [PATCH] cyrus-sasl: add CVE-2020-8032 to allowlist
-> >
-> > This affects only openSUSE, so add it to allowlist.
-> >
-> > Signed-off-by: Yuichi Ito <ito-yuichi@fujitsu.com>
-> > ---
-> >  .../recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb            | 3 +++
-> >  1 file changed, 3 insertions(+)
-> >
-> > diff --git
-> > a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
-> > b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
-> > index 33de8ca7e..c4b41ace8 100644
-> > --- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
-> > +++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
-> > @@ -96,3 +96,6 @@ FILES_${PN}-dbg       += "${libdir}/sasl2/.debug"
-> >  FILES_${PN}-staticdev += "${libdir}/sasl2/*.a"
-> >
-> >  INSANE_SKIP_${PN} += "dev-so"
-> > +
-> > +# CVE-2020-8032 affects only openSUSE
-> > +CVE_CHECK_WHITELIST += "CVE-2020-8032"
-> > --
-> > 2.25.1
->
->
-> 
->
+diff --git a/meta-oe/recipes-dbs/rocksdb/files/ppc64.patch b/meta-oe/recipes-dbs/rocksdb/files/ppc64.patch
+new file mode 100644
+index 0000000000..bc40f1b1e7
+--- /dev/null
++++ b/meta-oe/recipes-dbs/rocksdb/files/ppc64.patch
+@@ -0,0 +1,28 @@
++implement support for musl/ppc64
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++--- a/utilities/transactions/lock/range/range_tree/lib/portability/toku_time.h
+++++ b/utilities/transactions/lock/range/range_tree/lib/portability/toku_time.h
++@@ -58,7 +58,7 @@ Copyright (c) 2006, 2015, Percona and/or
++ #include <stdint.h>
++ #include <sys/time.h>
++ #include <time.h>
++-#if defined(__powerpc__)
+++#if defined(__powerpc__) && defined(__GLIBC__)
++ #include <sys/platform/ppc.h>
++ #endif
++ 
++@@ -131,8 +131,12 @@ static inline tokutime_t toku_time_now(v
++   uint64_t result;
++   __asm __volatile__("mrs %[rt], cntvct_el0" : [ rt ] "=r"(result));
++   return result;
++-#elif defined(__powerpc__)
+++#elif defined(__powerpc__) && defined(__GLIBC__)
++   return __ppc_get_timebase();
+++#elif defined(__powerpc64__) || defined(__ppc64__)
+++  uint64_t result;
+++  asm volatile("mfspr %0, 268" : "=r"(result));
+++  return result;
++ #elif defined(__riscv) // RISC-V
++ #if __riscv_xlen == 32
++   uint32_t lo, hi0, hi1;
+diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
+index 98930c6e6d..d03d0c9529 100644
+--- a/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
++++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
+@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
+            file://0001-folly-Use-SYS_futex-for-syscall.patch \
+            file://0001-jemalloc_helper-Limit-the-mm_malloc.h-hack-to-glibc-.patch \
+            file://0001-range_tree-Implement-toku_time_now-for-rv32-rv64-in-.patch \
++           file://ppc64.patch \
+           "
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.32.0
+
