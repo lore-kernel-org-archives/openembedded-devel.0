@@ -1,86 +1,129 @@
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web12.355.1623873471111379195
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.web10.3117.1623901229341885972
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Jun 2021 12:57:51 -0700
+ Wed, 16 Jun 2021 20:40:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@tanous-net.20150623.gappssmtp.com header.s=20150623 header.b=HaAanN/S;
- spf=none, err=permanent DNS error (domain: tanous.net, ip: 209.85.214.169, mailfrom: ed@tanous.net)
-Received: by mail-pl1-f169.google.com with SMTP id x19so1690283pln.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Jun 2021 12:57:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=fuSKRQXp;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id g24so2966230pji.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Jun 2021 20:40:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=tanous-net.20150623.gappssmtp.com; s=20150623;
+        d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=UmEmfirioF7TSUfXhQwadfB8oxIkImRnzGaWQhpN2yU=;
-        b=HaAanN/SRwOu70ZJV1iSoDho+YNElZ5ejbs9Q83+iDp1TjTyB23yG8xluiPBz+8TMZ
-         roYx4AN4+ya6ctNusyzyQLy2vPBWkNx+V51TyVowt66M3eh9jv3Fe9cud6I56k+hRRLn
-         KLcdCtOhrweW4/3itMgVzDYg1ywejYyYJSIfqosP+AILMMPm5CCDITJq4Sg0jslC9Ks/
-         DFuBTbZ443rXTuNgMkFBmaBP38D6XPcIrMzwT4fRLKA7XEWyB97s47AFQwrqg+AZPiS7
-         4BTDR13QqDwvqmDKo8gheCYekOZnCp2sGjlBHM9K90vZwN00LH0VwIfp0jDl2PNOc88A
-         Vksg==
+        bh=6sWH9QwIfwtKZF6WOPA2+QcMUGcq2YAEDEd8lisNP8I=;
+        b=fuSKRQXpVCTI/jLa1+renhWtqspAxCXdLgIb8Be88n19r269ze96jmbgFNMxIsBz6I
+         AC7mVdRDTcIZo1CnhvQqSloLc570+2f78J2bPu+NntdIoJ3H/93TQlcZMfybWJWj6Dew
+         Z/LuPz7/BfvRGj0IYngt5LDMgs5PuGcUAhL3rO6pKg2MebhkbUQD51v96As9Vay2ZCTX
+         J2LFXQDpx7To9f9ytvSw9IuFURGwJMHYmWFwGMenUzAeUiuT3b1yrDdSVhX0Jw+2+ZQO
+         yvkNEMjAMBwtyx3KHnSCd5rdbh6kTx47zydi3IJ9LOEz7uZR7D7QGa5US980OAItab0V
+         tI2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=UmEmfirioF7TSUfXhQwadfB8oxIkImRnzGaWQhpN2yU=;
-        b=aSgZbt0/mSpVd6Wg2IKDUZkuJ38LSzSUkKL/6jHahPXQKR7bMMxMOeIlhkMacx1yI4
-         bCvi+1vAYw9o9WsoNdxQ8RyadvCqYtQr93kkVv/LW3nlbwIzjYCjVprYg/yFDzLu4Otw
-         ThlFjFb3shE3Vq/mFbAAG1JfwJVzBm9EBLfsGVChaS74VKwmBp1TTTXSAbRvC5v8lMBU
-         Fxi0T8rop3Aj+Wsfa1NejcjOhu6ecVr1xvsv1PqdzcFhlySug5xqmx80vISBk1flus0l
-         qfgZcPVL7kf+bRRZJ1Lel5Ct35CF+eGlk0PmM4DK30WP8B4xJQdayTB5b8QHligbY0Tn
-         K4wg==
-X-Gm-Message-State: AOAM530UZcnI5OfvKUO0SHoPSHIN7Cb2j9qi+pV/g3Mbdq5CjdyB+FWv
-	ntw7ZOecFjcfudY8y9lOl6b0WUWcII6Xew==
-X-Google-Smtp-Source: ABdhPJyWqKbSYp0+uI8dgjHIYR4C8bNQF/n5DMW87gtLrdgFTz7k356NF4gk3CRrDqkfhOVj29TYsQ==
-X-Received: by 2002:a17:90b:4b51:: with SMTP id mi17mr12737316pjb.109.1623873470254;
-        Wed, 16 Jun 2021 12:57:50 -0700 (PDT)
-Return-Path: <ed@tanous.net>
-Received: from edtanous.svl.corp.google.com ([2620:15c:2c5:13:c466:fa8e:b409:4c3f])
-        by smtp.gmail.com with ESMTPSA id k30sm3164543pgf.59.2021.06.16.12.57.49
+        bh=6sWH9QwIfwtKZF6WOPA2+QcMUGcq2YAEDEd8lisNP8I=;
+        b=CcXLXw2ug8lHDSsYZ4PxyRBc+8dE/ax8NNAi0pO/s2t35heO7xM6rcm4b3aJE4Tqrf
+         z+9/uxb2ErmhCnKTJcxXbuxL/pSvwfAS5IxlELNF5+d4nWBIbxmRJuMnycH1qA0wtPnR
+         D2JhSUC9US8gY2mVR9JmTUOTOIXNsoddHRWxbZ0Z1huxi3EL/737UEFbhtDw/ythSsZh
+         5xweoc91y+IX4jWvmwyZwoeSfszF6EvYj3AwUMxxCvVUFnW7tvkzj/5XBG2GevufJx4h
+         fvJDDtp9QviQ2XfBHmtPV7xY5/odGuiKQj/Glvkx1JsrXtj8tnrN8BhEpt9S1gNE/9+a
+         TzhA==
+X-Gm-Message-State: AOAM531ED6pXapDHo1GJAzRPGa30TIgvTYZrgGwMLuiGGAlT2kSozv6a
+	NlupibDs9ELpRjVHsxiZfHc/SI64ypalZQ==
+X-Google-Smtp-Source: ABdhPJwbJT8Bn3Ar6nfoUxoFIrgS1ThOcYsFtSPOLuoFdJ84mxM5+MbbBRtTpLU4b4qkM8PKuyMPkA==
+X-Received: by 2002:a17:90a:5907:: with SMTP id k7mr3242379pji.46.1623901228517;
+        Wed, 16 Jun 2021 20:40:28 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a054])
+        by smtp.gmail.com with ESMTPSA id j13sm3704699pgp.29.2021.06.16.20.40.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Jun 2021 12:57:49 -0700 (PDT)
-From: ed@tanous.net
+        Wed, 16 Jun 2021 20:40:28 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ed Tanous <ed@tanous.net>
-Subject: [PATCH] Use the built-in options for removing pack tools
-Date: Wed, 16 Jun 2021 12:56:14 -0700
-Message-Id: <20210616195614.2938426-1-ed@tanous.net>
-X-Mailer: git-send-email 2.32.0.272.g935e593368-goog
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH v2] rocksdb: Implement toku_time_now function for rv32/rv64
+Date: Wed, 16 Jun 2021 20:40:25 -0700
+Message-Id: <20210617034025.1906539-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Ed Tanous <ed@tanous.net>
+Fixes build
+utilities/transactions/lock/range/range_tree/lib/locktree/../portability/toku_time.h:137:2: error: #error No timer implementation for this platform
+  137 | #error No timer implementation for this platform
+      |  ^~~~~
 
-For distros that want to use the ENABLE_LIB_ONLY option, the rm call
-will fail, because ENABLE_HPACK_TOOLS (set implicitly as part of
-ENABLE_LIB_ONLY) removes those two binaries from the build, so they then
-can't be removed again.  This commit sets ENABLE_HPACK_TOOLS=OFF, which
-not only allows for the option to be overridden in other meta layers,
-also allows a simplified use of ENABLE_LIB_ONLY in meta layers that
-don't want to ship the binaries.
-
-Signed-off-by: Ed Tanous <ed@tanous.net>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-networking/recipes-support/nghttp2/nghttp2_1.43.0.bb | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+v2: Implement toku_time_now for rv32/rv64 instead of disabling the build
 
-diff --git a/meta-networking/recipes-support/nghttp2/nghttp2_1.43.0.bb b/meta-networking/recipes-support/nghttp2/nghttp2_1.43.0.bb
-index 959cccf35..08b855262 100644
---- a/meta-networking/recipes-support/nghttp2/nghttp2_1.43.0.bb
-+++ b/meta-networking/recipes-support/nghttp2/nghttp2_1.43.0.bb
-@@ -18,11 +18,7 @@ PACKAGECONFIG[manpages] = ""
- 
- # examples are never installed, and don't need to be built in the
- # first place
--EXTRA_OECMAKE = "-DENABLE_EXAMPLES=OFF -DENABLE_APP=ON"
--
--do_install_append() {
--	rm ${D}${bindir}/deflatehd ${D}${bindir}/inflatehd
--}
-+EXTRA_OECMAKE = "-DENABLE_EXAMPLES=OFF -DENABLE_APP=ON -DENABLE_HPACK_TOOLS=OFF"
- 
- PACKAGES =+ "lib${PN} ${PN}-client ${PN}-proxy ${PN}-server"
- 
--- 
-2.32.0.272.g935e593368-goog
+ ...ment-toku_time_now-for-rv32-rv64-in-.patch | 44 +++++++++++++++++++
+ meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb |  1 +
+ 2 files changed, 45 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/rocksdb/files/0001-range_tree-Implement-toku_time_now-for-rv32-rv64-in-.patch
 
+diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-range_tree-Implement-toku_time_now-for-rv32-rv64-in-.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-range_tree-Implement-toku_time_now-for-rv32-rv64-in-.patch
+new file mode 100644
+index 0000000000..86c1bffea6
+--- /dev/null
++++ b/meta-oe/recipes-dbs/rocksdb/files/0001-range_tree-Implement-toku_time_now-for-rv32-rv64-in-.patch
+@@ -0,0 +1,44 @@
++From 89c032a9b4011385c0b504ea61e5df0db71f0ff5 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 16 Jun 2021 19:06:02 -0700
++Subject: [PATCH] range_tree: Implement toku_time_now for rv32/rv64 in asm
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ .../range_tree/lib/portability/toku_time.h    | 19 +++++++++++++++++++
++ 1 file changed, 19 insertions(+)
++
++diff --git a/utilities/transactions/lock/range/range_tree/lib/portability/toku_time.h b/utilities/transactions/lock/range/range_tree/lib/portability/toku_time.h
++index 4425a4a2e..4ac964f85 100644
++--- a/utilities/transactions/lock/range/range_tree/lib/portability/toku_time.h
+++++ b/utilities/transactions/lock/range/range_tree/lib/portability/toku_time.h
++@@ -133,6 +133,25 @@ static inline tokutime_t toku_time_now(void) {
++   return result;
++ #elif defined(__powerpc__)
++   return __ppc_get_timebase();
+++#elif defined(__riscv) // RISC-V
+++#if __riscv_xlen == 32
+++  uint32_t lo, hi0, hi1;
+++  __asm __volatile__(
+++      "rdcycleh %0\n"
+++      "rdcycle %1\n"
+++      "rdcycleh %2\n"
+++      "sub %0, %0, %2\n"
+++      "seqz %0, %0\n"
+++      "sub %0, zero, %0\n"
+++      "and %1, %1, %0\n"
+++      : "=r"(hi0), "=r"(lo), "=r"(hi1));
+++  return ((uint64_t)hi1 << 32) | lo;
+++#else
+++  uint64_t result;
+++  __asm __volatile__("rdcycle %0" : "=r"(result));
+++  return result;
+++#endif
+++
++ #else
++ #error No timer implementation for this platform
++ #endif
++--
++2.32.0
++
+diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
+index ded454e167..98930c6e6d 100644
+--- a/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
++++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
+@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
+            file://0001-cmake-Use-exported-target-for-bz2.patch \
+            file://0001-folly-Use-SYS_futex-for-syscall.patch \
+            file://0001-jemalloc_helper-Limit-the-mm_malloc.h-hack-to-glibc-.patch \
++           file://0001-range_tree-Implement-toku_time_now-for-rv32-rv64-in-.patch \
+           "
+
+ S = "${WORKDIR}/git"
+--
+2.32.0
