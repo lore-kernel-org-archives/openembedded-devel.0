@@ -1,141 +1,141 @@
-Received: from esa6.fujitsucc.c3s2.iphmx.com (esa6.fujitsucc.c3s2.iphmx.com [68.232.159.83])
- by mx.groups.io with SMTP id smtpd.web09.3266.1623903012116753751
+Received: from esa14.fujitsucc.c3s2.iphmx.com (esa14.fujitsucc.c3s2.iphmx.com [68.232.156.101])
+ by mx.groups.io with SMTP id smtpd.web08.3319.1623903198107530047
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Jun 2021 21:10:13 -0700
+ Wed, 16 Jun 2021 21:13:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj1 header.b=lKtPMbEd;
- spf=neutral (domain: fujitsu.com, ip: 68.232.159.83, mailfrom: ito-yuichi@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj1 header.b=qSIBguG1;
+ spf=pass (domain: fujitsu.com, ip: 68.232.156.101, mailfrom: ito-yuichi@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj1;
-  t=1623903013; x=1655439013;
+  t=1623903199; x=1655439199;
   h=from:to:subject:date:message-id:references:in-reply-to:
    content-transfer-encoding:mime-version;
-  bh=5MZkOKzgXNkJm2dMc8mRmHHFqcSrEupqE5ReZbhmUwQ=;
-  b=lKtPMbEdbiWog/GIHzIxSdbXC6nCXL/FMZTF/Tzz9DaH9D/a0d4DBP38
-   Ec6ZcPDV7tTNGa5UgyZTgmzTdBb+4jiKWkOyeXSlD0EyUVfgcji/W4rYu
-   O1NuM64xzVS9RuE9x8JoKeGjrxmpi9eobf3RfLZTnykcdF27Mh9HwgNGi
-   hzPo4G/zIIpGugmR6ac0xjp27Gtl+jz1O/4S0wgz44bOEc6cj6SJ5WmIN
-   ncu+ATRh/VPiEzwv/XgWZYN/2HsZgk2AUBkEJT2c7JYylTMdrWkPzP4Tg
-   cd3qML1znsu/Ca8T4FxkZslg6Cbdl6919iDW813mzFQr8M59V9r/NShPY
-   Q==;
-IronPort-SDR: tEfzgSsZO0kE2BTBpBWI5Qj9eiVHd0wnci/lve8w6JETOpZCL4SjMvrcQM8bI6w0dEQ0dtrdMd
- 5DxOsnqFxc3vyqEZvqlNSpnOaQVsgu+CLuRYeDfMEXp/g2Skv0xZH0dfkLNHTewDyobZ3PyRSx
- xVMxJDkVNA/9dPM/gUQ49YWMPRZ9u/GqIKEVXbo3NbfZXoZHS9KYZs3NctSlSf5iStYH1vI420
- gSGNeRlA9To6hD0PZ7YQP5YhQyr8OnmEi0Q/vEoK1sqdjJ77GlCCbl5ekcwgZWCnK6FoehFFOm
- yy8=
-X-IronPort-AV: E=McAfee;i="6200,9189,10017"; a="33384430"
+  bh=GiNz4ot2bJTKy74khALfP3GqWV3+lrMDXKjT0m5IuYw=;
+  b=qSIBguG1nur2XqCuo+gqGHaWX7TlrHRCEwkx010m2sz2z7BpRk/Et9dT
+   BppbHXvjqsq3KrdIdCXvSMErKSBTWzunEVuQWbU8q0fdHeHOfKnihmUm4
+   C2rzCW3KsM6x+qjLB5pTOjK9U7cg8UdrBOccENIVCLZODtZ8D2lfgZM8K
+   IIKkcR8KYdzyvufzqipu6safzPP2NTVtXoeU3H1XEH/LZdVBCQQv4qChv
+   QsZ3ZRPvrdWJO54slJkOwucFZpXZhFctK5ixkvbn9dpK7wS7OEattNwgC
+   dNNc3jgDuoV8z5ns+viOC/3AQTwwvO7sYz+C1A1w2pQg+WQV2/9H+d0uB
+   A==;
+IronPort-SDR: c7tuW04MhWfQ+EFYSOiTkCBGwy95Sex8Q2c0OdTj9DACGWdRdTc/Ltx1jqz+aJeE4/WaS1WACZ
+ s11M5RKO63KgQlXdIdrAUGlLiMEWZjRUE885vJZXFzcmqCVHOOGD3ONMqkDys4mELMOrrwclr6
+ feVo/DaB4D3daoMI5DirMUzq0pivD2POXDVdVRhoQJD9GhQlbEkzl8q0RJZtrfV7cKkAIdZ9hE
+ 4trfo+ZIuARMPTS/lnoe7TTtd3OLCNpi0egSAxjzCQ5kQqVUrOMiA7peSO0Y5xpdJBfLzR8Ar/
+ rJE=
+X-IronPort-AV: E=McAfee;i="6200,9189,10017"; a="33168520"
 X-IronPort-AV: E=Sophos;i="5.83,278,1616425200"; 
-   d="scan'208";a="33384430"
-Received: from mail-os2jpn01lp2053.outbound.protection.outlook.com (HELO JPN01-OS2-obe.outbound.protection.outlook.com) ([104.47.92.53])
-  by ob1.fujitsucc.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Jun 2021 13:10:10 +0900
+   d="scan'208";a="33168520"
+Received: from mail-os2jpn01lp2055.outbound.protection.outlook.com (HELO JPN01-OS2-obe.outbound.protection.outlook.com) ([104.47.92.55])
+  by ob1.fujitsucc.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Jun 2021 13:13:16 +0900
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GHPz58lddGVX827vwRwFtCB7bcPvgwo1VopSNLe6D8+qltXV92W9MXF+8/dPcW3pI6Gp1ncmhJk/XMAbwtVluqquMZzGvfMHwgIlJUvVsehrkGdFxtDmZORdzNQZ8PWmnGDrs4pCiJ4Tw6Gi+lvihaeTftvBzfwAkyBe24uKvLcIPoD5JnnHtyehkO8P1EW3PKNPslkoxQ+nZ06/wLNecAKoLqnNChrdhdr8xkVjnDOR0TFPjGCNKkAeFqRCDmfbTDvt+ggtbLLdqhtms6S/xDUI0wxWTzUFzf/80fcStCkdPQdUBpPTc/+d3Vwr2WsQ/cFRig+UhnQ1cvXami2gFw==
+ b=Uo+nkj2X11K+tGovtMpm7Sfy77lClCb/DuA0i8w2rqMV2e+fVteAo+PA6EfieFcjYKwmF55ug/OFet8Yq3gvn51O5QBYvFpIVbV67VPPgM3WZ5f4V0oKYoyH9i65dw8k0RXWFJs9/qee2Ybd+6oPC1Jreokv1hVTk3pEfZ8kGOPvCDeuiZosfvFTsXIS3yow4tat1Uchf/c4xiVHUtmLhGicHu6xwMPUKzaQgSfWh5WbOGXWUUjkPryeIqksq/VNImcVDvVgzlo59dhl+53m3pNalw0TYPynTz27swJ/k22zHbOeM4ews1JpNx2XPHcOgXGmh2wQTe0FRK3ifRsl9Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=H/lVZM5xLt2BQ+lFXS2Z8d5q58qRzsZcBMFa3d+zSPw=;
- b=B+wRBhMgCIY42vw0S7DFi0fqyBwNMX0YaC3SznhmjXXwbn8orYZUVPBKGZ95qOurRzx464mH3As5ykiDp+eQnA7b1oOozf/y+rjh/CJ5Vx6Bqr6/pKYiEXFat9is0gzd+m6OklWyi3+nw1a3eo1bdlIhLLtHA+p74inSE9Vj91JV1hxpY9PiEZ6XJtSUOIaMZOYPEUvSzKM1XLyBhrtCe+gKUFDguASZLtooBVTIvzLyZ5pzcu63bFc8iym3j/h75uPOrDu2eONYOkKU0RFcQrwOy1jeyQ9JCQk2ogTRU3Zxv5Yhmtmsk6r4Q9AaZSkOsD1xz2vanPyhdtcFJENHKA==
+ bh=9K+B3P3hE3olQIZyFc5SUSoIS+UVoIdrGxrpVeTFka4=;
+ b=AGRe87O8KP6D2uHF4ztlrBRbqzOPlW9ayeRC68j8c7qKdA56HqVPO5+RL4qAPhikeOs8/LW06Ab2bMOpNMLGZPNrzGknFFhaFa/hn8DDtyK23UqnJtyJvCEv31sJ2D0EzDIOphZ1UyXc65S8cp9+V3pWu199jqkho6WfjmGy1+M2o9D0OYzY5W1e7QJkfjJp82l1vU5ktYtU6lDxJPRULRTAQcCxp73m7LGvPhRt/wKLsqKZK4GykSD/t7c7lS8a+rs3FhZDq7aFv/qNO/6RNOFksxi1CFXr8Inrgeq7QR3kd76ul4KP4LG0j119Y2aJBcDs32T5jL8acJmFZRYvHQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=fujitsu.com; dmarc=pass action=none header.from=fujitsu.com;
  dkim=pass header.d=fujitsu.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=fujitsu.onmicrosoft.com; s=selector2-fujitsu-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=H/lVZM5xLt2BQ+lFXS2Z8d5q58qRzsZcBMFa3d+zSPw=;
- b=S6uDoCnjNfIKyS+E0ZCoyJwSpU6l1/eMOs0c8G2l0qJx0+QRKRKmu8UzE2lCpOkITK88z4ZCX+g42M25jGOxw1qKrGRJaibw11m6vlrsYw+5UUeP8+lNC35KAcquHAeeupQ2Wop4XJuJI8LUYDsrrknxXa7jmPVVCIjPONYtzqo=
+ bh=9K+B3P3hE3olQIZyFc5SUSoIS+UVoIdrGxrpVeTFka4=;
+ b=W7X5xbldLKk3JxPHFiQOSGTMNsfwEpQGyoaQI4menSMc7CDalYO1cBqIVlZOaTmzH7KRkl+7gH4Bnk8QsJxwcv8iW8zPvyFLDpKo3CKRQfvjf+qk+IpGEQmLyiNf6EaJrUTK44rVE8AXJ8hVe9w2w5Ql2qnQ9BrkpGthwv8p4qM=
 Received: from TYCPR01MB5599.jpnprd01.prod.outlook.com (2603:1096:400:41::9)
- by TYXPR01MB1598.jpnprd01.prod.outlook.com (2603:1096:403:f::12) with
+ by TYYPR01MB6556.jpnprd01.prod.outlook.com (2603:1096:400:e1::13) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4242.19; Thu, 17 Jun
- 2021 04:10:06 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4242.16; Thu, 17 Jun
+ 2021 04:13:12 +0000
 Received: from TYCPR01MB5599.jpnprd01.prod.outlook.com
  ([fe80::446a:7e01:7ec1:953b]) by TYCPR01MB5599.jpnprd01.prod.outlook.com
  ([fe80::446a:7e01:7ec1:953b%4]) with mapi id 15.20.4242.019; Thu, 17 Jun 2021
- 04:10:06 +0000
+ 04:13:12 +0000
 From: "ito-yuichi@fujitsu.com" <ito-yuichi@fujitsu.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [PATCH] cyrus-sasl: add CVE-2020-8032 to allowlist
-Thread-Topic: [oe] [PATCH] cyrus-sasl: add CVE-2020-8032 to allowlist
-Thread-Index: AQHXXpxlzUXvtjFK40O/cXqyEbtRJKsXn+NA
-Date: Thu, 17 Jun 2021 04:10:06 +0000
+Subject: Re: [oe] [PATCH] dovecot: add CVE-2016-4983 to allowlist
+Thread-Topic: [oe] [PATCH] dovecot: add CVE-2016-4983 to allowlist
+Thread-Index: AQHXYXs1RfiaWmEHoUauASH5MCRaJKsXmnfA
+Date: Thu, 17 Jun 2021 04:13:12 +0000
 Message-ID: 
- <TYCPR01MB5599FD7F21812AFB694953FF8F0E9@TYCPR01MB5599.jpnprd01.prod.outlook.com>
-References: <16877A0991CEE112.8333@lists.openembedded.org>
-In-Reply-To: <16877A0991CEE112.8333@lists.openembedded.org>
+ <TYCPR01MB5599CED629CC952CE45E5E9E8F0E9@TYCPR01MB5599.jpnprd01.prod.outlook.com>
+References: <16889911C5E4B48C.20286@lists.openembedded.org>
+In-Reply-To: <16889911C5E4B48C.20286@lists.openembedded.org>
 Accept-Language: ja-JP, en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 msip_labels: MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_Enabled=true;
- MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_SetDate=2021-06-17T04:10:04Z;
+ MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_SetDate=2021-06-17T04:10:36Z;
  MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_Method=Standard;
  MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_Name=FUJITSU-RESTRICTED?;
  MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_SiteId=a19f121d-81e1-4858-a9d8-736e267fd4c7;
- MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_ActionId=5ced15fd-4326-464d-af9b-f4def3bb0dff;
+ MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_ActionId=10c29ca9-9f29-4c2f-998f-8a46b0293cdd;
  MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_ContentBits=0
 authentication-results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=fujitsu.com;
 x-originating-ip: [210.162.30.54]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 7ee0e909-3f37-47b9-aa4e-08d93145ca0d
-x-ms-traffictypediagnostic: TYXPR01MB1598:
+x-ms-office365-filtering-correlation-id: 6ba7fcb9-7c15-4c4b-90c9-08d93146393e
+x-ms-traffictypediagnostic: TYYPR01MB6556:
 x-microsoft-antispam-prvs: 
- <TYXPR01MB1598536A24B966A6D695A8F28F0E9@TYXPR01MB1598.jpnprd01.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:1201;
+ <TYYPR01MB655608B20258878820C644378F0E9@TYYPR01MB6556.jpnprd01.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:421;
 x-ms-exchange-senderadcheck: 1
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- pdU1UMMd0yLHURlRZ7ZZlcszU6NnAkTBxC5J2A5U9a185xMgCa6cxoGhxg67zEyPN2j4jVp8tvpRKEA6Qkndm+LAs7ysCARgzxwOZccYTo+UdaJOpGs6a/SHdJCYusQMdnz5OBc0H/dnrF47VeeNpL/JYrCBCUkEBiiTYs6YR91sY0NrZ4kZoDm1onUHhX9XIwRAJ0Fr7a7IOxQfWyIWSwrZ9S58ud07KJQ46CE40avgrmfnlXlzjeXdjnvgFZPop37NH9DL5lQk22G5Ru3gm50HmnYicDpvR5Oe0X8IQq6GJXnisQsWrIQL62Y6w/yY5YOnOfVG6aGkengnQMzP5v03MmODPkybyzOTEA8RzqTeLiAW2sik27l9jf9+6eNni/RdClt2XuHN06dJzITWgKE9j2Dxy9uiF8il/bHthmXdntULLcHbnRgbb8zW31K0f5dPT1Lbeyp7zALKz5iW98aUevlgCKrfkjoXL2giucBy2Yo4lx0gbz20kYTfkpaghDJ83+hrwkYkoMpHQoUxEPa/SOSZpVDAKh/0fnUo+07iHr2la3gPM14V33XU6njJIPnlA9WFt8RZDoZruwgm7OdC75m+nTA7+zYJZgncTb8=
+ JKzoccZwahx/ekp9i9amWOJHZz+XL69iWo3IbAzTgHc829CSEChUccbAWTECniJEi6Q2kZEMv1zKpvu91VAr0UG97V0XJZqyNVPmWEX52sHFI5rrjLL74QSqJC9+7H40X/rHv+WsRC0ttj5Wv+t8WrBQimaRCzPaKz4MJFajI0z4CWLSSCTSZIiWmOtt8NzYG0rn5CpLFlsAEgyU9zAImtM4ZYy7jrIFh0+IHY7e+bVHsMLlWwOF5gv5HxXV0zeQybOxy/piBE88JMiDU3CIL0nrB/D06YwT1n5GHBy7F2qLWFmqULEt1QjJaztmHC8TTM6LYKJFWFMdYhwWrXCkfu5td7/ysLE4MQB+ofgn6rlMpnwDSdo6+qutUu0OkEOU6kNGn5WgQRrQ4xxj+LvvfXnwooOLhRpX0aFnoXUE45j7g+d1ypIRW/DU/ysdzOJYP+ZmkIshLu+ySk3EvVu2haaSYrKAXOC11RM/+11coVU3qhTU74hPpl58YsvvS7YJpEnmhCDU3iajbRa2FI1napGIwSlweCT3Od7vub5h9iW/TcF9eBvLLG3wlB6crJXGUT9+G7/0Zn6ZM2KQTfMDlRqoRZliGVRIz1Q2sjIPYiY=
 x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TYCPR01MB5599.jpnprd01.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(346002)(376002)(136003)(39860400002)(366004)(8676002)(86362001)(71200400001)(66946007)(83380400001)(2906002)(38100700002)(55016002)(33656002)(76116006)(122000001)(9686003)(6916009)(8936002)(53546011)(478600001)(186003)(64756008)(66446008)(66556008)(5660300002)(6506007)(316002)(52536014)(7696005)(26005)(85182001)(66476007);DIR:OUT;SFP:1101;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TYCPR01MB5599.jpnprd01.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(366004)(346002)(396003)(39860400002)(136003)(66476007)(66556008)(316002)(9686003)(71200400001)(66446008)(66946007)(64756008)(52536014)(2906002)(76116006)(122000001)(26005)(53546011)(6916009)(6506007)(86362001)(33656002)(8936002)(55016002)(83380400001)(38100700002)(478600001)(85182001)(8676002)(7696005)(5660300002)(186003);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0: 
- =?iso-2022-jp?B?Y2VXbVFuZVNxakc3Z1M5d2pBbjlCNEdCTlF2Q3RGQzR0VnFQZm5LNW1B?=
- =?iso-2022-jp?B?OHVKKzBzTjc4SFpOS1FyUHpueFRxVHRsQXBnTWltNElHQnpRby9HODdY?=
- =?iso-2022-jp?B?WmcwOVdaaUF5aXg5Um5Vd3hieVROUnl2aitKaTBseGZHMGl5aEt5dy93?=
- =?iso-2022-jp?B?N2dBRVBRWEg3WTM3V2VpdDBUaFVQYlc5OC8zK3M4SGM1RlNKNjNNY3lu?=
- =?iso-2022-jp?B?ZS8rVW4rUXNzMlVBWDFWWUhrY25scWp3R3c4UXNYWU5aTW45MGRyTE5K?=
- =?iso-2022-jp?B?M3JUdTV4THJOcFNTRkdaSTdML3BUaDZDMkM3WnIwcHBiMmFxN01MUmxt?=
- =?iso-2022-jp?B?djU3NERaWlpHNDJJWkRNU3M2ZS9tWEk0Z2RqZGgxUkorMjdZdHBRenNN?=
- =?iso-2022-jp?B?ZW85ZjB6VGgvdDJBVkNyclUvYmpjY1pXUERwMUZRT09RVitQWE5qeXBH?=
- =?iso-2022-jp?B?VHcvNi9qbHBEVUNyWVNWSkFjSE4rRjdlY3pUWCtOczRhMTZzWEFnL1pU?=
- =?iso-2022-jp?B?ODNVd1BoaUw2L25tWnBoWGJLV1gzOWY5MnlpN0dENFlKNEM5U21Jd3hM?=
- =?iso-2022-jp?B?bjA3T0k1dTc0dExSQW9wZ1RIT1Q1MU80Y09vK3hwOUoreXNwTjF4Y1dw?=
- =?iso-2022-jp?B?dG8vK08rREY5WHFHdEFuNEVvRHhoQ0VaZmdrYmo0aVlmdlEyRXJFdGh0?=
- =?iso-2022-jp?B?SDV5ZVFzOXlKK2ExZmgrUzFjdlUvOExhdUxuZHNXZjVpeEZSYzlHWUZK?=
- =?iso-2022-jp?B?WEV4bUZodkdCUWhXT0tXNVp5ZlJLVEhoanR5UDRiZkhuQ1hSZldPb3dn?=
- =?iso-2022-jp?B?dnpHSDJaU0QreW1rZTJkUGZvd3ArdVZFUjN3NGhlOGcyMkJRejZ6MXVl?=
- =?iso-2022-jp?B?OHNqZCs5R2tiSlBiSWtKRGdlZFlaWTMyU211am1PbjVtRnhseFd3STA0?=
- =?iso-2022-jp?B?RDE1QnBlU3Z2MjNNNHNMSTA0bXdKdWMzY1M2NHVienFJanUrdXJ2Ylp0?=
- =?iso-2022-jp?B?dEk5b1lzNm1HOUQyKzhqd1dTUU9UM0dFMUpoRHVQN3pEa2IvalN2eTFE?=
- =?iso-2022-jp?B?NklKWnBFTWxtOHBYamNrU09FSmFFTHYrZVVWaHpoNndwQUZpWTBZMWxy?=
- =?iso-2022-jp?B?MlgvalJBWDNwdGdLWDh1SUpWZzhiRDgyVUdEWkpOb0M1S1Y2VU1BdjNl?=
- =?iso-2022-jp?B?QmtvV2hZNWF4Z216dDV1ZlBlQTBjWWRmZnFtbmxVYkJMeTU2aElkczZU?=
- =?iso-2022-jp?B?cVlraHZqNUhrbGd1R3BKK2pvVjYrSmYwWDE3NGM2Qy9tOW56WXdrMTV0?=
- =?iso-2022-jp?B?RHF4OGVsMDVhTU5kb3FqZXpwRGladDZuQW1VQlZnTlFwVDd0UlVtVnEw?=
- =?iso-2022-jp?B?QjQxQXdHbnl2ckVqR2ZHYzg3TGJqcFZqZ012U3lZWlZzdi9WMzNidENR?=
- =?iso-2022-jp?B?MXhLT29ZaFdSUzBkV0tpdHdKeGMxNHlqUDFoSzFxa0VpZ256bTNmcWk5?=
- =?iso-2022-jp?B?TXlsTXdLamp1bC9PbWUvcUgvTFdOdTZVenR3Ujhheko4MGhIZFZTdGhw?=
- =?iso-2022-jp?B?TCtDN0lGVkd0bzArZUYzY0tFdnVRQzJsZFhRbFVENjVIUGYzQUx1Tytw?=
- =?iso-2022-jp?B?ZTQ5UGNidFhueW5TR2szcUZnUFNLV3ZzL0NKUldTM3pxRUJORUZ2b1Zy?=
- =?iso-2022-jp?B?Mk9UYUxKaWJwT2NlLzEraHgrcWFtNDNwN0xXL243RmNnL1cwY3I1TVlr?=
- =?iso-2022-jp?B?THBWSU4rY3AzS0QxNVRmTm8xcUdITFB3RjZEdHk3WVVTZVpLblg4ei9p?=
- =?iso-2022-jp?B?NG5PaVNKOGN6WWVQYnBSVmRJZnZsUTNsRkZlc3pIM0JSRGYzM1dzNE1R?=
- =?iso-2022-jp?B?dzI5ZkhDMlJhUVV4THBpV3o1NHNZPQ==?=
+ =?iso-2022-jp?B?VWlpRU81UGh1T3RzdVRpcTRlYmdFR1hsOHpybTFnNzM5UjFsS0ZWYUJN?=
+ =?iso-2022-jp?B?RmU1bFNNZ0d0dk4yRW1kVVJOeUp0S1N1aDlINTBsamNjbjdhQjRKenFp?=
+ =?iso-2022-jp?B?dlFXNDNXZFRCSzQzME9SRlorUGFvNnNMZk1hdE0xT2VJWnZXQmZTTERE?=
+ =?iso-2022-jp?B?Qk1PeERwK0V2a25WRElIT1RMVDcwZ21KdmxoNmVJbzB4czhRa1pCUXNw?=
+ =?iso-2022-jp?B?ZGlyQzNJYmxMUC9Fd2tmc2NzYTJkQk4yKytzcUlRcVJrbFJlU2dza1FD?=
+ =?iso-2022-jp?B?aUYzYjk5RmQ3VnUybjAxL3Zad0dTNFYxcEM3cVcvSjFYYmROd2ZQdExs?=
+ =?iso-2022-jp?B?V2JzUmlYS1ZHa3F3U1BwbzNKSWRPNFJzTUpydklUNU5UNm1kdk1sTi9B?=
+ =?iso-2022-jp?B?OHJ4ZmtTSWhBNGh3aEpyR0JxdFZwWmFUNS9uaW04elBxVVp1dldTQTZF?=
+ =?iso-2022-jp?B?dm90Y05YOGY2SnJrM0Y4ejBCNmJiWUJIMGxCaGFnRk1BWkVXdkZCQWs0?=
+ =?iso-2022-jp?B?UUorNEZyZWo4aUg5RkdiRjlXekVjZlViWktReGx0OWRTQVBjYWRUMER6?=
+ =?iso-2022-jp?B?Qmp1K1lyRlhjV283UmhrbjlQVDJ0a2ROQXEwSzhIdWI2WVJ6bUJoZ1h3?=
+ =?iso-2022-jp?B?SUtFTWZrZ0xLSGU4L2I2dzE1cHBxd1htSXhYdmlmd3FmdnEzbTJtQ2hp?=
+ =?iso-2022-jp?B?cEUzTEczRlMyWTlVbkNFcmFEWWlpdjhZUUhJUExqMUpYREJ6d1h3UnN5?=
+ =?iso-2022-jp?B?T3ovanRIZTJ0aDd0U214VjZiOURjL0NQOEdDbmJpcjMwQmpDRjJPVGVw?=
+ =?iso-2022-jp?B?S01YUjJWZHZMRiswU1JpUjNHeklJYkFHM0h5MEV1TjBzVVBmUWZ5U0Ni?=
+ =?iso-2022-jp?B?MEQ1TGtCdFlXMWZQeWttdmljcFlUc0lVMW4vbkR1QlE2MjB5RjIyYndm?=
+ =?iso-2022-jp?B?UjBQamt2NHprb0F6VmtQR0tsRXFPMFBDU0Z5QkxXb2xRZ0RKT1lkcXdj?=
+ =?iso-2022-jp?B?WURueXhmZDN0VHJLdkZjZ0Z1TW9mYS9Gb1NDdEpNa0RvcWVkdDVrWHgz?=
+ =?iso-2022-jp?B?YnJaa2RSRFlERktKQjBLcjV6UDJVbUt2T2tNWS9xdGtvYVB5Y2R6QkdG?=
+ =?iso-2022-jp?B?d05XMmJqWG9yTGR4SlhNeFRFUVArVDVES0lRSnJoUHNBa2ZxM2RJR1k4?=
+ =?iso-2022-jp?B?UHpWbFJIbHY3eDNhOVZ4cUNROElFeG50RDVkd3EvT0g0MlBmeEhNSVZa?=
+ =?iso-2022-jp?B?Z2lPa0ZxbkpzOXdlSXFpSk9QY1NSdVpVcHJkRkI5WGo1anIrR251WGdZ?=
+ =?iso-2022-jp?B?aW5kalZkU2EzVk84Y0VBS1c0MmZGWWpka1ZFWTRLSXAyOHRWd0lsQUNR?=
+ =?iso-2022-jp?B?TnZmMVA4SCtGQ1NGZ0szL3FuMmVNeVNYRyttdk9zRW5VcFltR2FDbW55?=
+ =?iso-2022-jp?B?Q0dTeVRROFJnT1lyanBvSHIyZWFPV24rM3JnUGJ6eTlVQVRJV0QxN3h2?=
+ =?iso-2022-jp?B?QmZxbUFGK2hqNzJFazBDR2IwL0F5bm05NUhObmlpQjNCL3QvSTEzRCt6?=
+ =?iso-2022-jp?B?dUZKclVubUZtaTZnTGVSM3Y1aXJDejlTK1lnVkFGdVh4RXdVQ1dTSEhp?=
+ =?iso-2022-jp?B?eFBSWlArRk9GTVRldUg3WWsrSW1kbHVDTUxhVVFteHhrcVpXMElLc1VV?=
+ =?iso-2022-jp?B?eFo5NWN2WlJOQ0ZjZmJZMGF1Mkc4N01RbzN3djFxS1FDQi9QaTJhYjhQ?=
+ =?iso-2022-jp?B?WVM1ZXNkQWc1NldLZXBHRVFDTDlFbWNxTTJHbFU1Rkx2UVFqV05ZQmc1?=
+ =?iso-2022-jp?B?WHBETktaZkUra1J2RU91eDVTWFRlRysvajRSRXFPRTFTL3NURmFkaVdW?=
+ =?iso-2022-jp?B?LzVrd1pNUzhjRVdwdU95Ui96NDJyekhFSnE1aXN5Vi90aXJOWWJCaVp0?=
 x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
 X-OriginatorOrg: fujitsu.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: TYCPR01MB5599.jpnprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7ee0e909-3f37-47b9-aa4e-08d93145ca0d
-X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Jun 2021 04:10:06.1256
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6ba7fcb9-7c15-4c4b-90c9-08d93146393e
+X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Jun 2021 04:13:12.6871
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: a19f121d-81e1-4858-a9d8-736e267fd4c7
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: tE5SsGqEIhVKbamCrLBctvE+MmOVmCxnvF6ZS0FLVEznyLF6CPFOq94T3zKdZRiDvWvG/jJQEGUUhwvQ/F0ph2I8aRcWmu7X4Jwe1Tg2BYE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYXPR01MB1598
+X-MS-Exchange-CrossTenant-userprincipalname: z0FsmOwoPrnRjX2Ztx6RSb29HKzv1QfCjXIT1FIugM3V4AHA84FhSaw9yMkiXjXZG15aYgUGV0+FGi/n98HLQowjOHv4ZjWivletFslsyVw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYYPR01MB6556
 Content-Language: ja-JP
 Content-Type: text/plain; charset="iso-2022-jp"
 Content-Transfer-Encoding: quoted-printable
@@ -148,30 +148,31 @@ I would appreciate if you have any advice on this patch.
 > From: openembedded-devel@lists.openembedded.org
 > <openembedded-devel@lists.openembedded.org> On Behalf Of
 > ito-yuichi@fujitsu.com
-> Sent: Friday, June 11, 2021 5:33 PM
+> Sent: Tuesday, June 15, 2021 9:13 AM
 > To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] [PATCH] cyrus-sasl: add CVE-2020-8032 to allowlist
+> Subject: [oe] [PATCH] dovecot: add CVE-2016-4983 to allowlist
 >=20
-> This affects only openSUSE, so add it to allowlist.
+> CVE-2016-4983 affects only postinstall script on specific distribution, s=
+o add
+> it to allowlist.
 >=20
 > Signed-off-by: Yuichi Ito <ito-yuichi@fujitsu.com>
 > ---
->  .../recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb            | 3 +++
+>  meta-networking/recipes-support/dovecot/dovecot_2.3.14.bb | 3 +++
 >  1 file changed, 3 insertions(+)
 >=20
-> diff --git
-> a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
-> b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
-> index 33de8ca7e..c4b41ace8 100644
-> --- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
-> +++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
-> @@ -96,3 +96,6 @@ FILES_${PN}-dbg       +=3D "${libdir}/sasl2/.debug"
->  FILES_${PN}-staticdev +=3D "${libdir}/sasl2/*.a"
->=20
->  INSANE_SKIP_${PN} +=3D "dev-so"
+> diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.3.14.bb
+> b/meta-networking/recipes-support/dovecot/dovecot_2.3.14.bb
+> index 19ba2b1fc..26b4f5ee8 100644
+> --- a/meta-networking/recipes-support/dovecot/dovecot_2.3.14.bb
+> +++ b/meta-networking/recipes-support/dovecot/dovecot_2.3.14.bb
+> @@ -72,3 +72,6 @@ FILES_${PN} +=3D "${libdir}/dovecot/*plugin.so
+> \  FILES_${PN}-staticdev +=3D "${libdir}/dovecot/*/*.a"
+>  FILES_${PN}-dev +=3D "${libdir}/dovecot/libdovecot*.so"
+>  FILES_${PN}-dbg +=3D "${libdir}/dovecot/*/.debug"
 > +
-> +# CVE-2020-8032 affects only openSUSE
-> +CVE_CHECK_WHITELIST +=3D "CVE-2020-8032"
+> +# CVE-2016-4983 affects only postinstall script on specific
+> +distribution CVE_CHECK_WHITELIST +=3D "CVE-2016-4983"
 > --
 > 2.25.1
 
