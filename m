@@ -1,86 +1,90 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.65])
- by mx.groups.io with SMTP id smtpd.web10.2621.1623982673765235421
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web11.2661.1623982702951677333
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Jun 2021 19:17:54 -0700
+ Thu, 17 Jun 2021 19:18:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=rCy9u/as;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.65, mailfrom: zhengrq.fnst@fujitsu.com)
-Return-Path: <zhengrq.fnst@fujitsu.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=NkZyji1R;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: zangrc.fnst@fujitsu.com)
+Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1623982672; i=@fujitsu.com;
-	bh=wshdKx9j9hgFmlxYSPBRdZYegSdq4i6IQbRq2qwK75w=;
+	s=170520fj; t=1623982700; i=@fujitsu.com;
+	bh=Kt7WgcEjnsAlc6Ho90zdqHHC/R7u/mAKwQRmTQnc0N8=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=rCy9u/aso1raJJZFhLwhKxxlsPWkppiDsKFPpPcfPDElH4ug9RZQe0/4InHVyhGRN
-	 Jtpg9CoYF/y0brR8UKdTRvvKfdOZVMr3dwbn2d4egWEZvroz5Xd98QBRRBf429lIZK
-	 uM/m42rPsRRCVUMcXHud4m31LjxsGibosG6szgjSOO3n1oLHFuStFF4iZB2Jo2pcvZ
-	 mi/p52IP7F/PHC30Xjur+AHaRDAMXa9pU5Jym8BM2HU8EduTPo2wXkNCmeoqiHxzQl
-	 oGzG1g+hKux99leoPT4oByINGndKzY3UaTYe2tGQZHqXWhLi5ubBOrtLnU03+grN2/
-	 CTY7GFnoZYu3g==
-Received: from [100.112.199.57] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-b.eu-west-1.aws.symcld.net id 94/B9-00056-F420CC06; Fri, 18 Jun 2021 02:17:51 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+EI0fVnOpN
-  gcGuPrMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvHryQ2WgpNsFdPmzWVpYLzC2sXIxSEkMJtJ
-  4tSjRUwQzh5GiYsrb7N1MXJysAnoSpx7vJYdxBYR0JdYOnsPM4gtLOAoceLQbTCbRUBVYs/LX
-  2A2r4CHxNNlM1lBbAkBBYkpD99DxQUlTs58wgJiMwtISBx88QIozgFUoygxe7o8RHmFxIwZ29
-  gmMPLMQtIxC0nHAkamVYwWSUWZ6RkluYmZObqGBga6hoZGuoaW5rqGxuZ6iVW6SXqppbrlqcU
-  luoZ6ieXFesWVuck5KXp5qSWbGIFhlFJwtHMH469XH/QOMUpyMCmJ8lq9PJ0gxJeUn1KZkVic
-  EV9UmpNafIhRhoNDSYJX5T9QTrAoNT21Ii0zBxjSMGkJDh4lEd43DGcShHiLCxJzizPTIVKnG
-  BWlxHk/giQEQBIZpXlwbbA4usQoKyXMy8jAwCDEU5BalJtZgir/ilGcg1FJmDcNZApPZl4J3P
-  RXQIuZgBa3CZ0CWVySiJCSamAy8YwR+iYrE38s5J6czQSTu5rT4qo1j6452feDc53Aki/udTy
-  +c4ur+SfN+FKrqpYyofRB3n3ZOYqfG2eJC0ZlVKzcJCE2bZKHcZBDOavl/AXrGxv29l6YJ1LC
-  ss17Ms+++oqJ85U//XFYxyj2/JLvzc8fQgvnKD2YMLeBfe5l3k9OGWaML9Xnbvq+WUdj/qw0l
-  8CJRgJR0SZ85RusVu71j6l07rRdH/d5lczhdacuHpUTmGbM7mBU0FpkJ83V1LpyH8uS1sCubw
-  xnPjw8PeOFdKTspTnV8UsMF+jqNEyflRY9u6Nzk8y8u1Uf03bG5pcIzy1bs5FTzWzxF6+7CkX
-  nrD7OP743o+uQ/oSn634psRRnJBpqMRcVJwIAE9swWR4DAAA=
-X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-13.tower-291.messagelabs.com!1623982671!87503!1
-X-Originating-IP: [62.60.8.84]
+	b=NkZyji1R9Ym/Chw5iOJtWuNql1jrC5pJIHVSVMb4oDI2O2Vrezbp1GbwdXxEJKikN
+	 Xg6nNiCd6nJ4ahAIrGno9QKV4BtUhb+i+mOyKmhFyad2tcAUknjw33lzBRS2aR0wd/
+	 lDXzK/9ftWwyEjR89hnxTP8//cNoNN9Q0vKg96k/7fEK0x+SmnhpRGkqMjaCtigSze
+	 akxQY73fm8lDrl+P/8f9dihwjPs4H1YT25fUdavQaHoiCN0XMRB90m88fWnhT9x6kq
+	 iD3HOzYK0vZrSKHr42aY/APTSS4/1EqQpK53cz3E2UZGIs+oDvig7+9e0RoOFEgc+u
+	 jqMZf9XoMN6XQ==
+Received: from [100.113.4.24] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-b.eu-central-1.aws.symcld.net id C9/BB-50909-B620CC06; Fri, 18 Jun 2021 02:18:19 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuplkeJIrShJLcpLzFFi42Kxs+EI1c1mOpN
+  gcGaKjsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmrFpxUuWgntsFcfefGRqYOxk62Lk4hASmM0k
+  8Wn7KijnBKPEwndngRxODjYBHYmOF90sILaIgL7E0tl7mEFsYQEXiQuXTzCC2CwCqhLP5l8Ds
+  3kF3CQe3PrLCmJLCChITHn4nhkiLihxcuYTsDnMAhISB1+8YIaoUZTYvvMMC4RdITFjxja2CY
+  w8s5C0zELSsoCRaRWjZVJRZnpGSW5iZo6uoYGBrqGhsa6prqGpsV5ilW6SXmqpbnJqXklRIlB
+  WL7G8WK+4Mjc5J0UvL7VkEyMwlFIKWWfuYPz0+oPeIUZJDiYlUV6rl6cThPiS8lMqMxKLM+KL
+  SnNSiw8xynBwKEnwqvwHygkWpaanVqRl5gDDGiYtwcGjJML7huFMghBvcUFibnFmOkTqFKOil
+  DjvR5CEAEgiozQPrg0WS5cYZaWEeRkZGBiEeApSi3IzS1DlXzGKczAqCfOmgUzhycwrgZv+Cm
+  gxE9DiNqFTIItLEhFSUg1MrYsPqU+crK4VIVKt+pzVeE2TFfO8ysc7vhRfuvLJaFI+B+dnwae
+  rrq/YufT+jyQ5p1Sf4FUKj6/uyOf/vmLHryPvGuWvCZgdmeHEN1n2jIGAgPm0nKpYF+frf75K
+  Fk1YyfhJN3rCqd2/Qu6fejw9V3KF++qvwh+NKt4InJxj2b6UfQ3byTiv988c2j3WmvmvCWori
+  NoqPk96vmhgGc8ih6dGuxRlKzZ935k366/wLFevkhkrBXIYihmXmHafFO7mnSHfvIjh2BXptT
+  4mRla/b0yNfPJkofrbqvm81e8XhIW/Nv9T+ryyf0E/s54sY+mPHjuNuGCP3Qs+7726jP/ptdh
+  DH7l4mM5vmXBmqamkkRJLcUaioRZzUXEiAOVHXpkgAwAA
+X-Env-Sender: zangrc.fnst@fujitsu.com
+X-Msg-Ref: server-6.tower-245.messagelabs.com!1623982699!97479!1
+X-Originating-IP: [62.60.8.85]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.75.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 2628 invoked from network); 18 Jun 2021 02:17:51 -0000
-Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-13.tower-291.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 18 Jun 2021 02:17:51 -0000
+Received: (qmail 3245 invoked from network); 18 Jun 2021 02:18:19 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-6.tower-245.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 18 Jun 2021 02:18:19 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15I2HpCH005215
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15I2IJ0q031996
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Jun 2021 03:17:51 +0100
-Received: from localhost.localdomain (10.167.225.35) by
+	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Jun 2021 03:18:19 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 18 Jun 2021 03:17:49 +0100
-From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
+ (TLS) id 15.0.1497.18; Fri, 18 Jun 2021 03:18:17 +0100
+From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] rsnapshot: upgrade 1.4.3 -> 1.4.4
-Date: Fri, 18 Jun 2021 19:17:38 +0800
-Message-ID: <1624015058-18468-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] googletest: upgrade 1.10.0 -> 1.11.0
+Date: Fri, 18 Jun 2021 22:18:11 +0800
+Message-ID: <1624025891-7635-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
+X-Originating-IP: [10.167.225.81]
 X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb | 4 ++--
+ meta-oe/recipes-test/googletest/googletest_git.bb | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-index 33f5dccca2..a81d8d6cad 100644
---- a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-+++ b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-@@ -22,8 +22,8 @@ RDEPENDS_${PN} = "rsync \
-                   perl-module-ipc-open3 \
-                  "
+diff --git a/meta-oe/recipes-test/googletest/googletest_git.bb b/meta-oe/recipes-test/googletest/googletest_git.bb
+index 2e0fecf7a9..3e1fc4ff88 100644
+--- a/meta-oe/recipes-test/googletest/googletest_git.bb
++++ b/meta-oe/recipes-test/googletest/googletest_git.bb
+@@ -4,12 +4,12 @@ SECTION = "libs"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=cbbd27594afd089daa160d3a16dd515a"
  
--SRCREV = "a9e29850fc33c503c289e245c7bad350eed746d9"
--PV = "1.4.3+git${SRCPV}"
-+SRCREV = "4dc82bfe6be3f83fcfa94946dcf6accfd6a18031"
-+PV = "1.4.4+git${SRCPV}"
+-PV = "1.10.0+git${SRCPV}"
++PV = "1.11.0+git${SRCPV}"
  
- SRC_URI = "git://github.com/DrHyde/${BPN};branch=master;protocol=git \
-            file://configure-fix-cmd_rsync.patch \
+ PROVIDES += "gmock gtest"
+ 
+ S = "${WORKDIR}/git"
+-SRCREV = "662fe38e44900c007eccb65a5d2ea19df7bd520e"
++SRCREV = "e2239ee6043f73722e7aa812a459f54a28552929"
+ SRC_URI = "git://github.com/google/googletest.git"
+ 
+ inherit cmake
 -- 
 2.25.1
 
