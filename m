@@ -1,105 +1,99 @@
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web08.9588.1624030859910603189
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+ by mx.groups.io with SMTP id smtpd.web09.11080.1624037337995529779
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Jun 2021 08:41:00 -0700
+ Fri, 18 Jun 2021 10:28:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=M8ZpMjDb;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id h16so5922430pjv.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Jun 2021 08:40:59 -0700 (PDT)
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=Fz1J8tgd;
+ spf=pass (domain: axis.com, ip: 195.60.68.18, mailfrom: peter.kjellerstedt@axis.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:references:from:organization:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=vgJzZxnAenGGfLo64eNJUOCQAZpmqkGNXFUfogL2s0Y=;
-        b=M8ZpMjDbk2dWrJCqm/72CePio40TWda/JpJmsenFCE85AWQmBD1AVyFDMO3aDQJ2r+
-         qVJFTZdQsgy6bJ/BM/GJ4lOtneD3ppdH/3sPgIgKsumfjy/SjQchyY0S8NbFGphOZPx4
-         bM0KI7BeIPrN3dfFQOtLbDH+aYAXQRhnrDCvM9RhBPv+j28F0YKTcys9aictOnT4iHQF
-         pFdVYZU8xYF6ZouCDmmDDIh8OyOspwjMYGpYOBRbx27HCO+fP137XNU2vUoQ7bVfI3d4
-         pOc5N4ylNC0k6YWybTUywLq8rdW+IHrBhF1L9FROE84gPnnUvHhkCys6z5U/JttssiSM
-         puhQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=vgJzZxnAenGGfLo64eNJUOCQAZpmqkGNXFUfogL2s0Y=;
-        b=MS/NxJ4w+AeWZIw+YeyiAWnANE6xE+Nb/yVBuxYS/5Eo+a4B8G4rY07ijWPmwQnObr
-         ynWs5Rw7veR7QsJJjM1K0YRl+uJDrMi1931e5ke6dq1sPJqkulrrVVCXpAjTt5HyAmiW
-         Zc2RhrunijQjXNeAPGgjM+zbYaBg8A2OImEIenen+8QqgpSgDkPY+KNJRDfjIcF2ZCD2
-         Au5kkI1/TLXzaovvw8h/4SirDOzGZjTVSULrFlte447Kynw6hweCQeIFe2hhJg68IR4E
-         pr8McEY+JYV0VE3shOXVM62Udme2BDf9AACGE16As352oZaQToWh2HlX/lJHO2hb7DSY
-         j16Q==
-X-Gm-Message-State: AOAM5333aUqcL9uPovApL2FGl8V09vA0NnCCDJ4gRNk5rqVebsgpkjcc
-	i6+tAcR4zubJT8pgHxx+/Ldjr5j2u3Nd4A==
-X-Google-Smtp-Source: ABdhPJxjp064L9m0rbc9mrSRt/jaBu5yCuhkQaSVx/s/yydJ8e23XQxqxq4YA0j1vk/kwyGzmrTvCw==
-X-Received: by 2002:a17:90a:6404:: with SMTP id g4mr22338461pjj.155.1624030859220;
-        Fri, 18 Jun 2021 08:40:59 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:a0f0:547b:1a51:8143:a5fd? ([2601:646:9200:a0f0:547b:1a51:8143:a5fd])
-        by smtp.gmail.com with ESMTPSA id b3sm8555652pjz.49.2021.06.18.08.40.58
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 18 Jun 2021 08:40:58 -0700 (PDT)
-Subject: Re: [oe] [meta-networking] [PATCH] mosquitto: upgrade 2.0.10 -> 2.0.11
-To: openembedded-devel@lists.openembedded.org
-References: <1624025493-7195-1-git-send-email-zangrc.fnst@fujitsu.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <474dd766-33ef-b9ff-d61c-aa679b60bb88@gmail.com>
-Date: Fri, 18 Jun 2021 08:40:57 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.11.0
+  d=axis.com; q=dns/txt; s=axis-central1; t=1624037338;
+  x=1655573338;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=4YttBzl20SFHRhQMBeI8EmGPtLWayK7oBwRLlVqjhH0=;
+  b=Fz1J8tgdBnAHkiZN7dJPJGeZdz1THqf1EUC1D54ua8JBCDXNCoIrTGfA
+   IBxQ6BVSFn2+wQ/uGC4vyYzT9SXNm6Y+Gz19RbkhzEbTjlhwNKiNZOO35
+   pAKjXlVHyheSi2Qaus8Pd+YVzQ7a6rZR+HCAn5X9jrfQYgoWejXSZTwIb
+   B+srv24/KQzK5t5hE2EO4BjM0YxzQFVWaLErVIHUrGeUz+OfYEd+4SXK1
+   3GrI57uesbqD9pT+3QPiTPllP/C8a+Lfgf9s181gywQjaj7GR/EIeaOEo
+   RS1PSf9cZpg+0lIP6Um4AKpJNa7qRpcJwiW2iWSQmy+qLSeU2II4/Z87x
+   g==;
+From: "Peter Kjellerstedt" <peter.kjellerstedt@axis.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] cryptsetup: Only recommend kernel modules when building for target
+Date: Fri, 18 Jun 2021 19:28:47 +0200
+Message-ID: <20210618172847.1024-1-pkj@axis.com>
+X-Mailer: git-send-email 2.21.3
 MIME-Version: 1.0
-In-Reply-To: <1624025493-7195-1-git-send-email-zangrc.fnst@fujitsu.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Return-Path: pkj@axis.com
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
+Otherwise cryptsetup-native depends on the target kernel and thus the
+target compiler, as can be seen by:
 
+  $ bitbake -g cryptsetup-native
+  $ grep 'cryptsetup.*linux-yocto' task-depends.dot
+  "cryptsetup-native.do_build" -> "linux-yocto.do_deploy"
+  "cryptsetup-native.do_build" -> "linux-yocto.do_package_write_rpm"
+  "cryptsetup-native.do_populate_sysroot" -> "linux-yocto.do_populate_sysroot"
+  $ grep 'linux-yocto.*gcc-cross' task-depends.dot
+  "linux-yocto.do_kernel_configme" -> "gcc-cross-x86_64.do_populate_sysroot"
+  "linux-yocto.do_prepare_recipe_sysroot" -> "gcc-cross-x86_64.do_populate_sysroot"
 
-On 6/18/21 7:11 AM, zangrc wrote:
-> -License-Update: notice.html does not exist in this version, use NOTICE.md to
-> check.
+This also moves the runtime dependencies to near the end of the recipe,
+which is more customary.
 
-is the content still same ?
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+---
+ .../cryptsetup/cryptsetup_2.3.6.bb            | 25 ++++++++++---------
+ 1 file changed, 13 insertions(+), 12 deletions(-)
 
-> 
-> Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
-> ---
->   .../mosquitto/{mosquitto_2.0.10.bb => mosquitto_2.0.11.bb}  | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
->   rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.10.bb => mosquitto_2.0.11.bb} (93%)
-> 
-> diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.10.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.11.bb
-> similarity index 93%
-> rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.10.bb
-> rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.11.bb
-> index b815ac3b49..9f1c024bbd 100644
-> --- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.10.bb
-> +++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.11.bb
-> @@ -10,7 +10,7 @@ LICENSE = "EPL-2.0 | EDL-1.0"
->   LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ca9a8f366c6babf593e374d0d7d58749 \
->                       file://edl-v10;md5=c09f121939f063aeb5235972be8c722c \
->                       file://epl-v20;md5=d9fc0efef5228704e7f5b37f27192723 \
-> -                    file://notice.html;md5=541f8f37af492858dab8d2c1b69ede69 \
-> +                    file://NOTICE.md;md5=a7a91b4754c6f7995020d1b49bc829c6 \
->   "
->   DEPENDS = "uthash cjson dlt-daemon"
->   
-> @@ -19,8 +19,8 @@ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
->              file://1571.patch \
->   "
->   
-> -SRC_URI[md5sum] = "3d1c327d8c5881f56983bee1e3c8f068"
-> -SRC_URI[sha256sum] = "0188f7b21b91d6d80e992b8d6116ba851468b3bd154030e8a003ed28fb6f4a44"
-> +SRC_URI[md5sum] = "638d801e6aac611b41de76d030951612"
-> +SRC_URI[sha256sum] = "7b36a7198bce85cf31b132f5c6ee36dcf5dadf86fb768501eb1e11ce95d4f78a"
->   
->   inherit systemd update-rc.d useradd cmake
->   
-> 
-> 
-> 
-> 
-> 
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb
+index 562ac83fb..9e83b90ea 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb
+@@ -16,10 +16,6 @@ DEPENDS = " \
+     util-linux-libuuid \
+ "
+ 
+-RDEPENDS_${PN} = " \
+-    libdevmapper \
+-"
+-
+ SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
+ SRC_URI[md5sum] = "504d1ab22cbc4d1a59a8d8c7ee5ed3bf"
+ SRC_URI[sha256sum] = "b296b7a21ea576c2b180611ccb19d06aec8dddaedf7c704b0c6a81210c25635f"
+@@ -71,14 +67,6 @@ PACKAGECONFIG[kernel] = "--with-crypto_backend=kernel"
+ PACKAGECONFIG[nettle] = "--with-crypto_backend=nettle,,nettle"
+ PACKAGECONFIG[luks2] = "--with-default-luks-format=LUKS2,--with-default-luks-format=LUKS1"
+ 
+-RRECOMMENDS_${PN} = "kernel-module-aes-generic \
+-                     kernel-module-dm-crypt \
+-                     kernel-module-md5 \
+-                     kernel-module-cbc \
+-                     kernel-module-sha256-generic \
+-                     kernel-module-xts \
+-"
+-
+ EXTRA_OECONF = "--enable-static"
+ # Building without largefile is not supported by upstream
+ EXTRA_OECONF += "--enable-largefile"
+@@ -89,4 +77,17 @@ EXTRA_OECONF += "--disable-libargon2"
+ 
+ FILES_${PN} += "${@bb.utils.contains('DISTRO_FEATURES','systemd','${exec_prefix}/lib/tmpfiles.d/cryptsetup.conf', '', d)}"
+ 
++RDEPENDS_${PN} = " \
++    libdevmapper \
++"
++
++RRECOMMENDS_${PN}_class-target = " \
++    kernel-module-aes-generic \
++    kernel-module-dm-crypt \
++    kernel-module-md5 \
++    kernel-module-cbc \
++    kernel-module-sha256-generic \
++    kernel-module-xts \
++"
++
+ BBCLASSEXTEND = "native nativesdk"
