@@ -1,107 +1,105 @@
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web12.9683.1624030741307819329
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web08.9588.1624030859910603189
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Jun 2021 08:39:01 -0700
+ Fri, 18 Jun 2021 08:41:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=G/fSsFV3;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id x19so4868646pln.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Jun 2021 08:39:01 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=M8ZpMjDb;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id h16so5922430pjv.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Jun 2021 08:40:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=XBxJG9uo/zoXtKyOGNPIDlXdY2LxE1QzlgFbhLd/Eqs=;
-        b=G/fSsFV3mMXg9NIk+fgshVahZAyOdr68pE00cHSsvX8GFAZ0tbflpSKsO0rHNEpzDb
-         M+RHGnMa9uxqZbgZplVXaIvC08zNtUh62YSsyIrZXkxnrNu1+e9kJfpLE9YQma0FQgk6
-         xWZiTDXbCAGP351VoUiPdkq0G6nH4hqNx7+fDYeDTZ2/YQZpIhHTI4sE9e+8iu35kwOs
-         dQjlnoV3CiOdn6HWgzZa8+Q7/KD9x1IwouADWkHrIR7zt19xCv6PdTYR0XqDG+uRkvV7
-         X8Y+y+pRejIICON3s3Ni1RIzXZAtbPnrVCqzPc1xIAV28PVzmnKQKmZMOvKT/a8PIlml
-         DgVw==
+        h=subject:to:references:from:organization:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=vgJzZxnAenGGfLo64eNJUOCQAZpmqkGNXFUfogL2s0Y=;
+        b=M8ZpMjDbk2dWrJCqm/72CePio40TWda/JpJmsenFCE85AWQmBD1AVyFDMO3aDQJ2r+
+         qVJFTZdQsgy6bJ/BM/GJ4lOtneD3ppdH/3sPgIgKsumfjy/SjQchyY0S8NbFGphOZPx4
+         bM0KI7BeIPrN3dfFQOtLbDH+aYAXQRhnrDCvM9RhBPv+j28F0YKTcys9aictOnT4iHQF
+         pFdVYZU8xYF6ZouCDmmDDIh8OyOspwjMYGpYOBRbx27HCO+fP137XNU2vUoQ7bVfI3d4
+         pOc5N4ylNC0k6YWybTUywLq8rdW+IHrBhF1L9FROE84gPnnUvHhkCys6z5U/JttssiSM
+         puhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=XBxJG9uo/zoXtKyOGNPIDlXdY2LxE1QzlgFbhLd/Eqs=;
-        b=FPn4o9RHJ/fdAQWdU58GimwW+gpgqDZsynqaV0LxlKsmyJbl3dPLcnXE4Vxbs6kusw
-         JPgfqg3kzg3EWmfmQyN1k2IbvEuLdFsv8U0mhA8P7Ddixi1RSLJURrK+veZSsOk/9/cd
-         dUzBAJg/sBrO1NgKE4QNinsfBZaLyuLii5tWK9uzHEMbpz/utT/awmy/JejAOq9ZbkCR
-         mvEgpm2MTuDCER3+61UetupeOlJnAnQ6GtHeZwX6561M5HOrYadV0B8iQvzWcs+zLobQ
-         XuqDrRU/zdpVIGR6jq7uure3GWHO2cAo0/AH5VwvzGpn2hDJfriof3lLMV36RyAcnz+D
-         GZjA==
-X-Gm-Message-State: AOAM530Yh2NY+1VMB2+TeQrZKHABiCeMaIzEe4p4Cl4LrY2faUFrMIib
-	hRwrHjMT3nXkLG3jjeepEo4OIK3G7oxbQg==
-X-Google-Smtp-Source: ABdhPJw4y2t/95rH41JBgHiHc/BMiZdVPK++VQJSNXd8CGs+DIvTug10OD72MRdRS60S+JpmEuuCpA==
-X-Received: by 2002:a17:90b:1d0f:: with SMTP id on15mr22647260pjb.194.1624030740637;
-        Fri, 18 Jun 2021 08:39:00 -0700 (PDT)
+        h=x-gm-message-state:subject:to:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=vgJzZxnAenGGfLo64eNJUOCQAZpmqkGNXFUfogL2s0Y=;
+        b=MS/NxJ4w+AeWZIw+YeyiAWnANE6xE+Nb/yVBuxYS/5Eo+a4B8G4rY07ijWPmwQnObr
+         ynWs5Rw7veR7QsJJjM1K0YRl+uJDrMi1931e5ke6dq1sPJqkulrrVVCXpAjTt5HyAmiW
+         Zc2RhrunijQjXNeAPGgjM+zbYaBg8A2OImEIenen+8QqgpSgDkPY+KNJRDfjIcF2ZCD2
+         Au5kkI1/TLXzaovvw8h/4SirDOzGZjTVSULrFlte447Kynw6hweCQeIFe2hhJg68IR4E
+         pr8McEY+JYV0VE3shOXVM62Udme2BDf9AACGE16As352oZaQToWh2HlX/lJHO2hb7DSY
+         j16Q==
+X-Gm-Message-State: AOAM5333aUqcL9uPovApL2FGl8V09vA0NnCCDJ4gRNk5rqVebsgpkjcc
+	i6+tAcR4zubJT8pgHxx+/Ldjr5j2u3Nd4A==
+X-Google-Smtp-Source: ABdhPJxjp064L9m0rbc9mrSRt/jaBu5yCuhkQaSVx/s/yydJ8e23XQxqxq4YA0j1vk/kwyGzmrTvCw==
+X-Received: by 2002:a17:90a:6404:: with SMTP id g4mr22338461pjj.155.1624030859220;
+        Fri, 18 Jun 2021 08:40:59 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::a054])
-        by smtp.gmail.com with ESMTPSA id y7sm2591476pja.8.2021.06.18.08.38.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Jun 2021 08:39:00 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:a0f0:547b:1a51:8143:a5fd? ([2601:646:9200:a0f0:547b:1a51:8143:a5fd])
+        by smtp.gmail.com with ESMTPSA id b3sm8555652pjz.49.2021.06.18.08.40.58
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 18 Jun 2021 08:40:58 -0700 (PDT)
+Subject: Re: [oe] [meta-networking] [PATCH] mosquitto: upgrade 2.0.10 -> 2.0.11
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] rocksdb: Implement timer for armv6+
-Date: Fri, 18 Jun 2021 08:38:57 -0700
-Message-Id: <20210618153857.775544-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.32.0
-In-Reply-To: <20210618153857.775544-1-raj.khem@gmail.com>
-References: <20210618153857.775544-1-raj.khem@gmail.com>
+References: <1624025493-7195-1-git-send-email-zangrc.fnst@fujitsu.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <474dd766-33ef-b9ff-d61c-aa679b60bb88@gmail.com>
+Date: Fri, 18 Jun 2021 08:40:57 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.11.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <1624025493-7195-1-git-send-email-zangrc.fnst@fujitsu.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-dbs/rocksdb/files/arm.patch   | 26 +++++++++++++++++++
- meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb |  1 +
- 2 files changed, 27 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/rocksdb/files/arm.patch
 
-diff --git a/meta-oe/recipes-dbs/rocksdb/files/arm.patch b/meta-oe/recipes-dbs/rocksdb/files/arm.patch
-new file mode 100644
-index 0000000000..d428a6624a
---- /dev/null
-+++ b/meta-oe/recipes-dbs/rocksdb/files/arm.patch
-@@ -0,0 +1,26 @@
-+implement timer for arm >= v6
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+--- a/utilities/transactions/lock/range/range_tree/lib/portability/toku_time.h
-++++ b/utilities/transactions/lock/range/range_tree/lib/portability/toku_time.h
-+@@ -161,6 +161,20 @@ static inline tokutime_t toku_time_now(v
-+   struct timeval tv;
-+   gettimeofday(&tv, nullptr);
-+   return (uint64_t)tv.tv_sec * 1000000 + tv.tv_usec;
-++#elif (__ARM_ARCH >= 6)
-++  uint32_t pmccntr;
-++  uint32_t pmuseren;
-++  uint32_t pmcntenset;
-++  // Read the user mode perf monitor counter access permissions.
-++  asm volatile("mrc p15, 0, %0, c9, c14, 0" : "=r"(pmuseren));
-++  if (pmuseren & 1) {  // Allows reading perfmon counters for user mode code.
-++    asm volatile("mrc p15, 0, %0, c9, c12, 1" : "=r"(pmcntenset));
-++    if (pmcntenset & 0x80000000ul) {  // Is it counting?
-++      asm volatile("mrc p15, 0, %0, c9, c13, 0" : "=r"(pmccntr));
-++      // The counter is set up to count every 64th cycle
-++      return (uint64_t)pmccntr * 64;  // Should optimize to << 6
-++    }
-++  }
-+ #else
-+ #error No timer implementation for this platform
-+ #endif
-diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
-index 6516edade6..99bfdd4264 100644
---- a/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
-+++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
-@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
-            file://0001-range_tree-Implement-toku_time_now-for-rv32-rv64-in-.patch \
-            file://ppc64.patch \
-            file://mips.patch \
-+           file://arm.patch \
-           "
- 
- S = "${WORKDIR}/git"
--- 
-2.32.0
 
+On 6/18/21 7:11 AM, zangrc wrote:
+> -License-Update: notice.html does not exist in this version, use NOTICE.md to
+> check.
+
+is the content still same ?
+
+> 
+> Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+> ---
+>   .../mosquitto/{mosquitto_2.0.10.bb => mosquitto_2.0.11.bb}  | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>   rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.10.bb => mosquitto_2.0.11.bb} (93%)
+> 
+> diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.10.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.11.bb
+> similarity index 93%
+> rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.10.bb
+> rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.11.bb
+> index b815ac3b49..9f1c024bbd 100644
+> --- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.10.bb
+> +++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.11.bb
+> @@ -10,7 +10,7 @@ LICENSE = "EPL-2.0 | EDL-1.0"
+>   LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ca9a8f366c6babf593e374d0d7d58749 \
+>                       file://edl-v10;md5=c09f121939f063aeb5235972be8c722c \
+>                       file://epl-v20;md5=d9fc0efef5228704e7f5b37f27192723 \
+> -                    file://notice.html;md5=541f8f37af492858dab8d2c1b69ede69 \
+> +                    file://NOTICE.md;md5=a7a91b4754c6f7995020d1b49bc829c6 \
+>   "
+>   DEPENDS = "uthash cjson dlt-daemon"
+>   
+> @@ -19,8 +19,8 @@ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
+>              file://1571.patch \
+>   "
+>   
+> -SRC_URI[md5sum] = "3d1c327d8c5881f56983bee1e3c8f068"
+> -SRC_URI[sha256sum] = "0188f7b21b91d6d80e992b8d6116ba851468b3bd154030e8a003ed28fb6f4a44"
+> +SRC_URI[md5sum] = "638d801e6aac611b41de76d030951612"
+> +SRC_URI[sha256sum] = "7b36a7198bce85cf31b132f5c6ee36dcf5dadf86fb768501eb1e11ce95d4f78a"
+>   
+>   inherit systemd update-rc.d useradd cmake
+>   
+> 
+> 
+> 
+> 
+> 
