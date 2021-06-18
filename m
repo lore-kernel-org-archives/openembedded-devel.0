@@ -1,59 +1,59 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.66])
- by mx.groups.io with SMTP id smtpd.web08.2555.1623982253763923279
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.2])
+ by mx.groups.io with SMTP id smtpd.web09.2536.1623982305832581132
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Jun 2021 19:10:54 -0700
+ Thu, 17 Jun 2021 19:11:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=VLtlvfNm;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.66, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ToAXTbn+;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.2, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1623982252; i=@fujitsu.com;
-	bh=l07/MxX/ARZWwlvocD9n9kmxnxC36p0trDqYnAazvDk=;
+	s=170520fj; t=1623982303; i=@fujitsu.com;
+	bh=U17Ej2DXwcMBhg2jJNEj384jRQQKK3E9b1d3ObNWpXk=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=VLtlvfNmDraXGp/LCrT+tWlHMjNDEGh+U+/1+OxDHSV2G/O74cwEJPFNm3vu1YPKU
-	 efjWpFq9CqcTmRxxd+E9ViQc6+/v1Xqi0GXZtc3VHYC8YZce/8b28z13ESJSHjm2PD
-	 pu80Hpc99vXikc/c0LyED3yF174GSrqMsU3CVNRAOpy7PNQYtzl2EIkEtLKd/ZvTHz
-	 WUvr6lly/d/rNxJxFMTsHkvNgFvkxweQycNulv25NNzLoDaGKDM2gd1ziiWpidgGi5
-	 69I5flZ/JCfV4yytKHqyCn8FvHWA0+ifGf6Pn+Z6/Eb4Y194Lgqb+/limw1JByIR9X
-	 cmwnmuERSlNRw==
-Received: from [100.112.198.210] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-b.eu-west-1.aws.symcld.net id E5/81-36719-BA00CC06; Fri, 18 Jun 2021 02:10:51 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupikeJIrShJLcpLzFFi42Kxs+GYorua4Uy
-  Cwfz5EhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aibVYFczkqPl/vYm5g3M/excjFISQwm0ni
-  3p5+ZgjnBKNEx9HvLF2MnBxsAjoSHS+6wWwRAX2JpbP3MIPYwgL2EttX3QeyOThYBFQlVjRZg
-  4R5BdwkfuxuZgOxJQQUJKY8fM8MEReUODnzCdgYZgEJiYMvXjBD1ChKbN95hgXCrpCYMWMb2w
-  RGnllIWmYhaVnAyLSK0SKpKDM9oyQ3MTNH19DAQNfQ0EjX0NJC19DYQC+xSjdJL7VUtzy1uET
-  XUC+xvFivuDI3OSdFLy+1ZBMjMIhSCo417WA8+fqD3iFGSQ4mJVFeq5enE4T4kvJTKjMSizPi
-  i0pzUosPMcpwcChJ8Kr8B8oJFqWmp1akZeYAAxomLcHBoyTCy/QXKM1bXJCYW5yZDpE6xagoJ
-  c7bBtInAJLIKM2Da4NF0SVGWSlhXkYGBgYhnoLUotzMElT5V4ziHIxKwrwSIFN4MvNK4Ka/Al
-  rMBLS4TegUyOKSRISUVAOTlIWBe6/Urj3H0yZnPDrKnfq0dmU2R9UO7TkW8f3y22ctXBKyfX/
-  oJB2JHY0qsh7sNvXrH2w5VuhiKG+fk9IYobio/ANrEd+saY3Sc8znTyiLPn9IpS5uxa3CLX6F
-  Lj/XRvQvkO4zdmIuuBq0PyfOp7mh0NJO4nFWbffUgqUpdWvNxHl7/ovsOSr4WtWL42nyOacpn
-  pasB98cO979QXqdt/Zr5hPfOtepp+33algc4JdZHLCF7UDGi4WrGXpfz911nqvXblF/wO8TE7
-  cuN11/6sGB45x505Lm/VdVqT/0sb3bKkzF6LfRHu65yaJl983KBK27vj5mKdNiytHqFPrHZ+S
-  zYGVav/OnnhvnriixFGckGmoxFxUnAgDiI0RTHQMAAA==
+	b=ToAXTbn+HbArNpjlCOsOp8Ub3Llg2luJbx820XB1BThAVgLfd8JttJ/r/PvcnD1/P
+	 24HLiJP1dVjWecVqivjA4iAmsllAoFn+aXuUaan/8HNsa3LzkrdfhUe2yxTTWx7clD
+	 QXII1FQeb6nvo63Jp7TYgxbRv5H5CBCH58R5Hv67xWhMvM3QkbfNC3ECPqSWXgKs3z
+	 FrBEK1O+lihD0gR5qGY4UWu6O2eanzthjrYZtpS7SYu9pRb3HfqkxLyzOGrRKwG5mV
+	 F/XbHaBY6UG6Cz5xkdpfewT+2KhDtXjtEFKsgXagyJXoKXn+gq5oYvs0siHd5RTNUJ
+	 anJ3DckRnwy2g==
+Received: from [100.113.0.182] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-a.eu-central-1.aws.symcld.net id 84/A8-11194-FD00CC06; Fri, 18 Jun 2021 02:11:43 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+GYonuP4Uy
+  CwdP3xhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8a2p42sBQv5Kmbd7GRuYNzH08XIxSEkMJtJ
+  YuOJP0wQzglGiZt/NrJ3MXJysAnoSHS86GYBsUUE9CWWzt7DDGILC3hL/L2xhBHEZhFQlTgzb
+  z2YzSvgJtFy/AOYLSGgIDHl4XtmiLigxMmZT8DmMAtISBx88YIZokZRYvvOMywQdoXEjBnb2C
+  Yw8sxC0jILScsCRqZVjBZJRZnpGSW5iZk5uoYGBrqGhsa6hrqmhnqJVbqJeqmlusmpeSVFiUB
+  JvcTyYr3iytzknBS9vNSSTYzAQEopZDTewXjw9Qe9Q4ySHExKorxWL08nCPEl5adUZiQWZ8QX
+  leakFh9ilOHgUJLgVfkPlBMsSk1PrUjLzAEGNUxagoNHSYSX6S9Qmre4IDG3ODMdInWKUVFKn
+  LcNpE8AJJFRmgfXBoukS4yyUsK8jAwMDEI8BalFuZklqPKvGMU5GJWEeSVApvBk5pXATX8FtJ
+  gJaHGb0CmQxSWJCCmpBqa63Zvv8bDtWXxcPPpXzYqrrJu+hZ96fcL44AT19NNbRQXv1nvYt4v
+  xLvj19vpyp4dO//ZWlPzV8P6iNld1zw1ev96iD52bhRyk7NMfXir5pebim2TU39sTmfk/7aTm
+  +shFJR3J3OEnPKym+3kJdatcmvy01eBBaeeeqx+yFoakLtRTEIy2VC1XzNAUa904S5XrQ1GJ9
+  asHy9J2WlwT/ZjwrTVpzsUvMmqx2rlHjTJLYu1klkoGh2zxPfk/pnjDvXfNEziWtfSKxqq8fb
+  /twtvuby1aOpZbCt+7eFRvWV7KW2EyJz12ut0sjxRtL9NdD4JCPuk1brrWy96ksd7QenKghNl
+  OJ5mlJv33HNIilFiKMxINtZiLihMBaIF6Nh8DAAA=
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-15.tower-287.messagelabs.com!1623982251!75053!1
+X-Msg-Ref: server-15.tower-228.messagelabs.com!1623982302!95854!1
 X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.75.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 27167 invoked from network); 18 Jun 2021 02:10:51 -0000
+Received: (qmail 7744 invoked from network); 18 Jun 2021 02:11:42 -0000
 Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-15.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 18 Jun 2021 02:10:51 -0000
+  by server-15.tower-228.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 18 Jun 2021 02:11:42 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15I2ApNY004069
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15I2Bf1a004288
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Jun 2021 03:10:51 +0100
+	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Jun 2021 03:11:41 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 18 Jun 2021 03:10:49 +0100
+ (TLS) id 15.0.1497.18; Fri, 18 Jun 2021 03:11:40 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-gnome] [PATCH] evince: upgrade 40.1 -> 40.2
-Date: Fri, 18 Jun 2021 22:10:43 +0800
-Message-ID: <1624025443-7083-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] mosquitto: upgrade 2.0.10 -> 2.0.11
+Date: Fri, 18 Jun 2021 22:11:33 +0800
+Message-ID: <1624025493-7195-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -61,27 +61,41 @@ X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
+-License-Update: notice.html does not exist in this version, use NOTICE.md to
+check.
+
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../recipes-gnome/evince/{evince_40.1.bb => evince_40.2.bb}     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/evince/{evince_40.1.bb => evince_40.2.bb} (93%)
+ .../mosquitto/{mosquitto_2.0.10.bb => mosquitto_2.0.11.bb}  | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.10.bb => mosquitto_2.0.11.bb} (93%)
 
-diff --git a/meta-gnome/recipes-gnome/evince/evince_40.1.bb b/meta-gnome/recipes-gnome/evince/evince_40.2.bb
+diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.10.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.11.bb
 similarity index 93%
-rename from meta-gnome/recipes-gnome/evince/evince_40.1.bb
-rename to meta-gnome/recipes-gnome/evince/evince_40.2.bb
-index 3b1a978c64..fa5125b53e 100644
---- a/meta-gnome/recipes-gnome/evince/evince_40.1.bb
-+++ b/meta-gnome/recipes-gnome/evince/evince_40.2.bb
-@@ -24,7 +24,7 @@ inherit gnomebase itstool gnome-help pkgconfig gsettings gobject-introspection g
- def gnome_verdir(v):
-     return oe.utils.trim_version(v, 1)
+rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.10.bb
+rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.11.bb
+index b815ac3b49..9f1c024bbd 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.10.bb
++++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.11.bb
+@@ -10,7 +10,7 @@ LICENSE = "EPL-2.0 | EDL-1.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ca9a8f366c6babf593e374d0d7d58749 \
+                     file://edl-v10;md5=c09f121939f063aeb5235972be8c722c \
+                     file://epl-v20;md5=d9fc0efef5228704e7f5b37f27192723 \
+-                    file://notice.html;md5=541f8f37af492858dab8d2c1b69ede69 \
++                    file://NOTICE.md;md5=a7a91b4754c6f7995020d1b49bc829c6 \
+ "
+ DEPENDS = "uthash cjson dlt-daemon"
  
--SRC_URI[archive.sha256sum] = "7a666363c350af2e3bbba7f14b3c1befc5012f9ed3d9d073447f4c59f33dcf2d"
-+SRC_URI[archive.sha256sum] = "0ff7ec79376a8a97ac4cd274d32e804c7e236ef2d2d5d3f646de6eb882a63c77"
+@@ -19,8 +19,8 @@ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
+            file://1571.patch \
+ "
  
- GTKDOC_MESON_OPTION = "gtk_doc"
+-SRC_URI[md5sum] = "3d1c327d8c5881f56983bee1e3c8f068"
+-SRC_URI[sha256sum] = "0188f7b21b91d6d80e992b8d6116ba851468b3bd154030e8a003ed28fb6f4a44"
++SRC_URI[md5sum] = "638d801e6aac611b41de76d030951612"
++SRC_URI[sha256sum] = "7b36a7198bce85cf31b132f5c6ee36dcf5dadf86fb768501eb1e11ce95d4f78a"
+ 
+ inherit systemd update-rc.d useradd cmake
  
 -- 
 2.25.1
