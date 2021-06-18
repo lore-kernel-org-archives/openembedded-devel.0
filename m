@@ -1,59 +1,59 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.5])
- by mx.groups.io with SMTP id smtpd.web09.2614.1623982730982265012
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.4])
+ by mx.groups.io with SMTP id smtpd.web09.2618.1623982751815396720
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Jun 2021 19:18:51 -0700
+ Thu, 17 Jun 2021 19:19:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=aeteHaF1;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.5, mailfrom: zhengrq.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=XSSdGiMg;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.4, mailfrom: zhengrq.fnst@fujitsu.com)
 Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1623982728; i=@fujitsu.com;
-	bh=6V1VzDBFRJVzQ/fla0mgFD4ckmbXCRGJ9J5GmEsycHM=;
+	s=170520fj; t=1623982750; i=@fujitsu.com;
+	bh=ZIFfVS/YQ5HuKl0pGnvUe71yZnT+YapPgEJGVSli3vw=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=aeteHaF1qLTWfKh8Ns4+3RTclvLUWSiO+va1tm50IOvHLAiGHi7/wcCd5i8ao+zqm
-	 DzOsG/yV9NShVXgAlVSe0tRTxfkw7JuX5pLQkfSL0KlGlNgo1Wj4Xn9KnuCk6vZhUs
-	 HYpRL4LtnrXoKeZOpMgcQcHij2xeyGgQdh1WcLefP1FVzj7H+UVfxT+a0e59dPaDcO
-	 Y1wHSx5+whL74e5w8GPea6gBWQ9RMOYVgWyT+fn3N7lKKdtmWshIQwPAJ2poo6XVD0
-	 NlSA0nblZ5okMiaYGl/qPbPp8DrRKzZA1p66T1JOVasxKNMPdi5K58qgPMNuItw1iE
-	 yIs1MZYw2vyug==
-Received: from [100.113.3.92] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-5.bemta.az-a.eu-central-1.aws.symcld.net id 91/62-16595-7820CC06; Fri, 18 Jun 2021 02:18:47 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYotvOdCb
-  B4NtPTYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPHt2XMBbs5Ky4+OsPWwPiYo4uRi0NIYDaT
-  xMJnD5kgnD2MEstOHmPsYuTkYBPQlTj3eC07iC0ioC+xdPYe5i5GDg5hAS+Ju48FQcIsAqoS7
-  S9XsYLYvAIeEi+fPWUBsSUEFCSmPHzPDBEXlDg58wlYnFlAQuLgixdgYyQEFCVmT5eHKK+QmD
-  FjG9sERp5ZSDpmIelYwMi0itEyqSgzPaMkNzEzR9fQwEDX0NBYF0gaG+glVukm6qWW6ian5pU
-  UJQJl9RLLi/WKK3OTc1L08lJLNjECwyilkKFpB+O7Vx/0DjFKcjApifJavTydIMSXlJ9SmZFY
-  nBFfVJqTWnyIUYaDQ0mCV+U/UE6wKDU9tSItMwcY0jBpCQ4eJRHeNwxnEoR4iwsSc4sz0yFSp
-  xgVpcR5P4IkBEASGaV5cG2wOLrEKCslzMvIwMAgxFOQWpSbWYIq/4pRnINRSZg3DWQKT2ZeCd
-  z0V0CLmYAWtwmdAllckoiQkmpgmp4u9VilLIOFSfeR/66LGiJtXQKh3x9fTrb8oSErHBfMn/3
-  AofiL8D6RlKNfvs88p+ojnzvfpbO5uKP68YPTb0JF+Sat2BT4XzLntX6E/yzJW2bvDv9oFI92
-  Ptk2Y89BNR1jJYb/mb7J3Hbz7253XvNuy7TmSQ3F+o03rsZzdb8sjPj/2eSJ8IIfATuXHLE5H
-  VZt0/2aP5Jt0WLnmNZpsWe5ovUeLs+Y3NhQpXR96W3917cMl56RruaQP6zjIrnycSET44Vjk9
-  IOnck4cP1RVli6X8mkd5FtYtaHzz5d6/xi7u3kt4KKpVZ/VL7z1xXM/v76xYHsN6cLXkrJvuz
-  01zXfu7mL/Zt/VPJBU5cFSizFGYmGWsxFxYkA38Nnzh4DAAA=
+	b=XSSdGiMgialjd778/hqEgWxVd5krm3jwB/bs7Ric4dnnNYK0kwSkLWhpS4zrURH06
+	 HBXpCaa7rsghHHfQ8xWWKYFKxQhvIicpHdRKtZoqrU9YrT+58Ix0mFc+D1Z4goj7fP
+	 RWMykFO1icoIJy7vxyk8VmHkH0pRXUIqx/Dgdos/tPTCuI9G7+wx6oS/f6DYpcerGU
+	 oQyIWQKaMYcekAqgVsJ+Am7zZGvpcszTEylj4CRnz/Lna/acmdZMh5hqG3+rbi+jzH
+	 CfDX56QFl5GiVVzRz4WF5NBIzcw6IU+Jvwcg9SwAHeR75FbIZehEm+maJ0VNTcXxF8
+	 FjUzImNSJZ/bA==
+Received: from [100.112.195.193] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-4.bemta.az-a.eu-west-1.aws.symcld.net id 81/E5-45811-D920CC06; Fri, 18 Jun 2021 02:19:09 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYqjuX6Uy
+  CwfGHvBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8ba12fYC3ZzVqyY083ewHiLo4uRi0NIYDaT
+  RN+r2ewQzh5GiQ/r3zF1MXJysAnoSpx7vJYdxBYR0JdYOnsPM4gtLOAq8X/fEjCbRUBVYu63v
+  ywgNq+Ah8TdjhusILaEgILElIfvmSHighInZz4Bq2EWkJA4+OIFUJwDqEZRYvZ0eYjyCokZM7
+  axTWDkmYWkYxaSjgWMTKsYLZKKMtMzSnITM3N0DQ0MdA0NjXQNLYHYyEwvsUo3US+1VLc8tbh
+  E11AvsbxYr7gyNzknRS8vtWQTIzCMUgoO1O1gfPD6g94hRkkOJiVRXquXpxOE+JLyUyozEosz
+  4otKc1KLDzHKcHAoSfDeYjyTICRYlJqeWpGWmQMMaZi0BAePkgivNTCshXiLCxJzizPTIVKnG
+  BWlxHntQBICIImM0jy4NlgcXWKUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzLsNZDtPZl4J3P
+  RXQIuZgBa3CZ0CWVySiJCSamAS1/6Zem9FzYqqLLYT+XeXzwzsnmQ3o+KTqdlTT95z95zupF1
+  qumDP8d1jicK1hF87/A9fWjRnF8vc32//7XkXtLO+P+CnDvPs/bkCc58z6IqHHLKbKK+ybFbv
+  ft1+hqud1lIlEbkRlv0SLuudWnvnbw/liuv/bVGxju8Jx7Ofdj85/+1ZL/18xfGqKVcu+ia5N
+  17Tlspz31kSsXT/ojNaZketd6+VX2BfeO1wYUCa65r316f/aZyw4u+XHyfDYl0nrVLumN7JFL
+  +063D0xwgtYxk25qP3f7ZPV3SILEhd8SJuRbhGcHyezI7EIKkLEj0te3VEj+cWr3AUWrmI3zm
+  XIaV9uezjjQZMvu073z9UYinOSDTUYi4qTgQAVzpp9B4DAAA=
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-11.tower-226.messagelabs.com!1623982727!2943!1
-X-Originating-IP: [62.60.8.148]
+X-Msg-Ref: server-11.tower-267.messagelabs.com!1623982748!92091!1
+X-Originating-IP: [62.60.8.149]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.75.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 21425 invoked from network); 18 Jun 2021 02:18:47 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-11.tower-226.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 18 Jun 2021 02:18:47 -0000
+Received: (qmail 1966 invoked from network); 18 Jun 2021 02:19:09 -0000
+Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
+  by server-11.tower-267.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 18 Jun 2021 02:19:09 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15I2IkNw006051
+	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15I2J8F5019346
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Jun 2021 03:18:46 +0100
+	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Jun 2021 03:19:08 +0100
 Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 18 Jun 2021 03:18:45 +0100
+ (TLS) id 15.0.1497.18; Fri, 18 Jun 2021 03:19:07 +0100
 From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-absl: upgrade 0.12.0 -> 0.13.0
-Date: Fri, 18 Jun 2021 19:17:57 +0800
-Message-ID: <1624015077-18514-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] rsyslog: upgrade 8.2104.0 -> 8.2106.0
+Date: Fri, 18 Jun 2021 19:18:55 +0800
+Message-ID: <1624015135-18587-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.35]
@@ -63,28 +63,28 @@ Content-Type: text/plain
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../python/{python3-absl_0.12.0.bb => python3-absl_0.13.0.bb} | 4 ++--
+ .../rsyslog/{rsyslog_8.2104.0.bb => rsyslog_8.2106.0.bb}      | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-absl_0.12.0.bb => python3-absl_0.13.0.bb} (67%)
+ rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.2104.0.bb => rsyslog_8.2106.0.bb} (98%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-absl_0.12.0.bb b/meta-python/recipes-devtools/python/python3-absl_0.13.0.bb
-similarity index 67%
-rename from meta-python/recipes-devtools/python/python3-absl_0.12.0.bb
-rename to meta-python/recipes-devtools/python/python3-absl_0.13.0.bb
-index 2ecf10caa1..2ebd358e5a 100644
---- a/meta-python/recipes-devtools/python/python3-absl_0.12.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-absl_0.13.0.bb
-@@ -4,8 +4,8 @@ SECTION = "devel/python"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2104.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2106.0.bb
+similarity index 98%
+rename from meta-oe/recipes-extended/rsyslog/rsyslog_8.2104.0.bb
+rename to meta-oe/recipes-extended/rsyslog/rsyslog_8.2106.0.bb
+index 3f1ec91ab0..37f391356f 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2104.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2106.0.bb
+@@ -31,8 +31,8 @@ SRC_URI_append_libc-musl = " \
+     file://0001-Include-sys-time-h.patch \
+ "
  
--SRC_URI[md5sum] = "cfc383e2c647698666a7c5d8ef83a675"
--SRC_URI[sha256sum] = "b44f68984a5ceb2607d135a615999b93924c771238a63920d17d3387b0d229d5"
-+SRC_URI[md5sum] = "afb3ffb4b59d53575e8eb073c3a52803"
-+SRC_URI[sha256sum] = "6953272383486044699fd0e9f00aad167a27e08ce19aae66c6c4b10e7e767793"
+-SRC_URI[md5sum] = "a0213c989bce297944901e1a85286b8b"
+-SRC_URI[sha256sum] = "710981c3c34f88d5d1fb55ecfc042aecad8af69414b2b1602b304f4dedbf9f43"
++SRC_URI[md5sum] = "b90659d85dce1df0f6c69a79c4ef053a"
++SRC_URI[sha256sum] = "faf45c25a2265c001739e8888b3652cf685eb3f35cd65d17d5c38fd44b9ddd81"
  
- PYPI_PACKAGE = "absl-py"
- 
+ UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 -- 
 2.25.1
 
