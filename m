@@ -1,99 +1,88 @@
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web11.356.1623964295297389190
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.67])
+ by mx.groups.io with SMTP id smtpd.web12.2616.1623982164470120765
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Jun 2021 14:11:35 -0700
+ Thu, 17 Jun 2021 19:09:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=BTPSo1ii;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: geoffhp@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id g4so4553585pjk.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Jun 2021 14:11:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=RihAleyrC1TXX5N/GpD0hQbrOkP27P4yj3phUGifiBU=;
-        b=BTPSo1iiTJCtvt508qXkyQfoKw5hThK1jYHJ5yRoD6PEsxHFsk2Q/UoGLWkTxqCyPe
-         lNz64MsFMpRx2mgZQqhFCcHhEmjMRXH7AFwUUpGcS8++5VlBhdLEmyY/JA2FpZI1p2O5
-         NFL1GZGAdk0OYcS9OnszfkFLqJ/+K028D+hw+ErnufWBwMqPLexV7j7dfVVRvDDeZzE1
-         3WJe9e3+xWHXlMfWfxK1BCsnrHVhoHD+jXclVWVhuNiXjnKa4Sv1xkHA624DgXGUmdIL
-         s56PY8NrZaAEwhZdi1Sy4H7geb5gjq74Br2AdgF2c+F1xmBcJMTevjp/gQE2+2umkVls
-         sqzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=RihAleyrC1TXX5N/GpD0hQbrOkP27P4yj3phUGifiBU=;
-        b=KOW6fw6bIXLJXssXi/4st1ClefiqtPWpQFmij8tRl+mq6GZbzFqG4yAs2y8d2Frjit
-         jyFR2qIAZfwKcZBRLqGH0/zNjmaRAobtr3tyXhPmtDzQkrKQ0jS858ELDes/dURaO7Kg
-         ppLuCX8DTYUNRuLZFOqQvpK5g7KFTFcFYExLfqniDDfUcEMoGRQkkDJ+uhacJj8O0Pv/
-         tcP6rzTtdRMUlgcIUc2LIzaKCMolePEpVD3oS3gn+c4n3+VSx8VpiUbbvRspleYe7Ceu
-         CVYzHsoxZRAWMTu7J01OsgXgPeBIZA1Nfd4pmfSvfq6k7XjhRnZdo8Zm2ngD72I8AlH5
-         ac8w==
-X-Gm-Message-State: AOAM533zI2i+yJ/NrsISmzSx9w4b2UNk6q7gENdN2y7wXNMiMgaz/Vc6
-	vZ09BxGnC+dxMWhI9QP5HZ4+lkxjPAXz3g==
-X-Google-Smtp-Source: ABdhPJxRGv+uvYFBY8KnB6eg2wz1tFxb7b2FbuwD8IJTB2/DGw7BldF3n4cO0QzDJPE2j2yIY9nC6w==
-X-Received: by 2002:a17:902:ea0f:b029:10d:6029:780f with SMTP id s15-20020a170902ea0fb029010d6029780fmr1654771plg.66.1623964294632;
-        Thu, 17 Jun 2021 14:11:34 -0700 (PDT)
-Return-Path: <geoffhp@gmail.com>
-Received: from localhost.localdomain (cpe-107-185-48-203.socal.res.rr.com. [107.185.48.203])
-        by smtp.gmail.com with ESMTPSA id n17sm5778860pfv.125.2021.06.17.14.11.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 17 Jun 2021 14:11:34 -0700 (PDT)
-From: "Geoff Parker" <geoffhp@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Geoff Parker <geoffrey.parker@arthrex.com>
-Subject: [PATCH] cifs-utils: set ROOTSBINDIR to /usr/sbin if DISTRO_FEATURES has usrmerge
-Date: Thu, 17 Jun 2021 14:11:18 -0700
-Message-Id: <20210617211118.3664708-1-geoffhp@gmail.com>
-X-Mailer: git-send-email 2.30.2
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=nrdWxI7z;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.67, mailfrom: zangrc.fnst@fujitsu.com)
+Return-Path: <zangrc.fnst@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1623982162; i=@fujitsu.com;
+	bh=xRB7WOvN2oXQ4ywwnsR1x048QtdBAO4IMTSzXZhteCk=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=nrdWxI7zctevg06AQqSHqrP9bqut6dh1YsH3EV4+z54FByVquYOJ+tnfTOmPdolU2
+	 it9dZsuUoDxk4paPJQBLcRQ9Tz/tsUcW4KGYeQtKFsqfgRDjixo8gKTtBE2G8VS5Nz
+	 FQc8qvGXVV6mMtKWSfP7DcRDuI3dV+HJL/GC/QpA1tdNQArsDedODO7K+dTCG9g8SW
+	 WCMe0SkMM3MsO/Ba0aQCVbb4AvRBHdDoBWREGaCTkkkuXt7VLRgQgXH1yk/mx9NpS2
+	 qefruf1CeyAzdnKsUXnro7eHdUO66ZflQlPUSOFDzBh9OX18f4ANeB9A+cwgnO7EhQ
+	 6ox7tH1mNjlcA==
+Received: from [100.112.198.210] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta.az-b.eu-west-1.aws.symcld.net id 38/8D-28814-2500CC06; Fri, 18 Jun 2021 02:09:22 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupkkeJIrShJLcpLzFFi42Kxs+EI0Q1kOJN
+  g0PrMxOLi4aXMDowe5zauYAxgjGLNzEvKr0hgzVg9u6LgFkfFwk8mDYxtHF2MXBxCArOZJA5s
+  bmKDcE4wSvy/2s/cxcjJwSagI9HxopsFxBYR0JdYOnsPWFxYwENi/vT/bCA2i4CqxN01Nxm7G
+  Dk4eAXcJCb0CoGEJQQUJKY8fA9WzisgKHFy5hOwMcwCEhIHX7xghqhRlNi+8wwLhF0hMWPGNr
+  YJjDyzkLTMQtKygJFpFaNFUlFmekZJbmJmjq6hgYGuoaGRrqGlua6hsbleYpVukl5qqW55anG
+  JrqFeYnmxXnFlbnJOil5easkmRmAIpRQc7dzB+OvVB71DjJIcTEqivFYvTycI8SXlp1RmJBZn
+  xBeV5qQWH2KU4eBQkuD99A8oJ1iUmp5akZaZAwxnmLQEB4+SCC/TX6A0b3FBYm5xZjpE6hSjo
+  pQ4b9t/oIQASCKjNA+uDRZDlxhlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ80qATOHJzCuBm/
+  4KaDET0OI2oVMgi0sSEVJSDUwXuoKr70tEtItz/0hrz36ww3XOFMun5yv3C1i8juHJtn62Z98
+  bNj291mPOWRwhjJ5bP//nXGl8UWBDUiOrc4/is/fPDO7ENH30C+KT2m3cq+vI0y5pONvggd+1
+  sFPzWBsSPoo67V3946eBm9Ert8UrD2ZelGx16bJsntfj+X6NisN++aUz2Xd8lJ3OcLGBUc34z
+  Fk7T8mvJi5tbv7ihXdyzsfYTdrbd1ck9mq5oVOeRKP28gViWz1u50sqLtnzSUR1M3+Iar2H4c
+  0KQ8f5hSblqudcV93YcuDf302G3/pPXt2xJ4Xh2jp79oD7Ll1HAmwmNC3lWumXsPLg8qNK5x9
+  8OXe2e1lzMKc8A9v9/0osxRmJhlrMRcWJAOW3XnAcAwAA
+X-Env-Sender: zangrc.fnst@fujitsu.com
+X-Msg-Ref: server-11.tower-291.messagelabs.com!1623982161!70244!1
+X-Originating-IP: [62.60.8.84]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.75.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 8156 invoked from network); 18 Jun 2021 02:09:21 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-11.tower-291.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 18 Jun 2021 02:09:21 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15I29Gdh002959
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Jun 2021 03:09:21 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Fri, 18 Jun 2021 03:09:14 +0100
+From: "zangrc" <zangrc.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-filesystems] [PATCH] fuse3: upgrade 3.10.3 -> 3.10.4
+Date: Fri, 18 Jun 2021 22:09:05 +0800
+Message-ID: <1624025345-6965-1-git-send-email-zangrc.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Type: text/plain
 
-From: Geoff Parker <geoffrey.parker@arthrex.com>
-
-Fixes cif-utils recipe build when DISTRO_FEATURES includes 'usrmerge'
-
-Add do_configure_prepend() to override ROOTSSBINDIR environment variable
-so that the utilities are installed in /usr/sbin rather than /sbin.
-Setting --exec-prefix or --prefix in EXTRA_OECONF does not work.
-
-Update do_install_append() to NOT remove /usr/bin /usr/sbin if usrmerge
-is set in DISTRO_FEATURES
-
-Signed-off-by: Geoff Parker <geoffrey.parker@arthrex.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../recipes-support/cifs/cifs-utils_6.13.bb     | 17 ++++++++++++++---
- 1 file changed, 14 insertions(+), 3 deletions(-)
+ .../recipes-support/fuse/{fuse3_3.10.3.bb => fuse3_3.10.4.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-filesystems/recipes-support/fuse/{fuse3_3.10.3.bb => fuse3_3.10.4.bb} (95%)
 
-diff --git a/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb b/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb
-index 41a9b8e76..bf8b18043 100644
---- a/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb
-+++ b/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb
-@@ -22,10 +22,21 @@ PACKAGECONFIG[pam] = "--enable-pam --with-pamdir=${base_libdir}/security,--disab
+diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.10.3.bb b/meta-filesystems/recipes-support/fuse/fuse3_3.10.4.bb
+similarity index 95%
+rename from meta-filesystems/recipes-support/fuse/fuse3_3.10.3.bb
+rename to meta-filesystems/recipes-support/fuse/fuse3_3.10.4.bb
+index 72d0cd3e49..32dab3e35d 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse3_3.10.3.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse3_3.10.4.bb
+@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://GPL2.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
  
- inherit autotools pkgconfig
+ SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-${PV}/fuse-${PV}.tar.xz \
+ "
+-SRC_URI[sha256sum] = "eb8373f208b05a39702f9f437f6e49caf4b1ace26a9acb68110b49912078560f"
++SRC_URI[sha256sum] = "9365b74fd8471caecdb3cc5adf25a821f70a931317ee9103d15bd39089e3590d"
  
-+do_configure_prepend() {
-+    # want installed to /usr/sbin rather than /sbin to be DISTRO_FEATURES usrmerge compliant
-+    # must override ROOTSBINDIR (default '/sbin'),
-+    # setting --exec-prefix or --prefix in EXTRA_OECONF does not work
-+    if ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','true','fakse',d)}; then
-+        export ROOTSBINDIR=${sbindir}
-+    fi
-+}
-+
- do_install_append() {
--    # Remove empty /usr/bin and /usr/sbin directories since the mount helper
--    # is installed to /sbin
--    rmdir --ignore-fail-on-non-empty ${D}${bindir} ${D}${sbindir}
-+    if ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','false','true',d)}; then
-+        # Remove empty /usr/bin and /usr/sbin directories since the mount helper
-+        # is installed to /sbin
-+        rmdir --ignore-fail-on-non-empty ${D}${bindir} ${D}${sbindir}
-+    fi
- }
+ S = "${WORKDIR}/fuse-${PV}"
  
- FILES_${PN} += "${base_libdir}/security"
 -- 
-2.30.2
+2.25.1
 
