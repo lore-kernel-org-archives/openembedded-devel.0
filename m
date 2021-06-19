@@ -1,144 +1,145 @@
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
- by mx.groups.io with SMTP id smtpd.web10.11485.1624039446177085961
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.web09.15845.1624061004052304331
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Jun 2021 11:04:06 -0700
+ Fri, 18 Jun 2021 17:03:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ICmifohc;
- spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: quaresma.jose@gmail.com)
-Received: by mail-ej1-f44.google.com with SMTP id gt18so17107755ejc.11
-        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Jun 2021 11:04:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=WzMiGCj+;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id 22-20020a17090a0c16b0290164a5354ad0so9115503pjs.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Jun 2021 17:03:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=4IQQkYFvTDHcm/ngLG57btgr3HJKmmgR9+HCokhBb8M=;
-        b=ICmifohcxvpgpYkf2GqTnQI+D5fflO5b5p8Saw0vtD7SkqXeBNrT/3wr9sfggY0MvC
-         EG+Y2ptiojDzSEvj01UeYi6bcnzqN1Zb3BlIzL5QokiB1xof091K7/Ua4rwjAnR//5iB
-         K9ui1/uHYtM4EL5EzLRJ2JwSVw6WXM/ckG+d9d25wWDZhO36AonWTbl9xslJFpAYWdpO
-         q5G33wb0Hk7b/zUVLtklUSiq2RdGvUt0MbA9lcig8MJqk169Ux5jhcNScYpkWE3VATWM
-         0bu09Pp+Qd6RG6E0iXx30eYPuYt9EwBoQzV5wJlfiYCAfWkm6ZOZkzzqEnfmSCI3CUFL
-         ZLDQ==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=YltBl2vosaMwkcFitKu/a2u9g5+GTc+w5HRFbNUKnMA=;
+        b=WzMiGCj+QcvLL3+copQ4kThNj9/1JBeKMkKRm9S0YdyRFEIIJGESkC8OtCWehYwsQv
+         MgTCshOXLx2npkwUo7mZbLCBXqftNWzUq9Wg2JNJqoGbkoLobVbKTzFv9p3RfDrLY2gX
+         TvfrYRtBUG8aGJIe2tpJ/evkeHzoruAlZ/+rkaFOl/jsVrW+PerHm/n4SMFN0atydRIv
+         FraUD9t15DDzof0P+0pOJJZlw7a3uQGBg93W7UvcvPFCR009EcJ8HfWxfCcgh+MKQxFo
+         sI5DVbMEDWsH7cI3F0e2BpLHL9XthDfp4sGmGAiD3Ox7t8cYS4onTnX8gI+2s61uLpvY
+         3f4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=4IQQkYFvTDHcm/ngLG57btgr3HJKmmgR9+HCokhBb8M=;
-        b=BFxVFD9ILIXQgggvSic5IlpPz0NCtE4haA9RqojBErMvBslRSNdLjC69Wb1zQWYVAa
-         PmY1Gp+9s4uvBPDHjUXNpSTfZbGT8nARHyqgq9dSjmOUa/pIqmoniQTfvr61M/lZTFo3
-         pQDeajKgIM7WycAPntvg0GGemH0mk2zY137K3ROJp49LaoqvCaAQRPtcU1abqUw1DCyX
-         vEH0ptcelxCZ8NeTe0vRCCKAlxFz3Wdp2hiWg3wFLnnllG8D7pwBT56lvKScek1b439c
-         /WT0M1ieQneyUZGBX6hHLXCIKp1g8pMkT8E3HEYHqGIaJLioEF/4k7fuz5W2LZih65mL
-         489g==
-X-Gm-Message-State: AOAM531DqJHLQMWJRdl0so8eSikygyVXFGSQbx2dJuhMdfYBfOJBllr4
-	IT66w+nBPPyUjqBPt8WTUytzySsxzi+m9FZc108=
-X-Google-Smtp-Source: ABdhPJxgf4nMbQtHVw1B1VSLCWGe6mM/+/Gzr2G9SZIJYigQTsKPCzL6QdjXR1XEtusajOy5+A5g900M1eJYiBXqdyo=
-X-Received: by 2002:a17:907:1b22:: with SMTP id mp34mr12422735ejc.408.1624039440575;
- Fri, 18 Jun 2021 11:04:00 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=YltBl2vosaMwkcFitKu/a2u9g5+GTc+w5HRFbNUKnMA=;
+        b=OhBICErKcYqih2zx/dzt0E1mYL1o8maBSGVH6m+JKGdrRFhL41zi/My7WMRVJo/xR4
+         2qmeX1B4AJBZCoejRJYoBuIphu2DhfEoIOZoR+qm/ibYM0b1OZvKl7sdsk3d7pGalKBa
+         yT9eC158TFa+Q/K9mwt+aslzJtfzQ0vM5u49T7EAKEiWy0BOb6y4KjMQEohgDs1u0XIk
+         oTwUTVqYD6KyzBineN1p8iL/jJ3dNYXuVmkDbp68HKZ/JzxCtM4a5BWAmVDVh5GOkzrL
+         LivQMhH43BW4C7yMAdCxrOciZTFi2FFbM59ew/9twvuyGfAm8Fdswfj2Y0ODTdQPyfG9
+         zhOg==
+X-Gm-Message-State: AOAM530wE65Nyjd9/jrBzI0aUUyLFsk8MEXSiW1QZ1UGvKbgQ0bKm+8n
+	vGeCsFjbUgGO5JbF9bT89ryROo0cbbsifQ==
+X-Google-Smtp-Source: ABdhPJy52qC8GkbNxv83uYTsjO2NiifYRjkvfB0QmyynKfxLJYGPqeRlRP66bd2WuzfY3u3o7eWwOw==
+X-Received: by 2002:a17:90b:2306:: with SMTP id mt6mr11523587pjb.71.1624061003375;
+        Fri, 18 Jun 2021 17:03:23 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::5cd3])
+        by smtp.gmail.com with ESMTPSA id n33sm2714515pgm.55.2021.06.18.17.03.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 18 Jun 2021 17:03:22 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [PATCH] rocksdb: Fix build with gcc on rv32 and mips
+Date: Fri, 18 Jun 2021 17:03:20 -0700
+Message-Id: <20210619000320.1082428-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-References: <98hT.1623132594082542882.bzIp@lists.yoctoproject.org>
- <CANNYZj9r_eZ8ZHEo801viRNuBekefmvKuqtLfKsKTQncw+uw-w@mail.gmail.com>
- <YMe6JtmeJc1NiRYZ@brokenbit> <ec0d85da208aa26517a50ea998b855a5aa0d1455.camel@linuxfoundation.org>
- <YMfKw9F6qY7daERE@brokenbit> <CANNYZj8DDhPseB_Vzr4oboJgQn6VY5LbRym6-Tp7=peHfKTJvw@mail.gmail.com>
- <DB6PR04MB3045822D414344179222A701900D9@DB6PR04MB3045.eurprd04.prod.outlook.com>
-In-Reply-To: <DB6PR04MB3045822D414344179222A701900D9@DB6PR04MB3045.eurprd04.prod.outlook.com>
-From: "Jose Quaresma" <quaresma.jose@gmail.com>
-Date: Fri, 18 Jun 2021 19:03:51 +0100
-Message-ID: <CANPvuRnE01E0FCGmNCQW9bJDuR5XfDwGz8p5D9a_nCg3DtA8mg@mail.gmail.com>
-Subject: Re: [EXT] Re: [oe] [yocto] [meta-java] icedtea7 fetching error
-To: Alejandro Lozano Lozano <alejandro.lozano@nxp.com>
-Cc: "alex.kanavin@gmail.com" <alex.kanavin@gmail.com>, 
-	Richard Leitner - SKIDATA <Richard.Leitner@skidata.com>, 
-	Richard Purdie <richard.purdie@linuxfoundation.org>, 
-	"George.Mocanu@rinftech.com" <George.Mocanu@rinftech.com>, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>, 
-	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Hi Alejandro,
+__sync_fetch_and_add (64bit) are not impelemented in gcc and clang
+smartly converts them to __atomic_fetch_add() APIs, so do that
+manually when using gcc for compiler
 
-Alejandro Lozano Lozano <alejandro.lozano@nxp.com> escreveu no dia
-sexta, 18/06/2021 =C3=A0(s) 14:08:
->
-> Hello,
->
->
->
-> Do you know where can we fetch the correct tarballs?
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...-with-new-atomic-builtin-equivalents.patch | 59 +++++++++++++++++++
+ meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb |  4 ++
+ 2 files changed, 63 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/rocksdb/files/0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch
 
-This files are now on the yocto mirror
-https://downloads.yoctoproject.org/mirror/sources/f89009ada191.tar.bz2
+diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch
+new file mode 100644
+index 0000000000..4aa91d9b26
+--- /dev/null
++++ b/meta-oe/recipes-dbs/rocksdb/files/0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch
+@@ -0,0 +1,59 @@
++From 114c42fba3fc86119710e8dd1bb2b7a9e39e3064 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 17 Jun 2021 19:35:01 -0700
++Subject: [PATCH] replace old sync with new atomic builtin equivalents
++
++Helps compiling with gcc on newer arches e.g. riscv32 where these
++__sync* builtins are not implemented atleast for 64bit values
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ .../range/range_tree/lib/portability/toku_atomic.h   | 12 ++++++------
++ 1 file changed, 6 insertions(+), 6 deletions(-)
++
++--- a/utilities/transactions/lock/range/range_tree/lib/portability/toku_atomic.h
+++++ b/utilities/transactions/lock/range/range_tree/lib/portability/toku_atomic.h
++@@ -77,37 +77,37 @@ template <typename T, typename U>
++ __attribute__((always_inline)) static inline T toku_sync_fetch_and_add(T *addr,
++                                                                        U diff) {
++   paranoid_invariant(!crosses_boundary(addr, sizeof *addr));
++-  return __sync_fetch_and_add(addr, diff);
+++  return __atomic_fetch_add(addr, diff, 5);
++ }
++ template <typename T, typename U>
++ __attribute__((always_inline)) static inline T toku_sync_add_and_fetch(T *addr,
++                                                                        U diff) {
++   paranoid_invariant(!crosses_boundary(addr, sizeof *addr));
++-  return __sync_add_and_fetch(addr, diff);
+++  return __atomic_add_fetch(addr, diff, 5);
++ }
++ template <typename T, typename U>
++ __attribute__((always_inline)) static inline T toku_sync_fetch_and_sub(T *addr,
++                                                                        U diff) {
++   paranoid_invariant(!crosses_boundary(addr, sizeof *addr));
++-  return __sync_fetch_and_sub(addr, diff);
+++  return __atomic_fetch_sub(addr, diff, 5);
++ }
++ template <typename T, typename U>
++ __attribute__((always_inline)) static inline T toku_sync_sub_and_fetch(T *addr,
++                                                                        U diff) {
++   paranoid_invariant(!crosses_boundary(addr, sizeof *addr));
++-  return __sync_sub_and_fetch(addr, diff);
+++  return __atomic_sub_fetch(addr, diff, 5);
++ }
++ template <typename T, typename U, typename V>
++ __attribute__((always_inline)) static inline T toku_sync_val_compare_and_swap(
++     T *addr, U oldval, V newval) {
++   paranoid_invariant(!crosses_boundary(addr, sizeof *addr));
++-  return __sync_val_compare_and_swap(addr, oldval, newval);
+++  return __atomic_compare_exchange(addr, oldval, newval);
++ }
++ template <typename T, typename U, typename V>
++ __attribute__((always_inline)) static inline bool
++ toku_sync_bool_compare_and_swap(T *addr, U oldval, V newval) {
++   paranoid_invariant(!crosses_boundary(addr, sizeof *addr));
++-  return __sync_bool_compare_and_swap(addr, oldval, newval);
+++  return static_cast<bool>(__atomic_compare_exchange(addr, oldval, newval));
++ }
++ 
++ // in case you include this but not toku_portability.h
+diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
+index 99bfdd4264..c89d5d4313 100644
+--- a/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
++++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
+@@ -20,6 +20,10 @@ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
+            file://arm.patch \
+           "
+ 
++SRC_URI_append_riscv32 = " file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
++SRC_URI_append_mips = " file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
++SRC_URI_remove_toolchain-clang_riscv32 = "file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
++
+ S = "${WORKDIR}/git"
+ 
+ inherit cmake
+-- 
+2.32.0
 
->
->
->
-> Thanks,
->
-> Alejandro
->
->
->
-> From: openembedded-devel@lists.openembedded.org <openembedded-devel@list=
-s.openembedded.org> On Behalf Of Alexander Kanavin via lists.openembedded.o=
-rg
-> Sent: Tuesday, June 15, 2021 1:53 AM
-> To: Richard Leitner - SKIDATA <Richard.Leitner@skidata.com>
-> Cc: Richard Purdie <richard.purdie@linuxfoundation.org>; George.Mocanu@r=
-inftech.com; Yocto-mailing-list <yocto@lists.yoctoproject.org>; openembedde=
-d-devel@lists.openembedded.org
-> Subject: [EXT] Re: [oe] [yocto] [meta-java] icedtea7 fetching error
->
->
->
-> Caution: EXT Email
->
-> On Mon, 14 Jun 2021 at 23:31, Richard Leitner - SKIDATA <Richard.Leitner=
-@skidata.com> wrote:
->
-> Thank you very much Richard!
-> The openjdk8 tarballs are now hosted at https://downloads.yoctoproject.o=
-rg/mirror/sources/
-> with their local download names.
->
-> Unfortunately I currently don't have the time and resources to provide a
-> patch for fixing the URLs and adding the mirror.
-> So help is greatly appreciated!
->
->
->
-> Unfortunately I think you mirrored the wrong tarballs. The problematic o=
-nes are specifically the six tarballs coming from http://icedtea.classpath.=
-org/hg/
->
-> and I am not seeing them mirrored. See the original error at the start o=
-f this thread:
->
->
->
-> --2021-06-07 17:24:33--  http://icedtea.classpath.org/hg/release/icedtea=
-7-forest-2.1/archive/f89009ada191.tar.bz2
->
-> Resolving icedtea.classpath.org (icedtea.classpath.org)... 172.104.137.1=
-20
-> Connecting to icedtea.classpath.org (icedtea.classpath.org)|172.104.137.=
-120|:80... connected.
-> HTTP request sent, awaiting response... 404 Not Found
-> 2021-06-07 16:21:05 ERROR 404: Not Found.
->
->
->
-> Alex
->
->
->
->
->
->
->=20
->
-
-
---=20
-Best regards,
-
-Jos=C3=A9 Quaresma
