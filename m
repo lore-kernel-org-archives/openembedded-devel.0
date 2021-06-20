@@ -1,145 +1,118 @@
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
- by mx.groups.io with SMTP id smtpd.web09.15845.1624061004052304331
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
+ by mx.groups.io with SMTP id smtpd.web10.28203.1624148847937703587
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Jun 2021 17:03:24 -0700
+ Sat, 19 Jun 2021 17:27:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=WzMiGCj+;
- spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f47.google.com with SMTP id 22-20020a17090a0c16b0290164a5354ad0so9115503pjs.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Jun 2021 17:03:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=gKqEjWH+;
+ spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f170.google.com with SMTP id w31so11036368pga.6
+        for <openembedded-devel@lists.openembedded.org>; Sat, 19 Jun 2021 17:27:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=YltBl2vosaMwkcFitKu/a2u9g5+GTc+w5HRFbNUKnMA=;
-        b=WzMiGCj+QcvLL3+copQ4kThNj9/1JBeKMkKRm9S0YdyRFEIIJGESkC8OtCWehYwsQv
-         MgTCshOXLx2npkwUo7mZbLCBXqftNWzUq9Wg2JNJqoGbkoLobVbKTzFv9p3RfDrLY2gX
-         TvfrYRtBUG8aGJIe2tpJ/evkeHzoruAlZ/+rkaFOl/jsVrW+PerHm/n4SMFN0atydRIv
-         FraUD9t15DDzof0P+0pOJJZlw7a3uQGBg93W7UvcvPFCR009EcJ8HfWxfCcgh+MKQxFo
-         sI5DVbMEDWsH7cI3F0e2BpLHL9XthDfp4sGmGAiD3Ox7t8cYS4onTnX8gI+2s61uLpvY
-         3f4Q==
+        bh=13LTcv1YigsMwpa50L9r8MB1O/bb3U+ekgVzEL3ZEXU=;
+        b=gKqEjWH+ki9HY13N2D82BUDQXM1HgeGD/h/X9F+wKE6Pe71XqH/I3u35yt9nGyS7p2
+         50IagBzRe4IbIS9YV7nWg9HJLt/50ORdXFIAvFGdTDfOl6Oi1+EbknqQzrCJAL1p+BLi
+         TfhwbwnUGEOjnaqTeUD5kJ9l+h3HkcLeqIwwaRtQCr8qT9FRbWl6FpR6oHWixAjphUh+
+         AWohlS62awWcjyYRo4QHcxt/yGLA+AXyEhhEsU/lg+4aAOfHEntiNpLBRVIjdiQT0bFS
+         ffpGnsojcFIPqShaBZiBD5pueriyZ39E9ahQ8/cUYcGXrTA6FkToQGIHncfTE8WYHQk9
+         JNoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=YltBl2vosaMwkcFitKu/a2u9g5+GTc+w5HRFbNUKnMA=;
-        b=OhBICErKcYqih2zx/dzt0E1mYL1o8maBSGVH6m+JKGdrRFhL41zi/My7WMRVJo/xR4
-         2qmeX1B4AJBZCoejRJYoBuIphu2DhfEoIOZoR+qm/ibYM0b1OZvKl7sdsk3d7pGalKBa
-         yT9eC158TFa+Q/K9mwt+aslzJtfzQ0vM5u49T7EAKEiWy0BOb6y4KjMQEohgDs1u0XIk
-         oTwUTVqYD6KyzBineN1p8iL/jJ3dNYXuVmkDbp68HKZ/JzxCtM4a5BWAmVDVh5GOkzrL
-         LivQMhH43BW4C7yMAdCxrOciZTFi2FFbM59ew/9twvuyGfAm8Fdswfj2Y0ODTdQPyfG9
-         zhOg==
-X-Gm-Message-State: AOAM530wE65Nyjd9/jrBzI0aUUyLFsk8MEXSiW1QZ1UGvKbgQ0bKm+8n
-	vGeCsFjbUgGO5JbF9bT89ryROo0cbbsifQ==
-X-Google-Smtp-Source: ABdhPJy52qC8GkbNxv83uYTsjO2NiifYRjkvfB0QmyynKfxLJYGPqeRlRP66bd2WuzfY3u3o7eWwOw==
-X-Received: by 2002:a17:90b:2306:: with SMTP id mt6mr11523587pjb.71.1624061003375;
-        Fri, 18 Jun 2021 17:03:23 -0700 (PDT)
+        bh=13LTcv1YigsMwpa50L9r8MB1O/bb3U+ekgVzEL3ZEXU=;
+        b=jlztr8FvSCtK2Q5rJHkcs6F8wRM97pFbKsmgnIC0Y4kaJtmsFEUxZxKaesXo9JQW1t
+         bmTtIUWz07PrRLh3Z4ppJ6RfvUpDGbf7f8Gyz0Vhf4NkkgwQ7J6gwNGOl33cWAHmhmsW
+         Zox/Vq99edKZBoWF1cEr+YopLhKR7qh+Vl7o9DDDgccDUeRfDQLpmEn4V9NtQqjfEDVJ
+         RpWOeam4MiH2qOI6Tsie6R11kjXNSHO4+TuX+YvDZ/0WoXsGC0ufjO1AC5jfR1bmicC9
+         8NAvXIHHTJFLJOM0+FaKp2jMZZUEqREBFsFGiH7u3SNFs+z0xOAM+ydAMzQmCDEkb1rg
+         mUzQ==
+X-Gm-Message-State: AOAM531PtQdQmbYOhN3zgzRluWmgjlNLbCPbk+PPMfd7Cm42neJrTd3D
+	BqCqt7wVr9z2iAx+mlYlm2lIMY9A8xKtmw==
+X-Google-Smtp-Source: ABdhPJz1TQ9vvI33rqMwrRapy9wNyltbGWabdqihhToYs0lxNo+zRta8R0dWZrq9BPl9PpXVQ1f16A==
+X-Received: by 2002:aa7:810b:0:b029:2fe:decd:c044 with SMTP id b11-20020aa7810b0000b02902fedecdc044mr12187196pfi.15.1624148847101;
+        Sat, 19 Jun 2021 17:27:27 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::5cd3])
-        by smtp.gmail.com with ESMTPSA id n33sm2714515pgm.55.2021.06.18.17.03.22
+        by smtp.gmail.com with ESMTPSA id b1sm2923628pjk.51.2021.06.19.17.27.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Jun 2021 17:03:22 -0700 (PDT)
+        Sat, 19 Jun 2021 17:27:26 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH] rocksdb: Fix build with gcc on rv32 and mips
-Date: Fri, 18 Jun 2021 17:03:20 -0700
-Message-Id: <20210619000320.1082428-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/5] libzip: Upgrade to 1.8.0
+Date: Sat, 19 Jun 2021 17:27:20 -0700
+Message-Id: <20210620002724.3894951-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-__sync_fetch_and_add (64bit) are not impelemented in gcc and clang
-smartly converts them to __atomic_fetch_add() APIs, so do that
-manually when using gcc for compiler
+Add packageconfigs for various features keep them disabled except ssl lzma tools examples
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-with-new-atomic-builtin-equivalents.patch | 59 +++++++++++++++++++
- meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb |  4 ++
- 2 files changed, 63 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/rocksdb/files/0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch
+ .../recipes-extended/libzip/libzip_1.7.3.bb   | 18 --------------
+ .../recipes-extended/libzip/libzip_1.8.0.bb   | 24 +++++++++++++++++++
+ 2 files changed, 24 insertions(+), 18 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/libzip/libzip_1.7.3.bb
+ create mode 100644 meta-oe/recipes-extended/libzip/libzip_1.8.0.bb
 
-diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch
+diff --git a/meta-oe/recipes-extended/libzip/libzip_1.7.3.bb b/meta-oe/recipes-extended/libzip/libzip_1.7.3.bb
+deleted file mode 100644
+index e903de3da3..0000000000
+--- a/meta-oe/recipes-extended/libzip/libzip_1.7.3.bb
++++ /dev/null
+@@ -1,18 +0,0 @@
+-DESCRIPTION = "libzip is a C library for reading, creating, and modifying zip archives."
+-HOMEPAGE = "https://libzip.org/"
+-
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=067e9870bba57e1ce20695c4d5672f30"
+-
+-DEPENDS = "zlib bzip2"
+-
+-PACKAGECONFIG[ssl] = "-DENABLE_OPENSSL=ON,-DENABLE_OPENSSL=OFF,openssl"
+-PACKAGECONFIG[lzma] = "-DENABLE_LZMA=ON,-DENABLE_LZMA=OFF,xz"
+-
+-PACKAGECONFIG ?= "ssl lzma"
+-
+-inherit cmake
+-
+-SRC_URI = "https://libzip.org/download/libzip-${PV}.tar.xz"
+-
+-SRC_URI[sha256sum] = "a60473ffdb7b4260c08bfa19c2ccea0438edac11193c3afbbb1f17fbcf6c6132"
+diff --git a/meta-oe/recipes-extended/libzip/libzip_1.8.0.bb b/meta-oe/recipes-extended/libzip/libzip_1.8.0.bb
 new file mode 100644
-index 0000000000..4aa91d9b26
+index 0000000000..23ac76a2d2
 --- /dev/null
-+++ b/meta-oe/recipes-dbs/rocksdb/files/0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch
-@@ -0,0 +1,59 @@
-+From 114c42fba3fc86119710e8dd1bb2b7a9e39e3064 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 17 Jun 2021 19:35:01 -0700
-+Subject: [PATCH] replace old sync with new atomic builtin equivalents
++++ b/meta-oe/recipes-extended/libzip/libzip_1.8.0.bb
+@@ -0,0 +1,24 @@
++DESCRIPTION = "libzip is a C library for reading, creating, and modifying zip archives."
++HOMEPAGE = "https://libzip.org/"
 +
-+Helps compiling with gcc on newer arches e.g. riscv32 where these
-+__sync* builtins are not implemented atleast for 64bit values
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=067e9870bba57e1ce20695c4d5672f30"
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ .../range/range_tree/lib/portability/toku_atomic.h   | 12 ++++++------
-+ 1 file changed, 6 insertions(+), 6 deletions(-)
++DEPENDS = "zlib bzip2"
 +
-+--- a/utilities/transactions/lock/range/range_tree/lib/portability/toku_atomic.h
-++++ b/utilities/transactions/lock/range/range_tree/lib/portability/toku_atomic.h
-+@@ -77,37 +77,37 @@ template <typename T, typename U>
-+ __attribute__((always_inline)) static inline T toku_sync_fetch_and_add(T *addr,
-+                                                                        U diff) {
-+   paranoid_invariant(!crosses_boundary(addr, sizeof *addr));
-+-  return __sync_fetch_and_add(addr, diff);
-++  return __atomic_fetch_add(addr, diff, 5);
-+ }
-+ template <typename T, typename U>
-+ __attribute__((always_inline)) static inline T toku_sync_add_and_fetch(T *addr,
-+                                                                        U diff) {
-+   paranoid_invariant(!crosses_boundary(addr, sizeof *addr));
-+-  return __sync_add_and_fetch(addr, diff);
-++  return __atomic_add_fetch(addr, diff, 5);
-+ }
-+ template <typename T, typename U>
-+ __attribute__((always_inline)) static inline T toku_sync_fetch_and_sub(T *addr,
-+                                                                        U diff) {
-+   paranoid_invariant(!crosses_boundary(addr, sizeof *addr));
-+-  return __sync_fetch_and_sub(addr, diff);
-++  return __atomic_fetch_sub(addr, diff, 5);
-+ }
-+ template <typename T, typename U>
-+ __attribute__((always_inline)) static inline T toku_sync_sub_and_fetch(T *addr,
-+                                                                        U diff) {
-+   paranoid_invariant(!crosses_boundary(addr, sizeof *addr));
-+-  return __sync_sub_and_fetch(addr, diff);
-++  return __atomic_sub_fetch(addr, diff, 5);
-+ }
-+ template <typename T, typename U, typename V>
-+ __attribute__((always_inline)) static inline T toku_sync_val_compare_and_swap(
-+     T *addr, U oldval, V newval) {
-+   paranoid_invariant(!crosses_boundary(addr, sizeof *addr));
-+-  return __sync_val_compare_and_swap(addr, oldval, newval);
-++  return __atomic_compare_exchange(addr, oldval, newval);
-+ }
-+ template <typename T, typename U, typename V>
-+ __attribute__((always_inline)) static inline bool
-+ toku_sync_bool_compare_and_swap(T *addr, U oldval, V newval) {
-+   paranoid_invariant(!crosses_boundary(addr, sizeof *addr));
-+-  return __sync_bool_compare_and_swap(addr, oldval, newval);
-++  return static_cast<bool>(__atomic_compare_exchange(addr, oldval, newval));
-+ }
-+ 
-+ // in case you include this but not toku_portability.h
-diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
-index 99bfdd4264..c89d5d4313 100644
---- a/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
-+++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
-@@ -20,6 +20,10 @@ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
-            file://arm.patch \
-           "
- 
-+SRC_URI_append_riscv32 = " file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
-+SRC_URI_append_mips = " file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
-+SRC_URI_remove_toolchain-clang_riscv32 = "file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
++PACKAGECONFIG[ssl] = "-DENABLE_OPENSSL=ON,-DENABLE_OPENSSL=OFF,openssl"
++PACKAGECONFIG[lzma] = "-DENABLE_LZMA=ON,-DENABLE_LZMA=OFF,xz"
++PACKAGECONFIG[gnutls] = "-DENABLE_GNUTLS=ON,-DENABLE_GNUTLS=OFF,gnutls nettle"
++PACKAGECONFIG[zstd] = "-DENABLE_ZSTD=ON,-DENABLE_ZSTD=OFF,zstd"
++PACKAGECONFIG[mbedtls] = "-DENABLE_MBEDTLS=ON,-DENABLE_MBEDTLS=OFF,mbedtls"
++PACKAGECONFIG[examples] = "-DENABLE_EXAMPLES=ON,-DENABLE_EXAMPLES=OFF,"
++PACKAGECONFIG[tools] = "-DENABLE_TOOLS=ON,-DENABLE_TOOLS=OFF,"
++PACKAGECONFIG[tests] = "-DBUILD_REGRESS=ON,-DBUILD_REGRESS=OFF,"
 +
- S = "${WORKDIR}/git"
- 
- inherit cmake
++PACKAGECONFIG ?= "ssl lzma tools examples"
++
++inherit cmake
++
++SRC_URI = "https://libzip.org/download/libzip-${PV}.tar.xz"
++
++SRC_URI[sha256sum] = "f0763bda24ba947e80430be787c4b068d8b6aa6027a26a19923f0acfa3dac97e"
 -- 
 2.32.0
 
