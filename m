@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.45436.1624273124366170015
+ by mx.groups.io with SMTP id smtpd.web10.45441.1624273125317064743
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Jun 2021 03:58:44 -0700
+ Mon, 21 Jun 2021 03:58:45 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=54610 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lvHdQ-0001ID-EB; Mon, 21 Jun 2021 13:58:33 +0300
+	id 1lvHdR-0001ID-Pq; Mon, 21 Jun 2021 13:58:34 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-fasteners: Upgrade 0.16.1 -> 0.16.3
-Date: Mon, 21 Jun 2021 13:58:22 +0300
-Message-Id: <20210621105825.28736-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-elementpath: Upgrade 2.2.2 -> 2.2.3
+Date: Mon, 21 Jun 2021 13:58:23 +0300
+Message-Id: <20210621105825.28736-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210621105825.28736-1-leon.anavi@konsulko.com>
 References: <20210621105825.28736-1-leon.anavi@konsulko.com>
@@ -30,32 +30,39 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.16.3:
+Upgrade to release 2.2.3:
 
-- Return the acquired status to the process lock
+- Add Python 3.10 in Tox and CI tests
+- Apply __slots__ to TDOP and regex classes
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-fasteners_0.16.1.bb => python3-fasteners_0.16.3.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-fasteners_0.16.1.bb => python3-fasteners_0.16.3.bb} (77%)
+ ...n3-elementpath_2.2.2.bb => python3-elementpath_2.2.3.bb} | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-elementpath_2.2.2.bb => python3-elementpath_2.2.3.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-fasteners_0.16.1.bb b/meta-python/recipes-devtools/python/python3-fasteners_0.16.3.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-fasteners_0.16.1.bb
-rename to meta-python/recipes-devtools/python/python3-fasteners_0.16.3.bb
-index 4b33a9ec69..6f283a3929 100644
---- a/meta-python/recipes-devtools/python/python3-fasteners_0.16.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-fasteners_0.16.3.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/harlowja/fasteners"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=4476c4be31402271e101d9a4a3430d52"
+diff --git a/meta-python/recipes-devtools/python/python3-elementpath_2.2.2.bb b/meta-python/recipes-devtools/python/python3-elementpath_2.2.3.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-elementpath_2.2.2.bb
+rename to meta-python/recipes-devtools/python/python3-elementpath_2.2.3.bb
+index c793592bea..2d9c53172d 100644
+--- a/meta-python/recipes-devtools/python/python3-elementpath_2.2.2.bb
++++ b/meta-python/recipes-devtools/python/python3-elementpath_2.2.3.bb
+@@ -3,9 +3,13 @@ HOMEPAGE = "https://github.com/sissaschool/elementpath"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5dbb7fb7d72da3921202dd7b995d3ecf"
  
--SRC_URI[sha256sum] = "b6f488d0fc9a3591a32d779400a00c3ebfadd41f45eb024d66f15a6c4e1c4a72"
-+SRC_URI[sha256sum] = "b1ab4e5adfbc28681ce44b3024421c4f567e705cc3963c732bf1cba3348307de"
+-SRC_URI[sha256sum] = "68de07c1aec3b1d33126111252cc699600dd1e45802625344aa6eb9e680ef157"
++SRC_URI[sha256sum] = "60139b91ef9646e27381fd62b8c38f1fc8ebc78dc4bc231c08c51240062e58e6"
  
+ PYPI_PACKAGE = "elementpath"
  inherit pypi setuptools3
  
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-xml \
++"
++
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
