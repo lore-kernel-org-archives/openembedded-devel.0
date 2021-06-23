@@ -1,84 +1,91 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.5047.1624439179383580383
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.web10.5071.1624439659130182582
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Jun 2021 02:06:19 -0700
+ Wed, 23 Jun 2021 02:14:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=54240 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.93)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lvypn-0008WN-F4; Wed, 23 Jun 2021 12:06:13 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=sN3dV3sZ;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f47.google.com with SMTP id j10so1105002wms.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Jun 2021 02:14:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=gJ4DvmPWKm7j3mlXX4vXrEdJ/9UuoaZ8Szp4Vn9C/w8=;
+        b=sN3dV3sZsxEFEqxfSfqJsOLeQuNn8cEzDsMTjNsknQFCydXTImy45vvG2QLZC2Ys6P
+         EKl20EL71HQ2RvkyOxjkG2E0bHKwVckm3cYRdpjA51UD8JlZonH8fRxQ3MXHYjdmci+E
+         usGsF+lqqHiGVIm+HzXp2sM4FXlcqWthnc1yIxty3wyJzh+IEkf43qQ9PAZy29S0ASOm
+         EtilnNtd309eu0EWXfzT5iI8GUbW+r+1xuQSPRhhQo+WwVYD1wepo0Q0cs2OE/6hlJhC
+         Opgzesp+fn46G6Hd07kZxGcpttNGyaAZLvT0SikNqUCRCi16AZkU6Hdc8j7SFeQMelay
+         b7Ag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=gJ4DvmPWKm7j3mlXX4vXrEdJ/9UuoaZ8Szp4Vn9C/w8=;
+        b=pojFy/zoCD+I0Nfy/FeWIZaLgIi8MzXxjO5SEzv2jzs7UFQov3y5WHPDR6UIC6Ozqf
+         /UOhFLq8Y+A6PDeLSxQGblVI/nPJ1/uBQ2hdx4cPgn4RuGh+aPcmFXyj2PIaPuKo/meg
+         CTSbg2o8+JaTYWeQd6BNSGh1mFMJ4IrQteX/3ZATtQomZ+Ed7zuhzc7bIWFRPjppOfOS
+         3YzxQog2JgziI0fN0ERfr0zcLq2PhF8HY7I/WudCmkiVpH7Xwd4GLLLEYHi+aYhfWxSC
+         mGDqrk2k+LHFFUFe0HyR5P5wSrtDehhTzQVKQ+dzQkIZPAv+vjufZS8ZFp0OGrTCFMW4
+         Xz1Q==
+X-Gm-Message-State: AOAM530GSmT0yGNBuSZesuWsPHUYy4O6mfj9Q/Mr1FYSIYMh3Uady79c
+	850mMMjDpugG4AgHIjGy41Ps5agItrs=
+X-Google-Smtp-Source: ABdhPJxnWxpqUkCb0d5XsdxE1Ecdpd1QhraKMvIu43cHuBCh9MPr1oX3mh7g+AGN4+94cZZQqzpyCw==
+X-Received: by 2002:a1c:59c3:: with SMTP id n186mr9745007wmb.48.1624439657486;
+        Wed, 23 Jun 2021 02:14:17 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id y4sm2182429wrw.71.2021.06.23.02.14.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 23 Jun 2021 02:14:17 -0700 (PDT)
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-mypy: Upgrade 0.902 -> 0.910
-Date: Wed, 23 Jun 2021 12:06:02 +0300
-Message-Id: <20210623090602.27496-3-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210623090602.27496-1-leon.anavi@konsulko.com>
-References: <20210623090602.27496-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-python2][dunfell][gatesgarth][hardknott][master][PATCH] python-chardet: rename ${bindir}/chardetect to avoid conflict with python3-chardet
+Date: Wed, 23 Jun 2021 11:14:10 +0200
+Message-Id: <20210623091410.20811-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.30.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 0.910:
+* to allow both python-chardet and python3-chardet to be installed in the same image
+* now it fails with:
+  Collected errors:
+   * check_data_file_clashes: Package python-chardet wants to install file image/1.0/rootfs/usr/bin/chardetect
+        But that file is already provided by package  * python3-chardet
 
-- Call get_method_hook when methods are used in decorators
-- Don't ask to install a stub package if stubs are installed
-- [mypyc] Support various number-related dunders
-- Fix crash when inferring multiple assignment with overloaded
-  function
-- Replace variable annotation with type comment to fix Python 3.5
-- docs: updating URL in comment
+* the only difference is the shebang:
+  --- python-chardet/3.0.4-r0/image/usr/bin/chardetect 2021-06-23 01:24:17.172638046 -0700
+  +++ python3-chardet/3.0.4-r0/image/usr/bin/chardetect        2021-06-23 01:24:17.412641733 -0700
+  @@ -1,4 +1,4 @@
+  -#!/usr/bin/env python
+  +#!/usr/bin/env python3
+   # EASY-INSTALL-ENTRY-SCRIPT: 'chardet==3.0.4','console_scripts','chardetect'
+   __requires__ = 'chardet==3.0.4'
+   import re
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../{python3-mypy_0.902.bb => python3-mypy_0.910.bb}  | 11 ++++-------
- 1 file changed, 4 insertions(+), 7 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-mypy_0.902.bb => python3-mypy_0.910.bb} (82%)
+ recipes-devtools/python/python-chardet_3.0.4.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-mypy_0.902.bb b/meta-python/recipes-devtools/python/python3-mypy_0.910.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-mypy_0.902.bb
-rename to meta-python/recipes-devtools/python/python3-mypy_0.910.bb
-index 86465e2f3a..8e675e6a9b 100644
---- a/meta-python/recipes-devtools/python/python3-mypy_0.902.bb
-+++ b/meta-python/recipes-devtools/python/python3-mypy_0.910.bb
-@@ -3,21 +3,18 @@ HOMEPAGE = "https://github.com/python/mypy"
- LICENSE = "MIT & Python-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=17b7180fcfc43c4e70c07c71588604c4"
+diff --git a/recipes-devtools/python/python-chardet_3.0.4.bb b/recipes-devtools/python/python-chardet_3.0.4.bb
+index 19d7b77..d84a305 100644
+--- a/recipes-devtools/python/python-chardet_3.0.4.bb
++++ b/recipes-devtools/python/python-chardet_3.0.4.bb
+@@ -26,6 +26,10 @@ RDEPENDS_${PN}_class-target += " \
  
--RDEPENDS_${PN} = " \
--    ${PYTHON_PN}-mypy-extensions \
--    ${PYTHON_PN}-typed-ast \
--    ${PYTHON_PN}-typing-extensions \
--"
--
- PYPI_PACKAGE = "mypy"
+ inherit pypi setuptools
  
- inherit pypi setuptools3
++do_install_append() {
++    mv ${D}${bindir}/chardetect ${D}${bindir}/chardetect-py2
++}
++
+ RDEPENDS_${PN} += "${PYTHON_PN}-argparse"
  
--SRC_URI[sha256sum] = "9236c21194fde5df1b4d8ebc2ef2c1f2a5dc7f18bcbea54274937cae2e20a01c"
-+SRC_URI[sha256sum] = "704098302473cb31a218f1775a873b376b30b4c18229421e9e9dc8916fd16150"
- 
- BBCLASSEXTEND = "native"
- 
- RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-mypy-extensions \
-+    ${PYTHON_PN}-typed-ast \
-+    ${PYTHON_PN}-typing-extensions \
-     ${PYTHON_PN}-json \
-     ${PYTHON_PN}-compression \
-     ${PYTHON_PN}-pprint \
+ BBCLASSEXTEND = "native nativesdk"
 -- 
-2.17.1
+2.30.2
 
