@@ -1,102 +1,108 @@
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web08.2999.1624421595062328937
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web08.3000.1624421595982488310
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Jun 2021 21:13:15 -0700
+ Tue, 22 Jun 2021 21:13:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=XcRMCMXE;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id p4-20020a17090a9304b029016f3020d867so574498pjo.3
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=FuNOyGLW;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id l11so739691pji.5
         for <openembedded-devel@lists.openembedded.org>; Tue, 22 Jun 2021 21:13:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=ovbWMpcMhaN/g2FERsuw3I44adkyLq25ZhxD+F4pp7o=;
-        b=XcRMCMXECpOs/QAN/wOzzvY3ZN7r1m6YWDqdDjXiHiViHcPrQnoXMX48wYTYKMFiJ0
-         ubB9mtlu0oJCIAXGtJXMsRUaKFp3z01W0jyKOeyBTWJoe+vF/0gBpxZV6UydasYt2dM+
-         uSZdaJ+KWZZIox5mU4CE9H4/PeQHPjLAw+KwZsdesodl0JJ/1+nv+ck9E8S1lw67IWdB
-         WSr+vsFkAk1/2uyHHI+2717qAngZd3l8R4xNB68/Ox8NbKJp+Pldh5CAd3fIfZoGubtl
-         +f+Xsk2y+om8nwT7Af9oQdofhfgLoKTc8u2K8DpVzbXPEduobW5Ne1Ch06r+GHK64j/3
-         BgQQ==
+        bh=q+mfh/1wn0uZDHBnFtDVTegoZ+XNzMlueORNDxhb42o=;
+        b=FuNOyGLWgbS6wRlaKN31MHfMSEbdcq2o6ngawF/RCSPh6GL2ZetLjWbazvPLHRZEUk
+         j35ojsJncmhyKfXKPBi+itTlVu4ZYmZVGdYnhZbqP8N2mNxW7ZZ3uzfW/g6sZgfgaNO1
+         /UQXUF5SXSkCWNXlL7Qh9YWe/ayahKHz/Egcibx9EmPA4I9uONIT6Oc5UODCljeutAjJ
+         aPbkOAaSQ+/guiuYtjnERArcmxAZ4Ld3QMuEppPW1XfCQ//C2mQO7TImolbM+YTvxUVI
+         ckfmbmor2xdTxHEdTIFkCZ3mQqwC8wC1PfxNDl2N+jvOgGmV6U0nXvBi14PWTsXPa6zO
+         2nhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=ovbWMpcMhaN/g2FERsuw3I44adkyLq25ZhxD+F4pp7o=;
-        b=hTkPFAxryLvqaXquKXOMb4PGXpA2aMDjSrVEu1P9pRdONm1FgRsrP1Plky5c0Rd6Bz
-         QrY3GEjj+lyYGqV3xal39H9P5a+linTbZEMKCTYaMMQM/0PDx4thVExKgWvIkdRf0Fy6
-         1EN18s8Utv/NL30Xo5O72+Ih77Qrou51wlCJPg48fNewUjmb3oKRUIGv1Dyxkk1ReN25
-         oguZmPvlMcFeSnEoE5LHImE3M9n7GZbD66KrKoXHk0EmEN8qEcLMfe4an/qjS2wew2lS
-         nlKoyIfDQsbIv40KsBUoMNP6yHHZYgVjX7UVOT07vm1o3ie4chiVkJOSOMupv3lZb1W/
-         4Fhg==
-X-Gm-Message-State: AOAM530ShkqcyO297ksVOR9uBRJ4lxqDMj/mcuLTjb6ZHUvq2gvQfcKH
-	DHGh+j4DPbVkaVkBM31toNBhKhs80pob+Q==
-X-Google-Smtp-Source: ABdhPJyHc2v+4Sb3fElVvkM2SozAASKkG9eo/sujjYYGOP+cw9YvhuMJpoaaCx2fTLXfHex0YIFJFg==
-X-Received: by 2002:a17:90a:6d82:: with SMTP id a2mr7327416pjk.150.1624421594429;
-        Tue, 22 Jun 2021 21:13:14 -0700 (PDT)
+        bh=q+mfh/1wn0uZDHBnFtDVTegoZ+XNzMlueORNDxhb42o=;
+        b=Yc3p9VCt2LrnO3ONg2r5bluYKalWvoIgrzQhHm2a5vFW2lp9BIHsteiT6qsc7KaIDJ
+         r0RYqMVdI83nNRN/IRRyM13V/qi3tcalZtTXQHjs3dp5pzHz5GbSO3Nk2MlSMvZagJfD
+         Z1vkC63TP1MarAqkRoK9v2kA4o6ILfoI1EG1eDWsLB3oz7moBBQz+WM2LNlDMwUjROLd
+         d9FjlXYcRuEQmVJeESMZQ3olcaIiCuP0AMUBaopCq9EuCsJ3kF3sBZQyxp4bhODjsuSr
+         bmgB9I1LiMefuwrl498N3JXLyulHCK9ULh7XuH4FFRP85i4UtSlAix3ydl8V/eAZPGG2
+         WNYw==
+X-Gm-Message-State: AOAM533FbqpRJut6qkfYiNPcppr16VDxs9Fbn1tluBkWrLQnvnhNTVf6
+	vyn+mXLl7PdM065V409v8RrMH/eFZeapXg==
+X-Google-Smtp-Source: ABdhPJzQ9rysR+a9EhUi3IOeXCUB2OrNRVtcaR+/5a/Ovj/5xqCtGymjevMVEzdY4AfqxIS/nwOkAQ==
+X-Received: by 2002:a17:902:6902:b029:106:50e3:b2db with SMTP id j2-20020a1709026902b029010650e3b2dbmr25432028plk.35.1624421595303;
+        Tue, 22 Jun 2021 21:13:15 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::bfd0])
-        by smtp.gmail.com with ESMTPSA id b5sm17951239pgh.41.2021.06.22.21.13.13
+        by smtp.gmail.com with ESMTPSA id b5sm17951239pgh.41.2021.06.22.21.13.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Jun 2021 21:13:13 -0700 (PDT)
+        Tue, 22 Jun 2021 21:13:14 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 3/4] python3-execnet: Add ptests
-Date: Tue, 22 Jun 2021 21:13:09 -0700
-Message-Id: <20210623041310.3976956-3-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 4/4] python3-py-cpuinfo: Add ptests
+Date: Tue, 22 Jun 2021 21:13:10 -0700
+Message-Id: <20210623041310.3976956-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20210623041310.3976956-1-raj.khem@gmail.com>
 References: <20210623041310.3976956-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+Add missing dependency on python3-io for cStringIO
+Remove comment about missing modules since _winreg is windows specific
+and cStringIO is addressed
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../python/python3-execnet/run-ptest              |  3 +++
- .../python/python3-execnet_1.9.0.bb               | 15 ++++++++++++---
- 2 files changed, 15 insertions(+), 3 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-execnet/run-ptest
+ .../python/python3-py-cpuinfo/run-ptest       |  3 +++
+ .../python/python3-py-cpuinfo_8.0.0.bb        | 21 ++++++++++++-------
+ 2 files changed, 17 insertions(+), 7 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-py-cpuinfo/run-ptest
 
-diff --git a/meta-python/recipes-devtools/python/python3-execnet/run-ptest b/meta-python/recipes-devtools/python/python3-execnet/run-ptest
+diff --git a/meta-python/recipes-devtools/python/python3-py-cpuinfo/run-ptest b/meta-python/recipes-devtools/python/python3-py-cpuinfo/run-ptest
 new file mode 100644
 index 0000000000..b63c4de0d9
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-execnet/run-ptest
++++ b/meta-python/recipes-devtools/python/python3-py-cpuinfo/run-ptest
 @@ -0,0 +1,3 @@
 +#!/bin/sh
 +
 +pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-diff --git a/meta-python/recipes-devtools/python/python3-execnet_1.9.0.bb b/meta-python/recipes-devtools/python/python3-execnet_1.9.0.bb
-index ec16e8884e..a7b156535d 100644
---- a/meta-python/recipes-devtools/python/python3-execnet_1.9.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-execnet_1.9.0.bb
-@@ -6,13 +6,22 @@ HOMEPAGE = "https://execnet.readthedocs.io/en/latest/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=772fcdaca14b378878d05c7d857e6c3e"
+diff --git a/meta-python/recipes-devtools/python/python3-py-cpuinfo_8.0.0.bb b/meta-python/recipes-devtools/python/python3-py-cpuinfo_8.0.0.bb
+index 1f81a83230..1b62a7611f 100644
+--- a/meta-python/recipes-devtools/python/python3-py-cpuinfo_8.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-py-cpuinfo_8.0.0.bb
+@@ -8,13 +8,20 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b0b97c022f12b14d9e02de0b283ee9e9"
  
-+DEPENDS += "python3-pip-native"
-+
-+SRC_URI += "file://run-ptest \
-+           "
- SRC_URI[sha256sum] = "8f694f3ba9cc92cab508b152dcfe322153975c29bda272e2fd7f3f00f36e47c5"
- 
--DEPENDS += "python3-pip-native"
-+inherit ptest pypi setuptools3
+ SRC_URI[sha256sum] = "5f269be0e08e33fd959de96b34cd4aeeeacac014dd8305f70eb28d06de2345c5"
  
 -inherit pypi setuptools3
++inherit ptest pypi setuptools3
+ 
+-RDEPENDS_${PN} += "python3-core python3-ctypes python3-datetime python3-json python3-mmap python3-multiprocessing python3-netclient python3-pickle python3-pprint python3-shell"
++SRC_URI += "file://run-ptest \
++           "
++
 +do_install_ptest() {
 +    install -d ${D}${PTEST_PATH}/tests
-+    cp -rf ${S}/testing/* ${D}${PTEST_PATH}/tests/
++    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
 +}
- 
--PACKAGECONFIG[testing] = ",,,python3-pre-commit"
++
 +RDEPENDS_${PN}-ptest += "\
 +    python3-pytest \
 +"
++
++RDEPENDS_${PN} += "python3-core python3-ctypes python3-datetime python3-json python3-io python3-mmap python3-multiprocessing python3-netclient python3-pickle python3-pprint python3-shell"
  
- RDEPENDS_${PN} += "python3-core python3-crypt python3-ctypes python3-fcntl python3-io python3-shell python3-threading"
- 
+-# WARNING: We were unable to map the following python package/module
+-# dependencies to the bitbake packages which include them:
+-#    _winreg
+-#    cStringIO
+-#    winreg
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.32.0
 
