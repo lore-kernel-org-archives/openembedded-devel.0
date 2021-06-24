@@ -1,95 +1,72 @@
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
- by mx.groups.io with SMTP id smtpd.web08.193.1624555494906513141
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.web12.176.1624567056350514658
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Jun 2021 10:24:55 -0700
+ Thu, 24 Jun 2021 13:37:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=EAJ/Orxu;
- spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f169.google.com with SMTP id c5so5762136pfv.8
-        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jun 2021 10:24:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=nf1LOL5U;
+ spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: texier.pj2@gmail.com)
+Received: by mail-wr1-f50.google.com with SMTP id j2so8062545wrs.12
+        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jun 2021 13:37:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:references:from:organization:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=ZqBTn+eyd/gSe78zngHNQgGm3JO2yTobsRPSJyEtQlg=;
-        b=EAJ/OrxuF0b86XF+5blaVX58OrgVeTA0KGZwwqpyc0ec8ycWTu5u+Cbjo6eXUnHgjN
-         YkYqz9ph542m0o3QumHKDzlAy23wgDGR9i1bU8KTyxNhoBcYlZpbZM8zx77vL0HEZedK
-         XA6WWmX3Hyu+IkvrVYRMYQgXLvpMmG+AzlVrJN/2HhmzH9A0gcnEqkyEcfJpfFIMcOMV
-         u9kaNWy55SIcJoWGI7SwXKS5NMEq97GvzJhj6Z++RRUQiUMUw9m5bBXv9yLwRH5cPBwl
-         wvsx1JD06cP9OdJWMbvWvPoyjrQyw7zRhudwrfyIH+6WVOU+usy6q24xpl9YRMHHiZTt
-         lJrw==
+        h=from:to:cc:subject:date:message-id;
+        bh=OXvWW2wVWKwAmwkkD+xqEnOFPaElcWKdmSI/TWoWVew=;
+        b=nf1LOL5UYaJKpWz1iy2CqLjzgZKCa82sQSH29EDbU4+tAod2TSRixE8XKm/rHdKfB/
+         nv2jd5IGOWhQpWuVIURi2j1NZ1Iel1MDS8Z8JrLpvbrDjiiieQuuk9kO5AO3k9J63/40
+         yYsSllpmry+I3broygcE7X1HYO9OvjmSCzUdZU6SkssigxBxNJrU2v6MjNkLum865Jh9
+         A8p4ITR3r2X0Ou1Ke6C47w1AW2Ur98eascCPXedVkbHB1xuZ1kCRrGomRhIAMemUhhwW
+         KjC3zmMXvJGJkR1Cl84vOsWRSs2Kj2NhoS1xhE+nRnvepdYCKSi8khPzaksHSF2vESbx
+         kqxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=ZqBTn+eyd/gSe78zngHNQgGm3JO2yTobsRPSJyEtQlg=;
-        b=AahTFtmsj7lBI5p/psCmflP3lV2crIc4fKtIb+LNFEOGvsL90ZQsf3xAAnL0vhCMih
-         0o7EGofOdSP57FDy0fMnA2sKNPxR52v3TsV82WLZ5MxuucPcDKUuA5rDcQ8aZNWHnr7x
-         iPiHGniGzvZKgTwCHRL6p72W+aXYN/m9OvHFWKMmpFTTLQHewV8xOSDdePp66kFJZGt3
-         q128ILkhwOYcivU4AAj6osNc/Q5952gCMwO/mebl/98UBUJq9oCWgoq0Ie+Ogp4PKWn/
-         Otg5QxRgo/4g/5CqvLY7h021ubaEHvqbjUNmmFIpYCOAQlxxOWKhvj6GC8DnyDopKqy9
-         Kc2g==
-X-Gm-Message-State: AOAM532dK/shVv5yg9pgfuSHjyHULZGfhgTTyC3Cwkhu+PPwwXYbWTnI
-	6h1iDglrZHUftlJqkwEjbOU+oosg3BBdKw==
-X-Google-Smtp-Source: ABdhPJzlQJzzJW2ZjYaRyGB6Ll9NLPrHd3GeAjPvCosoSO48e6J2pJmu3V0KcO7g0bLCJzJv/xv0fw==
-X-Received: by 2002:a63:f009:: with SMTP id k9mr5690390pgh.356.1624555493841;
-        Thu, 24 Jun 2021 10:24:53 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:a0f0:89a7:dc85:dd20:c47e? ([2601:646:9200:a0f0:89a7:dc85:dd20:c47e])
-        by smtp.gmail.com with ESMTPSA id c22sm3442139pfv.121.2021.06.24.10.24.53
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 24 Jun 2021 10:24:53 -0700 (PDT)
-Subject: Re: [oe] [PATCH] openvpn: add CVE-2020-7224 and CVE-2020-27569 to allowlist
-To: Akifumi Chikazawa <chikazawa.akifu@fujitsu.com>,
- openembedded-devel@lists.openembedded.org
-References: <20210624072457.674372-1-chikazawa.akifu@fujitsu.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <5b38d255-32d0-9932-e04b-3c5b3c23bdc0@gmail.com>
-Date: Thu, 24 Jun 2021 10:24:52 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.11.0
-MIME-Version: 1.0
-In-Reply-To: <20210624072457.674372-1-chikazawa.akifu@fujitsu.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=OXvWW2wVWKwAmwkkD+xqEnOFPaElcWKdmSI/TWoWVew=;
+        b=JSbUwGGjBTgAiGJwAuxS5PkN6yJKucae0QRrcpyWqQSOYEt/e8qExTBXvc9jAGeqTl
+         3NVRj8LrdJE7sisH9W6hzHdPzuSTXevebpQhtz574Jreh6J8n+GF1mENZj60VXDFL/+Z
+         OnT9hZS9OR9MJSvbSwGXgH7VThTctc3oJCo491rDrh1CJLjE1fNRq+gn+Kv1MwVuGJ30
+         2rZ8QnEnv2naMAKGgxasJ7rfMX9XRZovxmpey1MQE+L9cMf6rSsfmtN+9EHqfSBUCG3a
+         jEZ98bwLv5GQHQQGbf0I4sKyoEvXwpI+ym4gIAuX/8dH8MqTjldJEYSy9p/y5PqsKhbU
+         JlIQ==
+X-Gm-Message-State: AOAM5304oIpI/i63kjaznDZPFsoOLX2tNxhUYfs8C7WISh0GuuSNym8I
+	l7SsP3wGSBi0XCWuHx6qByY2EEn6+U8lrA==
+X-Google-Smtp-Source: ABdhPJwFiz/D50hFeounyKRRHRH9uLx50zrCTtFKgn7L/28aDGHq1LG5tv+qUjvPkAWlIoIkpUvx9Q==
+X-Received: by 2002:adf:e2cf:: with SMTP id d15mr6618555wrj.48.1624567054557;
+        Thu, 24 Jun 2021 13:37:34 -0700 (PDT)
+Return-Path: <texier.pj2@gmail.com>
+Received: from menoah.home ([2a01:cb19:190:c500:744d:25d4:358f:5207])
+        by smtp.gmail.com with ESMTPSA id 204sm4051595wma.30.2021.06.24.13.37.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 24 Jun 2021 13:37:34 -0700 (PDT)
+From: "Pierre-Jean Texier" <texier.pj2@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Pierre-Jean Texier <texier.pj2@gmail.com>
+Subject: [meta-oe][PATCH] libtinyxml2: upgrade 8.1.0 -> 9.0.0
+Date: Thu, 24 Jun 2021 22:37:22 +0200
+Message-Id: <20210624203722.25076-1-texier.pj2@gmail.com>
+X-Mailer: git-send-email 2.17.1
 
-Thanks for the patch
+Signed-off-by: Pierre-Jean Texier <texier.pj2@gmail.com>
+---
+ .../libtinyxml2/{libtinyxml2_8.1.0.bb => libtinyxml2_9.0.0.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libtinyxml2/{libtinyxml2_8.1.0.bb => libtinyxml2_9.0.0.bb} (89%)
 
-On 6/24/21 12:24 AM, Akifumi Chikazawa wrote:
-> CVE-2020-7224 and CVE-2020-27569 are for Aviatrix OpenVPN client,
-> not for openvpn.
-> 
-> Signed-off-by: Akifumi Chikazawa <chikazawa.akifu@fujitsu.com>
-> ---
->   meta-networking/recipes-support/openvpn/openvpn_2.5.2.bb | 3 +++
->   1 file changed, 3 insertions(+)
-> 
+diff --git a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_8.1.0.bb b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_9.0.0.bb
+similarity index 89%
+rename from meta-oe/recipes-support/libtinyxml2/libtinyxml2_8.1.0.bb
+rename to meta-oe/recipes-support/libtinyxml2/libtinyxml2_9.0.0.bb
+index 5245059a89..215f32a785 100644
+--- a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_8.1.0.bb
++++ b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_9.0.0.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=135624eef03e1f1101b9ba9ac9b5fffd"
+ 
+ SRC_URI = "git://github.com/leethomason/tinyxml2.git"
+ 
+-SRCREV = "3291390336141573e51dfa991b4179c8bcd8f306"
++SRCREV = "1dee28e51f9175a31955b9791c74c430fe13dc82"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.17.1
 
-
-we are on 2.5.3 on master, is this meant for master ? if so , please 
-rebase it on latest master/master-next and resend, if its meant for a 
-release branch then prefix the subject line with [release-name] so 
-release maintainer gets notified too.
-
-> diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.5.2.bb b/meta-networking/recipes-support/openvpn/openvpn_2.5.2.bb
-> index f82107dbe..646f0387a 100644
-> --- a/meta-networking/recipes-support/openvpn/openvpn_2.5.2.bb
-> +++ b/meta-networking/recipes-support/openvpn/openvpn_2.5.2.bb
-> @@ -17,6 +17,9 @@ UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
->   SRC_URI[md5sum] = "7643f135b49aee49df7d83c1f434dc4e"
->   SRC_URI[sha256sum] = "b9d295988b34e39964ac475b619c3585d667b36c350cf1adec19e5e3c843ba11"
->   
-> +# CVE-2020-7224 and CVE-2020-27569 are for Aviatrix OpenVPN client, not for openvpn.
-> +CVE_CHECK_WHITELIST += "CVE-2020-7224 CVE-2020-27569"
-> +
->   SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
->   SYSTEMD_AUTO_ENABLE = "disable"
->   
-> 
-> 
-> 
-> 
-> 
