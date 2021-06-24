@@ -1,59 +1,59 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.69])
- by mx.groups.io with SMTP id smtpd.web12.1607.1624500088601033201
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.116])
+ by mx.groups.io with SMTP id smtpd.web11.1518.1624500108643018206
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Jun 2021 19:01:28 -0700
+ Wed, 23 Jun 2021 19:01:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=dq0sxrfq;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.69, mailfrom: zhengrq.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=f94DHe4Y;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.116, mailfrom: zhengrq.fnst@fujitsu.com)
 Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1624500086; i=@fujitsu.com;
-	bh=e4g+YuVl0AIirWRqGbB5yFiTUUco5CE+f9djndZLlaA=;
+	s=170520fj; t=1624500105; i=@fujitsu.com;
+	bh=vnkoaFNsgTBO9o2h2BGH3yZ6CMFtWmSZCMiO89ZmWtg=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=dq0sxrfqKeOuRlEezxFfdkiU37GzdcqhQ60TscM/OXUMCpSkxwZl/UIo88vK6IKLk
-	 9NmBG4i4xVpeE3JNvLveK0lR68lQP6e0sVdBlPcYomQFIxE9g2UL2wHCNEJbSffktO
-	 oJrZwfXq2aWof/s3QmzyvBrKMrNqdZ6e4G0pu4OHudISZbXztnEHWnQkpUfTvN1xEd
-	 01PWOrQRnRG/2D7kRIgl3WdcmOCK56CNePdKm8002JzgFyFwhqZi4nDKHcbT3wfrGz
-	 gR6ckG5N4T0T+CZ5PGnguaGgupbh+FjA2VWou8K/TO+t1JoUOKpPT5ARz3UZKckyyp
-	 vCUkqk3PykmGw==
-Received: from [100.112.198.210] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-5.bemta.az-b.eu-west-1.aws.symcld.net id 41/01-64908-677E3D06; Thu, 24 Jun 2021 02:01:26 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYqlv6/HK
-  CQe9VXYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePVws1MBd0cFdu/dLM1MK5m72Lk4hASmM0k
-  ceTmEjYIZw+jRMempUAZTg42AV2Jc4/XgtkiAvoSS2fvYQaxhQWsJd5PvsoCYrMIqEpsbN/AC
-  mLzCnhILL67BKxeQkBBYsrD98wQcUGJkzOfgNUzC0hIHHzxAijOAVSjKDF7ujxEeYXEjBnb2C
-  Yw8sxC0jELSccCRqZVjBZJRZnpGSW5iZk5uoYGBrqGhka6hpYWuobGBnqJVbpJeqmluuWpxSW
-  6hnqJ5cV6xZW5yTkpenmpJZsYgWGUUnCsaQfjydcf9A4xSnIwKYnylrZfThDiS8pPqcxILM6I
-  LyrNSS0+xCjDwaEkwSvxDCgnWJSanlqRlpkDDGmYtAQHj5IIr+UToDRvcUFibnFmOkTqFKOil
-  Djv46dACQGQREZpHlwbLI4uMcpKCfMyMjAwCPEUpBblZpagyr9iFOdgVBLmbQOZwpOZVwI3/R
-  XQYiagxQq/L4IsLklESEk1MEU2pIYw7n/OwHazUFvAZ/+O14dTfs1q2b9k+oVbl6WfdLxP2Tr
-  5B1vY40P7nvLuLv95bd8XnTB/vtLT8gfusZ0Ulv5zfU6+8nKR8s3lq+e48TxelbFOfYOY4Plz
-  yyv2+fyJNF3OK12gmSMvaBv4btd7dXZ1YcYAZn6W7a+6Yj9ypJT94DfklJTaI2m7r+UMl9Gvj
-  /s7PFXtVjffPiUvdD+Us+41xxWV1E8WWQsOP1BNzSw4EajuuUntEN8q+Y8dkyd+8eiYOf1Wbt
-  YDzQf7Fe32r7RuZbTv2WNy+oug2avd0fc7iqY8LfbnVoxf1Hj52vfSUL41z1OnHNa99MLjU4P
-  3nOpLn1c6M7zU5z+yO0GJpTgj0VCLuag4EQB4ON7OHgMAAA==
+	b=f94DHe4Y2PqIgNNPoOtYWWdJ2e3QpbdaPcTt2KPEivMiH591HDs+xNZXFy70BTLJT
+	 xdEyjj1aSY9UxjAbZQRY9GTYJ76ACvgq8dJA4HBSnSzme+DN9tshRKsFh9gh6TpKmq
+	 nMdLhJ9X1Hfi9sSBoT/o4PANCthGcZd+7QW073rQDp0YB7mBTUB+Tv3dXIbLEY315S
+	 yXd9PU4pCUoxq2DhSgBtabfUnOVyRTCdZoG51REuiURydM1dS9+bCcQacBSiIjrcDB
+	 rtdOygThOvkJy2LT2pzFSsD9PtCKA3x7xKpgcdpEA1iPpevP45cuddrbE5s4UO7jyg
+	 hHrhOud790Z7Q==
+Received: from [100.113.4.24] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-5.bemta.az-b.eu-central-1.aws.symcld.net id DD/A5-14259-987E3D06; Thu, 24 Jun 2021 02:01:45 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+EI0W1/fjn
+  BYP8bA4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePWpcOMBe08FXu6utkbGOdwdzFycQgJzGaS
+  uNn1gwXC2cMosf7eVLYuRk4ONgFdiXOP17KD2CIC+hJLZ+9hBrGFBbwkNr7qBbNZBFQl2r7+A
+  avnFfCQ2HLiOhOILSGgIDHl4XtmiLigxMmZT1hAbGYBCYmDL14AxTmAahQlZk+XhyivkJgxYx
+  vbBEaeWUg6ZiHpWMDItIrRMqkoMz2jJDcxM0fX0MBA19DQWNccyDLVS6zSTdJLLdVNTs0rKUo
+  EyuollhfrFVfmJuek6OWllmxiBAZSSiF75g7GyW8+6B1ilORgUhLlLW2/nCDEl5SfUpmRWJwR
+  X1Sak1p8iFGGg0NJglfiGVBOsCg1PbUiLTMHGNQwaQkOHiURXssnQGne4oLE3OLMdIjUKUZFK
+  XHex0+BEgIgiYzSPLg2WCRdYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCTM2wYyhSczrwRu+i
+  ugxUxAixV+XwRZXJKIkJJqYDLd9qR/3fb5NyStY7n7487PSvwq0vnOOzl+x5XDO9Xv3Wfq9VS
+  rnFDxvp73wBH3hW/uL2TbqvrkN6Pk/+aTl9jDG1d/ZO67Ooe9bvpms+BgifiY3Q1M9zyT1m4W
+  CalIt41iTp9/zmG10awS9iDWZ5bmddVrlXaevlOSy+W5S96qWuSv7+1Y0QkbBSsvW+7u3bVpz
+  p/myM0e1sGlIcqTbELaZ23d+mn+ykcpf9103s18+F6T56aC/+VTEuY+8mUXEpw/OQZaLXHWdu
+  A9yxT56vOOlakvWo+pyluERlsp/bPc+WWpZbjrpgtu77za5l5/peSs/EvHZFlN6vyutufrFvd
+  VFylu4zi7ec2N00pRc5RYijMSDbWYi4oTAT35vCUfAwAA
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-17.tower-291.messagelabs.com!1624500085!97083!1
-X-Originating-IP: [62.60.8.149]
+X-Msg-Ref: server-17.tower-238.messagelabs.com!1624500103!52275!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.75.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 14985 invoked from network); 24 Jun 2021 02:01:25 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-17.tower-291.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Jun 2021 02:01:25 -0000
+Received: (qmail 26642 invoked from network); 24 Jun 2021 02:01:43 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-17.tower-238.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Jun 2021 02:01:43 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15O21PZW028426
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15O21hk3020560
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jun 2021 03:01:25 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jun 2021 03:01:43 +0100
 Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 24 Jun 2021 03:01:23 +0100
+ (TLS) id 15.0.1497.18; Thu, 24 Jun 2021 03:01:41 +0100
 From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] satyr: upgrade 0.37 -> 0.38
-Date: Thu, 24 Jun 2021 10:01:16 +0800
-Message-ID: <1624500076-82566-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-perl] [PATCH] libnet-telnet-perl: upgrade 3.04 -> 3.05
+Date: Thu, 24 Jun 2021 10:01:32 +0800
+Message-ID: <1624500092-82603-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.35]
@@ -61,28 +61,36 @@ X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
+-License-Update: Copyright year updated to 2021.
+
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- meta-oe/recipes-support/satyr/{satyr_0.37.bb => satyr_0.38.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/satyr/{satyr_0.37.bb => satyr_0.38.bb} (94%)
+ ...ibnet-telnet-perl_3.04.bb => libnet-telnet-perl_3.05.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-perl/recipes-perl/libnet/{libnet-telnet-perl_3.04.bb => libnet-telnet-perl_3.05.bb} (78%)
 
-diff --git a/meta-oe/recipes-support/satyr/satyr_0.37.bb b/meta-oe/recipes-support/satyr/satyr_0.38.bb
-similarity index 94%
-rename from meta-oe/recipes-support/satyr/satyr_0.37.bb
-rename to meta-oe/recipes-support/satyr/satyr_0.38.bb
-index 4630eb0210..d01ea42bd2 100644
---- a/meta-oe/recipes-support/satyr/satyr_0.37.bb
-+++ b/meta-oe/recipes-support/satyr/satyr_0.38.bb
-@@ -10,7 +10,7 @@ inherit autotools-brokensep python3native pkgconfig
- SRC_URI = "git://github.com/abrt/satyr.git \
-            file://0002-fix-compile-failure-against-musl-C-library.patch \
- "
--SRCREV = "4a7d0a31cdeee23bb13739f57926188a795bdf25"
-+SRCREV = "ad0030f071b7ce7eb748eca3c31cb381038e2b21"
- S = "${WORKDIR}/git"
+diff --git a/meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.04.bb b/meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.05.bb
+similarity index 78%
+rename from meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.04.bb
+rename to meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.05.bb
+index 652e8c941e..c5d8271ff7 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.04.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.05.bb
+@@ -12,11 +12,11 @@ HOMEPAGE = "http://search.cpan.org/dist/Net-Telnet/"
+ SECTION = "Development/Libraries"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ LICENSE = "Artistic-1.0|GPLv1+"
+-LIC_FILES_CHKSUM = "file://README;beginline=4;endline=7;md5=3fd238bfb6ee1810cb15d5d95e07b0f5"
++LIC_FILES_CHKSUM = "file://README;beginline=4;endline=7;md5=e94ab3b72335e3cdadd6c1ff736dd714"
+ 
+ SRC_URI = "http://search.cpan.org/CPAN/authors/id/J/JR/JROGERS/Net-Telnet-${PV}.tar.gz"
+-SRC_URI[md5sum] = "d2514080116c1b0fa5f96295c84538e3"
+-SRC_URI[sha256sum] = "e64d567a4e16295ecba949368e7a6b8b5ae2a16b3ad682121d9b007dc5d2a37a"
++SRC_URI[md5sum] = "c8573c57a2d9469f038c40ac284b1e5f"
++SRC_URI[sha256sum] = "677f68ba2cd2a824fae323fa82e183bf7e3d03c3c499c91d923bd6283796a743"
+ 
+ S = "${WORKDIR}/Net-Telnet-${PV}"
+ 
 -- 
 2.25.1
 
