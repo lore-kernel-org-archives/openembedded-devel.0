@@ -1,88 +1,60 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.3])
- by mx.groups.io with SMTP id smtpd.web10.3674.1624514726696184205
+Received: from esa11.hc1455-7.c3s2.iphmx.com (esa11.hc1455-7.c3s2.iphmx.com [207.54.90.137])
+ by mx.groups.io with SMTP id smtpd.web09.4171.1624519505613450093
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Jun 2021 23:05:27 -0700
+ Thu, 24 Jun 2021 00:25:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=zKPTLHaP;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.3, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1624514723; i=@fujitsu.com;
-	bh=0RVYciw2R9pDrsFJgTFtt8/iW4bB560SyPgGW1KBcSw=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=zKPTLHaP6UnEk6CzEO8IyPtmUXWSK+r8l0VWnyOU8ENgGnyMH0TCYumyWQf2CuKV0
-	 FacIuE5CzWbLTrO9qVdyJKw6N9o2QuwfhtZaCp7Lwwk0Tz0LdJe2GXgg29OAaZwzvD
-	 VuG/yEKHYHgU5u1usLdIn6vGOt0zq5P1jjX0mCJvRDjqCFkXFzc3A/40Hfszj30egY
-	 vIWcbszw2HudoZs/M3jZ+FYNbjrN0bJyU33mpWxot0B1pL06BS3Pjmf+ZiM+uG7dz/
-	 arEiP8Khn4hqd893h3S0vNA+wu179KQcFalT5rMRiWW1uKyJu7uch/EsZaNdaQjYSg
-	 JWXk6qDtIfObw==
-Received: from [100.113.1.143] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-a.eu-central-1.aws.symcld.net id 62/0C-19780-3A024D06; Thu, 24 Jun 2021 06:05:23 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuplkeJIrShJLcpLzFFi42Kxs+EI0V2scCX
-  B4PNeZouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeNN6xy2gtscFVO3fWZqYPzF3sXIxSEkMJtJ
-  YuXymUwQzglGidsNG1i6GDk52AR0JDpedIPZIgL6Ektn72EGsYUFHCUWbtjHDmKzCKhKrDvcy
-  wRi8wq4S6x59gDMlhBQkJjy8D0zRFxQ4uTMJ2BzmAUkJA6+eMEMUaMosX3nGRYIu0JixoxtbB
-  MYeWYhaZmFpGUBI9MqRsukosz0jJLcxMwcXUMDA11DQ2NdA10jUyO9xCrdRL3UUt3k1LySokS
-  grF5iebFecWVuck6KXl5qySZGYCilFDL82cG4+s0HvUOMkhxMSqK89/mvJAjxJeWnVGYkFmfE
-  F5XmpBYfYpTh4FCS4FUABqeQYFFqempFWmYOMKxh0hIcPEoivJKyQGne4oLE3OLMdIjUKUZFK
-  XFeSZA+AZBERmkeXBssli4xykoJ8zIyMDAI8RSkFuVmlqDKv2IU52BUEublAJnCk5lXAjf9Fd
-  BiJqDFCr8vgiwuSURISTUwlda5qbz0dDa+mRfWnuJ69wrnDZctHbnR4om/XCQsfXUX3/438bv
-  c792ssa57v069ILFamt9Z9MUV5Y3Hdq5bFDvR+88B04Z5ll9U0ubuazM48+pcy75n7zRui23/
-  9pjv3ZWZ+w5vO93Oo/38o/1+PsPECdeOzf69d/O1WTLnrn9OdRRiKa13zEyyCU6drNU7f+Ylm
-  zW7kpkmSv9gyb641j9j1hbuhwtj7hgL/6huElIW++hq8PKESEzyb9M6+8hiVl6PXdesZglaiP
-  ZFec7Y8Pundl/XHIbcFc3ypxm2fPs/o2Yb78WMx001AWo1v5e9zO1Y9cjO8cXOFU1RaQ9v7/z
-  277XWbtbrnLf5761bM0GJpTgj0VCLuag4EQAUQPM4IAMAAA==
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-11.tower-226.messagelabs.com!1624514722!98218!1
-X-Originating-IP: [62.60.8.84]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.75.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 31623 invoked from network); 24 Jun 2021 06:05:22 -0000
-Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-11.tower-226.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Jun 2021 06:05:22 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15O65H1V004029
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jun 2021 07:05:22 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 24 Jun 2021 07:05:16 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] function2: upgrade 4.1.0 -> 4.2.0
-Date: Thu, 24 Jun 2021 14:05:09 +0800
-Message-ID: <1624514709-14468-1-git-send-email-zangrc.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=missing; spf=neutral (domain: fujitsu.com, ip: 207.54.90.137, mailfrom: chikazawa.akifu@fujitsu.com)
+IronPort-SDR: T3jJEXWOWSosZtHk7W/+LkDXN+BGHIRT4VnMOAR8Sps8JdVX+egaSrPpWr+/84Vf6Ws9LejYhj
+ dOMehTsjXpKMLxusRT5w+DTyIXlZr5PhPqId6rGkwgkOXp+CtOGJ1CePwHC2le3377VNvOz6dd
+ UlOXU6N6z4GsgpaTNL9oFQtsvreLdf0cuSbycQvgHbXu826K9nxS0+Qy5N+oS4/tLAFBeN1+LT
+ OIdZiG+KZdVLlAPKUznw0L6dKnkX51SXy6TQHhSxqFmjvl+h8S3vHv8/36zKtA4V3RoyFjy2At
+ 4sM=
+X-IronPort-AV: E=McAfee;i="6200,9189,10024"; a="13896232"
+X-IronPort-AV: E=Sophos;i="5.83,295,1616425200"; 
+   d="scan'208";a="13896232"
+Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
+  by esa11.hc1455-7.c3s2.iphmx.com with ESMTP; 24 Jun 2021 16:25:03 +0900
+Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
+	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 61F9A32F7C2
+	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jun 2021 16:25:02 +0900 (JST)
+Received: from yto-om4.fujitsu.com (yto-om4.o.css.fujitsu.com [10.128.89.165])
+	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 8EDD1B4E37
+	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jun 2021 16:25:01 +0900 (JST)
+Received: from pumpkin.openstacklocal (pumpkin.fct.css.fujitsu.com [10.130.70.189])
+	by yto-om4.fujitsu.com (Postfix) with ESMTP id 65E424007F301
+	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jun 2021 16:25:01 +0900 (JST)
+From: "Akifumi Chikazawa" <chikazawa.akifu@fujitsu.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] openvpn: add CVE-2020-7224 and CVE-2020-27569 to allowlist
+Date: Thu, 24 Jun 2021 16:24:57 +0900
+Message-Id: <20210624072457.674372-1-chikazawa.akifu@fujitsu.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+X-TM-AS-GCONF: 00
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+CVE-2020-7224 and CVE-2020-27569 are for Aviatrix OpenVPN client,
+not for openvpn.
+
+Signed-off-by: Akifumi Chikazawa <chikazawa.akifu@fujitsu.com>
 ---
- .../function2/{function2_4.1.0.bb => function2_4.2.0.bb}        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/function2/{function2_4.1.0.bb => function2_4.2.0.bb} (92%)
+ meta-networking/recipes-support/openvpn/openvpn_2.5.2.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-support/function2/function2_4.1.0.bb b/meta-oe/recipes-support/function2/function2_4.2.0.bb
-similarity index 92%
-rename from meta-oe/recipes-support/function2/function2_4.1.0.bb
-rename to meta-oe/recipes-support/function2/function2_4.2.0.bb
-index 56dc30acdc..14b9883373 100644
---- a/meta-oe/recipes-support/function2/function2_4.1.0.bb
-+++ b/meta-oe/recipes-support/function2/function2_4.2.0.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "Provides improved implementations of std::function."
- HOMEPAGE = "https://naios.github.io/function2"
- LICENSE = "BSL-1.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
--SRCREV = "3a0746bf5f601dfed05330aefcb6854354fce07d"
-+SRCREV = "02ca99831de59c7c3a4b834789260253cace0ced"
- PV .= "+git${SRCPV}"
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.5.2.bb b/meta-networking/recipes-support/openvpn/openvpn_2.5.2.bb
+index f82107dbe..646f0387a 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.5.2.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.5.2.bb
+@@ -17,6 +17,9 @@ UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
+ SRC_URI[md5sum] = "7643f135b49aee49df7d83c1f434dc4e"
+ SRC_URI[sha256sum] = "b9d295988b34e39964ac475b619c3585d667b36c350cf1adec19e5e3c843ba11"
  
- SRC_URI += "gitsm://github.com/Naios/function2"
++# CVE-2020-7224 and CVE-2020-27569 are for Aviatrix OpenVPN client, not for openvpn.
++CVE_CHECK_WHITELIST += "CVE-2020-7224 CVE-2020-27569"
++
+ SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
+ SYSTEMD_AUTO_ENABLE = "disable"
+ 
 -- 
 2.25.1
 
