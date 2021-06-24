@@ -1,105 +1,112 @@
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web08.4732.1624523530905972340
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web09.7411.1624540742346932659
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Jun 2021 01:32:11 -0700
+ Thu, 24 Jun 2021 06:19:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: kai.kang@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 15O8W8v3027288
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jun 2021 01:32:09 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 15O8W8Yx019859
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jun 2021 01:32:08 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.10; Thu, 24 Jun 2021 01:32:08 -0700
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.10 via Frontend Transport; Thu, 24 Jun 2021 01:32:07 -0700
-From: "kai" <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH] python3-m2crypto: avoid host contamination for swig
-Date: Thu, 24 Jun 2021 16:32:04 +0800
-Message-ID: <20210624083204.17626-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=hcQ7krTU;
+ spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: andrea.adami@gmail.com)
+Received: by mail-ej1-f41.google.com with SMTP id hz1so9525380ejc.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jun 2021 06:19:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=DwZxf72bUsj3Re9M7EKrrzawU8Epaouc29w6f0Ndqjc=;
+        b=hcQ7krTUcTq2bjc7XQHLTfPwbAZa3cK13lizxqmcxAFeRjtbLlriNH4s65dbbjfwTE
+         t2QD8m0RRrKJ7uJOdsHzuca5FRpFeP1dWuCM0L/AWob0dU9BJiGdDbZI4gl2Q94y4PVL
+         rSXsdx6gWfiG5jEkTFMRpL4JstiVLI9ZqWzHgc1J8V+wGXx3aF73x/qb+B0VTBlOqJ+n
+         TBywxcjknzrH0JyhSf3AaIyFcA0QfYr8ClOuQggxlauuODDrPqAxl2JEuzAvqa6K1CmS
+         pHhTHQXIrYwOIokwykT/kQhNSXEYVyrcBnGrSbbf8qLjU5txwC9Y2IYP3xQc6uRJDr+B
+         nLLA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=DwZxf72bUsj3Re9M7EKrrzawU8Epaouc29w6f0Ndqjc=;
+        b=B7nOMCGbEHhCC+JDF9uUBdWospoeYbcGrFjqC+UVsaIE+7h80Ce5PMvaBNTdqDhzp8
+         N4PHSXVKzvkfd3rQgZgxxEb9LGcsLHRYfHMCIBVB4mLGe0q52UgjLKtd3cF58h4XX62m
+         klQX3bOpdQx7tIInsZnT9WsUIuZFZnG7AJz0yje9TwOVileNI6RjeHv2o2/Kj1crvxWE
+         QkKEdtdZc4jV69xcanXg2qHhGkWe+HfEHyzmTQvvqJ++imu4d3Z1/l5a4X1HFoezWlHy
+         B7JkO9jP4MlGz5gZPqm1YKz4uvOSR/isQSmJeIl+p0f0DeVn9JwSKkSCBP9M5x+Zo6RQ
+         ML6A==
+X-Gm-Message-State: AOAM533jLSaOHX8sUT86+AirCE3tdMgVotsr7FHnt5bnEVmsh+1hByMh
+	im9+FbnvWsXEgQUIvPP23+/lKlMQdbmzQfjaVHs=
+X-Google-Smtp-Source: ABdhPJx05063uk68dfYVRNZe4xAO/mwviunq30+ESqdb0pN3+BMTajDIKWw4Xu68f7NwWLrlk0kCFGXhhh5ZQlSwcLY=
+X-Received: by 2002:a17:906:c2d9:: with SMTP id ch25mr5276945ejb.127.1624540740683;
+ Thu, 24 Jun 2021 06:19:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20210604014438.33958-1-kai.kang@windriver.com>
+ <CA+chaQf3SGiUJSg57umnwTQ8gMtAmrFLTSsTw=xeB2GYzaRSpQ@mail.gmail.com>
+ <b47a52f7-6946-9be0-a22c-8526047215a5@windriver.com> <CA+chaQcxyMhVhHrnfEJjp0iKcrT7EpLUdy0E3vM5xRDHiiqADg@mail.gmail.com>
+In-Reply-To: <CA+chaQcxyMhVhHrnfEJjp0iKcrT7EpLUdy0E3vM5xRDHiiqADg@mail.gmail.com>
+From: "Andrea Adami" <andrea.adami@gmail.com>
+Date: Thu, 24 Jun 2021 15:18:49 +0200
+Message-ID: <CAAQYJAvmimK2nEvTJfMpLvepV7MuYgar42Fo4Fc8uoY+fM6qUQ@mail.gmail.com>
+Subject: Re: [oe] [PATCH] layers: set LAYERSERIES_COMPAT with honister
+To: Martin Jansa <Martin.Jansa@gmail.com>
+Cc: Kai <kai.kang@windriver.com>, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Kai Kang <kai.kang@windriver.com>
+On Mon, Jun 7, 2021 at 10:21 AM Martin Jansa <Martin.Jansa@gmail.com> wrote=
+:
+>
+> Then I believe layer index should be fixed to support longer values, the=
+re are layers which are compatible with multiple releases and it works fine=
+ with bitbake/oe-core, layer index parsing shouldn't be more strict than th=
+e mechanism which is using these variables.
+>
+Hi,
+I agree with Martin, we have examples of compatibility since sumo, we
+will surely split but this is an unreasonable limit.
+A.A.
 
-If the version of libssl-dev is not match the version of libssl on the
-build machine, it fails to compile SWIG/_m2crypto_wrap.c which is
-created by swig for python3-m2crypto-native:
 
-| SWIG/_m2crypto_wrap.c:9757:19: error: dereferencing pointer to
-   incomplete type 'struct stack_st'
-|   if (arg1) (arg1)->num = arg2;
-|                   ^~
-
-But it works if no libssl-dev installed on the build machine.
-
-Export STAGING_DIR to make existing patch
-0001-setup.py-link-in-sysroot-not-in-host-directories.patch work. And
-filter out '/usr/inlucde' from include pathes of swig.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- .../avoid-host-contamination.patch            | 23 +++++++++++++++++++
- .../python/python3-m2crypto_0.37.1.bb         |  3 +++
- 2 files changed, 26 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-m2crypto/avoid-host-contamination.patch
-
-diff --git a/meta-python/recipes-devtools/python/python3-m2crypto/avoid-host-contamination.patch b/meta-python/recipes-devtools/python/python3-m2crypto/avoid-host-contamination.patch
-new file mode 100644
-index 000000000..9d9b8449b
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-m2crypto/avoid-host-contamination.patch
-@@ -0,0 +1,23 @@
-+Filter out '/usr/include' for swig to avoid host contamination issue.
-+
-+Upstream-Status: Upstream-Status: Inappropriate [cross compile specific]
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+ setup.py | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/setup.py b/setup.py
-+index 5a12981..389d49f 100644
-+--- a/setup.py
-++++ b/setup.py
-+@@ -153,7 +153,8 @@ class _M2CryptoBuildExt(build_ext.build_ext):
-+             self.swig_opts.append('-py3')
-+ 
-+         # swig seems to need the default header file directories
-+-        self.swig_opts.extend(['-I%s' % i for i in _get_additional_includes()])
-++        self.swig_opts.extend(['-I%s' % i for i in _get_additional_includes()
-++                                            if i != '/usr/include'])
-+ 
-+         log.debug('self.include_dirs = %s', self.include_dirs)
-+         log.debug('self.library_dirs = %s', self.library_dirs)
-diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
-index 2284a43a3..b3da87fb7 100644
---- a/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
-@@ -10,6 +10,7 @@ SRC_URI += "file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch \
-             file://cross-compile-platform.patch \
-             file://0001-Allow-verify_cb_-to-be-called-with-ok-True.patch \
-             file://0001-Use-of-RSA_SSLV23_PADDING-has-been-deprecated.patch \
-+            file://avoid-host-contamination.patch \
-            "
- SRC_URI[sha256sum] = "e4e42f068b78ccbf113e5d0a72ae5f480f6c3ace4940b91e4fff5598cfff6fb3"
- 
-@@ -42,4 +43,6 @@ SWIG_FEATURES_append_mipsarch = " -D_MIPS_SZPTR=${SITEINFO_BITS}"
- SWIG_FEATURES_append_powerpc64le = " -D__powerpc64__"
- export SWIG_FEATURES
- 
-+export STAGING_DIR
-+
- BBCLASSEXTEND = "native"
--- 
-2.17.1
-
+> On Fri, Jun 4, 2021 at 11:26 AM Kai <kai.kang@windriver.com> wrote:
+>>
+>> On 6/4/21 4:52 PM, Martin Jansa wrote:
+>>
+>> On Fri, Jun 4, 2021 at 3:44 AM kai <kai.kang@windriver.com> wrote:
+>>>
+>>> From: Kai Kang <kai.kang@windriver.com>
+>>>
+>>> Set LAYERSERIES_COMPAT with 'honister' which align with oe-core.
+>>>
+>>
+>> I think it's bad practice to claim honister support this early in its d=
+evelopment cycle. It won't happen with well-maintained layers like meta-oe,=
+ but if some less frequently updated layer sets the compatibility with honi=
+ster now and then doesn't get necessary updates to stay compatible with hon=
+ister in next 4 months, then whole purpose of LAYERSERIES_COMPAT will get b=
+roken just by claiming the compatibility too soon (without even knowing wha=
+t final honister will contain).
+>>
+>> Changing it after release freeze in oe-core seems much better time to d=
+o it.
+>>
+>> The same does apply on the meta-qt5 PR you've sent today https://github=
+.com/meta-qt5/meta-qt5/pull/416/commits
+>>
+>> Cheers,
+>>
+>> Got it. Thanks very much.
+>>
+>> I've comment on the meta-qt5 PR that too long strings in LAYERSERIES_CO=
+MPAT will cause layer index complains:
+>>
+>> WARNING: YPCompatibleVersion.name: dunfell gatesgarth hardknott: length=
+ 28 exceeds maximum (25), truncating
+>>
+>> So what is policy to keep old codenames in LAYERSERIES_COMPAT? Is  that=
+ ok to keep latest 2(hardknott and honister), please?
+>>
+>> Regards,
+>>
+>> --
+>> Kai Kang
+>> Wind River Linux
+>
+>
+>=20
+>
