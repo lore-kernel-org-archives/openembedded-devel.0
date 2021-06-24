@@ -1,92 +1,130 @@
-Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
- by mx.groups.io with SMTP id smtpd.web11.10336.1624466308339875940
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web09.1144.1624497617032820545
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Jun 2021 09:38:28 -0700
+ Wed, 23 Jun 2021 18:20:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=axis-central1 header.b=ifkM/vLD;
- spf=pass (domain: axis.com, ip: 195.60.68.17, mailfrom: peter.kjellerstedt@axis.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; q=dns/txt; s=axis-central1; t=1624466308;
-  x=1656002308;
-  h=from:to:subject:date:message-id:in-reply-to:references:
-   mime-version:content-transfer-encoding;
-  bh=pF1uP2sxU1tI9nhrwA78l+1r5QdIYrDlzANB4M22u5s=;
-  b=ifkM/vLDsgqqBOh+wls7JUEUBct9mMaJNn3GMmM7OruCH+LkKYUWYw6h
-   thzY9rZTLyIVgxlO/UAVoxlV4J6Me0BtRJ+O4ko7247W9rsLPzvP+ySXk
-   pF91th4LSAK9978ycCuzPf0Bbh9BKW78hDaO5jnZ7foT3uDuh/F8XAArd
-   SQhmYIIZmgRV0FOSEywE8pTpd9L4GTXRK5Klbw2jDPab3ScEM44ycBF+/
-   mFUkqvvVTdksifROpnn1aCuUVGzk8ai7MDKsPy+6LfaGRUxQpElIRmE4f
-   JP8/rQ41ASm5RQ3wCgB++SxY6KVfFu9a1B7z3j/2ScX9pYl/op2f3SfG2
-   A==;
-From: "Peter Kjellerstedt" <peter.kjellerstedt@axis.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Ggh8g6sY;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: wangmy@fujitsu.com)
+Return-Path: <wangmy@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1624497614; i=@fujitsu.com;
+	bh=g7rxDdwAj5fLik/JwB9uJLa6AHZQVfvcn3w0m6B9CQM=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=Ggh8g6sY5x7U9nxoszd4Rpl/d3rzlUXSGiIadDsj/1oI5MrzoD06cAvU+2TbvKaYi
+	 r7PuuO+DJnwkVRst/5N2/656kUCt+AUvUq25oj+ic1oQZwIjJhSEGuqxp+qiT+Dai1
+	 SUF5T7qpPaGSmD+LA+py8dOWERFBJ4e+TqA0i6dS2EtDvmt3QP/uXH2vyXFLkTwjNB
+	 pm7UCEtmGPNNgL+Dyp6YS8tA6ySnFT4f/FcnUmhEWobEeHP6WHpIytoVjGBSt8dVCE
+	 sJjuNKrnhtTugcDs+wk3ZCCRJjKWWN+uSGj98U5jg5bbYPzrRjXR+imuqcW4NK/hKh
+	 ptLBBw2iFzDFw==
+Received: from [100.113.1.143] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-a.eu-central-1.aws.symcld.net id EF/C0-37841-DCDD3D06; Thu, 24 Jun 2021 01:20:13 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrKIsWRWlGSWpSXmKPExsViZ8MRqnv27uU
+  Eg5X7RC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oxVl26xF+wWqti+5CxjA+MO/i5GLg4hgdlM
+  ErfW/GOGcE4wSmy9t4iti5GTg01ATWL6rRusILaIgL7E0tl7mEFsZgEViRe/e9hBbGGBWInld
+  3cxgtgsAqoSz45PB6vnFXCSOPfpEVhcQkBBYsrD98wQcUGJkzOfsEDMkZA4+OIFM0SNosTsy8
+  0sEHaFxOvDl5gnMPLOQtIyC0nLAkamVYyWSUWZ6RkluYmZObqGBga6hobGuga6RqZGeolVuol
+  6qaW6yal5JUWJQFm9xPJiveLK3OScFL281JJNjMAQSylk+LODcfWbD3qHGCU5mJREeUvbLycI
+  8SXlp1RmJBZnxBeV5qQWH2KU4eBQkuDlvw2UEyxKTU+tSMvMAYY7TFqCg0dJhDcEJM1bXJCYW
+  5yZDpE6xajLsfPovEXMQix5+XmpUuK8T0CKBECKMkrz4EbAYu8So6yUMC8jAwODEE9BalFuZg
+  mq/CtGcQ5GJWHeNJApPJl5JXCbXgEdwQR0hMLviyBHlCQipKQamMQTiout+y3nToqa3lGTonX
+  rqV3IxJfvvlhIr/t+JXelqabZcjeJE1/5zJ5ut80ofbt/f7TwPr2Zp/7e0fkQYdab5CsspZvt
+  l/+t4Qrr3wdiN9Z6vcy0ftO/zK65f43cpslPmkoPtkv8tX72fFZ67vJ5y+3XWUQdVn3m5WFZk
+  PNf9XdZ3uHOif+1b8nFdmpvKEsrikjPWz+9sdzWOJ5RzHrO9w28Gmp9x4OsWA9/23rAQ7v4jo
+  7fksifFctPLHUNtngf2iAioCD6SWV1w+vg/g1fGBa8MuN4Zmv0pvdyeoFiFt87Y7vvEgdOct2
+  9Jqbt3VtfIillE5KXd7D16neOQhmu19a2m49LmBh/mLRciaU4I9FQi7moOBEAD0oG1jgDAAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-8.tower-226.messagelabs.com!1624497612!76941!1
+X-Originating-IP: [62.60.8.85]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.75.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 19977 invoked from network); 24 Jun 2021 01:20:13 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-8.tower-226.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Jun 2021 01:20:13 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15O1JwgO006819
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jun 2021 02:20:12 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Thu, 24 Jun 2021 02:19:56 +0100
+From: "wangmy" <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][hardknott][PATCH 2/2] net-snmp: Support building for native
-Date: Wed, 23 Jun 2021 18:38:23 +0200
-Message-ID: <20210623163823.20596-2-pkj@axis.com>
-X-Mailer: git-send-email 2.21.3
-In-Reply-To: <20210623163823.20596-1-pkj@axis.com>
-References: <20210623163823.20596-1-pkj@axis.com>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH v2] samba: Solve the dependency problem when installing Samba
+Date: Thu, 24 Jun 2021 09:19:35 +0800
+Message-ID: <1624497575-83398-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Return-Path: pkj@axis.com
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-Due to the sed commands in do_install_append() that removed
-${STAGING_DIR_HOST} and it being empty when building for native, it was
-impossible to add support for building this as native using a bbappend.
+Error Message:
+ Problem: conflicting requests
+  - nothing provides samba-pidl needed by samba-client-4.14.5-r0.aarch64
 
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-protocols/net-snmp/net-snmp_5.9.bb | 18 +++++++++++++-----
- 1 file changed, 13 insertions(+), 5 deletions(-)
+ .../samba/samba_4.14.5.bb                     | 22 +++++++++++++++++--
+ 1 file changed, 20 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb
-index f577fd1c1..2159342fc 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.bb
-@@ -5,7 +5,8 @@ LICENSE = "BSD & MIT"
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.14.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.14.5.bb
+index efaf4f2a15..82108842f6 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.14.5.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.14.5.bb
+@@ -39,7 +39,7 @@ SRC_URI[sha256sum] = "bb6ef5d2f16b85288d823578abc453d9a80514c42e5a2ea2c4e3c60dc4
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=9d100a395a38584f2ec18a8275261687"
+ UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.14(\.\d+)+).tar.gz"
  
--DEPENDS = "openssl pciutils"
-+DEPENDS = "openssl"
-+DEPENDS_append_class-target = " pciutils"
+-inherit systemd waf-samba cpan-base perlnative update-rc.d
++inherit systemd waf-samba cpan-base perlnative update-rc.d perl-version
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
-            file://init \
-@@ -72,8 +73,10 @@ CACHED_CONFIGUREVARS = " \
-     ac_cv_file__etc_printcap=no \
-     NETSNMP_CONFIGURE_OPTIONS= \
- "
--export PERLPROG="${bindir}/env perl"
-+PERLPROG = "${bindir}/env perl"
-+PERLPROG_class-native = "${bindir_native}/env perl"
- PERLPROG_append = "${@bb.utils.contains('PACKAGECONFIG', 'perl', ' -I${WORKDIR}', '', d)}"
-+export PERLPROG
+ # CVE-2011-2411 is valnerble only on HP NonStop Servers.
+ CVE_CHECK_WHITELIST += "CVE-2011-2411" 
+@@ -130,6 +130,18 @@ EXTRA_OECONF += "--enable-fhs \
  
- HAS_PERL = "${@bb.utils.contains('PACKAGECONFIG', 'perl', '1', '0', d)}"
+ LDFLAGS += "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
  
-@@ -126,11 +129,14 @@ do_install_append() {
-         -e 's@[^ ]*--with-install-prefix=[^ "]*@@g' \
-         -e 's@[^ ]*PKG_CONFIG_PATH=[^ "]*@@g' \
-         -e 's@[^ ]*PKG_CONFIG_LIBDIR=[^ "]*@@g' \
--        -e 's@${STAGING_DIR_HOST}@@g' \
-         -i ${D}${bindir}/net-snmp-config
- 
--    sed -e 's@${STAGING_DIR_HOST}@@g' \
--        -i ${D}${libdir}/pkgconfig/netsnmp*.pc
-+    # ${STAGING_DIR_HOST} is empty for native builds, and the sed command below
-+    # will result in errors if run for native.
-+    if [ "${STAGING_DIR_HOST}" ]; then
-+        sed -e 's@${STAGING_DIR_HOST}@@g' \
-+            -i ${D}${bindir}/net-snmp-config ${D}${libdir}/pkgconfig/netsnmp*.pc
-+    fi
- 
-     sed -e "s@^NSC_INCLUDEDIR=.*@NSC_INCLUDEDIR=\$\{includedir\}@g" \
-         -e "s@^NSC_LIBDIR=-L.*@NSC_LIBDIR=-L\$\{libdir\}@g" \
-@@ -270,3 +276,5 @@ RCONFLICTS_${PN}-server-snmptrapd += "${PN}-server-snmptrapd-systemd"
- LEAD_SONAME = "libnetsnmp.so"
- 
- MULTILIB_SCRIPTS = "${PN}-dev:${bindir}/net-snmp-config"
++do_configure_append () {
++    cd ${S}/pidl/
++    perl Makefile.PL PREFIX=${prefix}
++    sed -e 's,VENDORPREFIX)/lib/perl,VENDORPREFIX)/${baselib}/perl,g' \
++        -e 's,PERLPREFIX)/lib/perl,PERLPREFIX)/${baselib}/perl,g' -i Makefile
 +
-+BBCLASSEXTEND = "native"
++}
++
++do_compile_append () {
++    oe_runmake -C ${S}/pidl
++}
++
+ do_install_append() {
+     for section in 1 5 7; do
+         install -d ${D}${mandir}/man$section
+@@ -195,6 +207,10 @@ do_install_append() {
+     if [ -f "${D}${bindir}/samba-tool" ]; then
+         sed -i -e 's,${PYTHON},/usr/bin/env python3,g' ${D}${bindir}/samba-tool
+     fi
++
++    oe_runmake -C ${S}/pidl DESTDIR=${D} install_vendor
++    rm -rf ${D}${libdir}/perl5/${PERLVERSION}/${BUILD_SYS}/perllocal.pod
++    rm -rf ${D}${libdir}/perl5/vendor_perl/${PERLVERSION}/${BUILD_SYS}/auto/Parse/Pidl/.packlist
+     
+ }
+ 
+@@ -301,7 +317,9 @@ FILES_smbclient = "${bindir}/cifsdd \
+                    ${libdir}/samba/smbspool_krb5_wrapper"
+ 
+ RDEPENDS_${PN}-pidl_append = " perl"
+-FILES_${PN}-pidl = "${bindir}/pidl ${datadir}/perl5/Parse"
++FILES_${PN}-pidl = "${bindir}/pidl \
++                    ${libdir}/perl5 \
++                   "
+ 
+ RDEPENDS_${PN}-client = "\
+     smbclient \
+-- 
+2.25.1
+
