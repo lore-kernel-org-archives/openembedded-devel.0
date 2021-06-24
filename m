@@ -1,102 +1,153 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.5])
- by mx.groups.io with SMTP id smtpd.web08.1514.1624500023496493385
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web10.1588.1624500053828952723
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Jun 2021 19:00:23 -0700
+ Wed, 23 Jun 2021 19:00:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=I95IjFUF;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.5, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=VtXgVK58;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: zhengrq.fnst@fujitsu.com)
+Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1624500021; i=@fujitsu.com;
-	bh=ziNANnDP6i3Fo7PWW0RAyyRrgrd4ALY5iNsw/xqDEhY=;
+	s=170520fj; t=1624500051; i=@fujitsu.com;
+	bh=LpmaKYQ1ypBy/l94X1uqwM35zua9EcqrrWaT3t2/lIU=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=I95IjFUFTUwz67jqf0ftobekegrBdn5fq9GaGs8k5oQtMxr21M5aB0HA0JyDI/J7i
-	 se0pyHx18zdiHSrkJt+jFBXm8vi8KzBBDsz/ufbVTI/BqkEH/dX3PSZZ+ciDwXXRy1
-	 DzJKHkc5nxI1Vsj/7u/q8PUd+WWDWvCxIOQzieCtcvdzQc3z5HDBQKwmhkLUE75msB
-	 MzmxikoLmPji5hXrOvN9PBRvMjm6WHOslBrMB+7b/Um10aq7VUv7weM4aRtHPE71rc
-	 MExOMsQRaAwJ9etyTjqxqdWbSmmNsu2Q1IfxRHInQn2Pxx1QA8/8XK2KdA8wdjda9t
-	 2rtRQavPs7Plw==
-Received: from [100.112.193.7] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-5.bemta.az-a.eu-west-1.aws.symcld.net id 0F/08-56066-437E3D06; Thu, 24 Jun 2021 02:00:20 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrOIsWRWlGSWpSXmKPExsViZ8MxRdfk+eU
-  Eg+t7RS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oz/H2QK/vNWXN/cw97A+Jini5GLQ0hgNpPE
-  sj0n2CGcE4wSn1tmMXcxcnKwCehIdLzoZgGxRQT0JZbO3gMWFxZwl7g9fToriM0ioCqx5e1OR
-  hCbFyj+bf8nsHoJAQWJKQ/fM0PEBSVOznwCFmcWkJA4+OIFM0SNosT2nWeg6iskZszYxjaBkW
-  cWkpZZSFoWMDKtYrRIKspMzyjJTczM0TU0MNA1NDTSNbQEYiMzvcQq3US91FLd8tTiEl1DvcT
-  yYr3iytzknBS9vNSSTYzAMEopOFC3g/HB6w96hxglOZiURHlL2y8nCPEl5adUZiQWZ8QXleak
-  Fh9ilOHgUJLglXgGlBMsSk1PrUjLzAGGNExagoNHSYTX8glQmre4IDG3ODMdInWKMZbj2doli
-  5g5XoLJDfOWAsn/d+8CyaZ7ILJ/wcHVzBxTwOTN9kNA8g6IFGLJy89LlRLnffwUaKgAyNCM0j
-  y4lbD4vcQoKyXMy8jAwCDEU5BalJtZgir/ilGcg1FJmLcNZApPZl4J3GWvgI5mAjpa4fdFkKN
-  LEhFSUg1MjNelt65oPjfnOvupjkzRzRff/Oz61bjcLMZhtqriP7OENo5XnJ+rv/yd8iFua6RZ
-  i1LIqbiL884f69qVuOVdvp6p8cUDLR/ONbT8vFwcdrUh25FNY92kdcdChZoMnfveBBx66qj+0
-  vFLv8PWgrTGLnXGn69WGKc899tX9LqZ+8vng6mb3Qx7Nngrqxy6kFbi8XLtvUquVaEHdlTzcv
-  UyOnuymIi6hu77rj3l0qNsRs90o6UVPy+zOVmoGDnplj86d9nt3fbpp3Iez9JgYLGxeWRVfdz
-  lrOO69NS0plfvN225cfy0FZN/qIKhZegX3xkVd0ID+DVZj+y8X2t+gP88u/KjhEt2LcyWztuU
-  O5yVWIozEg21mIuKEwET71jfWgMAAA==
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-9.tower-271.messagelabs.com!1624500020!93958!1
-X-Originating-IP: [62.60.8.148]
+	b=VtXgVK58zWG1UBsR8dps40kbwhzFB6DkKd9TZtHI82Bo5tL4+6HRhD9U0itxhsE30
+	 WGi1ttGIm8W/aXwO8nsKGWg8hOEXJgdtrkxTLtCFif4Qg1dV020DruA23/Mv7mfOIa
+	 Wyf8m8q74WW8QqjxjnfpvpJMfwxxE5T5q+R89FQ/PXbHJ245G0ro7qISTA94Cg4IUn
+	 /LC9Lpz9oUFntrGFsnRnX8fxWRckf1/cmontvV404OcgVgqaIza9coevLHFAj3vgjo
+	 uouJBIy/AZPzEhPHzVolUCf7gi0FIZuKYZf8RPS4boIwCwfJJxA/fJHjbqyej9olV5
+	 PBlnh6O1MYqQQ==
+Received: from [100.113.7.10] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-b.eu-central-1.aws.symcld.net id 35/07-50909-257E3D06; Thu, 24 Jun 2021 02:00:50 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupikeJIrShJLcpLzFFi42Kxs+GYqhv0/HK
+  CwfGn2hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8abFz3sBfNlKmZtr2lgvC/RxcjFISQwm0ni
+  yMYuJghnD6PEi4+HgBxODjYBXYlzj9eyg9giAvoSS2fvYe5i5OAQFnCSuLgmHiTMIqAqcblnC
+  RuIzSvgIfF1TxdYq4SAgsSUh++ZIeKCEidnPmEBsZkFJCQOvngBNkZCQFFi9nR5iPIKiRkztr
+  FNYOSZhaRjFpKOBYxMqxgtk4oy0zNKchMzc3QNDQx0DQ2NdU10DY0N9BKrdJP0Ukt1k1PzSoo
+  SgbJ6ieXFesWVuck5KXp5qSWbGIFBlFLI0rSD8ferD3qHGCU5mJREeUvbLycI8SXlp1RmJBZn
+  xBeV5qQWH2KU4eBQkuCVeAaUEyxKTU+tSMvMAQY0TFqCg0dJhNfyCVCat7ggMbc4Mx0idYpRU
+  Uqc9/FToIQASCKjNA+uDRZFlxhlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ87aBTOHJzCuBm/
+  4KaDET0GKF3xdBFpckIqSkGphqPM+4hbYHucYdkv/48tfOiC/lN9KdGYIZ5jepbcxy/stV7fH
+  u18aQrff1Jq89v7xXXkatokn2itZW4ZTkHcs/rKowurdGP1ZAyWjCz7ySRL2XQTwOy0UTxLYv
+  rkpWzX5wi2FdfCtja/rJV6q7QyWOaWYvuali9d4qYXPdL79/vDM2vi59mMiXcST3XLfPncpJI
+  m8eO/DoFCy7dOvqhbqTyp15SvlvdSd/45z63fFgw+zoEFsB79RSfpvuUH4v4/w/a3r9tr5zk+
+  dOqTWMnLPWQ8yaRX5p+BfndbP+fj4iddZEbq2Ye2RW7Y7grrVB3qe+f34fnXm2PFFygVuC66P
+  dGxO2bHoTIu8e9jVFV4mlOCPRUIu5qDgRAOqTxMIdAwAA
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-4.tower-245.messagelabs.com!1624500050!221305!1
+X-Originating-IP: [62.60.8.149]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.75.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 17344 invoked from network); 24 Jun 2021 02:00:20 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-9.tower-271.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Jun 2021 02:00:20 -0000
+Received: (qmail 20130 invoked from network); 24 Jun 2021 02:00:50 -0000
+Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
+  by server-4.tower-245.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Jun 2021 02:00:50 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15O20JDu005938
+	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15O20n9X028162
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jun 2021 03:00:19 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
+	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jun 2021 03:00:50 +0100
+Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 24 Jun 2021 03:00:18 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
+ (TLS) id 15.0.1497.18; Thu, 24 Jun 2021 03:00:48 +0100
+From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-networking] [PATCH] openvpn: upgrade 2.5.2 -> 2.5.3
-Date: Thu, 24 Jun 2021 10:00:11 +0800
-Message-ID: <1624500011-10741-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] fwts: upgrade 21.03.00 -> 21.06.00
+Date: Thu, 24 Jun 2021 10:00:41 +0800
+Message-ID: <1624500041-82428-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
+X-Originating-IP: [10.167.225.35]
 X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
--License-Update: Copyright year updated to 2021.
+Refresh the following patch:
+0003-Remove-Werror-from-build.patch
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../openvpn/{openvpn_2.5.2.bb => openvpn_2.5.3.bb}          | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-networking/recipes-support/openvpn/{openvpn_2.5.2.bb => openvpn_2.5.3.bb} (93%)
+ .../fwts/0003-Remove-Werror-from-build.patch  | 24 +++++++++----------
+ .../{fwts_21.03.00.bb => fwts_21.06.00.bb}    |  2 +-
+ 2 files changed, 13 insertions(+), 13 deletions(-)
+ rename meta-oe/recipes-test/fwts/{fwts_21.03.00.bb => fwts_21.06.00.bb} (94%)
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.5.2.bb b/meta-networking/recipes-support/openvpn/openvpn_2.5.3.bb
-similarity index 93%
-rename from meta-networking/recipes-support/openvpn/openvpn_2.5.2.bb
-rename to meta-networking/recipes-support/openvpn/openvpn_2.5.3.bb
-index f82107dbee..20f971a3b7 100644
---- a/meta-networking/recipes-support/openvpn/openvpn_2.5.2.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.5.3.bb
-@@ -2,7 +2,7 @@ SUMMARY = "A full-featured SSL VPN solution via tun device."
- HOMEPAGE = "https://openvpn.net/"
- SECTION = "net"
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=7aee596ed2deefe3e8a861e24292abba"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=377a495e6f12b2a3adcee797e59540b8"
- DEPENDS = "lzo openssl iproute2 ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+diff --git a/meta-oe/recipes-test/fwts/fwts/0003-Remove-Werror-from-build.patch b/meta-oe/recipes-test/fwts/fwts/0003-Remove-Werror-from-build.patch
+index 906ec99a9d..5ccd461d9f 100644
+--- a/meta-oe/recipes-test/fwts/fwts/0003-Remove-Werror-from-build.patch
++++ b/meta-oe/recipes-test/fwts/fwts/0003-Remove-Werror-from-build.patch
+@@ -11,12 +11,12 @@ Upstream-Status: Pending
+  3 files changed, 3 insertions(+), 3 deletions(-)
  
- inherit autotools systemd update-rc.d
-@@ -14,8 +14,8 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
+ diff --git a/src/Makefile.am b/src/Makefile.am
+-index a26a197b..70a28174 100644
++index f8066af..6b979f8 100644
+ --- a/src/Makefile.am
+ +++ b/src/Makefile.am
+-@@ -14,7 +14,7 @@ AM_CPPFLAGS = \
+- 	`pkg-config --silence-errors --cflags json`	\
+- 	`pkg-config --silence-errors --cflags json-c`	\
++@@ -12,7 +12,7 @@ AM_CPPFLAGS = \
++ 	-I$(top_srcdir)/src/acpica/source/compiler	\
++ 	-I$(top_srcdir)/efi_runtime			\
+  	-pthread `pkg-config --cflags glib-2.0 gio-2.0` \
+ -	-Wall -Werror -Wextra				\
+ +	-Wall -Wextra					\
+@@ -24,7 +24,7 @@ index a26a197b..70a28174 100644
+  	-Wfloat-equal -Wmissing-declarations		\
+  	-Wno-long-long -Wredundant-decls -Wshadow	\
+ diff --git a/src/lib/src/Makefile.am b/src/lib/src/Makefile.am
+-index 55c52b41..b85d0101 100644
++index 55c52b4..50efa97 100644
+ --- a/src/lib/src/Makefile.am
+ +++ b/src/lib/src/Makefile.am
+ @@ -25,7 +25,7 @@ AM_CPPFLAGS = \
+@@ -32,23 +32,23 @@ index 55c52b41..b85d0101 100644
+  	`pkg-config --cflags glib-2.0 gio-2.0` 		\
+  	-DDATAROOTDIR=\"$(datarootdir)\"		\
+ -	-Wall -Werror -Wextra				\
+-+	-Wall -Wextra				\
+++	-Wall -Wextra					\
+  	-Wno-address-of-packed-member
+  
+  pkglib_LTLIBRARIES = libfwts.la
+ diff --git a/src/utilities/Makefile.am b/src/utilities/Makefile.am
+-index ecc25f0a..129c1036 100644
++index a7d9b9c..e1bf141 100644
+ --- a/src/utilities/Makefile.am
+ +++ b/src/utilities/Makefile.am
+ @@ -16,7 +16,7 @@
+  # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  #
+  
+--AM_CPPFLAGS = -Wall -Werror -Wextra -DDATAROOTDIR=\"$(datarootdir)\" \
+-+AM_CPPFLAGS = -Wall -Wextra -DDATAROOTDIR=\"$(datarootdir)\" \
+- 	`pkg-config --silence-errors --cflags json` \
+- 	`pkg-config --silence-errors --cflags json-c` \
+- 	-I../lib/include
++-AM_CPPFLAGS = -Wall -Werror -Wextra -DDATAROOTDIR=\"$(datarootdir)\" 	\
+++AM_CPPFLAGS = -Wall -Wextra -DDATAROOTDIR=\"$(datarootdir)\" 	\
++ 	-I$(srcdir)/../lib/include
++ 
++ bin_PROGRAMS = kernelscan
+ -- 
+ 2.25.1
  
- UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
+diff --git a/meta-oe/recipes-test/fwts/fwts_21.03.00.bb b/meta-oe/recipes-test/fwts/fwts_21.06.00.bb
+similarity index 94%
+rename from meta-oe/recipes-test/fwts/fwts_21.03.00.bb
+rename to meta-oe/recipes-test/fwts/fwts_21.06.00.bb
+index aa7d422f7b..21d2563514 100644
+--- a/meta-oe/recipes-test/fwts/fwts_21.03.00.bb
++++ b/meta-oe/recipes-test/fwts/fwts_21.06.00.bb
+@@ -13,7 +13,7 @@ SRC_URI = "http://fwts.ubuntu.com/release/fwts-V${PV}.tar.gz;subdir=${BP} \
+            file://0005-Undefine-PAGE_SIZE.patch \
+            file://0006-use-intptr_t-to-fix-pointer-to-int-cast-issues.patch \
+            "
+-SRC_URI[sha256sum] = "c22dcba2572e4237bf2fe9ab579e195cf051d3a99b2c07ab58f757cae02d24fb"
++SRC_URI[sha256sum] = "ca43439707976f6664fe3f6eb7f356a51ac7d7f8a4e246ef4d1b16305e066909"
  
--SRC_URI[md5sum] = "7643f135b49aee49df7d83c1f434dc4e"
--SRC_URI[sha256sum] = "b9d295988b34e39964ac475b619c3585d667b36c350cf1adec19e5e3c843ba11"
-+SRC_URI[md5sum] = "08895fd1142f25fdd94a98315632e1bf"
-+SRC_URI[sha256sum] = "75f0044df449430555ca7b995a2b77ab24f2946fdc3668301b8edc23986a5f7e"
+ COMPATIBLE_HOST = "(i.86|x86_64|aarch64|powerpc64).*-linux"
  
- SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
- SYSTEMD_AUTO_ENABLE = "disable"
 -- 
 2.25.1
 
