@@ -1,59 +1,59 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.113])
- by mx.groups.io with SMTP id smtpd.web08.1527.1624500078471840703
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.69])
+ by mx.groups.io with SMTP id smtpd.web12.1607.1624500088601033201
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Jun 2021 19:01:18 -0700
+ Wed, 23 Jun 2021 19:01:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=yREGrCYx;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.113, mailfrom: zhengrq.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=dq0sxrfq;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.69, mailfrom: zhengrq.fnst@fujitsu.com)
 Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1624500075; i=@fujitsu.com;
-	bh=N7OgQKvs4/VpkbZKhEkHMVt2BpeNI5olbvXiHo+wckY=;
+	s=170520fj; t=1624500086; i=@fujitsu.com;
+	bh=e4g+YuVl0AIirWRqGbB5yFiTUUco5CE+f9djndZLlaA=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=yREGrCYxB3JIQJvhN/Che3uizy6BkPNYuq/Ytj1zzH/3j5si1f/HPV/q8xvD7UFlp
-	 2akOlsbdIjW6UFVfyH5aRM2n9JwRZIhkxwmX63ZsxFu60504qH1Hwk9Tns14cyDH2C
-	 0q/POkX3PeVapfy/bDJnBtbzNEIND8hBL1N98Ab/ey/yLi/yWizM+6aTh/68SV+lFj
-	 KmqYfM6Rv+cdjzUc3JsIDQ0qS48lFvhahyhsAVr8HmS4vnHSXTPVVDtY9t1TDjAAOl
-	 QfQRDk7lWkQjS4072vg2rdWnw+dWeBPQ2Ju85NoLZvQezLckm3NwXlVl7J2FR8qBgT
-	 ipfqXmLpDO/yg==
-Received: from [100.113.7.10] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-b.eu-central-1.aws.symcld.net id 68/24-33341-B67E3D06; Thu, 24 Jun 2021 02:01:15 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYopv9/HK
-  CwfJeUYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePq0rusBes4KxZf/cnawHiBo4uRi0NIYDaT
-  xPTtF5khnD2MEk8OvmPqYuTkYBPQlTj3eC07iC0ioC+xdPYeZhBbWMBR4v6Zw2A2i4CqxO6Zk
-  1m6GDk4eAU8JNb31oOEJQQUJKY8fA9WwisgKHFy5hMWEJtZQELi4IsXzCDlEgKKErOny0OUV0
-  jMmLGNbQIjzywkHbOQdCxgZFrFaJlUlJmeUZKbmJmja2hgoGtoaKxrrmtkbKiXWKWbpJdaqpu
-  cmldSlAiU1UssL9YrrsxNzknRy0st2cQIDKOUQvbnOxhXvfmgd4hRkoNJSZS3tP1yghBfUn5K
-  ZUZicUZ8UWlOavEhRhkODiUJXolnQDnBotT01Iq0zBxgSMOkJTh4lER4LZ8ApXmLCxJzizPTI
-  VKnGBWlxHkfPwVKCIAkMkrz4NpgcXSJUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjBvG8gUns
-  y8Erjpr4AWMwEtVvh9EWRxSSJCSqqBKfjH+jMrdz5lFH7b07R2U+fd8M7yCoN/D4+yzOWL4/l
-  wwNTxTE6cqk5TT+THc+vvST/mf32BaXdYYK9qp+3Be459K4I/37A4rfakNdKCf98T5cdrVtvX
-  XdxcHDilOrDMaYtWomFPsjKrY1mTosjEtNOHzxloqHArTQ6ab21XbH/0QaPX3KbdMfkTpYwn7
-  TyxeMZ1zdOvzyl8Yn3gaLP2yCf+1VteXVhTpXLJ/Z7T/bBUzemf+0TEpq/fWuzIJ3RaJEjm1w
-  +5BaKN/wwX8FjLSZ3bc6GKvb5Stpph1tdD9T+Tpkf8/Cq/0VP311cj/p8b7nRf9XgpW7H9nOK
-  JowncCVYMOya4pbqF6H1znlJfpcRSnJFoqMVcVJwIAEs04V8eAwAA
+	b=dq0sxrfqKeOuRlEezxFfdkiU37GzdcqhQ60TscM/OXUMCpSkxwZl/UIo88vK6IKLk
+	 9NmBG4i4xVpeE3JNvLveK0lR68lQP6e0sVdBlPcYomQFIxE9g2UL2wHCNEJbSffktO
+	 oJrZwfXq2aWof/s3QmzyvBrKMrNqdZ6e4G0pu4OHudISZbXztnEHWnQkpUfTvN1xEd
+	 01PWOrQRnRG/2D7kRIgl3WdcmOCK56CNePdKm8002JzgFyFwhqZi4nDKHcbT3wfrGz
+	 gR6ckG5N4T0T+CZ5PGnguaGgupbh+FjA2VWou8K/TO+t1JoUOKpPT5ARz3UZKckyyp
+	 vCUkqk3PykmGw==
+Received: from [100.112.198.210] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-5.bemta.az-b.eu-west-1.aws.symcld.net id 41/01-64908-677E3D06; Thu, 24 Jun 2021 02:01:26 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYqlv6/HK
+  CQe9VXYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePVws1MBd0cFdu/dLM1MK5m72Lk4hASmM0k
+  ceTmEjYIZw+jRMempUAZTg42AV2Jc4/XgtkiAvoSS2fvYQaxhQWsJd5PvsoCYrMIqEpsbN/AC
+  mLzCnhILL67BKxeQkBBYsrD98wQcUGJkzOfgNUzC0hIHHzxAijOAVSjKDF7ujxEeYXEjBnb2C
+  Yw8sxC0jELSccCRqZVjBZJRZnpGSW5iZk5uoYGBrqGhka6hpYWuobGBnqJVbpJeqmluuWpxSW
+  6hnqJ5cV6xZW5yTkpenmpJZsYgWGUUnCsaQfjydcf9A4xSnIwKYnylrZfThDiS8pPqcxILM6I
+  LyrNSS0+xCjDwaEkwSvxDCgnWJSanlqRlpkDDGmYtAQHj5IIr+UToDRvcUFibnFmOkTqFKOil
+  Djv46dACQGQREZpHlwbLI4uMcpKCfMyMjAwCPEUpBblZpagyr9iFOdgVBLmbQOZwpOZVwI3/R
+  XQYiagxQq/L4IsLklESEk1MEU2pIYw7n/OwHazUFvAZ/+O14dTfs1q2b9k+oVbl6WfdLxP2Tr
+  5B1vY40P7nvLuLv95bd8XnTB/vtLT8gfusZ0Ulv5zfU6+8nKR8s3lq+e48TxelbFOfYOY4Plz
+  yyv2+fyJNF3OK12gmSMvaBv4btd7dXZ1YcYAZn6W7a+6Yj9ypJT94DfklJTaI2m7r+UMl9Gvj
+  /s7PFXtVjffPiUvdD+Us+41xxWV1E8WWQsOP1BNzSw4EajuuUntEN8q+Y8dkyd+8eiYOf1Wbt
+  YDzQf7Fe32r7RuZbTv2WNy+oug2avd0fc7iqY8LfbnVoxf1Hj52vfSUL41z1OnHNa99MLjU4P
+  3nOpLn1c6M7zU5z+yO0GJpTgj0VCLuag4EQB4ON7OHgMAAA==
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-19.tower-238.messagelabs.com!1624500074!52630!1
-X-Originating-IP: [62.60.8.148]
+X-Msg-Ref: server-17.tower-291.messagelabs.com!1624500085!97083!1
+X-Originating-IP: [62.60.8.149]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.75.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 14865 invoked from network); 24 Jun 2021 02:01:15 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-19.tower-238.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Jun 2021 02:01:15 -0000
+Received: (qmail 14985 invoked from network); 24 Jun 2021 02:01:25 -0000
+Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
+  by server-17.tower-291.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Jun 2021 02:01:25 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15O21EHJ006373
+	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 15O21PZW028426
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jun 2021 03:01:14 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jun 2021 03:01:25 +0100
 Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 24 Jun 2021 03:01:13 +0100
+ (TLS) id 15.0.1497.18; Thu, 24 Jun 2021 03:01:23 +0100
 From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] libconfig: upgrade 1.7.2 -> 1.7.3
-Date: Thu, 24 Jun 2021 10:01:06 +0800
-Message-ID: <1624500066-82530-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] satyr: upgrade 0.37 -> 0.38
+Date: Thu, 24 Jun 2021 10:01:16 +0800
+Message-ID: <1624500076-82566-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.35]
@@ -63,28 +63,26 @@ Content-Type: text/plain
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../libconfig/{libconfig_1.7.2.bb => libconfig_1.7.3.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-extended/libconfig/{libconfig_1.7.2.bb => libconfig_1.7.3.bb} (82%)
+ meta-oe/recipes-support/satyr/{satyr_0.37.bb => satyr_0.38.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/satyr/{satyr_0.37.bb => satyr_0.38.bb} (94%)
 
-diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb b/meta-oe/recipes-extended/libconfig/libconfig_1.7.3.bb
-similarity index 82%
-rename from meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb
-rename to meta-oe/recipes-extended/libconfig/libconfig_1.7.3.bb
-index a4a2581458..3d87e44817 100644
---- a/meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb
-+++ b/meta-oe/recipes-extended/libconfig/libconfig_1.7.3.bb
-@@ -14,8 +14,8 @@ UPSTREAM_CHECK_REGEX = "Version (?P<pver>\d+(\.\d+)+)"
+diff --git a/meta-oe/recipes-support/satyr/satyr_0.37.bb b/meta-oe/recipes-support/satyr/satyr_0.38.bb
+similarity index 94%
+rename from meta-oe/recipes-support/satyr/satyr_0.37.bb
+rename to meta-oe/recipes-support/satyr/satyr_0.38.bb
+index 4630eb0210..d01ea42bd2 100644
+--- a/meta-oe/recipes-support/satyr/satyr_0.37.bb
++++ b/meta-oe/recipes-support/satyr/satyr_0.38.bb
+@@ -10,7 +10,7 @@ inherit autotools-brokensep python3native pkgconfig
+ SRC_URI = "git://github.com/abrt/satyr.git \
+            file://0002-fix-compile-failure-against-musl-C-library.patch \
+ "
+-SRCREV = "4a7d0a31cdeee23bb13739f57926188a795bdf25"
++SRCREV = "ad0030f071b7ce7eb748eca3c31cb381038e2b21"
+ S = "${WORKDIR}/git"
  
- inherit autotools-brokensep pkgconfig
- 
--SRC_URI[md5sum] = "6bd98ee3a6e6b9126c82c916d7a9e690"
--SRC_URI[sha256sum] = "7c3c7a9c73ff3302084386e96f903eb62ce06953bb1666235fac74363a16fad9"
-+SRC_URI[md5sum] = "15ec701205f91f21b1187f8b61e0d64f"
-+SRC_URI[sha256sum] = "545166d6cac037744381d1e9cc5a5405094e7bfad16a411699bcff40bbb31ee7"
- 
- PACKAGE_BEFORE_PN = "${PN}++"
- FILES_${PN}++ = "${libdir}/${BPN}++*${SOLIBS}"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 -- 
 2.25.1
 
