@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.5552.1624616161488731330
+ by mx.groups.io with SMTP id smtpd.web09.5527.1624616162335923835
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 25 Jun 2021 03:16:02 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=34510 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lwisM-0005zp-8g; Fri, 25 Jun 2021 13:15:55 +0300
+	id 1lwisN-0005zp-3h; Fri, 25 Jun 2021 13:15:55 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/6] python3-google-auth: Add recipe
-Date: Fri, 25 Jun 2021 13:15:43 +0300
-Message-Id: <20210625101545.30040-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/6] python3-googleapis-common-protos: Add recipe
+Date: Fri, 25 Jun 2021 13:15:44 +0300
+Message-Id: <20210625101545.30040-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210625101545.30040-1-leon.anavi@konsulko.com>
 References: <20210625101545.30040-1-leon.anavi@konsulko.com>
@@ -30,46 +30,33 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Add Google Authentication Library.
+Add common protobufs used in Google APIs.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python3-google-auth_1.32.0.bb      | 27 +++++++++++++++++++
- 1 file changed, 27 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-google-auth_1.32.0.bb
+ .../python3-googleapis-common-protos_1.53.0.bb     | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-googleapis-common-protos_1.53.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-google-auth_1.32.0.bb b/meta-python/recipes-devtools/python/python3-google-auth_1.32.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-googleapis-common-protos_1.53.0.bb b/meta-python/recipes-devtools/python/python3-googleapis-common-protos_1.53.0.bb
 new file mode 100644
-index 0000000000..d492bbbcb7
+index 0000000000..2c59ae86d2
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-google-auth_1.32.0.bb
-@@ -0,0 +1,27 @@
-+DESCRIPTION = "Google Authentication Library"
-+HOMEPAGE = "https://github.com/googleapis/google-auth-library-python"
-+AUTHOR = "Google Cloud Platform"
++++ b/meta-python/recipes-devtools/python/python3-googleapis-common-protos_1.53.0.bb
+@@ -0,0 +1,14 @@
++DESCRIPTION = "Common protobufs used in Google APIs"
++HOMEPAGE = "https://github.com/googleapis/python-api-common-protos"
++AUTHOR = "Google LLC"
 +LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 +
 +inherit pypi setuptools3
 +
-+SRC_URI[sha256sum] = "e34e5f5de5610b202f9b40ebd9f8b27571d5c5537db9afed3a72b2db5a345039"
++SRC_URI[sha256sum] = "a88ee8903aa0a81f6c3cec2d5cf62d3c8aa67c06439b0496b49048fb1854ebf4"
 +
 +RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-asyncio \
-+    ${PYTHON_PN}-datetime \
-+    ${PYTHON_PN}-io \
-+    ${PYTHON_PN}-json \
-+    ${PYTHON_PN}-logging \
-+    ${PYTHON_PN}-netclient \
-+    ${PYTHON_PN}-numbers \
-+"
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-aiohttp \
-+    ${PYTHON_PN}-cachetools \
-+    ${PYTHON_PN}-pyasn1-modules \
-+    ${PYTHON_PN}-rsa \
-+    ${PYTHON_PN}-six \
++    ${PYTHON_PN}-grpcio \
++    ${PYTHON_PN}-protobuf \
 +"
 -- 
 2.17.1
