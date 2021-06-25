@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.5528.1624616164775435295
+ by mx.groups.io with SMTP id smtpd.web08.5556.1624616164814314786
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 25 Jun 2021 03:16:05 -0700
 Authentication-Results: mx.groups.io;
@@ -8,15 +8,17 @@ Received: from [78.130.197.211] (port=34510 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lwisK-0005zp-Cx; Fri, 25 Jun 2021 13:15:52 +0300
+	id 1lwisK-0005zp-UY; Fri, 25 Jun 2021 13:15:53 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/6] python3-ruamel-yaml: Upgrade 0.17.9 -> 0.17.10
-Date: Fri, 25 Jun 2021 13:15:40 +0300
-Message-Id: <20210625101545.30040-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/6] python3-httplib2: Fix runtime dependencies
+Date: Fri, 25 Jun 2021 13:15:41 +0300
+Message-Id: <20210625101545.30040-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-X-OutGoing-Spam-Status: No, score=-0.5
+In-Reply-To: <20210625101545.30040-1-leon.anavi@konsulko.com>
+References: <20210625101545.30040-1-leon.anavi@konsulko.com>
+X-OutGoing-Spam-Status: No, score=-1.0
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
@@ -28,37 +30,28 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.17.10:
-
-- Bug fix: token with old comment structure != two elements
+Add python3-compression, python3-netclient and python3-pyparsing
+as runtime dependencies.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ruamel-yaml_0.17.9.bb => python3-ruamel-yaml_0.17.10.bb} | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-ruamel-yaml_0.17.9.bb => python3-ruamel-yaml_0.17.10.bb} (74%)
+ .../recipes-devtools/python/python3-httplib2_0.19.1.bb      | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.9.bb b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.10.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.9.bb
-rename to meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.10.bb
-index 30306410da..3414ed097b 100644
---- a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.9.bb
-+++ b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.10.bb
-@@ -8,9 +8,11 @@ PYPI_PACKAGE = "ruamel.yaml"
+diff --git a/meta-python/recipes-devtools/python/python3-httplib2_0.19.1.bb b/meta-python/recipes-devtools/python/python3-httplib2_0.19.1.bb
+index a16f8d9d20..122b4bd8b7 100644
+--- a/meta-python/recipes-devtools/python/python3-httplib2_0.19.1.bb
++++ b/meta-python/recipes-devtools/python/python3-httplib2_0.19.1.bb
+@@ -7,3 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=56e5e931172b6164b62dc7c4aba6c8cf"
+ SRC_URI[sha256sum] = "0b12617eeca7433d4c396a100eaecfa4b08ee99aa881e6df6e257a7aad5d533d"
  
  inherit pypi setuptools3
- 
--BBCLASSEXTEND = "native nativesdk"
-+SRC_URI[sha256sum] = "106bc8d6dc6a0ff7c9196a47570432036f41d556b779c6b4e618085f57e39e67"
- 
--SRC_URI[sha256sum] = "374373b4743aee9f6d9f40bea600fe020a7ac7ae36b838b4a6a93f72b584a14c"
++
 +RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-shell \
++    ${PYTHON_PN}-compression \
++    ${PYTHON_PN}-netclient \
++    ${PYTHON_PN}-pyparsing \
 +"
- 
- do_install_prepend() {
-     export RUAMEL_NO_PIP_INSTALL_CHECK=1
 -- 
 2.17.1
 
