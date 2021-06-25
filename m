@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.5556.1624616164814314786
+ by mx.groups.io with SMTP id smtpd.web09.5530.1624616165629250958
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Jun 2021 03:16:05 -0700
+ Fri, 25 Jun 2021 03:16:06 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=34510 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1lwisK-0005zp-UY; Fri, 25 Jun 2021 13:15:53 +0300
+	id 1lwisL-0005zp-Dt; Fri, 25 Jun 2021 13:15:54 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/6] python3-httplib2: Fix runtime dependencies
-Date: Fri, 25 Jun 2021 13:15:41 +0300
-Message-Id: <20210625101545.30040-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/6] python3-google-api-core: Add recipe
+Date: Fri, 25 Jun 2021 13:15:42 +0300
+Message-Id: <20210625101545.30040-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210625101545.30040-1-leon.anavi@konsulko.com>
 References: <20210625101545.30040-1-leon.anavi@konsulko.com>
@@ -30,27 +30,45 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Add python3-compression, python3-netclient and python3-pyparsing
-as runtime dependencies.
+Add Google API client core library.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python3-httplib2_0.19.1.bb      | 6 ++++++
- 1 file changed, 6 insertions(+)
+ .../python/python3-google-api-core_1.30.0.bb  | 26 +++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-google-api-core_1.30.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-httplib2_0.19.1.bb b/meta-python/recipes-devtools/python/python3-httplib2_0.19.1.bb
-index a16f8d9d20..122b4bd8b7 100644
---- a/meta-python/recipes-devtools/python/python3-httplib2_0.19.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-httplib2_0.19.1.bb
-@@ -7,3 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=56e5e931172b6164b62dc7c4aba6c8cf"
- SRC_URI[sha256sum] = "0b12617eeca7433d4c396a100eaecfa4b08ee99aa881e6df6e257a7aad5d533d"
- 
- inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-google-api-core_1.30.0.bb b/meta-python/recipes-devtools/python/python3-google-api-core_1.30.0.bb
+new file mode 100644
+index 0000000000..08cc35d064
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-google-api-core_1.30.0.bb
+@@ -0,0 +1,26 @@
++DESCRIPTION = "Google API client core library"
++HOMEPAGE = "https://github.com/googleapis/python-api-core"
++AUTHOR = "Google LLC"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
++
++inherit pypi setuptools3
++
++SRC_URI[sha256sum] = "0724d354d394b3d763bc10dfee05807813c5210f0bd9b8e2ddf6b6925603411c"
 +
 +RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-compression \
-+    ${PYTHON_PN}-netclient \
-+    ${PYTHON_PN}-pyparsing \
++    ${PYTHON_PN}-asyncio \
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-logging \
++    ${PYTHON_PN}-math \
++"
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-googleapis-common-protos \
++    ${PYTHON_PN}-google-auth \
++    ${PYTHON_PN}-grpcio \
++    ${PYTHON_PN}-protobuf \
++    ${PYTHON_PN}-pytz \
++    ${PYTHON_PN}-requests \
++    ${PYTHON_PN}-six \
 +"
 -- 
 2.17.1
