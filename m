@@ -1,108 +1,109 @@
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web08.9316.1624635346726796717
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+ by mx.groups.io with SMTP id smtpd.web08.400.1624658759007905279
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Jun 2021 08:35:46 -0700
+ Fri, 25 Jun 2021 15:05:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=FNlxccIt;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id h23so5664417pjv.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Jun 2021 08:35:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=R1RyDY0Z;
+ spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f178.google.com with SMTP id g192so8525323pfb.6
+        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Jun 2021 15:05:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:references:from:organization:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=pw7VslYQcljPTmfdU8FMpwv4/2S+ShOBOs0lbF0+Pbg=;
-        b=FNlxccItq3yzayPDjFNvNPPa46cW6ERAfa/cF1yTMazRJwVr94b9fajxM+9sXgANGz
-         rOMA+GDVQR0dePcKZwhd61pfIIY6vYFNYkddGQppTrL5f2uU7OBp8pvvRURSTOqbro/7
-         o4NVPlkvCRgA8Z5UVcZNWnHYA69FUHuYrlAusYE2V80+FzpM08JlWicjyQZS978+EWJr
-         yIpcyR22RV9gC+UWHlpu7ypqKlGnC3+X1qleePuHXJMdQNIYKYTE5B3b7P5pS9Y/QG4P
-         zAcMnWxaDukCVfddHYivJwovy9+tXfceXrZwPS7hmDANjh6Rs6za7vctlJ6Qza+Q2TLB
-         HwiQ==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=W+AhnjKY+MTC6YZGq0BTnTrCBNnpNshLVTq61JY9yCk=;
+        b=R1RyDY0ZBMh54QUvxNdRykSmeb97FBIuMCTTsOc2ICiGvpncjzBVNvCZ6/OlXFWCTW
+         88kX0ro2wJuRMrszUGd6TaKHKzvbDcp2bLr6MEFBnAjX/CUNhhCQY2PDq6Ey3kJDbetm
+         hk0Izc/l788UPbo7obDTQGtLp49oZhZsUP8g1eubmFUvSHf5WcrFqMfxINDbyuDz1FFx
+         JLj/uX6g/tBiOeXw/BeDm08AzDvVAOrWQUHCKNhG1o/9lTNiLMgyzzsKEoSSBAzlQgU+
+         NKOm6Th2qcPP1rg5WdA3cF+lfvGjre4g9QnxWhqBqaYk/2EwpVx5V5nQVujjJt3D/ehg
+         RjQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=pw7VslYQcljPTmfdU8FMpwv4/2S+ShOBOs0lbF0+Pbg=;
-        b=DQ23LjkpFMI9LDhSsXCSbW3OWBS7OwoQ04iLm7PbHlebdEUhsA1cZL9KySjujOeyYJ
-         +pJj2vPy+yl+aBxzcN3mCk+NFnIb+94IQJEril1FVpug72fwcCwD3Nvjs+hTfVGpIRdd
-         OIFkgU5bbCsCBdc6GAmgMwLKRklITRZnSpdpKBQJMOuNgAsFAyHPTDyOTj/lgnmBpw25
-         O7EjY+8JnR3dRhkIpOit58P+gQwBla23yCM9Y4aZ50iC4moc54scFGj0wFWDj+435BC2
-         cr34u353GCPHpeyeiQS1HDo/xcFWfZW0jLDj2oAz2oGxHX508UwO/d3hXbROidzQFBre
-         wAmA==
-X-Gm-Message-State: AOAM532uQPllokAWXSXahV5DXed1p0e7zv3JKLRGILU/voJC5DSPI+s9
-	VOl6TAXpsBu2OXNagRqadbBu1cbsH2C4ig==
-X-Google-Smtp-Source: ABdhPJxFOFaUYOFsIaM8ohAgZOS9RdpJFpXEHjxAlvaO3WMe/7eHm0/BicA/RDM+kKWwYWXl8TOeZQ==
-X-Received: by 2002:a17:902:8ec7:b029:11b:acb4:ac43 with SMTP id x7-20020a1709028ec7b029011bacb4ac43mr9495663plo.1.1624635345948;
-        Fri, 25 Jun 2021 08:35:45 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=W+AhnjKY+MTC6YZGq0BTnTrCBNnpNshLVTq61JY9yCk=;
+        b=TGCdTDXOk1XIYH7si32fVXrICgGqJm4sJBpzifDPJFimjF/Hpp6y4youJTfjeDLGBu
+         ExhkoSqRdlbwQIzq3FnSdxCNm/KiiBlqpfuhPoZnxZpKwQzoMiKYps7LbRliNDbk4a4H
+         Qp32xxbNcRhkIwiykyg8gvRfSvw5B9uX8621AoEPZYKaq4uKyqOMamH2hckKdxZEk9W3
+         Xy24F9kphzIk7RhK6NvbQdjcdJwulvzkLMyklhwRSFk3GPaS4sqtsptK/Om6yiusv/Ka
+         RMaQTnQgXrOmqmImfW+7OvgSa4sayQ6FIFS3CBiyf9wUtGXkVJMQPQex9eSJKSg31Hx8
+         JRWQ==
+X-Gm-Message-State: AOAM532/vE5uUSteSfgEy2D4OfIEvxRsvoiilOvtX+wfTFvuO8wAL2Xd
+	MTimVSiaxw25oQEO14L6KJ9L2P5nz4ACSA==
+X-Google-Smtp-Source: ABdhPJz8pH/fdBvN0nAyLmEZJUi28r/Ik5ICeu+YHMx3JLAWCcA93WK0DURl8v9+RAMPor5UNeZJxw==
+X-Received: by 2002:aa7:9198:0:b029:307:f3d:6a2a with SMTP id x24-20020aa791980000b02903070f3d6a2amr12606165pfa.9.1624658758291;
+        Fri, 25 Jun 2021 15:05:58 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:a0f0:9c2:2fa:950b:5920? ([2601:646:9200:a0f0:9c2:2fa:950b:5920])
-        by smtp.gmail.com with ESMTPSA id 3sm6602359pfb.202.2021.06.25.08.35.45
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 25 Jun 2021 08:35:45 -0700 (PDT)
-Subject: Re: [oe] [meta-python][PATCH 3/6] python3-google-api-core: Add recipe
-To: Leon Anavi <leon.anavi@konsulko.com>,
- openembedded-devel@lists.openembedded.org
-References: <20210625101545.30040-1-leon.anavi@konsulko.com>
- <20210625101545.30040-3-leon.anavi@konsulko.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::e0be])
+        by smtp.gmail.com with ESMTPSA id k35sm6398737pgi.21.2021.06.25.15.05.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 25 Jun 2021 15:05:57 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <83ea86dc-5d50-47a1-b783-fb008192e5aa@gmail.com>
-Date: Fri, 25 Jun 2021 08:35:43 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.11.0
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/2] libc-bench: Do not override ldflags in makefile
+Date: Fri, 25 Jun 2021 15:05:54 -0700
+Message-Id: <20210625220555.1218235-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-In-Reply-To: <20210625101545.30040-3-leon.anavi@konsulko.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-please send a follow up to add them to meta-python test packagegroup as 
-well.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...ot-override-ldflags-from-environment.patch | 30 +++++++++++++++++++
+ .../libc-bench/libc-bench_git.bb              |  1 +
+ 2 files changed, 31 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/libc-bench/libc-bench/0001-build-Do-not-override-ldflags-from-environment.patch
 
-On 6/25/21 3:15 AM, Leon Anavi wrote:
-> Add Google API client core library.
-> 
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> ---
->   .../python/python3-google-api-core_1.30.0.bb  | 26 +++++++++++++++++++
->   1 file changed, 26 insertions(+)
->   create mode 100644 meta-python/recipes-devtools/python/python3-google-api-core_1.30.0.bb
-> 
-> diff --git a/meta-python/recipes-devtools/python/python3-google-api-core_1.30.0.bb b/meta-python/recipes-devtools/python/python3-google-api-core_1.30.0.bb
-> new file mode 100644
-> index 0000000000..08cc35d064
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-google-api-core_1.30.0.bb
-> @@ -0,0 +1,26 @@
-> +DESCRIPTION = "Google API client core library"
-> +HOMEPAGE = "https://github.com/googleapis/python-api-core"
-> +AUTHOR = "Google LLC"
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
-> +
-> +inherit pypi setuptools3
-> +
-> +SRC_URI[sha256sum] = "0724d354d394b3d763bc10dfee05807813c5210f0bd9b8e2ddf6b6925603411c"
-> +
-> +RDEPENDS_${PN} += "\
-> +    ${PYTHON_PN}-asyncio \
-> +    ${PYTHON_PN}-datetime \
-> +    ${PYTHON_PN}-logging \
-> +    ${PYTHON_PN}-math \
-> +"
-> +
-> +RDEPENDS_${PN} += "\
-> +    ${PYTHON_PN}-googleapis-common-protos \
-> +    ${PYTHON_PN}-google-auth \
-> +    ${PYTHON_PN}-grpcio \
-> +    ${PYTHON_PN}-protobuf \
-> +    ${PYTHON_PN}-pytz \
-> +    ${PYTHON_PN}-requests \
-> +    ${PYTHON_PN}-six \
-> +"
-> 
-> 
-> 
-> 
-> 
+diff --git a/meta-oe/recipes-benchmark/libc-bench/libc-bench/0001-build-Do-not-override-ldflags-from-environment.patch b/meta-oe/recipes-benchmark/libc-bench/libc-bench/0001-build-Do-not-override-ldflags-from-environment.patch
+new file mode 100644
+index 0000000000..060b418fcd
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/libc-bench/libc-bench/0001-build-Do-not-override-ldflags-from-environment.patch
+@@ -0,0 +1,30 @@
++From 419dac71dd524a39ad2333e91334b4650e277a78 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 25 Jun 2021 09:43:00 -0700
++Subject: [PATCH] build: Do not override ldflags from environment
++
++bitbake passed LDFLAGS contain important information e.g. which compiler
++runtime to link etc. Therefore append -static to LDFLAGS instead
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ Makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Makefile b/Makefile
++index efda5c0..a867876 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -3,7 +3,7 @@ SRCS = $(sort $(wildcard *.c))
++ OBJS = $(SRCS:.c=.o)
++ 
++ CFLAGS = -Os -D_XOPEN_SOURCE=700
++-LDFLAGS = -static
+++LDFLAGS += -static
++ LIBS = -lpthread -lrt -lpthread
++ 
++ 
++-- 
++2.32.0
++
+diff --git a/meta-oe/recipes-benchmark/libc-bench/libc-bench_git.bb b/meta-oe/recipes-benchmark/libc-bench/libc-bench_git.bb
+index e813894316..f16bd99d5d 100644
+--- a/meta-oe/recipes-benchmark/libc-bench/libc-bench_git.bb
++++ b/meta-oe/recipes-benchmark/libc-bench/libc-bench_git.bb
+@@ -10,6 +10,7 @@ SRCREV = "b6b2ce5f9f87a09b14499cb00c600c601f022634"
+ PV = "20110206+git${SRCPV}"
+ 
+ SRC_URI = "git://git.musl-libc.org/libc-bench \
++           file://0001-build-Do-not-override-ldflags-from-environment.patch \
+            "
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.32.0
+
