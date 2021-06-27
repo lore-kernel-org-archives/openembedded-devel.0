@@ -1,101 +1,77 @@
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.web08.2653.1624825352632568180
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web08.2654.1624825353445255076
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Jun 2021 13:22:32 -0700
+ Sun, 27 Jun 2021 13:22:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=W6bVNwvV;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id g21so10593859pfc.11
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Jun 2021 13:22:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Bw7rLU95;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id q192so12291703pfc.7
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Jun 2021 13:22:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=Bckf1Jx+GxS6nTR6k60qM+nd8tpUzOcRtiThr8yfGG4=;
-        b=W6bVNwvVUv5uGspukuEaZY+dpaMf9u46L58JBAhSp3uLTvqndTkqPpA7ockZQQKU7d
-         NFsAEeblr3CrVpY4+gUnXcrXWFFW8x9sKJvMDg4sIKXeJk+qcZ1gmS3Ngd/D080hUe16
-         6UeYjahhoZT8CDfBemd1l5bNNAVIS1wI3o7x1y180OFmlI8oPhpOpRon+WgW2jpQV3pp
-         1IEh3Yvtl4JEMaC++4Wsc0+yYcgh9epBcp6y5gWnn7R1LJgD9EKBoZArDc7y6+dy1YOG
-         cuF5uxqPzgMvc16ZWMco0S0xsf7+f2tOTdzdWaPAnJZ+fHSSPE7BY/U32mmw86X2YyEz
-         iwsw==
+        bh=KUJlJIciIsPlhp9UtNVpx5nk43E9aAGEeItOb6g3DCM=;
+        b=Bw7rLU95ZXv3qXW9nph25H4VfpA93coiZfx6wcVGuHvR6454NN970DM7JkdA7xNSXr
+         63LGFOuUGpjNqu4UFGZGsuXiFEY+tUaYucv/tk9zeTuS/KptM1mMkiacdXJY9XLS1ZVE
+         5jjOAyChNgJR4t8guORQwcJtLDEGowOW2KqGoZYTrjdEANlxJZg1iBiFJ70iSaFXyc+6
+         GIdoBE9P5SynrmU/QIG87Qg3SndYslEAKgkRPDBDlPINcpwWQl9kX+UL3FraXmKgpbxM
+         s6/t7+kBs3lNJkzeQRtSjhqWp76REDFBd48BMyL6QcOP+D88FMHu+WckStmq5TPbPBwH
+         DBVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=Bckf1Jx+GxS6nTR6k60qM+nd8tpUzOcRtiThr8yfGG4=;
-        b=mUWUmwUCGlij16JBgviGAtmCk2BjCtHOnZGFYRfKf8iq6HEEko9S3+3JZRZRLjd26y
-         HsNZYcfl1viuKFx6Jd0qyTUqIZCxH7VudmgQukjqD1artL1COkMY8f1bFDTSkPey0kdJ
-         R/79yAfJITScBsvRynlrOUFSlP0fIKghtEWdRnjC3A+D/N3OSKY/SoPK1IxUVo+5U650
-         2hEUz4VWZrfV+32ZDKxQU6WGl5gVKuCrpEWxfrLRiE5ZUlPWF8I9VRlu7kYBKSphOjxj
-         VBo3dhvNqRiSIK1bDU16jNXb8ce2KeygU2UWscmSfFqsdkxJKI7sg13B7IDn+rwRpi81
-         FuwQ==
-X-Gm-Message-State: AOAM531h6/Em9h+oYtdL76yygANSLDm7NTwyCEeUK6AAqMEwDDndv2r5
-	1wY4OJF5bysWdibngMtQVqGANLoqb3q4zA==
-X-Google-Smtp-Source: ABdhPJzA2qCE5Zs6VIPd81YWyNOn2Xe6qhC+aMKeitA42IJshJJvXceif2FDgLHiAMDDWw/eNBkDiQ==
-X-Received: by 2002:a65:528d:: with SMTP id y13mr20208715pgp.276.1624825352119;
+        bh=KUJlJIciIsPlhp9UtNVpx5nk43E9aAGEeItOb6g3DCM=;
+        b=iZMig59NMscNZWQbihBcYPfoRVrCUnrffbt1x011EAJukPufqm3hv3ymj8q9NLkE8w
+         TENGUvSYRGBYszWaVGcWfQG+mJnU7sa/CXZSxi5LkSJgjSkqZEzI6hY90ZTlLjRUTvzj
+         5vlN5QK14iVdEcDn3a3XCSS0nLNt+PJhgVHiTOLrh/9nwk5bBp3B+O+RbfSIl6KbaGsi
+         FhrwPGEU3daRA5XlKp+L4+roHOnIu5e2nVnDUp/mMag03zRCT/+y9O8Qy7s0ZGltbTJ9
+         QYwIokQKVQTynWPTP6CifIltJXKXGXrETqmAXQU0otXJ6kzgWVvrHgbPr+Xem4dQhNbI
+         zj5g==
+X-Gm-Message-State: AOAM531g+3BgBaGVVl4Vnz0TjL0Ak4CqocBYTPRYPpMCq1wz3tqxJ2fP
+	6LV/FVXXxyIjhMT2uVG62qn1oAgelxzLgw==
+X-Google-Smtp-Source: ABdhPJxXVaEj7Lw4N+kqde6/vymgHwQVY7/d0fXQRuI3zWNfbNcBjLQ0CspI1b6dBW6XdW+u4ZmdXQ==
+X-Received: by 2002:a63:d213:: with SMTP id a19mr20104080pgg.28.1624825352913;
         Sun, 27 Jun 2021 13:22:32 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:90a0:cfd2:ffe1:efef])
-        by smtp.gmail.com with ESMTPSA id ay3sm3501192pjb.38.2021.06.27.13.22.31
+        by smtp.gmail.com with ESMTPSA id ay3sm3501192pjb.38.2021.06.27.13.22.32
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Jun 2021 13:22:31 -0700 (PDT)
+        Sun, 27 Jun 2021 13:22:32 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 15/20] cifs-utils: set ROOTSBINDIR to /usr/sbin if DISTRO_FEATURES has usrmerge
-Date: Sun, 27 Jun 2021 13:22:10 -0700
-Message-Id: <a83c773ddd3d3e36d17a560103531657f915f6fe.1624825239.git.akuster808@gmail.com>
+Subject: [hardknott 16/20] ntp: add CVE-2016-9312 to allowlist
+Date: Sun, 27 Jun 2021 13:22:11 -0700
+Message-Id: <9636d8d6eb3faf78617e7ecd1e5311a8101cc3db.1624825239.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1624825239.git.akuster808@gmail.com>
 References: <cover.1624825239.git.akuster808@gmail.com>
 
-From: Geoff Parker <geoffrey.parker@arthrex.com>
+From: Sekine Shigeki <sekine.shigeki@fujitsu.com>
 
-Fixes cif-utils recipe build when DISTRO_FEATURES includes 'usrmerge'
-
-Add do_configure_prepend() to override ROOTSSBINDIR environment variable
-so that the utilities are installed in /usr/sbin rather than /sbin.
-Setting --exec-prefix or --prefix in EXTRA_OECONF does not work.
-
-Update do_install_append() to NOT remove /usr/bin /usr/sbin if usrmerge
-is set in DISTRO_FEATURES
-
-Signed-off-by: Geoff Parker <geoffrey.parker@arthrex.com>
+Signed-off-by: Sekine Shigeki <sekine.shigeki@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 3c1e72d62ccf2c2f94bf280a2500e23fdb01a57c)
+(cherry picked from commit 04a7dce6259b43234e0f815dfc1415eca693eddf)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-support/cifs/cifs-utils_6.13.bb     | 17 ++++++++++++++---
- 1 file changed, 14 insertions(+), 3 deletions(-)
+ meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb b/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb
-index 41a9b8e76a..bf8b18043a 100644
---- a/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb
-+++ b/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb
-@@ -22,10 +22,21 @@ PACKAGECONFIG[pam] = "--enable-pam --with-pamdir=${base_libdir}/security,--disab
+diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb
+index 7e168825e0..e668113c50 100644
+--- a/meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb
++++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb
+@@ -26,6 +26,9 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
  
- inherit autotools pkgconfig
+ SRC_URI[sha256sum] = "f65840deab68614d5d7ceb2d0bb9304ff70dcdedd09abb79754a87536b849c19"
  
-+do_configure_prepend() {
-+    # want installed to /usr/sbin rather than /sbin to be DISTRO_FEATURES usrmerge compliant
-+    # must override ROOTSBINDIR (default '/sbin'),
-+    # setting --exec-prefix or --prefix in EXTRA_OECONF does not work
-+    if ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','true','fakse',d)}; then
-+        export ROOTSBINDIR=${sbindir}
-+    fi
-+}
++# CVE-2016-9312 is only for windows.
++CVE_CHECK_WHITELIST += "CVE-2016-9312"
 +
- do_install_append() {
--    # Remove empty /usr/bin and /usr/sbin directories since the mount helper
--    # is installed to /sbin
--    rmdir --ignore-fail-on-non-empty ${D}${bindir} ${D}${sbindir}
-+    if ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','false','true',d)}; then
-+        # Remove empty /usr/bin and /usr/sbin directories since the mount helper
-+        # is installed to /sbin
-+        rmdir --ignore-fail-on-non-empty ${D}${bindir} ${D}${sbindir}
-+    fi
- }
+ inherit autotools update-rc.d useradd systemd pkgconfig
  
- FILES_${PN} += "${base_libdir}/security"
+ # The ac_cv_header_readline_history is to stop ntpdc depending on either
 -- 
 2.17.1
 
