@@ -1,78 +1,101 @@
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
- by mx.groups.io with SMTP id smtpd.web09.2637.1624825351851937248
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web08.2653.1624825352632568180
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Jun 2021 13:22:31 -0700
+ Sun, 27 Jun 2021 13:22:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=tGx17xX2;
- spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f173.google.com with SMTP id e33so13491668pgm.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Jun 2021 13:22:31 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=W6bVNwvV;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id g21so10593859pfc.11
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Jun 2021 13:22:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=FnDPVugyUGvkdy4jYMSaHr2tAXUn2RlH/f9k3C7qUyA=;
-        b=tGx17xX2buwDzUXeM84/o+omj6WM27MFnntNgb6xskpij9gfi8yM/+5RSvtv1scR7w
-         p2iYvbWqYEQHf7+cHmHzHG0FpgD0l7oHp+bGFVtYPuoTp83nPK78RvwDFGR839ghRQ8N
-         uNIyNZD1jpfIR+5EfC6QqNQqJW9R411pekQ3NUhH0j84HgrvT81dQCARFE122HcSkPjQ
-         hA5OBKOEoUS+kn9xIhr+1Dbxcj5n/O9Rma/gZV7zKoI9X/QJ0O0hZTYaM8zUO05QNRnY
-         zBMXWlRryxwyWZyPJv5cObvWhe4l48Y3vagGNufb3uQgNXwrALNRFGsz91+iLg44i4lR
-         qIAQ==
+        bh=Bckf1Jx+GxS6nTR6k60qM+nd8tpUzOcRtiThr8yfGG4=;
+        b=W6bVNwvVUv5uGspukuEaZY+dpaMf9u46L58JBAhSp3uLTvqndTkqPpA7ockZQQKU7d
+         NFsAEeblr3CrVpY4+gUnXcrXWFFW8x9sKJvMDg4sIKXeJk+qcZ1gmS3Ngd/D080hUe16
+         6UeYjahhoZT8CDfBemd1l5bNNAVIS1wI3o7x1y180OFmlI8oPhpOpRon+WgW2jpQV3pp
+         1IEh3Yvtl4JEMaC++4Wsc0+yYcgh9epBcp6y5gWnn7R1LJgD9EKBoZArDc7y6+dy1YOG
+         cuF5uxqPzgMvc16ZWMco0S0xsf7+f2tOTdzdWaPAnJZ+fHSSPE7BY/U32mmw86X2YyEz
+         iwsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=FnDPVugyUGvkdy4jYMSaHr2tAXUn2RlH/f9k3C7qUyA=;
-        b=nD9b0tqIauGw1nd4QCaZ7xQA7lU9n5K7dXHsVFIaxyXs4b8i4hPds6AIGag9cX+lBg
-         maAgh1XEcw95WzvxojUqN6m9/4Oh7kNhaNbU8SNbigK1rQC4N1fo0UP48pDGdxnEM+GE
-         iKkMgRu0LhvCTXYC2ZT1S4YuEP/ft65Zw7lHmGvl8rPnGCPcFxWSbpxQy7L8pWWUwVbm
-         yl86yyEcEKKvxNWAHGgQDF93kfuva3hxvTF+AyHToMWoeU7HI+H+IAyJ6iM32+gvuZJm
-         ZOo8SNkDdbRlcycZJfZMGfMZfwYDyZLX/pVBi0mGyAflJ2WoqcNHVuxfLyYMqiZpXBma
-         Chjw==
-X-Gm-Message-State: AOAM530g3zshbaM+JIVGB47noPIkXJ0INFNml008ERP9XPXIxQ/YCw58
-	Gtqq9lqvLeFnkk5vUPjxpL3NzhV35SEDzg==
-X-Google-Smtp-Source: ABdhPJzMUiJ26ieVjqdp2jOVvAMFI5+pZ1iiJ+RCSYNiVwfvFF6TVKkdSRdMJV20moKWSBeXF93vIg==
-X-Received: by 2002:a63:ff4b:: with SMTP id s11mr20026613pgk.436.1624825351303;
-        Sun, 27 Jun 2021 13:22:31 -0700 (PDT)
+        bh=Bckf1Jx+GxS6nTR6k60qM+nd8tpUzOcRtiThr8yfGG4=;
+        b=mUWUmwUCGlij16JBgviGAtmCk2BjCtHOnZGFYRfKf8iq6HEEko9S3+3JZRZRLjd26y
+         HsNZYcfl1viuKFx6Jd0qyTUqIZCxH7VudmgQukjqD1artL1COkMY8f1bFDTSkPey0kdJ
+         R/79yAfJITScBsvRynlrOUFSlP0fIKghtEWdRnjC3A+D/N3OSKY/SoPK1IxUVo+5U650
+         2hEUz4VWZrfV+32ZDKxQU6WGl5gVKuCrpEWxfrLRiE5ZUlPWF8I9VRlu7kYBKSphOjxj
+         VBo3dhvNqRiSIK1bDU16jNXb8ce2KeygU2UWscmSfFqsdkxJKI7sg13B7IDn+rwRpi81
+         FuwQ==
+X-Gm-Message-State: AOAM531h6/Em9h+oYtdL76yygANSLDm7NTwyCEeUK6AAqMEwDDndv2r5
+	1wY4OJF5bysWdibngMtQVqGANLoqb3q4zA==
+X-Google-Smtp-Source: ABdhPJzA2qCE5Zs6VIPd81YWyNOn2Xe6qhC+aMKeitA42IJshJJvXceif2FDgLHiAMDDWw/eNBkDiQ==
+X-Received: by 2002:a65:528d:: with SMTP id y13mr20208715pgp.276.1624825352119;
+        Sun, 27 Jun 2021 13:22:32 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:90a0:cfd2:ffe1:efef])
-        by smtp.gmail.com with ESMTPSA id ay3sm3501192pjb.38.2021.06.27.13.22.30
+        by smtp.gmail.com with ESMTPSA id ay3sm3501192pjb.38.2021.06.27.13.22.31
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sun, 27 Jun 2021 13:22:31 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 14/20] minifi-cpp: set CLEANBROKEN to 1
-Date: Sun, 27 Jun 2021 13:22:09 -0700
-Message-Id: <22f613b047acbe5051e5fad3bba54cecb70a55a0.1624825239.git.akuster808@gmail.com>
+Subject: [hardknott 15/20] cifs-utils: set ROOTSBINDIR to /usr/sbin if DISTRO_FEATURES has usrmerge
+Date: Sun, 27 Jun 2021 13:22:10 -0700
+Message-Id: <a83c773ddd3d3e36d17a560103531657f915f6fe.1624825239.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1624825239.git.akuster808@gmail.com>
 References: <cover.1624825239.git.akuster808@gmail.com>
 
-From: Chen Qi <Qi.Chen@windriver.com>
+From: Geoff Parker <geoffrey.parker@arthrex.com>
 
-Rebuilding minifi-cpp in old build dir sometimes result
-in do_compile failure. So set CLEANBROKEN to "1" to workaround
-this problem. If further investigation is done and the underlying
-problem is addressed, this setting could be removed.
+Fixes cif-utils recipe build when DISTRO_FEATURES includes 'usrmerge'
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Add do_configure_prepend() to override ROOTSSBINDIR environment variable
+so that the utilities are installed in /usr/sbin rather than /sbin.
+Setting --exec-prefix or --prefix in EXTRA_OECONF does not work.
+
+Update do_install_append() to NOT remove /usr/bin /usr/sbin if usrmerge
+is set in DISTRO_FEATURES
+
+Signed-off-by: Geoff Parker <geoffrey.parker@arthrex.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit a9e17243875b82dba698924cf2f1d31408127521)
+(cherry picked from commit 3c1e72d62ccf2c2f94bf280a2500e23fdb01a57c)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../recipes-support/cifs/cifs-utils_6.13.bb     | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-index 5b27601c04..68d83eb008 100644
---- a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-+++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-@@ -138,3 +138,5 @@ pkg_postinst_${PN}() {
-         fi
-     fi
- }
+diff --git a/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb b/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb
+index 41a9b8e76a..bf8b18043a 100644
+--- a/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb
++++ b/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb
+@@ -22,10 +22,21 @@ PACKAGECONFIG[pam] = "--enable-pam --with-pamdir=${base_libdir}/security,--disab
+ 
+ inherit autotools pkgconfig
+ 
++do_configure_prepend() {
++    # want installed to /usr/sbin rather than /sbin to be DISTRO_FEATURES usrmerge compliant
++    # must override ROOTSBINDIR (default '/sbin'),
++    # setting --exec-prefix or --prefix in EXTRA_OECONF does not work
++    if ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','true','fakse',d)}; then
++        export ROOTSBINDIR=${sbindir}
++    fi
++}
 +
-+CLEANBROKEN = "1"
+ do_install_append() {
+-    # Remove empty /usr/bin and /usr/sbin directories since the mount helper
+-    # is installed to /sbin
+-    rmdir --ignore-fail-on-non-empty ${D}${bindir} ${D}${sbindir}
++    if ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','false','true',d)}; then
++        # Remove empty /usr/bin and /usr/sbin directories since the mount helper
++        # is installed to /sbin
++        rmdir --ignore-fail-on-non-empty ${D}${bindir} ${D}${sbindir}
++    fi
+ }
+ 
+ FILES_${PN} += "${base_libdir}/security"
 -- 
 2.17.1
 
