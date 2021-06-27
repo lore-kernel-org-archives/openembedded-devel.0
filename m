@@ -1,110 +1,134 @@
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web09.4840.1624799276830491487
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.web09.2630.1624825339627586169
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Jun 2021 06:07:56 -0700
+ Sun, 27 Jun 2021 13:22:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=E/TKa5lK;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id y4so11698461pfi.9
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Jun 2021 06:07:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=osrGlyRX;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id bb10-20020a17090b008ab029016eef083425so11391265pjb.5
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Jun 2021 13:22:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=9ErVcDkiGJpkbU4lz+id/Y4nyq0ByYDH5C9Rr3zTcJQ=;
-        b=E/TKa5lKGvQLDe2X9EqqR15Qe7hm8z0MN9cY6BOUropL1/GkUzZTPbRbtiytBp0I5c
-         NQ4ITc7tou07YvoXE+J2W2zBUhBgRtHdfL7g0CJsBb/u/YbySfxrj+fYhopVo0oXjdD5
-         ZA24qbpPV4TxB43DUFPWe06eg7Cp6AlYhW/nsIiE0A8NtSbMbhSU90B8qohG1PDhvNGv
-         6w6HAlqbir92BMXR1prPSjh/J8/z0mKY8UaqZqfS2AWpd2GYwwx5Wrkw/wq4oCZ6G2n0
-         JSxf/W4FUxmdu+wkUqYdisCSLxdbwOOva+n3g0xENUw8+JVRdpyM6XDnXt2ywkVJd5Cp
-         4cxw==
+        h=from:to:subject:date:message-id;
+        bh=4GvMFt+XQoFrGwaerT4AJNF64CFxrZ5dDqeg67GV8f8=;
+        b=osrGlyRXZwYuhj4pWfFUTwfsEaN4t7cOkepIP9wcWnfdvSr4kUngLGe26GnPmfptyF
+         Ml2e6/ynPsNkGlnY6O8V6YCT76CulWDjXVJqBC2C+fF7oJhxvJU+qCqzb7RWIvrHGY/r
+         mdtnPyUKf2x7AO3ykVo7C+9ddhjwDhCDzaDbROkymfHT59OM2ZwPlopVNxcxuObSmSg5
+         Ms7kya/Tl418UPsdSSk7OBO3Yfkfw/HhrbKVDddbW9Os+o7/0XirxBb0Bdy9mWMccBnz
+         CfmnlIP7Xw8+kfeGymQEcg6t5jDH0LSDKNMs3Lb/ZnvcMVLucDXfgwF7g8/sA/7/cTzq
+         8u3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=9ErVcDkiGJpkbU4lz+id/Y4nyq0ByYDH5C9Rr3zTcJQ=;
-        b=sptfI71yVgoZiYixPgKLm8AImfNUTEAyNRQSohsdjTsd6drPqlVzRU+9WVkJXwcqqO
-         1v+kl4Q34Ke4gJRqfsXV7fO0b9qpz2h5KOMq/swXY9mtn6jHDCKkIsWrrr2t2sYK+9qQ
-         2fm1FQj7TkHUZD954TRCYNMCZbCULZuhcZO8nngX7idTARXfC7xu5IUiT0LvycfEEnCM
-         QWxPDe+ybgNfItK9n4bvNbs21AQmTPHheD+XUeIb3iPu2te/MLA9TMFQdouclo+PuZWC
-         vPJHgSTAuN6lKu2/KNvh2vXnmGdZwxmZWb3apASCDhupi1qbxsRFgnKQ4UZrf7NWzJsg
-         aasg==
-X-Gm-Message-State: AOAM533KUBPwQKDWPyLcxUHJptpmeTgMcOukJYm5hJ5KDeCpeCDhJ6VQ
-	R3F2azlZzoLKgznZfS8KFHA=
-X-Google-Smtp-Source: ABdhPJyod0P/2Pvx9GQ49FG3I82tEsRKwzAgqHKMRp0zaqi4r/bqHLEe08hSjVbatpK3K2WP+R3dlw==
-X-Received: by 2002:a63:6e87:: with SMTP id j129mr18795098pgc.45.1624799276354;
-        Sun, 27 Jun 2021 06:07:56 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id;
+        bh=4GvMFt+XQoFrGwaerT4AJNF64CFxrZ5dDqeg67GV8f8=;
+        b=GDJzEHTVlkGeBbsVuWgdz9Z+7RJFWsLAaNNRc6JvxQQhleCGAJb5kgH/Pt8g8cijSL
+         uqkCOAHPO33NmIwnY7en136khFJNjazjEwXOLo8hVQ8MVgjrP9sADmub1K8BOPsw94hd
+         w6L0bC8T0kNPxUvo6x88krkPwCzmFAMHb4c5hJkBesGre8U8O5/C9EZVhtmK7Khl1D5L
+         KuF6I8MkR4flsh8kqp+QNAh2vwBGJ7jJF/JhUkkb/wb8vmOUdMiQkpuOVEsy6hjKHCd3
+         PiH5R1QCm7gZ0JVMsRRUgCZwafk577W+9cngVDSJrcRGUC99/rb/86EOjILbod3LVAcF
+         mDcg==
+X-Gm-Message-State: AOAM533JvPnx7/btIn8uSGQnzvU0Or8+k8Aw7WlGYPCVsG3GKi/HPCRB
+	zbVlt4kUpVu7ZEAvN8jw4dHa62Bqq2ifZA==
+X-Google-Smtp-Source: ABdhPJz/9ug53m2ZAGRPvmPvoWXvWgskaURDq2LHGgMizk+alwIF0tzdkxKOE+OTRZjUqpm48SfSHg==
+X-Received: by 2002:a17:90b:14d1:: with SMTP id jz17mr33047139pjb.45.1624825338529;
+        Sun, 27 Jun 2021 13:22:18 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0:9dc2:bdeb:54e8:4df9? ([2601:202:4180:a5c0:9dc2:bdeb:54e8:4df9])
-        by smtp.gmail.com with ESMTPSA id g17sm11469084pgh.61.2021.06.27.06.07.55
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 27 Jun 2021 06:07:55 -0700 (PDT)
-Subject: Re: [oe] [meta-oe][dunfell][PATCH] protobuf: Whitelist CVE-2015-5237
-To: RAHUL taya <rahultaya96@gmail.com>,
- openembedded-devel@lists.openembedded.org, raj.khem@gmail.com
-Cc: nisha.parrakat@kpit.com, purushottam.choudhary@kpit.com
-References: <20210615071950.12684-1-Rahultaya96@gmail.com>
+Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:90a0:cfd2:ffe1:efef])
+        by smtp.gmail.com with ESMTPSA id ay3sm3501192pjb.38.2021.06.27.13.22.17
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 27 Jun 2021 13:22:18 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
-Message-ID: <88c8025b-640c-998b-8f94-ac5624c8bd74@gmail.com>
-Date: Sun, 27 Jun 2021 06:07:54 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
-MIME-Version: 1.0
-In-Reply-To: <20210615071950.12684-1-Rahultaya96@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+To: openembedded-devel@lists.openembedded.org
+Subject: [hardknott 00/20] Patch review; June 27
+Date: Sun, 27 Jun 2021 13:21:55 -0700
+Message-Id: <cover.1624825239.git.akuster808@gmail.com>
+X-Mailer: git-send-email 2.17.1
 
+Please have comments back by wednesday.
 
+The following changes since commit aca88908fd329f5cef6f19995b072397fb2d8ec6:
 
-On 6/15/21 12:19 AM, RAHUL taya wrote:
-> As per below reference links this CVE issue seems to be minor and
-> harmless and as per upstream this is not a real issue in practice.
->
-> And as per red hat this issue is marked as low severity.
->
-> 1. https://bugzilla.suse.com/show_bug.cgi?id=CVE-2015-5237
-> 2. https://security-tracker.debian.org/tracker/CVE-2015-5237
-> 3. https://ubuntu.com/security/CVE-2015-5237
-> 4. https://github.com/protocolbuffers/protobuf/issues/760
-I believe it is  bad form for a upstream project to not fix Security
-issues based on their score. The decision should be left up to the
-consumers of sed repo, layer or Project.
+  thunar: fix CVE-2021-32563 (2021-06-13 12:35:48 -0700)
 
-BTW, the NVD score is 8.8. IMHO, it should be fixed, not masked out.  If
-you want to evaluate it yourself and decide to excluded this issue from
-you project or product, you are able to do so in your own layer.
+are available in the Git repository at:
 
-- armin
+  git://git.openembedded.org/meta-openembedded-contrib stable/hardknott-nut
+  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/hardknott-nut
 
+Andrea Adami (3):
+  initramfs-kexecboot-image: support cases where machines override
+    IMAGE_FSTYPES
+  initramfs-debug-image: support cases where machines override
+    IMAGE_FSTYPES
+  rapidjson: remove stale LIB_INSTALL_DIR
 
->
-> As per NVD link: https://nvd.nist.gov/vuln/detail/CVE-2015-5237#range-6634983
-> it affects version upto 3.1(including)
->
-> Signed-off-by: Rahul Taya <Rahultaya96@gmail.com>
-> ---
->  meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb | 8 ++++++++
->  1 file changed, 8 insertions(+)
->
-> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
-> index 4d6c5b255..f845a72a0 100644
-> --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
-> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
-> @@ -88,3 +88,11 @@ LDFLAGS_append_arm = " -latomic"
->  LDFLAGS_append_mips = " -latomic"
->  LDFLAGS_append_powerpc = " -latomic"
->  LDFLAGS_append_mipsel = " -latomic"
-> +
-> +# As per below links this issue is minor and harmless and
-> +# as per upstream this is not a real issue in practice.
-> +# https://bugzilla.suse.com/show_bug.cgi?id=CVE-2015-5237
-> +# https://security-tracker.debian.org/tracker/CVE-2015-5237
-> +# https://ubuntu.com/security/CVE-2015-5237
-> +# https://github.com/protocolbuffers/protobuf/issues/760
-> +CVE_CHECK_WHITELIST += "CVE-2015-5237"
->
-> 
->
+Chen Qi (1):
+  minifi-cpp: set CLEANBROKEN to 1
+
+Geoff Parker (1):
+  cifs-utils: set ROOTSBINDIR to /usr/sbin if DISTRO_FEATURES has
+    usrmerge
+
+Leon Anavi (1):
+  python3-django: Upgrade 3.2.3 -> 3.2.4
+
+Olivier Georget (1):
+  libpfm4 4.10.1 : enable arm64 host platform
+
+Ovidiu Panait (1):
+  libeigen: update LICENSE information
+
+Peter Kjellerstedt (2):
+  net-snmp: A little clean up
+  net-snmp: Support building for native
+
+Sekine Shigeki (2):
+  add CVE-2011-2411 to allowlist
+  ntp: add CVE-2016-9312 to allowlist
+
+Trevor Gamblin (3):
+  python3-django: upgrade 2.2.22 -> 2.2.23
+  python3-django: upgrade 3.2.2 -> 3.2.3
+  python3-django: upgrade 2.2.23 -> 2.2.24
+
+Yi Zhao (1):
+  minifi-cpp: set correct python processor directory in configure file
+
+ito-yuichi@fujitsu.com (2):
+  cyrus-sasl: add CVE-2020-8032 to allowlist
+  dovecot: add CVE-2016-4983 to allowlist
+
+zangrc (1):
+  wireshark: upgrade 3.4.5 -> 3.4.6
+
+zhengruoqin (1):
+  net-snmp: upgrade 5.9 -> 5.9.1
+
+ .../images/initramfs-debug-image.bb           |  7 ++-
+ .../images/initramfs-kexecboot-image.bb       |  8 ++-
+ .../samba/samba_4.10.18.bb                    |  4 ++
+ .../cyrus-sasl/cyrus-sasl_2.1.27.bb           |  3 ++
+ ....7.2-fix-engineBoots-value-on-SIGHUP.patch | 19 ++++---
+ .../{net-snmp_5.9.bb => net-snmp_5.9.1.bb}    | 53 ++++++++++---------
+ .../recipes-support/cifs/cifs-utils_6.13.bb   | 17 ++++--
+ .../recipes-support/dovecot/dovecot_2.3.14.bb |  3 ++
+ .../recipes-support/ntp/ntp_4.2.8p15.bb       |  3 ++
+ ...{wireshark_3.4.5.bb => wireshark_3.4.6.bb} |  2 +-
+ meta-oe/licenses/MINPACK                      | 51 ++++++++++++++++++
+ .../rapidjson/rapidjson_git.bb                |  2 +-
+ .../minifi-cpp/minifi-cpp_0.7.0.bb            |  5 ++
+ .../recipes-kernel/libpfm/libpfm4_4.10.1.bb   |  3 +-
+ .../libeigen/libeigen_3.3.7.bb                |  9 +++-
+ ...ngo_2.2.22.bb => python3-django_2.2.24.bb} |  4 +-
+ ...jango_3.2.2.bb => python3-django_3.2.4.bb} |  2 +-
+ 17 files changed, 149 insertions(+), 46 deletions(-)
+ rename meta-networking/recipes-protocols/net-snmp/{net-snmp_5.9.bb => net-snmp_5.9.1.bb} (89%)
+ rename meta-networking/recipes-support/wireshark/{wireshark_3.4.5.bb => wireshark_3.4.6.bb} (97%)
+ create mode 100644 meta-oe/licenses/MINPACK
+ rename meta-python/recipes-devtools/python/{python3-django_2.2.22.bb => python3-django_2.2.24.bb} (41%)
+ rename meta-python/recipes-devtools/python/{python3-django_3.2.2.bb => python3-django_3.2.4.bb} (77%)
+
+-- 
+2.17.1
 
