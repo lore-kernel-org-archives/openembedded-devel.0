@@ -1,134 +1,87 @@
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.web09.2630.1624825339627586169
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.web10.2636.1624825339828659918
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 27 Jun 2021 13:22:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=osrGlyRX;
- spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f49.google.com with SMTP id bb10-20020a17090b008ab029016eef083425so11391265pjb.5
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=si11C7oH;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id g4so8746933pjk.0
         for <openembedded-devel@lists.openembedded.org>; Sun, 27 Jun 2021 13:22:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id;
-        bh=4GvMFt+XQoFrGwaerT4AJNF64CFxrZ5dDqeg67GV8f8=;
-        b=osrGlyRXZwYuhj4pWfFUTwfsEaN4t7cOkepIP9wcWnfdvSr4kUngLGe26GnPmfptyF
-         Ml2e6/ynPsNkGlnY6O8V6YCT76CulWDjXVJqBC2C+fF7oJhxvJU+qCqzb7RWIvrHGY/r
-         mdtnPyUKf2x7AO3ykVo7C+9ddhjwDhCDzaDbROkymfHT59OM2ZwPlopVNxcxuObSmSg5
-         Ms7kya/Tl418UPsdSSk7OBO3Yfkfw/HhrbKVDddbW9Os+o7/0XirxBb0Bdy9mWMccBnz
-         CfmnlIP7Xw8+kfeGymQEcg6t5jDH0LSDKNMs3Lb/ZnvcMVLucDXfgwF7g8/sA/7/cTzq
-         8u3g==
+        h=from:to:subject:date:message-id:in-reply-to:references;
+        bh=cqLGrySs8XtJcCRRMFuFxnKHeSqcdNoexLXLaECkstM=;
+        b=si11C7oHZBc27g07s+gojnRkfQ2NTfCnlrb6Axi5xdzs9SFvILkTUSqM8Jj9spPB5v
+         8dl+YZdXPFC/VT33kn3/2Bz/qoaUQlvtli1vTKOpftuePYT9WABEnA1hpZ4FGQlXITpM
+         Q8UaJbCdjLOhx4YVELZ7xTgQtozgNK0eUk7/eDxBKAIHWj2RyweTjj+26N3CQeZx+5kP
+         9rCqW5gEAjtp5vi4cV6SvjP7vqhmOU8QApWXcywCJVSmW22dnFxTrZ/NuQY4FMlt34zN
+         yNreWiT6bPZscCAzlKpxSfZB1FfDWObGcyAEqexTbgCbeKEYuDtI+209lCozxFF0mS5A
+         lBlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id;
-        bh=4GvMFt+XQoFrGwaerT4AJNF64CFxrZ5dDqeg67GV8f8=;
-        b=GDJzEHTVlkGeBbsVuWgdz9Z+7RJFWsLAaNNRc6JvxQQhleCGAJb5kgH/Pt8g8cijSL
-         uqkCOAHPO33NmIwnY7en136khFJNjazjEwXOLo8hVQ8MVgjrP9sADmub1K8BOPsw94hd
-         w6L0bC8T0kNPxUvo6x88krkPwCzmFAMHb4c5hJkBesGre8U8O5/C9EZVhtmK7Khl1D5L
-         KuF6I8MkR4flsh8kqp+QNAh2vwBGJ7jJF/JhUkkb/wb8vmOUdMiQkpuOVEsy6hjKHCd3
-         PiH5R1QCm7gZ0JVMsRRUgCZwafk577W+9cngVDSJrcRGUC99/rb/86EOjILbod3LVAcF
-         mDcg==
-X-Gm-Message-State: AOAM533JvPnx7/btIn8uSGQnzvU0Or8+k8Aw7WlGYPCVsG3GKi/HPCRB
-	zbVlt4kUpVu7ZEAvN8jw4dHa62Bqq2ifZA==
-X-Google-Smtp-Source: ABdhPJz/9ug53m2ZAGRPvmPvoWXvWgskaURDq2LHGgMizk+alwIF0tzdkxKOE+OTRZjUqpm48SfSHg==
-X-Received: by 2002:a17:90b:14d1:: with SMTP id jz17mr33047139pjb.45.1624825338529;
-        Sun, 27 Jun 2021 13:22:18 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+         :references;
+        bh=cqLGrySs8XtJcCRRMFuFxnKHeSqcdNoexLXLaECkstM=;
+        b=IrLqNLoyW8Vtk/jQp0dlWePcKE8gTgCpkZ9DPwPow9NNaAKS+xRlQzPdLl6dcXcAb5
+         42kaPZ4ebi9ACx0Wb4BJ2vFOAbikq14yhWod/RMJsHQIbhiRfdl2muM9G6cmC4CLeX9c
+         4hUBcdqMqa98rG4+Lsalwi7UxwX4bkKJcEUinuN9TrTOefoQlfGBfTC3+HfFPR/mH0nB
+         XSfEh6TgiQN0w1KlNkMCYWszW3iUYUpKQo+PE7SNb2+39Ml6Jxf+5CFhxV5opiWJ/5gM
+         qU9Q21jpEoT24y8BUTft9Xf/UYEV+LGyUBD3WsFnMpgqbUKqEhwH0f0zynOYCPNxM1yk
+         c2Cw==
+X-Gm-Message-State: AOAM532Ta/PPJBy//QsdQBryy5u3mcwiwV2T7ypZHUAemveV5XudndTg
+	vVXwIvoBHlPuz06FULIo/i1vwkrb1qOsAg==
+X-Google-Smtp-Source: ABdhPJzFV7HwiFS+yiQifWG2q9IIOQh5B3AKrZIapBeIBJTrJ8SVcMw+oI0oh8eAP3Pgwr3rKcJm5g==
+X-Received: by 2002:a17:90a:c911:: with SMTP id v17mr14031639pjt.26.1624825339309;
+        Sun, 27 Jun 2021 13:22:19 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:90a0:cfd2:ffe1:efef])
-        by smtp.gmail.com with ESMTPSA id ay3sm3501192pjb.38.2021.06.27.13.22.17
+        by smtp.gmail.com with ESMTPSA id ay3sm3501192pjb.38.2021.06.27.13.22.18
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sun, 27 Jun 2021 13:22:18 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 00/20] Patch review; June 27
-Date: Sun, 27 Jun 2021 13:21:55 -0700
-Message-Id: <cover.1624825239.git.akuster808@gmail.com>
+Subject: [hardknott 01/20] libpfm4 4.10.1 : enable arm64 host platform
+Date: Sun, 27 Jun 2021 13:21:56 -0700
+Message-Id: <4516ddc0a21539ad6afc9c1c6b63b7a24f71ddd9.1624825239.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1624825239.git.akuster808@gmail.com>
+References: <cover.1624825239.git.akuster808@gmail.com>
 
-Please have comments back by wednesday.
+From: Olivier Georget <ogeorget@prophesee.ai>
 
-The following changes since commit aca88908fd329f5cef6f19995b072397fb2d8ec6:
+libpfm4 is only enabled for powerpc arch as of now.
+This enables the lib on Arm 64bit platform as well.
 
-  thunar: fix CVE-2021-32563 (2021-06-13 12:35:48 -0700)
+Signed-off-by: Olivier Georget <olivier.georget@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit d02bd486736ba7cc552312849cea4fa33b1e1259)
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-oe/recipes-kernel/libpfm/libpfm4_4.10.1.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-are available in the Git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib stable/hardknott-nut
-  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/hardknott-nut
-
-Andrea Adami (3):
-  initramfs-kexecboot-image: support cases where machines override
-    IMAGE_FSTYPES
-  initramfs-debug-image: support cases where machines override
-    IMAGE_FSTYPES
-  rapidjson: remove stale LIB_INSTALL_DIR
-
-Chen Qi (1):
-  minifi-cpp: set CLEANBROKEN to 1
-
-Geoff Parker (1):
-  cifs-utils: set ROOTSBINDIR to /usr/sbin if DISTRO_FEATURES has
-    usrmerge
-
-Leon Anavi (1):
-  python3-django: Upgrade 3.2.3 -> 3.2.4
-
-Olivier Georget (1):
-  libpfm4 4.10.1 : enable arm64 host platform
-
-Ovidiu Panait (1):
-  libeigen: update LICENSE information
-
-Peter Kjellerstedt (2):
-  net-snmp: A little clean up
-  net-snmp: Support building for native
-
-Sekine Shigeki (2):
-  add CVE-2011-2411 to allowlist
-  ntp: add CVE-2016-9312 to allowlist
-
-Trevor Gamblin (3):
-  python3-django: upgrade 2.2.22 -> 2.2.23
-  python3-django: upgrade 3.2.2 -> 3.2.3
-  python3-django: upgrade 2.2.23 -> 2.2.24
-
-Yi Zhao (1):
-  minifi-cpp: set correct python processor directory in configure file
-
-ito-yuichi@fujitsu.com (2):
-  cyrus-sasl: add CVE-2020-8032 to allowlist
-  dovecot: add CVE-2016-4983 to allowlist
-
-zangrc (1):
-  wireshark: upgrade 3.4.5 -> 3.4.6
-
-zhengruoqin (1):
-  net-snmp: upgrade 5.9 -> 5.9.1
-
- .../images/initramfs-debug-image.bb           |  7 ++-
- .../images/initramfs-kexecboot-image.bb       |  8 ++-
- .../samba/samba_4.10.18.bb                    |  4 ++
- .../cyrus-sasl/cyrus-sasl_2.1.27.bb           |  3 ++
- ....7.2-fix-engineBoots-value-on-SIGHUP.patch | 19 ++++---
- .../{net-snmp_5.9.bb => net-snmp_5.9.1.bb}    | 53 ++++++++++---------
- .../recipes-support/cifs/cifs-utils_6.13.bb   | 17 ++++--
- .../recipes-support/dovecot/dovecot_2.3.14.bb |  3 ++
- .../recipes-support/ntp/ntp_4.2.8p15.bb       |  3 ++
- ...{wireshark_3.4.5.bb => wireshark_3.4.6.bb} |  2 +-
- meta-oe/licenses/MINPACK                      | 51 ++++++++++++++++++
- .../rapidjson/rapidjson_git.bb                |  2 +-
- .../minifi-cpp/minifi-cpp_0.7.0.bb            |  5 ++
- .../recipes-kernel/libpfm/libpfm4_4.10.1.bb   |  3 +-
- .../libeigen/libeigen_3.3.7.bb                |  9 +++-
- ...ngo_2.2.22.bb => python3-django_2.2.24.bb} |  4 +-
- ...jango_3.2.2.bb => python3-django_3.2.4.bb} |  2 +-
- 17 files changed, 149 insertions(+), 46 deletions(-)
- rename meta-networking/recipes-protocols/net-snmp/{net-snmp_5.9.bb => net-snmp_5.9.1.bb} (89%)
- rename meta-networking/recipes-support/wireshark/{wireshark_3.4.5.bb => wireshark_3.4.6.bb} (97%)
- create mode 100644 meta-oe/licenses/MINPACK
- rename meta-python/recipes-devtools/python/{python3-django_2.2.22.bb => python3-django_2.2.24.bb} (41%)
- rename meta-python/recipes-devtools/python/{python3-django_3.2.2.bb => python3-django_3.2.4.bb} (77%)
-
+diff --git a/meta-oe/recipes-kernel/libpfm/libpfm4_4.10.1.bb b/meta-oe/recipes-kernel/libpfm/libpfm4_4.10.1.bb
+index ff56d48043..6da0f5d9a0 100644
+--- a/meta-oe/recipes-kernel/libpfm/libpfm4_4.10.1.bb
++++ b/meta-oe/recipes-kernel/libpfm/libpfm4_4.10.1.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0de488f3bd4424e308e2e399cb99c788"
+ 
+ SECTION = "devel"
+ 
+-COMPATIBLE_HOST = "powerpc64"
++COMPATIBLE_HOST = "powerpc64|aarch64"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/perfmon2/${BPN}/libpfm-${PV}.tar.gz \
+            file://0001-Include-poll.h-instead-of-sys-poll.h.patch \
+@@ -24,6 +24,7 @@ EXTRA_OEMAKE = "DESTDIR=\"${D}\" PREFIX=\"${prefix}\" LIBDIR=\"${libdir}\" LDCON
+ EXTRA_OEMAKE_append_powerpc = " ARCH=\"powerpc\""
+ EXTRA_OEMAKE_append_powerpc64 = " ARCH=\"powerpc\" BITMODE=\"64\""
+ EXTRA_OEMAKE_append_powerpc64le = " ARCH=\"powerpc\" BITMODE=\"64\""
++EXTRA_OEMAKE_append_aarch64 = " ARCH=\"arm64\""
+ 
+ S = "${WORKDIR}/libpfm-${PV}"
+ 
 -- 
 2.17.1
 
