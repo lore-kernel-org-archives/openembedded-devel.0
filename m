@@ -1,117 +1,77 @@
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web11.2666.1624825350242790960
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+ by mx.groups.io with SMTP id smtpd.web11.2667.1624825351061207774
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Jun 2021 13:22:30 -0700
+ Sun, 27 Jun 2021 13:22:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=mdAp16Yq;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id c5so12296297pfv.8
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Jun 2021 13:22:30 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=oBslmS+0;
+ spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f175.google.com with SMTP id e20so13519841pgg.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Jun 2021 13:22:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=8bSxafEw0kp6bz7jchcai+JQIJsUVzdagUcn4Ah3xCw=;
-        b=mdAp16YqY2pKXm+PEsMVZav3KmBN2YcMGDU1P0al+1/BtMpgykfD24r5xYDMCOIEfD
-         vv75t3AbW7xU2J/nmzr1LO8rO4VC571BeN2aSK6tJTsNvV+JuPV08KL1219J/ZTjxgMq
-         dTNan27tWVvYWtdzd8GdviFYL8I1QlXLmXYOeZk/d/kqnEggR76nnANXR10wYq3oOxPr
-         75diTVgbxstsNN859LVQduHgFeexHUNwRm0jhY8sNRfQhId96fFynsWGNx6zrYPvIULr
-         DShJM+h4i4+J/DyLAptTPO8xd1nzbOPvgT8ai6ghbapUafFZdoJZ+C3GC+EeRe3aV5ZU
-         74Pg==
+        bh=XfgLc5TSaa8L/U9sv+lvJAncjq/H85WB9L9VaMri510=;
+        b=oBslmS+0WsqwjRdSSwlABU5Hr4+qcKw6MNxCYLGy8P/wkCV3XumKrGyuy4lAL5QeJO
+         P0GxmGur3CYbjNK2pihBPfCAPEUxVY9rHZ2DKYI23y7gdXtMw5H6oqFakwztmpoHHC2g
+         hsLY/T2jLZHxpJGWAkpd/O/AvcdcNa0YOWbHmoheixBheVe2OTQnNqNDAol1OytDoTCi
+         SSHno1wuJf44geSMIgevL2w4rHJLstBBsTmssvmQ67rKeruidcUUPxEoYKAN560hsym6
+         wNVFd8Rx0L9QqVb5LX6S8GZPceXP+avtBzOwtn16YdxG8M+DEPsdEUzo5OM55atp8u2U
+         Snow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references;
-        bh=8bSxafEw0kp6bz7jchcai+JQIJsUVzdagUcn4Ah3xCw=;
-        b=PFkFtSTM7MCgEdrEh0IXSzJLd1Sl2YauN8VaTiXBX/RyFKaExGqKmqIBYEU0w5veKy
-         Ht4QLRWokAwr6FG3AH43kXY8K2zV7EE7PpF3JCnvmXppr2BwiZ3K2ksY8lZ5Zv1E0Fzx
-         96EA6bxSgaSt0zqVv+7l1vUYkTP17ALR3lNNEe+6X081o8Ymsevw9DWzR9bR1SToXCnb
-         UmVSSpj+paUwMJUi2Eb2GTK+Ry5aU2aqmZlnMBk7RdlgK4U8OAKh9XvfQJfMrd9LcII+
-         EBltciVUqKGwloNJYBCWgn/ttGjg3EZKKCoOYQKz3TC9FfcNkn/zQu3Z5rH9SWtEg0lP
-         Rjjw==
-X-Gm-Message-State: AOAM530e5WrosqgUwae0Xj7xTqOIowQWtNajzw7WMh5t9Qm5ZtU0zTgP
-	kJEr4Yb1h/c1A1rROXGEqwi8NklehXsH/Q==
-X-Google-Smtp-Source: ABdhPJwnItnuKflW7wDhwyVRlL0sXciOvcuhWzVK3hR7kPNiH/28nErB4Mw3o8NjAKxFCJWtyjufzQ==
-X-Received: by 2002:a63:5153:: with SMTP id r19mr20125838pgl.56.1624825349685;
-        Sun, 27 Jun 2021 13:22:29 -0700 (PDT)
+        bh=XfgLc5TSaa8L/U9sv+lvJAncjq/H85WB9L9VaMri510=;
+        b=N5oeqLo8uUrtLHgtAX8e9dx9RQKEg7uQE11fKpcGSOmVAFgAnTeF4MUITBkFOMaGmM
+         R7UZ5qd8g1+MlUrWjBtg2I+4fYfbm6uKR+63jA3ClhFC8WeeXMrk7HnNStT5IND3opJc
+         eWiWrMCtVqMq2kPgYoBQcphrMr7xk51LG1eKszb0OjHGSDXrOzeAm8DfWbWVCLiKgdbt
+         Ii31kI6UAC/Ub7r4UEuoF0drMClZQX0QbSgQDUfAdrjhQ31H8wW+wbSfY0y/48MSZbmX
+         Y+okzNnU/ipdRRb0XYSuKWrBgW5BL/JoHpOdUfK7QUX5nRdkGlwwINJdHwuBiCF8rKew
+         l5Fw==
+X-Gm-Message-State: AOAM531q3NhnbSl+Au89Q2v9hLOZ+wb4Go7Bl0VQVYWqmsIGuiPXTdtq
+	A1sEHrp2tZmQ6x5h9dACyKZG7tu3u57oqg==
+X-Google-Smtp-Source: ABdhPJxba1bQ4l6Ol2zs3Mqnuf6PDEmlRSkcRer0Ks5AMgnOMdjvYK3YIA4C9RbVuNf1vzLeycpIHg==
+X-Received: by 2002:a65:5603:: with SMTP id l3mr1625283pgs.7.1624825350514;
+        Sun, 27 Jun 2021 13:22:30 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:90a0:cfd2:ffe1:efef])
-        by smtp.gmail.com with ESMTPSA id ay3sm3501192pjb.38.2021.06.27.13.22.28
+        by smtp.gmail.com with ESMTPSA id ay3sm3501192pjb.38.2021.06.27.13.22.29
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Jun 2021 13:22:29 -0700 (PDT)
+        Sun, 27 Jun 2021 13:22:30 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 12/20] net-snmp: Support building for native
-Date: Sun, 27 Jun 2021 13:22:07 -0700
-Message-Id: <b6e76a4a380f2a60d99bc36634cd8823107f5493.1624825239.git.akuster808@gmail.com>
+Subject: [hardknott 13/20] dovecot: add CVE-2016-4983 to allowlist
+Date: Sun, 27 Jun 2021 13:22:08 -0700
+Message-Id: <d1fb027f894921ea02c984eb581ee1500c613470.1624825239.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1624825239.git.akuster808@gmail.com>
 References: <cover.1624825239.git.akuster808@gmail.com>
 
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+From: "ito-yuichi@fujitsu.com" <ito-yuichi@fujitsu.com>
 
-Due to the sed commands in do_install_append() that removed
-${STAGING_DIR_HOST} and it being empty when building for native, it was
-impossible to add support for building this as native using a bbappend.
+CVE-2016-4983 affects only postinstall script on specific distribution, so add it to allowlist.
 
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Signed-off-by: Yuichi Ito <ito-yuichi@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 74d58bc6e8f53bff15d2c06865591c325ebb6a7f)
+(cherry picked from commit 3613b50a84559ce771866cd1eef1141fa3e6d238)
+[mkcert.sh does mask 077 first]
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../net-snmp/net-snmp_5.9.1.bb                 | 18 +++++++++++++-----
- 1 file changed, 13 insertions(+), 5 deletions(-)
+ meta-networking/recipes-support/dovecot/dovecot_2.3.14.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb
-index 46aba3b81a..7c3d5babd8 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb
-@@ -5,7 +5,8 @@ LICENSE = "BSD & MIT"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=9d100a395a38584f2ec18a8275261687"
- 
--DEPENDS = "openssl pciutils"
-+DEPENDS = "openssl"
-+DEPENDS_append_class-target = " pciutils"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
-            file://init \
-@@ -72,8 +73,10 @@ CACHED_CONFIGUREVARS = " \
-     ac_cv_file__etc_printcap=no \
-     NETSNMP_CONFIGURE_OPTIONS= \
- "
--export PERLPROG="${bindir}/env perl"
-+PERLPROG = "${bindir}/env perl"
-+PERLPROG_class-native = "${bindir_native}/env perl"
- PERLPROG_append = "${@bb.utils.contains('PACKAGECONFIG', 'perl', ' -I${WORKDIR}', '', d)}"
-+export PERLPROG
- 
- HAS_PERL = "${@bb.utils.contains('PACKAGECONFIG', 'perl', '1', '0', d)}"
- 
-@@ -126,11 +129,14 @@ do_install_append() {
-         -e 's@[^ ]*--with-install-prefix=[^ "]*@@g' \
-         -e 's@[^ ]*PKG_CONFIG_PATH=[^ "]*@@g' \
-         -e 's@[^ ]*PKG_CONFIG_LIBDIR=[^ "]*@@g' \
--        -e 's@${STAGING_DIR_HOST}@@g' \
-         -i ${D}${bindir}/net-snmp-config
- 
--    sed -e 's@${STAGING_DIR_HOST}@@g' \
--        -i ${D}${libdir}/pkgconfig/netsnmp*.pc
-+    # ${STAGING_DIR_HOST} is empty for native builds, and the sed command below
-+    # will result in errors if run for native.
-+    if [ "${STAGING_DIR_HOST}" ]; then
-+        sed -e 's@${STAGING_DIR_HOST}@@g' \
-+            -i ${D}${bindir}/net-snmp-config ${D}${libdir}/pkgconfig/netsnmp*.pc
-+    fi
- 
-     sed -e "s@^NSC_INCLUDEDIR=.*@NSC_INCLUDEDIR=\$\{includedir\}@g" \
-         -e "s@^NSC_LIBDIR=-L.*@NSC_LIBDIR=-L\$\{libdir\}@g" \
-@@ -270,3 +276,5 @@ RCONFLICTS_${PN}-server-snmptrapd += "${PN}-server-snmptrapd-systemd"
- LEAD_SONAME = "libnetsnmp.so"
- 
- MULTILIB_SCRIPTS = "${PN}-dev:${bindir}/net-snmp-config"
+diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.3.14.bb b/meta-networking/recipes-support/dovecot/dovecot_2.3.14.bb
+index c0f2863dbf..f767eb8430 100644
+--- a/meta-networking/recipes-support/dovecot/dovecot_2.3.14.bb
++++ b/meta-networking/recipes-support/dovecot/dovecot_2.3.14.bb
+@@ -71,3 +71,6 @@ FILES_${PN} += "${libdir}/dovecot/*plugin.so \
+ FILES_${PN}-staticdev += "${libdir}/dovecot/*/*.a"
+ FILES_${PN}-dev += "${libdir}/dovecot/libdovecot*.so"
+ FILES_${PN}-dbg += "${libdir}/dovecot/*/.debug"
 +
-+BBCLASSEXTEND = "native"
++# CVE-2016-4983 affects only postinstall script on specific distribution
++CVE_CHECK_WHITELIST += "CVE-2016-4983"
 -- 
 2.17.1
 
