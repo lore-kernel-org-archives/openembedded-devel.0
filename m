@@ -1,75 +1,110 @@
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.web12.7398.1624718386746624553
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web09.4840.1624799276830491487
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 26 Jun 2021 07:39:47 -0700
+ Sun, 27 Jun 2021 06:07:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=em5VHQBX;
- spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: texier.pj2@gmail.com)
-Received: by mail-wr1-f50.google.com with SMTP id l12so13355649wrt.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Jun 2021 07:39:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=E/TKa5lK;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id y4so11698461pfi.9
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Jun 2021 06:07:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=fVG+bFnCtJbPuRaHUrzsySPYx4wxJx4pmgsKBnoOzrs=;
-        b=em5VHQBXwrI+ck21pGzwxP2m0PVDP+AVZdXiLPW+caMyMXqTwt+lPwkJYMsqcUxXaI
-         mWFBxhKMfUXy4P8wJRvNc5PMNc8gvELCZR0ubftob4BVTj9m201Q8+jayLX71a7Gbph/
-         2em9wqLu3wv5ylSZ2zisVnd3bVJ4/7CmczT1vUezuGUZZsLrgowGqB2q+WIqRQ8oZJnD
-         bqz5Ymw8/BkH6PTLkLeb0ZI3lpE+/bGWgtVTnWlgsOd8DtJKYDns+/mc9JjD2fP0sID5
-         wN5CMTFyODqij+Gfndxg8CW7AfvnjeaufUZ+3HI4zD4Iclh+iyWIyHoHPqwDZ9aQOvUL
-         EPYA==
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=9ErVcDkiGJpkbU4lz+id/Y4nyq0ByYDH5C9Rr3zTcJQ=;
+        b=E/TKa5lKGvQLDe2X9EqqR15Qe7hm8z0MN9cY6BOUropL1/GkUzZTPbRbtiytBp0I5c
+         NQ4ITc7tou07YvoXE+J2W2zBUhBgRtHdfL7g0CJsBb/u/YbySfxrj+fYhopVo0oXjdD5
+         ZA24qbpPV4TxB43DUFPWe06eg7Cp6AlYhW/nsIiE0A8NtSbMbhSU90B8qohG1PDhvNGv
+         6w6HAlqbir92BMXR1prPSjh/J8/z0mKY8UaqZqfS2AWpd2GYwwx5Wrkw/wq4oCZ6G2n0
+         JSxf/W4FUxmdu+wkUqYdisCSLxdbwOOva+n3g0xENUw8+JVRdpyM6XDnXt2ywkVJd5Cp
+         4cxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=fVG+bFnCtJbPuRaHUrzsySPYx4wxJx4pmgsKBnoOzrs=;
-        b=m7CD31r6wIhzClhR2FfXCeEhfQ9t28lRA7PjOe2acU/NMWTHhtZrHFiNArWxKppr/a
-         pX6KE5Nljj24dn84WAXvL5kDU5VaV5i5EIPbrzHeMaJomDZ+26fgYm2KMeqEy3tFp+ya
-         VqPewLJ/jnDFkvzzCJ4i4WlB9rGhM1Z3Ee32+FKUKlH6pa5mtnJLCniJEu28A6wzDoyx
-         ML4OI2oohYPU6SUYBufpExDfKDLS1Xn+Md2ltJzp/920TF/jhM3j7fj4BeopLzVwqY7E
-         wGCWHLf7Ylwj/0BPVZu3IPyAub03ZzapDWuCI8DIu3sXwOXG3M8kwFPSyBsFfazRrMsa
-         alsQ==
-X-Gm-Message-State: AOAM531xGhiXCNh0jvkSIOLrt7vXf9NJ1f/EGecSLgIewBDz8Ov1pfFZ
-	ULz8PjEhzZ8YqPeEXCl/0dLawfvyI6eZew==
-X-Google-Smtp-Source: ABdhPJywDxjTevsVgt8babwggT19YXS7MyS/GVoWrelyd1+gARVh/Jum9BUVyH1B1ChLo9S72UbBNg==
-X-Received: by 2002:a5d:65c1:: with SMTP id e1mr18200610wrw.196.1624718384961;
-        Sat, 26 Jun 2021 07:39:44 -0700 (PDT)
-Return-Path: <texier.pj2@gmail.com>
-Received: from menoah.home ([2a01:cb19:190:c500:8e3:52c4:2147:e10d])
-        by smtp.gmail.com with ESMTPSA id x81sm16212879wmg.36.2021.06.26.07.39.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 26 Jun 2021 07:39:44 -0700 (PDT)
-From: "Pierre-Jean Texier" <texier.pj2@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Pierre-Jean Texier <texier.pj2@gmail.com>
-Subject: [meta-oe][PATCH] monit: upgrade 5.27.2 -> 5.28.0
-Date: Sat, 26 Jun 2021 16:39:42 +0200
-Message-Id: <20210626143942.23981-1-texier.pj2@gmail.com>
-X-Mailer: git-send-email 2.17.1
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=9ErVcDkiGJpkbU4lz+id/Y4nyq0ByYDH5C9Rr3zTcJQ=;
+        b=sptfI71yVgoZiYixPgKLm8AImfNUTEAyNRQSohsdjTsd6drPqlVzRU+9WVkJXwcqqO
+         1v+kl4Q34Ke4gJRqfsXV7fO0b9qpz2h5KOMq/swXY9mtn6jHDCKkIsWrrr2t2sYK+9qQ
+         2fm1FQj7TkHUZD954TRCYNMCZbCULZuhcZO8nngX7idTARXfC7xu5IUiT0LvycfEEnCM
+         QWxPDe+ybgNfItK9n4bvNbs21AQmTPHheD+XUeIb3iPu2te/MLA9TMFQdouclo+PuZWC
+         vPJHgSTAuN6lKu2/KNvh2vXnmGdZwxmZWb3apASCDhupi1qbxsRFgnKQ4UZrf7NWzJsg
+         aasg==
+X-Gm-Message-State: AOAM533KUBPwQKDWPyLcxUHJptpmeTgMcOukJYm5hJ5KDeCpeCDhJ6VQ
+	R3F2azlZzoLKgznZfS8KFHA=
+X-Google-Smtp-Source: ABdhPJyod0P/2Pvx9GQ49FG3I82tEsRKwzAgqHKMRp0zaqi4r/bqHLEe08hSjVbatpK3K2WP+R3dlw==
+X-Received: by 2002:a63:6e87:: with SMTP id j129mr18795098pgc.45.1624799276354;
+        Sun, 27 Jun 2021 06:07:56 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:9dc2:bdeb:54e8:4df9? ([2601:202:4180:a5c0:9dc2:bdeb:54e8:4df9])
+        by smtp.gmail.com with ESMTPSA id g17sm11469084pgh.61.2021.06.27.06.07.55
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 27 Jun 2021 06:07:55 -0700 (PDT)
+Subject: Re: [oe] [meta-oe][dunfell][PATCH] protobuf: Whitelist CVE-2015-5237
+To: RAHUL taya <rahultaya96@gmail.com>,
+ openembedded-devel@lists.openembedded.org, raj.khem@gmail.com
+Cc: nisha.parrakat@kpit.com, purushottam.choudhary@kpit.com
+References: <20210615071950.12684-1-Rahultaya96@gmail.com>
+From: "Armin Kuster" <akuster808@gmail.com>
+Message-ID: <88c8025b-640c-998b-8f94-ac5624c8bd74@gmail.com>
+Date: Sun, 27 Jun 2021 06:07:54 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
+MIME-Version: 1.0
+In-Reply-To: <20210615071950.12684-1-Rahultaya96@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-See full changelog: https://mmonit.com/monit/changes/
 
-Signed-off-by: Pierre-Jean Texier <texier.pj2@gmail.com>
----
- .../recipes-support/monit/{monit_5.27.2.bb => monit_5.28.0.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-oe/recipes-support/monit/{monit_5.27.2.bb => monit_5.28.0.bb} (91%)
 
-diff --git a/meta-oe/recipes-support/monit/monit_5.27.2.bb b/meta-oe/recipes-support/monit/monit_5.28.0.bb
-similarity index 91%
-rename from meta-oe/recipes-support/monit/monit_5.27.2.bb
-rename to meta-oe/recipes-support/monit/monit_5.28.0.bb
-index b5e16d0f97..069d9f81ca 100644
---- a/meta-oe/recipes-support/monit/monit_5.27.2.bb
-+++ b/meta-oe/recipes-support/monit/monit_5.28.0.bb
-@@ -15,8 +15,7 @@ SRC_URI = " \
- 	file://monitrc \
- "
- 
--SRC_URI[md5sum] = "13a0804dae18ef08198c3ace72f9dd60"
--SRC_URI[sha256sum] = "d8809c78d5dc1ed7a7ba32a5a55c5114855132cc4da4805f8d3aaf8cf46eaa4c"
-+SRC_URI[sha256sum] = "9fc6287fd9570b25a85c5d5bf988ee8bd4c54d0e9e01ff04cc4b9398a159849c"
- 
- DEPENDS = "zlib bison-native libnsl2 flex-native openssl virtual/crypt"
- 
--- 
-2.17.1
+On 6/15/21 12:19 AM, RAHUL taya wrote:
+> As per below reference links this CVE issue seems to be minor and
+> harmless and as per upstream this is not a real issue in practice.
+>
+> And as per red hat this issue is marked as low severity.
+>
+> 1. https://bugzilla.suse.com/show_bug.cgi?id=CVE-2015-5237
+> 2. https://security-tracker.debian.org/tracker/CVE-2015-5237
+> 3. https://ubuntu.com/security/CVE-2015-5237
+> 4. https://github.com/protocolbuffers/protobuf/issues/760
+I believe it is  bad form for a upstream project to not fix Security
+issues based on their score. The decision should be left up to the
+consumers of sed repo, layer or Project.
+
+BTW, the NVD score is 8.8. IMHO, it should be fixed, not masked out.  If
+you want to evaluate it yourself and decide to excluded this issue from
+you project or product, you are able to do so in your own layer.
+
+- armin
+
+
+>
+> As per NVD link: https://nvd.nist.gov/vuln/detail/CVE-2015-5237#range-6634983
+> it affects version upto 3.1(including)
+>
+> Signed-off-by: Rahul Taya <Rahultaya96@gmail.com>
+> ---
+>  meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>
+> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
+> index 4d6c5b255..f845a72a0 100644
+> --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
+> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
+> @@ -88,3 +88,11 @@ LDFLAGS_append_arm = " -latomic"
+>  LDFLAGS_append_mips = " -latomic"
+>  LDFLAGS_append_powerpc = " -latomic"
+>  LDFLAGS_append_mipsel = " -latomic"
+> +
+> +# As per below links this issue is minor and harmless and
+> +# as per upstream this is not a real issue in practice.
+> +# https://bugzilla.suse.com/show_bug.cgi?id=CVE-2015-5237
+> +# https://security-tracker.debian.org/tracker/CVE-2015-5237
+> +# https://ubuntu.com/security/CVE-2015-5237
+> +# https://github.com/protocolbuffers/protobuf/issues/760
+> +CVE_CHECK_WHITELIST += "CVE-2015-5237"
+>
+> 
+>
 
