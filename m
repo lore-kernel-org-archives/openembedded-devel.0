@@ -1,85 +1,131 @@
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.web12.2670.1624825356800509734
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+ by mx.groups.io with SMTP id smtpd.web08.3900.1624832593993689182
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Jun 2021 13:22:36 -0700
+ Sun, 27 Jun 2021 15:23:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=fbL98Eee;
- spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id h4so13475346pgp.5
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Jun 2021 13:22:36 -0700 (PDT)
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=lp6nC2i5;
+ spf=pass (domain: axis.com, ip: 195.60.68.18, mailfrom: peter.kjellerstedt@axis.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=XkKw9u+fCVXA2NfR8hCncwbYTPDJYTFA14l2fvrKCwA=;
-        b=fbL98EeelXFQ9rl60soCDpBtu/PQAs/5Qa3nh5EiEDw1iur6cQYSavSZcqhPCqto/f
-         si3fXw2tnH/LhVzL9AmVdBh0447nz6OCft74SiqPdpkE7Rxg/KTe/KqOnfsYaT51dO4y
-         ZCRglbokmj4wvaXQMiSPh7giv5kuxxQXWujyXmmDxUMCkYqVUgixi77R9/gBKpAeolYp
-         oHKV5kJhCjMwe2R5xCY5paAjZws3bf+21/5uIMOwmIQwSJtq3j1bbAUcCvkZ0lmRf73D
-         T5V8GnPERdqab4mhFLMixyqLZbvw8b46Vy7ZT88TJyyjsNHZDQEWhCSoYKMpaUF9aF8N
-         Yi+Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references;
-        bh=XkKw9u+fCVXA2NfR8hCncwbYTPDJYTFA14l2fvrKCwA=;
-        b=THPKK82V9dHuJthyky8XSxyxABODMI1kFbs9R35xtTUreqrj5KG5xsAIzoZniolnrU
-         4KpNqESwH89/cUambCnsnJWUd5S68gBRZRWYCsFB7iqTQIj8kLYiHNOlb+xA/KR2Y4BA
-         xGBfpxiF1S2oPWhKGpfr36C4SOsb+s/dCLTmZgjhbErGPfMSqvdV4aG2pwPcFtX1ddc6
-         u+mOdceuWfeVtttUAfb5v3zdi2bP6mhjpTh4nh+y43bqelfQnqvRnDN6YuYxSCqCklVG
-         qDK8E1vMlc+qM3qkBiBpIlJlziNWgfwTHAifZIaBOerYT9+ATtoUx23uKghY4IAxnOWW
-         6t6Q==
-X-Gm-Message-State: AOAM533RmDTaBGZVSHh36bcxJVEZxe3SqAPmQTgW4WzfwkhaO7bjbz31
-	w1CRue16Rc0SIBYeGytVcuCH1U8JD8noEQ==
-X-Google-Smtp-Source: ABdhPJzdrXsIaAblE5XlJMMlYGjYU6Y3lG3YVQI/NY4EkmuPU7gJdkRYbLCESVEMLiGH/1r+yd+xJw==
-X-Received: by 2002:a62:7f58:0:b029:300:9551:8cc0 with SMTP id a85-20020a627f580000b029030095518cc0mr21514715pfd.21.1624825356235;
-        Sun, 27 Jun 2021 13:22:36 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net ([2601:202:4180:a5c0:90a0:cfd2:ffe1:efef])
-        by smtp.gmail.com with ESMTPSA id ay3sm3501192pjb.38.2021.06.27.13.22.35
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Jun 2021 13:22:35 -0700 (PDT)
-From: "Armin Kuster" <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 20/20] python3-django: upgrade 2.2.23 -> 2.2.24
-Date: Sun, 27 Jun 2021 13:22:15 -0700
-Message-Id: <c51e79dd854460c6f6949a187970d05362152e84.1624825239.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1624825239.git.akuster808@gmail.com>
-References: <cover.1624825239.git.akuster808@gmail.com>
+  d=axis.com; q=dns/txt; s=axis-central1; t=1624832594;
+  x=1656368594;
+  h=from:to:subject:date:message-id:references:in-reply-to:
+   content-transfer-encoding:mime-version;
+  bh=YUFDV+8TeCTL+DTBEDP5IVSkPBeWmAmBRLNTKidI4mc=;
+  b=lp6nC2i5jcz+Ri6tm0aH8LNYTlP8LqQdTYvpnUqAyD37xIep589wIAo6
+   N/iZ/Ywkrb1SwOr1AWDJ7TaKgcTKeC8c5pG4d2zaiImHmmzsCYyg6vNLE
+   d2RxKQC/7cXuihs2WrL2EYaSpyyZmbMztdjtZiK7BVRaNgtL7qNX8TSpV
+   XUkgDIugwxdCcZ/BIVA5sWOmz1RfCDFVHzWdy9iBiNvNFzHFnfNcmcj7U
+   J0NJe1KYjv+PsBbk/xsB5YGhMWO2Ilm2WAtDuAaF5yZDulaId2OJD168k
+   Rcrcc3wWx27wU1/gIsQtFphC0Y2PxU7O/3NoPFzCEjSqYOLqkQW4rHT1I
+   w==;
+From: "Peter Kjellerstedt" <peter.kjellerstedt@axis.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-oe][PATCH] cryptsetup: Only recommend kernel modules when building for target
+Thread-Topic: [oe] [meta-oe][PATCH] cryptsetup: Only recommend kernel modules
+ when building for target
+Thread-Index: AQHXZGd4tirBeyrOJUK3mLrtn0OP36sofJQw
+Date: Sun, 27 Jun 2021 22:23:10 +0000
+Message-ID: <da526c764643436486529abb8b238ec5@XBOX03.axis.com>
+References: <1689BD5B007B0F3E.6151@lists.openembedded.org>
+In-Reply-To: <1689BD5B007B0F3E.6151@lists.openembedded.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.197.240.43]
+MIME-Version: 1.0
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
+*ping* And please backport it to Hardknott once it is accepted for master.
 
-Version 2.2.24 contains a fix for CVE-2021-33571 and is the latest LTS
-release.
+//Peter
 
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit fa2d3338fb87a38a66d11735b876ce2320045b0d)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../{python3-django_2.2.23.bb => python3-django_2.2.24.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-django_2.2.23.bb => python3-django_2.2.24.bb} (41%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.23.bb b/meta-python/recipes-devtools/python/python3-django_2.2.24.bb
-similarity index 41%
-rename from meta-python/recipes-devtools/python/python3-django_2.2.23.bb
-rename to meta-python/recipes-devtools/python/python3-django_2.2.24.bb
-index ab4b68fc87..964ca6ba03 100644
---- a/meta-python/recipes-devtools/python/python3-django_2.2.23.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_2.2.24.bb
-@@ -1,8 +1,8 @@
- require python-django.inc
- inherit setuptools3
- 
--SRC_URI[md5sum] = "d72405637143e201b745714e300bb546"
--SRC_URI[sha256sum] = "12cfc045a4ccb2348719aaaa77b17e66a26bff9fc238b4c765a3e825ef92e414"
-+SRC_URI[md5sum] = "ebf3bbb7716a7b11029e860475b9a122"
-+SRC_URI[sha256sum] = "3339ff0e03dee13045aef6ae7b523edff75b6d726adf7a7a48f53d5a501f7db7"
- 
- RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-sqlparse \
--- 
-2.17.1
-
+> -----Original Message-----
+> From: openembedded-devel@lists.openembedded.org <openembedded-
+> devel@lists.openembedded.org> On Behalf Of Peter Kjellerstedt
+> Sent: den 18 juni 2021 19:29
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-oe][PATCH] cryptsetup: Only recommend kernel modules
+> when building for target
+>=20
+> Otherwise cryptsetup-native depends on the target kernel and thus the
+> target compiler, as can be seen by:
+>=20
+>   $ bitbake -g cryptsetup-native
+>   $ grep 'cryptsetup.*linux-yocto' task-depends.dot
+>   "cryptsetup-native.do_build" -> "linux-yocto.do_deploy"
+>   "cryptsetup-native.do_build" -> "linux-yocto.do_package_write_rpm"
+>   "cryptsetup-native.do_populate_sysroot" -> "linux-yocto.do_populate_sys=
+root"
+>   $ grep 'linux-yocto.*gcc-cross' task-depends.dot
+>   "linux-yocto.do_kernel_configme" -> "gcc-cross-x86_64.do_populate_sysro=
+ot"
+>   "linux-yocto.do_prepare_recipe_sysroot" -> "gcc-cross-x86_64.do_populat=
+e_sysroot"
+>=20
+> This also moves the runtime dependencies to near the end of the recipe,
+> which is more customary.
+>=20
+> Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+> ---
+>  .../cryptsetup/cryptsetup_2.3.6.bb            | 25 ++++++++++---------
+>  1 file changed, 13 insertions(+), 12 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb b/meta=
+-
+> oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb
+> index 562ac83fb..9e83b90ea 100644
+> --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb
+> +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb
+> @@ -16,10 +16,6 @@ DEPENDS =3D " \
+>      util-linux-libuuid \
+>  "
+>=20
+> -RDEPENDS_${PN} =3D " \
+> -    libdevmapper \
+> -"
+> -
+>  SRC_URI =3D "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').s=
+plit('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
+>  SRC_URI[md5sum] =3D "504d1ab22cbc4d1a59a8d8c7ee5ed3bf"
+>  SRC_URI[sha256sum] =3D "b296b7a21ea576c2b180611ccb19d06aec8dddaedf7c704b=
+0c6a81210c25635f"
+> @@ -71,14 +67,6 @@ PACKAGECONFIG[kernel] =3D "--with-crypto_backend=3Dker=
+nel"
+>  PACKAGECONFIG[nettle] =3D "--with-crypto_backend=3Dnettle,,nettle"
+>  PACKAGECONFIG[luks2] =3D "--with-default-luks-format=3DLUKS2,--with-defa=
+ult-luks-format=3DLUKS1"
+>=20
+> -RRECOMMENDS_${PN} =3D "kernel-module-aes-generic \
+> -                     kernel-module-dm-crypt \
+> -                     kernel-module-md5 \
+> -                     kernel-module-cbc \
+> -                     kernel-module-sha256-generic \
+> -                     kernel-module-xts \
+> -"
+> -
+>  EXTRA_OECONF =3D "--enable-static"
+>  # Building without largefile is not supported by upstream
+>  EXTRA_OECONF +=3D "--enable-largefile"
+> @@ -89,4 +77,17 @@ EXTRA_OECONF +=3D "--disable-libargon2"
+>=20
+>  FILES_${PN} +=3D "${@bb.utils.contains('DISTRO_FEATURES','systemd','${ex=
+ec_prefix}/lib/tmpfiles.d/cryptsetup.conf', '', d)}"
+>=20
+> +RDEPENDS_${PN} =3D " \
+> +    libdevmapper \
+> +"
+> +
+> +RRECOMMENDS_${PN}_class-target =3D " \
+> +    kernel-module-aes-generic \
+> +    kernel-module-dm-crypt \
+> +    kernel-module-md5 \
+> +    kernel-module-cbc \
+> +    kernel-module-sha256-generic \
+> +    kernel-module-xts \
+> +"
+> +
+>  BBCLASSEXTEND =3D "native nativesdk"
