@@ -1,79 +1,59 @@
-Subject: [meta-java][dunfell][Bug] libecj-bootstrap-native_3.6.2.bb failing in do_compile randomly
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web10.9025.1624976545531761894
+ for <openembedded-devel@lists.openembedded.org>;
+ Tue, 29 Jun 2021 07:22:25 -0700
+Authentication-Results: mx.groups.io;
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=58062 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.93)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1lyEd4-0005GQ-SL; Tue, 29 Jun 2021 17:22:23 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-From: "akash hadke" <akash.hadke@kpit.com>
-X-Originating-Location: IN (103.110.167.10)
-X-Originating-Platform: Linux Firefox 88
-User-Agent: GROUPS.IO Web Poster
-MIME-Version: 1.0
-Date: Mon, 28 Jun 2021 01:19:38 -0700
-Message-ID: <6PMF.1624868378873525682.DlmA@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="If2vEcFsjMAlMX9HqLIU"
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-ipython: Upgrade 7.24.1 -> 7.25.0
+Date: Tue, 29 Jun 2021 17:22:16 +0300
+Message-Id: <20210629142217.28346-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
---If2vEcFsjMAlMX9HqLIU
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Upgrade to release 7.25.0 with a single bugfix, which is highly
+recommended for all users of ipdb, ipython debugger %debug magic
+and similar.
 
-libecj-bootstrap-native_3.6.2.bb failing in do_compile randomly in my build=
-. The failure occurrence is very less.
-I am triggering build by removing all sstate cache, multiple times and lie=
-cj-bootstrap-native gets fail for 2 times out of 50. The occurrence rate is=
- very less but still, I think we need to check the issue.
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../{python3-ipython_7.24.1.bb => python3-ipython_7.25.0.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-ipython_7.24.1.bb => python3-ipython_7.25.0.bb} (89%)
 
-Below are some of the failure messages.
+diff --git a/meta-python/recipes-devtools/python/python3-ipython_7.24.1.bb b/meta-python/recipes-devtools/python/python3-ipython_7.25.0.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-ipython_7.24.1.bb
+rename to meta-python/recipes-devtools/python/python3-ipython_7.25.0.bb
+index 96d50b76db..b8a6db2b11 100644
+--- a/meta-python/recipes-devtools/python/python3-ipython_7.24.1.bb
++++ b/meta-python/recipes-devtools/python/python3-ipython_7.25.0.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
+ 
+ PYPI_PACKAGE = "ipython"
+ 
+-SRC_URI[sha256sum] = "9bc24a99f5d19721fb8a2d1408908e9c0520a17fff2233ffe82620847f17f1b6"
++SRC_URI[sha256sum] = "54bbd1fe3882457aaf28ae060a5ccdef97f212a741754e420028d4ec5c2291dc"
+ 
+ RDEPENDS_${PN} = "\
+     ${PYTHON_PN}-setuptools \
+-- 
+2.17.1
 
-Found 1 semantic error compiling "source/org/eclipse/jdt/internal/compiler=
-/problem/DefaultProblemFactory.java":
-24. public class DefaultProblemFactory implements IProblemFactory {
-^-------------^
-*** Semantic Error: Type "IProblemFactory" was not found.
-
-*** Semantic Error: Type "org.eclipse.jdt.internal.compiler.AbstractAnnota=
-tionProcessorManager" was not found.
-61. import org.eclipse.jdt.internal.compiler.ICompilerRequestor;
-^----------------^
-*** Semantic Error: Type "org.eclipse.jdt.internal.compiler.ICompilerReque=
-stor" was not found.
-
-I think some race condition is occurring while compilation. I checked the =
-do_compile code, BB_NUMBER_THREAD is getting used for making the compilatio=
-n of java files parallel, I think that might be causing the race condition =
-but I am not sure. If we remove the use of BB_NUMBER_THREAD then compilatio=
-n will get single-threaded but I am not sure if that will be fine. And as t=
-he issue is not occurring very often it's hard to say if this will fix the =
-issue.
-
---If2vEcFsjMAlMX9HqLIU
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-
-&nbsp;libecj-bootstrap-native_3.6.2.bb failing in do_compile randomly in my=
- build. The failure occurrence is very less.<br />I am triggering build by =
-removing all sstate cache, multiple times and liecj-bootstrap-native gets f=
-ail for 2 times out of 50. The occurrence rate is very less but still, I th=
-ink we need to check the issue.<br /><br />Below are some of the failure me=
-ssages.<br /><br /><em>Found 1 semantic error compiling "source/org/eclipse=
-/jdt/internal/compiler/problem/DefaultProblemFactory.java":</em><br /><em>&=
-nbsp;&nbsp;&nbsp; 24. public class DefaultProblemFactory implements IProble=
-mFactory {</em><br /><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ^-------------^</em><br /><em>*=
-** Semantic Error: Type "IProblemFactory" was not found.</em><br /><br /><b=
-r /><em>*** Semantic Error: Type "org.eclipse.jdt.internal.compiler.Abstrac=
-tAnnotationProcessorManager" was not found.</em><br /><em>&nbsp;&nbsp;&nbsp=
-; 61. import org.eclipse.jdt.internal.compiler.ICompilerRequestor;</em><br =
-/><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ^----=
-------------^</em><br /><em>*** Semantic Error: Type "org.eclipse.jdt.inter=
-nal.compiler.ICompilerRequestor" was not found.</em><br /><br /><br />I thi=
-nk some race condition is occurring while compilation. I checked the do_com=
-pile code, BB_NUMBER_THREAD is getting used for making the compilation of j=
-ava files parallel, I think that might be causing the race condition but I =
-am not sure. If we remove the use of BB_NUMBER_THREAD then compilation will=
- get single-threaded but I am not sure if that will be fine. And as the iss=
-ue is not occurring very often it's hard to say if this will fix the issue.
-
---If2vEcFsjMAlMX9HqLIU--
