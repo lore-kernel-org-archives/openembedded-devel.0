@@ -1,135 +1,236 @@
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.web08.926.1625021235220230170
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web10.6945.1625063873102618754
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Jun 2021 19:47:15 -0700
+ Wed, 30 Jun 2021 07:37:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ji0NWtGI;
- spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id a2so753830pgi.6
-        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Jun 2021 19:47:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=K2wH8dAkWSSxJ3QlffSyRWDgUgYTo3+UwhOR/oow3ZM=;
-        b=ji0NWtGI8gwIG0KBtH0mbZ9PZ5BIk8cg51rqioSeU08BJ9oxa/acgLOtMJ23o1G9T7
-         VvAhFjT4PTks9bu05ZJToYTIx9DjiKwUbE8RkjiMEC8jSoVJaJTXR0gTrS54uKDiML9j
-         MYq5QkQiGD+lPvnITtigXLoxAnQ3HqEjXVKBFnED+3sX68uuyxgHdKE2+TGvRnHkKPlO
-         M5TPoHL20O1bifnyoFmb7l8a9hWxATCSnXgQ46aT9YldYBofUDSuGRSptlyjM2YlxHGV
-         UdWxZOY05w8BqwFicxIuCdEHbaLwo4PTB/5/QB97LTlQWYYwmTrk6eAmdrl3kr9Ut4SE
-         hQmA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=K2wH8dAkWSSxJ3QlffSyRWDgUgYTo3+UwhOR/oow3ZM=;
-        b=JzwAU3t8c+M8pzALTjOv/X8XwszZBK5zF2v4j696+N3k2eEQFAi6FdSkkjKTLm2jiM
-         unQ8789XkE+pxgV9TcftXJUlANrSZAf03HHRNDW8WCgXzv7qqqDsX4eqdZML0JHqIwcW
-         LXrPpuso2+9cCFGGsLf+ktNUKjxvRTpItdG7rYxVTfnvxvKiHgtycDJA3xNWe9fieeoK
-         d9Afs7jB1UUcnq31hO12WRuNQLmXucCeCjhvYlLjiCs3ZwkAvBKovZPM6i8iDRsNEAY0
-         Vfte0j4z6z4faXgIC19vJr6wZhv4kZzd8qbOT79jrZImRt7SzordTTE19ofn7TUDHfui
-         QWLA==
-X-Gm-Message-State: AOAM533WdsVBRJaLCWoacQnUy7OhGZOil3/zawTn+ldF2QKKbWgnEsNI
-	ASrgcyMHwmk73n3YWMICHplJwFsjz0ZHIw==
-X-Google-Smtp-Source: ABdhPJy9fLrE6hG8ic3EjPa01Xh8o5kqL61q4cOYEi7rUXPJPrztAKjSTLRL96nyesrCfU0ui2qR7w==
-X-Received: by 2002:a63:db06:: with SMTP id e6mr31694437pgg.244.1625021234481;
-        Tue, 29 Jun 2021 19:47:14 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b522])
-        by smtp.gmail.com with ESMTPSA id 28sm20244637pgq.39.2021.06.29.19.47.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Jun 2021 19:47:13 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Subject: [meta-multimedia][PATCH] mpd: Update to 0.22.9
-Date: Tue, 29 Jun 2021 19:47:11 -0700
-Message-Id: <20210630024711.2277396-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.32.0
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: ttasciog@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 15UEbpJh016285
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Jun 2021 07:37:51 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.10; Wed, 30 Jun 2021 07:37:50 -0700
+Received: from ala-lpggp3.wrs.com (147.11.105.124) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.10 via Frontend Transport; Wed, 30 Jun 2021 07:37:50 -0700
+Received: by ala-lpggp3.wrs.com (Postfix, from userid 21862)
+	id B85E790140F; Wed, 30 Jun 2021 07:37:50 -0700 (PDT)
+From: "Tony Tascioglu" <tony.tascioglu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <randy.macleod@windriver.com>, <tony.tascioglu@windriver.com>
+Subject: [meta-oe][PATCH] libyang: create recipe for libyang
+Date: Wed, 30 Jun 2021 07:37:19 -0700
+Message-ID: <20210630143719.166267-1-tony.tascioglu@windriver.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Fix build with clang
+Add a new recipe, patches, and ptest coverage for libyang.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andreas Müller <schnitzeltony@gmail.com>
+The recipe follows from upstream, using the cmake build system.
+
+There were 2 small changes needed to get the package building:
+  - Remove call to pcre2-config
+  - Add missing import statement
+
+The recipe has a dependency on libpcre2, which satisfies the minimum
+requirements for libyang. In addition, for tests, cmocka is required
+during build and runtime, and valgrind is required in the runtime for
+some tests.
+
+Due to the way the library by default builds in a debug mode, release
+mode was specified. However, this disables building the built-in tests,
+so an EXTRA_OECMAKE was added based on whether or not ptests are enabled
+to specifiy the required extra flag.
+
+Binconfig-disabled is inherited since using pcre2-config directly is not
+suggested anymore. Cmocka as a dependency depends on whether ptests have
+been enabled. Since ptests are built with the main package, we need
+cmocka installed before the test are compiled if they are needed.
+
+Ptest coverage:
+The ptests come from the original tests included with the library.
+Ptests are in ctest format by default, so we compare the return code to
+print it in Yocto format. However, as each "test" target executable has
+multiple tests in it, the full stdout and stderr logs are saved for
+troubleshooting.
+
+Currently, several of the tests fail due to hardcoded paths in the
+executable binaries generated, this is an issue we will take upstream.
+For now, only the tests which work on a different target are enabled as
+the ptests. The list can be updated in the run-ptest script, which is
+portable shell compatible, without requiring bash.
+
+The recipe also has libyang-bin as a split package, which includes
+yanglint should it be needed.
+This recipe was tested using buildall-qemu as well as from within qemu
+in x86_64 and arm64.
+
+Signed-off-by: Tony Tascioglu <tony.tascioglu@windriver.com>
 ---
- ...0001-include-utility-for-std-forward.patch | 43 +++++++++++++++++++
- .../musicpd/{mpd_0.22.6.bb => mpd_0.22.9.bb}  |  3 +-
- 2 files changed, 45 insertions(+), 1 deletion(-)
- create mode 100644 meta-multimedia/recipes-multimedia/musicpd/mpd/0001-include-utility-for-std-forward.patch
- rename meta-multimedia/recipes-multimedia/musicpd/{mpd_0.22.6.bb => mpd_0.22.9.bb} (97%)
+ ...byang-skip-pcre2-config-add-stdint-h.patch | 55 +++++++++++++++++++
+ .../libyang/libyang/run-ptest                 | 46 ++++++++++++++++
+ .../recipes-extended/libyang/libyang_2.0.7.bb | 33 +++++++++++
+ 3 files changed, 134 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/libyang/libyang/libyang-skip-pcre2-config-add-stdint-h.patch
+ create mode 100644 meta-oe/recipes-extended/libyang/libyang/run-ptest
+ create mode 100644 meta-oe/recipes-extended/libyang/libyang_2.0.7.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd/0001-include-utility-for-std-forward.patch b/meta-multimedia/recipes-multimedia/musicpd/mpd/0001-include-utility-for-std-forward.patch
+diff --git a/meta-oe/recipes-extended/libyang/libyang/libyang-skip-pcre2-config-add-stdint-h.patch b/meta-oe/recipes-extended/libyang/libyang/libyang-skip-pcre2-config-add-stdint-h.patch
 new file mode 100644
-index 0000000000..68ccb65835
+index 000000000..e3b2d0e02
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/musicpd/mpd/0001-include-utility-for-std-forward.patch
-@@ -0,0 +1,43 @@
-+From 9bb962148672a3c20fb0119d7f71789b8ef3dc02 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 29 Jun 2021 19:31:34 -0700
-+Subject: [PATCH] include <utility> for std::forward
++++ b/meta-oe/recipes-extended/libyang/libyang/libyang-skip-pcre2-config-add-stdint-h.patch
+@@ -0,0 +1,55 @@
++From c7f3e2a8fe530beec6103cb9071ccc41458879aa Mon Sep 17 00:00:00 2001
++From: Tony Tascioglu <tony.tascioglu@windriver.com>
++Date: Mon, 21 Jun 2021 12:34:22 -0400
++Subject: [PATCH] libyang: fix initial build errors
 +
-+Fixes
-+../git/src/Log.hxx:121:42: error: no member named 'forward' in namespace 'std'
-+        LogFormat(LogLevel::ERROR, e, fmt, std::forward<Args>(args)...);
++This patch addresses build errors seen when integrating libyang as a
++recipe.
 +
-+Upstream-Status: Submitted [https://github.com/MusicPlayerDaemon/MPD/pull/1201]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++The call to pcre2-config has been commented out. *-config calls are
++being replaced by pkgconfig, and we want to avoid the binary config
++calls. This call can safely be discarded since it is used to check
++the version of libpcre2 on the system, and all recent YP builds meet
++the minimum required version (v10.21).
++
++There is a missing include statement for stdint.h in utests.h which
++causes build problems. stdint.h is required to be imported by cmocka.h
++prior to the cmocka file. Adding the stdint allows it to build the
++tests correctly
++
++Upstream-Status: Pending
++
++Signed-off-by: Tony Tascioglu <tony.tascioglu@windriver.com>
 +---
-+ src/Log.hxx                   | 1 +
-+ src/lib/expat/ExpatParser.hxx | 1 +
-+ 2 files changed, 2 insertions(+)
++ CMakeModules/FindPCRE2.cmake | 2 +-
++ tests/utests/utests.h        | 1 +
++ 2 files changed, 2 insertions(+), 1 deletion(-)
 +
-+diff --git a/src/Log.hxx b/src/Log.hxx
-+index a295ed9f6..87097b086 100644
-+--- a/src/Log.hxx
-++++ b/src/Log.hxx
-+@@ -24,6 +24,7 @@
-+ #include "util/Compiler.h"
++diff --git a/CMakeModules/FindPCRE2.cmake b/CMakeModules/FindPCRE2.cmake
++index 8f60daa2..ad014f14 100644
++--- a/CMakeModules/FindPCRE2.cmake
+++++ b/CMakeModules/FindPCRE2.cmake
++@@ -12,7 +12,7 @@ FIND_PATH(PCRE2_INCLUDE_DIR pcre2.h)
++ FIND_LIBRARY(PCRE2_LIBRARY NAMES libpcre2.a pcre2-8)
 + 
-+ #include <exception>
-++#include <utility>
++ # Check required version
++-execute_process(COMMAND pcre2-config --version OUTPUT_VARIABLE PCRE2_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
+++# execute_process(COMMAND pcre2-config --version OUTPUT_VARIABLE PCRE2_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
 + 
-+ class Domain;
++ # Handle the QUIETLY and REQUIRED arguments and set PCRE_FOUND to TRUE if all listed variables are TRUE.
++ INCLUDE(FindPackageHandleStandardArgs)
++diff --git a/tests/utests/utests.h b/tests/utests/utests.h
++index 5bea0459..a256120c 100644
++--- a/tests/utests/utests.h
+++++ b/tests/utests/utests.h
++@@ -23,6 +23,7 @@
++ #include <stddef.h>
++ #include <stdlib.h>
 + 
-+diff --git a/src/lib/expat/ExpatParser.hxx b/src/lib/expat/ExpatParser.hxx
-+index e1723d109..4b5221e89 100644
-+--- a/src/lib/expat/ExpatParser.hxx
-++++ b/src/lib/expat/ExpatParser.hxx
-+@@ -25,6 +25,7 @@
-+ #include <expat.h>
+++#include <stdint.h>
++ #include <cmocka.h>
 + 
-+ #include <stdexcept>
-++#include <utility>
-+ 
-+ class InputStream;
-+ 
++ #include <string.h>
 +-- 
 +2.32.0
 +
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.22.6.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.22.9.bb
-similarity index 97%
-rename from meta-multimedia/recipes-multimedia/musicpd/mpd_0.22.6.bb
-rename to meta-multimedia/recipes-multimedia/musicpd/mpd_0.22.9.bb
-index b1fa96e1be..c112a40ce9 100644
---- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.22.6.bb
-+++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.22.9.bb
-@@ -19,9 +19,10 @@ DEPENDS += " \
- 
- SRC_URI = " \
-     git://github.com/MusicPlayerDaemon/MPD;branch=v0.22.x \
-+    file://0001-include-utility-for-std-forward.patch \
-     file://mpd.conf.in \
- "
--SRCREV = "938728820b11d4544a071994fe3c63c6ab710e8e"
-+SRCREV = "18628bf89ebfa5a806971479a71cf9b5764e500e"
- S = "${WORKDIR}/git"
- 
- EXTRA_OEMESON += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd=enabled -Dsystemd_system_unit_dir=${systemd_system_unitdir} -Dsystemd_user_unit_dir=${systemd_system_unitdir}', '-Dsystemd=disabled', d)}"
+diff --git a/meta-oe/recipes-extended/libyang/libyang/run-ptest b/meta-oe/recipes-extended/libyang/libyang/run-ptest
+new file mode 100644
+index 000000000..1c9f8f47f
+--- /dev/null
++++ b/meta-oe/recipes-extended/libyang/libyang/run-ptest
+@@ -0,0 +1,46 @@
++#!/bin/sh
++# Valid tests to run
++tests="utest_binary \
++       utest_bits \
++       utest_common \
++       utest_hash_table \
++       utest_inet_types \
++       utest_int8 \
++       utest_json \
++       utest_list \
++       utest_merge \
++       utest_metadata \
++       utest_parser_yang \
++       utest_parser_yin \
++       utest_pattern \
++       utest_printer_yang \
++       utest_printer_yin \
++       utest_range \
++       utest_schema \
++       utest_set \
++       utest_string \
++       utest_tree_data \
++       utest_tree_schema_compile \
++       utest_types \
++       utest_xml \
++       utest_xpath \
++       utest_yang_types \
++       utest_yanglib"
++
++# cd into right directory
++ptestdir=$(dirname "$(readlink -f "$0")")
++cd "$ptestdir"/tests || exit
++
++# Run specified tests
++for f in $tests
++do
++    if test -e ./"$f"; then
++        if ./"$f" > ./"$f".out 2> ./"$f".err; then
++            echo "PASS: $f"
++        else
++            echo "FAIL: $f"
++        fi
++    else
++        echo "SKIP: $f"
++    fi
++done
+diff --git a/meta-oe/recipes-extended/libyang/libyang_2.0.7.bb b/meta-oe/recipes-extended/libyang/libyang_2.0.7.bb
+new file mode 100644
+index 000000000..9cab6507e
+--- /dev/null
++++ b/meta-oe/recipes-extended/libyang/libyang_2.0.7.bb
+@@ -0,0 +1,33 @@
++SUMMARY = "YANG data modeling language library"
++DESCRIPTION = "libyang is a YANG data modelling language parser and toolkit written (and providing API) in C."
++HOMEPAGE = "https://github.com/CESNET/libyang"
++SECTION = "libs"
++LICENSE = "BSD-3-Clause"
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=f3916d7d8d42a6508d0ea418cfff10ad"
++
++SRCREV = "69d9fff65abb58beb0bb6aa9ecacd572ca1dfc56"
++
++SRC_URI = "git://github.com/CESNET/libyang.git \
++           file://libyang-skip-pcre2-config-add-stdint-h.patch \
++           file://run-ptest \
++           "
++
++S = "${WORKDIR}/git"
++
++# Main dependencies
++inherit cmake pkgconfig lib_package binconfig-disabled ptest
++DEPENDS = "libpcre2"
++DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'cmocka', '', d)}"
++BINCONFIG = "${bindir}/pcre2-config"
++
++# Ptest dependencies
++RDEPENDS_${PN}-ptest += "valgrind"
++
++EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=Release"
++EXTRA_OECMAKE += " ${@bb.utils.contains('PTEST_ENABLED', '1', '-DENABLE_BUILD_TESTS=ON', '', d)}"
++
++do_install_ptest () {
++    cp -a ${B}/tests/ ${D}${PTEST_PATH}/
++}
++
 -- 
 2.32.0
 
