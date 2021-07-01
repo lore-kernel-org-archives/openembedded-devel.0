@@ -1,87 +1,117 @@
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web09.3746.1625090319958884405
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web10.2374.1625109885604071074
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Jun 2021 14:58:40 -0700
+ Wed, 30 Jun 2021 20:24:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: ttasciog@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 15ULwd9d030209
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Jun 2021 14:58:39 -0700
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: kai.kang@windriver.com)
 Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 15ULwc9s019582
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 1613Oi8x017058
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Jun 2021 14:58:38 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Jun 2021 20:24:44 -0700
 Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.10; Wed, 30 Jun 2021 14:58:37 -0700
-Received: from ala-lpggp3.wrs.com (147.11.105.124) by
+ 15.1.2242.10; Wed, 30 Jun 2021 20:24:44 -0700
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.10 via Frontend Transport; Wed, 30 Jun 2021 14:58:37 -0700
-Received: by ala-lpggp3.wrs.com (Postfix, from userid 21862)
-	id 61E8B90140F; Wed, 30 Jun 2021 14:58:37 -0700 (PDT)
-From: "Tony Tascioglu" <tony.tascioglu@windriver.com>
+ 15.1.2242.10 via Frontend Transport; Wed, 30 Jun 2021 20:24:43 -0700
+From: "kai" <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: <randy.macleod@windriver.com>,
-        Tony Tascioglu
-	<tony.tascioglu@windriver.com>
-Subject: [meta-oe][PATCH] redis: upgrade to 6.2.4
-Date: Wed, 30 Jun 2021 14:58:12 -0700
-Message-ID: <20210630215812.146648-1-tony.tascioglu@windriver.com>
-X-Mailer: git-send-email 2.31.1
+Subject: [meta-oe][PATCH] bats: fix qa issue when multilib eanbled
+Date: Thu, 1 Jul 2021 11:24:41 +0800
+Message-ID: <20210701032441.7007-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Upstream changelog:
+From: Kai Kang <kai.kang@windriver.com>
 
-Upgrade urgency: SECURITY, Contains fixes to security issues that affect
-authenticated client connections. MODERATE otherwise.
+Fix qa issue for bats when multilib is enabled:
 
-Fix integer overflow in STRALGO LCS (CVE-2021-32625)
-An integer overflow bug in Redis version 6.0 or newer can be exploited using the
-STRALGO LCS command to corrupt the heap and potentially result with remote code
-execution. This is a result of an incomplete fix by CVE-2021-29477.
+| ERROR: bats-1.3.0-r0 do_package: QA Issue: bats: Files/directories
+     were installed but not shipped in any package:
+|  /usr/lib
+|  /usr/lib/bats-core
+|  /usr/lib/bats-core/formatter.bash
+|  /usr/lib/bats-core/test_functions.bash
 
-Bug fixes that are only applicable to previous releases of Redis 6.2:
-
-    Fix crash after a diskless replication fork child is terminated (#8991)
-    Fix redis-benchmark crash on unsupported configs (#8916)
-
-Other bug fixes:
-
-    Fix crash in UNLINK on a stream key with deleted consumer groups (#8932)
-    SINTERSTORE: Add missing keyspace del event when none of the sources exist (#8949)
-    Sentinel: Fix CONFIG SET of empty string sentinel-user/sentinel-pass configs (#8958)
-    Enforce client output buffer soft limit when no traffic (#8833)
-
-Improvements:
-
-    Hide AUTH passwords in MIGRATE command from slowlog (#8859)
-
-Signed-off-by: Tony Tascioglu <tony.tascioglu@windriver.com>
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../recipes-extended/redis/{redis_6.2.3.bb => redis_6.2.4.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/redis/{redis_6.2.3.bb => redis_6.2.4.bb} (96%)
+ meta-oe/recipes-test/bats/bats_1.3.0.bb       |  3 +-
+ .../0001-install.sh-consider-multilib.patch   | 43 +++++++++++++++++++
+ 2 files changed, 45 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-test/bats/files/0001-install.sh-consider-multilib.patch
 
-diff --git a/meta-oe/recipes-extended/redis/redis_6.2.3.bb b/meta-oe/recipes-extended/redis/redis_6.2.4.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/redis/redis_6.2.3.bb
-rename to meta-oe/recipes-extended/redis/redis_6.2.4.bb
-index 67ac974de..35f34a27d 100644
---- a/meta-oe/recipes-extended/redis/redis_6.2.3.bb
-+++ b/meta-oe/recipes-extended/redis/redis_6.2.4.bb
-@@ -17,7 +17,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://GNU_SOURCE.patch \
-            file://0006-Define-correct-gregs-for-RISCV32.patch \
-            "
--SRC_URI[sha256sum] = "98ed7d532b5e9671f5df0825bb71f0f37483a16546364049384c63db8764512b"
-+SRC_URI[sha256sum] = "ba32c406a10fc2c09426e2be2787d74ff204eb3a2e496d87cff76a476b6ae16e"
+diff --git a/meta-oe/recipes-test/bats/bats_1.3.0.bb b/meta-oe/recipes-test/bats/bats_1.3.0.bb
+index 8190a5e3a..39a02733f 100644
+--- a/meta-oe/recipes-test/bats/bats_1.3.0.bb
++++ b/meta-oe/recipes-test/bats/bats_1.3.0.bb
+@@ -7,6 +7,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=2970203aedf9e829edb96a137a4fe81b"
  
- inherit autotools-brokensep update-rc.d systemd useradd
+ SRC_URI = "git://github.com/bats-core/bats-core.git \
++           file://0001-install.sh-consider-multilib.patch \
+           "
+ # v1.3.0
+ SRCREV = "9086c47854652f2731861b40385689c85f12103f"
+@@ -15,7 +16,7 @@ S = "${WORKDIR}/git"
  
+ do_install() {
+ 	# Just a bunch of bash scripts to install
+-	${S}/install.sh ${D}${prefix}
++	${S}/install.sh ${D}${prefix} ${baselib}
+ }
+ 
+ RDEPENDS_${PN} = "bash"
+diff --git a/meta-oe/recipes-test/bats/files/0001-install.sh-consider-multilib.patch b/meta-oe/recipes-test/bats/files/0001-install.sh-consider-multilib.patch
+new file mode 100644
+index 000000000..c7393ca2e
+--- /dev/null
++++ b/meta-oe/recipes-test/bats/files/0001-install.sh-consider-multilib.patch
+@@ -0,0 +1,43 @@
++From 6e3d01f1ff199383b78a7504858c374fbce05f4e Mon Sep 17 00:00:00 2001
++From: Kai Kang <kai.kang@windriver.com>
++Date: Thu, 10 Jun 2021 11:11:07 +0800
++Subject: [PATCH] install.sh: consider multilib
++
++It may install files to /usr/lib64 when multilib is enabled. Add an
++optional parameter for install.sh to support it.
++
++Upstream-Status: Submitted [https://github.com/bats-core/bats-core/pull/452]
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++---
++ install.sh | 5 +++--
++ 1 file changed, 3 insertions(+), 2 deletions(-)
++
++diff --git a/install.sh b/install.sh
++index e660866..d91159e 100755
++--- a/install.sh
+++++ b/install.sh
++@@ -4,6 +4,7 @@ set -e
++ 
++ BATS_ROOT="${0%/*}"
++ PREFIX="$1"
+++BASELIB="${2:-lib}"
++ 
++ if [[ -z "$PREFIX" ]]; then
++   printf '%s\n' \
++@@ -12,10 +13,10 @@ if [[ -z "$PREFIX" ]]; then
++   exit 1
++ fi
++ 
++-install -d -m 755 "$PREFIX"/{bin,libexec/bats-core,lib/bats-core,share/man/man{1,7}}
+++install -d -m 755 "$PREFIX"/{bin,libexec/bats-core,${BASELIB}/bats-core,share/man/man{1,7}}
++ install -m 755 "$BATS_ROOT/bin"/* "$PREFIX/bin"
++ install -m 755 "$BATS_ROOT/libexec/bats-core"/* "$PREFIX/libexec/bats-core"
++-install -m 755 "$BATS_ROOT/lib/bats-core"/* "$PREFIX/lib/bats-core"
+++install -m 755 "$BATS_ROOT/lib/bats-core"/* "$PREFIX/${BASELIB}/bats-core"
++ install -m 644 "$BATS_ROOT/man/bats.1" "$PREFIX/share/man/man1"
++ install -m 644 "$BATS_ROOT/man/bats.7" "$PREFIX/share/man/man7"
++ 
++-- 
++2.17.1
++
 -- 
-2.32.0
+2.17.1
 
