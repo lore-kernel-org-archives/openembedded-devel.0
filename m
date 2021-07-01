@@ -1,358 +1,151 @@
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web09.5710.1625139554223297399
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
+ by mx.groups.io with SMTP id smtpd.web08.7504.1625147877328988072
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Jul 2021 04:39:14 -0700
+ Thu, 01 Jul 2021 06:57:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=DrGMAIvV;
- spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-wm1-f49.google.com with SMTP id r9-20020a7bc0890000b02901f347b31d55so3766766wmh.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Jul 2021 04:39:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=FRYVnDFB;
+ spf=pass (domain: gmail.com, ip: 209.85.216.46, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f46.google.com with SMTP id l11so4290838pji.5
+        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Jul 2021 06:57:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=PpllwIv6piCoILw0iW+jkag+MDPDPKxeGHYpBhJ/enE=;
-        b=DrGMAIvV64GdgJEp/becRYVoMjvRSEt8Ir7sMj5+Ci4ZmwOA5hJPxtESQxMQ3aWc9W
-         Y22tcDmuzt5IZYNMAnEukgrQ8OsQeLY5TRNjnD8nBdprysnPCLX7SsQD+1wkYCwzpHXW
-         1hymVr20kjLxQISLPmOZLK/f3WhgfYyEV6bA7co0nnaFnpJuDVoH8EVMh9B/MLKIwWFP
-         mK1Lr9gs5Hu9Gm2z6vxTJKzdEubTYc+RS6wqVULY7xwrVhBRn2iE9AQqaAjLq8fZhK9v
-         B5mGyhQ4XThEVn1J3ARu4Q1ZXbIsK9Uok8kTBuPqxe+kNxVdgltT7Rg++rtQs7nUQ5wE
-         PUMg==
+        h=to:from:subject:message-id:date:user-agent:mime-version
+         :content-transfer-encoding:content-language;
+        bh=oeoT3GeynAEoaPeq9iz0TukSXJsxNCJzydHmjIQMP94=;
+        b=FRYVnDFB63i0e3QCo3L6+y51kFDyvusF1l1fFJyIViwzPycvuu6nCmq5eZx7S+5O1t
+         PCkEuuxwMG88fZ7rIhgFwro2kv1FHfY03QepJltDxeezLpPEvBoYfbfN2UiRnYG7dvyB
+         zN7A8BqfdTptbXpBa4C5VCrz2XuJWYG+RFnEt8PLBz8CbxHg1ABolB63CwnZktMCwWaf
+         hBW9DBGUpxE1GktllyLK8jIcgxzGtU2I2AKHIbekevfQ0JWu4+mfSdEv3L7Hf78Wn5Sp
+         9V79xRZToOsLkFWeaKKVLlnXkfhtYDp6d0Nc69Jp6JaM+7Lv8H0TYf3i5RAOEiRY82SG
+         ch3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=PpllwIv6piCoILw0iW+jkag+MDPDPKxeGHYpBhJ/enE=;
-        b=ILApFaQv/QfzbElmE32LU2WqF7NFqq6Hp2AuY4v0ENPEK0hJ148NsDFyuftegkPKqm
-         E2M61ENCXqNcaMGsOBEHCHDgtl4x/KriQPttB3+ZoL6awzoW/QxxPiH8TpPK+tCivqUj
-         rIO3ge8+iKLhVX9tFFWWFRfp9f30DRpjuIVkK/vgcQO03/Bmh1ywsjSU4enRHnhDcdo/
-         4TSjs6xpsxuywNhOTYoWmGZRrotMVz3vII/rujG4SKaZYyge4SBLRb2V2boObGd5lbI0
-         9oDDp7Ib9EHLVXwak+JIhgMwbcASVGtQtbr1591rWpxxeVpMymi5mE1uuOQMczcrBFrj
-         T67Q==
-X-Gm-Message-State: AOAM530gZ6tugwnb7caTKpGiC2NDXCnTgbwKHaxW1EL7N8JKOU3+nYy1
-	LkSwedJ0xggiyvxpau/v2ivLoWKqZrSWdQ==
-X-Google-Smtp-Source: ABdhPJwiT+4v0lNqKrJRfidzKCiOZ7WPOvk58xQxHoeG2WPZmrdf6Jz3Z98jofYs8vGho1bjbS24mw==
-X-Received: by 2002:a05:600c:5106:: with SMTP id o6mr9350736wms.162.1625139552105;
-        Thu, 01 Jul 2021 04:39:12 -0700 (PDT)
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from Unimatrix08-Focal.lan ([5.170.214.66])
-        by smtp.gmail.com with ESMTPSA id a9sm24556821wrv.37.2021.07.01.04.39.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Jul 2021 04:39:11 -0700 (PDT)
-From: "Gianfranco" <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	Gianfranco Costamagna <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH] vboxguestdrivers: add upstream patch (already used in Debian and Ubuntu) to fix a build failure with kernel 5.13
-Date: Thu,  1 Jul 2021 13:39:09 +0200
-Message-Id: <20210701113909.1818893-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.25.1
+        h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+         :mime-version:content-transfer-encoding:content-language;
+        bh=oeoT3GeynAEoaPeq9iz0TukSXJsxNCJzydHmjIQMP94=;
+        b=N1H1YlFSZwHFYW90xKKKk5JeD2U9U6KgG0BqF/i0LAYMTsH2jcELyuNyEFvJimAuFa
+         FxAjniDjHcUv4Lf1p92EJL1xMjS270I+KoUPvmrrgeBL8kNrwG9w5rf25u7clLdArZhl
+         HD4J7a8Hckl2WoQH3vreZYU1mR4sHLhMIbuDNIXGcRRtD3bzFm1CfHc1it6hdrUNtWW0
+         o9RG6IenVYWWmavF93LP2bBJTmSSzYrDoiTY9YGDbHGBr7dWEuU9BrKxVHSFFR3zAW/B
+         I3jKTFCqx/L3wYwmDBM1SYgYt7s7jATCFyFRmesuPW5IIh8u5bqKNCKyxaGbX71i4q/X
+         udLA==
+X-Gm-Message-State: AOAM531QTmbaVhHa1yfJWa0juv9GjH0UEJEMgSZKsYHC0gf8Nq1y68nA
+	cxmW6NLH4j2G6am7krWxsbk=
+X-Google-Smtp-Source: ABdhPJykV5/Rq+KIk4xonrxWpHUYWcAVyFGs3amNnrLIogakhhp5JN0I5WqreozYCtRC1RYBfU9miQ==
+X-Received: by 2002:a17:902:b198:b029:11b:2246:e374 with SMTP id s24-20020a170902b198b029011b2246e374mr29689plr.17.1625147876837;
+        Thu, 01 Jul 2021 06:57:56 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:608a:da78:6588:bb4f? ([2601:202:4180:a5c0:608a:da78:6588:bb4f])
+        by smtp.gmail.com with ESMTPSA id q24sm26419210pgk.32.2021.07.01.06.57.56
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 01 Jul 2021 06:57:56 -0700 (PDT)
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+ Khem Raj <raj.khem@gmail.com>
+From: "Armin Kuster" <akuster808@gmail.com>
+Subject: Hardknott merge request; July 1st
+Message-ID: <fca61e07-2a18-7777-ac83-1226a079d55c@gmail.com>
+Date: Thu, 1 Jul 2021 06:57:55 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
----
- .../40-linux-5.13-support.patch               | 276 ++++++++++++++++++
- .../vboxguestdrivers_6.1.22.bb                |   1 +
- 2 files changed, 277 insertions(+)
- create mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/40-linux-5.13-support.patch
+The following changes since commit aca88908fd329f5cef6f19995b072397fb2d8ec6:
 
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/40-linux-5.13-support.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/40-linux-5.13-support.patch
-new file mode 100644
-index 000000000..e95e24049
---- /dev/null
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/40-linux-5.13-support.patch
-@@ -0,0 +1,276 @@
-+Subject: Fix build errors with linux 5.13
-+Origin: upstream, https://www.virtualbox.org/browser/vbox/trunk
-+Bug: https://bugs.launchpad.net/bugs/1929193
-+
-+diff -urpN virtualbox-6.1.22-dfsg.orig/src/VBox/Additions/linux/drm/vbox_drv.h virtualbox-6.1.22-dfsg/src/VBox/Additions/linux/drm/vbox_drv.h
-+--- virtualbox-6.1.22-dfsg.orig/src/VBox/Additions/linux/drm/vbox_drv.h	2021-04-28 16:24:47.000000000 +0000
-++++ virtualbox-6.1.22-dfsg/src/VBox/Additions/linux/drm/vbox_drv.h	2021-06-23 10:08:44.431714404 +0000
-+@@ -46,20 +41,20 @@
-+  * Evaluates to true if the linux kernel version is equal or higher to the
-+  * one specfied. */
-+ #define RTLNX_VER_MIN(a_Major, a_Minor, a_Patch) \
-+-    (LINUX_VERSION_CODE >= KERNEL_VERSION(a_Major, a_Minor, a_Patch))
-++	(LINUX_VERSION_CODE >= KERNEL_VERSION(a_Major, a_Minor, a_Patch))
-+ 
-+ /** @def RTLNX_VER_MAX
-+  * Evaluates to true if the linux kernel version is less to the one specfied
-+  * (exclusive). */
-+ #define RTLNX_VER_MAX(a_Major, a_Minor, a_Patch) \
-+-    (LINUX_VERSION_CODE < KERNEL_VERSION(a_Major, a_Minor, a_Patch))
-++	(LINUX_VERSION_CODE < KERNEL_VERSION(a_Major, a_Minor, a_Patch))
-+ 
-+ /** @def RTLNX_VER_RANGE
-+  * Evaluates to true if the linux kernel version is equal or higher to the given
-+  * minimum version and less (but not equal) to the maximum version (exclusive). */
-+ #define RTLNX_VER_RANGE(a_MajorMin, a_MinorMin, a_PatchMin,  a_MajorMax, a_MinorMax, a_PatchMax) \
-+-    (   LINUX_VERSION_CODE >= KERNEL_VERSION(a_MajorMin, a_MinorMin, a_PatchMin) \
-+-     && LINUX_VERSION_CODE <  KERNEL_VERSION(a_MajorMax, a_MinorMax, a_PatchMax) )
-++	(   LINUX_VERSION_CODE >= KERNEL_VERSION(a_MajorMin, a_MinorMin, a_PatchMin) \
-++	 && LINUX_VERSION_CODE <  KERNEL_VERSION(a_MajorMax, a_MinorMax, a_PatchMax) )
-+ 
-+ 
-+ /** @def RTLNX_RHEL_MIN
-+@@ -70,7 +65,7 @@
-+  */
-+ #if defined(RHEL_MAJOR) && defined(RHEL_MINOR)
-+ # define RTLNX_RHEL_MIN(a_iMajor, a_iMinor) \
-+-     ((RHEL_MAJOR) > (a_iMajor) || ((RHEL_MAJOR) == (a_iMajor) && (RHEL_MINOR) >= (a_iMinor)))
-++	 ((RHEL_MAJOR) > (a_iMajor) || ((RHEL_MAJOR) == (a_iMajor) && (RHEL_MINOR) >= (a_iMinor)))
-+ #else
-+ # define RTLNX_RHEL_MIN(a_iMajor, a_iMinor) (0)
-+ #endif
-+@@ -83,7 +78,7 @@
-+  */
-+ #if defined(RHEL_MAJOR) && defined(RHEL_MINOR)
-+ # define RTLNX_RHEL_MAX(a_iMajor, a_iMinor) \
-+-     ((RHEL_MAJOR) < (a_iMajor) || ((RHEL_MAJOR) == (a_iMajor) && (RHEL_MINOR) < (a_iMinor)))
-++	 ((RHEL_MAJOR) < (a_iMajor) || ((RHEL_MAJOR) == (a_iMajor) && (RHEL_MINOR) < (a_iMinor)))
-+ #else
-+ # define RTLNX_RHEL_MAX(a_iMajor, a_iMinor) (0)
-+ #endif
-+@@ -95,7 +90,7 @@
-+  */
-+ #if defined(RHEL_MAJOR) && defined(RHEL_MINOR)
-+ # define RTLNX_RHEL_RANGE(a_iMajorMin, a_iMinorMin,  a_iMajorMax, a_iMinorMax) \
-+-     (RTLNX_RHEL_MIN(a_iMajorMin, a_iMinorMin) && RTLNX_RHEL_MAX(a_iMajorMax, a_iMinorMax))
-++	 (RTLNX_RHEL_MIN(a_iMajorMin, a_iMinorMin) && RTLNX_RHEL_MAX(a_iMajorMax, a_iMinorMax))
-+ #else
-+ # define RTLNX_RHEL_RANGE(a_iMajorMin, a_iMinorMin,  a_iMajorMax, a_iMinorMax)  (0)
-+ #endif
-+@@ -173,7 +168,9 @@
-+ #include <drm/ttm/ttm_bo_api.h>
-+ #include <drm/ttm/ttm_bo_driver.h>
-+ #include <drm/ttm/ttm_placement.h>
-++#if RTLNX_VER_MAX(5,13,0)
-+ #include <drm/ttm/ttm_memory.h>
-++#endif
-+ #if RTLNX_VER_MAX(5,12,0)
-+ # include <drm/ttm/ttm_module.h>
-+ #endif
-+@@ -222,7 +219,7 @@ static inline void drm_gem_object_put(st
-+ 				 VBVA_ADAPTER_INFORMATION_SIZE)
-+ #define GUEST_HEAP_SIZE   VBVA_ADAPTER_INFORMATION_SIZE
-+ #define GUEST_HEAP_USABLE_SIZE (VBVA_ADAPTER_INFORMATION_SIZE - \
-+-				sizeof(HGSMIHOSTFLAGS))
-++				sizeof(struct hgsmi_host_flags))
-+ #define HOST_FLAGS_OFFSET GUEST_HEAP_USABLE_SIZE
-+ 
-+ /** How frequently we refresh if the guest is not providing dirty rectangles. */
-+@@ -232,7 +229,7 @@ static inline void drm_gem_object_put(st
-+ static inline void *devm_kcalloc(struct device *dev, size_t n, size_t size,
-+ 				 gfp_t flags)
-+ {
-+-    return devm_kzalloc(dev, n * size, flags);
-++	return devm_kzalloc(dev, n * size, flags);
-+ }
-+ #endif
-+ 
-+@@ -244,7 +241,7 @@ struct vbox_private {
-+ 	u8 __iomem *guest_heap;
-+ 	u8 __iomem *vbva_buffers;
-+ 	struct gen_pool *guest_pool;
-+-	struct VBVABUFFERCONTEXT *vbva_info;
-++	struct vbva_buf_context *vbva_info;
-+ 	bool any_pitch;
-+ 	u32 num_crtcs;
-+ 	/** Amount of available VRAM, including space used for buffers. */
-+@@ -252,7 +249,7 @@ struct vbox_private {
-+ 	/** Amount of available VRAM, not including space used for buffers. */
-+ 	u32 available_vram_size;
-+ 	/** Array of structures for receiving mode hints. */
-+-	VBVAMODEHINT *last_mode_hints;
-++	struct vbva_modehint *last_mode_hints;
-+ 
-+ 	struct vbox_fbdev *fbdev;
-+ 
-+@@ -263,7 +260,11 @@ struct vbox_private {
-+ 		struct drm_global_reference mem_global_ref;
-+ 		struct ttm_bo_global_ref bo_global_ref;
-+ #endif
-++#if RTLNX_VER_MIN(5,13,0) 
-++		struct ttm_device bdev; 
-++#else
-+ 		struct ttm_bo_device bdev;
-++#endif
-+ 		bool mm_initialised;
-+ 	} ttm;
-+ 
-+diff -urpN virtualbox-6.1.22-dfsg.orig/src/VBox/Additions/linux/drm/vbox_ttm.c virtualbox-6.1.22-dfsg/src/VBox/Additions/linux/drm/vbox_ttm.c
-+--- virtualbox-6.1.22-dfsg.orig/src/VBox/Additions/linux/drm/vbox_ttm.c	2021-04-28 16:24:47.000000000 +0000
-++++ virtualbox-6.1.22-dfsg/src/VBox/Additions/linux/drm/vbox_ttm.c	2021-06-23 10:08:07.164057918 +0000
-+@@ -48,7 +43,11 @@
-+ #endif
-+ 
-+ 
-++#if RTLNX_VER_MIN(5,13,0)
-++static inline struct vbox_private *vbox_bdev(struct ttm_device *bd)
-++#else
-+ static inline struct vbox_private *vbox_bdev(struct ttm_bo_device *bd)
-++#endif
-+ {
-+ 	return container_of(bd, struct vbox_private, ttm.bdev);
-+ }
-+@@ -188,7 +187,7 @@ static int vbox_ttm_io_mem_reserve(struc
-+ 	mem->bus.size = mem->num_pages << PAGE_SHIFT;
-+ 	mem->bus.base = 0;
-+ 	mem->bus.is_iomem = false;
-+-	if (!(man->flags & TTM_MEMTYPE_FLAG_MAPPABLE))
-++	 if (!(man->flags & TTM_MEMTYPE_FLAG_MAPPABLE))
-+ 		return -EINVAL;
-+ 	switch (mem->mem_type) {
-+ 	case TTM_PL_SYSTEM:
-+@@ -205,8 +204,13 @@ static int vbox_ttm_io_mem_reserve(struc
-+ 	return 0;
-+ }
-+ #else
-++# if RTLNX_VER_MAX(5,13,0)
-+ static int vbox_ttm_io_mem_reserve(struct ttm_bo_device *bdev,
-+ 				   struct ttm_resource *mem)
-++# else /* > 5.13.0 */
-++static int vbox_ttm_io_mem_reserve(struct ttm_device *bdev,
-++				   struct ttm_resource *mem)
-++# endif /* > 5.13.0 */
-+ {
-+ 	struct vbox_private *vbox = vbox_bdev(bdev);
-+ 	mem->bus.addr = NULL;
-+@@ -241,7 +245,12 @@ static int vbox_ttm_io_mem_reserve(struc
-+ 
-+ 
-+ 
-+-#if RTLNX_VER_MIN(5,10,0)
-++#if RTLNX_VER_MIN(5,13,0)
-++static void vbox_ttm_io_mem_free(struct ttm_device *bdev,
-++				 struct ttm_resource *mem)
-++{
-++}
-++#elif RTLNX_VER_MIN(5,10,0)
-+ static void vbox_ttm_io_mem_free(struct ttm_bo_device *bdev,
-+ 				 struct ttm_resource *mem)
-+ {
-+@@ -253,7 +262,13 @@ static void vbox_ttm_io_mem_free(struct
-+ }
-+ #endif
-+ 
-+-#if RTLNX_VER_MIN(5,10,0)
-++#if RTLNX_VER_MIN(5,13,0)
-++static void vbox_ttm_tt_destroy(struct ttm_device *bdev, struct ttm_tt *tt)
-++{
-++	ttm_tt_fini(tt);
-++	kfree(tt);
-++}
-++#elif RTLNX_VER_MIN(5,10,0)
-+ static void vbox_ttm_tt_destroy(struct ttm_bo_device *bdev, struct ttm_tt *tt)
-+ {
-+ 	ttm_tt_fini(tt);
-+@@ -333,7 +348,11 @@ static int vbox_bo_move(struct ttm_buffe
-+ }
-+ #endif
-+ 
-++#if RTLNX_VER_MIN(5,13,0)
-++static struct ttm_device_funcs vbox_bo_driver = {
-++#else /* < 5.13.0 */
-+ static struct ttm_bo_driver vbox_bo_driver = {
-++#endif /* < 5.13.0 */
-+ 	.ttm_tt_create = vbox_ttm_tt_create,
-+ #if RTLNX_VER_MIN(5,10,0)
-+ 	.ttm_tt_destroy = vbox_ttm_tt_destroy,
-+@@ -370,14 +389,22 @@ int vbox_mm_init(struct vbox_private *vb
-+ {
-+ 	int ret;
-+ 	struct drm_device *dev = vbox->dev;
-++#if RTLNX_VER_MIN(5,13,0)
-++	struct ttm_device *bdev = &vbox->ttm.bdev;
-++#else
-+ 	struct ttm_bo_device *bdev = &vbox->ttm.bdev;
-++#endif
-+ 
-+ #if RTLNX_VER_MAX(5,0,0) && !RTLNX_RHEL_MAJ_PREREQ(7,7) && !RTLNX_RHEL_MAJ_PREREQ(8,1)
-+ 	ret = vbox_ttm_global_init(vbox);
-+ 	if (ret)
-+ 		return ret;
-+ #endif
-++#if RTLNX_VER_MIN(5,13,0)
-++	ret = ttm_device_init(&vbox->ttm.bdev,
-++#else
-+ 	ret = ttm_bo_device_init(&vbox->ttm.bdev,
-++#endif
-+ #if RTLNX_VER_MAX(5,0,0) && !RTLNX_RHEL_MAJ_PREREQ(7,7) && !RTLNX_RHEL_MAJ_PREREQ(8,1)
-+ 				 vbox->ttm.bo_global_ref.ref.object,
-+ #endif
-+@@ -429,7 +456,11 @@ int vbox_mm_init(struct vbox_private *vb
-+ 	return 0;
-+ 
-+ err_device_release:
-++#if RTLNX_VER_MIN(5,13,0)
-++	ttm_device_fini(&vbox->ttm.bdev);
-++#else
-+ 	ttm_bo_device_release(&vbox->ttm.bdev);
-++#endif
-+ #if RTLNX_VER_MAX(5,0,0) && !RTLNX_RHEL_MAJ_PREREQ(7,7) && !RTLNX_RHEL_MAJ_PREREQ(8,1)
-+ err_ttm_global_release:
-+ 	vbox_ttm_global_release(vbox);
-+@@ -446,7 +477,11 @@ void vbox_mm_fini(struct vbox_private *v
-+ #else
-+ 	arch_phys_wc_del(vbox->fb_mtrr);
-+ #endif
-++#if RTLNX_VER_MIN(5,13,0)
-++        ttm_device_fini(&vbox->ttm.bdev);
-++#else
-+ 	ttm_bo_device_release(&vbox->ttm.bdev);
-++#endif
-+ #if RTLNX_VER_MAX(5,0,0) && !RTLNX_RHEL_MAJ_PREREQ(7,7) && !RTLNX_RHEL_MAJ_PREREQ(8,1)
-+ 	vbox_ttm_global_release(vbox);
-+ #endif
-+@@ -528,7 +563,9 @@ int vbox_bo_create(struct drm_device *de
-+ {
-+ 	struct vbox_private *vbox = dev->dev_private;
-+ 	struct vbox_bo *vboxbo;
-++#if RTLNX_VER_MAX(5,13,0)
-+ 	size_t acc_size;
-++#endif
-+ 	int ret;
-+ 
-+ 	vboxbo = kzalloc(sizeof(*vboxbo), GFP_KERNEL);
-+@@ -551,16 +588,20 @@ int vbox_bo_create(struct drm_device *de
-+ 
-+ 	vbox_ttm_placement(vboxbo, VBOX_MEM_TYPE_VRAM | VBOX_MEM_TYPE_SYSTEM);
-+ 
-++#if RTLNX_VER_MAX(5,13,0)
-+ 	acc_size = ttm_bo_dma_acc_size(&vbox->ttm.bdev, size,
-+ 				       sizeof(struct vbox_bo));
-++#endif
-+ 
-+ 	ret = ttm_bo_init(&vbox->ttm.bdev, &vboxbo->bo, size,
-+ 			  ttm_bo_type_device, &vboxbo->placement,
-+ #if RTLNX_VER_MAX(4,17,0) && !RTLNX_RHEL_MAJ_PREREQ(7,6) && !RTLNX_SUSE_MAJ_PREREQ(15,1) && !RTLNX_SUSE_MAJ_PREREQ(12,5)
-+ 			  align >> PAGE_SHIFT, false, NULL, acc_size,
-+-#else
-++#elif RTLNX_VER_MAX(5,13,0) /* < 5.13.0 */
-+ 			  align >> PAGE_SHIFT, false, acc_size,
-+-#endif
-++#else /* > 5.13.0 */
-++			  align >> PAGE_SHIFT, false,
-++#endif /* > 5.13.0 */
-+ #if RTLNX_VER_MIN(3,18,0) || RTLNX_RHEL_MAJ_PREREQ(7,2)
-+ 			  NULL, NULL, vbox_bo_ttm_destroy);
-+ #else
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.22.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.22.bb
-index a074d0a55..19b8f8f46 100644
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.22.bb
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.22.bb
-@@ -13,6 +13,7 @@ VBOX_NAME = "VirtualBox-${PV}"
- 
- SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
-     file://Makefile.utils \
-+    file://40-linux-5.13-support.patch \
-     file://add__divmoddi4.patch \
- "
- SRC_URI[md5sum] = "abb1a20021e5915fe38c666e8c11cf80"
--- 
-2.25.1
+  thunar: fix CVE-2021-32563 (2021-06-13 12:35:48 -0700)
+
+are available in the Git repository at:
+
+  https://git.openembedded.org/meta-openembedded hardknott-next
+
+for you to fetch changes up to c51e79dd854460c6f6949a187970d05362152e84:
+
+  python3-django: upgrade 2.2.23 -> 2.2.24 (2021-06-27 07:50:20 -0700)
+
+----------------------------------------------------------------
+Andrea Adami (3):
+      initramfs-kexecboot-image: support cases where machines override
+IMAGE_FSTYPES
+      initramfs-debug-image: support cases where machines override
+IMAGE_FSTYPES
+      rapidjson: remove stale LIB_INSTALL_DIR
+
+Chen Qi (1):
+      minifi-cpp: set CLEANBROKEN to 1
+
+Geoff Parker (1):
+      cifs-utils: set ROOTSBINDIR to /usr/sbin if DISTRO_FEATURES has
+usrmerge
+
+Leon Anavi (1):
+      python3-django: Upgrade 3.2.3 -> 3.2.4
+
+Olivier Georget (1):
+      libpfm4 4.10.1 : enable arm64 host platform
+
+Ovidiu Panait (1):
+      libeigen: update LICENSE information
+
+Peter Kjellerstedt (2):
+      net-snmp: A little clean up
+      net-snmp: Support building for native
+
+Sekine Shigeki (2):
+      add CVE-2011-2411 to allowlist
+      ntp: add CVE-2016-9312 to allowlist
+
+Trevor Gamblin (3):
+      python3-django: upgrade 2.2.22 -> 2.2.23
+      python3-django: upgrade 3.2.2 -> 3.2.3
+      python3-django: upgrade 2.2.23 -> 2.2.24
+
+Yi Zhao (1):
+      minifi-cpp: set correct python processor directory in configure file
+
+ito-yuichi@fujitsu.com (2):
+      cyrus-sasl: add CVE-2020-8032 to allowlist
+      dovecot: add CVE-2016-4983 to allowlist
+
+zangrc (1):
+      wireshark: upgrade 3.4.5 -> 3.4.6
+
+zhengruoqin (1):
+      net-snmp: upgrade 5.9 -> 5.9.1
+
+ meta-initramfs/recipes-core/images/initramfs-debug-image.bb     |  7 +++-
+ meta-initramfs/recipes-core/images/initramfs-kexecboot-image.bb |  8 +++--
+ meta-networking/recipes-connectivity/samba/samba_4.10.18.bb     |  4 +++
+ meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb |  3 ++
+ .../net-snmp-5.7.2-fix-engineBoots-value-on-SIGHUP.patch        | 19
+++++++-----
+ .../net-snmp/{net-snmp_5.9.bb => net-snmp_5.9.1.bb}             | 53
+++++++++++++++++-------------
+ meta-networking/recipes-support/cifs/cifs-utils_6.13.bb         | 17
++++++++--
+ meta-networking/recipes-support/dovecot/dovecot_2.3.14.bb       |  3 ++
+ meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb             |  3 ++
+ .../wireshark/{wireshark_3.4.5.bb => wireshark_3.4.6.bb}        |  2 +-
+ meta-oe/licenses/MINPACK                                        | 51
++++++++++++++++++++++++++++
+ meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb             |  2 +-
+ meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb         |  5 +++
+ meta-oe/recipes-kernel/libpfm/libpfm4_4.10.1.bb                 |  3 +-
+ meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb              |  9 +++--
+ meta-python/recipes-devtools/python/python3-django_2.2.22.bb    |  9 -----
+ meta-python/recipes-devtools/python/python3-django_2.2.24.bb    |  9 +++++
+ .../python/{python3-django_3.2.2.bb => python3-django_3.2.4.bb} |  2 +-
+ 18 files changed, 156 insertions(+), 53 deletions(-)
+ rename meta-networking/recipes-protocols/net-snmp/{net-snmp_5.9.bb =>
+net-snmp_5.9.1.bb} (89%)
+ rename meta-networking/recipes-support/wireshark/{wireshark_3.4.5.bb =>
+wireshark_3.4.6.bb} (97%)
+ create mode 100644 meta-oe/licenses/MINPACK
+ delete mode 100644
+meta-python/recipes-devtools/python/python3-django_2.2.22.bb
+ create mode 100644
+meta-python/recipes-devtools/python/python3-django_2.2.24.bb
+ rename meta-python/recipes-devtools/python/{python3-django_3.2.2.bb =>
+python3-django_3.2.4.bb} (77%)
 
