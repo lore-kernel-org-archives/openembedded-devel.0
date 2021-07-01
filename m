@@ -1,207 +1,140 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.112])
- by mx.groups.io with SMTP id smtpd.web11.3929.1625124483075498977
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.5001.1625133433049974725
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Jul 2021 00:28:03 -0700
+ Thu, 01 Jul 2021 02:57:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@fujitsu.com header.s=170520fj header.b=dwxQQXHz;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: zhengrq.fnst@fujitsu.com)
-Return-Path: <zhengrq.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1625124480; i=@fujitsu.com;
-	bh=LfYTYGg/LdNOqGQ34bkJoM7I8qxrKIE4Vzl+D1xWaNo=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	b=dwxQQXHzUJwnPtbxN9km3GSBXnBgPMEmB1oAcZsL9o/u90kWVTvgwZILjW0F5jUUL
-	 jiFTfTla74j11Iq7gW3q4YfyICceTKylVVAzKzitUUkV65M9PtQD63NWXDqolZQAbV
-	 62rSxF8Pf8P6RKdXCEPD1oOExlnXVL5dx+c+D5I2fkfXB+NgdCnfbrTcawEgr1ltFy
-	 3pdWgCqqjm6PT0R3fmnh8qah9drYkjATLg4nnwjiieeP37NjD2OUwtK56NS6NSRb7w
-	 ousAVvu1iQDUdNtTbFiqqM2ADI2aLSKbr3NTZDUw+ypORkUuw8H7WvKTy/hMfyzOSK
-	 66kZo1Oi5khvg==
-Received: from [100.113.7.10] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-b.eu-central-1.aws.symcld.net id 4B/31-03281-F7E6DD06; Thu, 01 Jul 2021 07:27:59 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrMIsWRWlGSWpSXmKPExsViZ8MRqlufdzf
-  B4MUqaYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeNt/1q2gjaTis87zRoY12l0MXJxCAnMYpJY
-  s2cCC4Szm1Hiz8+jjF2MnBxsAroS5x6vZQexRQT0JZbO3sMMYgsLBEg8P3UKzGYRUJHY+O0QK
-  4jNK+Ah8frCVrB6CQEFiSkP3zNDxAUlTs58wgJiMwuoSnQfecoEYctLNG+dDVTDAVSvKDF7uj
-  xEa4XEjBnb2CYw8s5C0j0LSfcsJN0LGJlXMVomFWWmZ5TkJmbm6BoaGOgaGhrrmusaGhnqJVb
-  pJumlluomp+aVFCUCZfUSy4v1iitzk3NS9PJSSzYxAsMupZC9cgfj2jcf9A4xSnIwKYnyvou6
-  myDEl5SfUpmRWJwRX1Sak1p8iFGGg0NJgjcxFygnWJSanlqRlpkDjAGYtAQHj5II70yQNG9xQ
-  WJucWY6ROoUo6KUOK86SEIAJJFRmgfXBou7S4yyUsK8jAwMDEI8BalFuZklqPKvGMU5GJWEea
-  /nAE3hycwrgZv+CmgxE9DiRU9ugiwuSURISTUwaX3IXsf9a6+qgblly75bLKfrH82p3b0nPfD
-  pxdPXru+0k38RFdO9a6uF4YJZxesrWP7cydtr+fud9duFbFnuMk0l/swNX5zes4jNO3OXye3M
-  4br57J95VmvWML07uXYd1+wSX6uk51ccoj/M81/hNGHHvj2ep57eme8nvCKA2WqpZJoEE/s11
-  euJxRsqvz/xeK3zSsIv863qDXs912cB9zR9j3Z0PVvBmPjPq8WL7bnDrNr1lr9MAm9F338j+W
-  Dv3/gpJ9XUzyY7HZU/nb5et/JLZpW50P43eUJ7/2cFx03+szp6+oHH0b/ytxySOfnxeuKWVcY
-  9T/warOf7PLiTdHpS+9lTTctTjH+vqz/J0KfEUpyRaKjFXFScCAD0bKBpNgMAAA==
-X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-2.tower-238.messagelabs.com!1625124478!111497!1
-X-Originating-IP: [62.60.8.85]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 16648 invoked from network); 1 Jul 2021 07:27:59 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-2.tower-238.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 1 Jul 2021 07:27:59 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1617RtkU029709
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 1 Jul 2021 08:27:58 +0100
-Received: from localhost.localdomain (10.167.225.35) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 1 Jul 2021 08:27:54 +0100
-From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-sqlalchemy: upgrade 1.4.17 -> 1.4.20
-Date: Thu, 1 Jul 2021 14:37:33 +0800
-Message-ID: <1625121453-86858-1-git-send-email-zhengrq.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=Y6PCoyJv;
+ spf=pass (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=2816976379=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id 1619nwM7010740
+	for <openembedded-devel@lists.openembedded.org>; Thu, 1 Jul 2021 09:57:11 GMT
+Received: from nam12-dm6-obe.outbound.protection.outlook.com (mail-dm6nam12lp2169.outbound.protection.outlook.com [104.47.59.169])
+	by mx0a-0064b401.pphosted.com with ESMTP id 39ga5r9bcf-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 01 Jul 2021 09:57:11 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ElPbSMx0Yi/hAvBEvxjM41IoytdNO4+udi0ElsRZhKqJ/r+HkUHQm/ufAu9cLBBN0Zi5RJj7/UqXXN1TWn5VuplzlAeHL2r4jxs1rA9tQUT7PHJQBvObDDIuwnMavReXSlB5k2OvTEjHK2s7JmMnZlKYQx3NxNvVeJtHwB/cXB4bVkqXCrg1K3jDrs/NL2G8nzQBtXjgqLLOZLs1Nx86sZJcXgkWmhTk8tksJzLvlJ1wcwsRWlCk3RWWn2g09A/duwLkPY1buB2BPcZZJROfNnVExbSxQYfAPmKn81nK9ro9vzrnRUiUtA5Gii40KmT+v9lbjmwX8BFV3HFTHLRuMw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fSPQ7fIxWBforAHyQvWHViQbXfzfBcD3srN8nE9EIno=;
+ b=SxYl8vmpF3BAVEROAK6FlfheNI0w7J3lpDpLFWrOIv5cAjzhxe4wkDx8A1O9Az+46HpXqtOK2n7R2AuHD2mBqU8+3AfYwIL8wFO9ml828kim0cjRFaFg4AlarlA5+nIU2WRDrppkXhAXNmjfM+30R8RoqhWxU7+T2fYQpArCDjYDIlhInrbwj1n/Ibw3+5aP4w3pGg3Y6zENqJhcrVNneDGOvfv/+ptIkKwx3Sthi8ny3reeiumJildMo85UD8BvlCx8pIS89uYoGV8wS1064+37ylpvZcPGiA7JbW01/p9YWTRrAiaFOYyanzHoX7hCvmeKZAFS4gS2rtEHPre2Lg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fSPQ7fIxWBforAHyQvWHViQbXfzfBcD3srN8nE9EIno=;
+ b=Y6PCoyJvmXHRwa79i2lwCz2rxGsGIeENNej3+1I3bOlvRp0LGg9dymt4IIdqnr6YVX0e4Ez3rB2+Qk/PhmYLVgAq7qUXyACDzqdOT9ixY+FyP6y0dTNDgLSO0GEEGYIxNA80nd0XzSSKdRi+PRCMvtg3smD7bydgBcPoUzlJAl4=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
+ by CO1PR11MB4802.namprd11.prod.outlook.com (2603:10b6:303:96::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4264.20; Thu, 1 Jul
+ 2021 09:57:10 +0000
+Received: from CO1PR11MB4867.namprd11.prod.outlook.com
+ ([fe80::6ca0:3d02:dcd0:626c]) by CO1PR11MB4867.namprd11.prod.outlook.com
+ ([fe80::6ca0:3d02:dcd0:626c%6]) with mapi id 15.20.4287.023; Thu, 1 Jul 2021
+ 09:57:10 +0000
+From: "Yi Zhao" <yi.zhao@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH 1/2] samba: fix shebang for pidl
+Date: Thu,  1 Jul 2021 17:56:58 +0800
+Message-Id: <20210701095659.113682-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.25.1
+X-Originating-IP: [60.247.85.82]
+X-ClientProxiedBy: SJ0PR03CA0281.namprd03.prod.outlook.com
+ (2603:10b6:a03:39e::16) To CO1PR11MB4867.namprd11.prod.outlook.com
+ (2603:10b6:303:9a::13)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain; charset="y"
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from pek-yzhao1-d1.wrs.com (60.247.85.82) by SJ0PR03CA0281.namprd03.prod.outlook.com (2603:10b6:a03:39e::16) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4287.22 via Frontend Transport; Thu, 1 Jul 2021 09:57:09 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: e7f926e3-a857-4855-f089-08d93c769798
+X-MS-TrafficTypeDiagnostic: CO1PR11MB4802:
+X-Microsoft-Antispam-PRVS: 
+	<CO1PR11MB4802847183E5DABF3812756EF9009@CO1PR11MB4802.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:949;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	/6UvRZaQB/AgTGUZeUPp/kWW0Dx2fpmIQEZxh1xIOkQRaSxtmSS4paeG1MOoXYLetV+3K2gdbSbpmlpSzdL6ki+jbe3A5saRrkFdh9m8Ft7/v9PGyPZbut/f+j8JH2uvoXC3WGXVq5FV4ABJ2zccEkChtUEPbyeyfq7p+9XCaOxMLy7YmRBoWHd0rY4SKeK0/HxLOL/EwczNzYj2pQzrBY/CaGjqsYXi576swKQyIn8uc9ufnHTuO2HMVHU4D/nH4DzoyiWFes59HFQT07A9/PNHhnOq1riZ6NBcFcMisyUr/1IVaxtL6KXE6g+1yT8jOu602nvCvLPwH4lWuFw8dHXvJ2nsJn2DJMUMo9b9kEDESC02axsfZzuUfGgxnvakmnm3XE0Bjkp/GnaEYC6HAuYYowUrSM2eYzm6R1GD6/n+EWJVwy50gHUNGjEMJ7t7FTh3rPn5ffzgrIEhD66wrpzs0MSWsXD12bWmnvQTDBSw3pqU2DZ4BzbE4teJ9eYs73qMLtxj7Yua6xIt6jVXNSyM1wRfZiCJiKyMOp+oPAXVlf9+ehPWvoOg6dkkYzdH8akV9BkUC4PBnYBhRpWiX9Ak4/IKV+Wz2BFJvi3wk8fMZM5Ji7Vkmicvh6pkCLiF1p0VXmaSpvj5N1EjqzGLNnN1R+ljEyVq0bIdRXMdMUGsLSW9F2vlxYDJRIyGc6bPig9xAFIHj/ZWFvpKzuB2Nw==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(396003)(366004)(346002)(136003)(376002)(186003)(16526019)(83380400001)(86362001)(36756003)(44832011)(8676002)(66476007)(4744005)(6916009)(6512007)(26005)(66556008)(5660300002)(6506007)(6486002)(2616005)(478600001)(316002)(52116002)(2906002)(1076003)(38100700002)(38350700002)(6666004)(66946007)(956004)(8936002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?nDyQeD2f/v4/k0UFUdbDlozzv2yiDtfFgaaPxcbJGVCq9hUHknI1p/5wxa8g?=
+ =?us-ascii?Q?CajVqbDuycN4rgnPzgLgXDY+SpP4LfBS3alGC3AcINoK3WMgnZdGzj7huRj2?=
+ =?us-ascii?Q?Fo/59G5IawvlR5u5vFA0kFiPFQtLoTUiiEf35xg/JTDlcx2EhkZkSBU2Jy+T?=
+ =?us-ascii?Q?eOhrA8aF+BRNzt46Y+KA61aC4b0R4FoBnHnxm/+x/G7uDbhCoe30AXmwxC/w?=
+ =?us-ascii?Q?YcAQ+sUdV41TWp5m/0tMKqSkTnPZFfdOn7hyKgLByqU5q73TnpAp+2lXjGQZ?=
+ =?us-ascii?Q?e3JDWFsqhBE4UuKmTs1K2crh6gNI2hX7cMMp4FaEAd0P858V9mLPYHOAJ768?=
+ =?us-ascii?Q?O/5X/frzzNdiMaeuzL7ysdxTUnQRtJsnRXfWFcITN3RI0rjos+saqm+SH3Ym?=
+ =?us-ascii?Q?UmeUvPFtNb8MOXG281LxLwKA3DMDSGdn8eW9baEwbeSjnOEU1z1ErVxeJ/7g?=
+ =?us-ascii?Q?bSWaq+df7EKVfI8dz1nYBN5JiHCWadrgz5XIoHECpIDMe6OyZtQIo9r0UZ+W?=
+ =?us-ascii?Q?ucn10QO3h9tp7HP3zISSkxBtTRwCergm9Bjf+OhJ6qgunQRomK+9Tb3WkLlW?=
+ =?us-ascii?Q?5ObtsY01JTFw/0A3iplUaZ5ZB6Sq2goPpGRZoCeyLzrgP3nEfmv9SOsPf1qp?=
+ =?us-ascii?Q?4+sovkyUDkkziiCx06MWPA4EJ3n345MwQi5ldGfxymPuIyk7moBUa8VQukG5?=
+ =?us-ascii?Q?Igzkvh3MOq09ejvyt+huep0MGLMTMW6Ayfdy9tXOfTChqkG1v5jVsRQjUP18?=
+ =?us-ascii?Q?cGbV48IT46ryEE0kPMY78dV9SNuhcpPyOoJoRZ2mXk+BcMBxKesDDa5aCfMm?=
+ =?us-ascii?Q?SdBuHHKWRkZHNQj/o+fR7SkOuMLRjxMGWeRDyoQsHsXqmuH9KkakD5vTRRHy?=
+ =?us-ascii?Q?+JhF2c+tHyiIKpJOBK1RpvJpoq5/kt56U33JwGSdBpdmPVB42nEAeilJ9Va5?=
+ =?us-ascii?Q?J4d7P3cLRwLSmoFme07DeNTtgBTGXP2Zd9IjJLgXFJFOXhhCj1RjSXnjCJW3?=
+ =?us-ascii?Q?6LBeEkK7t6wAq3zvz3Mvz8xfVESqM42Pmuctigm3kpsdLKLPzjTtBSfsCf5s?=
+ =?us-ascii?Q?DzQ+uLcH9GO4VexDOd7GUxG4WzJaBnt/tv41olQv0KG+GCROmp3/14cfFlzb?=
+ =?us-ascii?Q?su06fFkXwr9K1lPkgLnJaph3hLE09MLM2BCerMjA7WQ9i5BbLATDY93I7oY9?=
+ =?us-ascii?Q?oMjvr5LClIWwC38nAh9HxDx87EmSOw8FNv5dwn/t4peWNZQiyRCZGVaF/Efp?=
+ =?us-ascii?Q?+JVI414k8uWtbPegyziVrJfL23fNv59jh9zoaJjlbE2oZ5IO3pHDpvz4sXs2?=
+ =?us-ascii?Q?nueskIhYsHjLtWrZi89YgXSn?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e7f926e3-a857-4855-f089-08d93c769798
+X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2021 09:57:09.9404
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Be2YMrBrlvx5SP1mfSHT8TpgyTUpLrzljuQ0hdwTajrBo2ZI2npa1Ks2OpLpvbxVHIV/qIf2HjwbcsbfowY0XQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR11MB4802
+X-Proofpoint-ORIG-GUID: 3C-HxCPWXkYFE5jYlyZv6fa0_WwUte7a
+X-Proofpoint-GUID: 3C-HxCPWXkYFE5jYlyZv6fa0_WwUte7a
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391,18.0.790
+ definitions=2021-07-01_06:2021-06-30,2021-07-01 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 bulkscore=0
+ priorityscore=1501 impostorscore=0 mlxlogscore=899 spamscore=0
+ malwarescore=0 suspectscore=0 lowpriorityscore=0 mlxscore=0 adultscore=0
+ phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2104190000 definitions=main-2107010066
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-.. changelog::
-    :version: 1.4.20
-    :released: June 28, 2021
+The shebang in pidl points to wrong location:
+$ pidl
+-sh: /usr/bin/pidl: /buildarea/build/tmp-glibc/hosttools/env: bad interpreter: No such file or directory
 
-    .. change::
-        :tags: bug, regression, orm
-        :tickets: 6680
-
-        Fixed regression in ORM regarding an internal reconstitution step for the
-        :func:`_orm.with_polymorphic` construct, when the user-facing object is
-        garbage collected as the query is processed. The reconstitution was not
-        ensuring the sub-entities for the "polymorphic" case were handled, leading
-        to an ``AttributeError``.
-
-    .. change::
-        :tags: usecase, sql
-        :tickets: 6646
-
-        Add a impl parameter to :class:`_types.PickleType` constructor, allowing
-        any arbitary type to be used in place of the default implementation of
-        :class:`_types.LargeBinary`. Pull request courtesy jason3gb.
-
-    .. change::
-        :tags: bug, engine
-        :tickets: 5348
-
-        Fixed an issue in the C extension for the :class:`_result.Row` class which
-        could lead to a memory leak in the unlikely case of a :class:`_result.Row`
-        object which referred to an ORM object that then was mutated to refer back
-        to the ``Row`` itself, creating a cycle. The Python C APIs for tracking GC
-        cycles has been added to the native :class:`_result.Row` implementation to
-        accommodate for this case.
-
-    .. change::
-        :tags: bug, engine
-        :tickets: 6665
-
-        Fixed old issue where a :func:`_sql.select()` made against the token "*",
-        which then yielded exactly one column, would fail to correctly organize the
-        ``cursor.description`` column name into the keys of the result object.
-
-    .. change::
-        :tags: usecase, mysql
-        :tickets: 6659
-
-        Made a small adjustment in the table reflection feature of the MySQL
-        dialect to accommodate for alternate MySQL-oriented databases such as TiDB
-        which include their own "comment" directives at the end of a constraint
-        directive within "CREATE TABLE" where the format doesn't have the
-        additional space character after the comment, in this case the TiDB
-        "clustered index" feature. Pull request courtesy Dani=C3=ABl van Eeden.
-
-    .. change::
-        :tags: bug, schema
-        :tickets: 6685
-
-        Fixed issue where passing ``None`` for the value of
-        :paramref:`_schema.Table.prefixes` would not store an empty list, but
-        rather the constant ``None``, which may be unexpected by third party
-        dialects. The issue is revealed by a usage in recent versions of Alembic
-        that are passing ``None`` for this value. Pull request courtesy Kai
-        Mueller.
-
-    .. change::
-        :tags: bug, regression, ext
-        :tickets: 6679
-
-        Fixed regression in :mod:`sqlalchemy.ext.automap` extension such that the
-        use case of creating an explicit mapped class to a table that is also the
-        :paramref:`_orm.relationship.secondary` element of a
-        :func:`_orm.relationship` that automap will be generating would emit the
-        "overlaps" warnings introduced in 1.4 and discussed at :ref:`error_qzyx`.
-        While generating this case from automap is still subject to the same
-        caveats that the "overlaps" warning refers towards, as automap is intended
-        for more ad-hoc use cases, the condition which produces the warning is
-        disabled when a many-to-many relationship with this particular pattern is
-        generated.
-
-    .. change::
-        :tags: bug, regression, orm
-        :tickets: 6678
-
-        Adjusted :meth:`_orm.Query.union` and similar set operations to be
-        correctly compatible with the new capabilities just added in
-        :ticket:`6661`, with SQLAlchemy 1.4.19, such that the SELECT statements
-        rendered as elements of the UNION or other set operation will include
-        directly mapped columns that are mapped as deferred; this both fixes a
-        regression involving unions with multiple levels of nesting that would
-        produce a column mismatch, and also allows the :func:`_orm.undefer` option
-        to be used at the top level of such a :class:`_orm.Query` without having to
-        apply the option to each of the elements within the UNION.
-
-    .. change::
-        :tags: bug, sql, orm
-        :tickets: 6668
-
-        Fixed the class hierarchy for the :class:`_schema.Sequence` and the more
-        general :class:`_schema.DefaultGenerator` base, as these are "executable"
-        as statements they need to include :class:`_sql.Executable` in their
-        hierarchy, not just :class:`_roles.StatementRole` as was applied
-        arbitrarily to :class:`_schema.Sequence` previously. The fix allows
-        :class:`_schema.Sequence` to work in all ``.execute()`` methods including
-        with :meth:`_orm.Session.execute` which was not working in the case that a
-        :meth:`_orm.SessionEvents.do_orm_execute` handler was also established.
-
-    .. change::
-        :tags: bug, orm
-        :tickets: 6538
-
-        Adjusted the check in the mapper for a callable object that is used as a
-        ``@validates`` validator function or a ``@reconstructor`` reconstruction
-        function, to check for "callable" more liberally such as to accommodate
-        objects based on fundamental attributes like ``__func__`` and
-        ``__call___``, rather than testing for ``MethodType`` / ``FunctionType``,
-        allowing things like cython functions to work properly. Pull request
-        courtesy Mi=C5=82osz Stypi=C5=84ski.
-
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- ...ython3-sqlalchemy_1.4.17.bb =3D> python3-sqlalchemy_1.4.20.bb} | 2 +-
+ meta-networking/recipes-connectivity/samba/samba_4.14.5.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-sqlalchemy_1.4.17.bb =3D> python3-sqlalchemy_1.4.20.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.17.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.20.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.17.bb
-rename to meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.20.bb
-index 5b881ea0b6..b96cdd3ed8 100644
---- a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.17.bb
-+++ b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.20.bb
-@@ -4,7 +4,7 @@ HOMEPAGE =3D "http://www.sqlalchemy.org/"
- LICENSE =3D "MIT"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3359ed561ac16aaa25b6c6eff84df595"
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.14.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.14.5.bb
+index 018bbf163..49259c7e2 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.14.5.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.14.5.bb
+@@ -211,7 +211,7 @@ do_install_append() {
+     oe_runmake -C ${S}/pidl DESTDIR=${D} install_vendor
+     find ${D}${libdir}/ -type f -name "perllocal.pod" | xargs rm -f
+     rm -rf ${D}${libdir}/perl5/vendor_perl/${PERLVERSION}/${BUILD_SYS}/auto/Parse/Pidl/.packlist
+-    
++    sed -i -e '1s,#!.*perl,#!${bindir}/env perl,' ${D}${bindir}/pidl
+ }
  
--SRC_URI[sha256sum] =3D "651cdb3adcee13624ba22d5ff3e96f91e16a115d2ca489ddc16a8e4c217e8509"
-+SRC_URI[sha256sum] =3D "38ee3a266afef2978e82824650457f70c5d74ec0cadec1b10fe5ed6f038eb5d0"
- 
- PYPI_PACKAGE =3D "SQLAlchemy"
- inherit pypi setuptools3
+ PACKAGES =+ "${PN}-python3 ${PN}-pidl \
 -- 
 2.25.1
 
