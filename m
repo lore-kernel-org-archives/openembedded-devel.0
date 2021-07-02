@@ -1,59 +1,60 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.115])
- by mx.groups.io with SMTP id smtpd.web08.3878.1625188790233028762
+Received: from mail3.bemta25.messagelabs.com (mail3.bemta25.messagelabs.com [195.245.230.84])
+ by mx.groups.io with SMTP id smtpd.web09.3980.1625189272835279296
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Jul 2021 18:19:50 -0700
+ Thu, 01 Jul 2021 18:27:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=fmzF4HVl;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.115, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=YH5lt2O1;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.84, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1625188787; i=@fujitsu.com;
-	bh=l/HyH0MBQ064iVQONtWKBOiCpDmNtnF8kghE6vWbfSM=;
+	s=170520fj; t=1625189271; i=@fujitsu.com;
+	bh=ZLibFkQ63/YJ1j/m/+bxO4W+mdprP2O57cukF9w1zA8=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=fmzF4HVlU2gP1CZaZcF1GVbhV4Jz2Kq8JjfVZ8EoEdjkmJ/6lQT9AMt9HXWuUTguU
-	 9RaNhDkqQQzR7QJCQU7pvwOJ1KRAxs20ZcFD3TtF7zA57YFq/I1DTja+at/OdMrUaw
-	 aIC+YVsr2bh5DnvtXvahPXDYzda1+fcCuMe1neFFp/S9OV+NUp3RxiW4poGy33i3Ku
-	 tycujpbnzSN1mK7k8VR00ImFCBs6TmhUTjT9T9SOwj0PIseEMxWUq0c0CFFOKvyDoc
-	 8pneHa8nbETVaGC720QNQMggnPzln+AqBmqdT5vI4bvvpbaurDpSBVDEAzm/yq+xkw
-	 XB2+/aoLBt9Og==
-Received: from [100.113.4.179] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-b.eu-central-1.aws.symcld.net id 3C/2D-07224-3B96ED06; Fri, 02 Jul 2021 01:19:47 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+EI1d2ceS/
-  B4MJeJouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaP3rGPBHdaKS9svMDcwTmXtYuTiEBKYxSSx
-  aekjFgjnOKPEnV8v2boYOTnYBHQkOl50s4DYIgL6Ektn72EGsYUFPCXuzX/BCGKzCKhIzDjcw
-  g5i8wq4S3y/cZ0VxJYQUJCY8vA9M0RcUOLkzCdgc5gFJCQOvnjBDFGjKLF95xkWCLtCYsaMbW
-  wTGHlmIWmZhaRlASPTKkbLpKLM9IyS3MTMHF1DAwNdQ0NjXVNdQ1NjvcQq3SS91FLd5NS8kqJ
-  EoKxeYnmxXnFlbnJOil5easkmRmAgpRSyztzB+On1B71DjJIcTEqivAfO3U0Q4kvKT6nMSCzO
-  iC8qzUktPsQow8GhJME7IeNegpBgUWp6akVaZg4wqGHSEhw8SiK88SBp3uKCxNzizHSI1ClGR
-  Slx3hvpQAkBkERGaR5cGyySLjHKSgnzMjIwMAjxFKQW5WaWoMq/YhTnYFQS5o0FmcKTmVcCN/
-  0V0GImoMWnb94FWVySiJCSamBaWrxk0/RjqZmfeYNOCVVNOKNgt+ql9xnbVdND+03srpRsm6f
-  4XHMD92vm7J1hM+ZOE12gVtSV5CdnKz6D+dO7xOuT73ef0kv8urS480iAxqHV9a+2LxecW3D/
-  Gqv48aMixcEHlKRUZ1m5Xttt/GmBhPxR1b+iYVuUDP9tvytxh8loxo/EV2dPzJrr+rbmfJeV2
-  9oZqyLnKn6bNoN1yyyVj5eZuC26OtfKKF5a1qut1btVrnPB4TkNhc6z1DTyfgiksTPOqpv+68
-  HRAPYF+mfF9geu5fDliPx7sGi1+Sfj03uYRcz/W5TmLLsZtMEoe26h96Q9U4qm6vqf59YL+ZC
-  37VyWbJfDH23HaWUqxgqzlFiKMxINtZiLihMB5oowbR8DAAA=
+	b=YH5lt2O1T+t8fOzTka47C+FX9QanBP4Pz1XKcUpDqGL/V3G6HTNlWbWcOdyxZrdDi
+	 jq0vm/jSXxp0Ww9K/yfbVPyLIGEd5WDdUei+w63EwpIzGyNBV+YK42FF34fCio3GXw
+	 C64ILbj+3v0WAUYM1WIvD5sumMTGCCkjwBZcHtNXAuXFI+M+MWuhcXk+5Loy+q7CdC
+	 UOJRly2/4Y31SkPp54wyTd5gis3ihDSJ0JOy+YPln0nQWjWDDfDx3cM8pl4M69NgWT
+	 gQus6rQY1U6vHgVI0LYQpumGLTUPd5MEnZD1beBClniN/q3/nI6noWNaYYAMU1gQ8P
+	 ROPNV1KMI+DUw==
+Received: from [100.112.199.118] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-4.bemta.az-b.eu-west-1.aws.symcld.net id D4/CA-07373-69B6ED06; Fri, 02 Jul 2021 01:27:50 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrIIsWRWlGSWpSXmKPExsViZ8MRojst+16
+  Cwav/ohYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8acZzUFMzkq3hy7w9LAeJS9i5GLQ0hgFpPE
+  13e3oJzjjBJzV/1j6WLk5GAT0JHoeNENZosI6Essnb2HGcQWFvCX+PjyFpjNIqAicWP5CbAaX
+  gF3ibub1jCC2BICChJTHr5nhogLSpyc+QSshllAQuLgixfMEDWKEtt3nmGBsCskZszYxjaBkW
+  cWkpZZSFoWMDKtYrRIKspMzyjJTczM0TU0MNA1NDTSNbQ00zUyNNFLrNJN0kst1S1PLS7RNdR
+  LLC/WK67MTc5J0ctLLdnECAyjlIIj13YwHnj9Qe8QoyQHk5Io74FzdxOE+JLyUyozEosz4otK
+  c1KLDzHKcHAoSfCezbyXICRYlJqeWpGWmQMMaZi0BAePkghvfAZQmre4IDG3ODMdInWKMZzjz
+  doli5g53oLJtnt3gWQ7mJy54OBqZo5ZYPJ++yEg+QBECrHk5eelSonzdmYBjRMAGZdRmge3DB
+  azlxhlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ834BuZknM68E7qZXQOcyAZ17+uZdkHNLEhF
+  SUg1MV5wbNkbs3exceiPg2ZHLB0xT3m7Qkiu5c35KqlHOP5fwIxOXbktbWvytf0PZ5vwE2XmL
+  mFPdjtofu/6nlXHn1HXebztMFX7+Ofj1arvm2i2XI5YIB9qVzGnw9W3a2fb4RV3M1GnPOkJkn
+  buOrVM4vsaV7VZIVbus0r9UL8mcmnv+8xaKeSafXcaQMN287VO/8TMHKz6fNXtLfEwCv8S6Td
+  yQxF8VlV+1ujY+9LmXjwF3lefN1Rlhj5+EG+d5ZrB+5p7we+4MaSmxp+EV0RXLzY1nTzvhXac
+  r8YY/4ejZtym/bkgU+5cbnJDUnqQlHi/OxmC/+HjH28cLrSslJLIafS+78d+2Cnyqqu4k4q7E
+  UpyRaKjFXFScCAAKFMf8VAMAAA==
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-12.tower-248.messagelabs.com!1625188786!31070!1
-X-Originating-IP: [62.60.8.85]
+X-Msg-Ref: server-12.tower-285.messagelabs.com!1625189270!44057!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
-X-StarScan-Version: 9.81.3; banners=-,-,-
+X-StarScan-Version: 9.75.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 16464 invoked from network); 2 Jul 2021 01:19:46 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-12.tower-248.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 2 Jul 2021 01:19:46 -0000
+Received: (qmail 19497 invoked from network); 2 Jul 2021 01:27:50 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-12.tower-285.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 2 Jul 2021 01:27:50 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1621Jds9023186
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1621RnGY014676
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 2 Jul 2021 02:19:46 +0100
+	for <openembedded-devel@lists.openembedded.org>; Fri, 2 Jul 2021 02:27:49 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 2 Jul 2021 02:19:37 +0100
+ (TLS) id 15.0.1497.18; Fri, 2 Jul 2021 02:27:48 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] can-utils: upgrade 2020.12.0 -> 2021.06.0
-Date: Fri, 2 Jul 2021 09:19:29 +0800
-Message-ID: <1625188769-50922-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] ctags: upgrade 5.9.20210620.0 -> 5.9.20210627.0
+Date: Fri, 2 Jul 2021 09:27:41 +0800
+Message-ID: <1625189261-51130-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -63,25 +64,26 @@ Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- meta-oe/recipes-extended/socketcan/can-utils_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../ctags/{ctags_5.9.20210620.0.bb => ctags_5.9.20210627.0.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/ctags/{ctags_5.9.20210620.0.bb => ctags_5.9.20210627.0.bb} (95%)
 
-diff --git a/meta-oe/recipes-extended/socketcan/can-utils_git.bb b/meta-oe/recipes-extended/socketcan/can-utils_git.bb
-index 3b2b6a9da1..36e7d1ef57 100644
---- a/meta-oe/recipes-extended/socketcan/can-utils_git.bb
-+++ b/meta-oe/recipes-extended/socketcan/can-utils_git.bb
-@@ -6,9 +6,9 @@ DEPENDS = "libsocketcan"
+diff --git a/meta-oe/recipes-devtools/ctags/ctags_5.9.20210620.0.bb b/meta-oe/recipes-devtools/ctags/ctags_5.9.20210627.0.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/ctags/ctags_5.9.20210620.0.bb
+rename to meta-oe/recipes-devtools/ctags/ctags_5.9.20210627.0.bb
+index 8f4781b177..7d01bba697 100644
+--- a/meta-oe/recipes-devtools/ctags/ctags_5.9.20210620.0.bb
++++ b/meta-oe/recipes-devtools/ctags/ctags_5.9.20210627.0.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
- SRC_URI = "git://github.com/linux-can/${BPN}.git;protocol=git"
+ inherit autotools-brokensep pkgconfig manpages
  
--SRCREV = "eb66451df280f95a9a12e78b151b8d867e1b78ed"
-+SRCREV = "e9dd86fa5c4e6ecdfc34e487634a32f19e5c4d63"
- 
--PV = "2020.12.0"
-+PV = "2021.06.0"
+-SRCREV = "e8457b5021744add677ede6663190f09bd223e82"
++SRCREV = "c436bca61f1fb92d2c6d5767ae4b307efab678f3"
+ SRC_URI = "git://github.com/universal-ctags/ctags"
  
  S = "${WORKDIR}/git"
- 
 -- 
 2.25.1
 
