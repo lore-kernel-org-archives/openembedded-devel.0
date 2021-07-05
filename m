@@ -1,59 +1,59 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.2])
- by mx.groups.io with SMTP id smtpd.web11.5602.1625450118123108274
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.68])
+ by mx.groups.io with SMTP id smtpd.web12.5730.1625450163466174219
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Jul 2021 18:55:18 -0700
+ Sun, 04 Jul 2021 18:56:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=UqLT2YkT;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=D1bdmUrZ;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.68, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1625450115; i=@fujitsu.com;
-	bh=NoAp/yr2at6uGfH9sniQkiPKzqnVnverW9yaxeJNzIY=;
+	s=170520fj; t=1625450161; i=@fujitsu.com;
+	bh=Nrp8qJAj7cFjOCPoF/i/0e/9NqvXe6z5DCf06UlnqZQ=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=UqLT2YkT+G2xJqtBx7cFLO/14X8LUnKcP3gTSjDr0vf4obMmqd1sb3yqEoAY9XsOM
-	 FHnCJQj0rsjmwcTXUhnLj06eSn3aN2i2ExGN4aCsO66oZWJ25w8yjcuuBb6ppHLaDI
-	 Z2LvuqGBxn7brF+tvzOf3vu4A6f93dfEko+jdFPF4zU7jmHSJVj33fKEn75CULyKMZ
-	 QW9D41naUyaKQO9KLjGVahy4f1k2gsdnScnRukvZew2YV71b9EB6tE2PvIv7J9NfH2
-	 rqpfOdJU1Or5TOTbBUHyBd2oB1w3XxxyawkzIeJEdUq/cjw2SbEoicJVrGpzhgS2c5
-	 dCDc7O0SDLyag==
-Received: from [100.112.192.148] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-west-1.aws.symcld.net id 7B/B8-07839-38662E06; Mon, 05 Jul 2021 01:55:15 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprOIsWRWlGSWpSXmKPExsViZ8MxVbc57VG
-  CQfcLNouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeNB8yeWgpniFRtOnmBrYPwr0sXIxSEkMItJ
-  4trVTcwQznFGiQ0bOoAcTg42AR2JjhfdLCC2iIC+xNLZe8DiwgK+ErNazjKB2CwCKhITjlwGi
-  nNw8Ap4SJzpMQEJSwgoSEx5+B6snFdAUOLkzCdgY5gFJCQOvnjBDFGjKLF95xkWCLtCYsaMbW
-  wTGHlmIWmZhaRlASPTKkaLpKLM9IyS3MTMHF1DAwNdQ0MjXUNLIDYx0Uus0k3USy3VLU8tLtE
-  11EssL9YrrsxNzknRy0st2cQIDKOUggMTdjDuf/1B7xCjJAeTkijvJs1HCUJ8SfkplRmJxRnx
-  RaU5qcWHGGU4OJQkeKuSgXKCRanpqRVpmTnAkIZJS3DwKInwJscBpXmLCxJzizPTIVKnGHU53
-  v1cvIhZiCUvPy9VSpyXJRWoSACkKKM0D24ELL4uMcpKCfMyMjAwCPEUpBblZpagyr9iFOdgVB
-  LmvQsyhSczrwRu0yugI5iAjrh57iHIESWJCCmpBiY7scXKgfxuZlnPHxj8yX76TiXuz5L12nN
-  7+vwMhGq9VmslfTEsNuQ23rZy29NZbMmFC5tsRLa/kKiJKetYb1eW/3+mz3aDW+p3GdgT5v0u
-  eb4258bvR13HogRX73/SvjP4XOzsmm0Ohc8N/k6V/dmy1oA7XO1Kdov+ggUf0419yi7+6ee68
-  T6w7xn31nmLJeZ2/pfuP9hTr/WyM0V05kZbq54TGimz/H/UFPmsCrMzCb+xyPC6lMoyaQv/WP
-  tPJRmdzsemMrubqua/2hxcNHtG3kOuh37GKfv5mC+s7WF0u3pm71vLtY/6Hxg0HDc/EVeyqkJ
-  H2KyErXlzyhz5YMmgX3ISz98u0/9zaM4BSyWW4oxEQy3mouJEACxZamIqAwAA
+	b=D1bdmUrZwPzBzUxq27exIWHpDB1NVAbT8SR5ozo0XDI+nCU+NjVRLlJeyhUnjzCdJ
+	 2RVbjNNJm2E9wFu6x9Py1oMK5vXMUIjySm+6fSat8G0BmCSp3ri2+n3KbHl42rAb+U
+	 oTOKkJWbuIVpn130xrzCSoVwGaM8oCRm8RhRvdvb320qQIyJ2Q2UPE3qUKgmv4lhw0
+	 JiTv+zUQFd2ABCKcw06Wcy/yzbeEckJTus6tj6vN1LapdW2s9/X6Rxsya7Qthzmp8s
+	 6R+E2RW0NDdKJw4KgcJnxWYPr7ry5bZ5L5bmM9QvzSZSx2wc5wzs0DZX9b62l8GkbD
+	 KlYZJt77qSA+w==
+Received: from [100.112.198.210] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-4.bemta.az-b.eu-west-1.aws.symcld.net id 6C/60-07373-0B662E06; Mon, 05 Jul 2021 01:56:00 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprLIsWRWlGSWpSXmKPExsViZ8MRqrs+7VG
+  CwbIvNhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aS9qUsBVdsKl7st21gvGvcxcjFISQwi0ni
+  xp+f7BDOcUaJYxcXsHQxcnKwCehIdLzoBrNFBPQlls7ewwxiCwv4SfxfsZIVxGYRUJG4e+keW
+  JxXwEPi7evJYLaEgILElIfvoeKCEidnPgGbwywgIXHwxQuoGkWJ7TvPsEDYFRIzZmxjm8DIMw
+  tJyywkLQsYmVYxWiQVZaZnlOQmZuboGhoY6BoaGukaWlroGhma6iVW6SbppZbqlqcWl+ga6iW
+  WF+sVV+Ym56To5aWWbGIEhlFKwbHrOxivvv6gd4hRkoNJSZR3k+ajBCG+pPyUyozE4oz4otKc
+  1OJDjDIcHEoSvFXJQDnBotT01Iq0zBxgSMOkJTh4lER4k+OA0rzFBYm5xZnpEKlTjMYcl6/PW
+  8TMserA9FXMQix5+XmpUuK8LKlApQIgpRmleXCDYLF2iVFWSpiXkYGBQYinILUoN7MEVf4Voz
+  gHo5Iw712QKTyZeSVw+14BncIEdMrNcw9BTilJREhJNTBp9avVTz+01yw/61Fz5VftG3p7H5z
+  jO6D+6OLiswqPY05EzwycIGM0VevIEWPFj4uilrmxaXbHz9uXM33l3iDrsliuIA7FQ9vUz0jv
+  firzns36d4xyRNzls+YFosfbvA7cNFipr/HjhxBf73clhd2KCX+nrgxQODRVxOfRwohdyq1mf
+  f/PWuyafeRTyKP0Tfdnaeo+inoed2Dr7RPBDekP3qptfBd5b/Lsv2GXHPe7vl9zIzC0ovuwXs
+  mq52s8Mwp47//eF2my3aDLqm3B8x8+RXF5rdZPPGous1w+lWD7/mX5vvUVwX3T3ydNnLnwcmL
+  RJLaqIvVft3VyoidI/NhuYefav/rwsuuMomwv1z+QUmIpzkg01GIuKk4EAJv5lEIwAwAA
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-8.tower-265.messagelabs.com!1625450114!230885!1
-X-Originating-IP: [62.60.8.149]
+X-Msg-Ref: server-11.tower-291.messagelabs.com!1625450159!293186!1
+X-Originating-IP: [62.60.8.85]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 24709 invoked from network); 5 Jul 2021 01:55:15 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-8.tower-265.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 5 Jul 2021 01:55:15 -0000
+Received: (qmail 9234 invoked from network); 5 Jul 2021 01:55:59 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-11.tower-291.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 5 Jul 2021 01:55:59 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1651tEBZ006620
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1651txg1006941
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 5 Jul 2021 02:55:14 +0100
+	for <openembedded-devel@lists.openembedded.org>; Mon, 5 Jul 2021 02:55:59 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Mon, 5 Jul 2021 02:55:13 +0100
+ (TLS) id 15.0.1497.18; Mon, 5 Jul 2021 02:55:58 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-haversine: upgrade 2.3.0 -> 2.3.1
-Date: Mon, 5 Jul 2021 09:55:08 +0800
-Message-ID: <1625450108-114889-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-m2crypto: upgrade 0.37.1 -> 0.38.0
+Date: Mon, 5 Jul 2021 09:55:53 +0800
+Message-ID: <1625450153-114955-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -61,74 +61,167 @@ X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-0001-setup.py-Correct-the-license-assignment.patch
-Removed since this is included in 2.3.1
+0.38.0 - 2021-06-14
+-------------------
+
+- Remove the last use of setup.py test idiom.
+- Use m2_PyObject_AsReadBuffer instead of PyObject_AsReadBuffer.
+- Add support for arm64 big endian <Steev Klimaszewski>
+- Make support of RSA_SSLV23_PADDING optional (it has been deprecated).
+- Move project to src/ layout
+- Allow verify_cb_* to be called with ok=True  <Casey Deccio>
+- Be prepared if any of constants in x509_vfy.h is not available.
+- But we do support 3.8
+- We DO NOT support Python 2.6.
+
+Refresh the following patch:
+cross-compile-platform.patch
+
+0001-Allow-verify_cb_-to-be-called-with-ok-True.patch
+0001-Use-of-RSA_SSLV23_PADDING-has-been-deprecated.patch
+Removed since these are included in 0.38.0
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- ...up.py-Correct-the-license-assignment.patch | 32 -------------------
- ...ne_2.3.0.bb => python3-haversine_2.3.1.bb} |  5 +--
- 2 files changed, 1 insertion(+), 36 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-haversine/0001-setup.py-Correct-the-license-assignment.patch
- rename meta-python/recipes-devtools/python/{python3-haversine_2.3.0.bb => python3-haversine_2.3.1.bb} (55%)
+ ...verify_cb_-to-be-called-with-ok-True.patch | 47 -------------------
+ ...A_SSLV23_PADDING-has-been-deprecated.patch | 29 ------------
+ .../cross-compile-platform.patch              |  4 +-
+ ...o_0.37.1.bb => python3-m2crypto_0.38.0.bb} |  4 +-
+ 4 files changed, 4 insertions(+), 80 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-m2crypto/0001-Allow-verify_cb_-to-be-called-with-ok-True.patch
+ delete mode 100644 meta-python/recipes-devtools/python/python3-m2crypto/0001-Use-of-RSA_SSLV23_PADDING-has-been-deprecated.patch
+ rename meta-python/recipes-devtools/python/{python3-m2crypto_0.37.1.bb => python3-m2crypto_0.38.0.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-haversine/0001-setup.py-Correct-the-license-assignment.patch b/meta-python/recipes-devtools/python/python3-haversine/0001-setup.py-Correct-the-license-assignment.patch
+diff --git a/meta-python/recipes-devtools/python/python3-m2crypto/0001-Allow-verify_cb_-to-be-called-with-ok-True.patch b/meta-python/recipes-devtools/python/python3-m2crypto/0001-Allow-verify_cb_-to-be-called-with-ok-True.patch
 deleted file mode 100644
-index bb5955a44e..0000000000
---- a/meta-python/recipes-devtools/python/python3-haversine/0001-setup.py-Correct-the-license-assignment.patch
+index 3c836635a1..0000000000
+--- a/meta-python/recipes-devtools/python/python3-m2crypto/0001-Allow-verify_cb_-to-be-called-with-ok-True.patch
 +++ /dev/null
-@@ -1,32 +0,0 @@
--From 56b421a18ef8acb41ab9e4bde7e1f5452ec67da9 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Mon, 17 May 2021 22:17:07 -0700
--Subject: [PATCH] setup.py: Correct the license assignment
+@@ -1,47 +0,0 @@
+-From 73fbd1e646f6bbf202d4418bae80eb9941fbf552 Mon Sep 17 00:00:00 2001
+-From: Casey Deccio <casey@deccio.net>
+-Date: Fri, 8 Jan 2021 12:43:09 -0700
+-Subject: [PATCH] Allow verify_cb_* to be called with ok=True
 -
--latest python/2.9 + setuptools bail out otherwise
--
--lines = header.split('\n')
--| AttributeError: 'list' object has no attribute 'split'
--
--Upstream-Status: Submitted [https://github.com/mapado/haversine/pull/38]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-With https://github.com/openssl/openssl/commit/2e06150e3928daa06d5ff70c32bffad8088ebe58
+-OpenSSL allowed verificaton to continue on UNABLE_TO_VERIFY_LEAF_SIGNATURE
 ----
-- setup.py | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
+- tests/test_ssl.py | 14 ++++++++++++--
+- 1 file changed, 12 insertions(+), 2 deletions(-)
 -
--diff --git a/setup.py b/setup.py
--index 549436d..9e7fb00 100755
----- a/setup.py
--+++ b/setup.py
--@@ -15,7 +15,7 @@ setup(
--     maintainer_email='julien.deniau@mapado.com',
--     url='https://github.com/mapado/haversine',
--     packages=['haversine'],
---    license=['MIT'],
--+    license='MIT',
--     classifiers=[
--         'Development Status :: 4 - Beta',
--         'Intended Audience :: Developers',
+-diff --git a/tests/test_ssl.py b/tests/test_ssl.py
+-index 92b6942..7a3271a 100644
+---- a/tests/test_ssl.py
+-+++ b/tests/test_ssl.py
+-@@ -59,8 +59,13 @@ def allocate_srv_port():
+- 
+- 
+- def verify_cb_new_function(ok, store):
+--    assert not ok
+-     err = store.get_error()
+-+    # If err is X509_V_ERR_UNABLE_TO_VERIFY_LEAF_SIGNATURE, then instead of
+-+    # aborting, this callback is called to retrieve additional error
+-+    # information.  In this case, ok might not be False.
+-+    # See https://github.com/openssl/openssl/commit/2e06150e3928daa06d5ff70c32bffad8088ebe58
+-+    if err != m2.X509_V_ERR_UNABLE_TO_VERIFY_LEAF_SIGNATURE:
+-+        assert not ok
+-     assert err in [m2.X509_V_ERR_DEPTH_ZERO_SELF_SIGNED_CERT,
+-                    m2.X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY,
+-                    m2.X509_V_ERR_CERT_UNTRUSTED,
+-@@ -618,7 +623,12 @@ class MiscSSLClientTestCase(BaseSSLClientTestCase):
+- 
+-     def verify_cb_old(self, ctx_ptr, x509_ptr, err, depth, ok):
+-         try:
+--            self.assertFalse(ok)
+-+            # If err is X509_V_ERR_UNABLE_TO_VERIFY_LEAF_SIGNATURE, then instead of
+-+            # aborting, this callback is called to retrieve additional error
+-+            # information.  In this case, ok might not be False.
+-+            # See https://github.com/openssl/openssl/commit/2e06150e3928daa06d5ff70c32bffad8088ebe58
+-+            if err != m2.X509_V_ERR_UNABLE_TO_VERIFY_LEAF_SIGNATURE:
+-+                self.assertFalse(ok)
+-             self.assertIn(err,
+-                           [m2.X509_V_ERR_DEPTH_ZERO_SELF_SIGNED_CERT,
+-                            m2.X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY,
 --- 
--2.31.1
+-2.29.2
 -
-diff --git a/meta-python/recipes-devtools/python/python3-haversine_2.3.0.bb b/meta-python/recipes-devtools/python/python3-haversine_2.3.1.bb
-similarity index 55%
-rename from meta-python/recipes-devtools/python/python3-haversine_2.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-haversine_2.3.1.bb
-index 624d30ca01..c3251624f5 100644
---- a/meta-python/recipes-devtools/python/python3-haversine_2.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-haversine_2.3.1.bb
-@@ -2,10 +2,7 @@ SUMMARY = "Calculate the distance between 2 points on Earth"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
- 
--SRC_URI += "file://0001-setup.py-Correct-the-license-assignment.patch"
+diff --git a/meta-python/recipes-devtools/python/python3-m2crypto/0001-Use-of-RSA_SSLV23_PADDING-has-been-deprecated.patch b/meta-python/recipes-devtools/python/python3-m2crypto/0001-Use-of-RSA_SSLV23_PADDING-has-been-deprecated.patch
+deleted file mode 100644
+index 2313a324a0..0000000000
+--- a/meta-python/recipes-devtools/python/python3-m2crypto/0001-Use-of-RSA_SSLV23_PADDING-has-been-deprecated.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From d06eaa88a5f491827733f32027c46de3557fbd05 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Mat=C4=9Bj=20Cepl?= <mcepl@cepl.eu>
+-Date: Fri, 19 Feb 2021 15:53:02 +0100
+-Subject: [PATCH] Use of RSA_SSLV23_PADDING has been deprecated.
 -
--SRC_URI[md5sum] = "ff2d43a74195ec00c42ccd5da2a3f3de"
--SRC_URI[sha256sum] = "72c76855ac25e6ad054c7ed380e95c1a96803185f005dd11f40ccaa9620b551f"
-+SRC_URI[sha256sum] = "75a7f859b3fb6df746564ca66ad1fd5b4052cdbab3d74ff16e8f1a7c3d4a26a5"
+-Fixes #293.
+----
+- tests/test_rsa.py | 5 -----
+- 1 file changed, 5 deletions(-)
+-
+-diff --git a/tests/test_rsa.py b/tests/test_rsa.py
+-index 3de5016..7299785 100644
+---- a/tests/test_rsa.py
+-+++ b/tests/test_rsa.py
+-@@ -124,11 +124,6 @@ class RSATestCase(unittest.TestCase):
+-             ptxt = priv.private_decrypt(ctxt, p)
+-             self.assertEqual(ptxt, self.data)
+- 
+--        # sslv23_padding
+--        ctxt = priv.public_encrypt(self.data, RSA.sslv23_padding)
+--        res = priv.private_decrypt(ctxt, RSA.sslv23_padding)
+--        self.assertEqual(res, self.data)
+--
+-         # no_padding
+-         with six.assertRaisesRegex(self, RSA.RSAError, 'data too small'):
+-             priv.public_encrypt(self.data, RSA.no_padding)
+--- 
+-2.29.2
+-
+diff --git a/meta-python/recipes-devtools/python/python3-m2crypto/cross-compile-platform.patch b/meta-python/recipes-devtools/python/python3-m2crypto/cross-compile-platform.patch
+index f039ae8665..77ef7e557e 100644
+--- a/meta-python/recipes-devtools/python/python3-m2crypto/cross-compile-platform.patch
++++ b/meta-python/recipes-devtools/python/python3-m2crypto/cross-compile-platform.patch
+@@ -6,7 +6,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  
- inherit pypi setuptools3
+ --- a/setup.py
+ +++ b/setup.py
+-@@ -169,22 +169,6 @@ class _M2CryptoBuildExt(build_ext.build_
++@@ -169,24 +169,6 @@ class _M2CryptoBuildExt(build_ext.build_
+              log.debug('self.include_dirs = %s', self.include_dirs)
+              log.debug('self.library_dirs = %s', self.library_dirs)
+  
+@@ -25,6 +25,8 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ -            self.swig_opts.append('-D%s' % arch)
+ -            if mach in ('ppc64le', 'ppc64el'):
+ -                self.swig_opts.append('-D_CALL_ELF=2')
++-            if mach in ('arm64_be'):
++-                self.swig_opts.append('-D__AARCH64EB__')
+ -
+          self.swig_opts.extend(['-I%s' % i for i in self.include_dirs])
+  
+diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.38.0.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
+rename to meta-python/recipes-devtools/python/python3-m2crypto_0.38.0.bb
+index b3da87fb7e..950de564f2 100644
+--- a/meta-python/recipes-devtools/python/python3-m2crypto_0.37.1.bb
++++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.38.0.bb
+@@ -8,11 +8,9 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/python-m2crypto:"
  
+ SRC_URI += "file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch \
+             file://cross-compile-platform.patch \
+-            file://0001-Allow-verify_cb_-to-be-called-with-ok-True.patch \
+-            file://0001-Use-of-RSA_SSLV23_PADDING-has-been-deprecated.patch \
+             file://avoid-host-contamination.patch \
+            "
+-SRC_URI[sha256sum] = "e4e42f068b78ccbf113e5d0a72ae5f480f6c3ace4940b91e4fff5598cfff6fb3"
++SRC_URI[sha256sum] = "99f2260a30901c949a8dc6d5f82cd5312ffb8abc92e76633baf231bbbcb2decb"
+ 
+ PYPI_PACKAGE = "M2Crypto"
+ inherit pypi siteinfo setuptools3
 -- 
 2.25.1
 
