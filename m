@@ -1,130 +1,89 @@
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web11.5037.1625446024968306849
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.65])
+ by mx.groups.io with SMTP id smtpd.web08.5625.1625450071829622282
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Jul 2021 17:47:05 -0700
+ Sun, 04 Jul 2021 18:54:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=uBH6FolW;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id f17so3722988pfj.8
-        for <openembedded-devel@lists.openembedded.org>; Sun, 04 Jul 2021 17:47:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=T4jcUZPgJFPlIcNNqgAWbfZ0SQjslh0g+MvKAMt9YEY=;
-        b=uBH6FolWQJX0z74vEhTLUl2dBACY1J/zd57DK6h3Jy1JrQOIIc6S5zKlKU4kek8bS6
-         HB7t8YuY/Gl7AWy2tHioe5VoJEr1wN1883sHeHDKqtSpuNhzIjhmgsdysUAOY+t8E1h4
-         Ms1JXyT3Ha2+e+KBXajwviFCtDC31wtW7IRpOfvdBMMpU9FvaabiI5HZSLN1/khtp1YJ
-         BgmhjFTIYFMPSAy6Fyls/u475Eli3kbj1jf2Nrymck0V6CNEd4sgBsH4Lqz7+B93MZrL
-         ZE4q7II84+2FRjOBIOHWWdEUPfoCcHcAEsM2Rrv68Ur5QTbLyIoMtDUeP/y8hY9OxHG6
-         XAQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=T4jcUZPgJFPlIcNNqgAWbfZ0SQjslh0g+MvKAMt9YEY=;
-        b=U7gc3+GBqw5dspCDlLa8/tQRYrQbuK7SybEhBinAYEgXPINZPp2cEKQgMfEpON0A/+
-         2feEwlCpjQEsAxATk5kA0/pVgO4JUfs19g8NRrWu2nwUd8iEFbUJ4opwa9usypf8c9Vo
-         gIxqGeBdfdwbK+ntTm6nhwH8c2U6UjP36Ziu5rPaGF3yPPhDv2gdH/L52BwOe+FNZeqW
-         HHchyQSFlbXSo2xeFFGUzuGz1tya6BlDvBaqQXp/4FD1xsX8VHO7pnEGGpLbI5VYl2xp
-         0Jbmrr7xveExnmnQZhn6CshaWNRyuVVtmTiyA1KwS6hTNml8N6eZNwS67l3lFZwHHbbV
-         k13A==
-X-Gm-Message-State: AOAM532dFOJpiDlQwyIQm6Nhi0wgbh325JV1A2Mq19DRTuZryiuWWaZV
-	IZlSZIq+wEyYb7tgAuJ7zY2/xN2bN/uJUA==
-X-Google-Smtp-Source: ABdhPJyvQjAr7wBKiNJ0J5AoI2ZeRrsjIVyO0F5zBLca/y619dJdsB9J0SqBGZiU/warhkvoQMGH9w==
-X-Received: by 2002:a63:7985:: with SMTP id u127mr12837262pgc.228.1625446024331;
-        Sun, 04 Jul 2021 17:47:04 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::1c2d])
-        by smtp.gmail.com with ESMTPSA id 10sm10687648pfh.174.2021.07.04.17.47.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Jul 2021 17:47:04 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] portaudio-v19: Use GNUInstallDirs to make it portable
-Date: Sun,  4 Jul 2021 17:47:00 -0700
-Message-Id: <20210705004700.2627341-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.32.0
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=AWM4I784;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.65, mailfrom: zangrc.fnst@fujitsu.com)
+Return-Path: <zangrc.fnst@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1625450069; i=@fujitsu.com;
+	bh=0bho/UsmvlyvWrDZ/LSc/PAXvXXPoT/FryO2MBXC0mE=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=AWM4I784k0QQDIhQ4BApAFbd8FdnNpbx7AmD4YZnTz+tvMqK2czqaczHZqIohgmHB
+	 ByFJlQQPqZv8R3kelkifn6sLH5nC1lU/6ODO+P6tppA7PawmB/uMMCIPJiWh2eOtMu
+	 yI7JHwsHF0zubx/Il+dA1WhVwOKLz5MKOPt5YqlYIMut/JrI8MGRhcI7gEGfX2qbu5
+	 XIrkfqdVGMnqN+OHj39syF1MgdQZCaaJRB+CIC4kknWcyocHSkDw2K5V1K6mLYdj61
+	 G6I/KGT7KqGf7NppGFOyLdJb3iwnhOMA6GmvqYvPPrcpT/FbM6tQICgXTIGrQdhBNh
+	 /CJz9l5cAJEvQ==
+Received: from [100.112.197.63] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-b.eu-west-1.aws.symcld.net id E4/BB-03155-45662E06; Mon, 05 Jul 2021 01:54:28 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+EI1Q1Je5R
+  gcOuVjMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvH8xmG2gr8cFR8ub2VtYFzK0cXIxSEkMItJ
+  ovnlFTYI5zijxMTefUAOJwebgI5Ex4tuFhBbREBfYunsPcwgtrCAh8S/SZ2sIDaLgIrEiU9H2
+  EFsXqD4+ylrwWwJAQWJKQ/fM0PEBSVOznwCNodZQELi4IsXzBA1ihLbd55hgbArJGbM2MY2gZ
+  FnFpKWWUhaFjAyrWK0SCrKTM8oyU3MzNE1NDDQNTQ00jW0tNA1MjTVS6zSTdJLLdUtTy0u0TX
+  USywv1iuuzE3OSdHLSy3ZxAgMpJSCY9d3MF59/UHvEKMkB5OSKO8mzUcJQnxJ+SmVGYnFGfFF
+  pTmpxYcYZTg4lCR4q5KBcoJFqempFWmZOcCghklLcPAoifAmxwGleYsLEnOLM9MhUqcYFaXEe
+  VlSgRICIImM0jy4NlgkXWKUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzHsXZApPZl4J3PRXQI
+  uZgBbfPPcQZHFJIkJKqoEpQVih7sIyuXm/bQrKzwk4cT0LfhOvxvjxmHngjkUP//d7rujeOCn
+  Sz8mw4GVstp5E3xq5+Fvu87k059W2Vxj/Kj9kteVn5ZLgK8f/fedwX3nB+v7BpF1htzoXF3aJ
+  /I36vunJy6rEutIkgc2P1c5YfiuLnXZf+tbOD7Wvbxccn5u4s4Tj66XbrvsXhMkuZOW9MeF7r
+  yVfQkTo4drEI2dcUy4t/nbkuFTHfNc5n3faO9zYGLRA5vFzOT0VIea/b+OmK8ubsDPzTjc/3r
+  b/2Mmpi888KWjw/Cp0kl3l2ZrTHElHt8Xv2OG+z3NGZ5eR/OG/M51U4/0Sgx7yWbGe03utrCL
+  /pmD154hDKw+enjTFVYmlOCPRUIu5qDgRAHSdACkfAwAA
+X-Env-Sender: zangrc.fnst@fujitsu.com
+X-Msg-Ref: server-6.tower-291.messagelabs.com!1625450068!195895!1
+X-Originating-IP: [62.60.8.85]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 10344 invoked from network); 5 Jul 2021 01:54:28 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-6.tower-291.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 5 Jul 2021 01:54:28 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1651sMGp006560
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 5 Jul 2021 02:54:28 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Mon, 5 Jul 2021 02:54:21 +0100
+From: "zangrc" <zangrc.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-python] [PATCH] python3-gast: upgrade 0.4.0 -> 0.5.0
+Date: Mon, 5 Jul 2021 09:54:14 +0800
+Message-ID: <1625450054-114775-1-git-send-email-zangrc.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Type: text/plain
 
-libdir varies for different architectures therefore do not hardcode it
-to lib
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../0001-cmake-Use-GNUInstallDirs.patch       | 49 +++++++++++++++++++
- .../portaudio/portaudio-v19_19.7.0.bb         |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-oe/recipes-support/portaudio/portaudio-v19/0001-cmake-Use-GNUInstallDirs.patch
+ .../python/{python3-gast_0.4.0.bb => python3-gast_0.5.0.bb}    | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-gast_0.4.0.bb => python3-gast_0.5.0.bb} (69%)
 
-diff --git a/meta-oe/recipes-support/portaudio/portaudio-v19/0001-cmake-Use-GNUInstallDirs.patch b/meta-oe/recipes-support/portaudio/portaudio-v19/0001-cmake-Use-GNUInstallDirs.patch
-new file mode 100644
-index 0000000000..892399de70
---- /dev/null
-+++ b/meta-oe/recipes-support/portaudio/portaudio-v19/0001-cmake-Use-GNUInstallDirs.patch
-@@ -0,0 +1,49 @@
-+From ced7af0420c1df0ac02f0c25e7c3534431ebd7fd Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 4 Jul 2021 17:09:49 -0700
-+Subject: [PATCH] cmake: Use GNUInstallDirs
-+
-+Helps install cmakefiles in right libdir
-+
-+Upstream-Status: Submitted [https://github.com/PortAudio/portaudio/pull/610]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ CMakeLists.txt | 12 +++++++-----
-+ 1 file changed, 7 insertions(+), 5 deletions(-)
-+
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -6,6 +6,8 @@
-+
-+ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
-+
-++include(GNUInstallDirs)
-++
-+ # Check if the user is building PortAudio stand-alone or as part of a larger
-+ # project. If this is part of a larger project (i.e. the CMakeLists.txt has
-+ # been imported by some other CMakeLists.txt), we don't want to trump over
-+@@ -452,18 +454,18 @@ IF(NOT PA_OUTPUT_OSX_FRAMEWORK AND NOT P
-+   CONFIGURE_FILE(cmake_support/portaudio-2.0.pc.in ${CMAKE_CURRENT_BINARY_DIR}/portaudio-2.0.pc @ONLY)
-+   INSTALL(FILES README.md DESTINATION share/doc/portaudio)
-+   INSTALL(FILES LICENSE.txt DESTINATION share/doc/portaudio)
-+-  INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/portaudio-2.0.pc DESTINATION lib/pkgconfig)
-++  INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/portaudio-2.0.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
-+   INSTALL(FILES ${PA_PUBLIC_INCLUDES} DESTINATION include)
-+   INSTALL(TARGETS ${PA_TARGETS}
-+     EXPORT portaudio-targets
-+-    RUNTIME DESTINATION bin
-+-    LIBRARY DESTINATION lib
-+-    ARCHIVE DESTINATION lib)
-+-  INSTALL(EXPORT portaudio-targets FILE "portaudioTargets.cmake" DESTINATION "lib/cmake/portaudio")
-++    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-++    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-++    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
-++  INSTALL(EXPORT portaudio-targets FILE "portaudioTargets.cmake" DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/portaudio")
-+   EXPORT(TARGETS ${PA_TARGETS} FILE "${PROJECT_BINARY_DIR}/cmake/portaudio/portaudioTargets.cmake")
-+   INSTALL(FILES "${CMAKE_BINARY_DIR}/cmake/portaudio/portaudioConfig.cmake"
-+                 "${CMAKE_BINARY_DIR}/cmake/portaudio/portaudioConfigVersion.cmake"
-+-    DESTINATION "lib/cmake/portaudio")
-++    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/portaudio")
-+
-+   IF (NOT TARGET uninstall)
-+     CONFIGURE_FILE(
-diff --git a/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb b/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb
-index 3a0f7894f1..aec482b9b7 100644
---- a/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb
-+++ b/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb
-@@ -8,6 +8,7 @@ PV = "v190700"
- SRC_URI = " \
-     git://github.com/PortAudio/portaudio.git \
-     file://0001-Find-jack.patch \
-+    file://0001-cmake-Use-GNUInstallDirs.patch \
- "
- SRCREV = "147dd722548358763a8b649b3e4b41dfffbcfbb6"
- S = "${WORKDIR}/git"
---
-2.32.0
+diff --git a/meta-python/recipes-devtools/python/python3-gast_0.4.0.bb b/meta-python/recipes-devtools/python/python3-gast_0.5.0.bb
+similarity index 69%
+rename from meta-python/recipes-devtools/python/python3-gast_0.4.0.bb
+rename to meta-python/recipes-devtools/python/python3-gast_0.5.0.bb
+index 7ef2eb4681..9908950dc1 100644
+--- a/meta-python/recipes-devtools/python/python3-gast_0.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-gast_0.5.0.bb
+@@ -4,8 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a3ad9b6802e713fc5e307e1230f1ea90"
+ 
+-SRC_URI[md5sum] = "d1f258eb70bb916f8fe5535351d5ff05"
+-SRC_URI[sha256sum] = "40feb7b8b8434785585ab224d1568b857edb18297e5a3047f1ba012bc83b42c1"
++SRC_URI[sha256sum] = "8109cbe7aa0f7bf7e4348379da05b8137ea1f059f073332c3c1cedd57db8541f"
+ 
+ inherit pypi setuptools3
+ 
+-- 
+2.25.1
+
