@@ -1,111 +1,387 @@
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.web09.7206.1625583201978183043
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web10.7358.1625583203079429795
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Jul 2021 07:53:22 -0700
+ Tue, 06 Jul 2021 07:53:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Z9E5+MQn;
- spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f49.google.com with SMTP id h1-20020a17090a3d01b0290172d33bb8bcso1681089pjc.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Jul 2021 07:53:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=WVu/6M8p;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id x21-20020a17090aa395b029016e25313bfcso2045950pjp.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Jul 2021 07:53:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=361B85KKWjCloaa7FUugkYszBRkIWkBJNPwfDrFCCR4=;
-        b=Z9E5+MQnisyq4TVflSLuJSxk05WDtieXD5frlJTTLeqlEESemGoWT8By6WrpQ4SKkv
-         vkicvyJ6sxYLpb6OF5gUcfWAs6PHlF89mlAgO575203NvIgg3Qra1UMXjXsw4gSMuFAX
-         Cj6eO8QVtY8J9JsK+LhCWtLFBWnn8mBJoyc/lQh0ivMiBo7X7nB6NkvCz1NCr/lLwwy1
-         UXeJ9jCC4wsfdOo0r65HCg0SnkKIsyRqzGld2gWqBdzUJw9PJxjr1hW/caC0q7/clKvO
-         anNY1ybaA5B9V9KlzXTaZzJsqK0Aiyz0g8N2wBHsB2R4CUQxockbnyt2itldgEl/S3Rw
-         usFA==
+        bh=z7HPD2joOmxiHGDIuNW3Rj0l/bORcTAce2JIVXGQPFA=;
+        b=WVu/6M8pZWKhAnil+ymaXBibYMP3peLDQM9dfm10/wvH6ylpCGJzpAn9KXGRT3zUTx
+         3O6+S+WwqHf7e6mf/iCW+bcukiAi7ZOLWqPB3ZDJl8q2+luziOuEwt0vQzgZu6ZoFpBd
+         0XHICbdV/Nc1cV9Ej45eGntwApgpfydJ+sDYoMey7NFx+fjBzXqbymxwqZ9lWEZVbQOc
+         y0f6Rmbo7R4e7AtHjh1n613NHcCE1tvFPtoWbc7wg/bh1gK3Zr/5voPkd5AlJWQVAZXg
+         inEOC+JLDC2CgOnxeFS4KFfRyMNrXK9TV/ahUIV69/qNT32kdtc9oktGo1eDyMqqz8So
+         obGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=361B85KKWjCloaa7FUugkYszBRkIWkBJNPwfDrFCCR4=;
-        b=ZuHdD5lWH7FxX4HjpFrK62fA05/atDGwIlm49yxA/TdyQAbe6SpY6+VSbo3+AOksTl
-         2Lp+sXhPpg5fARXfo3/TEJ0N1kkUwDplczfMgRvL2M+2KzJbAqHK6eEw1qYSgNW9KiMw
-         SWFDePmgshT+9VLZmt5t3YFp10PXcfqvDDdy96LohAKLprzgNhLsDjCo8/0a61GS7klt
-         F7Yqee+iksQZwliQx0jzl+X0X8Ait0WhOrjBfg8lNLdBvY8Olppjxy78dMBcNd7ivYub
-         iPEWffzQ5fxd2cidK6SBQOtsxxXtz826zM2aC09rYO+LaxsYdkVRjVmzVCQreBvHZodc
-         /3Qw==
-X-Gm-Message-State: AOAM530/p8ohVlZtk5EXza7XlIGMIIpf19QplZWbMmxcdFCoKQ9XPoHT
-	DY/W2V7wHrlGB7OPub+qDQguQsokXt2KPQ==
-X-Google-Smtp-Source: ABdhPJzV/T453meNvZpGlTkHYtkLZ993BXA22RjUoDW6tODMnpod1t+MKqe7Vr+6Rd7H/sICW8u1xA==
-X-Received: by 2002:a17:903:1cb:b029:129:4728:d61c with SMTP id e11-20020a17090301cbb02901294728d61cmr17248026plh.65.1625583201433;
-        Tue, 06 Jul 2021 07:53:21 -0700 (PDT)
+        bh=z7HPD2joOmxiHGDIuNW3Rj0l/bORcTAce2JIVXGQPFA=;
+        b=rg9HPXqk2C/pJf6vJOlE+6hNL2m1umGzHXcocdqMjmNWfdNkkSjfH2GGihHUJTqVtr
+         ni2KrueKGeOFnlDaWmamjdk41dLZ+eYs2y5VKmgo5ybhsYwTYqR/JF5mLmqero/Glk12
+         WFbIMEpP9E3ihR/YCct4tanJyIOXPJtWkfAWKAR+apaxd9S1SxHqN8Me1d330lz8FIAp
+         6+IW1wqwJOGwp9Rj4G5FjX70n5gKM2fwSV3I1ou//5jv5Bt7KoVQZnPx3bGP/JkAgt1/
+         WPUTxh3CsZNIM61dqzdLvQ5FAiun2NjfAjCsHkLFl7K46tGJcxJVtwmtQNKL5nrdAgjS
+         QpjA==
+X-Gm-Message-State: AOAM530z0xJNkW/axU4rzVoc1stVVF9oi9WpKKsOij34KPUZbJASOIO6
+	uVvIwFsRmd5Kd9iNJDNUvIUtVODtmpNyKw==
+X-Google-Smtp-Source: ABdhPJzA2tXa8Gq5oXeeOe+Pzt3jub0fIo9ZL+8OA1gLvQ9yZNS/E8azlPiniOP7hllslngOz40CeA==
+X-Received: by 2002:a17:90a:928c:: with SMTP id n12mr20707178pjo.30.1625583202311;
+        Tue, 06 Jul 2021 07:53:22 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-X13-Gen-1.hsd1.ca.comcast.net ([2601:202:4180:a5c0:234d:f3c6:164b:2950])
-        by smtp.gmail.com with ESMTPSA id b22sm6504809pfi.181.2021.07.06.07.53.20
+        by smtp.gmail.com with ESMTPSA id b22sm6504809pfi.181.2021.07.06.07.53.21
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Tue, 06 Jul 2021 07:53:21 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 03/11] python3-django: upgrade 2.2.13 -> 2.2.16
-Date: Tue,  6 Jul 2021 07:53:08 -0700
-Message-Id: <f1d5b6260f7ebf89a524a632ef523b7f3c01b1b3.1625583100.git.akuster808@gmail.com>
+Subject: [dunfell 04/11] python3-django: fix CVE-2021-28658
+Date: Tue,  6 Jul 2021 07:53:09 -0700
+Message-Id: <f01a9056a997bc180af0644bfc640d3e6ea5fb62.1625583100.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1625583100.git.akuster808@gmail.com>
 References: <cover.1625583100.git.akuster808@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
+From: Stefan Ghinea <stefan.ghinea@windriver.com>
 
-Summary of release notes from https://docs.djangoproject.com/en/2.2/releases/
+In Django 2.2 before 2.2.20, 3.0 before 3.0.14, and 3.1 before 3.1.8,
+MultiPartParser allowed directory traversal via uploaded files with
+suitably crafted file names. Built-in upload handlers were not affected
+by this vulnerability.
 
-2.2.14 release notes:
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2021-28658
 
-- Fixed messages of InvalidCacheKey exceptions and CacheKeyWarning warnings
-  raised by cache key validation (#31654).
+Upstream patches:
+https://github.com/django/django/commit/4036d62bda0e9e9f6172943794b744a454ca49c2
 
-2.2.15 release notes:
-
-- Allowed setting the SameSite cookie flag in HttpResponse.delete_cookie()
-  (#31790).
-- Fixed crash when sending emails to addresses with display names longer than
-  75 chars on Python 3.6.11+, 3.7.8+, and 3.8.4+ (#31784).
-
-2.2.16 release notes:
-
-- Fixed CVE-2020-24583: Incorrect permissions on intermediate-level directories
-  on Python 3.7+
-- Fixed CVE-2020-24584: Permission escalation in intermediate-level directories
-  of the file system cache on Python 3.7+
-- Fixed a data loss possibility in the select_for_update(). When using related
-  fields pointing to a proxy model in the of argument, the corresponding model
-  was not locked (#31866).
-- Fixed a data loss possibility, following a regression in Django 2.0, when
-  copying model instances with a cached fields value (#31863).
-
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+Signed-off-by: Stefan Ghinea <stefan.ghinea@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit eb69aad33fc06f06544589ec483f9b76464f6c5f)
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+(cherry picked from commit aef354a0c29a4c6aad4ace53190b5573c78d881b)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{python3-django_2.2.13.bb => python3-django_2.2.16.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-django_2.2.13.bb => python3-django_2.2.16.bb} (41%)
+ .../CVE-2021-28658.patch                      | 289 ++++++++++++++++++
+ .../python/python3-django_2.2.16.bb           |   2 +
+ 2 files changed, 291 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-2.2.16/CVE-2021-28658.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.13.bb b/meta-python/recipes-devtools/python/python3-django_2.2.16.bb
-similarity index 41%
-rename from meta-python/recipes-devtools/python/python3-django_2.2.13.bb
-rename to meta-python/recipes-devtools/python/python3-django_2.2.16.bb
-index 55eacdff2e..0715abbd4c 100644
---- a/meta-python/recipes-devtools/python/python3-django_2.2.13.bb
+diff --git a/meta-python/recipes-devtools/python/python3-django-2.2.16/CVE-2021-28658.patch b/meta-python/recipes-devtools/python/python3-django-2.2.16/CVE-2021-28658.patch
+new file mode 100644
+index 0000000000..325aa00420
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-django-2.2.16/CVE-2021-28658.patch
+@@ -0,0 +1,289 @@
++From 4036d62bda0e9e9f6172943794b744a454ca49c2 Mon Sep 17 00:00:00 2001
++From: Mariusz Felisiak <felisiak.mariusz@gmail.com>
++Date: Tue, 16 Mar 2021 10:19:00 +0100
++Subject: [PATCH] Fixed CVE-2021-28658 -- Fixed potential directory-traversal
++ via uploaded files.
++
++Thanks Claude Paroz for the initial patch.
++Thanks Dennis Brinkrolf for the report.
++
++Backport of d4d800ca1addc4141e03c5440a849bb64d1582cd from main.
++
++Upstream-Status: Backport
++CVE: CVE-2021-28658
++
++Reference to upstream patch:
++[https://github.com/django/django/commit/4036d62bda0e9e9f6172943794b744a454ca49c2]
++
++[SG: Adapted stable/2.2.x patch for 2.2.16]
++Signed-off-by: Stefan Ghinea <stefan.ghinea@windriver.com>
++---
++ django/http/multipartparser.py      | 13 ++++--
++ docs/releases/2.2.16.txt            | 12 +++++
++ tests/file_uploads/tests.py         | 72 ++++++++++++++++++++++-------
++ tests/file_uploads/uploadhandler.py | 31 +++++++++++++
++ tests/file_uploads/urls.py          |  1 +
++ tests/file_uploads/views.py         | 12 ++++-
++ 6 files changed, 120 insertions(+), 21 deletions(-)
++
++diff --git a/django/http/multipartparser.py b/django/http/multipartparser.py
++index f6f12ca..5a9cca8 100644
++--- a/django/http/multipartparser.py
+++++ b/django/http/multipartparser.py
++@@ -7,6 +7,7 @@ file upload handlers for processing.
++ import base64
++ import binascii
++ import cgi
+++import os
++ from urllib.parse import unquote
++ 
++ from django.conf import settings
++@@ -205,7 +206,7 @@ class MultiPartParser:
++                     file_name = disposition.get('filename')
++                     if file_name:
++                         file_name = force_text(file_name, encoding, errors='replace')
++-                        file_name = self.IE_sanitize(unescape_entities(file_name))
+++                        file_name = self.sanitize_file_name(file_name)
++                     if not file_name:
++                         continue
++ 
++@@ -293,9 +294,13 @@ class MultiPartParser:
++                 self._files.appendlist(force_text(old_field_name, self._encoding, errors='replace'), file_obj)
++                 break
++ 
++-    def IE_sanitize(self, filename):
++-        """Cleanup filename from Internet Explorer full paths."""
++-        return filename and filename[filename.rfind("\\") + 1:].strip()
+++    def sanitize_file_name(self, file_name):
+++        file_name = unescape_entities(file_name)
+++        # Cleanup Windows-style path separators.
+++        file_name = file_name[file_name.rfind('\\') + 1:].strip()
+++        return os.path.basename(file_name)
+++
+++    IE_sanitize = sanitize_file_name
++ 
++     def _close_files(self):
++         # Free up all file handles.
++diff --git a/docs/releases/2.2.16.txt b/docs/releases/2.2.16.txt
++index 31231fb..4b7021b 100644
++--- a/docs/releases/2.2.16.txt
+++++ b/docs/releases/2.2.16.txt
++@@ -2,6 +2,18 @@
++ Django 2.2.16 release notes
++ ===========================
++ 
+++*April 6, 2021*
+++
+++Backported from Django 2.2.20 a fix for a security issue.
+++
+++CVE-2021-28658: Potential directory-traversal via uploaded files
+++================================================================
+++
+++``MultiPartParser`` allowed directory-traversal via uploaded files with
+++suitably crafted file names.
+++
+++Built-in upload handlers were not affected by this vulnerability.
+++
++ *September 1, 2020*
++ 
++ Django 2.2.16 fixes two security issues and two data loss bugs in 2.2.15.
++diff --git a/tests/file_uploads/tests.py b/tests/file_uploads/tests.py
++index ea4976d..2a08d1b 100644
++--- a/tests/file_uploads/tests.py
+++++ b/tests/file_uploads/tests.py
++@@ -22,6 +22,21 @@ UNICODE_FILENAME = 'test-0123456789_中文_Orléans.jpg'
++ MEDIA_ROOT = sys_tempfile.mkdtemp()
++ UPLOAD_TO = os.path.join(MEDIA_ROOT, 'test_upload')
++ 
+++CANDIDATE_TRAVERSAL_FILE_NAMES = [
+++    '/tmp/hax0rd.txt',          # Absolute path, *nix-style.
+++    'C:\\Windows\\hax0rd.txt',  # Absolute path, win-style.
+++    'C:/Windows/hax0rd.txt',    # Absolute path, broken-style.
+++    '\\tmp\\hax0rd.txt',        # Absolute path, broken in a different way.
+++    '/tmp\\hax0rd.txt',         # Absolute path, broken by mixing.
+++    'subdir/hax0rd.txt',        # Descendant path, *nix-style.
+++    'subdir\\hax0rd.txt',       # Descendant path, win-style.
+++    'sub/dir\\hax0rd.txt',      # Descendant path, mixed.
+++    '../../hax0rd.txt',         # Relative path, *nix-style.
+++    '..\\..\\hax0rd.txt',       # Relative path, win-style.
+++    '../..\\hax0rd.txt',        # Relative path, mixed.
+++    '..&#x2F;hax0rd.txt',       # HTML entities.
+++]
+++
++ 
++ @override_settings(MEDIA_ROOT=MEDIA_ROOT, ROOT_URLCONF='file_uploads.urls', MIDDLEWARE=[])
++ class FileUploadTests(TestCase):
++@@ -205,22 +220,8 @@ class FileUploadTests(TestCase):
++         # a malicious payload with an invalid file name (containing os.sep or
++         # os.pardir). This similar to what an attacker would need to do when
++         # trying such an attack.
++-        scary_file_names = [
++-            "/tmp/hax0rd.txt",          # Absolute path, *nix-style.
++-            "C:\\Windows\\hax0rd.txt",  # Absolute path, win-style.
++-            "C:/Windows/hax0rd.txt",    # Absolute path, broken-style.
++-            "\\tmp\\hax0rd.txt",        # Absolute path, broken in a different way.
++-            "/tmp\\hax0rd.txt",         # Absolute path, broken by mixing.
++-            "subdir/hax0rd.txt",        # Descendant path, *nix-style.
++-            "subdir\\hax0rd.txt",       # Descendant path, win-style.
++-            "sub/dir\\hax0rd.txt",      # Descendant path, mixed.
++-            "../../hax0rd.txt",         # Relative path, *nix-style.
++-            "..\\..\\hax0rd.txt",       # Relative path, win-style.
++-            "../..\\hax0rd.txt"         # Relative path, mixed.
++-        ]
++-
++         payload = client.FakePayload()
++-        for i, name in enumerate(scary_file_names):
+++        for i, name in enumerate(CANDIDATE_TRAVERSAL_FILE_NAMES):
++             payload.write('\r\n'.join([
++                 '--' + client.BOUNDARY,
++                 'Content-Disposition: form-data; name="file%s"; filename="%s"' % (i, name),
++@@ -240,7 +241,7 @@ class FileUploadTests(TestCase):
++         response = self.client.request(**r)
++         # The filenames should have been sanitized by the time it got to the view.
++         received = response.json()
++-        for i, name in enumerate(scary_file_names):
+++        for i, name in enumerate(CANDIDATE_TRAVERSAL_FILE_NAMES):
++             got = received["file%s" % i]
++             self.assertEqual(got, "hax0rd.txt")
++ 
++@@ -518,6 +519,36 @@ class FileUploadTests(TestCase):
++         # shouldn't differ.
++         self.assertEqual(os.path.basename(obj.testfile.path), 'MiXeD_cAsE.txt')
++ 
+++    def test_filename_traversal_upload(self):
+++        os.makedirs(UPLOAD_TO, exist_ok=True)
+++        self.addCleanup(shutil.rmtree, MEDIA_ROOT)
+++        file_name = '..&#x2F;test.txt',
+++        payload = client.FakePayload()
+++        payload.write(
+++            '\r\n'.join([
+++                '--' + client.BOUNDARY,
+++                'Content-Disposition: form-data; name="my_file"; '
+++                'filename="%s";' % file_name,
+++                'Content-Type: text/plain',
+++                '',
+++                'file contents.\r\n',
+++                '\r\n--' + client.BOUNDARY + '--\r\n',
+++            ]),
+++        )
+++        r = {
+++            'CONTENT_LENGTH': len(payload),
+++            'CONTENT_TYPE': client.MULTIPART_CONTENT,
+++            'PATH_INFO': '/upload_traversal/',
+++            'REQUEST_METHOD': 'POST',
+++            'wsgi.input': payload,
+++        }
+++        response = self.client.request(**r)
+++        result = response.json()
+++        self.assertEqual(response.status_code, 200)
+++        self.assertEqual(result['file_name'], 'test.txt')
+++        self.assertIs(os.path.exists(os.path.join(MEDIA_ROOT, 'test.txt')), False)
+++        self.assertIs(os.path.exists(os.path.join(UPLOAD_TO, 'test.txt')), True)
+++
++ 
++ @override_settings(MEDIA_ROOT=MEDIA_ROOT)
++ class DirectoryCreationTests(SimpleTestCase):
++@@ -591,6 +622,15 @@ class MultiParserTests(SimpleTestCase):
++         }, StringIO('x'), [], 'utf-8')
++         self.assertEqual(multipart_parser._content_length, 0)
++ 
+++    def test_sanitize_file_name(self):
+++        parser = MultiPartParser({
+++            'CONTENT_TYPE': 'multipart/form-data; boundary=_foo',
+++            'CONTENT_LENGTH': '1'
+++        }, StringIO('x'), [], 'utf-8')
+++        for file_name in CANDIDATE_TRAVERSAL_FILE_NAMES:
+++            with self.subTest(file_name=file_name):
+++                self.assertEqual(parser.sanitize_file_name(file_name), 'hax0rd.txt')
+++
++     def test_rfc2231_parsing(self):
++         test_data = (
++             (b"Content-Type: application/x-stuff; title*=us-ascii'en-us'This%20is%20%2A%2A%2Afun%2A%2A%2A",
++diff --git a/tests/file_uploads/uploadhandler.py b/tests/file_uploads/uploadhandler.py
++index 7c6199f..65d70c6 100644
++--- a/tests/file_uploads/uploadhandler.py
+++++ b/tests/file_uploads/uploadhandler.py
++@@ -1,6 +1,8 @@
++ """
++ Upload handlers to test the upload API.
++ """
+++import os
+++from tempfile import NamedTemporaryFile
++ 
++ from django.core.files.uploadhandler import FileUploadHandler, StopUpload
++ 
++@@ -35,3 +37,32 @@ class ErroringUploadHandler(FileUploadHandler):
++     """A handler that raises an exception."""
++     def receive_data_chunk(self, raw_data, start):
++         raise CustomUploadError("Oops!")
+++
+++
+++class TraversalUploadHandler(FileUploadHandler):
+++    """A handler with potential directory-traversal vulnerability."""
+++    def __init__(self, request=None):
+++        from .views import UPLOAD_TO
+++
+++        super().__init__(request)
+++        self.upload_dir = UPLOAD_TO
+++
+++    def file_complete(self, file_size):
+++        self.file.seek(0)
+++        self.file.size = file_size
+++        with open(os.path.join(self.upload_dir, self.file_name), 'wb') as fp:
+++            fp.write(self.file.read())
+++        return self.file
+++
+++    def new_file(
+++        self, field_name, file_name, content_type, content_length, charset=None,
+++        content_type_extra=None,
+++    ):
+++        super().new_file(
+++            file_name, file_name, content_length, content_length, charset,
+++            content_type_extra,
+++        )
+++        self.file = NamedTemporaryFile(suffix='.upload', dir=self.upload_dir)
+++
+++    def receive_data_chunk(self, raw_data, start):
+++        self.file.write(raw_data)
++diff --git a/tests/file_uploads/urls.py b/tests/file_uploads/urls.py
++index 3e7985d..eaac1da 100644
++--- a/tests/file_uploads/urls.py
+++++ b/tests/file_uploads/urls.py
++@@ -4,6 +4,7 @@ from . import views
++ 
++ urlpatterns = [
++     path('upload/', views.file_upload_view),
+++    path('upload_traversal/', views.file_upload_traversal_view),
++     path('verify/', views.file_upload_view_verify),
++     path('unicode_name/', views.file_upload_unicode_name),
++     path('echo/', views.file_upload_echo),
++diff --git a/tests/file_uploads/views.py b/tests/file_uploads/views.py
++index d4947e4..137c6f3 100644
++--- a/tests/file_uploads/views.py
+++++ b/tests/file_uploads/views.py
++@@ -6,7 +6,9 @@ from django.http import HttpResponse, HttpResponseServerError, JsonResponse
++ 
++ from .models import FileModel
++ from .tests import UNICODE_FILENAME, UPLOAD_TO
++-from .uploadhandler import ErroringUploadHandler, QuotaUploadHandler
+++from .uploadhandler import (
+++    ErroringUploadHandler, QuotaUploadHandler, TraversalUploadHandler,
+++)
++ 
++ 
++ def file_upload_view(request):
++@@ -158,3 +160,11 @@ def file_upload_fd_closing(request, access):
++     if access == 't':
++         request.FILES  # Trigger file parsing.
++     return HttpResponse('')
+++
+++
+++def file_upload_traversal_view(request):
+++    request.upload_handlers.insert(0, TraversalUploadHandler())
+++    request.FILES  # Trigger file parsing.
+++    return JsonResponse(
+++        {'file_name': request.upload_handlers[0].file_name},
+++    )
++-- 
++2.17.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.16.bb b/meta-python/recipes-devtools/python/python3-django_2.2.16.bb
+index 0715abbd4c..eb626e8d3f 100644
+--- a/meta-python/recipes-devtools/python/python3-django_2.2.16.bb
 +++ b/meta-python/recipes-devtools/python/python3-django_2.2.16.bb
-@@ -1,8 +1,8 @@
- require python-django.inc
- inherit setuptools3
- 
--SRC_URI[md5sum] = "30c688af9b63c4800ef9b044e0dd4145"
--SRC_URI[sha256sum] = "84f370f6acedbe1f3c41e1a02de44ac206efda3355e427139ecb785b5f596d80"
-+SRC_URI[md5sum] = "93faf5bbd54a19ea49f4932a813b9758"
-+SRC_URI[sha256sum] = "62cf45e5ee425c52e411c0742e641a6588b7e8af0d2c274a27940931b2786594"
- 
+@@ -7,3 +7,5 @@ SRC_URI[sha256sum] = "62cf45e5ee425c52e411c0742e641a6588b7e8af0d2c274a27940931b2
  RDEPENDS_${PN} += "\
      ${PYTHON_PN}-sqlparse \
+ "
++SRC_URI += "file://CVE-2021-28658.patch \
++"
 -- 
 2.25.1
 
