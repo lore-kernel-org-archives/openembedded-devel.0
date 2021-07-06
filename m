@@ -1,50 +1,50 @@
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web12.7384.1625583205020556328
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
+ by mx.groups.io with SMTP id smtpd.web11.7353.1625583205754082425
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 06 Jul 2021 07:53:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=MX6vj2IR;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id p4-20020a17090a9304b029016f3020d867so2041492pjo.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Jul 2021 07:53:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=F8mrfgUI;
+ spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f45.google.com with SMTP id oj10-20020a17090b4d8ab0290172f77377ebso1191148pjb.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Jul 2021 07:53:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=umgiXGwr1kBWghtsofkCEiI6h3yg7bjXEbR+G95fefM=;
-        b=MX6vj2IR9lvybPKViNMjWOJKJ1HvXND3TZ3BBwSujWkXyxpE0IeAFk2HI78canQvb4
-         ByQhzzKez/1QzoieeNE/ERqzMw3m28D/lqLZKfWRAzwJ/LfO401qg/NHI4c0pYTJJY6r
-         V51LBfFeyo+r+3NXmTwdwzAh4Ldf3fpS762jwzy89OySZwDHTPUlCKg8yon1rR7W9IMH
-         NeRN9KLB//GJh2jQuAL5nN1Vj9ENwFvzrnmlfi2eHjUMtgX8fuXRgYjJ13KTFk+O3fzD
-         xwVaIg+NH3BCO8V6pwy+gDk5H9AzZzVzIEouXaze1EnYzrMmuFv9LikSiIWvx73zM71w
-         HRmg==
+        bh=FscAqYtJDVZ+PkGbAEoiSP7ANUC0WwGqt0hdGxbn2LY=;
+        b=F8mrfgUImOjV2xj/B+pQie4h1t7xiiVwGaL3x2CMtZD1+7TB3kuUrIkfnrjaBqXvTd
+         zf2+vdrP/g8Ld4ZqYVKptoSZkhJMw8r/Imd0RtOpiuYfaLLQuhBtJdgw3mQDdFsgkY2C
+         8hdF0m9P6ns+NldTgXqtGhc/oDKVkTXBcHsp28yI00IN9RhwuAcn+dw+qMBjD96mXnDp
+         LyZngG9IsDsxwdpJoYFcqyAxJpwOq5pBrqUViAsVeJLgat5NuxVBxNVYTu53VVYLVETn
+         UzjEY07TTbl0bLrI7DUmeqTvfTPkwifQVD6a952dmKV4baAq87ycKGcblZpunhwilxV0
+         fF0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=umgiXGwr1kBWghtsofkCEiI6h3yg7bjXEbR+G95fefM=;
-        b=rvXbY4Wi36NMjFjhx/7chEStyVO6MeRZKXnHX6ivAQ3d3zESMVYtAOv89MjtDI8O6n
-         SzhIAPFY8220BzpzGOHq+OHr+hRA9lrIYSHZX5IrGmuNpQzPhMHKCRpbrFV6RkEIs24i
-         XS2BlXUTzIXe+E14mk/LCIYsTa8S3NQL4F0DRtB26XOYQ8FvTXed9WSmXSavaald3cOm
-         QQyViA3AePbxCXDLBW/XJzOXlRAS4v3s9++7mncWtZn1Vt4B1AHwJON2YILZaTS+rBYK
-         Keoyl6KHSOXt74pVfaFjL/r/C+G2S1QZ/oUmTGrBLlRQabt6JXOK4dK8e7cMHosCdPJR
-         2JVA==
-X-Gm-Message-State: AOAM531tctar4jGNdBfvinBWGEWaJIn5GtjEea7+EXk9i812X1oFUjgl
-	JiJeiLKMSkumo2v8t8o9DABkank4VmZsyA==
-X-Google-Smtp-Source: ABdhPJyLVjWRJbTzUR07gKTqn0HYVFEBUqAX087B8dkyv3imOqQpGNXyoIDFdX3eYZNlD3Y435h8vQ==
-X-Received: by 2002:a17:90a:bd06:: with SMTP id y6mr21209588pjr.6.1625583204489;
-        Tue, 06 Jul 2021 07:53:24 -0700 (PDT)
+        bh=FscAqYtJDVZ+PkGbAEoiSP7ANUC0WwGqt0hdGxbn2LY=;
+        b=aHCgnjO0dCUMyryLAkc9NqL6Ar3Ln9Lo+M+lm9WuAG7etDFledhvoBrn77wGjwGKME
+         HLrw+2DtSLTx1z/PlMJrHXNfC05GCPe6QfBA/0/PpyBiochAN/rlo1Ym4FDfNwv4Vfll
+         m645/en4S8H256FOw5JKj8nz03YoQrBsehuiVe9O8mlOwX+mLd+hBPFGBilUJ7j+DCwZ
+         5/4ui2Y0FZ5v6C9lD6MADwfZDpw+MaUGc3SCNklMlb10oaREEASRU0p8xM5/giogDj6y
+         ShOraMDOOmG1pjDC+gh0SIiNzW7jPlfdx4fGmnO4W3M73tnpuLJKNlfV8Z4+enrtjCnP
+         neYA==
+X-Gm-Message-State: AOAM530mVtwi53gIRVmGS67eTzcNOKsbfpW22pnNp+FDleA26liB01d+
+	UoPtQj1TCfj8iRAOtbDxPCqaX8bc9pC2Tw==
+X-Google-Smtp-Source: ABdhPJx9XA58K0tS+lswUKO/7HKn8yr89ZSc330FWcVbRFQTBHtgj7YBWOY9Gh3vnzpsaU094ah8Sw==
+X-Received: by 2002:a17:902:c405:b029:129:3120:1537 with SMTP id k5-20020a170902c405b029012931201537mr17050885plk.49.1625583205224;
+        Tue, 06 Jul 2021 07:53:25 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-X13-Gen-1.hsd1.ca.comcast.net ([2601:202:4180:a5c0:234d:f3c6:164b:2950])
-        by smtp.gmail.com with ESMTPSA id b22sm6504809pfi.181.2021.07.06.07.53.23
+        by smtp.gmail.com with ESMTPSA id b22sm6504809pfi.181.2021.07.06.07.53.24
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Tue, 06 Jul 2021 07:53:24 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 07/11] python3-django: upgrade 2.2.22 -> 2.2.23
-Date: Tue,  6 Jul 2021 07:53:12 -0700
-Message-Id: <91fe0bd0984e7a0625126168051c2af9b61f1ae9.1625583100.git.akuster808@gmail.com>
+Subject: [dunfell 08/11] python3-django: upgrade 2.2.23 -> 2.2.24
+Date: Tue,  6 Jul 2021 07:53:13 -0700
+Message-Id: <cca0a50ab0fa256718f03c1f096bc62bc394288b.1625583100.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1625583100.git.akuster808@gmail.com>
 References: <cover.1625583100.git.akuster808@gmail.com>
@@ -53,39 +53,35 @@ Content-Transfer-Encoding: 8bit
 
 From: Trevor Gamblin <trevor.gamblin@windriver.com>
 
-2.2.23 is a bugfix release:
-
-- Fixed a regression in Django 2.2.21 where saving FileField would raise a
-  SuspiciousFileOperation even when a custom upload_to returns a valid
-  file path (#32718).
+Version 2.2.24 contains a fix for CVE-2021-33571 and is the latest LTS
+release.
 
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-(cherry picked from commit f07a8c1376fe9f5eb4fc0ddff8ca1a1b3c3f173b)
+(cherry picked from commit fa2d3338fb87a38a66d11735b876ce2320045b0d)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
-(cherry picked from commit b2716ef06a76854497de80c642bf7f63b07f7a6c)
+(cherry picked from commit c51e79dd854460c6f6949a187970d05362152e84)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{python3-django_2.2.22.bb => python3-django_2.2.23.bb}    | 4 ++--
+ .../{python3-django_2.2.23.bb => python3-django_2.2.24.bb}    | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-django_2.2.22.bb => python3-django_2.2.23.bb} (41%)
+ rename meta-python/recipes-devtools/python/{python3-django_2.2.23.bb => python3-django_2.2.24.bb} (41%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.22.bb b/meta-python/recipes-devtools/python/python3-django_2.2.23.bb
+diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.23.bb b/meta-python/recipes-devtools/python/python3-django_2.2.24.bb
 similarity index 41%
-rename from meta-python/recipes-devtools/python/python3-django_2.2.22.bb
-rename to meta-python/recipes-devtools/python/python3-django_2.2.23.bb
-index a0b8840259..ab4b68fc87 100644
---- a/meta-python/recipes-devtools/python/python3-django_2.2.22.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_2.2.23.bb
+rename from meta-python/recipes-devtools/python/python3-django_2.2.23.bb
+rename to meta-python/recipes-devtools/python/python3-django_2.2.24.bb
+index ab4b68fc87..964ca6ba03 100644
+--- a/meta-python/recipes-devtools/python/python3-django_2.2.23.bb
++++ b/meta-python/recipes-devtools/python/python3-django_2.2.24.bb
 @@ -1,8 +1,8 @@
  require python-django.inc
  inherit setuptools3
  
--SRC_URI[md5sum] = "dca447b605dcabd924ac7ba17680cf73"
--SRC_URI[sha256sum] = "db2214db1c99017cbd971e58824e6f424375154fe358afc30e976f5b99fc6060"
-+SRC_URI[md5sum] = "d72405637143e201b745714e300bb546"
-+SRC_URI[sha256sum] = "12cfc045a4ccb2348719aaaa77b17e66a26bff9fc238b4c765a3e825ef92e414"
+-SRC_URI[md5sum] = "d72405637143e201b745714e300bb546"
+-SRC_URI[sha256sum] = "12cfc045a4ccb2348719aaaa77b17e66a26bff9fc238b4c765a3e825ef92e414"
++SRC_URI[md5sum] = "ebf3bbb7716a7b11029e860475b9a122"
++SRC_URI[sha256sum] = "3339ff0e03dee13045aef6ae7b523edff75b6d726adf7a7a48f53d5a501f7db7"
  
  RDEPENDS_${PN} += "\
      ${PYTHON_PN}-sqlparse \
