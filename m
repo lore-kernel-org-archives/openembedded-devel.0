@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.7153.1625582950849893133
+ by mx.groups.io with SMTP id smtpd.web11.7308.1625582951088256397
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 06 Jul 2021 07:49:11 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=38392 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1m0mNo-0003Bp-P4; Tue, 06 Jul 2021 17:49:09 +0300
+	id 1m0mNp-0003Bp-Vp; Tue, 06 Jul 2021 17:49:10 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-watchdog: Upgrade 2.1.2 -> 2.1.3
-Date: Tue,  6 Jul 2021 17:49:00 +0300
-Message-Id: <20210706144901.30020-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-humanize: Upgrade 3.9.0 -> 3.10.0
+Date: Tue,  6 Jul 2021 17:49:01 +0300
+Message-Id: <20210706144901.30020-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210706144901.30020-1-leon.anavi@konsulko.com>
 References: <20210706144901.30020-1-leon.anavi@konsulko.com>
@@ -30,29 +30,29 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.1.3:
+Upgrade to release 3.10.0:
 
-- Publish macOS arm64 and universal2 wheels
+- Add Swedish translation
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-watchdog_2.1.2.bb => python3-watchdog_2.1.3.bb}    | 2 +-
+ .../{python3-humanize_3.9.0.bb => python3-humanize_3.10.0.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-watchdog_2.1.2.bb => python3-watchdog_2.1.3.bb} (80%)
+ rename meta-python/recipes-devtools/python/{python3-humanize_3.9.0.bb => python3-humanize_3.10.0.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-watchdog_2.1.2.bb b/meta-python/recipes-devtools/python/python3-watchdog_2.1.3.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-watchdog_2.1.2.bb
-rename to meta-python/recipes-devtools/python/python3-watchdog_2.1.3.bb
-index c2bf68a2d6..ba0fdf1eb4 100644
---- a/meta-python/recipes-devtools/python/python3-watchdog_2.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-watchdog_2.1.3.bb
-@@ -4,7 +4,7 @@ DEPENDS = "${PYTHON_PN}-argh"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-python/recipes-devtools/python/python3-humanize_3.9.0.bb b/meta-python/recipes-devtools/python/python3-humanize_3.10.0.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-humanize_3.9.0.bb
+rename to meta-python/recipes-devtools/python/python3-humanize_3.10.0.bb
+index f3a11745e1..eba13dbc7e 100644
+--- a/meta-python/recipes-devtools/python/python3-humanize_3.9.0.bb
++++ b/meta-python/recipes-devtools/python/python3-humanize_3.10.0.bb
+@@ -5,7 +5,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d"
  
--SRC_URI[sha256sum] = "0237db4d9024859bea27d0efb59fe75eef290833fd988b8ead7a879b0308c2db"
-+SRC_URI[sha256sum] = "e5236a8e8602ab6db4b873664c2d356c365ab3cac96fbdec4970ad616415dd45"
+-SRC_URI[sha256sum] = "892a5b7b87763c4c6997a58382c2b1f4614048a2e01c23ef1bb0456e6f9d4d5d"
++SRC_URI[sha256sum] = "b2413730ce6684f85e0439a5b80b8f402e09f03e16ab8023d1da758c6ff41148"
  
  inherit pypi setuptools3
  
