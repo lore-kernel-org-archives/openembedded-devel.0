@@ -1,98 +1,98 @@
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web12.7377.1625583199686481224
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
+ by mx.groups.io with SMTP id smtpd.web12.7379.1625583200230643146
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Jul 2021 07:53:19 -0700
+ Tue, 06 Jul 2021 07:53:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=f0916ttj;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id o4so9092286plg.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Jul 2021 07:53:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=g1zn1qxP;
+ spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f175.google.com with SMTP id q10so3495147pfj.12
+        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Jul 2021 07:53:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
+        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=r13EMVBV/ZZ7KRQrUK8oE311e0Ppa7ByNe2Ns2ED63U=;
-        b=f0916ttj+7njzqVYgajKyoJtEJTuq0zK4lD1kOCeD5Tl8MmUHXfaJbObLGGmp75idw
-         u+GGdcXnjNQXBSzuvdPqj8DLKv5xa3i2J+4ylRuQDyyjNw3d9IpGjBX1kAUqjT82SEPC
-         N3BL+xXC0zzh9lQsAKs+B3rQjPu70K4O+qFY7lFbTc1hSaajtJm10KOnGewgRb03IfMZ
-         2jP/Y+dUtL1WPWGR7chRVJFq7Qpe11XL8vUjXB4nxQnbwZx4A1ZkeAA71XPgiAoreqt4
-         DlIFUiFhkoiV/zDDt662um5czcTe1SdFscKc6mf6ggxyFld3X4WH250UVjV0LCdcVAFj
-         vzcA==
+        bh=6Z9mobdTSh1SSOeyr3mGCkhQPiTteJwQRMP5V9mEU/E=;
+        b=g1zn1qxPkMf/mXoygXTN8CwwBGaStpC9+FGGiUD8PuNZiRsl/X9dLxLT1JX5PMprWB
+         oTOXpyZGhC5Z3aDWcfWmcr1ZNCg5v7xHnu6hmmVYuhH9defRi8Fv9HyYFw/d2qjJlgYQ
+         VWo37eBQhWrFzhDV0HoRPOKQH4ZgyzOLqgvxMDrdHQiZk6+V4gz/bGDWsCZOp0zZNXD9
+         tTCM22rmraGqcCZfIgoYSxEzIAEkt7Nv+5lLWf4zAb9G+23ITm3dIomWS2qN2YzU4LU2
+         //2N5grsLHaGcRkel2Nuqlh2/FoHwAyTy5KDvCrZS9JnOhOTOIIEISfpxnSxHAZcPrL1
+         T7cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=r13EMVBV/ZZ7KRQrUK8oE311e0Ppa7ByNe2Ns2ED63U=;
-        b=sIUB7RDFgSeGTlgYXLpmY1surhQj5E6zwek+CrLNcvsIOUguNG69y8VWYU6B2CjY5J
-         TkKxGvJTVOEXCpDDD3ajuHBPH3d6ThALQHDL5FJTYKI4FdnDyOvtZjZU+8KbpdS5a/zG
-         eD7UQAB/Qu2KeuGLoXXP/KPmSuXzEWCHaz1sWiVmIqTnGU3Sgf8H7AB7qQJ3D6Ti8A2S
-         6cm1Kz28lulcmxlg8JW/XhPiRA30vjQoR3SEwYO2yEX45W1taLoEJobks8eXbm5jkFPv
-         BMwEVtllxAmXpJH0P/YXnfisNMZ7CtesnOqddskDsONbsJ9DegQ7YU3SCq6HXpoV0fdS
-         SzkA==
-X-Gm-Message-State: AOAM533+7j2huDyG91pUPPWFVUfhMJOH9QllX8tShMJ/my9Wim+3ElXa
-	NI/Xac0ZWDl9/4EZvwxwobBqZiZQK2VsSw==
-X-Google-Smtp-Source: ABdhPJy8osU+93BaqM7qxU0ZLg4oGVSTv7Eyg8pGtEmX8P6xfX/GStklwOjOfKxGIHVb/XMfqV9j2A==
-X-Received: by 2002:a17:902:f784:b029:ef:8e2f:430e with SMTP id q4-20020a170902f784b02900ef8e2f430emr17512869pln.28.1625583199105;
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=6Z9mobdTSh1SSOeyr3mGCkhQPiTteJwQRMP5V9mEU/E=;
+        b=mZvVg0nzCqs5BO4Y4fXajrDOjwtgcOv/rcH3Tqyb6fEMxYMuqtTP2ENs2S5fYviPrP
+         EtnJu83WLH8NCAc9gC22thIrCe7/fE6PoK16QSuVgkSqHoM6xfWv2ph/fnpwOJFudI4D
+         LN/z4tHRnZESBeyccO476iUoFUNTwnrlgIbJHW4TuOWOkHum2ftXy4n7l+CMKaBEmdyZ
+         4qFdCg/Cr+wMog6KO4lLW1BRV5qGkHpR1FUu3OK4/sSoUBKYhHZniRZnvfuZmoGTf62+
+         S++WK0Qlm9vbhM+teZxVCTd7BK1jfvCC3orxcjzERxXn8oTxHa15rxA+ziMKKGPgsOE/
+         KUrw==
+X-Gm-Message-State: AOAM530Zr53cHLyE/bTQ4yi2iskahnITUUFxD4I4FBj8LxJcfNVNnuUN
+	43aJc/yLzt+jb8mwFWIVGvTVJv3P6mEacw==
+X-Google-Smtp-Source: ABdhPJxT32UeL87V8vWUL4qJfbiZADwrgZLBwTQswJPotHMJzZ0u84NKapg2bqtEOu9sgOTEX6e3Xw==
+X-Received: by 2002:a62:e50c:0:b029:2f9:b9b1:d44f with SMTP id n12-20020a62e50c0000b02902f9b9b1d44fmr21075106pff.42.1625583199728;
         Tue, 06 Jul 2021 07:53:19 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from akuster-ThinkPad-X13-Gen-1.hsd1.ca.comcast.net ([2601:202:4180:a5c0:234d:f3c6:164b:2950])
-        by smtp.gmail.com with ESMTPSA id b22sm6504809pfi.181.2021.07.06.07.53.18
+        by smtp.gmail.com with ESMTPSA id b22sm6504809pfi.181.2021.07.06.07.53.19
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Jul 2021 07:53:18 -0700 (PDT)
+        Tue, 06 Jul 2021 07:53:19 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 00/11] Patch review, July 5th
-Date: Tue,  6 Jul 2021 07:53:05 -0700
-Message-Id: <cover.1625583100.git.akuster808@gmail.com>
+Subject: [dunfell 01/11] nss: Fix build on Centos 7
+Date: Tue,  6 Jul 2021 07:53:06 -0700
+Message-Id: <54207c3575ae610e68e5ec4f6e7c698d3a6ba1d0.1625583100.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1625583100.git.akuster808@gmail.com>
+References: <cover.1625583100.git.akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Please have comments back by Thursday
+From: Marek Vasut <marex@denx.de>
 
-The following changes since commit c38d2a74f762a792046f3d3c377827b08aade513:
+Centos 7 has glibc 2.18 and nss-native build fails due to implicit
+declaration of function putenv during build. This is because of the
+Feature Test Macro Requirements for glibc (see feature_test_macros(7)):
 
-  dnsmasq: Add fixes for CVEs reported for dnsmasq (2021-05-29 11:41:45 -0700)
+  putenv(): _XOPEN_SOURCE
+      || /* Glibc since 2.19: */ _DEFAULT_SOURCE
+      || /* Glibc versions <= 2.19: */ _SVID_SOURCE
 
-are available in the Git repository at:
+and because nss coreconf/Linux.mk only defines
 
-  git://git.openembedded.org/meta-openembedded-contrib stable/dunfell-nut
-  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/dunfell-nut
+ -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_POSIX_SOURCE
 
-Armin Kuster (1):
-  dovecot: add CVE-2016-4983 to allowlist
+So on such system with glibc 2.18, neither macro makes putenv()
+available. Add -D_XOPEN_SOURCE for the Centos 7 and glibc 2.18
+native build case.
 
-Chen Qi (1):
-  python3-django: upgrade to 2.2.20
+Signed-off-by: Marek Vasut <marex@denx.de>
+Cc: Armin Kuster <akuster808@gmail.com>
+Cc: Armin Kuster <akuster@mvista.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
+Cc: Ross Burton <ross.burton@arm.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-oe/recipes-support/nss/nss_3.51.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Marek Vasut (1):
-  nss: Fix build on Centos 7
-
-Sekine Shigeki (1):
-  add CVE-2011-2411 to allowlist
-
-Stefan Ghinea (1):
-  python3-django: fix CVE-2021-28658
-
-Trevor Gamblin (5):
-  python3-django: upgrade 2.2.7 -> 2.2.13
-  python3-django: upgrade 2.2.13 -> 2.2.16
-  python3-django: upgrade 2.2.20 -> 2.2.22
-  python3-django: upgrade 2.2.22 -> 2.2.23
-  python3-django: upgrade 2.2.23 -> 2.2.24
-
-ito-yuichi@fujitsu.com (1):
-  cyrus-sasl: add CVE-2020-8032 to allowlist
-
- meta-networking/recipes-connectivity/samba/samba_4.10.18.bb   | 4 ++++
- .../recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb           | 3 +++
- meta-networking/recipes-support/dovecot/dovecot_2.2.36.4.bb   | 3 +++
- meta-oe/recipes-support/nss/nss_3.51.1.bb                     | 2 ++
- .../{python3-django_2.2.7.bb => python3-django_2.2.24.bb}     | 4 ++--
- 5 files changed, 14 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-django_2.2.7.bb => python3-django_2.2.24.bb} (41%)
-
+diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+index 0e127975b4..30370573d4 100644
+--- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
++++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+@@ -55,6 +55,8 @@ TUNE_CCARGS_remove = "-mcpu=cortex-a55+crc -mcpu=cortex-a55 -mcpu=cortex-a55+crc
+ 
+ TARGET_CC_ARCH += "${LDFLAGS}"
+ 
++CFLAGS_append_class-native = " -D_XOPEN_SOURCE "
++
+ do_configure_prepend_libc-musl () {
+     sed -i -e '/-DHAVE_SYS_CDEFS_H/d' ${S}/nss/lib/dbm/config/config.mk
+ }
 -- 
 2.25.1
 
