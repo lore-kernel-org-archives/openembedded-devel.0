@@ -1,50 +1,50 @@
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
- by mx.groups.io with SMTP id smtpd.web11.3753.1625562820590711851
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.web09.3730.1625562821744171997
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Jul 2021 02:13:40 -0700
+ Tue, 06 Jul 2021 02:13:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gGuH3g4a;
- spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-ed1-f49.google.com with SMTP id s15so27005024edt.13
-        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Jul 2021 02:13:40 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=D37BbAY+;
+ spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-ej1-f44.google.com with SMTP id nd37so33058349ejc.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Jul 2021 02:13:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=r2de/Dc/xPrZkFSOVyIFl6BlNCEREoUBEu7jwCnelts=;
-        b=gGuH3g4awmMFONxp6qiYSxASl7wNbakvXwqI8TOoY52KjRSYdSIKQbQ/QKzDVsokFA
-         7LzhnTyWO6Ntfq5yinrfNYe24iSxcGKFK9r/S/PWlzIchxshnZW4LmbwrPHbySdU9XB1
-         32K9EMGr4OAyWTOuOqAMZuiC2j15QLk+EPqaZhQF7Wun9v2E4rTTgyWA2gaZdVVFsZBQ
-         nwUrU4buRCDd7DP/RuNYxecSoj1GJnkyPbIvnKtVIWvu20i55gBWEo7qFuzL4uamn/UL
-         xfwXPp7Y2ahKVXGkVTBFCwJAZGxCFuSeZ7yx4/vskNF+eGU7vgexgRvqu+bnFlaN4a6s
-         48xA==
+        bh=R26hldOKK4/PazIkApcI0g9YOW6MtEDc2z7Mx0z7oK0=;
+        b=D37BbAY+zJoczhTQMIyJmhqrxVTDVlkWSg0+59zNwsFMVjEuszgMtpAi/Xo/85vhn5
+         5kBuCboDplRT44V+Wh8vuJfzHKSs4XYoLSBrWkbxwpk6f4yrSFCkjsPxFC/DXYHE6q0q
+         sFCFxd66VEyZviwRHWGCoaXRa+agwhEfFZ3/NUXUJCQY2ZV75uqzOHZFoqiaxih2BnSn
+         ofXMtkPtyCR39+a43/jEHRyayaVzGsXKPew0I0WqBTITZna4FyL/Se3ecllS9BjQvLlE
+         KxMgJ8xkUcSMiCXKRtA9K7EM4yNDTNshGHJVJE4ymuMqFwMuV5GbiedTmI9ex+c1XvnN
+         E+1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=r2de/Dc/xPrZkFSOVyIFl6BlNCEREoUBEu7jwCnelts=;
-        b=GtVRPQZ0qPaMVwE6WF/XFxnt7xuKYATdEMYVgKmQhEeJJqr/AmMnL9BOdjL0m+Bg8B
-         pIOMduSfmEPGT8nj+tJWpAmUsc5ZjVWzinWlN19r3QeTPiZkmdcJTNiPGPsZZW7UYl61
-         bWf1f/v8bjn8gCngDnpFauzKwRnhBzcG8xNVMp5nXb9H39AZYZH6rRv30jIoxzayMffk
-         hOlNyOQwjndRYkFEpCjUcMviWDZgTB01hnLu6w7Ppe0z6T0db4qDaBOimmGKv7BkWW/c
-         MXPGAlGg/zSRsw3h1/uNcjV718jvXTFY1u6LLZuke23MNyXCPqSMPyr0P15qrybHDJgj
-         Jbpw==
-X-Gm-Message-State: AOAM5318kuGbUmpCDGqd65dap9NDnUJpm8heLBkj5YeRskxRKAZFGD91
-	NmJjuchgya/KWdJWT7vFBPq3/FemIZs=
-X-Google-Smtp-Source: ABdhPJzs4omgBH0jM5bNSasoISoBrgPwn71jG3NcUhUn2gYXtbluAj6hXutVcdVo8fjLfXajzoqEJg==
-X-Received: by 2002:a05:6402:50d3:: with SMTP id h19mr10988691edb.344.1625562819258;
-        Tue, 06 Jul 2021 02:13:39 -0700 (PDT)
+        bh=R26hldOKK4/PazIkApcI0g9YOW6MtEDc2z7Mx0z7oK0=;
+        b=mPvDx/9AQaQs/0nYrZXHHyP8BhfKo1FA3LPBrMo1a/rMga14YjhOmt/0uYwk6AhKGM
+         HNJBtzcAF8IV8OJFeDoaBVU7IFVuM08p2YtcwFMA6WZRD2/FJ8p8IgfgoZ4nlBEPrgb7
+         E2QojDID2ecOgkAAbURCj9pWWLO4uHh4rtNYqbOYwVJk6N/AGAN32kVsdEoGLM89P7JP
+         6i8KZWDWhgD8ZzXwytQfw80j+8byDQdb9sMT88jUzeNMwq0B0sBXKdlRSVXF/o63yPAl
+         jgvbrTHvadLwHaPvne+iQCfLu6RxZJs3MYhwWeGR5dxD0ZRNHyZ9Gb5E+sKEBZI/Rkhg
+         b/kw==
+X-Gm-Message-State: AOAM532e6Is7LOXFggdAR/AqnOLSwVWkvEQREhVAgo4WLASLGk50cJ05
+	bfyPBHqYbGIIXmHkSw7Z20ERhyItWro=
+X-Google-Smtp-Source: ABdhPJwvghObtG+D99aQSL6vTjubNt8ipG9V+siqdZU1r9I7y5xcM3wZR5oB3X0ucqdWRTLkTqyd4g==
+X-Received: by 2002:a17:906:aac6:: with SMTP id kt6mr10901853ejb.508.1625562820085;
+        Tue, 06 Jul 2021 02:13:40 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from thanks-buchmuellers.speedport.ip (p200300f07f3d4039af027e3874c3f08b.dip0.t-ipconnect.de. [2003:f0:7f3d:4039:af02:7e38:74c3:f08b])
-        by smtp.gmail.com with ESMTPSA id p5sm5358273ejm.115.2021.07.06.02.13.38
+        by smtp.gmail.com with ESMTPSA id p5sm5358273ejm.115.2021.07.06.02.13.39
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Jul 2021 02:13:38 -0700 (PDT)
+        Tue, 06 Jul 2021 02:13:39 -0700 (PDT)
 From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 6/9] libgusb: upgrade 0.3.6 -> 0.3.7
-Date: Tue,  6 Jul 2021 11:13:24 +0200
-Message-Id: <20210706091327.1513939-6-schnitzeltony@gmail.com>
+Subject: [PATCH 7/9] poppler: upgrade 21.06.1 -> 21.07.0
+Date: Tue,  6 Jul 2021 11:13:25 +0200
+Message-Id: <20210706091327.1513939-7-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210706091327.1513939-1-schnitzeltony@gmail.com>
 References: <20210706091327.1513939-1-schnitzeltony@gmail.com>
@@ -52,40 +52,37 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Version 0.3.7
-~~~~~~~~~~~~~
-Released: 2021-05-24
-
-New Features:
- - Add a FreeBSD CI target (Richard Hughes)
-
-Bugfixes:
- - Do not depend on libusb_get_parent() to fix FreeBSD compile (Richard Hughes)
- - Do not depend on libusb_get_port_number() to fix DragonFlyBSD compile (Richard Hughes)
- - Do not double-reference USB devices (Marco Trevisan)
- - Do not run the tests on FreeBSD (Richard Hughes)
- - Require *any* python3 to fix FreeBSD build (Richard Hughes)
+Release 21.07.0
+core:
+ * JBIG2Stream: Do not consider a size-0 to be an error. Issue #535
+ * PSOutputDev: fix off-by-one error for image masking in L1/L2 output. Issue #1088
+ * CairoOutputDev: Fix memory leak on broken files
+ * Minor code improvements
+build system:
+ * set C standard to 11 without extensions
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../libgusb/{libgusb_0.3.6.bb => libgusb_0.3.7.bb}              | 2 +-
+ .../poppler/{poppler_21.06.1.bb => poppler_21.07.0.bb}          | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/libgusb/{libgusb_0.3.6.bb => libgusb_0.3.7.bb} (85%)
+ rename meta-oe/recipes-support/poppler/{poppler_21.06.1.bb => poppler_21.07.0.bb} (96%)
 
-diff --git a/meta-oe/recipes-support/libgusb/libgusb_0.3.6.bb b/meta-oe/recipes-support/libgusb/libgusb_0.3.7.bb
-similarity index 85%
-rename from meta-oe/recipes-support/libgusb/libgusb_0.3.6.bb
-rename to meta-oe/recipes-support/libgusb/libgusb_0.3.7.bb
-index 2f74013ca..2b8728179 100644
---- a/meta-oe/recipes-support/libgusb/libgusb_0.3.6.bb
-+++ b/meta-oe/recipes-support/libgusb/libgusb_0.3.7.bb
-@@ -7,5 +7,5 @@ DEPENDS = "glib-2.0 libusb"
- inherit meson gobject-introspection gtk-doc gettext vala
+diff --git a/meta-oe/recipes-support/poppler/poppler_21.06.1.bb b/meta-oe/recipes-support/poppler/poppler_21.07.0.bb
+similarity index 96%
+rename from meta-oe/recipes-support/poppler/poppler_21.06.1.bb
+rename to meta-oe/recipes-support/poppler/poppler_21.07.0.bb
+index 6b6a2a133..975ab1d70 100644
+--- a/meta-oe/recipes-support/poppler/poppler_21.06.1.bb
++++ b/meta-oe/recipes-support/poppler/poppler_21.07.0.bb
+@@ -7,7 +7,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://0001-Do-not-overwrite-all-our-build-flags.patch \
+            file://basename-include.patch \
+            "
+-SRC_URI[sha256sum] = "86b09e5a02de40081a3916ef8711c5128eaf4b1fc59d5f87d0ec66f04f595db4"
++SRC_URI[sha256sum] = "e26ab29f68065de4d6562f0a3e2b5435a83ca92be573b99a1c81998fa286a4d4"
  
- SRC_URI = "git://github.com/hughsie/libgusb.git"
--SRCREV = "b0464454048cac6779d4d51f12fe7f37ae4bbd57"
-+SRCREV = "ff9c606d9d72c7dd369ad220d92729556faaaf0c"
- S = "${WORKDIR}/git"
+ DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
+ 
 -- 
 2.31.1
 
