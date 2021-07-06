@@ -1,254 +1,81 @@
 Received: from mail6.pr.hu (mail6.pr.hu [87.242.0.6])
- by mx.groups.io with SMTP id smtpd.web11.2855.1625554695474310756
+ by mx.groups.io with SMTP id smtpd.web12.2887.1625554697731632796
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Jul 2021 23:58:16 -0700
+ Mon, 05 Jul 2021 23:58:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@pr.hu header.s=pr20170203 header.b=D0DOwpMA;
+ dkim=pass header.i=@pr.hu header.s=pr20170203 header.b=OvjtmWLe;
  spf=pass (domain: pr.hu, ip: 87.242.0.6, mailfrom: zboszor@pr.hu)
 Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
 	by frontdoor.pr.hu with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.89)
 	(envelope-from <zboszor@pr.hu>)
-	id 1m0f26-0002YU-1a; Tue, 06 Jul 2021 08:58:14 +0200
+	id 1m0f28-0002Yh-9p; Tue, 06 Jul 2021 08:58:16 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
 	s=pr20170203; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
-	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
 	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=optuzhpton2fscRpuWsKVW/Vy4pb1g1nW+v1Z6xI620=; b=D0DOwpMAbvyQe5ogiR5YAvS29Z
-	4qrUvTfK12JdiwW2p86Wcu1XZp39Gp0wmwUdMz9kzi4SJc1sGCSTSRIjBn1yjs3O2R6i3WNrJTUgi
-	6EKkZ+EI3w/FZXH5VCOkySeXQyrZUOEC7+unWCCV8DPNFZNXaE59FPLLcLHsJJzcfDMKSUJV+Obs2
-	UetNmCZp34wc4nPNNQTwq+XJ0jKWISfghW6mMYqOZxCKJOB2AIg3qBD50kD1tfhgkN6E9uWQIalIY
-	LmtGdwaQsxMcGESdRXoTNXkBDAM845IkhDgpFJjRrwJWP/RIquirnGMZjG/kIZF9/dcRTJa0dHx+h
-	GVKXhyOA==;
+	bh=5Gw1iHjfWrB45deRffw0pRzZ3ktvhfq7WHvftmfVSdI=; b=OvjtmWLeQJPiy1MW8ZrjanEobE
+	NNXDKivCPZkHkbr5VUeH/V5zdyaY4YfiA2H2M7+ey/8qIF31H26XQqd6Peo8CNIz0gwvIu1dq/7CX
+	COvv3rrYInsjOYoyRLwmFjM6f8NkCGjc9Jjsfu+Ej2g9Wcol5UkdMbu+DSvkt0VKVqvaoN7gqC+V2
+	7+BZUZl6CP5wYJvFHJUvyMFcVdQnWBa+S0wo385BWNA7RRIzMfEkgMpVtvciVUssk4lMLhOuzOsQj
+	k8i2yDb+mzxnWCN34s0sUYTaEGBkLfva9LtGnuU1Nl+esbo+t3OcM5Pw946LvWxZNO2qJKXa40JIr
+	iLrT0Cjw==;
 Received: from host-87-242-23-58.prtelecom.hu ([87.242.23.58] helo=localhost.localdomain)
 	by mail.pr.hu with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.92)
 	(envelope-from <zboszor@pr.hu>)
-	id 1m0f21-0007Qz-HN; Tue, 06 Jul 2021 08:58:11 +0200
+	id 1m0f24-0007Qz-2C; Tue, 06 Jul 2021 08:58:14 +0200
 From: "Zoltan Boszormenyi" <zboszor@pr.hu>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>,
 	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Subject: [meta-oe][PATCH 1/2] mariadb: Use qemu to run cross-compiled binaries
-Date: Tue,  6 Jul 2021 08:57:48 +0200
-Message-Id: <20210706065749.187264-1-zboszor@pr.hu>
+Subject: [meta-oe][PATCH 2/2] mariadb: Upgrade to 10.5.11
+Date: Tue,  6 Jul 2021 08:57:49 +0200
+Message-Id: <20210706065749.187264-2-zboszor@pr.hu>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20210706065749.187264-1-zboszor@pr.hu>
+References: <20210706065749.187264-1-zboszor@pr.hu>
 MIME-Version: 1.0
 X-Spam-Score: -0.9 (/)
-X-Scan-Signature: 95b4cc0dcd527d9223de7ebc14f45880
-X-Spam-Tracer: backend.mail.pr.hu -0.9 20210706065811Z
+X-Scan-Signature: f863141675028d675eb61fc829984e23
+X-Spam-Tracer: backend.mail.pr.hu -0.9 20210706065814Z
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Zoltán Böszörményi <zboszor@gmail.com>
 
-This way, mariadb does not depend on mariadb-native anymore.
-
 Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
 ---
- meta-oe/recipes-dbs/mysql/mariadb.inc         | 27 ++++----
- .../mysql/mariadb/cross-compiling.patch       | 25 -------
- ...Lists.txt-fix-gen_lex_hash-not-found.patch | 67 -------------------
- meta-oe/recipes-dbs/mysql/mariadb_10.5.10.bb  |  4 +-
- 4 files changed, 15 insertions(+), 108 deletions(-)
- delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/cross-compiling.patch
- delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
+ .../{mariadb-native_10.5.10.bb => mariadb-native_10.5.11.bb}    | 0
+ meta-oe/recipes-dbs/mysql/mariadb.inc                           | 2 +-
+ .../mysql/{mariadb_10.5.10.bb => mariadb_10.5.11.bb}            | 0
+ 3 files changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.5.10.bb => mariadb-native_10.5.11.bb} (100%)
+ rename meta-oe/recipes-dbs/mysql/{mariadb_10.5.10.bb => mariadb_10.5.11.bb} (100%)
 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.10.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.11.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.5.10.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.5.11.bb
 diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 18b025070..7b1f537fb 100644
+index 7b1f537fb..71978740b 100644
 --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
 +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -12,7 +12,6 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
-            file://mysql-systemd-start \
-            file://configure.cmake-fix-valgrind.patch \
-            file://support-files-CMakeLists.txt-fix-do_populate_sysroot.patch \
--           file://sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
-            file://0001-disable-ucontext-on-musl.patch \
-            file://c11_atomics.patch \
-            file://clang_version_header_conflict.patch \
-@@ -21,7 +20,6 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
-            file://0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch \
-            file://0001-aio_linux-Check-if-syscall-exists-before-using-it.patch \
-            file://sys_futex.patch \
--           file://cross-compiling.patch \
-            file://ssize_t.patch \
-            file://mm_malloc.patch \
+@@ -25,7 +25,7 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
            "
-@@ -60,8 +58,6 @@ SYSTEMD_AUTO_ENABLE_${PN}-setupdb ?= "enable"
- ALLOW_EMPTY_${PN}-setupdb ?= "1"
- FILES_${PN}-setupdb = "${sysconfdir}/init.d/install_db"
+ SRC_URI_append_libc-musl = " file://ppc-remove-glibc-dep.patch"
  
--EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
--
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)} setupdb"
- PACKAGECONFIG_class-native = ""
- PACKAGECONFIG[pam] = ",-DWITHOUT_AUTH_PAM=TRUE,libpam"
-@@ -95,6 +91,8 @@ EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
-                  -DCAT_EXECUTABLE=`which cat` \
-                  -DCMAKE_AR:FILEPATH=${AR}"
+-SRC_URI[sha256sum] = "a5ff32f9fcaaf26bf5cba94accc7b246d2d5eb75710d027e40122df6bac0babb"
++SRC_URI[sha256sum] = "761053605fe30ce393f324852117990350840a93b3e6305ef4d2f8c8305cc47a"
  
-+EXTRA_OECMAKE_prepend_class-target = "-DCMAKE_CROSSCOMPILING_EMULATOR=${WORKDIR}/qemuwrapper "
-+
- # With Ninja it fails with:
- # make: *** No rule to make target `install'.  Stop.
- OECMAKE_GENERATOR = "Unix Makefiles"
-@@ -117,12 +115,18 @@ do_generate_toolchain_file_append_class-native () {
-     sed -i "/set( CMAKE_SYSTEM_PROCESSOR/d" ${WORKDIR}/toolchain.cmake
- }
+ UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
  
--do_compile_prepend_class-target () {
--    # These need to be in-tree or make will think they need to be built,
--    # and since we're cross-compiling that is disabled
--    cp ${STAGING_BINDIR_NATIVE}/comp_err ${S}/extra
--    cp ${STAGING_BINDIR_NATIVE}/comp_sql ${S}/scripts
-+do_configure_prepend_class-target () {
-+	# Write out a qemu wrapper that will be used by cmake
-+	# so that it can run target helper binaries through that.
-+	qemu_binary="${@qemu_wrapper_cmdline(d, d.getVar('STAGING_DIR_HOST'), [d.expand('${STAGING_DIR_HOST}${libdir}'),d.expand('${STAGING_DIR_HOST}${base_libdir}')])}"
-+	cat > ${WORKDIR}/qemuwrapper << EOF
-+#!/bin/sh
-+$qemu_binary "\$@"
-+EOF
-+	chmod +x ${WORKDIR}/qemuwrapper
-+}
- 
-+do_compile_prepend_class-target () {
-     if [ "${@bb.utils.contains('PACKAGECONFIG', 'krb5', 'yes', 'no', d)}" = "no" ]; then
-         if ! [ -e ${B}/include/openssl/kssl.h ] ; then
-             mkdir -p ${B}/include/openssl
-@@ -132,11 +136,6 @@ do_compile_prepend_class-target () {
-             echo "#endif" >>${B}/include/openssl/kssl.h
-         fi
-     fi
--    # workaround to handle out-of-source build from source package
--    yacc_files="sql_yacc.hh sql_yacc.cc sql_yacc_ora.hh sql_yacc_ora.cc"
--    for yacc_file in ${yacc_files}; do
--        cp ${S}/sql/${yacc_file} ${B}/sql/${yacc_file}
--    done
- }
- 
- SYSROOT_PREPROCESS_FUNCS += "mariadb_sysroot_preprocess"
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/cross-compiling.patch b/meta-oe/recipes-dbs/mysql/mariadb/cross-compiling.patch
-deleted file mode 100644
-index 0f4815b18..000000000
---- a/meta-oe/recipes-dbs/mysql/mariadb/cross-compiling.patch
-+++ /dev/null
-@@ -1,25 +0,0 @@
--This is not needed for OE builds
--
--building failed since native does not generate import_executables.cmake
--In fact, our building system will export the needed commands
--
--Upstream-Status: Inappropriate [configuration]
--
--Signed-off-by: Roy Li <rongqing.li@windriver.com>
--Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -392,11 +392,6 @@ CHECK_PCRE()
-- 
-- CHECK_SYSTEMD()
-- 
---IF(CMAKE_CROSSCOMPILING AND NOT DEFINED CMAKE_CROSSCOMPILING_EMULATOR)
---  SET(IMPORT_EXECUTABLES "IMPORTFILE-NOTFOUND" CACHE FILEPATH "Path to import_executables.cmake from a native build")
---  INCLUDE(${IMPORT_EXECUTABLES})
---ENDIF()
---
-- #
-- # Setup maintainer mode options. Platform checks are
-- # not run with the warning options as to not perturb fragile checks
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch b/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
-deleted file mode 100644
-index 4cb044339..000000000
---- a/meta-oe/recipes-dbs/mysql/mariadb/sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
-+++ /dev/null
-@@ -1,67 +0,0 @@
--From cfce1491827e5a581878b5e166bf4d30e6d90e07 Mon Sep 17 00:00:00 2001
--From: Mingli Yu <mingli.yu@windriver.com>
--Date: Thu, 23 Jul 2020 00:08:16 -0700
--Subject: [PATCH] sql/CMakeLists.txt: fix gen_lex_hash not found
--
--Fix the below do_compile issue in cross-compiling env.
--| make[2]: *** No rule to make target '/build/tmp/work/aarch64-poky-linux/mariadb/10.3.13-r0/mariadb-10.3.13/sql/gen_lex_hash', needed by 'sql/lex_hash.h'.  Stop.
--| make[2]: *** No rule to make target '/build/tmp/work/aarch64-poky-linux/mariadb/10.3.13-r0/mariadb-10.3.13/sql/gen_lex_token', needed by 'sql/lex_token.h'.  Stop.
--
--Upstream-Status: Inappropriate [oe build specific]
--
--Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-----
-- sql/CMakeLists.txt | 30 ++++++++++++++++++++----------
-- 1 file changed, 20 insertions(+), 10 deletions(-)
--
--diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
--index 0dc3caa..616017b 100644
----- a/sql/CMakeLists.txt
--+++ b/sql/CMakeLists.txt
--@@ -52,11 +52,16 @@ ${CMAKE_BINARY_DIR}/sql
-- ${CMAKE_SOURCE_DIR}/tpool
-- )
-- 
---ADD_CUSTOM_COMMAND(
---  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/lex_token.h
---  COMMAND gen_lex_token > lex_token.h
---  DEPENDS gen_lex_token
---)
--+IF(NOT CMAKE_CROSSCOMPILING)
--+  ADD_CUSTOM_COMMAND(
--+   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/lex_token.h
--+   COMMAND gen_lex_token > lex_token.h
--+   DEPENDS gen_lex_token)
--+ELSE()
--+  ADD_CUSTOM_COMMAND(
--+   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/lex_token.h
--+   COMMAND gen_lex_token > lex_token.h)
--+ENDIF()
-- 
-- ADD_CUSTOM_COMMAND(
--   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/sql_yacc_ora.yy
--@@ -345,11 +350,16 @@ IF(NOT CMAKE_CROSSCOMPILING)
--   ADD_EXECUTABLE(gen_lex_hash gen_lex_hash.cc)
-- ENDIF()
-- 
---ADD_CUSTOM_COMMAND(
---  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/lex_hash.h
---  COMMAND gen_lex_hash > lex_hash.h
---  DEPENDS gen_lex_hash
---)
--+IF(NOT CMAKE_CROSSCOMPILING)
--+  ADD_CUSTOM_COMMAND(
--+   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/lex_hash.h
--+   COMMAND gen_lex_hash > lex_hash.h
--+   DEPENDS gen_lex_hash)
--+ELSE()
--+  ADD_CUSTOM_COMMAND(
--+   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/lex_hash.h
--+   COMMAND gen_lex_hash > lex_hash.h)
--+ENDIF()
-- 
-- MYSQL_ADD_EXECUTABLE(mariadb-tzinfo-to-sql tztime.cc COMPONENT Server)
-- SET_TARGET_PROPERTIES(mariadb-tzinfo-to-sql PROPERTIES COMPILE_FLAGS "-DTZINFO2SQL")
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.5.10.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.5.10.bb
-index 8ae8241b0..57d7736ea 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb_10.5.10.bb
-+++ b/meta-oe/recipes-dbs/mysql/mariadb_10.5.10.bb
-@@ -1,8 +1,8 @@
- require mariadb.inc
- 
--EXTRA_OECMAKE += "-DSTACK_DIRECTION=-1"
-+inherit qemu
- 
--DEPENDS += "mariadb-native bison-native boost libpcre2 curl openssl ncurses zlib libaio libedit libevent libxml2"
-+DEPENDS += "qemu-native bison-native boost libpcre2 curl openssl ncurses zlib libaio libedit libevent libxml2"
- 
- PROVIDES += "mysql5 libmysqlclient"
- 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.5.10.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.5.11.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb_10.5.10.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb_10.5.11.bb
 -- 
 2.31.1
 
