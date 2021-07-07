@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.20796.1625663363152911432
+ by mx.groups.io with SMTP id smtpd.web12.20735.1625663363154463147
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 07 Jul 2021 06:09:23 -0700
 Authentication-Results: mx.groups.io;
@@ -8,16 +8,14 @@ Received: from [78.130.197.211] (port=39496 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1m17Im-0004Cr-Gy; Wed, 07 Jul 2021 16:09:21 +0300
+	id 1m17Il-0004Cr-LE; Wed, 07 Jul 2021 16:09:20 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-bitarray: Upgrade 2.1.3 -> 2.2.1
-Date: Wed,  7 Jul 2021 16:09:12 +0300
-Message-Id: <20210707130913.13459-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-pillow: Upgrade 8.2.0 -> 8.3.1
+Date: Wed,  7 Jul 2021 16:09:11 +0300
+Message-Id: <20210707130913.13459-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210707130913.13459-1-leon.anavi@konsulko.com>
-References: <20210707130913.13459-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -30,34 +28,38 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.2.1:
+Upgrade to release 8.3.1:
 
-- improve documentation
-- speedup `vl_encode()`
-- `bitarray.h`: make `getbit()` always an (inline) function
-- add assertions in C code
+- Catch OSError when checking if fp is sys.stdout
+- Handle removing orientation from alternate types of EXIF data
+- Make Image.__array__ take optional dtype argument
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-bitarray_2.1.3.bb => python3-bitarray_2.2.1.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-bitarray_2.1.3.bb => python3-bitarray_2.2.1.bb} (77%)
+ .../{python3-pillow_8.2.0.bb => python3-pillow_8.3.1.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pillow_8.2.0.bb => python3-pillow_8.3.1.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_2.1.3.bb b/meta-python/recipes-devtools/python/python3-bitarray_2.2.1.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-bitarray_2.1.3.bb
-rename to meta-python/recipes-devtools/python/python3-bitarray_2.2.1.bb
-index 74626c7f96..e1f3e17b7a 100644
---- a/meta-python/recipes-devtools/python/python3-bitarray_2.1.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-bitarray_2.2.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
- LICENSE = "PSF"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
+diff --git a/meta-python/recipes-devtools/python/python3-pillow_8.2.0.bb b/meta-python/recipes-devtools/python/python3-pillow_8.3.1.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-pillow_8.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-pillow_8.3.1.bb
+index 3241230d13..045357a6ad 100644
+--- a/meta-python/recipes-devtools/python/python3-pillow_8.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pillow_8.3.1.bb
+@@ -5,11 +5,11 @@ HOMEPAGE = "https://pillow.readthedocs.io"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0337b116233da4616ae9fdb130bf6f1a"
  
--SRC_URI[sha256sum] = "a24aff72a7f1b09571b5daf9dbfcffd98481be1fe085ae5ef662cf11452a97e0"
-+SRC_URI[sha256sum] = "31b40d716a1f0642ea9e2741c29b756299075db2e1d1ebe750e3e2c1469f589d"
+-SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=8.2.x \
++SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=8.3.x \
+            file://0001-support-cross-compiling.patch \
+            file://0001-explicitly-set-compile-options.patch \
+ "
+-SRCREV ?= "e0e353c0ef7516979a9aedce3792596649ce4433"
++SRCREV ?= "92933b86574b9c80764bf52c357ed29e1ef53382"
  
- inherit setuptools3 pypi
+ inherit setuptools3
  
 -- 
 2.17.1
