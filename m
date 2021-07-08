@@ -1,106 +1,397 @@
 Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web11.8954.1625731691260612921
+ by mx.groups.io with SMTP id smtpd.web08.9418.1625735151369539448
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Jul 2021 01:08:11 -0700
+ Thu, 08 Jul 2021 02:05:51 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: changqing.li@windriver.com)
 Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 168889tJ026807
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 16895oaV030516
 	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 8 Jul 2021 01:08:09 -0700
+	for <openembedded-devel@lists.openembedded.org>; Thu, 8 Jul 2021 02:05:50 -0700
 Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 168889qc021501
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 16895nvC029270
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 8 Jul 2021 01:08:09 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 8 Jul 2021 02:05:50 -0700 (PDT)
 Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.10; Thu, 8 Jul 2021 01:08:08 -0700
+ 15.1.2242.10; Thu, 8 Jul 2021 02:05:49 -0700
 Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.10 via Frontend Transport; Thu, 8 Jul 2021 01:08:08 -0700
+ 15.1.2242.10 via Frontend Transport; Thu, 8 Jul 2021 02:05:48 -0700
 From: "Changqing Li" <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [hardknott][meta-webserver][PATCH] nginx: fix CVE-2021-23017
-Date: Thu, 8 Jul 2021 16:06:57 +0800
-Message-ID: <20210708080657.31094-1-changqing.li@windriver.com>
+Subject: [hardknott][meta-webserver][PATCH] apache2: fix CVE-2020-13950 CVE-2020-35452 CVE-2021-26690 CVE-2021-26691 CVE-2021-30641
+Date: Thu, 8 Jul 2021 17:04:37 +0800
+Message-ID: <20210708090437.32493-1-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain
 
-From: Changqing Li <changqing.li@windriver.com>
+From: Li Wang <li.wang@windriver.com>
 
+CVE-2020-13950:
+Apache HTTP Server versions 2.4.41 to 2.4.46 mod_proxy_http can be
+made to crash (NULL pointer dereference) with specially crafted
+requests using both Content-Length and Transfer-Encoding headers,
+leading to a Denial of Service
+
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2020-13950
+
+Upstream patches:
+https://bugzilla.redhat.com/show_bug.cgi?id=1966738
+https://github.com/apache/httpd/commit/8c162db8b65b2193e622b780e8c6516d4265f68b
+
+CVE-2020-35452:
+Apache HTTP Server versions 2.4.0 to 2.4.46 A specially
+crafted Digest nonce can cause a stack overflow in
+mod_auth_digest. There is no report of this overflow
+being exploitable, nor the Apache HTTP Server team could
+create one, though some particular compiler and/or
+compilation option might make it possible, with limited
+consequences anyway due to the size (a single byte) and
+the value (zero byte) of the overflow
+
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2020-35452
+
+Upstream patches:
+https://security-tracker.debian.org/tracker/CVE-2020-35452
+https://github.com/apache/httpd/commit/3b6431eb9c9dba603385f70a2131ab4a01bf0d3b
+
+CVE-2021-26690:
+Apache HTTP Server versions 2.4.0 to 2.4.46 A specially
+crafted Cookie header handled by mod_session can cause
+a NULL pointer dereference and crash, leading to a
+possible Denial Of Service
+
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2021-26690
+
+Upstream patches:
+https://security-tracker.debian.org/tracker/CVE-2021-26690
+https://github.com/apache/httpd/commit/67bd9bfe6c38831e14fe7122f1d84391472498f8
+
+CVE-2021-26691:
+In Apache HTTP Server versions 2.4.0 to 2.4.46 a
+specially crafted SessionHeader sent by an origin server
+could cause a heap overflow
+
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2021-26691
+
+Upstream patches:
+https://bugzilla.redhat.com/show_bug.cgi?id=1966732
+https://github.com/apache/httpd/commit/7e09dd714fc62c08c5b0319ed7b9702594faf49b
+
+CVE-2021-30641:
+Apache HTTP Server versions 2.4.39 to 2.4.46 Unexpected
+matching behavior with 'MergeSlashes OFF'
+
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2021-30641
+
+Upstream patches:
+https://httpd.apache.org/security/vulnerabilities_24.html#CVE-2021-30641
+https://github.com/apache/httpd/commit/6141d5aa3f5cf8f1b89472e7fdb66578810d0ae3
+
+Signed-off-by: Li Wang <li.wang@windriver.com>
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- .../nginx/files/CVE-2021-23017.patch          | 46 +++++++++++++++++++
- meta-webserver/recipes-httpd/nginx/nginx.inc  |  1 +
- 2 files changed, 47 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2021-23017.patch
+ .../apache2/apache2/CVE-2020-13950.patch      | 45 +++++++++++++
+ .../apache2/apache2/CVE-2020-35452.patch      | 49 ++++++++++++++
+ .../apache2/apache2/CVE-2021-26690.patch      | 39 +++++++++++
+ .../apache2/apache2/CVE-2021-26691.patch      | 35 ++++++++++
+ .../apache2/apache2/CVE-2021-30641.patch      | 66 +++++++++++++++++++
+ .../recipes-httpd/apache2/apache2_2.4.46.bb   |  5 ++
+ 6 files changed, 239 insertions(+)
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-13950.patch
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-35452.patch
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26690.patch
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26691.patch
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-30641.patch
 
-diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2021-23017.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2021-23017.patch
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-13950.patch b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-13950.patch
 new file mode 100644
-index 000000000..a70803377
+index 000000000..4eb6b85b1
 --- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2021-23017.patch
-@@ -0,0 +1,46 @@
-+From 7199ebc203f74fd9e44595474de6bdc41740c5cf Mon Sep 17 00:00:00 2001
-+From: Maxim Dounin <mdounin@mdounin.ru>
-+Date: Tue, 25 May 2021 15:17:36 +0300
-+Subject: [PATCH] Resolver: fixed off-by-one write in ngx_resolver_copy().
++++ b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-13950.patch
+@@ -0,0 +1,45 @@
++From 8c162db8b65b2193e622b780e8c6516d4265f68b Mon Sep 17 00:00:00 2001
++From: Yann Ylavic <ylavic@apache.org>
++Date: Mon, 11 May 2015 15:48:58 +0000
++Subject: [PATCH] mod_proxy_http: follow up to r1656259. The proxy connection
++ may be NULL during prefetch, don't try to dereference it! Still
++ origin->keepalive will be set according to p_conn->close by the caller
++ (proxy_http_handler).
 +
-+Reported by Luis Merino, Markus Vervier, Eric Sesterhenn, X41 D-Sec GmbH.
++git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1678771 13f79535-47bb-0310-9956-ffa450edef68
 +
 +Upstream-Status: Backport
-+CVE: CVE-2021-23017
++CVE: CVE-2020-35504
 +
 +Reference to upstream patch:
-+https://github.com/nginx/nginx/commit/7199ebc203f74fd9e44595474de6bdc41740c5cf
++https://bugzilla.redhat.com/show_bug.cgi?id=1966738
++https://github.com/apache/httpd/commit/8c162db8b65b2193e622b780e8c6516d4265f68b
 +
-+Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
++Signed-off-by: Li Wang <li.wang@windriver.com>
 +---
-+ src/core/ngx_resolver.c | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
++ modules/proxy/mod_proxy_http.c | 2 --
++ 1 file changed, 2 deletions(-)
 +
-+diff --git a/src/core/ngx_resolver.c b/src/core/ngx_resolver.c
-+index 79390701..63b26193 100644
-+--- a/src/core/ngx_resolver.c
-++++ b/src/core/ngx_resolver.c
-+@@ -4008,15 +4008,15 @@ done:
-+             n = *src++;
++diff --git a/modules/proxy/mod_proxy_http.c b/modules/proxy/mod_proxy_http.c
++index ec1e042..5f507d5 100644
++--- a/modules/proxy/mod_proxy_http.c
+++++ b/modules/proxy/mod_proxy_http.c
++@@ -570,7 +570,6 @@ static int ap_proxy_http_prefetch(proxy_http_req_t *req,
++     apr_off_t bytes;
++     int force10, rv;
++     apr_read_type_e block;
++-    conn_rec *origin = p_conn->connection;
 + 
-+         } else {
-++            if (dst != name->data) {
-++                *dst++ = '.';
-++            }
-++
-+             ngx_strlow(dst, src, n);
-+             dst += n;
-+             src += n;
++     if (apr_table_get(r->subprocess_env, "force-proxy-request-1.0")) {
++         if (req->expecting_100) {
++@@ -630,7 +629,6 @@ static int ap_proxy_http_prefetch(proxy_http_req_t *req,
++                       "chunked body with Content-Length (C-L ignored)",
++                       c->client_ip, c->remote_host ? c->remote_host: "");
++         req->old_cl_val = NULL;
++-        origin->keepalive = AP_CONN_CLOSE;
++         p_conn->close = 1;
++     }
 + 
-+             n = *src++;
-+-
-+-            if (n != 0) {
-+-                *dst++ = '.';
-+-            }
-+         }
-+ 
-+         if (n == 0) {
 +-- 
-+2.17.1
++2.7.4
 +
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
-index de080a2b0..a4583ed8f 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-+++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-@@ -22,6 +22,7 @@ SRC_URI = " \
-     file://nginx-volatile.conf \
-     file://nginx.service \
-     file://nginx-fix-pidfile.patch \
-+    file://CVE-2021-23017.patch \
- "
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-35452.patch b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-35452.patch
+new file mode 100644
+index 000000000..001ca9252
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-35452.patch
+@@ -0,0 +1,49 @@
++From 3b6431eb9c9dba603385f70a2131ab4a01bf0d3b Mon Sep 17 00:00:00 2001
++From: Yann Ylavic <ylavic@apache.org>
++Date: Mon, 18 Jan 2021 17:39:12 +0000
++Subject: [PATCH] Merge r1885659 from trunk:
++
++mod_auth_digest: Fast validation of the nonce's base64 to fail early if
++                 the format can't match anyway.
++
++Submitted by: ylavic
++Reviewed by: ylavic, covener, jailletc36
++
++git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.4.x@1885666 13f79535-47bb-0310-9956-ffa450edef68
++
++Upstream-Status: Backport
++CVE: CVE-2020-35452
++
++Reference to upstream patch:
++https://security-tracker.debian.org/tracker/CVE-2020-35452
++https://github.com/apache/httpd/commit/3b6431eb9c9dba603385f70a2131ab4a01bf0d3b
++
++Signed-off-by: Li Wang <li.wang@windriver.com>
++---
++ modules/aaa/mod_auth_digest.c | 9 +++++++--
++ 1 file changed, 7 insertions(+), 2 deletions(-)
++
++diff --git a/modules/aaa/mod_auth_digest.c b/modules/aaa/mod_auth_digest.c
++index b760941..0825b1b 100644
++--- a/modules/aaa/mod_auth_digest.c
+++++ b/modules/aaa/mod_auth_digest.c
++@@ -1422,9 +1422,14 @@ static int check_nonce(request_rec *r, digest_header_rec *resp,
++     time_rec nonce_time;
++     char tmp, hash[NONCE_HASH_LEN+1];
++ 
++-    if (strlen(resp->nonce) != NONCE_LEN) {
+++    /* Since the time part of the nonce is a base64 encoding of an
+++     * apr_time_t (8 bytes), it should end with a '=', fail early otherwise.
+++     */
+++    if (strlen(resp->nonce) != NONCE_LEN
+++            || resp->nonce[NONCE_TIME_LEN - 1] != '=') {
++         ap_log_rerror(APLOG_MARK, APLOG_ERR, 0, r, APLOGNO(01775)
++-                      "invalid nonce %s received - length is not %d",
+++                      "invalid nonce '%s' received - length is not %d "
+++                      "or time encoding is incorrect",
++                       resp->nonce, NONCE_LEN);
++         note_digest_auth_failure(r, conf, resp, 1);
++         return HTTP_UNAUTHORIZED;
++-- 
++2.7.4
++
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26690.patch b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26690.patch
+new file mode 100644
+index 000000000..d3aea9e12
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26690.patch
+@@ -0,0 +1,39 @@
++From 67bd9bfe6c38831e14fe7122f1d84391472498f8 Mon Sep 17 00:00:00 2001
++From: Yann Ylavic <ylavic@apache.org>
++Date: Mon, 1 Mar 2021 20:07:08 +0000
++Subject: [PATCH] mod_session: save one apr_strtok() in
++ session_identity_decode().
++
++When the encoding is invalid (missing '='), no need to parse further.
++
++git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1887050 13f79535-47bb-0310-9956-ffa450edef68
++
++Upstream-Status: Backport
++CVE: CVE-2021-26690
++
++Reference to upstream patch:
++https://security-tracker.debian.org/tracker/CVE-2021-26690
++https://github.com/apache/httpd/commit/67bd9bfe6c38831e14fe7122f1d84391472498f8
++
++Signed-off-by: Li Wang <li.wang@windriver.com>
++---
++ modules/session/mod_session.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/modules/session/mod_session.c b/modules/session/mod_session.c
++index ebd05b0..af70f6b 100644
++--- a/modules/session/mod_session.c
+++++ b/modules/session/mod_session.c
++@@ -404,8 +404,8 @@ static apr_status_t session_identity_decode(request_rec * r, session_rec * z)
++         char *plast = NULL;
++         const char *psep = "=";
++         char *key = apr_strtok(pair, psep, &plast);
++-        char *val = apr_strtok(NULL, psep, &plast);
++         if (key && *key) {
+++            char *val = apr_strtok(NULL, sep, &plast);
++             if (!val || !*val) {
++                 apr_table_unset(z->entries, key);
++             }
++-- 
++2.7.4
++
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26691.patch b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26691.patch
+new file mode 100644
+index 000000000..f9cf868d0
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26691.patch
+@@ -0,0 +1,35 @@
++From 7e09dd714fc62c08c5b0319ed7b9702594faf49b Mon Sep 17 00:00:00 2001
++From: Yann Ylavic <ylavic@apache.org>
++Date: Mon, 1 Mar 2021 20:13:54 +0000
++Subject: [PATCH] mod_session: account for the '&' in identity_concat().
++
++git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1887052 13f79535-47bb-0310-9956-ffa450edef68
++
++Upstream-Status: Backport
++CVE: CVE-2021-26691
++
++Reference to upstream patch:
++https://bugzilla.redhat.com/show_bug.cgi?id=1966732
++https://github.com/apache/httpd/commit/7e09dd714fc62c08c5b0319ed7b9702594faf49b
++
++Signed-off-by: Li Wang <li.wang@windriver.com>
++---
++ modules/session/mod_session.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/modules/session/mod_session.c b/modules/session/mod_session.c
++index 7ee477c..ebd05b0 100644
++--- a/modules/session/mod_session.c
+++++ b/modules/session/mod_session.c
++@@ -317,7 +317,7 @@ static apr_status_t ap_session_set(request_rec * r, session_rec * z,
++ static int identity_count(void *v, const char *key, const char *val)
++ {
++     int *count = v;
++-    *count += strlen(key) * 3 + strlen(val) * 3 + 1;
+++    *count += strlen(key) * 3 + strlen(val) * 3 + 2;
++     return 1;
++ }
++ 
++-- 
++2.7.4
++
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-30641.patch b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-30641.patch
+new file mode 100644
+index 000000000..7f74c85e3
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-30641.patch
+@@ -0,0 +1,66 @@
++From 6141d5aa3f5cf8f1b89472e7fdb66578810d0ae3 Mon Sep 17 00:00:00 2001
++From: Eric Covener <covener@apache.org>
++Date: Wed, 21 Apr 2021 01:02:11 +0000
++Subject: [PATCH] legacy default slash-matching behavior w/ 'MergeSlashes OFF'
++
++git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1889036 13f79535-47bb-0310-9956-ffa450edef68
++
++Upstream-Status: Backport
++CVE: CVE-2021-30641
++
++Reference to upstream patch:
++https://httpd.apache.org/security/vulnerabilities_24.html#CVE-2021-30641
++https://github.com/apache/httpd/commit/6141d5aa3f5cf8f1b89472e7fdb66578810d0ae3
++
++Signed-off-by: Li Wang <li.wang@windriver.com>
++---
++ server/request.c | 19 ++++++++++++++++---
++ 1 file changed, 16 insertions(+), 3 deletions(-)
++
++diff --git a/server/request.c b/server/request.c
++index d5c558a..18625af 100644
++--- a/server/request.c
+++++ b/server/request.c
++@@ -1419,7 +1419,20 @@ AP_DECLARE(int) ap_location_walk(request_rec *r)
++ 
++     cache = prep_walk_cache(AP_NOTE_LOCATION_WALK, r);
++     cached = (cache->cached != NULL);
++-    entry_uri = r->uri;
+++
+++   /*
+++    * When merge_slashes is set to AP_CORE_CONFIG_OFF the slashes in r->uri
+++    * have not been merged. But for Location walks we always go with merged
+++    * slashes no matter what merge_slashes is set to.
+++    */
+++    if (sconf->merge_slashes != AP_CORE_CONFIG_OFF) {
+++        entry_uri = r->uri;
+++    }
+++    else {
+++        char *uri = apr_pstrdup(r->pool, r->uri);
+++        ap_no2slash(uri);
+++        entry_uri = uri;
+++    }
++ 
++     /* If we have an cache->cached location that matches r->uri,
++      * and the vhost's list of locations hasn't changed, we can skip
++@@ -1486,7 +1499,7 @@ AP_DECLARE(int) ap_location_walk(request_rec *r)
++                     pmatch = apr_palloc(rxpool, nmatch*sizeof(ap_regmatch_t));
++                 }
++ 
++-                if (ap_regexec(entry_core->r, entry_uri, nmatch, pmatch, 0)) {
+++                if (ap_regexec(entry_core->r, r->uri, nmatch, pmatch, 0)) {
++                     continue;
++                 }
++ 
++@@ -1496,7 +1509,7 @@ AP_DECLARE(int) ap_location_walk(request_rec *r)
++                         apr_table_setn(r->subprocess_env,
++                                        ((const char **)entry_core->refs->elts)[i],
++                                        apr_pstrndup(r->pool,
++-                                       entry_uri + pmatch[i].rm_so,
+++                                       r->uri + pmatch[i].rm_so,
++                                        pmatch[i].rm_eo - pmatch[i].rm_so));
++                     }
++                 }
++-- 
++2.7.4
++
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.46.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.46.bb
+index 197cb83e6..4fc1f1631 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.46.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.46.bb
+@@ -15,6 +15,11 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
+            file://0007-apache2-allow-to-disable-selinux-support.patch \
+            file://apache-configure_perlbin.patch \
+            file://0001-support-apxs.in-force-destdir-to-be-empty-string.patch \
++           file://CVE-2020-13950.patch \
++           file://CVE-2020-35452.patch \
++           file://CVE-2021-26690.patch \
++           file://CVE-2021-26691.patch \
++           file://CVE-2021-30641.patch \
+           "
  
- inherit siteinfo update-rc.d useradd systemd
+ SRC_URI_append_class-target = " \
 -- 
 2.17.1
 
