@@ -1,59 +1,59 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.65])
- by mx.groups.io with SMTP id smtpd.web12.5321.1625794643333147466
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.5])
+ by mx.groups.io with SMTP id smtpd.web09.5354.1625794658654756416
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Jul 2021 18:37:23 -0700
+ Thu, 08 Jul 2021 18:37:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=fIb4VEcD;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.65, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=DZ2mpro5;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.5, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1625794641; i=@fujitsu.com;
-	bh=bBvdbsjyG6d1kCQF9my/LjpzxmwPd19rBwYAR2ZauMk=;
+	s=170520fj; t=1625794656; i=@fujitsu.com;
+	bh=7dws6bfBigZx1AhCgUIdHHpYLYuzZlWuzC9EG9Tiy2M=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=fIb4VEcDH+FxnsGy/Pc/I31TTXKIafqVbP4emvX5KRAi1kVvHTqNbpBsoPv71Kg8r
-	 B06us8Z8S+TXQjzxSgcLCSGEjgAgLDw3HmD3vETT0ycBOJuS+nJaVRQtlsQBbsMv9A
-	 zT/QVweMZm34HFF05wrJN+QPaSSv1R1dLN9ilugFHckKsdFK5o0gBdu3XGGcArdTQU
-	 NNWBuK+pwI7i/tRzY9GCNCGrAfKakxSEduypeyVGeJqhwdsYmcOnMmGao0SaJEEkt6
-	 62f/HFDqyzTs3RdTe3xnJEdeWYctIyILJrw3276UamKaGbouqDg33isxmlxsMUZ7he
-	 ffiUTxIAAPLsg==
-Received: from [100.112.199.57] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-b.eu-west-1.aws.symcld.net id 2E/4C-03155-058A7E06; Fri, 09 Jul 2021 01:37:20 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+EI0Q1Y8Tz
-  BYP0/NouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPTog1sBTMEK2bseMjSwLiMv4uRi0NIYBaT
-  xIxff9ghnOOMEj3fP7N2MXJysAnoSHS86GYBsUUE9CWWzt7DDGILC3hKrJj/HCzOIqAisWzZX
-  DYQm1fAXWLJuc1MILaEgILElIfvmSHighInZz4Bq2cWkJA4+OIFM0SNosT2nWdYIOwKiRkztr
-  FNYOSZhaRlFpKWBYxMqxgtkooy0zNKchMzc3QNDQx0DQ2NdA0tzXUNjc31Eqt0k/RSS3XLU4t
-  LdA31EsuL9Yorc5NzUvTyUks2MQIDKaXgaOcOxl+vPugdYpTkYFIS5dWa8TxBiC8pP6UyI7E4
-  I76oNCe1+BCjDAeHkgTvkSVAOcGi1PTUirTMHGBQw6QlOHiURHg5FwGleYsLEnOLM9MhUqcYF
-  aXEeYOXASUEQBIZpXlwbbBIusQoKyXMy8jAwCDEU5BalJtZgir/ilGcg1FJmFdnOdAUnsy8Er
-  jpr4AWMwEtZjj8FGRxSSJCSqqBybdhmanxcjct/hfXI/uXcnIUTZ8+lb1c8Yzc0fSTTxcHr/k
-  3w/Lx1DKtk4p9Fd0Tc7VuPvl/vcrNb8KN7xzbzmqvyzPaec79Q4dql12j8bXrDHeMyizky5f+
-  unekLoTrajvLg4VlYpPeis458FPDaN5P51WR9VV9a+7y/ZIRcdKOPPh+m7vRpp4p2isDF10NX
-  vjNope7Z9P6vww93wX8Fkodi5b0CWDcv/GywUpzGbZtjdq1Ffe4fz7yTLh76pTL1Whp+3v6as
-  H2s3ptyizSiwL8d01a1sy3JSKm0ann/EHBvkSP+6dvNH/bd8NumW9A6uvlv9fwm0duYrsb7Sh
-  99vKTtPQ7xzd4Td3w3cW2WImlOCPRUIu5qDgRABDrC7YfAwAA
+	b=DZ2mpro5L2Ct5Ov3xeEkbe6TCXoOvLT6WsMIFIKtdx0O/Pr+npsX20BJVwJWT10CZ
+	 wQH2Ke1kUuHYcVkSHFuyvd2MYAFemUxl7geGqcZNLXy071pX3giPBngDjDkR2MvSx1
+	 v1jk2W/13iN10DtJnnbyhwo03JXo/3lzuG2hh22pQwpxj18wZAa9AA53a4JwNCouCM
+	 rxc/mIpSqH2ZMD82zQMo5IcssTl3w76HBZiTwRpaPN0jlXA6qkxHG7dYrFmcKvPukf
+	 9t1F6Z+AadUzWsnCog6xP3AON8Y60p/2sf6HIqR2SWJ5oo7BX/NtwoEdSKWv6pPels
+	 dL9kxCl3bM0Ew==
+Received: from [100.113.1.143] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-5.bemta.az-a.eu-central-1.aws.symcld.net id 7E/A2-07211-F58A7E06; Fri, 09 Jul 2021 01:37:35 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprOIsWRWlGSWpSXmKPExsViZ8MxVTd+xfM
+  Eg/4tshYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8b/i81MBe/4K/ZttWpg/MnbxcjFISQwi0ni
+  fss5dgjnOKPE3J3PmLoYOTnYBHQkOl50s4DYIgL6Ektn72EGsYUFvCS6D7WB2SwCKhJHFx5iB
+  bF5BdwlNr2aCxaXEFCQmPLwPTNEXFDi5MwnYHOYBSQkDr54AVWjKLF95xkWCLtCYsaMbWwTGH
+  lmIWmZhaRlASPTKkaLpKLM9IyS3MTMHF1DAwNdQ0NjXUNdU0O9xCrdRL3UUt3k1LySokSgpF5
+  iebFecWVuck6KXl5qySZGYBilFDIa72A8+PqD3iFGSQ4mJVFerRnPE4T4kvJTKjMSizPii0pz
+  UosPMcpwcChJ8B5ZApQTLEpNT61Iy8wBhjRMWoKDR0mEl3MRUJq3uCAxtzgzHSJ1ilGXY/Pcp
+  YuYhVjy8vNSpcR5g5cBFQmAFGWU5sGNgMXXJUZZKWFeRgYGBiGegtSi3MwSVPlXjOIcjErCvD
+  rLgabwZOaVwG16BXQEE9ARDIefghxRkoiQkmpgEt964Fcwn5WB+e8/KpKiVVeOFWjr3VTePnP
+  vqzoPhR/dzT9e3DATSyj7dOdV8EG3DIV/htwG/LU1dZZqij3d6eta55nk5/2YnL1ruo38lgK9
+  d7//um6ee826+gzb62fenxWy216dqllvvZEjeknMMsY911fFRMqFBy54I8XccpG1lXmZ2o/Fi
+  zfEpJi1C3OKLVx6dfLjNWFy/a0ZH4I7J385lBXxTuknn7PSlzU+9tFiW3b8Ovz/VV3FUvdH+z
+  b89YlhiZtkJ2fsfk/UPW5KVaAXV0/E4leHs4JbEiecznB8MdHkAGdUENPi5QsrzGtNIvPbm3R
+  11cTzN+UYC+S/Uv7W9KmGb6rem6p4xTolluKMREMt5qLiRADoz0V5KgMAAA==
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-5.tower-291.messagelabs.com!1625794639!87115!1
-X-Originating-IP: [62.60.8.84]
+X-Msg-Ref: server-2.tower-228.messagelabs.com!1625794654!464960!1
+X-Originating-IP: [62.60.8.149]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 673 invoked from network); 9 Jul 2021 01:37:20 -0000
-Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-5.tower-291.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 9 Jul 2021 01:37:20 -0000
+Received: (qmail 19143 invoked from network); 9 Jul 2021 01:37:35 -0000
+Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
+  by server-2.tower-228.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 9 Jul 2021 01:37:35 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1691bJsg019095
+	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1691bY1a023831
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 9 Jul 2021 02:37:19 +0100
+	for <openembedded-devel@lists.openembedded.org>; Fri, 9 Jul 2021 02:37:34 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 9 Jul 2021 02:37:17 +0100
+ (TLS) id 15.0.1497.18; Fri, 9 Jul 2021 02:37:32 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-networking] [PATCH] firewalld: upgrade 0.9.3 -> 0.9.4
-Date: Fri, 9 Jul 2021 09:37:11 +0800
-Message-ID: <1625794631-29529-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] strongswan: upgrade 5.9.2 -> 5.9.3
+Date: Fri, 9 Jul 2021 09:37:26 +0800
+Message-ID: <1625794646-29581-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -61,53 +61,49 @@ X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-This is a bug fix only release.
+- Added AES_ECB, SHA-3 and SHAKE-256 support to wolfssl plugin.
 
-$ git shortlog --grep "^fix" v0.9.3..v0.9.4
-Eric Garver (10):
+- Added AES_CCM and SHA-3 signature support to openssl plugin.
 
-fix(dbus): conf: setting deprecated properties should be ignored
-fix(dbus): properties: IPv4 and IPv6 should be true if using nftables
-fix(fw): when checking tables make sure to check the actual backend
-fix(ipset): nftables: use interval flag for "ip" types
-fix(rpm): applet: don't replace config modified by admin
-fix(rpm): logrotate: don't replace config modified by admin
-fix(ipv6_filter): match fwmark
-fix(direct): rule order with multiple address with -s/-d
-fix(nm): reload: only consider NM connections with a real interface
-fix(policy): warn instead of error for overlapping ports
-Fabrizio D'Angelo (1):
+- The x509 and openssl plugins now consider the authorityKeyIdentifier, if
+  available, before verifying signatures, which avoids unnecessary signature
+  verifications after a CA key rollover if both certificates are loaded.
 
-fix(ipset): fix hash:net,net functionality
-Robert Richmond (1):
+- The pkcs11 plugin better handles optional attributes like CKA_TRUSTED, which
+  previously depended on a version check.
 
-fix(ipset): entry delete with timeout
-Ye Shu (1):
+- charon-nm now supports using SANs as client identities, not only full DNs.
 
-fix(applet): Show a basic tooltip instead of HTML
+- charon-tkm now handles IKE encryption.
+
+- A MOBIKE update is sent again if a a change in the NAT mappings is detected
+  but the endpoints stay the same.
+
+- Converted most of the test case scenarios to the vici interface
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../firewalld/{firewalld_0.9.3.bb => firewalld_0.9.4.bb}        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/firewalld/{firewalld_0.9.3.bb => firewalld_0.9.4.bb} (97%)
+ .../strongswan/{strongswan_5.9.2.bb => strongswan_5.9.3.bb}    | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-networking/recipes-support/strongswan/{strongswan_5.9.2.bb => strongswan_5.9.3.bb} (97%)
 
-diff --git a/meta-networking/recipes-connectivity/firewalld/firewalld_0.9.3.bb b/meta-networking/recipes-connectivity/firewalld/firewalld_0.9.4.bb
+diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.9.2.bb b/meta-networking/recipes-support/strongswan/strongswan_5.9.3.bb
 similarity index 97%
-rename from meta-networking/recipes-connectivity/firewalld/firewalld_0.9.3.bb
-rename to meta-networking/recipes-connectivity/firewalld/firewalld_0.9.4.bb
-index 9aad510b4e..b8025c7078 100644
---- a/meta-networking/recipes-connectivity/firewalld/firewalld_0.9.3.bb
-+++ b/meta-networking/recipes-connectivity/firewalld/firewalld_0.9.4.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.gz \
-            file://firewalld.init \
- "
--SRC_URI[sha256sum] = "5998894db976d77996ca0a6b700a2f4125b9f283465fb255da9bddfb1640cb27"
-+SRC_URI[sha256sum] = "52c5e3d5b1e2efc0e86c22b2bc1f7fd80908cc2d8130157dc2a3517a59b0a760"
+rename from meta-networking/recipes-support/strongswan/strongswan_5.9.2.bb
+rename to meta-networking/recipes-support/strongswan/strongswan_5.9.3.bb
+index c178b4cdac..8a704f6dc4 100644
+--- a/meta-networking/recipes-support/strongswan/strongswan_5.9.2.bb
++++ b/meta-networking/recipes-support/strongswan/strongswan_5.9.3.bb
+@@ -12,8 +12,7 @@ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+            file://0001-memory.h-Include-stdint.h-for-uintptr_t.patch \
+            "
  
- # glib-2.0-native is needed for GSETTINGS_RULES autoconf macro from gsettings.m4
- DEPENDS = "intltool-native glib-2.0-native nftables"
+-SRC_URI[md5sum] = "8918e6675e1be3784817641f07eadeb8"
+-SRC_URI[sha256sum] = "61c72f741edb2c1295a7b7ccce0317a104b3f9d39efd04c52cd05b01b55ab063"
++SRC_URI[sha256sum] = "9325ab56a0a4e97e379401e1d942ce3e0d8b6372291350ab2caae0755862c6f7"
+ 
+ UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
+ 
 -- 
 2.25.1
 
