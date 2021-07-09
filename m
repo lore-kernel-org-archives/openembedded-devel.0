@@ -1,107 +1,107 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.115])
- by mx.groups.io with SMTP id smtpd.web11.5375.1625794706520232673
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web12.7404.1625810536618900455
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Jul 2021 18:38:26 -0700
+ Thu, 08 Jul 2021 23:02:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=XU/DG7YB;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.115, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1625794704; i=@fujitsu.com;
-	bh=wkZgrlf9isHBwAd1sJWmcTNctaaGC/xB4EVQQzzDT6w=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=XU/DG7YBtDKizEJvy4oCaL7tNdGJGNmAnR0p0eQr5l9XowszrQFhrMrZReTs0OgHh
-	 Kyda7WonzfGdpzu0WdGV/BXuXqiokMaNdzESdYIpEttz9Zjb5uMj65uVIktPFaL+LT
-	 eFOsvo2v46aI5nbzMY7+pUxXghEAE2x5g2sE1h3iRsY354SWjHGCFt2NN2WCMXM0HU
-	 KJGMc6kYHrPIVxsGrCZ5bzJ1RpoIhyMiuRYURhPc0wZeXj5qBUYj3+TTnqsIvtinhs
-	 J1qzqO8L8LeyfVsmncWzWC+ITSwkI+rssAPcIB+yxY0eMBHiM3yUJBO8URU9snov2F
-	 byvV7qVeuqRCA==
-Received: from [100.113.7.10] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-b.eu-central-1.aws.symcld.net id 6C/38-07224-F88A7E06; Fri, 09 Jul 2021 01:38:23 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuplkeJIrShJLcpLzFFi42Kxs+GYotu/4nm
-  CwcOv6hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0Zr5zz2gmM8FR/ud7M0MK7i7mLk4hASmMUk
-  sXHvOSYI5zijxMy2n4xdjJwcbAI6Eh0vullAbBEBfYmls/cwg9jCAp4S86d8A6thEVCRmLrgI
-  zuIzSvgLnF1+gowW0JAQWLKw/fMEHFBiZMzn4DNYRaQkDj44gUzRI2ixPadZ1gg7AqJGTO2sU
-  1g5JmFpGUWkpYFjEyrGC2TijLTM0pyEzNzdA0NDHQNDY11zXWNTI30Eqt0k/RSS3WTU/NKihK
-  BsnqJ5cV6xZW5yTkpenmpJZsYgaGUUsj+Zwfj9dcf9A4xSnIwKYnyas14niDEl5SfUpmRWJwR
-  X1Sak1p8iFGGg0NJgvfIEqCcYFFqempFWmYOMKxh0hIcPEoivJyLgNK8xQWJucWZ6RCpU4yKU
-  uK8wcuAEgIgiYzSPLg2WCxdYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCTMq7McaApPZl4J3P
-  RXQIuZgBYzHH4KsrgkESEl1cAkpX6lbQ37eeET4ev+/nu37HLStjgrncyqecVyjB/l43a/XzL
-  T5cLr2lsp5j4Sux+0H36vs3rzjVsrKhMFj9numrPHTLNzroNRy8/QFr/ZDTFKpakLdV1MwxfF
-  SKz9WPQi+0VY7/SCo/wSavcean0RmsbmHLJ2qaW8mMLLeV+sTqh6zrNoaXz4evt5K5OeWNHPF
-  +cvvh2qWhnTOMfY6kPhpgOCjy/H5K0IuZtr9lRBfNNv/4QP2YI9C7MY6uvORos+aTt74fJfBd
-  nSC03Zr/Nl5kz4cyT5wFu7fZwrj343uFUzvzpN953pRBHB2LQrcsFuEpxd61bOs2Pe4Wky+dE
-  1870PbwdlNHEfnNjwzFtViaU4I9FQi7moOBEAiaFlfiADAAA=
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-13.tower-248.messagelabs.com!1625794703!94846!1
-X-Originating-IP: [62.60.8.148]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 15437 invoked from network); 9 Jul 2021 01:38:23 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-13.tower-248.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 9 Jul 2021 01:38:23 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1691cMPp023427
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 9 Jul 2021 02:38:22 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 9 Jul 2021 02:38:20 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-pyusb: upgrade 1.1.1 -> 1.2.0
-Date: Fri, 9 Jul 2021 09:38:14 +0800
-Message-ID: <1625794694-29700-1-git-send-email-zangrc.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=YkSSJYZ6;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id oj10-20020a17090b4d8ab0290172f77377ebso5498065pjb.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Jul 2021 23:02:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=to:from:subject:message-id:date:user-agent:mime-version
+         :content-transfer-encoding:content-language;
+        bh=/pjg8VCPYX5nH0eXZfsBIp5XD63fcIhgihtJrse2z0U=;
+        b=YkSSJYZ6QADM1asOr77aNpZOScPqExcSFE6jOhX56T41PtFt+Eq088Rg1HIVWZ/jGz
+         UZto3m1ncMScl+eUSG07svU8QLxFWDjzMLt1RQNmGkAQmPdcjTMr1VX1zkEUFQNDj3Cb
+         fNUshsUilQxOzedHi8v3cLLDvtpfKr0bFWgNPzunFB05CbVI51qqvzdHhnwgU3AYVQw0
+         ij25nQaY1WCGTcgLJXJafzhxBr/jSj5PCksNq9F/RlpzcvH70T+tdAYe+H9ghEx3I/+2
+         cuG9YsbltDaMORxjPnGlihNuXdi0ux/lIt2IzhhBw19r+gOY5MT5Wz+g/uzUiYFdgwzQ
+         JvDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+         :mime-version:content-transfer-encoding:content-language;
+        bh=/pjg8VCPYX5nH0eXZfsBIp5XD63fcIhgihtJrse2z0U=;
+        b=EA2BBbuKMn+q/qXnH1AzAPJd0Y51RMybZPEkRBErFclstg35VxDOEq/GGovprPouav
+         hPFOoWrM/VOk/sxMpzPr19MHfL9DS7Zk+KxQrpqjyrNVKsB4XSycEundSQv6Qp40Na7V
+         VLzSXicLODX2/+9XzTXXR/HD7Z4ysm0KFIWDQ022Mcv7ovISH3THgrIsPCneGOTGhCsR
+         SV/viN4dmB0ZjL0RjIcnc7QG2lTZQQa7AXonHTF+PV/ddS4grNlcIzw//LeKoVcLuGVz
+         WFZavD8/Pr/9Qv1LS4e6rzKlEzgsv6XILQaM/HVkXddvKDBudBTbIlB3ol8wmP3cj7ph
+         PPbw==
+X-Gm-Message-State: AOAM5313Fp9yzDmZzTCYIFDuXgsFslTcGYwtugYp0iWEzHDL0gqb1wni
+	gqutU/7QwxQPUOpzyh9fpWs=
+X-Google-Smtp-Source: ABdhPJxScqZI2NBIZJxVMQfjMFrf9X//ewTsUWE7aG66il+7oYIh5rtGCd/5ajWJCOsZWrpcWojJTw==
+X-Received: by 2002:a17:90a:7e81:: with SMTP id j1mr3568883pjl.26.1625810536010;
+        Thu, 08 Jul 2021 23:02:16 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:47d7:bb6b:55b6:582f? ([2601:202:4180:a5c0:47d7:bb6b:55b6:582f])
+        by smtp.gmail.com with ESMTPSA id w16sm1138475pgi.41.2021.07.08.23.02.15
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 08 Jul 2021 23:02:15 -0700 (PDT)
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+ Khem Raj <raj.khem@gmail.com>
+From: "Armin Kuster" <akuster808@gmail.com>
+Subject: Dunfell merge request - July 8
+Message-ID: <56a974ab-248a-05a3-c072-487d1ee21de9@gmail.com>
+Date: Thu, 8 Jul 2021 23:02:14 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Added:
+The following changes since commit c38d2a74f762a792046f3d3c377827b08aade513:
 
-core: implement Device.__eq__() (#147)
-Changed:
+  dnsmasq: Add fixes for CVEs reported for dnsmasq (2021-05-29 11:41:45
+-0700)
 
-libusb0: implement is_kernel_driver_active() for FreeBSD and DragonFly BSD (#365)
-libusb0: implement is_kernel_driver_active() for Mac OS (#374)
-Fixed:
+are available in the Git repository at:
 
-setup: prevent installation on unsupported Python versions (PR #364)
-control: fix undefined USBError (#372)
-tests: fix legacy/hardware tests for Python 3.9 (#373)
+  https://git.openembedded.org/meta-openembedded dunfell-next
 
-Add runtime dependency to resolve errors that occurred when import usb.
+for you to fetch changes up to 7bd47ef6c98323c95a9e527129dca98c9a65ee08:
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
----
- .../{python3-pyusb_1.1.1.bb => python3-pyusb_1.2.0.bb}      | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pyusb_1.1.1.bb => python3-pyusb_1.2.0.bb} (70%)
+  dovecot: add CVE-2016-4983 to allowlist (2021-07-06 07:50:13 -0700)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyusb_1.1.1.bb b/meta-python/recipes-devtools/python/python3-pyusb_1.2.0.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-pyusb_1.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-pyusb_1.2.0.bb
-index a8c7031b65..06f7c1c82b 100644
---- a/meta-python/recipes-devtools/python/python3-pyusb_1.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyusb_1.2.0.bb
-@@ -5,7 +5,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e64a29fcd3c3dd356a24e235dfcb3905"
- 
- DEPENDS += "libusb1 ${PYTHON_PN}-setuptools-scm-native"
- 
--SRC_URI[sha256sum] = "7d449ad916ce58aff60b89aae0b65ac130f289c24d6a5b7b317742eccffafc38"
-+RDEPENDS_${PN} += " \
-+	python3-logging \
-+"
-+
-+SRC_URI[sha256sum] = "d68597d2cf7df766bdf816b1a337b72ab8233c19825e170ae18714f16b838cbc"
- 
- inherit pypi setuptools3
- 
--- 
-2.25.1
+----------------------------------------------------------------
+Armin Kuster (1):
+      dovecot: add CVE-2016-4983 to allowlist
+
+Chen Qi (1):
+      python3-django: upgrade to 2.2.20
+
+Marek Vasut (1):
+      nss: Fix build on Centos 7
+
+Sekine Shigeki (1):
+      add CVE-2011-2411 to allowlist
+
+Stefan Ghinea (1):
+      python3-django: fix CVE-2021-28658
+
+Trevor Gamblin (5):
+      python3-django: upgrade 2.2.7 -> 2.2.13
+      python3-django: upgrade 2.2.13 -> 2.2.16
+      python3-django: upgrade 2.2.20 -> 2.2.22
+      python3-django: upgrade 2.2.22 -> 2.2.23
+      python3-django: upgrade 2.2.23 -> 2.2.24
+
+ito-yuichi@fujitsu.com (1):
+      cyrus-sasl: add CVE-2020-8032 to allowlist
+
+ meta-networking/recipes-connectivity/samba/samba_4.10.18.bb     | 4 ++++
+ meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb | 3 +++
+ meta-networking/recipes-support/dovecot/dovecot_2.2.36.4.bb     | 3 +++
+ meta-oe/recipes-support/nss/nss_3.51.1.bb                       | 2 ++
+ meta-python/recipes-devtools/python/python3-django_2.2.24.bb    | 9
++++++++++
+ meta-python/recipes-devtools/python/python3-django_2.2.7.bb     | 9
+---------
+ 6 files changed, 21 insertions(+), 9 deletions(-)
+ create mode 100644
+meta-python/recipes-devtools/python/python3-django_2.2.24.bb
+ delete mode 100644
+meta-python/recipes-devtools/python/python3-django_2.2.7.bb
 
