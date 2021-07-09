@@ -1,95 +1,113 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.114])
- by mx.groups.io with SMTP id smtpd.web09.5312.1625794326520687687
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.65])
+ by mx.groups.io with SMTP id smtpd.web12.5321.1625794643333147466
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Jul 2021 18:32:06 -0700
+ Thu, 08 Jul 2021 18:37:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=PxhNZHer;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.114, mailfrom: zhengrq.fnst@fujitsu.com)
-Return-Path: <zhengrq.fnst@fujitsu.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=fIb4VEcD;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.65, mailfrom: zangrc.fnst@fujitsu.com)
+Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1625794324; i=@fujitsu.com;
-	bh=9m4TY6+/Z9fgMBJw1c6EVqG+okzXpXCz9fKGG55BLxU=;
+	s=170520fj; t=1625794641; i=@fujitsu.com;
+	bh=bBvdbsjyG6d1kCQF9my/LjpzxmwPd19rBwYAR2ZauMk=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=PxhNZHerdYGof+JIPyIN/rbHSTD1hGNjXG05yCp9Si9gDuuwnBhdjTTgomUX4ajVH
-	 qEKZA1LgICWEI7Ka+oeOYyTaRc6P23SEEJGgEVIYxfUifjKiLbFknjParBnm6xa+ZB
-	 t3Lv8N90kq42pGfDKmWIYUgIf7LXuWzLPQBWzoaaPoOnKmxdZteRQ6Jpj6cO1qJvYD
-	 X5CUpNUdAeerdJbSR6L1gAwgOMY8MtbB040pA5L+F00eClouNcA5JgM72abQIDB7vq
-	 rTcP38ChFk9kvOjlJ3lf5rpfMAGYQ7tZnE4BVnY6hDPvQhPVJ2/2aEfyXMMB/7+L5r
-	 yY9nsZ+qx7sUw==
-Received: from [100.113.4.179] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-b.eu-central-1.aws.symcld.net id 13/5A-07695-317A7E06; Fri, 09 Jul 2021 01:32:03 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+EI1RVe/jz
-  BoOGcgsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvFn2RbGgiaeip+zN7E2ML7n6mLk4hASmMUk
-  sW76XXYIZzejxJ9JJ4EcTg42AV2Jc4/XgtkiAvoSS2fvYQaxhQX8JA4efgIU5+BgEVCRmLCJE
-  STMK+Ap8eT4M7ByCQEFiSkP3zNDxAUlTs58wgJiMwtISBx88YIZpFVCQFFi9nR5iPIKiRkztr
-  FNYOSZhaRjFpKOBYxMqxgtk4oy0zNKchMzc3QNDQx0DQ2Ndc11jUyN9BKrdJP0Ukt1k1PzSoo
-  SgbJ6ieXFesWVuck5KXp5qSWbGIFhlFLI/mcH4/XXH/QOMUpyMCmJ8mrNeJ4gxJeUn1KZkVic
-  EV9UmpNafIhRhoNDSYL3yBKgnGBRanpqRVpmDjCkYdISHDxKIryci4DSvMUFibnFmekQqVOMi
-  lLivJpLgRICIImM0jy4NlgcXWKUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzHsdZApPZl4J3P
-  RXQIuZgBYzHH4KsrgkESEl1cC04wuDl4bddOGY5XcjxL3frFbhDfSPO7B0YZOBlpXOpslCh/3
-  6WM9piEhfYntcqX9UWWfmauaKF3HvC1YrHZfhPOY2vy8iP1dqqvLHZ1qrqhxae8STfANuqtZz
-  H6lxc/3HdqK5u2Yl938Zzu6or7sdDjVcej7fPXZZUabAJLtVwjM2ey7gtDhb9vf4WYV3kT2ff
-  BiPn+F1UliYaDxDx5lBcurzqEkn9ynyL9yoL7204G76wfY/NybHvvq+xKExcx37UYl9u4zTlc
-  KTWxnmuvycZ7wx4J91WYxQ1tKceKbz6qwa+9KD+I+LG/xIT40+dLEqmLuKlTX8Sel5fc4pFk8
-  07/ue8G8sXcFxdPl6cSWW4oxEQy3mouJEAOKIe9UeAwAA
-X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-5.tower-238.messagelabs.com!1625794322!341414!1
-X-Originating-IP: [62.60.8.85]
+	b=fIb4VEcDH+FxnsGy/Pc/I31TTXKIafqVbP4emvX5KRAi1kVvHTqNbpBsoPv71Kg8r
+	 B06us8Z8S+TXQjzxSgcLCSGEjgAgLDw3HmD3vETT0ycBOJuS+nJaVRQtlsQBbsMv9A
+	 zT/QVweMZm34HFF05wrJN+QPaSSv1R1dLN9ilugFHckKsdFK5o0gBdu3XGGcArdTQU
+	 NNWBuK+pwI7i/tRzY9GCNCGrAfKakxSEduypeyVGeJqhwdsYmcOnMmGao0SaJEEkt6
+	 62f/HFDqyzTs3RdTe3xnJEdeWYctIyILJrw3276UamKaGbouqDg33isxmlxsMUZ7he
+	 ffiUTxIAAPLsg==
+Received: from [100.112.199.57] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-b.eu-west-1.aws.symcld.net id 2E/4C-03155-058A7E06; Fri, 09 Jul 2021 01:37:20 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+EI0Q1Y8Tz
+  BYP0/NouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPTog1sBTMEK2bseMjSwLiMv4uRi0NIYBaT
+  xIxff9ghnOOMEj3fP7N2MXJysAnoSHS86GYBsUUE9CWWzt7DDGILC3hKrJj/HCzOIqAisWzZX
+  DYQm1fAXWLJuc1MILaEgILElIfvmSHighInZz4Bq2cWkJA4+OIFM0SNosT2nWdYIOwKiRkztr
+  FNYOSZhaRlFpKWBYxMqxgtkooy0zNKchMzc3QNDQx0DQ2NdA0tzXUNjc31Eqt0k/RSS3XLU4t
+  LdA31EsuL9Yorc5NzUvTyUks2MQIDKaXgaOcOxl+vPugdYpTkYFIS5dWa8TxBiC8pP6UyI7E4
+  I76oNCe1+BCjDAeHkgTvkSVAOcGi1PTUirTMHGBQw6QlOHiURHg5FwGleYsLEnOLM9MhUqcYF
+  aXEeYOXASUEQBIZpXlwbbBIusQoKyXMy8jAwCDEU5BalJtZgir/ilGcg1FJmFdnOdAUnsy8Er
+  jpr4AWMwEtZjj8FGRxSSJCSqqBybdhmanxcjct/hfXI/uXcnIUTZ8+lb1c8Yzc0fSTTxcHr/k
+  3w/Lx1DKtk4p9Fd0Tc7VuPvl/vcrNb8KN7xzbzmqvyzPaec79Q4dql12j8bXrDHeMyizky5f+
+  unekLoTrajvLg4VlYpPeis458FPDaN5P51WR9VV9a+7y/ZIRcdKOPPh+m7vRpp4p2isDF10NX
+  vjNope7Z9P6vww93wX8Fkodi5b0CWDcv/GywUpzGbZtjdq1Ffe4fz7yTLh76pTL1Whp+3v6as
+  H2s3ptyizSiwL8d01a1sy3JSKm0ann/EHBvkSP+6dvNH/bd8NumW9A6uvlv9fwm0duYrsb7Sh
+  99vKTtPQ7xzd4Td3w3cW2WImlOCPRUIu5qDgRABDrC7YfAwAA
+X-Env-Sender: zangrc.fnst@fujitsu.com
+X-Msg-Ref: server-5.tower-291.messagelabs.com!1625794639!87115!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 17626 invoked from network); 9 Jul 2021 01:32:03 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-5.tower-238.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 9 Jul 2021 01:32:03 -0000
+Received: (qmail 673 invoked from network); 9 Jul 2021 01:37:20 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-5.tower-291.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 9 Jul 2021 01:37:20 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1691W2Ik004367
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1691bJsg019095
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 9 Jul 2021 02:32:02 +0100
-Received: from localhost.localdomain (10.167.225.35) by
+	for <openembedded-devel@lists.openembedded.org>; Fri, 9 Jul 2021 02:37:19 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 9 Jul 2021 02:32:00 +0100
-From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
+ (TLS) id 15.0.1497.18; Fri, 9 Jul 2021 02:37:17 +0100
+From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-sentry-sdk: upgrade 1.1.0 -> 1.2.0
-Date: Fri, 9 Jul 2021 09:31:53 +0800
-Message-ID: <1625794313-102950-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] firewalld: upgrade 0.9.3 -> 0.9.4
+Date: Fri, 9 Jul 2021 09:37:11 +0800
+Message-ID: <1625794631-29529-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
+X-Originating-IP: [10.167.225.81]
 X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-Fix for AWSLambda Integration to handle other path formats for function initial handler 
-Fix for worker to set deamon attribute instead of deprecated setDaemon method 
-Fix for bottle Integration that discards -dev for version extraction 
-Fix for transport that adds a unified hook for capturing metrics about dropped events 
-Add Httpx Integration 
-Add support for china domains in AWSLambda Integration 
+This is a bug fix only release.
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+$ git shortlog --grep "^fix" v0.9.3..v0.9.4
+Eric Garver (10):
+
+fix(dbus): conf: setting deprecated properties should be ignored
+fix(dbus): properties: IPv4 and IPv6 should be true if using nftables
+fix(fw): when checking tables make sure to check the actual backend
+fix(ipset): nftables: use interval flag for "ip" types
+fix(rpm): applet: don't replace config modified by admin
+fix(rpm): logrotate: don't replace config modified by admin
+fix(ipv6_filter): match fwmark
+fix(direct): rule order with multiple address with -s/-d
+fix(nm): reload: only consider NM connections with a real interface
+fix(policy): warn instead of error for overlapping ports
+Fabrizio D'Angelo (1):
+
+fix(ipset): fix hash:net,net functionality
+Robert Richmond (1):
+
+fix(ipset): entry delete with timeout
+Ye Shu (1):
+
+fix(applet): Show a basic tooltip instead of HTML
+
+Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- ...{python3-sentry-sdk_1.1.0.bb => python3-sentry-sdk_1.2.0.bb} | 2 +-
+ .../firewalld/{firewalld_0.9.3.bb => firewalld_0.9.4.bb}        | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-sentry-sdk_1.1.0.bb => python3-sentry-sdk_1.2.0.bb} (82%)
+ rename meta-networking/recipes-connectivity/firewalld/{firewalld_0.9.3.bb => firewalld_0.9.4.bb} (97%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_1.1.0.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.2.0.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-sentry-sdk_1.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-sentry-sdk_1.2.0.bb
-index 89c659dba3..e86ff46be4 100644
---- a/meta-python/recipes-devtools/python/python3-sentry-sdk_1.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.2.0.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341"
+diff --git a/meta-networking/recipes-connectivity/firewalld/firewalld_0.9.3.bb b/meta-networking/recipes-connectivity/firewalld/firewalld_0.9.4.bb
+similarity index 97%
+rename from meta-networking/recipes-connectivity/firewalld/firewalld_0.9.3.bb
+rename to meta-networking/recipes-connectivity/firewalld/firewalld_0.9.4.bb
+index 9aad510b4e..b8025c7078 100644
+--- a/meta-networking/recipes-connectivity/firewalld/firewalld_0.9.3.bb
++++ b/meta-networking/recipes-connectivity/firewalld/firewalld_0.9.4.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.gz \
+            file://firewalld.init \
+ "
+-SRC_URI[sha256sum] = "5998894db976d77996ca0a6b700a2f4125b9f283465fb255da9bddfb1640cb27"
++SRC_URI[sha256sum] = "52c5e3d5b1e2efc0e86c22b2bc1f7fd80908cc2d8130157dc2a3517a59b0a760"
  
- RDEPENDS_${PN} += "python3-urllib3"
- 
--SRC_URI[sha256sum] = "c1227d38dca315ba35182373f129c3e2722e8ed999e52584e6aca7d287870739"
-+SRC_URI[sha256sum] = "9907adbdd30a55b818914512cc143e6beae0bb3ba78b2649f4b079752eb0e424"
- 
- PYPI_PACKAGE = "sentry-sdk"
- 
+ # glib-2.0-native is needed for GSETTINGS_RULES autoconf macro from gsettings.m4
+ DEPENDS = "intltool-native glib-2.0-native nftables"
 -- 
 2.25.1
 
