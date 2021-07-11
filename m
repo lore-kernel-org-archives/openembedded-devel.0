@@ -1,94 +1,87 @@
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web10.2442.1625965696231707277
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web11.2440.1625965702879893846
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 10 Jul 2021 18:08:16 -0700
+ Sat, 10 Jul 2021 18:08:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=aGQN6YTz;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: ticotimo@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id p17so6574949plf.12
-        for <openembedded-devel@lists.openembedded.org>; Sat, 10 Jul 2021 18:08:16 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=gX79NoFL;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: ticotimo@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id z2so4197588plg.8
+        for <openembedded-devel@lists.openembedded.org>; Sat, 10 Jul 2021 18:08:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=rMXFcSnPMl2PPNDvbzd9WvWNAqZNZGxuPPsisMdjHGs=;
-        b=aGQN6YTzORbeKh4qzJNrp6bzeU6ITareR87Gqz6Q2Eji4tGm2CcQ0jE0Chs2XBkZYd
-         w4BLnOE4fZA/fpLMd7H3eLNytbY942Mk2+Z8KqAOPqRVCSilQu7U1b7au+aR9XVD3v/E
-         YOlWQkX1LzKGv0noDLQe/Nbl4ov0W9TwAZP28vhvbko0RIRO5fBesidW3e3ivnEdQWOG
-         yvGRszYzFZGhwEGW+A+YkN4CYaaJtjiKalmQ0gSeDX/NX/cutylm0Vxwb6vInUy/5yWE
-         KJ5xsEPfUbpmTVo7xFh1LykPczE6zS7JO6tXrLX15+eTx3jETL5bQ6548ethPcwHoHxj
-         P+Lg==
+        bh=PJ7Nx5Qe6Tp1RQH+qdiPmfc+3yMGfCWamYJcmcqSbZA=;
+        b=gX79NoFLkPtfm3Ywb9+nr6h/x2E2TxjVIT2fOh4d/vDEZZ7RxA+gbhs/OaeOZ15G1W
+         Fxv4J6vhJkCTwEc99JqSJShMSpQ3VG1Uj9RoSpvpoldLJh/IkVFGFoF/7AVKjMO4RxWH
+         es5AY1NN6XQXMRt8YfxBhVGmJTRsHrGordgthBwLjUFsgtamgXRm7mt3M6evZc9TVQqz
+         VNdE1kjRQ6bsbcHoMXz1pH7Qw7nVVqhZmnsCgN55Q2RdftlV3W0jeFwo/jTZEJL7L09V
+         7oJCjTojHfjZCyzheIOw0RaRteic9/K6UFNNBUlpFIngIjZtZeqDrTiiG8yhn/PIQ6qE
+         U6Qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=rMXFcSnPMl2PPNDvbzd9WvWNAqZNZGxuPPsisMdjHGs=;
-        b=Se1k63NoECoRRCQ9ZCIl7rFidsOXsIOJy10wZzEY+8oOndShrZ+ILieWfomUq1H1LU
-         yk0NdvXkPbPQtquvRuhlJv/piMGC61RntJbgR087ZsyosUBucWfL8AyCIZf83S1g7SJm
-         gG9JdQvm7YH/KMiRAnKtZFqfJZKhYA3/JiTfIw9bBr/W+yS/fXRjmqUJxX0Tg84yEh/5
-         NHpe/JUGlNo6SZ0AT1k0Je7D8PP13gYvFGUy0jRgVcdxJM6dKrx0JdeGj+SInzKqee+o
-         b74wV4uvGwRyWwZfEdMcf1O2p/8v9i3GR889W0uGF7BitEHvychYTI6z3gW2wgxhhnlb
-         EK1g==
-X-Gm-Message-State: AOAM531HOMW60PGawnlF9E4fMwAzmuJ1AZ+soWNbCC6Af3MvtSPizZEo
-	57L9hWceVQdzFAIJMMJyoZa9lc3zqjBgmA==
-X-Google-Smtp-Source: ABdhPJzZS52i8hWEHvCUkGFWxmY2TZSiS35G8ihUImkstlGObo6hxySMr+CSYpvDS4M+Ob8Fb2dVqw==
-X-Received: by 2002:a17:90b:1e02:: with SMTP id pg2mr6709820pjb.189.1625965695494;
-        Sat, 10 Jul 2021 18:08:15 -0700 (PDT)
+        bh=PJ7Nx5Qe6Tp1RQH+qdiPmfc+3yMGfCWamYJcmcqSbZA=;
+        b=VBWk36BPddqZkE3+K3Ycr2GIaFUJcp+2fnPMU9RPC0K2q7DNSuDCYkHlsdn1F9wAzI
+         o5cJ+kKWDE1AuUVpjF1b6HUHvQDhEdzDc880eiBM3FUpuEw2ZU7WnVoy/nKZMN3Tja41
+         GaKEUmIkAGJtSx4bWZg+eN5v0SCO+R+zSRyjcIClEt9bPdq0Rpskk5R/76QMGDZXXUzs
+         XzpIIM2FZydARUdaZ7Y0ZvPXW1zNPDfG88ncJCVikRfiLSodbmASXXYt8hV35bp2qorA
+         r+xmEmZNEZHMGlI1qWqP26mQrQpJrhrPNr+PWo+59oZPjAHpBVGTbRLuAZQ/1GG/XHii
+         XUOg==
+X-Gm-Message-State: AOAM5304lEHDgiIpN/g8f185V4rf1S4APrNV/VcK4ZfuTqjCGnO5AEtg
+	mLlVsL+pR4+/X3uZl3oa1voE7NUiSX2Pjw==
+X-Google-Smtp-Source: ABdhPJzcWhKQPSwt5WPfuBgKnew/UMjBxja/xEAn4bmQIEtTsiWr3UpYbnZQfoqxZX1C4MSXSTVGpQ==
+X-Received: by 2002:a17:90a:390d:: with SMTP id y13mr46450120pjb.52.1625965702294;
+        Sat, 10 Jul 2021 18:08:22 -0700 (PDT)
 Return-Path: <ticotimo@gmail.com>
 Received: from thetis.hsd1.or.comcast.net ([2601:1c0:6000:1830::7ed6])
-        by smtp.gmail.com with ESMTPSA id z3sm12199024pgl.77.2021.07.10.18.08.15
+        by smtp.gmail.com with ESMTPSA id z3sm12199024pgl.77.2021.07.10.18.08.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 10 Jul 2021 18:08:15 -0700 (PDT)
+        Sat, 10 Jul 2021 18:08:22 -0700 (PDT)
 From: "Tim Orling" <ticotimo@gmail.com>
 X-Google-Original-From: Tim Orling <timothy.t.orling@intel.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Tim Orling <timothy.t.orling@intel.com>
-Subject: [meta-perl][PATCH 1/8] libcgi-perl: upgrade 4.51 -> 4.53
-Date: Sun, 11 Jul 2021 01:07:57 +0000
-Message-Id: <8ca0479fe42c9b3c371b13a3ec6f1913ddcd4394.1625965484.git.timothy.t.orling@intel.com>
+Subject: [meta-perl][PATCH 2/8] libcrypt-openssl-guess-perl: upgrade 0.12 -> 0.13
+Date: Sun, 11 Jul 2021 01:07:58 +0000
+Message-Id: <2233a973f2896f0c47ba18ebe824ce90e0d7279d.1625965484.git.timothy.t.orling@intel.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <cover.1625965484.git.timothy.t.orling@intel.com>
 References: <cover.1625965484.git.timothy.t.orling@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-4.53 2021-06-03
+0.13 2021-05-03T15:37:39Z
 
-    [ FIX ]
-    - fix typo in passing of max-age to CGI::Cookie (GH #247)
-
-4.52 2021-05-04
-
-    [ FIX ]
-    - sort hash keys for deterministic behaviour (GH #245, GH #246)
+    - use --installed option while executing brew --prefix (PR#9
+      @skaji++)
 
 References:
-https://github.com/leejo/CGI.pm/issues/247
-https://github.com/leejo/CGI.pm/pull/246
-https://github.com/leejo/CGI.pm/issues/245
+https://github.com/akiym/Crypt-OpenSSL-Guess/pull/9
 
 Signed-off-by: Tim Orling <timothy.t.orling@intel.com>
 ---
- .../libcgi/{libcgi-perl_4.51.bb => libcgi-perl_4.53.bb}        | 3 +--
+ ...-guess-perl_0.12.bb => libcrypt-openssl-guess-perl_0.13.bb} | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libcgi/{libcgi-perl_4.51.bb => libcgi-perl_4.53.bb} (90%)
+ rename meta-perl/recipes-perl/libcrypt/{libcrypt-openssl-guess-perl_0.12.bb => libcrypt-openssl-guess-perl_0.13.bb} (86%)
 
-diff --git a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.51.bb b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.53.bb
-similarity index 90%
-rename from meta-perl/recipes-perl/libcgi/libcgi-perl_4.51.bb
-rename to meta-perl/recipes-perl/libcgi/libcgi-perl_4.53.bb
-index e3a83679ed..2f1a860315 100644
---- a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.51.bb
-+++ b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.53.bb
-@@ -10,8 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=415fc49abed2728f9480cd32c8d67beb"
+diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.12.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.13.bb
+similarity index 86%
+rename from meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.12.bb
+rename to meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.13.bb
+index 6f35e39bf3..b0a1937576 100644
+--- a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.12.bb
++++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.13.bb
+@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ea914cc2718e8d53bd7744d96e66c03c"
  
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/L/LE/LEEJO/CGI-${PV}.tar.gz"
+ SRC_URI = "http://www.cpan.org/modules/by-module/Crypt/Crypt-OpenSSL-Guess-${PV}.tar.gz "
  
--SRC_URI[md5sum] = "87b6cf5bc68739c9310ca501adad998e"
--SRC_URI[sha256sum] = "0bd215e7012f9f52e6a7d3fe695ee30ef959d796e8e53472fa0ed8c53fba600a"
-+SRC_URI[sha256sum] = "c67e732f3c96bcb505405fd944f131fe5c57b46e5d02885c00714c452bf14e60"
+-SRC_URI[md5sum] = "9e86baf96828a38c967003a5e66f0c39"
+-SRC_URI[sha256sum] = "0a18d18768cf42b49b15c9dea626199dc74346bbbc76acd3d817b9c1d2bd471d"
++SRC_URI[sha256sum] = "87c1dd7f0f80fcd3d1396bce9fd9962e7791e748dc0584802f8d10cc9585e743"
  
- S = "${WORKDIR}/CGI-${PV}"
+ DEPENDS += "openssl"
  
 -- 
 2.30.2
