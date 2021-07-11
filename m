@@ -1,93 +1,128 @@
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web08.2359.1625965713550157734
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.web11.2442.1625965718553893914
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 10 Jul 2021 18:08:33 -0700
+ Sat, 10 Jul 2021 18:08:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dQyYW9oF;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: ticotimo@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id x16so6226750plg.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 10 Jul 2021 18:08:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=DdUFsh/2;
+ spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: ticotimo@gmail.com)
+Received: by mail-pg1-f172.google.com with SMTP id f5so14203017pgv.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 10 Jul 2021 18:08:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=k0eDNANrK4+Q0D2Tfi9vvTRjBjrTcRf9PkHlBFQI3uo=;
-        b=dQyYW9oFtIIe2dfnQu5B7bnFO5oYCKhwiG7xfuRgrLIaKw6EGvZgq0p1komM5LVbWk
-         JMBWO7wVfGGIcOeW+9myRI4akVeQIqdwD4i0yvE8JxQTd7a3hg8jqSl3hcTaLfdL/lNO
-         4jIT4U3z2d9T/qtFzYnsL7/IGyY6cxFtD1q05PHAGroot2hFRpFSVbmvAXP+gJUYd4z+
-         JelnyCDJwCJ96YJdAVfAvoz6K+q5Tl5V4B/nPG3UFcIaGOkJIpkB4l1mtWK2j6WrzRJM
-         V4cswSqmVQdeSjkruea9kRZH6XycXgQd77cDktjWObTygLZfOvVjkdJGZ3EcBz305lqv
-         ziMA==
+        bh=lkiIdcLgcD5YSohdgfNwmcX0ILermn/w0DqldOM8sII=;
+        b=DdUFsh/2wouHyDHf+Bt1R/iYSUfY5AqtDH+eZXUztcUitqWJNJFB0exx0wil2VnXGp
+         xSHLIidpD0G20dEflx/hRP2RUuvB/DZAnR582rPjh6NgCSe49AdCc/W+uCmFJOwhPZWb
+         yFfZq7SHQmSvuxkpakmSVijceUyUcnuWbfKw/NVp7nPrTWSymju0ind8TmNASaEe3d4l
+         6zGabU2QJ2bHcN8nCHkjVRhiGmWUuHpWg+1hPmrfnKRmBXCJjncZteTzREM2C2nEuksC
+         ewPoDcXLJd4u/OAfdw810eivYl1hrPv0DYB1y5LlaZOU4AXaeCS6FhCbnG0dkeGRzwzT
+         8RRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=k0eDNANrK4+Q0D2Tfi9vvTRjBjrTcRf9PkHlBFQI3uo=;
-        b=iWft508q6otPdQViLRxsi/J1xevPfQ9PK38hR62312B1FBGjQrZ0GYVxJZcuywpia5
-         9LWX+9AmrEMgxMp0Y/O3LYDOI6aK5s/5Qkiypxm7AE8iIBYw/NXML1zn9Fo1Ewtr7EN0
-         IOvd4ycEfEoFy6wo9oldyaLHiyd+uUbILUvKhVMP5ym9zD10AqxMo3pmb6aU7N4xqCn6
-         sKtb27MhvarLyen8Hf0WlM0NtKl9LA6Eke9PWFI4NLP1PELheix30SUv5alzsOZG5Ln8
-         ieMu5jen7iy/wj6c3UdC7OLJeSYb5X1qhVNMcYt30A600qezMTQqPYbhQw6Io16JXgBg
-         EU2w==
-X-Gm-Message-State: AOAM531ysDEZRLnT64wLnHOy1yv5kfVdicpqzuVkazMYQGKDeiKUFxPS
-	WOPeoyZiLyXpsrlIBKhGm7lBphPpYbe0QQ==
-X-Google-Smtp-Source: ABdhPJwJwDTjlpuRSfYm8N9p1dGQ3RQDEQhGjXNQDIrik+hqOJsAyLMCXhjHcZ61NEExXGW9d41CRQ==
-X-Received: by 2002:a17:903:89:b029:12a:ee95:42df with SMTP id o9-20020a1709030089b029012aee9542dfmr4642078pld.77.1625965712897;
-        Sat, 10 Jul 2021 18:08:32 -0700 (PDT)
+        bh=lkiIdcLgcD5YSohdgfNwmcX0ILermn/w0DqldOM8sII=;
+        b=ikv/6w4ZOGHV95EuFqZDdH3CK3toTB3ZvFJv4lmp9JTTkv780/AowkMgpYQDrCkQkb
+         hVdynHONZA9sz1/AmVaoFx5+WKjqAnX7Q49D8BioSlu5L3So95iGvd8Ycxh3VzGzxUNM
+         HGMsw5tlPEzFvy7b/TKbpd6xfUCAhUUd3jLX6nE5/iL3QqFywFfqtbYrWIdoToa9s9I5
+         ne/EYPvl/pZkEfTvyGOyxEaxPJyXoSqIzHTgCMsrL73sDbPeAkWUHDQB/BbqSRskyGRc
+         B20s6783oFrIdZCYFVLeZo87/jOsY0FNSoNm2TuqVoDD4+viJL6AK9xkuUYdI0B9Ubc0
+         v9Xg==
+X-Gm-Message-State: AOAM531sZ4vOvgMlM8deUGhWxKKJ69aiRW3ay+L6VynXnLs34P/A3EvT
+	h71b6BsBq6WG74QtKhN5B019NIqjwnufYg==
+X-Google-Smtp-Source: ABdhPJyy/gSox9fwOdkvzH7y5rj5lQx2N0ybiqjtbSTRrNugj4EPQC2jlMPLQH/X+9TTxSNj+6+Ylg==
+X-Received: by 2002:a63:a545:: with SMTP id r5mr10539717pgu.204.1625965717891;
+        Sat, 10 Jul 2021 18:08:37 -0700 (PDT)
 Return-Path: <ticotimo@gmail.com>
 Received: from thetis.hsd1.or.comcast.net ([2601:1c0:6000:1830::7ed6])
-        by smtp.gmail.com with ESMTPSA id z3sm12199024pgl.77.2021.07.10.18.08.32
+        by smtp.gmail.com with ESMTPSA id z3sm12199024pgl.77.2021.07.10.18.08.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 10 Jul 2021 18:08:32 -0700 (PDT)
+        Sat, 10 Jul 2021 18:08:37 -0700 (PDT)
 From: "Tim Orling" <ticotimo@gmail.com>
 X-Google-Original-From: Tim Orling <timothy.t.orling@intel.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Tim Orling <timothy.t.orling@intel.com>
-Subject: [meta-perl][PATCH 4/8] libio-socket-ssl-perl: upgrade 2.068 -> 2.071
-Date: Sun, 11 Jul 2021 01:08:00 +0000
-Message-Id: <3dc8b32e889bc51e4275fb51cfde2a2d7691f80f.1625965484.git.timothy.t.orling@intel.com>
+Subject: [meta-perl][PATCH 5/8] libmoo-perl: upgrade 2.004000 -> 2.005004
+Date: Sun, 11 Jul 2021 01:08:01 +0000
+Message-Id: <1f51ed80b7272d6e60b8506e9aebd7803d761c42.1625965484.git.timothy.t.orling@intel.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <cover.1625965484.git.timothy.t.orling@intel.com>
 References: <cover.1625965484.git.timothy.t.orling@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-2.071 2021/05/23
-- fix t/nonblock.t race on some systems. Fixes issue #102, maybe #98 too.
-2.070 2021/02/26
-- changed bugtracker in Makefile.PL to github, away from obsolete rt.cpan.org
-2.069 2021/01/22
-- IO::Socket::Utils CERT_asHash and CERT_create now support subject and issuer
-  with multiple same parts (like multiple OU). In this case an array ref instead
-  of a scalar is used as hash value.
+2.005004 - 2021-03-29
+  - fix file set in %INC in create_class_with_roles (RT#134845)
 
-References:
-https://github.com/noxxi/p5-io-socket-ssl/issues/102
-https://github.com/noxxi/p5-io-socket-ssl/issues/98
-https://github.com/noxxi/p5-io-socket-ssl/issues/95
+2.005003 - 2021-03-21
+  - silence 'once' warnings from Moo::_Utils
+
+2.005_002 - 2021-01-22
+  - fix C3 test skipping properly when MRO::Compat not available on perl < 5.10
+
+2.005_001 - 2021-01-20
+  - fix perl version check in global destruction code
+
+2.005_000 - 2021-01-20
+  - remove MooseX::Types from developer prereqs
+  - recommend Sub::Util rather than Sub::Name, since Sub::Util is in core
+  - fix line numbers when using oo module (perl -Moo)
+  - adjust some author tests to rely less on external modules
+  - lower Exporter prereq to any version
+  - bump Role::Tiny prereq to 2.003004
+  - refactor and simplify role application code, as allowed by new Role::Tiny
+    version
+  - switch to using normal strict+warnings rather than strictures for authors
+  - remove strictures from recommends, as Moo does not use it anywhere
+  - remove Task::Weaken prereq, as it served no purpose
+  - remove MRO::Compat prereq, using it only when user code does
+  - remove use of Devel::GlobalDestruction in code, only using
+    Devel::GlobalDestruction::XS when it is available. Devel::GlobalDestruction
+    is still a dependency on perl < 5.14 to facilitate the installation of the
+    ::XS module.
+  - Moo now has no mandatory perl version specific dependencies. The version
+    specific modules are now optional or not used. This means code using Moo can
+    be fatpacked on a new perl version without special cases, and it will work
+    on older perl versions.
+
+2.004004 - 2020-11-25
+  - fix error location test when using core Carp on perl 5.8.9 - 5.10.1
+
+2.004003 - 2020-11-21
+  - fix extraneous MANIFEST entry
+
+2.004002 - 2020-11-20
+  - no changes
+  - releasing as stable
+
+2.004_001 - 2020-07-30
+  - remove Module::Runtime prerequisite
+  - internal code cleanups
+  - added test for conflicts in extensions wrapping 'has' and similar subs
 
 Signed-off-by: Tim Orling <timothy.t.orling@intel.com>
 ---
- ...socket-ssl-perl_2.068.bb => libio-socket-ssl-perl_2.071.bb} | 3 +--
+ .../{libmoo-perl_2.004000.bb => libmoo-perl_2.005004.bb}       | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libio/{libio-socket-ssl-perl_2.068.bb => libio-socket-ssl-perl_2.071.bb} (91%)
+ rename meta-perl/recipes-perl/libmoo/{libmoo-perl_2.004000.bb => libmoo-perl_2.005004.bb} (91%)
 
-diff --git a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.068.bb b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.071.bb
+diff --git a/meta-perl/recipes-perl/libmoo/libmoo-perl_2.004000.bb b/meta-perl/recipes-perl/libmoo/libmoo-perl_2.005004.bb
 similarity index 91%
-rename from meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.068.bb
-rename to meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.071.bb
-index fc9786beca..4a98ac3744 100644
---- a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.068.bb
-+++ b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.071.bb
-@@ -22,8 +22,7 @@ RDEPENDS_${PN} += "\
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz \
-            file://run-ptest \
-           "
--SRC_URI[md5sum] = "4230c829c8875889848093b2b46a7284"
--SRC_URI[sha256sum] = "4420fc0056f1827b4dd1245eacca0da56e2182b4ef6fc078f107dc43c3fb8ff9"
-+SRC_URI[sha256sum] = "40da40948ecc9c787ed39c95715872679eebfd54243721174993a2003e32ab0a"
+rename from meta-perl/recipes-perl/libmoo/libmoo-perl_2.004000.bb
+rename to meta-perl/recipes-perl/libmoo/libmoo-perl_2.005004.bb
+index dbad74d229..ecc4d87c85 100644
+--- a/meta-perl/recipes-perl/libmoo/libmoo-perl_2.004000.bb
++++ b/meta-perl/recipes-perl/libmoo/libmoo-perl_2.005004.bb
+@@ -10,8 +10,7 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
+ LIC_FILES_CHKSUM = "file://README;beginline=742;endline=787;md5=0e7ee44f5ce5e9b84619cd198caad1d6"
  
- S = "${WORKDIR}/IO-Socket-SSL-${PV}"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/Moo-${PV}.tar.gz"
+-SRC_URI[md5sum] = "e542104553d616b15631b5c66ccee904"
+-SRC_URI[sha256sum] = "323240d000394cf38ec42e865b05cb8928f625c82c9391cd2cdc72b33c51b834"
++SRC_URI[sha256sum] = "e3030b80bd554a66f6b3c27fd53b1b5909d12af05c4c11ece9a58f8d1e478928"
+ 
+ S = "${WORKDIR}/Moo-${PV}"
  
 -- 
 2.30.2
