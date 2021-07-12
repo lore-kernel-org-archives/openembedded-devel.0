@@ -1,108 +1,101 @@
-Received: from mail3.bemta25.messagelabs.com (mail3.bemta25.messagelabs.com [195.245.230.81])
- by mx.groups.io with SMTP id smtpd.web08.8516.1626081911388223369
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web11.11239.1626097499317306004
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Jul 2021 02:25:11 -0700
+ Mon, 12 Jul 2021 06:44:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=wAV1cFYs;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.81, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1626081908; i=@fujitsu.com;
-	bh=CLQgmQke3Qt0YGekpOVKkWFuaO6ZRx2ky76W4X+p0xk=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=wAV1cFYsLbKvvAknaBox0UOMX7AAuk+W9oerTAxwILAt/OkVM1B8P/aUtxtv7d2Ev
-	 /PrAzf++eBu+47Cx9YszomNX3LJfifXXpinc3s18DlukURcvgDNHIRDmIX8snC+fAT
-	 9vESg1syWyqIfk435YfSCvFNBPtvocwnWZ3U8JdiNa1UxxbtIIUZJqIADKL4LbUODJ
-	 xD8uEP+pHy600FekmA9U6cSdsQp4Ft1GUKhFoZPHi/wvkxKio1RV4cEEZxcQDaVH/1
-	 yq3oaUxrDteI8GdbuEIYPLw4/ygENGj4KtYDr3aUstuW5OY2oPzoBHcB70QMDt1o5O
-	 godz/+bQRsq9Q==
-Received: from [100.112.199.200] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-b.eu-west-1.aws.symcld.net id 35/3F-03155-47A0CE06; Mon, 12 Jul 2021 09:25:08 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupikeJIrShJLcpLzFFi42Kxs+EI0S3hepN
-  g8Hy7qMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvF/ynbmgtMCFfen/WduYOzm72Lk5BAS2MYk
-  8WJuchcjF5B9klHid/8/VpAEm4CORMeLbhYQW0RAX2Lp7D3MILawQJrEq7v/GEFsFgFViZM7J
-  4DV8Aq4SWxt3swOYksIKEhMefieGSIuKHFy5hOwGmYBCYmDL14wQ9QoSmzfeYYFwq6U2DOrn2
-  kCI88sJC2zkLQsYGRaxWieVJSZnlGSm5iZo2toYKBraGika2hpoWtsoJdYpZukl1qqW55aXKJ
-  rqJdYXqxXXJmbnJOil5dasokRGEQpBcfkdjD2vvmgd4hRkoNJSZRX5/LrBCG+pPyUyozE4oz4
-  otKc1OJDjDIcHEoSvJ4cbxKEBItS01Mr0jJzgAENk5bg4FES4V3LDpTmLS5IzC3OTIdInWJUl
-  BLnzQLpEwBJZJTmwbXBougSo6yUMC8jAwODEE9BalFuZgmq/CtGcQ5GJWHeBpApPJl5JXDTXw
-  EtZgJaXLjjJcjikkSElFQDU2HYh4bt7V/W/Zrc0W+9c4nJrf2LpkpIC90u/vNzVkKesvZaxg8
-  /Gm+ePqW5XPOY+keLexb7N366OOmp6pNXfK4flLg2+Ac63/V/3H4w9f7MmI8+XRM52H7v6D1U
-  KFsa8MbkUl6mnEz0kTdnrtTPsSlWmFdc2yXSp/L66NTPQcKK9su+RM335E4s1Dyd6+kh8+6i8
-  /NPgfPKqhQZjPbUOEYtErqlZ3RBi+9daPVydlnuXwI+rq9bjdk/WuY8WHd1EvOsKr/e3JadNj
-  9bMpiKBV7GOUyeFe1QXr/wC8c+ycjP6zMDi6atXFZ0+r6WzH+NSdtPyHZuk0pJnXtfVyjvfLZ
-  m/Mk1E9Y9abkutuKPrxJLcUaioRZzUXEiANBCw4AdAwAA
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-6.tower-285.messagelabs.com!1626081908!518628!1
-X-Originating-IP: [62.60.8.84]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 6007 invoked from network); 12 Jul 2021 09:25:08 -0000
-Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-6.tower-285.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 12 Jul 2021 09:25:08 -0000
-Received: from R01UKEXCASM223.r01.fujitsu.local (ex2k13_223.fs.fujitsu.com [10.182.185.121])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 16C9P22L008800
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jul 2021 10:25:07 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Mon, 12 Jul 2021 10:25:01 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH] [oe] [meta-python] [PATCH] python3-google-api-python-client: upgrade 2.10.0 -> 2.12.0
-Date: Tue, 13 Jul 2021 05:24:53 +0800
-Message-ID: <1626125093-4376-1-git-send-email-zangrc.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=N0eznXj4;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id v7so18295939pgl.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jul 2021 06:44:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:references:from:message-id:date:user-agent:mime-version
+         :in-reply-to:content-transfer-encoding:content-language;
+        bh=XZ8Qsq7NqEFFO4ZWWe7XrAbbWOTi0EXzna/65Xp5cmo=;
+        b=N0eznXj4Gon48HF7giaE6X8Gv4BUHRAJKEJ1Gtu8c3Zj0SZjcsrYgBmIExQfXg3H3F
+         AEbBEbroBNBpxvaUgzWSk93shxYTs4jtgdakvM5OeJJHoAMsWZaqY4mqFLil955DV/L4
+         UvgBcr3cyTRBQJT0fXOV5SytOEcCTy6cqyfI76oaT3HLUQQyd+AuKfeb9XfiNPZ7+Ypt
+         3K6z6NRu1nbtjE31U5nkpHGOqh3ho8/ufJSP0gUe+n+qCmlLpvoQHQo2H019c2FWtste
+         JO3h+M32MyOC8wpL1cXRlhu5K+9t8j6ZKx5Kam8pJz9xoheRhlCwmWhZCwStqHSuQOKq
+         70Lw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=XZ8Qsq7NqEFFO4ZWWe7XrAbbWOTi0EXzna/65Xp5cmo=;
+        b=gtYfglb0Ce8kFCTBJy1regfLAJK3l+d3vh4KqCOxU7JUu04rYZW6BOnCx4Lc1tzKWt
+         DE4gkpk/mYzMk+hG4lDDmK32Imb/i4ytCCgdJ60XhryRaatqEJ4W2INo7hEvVBQLuO2W
+         ukyADxsn69CM6mgFGkW2nukwF5AwvlVVIpQzMo6YUQ6WfCljDTB/sIIkQmsfqu+v2nLG
+         SBKdOsL8TqulTDLc2FEtxLf5JJplopU20TFlJL3FacUT8GnCpxWTG37JFSObRGFPPSaD
+         Ub3yoGSwDbUIA2pRMHjg7ZchDQhkDubRw9Skhu2yB+Plmqqp9H2X8Oipnj1f9SbgEK3L
+         BsIA==
+X-Gm-Message-State: AOAM533lbSmvnr/yswtQKpW5GEJ/P+qTDqlcYYvQfbxqXMim1l1pUiL4
+	hVY/Xky3Vl24hgclsKWGE/ZcZ3eDQR/A9A==
+X-Google-Smtp-Source: ABdhPJwNZlE+01rj9bCN/fZcuOxBe6QdbkigQ5eTD0JuQK2kSYO3Md8gWZ9g/TSm11SEHQC9c1ndgQ==
+X-Received: by 2002:a05:6a00:168a:b029:2fb:6bb0:aba with SMTP id k10-20020a056a00168ab02902fb6bb00abamr54106194pfc.32.1626097498430;
+        Mon, 12 Jul 2021 06:44:58 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:47a9:e029:ea8:ce68? ([2601:202:4180:a5c0:47a9:e029:ea8:ce68])
+        by smtp.gmail.com with ESMTPSA id 131sm16330896pfb.164.2021.07.12.06.44.57
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 12 Jul 2021 06:44:58 -0700 (PDT)
+Subject: Re: [meta-networking][dunfell][PATCH 0/2] ufw: Backport 0.36, update module RRECOMMENDS
+To: Jate Sujjavanich <jatedev@gmail.com>,
+ openembedded-devel@lists.openembedded.org
+References: <cover.1626055148.git.jatedev@gmail.com>
+From: "Armin Kuster" <akuster808@gmail.com>
+Message-ID: <a7901ba7-29c6-507b-3cc4-2be2fc8e1016@gmail.com>
+Date: Mon, 12 Jul 2021 06:44:57 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
-Content-Type: text/plain
+In-Reply-To: <cover.1626055148.git.jatedev@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Features
-artifactregistry: update the api bc9a38b (a933dad)
-chat: update the api eea3c5c (a933dad)
-cloudasset: update the api 2e31dd0 (a933dad)
-cloudbuild: update the api 3a3b420 (a933dad)
-composer: update the api 78c0d8d (a933dad)
-container: update the api a54737f (a933dad)
-datafusion: update the api f6bf3c6 (a933dad)
-dataproc: update the api 3fde9a3 (a933dad)
-documentai: update the api 79c556d (a933dad)
-groupssettings: update the api d537f96 (a933dad)
-logging: update the api d3548c5 (a933dad)
-monitoring: update the api d24af68 (a933dad)
-paymentsresellersubscription: update the api cff9039 (a933dad)
-redis: update the api 46102d1 (a933dad)
-run: update the api db18e29 (a933dad)
-slides: update the api 68634cd (a933dad)
-spanner: update the api 2895121 (a933dad)
-storagetransfer: update the api 24895f1 (a933dad)
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
----
- ...ent_2.10.0.bb => python3-google-api-python-client_2.12.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-google-api-python-client_2.10.0.bb => python3-google-api-python-client_2.12.0.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-google-api-python-client_2.10.0.bb b/meta-python/recipes-devtools/python/python3-google-api-python-client_2.12.0.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-google-api-python-client_2.10.0.bb
-rename to meta-python/recipes-devtools/python/python3-google-api-python-client_2.12.0.bb
-index b406f677d8..67d05b5dd0 100644
---- a/meta-python/recipes-devtools/python/python3-google-api-python-client_2.10.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-google-api-python-client_2.12.0.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/googleapis/google-api-python-client"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=94023d14f6b58272fd885e4e3f2f08b3"
- 
--SRC_URI[sha256sum] = "58424d263344625dcf4dc08e7639a6714737102ab4ae83e5f043e3db08d9965f"
-+SRC_URI[sha256sum] = "a5d203241a93201a770c966f8eca39de7f88b28194f9d252065b18e83bd99c4b"
- 
- inherit pypi setuptools3
- 
--- 
-2.25.1
+On 7/11/21 7:08 PM, Jate Sujjavanich wrote:
+> Backport ufw 0.36 to dunfell and update kernel module RRECOMMENDS for
+> linux-yocto 5.4 in dunfell poky.
+This update, is it bug fix only ?
+
+-armin
+>
+> The following changes since commit c38d2a74f762a792046f3d3c377827b08aade513:
+>
+>   dnsmasq: Add fixes for CVEs reported for dnsmasq (2021-05-29 11:41:45 -0700)
+>
+> are available in the Git repository at:
+>
+>   git://github.com/jatedev/meta-openembedded pr-dunfell-ufw-0.36
+>   https://github.com/jatedev/meta-openembedded/tree/pr-dunfell-ufw-0.36
+>
+> Jate Sujjavanich (2):
+>   ufw: bump version to 0.36 and add services
+>   ufw: update RRECOMMENDS for linux-yocto 5.4
+>
+>  .../ufw/ufw/0001-optimize-boot.patch          |  37 ++++--
+>  ...option-to-specify-iptables-location.patch} |  41 +++---
+>  .../ufw/ufw/0002-lp1044361.patch              | 118 ------------------
+>  .../ufw/ufw/0003-fix-typeerror-on-error.patch |  20 ---
+>  .../0003-only-make-one-reference-to-env.patch |  73 +++++++++++
+>  .../ufw/ufw/0004-lp1039729.patch              |  40 ------
+>  .../ufw/ufw/0005-lp1191197.patch              |  32 -----
+>  ...setup-only-make-one-reference-to-env.patch |  77 ------------
+>  .../recipes-connectivity/ufw/ufw_0.33.bb      |  59 ---------
+>  .../recipes-connectivity/ufw/ufw_0.36.bb      |  90 +++++++++++++
+>  10 files changed, 209 insertions(+), 378 deletions(-)
+>  rename meta-networking/recipes-connectivity/ufw/ufw/{setup-add-an-option-to-specify-iptables-location.patch => 0002-add-an-option-to-specify-iptables-location.patch} (87%)
+>  delete mode 100644 meta-networking/recipes-connectivity/ufw/ufw/0002-lp1044361.patch
+>  delete mode 100644 meta-networking/recipes-connectivity/ufw/ufw/0003-fix-typeerror-on-error.patch
+>  create mode 100644 meta-networking/recipes-connectivity/ufw/ufw/0003-only-make-one-reference-to-env.patch
+>  delete mode 100644 meta-networking/recipes-connectivity/ufw/ufw/0004-lp1039729.patch
+>  delete mode 100644 meta-networking/recipes-connectivity/ufw/ufw/0005-lp1191197.patch
+>  delete mode 100644 meta-networking/recipes-connectivity/ufw/ufw/setup-only-make-one-reference-to-env.patch
+>  delete mode 100644 meta-networking/recipes-connectivity/ufw/ufw_0.33.bb
+>  create mode 100644 meta-networking/recipes-connectivity/ufw/ufw_0.36.bb
+>
 
