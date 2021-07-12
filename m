@@ -1,111 +1,128 @@
-Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com [209.85.222.172])
- by mx.groups.io with SMTP id smtpd.web09.5829.1626055721055165177
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web11.6442.1626060210694460085
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 11 Jul 2021 19:08:41 -0700
+ Sun, 11 Jul 2021 20:23:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=nSE+pGFf;
- spf=pass (domain: gmail.com, ip: 209.85.222.172, mailfrom: jatedev@gmail.com)
-Received: by mail-qk1-f172.google.com with SMTP id 9so16508046qkf.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 11 Jul 2021 19:08:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=+YrWbhXlIu7ZQI/JFYmbADtHoDzWKlRgiRhTLA9DrD4=;
-        b=nSE+pGFfFTqv1+BMgBhc+6GiMUbOhBsIh3MT3qFn5Vj9AEDQDFl5KVo11ZGaHcHy/l
-         ntmWN17wYwfJtyx0XH703ojbMMfploitOZ2cyPZWICtvVK1BWYobvuWYcg8ofzIglTJC
-         /mx3CkHpcces13YoPKUnRPoEIMLgaozdxcWPXVCVHoxOG7y4zDLbp2feuF3+xni6hU6s
-         loz/9/Xhk0q+96dV+/C6ifZX+HbskE3VBO5M3cCStqOhCsuhYYi/1D99cvarwoJyiwyz
-         8gUDxlinOEnkZk0238UO8Wcxs4FD4gv3qJC2g2tgLUrDZGd1lO7qAfzLAM2IDgpq5C66
-         otrw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=+YrWbhXlIu7ZQI/JFYmbADtHoDzWKlRgiRhTLA9DrD4=;
-        b=B6YqmfX1lMOCpbi+PjbT5W+RmppHxzttZEYp4xr3avKLObaLQV1LOHNqtTzLkSnxu9
-         eZ/zwK4/QKeZCTcZWm/ENQHICtR2ErHUv6joofXGvTq6ZDjIINZnoAJwhn0JDwoEg6jh
-         8vl7RJhSPl+RYN9U3XvGq4W33vI46eUecMRBR5va++9oYNHt0EeGzdZ6veR7gupIbFbE
-         V8/XOJ8WW7FjZUSFCBpL6VaW6dlMVBODhZGSgiOrrWT4iZ/9tL00IjUPn3gd6FHluyqo
-         jILFqTpNZRZUsJQgwzX60dhHBs/2gX0puWHqc/LjIUpybnloyBpAecRQweTxmCpT1cj8
-         9NYw==
-X-Gm-Message-State: AOAM533qoFBsFPWDp3WMgucaKSkvImbExDH4XsBTUq2+aCkdsP0dv4V8
-	FD2c6Zr8hW8+vBRONuWudGvnIYrKsBc=
-X-Google-Smtp-Source: ABdhPJwSE0YXEzg8ty8wqpzRQ3Vzw/74NdktV7LIQq4JRz9QDhkJAAWbix2JCDrmLCwwqbv+V3DMqw==
-X-Received: by 2002:a37:9a88:: with SMTP id c130mr28180502qke.375.1626055720090;
-        Sun, 11 Jul 2021 19:08:40 -0700 (PDT)
-Return-Path: <jatedev@gmail.com>
-Received: from localhost.localdomain ([63.148.217.19])
-        by smtp.gmail.com with ESMTPSA id u12sm2906419qke.58.2021.07.11.19.08.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 11 Jul 2021 19:08:39 -0700 (PDT)
-From: "Jate Sujjavanich" <jatedev@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: akuster808@gmail.com
-Subject: [meta-networking][dunfell][PATCH 2/2] ufw: update RRECOMMENDS for linux-yocto 5.4
-Date: Mon, 12 Jul 2021 02:08:19 +0000
-Message-Id: <39f17204f94c55ea327d4d5c1450b1fa83222cc9.1626055148.git.jatedev@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1626055148.git.jatedev@gmail.com>
-References: <cover.1626055148.git.jatedev@gmail.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: kai.kang@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 16C3NTO6032296
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 11 Jul 2021 20:23:29 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.10; Sun, 11 Jul 2021 20:23:28 -0700
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.10 via Frontend Transport; Sun, 11 Jul 2021 20:23:28 -0700
+From: "kai" <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] mariadb: fix failures to start install_db.service
+Date: Mon, 12 Jul 2021 11:23:23 +0800
+Message-ID: <20210712032323.13141-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Cataloged modules by running check-requirements
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Jate Sujjavanich <jatedev@gmail.com>
+It fails to start install_db.service when install mariadb-setupdb from a
+package repo via dnf:
+
+root@qemux86-64:~# systemctl status install_db
+x install_db.service - Install MySQL Community Server Database
+     Loaded: loaded (/lib/systemd/system/install_db.service; enabled; vendor preset: enabled)
+     Active: failed (Result: exit-code) since Fri 2021-07-09 02:55:12 UTC; 5s ago
+    Process: 504 ExecStart=/usr/bin/mysql-systemd-start pre (code=exited, status=203/EXEC)
+   Main PID: 504 (code=exited, status=203/EXEC)
+
+Jul 09 02:55:12 qemux86-64 systemd[1]: Starting Install MySQL Community Server Database...
+Jul 09 02:55:12 qemux86-64 systemd[504]: install_db.service: Failed to locate executable /usr/bin/mysql-systemd-start: No such file or directo>
+Jul 09 02:55:12 qemux86-64 systemd[504]: install_db.service: Failed at step EXEC spawning /usr/bin/mysql-systemd-start: No such file or direct>
+Jul 09 02:55:12 qemux86-64 systemd[1]: install_db.service: Main process exited, code=exited, status=203/EXEC
+Jul 09 02:55:12 qemux86-64 systemd[1]: install_db.service: Failed with result 'exit-code'.
+Jul 09 02:55:12 qemux86-64 systemd[1]: Failed to start Install MySQL Community Server Database.
+
+The scripts required by install_db.service are packaged in
+mariadb-server which depends on mariadb-setupdb already. So move the
+scripts to mariadb-setupdb to make sure start install_db.service
+successfully. And move creating user 'mysql' in mariadb-setupdb as well.
+Packageconfig 'setupdb' has been useless from last upgrade, so remove it
+at same time.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../recipes-connectivity/ufw/ufw_0.36.bb      | 32 ++++++++++++++++---
- 1 file changed, 27 insertions(+), 5 deletions(-)
+ meta-oe/recipes-dbs/mysql/mariadb.inc | 25 ++++++++++++++-----------
+ 1 file changed, 14 insertions(+), 11 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/ufw/ufw_0.36.bb b/meta-networking/recipes-connectivity/ufw/ufw_0.36.bb
-index 8e35dc01e..5631abcf0 100644
---- a/meta-networking/recipes-connectivity/ufw/ufw_0.36.bb
-+++ b/meta-networking/recipes-connectivity/ufw/ufw_0.36.bb
-@@ -29,16 +29,38 @@ RDEPENDS_${PN} = " \
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 71978740b..5787ae4bd 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -36,15 +36,15 @@ BINCONFIG_GLOB = "mysql_config"
+ inherit cmake gettext binconfig update-rc.d useradd systemd multilib_script
  
- RRECOMMENDS_${PN} = " \
-                      kernel-module-ipv6 \
--                     kernel-module-nf-conntrack-ipv6 \
-+                     kernel-module-ipt-reject \
-+                     kernel-module-iptable-mangle \
-+                     kernel-module-iptable-raw \
-+                     kernel-module-ip6table-raw \
-+                     kernel-module-ip6t-reject \
-+                     kernel-module-ip6t-rt \
-+                     kernel-module-ip6table-mangle \
-+                     kernel-module-nf-conntrack \
-                      kernel-module-nf-log-common \
-+                     kernel-module-nf-conntrack-broadcast \
-+                     kernel-module-nf-conntrack-ftp \
-+                     kernel-module-nf-conntrack-netbios-ns \
-                      kernel-module-nf-log-ipv4 \
-                      kernel-module-nf-log-ipv6 \
--                     kernel-module-nf-addrtype \
--                     kernel-module-nf-limit \
--                     kernel-module-nf-log \
--                     kernel-module-nf-recent \
-+                     kernel-module-nf-log-ipv4 \
-+                     kernel-module-nf-log-ipv6 \
-+                     kernel-module-nf-nat-ftp \
-+                     kernel-module-xt-addrtype \
-+                     kernel-module-xt-comment \
-+                     kernel-module-xt-conntrack \
-+                     kernel-module-xt-hashlimit \
-+                     kernel-module-xt-hl \
-+                     kernel-module-xt-multiport \
-+                     kernel-module-xt-ratetest \
-+                     kernel-module-xt-socket \
-+                     kernel-module-xt-tcpudp \
-+                     kernel-module-xt-limit \
-+                     kernel-module-xt-log \
-+                     kernel-module-xt-recent \
- "
+ MULTILIB_SCRIPTS = "${PN}-server:${bindir}/mariadbd-safe \
+-                    ${PN}-server:${bindir}/mariadb-install-db"
++                    ${PN}-setupdb:${bindir}/mariadb-install-db"
  
+ INITSCRIPT_PACKAGES = "${PN}-server ${PN}-setupdb"
+ INITSCRIPT_NAME_${PN}-server = "mysqld"
+ INITSCRIPT_PARAMS_${PN}-server ?= "start 45 5 . stop 45 0 6 1 ."
+ 
+-USERADD_PACKAGES = "${PN}-server"
+-USERADD_PARAM_${PN}-server = "--system --home-dir /var/mysql -g mysql --shell /bin/false mysql"
+-GROUPADD_PARAM_${PN}-server = "--system mysql"
++USERADD_PACKAGES = "${PN}-setupdb"
++USERADD_PARAM_${PN}-setupdb = "--system --home-dir /var/mysql -g mysql --shell /bin/false mysql"
++GROUPADD_PARAM_${PN}-setupdb = "--system mysql"
+ 
+ INITSCRIPT_NAME_${PN}-setupdb = "install_db"
+ INITSCRIPT_PARAMS_${PN}-setupdb ?= "defaults 44 44"
+@@ -56,14 +56,18 @@ SYSTEMD_AUTO_ENABLE_${PN}-server ?= "disable"
+ SYSTEMD_SERVICE_${PN}-setupdb = "install_db.service"
+ SYSTEMD_AUTO_ENABLE_${PN}-setupdb ?= "enable"
+ ALLOW_EMPTY_${PN}-setupdb ?= "1"
+-FILES_${PN}-setupdb = "${sysconfdir}/init.d/install_db"
+-
+-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)} setupdb"
++FILES_${PN}-setupdb = "${sysconfdir}/init.d/install_db \
++                       ${bindir}/mariadb-install-db \
++                       ${bindir}/my_print_defaults \
++                       ${bindir}/mysql_install_db \
++                       ${bindir}/mysql-systemd-start \
++                       "
 +
- do_install_append() {
-     install -d ${D}${systemd_unitdir}/system/
-     install -m 0644 ${S}/doc/systemd.example ${D}${systemd_unitdir}/system/ufw.service
++PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
+ PACKAGECONFIG_class-native = ""
+ PACKAGECONFIG[pam] = ",-DWITHOUT_AUTH_PAM=TRUE,libpam"
+ PACKAGECONFIG[valgrind] = "-DWITH_VALGRIND=TRUE,-DWITH_VALGRIND=FALSE,valgrind"
+ PACKAGECONFIG[krb5] = ", ,krb5"
+-PACKAGECONFIG[setupdb] = ", ,,${PN}-setupdb"
+ PACKAGECONFIG[zstd] = "-DWITH_ROCKSDB_ZSTD=ON,-DWITH_ROCKSDB_ZSTD=OFF,zstd"
+ 
+ # MariaDB doesn't link properly with gold
+@@ -185,10 +189,10 @@ do_install() {
+     fi
+ }
+ 
+-PACKAGES = "${PN}-dbg ${PN} \
++PACKAGES = "${PN}-dbg ${PN}-setupdb ${PN} \
+     libmysqlclient-r libmysqlclient-r-dev libmysqlclient-r-staticdev \
+     libmysqlclient libmysqlclient-dev libmysqlclient-staticdev \
+-    libmysqld libmysqld-dev ${PN}-client ${PN}-server ${PN}-setupdb ${PN}-leftovers"
++    libmysqld libmysqld-dev ${PN}-client ${PN}-server ${PN}-leftovers"
+ CONFFILES_${PN}-server += "${sysconfdir}/my.cnf ${sysconfdir}/my.cnf.d/server.cnf"
+ CONFFILES_${PN}-client += "${sysconfdir}/my.cnf.d/mysql-clients.cnf"
+ CONFFILES_libmysqlclient += "${sysconfdir}/my.cnf.d/client.cnf"
+@@ -291,7 +295,6 @@ FILES_${PN}-server = "\
+     ${bindir}/mysql_convert_table_format \
+     ${bindir}/mariadb-convert-table-format \
+     ${bindir}/mysql_install_db \
+-    ${bindir}/mariadb-install-db \
+     ${bindir}/mysql_secure_installation \
+     ${bindir}/mariadb-secure-installation \
+     ${bindir}/mysql_setpermission \
 -- 
-2.25.1
+2.17.1
 
