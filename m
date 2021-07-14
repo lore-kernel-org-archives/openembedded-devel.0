@@ -1,80 +1,95 @@
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.web09.7770.1626274495926212459
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web10.9307.1626279954488443543
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Jul 2021 07:54:56 -0700
+ Wed, 14 Jul 2021 09:25:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=rT051DjT;
- spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: texier.pj2@gmail.com)
-Received: by mail-wr1-f49.google.com with SMTP id f9so3557617wrq.11
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jul 2021 07:54:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=HZyWAgiY;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id cu14so1934274pjb.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jul 2021 09:25:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=4in5BIkQstmiAZgwxke4V/0zDHxrFVCq1EUKU7S+9pw=;
-        b=rT051DjTuyjfbqmp/aDGRnC8Sb7zc0cOCRDWvBvtR8D6NYK3DlfGcZ36F4GDe1Pp1C
-         4XpvBgYl2sq3v10CKVmqjrlh8V1tqssPAsW2EC4qPxvVg4lQodPbS8vlnvLEFkKcJX7L
-         K675ypblcvPLDrplDnVM1+VruMhoEua0efVY3SUWxgl/RcM3nIk7+PCml+MsApP0lz6t
-         wI6gpMner/jgg8tWPXtgs0Fh+vsHt1GJMZAsvBo2+n5C/bGFlM6003fIg0uEJzFlyntS
-         gij3ZzYd2qEHtr6XjKD+RXz/xcGRmdYLm8KgBTBuX5oRTsNkgmA562b9xfVyfxC4ChxP
-         A0PQ==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=oKg1Hu3ZQ7h4XWNxoSwNtjOmCeBGUDqtdGWYoDUtv7Y=;
+        b=HZyWAgiYERmRpV0EUegr8pu60ZngLb29ESdPQKzambwidbiE1CNKvZQ0UwFgV2Uhm5
+         b2cLi4fXvKqN2UcpAAbIFRxrwHOpF5rJyd39YXcH6uO+aOgO07WuV8jrw9ZIEQR9oxCr
+         ka15jIy2A63RcliIpD07Hr9ioFHRMb6aXrGrgc0BxZYGAS+oD2JlcHyXuBrWKK6mqBfR
+         JkjgYYuRHXu74xEVr6Qyjj4r/+Py6Twjt6/7zrEp4MwWIcESfc3qjzeDunetFcwhg9V3
+         N+uMqkMaeW3GjX0t666/nZKky/ic6pCn8gXmDk+2UdgK71Cq5dAIVZLInE2RiDN2Bthv
+         Uu1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=4in5BIkQstmiAZgwxke4V/0zDHxrFVCq1EUKU7S+9pw=;
-        b=o94A1UoyzgJvLbJdZMcNKf2rzOHsA+WYFQFDmWOXd2h1rVTUWGGg47B+6/oTTi03Hp
-         Lyod6SMzjkaZ4+XfGcUlNHFxHuYhpPIqWPcG5uCVaml9G6z9R4yKpx7esKKqIyRLTfrk
-         XGEnw/b70lH4hEk+36WSKAa2rlifR3R7m1aZKJC6TWFZYJPtkR52Dtb+/TDfbpjwVlD5
-         5u6DRbCPTKu3HHUdZpc+ls8t3zJ0c62lgNPC/S0AbS+DIfeIPEkK2JYV6YP4EqUzDVxN
-         dEnPRDoxjmtJc40oGBH7A5lbWOWoERZpSleOxy5pv9BgWZj+EQAfmRLBLNWYnDMeS92j
-         9kxQ==
-X-Gm-Message-State: AOAM5308PxTXAIDZtISG0zxyVSiXeItn9IkBusibm8aGEnJwpbBCAa9g
-	KIKbXo3B4eJmTlSHLIdecZWShLrqWR8=
-X-Google-Smtp-Source: ABdhPJxDQcreklu/nUgETQ6VQX0OBqDsQHC+BSsX3pF9vgYr4S1PqysMz1FlTbe0fseOw2bwmQhAWA==
-X-Received: by 2002:adf:fa4c:: with SMTP id y12mr13937339wrr.302.1626274494280;
-        Wed, 14 Jul 2021 07:54:54 -0700 (PDT)
-Return-Path: <texier.pj2@gmail.com>
-Received: from menoah.home ([2a01:cb19:190:c500:d5ae:6a4a:fa0e:90ca])
-        by smtp.gmail.com with ESMTPSA id p2sm2352453wma.27.2021.07.14.07.54.53
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=oKg1Hu3ZQ7h4XWNxoSwNtjOmCeBGUDqtdGWYoDUtv7Y=;
+        b=bVC9bWcGza0vRxwyjEf6Q7u+xFWnwJpBcHB++m4245aLf6fvD5A0zAKr4FA5CzpWz7
+         qmU4GzVZlZa7O00RRpPoHKUOWwvpVGWOeYXz4f12+0vB3Bnr58no12tW4e0Rby9lCA5g
+         mQ3pnvpsohA41/0B9N1+jW+VgF/fujRKvMy96YVH1gojJyeMm9gt6OfifDEDyhnRXkJS
+         TdgFDRGXOl6gPGFaU4a5d/orM6NEqzXXVpkWJd8KGc+F7alDEVE2kWlm0ZxKw6tRsLdT
+         7hEpKTy9xtS4RpHpHonaD0JDLcsrmjNGVwc3iE5sxEgtIToE973Gjw9IFZZ0q6rjbjEk
+         FEXg==
+X-Gm-Message-State: AOAM5301MdW7rxo9j6iid/kaCS4/rTl0hyc8TEmMJogKuUSn13sN4DwQ
+	TVeu7RdyQlQvMVOkLFmrJhbw50xCdsaVzw==
+X-Google-Smtp-Source: ABdhPJzuXkoc94xNvXSgO9u1uYo831QarTAgIpdMk6ebOPhJBmDClkbkV1jRqVecrlAMgr2uZZ/Aaw==
+X-Received: by 2002:a17:90b:3617:: with SMTP id ml23mr10424034pjb.236.1626279953713;
+        Wed, 14 Jul 2021 09:25:53 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::5593])
+        by smtp.gmail.com with ESMTPSA id js5sm2610533pjb.40.2021.07.14.09.25.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Jul 2021 07:54:53 -0700 (PDT)
-From: "Pierre-Jean Texier" <texier.pj2@gmail.com>
+        Wed, 14 Jul 2021 09:25:53 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Pierre-Jean Texier <texier.pj2@gmail.com>
-Subject: [meta-oe][PATCH] spitools: upgrade 0.8.7 -> 1.0.0
-Date: Wed, 14 Jul 2021 16:54:44 +0200
-Message-Id: <20210714145444.18527-1-texier.pj2@gmail.com>
-X-Mailer: git-send-email 2.17.1
+Cc: David Sterling <david-sterling@users.noreply.github.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/2] can-isotp: Upgrade to latest on master
+Date: Wed, 14 Jul 2021 09:25:49 -0700
+Message-Id: <20210714162550.3153376-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.32.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-This includes the following changes:
+From: David Sterling <david-sterling@users.noreply.github.com>
 
-f5d8795 [RELEASE] 1.0.0.
-eaa6f35 [RELEASE] 1.0.0.
-fe6ffcb [DEV] Add license mention in `--version` display.
-f9edc7d [DEV] Support all configuration options in `spi-pipe`.
-18f6b23 [DEV] Support SPI mode option in `spi-pipe`
-8c6e7f7 [DEV] support `--bits` config option in `spi-pipe`.
+It is needed for 5.2 to 5.10 kernel
 
-Signed-off-by: Pierre-Jean Texier <texier.pj2@gmail.com>
+Can-isotp is now upstream from kernel 5.10 onwards.
+Use kernel config file instead.  This is only provided for legacy kernels.
+
+For kernel 5.10 onwards use kernel defconfig option for ISO 15765-2 CAN
+transport and do not use can-isotp recipe. You will get "The file
+/usr/include/linux/can/isotp.h is installed by both linux-libc-headers
+and can-isotp" error using this recipe with kernel >= 5.10
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/spitools/spitools_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-extended/socketcan/can-isotp_git.bb | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/spitools/spitools_git.bb b/meta-oe/recipes-support/spitools/spitools_git.bb
-index cde26df498..bb41a33c14 100644
---- a/meta-oe/recipes-support/spitools/spitools_git.bb
-+++ b/meta-oe/recipes-support/spitools/spitools_git.bb
-@@ -4,9 +4,9 @@ AUTHOR = "Christophe BLAESS"
- LICENSE="GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=8c16666ae6c159876a0ba63099614381"
- 
--BPV = "0.8.7"
-+BPV = "1.0.0"
- PV = "${BPV}"
--SRCREV = "67937230d70ad87c23c7116a72df83577e309f6f"
-+SRCREV = "f5d87954bd9e13689481700105efe2f42199d364"
- 
+diff --git a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+index eca8dfc7b7..72d6757804 100644
+--- a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
++++ b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+@@ -1,14 +1,17 @@
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=72d977d697c3c05830fdff00a7448931"
+-SRCREV = "b31bce98d65f894aad6427bcf6f3f7822e261a59"
++SRCREV = "beb4650660179963a8ed5b5cbf2085cc1b34f608"
+ PV = "1.0+git${SRCPV}"
+
+ SRC_URI = "git://github.com/hartkopp/can-isotp.git;protocol=https"
+
++
  S = "${WORKDIR}/git"
- 
--- 
-2.17.1
 
+ inherit module
+
+ EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
+
+-PNBLACKLIST[can-isotp] ?= "Kernel module Needs forward porting to kernel 5.2+"
++do_install_append() {
++    install -Dm 644 ${S}/include/uapi/linux/can/isotp.h ${D}${includedir}/linux/can/isotp.h
++}
+--
+2.32.0
