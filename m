@@ -1,59 +1,59 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.67])
- by mx.groups.io with SMTP id smtpd.web11.4433.1626255244914959873
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.66])
+ by mx.groups.io with SMTP id smtpd.web09.4396.1626255264748358098
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Jul 2021 02:34:05 -0700
+ Wed, 14 Jul 2021 02:34:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=GJP0fUiX;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.67, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=bGObPryf;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.66, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1626255243; i=@fujitsu.com;
-	bh=UKrgSzsd2+MlDN6IHy0vzvTO4Bt+P800iddziXvskYA=;
+	s=170520fj; t=1626255258; i=@fujitsu.com;
+	bh=AYhTrGpTwEPAZ+XwL/98FQW655YhdkaHvUl6TuA8nbg=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=GJP0fUiXIdqPJIJi+ECOI0FPqbuyzEc0E9ZUg35bFtgsBWXNCCNXb3WhkDnoXpJeX
-	 FfKxUnl5aaQjg7cmzkLHCLW78JMD4JviFawCguVjtSzt0xtAFraS0aWt29mUEoDLPK
-	 tdc4q/QpJjlU9EjcoRb1fXunGKxN/DEDe3Rc+NMrw1V+HhjYoJEI+kamCjjNPWr61H
-	 BJMO6IWVMl/KDeIMo88fx9HCv/72I7TMDUIHP8zteT7TsX48g77lmfcgBe5N+uB/YH
-	 jUzUMNqvdf9jZLeX6NW53U/tgbANaSmqGJc/gZAvMaPyfk5poAKYGdKyJSYs0dxeIy
-	 KEW7PsJRS4EaA==
-Received: from [100.112.199.57] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-b.eu-west-1.aws.symcld.net id DB/0F-07821-A8FAEE06; Wed, 14 Jul 2021 09:34:02 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+EI0e1a/y7
-  B4HKzpMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvHz9DzGgpOcFY+urGZvYPzC0cXIySEksI1J
-  4udauS5GLiD7JKPE9VM9LCAJNgEdiY4X3WC2iIC+xNLZe5hBbGGBAImVfyYwgdgsAqoSh2fvY
-  gOxeQXcJNrOfgerkRBQkJjy8D0zRFxQ4uTMJ2BzmAUkJA6+eAFVoyixfecZFgi7UmLPrH6mCY
-  w8s5C0zELSsoCRaRWjRVJRZnpGSW5iZo6uoYGBrqGhka6hpbmukYmlXmKVbpJeaqlueWpxia6
-  hXmJ5sV5xZW5yTopeXmrJJkZgGKUUHP25g/Hh6w96hxglOZiURHlv+LxNEOJLyk+pzEgszogv
-  Ks1JLT7EKMPBoSTBy7j2XYKQYFFqempFWmYOMKRh0hIcPEoivO4gad7igsTc4sx0iNQpRkUpc
-  V7vdUAJAZBERmkeXBssji4xykoJ8zIyMDAI8RSkFuVmlqDKv2IU52BUEuY9CzKeJzOvBG76K6
-  DFTECLtde8BVlckoiQkmpgml8Tbuqys6F3zgOxbYwd/tYdG/5xSMRJfaqebLCrOmjzkVvLdzo
-  ccXIrKEjUjdgyX5xhSuTuAjGRhA6WS38um+xlN5ds27/l5adlXukZ+UtuVH5d7dyny7PkeMQH
-  aYeU/snNE7dXOm/6ODEqXWjb1KwuoexAFcH40MpJPx3bZi8NZ0h9lGcR4XQ1sFhqYarp/QOWp
-  6629gSc2Ggnd/eA17FLx3i75A7d0KpPiN10MXJGxdObr14Fbmzlaeo8p7h4N+umtT1Ji7beil
-  8+qcBVuPvP5MT3ffVSHI9nX1didIkpdcvyzZ/c+vLCjQ3P+zKW3DhWrnDWQr9+wozjFk7uOZG
-  vnetOcqjP6Zn749p+JZbijERDLeai4kQAAzoGAR4DAAA=
+	b=bGObPryfH5dxOJPj6jjfnA4oWndUywp/ofJH3JYsPk8RYR6MUqVWXQP4I0YbbINlR
+	 xg7sXr7Xn7w3s7mP5vOS4P3vxdUgevlrau0IuBZPXaCGejGYp3/dYLAXu9zaxswsVs
+	 4BvNcyKz464Dja4RIgNI7gsioEVsME64Hj+0Td0s8LvX9r2GRVjqOO6rz8E9Nn5EZj
+	 ZNNAZrlGuEIIf34vy3KaTb1VmrIhwsEWCsFgJj5JioSSWI5E/q3pkN3vhV1NS+3jZ8
+	 umy8j3zFw75ia0La87zmImhM112+IGRF5WV3YgmiD9YciWiyOEbUzr5rYD/ocZ1bA2
+	 qOZfS9x02QRCg==
+Received: from [100.112.199.200] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-b.eu-west-1.aws.symcld.net id E9/07-27654-A9FAEE06; Wed, 14 Jul 2021 09:34:18 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYojtt/bs
+  Eg8bphhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bhCffYClZyVey93cTWwHiCs4uRi0NIYBuT
+  xPGNr9kgnJOMEs3LdjJ1MXJysAnoSHS86GYBsUUE9CWWzt7D3MXIwSEsECFx6YoqSJhFQFWie
+  dF9sHJeATeJxsnvGUFsCQEFiSkP3zNDxAUlTs58AjaGWUBC4uCLF8wQNYoS23eeYYGwKyX2zO
+  pnmsDIMwtJyywkLQsYmVYxWiQVZaZnlOQmZuboGhoY6BoaGukaWlroGpob6yVW6SbppZbqlqc
+  Wl+ga6iWWF+sVV+Ym56To5aWWbGIEhlFKwbG1Oxh73nzQO8QoycGkJMp7w+dtghBfUn5KZUZi
+  cUZ8UWlOavEhRhkODiUJXsa17xKEBItS01Mr0jJzgCENk5bg4FES4XUHSfMWFyTmFmemQ6ROM
+  SpKifN6rwNKCIAkMkrz4NpgcXSJUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjDvWZDxPJl5JX
+  DTXwEtZgJarL3mLcjikkSElFQD08omjc7q6t7pHz4Kyh6bb6X/MN3j3TVT3mT/3fZbzq4P5Zk
+  uuM1MXGDCk3MCxbL66197ufP/4NU+zTljkcXf6uuKC5LFt/Dp7ZPKE3ObL64T3RfqJL3wcMYf
+  91uNNv+rzsuULO0O/vRucschqYfMz9c88v4bV3HrlI7SDaeuQ1/LK2r0Sq/6q07QfrDr3gOvU
+  yuOmMQXrdIOM7XYorpoy/N5GU4PRfqOxj1eczzwlVbJ1mVHbmfvZBSeeHfp0WnvQ6JnhP6313
+  y6/LJXmNPtqKOvvBVfLS1boMDNGS7pIjF1dzHf0dbQe3mJGb23/7zTf/9j4bPfZYKr558JyPz
+  EerCn0al/3t0dF6/nJvAe2KPEUpyRaKjFXFScCACjmXOaHgMAAA==
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-13.tower-287.messagelabs.com!1626255242!78897!1
-X-Originating-IP: [62.60.8.84]
+X-Msg-Ref: server-8.tower-287.messagelabs.com!1626255254!79796!1
+X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 19529 invoked from network); 14 Jul 2021 09:34:02 -0000
-Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-13.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 14 Jul 2021 09:34:02 -0000
+Received: (qmail 7723 invoked from network); 14 Jul 2021 09:34:14 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-8.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 14 Jul 2021 09:34:14 -0000
 Received: from R01UKEXCASM223.r01.fujitsu.local (ex2k13_223.fs.fujitsu.com [10.182.185.121])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 16E9Y1MM023049
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 16E9YE9x030849
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jul 2021 10:34:02 +0100
+	for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jul 2021 10:34:14 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Wed, 14 Jul 2021 10:33:59 +0100
+ (TLS) id 15.0.1497.18; Wed, 14 Jul 2021 10:34:12 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-configargparse: upgrade 1.5 -> 1.5.1
-Date: Thu, 15 Jul 2021 05:33:53 +0800
-Message-ID: <1626298433-4485-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-cryptography-vectors: upgrade 3.4.6 -> 3.4.7
+Date: Thu, 15 Jul 2021 05:34:06 +0800
+Message-ID: <1626298446-4540-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -61,29 +61,29 @@ X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
 Content-Type: text/plain
 
-added get_source_to_settings_dict
+Updated Windows, macOS, and manylinux wheels to be compiled with OpenSSL 1.1.1k.
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- ...n3-configargparse_1.5.bb => python3-configargparse_1.5.1.bb} | 2 +-
+ ...y-vectors_3.4.6.bb => python3-cryptography-vectors_3.4.7.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-configargparse_1.5.bb => python3-configargparse_1.5.1.bb} (85%)
+ rename meta-python/recipes-devtools/python/{python3-cryptography-vectors_3.4.6.bb => python3-cryptography-vectors_3.4.7.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-configargparse_1.5.bb b/meta-python/recipes-devtools/python/python3-configargparse_1.5.1.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-configargparse_1.5.bb
-rename to meta-python/recipes-devtools/python/python3-configargparse_1.5.1.bb
-index 4da5288815..596d16fa4a 100644
---- a/meta-python/recipes-devtools/python/python3-configargparse_1.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-configargparse_1.5.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/bw2/ConfigArgParse"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=da746463714cc35999ed9a42339f2943"
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.6.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.7.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.6.bb
+rename to meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.7.bb
+index b5f34daefe..565e223bfc 100644
+--- a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.6.bb
++++ b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.7.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "Apache-2.0 | BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
  
--SRC_URI[sha256sum] = "dded3590373b7dae6ce6d0afeb4ae3def74761fdd78730952863914d4cb4bdb5"
-+SRC_URI[sha256sum] = "371f46577e76ec71a183b88378f36dd09f4b946f60fe60712f411b020f26b812"
+-SRC_URI[sha256sum] = "e5f88a5fb03d60b4f20eed4920638b6a3ed32a363523a77086528d557a2c2da8"
++SRC_URI[sha256sum] = "a7ac3aaa57514687696ad65f833e5e39b6fa3c5d41de2b8c938346ee119204c2"
  
- PYPI_PACKAGE = "ConfigArgParse"
+ PYPI_PACKAGE = "cryptography_vectors"
  
 -- 
 2.25.1
