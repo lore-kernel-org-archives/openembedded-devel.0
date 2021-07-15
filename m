@@ -1,79 +1,89 @@
 Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.web12.899.1626368450835691735
+ by mx.groups.io with SMTP id smtpd.web11.954.1626368451787336986
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Jul 2021 10:00:50 -0700
+ Thu, 15 Jul 2021 10:00:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=i3zNRkd1;
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=m9nqG4IB;
  spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id me13-20020a17090b17cdb0290173bac8b9c9so6886028pjb.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jul 2021 10:00:50 -0700 (PDT)
+Received: by mail-pj1-f48.google.com with SMTP id my10so4475554pjb.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jul 2021 10:00:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=wQaNnYmgWbUxa4J04nbrY4FlxEp90I9mjHmtQdoslPw=;
-        b=i3zNRkd1s+n1ItSMRMM3Osj2gNBQfX7vZ+6v/l6cpypmjQEA7undnplkDZmUqy1yxG
-         nLhj7tacRwqBWhkTYkQzE3HG9klDGkOqRTOOnM19YBndu7ms6F5etgE/5pog58CcH3NO
-         Rlie5DcM3SokOrRc3y8fB9yUFBD9VMXkyNbkPbA4xC4U1eyROMD36h6QUo6YfJWIcULn
-         o8ZEIIWxBkTRHmG0iGa5HrVUpDS29TVs2vlO7vHnttnAChWBsPOPIfviwsEWfv/f8h0U
-         hzdPkallNUYapw5yqlPTYsuK7uebhwoSGl7npRaR2TqWVy6XVsdp1JVKQHHt/SeCQ/QZ
-         5I/g==
+        bh=AA5oFdd0uuCdEvZsJ9OR+Vc5F2YdxYGSKKFjlYohoOM=;
+        b=m9nqG4IBRtnUgGbeShikit9tf2jfbEnk4sxekyQ9LZmla4ZxZxgAmFFWG1OSoJoEvH
+         1W0+roNQ97mDM2kdNu+Ew8BZBzajMvf9RDOroYne98SUKqlAhoDoMOqtM54uyENnN15t
+         HoYGcwCzPvrLQkqAIJBwu/qdoBTdsSfMV3jQXnWmR7ksSp9pH3KNOysmcfLAwjbqcZsd
+         4fvDlDPlfe6wB9khfv5X8L1mdTE0hif+CJV59CELtje/VWJBiyjvrzfy03o5eIU9L9bn
+         Y5NVIP3+XnP3FVDnrGGxA8BBq6anJrx/koAe91Y67+exgq6PwOYTUVzz5XEbnMjJgsql
+         SAOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=wQaNnYmgWbUxa4J04nbrY4FlxEp90I9mjHmtQdoslPw=;
-        b=p4RIZ6G4ZrrE8jH6vXSAOZYYIH2x2r+Dk0N1/Xmf/FgQoplA3u/2rHV9YzL1+eAXn+
-         iECONA8/YEtqUVetm6zwgP/Avo/NO/gHX9XzB55GoYiyTie+GIOJ1dFe0+TNvkUEr8Ki
-         a25l4bxIMW7LQWOi8E5ThnirFjIQ2Mn8EmbZBglScAqY16Roee+ncdEDgz+DNMoKqgII
-         F5eeczAVspslUls5qfH0Mk+kLB9JN6qDgJGUmHF64vSUSmxyfKkrQhIkHpY+vDzbmlYe
-         KE5rZXcR/wGo+UJZ92vOoasOM5YFy5n0ubEM++CfxUNac4BFYUMvgjaaNWNBKg0Scwdt
-         C+7w==
-X-Gm-Message-State: AOAM532uX4TcsiRgaQx/UmXSium0RGc7tff/ozWvTBmUDe8WGRU8pckd
-	RTCRsQ+ryBDGJ3jUUIJvo1Qaul0B16M=
-X-Google-Smtp-Source: ABdhPJxzPfWuWkwZKNMo3R3TmCN0jJqidvpnbnPgVWcMAxApd1oZNBoZc6u8X54PX44aAi+hYkbVIg==
-X-Received: by 2002:a17:902:e843:b029:129:acb4:2464 with SMTP id t3-20020a170902e843b0290129acb42464mr4107756plg.77.1626368450172;
-        Thu, 15 Jul 2021 10:00:50 -0700 (PDT)
+        bh=AA5oFdd0uuCdEvZsJ9OR+Vc5F2YdxYGSKKFjlYohoOM=;
+        b=DH7GDKZS8cxKM9M+b9ZoHOgqjdCByYdLI0X8Cm9JHe7vZB3Db2vzgRbdN593WwcCNP
+         O5JqK4G69bUCbInxxYgiz0ybfnED/w+yZ1MG1dAXOQqUTMQorF33FtthcLQ/J+n34f2m
+         bMlEsxmhQ4/WHywIHITLRU92eeJMFqu3NIYYNdPSWx9mGT2BzfzTDns+pTtAlGV39RVm
+         YjGaokd6KZf/gR8Q41NykOWkptbrfV3ZO5VN4k9wSHOCXdXxTI9aDX1aYx22Du6xtBY6
+         rjDe1Abk9Px0H/yO+l2DF0H6Q7DMt2dYfGozoLV4G/gFcarHHN3ezhqqGtVMAgV9oOoQ
+         Mt5A==
+X-Gm-Message-State: AOAM530UPV6QKlgm0ARLi+q83lgMylYEiEBINo4l/3kMkuQybywwxGTm
+	Co24aH7poEzgygbuxEnhFLkya3A2ZyI=
+X-Google-Smtp-Source: ABdhPJz88UVwPWFR0FEht2YK9yOUVv7L30qrTxDkB5nESHfllRaLl3kTyttxT6NB+xo7f5IK/HDZ3w==
+X-Received: by 2002:a17:90a:74c8:: with SMTP id p8mr11044393pjl.70.1626368451092;
+        Thu, 15 Jul 2021 10:00:51 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.caveonetworks.com ([2601:202:4180:a5c0:bd64:b325:a706:6ef2])
-        by smtp.gmail.com with ESMTPSA id d23sm5805563pjd.25.2021.07.15.10.00.49
+        by smtp.gmail.com with ESMTPSA id d23sm5805563pjd.25.2021.07.15.10.00.50
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Jul 2021 10:00:49 -0700 (PDT)
+        Thu, 15 Jul 2021 10:00:50 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 4/7] nss: add CVE-2006-5201 to allowlist
-Date: Thu, 15 Jul 2021 10:00:39 -0700
-Message-Id: <ace5cd9a8bb6ba0058caf8a148437820a9336b9c.1626359076.git.akuster808@gmail.com>
+Subject: [hardknott 5/7] ntp: fix ntpdate to wait for subprocesses
+Date: Thu, 15 Jul 2021 10:00:40 -0700
+Message-Id: <f52ce99b468eff95b6e36caf41fb50808a26f8d5.1626359076.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1626359076.git.akuster808@gmail.com>
 References: <cover.1626359076.git.akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Masaki Ambai <ambai.masaki@fujitsu.com>
+From: Adrian Zaharia <Adrian.Zaharia@windriver.com>
 
-CVE-2006-5201 affects only using an RSA key with exponent 3 on Sun Solaris.
+When using systemd, ntpdate-sync script will start in background
+triggering the start of ntpd without actually exiting.
+This results in an bind error in ntpd startup.
 
-Signed-off-by: Masaki Ambai <ambai.masaki@fujitsu.com>
+Add wait at the end of ntpdate script to ensure that when the ntpdate.service
+is marked as finished the oneshot script ntpdate-sync finished and unbind the
+ntp port
+
+Fixes #386
+
+Signed-off-by: Adrian Zaharia <Adrian.Zaharia@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 44113dcb5feea5522696d43d00909db41e5e6dbc)
+(cherry picked from commit 73d5cd5e8d9d8a922b6a8a9d90adf0470a99314e)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/nss/nss_3.64.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-networking/recipes-support/ntp/ntp/ntpdate | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-oe/recipes-support/nss/nss_3.64.bb b/meta-oe/recipes-support/nss/nss_3.64.bb
-index 9c4c03df99..97193aff5c 100644
---- a/meta-oe/recipes-support/nss/nss_3.64.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.64.bb
-@@ -282,3 +282,6 @@ FILES_${PN}-dev = "\
- RDEPENDS_${PN}-smime = "perl"
+diff --git a/meta-networking/recipes-support/ntp/ntp/ntpdate b/meta-networking/recipes-support/ntp/ntp/ntpdate
+index 17b64d1335..be3bacfcd1 100755
+--- a/meta-networking/recipes-support/ntp/ntp/ntpdate
++++ b/meta-networking/recipes-support/ntp/ntp/ntpdate
+@@ -52,3 +52,8 @@ if [ -x /usr/bin/lockfile-create ] ; then
+ fi
  
- BBCLASSEXTEND = "native nativesdk"
+ ) &
 +
-+# CVE-2006-5201 affects only Sun Solaris
-+CVE_CHECK_WHITELIST += "CVE-2006-5201"
++# wait for all subprocesses to finish
++# this is required when using systemd service as ntpd will start before ntpdate finishes
++# and results in a bind error (port 123)
++wait
 -- 
 2.25.1
 
