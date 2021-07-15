@@ -1,110 +1,85 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.114])
- by mx.groups.io with SMTP id smtpd.web12.9035.1626360634736878390
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web12.171.1626365357595729379
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Jul 2021 07:50:35 -0700
+ Thu, 15 Jul 2021 09:09:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=iuMGTA2K;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.114, mailfrom: wangmy@fujitsu.com)
-Return-Path: <wangmy@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1626360632; i=@fujitsu.com;
-	bh=IJZ2pqkn2PmWJNiEmqD4BsSc/4Mf7iPjEPqefN3049E=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=iuMGTA2K/3ehuE/THflGyWpEdODp4WCNfJG9KBKxvSUboUaLsjtj7fb4KveuA7vu+
-	 tgfxUjtUeZxJz048gmbEePLlZzNUt6WJ0aYvKo1/HfUZiPwcM7eQVKMJNF3vgQoVu0
-	 8FiY5Zk8gqDP9Mvift3z+Pls/zdLlWLjUok50wZPEWUTNNqsGB9uZ21OGc9j6Jezoe
-	 +vTsAT4vZGuVJXqLZs9jpYoNV+Wuk/xU93iDx7dnVsrfrMQxNAqGE+rJ2inaxFKBg+
-	 2HVj5QgUEf73pIGWZ4S4/qctaiHtm/G4etp7WXsYJ90Uzu+N3WkIdiJ0YpSjW5LmJ7
-	 rARGsR//9B+hQ==
-Received: from [100.113.4.179] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-b.eu-central-1.aws.symcld.net id BB/62-07695-83B40F06; Thu, 15 Jul 2021 14:50:32 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrMIsWRWlGSWpSXmKPExsViZ8MRqmvh/SH
-  BYMIhZouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPd8YSCd4IVja8WsjUwXuPvYuTiEBLYxiSx
-  7tg9FgjnJKPE2sMHmbsYOTnYBNQkpt+6wQpiiwjoSyydvQcsziygIvHidw87iC0sYCtxZMpfJ
-  hCbRUBV4u+bPWwgNq+Ak8Sd5WfB6iUEFCSmPHzPDBEXlDg58wkLxBwJiYMvXkDVKErMvtwMFO
-  cAsislbjxOncDIOwtJxywkHQsYmVYxWiYVZaZnlOQmZuboGhoY6BoaGuua6hqaGuslVukm6aW
-  W6ian5pUUJQJl9RLLi/WKK3OTc1L08lJLNjECwyulkHXmDsZPrz/oHWKU5GBSEuXd1Po+QYgv
-  KT+lMiOxOCO+qDQntfgQowwHh5IEL4PnhwQhwaLU9NSKtMwcYKjDpCU4eJREeP3tgNK8xQWJu
-  cWZ6RCpU4y6HC+uLl7ELMSSl5+XKiXOKwYyQwCkKKM0D24ELO4uMcpKCfMyMjAwCPEUpBblZp
-  agyr9iFOdgVBLmdQOZwpOZVwK36RXQEUxAR2iveQtyREkiQkqqgaku8nyHXe0t6zU6FsyTvO4
-  yu8h4TLabfqP1G+OD2OCLrKLOc05OjwtfJ8D79ta+zZc8dcz6Qr6mux9l8038ddZxmelxZ6b7
-  t0JnRYmXLFpy086n++/HdD2L1+sES/fZivP57P0jpRlyS6Lss2/7DcGphXW/X9ZwtIptNC6ql
-  576W8/4kHdeeP0SDd3+zezmN9s3eeUtbNwleGnrbJkjG6/vPzpxYS7/zsNPKs6e97jntVaMx9
-  HA//WDSO+Xnx8aCLBxHjxgGaWS4dRouvChdXHSZal7pRtXJL49Oavsh+LyTpZf3Vu+6/1UmGL
-  AoOB2fH7+jIqgAxcMgv4s5Sr5fMuu9of/I+s7HaZc3apiJ5RYijMSDbWYi4oTAaEMA2g2AwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-2.tower-248.messagelabs.com!1626360631!50734!1
-X-Originating-IP: [62.60.8.85]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 23669 invoked from network); 15 Jul 2021 14:50:31 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-2.tower-248.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 15 Jul 2021 14:50:31 -0000
-Received: from R01UKEXCASM223.r01.fujitsu.local (ex2k13_223.fs.fujitsu.com [10.182.185.121])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 16FEoOtw014590
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jul 2021 15:50:31 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 15 Jul 2021 15:50:22 +0100
-From: "wangmy" <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] icewm: upgrade 2.3.4 -> 2.6.0
-Date: Thu, 15 Jul 2021 22:50:09 +0800
-Message-ID: <1626360609-26207-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
-Content-Type: text/plain
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=41550 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.93)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1m43vG-0000O5-J5; Thu, 15 Jul 2021 19:09:15 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-pandas: Upgrade 1.2.5 -> 1.3.0
+Date: Thu, 15 Jul 2021 19:09:04 +0300
+Message-Id: <20210715160906.26266-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Changelog:
-Keep track of changes to modal flag.
-Optimize raising of modal windows.
-Fix a memory leak for dynamic menu's.
-Free start menu and windowlist menu on exit.
-Fix for browse menu's for root and home in start menu.
-Eliminate several memory leaks in icon handling.
-Use absolute paths for the Exec definition in desktop files.
-Only do a passive grab on buttons which are defined by the ButtonRaiseMask.
-Guard against buffer overflow when copying the degrees centigrade symbol.
-When a focused window can't raise, or there is no overlapping window,
-then there shouldn't be a passive button grab by icewm, in order to
-improve menu handling in applications which don't use windows for menu's.
-Release the passive button grab from a focused window,
-when a button click wouldn't raise it, for improved menu
-handling for applications with internal menu's (CSS drawing).
-These fix the Debian Bug report with number #989764:
-"icewm: Intermittently unable to select menu items in drop-down menus.",
-which was reported versus IceWM version 2.1.2 on June 12 on:
-https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=989764.
+Upgrade to release 1.3.0:
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+- Custom HTTP(s) headers when reading csv or json files
+- Read and write XML documents
+- Styler enhancements
+- DataFrame constructor honors copy=False with dict
+- PyArrow backed string data type
+- Centered datetime-like rolling windows
+- Bug fix: Categorical.unique now always maintains same dtype as
+  original
+- Bug fix: preserve dtypes in DataFrame.combine_first()
+- Bug fix: Groupby methods agg and transform no longer changes
+  return dtype for callables
+- Bug fix: Consistent casting with setting into Boolean Series
+- Bug fix: GroupBy.rolling with MultiIndex no longer drops levels
+  in the result
+
+License-Update: Update license year
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-extended/icewm/{icewm_2.3.4.bb => icewm_2.6.0.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/icewm/{icewm_2.3.4.bb => icewm_2.6.0.bb} (94%)
+ .../{python3-pandas_1.2.5.bb => python3-pandas_1.3.0.bb}     | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pandas_1.2.5.bb => python3-pandas_1.3.0.bb} (76%)
 
-diff --git a/meta-oe/recipes-extended/icewm/icewm_2.3.4.bb b/meta-oe/recipes-extended/icewm/icewm_2.6.0.bb
-similarity index 94%
-rename from meta-oe/recipes-extended/icewm/icewm_2.3.4.bb
-rename to meta-oe/recipes-extended/icewm/icewm_2.6.0.bb
-index f80611356f..90c0d244f2 100644
---- a/meta-oe/recipes-extended/icewm/icewm_2.3.4.bb
-+++ b/meta-oe/recipes-extended/icewm/icewm_2.6.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4a26952467ef79a7efca4a9cf52d417b"
- SRC_URI = "https://github.com/ice-wm/${BPN}/releases/download/${PV}/${BPN}-${PV}.tar.lz \
-            file://0001-configure.ac-skip-running-test-program-when-cross-co.patch \
-            "
--SRC_URI[sha256sum] = "1368f7db61589b1309274a2fe7250961e21904a294b1cff2c13273abd73725f4"
-+SRC_URI[sha256sum] = "33cc69ba1fb762d85cc2755a930d6cf1a7c23e33f736ef2ec01c59d612f9b2eb"
+diff --git a/meta-python/recipes-devtools/python/python3-pandas_1.2.5.bb b/meta-python/recipes-devtools/python/python3-pandas_1.3.0.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-pandas_1.2.5.bb
+rename to meta-python/recipes-devtools/python/python3-pandas_1.3.0.bb
+index 71386dc94a..b98e2865c7 100644
+--- a/meta-python/recipes-devtools/python/python3-pandas_1.2.5.bb
++++ b/meta-python/recipes-devtools/python/python3-pandas_1.3.0.bb
+@@ -4,9 +4,9 @@ high-performance, easy-to-use data structures and data analysis tools for \
+ the Python programming language."
+ HOMEPAGE = "http://pandas.pydata.org/"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=c2a8f987b2ce77c368c6b3e1b5b10774"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3f23c5c092b74d245d48eeef72bc3fd2"
  
- UPSTREAM_CHECK_URI = "https://github.com/ice-wm/${BPN}/releases"
+-SRC_URI[sha256sum] = "14abb8ea73fce8aebbb1fb44bec809163f1c55241bcc1db91c2c780e97265033"
++SRC_URI[sha256sum] = "c554e6c9cf2d5ea1aba5979cc837b3649539ced0e18ece186f055450c86622e2"
  
+ inherit pypi setuptools3
+ 
+@@ -20,6 +20,7 @@ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-json \
+     ${PYTHON_PN}-numpy \
+     ${PYTHON_PN}-dateutil \
++    ${PYTHON_PN}-dateutil-zoneinfo \
+     ${PYTHON_PN}-pytz \
+     ${PYTHON_PN}-profile \
+ "
 -- 
-2.25.1
+2.17.1
 
