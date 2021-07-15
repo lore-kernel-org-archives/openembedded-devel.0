@@ -1,65 +1,62 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web11.4807.1626334069517663896
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.2])
+ by mx.groups.io with SMTP id smtpd.web12.4944.1626335530317737347
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Jul 2021 00:27:49 -0700
+ Thu, 15 Jul 2021 00:52:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=xA6vVIdq;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=rNfb9GpP;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: wangmy@fujitsu.com)
 Return-Path: <wangmy@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1626334067; i=@fujitsu.com;
-	bh=Sb7RokcaggVvYuLoSFU78BwaaR01oUYr2YST0n2wbDE=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=xA6vVIdqdvrKeI5Q/41RopNxxdiW6WeiIsQ4WArx/VBPpwqVUhzjYsu6KXitiJjeW
-	 6uk+ylOwR1pDyqTMacxBSV40aPOtUuiog1jMCYjCCiyJBlHqE3B5BqSaQsxQWf7MvH
-	 yK3Z41b2JErQbBoOAWvzSDg3RvjwiRkD7eH5+gcPcP+DMI6vX0e3TwNh3HxrI97TBC
-	 b6qfz8D5zSdeX7c8n6Xxchr40h0FNc/8ALqTTBfY+EzvbDQBWmHj6q9CFR8Q1IP1H7
-	 GnkaDgngy+fnY1CEuztxyR53vLTHPZb53KXtweLCnDWrswqh5gd64xCvyUM6w0rENn
-	 WQHnPMgSWgblQ==
-Received: from [100.113.0.182] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-a.eu-central-1.aws.symcld.net id AE/01-03136-373EFE06; Thu, 15 Jul 2021 07:27:47 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrDIsWRWlGSWpSXmKPExsViZ8MRqlv0+H2
-  Cwb9WI4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaO/fQNTwUPOijVPupkbGB9zdDFycQgJbGOS
-  OLV6PhOEc5JR4tCrx2xdjJwcbAJqEtNv3WAFsUUE9CWWzt7DDGIzC6hIvPjdww5iCwt4S0x7P
-  hUsziKgKrFh61mwOK+Ak8S8tdPAeiUEFCSmPHwPVsMp4Cyx/MQBFhBbCKjm5cnFLBD1ghInZz
-  5hgZgvIXHwxQtmiF5FidmXm4HiHEB2pcSNx6kTGPlnIemYhaRjASPTKkbLpKLM9IyS3MTMHF1
-  DAwNdQ0NjXWNdQ0sTvcQq3US91FLd5NS8kqJEoKxeYnmxXnFlbnJOil5easkmRmBAphQyH9rB
-  +OT1B71DjJIcTEqivJta3ycI8SXlp1RmJBZnxBeV5qQWH2KU4eBQkuDleASUEyxKTU+tSMvMA
-  UYHTFqCg0dJhPfxPaA0b3FBYm5xZjpE6hSjLsfl6/MWMQux5OXnpUqJ89o/BCoSACnKKM2DGw
-  GL1EuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHmtQS7hycwrgdv0CugIJqAjtNe8BTmiJBE
-  hJdXAtDqy7Q6Dx3E9bR/jL5rljgFX0yKTrsoIH3Xq6TrDsMLueoWa33OmnexTz4kHem6O31nk
-  WH7smLnK7Z7Nm0qTey8+yXwucy8z+Xt70uPStQrH7v6NNgzd3XP029EvX8tOh69ZwHqqR3kH3
-  1370JdsahzzfTo1ZP6/rilqaJgkNM/2AeNk9wlfr5g8k+e9siDRYLODXPjObkcjJdvHazqtPg
-  mm1LX2/n21cs6lmENpPHPO2UizXJr++8GJmdtuperunLFAfL7bk4r9EsY/1ky96zPFO/unXuI
-  sP9V9e0RWbRfqzt21uz/D6pumfO7eW4oXfVo0Qn/cElkm8Hg1k/8uRT7GOtUpXsbNl/Q3/j4j
-  q8RSnJFoqMVcVJwIAKFya9ZPAwAA
+	s=170520fj; t=1626335528; i=@fujitsu.com;
+	bh=qdpMsmLUmYKlWWwPnEMTVH7VQ07LGBUbBPwiA2U7qSY=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=rNfb9GpPsWgH8NRQq1wIFjhSuTKTYM4FVhtX8wiM/qrp+1ikqN5qLK/sCO8paB2xN
+	 +h8uEvVjARWbaVRUR7yy66/uMITuibfhA7iaYfwtzw6ej0XRomWM4Kj/+ACRaxVe+N
+	 Gq/OTPReBezOMovR0ljxugorUH/EW3/vkfsRy/I9e4fxgTFKxNKG5WlR0M9IcpFnaC
+	 aDxKYT7oPpnSmbQRa5dygewluKkaxmIrgr/ORNBRz8+aqtuHI2FcuRTwqYg5Hts1/2
+	 9pUntxd4kP20BUR4byT7M9Yiu1Mbvf7OEJ53ebyCce3e11K0jiAxFvVx+y+HA1vZlA
+	 mOK+f9GDT1tfw==
+Received: from [100.112.192.137] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-a.eu-west-1.aws.symcld.net id 43/58-07839-829EFE06; Thu, 15 Jul 2021 07:52:08 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrDIsWRWlGSWpSXmKPExsViZ8MxVVfj5fs
+  Eg+WbGS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oyXbxezF0zmqDi7/jNbA+N+9i5GLg4hgW1M
+  EreedbNCOCcZJd6fuw7kcHKwCahJTL91A8wWEdCXWDp7DzOIzSygIvHidw9QNweHsIC/xP07L
+  iBhFgFViadXboCV8Ao4Sfx42wJmSwgoSEx5+B4qLihxcuYTFogxEhIHX7yAqlGUmH25mQVkpI
+  RApcSNx6kTGHlnIemYhaRjASPTKkaLpKLM9IyS3MTMHF1DAwNdQ0MjXUNLIDYx0Uus0k3USy3
+  VLU8tLtE11EssL9YrrsxNzknRy0st2cQIDK6UggMTdjDuf/1B7xCjJAeTkijvptb3CUJ8Sfkp
+  lRmJxRnxRaU5qcWHGGU4OJQkeL8/A8oJFqWmp1akZeYAAx0mLcHBoyTCy/kCKM1bXJCYW5yZD
+  pE6xRjO8WbtkkXMHG/BZNu9u0CyHUzOXHBwNTPHLDB5v/0QkHwAIoVY8vLzUqXEeY88BxonAD
+  IuozQPbhkski8xykoJ8zIyMDAI8RSkFuVmlqDKv2IU52BUEuZdBXIUT2ZeCdxNr4DOZQI6V3v
+  NW5BzSxIRUlINTHa35/1avuhtGXPnC9doCbYNrn+PlFbt6V2pLepS2PiGM0RrZenehGzZh18u
+  xUQfuiHe6BvAI+3t+ab7rsN0jftxMmwvy5N97PhZDQM3RPfPm2h56aPQivdbXoiuFAn93Faoc
+  /33WxWDn/5bbv7p79n6M+H0mvLsTxOPCbFeV368/OuKv8rqrOdSOq0UP3RfFn8Ve0ny4Z27UQ
+  7uE7oeb2M79nChwa2rLntSu45Pmnox1Mqbb9MExsP3V3YZ29Z+bNt/Xv5S9Ezp44Ku0d9+hO3
+  VPfbmzduTJa7Jz7qWetzmVJi1cILkxt1+4akGv2YpfYzIy+Qq2VMc9846omPPxjcnG6r4biu1
+  R/OfOVRQtEyJpTgj0VCLuag4EQBBhvyaXwMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-2.tower-228.messagelabs.com!1626334066!12423!1
-X-Originating-IP: [62.60.8.85]
+X-Msg-Ref: server-4.tower-271.messagelabs.com!1626335527!218857!1
+X-Originating-IP: [62.60.8.149]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 12950 invoked from network); 15 Jul 2021 07:27:46 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-2.tower-228.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 15 Jul 2021 07:27:46 -0000
+Received: (qmail 8528 invoked from network); 15 Jul 2021 07:52:07 -0000
+Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
+  by server-4.tower-271.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 15 Jul 2021 07:52:07 -0000
 Received: from R01UKEXCASM223.r01.fujitsu.local (ex2k13_223.fs.fujitsu.com [10.182.185.121])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 16F7RbT4016385
+	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 16F7q435003387
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jul 2021 08:27:46 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jul 2021 08:52:07 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 15 Jul 2021 08:27:37 +0100
+ (TLS) id 15.0.1497.18; Thu, 15 Jul 2021 08:52:03 +0100
 From: "wangmy" <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-filesystems] [PATCH] xfsprogs: upgrade 5.10.0 -> 5.12.0
-Date: Thu, 15 Jul 2021 15:27:21 +0800
-Message-ID: <1626334041-25250-2-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] ctags: upgrade 5.9.20210627.0 -> 5.9.20210711.0
+Date: Thu, 15 Jul 2021 15:51:50 +0800
+Message-ID: <1626335510-25374-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1626334041-25250-1-git-send-email-wangmy@fujitsu.com>
-References: <1626334041-25250-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.33]
 X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
@@ -68,26 +65,26 @@ Content-Type: text/plain
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../xfsprogs/{xfsprogs_5.10.0.bb => xfsprogs_5.12.0.bb}         | 2 +-
+ .../ctags/{ctags_5.9.20210627.0.bb => ctags_5.9.20210711.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-filesystems/recipes-utils/xfsprogs/{xfsprogs_5.10.0.bb => xfsprogs_5.12.0.bb} (96%)
+ rename meta-oe/recipes-devtools/ctags/{ctags_5.9.20210627.0.bb => ctags_5.9.20210711.0.bb} (95%)
 
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.10.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.12.0.bb
-similarity index 96%
-rename from meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.10.0.bb
-rename to meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.12.0.bb
-index 509dbd620b..c2d0595290 100644
---- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.10.0.bb
-+++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.12.0.bb
-@@ -12,7 +12,7 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
-            file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch \
-            file://0001-support-usrmerge.patch \
-            "
--SRC_URI[sha256sum] = "e04017e46d43e4d54b9a560fd7cea922520f8f6ef882404969d20cd4e5c790e9"
-+SRC_URI[sha256sum] = "bec44445cf18f49e63971d4f27dc4e90a17b118b852714a1104b621ea30e3507"
- inherit autotools-brokensep
+diff --git a/meta-oe/recipes-devtools/ctags/ctags_5.9.20210627.0.bb b/meta-oe/recipes-devtools/ctags/ctags_5.9.20210711.0.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/ctags/ctags_5.9.20210627.0.bb
+rename to meta-oe/recipes-devtools/ctags/ctags_5.9.20210711.0.bb
+index 7d01bba697..4be634b38f 100644
+--- a/meta-oe/recipes-devtools/ctags/ctags_5.9.20210627.0.bb
++++ b/meta-oe/recipes-devtools/ctags/ctags_5.9.20210711.0.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
- PACKAGES =+ "${PN}-fsck ${PN}-mkfs ${PN}-repair libhandle"
+ inherit autotools-brokensep pkgconfig manpages
+ 
+-SRCREV = "c436bca61f1fb92d2c6d5767ae4b307efab678f3"
++SRCREV = "c81079788bfe650190db8ac9df80d63d2bc160aa"
+ SRC_URI = "git://github.com/universal-ctags/ctags"
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.25.1
 
