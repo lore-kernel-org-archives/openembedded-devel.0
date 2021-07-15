@@ -1,189 +1,108 @@
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web10.2165.1626311609667191453
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.3])
+ by mx.groups.io with SMTP id smtpd.web12.4809.1626334069060859509
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Jul 2021 18:13:30 -0700
+ Thu, 15 Jul 2021 00:27:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dH6T5d39;
- spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id c15so2333764pls.13
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jul 2021 18:13:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=qNZAC3g0S0xtUYOpkdU1EKqAOsTw9CdFKehGOvEkPpo=;
-        b=dH6T5d39OAj87CYqx/u2s7/ZbErKmQOmstryrRvggMseLGO7LTGqUD06hXvY96lImE
-         sfk9eYydfuHB4NXLk+GY81pxQHErKhIA4nxWGHEeUYgbrsDSezaF6bZ5YXRLQahrrdvr
-         IYTAFNH67BAkSlO0NTTaVwXeXPuQe7wga98tcbGZ5D/2OVsKRpc5neVBgb2oZ7wSyn1K
-         YBLyC/4AxZB7OTZINPdmeYxL3O0J/CSDjK+rt3ZtPrXshRqtewmiHQHq1PO0excHHpql
-         1N23z+8e459TwfAIFqlZ09zLrZbTYU6PP4h9GtZT2uwNiDIBEjWsx2VmdU+Q1lLwYcXn
-         V5OQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=qNZAC3g0S0xtUYOpkdU1EKqAOsTw9CdFKehGOvEkPpo=;
-        b=X5SXLLdnAncpSYr+KaySxgIrAQpsBYp7ODa6QXbBL9HH86sKgRJ+TsENWkNUA3P2Zw
-         gn1pX5QaPWr/h21xCuVfgV0ekVO3eMUsxnR2PoRx3sI8h+4HKM6O7ZHSbHIolvUkada8
-         GGGgPusfa06Nw4/Cp1r3sBkTusCXy9JuzKZRzBL/DujMzN9I0ZMuw7V+ESZqVQdKxQbe
-         fmy48WGnEXhNdzNTN8H6ifMAYXM90Gy2Q8IR0b+xmPbaI8LXYfAy4K6LrHa7Y8Oa9XJU
-         mWloXPecczdkpaNChZ1CVyByZf280ZDJCqi+S7OsQ0EWuMCU0duVt/TjLoIcT5jPOSbv
-         r5bQ==
-X-Gm-Message-State: AOAM532SXB3hn0LggYb7k3F7jbot6oJS3hmSBf+h1kALCdGp/o/alL+0
-	QAYZDk3BCRNQF/3YZmXSKw3EzmiexEViNQ==
-X-Google-Smtp-Source: ABdhPJznxOVYbx3/KR7H57d7NSDuZLwevHDbSdcRU7olg/WgzxxzCABgnKJTSWcQDhoZ552V3UoCWA==
-X-Received: by 2002:a17:902:b285:b029:129:c8a4:3934 with SMTP id u5-20020a170902b285b0290129c8a43934mr826168plr.75.1626311608896;
-        Wed, 14 Jul 2021 18:13:28 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::5593])
-        by smtp.gmail.com with ESMTPSA id j2sm4317159pfb.53.2021.07.14.18.13.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Jul 2021 18:13:28 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] postfix: Upgrade to 3.6.1
-Date: Wed, 14 Jul 2021 18:13:26 -0700
-Message-Id: <20210715011326.3714680-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.32.0
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=eLEFP7AZ;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.3, mailfrom: wangmy@fujitsu.com)
+Return-Path: <wangmy@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1626334067; i=@fujitsu.com;
+	bh=GSGncSU6ii0Jf1WGHt8W/99yvbof+6sK0qVoXTyUCI4=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=eLEFP7AZKrBcrcmqtjS7zIG/uGqEM97eBigEKktEef8d/MzhpTOAou2C2XeBnIPye
+	 7/ehlvr6yRnNGu6yvH+1hO1kQeZUyxaoa95n8nIfP0/IEX329/UNpIE4w0/1ajK82P
+	 9PBsnlZ58xmtOpi5whgQcl+A6fn1wd2B+jC5ZniepfvO/tr91WRQSB7EJHWwp5vjUy
+	 otS2gJ2p2y88i8uZdVbaPvgwm425AxA4tBjWI0H87wv0PwJ6de6+n19RfsiNNi8i7L
+	 ZALsG0vQKdQYBgJwvOanr88KS8sWpB4WoS8yMI/PpQDU2rW2zYWbmOLxEE+2RuricE
+	 jjzrDVTfbGyQQ==
+Received: from [100.112.192.148] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta.az-a.eu-west-1.aws.symcld.net id 90/33-07800-273EFE06; Thu, 15 Jul 2021 07:27:46 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrDIsWRWlGSWpSXmKPExsViZ8MRqlv0+H2
+  CwZKLShYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8akdUeZC2byVuxYuYa5gfEudxcjJ4eQwDYm
+  iSUfxboYuYDsk4wSp2fMZwNJsAmoSUy/dYMVxBYR0JdYOnsPM4jNLKAi8eJ3DzuILSzgJXHiW
+  x9YPYuAqsT2Ay8YQWxeASeJtosdYHEJAQWJKQ/fM0PEBSVOznzCAjFHQuLgixfMEDWKErMvNw
+  PFOYDsSokbj1MnMPLOQtIxC0nHAkamVYwWSUWZ6RkluYmZObqGBga6hoZGuoaWRrpGBiZ6iVW
+  6iXqppbrlqcUluoZ6ieXFesWVuck5KXp5qSWbGIHBlVJw4MwOxlOvP+gdYpTkYFIS5d3U+j5B
+  iC8pP6UyI7E4I76oNCe1+BCjDAeHkgQvxyOgnGBRanpqRVpmDjDQYdISHDxKIryP7wGleYsLE
+  nOLM9MhUqcYwznerF2yiJnjLZhsu3cXSLaDyZkLDq5m5pgFJu+3HwKSD0CkEEtefl6qlDiv/U
+  OgcQIg4zJK8+CWwSL5EqOslDAvIwMDgxBPQWpRbmYJqvwrRnEORiVhXmuQm3ky80rgbnoFdC4
+  T0Lnaa96CnFuSiJCSamCaX/u1letFahHfLe+zOuKf1ltUdhXtCjFPWOLolHHp0sENzjttw+YI
+  GGZwu9dtP7iuykQ6XkWoMk+PLb3ggjdTnkVEjqTqbf65/GvUlhQvs6tavHTJw2Vps7WP8P88G
+  jVd4XJ94/uHi6zn74gRXney4FOo/6bu22c/BrXd6131JqVbuO8xa/bODdffFVcGpx25Wu/kGX
+  2fxX37ruOHNt/Z9PF7ZWoTi9WPD9aLp6hLfcuSy0rYc67fWLma63xV6KvPVv27w6L7z4dezXq
+  buOdh1zzjFMGCatbZj5jaAhNVI5/9zoyO3pOlMkkx9Juty7FZOccW6K/vMlnZbzP3g5zxz7jM
+  zWqv3xrfNEtzeqnEUpyRaKjFXFScCADoar5aXwMAAA==
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-9.tower-267.messagelabs.com!1626334066!170733!1
+X-Originating-IP: [62.60.8.85]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 5514 invoked from network); 15 Jul 2021 07:27:46 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-9.tower-267.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 15 Jul 2021 07:27:46 -0000
+Received: from R01UKEXCASM223.r01.fujitsu.local (ex2k13_223.fs.fujitsu.com [10.182.185.121])
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 16F7RbT2016385
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jul 2021 08:27:46 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Thu, 15 Jul 2021 08:27:35 +0100
+From: "wangmy" <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-filesystems] [PATCH] fatresize: upgrade 1.0.2 -> 1.1.0
+Date: Thu, 15 Jul 2021 15:27:20 +0800
+Message-ID: <1626334041-25250-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
+Content-Type: text/plain
 
-Fix build with glibc 2.34+
-Details of this release [1]
+License_Update: Update license to GPLv3
 
-[1] http://cdn.postfix.johnriley.me/mirrors/postfix-release/official/postfix-3.6.1.RELEASE_NOTES
+version 1.1.0:
+ - drop support for libparted older than 2.4 (#16)
+ - introduce `-n, --partition` to set a partition number when
+   dealing with file dumps, /dev/loop and /dev/ram devices (#15)
+ - ask confirmation for operations (e.g. FAT32 -> FAT16 conversion),
+   add `-f, --force` option to not prompt (#13)
+ - do not limit FAT32 usage on small partitions (#11)
+ - update ChangeLog (#10)
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...7-correct-signature-of-closefrom-API.patch | 101 ++++++++++++++++++
- .../{postfix_3.4.12.bb => postfix_3.6.1.bb}   |   3 +-
- 2 files changed, 103 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-daemons/postfix/files/0007-correct-signature-of-closefrom-API.patch
- rename meta-networking/recipes-daemons/postfix/{postfix_3.4.12.bb => postfix_3.6.1.bb} (82%)
+ .../fatresize/{fatresize_1.0.2.bb => fatresize_1.1.0.bb}    | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-filesystems/recipes-utils/fatresize/{fatresize_1.0.2.bb => fatresize_1.1.0.bb} (63%)
 
-diff --git a/meta-networking/recipes-daemons/postfix/files/0007-correct-signature-of-closefrom-API.patch b/meta-networking/recipes-daemons/postfix/files/0007-correct-signature-of-closefrom-API.patch
-new file mode 100644
-index 0000000000..e583354ccb
---- /dev/null
-+++ b/meta-networking/recipes-daemons/postfix/files/0007-correct-signature-of-closefrom-API.patch
-@@ -0,0 +1,101 @@
-+From 1e451ddc15af1a4e19318c8b1ced46c5c41610d3 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 14 Jul 2021 18:08:30 -0700
-+Subject: [PATCH] correct signature of closefrom() API
-+
-+glibc 2.34 introduced this function and finds this error which has been
-+all along.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/util/sys_compat.c |  6 +++---
-+ src/util/sys_defs.h   | 12 ++++++------
-+ 2 files changed, 9 insertions(+), 9 deletions(-)
-+
-+diff --git a/src/util/sys_compat.c b/src/util/sys_compat.c
-+index 8bf8e58..c87f043 100644
-+--- a/src/util/sys_compat.c
-++++ b/src/util/sys_compat.c
-+@@ -286,7 +286,7 @@ int     dup2_pass_on_exec(int oldd, int newd)
-+
-+ /* closefrom() - closes all file descriptors from the given one up */
-+
-+-int     closefrom(int lowfd)
-++void     closefrom(int lowfd)
-+ {
-+     int     fd_limit = open_limit(0);
-+     int     fd;
-+@@ -298,14 +298,14 @@ int     closefrom(int lowfd)
-+      */
-+     if (lowfd < 0) {
-+ 	errno = EBADF;
-+-	return (-1);
-++	return;
-+     }
-+     if (fd_limit > 500)
-+ 	fd_limit = 500;
-+     for (fd = lowfd; fd < fd_limit; fd++)
-+ 	(void) close(fd);
-+
-+-    return (0);
-++    return;
-+ }
-+
-+ #endif
-+diff --git a/src/util/sys_defs.h b/src/util/sys_defs.h
-+index 2e1c953..515de6c 100644
-+--- a/src/util/sys_defs.h
-++++ b/src/util/sys_defs.h
-+@@ -1509,7 +1509,7 @@ extern int setsid(void);
-+ #endif
-+
-+ #ifndef HAS_CLOSEFROM
-+-extern int closefrom(int);
-++extern void closefrom(int);
-+
-+ #endif
-+
-+@@ -1563,7 +1563,7 @@ typedef int pid_t;
-+
-+  /*
-+   * Clang-style attribute tests.
-+-  *
-++  *
-+   * XXX Without the unconditional test below, gcc 4.6 will barf on ``elif
-+   * defined(__clang__) && __has_attribute(__whatever__)'' with error message
-+   * ``missing binary operator before token "("''.
-+@@ -1577,7 +1577,7 @@ typedef int pid_t;
-+   * warn for missing initializations and other trouble. However, OPENSTEP4
-+   * gcc 2.7.x cannot handle this so we define this only if NORETURN isn't
-+   * already defined above.
-+-  *
-++  *
-+   * Data point: gcc 2.7.2 has __attribute__ (Wietse Venema) but gcc 2.6.3 does
-+   * not (Clive Jones). So we'll set the threshold at 2.7.
-+   */
-+@@ -1653,12 +1653,12 @@ typedef int pid_t;
-+   * write to output parameters (for example, stat- or scanf-like functions)
-+   * or from functions that have other useful side effects (for example,
-+   * fseek- or rename-like functions).
-+-  *
-++  *
-+   * DO NOT use this for functions that write to a stream; it is entirely
-+   * legitimate to detect write errors with fflush() or fclose() only. On the
-+   * other hand most (but not all) functions that read from a stream must
-+   * never ignore result values.
-+-  *
-++  *
-+   * XXX Prepending "(void)" won't shut up GCC. Clang behaves as expected.
-+   */
-+ #if ((__GNUC__ == 3 && __GNUC_MINOR__ >= 4) || __GNUC__ > 3)
-+@@ -1739,7 +1739,7 @@ typedef const char *CONST_CHAR_STAR;
-+   * Safety. On some systems, ctype.h misbehaves with non-ASCII or negative
-+   * characters. More importantly, Postfix uses the ISXXX() macros to ensure
-+   * protocol compliance, so we have to rule out non-ASCII characters.
-+-  *
-++  *
-+   * XXX The (unsigned char) casts in isalnum() etc arguments are unnecessary
-+   * because the ISASCII() guard already ensures that the values are
-+   * non-negative; the casts are done anyway to shut up chatty compilers.
-diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.4.12.bb b/meta-networking/recipes-daemons/postfix/postfix_3.6.1.bb
-similarity index 82%
-rename from meta-networking/recipes-daemons/postfix/postfix_3.4.12.bb
-rename to meta-networking/recipes-daemons/postfix/postfix_3.6.1.bb
-index db5b41bfbd..c139f06610 100644
---- a/meta-networking/recipes-daemons/postfix/postfix_3.4.12.bb
-+++ b/meta-networking/recipes-daemons/postfix/postfix_3.6.1.bb
-@@ -13,6 +13,7 @@ SRC_URI += "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
-            file://postfix-install.patch \
-            file://icu-config.patch \
-            file://0001-makedefs-add-lnsl-and-lresolv-to-SYSLIBS-by-default.patch \
-+           file://0007-correct-signature-of-closefrom-API.patch \
-            "
--SRC_URI[sha256sum] = "18555183ae8b52a9e76067799279c86f9f2770cdef3836deb8462ee0a0855dec"
-+SRC_URI[sha256sum] = "20a805625601e7b95989220832c8fa14ce374f0711da054188f8cec6a92fd71c"
- UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.3(\.\d+)+).tar.gz"
---
-2.32.0
+diff --git a/meta-filesystems/recipes-utils/fatresize/fatresize_1.0.2.bb b/meta-filesystems/recipes-utils/fatresize/fatresize_1.1.0.bb
+similarity index 63%
+rename from meta-filesystems/recipes-utils/fatresize/fatresize_1.0.2.bb
+rename to meta-filesystems/recipes-utils/fatresize/fatresize_1.1.0.bb
+index 88d495b685..32406077da 100644
+--- a/meta-filesystems/recipes-utils/fatresize/fatresize_1.0.2.bb
++++ b/meta-filesystems/recipes-utils/fatresize/fatresize_1.1.0.bb
+@@ -1,12 +1,12 @@
+ SUMMARY = "Resize FAT partitions using libparted"
+ SECTION = "console/tools"
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+ SRC_URI = "git://salsa.debian.org/parted-team/fatresize.git;protocol=https"
+-SRCREV = "3f80afc76ad82d4a1b852a6c8dea24cd9f5e7a24"
++SRCREV = "12da22087de2ec43f0fe5af1237389e94619c483"
+ 
+-PV = "1.0.2-11"
++PV = "1.1.0"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.25.1
+
