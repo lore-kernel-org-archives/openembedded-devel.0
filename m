@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.194.1626365357598249506
+ by mx.groups.io with SMTP id smtpd.web12.172.1626365357960108706
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 15 Jul 2021 09:09:18 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=41550 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1m43vH-0000O5-HW; Thu, 15 Jul 2021 19:09:16 +0300
+	id 1m43vI-0000O5-98; Thu, 15 Jul 2021 19:09:17 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-texttable: Upgrade 1.6.3 -> 1.6.4
-Date: Thu, 15 Jul 2021 19:09:05 +0300
-Message-Id: <20210715160906.26266-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-dateutil: Upgrade 2.8.1 -> 2.8.2
+Date: Thu, 15 Jul 2021 19:09:06 +0300
+Message-Id: <20210715160906.26266-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210715160906.26266-1-leon.anavi@konsulko.com>
 References: <20210715160906.26266-1-leon.anavi@konsulko.com>
@@ -30,32 +30,44 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.6.4:
+Upgrade to release 2.8.2:
 
-- Fix alignment bug when deco is modified
+- Updated tzdata version to 2021a
+- Fixed a bug in the parser where non-ValueError exceptions would
+  be raised during exception handling; this would happen, for
+  example, if an IllegalMonthError was raised in dateutil code.
+- Fixed the custom repr for dateutil.parser.ParserError, which was
+  not defined due to an indentation error.
+- Fixed a bug that caused b' prefixes to appear in parse_isodate
+  exception messages.
+- Make isoparse raise when trying to parse times with inconsistent
+  use of : separator.
+- Fixed tz.gettz() not returning local time when passed an empty
+  string.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-texttable_1.6.3.bb => python3-texttable_1.6.4.bb} | 3 +--
+ .../{python3-dateutil_2.8.1.bb => python3-dateutil_2.8.2.bb}   | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-texttable_1.6.3.bb => python3-texttable_1.6.4.bb} (64%)
+ rename meta-python/recipes-devtools/python/{python3-dateutil_2.8.1.bb => python3-dateutil_2.8.2.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-texttable_1.6.3.bb b/meta-python/recipes-devtools/python/python3-texttable_1.6.4.bb
-similarity index 64%
-rename from meta-python/recipes-devtools/python/python3-texttable_1.6.3.bb
-rename to meta-python/recipes-devtools/python/python3-texttable_1.6.4.bb
-index 03ebd010e0..6916a72d34 100644
---- a/meta-python/recipes-devtools/python/python3-texttable_1.6.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-texttable_1.6.4.bb
-@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7a97cdac2d9679ffdcfef3dc036d24f6"
+diff --git a/meta-python/recipes-devtools/python/python3-dateutil_2.8.1.bb b/meta-python/recipes-devtools/python/python3-dateutil_2.8.2.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-dateutil_2.8.1.bb
+rename to meta-python/recipes-devtools/python/python3-dateutil_2.8.2.bb
+index 5326924e64..a68a736a8c 100644
+--- a/meta-python/recipes-devtools/python/python3-dateutil_2.8.1.bb
++++ b/meta-python/recipes-devtools/python/python3-dateutil_2.8.2.bb
+@@ -4,8 +4,7 @@ HOMEPAGE = "https://dateutil.readthedocs.org"
+ LICENSE = "BSD-3-Clause & Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e3155c7bdc71f66e02678411d2abf996"
  
+-SRC_URI[md5sum] = "f2a1d4b680b297b367a974664ca3a4f6"
+-SRC_URI[sha256sum] = "73ebfe9dbf22e832286dafa60473e4cd239f8592f699aa5adaf10050e6e1823c"
++SRC_URI[sha256sum] = "0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"
+ 
+ PYPI_PACKAGE = "python-dateutil"
  inherit pypi setuptools3
- 
--SRC_URI[md5sum] = "68e6b31d36f5c20221da7d5db3eca772"
--SRC_URI[sha256sum] = "ce0faf21aa77d806bbff22b107cc22cce68dc9438f97a2df32c93e9afa4ce436"
-+SRC_URI[sha256sum] = "42ee7b9e15f7b225747c3fa08f43c5d6c83bc899f80ff9bae9319334824076e9"
- 
- BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
