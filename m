@@ -1,90 +1,96 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.2])
- by mx.groups.io with SMTP id smtpd.web12.4944.1626335530317737347
+Received: from outbound.soverin.net (outbound.soverin.net [116.202.126.228])
+ by mx.groups.io with SMTP id smtpd.web08.5148.1626338705104580721
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Jul 2021 00:52:10 -0700
+ Thu, 15 Jul 2021 01:45:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=rNfb9GpP;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: wangmy@fujitsu.com)
-Return-Path: <wangmy@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1626335528; i=@fujitsu.com;
-	bh=qdpMsmLUmYKlWWwPnEMTVH7VQ07LGBUbBPwiA2U7qSY=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=rNfb9GpPsWgH8NRQq1wIFjhSuTKTYM4FVhtX8wiM/qrp+1ikqN5qLK/sCO8paB2xN
-	 +h8uEvVjARWbaVRUR7yy66/uMITuibfhA7iaYfwtzw6ej0XRomWM4Kj/+ACRaxVe+N
-	 Gq/OTPReBezOMovR0ljxugorUH/EW3/vkfsRy/I9e4fxgTFKxNKG5WlR0M9IcpFnaC
-	 aDxKYT7oPpnSmbQRa5dygewluKkaxmIrgr/ORNBRz8+aqtuHI2FcuRTwqYg5Hts1/2
-	 9pUntxd4kP20BUR4byT7M9Yiu1Mbvf7OEJ53ebyCce3e11K0jiAxFvVx+y+HA1vZlA
-	 mOK+f9GDT1tfw==
-Received: from [100.112.192.137] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-west-1.aws.symcld.net id 43/58-07839-829EFE06; Thu, 15 Jul 2021 07:52:08 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrDIsWRWlGSWpSXmKPExsViZ8MxVVfj5fs
-  Eg+WbGS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oyXbxezF0zmqDi7/jNbA+N+9i5GLg4hgW1M
-  EreedbNCOCcZJd6fuw7kcHKwCahJTL91A8wWEdCXWDp7DzOIzSygIvHidw9QNweHsIC/xP07L
-  iBhFgFViadXboCV8Ao4Sfx42wJmSwgoSEx5+B4qLihxcuYTFogxEhIHX7yAqlGUmH25mQVkpI
-  RApcSNx6kTGHlnIemYhaRjASPTKkaLpKLM9IyS3MTMHF1DAwNdQ0MjXUNLIDYx0Uus0k3USy3
-  VLU8tLtE11EssL9YrrsxNzknRy0st2cQIDK6UggMTdjDuf/1B7xCjJAeTkijvptb3CUJ8Sfkp
-  lRmJxRnxRaU5qcWHGGU4OJQkeL8/A8oJFqWmp1akZeYAAx0mLcHBoyTCy/kCKM1bXJCYW5yZD
-  pE6xRjO8WbtkkXMHG/BZNu9u0CyHUzOXHBwNTPHLDB5v/0QkHwAIoVY8vLzUqXEeY88BxonAD
-  IuozQPbhkski8xykoJ8zIyMDAI8RSkFuVmlqDKv2IU52BUEuZdBXIUT2ZeCdxNr4DOZQI6V3v
-  NW5BzSxIRUlINTHa35/1avuhtGXPnC9doCbYNrn+PlFbt6V2pLepS2PiGM0RrZenehGzZh18u
-  xUQfuiHe6BvAI+3t+ab7rsN0jftxMmwvy5N97PhZDQM3RPfPm2h56aPQivdbXoiuFAn93Faoc
-  /33WxWDn/5bbv7p79n6M+H0mvLsTxOPCbFeV368/OuKv8rqrOdSOq0UP3RfFn8Ve0ny4Z27UQ
-  7uE7oeb2M79nChwa2rLntSu45Pmnox1Mqbb9MExsP3V3YZ29Z+bNt/Xv5S9Ezp44Ku0d9+hO3
-  VPfbmzduTJa7Jz7qWetzmVJi1cILkxt1+4akGv2YpfYzIy+Qq2VMc9846omPPxjcnG6r4biu1
-  R/OfOVRQtEyJpTgj0VCLuag4EQBBhvyaXwMAAA==
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-4.tower-271.messagelabs.com!1626335527!218857!1
-X-Originating-IP: [62.60.8.149]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 8528 invoked from network); 15 Jul 2021 07:52:07 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-4.tower-271.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 15 Jul 2021 07:52:07 -0000
-Received: from R01UKEXCASM223.r01.fujitsu.local (ex2k13_223.fs.fujitsu.com [10.182.185.121])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 16F7q435003387
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jul 2021 08:52:07 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 15 Jul 2021 08:52:03 +0100
-From: "wangmy" <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] ctags: upgrade 5.9.20210627.0 -> 5.9.20210711.0
-Date: Thu, 15 Jul 2021 15:51:50 +0800
-Message-ID: <1626335510-25374-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=fail reason="no key for verify" header.i=@embed.me.uk header.s=soverin header.b=RXcweuy5;
+ spf=pass (domain: embed.me.uk, ip: 116.202.126.228, mailfrom: ml@embed.me.uk)
+Received: from smtp.soverin.net (unknown [10.10.3.24])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+	(No client certificate requested)
+	by outbound.soverin.net (Postfix) with ESMTPS id 7F9C3331;
+	Thu, 15 Jul 2021 08:45:02 +0000 (UTC)
+Received: from smtp.soverin.net (smtp.soverin.net [159.69.232.138]) by soverin.net
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=embed.me.uk;
+	s=soverin; t=1626338701;
+	bh=nw/fPd6C73HvABV+DK3jP0aBq6pBTavIrRt+A74t2GM=;
+	h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
+	b=RXcweuy5Uqz16FEN0PYORNKrS/n8e3oiujmFtDCFDYedKaelCcvYYKPB5bGyqfgmS
+	 ub0Y9InHGm6WyHwvCtsoJPv8iYiyp0pAr9SbNM+I5/AfxPa+edp91oKvu9AlhJYoBh
+	 rRHdj7oEUjCDFhkQc023Gb+U1Kp4lcqnsDGkGDvbua+nApvH2CV0HGsQwjuda6oviO
+	 UP1w+/XBc9fNukoSqVTfU5oVqXEeK5MV39eow1x0F2SyoTQkgx6DGcdDXP5EB2Zbjp
+	 tFf8XSkoY4GQObmty8gtdfpCFcdAC+qWAQlgnCNIWsKqSq0IPkJeXTuXPgjqVw8HGD
+	 NHJ972bt/RZpw==
+Subject: Re: [oe] Upstream scipy recipe to meta-openembedded
+To: Gregory Anders <greg@gpanders.com>
+Cc: zboszor@pr.hu, Khem Raj <raj.khem@gmail.com>,
+ openembedded-devel@lists.openembedded.org
+References: <YOxdaI1jQgdxKTQn@gpanders.com>
+ <59d33c0b-fbf0-593c-a259-be23aac0de6a@gmail.com>
+ <be74a5ac-d9d9-8efa-434b-504bc7663c19@pr.hu>
+ <e025ca46-c030-978f-3ec0-499df2ba14a6@embed.me.uk>
+ <YO2QfsrtVgrsw7YX@gpanders.com>
+From: "Jack Mitchell" <ml@embed.me.uk>
+Message-ID: <f0c2e1bc-0e24-1b7a-f9ff-ca85c9cd9856@embed.me.uk>
+Date: Thu, 15 Jul 2021 09:44:57 +0100
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
-Content-Type: text/plain
+In-Reply-To: <YO2QfsrtVgrsw7YX@gpanders.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US-large
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- .../ctags/{ctags_5.9.20210627.0.bb => ctags_5.9.20210711.0.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/ctags/{ctags_5.9.20210627.0.bb => ctags_5.9.20210711.0.bb} (95%)
+On 13/07/2021 14:09, Gregory Anders wrote:
+> On Tue, 13 Jul 2021 11:46 +0100, Jack Mitchell wrote:
+>> On 13/07/2021 11:20, Zoltan Boszormenyi via lists.openembedded.org wrote:
+>>>
+>>> FYI, there's another layer
+>>> (https://github.com/tuxable-ltd/meta-scikit-learn that
+>>> I had to fork and make hardknott-compatible) that uses python3-scipy as
+>>> a build
+>>> and runtime dependency for python3-scikit-learn so import
+>>> sklearn.linear_model"
+>>> is possible. That layer also extends python3-scipy with a native build
+>>> variant
+>>> which doesn't exist in your layer AND patches lapack further to use
+>>> openblas.
+>>
+>> Yes, that would be my layer. I had never intended to upstream the
+>> scikit-learn portions as I don't believe it is maintainable in a generic
+>> layer due to the niche use-cases and awkwardness of the build system
+>> itself and it's dependencies, in addition to the very large build time
+>> which would put strain on auto-builders.
+>>
+>> What I had intended to do though, which I haven't got round to yet is
+>> try to provide a virtual provider for blas/cblas in meta-oe which would
+>> allow openblas to be properly upstreamed and then packageconfigs and
+>> preferred versions used for selection as distro policy.
+>>
+> 
+> Thanks, I wasn't aware of this project. And it looks like you actually
+> sent a PR to my meta-scipy layer at one point, so thank you!
+> 
+> Jack, would you mind if I simply directed people from my meta-scipy
+> repository to your meta-scikit-learn layer? I am no longer using scipy
+> in OE so maintaining this layer (e.g. testing contributions and updating
+> for new versions) is falling behind.
+> 
+> If not then that is totally fine, I will just add a call for a new
+> maintainer.
+> 
+> Thanks,
+> 
+> Greg
 
-diff --git a/meta-oe/recipes-devtools/ctags/ctags_5.9.20210627.0.bb b/meta-oe/recipes-devtools/ctags/ctags_5.9.20210711.0.bb
-similarity index 95%
-rename from meta-oe/recipes-devtools/ctags/ctags_5.9.20210627.0.bb
-rename to meta-oe/recipes-devtools/ctags/ctags_5.9.20210711.0.bb
-index 7d01bba697..4be634b38f 100644
---- a/meta-oe/recipes-devtools/ctags/ctags_5.9.20210627.0.bb
-+++ b/meta-oe/recipes-devtools/ctags/ctags_5.9.20210711.0.bb
-@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
- 
- inherit autotools-brokensep pkgconfig manpages
- 
--SRCREV = "c436bca61f1fb92d2c6d5767ae4b307efab678f3"
-+SRCREV = "c81079788bfe650190db8ac9df80d63d2bc160aa"
- SRC_URI = "git://github.com/universal-ctags/ctags"
- 
- S = "${WORKDIR}/git"
+Hi Greg,
+
+I should be able to take it over as I'll continue to be using it in the
+future. How do you want to transfer ownership, shall I fork it and you
+point to the new repo on the master branch, or can you get github to
+re-direct to the new home?
+
+Regards,
+Jack.
+
 -- 
-2.25.1
-
+Jack Mitchell, Consultant
+https://www.tuxable.co.uk
