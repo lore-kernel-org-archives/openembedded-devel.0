@@ -1,171 +1,141 @@
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.web09.1029.1626368452884435519
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
+ by mx.groups.io with SMTP id smtpd.web09.1030.1626368453907949338
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Jul 2021 10:00:52 -0700
+ Thu, 15 Jul 2021 10:00:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=nedwwO04;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id 17so6052835pfz.4
-        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jul 2021 10:00:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=CBCHKoWu;
+ spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f175.google.com with SMTP id y4so6040335pfi.9
+        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jul 2021 10:00:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=xtC7WbtZC1R0BPdDdhWig3Ow1CBR5mqNSGvrR7+C5WM=;
-        b=nedwwO04IlFYYk0SO9Y9srFdxHj6XqwD+qc0Jy1JUmw/tVKPxE5JQa+fCpxD/zYd4+
-         W7vTnlqQBrb8yG5TypfSendHgfJJ4Awz1HIp+hN/0vn0j8TZkjmzzqquSAQCSGlZ1K8P
-         W1cDbLvxTSrLy9sSLuLjRC+82LVZ0Hub3yKC2a4qd9cfdypcb6Hc1D7cGLwZ6xx92Vii
-         HrlN/xtlaqFUHsrNRPeTKDmzvGqtg5W05l3ayT660Cp+mXAY+e+MygpatOkl3udJbwNr
-         9QPKzHS96gKkduJajGxoDg/HzDOZKbA1JMm5bK8nu17FMHmMk8jq5VaJJ6a05Le6gDe2
-         a6Fg==
+        bh=mVvXZ83iYyLs8LnTIxox2kYr6+WOQkcohmnzTxGDgAw=;
+        b=CBCHKoWudq9tJ/TuZOzWExwzty4vAHkXRrdQKkG32v1S9EW/1GVhh0tY7CPrFAiocV
+         7EC5Ms9wMzISx3aD5FE86KKxB2BKlePrhmRg7DPYVkeAknXaUIFJn/kTP5ltdpOlDybG
+         NBFogmCIukAxFcTAu3EtmDsChm7ORMH8/YpJzHVFwA0Yo8m/ij+RMkW3WE1LhBs+o/Gf
+         ppxW2Sxjz878yCugDlxffux7YqrWyS42pDH/moGpOfDGOrwMSb/SaasFvRyHEK8nTMcq
+         jOIKU7I0maHWq5bw7mOt+ZEj3ENEB0V06kaeifEeSxZWDYfUA/e+eLN0OzllEd6gvLfa
+         fh4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=xtC7WbtZC1R0BPdDdhWig3Ow1CBR5mqNSGvrR7+C5WM=;
-        b=O2BgiKQIKV2E2VS8ZE0HMyEzS3Nd41LYoy20iX0LOyTdRczFI7eZgbndvGTjgVc84x
-         QKPsy9gSPQ245fe0Zdk9v350JOdXkDZ4g60NETnCQqseIGKfMWTSmpt6ix+8yyuXe1Y7
-         aQfS8e2MBeaupZbN2/RMMxv36keJoa8QDMFLMlHF05vNUN/mcsi066TkrRR+rTIA5RIX
-         nszmIh57cKbA738PuOKOmTSOQAussL+A46zzEQZer5xorF5Sxwew4IhM8ETvtonIqej7
-         TQyoe537eViq39VzgSUDOzcDVlODKG994KhAL6Mm6cpF07N9IKpgwf0oyORRnfjd/In8
-         a4IQ==
-X-Gm-Message-State: AOAM532F3rt7gGgg4HsuN1PNQmR3vB2axlIRJQBlXZl9/TCSmCl1LkVB
-	tpYrK/Dr+uPZfXYrC8Bp3gP+SE+DSl8=
-X-Google-Smtp-Source: ABdhPJx8tIs53K8aBEmTLcB0O+s4mekpYcXushu1akLSe7KVo0DmMkvM3s8iGPzESPrx9ddZltNJEQ==
-X-Received: by 2002:a65:56ca:: with SMTP id w10mr5499055pgs.107.1626368452026;
-        Thu, 15 Jul 2021 10:00:52 -0700 (PDT)
+        bh=mVvXZ83iYyLs8LnTIxox2kYr6+WOQkcohmnzTxGDgAw=;
+        b=o2Vs21W3rxM3+j0zAFR3bv/ysJyhqC2/l1nriKNcxI9QOuVREbrS37T6MMAsAWRJm1
+         Cg+JileceiCrYu8Kzh4pW7WJ+VF8ZiLiF+R33j6JlgjFc7Xk1nmSCJ+mrWhfl+M/S8Be
+         5CLzzPIRomJDvOijxsRaALWDS/VW0zgC9xcuZEtwoiYNymQYiODXlO/0h7Ew/WWddscI
+         Hf6fJ33el7JYjCbws+22duDiToGdegfn/4b/L9Z3sJnr5458INuWHQFQCzTOi8wAQybO
+         AioAATZt992FDZW221lPnLfQGXIeyaVxMH9OLkAS8i9VBIQuSxsftjkxZAN+JlDSNVro
+         zY4A==
+X-Gm-Message-State: AOAM532HW6SW79YCcE7aTfpGBmdkoSeadNi1PGt/d1vfsQZv0S0ChLtI
+	oYolVXKNQ++kiNdatvuqjXaLdt/5DdM=
+X-Google-Smtp-Source: ABdhPJzkUTGldJn2cQf0YD6Ph2bUBXkbprD2ZWgd8zJFpXEsiDiMnhJWWYpwqRucJPigYOeHhp8djg==
+X-Received: by 2002:a63:5505:: with SMTP id j5mr5638428pgb.250.1626368453336;
+        Thu, 15 Jul 2021 10:00:53 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.caveonetworks.com ([2601:202:4180:a5c0:bd64:b325:a706:6ef2])
-        by smtp.gmail.com with ESMTPSA id d23sm5805563pjd.25.2021.07.15.10.00.51
+        by smtp.gmail.com with ESMTPSA id d23sm5805563pjd.25.2021.07.15.10.00.52
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Jul 2021 10:00:51 -0700 (PDT)
+        Thu, 15 Jul 2021 10:00:52 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 6/7] libiio: fix installing libiio when python3 bindings are enabled
-Date: Thu, 15 Jul 2021 10:00:41 -0700
-Message-Id: <82cca6d4edd3bb3a3d888f2647d43256b5f4691c.1626359076.git.akuster808@gmail.com>
+Subject: [hardknott 7/7] sysbench: fix memory test
+Date: Thu, 15 Jul 2021 10:00:42 -0700
+Message-Id: <6a7ba8f7f210e04183fb64ab181520d817a34a11.1626359076.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1626359076.git.akuster808@gmail.com>
 References: <cover.1626359076.git.akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Sam Van Den Berge <sam.van.den.berge@gmail.com>
+From: massimo toscanelli <massimo.toscanelli@leica-geosystems.com>
 
-This patch fixes the following error when libiio is installed when
-python3 bindings are enabled:
+In sysbench version 0.4, the tmp variable used by the memory test to
+execute requests is optimized by the compiler. Caching mechanism reduces
+the direct accesses to the memory increasing the transfer speed. This
+leads to false timing estimations that considerably affect read and
+also random write operations.
 
-ERROR: Execution of '.../libiio/0.21+gitAUTOINC+565bf68ecc-r0/temp/run.do_install.2349473' failed with exit code 1:
-running build
-running build_py
-running install
-Traceback (most recent call last):
-  File ".../libiio/0.21+gitAUTOINC+565bf68ecc-r0/build/bindings/python/setup.py", line 77, in _check_libiio_installed
-    raise OSError
-OSError
+In sysbench version 1, this issue is fixed adding the volatile modifier
+to the tmp variable. This prevents compiler optimizations forcing a direct
+access to the memory.
 
-During handling of the above exception, another exception occurred:
+The final result is a realistic transfer speed measurement.
 
-Traceback (most recent call last):
-  File ".../libiio/0.21+gitAUTOINC+565bf68ecc-r0/build/bindings/python/setup.py", line 106, in <module>
-    setup(**config)
-  File ".../libiio/0.21+gitAUTOINC+565bf68ecc-r0/recipe-sysroot-native/usr/lib/python3.9/site-packages/setuptools/__init__.py", line 153, in setup
-    return distutils.core.setup(**attrs)
-  File ".../libiio/0.21+gitAUTOINC+565bf68ecc-r0/recipe-sysroot-native/usr/lib/python3.9/distutils/core.py", line 148, in setup
-    dist.run_commands()
-  File ".../libiio/0.21+gitAUTOINC+565bf68ecc-r0/recipe-sysroot-native/usr/lib/python3.9/distutils/dist.py", line 966, in run_commands
-    self.run_command(cmd)
-  File ".../libiio/0.21+gitAUTOINC+565bf68ecc-r0/recipe-sysroot-native/usr/lib/python3.9/distutils/dist.py", line 985, in run_command
-    cmd_obj.run()
-  File ".../libiio/0.21+gitAUTOINC+565bf68ecc-r0/build/bindings/python/setup.py", line 52, in run
-    self._check_libiio_installed()
-  File "/libiio/0.21+gitAUTOINC+565bf68ecc-r0/build/bindings/python/setup.py", line 83, in _check_libiio_installed
-    raise Exception(msg)
-Exception: The libiio library could not be found.
-            libiio needs to be installed first before the python bindings.
-            The latest release can be found on GitHub:
-            https://github.com/analogdevicesinc/libiio/releases
-
-Some time ago a fix for this issue was already discussed here [1].
-However in the same discussion also a second issue was being handled.
-
-A fix for the second issue was merged in 51f98865da0. The first issue
-didn't pop up anymore and so a fix was never applied.
-
-Recently however after switching from build machine, I started seeing
-the first issue. I suspect due to build caching the first issue didn't
-pop up anymore before up until now. With this patch, fixes are now
-available for both issues handled in [1].
-
-[1]: https://github.com/openembedded/meta-openembedded/issues/248
-
-Signed-off-by: Sam Van Den Berge <sam.van.den.berge@gmail.com>
+Signed-off-by: massimo toscanelli <massimo.toscanelli@leica-geosystems.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 59cce5ad1603c2975684ae15b639e0e3cd688c40)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...rify-whether-libiio-is-installed-whe.patch | 37 +++++++++++++++++++
- meta-oe/recipes-support/libiio/libiio_git.bb  |  4 +-
- 2 files changed, 40 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/libiio/files/0001-python-Do-not-verify-whether-libiio-is-installed-whe.patch
+ ...modifier-to-tmp-variable-in-memory-t.patch | 40 +++++++++++++++++++
+ .../sysbench/sysbench_0.4.12.bb               |  4 +-
+ 2 files changed, 43 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-benchmark/sysbench/sysbench/0001-Adding-volatile-modifier-to-tmp-variable-in-memory-t.patch
 
-diff --git a/meta-oe/recipes-support/libiio/files/0001-python-Do-not-verify-whether-libiio-is-installed-whe.patch b/meta-oe/recipes-support/libiio/files/0001-python-Do-not-verify-whether-libiio-is-installed-whe.patch
+diff --git a/meta-oe/recipes-benchmark/sysbench/sysbench/0001-Adding-volatile-modifier-to-tmp-variable-in-memory-t.patch b/meta-oe/recipes-benchmark/sysbench/sysbench/0001-Adding-volatile-modifier-to-tmp-variable-in-memory-t.patch
 new file mode 100644
-index 0000000000..5566aa0ffd
+index 0000000000..d628e81b56
 --- /dev/null
-+++ b/meta-oe/recipes-support/libiio/files/0001-python-Do-not-verify-whether-libiio-is-installed-whe.patch
-@@ -0,0 +1,37 @@
-+From 3a26f0536706fa7c241c9de986799ae440c68c8a Mon Sep 17 00:00:00 2001
-+From: Julien Malik <julien.malik@unseenlabs.fr>
-+Date: Mon, 27 Jul 2020 14:34:44 +0200
-+Subject: [PATCH] python: Do not verify whether libiio is installed when
-+ cross-compiling
++++ b/meta-oe/recipes-benchmark/sysbench/sysbench/0001-Adding-volatile-modifier-to-tmp-variable-in-memory-t.patch
+@@ -0,0 +1,40 @@
++From c1ebf893e32a0a77e820484d48a903523fef7c1b Mon Sep 17 00:00:00 2001
++From: Vasily Tarasov <tarasov@vasily.name>
++Date: Fri, 10 Jun 2016 14:33:48 -0400
++Subject: [PATCH] Adding volatile modifier to tmp variable in memory test
 +
-+This should fix #561
++Issue explanation:
 +
-+Upstream-Status: Backport
++./sysbench/sysbench --test=memory --num-threads=16 \
++		    --memory-block-size=268435456 \
++		    --memory-total-size=137438953472 \
++		    --memory-oper=read \
++		    --memory-access-mode=seq \
++		    --memory-scope=local run
 +
-+Signed-off-by: Julien Malik <julien.malik@paraiso.me>
-+Signed-off-by: Sam Van Den Berge <sam.van.den.berge@gmail.com>
++Without this commit the time to run the above command is 0.0004 seconds.
++With this commit the time is greater than 3 seconds.  Essentially,
++without the volatile modifier, the compiler optimizes read access so
++that no real access happens.
++
++Upstream-Status: Backport [part of v1.0.0 https://github.com/akopytov/sysbench/commit/8753cb93be4c0b81a20b704ced91e7a422da52b1]
++
++(cherry picked from commit 8753cb93be4c0b81a20b704ced91e7a422da52b1)
++Signed-off-by: massimo toscanelli <massimo.toscanelli@leica-geosystems.com>
 +---
-+ bindings/python/setup.py.cmakein | 7 +++++++
-+ 1 file changed, 7 insertions(+)
++ sysbench/tests/memory/sb_memory.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/bindings/python/setup.py.cmakein b/bindings/python/setup.py.cmakein
-+index cd14e2e..96d58a8 100644
-+--- a/bindings/python/setup.py.cmakein
-++++ b/bindings/python/setup.py.cmakein
-+@@ -54,6 +54,13 @@ class InstallWrapper(install):
-+         install.run(self)
-+ 
-+     def _check_libiio_installed(self):
-++        cross_compiling = ("${CMAKE_CROSSCOMPILING}" == "TRUE")
-++        if cross_compiling:
-++            # When cross-compiling, we generally cannot dlopen
-++            # the libiio shared lib from the build platform.
-++            # Simply skip this check in that case.
-++            return
-++
-+         from platform import system as _system
-+         from ctypes import CDLL as _cdll
-+         from ctypes.util import find_library
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-support/libiio/libiio_git.bb b/meta-oe/recipes-support/libiio/libiio_git.bb
-index 00c016db44..d7e4cc60a9 100644
---- a/meta-oe/recipes-support/libiio/libiio_git.bb
-+++ b/meta-oe/recipes-support/libiio/libiio_git.bb
-@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=7c13b3376cea0ce68d2d2da0a1b3a72c"
- SRCREV = "565bf68eccfdbbf22cf5cb6d792e23de564665c7"
- PV = "0.21+git${SRCPV}"
++diff --git a/sysbench/tests/memory/sb_memory.c b/sysbench/tests/memory/sb_memory.c
++index 2e8998f..7d22bb9 100644
++--- a/sysbench/tests/memory/sb_memory.c
+++++ b/sysbench/tests/memory/sb_memory.c
++@@ -244,7 +244,7 @@ sb_request_t memory_get_request(int tid)
++ int memory_execute_request(sb_request_t *sb_req, int thread_id)
++ {
++   sb_mem_request_t    *mem_req = &sb_req->u.mem_request;
++-  int                 tmp = 0;
+++  volatile int        tmp = 0;
++   int                 idx; 
++   int                 *buf, *end;
++   log_msg_t           msg;
+diff --git a/meta-oe/recipes-benchmark/sysbench/sysbench_0.4.12.bb b/meta-oe/recipes-benchmark/sysbench/sysbench_0.4.12.bb
+index 708c71f4ff..d1725dddd6 100644
+--- a/meta-oe/recipes-benchmark/sysbench/sysbench_0.4.12.bb
++++ b/meta-oe/recipes-benchmark/sysbench/sysbench_0.4.12.bb
+@@ -8,7 +8,9 @@ inherit autotools
  
--SRC_URI = "git://github.com/analogdevicesinc/libiio.git;protocol=https"
-+SRC_URI = "git://github.com/analogdevicesinc/libiio.git;protocol=https \
-+           file://0001-python-Do-not-verify-whether-libiio-is-installed-whe.patch \
-+"
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ # The project has moved from Sourceforge to Launchpad, to Github. Use the source tarball from
+ # Launchpad until the next release is available from Github.
+-SRC_URI = "https://launchpad.net/ubuntu/+archive/primary/+files/${BPN}_${PV}.orig.tar.gz"
++SRC_URI = "https://launchpad.net/ubuntu/+archive/primary/+files/${BPN}_${PV}.orig.tar.gz \
++           file://0001-Adding-volatile-modifier-to-tmp-variable-in-memory-t.patch \
++           "
  
- S = "${WORKDIR}/git"
+ SRC_URI[md5sum] = "3a6d54fdd3fe002328e4458206392b9d"
+ SRC_URI[sha256sum] = "83fa7464193e012c91254e595a89894d8e35b4a38324b52a5974777e3823ea9e"
 -- 
 2.25.1
 
