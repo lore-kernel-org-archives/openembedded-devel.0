@@ -1,112 +1,130 @@
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web08.950.1626368447065207549
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+ by mx.groups.io with SMTP id smtpd.web12.898.1626368447828592399
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 15 Jul 2021 10:00:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=E+VqFi6J;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id 17so6052519pfz.4
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=tFxOjdBR;
+ spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f175.google.com with SMTP id v14so3713424plg.9
         for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jul 2021 10:00:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
+        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=wPzdVsJ5blgsNHss/6Vk7EZ1w+UUIKyjUTu87fydOI4=;
-        b=E+VqFi6J5aE/9u0S6a+mQhKqEZOrFgi/GVxg+aJ5StJYZTkT8l1CfVId2KhYafA2EZ
-         A4ex/aWlhUKEYHHF4DSmq064V0Xik512v4eqBdgCEwuHQdW3Hdf9ibUgGO+olB43SnMy
-         h3818d8NHhxgr4UCLdbygawjs4HuWRxaqjVphOkD34VaxGX2YUoGqN7bzn4AXVF7mKd+
-         2z3q3gQP3hSQrkNEf1b0zPH9QuGdmf1mnPIt+H6xYzJ6QG3i8oVKJrLMzSzwalOzQdId
-         SBOMQaL1hhnoqmekRybCiO90EkVhX/UZI9CdzLh0+qGQ2gKcVYYaSw1Td+jRsBwpq//V
-         IuBQ==
+        bh=3jxbIcIQJkLlwV7wX10EsjX7yGrmPhtDyaws6mNfuWE=;
+        b=tFxOjdBRcirbdI4VTBI503sguxcKVMVwtCFULeQRuLG0ToBFpYYEAtwPC1Xo/Vwuop
+         A8qIYXGkzyVZws2N3gp217jhCUGq4SKTmOh8l7MUfbd/x2rK+3eQEwYS6pELK/7W1JN2
+         C59eFQw03XKkfetbT1SAOTGRg97iGp9p7XilrYeUu8UbUnsGee4uDh089bsLNHtMBBd+
+         m0gE4TQSQF+X9/FWOpgJCJSE7ll+Ql+lAVA1ygT3RJUqZ+D4QE+7pdkP/XG6IClrgLZL
+         pCd3oQ3lGnw21XWZ/rHY8ubh/rRs52h5f3OOi/Jo6cN4ZxjPO0sJ8aTnLkBolenuRlom
+         rUyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=wPzdVsJ5blgsNHss/6Vk7EZ1w+UUIKyjUTu87fydOI4=;
-        b=ZimY5KWA0Ij/6lDQGROOKv+D2XeO48eA8oLl3NLcth4cRnnY8bVWI/oZ+iY4OVEH8P
-         R8RjeqOILtWz6vL/oZYd3SOoMthv993zpY5DDKhFbi0BbKnV8+QkwGLmqxMjtFQULCKg
-         tXYVF1Nns7iYzsgcJ0pLF2SF/6dUMMgABZil6zcSzpjjNW7sAYkZHdttnOCyIIbOA6sZ
-         UYoemYUOXr8vcNXqgc5w8vhYZJnodWHQPSfe51kP+r4Ix/L3Y+9ErML4WIciNU27Kr4c
-         HWA7+QBXhZCUqrksYKob2+GSCjHN93vrcbEocOLJbrxVGgPsg6zJ58x1mAfoMKPeT081
-         M0IQ==
-X-Gm-Message-State: AOAM533f9o33T+rYz+7p+dCA4ymR34FfGFoAs6oVtxy4o1DvkB476Qc2
-	K8nOs3c8fVEeDknI1mU4G9I99egNdaQ=
-X-Google-Smtp-Source: ABdhPJxOpuBv7MJ0gI77TqR7oQ1LptHSjO5AwB9fN04KcwTC1M7JWkWLQEuO6KH6b/JOiEU35OoZkA==
-X-Received: by 2002:a63:1263:: with SMTP id 35mr5447971pgs.221.1626368446109;
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=3jxbIcIQJkLlwV7wX10EsjX7yGrmPhtDyaws6mNfuWE=;
+        b=IMyIVJa5VdxpAvvHXHNIE3qlA/gZsdh0BzPemd/G0DgbKZzgqas/hVWYBIaE3BDlD1
+         R15QqVw2VQ9E7JNEvYc2cMcdhzrUTSTAtfgGU1zcli83M0YSGENEz9BOp8Do4l3P6TkT
+         ctJnn58xzuZPsxxr1EciH1EZpVHbl8iTPS0y7B6SVwNF2PSvuR/+4ZfZyBBt1HRhKAZz
+         e3DNG+5kbrs0CEja+FgPCFx8PX9TnzbbtIxSuOt5++IW2DvAHRM2nlWjI7sSIaR45mBd
+         9hOuFzMvNgWi7G3zXkH12iWD5fMPVmjKltHKz8heu2mXcJMb1ij+daCGi5qrrPRLx17J
+         CBww==
+X-Gm-Message-State: AOAM531GzAjtDxPcCvspt+r0A1LJd9mNLvW3BgZcWxPHGdlJbLqeS+ZT
+	IEexiisBnpt2hggLGCSUozQczALMyrs=
+X-Google-Smtp-Source: ABdhPJzRY//2aV8UEn/+3c28wnKcJPPHLUiKfhQT2/bvKiS8rtj57U6/0A6p3+xL0LcBlEV/SNjECw==
+X-Received: by 2002:a17:903:248f:b029:128:d5ea:18a7 with SMTP id p15-20020a170903248fb0290128d5ea18a7mr4149439plw.83.1626368446950;
         Thu, 15 Jul 2021 10:00:46 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.caveonetworks.com ([2601:202:4180:a5c0:bd64:b325:a706:6ef2])
-        by smtp.gmail.com with ESMTPSA id d23sm5805563pjd.25.2021.07.15.10.00.45
+        by smtp.gmail.com with ESMTPSA id d23sm5805563pjd.25.2021.07.15.10.00.46
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Jul 2021 10:00:45 -0700 (PDT)
+        Thu, 15 Jul 2021 10:00:46 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 0/7] Patch review July 15th
-Date: Thu, 15 Jul 2021 10:00:35 -0700
-Message-Id: <cover.1626359076.git.akuster808@gmail.com>
+Subject: [hardknott 1/7] nginx: fix CVE-2021-23017
+Date: Thu, 15 Jul 2021 10:00:36 -0700
+Message-Id: <82385049035a3a4a81b18af099d2131b46802965.1626359076.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1626359076.git.akuster808@gmail.com>
+References: <cover.1626359076.git.akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Please have comments back by Friday
+From: Changqing Li <changqing.li@windriver.com>
 
-The following changes since commit c51e79dd854460c6f6949a187970d05362152e84:
-
-  python3-django: upgrade 2.2.23 -> 2.2.24 (2021-06-27 07:50:20 -0700)
-
-are available in the Git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib stable/hardknott-nut
-  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/hardknott-nut
-
-Adrian Zaharia (1):
-  ntp: fix ntpdate to wait for subprocesses
-
-Akifumi Chikazawa (1):
-  openvpn: add CVE-2020-7224 and CVE-2020-27569 to allowlist
-
-Changqing Li (1):
-  nginx: fix CVE-2021-23017
-
-Li Wang (1):
-  apache2: fix CVE-2020-13950 CVE-2020-35452 CVE-2021-26690
-    CVE-2021-26691 CVE-2021-30641
-
-Masaki Ambai (1):
-  nss: add CVE-2006-5201 to allowlist
-
-Sam Van Den Berge (1):
-  libiio: fix installing libiio when python3 bindings are enabled
-
-massimo toscanelli (1):
-  sysbench: fix memory test
-
- .../recipes-support/ntp/ntp/ntpdate           |  5 ++
- .../recipes-support/openvpn/openvpn_2.5.2.bb  |  3 +
- ...modifier-to-tmp-variable-in-memory-t.patch | 40 +++++++++++
- .../sysbench/sysbench_0.4.12.bb               |  4 +-
- ...rify-whether-libiio-is-installed-whe.patch | 37 +++++++++++
- meta-oe/recipes-support/libiio/libiio_git.bb  |  4 +-
- meta-oe/recipes-support/nss/nss_3.64.bb       |  3 +
- .../apache2/apache2/CVE-2020-13950.patch      | 45 +++++++++++++
- .../apache2/apache2/CVE-2020-35452.patch      | 49 ++++++++++++++
- .../apache2/apache2/CVE-2021-26690.patch      | 39 +++++++++++
- .../apache2/apache2/CVE-2021-26691.patch      | 35 ++++++++++
- .../apache2/apache2/CVE-2021-30641.patch      | 66 +++++++++++++++++++
- .../recipes-httpd/apache2/apache2_2.4.46.bb   |  5 ++
- .../nginx/files/CVE-2021-23017.patch          | 46 +++++++++++++
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../nginx/files/CVE-2021-23017.patch          | 46 +++++++++++++++++++
  meta-webserver/recipes-httpd/nginx/nginx.inc  |  1 +
- 15 files changed, 380 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-benchmark/sysbench/sysbench/0001-Adding-volatile-modifier-to-tmp-variable-in-memory-t.patch
- create mode 100644 meta-oe/recipes-support/libiio/files/0001-python-Do-not-verify-whether-libiio-is-installed-whe.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-13950.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-35452.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26690.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26691.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-30641.patch
+ 2 files changed, 47 insertions(+)
  create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2021-23017.patch
 
+diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2021-23017.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2021-23017.patch
+new file mode 100644
+index 0000000000..a708033775
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2021-23017.patch
+@@ -0,0 +1,46 @@
++From 7199ebc203f74fd9e44595474de6bdc41740c5cf Mon Sep 17 00:00:00 2001
++From: Maxim Dounin <mdounin@mdounin.ru>
++Date: Tue, 25 May 2021 15:17:36 +0300
++Subject: [PATCH] Resolver: fixed off-by-one write in ngx_resolver_copy().
++
++Reported by Luis Merino, Markus Vervier, Eric Sesterhenn, X41 D-Sec GmbH.
++
++Upstream-Status: Backport
++CVE: CVE-2021-23017
++
++Reference to upstream patch:
++https://github.com/nginx/nginx/commit/7199ebc203f74fd9e44595474de6bdc41740c5cf
++
++Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ src/core/ngx_resolver.c | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
++
++diff --git a/src/core/ngx_resolver.c b/src/core/ngx_resolver.c
++index 79390701..63b26193 100644
++--- a/src/core/ngx_resolver.c
+++++ b/src/core/ngx_resolver.c
++@@ -4008,15 +4008,15 @@ done:
++             n = *src++;
++ 
++         } else {
+++            if (dst != name->data) {
+++                *dst++ = '.';
+++            }
+++
++             ngx_strlow(dst, src, n);
++             dst += n;
++             src += n;
++ 
++             n = *src++;
++-
++-            if (n != 0) {
++-                *dst++ = '.';
++-            }
++         }
++ 
++         if (n == 0) {
++-- 
++2.17.1
++
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
+index de080a2b01..a4583ed8f8 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx.inc
++++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+@@ -22,6 +22,7 @@ SRC_URI = " \
+     file://nginx-volatile.conf \
+     file://nginx.service \
+     file://nginx-fix-pidfile.patch \
++    file://CVE-2021-23017.patch \
+ "
+ 
+ inherit siteinfo update-rc.d useradd systemd
 -- 
 2.25.1
 
