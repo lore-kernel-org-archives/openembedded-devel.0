@@ -1,77 +1,93 @@
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.web12.26.1626378330463681246
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.2])
+ by mx.groups.io with SMTP id smtpd.web12.592.1626397981981646924
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Jul 2021 12:45:30 -0700
+ Thu, 15 Jul 2021 18:13:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=IA91RVRH;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: texier.pj2@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id a23-20020a05600c2257b0290236ec98bebaso1928139wmm.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jul 2021 12:45:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=3J2eFgLL9YGQCNkS91K+KbrXQ+wEP5H9S4dCPSf7ozc=;
-        b=IA91RVRHa39et+l47n4jfPXfLinubdueiExUsuWPo1gxpoIGZAh6A3xacdt1tdPnWI
-         o1bmoRLrBby3n6BJ9/Y2ZsHcraO6ugms8ovFFqR5uPKP3fST7Xi7GXBHZF06XkcF/tyJ
-         7jNcDDGFiNZFsFI0G33m8Ab7K8t0d14XlP+dJBvex40NRP0dtTwFRTlSJ7m5DXct6CwC
-         qYF/LQckyumdXip3od3KcEiS6UPNJvmiKwXKghTVS0QFDp8eAOGrA0PWIHBnyP4EF0zX
-         HIDTt5z8zQP7MgYRAz5rIrBW5MJOPyvBnAPfVF4TDXSwvmthBkgKdwTNpXK73qZo96bp
-         BL+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=3J2eFgLL9YGQCNkS91K+KbrXQ+wEP5H9S4dCPSf7ozc=;
-        b=Iu0B0wXyf3ZmV5M61g/inEzwIuI0Oodhkqa36YJGNsSothd5ajBcCxID7v2WSmISDb
-         54KNbbj2UUUvI/6hvi1E0NASh2+Ka2N/fiqSIWqQeTMb9/cMD/uJ6rF/1QLkomtB22i7
-         maGgZzWhh4IICTHQ+SDHimsW/iEa/jp6W7Q1AotgQpf1U7tU6QrIq+6ReErDap2KVgMx
-         taZAYDwIjmRYSmlO7U7A+6CJvTD/Ci/B4LFNPiWcdXCxjI8WerPSeyy6k/8hf+KrdywJ
-         OGmq6/Ss8sE+PgJ/T+lB+BlU7UBuMQFwtcLHbbVOiI8S48vKdVzjy0CUdZM9smVVc6qK
-         a9fw==
-X-Gm-Message-State: AOAM532te7SscNJlQl4da+5x8nITgzJVYM35X0XgQ8Azm8mIGvLbwT+g
-	HL50wAjokeDTiA6xGWsMfjDPLKQcoiw=
-X-Google-Smtp-Source: ABdhPJyZPIn2ZC6KNiSyepyCEmpYtoH8krRyUcvpAvP1pL9rq2oZiepu7F5Ff0s3G5w06nZsSmpZEQ==
-X-Received: by 2002:a05:600c:4e92:: with SMTP id f18mr12265376wmq.62.1626378328732;
-        Thu, 15 Jul 2021 12:45:28 -0700 (PDT)
-Return-Path: <texier.pj2@gmail.com>
-Received: from menoah.home ([2a01:cb19:190:c500:3523:b838:596f:db5])
-        by smtp.gmail.com with ESMTPSA id g3sm7602410wru.95.2021.07.15.12.45.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Jul 2021 12:45:28 -0700 (PDT)
-From: "Pierre-Jean Texier" <texier.pj2@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Pierre-Jean Texier <texier.pj2@gmail.com>
-Subject: [meta-oe][PATCH] linuxptp: fix upstream version check
-Date: Thu, 15 Jul 2021 21:45:25 +0200
-Message-Id: <20210715194525.16639-1-texier.pj2@gmail.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=gD2ccpeO;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: wangmy@fujitsu.com)
+Return-Path: <wangmy@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1626397979; i=@fujitsu.com;
+	bh=4orzUH9ZEZIU5tjIV9W/CwTbEjO8iWeJ1UGuXYKYd6U=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=gD2ccpeOwCNRjhOBXJHRihWjdKmYsttZMPoyg3RH9kC3QAqOP8tSdq79c0hN0oCWG
+	 fFraLpP7HtOEmy6lHkVEqA+KhfqnN8b7+hyzwlJ2YkhFi7YghVWOxZJPpXggY2OhnG
+	 tuOuyccdRkqLbwOLT1MJKDHodblZqm9rTXONcJfXyZRhbnuEMlIEBpw30BKyIDKKVY
+	 z4lylT8RViuFXbJpEWeL88lu6MQ33OhoYT9MEffX9gfHiC3xynEm5rgQxWWW5e+Gnk
+	 mvHmPqKve0X/2ldF6FMx2nCnVz6ci8acOePDke8y6pGw4QdtgxH9tSJqGaciQT+gyF
+	 cAXj+vXjgHY+Q==
+Received: from [100.112.192.137] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-a.eu-west-1.aws.symcld.net id F1/9F-07839-A1DD0F06; Fri, 16 Jul 2021 01:12:58 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrDIsWRWlGSWpSXmKPExsViZ8MxVVfq7oc
+  Eg0VLOS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oxlU3ayFjRxVWw8Xt/AOIezi5GLQ0hgG5PE
+  pMurWLoYOYGck4wSE47EgdhsAmoS02/dYAWxRQT0JZbO3sMMYjMLqEi8+N3DDmILC7hJfDmyF
+  8jm4GARUJW4tTQHJMwr4CTxdf4UsJESAgoSUx6+B2vlFHCW+NU3mR1ilZNEX8tSVoh6QYmTM5
+  +wQIyXkDj44gUzRK+ixOzLzSwg4yUEKiVuPE6dwMg/C0nHLCQdCxiZVjFaJBVlpmeU5CZm5ug
+  aGhjoGhoa6RpaArGRmV5ilW6iXmqpbnlqcYmuoV5iebFecWVuck6KXl5qySZGYCCmFByo28H4
+  4PUHvUOMkhxMSqK86y9/SBDiS8pPqcxILM6ILyrNSS0+xCjDwaEkwSt5GygnWJSanlqRlpkDj
+  AqYtAQHj5IIbxRImre4IDG3ODMdInWKUVFKnPfaLaCEAEgiozQPrg0WiZcYZaWEeRkZGBiEeA
+  pSi3IzS1DlXzGKczAqCfNuBJnCk5lXAjf9FdBiJqDF2mvegiwuSURISTUwZU4NlGh8vdrzhSr
+  jrDTb2seOko6Pzr2QKDz9wujvAlHdHVW5jRtuKEW6iV8z9A3YxbFU8mD259xS40n7cyI1n6/6
+  fTDa5Nvsm7nx2x/u9OBo2FCocTx6T8WjV8K/XNy0Hv7q2bNqa+eZ24IRZzg/fboYGRX7xlFY/
+  PS6dZzd3y6cXNScEsfjf+R9YVpMhb/QLcOthw6cYS4VK5ipm7RK2zuuYLsxc3LaR5MMwyv/Cy
+  Y1LjWyDqwL0Ahxelz59/7FpD2+bYEVVjv2CIebCJ5e258X0H5r/XfxOYJVnPmmq+J3btkosNz
+  w9++lYV7Fd43qzDtMVuytDhG9K58WpiJSpPSNp5ZPu86z7MCr8KNKLMUZiYZazEXFiQAwcY21
+  PwMAAA==
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-7.tower-267.messagelabs.com!1626397977!152466!1
+X-Originating-IP: [62.60.8.149]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 25026 invoked from network); 16 Jul 2021 01:12:58 -0000
+Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
+  by server-7.tower-267.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 16 Jul 2021 01:12:58 -0000
+Received: from R01UKEXCASM223.r01.fujitsu.local (ex2k13_223.fs.fujitsu.com [10.182.185.121])
+	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 16G1CmkD017303
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 16 Jul 2021 02:12:57 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Fri, 16 Jul 2021 02:12:49 +0100
+From: "wangmy" <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] modemmanager: upgrade 1.16.6 -> 1.16.8
+Date: Fri, 16 Jul 2021 09:12:32 +0800
+Message-ID: <1626397952-27403-2-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1626397952-27403-1-git-send-email-wangmy@fujitsu.com>
+References: <1626397952-27403-1-git-send-email-wangmy@fujitsu.com>
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
+Content-Type: text/plain
 
-Fixes:
-
-builder@2088cb10ccfb:/work/build$ devtool check-upgrade-status linuxptp
-NOTE: Starting bitbake server...
-<...>
-
-INFO: linuxptp                  3.1             UNKNOWN_BROKEN  None
-
-Signed-off-by: Pierre-Jean Texier <texier.pj2@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-oe/recipes-connectivity/linuxptp/linuxptp_3.1.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../{modemmanager_1.16.6.bb => modemmanager_1.16.8.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.16.6.bb => modemmanager_1.16.8.bb} (95%)
 
-diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_3.1.bb b/meta-oe/recipes-connectivity/linuxptp/linuxptp_3.1.bb
-index ce28564759..a0f894a4db 100644
---- a/meta-oe/recipes-connectivity/linuxptp/linuxptp_3.1.bb
-+++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_3.1.bb
-@@ -8,6 +8,9 @@ SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.
-            file://Use-cross-cpp-in-incdefs.patch \
-            "
+diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.16.6.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.16.8.bb
+similarity index 95%
+rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.16.6.bb
+rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.16.8.bb
+index b499d93ec1..acfa113edb 100644
+--- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.16.6.bb
++++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.16.8.bb
+@@ -12,7 +12,7 @@ inherit gnomebase gettext systemd vala gobject-introspection bash-completion
+ DEPENDS = "glib-2.0 libgudev intltool-native libxslt-native"
  
-+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/linuxptp/files/"
-+UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)/"
-+
- SRC_URI[md5sum] = "2264cb69c9af947028835c12c89a7572"
- SRC_URI[sha256sum] = "f58f5b11cf14dc7c4f7c9efdfb27190e43d02cf20c3525f6639edac10528ce7d"
+ SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz"
+-SRC_URI[sha256sum] = "2a90b6260f66d3135609d62667ada73416694d717e7fd9b73223e3703a499617"
++SRC_URI[sha256sum] = "21fdfaf94171261ad9d99771894f5ade4bc39ef3d1ff1d421054d14713e97880"
+ S = "${WORKDIR}/ModemManager-${PV}"
  
+ PACKAGECONFIG ??= "mbim qmi \
 -- 
-2.17.1
+2.25.1
 
