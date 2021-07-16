@@ -1,60 +1,60 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.68])
- by mx.groups.io with SMTP id smtpd.web12.911.1626399978108465798
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.1])
+ by mx.groups.io with SMTP id smtpd.web08.1143.1626401446657567467
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Jul 2021 18:46:18 -0700
+ Thu, 15 Jul 2021 19:10:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=CmJrAdkl;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.68, mailfrom: zhengrq.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=xewY3U1W;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.1, mailfrom: zhengrq.fnst@fujitsu.com)
 Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1626399975; i=@fujitsu.com;
+	s=170520fj; t=1626401444; i=@fujitsu.com;
 	bh=cg3CzsZc5uubBBbDkocYiLeiu9nb2jQX3cp6z4h+vb8=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=CmJrAdklU3GhZkR1YjnXaM0ESH6o8ITphExY4/zn9BJ6RBoHLDLwVUtEuPknYovYT
-	 IqSuVvovtprm7Jjl5KOp4G8rL0qsEHU2F6PnOGsnFjW2uwsmX8l1aGqRqDBi9BkgmO
-	 JAx6+JEBbXHg3q8nHJ0AarQOp70UcZUrPUa7PY18OJVcGl7vk13XA3Gopo4hIfM883
-	 Mkh1OED01eRtGP6cv7KBlMLgPFSb2XMpqXuikS5Dx6lXY/ccnKH8u+gXMB8q3jTJ5u
-	 GzoZbETM9CMXflFpwXl7BqzY36p94WMcZi/rrJCe+RhTh6hPZ4c0QpgActZZ9mWbTZ
-	 ChuXU2q4dKE2Q==
-Received: from [100.112.198.129] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-b.eu-west-1.aws.symcld.net id 1C/E1-07373-7E4E0F06; Fri, 16 Jul 2021 01:46:15 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrHIsWRWlGSWpSXmKPExsViZ8MxVff5kw8
-  JBkt6mSwuHl7K7MDocW7jCsYAxijWzLyk/IoE1owrM3ILPrNXLFn5k7GBcTZ7FyMXh5DANiaJ
-  /keH2CCcvYwSnze8Zuxi5ORgE9CVOPd4LTuILSKgL7F09h5mEFtYwEni6sQjQDUcHCwCqhIN+
-  5JAwrwCnhKzf09nArElBBQkpjx8zwwRF5Q4OfMJC4jNLCAhcfDFC2aQVgkBRYnZ0+Uhyisl9s
-  zqZ5rAyDMLSccsJB0LGJlWMZonFWWmZ5TkJmbm6BoaGOgaGhrpGlqa6ZqZ6CVW6SbppZbqlqc
-  Wl+ga6iWWF+sVV+Ym56To5aWWbGIEBlBKwRGHHYz3X3/QO8QoycGkJMq7/vKHBCG+pPyUyozE
-  4oz4otKc1OJDjDIcHEoSvDseA+UEi1LTUyvSMnOAwQyTluDgURLh3XwHKM1bXJCYW5yZDpE6x
-  RjO8WbtkkXMHG/BZNu9u0CyHUzOXHBwNTPHLDB5v/0QkHwAIoVY8vLzUqXEeZ+DbBMAGZdRmg
-  e3DBatlxhlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ81Y8AprCk5lXAnfTK6BzmYDO1V7zFuT
-  ckkSElFQD0zR785aDDXOtG3+2JvmnJLBscTpvcfnZUvZbSUsnfstNOMY+q9tsUtg6hzMsWYfi
-  OTKTPj7rN5+xUf9ryaH2VaIsK9Q1v0hOb4qctlomfIeu1B8eVdtJFR+WT3Weahah8/jD6ZhVz
-  WdPrkjXrD3gHH7itsbnTeG3HIxk0zKy3vzKflO+/GBlwfpf7381GIm1Srz+oSYinHrqwcYTFg
-  evZzzRaJguV5CrdfrCOf1eFYnXtdc3zrc9/XFl0aZ3nU9m3bWNnCvxqTMp8gAH7/yZXKcv7S5
-  viTzR/F3glZBNeC2zTIhwWb0Ng5Sri1FpduWLTNme+ryzW0Xy/6+Jq8y91lu2qao5+IDMLdv2
-  Kw/fKrEUZyQaajEXFScCAAaWkxRRAwAA
+	b=xewY3U1WdFbiOzaxXHd2PmYLP6U+POOj4KLxTseULJM6bUKL4eWvWMRwrJ26GJ3uI
+	 DCorCXPkMKrHPlxo7h+8NSGD2wLguebsigpSdjwUID5lM7Axt4tBdY5bxzPLdqPi96
+	 zkd2R4rhw+tPHSue6QbgH2FbIIW04IfRjEp5cUw5h6GNNzkTXdDBgp6PDcdTwt51Ap
+	 gkMr0+jisW0GbZTLhiCQ366uOPtULexIaXY44oyAOZqIV9akp+JaOJJ8PWvrBfkgnN
+	 y9yAKDT7puVIcLn7afKN6l9P/PH9ADKQCUGcPV36Yek/sWKrP3X5BWfVRYMnrDapQ8
+	 b2XypQ6lUN9tQ==
+Received: from [100.112.192.137] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-a.eu-west-1.aws.symcld.net id B6/29-31114-3AAE0F06; Fri, 16 Jul 2021 02:10:43 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrPIsWRWlGSWpSXmKPExsViZ8MRorv41Yc
+  Eg+ajghYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aVGbkFn9krlqz8ydjAOJu9i5GLQ0hgG5PE
+  tOe/WCCcvYwSC/9eZO5i5ORgE9CVOPd4LTuILSKgL7F09h6wuLCAk8TViUcYQWwWAVWJaR/Os
+  YHYvAKeEr8nHQarlxBQkJjy8D0zRFxQ4uTMJywgNrOAhMTBFy+A4hxANYoSs6fLQ5RXSuyZ1c
+  80gZFnFpKOWUg6FjAyrWI0TyrKTM8oyU3MzNE1NDDQNTQ00jW0NNI1MdFLrNJN1Est1S1PLS7
+  RNdRLLC/WK67MTc5J0ctLLdnECAyhlIIDOjsYf776oHeIUZKDSUmUd/3lDwlCfEn5KZUZicUZ
+  8UWlOanFhxhlODiUJHiVngHlBItS01Mr0jJzgOEMk5bg4FES4d18ByjNW1yQmFucmQ6ROsUYz
+  vFm7ZJFzBxvwWTbvbtAsh1MzlxwcDUzxywweb/9EJB8ACKFWPLy81KlxHnFXgKNEwAZl1GaB7
+  cMFq+XGGWlhHkZGRgYhHgKUotyM0tQ5V8xinMwKgnzMoNM4cnMK4G76RXQuUxA52qveQtybkk
+  iQkqqgSnj7KXNVc9r9FS7TlQ91rz3oWPm1I+bGqNKCnULRMp+KPKyrSovSFK3mLDcfLrQ2Y+l
+  k75umKhlNlevUN48dGruEu9vCTwfjH6Yh/9T2vm6peCV6bkdhsnpR3dMmHU0813kubc+YY+UX
+  h0Per+ux/jzDParMroSkmrGXaZ2H1RqN6ZutZ63/urGiAnuYucKrsVM22fRudmy7HtWzhsJr8
+  Vsdxjv9rOz3m+ueO3CvidztwTLmdWxTP77JvixrefmEmFex5/TenO+mssank7tI0/sK5I7LjK
+  VhIoXMfp/tRB8MG2u8snfc1gSHb9vS78ZlmGi1f9wRWnn8xnzPf+76no4bQ2VmTjTV2Zvi5BQ
+  jBJLcUaioRZzUXEiAHMfDXpSAwAA
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-9.tower-287.messagelabs.com!1626399974!70554!1
-X-Originating-IP: [62.60.8.149]
+X-Msg-Ref: server-7.tower-271.messagelabs.com!1626401442!45570!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 6952 invoked from network); 16 Jul 2021 01:46:15 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-9.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 16 Jul 2021 01:46:15 -0000
+Received: (qmail 12740 invoked from network); 16 Jul 2021 02:10:43 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-7.tower-271.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 16 Jul 2021 02:10:43 -0000
 Received: from R01UKEXCASM223.r01.fujitsu.local (ex2k13_223.fs.fujitsu.com [10.182.185.121])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 16G1kBZb028970
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 16G1SORo009272
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 16 Jul 2021 02:46:14 +0100
+	for <openembedded-devel@lists.openembedded.org>; Fri, 16 Jul 2021 02:28:24 +0100
 Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 16 Jul 2021 02:46:09 +0100
+ (TLS) id 15.0.1497.18; Fri, 16 Jul 2021 02:28:21 +0100
 From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 Subject: [oe] [meta-oe] [PATCH] span-lite: upgrade 0.9.2 -> 0.10.0
-Date: Fri, 16 Jul 2021 09:45:58 +0800
-Message-ID: <1626399958-103679-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Date: Fri, 16 Jul 2021 09:28:18 +0800
+Message-ID: <1626398898-103342-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.35]
