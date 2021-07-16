@@ -1,106 +1,123 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.65])
- by mx.groups.io with SMTP id smtpd.web12.2889.1626416960347332344
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web09.3976.1626427288265586151
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Jul 2021 23:29:20 -0700
+ Fri, 16 Jul 2021 02:21:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@fujitsu.com header.s=170520fj header.b=K83EEELB;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.65, mailfrom: zhengrq.fnst@fujitsu.com)
-Return-Path: <zhengrq.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1626416958; i=@fujitsu.com;
-	bh=mAsKCa/payviiECMS2YKyPiAJ9G6xaPRg9xcMxsMGRY=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	b=K83EEELB8XmLCKd2TjEh/6kUCpyt3cC19Ow6+wXzdNM7gjZkYe61jtdn5LktA9iOI
-	 AUuNctyJe9ojrCqtCB3JeKZk2Na29PVyVUWobG7u1K7JUYEYWp0SrJsO2zxs8yzXZ8
-	 NuIfEV6fhRmPiekSqXp+9DyRghsIyqVTHcVqccSIoU9FnHOUWua/y2PiaJwiGdmFLF
-	 TUZtqGEgnekSfWuOdMcCrLa2lY4ToCfR/CuDGbut6v7a4WFE3O6Z5b/ByfpE1NJ8gi
-	 oE/zvQT4quTX+FBXJfGBr/lI0Pe/1m1swT5LnxUQ1jCQjFWCzs7X9I7xkEjiVr58YD
-	 vZDKyGb1DhV7A==
-Received: from [100.112.199.200] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-b.eu-west-1.aws.symcld.net id D7/B6-03155-E3721F06; Fri, 16 Jul 2021 06:29:18 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrGIsWRWlGSWpSXmKPExsViZ8MxRddW/WO
-  CwZYPlhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aLSaeYCpq4K6bOeMDUwPifs4uRi0NIYBuT
-  xKJja9i6GDmBnL2MEg2PdUBsNgFdiXOP17KD2CIC+hJLZ+9hBrGFBfwk2tdPAqtnEVCVaOiaA
-  BTn4OAV8JQ4/0cIJCwhoCAx5eF7sHJeAUGJkzOfsIDYzEDl3UeeMkHY8hLNW2eDtUoIKErMni
-  4P0VopsWdWP9MERt5ZSLpnIemehaR7ASPzKkbzpKLM9IyS3MTMHF1DAwNdQ0MjXUNLS11DC73
-  EKt0kvdRS3fLU4hJdQ73E8mK94src5JwUvbzUkk2MwIBLKTgutIPxzesPeocYJTmYlER5L3/+
-  kCDEl5SfUpmRWJwRX1Sak1p8iFGGg0NJgtdT4WOCkGBRanpqRVpmDjD4YdISHDxKIrxqIGne4
-  oLE3OLMdIjUKcZwjjdrlyxi5ngLJtvu3QWS7WBy5oKDq5k5ZoHJ++2HgOQDECnEkpeflyolzj
-  tVFWicAMi4jNI8uGWw6L7EKCslzMvIwMAgxFOQWpSbWYIq/4pRnINRSZj3uRLQFJ7MvBK4m14
-  BncsEdK72mrcg55YkIqSkGpis+hcr7xHd/HYHl+zrIDdfZ9b5N2eeY7aZ1Po68qlV+JO+zsOP
-  ud8cWR9Qv2Lzs9UR5dFPD+5q85c7ZFNzIiyW7fzfuFUVS9sUF9dfmdyX5R51l+vdeYbEhrgd6
-  nc5olK25sybasn/+vo59q18vx1ehtwrOrVly61dmyzzZAWLO0pVI/lLLieU9ajlGNX+/rp8/W
-  Lh9XmL7SvXnpwbveXrf6EIsVmz1W9XMyUbsT++urxb9WX9jASnKeZzr2YEqskf/1D29r3qNvW
-  mVysMJk1y0ItUnvGvij9k6vrHUbobtrsGTBf0T2Xj2rFwrc25qzLTVgTdqk4Pv2DoruUytSmH
-  47692gkFK8ttaopLumOUWIozEg21mIuKEwHm67G6aQMAAA==
-X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-4.tower-287.messagelabs.com!1626416957!72554!1
-X-Originating-IP: [62.60.8.148]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 6210 invoked from network); 16 Jul 2021 06:29:17 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-4.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 16 Jul 2021 06:29:17 -0000
-Received: from R01UKEXCASM223.r01.fujitsu.local (ex2k13_223.fs.fujitsu.com [10.182.185.121])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 16G6THU4030146
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 16 Jul 2021 07:29:17 +0100
-Received: from localhost.localdomain (10.167.225.35) by
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 16 Jul 2021 07:29:15 +0100
-From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-pymisp: upgrade 2.4.143 -> 2.4.144
-Date: Fri, 16 Jul 2021 14:29:11 +0800
-Message-ID: <1626416951-107506-1-git-send-email-zhengrq.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=59848 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.93)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1m4K27-0008Em-Kn; Fri, 16 Jul 2021 12:21:24 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-requests: Upgrade 2.25.1 -> 2.26.0
+Date: Fri, 16 Jul 2021 12:21:16 +0300
+Message-Id: <20210716092117.31730-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
-Content-Type: text/plain; charset="y"
-Content-Transfer-Encoding: quoted-printable
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-v2.4.144 (2021-06-07)
----------------------
+Upgrade to release 2.26.0:
 
-Changes
-~~~~~~~
-- Bump version. [Rapha=C3=ABl Vinot]
-- Bump object templates. [Rapha=C3=ABl Vinot]
-- Bump deps. [Rapha=C3=ABl Vinot]
-- Bump deps. [Rapha=C3=ABl Vinot]
-- Bump deps. [Rapha=C3=ABl Vinot]
+- Requests now supports Brotli compression, if either the `brotli`
+  or￼ `brotlicffi` package is installed
+- `Session.send` now correctly resolves proxy configurations from
+  both the Session and Request. Behavior now matches
+  `Session.request`.
+- Fixed a race condition in zip extraction when using Requests in
+  parallel from zip archive.
+- Requests now supports `idna` 3.x on Python 3. `idna` 2.x will
+  continue to be used on Python 2 installations
 
-Other
-~~~~~
-- Fix misp API response content parsing. [Silvian I]
+Drop setup.py-Support-idna-version-3.1.patch because the issue
+with idna version has been solved in the upstream for Python 3.
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pymisp_2.4.143.bb =3D> python3-pymisp_2.4.144.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.143.bb =3D> python3-pymisp_2.4.144.bb} (92%)
+ .../setup.py-Support-idna-version-3.1.patch   | 40 -------------------
+ ...s_2.25.1.bb => python3-requests_2.26.0.bb} |  4 +-
+ 2 files changed, 1 insertion(+), 43 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-requests/setup.py-Support-idna-version-3.1.patch
+ rename meta-python/recipes-devtools/python/{python3-requests_2.25.1.bb => python3-requests_2.26.0.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.143.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.144.bb
-similarity index 92%
-rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.143.bb
-rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.144.bb
-index 1e3ef27a79..1e97b27aed 100644
---- a/meta-python/recipes-devtools/python/python3-pymisp_2.4.143.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymisp_2.4.144.bb
-@@ -4,7 +4,7 @@ LICENSE =3D "BSD-2-Clause"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Da3639cf5780f71b125d3e9d1dc127c20"
+diff --git a/meta-python/recipes-devtools/python/python3-requests/setup.py-Support-idna-version-3.1.patch b/meta-python/recipes-devtools/python/python3-requests/setup.py-Support-idna-version-3.1.patch
+deleted file mode 100644
+index 26332249da..0000000000
+--- a/meta-python/recipes-devtools/python/python3-requests/setup.py-Support-idna-version-3.1.patch
++++ /dev/null
+@@ -1,40 +0,0 @@
+-From fc45beed40a86c8fc38fc430765c1c5d2c9961c2 Mon Sep 17 00:00:00 2001
+-From: Fabio Berton <fabio.berton@ossystems.com.br>
+-Date: Thu, 4 Mar 2021 09:26:48 -0300
+-Subject: [PATCH] setup.py: Support idna version 3.1
+-Organization: O.S. Systems Software LTDA.
+-
+-Change idna required version to use python3-idna recipe that currently
+-is on version 3.1.
+-
+-Without this change python-request doesn't work as the idna version
+-doesn't match the required versions. When bump python-request recipe,
+-verify if the upstream project bumped the idna version and drop this
+-patch.
+-
+-As this recipe was tested with python3-idna_3.1 don't allow higher
+-versions.
+-
+-Upstream-Status: Inappropriate [embedded specific]
+-
+-Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+----
+- setup.py | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/setup.py b/setup.py
+-index 7ba4b2a2..9d3b973e 100755
+---- a/setup.py
+-+++ b/setup.py
+-@@ -43,7 +43,7 @@ packages = ['requests']
+- 
+- requires = [
+-     'chardet>=3.0.2,<5',
+--    'idna>=2.5,<3',
+-+    'idna>=2.5,<3.2',
+-     'urllib3>=1.21.1,<1.27',
+-     'certifi>=2017.4.17'
+- 
+--- 
+-2.30.1
+-
+diff --git a/meta-python/recipes-devtools/python/python3-requests_2.25.1.bb b/meta-python/recipes-devtools/python/python3-requests_2.26.0.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-requests_2.25.1.bb
+rename to meta-python/recipes-devtools/python/python3-requests_2.26.0.bb
+index cea8fd5178..95e6e1a6b6 100644
+--- a/meta-python/recipes-devtools/python/python3-requests_2.25.1.bb
++++ b/meta-python/recipes-devtools/python/python3-requests_2.26.0.bb
+@@ -3,9 +3,7 @@ HOMEPAGE = "http://python-requests.org"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
  
- SRC_URI =3D "git://github.com/MISP/PyMISP.git;protocol=3Dhttps;branch=3Dmain"
--SRCREV =3D "c2e9663765e83f1a4aa70099546bec653ed770e7"
-+SRCREV =3D "7dbaf665d9288f2a2692bee3d6207bb6abe3c51f"
- S =3D "${WORKDIR}/git"
+-SRC_URI += "file://setup.py-Support-idna-version-3.1.patch"
+-
+-SRC_URI[sha256sum] = "27973dd4a904a4f13b263a19c866c13b92a39ed1c964655f025f3f8d3d75b804"
++SRC_URI[sha256sum] = "b8aa58f8cf793ffd8782d3d8cb19e66ef36f7aba4353eec859e74678b01b07a7"
  
- inherit setuptools3
+ inherit pypi setuptools3
+ 
 -- 
-2.25.1
+2.17.1
 
