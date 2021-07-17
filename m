@@ -1,495 +1,260 @@
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web08.6114.1626542136330204827
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.6683.1626545405183798122
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 17 Jul 2021 10:15:36 -0700
+ Sat, 17 Jul 2021 11:10:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=rmlq/0f7;
- spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id b5-20020a17090a9905b029016fc06f6c5bso9188718pjp.5
-        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Jul 2021 10:15:36 -0700 (PDT)
+ dkim=fail reason="body hash did not verify" header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=NAJNepVB;
+ spf=permerror, err=parse error for token &{10 18 testsso.windriver.com}: permanent DNS error (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=2832432288=randy.macleod@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 16HI4Ibc015349
+	for <openembedded-devel@lists.openembedded.org>; Sat, 17 Jul 2021 18:10:03 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0a-0064b401.pphosted.com with ESMTP id 39us6r09w0-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sat, 17 Jul 2021 18:10:03 +0000
+Received: from m0250811.ppops.net (m0250811.ppops.net [127.0.0.1])
+	by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 16HIA3fU025030
+	for <openembedded-devel@lists.openembedded.org>; Sat, 17 Jul 2021 18:10:03 GMT
+Received: from nam10-dm6-obe.outbound.protection.outlook.com (mail-dm6nam10lp2103.outbound.protection.outlook.com [104.47.58.103])
+	by mx0a-0064b401.pphosted.com with ESMTP id 39us6r09vx-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Sat, 17 Jul 2021 18:10:03 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Xdp6I80DZ8Hqj4V6heYIjFb+J3pGTCN3Qjil8vEZCqN2ZlfLZWn25v2vjFIl0YacSegGvefE1T96M5cr2s95GY4bwqIh/83aXUhhAr3o+XhpxnyBe6RN8zKdxsb6sa2tveNJYOSlkUEdbYwpjHgp9QDGNG/bJlaDCQr4PzNffeyZ13uW52ho0Dgc+SyecnhWzU82i6V5QOItzTVmLiKVSsh6ssVi16+8WbX0Abtt6bk0pS2dfxudSbg9B+pv0gRnVO8tD1Wqhbp/WCdWLowT870J9gtcLj6U/o8UOHu3bsc7oa0wUNa8k5swoPOz2E720gPR3N4J3okiE2B1PN072A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=k1T84RVxLYLy6I/QbJX+weprpxKYAMQATZ2CmC7KOFg=;
+ b=AYnYinr/0tv5ymdN97LAiqRIOldM/KHgu3vvxpptTyQt+PvS+qYU+cZX15cJVMuQo0WedABVT7SeNkFM3W+VngBTQVlQ3oDVD5cn4QJLByxhHOoHqSQV6yOqOj75bsgQU5uloqUCC9vW4QUuEb9mMikgUpRHrLZjFNH9OWN3pLfnzIhddVSNAv8uKXM8T90+InaO6U0xYHk6Juhu3WuYhdrHR+OpnsfMIoS4MFXuaDsJsNHqIfZovxSxM2IeYGOtUFch629CXGwluUaAXQkAv57ver10Rdxjvyd5m3Pf7hKlnOsOdC98H2Y1ydt8tHi4p4W5YtaPNrCFOcUw015m1w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=aPRe4FBz6EJGVseFVb5ZO/L2WgJXapNUxB7GL2tFogM=;
-        b=rmlq/0f7IsKMFZpeWGBddd+l7vgdN5dmxJ9c74mJMwrPbNaWGJPjLuTvW39gBtdyjB
-         Q8x4iqQrDjqWT283vB+ntmyT3rqm8ZMANzg8E3R04dXYrx2+u5IVYHRPHMMAMQCTEUZH
-         w15HGpH1C8fiNh7Aez4DIpq1xQxSpVWkyVGUqlOlpU2ZWAt2gBfhp2VkEHaWNTcbx0wE
-         ESVDVUrJ9AYcbhJvrf7o40IQGPUwdLw8umFaIZWMySj9JprSjrE11m74rAUCAwt0/s1/
-         QuLVHLeyh6of2AubSc9b0oKH36jIy7NeLZZ5DDc16JmsJNWfvZmL5r5oVP5aUGJKbd9p
-         ydDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=aPRe4FBz6EJGVseFVb5ZO/L2WgJXapNUxB7GL2tFogM=;
-        b=j6k239KbreU0PclC8jb5TqNn04EaPqeQY4iUoEkRNFlDdsxkjIx+sw9gRct4jMsiCG
-         dGe2zWrsuHPM7nzKABflCYLmZ1iTGaDfQSm8iJRlIOcv0VI945X9nkziEZGpos/pl70k
-         2xR2OjNe8P8oPjetcCn5VZmKI8LVHd2wQVfYnrit2sjsFRMKODBgF5E5gxl0nX5dcc8j
-         ptzEKcKCpLDCAZAN1PogDMd6WCZo/JSc68bRWJXaol/7HGIfKRx6wGgQflRUNSeJzbQa
-         sFi45fhcmrTpaePnY6Bhy+eIwYJC3xuj2W3cDHXxNtRZE5+4ZLVs8/zVay92AAiLKkzI
-         Tdpg==
-X-Gm-Message-State: AOAM533cJ6BNC3Fu2uWiK+F0JfNRgAhyWlEBRS+vcRKS0KO6T3jXjxtt
-	2B8iWXfzwGd0kqa/imFoqmP/pnkfqonTHQ==
-X-Google-Smtp-Source: ABdhPJzuD9okHeLiVtzG11fiMYkvSZ54A1NLjMztUYWphif9Lm6XNuJHec+mW5+YQtLSuH6tu2ZyuQ==
-X-Received: by 2002:a17:90a:3e0d:: with SMTP id j13mr21267657pjc.91.1626542135404;
-        Sat, 17 Jul 2021 10:15:35 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::8300])
-        by smtp.gmail.com with ESMTPSA id 2sm16192941pgz.26.2021.07.17.10.15.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 17 Jul 2021 10:15:34 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] autofs: Upgrade to 5.1.7
-Date: Sat, 17 Jul 2021 10:15:32 -0700
-Message-Id: <20210717171532.1243175-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.32.0
+ d=windriversystems.onmicrosoft.com;
+ s=selector2-windriversystems-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=k1T84RVxLYLy6I/QbJX+weprpxKYAMQATZ2CmC7KOFg=;
+ b=NAJNepVBK5Jz6UOPKsoCp8u80hQ/ZOzAwsHBdqUojngQ6bX+ktKnswjX5OkHisLsgAnW1enFP5FKbjExZ/plrcMQAlkH4GC7HyMPf8pMpKapeopeAdS4M5Tojdrvy9dD3kQLNs2kqVxE/YdTjOvVzeDnywCFNgRx9P/kqFpzNDU=
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from DM6PR11MB3994.namprd11.prod.outlook.com (2603:10b6:5:193::19)
+ by DM5PR11MB1675.namprd11.prod.outlook.com (2603:10b6:4:d::8) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4331.26; Sat, 17 Jul 2021 18:10:01 +0000
+Received: from DM6PR11MB3994.namprd11.prod.outlook.com
+ ([fe80::c413:9f51:c32e:a579]) by DM6PR11MB3994.namprd11.prod.outlook.com
+ ([fe80::c413:9f51:c32e:a579%6]) with mapi id 15.20.4331.030; Sat, 17 Jul 2021
+ 18:10:01 +0000
+Subject: Re: [oe] [meta-oe][hardknott][PATCH 1/2] redis: fix CVE-2021-29477
+To: akuster808 <akuster808@gmail.com>,
+        Tony Tascioglu <tony.tascioglu@windriver.com>,
+        openembedded-devel@lists.openembedded.org
+References: <20210716184733.37797-1-tony.tascioglu@windriver.com>
+ <106d037b-ffac-beae-e65c-845e99742c86@gmail.com>
+From: "Randy MacLeod" <randy.macleod@windriver.com>
+Message-ID: <a3b8968d-140c-68a7-2704-7a9b3b54f164@windriver.com>
+Date: Sat, 17 Jul 2021 14:09:57 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
+In-Reply-To: <106d037b-ffac-beae-e65c-845e99742c86@gmail.com>
+X-ClientProxiedBy: SJ0PR03CA0278.namprd03.prod.outlook.com
+ (2603:10b6:a03:39e::13) To DM6PR11MB3994.namprd11.prod.outlook.com
+ (2603:10b6:5:193::19)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [172.25.44.2] (198.48.226.187) by SJ0PR03CA0278.namprd03.prod.outlook.com (2603:10b6:a03:39e::13) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4331.23 via Frontend Transport; Sat, 17 Jul 2021 18:10:00 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: c5885aa6-7ded-4ba9-6273-08d9494e1851
+X-MS-TrafficTypeDiagnostic: DM5PR11MB1675:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: 
+	<DM5PR11MB167578766431D42D27D72528F8109@DM5PR11MB1675.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	GcB7X7hgExybaUOjxj3k29KVBtgsC3wchMMLw1WZsTeKF0KUHOOIfvDTFdHWbfhfbe5zvlmINSEgP58dCvsiFXPqb8yhEYIw5rxjWndePrdlz1o8q+wPqPrEN4vIQQIkrKLnJA/LXG69yf5ce8yPYumwxtqAFBc9Ndi+ZImveWpG6ysb2EYsqkqx1znZFeZLaAlSqKi0ThBkihWywhv0P/wVb4Op9e1YFyVOEM5OPGeXdfUpAucgZZnV3IEtpAQsiQJL/6qR+9mRbm15KR/qBUB2hRvL7ZWhR9JH9qID966aXhKQX8AEIF7bdXxLb09HjfNse22Ffex/xwgXziwqwNMfWDdwRjbzcMYnMNjVL1CFW99P6QfO4xta7Ij+J4uddbVdjM0nLIyVnlALtvwwmo+XgD24A80Rjvq9VcD4x6sxOAx5L3NXQCvEWdkJ+cWuxP6fCS2wWRnHIkuOd6+gDcv1Eu7h4YiNTJ9IcUq7S18EXnTYBdlq2p8A0viFNCH6qJHPjfjJvMIAEn9ltlcLGEbvu5Py/5z5UrutTX/D9sjSUjMRnvGMiRJcQ9Wo8lukUeMDsboyGdqYRTsBUpStZGKEIo5jGCRYBUfFfs6y7qLJitx4gHf9/DxinpdYQnejewXSvBGE5S9rIPHGkOss7iroWyuheAT4YgUgF9tX0l2J978MY9dkGrf/wuGMbh+xmfBa+/lwTVqGC+As8AG26Rrr6naZZRvPs1PcjX/zwvxFAV2ugoAOZqVGigpEJRplnHsga0+f3N2LOPWOcqAsn0nKu+cBBdxvw3grK8sp5+vgrcpWem1lI4RCUcOv+EOn5ctPwseb/zF0xMgHzf4OvwuCDK6FzkmBkKu5CvDM3jZxSDWW/A84pMfaYZgaHCNu
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3994.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(396003)(346002)(136003)(39840400004)(376002)(6666004)(6486002)(8676002)(31696002)(31686004)(8936002)(86362001)(2906002)(110136005)(16576012)(36756003)(2616005)(956004)(53546011)(478600001)(66556008)(66476007)(66946007)(5660300002)(316002)(38350700002)(83380400001)(38100700002)(966005)(26005)(52116002)(186003)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?NW15alJOZlUrdnJZYzNHdTgwc0J4WXdSdWM5Q3RUZzh2V2tObllXUGFPbzhC?=
+ =?utf-8?B?OFdsNjVlcE0ybkxwY3o1SjVTRWxxZnluWG1oTHA3cVVBWEh0alY3ZjNJOFFO?=
+ =?utf-8?B?bWVPQzlITW9uVDQ5K0I0VGIwdVlDNXg5Y21wdFAwWWIxdjFaYjUwRlBqMFFn?=
+ =?utf-8?B?TlpQa0g3VkFMMG9KRUtheEVUY0hqdThFRkRBVndqUDBmajI1ZDkzUFg2MS9r?=
+ =?utf-8?B?TzN4YzlJaTNaMDAvU2puU2hYZDlxdUhTdklDK2N0RERnUEt6VnFaUVZ4ZTRw?=
+ =?utf-8?B?VURveWJqUXJiSzFoK3AxMythSEJNZW95ZjRJRitOZko4YnFtdFdJZ0plV2xU?=
+ =?utf-8?B?RDVQRVZrZHFxMGMwUEVJUC9xd05ZcUp4aWIzQ2U3UzVSTENyd21CSGRURUdx?=
+ =?utf-8?B?RFhsbm5iRlJOMDJ1MU5Ya0JSUmFjSU9QQkNXMG1vMHdEM3hTRXBuY3JvMjIx?=
+ =?utf-8?B?RGdOa1pTVjlxQnorZEY2RjE3NWRGSkRFcG0yQkZQTjc4MjZBNDZoSWpWYU50?=
+ =?utf-8?B?aEErNktiRWMrYWwxRUR6bE9pNjdaUUQzcFVkVk5leElyZTQ2RkdFSmtnMDY5?=
+ =?utf-8?B?TFJYU2xuVTV0RjR0NzMzYUpiajFTeUhEK3hpUUcwTEJUOHFlcXFEc1hMK2JS?=
+ =?utf-8?B?emJodzFYZWFoeFZRK0owQnlIUWUvSC9JM1E0aE5lMk9oZFhZc0hRRDUzRWdw?=
+ =?utf-8?B?REpBcFhkNVhKRk1ObUV0a1U1azl0NFpMK1pXbi9rS1RIcDE2YXZ4R0IvdU04?=
+ =?utf-8?B?dzUvb1hpVXNOQjBIR21NRTFnNWJEOW56R0lYTC9sRENxMUJoNTcxb3ZjWmVF?=
+ =?utf-8?B?dExKUXNBRzM3K1A3ZnBLbkxZSHFkMWwvZ1diYlF1NkE2eGc4UmlrUjRVZHA3?=
+ =?utf-8?B?Z2ZlZWp2WmtwODZ6S2FnRVR1citiR2ZzNHMzK3huVTM2UG5WQnpMRWw0aFZF?=
+ =?utf-8?B?YStnQVlpK2RYQkxyWEVIdktHQXZrN1RWbndLRXRhd0VOMFZKWGFUNmlSVmdO?=
+ =?utf-8?B?YXY4QVBaOHoxN3dBckg1dm1MVEN0M3NEMjBBS0JqKzEwZWJ6TGM1YnRoZDFX?=
+ =?utf-8?B?OXNNMTlIUmFOWGxtbjY3M0NSWEl5Tll6MGV6WnByblhxNEtiUjFkeEVZM3E3?=
+ =?utf-8?B?STJMRk4rU010L0NMTjV2dG5SN1M4Q1o1S0FvZHFvR2RXaGtDWjhPMUU5eEF6?=
+ =?utf-8?B?SHF1MGluOEhSc1FIU3llR25mL1RadlA5bjNLc3dnN0N1R3V0b2lvaHF0OHZD?=
+ =?utf-8?B?UlEvM1JyYUM5dkVsV2tKUlpZanFTTzl2dDdPWVJRZGtPQ2ZqV3F1R3ZxSkFL?=
+ =?utf-8?B?YU1wejhLaFNlNXRKekNHMlFJSEdKZmxFRU91ZVU0TDB1YldlVTdJZjZHWklo?=
+ =?utf-8?B?bEJpMGFra0tlQ3NGRE1FOWdwbC9IV2ZkVVNjNUhlcDM4a3dYVlRsSkxycEQ3?=
+ =?utf-8?B?bXhXVmJlUldxaUdONW5lMG9OcEprVDdoblhSSCszWjMyMGtadlhmNGtlRWZY?=
+ =?utf-8?B?MGZxR0tBa1ZyTk1rWUNaNVlEL0VpMXJyWjMvTTVqWUZITCt1ZHVROWV6NER0?=
+ =?utf-8?B?TGtpaGRHbWV6RTh2aXRDVkxIVUw4dEE2UExLTlRWZ0x0YUkrcm45dHRLRnpR?=
+ =?utf-8?B?ZzQ5eVJsdHBOY3MxYThSUzE2V1hibWZRME8rT2MwS1JaUklIb2l1enhESHV4?=
+ =?utf-8?B?V3RWNEJtQUZXQzhyNEoyNmVCM3AwRDJTRHdBZjNBNzBLSlR2dDk0MW1lODlI?=
+ =?utf-8?Q?+ohCy04XbFcuffTnzb9rP1DH3hsxTPFr4CgY6Py?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c5885aa6-7ded-4ba9-6273-08d9494e1851
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3994.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2021 18:10:01.5198
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: j38a9YX9VSxiDB/YGp2t0wyOkXRUIj/tbPhs/vdrrIoUGgSoDO1gLl+DL76Ko7NjU4sOPbM3shXseHdQKdl9mDyuTwoG4XtKszx6vRFvSY4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB1675
+X-Proofpoint-ORIG-GUID: YfpZAXh7lJlfENASDw8tCRjAMqYwrc-E
+X-Proofpoint-GUID: _ubMnIPnajvcVDKNgtPocBdiuqCa_Zk9
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
+ definitions=2021-07-17_07,2021-07-16_02,2020-04-07_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 malwarescore=0
+ mlxlogscore=999 impostorscore=0 spamscore=0 lowpriorityscore=0
+ suspectscore=0 priorityscore=1501 adultscore=0 phishscore=0 clxscore=1011
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2104190000 definitions=main-2107170110
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 16HI4Ibc015349
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-CA
+Content-Transfer-Encoding: quoted-printable
 
-License-Update:  correct fsf address [1]
+On 2021-07-17 9:50 a.m., akuster808 wrote:
+>
+> On 7/16/21 11:47 AM, Tony Tascioglu wrote:
+>> This patch backports the fix for CVE-2021-29477.
+>>
+>> CVE: CVE-2021-29477
+>> Upstream-Status: Backport
+>> [https://github.com/redis/redis/commit/f0c5f920d0f88bd8aa376a2c05af4902=
+789d1ef9]
+> Thanks for the fixes. Any reason why updating to the latest stable 6.2.4
+> is not an option?
+> https://raw.githubusercontent.com/redis/redis/6.2/00-RELEASENOTES
 
-- Drop upstreamed autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch
-- Forward port remaining patches
-- Package libautofs.so which is new
-- Add a patch to fix build on musl systems
-- Detailed ChangeLog [2]
+This commit adds a public function:
 
-[1] https://git.kernel.org/pub/scm/linux/storage/autofs/autofs.git/commit/COPYING?id=b74dcdd3f6b05522388729141c29286829c302fc
-[2] https://www.spinics.net/lists/autofs/msg02344.html
+ =C2=A0=C2=A0 1916:void redactClientCommandArgument(client *c, int argc);
+in:
+https://github.com/redis/redis/commit/875a1f07d821dc5abe737b064018a27bbc71=
+75d2
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...001-Define-__SWORD_TYPE-if-undefined.patch | 124 ++++++++++++++++++
- ...0001-Do-not-hardcode-path-for-pkg.m4.patch |   7 +-
- .../0002-Replace-__S_IEXEC-with-S_IEXEC.patch |  19 +--
- ...lude-linux-nfs.h-directly-in-rpc_sub.patch |  30 -----
- ...-YACC-rule-to-fix-a-building-failure.patch |  43 +++---
- ...config-to-detect-libxml-2.0-and-krb5.patch |  28 ++--
- .../{autofs_5.1.6.bb => autofs_5.1.7.bb}      |  15 ++-
- 7 files changed, 175 insertions(+), 91 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/autofs/autofs/0001-Define-__SWORD_TYPE-if-undefined.patch
- delete mode 100644 meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch
- rename meta-networking/recipes-daemons/autofs/{autofs_5.1.6.bb => autofs_5.1.7.bb} (89%)
+probably not a show stopper but it does affect the API in server.h.
 
-diff --git a/meta-networking/recipes-daemons/autofs/autofs/0001-Define-__SWORD_TYPE-if-undefined.patch b/meta-networking/recipes-daemons/autofs/autofs/0001-Define-__SWORD_TYPE-if-undefined.patch
-new file mode 100644
-index 0000000000..117b1e58a9
---- /dev/null
-+++ b/meta-networking/recipes-daemons/autofs/autofs/0001-Define-__SWORD_TYPE-if-undefined.patch
-@@ -0,0 +1,124 @@
-+From 9fe90ab1e333b2e2bed370ff13ba552eb54c3aaf Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 17 Jul 2021 09:56:28 -0700
-+Subject: [PATCH] Define __SWORD_TYPE if undefined
+I didn't check the rest of the commit carefully but we really need an=20
+API/ABI
+checker. I'm not sure how redis clients usually interact with the=20
+server, are you?
+
+It would be nice if this site were up to date:
+ =C2=A0=C2=A0 https://abi-laboratory.pro/?view=3Dtimeline&l=3Dhiredis
+
+I guess Tony could try the tools that the site points to if
+you like Armin.
+
+../Randy
+
+
+> - Armin
+>> An integer overflow bug in Redis version 6.0 or newer could be exploite=
+d using
+>> the STRALGO LCS command to corrupt the heap and potentially result with=
+ remote
+>> code execution.
+>>
+>> Signed-off-by: Tony Tascioglu <tony.tascioglu@windriver.com>
+>> ---
+>>   .../redis/redis/fix-CVE-2021-29477.patch      | 35 ++++++++++++++++++=
 +
-+These fixes are inspired when building autofs on musl
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ daemon/automount.c | 20 ++++++++++++++------
-+ include/hash.h     |  5 +++++
-+ lib/log.c          |  6 +++++-
-+ 3 files changed, 24 insertions(+), 7 deletions(-)
-+
-+diff --git a/daemon/automount.c b/daemon/automount.c
-+index e476f6b..3a1514b 100644
-+--- a/daemon/automount.c
-++++ b/daemon/automount.c
-+@@ -1,7 +1,7 @@
-+ /* ----------------------------------------------------------------------- *
-+  *
-+  *  automount.c - Linux automounter daemon
-+- *
-++ *
-+  *   Copyright 1997 Transmeta Corporation - All Rights Reserved
-+  *   Copyright 1999-2000 Jeremy Fitzhardinge <jeremy@goop.org>
-+  *   Copyright 2001-2005 Ian Kent <raven@themaw.net>
-+@@ -11,7 +11,7 @@
-+  *   the Free Software Foundation, Inc., 675 Mass Ave, Cambridge MA 02139,
-+  *   USA; either version 2 of the License, or (at your option) any later
-+  *   version.
-+- *
-++ *
-+  *   This program is distributed in the hope that it will be useful,
-+  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
-+  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+@@ -40,6 +40,14 @@
-+ #include <systemd/sd-daemon.h>
-+ #endif
-+
-++#ifndef __SWORD_TYPE
-++# if __WORDSIZE == 32  /* System word size */
-++#  define __SWORD_TYPE int
-++# else /* __WORDSIZE == 64 */
-++#  define __SWORD_TYPE long int
-++# endif
-++#endif
-++
-+ #include "automount.h"
-+ #if defined(LIBXML2_WORKAROUND) || defined(TIRPC_WORKAROUND)
-+ #include <dlfcn.h>
-+@@ -282,7 +290,7 @@ int rmdir_path(struct autofs_point *ap, const char *path, dev_t dev)
-+ 			     dev, buf, st.st_dev);
-+ 			return -1;
-+ 		}
-+-
-++
-+ 		/*
-+ 		 * Last element of path may be a symbolic link; all others
-+ 		 * are directories (and the last directory element is
-+@@ -455,7 +463,7 @@ int count_mounts(struct autofs_point *ap, const char *path, dev_t dev)
-+
-+ 	counter.count = 0;
-+ 	counter.dev = dev;
-+-
-++
-+ 	if (walk_tree(path, counter_fn, 1, ap, &counter) == -1)
-+ 		return -1;
-+
-+@@ -811,7 +819,7 @@ static char *automount_path_to_fifo(unsigned logopt, const char *path)
-+ 	/*
-+ 	 *  An automount path can be made up of subdirectories.  So, to
-+ 	 *  create the fifo name, we will just replace instances of '/' with
-+-	 *  '-'.
-++	 *  '-'.
-+ 	 */
-+ 	p = fifo_name + strlen(fifodir);
-+ 	while (*p != '\0') {
-+@@ -1640,7 +1648,7 @@ static void return_start_status(void *arg)
-+ 	sc->done = 1;
-+
-+ 	/*
-+-	 * Startup condition mutex must be locked during
-++	 * Startup condition mutex must be locked during
-+ 	 * the startup process.
-+ 	 */
-+ 	status = pthread_cond_signal(&sc->cond);
-+diff --git a/include/hash.h b/include/hash.h
-+index 2447f29..6f0dee6 100644
-+--- a/include/hash.h
-++++ b/include/hash.h
-+@@ -5,6 +5,11 @@
-+
-+ #include <sys/types.h>
-+ #include <stdint.h>
-++#include <linux/stddef.h>
-++
-++#ifndef __GLIBC__
-++#include <sys/reg.h>
-++#endif
-+
-+ /*
-+  * The "GOLDEN_RATIO_PRIME" is used in ifs/btrfs/brtfs_inode.h and
-+diff --git a/lib/log.c b/lib/log.c
-+index 0cb47d7..39b1e3b 100644
-+--- a/lib/log.c
-++++ b/lib/log.c
-+@@ -38,7 +38,11 @@ static char *prepare_attempt_prefix(const char *msg)
-+ 	char buffer[ATTEMPT_ID_SIZE + 1];
-+ 	char *prefixed_msg = NULL;
-+
-+-	attempt_id = pthread_getspecific(key_thread_attempt_id);
-++        if (key_thread_attempt_id) {
-++                attempt_id = pthread_getspecific(key_thread_attempt_id);
-++        } else {
-++                attempt_id = 0;
-++        }
-+ 	if (attempt_id) {
-+ 		int len = sizeof(buffer) + 1 + strlen(msg) + 1;
-+
-+--
-+2.32.0
-+
-diff --git a/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch b/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch
-index b991acad38..d5ea417fb2 100644
---- a/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch
-+++ b/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch
-@@ -15,12 +15,10 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
-  configure.in | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
+>>   meta-oe/recipes-extended/redis/redis_6.2.2.bb |  1 +
+>>   2 files changed, 36 insertions(+)
+>>   create mode 100644 meta-oe/recipes-extended/redis/redis/fix-CVE-2021-=
+29477.patch
+>>
+>> diff --git a/meta-oe/recipes-extended/redis/redis/fix-CVE-2021-29477.pa=
+tch b/meta-oe/recipes-extended/redis/redis/fix-CVE-2021-29477.patch
+>> new file mode 100644
+>> index 000000000..a5e5a1ba5
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/redis/redis/fix-CVE-2021-29477.patch
+>> @@ -0,0 +1,35 @@
+>> +From f0c5f920d0f88bd8aa376a2c05af4902789d1ef9 Mon Sep 17 00:00:00 2001
+>> +From: Oran Agra <oran@redislabs.com>
+>> +Date: Mon, 3 May 2021 08:32:31 +0300
+>> +Subject: [PATCH] Fix integer overflow in STRALGO LCS (CVE-2021-29477)
+>> +
+>> +An integer overflow bug in Redis version 6.0 or newer could be exploit=
+ed using
+>> +the STRALGO LCS command to corrupt the heap and potentially result wit=
+h remote
+>> +code execution.
+>> +
+>> +CVE: CVE-2021-29477
+>> +Upstream-Status: Backport
+>> +[https://github.com/redis/redis/commit/f0c5f920d0f88bd8aa376a2c05af490=
+2789d1ef9]
+>> +
+>> +Signed-off-by: Tony Tascioglu <tony.tascioglu@windriver.com>
+>> +
+>> +---
+>> + src/t_string.c | 2 +-
+>> + 1 file changed, 1 insertion(+), 1 deletion(-)
+>> +
+>> +diff --git a/src/t_string.c b/src/t_string.c
+>> +index 9228c5ed0..db6f7042e 100644
+>> +--- a/src/t_string.c
+>> ++++ b/src/t_string.c
+>> +@@ -805,7 +805,7 @@ void stralgoLCS(client *c) {
+>> +     /* Setup an uint32_t array to store at LCS[i,j] the length of the
+>> +      * LCS A0..i-1, B0..j-1. Note that we have a linear array here, s=
+o
+>> +      * we index it as LCS[j+(blen+1)*j] */
+>> +-    uint32_t *lcs =3D zmalloc((alen+1)*(blen+1)*sizeof(uint32_t));
+>> ++    uint32_t *lcs =3D zmalloc((size_t)(alen+1)*(blen+1)*sizeof(uint32=
+_t));
+>> +     #define LCS(A,B) lcs[(B)+((A)*(blen+1))]
+>> +
+>> +     /* Start building the LCS table. */
+>> +--
+>> +2.32.0
+>> +
+>> diff --git a/meta-oe/recipes-extended/redis/redis_6.2.2.bb b/meta-oe/re=
+cipes-extended/redis/redis_6.2.2.bb
+>> index 65b525709..e89bb50f1 100644
+>> --- a/meta-oe/recipes-extended/redis/redis_6.2.2.bb
+>> +++ b/meta-oe/recipes-extended/redis/redis_6.2.2.bb
+>> @@ -16,6 +16,7 @@ SRC_URI =3D "http://download.redis.io/releases/${BP}.=
+tar.gz \
+>>              file://0001-src-Do-not-reset-FINAL_LIBS.patch \
+>>              file://GNU_SOURCE.patch \
+>>              file://0006-Define-correct-gregs-for-RISCV32.patch \
+>> +           file://fix-CVE-2021-29477.patch \
+>>              "
+>>   SRC_URI[sha256sum] =3D "7a260bb74860f1b88c3d5942bf8ba60ca59f121c6dce4=
+2d3017bed6add0b9535"
+>>  =20
+>>
+>>=20
+>>
 
--diff --git a/configure.in b/configure.in
--index 493b9f1..268d06b 100644
- --- a/configure.in
- +++ b/configure.in
- @@ -12,7 +12,7 @@ define([AC_CACHE_SAVE], )dnl
-- AC_INIT(.autofs-5.1.6)
-+ AC_INIT(.autofs-5.1.7)
+--=20
+# Randy MacLeod
+# Wind River Linux
 
-  # for pkg-config macros
- -m4_include([/usr/share/aclocal/pkg.m4])
-@@ -28,6 +26,3 @@ index 493b9f1..268d06b 100644
-
-  #
-  # autofs installs by default in /usr
----
--2.7.4
--
-diff --git a/meta-networking/recipes-daemons/autofs/autofs/0002-Replace-__S_IEXEC-with-S_IEXEC.patch b/meta-networking/recipes-daemons/autofs/autofs/0002-Replace-__S_IEXEC-with-S_IEXEC.patch
-index e7fdd10aab..1a2eb4fc21 100644
---- a/meta-networking/recipes-daemons/autofs/autofs/0002-Replace-__S_IEXEC-with-S_IEXEC.patch
-+++ b/meta-networking/recipes-daemons/autofs/autofs/0002-Replace-__S_IEXEC-with-S_IEXEC.patch
-@@ -16,29 +16,27 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
-  modules/lookup_multi.c | 2 +-
-  2 files changed, 4 insertions(+), 4 deletions(-)
-
--diff --git a/daemon/lookup.c b/daemon/lookup.c
--index 18df935..d35d484 100644
- --- a/daemon/lookup.c
- +++ b/daemon/lookup.c
--@@ -382,7 +382,7 @@ static int read_file_source_instance(struct autofs_point *ap, struct map_source
-- 	if (!S_ISREG(st.st_mode))
-+@@ -397,7 +397,7 @@ static int read_file_source_instance(str
-  		return NSS_STATUS_NOTFOUND;
-+ 	}
-
- -	if (st.st_mode & __S_IEXEC)
- +	if (st.st_mode & S_IEXEC)
-  		type = src_prog;
-  	else
-  		type = src_file;
--@@ -942,7 +942,7 @@ static int lookup_name_file_source_instance(struct autofs_point *ap, struct map_
-- 	if (!S_ISREG(st.st_mode))
-+@@ -930,7 +930,7 @@ static int lookup_name_file_source_insta
-  		return NSS_STATUS_NOTFOUND;
-+ 	}
-
- -	if (st.st_mode & __S_IEXEC)
- +	if (st.st_mode & S_IEXEC)
-  		type = src_prog;
-  	else
-  		type = src_file;
--@@ -1118,7 +1118,7 @@ static struct map_source *lookup_get_map_source(struct master_mapent *entry)
-+@@ -1077,7 +1077,7 @@ static struct map_source *lookup_get_map
-  	if (!S_ISREG(st.st_mode))
-  		return NULL;
-
-@@ -47,11 +45,9 @@ index 18df935..d35d484 100644
-  		type = "program";
-  	else
-  		type = "file";
--diff --git a/modules/lookup_multi.c b/modules/lookup_multi.c
--index bb9f88c..cf109de 100644
- --- a/modules/lookup_multi.c
- +++ b/modules/lookup_multi.c
--@@ -247,7 +247,7 @@ static struct lookup_mod *nss_open_lookup(const char *format, int argc, const ch
-+@@ -247,7 +247,7 @@ static struct lookup_mod *nss_open_looku
-  				continue;
-  			}
-
-@@ -60,6 +56,3 @@ index bb9f88c..cf109de 100644
-  				type = src_prog;
-  			else
-  				type = src_file;
----
--2.7.4
--
-diff --git a/meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch b/meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch
-deleted file mode 100644
-index 9b0942ebf6..0000000000
---- a/meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From 2256b8aa98cff15ddf2a8d36496e6c9125927901 Mon Sep 17 00:00:00 2001
--From: Andreas Oberritter <obi@opendreambox.org>
--Date: Wed, 13 Mar 2013 16:17:08 +0100
--Subject: [PATCH] autofs-5.0.7: include linux/nfs.h directly in rpc_subs.h
--
--Upstream-Status: Pending
--
--Fixes compile error with uclibc. Glibc's nfs/nfs.h contains
--nothing but "#include linux/nfs.h". rpc_subs.h already includes
--other linux/nfs*.h files directly.
--
--Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
--
-----
-- include/rpc_subs.h | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/include/rpc_subs.h b/include/rpc_subs.h
--index e744e89..83db47e 100644
----- a/include/rpc_subs.h
--+++ b/include/rpc_subs.h
--@@ -18,7 +18,7 @@
--
-- #include <rpc/rpc.h>
-- #include <rpc/pmap_prot.h>
---#include <nfs/nfs.h>
--+#include <linux/nfs.h>
-- #include <linux/nfs2.h>
-- #include <linux/nfs3.h>
--
-diff --git a/meta-networking/recipes-daemons/autofs/autofs/fix-the-YACC-rule-to-fix-a-building-failure.patch b/meta-networking/recipes-daemons/autofs/autofs/fix-the-YACC-rule-to-fix-a-building-failure.patch
-index 21a97c8f5c..8ad3b22de5 100644
---- a/meta-networking/recipes-daemons/autofs/autofs/fix-the-YACC-rule-to-fix-a-building-failure.patch
-+++ b/meta-networking/recipes-daemons/autofs/autofs/fix-the-YACC-rule-to-fix-a-building-failure.patch
-@@ -23,21 +23,9 @@ Signed-off-by: Roy Li <rongqing.li@windriver.com>
-  modules/Makefile | 3 ++-
-  2 files changed, 6 insertions(+), 3 deletions(-)
-
--diff --git a/lib/Makefile b/lib/Makefile
--index 4798a4b..c40cf86 100644
- --- a/lib/Makefile
- +++ b/lib/Makefile
--@@ -57,7 +57,8 @@ mount_xdr.o: mount_xdr.c
-- master_tok.c: master_tok.l
-- 	$(LEX) -o$@ -Pmaster_ $?
--
---master_parse.tab.c master_parse.tab.h: master_parse.y
--+master_parse.tab.h: master_parse.tab.c
--+master_parse.tab.c: master_parse.y
-- 	$(YACC) -v -d -p master_ -b master_parse $?
--
-- master_tok.o: master_tok.c master_parse.tab.h
--@@ -67,7 +68,8 @@ master_parse.tab.o: master_parse.tab.c master_parse.tab.h
-+@@ -53,7 +53,8 @@ mount_xdr.o: mount_xdr.c
-  nss_tok.c: nss_tok.l
-  	$(LEX) -o$@ -Pnss_ $?
-
-@@ -47,8 +35,6 @@ index 4798a4b..c40cf86 100644
-  	$(YACC) -v -d -p nss_ -b nss_parse $?
-
-  nss_tok.o: nss_tok.c nss_parse.tab.h
--diff --git a/modules/Makefile b/modules/Makefile
--index d9ab06c..abc7698 100644
- --- a/modules/Makefile
- +++ b/modules/Makefile
- @@ -103,7 +103,8 @@ amd_tok.c: amd_tok.l
-@@ -61,3 +47,30 @@ index d9ab06c..abc7698 100644
-  	$(YACC) -v -d -p amd_ -b amd_parse $?
-
-  amd_parse.tab.o: amd_parse.tab.c amd_parse.tab.h
-+--- a/daemon/Makefile
-++++ b/daemon/Makefile
-+@@ -16,7 +16,7 @@ YACCSRC = master_tok.c master_parse.tab.
-+ version := $(shell cat ../.version)
-+
-+ CFLAGS += -rdynamic $(DAEMON_CFLAGS) -D_GNU_SOURCE -I../include
-+-CFLAGS += -DAUTOFS_LIB_DIR=\"$(autofslibdir)\"
-++CFLAGS += -DAUTOFS_LIB_DIR=\"$(autofslibdir)\"
-+ CFLAGS += -DAUTOFS_MAP_DIR=\"$(autofsmapdir)\"
-+ CFLAGS += -DAUTOFS_CONF_DIR=\"$(autofsconfdir)\"
-+ CFLAGS += -DAUTOFS_FIFO_DIR=\"$(autofsfifodir)\"
-+@@ -44,7 +44,8 @@ automount: $(OBJS) $(AUTOFS_LIB)
-+ master_tok.c: master_tok.l
-+ 	$(LEX) -o$@ -Pmaster_ $?
-+
-+-master_parse.tab.c master_parse.tab.h: master_parse.y
-++master_parse.tab.h: master_parse.tab.c
-++master_parse.tab.c: master_parse.y
-+ 	$(YACC) -v -d -p master_ -b master_parse $?
-+
-+ master_tok.o: master_tok.c master_parse.tab.h
-+@@ -57,5 +58,3 @@ clean:
-+ install: all
-+ 	install -d -m 755 $(INSTALLROOT)$(sbindir)
-+ 	install -c automount -m 755 $(INSTALLROOT)$(sbindir)
-+-
-+-
-diff --git a/meta-networking/recipes-daemons/autofs/autofs/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch b/meta-networking/recipes-daemons/autofs/autofs/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch
-index d1f9f3493e..41de373fd4 100644
---- a/meta-networking/recipes-daemons/autofs/autofs/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch
-+++ b/meta-networking/recipes-daemons/autofs/autofs/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch
-@@ -16,33 +16,21 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
-  configure.in | 16 ++++++++++++++--
-  1 file changed, 14 insertions(+), 2 deletions(-)
-
--diff --git a/configure.in b/configure.in
--index f5fbb35..76ecb40 100644
- --- a/configure.in
- +++ b/configure.in
--@@ -211,8 +211,20 @@ fi
-- AC_SUBST(ENABLE_FEDFS)
--
-- # LDAP SASL auth needs libxml and Kerberos
---AF_CHECK_LIBXML()
-+@@ -215,7 +215,14 @@ PKG_CHECK_MODULES([XML], [libxml-2.0], [
-+   AC_DEFINE(LIBXML2_WORKAROUND, 1, [Use libxml2 tsd usage workaround])
-+ ], [HAVE_LIBXML=0])
-+
- -AF_CHECK_KRB5()
--+PKG_CHECK_MODULES(XML, [libxml-2.0],HAVE_LIBXML=1,HAVE_LIBXML=0)
--+AC_SUBST([HAVE_LIBXML])
--+XML_FLAGS=$XML_CFLAGS
--+
--+PKG_CHECK_MODULES(KRB5, [krb5],HAVE_KRB5=1,HAVE_KRB5=0)
--+AC_SUBST([HAVE_KRB5])
--+if test "x$HAVE_KRB5" = "x1"; then
-++PKG_CHECK_MODULES(KRB5, [krb5], [
-++  HAVE_KRB5=1
- +  SAVE_CFLAGS=$CFLAGS
- +  SAVE_LIBS=$LIBS
- +  CFLAGS="$CFLAGS $KRB5_FLAGS"
- +  LIBS="$LIBS $KRB5_LIBS"
--+
- +  AC_CHECK_FUNCS([krb5_principal_get_realm])
--+fi
--
-++], [HAVE_KRB5=0])
-+
-  AC_SEARCH_LIBS([versionsort],[])
-  if test "$ac_cv_search_versionsort" = "no"; then
----
--2.7.4
--
-diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.1.6.bb b/meta-networking/recipes-daemons/autofs/autofs_5.1.7.bb
-similarity index 89%
-rename from meta-networking/recipes-daemons/autofs/autofs_5.1.6.bb
-rename to meta-networking/recipes-daemons/autofs/autofs_5.1.7.bb
-index 54f0b99915..019b453c2c 100644
---- a/meta-networking/recipes-daemons/autofs/autofs_5.1.6.bb
-+++ b/meta-networking/recipes-daemons/autofs/autofs_5.1.7.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "Kernel based automounter for linux"
- SECTION = "utils"
- LICENSE = "GPL-2.0"
--LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=ee9324a6f564bb2376b63878ac396798"
-
- DEPENDS += "libtirpc flex-native bison-native e2fsprogs openssl libxml2 util-linux cyrus-sasl libnsl2"
-
-@@ -10,7 +10,6 @@ CFLAGS += "-I${STAGING_INCDIR}/tirpc"
- inherit autotools-brokensep systemd update-rc.d pkgconfig
-
- SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
--           file://autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch \
-            file://no-bash.patch \
-            file://cross.patch \
-            file://fix_disable_ldap.patch \
-@@ -26,11 +25,9 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
-            file://0001-modules-lookup_multi.c-Replace-__S_IEXEC-with-S_IEXE.patch \
-            file://0001-Do-not-hardcode-path-for-pkg.m4.patch \
-            file://0001-Bug-fix-for-pid_t-not-found-on-musl.patch \
-+           file://0001-Define-__SWORD_TYPE-if-undefined.patch \
-            "
--
--
--SRC_URI[md5sum] = "e6800e0afd6009ecdff148088c564050"
--SRC_URI[sha256sum] = "82094cad44f4e5c4f93eff2789cd66b57d7ab3fa646b7722d97608571001e694"
-+SRC_URI[sha256sum] = "a18619e5ad18960fe382354eef33f070e57e4e5711d484b010acde080a003312"
-
- UPSTREAM_CHECK_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/"
-
-@@ -87,10 +84,14 @@ do_install_append () {
- }
- SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
-
-+# all the libraries are unversioned, so don't pack it on PN-dev
-+SOLIBS = ".so"
-+FILES_SOLIBSDEV = ""
-+# Some symlinks are created in plugins dir e.g.
-+# mount_nfs4.so -> mount_nfs.so
- INSANE_SKIP_${PN} = "dev-so"
-
- RPROVIDES_${PN} += "${PN}-systemd"
- RREPLACES_${PN} += "${PN}-systemd"
- RCONFLICTS_${PN} += "${PN}-systemd"
- SYSTEMD_SERVICE_${PN} = "autofs.service"
--
---
-2.32.0
