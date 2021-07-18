@@ -1,186 +1,191 @@
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.web10.9745.1626563581190021332
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web11.17216.1626630413062683372
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 17 Jul 2021 16:13:01 -0700
+ Sun, 18 Jul 2021 10:46:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=S+adAcDW;
- spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f171.google.com with SMTP id q10so12673534pfj.12
-        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Jul 2021 16:13:01 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=uaO2w1PC;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id o8so8223940plg.11
+        for <openembedded-devel@lists.openembedded.org>; Sun, 18 Jul 2021 10:46:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:references:from:message-id:date:user-agent:mime-version
          :in-reply-to:content-transfer-encoding:content-language;
-        bh=RWuHwsUp9k6hC9w+XxReGhER4ziIAh6QyD4HhGYsAZw=;
-        b=S+adAcDW6Ucks4H8G+Pp+4RSc8ErlkeT3kSh0jCGx/373xoD8yO28wr9j2JyW3onNW
-         0VrVIBQYHu0hZj/cfkyihrtK1WPZXKbtCZPPfQgCPLXWtWhwQuJG1HoNmOMzFbiFGjuf
-         ZJvSHr1z8JHPoXRHjOUCK2cptkAzx6zmTwVlniBT3w+9bwaRA2ZIc+iiYvJReWXhqSVM
-         QoV7SVioUuQt6mB8x/84BhWbFzk8l3h0nlIf+bYeA30qgpoQVY90ZSJ97ds4Fy08f0yo
-         LVC2hJ+7b2kn6B77pKRBiW3BzQZZoFP4/8FyL0ModytpNSPvyIJ9p9k/9204SZDDevN9
-         52Ig==
+        bh=Ckdj83w4PPnkaP1YrfXK0963oSuUM+VHmBvqaXuLW6Y=;
+        b=uaO2w1PC2C7D8DtuOJ2SZXl/w+Z2P08XnaEw9GtMSNKqhwZzIOi7ikmj5VFx4XAzAa
+         EOKxVHDYD+4jpXrG91wsU4ouWnwmUtJTr0J669VWpG7Ihxr/ynL6pc5fqXYS5kpePWaV
+         RD4jUlEmu7phL4JjNakqShhYvfme6DYZhwiradRPvr6tSeF1dknu172+kui+VeNzswjX
+         vr0iCw4cbKPNEKoyBXj+aaXbAdjR6dwcH+GzO7KXqGMggqLuaBbdkV2hTuQdcMIlYG3T
+         nrlOxPhvZUQj8DEuubbHG6Ym3r8SNIgc/9DzCz6NnyUOUFx7l88wZO0C8zCr9/IbLXXY
+         KIQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:references:from:message-id:date
          :user-agent:mime-version:in-reply-to:content-transfer-encoding
          :content-language;
-        bh=RWuHwsUp9k6hC9w+XxReGhER4ziIAh6QyD4HhGYsAZw=;
-        b=RuKDyjreai/XHB5/CMUSVfu9RYalUL/kkxpC0leZxHYnMTlZuadMLeO5VEoFmC1PdB
-         CIMSUa03XYEVqgJ/tacq66UL04Aj/CJNUkKIONGsG+BYQ43XmivBz9qcnpeM+vMhKzVP
-         TSCKIp3z3vSKN1sPSyGf4GmEwE2dgcL6MdcnBzyD6BoaETGLLjNcgSdoaRNhrmFHV3s2
-         qzBuQ7x9op08RGP688mzMwwzQfxhA2orVQpmwYOGYtq4YI/jVGJzanGcWd61YA2/yu50
-         7ExTR3F4fVlR8WkMwZRFz2XkDqMV4YVH7KEiCpOy1l8GMmpzVmgCB2rrm0Byz7Fepxrx
-         7aVA==
-X-Gm-Message-State: AOAM531R5bdivee/9ELWPAYZbvscwLc43GnXT0Mww1jILb2WOgjJQZOU
-	9R/J3TW3/F10lpgxlVyQi+Q507C2sUY=
-X-Google-Smtp-Source: ABdhPJwrrI0AJdaZrHfHLJbkcAaPKp46kJ6k2QcHCuFILkcVLTOYLS3zWAPjgE2rBncZkdzOIYNi2w==
-X-Received: by 2002:a63:565f:: with SMTP id g31mr17473030pgm.164.1626563580421;
-        Sat, 17 Jul 2021 16:13:00 -0700 (PDT)
+        bh=Ckdj83w4PPnkaP1YrfXK0963oSuUM+VHmBvqaXuLW6Y=;
+        b=N/+pyf2NDMFS9z/g49bgze6hIWl73eBTurnZ0BkwIkw7M6ASgL8joNgx6ZN2eu9KmG
+         YGy+NKT+r/YsIImr08APN5DCBwmYp/inX6bFlDhOH2X/M0ck1rZh1aADcoubjBcMEtMD
+         wx3nnvehYCJGZJFzoUzYCRd+lHu+rP9OwYcfom5SJgg+InTrlQ1L01nw52fvGJnEsC18
+         6086nb2xgaMzB9ld1FyCB3laIOhkjOHyez/Co8B1jMNC6fHneP+5nFKXia+6Aq5G9kt/
+         2w7juXZP6MaXLoiFgdhFkFsavbdU8BM1RAVFxQOym0zMBYFHUEAbCdd5NFWy6f3ZyNv7
+         wSNw==
+X-Gm-Message-State: AOAM530IfqDH22figAIgJIYufElrUeUJzLCu2+ja6yEO39LK0ayb4ETL
+	Ka/div64d1vCs/YqwSq41EHPBPK57K8=
+X-Google-Smtp-Source: ABdhPJzhFH5gU4c6AYqbbGCVfWX12jY25bLHrjnCAhQYKwi8SQ1mGNNyJcVb6BjQJKbo5/EEqQWttw==
+X-Received: by 2002:a17:902:e052:b029:12b:491f:4eb6 with SMTP id x18-20020a170902e052b029012b491f4eb6mr16302395plx.81.1626630412409;
+        Sun, 18 Jul 2021 10:46:52 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0:5b11:9c4:d91e:7217? ([2601:202:4180:a5c0:5b11:9c4:d91e:7217])
-        by smtp.gmail.com with ESMTPSA id p33sm14659379pfw.40.2021.07.17.16.12.59
+Received: from ?IPv6:2601:202:4180:a5c0:3b2f:89be:7392:671a? ([2601:202:4180:a5c0:3b2f:89be:7392:671a])
+        by smtp.gmail.com with ESMTPSA id e30sm19459759pga.63.2021.07.18.10.46.51
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 17 Jul 2021 16:12:59 -0700 (PDT)
-Subject: Re: [oe] [meta-oe][hardknott][PATCH 1/2] redis: fix CVE-2021-29477
-To: Randy MacLeod <randy.macleod@windriver.com>,
- Tony Tascioglu <tony.tascioglu@windriver.com>,
- openembedded-devel@lists.openembedded.org
-References: <20210716184733.37797-1-tony.tascioglu@windriver.com>
- <106d037b-ffac-beae-e65c-845e99742c86@gmail.com>
- <a3b8968d-140c-68a7-2704-7a9b3b54f164@windriver.com>
+        Sun, 18 Jul 2021 10:46:51 -0700 (PDT)
+Subject: Re: [oe] [PATCH] layers: Fix git send-email instructions in README
+To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
+References: <20210717160823.12894-1-raj.khem@gmail.com>
 From: "Armin Kuster" <akuster808@gmail.com>
-Message-ID: <cb5a4f2d-c3fc-23e7-64cf-c8ad9daf1fe6@gmail.com>
-Date: Sat, 17 Jul 2021 16:12:59 -0700
+Message-ID: <fa4050d6-8972-0d7f-4653-dc4567d8e509@gmail.com>
+Date: Sun, 18 Jul 2021 10:46:50 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <a3b8968d-140c-68a7-2704-7a9b3b54f164@windriver.com>
+In-Reply-To: <20210717160823.12894-1-raj.khem@gmail.com>
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
 
 
-On 7/17/21 11:09 AM, Randy MacLeod wrote:
-> On 2021-07-17 9:50 a.m., akuster808 wrote:
->>
->> On 7/16/21 11:47 AM, Tony Tascioglu wrote:
->>> This patch backports the fix for CVE-2021-29477.
->>>
->>> CVE: CVE-2021-29477
->>> Upstream-Status: Backport
->>> [https://github.com/redis/redis/commit/f0c5f920d0f88bd8aa376a2c05af4902789d1ef9]
->>>
->> Thanks for the fixes. Any reason why updating to the latest stable 6.2.4
->> is not an option?
->> https://raw.githubusercontent.com/redis/redis/6.2/00-RELEASENOTES
->
-> This commit adds a public function:
->
->    1916:void redactClientCommandArgument(client *c, int argc);
-> in:
-> https://github.com/redis/redis/commit/875a1f07d821dc5abe737b064018a27bbc7175d2
->
->
-> probably not a show stopper but it does affect the API in server.h.
->
-> I didn't check the rest of the commit carefully but we really need an
-> API/ABI
-> checker. I'm not sure how redis clients usually interact with the
-> server, are you?
->
-> It would be nice if this site were up to date:
->    https://abi-laboratory.pro/?view=timeline&l=hiredis
->
-> I guess Tony could try the tools that the site points to if
-> you like Armin.
+On 7/17/21 9:08 AM, Khem Raj wrote:
+> This ensures that cut-n-paste of this command from README will work
 
-Thanks for the info. Patches in this case are appropriate.
+with backport ?
 
-- Armin
+-armin
 >
-> ../Randy
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-filesystems/README     | 3 +--
+>  meta-initramfs/README       | 2 +-
+>  meta-multimedia/README      | 4 ++--
+>  meta-networking/MAINTAINERS | 2 +-
+>  meta-perl/README            | 3 +--
+>  meta-python/README          | 5 ++---
+>  meta-xfce/README            | 2 +-
+>  7 files changed, 9 insertions(+), 12 deletions(-)
 >
+> diff --git a/meta-filesystems/README b/meta-filesystems/README
+> index edcf8bfeef..78a4429ce2 100644
+> --- a/meta-filesystems/README
+> +++ b/meta-filesystems/README
+> @@ -30,7 +30,7 @@ When sending single patches, please use something like:
+>  
+>     git send-email -1 -M \
+>          --to openembedded-devel@lists.openembedded.org \
+> -        --subject-prefix=meta-filesystems][PATCH
+> +        --subject-prefix='meta-filesystems][PATCH'
+>  
+>  
+>  Table of Contents
+> @@ -99,4 +99,3 @@ II. Misc
+>  
+>    --- xfsprogs ---
+>    It provides XFS filesystem utilities.
+> -
+> diff --git a/meta-initramfs/README b/meta-initramfs/README
+> index 79244d43f0..a8f17ba859 100644
+> --- a/meta-initramfs/README
+> +++ b/meta-initramfs/README
+> @@ -23,7 +23,7 @@ Send patches / pull requests to openembedded-devel@lists.openembedded.org
+>  with '[meta-initramfs]' in the subject.
+>  
+>  When sending single patches, please using something like:
+> -'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-initramfs][PATCH'
+> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-initramfs][PATCH'
+>  
+>  Interm layer maintainer: Khem Raj <raj.khem@gmail.com>
+>  
+> diff --git a/meta-multimedia/README b/meta-multimedia/README
+> index b4c2455a11..9c649ff87c 100644
+> --- a/meta-multimedia/README
+> +++ b/meta-multimedia/README
+> @@ -9,10 +9,10 @@ layers: meta-oe
+>  branch: master
+>  revision: HEAD
+>  
+> -Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-multimedia]' in the subject'
+> +Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-multimedia]' in the subject
+>  
+>  When sending single patches, please use something like:
+> -'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-multimedia][PATCH
+> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-multimedia][PATCH'
+>  
+>  You are encouraged to fork the mirror on github https://github.com/openembedded/meta-openembedded to share your patches, this is preferred for patch sets consisting of more than one patch. Other services like GitLab, repo.or.cz or self hosted setups are of course accepted as well, 'git fetch <remote>' works the same on all of them. We recommend github because it is free, easy to use, has been proven to be reliable and has a really good web GUI.
+>  
+> diff --git a/meta-networking/MAINTAINERS b/meta-networking/MAINTAINERS
+> index 5c4c4ce052..77e90668c4 100644
+> --- a/meta-networking/MAINTAINERS
+> +++ b/meta-networking/MAINTAINERS
+> @@ -8,7 +8,7 @@ When sending single patches, please use something like:
+>  
+>     git send-email -1 -M \
+>          --to openembedded-devel@lists.openembedded.org \
+> -        --subject-prefix=meta-networking][PATCH
+> +        --subject-prefix='meta-networking][PATCH'
+>  
+>  You may also contact the maintainers directly.
+>  
+> diff --git a/meta-perl/README b/meta-perl/README
+> index 67f291079f..2419ae2281 100644
+> --- a/meta-perl/README
+> +++ b/meta-perl/README
+> @@ -78,7 +78,7 @@ Send patches / pull requests to openembedded-devel@lists.openembedded.org with
+>  '[meta-perl]' in the subject.
+>  
+>  When sending single patches, please using something like:
+> -'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-perl][PATCH'
+> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-perl][PATCH'
+>  
+>  Layer maintainers:
+>      Hongxu Jia <hongxu.jia@windriver.com>
+> @@ -90,4 +90,3 @@ License
+>  All metadata is MIT licensed unless otherwise stated. Source code included
+>  in tree for individual recipes is under the LICENSE stated in each recipe
+>  (.bb file) unless otherwise stated.
+> -
+> diff --git a/meta-python/README b/meta-python/README
+> index ca0a290d9f..df6abe0e2e 100644
+> --- a/meta-python/README
+> +++ b/meta-python/README
+> @@ -37,8 +37,8 @@ before posting.
+>  Send pull requests to openembedded-devel@lists.openembedded.org with
+>  '[meta-python]' in the subject.
+>  
+> -When sending single patches, please use something like: 
+> -'git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix=meta-python][PATCH'
+> +When sending single patches, please use something like:
+> +git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix='meta-python][PATCH'
+>  
+>  Maintenance
+>  -------------------------
+> @@ -47,4 +47,3 @@ Layer Maintainers:
+>          Tim "moto-timo" Orling <TicoTimo@gmail.com>
+>          Derek Straka <derek@asterius.io>
+>          Trevor Gamblin <trevor.gamblin@windriver.com>
+> -
+> diff --git a/meta-xfce/README b/meta-xfce/README
+> index 70ad47a2d1..bbf4b2edf2 100644
+> --- a/meta-xfce/README
+> +++ b/meta-xfce/README
+> @@ -17,6 +17,6 @@ BBMASK = "meta-xfce/recipes-multimedia"
+>  Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce]' in the subject'
+>  
+>  When sending single patches, please using something like:
+> -'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-xfce][PATCH'
+> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-xfce][PATCH'
+>  
+>  Layer maintainer: Kai Kang <kai.kang@windriver.com>
 >
->> - Armin
->>> An integer overflow bug in Redis version 6.0 or newer could be
->>> exploited using
->>> the STRALGO LCS command to corrupt the heap and potentially result
->>> with remote
->>> code execution.
->>>
->>> Signed-off-by: Tony Tascioglu <tony.tascioglu@windriver.com>
->>> ---
->>>   .../redis/redis/fix-CVE-2021-29477.patch      | 35
->>> +++++++++++++++++++
->>>   meta-oe/recipes-extended/redis/redis_6.2.2.bb |  1 +
->>>   2 files changed, 36 insertions(+)
->>>   create mode 100644
->>> meta-oe/recipes-extended/redis/redis/fix-CVE-2021-29477.patch
->>>
->>> diff --git
->>> a/meta-oe/recipes-extended/redis/redis/fix-CVE-2021-29477.patch
->>> b/meta-oe/recipes-extended/redis/redis/fix-CVE-2021-29477.patch
->>> new file mode 100644
->>> index 000000000..a5e5a1ba5
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-extended/redis/redis/fix-CVE-2021-29477.patch
->>> @@ -0,0 +1,35 @@
->>> +From f0c5f920d0f88bd8aa376a2c05af4902789d1ef9 Mon Sep 17 00:00:00 2001
->>> +From: Oran Agra <oran@redislabs.com>
->>> +Date: Mon, 3 May 2021 08:32:31 +0300
->>> +Subject: [PATCH] Fix integer overflow in STRALGO LCS (CVE-2021-29477)
->>> +
->>> +An integer overflow bug in Redis version 6.0 or newer could be
->>> exploited using
->>> +the STRALGO LCS command to corrupt the heap and potentially result
->>> with remote
->>> +code execution.
->>> +
->>> +CVE: CVE-2021-29477
->>> +Upstream-Status: Backport
->>> +[https://github.com/redis/redis/commit/f0c5f920d0f88bd8aa376a2c05af4902789d1ef9]
->>>
->>> +
->>> +Signed-off-by: Tony Tascioglu <tony.tascioglu@windriver.com>
->>> +
->>> +---
->>> + src/t_string.c | 2 +-
->>> + 1 file changed, 1 insertion(+), 1 deletion(-)
->>> +
->>> +diff --git a/src/t_string.c b/src/t_string.c
->>> +index 9228c5ed0..db6f7042e 100644
->>> +--- a/src/t_string.c
->>> ++++ b/src/t_string.c
->>> +@@ -805,7 +805,7 @@ void stralgoLCS(client *c) {
->>> +     /* Setup an uint32_t array to store at LCS[i,j] the length of the
->>> +      * LCS A0..i-1, B0..j-1. Note that we have a linear array
->>> here, so
->>> +      * we index it as LCS[j+(blen+1)*j] */
->>> +-    uint32_t *lcs = zmalloc((alen+1)*(blen+1)*sizeof(uint32_t));
->>> ++    uint32_t *lcs =
->>> zmalloc((size_t)(alen+1)*(blen+1)*sizeof(uint32_t));
->>> +     #define LCS(A,B) lcs[(B)+((A)*(blen+1))]
->>> +
->>> +     /* Start building the LCS table. */
->>> +--
->>> +2.32.0
->>> +
->>> diff --git a/meta-oe/recipes-extended/redis/redis_6.2.2.bb
->>> b/meta-oe/recipes-extended/redis/redis_6.2.2.bb
->>> index 65b525709..e89bb50f1 100644
->>> --- a/meta-oe/recipes-extended/redis/redis_6.2.2.bb
->>> +++ b/meta-oe/recipes-extended/redis/redis_6.2.2.bb
->>> @@ -16,6 +16,7 @@ SRC_URI =
->>> "http://download.redis.io/releases/${BP}.tar.gz \
->>>              file://0001-src-Do-not-reset-FINAL_LIBS.patch \
->>>              file://GNU_SOURCE.patch \
->>>              file://0006-Define-correct-gregs-for-RISCV32.patch \
->>> +           file://fix-CVE-2021-29477.patch \
->>>              "
->>>   SRC_URI[sha256sum] =
->>> "7a260bb74860f1b88c3d5942bf8ba60ca59f121c6dce42d3017bed6add0b9535"
->>>  
->>> 
->>>
+> 
 >
 
