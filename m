@@ -1,73 +1,139 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.138.1626711887068309956
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.web11.355.1626730881497147557
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Jul 2021 09:24:47 -0700
+ Mon, 19 Jul 2021 14:41:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=34994 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.93)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1m5W4T-00080h-AE; Mon, 19 Jul 2021 19:24:46 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-zeroconf: Upgrade 0.31.0 -> 0.33.1
-Date: Mon, 19 Jul 2021 19:24:38 +0300
-Message-Id: <20210719162438.3504-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210719162438.3504-1-leon.anavi@konsulko.com>
-References: <20210719162438.3504-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=SZUhq2mM;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id i16-20020a17090acf90b02901736d9d2218so1183218pju.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jul 2021 14:41:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:references:from:organization:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=oiCDNcOA/Nq93RvO48sMYrw/2TlpcqZkAzAvNj6vcss=;
+        b=SZUhq2mMhYjV8T0IWG4jPkwFP/wY1JeVUGz+WYBTFoeQ5QRKTAWZVp7QruFrxtINnR
+         rrfq+aXmgC0WTItBiVtYmrqzS+8npLOHLTt8l2IcvO1pDoI720lkOsVDIvKDA0DD3JeM
+         Jd6IxmlYA27VEBEiB7OPmdde0xujOkdzDHTZO3Wwn9nlUtsRd80fcdGdrZT8NLQU3Mcy
+         Ox83HLIUY64lZs+W9kVunpM32eW4lJx4HCJIjuiN13/+FjNm9wd8pRYzPczPWCV7sDOt
+         UFIKJE1/H+eCOBVPFtwU1g5D45NWaZFmVnv65nDEdQyc+nfUjmOQ+mXsQ2uQnYF2WR2q
+         ddSg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=oiCDNcOA/Nq93RvO48sMYrw/2TlpcqZkAzAvNj6vcss=;
+        b=JF5A+ooDiH1XjzF/rZhjLTVXeDH0aNSsm9cK5E/f8MoHtDN5ihYJRGnKufzYjGwCuz
+         hrpA7KSpaxHWD4lKIZ3G+T34nrOv4u6JsBemr8CJfyfNqAisCs2L6Yrh18da4/pbsbGi
+         rU8M4B8BTfILsWYtxFANnIp+bqUxQVa0hQ5VxtkDXWyiQag6WvGuiQYsjMIkmuPyJZ9w
+         o0R0nv7Ecdu9n08abdtZjOn5UfXlf6j+U9eWUKJounKe5+FU4S40DZizAwmYKeZC3ue0
+         gXKNnMued+K9zHnig4/71UmxdEVbduWIOHV0RT/UPKtIav/K5wxJ1hwfZ4KEW3Y0Gbab
+         jEoA==
+X-Gm-Message-State: AOAM530rVPfnvpI7S7Ib0aCyO0tGiNE35pfNx8BiYZrA1oYHnM4TbsM4
+	KWbts+O3syJesOi8cLGp9+7kippYIKuD4A==
+X-Google-Smtp-Source: ABdhPJx5QkHmjHVVdgTI1ey+b5fQxEzErml4Ocp9C4i3nJtEXLWV9wGxXVdUfWSRW2NeKYpR08DrVw==
+X-Received: by 2002:a17:90b:1195:: with SMTP id gk21mr10805707pjb.150.1626730880333;
+        Mon, 19 Jul 2021 14:41:20 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:a0f0:594e:bbc7:711:7e52? ([2601:646:9200:a0f0:594e:bbc7:711:7e52])
+        by smtp.gmail.com with ESMTPSA id h8sm19935742pfi.47.2021.07.19.14.41.19
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 19 Jul 2021 14:41:19 -0700 (PDT)
+Subject: Re: Hardknott merge request -July 19th
+To: akuster808 <akuster808@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+References: <a13e28fe-3433-7031-3dd0-35e1b95e9b7b@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <bba97ddd-cfda-5638-5500-7856bd94760a@gmail.com>
+Date: Mon, 19 Jul 2021 14:41:18 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.12.0
+MIME-Version: 1.0
+In-Reply-To: <a13e28fe-3433-7031-3dd0-35e1b95e9b7b@gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 0.33.1:
 
-- Version number change only with less restrictive directory
-  permissions
-- Let connection_lost close the underlying socket
-- Removed duplicate unregister_all_services code
 
-License-Update: License remains LGPL Version 2.1
+On 7/19/21 8:15 AM, akuster808 wrote:
+> The following changes since commit c51e79dd854460c6f6949a187970d05362152e84:
+> 
+>    python3-django: upgrade 2.2.23 -> 2.2.24 (2021-06-27 07:50:20 -0700)
+> 
+> are available in the Git repository at:
+> 
+>    https://git.openembedded.org/meta-openembedded hardknott-next
+> 
+> for you to fetch changes up to 6a7ba8f7f210e04183fb64ab181520d817a34a11:
+> 
+>    sysbench: fix memory test (2021-07-14 21:27:01 -0700)
+> 
+> ----------------------------------------------------------------
+> Adrian Zaharia (1):
+>        ntp: fix ntpdate to wait for subprocesses
+> 
+> Akifumi Chikazawa (1):
+>        openvpn: add CVE-2020-7224 and CVE-2020-27569 to allowlist
+> 
+> Changqing Li (1):
+>        nginx: fix CVE-2021-23017
+> 
+> Li Wang (1):
+>        apache2: fix CVE-2020-13950 CVE-2020-35452 CVE-2021-26690
+> CVE-2021-26691 CVE-2021-30641
+> 
+> Masaki Ambai (1):
+>        nss: add CVE-2006-5201 to allowlist
+> 
+> Sam Van Den Berge (1):
+>        libiio: fix installing libiio when python3 bindings are enabled
+> 
+> massimo toscanelli (1):
+>        sysbench: fix memory test
+> 
+>   meta-networking/recipes-support/ntp/ntp/ntpdate                 |  5 +++
+>   meta-networking/recipes-support/openvpn/openvpn_2.5.2.bb        |  3 ++
+>   ...1-Adding-volatile-modifier-to-tmp-variable-in-memory-t.patch | 40
+> +++++++++++++++++
+>   meta-oe/recipes-benchmark/sysbench/sysbench_0.4.12.bb           |  4 +-
+>   ...1-python-Do-not-verify-whether-libiio-is-installed-whe.patch | 37
+> ++++++++++++++++
+>   meta-oe/recipes-support/libiio/libiio_git.bb                    |  4 +-
+>   meta-oe/recipes-support/nss/nss_3.64.bb                         |  3 ++
+>   .../recipes-httpd/apache2/apache2/CVE-2020-13950.patch          | 45
+> ++++++++++++++++++++
+>   .../recipes-httpd/apache2/apache2/CVE-2020-35452.patch          | 49
+> +++++++++++++++++++++
+>   .../recipes-httpd/apache2/apache2/CVE-2021-26690.patch          | 39
+> +++++++++++++++++
+>   .../recipes-httpd/apache2/apache2/CVE-2021-26691.patch          | 35
+> +++++++++++++++
+>   .../recipes-httpd/apache2/apache2/CVE-2021-30641.patch          | 66
+> +++++++++++++++++++++++++++++
+>   meta-webserver/recipes-httpd/apache2/apache2_2.4.46.bb          |  5 +++
+>   meta-webserver/recipes-httpd/nginx/files/CVE-2021-23017.patch   | 46
+> ++++++++++++++++++++
+>   meta-webserver/recipes-httpd/nginx/nginx.inc                    |  1 +
+>   15 files changed, 380 insertions(+), 2 deletions(-)
+>   create mode 100644
+> meta-oe/recipes-benchmark/sysbench/sysbench/0001-Adding-volatile-modifier-to-tmp-variable-in-memory-t.patch
+>   create mode 100644
+> meta-oe/recipes-support/libiio/files/0001-python-Do-not-verify-whether-libiio-is-installed-whe.patch
+>   create mode 100644
+> meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-13950.patch
+>   create mode 100644
+> meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-35452.patch
+>   create mode 100644
+> meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26690.patch
+>   create mode 100644
+> meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26691.patch
+>   create mode 100644
+> meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-30641.patch
+>   create mode 100644
+> meta-webserver/recipes-httpd/nginx/files/CVE-2021-23017.patch
+> 
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- ...python3-zeroconf_0.31.0.bb => python3-zeroconf_0.33.1.bb} | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-zeroconf_0.31.0.bb => python3-zeroconf_0.33.1.bb} (56%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-zeroconf_0.31.0.bb b/meta-python/recipes-devtools/python/python3-zeroconf_0.33.1.bb
-similarity index 56%
-rename from meta-python/recipes-devtools/python/python3-zeroconf_0.31.0.bb
-rename to meta-python/recipes-devtools/python/python3-zeroconf_0.33.1.bb
-index cb4c03329d..a0af8420f4 100644
---- a/meta-python/recipes-devtools/python/python3-zeroconf_0.31.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-zeroconf_0.33.1.bb
-@@ -1,12 +1,13 @@
- SUMMARY = "Pure Python Multicast DNS Service Discovery Library (Bonjour/Avahi compatible)"
- HOMEPAGE = "https://github.com/jstasiak/python-zeroconf"
- LICENSE = "LGPL-2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=27818cd7fd83877a8e3ef82b82798ef4"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=3bb705b228ea4a14ea2728215b780d80"
- 
--SRC_URI[sha256sum] = "53a180248471c6f81bd1fffcbce03ed93d7d8eaf10905c9121ac1ea996d19844"
-+SRC_URI[sha256sum] = "ac88738639669f924859a4e01d9742f3783e619e710103f4a0d321a47f260fd2"
- 
- inherit pypi setuptools3
- 
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-ifaddr \
-+    ${PYTHON_PN}-asyncio \
- "
--- 
-2.17.1
-
+merged thanks.
