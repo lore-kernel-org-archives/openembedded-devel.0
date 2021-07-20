@@ -1,107 +1,103 @@
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.web11.555.1626799511854539356
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
+ by mx.groups.io with SMTP id smtpd.web09.57.1626800116131186165
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Jul 2021 09:45:11 -0700
+ Tue, 20 Jul 2021 09:55:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=n6mokDRT;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id h1so11699345plf.6
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jul 2021 09:45:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=XZQlqvPh;
+ spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f175.google.com with SMTP id c1so16256663pfc.13
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jul 2021 09:55:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:references:from:organization:message-id:date:user-agent
          :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=yu2J8yhmQUf6+Wvtd+3qKNr9CLwBZdHBXPlgJGnbQKE=;
-        b=n6mokDRTmsf4WrL7m6Ph8u/DfmvavokoKiL04Aoh7SJxirH736E8KAIAxzZB+2ltSp
-         LxIs1wp2dK6WH3Da0+5+rBFl8ZNZviKOH5gfNQHlV4mLR24qIlUQ7JNm4doHRlqUEXfB
-         mT5ZDWQhGWwFBroLPEv5V9uaoBjBiP/5RXLhL078IDxL5R7DEydX14hdu/dZngAtVOyB
-         Idkykc/lzfy/hYnJiRCEXMZoGBcuJDfDxLDV60OJ8ICb+rCJO9vuqPnbcj4HigxXy+Q3
-         fZkL1BAgsgEfBwWA+mLhajXtGgmIrkdE35FfJ6Odjmk3OxA1HdTx0MtUzPvVYvKciYMH
-         7+4g==
+        bh=+To5OfYCzP8h1eW/dgoSvYXUZr3C+lO7blZDb+xRfMQ=;
+        b=XZQlqvPhl41PzHrf/pdKx2MPYqQRAuv7hj+GWzHR+0jL61YZJSsVxK9qKx1q40gq+r
+         h7qOycreYa1o5MA6m1UjmBpBMbyvtTIqVd+1bCbh62FXQ+FulL5vualKQO33pcXVcUcG
+         8eSjNa/Ex0nRxPu4VAyzF0xNYbkeyWEq1LEFMaXN8nheSDmwAojLsrS/fvhjOFVnm8xy
+         G4PvpiRdLQGD+kclY0x9Cpg5543VTfllHcNlN5ovAGswNlUksBKzn4rtGp3Ennj8sUjB
+         YJ8mEaCwnzgV+5TDOrmqVemXoxUHI2LaeOUKRIyrfmhG3REc+4LQ3sgwVkBczUeJIpmu
+         BNqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:references:from:organization
          :message-id:date:user-agent:mime-version:in-reply-to
          :content-language:content-transfer-encoding;
-        bh=yu2J8yhmQUf6+Wvtd+3qKNr9CLwBZdHBXPlgJGnbQKE=;
-        b=d5DcT9UAyfh3+VLEuEpAXNAtyy4PQfhSH6lVJrmDsdESrIWdtkr9uHd5EANrIP3rMY
-         IDIV04Aimm/mzeXUlBcaihMn8VX9/xaJciW1Wsa/ydXbfaS8NxLZ7D9rXsxZh8Jn2pyW
-         OdDJJ5BZZiQOxAhxBmyhnfxNM7HhFE4I8ziyxRr7j1oZUNPiqBe8QNCj/WiEawwHq6gc
-         aUoyauXf42mdl3+0YXC5/9nWSQOYWUbHelWtaPCv6e5pcjmFS36u1bowhL7N54o6c5eq
-         jb/jrbHAI72JRHxhSuBX4lm3/E0lcu9aT5l+vQN5saR+WswS4ceCaT9JMvRtSmw+SWEN
-         w/yw==
-X-Gm-Message-State: AOAM532Yz58k84sqx7j6j04KRZx4pdzBbKnFT1pgm4hse+faQDGewftP
-	4cISDolgOBfmDCN8ubtu8GxriJOaSdPoKA==
-X-Google-Smtp-Source: ABdhPJyrXdkJB6RPFeiuio88kKt/8PsWUIkxUbaySlx9dE6ErSj7twph3yEdg71rT6a++zDBO7ZWSQ==
-X-Received: by 2002:a17:90a:19c2:: with SMTP id 2mr30565337pjj.233.1626799510908;
-        Tue, 20 Jul 2021 09:45:10 -0700 (PDT)
+        bh=+To5OfYCzP8h1eW/dgoSvYXUZr3C+lO7blZDb+xRfMQ=;
+        b=ZksJtYr0L1T1orFTil7yCeWAwh0Ef8WCM9rEeBIVHWNQO/2PGAjexzPQO188zFmY/2
+         Gf0vEpC+feaF1NCNC46UscYq1ZtuMZqXIvgtJmd1HiH4l04cnU3Kcvi3ddTXUQkL30q2
+         ksM8USrEalaKOPHZ/7h3EWHqpupJ3F+NkJPiDDKr5Cn6KnKYR3/G+LuOLzM1RpQz5JHP
+         HVUYycEZ/NimzqAvpVL/ZQGugX9k3VL6ivBb1RWFNTyxhTn309MB0AHGM7GxNcFzJxk6
+         hHAMf+eikSoD9lE50yA8TBh0dud9krhmeT5VFRzxHBqnUqHYbcEVxTGOum98a+BR0VEt
+         NS+Q==
+X-Gm-Message-State: AOAM530W9IOHjADzviL0HjUsoopvSH9YXJb1iX8/VMpM5A3ik6aJz438
+	Xyx8oK4E3zy3e1bVF0fZVav9402rzTr87A==
+X-Google-Smtp-Source: ABdhPJwgqq0HJGe8Vz5Vqxqj8jp96nr7u/ahR09iT8iajoPNDcOXCd3tVcj1BBLqvBrV623isIsYkg==
+X-Received: by 2002:a65:638e:: with SMTP id h14mr31779866pgv.330.1626800115126;
+        Tue, 20 Jul 2021 09:55:15 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from ?IPv6:2601:646:9200:a0f0:d8a1:9261:489d:7116? ([2601:646:9200:a0f0:d8a1:9261:489d:7116])
-        by smtp.gmail.com with ESMTPSA id z6sm3446837pgs.4.2021.07.20.09.45.10
+        by smtp.gmail.com with ESMTPSA id x10sm26032986pgj.73.2021.07.20.09.55.14
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 20 Jul 2021 09:45:10 -0700 (PDT)
-Subject: Re: [oe] [meta-oe][PATCH] lvm2: allow lvm2-scripts sort rdep to be configurable
-To: Peter Morrow <pdmorrow@gmail.com>,
- openembedded-devel@lists.openembedded.org
-References: <20210720130412.733320-1-pemorrow@linux.microsoft.com>
+        Tue, 20 Jul 2021 09:55:14 -0700 (PDT)
+Subject: Re: [oe] [meta-networking][PATCH] nghttp2 Use the built-in options for removing pack tools
+To: ed@tanous.net, openembedded-devel@lists.openembedded.org
+References: <20210720035647.893435-1-ed@tanous.net>
 From: "Khem Raj" <raj.khem@gmail.com>
 Organization: HIMVIS LLC
-Message-ID: <1bf5f71e-841b-e4ec-03a4-d6d75b4bfe0c@gmail.com>
-Date: Tue, 20 Jul 2021 09:45:08 -0700
+Message-ID: <12a32f2f-d1fe-6bab-d94e-baf6387d2e51@gmail.com>
+Date: Tue, 20 Jul 2021 09:55:13 -0700
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
  Gecko/20100101 Thunderbird/78.12.0
 MIME-Version: 1.0
-In-Reply-To: <20210720130412.733320-1-pemorrow@linux.microsoft.com>
+In-Reply-To: <20210720035647.893435-1-ed@tanous.net>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 
 
 
-On 7/20/21 6:04 AM, Peter Morrow wrote:
-> By default lvm2-scripts has a runtime dependency on coreutils to
-> provide the "sort" binary. There are alternative providers for "sort"
-> such as busybox. It isn't desirabled in some cases to pull in a large
-> package such as coreutils when busybox can provide the sort binary. This
-> patch allows the dependency to be changed to something other than
-> coreutils.
+On 7/19/21 8:56 PM, ed@tanous.net wrote:
+> From: Ed Tanous <ed@tanous.net>
 > 
-> Signed-off-by: Peter Morrow <pemorrow@linux.microsoft.com>
+> For distros that want to use the ENABLE_LIB_ONLY option, the rm call in
+> the do_install_append() will fail, because ENABLE_HPACK_TOOLS (set
+> implicitly as part of ENABLE_LIB_ONLY) removes those two binaries from
+> the build, so they then can't be removed again.  It appears that nghttp2
+> has added explicit options for this use case, so this commit sets
+> ENABLE_HPACK_TOOLS=OFF, which not only allows for the option to be
+> overridden in other meta layers, also allows a simplified use of
+> ENABLE_LIB_ONLY in meta layers that don't want to ship any of the
+> binaries.
+> 
+
+this is already applied to master via
+https://git.openembedded.org/meta-openembedded/commit/?id=df8ecfeacfc84a34a0696a48f3a1dc6d83496271
+
+so is it that you are proposing it for release branches.
+if so then indicate that in patch header.
+
+> Signed-off-by: Ed Tanous <ed@tanous.net>
 > ---
->   meta-oe/recipes-support/lvm2/lvm2_2.03.11.bb | 6 +++++-
->   1 file changed, 5 insertions(+), 1 deletion(-)
+>   meta-networking/recipes-support/nghttp2/nghttp2_1.43.0.bb | 6 +-----
+>   1 file changed, 1 insertion(+), 5 deletions(-)
 > 
-> diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.03.11.bb b/meta-oe/recipes-support/lvm2/lvm2_2.03.11.bb
-> index 7f3f000e0..fbf424f44 100644
-> --- a/meta-oe/recipes-support/lvm2/lvm2_2.03.11.bb
-> +++ b/meta-oe/recipes-support/lvm2/lvm2_2.03.11.bb
-> @@ -69,11 +69,15 @@ RDEPENDS_${PN}-udevrules = "libdevmapper"
->   RDEPENDS_${PN}_append_class-target = " libdevmapper"
->   RDEPENDS_${PN}_append_class-nativesdk = " libdevmapper"
+> diff --git a/meta-networking/recipes-support/nghttp2/nghttp2_1.43.0.bb b/meta-networking/recipes-support/nghttp2/nghttp2_1.43.0.bb
+> index 959cccf35..08b855262 100644
+> --- a/meta-networking/recipes-support/nghttp2/nghttp2_1.43.0.bb
+> +++ b/meta-networking/recipes-support/nghttp2/nghttp2_1.43.0.bb
+> @@ -18,11 +18,7 @@ PACKAGECONFIG[manpages] = ""
 >   
-> +# Select the runtime dependency for lvm2-scripts which provides the "sort"
-> +# binary.
-> +VIRTUAL-RUNTIME_sort ?= "coreutils"
-> +
-
-if coreutils is pulled in via other rdeps then this will be ineffective. 
-Secondly, it seems more like a global setting instead of per recipe 
-setting. Maybe turn it into packageconfig
-
-PACKAGECONFIG[busybox-sort] = ",,,busybox"
-PACKAGECONFIG[coreutils-sort] = ",,,coreutils"
-
-and then default to coreutils
-
-
->   RDEPENDS_${PN}-scripts = "${PN} (= ${EXTENDPKGV}) \
->                             bash \
->                             util-linux-lsblk \
->                             util-linux-findmnt \
-> -                          coreutils \
-> +                          ${VIRTUAL-RUNTIME_sort} \
->   "
->   RRECOMMENDS_${PN}_class-target = "${PN}-scripts (= ${EXTENDPKGV})"
+>   # examples are never installed, and don't need to be built in the
+>   # first place
+> -EXTRA_OECMAKE = "-DENABLE_EXAMPLES=OFF -DENABLE_APP=ON"
+> -
+> -do_install_append() {
+> -	rm ${D}${bindir}/deflatehd ${D}${bindir}/inflatehd
+> -}
+> +EXTRA_OECMAKE = "-DENABLE_EXAMPLES=OFF -DENABLE_APP=ON -DENABLE_HPACK_TOOLS=OFF"
+>   
+>   PACKAGES =+ "lib${PN} ${PN}-client ${PN}-proxy ${PN}-server"
 >   
 > 
 > 
