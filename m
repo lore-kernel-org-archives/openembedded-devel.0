@@ -1,106 +1,89 @@
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.web12.389.1626798677261968522
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.web10.412.1626798677546240267
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 20 Jul 2021 09:31:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=y9X1oJIc;
- spf=pass (domain: linaro.org, ip: 209.85.128.42, mailfrom: nicolas.dechesne@linaro.org)
-Received: by mail-wm1-f42.google.com with SMTP id m11-20020a05600c3b0bb0290228f19cb433so1880696wms.0
+ dkim=pass header.i=@linaro.org header.s=google header.b=bXC4sRPO;
+ spf=pass (domain: linaro.org, ip: 209.85.128.44, mailfrom: nicolas.dechesne@linaro.org)
+Received: by mail-wm1-f44.google.com with SMTP id b14-20020a1c1b0e0000b02901fc3a62af78so1845849wmb.3
         for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jul 2021 09:31:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=Ycn8wWZxfdNwwqw7bJVjP1Rzt0PjRU/SI5m5C9lwwVw=;
-        b=y9X1oJIcgVuwZ8q06nHdouprJCt8y/fz+AxJVFV4PoFqS31ty55sDS//dZqT/hrR8w
-         uCqZxg4rKqNqG5fH6Z691WIz0wNethgOm6VyeQyHvOUZkitm430VYXnDzjpVP8wVgp1E
-         9MIcV7S908hvN+AW3TVewM5WvuoaYd0mhCY1cz8TlL1r5dD8mE+ciEf2MX1HjzIKtq0x
-         S5ft4Fiv/G35boluCf82/+SSYehbtmVpcnpywVasqq/dxLtjO0NStMiqGRJrQBAHZ6ER
-         czByYluICZdbimwc3itf34Di8c7oYvYHA2p9X++CJDVi+LP1r5PJ8UPB95SI5DGjyal1
-         ys2w==
+        bh=yEiwNwmUOyG4AkU0baKhUsdh6EpfGG503qhYjoIKxGc=;
+        b=bXC4sRPOmIKcteIInsa/gHXMvllNzmmI8+P251dOGcbwdMxkXxWykQqVo0v+zdA1gz
+         +ng4AV6iBn929Ky1irlbeX3Jcf7ff8eEiUESa9gcCPqjya/wZLSNNgbpR5DAKmABJDya
+         Hzu0E/ysvBWp7m9zwHuoIO7h/yzzZP44Yf4d6FutBeL3hBNXwtXNjPyXSmsqhrLXz9pl
+         WX4E97PDhS9iSeLLp4Ka6tD2OUo0aF9n/o0Qay2uvwXtdrvLNcX9hPi1UiUjmDVRSUqZ
+         Da1O3C+PwKUunSHDg9z7OQCQ7fa4KkrP7U3j2GrRIPej1UpA6+oiyxadpMtrXtFGkbdh
+         rFMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=Ycn8wWZxfdNwwqw7bJVjP1Rzt0PjRU/SI5m5C9lwwVw=;
-        b=XvEhsRrtrQ8ZvN7nouMoJn+AKDi+01i2q8aYhTO/GwtGZS3zZZJBVdIK8veHvW2/38
-         +F8rkeUVdaSATDh/XzafnhM7/Tgv+62fnHL7ku+Hqtw+fXT/8Vm8gcFNZjpj2iYg2SAb
-         FfnC2nBQpTVhs8B/n6FrnB+J65S4zPv5rQkddmEP/AVgpSEJ+LaGRQhn0KQC7uD/jwqZ
-         RO+y3XetSKjctinJZP63D1j83xq8zEkK+jnKe5X92n9YzY2VxsG3wfiQoIfZl8ClBpvr
-         MFw0/SDyuTaRML/7HRRch1e9f4RRMNeXgNIZ65h7yo/r2LFa4g8WRBIJf2qqSswXi9YR
-         u2Ug==
-X-Gm-Message-State: AOAM5315ICr0PNJw5vr/K1cFp8iq/DMz1ww9KopRnD/jg1RuI9CVUhBO
-	W9ZuUNo+rpLqb1cJdk4YxQ9ELg==
-X-Google-Smtp-Source: ABdhPJzdAPGrbfdHLgtFKIP7SJ/biQd+z2gkM81APeSzN36iJfaar+1Mn4OAcl86bJuOpdH4IHcTjg==
-X-Received: by 2002:a1c:f016:: with SMTP id a22mr33116738wmb.65.1626798675471;
-        Tue, 20 Jul 2021 09:31:15 -0700 (PDT)
+        bh=yEiwNwmUOyG4AkU0baKhUsdh6EpfGG503qhYjoIKxGc=;
+        b=srXboxraU2Ug5ahpP3ro5b0SrRyB5jYiqClA1ZBj61StZzxEjn114fDTL4pv7XLgoY
+         Fo8QjbAnyQDESKkU4tVMl083fZg9kpSWt7EXekgMqkjvEwM/Y5H6tB5ZyVNDpMHgntG8
+         VH5HgtdJ/9r4o/IAX/NQinJtuLtB0BqkfgifUpJQHg3HOjK63muWaZYv+dL4HNg5rMeg
+         4vpzLzemCNmyZkhTWQ5zYQ9ZvoZQlyWzNnQaji3IZgYrv4SpUv5H3h0sDPomTqVWdSm3
+         DD3zBwzgsgtZrddZKNz2DkyAIi1Gh2ljoQxAY+jc2NUapfIq5KDaZ+rOInGWQQS76sMl
+         HR9Q==
+X-Gm-Message-State: AOAM532q+8MklWgnHG4n26psx0TYxKzW7dTTRDGeQqLlPbCEwOcsh6vB
+	VCi4bJdU0Ym9rdmuw+KUXbd0pA==
+X-Google-Smtp-Source: ABdhPJzRsmwtKZU8CBGV1qkueQIjhCr1rTQlg5BIEOXugaz0TdsPwPRuqZoKX41JIr15hMIw34krGw==
+X-Received: by 2002:a7b:c2a2:: with SMTP id c2mr32873841wmk.89.1626798676011;
+        Tue, 20 Jul 2021 09:31:16 -0700 (PDT)
 Return-Path: <nicolas.dechesne@linaro.org>
 Received: from qcom-hackbox.linaro.org.net (163-172-5-244.rev.poneytelecom.eu. [163.172.5.244])
-        by smtp.gmail.com with ESMTPSA id l39sm2256731wms.1.2021.07.20.09.31.14
+        by smtp.gmail.com with ESMTPSA id l39sm2256731wms.1.2021.07.20.09.31.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Jul 2021 09:31:14 -0700 (PDT)
+        Tue, 20 Jul 2021 09:31:15 -0700 (PDT)
 From: "Nicolas Dechesne" <nicolas.dechesne@linaro.org>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Subject: [PATCH 1/5] libdevmapper,lvm2: Do not inherit license
-Date: Tue, 20 Jul 2021 18:30:48 +0200
-Message-Id: <20210720163052.11295-2-nicolas.dechesne@linaro.org>
+Cc: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Subject: [PATCH 2/5] python3-markupsafe: remove recipe
+Date: Tue, 20 Jul 2021 18:30:49 +0200
+Message-Id: <20210720163052.11295-3-nicolas.dechesne@linaro.org>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20210720163052.11295-1-nicolas.dechesne@linaro.org>
 References: <20210720163052.11295-1-nicolas.dechesne@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Khem Raj <raj.khem@gmail.com>
+It was moved to OE-core/dunfell in
+ec222f6af5f8 (python3-markupsafe: Import from meta-oe/meta-python)
 
-inheriting license class which brings in
-AVAILABLE_LICENSES into do_configure task checksums class since it wants to
-enable thin-provisioning-tools if distro allows GPL-3 automatically, but this
-brings issues when other layers which have additional licenses are
-provided which ends up in signature mismatches so leave that setting to end-user and keep it disabled by
-default with a comment in recipes stating that if needed then the user should enable it via
-config metadata or bbappends.
+However it was not removed from meta-oe, as such this recipe is now
+duplicated, for no good reason. The version in meta-oe and oe-core
+match so, it's really a no-op.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit f592e81f11d455546447ddff35b2f89e18c0cc0c)
 Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
 ---
- meta-oe/recipes-support/lvm2/lvm2.inc | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ .../recipes-devtools/python/python3-markupsafe/run-ptest       | 3 ---
+ .../recipes-devtools/python/python3-markupsafe_1.1.1.bb        | 2 --
+ 2 files changed, 5 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-markupsafe/run-ptest
+ delete mode 100644 meta-python/recipes-devtools/python/python3-markupsafe_1.1.1.bb
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index 01c9df45c..2fe97d571 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -19,12 +19,11 @@ SRC_URI = "git://sourceware.org/git/lvm2.git \
- SRCREV = "b9391b1b9f0b73303fa21f8f92574d17ce4c2b02"
- S = "${WORKDIR}/git"
- 
--inherit autotools-brokensep pkgconfig systemd license
-+inherit autotools-brokensep pkgconfig systemd
- 
- LVM2_PACKAGECONFIG = "dmeventd"
- LVM2_PACKAGECONFIG_append_class-target = " \
-     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)} \
--    ${@incompatible_license_contains('GPLv3', '', 'thin-provisioning-tools', d)} \
- "
- 
- # odirect is always enabled because there currently is a bug in
-@@ -37,6 +36,7 @@ PACKAGECONFIG[dmeventd] = "--enable-dmeventd,--disable-dmeventd"
- PACKAGECONFIG[odirect] = "--enable-o_direct,--disable-o_direct"
- PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
- PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
-+# NOTE: Add thin-provisioning-tools only if your distro policy allows GPL-3.0 license
- PACKAGECONFIG[thin-provisioning-tools] = "--with-thin=internal,--with-thin=none,,thin-provisioning-tools"
- 
- # Unset user/group to unbreak install.
-@@ -53,4 +53,3 @@ EXTRA_OECONF = "--with-user= \
-                 --with-thin-repair=${sbindir}/thin_repair \
-                 --with-thin-restore=${sbindir}/thin_restore \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-markupsafe/run-ptest b/meta-python/recipes-devtools/python/python3-markupsafe/run-ptest
+deleted file mode 100644
+index 5cec71169..000000000
+--- a/meta-python/recipes-devtools/python/python3-markupsafe/run-ptest
++++ /dev/null
+@@ -1,3 +0,0 @@
+-#!/bin/sh
 -
+-pytest
+diff --git a/meta-python/recipes-devtools/python/python3-markupsafe_1.1.1.bb b/meta-python/recipes-devtools/python/python3-markupsafe_1.1.1.bb
+deleted file mode 100644
+index 765e3c906..000000000
+--- a/meta-python/recipes-devtools/python/python3-markupsafe_1.1.1.bb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-inherit setuptools3
+-require python-markupsafe.inc
 -- 
 2.29.2
 
