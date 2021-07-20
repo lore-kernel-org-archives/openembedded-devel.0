@@ -1,88 +1,83 @@
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web12.3301.1626753451220897176
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.web12.4164.1626761655537798792
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Jul 2021 20:57:31 -0700
+ Mon, 19 Jul 2021 23:14:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@tanous-net.20150623.gappssmtp.com header.s=20150623 header.b=y87omu6u;
- spf=none, err=permanent DNS error (domain: tanous.net, ip: 209.85.210.179, mailfrom: ed@tanous.net)
-Received: by mail-pf1-f179.google.com with SMTP id b12so18502257pfv.6
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jul 2021 20:57:31 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=W6pMr2bp;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id t5so24662267wrw.12
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jul 2021 23:14:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=tanous-net.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=6w0S+ZhZndeTxGcdV3d7aryMNHHPe3xqKutQDr79rkc=;
-        b=y87omu6uqgCI0p85DKOihXsLIOYqf95t1X7jn2Hg8yQ0QqZuLYDzIgGXcdf5ERKo6+
-         CblMt5ZVu8z5hTap4xtJRoKyELdI4otO0GWXOeeQBypkn3CvbsqMu082tmf08ddXBSBv
-         FhYNf9z+Q6kxrU0acWn+oSMI8H4U0MbAqq2y+orGHJCwarb8QSgJ1JJGVVWVQMwT26df
-         La3HOSKaQ+kg/Dkz8uA+jRABPScMZp/tluCruWGZE4RMPx2rh6bPSxcT2SfAzmuwremg
-         fMBDViF3s5h3lROc6aMNzo5kfnyc9GosOnt0yJnBtsLRh8OwXoMZipnnY3bZ7nXBkrPF
-         OfLg==
+        bh=ug+LAP2FfllFn3iHe/wmt8xAVwvEfLZ0w7IPMk/SlQk=;
+        b=W6pMr2bpY9ElfHw+Re9sewjj7vmv31jlC2UqSY9c6+AJM7sAbzvSZTY2irhHfW9ZHP
+         AUqp/eXBVlFWiM2V54nZyUsnhbZpJY4vAk36JsJCibPettKBSZuZqqhxaLrnTBNNZ3lO
+         YZ8PYsn3xBTrtHJUuBFxLClpmh86/GHzhJogQUfdoYysav+hYR4Lrv0PB1Y2Ya0i4WNO
+         DWOYriABfiQCnVHNcCi+HOugr5YRu9vOmL2+s64CL9EmANcaKVISKtG79QLlYnZlSU17
+         4NTZqfNsn7KQ46G3+JxHDQ/eKLYpUDbTmfMgbMke0WjT5s5+lck6vBDUsaB6rJjgstgb
+         wp+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=6w0S+ZhZndeTxGcdV3d7aryMNHHPe3xqKutQDr79rkc=;
-        b=mbQwXPujsO+5dlgXlrk9DFMnbW6qxcbaqisfPhI54HpZYVZOLaTEu8TRcflLtOd3Gf
-         9f+ueuiikuskQ6rHiFTSMkYVYPXUOyrZ+9ZPpB6PpBdfu6FCIdNcB+6L3nY5LMLozjHp
-         DJ6A4uz/nDbPL6RNejD7QQAG3zz8MkRPnWPAPPYp7sU7SP6kagIEm57bSYGuPjLyOMmY
-         L+Y1uls8gkkc1qRsogxHl0Rk5cOePfBqd+btyE+w0Rdlp0L12dNepxkvS8stAs55Js4Z
-         GQ+MyoLvw7wEezTXiS3J7uawyqt9V1Aib62EpAIufWajZaOTTx5smC7CWwKskT2Fwhso
-         mTYA==
-X-Gm-Message-State: AOAM530y8E3jsTAhGo8JLfnZtMcHsnYh2r2T8fc3goIskpeCKzBo4zH1
-	KscHGxyMIMI+e2UvoiG0V2EU7F39ErLvog==
-X-Google-Smtp-Source: ABdhPJxCnqU9qPh7LX0fRXFuYRwxTSba0LrNcyHDOpe0vnCq5wmfFlqXYnY8zyhK9gfgix73ihxp5Q==
-X-Received: by 2002:a63:ef45:: with SMTP id c5mr29245365pgk.78.1626753450061;
-        Mon, 19 Jul 2021 20:57:30 -0700 (PDT)
-Return-Path: <ed@tanous.net>
-Received: from edtanous.svl.corp.google.com ([2620:15c:2c5:13:25c4:871:645e:f49f])
-        by smtp.gmail.com with ESMTPSA id a22sm23469960pgv.84.2021.07.19.20.57.29
+        bh=ug+LAP2FfllFn3iHe/wmt8xAVwvEfLZ0w7IPMk/SlQk=;
+        b=g1DR/J46Sz/9Y+or6la5XQVSpJYbKAHz93qV4egP3d7UxETfj77cvIlqDtA969JAyy
+         UGAW4pF3Ch0TR+/dKAo6sc5pNK3ySAEEbi4TvbanVagi6pYwOoQwrmIxEsQW5F7pgPiQ
+         JH/y+oz0QHyUG6iMJtNMQ48OY7tykqLR0nDOx3WjL5TxBbQSGqmA83rh9LQ1YUY+HQkw
+         9nVTfk5QJOp43ROzSCj18z0ONTMJ74yoMpvHIxP38tUMOf2qMpkOfbvdMgACkhKVlXMg
+         dw8Qf5YwHB0wBgwl0y2bxEcGPYRrB74h8tL6aazVA2nv1XkEmRNUUiwnAnerZVn38X7a
+         pjvQ==
+X-Gm-Message-State: AOAM532icvyyVMMLbIC6eFGCsMU8SddEIK4RDjOA5RnyY/5KIQRX2ogO
+	gmLG5CopjBGOaNniqzFMFC6WuHIRRIw=
+X-Google-Smtp-Source: ABdhPJyH4FL6S34jXWrxilP8EGTYdic7fgK2yFvLXMh0n0Mnhb+UU1aP/X+fZDf+C+oHRwwbN+/JHw==
+X-Received: by 2002:adf:dfc4:: with SMTP id q4mr33310878wrn.329.1626761653664;
+        Mon, 19 Jul 2021 23:14:13 -0700 (PDT)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from thanks-buchmuellers.speedport.ip (p200300f07f02a430b7203cd4bde6d1df.dip0.t-ipconnect.de. [2003:f0:7f02:a430:b720:3cd4:bde6:d1df])
+        by smtp.gmail.com with ESMTPSA id u2sm18205922wmc.42.2021.07.19.23.14.12
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Jul 2021 20:57:29 -0700 (PDT)
-From: ed@tanous.net
+        Mon, 19 Jul 2021 23:14:13 -0700 (PDT)
+From: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ed Tanous <ed@tanous.net>
-Subject: [meta-networking][PATCH] nghttp2 Use the built-in options for removing pack tools
-Date: Mon, 19 Jul 2021 20:56:47 -0700
-Message-Id: <20210720035647.893435-1-ed@tanous.net>
-X-Mailer: git-send-email 2.32.0.402.g57bb445576-goog
+Subject: [PATCH 1/3] mozjs/0001-Port-build-to-python3.patch: Fix typos in description
+Date: Tue, 20 Jul 2021 08:14:03 +0200
+Message-Id: <20210720061405.2255027-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Ed Tanous <ed@tanous.net>
-
-For distros that want to use the ENABLE_LIB_ONLY option, the rm call in
-the do_install_append() will fail, because ENABLE_HPACK_TOOLS (set
-implicitly as part of ENABLE_LIB_ONLY) removes those two binaries from
-the build, so they then can't be removed again.  It appears that nghttp2
-has added explicit options for this use case, so this commit sets
-ENABLE_HPACK_TOOLS=OFF, which not only allows for the option to be
-overridden in other meta layers, also allows a simplified use of
-ENABLE_LIB_ONLY in meta layers that don't want to ship any of the
-binaries.
-
-Signed-off-by: Ed Tanous <ed@tanous.net>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-networking/recipes-support/nghttp2/nghttp2_1.43.0.bb | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+ .../mozjs/mozjs/0001-Port-build-to-python3.patch            | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-networking/recipes-support/nghttp2/nghttp2_1.43.0.bb b/meta-networking/recipes-support/nghttp2/nghttp2_1.43.0.bb
-index 959cccf35..08b855262 100644
---- a/meta-networking/recipes-support/nghttp2/nghttp2_1.43.0.bb
-+++ b/meta-networking/recipes-support/nghttp2/nghttp2_1.43.0.bb
-@@ -18,11 +18,7 @@ PACKAGECONFIG[manpages] = ""
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs/0001-Port-build-to-python3.patch b/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs/0001-Port-build-to-python3.patch
+index e525047df..5cdad93e9 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs/0001-Port-build-to-python3.patch
++++ b/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs/0001-Port-build-to-python3.patch
+@@ -17,15 +17,15 @@ Content-Transfer-Encoding: 8bit
+   python/mozbuild/mozbuild/configure/__init__.py / Line 310 onwards
+ * major changes upstream on build are not to expect so upgrading should cause
+   little trouble and changes can be tracked by [3]
+-* some solutions are workarounds/hacks so this patch will not be accepeted
+-  upstream. This should not be a probelme for us: once mozjs >= 68 will arrive
++* some solutions are workarounds/hacks so this patch will not be accepted
++  upstream. This should not be a problem for us: once mozjs >= 68 will arrive
+   we have to go to rust/cargo based build anyway.
  
- # examples are never installed, and don't need to be built in the
- # first place
--EXTRA_OECMAKE = "-DENABLE_EXAMPLES=OFF -DENABLE_APP=ON"
--
--do_install_append() {
--	rm ${D}${bindir}/deflatehd ${D}${bindir}/inflatehd
--}
-+EXTRA_OECMAKE = "-DENABLE_EXAMPLES=OFF -DENABLE_APP=ON -DENABLE_HPACK_TOOLS=OFF"
+ [1] https://code.foxkit.us/adelie/packages/blob/f2b5773da19ab397fbe64fd32dacc383cfe4cd77/user/mozjs/python3.patch
+ [2] https://github.com/mozilla/gecko-dev
+ [3] https://github.com/mozilla/gecko-dev/tree/esr60
  
- PACKAGES =+ "lib${PN} ${PN}-client ${PN}-proxy ${PN}-server"
+-Upstream-Status: Inaproppriate [Some Hacks]
++Upstream-Status: Inappropriate [Some Hacks]
  
+ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+ ---
 -- 
-2.32.0.402.g57bb445576-goog
+2.31.1
 
