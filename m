@@ -1,194 +1,110 @@
-Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
- by mx.groups.io with SMTP id smtpd.web10.435.1626798787678302538
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.web11.555.1626799511854539356
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Jul 2021 09:33:08 -0700
+ Tue, 20 Jul 2021 09:45:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=KLf+HY4g;
- spf=pass (domain: linaro.org, ip: 209.85.218.52, mailfrom: nicolas.dechesne@linaro.org)
-Received: by mail-ej1-f52.google.com with SMTP id nd37so35242292ejc.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jul 2021 09:33:07 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=n6mokDRT;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id h1so11699345plf.6
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jul 2021 09:45:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
-        bh=SYfvez8memq7qHPRdzbVoeMv3PstiFs3mBRv8G+ZW8k=;
-        b=KLf+HY4gRYCgFlZ8xFBcaUO3bIlV3UQUiI5424MAwGwmremsIqVpy7durTZ1UY7q60
-         pleRdnHlCt2LkNL6Rbdim8AgoHkJnSXkEXz07BFmArEdXY+hBPH4fkmORyW0AdIf9Q6Y
-         XU0kuBa54lv7X17u8Irn/5u+2SOwHvNSNgnR78eyyHPHJZhu2cC2Znsvn3qbhYm+dWeD
-         8C9N1Qz7eB0CywzIhQd9UFjt2M6102uKhHIdNoZOR1XLbpp4YXTIKOBic8I49K7CnP6U
-         Nt4o4xizxA6KgHqne+0YjTBLqYBP/tkcAQg12oyTQMBNrwnMSG90TqOZNgcVtHuhIVvY
-         Ah3Q==
+        d=gmail.com; s=20161025;
+        h=subject:to:references:from:organization:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=yu2J8yhmQUf6+Wvtd+3qKNr9CLwBZdHBXPlgJGnbQKE=;
+        b=n6mokDRTmsf4WrL7m6Ph8u/DfmvavokoKiL04Aoh7SJxirH736E8KAIAxzZB+2ltSp
+         LxIs1wp2dK6WH3Da0+5+rBFl8ZNZviKOH5gfNQHlV4mLR24qIlUQ7JNm4doHRlqUEXfB
+         mT5ZDWQhGWwFBroLPEv5V9uaoBjBiP/5RXLhL078IDxL5R7DEydX14hdu/dZngAtVOyB
+         Idkykc/lzfy/hYnJiRCEXMZoGBcuJDfDxLDV60OJ8ICb+rCJO9vuqPnbcj4HigxXy+Q3
+         fZkL1BAgsgEfBwWA+mLhajXtGgmIrkdE35FfJ6Odjmk3OxA1HdTx0MtUzPvVYvKciYMH
+         7+4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to;
-        bh=SYfvez8memq7qHPRdzbVoeMv3PstiFs3mBRv8G+ZW8k=;
-        b=Q/lcc1kTHPFu1641vZeyIlp3UT8DNiSnzFJbaIgBl8wDqyGjVDylnkXjF8FpErUz7X
-         LUTMVQl5ZvdcNsC81gH3qIJvyDWloEtiwxwbzRSO/zYhWaeOIuvFRjw7WZGpUTSOeiIm
-         jwlW1/kSAwvtW4Pe5yp+VxCoY/CwEeE+oQHIAc2vhSDlPrIXoPtDaMANxGLu1O0IFDGB
-         52aMeXy41T2EcZNSBmenYTXH8+R15FAn1nuRTOuzpRMEYvqHwcyus0YE31QQUBXbFbqz
-         uslvFefDlvjZu30mEXHoWj37lIl+vOpn849FJDXQebDldgGRLyvX85QeVd+sGeDSEfqW
-         4Xqg==
-X-Gm-Message-State: AOAM531TxcWHLF3pn8hJL/WqFb9aI3hzOptrTerUs/ekiFRZM/0ThMXI
-	FUsxfKs9psPlSoI62cBay7NZYldjOEeb20gVZtBzqw==
-X-Google-Smtp-Source: ABdhPJyo7yhwsus3cboP/yJmUnrm7tTK5u4MQ1lybf71cyM/eVLGOynt2M+fSis/gY1uj1ZkMbGHwu2Nt7BNU31lhes=
-X-Received: by 2002:a17:906:384c:: with SMTP id w12mr33649820ejc.445.1626798785945;
- Tue, 20 Jul 2021 09:33:05 -0700 (PDT)
+        h=x-gm-message-state:subject:to:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=yu2J8yhmQUf6+Wvtd+3qKNr9CLwBZdHBXPlgJGnbQKE=;
+        b=d5DcT9UAyfh3+VLEuEpAXNAtyy4PQfhSH6lVJrmDsdESrIWdtkr9uHd5EANrIP3rMY
+         IDIV04Aimm/mzeXUlBcaihMn8VX9/xaJciW1Wsa/ydXbfaS8NxLZ7D9rXsxZh8Jn2pyW
+         OdDJJ5BZZiQOxAhxBmyhnfxNM7HhFE4I8ziyxRr7j1oZUNPiqBe8QNCj/WiEawwHq6gc
+         aUoyauXf42mdl3+0YXC5/9nWSQOYWUbHelWtaPCv6e5pcjmFS36u1bowhL7N54o6c5eq
+         jb/jrbHAI72JRHxhSuBX4lm3/E0lcu9aT5l+vQN5saR+WswS4ceCaT9JMvRtSmw+SWEN
+         w/yw==
+X-Gm-Message-State: AOAM532Yz58k84sqx7j6j04KRZx4pdzBbKnFT1pgm4hse+faQDGewftP
+	4cISDolgOBfmDCN8ubtu8GxriJOaSdPoKA==
+X-Google-Smtp-Source: ABdhPJyrXdkJB6RPFeiuio88kKt/8PsWUIkxUbaySlx9dE6ErSj7twph3yEdg71rT6a++zDBO7ZWSQ==
+X-Received: by 2002:a17:90a:19c2:: with SMTP id 2mr30565337pjj.233.1626799510908;
+        Tue, 20 Jul 2021 09:45:10 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:a0f0:d8a1:9261:489d:7116? ([2601:646:9200:a0f0:d8a1:9261:489d:7116])
+        by smtp.gmail.com with ESMTPSA id z6sm3446837pgs.4.2021.07.20.09.45.10
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 20 Jul 2021 09:45:10 -0700 (PDT)
+Subject: Re: [oe] [meta-oe][PATCH] lvm2: allow lvm2-scripts sort rdep to be configurable
+To: Peter Morrow <pdmorrow@gmail.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20210720130412.733320-1-pemorrow@linux.microsoft.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <1bf5f71e-841b-e4ec-03a4-d6d75b4bfe0c@gmail.com>
+Date: Tue, 20 Jul 2021 09:45:08 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.12.0
 MIME-Version: 1.0
-References: <20210720163052.11295-1-nicolas.dechesne@linaro.org>
-In-Reply-To: <20210720163052.11295-1-nicolas.dechesne@linaro.org>
-From: "Nicolas Dechesne" <nicolas.dechesne@linaro.org>
-Date: Tue, 20 Jul 2021 18:32:54 +0200
-Message-ID: <CAP71Wjy6Ka+e5+F57uizPGuLHdJumYAXLP131GKdFO9+ndt0iw@mail.gmail.com>
-Subject: Re: [PATCH 0/5] Various fixes for YP compatible
-To: akuster808 <akuster808@gmail.com>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000c1f9ee05c7909ba6"
+In-Reply-To: <20210720130412.733320-1-pemorrow@linux.microsoft.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
---000000000000c1f9ee05c7909ba6
-Content-Type: text/plain; charset="UTF-8"
 
-d'oh... I meant to add it in the prefix.. but these patches are for dunfell
-branch.
 
-On Tue, Jul 20, 2021 at 6:31 PM Nicolas Dechesne <
-nicolas.dechesne@linaro.org> wrote:
+On 7/20/21 6:04 AM, Peter Morrow wrote:
+> By default lvm2-scripts has a runtime dependency on coreutils to
+> provide the "sort" binary. There are alternative providers for "sort"
+> such as busybox. It isn't desirabled in some cases to pull in a large
+> package such as coreutils when busybox can provide the sort binary. This
+> patch allows the dependency to be changed to something other than
+> coreutils.
+> 
+> Signed-off-by: Peter Morrow <pemorrow@linux.microsoft.com>
+> ---
+>   meta-oe/recipes-support/lvm2/lvm2_2.03.11.bb | 6 +++++-
+>   1 file changed, 5 insertions(+), 1 deletion(-)
+> 
+> diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.03.11.bb b/meta-oe/recipes-support/lvm2/lvm2_2.03.11.bb
+> index 7f3f000e0..fbf424f44 100644
+> --- a/meta-oe/recipes-support/lvm2/lvm2_2.03.11.bb
+> +++ b/meta-oe/recipes-support/lvm2/lvm2_2.03.11.bb
+> @@ -69,11 +69,15 @@ RDEPENDS_${PN}-udevrules = "libdevmapper"
+>   RDEPENDS_${PN}_append_class-target = " libdevmapper"
+>   RDEPENDS_${PN}_append_class-nativesdk = " libdevmapper"
+>   
+> +# Select the runtime dependency for lvm2-scripts which provides the "sort"
+> +# binary.
+> +VIRTUAL-RUNTIME_sort ?= "coreutils"
+> +
 
-> There are some pending requests for YP compatible for layers which
-> depend on meta-oe, meta-python and meta-networking. In dunfell, these
-> layers do not PASS the yocto-check-layer compatibility script. With
-> these patches applied, I am able to get this:
->
-> INFO: Summary of results:
-> INFO:
-> INFO: meta-networking ... PASS
-> INFO: meta-python ... PASS
-> INFO: meta-oe ... PASS
->
-> Khem Raj (1):
->   libdevmapper,lvm2: Do not inherit license
->
-> Nicolas Dechesne (4):
->   python3-markupsafe: remove recipe
->   python3-jinja2: remove recipe
->   python3-{pyyaml,cython,pyparsing}: move from meta-python to meta-oe
->   ostree: Do not check for meta-python
->
->  .../recipes-devtools/python/python-cython.inc |  0
->  .../python/python3-cython_0.29.14.bb          |  0
->  .../python/python3-pyparsing_2.4.6.bb         |  0
->  .../python/python3-pyyaml_5.3.1.bb            |  0
->  .../recipes-extended/ostree/ostree_2020.3.bb  |  2 +-
->  meta-oe/recipes-support/lvm2/lvm2.inc         |  5 +--
->  .../python/python3-jinja2/run-ptest           |  3 --
->  .../python/python3-jinja2_2.11.2.bb           | 43 -------------------
->  .../python/python3-markupsafe/run-ptest       |  3 --
->  .../python/python3-markupsafe_1.1.1.bb        |  2 -
->  10 files changed, 3 insertions(+), 55 deletions(-)
->  rename {meta-python => meta-oe}/recipes-devtools/python/python-cython.inc
-> (100%)
->  rename {meta-python => meta-oe}/recipes-devtools/python/
-> python3-cython_0.29.14.bb (100%)
->  rename {meta-python => meta-oe}/recipes-devtools/python/
-> python3-pyparsing_2.4.6.bb (100%)
->  rename {meta-python => meta-oe}/recipes-devtools/python/
-> python3-pyyaml_5.3.1.bb (100%)
->  delete mode 100644
-> meta-python/recipes-devtools/python/python3-jinja2/run-ptest
->  delete mode 100644 meta-python/recipes-devtools/python/
-> python3-jinja2_2.11.2.bb
->  delete mode 100644
-> meta-python/recipes-devtools/python/python3-markupsafe/run-ptest
->  delete mode 100644 meta-python/recipes-devtools/python/
-> python3-markupsafe_1.1.1.bb
->
-> --
-> 2.29.2
->
->
+if coreutils is pulled in via other rdeps then this will be ineffective. 
+Secondly, it seems more like a global setting instead of per recipe 
+setting. Maybe turn it into packageconfig
 
---000000000000c1f9ee05c7909ba6
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+PACKAGECONFIG[busybox-sort] = ",,,busybox"
+PACKAGECONFIG[coreutils-sort] = ",,,coreutils"
 
-<div dir=3D"ltr"><div>d&#39;oh... I meant to add it in the prefix.. but the=
-se patches are for dunfell branch.=C2=A0</div><br><div class=3D"gmail_quote=
-"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jul 20, 2021 at 6:31 PM Nic=
-olas Dechesne &lt;<a href=3D"mailto:nicolas.dechesne@linaro.org">nicolas.de=
-chesne@linaro.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote"=
- style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);p=
-adding-left:1ex">There are some pending requests for YP compatible for laye=
-rs which<br>
-depend on meta-oe, meta-python and meta-networking. In dunfell, these<br>
-layers do not PASS the yocto-check-layer compatibility script. With<br>
-these patches applied, I am able to get this:<br>
-<br>
-INFO: Summary of results:<br>
-INFO:<br>
-INFO: meta-networking ... PASS<br>
-INFO: meta-python ... PASS<br>
-INFO: meta-oe ... PASS<br>
-<br>
-Khem Raj (1):<br>
-=C2=A0 libdevmapper,lvm2: Do not inherit license<br>
-<br>
-Nicolas Dechesne (4):<br>
-=C2=A0 python3-markupsafe: remove recipe<br>
-=C2=A0 python3-jinja2: remove recipe<br>
-=C2=A0 python3-{pyyaml,cython,pyparsing}: move from meta-python to meta-oe<=
-br>
-=C2=A0 ostree: Do not check for meta-python<br>
-<br>
-=C2=A0.../recipes-devtools/python/python-cython.inc |=C2=A0 0<br>
-=C2=A0.../python/<a href=3D"http://python3-cython_0.29.14.bb" rel=3D"norefe=
-rrer" target=3D"_blank">python3-cython_0.29.14.bb</a>=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 |=C2=A0 0<br>
-=C2=A0.../python/<a href=3D"http://python3-pyparsing_2.4.6.bb" rel=3D"noref=
-errer" target=3D"_blank">python3-pyparsing_2.4.6.bb</a>=C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0|=C2=A0 0<br>
-=C2=A0.../python/<a href=3D"http://python3-pyyaml_5.3.1.bb" rel=3D"noreferr=
-er" target=3D"_blank">python3-pyyaml_5.3.1.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 |=C2=A0 0<br>
-=C2=A0.../recipes-extended/ostree/<a href=3D"http://ostree_2020.3.bb" rel=
-=3D"noreferrer" target=3D"_blank">ostree_2020.3.bb</a>=C2=A0 |=C2=A0 2 +-<b=
-r>
-=C2=A0meta-oe/recipes-support/lvm2/lvm2.inc=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0|=C2=A0 5 +--<br>
-=C2=A0.../python/python3-jinja2/run-ptest=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0|=C2=A0 3 --<br>
-=C2=A0.../python/<a href=3D"http://python3-jinja2_2.11.2.bb" rel=3D"norefer=
-rer" target=3D"_blank">python3-jinja2_2.11.2.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0| 43 -------------------<br>
-=C2=A0.../python/python3-markupsafe/run-ptest=C2=A0 =C2=A0 =C2=A0 =C2=A0|=
-=C2=A0 3 --<br>
-=C2=A0.../python/<a href=3D"http://python3-markupsafe_1.1.1.bb" rel=3D"nore=
-ferrer" target=3D"_blank">python3-markupsafe_1.1.1.bb</a>=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 |=C2=A0 2 -<br>
-=C2=A010 files changed, 3 insertions(+), 55 deletions(-)<br>
-=C2=A0rename {meta-python =3D&gt; meta-oe}/recipes-devtools/python/python-c=
-ython.inc (100%)<br>
-=C2=A0rename {meta-python =3D&gt; meta-oe}/recipes-devtools/python/<a href=
-=3D"http://python3-cython_0.29.14.bb" rel=3D"noreferrer" target=3D"_blank">=
-python3-cython_0.29.14.bb</a> (100%)<br>
-=C2=A0rename {meta-python =3D&gt; meta-oe}/recipes-devtools/python/<a href=
-=3D"http://python3-pyparsing_2.4.6.bb" rel=3D"noreferrer" target=3D"_blank"=
->python3-pyparsing_2.4.6.bb</a> (100%)<br>
-=C2=A0rename {meta-python =3D&gt; meta-oe}/recipes-devtools/python/<a href=
-=3D"http://python3-pyyaml_5.3.1.bb" rel=3D"noreferrer" target=3D"_blank">py=
-thon3-pyyaml_5.3.1.bb</a> (100%)<br>
-=C2=A0delete mode 100644 meta-python/recipes-devtools/python/python3-jinja2=
-/run-ptest<br>
-=C2=A0delete mode 100644 meta-python/recipes-devtools/python/<a href=3D"htt=
-p://python3-jinja2_2.11.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-=
-jinja2_2.11.2.bb</a><br>
-=C2=A0delete mode 100644 meta-python/recipes-devtools/python/python3-markup=
-safe/run-ptest<br>
-=C2=A0delete mode 100644 meta-python/recipes-devtools/python/<a href=3D"htt=
-p://python3-markupsafe_1.1.1.bb" rel=3D"noreferrer" target=3D"_blank">pytho=
-n3-markupsafe_1.1.1.bb</a><br>
-<br>
--- <br>
-2.29.2<br>
-<br>
-</blockquote></div></div>
+and then default to coreutils
 
---000000000000c1f9ee05c7909ba6--
+
+>   RDEPENDS_${PN}-scripts = "${PN} (= ${EXTENDPKGV}) \
+>                             bash \
+>                             util-linux-lsblk \
+>                             util-linux-findmnt \
+> -                          coreutils \
+> +                          ${VIRTUAL-RUNTIME_sort} \
+>   "
+>   RRECOMMENDS_${PN}_class-target = "${PN}-scripts (= ${EXTENDPKGV})"
+>   
+> 
+> 
+> 
+> 
+> 
