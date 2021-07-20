@@ -1,106 +1,82 @@
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.web08.383.1626798679299572693
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.web09.383.1626798680564968829
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Jul 2021 09:31:19 -0700
+ Tue, 20 Jul 2021 09:31:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=hu1ovWQP;
- spf=pass (domain: linaro.org, ip: 209.85.128.54, mailfrom: nicolas.dechesne@linaro.org)
-Received: by mail-wm1-f54.google.com with SMTP id g8-20020a1c9d080000b02901f13dd1672aso1859489wme.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jul 2021 09:31:19 -0700 (PDT)
+ dkim=pass header.i=@linaro.org header.s=google header.b=d2m4tI31;
+ spf=pass (domain: linaro.org, ip: 209.85.128.49, mailfrom: nicolas.dechesne@linaro.org)
+Received: by mail-wm1-f49.google.com with SMTP id p15-20020a05600c358fb0290245467f26a4so2435576wmq.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jul 2021 09:31:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=htJRfpThI0SsEqQvXVih/cCr+f+R6D+sVhstDn+LVgM=;
-        b=hu1ovWQP6GneZxrG0AI3nSUTA4yBJ0eBMPM9QWShOUc9ghcVjml7oPFmYEgvts77Ox
-         J08aMTu4vUXI6ri8iVs7HzZ7zFdUdOXXYDWSDp9Fq2GEq2KM9Cs/Qq9wwArP9sI3XCO9
-         7njPWy69nUTB0ykfjY4APAadiVR4KseA3OmJmni1h6tJLflZ/Stt/DpcRFYMufvWBLAS
-         XAnKiJpNByLQpXP3speN9+DNfi7sBNeThoPbyPLkm6Z0c0TGOcxJ9QfYzCZ82g9zHMAd
-         CdkooMTPJtYfKwzAs6RSBg5dzo4BB5MZocI6+Dyrmp6jWxErsOeyKQAtwGaOAFWD+iW5
-         v2vg==
+        bh=GIc7AI7POzOySnW+CUgewvYHNXSm/ODPyzdhwSNovM0=;
+        b=d2m4tI31Rsq8Ug7MyKdT2CZyvviObpAbUVr96Qq14B0f+DmTd7eMa/H+k24ki2WsZy
+         YOLo718rAPAfkFE4qKzuaj776TNBd5EnZyS6dF1Pa18y/W3NdVHv0wLrby4Nu2APc42/
+         Bj690/4jtG4AMfej7962vK2PrajSBS3G7Wi7thiiVrsWzvsQZAlhOWKuZUjGRZ+GqioE
+         i9wqjHCjW6RUr0zb+BVtNtmtnT2Pw9nLAypmhufZes0vTckb/NkQ0HpztLxo4ap0zy43
+         lTusnZT7vbEm0pJT2kdMKhxZePUDtH5tNaZIPZrLdWbaKKV6/5gxfogzdX+qBW1NriSX
+         Qyig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=htJRfpThI0SsEqQvXVih/cCr+f+R6D+sVhstDn+LVgM=;
-        b=o2sCNnIhhZ/tww7vcXyN2t9BYU69kkJZvrRzLJSOm/Wx267jE49LfpM6uKABpEdJG0
-         HUNYuw4m7XOhlQwle5jQPQL46r7ClTiq52Zr5KpBvqJnEWOtKzH89iMVf2yJ6Ldax52K
-         vTAATSDI9MX6Ae0tj3E/xsb3bkq/QJ3pzKPJpXYQNjdFE+MZhtrGoM3tsLxLhsegxKXC
-         Rz9/aTJgPByiC0UXDJ84LlPoegJiNwKLNPYDxD49zie4EKU1J8JMsODCkX0xcGB3h4By
-         ctpkvCWKEGJOBFeGtujQRQZjPMDQs5D9yGgRLc6t1ABmi5yvh7SqzHhjiT56dU7ni8DK
-         RhwA==
-X-Gm-Message-State: AOAM532GmroW2NPBy2cVjHYUKEk2CML8KTdkN/YPcpfR5vNl7qmHc0EI
-	U69oI5joYr3vmc23Py5pv88Qmw==
-X-Google-Smtp-Source: ABdhPJw6b1xy6dtjgXX5h6zqf8gdA1xTTW/80om1YL4Y7B/DiNbO7bnN6eMCKqDPIsVJb42f3XKmYQ==
-X-Received: by 2002:a05:600c:1d11:: with SMTP id l17mr33089961wms.169.1626798677730;
-        Tue, 20 Jul 2021 09:31:17 -0700 (PDT)
+        bh=GIc7AI7POzOySnW+CUgewvYHNXSm/ODPyzdhwSNovM0=;
+        b=pNl6bhRoka1/MhiiDCGYnFBF/ExpZMdc01qACgtYZ3weO00fU0u6PWElrvTqGdzsNb
+         UuMFXd0vWSyygupjZGyJZmcfftI38phgGdw2WsodglLkPro0JCATDR9ozLeByhmAWw7g
+         d4SUVTX4ql0PTT7c8hPeNeXILuycTkBPuXF0TzvlYalhdigyRPmK69VHwW3Dbby6hNG1
+         D4xCjyDX2P7lfE0hurN5Mqb6BACkogqjNC4EEt+T0TTaEHQomZC7fczIY7k71BATohNO
+         1e2M5e/8ODHv7qwTOCsTcRQf0s5qoVhIs1OM4ZaVIhQV21OiNyt1ilV8sbHAWZlmfVbQ
+         8Log==
+X-Gm-Message-State: AOAM5332q40saphzVyIRwlpY7j4id8K51fAK68pxVdXjfOOS5QwHwQtl
+	d57Sh79+zoBlbFXIm20rHIJa2Q==
+X-Google-Smtp-Source: ABdhPJw+OqGKQiiKHlq/ivzEwfLZTGA6k6BSkDF4skldlSfdt4w+1YNSLzONR8Yhd6OXqRiZaPTgTw==
+X-Received: by 2002:a1c:9a97:: with SMTP id c145mr38700020wme.42.1626798678963;
+        Tue, 20 Jul 2021 09:31:18 -0700 (PDT)
 Return-Path: <nicolas.dechesne@linaro.org>
 Received: from qcom-hackbox.linaro.org.net (163-172-5-244.rev.poneytelecom.eu. [163.172.5.244])
-        by smtp.gmail.com with ESMTPSA id l39sm2256731wms.1.2021.07.20.09.31.16
+        by smtp.gmail.com with ESMTPSA id l39sm2256731wms.1.2021.07.20.09.31.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Jul 2021 09:31:16 -0700 (PDT)
+        Tue, 20 Jul 2021 09:31:17 -0700 (PDT)
 From: "Nicolas Dechesne" <nicolas.dechesne@linaro.org>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
 Cc: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Subject: [PATCH 4/5] python3-{pyyaml,cython,pyparsing}: move from meta-python to meta-oe
-Date: Tue, 20 Jul 2021 18:30:51 +0200
-Message-Id: <20210720163052.11295-5-nicolas.dechesne@linaro.org>
+Subject: [PATCH 5/5] ostree: Do not check for meta-python
+Date: Tue, 20 Jul 2021 18:30:52 +0200
+Message-Id: <20210720163052.11295-6-nicolas.dechesne@linaro.org>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20210720163052.11295-1-nicolas.dechesne@linaro.org>
 References: <20210720163052.11295-1-nicolas.dechesne@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This specific statement in ostree recipe breaks the YP compatible
-status (yocto-check-layer):
+It is a (non trivial) cherry pick from
+(cherry picked from commit b9ede0cb182ab095c863a6a5154bbe259a33f5c0)
 
-RDEPENDS_${PN}-ptest += " \
-    ...
-    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'meta-python',    'python3-pyyaml', '', d)} \
-    ...
-"
-
-Recently python3-pyyaml was moved to OE-core (0a8600f9cec0), and the
-ostree recipe was fixed with:
-b9ede0cb182a (python3-pyyaml: Do not check for meta-python)
-
-In dunfell, moving python3-pyyaml to OE-core is not a great idea, but
-moving it from meta-python to meta-oe allows us to fix ostree YP
-compatible issue. Since meta-python depends on meta-oe, it should not
-be a change with any visible effect.
-
-python3-cython and python3-pyparsing are collateral damages since they are
-dependency for python3-pyyaml, so needed to be moved too.
+python3-pyyaml was moved from meta-python to meta-oe, so that we could
+apply this specific patch which breaks basic YP compatible check
+script.
 
 Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
 ---
- .../recipes-devtools/python/python-cython.inc                     | 0
- .../recipes-devtools/python/python3-cython_0.29.14.bb             | 0
- .../recipes-devtools/python/python3-pyparsing_2.4.6.bb            | 0
- .../recipes-devtools/python/python3-pyyaml_5.3.1.bb               | 0
- 4 files changed, 0 insertions(+), 0 deletions(-)
- rename {meta-python => meta-oe}/recipes-devtools/python/python-cython.inc (100%)
- rename {meta-python => meta-oe}/recipes-devtools/python/python3-cython_0.29.14.bb (100%)
- rename {meta-python => meta-oe}/recipes-devtools/python/python3-pyparsing_2.4.6.bb (100%)
- rename {meta-python => meta-oe}/recipes-devtools/python/python3-pyyaml_5.3.1.bb (100%)
+ meta-oe/recipes-extended/ostree/ostree_2020.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-cython.inc b/meta-oe/recipes-devtools/python/python-cython.inc
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-cython.inc
-rename to meta-oe/recipes-devtools/python/python-cython.inc
-diff --git a/meta-python/recipes-devtools/python/python3-cython_0.29.14.bb b/meta-oe/recipes-devtools/python/python3-cython_0.29.14.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-cython_0.29.14.bb
-rename to meta-oe/recipes-devtools/python/python3-cython_0.29.14.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pyparsing_2.4.6.bb b/meta-oe/recipes-devtools/python/python3-pyparsing_2.4.6.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pyparsing_2.4.6.bb
-rename to meta-oe/recipes-devtools/python/python3-pyparsing_2.4.6.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pyyaml_5.3.1.bb b/meta-oe/recipes-devtools/python/python3-pyyaml_5.3.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pyyaml_5.3.1.bb
-rename to meta-oe/recipes-devtools/python/python3-pyyaml_5.3.1.bb
+diff --git a/meta-oe/recipes-extended/ostree/ostree_2020.3.bb b/meta-oe/recipes-extended/ostree/ostree_2020.3.bb
+index 86407459b..c1f43feb6 100644
+--- a/meta-oe/recipes-extended/ostree/ostree_2020.3.bb
++++ b/meta-oe/recipes-extended/ostree/ostree_2020.3.bb
+@@ -176,7 +176,7 @@ RDEPENDS_${PN}-ptest += " \
+     util-linux \
+     xz \
+     ${PN}-trivial-httpd \
+-    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'meta-python', 'python3-pyyaml', '', d)} \
++    python3-pyyaml \
+     ${@bb.utils.contains('PACKAGECONFIG', 'gjs', 'gjs', '', d)} \
+ "
+ RDEPENDS_${PN}-ptest_append_libc-glibc = " glibc-utils glibc-localedata-en-us"
 -- 
 2.29.2
 
