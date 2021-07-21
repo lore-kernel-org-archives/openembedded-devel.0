@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.2088.1626862201123568938
+ by mx.groups.io with SMTP id smtpd.web12.2204.1626862201309205479
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 21 Jul 2021 03:10:01 -0700
 Authentication-Results: mx.groups.io;
@@ -8,16 +8,14 @@ Received: from [78.130.197.211] (port=36742 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1m69Ar-0008Ud-QW; Wed, 21 Jul 2021 13:09:58 +0300
+	id 1m69Ar-0008Ud-0Q; Wed, 21 Jul 2021 13:09:57 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-astroid: Upgrade 2.6.2 -> 2.6.5
-Date: Wed, 21 Jul 2021 13:09:50 +0300
-Message-Id: <20210721100950.13816-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-yamlloader: Upgrade 1.0.0 -> 1.1.0
+Date: Wed, 21 Jul 2021 13:09:49 +0300
+Message-Id: <20210721100950.13816-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210721100950.13816-1-leon.anavi@konsulko.com>
-References: <20210721100950.13816-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -30,32 +28,31 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.6.5:
+Upgrade to release 1.1.0:
 
-- Fix a crash when there would be a 'TypeError object does not
-  support item assignment' in the code we parse.
-- Fix a crash when a AttributeInferenceError was raised when
-  failing to find the real name in infer_import_from.
+- Update coverage
+- Update run unittest
+- CI: setup GHA
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-astroid_2.6.2.bb => python3-astroid_2.6.5.bb}      | 2 +-
+ ...{python3-yamlloader_1.0.0.bb => python3-yamlloader_1.1.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-astroid_2.6.2.bb => python3-astroid_2.6.5.bb} (89%)
+ rename meta-python/recipes-devtools/python/{python3-yamlloader_1.0.0.bb => python3-yamlloader_1.1.0.bb} (76%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-astroid_2.6.2.bb b/meta-python/recipes-devtools/python/python3-astroid_2.6.5.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-astroid_2.6.2.bb
-rename to meta-python/recipes-devtools/python/python3-astroid_2.6.5.bb
-index 88a7c49499..513235bd82 100644
---- a/meta-python/recipes-devtools/python/python3-astroid_2.6.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-astroid_2.6.5.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
+diff --git a/meta-python/recipes-devtools/python/python3-yamlloader_1.0.0.bb b/meta-python/recipes-devtools/python/python3-yamlloader_1.1.0.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-yamlloader_1.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-yamlloader_1.1.0.bb
+index a2483a6f46..25e7edab28 100644
+--- a/meta-python/recipes-devtools/python/python3-yamlloader_1.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-yamlloader_1.1.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/Phynix/yamlloader"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=6831ef36faa29329bce2420c5356f97e"
  
--SRC_URI[sha256sum] = "38b95085e9d92e2ca06cf8b35c12a74fa81da395a6f9e65803742e6509c05892"
-+SRC_URI[sha256sum] = "83e494b02d75d07d4e347b27c066fd791c0c74fc96c613d1ea3de0c82c48168f"
+-SRC_URI[sha256sum] = "e96dc3dc6895d814c330c054c966d993fc81ef1dbf5a30a4bdafeb256359e058"
++SRC_URI[sha256sum] = "8a297c7a197683ba02e5e2b882ffd6c6180d01bdefb534b69cd3962df020bfe6"
  
  inherit pypi setuptools3
  
