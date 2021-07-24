@@ -1,104 +1,73 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.5])
- by mx.groups.io with SMTP id smtpd.web09.8547.1627145188304422832
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.web09.8697.1627145999726864997
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 24 Jul 2021 09:46:28 -0700
+ Sat, 24 Jul 2021 09:59:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=xpXB/ZY3;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.5, mailfrom: wangmy@fujitsu.com)
-Return-Path: <wangmy@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1627145185; i=@fujitsu.com;
-	bh=HryE8UrnO2qHxqTbsNqgmAI9iBUpK16yX3aUWz8WDjc=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=xpXB/ZY34zIZWZ1MoaL4StJZcnXmUeYCKkD3VLwXndttJ1/1qmUOyHn0EqFaVO3GE
-	 gB741C7MDN5H1ccIc/R2V3zxzaxlKSbh1YXXiXsooM4nrkGsYVLsgqLEqdYpKtYQzk
-	 U9yHUdw8EID7Z2yyHRAdQ3syBguKZEtFTwVURJm8W7LmpkAqrFaC5XKJak+3tIIeOl
-	 VB/2ga2ag5lkZpSxGwzayi8VHvC9rmBhuIZfuBYnv44o6isfQVilxhnA6VUg4xMLyW
-	 cbuqiFFMwXIz1fmG2S6zg1cPQJ0SCHKcAxvHeWd19u1zkhImZAZzWyt7yuvMMrEd7X
-	 XpCjdofeSah/Q==
-Received: from [100.113.2.110] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-5.bemta.az-a.eu-central-1.aws.symcld.net id D6/A6-07211-0E34CF06; Sat, 24 Jul 2021 16:46:24 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprOIsWRWlGSWpSXmKPExsViZ8MxVfeB858
-  Eg49PlS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oyPL20LpvNVXJ32gr2BcQVPFyMXh5DAbCaJ
-  C7OXsEI4JxglHj49w9zFyMnBJqAmMf3WDVYQW0RAX2Lp7D1gcWYBFYkXv3vYQWxhAU+Jo1NOA
-  sU5OFgEVCWObuIACfMKOEmsXPYTrFVCQEFiysP3zBBxQYmTM5+wQIyRkDj44gUzRI2ixOzLzS
-  wQdoXErFltTBMYeWchaZmFpGUBI9MqRsukosz0jJLcxMwcXUMDA11DQ2NdQyBprpdYpZuol1q
-  qm5yaV1KUCJTVSywv1iuuzE3OSdHLSy3ZxAgMr5RCxtIdjNPefNA7xCjJwaQkyqtk/SdBiC8p
-  P6UyI7E4I76oNCe1+BCjDAeHkgSvoyNQTrAoNT21Ii0zBxjqMGkJDh4lEV51C6A0b3FBYm5xZ
-  jpE6hSjopQ471UnoIQASCKjNA+uDRZflxhlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ814F2c
-  6TmVcCN/0V0GImoMWnun6CLC5JREhJNTAJRFqwnDP6eq9xc2hAhc7ZxON54hEas2yjj3HsWeK
-  7VHLymW2Nm472L5CfaW81e3Wal7aovn169J7dsmt1T/iHrbPJmvDnwbZpJqttuZdHPlXYkrVp
-  XZB2efJGhrntrDvLv9+594LdsDE/7tSW4GTjGP2+mlu3HYReHBddc/jpG69/697klYe2F/V+t
-  BU2VpR8ePwwa9CGfXu612os8j1o91x5za5Tp/bKpp//O9tBaS+rqOHaK9/DXZVesP2sref1n/
-  15Qk6xYMt/hlsL9mlJHvxQ83SC1ZHGG49/hD659qTMjknpXqItL9ereycTf/OvM219y53fFlh
-  ZNX3uRq9V608FTTpp35R3nqfp9YQdSizFGYmGWsxFxYkAjHTITSoDAAA=
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-4.tower-226.messagelabs.com!1627145184!61645!1
-X-Originating-IP: [62.60.8.149]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 6046 invoked from network); 24 Jul 2021 16:46:24 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-4.tower-226.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Jul 2021 16:46:24 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 16OGkIKs021705
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Sat, 24 Jul 2021 17:46:23 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Sat, 24 Jul 2021 17:46:16 +0100
-From: "wangmy" <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] libtalloc: upgrade 2.3.2 -> 2.3.3
-Date: Sun, 25 Jul 2021 00:46:04 +0800
-Message-ID: <1627145165-12120-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=RaXc5Bvx;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id m1so6767493pjv.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Jul 2021 09:59:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=rRDst6infKBC5/zhorUKNlDLCRHXVdbipeN97OhGH1U=;
+        b=RaXc5BvxvJMji/gE8zfoHJplk3w/lVbvgYLrhdqEAWDr+8y3rc6B/7I+dABXASHUDf
+         dnM/eCoLa6mrFHdu7Rcbcc5J1yUAJlv4izLN+znYOr90oDlB0oeurzcay1ggZxJd6+yQ
+         NRsASvfmjKnYMGkaXMmHwNqH2K91zC8JhtXy2q2uRImFTBlGMF2taxAFwWyviWR6EyCm
+         ensYSpHYxravSMVevxaklYkkXNe+s14UTamjv5fUd69VZPsQQ+P2b286IwSLzGUh+yrL
+         L6FchRbokcGTPpGrA0IOA5M1tnpN02xeX/4O4oEe7Eegan/BoHstB9G81xVsgAEtSsAt
+         VGbw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=rRDst6infKBC5/zhorUKNlDLCRHXVdbipeN97OhGH1U=;
+        b=GsAYBnrje4gxDmfGphNXm8MM/0HmzRQ0AM6oI4+ZlLGlFi4PvAsecqAOXGqlwvNv9o
+         qiyPLiyulml71x7dVBfs/ISl2TcMP56qrjfZG5MAH1lVjcOQOdWK27fAKtp/iSs7+255
+         OKKm/P1uLNgKiZsZhufoO197uwWMMXU3EyaMysOBoQDeIvrwiL5B1clro6p2OIIxso0c
+         /N9vJAnWjcLB7D0yDhrT63xzGux7kuFPhIkQGRJjYh1l9cBtnI97MR/EVHAkVWbpP0gi
+         cn1V93usbj0IsOeBNZw5AlnPjgDFfvIjjEszf5Ji8X4vtK9xO+yayQk4tDldihUSxQ4A
+         S7Lw==
+X-Gm-Message-State: AOAM5334IEa6ouIK3m6BLOS8TcvMh6sRi35V269AonuinIPM7EFjSy1T
+	d1p0oh8ATA7y3pPJqPaLtxf8/aIIbzP+fg==
+X-Google-Smtp-Source: ABdhPJx5Q/06cZ8n4/ekNzQeyyGlhqbD4//10gVeASd0pXPle8vLefWKYGnXKCRjhAerKh7XTXc/YQ==
+X-Received: by 2002:a62:b615:0:b029:34a:3920:a7ea with SMTP id j21-20020a62b6150000b029034a3920a7eamr9909980pff.21.1627145998810;
+        Sat, 24 Jul 2021 09:59:58 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from keaua.caveonetworks.com ([2601:202:4180:a5c0:734d:6ce:6223:58e4])
+        by smtp.gmail.com with ESMTPSA id n22sm37126226pff.57.2021.07.24.09.59.58
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 24 Jul 2021 09:59:58 -0700 (PDT)
+From: "Armin Kuster" <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [[meta-webserver][hardknott]] hiawatha: fix url.
+Date: Sat, 24 Jul 2021 09:59:57 -0700
+Message-Id: <20210724165957.854316-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-License-Update:
- add note:
-     ** NOTE! The following LGPL license applies to the talloc
-     ** library. This does NOT imply that all of Samba is released
-     ** under the LGPL
- "GNU General Public License" changed to "GNU Lesser General Public License"
+files moved under a new dir structure.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../libtalloc/{libtalloc_2.3.2.bb => libtalloc_2.3.3.bb}    | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-networking/recipes-support/libtalloc/{libtalloc_2.3.2.bb => libtalloc_2.3.3.bb} (91%)
+ meta-webserver/recipes-httpd/hiawatha/hiawatha_10.11.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.3.2.bb b/meta-networking/recipes-support/libtalloc/libtalloc_2.3.3.bb
-similarity index 91%
-rename from meta-networking/recipes-support/libtalloc/libtalloc_2.3.2.bb
-rename to meta-networking/recipes-support/libtalloc/libtalloc_2.3.3.bb
-index ae92de2db3..1d227dac6c 100644
---- a/meta-networking/recipes-support/libtalloc/libtalloc_2.3.2.bb
-+++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.3.3.bb
-@@ -3,14 +3,14 @@ HOMEPAGE = "http://talloc.samba.org"
- SECTION = "libs"
- LICENSE = "LGPL-3.0+ & GPL-3.0+"
- LIC_FILES_CHKSUM = "file://talloc.h;beginline=3;endline=27;md5=a301712782cad6dd6d5228bfa7825249 \
--                    file://pytalloc.h;beginline=1;endline=18;md5=2c498cc6f2263672483237b20f46b43d"
-+                    file://pytalloc.h;beginline=1;endline=18;md5=21ab13bd853679d7d47a1739cb3b7db6 \
-+                    "
+diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.11.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.11.bb
+index 89910841f6..f0be75f5d3 100644
+--- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.11.bb
++++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.11.bb
+@@ -6,7 +6,7 @@ DEPENDS = "libxml2 libxslt virtual/crypt"
  
+ SECTION = "net"
  
- SRC_URI = "https://www.samba.org/ftp/talloc/talloc-${PV}.tar.gz \
-            file://options-2.2.0.patch \
- "
--SRC_URI[md5sum] = "3376a86bdf9dd4abc6b8d8d645390902"
--SRC_URI[sha256sum] = "27a03ef99e384d779124df755deb229cd1761f945eca6d200e8cfd9bf5297bd7"
-+SRC_URI[sha256sum] = "6be95b2368bd0af1c4cd7a88146eb6ceea18e46c3ffc9330bf6262b40d1d8aaa"
- 
- inherit waf-samba
+-SRC_URI = "http://hiawatha-webserver.org/files/${BP}.tar.gz \
++SRC_URI = "http://hiawatha-webserver.org/files/hiawatha-10/${BP}.tar.gz \
+            file://hiawatha-init \
+            file://hiawatha.service "
  
 -- 
 2.25.1
