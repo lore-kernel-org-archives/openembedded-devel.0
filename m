@@ -1,76 +1,114 @@
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web11.7630.1627140079977029112
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.4])
+ by mx.groups.io with SMTP id smtpd.web11.8548.1627145187473930623
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 24 Jul 2021 08:21:20 -0700
+ Sat, 24 Jul 2021 09:46:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=iAs8WVd6;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id c16so972869plh.7
-        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Jul 2021 08:21:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=0ByMib0O5Z6kswB4W3nFJEZh6aOE1BZ23GXMckG44/s=;
-        b=iAs8WVd6YjFvRsCPCWPWWkS5ZDWt+Y5EtJZdE0s5GhxWkmo4GLdYHQZUHM3FL8K+Hy
-         +7/C2pVJgII+1gdlZ9qlgHkHVxOEDWyPTpr57dj5K65RBVmsMzqqza/SGv7ZasyJGNO0
-         8PZIHcciE5FSMpYK+0hJe9cTJIQw+YBlWdcysttijAkmxMnls0RS4WoGIS40BieCbeLO
-         ZixCuVKdIngWAGRiYbhNZFnNWfJWtEdHyn0ZO41Jwo+GgRLRno/u3RHCvionESoah3By
-         SGYyEV3MtjGBzi03FvvZJhtDrZo1qAHfjAr9OJElEOWanSYySoyIkJs57yuVUvkrn3f+
-         9vHQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=0ByMib0O5Z6kswB4W3nFJEZh6aOE1BZ23GXMckG44/s=;
-        b=n+Jfc/ESmkr/8ccXsGGZKIf09++ibGmy1nqhfvEp4uyto8ommyikmJ3FDvJDkQ9qf8
-         Bq/hKM4SBkvo6yBSQugXPlEjKSTlNJDdTrsHU4cBH5T3q+tosESUG92XQoz4bpkMYsui
-         5/TBFM25yRG+0BiX7ygQ5X8RTsVVu+SJZt88qLSG57goIFFcmCkGXgQcoDJ3oagEn9an
-         89KHLc+pedWw3kBjAzd/2/hP+9Z+H2k0PzUno5oU+ywb8+0KEwmWrUz8t7wpesyCHPRN
-         qEFdPcl63GYwKiSd2sxrEaMwno5KP+Ux13MN3gQRorKspmS1ZuAJPdASN3FAHyRbY+i/
-         zuYw==
-X-Gm-Message-State: AOAM530ct99QsVw74Ei+iajcDzDYsIe6gEVDi0no5wBw5+U+7zwHNVeZ
-	8CQWoBW9kTCF8MI31UE5qdHibMkRK2nW0A==
-X-Google-Smtp-Source: ABdhPJxsj/okekjhGvUX2KRAeSZ6km5bGSRWetxfZivake+HOLa4elH7/9QDQONTEXg9chn/Acb6ZA==
-X-Received: by 2002:a17:90b:214:: with SMTP id fy20mr18284856pjb.62.1627140078807;
-        Sat, 24 Jul 2021 08:21:18 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from keaua.caveonetworks.com ([2601:202:4180:a5c0:734d:6ce:6223:58e4])
-        by smtp.gmail.com with ESMTPSA id g4sm43834276pgn.45.2021.07.24.08.21.17
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 24 Jul 2021 08:21:18 -0700 (PDT)
-From: "Armin Kuster" <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [[meta-webserver][dunfell]] hiawatha: fix url.
-Date: Sat, 24 Jul 2021 08:21:16 -0700
-Message-Id: <20210724152116.852884-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=fail reason="body hash did not verify" header.i=@fujitsu.com header.s=170520fj header.b=Y64jLZjg;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.4, mailfrom: wangmy@fujitsu.com)
+Return-Path: <wangmy@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1627145185; i=@fujitsu.com;
+	bh=baj7FPaQkBNzZBP06DLcvVmY9TB8JpX4la0UWcWoo5Y=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding;
+	b=Y64jLZjgolVmJVApElO0KmbCj56d+kW2/0UuGdTpa2v0OEtEMfT6SjRtxSnfoNuBx
+	 JC2frLF+O99PdH6zz4YGicg/6PBXKv0ATvAhQN2RrTzmnM66tdCDdQyVAK5aQRCMQl
+	 PGLFko507XCk1mRrgtZB8VYZT5+zbLFbx4YLzGvA2UBerDj6o7Z1ucJ22OoreL7Bk9
+	 ukTEi5I0iawVaDqtTyqzPzWb+QhgWyRbA+8wbJnX+UTzqqNHSrlbzv9WfOHxo+uEPh
+	 DimGV+rjrXHDwAQI73J5o8vsHOse463EDKDPIzSMyLLmblzjqgm35cjlkzX469/LnW
+	 A4gwROIz/q0tw==
+Received: from [100.113.2.110] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-4.bemta.az-a.eu-central-1.aws.symcld.net id D8/72-07223-0E34CF06; Sat, 24 Jul 2021 16:46:24 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrFIsWRWlGSWpSXmKPExsViZ8MxVfeB858
+  Eg9u3VS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1owDB/4wF2zkr5hzu525gfEFbxcjF4eQwGwm
+  iZ+HTzNBOCcYJXacmMfaxcjJwSagJjH91g0wW0RAX2Lp7D3MIDazgIrEi9897CC2sICnROPnm
+  SxdjBwcLAKqEvfXpIKEeQWcJG6/WQhWIiGgIDHl4XuwVk4BZ4mJt/8wgdhCQDW7LjewQ9QLSp
+  yc+YQFYryqRPeRp0wQtrxE89bZzBBzFCVmX25mgbArJGbNamOawCgwC0n7LCTts5C0L2BkXsV
+  omVSUmZ5RkpuYmaNraGCga2horGuoa2RkppdYpZuol1qqm5yaV1KUCJTVSywv1iuuzE3OSdHL
+  Sy3ZxAgM4JRCxkc7GE+//qB3iFGSg0lJlFfJ+k+CEF9SfkplRmJxRnxRaU5q8SFGGQ4OJQleR
+  0egnGBRanpqRVpmDjCaYNISHDxKIrzqFkBp3uKCxNzizHSI1ClGY453PxcvYubYPHfpImYhlr
+  z8vFQpcd6rTkClAiClGaV5cINgUX6JUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjDvVZB7eDL
+  zSuD2vQI6hQnolFNdP0FOKUlESEk1MNW01IvdquOYyfFtm+Hm+b5bHCYUpBfWbmlNePB0eq3D
+  v2hPjrn8EjPWSea0BtZfvqnf+H5Gy+fAf2zcTfu/mdxdJtq/wWqfq9596W9v1RiTtc+mmHXu+
+  aYaafd6VtKdbXKynd+6iktWuv0VKLJv5fedu/dh2WnHI+8XfFbbtKzRTzopUi3gbNqJgPZut5
+  d7+Y5Pj+S+oVN4rMdi9irOh7dWrRH4lDi7u3el7THBBHf7EsmGlDW7A4/x/5trem72vCj/qBr
+  V0Om/dr2dNGf3rsWSux0iPrrobHTYsUd8tUnVgTlrJeZmOD2z373K6EbcxUQnmQlHbe4kS9ha
+  7T3+7JdE0/bypc1FwtqXlyZOYldiKc5INNRiLipOBABGfXf/bQMAAA==
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-11.tower-232.messagelabs.com!1627145184!270051!1
+X-Originating-IP: [62.60.8.149]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 8659 invoked from network); 24 Jul 2021 16:46:24 -0000
+Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
+  by server-11.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Jul 2021 16:46:24 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 16OGkIKt021705
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Sat, 24 Jul 2021 17:46:23 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Sat, 24 Jul 2021 17:46:19 +0100
+From: "wangmy" <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] nghttp2: upgrade 1.43.0 -> 1.44.0
+Date: Sun, 25 Jul 2021 00:46:05 +0800
+Message-ID: <1627145165-12120-2-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1627145165-12120-1-git-send-email-wangmy@fujitsu.com>
+References: <1627145165-12120-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Type: text/plain; charset="y"
+Content-Transfer-Encoding: quoted-printable
 
-files moved under a new dir structure.
+v1.44.0 changelog:
 
-ERROR: hiawatha-10.10-r0 do_fetch: Fetcher failure for URL: 'http://hiawatha-webserver.org/files/hiawatha-10.10.tar.gz'. Unable to fetch URL from any source.
+lib: Port new ngtcp2 map implementation
+doc: Replace master with main
+build: Add precious variables for libev and jemalloc and use JEMALLOC_CFLAGS
+build: Add more --with-* configure flags
+build: Add LIBTOOL_LDFLAGS configure variable
+third-party: Bump llhttp to 6.0.2
+src: Replace black-list with block-list
+nghttpx: Fix max distance in weight group/address cycle comparison
+nghttpx: Set connect_blocker and live_check after shuffling addresses
+nghttpx: Replace master with main
+nghttpx: Remove trailing white space after $method log variable
+(https://github.com/nghttp2/nghttp2/pull/1553)
+h2load: Add --rps option
+(https://github.com/nghttp2/nghttp2/pull/1559)
+h2load: Allow unit in -D option
+asio: fix some typos (Patch from Jan Kundr=C3=A1t)
+(https://github.com/nghttp2/nghttp2/pull/1550)
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-webserver/recipes-httpd/hiawatha/hiawatha_10.10.bb | 2 +-
+ .../nghttp2/{nghttp2_1.43.0.bb =3D> nghttp2_1.44.0.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/nghttp2/{nghttp2_1.43.0.bb =3D> nghttp2_1.44.0.bb} (93%)
 
-diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.10.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.10.bb
-index ed3df19390..2503f53166 100644
---- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.10.bb
-+++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.10.bb
-@@ -6,7 +6,7 @@ DEPENDS = "libxml2 libxslt virtual/crypt"
+diff --git a/meta-networking/recipes-support/nghttp2/nghttp2_1.43.0.bb b/meta-networking/recipes-support/nghttp2/nghttp2_1.44.0.bb
+similarity index 93%
+rename from meta-networking/recipes-support/nghttp2/nghttp2_1.43.0.bb
+rename to meta-networking/recipes-support/nghttp2/nghttp2_1.44.0.bb
+index 08b8552622..48ba5e314d 100644
+--- a/meta-networking/recipes-support/nghttp2/nghttp2_1.43.0.bb
++++ b/meta-networking/recipes-support/nghttp2/nghttp2_1.44.0.bb
+@@ -11,7 +11,7 @@ SRC_URI =3D "\
+     https://github.com/nghttp2/nghttp2/releases/download/v${PV}/nghttp2-${PV}.tar.xz \
+     file://0001-fetch-ocsp-response-use-python3.patch \
+ "
+-SRC_URI[sha256sum] =3D "f7d54fa6f8aed29f695ca44612136fa2359013547394d5dffeffca9e01a26b0f"
++SRC_URI[sha256sum] =3D "5699473b29941e8dafed10de5c8cb37a3581edf62ba7d04b911ca247d4de3c5d"
  
- SECTION = "net"
- 
--SRC_URI = "http://hiawatha-webserver.org/files/${BP}.tar.gz \
-+SRC_URI = "http://hiawatha-webserver.org/files/hiawatha-10/${BP}.tar.gz \
-            file://hiawatha-init \
-            file://hiawatha.service "
- 
+ inherit cmake manpages python3native
+ PACKAGECONFIG[manpages] =3D ""
 -- 
 2.25.1
 
