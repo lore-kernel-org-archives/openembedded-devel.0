@@ -1,74 +1,126 @@
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.web11.8693.1627146053260691752
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web08.14660.1627188750170870672
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 24 Jul 2021 10:00:53 -0700
+ Sat, 24 Jul 2021 21:52:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Tcnk3yu+;
- spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id c11so6685312plg.11
-        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Jul 2021 10:00:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=TIxRs+Km;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id k1so7712409plt.12
+        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Jul 2021 21:52:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=wAaw5rvHVGtbSgroGvAqbBnSWAnanL6bWbiyqNg9HEk=;
-        b=Tcnk3yu+9G06trVQI7c60YZkYsFxTsVawFpd70b090sGtq6H8yUuhUX4a0yHNIR6Gi
-         UA9tSHkF46zV/yIF3Bgi+vPj4vQ/DIEzXCfQdSYhmOlsI5YGj7dTLCYJV81hhVnNWH7+
-         nL6iKK8/kd4Na2P9ujy+bN7yz6/whsMoh75m5ToxlwbHU7I/JW9ZXGEXzq+yYYjlHCJi
-         thf6dhj17CT10pdbcIhwev4ERx3+QkOyEz6XPWJQW2dBJtfBUqh0oN/n7EphMM7vjAS4
-         /zg3RCdgzQm7Efi+Ct/xF+j+/VSa7d6Zo04Z7LGnT6Ceh7yFcLTUJU5fTySIvk23dP+o
-         1wXQ==
+        bh=SA0QciRJLubw/EPwmfBupKG3vREGFt6SVcE168a5RlI=;
+        b=TIxRs+KmOfdTQkU+WC0tbJeVbH3ESKkt41Kw1OldItNnJxjhFWEGw4nVGlrMkbj78M
+         ln79PzXM8jxCDZRR6mZrM2vFh0MiTy0l/wqt29CEki9k9HyDFMYV8LHcRKbzTQgH5Zku
+         3HytwV7qX9CX1KhNl2EE57crt3KNZa6JVuRMB1BQkZ03Y9pw25R61a52aHqwJKQci5Yt
+         ZJ3ros6bJVPj+VAT6tFJEJNID43V/2ai0Zr7tMV79CS/Vfc0cVSy7idbdrdN2ggf9slU
+         xB59abO1vss+5b5G9zVgdyrUSpR2tSFI0niqHZc6gHAR62nONcFyAoAQhdpXl0j73o4A
+         B3HQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=wAaw5rvHVGtbSgroGvAqbBnSWAnanL6bWbiyqNg9HEk=;
-        b=uel2wqjzzARV45W4S/GTEHHaDheInEFNP0W5cSzLQNOLNg1I1K3PTIR0qgsbYmoNXT
-         OsDzIo2E6T5SrQQLIwHu4ZvjANrPvv1vM099jz09LKesHEPWOJ7NBAyS0obXR3qv/Vi/
-         uqb30jLrJCPg1TjUNoxw3Hw2t8AG4/QheuO9KcSLMt7LPfl4SASpGG2ia3Xz66mDIHlo
-         mhNYwW0/u3eLihANDQmOobuGXUeeIOv2V6w5Z16x8G1pU6mYqPkc4oh+rqYcuYvy1qH1
-         RRRxoVjmHJXdxP86kjU+IU1jENfzVVstjRLnbxPnTc4lRY0lgke+AYcYlA2DfGyQOR9K
-         Gi5Q==
-X-Gm-Message-State: AOAM530F6qmO/Z1OlY8ZKfq32GIKiKva//toOKY12UgiwG5tPIMqFCoz
-	4ff9s1yi0kmGJbrVaG//bytKsuNTRoqnJg==
-X-Google-Smtp-Source: ABdhPJxYIBlSdawdzsQnvvotp2Qigqfd94ctkJbMrU//xwlmUJI3svo9OVn6IODwGDsYtdKN4JCPuA==
-X-Received: by 2002:a65:64c9:: with SMTP id t9mr5154999pgv.378.1627146052762;
-        Sat, 24 Jul 2021 10:00:52 -0700 (PDT)
+        bh=SA0QciRJLubw/EPwmfBupKG3vREGFt6SVcE168a5RlI=;
+        b=SD1LGmzb4rA3id6pYpUA0jVwUsAzR6jNrDoJZIWxNaAsB6gEQFl7YnEZuMCDF471rr
+         WOWnyjtySAyZXJBMyMulGj8eyoZEIEqY624xbfTHkmpZUY56lDzmIC2maotbqa0CxPTj
+         cQ73Hz3QNV5GvPKp5dkB7SXji2FzkePSsgLcXToirCXkBqLwoyMokqRHzOLr8H7bN8xc
+         DJMgGm15txRm0zD+xLPxDQlZfx4UU/j4j70NfIJkYeHqxloiaLQR5zT0NgvPjg22g+Lo
+         1ri71hCqlDQJrDFhFRWVpDpZ2e1Le42w7Uwan+ZstvqlJmctMpr7JcRjtNhgsdvIpL0+
+         TosA==
+X-Gm-Message-State: AOAM530B3DfWj7RoTQXvZy0wyfGGgh5xyuN54zvoUlO6xj1CQza0RVTu
+	XNKKYiXTFOVjDD6hERLdb66kPMmv1ZjV0A==
+X-Google-Smtp-Source: ABdhPJwkuCif7MDWkfzTUblJ/2MIJNHw2J/KgcqJHjZ8lfPerLkx5UWabCIETI75RaqRqAmcnmzMOw==
+X-Received: by 2002:aa7:85cc:0:b029:359:7d78:bc4c with SMTP id z12-20020aa785cc0000b02903597d78bc4cmr11888022pfn.6.1627188749391;
+        Sat, 24 Jul 2021 21:52:29 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
-Received: from keaua.caveonetworks.com ([2601:202:4180:a5c0:734d:6ce:6223:58e4])
-        by smtp.gmail.com with ESMTPSA id fz10sm2453500pjb.40.2021.07.24.10.00.52
+Received: from keaua.caveonetworks.com ([2601:202:4180:a5c0:d2f1:9af3:9c5d:7e26])
+        by smtp.gmail.com with ESMTPSA id t10sm43368804pgv.52.2021.07.24.21.52.28
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 24 Jul 2021 10:00:52 -0700 (PDT)
+        Sat, 24 Jul 2021 21:52:28 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [[meta-webserver][master]] hiawatha: fix url.
-Date: Sat, 24 Jul 2021 10:00:51 -0700
-Message-Id: <20210724170051.854430-1-akuster808@gmail.com>
+Subject: [dunfell 00/15] Patch review July 24th
+Date: Sat, 24 Jul 2021 21:52:06 -0700
+Message-Id: <cover.1627164868.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-files moved under a new dir structure.
+please have comments back by Tuesday.
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The following changes since commit 10082fce3b6ddeaaae4df95f7f002356942b7577:
 
-diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb
-index 9729fd4a80..4b902bfda6 100644
---- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb
-+++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb
-@@ -6,7 +6,7 @@ DEPENDS = "libxml2 libxslt virtual/crypt"
- 
- SECTION = "net"
- 
--SRC_URI = "http://hiawatha-webserver.org/files/${BP}.tar.gz \
-+SRC_URI = "http://hiawatha-webserver.org/files/hiawatha-10/${BP}.tar.gz \
-            file://hiawatha-init \
-            file://hiawatha.service "
- 
+  postgresql: update to 12.7 (2021-07-17 07:42:33 -0700)
+
+are available in the Git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib stable/dunfell-nut
+  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/dunfell-nut
+
+Armin Kuster (2):
+  mariadb: update to 10.4.20
+  hiawatha: fix url.
+
+Bruce Ashfield (1):
+  vboxguestdrivers: fix build against kernel v5.10+
+
+Gianfranco (5):
+  vboxguestdrivers: upgrade 6.1.16 -> 6.1.18
+  vboxguestdrivers: Add patch proposed upstream to fix a build failure
+    on i386
+  vboxguestdrivers: upgrade 6.1.18 -> 6.1.20
+  vboxguestdrivers: upgrade 6.1.20 -> 6.1.22
+  vboxguestdrivers: add a fix for build failure with kernel 5.13
+
+Gianfranco Costamagna (3):
+  vboxguestdrivers: upgrade 6.1.6 -> 6.1.12
+  vboxguestdrivers: upgrade 6.1.12 -> 6.1.14 Drop kernel 5.8
+    compatibility patch, now part of upstream codebase
+  vboxguestdrivers: upgrade 6.1.14 -> 6.1.16
+
+Hongxu Jia (1):
+  vboxguestdrivers: fix failed to compile with kernel 5.8.0
+
+Jate Sujjavanich (1):
+  ufw: backport patches, update RRECOMMENDS, python3 support, tests
+
+Khem Raj (2):
+  vboxguestdrivers: Fix build with kernel 5.8
+  vboxguestdrivers: Add __divmoddi4 builtin support
+
+ .../0006-check-requirements-get-error.patch   |    36 +
+ ...se-conntrack-instead-of-state-module.patch | 14903 ++++++++++++++++
+ ...8-support-.-setup.py-build-LP-819600.patch |    93 +
+ ...st-runtime-tests-to-use-daytime-port.patch |  2895 +++
+ ...IPT_MODULES-and-update-documentation.patch |   106 +
+ ...nts--simplify-and-support-python-3.8.patch |    33 +
+ ...tect-openembedded-python-interpreter.patch |    33 +
+ ...setup-only-make-one-reference-to-env.patch |    14 +-
+ .../recipes-connectivity/ufw/ufw_0.33.bb      |    49 +-
+ ...e_10.4.17.bb => mariadb-native_10.4.20.bb} |     0
+ meta-oe/recipes-dbs/mysql/mariadb.inc         |     4 +-
+ ...{mariadb_10.4.17.bb => mariadb_10.4.20.bb} |     0
+ .../40-linux-5.13-support.patch               |   276 +
+ .../vboxguestdrivers/add__divmoddi4.patch     |    36 +
+ ...rs_6.1.6.bb => vboxguestdrivers_6.1.22.bb} |     9 +-
+ .../recipes-httpd/hiawatha/hiawatha_10.10.bb  |     2 +-
+ 16 files changed, 18476 insertions(+), 13 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/ufw/ufw/0006-check-requirements-get-error.patch
+ create mode 100644 meta-networking/recipes-connectivity/ufw/ufw/0007-use-conntrack-instead-of-state-module.patch
+ create mode 100644 meta-networking/recipes-connectivity/ufw/ufw/0008-support-.-setup.py-build-LP-819600.patch
+ create mode 100644 meta-networking/recipes-connectivity/ufw/ufw/0009-adjust-runtime-tests-to-use-daytime-port.patch
+ create mode 100644 meta-networking/recipes-connectivity/ufw/ufw/0010-empty-out-IPT_MODULES-and-update-documentation.patch
+ create mode 100644 meta-networking/recipes-connectivity/ufw/ufw/0011-tests-check-requirements--simplify-and-support-python-3.8.patch
+ create mode 100644 meta-networking/recipes-connectivity/ufw/ufw/Add-code-to-detect-openembedded-python-interpreter.patch
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.4.17.bb => mariadb-native_10.4.20.bb} (100%)
+ rename meta-oe/recipes-dbs/mysql/{mariadb_10.4.17.bb => mariadb_10.4.20.bb} (100%)
+ create mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/40-linux-5.13-support.patch
+ create mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/add__divmoddi4.patch
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_6.1.6.bb => vboxguestdrivers_6.1.22.bb} (90%)
+
 -- 
 2.25.1
 
