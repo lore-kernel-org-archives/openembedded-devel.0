@@ -1,105 +1,88 @@
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web12.23157.1627252827876485807
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.3])
+ by mx.groups.io with SMTP id smtpd.web08.24876.1627264010378333848
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 25 Jul 2021 15:40:27 -0700
+ Sun, 25 Jul 2021 18:46:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=tw55L+Me;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id a20so9631591plm.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Jul 2021 15:40:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:references:from:message-id:date:user-agent:mime-version
-         :in-reply-to:content-transfer-encoding:content-language;
-        bh=50qAQ/fAuWMJNSZmRCYia85wSe66PlcOpYhTX684l5g=;
-        b=tw55L+MeZQltKX23vxwStpyfwpfm60MKiUs7YwgZHnb8aoMc3qwDbpMA1ktJdajWKo
-         6Gf7BVViDT+cvCzQf7iXOi4uv8aVuEx7iW0/AS99o/BnFtDgopW+M9Qy28XoYGp/DdYJ
-         JOCMIShEVmH1LFSE0etE/OvnQksls7yxwfZxLbzXeO0DbCO7V6jY5vLgRTSTmdzoWxJt
-         3DbNpti3M47/R3YvGgKPJlSR5THkB1mIMqhpDtOxl2FJ/Uw7rO5L7APOtv13AmGqei/V
-         LCRPJnU8i9zGAPFk3gZFqFFl6DOgmBs7TXKEk7FsZpNCeT2X6PfksB5HCo1uzb3p4SYi
-         lmow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=50qAQ/fAuWMJNSZmRCYia85wSe66PlcOpYhTX684l5g=;
-        b=WNKSPvk3usE2+K44l9IPvDnLOFlLsNo67zh3OOzPUvHPfx0aMTWi7JEetp/IvD0xce
-         5gLd9XRyrcAUEm0pQz7Z39ak9lkldjBS6cH3u/tidbSTrcZcX5NY4tyPGpyLZWxJiKsN
-         ++krKvdLNki7Y+pUrIofYiO7qOPJi3V4sa669lvUs3OgzuNHtYdKIgAGOKxCP0fGg9UQ
-         5gJinIztUb5/cHNc0aEFHqk9hRnlPtaewxYZFhti1Gf60M5ISJxyTQt9hwPyF7PUpAa2
-         ErvjAuz6VfGjEASbnXRNz5uYBCPj0qo7AaJsoRU0c6Gel+nw8r0TFaxiwxIeQoq6r9wV
-         rKCw==
-X-Gm-Message-State: AOAM530gOA7S+stMH7KD+5pLOrzXkVP1FetDvddqhbNnY+UCmsOgew8z
-	mvm7JZUmWR55nqn2VaGNvH4cYBx7mGPjDg==
-X-Google-Smtp-Source: ABdhPJyc5sSsblKlzf/XagXZFR/+Qtt1tccCWCYwNH+v0T5L1iNpdlI29sAce+CKjM+PH0sLZZfs2Q==
-X-Received: by 2002:a17:90a:a898:: with SMTP id h24mr23566505pjq.208.1627252827010;
-        Sun, 25 Jul 2021 15:40:27 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0:d2f1:9af3:9c5d:7e26? ([2601:202:4180:a5c0:d2f1:9af3:9c5d:7e26])
-        by smtp.gmail.com with ESMTPSA id 33sm33555429pgs.59.2021.07.25.15.40.25
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 25 Jul 2021 15:40:26 -0700 (PDT)
-Subject: Re: [PATCH 0/5] Various fixes for YP compatible
-To: Nicolas Dechesne <nicolas.dechesne@linaro.org>,
- openembedded-devel@lists.openembedded.org
-References: <20210720163052.11295-1-nicolas.dechesne@linaro.org>
-From: "Armin Kuster" <akuster808@gmail.com>
-Message-ID: <58338c52-d0b4-6342-19de-ddc20c1de83a@gmail.com>
-Date: Sun, 25 Jul 2021 15:40:25 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=RKILpXBe;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.3, mailfrom: zhengrq.fnst@fujitsu.com)
+Return-Path: <zhengrq.fnst@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1627264008; i=@fujitsu.com;
+	bh=+D8cFc95ZZmU+SUE2l+nL7ramf76h28Dj0+BrgqV5aQ=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=RKILpXBeYrawVQda4RrDYSgwpJp4bsvDUvNb/NRagkAiCR6NZcg7wZbD15UtbwLRa
+	 StffVLTBxDuf4iVq2M2W2wCUgzZQKyM+pAZp+P/grEYlPHi94bJ5usKK5gJ4Pxaxrd
+	 taFCOxyF3EoK8dVxG9RRFi26R7DmnxZgj90RakGQOo/wK6kW9ilgZZale9LKa/JXRS
+	 lHjJsjyTDe2TMX2QbIA//MDek3meFzpLo6nwjldZ+XGADBTBod+zKRDgAJz0Fvpq3j
+	 Ae+41VY0vzO3VBuM2fm7nAr2MKC0w6OY8h7Fbi99k4WfABEle/kGV6LYdJ2rSkNo2y
+	 XWwYH2JVdKNFQ==
+Received: from [100.113.1.116] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta.az-a.eu-central-1.aws.symcld.net id 80/04-07651-7041EF06; Mon, 26 Jul 2021 01:46:47 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprBIsWRWlGSWpSXmKPExsViZ8MRqssu8i/
+  BYNFHEYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaNrxV7WgvOcFecvnmZuYHzN0cXIxSEkMJtJ
+  YsLjtcwQzh5GiSM/nrB1MXJysAnoSpx7vJYdxBYR0JdYOnsPM4gtLOAqcfjyFTCbRUBVoqFtD
+  lgNr4C7xIH9rxhBbAkBBYkpD98zQ8QFJU7OfMICYjMLSEgcfPECKM4BVKMoMXu6PER5hcTrw5
+  eYJzDyzELSMQtJxwJGplWMlklFmekZJbmJmTm6hgYGuoaGxrpGukaGZnqJVbqJeqmlusmpeSV
+  FiUBZvcTyYr3iytzknBS9vNSSTYzAQEopZLqxg/Hb6w96hxglOZiURHn71v5JEOJLyk+pzEgs
+  zogvKs1JLT7EKMPBoSTBayn0L0FIsCg1PbUiLTMHGNQwaQkOHiUR3gheoDRvcUFibnFmOkTqF
+  KMux5dVSxYxC7Hk5eelSonz5gsDFQmAFGWU5sGNgEXYJUZZKWFeRgYGBiGegtSi3MwSVPlXjO
+  IcjErCvG4gU3gy80rgNr0COoIJ6Ijg+r8gR5QkIqSkGpjUZKeddI5Y0npFXtlRMNxpZd+eE59
+  aY35f6T8zNyXgOM+5HXpZ7hv/nj3YaOT1b/6Te/NnNWe9n9coHPP8swHbobdZzjEMD7yf2F39
+  w5Ws6JbXVs4UpX314JdP85I73x6dtJpD6mlt3UcRgZgL/axT5Z1FnN2Nj22vypyWtb2w7+fTC
+  pnEhwkHV9j+7Hs0jYlvY9vT1potsn8We3z/ds1C3vpA1OZVxhzLvj94tox/RtL3Ccde1HosKG
+  ML/1sd+O97tODV7gKXVM+ky7sK1FdfmdasOv9SpJ3IVpP1wapX6xZdPf0i7eLW2eLNJ8Q1n/w
+  90p/46f46s7zN4QUOlyMZE4Of89Y4JEyvY24++HuJEktxRqKhFnNRcSIAM0O96CsDAAA=
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-9.tower-232.messagelabs.com!1627264006!376528!1
+X-Originating-IP: [62.60.8.85]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 29677 invoked from network); 26 Jul 2021 01:46:47 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-9.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 26 Jul 2021 01:46:47 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 16Q1kfs1005032
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 26 Jul 2021 02:46:46 +0100
+Received: from localhost.localdomain (10.167.225.35) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Mon, 26 Jul 2021 02:46:40 +0100
+From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-oe] [PATCH] live555: upgrade 20210710 -> 20210720
+Date: Mon, 26 Jul 2021 18:46:34 +0800
+Message-ID: <1627296394-3699-1-git-send-email-zhengrq.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-In-Reply-To: <20210720163052.11295-1-nicolas.dechesne@linaro.org>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Type: text/plain
 
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+---
+ .../live555/{live555_20210710.bb => live555_20210720.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-multimedia/live555/{live555_20210710.bb => live555_20210720.bb} (97%)
 
-
-On 7/20/21 9:30 AM, Nicolas Dechesne wrote:
-> There are some pending requests for YP compatible for layers which
-> depend on meta-oe, meta-python and meta-networking. In dunfell, these
-> layers do not PASS the yocto-check-layer compatibility script. With
-> these patches applied, I am able to get this:
->
-> INFO: Summary of results:
-> INFO:
-> INFO: meta-networking ... PASS
-> INFO: meta-python ... PASS
-> INFO: meta-oe ... PASS
->
-> Khem Raj (1):
->   libdevmapper,lvm2: Do not inherit license
-I remembered these changes after I sent out the last patch review. They
-are queued up in the next batch.
-
--armin
->
-> Nicolas Dechesne (4):
->   python3-markupsafe: remove recipe
->   python3-jinja2: remove recipe
->   python3-{pyyaml,cython,pyparsing}: move from meta-python to meta-oe
->   ostree: Do not check for meta-python
->
->  .../recipes-devtools/python/python-cython.inc |  0
->  .../python/python3-cython_0.29.14.bb          |  0
->  .../python/python3-pyparsing_2.4.6.bb         |  0
->  .../python/python3-pyyaml_5.3.1.bb            |  0
->  .../recipes-extended/ostree/ostree_2020.3.bb  |  2 +-
->  meta-oe/recipes-support/lvm2/lvm2.inc         |  5 +--
->  .../python/python3-jinja2/run-ptest           |  3 --
->  .../python/python3-jinja2_2.11.2.bb           | 43 -------------------
->  .../python/python3-markupsafe/run-ptest       |  3 --
->  .../python/python3-markupsafe_1.1.1.bb        |  2 -
->  10 files changed, 3 insertions(+), 55 deletions(-)
->  rename {meta-python => meta-oe}/recipes-devtools/python/python-cython.inc (100%)
->  rename {meta-python => meta-oe}/recipes-devtools/python/python3-cython_0.29.14.bb (100%)
->  rename {meta-python => meta-oe}/recipes-devtools/python/python3-pyparsing_2.4.6.bb (100%)
->  rename {meta-python => meta-oe}/recipes-devtools/python/python3-pyyaml_5.3.1.bb (100%)
->  delete mode 100644 meta-python/recipes-devtools/python/python3-jinja2/run-ptest
->  delete mode 100644 meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
->  delete mode 100644 meta-python/recipes-devtools/python/python3-markupsafe/run-ptest
->  delete mode 100644 meta-python/recipes-devtools/python/python3-markupsafe_1.1.1.bb
->
+diff --git a/meta-oe/recipes-multimedia/live555/live555_20210710.bb b/meta-oe/recipes-multimedia/live555/live555_20210720.bb
+similarity index 97%
+rename from meta-oe/recipes-multimedia/live555/live555_20210710.bb
+rename to meta-oe/recipes-multimedia/live555/live555_20210720.bb
+index 9d89e1c5ad..b30fc1069e 100644
+--- a/meta-oe/recipes-multimedia/live555/live555_20210710.bb
++++ b/meta-oe/recipes-multimedia/live555/live555_20210720.bb
+@@ -16,7 +16,7 @@ SRC_URI = "https://download.videolan.org/pub/contrib/live555/live.${URLV}.tar.gz
+ # only latest live version stays on http://www.live555.com/liveMedia/public/, add mirror for older
+ MIRRORS += "http://www.live555.com/liveMedia/public/ http://download.videolan.org/contrib/live555/ \n"
+ 
+-SRC_URI[sha256sum] = "c157e848fecb335a7af2917fe787dacc5ada07e74f02026c206b092bc4cecb01"
++SRC_URI[sha256sum] = "3a9a83618b07192c5fb0d824bdafaece466086bb44b5634fac32e8f9e00c7994"
+ 
+ S = "${WORKDIR}/live"
+ 
+-- 
+2.25.1
 
