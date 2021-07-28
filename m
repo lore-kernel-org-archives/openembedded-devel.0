@@ -1,243 +1,237 @@
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web09.4425.1627476892839801024
+Received: from mail-qv1-f47.google.com (mail-qv1-f47.google.com [209.85.219.47])
+ by mx.groups.io with SMTP id smtpd.web10.194.1627491531325397988
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 28 Jul 2021 05:54:52 -0700
+ Wed, 28 Jul 2021 09:58:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=fGbSjvnw;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id g23-20020a17090a5797b02901765d605e14so3958489pji.5
-        for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jul 2021 05:54:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ln4/PCa3;
+ spf=pass (domain: gmail.com, ip: 209.85.219.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f47.google.com with SMTP id g6so1872172qvj.8
+        for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jul 2021 09:58:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:references:from:message-id:date:user-agent:mime-version
-         :in-reply-to:content-transfer-encoding:content-language;
-        bh=K5lRybRQ05nTWVYsNXDZQ9LTSRce/JeXzzlJ5/+l910=;
-        b=fGbSjvnweTU0zFEJ2+YbVbnwj9fxMp3WDksIj9FwWhFQin3UxeVtAztQ4TmiIPQLdr
-         S1QSIrUJoXKtT7L5bPvaslzKrLlMNwAcpbvoeVToHllBBwNZu7X+6wBVRCrGEPaiw24t
-         IGIPbyqQLIrBDI+13BDqHZDt+++MgClSbYjNwpwaSh6QVUw/8+ZPg9x9oVafn1o7LCft
-         ODywgJe82hUwQ6c8sUQXzljjtoaZtvE9OBv5OZgFoOfrHcSivF6q9knNx0uO/0mUD3W2
-         brrO7WeGqBNyU5F+tDW0tAYaS6bB0bQhgo6jf5qzHTqVtGUKK63S1G4JxuBi8ansabvo
-         aAug==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=/2l8OkhF3r08vG1Hobn9ZyLUFfCIUerkq6oLjJU59wI=;
+        b=Ln4/PCa3ODh2HQ9CV/qC+XCT+9GjyHBL3ltf/4T0TW7SfUpLrPJ+Z5EXl3u/4f2Zb4
+         Iv37ZqMuz7I05AR8EiA0PZj27QxNor0VUn3fpRFf81kxUh4mpn86g+hPoLwjCKvHBO7N
+         P5jxRQ2HoH5H877hCvXacnd10EoNiOid7I5q8boA98PngXonyDdoJt+AngqvlRSIr84i
+         uoGSaj2ZLc7v7MNrE4no/HtFQfqLOuLfpvXlV7R7t/WosRqTH6qaw/+CPguLYuCw2Jqr
+         OVh9ZU4Urohw6zwx9/E6gdassGI80mMYK7Tmgo0bl+v02PbV6NNndVDbYPt2KFmQmUgk
+         AYKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=K5lRybRQ05nTWVYsNXDZQ9LTSRce/JeXzzlJ5/+l910=;
-        b=KqbtshQoPKMCIXwA3JlwyCMEy0E74Kxe+OdGkBm/tGhfA3vxglxXut51GV5itBUHLR
-         z0d+v+8BcmMmGLSjHwLsAri+9mt6K/dMWo+QzMOjzIupKF7NM/L8PkGZUi6ShOFo8RxO
-         Ug8bp067GIlgX19TEuGNSFynHiJ9tl3mDeIoKzzV6Vmb03od1sokQoWSdTsNmtpG25QV
-         5cc3ZPdpUqDIPpS8h2TZdUJ6Z5h5q53m8JeOHiMAh1/gcb6vivWNCTXXFLmhqPBIAsf2
-         /rdx8nGhZ8gMEjzH1Ehla+aCeASf5f2Q1bLdHcE2ytqQLTkpnDCunXYGSmwelJllEbqI
-         6psg==
-X-Gm-Message-State: AOAM533pw9WsTjshqRXs4jBdpI+ZMIKnMcDb9RmkcXCY0VEQzk9N6818
-	Vs3LT1hAIPJR8x9URpmCh9vAXBFmr3/bEQ==
-X-Google-Smtp-Source: ABdhPJy/AEFbRzojq1fFvlX/LppRBbRAhGQtEqOlsvIE9I2BEsYRRjmSKf1QMNKeamp/ZBmgU0P7Hw==
-X-Received: by 2002:a17:90a:9411:: with SMTP id r17mr27445403pjo.49.1627476891999;
-        Wed, 28 Jul 2021 05:54:51 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0:d256:c9be:ce5e:7cca? ([2601:202:4180:a5c0:d256:c9be:ce5e:7cca])
-        by smtp.gmail.com with ESMTPSA id t7sm3483037pjf.19.2021.07.28.05.54.50
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 28 Jul 2021 05:54:51 -0700 (PDT)
-Subject: Re: [oe] [hardknott][meta-oe][PATCH] mariadb: Upgrade to 10.5.10
-To: "Yu, Mingli" <mingli.yu@windriver.com>,
- openembedded-devel@lists.openembedded.org
-References: <20210727053348.39811-1-mingli.yu@windriver.com>
- <afd4eb85-8fed-5332-e843-8a0662833fb7@gmail.com>
- <c9614a91-0cc6-b32a-1199-2cc2699e62bc@windriver.com>
-From: "Armin Kuster" <akuster808@gmail.com>
-Message-ID: <f8a8a8a2-36e0-25c3-aeb2-4e8977b0e8b5@gmail.com>
-Date: Wed, 28 Jul 2021 05:54:50 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=/2l8OkhF3r08vG1Hobn9ZyLUFfCIUerkq6oLjJU59wI=;
+        b=VQKLE175InIC+Vh2jRjaOwRykDVsdOQiJfcV7uKipoF5Q6x70ccHlpb1VK82zNazhr
+         YYbd8Q90/7gz0MMgIe0PhqZnJ4pCv8L33kj5bUtNI77u+OZQmOzJpAfmEvMqO+Ic8/9B
+         M+P35QVmRLcIuF36HK36xHz0wv/oqsrbTgDumt5l8Y3sWgvPs4XlYABdG/RGFU/4BAih
+         kxqA8Vsc9IcIbIC0yAI59F//I9SrHn+iceQ51o57KZjqblLCzw/vsSq94HTUwQeOTjXW
+         uIb63/qe1uRRDzKSX62hQhrTsFw4qvpcBsvhOKmh134qgb5zy9L0BiRnkOhgW3UNCQvU
+         enKA==
+X-Gm-Message-State: AOAM531CLtpjV6mpgcMhooc/RwVytyCCU6LAVXbzbhQAgqlrzWA0BN28
+	2gt5WExvUq4N9wKZNJxV17NAhsmx4cjnL1O/uuU=
+X-Google-Smtp-Source: ABdhPJx92kLVtAIKdmrGCF6wAtsDOa5YZOfKiWbOrXzP7cE/H0KjQtlCFnWiCImVjhY2ovx9UPv7+csSn3sGeHAFERE=
+X-Received: by 2002:a05:6214:1bcf:: with SMTP id m15mr919382qvc.55.1627491530406;
+ Wed, 28 Jul 2021 09:58:50 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <c9614a91-0cc6-b32a-1199-2cc2699e62bc@windriver.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+References: <57336956-c478-d82a-7595-7f62190db4b7@gmail.com>
+In-Reply-To: <57336956-c478-d82a-7595-7f62190db4b7@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Wed, 28 Jul 2021 09:58:24 -0700
+Message-ID: <CAMKF1sq8Z1Bw9_7-cu1HO84P9mxz0Wyg0aBMRF_KitqNp=77Fw@mail.gmail.com>
+Subject: Re: dunfell merge request July 27th
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-
-
-On 7/27/21 10:53 PM, Yu, Mingli wrote:
+On Tue, Jul 27, 2021 at 9:23 PM akuster808 <akuster808@gmail.com> wrote:
 >
+> The following changes since commit 7bd47ef6c98323c95a9e527129dca98c9a65ee08:
 >
-> On 7/28/21 1:41 PM, akuster808 wrote:
->> [Please note: This e-mail is from an EXTERNAL e-mail address]
->>
->> On 7/26/21 10:33 PM, Yu, Mingli wrote:
->>> From: Khem Raj <raj.khem@gmail.com>
->>>
->>> Drop fix-a-building-failure.patch because upstream has made is narrower
->>> to apply to emulator builds and not just any cross compiling builds
->>>
->>> Add missing dependency on boost
->>
->> Thanks. I backported this a few days ago and is in stable/hardknott-nut
+>   dovecot: add CVE-2016-4983 to allowlist (2021-07-06 07:50:13 -0700)
 >
-> Thanks for your comments, but I didn't find the stable/hardknott-nut
-> branch at https://git.openembedded.org/meta-openembedded/refs/heads
+> are available in the Git repository at:
+>
+>   https://git.openembedded.org/meta-openembedded dunfell-next
+>
+> for you to fetch changes up to 85f8047c71047d93cf79a954142157f85079968d:
+>
+>   php: Upgrade to 7.4.16 (2021-07-26 16:05:08 -0700)
+>
+> ----------------------------------------------------------------
+> Adrian Zaharia (1):
+>       ntp: fix ntpdate to wait for subprocesses
+>
+> Armin Kuster (3):
+>       mariadb: update to 10.4.20
+>       hiawatha: fix url.
+>       wireshark: update to 3.2.15
+>
+> Armin kuster (1):
+>       postgresql: update to 12.7
+>
+> Bruce Ashfield (1):
+>       vboxguestdrivers: fix build against kernel v5.10+
+>
+> Changqing Li (2):
+>       nginx: fix CVE-2021-23017
+>       php: allow php as empty
+>
+> Diego Santa Cruz (1):
+>       php: split out phpdbg into a separate package
+>
+> Gianfranco (5):
+>       vboxguestdrivers: upgrade 6.1.16 -> 6.1.18
+>       vboxguestdrivers: Add patch proposed upstream to fix a build
+> failure on i386
+>       vboxguestdrivers: upgrade 6.1.18 -> 6.1.20
+>       vboxguestdrivers: upgrade 6.1.20 -> 6.1.22
+>       vboxguestdrivers: add a fix for build failure with kernel 5.13
+>
+> Gianfranco Costamagna (3):
+>       vboxguestdrivers: upgrade 6.1.6 -> 6.1.12
+>       vboxguestdrivers: upgrade 6.1.12 -> 6.1.14 Drop kernel 5.8
+> compatibility patch, now part of upstream codebase
+>       vboxguestdrivers: upgrade 6.1.14 -> 6.1.16
+>
+> Hongxu Jia (1):
+>       vboxguestdrivers: fix failed to compile with kernel 5.8.0
+>
+> Jate Sujjavanich (1):
+>       ufw: backport patches, update RRECOMMENDS, python3 support, tests
+>
+> Khem Raj (5):
+>       tracker-miners: Check for commercial license to enable ffmpeg
+>       sysprof: Enable sysprofd/libsysprof only when polkit in
+> DISTRO_FEATURES
+>       vboxguestdrivers: Fix build with kernel 5.8
+>       vboxguestdrivers: Add __divmoddi4 builtin support
+>       libdevmapper,lvm2: Do not inherit license
+>
+> Li Wang (1):
+>       apache2: fix CVE-2020-13950 CVE-2020-35452 CVE-2021-26690
+> CVE-2021-26691 CVE-2021-30641
+>
+> Masaki Ambai (1):
+>       nss: add CVE-2006-5201 to allowlist
+>
+> Mingli Yu (1):
+>       php: Upgrade to 7.4.16
+>
+> Nicolas Dechesne (4):
+>       python3-markupsafe: remove recipe
+>       python3-jinja2: remove recipe
+>       python3-{pyyaml,cython,pyparsing}: move from meta-python to meta-oe
+>       ostree: Do not check for meta-python
+>
 
-Sorry. its in the contrib one. 
-https://git.openembedded.org/meta-openembedded-contrib/commit/?h=stable/hardknott-nut&id=5a9c8a31b73e97a60cd682b53c2497f8d4835dc7
+merged thanks
 
--armin
+>  meta-gnome/recipes-gnome/tracker/tracker-miners_2.3.3.bb        |     2 +-
+>  meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb             |     4 +-
+>  .../ufw/ufw/0006-check-requirements-get-error.patch             |    36 +
+>  .../ufw/ufw/0007-use-conntrack-instead-of-state-module.patch    | 14903
+> ++++++++++++++++++++++++++
+>  .../ufw/ufw/0008-support-.-setup.py-build-LP-819600.patch       |    93 +
+>  .../ufw/ufw/0009-adjust-runtime-tests-to-use-daytime-port.patch |  2895
+> +++++
+>  .../0010-empty-out-IPT_MODULES-and-update-documentation.patch   |   106 +
+>  ...ts-check-requirements--simplify-and-support-python-3.8.patch |    33 +
+>  .../Add-code-to-detect-openembedded-python-interpreter.patch    |    33 +
+>  .../ufw/ufw/setup-only-make-one-reference-to-env.patch          |    14 +-
+>  meta-networking/recipes-connectivity/ufw/ufw_0.33.bb            |    49 +-
+>  meta-networking/recipes-support/ntp/ntp/ntpdate                 |     5 +
+>  .../wireshark/{wireshark_3.2.10.bb => wireshark_3.2.15.bb}      |     2 +-
+>  .../{mariadb-native_10.4.17.bb => mariadb-native_10.4.20.bb}    |     0
+>  meta-oe/recipes-dbs/mysql/mariadb.inc                           |     4 +-
+>  .../mysql/{mariadb_10.4.17.bb => mariadb_10.4.20.bb}            |     0
+>  .../postgresql/{postgresql_12.5.bb => postgresql_12.7.bb}       |     4 +-
+>  meta-oe/recipes-devtools/php/php/CVE-2020-7069.patch            |   158 -
+>  meta-oe/recipes-devtools/php/php/CVE-2020-7070.patch            |    24 -
+>  meta-oe/recipes-devtools/php/{php_7.4.9.bb => php_7.4.16.bb}    |    12 +-
+>  .../recipes-devtools/python/python-cython.inc                   |     0
+>  .../recipes-devtools/python/python3-cython_0.29.14.bb           |     0
+>  .../recipes-devtools/python/python3-pyparsing_2.4.6.bb          |     0
+>  .../recipes-devtools/python/python3-pyyaml_5.3.1.bb             |     0
+>  meta-oe/recipes-extended/ostree/ostree_2020.3.bb                |     2 +-
+>  meta-oe/recipes-support/lvm2/lvm2.inc                           |     5 +-
+>  meta-oe/recipes-support/nss/nss_3.51.1.bb                       |     3 +
+>  .../vboxguestdrivers/40-linux-5.13-support.patch                |   276 +
+>  .../vboxguestdrivers/vboxguestdrivers/add__divmoddi4.patch      |    36 +
+>  .../{vboxguestdrivers_6.1.6.bb => vboxguestdrivers_6.1.22.bb}   |     9 +-
+>  meta-python/recipes-devtools/python/python3-jinja2/run-ptest    |     3 -
+>  meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb    |    43 -
+>  .../recipes-devtools/python/python3-markupsafe/run-ptest        |     3 -
+>  meta-python/recipes-devtools/python/python3-markupsafe_1.1.1.bb |     2 -
+>  .../recipes-httpd/apache2/apache2/CVE-2020-13950.patch          |    45 +
+>  .../recipes-httpd/apache2/apache2/CVE-2020-35452.patch          |    49 +
+>  .../recipes-httpd/apache2/apache2/CVE-2021-26690.patch          |    39 +
+>  .../recipes-httpd/apache2/apache2/CVE-2021-26691.patch          |    35 +
+>  .../recipes-httpd/apache2/apache2/CVE-2021-30641.patch          |    66 +
+>  meta-webserver/recipes-httpd/apache2/apache2_2.4.46.bb          |     5 +
+>  meta-webserver/recipes-httpd/hiawatha/hiawatha_10.10.bb         |     2 +-
+>  meta-webserver/recipes-httpd/nginx/files/CVE-2021-23017.patch   |    46 +
+>  meta-webserver/recipes-httpd/nginx/nginx.inc                    |     1 +
+>  43 files changed, 18786 insertions(+), 261 deletions(-)
+>  create mode 100644
+> meta-networking/recipes-connectivity/ufw/ufw/0006-check-requirements-get-error.patch
+>  create mode 100644
+> meta-networking/recipes-connectivity/ufw/ufw/0007-use-conntrack-instead-of-state-module.patch
+>  create mode 100644
+> meta-networking/recipes-connectivity/ufw/ufw/0008-support-.-setup.py-build-LP-819600.patch
+>  create mode 100644
+> meta-networking/recipes-connectivity/ufw/ufw/0009-adjust-runtime-tests-to-use-daytime-port.patch
+>  create mode 100644
+> meta-networking/recipes-connectivity/ufw/ufw/0010-empty-out-IPT_MODULES-and-update-documentation.patch
+>  create mode 100644
+> meta-networking/recipes-connectivity/ufw/ufw/0011-tests-check-requirements--simplify-and-support-python-3.8.patch
+>  create mode 100644
+> meta-networking/recipes-connectivity/ufw/ufw/Add-code-to-detect-openembedded-python-interpreter.patch
+>  rename meta-networking/recipes-support/wireshark/{wireshark_3.2.10.bb
+> => wireshark_3.2.15.bb} (96%)
+>  rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.4.17.bb =>
+> mariadb-native_10.4.20.bb} (100%)
+>  rename meta-oe/recipes-dbs/mysql/{mariadb_10.4.17.bb =>
+> mariadb_10.4.20.bb} (100%)
+>  rename meta-oe/recipes-dbs/postgresql/{postgresql_12.5.bb =>
+> postgresql_12.7.bb} (51%)
+>  delete mode 100644 meta-oe/recipes-devtools/php/php/CVE-2020-7069.patch
+>  delete mode 100644 meta-oe/recipes-devtools/php/php/CVE-2020-7070.patch
+>  rename meta-oe/recipes-devtools/php/{php_7.4.9.bb => php_7.4.16.bb} (96%)
+>  rename {meta-python =>
+> meta-oe}/recipes-devtools/python/python-cython.inc (100%)
+>  rename {meta-python =>
+> meta-oe}/recipes-devtools/python/python3-cython_0.29.14.bb (100%)
+>  rename {meta-python =>
+> meta-oe}/recipes-devtools/python/python3-pyparsing_2.4.6.bb (100%)
+>  rename {meta-python =>
+> meta-oe}/recipes-devtools/python/python3-pyyaml_5.3.1.bb (100%)
+>  create mode 100644
+> meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/40-linux-5.13-support.patch
+>  create mode 100644
+> meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/add__divmoddi4.patch
+>  rename
+> meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_6.1.6.bb =>
+> vboxguestdrivers_6.1.22.bb} (90%)
+>  delete mode 100644
+> meta-python/recipes-devtools/python/python3-jinja2/run-ptest
+>  delete mode 100644
+> meta-python/recipes-devtools/python/python3-jinja2_2.11.2.bb
+>  delete mode 100644
+> meta-python/recipes-devtools/python/python3-markupsafe/run-ptest
+>  delete mode 100644
+> meta-python/recipes-devtools/python/python3-markupsafe_1.1.1.bb
+>  create mode 100644
+> meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-13950.patch
+>  create mode 100644
+> meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-35452.patch
+>  create mode 100644
+> meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26690.patch
+>  create mode 100644
+> meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26691.patch
+>  create mode 100644
+> meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-30641.patch
+>  create mode 100644
+> meta-webserver/recipes-httpd/nginx/files/CVE-2021-23017.patch
 >
-> Thanks,
->
->>
->> -armin
->>>
->>> (master rev: 2183f0894110a6913c44bee9a1f4b1cea7639bdc)
->>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
->>> ---
->>>   ...ve_10.5.9.bb => mariadb-native_10.5.10.bb} |  0
->>>   meta-oe/recipes-dbs/mysql/mariadb.inc         |  4 ++--
->>>   ...ng-failure.patch => cross-compiling.patch} | 22
->>> +++++--------------
->>>   .../mysql/mariadb/ppc-remove-glibc-dep.patch  |  2 +-
->>>   .../{mariadb_10.5.9.bb => mariadb_10.5.10.bb} |  2 +-
->>>   5 files changed, 10 insertions(+), 20 deletions(-)
->>>   rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.5.9.bb =>
->>> mariadb-native_10.5.10.bb} (100%)
->>>   rename
->>> meta-oe/recipes-dbs/mysql/mariadb/{fix-a-building-failure.patch =>
->>> cross-compiling.patch} (61%)
->>>   rename meta-oe/recipes-dbs/mysql/{mariadb_10.5.9.bb =>
->>> mariadb_10.5.10.bb} (85%)
->>>
->>> diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.9.bb
->>> b/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.10.bb
->>> similarity index 100%
->>> rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.5.9.bb
->>> rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.5.10.bb
->>> diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc
->>> b/meta-oe/recipes-dbs/mysql/mariadb.inc
->>> index 9833b2885..2974341bf 100644
->>> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
->>> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
->>> @@ -11,7 +11,6 @@ SRC_URI =
->>> "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
->>>              file://install_db \
->>>              file://mysql-systemd-start \
->>>              file://configure.cmake-fix-valgrind.patch \
->>> -           file://fix-a-building-failure.patch \
->>>             
->>> file://support-files-CMakeLists.txt-fix-do_populate_sysroot.patch \
->>>             
->>> file://sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
->>>              file://0001-disable-ucontext-on-musl.patch \
->>> @@ -22,10 +21,11 @@ SRC_URI =
->>> "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
->>>             
->>> file://0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch \
->>>             
->>> file://0001-aio_linux-Check-if-syscall-exists-before-using-it.patch \
->>>              file://sys_futex.patch \
->>> +           file://cross-compiling.patch \
->>>             "
->>>   SRC_URI_append_libc-musl = " file://ppc-remove-glibc-dep.patch"
->>>
->>> -SRC_URI[sha256sum] =
->>> "40ab19aeb8de141fdc188cf2251213c9e7351bee4d0cd29db704fae68d1068cf"
->>> +SRC_URI[sha256sum] =
->>> "a5ff32f9fcaaf26bf5cba94accc7b246d2d5eb75710d027e40122df6bac0babb"
->>>
->>>   UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
->>>
->>> diff --git
->>> a/meta-oe/recipes-dbs/mysql/mariadb/fix-a-building-failure.patch
->>> b/meta-oe/recipes-dbs/mysql/mariadb/cross-compiling.patch
->>> similarity index 61%
->>> rename from
->>> meta-oe/recipes-dbs/mysql/mariadb/fix-a-building-failure.patch
->>> rename to meta-oe/recipes-dbs/mysql/mariadb/cross-compiling.patch
->>> index 9149ee21f..0f4815b18 100644
->>> --- a/meta-oe/recipes-dbs/mysql/mariadb/fix-a-building-failure.patch
->>> +++ b/meta-oe/recipes-dbs/mysql/mariadb/cross-compiling.patch
->>> @@ -1,28 +1,21 @@
->>> -From 1b2b6a61c9f82157cd2e0c3744f6c07e07aeb0bd Mon Sep 17 00:00:00 2001
->>> -From: Mingli Yu <mingli.yu@windriver.com>
->>> -Date: Mon, 4 Mar 2019 01:11:30 -0800
->>> -Subject: [PATCH] fix a building failure
->>> -
->>> -Upstream-Status: Inappropriate [configuration]
->>> +This is not needed for OE builds
->>>
->>>   building failed since native does not generate
->>> import_executables.cmake
->>>   In fact, our building system will export the needed commands
->>>
->>> +Upstream-Status: Inappropriate [configuration]
->>> +
->>>   Signed-off-by: Roy Li <rongqing.li@windriver.com>
->>>   Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
->>> ----
->>> - CMakeLists.txt | 5 -----
->>> - 1 file changed, 5 deletions(-)
->>> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>>
->>> -diff --git a/CMakeLists.txt b/CMakeLists.txt
->>> -index fc30750..4f9110e 100644
->>>   --- a/CMakeLists.txt
->>>   +++ b/CMakeLists.txt
->>> -@@ -347,11 +347,6 @@ CHECK_PCRE()
->>> +@@ -392,11 +392,6 @@ CHECK_PCRE()
->>>
->>>    CHECK_SYSTEMD()
->>>
->>> --IF(CMAKE_CROSSCOMPILING)
->>> +-IF(CMAKE_CROSSCOMPILING AND NOT DEFINED
->>> CMAKE_CROSSCOMPILING_EMULATOR)
->>>   -  SET(IMPORT_EXECUTABLES "IMPORTFILE-NOTFOUND" CACHE FILEPATH
->>> "Path to import_executables.cmake from a native build")
->>>   -  INCLUDE(${IMPORT_EXECUTABLES})
->>>   -ENDIF()
->>> @@ -30,6 +23,3 @@ index fc30750..4f9110e 100644
->>>    #
->>>    # Setup maintainer mode options. Platform checks are
->>>    # not run with the warning options as to not perturb fragile checks
->>> ---
->>> -2.17.1
->>> -
->>> diff --git
->>> a/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
->>> b/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
->>> index 1ca86bcca..d082d424b 100644
->>> --- a/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
->>> +++ b/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
->>> @@ -36,7 +36,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>>   +  __builtin_ppc_get_timebase();
->>>    #elif defined __GNUC__ && (defined __arm__ || defined __aarch64__)
->>>      /* Mainly, prevent the compiler from optimizing away delay
->>> loops */
->>> -   __asm__ __volatile__ ("":::"memory");
->>> +   __asm__ __volatile__ ("isb":::"memory");
->>>   --- a/storage/tokudb/PerconaFT/portability/toku_time.h
->>>   +++ b/storage/tokudb/PerconaFT/portability/toku_time.h
->>>   @@ -124,7 +124,7 @@ static inline tokutime_t toku_time_now(v
->>> diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.5.9.bb
->>> b/meta-oe/recipes-dbs/mysql/mariadb_10.5.10.bb
->>> similarity index 85%
->>> rename from meta-oe/recipes-dbs/mysql/mariadb_10.5.9.bb
->>> rename to meta-oe/recipes-dbs/mysql/mariadb_10.5.10.bb
->>> index e6743fe97..8ae8241b0 100644
->>> --- a/meta-oe/recipes-dbs/mysql/mariadb_10.5.9.bb
->>> +++ b/meta-oe/recipes-dbs/mysql/mariadb_10.5.10.bb
->>> @@ -2,7 +2,7 @@ require mariadb.inc
->>>
->>>   EXTRA_OECMAKE += "-DSTACK_DIRECTION=-1"
->>>
->>> -DEPENDS += "mariadb-native bison-native libpcre2 curl openssl
->>> ncurses zlib libaio libedit libevent libxml2"
->>> +DEPENDS += "mariadb-native bison-native boost libpcre2 curl openssl
->>> ncurses zlib libaio libedit libevent libxml2"
->>>
->>>   PROVIDES += "mysql5 libmysqlclient"
->>>
->>>
->>> 
->>>
->>
-
