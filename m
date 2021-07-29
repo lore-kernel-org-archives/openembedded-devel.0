@@ -1,75 +1,185 @@
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.web10.17222.1627601826202901291
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web11.17213.1627601827257063481
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Jul 2021 16:37:06 -0700
+ Thu, 29 Jul 2021 16:37:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=OICjzz4p;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id t21so8788853plr.13
-        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Jul 2021 16:37:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=J3c6CvrH;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id pf12-20020a17090b1d8cb0290175c085e7a5so18137918pjb.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Jul 2021 16:37:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=rRDst6infKBC5/zhorUKNlDLCRHXVdbipeN97OhGH1U=;
-        b=OICjzz4p89ZH18DYjf14isTEbFlfyVTwQgAwQmIc9V08b1+70Fug/dQD9kG+y2TiCF
-         W6+OgkUkokliXqIf/uOURqJukJKi4NYKHWYe92J6dGv9a/69TV4PoQVqlH3ciVtU5qvT
-         3bIMNaDxIu2DszWAZRkX32UMhHtV723SWWo+vWpnogK7VbNGZyNlWJ5QmqK3cI78jocX
-         ADuUaaPjdu4NHg4VpWz1ML+vsDLWqLf4cx69/+90Jkls+3NFe+B47i/ZL0aBbM+hsVo2
-         9jyBk+XOU98AUKgYxRP2u+bKLzSqmGiE9Ca3/PbiO1YcOcn0oI8rfQMybcvTsZLPbAa2
-         UKCw==
+        bh=gKID/2z7XD5XgyFSRCH+/mAdYCwXrDywNzZZLec1w64=;
+        b=J3c6CvrHjMQFf9OoOtd/ktNuxwW+wMd9f15yX81JBdP55eq7FZi8HN3Hi3a0ED3KTP
+         QyjJ5ixNXWaNwN7PbS0tCU8BjgBG/ON3UdCIRy39nNqNMPB8py++KHCCKYi6DZKedgn9
+         RBpkyQXh6FFIUt0jBMvg9+9REILI8dHoBo04Kx1YxtsPbkCvSoQ79y1V3XOaDe7AZvF4
+         i+JFC+5dYR5MnRjzSAix5tRd7iS08IaEgWv+v6NmsnsM11GOFDa96UPUguTpHcvyHzur
+         K3wtpwNOYVFoQvF7yf0zkmGUNBycLOj7vN9FWtoy80BbCLxEcMo8gYB9vg5NNdzh3SyN
+         pVzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=rRDst6infKBC5/zhorUKNlDLCRHXVdbipeN97OhGH1U=;
-        b=tWFjNfnBCeo20qV6kppa21S57nXmf2WktYq5w2pWy5hoV+jW9g/WVxw6j387/x24Xu
-         R3H1kQOtZ+N6HIshkYMMegwJeAlO4oaSgCtooRZGcdHAeAZ7dtgpUHm2nqgEUPD//orA
-         NdzWLc+pWGnwlE+6qiRFweRL7Rdz7aNYo1VP3M+wgroNvk9Jc2xVc9oghuEEWUogCx7q
-         Xfygevutt/1vf5M02PFE2+LuaXCxrDh64FB7JxETjET9AlyVO9cSDBevSPDaR0eN5D1o
-         WQfRPYr5sC0vvs88VoGvAFQknHrNh9BgkAF7hObx18fX6MT69KPYGnNwnJVIHfyKuWqf
-         ZJtA==
-X-Gm-Message-State: AOAM532wvu4jJXT7hgv1v+I3OinhIGlR5yldA+gOtk+/EdTyFbPALjta
-	amAslK3MidgP+byDjgxmEhNhFmdSKSzIoA==
-X-Google-Smtp-Source: ABdhPJySoPH+Nv3rjfXOmz8D+eOojexJ5N6r/BiHrNksk9gE1qTGWiga0dw67DiGfJqNjcmKaJRPcg==
-X-Received: by 2002:a17:902:6905:b029:12b:8f6a:7c60 with SMTP id j5-20020a1709026905b029012b8f6a7c60mr6743024plk.24.1627601825716;
-        Thu, 29 Jul 2021 16:37:05 -0700 (PDT)
+        bh=gKID/2z7XD5XgyFSRCH+/mAdYCwXrDywNzZZLec1w64=;
+        b=J7V0Odf342jL0rIWQsRVMYhXVX6BcLhUybOVXxqsdRzLR9MlhdH5pIr1h8XDSOzuD4
+         Ruewl/Xz/8FuBw8/clYMuyCF0+DiG5Cdb7eU75SD61v4Ba/5aKF2HMuhkwcLuhIoo8jN
+         f2LjfrhgLXnmeF1WVdfRfTNr6ZGBL3M9kmKZepj5o9380wP9uNEooyIa5D9V0UQkNXrc
+         /QIWg6PNxi2vipcLjjvO/mfTA0stEmsiL6vqxoL4hpRApdRjbnYrz9hNTOsw9QxxKrod
+         mh84Hraa718uUT+i5N9KSzkPSi6tfG2MCepCOh9GhefRzx8Qd+1S2PKBOEfs6pUidmAR
+         xdOQ==
+X-Gm-Message-State: AOAM531tNrjxm/618GxEeICKcAGmEWtZ9TEO3wyeOgoJnUlXFwZBKaAp
+	0upKzftQVoxJDG4tgXV9zQFGwQRQ3Ajlrg==
+X-Google-Smtp-Source: ABdhPJxTj0wRR4wg8rrJclzwgzUqWnUZ3RFmlcAoB+v6T+fnlO7jViNOmk33jwEM1D6y/hZGtU4PhA==
+X-Received: by 2002:a63:f342:: with SMTP id t2mr5985075pgj.45.1627601826698;
+        Thu, 29 Jul 2021 16:37:06 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:43fe:2e36:1546:5b06])
-        by smtp.gmail.com with ESMTPSA id w15sm2360487pfu.89.2021.07.29.16.37.05
+        by smtp.gmail.com with ESMTPSA id w15sm2360487pfu.89.2021.07.29.16.37.06
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Jul 2021 16:37:05 -0700 (PDT)
+        Thu, 29 Jul 2021 16:37:06 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 14/15] hiawatha: fix url.
-Date: Thu, 29 Jul 2021 16:36:47 -0700
-Message-Id: <76a6070e6886fc7d623742bf0f7c4167b8b8dae8.1627593245.git.akuster808@gmail.com>
+Subject: [hardknott 15/15] python3-pillow: fix CVE-2021-34552
+Date: Thu, 29 Jul 2021 16:36:48 -0700
+Message-Id: <88813d34dd665cf90403716b88db2f0e0ec78d76.1627593245.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1627593245.git.akuster808@gmail.com>
 References: <cover.1627593245.git.akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-files moved under a new dir structure.
+From: Joe Slater <joe.slater@windriver.com>
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Pull fix from version 8.3.1 back to 8.2.0.
+
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
- meta-webserver/recipes-httpd/hiawatha/hiawatha_10.11.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...Limit-sprintf-modes-to-10-characters.patch | 49 +++++++++++++++++++
+ ...0001-Use-snprintf-instead-of-sprintf.patch | 43 ++++++++++++++++
+ .../python/python3-pillow_8.2.0.bb            |  2 +
+ 3 files changed, 94 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pillow/0001-Limit-sprintf-modes-to-10-characters.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-pillow/0001-Use-snprintf-instead-of-sprintf.patch
 
-diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.11.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.11.bb
-index 89910841f6..f0be75f5d3 100644
---- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.11.bb
-+++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.11.bb
-@@ -6,7 +6,7 @@ DEPENDS = "libxml2 libxslt virtual/crypt"
- 
- SECTION = "net"
- 
--SRC_URI = "http://hiawatha-webserver.org/files/${BP}.tar.gz \
-+SRC_URI = "http://hiawatha-webserver.org/files/hiawatha-10/${BP}.tar.gz \
-            file://hiawatha-init \
-            file://hiawatha.service "
+diff --git a/meta-python/recipes-devtools/python/python3-pillow/0001-Limit-sprintf-modes-to-10-characters.patch b/meta-python/recipes-devtools/python/python3-pillow/0001-Limit-sprintf-modes-to-10-characters.patch
+new file mode 100644
+index 0000000000..a1dd0d29ff
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pillow/0001-Limit-sprintf-modes-to-10-characters.patch
+@@ -0,0 +1,49 @@
++From 5f4504bb03f4edeeef8c2633dc5ba03a4c2a8a97 Mon Sep 17 00:00:00 2001
++From: Andrew Murray <radarhere@users.noreply.github.com>
++Date: Tue, 15 Jun 2021 15:14:26 +1000
++Subject: [PATCH 1/1] Limit sprintf modes to 10 characters
++
++Needed to make CVE-2021-34552 fix apply cleanly.
++
++commit 5f4504bb03f4edeeef8c2633dc5ba03a4c2a8a97 (unmodified)
++
++Upstream-Status: Backport
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
++
++---
++ src/libImaging/Convert.c | 10 ++++------
++ 1 file changed, 4 insertions(+), 6 deletions(-)
++
++diff --git a/src/libImaging/Convert.c b/src/libImaging/Convert.c
++index 8c7be36a2..1fa74a13b 100644
++--- a/src/libImaging/Convert.c
+++++ b/src/libImaging/Convert.c
++@@ -1594,9 +1594,8 @@ convert(
++ #ifdef notdef
++         return (Imaging)ImagingError_ValueError("conversion not supported");
++ #else
++-        static char buf[256];
++-        /* FIXME: may overflow if mode is too large */
++-        sprintf(buf, "conversion from %s to %s not supported", imIn->mode, mode);
+++        static char buf[100];
+++        sprintf(buf, "conversion from %.10s to %.10s not supported", imIn->mode, mode);
++         return (Imaging)ImagingError_ValueError(buf);
++ #endif
++     }
++@@ -1645,11 +1644,10 @@ ImagingConvertTransparent(Imaging imIn, const char *mode, int r, int g, int b) {
++     }
++ #else
++     {
++-        static char buf[256];
++-        /* FIXME: may overflow if mode is too large */
+++        static char buf[100];
++         sprintf(
++             buf,
++-            "conversion from %s to %s not supported in convert_transparent",
+++            "conversion from %.10s to %.10s not supported in convert_transparent",
++             imIn->mode,
++             mode);
++         return (Imaging)ImagingError_ValueError(buf);
++-- 
++2.29.2
++
+diff --git a/meta-python/recipes-devtools/python/python3-pillow/0001-Use-snprintf-instead-of-sprintf.patch b/meta-python/recipes-devtools/python/python3-pillow/0001-Use-snprintf-instead-of-sprintf.patch
+new file mode 100644
+index 0000000000..fc0337f137
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pillow/0001-Use-snprintf-instead-of-sprintf.patch
+@@ -0,0 +1,43 @@
++From 518ee3722a99d7f7d890db82a20bd81c1c0327fb Mon Sep 17 00:00:00 2001
++From: Andrew Murray <radarhere@users.noreply.github.com>
++Date: Wed, 30 Jun 2021 23:47:10 +1000
++Subject: [PATCH 1/1] Use snprintf instead of sprintf
++
++Fix CVE-2021-34552.
++
++commit 518ee3722a99d7f7d890db82a20bd81c1c0327fb (unmodified)
++
++Upstream-Status: Backport
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
++
++---
++ src/libImaging/Convert.c | 5 +++--
++ 1 file changed, 3 insertions(+), 2 deletions(-)
++
++diff --git a/src/libImaging/Convert.c b/src/libImaging/Convert.c
++index 1fa74a13b..9012cfcd7 100644
++--- a/src/libImaging/Convert.c
+++++ b/src/libImaging/Convert.c
++@@ -1595,7 +1595,7 @@ convert(
++         return (Imaging)ImagingError_ValueError("conversion not supported");
++ #else
++         static char buf[100];
++-        sprintf(buf, "conversion from %.10s to %.10s not supported", imIn->mode, mode);
+++        snprintf(buf, 100, "conversion from %.10s to %.10s not supported", imIn->mode, mode);
++         return (Imaging)ImagingError_ValueError(buf);
++ #endif
++     }
++@@ -1645,8 +1645,9 @@ ImagingConvertTransparent(Imaging imIn, const char *mode, int r, int g, int b) {
++ #else
++     {
++         static char buf[100];
++-        sprintf(
+++        snprintf(
++             buf,
+++            100,
++             "conversion from %.10s to %.10s not supported in convert_transparent",
++             imIn->mode,
++             mode);
++-- 
++2.29.2
++
+diff --git a/meta-python/recipes-devtools/python/python3-pillow_8.2.0.bb b/meta-python/recipes-devtools/python/python3-pillow_8.2.0.bb
+index 3241230d13..40745bb763 100644
+--- a/meta-python/recipes-devtools/python/python3-pillow_8.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pillow_8.2.0.bb
+@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0337b116233da4616ae9fdb130bf6f1a"
+ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=8.2.x \
+            file://0001-support-cross-compiling.patch \
+            file://0001-explicitly-set-compile-options.patch \
++           file://0001-Limit-sprintf-modes-to-10-characters.patch \
++           file://0001-Use-snprintf-instead-of-sprintf.patch \
+ "
+ SRCREV ?= "e0e353c0ef7516979a9aedce3792596649ce4433"
  
 -- 
 2.25.1
