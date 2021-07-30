@@ -1,77 +1,84 @@
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
- by mx.groups.io with SMTP id smtpd.web11.21347.1627633437180145788
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web10.23075.1627647224930440872
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Jul 2021 01:23:57 -0700
+ Fri, 30 Jul 2021 05:13:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Av3woDOn;
- spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f41.google.com with SMTP id b7so12032607edu.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Jul 2021 01:23:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=mNF9G3eGwAs8rrMCQqZw5FxOhPvxAJR0/z+IdAbtcu0=;
-        b=Av3woDOnCC4tdvEf13Mxfffm5v1ROUXyWM79WJaqWOC5JvSZu8SQLuftTyEr3ihsR7
-         S7pnYvli96e406H73LmDo6MNytmcrYWk1DuZZXCoJD+EPOhNLiE7lUws1t0B2aGUATNY
-         U4ThcK8yFVUVgp0crgWyYvGdjFwScrm7NWF2bGwwXHegS5q5nkaUAWgGqJs1BSnogjKB
-         y9uSgVIqOWJ44+affyO7sKrvZschSb8xnGt3GJik1Up2MxCEtsUyJ3wVup6KXB54B2rD
-         rIODOW+96Yl4c8zgp9nhlJa9PHXoL0g2o0h4sqBXYFlLIB3eaPZlOJGYefxna0RQuAgV
-         Z44A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=mNF9G3eGwAs8rrMCQqZw5FxOhPvxAJR0/z+IdAbtcu0=;
-        b=gv7EzLlfnq6aq3fuMrPQuxZscAPTTOUAAr2TZ0P2XWE0UTdFP9ymE3hZpHy0jIe1QE
-         k52ZCHQKXFnpvYvDdKESOkNUpbP/v2n7DUCCz9FQRVl7IZg8Ysd3Inn/Tnlxhu0v2ElO
-         i1G6Uqa2t1K1f973QmqszpohZuz0iJZHU0w9ooe6VPYyLoWiYWjQBAlccJkyM/RQ474P
-         obSFezxiiEMO9fK3a/2D5K9MQ6EB6GlxEelG39YCHb9WzVMLnREic53uXOOqXb/n4iaA
-         lJvplaEeyAvSN4qpz7rFbAbt5GnwhSgDsDWTAIEX88EOACBp7tUlYpklddEqX947j+L2
-         xoyw==
-X-Gm-Message-State: AOAM531C7683SNPUa5GEdkL39umcA6HLySzV7ElOPOUgob0J6xq+hFiz
-	hzyK1zjce8uEFSxfj/VNpMJNaVw0eu72KA==
-X-Google-Smtp-Source: ABdhPJyCGf6ssQXcgx7Wvxf1hMqZUPSQgUQipoEAe9VFTxwE4iiBL5q832/k1U0jbkQBv+zb/+jNEQ==
-X-Received: by 2002:aa7:dd84:: with SMTP id g4mr1636881edv.134.1627633435788;
-        Fri, 30 Jul 2021 01:23:55 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id s12sm309816ejz.36.2021.07.30.01.23.55
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 30 Jul 2021 01:23:55 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-python2][WIP][PATCH 2/2] layer.conf: Update to honister
-Date: Fri, 30 Jul 2021 10:23:49 +0200
-Message-Id: <20210730082349.8729-2-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210730082349.8729-1-Martin.Jansa@gmail.com>
-References: <20210730082349.8729-1-Martin.Jansa@gmail.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: mingli.yu@windriver.com)
+Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 16UCDh4R032250
+	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 30 Jul 2021 05:13:43 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 16UCDhP9020958
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 30 Jul 2021 05:13:43 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Fri, 30 Jul 2021 05:13:42 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Fri, 30 Jul 2021 05:13:42 -0700
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] mariadb: redefine log-error item
+Date: Fri, 30 Jul 2021 20:11:28 +0800
+Message-ID: <20210730121128.31993-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-This marks the layers as compatible with honister now they use the new override
-syntax.
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+The log-error item which defined in my.cnf is "/var/log/mysqld.err"
+previouly and it's not consistent with which created in install_db
+service file which will call mysql-systemd-start to create the file
+"/var/log/mysqld.log".
+
+And it fails when boot with sysvinit as below:
+ $ service mysqld start
+ Starting MariaDB.210727 04:05:03 mysqld_safe Logging to '/var/log/mysqld.err'.
+ 210727 04:05:03 mysqld_safe Starting mariadbd daemon with databases from /var/lib/mysql
+ /usr/bin/mysqld_safe_helper: Can't create/write to file '/var/log/mysqld.err' (Errcode: 13 "Permission denied")
+
+So make the log-error item consistent to fix the above failure
+and also remove the related workaround when boot with systemd.
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- conf/layer.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-dbs/mysql/mariadb.inc    | 5 -----
+ meta-oe/recipes-dbs/mysql/mariadb/my.cnf | 2 +-
+ 2 files changed, 1 insertion(+), 6 deletions(-)
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index 68a2561..2142b9a 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -14,6 +14,6 @@ LAYERVERSION_meta-python2 = "1"
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 5787ae4bd..7cf08f471 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -168,11 +168,6 @@ do_install() {
+     sed -i -e 's,@BINDIR@,${bindir},g' -e 's,@PREFIX@,${prefix},g' ${D}${systemd_unitdir}/system/mysqld.service \
+                                                                    ${D}${systemd_unitdir}/system/install_db.service
  
- LAYERDEPENDS_meta-python2 = "core openembedded-layer"
- 
--LAYERSERIES_COMPAT_meta-python2 = "hardknott"
-+LAYERSERIES_COMPAT_meta-python2 = "honister"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
+-    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+-        install -d ${D}${sysconfdir}/tmpfiles.d
+-        echo "f /var/log/mysqld.err 0640 mysql mysql -" \
+-            > ${D}${sysconfdir}/tmpfiles.d/99-mysqld.conf
+-    fi
+     install -d ${D}${bindir}
+     install -m 755 ${WORKDIR}/mysql-systemd-start ${D}${bindir}
+     install -d ${D}${datadir}/doc/${PN}
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/my.cnf b/meta-oe/recipes-dbs/mysql/mariadb/my.cnf
+index dc4c172e5..75db46a55 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb/my.cnf
++++ b/meta-oe/recipes-dbs/mysql/mariadb/my.cnf
+@@ -10,7 +10,7 @@ user 						= mysql
+ port 						= 3306
+ socket 						= /var/lib/mysql/mysql.sock
+ pid-file 					= /var/lib/mysql/mysqld.pid
+-log-error 					= /var/log/mysqld.err
++log-error 					= /var/log/mysqld.log
+ basedir 					= /usr
+ datadir 					= /var/lib/mysql
+ skip-external-locking
 -- 
-2.30.2
+2.17.1
 
