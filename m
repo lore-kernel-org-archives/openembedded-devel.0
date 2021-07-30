@@ -1,195 +1,357 @@
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.25630.1627659428484755499
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.25832.1627660337862684241
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Jul 2021 08:37:09 -0700
+ Fri, 30 Jul 2021 08:52:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=KvQpaoF0;
- spf=pass (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=38454ad370=randy.macleod@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 16UDtTKc001956
-	for <openembedded-devel@lists.openembedded.org>; Fri, 30 Jul 2021 15:37:06 GMT
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=Oy6P7FPU;
+ spf=pass (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3845513027=sakib.sajal@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 16UDtWlx026701
+	for <openembedded-devel@lists.openembedded.org>; Fri, 30 Jul 2021 08:52:17 -0700
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=subject : to :
  references : from : message-id : date : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=PPS06212021;
- bh=OBjl5t+P8IwTaTzzKLZajIYuzMzHfUnBbHxoEPAjUB8=;
- b=KvQpaoF0C1/o+Rx1rt+BYAZ3ic94WqBYygIfWEi8Wh0VRr7Ogp+JtlWGJwj7DBKaF5DQ
- uWsUcPP8ktyh1iSsSsc4gP1gxBBKvUpGKbwE+jQbuC0l4g9jRIxBrU8GbUHWiuy2zUhH
- +eNMuj4P1CLM/F0TjRVDXEdRfGt7O3QduY9gjx3jwG9q45wlU4uXsmSXFnZOQk8PvHKz
- mggE1kRrzoyBm3Zlnaoq65w7JnB5Wtapi1CnH24O4KDli7ctMuLpd2EmwAoRRRl5VcOv
- zFJNXDF/3wevUwKZ1XHptp6G2pyO7YdrgKeiVcpEUTj/8MXlhto5BBv1qo0emeBMK61y Xg== 
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com with ESMTP id 3a3wqm949b-1
+ mime-version; s=PPS06212021;
+ bh=/LtLTzCe3nBPMpAk1dKLZxcbdymRbGVAd8J7PYYhqOI=;
+ b=Oy6P7FPUnjfuBkiJumltkaMBRJICtsjzU1eRLqLnAsAhTJ/OM+vabsbHQP3TxP/cvI1s
+ /LfDxKrSrSMiU4QRcPXtw6Uqhl0T+9/y1OzsR6mGk3XDUP6uCOuurFJMoxagIMBDvb7W
+ 0tFjZXto3q0wDiUatVdqgqfeX87GRmlonEQo6qPmI+pN6+ev2vDHt8bW94IFkove5kJY
+ 0TDzfCDJBo+GB4u+WmtKkINz+D7UJ1dMNZJD9kJ1MKlegGtscAUQ4Sw7sWxw665pcy3k
+ CTP8WfBLZu+aLZG9dkpMyJCDoHYkILqrf64TXNV2Ka82nbmj/e+wn30wSObFGbrxqCJW yw== 
+Received: from nam11-bn8-obe.outbound.protection.outlook.com (mail-bn8nam11lp2170.outbound.protection.outlook.com [104.47.58.170])
+	by mx0a-0064b401.pphosted.com with ESMTP id 3a3uu0sabh-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 30 Jul 2021 15:37:05 +0000
-Received: from m0250811.ppops.net (m0250811.ppops.net [127.0.0.1])
-	by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 16UFb5rG024341
-	for <openembedded-devel@lists.openembedded.org>; Fri, 30 Jul 2021 15:37:05 GMT
-Received: from nam10-bn7-obe.outbound.protection.outlook.com (mail-bn7nam10lp2109.outbound.protection.outlook.com [104.47.70.109])
-	by mx0a-0064b401.pphosted.com with ESMTP id 3a3wqm9498-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 30 Jul 2021 15:37:05 +0000
+	for <openembedded-devel@lists.openembedded.org>; Fri, 30 Jul 2021 08:52:16 -0700
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mSLO+VmVudlz7xP1g9R/qLlOqtiIePDyvZMl5s3dYmY3+KwJnZscf1sjIcFIZPFYc5StsyyNTmOaYfMSbQKWbruG3OnnJM9LEbB+ANcoIsjNV+3ZiS2eL38e1wARRR3gMGusOkJlkDfvSg11Qu+L7pu8ND6h9arIDbrJf0husykOFFnZJZititxYJDXmR/EoGyGJEdoqPKN2vkazgS2iUd/T5NXVtygMrlyFjw4ck/busSs5cmbmjMn6T0ZCwb8GrJ0QbwLdzDQoin6L5Cba42EyGuFBQBoSLdipi8mkTbHTYvr3i5oapx0OuwKDr9wAQTpC6sN44ghUiLS2pcKGUA==
+ b=G1sAoDBMPKCBLdHV4yKNYCgmXyJW6IrInjT7Bvc6gSBs3agNTR0REcdHxmWe7K1at5afLaxmjXxuJa5H8bD/v1lNvxYrwTUwEN2Zx0SnMBR5QikEV30Ht6XCfeAOUG+A0aHRPpbT4TqB2jFRlHDgnzEmY4b7BhyYAFV/23AaVo/XERDaD6ZXKBMvJhXsZjFIEqST1BxRfTJqwl8x/biEW8Q5Bmz3iCsLGxcJM535GAA2yg0CTHamhvn7XxFPlWEj/xdLFxb2AE+0Vdk8ZArwIM8r7Ykgl+Ayw/24/l52LChBE3f+94Sztu1aMtU24cxU1CFy/hPWSpa/W0WieM/ZEQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OBjl5t+P8IwTaTzzKLZajIYuzMzHfUnBbHxoEPAjUB8=;
- b=DaQ9vrFMFcMvu8o27C0HSNgoU9mxauN0FPu1KxtYRdtyljTzHXxtPhVBqHfObIJO/9d21xV4U/9Ja6kW4zSra8pz3fXBZgplgUA2PChJx4WYYeIizuxhlp3RQsnmb+v3zj9/sFENwD/lXlcS0Be2YYq3IbvqRYI7EkJCq+ub22CHLxxHNyrwubwmjjdHJe//gYCKoTyltcV9QbGUNakT3EiGA9OM0zNmV0FAjg5Nlt7+b9kgJs/CLZT8Cu8IEZIMTr5cWaB4LKtsmM9tk+uTFfroi01kFbJA6JHdlj/yE2k/+VEnpGSD0+Z6Jevbu30svT/xQKgcJHADP8UBS0ho5A==
+ bh=/LtLTzCe3nBPMpAk1dKLZxcbdymRbGVAd8J7PYYhqOI=;
+ b=DSYbyfaqYj/f3PB13Up/u+QSLHfsb391O9vdAKKNeSk01AbER46WbUJfuzhKRXGPfxu7QvtAYJiIZhrha0yRFItXMZNf35hLZ8wL+qQ9XKgbowuYJkNk1JcR+kIWNw5+6LQgKWuefEFYl+ZhxR0zwg+NzvOMRWjq7gjEQtL/nfgXofLBO4tIotyZfZL6PTS0whaH2CExvf5eH2d7rCfjaoQquyo9Oy2UKLsqMoF81myYpAujHGiuEaL84RqLvSTJftD9vTEBYRpxTFUdGcnRS/ogQgrjdUmXd/prHuF/Kzy0XmcgVU+WXSmXCgwSvL0GQdQS9BXq0tqi2Ann9ud/2A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Authentication-Results: gmail.com; dkim=none (message not signed)
- header.d=none;gmail.com; dmarc=none action=none header.from=windriver.com;
-Received: from DM6PR11MB3994.namprd11.prod.outlook.com (2603:10b6:5:193::19)
- by DM6PR11MB4202.namprd11.prod.outlook.com (2603:10b6:5:1df::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4373.18; Fri, 30 Jul
- 2021 15:37:02 +0000
-Received: from DM6PR11MB3994.namprd11.prod.outlook.com
- ([fe80::c413:9f51:c32e:a579]) by DM6PR11MB3994.namprd11.prod.outlook.com
- ([fe80::c413:9f51:c32e:a579%6]) with mapi id 15.20.4373.025; Fri, 30 Jul 2021
- 15:37:02 +0000
-Subject: Re: [hardknott][meta-python][PATCH 1/1] python3-urllib3: Upgrade 1.26.4 -> 1.26.5
-To: Joe Slater <joe.slater@windriver.com>,
-        openembedded-devel@lists.openembedded.org,
-        Armin Kuster <akuster808@gmail.com>
-References: <20210720185352.134342-1-joe.slater@windriver.com>
-From: "Randy MacLeod" <randy.macleod@windriver.com>
-Message-ID: <36590d9a-37b4-d42c-123e-dfac19c88cdb@windriver.com>
-Date: Fri, 30 Jul 2021 11:36:58 -0400
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from DM6PR11MB2538.namprd11.prod.outlook.com (2603:10b6:5:be::20) by
+ DM5PR11MB1674.namprd11.prod.outlook.com (2603:10b6:4:b::8) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4373.25; Fri, 30 Jul 2021 15:52:14 +0000
+Received: from DM6PR11MB2538.namprd11.prod.outlook.com
+ ([fe80::d44b:60e8:b607:73f7]) by DM6PR11MB2538.namprd11.prod.outlook.com
+ ([fe80::d44b:60e8:b607:73f7%7]) with mapi id 15.20.4352.035; Fri, 30 Jul 2021
+ 15:52:14 +0000
+Subject: Re: [oe] [meta-oe][hardknott][PATCH] lmdb: add recipe
+To: openembedded-devel@lists.openembedded.org
+References: <20210729182156.16834-1-sakib.sajal@windriver.com>
+ <31c118d9-7c29-e8f0-5f04-80ffacef09af@gmail.com>
+From: "Sakib Sajal" <sakib.sajal@windriver.com>
+Message-ID: <bc42345c-faec-c656-692b-96e9d1bd8796@windriver.com>
+Date: Fri, 30 Jul 2021 11:52:05 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
-In-Reply-To: <20210720185352.134342-1-joe.slater@windriver.com>
-X-ClientProxiedBy: SJ0PR05CA0166.namprd05.prod.outlook.com
- (2603:10b6:a03:339::21) To DM6PR11MB3994.namprd11.prod.outlook.com
- (2603:10b6:5:193::19)
+In-Reply-To: <31c118d9-7c29-e8f0-5f04-80ffacef09af@gmail.com>
+X-ClientProxiedBy: BL1PR13CA0241.namprd13.prod.outlook.com
+ (2603:10b6:208:2ba::6) To DM6PR11MB2538.namprd11.prod.outlook.com
+ (2603:10b6:5:be::20)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [172.25.44.2] (198.48.226.187) by SJ0PR05CA0166.namprd05.prod.outlook.com (2603:10b6:a03:339::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4394.10 via Frontend Transport; Fri, 30 Jul 2021 15:37:01 +0000
+Received: from [192.168.2.28] (184.147.146.64) by BL1PR13CA0241.namprd13.prod.outlook.com (2603:10b6:208:2ba::6) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4394.12 via Frontend Transport; Fri, 30 Jul 2021 15:52:13 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 1e522976-2b6e-435e-1cf5-08d9536fe095
-X-MS-TrafficTypeDiagnostic: DM6PR11MB4202:
-X-MS-Exchange-Transport-Forked: True
+X-MS-Office365-Filtering-Correlation-Id: 3cd0b2a6-ea79-454b-67ef-08d95372000c
+X-MS-TrafficTypeDiagnostic: DM5PR11MB1674:
 X-Microsoft-Antispam-PRVS: 
-	<DM6PR11MB42020B571EA343BD0544DCDFF8EC9@DM6PR11MB4202.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:862;
+	<DM5PR11MB167403640BA83AE0B86969F2F2EC9@DM5PR11MB1674.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:4941;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	0sk58Rl9fE+wYCjNUC4BAjNM1h+s526pC61sgSZ26EtD7I69LrSw+ENi99aFpXwKZtVwaK8c+1OiXUwKLVna6COwjkEBjh3n2gZ3pat513xCK4DuV3ikbt+sVDk2IuM4lFyO4+LE4zYFk6kY9w/c+5PZTBpgOPmAVRrh1Zb0XPypMTpxHv0RdtKnDngbuEruJgxPhzyo35K4wgMsoqsg2Ky/YFRAI4lswSNOQfRdrUgZDGG0RWOQA7O5K/rTieZPojAQXFuvFhnOLwXsZLWqg8QruTC5tv0vbZ6xhPcL7rc3msF08bxOFppw8Ti27+WhbSTYNi+Mz2jiU4TZlJ0mECACHktIQ0Y8vY5Hamm7QaSohghXhnS1RgWECFxltk6kweGmDGF47X88Z9HleR4l0Q0V+x4JWiUJxdhmRWDwsEcPojcEUdhtsPp3Dc0DpCw1mgVx865keCnyOZxUj6kH0895AimjxLsQX1TPfYF+i77Ri2iyvkrq6BDT7AYGTng0F+B5U4YlYPL+FeJ/8CHk4IhUqy+ZK6Jjig85IstsGe5VjhVf+9dXV3UGWWoSUcrroGmrZqoBFifKXSrgnk8iO6wGSWoCXmS+oIZInvWiGxO6NdcJrMby5RkrZObs3clKr537nsF+Y1aciZZ7UO0RgaWa/N6iqI670/0NdcDNfvVIjQV9YHQXDPAMGR4kqT6IOj2MA0NZL/qU1fw4Jlp3WeflJutJtYTsP6y7ZUyV9/MuwY1Rzu1aZP+oMKTfBPMel0Zld9Hr34a0BXKoQcIQpjvjQ6y0kFIZ0UhcQefdEw7gCUAe5bPRKRX0m8s24E6Et8hk5ALCxAl6t0upMGLE68PsYoQFGZSLznpK9f4t7t2G0Xf9bZVs6QgpVX452iZGQeNZQuSiCS9j++0/w9giDA==
+	BmST/qzQHDkSv7s0J4sq3HF3mymZDyv6i/f45DGp0U5aKvp2CtKYG0Uccuy9leYoRtwpy1Vnl4Bite0CD2KYtSy5MNmgPtvV3GnwwMDWYtBKUITyvpMaJFl1715Lci8eZk9uLhIvjKq9NJEvF/fG6+GpU29rt9hpDmDbyx1lWyy4iXzveb1sJ30FXyz0Ebtnd6JsA8OW/4gyS+ukCYDCkNAh25yl0cx4hHc2kmK7MqpvRBIQtqc0qKAxwwQsEoTADwQRZEaDGSm/irfNDgfBfvEqqpgatXSMJaYN/yCL6N6ZPMhSG53+W3JHnc6yPfl+rC3OW8dBi1ck+TBc3tpUh9Pmx1g1dunTtUG+LWoiAaslccSZqowizSiu3a7A/XoAhl6FhTY0jm9eA8HcS7K7hqK5rRSQbpnTPmmSR+hAG/uCVqp3+N09K8Ie7IGL1HYYQRO4mTBLkJ4NjSFMhKexs1PLQt6QiBYkmuG4zDubgupREx66A0Hfqe1zfrxThy08XpgIezcG5h8ZMhod9VARXu6TaIeLyLJ+cvXt6/AxammDgRO4WmUAdZ4AqU40m1lFy2d2oqIsAStRoRJUdZxG9XuRNM663BwfVKQ8NfTNzqlVQE+PVhN0B2LJlxulUKRpCg/wXyYJ0T3Pl/UsMVrjTfFC2v0Dhsi0joT2duVqvLc7jsNGAXN3tfd+6r/KxJ59JORmJ5nw4FQEUmthzqwcvmu71ryKlhtYKU0v8xX0QJOOZs/BM7hJgFgYBy3hvzANibWcM5qqSmm4Df1tj9EaYjjPEW60GfqUzHAFkTukpfmu6Sf240LsIs/Hlt8doFJwKoiEnG/VoqtptxJ6AdhkH1TW6AVbi6opSZp5C7X/rgWdcp81GRIzqwNscK5tYOwo
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3994.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(366004)(39850400004)(396003)(346002)(376002)(5660300002)(36756003)(66476007)(52116002)(86362001)(66556008)(38100700002)(53546011)(38350700002)(2616005)(16576012)(956004)(2906002)(6486002)(110136005)(26005)(83380400001)(8936002)(966005)(478600001)(8676002)(31696002)(316002)(31686004)(186003)(66946007)(6666004)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB2538.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(366004)(376002)(39850400004)(396003)(346002)(8936002)(33964004)(66476007)(6916009)(26005)(66556008)(66946007)(8676002)(5660300002)(166002)(966005)(83380400001)(956004)(16576012)(478600001)(31686004)(86362001)(2906002)(53546011)(31696002)(44832011)(52116002)(186003)(38350700002)(36756003)(316002)(38100700002)(6666004)(2616005)(6486002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?STVsNTI1SzNYVkFMWDM1Ymhseis4RFk3ckZNZyt2VytLUlFLOUppS3dxQWlP?=
- =?utf-8?B?MngweWYvR2JocllCQ1dWOGNjVHNTZDlvazN5UXBjWXZwNEtqUFB4dkswdk9Y?=
- =?utf-8?B?TWJJUzNoQ0dSRVJSWHV3eUxRRHg4VFFZWUZvTVo2OEFHVmNKWlJtNlZiKzZY?=
- =?utf-8?B?UXJNa2I3NUs3TVFiV0RqN1VjaWNXVTBmZk1TWFkvaXhVYmNoTlFCWXA0cnNE?=
- =?utf-8?B?NS9ZMkVHTUJKbWVnaHlseGJWYzhodEQvNHVCbkFJbGNUQUFha2NPSWpKQmRh?=
- =?utf-8?B?UDkvNjZXQTZ2QklYSHBXT1N6RUtQb3IxVVpKQUJCK3ppd2lwUVc3ZG8yeTFK?=
- =?utf-8?B?TExacytvMmhSWUZDWDh4SExlMSs5TEhjMVo1RnBxK0lEait3NDdVOWlCM0tE?=
- =?utf-8?B?bVN3anIzRVlxQTdRcXR5RFd4QWFOajcxZittOWRZTzM4cXhSUTNKeExyM24x?=
- =?utf-8?B?Vk1NSHQwWG15VEc0NEkyRG9CdHBkSThYZEZtVGxPcC9IVE13cHdSRTBOSkdz?=
- =?utf-8?B?WWJOZXpHNUFYbGl0VlN6VVhZMlhTSE9SUWkwOVpGQng4TCtjN0t1dTg4ZzQv?=
- =?utf-8?B?VlBTTEhweG9lU1ZSdHhKNFhpUnZQSFAwSlNTUXFiTzR3U1BENkdjRm9qeEtq?=
- =?utf-8?B?R2Z0bDlHSERSSHpZVXh4S1dBbG9JU0JScEhPZGdWQ0hlSGZGUjd0ZlNZZ3p4?=
- =?utf-8?B?Z09kTnVRSTdXODdRZHQ1blBBSWJpTGxiM0VFazhZMG5FcXFWcm45YUxsZ1Er?=
- =?utf-8?B?ZWhSRWF2dkd2eDVnd3pBWDZnOHRPQWYvR1JzUmVydkJwWVFlTnR1MkVRaGNY?=
- =?utf-8?B?cFFFeTZTb2NkQzJHTFBGLzVSdGIyVmZtbUlqMFlHbnR0TnRuSFVmVlRRT1Rs?=
- =?utf-8?B?WUVPdS94bU1UT0NUQ3lGTk9ZWFpDRDRVL1p0dUFvQWp2Yk1RYkN4c003NnVO?=
- =?utf-8?B?Y0ZFSkhMQ3E0NFlRNVNST25OanN5ODl3ZDJpZjhmVW14QjNFWENoWk9vdXYy?=
- =?utf-8?B?K2lTNERCTStWUlVkODlBMjVmZlpXQUNnelp5ZzM3RjlKS002eS9wc21ndXlX?=
- =?utf-8?B?RFpkSlFSK2hkcmhCOWNJOGZyN0t5SkIrVEdsbzZ5TERvU3FFNXF6U0E4OHVK?=
- =?utf-8?B?OWprUWFTYVhwVUE5eGxLVlpsa2ZPNEpEZFhmNnl2S1QyU2lWSVBBQUN6RHRZ?=
- =?utf-8?B?Uzh5eUFzOS90MFlPL09hNng5aTI0bkx2WkNmczNqa2llWEhHSnprdFY5eU1N?=
- =?utf-8?B?VU9TU3Vnc0ZaZzlwTDdYL0w3VTNjbmkzY2dubTZSS3NTbURFbW1yS0lORmUv?=
- =?utf-8?B?WjV5V1NEWW85Nmt4T2pLZTEvNUJuS0NSY2tWdzJBK2NJUVlLUnFiUG05cTVm?=
- =?utf-8?B?QzNWZGNYMnRXMGRleVNVM0lBQWJUOFZXcG5qeGl5d3VrS1ViTWJEZnk1cEFQ?=
- =?utf-8?B?TkFkMU5ETWJpSXNLT09rMGpiTW9DYnhIU3pqVlJxclF1bStkQWJsN3lUU1hl?=
- =?utf-8?B?b0FTNVRkVkM3OGk0azdiWk1SWWJpaTdDUU85VDRKRjdNMUhSWVkwcWNjckVS?=
- =?utf-8?B?WWFaUmpIbTdrSFYyNXJIRnVGMnI0M0xkQ0Q2RkdIa1hLbWxFWnM0N21icUNj?=
- =?utf-8?B?UmtjMzRUSW1CZzU5MlN1bENyQ3AzeDZCMVhnSDczUlZ0cXVKNEhMS0Q4WTMv?=
- =?utf-8?B?TktWN3VycEw5WmthMnR1aUZKN0dkVm50eXBvcHZ6MFE5a20zSFNSZVh4aXNO?=
- =?utf-8?Q?2UExynMm0/8E1U/3AMpArJVA/VHzTMLCcBLi65E?=
+	Vm1deCROiMhYDKeRv8cryAa08BoiqtbjAyLYTPXqAi8XTm1LZgv6pLwrXaMjXkGClnr6WULGsOsKkiAzjsMOSo1mtq/g55GhechTSzl/G1MhYpmU82TQpK8e+47NJb7NZK9i37RiNEQIMuhy4wVzHHX/nTpnAGwcV8XrtQqje34NfY74r47UkImP0E1Z7HinfFaNUV1cEevON9v6FO2c1VIMV1hRz/GyfkzLj3TkbGxUOYRbILhuGynLz5WJKiJiYAPUreiZfV4Rt6UvhyizXX6QSQmRJ30tnj5pwz5MFdcpbkGsdehPH85GX4cxQqaNcTIi5SvHg1VVVjJLGXG83mIMGYMSO+I7L1E0qDEUUG5D0GRXwRuzaCsMXGwq6gkZVtqSfGRsEbEVxE3e8YCC2L/wlKIUuyS2+k+5zUHBmujRCk4+m6NnlayHL91x2wF3TAOlptd4QN7ZrV98CFodYi3J1FGDD7U76Sk1ANYFU3VlMN3zyFocgb8kw22fAbWSTR8DqBvqNXvWq5moYE3zOQdwqT4hpJqxw94x/s+0SpEoYNPlmVkasNP9WExwB0wOCzwsgcSoxmgfJyTppu9dpjIbxXblru5F1A0zbIF5OinGyQ707PEH2RF86pP7BB/dfF1SgqQ6ocgpddPUfdkJtqNBk2nTARCwaEJJ5hvStXJIa/dTGtnBeeCc828I19VSOB3yv2dPIGktLemeBvjlBrPrGRl51orcFZzHek/tR/S5xsTg/HgU+iJ7qmfcDDbo
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1e522976-2b6e-435e-1cf5-08d9536fe095
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3994.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3cd0b2a6-ea79-454b-67ef-08d95372000c
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB2538.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2021 15:37:02.5468
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2021 15:52:14.4124
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 1QEFhfEr+nJBunF1MTS8ufG+FmvFb1s4B7TmN9YaiMy6hVV5j/8qtqg23e25dgi8BquGoZUdUY5M+ci0oj98XgkGv4iPhTsG74wz/QbMc/s=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB4202
-X-Proofpoint-GUID: hm4JMzy3xzVJHkSOPROU1G44BnmGLFUF
-X-Proofpoint-ORIG-GUID: FhBhQ06UajkZ5RARQMBNwYDQjH3fCQhe
+X-MS-Exchange-CrossTenant-UserPrincipalName: kUTfjqNroN2TdWxi5jSarLNH5cE9PJIwBMdsPfmxm23xhn9FdPeiGfYgVlRuy3wxn14fDX1muqbSu09M++eyDoW7X9aTLgki0vC2ZTJ0XPk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB1674
+X-Proofpoint-GUID: tP1E0dDoxWX6Q3KLJVJ5a7FalBGHr8nG
+X-Proofpoint-ORIG-GUID: tP1E0dDoxWX6Q3KLJVJ5a7FalBGHr8nG
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
- definitions=2021-07-30_08,2021-07-30_01,2020-04-07_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=999 spamscore=0
- impostorscore=0 phishscore=0 bulkscore=0 clxscore=1015 malwarescore=0
- priorityscore=1501 suspectscore=0 mlxscore=0 adultscore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2107140000 definitions=main-2107300104
+ definitions=2021-07-30_11,2021-07-30_01,2020-04-07_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
+ malwarescore=0 priorityscore=1501 clxscore=1015 lowpriorityscore=0
+ bulkscore=0 suspectscore=0 mlxlogscore=999 phishscore=0 adultscore=0
+ mlxscore=0 spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2107140000 definitions=main-2107300106
+Content-Type: multipart/alternative;
+ boundary="------------22818084EAD921704D581E1C"
+Content-Language: en-US
+
+--------------22818084EAD921704D581E1C
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-CA
 Content-Transfer-Encoding: 7bit
 
-On 2021-07-20 2:53 p.m., Joe Slater wrote:
-> From: Leon Anavi <leon.anavi@konsulko.com>
-> 
-> Upgrade to release 1.26.5:
 
-Armin,
+On 2021-07-30 9:45 a.m., Armin Kuster wrote:
+> [Please note: This e-mail is from an EXTERNAL e-mail address]
+>
+> On 7/29/21 11:21 AM, Sakib Sajal wrote:
+>> lmdb provides a high-performance embedded transactional
+>> database in the form of a key-value store.
+>>
+>> Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Adding a new package to a stable branch is not allowed per process.
+>
+> Your request is denied.
+>
+> - Armin
 
-Did you miss this one, I don't see it in:
- 
-https://git.openembedded.org/meta-openembedded-contrib/log/?h=stable/hardknott-nut
+Thanks for the information.
 
-Thanks,
+Sakib
 
-../Randy
+>> ---
+>>   meta-oe/recipes-dbs/lmdb/files/run-ptest | 25 +++++++++++++++
+>>   meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb  | 39 ++++++++++++++++++++++++
+>>   2 files changed, 64 insertions(+)
+>>   create mode 100644 meta-oe/recipes-dbs/lmdb/files/run-ptest
+>>   create mode 100644 meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
+>>
+>> diff --git a/meta-oe/recipes-dbs/lmdb/files/run-ptest b/meta-oe/recipes-dbs/lmdb/files/run-ptest
+>> new file mode 100644
+>> index 000000000..a6a7549b9
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-dbs/lmdb/files/run-ptest
+>> @@ -0,0 +1,25 @@
+>> +#!/bin/sh
+>> +
+>> +cd tests
+>> +
+>> +retval=0
+>> +for t in mtest*
+>> +do
+>> +    mkdir testdb
+>> +    ./$t > /dev/null && ./mdb_stat testdb > /dev/null
+>> +    if [ $? -ne 0 ]; then
+>> +            echo "FAIL: $t"
+>> +            retval=$(( ${retval} + 1))
+>> +    else
+>> +            echo "PASS: $t"
+>> +    fi
+>> +    rm -rf testdb
+>> +done
+>> +
+>> +if [ $retval -eq 0 ] ; then
+>> +    echo "PASS: lmdb"
+>> +else
+>> +    echo "FAIL: lmdb"
+>> +fi
+>> +
+>> +exit $retval
+>> \ No newline at end of file
+>> diff --git a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
+>> new file mode 100644
+>> index 000000000..0746da141
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
+>> @@ -0,0 +1,39 @@
+>> +# SPDX-FileCopyrightText: 2017-2019 Volker Krause <vkrause@kde.org>
+>> +# SPDX-FileCopyrightText: 2019 Hannah Kiekens <hannahkiekens@gmail.com>
+>> +#
+>> +# SPDX-License-Identifier: MIT
+>> +
+>> +SUMMARY = "Lightning Memory-Mapped Database (LMDB)"
+>> +HOMEPAGE = "https://symas.com/lightning-memory-mapped-database/"
+>> +LICENSE = "OLDAP-2.8"
+>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972"
+>> +
+>> +SRC_URI = "git://github.com/LMDB/lmdb.git;nobranch=1 \
+>> +           file://run-ptest \
+>> +"
+>> +
+>> +SRCREV = "LMDB_${PV}"
+>> +
+>> +inherit base ptest
+>> +
+>> +S = "${WORKDIR}/git/libraries/liblmdb"
+>> +
+>> +LDFLAGS += "-Wl,-soname,lib${PN}.so.${PV}"
+>> +
+>> +do_compile() {
+>> +    oe_runmake CC="${CC}" SOEXT=".so.${PV}" LDFLAGS="${LDFLAGS}"
+>> +}
+>> +
+>> +do_install() {
+>> +    oe_runmake CC="${CC}" DESTDIR="${D}" prefix="${prefix}" libprefix="${libdir}" manprefix="${mandir}" SOEXT=".so.${PV}" LDFLAGS="${LDFLAGS}" install
+>> +    cd ${D}/${libdir}
+>> +    ln -s liblmdb.so.${PV} liblmdb.so
+>> +    rm liblmdb.a
+>> +}
+>> +
+>> +do_install_ptest() {
+>> +    install -d ${D}${PTEST_PATH}/tests
+>> +    for test in mtest mtest2 mtest3 mtest4 mtest5 mdb_stat; do
+>> +        install -m 755 ${S}/$test ${D}${PTEST_PATH}/tests
+>> +    done
+>> +}
+>>
+>>
+>>
+>
 > 
-> - Fixed deprecation warnings emitted in Python 3.10.
-> - Updated vendored six library to 1.16.0.
-> - Improved performance of URL parser when splitting the authority
->    component.
-> 
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> 
-> Fixes CVE 2021-33503.
-> 
-> (cherry picked from commit bb39c29a46e44fcc082aed0ce8772f4267a41d2d)
-> 
-> Signed-off-by: Joe Slater <joe.slater@windriver.com>
-> ---
->   .../{python3-urllib3_1.26.4.bb => python3-urllib3_1.26.5.bb}    | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->   rename meta-python/recipes-devtools/python/{python3-urllib3_1.26.4.bb => python3-urllib3_1.26.5.bb} (86%)
-> 
-> diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.26.4.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.26.5.bb
-> similarity index 86%
-> rename from meta-python/recipes-devtools/python/python3-urllib3_1.26.4.bb
-> rename to meta-python/recipes-devtools/python/python3-urllib3_1.26.5.bb
-> index 0a31fb1e2..f2fb33c6d 100644
-> --- a/meta-python/recipes-devtools/python/python3-urllib3_1.26.4.bb
-> +++ b/meta-python/recipes-devtools/python/python3-urllib3_1.26.5.bb
-> @@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
->   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c2823cb995439c984fd62a973d79815c"
->   
-> -SRC_URI[sha256sum] = "e7b021f7241115872f92f43c6508082facffbd1c048e3c6e2bb9c2a157e28937"
-> +SRC_URI[sha256sum] = "a7acd0977125325f516bda9735fa7142b909a8d01e8b2e4c8108d0984e6e0098"
->   
->   inherit pypi setuptools3
->   
-> 
+>
+
+--------------22818084EAD921704D581E1C
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 2021-07-30 9:45 a.m., Armin Kuster
+      wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:31c118d9-7c29-e8f0-5f04-80ffacef09af@gmail.com">
+      <pre class="moz-quote-pre" wrap="">[Please note: This e-mail is from an EXTERNAL e-mail address]
+
+On 7/29/21 11:21 AM, Sakib Sajal wrote:
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">lmdb provides a high-performance embedded transactional
+database in the form of a key-value store.
+
+Signed-off-by: Sakib Sajal <a class="moz-txt-link-rfc2396E" href="mailto:sakib.sajal@windriver.com">&lt;sakib.sajal@windriver.com&gt;</a>
+Signed-off-by: Khem Raj <a class="moz-txt-link-rfc2396E" href="mailto:raj.khem@gmail.com">&lt;raj.khem@gmail.com&gt;</a>
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">Adding a new package to a stable branch is not allowed per process.
+
+Your request is denied.
+
+- Armin</pre>
+    </blockquote>
+    <p>Thanks for the information.</p>
+    <p>Sakib<br>
+    </p>
+    <blockquote type="cite" cite="mid:31c118d9-7c29-e8f0-5f04-80ffacef09af@gmail.com">
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">---
+ meta-oe/recipes-dbs/lmdb/files/run-ptest | 25 +++++++++++++++
+ meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb  | 39 ++++++++++++++++++++++++
+ 2 files changed, 64 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/lmdb/files/run-ptest
+ create mode 100644 meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
+
+diff --git a/meta-oe/recipes-dbs/lmdb/files/run-ptest b/meta-oe/recipes-dbs/lmdb/files/run-ptest
+new file mode 100644
+index 000000000..a6a7549b9
+--- /dev/null
++++ b/meta-oe/recipes-dbs/lmdb/files/run-ptest
+@@ -0,0 +1,25 @@
++#!/bin/sh
++
++cd tests
++
++retval=0
++for t in mtest*
++do
++    mkdir testdb
++    ./$t &gt; /dev/null &amp;&amp; ./mdb_stat testdb &gt; /dev/null
++    if [ $? -ne 0 ]; then
++            echo &quot;FAIL: $t&quot;
++            retval=$(( ${retval} + 1))
++    else
++            echo &quot;PASS: $t&quot;
++    fi
++    rm -rf testdb
++done
++
++if [ $retval -eq 0 ] ; then
++    echo &quot;PASS: lmdb&quot;
++else
++    echo &quot;FAIL: lmdb&quot;
++fi
++
++exit $retval
+\ No newline at end of file
+diff --git a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
+new file mode 100644
+index 000000000..0746da141
+--- /dev/null
++++ b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
+@@ -0,0 +1,39 @@
++# SPDX-FileCopyrightText: 2017-2019 Volker Krause <a class="moz-txt-link-rfc2396E" href="mailto:vkrause@kde.org">&lt;vkrause@kde.org&gt;</a>
++# SPDX-FileCopyrightText: 2019 Hannah Kiekens <a class="moz-txt-link-rfc2396E" href="mailto:hannahkiekens@gmail.com">&lt;hannahkiekens@gmail.com&gt;</a>
++#
++# SPDX-License-Identifier: MIT
++
++SUMMARY = &quot;Lightning Memory-Mapped Database (LMDB)&quot;
++HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://symas.com/lightning-memory-mapped-database/">&quot;https://symas.com/lightning-memory-mapped-database/&quot;</a>
++LICENSE = &quot;OLDAP-2.8&quot;
++LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972">&quot;file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972&quot;</a>
++
++SRC_URI = &quot;git://github.com/LMDB/lmdb.git;nobranch=1 \
++           <a class="moz-txt-link-freetext" href="file://run-ptest">file://run-ptest</a> \
++&quot;
++
++SRCREV = &quot;LMDB_${PV}&quot;
++
++inherit base ptest
++
++S = &quot;${WORKDIR}/git/libraries/liblmdb&quot;
++
++LDFLAGS += &quot;-Wl,-soname,lib${PN}.so.${PV}&quot;
++
++do_compile() {
++    oe_runmake CC=&quot;${CC}&quot; SOEXT=&quot;.so.${PV}&quot; LDFLAGS=&quot;${LDFLAGS}&quot;
++}
++
++do_install() {
++    oe_runmake CC=&quot;${CC}&quot; DESTDIR=&quot;${D}&quot; prefix=&quot;${prefix}&quot; libprefix=&quot;${libdir}&quot; manprefix=&quot;${mandir}&quot; SOEXT=&quot;.so.${PV}&quot; LDFLAGS=&quot;${LDFLAGS}&quot; install
++    cd ${D}/${libdir}
++    ln -s liblmdb.so.${PV} liblmdb.so
++    rm liblmdb.a
++}
++
++do_install_ptest() {
++    install -d ${D}${PTEST_PATH}/tests
++    for test in mtest mtest2 mtest3 mtest4 mtest5 mdb_stat; do
++        install -m 755 ${S}/$test ${D}${PTEST_PATH}/tests
++    done
++}
 
 
--- 
-# Randy MacLeod
-# Wind River Linux
+
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+
+
+</pre>
+    </blockquote>
+  </body>
+</html>
+
+--------------22818084EAD921704D581E1C--
