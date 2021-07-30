@@ -1,84 +1,80 @@
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web10.23075.1627647224930440872
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.web11.22208.1627640565836060742
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Jul 2021 05:13:45 -0700
+ Fri, 30 Jul 2021 03:22:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: mingli.yu@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 16UCDh4R032250
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 30 Jul 2021 05:13:43 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 16UCDhP9020958
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 30 Jul 2021 05:13:43 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Fri, 30 Jul 2021 05:13:42 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Fri, 30 Jul 2021 05:13:42 -0700
-From: "Yu, Mingli" <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] mariadb: redefine log-error item
-Date: Fri, 30 Jul 2021 20:11:28 +0800
-Message-ID: <20210730121128.31993-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=u5PrZkRo;
+ spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: salman.isd@gmail.com)
+Received: by mail-wr1-f53.google.com with SMTP id c16so10623344wrp.13
+        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Jul 2021 03:22:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Cv9qtq0u72FNjE0p1n+cSlUQ6EcKXXmZemD6difbKuk=;
+        b=u5PrZkRorR/oofCCIOEgi+PXeFoGW081YtL+ixs88ssP2wy8RQ44ld+fUx0qoQbinZ
+         MZZRGo/nWKrnHmZJ/apjWEMq/UcSSWmUZ123xaq+ed/pljbLa0M7FIx8BYWVtVwx0ebB
+         281xftJYJY9jSCWlDsSHtdIEeGLdnc7s2VC/zbPz4NGEiPPtZI3eQj4Hqt4juA9HrQn8
+         x2JCENeCFSzXP7dyw3r3MbSTFgGJYHacGRHbvm9qbZOQJZ7cbddjGbcFGpqXF/4/nV88
+         h/nznuauwZO2ep4km0zuSRyB+3iI+1JYq8lARTrTvjOlQH2t47zJbUHFc3Oo9uzFbFSi
+         yo7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Cv9qtq0u72FNjE0p1n+cSlUQ6EcKXXmZemD6difbKuk=;
+        b=XnQQs/vZtilChHyEEYHlqdBdI7L1CNJxf4ixI/RIkgsIy/1eBPkAC2Kbg57JG2BYws
+         yZiHMhvQPTUBDw1vIMKQ0P/PO549ISWfjjzMtM9O/Fn2/4yL12qknayHkg33gRJLf0PF
+         su4WJdDn5SGxXB0OZCP86LvXhgezQEXy5Ho1+chR67g5PVqoVcSe9QYAYiIGpxCrdypQ
+         xPu2yqV8XzrOo3FiHCYN1adm495FLLVz+EheE3yX0642nqMmawYTyNbnDrAMbhKR5Oe0
+         sttxlKa2K43VnlWy9K/6i/OKMQR1Nuy3aK1GGMmzSbxy50x7XRx8DhtQmgRTpKBgNO5/
+         xAvQ==
+X-Gm-Message-State: AOAM530G4cKv5DiAVJu2nDbRaA5gu8/paie80GgkNNlBDjMSqK6qSwMA
+	KCxxY13ioZQZvXAfux0NU1H2PCwGNR/G7w==
+X-Google-Smtp-Source: ABdhPJywIh4yEiTSLGdx5Xu80HZpVsrcySGB0E91a1+DBf/m4iIRhy/V9R598NiRySsCDnOrFePlnA==
+X-Received: by 2002:adf:f5d1:: with SMTP id k17mr2241286wrp.123.1627640564168;
+        Fri, 30 Jul 2021 03:22:44 -0700 (PDT)
+Return-Path: <salman.isd@gmail.com>
+Received: from localhost.localdomain (ip-37-201-145-145.hsi13.unitymediagroup.de. [37.201.145.145])
+        by smtp.gmail.com with ESMTPSA id u11sm1164468wrp.26.2021.07.30.03.22.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 30 Jul 2021 03:22:43 -0700 (PDT)
+From: salman.isd@gmail.com
+X-Google-Original-From: Salman Ahmed <salman.ahmed@weidmueller.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: derek@asterius.io
+Subject: [meta-webserver]
+Date: Fri, 30 Jul 2021 12:22:34 +0200
+Message-Id: <cover.1627638813.git.salman.ahmed@weidmueller.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-From: Mingli Yu <mingli.yu@windriver.com>
+upgrade nginx to latest stable/mainline versions
 
-The log-error item which defined in my.cnf is "/var/log/mysqld.err"
-previouly and it's not consistent with which created in install_db
-service file which will call mysql-systemd-start to create the file
-"/var/log/mysqld.log".
+The following changes since commit 86be1d89174ecfa91e7f323d49a301f51db01501:
 
-And it fails when boot with sysvinit as below:
- $ service mysqld start
- Starting MariaDB.210727 04:05:03 mysqld_safe Logging to '/var/log/mysqld.err'.
- 210727 04:05:03 mysqld_safe Starting mariadbd daemon with databases from /var/lib/mysql
- /usr/bin/mysqld_safe_helper: Can't create/write to file '/var/log/mysqld.err' (Errcode: 13 "Permission denied")
+  python3-sentry-sdk: upgrade 1.2.0 -> 1.3.0 (2021-07-29 10:35:05 -0700)
 
-So make the log-error item consistent to fix the above failure
-and also remove the related workaround when boot with systemd.
+are available in the Git repository at:
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- meta-oe/recipes-dbs/mysql/mariadb.inc    | 5 -----
- meta-oe/recipes-dbs/mysql/mariadb/my.cnf | 2 +-
- 2 files changed, 1 insertion(+), 6 deletions(-)
+  https://github.com/salmanisd/meta-openembedded.git upgrade-nginx
+  https://github.com//tree/upgrade-nginx
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 5787ae4bd..7cf08f471 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -168,11 +168,6 @@ do_install() {
-     sed -i -e 's,@BINDIR@,${bindir},g' -e 's,@PREFIX@,${prefix},g' ${D}${systemd_unitdir}/system/mysqld.service \
-                                                                    ${D}${systemd_unitdir}/system/install_db.service
- 
--    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
--        install -d ${D}${sysconfdir}/tmpfiles.d
--        echo "f /var/log/mysqld.err 0640 mysql mysql -" \
--            > ${D}${sysconfdir}/tmpfiles.d/99-mysqld.conf
--    fi
-     install -d ${D}${bindir}
-     install -m 755 ${WORKDIR}/mysql-systemd-start ${D}${bindir}
-     install -d ${D}${datadir}/doc/${PN}
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/my.cnf b/meta-oe/recipes-dbs/mysql/mariadb/my.cnf
-index dc4c172e5..75db46a55 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb/my.cnf
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/my.cnf
-@@ -10,7 +10,7 @@ user 						= mysql
- port 						= 3306
- socket 						= /var/lib/mysql/mysql.sock
- pid-file 					= /var/lib/mysql/mysqld.pid
--log-error 					= /var/log/mysqld.err
-+log-error 					= /var/log/mysqld.log
- basedir 					= /usr
- datadir 					= /var/lib/mysql
- skip-external-locking
+Salman Ahmed (2):
+  nginx: upgrade 1.18.0 -> 1.20.1
+  nginx: upgrade 1.19.6 -> 1.21.1
+
+ meta-webserver/recipes-httpd/nginx/nginx_1.18.0.bb |  6 ------
+ meta-webserver/recipes-httpd/nginx/nginx_1.19.6.bb | 10 ----------
+ meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb |  7 +++++++
+ meta-webserver/recipes-httpd/nginx/nginx_1.21.1.bb | 10 ++++++++++
+ 4 files changed, 17 insertions(+), 16 deletions(-)
+ delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.18.0.bb
+ delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.19.6.bb
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.21.1.bb
+
 -- 
-2.17.1
+2.25.1
 
