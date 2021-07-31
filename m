@@ -1,50 +1,50 @@
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web11.5176.1627747613696956928
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+ by mx.groups.io with SMTP id smtpd.web08.5293.1627748160502242592
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 31 Jul 2021 09:06:53 -0700
+ Sat, 31 Jul 2021 09:16:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ro3sJv9O;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id a4-20020a17090aa504b0290176a0d2b67aso25287773pjq.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 31 Jul 2021 09:06:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=G9DxFJ5t;
+ spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f175.google.com with SMTP id m11so2509516plx.4
+        for <openembedded-devel@lists.openembedded.org>; Sat, 31 Jul 2021 09:16:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=XBMTrwr3KZ7efyytj/HxQ45CYjcG7d+I6st1U+KEOqg=;
-        b=Ro3sJv9OSVNpqJ5AryxOyxw8PwRSCc8/XSnLT1N5uYmiPqUgsUPejpHIdL/Hcp1pkh
-         6sBmkw+nLBEDsWrGXnLKhH8PRxJUWRv2UexNU6ndVo7iLepcXbTuxZ3Bg36slYwjuZWN
-         BN5FYv6xijLfA2WUeLPYifw5Hc+yJ0r8bVjEIR7keyWMog/20MC1FqKgkagjrSZMNp/m
-         tcaFsxEr/zI4P7ZbEXO5dC1bnJ8VrM7fY5wKmLsINlRfV8/2bGiVnEBYumtCbi8DGWDW
-         pDkmtO6znVz0N8L55rc8K4/9nrWTUDizixT7bkw+FkhOiC33iAhL/YsXxC5AindbCmwx
-         2Qdg==
+        bh=qcXj1C0kuodGtyYxfakyVmdfxfgOrwdXLWTf0wxQ/uI=;
+        b=G9DxFJ5tI+Zd5SF3V3DoK2M0+MLVeQMbrTYLOxAVGLKn+Lk9Pvxl9TsOXbrxSTQzIr
+         RbsY5o2QLBJGfgrRDFW5fpeJd+idd2Gley7GiNqQVrBP27A3uoxv6d/2F3niOhsHrgUW
+         Xn5jTMNILb+zeIkFoXJQzxMA5yRdFXgYSH4NEWCGZUT9lJ+Bmn5RxYBGNeBh/1ZF9QbW
+         XbxFQQrn3FE9eiZWdvKEG7gJI895kjQQx0JV1TSL0jc4agVuwsRIUcP6kwqWM20V+lpA
+         AdPHNxy50OOm4w3+XGdenYmT9aI7sNPv/jRiHy5qZJ+Tzmgj08Zvh3vWBGuJf3i8Z6BU
+         uOeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=XBMTrwr3KZ7efyytj/HxQ45CYjcG7d+I6st1U+KEOqg=;
-        b=Z5O09PCs3Z43yBgZ7MOFCvkuGqToDTQdhWNTFFjJP9kyqd6gt/iuSYZP2obNdGiC3H
-         3dDNdmJRp0MfDSNKbil0cFY1C06RvvHtTyrZ97L+OMsl1XR+jPi6vqRcwdBN4ESyQod2
-         tTMaBbFpTGgPHihcxCmL9DeshjvkLdV4K4f1bcheBSJ+0x6e/ZTfkQGuCV7X1QuXZgrF
-         HjHuaHV08pDW8UwX0neEclNpC7w1hA8md2Wr5thctDRD1sNSAC3Pmyr8Gpo2VYqCBgOz
-         6Cr5mohC58Z9DIgC+wqoZdOqWanh6EwSCxwuARHTvCvGh9xY0EBImVarYN55SbTqdfJV
-         qSSw==
-X-Gm-Message-State: AOAM533qgnMJg6RBYIjb+EYqkuWxCMRZkEE3QvZrcvLUe2Xu57vw3lhy
-	owiGpVuHrWnXbcV2AHWOpALwXpk6X9/deg==
-X-Google-Smtp-Source: ABdhPJzHej9WU+u+kz9irmKqBLmUT/3n3UO1IJ7/p8L6YyfXZx2vZLy6EjpWv3fAI2+dRYeCQKf5ug==
-X-Received: by 2002:a62:7c4d:0:b029:3b0:b284:fd9c with SMTP id x74-20020a627c4d0000b02903b0b284fd9cmr6438518pfc.11.1627747612829;
-        Sat, 31 Jul 2021 09:06:52 -0700 (PDT)
+        bh=qcXj1C0kuodGtyYxfakyVmdfxfgOrwdXLWTf0wxQ/uI=;
+        b=AB7lfGH+ko0T+VSPouvZ1kpJfCgS6flx9kMZa67DRZr4KW7mr46ctJctQMcLRFaaVh
+         xONVK/WD7hUOY558PdE6F/ok3uL8POd31JnmWcP/xlfuqqJM2rnD7N+2tCdQZfLehcM/
+         f24BR0C/11aAl/3JHAW15bR3ZFU02PHySt41rieAI4mu5jh0aK6odaXeGJ/M/gjouuVN
+         i+bLJQ5PMSaxHxKu345O0tp8gOgwZc9kmzZ5YVXuhaHbO+tBbML4dzABbkucGoET02vI
+         GWs179hfDPNB94ojseziuGrmSBbFcX355krelzzrCin01YrwbzYbdHZF61JA+Ci8rFvn
+         QK0w==
+X-Gm-Message-State: AOAM532PtsYij0YukunYmBj8LsVrRpB5MBZ1cyHqOW6ypBefV0+YI6Pg
+	c/0eNe9q+SJqryppBidprN/A2YuGMtJWKw==
+X-Google-Smtp-Source: ABdhPJxbyRuRjRLdJhP2sGZkX5ovZjFBfAGh0bs8pbdp2vUJ5qPJUKBxkL+5X2MXWsBfAu7Z12DbBA==
+X-Received: by 2002:a63:6602:: with SMTP id a2mr986768pgc.228.1627748159524;
+        Sat, 31 Jul 2021 09:15:59 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::d2cb])
-        by smtp.gmail.com with ESMTPSA id w22sm6007518pfn.188.2021.07.31.09.06.52
+        by smtp.gmail.com with ESMTPSA id l1sm5581648pjq.1.2021.07.31.09.15.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 31 Jul 2021 09:06:52 -0700 (PDT)
+        Sat, 31 Jul 2021 09:15:59 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] addcli: check for ns_get16 and ns_get32
-Date: Sat, 31 Jul 2021 09:06:50 -0700
-Message-Id: <20210731160650.3544476-1-raj.khem@gmail.com>
+Subject: [meta-filesystems][PATCH] fuse: Define closefrom if not available
+Date: Sat, 31 Jul 2021 09:15:57 -0700
+Message-Id: <20210731161557.3562310-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -53,76 +53,79 @@ Fixes build with glibc 2.34+
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-connectivity/adcli/adcli_0.9.0.bb |  3 +-
- ...ck-for-ns_get16-and-ns_get32-as-well.patch | 39 +++++++++++++++++++
- 2 files changed, 41 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-connectivity/adcli/files/0001-configure-check-for-ns_get16-and-ns_get32-as-well.patch
+ ...rver.c-conditionally-define-closefro.patch | 51 +++++++++++++++++++
+ .../recipes-support/fuse/fuse_2.9.9.bb        |  1 +
+ 2 files changed, 52 insertions(+)
+ create mode 100644 meta-filesystems/recipes-support/fuse/files/fuse2-0007-util-ulockmgr_server.c-conditionally-define-closefro.patch
 
-diff --git a/meta-networking/recipes-connectivity/adcli/adcli_0.9.0.bb b/meta-networking/recipes-connectivity/adcli/adcli_0.9.0.bb
-index 76df27851b..074292b43b 100644
---- a/meta-networking/recipes-connectivity/adcli/adcli_0.9.0.bb
-+++ b/meta-networking/recipes-connectivity/adcli/adcli_0.9.0.bb
-@@ -8,6 +8,7 @@ SRCREV = "1b1528038e084a9f81ea108cffca9c2707623b9c"
-
- SRC_URI = "git://gitlab.freedesktop.org/realmd/adcli;branch=master \
-            file://Fixed-build-error-on-musl.patch \
-+           file://0001-configure-check-for-ns_get16-and-ns_get32-as-well.patch \
- 	   "
-
- S = "${WORKDIR}/git"
-@@ -15,7 +16,7 @@ S = "${WORKDIR}/git"
- LICENSE = "LGPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=23c2a5e0106b99d75238986559bb5fc6"
-
--inherit autotools xmlcatalog
-+inherit autotools xmlcatalog
-
- DEPENDS += "virtual/crypt krb5 openldap gettext libxslt xmlto libxml2-native \
-             cyrus-sasl libxslt-native xmlto-native coreutils-native\
-diff --git a/meta-networking/recipes-connectivity/adcli/files/0001-configure-check-for-ns_get16-and-ns_get32-as-well.patch b/meta-networking/recipes-connectivity/adcli/files/0001-configure-check-for-ns_get16-and-ns_get32-as-well.patch
+diff --git a/meta-filesystems/recipes-support/fuse/files/fuse2-0007-util-ulockmgr_server.c-conditionally-define-closefro.patch b/meta-filesystems/recipes-support/fuse/files/fuse2-0007-util-ulockmgr_server.c-conditionally-define-closefro.patch
 new file mode 100644
-index 0000000000..8cc859318c
+index 0000000000..3607304e05
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/adcli/files/0001-configure-check-for-ns_get16-and-ns_get32-as-well.patch
-@@ -0,0 +1,39 @@
-+From 98660f57a98f45dbf55414cfde46338019adcc33 Mon Sep 17 00:00:00 2001
-+From: Sumit Bose <sbose@redhat.com>
-+Date: Wed, 28 Jul 2021 12:55:16 +0200
-+Subject: [PATCH] configure: check for ns_get16 and ns_get32 as well
++++ b/meta-filesystems/recipes-support/fuse/files/fuse2-0007-util-ulockmgr_server.c-conditionally-define-closefro.patch
+@@ -0,0 +1,51 @@
++From: Sam James <sam@gentoo.org>
++Date: Sat, 24 Jul 2021 22:02:45 +0100
++Subject: [PATCH] util/ulockmgr_server.c: conditionally define closefrom (fix
++ glibc-2.34+)
 +
-+With newer versions of glibc res_query() might ba already available in
-+glibc with ns_get16() and ns_get32() still requires libresolv.
++closefrom(3) has joined us in glibc-land from *BSD and Solaris. Since
++it's available in glibc 2.34+, we want to detect it and only define our
++fallback if the libc doesn't provide it.
 +
-+Upstream-Status: Backport [https://gitlab.freedesktop.org/realmd/adcli/-/commit/e841ba7513f3f8b6393183d2dea9adcbf7ba2e44]
-+Resolves: https://bugzilla.redhat.com/show_bug.cgi?id=1984891
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac | 6 ++++--
-+ 1 file changed, 4 insertions(+), 2 deletions(-)
++Bug: https://bugs.gentoo.org/803923
++Signed-off-by: Sam James <sam@gentoo.org>
 +
-+diff --git a/configure.ac b/configure.ac
-+index ebc6cb4..e8775d0 100644
 +--- a/configure.ac
 ++++ b/configure.ac
-+@@ -98,13 +98,15 @@ AC_SUBST(LDAP_CFLAGS)
-+ # -------------------------------------------------------------------
-+ # resolv
++@@ -55,6 +55,7 @@ fi
 +
-+-AC_MSG_CHECKING(for which library has res_query)
-++AC_MSG_CHECKING([for which library has res_query, ns_get16 and ns_get32])
-+ for lib in "" "-lresolv"; do
-+ 	saved_LIBS="$LIBS"
-+ 	LIBS="$LIBS $lib"
-+ 	AC_LINK_IFELSE([
-+ 		AC_LANG_PROGRAM([#include <resolv.h>],
-+-		                [res_query (0, 0, 0, 0, 0)])
-++		                [res_query (0, 0, 0, 0, 0);
-++		                 ns_get32 (NULL);
-++		                 ns_get16 (NULL);])
-+ 	],
-+ 	[ AC_MSG_RESULT(${lib:-libc}); have_res_query="yes"; break; ],
-+ 	[ LIBS="$saved_LIBS" ])
-+--
-+2.32.0
++ AC_CHECK_FUNCS([fork setxattr fdatasync splice vmsplice utimensat])
++ AC_CHECK_FUNCS([posix_fallocate])
+++AC_CHECK_FUNCS([closefrom])
++ AC_CHECK_MEMBERS([struct stat.st_atim])
++ AC_CHECK_MEMBERS([struct stat.st_atimespec])
++
++--- a/util/ulockmgr_server.c
+++++ b/util/ulockmgr_server.c
++@@ -22,6 +22,10 @@
++ #include <sys/socket.h>
++ #include <sys/wait.h>
++
+++#ifdef HAVE_CONFIG_H
+++	#include "config.h"
+++#endif
+++
++ struct message {
++ 	unsigned intr : 1;
++ 	unsigned nofd : 1;
++@@ -124,6 +128,7 @@ static int receive_message(int sock, voi
++ 	return res;
++ }
++
+++#if !defined(HAVE_CLOSEFROM)
++ static int closefrom(int minfd)
++ {
++ 	DIR *dir = opendir("/proc/self/fd");
++@@ -141,6 +146,7 @@ static int closefrom(int minfd)
++ 	}
++ 	return 0;
++ }
+++#endif
++
++ static void send_reply(int cfd, struct message *msg)
++ {
+diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
+index 2c272d4527..64414305ee 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
+@@ -14,6 +14,7 @@ SRC_URI = "https://github.com/libfuse/libfuse/releases/download/${BP}/${BP}.tar.
+            file://gold-unversioned-symbol.patch \
+            file://aarch64.patch \
+            file://0001-fuse-fix-the-return-value-of-help-option.patch \
++           file://fuse2-0007-util-ulockmgr_server.c-conditionally-define-closefro.patch \
+            file://fuse.conf \
+ "
+ SRC_URI[md5sum] = "8000410aadc9231fd48495f7642f3312"
 --
 2.32.0
