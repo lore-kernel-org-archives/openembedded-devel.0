@@ -1,110 +1,144 @@
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.web08.458.1627754269974153311
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web10.2603.1627781111337386389
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 31 Jul 2021 10:57:50 -0700
+ Sat, 31 Jul 2021 18:25:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dxrOAl2T;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id u9-20020a17090a1f09b029017554809f35so25469661pja.5
-        for <openembedded-devel@lists.openembedded.org>; Sat, 31 Jul 2021 10:57:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=RT8Ycfy5;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id j18-20020a17090aeb12b029017737e6c349so12262416pjz.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 31 Jul 2021 18:25:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=2oN5ev7h+JpjLhOaXhNyePbduwd4JJjg+oro47/R4l8=;
-        b=dxrOAl2TiuGTJoLDYPyW69ejdb8UPog1a6UT5sNcGsxJWOIhRLQbKhgTNzOIWI0qh0
-         wvdWp0lzAF87lyD7iCO3Kb553O2Db4SQDkvLIsBztbHgTTa3lWIsV4NKDPhODTGUWdHj
-         R47WsELn8lxjFBVOaq/rsCvDsJLtHFCKMWKcgFcWCYMeRa4yEgmPzMvSsVUhwC9ex64D
-         bKitB/8/Bv7Wl5fL+eRBETokG9HQ66RmVIYOL03yoWnxjI8/avRXJJ5XY4wgIOmqIbwL
-         UH1YRXVFKIAakX1XjygACVKQzCYbbKdR6K1Dc00vzG+lRvtFOsDp6JHQTCOgoaoRndbu
-         Et5g==
+        bh=arGtkQ0g29UKgCnwNZYsnGStewJ7S8N1NsnKkc6kHLI=;
+        b=RT8Ycfy5MYVaZaoXvaPjD+WDUzhBBUL0VwKxDIllCEqFf8Ts4UiVkswRlY/RMTKYKp
+         9OfWiabnQZNs2XYKQc2eRciKv68LVU1/8lTrgcX3Q6g0xBqY++7/smhsGL052VgP5s/9
+         tZSQCu+kyZRyMuXl+ZzUToT0sMc00sSwVKDLCMS66uoCcmvrR4seQTq8d+mKvLKwVvZb
+         Yls4zww/nCabX2F4k7Fo1Qhhli7GNCjMn0sYZ4Q/l5/a+NxzfVj4HHWVPRTDI5TwPg5l
+         DqLxIgIsvnmkMh15q1CZ+yBrZi2ZlkY8O7B6QBy8RLBy8IctE/LhrFg6BJH/dQyNzg9q
+         fwBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=2oN5ev7h+JpjLhOaXhNyePbduwd4JJjg+oro47/R4l8=;
-        b=dIJIxmC+PLAI0DC6DuPHE3c0UQAhfUcj7OAbEG73zXrLP3NcPY8OG/89xOd5nJ217h
-         uidScXhwSfwKJ/ICzo0kS0oBtiB4gecPxWhg+RXbrxB4lC66COrFmEb3jZjLMUln4z6q
-         Xw1o9bNxCmxPX9TtIwHN9sLUV6JZzkE9q8wB8D+0g3zxKudrtlDt4xJuRwbdzcQ886db
-         rgXCbbOcAZh9jWiT66+YOcma0k/+2V4hKXoJvomzaZv5UjvUH67JqULK78F2gHizagqq
-         ZW+A+B34XmSOJ65/N4keNaVnSFNt8uM2Gu7h6j70SMPxOwk0VPMJRYzyij+J8fLxjg8l
-         JPrA==
-X-Gm-Message-State: AOAM533uq6LtZHox9fspfsDx7+MSaGi8ofVOhS3JI+/mvOagCr2bqef0
-	amFeGEpoyaH/ZKtyDndjly9s03rn+czOlg==
-X-Google-Smtp-Source: ABdhPJw31MBWVWG5xsG59c4185Mc12PsO2T4X0QizMN/MJajextfwi9hHbUv776y/vl+1+1BdEvefg==
-X-Received: by 2002:a17:90b:1c8e:: with SMTP id oo14mr9310915pjb.108.1627754269261;
-        Sat, 31 Jul 2021 10:57:49 -0700 (PDT)
+        bh=arGtkQ0g29UKgCnwNZYsnGStewJ7S8N1NsnKkc6kHLI=;
+        b=Jeb1wPnKYw0xM44u1TQerDaHcr524dVIGrw6DF/BuEJvLSetYP630OMBxw5qctdtzO
+         VA4RKBMMP6M2jKHC/vxSxnTCm9v6ON/A1G0rm1UbcFlw6p/xHnhCdoMlYyHL5MGNsGIn
+         eluqlTD7SnaoxIvtyd6nKobgq+D3e4FJN54sFnBkVWArOM/IXH0xBKM2JQE2wNk/h00y
+         v252LQC60SKGsY3x+Sarn6aV0kO0ijsmJN7JysgmRKYI2mYP21WxlAETcJnmJH5LLvGY
+         Fo0JM4PNLuz/HgqmUuSTZi7w/hdeWwZzfK4HtOW5nu5N+Abne1y7vc0z3ASoQkEtuZww
+         n0Iw==
+X-Gm-Message-State: AOAM533nE8fhEJyfWIK8xn/DAC/WtuAmE5smQvsm7iM9gEdvhti8wOU0
+	m3bQGedPBVMvuyaAc3xULjxNUgfvTeFy7Q==
+X-Google-Smtp-Source: ABdhPJxf4MOcNnMvO9S7Jykfk66LskNLm/Y6YCFTFW2tXsz9Ipp6YCGr5LHelFK2JP9G9YTPk7LYMg==
+X-Received: by 2002:a17:90a:f493:: with SMTP id bx19mr10353035pjb.224.1627781110621;
+        Sat, 31 Jul 2021 18:25:10 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::d2cb])
-        by smtp.gmail.com with ESMTPSA id t19sm6824613pfg.216.2021.07.31.10.57.48
+        by smtp.gmail.com with ESMTPSA id s36sm8066917pgk.64.2021.07.31.18.25.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 31 Jul 2021 10:57:48 -0700 (PDT)
+        Sat, 31 Jul 2021 18:25:10 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] ntp: Do not use PTHREAD_STACK_MIN on glibc
-Date: Sat, 31 Jul 2021 10:57:46 -0700
-Message-Id: <20210731175746.3669064-1-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 1/2] ntp: Fix make check
+Date: Sat, 31 Jul 2021 18:25:06 -0700
+Message-Id: <20210801012507.2054977-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Int not a compile time constant in glibc 2.34+
+Some test code is not yet ported to build with gcc 11
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...o-not-use-PTHREAD_STACK_MIN-on-glibc.patch | 32 +++++++++++++++++++
+ ...ith-new-compiler-defaults-to-fno-com.patch | 66 +++++++++++++++++++
  .../recipes-support/ntp/ntp_4.2.8p15.bb       |  1 +
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-networking/recipes-support/ntp/ntp/0001-libntp-Do-not-use-PTHREAD_STACK_MIN-on-glibc.patch
+ 2 files changed, 67 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ntp/ntp/0001-test-Fix-build-with-new-compiler-defaults-to-fno-com.patch
 
-diff --git a/meta-networking/recipes-support/ntp/ntp/0001-libntp-Do-not-use-PTHREAD_STACK_MIN-on-glibc.patch b/meta-networking/recipes-support/ntp/ntp/0001-libntp-Do-not-use-PTHREAD_STACK_MIN-on-glibc.patch
+diff --git a/meta-networking/recipes-support/ntp/ntp/0001-test-Fix-build-with-new-compiler-defaults-to-fno-com.patch b/meta-networking/recipes-support/ntp/ntp/0001-test-Fix-build-with-new-compiler-defaults-to-fno-com.patch
 new file mode 100644
-index 0000000000..372938c6d6
+index 0000000000..42e1efd8be
 --- /dev/null
-+++ b/meta-networking/recipes-support/ntp/ntp/0001-libntp-Do-not-use-PTHREAD_STACK_MIN-on-glibc.patch
-@@ -0,0 +1,32 @@
-+From 082a504cfcc046c3d8adaae1164268bc94e5108a Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-support/ntp/ntp/0001-test-Fix-build-with-new-compiler-defaults-to-fno-com.patch
+@@ -0,0 +1,66 @@
++From 778f3cddc20930185a917fa3f8ffe1ef2b0b0ea0 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 31 Jul 2021 10:51:41 -0700
-+Subject: [PATCH] libntp: Do not use PTHREAD_STACK_MIN on glibc
-+
-+In glibc 2.34+ PTHREAD_STACK_MIN is not a compile-time constant which
-+could mean different stack sizes at runtime on different architectures
-+and it also causes compile failure. Default glibc thread stack size
-+or 64Kb set by ntp should be good in glibc these days.
++Date: Sat, 31 Jul 2021 13:27:16 -0700
++Subject: [PATCH] test: Fix build with new compiler defaults to -fno-common
 +
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ libntp/work_thread.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ sntp/tests/run-packetHandling.c | 2 +-
++ sntp/tests/run-t-log.c          | 2 +-
++ sntp/tests/run-utilities.c      | 2 +-
++ tests/libntp/test-libntp.h      | 2 +-
++ 4 files changed, 4 insertions(+), 4 deletions(-)
 +
-+diff --git a/libntp/work_thread.c b/libntp/work_thread.c
-+index 03a5647..3ddd751 100644
-+--- a/libntp/work_thread.c
-++++ b/libntp/work_thread.c
-+@@ -41,7 +41,7 @@
-+ #ifndef THREAD_MINSTACKSIZE
-+ # define THREAD_MINSTACKSIZE	(64U * 1024)
-+ #endif
-+-#ifndef __sun
-++#if !defined(__sun) && !defined(__GLIBC__)
-+ #if defined(PTHREAD_STACK_MIN) && THREAD_MINSTACKSIZE < PTHREAD_STACK_MIN
-+ # undef THREAD_MINSTACKSIZE
-+ # define THREAD_MINSTACKSIZE PTHREAD_STACK_MIN
++diff --git a/sntp/tests/run-packetHandling.c b/sntp/tests/run-packetHandling.c
++index 7790b20..c58380c 100644
++--- a/sntp/tests/run-packetHandling.c
+++++ b/sntp/tests/run-packetHandling.c
++@@ -64,7 +64,7 @@ void resetTest(void)
++   setUp();
++ }
++
++-char const *progname;
+++extern char const *progname;
++
++
++ //=======MAIN=====
++diff --git a/sntp/tests/run-t-log.c b/sntp/tests/run-t-log.c
++index 268bf41..cd835bc 100644
++--- a/sntp/tests/run-t-log.c
+++++ b/sntp/tests/run-t-log.c
++@@ -50,7 +50,7 @@ void resetTest(void)
++   setUp();
++ }
++
++-char const *progname;
+++extern char const *progname;
++
++
++ //=======MAIN=====
++diff --git a/sntp/tests/run-utilities.c b/sntp/tests/run-utilities.c
++index f717882..98d9bf1 100644
++--- a/sntp/tests/run-utilities.c
+++++ b/sntp/tests/run-utilities.c
++@@ -58,7 +58,7 @@ void resetTest(void)
++   setUp();
++ }
++
++-char const *progname;
+++extern char const *progname;
++
++
++ //=======MAIN=====
++diff --git a/tests/libntp/test-libntp.h b/tests/libntp/test-libntp.h
++index 93050b3..60461d8 100644
++--- a/tests/libntp/test-libntp.h
+++++ b/tests/libntp/test-libntp.h
++@@ -5,4 +5,4 @@
++
++ time_t timefunc(time_t *ptr);
++ void settime(int y, int m, int d, int H, int M, int S);
++-time_t nowtime;
+++extern time_t nowtime;
 +--
 +2.32.0
 +
 diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb
-index e668113c50..6129bab261 100644
+index 6129bab261..37f67095c5 100644
 --- a/meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb
 +++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb
-@@ -13,6 +13,7 @@ DEPENDS = "libevent"
- SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.gz \
+@@ -14,6 +14,7 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
             file://ntp-4.2.4_p6-nano.patch \
             file://reproducibility-fixed-path-to-posix-shell.patch \
-+           file://0001-libntp-Do-not-use-PTHREAD_STACK_MIN-on-glibc.patch \
+            file://0001-libntp-Do-not-use-PTHREAD_STACK_MIN-on-glibc.patch \
++           file://0001-test-Fix-build-with-new-compiler-defaults-to-fno-com.patch \
             file://ntpd \
             file://ntp.conf \
             file://ntpdate \
