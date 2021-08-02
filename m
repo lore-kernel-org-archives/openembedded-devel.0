@@ -1,143 +1,55 @@
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web08.8809.1627834788462051056
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web09.14845.1627870306433654207
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 01 Aug 2021 09:19:48 -0700
+ Sun, 01 Aug 2021 19:11:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=D7ET3UBv;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id e2-20020a17090a4a02b029016f3020d867so21441915pjh.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 01 Aug 2021 09:19:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=I0BB18DeHZ4A4TgkFIugImxtWqXrlx3FuYWjsL09FwY=;
-        b=D7ET3UBvGaCXoFBZ/WCUeSfcZsFFJLHEIQLhHuIagR3gDEQ+/5Lwd2e3D4EO06GQri
-         mETboNEPNGaHYPKxViF0FVE1poYI86Ocq+OZ0ku/b1/uRDrW7QWYHFpCWkb575Uv4ZCl
-         /lp6M3NAn9va3dmFVbpmsJWyPCOzNYPkIZBaaJdLVTutCOUMBZKvYspItBteObVBdLFR
-         dfBR1bTZ3SNHMY1zYARnFdF9/C5FHfUjT4uQtrazmQ0L7X5b4qj1aksV7viu6+v5f36G
-         P/Tr0SXsirvFl3p89Yea65sp7y0UU5r0IiH62l9u7hBohiMbbUrHYPrDGkRygJCyOsLu
-         vPyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=I0BB18DeHZ4A4TgkFIugImxtWqXrlx3FuYWjsL09FwY=;
-        b=AiaWpX1uWYlQJGsS7aO5IOYMjuwI8EcDA5//MCN0NyP4oLKcGX4LQYK9G0ZmuAL0P/
-         jGLWPyirxqUuRpyhUfpSpv+3vt302987w1sHtsp0rSWi8VwdYEmBrMWgG7M6etz5HWx5
-         znppCRCZCZ5oD2sc+ThdZfs9o5DIRpB3z3sKe6DzEfkQm226TdVDbda787d00otGY1as
-         oE+4g+8TmidR0QOsXHVA0BtolDQ5sXZC9xSg/tzWHxEtqhdz6TfJ06NzIG9C3fcHmENu
-         ofTGyBdrdtINBqo7LqvVxXt/+7ELThdKFaAJCEjG7EqsdWdOQTWupy1za9+qc2kQxmAr
-         BQ3Q==
-X-Gm-Message-State: AOAM533yx7huugbz6zf+/uNM8k494u2HpxKw4UyaiY+9piqbPJaPvN/0
-	WpgeYp/J+mKKh8wcqf5k9baQInUT8YmEVQ==
-X-Google-Smtp-Source: ABdhPJz5Z+lIbAyPj9sxoixueHq6+suW2mwrfXh8O8AHo2N8oMVvFCTpypCWUQBsRRBokzIdBPURsw==
-X-Received: by 2002:a63:5c04:: with SMTP id q4mr3463053pgb.127.1627834787679;
-        Sun, 01 Aug 2021 09:19:47 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::d2cb])
-        by smtp.gmail.com with ESMTPSA id b19sm5813291pfp.5.2021.08.01.09.19.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 01 Aug 2021 09:19:47 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] lvm2: Update to 2.03.12 release
-Date: Sun,  1 Aug 2021 09:19:44 -0700
-Message-Id: <20210801161944.3087568-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.32.0
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: changqing.li@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 1722BiCq029318
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 1 Aug 2021 19:11:45 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Sun, 1 Aug 2021 19:11:44 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Sun, 1 Aug 2021 19:11:43 -0700
+From: "Changqing Li" <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-webserver][PATCH] apache2: upgrade 2.4.46 -> 2.4.48
+Date: Mon, 2 Aug 2021 10:09:22 +0800
+Message-ID: <20210802020922.14691-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Detailed changelog [1]
+From: Changqing Li <changqing.li@windriver.com>
 
-[1] https://github.com/lvmteam/lvm2/releases/tag/v2_03_12
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- .../lvm2/files/0005-do-not-build-manual.patch | 19 ++++++-------------
- ...per_2.03.11.bb => libdevmapper_2.03.12.bb} |  0
- meta-oe/recipes-support/lvm2/lvm2.inc         |  2 +-
- .../lvm2/{lvm2_2.03.11.bb => lvm2_2.03.12.bb} |  0
- 4 files changed, 7 insertions(+), 14 deletions(-)
- rename meta-oe/recipes-support/lvm2/{libdevmapper_2.03.11.bb => libdevmapper_2.03.12.bb} (100%)
- rename meta-oe/recipes-support/lvm2/{lvm2_2.03.11.bb => lvm2_2.03.12.bb} (100%)
+ .../apache2/{apache2_2.4.46.bb => apache2_2.4.48.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.46.bb => apache2_2.4.48.bb} (98%)
 
-diff --git a/meta-oe/recipes-support/lvm2/files/0005-do-not-build-manual.patch b/meta-oe/recipes-support/lvm2/files/0005-do-not-build-manual.patch
-index 7117d99a39..9e1ec71ec8 100644
---- a/meta-oe/recipes-support/lvm2/files/0005-do-not-build-manual.patch
-+++ b/meta-oe/recipes-support/lvm2/files/0005-do-not-build-manual.patch
-@@ -24,16 +24,14 @@ Signed-off-by: Kai Kang <kai.kang@windriver.com>
-  configure.ac | 1 -
-  2 files changed, 3 insertions(+), 4 deletions(-)
-
--diff --git a/Makefile.in b/Makefile.in
--index 6a1a990..80cba91 100644
- --- a/Makefile.in
- +++ b/Makefile.in
- @@ -18,7 +18,7 @@ top_builddir = @top_builddir@
-  abs_top_builddir = @abs_top_builddir@
-  abs_top_srcdir = @abs_top_srcdir@
-
---SUBDIRS = conf daemons include lib libdaemon libdm man scripts tools
--+SUBDIRS = conf daemons include lib libdaemon libdm scripts tools
-+-SUBDIRS = libdm conf daemons include lib libdaemon man scripts tools
-++SUBDIRS = libdm conf daemons include lib libdaemon scripts tools
-
-  ifeq ("@UDEV_RULES@", "yes")
-    SUBDIRS += udev
-@@ -46,20 +44,18 @@ index 6a1a990..80cba91 100644
-      libdaemon lib tools daemons libdm \
-      udev po
-  tools.distclean: test.distclean
--@@ -65,7 +65,7 @@ libdm.device-mapper: include.device-mapper
-+@@ -59,7 +59,7 @@ unit-test  run-unit-test: test
-+
-  daemons.device-mapper: libdm.device-mapper
-  tools.device-mapper: libdm.device-mapper
-- scripts.device-mapper: include.device-mapper
- -device-mapper: tools.device-mapper daemons.device-mapper man.device-mapper
- +device-mapper: tools.device-mapper daemons.device-mapper
-+ device_mapper: device-mapper
-
-  ifeq ("@INTL@", "yes")
-- lib.pofile: include.pofile
--diff --git a/configure.ac b/configure.ac
--index 7fd0561..4154dc0 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -1812,7 +1812,6 @@ libdaemon/server/Makefile
-+@@ -1941,7 +1941,6 @@ libdaemon/server/Makefile
-  libdm/Makefile
-  libdm/dm-tools/Makefile
-  libdm/libdevmapper.pc
-@@ -67,6 +63,3 @@ index 7fd0561..4154dc0 100644
-  po/Makefile
-  scripts/lvm2-pvscan.service
-  scripts/blkdeactivate.sh
----
--2.7.4
--
-diff --git a/meta-oe/recipes-support/lvm2/libdevmapper_2.03.11.bb b/meta-oe/recipes-support/lvm2/libdevmapper_2.03.12.bb
-similarity index 100%
-rename from meta-oe/recipes-support/lvm2/libdevmapper_2.03.11.bb
-rename to meta-oe/recipes-support/lvm2/libdevmapper_2.03.12.bb
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index ccb4f7ac14..6f73519283 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -18,7 +18,7 @@ SRC_URI = "git://sourceware.org/git/lvm2.git;branch=main \
-            file://reproducible-build.patch \
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.46.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.48.bb
+similarity index 98%
+rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.46.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.48.bb
+index e84f7eaa2..3a851167c 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.46.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.48.bb
+@@ -26,8 +26,8 @@ SRC_URI_append_class-target = " \
             "
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
+-SRC_URI[md5sum] = "7d661ea5e736dac5e2761d9f49fe8361"
+-SRC_URI[sha256sum] = "740eddf6e1c641992b22359cabc66e6325868c3c5e2e3f98faf349b61ecf41ea"
++SRC_URI[md5sum] = "a7088cec171b0d00bf43394ce64d3909"
++SRC_URI[sha256sum] = "1bc826e7b2e88108c7e4bf43c026636f77a41d849cfb667aa7b5c0b86dbf966c"
+ 
+ S = "${WORKDIR}/httpd-${PV}"
+ 
+-- 
+2.17.1
 
--SRCREV = "3e8bd8d1bd70691f09a170785836aeb4f83154e6"
-+SRCREV = "01b05cf51dd547354b4ad70e7f8f4ff7ff0bb152"
- S = "${WORKDIR}/git"
-
- inherit autotools-brokensep pkgconfig systemd
-diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.03.11.bb b/meta-oe/recipes-support/lvm2/lvm2_2.03.12.bb
-similarity index 100%
-rename from meta-oe/recipes-support/lvm2/lvm2_2.03.11.bb
-rename to meta-oe/recipes-support/lvm2/lvm2_2.03.12.bb
---
-2.32.0
