@@ -1,59 +1,59 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.5])
- by mx.groups.io with SMTP id smtpd.web12.15504.1627875482837350123
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.3])
+ by mx.groups.io with SMTP id smtpd.web10.15616.1627875512219021494
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 01 Aug 2021 20:38:03 -0700
+ Sun, 01 Aug 2021 20:38:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=OpaB2azJ;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.5, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=yxL6KP5J;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.3, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1627875481; i=@fujitsu.com;
-	bh=lo0P+hUJwjkoMSjMo4j5j7y6LJnbb3WZyc1/1H3jmjc=;
+	s=170520fj; t=1627875509; i=@fujitsu.com;
+	bh=uwuyi6MuvfEP8rtskBC4nQ/UI8qPCIl+gI3rhX/I4GQ=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=OpaB2azJ3MqhMEEex/pgbWse6IeqKJP2//6dBUqVjd9I8Re+DLXRch5yoVqL5fGxD
-	 6ypgzm3e5SvMJQXphP9otSPjfuwUi6BhOegjSw0rK3v2cY0gjhC1+0r3cRrtl3C3vu
-	 lHhjYAZx+J6BPzsvMYSwjjVvZ9Q35tEpmTFMfzzGdgOmHMY31/aFOGySfsnWqF01b9
-	 7ijGhsyhOqx0c1/mZgBtyqDcii/NBReY2KEZYrjwnX8FgDyd4v0Idm45TFYZJJv4cp
-	 XL0wk3A0ZOZFvO6WwrKYGaYx6ccvtBJZOGVIbEP/50OmBOP/tVoV9Qn1KBcZFCFj6r
-	 sU1Lmb3vcBmSw==
-Received: from [100.112.192.148] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-5.bemta.az-a.eu-west-1.aws.symcld.net id 38/7D-07317-89867016; Mon, 02 Aug 2021 03:38:00 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+EI0Z2ewZ5
-  o8GyxpcXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvHg4AWmgg+cFSfXr2RpYGzj7GLk4hASmMUk
-  sfHQbjYI5zijxNKVV1i6GDk52AR0JDpedIPZIgL6Ektn72EGsYUFvCSOnH0MFmcRUJG4tqCBF
-  cTmFXCXuPirnxHElhBQkJjy8D0zRFxQ4uTMJ2D1zAISEgdfvGCGqFGU2L7zDAuEXSHx+vAl5g
-  mMPLOQtMxC0rKAkWkVo0VSUWZ6RkluYmaOrqGBga6hoZGuoSUQG5npJVbpJuqlluqWpxaX6Br
-  qJZYX6xVX5ibnpOjlpZZsYgQGUkrBgbodjA9ef9A7xCjJwaQkyhvSxpIoxJeUn1KZkVicEV9U
-  mpNafIhRhoNDSYLXPJ09UUiwKDU9tSItMwcY1DBpCQ4eJRHemWlAad7igsTc4sx0iNQpRkUpc
-  d6pIH0CIImM0jy4NlgkXWKUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzDsfZDxPZl4J3PRXQI
-  uZgBZPzWAFWVySiJCSamCa0rJffOkBCd/4Yrd0t8CI1dorK+Y7HxSOnnb4Fu9+V/O3O36kR0Y
-  k3WxQ0fnsqPBX6XTZtNxIydUrNnZ87mC80qfeUPDjAduc+5XR4ddyJvDyvlRUnNXXm5GVr/H2
-  7IGIh4FfPjsczZZu1Nmdt/3jt6NRTFO/vHMVvrK84/fk/o4Lx+2anrSxb9zetHHnY8aHbi8nr
-  imW1UqamR9y2ens5/McxbJb5t1RTFAVKOJ03M9c3/PR1FHEsJb1o6Hi27sn7SyWSC878eDaqn
-  ymwwp/zgQ9/Pfy7p3vC8zWs1Q+nLlKeOcc+x/rP9/i87Q7o/NUwikj9UmU9pNyo/Q9s5exhuw
-  vPCSgzH5cutlUpeG1EktxRqKhFnNRcSIAxEMDbh8DAAA=
+	b=yxL6KP5J9zqO5BTCkVylWaiKJW1VY8GLsJyQ0TXbDW/hTLlS0y5oy7JZfIxisSKbj
+	 B8mAE9j1gVUcc+IvIiDD0cOSF3pMiQBhtPEkp/+NdJcGNpiKCh16p2vOIbA6xX2Qkp
+	 4dVdmannr6tvfg8WDE3YqK+/Tmh1CVheOxgYnG6kD4SkGUfDroZhkzc743tF5YQ6uF
+	 sbjZxuCg2T3ur6gyXYTrKj72Ax0I2BY8wnmb4vi0Octbr5zza+2+XaYHLzsRwMamYj
+	 nvxcXy6JFVwEnmYv+1ZQcvdzrQ3q/4wkK8W31Q+HiXKgpiM4KgRJjyspyb3alHNu2w
+	 Zk80tpKsRly9w==
+Received: from [100.113.1.116] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta.az-a.eu-central-1.aws.symcld.net id B1/78-13315-5B867016; Mon, 02 Aug 2021 03:38:29 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+EI0d2SwZ5
+  o8OKMmcXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnHq2h+mgqe8FT+mH2FtYDzB08XIxSEkMItJ
+  YsK1pYwQznFGifM7LzJ1MXJysAnoSHS86GYBsUUE9CWWzt7DDGILC3hJTDyxgRXEZhFQkTjT3
+  cLexcjBwSvgLjFhgxVIWEJAQWLKw/dg5bwCghInZz4BG8MsICFx8MULZogaRYntO8+wQNgVEq
+  8PX2KewMgzC0nLLCQtCxiZVjFaJBVlpmeU5CZm5ugaGhjoGhoa6xrpmhrqJVbpJuqlluomp+a
+  VFCUCJfUSy4v1iitzk3NS9PJSSzYxAsMopZDJeAfjtdcf9A4xSnIwKYnyhrSxJArxJeWnVGYk
+  FmfEF5XmpBYfYpTh4FCS4DVPZ08UEixKTU+tSMvMAYY0TFqCg0dJhHdmGlCat7ggMbc4Mx0id
+  YpRUUqcdypInwBIIqM0D64NFkeXGGWlhHkZGRgYhHgKUotyM0tQ5V8xinMwKgnzzgcZz5OZVw
+  I3/RXQYiagxVMzWEEWlyQipKQamLSv/03coCfxPLjo+Y5OiUSL0NCzp1RNGlI+PPrzUHjLtZi
+  1Ivkyx2d/02RxvZ94s/uRgado9JKEQ3qTWPl3caVpdtXHtPxR0DibK7a86OE/9pPeDjzJK/Z/
+  drjofvzxBrvF/7cmSX5c9efDo5xb3f5+7Mb2Tsu0Lx+fxmuylvHT2ku/l4Zm7DJyfbSpVnqbW
+  /Pef0w1wV2TMxbueJEwcQNbIPvhracWsdh1uOwJnH+nqPM9W4piltJ2lvTgnW1L5vXm7fn4wX
+  rJ/RkXv+kekVnzwGbyh2gnToV3R5f9XvfgU+qa+UKHc5KWFS68WdJTcsD1wJIyYe4lLxMesfy
+  4dvnazMSNbKreIdbeZ2JfzJZQYinOSDTUYi4qTgQAa0sZKx4DAAA=
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-16.tower-265.messagelabs.com!1627875479!285067!1
+X-Msg-Ref: server-23.tower-232.messagelabs.com!1627875508!274680!1
 X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 26017 invoked from network); 2 Aug 2021 03:37:59 -0000
+Received: (qmail 4998 invoked from network); 2 Aug 2021 03:38:28 -0000
 Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-16.tower-265.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 2 Aug 2021 03:37:59 -0000
+  by server-23.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 2 Aug 2021 03:38:28 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1723bxd1011681
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1723cSsP011785
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 2 Aug 2021 04:37:59 +0100
+	for <openembedded-devel@lists.openembedded.org>; Mon, 2 Aug 2021 04:38:28 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Mon, 2 Aug 2021 04:37:58 +0100
+ (TLS) id 15.0.1497.18; Mon, 2 Aug 2021 04:38:26 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-gmqtt: upgrade 0.6.9 -> 0.6.10
-Date: Mon, 2 Aug 2021 11:37:50 +0800
-Message-ID: <1627875470-34203-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-graphviz: upgrade 0.16 -> 0.17
+Date: Mon, 2 Aug 2021 11:38:20 +0800
+Message-ID: <1627875500-34256-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -61,30 +61,40 @@ X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-Fix unsubscribe and heap storage behavior
-Fair waiting for the heap based storage is empty
-Fix unsubscribe cleans subscriptions storage
-Fix tests
+Version 0.17
+------------
+Drop Python 2 support. Tag Python 3.10 support.
+Migrate CI to GitHub actions. Add ``pypy3`` to matrix.
+Tests: implement ``--skip-exe`` via custom ``pytest`` marker.
+Documentation: point Anaconda users to ``conda-forge/python-graphviz``.
+Move type hints from docstrings to type annotations. Improve doctests.
+Examples: standardize import convention and modernize.
+Re-render example notebooks with Graphviz 2.46.1.
+
+-License-Update: Copyright year updated to 2021.
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../python/{python3-gmqtt_0.6.9.bb => python3-gmqtt_0.6.10.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-gmqtt_0.6.9.bb => python3-gmqtt_0.6.10.bb} (81%)
+ .../{python3-graphviz_0.16.bb => python3-graphviz_0.17.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-graphviz_0.16.bb => python3-graphviz_0.17.bb} (61%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-gmqtt_0.6.9.bb b/meta-python/recipes-devtools/python/python3-gmqtt_0.6.10.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-gmqtt_0.6.9.bb
-rename to meta-python/recipes-devtools/python/python3-gmqtt_0.6.10.bb
-index 73c0ae0acf..8ecb691f82 100644
---- a/meta-python/recipes-devtools/python/python3-gmqtt_0.6.9.bb
-+++ b/meta-python/recipes-devtools/python/python3-gmqtt_0.6.10.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/wialon/gmqtt"
+diff --git a/meta-python/recipes-devtools/python/python3-graphviz_0.16.bb b/meta-python/recipes-devtools/python/python3-graphviz_0.17.bb
+similarity index 61%
+rename from meta-python/recipes-devtools/python/python3-graphviz_0.16.bb
+rename to meta-python/recipes-devtools/python/python3-graphviz_0.17.bb
+index 1af657098b..306ada89cd 100644
+--- a/meta-python/recipes-devtools/python/python3-graphviz_0.16.bb
++++ b/meta-python/recipes-devtools/python/python3-graphviz_0.17.bb
+@@ -1,9 +1,9 @@
+ DESCRIPTION = "Graphviz protocol implementation"
+ HOMEPAGE = "https://graphviz.readthedocs.io/en/stable/"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=903f1792621a3b35ee546da75d139177"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f7831c564aeff14e68aa4ff7a93dc89f"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=87cd8818b7e63c6a9c580034e80d7521"
  
--SRC_URI[sha256sum] = "0e98a964393834e724c93b5dce9524c9f1255c338c0d972188794f54c6559f04"
-+SRC_URI[sha256sum] = "7ab7a226ab13d75f7bc34a1422da73658ce4cac86708bf55f92daf7c5f44165a"
+-SRC_URI[sha256sum] = "d2d25af1c199cad567ce4806f0449cb74eb30cf451fd7597251e1da099ac6e57"
++SRC_URI[sha256sum] = "ef6e2c5deb9cdcc0c7eece1d89625fd07b0f2208ea2bcb483520907ddf8b4e12"
  
  inherit pypi setuptools3
  
