@@ -1,84 +1,374 @@
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
- by mx.groups.io with SMTP id smtpd.web12.2984.1627934712395768157
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.web10.1573.1627942621301197885
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Aug 2021 13:05:12 -0700
+ Mon, 02 Aug 2021 15:17:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=OZlllSbx;
- spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f182.google.com with SMTP id q2so20942199plr.11
-        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Aug 2021 13:05:12 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=i/3o4lIi;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: b.hutchman@gmail.com)
+Received: by mail-pl1-f171.google.com with SMTP id z3so20018620plg.8
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Aug 2021 15:17:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:references:from:organization:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=P/U065vKyI8ubiROxu2WyrCl99/aOE6F3rE0pLEnSvA=;
-        b=OZlllSbxgXi+pPCqgRLXWKF5kpKcU8p+2TjKuZluZoL/ta63N3OLlaMvANIC30W2H3
-         U8L2Nq3fRrXJH7AkXSK3f1jeDEiaeH+oc9CU//rYBrwi7sD3/Hi6mGIBYkSkxpBD94eU
-         ElbbzVIT/T55ud09sI3ZDxPv4ugyb2XCYMAIL2agnCrGXwY1rPpiuk1hX/MfNucc0ltb
-         tg3+sZpOrKRob8oc62V3CL1PjYibYK+3USW3idwWRHEf66uwPMsKJDaoOnUnc8U0u3aN
-         ggA32xtTkary73010qVJ9MsSalFxWHhWpSnIqdUTcF6/k1m8o78awDqp3No46qnVdh8k
-         zA/w==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=CH+9leg9yuKjDS+YRKNzkdng/h3I2Z0vd/C93NloM4c=;
+        b=i/3o4lIio7jYbmtz/48RZg3g/g4sALrW5Jmd+3EnGsvS91VfWjJ1we6AYuDCm1smTD
+         K1HV+taeWruWRnu/gwagnJWZWFobHvL9PAA3V3+KTQ4QGoCZTbm+MqfnVogbo3bdq/0P
+         uoKDU6yRwK/YNVShsV2L/zKpERHXOXj/qFGTE5eQNl4YfdUEHI5PeOHQGgTKQFYX+KKE
+         wsJ2hiOuIXcZ0/vEVqpK3IJ5o611GpDI6t+5+Fqc871swU4NAhJBuAnNFwMaFuhmE5aP
+         O6goWOFylKmBoIea8Dnu/fo51tfabH13aHQqlg48fZlwHQfMJjfP3Mzk/U6D+lD8WHEo
+         YoFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=P/U065vKyI8ubiROxu2WyrCl99/aOE6F3rE0pLEnSvA=;
-        b=bSZs0E6MzSOmShQWPvl6TWm4WX+45GPKMLnLvL/qDo8OtPE2v9q1ddw5dkqsk/tO5l
-         PpscAyaWDqN9nOF634/k22uzCpsuUoMRNB48xyyLggpBUQD4BAzSMjGDRxSwx+Ow/dm4
-         zYNnLE4/A4Q5jV0UDRR3LldVeepSRnaWgE6K8PJAfVCs7N9LowJ/Es1aQXTOwwUQzqn3
-         HmolRdl1XV9DG5xtk3NAyx2ENPaVt15HxxqGQdE4ctbqHq2VgcDcieraGI28l2nvP/O3
-         fFGe67dEGXBFY9JfC3eik7CiwL4hzSJNvkUqrw5xvxlY1XdWfs8S0GP1t8r+wKD8Vuyh
-         ygjQ==
-X-Gm-Message-State: AOAM533KnlslgfQUg8BmsF3AwgawQeEn0I29iPiVtISi+0orYhtXgoBh
-	Uo1/GOH2d3VlVEreCTogrvyqx2mNT/Iupg==
-X-Google-Smtp-Source: ABdhPJxaMFvngiaAgH22YucF7J2T2q6CH0C3jHVsq+S4BMlho58p47QXwPc3dcWLvA4KX2ZN1AFd3Q==
-X-Received: by 2002:a05:6a00:2150:b029:399:711c:826f with SMTP id o16-20020a056a002150b0290399711c826fmr18196774pfk.14.1627934711680;
-        Mon, 02 Aug 2021 13:05:11 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPv6:2601:646:9200:a0f0:61bd:9658:157a:c74c? ([2601:646:9200:a0f0:61bd:9658:157a:c74c])
-        by smtp.gmail.com with ESMTPSA id 37sm14223263pgt.28.2021.08.02.13.05.10
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 02 Aug 2021 13:05:11 -0700 (PDT)
-Subject: Re: [oe] Any way to make cryptsetup smaller? I have a small 32M NOR flash and 11M SquashFS rootfs.
-To: Brian Hutchinson <b.hutchman@gmail.com>,
- openembedded-devel@lists.openembedded.org
-References: <CAFZh4h8HhO5EMV8k4y6a8pMFOMO9Wv68zAO+Zy6KJSEUFePRFw@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <6c1da27d-dc2b-7a32-ad5d-cade68a796f8@gmail.com>
-Date: Mon, 2 Aug 2021 13:05:10 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.12.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=CH+9leg9yuKjDS+YRKNzkdng/h3I2Z0vd/C93NloM4c=;
+        b=eblG8QBG3o+gnFsRx/tZmnTOZuKF+smOkeoqhNd7FhiAHhahV8/sNmLk9ukHbafwfb
+         KOr5Izsvru6pZbdLokujKO0QDUuj0cVxPMkFXhYM7GFcbrXZyfgY8bGYyWi96qBI6EBB
+         yZbFUF8KTd+Wvm2yz/2kQt9eF+lvrUyYYZJQzka09J1BrZPhiESHeJNLuNeqtRf95ksj
+         bVdAKoXkVu4Hieg7/ntp/WfRO3OKfG9dHZE6flgKfQS8cvVaIuoXBOP9/g0+YtUMLkGC
+         dnZamdtec2f5tC2NjJjrQSAKLR0D/t7LiMBJ4opC5B4ykMG73y9wUN5r9cfFILwohNr9
+         NbsQ==
+X-Gm-Message-State: AOAM531XDHpjmuZeJEPnLlIIRY8lFXcH1Df8Bs+blimFiF17apqrXmhk
+	7194TSnfNsVV/q2FVhKhja0PdbK6ugfqeZI5drI=
+X-Google-Smtp-Source: ABdhPJxvhSE6x9st9tHdLH+jeW4qe/VrVkDrurooqNkClcVpidM9GDup9Cnl/7cuDyiEOFmdYTICrb7N8/szD+IucTk=
+X-Received: by 2002:a65:4307:: with SMTP id j7mr2989755pgq.387.1627942620743;
+ Mon, 02 Aug 2021 15:17:00 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAFZh4h8HhO5EMV8k4y6a8pMFOMO9Wv68zAO+Zy6KJSEUFePRFw@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+References: <CAFZh4h8HhO5EMV8k4y6a8pMFOMO9Wv68zAO+Zy6KJSEUFePRFw@mail.gmail.com>
+ <6c1da27d-dc2b-7a32-ad5d-cade68a796f8@gmail.com>
+In-Reply-To: <6c1da27d-dc2b-7a32-ad5d-cade68a796f8@gmail.com>
+From: "Brian Hutchinson" <b.hutchman@gmail.com>
+Date: Mon, 2 Aug 2021 18:16:49 -0400
+Message-ID: <CAFZh4h8r3XOuNWA-3h9yraUZ+U7PLnPd7hxDLcyEQGiVM6EqrA@mail.gmail.com>
+Subject: Re: [oe] Any way to make cryptsetup smaller? I have a small 32M NOR flash and 11M SquashFS rootfs.
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000009fcd3605c89aed8f"
 
+--0000000000009fcd3605c89aed8f
+Content-Type: text/plain; charset="UTF-8"
 
+Hey Khem,
 
-On 8/2/21 11:07 AM, Brian Hutchinson wrote:
-> Hi,
-> 
-> I have a 32M NOR that I boot from and it uses a 11M SquashFS rootfs made 
-> from core-image-minimal.  I'd like to add cryptsetup but doing so blows 
-> my SquashFS up to 35M.
-> 
-> I've looked at the recipe and package config and I see things like 
-> --enable-static and other settings that look doubtful that I can build 
-> cryptsetup package and get it to fit my size constraints.
-> 
-> All I'm wanting to do is encrypt a filesytem and mount it as ext4.
-> 
+On Mon, Aug 2, 2021 at 4:05 PM Khem Raj <raj.khem@gmail.com> wrote:
 
-Can you list all the direct/indirect dependencies that cryptsetup is 
-bringing in ? perhaps buildhistory will be handy to get that information
+>
+>
+> On 8/2/21 11:07 AM, Brian Hutchinson wrote:
+> > Hi,
+> >
+> > I have a 32M NOR that I boot from and it uses a 11M SquashFS rootfs made
+> > from core-image-minimal.  I'd like to add cryptsetup but doing so blows
+> > my SquashFS up to 35M.
+> >
+> > I've looked at the recipe and package config and I see things like
+> > --enable-static and other settings that look doubtful that I can build
+> > cryptsetup package and get it to fit my size constraints.
+> >
+> > All I'm wanting to do is encrypt a filesytem and mount it as ext4.
+> >
+>
+> Can you list all the direct/indirect dependencies that cryptsetup is
+> bringing in ? perhaps buildhistory will be handy to get that information
+>
+> You mean something like this:
 
-> Regards,
-> 
-> Brian
-> 
-> 
-> 
-> 
+bitbake -g cryptsetup && cat pn-buildlist | grep -ve "native" | sort | uniq
+WARNING: You have included the meta-virtualization layer, but
+'virtualization' has not been enabled in your DISTRO_FEATURES. Some
+bbappend files may not take effect. See the meta-virtualization README for
+details on enabling virtualization support.
+Loading cache: 100%
+|###############################################################################################################################################################################################################################################|
+Time: 0:00:00
+Loaded 5177 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+NOTE: PN build list saved to 'pn-buildlist'
+NOTE: Task dependencies saved to 'task-depends.dot'
+
+Summary: There was 1 WARNING message shown.
+acl
+attr
+autoconf
+autoconf-archive
+automake
+base-files
+base-passwd
+bash
+bash-completion
+bc
+binutils
+binutils-cross-aarch64
+bison
+boost
+btrfs-tools
+bzip2
+ca-certificates
+coreutils
+cryptsetup
+db
+dbus
+dbus-test
+depmodwrapper-cross
+diffutils
+e2fsprogs
+elfutils
+eudev
+expat
+findutils
+flex
+gawk
+gcc
+gcc-cross-aarch64
+gcc-runtime
+gcc-source-9.3.0
+gdbm
+gettext
+glib-2.0
+glibc
+glibc-locale
+gmp
+gnome-desktop-testing
+gnu-config
+grep
+icu
+initscripts
+iproute2
+iptables
+json-c
+kmod
+libaio
+libcap
+libcap-ng
+libcroco
+libdevmapper
+liberror-perl
+libffi
+libgcc
+libgcc-initial
+libmnl
+libmodule-build-perl
+libmpc
+libnsl2
+libpcre
+libtirpc
+libtool
+libtool-cross
+libxcrypt
+libxml2
+linux-fslc-imx
+linux-libc-headers
+lvm2
+lzo
+m4
+make
+mdadm
+mpfr
+ncurses
+openssl
+opkg-utils
+packagegroup-core-buildessential
+perl
+pkgconfig
+popt
+procps
+ptest-runner
+python3
+readline
+sed
+shadow
+shadow-securetty
+shadow-sysroot
+shared-mime-info
+socat
+sqlite3
+tcp-wrappers
+thin-provisioning-tools
+tzdata
+unzip
+update-rc.d
+util-linux
+which
+xz
+zlib
+
+Looks like everything but the kitchen sink.
+
+Thanks,
+
+Brian
+
+--0000000000009fcd3605c89aed8f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">Hey Khem,<br></div><br><div class=3D"gmai=
+l_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Aug 2, 2021 at 4:05 =
+PM Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com">raj.khem@gmail.com</a=
+>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px=
+ 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><br=
+>
+<br>
+On 8/2/21 11:07 AM, Brian Hutchinson wrote:<br>
+&gt; Hi,<br>
+&gt; <br>
+&gt; I have a 32M NOR that I boot from and it uses a 11M SquashFS rootfs ma=
+de <br>
+&gt; from core-image-minimal.=C2=A0 I&#39;d like to add cryptsetup but doin=
+g so blows <br>
+&gt; my SquashFS up to 35M.<br>
+&gt; <br>
+&gt; I&#39;ve looked at the recipe and package config and I see things like=
+ <br>
+&gt; --enable-static and other settings that look doubtful that I can build=
+ <br>
+&gt; cryptsetup package and get it to fit my size constraints.<br>
+&gt; <br>
+&gt; All I&#39;m wanting to do is encrypt a filesytem and mount it as ext4.=
+<br>
+&gt; <br>
+<br>
+Can you list all the direct/indirect dependencies that cryptsetup is <br>
+bringing in ? perhaps buildhistory will be handy to get that information<br=
+>
+<br></blockquote><div>You mean something like this:</div><div><br></div><di=
+v><span style=3D"font-family:monospace"><span style=3D"color:rgb(0,0,0);bac=
+kground-color:rgb(255,255,255)">bitbake -g cryptsetup &amp;&amp; cat pn-bui=
+ldlist | grep -ve &quot;native&quot; | sort | uniq
+</span><br><span style=3D"font-weight:bold;color:rgb(255,255,84);background=
+-color:rgb(255,255,255)">WARNING</span><span style=3D"color:rgb(0,0,0);back=
+ground-color:rgb(255,255,255)">: </span><span style=3D"color:rgb(178,104,24=
+);background-color:rgb(255,255,255)">You have included the meta-virtualizat=
+ion layer, but &#39;virtualization&#39; has not been enabled in your DISTRO=
+_FEATURES. Some bbappend files may not take effect. See the meta-virtualiza=
+tion README for details on enabling virtualization support.</span><span sty=
+le=3D"color:rgb(0,0,0);background-color:rgb(255,255,255)">
+</span><br>Loading cache: 100% |###########################################=
+###########################################################################=
+###########################################################################=
+##############################################| Time: 0:00:00
+<br>Loaded 5177 entries from dependency cache.
+<br><span style=3D"font-weight:bold;color:rgb(0,0,0);background-color:rgb(2=
+55,255,255)">NOTE</span><span style=3D"color:rgb(0,0,0);background-color:rg=
+b(255,255,255)">: Resolving any missing task queue dependencies
+</span><br><span style=3D"font-weight:bold;color:rgb(0,0,0);background-colo=
+r:rgb(255,255,255)">NOTE</span><span style=3D"color:rgb(0,0,0);background-c=
+olor:rgb(255,255,255)">: PN build list saved to &#39;pn-buildlist&#39;
+</span><br><span style=3D"font-weight:bold;color:rgb(0,0,0);background-colo=
+r:rgb(255,255,255)">NOTE</span><span style=3D"color:rgb(0,0,0);background-c=
+olor:rgb(255,255,255)">: Task dependencies saved to &#39;task-depends.dot&#=
+39;
+</span><br>
+<br>Summary: There was 1 WARNING message shown.
+<br>acl
+<br>attr
+<br>autoconf
+<br>autoconf-archive
+<br>automake
+<br>base-files
+<br>base-passwd
+<br>bash
+<br>bash-completion
+<br>bc
+<br>binutils
+<br>binutils-cross-aarch64
+<br>bison
+<br>boost
+<br>btrfs-tools
+<br>bzip2
+<br>ca-certificates
+<br>coreutils
+<br>cryptsetup
+<br>db
+<br>dbus
+<br>dbus-test
+<br>depmodwrapper-cross
+<br>diffutils
+<br>e2fsprogs
+<br>elfutils
+<br>eudev
+<br>expat
+<br>findutils
+<br>flex
+<br>gawk
+<br>gcc
+<br>gcc-cross-aarch64
+<br>gcc-runtime
+<br>gcc-source-9.3.0
+<br>gdbm
+<br>gettext
+<br>glib-2.0
+<br>glibc
+<br>glibc-locale
+<br>gmp
+<br>gnome-desktop-testing
+<br>gnu-config
+<br>grep
+<br>icu
+<br>initscripts
+<br>iproute2
+<br>iptables
+<br>json-c
+<br>kmod
+<br>libaio
+<br>libcap
+<br>libcap-ng
+<br>libcroco
+<br>libdevmapper
+<br>liberror-perl
+<br>libffi
+<br>libgcc
+<br>libgcc-initial
+<br>libmnl
+<br>libmodule-build-perl
+<br>libmpc
+<br>libnsl2
+<br>libpcre
+<br>libtirpc
+<br>libtool
+<br>libtool-cross
+<br>libxcrypt
+<br>libxml2
+<br>linux-fslc-imx
+<br>linux-libc-headers
+<br>lvm2
+<br>lzo
+<br>m4
+<br>make
+<br>mdadm
+<br>mpfr
+<br>ncurses
+<br>openssl
+<br>opkg-utils
+<br>packagegroup-core-buildessential
+<br>perl
+<br>pkgconfig
+<br>popt
+<br>procps
+<br>ptest-runner
+<br>python3
+<br>readline
+<br>sed
+<br>shadow
+<br>shadow-securetty
+<br>shadow-sysroot
+<br>shared-mime-info
+<br>socat
+<br>sqlite3
+<br>tcp-wrappers
+<br>thin-provisioning-tools
+<br>tzdata
+<br>unzip
+<br>update-rc.d
+<br>util-linux
+<br>which
+<br>xz
+<br>zlib<br></span></div><div><span style=3D"font-family:monospace"><br></s=
+pan></div><div><span style=3D"font-family:monospace">Looks like everything =
+but the kitchen sink.</span></div><div><span style=3D"font-family:monospace=
+"><br></span></div><div><span style=3D"font-family:monospace">Thanks,</span=
+></div><div><span style=3D"font-family:monospace"><br></span></div><div><sp=
+an style=3D"font-family:monospace">Brian<br></span> </div></div></div>
+
+--0000000000009fcd3605c89aed8f--
