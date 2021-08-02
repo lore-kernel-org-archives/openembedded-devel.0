@@ -1,85 +1,84 @@
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web09.1418.1627927646384155539
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
+ by mx.groups.io with SMTP id smtpd.web12.2984.1627934712395768157
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Aug 2021 11:07:26 -0700
+ Mon, 02 Aug 2021 13:05:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=j0sr1Nwi;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: b.hutchman@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id u16so12040865ple.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Aug 2021 11:07:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=OZlllSbx;
+ spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f182.google.com with SMTP id q2so20942199plr.11
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Aug 2021 13:05:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=LaVDZ5V/h05vjyP0qfD5ZMK5l/frZoEmoD48lqiMj1Q=;
-        b=j0sr1NwiRIKOqzAxCxKB6BgLIEeexByi60LJ1nwAXJzZug5B7HuFNBwj4m4E5HZRi5
-         MJX5PzuO69nrN/z6fnIcKsGR/9VkFqYfU2QdwSs3y2oYEonBUjNPkbY+ATPYnxg9lCyE
-         3aDF1yvbhBtbCkwMU3A8gtfN8F08dagjAHV0HKUqcs/4/KBk7CxzEcjdIfVjwBYYW4xb
-         VOelH8HLmv0uf7ZyarWE0lVN0MruD6tZn4nozTp+SiC5H1WDsYa81z7q9qcRQE6t1Ff8
-         4lgkqrfBGhLMMRAO/FCMEA0Dg+LLR6Zm3TZDKYaLnBmLuM1sWnkVoUTVTWEw7MVeoTaw
-         TePA==
+        h=subject:to:references:from:organization:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=P/U065vKyI8ubiROxu2WyrCl99/aOE6F3rE0pLEnSvA=;
+        b=OZlllSbxgXi+pPCqgRLXWKF5kpKcU8p+2TjKuZluZoL/ta63N3OLlaMvANIC30W2H3
+         U8L2Nq3fRrXJH7AkXSK3f1jeDEiaeH+oc9CU//rYBrwi7sD3/Hi6mGIBYkSkxpBD94eU
+         ElbbzVIT/T55ud09sI3ZDxPv4ugyb2XCYMAIL2agnCrGXwY1rPpiuk1hX/MfNucc0ltb
+         tg3+sZpOrKRob8oc62V3CL1PjYibYK+3USW3idwWRHEf66uwPMsKJDaoOnUnc8U0u3aN
+         ggA32xtTkary73010qVJ9MsSalFxWHhWpSnIqdUTcF6/k1m8o78awDqp3No46qnVdh8k
+         zA/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=LaVDZ5V/h05vjyP0qfD5ZMK5l/frZoEmoD48lqiMj1Q=;
-        b=njA61XXQgbkVyXpq8xHtHjiez5DaAJ/+3z/CqMIQVzbBJGcF7yN5IYIUIXxPDJ+0Zx
-         w/fhKfR6tHrgcL9sa9VrnLm3i/hO0xypB2BcOslKirv2CpcDdTKO+OLyuyZyrcE1AZ7u
-         ZsOwxHy8IwGIbV8SwY9zbcQXzrkMB035e+IRu8WQIjGSyo2tzC/4UXkGfE8Cjqva/w9c
-         C5OM+HpqJNE+nAEAEYCakE31VW6YqytTA58d+RX5WR1OnYpSc887wUFzDiN3f814QQxa
-         EBb22RhTJziGugrIdUdWWwF72Lyrxj1hBkWVISUloFpX8hZUU7I3GpryfmnOrb3pwiU1
-         BPNg==
-X-Gm-Message-State: AOAM5313nCiyMZAEmdIYvuU5fL11DyEkjSz94C0K+SCwTEtFyQhQNv9J
-	1657uozj51VsA0H+vvOrri1gPcrDfLSnBaf64IMtVkky
-X-Google-Smtp-Source: ABdhPJyxTy9DqUAiYi+EGjgH6ksvW4KPsm5+vWRfXbP+m5WFzR5jHvl151yDndoh1NYiZHRiVo9LDY9OnKrDWOJSbXk=
-X-Received: by 2002:a65:4307:: with SMTP id j7mr2222407pgq.387.1627927645516;
- Mon, 02 Aug 2021 11:07:25 -0700 (PDT)
+        h=x-gm-message-state:subject:to:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=P/U065vKyI8ubiROxu2WyrCl99/aOE6F3rE0pLEnSvA=;
+        b=bSZs0E6MzSOmShQWPvl6TWm4WX+45GPKMLnLvL/qDo8OtPE2v9q1ddw5dkqsk/tO5l
+         PpscAyaWDqN9nOF634/k22uzCpsuUoMRNB48xyyLggpBUQD4BAzSMjGDRxSwx+Ow/dm4
+         zYNnLE4/A4Q5jV0UDRR3LldVeepSRnaWgE6K8PJAfVCs7N9LowJ/Es1aQXTOwwUQzqn3
+         HmolRdl1XV9DG5xtk3NAyx2ENPaVt15HxxqGQdE4ctbqHq2VgcDcieraGI28l2nvP/O3
+         fFGe67dEGXBFY9JfC3eik7CiwL4hzSJNvkUqrw5xvxlY1XdWfs8S0GP1t8r+wKD8Vuyh
+         ygjQ==
+X-Gm-Message-State: AOAM533KnlslgfQUg8BmsF3AwgawQeEn0I29iPiVtISi+0orYhtXgoBh
+	Uo1/GOH2d3VlVEreCTogrvyqx2mNT/Iupg==
+X-Google-Smtp-Source: ABdhPJxaMFvngiaAgH22YucF7J2T2q6CH0C3jHVsq+S4BMlho58p47QXwPc3dcWLvA4KX2ZN1AFd3Q==
+X-Received: by 2002:a05:6a00:2150:b029:399:711c:826f with SMTP id o16-20020a056a002150b0290399711c826fmr18196774pfk.14.1627934711680;
+        Mon, 02 Aug 2021 13:05:11 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPv6:2601:646:9200:a0f0:61bd:9658:157a:c74c? ([2601:646:9200:a0f0:61bd:9658:157a:c74c])
+        by smtp.gmail.com with ESMTPSA id 37sm14223263pgt.28.2021.08.02.13.05.10
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 02 Aug 2021 13:05:11 -0700 (PDT)
+Subject: Re: [oe] Any way to make cryptsetup smaller? I have a small 32M NOR flash and 11M SquashFS rootfs.
+To: Brian Hutchinson <b.hutchman@gmail.com>,
+ openembedded-devel@lists.openembedded.org
+References: <CAFZh4h8HhO5EMV8k4y6a8pMFOMO9Wv68zAO+Zy6KJSEUFePRFw@mail.gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <6c1da27d-dc2b-7a32-ad5d-cade68a796f8@gmail.com>
+Date: Mon, 2 Aug 2021 13:05:10 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.12.0
 MIME-Version: 1.0
-From: "Brian Hutchinson" <b.hutchman@gmail.com>
-Date: Mon, 2 Aug 2021 14:07:15 -0400
-Message-ID: <CAFZh4h8HhO5EMV8k4y6a8pMFOMO9Wv68zAO+Zy6KJSEUFePRFw@mail.gmail.com>
-Subject: Any way to make cryptsetup smaller? I have a small 32M NOR flash and 11M SquashFS rootfs.
-To: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000007f5e005c8977100"
+In-Reply-To: <CAFZh4h8HhO5EMV8k4y6a8pMFOMO9Wv68zAO+Zy6KJSEUFePRFw@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 
---00000000000007f5e005c8977100
-Content-Type: text/plain; charset="UTF-8"
 
-Hi,
 
-I have a 32M NOR that I boot from and it uses a 11M SquashFS rootfs made
-from core-image-minimal.  I'd like to add cryptsetup but doing so blows my
-SquashFS up to 35M.
+On 8/2/21 11:07 AM, Brian Hutchinson wrote:
+> Hi,
+> 
+> I have a 32M NOR that I boot from and it uses a 11M SquashFS rootfs made 
+> from core-image-minimal.  I'd like to add cryptsetup but doing so blows 
+> my SquashFS up to 35M.
+> 
+> I've looked at the recipe and package config and I see things like 
+> --enable-static and other settings that look doubtful that I can build 
+> cryptsetup package and get it to fit my size constraints.
+> 
+> All I'm wanting to do is encrypt a filesytem and mount it as ext4.
+> 
 
-I've looked at the recipe and package config and I see things like
---enable-static and other settings that look doubtful that I can build
-cryptsetup package and get it to fit my size constraints.
+Can you list all the direct/indirect dependencies that cryptsetup is 
+bringing in ? perhaps buildhistory will be handy to get that information
 
-All I'm wanting to do is encrypt a filesytem and mount it as ext4.
-
-Regards,
-
-Brian
-
---00000000000007f5e005c8977100
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div style=3D"font-family:sans-serif;font-size:12.8px" di=
-r=3D"auto">Hi,<br></div><div style=3D"font-family:sans-serif;font-size:12.8=
-px" dir=3D"auto"><br></div><div style=3D"font-family:sans-serif;font-size:1=
-2.8px" dir=3D"auto">I have a 32M NOR that I boot from and it uses a 11M Squ=
-ashFS rootfs made from core-image-minimal.=C2=A0 I&#39;d like to add crypts=
-etup but doing so blows my SquashFS up to 35M.</div><div style=3D"font-fami=
-ly:sans-serif;font-size:12.8px" dir=3D"auto"><br></div><div style=3D"font-f=
-amily:sans-serif;font-size:12.8px" dir=3D"auto">I&#39;ve looked at the reci=
-pe and package config and I see things like --enable-static and other setti=
-ngs that look doubtful that I can build cryptsetup package and get it to fi=
-t my size constraints.</div><div style=3D"font-family:sans-serif;font-size:=
-12.8px" dir=3D"auto"><br></div><div style=3D"font-family:sans-serif;font-si=
-ze:12.8px" dir=3D"auto">All I&#39;m wanting to do is encrypt a filesytem an=
-d mount it as ext4.</div><div style=3D"font-family:sans-serif;font-size:12.=
-8px" dir=3D"auto"><br></div><div style=3D"font-family:sans-serif;font-size:=
-12.8px" dir=3D"auto">Regards,</div><div style=3D"font-family:sans-serif;fon=
-t-size:12.8px" dir=3D"auto"><br></div><div style=3D"font-family:sans-serif;=
-font-size:12.8px" dir=3D"auto">Brian</div></div>
-
---00000000000007f5e005c8977100--
+> Regards,
+> 
+> Brian
+> 
+> 
+> 
+> 
