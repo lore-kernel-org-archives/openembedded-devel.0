@@ -1,94 +1,95 @@
-Received: from mail-qv1-f46.google.com (mail-qv1-f46.google.com [209.85.219.46])
- by mx.groups.io with SMTP id smtpd.web11.15051.1627872378090762737
+Received: from mail3.bemta25.messagelabs.com (mail3.bemta25.messagelabs.com [195.245.230.83])
+ by mx.groups.io with SMTP id smtpd.web12.15438.1627874990812337864
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 01 Aug 2021 19:46:18 -0700
+ Sun, 01 Aug 2021 20:29:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=r5FnKPAQ;
- spf=pass (domain: gmail.com, ip: 209.85.219.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f46.google.com with SMTP id g6so8240233qvj.8
-        for <openembedded-devel@lists.openembedded.org>; Sun, 01 Aug 2021 19:46:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=msglQ93/BZdgFI54lHt4pcAppvJtE1HCV3BGWkthke8=;
-        b=r5FnKPAQBnai03TzcHdk/hov/bwDM5SB9/wNOOUyyjNKUaazC4ihjC27SQhy0d9Se+
-         o7rz7PYU1fRuzyMT8zmn59nyWSfh9ZqlIZwEtho1iDqGaQOsbDYGHyrDPcdL73elzD/E
-         n7nD8kCjkAWbU+FTnAm1EVNQIjWA8rG9vw5aM6/K+Oku5nESx0kR3sZV2xmEl7aG94p2
-         thvvfg25pbspJhpzNtcnqUHdmBW/jCfplukmzOzgtjiXH/45bYTf5pToCW0ffeRzUjGl
-         xz6eBEjmmjs8nWJXyLL4dVhw26OxLBeL7D6qK49FutHxvLnqk+JqXjAEFEj5O+baO0Nh
-         w+bw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=msglQ93/BZdgFI54lHt4pcAppvJtE1HCV3BGWkthke8=;
-        b=pfm1CGjq5l23AscpnM+EPfdJbbxtOMTTJ8qOAp1KH0Am/Mn3/7UFUHvoVYig6L8IVD
-         G49ezZGQVZAwFkwMBBGQkPTMURlZ6MVyh/Tl/nJVJSYV0VTynW2VxBW/kmp0z+mw8Gc+
-         yU/ZICeM/ZqfNeqDqiSlqFzX0m+CjLZkkS4f1byJfndh9T2RMY5JwQ9t8Zmnd33hRiyx
-         rFtU8x2Qw8POCWnzLF/n0NWfdfIocTAErBwEbGr56cxq17ZR7f7J68Lywcowfa4bKghA
-         xatJ6qOahxvlVmRgXdH1FzS/OEEbt9B57uRn2eoyHOe6Y8c3FNFiRRob134XChyprQoU
-         ozww==
-X-Gm-Message-State: AOAM530FIjzolRKIPxL6qBRklGBJEEBs33pU780qsxkZoZLV+FHOcDZT
-	ls2HWBep3jkAxFCrmf50nlYehPHNLWF7wWn53ic=
-X-Google-Smtp-Source: ABdhPJy1kwvQbMHoTtepim+Qiu6V+26jskUhpigVQkUPf91TuZdC+gcbWIQJVUz8wS9JmgvmBWxOcYemPBDG44c5KUk=
-X-Received: by 2002:a05:6214:b33:: with SMTP id w19mr14448316qvj.50.1627872377101;
- Sun, 01 Aug 2021 19:46:17 -0700 (PDT)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=oByvOtId;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.83, mailfrom: zhengrq.fnst@fujitsu.com)
+Return-Path: <zhengrq.fnst@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1627874983; i=@fujitsu.com;
+	bh=QmnH4OnzC7RDecrmAab4skN4tMfPnfuycbHHb4fO30k=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=oByvOtIdCY23ZHPzmzhmqsIEEB1GZ/Ujo74Pry5+tyJ4b+MIL9qgL/KvV6FSBjoCm
+	 8HZyXNknm5ezf3Jqkl0RcytFFsW6dK3U37ctnoOD6Wcxa3YjJFEPSrgVzs0mcdGNtC
+	 wUUFxIU7bi8Z49cJyyyK7aA4izxbZne9gDRMZb12fKq7Ua0Tgb081p/Xjae4JtsBKy
+	 AZmmLhHFRIOvaeYIx3UmG33OqItYRNBBtcd6gTbhIzb0j85F2GvS0buZZeUWAJPYTn
+	 iC00HS5d4Wt4V0cJI31dU2QOIpEyQQZYOYjOi2ZJPLahIJYvbmyQD0FDPbWMsYCoJU
+	 LEvjJgBsP3fqQ==
+Received: from [100.112.198.115] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta.az-b.eu-west-1.aws.symcld.net id 9F/A8-07821-7A667016; Mon, 02 Aug 2021 03:29:43 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupikeJIrShJLcpLzFFi42Kxs+EI0V2Wxp5
+  o8OmCgcXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnHs2G72gnNcFUvvzGJsYLzC2cXIxSEkMItJ
+  YtLCw4wQzm5GiXlXzzF1MXJysAnoSpx7vJYdxBYR0JdYOnsPM4gtLOAj8excD1gNi4CKxPu9J
+  8DivAIeEl++z2QFsSUEFCSmPHwPFReUODnzCQuIzSwgIXHwxQugOAdQjaLE7OnyEOUVEq8PX2
+  KewMgzC0nHLCQdCxiZVjGaJxVlpmeU5CZm5ugaGhjoGhoa6RpamumameglVukm6aWW6panFpf
+  oGuollhfrFVfmJuek6OWllmxiBAZRSsERhx2M919/0DvEKMnBpCTKG9LGkijEl5SfUpmRWJwR
+  X1Sak1p8iFGGg0NJgtc3lT1RSLAoNT21Ii0zBxjQMGkJDh4lEYg0b3FBYm5xZjpE6hSjopQ47
+  8kUoIQASCKjNA+uDRZFlxhlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ8xaAjOfJzCuBm/4KaD
+  ET0OKpGawgi0sSEVJSDUzKCl6++7yOelzJ1oiuPLNu0YY9s73mtKndXunkfLOO1WrhmQbLk/s
+  brCNZU74KLKnXvDVh0/NtLXN6e+SO2S92rpKuezE1al/6L5cvt13/HFi7yHPGi2v7BM5lvLF2
+  cz4llHvf79tPgX/NduXnDXbMS15U53n07KddtZbF56urdE58nqC366aBwow8hgc+z7yfWb6o1
+  b7JfyXAtsGBN2oKx/drigV37BjCj9lw929q8l48VSTW1/SgmI1tLa+ApomJUXHjEja/c/Znkx
+  dXTJ2oW6pRVmpb9EpjhfPnM3wvk/i3BP5htSy1mH3YonffCe/vzmF26Zxab74GzchhumymdFU
+  vYIZPPM8Lw0tdkUosxRmJhlrMRcWJAGnlYnAdAwAA
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-11.tower-285.messagelabs.com!1627874982!198814!1
+X-Originating-IP: [62.60.8.84]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 31916 invoked from network); 2 Aug 2021 03:29:42 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-11.tower-285.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 2 Aug 2021 03:29:42 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1723TaQP009400
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 2 Aug 2021 04:29:42 +0100
+Received: from localhost.localdomain (10.167.225.35) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Mon, 2 Aug 2021 04:29:34 +0100
+From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-python] [PATCH] python3-bitarray: upgrade 2.2.2 -> 2.2.3
+Date: Mon, 2 Aug 2021 11:29:25 +0800
+Message-ID: <1627874965-94866-1-git-send-email-zhengrq.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <20210802020935.14749-1-changqing.li@windriver.com>
-In-Reply-To: <20210802020935.14749-1-changqing.li@windriver.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sun, 1 Aug 2021 19:45:51 -0700
-Message-ID: <CAMKF1spp+vRTaLikktg4_A5PEqmcmcucJLWUtUoBqj2p8h-2pw@mail.gmail.com>
-Subject: Re: [oe] [meta-webserver][PATCH 1/2] nginx: upgrade 1.18.0 -> 1.20.1
-To: Changqing Li <changqing.li@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Type: text/plain
 
-can you check/rebase with latest master ? I think these patches are
-already applied.
+2021-07-22   2.2.3:
+-------------------
+  * speedup `repeat()`, #136
+  * speedup shift operations, #139
+  * optimize slice assignment with negative step, e.g.: `a[::-1] = 1`
+  * add tests
 
-On Sun, Aug 1, 2021 at 7:12 PM Changqing Li <changqing.li@windriver.com> wrote:
->
-> From: Changqing Li <changqing.li@windriver.com>
->
-> License-Update: Copyright Year Updated
->
-> Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> ---
->  meta-webserver/recipes-httpd/nginx/nginx_1.18.0.bb | 6 ------
->  meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb | 6 ++++++
->  2 files changed, 6 insertions(+), 6 deletions(-)
->  delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.18.0.bb
->  create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb
->
-> diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.18.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.18.0.bb
-> deleted file mode 100644
-> index ac303e47d..000000000
-> --- a/meta-webserver/recipes-httpd/nginx/nginx_1.18.0.bb
-> +++ /dev/null
-> @@ -1,6 +0,0 @@
-> -require nginx.inc
-> -
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=52e384aaac868b755b93ad5535e2d075"
-> -
-> -SRC_URI[md5sum] = "b2d33d24d89b8b1f87ff5d251aa27eb8"
-> -SRC_URI[sha256sum] = "4c373e7ab5bf91d34a4f11a0c9496561061ba5eee6020db272a17a7228d35f99"
-> diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb
-> new file mode 100644
-> index 000000000..32d375542
-> --- /dev/null
-> +++ b/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb
-> @@ -0,0 +1,6 @@
-> +require nginx.inc
-> +
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=206629dc7c7b3e87acb31162363ae505"
-> +
-> +SRC_URI[md5sum] = "8ca6edd5076bdfad30a69c9c9b41cc68"
-> +SRC_URI[sha256sum] = "e462e11533d5c30baa05df7652160ff5979591d291736cfa5edb9fd2edb48c49"
-> --
-> 2.17.1
->
->
-> 
->
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+---
+ .../{python3-bitarray_2.2.2.bb => python3-bitarray_2.2.3.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-bitarray_2.2.2.bb => python3-bitarray_2.2.3.bb} (77%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_2.2.2.bb b/meta-python/recipes-devtools/python/python3-bitarray_2.2.3.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-bitarray_2.2.2.bb
+rename to meta-python/recipes-devtools/python/python3-bitarray_2.2.3.bb
+index 01f474d0bb..b72ca3b560 100644
+--- a/meta-python/recipes-devtools/python/python3-bitarray_2.2.2.bb
++++ b/meta-python/recipes-devtools/python/python3-bitarray_2.2.3.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+ LICENSE = "PSF"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
+ 
+-SRC_URI[sha256sum] = "5ed37f0482199de5a3e096405a646ab3f45dd020d234c42539b3c11ea0e2278d"
++SRC_URI[sha256sum] = "b5d707d9c4aa75e684e21ff1848b234f3d2ff41d5038db89e2465e5527f90c68"
+ 
+ inherit setuptools3 pypi
+ 
+-- 
+2.25.1
+
