@@ -1,112 +1,101 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.113])
- by mx.groups.io with SMTP id smtpd.web09.15528.1627875548650266707
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.116])
+ by mx.groups.io with SMTP id smtpd.web12.15518.1627875581329454520
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 01 Aug 2021 20:39:09 -0700
+ Sun, 01 Aug 2021 20:39:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@fujitsu.com header.s=170520fj header.b=mUFO2dwi;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.113, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=y+oEHEFx;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.116, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1627875546; i=@fujitsu.com;
-	bh=x+aehQH722zJJqm9GSjkY0SFMfApByIPPfrrXNN+jWs=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	b=mUFO2dwiidDRSPAVt0+neQTtwumZ6/nq1x/lotDM72cwMaFCvjtJZzHbfxLsG51Pr
-	 UxOxULOICTYQwpxFo/shdNyjYrcTm12P6YzpIGuEJoHI9Nmb3d1MBhBX4ExAklg6ZB
-	 zVG1oEYTJ8o3YxYjhGn6vI8N5sOyfBRbMnmX/J8yj2OYzuojUIfUd68pDskeJb+S6H
-	 8Y44piCb6vl0FZqyccatUOIqrgWw7Yv84Xcbx4P223Ap92bu05BzgDWVjdE5Eu/ZJb
-	 tfREZIDeEhLSQe2A5EggVoDsNGTAILEMKFkqm/OI26Cwn3TzJk1HN/qKCFgiLv1ns0
-	 VCTQb/I+VrE2Q==
+	s=170520fj; t=1627875579; i=@fujitsu.com;
+	bh=QimpTWpgTc9ybuYuGbJI762yVy4FLQ+5vBH26t6FEAI=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=y+oEHEFxAXju3AWp81jeAwEckyH9pK4mb/PVn9dJNrhvTDJ2i7GqCawXqgc0jLvwC
+	 GQ5u74M+EsVuqHH5D7KzhaBlcjwrQoAGdq/WFZOONgbWyGHEz49H70p+dQSwLwGinm
+	 vMftx15YamVvmV2AeevO8g8UytAgmmxB0jKr8dv6fPO9MaPigb2HHDqMgjUEyEb1qy
+	 iBwdGtpGuXeh1gA+Ozu/qBSgC72Q/3NP1yb6ZI+Yr6hPgj2idgiq8XxOPMxn4KmrSV
+	 32sXZSdxknLaIMaBkjBAUgvtaTXrTBom4trkIfcHQfo+ZkSIPDLczE2+dCN3Ja6STp
+	 qNUrQSN9q75yg==
 Received: from [100.113.7.195] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-b.eu-central-1.aws.symcld.net id 2E/CC-00773-AD867016; Mon, 02 Aug 2021 03:39:06 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrMIsWRWlGSWpSXmKPExsViZ8MRqnszgz3
-  RoHmHtcXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmrG3/wtjwRuJigUzz7A0MDaJdTFycQgJzGKS
-  OLN5LksXIyeQc5xRYu7lUhCbTUBHouNFN1hcREBfYunsPcwgtrBAkMTxd0tZQWwWARWJp92PG
-  EFsXgF3iTu3roLFJQQUJKY8fM8MEReUODnzCdgcZgFVie4jT5kgbHmJ5q2zmSHqFSW27zzDAm
-  FXSLw+fIl5AiPvLCTts5C0z0LSvoCReRWjRVJRZnpGSW5iZo6uoYGBrqGhsa6ZroW5XmKVbpJ
-  eaqlucmpeSVEiUFIvsbxYr7gyNzknRS8vtWQTIzDsUgrZwncwnnn9Qe8QoyQHk5Iob0gbS6IQ
-  X1J+SmVGYnFGfFFpTmrxIUYZDg4lCV7zdPZEIcGi1PTUirTMHGAMwKQlOHiURHhnpgGleYsLE
-  nOLM9MhUqcYFaXEeaeC9AmAJDJK8+DaYHF3iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5Iw73
-  yQ8TyZeSVw018BLWYCWjw1gxVkcUkiQkqqgWl6BY84S64x1+aLOl/7EipXFr2SDb1ksU1+75m
-  f3NoT3t6de3CVb7fN7iSxvIx9Z19nfHafe6M/Qj5gU4lUcLm/fmbo6RPTN+2+4blwTez2u+nM
-  XMrZZkVH9iZZuej+X3j+459uK3OfDqHdWxIkT8480Sj4NG2vbdibm8u4MybvkPHyN9HlZGVfs
-  jUwvYaJ0XmXqPelk0prLW6x22WZm8oIls41n3szZtcds2DHQwYtZgWmSXnmP1SypxuESEq/ec
-  IaUiERfa5fPbJlTWHindqS2fPSuc1XL/q+zG/mItv4r1MYd8xoruvnNDrY4+FwV7XTQ+hfrb/
-  0efkbp89uV8wJ7/y3plD7mbHNdGZvJZbijERDLeai4kQApNLpLzYDAAA=
+	by server-5.bemta.az-b.eu-central-1.aws.symcld.net id 3A/4C-29101-BF867016; Mon, 02 Aug 2021 03:39:39 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYovsrgz3
+  RoGuyicXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmtG0xbxgEm/F9IO3GBsYz3J3MXJxCAnMYpKY
+  f7KVDcI5zihx68lM1i5GTg42AR2JjhfdLCC2iIC+xNLZe5hBbGEBV4m+zQfYQGwWARWJjkdr2
+  bsYOTh4BdwljtxwAAlLCChITHn4HqycV0BQ4uTMJ2BjmAUkJA6+eMEMUaMosX3nGRYIu0Li9e
+  FLzBMYeWYhaZmFpGUBI9MqRsukosz0jJLcxMwcXUMDA11DQ2Ndc10jUyO9xCrdJL3UUt3k1Ly
+  SokSgrF5iebFecWVuck6KXl5qySZGYBilFLL/2cF4/fUHvUOMkhxMSqK8IW0siUJ8SfkplRmJ
+  xRnxRaU5qcWHGGU4OJQkeM3T2ROFBItS01Mr0jJzgCENk5bg4FES4Z2ZBpTmLS5IzC3OTIdIn
+  WJUlBLnnQrSJwCSyCjNg2uDxdElRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSsK880HG82Tmlc
+  BNfwW0mAlo8dQMVpDFJYkIKakGpu4zB6tfH3NY8i5KSX7HCya+7QZi/5VWLdbOnfS+nL/7SvH
+  +S8mLH1g69B38s2TXv6ch8ZzSxmVBJnoWU1z1FeXYnt9jdF+1KtCjNu9w7irevWyrNhXOtZz/
+  6Mhik0UCLz/XWT/4emqJ2w8V6UhOg+t6oVPuRl4JN721WvP25R966385Xtm/Wi0wU1ntCuuFd
+  ZOWzZ5w29XdanXOLK/8n5q2k3v2+xwNitlR/8a1zipG0OKb6OLTk39w/hFIYfONrOhdwxYy3X
+  NbX1rs7zlsOouFr6pLPU6aqqnflnZl64+UeLenajan1A1qEk7/MtEJMe9llbyfcWL2uZNq/6p
+  ks/UuPbv+zy+H46XedRu+EiWW4oxEQy3mouJEACuMIqMeAwAA
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-15.tower-245.messagelabs.com!1627875545!292417!1
-X-Originating-IP: [62.60.8.85]
+X-Msg-Ref: server-16.tower-245.messagelabs.com!1627875578!291108!1
+X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 16047 invoked from network); 2 Aug 2021 03:39:05 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-15.tower-245.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 2 Aug 2021 03:39:05 -0000
+Received: (qmail 27399 invoked from network); 2 Aug 2021 03:39:38 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-16.tower-245.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 2 Aug 2021 03:39:38 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1723d5MS031571
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1723dbbF030163
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 2 Aug 2021 04:39:05 +0100
+	for <openembedded-devel@lists.openembedded.org>; Mon, 2 Aug 2021 04:39:37 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Mon, 2 Aug 2021 04:39:02 +0100
+ (TLS) id 15.0.1497.18; Mon, 2 Aug 2021 04:39:35 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH] [oe] [meta-python] [PATCH] python3-pandas: upgrade 1.3.0 -> 1.3.1
-Date: Mon, 2 Aug 2021 11:38:56 +0800
-Message-ID: <1627875536-34323-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-smbus: upgrade 4.2 -> 4.3
+Date: Mon, 2 Aug 2021 11:39:29 +0800
+Message-ID: <1627875569-34385-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
 X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain; charset="y"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-Fixed regressions
-Pandas could not be built on PyPy (GH42355)
-DataFrame constructed with an older version of pandas could not be unpickled (GH42345)
-Performance regression in constructing a DataFrame from a dictionary of dictionaries (GH42248)
-Fixed regression in DataFrame.agg() dropping values when the DataFrame had an Extension Array dtype, a duplicate index, and axis=3D1 (GH42380)
-Fixed regression in DataFrame.astype() changing the order of noncontiguous data (GH42396)
-Performance regression in DataFrame in reduction operations requiring casting such as DataFrame.mean() on integer data (GH38592)
-Performance regression in DataFrame.to_dict() and Series.to_dict() when orient argument one of =E2=80=9Crecords=E2=80=9D, =E2=80=9Cdict=E2=80=9D, or =E2=80=9Csplit=E2=80=9D (GH42352)
-Fixed regression in indexing with a list subclass incorrectly raising TypeError (GH42433, GH42461)
-Fixed regression in DataFrame.isin() and Series.isin() raising TypeError with nullable data containing at least one missing value (GH42405)
-Regression in concat() between objects with bool dtype and integer dtype casting to object instead of to integer (GH42092)
-Bug in Series constructor not accepting a dask.Array (GH38645)
-Fixed regression for SettingWithCopyWarning displaying incorrect stacklevel (GH42570)
-Fixed regression for merge_asof() raising KeyError when one of the by columns is in the index (GH34488)
-Fixed regression in to_datetime() returning pd.NaT for inputs that produce duplicated values, when cache=3DTrue (GH42259)
-Fixed regression in SeriesGroupBy.value_counts() that resulted in an IndexError when called on a Series with one row (GH42618)
-
-Bug fixes
-Fixed bug in DataFrame.transpose() dropping values when the DataFrame had an Extension Array dtype and a duplicate index (GH42380)
-Fixed bug in DataFrame.to_xml() raising KeyError when called with index=3DFalse and an offset index (GH42458)
-Fixed bug in Styler.set_sticky() not handling index names correctly for single index columns case (GH42537)
-Fixed bug in DataFrame.copy() failing to consolidate blocks in the result (GH42579)
+4.3 (2021-07-22)
+  decode-dimms: Attempt to decode LPDDR3 modules
+  eeprom, eepromer: Removed the tools in favor of eeprog
+  i2cdetect: Sort the bus list by number
+  i2cdump: Add range support to I2C block mode
+           Deprecate SMBus block mode
+  i2cget: Add support for I2C block read
+          Add support for SMBus block read
+  i2ctransfer: Reverted check for returned length from driver
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../python/{python3-pandas_1.3.0.bb =3D> python3-pandas_1.3.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pandas_1.3.0.bb =3D> python3-pandas_1.3.1.bb} (89%)
+ .../python/{python3-smbus_4.2.bb => python3-smbus_4.3.bb}     | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-smbus_4.2.bb => python3-smbus_4.3.bb} (69%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pandas_1.3.0.bb b/meta-python/recipes-devtools/python/python3-pandas_1.3.1.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-pandas_1.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-pandas_1.3.1.bb
-index b98e2865c7..02e21e4f83 100644
---- a/meta-python/recipes-devtools/python/python3-pandas_1.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pandas_1.3.1.bb
-@@ -6,7 +6,7 @@ HOMEPAGE =3D "http://pandas.pydata.org/"
- LICENSE =3D "BSD-3-Clause"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3f23c5c092b74d245d48eeef72bc3fd2"
+diff --git a/meta-python/recipes-devtools/python/python3-smbus_4.2.bb b/meta-python/recipes-devtools/python/python3-smbus_4.3.bb
+similarity index 69%
+rename from meta-python/recipes-devtools/python/python3-smbus_4.2.bb
+rename to meta-python/recipes-devtools/python/python3-smbus_4.3.bb
+index 862a547c00..e2fd20fc00 100644
+--- a/meta-python/recipes-devtools/python/python3-smbus_4.2.bb
++++ b/meta-python/recipes-devtools/python/python3-smbus_4.3.bb
+@@ -1,11 +1,9 @@
+ SUMMARY = "Set of i2c tools for linux - Python module"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://smbusmodule.c;beginline=1;endline=18;md5=46e424fb045901ab25e0f92c28c80055"
+-PR = "r1"
  
--SRC_URI[sha256sum] =3D "c554e6c9cf2d5ea1aba5979cc837b3649539ced0e18ece186f055450c86622e2"
-+SRC_URI[sha256sum] =3D "341935a594db24f3ff07d1b34d1d231786aa9adfa84b76eab10bf42907c8aed3"
+ SRC_URI = "${KERNELORG_MIRROR}/software/utils/i2c-tools/i2c-tools-${PV}.tar.gz "
+-SRC_URI[md5sum] = "d6861c89521f2a2773e19edadb2befee"
+-SRC_URI[sha256sum] = "7de18ed890e111fa54ab7ea896804d5faa4d1f0462a258aad9fbb7a8cc6b60cc"
++SRC_URI[sha256sum] = "eec464e42301d93586cbeca3845ed61bff40f560670e5b35baec57301d438148"
  
- inherit pypi setuptools3
+ DEPENDS += "i2c-tools"
  
 -- 
 2.25.1
