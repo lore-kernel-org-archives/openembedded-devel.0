@@ -1,100 +1,110 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.3])
- by mx.groups.io with SMTP id smtpd.web10.15616.1627875512219021494
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web09.15528.1627875548650266707
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 01 Aug 2021 20:38:32 -0700
+ Sun, 01 Aug 2021 20:39:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=yxL6KP5J;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.3, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=fail reason="body hash did not verify" header.i=@fujitsu.com header.s=170520fj header.b=mUFO2dwi;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1627875509; i=@fujitsu.com;
-	bh=uwuyi6MuvfEP8rtskBC4nQ/UI8qPCIl+gI3rhX/I4GQ=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=yxL6KP5J9zqO5BTCkVylWaiKJW1VY8GLsJyQ0TXbDW/hTLlS0y5oy7JZfIxisSKbj
-	 B8mAE9j1gVUcc+IvIiDD0cOSF3pMiQBhtPEkp/+NdJcGNpiKCh16p2vOIbA6xX2Qkp
-	 4dVdmannr6tvfg8WDE3YqK+/Tmh1CVheOxgYnG6kD4SkGUfDroZhkzc743tF5YQ6uF
-	 sbjZxuCg2T3ur6gyXYTrKj72Ax0I2BY8wnmb4vi0Octbr5zza+2+XaYHLzsRwMamYj
-	 nvxcXy6JFVwEnmYv+1ZQcvdzrQ3q/4wkK8W31Q+HiXKgpiM4KgRJjyspyb3alHNu2w
-	 Zk80tpKsRly9w==
-Received: from [100.113.1.116] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-a.eu-central-1.aws.symcld.net id B1/78-13315-5B867016; Mon, 02 Aug 2021 03:38:29 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+EI0d2SwZ5
-  o8OKMmcXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnHq2h+mgqe8FT+mH2FtYDzB08XIxSEkMItJ
-  YsK1pYwQznFGifM7LzJ1MXJysAnoSHS86GYBsUUE9CWWzt7DDGILC3hJTDyxgRXEZhFQkTjT3
-  cLexcjBwSvgLjFhgxVIWEJAQWLKw/dg5bwCghInZz4BG8MsICFx8MULZogaRYntO8+wQNgVEq
-  8PX2KewMgzC0nLLCQtCxiZVjFaJBVlpmeU5CZm5ugaGhjoGhoa6xrpmhrqJVbpJuqlluomp+a
-  VFCUCJfUSy4v1iitzk3NS9PJSSzYxAsMopZDJeAfjtdcf9A4xSnIwKYnyhrSxJArxJeWnVGYk
-  FmfEF5XmpBYfYpTh4FCS4DVPZ08UEixKTU+tSMvMAYY0TFqCg0dJhHdmGlCat7ggMbc4Mx0id
-  YpRUUqcdypInwBIIqM0D64NFkeXGGWlhHkZGRgYhHgKUotyM0tQ5V8xinMwKgnzzgcZz5OZVw
-  I3/RXQYiagxVMzWEEWlyQipKQamLSv/03coCfxPLjo+Y5OiUSL0NCzp1RNGlI+PPrzUHjLtZi
-  1Ivkyx2d/02RxvZ94s/uRgado9JKEQ3qTWPl3caVpdtXHtPxR0DibK7a86OE/9pPeDjzJK/Z/
-  drjofvzxBrvF/7cmSX5c9efDo5xb3f5+7Mb2Tsu0Lx+fxmuylvHT2ku/l4Zm7DJyfbSpVnqbW
-  /Pef0w1wV2TMxbueJEwcQNbIPvhracWsdh1uOwJnH+nqPM9W4piltJ2lvTgnW1L5vXm7fn4wX
-  rJ/RkXv+kekVnzwGbyh2gnToV3R5f9XvfgU+qa+UKHc5KWFS68WdJTcsD1wJIyYe4lLxMesfy
-  4dvnazMSNbKreIdbeZ2JfzJZQYinOSDTUYi4qTgQAa0sZKx4DAAA=
+	s=170520fj; t=1627875546; i=@fujitsu.com;
+	bh=x+aehQH722zJJqm9GSjkY0SFMfApByIPPfrrXNN+jWs=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	b=mUFO2dwiidDRSPAVt0+neQTtwumZ6/nq1x/lotDM72cwMaFCvjtJZzHbfxLsG51Pr
+	 UxOxULOICTYQwpxFo/shdNyjYrcTm12P6YzpIGuEJoHI9Nmb3d1MBhBX4ExAklg6ZB
+	 zVG1oEYTJ8o3YxYjhGn6vI8N5sOyfBRbMnmX/J8yj2OYzuojUIfUd68pDskeJb+S6H
+	 8Y44piCb6vl0FZqyccatUOIqrgWw7Yv84Xcbx4P223Ap92bu05BzgDWVjdE5Eu/ZJb
+	 tfREZIDeEhLSQe2A5EggVoDsNGTAILEMKFkqm/OI26Cwn3TzJk1HN/qKCFgiLv1ns0
+	 VCTQb/I+VrE2Q==
+Received: from [100.113.7.195] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-b.eu-central-1.aws.symcld.net id 2E/CC-00773-AD867016; Mon, 02 Aug 2021 03:39:06 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrMIsWRWlGSWpSXmKPExsViZ8MRqnszgz3
+  RoHmHtcXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmrG3/wtjwRuJigUzz7A0MDaJdTFycQgJzGKS
+  OLN5LksXIyeQc5xRYu7lUhCbTUBHouNFN1hcREBfYunsPcwgtrBAkMTxd0tZQWwWARWJp92PG
+  EFsXgF3iTu3roLFJQQUJKY8fM8MEReUODnzCdgcZgFVie4jT5kgbHmJ5q2zmSHqFSW27zzDAm
+  FXSLw+fIl5AiPvLCTts5C0z0LSvoCReRWjRVJRZnpGSW5iZo6uoYGBrqGhsa6ZroW5XmKVbpJ
+  eaqlucmpeSVEiUFIvsbxYr7gyNzknRS8vtWQTIzDsUgrZwncwnnn9Qe8QoyQHk5Iob0gbS6IQ
+  X1J+SmVGYnFGfFFpTmrxIUYZDg4lCV7zdPZEIcGi1PTUirTMHGAMwKQlOHiURHhnpgGleYsLE
+  nOLM9MhUqcYFaXEeaeC9AmAJDJK8+DaYHF3iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5Iw73
+  yQ8TyZeSVw018BLWYCWjw1gxVkcUkiQkqqgWl6BY84S64x1+aLOl/7EipXFr2SDb1ksU1+75m
+  f3NoT3t6de3CVb7fN7iSxvIx9Z19nfHafe6M/Qj5gU4lUcLm/fmbo6RPTN+2+4blwTez2u+nM
+  XMrZZkVH9iZZuej+X3j+459uK3OfDqHdWxIkT8480Sj4NG2vbdibm8u4MybvkPHyN9HlZGVfs
+  jUwvYaJ0XmXqPelk0prLW6x22WZm8oIls41n3szZtcds2DHQwYtZgWmSXnmP1SypxuESEq/ec
+  IaUiERfa5fPbJlTWHindqS2fPSuc1XL/q+zG/mItv4r1MYd8xoruvnNDrY4+FwV7XTQ+hfrb/
+  0efkbp89uV8wJ7/y3plD7mbHNdGZvJZbijERDLeai4kQApNLpLzYDAAA=
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-23.tower-232.messagelabs.com!1627875508!274680!1
-X-Originating-IP: [62.60.8.84]
+X-Msg-Ref: server-15.tower-245.messagelabs.com!1627875545!292417!1
+X-Originating-IP: [62.60.8.85]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 4998 invoked from network); 2 Aug 2021 03:38:28 -0000
-Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-23.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 2 Aug 2021 03:38:28 -0000
+Received: (qmail 16047 invoked from network); 2 Aug 2021 03:39:05 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-15.tower-245.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 2 Aug 2021 03:39:05 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1723cSsP011785
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1723d5MS031571
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 2 Aug 2021 04:38:28 +0100
+	for <openembedded-devel@lists.openembedded.org>; Mon, 2 Aug 2021 04:39:05 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Mon, 2 Aug 2021 04:38:26 +0100
+ (TLS) id 15.0.1497.18; Mon, 2 Aug 2021 04:39:02 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-graphviz: upgrade 0.16 -> 0.17
-Date: Mon, 2 Aug 2021 11:38:20 +0800
-Message-ID: <1627875500-34256-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [PATCH] [oe] [meta-python] [PATCH] python3-pandas: upgrade 1.3.0 -> 1.3.1
+Date: Mon, 2 Aug 2021 11:38:56 +0800
+Message-ID: <1627875536-34323-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
 X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+Content-Type: text/plain; charset="y"
+Content-Transfer-Encoding: quoted-printable
 
-Version 0.17
-------------
-Drop Python 2 support. Tag Python 3.10 support.
-Migrate CI to GitHub actions. Add ``pypy3`` to matrix.
-Tests: implement ``--skip-exe`` via custom ``pytest`` marker.
-Documentation: point Anaconda users to ``conda-forge/python-graphviz``.
-Move type hints from docstrings to type annotations. Improve doctests.
-Examples: standardize import convention and modernize.
-Re-render example notebooks with Graphviz 2.46.1.
+Fixed regressions
+Pandas could not be built on PyPy (GH42355)
+DataFrame constructed with an older version of pandas could not be unpickled (GH42345)
+Performance regression in constructing a DataFrame from a dictionary of dictionaries (GH42248)
+Fixed regression in DataFrame.agg() dropping values when the DataFrame had an Extension Array dtype, a duplicate index, and axis=3D1 (GH42380)
+Fixed regression in DataFrame.astype() changing the order of noncontiguous data (GH42396)
+Performance regression in DataFrame in reduction operations requiring casting such as DataFrame.mean() on integer data (GH38592)
+Performance regression in DataFrame.to_dict() and Series.to_dict() when orient argument one of =E2=80=9Crecords=E2=80=9D, =E2=80=9Cdict=E2=80=9D, or =E2=80=9Csplit=E2=80=9D (GH42352)
+Fixed regression in indexing with a list subclass incorrectly raising TypeError (GH42433, GH42461)
+Fixed regression in DataFrame.isin() and Series.isin() raising TypeError with nullable data containing at least one missing value (GH42405)
+Regression in concat() between objects with bool dtype and integer dtype casting to object instead of to integer (GH42092)
+Bug in Series constructor not accepting a dask.Array (GH38645)
+Fixed regression for SettingWithCopyWarning displaying incorrect stacklevel (GH42570)
+Fixed regression for merge_asof() raising KeyError when one of the by columns is in the index (GH34488)
+Fixed regression in to_datetime() returning pd.NaT for inputs that produce duplicated values, when cache=3DTrue (GH42259)
+Fixed regression in SeriesGroupBy.value_counts() that resulted in an IndexError when called on a Series with one row (GH42618)
 
--License-Update: Copyright year updated to 2021.
+Bug fixes
+Fixed bug in DataFrame.transpose() dropping values when the DataFrame had an Extension Array dtype and a duplicate index (GH42380)
+Fixed bug in DataFrame.to_xml() raising KeyError when called with index=3DFalse and an offset index (GH42458)
+Fixed bug in Styler.set_sticky() not handling index names correctly for single index columns case (GH42537)
+Fixed bug in DataFrame.copy() failing to consolidate blocks in the result (GH42579)
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../{python3-graphviz_0.16.bb => python3-graphviz_0.17.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-graphviz_0.16.bb => python3-graphviz_0.17.bb} (61%)
+ .../python/{python3-pandas_1.3.0.bb =3D> python3-pandas_1.3.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pandas_1.3.0.bb =3D> python3-pandas_1.3.1.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-graphviz_0.16.bb b/meta-python/recipes-devtools/python/python3-graphviz_0.17.bb
-similarity index 61%
-rename from meta-python/recipes-devtools/python/python3-graphviz_0.16.bb
-rename to meta-python/recipes-devtools/python/python3-graphviz_0.17.bb
-index 1af657098b..306ada89cd 100644
---- a/meta-python/recipes-devtools/python/python3-graphviz_0.16.bb
-+++ b/meta-python/recipes-devtools/python/python3-graphviz_0.17.bb
-@@ -1,9 +1,9 @@
- DESCRIPTION = "Graphviz protocol implementation"
- HOMEPAGE = "https://graphviz.readthedocs.io/en/stable/"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f7831c564aeff14e68aa4ff7a93dc89f"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=87cd8818b7e63c6a9c580034e80d7521"
+diff --git a/meta-python/recipes-devtools/python/python3-pandas_1.3.0.bb b/meta-python/recipes-devtools/python/python3-pandas_1.3.1.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-pandas_1.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-pandas_1.3.1.bb
+index b98e2865c7..02e21e4f83 100644
+--- a/meta-python/recipes-devtools/python/python3-pandas_1.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pandas_1.3.1.bb
+@@ -6,7 +6,7 @@ HOMEPAGE =3D "http://pandas.pydata.org/"
+ LICENSE =3D "BSD-3-Clause"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3f23c5c092b74d245d48eeef72bc3fd2"
  
--SRC_URI[sha256sum] = "d2d25af1c199cad567ce4806f0449cb74eb30cf451fd7597251e1da099ac6e57"
-+SRC_URI[sha256sum] = "ef6e2c5deb9cdcc0c7eece1d89625fd07b0f2208ea2bcb483520907ddf8b4e12"
+-SRC_URI[sha256sum] =3D "c554e6c9cf2d5ea1aba5979cc837b3649539ced0e18ece186f055450c86622e2"
++SRC_URI[sha256sum] =3D "341935a594db24f3ff07d1b34d1d231786aa9adfa84b76eab10bf42907c8aed3"
  
  inherit pypi setuptools3
  
