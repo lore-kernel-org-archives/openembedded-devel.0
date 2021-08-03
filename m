@@ -1,50 +1,51 @@
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web10.4137.1628020913605611232
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.web10.4138.1628020914511759765
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Aug 2021 13:01:53 -0700
+ Tue, 03 Aug 2021 13:01:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=oznDRHK4;
- spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id pj14-20020a17090b4f4eb029017786cf98f9so351514pjb.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Aug 2021 13:01:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=is96xCDt;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id q17-20020a17090a2e11b02901757deaf2c8so403788pjd.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Aug 2021 13:01:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=CfFw+QbHhOvSiR8JpY2DRjOLCtgtCeXTWPSBfF3c/BM=;
-        b=oznDRHK4Xi6Cey3xJHEsNftjki8dBi2J6BckeJUpnwWrqRXCtqEbea7laqLPID/yI3
-         R1NK9McuEIGGuwzdJMkz05zbYOrDmii2WHgYHWm9Pxi9nF/BBJmSotfwKvPhQj2RmmSS
-         viR2hJSZwVnid1Mtfn3lU/ps0j2e/lCMj42vjmR9N8UNs69sYe4RvShFUiorJzAf/Ymt
-         T8pKHLrN6ZPGu8zfX5gSyF9/TM/GmQeVQDP4f8unibauq06aYp+m0NJEsjTPtDU2nnlb
-         N9Lt9iYWGSRu6jXyR2A7xtP7sfGHi3+m+afq17xAXk/geMMFHE8etc+mL8k9N5FlFEd0
-         rFjg==
+        bh=QrzdBEvDU4kcKlVHu6M1P3DZw7z2FC8N6pNRF+eCsKs=;
+        b=is96xCDtwTz6wQLmO/eoe2cTbNBcxg3bLmD3ly86rnPJb8DxsyfPzZoMFs2NaKgFQw
+         HALnJXC/Yol+7FePatbVGyPR4vnjWtM4mIWJaUecIehX4+suoErlZrKGAcsT20EC7agK
+         Z3Xb4L+kGs3INI2OTERpNXaUT9MtkQOvyXDz97TMW8nM790YKm1P06iYjaLy6DhAFXt6
+         luT4hb2V7FiWMNk/X+Oqnsf75x0JKqMK/Ff6LdAdKN9Z8Yksv0DKmFVPZ69zl67mNQMt
+         zY+JhKyzIsr/4hVojrMHG8FbHsQPBFIGm7PvSoxr5M1rblFFfXvUhfKnW++RGMbf0hvV
+         jN6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=CfFw+QbHhOvSiR8JpY2DRjOLCtgtCeXTWPSBfF3c/BM=;
-        b=fncq2/oob5Iq7+x9TL7RULv022pPqb7y2VqtTVfMUIoFv48v2I2/GeT6bqsNRuRQMw
-         S4vKqFOCmfz2zuM9b2kV0IqfVziYgiG4MIxr17fOAjCDoyCkedlGNf/YWIHSIIBWc4lu
-         bW/I8YAtoGqbHJuHre5KHd3CZhvck8CEqYT2yxbK3Y55nkSDNg0MwIEv/3YN7jgRZzQ5
-         tivpIJVgFfTOnwcK8d4s4qpwOooKBDnvnKGOiYZJhgRbuqBxbRXjAybgIaPdU1uQ0VWe
-         8XF1G6T28IO76YkrDxVgFOXg07/MBtCak1IN/5PYWAKw+tZ1P6uQN0CZT/IRQ532G5QC
-         hThA==
-X-Gm-Message-State: AOAM532wnt1KWp8KIIaUq506NYMyUiyns+lMXXn8aDchmrSyfBmb3Zz2
-	4SVcGSV8RM+VTGirFEJlSgdApPwxw2BYwQ==
-X-Google-Smtp-Source: ABdhPJyO3YHrK8NCcL1Go+NVwpyai26VEtEMV+vmKstlIow97T32BjjizrTCnTJVLv2Pw8ZqMMMmxQ==
-X-Received: by 2002:a17:90b:3703:: with SMTP id mg3mr24641506pjb.140.1628020912952;
-        Tue, 03 Aug 2021 13:01:52 -0700 (PDT)
+        bh=QrzdBEvDU4kcKlVHu6M1P3DZw7z2FC8N6pNRF+eCsKs=;
+        b=uJmFE6YJOIHQjTpFdL6Z5qF0didFKvm2SMQFvNcD+odSC1owDCgrgvtPmmpIlGSyUf
+         NX4tO3GE2AxXGhPx0FHX7hTofD8obGTbUPE8BJaGcBUYARp7XBY2I1WBbSW9UAyBtyg4
+         oBOtcaDYaN7Lv7u2ubI0wjjO0VnaQuBinrn8KwxHYOpt4e3pyRXYm6JUeXKI2jkdHziR
+         u43mnU+OcZv76lbpV7wiDx7NeztQHP/CfXn9RZSwBzvUxUfTHYYW3M0K/20T14f3VnBT
+         q8nd8nJ/uDj3JIhWSM76s4KcPEsmYM24+pniccHDbL1oFs8qhaqJO5VMJ72z1pFLsz8s
+         bt/Q==
+X-Gm-Message-State: AOAM530f/q9jUK179iKWLIcy7ODEVScxqqMA3MEeSZtfDdFND5aCcRHD
+	G72JcgTAmOvvEuu0PYG11gfJhbELbYXmLQ==
+X-Google-Smtp-Source: ABdhPJy0i4pYMBS2kx8rUGDUldWRx16i08nhNuVf84piwaVTv0KQFFlWaB51TemuthiixlBkUf5RTw==
+X-Received: by 2002:a65:6658:: with SMTP id z24mr1025035pgv.266.1628020913822;
+        Tue, 03 Aug 2021 13:01:53 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0:db81:2f56:60e4:2c64])
-        by smtp.gmail.com with ESMTPSA id a35sm18914290pgm.66.2021.08.03.13.01.52
+        by smtp.gmail.com with ESMTPSA id a35sm18914290pgm.66.2021.08.03.13.01.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Aug 2021 13:01:52 -0700 (PDT)
+        Tue, 03 Aug 2021 13:01:53 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/3] packagegroup-meta-oe: Correct override name and fix syntax
-Date: Tue,  3 Aug 2021 13:01:48 -0700
-Message-Id: <20210803200149.2706807-2-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe,meta-initramfs,meta-networking][PATCH 3/3] recipes: Fix override syntax
+Date: Tue,  3 Aug 2021 13:01:49 -0700
+Message-Id: <20210803200149.2706807-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20210803200149.2706807-1-raj.khem@gmail.com>
 References: <20210803200149.2706807-1-raj.khem@gmail.com>
@@ -52,22 +53,99 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb     | 2 +-
+ .../recipes-extended/corosync/corosync_3.0.3.bb           | 2 +-
+ .../meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb  | 8 ++++----
+ meta-oe/recipes-devtools/lapack/lapack_3.9.0.bb           | 4 ++--
+ meta-oe/recipes-extended/ostree/ostree_2021.3.bb          | 2 +-
+ meta-oe/recipes-graphics/fontforge/fontforge_20190801.bb  | 2 +-
+ 6 files changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index ad95b9c458..5cd605ff49 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -632,7 +632,7 @@ RDEPENDS:packagegroup-meta-oe-kernel ="\
+diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
+index 0f77f65df3..d45c62a082 100644
+--- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
++++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ PV = "0.6+git${SRCPV}"
+ S = "${WORKDIR}/git"
+ SRC_URI = "git://github.com/kexecboot/kexecboot.git"
+-SRC_URI:append_libc-klibc = "\
++SRC_URI:append:libc-klibc = "\
+     file://0001-kexecboot-Use-new-reboot-API-with-klibc.patch \
+     file://0001-make-Add-compiler-includes-in-cflags.patch \
  "
- RDEPENDS:packagegroup-meta-oe-kernel:append:x86 = " intel-speed-select ipmiutil pm-graph turbostat"
- RDEPENDS:packagegroup-meta-oe-kernel:append:x86-64 = " intel-speed-select ipmiutil kpatch pm-graph turbostat bpftool"
--RDEPENDS:packagegroup-meta-oe-kernel:append_poerpc64 = " libpfm4"
-+RDEPENDS:packagegroup-meta-oe-kernel:append:powerpc64 = " libpfm4"
+diff --git a/meta-networking/recipes-extended/corosync/corosync_3.0.3.bb b/meta-networking/recipes-extended/corosync/corosync_3.0.3.bb
+index 0af954c310..909296197c 100644
+--- a/meta-networking/recipes-extended/corosync/corosync_3.0.3.bb
++++ b/meta-networking/recipes-extended/corosync/corosync_3.0.3.bb
+@@ -37,7 +37,7 @@ PACKAGECONFIG[systemd] = "--enable-systemd --with-systemddir=${systemd_system_un
+ EXTRA_OECONF = "ac_cv_path_BASHPATH=${base_bindir}/bash ap_cv_cc_pie=no"
+ EXTRA_OEMAKE = "tmpfilesdir_DATA="
 
- # Kernel-selftest does not build with 5.8 and its exluded from build too so until its fixed remove it
- RDEPENDS:packagegroup-meta-oe-kernel:remove = "kernel-selftest"
+-#do_configure_prepend() {
++#do_configure:prepend() {
+ #    ( cd ${S}
+ #    ${S}/autogen.sh )
+ #}
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb
+index d8cf9b9f54..1ca7b6084c 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb
+@@ -1,8 +1,8 @@
+ DESCRIPTION = "LIRC is a package that allows you to decode and send infra-red signals of many commonly used remote controls."
+-DESCRIPTION:append_lirc = " This package contains the lirc daemon, libraries and tools."
+-DESCRIPTION:append_lirc-exec = " This package contains a daemon that runs programs on IR signals."
+-DESCRIPTION:append_lirc-remotes = " This package contains some config files for remotes."
+-DESCRIPTION:append_lirc-nslu2example = " This package contains a working config for RC5 remotes and a modified NSLU2."
++DESCRIPTION:append:lirc = " This package contains the lirc daemon, libraries and tools."
++DESCRIPTION:append:lirc-exec = " This package contains a daemon that runs programs on IR signals."
++DESCRIPTION:append:lirc-remotes = " This package contains some config files for remotes."
++DESCRIPTION:append:lirc-nslu2example = " This package contains a working config for RC5 remotes and a modified NSLU2."
+ HOMEPAGE = "http://www.lirc.org"
+ SECTION = "console/network"
+ LICENSE = "GPLv2"
+diff --git a/meta-oe/recipes-devtools/lapack/lapack_3.9.0.bb b/meta-oe/recipes-devtools/lapack/lapack_3.9.0.bb
+index 62d4df5e09..1664d637b7 100644
+--- a/meta-oe/recipes-devtools/lapack/lapack_3.9.0.bb
++++ b/meta-oe/recipes-devtools/lapack/lapack_3.9.0.bb
+@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=930f8aa500a47c7dab0f8efb5a1c9a40"
+ # Note this is not officially supported and is just illustrated here to
+ # show an example of how it can be done
+ # You'll also need your fortran recipe to depend on libgfortran
+-#FORTRAN_forcevariable = ",fortran"
+-#RUNTIMETARGET_append_pn-gcc-runtime = " libquadmath"
++#FORTRAN:forcevariable = ",fortran"
++#RUNTIMETARGET:append:pn-gcc-runtime = " libquadmath"
+
+ DEPENDS = "libgfortran"
+
+diff --git a/meta-oe/recipes-extended/ostree/ostree_2021.3.bb b/meta-oe/recipes-extended/ostree/ostree_2021.3.bb
+index a0576b51e2..b0c9849fad 100644
+--- a/meta-oe/recipes-extended/ostree/ostree_2021.3.bb
++++ b/meta-oe/recipes-extended/ostree/ostree_2021.3.bb
+@@ -154,7 +154,7 @@ RDEPENDS:${PN}:class-target = " \
+ # Note that to get ptest to pass you also need:
+ #
+ #   xattr in DISTRO_FEATURES
+-#   static ostree-prepare-root (PACKAGECONFIG_append_pn-ostree = " static")
++#   static ostree-prepare-root (PACKAGECONFIG:append:pn-ostree = " static")
+ #   meta-python in your layers
+ #   overlayfs in your kernel (KERNEL_EXTRA_FEATURES += "features/overlayfs/overlayfs.scc")
+ #   busybox built statically
+diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20190801.bb b/meta-oe/recipes-graphics/fontforge/fontforge_20190801.bb
+index 26d51bdafd..bcc85157cb 100644
+--- a/meta-oe/recipes-graphics/fontforge/fontforge_20190801.bb
++++ b/meta-oe/recipes-graphics/fontforge/fontforge_20190801.bb
+@@ -26,7 +26,7 @@ EXTRA_OECONF:append:class-native = " with_x=no"
+ LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI}"
+ BUILD_LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI}"
+
+-#do_configure_prepend() {
++#do_configure:prepend() {
+ # uthash sources are expected in uthash/src
+ #    mkdir -p ${S}/uthash/src
+ #    cp ${STAGING_INCDIR}/ut*.h ${S}/uthash/src
 --
 2.32.0
