@@ -1,95 +1,86 @@
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web08.1607.1628011258110313803
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.web10.1907.1628012312755367701
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Aug 2021 10:20:58 -0700
+ Tue, 03 Aug 2021 10:38:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=kWZjjI2Q;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id d17so2576703plr.12
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Aug 2021 10:20:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=M6h+e4o9;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f173.google.com with SMTP id e5so24591753pld.6
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Aug 2021 10:38:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=m4IKQRAp2SPuyQr+QvCZsNHvVvvqcDQusDES3mBFIjQ=;
-        b=kWZjjI2QDDULQkkcwzv7pxhAKzChhxO0M8V3RVkdeES/eAQWlm+6BZPD0lp7KFGI82
-         Zdn5LiddJC6WSyQL2ufefkdjP3otx5AmaQc3GZB1/zQmxWTQYTZxYtnWRFos5udn9m0P
-         5iUPVZ7hWkWAfAKG3etFZc8ukC5hWN2OIKzdvZULCM+y2HmeRyTIcMNBS1Kaw06MFbcU
-         bFDJwaD+L9ID3MM80zUjQrmZHfCrL8ZKxrqK6UtfqLDG5DPOoWn6/le11DCZjBvNNRRJ
-         uNiH+naHbhVlu4HV5NAbOPvE7eL/tfvY8Dwng9pGeG95bq/DixpwxQcImBB9LtT6aY1S
-         sJng==
+        bh=w75lUYqyO7YuZaLh0IdzyT7uEoGwTJ69NfNMzzfZBVA=;
+        b=M6h+e4o9hzLp0IBJVMEXDp+60C9X+fOP68Iv05u61eSxmDcyS+uI9SWl6qfmbqv9Xp
+         5xuSmQ6re/ZFZ/09EFcqBctUEiqxbv9/smM0gWJsTE0VXQ0WrdxHgbtxhIDPnhimfH69
+         GcdBISHTHgX9ccnqiW4rbvioCFfoQx4jJZ0TdA56s5SaypzSZnQPHenbTPeIUZTMuCEl
+         T+qjlt2SosYttOdLGK9xDnQv1uJvj/quVzFkpyCdGXQFKAyo1ifpTIo1zSSt1dBTHs9Q
+         wTuakPYaHi+g3kk1CT4Rg2tXwN26Seyp72Pu0fW2ZeHkXgSL6QLwn7ZM4b6bpLTFledL
+         nr5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=m4IKQRAp2SPuyQr+QvCZsNHvVvvqcDQusDES3mBFIjQ=;
-        b=A4Wvns4pmkqs0sLxNeGEd8HMCA7hxzGXOgQnfMxbl+qnSBFpKqI0SQtkqyyWgN9CXy
-         4NbBhKfJrdTgZNgDG46yYcHK+lLNTwp/kJ4arnzF0ApD637UMcTG1eQnGiUNWrJIGm5p
-         IJ8bipThHtCUn5na0CC3zeALLHguQaEyhaFDUHgZ56A/D0msMPCm/LfI2c/q99Bd6kzf
-         XfRBErTpOXlXlBK/cz5ZjHlvFm9vAkJIt/8PiXA8iPtZ+ca1o2dLMis2ojso12S2C992
-         I8MGqgD4gk+Q+fLqAffhbyg0CP1UQffTKZdk8HmpoIbndaEs6pK6iCKNpjSEhjRHliJI
-         aYTQ==
-X-Gm-Message-State: AOAM530CfhSzqbaYlaLRtfzBBAuyXB5ekkbSL8Mo74TLVu4kYeOHfU4z
-	FO4eyRHDXcXqQbiroGjlZIlRjpdiTP2ghQ==
-X-Google-Smtp-Source: ABdhPJwWGBWyOnVJVIssSL/qxk/sVAhTDsPlq7+yEGuUhRpiusVQVGJj61UWVbZ0vuTgMoXCxrW24A==
-X-Received: by 2002:a17:90b:2286:: with SMTP id kx6mr5554542pjb.11.1628011257161;
-        Tue, 03 Aug 2021 10:20:57 -0700 (PDT)
+        bh=w75lUYqyO7YuZaLh0IdzyT7uEoGwTJ69NfNMzzfZBVA=;
+        b=BqPxe3M787ueJjNqS08O1XOpvtWk0QZGjwSx4TezALbHGS8KiArI6ZYUH5XqMYOLbG
+         GB4qs6AM6/sy2SRu6G5jAbKw8SGESS3trMEUPbFgcO411kNKNpIxezJY1LKQvFncxS5u
+         gIsPe/vK/yPL44QcijEtpxS3wfiXM2cyCo1MV4ZhWjRfDIcjsZvX7gsRYD4pXtBC/n8a
+         LMp0eIeVTGFpjYdKHM4XJ0unIKMlXBHJTDjlzApJ/nS7MCasO41crc+E/QZY2esUxIv2
+         qEzSRx6gNO4Oa+zZz9d6de+LLQuB/0owZXfRLIvqoqdnmOonpOZM1xKRK6NvCSI+yX1X
+         JKVQ==
+X-Gm-Message-State: AOAM532OKuwZI5uIKjr35o9LlRzHwYvQGmB0T8TVYN1vRBNTyGZ83cPm
+	75kVuD7McCM5r6GrbQQe7AAD8CP59LqJSQ==
+X-Google-Smtp-Source: ABdhPJxaLP8Z1IKtqrJb5hSQGmtHwzwJH8M/Vh6NHrS77YGOHvP5RbfZWE0FrVTRsTn1hMvKnwPayg==
+X-Received: by 2002:a05:6a00:14c8:b029:3b8:7d42:960e with SMTP id w8-20020a056a0014c8b02903b87d42960emr15400091pfu.64.1628012312118;
+        Tue, 03 Aug 2021 10:38:32 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0:db81:2f56:60e4:2c64])
-        by smtp.gmail.com with ESMTPSA id l6sm16187057pff.74.2021.08.03.10.20.56
+        by smtp.gmail.com with ESMTPSA id a11sm16805297pgj.75.2021.08.03.10.38.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Aug 2021 10:20:56 -0700 (PDT)
+        Tue, 03 Aug 2021 10:38:31 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] fvwm: Package extra files and man pages
-Date: Tue,  3 Aug 2021 10:20:54 -0700
-Message-Id: <20210803172054.2666636-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] apitrace: Exclude from builds with glibc 2.34+
+Date: Tue,  3 Aug 2021 10:38:28 -0700
+Message-Id: <20210803173829.2669409-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Avoids using installed-vs-shipped
+It needs some work see [1]
+
+[1] https://github.com/apitrace/apitrace/issues/756
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb | 17 +++++++++++------
- 1 file changed, 11 insertions(+), 6 deletions(-)
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 1 -
+ meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb         | 3 +++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb b/meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb
-index 96877577e7..54e0a0ef4d 100644
---- a/meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb
-+++ b/meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb
-@@ -88,6 +88,8 @@ do_install:append() {
- # as well)
- PACKAGES = " \
-     ${PN} \
-+    ${PN}-extra \
-+    ${PN}-doc \
-     ${PN}-dbg \
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 06bde46a3c..a95fe8b040 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -227,7 +227,6 @@ RDEPENDS_packagegroup-meta-oe-dbs-python2 ="\
+
+ RDEPENDS_packagegroup-meta-oe-devtools ="\
+     abseil-cpp \
+-    apitrace \
+     breakpad \
+     bootchart \
+     android-tools-conf \
+diff --git a/meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb b/meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb
+index e42b891d46..a1e82970a3 100644
+--- a/meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb
++++ b/meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb
+@@ -30,3 +30,6 @@ EXTRA_OECMAKE += "\
  "
 
-@@ -98,12 +100,15 @@ FILES:${PN} = " \
-     ${datadir}/fvwm/ConfigFvwmDefaults \
- "
-
-+FILES:${PN}-extra = " \
-+    ${bindir} \
-+    ${libexecdir} \
-+    ${sysconfdir}/xdg/fvwm \
-+"
-+FILES:${PN}-doc = " \
-+    ${mandir} \
-+    ${datadir}/fvwm \
-+"
- RDEPENDS:${PN} = " \
-     xuser-account \
- "
--
--# by default a lot of stuff is installed and it's not easy to control what to
--# install, so install everything, but skip the check
--INSANE_SKIP:${PN} = " \
--    installed-vs-shipped \
--"
+ SECURITY_CFLAGS_toolchain-clang = ""
++
++# see https://github.com/apitrace/apitrace/issues/756
++PNBLACKLIST[apitrace] ?= "Needs porting to glibc 2.34+"
 --
 2.32.0
