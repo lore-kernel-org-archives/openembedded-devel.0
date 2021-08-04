@@ -1,137 +1,90 @@
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web10.7511.1628076031644245201
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web09.9002.1628084473181731680
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Aug 2021 04:20:32 -0700
+ Wed, 04 Aug 2021 06:41:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=gHc7ndsK;
- spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f51.google.com with SMTP id go31so3173994ejc.6
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Aug 2021 04:20:31 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=KjaqGirV;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id pj14-20020a17090b4f4eb029017786cf98f9so3626938pjb.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Aug 2021 06:41:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=HWWSa2350vxm8b99EWVf462YoWOI1sa+PqPMOuw9avU=;
-        b=gHc7ndsKo1ADyXvYs0t2T2iOSENaRnIocPXP129LCneC2v2EXquS0Dr37CIwgBXkox
-         VRlRJGMbJuxsBkhlOiJ9V0IvsU/XAJPJVNUZ+Rn6PFOVjyuZf91MeAeuQ78t9AF30HRz
-         +UDKPJ4vSHf0yE7/16vPHCQsoo57AwpdlcmPU2Kn4bS2TVMqVqDLfNrvlfJztNmLUfUP
-         o+VMglAUswZDoDW6LXpQKucYp/3mg2gilMCTZ7w0xibbhMYJ+BwExLUV1reVDXcJj4jd
-         H4y8j33Xgvlv04XiVYkTK+yjy1LywhMv3gEv6S/PvT3NWkVIJDdW7aoOchnWA8R5OiBC
-         zE9w==
+        h=subject:to:references:from:message-id:date:user-agent:mime-version
+         :in-reply-to:content-transfer-encoding:content-language;
+        bh=pmpxoeiTVcR2j88xeq89SO/TdM/Er119Tk74FXaBc2w=;
+        b=KjaqGirVB2UGXrfByB8PCiTZwAsrz3860imbcwoFwOr5BoyOLMUzrXc24e3eeG51d1
+         g3uSPcrWSTLxt20HXTYF9pHQgMxHKQlL8Br4IezW0Lomft8UsXqxKKcOegn6z5oY7TuQ
+         omp3uea9SuaRfi6/5SuMWpIFV+0m78uDESXqf/5RJWDVKzAQx5aF82CAgIMk0/4zRVS0
+         EAOtubvfZwfC1nIssYz7tny19Zoi2RD5fTK9nqu3ysh5fEHEKSkkf7WGOf4duuYeKBbR
+         ojAKL79gVDxNEqeabFEqTtd6lc0mDF0yHDzleJ84amZ9NbY9o0k/ySnJJ5tX13Gu6nrY
+         kyCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=HWWSa2350vxm8b99EWVf462YoWOI1sa+PqPMOuw9avU=;
-        b=Mjq505mr0rGOwq7otsxgT04Sx47wMn163/QsZJj+jEs+aOgnnClVlII2sdhiElUQwx
-         fvYBmsAU3FRnRHTa+FESZ1PALprwZQ3J/V+hP/oYAMgfFqDWa1ixU7qICyMHi85jvCzR
-         zqQ32ZEfmKSnnO4upm/6MR7cxW3ipSd0q6YeIDX7E5v2EPiqfir330xrzOYMc86PgEP2
-         +iidsJKidXdWQbEpLFRCceYQaoJGwgqUl4rz06dXIWHlkzpiVKb9FmXeU6RdpeKUCtUW
-         ikDJup2UhHyBpOgF/20OZt+NXraoYPBDJPY+80RY3M0KoFV19yE2hKlGVyT0UuzN6VUB
-         9QYQ==
-X-Gm-Message-State: AOAM531hCar7tcB//ppvgAQQRmyMOs5PgAiUY9JYVtU1ntw4EnEP9Y45
-	Bs851DoSvDVYik8cwIz4qOs8oOWN67mMdfLJIig=
-X-Google-Smtp-Source: ABdhPJzMlQAqsdSsDT3GcAz9DwOj1L3zAY95O85K5nmGE2ry6Po3OvaBOfWaMh88HXW/IdoblHLjaYGogYkpWl3qKsE=
-X-Received: by 2002:a17:907:990d:: with SMTP id ka13mr25626732ejc.392.1628076029851;
- Wed, 04 Aug 2021 04:20:29 -0700 (PDT)
+        h=x-gm-message-state:subject:to:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=pmpxoeiTVcR2j88xeq89SO/TdM/Er119Tk74FXaBc2w=;
+        b=HywWKODEUTF6AfmanwahJNNjmyWrXWqQ+Dmt9rasR4LJv+j6S0Q4mYMOtwiBJNUhV3
+         jJSm7AhS7wdpUOiGzchyC1otUTAriahTHqVCajcJECH/197nSbqTHGL4cd3pDBUgBVZ4
+         pa5oA6sjo+xmOkCaBaGMinceFT1viP13riFjL/Ng4+tBpWLzrVV1Yoa4azd4HGkltmxv
+         jAUjNN8T0lvyfkuv6jv+8laB9U7esRoCq8xE5OZn3qoGIqTkq2b1HRbxmA9f4yypqKjZ
+         T//PkYk26pnxBGg074aA3tlOj821jbZezVcC4BfDOgMQfIgiJlMpYjs6Y9BI+pjZ1Nw+
+         L3fA==
+X-Gm-Message-State: AOAM533ZV5xLCS4yzhuj/850EKGgpNtzr6FeXyrq15oA54QusFKJqxj/
+	jcB3QS8B9nbRf28IRoSUVf/I7l+mBRjrMg==
+X-Google-Smtp-Source: ABdhPJzcAJ19ylPvuRvrwji2RHj7yoR1MuB97hrT9RHRQghEPKOfze44Xlq2ot+O+sUs4/SEiJrx9Q==
+X-Received: by 2002:a63:1614:: with SMTP id w20mr2087979pgl.198.1628084472591;
+        Wed, 04 Aug 2021 06:41:12 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:484:f8e6:e2bc:be7? ([2601:202:4180:a5c0:484:f8e6:e2bc:be7])
+        by smtp.gmail.com with ESMTPSA id p20sm6171055pju.48.2021.08.04.06.41.11
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 04 Aug 2021 06:41:12 -0700 (PDT)
+Subject: Re: [oe] [meta-python][hardknott][PATCH] python3-janus: introduce new recipe
+To: Holger Assmann <h.assmann@pengutronix.de>,
+ openembedded-devel@lists.openembedded.org
+References: <20210804091900.7640-1-h.assmann@pengutronix.de>
+From: "Armin Kuster" <akuster808@gmail.com>
+Message-ID: <231c4f4f-4312-e562-595c-9e80de9fbd7a@gmail.com>
+Date: Wed, 4 Aug 2021 06:41:11 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-References: <20210802090220.10668-1-liuxiwei@inspur.com>
-In-Reply-To: <20210802090220.10668-1-liuxiwei@inspur.com>
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-Date: Wed, 4 Aug 2021 13:20:19 +0200
-Message-ID: <CA+chaQcXRTcsY9wz1qgr9PAo=dZzHZQbnqVJFMtNJ+3JK1zwiA@mail.gmail.com>
-Subject: Re: [oe][meta-security][PATCH] meta: Fix typos
-To: George Liu <liuxiwei1013@gmail.com>
-Cc: Yocto-mailing-list <yocto@lists.yoctoproject.org>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	akuster808 <akuster808@gmail.com>, sergio.prado@toradex.com, 
-	George Liu <liuxiwei@inspur.com>
-Content-Type: multipart/alternative; boundary="0000000000006d3f3b05c8b9fdeb"
+In-Reply-To: <20210804091900.7640-1-h.assmann@pengutronix.de>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
---0000000000006d3f3b05c8b9fdeb
-Content-Type: text/plain; charset="UTF-8"
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-On Mon, Aug 2, 2021 at 11:02 AM George Liu <liuxiwei1013@gmail.com> wrote:
+On 8/4/21 2:19 AM, Holger Assmann wrote:
+> Signed-off-by: Holger Assmann <h.assmann@pengutronix.de>
+Adding new packages are not allowed in stable branches per process.
 
-> Fix the variable spelling errors
-> s/SKIP_META_SECUIRTY_SANITY_CHECK/SKIP_META_SECURITY_SANITY_CHECK
->
-> Signed-off-by: George Liu <liuxiwei@inspur.com>
+-armin
 > ---
->  classes/sanity-meta-security.bbclass | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  .../recipes-devtools/python/python3-janus_0.6.1.bb    | 11 +++++++++++
+>  1 file changed, 11 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-janus_0.6.1.bb
 >
-> diff --git a/classes/sanity-meta-security.bbclass
-> b/classes/sanity-meta-security.bbclass
-> index b6c6b9c..f9e2698 100644
-> --- a/classes/sanity-meta-security.bbclass
-> +++ b/classes/sanity-meta-security.bbclass
-> @@ -1,7 +1,7 @@
->  addhandler security_bbappend_distrocheck
->  security_bbappend_distrocheck[eventmask] = "bb.event.SanityCheck"
->  python security_bbappend_distrocheck() {
-> -    skip_check = e.data.getVar('SKIP_META_SECUIRTY_SANITY_CHECK') == "1"
-> +    skip_check = e.data.getVar('SKIP_META_SECURITY_SANITY_CHECK') == "1"
->      if 'security' not in e.data.getVar('DISTRO_FEATURES').split() and not
-> skip_check:
->          bb.warn("You have included the meta-security layer, but \
->  'security' has not been enabled in your DISTRO_FEATURES. Some bbappend
-> files \
-> --
-> 2.30.2
->
+> diff --git a/meta-python/recipes-devtools/python/python3-janus_0.6.1.bb b/meta-python/recipes-devtools/python/python3-janus_0.6.1.bb
+> new file mode 100644
+> index 000000000000..83630eceb4e6
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-janus_0.6.1.bb
+> @@ -0,0 +1,11 @@
+> +DESCRIPTION = "Mixed sync-async queue to interoperate between asyncio tasks and classic threads"
+> +HOMEPAGE = "https://pypi.org/project/janus/"
+> +SECTION = "devel/python"
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=23878c357ebb4c8ce1109be365043349"
+> +
+> +SRC_URI[sha256sum] = "4712e0ef75711fe5947c2db855bc96221a9a03641b52e5ae8e25c2b705dd1d0c"
+> +
+> +inherit pypi setuptools3
+> +
+> +RDEPENDS_${PN} += "${PYTHON_PN}-asyncio ${PYTHON_PN}-core ${PYTHON_PN}-threading"
 >
 > 
 >
->
 
---0000000000006d3f3b05c8b9fdeb
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Acked-by:=C2=A0Martin Jansa &lt;<a href=3D"mailto:Martin.J=
-ansa@gmail.com">Martin.Jansa@gmail.com</a>&gt;</div><br><div class=3D"gmail=
-_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Aug 2, 2021 at 11:02 =
-AM George Liu &lt;<a href=3D"mailto:liuxiwei1013@gmail.com">liuxiwei1013@gm=
-ail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"=
-margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-lef=
-t:1ex">Fix the variable spelling errors<br>
-s/SKIP_META_SECUIRTY_SANITY_CHECK/SKIP_META_SECURITY_SANITY_CHECK<br>
-<br>
-Signed-off-by: George Liu &lt;<a href=3D"mailto:liuxiwei@inspur.com" targe=
-t=3D"_blank">liuxiwei@inspur.com</a>&gt;<br>
----<br>
-=C2=A0classes/sanity-meta-security.bbclass | 2 +-<br>
-=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-<br>
-diff --git a/classes/sanity-meta-security.bbclass b/classes/sanity-meta-se=
-curity.bbclass<br>
-index b6c6b9c..f9e2698 100644<br>
---- a/classes/sanity-meta-security.bbclass<br>
-+++ b/classes/sanity-meta-security.bbclass<br>
-@@ -1,7 +1,7 @@<br>
-=C2=A0addhandler security_bbappend_distrocheck<br>
-=C2=A0security_bbappend_distrocheck[eventmask] =3D &quot;bb.event.SanityCh=
-eck&quot;<br>
-=C2=A0python security_bbappend_distrocheck() {<br>
--=C2=A0 =C2=A0 skip_check =3D e.data.getVar(&#39;SKIP_META_SECUIRTY_SANITY=
-_CHECK&#39;) =3D=3D &quot;1&quot;<br>
-+=C2=A0 =C2=A0 skip_check =3D e.data.getVar(&#39;SKIP_META_SECURITY_SANITY=
-_CHECK&#39;) =3D=3D &quot;1&quot;<br>
-=C2=A0 =C2=A0 =C2=A0if &#39;security&#39; not in e.data.getVar(&#39;DISTRO=
-_FEATURES&#39;).split() and not skip_check:<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0bb.warn(&quot;You have included the meta=
--security layer, but \<br>
-=C2=A0&#39;security&#39; has not been enabled in your DISTRO_FEATURES. Som=
-e bbappend files \<br>
--- <br>
-2.30.2<br>
-<br>
-<br>
-<br>
-<br>
-</blockquote></div>
-
---0000000000006d3f3b05c8b9fdeb--
