@@ -1,61 +1,65 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.2])
- by mx.groups.io with SMTP id smtpd.web08.4349.1628133414642225642
+Received: from mail3.bemta25.messagelabs.com (mail3.bemta25.messagelabs.com [195.245.230.83])
+ by mx.groups.io with SMTP id smtpd.web08.4467.1628134525298755053
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Aug 2021 20:16:55 -0700
+ Wed, 04 Aug 2021 20:35:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=iqC1V/cA;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WYy4cc79;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.83, mailfrom: wangmy@fujitsu.com)
 Return-Path: <wangmy@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1628133412; i=@fujitsu.com;
-	bh=DtcV4kovC9qGK5/m3igZbxX77muywWdXUebqBrrZJ6o=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=iqC1V/cAo/B8pcWI0JHKzKnazp/kBRgda0iv6PGiuxqYtH9iDZyffDrx6EAFimwv1
-	 wPWAn77V4IMn5vr9uskPk0/4cAtPuXZYge7YOFdIBQOjulLI3pvbG3T9R2BWJF8Cnu
-	 viBwWdp4jk2xPYvMYCHlvDchCYCGUz8cOOtn6hyuS80KXEai5cQHEghAXVwAV3sggb
-	 y+oem+XfL1kl5T6ub5wIZs4y+qwPTbxJkBAdmSXZWNPYowgdBrUqyPEFMcuKMJJmN4
-	 CPkSoCXPDUJm7BW/z3IFT4aIg2rqUHo53UqitXjZUvTv/A8lSzj5XlcIxTpOEc8wxR
-	 9uiBMbUukrt4Q==
-Received: from [100.112.195.193] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-west-1.aws.symcld.net id EF/3C-07839-3285B016; Thu, 05 Aug 2021 03:16:51 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprBIsWRWlGSWpSXmKPExsViZ8MRqqscwZ1
-  ocOcIr8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnHxxQm2gp0cFY82XGNtYDzP3sXIxSEkMItJ
-  4s78A6wQznFGiUX9n4AynBxsAmoS02/dYAWxRQT0JZbO3sMMYjMLqEi8+N0DViMsYCmx79Rzs
-  DgLUPxC6wIwm1fAUWLfm6tgvRICChJTHr6HigtKnJz5hAVijoTEwRcvmCFqFCVmX25mgbArJG
-  bNamOawMg7C0nLLCQtCxiZVjFaJBVlpmeU5CZm5ugaGhjoGhoa6RpamuoaGZrqJVbpJuqlluq
-  WpxaX6BrqJZYX6xVX5ibnpOjlpZZsYgQGWErB4es7GG+9/qB3iFGSg0lJlPeDBHeiEF9Sfkpl
-  RmJxRnxRaU5q8SFGGQ4OJQneCaFAOcGi1PTUirTMHGCww6QlOHiURHiXhgGleYsLEnOLM9MhU
-  qcYFaXEeQ3CgRICIImM0jy4NliEXWKUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzFsJMp4nM6
-  8EbvoroMVMQIsvxHKCLC5JREhJNTDNC/m1Tv+E4NzdD9l3reIr7nizXVgvYBVzqJ7XNR0tteN
-  uywU4fvHOnJfut2HJ00TlOct6vwVWMJ/P/PV3ZwFXqoApV8Gq5CsP5t6/O8v165LV27cpPe9p
-  Pnt6z1EjqXSxCU4/ret0e5UsTCRsnPX+RH3W+nk3r/DtDMfEt1eXy047y6Dael0mQHfKH8cJ+
-  Wbtu4U6lITOhxrttORjuxTm58K3S+fcTfmfGWkct/aE2zsaL353eXL2Kv29/0/5NHmqPNLUYr
-  cNu7nITiP53ET1VlPO5I6uG3IT+2ueLtgW8uDlzBorRT3GVPGfv+ySTbLjPi4Vv7SNW3bj5Vf
-  yBYf/Vj75x3c1drrN8airN84rsRRnJBpqMRcVJwIAqS7pyCsDAAA=
+	s=170520fj; t=1628134522; i=@fujitsu.com;
+	bh=R3ZO4zuWTkIFdILr+i3sef4bzvQd+WbJKvC5ECIKk0I=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=WYy4cc79zikSe2M4Ib0TvrdJW2jSefXA6K/xX26A8fjpfiHCMWtlZ+bD/kLsZkjWv
+	 064LHe6hsVhlq7SdYtXuheeEjbW/X1cyNE1umgNejerADD+XKNaArIj2XweFoqOM84
+	 9+e2MtFzohcXUpyGO8WKvCKqfEt9equyMmYAUUw+AnpXOMwErLRyhXeKLWivkU9uFW
+	 bTjpVuYMJmlNTQl+0VNfuJ/NdSJ3u6Ex2ygaTiqwarkhBGSJwOheBNqrPUSv1lhQm0
+	 pzUsjxN0eVPRHiSG/mGRHHec56Z0emXA2nKJvbsOdO3P+6ABLvuYODPscSRUY5nmUv
+	 rfUlqeo46caHw==
+Received: from [100.112.198.115] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta.az-b.eu-west-1.aws.symcld.net id 85/9B-07821-A7C5B016; Thu, 05 Aug 2021 03:35:22 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrHIsWRWlGSWpSXmKPExsViZ8MRolsZw51
+  oMH2ClcXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnFq7RzmggccFU0T97M1MP5l72Lk4hASmMUk
+  sauhjaWLkRPIOc4ocfmKF4jNJqAmMf3WDVYQW0RAX2Lp7D3MIDazgIrEi9897CC2sICDxJtDd
+  xhBbBag+LflO8BqeAUcJfZ8PgZmSwgoSEx5+B7I5uDgFHCSmP1OCWKVo8SyrheMEOWCEidnPm
+  GBGC8hcfDFC6hWRYnZl5tZIOwKiVmz2pgmMPLPQtIyC0nLAkamVYwWSUWZ6RkluYmZObqGBga
+  6hoZGuoaWFrpGhqZ6iVW6SXqppbrlqcUluoZ6ieXFesWVuck5KXp5qSWbGIHBmFJw7PoOxquv
+  P+gdYpTkYFIS5f0gwZ0oxJeUn1KZkVicEV9UmpNafIhRhoNDSYK3IBooJ1iUmp5akZaZA4wMm
+  LQEB4+SCO/SMKA0b3FBYm5xZjpE6hSjopQ4bwBInwBIIqM0D64NFo2XGGWlhHkZGRgYhHgKUo
+  tyM0tQ5V8xinMwKgnzzgCZwpOZVwI3/RXQYiagxRdiOUEWlyQipKQamDIcfG4YG4pbXViW+Wu
+  e3iKxRVKz5V45a+87aGjIM296XSzDL/muK7+O//rL6DF1G8cPHtummolvP7R4Pm10XlCac3lH
+  WvwZvsv8bxjVUlSnqNnfeFSilq32Q/9P5sq3RkuP7qm6/nn7pT0LcnfVdYotPLE0IXRHXt1/9
+  /Q8CSEuv51hm0wbnEx+PbVI7HNhWzXFSuGG54J7SVutdBe3PN3ZeumOBJ/X2iKDx/Pq7vUJr9
+  YLOrqPTz1y8a8tX9w8L99acu1+xluf249ZtjB5rFIz/dxnedvd44q7Q8gfu4g1nxR+LXg6dau
+  S1+nydMs88WvXrJzf6Lc6rDj6Quq8wya/PSsd1H89yP105UrKDwElluKMREMt5qLiRAC2PSYF
+  QQMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-7.tower-271.messagelabs.com!1628133410!201749!1
-X-Originating-IP: [62.60.8.85]
+X-Msg-Ref: server-16.tower-285.messagelabs.com!1628134521!591361!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 21277 invoked from network); 5 Aug 2021 03:16:51 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-7.tower-271.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 5 Aug 2021 03:16:51 -0000
+Received: (qmail 25771 invoked from network); 5 Aug 2021 03:35:21 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-16.tower-285.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 5 Aug 2021 03:35:21 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1753Gj1r026282
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1753ZGJp017343
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Aug 2021 04:16:50 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Aug 2021 04:35:21 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 5 Aug 2021 04:16:42 +0100
+ (TLS) id 15.0.1497.18; Thu, 5 Aug 2021 04:35:16 +0100
 From: "wangmy" <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] iwd: upgrade 1.15 -> 1.16
-Date: Thu, 5 Aug 2021 11:16:31 +0800
-Message-ID: <1628133391-4914-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libqmi: upgrade 1.28.6 -> 1.28.8
+Date: Thu, 5 Aug 2021 11:34:50 +0800
+Message-ID: <1628134490-5097-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1628134490-5097-1-git-send-email-wangmy@fujitsu.com>
+References: <1628134490-5097-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.33]
 X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
@@ -64,26 +68,26 @@ Content-Type: text/plain
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-oe/recipes-connectivity/iwd/{iwd_1.15.bb => iwd_1.16.bb} | 2 +-
+ .../libqmi/{libqmi_1.28.6.bb => libqmi_1.28.8.bb}               | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/iwd/{iwd_1.15.bb => iwd_1.16.bb} (94%)
+ rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.28.6.bb => libqmi_1.28.8.bb} (90%)
 
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.15.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.16.bb
-similarity index 94%
-rename from meta-oe/recipes-connectivity/iwd/iwd_1.15.bb
-rename to meta-oe/recipes-connectivity/iwd/iwd_1.16.bb
-index bb7538739..6bace616a 100644
---- a/meta-oe/recipes-connectivity/iwd/iwd_1.15.bb
-+++ b/meta-oe/recipes-connectivity/iwd/iwd_1.16.bb
-@@ -8,7 +8,7 @@ DEPENDS = "ell"
- SRC_URI = "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar.xz \
-            file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-for-e.patch \
-           "
--SRC_URI[sha256sum] = "a7ab8e80592da5cb1a8b651b6d41e87e4507a3f07e04246e05bca89c547af659"
-+SRC_URI[sha256sum] = "af548398aea2089a3a5103e5586561f24791090a17d4b2e50785e2faab5ed03a"
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.28.6.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.28.8.bb
+similarity index 90%
+rename from meta-oe/recipes-connectivity/libqmi/libqmi_1.28.6.bb
+rename to meta-oe/recipes-connectivity/libqmi/libqmi_1.28.8.bb
+index f062d8631..ebc8b8b8a 100644
+--- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.28.6.bb
++++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.28.8.bb
+@@ -14,7 +14,7 @@ inherit autotools pkgconfig bash-completion gobject-introspection
  
- inherit autotools manpages pkgconfig python3native systemd
+ SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
  
+-SRC_URI[sha256sum] = "cbb890893de1dee06ea5ebdac2d22f0469314a6f93f15f61f2f1206a1c9ae5fd"
++SRC_URI[sha256sum] = "6e3bbbd200bc1b64b23f6254fef9212f2699ec77cfb32075d2ba5079c73a9f78"
+ 
+ PACKAGECONFIG ??= "udev mbim"
+ PACKAGECONFIG[udev] = ",--without-udev,libgudev"
 -- 
 2.25.1
 
