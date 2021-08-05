@@ -1,59 +1,59 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.112])
- by mx.groups.io with SMTP id smtpd.web12.6765.1628157069966602710
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web11.6669.1628157083278062826
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Aug 2021 02:51:10 -0700
+ Thu, 05 Aug 2021 02:51:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=SR1UQC3C;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=pIP24z5S;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1628157067; i=@fujitsu.com;
-	bh=XEFus6JG+yHXDL6DEB9/vSAQkZQSvgFRQkjpjUkl0C8=;
+	s=170520fj; t=1628157081; i=@fujitsu.com;
+	bh=rczdc8OaDj2IA5SJ5X/XSTTNfhmz3Dep3uZm335JdZc=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=SR1UQC3CjCUfaMOxc1vjdfPfmUrNJsv2t5LnydAlsu3pMhXKXZ8f9Yis+OtkXunaA
-	 fCEOJXM1PL4S64k3d/9VSA9i51sjI6f7c2+CVbAo1BG/hs+A7pa5xwDU4ohjgmBaw6
-	 mt/3fZNT5o1Ao95g6SHKpyBdvc/skRt/jRIuHMBCJ+rgT250kUKvCGWtkgn6AEb1h8
-	 ueignW8m1+4CgOKtypb28/lCZzS0ITDfU9DM3XXtLQwapKJQ/wiB7aqL5USdqDNBZm
-	 Y5xNiWoj030Gfrgu5CxBe9B4TPNdIxOmUCOFuJ/zQmD5AOS3A5my2N2HfkWLBE3UAZ
-	 fFWKhCZfOjSKg==
-Received: from [100.113.4.199] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-b.eu-central-1.aws.symcld.net id AE/95-06992-B84BB016; Thu, 05 Aug 2021 09:51:07 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuplkeJIrShJLcpLzFFi42Kxs+GYqtu9hTv
-  R4ONafouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPugoPsBVt4KmavaGJvYFzA3cXIxSEkMItJ
-  YtbFQ+wQznFGiYNPrzN2MXJysAnoSHS86GYBsUUE9CWWzt7DDGILC/hIHL/QzgpiswioSMw4t
-  gzM5hVwk7jy/AZYr4SAgsSUh++ZIeKCEidnPgGbwywgIXHwxQtmiBpFie07z7BA2BUSrw9fYp
-  7AyDMLScssJC0LGJlWMVomFWWmZ5TkJmbm6BoaGOgaGhrrmusaGhnqJVbpJumlluomp+aVFCU
-  CZfUSy4v1iitzk3NS9PJSSzYxAkMppZC9cgfj2jcf9A4xSnIwKYny6vdyJwrxJeWnVGYkFmfE
-  F5XmpBYfYpTh4FCS4FXZDJQTLEpNT61Iy8wBhjVMWoKDR0mEd/EmoDRvcUFibnFmOkTqFKOil
-  DhvK0hCACSRUZoH1waLpUuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHkLQabwZOaVwE1/Bb
-  SYCWjxhVhOkMUliQgpqQamKQqTCh9ZXspsVnB4tkHr2TeNri6PJ+Fmck1dPCna747KTFGNUcp
-  S/rLlmLWa+jujUB21Wrlf5rXvrmfeX/mmefYlnoy97FyxhZIFkSKcSl5fPDdfNb/IPmPp8iA3
-  O4F3bayP/tZPuP2ky+i90aswh6qGJeoZ944lq6hLV5bvYGOQX372pQHz2sTKJ32ls/Pr9Nq2T
-  YwT36DcUhIabzYlr+lUWXHf+7QnWR1fcld8e1mcp7BKa2+vf4aWf9Dnlbaed0/8ctYu0F2uJt
-  OjOHmFSLDEX5trFhN/MO1psy5wu8p6Rcr+ANPEifHPC8/Ir/rIW+X69+6VFTl2zvaVHOEr273
-  t+Cuua92bfeD+ZSWW4oxEQy3mouJEAL3JhpcgAwAA
+	b=pIP24z5S55312mzdi20q+RwMIrtFdJMIJaYazA3RXYrFTboCeecV4n2vcW51ngtj0
+	 VbXywX6n7Q+Rq7KNoI14WMQgaQ/o/eqsXTCoR68MMQFROnYdCkfBfvvTl7F109ms5X
+	 QjupZTXSndBkm0zD9RdP1sJ6FjkDRE7/45eLJcTzRxOszRs/X1rZVpcgacZFgM9EPW
+	 7gVjfjMqR/69pBXedp62Y+YR8GIZR8sPk6KU4Bqyj8HVTC1AYyOqQQTwLXnXh5YNyL
+	 MOVrtrtplp9V8H0DapMN0d0E85q1SSqBPkoCXZcvGFfs6eWtph2PqDmy13QVSq8nKk
+	 0IMVrXCbApnrw==
+Received: from [100.113.1.116] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-a.eu-central-1.aws.symcld.net id FF/83-16478-994BB016; Thu, 05 Aug 2021 09:51:21 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuplkeJIrShJLcpLzFFi42Kxs+GYojtzC3e
+  iwfKfjBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bCFadZCt5xVpy7+Jy9gbGBs4uRi0NIYBaT
+  xMXfbxkhnOOMEvNmTWbuYuTkYBPQkeh40c0CYosI6Essnb0HLC4s4CWxamUrO4jNIqAi8ebzC
+  zYQm1fATeJW72ywegkBBYkpD98zQ8QFJU7OfAIWZxaQkDj44gUzRI2ixPadZ6DqKyReH77EPI
+  GRZxaSlllIWhYwMq1itEwqykzPKMlNzMzRNTQw0DU0NNY11DUyNtNLrNJN1Est1U1OzSspSgT
+  K6iWWF+sVV+Ym56To5aWWbGIEhlJKIeObHYxfX3/QO8QoycGkJMqr38udKMSXlJ9SmZFYnBFf
+  VJqTWnyIUYaDQ0mCV2UzUE6wKDU9tSItMwcY1jBpCQ4eJRHexZuA0rzFBYm5xZnpEKlTjIpS4
+  rytIAkBkERGaR5cGyyWLjHKSgnzMjIwMAjxFKQW5WaWoMq/YhTnYFQS5i0EmcKTmVcCN/0V0G
+  ImoMUXYjlBFpckIqSkGph6Hmw596Z9UfFPbof3UdbChsnb59owHD5eqbVtjuwswV9q1Us5V29
+  Sn7C2nOlT1Nzb+RaP9so8WvbffV5ialf2M+7X32afOmTcsPFh8Hl2ebYE4azMu2LCikpJJet8
+  jq5j4mhjO7h8U8SDSOt3WkY/Tmb+LHx9sdPg9cLdbGVBTlfTp+TULFu369q/9xZL/zdXBehIX
+  NM6ZJa8/MLamkghsRl8cv//HvM03quqc7HgW+2mzzcFc345JvF7Np3vyl3GIbdm4aOQvvZsoT
+  2PHWtDVMPUzt64luetuuDP2eLLB6PlrnTcORY1X5itkvH02kuTd0iUJQT6LFpp/lo9KbMv9lk
+  v31J+ljnSIs9aVZ2UWIozEg21mIuKEwEZYULsIAMAAA==
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-8.tower-238.messagelabs.com!1628157066!323371!1
-X-Originating-IP: [62.60.8.149]
+X-Msg-Ref: server-14.tower-228.messagelabs.com!1628157080!9089!1
+X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 12255 invoked from network); 5 Aug 2021 09:51:07 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-8.tower-238.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 5 Aug 2021 09:51:07 -0000
+Received: (qmail 25918 invoked from network); 5 Aug 2021 09:51:20 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-14.tower-228.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 5 Aug 2021 09:51:20 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1759p6Ct021003
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1759pKD4002411
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Aug 2021 10:51:06 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Aug 2021 10:51:20 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 5 Aug 2021 10:51:04 +0100
+ (TLS) id 15.0.1497.18; Thu, 5 Aug 2021 10:51:18 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-socketio: upgrade 5.3.0 -> 5.4.0
-Date: Fri, 6 Aug 2021 05:50:58 +0800
-Message-ID: <1628200258-4626-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-tqdm: upgrade 4.61.2 -> 4.62.0
+Date: Fri, 6 Aug 2021 05:51:12 +0800
+Message-ID: <1628200272-4673-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -61,37 +61,33 @@ X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-Release 5.4.0 - 2021-08-02
-
-Support msgpack and custom packet serializers #749 (commit)
-Return error packet if client connects to an already connected namespace (commit)
-Handle CancelledError in async pubsub managers #750 (commit)
-More robust handling of emit's "to" argument #689 (commit)
-Remove executable permissions from setup.py, which has no shebang #748 (commit) (thanks Ben Beasley!)
-Improved project structure (commit)
+asyncio.gather API consistency with stdlib (#1212)
+fix shutdown exception (#1209 <- #1198)
+misc build framework updates (#1209)
+add GH Sponsors & merch links
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../{python3-socketio_5.3.0.bb => python3-socketio_5.4.0.bb}    | 2 +-
+ .../python/{python3-tqdm_4.61.2.bb => python3-tqdm_4.62.0.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-socketio_5.3.0.bb => python3-socketio_5.4.0.bb} (89%)
+ rename meta-python/recipes-devtools/python/{python3-tqdm_4.61.2.bb => python3-tqdm_4.62.0.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-socketio_5.3.0.bb b/meta-python/recipes-devtools/python/python3-socketio_5.4.0.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-socketio_5.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-socketio_5.4.0.bb
-index 18a1753bb7..cd2c436a5c 100644
---- a/meta-python/recipes-devtools/python/python3-socketio_5.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-socketio_5.4.0.bb
-@@ -9,7 +9,7 @@ inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-tqdm_4.61.2.bb b/meta-python/recipes-devtools/python/python3-tqdm_4.62.0.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-tqdm_4.61.2.bb
+rename to meta-python/recipes-devtools/python/python3-tqdm_4.62.0.bb
+index ef0e5f40a4..f9b530d652 100644
+--- a/meta-python/recipes-devtools/python/python3-tqdm_4.61.2.bb
++++ b/meta-python/recipes-devtools/python/python3-tqdm_4.62.0.bb
+@@ -5,7 +5,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT & MPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=59e4271a933d33edfe60237db377a14b"
  
- PYPI_PACKAGE = "python-socketio"
+-SRC_URI[sha256sum] = "8bb94db0d4468fea27d004a0f1d1c02da3cdedc00fe491c0de986b76a04d6b0a"
++SRC_URI[sha256sum] = "3642d483b558eec80d3c831e23953582c34d7e4540db86d9e5ed9dad238dabc6"
  
--SRC_URI[sha256sum] = "3dcc9785aaeef3a9eeb36c3818095662342744bdcdabd050fe697cdb826a1c2b"
-+SRC_URI[sha256sum] = "ca807c9e1f168e96dea412d64dd834fb47c470d27fd83da0504aa4b248ba2544"
+ inherit pypi setuptools3
  
- PACKAGECONFIG ?= "asyncio_client client"
- PACKAGECONFIG[asyncio_client] = ",,,${PYTHON_PN}-aiohttp ${PYTHON_PN}-websockets"
 -- 
 2.25.1
 
