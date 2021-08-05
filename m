@@ -1,60 +1,60 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.69])
- by mx.groups.io with SMTP id smtpd.web12.6298.1628152526527454719
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.68])
+ by mx.groups.io with SMTP id smtpd.web12.6301.1628152539816304867
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Aug 2021 01:35:26 -0700
+ Thu, 05 Aug 2021 01:35:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=yURnGEf7;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.69, mailfrom: zhengrq.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ZO4/2I9Z;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.68, mailfrom: zhengrq.fnst@fujitsu.com)
 Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1628152524; i=@fujitsu.com;
-	bh=E+Ef059brqEPKyfzEILtMFTXwflKSCt1Fc7/NilSBHI=;
+	s=170520fj; t=1628152538; i=@fujitsu.com;
+	bh=ntNie/vR+gE9+dzpdyvHuoOokzYAkri3UZngNNfBx5w=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=yURnGEf7Sl/9MqGDTG+oEGFQ3YrXxOrFcXgA/Ac2WGVjciDAVZsWzEEflB6ueVsR6
-	 bvctO0gf9eJNz9cp1KJRIeoBU2UivSHZ9AzOAOV8ttDBL8Djm9G40NJd0jdYFu4Wy0
-	 LDI7Sq4XowmTqjgwKB/i0O7910EyRzP89MEuzBz197EmztIT3ruVv5nR/+rMSo7h1o
-	 dqrSCEoIZkd2fLXf+x1mYVcLnJlMgfjZbnpES+sMCG83010efk8VbpQqD8Hp/IFCrx
-	 cu8XdR2bxIfoQtREGnPTeIuxl5PuydGbi4WyND2FXt4CYPluMUF2CHMcINZrfVx3yj
-	 wwymoukfI2LPA==
+	b=ZO4/2I9ZRP+VZOf6opA7F0JtKXTnHp40QJQkp6CMzY3kDsFPV0nC0gsTYS9cxaLnZ
+	 wxpJE30BgJ2TN8X1wRB8MuB8B6rZrBcVq97JhmAtj5/eq0jvcBLhWPpGFIk9cOJh2C
+	 mU/PUEGEvTngQd1Eh1uP8pvFKTmYogW6tpgwT13waCUszPTzBCTa7ZS05vLwpnQ7Ss
+	 JR/v8EJ1tlMC0nDnFmKejAt91l4bFN5CZD6UipFEJaE5t1cdJ3ZvqqjNrT76HjA9bc
+	 Tk7ehBfxNFc+xl8OiNJEKGG5W2PXCuclnjUFYYR/M2TyWcuDq2p8LqxA+dRxQybnKc
+	 Nnfsm8wIRLCWQ==
 Received: from [100.112.198.129] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-5.bemta.az-b.eu-west-1.aws.symcld.net id 06/A9-07336-CC2AB016; Thu, 05 Aug 2021 08:35:24 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrKIsWRWlGSWpSXmKPExsViZ8MxRffUIu5
-  EgznH5SwuHl7K7MDocW7jCsYAxijWzLyk/IoE1oyPmw+zFLRwVFy6eJ+1gXELexcjF4eQwCwm
-  iYZfm9ggnN2MEqee/2HsYuTkYBPQlTj3eC07iC0ioC+xdPYeZhBbWMBa4sPFDhYQm0VAReL22
-  9NgNq+Ah8SrCeeZQGwJAQWJKQ/fM0PEBSVOznwCVsMsICFx8MULoDgHUI2ixOzp8hDlFRKvD1
-  9insDIMwtJxywkHQsYmVYxWiQVZaZnlOQmZuboGhoY6BoaGukaWprpGhka6yVW6SbppZbqlqc
-  Wl+ga6iWWF+sVV+Ym56To5aWWbGIEhlFKwZGrOxi733zQO8QoycGkJMqr38udKMSXlJ9SmZFY
-  nBFfVJqTWnyIUYaDQ0mCt2IBUE6wKDU9tSItMwcY0jBpCQ4eJRFeZpA0b3FBYm5xZjpE6hSjN
-  8fl6/MWMXM8W7sESG6YtxRI/r97F0j2Lzi4mpnjZvuh1cxCLHn5ealS4ryqC4FGCICMyCjNg1
-  sAi81LjLJSwryMDAwMQjwFqUW5mSWo8q8YxTkYlYR51UGm8GTmlcDd8QroRCagEy/EcoKcWJK
-  IkJJqYDowadIP3f42mYOb9bbHM0eeUZkazTS1ymO7peDqPcsdf8Xx6OtZXeZ79XO59NTJWztF
-  Pt66wBzavDt6c/TeSboxIduPf7hfwB24SS9xRdOem3qf79dn3jHp3Pak8cOO+w6pW30bm+UnX
-  Pjy5ofjZ+4jUn/e5a/9o/B5s9mNLD0//luJ2TuXSQUsPFG1rKU85RJ3yQ7+SVeEXqTOmrT4YA
-  xLWOJvX/OJkc8yebbKn+e31r6UtyHlmTBj7OtzU1kklk9SqBHPviF8U/fCS43CJ6cDd3zgdm+
-  5xFTne+cba+e0otUPHkUcCZijx/El7rH8Lo6Jq3Q0bNq/Tpw6t5bHpteE5W/Y6ogYl1bezPvn
-  Of8rsRRnJBpqMRcVJwIAIsO9X0gDAAA=
+	by server-4.bemta.az-b.eu-west-1.aws.symcld.net id 3B/0C-07373-AD2AB016; Thu, 05 Aug 2021 08:35:38 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrIIsWRWlGSWpSXmKPExsViZ8MRqntzEXe
+  iwekNRhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bGjWfZC/p4K3p2X2BrYHzE3cXIxSEkMItJ
+  4vCx/ewQzm5GiZtz7jJ1MXJysAnoSpx7vJYdxBYR0JdYOnsPM4gtLGAjMeHMRVYQm0VAReLk6
+  j1sIDavgIfE9osbwOISAgoSUx6+Z4aIC0qcnPmEBcRmFpCQOPjiBVCcA6hGUWL2dHmI8gqJ14
+  cvMU9g5JmFpGMWko4FjEyrGC2SijLTM0pyEzNzdA0NDHQNDY10DS0tdY2MzPUSq3ST9FJLdct
+  Ti0t0DfUSy4v1iitzk3NS9PJSSzYxAsMopeD44x2MK9580DvEKMnBpCTKq9/LnSjEl5SfUpmR
+  WJwRX1Sak1p8iFGGg0NJgrdiAVBOsCg1PbUiLTMHGNIwaQkOHiURXmaQNG9xQWJucWY6ROoUY
+  zjHm7VLFjFzvAWTbffuAsl2MDlzwcHVzByzwOT99kNA8gGIFGLJy89LlRLnVV0INE4AZFxGaR
+  7cMljMXmKUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzKsOMoUnM68E7qZXQOcyAZ17IZYT5Ny
+  SRISUVAPToQQB7ykh8So9Mcf3RalNP1m5/H/ttSPXvVlOe9l07DDqidv4NbSKN5NbSzTrpqG0
+  pdc3p0jxUIaY4+xS6QtCVlzd8DhynrbZg/fiUZM/5V+exL6pwa306FzuHL9+rfpE+2Z+eZlO6
+  Z8xvydYFpy9t2Kj4q7gCC3BT1aplwzM33Vd6T6zWn6X+zSG9sAK90aPd2vag95Vn2yws/+wg6
+  tXJjr98MXdGsd3vb/6Z8XBvcuY/z/4ETW7W7Cp8GST8y0F89bjZb86/VcK2Ki/u+/AHGWmy7T
+  Lziv55my7OYzNRWbBh8wjgqYobmFwLj79p7F45ZcNBYbRefddCl+L/E/N9DmsMqEjZkmoyqXY
+  i0osxRmJhlrMRcWJAGiY909UAwAA
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-7.tower-291.messagelabs.com!1628152522!194!1
-X-Originating-IP: [62.60.8.148]
+X-Msg-Ref: server-16.tower-291.messagelabs.com!1628152537!615213!1
+X-Originating-IP: [62.60.8.85]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 18516 invoked from network); 5 Aug 2021 08:35:22 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-7.tower-291.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 5 Aug 2021 08:35:22 -0000
+Received: (qmail 26782 invoked from network); 5 Aug 2021 08:35:37 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-16.tower-291.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 5 Aug 2021 08:35:37 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1758ZMHX020409
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1758ZbNu024865
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Aug 2021 09:35:22 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Aug 2021 09:35:37 +0100
 Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 5 Aug 2021 09:35:19 +0100
+ (TLS) id 15.0.1497.18; Thu, 5 Aug 2021 09:35:35 +0100
 From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] xwd: upgrade 1.0.7 -> 1.0.8
-Date: Thu, 5 Aug 2021 16:35:14 +0800
-Message-ID: <1628152514-23176-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] valijson: upgrade 0.4 -> 0.5
+Date: Thu, 5 Aug 2021 16:35:28 +0800
+Message-ID: <1628152528-23213-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.35]
@@ -62,26 +62,39 @@ X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
+This is mostly a maintenance release.
+It addresses a number of warnings that were produced when compiling
+with warnings enabled (/W4) on MSVC.
+In some cases, warnings have been suppressed on a per-file basis,
+through the use of pragma statements.
+This was done to minimise the potential impact of changes required
+to exhaustively address these warnings.
+
+Bundled versions of gtest and rapidjson have also been updated,
+and several minor bug fixes have been included.
+
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../recipes-graphics/xorg-app/{xwd_1.0.7.bb => xwd_1.0.8.bb}   | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/xorg-app/{xwd_1.0.7.bb => xwd_1.0.8.bb} (69%)
+ .../valijson/{valijson_0.4.bb => valijson_0.5.bb}               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/{valijson_0.4.bb => valijson_0.5.bb} (96%)
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/xwd_1.0.7.bb b/meta-oe/recipes-graphics/xorg-app/xwd_1.0.8.bb
-similarity index 69%
-rename from meta-oe/recipes-graphics/xorg-app/xwd_1.0.7.bb
-rename to meta-oe/recipes-graphics/xorg-app/xwd_1.0.8.bb
-index 1ad48b071..44b9c80d7 100644
---- a/meta-oe/recipes-graphics/xorg-app/xwd_1.0.7.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xwd_1.0.8.bb
-@@ -7,5 +7,4 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c0cdb783e9a0198237371fdaa26a18bf"
- DEPENDS = "libxmu libxkbfile"
+diff --git a/meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.4.bb b/meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.5.bb
+similarity index 96%
+rename from meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.4.bb
+rename to meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.5.bb
+index a9302616b..9b6f19f58 100644
+--- a/meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.4.bb
++++ b/meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.5.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=015106c62262b2383f6c72063f0998f2"
  
--SRC_URI[md5sum] = "11794a8eba6d295a192a8975287fd947"
--SRC_URI[sha256sum] = "cd6815b8b9e0b98e284d3d732fb12162159cb9dcee4f45a7d4c0bd8b308a6794"
-+SRC_URI[sha256sum] = "fbaa2b34163714fe7be22b60920ea4683f63b355babb1781aec2e452a033031b"
+ SRC_URI = "git://github.com/tristanpenman/valijson.git"
+-SRCREV = "9183462118f58a3ca4be82b8f656f18707229737"
++SRCREV = "c5487c39eb900b97535f8b3a38a17af098c784e3"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.25.1
 
