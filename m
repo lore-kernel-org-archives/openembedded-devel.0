@@ -1,99 +1,93 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.68])
- by mx.groups.io with SMTP id smtpd.web12.6301.1628152539816304867
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.3])
+ by mx.groups.io with SMTP id smtpd.web10.6766.1628157044723409487
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Aug 2021 01:35:40 -0700
+ Thu, 05 Aug 2021 02:50:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ZO4/2I9Z;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.68, mailfrom: zhengrq.fnst@fujitsu.com)
-Return-Path: <zhengrq.fnst@fujitsu.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=wIxVkjmO;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.3, mailfrom: zangrc.fnst@fujitsu.com)
+Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1628152538; i=@fujitsu.com;
-	bh=ntNie/vR+gE9+dzpdyvHuoOokzYAkri3UZngNNfBx5w=;
+	s=170520fj; t=1628157042; i=@fujitsu.com;
+	bh=jlmEvL4+H5HsBtIgaFC8A4QBu6QnASF+Tk8NjIOk48E=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=ZO4/2I9ZRP+VZOf6opA7F0JtKXTnHp40QJQkp6CMzY3kDsFPV0nC0gsTYS9cxaLnZ
-	 wxpJE30BgJ2TN8X1wRB8MuB8B6rZrBcVq97JhmAtj5/eq0jvcBLhWPpGFIk9cOJh2C
-	 mU/PUEGEvTngQd1Eh1uP8pvFKTmYogW6tpgwT13waCUszPTzBCTa7ZS05vLwpnQ7Ss
-	 JR/v8EJ1tlMC0nDnFmKejAt91l4bFN5CZD6UipFEJaE5t1cdJ3ZvqqjNrT76HjA9bc
-	 Tk7ehBfxNFc+xl8OiNJEKGG5W2PXCuclnjUFYYR/M2TyWcuDq2p8LqxA+dRxQybnKc
-	 Nnfsm8wIRLCWQ==
-Received: from [100.112.198.129] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-b.eu-west-1.aws.symcld.net id 3B/0C-07373-AD2AB016; Thu, 05 Aug 2021 08:35:38 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrIIsWRWlGSWpSXmKPExsViZ8MRqntzEXe
-  iwekNRhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bGjWfZC/p4K3p2X2BrYHzE3cXIxSEkMItJ
-  4vCx/ewQzm5GiZtz7jJ1MXJysAnoSpx7vJYdxBYR0JdYOnsPM4gtLGAjMeHMRVYQm0VAReLk6
-  j1sIDavgIfE9osbwOISAgoSUx6+Z4aIC0qcnPmEBcRmFpCQOPjiBVCcA6hGUWL2dHmI8gqJ14
-  cvMU9g5JmFpGMWko4FjEyrGC2SijLTM0pyEzNzdA0NDHQNDY10DS0tdY2MzPUSq3ST9FJLdct
-  Ti0t0DfUSy4v1iitzk3NS9PJSSzYxAsMopeD44x2MK9580DvEKMnBpCTKq9/LnSjEl5SfUpmR
-  WJwRX1Sak1p8iFGGg0NJgrdiAVBOsCg1PbUiLTMHGNIwaQkOHiURXmaQNG9xQWJucWY6ROoUY
-  zjHm7VLFjFzvAWTbffuAsl2MDlzwcHVzByzwOT99kNA8gGIFGLJy89LlRLnVV0INE4AZFxGaR
-  7cMljMXmKUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzKsOMoUnM68E7qZXQOcyAZ17IZYT5Ny
-  SRISUVAPToQQB7ykh8So9Mcf3RalNP1m5/H/ttSPXvVlOe9l07DDqidv4NbSKN5NbSzTrpqG0
-  pdc3p0jxUIaY4+xS6QtCVlzd8DhynrbZg/fiUZM/5V+exL6pwa306FzuHL9+rfpE+2Z+eZlO6
-  Z8xvydYFpy9t2Kj4q7gCC3BT1aplwzM33Vd6T6zWn6X+zSG9sAK90aPd2vag95Vn2yws/+wg6
-  tXJjr98MXdGsd3vb/6Z8XBvcuY/z/4ETW7W7Cp8GST8y0F89bjZb86/VcK2Ki/u+/AHGWmy7T
-  Lziv55my7OYzNRWbBh8wjgqYobmFwLj79p7F45ZcNBYbRefddCl+L/E/N9DmsMqEjZkmoyqXY
-  i0osxRmJhlrMRcWJAGiY909UAwAA
-X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-16.tower-291.messagelabs.com!1628152537!615213!1
-X-Originating-IP: [62.60.8.85]
+	b=wIxVkjmOreEJpBF5eYtkcsgNvwXH4J+JhGRu38fKtuHL1FY7xmxFinvx7OYf5jOFK
+	 NbwuaN9z9Tn6tGPdn1ZZ4jD7k9KJaa6utKFtwvdypGuVRY1PyvA2scDzlChiSNs9jL
+	 cfWlfJ6tYvQkdAYfMY+dD0HrHGMtxnKuCB7cOX7MoUptQpo2WEBdGYjLBzn/d9nV74
+	 RR9E7zDSMgEmNg5ypx2Eq9T1GONYO01O1WzV5ekDo9/6WUz4qkAobjRXVaUpDcOQyR
+	 Xgx7Oj7/iDrjMsl9TxJSX2sztsd45MPcHSF+GcbGEG4JPha5sX6JmNfA89RqJL0W3/
+	 /0wc/uaea52tQ==
+Received: from [100.112.192.137] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta.az-a.eu-west-1.aws.symcld.net id 4B/60-07800-274BB016; Thu, 05 Aug 2021 09:50:42 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYolu0hTv
+  R4PwKEYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPxnxVsBce5Kl4+Pc3UwHiXs4uRi0NIYBaT
+  xLSNaxghnOOMEuen7mfpYuTkYBPQkeh40Q1miwjoSyydvYcZxBYW8JA4fPUIexcjBweLgIrEp
+  s1WIGFeATeJ1ze3s4HYEgIKElMevmeGiAtKnJz5BGwMs4CExMEXL5ghahQltu88wwJhV0i8Pn
+  yJeQIjzywkLbOQtCxgZFrFaJFUlJmeUZKbmJmja2hgoGtoaKRraAnERmZ6iVW6iXqppbrlqcU
+  luoZ6ieXFesWVuck5KXp5qSWbGIFhlFJwoG4H44PXH/QOMUpyMCmJ8ur3cicK8SXlp1RmJBZn
+  xBeV5qQWH2KU4eBQkuBV2QyUEyxKTU+tSMvMAYY0TFqCg0dJhHfxJqA0b3FBYm5xZjpE6hSjo
+  pQ4bytIQgAkkVGaB9cGi6NLjLJSwryMDAwMQjwFqUW5mSWo8q8YxTkYlYR5C0Gm8GTmlcBNfw
+  W0mAlo8YVYTpDFJYkIKakGpp32BqGnc20KliyzNHQvfbdq7dG1T+uyrnjPXVHX+n667Xzheax
+  /Sq9G/3ljYHymwZmtf/WuSX/zMhsKXtvqf1j90d96/w71K50bY31tt70zEDeITDH85VTUapTQ
+  F679IK584gO+kJT0q72uN4pPPF/6/LS02E3+bxM6F+Xy79vydIL7FovTx2v5U/lqYn7du1L+v
+  2l2zOmJekHr8+qeXDT46262t0DizYHfdrH/TlVm8SRk6MV8kmYr+nSZ/74c50/TkLI9K5QlFK
+  eF8N5LfZRWLiN7UqJZ8/wy3rMtf2c+CF5Tfzy9Wzc7dSXDIr9D+0zktP5KGKq1eTz15emPeHB
+  nb6bxy61rn2wOKHviqsRSnJFoqMVcVJwIAJxR4hMeAwAA
+X-Env-Sender: zangrc.fnst@fujitsu.com
+X-Msg-Ref: server-19.tower-265.messagelabs.com!1628157042!716830!1
+X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 26782 invoked from network); 5 Aug 2021 08:35:37 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-16.tower-291.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 5 Aug 2021 08:35:37 -0000
+Received: (qmail 2736 invoked from network); 5 Aug 2021 09:50:42 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-19.tower-265.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 5 Aug 2021 09:50:42 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1758ZbNu024865
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1759oWjF002068
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Aug 2021 09:35:37 +0100
-Received: from localhost.localdomain (10.167.225.35) by
+	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Aug 2021 10:50:41 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 5 Aug 2021 09:35:35 +0100
-From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
+ (TLS) id 15.0.1497.18; Thu, 5 Aug 2021 10:50:30 +0100
+From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] valijson: upgrade 0.4 -> 0.5
-Date: Thu, 5 Aug 2021 16:35:28 +0800
-Message-ID: <1628152528-23213-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-progress: upgrade 1.5 -> 1.6
+Date: Fri, 6 Aug 2021 05:50:23 +0800
+Message-ID: <1628200223-4506-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
+X-Originating-IP: [10.167.225.81]
 X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-This is mostly a maintenance release.
-It addresses a number of warnings that were produced when compiling
-with warnings enabled (/W4) on MSVC.
-In some cases, warnings have been suppressed on a per-file basis,
-through the use of pragma statements.
-This was done to minimise the potential impact of changes required
-to exhaustively address these warnings.
+-License-Update: Fixed misspelling of names.
 
-Bundled versions of gtest and rapidjson have also been updated,
-and several minor bug fixes have been included.
-
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../valijson/{valijson_0.4.bb => valijson_0.5.bb}               | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/{valijson_0.4.bb => valijson_0.5.bb} (96%)
+ .../{python3-progress_1.5.bb => python3-progress_1.6.bb}     | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-progress_1.5.bb => python3-progress_1.6.bb} (55%)
 
-diff --git a/meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.4.bb b/meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.5.bb
-similarity index 96%
-rename from meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.4.bb
-rename to meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.5.bb
-index a9302616b..9b6f19f58 100644
---- a/meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.4.bb
-+++ b/meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.5.bb
-@@ -4,7 +4,7 @@ LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=015106c62262b2383f6c72063f0998f2"
+diff --git a/meta-python/recipes-devtools/python/python3-progress_1.5.bb b/meta-python/recipes-devtools/python/python3-progress_1.6.bb
+similarity index 55%
+rename from meta-python/recipes-devtools/python/python3-progress_1.5.bb
+rename to meta-python/recipes-devtools/python/python3-progress_1.6.bb
+index 7fd6fd3ba6..1333da98da 100644
+--- a/meta-python/recipes-devtools/python/python3-progress_1.5.bb
++++ b/meta-python/recipes-devtools/python/python3-progress_1.6.bb
+@@ -1,10 +1,9 @@
+ SUMMARY = "Easy progress reporting for Python"
+ HOMEPAGE = "http://github.com/verigak/progress/"
+ LICENSE = "ISC"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=aef5566ac4fede9815eccf124c281317"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=00ab78a4113b09aacf63d762a7bb9644"
  
- SRC_URI = "git://github.com/tristanpenman/valijson.git"
--SRCREV = "9183462118f58a3ca4be82b8f656f18707229737"
-+SRCREV = "c5487c39eb900b97535f8b3a38a17af098c784e3"
+-SRC_URI[md5sum] = "408df0e3db0ad4b74f19f6beec814ae4"
+-SRC_URI[sha256sum] = "69ecedd1d1bbe71bf6313d88d1e6c4d2957b7f1d4f71312c211257f7dae64372"
++SRC_URI[sha256sum] = "c9c86e98b5c03fa1fe11e3b67c1feda4788b8d0fe7336c2ff7d5644ccfba34cd"
  
- S = "${WORKDIR}/git"
+ inherit pypi setuptools3
  
 -- 
 2.25.1
