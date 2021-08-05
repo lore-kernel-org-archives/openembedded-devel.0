@@ -1,95 +1,89 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.115])
- by mx.groups.io with SMTP id smtpd.web11.3619.1628129072170464832
+Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com [66.111.4.26])
+ by mx.groups.io with SMTP id smtpd.web08.3981.1628130557492673318
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Aug 2021 19:04:32 -0700
+ Wed, 04 Aug 2021 19:29:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=DqQrydc6;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.115, mailfrom: wangmy@fujitsu.com)
-Return-Path: <wangmy@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1628129069; i=@fujitsu.com;
-	bh=wLackPzY/JjrNZefRyKrccOuH+Wtx8Bv5Hn9zHAO/uA=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=DqQrydc6DHd5clN+E+41U3dN88Sik/HP04ZlRnF2GK18tnibkRLg0wh5GRlVTot6C
-	 akAEQHrjw4bdU0jCWotM4VdW2Un7Py9loZAv+CE6T9x6PXuBupNDm2H48eEgOPkLjR
-	 2dawa/Soy6TrYwMI6mcp0LAuhdtxeTyEerwLJrHGPLVi8SYxku4rBnodbepuBqFdyc
-	 sI9GRFTIoSqXbUhHdMAzGTDvpzeXq0rk2gNYQzLNZ5MPTyBJdw8irvcGgSKIfaf0o6
-	 7b6tj1r9wsTOoMQAnyWhPJNUeVjQZSD8VSjsiudTtmYc++Vl8htiSKuqjyvokkDeod
-	 tR2rSb2YqiBUQ==
-Received: from [100.113.6.129] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-b.eu-central-1.aws.symcld.net id 21/AA-07605-C274B016; Thu, 05 Aug 2021 02:04:28 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrAIsWRWlGSWpSXmKPExsViZ8MRqqvjzp1
-  o0DhJ0uLi4aXMDowe5zauYAxgjGLNzEvKr0hgzVj4eydbwT6OiouPzjI2MD5m72Lk4hASmMUk
-  MWPKelYI5zijxNX7txi7GDk52ATUJKbfusEKYosI6Essnb2HGcRmFlCRePG7B6ibg0NYwF+ie
-  XcBSJgFKHzx1QEmEJtXwFHi7IlNYGMkBBQkpjx8D9bKKeAk8X3aHTYQWwioZk/LCVaIekGJkz
-  OfsECMl5A4+OIFM0SvosTsy80sEHaFxKxZbUwTGPlnIWmZhaRlASPTKkbLpKLM9IyS3MTMHF1
-  DAwNdQ0NjXVNdIxNDvcQq3SS91FLd5NS8kqJEoKxeYnmxXnFlbnJOil5easkmRmBAphSyftzB
-  eOj1B71DjJIcTEqivB8kuBOF+JLyUyozEosz4otKc1KLDzHKcHAoSfC2uQLlBItS01Mr0jJzg
-  NEBk5bg4FES4eV3BkrzFhck5hZnpkOkTjEqSonzprsBJQRAEhmleXBtsIi8xCgrJczLyMDAIM
-  RTkFqUm1mCKv+KUZyDUUmYNwdkO09mXgnc9FdAi5mAFl+I5QRZXJKIkJJqYHL9plWzu65d+LS
-  pQ/ZZ9Q0zNsVY7GWR29//4FfA3e0e23nmdF/9w+F0+D+PiHPjz1czPIU0Z3hfnVfh1G18K4D1
-  6s3nB3/wXF3Et/FbjqbSotU/zRec3iZ9eslNTnH+xhz7NIuLzXb1/8N6Z3hsuepk4XZxfsMWI
-  6X9/f26Xx5diTgTsXPVqu52wchG881vr+/8F253IXLqi8TuK9x9GceeyvwTe7TSZdPV2btz9b
-  cs9neIr/v8+kpclcXU+QdmHNv17vk2VTERe50i+YCiRtZglr60irP9MlGRd7fzTXKu2Rb63fP
-  iL5+pzcdvHp5nNrP24Yut12Y3LtX+xPKJ+VTo3uVbdt4T9ZsqLXC/JFhHiaU4I9FQi7moOBEA
-  rc2Ip0MDAAA=
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-8.tower-238.messagelabs.com!1628129067!282444!1
-X-Originating-IP: [62.60.8.85]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 22487 invoked from network); 5 Aug 2021 02:04:28 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-8.tower-238.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 5 Aug 2021 02:04:28 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17524MtH008057
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Aug 2021 03:04:27 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 5 Aug 2021 03:04:24 +0100
-From: "wangmy" <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] ctags: upgrade 5.9.20210718.0 -> 5.9.20210801.0
-Date: Thu, 5 Aug 2021 10:04:09 +0800
-Message-ID: <1628129049-4619-2-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1628129049-4619-1-git-send-email-wangmy@fujitsu.com>
-References: <1628129049-4619-1-git-send-email-wangmy@fujitsu.com>
+ dkim=pass header.i=@aj.id.au header.s=fm3 header.b=jFMOCWbG;
+ spf=pass (domain: aj.id.au, ip: 66.111.4.26, mailfrom: andrew@aj.id.au)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+	by mailout.nyi.internal (Postfix) with ESMTP id AEFDA5C0114
+	for <openembedded-devel@lists.openembedded.org>; Wed,  4 Aug 2021 22:29:16 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute4.internal (MEProxy); Wed, 04 Aug 2021 22:29:16 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aj.id.au; h=from
+	:to:subject:date:message-id:mime-version
+	:content-transfer-encoding; s=fm3; bh=DTV0L4+8+o0YCvx8m99hqN3WIn
+	A0FRhWwFliyvghhC8=; b=jFMOCWbG5/Bj6z9KLWDY/gzPXKLS0UMslDG/kjrReF
+	55HeAzmL9VeGRVjaexqlFKmfNrCsmsNu2wOrAF02fiO43dB26tCqJkxek/ZXpoJr
+	xbgwj6GkfKAONCuzntNMcAUttkVOFvggsCHPHp+PtGqifQvIRHgyQej1fqUauYxT
+	PoPap+oxJLpm3EPvkrHd7CB4l2pP5RnKjun7eazrzWgCYDWolaZBEq8V9m0WATUw
+	5P4cmanHUWn6rtU46iwixTEBydF6k6HR2ozmtieVQWqJSvVCJRzpAEwhpOICNy7V
+	KFm6FZTQfnk8QfJjq/dFxk6MmkFXLvB1+L7DUr8KfyPg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=content-transfer-encoding:date:from
+	:message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=DTV0L4+8+o0YCvx8m
+	99hqN3WInA0FRhWwFliyvghhC8=; b=gx4TKKoup0RDKrgoxJq16FHYQNLSSBh4p
+	xF0qZ8U7w39nUSVwu1eeVBIINjqeVFY1NdaWkpwqwLdYhyaxrAGaC3qZekQEnQpp
+	8wc+q1V1fNi6kwjXtSlz0r+gIBfyMACVirXWkgX4k8ig40UPkWx7JFH+UpbeFlEt
+	/ZIlKrJf8iDUqstjNWnJrQthxEZ3joG2KDl8Y1u7S2LWVQ+HHS+5U6irSh1wxGmS
+	GO1Hhe4ku1+p+r92ROZSoem4XEItW6W9rBLp0BH93cQmoJBNVARVX27pwCWrXaLA
+	PYS/bpDby+QnAnCYWJGMYhoBEU+9vZv8G1Jol4YN/y7WPPF4p+dNg==
+X-ME-Sender: <xms:_EwLYT_eQaFSCwtQEE3tat03WHHOBE0r5IqS3yONf3SuXrI829t2Hw>
+    <xme:_EwLYftWwqIhVuY6xVPyTiQu2Sjrs1X56ZC0OkMSjhP9dh2hxQnN56vY4Lw3sDzRF
+    tpwxEByuvpXoO3FbQ>
+X-ME-Received: <xmr:_EwLYRDjqLfAjjgvWvcWl5FUjV1nCSMg17b8l8t0qQOdS2vEXJir1apXo4MZLwYjMfN7poM>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddrieekgdehjecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffoggfgsedtkeertdertd
+    dtnecuhfhrohhmpeetnhgurhgvficulfgvfhhfvghrhicuoegrnhgurhgvfiesrghjrdhi
+    ugdrrghuqeenucggtffrrghtthgvrhhnpeduieellefhueegkeehkedtleekfeekueehff
+    efheduvdejudfghfeuledvleevudenucffohhmrghinhepghhithhhuhgsrdgtohhmnecu
+    vehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprghnughrvg
+    ifsegrjhdrihgurdgruh
+X-ME-Proxy: <xmx:_EwLYfd5jGakRpE2QOvLzarX1YA4tp_shSIVB33fXlgZbPqSE5rvpA>
+    <xmx:_EwLYYOcW70LdVkhGmZD9T5Q3VqMM3_mApMGR9rKwYz1qUhFjBvm8w>
+    <xmx:_EwLYRnySVI1hgrkSoJcRAp-P5ZQnq3QJ2EFKwGdrraksQO2y5LTIQ>
+    <xmx:_EwLYTZOHpYYQqErw74hV_2ILqemLQHCAWYYrmlVsh3R-TmdZklEzg>
+Received: by mail.messagingengine.com (Postfix) with ESMTPA for
+ <openembedded-devel@lists.openembedded.org>; Wed,
+ 4 Aug 2021 22:29:15 -0400 (EDT)
+From: "Andrew Jeffery" <andrew@aj.id.au>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH 0/2] Add native support for socsec dependencies
+Date: Thu,  5 Aug 2021 11:59:04 +0930
+Message-Id: <20210805022906.1023804-1-andrew@aj.id.au>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-ci-env: use unified CI environment variable
+Hello,
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- .../ctags/{ctags_5.9.20210718.0.bb => ctags_5.9.20210801.0.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/ctags/{ctags_5.9.20210718.0.bb => ctags_5.9.20210801.0.bb} (95%)
+This series is two patches adding native support for dependencies of ASPEED's
+`socsec` package from OpenBMC's meta-aspeed layer:
 
-diff --git a/meta-oe/recipes-devtools/ctags/ctags_5.9.20210718.0.bb b/meta-oe/recipes-devtools/ctags/ctags_5.9.20210801.0.bb
-similarity index 95%
-rename from meta-oe/recipes-devtools/ctags/ctags_5.9.20210718.0.bb
-rename to meta-oe/recipes-devtools/ctags/ctags_5.9.20210801.0.bb
-index 9e803913f..b6fdad27c 100644
---- a/meta-oe/recipes-devtools/ctags/ctags_5.9.20210718.0.bb
-+++ b/meta-oe/recipes-devtools/ctags/ctags_5.9.20210801.0.bb
-@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
- 
- inherit autotools-brokensep pkgconfig manpages
- 
--SRCREV = "23ea3765d15a4cc361a1dfef497617c91c704fbe"
-+SRCREV = "6544786c167ed3149d56e1ffe740c70513762197"
- SRC_URI = "git://github.com/universal-ctags/ctags"
- 
- S = "${WORKDIR}/git"
+https://github.com/openbmc/openbmc/blob/04fa7fa906a548beb1012f3583a194a6b9798244/meta-aspeed/recipes-aspeed/python/socsec_git.bb
+
+socsec is a set of tools used to sign bootloaders and form a hardware root of
+trust in ASPEED BMC SoCs. The socsec tools are integrated into the meta-aspeed
+u-boot recipe to sign the bootloader at build-time:
+
+https://github.com/openbmc/openbmc/blob/04fa7fa906a548beb1012f3583a194a6b9798244/meta-aspeed/recipes-bsp/u-boot/u-boot-aspeed-sdk_2019.04.bb#L6
+
+https://github.com/openbmc/openbmc/blob/04fa7fa906a548beb1012f3583a194a6b9798244/meta-aspeed/classes/socsec-sign.bbclass
+
+Please review!
+
+Andrew
+
+Andrew Jeffery (2):
+  meta-oe: python3-gmpy: Add native support
+  meta-oe: python3-ecdsa: Add native support
+
+ meta-python/recipes-devtools/python/python3-ecdsa_0.17.0.bb | 4 +++-
+ meta-python/recipes-devtools/python/python3-gmpy2_2.0.8.bb  | 3 ++-
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+
 -- 
-2.25.1
+2.30.2
 
