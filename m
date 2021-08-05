@@ -1,89 +1,84 @@
 Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com [66.111.4.26])
- by mx.groups.io with SMTP id smtpd.web08.3981.1628130557492673318
+ by mx.groups.io with SMTP id smtpd.web12.3950.1628130558868402063
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Aug 2021 19:29:17 -0700
+ Wed, 04 Aug 2021 19:29:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@aj.id.au header.s=fm3 header.b=jFMOCWbG;
+ dkim=pass header.i=@aj.id.au header.s=fm3 header.b=bpt8mDfy;
  spf=pass (domain: aj.id.au, ip: 66.111.4.26, mailfrom: andrew@aj.id.au)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
-	by mailout.nyi.internal (Postfix) with ESMTP id AEFDA5C0114
-	for <openembedded-devel@lists.openembedded.org>; Wed,  4 Aug 2021 22:29:16 -0400 (EDT)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+	by mailout.nyi.internal (Postfix) with ESMTP id 3B0165C0112
+	for <openembedded-devel@lists.openembedded.org>; Wed,  4 Aug 2021 22:29:18 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
-  by compute4.internal (MEProxy); Wed, 04 Aug 2021 22:29:16 -0400
+  by compute5.internal (MEProxy); Wed, 04 Aug 2021 22:29:18 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aj.id.au; h=from
-	:to:subject:date:message-id:mime-version
-	:content-transfer-encoding; s=fm3; bh=DTV0L4+8+o0YCvx8m99hqN3WIn
-	A0FRhWwFliyvghhC8=; b=jFMOCWbG5/Bj6z9KLWDY/gzPXKLS0UMslDG/kjrReF
-	55HeAzmL9VeGRVjaexqlFKmfNrCsmsNu2wOrAF02fiO43dB26tCqJkxek/ZXpoJr
-	xbgwj6GkfKAONCuzntNMcAUttkVOFvggsCHPHp+PtGqifQvIRHgyQej1fqUauYxT
-	PoPap+oxJLpm3EPvkrHd7CB4l2pP5RnKjun7eazrzWgCYDWolaZBEq8V9m0WATUw
-	5P4cmanHUWn6rtU46iwixTEBydF6k6HR2ozmtieVQWqJSvVCJRzpAEwhpOICNy7V
-	KFm6FZTQfnk8QfJjq/dFxk6MmkFXLvB1+L7DUr8KfyPg==
+	:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-transfer-encoding; s=fm3; bh=1EXkHVJEI6IC7nz0WJpWgFzxG7
+	ksQPYSS2qSonqmRiQ=; b=bpt8mDfyIL/nW0jFO0hAGV7VASArtMb32WLz8qps2n
+	SFdEcRw9Mu+ItNwMnZuGGKHLLsjbDOpuQ937fcShm6m7Gll/Os9Y0MhL8q0/XBLu
+	QQ44hnB4DZeq0mf0YG4cqY4905VDCjos/MJXoi806EcpLdnYXY6A6HVZSUxOmSCX
+	Gcq0UyZc1An71h4FIstKIJ+mvG9bYC8QOrZVmHgS3FN0FScBnFNIB+u2H3I+lrNg
+	L3i1B6fNhUX/+kcJH6PPcd/drsOZwYlgiF6RVBOHL9aym/xyx6JvriVu7BMFwrvh
+	L7F9WCBm08+cY19zj0N30cr0zsG5GNHnQFkul429fx8Q==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=content-transfer-encoding:date:from
-	:message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=DTV0L4+8+o0YCvx8m
-	99hqN3WInA0FRhWwFliyvghhC8=; b=gx4TKKoup0RDKrgoxJq16FHYQNLSSBh4p
-	xF0qZ8U7w39nUSVwu1eeVBIINjqeVFY1NdaWkpwqwLdYhyaxrAGaC3qZekQEnQpp
-	8wc+q1V1fNi6kwjXtSlz0r+gIBfyMACVirXWkgX4k8ig40UPkWx7JFH+UpbeFlEt
-	/ZIlKrJf8iDUqstjNWnJrQthxEZ3joG2KDl8Y1u7S2LWVQ+HHS+5U6irSh1wxGmS
-	GO1Hhe4ku1+p+r92ROZSoem4XEItW6W9rBLp0BH93cQmoJBNVARVX27pwCWrXaLA
-	PYS/bpDby+QnAnCYWJGMYhoBEU+9vZv8G1Jol4YN/y7WPPF4p+dNg==
-X-ME-Sender: <xms:_EwLYT_eQaFSCwtQEE3tat03WHHOBE0r5IqS3yONf3SuXrI829t2Hw>
-    <xme:_EwLYftWwqIhVuY6xVPyTiQu2Sjrs1X56ZC0OkMSjhP9dh2hxQnN56vY4Lw3sDzRF
-    tpwxEByuvpXoO3FbQ>
-X-ME-Received: <xmr:_EwLYRDjqLfAjjgvWvcWl5FUjV1nCSMg17b8l8t0qQOdS2vEXJir1apXo4MZLwYjMfN7poM>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddrieekgdehjecutefuodetggdotefrodftvf
+	:in-reply-to:message-id:mime-version:references:subject:to
+	:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+	fm3; bh=1EXkHVJEI6IC7nz0WJpWgFzxG7ksQPYSS2qSonqmRiQ=; b=oP8913wv
+	w95SrbjYTrS8icFMYDJFY1VKUDXoGMPRjNZrITlrHrGPoksjPJ72BpwA/tI4Xdmb
+	ce6TKF5lg0l2NyLx7ZGVvOsxc+eGnhpb2Z1J7D5YM+szWK1lmcZ6mPHNOwa4mNVL
+	DtDADUJoZgLym9MObeafS5QqDFIeVocOq+OKB5m8Rvn+vj7/O8caXLvJD09dYlWu
+	tXA9V0725+zBfd3It4RhXpokSYBrDT+zH6qPK+LT31nPVOhKLNc3zme8Yo2lIQd4
+	Yr4ZNYCpXG2zSMY6gilLQMhf5+cpxefmew/DnKxSAfm37abdbIyys/0cvn62oVi6
+	TsyA1h35RLieww==
+X-ME-Sender: <xms:_kwLYYAZs6cjegogvQii3pWLH_nZhPWRwUf-XaHiH2AQsvbiCgQhMg>
+    <xme:_kwLYaj3IBqHdIZZixvaujSAepPWK-BLezCA6UsjgDA-ymC6fVBWJQiRIJieBsIkO
+    uI5_bUcio_MPNv_Sw>
+X-ME-Received: <xmr:_kwLYbm6yrRCMbxj7jmRWvtA5naAAWhF9uceSWe7NTZdlVwWXLhwKVlb47AwONxJoB3E7S4>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddrieekgdehiecutefuodetggdotefrodftvf
     curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-    uegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffoggfgsedtkeertdertd
-    dtnecuhfhrohhmpeetnhgurhgvficulfgvfhhfvghrhicuoegrnhgurhgvfiesrghjrdhi
-    ugdrrghuqeenucggtffrrghtthgvrhhnpeduieellefhueegkeehkedtleekfeekueehff
-    efheduvdejudfghfeuledvleevudenucffohhmrghinhepghhithhhuhgsrdgtohhmnecu
-    vehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprghnughrvg
-    ifsegrjhdrihgurdgruh
-X-ME-Proxy: <xmx:_EwLYfd5jGakRpE2QOvLzarX1YA4tp_shSIVB33fXlgZbPqSE5rvpA>
-    <xmx:_EwLYYOcW70LdVkhGmZD9T5Q3VqMM3_mApMGR9rKwYz1qUhFjBvm8w>
-    <xmx:_EwLYRnySVI1hgrkSoJcRAp-P5ZQnq3QJ2EFKwGdrraksQO2y5LTIQ>
-    <xmx:_EwLYTZOHpYYQqErw74hV_2ILqemLQHCAWYYrmlVsh3R-TmdZklEzg>
+    uegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffojghfggfgsedtkeertd
+    ertddtnecuhfhrohhmpeetnhgurhgvficulfgvfhhfvghrhicuoegrnhgurhgvfiesrghj
+    rdhiugdrrghuqeenucggtffrrghtthgvrhhnpeejgfdvveehteekveeggeellefgleette
+    ejffelffdvudduveeiffegteelvefhteenucevlhhushhtvghrufhiiigvpedtnecurfgr
+    rhgrmhepmhgrihhlfhhrohhmpegrnhgurhgvfiesrghjrdhiugdrrghu
+X-ME-Proxy: <xmx:_kwLYewig_OindNRNtcYZ85_m-LNKoInYKRcwRgBiC-98LObYgsHFA>
+    <xmx:_kwLYdSqCZbhK5JjIe6bpr1eijkYeBKA6OvS9HK3RAxWv74ghKO7WA>
+    <xmx:_kwLYZbQ7mVgQe23pq8tOl2K2k5hO-5755bJ37qaruEnWbWn9E21dA>
+    <xmx:_kwLYYN3HWsIqP7ejafkXc-WYcPSw5QtYOry9EirvVJvopVDDYvorg>
 Received: by mail.messagingengine.com (Postfix) with ESMTPA for
  <openembedded-devel@lists.openembedded.org>; Wed,
- 4 Aug 2021 22:29:15 -0400 (EDT)
+ 4 Aug 2021 22:29:16 -0400 (EDT)
 From: "Andrew Jeffery" <andrew@aj.id.au>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 0/2] Add native support for socsec dependencies
-Date: Thu,  5 Aug 2021 11:59:04 +0930
-Message-Id: <20210805022906.1023804-1-andrew@aj.id.au>
+Subject: [meta-python][PATCH 1/2] meta-oe: python3-gmpy: Add native support
+Date: Thu,  5 Aug 2021 11:59:05 +0930
+Message-Id: <20210805022906.1023804-2-andrew@aj.id.au>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20210805022906.1023804-1-andrew@aj.id.au>
+References: <20210805022906.1023804-1-andrew@aj.id.au>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hello,
+python3-gmpy is a transitive dependency of meta-aspeed's socsec package,
+via python3-ecdsa. socsec is a set of tools for signing bootloaders and
+forming a hardware root of trust for ASPEED BMC SoCs.
 
-This series is two patches adding native support for dependencies of ASPEED's
-`socsec` package from OpenBMC's meta-aspeed layer:
+Signed-off-by: Andrew Jeffery <andrew@aj.id.au>
+---
+ meta-python/recipes-devtools/python/python3-gmpy2_2.0.8.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-https://github.com/openbmc/openbmc/blob/04fa7fa906a548beb1012f3583a194a6b9798244/meta-aspeed/recipes-aspeed/python/socsec_git.bb
-
-socsec is a set of tools used to sign bootloaders and form a hardware root of
-trust in ASPEED BMC SoCs. The socsec tools are integrated into the meta-aspeed
-u-boot recipe to sign the bootloader at build-time:
-
-https://github.com/openbmc/openbmc/blob/04fa7fa906a548beb1012f3583a194a6b9798244/meta-aspeed/recipes-bsp/u-boot/u-boot-aspeed-sdk_2019.04.bb#L6
-
-https://github.com/openbmc/openbmc/blob/04fa7fa906a548beb1012f3583a194a6b9798244/meta-aspeed/classes/socsec-sign.bbclass
-
-Please review!
-
-Andrew
-
-Andrew Jeffery (2):
-  meta-oe: python3-gmpy: Add native support
-  meta-oe: python3-ecdsa: Add native support
-
- meta-python/recipes-devtools/python/python3-ecdsa_0.17.0.bb | 4 +++-
- meta-python/recipes-devtools/python/python3-gmpy2_2.0.8.bb  | 3 ++-
- 2 files changed, 5 insertions(+), 2 deletions(-)
-
+diff --git a/meta-python/recipes-devtools/python/python3-gmpy2_2.0.8.bb b/meta-python/recipes-devtools/python/python3-gmpy2_2.0.8.bb
+index c6edcbb3207a..976f57ab26a6 100644
+--- a/meta-python/recipes-devtools/python/python3-gmpy2_2.0.8.bb
++++ b/meta-python/recipes-devtools/python/python3-gmpy2_2.0.8.bb
+@@ -10,4 +10,5 @@ PYPI_PACKAGE = "gmpy2"
+ PYPI_PACKAGE_EXT = "zip"
+ SRC_URI[sha256sum] = "dd233e3288b90f21b0bb384bcc7a7e73557bb112ccf0032ad52aa614eb373d3f"
+ 
+-inherit pypi setuptools3
++inherit pypi setuptools3 python3native
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.30.2
 
