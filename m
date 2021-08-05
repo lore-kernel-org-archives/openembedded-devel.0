@@ -1,93 +1,178 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.5])
- by mx.groups.io with SMTP id smtpd.web11.6676.1628157112420530581
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+ by mx.groups.io with SMTP id smtpd.web08.7032.1628158902582788938
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Aug 2021 02:51:52 -0700
+ Thu, 05 Aug 2021 03:21:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=wQe5k5Ph;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.5, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1628157110; i=@fujitsu.com;
-	bh=hATuJyhxwbwE7ZsmjKiFMJUY2azaQKQgq8U+hSgP6Uo=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=wQe5k5Phb/oM2NU7p7vg45JszbwamIMz3m1K+PgEzdMjwHFjpEHIYL2rakPIyW/Qn
-	 fjIkEyEEwvUe90F+U9N1frVAszhLzIwAxFR6qWF0uQowPLLJq5O+2FnOh3oQ7uEqAF
-	 SJMo4vJa1M6rfVXGJL23uAZe7q8deOrdJruPkgLixWdsmc6UanT9De7JFP5V0earIn
-	 5WSMuhnIscJLCriUDuK7cQ4np8JeIzAe8ohJCiLhpM7xnRD9lj8CXoNAXGhC7Gkguv
-	 P7ROkp5y3FUhkoPJDi8PakRP2rkLf/rn4C28fCY7Mgdlhl7uITKxfE39RVvb0NDqET
-	 /E9gI+XjjJbbg==
-Received: from [100.113.1.116] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-5.bemta.az-a.eu-central-1.aws.symcld.net id DB/E1-17945-6B4BB016; Thu, 05 Aug 2021 09:51:50 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYqrttC3e
-  iwbNP7BYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bM118YCxq5Kr7uLWlgnMDZxcjFISQwi0li
-  weZDzBDOcUaJTye6WLoYOTnYBHQkOl50g9kiAvoSS2fvYQaxhQX8JI7MmMYKYrMIqEhMOD6XD
-  cTmFXCTWP1kKiOILSGgIDHl4XtmiLigxMmZT8DmMAtISBx88YIZokZRYvvOMywQdoXE68OXmC
-  cw8sxC0jILScsCRqZVjBZJRZnpGSW5iZk5uoYGBrqGhsa6RrqmhnqJVbqJeqmlusmpeSVFiUB
-  JvcTyYr3iytzknBS9vNSSTYzAMEopZDLewXjt9Qe9Q4ySHExKorz6vdyJQnxJ+SmVGYnFGfFF
-  pTmpxYcYZTg4lCR4VTYD5QSLUtNTK9Iyc4AhDZOW4OBREuFdvAkozVtckJhbnJkOkTrFqCglz
-  tsKkhAASWSU5sG1weLoEqOslDAvIwMDgxBPQWpRbmYJqvwrRnEORiVh3kKQKTyZeSVw018BLW
-  YCWnwhlhNkcUkiQkqqgamltkLC/ue6H5v+Ceo/OSwp4cO1menmjK62mIpfIroqt5fNenfkx9z
-  5G62nbq2JuqC26eV1Za/c5qDE1HfXtevUhS1mK7qIVDlkvVi0uePZg7OhKy7ez74XVRG/r2tn
-  gCH34ggDRaGY00p6P8VawnaJsM3jYWTy7P8auG6X6BePyoKMhNef+e7fCl7v4SwVVxhXxBVjb
-  /6k09yCv2YVU9KfiSttdmfxa8QZR/f9yhHWKBJdcIJf0SLjX3F3/pm9u13/aE5+LvPt3JZbJ0
-  2nrMtPqBL5fsbAu+JUWEscU5duYBOXSsdt+b6Qzv8qjWIa94MyFESmz3/J9UvL9JKCslS65mn
-  /xWU5nzeLN3MosRRnJBpqMRcVJwIAoRrYfx4DAAA=
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-22.tower-226.messagelabs.com!1628157109!10503!1
-X-Originating-IP: [62.60.8.149]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 17589 invoked from network); 5 Aug 2021 09:51:50 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-22.tower-226.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 5 Aug 2021 09:51:50 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1759pnTP021363
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Aug 2021 10:51:49 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 5 Aug 2021 10:51:47 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-xlsxwriter: upgrade 1.4.4 -> 1.4.5
-Date: Fri, 6 Aug 2021 05:51:41 +0800
-Message-ID: <1628200301-4774-1-git-send-email-zangrc.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@linuxfoundation.org header.s=google header.b=NIuWUXNe;
+ spf=pass (domain: linuxfoundation.org, ip: 209.85.221.43, mailfrom: richard.purdie@linuxfoundation.org)
+Received: by mail-wr1-f43.google.com with SMTP id n12so5828402wrr.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Aug 2021 03:21:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linuxfoundation.org; s=google;
+        h=message-id:subject:from:to:date:in-reply-to:references:user-agent
+         :mime-version:content-transfer-encoding;
+        bh=M/RLn+/cNk2X6VLq8k6arZ/XtyKipFBya9kWxoA5JjE=;
+        b=NIuWUXNeDBhOSg0wmzsBIzPNQ6pMqUAJVklWq5vNNzY8ip6C7zUFenHtIhp808rySZ
+         FW75EZo8wrxYAlxQbYc+c/kBF1O4XrZH2S7hojJ8HDqOB9y7jGGfkcJ/z4l/o2YxwAgS
+         6QfP0Ax5qwdGlsuEu4PeGqc682JM8FdTcGDE4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
+         :references:user-agent:mime-version:content-transfer-encoding;
+        bh=M/RLn+/cNk2X6VLq8k6arZ/XtyKipFBya9kWxoA5JjE=;
+        b=FE/7kIGEZkFidgxZkbriDe+EHcNEehVJAX1Zc7IfD8Yqbu18VnZ/ETMCSmq6PlWVSr
+         FmkPlbm47d42aLsjpIGE/cY8DR4XzPobkiGc0gpFr1m5lrbeps14Pj58BO3JBeL1zS4X
+         s60PlBACJ6E5cRH596AQ6DGBvsEGVjxy6E4cTe5RudDxKADfQ4QFGwx/NyrG/yKmVIpk
+         NwLTel6bp6tewWJXGGGYWBtI9DbrOi7iTF4qnrElm201D60hwvN0yfQbAepjic/y+Cl/
+         l5GS6Y8m2IfRuu2D0+loam7knIEKi5YP9hcqhSHhnRvwWSTMAnshw/I5PtM02ZgA2Lyx
+         JWsw==
+X-Gm-Message-State: AOAM5307FmHBKJ+x/vRdq7Tvz2gU7h7Hl3Ua99RsNY+eBvOrXpNlZ2sj
+	pccUKk5si+tPr+eM8jLB0Kw61A==
+X-Google-Smtp-Source: ABdhPJyl70ywTkw7GFrKG2He6pvxTQq1GeYub1fFbCZJQmpNkP6Iia+Bprzv57BngEulkN+/sRejVQ==
+X-Received: by 2002:a5d:6312:: with SMTP id i18mr4301758wru.414.1628158900679;
+        Thu, 05 Aug 2021 03:21:40 -0700 (PDT)
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from ?IPv6:2001:8b0:aba:5f3c:ea47:91d3:ba71:9eb4? ([2001:8b0:aba:5f3c:ea47:91d3:ba71:9eb4])
+        by smtp.gmail.com with ESMTPSA id o2sm5161960wmq.30.2021.08.05.03.21.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 05 Aug 2021 03:21:40 -0700 (PDT)
+Message-ID: <22d7a9866471f53ea283caa1578fbf0b48d5e113.camel@linuxfoundation.org>
+Subject: Re: [OE-core] [master][PATCH 0/4] Reproducible LTO builds
+From: "Richard Purdie" <richard.purdie@linuxfoundation.org>
+To: Randy MacLeod <randy.macleod@windriver.com>, Tony Battersby
+	 <tonyb@cybernetics.com>, openembedded-core@lists.openembedded.org, 
+	openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
+Date: Thu, 05 Aug 2021 11:21:39 +0100
+In-Reply-To: <447d4fa9-b915-4e59-0ecc-64d41c6ceee6@windriver.com>
+References: <2efeecad-7ee5-126c-9271-d69fc3428c38@cybernetics.com>
+	 <447d4fa9-b915-4e59-0ecc-64d41c6ceee6@windriver.com>
+User-Agent: Evolution 3.40.0-1 
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-Release 1.4.5 - July 29 2021
-----------------------------
+On Wed, 2021-08-04 at 20:13 -0400, Randy MacLeod wrote:
+> On 2021-07-27 9:34 a.m., Tony Battersby wrote:
+> > Currently, enabling Link Time Optimization via:
+> > 
+> > require conf/distro/include/lto.inc
+> > DISTRO_FEATURES_append = " lto"
+> > 
+> > makes the build non-reproducible (as in
+> > https://reproducible-builds.org/).  This patch set fixes some of the
+> > problems, but is not yet a complete solution.
+> > 
+> > This patch set addresses the following bugs:
+> > https://bugzilla.yoctoproject.org/show_bug.cgi?id=14481
+> > https://bugzilla.yoctoproject.org/show_bug.cgi?id=14490
+> > 
+> > openembedded-core patches
+> > 1/4: lto.inc: disable LTO for grub
+> > 2/4: gcc: Backport patch to make LTO builds more reproducible
+> > 3/4: bitbake.conf: add DEBUG_PREFIX_MAP to TARGET_LDFLAGS
+> > 
+> > openembedded-devel patches
+> > 4/4: net-snmp: fix QA Issue after LDFLAGS change
+> > 
+> > Patch 3 adds DEBUG_PREFIX_MAP to TARGET_LDFLAGS (it was already in
+> > TARGET_CFLAGS).  This could possibly be done differently, such as by
+> > removing it from TARGET_CFLAGS and adding it to TOOLCHAIN_OPTIONS,
+> > TARGET_CC_ARCH, or TUNE_CCARGS, but I haven't tested those.  Let me know
+> > if there is a better/preferred way to do it.
+> > 
+> > The TARGET_LDFLAGS change broke net-snmp from meta-networking, so I have
+> > included a patch to fix that.  Other packages might have been broken as
+> > well, although I haven't found any others.
+> > 
+> > With all these patches, there are still many shared libraries in /lib
+> > and /usr/lib that are still not reproducible with LTO enabled because
+> > x86_64-poky-linux-libtool filters out the -f*-prefix-map flags added by
+> > patch 3 when linking shared libraries.  /usr/lib/libbz2.so.1.0.6 from
+> > the libbz2 package from the bzip2 recipe is a good example.  I do not
+> > have a patch for that problem.  I will leave that to someone else.
+> > 
+> > So this is what we need to achieve reproducible LTO builds:
+> > *) This patch set
+> > *) A fix for libtool
+> > *) Add LTO to reproducible builds testing if appropriate (e.g.
+> > meta/lib/oeqa/selftest/cases/reproducible.py, CI on Autobuilder)
+> > *) Fixes for individual packages, if needed
+> > *) Once everything works, update the documentation again (I previously
+> > requested a documentation change for this bug, which will eventually
+> > show up at
+> > http://docs.yoctoproject.org/test-manual/reproducible-builds.html).
+> 
+> This is certainly a few steps in the right direction with a good outline
+> of what's next.
+> 
+> I suspect that Richard has been busy with other things like overrides
+> and the update to glibc-2.34.
+> 
+> Do you have any suggestions or questions about what we should do
+> with this patch series Richard?
 
- * Added Description/Alt Text and Decorative accessibility options for charts,
-   textboxes and buttons. These options were already available for images.
+Thanks for the reminder, I've been meaning to queue/test this which I will
+do. The gcc version has been bumped but I ported the patch forward to it
+and the patches are in master-next for testing. It is great to see this
+support moving forward.
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+Much as it pains me to admit having any libtool knowledge, I may be able to
+help with that bit. There is an untested patch below which may address that
+issue, or at least give a good hint on how to do it if it doesn't work. I
+don't have an environment to test easily right now.
+
+Cheers,
+
+Richard
+
+
+From 7681b0a1461f22034e1f70328a060db34474c60f Mon Sep 17 00:00:00 2001
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+Date: Thu, 5 Aug 2021 11:18:20 +0100
+Subject: libtool: Fix lto option passing?
+
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 ---
- ...{python3-xlsxwriter_1.4.4.bb => python3-xlsxwriter_1.4.5.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-xlsxwriter_1.4.4.bb => python3-xlsxwriter_1.4.5.bb} (82%)
+ meta/recipes-devtools/libtool/libtool-2.4.6.inc        |  1 +
+ meta/recipes-devtools/libtool/libtool/lto-prefix.patch | 16 ++++++++++++++++
+ 2 files changed, 17 insertions(+)
+ create mode 100644 meta/recipes-devtools/libtool/libtool/lto-prefix.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-xlsxwriter_1.4.4.bb b/meta-python/recipes-devtools/python/python3-xlsxwriter_1.4.5.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-xlsxwriter_1.4.4.bb
-rename to meta-python/recipes-devtools/python/python3-xlsxwriter_1.4.5.bb
-index ef4a6baa43..ffd3072a99 100644
---- a/meta-python/recipes-devtools/python/python3-xlsxwriter_1.4.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-xlsxwriter_1.4.5.bb
-@@ -16,6 +16,6 @@ RDEPENDS:${PN} += " \
- 	python3-io \
- "
+diff --git a/meta/recipes-devtools/libtool/libtool-2.4.6.inc b/meta/recipes-devtools/libtool/libtool-2.4.6.inc
+index c1cbceb51f..6748d7468e 100644
+--- a/meta/recipes-devtools/libtool/libtool-2.4.6.inc
++++ b/meta/recipes-devtools/libtool/libtool-2.4.6.inc
+@@ -23,6 +23,7 @@ SRC_URI = "${GNU_MIRROR}/libtool/libtool-${PV}.tar.gz \
+            file://0001-libtool-Check-for-static-libs-for-internal-compiler-.patch \
+            file://0001-Makefile.am-make-sure-autoheader-run-before-autoconf.patch \
+            file://0001-Makefile.am-make-sure-autoheader-run-before-automake.patch \
++           file://lto-prefix.patch \
+           "
  
--SRC_URI[sha256sum] = "791567acccc485ba76e0b84bccced2651981171de5b47d541520416f2f9f93e3"
-+SRC_URI[sha256sum] = "0956747859567ec01907e561a7d8413de18a7aae36860f979f9da52b9d58bc19"
- 
- BBCLASSEXTEND = "native nativesdk"
--- 
-2.25.1
+ SRC_URI[md5sum] = "addf44b646ddb4e3919805aa88fa7c5e"
+diff --git a/meta/recipes-devtools/libtool/libtool/lto-prefix.patch b/meta/recipes-
+devtools/libtool/libtool/lto-prefix.patch
+new file mode 100644
+index 0000000000..f788b3fc27
+--- /dev/null
++++ b/meta/recipes-devtools/libtool/libtool/lto-prefix.patch
+@@ -0,0 +1,16 @@
++Index: libtool-2.4.6/build-aux/ltmain.in
++===================================================================
++--- libtool-2.4.6.orig/build-aux/ltmain.in
+++++ libtool-2.4.6/build-aux/ltmain.in
++@@ -5424,9 +5424,10 @@ func_mode_link ()
++       # --sysroot=*          for sysroot support
++       # -O*, -g*, -flto*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
++       # -stdlib=*            select c++ std lib with clang
+++      # -f*-prefix-map*      needed for lto linking
++       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
++       -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \
++-      -O*|-g*|-flto*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*|-stdlib=*)
+++      -O*|-g*|-flto*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*|-stdlib=*|-f*-prefix-map*)
++         func_quote_for_eval "$arg"
++ 	arg=$func_quote_for_eval_result
++         func_append compile_command " $arg"
+
+
 
