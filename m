@@ -1,89 +1,77 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.68])
- by mx.groups.io with SMTP id smtpd.web09.4699.1628137049243520773
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.web09.5299.1628143352678927359
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Aug 2021 21:17:29 -0700
+ Wed, 04 Aug 2021 23:02:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=vyyJu6Xy;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.68, mailfrom: wangmy@fujitsu.com)
-Return-Path: <wangmy@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1628137046; i=@fujitsu.com;
-	bh=hm8kaRx3lqcHv/+lfT8vJNgg5rBNqYzZSb/CvMay8gE=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=vyyJu6Xy2nMBRp0V+8Nz3tJk1Bqxshfmn9uF8FYSCeH6a6cz/2CwxS144cfErFGI2
-	 4cqCGMpSM5gfJGWatES4pEf1KDPj01jwhs3wKhHUdZzljTc2G9nXPSmeYcahE4u9xn
-	 Ma/g+NkLWw7e7yudXndjLUB3KtamciWx1LdnqPm5HSucpzJx1s1NgM9mkQq0iAfmvZ
-	 RDGFKfcBBILbEy5Vhc7IOhMLD1BrSihYQpu4gKdIbpgjFTmE6mPUwF2z0ghaL0usHd
-	 pcNgLv3Rv3psTL2/fFeDbhrILhzYCkhveJs+3gdsSHO+MIeNkZ80/TjSPwZUbqnWR3
-	 ETtBcLzLEzAmg==
-Received: from [100.112.198.129] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-b.eu-west-1.aws.symcld.net id 94/87-07373-6566B016; Thu, 05 Aug 2021 04:17:26 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprBIsWRWlGSWpSXmKPExsViZ8MxVTcsjTv
-  R4NcUZouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePimhPsBXvYKzrmP2drYHzK1sXIxSEkMItJ
-  YuezC+wQznFGicfPfwJlODnYBNQkpt+6wQpiiwjoSyydvYcZxGYWUJF48buHHcQWFrCX2PrpM
-  SOIzQIUX/euH6yXV8BRomvOebC4hICCxJSH75kh4oISJ2c+YYGYIyFx8MULZogaRYnZl5tZIO
-  wKiVmz2pgmMPLOQtIyC0nLAkamVYwWSUWZ6RkluYmZObqGBga6hoZGuoaWFrqGxgZ6iVW6SXq
-  ppbrlqcUluoZ6ieXFesWVuck5KXp5qSWbGIEBllJwrGkH48nXH/QOMUpyMCmJ8n6Q4E4U4kvK
-  T6nMSCzOiC8qzUktPsQow8GhJMGbkQKUEyxKTU+tSMvMAQY7TFqCg0dJhLcxCSjNW1yQmFucm
-  Q6ROsWoKCXOWwLSJwCSyCjNg2uDRdglRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSsK835KBpv
-  Bk5pXATX8FtJgJaPGFWE6QxSWJCCmpBqa9K2U081Ol/Z4xXX0VFLEtIbql4/6+bWqZ01rcjvi
-  ufXNGzrnQYGdY6wr/9B2vpoSaTnb9/ObH7I1zVZtqJqwKSOvgyTkuVfjkiaCercini05Xs1VU
-  bOKZVit+7+sSZDWUvxD+xOjMs8wD1hbzrCa0/qprj+OWu7iNsUviYJPLHnWzlay6PW+KbD7uN
-  PxbtiVtxefX19LTcp6U/aubeGwFV+Xq6zenNVwzWPPahOl4zYSMbI4yKYafKs1xwS2cYc/Zjx
-  TG7jD9yaj17rhQgmRGfdT5NKd1IjMtZ3pduZmaJqhcFTXpD8OOs2FXhNtq1rz8OJPv5C+JBXw
-  X3h6w/JE226zo8sO3vS5M3IkHVZVYijMSDbWYi4oTAWlBCfsrAwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-17.tower-287.messagelabs.com!1628137045!594015!1
-X-Originating-IP: [62.60.8.149]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 14836 invoked from network); 5 Aug 2021 04:17:26 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-17.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 5 Aug 2021 04:17:26 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1754HKM3019559
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Aug 2021 05:17:25 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 5 Aug 2021 05:17:17 +0100
-From: "wangmy" <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] monit: upgrade 5.28.0 -> 5.28.1
-Date: Thu, 5 Aug 2021 12:17:08 +0800
-Message-ID: <1628137028-5293-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=tZiIdHsG;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id cl16-20020a17090af690b02901782c35c4ccso3302272pjb.5
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Aug 2021 23:02:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=KlEnoGM0ApiGCd8uhOZUFvGCRYwvfbWrqFzXp50skRM=;
+        b=tZiIdHsGlV4xSkybha4NveERVvsgBBWX0mv0Kiu3ZFzoAMKtmxa5yrN/kXnEA8Ncbr
+         D3W02guhSkzaNzwOfjiTmIPd10x27VpCH8xK9NAj0PvqlpS6jSuLgLHN9F7QjOXV7OM1
+         ZRDRYCH4Ptz07KKNydR1jEVYYSPNe8Hsctp1RyX4pqF5GvuUFAb8XiiPjKgycpFTVwHo
+         777KgVySiD/QkKJtLK2PNDII3DX+h1IP2tdgJep389dYLm98PIV/Pjb+f5C16aLk5jbf
+         /V3dm1zSbA1d3V1YbZ1cIAdSTqcukf5sbSjEFd4cg1XhxT2teNLoJ7PZTigjYsYH9OZH
+         PxCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=KlEnoGM0ApiGCd8uhOZUFvGCRYwvfbWrqFzXp50skRM=;
+        b=N4cr219Fkz3iIbCebsI9/4pzEY3UcpOHQLXR67CCo8dvrXIjYKnLuKRMBdsHdDEyZR
+         lQhApJaQiP7dbtd4JLw4gYYn/HKaPOsHYsQmmrkbtwFpr6zJgVE8WZ8u15f6FNvP6NNF
+         NpZ2nwhLW9ht/ag1onYa5vdy8lCZX+A2VBlp2n86TnxqimgEqWf8twSs55sTFE3cv3xO
+         BNRsAy4zOr7VwDVoxTCycvwg6y+NWcm/x2KlzjN261JsB06uHTyx3+tijKjUdx4131DI
+         w+KJARjq4LRyC2Q9VqbnwAR63cuYyFgGAJL5zR238DNWDNkFV/CX7BFeDY/PbaJ+kfwL
+         hI5w==
+X-Gm-Message-State: AOAM530OAOOJaCBwfOYfeBRvogJqpS1H6nCVytdqOZfNfse9zUbgesKS
+	xz5fSWfPhqvGPn70KWMGWFSWMXaLhlDzPg==
+X-Google-Smtp-Source: ABdhPJx0nIqQPhBRJhfse0Yc8+jFrIIVeZBbpSzkAeKt7/qcx1PtAcfHALrKow5zxBAtSpfZ8cB7IQ==
+X-Received: by 2002:a63:a902:: with SMTP id u2mr95792pge.123.1628143351762;
+        Wed, 04 Aug 2021 23:02:31 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0:db81:2f56:60e4:2c64])
+        by smtp.gmail.com with ESMTPSA id f4sm6082046pgi.68.2021.08.04.23.02.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 04 Aug 2021 23:02:31 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] nis: Drop uclibc check in anon python function
+Date: Wed,  4 Aug 2021 23:02:29 -0700
+Message-Id: <20210805060229.207260-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+uclibc is no longer supported
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-support/monit/{monit_5.28.0.bb => monit_5.28.1.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/monit/{monit_5.28.0.bb => monit_5.28.1.bb} (94%)
+ meta-networking/recipes-support/nis/nis.inc | 9 ---------
+ 1 file changed, 9 deletions(-)
 
-diff --git a/meta-oe/recipes-support/monit/monit_5.28.0.bb b/meta-oe/recipes-support/monit/monit_5.28.1.bb
-similarity index 94%
-rename from meta-oe/recipes-support/monit/monit_5.28.0.bb
-rename to meta-oe/recipes-support/monit/monit_5.28.1.bb
-index 52becf9b7..9833c0cec 100644
---- a/meta-oe/recipes-support/monit/monit_5.28.0.bb
-+++ b/meta-oe/recipes-support/monit/monit_5.28.1.bb
-@@ -15,7 +15,7 @@ SRC_URI = " \
- 	file://monitrc \
- "
- 
--SRC_URI[sha256sum] = "9fc6287fd9570b25a85c5d5bf988ee8bd4c54d0e9e01ff04cc4b9398a159849c"
-+SRC_URI[sha256sum] = "57d8885f66e58a0a4ca6a967f2bb7e8c15ed988a25b5ca6ba6733f919ef07a5c"
- 
- DEPENDS = "zlib bison-native libnsl2 flex-native openssl virtual/crypt"
- 
--- 
-2.25.1
-
+diff --git a/meta-networking/recipes-support/nis/nis.inc b/meta-networking/recipes-support/nis/nis.inc
+index a968af174f..3ae0f7e95a 100644
+--- a/meta-networking/recipes-support/nis/nis.inc
++++ b/meta-networking/recipes-support/nis/nis.inc
+@@ -20,12 +20,3 @@ inherit autotools gettext pkgconfig
+ do_install() {
+     oe_runmake 'DESTDIR=${D}' install-strip
+ }
+-
+-# An attempt to build on uclibc will fail, causing annoyance,
+-# so force the package to be skipped here (this will cause a
+-# 'nothing provides' error)
+-python () {
+-    os = d.getVar("TARGET_OS")
+-    if os == "linux-uclibc":
+-        raise bb.parse.SkipRecipe("NIS functionality requires rpcsvc/yp.h, uClibC does not provide this")
+-}
+--
+2.32.0
