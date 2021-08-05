@@ -1,59 +1,59 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web11.6669.1628157083278062826
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.114])
+ by mx.groups.io with SMTP id smtpd.web11.6672.1628157100286078224
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Aug 2021 02:51:23 -0700
+ Thu, 05 Aug 2021 02:51:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=pIP24z5S;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=i6snz3L7;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.114, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1628157081; i=@fujitsu.com;
-	bh=rczdc8OaDj2IA5SJ5X/XSTTNfhmz3Dep3uZm335JdZc=;
+	s=170520fj; t=1628157098; i=@fujitsu.com;
+	bh=TaredCJYSOwqTwTtd5vqbmi6pu+PDc+eGesbPrecjWI=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=pIP24z5S55312mzdi20q+RwMIrtFdJMIJaYazA3RXYrFTboCeecV4n2vcW51ngtj0
-	 VbXywX6n7Q+Rq7KNoI14WMQgaQ/o/eqsXTCoR68MMQFROnYdCkfBfvvTl7F109ms5X
-	 QjupZTXSndBkm0zD9RdP1sJ6FjkDRE7/45eLJcTzRxOszRs/X1rZVpcgacZFgM9EPW
-	 7gVjfjMqR/69pBXedp62Y+YR8GIZR8sPk6KU4Bqyj8HVTC1AYyOqQQTwLXnXh5YNyL
-	 MOVrtrtplp9V8H0DapMN0d0E85q1SSqBPkoCXZcvGFfs6eWtph2PqDmy13QVSq8nKk
-	 0IMVrXCbApnrw==
-Received: from [100.113.1.116] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-a.eu-central-1.aws.symcld.net id FF/83-16478-994BB016; Thu, 05 Aug 2021 09:51:21 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuplkeJIrShJLcpLzFFi42Kxs+GYojtzC3e
-  iwfKfjBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bCFadZCt5xVpy7+Jy9gbGBs4uRi0NIYBaT
-  xMXfbxkhnOOMEvNmTWbuYuTkYBPQkeh40c0CYosI6Essnb0HLC4s4CWxamUrO4jNIqAi8ebzC
-  zYQm1fATeJW72ywegkBBYkpD98zQ8QFJU7OfAIWZxaQkDj44gUzRI2ixPadZ6DqKyReH77EPI
-  GRZxaSlllIWhYwMq1itEwqykzPKMlNzMzRNTQw0DU0NNY11DUyNtNLrNJN1Est1U1OzSspSgT
-  K6iWWF+sVV+Ym56To5aWWbGIEhlJKIeObHYxfX3/QO8QoycGkJMqr38udKMSXlJ9SmZFYnBFf
-  VJqTWnyIUYaDQ0mCV2UzUE6wKDU9tSItMwcY1jBpCQ4eJRHexZuA0rzFBYm5xZnpEKlTjIpS4
-  rytIAkBkERGaR5cGyyWLjHKSgnzMjIwMAjxFKQW5WaWoMq/YhTnYFQS5i0EmcKTmVcCN/0V0G
-  ImoMUXYjlBFpckIqSkGph6Hmw596Z9UfFPbof3UdbChsnb59owHD5eqbVtjuwswV9q1Us5V29
-  Sn7C2nOlT1Nzb+RaP9so8WvbffV5ialf2M+7X32afOmTcsPFh8Hl2ebYE4azMu2LCikpJJet8
-  jq5j4mhjO7h8U8SDSOt3WkY/Tmb+LHx9sdPg9cLdbGVBTlfTp+TULFu369q/9xZL/zdXBehIX
-  NM6ZJa8/MLamkghsRl8cv//HvM03quqc7HgW+2mzzcFc345JvF7Np3vyl3GIbdm4aOQvvZsoT
-  2PHWtDVMPUzt64luetuuDP2eLLB6PlrnTcORY1X5itkvH02kuTd0iUJQT6LFpp/lo9KbMv9lk
-  v31J+ljnSIs9aVZ2UWIozEg21mIuKEwEZYULsIAMAAA==
+	b=i6snz3L7b2Oqz7Z3uDnztN830QY8ns1Qx0FQknHCfZeL2vQnYcUjEMbwBl9ekW90/
+	 EpKgkqxtps7FSiQIkC5iDDEhO72ttL9def6ftt/SWdhKJAmF9KjUwfBQcub8sbF4Us
+	 BLxfzUXqlEMoX8hJITR0jj7g1KNM+kSxTyh+mUP7RyGIIBYKQFEJkZOx/0GWOGisIS
+	 1vpEnN7agYE66ClGXfoqn1hlC6QaFC+zMisaCYUacQZH2VGXp4zwhr8+qeY7G4aVl8
+	 Wn4gltxgUkPPZXiFE7bfjLU7kcm9ewHKEt/4owPmiU77X+WHEAUZy9ey+Blsac8Vwq
+	 qd0d0iGUSlx2w==
+Received: from [100.113.4.199] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta.az-b.eu-central-1.aws.symcld.net id 7C/EE-29721-AA4BB016; Thu, 05 Aug 2021 09:51:38 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+GYortyC3e
+  iwf9dhhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0ZPx0PmgiXcFbsXTWJuYJzD1cXIxSEkMItJ
+  4tDUdlYI5zijxPGu/4xdjJwcbAI6Eh0vullAbBEBfYmls/cwg9jCAr4SE2d8ALI5OFgEVCQar
+  xeChHkF3CQefV4F1iohoCAx5eF7Zoi4oMTJmU/AxjALSEgcfPGCGaJGUWL7zjMsEHaFxOvDl5
+  gnMPLMQtIyC0nLAkamVYyWSUWZ6RkluYmZObqGBga6hobGuqa6RiaGeolVukl6qaW6yal5JUW
+  JQFm9xPJiveLK3OScFL281JJNjMBASilk/biD8dDrD3qHGCU5mJREefV7uROF+JLyUyozEosz
+  4otKc1KLDzHKcHAoSfCqbAbKCRalpqdWpGXmAIMaJi3BwaMkwrt4E1Cat7ggMbc4Mx0idYpRU
+  UqctxUkIQCSyCjNg2uDRdIlRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSsK8hSBTeDLzSuCmvw
+  JazAS0+EIsJ8jikkSElFQDEzePNbOFq2RleivjtQX8tTOD9cTlFfT9w+4cWFg/67P63GCnlHe
+  Sgt++n+wX+n3XLVcpY7viql8q6ZrropatNzkYJtg41zeqxs+vTdfSsk+yhGXp7LdGF82svNIe
+  /9NrWaS0L6Tvxcfk1YvL8icp88XuS3cSjDisl+T0oPh5+/+YS0UZ/7JvTrDW/VwSeNHgpM3cN
+  51y53rT2qded17MFnTmGce8X8kXH22WndKUfLlLS7mnTGnTHb2Qp9vLy4xeHqtWveHya1IL/9
+  RK5c01lk18ixWY1sw2EfZh/+nUfJRjGXPLfvt1PwOjk/6L5qftXlglLHGQSbbVtXxpiLttcPt
+  STb2ICe0Krq/XqCqxFGckGmoxFxUnAgD5M+KnHwMAAA==
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-14.tower-228.messagelabs.com!1628157080!9089!1
+X-Msg-Ref: server-2.tower-245.messagelabs.com!1628157097!118533!1
 X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 25918 invoked from network); 5 Aug 2021 09:51:20 -0000
+Received: (qmail 3164 invoked from network); 5 Aug 2021 09:51:37 -0000
 Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-14.tower-228.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 5 Aug 2021 09:51:20 -0000
+  by server-2.tower-245.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 5 Aug 2021 09:51:37 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1759pKD4002411
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1759pbsA002588
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Aug 2021 10:51:20 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Aug 2021 10:51:37 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 5 Aug 2021 10:51:18 +0100
+ (TLS) id 15.0.1497.18; Thu, 5 Aug 2021 10:51:34 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-tqdm: upgrade 4.61.2 -> 4.62.0
-Date: Fri, 6 Aug 2021 05:51:12 +0800
-Message-ID: <1628200272-4673-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-twisted: upgrade 21.2.0 -> 21.7.0
+Date: Fri, 6 Aug 2021 05:51:28 +0800
+Message-ID: <1628200288-4727-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -61,32 +61,38 @@ X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-asyncio.gather API consistency with stdlib (#1212)
-fix shutdown exception (#1209 <- #1198)
-misc build framework updates (#1209)
-add GH Sponsors & merch links
+Twisted 21.7.0 (2021-07-26)
+===========================
+
+Features
+--------
+
+- Python 3.10b3 is now supported (#10224)
+- Type hinting was added to twisted.internet.defer, making this is the first release
+  of Twisted where you might reasonably be able to use mypy without your own custom
+  stub files (#10017)
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../python/{python3-tqdm_4.61.2.bb => python3-tqdm_4.62.0.bb}   | 2 +-
+ .../{python3-twisted_21.2.0.bb => python3-twisted_21.7.0.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-tqdm_4.61.2.bb => python3-tqdm_4.62.0.bb} (81%)
+ rename meta-python/recipes-devtools/python/{python3-twisted_21.2.0.bb => python3-twisted_21.7.0.bb} (99%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-tqdm_4.61.2.bb b/meta-python/recipes-devtools/python/python3-tqdm_4.62.0.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-tqdm_4.61.2.bb
-rename to meta-python/recipes-devtools/python/python3-tqdm_4.62.0.bb
-index ef0e5f40a4..f9b530d652 100644
---- a/meta-python/recipes-devtools/python/python3-tqdm_4.61.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-tqdm_4.62.0.bb
-@@ -5,7 +5,7 @@ SECTION = "devel/python"
- LICENSE = "MIT & MPL-2.0"
- LIC_FILES_CHKSUM = "file://LICENCE;md5=59e4271a933d33edfe60237db377a14b"
+diff --git a/meta-python/recipes-devtools/python/python3-twisted_21.2.0.bb b/meta-python/recipes-devtools/python/python3-twisted_21.7.0.bb
+similarity index 99%
+rename from meta-python/recipes-devtools/python/python3-twisted_21.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-twisted_21.7.0.bb
+index 67c6c976f0..4e9472793b 100644
+--- a/meta-python/recipes-devtools/python/python3-twisted_21.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-twisted_21.7.0.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "http://www.twistedmatrix.com"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e33c411c0b86b1f3ca299091ed51ca31"
  
--SRC_URI[sha256sum] = "8bb94db0d4468fea27d004a0f1d1c02da3cdedc00fe491c0de986b76a04d6b0a"
-+SRC_URI[sha256sum] = "3642d483b558eec80d3c831e23953582c34d7e4540db86d9e5ed9dad238dabc6"
+-SRC_URI[sha256sum] = "77544a8945cf69b98d2946689bbe0c75de7d145cdf11f391dd487eae8fc95a12"
++SRC_URI[sha256sum] = "2cd652542463277378b0d349f47c62f20d9306e57d1247baabd6d1d38a109006"
  
- inherit pypi setuptools3
+ PYPI_PACKAGE = "Twisted"
  
 -- 
 2.25.1
