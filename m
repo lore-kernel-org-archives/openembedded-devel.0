@@ -1,56 +1,83 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web10.4059.1628131537296872282
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.web09.4076.1628131679221908914
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Aug 2021 19:45:37 -0700
+ Wed, 04 Aug 2021 19:47:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: mingli.yu@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 1752jZ7N028288
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 4 Aug 2021 19:45:36 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Wed, 4 Aug 2021 19:45:35 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Wed, 4 Aug 2021 19:45:34 -0700
-From: "Yu, Mingli" <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] mariadb: Update SRC_URI
-Date: Thu, 5 Aug 2021 10:43:04 +0800
-Message-ID: <20210805024304.15485-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=cUhM+KKE;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f171.google.com with SMTP id z3so5317936plg.8
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Aug 2021 19:47:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=pGPrLlEV7FNUGrxZR+L/+HwwhMnA5gUVHdoe0fGQ63Q=;
+        b=cUhM+KKEl1UJqH0bQfjfqIEhNjRIZM6noVn5f9QAgZdyRmwDfILTATRlsC8xO8o4hS
+         v+WnarCbxCAjmLHhcf+QYcO6yy/xVe/MApmxtmtQ+DnYxEbr+A7EsIublmu2l7egqXBB
+         sM0bbyIHsjYSxiShxknDd/ZAcWz/E+oGX+ypktEAV+JHuRLMtACGFo+xh0pD39GsSv40
+         JCh6PUdWGpQz3dbL0ax8nkTWW6Imwqe8ZJ2IykcEzfbbgEwVBxQscxyN6zXlXeTD3eqE
+         ZZS5cQzl3KnDenoYWzQRtXcW3zsoJyyLjFMAYdErFCgKMtYhkK+jgTqIMzi5PekJ5Up5
+         SGYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=pGPrLlEV7FNUGrxZR+L/+HwwhMnA5gUVHdoe0fGQ63Q=;
+        b=Q39sIiAg3CHYkOeg2UTMDuQ6vpak1cPoIa1y5gwJsZdYclimxOwbJghkxB7m3Xgk5W
+         3tKHwEKCX+k218up77X9YT6Lz3kIiGDLzU6MUlYlDTJVxZWtjCIoJ4lMf9qAM6OZA0sG
+         06tWdW++eGd8iNpuo2X1htLiMjfBNvBwYl07XSXgR5/bMFbFGHIgpG2yvL2QyjegVI5V
+         qwHNPn/HNeuXNuvmMwH5f6bw/Tjf2rcwt/zh2UalHRmKHpXjJfSayUWgq7egFIH8TNjG
+         fMGARNnE2UexiUQfmGzj1me2wflkh5lymVTzD8TcsrcV9qXTJT2s753XZxRLKsBy7bS4
+         LtFQ==
+X-Gm-Message-State: AOAM5314sGXkPEDhWlSaKFREndNLhHPs58KhX82u95N3+FQ904upg3Aj
+	A7KSCc42LOFQfgU4aLkcInDddu/0gbQSbA==
+X-Google-Smtp-Source: ABdhPJxC8pkQKPi8GlBvaGpAgHytvjojOxWLvG1yQPAU1M6cNn43G5hFP2OrRAY/WzTG1z1THzq5wQ==
+X-Received: by 2002:a17:90a:9f91:: with SMTP id o17mr12689533pjp.29.1628131678534;
+        Wed, 04 Aug 2021 19:47:58 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0:db81:2f56:60e4:2c64])
+        by smtp.gmail.com with ESMTPSA id b10sm4405722pfi.122.2021.08.04.19.47.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 04 Aug 2021 19:47:58 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] fvwm: Fix build time paths in target perl/python scripts
+Date: Wed,  4 Aug 2021 19:47:56 -0700
+Message-Id: <20210805024756.4062870-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Add rdeps as needed
+Fixes shebang-size QA warnings
 
-The previous SRC_URI only stores the latest source tarball and we
-will meet do_fetch issue if not upgrade timely.
-
-Update the SRC_URI which stores all versions to fix some warning
-like below:
-WARNING: mariadb-10.5.9-r0 do_fetch: Failed to fetch URL https://downloads.mariadb.org/interstitial/mariadb-10.5.9/source/mariadb-10.5.9.tar.gz, attempting MIRRORS if available
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-dbs/mysql/mariadb.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index b38672dfc..2496ac8fd 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -4,7 +4,7 @@ SECTION = "libs"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b1becf0cfa3366e0f4d854d1d264f311"
- 
--SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz \
-+SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
-            file://my.cnf \
-            file://mysqld.service \
-            file://install_db.service \
--- 
-2.17.1
+diff --git a/meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb b/meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb
+index 54e0a0ef4d..e0449269c0 100644
+--- a/meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb
++++ b/meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb
+@@ -82,6 +82,9 @@ do_install:append() {
 
+     install -d -m 0755 ${D}/${datadir}/fvwm
+     touch ${D}/${datadir}/fvwm/ConfigFvwmDefaults
++    sed -i -e 's:${STAGING_BINDIR_NATIVE}/perl-native/perl:${USRBINPATH}/env perl:g' ${D}${bindir}/fvwm-*
++    sed -i -e 's:${STAGING_BINDIR_NATIVE}/perl-native/perl:${USRBINPATH}/env perl:g' ${D}${libexecdir}/fvwm/*/Fvwm*
++    sed -i -e 's:${STAGING_BINDIR_NATIVE}/python3-native/python3:${USRBINPATH}/env python3:g' ${D}${bindir}/fvwm-menu-desktop
+ }
+
+ # the only needed packages (note: locale packages are automatically generated
+@@ -112,3 +115,7 @@ FILES:${PN}-doc = " \
+ RDEPENDS:${PN} = " \
+     xuser-account \
+ "
++RDEPENDS:${PN}-extra += "\
++    perl \
++    python3-core \
++"
+--
+2.32.0
