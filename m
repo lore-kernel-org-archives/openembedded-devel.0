@@ -1,282 +1,195 @@
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web11.2531.1628240479375083032
+Received: from mail.cybernetics.com (mail.cybernetics.com [173.71.130.66])
+ by mx.groups.io with SMTP id smtpd.web08.7496.1628268254640086071
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 06 Aug 2021 02:01:19 -0700
+ Fri, 06 Aug 2021 09:44:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: qi.chen@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 17691HjK003765
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 6 Aug 2021 02:01:18 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 17691H9V023845
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 6 Aug 2021 02:01:17 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Fri, 6 Aug 2021 02:01:16 -0700
-Received: from ala-lpggp7.wrs.com (147.11.105.171) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Fri, 6 Aug 2021 02:01:16 -0700
-From: "Chen Qi" <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-openembedded][PATCH] Convert to new override syntax using latest convert-overrides.py script
-Date: Fri, 6 Aug 2021 02:01:16 -0700
-Message-ID: <20210806090116.122021-1-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 2.30.2
+ dkim=fail reason="body hash did not verify" header.i=@cybernetics.com header.s=mail header.b=SheuV5pA;
+ spf=pass (domain: cybernetics.com, ip: 173.71.130.66, mailfrom: btv1==852474de9cf==tonyb@cybernetics.com)
+X-ASG-Debug-ID: 1628268251-0fb3b001bf9b120001-aWHRdb
+Received: from cybernetics.com ([10.10.4.126]) by mail.cybernetics.com with ESMTP id naQp4wUPas6RLpdQ; Fri, 06 Aug 2021 12:44:11 -0400 (EDT)
+X-Barracuda-Envelope-From: tonyb@cybernetics.com
+X-Barracuda-RBL-Trusted-Forwarder: 10.10.4.126
+X-ASG-Whitelist: Client
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=cybernetics.com; s=mail;
+	bh=N+qX9CVj9CCPu4kY1QLSqRf2G8+8WtYzOGGnFrfDlRE=;
+	h=Content-Language:Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:To:Subject; b=SheuV5pAXFqn7Dw1F6
+	ers7UpKO4CPKKYLJft6Mwux4l7cvYrYC6iglH/exOWtEfVD3ahdX9XFtJ5UKRvjgdv9Wvi4jXkM4X
+	LPEYagC63au75EhSdpBXr3BPpVptGFki5wffoR2T+CJgX0ifOm/0B0p1aPIrnUrQFr7AR0ZD7gnk=
+Received: from [10.157.2.224] (HELO [192.168.200.1])
+  by cybernetics.com (CommuniGate Pro SMTP 6.2.14)
+  with ESMTPS id 11054636; Fri, 06 Aug 2021 12:44:11 -0400
+Subject: Re: [OE-core] [master][PATCH 0/4] Reproducible LTO builds
+X-Barracuda-RBL-Trusted-Forwarder: 10.157.2.224
+To: Richard Purdie <richard.purdie@linuxfoundation.org>,
+ Randy MacLeod <randy.macleod@windriver.com>,
+ openembedded-core@lists.openembedded.org,
+ openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
+X-ASG-Orig-Subj: Re: [OE-core] [master][PATCH 0/4] Reproducible LTO builds
+References: <2efeecad-7ee5-126c-9271-d69fc3428c38@cybernetics.com>
+ <447d4fa9-b915-4e59-0ecc-64d41c6ceee6@windriver.com>
+ <22d7a9866471f53ea283caa1578fbf0b48d5e113.camel@linuxfoundation.org>
+ <a0c4c23d-7437-ce14-066f-0f7f6929a987@cybernetics.com>
+ <040fe5d8cd3914e7c19fc70ae6d18894b07f8073.camel@linuxfoundation.org>
+From: "Tony Battersby" <tonyb@cybernetics.com>
+Message-ID: <6bb55159-9b49-3229-a15c-eee730560fb7@cybernetics.com>
+Date: Fri, 6 Aug 2021 12:44:11 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+In-Reply-To: <040fe5d8cd3914e7c19fc70ae6d18894b07f8073.camel@linuxfoundation.org>
+X-Barracuda-Connect: UNKNOWN[10.10.4.126]
+X-Barracuda-Start-Time: 1628268251
+X-Barracuda-URL: https://10.10.4.122:443/cgi-mod/mark.cgi
+X-Barracuda-BRTS-Status: 1
+X-Virus-Scanned: by bsmtpd at cybernetics.com
+X-Barracuda-Scan-Msg-Size: 5189
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-This patch is the result of running the latest convert-ovrrides.py
-script.
+On 8/6/21 1:33 AM, Richard Purdie wrote:
+> On Thu, 2021-08-05 at 17:54 -0400, Tony Battersby wrote:
+>> On 8/5/21 6:21 AM, Richard Purdie wrote:
+>>> On Wed, 2021-08-04 at 20:13 -0400, Randy MacLeod wrote:
+>>>> On 2021-07-27 9:34 a.m., Tony Battersby wrote:
+>>>>> Currently, enabling Link Time Optimization via:
+>>>>>
+>>>>> require conf/distro/include/lto.inc
+>>>>> DISTRO_FEATURES_append =3D " lto"
+>>>>>
+>>>>> makes the build non-reproducible (as in
+>>>>> https://reproducible-builds.org/).=C2=A0 This patch set fixes some =
+of the
+>>>>> problems, but is not yet a complete solution.
+>>>>>
+>>>>> This patch set addresses the following bugs:
+>>>>> https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D14481
+>>>>> https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D14490
+>>>>>
+>>>>> openembedded-core patches
+>>>>> 1/4: lto.inc: disable LTO for grub
+>>>>> 2/4: gcc: Backport patch to make LTO builds more reproducible
+>>>>> 3/4: bitbake.conf: add DEBUG_PREFIX_MAP to TARGET_LDFLAGS
+>>>>>
+>>>>> openembedded-devel patches
+>>>>> 4/4: net-snmp: fix QA Issue after LDFLAGS change
+>>>>>
+>>>>> Patch 3 adds DEBUG_PREFIX_MAP to TARGET_LDFLAGS (it was already in
+>>>>> TARGET_CFLAGS).=C2=A0 This could possibly be done differently, such=
+ as by
+>>>>> removing it from TARGET_CFLAGS and adding it to TOOLCHAIN_OPTIONS,
+>>>>> TARGET_CC_ARCH, or TUNE_CCARGS, but I haven't tested those.=C2=A0 L=
+et me know
+>>>>> if there is a better/preferred way to do it.
+>>>>>
+>>>>> The TARGET_LDFLAGS change broke net-snmp from meta-networking, so I=
+ have
+>>>>> included a patch to fix that.=C2=A0 Other packages might have been =
+broken as
+>>>>> well, although I haven't found any others.
+>>>>>
+>>>>> With all these patches, there are still many shared libraries in /l=
+ib
+>>>>> and /usr/lib that are still not reproducible with LTO enabled becau=
+se
+>>>>> x86_64-poky-linux-libtool filters out the -f*-prefix-map flags adde=
+d by
+>>>>> patch 3 when linking shared libraries.=C2=A0 /usr/lib/libbz2.so.1.0=
+.6 from
+>>>>> the libbz2 package from the bzip2 recipe is a good example.=C2=A0 I=
+ do not
+>>>>> have a patch for that problem.=C2=A0 I will leave that to someone e=
+lse.
+>>>>>
+>>>>> So this is what we need to achieve reproducible LTO builds:
+>>>>> *) This patch set
+>>>>> *) A fix for libtool
+>>>>> *) Add LTO to reproducible builds testing if appropriate (e.g.
+>>>>> meta/lib/oeqa/selftest/cases/reproducible.py, CI on Autobuilder)
+>>>>> *) Fixes for individual packages, if needed
+>>>>> *) Once everything works, update the documentation again (I previou=
+sly
+>>>>> requested a documentation change for this bug, which will eventuall=
+y
+>>>>> show up at
+>>>>> http://docs.yoctoproject.org/test-manual/reproducible-builds.html).
+>>>> This is certainly a few steps in the right direction with a good out=
+line
+>>>> of what's next.
+>>>>
+>>>> I suspect that Richard has been busy with other things like override=
+s
+>>>> and the update to glibc-2.34.
+>>>>
+>>>> Do you have any suggestions or questions about what we should do
+>>>> with this patch series Richard?
+>>> Thanks for the reminder, I've been meaning to queue/test this which I=
+ will
+>>> do. The gcc version has been bumped but I ported the patch forward to=
+ it
+>>> and the patches are in master-next for testing. It is great to see th=
+is
+>>> support moving forward.
+>>>
+>>> Much as it pains me to admit having any libtool knowledge, I may be a=
+ble to
+>>> help with that bit. There is an untested patch below which may addres=
+s that
+>>> issue, or at least give a good hint on how to do it if it doesn't wor=
+k. I
+>>> don't have an environment to test easily right now.
+>>>
+>>> Cheers,
+>>>
+>>> Richard
+>> I tested your libtool patch in master-next with the bzip2 recipe.=C2=A0=
+ It
+>> works as intended; libbz2.so.1.0.6 and all the other output files are
+>> now reproducible with LTO enabled.=C2=A0 I also verified that libtool =
+is
+>> passing the -f*-prefix-map flags to the link command in log.do_compile
+>> as intended.
+>>
+>> I also verified that core-image-minimal builds successfully with the
+>> libtool patch.
+> Thanks for testing that, sounds like it helps that issue. I'll queue th=
+at patch.
+>
+> Unfortunately even with the ruby fix I queued, we still see reproducibl=
+ity
+> issues with the LDFLAGS change in curl-dev, gettext-ptest, ruby and rub=
+y-dbg=C2=A0
+> packages:
+>
+> https://autobuilder.yoctoproject.org/typhoon/#/builders/115/builds/515/=
+steps/12/logs/stdio
+>
+> We'll need to resolve those before I can merge the flags change.
+>
+> Diffoscope output:
+>
+> https://autobuilder.yocto.io/pub/repro-fail/oe-reproducible-20210805-8j=
+fd55ki/packages/diff-html/
+>
+> Basically LDFLAGS get encoded into a couple of scripts and the ruby bin=
+ary.
+>
+> Cheers,
+>
+> Richard
+>
+It looks like the ruby problem is being caused by MJIT_DLDFLAGS in
+build/tmp/work/core2-64-poky-linux/ruby/3.0.2-r0/build/mjit_config.h.=C2=A0
+There is already a patch
+poky/meta/recipes-devtools/ruby/ruby/0001-template-Makefile.in-do-not-wri=
+te-host-cross-cc-item.patch
+that removes some of these items for the sake of reproducibiltiy.=C2=A0 B=
+ut I
+do not know ruby, so I do not know the implications of doing the same
+thing for MJIT_DLDFLAGS.
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- meta-initramfs/classes/klibc.bbclass           |  2 +-
- .../recipes-daemons/lldpd/lldpd_1.0.8.bb       |  2 +-
- .../corosync/corosync_3.0.3.bb                 |  2 +-
- meta-oe/classes/image_types_sparse.bbclass     |  2 +-
- .../recipes-core/meta/distro-feed-configs.bb   |  2 +-
- .../packagegroups/packagegroup-meta-oe.bb      | 14 +++++++-------
- .../geany/geany-plugins_1.37.bb                | 18 +++++++++---------
- .../recipes-devtools/lapack/lapack_3.9.0.bb    |  4 ++--
- meta-oe/recipes-devtools/luajit/luajit_git.bb  |  2 +-
- .../dnfdragora/dnfdragora_git.bb               |  2 +-
- .../fontforge/fontforge_20190801.bb            |  2 +-
- .../libmime/libmime-types-perl_2.17.bb         |  2 +-
- 12 files changed, 27 insertions(+), 27 deletions(-)
+Tony Battersby
 
-diff --git a/meta-initramfs/classes/klibc.bbclass b/meta-initramfs/classes/klibc.bbclass
-index 83112c06f..202d132d9 100644
---- a/meta-initramfs/classes/klibc.bbclass
-+++ b/meta-initramfs/classes/klibc.bbclass
-@@ -4,7 +4,7 @@ DEPENDS =+ "klcc-cross"
- # Default for klcc is to build static binaries.
- # Set CC = "${TARGET_PREFIX}klcc -shared" to build the dynamic version.
- CC:forcevariable = "${TARGET_PREFIX}klcc ${TOOLCHAIN_OPTIONS}"
--CC:forcevariable:armv4_linux-gnueabi = "${TARGET_PREFIX}klcc ${TOOLCHAIN_OPTIONS} -march=armv4 -mthumb-interwork"
-+CC:forcevariable:armv4:linux-gnueabi = "${TARGET_PREFIX}klcc ${TOOLCHAIN_OPTIONS} -march=armv4 -mthumb-interwork"
- CC:append:armv7ve = " ${@' -mfloat-abi=${TUNE_CCARGS_MFLOAT}' if (d.getVar('TUNE_CCARGS_MFLOAT') != '') else ''}"
- CC:append:armv7a = " ${@' -mfloat-abi=${TUNE_CCARGS_MFLOAT}' if (d.getVar('TUNE_CCARGS_MFLOAT') != '') else ''}"
- 
-diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb
-index d5e9e2c30..cf2b156fe 100644
---- a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb
-+++ b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb
-@@ -61,4 +61,4 @@ RDEPENDS:${PN} += "os-release"
- 
- FILES:${PN}-zsh-completion += "${datadir}/zsh/"
- # FIXME: zsh is broken in meta-oe so this cannot be enabled for now
--#RDEPENDS_${PN}-zsh-completion += "zsh"
-+#RDEPENDS:${PN}-zsh-completion += "zsh"
-diff --git a/meta-networking/recipes-extended/corosync/corosync_3.0.3.bb b/meta-networking/recipes-extended/corosync/corosync_3.0.3.bb
-index 0af954c31..909296197 100644
---- a/meta-networking/recipes-extended/corosync/corosync_3.0.3.bb
-+++ b/meta-networking/recipes-extended/corosync/corosync_3.0.3.bb
-@@ -37,7 +37,7 @@ PACKAGECONFIG[systemd] = "--enable-systemd --with-systemddir=${systemd_system_un
- EXTRA_OECONF = "ac_cv_path_BASHPATH=${base_bindir}/bash ap_cv_cc_pie=no"
- EXTRA_OEMAKE = "tmpfilesdir_DATA="
- 
--#do_configure_prepend() {
-+#do_configure:prepend() {
- #    ( cd ${S}
- #    ${S}/autogen.sh )
- #}
-diff --git a/meta-oe/classes/image_types_sparse.bbclass b/meta-oe/classes/image_types_sparse.bbclass
-index 1459f800a..af3879372 100644
---- a/meta-oe/classes/image_types_sparse.bbclass
-+++ b/meta-oe/classes/image_types_sparse.bbclass
-@@ -1,7 +1,7 @@
- inherit image_types
- 
- CONVERSIONTYPES += "sparse"
--CONVERSION_CMD_sparse() {
-+CONVERSION_CMD:sparse() {
-     in="${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}"
-     out="${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}.sparse"
-     case "${type}" in
-diff --git a/meta-oe/recipes-core/meta/distro-feed-configs.bb b/meta-oe/recipes-core/meta/distro-feed-configs.bb
-index cffeeb6a0..a87de4583 100644
---- a/meta-oe/recipes-core/meta/distro-feed-configs.bb
-+++ b/meta-oe/recipes-core/meta/distro-feed-configs.bb
-@@ -28,6 +28,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- #    confs = [ ( "${sysconfdir}/opkg/%s-feed.conf" % feed ) for feed in archs ]
- #    return " ".join( confs )
- #
--#CONFFILES_${PN} += '${@distro_feed_configs(d)}'
-+#CONFFILES:${PN} += '${@distro_feed_configs(d)}'
- 
- CONFFILES:${PN} += '${@ " ".join( [ ( "${sysconfdir}/opkg/%s-feed.conf" % feed ) for feed in "all ${PACKAGE_EXTRA_ARCHS} ${MACHINE_ARCH}".split() ] ) }'
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index ad95b9c45..cdc43bf04 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -205,7 +205,7 @@ RDEPENDS:packagegroup-meta-oe-crypto ="\
-     libsodium \
-     pkcs11-helper \
- "
--RDEPENDS_packagegroup-meta-oe-crypto:remove:riscv32 = "botan"
-+RDEPENDS:packagegroup-meta-oe-crypto:remove:riscv32 = "botan"
- 
- RDEPENDS:packagegroup-meta-oe-dbs ="\
-     influxdb \
-@@ -948,12 +948,12 @@ RDEPENDS:packagegroup-meta-oe-test ="\
-     pm-qa \
-     testfloat \
- "
--RDEPENDS_packagegroup-meta-oe-test:remove:libc-musl = "pm-qa"
--RDEPENDS_packagegroup-meta-oe-test:remove:arm = "fwts"
--RDEPENDS_packagegroup-meta-oe-test:remove:mipsarch = "fwts"
--RDEPENDS_packagegroup-meta-oe-test:remove:powerpc = "fwts"
--RDEPENDS_packagegroup-meta-oe-test:remove:riscv64 = "fwts"
--RDEPENDS_packagegroup-meta-oe-test:remove:riscv32 = "fwts"
-+RDEPENDS:packagegroup-meta-oe-test:remove:libc-musl = "pm-qa"
-+RDEPENDS:packagegroup-meta-oe-test:remove:arm = "fwts"
-+RDEPENDS:packagegroup-meta-oe-test:remove:mipsarch = "fwts"
-+RDEPENDS:packagegroup-meta-oe-test:remove:powerpc = "fwts"
-+RDEPENDS:packagegroup-meta-oe-test:remove:riscv64 = "fwts"
-+RDEPENDS:packagegroup-meta-oe-test:remove:riscv32 = "fwts"
- 
- RDEPENDS:packagegroup-meta-oe-ptest-packages = "\
-     zeromq-ptest \
-diff --git a/meta-oe/recipes-devtools/geany/geany-plugins_1.37.bb b/meta-oe/recipes-devtools/geany/geany-plugins_1.37.bb
-index 10e51fa81..9a7053792 100644
---- a/meta-oe/recipes-devtools/geany/geany-plugins_1.37.bb
-+++ b/meta-oe/recipes-devtools/geany/geany-plugins_1.37.bb
-@@ -66,7 +66,7 @@ FILES:${PN}-commander = "${libdir}/geany/commander.so"
- EXTRA_OECONF += "--disable-debugger"
- #PLUGINS += "${PN}-debugger"
- #LIC_FILES_CHKSUM += "file://debugger/COPYING;md5=4325afd396febcb659c36b49533135d4"
--#FILES_${PN}-debugger = "${libdir}/geany/debugger.so ${datadir}/${PN}/debugger"
-+#FILES:${PN}-debugger = "${libdir}/geany/debugger.so ${datadir}/${PN}/debugger"
- 
- PLUGINS += "${PN}-defineformat"
- LIC_FILES_CHKSUM += "file://defineformat/COPYING;md5=751419260aa954499f7abaabaa882bbe"
-@@ -76,8 +76,8 @@ FILES:${PN}-defineformat = "${libdir}/geany/defineformat.so"
- EXTRA_OECONF += "--disable-devhelp"
- #PLUGINS += "${PN}-devhelp"
- #LIC_FILES_CHKSUM += "file://devhelp/COPYING;md5=d32239bcb673463ab874e80d47fae504"
--#LICENSE_${PN}-devhelp = "GPLv3"
--#FILES_${PN}-devhelp = "${libdir}/geany/devhelp.so"
-+#LICENSE:${PN}-devhelp = "GPLv3"
-+#FILES:${PN}-devhelp = "${libdir}/geany/devhelp.so"
- 
- PLUGINS += "${PN}-geanyctags"
- LIC_FILES_CHKSUM += "file://geanyctags/COPYING;md5=c107cf754550e65755c42985a5d4e9c9"
-@@ -100,7 +100,7 @@ FILES:${PN}-geanyinsertnum = "${libdir}/geany/geanyinsertnum.so"
- EXTRA_OECONF += "--disable-geanylua"
- #PLUGINS += "${PN}-geanylua"
- #LIC_FILES_CHKSUM += "file://geanylua/COPYING;md5=4325afd396febcb659c36b49533135d4"
--#FILES_${PN}-geanylua = "${libdir}/geany/geanylua.so ${libdir}/${PN}/geanylua/*.so"
-+#FILES:${PN}-geanylua = "${libdir}/geany/geanylua.so ${libdir}/${PN}/geanylua/*.so"
- 
- PLUGINS += "${PN}-geanymacro"
- LIC_FILES_CHKSUM += "file://geanymacro/COPYING;md5=c107cf754550e65755c42985a5d4e9c9"
-@@ -125,7 +125,7 @@ FILES:${PN}-geanyprj = "${libdir}/geany/geanyprj.so"
- 
- #PLUGINS += "${PN}-geanypy"
- #LIC_FILES_CHKSUM += "file://geanypy/COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
--#FILES_${PN}-geanypy = "${libdir}/geany/geanypy.so"
-+#FILES:${PN}-geanypy = "${libdir}/geany/geanypy.so"
- 
- PLUGINS += "${PN}-geanyvc"
- LIC_FILES_CHKSUM += "file://geanyvc/COPYING;md5=c107cf754550e65755c42985a5d4e9c9"
-@@ -160,13 +160,13 @@ FILES:${PN}-lipsum = "${libdir}/geany/lipsum.so"
- EXTRA_OECONF += "--disable-peg-markdown"
- #PLUGINS += "${PN}-markdown"
- #LIC_FILES_CHKSUM += "file://markdown/COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
--#FILES_${PN}-markdown = "${libdir}/geany/markdown.so"
-+#FILES:${PN}-markdown = "${libdir}/geany/markdown.so"
- 
- # | checking whether the GTK version in use is compatible with plugin multiterm... no
- EXTRA_OECONF += "--disable-multiterm"
- #PLUGINS += "${PN}-multiterm"
- #LIC_FILES_CHKSUM += "file://multiterm/COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
--#FILES_${PN}-multiterm = "${libdir}/geany/multiterm.so"
-+#FILES:${PN}-multiterm = "${libdir}/geany/multiterm.so"
- 
- PLUGINS += "${PN}-overview"
- LIC_FILES_CHKSUM += "file://overview/overview/overviewplugin.c;beginline=4;endline=20;md5=1aa33522916cdeb46cccac0c629da0d0"
-@@ -226,8 +226,8 @@ FILES:${PN}-vimode = "${libdir}/geany/vimode.so"
- EXTRA_OECONF += " --disable-webhelper"
- #PLUGINS += "${PN}-webhelper"
- #LIC_FILES_CHKSUM += "file://webhelper/COPYING;md5=d32239bcb673463ab874e80d47fae504"
--#LICENSE_${PN}-webhelper = "GPLv3"
--#FILES_${PN}-webhelper = "${libdir}/geany/webhelper.so"
-+#LICENSE:${PN}-webhelper = "GPLv3"
-+#FILES:${PN}-webhelper = "${libdir}/geany/webhelper.so"
- 
- PLUGINS += "${PN}-workbench"
- LIC_FILES_CHKSUM += "file://workbench/COPYING;md5=c107cf754550e65755c42985a5d4e9c9"
-diff --git a/meta-oe/recipes-devtools/lapack/lapack_3.9.0.bb b/meta-oe/recipes-devtools/lapack/lapack_3.9.0.bb
-index 62d4df5e0..1664d637b 100644
---- a/meta-oe/recipes-devtools/lapack/lapack_3.9.0.bb
-+++ b/meta-oe/recipes-devtools/lapack/lapack_3.9.0.bb
-@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=930f8aa500a47c7dab0f8efb5a1c9a40"
- # Note this is not officially supported and is just illustrated here to
- # show an example of how it can be done
- # You'll also need your fortran recipe to depend on libgfortran
--#FORTRAN_forcevariable = ",fortran"
--#RUNTIMETARGET_append_pn-gcc-runtime = " libquadmath"
-+#FORTRAN:forcevariable = ",fortran"
-+#RUNTIMETARGET:append:pn-gcc-runtime = " libquadmath"
- 
- DEPENDS = "libgfortran"
- 
-diff --git a/meta-oe/recipes-devtools/luajit/luajit_git.bb b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-index 645680cd9..87da485cc 100644
---- a/meta-oe/recipes-devtools/luajit/luajit_git.bb
-+++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-@@ -31,7 +31,7 @@ BUILD_CC_ARCH:append = " ${@['-m32',''][d.getVar('SITEINFO_BITS') != '32']}"
- LUA_TARGET_OS = "Unknown"
- LUA_TARGET_OS:darwin = "Darwin"
- LUA_TARGET_OS_linux = "Linux"
--LUA_TARGET_OS_linux-gnueabi = "Linux"
-+LUA_TARGET_OS:linux-gnueabi = "Linux"
- LUA_TARGET_OS:mingw32 = "Windows"
- 
- # We don't want the lua buildsystem's compiler optimizations, or its
-diff --git a/meta-oe/recipes-graphics/dnfdragora/dnfdragora_git.bb b/meta-oe/recipes-graphics/dnfdragora/dnfdragora_git.bb
-index f1e994863..70e1a47f0 100644
---- a/meta-oe/recipes-graphics/dnfdragora/dnfdragora_git.bb
-+++ b/meta-oe/recipes-graphics/dnfdragora/dnfdragora_git.bb
-@@ -17,7 +17,7 @@ S = "${WORKDIR}/git"
- inherit cmake gettext pkgconfig python3-dir python3native distutils3-base mime-xdg
- 
- DEPENDS += "dnf python3 "
--#DEPENDS_class-nativesdk += "nativesdk-python3"
-+#DEPENDS:class-nativesdk += "nativesdk-python3"
- 
- RDEPENDS:${PN}:class-target = " python3-core libyui libyui-ncurses "
- 
-diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20190801.bb b/meta-oe/recipes-graphics/fontforge/fontforge_20190801.bb
-index 26d51bdaf..bcc85157c 100644
---- a/meta-oe/recipes-graphics/fontforge/fontforge_20190801.bb
-+++ b/meta-oe/recipes-graphics/fontforge/fontforge_20190801.bb
-@@ -26,7 +26,7 @@ EXTRA_OECONF:append:class-native = " with_x=no"
- LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI}"
- BUILD_LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI}"
- 
--#do_configure_prepend() {
-+#do_configure:prepend() {
- # uthash sources are expected in uthash/src
- #    mkdir -p ${S}/uthash/src
- #    cp ${STAGING_INCDIR}/ut*.h ${S}/uthash/src
-diff --git a/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb b/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
-index fd398a0fe..18fa46f01 100644
---- a/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
-+++ b/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
-@@ -29,7 +29,7 @@ RDEPENDS:${PN} = "\
- "
- 
- RDEPENDS:${PN}-ptest = "perl-module-lib perl-module-test-more"
--#RSUGGESTS_${PN}-ptest = "libmojo-base-perl"
-+#RSUGGESTS:${PN}-ptest = "libmojo-base-perl"
- 
- do_install () {
-     cpan_do_install
--- 
-2.30.2
+
 
