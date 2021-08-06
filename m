@@ -1,96 +1,101 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.5])
- by mx.groups.io with SMTP id smtpd.web11.1758.1628233200157984339
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web10.1674.1628233231525104775
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 06 Aug 2021 00:00:00 -0700
+ Fri, 06 Aug 2021 00:00:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=cJSMXv+u;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.5, mailfrom: zhengrq.fnst@fujitsu.com)
+ dkim=fail reason="body hash did not verify" header.i=@fujitsu.com header.s=170520fj header.b=PP4mx9pS;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: zhengrq.fnst@fujitsu.com)
 Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1628233197; i=@fujitsu.com;
-	bh=zoNIO3LeaXBP4Kdei7uBCKlp3TBkT5W6oIWeSc8o4Ho=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=cJSMXv+uEX7LesFraRl8tjDCIIrm3f7IEAtIDtM6Fwt0/qvFDxkY8hqXqQtZ/BN8r
-	 wbJ2CidK9sow2QOITisVls0whlf6tmrvR557pW2jCEwK+yKoj4NkPE3PKTwcjYfPd+
-	 ladGQmyH7yifNDEcUlk3seQIHXuoXE3pJMxQ8qXDEe1826iRwbdL0u69DR3dssa4X9
-	 fWAKhN6teGCo+0tLUAMmSOWTKxWIt//HHCXaGC8+XPrUcfQgS+FI/QKWqHhviwJzSu
-	 /TvbZ4DBl6vZGXMWThSJ5uQAOXVI+aSLlYducAPpUxnToNqhAnGhII0+zKMoW88kOz
-	 0Mpe23KTEaKmw==
-Received: from [100.112.192.148] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-5.bemta.az-a.eu-west-1.aws.symcld.net id FC/39-07317-DEDDC016; Fri, 06 Aug 2021 06:59:57 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprGIsWRWlGSWpSXmKPExsViZ8MxVfftXZ5
-  Eg59v+SwuHl7K7MDocW7jCsYAxijWzLyk/IoE1owTx9eyFkzhqbi/ezV7A2MDdxcjJ4eQwCwm
-  iY/bhbsYuYDs3YwSv49PZARJsAnoSpx7vJYdxBYR0JdYOnsPM4gtLOAp8efYIjYQm0VARWLr3
-  c1MIDavgIfE98m9YHEJAQWJKQ/fM0PEBSVOznzCAmIzC0hIHHzxAijOAVSjKDF7ujxEeYXE68
-  OXmCcw8sxC0jELSccCRqZVjBZJRZnpGSW5iZk5uoYGBrqGhka6hpZAbGKil1ilm6iXWqpbnlp
-  comuol1herFdcmZuck6KXl1qyiREYRCkFBybsYNz/+oPeIUZJDiYlUd7mczyJQnxJ+SmVGYnF
-  GfFFpTmpxYcYZTg4lCR44+4A5QSLUtNTK9Iyc4ABDZOW4OBREuHtugWU5i0uSMwtzkyHSJ1i1
-  OXYPHfpImYhlrz8vFQpcV5OkBkCIEUZpXlwI2DRdYlRVkqYl5GBgUGIpyC1KDezBFX+FaM4B6
-  OSMO8EkFU8mXklcJteAR3BBHTEhVhOkCNKEhFSUg1Ms66s0eqXYH09ySrm08KEJ7Irplmv/3i
-  +uUXdaKJBiojEirrAt8UWnqyfzH2Yd6Vsjjn87Hixv+GPN39sl+bXvb76ICSi6LbYVib25VfE
-  GPl3VAftWjznM9sxJr79rY4ev5NVPhosExX+cJcvUmfDTkXdN5OP7dKR2LNpj/kMDh/3c/Xfb
-  j15VLbP89OmWpEdW9cpq/42POe6U2e+R3xm5Ma7nE6NJ2T3yc9nKLKwcgkrvjBjQfBlUR3hH7
-  ciXhcv5hE+O1860yesLCPGvTw5LmjyTHbzEvvCo+Jq23osNnNr/r4k2a18L7YxjVOkXKNv+8R
-  f/u6FaUun7JLsMJzx+OIiRQP///K19yQNij2VWIozEg21mIuKEwFKpYIpKQMAAA==
+	s=170520fj; t=1628233219; i=@fujitsu.com;
+	bh=EECJ1GuOd6SB7Na9OdpwVfrVtBen/E6GFu+NWZFzQs4=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	b=PP4mx9pSRwR5a08B0fRcliAMeOiFAw+BdqMupgPBJbckp+Q7cHhzrkTEX+mLB8x+N
+	 wbEHwvcm5iDl2nYXxk4egosSDLjoF5XCSMW537PdKGfXbfQbVFDADCVtvl+Sn3M1s8
+	 1A8AGQf19Fkqvkg8KvMhBlnixb7P8TRbMx+8Z9MPYXSS6nAxvGSjgF9tTdvVP5xCG0
+	 IYz8NMhNPz6CKU5eaQbPYP3+y6dwrY9B8Q+lDUY4zW5k5gNF5zYsj9lhOdCt/HvtvN
+	 LKYULmcpMMGkFF/xPevhBVQGCgnV/eXClghgvZ0nxWKO6VHHx2QXKAYKUwur+md+Pi
+	 jPmPhOzD9nAsQ==
+Received: from [100.113.1.143] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-a.eu-central-1.aws.symcld.net id 06/9A-16478-30EDC016; Fri, 06 Aug 2021 07:00:19 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrAIsWRWlGSWpSXmKPExsViZ8MRost0jyf
+  RYNNuCYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePFjRssBW/4K1avfMfUwNjJ18XIxSEkMItJ
+  Ysb9DewQzm5GiZv7ZrJ0MXJysAnoSpx7vJYdxBYR0JdYOnsPM4gtLOAjMf3udEYQm0VARWLXi
+  wYwm1fAQ+J8yzSwGgkBBYkpD98zQ8QFJU7OfAI2k1lAVaL7yFMmCFteonnrbKAaDqB6RYnZ0+
+  UhWiskXh++xDyBkXcWku5ZSLpnIelewMi8itEyqSgzPaMkNzEzR9fQwEDX0NBYF0iaGuolVuk
+  m6qWW6ian5pUUJQJl9RLLi/WKK3OTc1L08lJLNjECAy+lkGH6DsY1bz7oHWKU5GBSEuVtPseT
+  KMSXlJ9SmZFYnBFfVJqTWnyIUYaDQ0mCN+4OUE6wKDU9tSItMwcYBTBpCQ4eJRHerltAad7ig
+  sTc4sx0iNQpRl2Odz8XL2IWYsnLz0uVEuflBJkhAFKUUZoHNwIWkZcYZaWEeRkZGBiEeApSi3
+  IzS1DlXzGKczAqCfNOAFnFk5lXArfpFdARTEBHXIjlBDmiJBEhJdXAFDC/JDG+/WByyJfTbzR
+  urXh5mal71fWHRV1C05ZtSmR+HDklIfTamfwNRs/stDVXnvil/fOC87+ZsapXuUIcUxkzd6wT
+  nXrk0/rjB1o//ed4MtXBSIPV9IRYW/p8neqeOzozTFOvmB/b9cWpkmuxda6/89LpK6MWS57+/
+  eZ14tUl1aLJPEo3TNe3Bt3hTBPgZ2tltWWNW/6D4fXs2tLrYjZcWe5/dQ7VZ+WoGKjv5kmw+p
+  I9Vcep4ylfvpCk50X/6kU9klxn9ewvbON61eKwVHUbi3LYLZ4vuzo7+dftYHxuNzEpVMh7X/e
+  B4J/FJo57j+bFZol9+TzdT1P7tfCxFRY5d6VkivpczogyBdQpsRRnJBpqMRcVJwIAE55CGkMD
+  AAA=
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-10.tower-271.messagelabs.com!1628233196!116041!1
-X-Originating-IP: [62.60.8.149]
+X-Msg-Ref: server-12.tower-232.messagelabs.com!1628233217!778450!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 23131 invoked from network); 6 Aug 2021 06:59:57 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-10.tower-271.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 6 Aug 2021 06:59:57 -0000
+Received: (qmail 30168 invoked from network); 6 Aug 2021 07:00:18 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-12.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 6 Aug 2021 07:00:18 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1766xupm029202
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17670HPQ002086
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 6 Aug 2021 07:59:56 +0100
+	for <openembedded-devel@lists.openembedded.org>; Fri, 6 Aug 2021 08:00:17 +0100
 Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 6 Aug 2021 07:59:55 +0100
+ (TLS) id 15.0.1497.18; Fri, 6 Aug 2021 08:00:15 +0100
 From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-isort: upgrade 5.9.2 -> 5.9.3
-Date: Fri, 6 Aug 2021 14:59:48 +0800
-Message-ID: <1628233188-40301-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH]python3-ipython: upgrade 7.25.0 -> 7.26.0
+Date: Fri, 6 Aug 2021 15:00:09 +0800
+Message-ID: <1628233209-40351-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.35]
 X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+Content-Type: text/plain; charset="y"
+Content-Transfer-Encoding: quoted-printable
 
-5.9.3 July 28 2021
-Improved text of skipped file message to mention gitignore feature.
-Made all exceptions pickleable.
-Fixed #1779: Pylama integration ignores pylama specific isort config overrides.
-Fixed #1781: --from-first CLI flag shouldn't take any arguments.
-Fixed #1792: Sorting literals sometimes ignored when placed on first few lines of file.
-Fixed #1777: extend_skip is not honored wit a git submodule when skip_gitignore=true.
+IPython 7.26 is a minor release that fixes a couple of issues, updates in API and Copyright/Licenses issues around various part of the codebase.
+
+We=E2=80=99ll highlight this issue <https://github.com/ipython/ipython/issues/13039> pointing out we were including and refereeing to code from Stack Overflow which was CC-BY-SA, hence incompatible with the BSD license of IPython. This lead us to a rewriting of the corresponding logic which in our case was done in a more efficient way (in our case we were searching string prefixes instead of full strings).
+
+You will notice also a number of documentation improvements and cleanup.
+Of particular interest are the following Pull-requests:
+The IPython directive now uses Sphinx logging for warnings. PR #13030.
+Add expiry days option to pastebin magic and change http protocol to https. PR #13056
+Make Ipython.utils.timing work with jupyterlite PR #13050.
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../python/{python3-isort_5.9.2.bb => python3-isort_5.9.3.bb}   | 2 +-
+ .../{python3-ipython_7.25.0.bb =3D> python3-ipython_7.26.0.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-isort_5.9.2.bb => python3-isort_5.9.3.bb} (84%)
+ rename meta-python/recipes-devtools/python/{python3-ipython_7.25.0.bb =3D> python3-ipython_7.26.0.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-isort_5.9.2.bb b/meta-python/recipes-devtools/python/python3-isort_5.9.3.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-isort_5.9.2.bb
-rename to meta-python/recipes-devtools/python/python3-isort_5.9.3.bb
-index a459423839..44a51db28f 100644
---- a/meta-python/recipes-devtools/python/python3-isort_5.9.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-isort_5.9.3.bb
-@@ -4,7 +4,7 @@ LICENSE = "MIT"
- SECTION = "devel/python"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=8227180126797a0148f94f483f3e1489"
+diff --git a/meta-python/recipes-devtools/python/python3-ipython_7.25.0.bb b/meta-python/recipes-devtools/python/python3-ipython_7.26.0.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-ipython_7.25.0.bb
+rename to meta-python/recipes-devtools/python/python3-ipython_7.26.0.bb
+index 5e5261fa51..4c1d4ebd70 100644
+--- a/meta-python/recipes-devtools/python/python3-ipython_7.25.0.bb
++++ b/meta-python/recipes-devtools/python/python3-ipython_7.26.0.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING.rst;md5=3D59b20262b8663cdd094005bddf47af5f"
  
--SRC_URI[sha256sum] = "f65ce5bd4cbc6abdfbe29afc2f0245538ab358c14590912df638033f157d555e"
-+SRC_URI[sha256sum] = "9c2ea1e62d871267b78307fe511c0838ba0da28698c5732d54e2790bf3ba9899"
+ PYPI_PACKAGE =3D "ipython"
  
- inherit pypi setuptools3
+-SRC_URI[sha256sum] =3D "54bbd1fe3882457aaf28ae060a5ccdef97f212a741754e420028d4ec5c2291dc"
++SRC_URI[sha256sum] =3D "0cff04bb042800129348701f7bd68a430a844e8fb193979c08f6c99f28bb735e"
  
+ RDEPENDS:${PN} =3D "\
+     ${PYTHON_PN}-setuptools \
 -- 
 2.25.1
 
