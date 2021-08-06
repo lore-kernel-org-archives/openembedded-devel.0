@@ -1,158 +1,131 @@
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.web10.1214.1628228011764038725
+Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
+ by mx.groups.io with SMTP id smtpd.web10.1416.1628230449943637477
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Aug 2021 22:33:32 -0700
+ Thu, 05 Aug 2021 23:14:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linuxfoundation.org header.s=google header.b=ZfvLbSz7;
- spf=pass (domain: linuxfoundation.org, ip: 209.85.221.43, mailfrom: richard.purdie@linuxfoundation.org)
-Received: by mail-wr1-f43.google.com with SMTP id d8so9508819wrm.4
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Aug 2021 22:33:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linuxfoundation.org; s=google;
-        h=message-id:subject:from:to:date:in-reply-to:references:user-agent
-         :mime-version:content-transfer-encoding;
-        bh=S47TBsnUm20lkOCIvLNPt9JFZpdl4rl04gabEAVgoA8=;
-        b=ZfvLbSz7FKKlvSavuFg3cyxdQiV+DDAZ2TCKboCNTWH6SByQ9uZyLgChLZlm/opXn2
-         Uid8Dbs/FtRtbjlWBXCNBo1Q6+vpO95dveBAFPGIxRHaA/lZGjlaSRnV6nNspUGkBE8R
-         keus4JoVtBCcUXmFlqgRsEFe5u+UNnmAK2KcI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-         :references:user-agent:mime-version:content-transfer-encoding;
-        bh=S47TBsnUm20lkOCIvLNPt9JFZpdl4rl04gabEAVgoA8=;
-        b=A2lJLVEFbh74zO7OCQI6nahNjssV3PdkjBCjjCKS9C44eMXrfTI/JGb4iUcpTzEwxE
-         xGpP0QfcCiwh6OBaWL/eguCX+6qU+Yd8zvltwDz+4blgd/FxaAmSPlLwXqYFsdQbBjIK
-         RmXlzRV8fJzknW5AhexxvZyvZDh4dyZ/oU6y+kvHVuech9KcR+czlryYAiq+wx7pw+ax
-         TdaunwXwB2UfzL48VMB9Tm0AGbsNVixMb6iBRHrCw5vsUoD5I+kIryddzTbvH5bTTMqB
-         ytFkBYE5OrVel52Os8678BiCVM3qSG6J+egHQaqyD4LGhl2yeyiYGMTPfKlUPAC8PV0q
-         XblA==
-X-Gm-Message-State: AOAM530s++pIP9gFkaHRIWKb/GUD8XZs4TAyxzi1ifrg9S/TfLjVxv8g
-	ateptPm5znQc0hiTVmgOvfPEtA==
-X-Google-Smtp-Source: ABdhPJw12Ll2AXXVsZucGIF0fKgPBTXz8yK38xcCKeFQkGMXm/PB9yjfxgSqWgb9cMdsmCp7N0rJVw==
-X-Received: by 2002:a05:6000:12ce:: with SMTP id l14mr8952158wrx.41.1628228010060;
-        Thu, 05 Aug 2021 22:33:30 -0700 (PDT)
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from ?IPv6:2001:8b0:aba:5f3c:9b1a:3a88:2016:c4d0? ([2001:8b0:aba:5f3c:9b1a:3a88:2016:c4d0])
-        by smtp.gmail.com with ESMTPSA id p15sm7283638wmi.29.2021.08.05.22.33.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Aug 2021 22:33:29 -0700 (PDT)
-Message-ID: <040fe5d8cd3914e7c19fc70ae6d18894b07f8073.camel@linuxfoundation.org>
-Subject: Re: [OE-core] [master][PATCH 0/4] Reproducible LTO builds
-From: "Richard Purdie" <richard.purdie@linuxfoundation.org>
-To: Tony Battersby <tonyb@cybernetics.com>, Randy MacLeod
-	 <randy.macleod@windriver.com>, openembedded-core@lists.openembedded.org, 
-	openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
-Date: Fri, 06 Aug 2021 06:33:26 +0100
-In-Reply-To: <a0c4c23d-7437-ce14-066f-0f7f6929a987@cybernetics.com>
-References: <2efeecad-7ee5-126c-9271-d69fc3428c38@cybernetics.com>
-	 <447d4fa9-b915-4e59-0ecc-64d41c6ceee6@windriver.com>
-	 <22d7a9866471f53ea283caa1578fbf0b48d5e113.camel@linuxfoundation.org>
-	 <a0c4c23d-7437-ce14-066f-0f7f6929a987@cybernetics.com>
-User-Agent: Evolution 3.40.0-1 
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+ dkim=missing; spf=pass (domain: siemens.com, ip: 192.35.17.2, mailfrom: andrej.valek@siemens.com)
+Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
+	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id 1766E79Y007357
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 6 Aug 2021 08:14:07 +0200
+Received: from dev.vm6.ccp.siemens.com ([144.145.220.57])
+	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id 1766E6PQ010651;
+	Fri, 6 Aug 2021 08:14:07 +0200
+Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 61729950A87;
+	Fri,  6 Aug 2021 08:14:06 +0200 (CEST)
+From: "Andrej Valek" <andrej.valek@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Andrej Valek <andrej.valek@siemens.com>
+Subject: [OE-core][PATCH] thrift: upgrade to 0.14.2
+Date: Fri,  6 Aug 2021 08:13:14 +0200
+Message-Id: <20210806061314.26188-1-andrej.valek@siemens.com>
+X-Mailer: git-send-email 2.11.0
 
-On Thu, 2021-08-05 at 17:54 -0400, Tony Battersby wrote:
-> On 8/5/21 6:21 AM, Richard Purdie wrote:
-> > On Wed, 2021-08-04 at 20:13 -0400, Randy MacLeod wrote:
-> > > On 2021-07-27 9:34 a.m., Tony Battersby wrote:
-> > > > Currently, enabling Link Time Optimization via:
-> > > > 
-> > > > require conf/distro/include/lto.inc
-> > > > DISTRO_FEATURES_append = " lto"
-> > > > 
-> > > > makes the build non-reproducible (as in
-> > > > https://reproducible-builds.org/).  This patch set fixes some of the
-> > > > problems, but is not yet a complete solution.
-> > > > 
-> > > > This patch set addresses the following bugs:
-> > > > https://bugzilla.yoctoproject.org/show_bug.cgi?id=14481
-> > > > https://bugzilla.yoctoproject.org/show_bug.cgi?id=14490
-> > > > 
-> > > > openembedded-core patches
-> > > > 1/4: lto.inc: disable LTO for grub
-> > > > 2/4: gcc: Backport patch to make LTO builds more reproducible
-> > > > 3/4: bitbake.conf: add DEBUG_PREFIX_MAP to TARGET_LDFLAGS
-> > > > 
-> > > > openembedded-devel patches
-> > > > 4/4: net-snmp: fix QA Issue after LDFLAGS change
-> > > > 
-> > > > Patch 3 adds DEBUG_PREFIX_MAP to TARGET_LDFLAGS (it was already in
-> > > > TARGET_CFLAGS).  This could possibly be done differently, such as by
-> > > > removing it from TARGET_CFLAGS and adding it to TOOLCHAIN_OPTIONS,
-> > > > TARGET_CC_ARCH, or TUNE_CCARGS, but I haven't tested those.  Let me know
-> > > > if there is a better/preferred way to do it.
-> > > > 
-> > > > The TARGET_LDFLAGS change broke net-snmp from meta-networking, so I have
-> > > > included a patch to fix that.  Other packages might have been broken as
-> > > > well, although I haven't found any others.
-> > > > 
-> > > > With all these patches, there are still many shared libraries in /lib
-> > > > and /usr/lib that are still not reproducible with LTO enabled because
-> > > > x86_64-poky-linux-libtool filters out the -f*-prefix-map flags added by
-> > > > patch 3 when linking shared libraries.  /usr/lib/libbz2.so.1.0.6 from
-> > > > the libbz2 package from the bzip2 recipe is a good example.  I do not
-> > > > have a patch for that problem.  I will leave that to someone else.
-> > > > 
-> > > > So this is what we need to achieve reproducible LTO builds:
-> > > > *) This patch set
-> > > > *) A fix for libtool
-> > > > *) Add LTO to reproducible builds testing if appropriate (e.g.
-> > > > meta/lib/oeqa/selftest/cases/reproducible.py, CI on Autobuilder)
-> > > > *) Fixes for individual packages, if needed
-> > > > *) Once everything works, update the documentation again (I previously
-> > > > requested a documentation change for this bug, which will eventually
-> > > > show up at
-> > > > http://docs.yoctoproject.org/test-manual/reproducible-builds.html).
-> > > This is certainly a few steps in the right direction with a good outline
-> > > of what's next.
-> > > 
-> > > I suspect that Richard has been busy with other things like overrides
-> > > and the update to glibc-2.34.
-> > > 
-> > > Do you have any suggestions or questions about what we should do
-> > > with this patch series Richard?
-> > Thanks for the reminder, I've been meaning to queue/test this which I will
-> > do. The gcc version has been bumped but I ported the patch forward to it
-> > and the patches are in master-next for testing. It is great to see this
-> > support moving forward.
-> > 
-> > Much as it pains me to admit having any libtool knowledge, I may be able to
-> > help with that bit. There is an untested patch below which may address that
-> > issue, or at least give a good hint on how to do it if it doesn't work. I
-> > don't have an environment to test easily right now.
-> > 
-> > Cheers,
-> > 
-> > Richard
-> 
-> I tested your libtool patch in master-next with the bzip2 recipe.  It
-> works as intended; libbz2.so.1.0.6 and all the other output files are
-> now reproducible with LTO enabled.  I also verified that libtool is
-> passing the -f*-prefix-map flags to the link command in log.do_compile
-> as intended.
-> 
-> I also verified that core-image-minimal builds successfully with the
-> libtool patch.
+License-Update: Added new sections for new files
 
-Thanks for testing that, sounds like it helps that issue. I'll queue that patch.
+Configuration changes:
+ - BUILD_EXAMPLES - does not exist anymore
+ - WITH_SHARED_LIB -> BUILD_SHARED_LIBS, WITH_STATIC_LIB are not to be
+ allowed together
+ - WITH_AS3=OFF - adobe action script 3 not available
 
-Unfortunately even with the ruby fix I queued, we still see reproduciblity
-issues with the LDFLAGS change in curl-dev, gettext-ptest, ruby and ruby-dbg 
-packages:
+Added new options (disabled by default):
+ - javascript, nodejs
 
-https://autobuilder.yoctoproject.org/typhoon/#/builders/115/builds/515/steps/12/logs/stdio
 
-We'll need to resolve those before I can merge the flags change.
+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+---
+ ...llationPaths.cmake-Define-libdir-in-terms.patch |  8 ++++----
+ .../thrift/{thrift_0.13.0.bb => thrift_0.14.2.bb}  | 22 ++++++++++++----------
+ 2 files changed, 16 insertions(+), 14 deletions(-)
+ rename meta-oe/recipes-connectivity/thrift/{thrift_0.13.0.bb => thrift_0.14.2.bb} (72%)
 
-Diffoscope output:
-
-https://autobuilder.yocto.io/pub/repro-fail/oe-reproducible-20210805-8jfd55ki/packages/diff-html/
-
-Basically LDFLAGS get encoded into a couple of scripts and the ruby binary.
-
-Cheers,
-
-Richard
+diff --git a/meta-oe/recipes-connectivity/thrift/thrift/0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch b/meta-oe/recipes-connectivity/thrift/thrift/0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch
+index 485d7a4b0..e1e474ab0 100644
+--- a/meta-oe/recipes-connectivity/thrift/thrift/0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch
++++ b/meta-oe/recipes-connectivity/thrift/thrift/0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch
+@@ -12,9 +12,9 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ 
+ --- a/build/cmake/DefineInstallationPaths.cmake
+ +++ b/build/cmake/DefineInstallationPaths.cmake
+-@@ -22,11 +22,11 @@
+- set(BIN_INSTALL_DIR "bin" CACHE PATH "The binary install dir (default: bin)")
+- set(LIB_INSTALL_DIR "lib${LIB_SUFFIX}" CACHE PATH "The library install dir (default: lib${LIB_SUFFIX})")
++@@ -26,11 +26,11 @@
++     set(LIB_INSTALL_DIR "lib${LIB_SUFFIX}" CACHE PATH "The library install dir (default: lib${LIB_SUFFIX})")
++ endif()
+  set(INCLUDE_INSTALL_DIR "include" CACHE PATH "The library install dir (default: include)")
+ -set(CMAKE_INSTALL_DIR "lib/cmake" CACHE PATH "The subdirectory to install cmake config files (default: cmake)")
+ -set(PKGCONFIG_INSTALL_DIR "lib/pkgconfig" CACHE PATH "The subdirectory to install pkgconfig config files (default: lib/pkgconfig)")
+@@ -29,7 +29,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  set(cmakedir "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DIR}")
+ --- a/build/cmake/DefineCMakeDefaults.cmake
+ +++ b/build/cmake/DefineCMakeDefaults.cmake
+-@@ -44,8 +44,8 @@ include(BuildType)
++@@ -44,8 +44,8 @@
+  # top of the build tree rather than in hard-to-find leaf
+  # directories. This simplifies manual testing and the use of the build
+  # tree rather than installed thrift libraries.
+diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.13.0.bb b/meta-oe/recipes-connectivity/thrift/thrift_0.14.2.bb
+similarity index 72%
+rename from meta-oe/recipes-connectivity/thrift/thrift_0.13.0.bb
+rename to meta-oe/recipes-connectivity/thrift/thrift_0.14.2.bb
+index 5a0969710..014613e5d 100644
+--- a/meta-oe/recipes-connectivity/thrift/thrift_0.13.0.bb
++++ b/meta-oe/recipes-connectivity/thrift/thrift_0.14.2.bb
+@@ -3,16 +3,16 @@ DESCRIPTION =  "A software framework, for scalable cross-language services devel
+ HOMEPAGE = "https://thrift.apache.org/"
+ 
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=394465e125cffc0f133695ed43f14047 \
++LIC_FILES_CHKSUM = "file://LICENSE;md5=c40a383cb3f747e0c7abbf1482f194f0 \
+                     file://NOTICE;md5=2659b43daca219f99a2f2626ea128f73"
+ 
+-DEPENDS = "thrift-native boost flex-native bison-native openssl"
++DEPENDS = "thrift-native boost flex-native bison-native openssl zlib"
+ 
+ SRC_URI = "https://www-eu.apache.org/dist/thrift//${PV}/${BPN}-${PV}.tar.gz \
+            file://0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch \
+           "
+-SRC_URI[md5sum] = "38a27d391a2b03214b444cb13d5664f1"
+-SRC_URI[sha256sum] = "7ad348b88033af46ce49148097afe354d513c1fca7c607b59c33ebb6064b5179"
++SRC_URI[md5sum] = "284a48df355aa3910687ee9b894d3ae8"
++SRC_URI[sha256sum] = "4191bfc0b7490e20cc69f9f4dc6e991fbb612d4551aa9eef1dbf7f4c47ce554d"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+ 
+@@ -25,22 +25,24 @@ export HOST_SYS
+ 
+ EXTRA_OECMAKE = " \
+     -DBUILD_LIBRARIES=ON \
++    -DBUILD_SHARED_LIBS=ON \
+     -DBUILD_COMPILER=ON \
+     -DBUILD_TESTING=OFF \
+-    -DBUILD_EXAMPLES=OFF \
+     -DBUILD_TUTORIALS=OFF \
++    -DWITH_AS3=OFF \
+     -DWITH_CPP=ON \
+     -DWITH_JAVA=OFF \
+-    -DWITH_PYTHON=OFF \
+-    -DWITH_STATIC_LIB=ON \
+-    -DWITH_SHARED_LIB=ON \
+     -DWITH_OPENSSL=ON \
+     -DWITH_QT5=OFF \
++    -DWITH_ZLIB=ON \
+ "
+ 
+-PACKAGECONFIG ??= "libevent glib"
+-PACKAGECONFIG[libevent] = "-DWITH_LIBEVENT=ON,-DWITH_LIBEVENT=OFF,libevent"
++PACKAGECONFIG ??= "glib libevent"
+ PACKAGECONFIG[glib] = "-DWITH_C_GLIB=ON,-DWITH_C_GLIB=OFF,glib-2.0"
++PACKAGECONFIG[libevent] = "-DWITH_LIBEVENT=ON,-DWITH_LIBEVENT=OFF,libevent"
++PACKAGECONFIG[javascript] = "-DWITH_JAVASCRIPT=ON,-DWITH_JAVASCRIPT=OFF,nodejs"
++PACKAGECONFIG[nodejs] = "-DWITH_NODEJS=ON,-DWITH_NODEJS=OFF,nodejs"
++PACKAGECONFIG[python] = "-DWITH_PYTHON=ON,-DWITH_PYTHON=OFF,python"
+ 
+ do_install:append () {
+     ln -sf thrift ${D}/${bindir}/thrift-compiler
+-- 
+2.11.0
 
