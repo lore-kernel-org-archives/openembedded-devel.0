@@ -1,131 +1,95 @@
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
- by mx.groups.io with SMTP id smtpd.web10.1416.1628230449943637477
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.4])
+ by mx.groups.io with SMTP id smtpd.web11.1757.1628233193499288397
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Aug 2021 23:14:10 -0700
+ Thu, 05 Aug 2021 23:59:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: siemens.com, ip: 192.35.17.2, mailfrom: andrej.valek@siemens.com)
-Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id 1766E79Y007357
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 6 Aug 2021 08:14:07 +0200
-Received: from dev.vm6.ccp.siemens.com ([144.145.220.57])
-	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id 1766E6PQ010651;
-	Fri, 6 Aug 2021 08:14:07 +0200
-Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 61729950A87;
-	Fri,  6 Aug 2021 08:14:06 +0200 (CEST)
-From: "Andrej Valek" <andrej.valek@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Andrej Valek <andrej.valek@siemens.com>
-Subject: [OE-core][PATCH] thrift: upgrade to 0.14.2
-Date: Fri,  6 Aug 2021 08:13:14 +0200
-Message-Id: <20210806061314.26188-1-andrej.valek@siemens.com>
-X-Mailer: git-send-email 2.11.0
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=jcKxKKIs;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.4, mailfrom: zhengrq.fnst@fujitsu.com)
+Return-Path: <zhengrq.fnst@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1628233190; i=@fujitsu.com;
+	bh=EUhWodMPNhPcRiBwPQlwN/BOjD4L7kvB/XGEmgvFGI8=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=jcKxKKIsedwK+1itjJXZDt8l7gG76sHPa6ow69Te9iWKFuT3OSSO6CsyZVf+YDyPl
+	 rrsSnUxqpGa1KDgbQJPLZ2SX6ySi6K9as2MWm9esJ7YMx5n7gNd1mgF+GAM291bH55
+	 z2+9PSHoBFxDwyoJe2isiPkHP1LnozR7KA/6lrRbEIX9SHWC761K/uPDaTloidY4zs
+	 LzcxV0beynU5LjS54E4qn4vCqifpNyMe8oQ7nWc2SrMqIkjmzAsb7uCfNhgQITtReV
+	 rQTOgpdwYaxRSJg1XKiiYw3tmBaZFqfBOJbbVA9kk3/sk4iz2qjyWr3qK6eEihM05A
+	 /OVLu2hUvd5gw==
+Received: from [100.112.192.148] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-4.bemta.az-a.eu-west-1.aws.symcld.net id E4/6A-07274-6EDDC016; Fri, 06 Aug 2021 06:59:50 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrHIsWRWlGSWpSXmKPExsViZ8MxRffZXZ5
+  Eg6XXWSwuHl7K7MDocW7jCsYAxijWzLyk/IoE1oy7RzgKFnJXfLp5lbWBcS5XFyMXh5DALCaJ
+  V5tnM0I4uxklehZuAnI4OdgEdCXOPV7LDmKLCOhLLJ29hxnEFhbwkXj+dSJYnEVAReL/z6lMI
+  DavgIfE+cenwXolBBQkpjx8zwwRF5Q4OfMJC4jNLCAhcfDFC6A4B1CNosTs6fIQ5RUSrw9fYp
+  7AyDMLSccsJB0LGJlWMVokFWWmZ5TkJmbm6BoaGOgaGhrpGlqa6hqaGuolVukm6qWW6panFpf
+  oArnlxXrFlbnJOSl6eaklmxiBQZRScHj6Dsb+Nx/0DjFKcjApifI2n+NJFOJLyk+pzEgszogv
+  Ks1JLT7EKMPBoSTBG3cHKCdYlJqeWpGWmQMMaJi0BAePkghv1y2gNG9xQWJucWY6ROoUoyvHs
+  7VLFjFzbJi3FEj+v3sXSPYvOLiameNm+6HVzEIsefl5qVLivJwgswVAmjNK8+BGw6LxEqOslD
+  AvIwMDgxBPQWpRbmYJqvwrRnEORiVh3gkgJ/Bk5pXAXfAK6DgmoOMuxHKCHFeSiJCSamCyq3Z
+  w2haRNHcHo4yvKiP3vEgH52aX6Q/fnvS6yDD/TNSjFXa/5iYJGtVv913h0Z1yNKTqCENce9q7
+  fZ+WcS93PaXYcfik5oLJ90tO5lnG3j96kCljgdXJZWyu86dPkhK8ZJgg9MeUsUn2ous3raXxU
+  z6o2v1xcwp+b3jmVeH8xGTlNwXhCvsWimRsMrNdpHxKnG3tJtZyr8MOuy9PtPwfofGBsVrf29
+  b6ZYXkopOnvL599jsz8+c9bfd3ZXGbb774rW257j9nxduCtBOafhMe/394gI1bvYNhbepvO19
+  72dR9k1ZpHVwzVfzi1Lj/lQdCZrIwb3xtWvJHdgfX73tXlyQcPM657cLslM2Hy7dNVWIpzkg0
+  1GIuKk4EANbaokVBAwAA
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-7.tower-267.messagelabs.com!1628233189!114420!1
+X-Originating-IP: [62.60.8.148]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 14750 invoked from network); 6 Aug 2021 06:59:50 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-7.tower-267.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 6 Aug 2021 06:59:50 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1766xf1e022945
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 6 Aug 2021 07:59:49 +0100
+Received: from localhost.localdomain (10.167.225.35) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Fri, 6 Aug 2021 07:59:39 +0100
+From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-python] [PATCH] python3-engineio: upgrade 4.2.0 -> 4.2.1
+Date: Fri, 6 Aug 2021 14:59:32 +0800
+Message-ID: <1628233172-40265-1-git-send-email-zhengrq.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Type: text/plain
 
-License-Update: Added new sections for new files
+Release 4.2.1 - 2021-08-02
 
-Configuration changes:
- - BUILD_EXAMPLES - does not exist anymore
- - WITH_SHARED_LIB -> BUILD_SHARED_LIBS, WITH_STATIC_LIB are not to be
- allowed together
- - WITH_AS3=OFF - adobe action script 3 not available
+Support setting socketio_path to the root URL #242 (commit)
+Use the gevent selector to avoid 1024 file handle limitation of select#228 (commit)
+Pass reason when closing a WebSocket connection (commit)
+Improved project structure (commit)
+Remove executable permissions from files that lack shebang lines #240 (commit) (thanks Ben Beasley!)
 
-Added new options (disabled by default):
- - javascript, nodejs
-
-
-Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- ...llationPaths.cmake-Define-libdir-in-terms.patch |  8 ++++----
- .../thrift/{thrift_0.13.0.bb => thrift_0.14.2.bb}  | 22 ++++++++++++----------
- 2 files changed, 16 insertions(+), 14 deletions(-)
- rename meta-oe/recipes-connectivity/thrift/{thrift_0.13.0.bb => thrift_0.14.2.bb} (72%)
+ .../{python3-engineio_4.2.0.bb => python3-engineio_4.2.1.bb}   | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-engineio_4.2.0.bb => python3-engineio_4.2.1.bb} (73%)
 
-diff --git a/meta-oe/recipes-connectivity/thrift/thrift/0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch b/meta-oe/recipes-connectivity/thrift/thrift/0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch
-index 485d7a4b0..e1e474ab0 100644
---- a/meta-oe/recipes-connectivity/thrift/thrift/0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch
-+++ b/meta-oe/recipes-connectivity/thrift/thrift/0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch
-@@ -12,9 +12,9 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
- --- a/build/cmake/DefineInstallationPaths.cmake
- +++ b/build/cmake/DefineInstallationPaths.cmake
--@@ -22,11 +22,11 @@
-- set(BIN_INSTALL_DIR "bin" CACHE PATH "The binary install dir (default: bin)")
-- set(LIB_INSTALL_DIR "lib${LIB_SUFFIX}" CACHE PATH "The library install dir (default: lib${LIB_SUFFIX})")
-+@@ -26,11 +26,11 @@
-+     set(LIB_INSTALL_DIR "lib${LIB_SUFFIX}" CACHE PATH "The library install dir (default: lib${LIB_SUFFIX})")
-+ endif()
-  set(INCLUDE_INSTALL_DIR "include" CACHE PATH "The library install dir (default: include)")
- -set(CMAKE_INSTALL_DIR "lib/cmake" CACHE PATH "The subdirectory to install cmake config files (default: cmake)")
- -set(PKGCONFIG_INSTALL_DIR "lib/pkgconfig" CACHE PATH "The subdirectory to install pkgconfig config files (default: lib/pkgconfig)")
-@@ -29,7 +29,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  set(cmakedir "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DIR}")
- --- a/build/cmake/DefineCMakeDefaults.cmake
- +++ b/build/cmake/DefineCMakeDefaults.cmake
--@@ -44,8 +44,8 @@ include(BuildType)
-+@@ -44,8 +44,8 @@
-  # top of the build tree rather than in hard-to-find leaf
-  # directories. This simplifies manual testing and the use of the build
-  # tree rather than installed thrift libraries.
-diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.13.0.bb b/meta-oe/recipes-connectivity/thrift/thrift_0.14.2.bb
-similarity index 72%
-rename from meta-oe/recipes-connectivity/thrift/thrift_0.13.0.bb
-rename to meta-oe/recipes-connectivity/thrift/thrift_0.14.2.bb
-index 5a0969710..014613e5d 100644
---- a/meta-oe/recipes-connectivity/thrift/thrift_0.13.0.bb
-+++ b/meta-oe/recipes-connectivity/thrift/thrift_0.14.2.bb
-@@ -3,16 +3,16 @@ DESCRIPTION =  "A software framework, for scalable cross-language services devel
- HOMEPAGE = "https://thrift.apache.org/"
- 
- LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=394465e125cffc0f133695ed43f14047 \
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=c40a383cb3f747e0c7abbf1482f194f0 \
-                     file://NOTICE;md5=2659b43daca219f99a2f2626ea128f73"
- 
--DEPENDS = "thrift-native boost flex-native bison-native openssl"
-+DEPENDS = "thrift-native boost flex-native bison-native openssl zlib"
- 
- SRC_URI = "https://www-eu.apache.org/dist/thrift//${PV}/${BPN}-${PV}.tar.gz \
-            file://0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch \
-           "
--SRC_URI[md5sum] = "38a27d391a2b03214b444cb13d5664f1"
--SRC_URI[sha256sum] = "7ad348b88033af46ce49148097afe354d513c1fca7c607b59c33ebb6064b5179"
-+SRC_URI[md5sum] = "284a48df355aa3910687ee9b894d3ae8"
-+SRC_URI[sha256sum] = "4191bfc0b7490e20cc69f9f4dc6e991fbb612d4551aa9eef1dbf7f4c47ce554d"
- 
- BBCLASSEXTEND = "native nativesdk"
- 
-@@ -25,22 +25,24 @@ export HOST_SYS
- 
- EXTRA_OECMAKE = " \
-     -DBUILD_LIBRARIES=ON \
-+    -DBUILD_SHARED_LIBS=ON \
-     -DBUILD_COMPILER=ON \
-     -DBUILD_TESTING=OFF \
--    -DBUILD_EXAMPLES=OFF \
-     -DBUILD_TUTORIALS=OFF \
-+    -DWITH_AS3=OFF \
-     -DWITH_CPP=ON \
-     -DWITH_JAVA=OFF \
--    -DWITH_PYTHON=OFF \
--    -DWITH_STATIC_LIB=ON \
--    -DWITH_SHARED_LIB=ON \
-     -DWITH_OPENSSL=ON \
-     -DWITH_QT5=OFF \
-+    -DWITH_ZLIB=ON \
+diff --git a/meta-python/recipes-devtools/python/python3-engineio_4.2.0.bb b/meta-python/recipes-devtools/python/python3-engineio_4.2.1.bb
+similarity index 73%
+rename from meta-python/recipes-devtools/python/python3-engineio_4.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-engineio_4.2.1.bb
+index 7a828a645d..2eb82e8fc8 100644
+--- a/meta-python/recipes-devtools/python/python3-engineio_4.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-engineio_4.2.1.bb
+@@ -17,5 +17,4 @@ RDEPENDS:${PN} += " \
+ 	python3-asyncio \
  "
  
--PACKAGECONFIG ??= "libevent glib"
--PACKAGECONFIG[libevent] = "-DWITH_LIBEVENT=ON,-DWITH_LIBEVENT=OFF,libevent"
-+PACKAGECONFIG ??= "glib libevent"
- PACKAGECONFIG[glib] = "-DWITH_C_GLIB=ON,-DWITH_C_GLIB=OFF,glib-2.0"
-+PACKAGECONFIG[libevent] = "-DWITH_LIBEVENT=ON,-DWITH_LIBEVENT=OFF,libevent"
-+PACKAGECONFIG[javascript] = "-DWITH_JAVASCRIPT=ON,-DWITH_JAVASCRIPT=OFF,nodejs"
-+PACKAGECONFIG[nodejs] = "-DWITH_NODEJS=ON,-DWITH_NODEJS=OFF,nodejs"
-+PACKAGECONFIG[python] = "-DWITH_PYTHON=ON,-DWITH_PYTHON=OFF,python"
- 
- do_install:append () {
-     ln -sf thrift ${D}/${bindir}/thrift-compiler
+-SRC_URI[md5sum] = "1fa937ec2a9f6feac27e9f65824c5781"
+-SRC_URI[sha256sum] = "4e97c1189c23923858f5bb6dc47cfcd915005383c3c039ff01c89f2c00d62077"
++SRC_URI[sha256sum] = "d510329b6d8ed5662547862f58bc73659ae62defa66b66d745ba021de112fa62"
 -- 
-2.11.0
+2.25.1
 
