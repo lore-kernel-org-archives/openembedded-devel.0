@@ -1,90 +1,261 @@
-Received: from mail-pl1-f202.google.com (mail-pl1-f202.google.com [209.85.214.202])
- by mx.groups.io with SMTP id smtpd.web09.54.1628286652185818426
+Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
+ by mx.groups.io with SMTP id smtpd.web11.2379.1628302785255999121
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 06 Aug 2021 14:50:52 -0700
+ Fri, 06 Aug 2021 19:19:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@google.com header.s=20161025 header.b=G5hqnA5n;
- spf=pass (domain: flex--maxims.bounces.google.com, ip: 209.85.214.202, mailfrom: 3u64nyqykaf4i6teiockkcha.8ki@flex--maxims.bounces.google.com)
-Received: by mail-pl1-f202.google.com with SMTP id s6-20020a170902b186b029012cbebe7236so3143472plr.11
-        for <openembedded-devel@lists.openembedded.org>; Fri, 06 Aug 2021 14:50:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=X/QqDW9q;
+ spf=pass (domain: gmail.com, ip: 209.85.222.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f170.google.com with SMTP id t3so10746337qkg.11;
+        Fri, 06 Aug 2021 19:19:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:message-id:mime-version:subject:from:to:cc;
-        bh=/wCNb3TUoKk6adf7wqqEj700nR/0WDCWyxeo2Euj7qU=;
-        b=G5hqnA5nQlOYdW07ZZSX9ujfyohClyeDX5H9zgBk364iFshzozcvRZxkYitZG3jpBR
-         3ThCkvbXfEooDkalB6dHbLrgMzVzTPx7ivaETZ9tooREXPOl9Wq2BdF4I7DG/bfGlMMU
-         Tlqzid6Ya+TtuHPsjF0l+kBuNeXLz5ddD1VjtP1YbsoiFg1ZUlb7F5slE959TutRtqRG
-         A4XBzA51rgOpX6jnp/t5Y1VAAvjSaEp2pHWXck5FSvc2QvZAkqQT4ndVcbWfRYKrH9mn
-         +Yfm8pzsv+4T+w5Jo8ELJOH6gVKDVKhSqIPHCg+PvrhOVE9jyg70VS/Uihf5bzikTLCW
-         EV/g==
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=XqK6fcbdEx4VI4MUY1uQeoFC9TrLfgq0yz1QL8j0HRQ=;
+        b=X/QqDW9qgp52oPB/Iv2XDV6WJvHcVpMMGYW5slZQ9iF5rqIxIsrZ4+/cVYxlQwXy0+
+         RL1skW10UPIHe8l1EUaDtMjUd8iUVXvbaNcH5dy3i7yCHobMSVLUmVMKTxUeGJgAdOCG
+         LSAfXqiFA5lnPY52bbt8ME6QE+7EePKLpnb7abLzyEyMcfkTxcKuTAEe9G50bPqsuYHx
+         OllDQyx2h0AJGaVgesPO201MyJQfiaD/w/gMgoBJ09bPXXFpzY8bNVvchGFYqFUMNOZ0
+         IPg+56A94eurcQezAhd/CGzJOAdzHLsdGHaj38H0R/iX3HJZ0xVEzSwsmUoRQ5B4JUDb
+         hx3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
-        bh=/wCNb3TUoKk6adf7wqqEj700nR/0WDCWyxeo2Euj7qU=;
-        b=gAO0eztXcv8NdcmpzOZllZqzZ632OpxXe11Sx+bgdI//b9rMEN7zMQg3R/D/4UsJWb
-         sS3Z4uYRkRLumOSc7kiaVP0Od8/be1AqR38+PeWFG3KgvJvLOantT+whHygWI4d1M5Lm
-         e9E7/bKSAsbrICqVcX0+SaLTSBultcMqIWW1eynT+rWCsSejF4xL8bLLj3Lw6uyPa3xJ
-         jddQ6q/AKwqsjFX1gVjx9yg6V3bVk3kQum+ZbFxWm3oykFofm+QVQoRKLrlG3I3pa47v
-         0DZvh7BOUQOo70iTQA2h//cSkmscgdrvie2gphIdIiMK5KKxtWu08ud9OOhEvVFMLGCc
-         wN9g==
-X-Gm-Message-State: AOAM531DX7DA4bcIVIGXSTK/wiYvydKjUlovw6hgJipr8ma1SHLJb6Tc
-	rgyLNrE+XDQ8qP79W1MnBleXLnb0lNqt8e6X9xXNQZiAsGTYJJHc4QwtK6B/yEEkOFDJ4k2UhlA
-	t9m1qMFwPC8wKEOTgt4inFZL79AlYjNX8sn1Hsz6hJfYKN6sPzrrfzbccvoAe+Cn3bjKxf8fB1d
-	MevzpiPgVGB+w=
-X-Google-Smtp-Source: ABdhPJy27jwjAbCbA3w+2XMq3N7Oy9B8VwW6lQ5yI5mxMrCwLID0pG9MRepfA6zGevBLWUevg7JZKUAAf5Q=
-X-Received: from mxsl.c.googlers.com ([fda3:e722:ac3:cc00:24:72f4:c0a8:221c])
- (user=maxims job=sendgmr) by 2002:aa7:9156:0:b029:393:57f3:e5a9 with SMTP id
- 22-20020aa791560000b029039357f3e5a9mr6921677pfi.79.1628286651171; Fri, 06 Aug
- 2021 14:50:51 -0700 (PDT)
-Date: Fri,  6 Aug 2021 21:50:45 +0000
-Message-Id: <20210806215045.3036785-1-maxims@google.com>
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.32.0.605.g8dce9f2422-goog
-Subject: [meta-oe][PATCH] meta-oe: libusbgx: Configure the Devices Used
-From: "Maxim Sloyko" <maxims@google.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Maksym Sloyko <maxims@google.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=XqK6fcbdEx4VI4MUY1uQeoFC9TrLfgq0yz1QL8j0HRQ=;
+        b=Cr7zRl/bsNnnTUK3PCMTEW9SXVEU+O7Pa5qwS44noUrX21cXIVU8kt5us38pW1zPk6
+         Tq46s4oJHOjK5jonFd5hxnYOy/+gyDDpqlFNEFami9SIBkdGPV/hpetx6B6li8KcwrAk
+         p6l2jEHs7nRBwl5HP5FcEIJu0Rw4LBGINKIWJB/E/9ROW1BFmOboGNofHh7ysA0F6JQJ
+         pjIgctgnAEn3coi8k+Lvo1I0b4ueFGXz0quSfne5bz2qsdu0GsMm9iFd1reKWvDJ+spL
+         o9imC1CsgXYweQ8p12+Ou9dkIcecxWFA6lRN7rgAtWHd7gLL+6fOvZiB1fIIzTzY9PCO
+         oBVg==
+X-Gm-Message-State: AOAM531yFbFV5XJ5jkYCySusMrzVFiWVOSmnQDbJ3CqpH0nyEibJZjnB
+	Zb8MKo8G2WYAuiQxcz0TkkFnVFsya7gKqlWPYl0=
+X-Google-Smtp-Source: ABdhPJxaGrpbWdZLp7MGiJCMIIGD/wo2unzzFABgJL/edUHo3TOBYvgVWRr58ut+jumWdQUCeou+g+8+9gZRQ9DOvV4=
+X-Received: by 2002:ae9:f201:: with SMTP id m1mr12878541qkg.381.1628302784323;
+ Fri, 06 Aug 2021 19:19:44 -0700 (PDT)
+MIME-Version: 1.0
+References: <2efeecad-7ee5-126c-9271-d69fc3428c38@cybernetics.com>
+ <447d4fa9-b915-4e59-0ecc-64d41c6ceee6@windriver.com> <22d7a9866471f53ea283caa1578fbf0b48d5e113.camel@linuxfoundation.org>
+ <a0c4c23d-7437-ce14-066f-0f7f6929a987@cybernetics.com> <040fe5d8cd3914e7c19fc70ae6d18894b07f8073.camel@linuxfoundation.org>
+ <6bb55159-9b49-3229-a15c-eee730560fb7@cybernetics.com> <5e21ec72-667f-6e48-eefc-843312544fe4@cybernetics.com>
+In-Reply-To: <5e21ec72-667f-6e48-eefc-843312544fe4@cybernetics.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 6 Aug 2021 19:19:18 -0700
+Message-ID: <CAMKF1srcLEBkk1udvadr1xeh8qsgr-i-8+hT_ZvL-2Nak-tsjg@mail.gmail.com>
+Subject: Re: [OE-core] [master][PATCH 0/4] Reproducible LTO builds
+To: Tony Battersby <tonyb@cybernetics.com>
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>, 
+	Randy MacLeod <randy.macleod@windriver.com>, 
+	Patches and discussions about the oe-core layer <openembedded-core@lists.openembedded.org>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-Add ability to configure the UDC used for specific schema.
-The feature is backwards compatible, so existing users don't need to
-change anything.
+I am seeing bunch of failures on meta-oe and meta-atmel
 
-If one wants to specify which UDC is used for specific schema,
-for example, `eth0`, they can add this variable to the configuration
-file:
+https://errors.yoctoproject.org/Errors/Details/600064/
+https://errors.yoctoproject.org/Errors/Details/600065/
+https://errors.yoctoproject.org/Errors/Details/600071/
 
-UDC_FOR_SCHEMA_eth0=f8000000.udc
-
-If the device file exists in /sys/class/udc when the gadget is started,
-it will be used for this schema.
-
-If this configuration is not present, first available device is picked.
-
-Signed-off-by: Maksym Sloyko <maxims@google.com>
----
- meta-oe/recipes-support/libusbgx/libusbgx/gadget-start | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
- mode change 100644 => 100755 meta-oe/recipes-support/libusbgx/libusbgx/gadget-start
-
-diff --git a/meta-oe/recipes-support/libusbgx/libusbgx/gadget-start b/meta-oe/recipes-support/libusbgx/libusbgx/gadget-start
-old mode 100644
-new mode 100755
-index 1a106b785..9e22671a9
---- a/meta-oe/recipes-support/libusbgx/libusbgx/gadget-start
-+++ b/meta-oe/recipes-support/libusbgx/libusbgx/gadget-start
-@@ -7,5 +7,10 @@ for i in $IMPORT_SCHEMAS; do
- done
- 
- for i in $ENABLED_SCHEMAS; do
--    ls /sys/class/udc/ > /sys/kernel/config/usb_gadget/"$i"/UDC
-+    configured_udc=$(eval 'echo ${UDC_FOR_SCHEMA_'"$i"'}')
-+    if [ -n "${configured_udc}" ] && [ -e "/sys/class/udc/${configured_udc}" ]; then
-+        echo ${configured_udc} > /sys/kernel/config/usb_gadget/"$i"/UDC
-+    else
-+        ls /sys/class/udc/ > /sys/kernel/config/usb_gadget/"$i"/UDC
-+    fi
- done
--- 
-2.32.0.605.g8dce9f2422-goog
-
+On Fri, Aug 6, 2021 at 2:04 PM Tony Battersby <tonyb@cybernetics.com> wrote:
+>
+> On 8/6/21 12:44 PM, Tony Battersby wrote:
+> > On 8/6/21 1:33 AM, Richard Purdie wrote:
+> >> On Thu, 2021-08-05 at 17:54 -0400, Tony Battersby wrote:
+> >>> On 8/5/21 6:21 AM, Richard Purdie wrote:
+> >>>> On Wed, 2021-08-04 at 20:13 -0400, Randy MacLeod wrote:
+> >>>>> On 2021-07-27 9:34 a.m., Tony Battersby wrote:
+> >>>>>> Currently, enabling Link Time Optimization via:
+> >>>>>>
+> >>>>>> require conf/distro/include/lto.inc
+> >>>>>> DISTRO_FEATURES_append = " lto"
+> >>>>>>
+> >>>>>> makes the build non-reproducible (as in
+> >>>>>> https://reproducible-builds.org/).  This patch set fixes some of the
+> >>>>>> problems, but is not yet a complete solution.
+> >>>>>>
+> >>>>>> This patch set addresses the following bugs:
+> >>>>>> https://bugzilla.yoctoproject.org/show_bug.cgi?id=14481
+> >>>>>> https://bugzilla.yoctoproject.org/show_bug.cgi?id=14490
+> >>>>>>
+> >>>>>> openembedded-core patches
+> >>>>>> 1/4: lto.inc: disable LTO for grub
+> >>>>>> 2/4: gcc: Backport patch to make LTO builds more reproducible
+> >>>>>> 3/4: bitbake.conf: add DEBUG_PREFIX_MAP to TARGET_LDFLAGS
+> >>>>>>
+> >>>>>> openembedded-devel patches
+> >>>>>> 4/4: net-snmp: fix QA Issue after LDFLAGS change
+> >>>>>>
+> >>>>>> Patch 3 adds DEBUG_PREFIX_MAP to TARGET_LDFLAGS (it was already in
+> >>>>>> TARGET_CFLAGS).  This could possibly be done differently, such as by
+> >>>>>> removing it from TARGET_CFLAGS and adding it to TOOLCHAIN_OPTIONS,
+> >>>>>> TARGET_CC_ARCH, or TUNE_CCARGS, but I haven't tested those.  Let me know
+> >>>>>> if there is a better/preferred way to do it.
+> >>>>>>
+> >>>>>> The TARGET_LDFLAGS change broke net-snmp from meta-networking, so I have
+> >>>>>> included a patch to fix that.  Other packages might have been broken as
+> >>>>>> well, although I haven't found any others.
+> >>>>>>
+> >>>>>> With all these patches, there are still many shared libraries in /lib
+> >>>>>> and /usr/lib that are still not reproducible with LTO enabled because
+> >>>>>> x86_64-poky-linux-libtool filters out the -f*-prefix-map flags added by
+> >>>>>> patch 3 when linking shared libraries.  /usr/lib/libbz2.so.1.0.6 from
+> >>>>>> the libbz2 package from the bzip2 recipe is a good example.  I do not
+> >>>>>> have a patch for that problem.  I will leave that to someone else.
+> >>>>>>
+> >>>>>> So this is what we need to achieve reproducible LTO builds:
+> >>>>>> *) This patch set
+> >>>>>> *) A fix for libtool
+> >>>>>> *) Add LTO to reproducible builds testing if appropriate (e.g.
+> >>>>>> meta/lib/oeqa/selftest/cases/reproducible.py, CI on Autobuilder)
+> >>>>>> *) Fixes for individual packages, if needed
+> >>>>>> *) Once everything works, update the documentation again (I previously
+> >>>>>> requested a documentation change for this bug, which will eventually
+> >>>>>> show up at
+> >>>>>> http://docs.yoctoproject.org/test-manual/reproducible-builds.html).
+> >>>>> This is certainly a few steps in the right direction with a good outline
+> >>>>> of what's next.
+> >>>>>
+> >>>>> I suspect that Richard has been busy with other things like overrides
+> >>>>> and the update to glibc-2.34.
+> >>>>>
+> >>>>> Do you have any suggestions or questions about what we should do
+> >>>>> with this patch series Richard?
+> >>>> Thanks for the reminder, I've been meaning to queue/test this which I will
+> >>>> do. The gcc version has been bumped but I ported the patch forward to it
+> >>>> and the patches are in master-next for testing. It is great to see this
+> >>>> support moving forward.
+> >>>>
+> >>>> Much as it pains me to admit having any libtool knowledge, I may be able to
+> >>>> help with that bit. There is an untested patch below which may address that
+> >>>> issue, or at least give a good hint on how to do it if it doesn't work. I
+> >>>> don't have an environment to test easily right now.
+> >>>>
+> >>>> Cheers,
+> >>>>
+> >>>> Richard
+> >>> I tested your libtool patch in master-next with the bzip2 recipe.  It
+> >>> works as intended; libbz2.so.1.0.6 and all the other output files are
+> >>> now reproducible with LTO enabled.  I also verified that libtool is
+> >>> passing the -f*-prefix-map flags to the link command in log.do_compile
+> >>> as intended.
+> >>>
+> >>> I also verified that core-image-minimal builds successfully with the
+> >>> libtool patch.
+> >> Thanks for testing that, sounds like it helps that issue. I'll queue that patch.
+> >>
+> >> Unfortunately even with the ruby fix I queued, we still see reproduciblity
+> >> issues with the LDFLAGS change in curl-dev, gettext-ptest, ruby and ruby-dbg
+> >> packages:
+> >>
+> >> https://autobuilder.yoctoproject.org/typhoon/#/builders/115/builds/515/steps/12/logs/stdio
+> >>
+> >> We'll need to resolve those before I can merge the flags change.
+> >>
+> >> Diffoscope output:
+> >>
+> >> https://autobuilder.yocto.io/pub/repro-fail/oe-reproducible-20210805-8jfd55ki/packages/diff-html/
+> >>
+> >> Basically LDFLAGS get encoded into a couple of scripts and the ruby binary.
+> >>
+> >> Cheers,
+> >>
+> >> Richard
+> >>
+> > It looks like the ruby problem is being caused by MJIT_DLDFLAGS in
+> > build/tmp/work/core2-64-poky-linux/ruby/3.0.2-r0/build/mjit_config.h.
+> > There is already a patch
+> > poky/meta/recipes-devtools/ruby/ruby/0001-template-Makefile.in-do-not-write-host-cross-cc-item.patch
+> > that removes some of these items for the sake of reproducibiltiy.  But I
+> > do not know ruby, so I do not know the implications of doing the same
+> > thing for MJIT_DLDFLAGS.
+> >
+> > Tony Battersby
+> >
+> >
+> >
+> Richard,
+>
+> I noticed that you already fixed the problems in curl and gettext in
+> master-next.  Here is a patch for ruby if you haven't fixed that already.
+>
+> Tony Battersby
+>
+> From 9cfb9777ff6ef95a27ed6a03719c807365d0f116 Mon Sep 17 00:00:00 2001
+> From: Tony Battersby <tonyb@cybernetics.com>
+> Date: Fri, 6 Aug 2021 16:47:14 -0400
+> Subject: [PATCH] ruby: Fix reproducibility issue with LDFLAGS
+>
+> If we add DEBUG_PREFIX_MAP into LDFLAGS, ruby and ruby-dbg are no
+> longer reproducible.  Fix this.
+>
+> Signed-off-by: Tony Battersby <tonyb@cybernetics.com>
+> ---
+>  ...-Makefile.in-filter-out-f-prefix-map.patch | 42 +++++++++++++++++++
+>  meta/recipes-devtools/ruby/ruby_3.0.2.bb      |  1 +
+>  2 files changed, 43 insertions(+)
+>  create mode 100644 meta/recipes-devtools/ruby/ruby/0002-template-Makefile.in-filter-out-f-prefix-map.patch
+>
+> diff --git a/meta/recipes-devtools/ruby/ruby/0002-template-Makefile.in-filter-out-f-prefix-map.patch b/meta/recipes-devtools/ruby/ruby/0002-template-Makefile.in-filter-out-f-prefix-map.patch
+> new file mode 100644
+> index 0000000000..9387506c26
+> --- /dev/null
+> +++ b/meta/recipes-devtools/ruby/ruby/0002-template-Makefile.in-filter-out-f-prefix-map.patch
+> @@ -0,0 +1,42 @@
+> +Subject: [PATCH] template/Makefile.in: filter out -f*prefix-map
+> +
+> +If we add DEBUG_PREFIX_MAP into LDFLAGS, ruby and ruby-dbg are no longer
+> +reproducible.  Fix this.
+> +
+> +Upstream-Status: Inapproppriate [oe-core specific]
+> +Signed-off-by: Tony Battersby <tonyb@cybernetics.com>
+> +---
+> +--- a/tool/mjit_archflag.sh
+> ++++ b/tool/mjit_archflag.sh
+> +@@ -7,6 +7,20 @@ quote() {
+> +     echo
+> + }
+> +
+> ++quote_filtered() {
+> ++    printf "#${indent}define $1"
+> ++    while shift && [ "$#" -gt 0 ]; do
+> ++      case "$1" in
+> ++          -ffile-prefix-map=*|-fdebug-prefix-map=*|-fmacro-prefix-map=*)
+> ++              ;;
+> ++          *)
+> ++              printf ' "%s"'$sep "$1"
+> ++              ;;
+> ++      esac
+> ++    done
+> ++    echo
+> ++}
+> ++
+> + archs=""
+> + arch_flag=""
+> +
+> +--- a/template/Makefile.in
+> ++++ b/template/Makefile.in
+> +@@ -666,7 +666,7 @@ mjit_config.h:
+> +       quote "MJIT_OPTFLAGS   " $(MJIT_OPTFLAGS); \
+> +       quote "MJIT_DEBUGFLAGS " $(MJIT_DEBUGFLAGS); \
+> +       quote "MJIT_LDSHARED   " ; \
+> +-      quote "MJIT_DLDFLAGS    MJIT_ARCHFLAG" $(MJIT_DLDFLAGS); \
+> ++      quote_filtered "MJIT_DLDFLAGS    MJIT_ARCHFLAG" $(MJIT_DLDFLAGS); \
+> +       quote "MJIT_LIBS       " $(LIBRUBYARG_SHARED); \
+> +       quote 'PRELOADENV       "@PRELOADENV@"'; \
+> +       indent=$${archs:+'  '}; \
+> diff --git a/meta/recipes-devtools/ruby/ruby_3.0.2.bb b/meta/recipes-devtools/ruby/ruby_3.0.2.bb
+> index 0b9c342def..38e594a59e 100644
+> --- a/meta/recipes-devtools/ruby/ruby_3.0.2.bb
+> +++ b/meta/recipes-devtools/ruby/ruby_3.0.2.bb
+> @@ -6,6 +6,7 @@ SRC_URI += " \
+>             file://remove_has_include_macros.patch \
+>             file://run-ptest \
+>             file://0001-template-Makefile.in-do-not-write-host-cross-cc-item.patch \
+> +           file://0002-template-Makefile.in-filter-out-f-prefix-map.patch \
+>             "
+>
+>  SRC_URI[sha256sum] = "5085dee0ad9f06996a8acec7ebea4a8735e6fac22f22e2d98c3f2bc3bef7e6f1"
+> --
+> 2.25.1
+>
