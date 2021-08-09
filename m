@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.23042.1628516557489623399
+ by mx.groups.io with SMTP id smtpd.web08.22818.1628516558790495938
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Aug 2021 06:42:37 -0700
+ Mon, 09 Aug 2021 06:42:39 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=49496 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mD5Y2-0007HK-DZ; Mon, 09 Aug 2021 16:42:36 +0300
+	id 1mD5Y4-0007HK-N5; Mon, 09 Aug 2021 16:42:37 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/5] python3-greenlet: Upgrade 1.1.0 -> 1.1.1
-Date: Mon,  9 Aug 2021 16:42:25 +0300
-Message-Id: <20210809134227.27647-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/5] python3-bitarray: Upgrade 2.2.3 -> 2.2.5
+Date: Mon,  9 Aug 2021 16:42:26 +0300
+Message-Id: <20210809134227.27647-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210809134227.27647-1-leon.anavi@konsulko.com>
 References: <20210809134227.27647-1-leon.anavi@konsulko.com>
@@ -30,33 +30,38 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.1.1:
+Upgrade to release 2.2.5:
 
-- Provide Windows binary wheels for Python 3.10 (64-bit only).
-- Update Python 3.10 wheels to be built against 3.10rc1, where
-  applicable.
+- speedup `find_bit()` and `find_last()` using uint64 checking,
+  this means a speedup for `.find()`, `.index()`, `.search()` and
+  `util.rindex()`
+- add optional start and stop arguments to `.bytereverse()`
+- add example to illustrate how unaligned copying works internally
+- add documentation
+- add tests
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-greenlet_1.1.0.bb => python3-greenlet_1.1.1.bb}    | 2 +-
+ .../{python3-bitarray_2.2.3.bb => python3-bitarray_2.2.5.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-greenlet_1.1.0.bb => python3-greenlet_1.1.1.bb} (79%)
+ rename meta-python/recipes-devtools/python/{python3-bitarray_2.2.3.bb => python3-bitarray_2.2.5.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-greenlet_1.1.0.bb b/meta-python/recipes-devtools/python/python3-greenlet_1.1.1.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-greenlet_1.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-greenlet_1.1.1.bb
-index 0f0f18fe35..9d014ec7a7 100644
---- a/meta-python/recipes-devtools/python/python3-greenlet_1.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-greenlet_1.1.1.bb
-@@ -4,6 +4,6 @@ LICENSE = "MIT & PSF"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e95668d68e4329085c7ab3535e6a7aee \
-                     file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_2.2.3.bb b/meta-python/recipes-devtools/python/python3-bitarray_2.2.5.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-bitarray_2.2.3.bb
+rename to meta-python/recipes-devtools/python/python3-bitarray_2.2.5.bb
+index b72ca3b560..f8e2489070 100644
+--- a/meta-python/recipes-devtools/python/python3-bitarray_2.2.3.bb
++++ b/meta-python/recipes-devtools/python/python3-bitarray_2.2.5.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+ LICENSE = "PSF"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
  
--SRC_URI[sha256sum] = "c87df8ae3f01ffb4483c796fe1b15232ce2b219f0b18126948616224d3f658ee"
-+SRC_URI[sha256sum] = "c0f22774cd8294078bdf7392ac73cf00bfa1e5e0ed644bd064fdabc5f2a2f481"
+-SRC_URI[sha256sum] = "b5d707d9c4aa75e684e21ff1848b234f3d2ff41d5038db89e2465e5527f90c68"
++SRC_URI[sha256sum] = "efb2dc83f0acb832a94af3687eea558d72512cf2e54a64fca56a10aacf57934c"
  
- inherit pypi distutils3 setuptools3
+ inherit setuptools3 pypi
+ 
 -- 
 2.17.1
 
