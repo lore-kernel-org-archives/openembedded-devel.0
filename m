@@ -1,109 +1,122 @@
-Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com [209.85.208.180])
- by mx.groups.io with SMTP id smtpd.web12.17727.1628475732552808055
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web10.20603.1628501004561341762
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 08 Aug 2021 19:22:13 -0700
+ Mon, 09 Aug 2021 02:23:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=ZCPa8Yz/;
- spf=pass (domain: linaro.org, ip: 209.85.208.180, mailfrom: dmitry.baryshkov@linaro.org)
-Received: by mail-lj1-f180.google.com with SMTP id l4so6780392ljq.4
-        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Aug 2021 19:22:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=YyD1YmO6Vfg611vzPVlVGwTw0AHuZbiqZLc/OT5hxUM=;
-        b=ZCPa8Yz/MFI56eGJ6QoUXugcaJraV+0ti/s9/ijsDlgFAotOD6l1NTw0bHhC7l/VPE
-         jq/ySwr9853Y4d/If6gtLa9L4SEe491GipL8L2nZcoQ2l1tsg50BnP7qOHjaWV+faGtW
-         WGySjdFqdwhFqLspnb6/tRfyjA763WaRQ1m2R9X4wq74IcQK9LGM177q8BhOc3czTMpq
-         h006KeUsdiDOmabixWeH3In4fayCzROVg3BkGoui327LTYMfScnv0IIEKMbVL0r4iF7e
-         xxcW8jUZT/eDRcgyBtHcphQHTEGNDcCzCQcIZXrA190Qnv2p4kep1GNy38Zn9NqI2W6q
-         vprg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=YyD1YmO6Vfg611vzPVlVGwTw0AHuZbiqZLc/OT5hxUM=;
-        b=XntZ+Fel37i6jXDXrdOaibXbWE31G1QlgQwpZK4ygfDnxlxnSYYn/yWOpS7WBKte04
-         m5Reoesz5DiAJmufRzsJ37c1ErTgtEVuJBXvH55P6KKfLQqvTC2llFbGUxbXA2KZ33yp
-         pzYv54EJnZnb87yG9gLHokdGdDMI+PDuHtZAVgvXruQqpvidLB1TxbiNQSijUZWen7j2
-         PQCKMbT3RgPE35uX4hyl2euo9LZEM62uYLyWx0sL7S8HuqKHVEil3ddY9K1Js2cn8ROJ
-         Ea72pQkziBoOdn5ZEBP/f3Gi75a6vrbfYeq518/8sSMfxKW1PIY7lHRwkq4G4OJd1SIg
-         d24A==
-X-Gm-Message-State: AOAM531AplBL6QFm/DkTlbuG5GzWHf2LMpmN6rTLZpDUVTRoARZCH0Q8
-	Gg9SYvg4Wl6US/AiwUpmIcdBVDO9JdgLsQ==
-X-Google-Smtp-Source: ABdhPJwJ+2cLZkxiPEfhflzNpCEUq5dq6lNNQ05RJ1F3/An5svYkps1YZSXBZ5SFjrJBYgLHs0MOdw==
-X-Received: by 2002:a2e:a70f:: with SMTP id s15mr13836604lje.343.1628475730297;
-        Sun, 08 Aug 2021 19:22:10 -0700 (PDT)
-Return-Path: <dmitry.baryshkov@linaro.org>
-Received: from umbar.lan ([37.153.55.125])
-        by smtp.gmail.com with ESMTPSA id u19sm1585277lfo.205.2021.08.08.19.22.09
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 08 Aug 2021 19:22:09 -0700 (PDT)
-From: "Dmitry Baryshkov" <dbaryshkov@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] image_types_sparse: fix sparse image generation
-Date: Mon,  9 Aug 2021 05:22:08 +0300
-Message-Id: <20210809022208.1285256-1-dmitry.baryshkov@linaro.org>
-X-Mailer: git-send-email 2.30.2
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: kai.kang@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 1799NNUP013203
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 9 Aug 2021 02:23:23 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Mon, 9 Aug 2021 02:23:21 -0700
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Mon, 9 Aug 2021 02:23:21 -0700
+From: "kai" <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] libdbi-perl: fix CVE-2014-10402
+Date: Mon, 9 Aug 2021 17:23:19 +0800
+Message-ID: <20210809092319.36843-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-After changing image_types_sparse to follow new override syntax, using
-this class generates the syntax error, because CONVERSION_CMD:sparse()
-function is added to the generated shell file, but color can not be a
-part of the function name. Rewrite it to be the variable rather than the
-function, so that it does not end up the run.do_image_FOO file.
+From: Kai Kang <kai.kang@windriver.com>
 
-DEBUG: Executing shell function do_image_ext4
-[.......]/temp/run.do_image_ext4.1247938: line 184: `CONVERSION_CMD:sparse': not a valid identifier
-WARNING: [.......]/temp/run.do_image_ext4.1247938:151 exit 2 from 'export systemd_user_unitdir="/usr/lib/systemd/user"'
-WARNING: Backtrace (BB generated script):
-	#1: main, [.......]/temp/run.do_image_ext4.1247938, line 151
-ERROR: Execution of '[.......]/temp/run.do_image_ext4.1247938' failed with exit code 2:
-[.......]/temp/run.do_image_ext4.1247938: line 184: `CONVERSION_CMD:sparse': not a valid identifier
-WARNING: [.......]/temp/run.do_image_ext4.1247938:151 exit 2 from 'export systemd_user_unitdir="/usr/lib/systemd/user"'
-WARNING: Backtrace (BB generated script):
-	#1: main, [.......]/temp/run.do_image_ext4.1247938, line 151
+Backport patch to fix CVE-2014-10402.
 
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+CVE: CVE-2014-10402
+
+Ref:
+https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=972180#12
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-oe/classes/image_types_sparse.bbclass | 24 +++++++++++-----------
- 1 file changed, 12 insertions(+), 12 deletions(-)
+ .../perl/libdbi-perl/CVE-2014-10402.patch     | 56 +++++++++++++++++++
+ .../perl/libdbi-perl_1.643.bb                 |  4 +-
+ 2 files changed, 59 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2014-10402.patch
 
-diff --git a/meta-oe/classes/image_types_sparse.bbclass b/meta-oe/classes/image_types_sparse.bbclass
-index af3879372b68..65d980fd913f 100644
---- a/meta-oe/classes/image_types_sparse.bbclass
-+++ b/meta-oe/classes/image_types_sparse.bbclass
-@@ -1,16 +1,16 @@
- inherit image_types
+diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2014-10402.patch b/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2014-10402.patch
+new file mode 100644
+index 000000000..b41bbe0a5
+--- /dev/null
++++ b/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2014-10402.patch
+@@ -0,0 +1,56 @@
++Backport patch to fix CVE-2014-10402.
++
++CVE: CVE-2014-10402
++Upstream-Status: Backport [https://github.com/rehsack/dbi/commit/19d0fb1]
++
++Ref:
++https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=972180#12
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++
++
++From 19d0fb169eed475e1c053e99036b8668625cfa94 Mon Sep 17 00:00:00 2001
++From: Jens Rehsack <sno@netbsd.org>
++Date: Tue, 6 Oct 2020 10:22:17 +0200
++Subject: [PATCH] lib/DBD/File.pm: fix CVE-2014-10401
++
++Dig into the root cause of RT#99508 - which resulted in CVE-2014-10401 - and
++figure out that DBI->parse_dsn is the wrong helper to parse our attributes in
++DSN, since in DBD::dr::connect only the "dbname" remains from DSN which causes
++parse_dsn to bailout.
++
++Parsing on our own similar to parse_dsn shows the way out.
++
++Signed-off-by: Jens Rehsack <sno@netbsd.org>
++---
++ lib/DBD/File.pm | 7 +++++--
++ 1 file changed, 5 insertions(+), 2 deletions(-)
++
++diff --git a/lib/DBD/File.pm b/lib/DBD/File.pm
++index fb14e9a..f55076f 100644
++--- a/lib/DBD/File.pm
+++++ b/lib/DBD/File.pm
++@@ -109,7 +109,11 @@ sub connect
++     # We do not (yet) care about conflicting attributes here
++     # my $dbh = DBI->connect ("dbi:CSV:f_dir=test", undef, undef, { f_dir => "text" });
++     # will test here that both test and text should exist
++-    if (my $attr_hash = (DBI->parse_dsn ($dbname))[3]) {
+++    #
+++    # Parsing on our own similar to parse_dsn to find attributes in 'dbname' parameter.
+++    if ($dbname) {
+++	my @attrs = split /;/ => $dbname;
+++	my $attr_hash = { map { split /\s*=>?\s*|\s*,\s*/, $_} @attrs };
++ 	if (defined $attr_hash->{f_dir} && ! -d $attr_hash->{f_dir}) {
++ 	    my $msg = "No such directory '$attr_hash->{f_dir}";
++ 	    $drh->set_err (2, $msg);
++@@ -120,7 +124,6 @@ sub connect
++     if ($attr and defined $attr->{f_dir} && ! -d $attr->{f_dir}) {
++ 	my $msg = "No such directory '$attr->{f_dir}";
++ 	$drh->set_err (2, $msg);
++-	$attr->{RaiseError} and croak $msg;
++ 	return;
++ 	}
++ 
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb b/meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb
+index 311cf2730..b21418298 100644
+--- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb
++++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb
+@@ -9,7 +9,9 @@ SECTION = "libs"
+ LICENSE = "Artistic-1.0 | GPL-1.0+"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=10982c7148e0a012c0fd80534522f5c5"
  
- CONVERSIONTYPES += "sparse"
--CONVERSION_CMD:sparse() {
--    in="${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}"
--    out="${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}.sparse"
--    case "${type}" in
--        ext*)
--            ext2simg "$in" "$out"
--            ;;
--        *)
--            img2simg "$in" "$out"
--            ;;
--    esac
--}
-+CONVERSION_CMD:sparse = " \
-+    case "${type}" in \
-+        ext*) \
-+            ext2simg "${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}" \
-+                     "${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}.sparse" \
-+            ;; \
-+        *) \
-+            img2simg "${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}" \
-+                     "${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}.sparse" \
-+            ;; \
-+    esac \
-+"
- CONVERSION_DEPENDS_sparse = "android-tools-native"
+-SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz"
++SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz \
++           file://CVE-2014-10402.patch \
++           "
+ SRC_URI[md5sum] = "352f80b1e23769c116082a90905d7398"
+ SRC_URI[sha256sum] = "8a2b993db560a2c373c174ee976a51027dd780ec766ae17620c20393d2e836fa"
+ 
 -- 
-2.30.2
+2.17.1
 
