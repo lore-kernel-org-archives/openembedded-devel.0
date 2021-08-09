@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.22816.1628516555670151696
+ by mx.groups.io with SMTP id smtpd.web08.22817.1628516556329679931
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 09 Aug 2021 06:42:36 -0700
 Authentication-Results: mx.groups.io;
@@ -8,14 +8,16 @@ Received: from [78.130.197.211] (port=49496 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mD5Y0-0007HK-Hd; Mon, 09 Aug 2021 16:42:33 +0300
+	id 1mD5Y1-0007HK-4R; Mon, 09 Aug 2021 16:42:34 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-astroid: Upgrade 2.6.5 -> 2.6.6
-Date: Mon,  9 Aug 2021 16:42:23 +0300
-Message-Id: <20210809134227.27647-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-gast: Upgrade 0.5.1 -> 0.5.2
+Date: Mon,  9 Aug 2021 16:42:24 +0300
+Message-Id: <20210809134227.27647-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210809134227.27647-1-leon.anavi@konsulko.com>
+References: <20210809134227.27647-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -28,33 +30,29 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.6.6:
+Upgrade to release 0.5.2:
 
-- Added support to infer return type of typing.cast()
-- Fix variable lookup's handling of exclusive statements
-- Fix variable lookup's handling of function parameters
-- Fix variable lookup's handling of except clause variables
-- Fix handling of classes with duplicated bases with the same name
+- Test field count more accurately
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-astroid_2.6.5.bb => python3-astroid_2.6.6.bb}      | 2 +-
+ .../python/{python3-gast_0.5.1.bb => python3-gast_0.5.2.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-astroid_2.6.5.bb => python3-astroid_2.6.6.bb} (89%)
+ rename meta-python/recipes-devtools/python/{python3-gast_0.5.1.bb => python3-gast_0.5.2.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-astroid_2.6.5.bb b/meta-python/recipes-devtools/python/python3-astroid_2.6.6.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-astroid_2.6.5.bb
-rename to meta-python/recipes-devtools/python/python3-astroid_2.6.6.bb
-index 5d7ef8f29b..10851039b3 100644
---- a/meta-python/recipes-devtools/python/python3-astroid_2.6.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-astroid_2.6.6.bb
+diff --git a/meta-python/recipes-devtools/python/python3-gast_0.5.1.bb b/meta-python/recipes-devtools/python/python3-gast_0.5.2.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-gast_0.5.1.bb
+rename to meta-python/recipes-devtools/python/python3-gast_0.5.2.bb
+index eda18602fb..d318973a17 100644
+--- a/meta-python/recipes-devtools/python/python3-gast_0.5.1.bb
++++ b/meta-python/recipes-devtools/python/python3-gast_0.5.2.bb
 @@ -4,7 +4,7 @@ SECTION = "devel/python"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a3ad9b6802e713fc5e307e1230f1ea90"
  
--SRC_URI[sha256sum] = "83e494b02d75d07d4e347b27c066fd791c0c74fc96c613d1ea3de0c82c48168f"
-+SRC_URI[sha256sum] = "3975a0bd5373bdce166e60c851cfcbaf21ee96de80ec518c1f4cb3e94c3fb334"
+-SRC_URI[sha256sum] = "b00e63584db482ffe6107b5832042bbe5c5bf856e3c7279b6e93201b3dcfcb46"
++SRC_URI[sha256sum] = "f81fcefa8b982624a31c9e4ec7761325a88a0eba60d36d1da90e47f8fe3c67f7"
  
  inherit pypi setuptools3
  
