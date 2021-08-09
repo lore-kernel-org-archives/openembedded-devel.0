@@ -1,5 +1,5 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.22818.1628516558790495938
+ by mx.groups.io with SMTP id smtpd.web08.22819.1628516559256260920
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 09 Aug 2021 06:42:39 -0700
 Authentication-Results: mx.groups.io;
@@ -8,13 +8,13 @@ Received: from [78.130.197.211] (port=49496 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mD5Y4-0007HK-N5; Mon, 09 Aug 2021 16:42:37 +0300
+	id 1mD5Y6-0007HK-0l; Mon, 09 Aug 2021 16:42:38 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-bitarray: Upgrade 2.2.3 -> 2.2.5
-Date: Mon,  9 Aug 2021 16:42:26 +0300
-Message-Id: <20210809134227.27647-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-send2trash: Upgrade 1.7.1 -> 1.8.0
+Date: Mon,  9 Aug 2021 16:42:27 +0300
+Message-Id: <20210809134227.27647-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210809134227.27647-1-leon.anavi@konsulko.com>
 References: <20210809134227.27647-1-leon.anavi@konsulko.com>
@@ -30,38 +30,33 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.2.5:
+Upgrade to release 1.8.0:
 
-- speedup `find_bit()` and `find_last()` using uint64 checking,
-  this means a speedup for `.find()`, `.index()`, `.search()` and
-  `util.rindex()`
-- add optional start and stop arguments to `.bytereverse()`
-- add example to illustrate how unaligned copying works internally
-- add documentation
-- add tests
+- Add compatibility with pathlib paths
+- Fix thread compatibility of modern windows implementation
+- Fix handling of UNC names in legacy windows implementation
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-bitarray_2.2.3.bb => python3-bitarray_2.2.5.bb}    | 2 +-
+ ...{python3-send2trash_1.7.1.bb => python3-send2trash_1.8.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-bitarray_2.2.3.bb => python3-bitarray_2.2.5.bb} (77%)
+ rename meta-python/recipes-extended/send2trash/{python3-send2trash_1.7.1.bb => python3-send2trash_1.8.0.bb} (71%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_2.2.3.bb b/meta-python/recipes-devtools/python/python3-bitarray_2.2.5.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-bitarray_2.2.3.bb
-rename to meta-python/recipes-devtools/python/python3-bitarray_2.2.5.bb
-index b72ca3b560..f8e2489070 100644
---- a/meta-python/recipes-devtools/python/python3-bitarray_2.2.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-bitarray_2.2.5.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
- LICENSE = "PSF"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
+diff --git a/meta-python/recipes-extended/send2trash/python3-send2trash_1.7.1.bb b/meta-python/recipes-extended/send2trash/python3-send2trash_1.8.0.bb
+similarity index 71%
+rename from meta-python/recipes-extended/send2trash/python3-send2trash_1.7.1.bb
+rename to meta-python/recipes-extended/send2trash/python3-send2trash_1.8.0.bb
+index d3554c8031..76f59e2853 100644
+--- a/meta-python/recipes-extended/send2trash/python3-send2trash_1.7.1.bb
++++ b/meta-python/recipes-extended/send2trash/python3-send2trash_1.8.0.bb
+@@ -4,6 +4,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a02659c2d5f4cc626e4dcf6504b865eb"
  
--SRC_URI[sha256sum] = "b5d707d9c4aa75e684e21ff1848b234f3d2ff41d5038db89e2465e5527f90c68"
-+SRC_URI[sha256sum] = "efb2dc83f0acb832a94af3687eea558d72512cf2e54a64fca56a10aacf57934c"
+ inherit pypi setuptools3
  
- inherit setuptools3 pypi
+-SRC_URI[sha256sum] = "17730aa0a33ab82ed6ca76be3bb25f0433d0014f1ccf63c979bab13a5b9db2b2"
++SRC_URI[sha256sum] = "d2c24762fd3759860a0aff155e45871447ea58d2be6bdd39b5c8f966a0c99c2d"
  
+ PYPI_PACKAGE = "Send2Trash"
 -- 
 2.17.1
 
