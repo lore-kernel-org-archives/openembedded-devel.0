@@ -1,161 +1,73 @@
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
- by mx.groups.io with SMTP id smtpd.web12.22731.1628514947126888888
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+ by mx.groups.io with SMTP id smtpd.web12.22754.1628515073989623248
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Aug 2021 06:15:47 -0700
+ Mon, 09 Aug 2021 06:17:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=L6/n8I7G;
- spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: aj.bagwell@gmail.com)
-Received: by mail-wr1-f45.google.com with SMTP id n12so11340687wrr.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Aug 2021 06:15:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=pie0I6qE;
+ spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: aj.bagwell@gmail.com)
+Received: by mail-wr1-f49.google.com with SMTP id b13so21426506wrs.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Aug 2021 06:17:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=y8xWIYws9BYEvvItzCTbvSwtS2wRhCpV/s8hm7UYsBs=;
-        b=L6/n8I7Gv6RMkFlEWRNOr0BJ83Ep9auEENHpQxQ4uLos2sYs2E2k03JIaVRRrkAA+b
-         fLhuVZrSsYkFvzy/s1dS39lsa+to23tT6jnu5Eb/pqJg7ODWQpXhkxtvrfftdjJIj1Pu
-         b6P8PZeRlQzxgyxJ5HVPxNp94jBbgCNYo/6qNcm9z/asd/SQEwTmtP8s0cI3CMwyTVFb
-         ESB3ccV90OuERhAyTmQDb6cjIe/Gq0dVSKPw1pqqeGCegvPT93vte4yPXsQnSyKnDzes
-         QiZin4SvdHAMyAOehfPWg/935u1FTEvyLtMp1kJsxk9TW4dEMBKgJmTy/ROW/Mwp2AMw
-         ZSdA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=NI7L473liBiOjQVL4f0r82fkx0J4gPCOd3cnKaqaTm0=;
+        b=pie0I6qEtMNTRNozpjJqAuxkxhPk6Wer5Tn2/LN0UmbCyRlb4Mfcdt3Vj+f3sYlOSM
+         xPBsLn0mH9qeZtGxpirByqjLeUoljwkPeJKPyOXdbiy9/JvozwUVbX5p5f/wfCHX3Bxa
+         w1xLpyTJEIHbrChs0xbSJzcwFEGow1KCahcbJwxa7OxU2XNEspxLnFHv03VSpFeAwSAP
+         TOouvDdbxEEnbk1h/Pl1EKWNdfcNtm8TTJPdx4UI/IRGUiw7DgXHGiinptiCGfjGWHCh
+         nnyPn/8LzhtvS6JnkPn/vN68hdYQAEbCguH4lvjLXHjEOB/us9yWXtIsdOdoh0tV6k3k
+         5y4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=y8xWIYws9BYEvvItzCTbvSwtS2wRhCpV/s8hm7UYsBs=;
-        b=lZSftoQlj6Fxq+i+zLV7E3lW69bbU+6L56WzthaASqzj6wYVkuKy3csibdI5vGRqq7
-         3uMRg+o309iNFEisZ3tbXJ/ZFlAhF68wfwCdKn7Sv3TkzmxDq1VYzAXF7cyQRQK6xJ2L
-         Cen7/FdVd4AnlL5cDNJWBxUmpNSYgKLwEsnxUWe9lITDZ89TceVOyi1Y5PhZ3RtZ2oEt
-         H82rebE8eTsG7cdoWqF1hyn4SajWFLelDS2Of6ViIYqZ4qgPdSROx0FWkM0kfCFciLo+
-         u+iHOyCpvpENlp/uhSQU7srGvBwHLWQzW5YwghtQUECWNalq2QqeCN6dD0e7lkPVI6Qq
-         Wg1w==
-X-Gm-Message-State: AOAM531PCLWwH5bqbu7/T4gqDBAX2SxH28aEe5dF2/e23KJbMaQcRlTS
-	TVh4DyvD9gT2+utm+EfCmUI098sgE9o=
-X-Google-Smtp-Source: ABdhPJyHJO8dPCe9dqCzVSd5eEMdTYd3ONZBurusmiqpanu70wvGYMuZwGLkk08YMPszPVnBGYnVRQ==
-X-Received: by 2002:a5d:5090:: with SMTP id a16mr25057845wrt.21.1628514945513;
-        Mon, 09 Aug 2021 06:15:45 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=NI7L473liBiOjQVL4f0r82fkx0J4gPCOd3cnKaqaTm0=;
+        b=gPgJRhlMHf3/rgAT4w7aWftYd0+exegc9lDqGRpxZRyNsz9r+RriI+k9+pWIErWECe
+         lHDy2WZDnoDEtYQ5frhOs3coXrWc98LS8IAEtWUarlnHJpNR32epe3LPHorqVUWCyhPs
+         LXV+lDEcYLc7LXXNsMX9B5aMPGbRuDt/VAmon1/4kROKq/bem+z/ITmCcj9lEixkEi3x
+         yPTKZmJtYtvkeH+zkASYa2ksKtwWtSUjYG9MY1JMRqmX88fUtnthZVkhXyZk3L2diAGJ
+         yX18rSrIcfMgAmo846q4MRwBROvEQnn8D1AqYq74BCG7CNp2sS+RyhzVrQrs4/V35WrH
+         Yn6A==
+X-Gm-Message-State: AOAM530I2dckkB4f3qrKcpF783n/2qenx59cT1m87W6k3fm8UWYUsq11
+	WFnQI9ZFhUb5VvDVG6T+zD6MFQXt/GM=
+X-Google-Smtp-Source: ABdhPJxTmNfRIhFlpJ1aKAJogMeCaGc4TPNQ/wq9Gs18dqz53GpeKZTFPMSh7s3hsxq9wtyq6UrWCw==
+X-Received: by 2002:adf:a309:: with SMTP id c9mr7577901wrb.99.1628515072253;
+        Mon, 09 Aug 2021 06:17:52 -0700 (PDT)
 Return-Path: <aj.bagwell@gmail.com>
 Received: from localhost.localdomain (cpc108959-cmbg20-2-0-cust309.5-4.cable.virginm.net. [80.0.21.54])
-        by smtp.gmail.com with ESMTPSA id w5sm22866523wro.45.2021.08.09.06.15.44
+        by smtp.gmail.com with ESMTPSA id n18sm19772353wrt.78.2021.08.09.06.17.51
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Mon, 09 Aug 2021 06:15:45 -0700 (PDT)
+        Mon, 09 Aug 2021 06:17:51 -0700 (PDT)
 From: "Anthony Bagwell" <aj.bagwell@gmail.com>
 X-Google-Original-From: AJ Bagwell <anthony.bagwell@hivehome.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: AJ Bagwell <anthony.bagwell@hivehome.com>
-Subject: [meta-java][PATCH 2/2] all: manual fixes for new override syntax
-Date: Mon,  9 Aug 2021 14:09:38 +0100
-Message-Id: <20210809130938.12027-3-anthony.bagwell@hivehome.com>
+Subject: [meta-java][PATCH] layer.conf: Update to new honister release name
+Date: Mon,  9 Aug 2021 14:17:40 +0100
+Message-Id: <20210809131740.12242-1-anthony.bagwell@hivehome.com>
 X-Mailer: git-send-email 2.30.1 (Apple Git-130)
-In-Reply-To: <20210809130938.12027-1-anthony.bagwell@hivehome.com>
-References: <20210809130938.12027-1-anthony.bagwell@hivehome.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: AJ Bagwell <anthony.bagwell@hivehome.com>
 ---
- classes/java-library.bbclass                      | 4 ++--
- recipes-core/ant/ant-native_1.8.1.bb              | 4 ++--
- recipes-core/junit/junit_3.8.2.bb                 | 4 ++--
- recipes-core/openjdk/openjdk-8-release-common.inc | 3 ++-
- recipes-core/xml-commons/xom_1.2.10.bb            | 2 +-
- 5 files changed, 9 insertions(+), 8 deletions(-)
+ conf/layer.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/classes/java-library.bbclass b/classes/java-library.bbclass
-index 62fabec..67541d2 100644
---- a/classes/java-library.bbclass
-+++ b/classes/java-library.bbclass
-@@ -54,14 +54,14 @@ ALTJARFILENAMES = "${BPN}.jar"
+diff --git a/conf/layer.conf b/conf/layer.conf
+index 7ef116d..7791178 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -7,7 +7,7 @@ BBFILES += "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/recipes*/*/*.bbappend"
+ BBFILE_COLLECTIONS += "meta-java"
+ BBFILE_PATTERN_meta-java := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_meta-java = "10"
+-LAYERSERIES_COMPAT_meta-java = "dunfell gatesgarth hardknott"
++LAYERSERIES_COMPAT_meta-java = "dunfell gatesgarth hardknott honister"
+ LAYERDEPENDS_meta-java += "openembedded-layer"
  
- # Java "source" distributions often contain precompiled things
- # we want to delete first.
--do:removebinaries() {
-+do_deletebinaries() {
-   find ${WORKDIR} ! -path "${RECIPE_SYSROOT}/*" ! -path "${RECIPE_SYSROOT_NATIVE}/*" \
-                   -name "*.jar" -exec rm {} \;
-   find ${WORKDIR} ! -path "${RECIPE_SYSROOT}/*" ! -path "${RECIPE_SYSROOT_NATIVE}/*" \
-                   -name "*.class" -exec rm {} \;
- }
- 
--addtask removebinaries after do_unpack before do_patch
-+addtask deletebinaries after do_unpack before do_patch
- 
- do_install:append() {
-   oe_jarinstall ${JARFILENAME} ${ALTJARFILENAMES}
-diff --git a/recipes-core/ant/ant-native_1.8.1.bb b/recipes-core/ant/ant-native_1.8.1.bb
-index fa37dd1..8814039 100644
---- a/recipes-core/ant/ant-native_1.8.1.bb
-+++ b/recipes-core/ant/ant-native_1.8.1.bb
-@@ -20,7 +20,7 @@ DEPENDS = " \
- 	junit-native jdepend-native commons-net-native commons-logging-native \
- 	"
- 
--do:removecruft() {
-+do_deletecruft() {
- 	# Removes thing that need proprietary Jar files or are otherwise problematic
- 	rm -rf ${S}/src/main/org/apache/tools/ant/taskdefs/optional/image
- 	rm -rf ${S}/src/main/org/apache/tools/ant/types/optional/image
-@@ -30,7 +30,7 @@ do:removecruft() {
- 	rm -rf ${S}/src/main/org/apache/tools/ant/taskdefs/optional/NetRexxC.java
- }
- 
--addtask removecruft before do_patch after do:removebinaries
-+addtask deletecruft before do_patch after do_deletebinaries
- 
- do_compile() {
-   mkdir -p build
-diff --git a/recipes-core/junit/junit_3.8.2.bb b/recipes-core/junit/junit_3.8.2.bb
-index 4f10575..feaddc3 100644
---- a/recipes-core/junit/junit_3.8.2.bb
-+++ b/recipes-core/junit/junit_3.8.2.bb
-@@ -16,14 +16,14 @@ inherit java-library
- do_unpackpost[dirs] = "${B}"
- do_unpackpost() {
- 	mkdir -p src
--	# Prevent deletion by do:removebinaries.
-+	# Prevent deletion by do_deletebinraries.
- 	if [ -e src.jar ]; then
- 		mv src.jar src.zip
- 	fi
- 	unzip -o src.zip -d src
- }
- 
--addtask unpackpost before do:removebinaries after do_unpack
-+addtask unpackpost before do_deletebinraries after do_unpack
- 
- do_compile() {
-   mkdir -p build
-diff --git a/recipes-core/openjdk/openjdk-8-release-common.inc b/recipes-core/openjdk/openjdk-8-release-common.inc
-index 6c7bdd2..ff8d96e 100644
---- a/recipes-core/openjdk/openjdk-8-release-common.inc
-+++ b/recipes-core/openjdk/openjdk-8-release-common.inc
-@@ -1,3 +1,4 @@
-+
- PATCHES_URI = "\
-     file://0001-Allow-using-a-system-installed-libjpeg.patch \
-     file://0002-Allow-using-a-system-installed-libpng.patch \
-@@ -56,7 +57,7 @@ PATCHES_URI:append:libc-musl = "\
-     ${DISABLE_AGENT_BUILD_PT2} \
-     file://musl-0006-hotspot-os_linux-remove-glibc-dependencies-common.patch \
-     ${REMOVE_GLIBC_DEPENDENCIES_PT2} \
--    file://musl-0007-hotspot-os_linux:x86-remove-glibc-dependencies-fpu_c.patch \
-+    file://musl-0007-hotspot-os_linux_x86-remove-glibc-dependencies-fpu_c.patch \
-     file://musl-0008-jdk-musl-build-fix-use-SIGRTMAX-rather-than-__SIGRTM.patch \
-     file://musl-0009-jdk-musl-has-gethostby_r.patch \
- "
-diff --git a/recipes-core/xml-commons/xom_1.2.10.bb b/recipes-core/xml-commons/xom_1.2.10.bb
-index 5a71655..2520405 100644
---- a/recipes-core/xml-commons/xom_1.2.10.bb
-+++ b/recipes-core/xml-commons/xom_1.2.10.bb
-@@ -36,7 +36,7 @@ do_move_jaxen() {
- 
- }
- 
--addtask move_jaxen after do:removebinaries before do_patch
-+addtask move_jaxen after do_deletebinraries before do_patch
- 
- do_compile() {
-     mkdir -p build
+ LICENSE_PATH += "${LAYERDIR}/licenses"
 -- 
 2.17.1
 
