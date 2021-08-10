@@ -1,357 +1,234 @@
-Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com [209.85.160.169])
- by mx.groups.io with SMTP id smtpd.web12.297.1628614674144422037
+Received: from EUR04-DB3-obe.outbound.protection.outlook.com (EUR04-DB3-obe.outbound.protection.outlook.com [40.107.6.71])
+ by mx.groups.io with SMTP id smtpd.web11.332.1628614796056023612
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Aug 2021 09:57:54 -0700
+ Tue, 10 Aug 2021 09:59:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=i0FDm+nc;
- spf=pass (domain: gmail.com, ip: 209.85.160.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f169.google.com with SMTP id h10so6238989qtj.11;
-        Tue, 10 Aug 2021 09:57:54 -0700 (PDT)
+ dkim=pass header.i=@siemens.onmicrosoft.com header.s=selector1-siemens-onmicrosoft-com header.b=OAFIwyms;
+ spf=pass (domain: siemens.com, ip: 40.107.6.71, mailfrom: andrej.valek@siemens.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=bGU0BN9PHB+3kxl1cZJiqpxm0fKWxzVFAwNfskC3Y2yzTyB4tjsluVKyVIVm4OcgUm1nMmjWRkS2dq/q2anJuCkt4yzHCkYUYh5X9bxDtwTLhV3TxQngr/owzzhazszB61A8GJkImF/b1U9qA88h0ho5XWEfqLYLYhIRM1NVd/R0GsncaxwtUJgEIDpsFua2Db9MCpLoVdwZmYQ+7IBquR6ugTRN/41ocKdVWlnu2rvcWmqUQdjtyQkWVw6F/bs+41RRIjvduHD0jOq+cJuO6Nk9PfW+O0cT3fZqGzUwMEcBEX2/8qciHb9DRROZwP7D5WOLU24EfAtxAogu7a5iYA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rNS421cniDhdDyORDDqii54IHBwSrJinRFQjPrtoi2k=;
+ b=AgrN5+nHVEcpu8Jg8Chg7nN3U38XGgY+nI9ikvArdetOk+viMZtgJqMGvNqUQoldNxHpJWlSkiFIXlmSwjWezZsY+8OsOsWkhcEdsXUS5exvvgMTy6s5WQQ6axslJS8d3wCqJ6tkEXzwSqo4UJTePsprJ/sbBBEGZUbfswOnk99PjbwyQM7RRV9ZBM0Qa54slT0HRhK4WHR5Wt6eMzEzQzSjna9EqK3/fBJY1v1MXt6vCDfnGO4I/R5/xWqJM4zjL0hQxCGKwD+K2RXRgYp3V5BQS5PP36DGSuo9AJbA2CEupxEQFWhFXRC+qq9IKpY5ukZHqtDcLNrZdl+7GtgAvA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
+ dkim=pass header.d=siemens.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=7TYn5h1EUIwrsqWt/McNOAMLz+H5zIKZyBWIcIZnVMs=;
-        b=i0FDm+nc8KXCH+4BJviT7kyeQcTVMl+yz4uinJO6BX0MocJwqvk1KH13/0kHTtEFZe
-         TIL9MRx0hKeW4hKjQmTEloa8V6LEpj3QNWzPC3F0QHTyMLJCh6Q0Gc4WT+0U9VrsSWKT
-         J8DIv4Ax46x8OeBZi1hZgpDNd/GIB5LbSQcmD0A2wdfKGGsDEpKkWIMP+rQtr6LHyU5c
-         455ui4jc3e1cDkEjjr1plhyrZWNf2osryAW/ilMt4PFoR0sfDe3zmwY5CNlW6lZdgLgy
-         UdTu9Tp8/U5OtEMPiCFHoeIwl1qfPNMOGEjtRGgI5wnnk9sRZDIBhQbZ2/PxQwTAYW79
-         dyQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=7TYn5h1EUIwrsqWt/McNOAMLz+H5zIKZyBWIcIZnVMs=;
-        b=AMcOc04Y8iJkTbicO6e5NB0jJXDzSu/GG07a2T0Hc6/9DMvp3ZT8kfxKkd7/qOGNiU
-         40KmiZnI/GpTOz2GW2G4N2jOS3d00Ulp/vOSTBMqLGnjrcqXPRVEw1xRwg3vetjYadS6
-         lEgrU9FIFggcohUkohYQxVMZtLfiaHmDmJ3EpGgIPZNq0xbe8XMlBcc7PEKGDI4r8+fL
-         Qyypfksmw+94SV+hU4Cn7d699qVSBVWDMwQly39nNae555q0UId78bZCeW+pYEykrkOA
-         3DGpX5w+A+q5UfyPs3eDYUZNSZRUQHfa1HF4WUFyt7xxBwPgQ6AKLyvjyMFC8hGQ1/+m
-         snsA==
-X-Gm-Message-State: AOAM533bHqdM533upXEFKWmNRY4rRZRmVZnkd0YKHxogy2mKfJ+nAxe7
-	MvWdBGZZ+lGOIp7daQc5qs38w3MA1bMuVKY1Lik=
-X-Google-Smtp-Source: ABdhPJwkvGSo8pXcBOJORllM1ZndIZkxa3BPgF2NEXo2RQJKBi2ihaIoINXCn6RUvQji7DxcOo20GlVt622IY+ZKHWs=
-X-Received: by 2002:a05:622a:354:: with SMTP id r20mr25515148qtw.289.1628614673101;
- Tue, 10 Aug 2021 09:57:53 -0700 (PDT)
+ d=siemens.onmicrosoft.com; s=selector1-siemens-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rNS421cniDhdDyORDDqii54IHBwSrJinRFQjPrtoi2k=;
+ b=OAFIwymsDkXVlzEsYDDSUgXVtO0m+n/DuIBGNdLhTl7hIoY6Igs6PRON6LxfCRRX4LAV0laql52eiNFru0ISwhnsYCcajAa3vLZ4UxcdkpZJ9RbwMwwmnoekkS25+JvOsDoN/Gg15So4Mp3dDIrlqMOaloZzdYZ8tselznqWOhc=
+Received: from DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:138::9)
+ by DB7PR10MB1993.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:5:10::30) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4394.15; Tue, 10 Aug
+ 2021 16:59:53 +0000
+Received: from DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::a95f:bc47:e21e:adac]) by DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::a95f:bc47:e21e:adac%9]) with mapi id 15.20.4394.022; Tue, 10 Aug 2021
+ 16:59:53 +0000
+From: "Andrej Valek" <andrej.valek@siemens.com>
+To: akuster808 <akuster808@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+CC: "sakoman@gmail.com" <sakoman@gmail.com>
+Subject: Re: [oe] [dunfell][meta-oe][PATCH 0/2] thrift upgrade
+Thread-Topic: [oe] [dunfell][meta-oe][PATCH 0/2] thrift upgrade
+Thread-Index: AQHXjfa6z0+X2RMVIkm/2flpeFZBiats9F1V
+Date: Tue, 10 Aug 2021 16:59:53 +0000
+Message-ID: 
+ <DB8PR10MB3977EF762ABBFA3785BECB3492F79@DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM>
+References: 
+ <20210810135555.12946-1-andrej.valek@siemens.com>,<c2bc6f71-3c98-f24b-dddc-d5078f173449@gmail.com>
+In-Reply-To: <c2bc6f71-3c98-f24b-dddc-d5078f173449@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+ MSIP_Label_a59b6cd5-d141-4a33-8bf1-0ca04484304f_Enabled=True;MSIP_Label_a59b6cd5-d141-4a33-8bf1-0ca04484304f_SiteId=38ae3bcd-9579-4fd4-adda-b42e1495d55a;MSIP_Label_a59b6cd5-d141-4a33-8bf1-0ca04484304f_SetDate=2021-08-10T16:59:52.964Z;MSIP_Label_a59b6cd5-d141-4a33-8bf1-0ca04484304f_Name=Restricted
+ Default;MSIP_Label_a59b6cd5-d141-4a33-8bf1-0ca04484304f_ContentBits=0;MSIP_Label_a59b6cd5-d141-4a33-8bf1-0ca04484304f_Method=Standard;
+authentication-results: gmail.com; dkim=none (message not signed)
+ header.d=none;gmail.com; dmarc=none action=none header.from=siemens.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: c7785e8b-4090-4ddc-b8c2-08d95c20463a
+x-ms-traffictypediagnostic: DB7PR10MB1993:
+x-microsoft-antispam-prvs: 
+ <DB7PR10MB199327E9E4ABB50C6CC46FBD92F79@DB7PR10MB1993.EURPRD10.PROD.OUTLOOK.COM>
+x-ms-oob-tlc-oobclassifiers: OLM:6430;
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ lbWDSg8oV3rhl5OqQ+P3c9Fh6sGnqcXqZQ0XeFSyJDX0LL/QVNBk19exVj3Vm6u8uzRROCCLCOcyNzljtkJuH/yJ+xl0+8aE3X9+kpRSvmCB5aqtQAxHVAOJOlDxbVv60DGZxaQDQ3uNa1hqaizFi9qsRCswQvogBRn4Lg7WIzFIXsAv3S+3QUGn+BHAmJ9klPVyyF/AXk9QQw95ySdRoAi/TzjsMuVzPW/ePwCpdI5kYtGmq7+KvVV9wVsCBhZGu3O9QBQAZVf40qZ0YRp0PCjPAw9DpkSM5nNAXU3AwfQkn8BzT/kGfXsrsdfG2wmRpZ6v0ImwH1ofbh9P7rse4j+uMAt1Gvp/gOrPXgICGT+e83U0wUIDH/tR/3Wfz4qwAQO7gxKphZlZS++apsDx9zABULKYFLPa6wu7xjeUIpCg+ZnNm66Oeu9noEP/AG82LGRQlV0T2gfN3nJIOc54ie/wwJh+zgV+kozmIfRlz3fdTOu3QJ83d11zBmpF1YB1pDF4gJW4oJavBzF790EgZqzrVo5QqgLON196reYMKghADLGtx3mBHJPKMOeAcsHCf0s4MCinb+eg9pU80xW39Er2KDziDl95mbHCKeziaDoDK5UqtTsB2a+f0Pf3vF93LJJH+NVBDPd/u/h/TbHQ27wxwWy06xpFmdekY4y3LXT7wy48Fw+RKlKX1LNT0PjyJhCa4kOJHy6JQkzVJTZ35Ji1NWUuFUQh9AmxIPkuCP7OZn9IfK/g1WDXOoRxFRvrJ+QqaKlM1c01Blr/G9TVPPZVRzDnLLhB1OAU3uvYIAc=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(346002)(136003)(39860400002)(396003)(366004)(376002)(186003)(478600001)(26005)(45080400002)(66946007)(64756008)(966005)(4326008)(8936002)(53546011)(6506007)(66446008)(91956017)(86362001)(71200400001)(66476007)(7696005)(5660300002)(66556008)(76116006)(122000001)(38100700002)(316002)(83380400001)(166002)(19627405001)(110136005)(52536014)(55016002)(9686003)(33656002)(8676002)(2906002)(38070700005);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?iso-8859-1?Q?MqK7T3zuW+gBg6padOnkEHZf56yZDM6LnCLdmRdcV0SybSEBHAvGPqjuNb?=
+ =?iso-8859-1?Q?WqZ/ohdxx2EGepanBmHtSme7xm5VzPxI79DZDuc24AYCMRDm8pGjZnJ03d?=
+ =?iso-8859-1?Q?TsCdfxKOarHCzryS7isQ11Ar5fYHsGfS6e+YHw4gewFU9KlOtTw2qSOMkk?=
+ =?iso-8859-1?Q?JmnLJx+5mLy3V71usjcIUzlmo7DQ2KYKwJ9YlGMIWrATCPneMuZ6aBaM9X?=
+ =?iso-8859-1?Q?jtqNoKjw3FwkU7yyWKnfBA9IRjRumJnManlslkfi5Ssfoo31tp2beIwlo7?=
+ =?iso-8859-1?Q?hRQzU4CkNpxe4UR7Inb5Y8YwcJU1tlNl7tIayymP2uGOZ62Npz68YkuxHl?=
+ =?iso-8859-1?Q?NqUNwqAz/g4+rugHm11ufOP90O89lok1P9uhXpWa66MZWG7VLZ53hQ5K6s?=
+ =?iso-8859-1?Q?H4dsIvWnM1JrKCXc5AfvZlO1tEAPFr5itWszE5fuzFYcl2GXyLvpvuLztJ?=
+ =?iso-8859-1?Q?jV1bYZjXnvgAeelT6+mrm8GSDl22Gm/rCMjikGTfwOB5G3J7ntTGfniOb8?=
+ =?iso-8859-1?Q?k6HFwPtagpVxLVDhirfLtt33g0vh2+0mTInJt+VkorwR12JJwxDn1+Qtdi?=
+ =?iso-8859-1?Q?bRG1/EL31+INqqchyPB9r+HCrHcnNxS84X6HaCCEB9KDHA5qA82OMUJREp?=
+ =?iso-8859-1?Q?YwQCtPs1s0PTD+q1IEsS9wWYuvEIHGWYzj1q0tXUUyjW8NbsIovYO2TBU1?=
+ =?iso-8859-1?Q?Y63dW1Dm8ko+h4vNDLgTwNDOWfnLLbOTakpFhL6cMvhfzJsTDDnBalpFCW?=
+ =?iso-8859-1?Q?sZTq1HY4YPSQQusldkSOpRYjLdWcAlsalmzKZ2ym2ZSff7tlWMyaLQtgR6?=
+ =?iso-8859-1?Q?1RZaqZa4hgodZcKgF6OpQGXMvqX6eb6+Qzv86h+LalFEY/ACCcHBOhfb2Y?=
+ =?iso-8859-1?Q?vJqd+wvC/pDwwwO/KSOPfAj7Uk9P5h0PE9MFNBeBDJQ4O/GRNrsDvDy2kn?=
+ =?iso-8859-1?Q?KNa18JF49QQy85jhyXyAlhAUs680mnr8330ZH4TYuAjT34xnw0AQy4Wq8l?=
+ =?iso-8859-1?Q?Z33cG7UbyVGO7mN2IKWkq8jrNYwTQ3NhOn0VSpcBIUCVjtbRPG9mv/S4U0?=
+ =?iso-8859-1?Q?G9FMZWANcPNhYy0tBH0pgHCzz55plxypSulJ7zoV6w0qLVLm/VM0hAFcy7?=
+ =?iso-8859-1?Q?N7dpIGolPE1FrvyuX7G4x42kvRdOBlgk5rAnvuG1/QpPneJWO2J6CYrrat?=
+ =?iso-8859-1?Q?E6SgQCwnzEwHocrk1wiRmwBvL+ycn/CplvqfaEzCJVGHnGHZZgQoZXAfJ5?=
+ =?iso-8859-1?Q?ZCEm/l/sl8K3zKOcK+UbA7DPfzeX7a1j0apJU133ywTMZ0YVb5/EvKf75p?=
+ =?iso-8859-1?Q?1GY+GpDrBfI0Vz/EfOL5fh4bDrABFRB9hQ0aWP+eTN9fV8g=3D?=
+x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
-References: <2efeecad-7ee5-126c-9271-d69fc3428c38@cybernetics.com>
- <447d4fa9-b915-4e59-0ecc-64d41c6ceee6@windriver.com> <22d7a9866471f53ea283caa1578fbf0b48d5e113.camel@linuxfoundation.org>
- <a0c4c23d-7437-ce14-066f-0f7f6929a987@cybernetics.com> <040fe5d8cd3914e7c19fc70ae6d18894b07f8073.camel@linuxfoundation.org>
- <6bb55159-9b49-3229-a15c-eee730560fb7@cybernetics.com> <5e21ec72-667f-6e48-eefc-843312544fe4@cybernetics.com>
- <CAMKF1srcLEBkk1udvadr1xeh8qsgr-i-8+hT_ZvL-2Nak-tsjg@mail.gmail.com>
- <17ef7e32-fe38-6e02-8d65-ee1518a38e82@cybernetics.com> <ead673c1-a9dd-613e-1d7c-6fcc6cf96eca@gmail.com>
-In-Reply-To: <ead673c1-a9dd-613e-1d7c-6fcc6cf96eca@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Tue, 10 Aug 2021 09:57:27 -0700
-Message-ID: <CAMKF1soO1vifStLgeOH31-UnCUePNi9s_F1ifPsWJHR=qzkgxQ@mail.gmail.com>
-Subject: Re: [OE-core] [master][PATCH 0/4] Reproducible LTO builds
-To: Tony Battersby <tonyb@cybernetics.com>
-Cc: Richard Purdie <richard.purdie@linuxfoundation.org>, 
-	Randy MacLeod <randy.macleod@windriver.com>, 
-	Patches and discussions about the oe-core layer <openembedded-core@lists.openembedded.org>, 
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: c7785e8b-4090-4ddc-b8c2-08d95c20463a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Aug 2021 16:59:53.5214
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: MWt1A4C1TcoDqbX4FDaYluI154TXIXPMGNLQ/UpDJ1heM7e58xQvSv5uHQWXt6asgvRWu58pKiWYZOvzIhJ+CbQQJ2VSfRDxN/oaG4mRBkk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB7PR10MB1993
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_DB8PR10MB3977EF762ABBFA3785BECB3492F79DB8PR10MB3977EURP_"
+
+--_000_DB8PR10MB3977EF762ABBFA3785BECB3492F79DB8PR10MB3977EURP_
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-when using ubuntu 18.04 host tcsh fails now  see [1]
+Hello Armin,
 
-gcc: error: unrecognized command line option
-=E2=80=98-fmacro-prefix-map=3DTOPDIR/build/tmp/work/core2-32-yoe-linux/tcsh=
-/6.22.04-r0=3D/usr/src/debug/tcsh/6.22.04-r0=E2=80=99
-Makefile:450: recipe for target 'gethost' failed
-make: *** [gethost] Error 1
+Take a look at the CVE-2020-13949 (https://issues.apache.org/jira/browse/TH=
+RIFT-5237). Backporting just those patches is probably no go, that's reason=
+ why I chose the upgrade option.
 
-[1] https://errors.yoctoproject.org/Errors/Details/600645/
+Regards,
+Andrej
 
-On Mon, Aug 9, 2021 at 10:18 AM Khem Raj <raj.khem@gmail.com> wrote:
+> On 8/10/21 6:55 AM, Andrej Valek wrote:
+>> Upgrade thrift to version 0.14.2 due to remote security
+>> vulnerability.
+> No specific security issues are mentioned in the other patches. This is a=
+ big jump and from what I can decode from their release notes. They depreca=
+te many things between these two versions.
 >
+> Unless I can be convinced otherwise, this update is deemed outside the ac=
+ceptable norms for a stable release.
 >
+> I think backport the specific security issues may be  more appropriate.
 >
-> On 8/9/21 7:39 AM, Tony Battersby wrote:
-> > On 8/6/21 10:19 PM, Khem Raj wrote:
-> >> I am seeing bunch of failures on meta-oe and meta-atmel
-> >>
-> >> https://errors.yoctoproject.org/Errors/Details/600064/
-> >> https://errors.yoctoproject.org/Errors/Details/600065/
-> >> https://errors.yoctoproject.org/Errors/Details/600071/
-> >>
-> >>
-> > I sent patches for meta-openembedded, but I am not sure how to build
-> > meta-atmel:
-> >
-> > bitbake libegl
-> > ERROR: Layer atmel is not compatible with the core layer which only
-> > supports these series: honister (layer is compatible with hardknott)
+> thanks,
+> Armin
 >
-> you can use my branch which has fixes for override problem
+>> Andrej Valek (2):
+>>   thrift: drop unsupported features
+>>   thrift: upgrade to 0.14.2
+>>
+>>  ...llationPaths.cmake-Define-libdir-in-terms.patch |  8 +++----
+>>  .../thrift/{thrift_0.13.0.bb =3D> thrift_0.14.2.bb}  | 26 ++++++++++---=
+---------
+>>  2 files changed, 16 insertions(+), 18 deletions(-)
+>>  rename meta-oe/recipes-connectivity/thrift/{thrift_0.13.0.bb =3D> thrif=
+t_0.14.2.bb} (72%)
+>>
+>>
+>>=20
+>>
+
+
+--_000_DB8PR10MB3977EF762ABBFA3785BECB3492F79DB8PR10MB3977EURP_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+Hello Armin,</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+Take a look&nbsp;at the CVE-2020-13949 (<a href=3D"https://issues.apache.or=
+g/jira/browse/THRIFT-5237" id=3D"LPlnk">https://issues.apache.org/jira/brow=
+se/THRIFT-5237</a>). Backporting just those patches is probably no go, that=
+'s reason why I chose the upgrade option.</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+Regards,</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+Andrej<br>
+</div>
+<div class=3D"_Entity _EType_OWALinkPreview _EId_OWALinkPreview _EReadonly_=
+1"></div>
+<br>
+<div class=3D"BodyFragment"><font size=3D"2"><span style=3D"font-size:11pt"=
 >
-> https://github.com/YoeDistro/meta-atmel/tree/yoe/mut
->
->
-> >
-> > But the fix is probably the same as the ones I sent for the other
-> > packages (which I copied from
-> > meta-openembedded/meta-networking/recipes-protocols/net-snmp/net-snmp_5=
-.9.1.bb).
-> >
-> > Tony Battersby
-> >
-> >
-> >> On Fri, Aug 6, 2021 at 2:04 PM Tony Battersby <tonyb@cybernetics.com> =
-wrote:
-> >>> On 8/6/21 12:44 PM, Tony Battersby wrote:
-> >>>> On 8/6/21 1:33 AM, Richard Purdie wrote:
-> >>>>> On Thu, 2021-08-05 at 17:54 -0400, Tony Battersby wrote:
-> >>>>>> On 8/5/21 6:21 AM, Richard Purdie wrote:
-> >>>>>>> On Wed, 2021-08-04 at 20:13 -0400, Randy MacLeod wrote:
-> >>>>>>>> On 2021-07-27 9:34 a.m., Tony Battersby wrote:
-> >>>>>>>>> Currently, enabling Link Time Optimization via:
-> >>>>>>>>>
-> >>>>>>>>> require conf/distro/include/lto.inc
-> >>>>>>>>> DISTRO_FEATURES_append =3D " lto"
-> >>>>>>>>>
-> >>>>>>>>> makes the build non-reproducible (as in
-> >>>>>>>>> https://reproducible-builds.org/).  This patch set fixes some o=
-f the
-> >>>>>>>>> problems, but is not yet a complete solution.
-> >>>>>>>>>
-> >>>>>>>>> This patch set addresses the following bugs:
-> >>>>>>>>> https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D14481
-> >>>>>>>>> https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D14490
-> >>>>>>>>>
-> >>>>>>>>> openembedded-core patches
-> >>>>>>>>> 1/4: lto.inc: disable LTO for grub
-> >>>>>>>>> 2/4: gcc: Backport patch to make LTO builds more reproducible
-> >>>>>>>>> 3/4: bitbake.conf: add DEBUG_PREFIX_MAP to TARGET_LDFLAGS
-> >>>>>>>>>
-> >>>>>>>>> openembedded-devel patches
-> >>>>>>>>> 4/4: net-snmp: fix QA Issue after LDFLAGS change
-> >>>>>>>>>
-> >>>>>>>>> Patch 3 adds DEBUG_PREFIX_MAP to TARGET_LDFLAGS (it was already=
- in
-> >>>>>>>>> TARGET_CFLAGS).  This could possibly be done differently, such =
-as by
-> >>>>>>>>> removing it from TARGET_CFLAGS and adding it to TOOLCHAIN_OPTIO=
-NS,
-> >>>>>>>>> TARGET_CC_ARCH, or TUNE_CCARGS, but I haven't tested those.  Le=
-t me know
-> >>>>>>>>> if there is a better/preferred way to do it.
-> >>>>>>>>>
-> >>>>>>>>> The TARGET_LDFLAGS change broke net-snmp from meta-networking, =
-so I have
-> >>>>>>>>> included a patch to fix that.  Other packages might have been b=
-roken as
-> >>>>>>>>> well, although I haven't found any others.
-> >>>>>>>>>
-> >>>>>>>>> With all these patches, there are still many shared libraries i=
-n /lib
-> >>>>>>>>> and /usr/lib that are still not reproducible with LTO enabled b=
-ecause
-> >>>>>>>>> x86_64-poky-linux-libtool filters out the -f*-prefix-map flags =
-added by
-> >>>>>>>>> patch 3 when linking shared libraries.  /usr/lib/libbz2.so.1.0.=
-6 from
-> >>>>>>>>> the libbz2 package from the bzip2 recipe is a good example.  I =
-do not
-> >>>>>>>>> have a patch for that problem.  I will leave that to someone el=
-se.
-> >>>>>>>>>
-> >>>>>>>>> So this is what we need to achieve reproducible LTO builds:
-> >>>>>>>>> *) This patch set
-> >>>>>>>>> *) A fix for libtool
-> >>>>>>>>> *) Add LTO to reproducible builds testing if appropriate (e.g.
-> >>>>>>>>> meta/lib/oeqa/selftest/cases/reproducible.py, CI on Autobuilder=
-)
-> >>>>>>>>> *) Fixes for individual packages, if needed
-> >>>>>>>>> *) Once everything works, update the documentation again (I pre=
-viously
-> >>>>>>>>> requested a documentation change for this bug, which will event=
-ually
-> >>>>>>>>> show up at
-> >>>>>>>>> http://docs.yoctoproject.org/test-manual/reproducible-builds.ht=
-ml).
-> >>>>>>>> This is certainly a few steps in the right direction with a good=
- outline
-> >>>>>>>> of what's next.
-> >>>>>>>>
-> >>>>>>>> I suspect that Richard has been busy with other things like over=
-rides
-> >>>>>>>> and the update to glibc-2.34.
-> >>>>>>>>
-> >>>>>>>> Do you have any suggestions or questions about what we should do
-> >>>>>>>> with this patch series Richard?
-> >>>>>>> Thanks for the reminder, I've been meaning to queue/test this whi=
-ch I will
-> >>>>>>> do. The gcc version has been bumped but I ported the patch forwar=
-d to it
-> >>>>>>> and the patches are in master-next for testing. It is great to se=
-e this
-> >>>>>>> support moving forward.
-> >>>>>>>
-> >>>>>>> Much as it pains me to admit having any libtool knowledge, I may =
-be able to
-> >>>>>>> help with that bit. There is an untested patch below which may ad=
-dress that
-> >>>>>>> issue, or at least give a good hint on how to do it if it doesn't=
- work. I
-> >>>>>>> don't have an environment to test easily right now.
-> >>>>>>>
-> >>>>>>> Cheers,
-> >>>>>>>
-> >>>>>>> Richard
-> >>>>>> I tested your libtool patch in master-next with the bzip2 recipe. =
- It
-> >>>>>> works as intended; libbz2.so.1.0.6 and all the other output files =
-are
-> >>>>>> now reproducible with LTO enabled.  I also verified that libtool i=
-s
-> >>>>>> passing the -f*-prefix-map flags to the link command in log.do_com=
-pile
-> >>>>>> as intended.
-> >>>>>>
-> >>>>>> I also verified that core-image-minimal builds successfully with t=
-he
-> >>>>>> libtool patch.
-> >>>>> Thanks for testing that, sounds like it helps that issue. I'll queu=
-e that patch.
-> >>>>>
-> >>>>> Unfortunately even with the ruby fix I queued, we still see reprodu=
-ciblity
-> >>>>> issues with the LDFLAGS change in curl-dev, gettext-ptest, ruby and=
- ruby-dbg
-> >>>>> packages:
-> >>>>>
-> >>>>> https://autobuilder.yoctoproject.org/typhoon/#/builders/115/builds/=
-515/steps/12/logs/stdio
-> >>>>>
-> >>>>> We'll need to resolve those before I can merge the flags change.
-> >>>>>
-> >>>>> Diffoscope output:
-> >>>>>
-> >>>>> https://autobuilder.yocto.io/pub/repro-fail/oe-reproducible-2021080=
-5-8jfd55ki/packages/diff-html/
-> >>>>>
-> >>>>> Basically LDFLAGS get encoded into a couple of scripts and the ruby=
- binary.
-> >>>>>
-> >>>>> Cheers,
-> >>>>>
-> >>>>> Richard
-> >>>>>
-> >>>> It looks like the ruby problem is being caused by MJIT_DLDFLAGS in
-> >>>> build/tmp/work/core2-64-poky-linux/ruby/3.0.2-r0/build/mjit_config.h=
-.
-> >>>> There is already a patch
-> >>>> poky/meta/recipes-devtools/ruby/ruby/0001-template-Makefile.in-do-no=
-t-write-host-cross-cc-item.patch
-> >>>> that removes some of these items for the sake of reproducibiltiy.  B=
-ut I
-> >>>> do not know ruby, so I do not know the implications of doing the sam=
-e
-> >>>> thing for MJIT_DLDFLAGS.
-> >>>>
-> >>>> Tony Battersby
-> >>>>
-> >>>>
-> >>>>
-> >>> Richard,
-> >>>
-> >>> I noticed that you already fixed the problems in curl and gettext in
-> >>> master-next.  Here is a patch for ruby if you haven't fixed that alre=
-ady.
-> >>>
-> >>> Tony Battersby
-> >>>
-> >>>  From 9cfb9777ff6ef95a27ed6a03719c807365d0f116 Mon Sep 17 00:00:00 20=
-01
-> >>> From: Tony Battersby <tonyb@cybernetics.com>
-> >>> Date: Fri, 6 Aug 2021 16:47:14 -0400
-> >>> Subject: [PATCH] ruby: Fix reproducibility issue with LDFLAGS
-> >>>
-> >>> If we add DEBUG_PREFIX_MAP into LDFLAGS, ruby and ruby-dbg are no
-> >>> longer reproducible.  Fix this.
-> >>>
-> >>> Signed-off-by: Tony Battersby <tonyb@cybernetics.com>
-> >>> ---
-> >>>   ...-Makefile.in-filter-out-f-prefix-map.patch | 42 ++++++++++++++++=
-+++
-> >>>   meta/recipes-devtools/ruby/ruby_3.0.2.bb      |  1 +
-> >>>   2 files changed, 43 insertions(+)
-> >>>   create mode 100644 meta/recipes-devtools/ruby/ruby/0002-template-Ma=
-kefile.in-filter-out-f-prefix-map.patch
-> >>>
-> >>> diff --git a/meta/recipes-devtools/ruby/ruby/0002-template-Makefile.i=
-n-filter-out-f-prefix-map.patch b/meta/recipes-devtools/ruby/ruby/0002-temp=
-late-Makefile.in-filter-out-f-prefix-map.patch
-> >>> new file mode 100644
-> >>> index 0000000000..9387506c26
-> >>> --- /dev/null
-> >>> +++ b/meta/recipes-devtools/ruby/ruby/0002-template-Makefile.in-filte=
-r-out-f-prefix-map.patch
-> >>> @@ -0,0 +1,42 @@
-> >>> +Subject: [PATCH] template/Makefile.in: filter out -f*prefix-map
-> >>> +
-> >>> +If we add DEBUG_PREFIX_MAP into LDFLAGS, ruby and ruby-dbg are no lo=
-nger
-> >>> +reproducible.  Fix this.
-> >>> +
-> >>> +Upstream-Status: Inapproppriate [oe-core specific]
-> >>> +Signed-off-by: Tony Battersby <tonyb@cybernetics.com>
-> >>> +---
-> >>> +--- a/tool/mjit_archflag.sh
-> >>> ++++ b/tool/mjit_archflag.sh
-> >>> +@@ -7,6 +7,20 @@ quote() {
-> >>> +     echo
-> >>> + }
-> >>> +
-> >>> ++quote_filtered() {
-> >>> ++    printf "#${indent}define $1"
-> >>> ++    while shift && [ "$#" -gt 0 ]; do
-> >>> ++      case "$1" in
-> >>> ++          -ffile-prefix-map=3D*|-fdebug-prefix-map=3D*|-fmacro-pref=
-ix-map=3D*)
-> >>> ++              ;;
-> >>> ++          *)
-> >>> ++              printf ' "%s"'$sep "$1"
-> >>> ++              ;;
-> >>> ++      esac
-> >>> ++    done
-> >>> ++    echo
-> >>> ++}
-> >>> ++
-> >>> + archs=3D""
-> >>> + arch_flag=3D""
-> >>> +
-> >>> +--- a/template/Makefile.in
-> >>> ++++ b/template/Makefile.in
-> >>> +@@ -666,7 +666,7 @@ mjit_config.h:
-> >>> +       quote "MJIT_OPTFLAGS   " $(MJIT_OPTFLAGS); \
-> >>> +       quote "MJIT_DEBUGFLAGS " $(MJIT_DEBUGFLAGS); \
-> >>> +       quote "MJIT_LDSHARED   " ; \
-> >>> +-      quote "MJIT_DLDFLAGS    MJIT_ARCHFLAG" $(MJIT_DLDFLAGS); \
-> >>> ++      quote_filtered "MJIT_DLDFLAGS    MJIT_ARCHFLAG" $(MJIT_DLDFLA=
-GS); \
-> >>> +       quote "MJIT_LIBS       " $(LIBRUBYARG_SHARED); \
-> >>> +       quote 'PRELOADENV       "@PRELOADENV@"'; \
-> >>> +       indent=3D$${archs:+'  '}; \
-> >>> diff --git a/meta/recipes-devtools/ruby/ruby_3.0.2.bb b/meta/recipes-=
-devtools/ruby/ruby_3.0.2.bb
-> >>> index 0b9c342def..38e594a59e 100644
-> >>> --- a/meta/recipes-devtools/ruby/ruby_3.0.2.bb
-> >>> +++ b/meta/recipes-devtools/ruby/ruby_3.0.2.bb
-> >>> @@ -6,6 +6,7 @@ SRC_URI +=3D " \
-> >>>              file://remove_has_include_macros.patch \
-> >>>              file://run-ptest \
-> >>>              file://0001-template-Makefile.in-do-not-write-host-cross=
--cc-item.patch \
-> >>> +           file://0002-template-Makefile.in-filter-out-f-prefix-map.=
-patch \
-> >>>              "
-> >>>
-> >>>   SRC_URI[sha256sum] =3D "5085dee0ad9f06996a8acec7ebea4a8735e6fac22f2=
-2e2d98c3f2bc3bef7e6f1"
-> >>> --
-> >>> 2.25.1
-> >>>
-> >
+<div class=3D"PlainText">&gt; On 8/10/21 6:55 AM, Andrej Valek wrote:<br>
+&gt;&gt; Upgrade thrift to version 0.14.2 due to remote security<br>
+&gt;&gt; vulnerability.<br>
+&gt; No specific security issues are mentioned in the other patches. This i=
+s a big jump and from what I can decode from their release notes. They depr=
+ecate many things between these two versions.<br>
+&gt;<br>
+&gt; Unless I can be convinced otherwise, this update is deemed outside the=
+ acceptable norms for a stable release.<br>
+&gt;<br>
+&gt; I think backport the specific security issues may be&nbsp; more approp=
+riate.<br>
+&gt;<br>
+&gt; thanks,<br>
+&gt; Armin<br>
+&gt;<br>
+&gt;&gt; Andrej Valek (2):<br>
+&gt;&gt;&nbsp;&nbsp; thrift: drop unsupported features<br>
+&gt;&gt;&nbsp;&nbsp; thrift: upgrade to 0.14.2<br>
+<font size=3D"2"><span style=3D"font-size:11pt">&gt;</span></font>&gt;<br>
+<font size=3D"2"><span style=3D"font-size:11pt">&gt;</span></font>&gt;&nbsp=
+; ...llationPaths.cmake-Define-libdir-in-terms.patch |&nbsp; 8 +++----<br>
+<font size=3D"2"><span style=3D"font-size:11pt">&gt;</span></font>&gt;&nbsp=
+; .../thrift/{thrift_0.13.0.bb =3D&gt; thrift_0.14.2.bb}&nbsp; | 26 +++++++=
++++------------<br>
+<font size=3D"2"><span style=3D"font-size:11pt">&gt;</span></font>&gt;&nbsp=
+; 2 files changed, 16 insertions(+), 18 deletions(-)<br>
+<font size=3D"2"><span style=3D"font-size:11pt">&gt;</span></font>&gt;&nbsp=
+; rename meta-oe/recipes-connectivity/thrift/{thrift_0.13.0.bb =3D&gt; thri=
+ft_0.14.2.bb} (72%)<br>
+<font size=3D"2"><span style=3D"font-size:11pt">&gt;</span></font>&gt;<br>
+<font size=3D"2"><span style=3D"font-size:11pt">&gt;</span></font>&gt;<br>
+<font size=3D"2"><span style=3D"font-size:11pt">&gt;</span></font>&gt; <br>
+<font size=3D"2"><span style=3D"font-size:11pt">&gt;</span></font>&gt;<br>
+<br>
+</div>
+</span></font></div>
+</body>
+</html>
+
+--_000_DB8PR10MB3977EF762ABBFA3785BECB3492F79DB8PR10MB3977EURP_--
