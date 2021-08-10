@@ -1,80 +1,80 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.5442.1628584282246156462
+Received: from relay12.mail.gandi.net (relay12.mail.gandi.net [217.70.178.232])
+ by mx.groups.io with SMTP id smtpd.web08.147.1628601529668036259
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Aug 2021 01:31:22 -0700
+ Tue, 10 Aug 2021 06:18:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=53578 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.93)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mDNAO-0005EL-GE; Tue, 10 Aug 2021 11:31:21 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
+ dkim=missing; spf=pass (domain: bootlin.com, ip: 217.70.178.232, mailfrom: michael.opdenacker@bootlin.com)
+Received: (Authenticated sender: michael.opdenacker@bootlin.com)
+	by relay12.mail.gandi.net (Postfix) with ESMTPSA id 11AC8200008;
+	Tue, 10 Aug 2021 13:18:46 +0000 (UTC)
+From: "Michael Opdenacker" <michael.opdenacker@bootlin.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-distro: Upgrade 1.5.0 -> 1.6.0
-Date: Tue, 10 Aug 2021 11:30:58 +0300
-Message-Id: <20210810083058.29524-5-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210810083058.29524-1-leon.anavi@konsulko.com>
-References: <20210810083058.29524-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Cc: Michael Opdenacker <michael.opdenacker@bootlin.com>
+Subject: [meta-oe][PATCH] opus-tools: update to 0.2 and fix license
+Date: Tue, 10 Aug 2021 15:18:36 +0200
+Message-Id: <20210810131836.137934-1-michael.opdenacker@bootlin.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release:
+The license in version 0.1.8 was already BSD-2-Clause and GPLv2
+(for the "opusinfo" command).
 
-BACKWARDS COMPATIBILITY:
-- Deprecated the distro.linux_distribution() function. Use
-  distro.id(), distro.version() and distro.name() instead
-- Deprecated Python 2.7, 3.4 and 3.5 support. Further releases
-  will only support Python 3.6+
-ENHANCEMENTS:
-- Added type hints to distro module
-- Added __version__ for checking distro version
-- Added support for arbitrary rootfs via the root_dir parameter
-- Added the --root-dir option to CLI
-- Added fallback to /usr/lib/os-release when /etc/os-release isn't
-  available
-BUG FIXES:
-- Fixed subprocess.CalledProcessError when running lsb_release
-- Ignore /etc/iredmail-release file while parsing distribution
-- Use a binary file for /dev/null to avoid TextIOWrapper overhead
-RELEASE:
-- Moved repository from nir0s/distro to python-distro/distro on
-  GitHub.
+The license checksum change is due to trivial changes on the license
+text ("https" instead of "http" and whitespace changes).
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+This new version now DEPENDs on "libopusenc" and "opusfile" too.
+
+Signed-off-by: Michael Opdenacker <michael.opdenacker@bootlin.com>
 ---
- .../{python3-distro_1.5.0.bb => python3-distro_1.6.0.bb}       | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-distro_1.5.0.bb => python3-distro_1.6.0.bb} (65%)
+ .../opus-tools/opus-tools_0.1.8.bb                | 15 ---------------
+ .../opus-tools/opus-tools_0.2.bb                  | 15 +++++++++++++++
+ 2 files changed, 15 insertions(+), 15 deletions(-)
+ delete mode 100644 meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb
+ create mode 100644 meta-oe/recipes-multimedia/opus-tools/opus-tools_0.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-distro_1.5.0.bb b/meta-python/recipes-devtools/python/python3-distro_1.6.0.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-distro_1.5.0.bb
-rename to meta-python/recipes-devtools/python/python3-distro_1.6.0.bb
-index aaaee0deee..8aa2255670 100644
---- a/meta-python/recipes-devtools/python/python3-distro_1.5.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-distro_1.6.0.bb
-@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
- 
- PYPI_PACKAGE = "distro"
- 
--SRC_URI[md5sum] = "0ed68b4064709bdaaf6cce69780ddc51"
--SRC_URI[sha256sum] = "0e58756ae38fbd8fc3020d54badb8eae17c5b9dcbed388b17bb55b8a5928df92"
-+SRC_URI[sha256sum] = "83f5e5a09f9c5f68f60173de572930effbcc0287bb84fdc4426cb4168c088424"
- 
- inherit pypi setuptools3
- 
+diff --git a/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb b/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb
+deleted file mode 100644
+index a84f2bf07..000000000
+--- a/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb
++++ /dev/null
+@@ -1,15 +0,0 @@
+-SUMMARY = "Opus Audio Tools"
+-HOMEPAGE = "http://www.opus-codec.org/"
+-
+-LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=843a066da9f1facfcc6ea6f616ffecb1"
+-
+-SRC_URI = "http://downloads.xiph.org/releases/opus/opus-tools-${PV}.tar.gz"
+-SRC_URI[md5sum] = "b424790eda9357a4df394e2d7ca19eac"
+-SRC_URI[sha256sum] = "e4e188579ea1c4e4d5066460d4a7214a7eafe3539e9a4466fdc98af41ba4a2f6"
+-
+-S = "${WORKDIR}/opus-tools-${PV}"
+-
+-DEPENDS = "libopus flac"
+-
+-inherit autotools pkgconfig
+diff --git a/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.2.bb b/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.2.bb
+new file mode 100644
+index 000000000..b5e6ed947
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.2.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "Opus Audio Tools"
++HOMEPAGE = "http://www.opus-codec.org/"
++
++LICENSE = "BSD-2-Clause & GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=79f6fc2a6239fbe5f6e52f20ac76698c"
++
++SRC_URI = "http://downloads.xiph.org/releases/opus/opus-tools-${PV}.tar.gz"
++SRC_URI[md5sum] = "ff2d0536e960cabbfb8ca7c8c1759b6c"
++SRC_URI[sha256sum] = "b4e56cb00d3e509acfba9a9b627ffd8273b876b4e2408642259f6da28fa0ff86"
++
++S = "${WORKDIR}/opus-tools-${PV}"
++
++DEPENDS = "libopus libopusenc flac opusfile"
++
++inherit autotools pkgconfig
 -- 
-2.17.1
+2.25.1
 
