@@ -1,130 +1,88 @@
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
- by mx.groups.io with SMTP id smtpd.web12.653.1628603957907458146
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web12.1394.1628606883083846057
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Aug 2021 06:59:18 -0700
+ Tue, 10 Aug 2021 07:48:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: siemens.com, ip: 192.35.17.2, mailfrom: andrej.valek@siemens.com)
-Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id 17ADx9Rg017242
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Tue, 10 Aug 2021 15:59:10 +0200
-Received: from dev.vm6.ccp.siemens.com ([144.145.220.58])
-	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id 17ADx96p026454;
-	Tue, 10 Aug 2021 15:59:09 +0200
-Received: from dev.localdomain (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 6B336950A87;
-	Tue, 10 Aug 2021 15:59:09 +0200 (CEST)
-From: "Andrej Valek" <andrej.valek@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: sakoman@gmail.com, Andrej Valek <andrej.valek@siemens.com>
-Subject: [dunfell][meta-oe][PATCH 2/2] thrift: upgrade to 0.14.2
-Date: Tue, 10 Aug 2021 15:59:06 +0200
-Message-Id: <20210810135906.13302-1-andrej.valek@siemens.com>
-X-Mailer: git-send-email 2.11.0
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=ebHi6fBd;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id a5so5643700plh.5
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Aug 2021 07:48:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=QUpDpwy6lfA2SS2Szjnrlq/1PNuNNMz+RHAFLOeoS8U=;
+        b=ebHi6fBdyTJ0wydonQvFizGNA58seuDYQGa9pnI2Bj0JPjdtAGulYeCLDFbEqQ8EGw
+         uCuNAQ/Kt9H41Z4FoYa7VzXUBDNWKvd9ZOdyxUiEyOzjGs2bgybXC/y3k+76CSwPZ08X
+         gv9//yMqXpX0eRG+d0CmH4KRT8y7JQuVtkAxVCf6ykOaGF0ZRVSLL1WLZPUm9W46M6Of
+         l/JP27WbwiBKPPRKiwFn2TwtDz22zZQ5j1IgYyTMvDfzSxxSr0FlC1tbHUSo/5szyF7i
+         6qr0ZpI6DY/lZwDgbiDEPFIzfEGZeBvXtTDjrKP0NglLmrrV+wWip/LGqkwQ7s5BsNDJ
+         uIVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=QUpDpwy6lfA2SS2Szjnrlq/1PNuNNMz+RHAFLOeoS8U=;
+        b=G34a9LmKCSziRcFTersW9W0vengiqMu/fmV2OSzovb4wPqMaW5mI7GONnMo4Gsv6zM
+         z1Hlf6sZee1BSPGQvkS64SwDlcZedgtyIS3N6oEhg3q4vJc3S8y4U0J7txovypqxUWAU
+         L6CqZnNpj2DrXe0qT6rzp1W0uaSA8X3Y9FQXXTs4rZje+tERVmHiM+S/UVYgOl4QZdHY
+         8trvd0HW4mPE/+4LzIT69mSXnr8KzPr2eEdJxEZSfsWjQ/usx4t7KhAmA0KJogYdaslG
+         nLcnio17fEjUZg/u4X0xkPt3r3rnoyObWubKzIXuVGVbguyJaLUOTMYVMGtvVmKqdsfS
+         A7Ig==
+X-Gm-Message-State: AOAM531h+1TIeaImL8s2HbP/6jQkO8uWfMybFcvZ+cA5oEM2wBTaTh63
+	yYM3CUtEfdr3C3V+IlB34XI=
+X-Google-Smtp-Source: ABdhPJwGkCeQUKswED1XEAwqiQ70B5d6hRUtex7oKOKmVC0X+WpJAJlpdn4ry0V2R5aNisPAvoRnUg==
+X-Received: by 2002:a17:90a:ad06:: with SMTP id r6mr5292032pjq.25.1628606882578;
+        Tue, 10 Aug 2021 07:48:02 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:32d:5eba:f55b:c5d7? ([2601:202:4180:a5c0:32d:5eba:f55b:c5d7])
+        by smtp.gmail.com with ESMTPSA id m17sm24017020pfh.133.2021.08.10.07.48.01
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 10 Aug 2021 07:48:02 -0700 (PDT)
+Subject: Re: [oe] [dunfell][meta-oe][PATCH 0/2] thrift upgrade
+To: Andrej Valek <andrej.valek@siemens.com>,
+ openembedded-devel@lists.openembedded.org
+Cc: sakoman@gmail.com
+References: <20210810135555.12946-1-andrej.valek@siemens.com>
+From: "Armin Kuster" <akuster808@gmail.com>
+Message-ID: <c2bc6f71-3c98-f24b-dddc-d5078f173449@gmail.com>
+Date: Tue, 10 Aug 2021 07:48:01 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
+MIME-Version: 1.0
+In-Reply-To: <20210810135555.12946-1-andrej.valek@siemens.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-License-Update: Added new sections for new files
 
-Configuration changes:
- - BUILD_EXAMPLES - does not exist anymore
- - WITH_SHARED_LIB -> BUILD_SHARED_LIBS, WITH_STATIC_LIB are not to be
- allowed together
- - WITH_AS3=OFF - adobe action script 3 not available
 
-Added new options (disabled by default):
- - javascript, nodejs
+On 8/10/21 6:55 AM, Andrej Valek wrote:
+> Upgrade thrift to version 0.14.2 due to remote security
+> vulnerability.
+No specific security issues are mentioned in the other patches. This is
+a big jump and from what I can decode from their release notes. They
+deprecate many things between these two versions.
 
-Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
----
- ...llationPaths.cmake-Define-libdir-in-terms.patch |  8 ++++----
- .../thrift/{thrift_0.13.0.bb => thrift_0.14.2.bb}  | 22 ++++++++++++----------
- 2 files changed, 16 insertions(+), 14 deletions(-)
- rename meta-oe/recipes-connectivity/thrift/{thrift_0.13.0.bb => thrift_0.14.2.bb} (72%)
+Unless I can be convinced otherwise, this update is deemed outside the
+acceptable norms for a stable release.
 
-diff --git a/meta-oe/recipes-connectivity/thrift/thrift/0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch b/meta-oe/recipes-connectivity/thrift/thrift/0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch
-index 485d7a4b0..e1e474ab0 100644
---- a/meta-oe/recipes-connectivity/thrift/thrift/0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch
-+++ b/meta-oe/recipes-connectivity/thrift/thrift/0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch
-@@ -12,9 +12,9 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
- --- a/build/cmake/DefineInstallationPaths.cmake
- +++ b/build/cmake/DefineInstallationPaths.cmake
--@@ -22,11 +22,11 @@
-- set(BIN_INSTALL_DIR "bin" CACHE PATH "The binary install dir (default: bin)")
-- set(LIB_INSTALL_DIR "lib${LIB_SUFFIX}" CACHE PATH "The library install dir (default: lib${LIB_SUFFIX})")
-+@@ -26,11 +26,11 @@
-+     set(LIB_INSTALL_DIR "lib${LIB_SUFFIX}" CACHE PATH "The library install dir (default: lib${LIB_SUFFIX})")
-+ endif()
-  set(INCLUDE_INSTALL_DIR "include" CACHE PATH "The library install dir (default: include)")
- -set(CMAKE_INSTALL_DIR "lib/cmake" CACHE PATH "The subdirectory to install cmake config files (default: cmake)")
- -set(PKGCONFIG_INSTALL_DIR "lib/pkgconfig" CACHE PATH "The subdirectory to install pkgconfig config files (default: lib/pkgconfig)")
-@@ -29,7 +29,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  set(cmakedir "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DIR}")
- --- a/build/cmake/DefineCMakeDefaults.cmake
- +++ b/build/cmake/DefineCMakeDefaults.cmake
--@@ -44,8 +44,8 @@ include(BuildType)
-+@@ -44,8 +44,8 @@
-  # top of the build tree rather than in hard-to-find leaf
-  # directories. This simplifies manual testing and the use of the build
-  # tree rather than installed thrift libraries.
-diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.13.0.bb b/meta-oe/recipes-connectivity/thrift/thrift_0.14.2.bb
-similarity index 72%
-rename from meta-oe/recipes-connectivity/thrift/thrift_0.13.0.bb
-rename to meta-oe/recipes-connectivity/thrift/thrift_0.14.2.bb
-index e3880b357..435e5934e 100644
---- a/meta-oe/recipes-connectivity/thrift/thrift_0.13.0.bb
-+++ b/meta-oe/recipes-connectivity/thrift/thrift_0.14.2.bb
-@@ -3,16 +3,16 @@ DESCRIPTION =  "A software framework, for scalable cross-language services devel
- HOMEPAGE = "https://thrift.apache.org/"
- 
- LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=394465e125cffc0f133695ed43f14047 \
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=c40a383cb3f747e0c7abbf1482f194f0 \
-                     file://NOTICE;md5=2659b43daca219f99a2f2626ea128f73"
- 
--DEPENDS = "thrift-native boost flex-native bison-native openssl"
-+DEPENDS = "thrift-native boost flex-native bison-native openssl zlib"
- 
- SRC_URI = "https://www-eu.apache.org/dist/thrift//${PV}/${BPN}-${PV}.tar.gz \
-            file://0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch \
-           "
--SRC_URI[md5sum] = "38a27d391a2b03214b444cb13d5664f1"
--SRC_URI[sha256sum] = "7ad348b88033af46ce49148097afe354d513c1fca7c607b59c33ebb6064b5179"
-+SRC_URI[md5sum] = "284a48df355aa3910687ee9b894d3ae8"
-+SRC_URI[sha256sum] = "4191bfc0b7490e20cc69f9f4dc6e991fbb612d4551aa9eef1dbf7f4c47ce554d"
- 
- BBCLASSEXTEND = "native nativesdk"
- 
-@@ -25,22 +25,24 @@ export HOST_SYS
- 
- EXTRA_OECMAKE = " \
-     -DBUILD_LIBRARIES=ON \
-+    -DBUILD_SHARED_LIBS=ON \
-     -DBUILD_COMPILER=ON \
-     -DBUILD_TESTING=OFF \
--    -DBUILD_EXAMPLES=OFF \
-     -DBUILD_TUTORIALS=OFF \
-+    -DWITH_AS3=OFF \
-     -DWITH_CPP=ON \
-     -DWITH_JAVA=OFF \
--    -DWITH_PYTHON=OFF \
--    -DWITH_STATIC_LIB=ON \
--    -DWITH_SHARED_LIB=ON \
-     -DWITH_OPENSSL=ON \
-     -DWITH_QT5=OFF \
-+    -DWITH_ZLIB=ON \
- "
- 
--PACKAGECONFIG ??= "libevent glib"
--PACKAGECONFIG[libevent] = "-DWITH_LIBEVENT=ON,-DWITH_LIBEVENT=OFF,libevent"
-+PACKAGECONFIG ??= "glib libevent"
- PACKAGECONFIG[glib] = "-DWITH_C_GLIB=ON,-DWITH_C_GLIB=OFF,glib-2.0"
-+PACKAGECONFIG[libevent] = "-DWITH_LIBEVENT=ON,-DWITH_LIBEVENT=OFF,libevent"
-+PACKAGECONFIG[javascript] = "-DWITH_JAVASCRIPT=ON,-DWITH_JAVASCRIPT=OFF,nodejs"
-+PACKAGECONFIG[nodejs] = "-DWITH_NODEJS=ON,-DWITH_NODEJS=OFF,nodejs"
-+PACKAGECONFIG[python] = "-DWITH_PYTHON=ON,-DWITH_PYTHON=OFF,python"
- 
- do_install_append () {
-     ln -sf thrift ${D}/${bindir}/thrift-compiler
--- 
-2.11.0
+I think backport the specific security issues may be  more appropriate.
+
+thanks,
+Armin
+
+> Andrej Valek (2):
+>   thrift: drop unsupported features
+>   thrift: upgrade to 0.14.2
+>
+>  ...llationPaths.cmake-Define-libdir-in-terms.patch |  8 +++----
+>  .../thrift/{thrift_0.13.0.bb => thrift_0.14.2.bb}  | 26 ++++++++++------------
+>  2 files changed, 16 insertions(+), 18 deletions(-)
+>  rename meta-oe/recipes-connectivity/thrift/{thrift_0.13.0.bb => thrift_0.14.2.bb} (72%)
+>
+>
+> 
+>
 
