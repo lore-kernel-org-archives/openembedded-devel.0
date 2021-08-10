@@ -1,131 +1,96 @@
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web10.1524.1628621508681219837
+Received: from mail.cybernetics.com (mail.cybernetics.com [173.71.130.66])
+ by mx.groups.io with SMTP id smtpd.web10.188.1628624664257219966
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Aug 2021 11:51:49 -0700
+ Tue, 10 Aug 2021 12:44:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: ttasciog@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 17AIpkIt020012
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Aug 2021 11:51:46 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 17AIpk3R021146
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Aug 2021 11:51:46 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Tue, 10 Aug 2021 11:51:45 -0700
-Received: from ala-lpggp3.wrs.com (147.11.105.124) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Tue, 10 Aug 2021 11:51:45 -0700
-Received: by ala-lpggp3.wrs.com (Postfix, from userid 21862)
-	id 896F3900AE9; Tue, 10 Aug 2021 11:51:45 -0700 (PDT)
-From: "Tony Tascioglu" <tony.tascioglu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <randy.macleod@windriver.com>, <tony.tascioglu@windriver.com>
-Subject: [meta-oe][hardknott][PATCH] redis: fix CVE-2021-32625
-Date: Tue, 10 Aug 2021 11:51:45 -0700
-Message-ID: <20210810185145.37642-1-tony.tascioglu@windriver.com>
-X-Mailer: git-send-email 2.31.1
+ dkim=fail reason="body hash did not verify" header.i=@cybernetics.com header.s=mail header.b=LENJEq0m;
+ spf=pass (domain: cybernetics.com, ip: 173.71.130.66, mailfrom: btv1==856402cf7a3==tonyb@cybernetics.com)
+X-ASG-Debug-ID: 1628624661-0fb3b001bfb7240001-aWHRdb
+Received: from cybernetics.com ([10.10.4.126]) by mail.cybernetics.com with ESMTP id skOGVZIRu7zS8ISg; Tue, 10 Aug 2021 15:44:21 -0400 (EDT)
+X-Barracuda-Envelope-From: tonyb@cybernetics.com
+X-Barracuda-RBL-Trusted-Forwarder: 10.10.4.126
+X-ASG-Whitelist: Client
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=cybernetics.com; s=mail;
+	bh=C8g0maV3oQyRGdlOX5qTPs2gpmFtQlqp6UsklmiaRGc=;
+	h=Content-Language:Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject; b=LENJEq0mfZQqwHt
+	LXdDohIVsHL80cYg3iNH87dQmaRM9E4RFpOTLfpVowL7MiYO+WNEhqPtNKZXogKWJUHvlHEy0/g8w
+	jZyGyUKy+MdiREEooITnrDZqJQh5lkSBMWZCmtoKsxprCFK9MVq0Rp3JjR7SAp52rwzzoyE8cU6OH
+	d8=
+Received: from [10.157.2.224] (HELO [192.168.200.1])
+  by cybernetics.com (CommuniGate Pro SMTP 6.2.14)
+  with ESMTPS id 11061808; Tue, 10 Aug 2021 15:44:21 -0400
+Subject: [meta-oe][master][PATCH] tcsh: fix compile error after LDFLAGS change
+X-Barracuda-RBL-Trusted-Forwarder: 10.157.2.224
+To: Khem Raj <raj.khem@gmail.com>,
+ openembeded-devel <openembedded-devel@lists.openembedded.org>
+X-ASG-Orig-Subj: [meta-oe][master][PATCH] tcsh: fix compile error after LDFLAGS change
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>,
+ Randy MacLeod <randy.macleod@windriver.com>,
+ Patches and discussions about the oe-core layer
+ <openembedded-core@lists.openembedded.org>
+References: <2efeecad-7ee5-126c-9271-d69fc3428c38@cybernetics.com>
+ <447d4fa9-b915-4e59-0ecc-64d41c6ceee6@windriver.com>
+ <22d7a9866471f53ea283caa1578fbf0b48d5e113.camel@linuxfoundation.org>
+ <a0c4c23d-7437-ce14-066f-0f7f6929a987@cybernetics.com>
+ <040fe5d8cd3914e7c19fc70ae6d18894b07f8073.camel@linuxfoundation.org>
+ <6bb55159-9b49-3229-a15c-eee730560fb7@cybernetics.com>
+ <5e21ec72-667f-6e48-eefc-843312544fe4@cybernetics.com>
+ <CAMKF1srcLEBkk1udvadr1xeh8qsgr-i-8+hT_ZvL-2Nak-tsjg@mail.gmail.com>
+ <17ef7e32-fe38-6e02-8d65-ee1518a38e82@cybernetics.com>
+ <ead673c1-a9dd-613e-1d7c-6fcc6cf96eca@gmail.com>
+ <CAMKF1soO1vifStLgeOH31-UnCUePNi9s_F1ifPsWJHR=qzkgxQ@mail.gmail.com>
+From: "Tony Battersby" <tonyb@cybernetics.com>
+Message-ID: <b8e3c972-3d43-1a40-1bbe-bc4fe12dd021@cybernetics.com>
+Date: Tue, 10 Aug 2021 15:44:21 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+In-Reply-To: <CAMKF1soO1vifStLgeOH31-UnCUePNi9s_F1ifPsWJHR=qzkgxQ@mail.gmail.com>
+X-Barracuda-Connect: UNKNOWN[10.10.4.126]
+X-Barracuda-Start-Time: 1628624661
+X-Barracuda-URL: https://10.10.4.122:443/cgi-mod/mark.cgi
+X-Barracuda-BRTS-Status: 1
+X-Virus-Scanned: by bsmtpd at cybernetics.com
+X-Barracuda-Scan-Msg-Size: 1048
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-CVE: CVE-2021-32625
-Upstream-Status: Backport [e9a1438ac4c52aa68dfa2a8324b6419356842116]
+Adding -f*-prefix-map to LDFLAGS caused the following issue when
+compiling tcsh on Ubuntu 18.04:
 
-Fix integer overflow in STRALGO LCS (CVE-2021-32625) (#9011)
-An integer overflow bug in Redis version 6.0 or newer can be exploited using the
-STRALGO LCS command to corrupt the heap and potentially result with remote code
-execution. This is a result of an incomplete fix by CVE-2021-29477.
+gcc: error: unrecognized command line option =E2=80=98-fmacro-prefix-map=3D=
+...=E2=80=99
 
-Signed-off-by: Tony Tascioglu <tony.tascioglu@windriver.com>
+Fix by using BUILD_LDFLAGS instead of LDFLAGS for gethost.
+
+[YOCTO #14481]
+
+Signed-off-by: Tony Battersby <tonyb@cybernetics.com>
 ---
- .../redis/redis/fix-CVE-2021-32625.patch      | 61 +++++++++++++++++++
- meta-oe/recipes-extended/redis/redis_6.2.2.bb |  1 +
- 2 files changed, 62 insertions(+)
- create mode 100644 meta-oe/recipes-extended/redis/redis/fix-CVE-2021-32625.patch
 
-diff --git a/meta-oe/recipes-extended/redis/redis/fix-CVE-2021-32625.patch b/meta-oe/recipes-extended/redis/redis/fix-CVE-2021-32625.patch
-new file mode 100644
-index 000000000..6311a5db1
---- /dev/null
-+++ b/meta-oe/recipes-extended/redis/redis/fix-CVE-2021-32625.patch
-@@ -0,0 +1,61 @@
-+From e9a1438ac4c52aa68dfa2a8324b6419356842116 Mon Sep 17 00:00:00 2001
-+From: Oran Agra <oran@redislabs.com>
-+Date: Tue, 1 Jun 2021 09:12:45 +0300
-+Subject: [PATCH] Fix integer overflow in STRALGO LCS (CVE-2021-32625) (#9011)
-+
-+An integer overflow bug in Redis version 6.0 or newer can be exploited using the
-+STRALGO LCS command to corrupt the heap and potentially result with remote code
-+execution. This is a result of an incomplete fix by CVE-2021-29477.
-+
-+(cherry picked from commit 1ddecf1958924b178b76a31d989ef1e05af81964)
-+
-+
-+CVE: CVE-2021-32625
-+Upstream-Status: Backport [e9a1438ac4c52aa68dfa2a8324b6419356842116]
-+
-+Signed-off-by: Tony Tascioglu <tony.tascioglu@windriver.com>
-+---
-+ src/t_string.c | 18 +++++++++++++++++-
-+ 1 file changed, 17 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/t_string.c b/src/t_string.c
-+index 490d5983a..587d3aeb8 100644
-+--- a/src/t_string.c
-++++ b/src/t_string.c
-+@@ -797,6 +797,12 @@ void stralgoLCS(client *c) {
-+         goto cleanup;
-+     }
-+ 
-++    /* Detect string truncation or later overflows. */
-++    if (sdslen(a) >= UINT32_MAX-1 || sdslen(b) >= UINT32_MAX-1) {
-++        addReplyError(c, "String too long for LCS");
-++        goto cleanup;
-++    }
-++
-+     /* Compute the LCS using the vanilla dynamic programming technique of
-+      * building a table of LCS(x,y) substrings. */
-+     uint32_t alen = sdslen(a);
-+@@ -805,9 +811,19 @@ void stralgoLCS(client *c) {
-+     /* Setup an uint32_t array to store at LCS[i,j] the length of the
-+      * LCS A0..i-1, B0..j-1. Note that we have a linear array here, so
-+      * we index it as LCS[j+(blen+1)*j] */
-+-    uint32_t *lcs = zmalloc((size_t)(alen+1)*(blen+1)*sizeof(uint32_t));
-+     #define LCS(A,B) lcs[(B)+((A)*(blen+1))]
-+ 
-++    /* Try to allocate the LCS table, and abort on overflow or insufficient memory. */
-++    unsigned long long lcssize = (unsigned long long)(alen+1)*(blen+1); /* Can't overflow due to the size limits above. */
-++    unsigned long long lcsalloc = lcssize * sizeof(uint32_t);
-++    uint32_t *lcs = NULL;
-++    if (lcsalloc < SIZE_MAX && lcsalloc / lcssize == sizeof(uint32_t))
-++        lcs = ztrymalloc(lcsalloc);
-++    if (!lcs) {
-++        addReplyError(c, "Insufficient memory");
-++        goto cleanup;
-++    }
-++
-+     /* Start building the LCS table. */
-+     for (uint32_t i = 0; i <= alen; i++) {
-+         for (uint32_t j = 0; j <= blen; j++) {
-+-- 
-+2.32.0
-+
-diff --git a/meta-oe/recipes-extended/redis/redis_6.2.2.bb b/meta-oe/recipes-extended/redis/redis_6.2.2.bb
-index a36c190af..a9e6eaffa 100644
---- a/meta-oe/recipes-extended/redis/redis_6.2.2.bb
-+++ b/meta-oe/recipes-extended/redis/redis_6.2.2.bb
-@@ -18,6 +18,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://0006-Define-correct-gregs-for-RISCV32.patch \
-            file://fix-CVE-2021-29477.patch \
-            file://fix-CVE-2021-29478.patch \
-+           file://fix-CVE-2021-32625.patch \
-            "
- SRC_URI[sha256sum] = "7a260bb74860f1b88c3d5942bf8ba60ca59f121c6dce42d3017bed6add0b9535"
- 
--- 
-2.31.1
+NOTE: tested only on Ubuntu 20.04.
+
+ meta-oe/recipes-shells/tcsh/tcsh_6.22.04.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-shells/tcsh/tcsh_6.22.04.bb b/meta-oe/recipe=
+s-shells/tcsh/tcsh_6.22.04.bb
+index ac6c6db81..c4da5cd83 100644
+--- a/meta-oe/recipes-shells/tcsh/tcsh_6.22.04.bb
++++ b/meta-oe/recipes-shells/tcsh/tcsh_6.22.04.bb
+@@ -20,7 +20,7 @@ EXTRA_OEMAKE +=3D "CC_FOR_GETHOST=3D'${BUILD_CC}'"
+ inherit autotools
+=20
+ do_compile:prepend() {
+-    oe_runmake CC_FOR_GETHOST=3D'${BUILD_CC}' CFLAGS=3D'${BUILD_CFLAGS}'=
+ gethost
++    oe_runmake CC_FOR_GETHOST=3D'${BUILD_CC}' CFLAGS=3D'${BUILD_CFLAGS}'=
+ LDFLAGS=3D'${BUILD_LDFLAGS}' gethost
+ }
+=20
+ do_install:append () {
+--=20
+2.25.1
 
