@@ -1,96 +1,74 @@
-Received: from mail.cybernetics.com (mail.cybernetics.com [173.71.130.66])
- by mx.groups.io with SMTP id smtpd.web10.188.1628624664257219966
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web12.296.1628625145018508910
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Aug 2021 12:44:24 -0700
+ Tue, 10 Aug 2021 12:52:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@cybernetics.com header.s=mail header.b=LENJEq0m;
- spf=pass (domain: cybernetics.com, ip: 173.71.130.66, mailfrom: btv1==856402cf7a3==tonyb@cybernetics.com)
-X-ASG-Debug-ID: 1628624661-0fb3b001bfb7240001-aWHRdb
-Received: from cybernetics.com ([10.10.4.126]) by mail.cybernetics.com with ESMTP id skOGVZIRu7zS8ISg; Tue, 10 Aug 2021 15:44:21 -0400 (EDT)
-X-Barracuda-Envelope-From: tonyb@cybernetics.com
-X-Barracuda-RBL-Trusted-Forwarder: 10.10.4.126
-X-ASG-Whitelist: Client
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=cybernetics.com; s=mail;
-	bh=C8g0maV3oQyRGdlOX5qTPs2gpmFtQlqp6UsklmiaRGc=;
-	h=Content-Language:Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject; b=LENJEq0mfZQqwHt
-	LXdDohIVsHL80cYg3iNH87dQmaRM9E4RFpOTLfpVowL7MiYO+WNEhqPtNKZXogKWJUHvlHEy0/g8w
-	jZyGyUKy+MdiREEooITnrDZqJQh5lkSBMWZCmtoKsxprCFK9MVq0Rp3JjR7SAp52rwzzoyE8cU6OH
-	d8=
-Received: from [10.157.2.224] (HELO [192.168.200.1])
-  by cybernetics.com (CommuniGate Pro SMTP 6.2.14)
-  with ESMTPS id 11061808; Tue, 10 Aug 2021 15:44:21 -0400
-Subject: [meta-oe][master][PATCH] tcsh: fix compile error after LDFLAGS change
-X-Barracuda-RBL-Trusted-Forwarder: 10.157.2.224
-To: Khem Raj <raj.khem@gmail.com>,
- openembeded-devel <openembedded-devel@lists.openembedded.org>
-X-ASG-Orig-Subj: [meta-oe][master][PATCH] tcsh: fix compile error after LDFLAGS change
-Cc: Richard Purdie <richard.purdie@linuxfoundation.org>,
- Randy MacLeod <randy.macleod@windriver.com>,
- Patches and discussions about the oe-core layer
- <openembedded-core@lists.openembedded.org>
-References: <2efeecad-7ee5-126c-9271-d69fc3428c38@cybernetics.com>
- <447d4fa9-b915-4e59-0ecc-64d41c6ceee6@windriver.com>
- <22d7a9866471f53ea283caa1578fbf0b48d5e113.camel@linuxfoundation.org>
- <a0c4c23d-7437-ce14-066f-0f7f6929a987@cybernetics.com>
- <040fe5d8cd3914e7c19fc70ae6d18894b07f8073.camel@linuxfoundation.org>
- <6bb55159-9b49-3229-a15c-eee730560fb7@cybernetics.com>
- <5e21ec72-667f-6e48-eefc-843312544fe4@cybernetics.com>
- <CAMKF1srcLEBkk1udvadr1xeh8qsgr-i-8+hT_ZvL-2Nak-tsjg@mail.gmail.com>
- <17ef7e32-fe38-6e02-8d65-ee1518a38e82@cybernetics.com>
- <ead673c1-a9dd-613e-1d7c-6fcc6cf96eca@gmail.com>
- <CAMKF1soO1vifStLgeOH31-UnCUePNi9s_F1ifPsWJHR=qzkgxQ@mail.gmail.com>
-From: "Tony Battersby" <tonyb@cybernetics.com>
-Message-ID: <b8e3c972-3d43-1a40-1bbe-bc4fe12dd021@cybernetics.com>
-Date: Tue, 10 Aug 2021 15:44:21 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=iWXUZCW7;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: geoffhp@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id u13-20020a17090abb0db0290177e1d9b3f7so5841727pjr.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Aug 2021 12:52:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=jjPjqZvVLNszNhASbc6yRD8IW8S64S19uL40dPmjKys=;
+        b=iWXUZCW7+55lCercrGcPRpAenP7DixxlEvPU+018UM0FAOrumrvA4FR+sFnGWZrxEc
+         LDB78VCOtiNBa443viKo5mLJ+GiXzueQCvPqF93bn2t83ujkkLzGljcmkfc6rLFCva0X
+         z0dSYwQpTM+aAIpq4K4obhcu/se9o/9RJ/J/s29ufMG2wupUYR16SMtSVTUo22Pi/2ck
+         SiK5eJzSemgojsBsuQqPQdIymgJ4T9yAZQXCqj/CM2Y+88BJ1DrTN7yrsW5qsqzgsitc
+         7c81yE/G6qtC/2ZRMgRCUw3RoAdE9M/cG+eGQj0eB01r/P0Yw5I2UzRKuZ35cnCS7zgy
+         HGJA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=jjPjqZvVLNszNhASbc6yRD8IW8S64S19uL40dPmjKys=;
+        b=YfSzeXdxMIAWaehvaZi7vlzFsria0Xt4xHBFnaqy6vIYZlgaF3EBuUPD7JC+pA3928
+         lnd5lUCs5kghMAEXS0ddScsXvE/EK8WEd+SSpdiu+b1maAfcyCeNXIU4Ruhl69g6B9i1
+         T27t/Of5les9CyQpbLXQwFtXTqkHvKJd4W14wRJH+qBLav3hmib7fnR/qlMJvmJD2K4k
+         pKqfU5eeZEIGl93pslHm3ZTqdkZbMsDrgQkbGNRu5CMvGRxcpsLnkm+UosKnhF6kiQzh
+         EsdpxqA4pF5QqJfeeaZI61JJHeL/8isORzrfjnBEdTjN44usEhc/MWSEJCnRoFxKG7nK
+         XSDA==
+X-Gm-Message-State: AOAM530YUxIAweyxmH+wi0apRGmBqzq/lKhoRZoG/kuRAtHcbU7h8B8W
+	cSazVv5LSvnHQqCfMsEehtxku8Yk/bf2HA==
+X-Google-Smtp-Source: ABdhPJwqJWq6yL5EfdwzQfjMFlK1iBV+3Y3Mr/IHbAhVexQJfAcnPLQ2LEaRuruneo/EGhgR7PIZfQ==
+X-Received: by 2002:a65:6553:: with SMTP id a19mr424024pgw.8.1628625144281;
+        Tue, 10 Aug 2021 12:52:24 -0700 (PDT)
+Return-Path: <geoffhp@gmail.com>
+Received: from localhost.localdomain (cpe-107-185-48-203.socal.res.rr.com. [107.185.48.203])
+        by smtp.gmail.com with ESMTPSA id y12sm30641889pgk.7.2021.08.10.12.52.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 10 Aug 2021 12:52:24 -0700 (PDT)
+From: "Geoff Parker" <geoffhp@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Geoff Parker <geoffrey.parker@arthrex.com>
+Subject: [PATCH] cifs-utils: typo fix fakse --> false
+Date: Tue, 10 Aug 2021 12:52:00 -0700
+Message-Id: <20210810195200.2360151-1-geoffhp@gmail.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1soO1vifStLgeOH31-UnCUePNi9s_F1ifPsWJHR=qzkgxQ@mail.gmail.com>
-X-Barracuda-Connect: UNKNOWN[10.10.4.126]
-X-Barracuda-Start-Time: 1628624661
-X-Barracuda-URL: https://10.10.4.122:443/cgi-mod/mark.cgi
-X-Barracuda-BRTS-Status: 1
-X-Virus-Scanned: by bsmtpd at cybernetics.com
-X-Barracuda-Scan-Msg-Size: 1048
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Adding -f*-prefix-map to LDFLAGS caused the following issue when
-compiling tcsh on Ubuntu 18.04:
+From: Geoff Parker <geoffrey.parker@arthrex.com>
 
-gcc: error: unrecognized command line option =E2=80=98-fmacro-prefix-map=3D=
-...=E2=80=99
-
-Fix by using BUILD_LDFLAGS instead of LDFLAGS for gethost.
-
-[YOCTO #14481]
-
-Signed-off-by: Tony Battersby <tonyb@cybernetics.com>
+Signed-off-by: Geoff Parker <geoffrey.parker@arthrex.com>
 ---
-
-NOTE: tested only on Ubuntu 20.04.
-
- meta-oe/recipes-shells/tcsh/tcsh_6.22.04.bb | 2 +-
+ meta-networking/recipes-support/cifs/cifs-utils_6.13.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-shells/tcsh/tcsh_6.22.04.bb b/meta-oe/recipe=
-s-shells/tcsh/tcsh_6.22.04.bb
-index ac6c6db81..c4da5cd83 100644
---- a/meta-oe/recipes-shells/tcsh/tcsh_6.22.04.bb
-+++ b/meta-oe/recipes-shells/tcsh/tcsh_6.22.04.bb
-@@ -20,7 +20,7 @@ EXTRA_OEMAKE +=3D "CC_FOR_GETHOST=3D'${BUILD_CC}'"
- inherit autotools
-=20
- do_compile:prepend() {
--    oe_runmake CC_FOR_GETHOST=3D'${BUILD_CC}' CFLAGS=3D'${BUILD_CFLAGS}'=
- gethost
-+    oe_runmake CC_FOR_GETHOST=3D'${BUILD_CC}' CFLAGS=3D'${BUILD_CFLAGS}'=
- LDFLAGS=3D'${BUILD_LDFLAGS}' gethost
+diff --git a/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb b/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb
+index 54aa3ce19..a8d3e91eb 100644
+--- a/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb
++++ b/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb
+@@ -26,7 +26,7 @@ do_configure:prepend() {
+     # want installed to /usr/sbin rather than /sbin to be DISTRO_FEATURES usrmerge compliant
+     # must override ROOTSBINDIR (default '/sbin'),
+     # setting --exec-prefix or --prefix in EXTRA_OECONF does not work
+-    if ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','true','fakse',d)}; then
++    if ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','true','false',d)}; then
+         export ROOTSBINDIR=${sbindir}
+     fi
  }
-=20
- do_install:append () {
---=20
-2.25.1
+-- 
+2.30.2
 
