@@ -1,66 +1,101 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.5201.1628673357828446836
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web10.5369.1628674892417376114
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Aug 2021 02:15:58 -0700
+ Wed, 11 Aug 2021 02:41:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=50486 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.93)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mDkKz-0001XG-TP; Wed, 11 Aug 2021 12:15:56 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-apply-defaults: Upgrade 0.1.4 -> 0.1.6
-Date: Wed, 11 Aug 2021 12:15:30 +0300
-Message-Id: <20210811091530.26594-5-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210811091530.26594-1-leon.anavi@konsulko.com>
-References: <20210811091530.26594-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: mingli.yu@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 17B9fUDS009297
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 11 Aug 2021 02:41:31 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Wed, 11 Aug 2021 02:41:30 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Wed, 11 Aug 2021 02:41:29 -0700
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] jemalloc: add ptest support
+Date: Wed, 11 Aug 2021 17:38:41 +0800
+Message-ID: <20210811093841.2184-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.29.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Upgrade to release 0.1.6:
+From: Mingli Yu <mingli.yu@windriver.com>
 
-- Alias imports in __init__.py, so that mypy considers them
-  re-exported.
-- Use mypy with the --strict flag.
-- Added Github Actions to the repo.
-- Add .pre-commit-config.yml
+Add ptest support.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- ...apply-defaults_0.1.4.bb => python3-apply-defaults_0.1.6.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-apply-defaults_0.1.4.bb => python3-apply-defaults_0.1.6.bb} (69%)
+ .../recipes-devtools/jemalloc/files/run-ptest | 19 +++++++++++++++++++
+ .../jemalloc/jemalloc_5.2.1.bb                | 17 ++++++++++++++++-
+ 2 files changed, 35 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/jemalloc/files/run-ptest
 
-diff --git a/meta-python/recipes-devtools/python/python3-apply-defaults_0.1.4.bb b/meta-python/recipes-devtools/python/python3-apply-defaults_0.1.6.bb
-similarity index 69%
-rename from meta-python/recipes-devtools/python/python3-apply-defaults_0.1.4.bb
-rename to meta-python/recipes-devtools/python/python3-apply-defaults_0.1.6.bb
-index 7889f0c62a..6bf61cfcd3 100644
---- a/meta-python/recipes-devtools/python/python3-apply-defaults_0.1.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-apply-defaults_0.1.6.bb
-@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c89120516900f96f4c60d35fdc4c3f15"
+diff --git a/meta-oe/recipes-devtools/jemalloc/files/run-ptest b/meta-oe/recipes-devtools/jemalloc/files/run-ptest
+new file mode 100644
+index 000000000..ea9d80cbb
+--- /dev/null
++++ b/meta-oe/recipes-devtools/jemalloc/files/run-ptest
+@@ -0,0 +1,19 @@
++#!/bin/sh
++
++saved_dir=$PWD
++for dir in tests/* ; do
++	cd $dir
++	for atest in * ; do
++		if [ \( -x $atest \) -a \( -f $atest \) ] ; then
++			./$atest > ${atest}.stdout 2> ${atest}.stderr
++			if [ $? = 0 ] ; then
++				echo "PASS: $dir $atest"
++				rm ${atest}.stdout ${atest}.stderr
++			else
++				echo "FAIL: ${dir}/${atest}"
++			fi
++		fi
++	done
++	cd $saved_dir
++done
++
+diff --git a/meta-oe/recipes-devtools/jemalloc/jemalloc_5.2.1.bb b/meta-oe/recipes-devtools/jemalloc/jemalloc_5.2.1.bb
+index b191f729a..b5d53bb11 100644
+--- a/meta-oe/recipes-devtools/jemalloc/jemalloc_5.2.1.bb
++++ b/meta-oe/recipes-devtools/jemalloc/jemalloc_5.2.1.bb
+@@ -15,14 +15,29 @@ LIC_FILES_CHKSUM = "file://README;md5=6900e4a158982e4c4715bf16aa54fa10"
  
- PYPI_PACKAGE = "apply_defaults"
+ SRC_URI = "git://github.com/jemalloc/jemalloc.git \
+            file://0001-Makefile.in-make-sure-doc-generated-before-install.patch \
++           file://run-ptest \
+ "
  
--SRC_URI[md5sum] = "719abb133f4b46283ebd940fcdf30a78"
--SRC_URI[sha256sum] = "1ce26326a61d8773d38a9726a345c6525a91a6120d7333af79ad792dacb6246c"
-+SRC_URI[sha256sum] = "3773de3491b94c0fe44310f1a85888389cdc71e1544b343bce0d2bd6991acea5"
+ SRCREV = "ea6b3e973b477b8061e0076bb257dbd7f3faa756"
  
- inherit pypi setuptools3
+ S = "${WORKDIR}/git"
  
+-inherit autotools
++inherit autotools ptest
+ 
+ EXTRA_AUTORECONF += "--exclude=autoheader"
+ 
+ EXTRA_OECONF:append:libc-musl = " --with-jemalloc-prefix=je_"
++
++do_compile_ptest() {
++	oe_runmake tests
++}
++
++do_install_ptest() {
++	install -d ${D}${PTEST_PATH}/tests
++	subdirs="test/unit test/integration test/stress "
++	for tooltest in ${subdirs}
++	do
++		cp -r ${B}/${tooltest} ${D}${PTEST_PATH}/tests
++	done
++	find ${D}${PTEST_PATH}/tests \( -name "*.d" -o -name "*.o" \) -exec rm -f {} \;
++}
 -- 
-2.17.1
+2.29.2
 
