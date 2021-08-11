@@ -1,74 +1,60 @@
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.web12.296.1628625145018508910
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web10.2820.1628650172383903469
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Aug 2021 12:52:25 -0700
+ Tue, 10 Aug 2021 19:49:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=iWXUZCW7;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: geoffhp@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id u13-20020a17090abb0db0290177e1d9b3f7so5841727pjr.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Aug 2021 12:52:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=jjPjqZvVLNszNhASbc6yRD8IW8S64S19uL40dPmjKys=;
-        b=iWXUZCW7+55lCercrGcPRpAenP7DixxlEvPU+018UM0FAOrumrvA4FR+sFnGWZrxEc
-         LDB78VCOtiNBa443viKo5mLJ+GiXzueQCvPqF93bn2t83ujkkLzGljcmkfc6rLFCva0X
-         z0dSYwQpTM+aAIpq4K4obhcu/se9o/9RJ/J/s29ufMG2wupUYR16SMtSVTUo22Pi/2ck
-         SiK5eJzSemgojsBsuQqPQdIymgJ4T9yAZQXCqj/CM2Y+88BJ1DrTN7yrsW5qsqzgsitc
-         7c81yE/G6qtC/2ZRMgRCUw3RoAdE9M/cG+eGQj0eB01r/P0Yw5I2UzRKuZ35cnCS7zgy
-         HGJA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=jjPjqZvVLNszNhASbc6yRD8IW8S64S19uL40dPmjKys=;
-        b=YfSzeXdxMIAWaehvaZi7vlzFsria0Xt4xHBFnaqy6vIYZlgaF3EBuUPD7JC+pA3928
-         lnd5lUCs5kghMAEXS0ddScsXvE/EK8WEd+SSpdiu+b1maAfcyCeNXIU4Ruhl69g6B9i1
-         T27t/Of5les9CyQpbLXQwFtXTqkHvKJd4W14wRJH+qBLav3hmib7fnR/qlMJvmJD2K4k
-         pKqfU5eeZEIGl93pslHm3ZTqdkZbMsDrgQkbGNRu5CMvGRxcpsLnkm+UosKnhF6kiQzh
-         EsdpxqA4pF5QqJfeeaZI61JJHeL/8isORzrfjnBEdTjN44usEhc/MWSEJCnRoFxKG7nK
-         XSDA==
-X-Gm-Message-State: AOAM530YUxIAweyxmH+wi0apRGmBqzq/lKhoRZoG/kuRAtHcbU7h8B8W
-	cSazVv5LSvnHQqCfMsEehtxku8Yk/bf2HA==
-X-Google-Smtp-Source: ABdhPJwqJWq6yL5EfdwzQfjMFlK1iBV+3Y3Mr/IHbAhVexQJfAcnPLQ2LEaRuruneo/EGhgR7PIZfQ==
-X-Received: by 2002:a65:6553:: with SMTP id a19mr424024pgw.8.1628625144281;
-        Tue, 10 Aug 2021 12:52:24 -0700 (PDT)
-Return-Path: <geoffhp@gmail.com>
-Received: from localhost.localdomain (cpe-107-185-48-203.socal.res.rr.com. [107.185.48.203])
-        by smtp.gmail.com with ESMTPSA id y12sm30641889pgk.7.2021.08.10.12.52.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Aug 2021 12:52:24 -0700 (PDT)
-From: "Geoff Parker" <geoffhp@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Geoff Parker <geoffrey.parker@arthrex.com>
-Subject: [PATCH] cifs-utils: typo fix fakse --> false
-Date: Tue, 10 Aug 2021 12:52:00 -0700
-Message-Id: <20210810195200.2360151-1-geoffhp@gmail.com>
-X-Mailer: git-send-email 2.30.2
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: kai.kang@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 17B2nU4g023791
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Aug 2021 19:49:30 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Tue, 10 Aug 2021 19:49:30 -0700
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Tue, 10 Aug 2021 19:49:29 -0700
+From: "kai" <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-python][PATCH] python3-m2crypto: fix for new overrides syntax
+Date: Wed, 11 Aug 2021 10:49:25 +0800
+Message-ID: <20210811024925.28280-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-From: Geoff Parker <geoffrey.parker@arthrex.com>
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Geoff Parker <geoffrey.parker@arthrex.com>
+Fix wrong replacement caused by script convert-overrides.py. And use new
+overrides syntax for 'x32'.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-networking/recipes-support/cifs/cifs-utils_6.13.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-devtools/python/python3-m2crypto_0.38.0.bb        | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb b/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb
-index 54aa3ce19..a8d3e91eb 100644
---- a/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb
-+++ b/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb
-@@ -26,7 +26,7 @@ do_configure:prepend() {
-     # want installed to /usr/sbin rather than /sbin to be DISTRO_FEATURES usrmerge compliant
-     # must override ROOTSBINDIR (default '/sbin'),
-     # setting --exec-prefix or --prefix in EXTRA_OECONF does not work
--    if ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','true','fakse',d)}; then
-+    if ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','true','false',d)}; then
-         export ROOTSBINDIR=${sbindir}
-     fi
- }
+diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.38.0.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.38.0.bb
+index e0f4870be..e1ee99bae 100644
+--- a/meta-python/recipes-devtools/python/python3-m2crypto_0.38.0.bb
++++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.38.0.bb
+@@ -31,14 +31,14 @@ DISTUTILS_BUILD_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR} -I${STAGIN
+ DISTUTILS_INSTALL_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR}"
+ 
+ SWIG_FEATURES:x86 = "-D__i386__"
+-SWIG_FEATURES_x32 = "-D__ILP32__"
++SWIG_FEATURES:x32 = "-D__ILP32__"
+ 
+ SWIG_FEATURES ?= "-D__${HOST_ARCH}__ ${@['-D__ILP32__','-D__LP64__'][d.getVar('SITEINFO_BITS') != '32']}"
+ 
+ SWIG_FEATURES:append:riscv64 = " -D__SIZEOF_POINTER__=${SITEINFO_BITS}/8 -D__riscv_xlen=${SITEINFO_BITS}"
+ SWIG_FEATURES:append:riscv32 = " -D__SIZEOF_POINTER__=${SITEINFO_BITS}/8 -D__riscv_xlen=${SITEINFO_BITS}"
+ SWIG_FEATURES:append:mipsarch = " -D_MIPS_SZPTR=${SITEINFO_BITS}"
+-SWIG_FEATURES:append:powerpc64le = " -D_:powerpc64__"
++SWIG_FEATURES:append:powerpc64le = " -D__powerpc64__"
+ export SWIG_FEATURES
+ 
+ export STAGING_DIR
 -- 
-2.30.2
+2.17.1
 
