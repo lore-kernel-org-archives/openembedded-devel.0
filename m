@@ -1,109 +1,59 @@
-Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net [217.70.183.198])
- by mx.groups.io with SMTP id smtpd.web11.25067.1628787890587806962
+Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
+ by mx.groups.io with SMTP id smtpd.web09.25213.1628788402841372570
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Aug 2021 10:04:51 -0700
+ Thu, 12 Aug 2021 10:13:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: bootlin.com, ip: 217.70.183.198, mailfrom: michael.opdenacker@bootlin.com)
+ dkim=missing; spf=pass (domain: bootlin.com, ip: 217.70.183.197, mailfrom: michael.opdenacker@bootlin.com)
 Received: (Authenticated sender: michael.opdenacker@bootlin.com)
-	by relay6-d.mail.gandi.net (Postfix) with ESMTPSA id C3708C0002;
-	Thu, 12 Aug 2021 17:04:48 +0000 (UTC)
+	by relay5-d.mail.gandi.net (Postfix) with ESMTPSA id 122871C000B;
+	Thu, 12 Aug 2021 17:13:20 +0000 (UTC)
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-oe][PATCH] opus-tools: update to 0.2 and fix license
+To: Khem Raj <raj.khem@gmail.com>
+References: <20210810131836.137934-1-michael.opdenacker@bootlin.com>
+ <CAMKF1soq0fjOp8piavjppYcCOoAesQuyb+idC3NNX-yWBjOiFw@mail.gmail.com>
+ <9abf72ba-5ace-a600-4f68-5e98e1ce19cf@bootlin.com>
+ <CAMKF1sqJrCpxccqJr4Dsmgow2R2S-e2C=crXFbmOGLU8ggPDug@mail.gmail.com>
 From: "Michael Opdenacker" <michael.opdenacker@bootlin.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Michael Opdenacker <michael.opdenacker@bootlin.com>
-Subject: [meta-oe][PATCH v2] opus-tools: update to 0.2, move to meta-multimedia and fix license
-Date: Thu, 12 Aug 2021 19:04:39 +0200
-Message-Id: <20210812170439.243308-1-michael.opdenacker@bootlin.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <CAMKF1soq0fjOp8piavjppYcCOoAesQuyb+idC3NNX-yWBjOiFw@mail.gmail.com>
-References: <CAMKF1soq0fjOp8piavjppYcCOoAesQuyb+idC3NNX-yWBjOiFw@mail.gmail.com>
+Organization: Bootlin
+Message-ID: <f9de346f-45f6-c8dd-c037-f44d2f15df94@bootlin.com>
+Date: Thu, 12 Aug 2021 19:13:20 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAMKF1sqJrCpxccqJr4Dsmgow2R2S-e2C=crXFbmOGLU8ggPDug@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-The license in version 0.1.8 was already BSD-2-Clause and GPLv2
-(for the "opusinfo" command).
+Hi Khem,
 
-The license checksum change is due to trivial changes on the license
-text ("https" instead of "http" and whitespace changes).
+On 8/11/21 8:15 PM, Khem Raj wrote:
+> On Wed, Aug 11, 2021 at 11:12 AM Michael Opdenacker
+> <michael.opdenacker@bootlin.com> wrote:
+>>
+>> I'll be happy to.
+>> However, what's really the difference between meta-oe/recipes-multimedia
+>> and meta-multimedia/recipes-multimedia/? Why two different directories
+>> in the same repository?
+> these are two different layers, someone may not use meta-multimedia if
+> its not in bblayers.conf
+> and thusly not see the dir under meta-multimedia, so tools/packages
+> which are media related
+> but more or less generic go into meta-oe/recipe-multimedia, which this
+> upgrade now depends
+> on packages in meta-multimedia so its better to put it in meta-multimedia now
 
-This new version now DEPENDs on "libopusenc" and "opusfile" too,
-but this required to move the recipe to meta-multimedia instead.
 
-Signed-off-by: Michael Opdenacker <michael.opdenacker@bootlin.com>
----
- .../opus-tools/opus-tools_0.2.bb                  | 15 +++++++++++++++
- .../packagegroups/packagegroup-meta-multimedia.bb |  1 +
- .../packagegroups/packagegroup-meta-oe.bb         |  1 -
- .../opus-tools/opus-tools_0.1.8.bb                | 15 ---------------
- 4 files changed, 16 insertions(+), 16 deletions(-)
- create mode 100644 meta-multimedia/recipes-multimedia/opus-tools/opus-tools_0.2.bb
- delete mode 100644 meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb
+Thank you for the clarification. Now I understand that "meta-oe" is
+rather for generic packages (outside of oe-core, of course), and the
+other layers are for more specific purposes.
 
-diff --git a/meta-multimedia/recipes-multimedia/opus-tools/opus-tools_0.2.bb b/meta-multimedia/recipes-multimedia/opus-tools/opus-tools_0.2.bb
-new file mode 100644
-index 000000000..b5e6ed947
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/opus-tools/opus-tools_0.2.bb
-@@ -0,0 +1,15 @@
-+SUMMARY = "Opus Audio Tools"
-+HOMEPAGE = "http://www.opus-codec.org/"
-+
-+LICENSE = "BSD-2-Clause & GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=79f6fc2a6239fbe5f6e52f20ac76698c"
-+
-+SRC_URI = "http://downloads.xiph.org/releases/opus/opus-tools-${PV}.tar.gz"
-+SRC_URI[md5sum] = "ff2d0536e960cabbfb8ca7c8c1759b6c"
-+SRC_URI[sha256sum] = "b4e56cb00d3e509acfba9a9b627ffd8273b876b4e2408642259f6da28fa0ff86"
-+
-+S = "${WORKDIR}/opus-tools-${PV}"
-+
-+DEPENDS = "libopus libopusenc flac opusfile"
-+
-+inherit autotools pkgconfig
-diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-index 9e0c319c3..5522731a2 100644
---- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-+++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-@@ -66,6 +66,7 @@ RDEPENDS:packagegroup-meta-multimedia = "\
-     mycroft \
-     openal-soft \
-     opusfile \
-+    opus-tools \
-     libdvdcss \
-     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", bb.utils.contains("DISTRO_FEATURES", "x11", "vlc", "", d), "", d)} \
-     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "sox streamripper", "", d)} \
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 47ee3099a..b03525de3 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -668,7 +668,6 @@ RDEPENDS:packagegroup-meta-oe-multimedia ="\
-     live555-examples \
-     live555-mediaserver \
-     libmikmod \
--    opus-tools \
-     libmodplug \
-     sound-theme-freedesktop \
-     yavta \
-diff --git a/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb b/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb
-deleted file mode 100644
-index a84f2bf07..000000000
---- a/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb
-+++ /dev/null
-@@ -1,15 +0,0 @@
--SUMMARY = "Opus Audio Tools"
--HOMEPAGE = "http://www.opus-codec.org/"
--
--LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://COPYING;md5=843a066da9f1facfcc6ea6f616ffecb1"
--
--SRC_URI = "http://downloads.xiph.org/releases/opus/opus-tools-${PV}.tar.gz"
--SRC_URI[md5sum] = "b424790eda9357a4df394e2d7ca19eac"
--SRC_URI[sha256sum] = "e4e188579ea1c4e4d5066460d4a7214a7eafe3539e9a4466fdc98af41ba4a2f6"
--
--S = "${WORKDIR}/opus-tools-${PV}"
--
--DEPENDS = "libopus flac"
--
--inherit autotools pkgconfig
+Cheers,
+Michael.
+
 -- 
-2.25.1
+Michael Opdenacker, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
 
