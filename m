@@ -1,111 +1,132 @@
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web11.38977.1628871476549801043
+Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com [209.85.160.179])
+ by mx.groups.io with SMTP id smtpd.web10.38986.1628871924537033369
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Aug 2021 09:17:57 -0700
+ Fri, 13 Aug 2021 09:25:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: sakib.sajal@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 17DGHtuw028873
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Aug 2021 09:17:55 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 17DGHs3D025384
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Aug 2021 09:17:55 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Fri, 13 Aug 2021 09:17:54 -0700
-Received: from yow-lpggp3.wrs.com (128.224.137.13) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Fri, 13 Aug 2021 09:17:54 -0700
-From: "Sakib Sajal" <sakib.sajal@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] lmdb: use libprefix in Makefile to install libraries
-Date: Fri, 13 Aug 2021 12:17:49 -0400
-Message-ID: <20210813161749.24182-1-sakib.sajal@windriver.com>
-X-Mailer: git-send-email 2.32.0
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=o9hR4ESI;
+ spf=pass (domain: gmail.com, ip: 209.85.160.179, mailfrom: jatedev@gmail.com)
+Received: by mail-qt1-f179.google.com with SMTP id a12so8711429qtb.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Aug 2021 09:25:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ZUaKAzDBHHTxCIZ09WSUpY5vGzWLpOstGXpkmAmDZnI=;
+        b=o9hR4ESIb0OcjlDvw8yRf3kYIbY6k7QPhJKZ3i8wOp7mwucbCzCQBsXUKCnT5jO9cy
+         3HMUuWtWR+GMUBg9cPonJbC2M3udeqXafKyhUr+Q3z047d9MykvyHCeSRWoQb+qhfwX/
+         y7SM4C1pCddd/gEUJhyh9LI4+30wOAi12TYguSa4Fg9uiNsl4UwZqbIGWQoZ85ro7ViT
+         u7YXB+FVJA++wmuGh8ez1o0tB62nYZteKPI/VB/xjMvlt1VDnLvLBvhb4ly2A/glg3PB
+         ruOrVe8DoZyGs6vv0fcL1kNah7XTua7Xj3OQclAkTQ1gkkvdTM9/MMCjINn3ciadKlFO
+         e30w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ZUaKAzDBHHTxCIZ09WSUpY5vGzWLpOstGXpkmAmDZnI=;
+        b=prtfbvLzZQU5gyeuP/VVnWwHTLd63AhjchSHzWHX8YAfxCESjchA78vmn9pxNNesRo
+         XrMPXI3E1CDUXXGqypj+scc8Uwcoax8hWpc4hVFvQOkCyBo5WMJ5uHudGW2zycNYfhyk
+         gJV3YTUQatedqNY5tAsXtPCt5Ndzz1W8tbdkVVK1Q+kYVJALKNOJI3lkAIj5MsVAF65R
+         LUKyFMRLR2K4wMimIu34vNJYQWVkPyZSWi+MM1ryF6REpuc/fuNeJtPd/K5nCWZ00uU8
+         JwxrVA/qQXPZgYwzBDSw2L1pW2DVfP0N1KM2BmTajmHJpzFOTx3EYKvy+qDle53lJlrz
+         tfEg==
+X-Gm-Message-State: AOAM533z0DK50fbPyx0YoabvXmE8b2SYc9V4Myn24oEzKM9KYWrcyMg8
+	CN7HLqzSepJ5zXGgd3DNRfTOJZGWVGI=
+X-Google-Smtp-Source: ABdhPJw3/CwufXBdl6sg5eE+FLKRLw5Oq943vM3h3HWmB2eLvRh8o2hKYWJwiGz0eOV6Va3JbplWAQ==
+X-Received: by 2002:ac8:7556:: with SMTP id b22mr2772585qtr.64.1628871923338;
+        Fri, 13 Aug 2021 09:25:23 -0700 (PDT)
+Return-Path: <jatedev@gmail.com>
+Received: from localhost.localdomain ([63.148.217.19])
+        by smtp.gmail.com with ESMTPSA id b21sm1023992qtt.91.2021.08.13.09.25.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 13 Aug 2021 09:25:22 -0700 (PDT)
+From: "Jate Sujjavanich" <jatedev@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	Nakamura.Kenta@bp.MitsubishiElectric.co.jp,
+	akuster808@gmail.com
+Cc: Jate Sujjavanich <jatedev@gmail.com>
+Subject: [meta-networking][dunfell][PATCH] ufw: Fix interpreter for installed ufw and test ufw
+Date: Fri, 13 Aug 2021 16:20:47 +0000
+Message-Id: <20210813162047.20015-1-jatedev@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-Makefile used libdir which had hardcoded "$(exec_prefix)/lib"
-directory to install libraries. This is a problem for MULTILIB
-builds as libraries are installed in "lib64" directory.
-Hence use libprefix which contains the correct path for installing
-libraries.
+Revert patch to setup-only-make-one-reference-to-env.patch and make
+patch for python3 interpreter fix apply to runs of setup.py during
+self test as well as installs.
 
-Upstream-Status: oe-specific
-
-Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
+Reported-by: Kenta Nakamura <Nakamura.Kenta@bp.MitsubishiElectric.co.jp>
+Signed-off-by: Jate Sujjavanich <jatedev@gmail.com>
 ---
- ...file-use-libprefix-instead-of-libdir.patch | 33 +++++++++++++++++++
- meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb       |  5 +--
- 2 files changed, 36 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch
+ ...to-detect-openembedded-python-interpreter.patch |  8 ++++----
+ .../ufw/setup-only-make-one-reference-to-env.patch | 14 ++------------
+ 2 files changed, 6 insertions(+), 16 deletions(-)
 
-diff --git a/meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch b/meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch
-new file mode 100644
-index 000000000..2e32d9c37
---- /dev/null
-+++ b/meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch
-@@ -0,0 +1,33 @@
-+From 8d1d18f8ae4c3cd7ecdc79545f89459d1c9e4bfd Mon Sep 17 00:00:00 2001
-+From: Sakib Sajal <sakib.sajal@windriver.com>
-+Date: Fri, 13 Aug 2021 15:59:15 +0000
-+Subject: [PATCH] Makefile: use libprefix instead of libdir
-+
-+libdir expands to "$(exec_prefix)/lib" where "lib" is hardcoded.
-+This is a problem for builds that enable MULTILIB since libraries
-+are to be installed in "lib64" directory. Hence allow the directory
-+to be configurable.
-+
-+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
-+---
-+ libraries/liblmdb/Makefile | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/libraries/liblmdb/Makefile b/libraries/liblmdb/Makefile
-+index f254511..1ec74e6 100644
-+--- a/libraries/liblmdb/Makefile
-++++ b/libraries/liblmdb/Makefile
-+@@ -46,11 +46,11 @@ all:	$(ILIBS) $(PROGS)
-+ 
-+ install: $(ILIBS) $(IPROGS) $(IHDRS)
-+ 	mkdir -p $(DESTDIR)$(bindir)
-+-	mkdir -p $(DESTDIR)$(libdir)
-++	mkdir -p $(DESTDIR)$(libprefix)
-+ 	mkdir -p $(DESTDIR)$(includedir)
-+ 	mkdir -p $(DESTDIR)$(mandir)/man1
-+ 	for f in $(IPROGS); do cp $$f $(DESTDIR)$(bindir); done
-+-	for f in $(ILIBS); do cp $$f $(DESTDIR)$(libdir); done
-++	for f in $(ILIBS); do cp $$f $(DESTDIR)$(libprefix); done
-+ 	for f in $(IHDRS); do cp $$f $(DESTDIR)$(includedir); done
-+ 	for f in $(IDOCS); do cp $$f $(DESTDIR)$(mandir)/man1; done
-+ 
-diff --git a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
-index 0746da141..3c6ffe04e 100644
---- a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
-+++ b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
-@@ -10,7 +10,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972"
+diff --git a/meta-networking/recipes-connectivity/ufw/ufw/Add-code-to-detect-openembedded-python-interpreter.patch b/meta-networking/recipes-connectivity/ufw/ufw/Add-code-to-detect-openembedded-python-interpreter.patch
+index 85d51ca21..e1fcf0ca5 100644
+--- a/meta-networking/recipes-connectivity/ufw/ufw/Add-code-to-detect-openembedded-python-interpreter.patch
++++ b/meta-networking/recipes-connectivity/ufw/ufw/Add-code-to-detect-openembedded-python-interpreter.patch
+@@ -1,7 +1,7 @@
+ Add code to detect openembedded python interpreter
  
- SRC_URI = "git://github.com/LMDB/lmdb.git;nobranch=1 \
-            file://run-ptest \
--"
-+           file://0001-Makefile-use-libprefix-instead-of-libdir.patch \
-+           "
+-OE does not use /usr/bin/env as part of the interpreter, so it does not
+-update ufw with the interpreter name.
++OE does not use /usr/bin/env as part of the interpreter, Instead, it's a
++full path in sys.executable.
  
- SRCREV = "LMDB_${PV}"
+ Upstream-Status: Inappropriate (Embedded)
+ Signed-off-by: Jate Sujjavanich <jatedev@gmail.com>
+@@ -17,9 +17,9 @@ index 75c1105..3f9a5e0 100644
+                               "-i.jjm",
+                               "1s%^#.*python.*%#! " + sys.executable + "%g",
+                               'staging/ufw'])
+-+        elif '-native/python' in sys.executable and \
+++        elif '/python' in sys.executable and \
+ +            os.path.basename(sys.executable) in ['python', 'python3']:
+-+            print("Detected oe native python " + os.path.basename(sys.executable))
+++            print("Detected full path " + sys.executable + ". substituting " + os.path.basename(sys.executable))
+ +            subprocess.call(["sed",
+ +                             "-i.jjm",
+ +                            "1s%python$%"
+diff --git a/meta-networking/recipes-connectivity/ufw/ufw/setup-only-make-one-reference-to-env.patch b/meta-networking/recipes-connectivity/ufw/ufw/setup-only-make-one-reference-to-env.patch
+index f487a6fd6..ff704b5a4 100644
+--- a/meta-networking/recipes-connectivity/ufw/ufw/setup-only-make-one-reference-to-env.patch
++++ b/meta-networking/recipes-connectivity/ufw/ufw/setup-only-make-one-reference-to-env.patch
+@@ -14,10 +14,6 @@ detected or specified on the build line.
+ Upstream-Status: Inappropriate [ embedded specific ]
  
-@@ -26,7 +27,7 @@ do_compile() {
- 
- do_install() {
-     oe_runmake CC="${CC}" DESTDIR="${D}" prefix="${prefix}" libprefix="${libdir}" manprefix="${mandir}" SOEXT=".so.${PV}" LDFLAGS="${LDFLAGS}" install
--    cd ${D}/${libdir}
-+    cd ${D}${libdir}
-     ln -s liblmdb.so.${PV} liblmdb.so
-     rm liblmdb.a
- }
+ Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+-
+-Added conditional to handle sys.executable without env on python3
+-
+-Signed-off-by Jate Sujjavanich <jatedev@gmail.com>
+ ---
+  setup.py | 34 ++++++++++++++++++++++++++++------
+  1 file changed, 28 insertions(+), 6 deletions(-)
+@@ -47,7 +43,7 @@ index b13d11c..73acdef 100644
+          # Now byte-compile everything
+          super(Install, self).run()
+  
+-@@ -107,12 +112,29 @@ class Install(_install, object):
++@@ -107,12 +112,23 @@ class Install(_install, object):
+          for f in [ script, manpage, manpage_f ]:
+              self.mkpath(os.path.dirname(f))
+  
+@@ -66,13 +62,7 @@ index b13d11c..73acdef 100644
+ -                         'staging/ufw'])
+ +        print("Updating staging/ufw to use (%s)" % (sys.executable))
+ +
+-+        if not re.search("(/usr/bin/env)", sys.executable):
+-+            print("Did not find 'env' in sys.executable (%s)" % (sys.executable))
+-+            subprocess.call(["sed",
+-+                             "-i",
+-+                             "1s%^#.*python.*%#! /usr/bin/env " + sys.executable + "%g",
+-+                             'staging/ufw'])
+-+        elif re.search("(/usr/bin/env)", sys.executable):
+++        if re.search("(/usr/bin/env)", sys.executable):
+ +            print("found 'env' in sys.executable (%s)" % (sys.executable))
+ +            subprocess.call(["sed",
+ +                             "-i.jjm",
 -- 
-2.32.0
+2.25.1
 
