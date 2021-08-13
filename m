@@ -1,132 +1,118 @@
-Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com [209.85.160.179])
- by mx.groups.io with SMTP id smtpd.web10.38986.1628871924537033369
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
+ by mx.groups.io with SMTP id smtpd.web11.39193.1628872389701384858
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Aug 2021 09:25:24 -0700
+ Fri, 13 Aug 2021 09:33:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=o9hR4ESI;
- spf=pass (domain: gmail.com, ip: 209.85.160.179, mailfrom: jatedev@gmail.com)
-Received: by mail-qt1-f179.google.com with SMTP id a12so8711429qtb.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Aug 2021 09:25:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=X6pEwofg;
+ spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f182.google.com with SMTP id f3so12681333plg.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Aug 2021 09:33:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ZUaKAzDBHHTxCIZ09WSUpY5vGzWLpOstGXpkmAmDZnI=;
-        b=o9hR4ESIb0OcjlDvw8yRf3kYIbY6k7QPhJKZ3i8wOp7mwucbCzCQBsXUKCnT5jO9cy
-         3HMUuWtWR+GMUBg9cPonJbC2M3udeqXafKyhUr+Q3z047d9MykvyHCeSRWoQb+qhfwX/
-         y7SM4C1pCddd/gEUJhyh9LI4+30wOAi12TYguSa4Fg9uiNsl4UwZqbIGWQoZ85ro7ViT
-         u7YXB+FVJA++wmuGh8ez1o0tB62nYZteKPI/VB/xjMvlt1VDnLvLBvhb4ly2A/glg3PB
-         ruOrVe8DoZyGs6vv0fcL1kNah7XTua7Xj3OQclAkTQ1gkkvdTM9/MMCjINn3ciadKlFO
-         e30w==
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :references:from:organization:in-reply-to:content-transfer-encoding;
+        bh=Eeoj50ByIG9mcnPO4tNDI0JgXeFFP+00OwSxGG5O4i4=;
+        b=X6pEwofgsIZ+0XMSW3PwmrkiYkZTBauTQ+5SI+Z7wsb95Kk/5+gLXWnkoyTzniG7ii
+         u+DAUgm9WjXCShERrMklZwD1hrOzTVxmq1M1UtZGExxv8DkAh5rsKxSRj1eigye16M8c
+         GvwozgUeeJM2yQbcCJ30P6HhB4hBSxrbskU7u5wk1DT+0UAPXdsQCU5ICg+Jmx9bqrBv
+         BNRP5p2xBnilfg995oLLwUgBJwfJ6+ZjrBodFWBkD9/7gyVzUGwdXweTM+wY/QdE/xi1
+         fLfeNHI7pqCq1AtV+ImUtBkOwCFKivIZWQ5+nPM2F3OIKd8L7736BTB83ahW9QNvujMJ
+         jVmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:references:from:organization:in-reply-to
          :content-transfer-encoding;
-        bh=ZUaKAzDBHHTxCIZ09WSUpY5vGzWLpOstGXpkmAmDZnI=;
-        b=prtfbvLzZQU5gyeuP/VVnWwHTLd63AhjchSHzWHX8YAfxCESjchA78vmn9pxNNesRo
-         XrMPXI3E1CDUXXGqypj+scc8Uwcoax8hWpc4hVFvQOkCyBo5WMJ5uHudGW2zycNYfhyk
-         gJV3YTUQatedqNY5tAsXtPCt5Ndzz1W8tbdkVVK1Q+kYVJALKNOJI3lkAIj5MsVAF65R
-         LUKyFMRLR2K4wMimIu34vNJYQWVkPyZSWi+MM1ryF6REpuc/fuNeJtPd/K5nCWZ00uU8
-         JwxrVA/qQXPZgYwzBDSw2L1pW2DVfP0N1KM2BmTajmHJpzFOTx3EYKvy+qDle53lJlrz
-         tfEg==
-X-Gm-Message-State: AOAM533z0DK50fbPyx0YoabvXmE8b2SYc9V4Myn24oEzKM9KYWrcyMg8
-	CN7HLqzSepJ5zXGgd3DNRfTOJZGWVGI=
-X-Google-Smtp-Source: ABdhPJw3/CwufXBdl6sg5eE+FLKRLw5Oq943vM3h3HWmB2eLvRh8o2hKYWJwiGz0eOV6Va3JbplWAQ==
-X-Received: by 2002:ac8:7556:: with SMTP id b22mr2772585qtr.64.1628871923338;
-        Fri, 13 Aug 2021 09:25:23 -0700 (PDT)
-Return-Path: <jatedev@gmail.com>
-Received: from localhost.localdomain ([63.148.217.19])
-        by smtp.gmail.com with ESMTPSA id b21sm1023992qtt.91.2021.08.13.09.25.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Aug 2021 09:25:22 -0700 (PDT)
-From: "Jate Sujjavanich" <jatedev@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	Nakamura.Kenta@bp.MitsubishiElectric.co.jp,
-	akuster808@gmail.com
-Cc: Jate Sujjavanich <jatedev@gmail.com>
-Subject: [meta-networking][dunfell][PATCH] ufw: Fix interpreter for installed ufw and test ufw
-Date: Fri, 13 Aug 2021 16:20:47 +0000
-Message-Id: <20210813162047.20015-1-jatedev@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        bh=Eeoj50ByIG9mcnPO4tNDI0JgXeFFP+00OwSxGG5O4i4=;
+        b=FNtnWvGjmj1D7a+l6WKRlRfyGAcCa2y3hDd6cDSF0zljbwzTKQ/JjWOzjKI1wwxqRF
+         wnm9xO7KGbXynHjL7UNyvYK1yxma/Ir6AtBg02+WQi1MhKr5TRbsrVBOsWQo+svqIIF2
+         DFKLJt9L/X4EMjnNLdYonUJXuNTfkivcD7abm15cutfGVErnP3oAmiClPSSQYEe0jYgS
+         JULfX4G725ONHyyxxQV0pYKpTXG/UU/xfD6r8LF4+3fJO8l6RjclXbL0D++zh/Rdttrm
+         wRYxG4wcU/MV3G/icE7pGQdkEoZLuk3HfXGCvHsEGpAW4f/Tk5QDX3H6BYgvZPD4BHHV
+         uplQ==
+X-Gm-Message-State: AOAM533ksUmSysqNWZmHYD0bn1ZmlWzVMf7gtUU33yrC/8jUifj2YibU
+	HpvKGat+UT6tIOWQtDwTfmA=
+X-Google-Smtp-Source: ABdhPJwU09jOG4pWA3cQjQDtsZgBM+D5HAgNbS03ldZ7emmrwhATHvGEWXajJh2BzRGd+TmApUIVzw==
+X-Received: by 2002:a17:902:8488:b029:129:97e8:16e7 with SMTP id c8-20020a1709028488b029012997e816e7mr2616056plo.39.1628872389192;
+        Fri, 13 Aug 2021 09:33:09 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPV6:2601:646:9200:a0f0:c078:a19b:8919:aba? ([2601:646:9200:a0f0:c078:a19b:8919:aba])
+        by smtp.gmail.com with UTF8SMTPSA id p67sm2910336pfp.45.2021.08.13.09.33.08
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 13 Aug 2021 09:33:08 -0700 (PDT)
+Message-ID: <7ec64059-4784-0bbe-4ff0-49542fa645dc@gmail.com>
+Date: Fri, 13 Aug 2021 09:33:07 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.0
+Subject: Re: [oe] [meta-oe][PATCH] takao-fonts: It should be in ttf-fonts directory as the other ttf fonts.
+To: leimaohui <leimaohui@fujitsu.com>,
+ openembedded-devel@lists.openembedded.org
+References: <1628871245-5054-1-git-send-email-leimaohui@fujitsu.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+In-Reply-To: <1628871245-5054-1-git-send-email-leimaohui@fujitsu.com>
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Revert patch to setup-only-make-one-reference-to-env.patch and make
-patch for python3 interpreter fix apply to runs of setup.py during
-self test as well as installs.
 
-Reported-by: Kenta Nakamura <Nakamura.Kenta@bp.MitsubishiElectric.co.jp>
-Signed-off-by: Jate Sujjavanich <jatedev@gmail.com>
----
- ...to-detect-openembedded-python-interpreter.patch |  8 ++++----
- .../ufw/setup-only-make-one-reference-to-env.patch | 14 ++------------
- 2 files changed, 6 insertions(+), 16 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/ufw/ufw/Add-code-to-detect-openembedded-python-interpreter.patch b/meta-networking/recipes-connectivity/ufw/ufw/Add-code-to-detect-openembedded-python-interpreter.patch
-index 85d51ca21..e1fcf0ca5 100644
---- a/meta-networking/recipes-connectivity/ufw/ufw/Add-code-to-detect-openembedded-python-interpreter.patch
-+++ b/meta-networking/recipes-connectivity/ufw/ufw/Add-code-to-detect-openembedded-python-interpreter.patch
-@@ -1,7 +1,7 @@
- Add code to detect openembedded python interpreter
- 
--OE does not use /usr/bin/env as part of the interpreter, so it does not
--update ufw with the interpreter name.
-+OE does not use /usr/bin/env as part of the interpreter, Instead, it's a
-+full path in sys.executable.
- 
- Upstream-Status: Inappropriate (Embedded)
- Signed-off-by: Jate Sujjavanich <jatedev@gmail.com>
-@@ -17,9 +17,9 @@ index 75c1105..3f9a5e0 100644
-                               "-i.jjm",
-                               "1s%^#.*python.*%#! " + sys.executable + "%g",
-                               'staging/ufw'])
--+        elif '-native/python' in sys.executable and \
-++        elif '/python' in sys.executable and \
- +            os.path.basename(sys.executable) in ['python', 'python3']:
--+            print("Detected oe native python " + os.path.basename(sys.executable))
-++            print("Detected full path " + sys.executable + ". substituting " + os.path.basename(sys.executable))
- +            subprocess.call(["sed",
- +                             "-i.jjm",
- +                            "1s%python$%"
-diff --git a/meta-networking/recipes-connectivity/ufw/ufw/setup-only-make-one-reference-to-env.patch b/meta-networking/recipes-connectivity/ufw/ufw/setup-only-make-one-reference-to-env.patch
-index f487a6fd6..ff704b5a4 100644
---- a/meta-networking/recipes-connectivity/ufw/ufw/setup-only-make-one-reference-to-env.patch
-+++ b/meta-networking/recipes-connectivity/ufw/ufw/setup-only-make-one-reference-to-env.patch
-@@ -14,10 +14,6 @@ detected or specified on the build line.
- Upstream-Status: Inappropriate [ embedded specific ]
- 
- Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
--
--Added conditional to handle sys.executable without env on python3
--
--Signed-off-by Jate Sujjavanich <jatedev@gmail.com>
- ---
-  setup.py | 34 ++++++++++++++++++++++++++++------
-  1 file changed, 28 insertions(+), 6 deletions(-)
-@@ -47,7 +43,7 @@ index b13d11c..73acdef 100644
-          # Now byte-compile everything
-          super(Install, self).run()
-  
--@@ -107,12 +112,29 @@ class Install(_install, object):
-+@@ -107,12 +112,23 @@ class Install(_install, object):
-          for f in [ script, manpage, manpage_f ]:
-              self.mkpath(os.path.dirname(f))
-  
-@@ -66,13 +62,7 @@ index b13d11c..73acdef 100644
- -                         'staging/ufw'])
- +        print("Updating staging/ufw to use (%s)" % (sys.executable))
- +
--+        if not re.search("(/usr/bin/env)", sys.executable):
--+            print("Did not find 'env' in sys.executable (%s)" % (sys.executable))
--+            subprocess.call(["sed",
--+                             "-i",
--+                             "1s%^#.*python.*%#! /usr/bin/env " + sys.executable + "%g",
--+                             'staging/ufw'])
--+        elif re.search("(/usr/bin/env)", sys.executable):
-++        if re.search("(/usr/bin/env)", sys.executable):
- +            print("found 'env' in sys.executable (%s)" % (sys.executable))
- +            subprocess.call(["sed",
- +                             "-i.jjm",
--- 
-2.25.1
+On 8/13/21 9:14 AM, leimaohui wrote:
+> - Moved it to ttf-fonts directory.
+> - Rename to ttf-takao.
+> - Use ttf.inc instead of rewrite do_install.
+> 
+> Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
+> ---
+>   .../ttf-takao_003.03.01.bb}                      | 16 ++++++++++++----
+>   1 file changed, 12 insertions(+), 4 deletions(-)
+>   rename meta-oe/recipes-graphics/{takao-fonts/takao-fonts_003.03.01.bb => ttf-fonts/ttf-takao_003.03.01.bb} (57%)
+> 
+> diff --git a/meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.03.01.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-takao_003.03.01.bb
+> similarity index 57%
+> rename from meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.03.01.bb
+> rename to meta-oe/recipes-graphics/ttf-fonts/ttf-takao_003.03.01.bb
+> index 9ddfc6ae7..2c373f946 100644
+> --- a/meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.03.01.bb
+> +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-takao_003.03.01.bb
+> @@ -1,3 +1,5 @@
+> +require ttf.inc
+> +
+>   SUMMARY = "Takao Fonts are a community developed derivatives of IPA Fonts."
+>   DESCRIPTION = "Takao Fonts are a community developed derivatives of IPA Fonts."
+>   
+> @@ -6,14 +8,20 @@ SECTION = "User Interface/X"
+>   
+>   LICENSE = "IPA"
+>   LIC_FILES_CHKSUM = "file://IPA_Font_License_Agreement_v1.0.txt;md5=6cd3351ba979cf9db1fad644e8221276"
+> +PR = "r0"
 
+explicit PR setting is not needed here. I have removed it before staging 
+but keep this in mind for future
+
+> +
+>   SRC_URI = "https://launchpad.net/${BPN}/trunk/15.03/+download/TakaoFonts_00303.01.tar.xz"
+>   SRC_URI[md5sum] = "8cd3fe724faa5034a9369e98cf108d2d"
+>   SRC_URI[sha256sum] = "e9871f72ac69acb3e277aebbee7ca01fbebf54800733e29fafdc46133fc3552f"
+>   
+>   S = "${WORKDIR}/TakaoFonts_00303.01"
+> -do_install() {
+> -    install -m 0755 -d ${D}/${datadir}/fonts
+> -    install -m 0644 -p ${S}/*.ttf ${D}/${datadir}/fonts/
+> -}
+> +
+> +PACKAGES = "ttf-takao-pgothic ttf-takao-gothic ttf-takao-pmincho ttf-takao-mincho"
+> +FONT_PACKAGES = "ttf-takao-pgothic ttf-takao-gothic ttf-takao-pmincho ttf-takao-mincho"
+> +
+> +FILES:ttf-takao-pgothic = "${datadir}/fonts/truetype/TakaoPGothic.ttf"
+> +FILES:ttf-takao-gothic = "${datadir}/fonts/truetype/TakaoGothic.ttf"
+> +FILES:ttf-takao-pmincho = "${datadir}/fonts/truetype/TakaoPMincho.ttf"
+> +FILES:ttf-takao-mincho = "${datadir}/fonts/truetype/TakaoMincho.ttf"
+>   
+>   FILES:${PN} += "${datadir}/fonts/*.ttf"
+> 
+> 
+> 
+> 
+> 
