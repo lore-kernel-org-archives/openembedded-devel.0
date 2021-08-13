@@ -1,115 +1,111 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.112])
- by mx.groups.io with SMTP id smtpd.web08.33540.1628838864960487621
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web11.38977.1628871476549801043
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Aug 2021 00:14:25 -0700
+ Fri, 13 Aug 2021 09:17:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Db4X69bP;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: leimaohui@fujitsu.com)
-Return-Path: <leimaohui@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1628838861; i=@fujitsu.com;
-	bh=8id1S13PcnWxSLRhyD6DO8u23LcZQ4xrObf0ubQG4lk=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=Db4X69bP49OXE73mwEmiqlZGymjr1OeZm4NXBAEDli2ENplBhh3+IMeH49la4R6NB
-	 aGto4G75nYy4UpSwzhGuaKqcHFYbV8ax+nMsy431UnWKMAgsoTfKSaeFa0LI66h3q/
-	 pDuAtT+eC9zhV0Iu5Fps17Jhs038E/I01YvY0Za2qq0JZ+hFvOKTSuNmi2vT8djEvi
-	 CGszYPyFdt+k3ZVVnd4Aeppyxn7MLCPbrnVhbUyv+E7d2j25nyUqy26JL33TxCyp46
-	 1cE8+kSiEA9vgGs8DYCxzGZNDthN2OUUamEKg87rjoQN5jqn7q0wZ5aShreAaUuZWI
-	 ve28e5pATMUKg==
-Received: from [100.113.7.180] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-b.eu-central-1.aws.symcld.net id 97/51-20707-DCB16116; Fri, 13 Aug 2021 07:14:21 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprJIsWRWlGSWpSXmKPExsViZ8MxVfestFi
-  iwdtVEhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8at7smsBU8EKpYeXc3SwNjN38XIxSEkMJtJ
-  4uaLt8wQzl5GiedzJrJ1MXJysAloSOyeepkZxBYR0JdYOnsPmM0soCZx9OVPMFtYIF3ix/yNr
-  CA2i4CqxPoLpxlBbF4BF4l536YzgdgSAgoSUx6+Z4aIC0qcnPmEBWKOhMTBFy+YIWqUJN5e2s
-  MIYVdIzJrVxjSBkXcWkpZZSFoWMDKtYrRMKspMzyjJTczM0TU0MNA1NDTWNdM1MjHQS6zSTdJ
-  LLdVNTs0rKUoEyuollhfrFVfmJuek6OWllmxiBIZYSiHbhx2MU9580DvEKMnBpCTKu+GsSKIQ
-  X1J+SmVGYnFGfFFpTmrxIUYZDg4lCd5gCbFEIcGi1PTUirTMHGC4w6QlOHiURHhfSQKleYsLE
-  nOLM9MhUqcYFaXEectBEgIgiYzSPLg2WIxdYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCTMGw
-  WMWCGezLwSuOmvgBYzAS1eZy0KsrgkESEl1cAke8DqS/Bpr2qR3fMX7DGsqBCs/hpw1ZY9ZG6
-  y/NYjKR/e9G5h1OO+4rSM62Om23kG/vxL/S+uvRNgMArVVZ/28Wba6x/znBcfMg7cnTr7a0tU
-  y9Iv3YaTjpevWWgfu3VpuEjrgRdH9X4piDxxyQ4Pub1sxxLrQxxcIhumZbZfY23tlNN1nxLAf
-  z78MF/J7oMXnTNbn7voKp6Ma3p4eMn5z1MKlBftfCtxakcvX0Dn1GrXfIE1c/tvP81786zTlk
-  VCvvLytFbb7JOzbLfIfTrV/mth+57/Tg/ZAsUvLjB+qOv/eJ3hZY6vArvOutW0Hsz76Lz41PV
-  e21cK8c/15gUlX5X66KZUfvAzI/s23er/SizFGYmGWsxFxYkA7lqnpSwDAAA=
-X-Env-Sender: leimaohui@fujitsu.com
-X-Msg-Ref: server-12.tower-248.messagelabs.com!1628838860!103388!1
-X-Originating-IP: [62.60.8.149]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 6123 invoked from network); 13 Aug 2021 07:14:21 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-12.tower-248.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 13 Aug 2021 07:14:21 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17D7EFVu016779
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Aug 2021 08:14:20 +0100
-Received: from localhost.localdomain (10.167.225.227) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 13 Aug 2021 08:14:13 +0100
-From: "leimaohui" <leimaohui@fujitsu.com>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: sakib.sajal@windriver.com)
+Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 17DGHtuw028873
+	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Aug 2021 09:17:55 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 17DGHs3D025384
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Aug 2021 09:17:55 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Fri, 13 Aug 2021 09:17:54 -0700
+Received: from yow-lpggp3.wrs.com (128.224.137.13) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Fri, 13 Aug 2021 09:17:54 -0700
+From: "Sakib Sajal" <sakib.sajal@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Lei Maohui <leimaohui@fujitsu.com>
-Subject: [oe] [meta-oe][PATCH] takao-fonts: It should be in ttf-fonts directory as the other ttf fonts.
-Date: Sat, 14 Aug 2021 00:14:04 +0800
-Message-ID: <1628871245-5054-1-git-send-email-leimaohui@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+Subject: [meta-oe][PATCH] lmdb: use libprefix in Makefile to install libraries
+Date: Fri, 13 Aug 2021 12:17:49 -0400
+Message-ID: <20210813161749.24182-1-sakib.sajal@windriver.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.227]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-- Moved it to ttf-fonts directory.
-- Rename to ttf-takao.
-- Use ttf.inc instead of rewrite do_install.
+Makefile used libdir which had hardcoded "$(exec_prefix)/lib"
+directory to install libraries. This is a problem for MULTILIB
+builds as libraries are installed in "lib64" directory.
+Hence use libprefix which contains the correct path for installing
+libraries.
 
-Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
+Upstream-Status: oe-specific
+
+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
 ---
- .../ttf-takao_003.03.01.bb}                      | 16 ++++++++++++----
- 1 file changed, 12 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-graphics/{takao-fonts/takao-fonts_003.03.01.bb => ttf-fonts/ttf-takao_003.03.01.bb} (57%)
+ ...file-use-libprefix-instead-of-libdir.patch | 33 +++++++++++++++++++
+ meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb       |  5 +--
+ 2 files changed, 36 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch
 
-diff --git a/meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.03.01.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-takao_003.03.01.bb
-similarity index 57%
-rename from meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.03.01.bb
-rename to meta-oe/recipes-graphics/ttf-fonts/ttf-takao_003.03.01.bb
-index 9ddfc6ae7..2c373f946 100644
---- a/meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.03.01.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-takao_003.03.01.bb
-@@ -1,3 +1,5 @@
-+require ttf.inc
+diff --git a/meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch b/meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch
+new file mode 100644
+index 000000000..2e32d9c37
+--- /dev/null
++++ b/meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch
+@@ -0,0 +1,33 @@
++From 8d1d18f8ae4c3cd7ecdc79545f89459d1c9e4bfd Mon Sep 17 00:00:00 2001
++From: Sakib Sajal <sakib.sajal@windriver.com>
++Date: Fri, 13 Aug 2021 15:59:15 +0000
++Subject: [PATCH] Makefile: use libprefix instead of libdir
 +
- SUMMARY = "Takao Fonts are a community developed derivatives of IPA Fonts."
- DESCRIPTION = "Takao Fonts are a community developed derivatives of IPA Fonts."
- 
-@@ -6,14 +8,20 @@ SECTION = "User Interface/X"
- 
- LICENSE = "IPA"
- LIC_FILES_CHKSUM = "file://IPA_Font_License_Agreement_v1.0.txt;md5=6cd3351ba979cf9db1fad644e8221276"
-+PR = "r0"
++libdir expands to "$(exec_prefix)/lib" where "lib" is hardcoded.
++This is a problem for builds that enable MULTILIB since libraries
++are to be installed in "lib64" directory. Hence allow the directory
++to be configurable.
 +
- SRC_URI = "https://launchpad.net/${BPN}/trunk/15.03/+download/TakaoFonts_00303.01.tar.xz"
- SRC_URI[md5sum] = "8cd3fe724faa5034a9369e98cf108d2d"
- SRC_URI[sha256sum] = "e9871f72ac69acb3e277aebbee7ca01fbebf54800733e29fafdc46133fc3552f"
- 
- S = "${WORKDIR}/TakaoFonts_00303.01"
--do_install() {
--    install -m 0755 -d ${D}/${datadir}/fonts
--    install -m 0644 -p ${S}/*.ttf ${D}/${datadir}/fonts/
--}
++Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
++---
++ libraries/liblmdb/Makefile | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
 +
-+PACKAGES = "ttf-takao-pgothic ttf-takao-gothic ttf-takao-pmincho ttf-takao-mincho"
-+FONT_PACKAGES = "ttf-takao-pgothic ttf-takao-gothic ttf-takao-pmincho ttf-takao-mincho"
-+
-+FILES:ttf-takao-pgothic = "${datadir}/fonts/truetype/TakaoPGothic.ttf"
-+FILES:ttf-takao-gothic = "${datadir}/fonts/truetype/TakaoGothic.ttf"
-+FILES:ttf-takao-pmincho = "${datadir}/fonts/truetype/TakaoPMincho.ttf"
-+FILES:ttf-takao-mincho = "${datadir}/fonts/truetype/TakaoMincho.ttf"
++diff --git a/libraries/liblmdb/Makefile b/libraries/liblmdb/Makefile
++index f254511..1ec74e6 100644
++--- a/libraries/liblmdb/Makefile
+++++ b/libraries/liblmdb/Makefile
++@@ -46,11 +46,11 @@ all:	$(ILIBS) $(PROGS)
++ 
++ install: $(ILIBS) $(IPROGS) $(IHDRS)
++ 	mkdir -p $(DESTDIR)$(bindir)
++-	mkdir -p $(DESTDIR)$(libdir)
+++	mkdir -p $(DESTDIR)$(libprefix)
++ 	mkdir -p $(DESTDIR)$(includedir)
++ 	mkdir -p $(DESTDIR)$(mandir)/man1
++ 	for f in $(IPROGS); do cp $$f $(DESTDIR)$(bindir); done
++-	for f in $(ILIBS); do cp $$f $(DESTDIR)$(libdir); done
+++	for f in $(ILIBS); do cp $$f $(DESTDIR)$(libprefix); done
++ 	for f in $(IHDRS); do cp $$f $(DESTDIR)$(includedir); done
++ 	for f in $(IDOCS); do cp $$f $(DESTDIR)$(mandir)/man1; done
++ 
+diff --git a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
+index 0746da141..3c6ffe04e 100644
+--- a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
++++ b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
+@@ -10,7 +10,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972"
  
- FILES:${PN} += "${datadir}/fonts/*.ttf"
+ SRC_URI = "git://github.com/LMDB/lmdb.git;nobranch=1 \
+            file://run-ptest \
+-"
++           file://0001-Makefile-use-libprefix-instead-of-libdir.patch \
++           "
+ 
+ SRCREV = "LMDB_${PV}"
+ 
+@@ -26,7 +27,7 @@ do_compile() {
+ 
+ do_install() {
+     oe_runmake CC="${CC}" DESTDIR="${D}" prefix="${prefix}" libprefix="${libdir}" manprefix="${mandir}" SOEXT=".so.${PV}" LDFLAGS="${LDFLAGS}" install
+-    cd ${D}/${libdir}
++    cd ${D}${libdir}
+     ln -s liblmdb.so.${PV} liblmdb.so
+     rm liblmdb.a
+ }
 -- 
-2.25.1
+2.32.0
 
