@@ -1,135 +1,149 @@
-Received: from mail-qv1-f46.google.com (mail-qv1-f46.google.com [209.85.219.46])
- by mx.groups.io with SMTP id smtpd.web08.7043.1628993270173112765
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web10.11329.1629036401624071910
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Aug 2021 19:07:50 -0700
+ Sun, 15 Aug 2021 07:06:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ge3pZSdX;
- spf=pass (domain: gmail.com, ip: 209.85.219.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f46.google.com with SMTP id v1so7432800qva.7
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Aug 2021 19:07:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=TnJViVX+;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id gz13-20020a17090b0ecdb0290178c0e0ce8bso16650066pjb.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Aug 2021 07:06:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=O/v6tJkh1pWedDpuXL6yVt3Kvmd+TCdBpkMUP6q/Gh8=;
-        b=Ge3pZSdXx+oPn57kG3L10tHpejY4cMHOdmh+ARYAfv5blqzS/VvPwZlFVqDpNz5ERs
-         2NY/SYEGCgAqj4EUce9AIzQmsGvexrt96iEq3Q2B3gfWz8Ni+yY7wkFfY7t1IbXBwBs/
-         MDRhfcsPWb6peKh51DJT4w0tpUxMAa/V79aWF59UJ4AbN0AKH05PxmnUNheqTfZIYJIN
-         b+78g5w9Le1x/gPf9TX2PzfPM69uigcTTjpd03ydnof0SE5/Gm3EW5bF/Bn5CPOVQyXG
-         IElL02QC6GAiZMavScij4koCKafdGdIg8G3h+SuZJGeuS/2UW4IpTc9PWHsZTMp4mYqR
-         9epg==
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=eUMU6+SPzo7JD4qqDngJ3boiTb+HT/JEZ37gEavzQ5w=;
+        b=TnJViVX+XcPT8X3ieh5ZVThMgLiLFBi1yyX9JBRXbos4Dj3g3x1ujVKuKxvNYhVQuE
+         1WV+27MgsPvLN/NebPtPPZlYEFPqsR0huYPPwrXjbyty5HJtc24THLTou9rlRy8lB6TZ
+         buiqD7xZwNIW9+kV9146ZqGCnTBUVMuPUSYV9RB9JxLi95askHxer71ekrCcqKDaLHro
+         flLVUetRXwoDrLsQmfu88D6ILWKoITmM83xbgZi/+fTtS29EFJl5pumq0AePyrzNhs32
+         CmZhyN5sIF9kUeWXSUUkefK3e3sZn+bgaXm+GRURCMjatU7CXaTsrhlbt52kg5xEmm1o
+         XBkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=O/v6tJkh1pWedDpuXL6yVt3Kvmd+TCdBpkMUP6q/Gh8=;
-        b=beSLR7TlvC7inqOWGfEKZgCN1X9PQ/ApgikveTQtxP9VCTxcrxdiWvgstReJjDLn/z
-         OTjvSsxMgwsBmNrPe8epbgZw9ThmI+khWD6u6EQfN1RPB/JSVtt2u2X2RG89ctQ1WQbp
-         IUWwhEI7SQfP9Hb9ejVRAHjKiAJc8rkTwlE+P0TylhJwlaFaQXUUfdbvBiQbRiuIkNBD
-         CuUsV7ACwia3B5mbEnXlrgZrDUsxAeIp6VluyOXVaYZXKCRjGI6+WmAU25OmAJ1aMUOO
-         hXz9pst72z+c/3yEiGLAHrlKtlLel9UB0EkHsgoB+APXZjJI7HiUKhixVB2oUrL3xEkM
-         sJKA==
-X-Gm-Message-State: AOAM530y8XlHlOIThKIVIox2pc+0FAeVr/DjTv2yvPuRl+trs6phEekO
-	ISYF/EsQ4Xdkn+Q4vMApQLAZJP+i6BrauNdFaFU=
-X-Google-Smtp-Source: ABdhPJwN0AZj/+kBYUaKMlb92oxiOCv8zoPoErHFuOVViwTtAjUqCbWckpNsfWmc49ZCVRNcImcfryu/xUOM5NvvHhE=
-X-Received: by 2002:ad4:5f0d:: with SMTP id fo13mr10099063qvb.31.1628993269237;
- Sat, 14 Aug 2021 19:07:49 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=eUMU6+SPzo7JD4qqDngJ3boiTb+HT/JEZ37gEavzQ5w=;
+        b=rqIfsS2bgSdFh0SKoZF8Ak1TDq9L9eC/feHV00tW6bly2BUU2D4KEvo1KDnwkMS0b5
+         soaXpFF+FHLtxanJCX5UYCY3ensjS/GxoXiG0JHrHOi/h7VJkL+xxTKCZ9gdhdWaBb+/
+         imQYYSrrIA8YJEi56VuwNgD83VPy0KQqQTZdEDpcivk2aPnxYVqeuZrZyp6E4u1Mz7G9
+         Mu6CIm8xebk5ZqFp2SSoP1xacRdYU+xKh9CxBxHRAWJJ3+fhfzl81dZeMCrxc9sA8pJC
+         Z7h6ZEk0Ft4a4bm2hOLYH9tJXQNi+zF3fSuSBJxD11kRdpduQ8VsfEeTjN/A/uVkmWpq
+         WVJg==
+X-Gm-Message-State: AOAM532smef48obSw+LdF3MMWD9fNmOXkJuykoHwBsSLG/H6WHof58Oj
+	3GLhA1HEZ7bLax4eLOurIVAgI/jvcwPSrQ==
+X-Google-Smtp-Source: ABdhPJw69MfjSEOoDkr6t34T1Pmnf9nFw4g+J6xAOnrbWOKKVaIfB2MnfCes0nR0/oPO4NysvfZBqg==
+X-Received: by 2002:a63:682:: with SMTP id 124mr11357021pgg.299.1629036400764;
+        Sun, 15 Aug 2021 07:06:40 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:162c:344d:280d:4a4c])
+        by smtp.gmail.com with ESMTPSA id y67sm8332901pfg.218.2021.08.15.07.06.40
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 15 Aug 2021 07:06:40 -0700 (PDT)
+From: "Armin Kuster" <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [hardknott 00/18] Patch review
+Date: Sun, 15 Aug 2021 07:06:12 -0700
+Message-Id: <cover.1629036279.git.akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20210813161749.24182-1-sakib.sajal@windriver.com>
-In-Reply-To: <20210813161749.24182-1-sakib.sajal@windriver.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sat, 14 Aug 2021 19:07:23 -0700
-Message-ID: <CAMKF1soXTyDigHxU8GTm=yijZWH+nHLbUb2-BGj9xRiDyAG2iw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] lmdb: use libprefix in Makefile to install libraries
-To: Sakib Sajal <sakib.sajal@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-sadly it does not pass patching stage see
-https://errors.yoctoproject.org/Errors/Details/601024/
+Please have comments back by Tuesday
 
-On Fri, Aug 13, 2021 at 9:18 AM Sakib Sajal <sakib.sajal@windriver.com> wrote:
->
-> Makefile used libdir which had hardcoded "$(exec_prefix)/lib"
-> directory to install libraries. This is a problem for MULTILIB
-> builds as libraries are installed in "lib64" directory.
-> Hence use libprefix which contains the correct path for installing
-> libraries.
->
-> Upstream-Status: oe-specific
->
-> Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
-> ---
->  ...file-use-libprefix-instead-of-libdir.patch | 33 +++++++++++++++++++
->  meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb       |  5 +--
->  2 files changed, 36 insertions(+), 2 deletions(-)
->  create mode 100644 meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch
->
-> diff --git a/meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch b/meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch
-> new file mode 100644
-> index 000000000..2e32d9c37
-> --- /dev/null
-> +++ b/meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch
-> @@ -0,0 +1,33 @@
-> +From 8d1d18f8ae4c3cd7ecdc79545f89459d1c9e4bfd Mon Sep 17 00:00:00 2001
-> +From: Sakib Sajal <sakib.sajal@windriver.com>
-> +Date: Fri, 13 Aug 2021 15:59:15 +0000
-> +Subject: [PATCH] Makefile: use libprefix instead of libdir
-> +
-> +libdir expands to "$(exec_prefix)/lib" where "lib" is hardcoded.
-> +This is a problem for builds that enable MULTILIB since libraries
-> +are to be installed in "lib64" directory. Hence allow the directory
-> +to be configurable.
-> +
-> +Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
-> +---
-> + libraries/liblmdb/Makefile | 4 ++--
-> + 1 file changed, 2 insertions(+), 2 deletions(-)
-> +
-> +diff --git a/libraries/liblmdb/Makefile b/libraries/liblmdb/Makefile
-> +index f254511..1ec74e6 100644
-> +--- a/libraries/liblmdb/Makefile
-> ++++ b/libraries/liblmdb/Makefile
-> +@@ -46,11 +46,11 @@ all:       $(ILIBS) $(PROGS)
-> +
-> + install: $(ILIBS) $(IPROGS) $(IHDRS)
-> +       mkdir -p $(DESTDIR)$(bindir)
-> +-      mkdir -p $(DESTDIR)$(libdir)
-> ++      mkdir -p $(DESTDIR)$(libprefix)
-> +       mkdir -p $(DESTDIR)$(includedir)
-> +       mkdir -p $(DESTDIR)$(mandir)/man1
-> +       for f in $(IPROGS); do cp $$f $(DESTDIR)$(bindir); done
-> +-      for f in $(ILIBS); do cp $$f $(DESTDIR)$(libdir); done
-> ++      for f in $(ILIBS); do cp $$f $(DESTDIR)$(libprefix); done
-> +       for f in $(IHDRS); do cp $$f $(DESTDIR)$(includedir); done
-> +       for f in $(IDOCS); do cp $$f $(DESTDIR)$(mandir)/man1; done
-> +
-> diff --git a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
-> index 0746da141..3c6ffe04e 100644
-> --- a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
-> +++ b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
-> @@ -10,7 +10,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972"
->
->  SRC_URI = "git://github.com/LMDB/lmdb.git;nobranch=1 \
->             file://run-ptest \
-> -"
-> +           file://0001-Makefile-use-libprefix-instead-of-libdir.patch \
-> +           "
->
->  SRCREV = "LMDB_${PV}"
->
-> @@ -26,7 +27,7 @@ do_compile() {
->
->  do_install() {
->      oe_runmake CC="${CC}" DESTDIR="${D}" prefix="${prefix}" libprefix="${libdir}" manprefix="${mandir}" SOEXT=".so.${PV}" LDFLAGS="${LDFLAGS}" install
-> -    cd ${D}/${libdir}
-> +    cd ${D}${libdir}
->      ln -s liblmdb.so.${PV} liblmdb.so
->      rm liblmdb.a
->  }
-> --
-> 2.32.0
->
->
-> 
->
+The following changes since commit 5a4b2ab29d38c02535f24d5308cc40615739f557:
+
+  python3-urllib3: Upgrade 1.26.4 -> 1.26.5 (2021-07-30 16:20:20 -0700)
+
+are available in the Git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib stable/hardknott-nut
+  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/hardknott-nut
+
+Anastasios Kavoukis (1):
+  pm-qa: fix paths for shell scripts
+
+Armin Kuster (1):
+  wireshark: update to 3.4.7
+
+Changqing Li (1):
+  ndpi: fix CVE-2021-36082
+
+Devendra Tewari (1):
+  Suppress eol in functionfs setup scripts (#147)
+
+Gianfranco (1):
+  vboxguestdrivers: upgrade 6.1.22 -> 6.1.24
+
+Joe Slater (1):
+  php: move to version 7.4.21
+
+Kai Kang (1):
+  libdbi-perl: fix CVE-2014-10402
+
+Li Wang (1):
+  openlldp: fix segfault
+
+Michael Opdenacker (1):
+  bigbuckbunny-1080p: fix sample video URL
+
+Mingli Yu (2):
+  mariadb: redefine log-error item
+  mariadb: Update SRC_URI
+
+Paulo Neves (1):
+  htop: Add ncurses-terminfo-base to RDEPENDS
+
+Tony Battersby (3):
+  net-snmp: fix QA Issue after LDFLAGS change
+  curlpp: fix QA Issue after LDFLAGS change
+  ldns: fix QA Issue after LDFLAGS change
+
+Tony Tascioglu (1):
+  redis: fix CVE-2021-32625
+
+wangmy (2):
+  nghttp2: upgrade 1.43.0 -> 1.44.0
+  libtalloc: upgrade 2.3.2 -> 2.3.3
+
+ .../sample-content/bigbuckbunny-1080p.bb      |   2 +-
+ .../net-snmp/net-snmp_5.9.1.bb                |   5 +
+ .../lldp_head-remove-all-references.patch     | 331 ++++++++++++++++++
+ .../openlldp/openlldp_1.0.1.bb                |   1 +
+ .../recipes-support/curlpp/curlpp_0.8.1.bb    |   7 +
+ ...{libtalloc_2.3.2.bb => libtalloc_2.3.3.bb} |   6 +-
+ .../{nghttp2_1.43.0.bb => nghttp2_1.44.0.bb}  |   2 +-
+ .../ntopng/files/CVE-2021-36082.patch         | 116 ++++++
+ .../recipes-support/ntopng/ndpi_3.4.bb        |   1 +
+ ...{wireshark_3.4.6.bb => wireshark_3.4.7.bb} |   2 +-
+ meta-oe/recipes-dbs/mysql/mariadb.inc         |   7 +-
+ meta-oe/recipes-dbs/mysql/mariadb/my.cnf      |   2 +-
+ .../android-gadget-cleanup                    |   2 +-
+ .../android-gadget-setup                      |   4 +-
+ .../android-gadget-start                      |   2 +-
+ meta-oe/recipes-devtools/ldns/ldns_1.7.1.bb   |   7 +
+ .../perl/libdbi-perl/CVE-2014-10402.patch     |  56 +++
+ .../perl/libdbi-perl_1.643.bb                 |   4 +-
+ .../php/{php_7.4.16.bb => php_7.4.21.bb}      |   3 +-
+ .../redis/redis/fix-CVE-2021-32625.patch      |  61 ++++
+ meta-oe/recipes-extended/redis/redis_6.2.2.bb |   1 +
+ meta-oe/recipes-support/htop/htop_3.0.5.bb    |   2 +
+ .../40-linux-5.13-support.patch               | 276 ---------------
+ ...s_6.1.22.bb => vboxguestdrivers_6.1.26.bb} |   6 +-
+ meta-oe/recipes-test/pm-qa/pm-qa_git.bb       |   3 +-
+ 25 files changed, 610 insertions(+), 299 deletions(-)
+ create mode 100644 meta-networking/recipes-protocols/openlldp/files/lldp_head-remove-all-references.patch
+ rename meta-networking/recipes-support/libtalloc/{libtalloc_2.3.2.bb => libtalloc_2.3.3.bb} (91%)
+ rename meta-networking/recipes-support/nghttp2/{nghttp2_1.43.0.bb => nghttp2_1.44.0.bb} (93%)
+ create mode 100644 meta-networking/recipes-support/ntopng/files/CVE-2021-36082.patch
+ rename meta-networking/recipes-support/wireshark/{wireshark_3.4.6.bb => wireshark_3.4.7.bb} (97%)
+ create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2014-10402.patch
+ rename meta-oe/recipes-devtools/php/{php_7.4.16.bb => php_7.4.21.bb} (99%)
+ create mode 100644 meta-oe/recipes-extended/redis/redis/fix-CVE-2021-32625.patch
+ delete mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/40-linux-5.13-support.patch
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_6.1.22.bb => vboxguestdrivers_6.1.26.bb} (94%)
+
+-- 
+2.25.1
+
