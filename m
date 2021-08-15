@@ -1,377 +1,110 @@
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web08.11470.1629036409762067572
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web10.11334.1629036410544600803
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Aug 2021 07:06:49 -0700
+ Sun, 15 Aug 2021 07:06:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=WKNvo+JX;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id u1so737811plr.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Aug 2021 07:06:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=hDt7uc9z;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d17so17821337plr.12
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Aug 2021 07:06:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=+wspGzyeByVDuCJ2HWHItYBKo2Dcl/mOZbT1MBWfwIc=;
-        b=WKNvo+JXRiewNiXRAK6oxUDEIZN1unZWF2Ag/sOQ2O1Bwv9FISSwpg1gCgU3wpcXXV
-         c5zY3uo71y16cBSY46qQrIDTBERDYb/nwV8wmUmlcbLJjtG5UxYcJgHcyTmEzfS805Yw
-         xTZDm25lMq/U36zgtF5W8e5hRSjxliSScxflXi4TUkclvb4h3hGo8D54YtM+YZY3Khwq
-         Pv+C3xXGV+KyJuNRrwCKIXLtAyybGrEisedXfIVx3QGwRyMDxr5rCN+wx9nO1kC4nVH/
-         HFYGPANBsbywAOx7Tx/r9sRg4MzmZL54SEAKHGoD2l5Ff0K7UD8txfjE7lbyEl5BQB3U
-         G3+A==
+        bh=8cC49GOgWTRAYC23wB54m2bTe3/9BO8WqHIgUtVpgig=;
+        b=hDt7uc9zyOZu0f/jERLGemBSnEKqm/5D2SbOXEXZ/+RBvNvrrRhi9uyc08g1LAEKNN
+         JfhvSzQPPXetwiiO0h98YQUuDimAa4c0Psw3WDx97h/Z26SWtSnrnTDost47fR0Ctf7p
+         Jt4Rnb4+K0XiXWZLsXZ/zvXPDi2fR+RMJZw+mx7GTTzLFg9BWdJi41V6b7M79Cv9MxJj
+         CXuXllA3yddW3wbay2uyeNW3ioCO1LfuqpxrTWvE87qhAsnJimQbwyhsI9P0H2glUvhf
+         JyUcbV7KNM7+OwHId/dE8Zz27NwaOP15DvOMB/6apTYDYPURFGjP30xubjGBon5VQsPg
+         w0ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=+wspGzyeByVDuCJ2HWHItYBKo2Dcl/mOZbT1MBWfwIc=;
-        b=J7qFMDoeIY9qz7r71tMCfMaPTazxAPUXCw8FVvbKJ5G+OTPbUzz9YumqJqe3cknhaq
-         1NPAdZHT6xFY2weiT3Rtk7SGMaNqaEUvAJWBxrIqBgF8Hv0EIp4PnNIJ1f0rrosew6q/
-         uhB/knlCbcja2CnfRCgL17FSMYRZMCWH9f7Ysn6d8pazd/31V9ML+lfVX23HSpFPWPRM
-         WsiTLqkuUC0isyN7U42MkaEFEG2eYQ5EzB2qBjO0fBDrQPkq8FWK+V7RyyBWy56VQBa1
-         vXFdDze0c5UGLIIFDrgr7u276T1u6CdHZKW7hmsOimyeoXlz013m182oft7wiSonSVDK
-         oNWQ==
-X-Gm-Message-State: AOAM531a8YRc2JDd6YD3/3ICXPXzNYo0RUs1mfGyCPqPZ5o5L4gamKo8
-	A+g/EsNHd7DZovlG/B6pgOeDopu8WO/Dmg==
-X-Google-Smtp-Source: ABdhPJzuNDY77ms9/WiKPieQj/WNnj5hnFjH2wfbPdxlklm12di83yYhMhB8XU2/cNNQi7+zQFL6YQ==
-X-Received: by 2002:a65:6894:: with SMTP id e20mr11196463pgt.419.1629036409099;
+        bh=8cC49GOgWTRAYC23wB54m2bTe3/9BO8WqHIgUtVpgig=;
+        b=W5PO+yvsV1Y6z4TzgRiZwerYzqHx2tNEFeF6YiUny53qEnJBpQ3aW59FawYlW0nvLw
+         Zn6zPIIwMefpqRQqUPc4vJClUbCQKzZMU1LzOPxyyCYzkygsTeLahfVVH0eYSt8QZq8t
+         clW4SASTqlblDTX3sNB7b6x1xEOc0v6QbW83jnDCdQAzbBSo28MeMOTOJptYzI80UF0O
+         7aNdysry3AoAlVIngY3SsBmNeJOxc9oCB0Qqzxpxvo4lYZDMM/LgogdPQ720IGKqfvV1
+         9bpE7MYPfZwFhinVXb4Gwm5ydEJiPc2TRWFjZ/c8oRzJz5IcvUEwc1MLLYNZ7LVKNtjq
+         kzPA==
+X-Gm-Message-State: AOAM5312dO8X80hWsY3v2SL1ArNUrJGMW+xxkoESl2ZPKErGNg+Hp1/M
+	M8bb+YCtTvZgEREXfU85KKpR060mDDhg9Q==
+X-Google-Smtp-Source: ABdhPJzFt63B8p+6b0rwaoHAAdMwsEMZOOpV285TKmlAGewlOtf5o5i5x1lJk0aJIiwcACjGU7XWSw==
+X-Received: by 2002:a05:6a00:8c7:b029:3a1:119b:736 with SMTP id s7-20020a056a0008c7b02903a1119b0736mr11859910pfu.52.1629036409989;
         Sun, 15 Aug 2021 07:06:49 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:162c:344d:280d:4a4c])
-        by smtp.gmail.com with ESMTPSA id y67sm8332901pfg.218.2021.08.15.07.06.48
+        by smtp.gmail.com with ESMTPSA id y67sm8332901pfg.218.2021.08.15.07.06.49
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Aug 2021 07:06:48 -0700 (PDT)
+        Sun, 15 Aug 2021 07:06:49 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 10/18] vboxguestdrivers: upgrade 6.1.22 -> 6.1.24
-Date: Sun, 15 Aug 2021 07:06:22 -0700
-Message-Id: <620e4a48f57978ec1b67349773589362fb3b15c9.1629036279.git.akuster808@gmail.com>
+Subject: [hardknott 11/18] mariadb: redefine log-error item
+Date: Sun, 15 Aug 2021 07:06:23 -0700
+Message-Id: <56b77e4fe7591580fa9d8335d697652ae11601fe.1629036279.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1629036279.git.akuster808@gmail.com>
 References: <cover.1629036279.git.akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Gianfranco <costamagna.gianfranco@gmail.com>
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Drop patch to fix build failure with kernel 5.13, now part of upstream codebase
+The log-error item which defined in my.cnf is "/var/log/mysqld.err"
+previouly and it's not consistent with which created in install_db
+service file which will call mysql-systemd-start to create the file
+"/var/log/mysqld.log".
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+And it fails when boot with sysvinit as below:
+ $ service mysqld start
+ Starting MariaDB.210727 04:05:03 mysqld_safe Logging to '/var/log/mysqld.err'.
+ 210727 04:05:03 mysqld_safe Starting mariadbd daemon with databases from /var/lib/mysql
+ /usr/bin/mysqld_safe_helper: Can't create/write to file '/var/log/mysqld.err' (Errcode: 13 "Permission denied")
+
+So make the log-error item consistent to fix the above failure
+and also remove the related workaround when boot with systemd.
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 66b5131e266a6e4a82b467d58cb657a28a2e4b7e)
-[stable branch]
+(cherry picked from commit 1a4144d954692ad68121d16adae09dc990e8ab1f)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../40-linux-5.13-support.patch               | 276 ------------------
- ...s_6.1.22.bb => vboxguestdrivers_6.1.26.bb} |   6 +-
- 2 files changed, 3 insertions(+), 279 deletions(-)
- delete mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/40-linux-5.13-support.patch
- rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_6.1.22.bb => vboxguestdrivers_6.1.26.bb} (94%)
+ meta-oe/recipes-dbs/mysql/mariadb.inc    | 5 -----
+ meta-oe/recipes-dbs/mysql/mariadb/my.cnf | 2 +-
+ 2 files changed, 1 insertion(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/40-linux-5.13-support.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/40-linux-5.13-support.patch
-deleted file mode 100644
-index e95e240492..0000000000
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/40-linux-5.13-support.patch
-+++ /dev/null
-@@ -1,276 +0,0 @@
--Subject: Fix build errors with linux 5.13
--Origin: upstream, https://www.virtualbox.org/browser/vbox/trunk
--Bug: https://bugs.launchpad.net/bugs/1929193
--
--diff -urpN virtualbox-6.1.22-dfsg.orig/src/VBox/Additions/linux/drm/vbox_drv.h virtualbox-6.1.22-dfsg/src/VBox/Additions/linux/drm/vbox_drv.h
----- virtualbox-6.1.22-dfsg.orig/src/VBox/Additions/linux/drm/vbox_drv.h	2021-04-28 16:24:47.000000000 +0000
--+++ virtualbox-6.1.22-dfsg/src/VBox/Additions/linux/drm/vbox_drv.h	2021-06-23 10:08:44.431714404 +0000
--@@ -46,20 +41,20 @@
--  * Evaluates to true if the linux kernel version is equal or higher to the
--  * one specfied. */
-- #define RTLNX_VER_MIN(a_Major, a_Minor, a_Patch) \
---    (LINUX_VERSION_CODE >= KERNEL_VERSION(a_Major, a_Minor, a_Patch))
--+	(LINUX_VERSION_CODE >= KERNEL_VERSION(a_Major, a_Minor, a_Patch))
-- 
-- /** @def RTLNX_VER_MAX
--  * Evaluates to true if the linux kernel version is less to the one specfied
--  * (exclusive). */
-- #define RTLNX_VER_MAX(a_Major, a_Minor, a_Patch) \
---    (LINUX_VERSION_CODE < KERNEL_VERSION(a_Major, a_Minor, a_Patch))
--+	(LINUX_VERSION_CODE < KERNEL_VERSION(a_Major, a_Minor, a_Patch))
-- 
-- /** @def RTLNX_VER_RANGE
--  * Evaluates to true if the linux kernel version is equal or higher to the given
--  * minimum version and less (but not equal) to the maximum version (exclusive). */
-- #define RTLNX_VER_RANGE(a_MajorMin, a_MinorMin, a_PatchMin,  a_MajorMax, a_MinorMax, a_PatchMax) \
---    (   LINUX_VERSION_CODE >= KERNEL_VERSION(a_MajorMin, a_MinorMin, a_PatchMin) \
---     && LINUX_VERSION_CODE <  KERNEL_VERSION(a_MajorMax, a_MinorMax, a_PatchMax) )
--+	(   LINUX_VERSION_CODE >= KERNEL_VERSION(a_MajorMin, a_MinorMin, a_PatchMin) \
--+	 && LINUX_VERSION_CODE <  KERNEL_VERSION(a_MajorMax, a_MinorMax, a_PatchMax) )
-- 
-- 
-- /** @def RTLNX_RHEL_MIN
--@@ -70,7 +65,7 @@
--  */
-- #if defined(RHEL_MAJOR) && defined(RHEL_MINOR)
-- # define RTLNX_RHEL_MIN(a_iMajor, a_iMinor) \
---     ((RHEL_MAJOR) > (a_iMajor) || ((RHEL_MAJOR) == (a_iMajor) && (RHEL_MINOR) >= (a_iMinor)))
--+	 ((RHEL_MAJOR) > (a_iMajor) || ((RHEL_MAJOR) == (a_iMajor) && (RHEL_MINOR) >= (a_iMinor)))
-- #else
-- # define RTLNX_RHEL_MIN(a_iMajor, a_iMinor) (0)
-- #endif
--@@ -83,7 +78,7 @@
--  */
-- #if defined(RHEL_MAJOR) && defined(RHEL_MINOR)
-- # define RTLNX_RHEL_MAX(a_iMajor, a_iMinor) \
---     ((RHEL_MAJOR) < (a_iMajor) || ((RHEL_MAJOR) == (a_iMajor) && (RHEL_MINOR) < (a_iMinor)))
--+	 ((RHEL_MAJOR) < (a_iMajor) || ((RHEL_MAJOR) == (a_iMajor) && (RHEL_MINOR) < (a_iMinor)))
-- #else
-- # define RTLNX_RHEL_MAX(a_iMajor, a_iMinor) (0)
-- #endif
--@@ -95,7 +90,7 @@
--  */
-- #if defined(RHEL_MAJOR) && defined(RHEL_MINOR)
-- # define RTLNX_RHEL_RANGE(a_iMajorMin, a_iMinorMin,  a_iMajorMax, a_iMinorMax) \
---     (RTLNX_RHEL_MIN(a_iMajorMin, a_iMinorMin) && RTLNX_RHEL_MAX(a_iMajorMax, a_iMinorMax))
--+	 (RTLNX_RHEL_MIN(a_iMajorMin, a_iMinorMin) && RTLNX_RHEL_MAX(a_iMajorMax, a_iMinorMax))
-- #else
-- # define RTLNX_RHEL_RANGE(a_iMajorMin, a_iMinorMin,  a_iMajorMax, a_iMinorMax)  (0)
-- #endif
--@@ -173,7 +168,9 @@
-- #include <drm/ttm/ttm_bo_api.h>
-- #include <drm/ttm/ttm_bo_driver.h>
-- #include <drm/ttm/ttm_placement.h>
--+#if RTLNX_VER_MAX(5,13,0)
-- #include <drm/ttm/ttm_memory.h>
--+#endif
-- #if RTLNX_VER_MAX(5,12,0)
-- # include <drm/ttm/ttm_module.h>
-- #endif
--@@ -222,7 +219,7 @@ static inline void drm_gem_object_put(st
-- 				 VBVA_ADAPTER_INFORMATION_SIZE)
-- #define GUEST_HEAP_SIZE   VBVA_ADAPTER_INFORMATION_SIZE
-- #define GUEST_HEAP_USABLE_SIZE (VBVA_ADAPTER_INFORMATION_SIZE - \
---				sizeof(HGSMIHOSTFLAGS))
--+				sizeof(struct hgsmi_host_flags))
-- #define HOST_FLAGS_OFFSET GUEST_HEAP_USABLE_SIZE
-- 
-- /** How frequently we refresh if the guest is not providing dirty rectangles. */
--@@ -232,7 +229,7 @@ static inline void drm_gem_object_put(st
-- static inline void *devm_kcalloc(struct device *dev, size_t n, size_t size,
-- 				 gfp_t flags)
-- {
---    return devm_kzalloc(dev, n * size, flags);
--+	return devm_kzalloc(dev, n * size, flags);
-- }
-- #endif
-- 
--@@ -244,7 +241,7 @@ struct vbox_private {
-- 	u8 __iomem *guest_heap;
-- 	u8 __iomem *vbva_buffers;
-- 	struct gen_pool *guest_pool;
---	struct VBVABUFFERCONTEXT *vbva_info;
--+	struct vbva_buf_context *vbva_info;
-- 	bool any_pitch;
-- 	u32 num_crtcs;
-- 	/** Amount of available VRAM, including space used for buffers. */
--@@ -252,7 +249,7 @@ struct vbox_private {
-- 	/** Amount of available VRAM, not including space used for buffers. */
-- 	u32 available_vram_size;
-- 	/** Array of structures for receiving mode hints. */
---	VBVAMODEHINT *last_mode_hints;
--+	struct vbva_modehint *last_mode_hints;
-- 
-- 	struct vbox_fbdev *fbdev;
-- 
--@@ -263,7 +260,11 @@ struct vbox_private {
-- 		struct drm_global_reference mem_global_ref;
-- 		struct ttm_bo_global_ref bo_global_ref;
-- #endif
--+#if RTLNX_VER_MIN(5,13,0) 
--+		struct ttm_device bdev; 
--+#else
-- 		struct ttm_bo_device bdev;
--+#endif
-- 		bool mm_initialised;
-- 	} ttm;
-- 
--diff -urpN virtualbox-6.1.22-dfsg.orig/src/VBox/Additions/linux/drm/vbox_ttm.c virtualbox-6.1.22-dfsg/src/VBox/Additions/linux/drm/vbox_ttm.c
----- virtualbox-6.1.22-dfsg.orig/src/VBox/Additions/linux/drm/vbox_ttm.c	2021-04-28 16:24:47.000000000 +0000
--+++ virtualbox-6.1.22-dfsg/src/VBox/Additions/linux/drm/vbox_ttm.c	2021-06-23 10:08:07.164057918 +0000
--@@ -48,7 +43,11 @@
-- #endif
-- 
-- 
--+#if RTLNX_VER_MIN(5,13,0)
--+static inline struct vbox_private *vbox_bdev(struct ttm_device *bd)
--+#else
-- static inline struct vbox_private *vbox_bdev(struct ttm_bo_device *bd)
--+#endif
-- {
-- 	return container_of(bd, struct vbox_private, ttm.bdev);
-- }
--@@ -188,7 +187,7 @@ static int vbox_ttm_io_mem_reserve(struc
-- 	mem->bus.size = mem->num_pages << PAGE_SHIFT;
-- 	mem->bus.base = 0;
-- 	mem->bus.is_iomem = false;
---	if (!(man->flags & TTM_MEMTYPE_FLAG_MAPPABLE))
--+	 if (!(man->flags & TTM_MEMTYPE_FLAG_MAPPABLE))
-- 		return -EINVAL;
-- 	switch (mem->mem_type) {
-- 	case TTM_PL_SYSTEM:
--@@ -205,8 +204,13 @@ static int vbox_ttm_io_mem_reserve(struc
-- 	return 0;
-- }
-- #else
--+# if RTLNX_VER_MAX(5,13,0)
-- static int vbox_ttm_io_mem_reserve(struct ttm_bo_device *bdev,
-- 				   struct ttm_resource *mem)
--+# else /* > 5.13.0 */
--+static int vbox_ttm_io_mem_reserve(struct ttm_device *bdev,
--+				   struct ttm_resource *mem)
--+# endif /* > 5.13.0 */
-- {
-- 	struct vbox_private *vbox = vbox_bdev(bdev);
-- 	mem->bus.addr = NULL;
--@@ -241,7 +245,12 @@ static int vbox_ttm_io_mem_reserve(struc
-- 
-- 
-- 
---#if RTLNX_VER_MIN(5,10,0)
--+#if RTLNX_VER_MIN(5,13,0)
--+static void vbox_ttm_io_mem_free(struct ttm_device *bdev,
--+				 struct ttm_resource *mem)
--+{
--+}
--+#elif RTLNX_VER_MIN(5,10,0)
-- static void vbox_ttm_io_mem_free(struct ttm_bo_device *bdev,
-- 				 struct ttm_resource *mem)
-- {
--@@ -253,7 +262,13 @@ static void vbox_ttm_io_mem_free(struct
-- }
-- #endif
-- 
---#if RTLNX_VER_MIN(5,10,0)
--+#if RTLNX_VER_MIN(5,13,0)
--+static void vbox_ttm_tt_destroy(struct ttm_device *bdev, struct ttm_tt *tt)
--+{
--+	ttm_tt_fini(tt);
--+	kfree(tt);
--+}
--+#elif RTLNX_VER_MIN(5,10,0)
-- static void vbox_ttm_tt_destroy(struct ttm_bo_device *bdev, struct ttm_tt *tt)
-- {
-- 	ttm_tt_fini(tt);
--@@ -333,7 +348,11 @@ static int vbox_bo_move(struct ttm_buffe
-- }
-- #endif
-- 
--+#if RTLNX_VER_MIN(5,13,0)
--+static struct ttm_device_funcs vbox_bo_driver = {
--+#else /* < 5.13.0 */
-- static struct ttm_bo_driver vbox_bo_driver = {
--+#endif /* < 5.13.0 */
-- 	.ttm_tt_create = vbox_ttm_tt_create,
-- #if RTLNX_VER_MIN(5,10,0)
-- 	.ttm_tt_destroy = vbox_ttm_tt_destroy,
--@@ -370,14 +389,22 @@ int vbox_mm_init(struct vbox_private *vb
-- {
-- 	int ret;
-- 	struct drm_device *dev = vbox->dev;
--+#if RTLNX_VER_MIN(5,13,0)
--+	struct ttm_device *bdev = &vbox->ttm.bdev;
--+#else
-- 	struct ttm_bo_device *bdev = &vbox->ttm.bdev;
--+#endif
-- 
-- #if RTLNX_VER_MAX(5,0,0) && !RTLNX_RHEL_MAJ_PREREQ(7,7) && !RTLNX_RHEL_MAJ_PREREQ(8,1)
-- 	ret = vbox_ttm_global_init(vbox);
-- 	if (ret)
-- 		return ret;
-- #endif
--+#if RTLNX_VER_MIN(5,13,0)
--+	ret = ttm_device_init(&vbox->ttm.bdev,
--+#else
-- 	ret = ttm_bo_device_init(&vbox->ttm.bdev,
--+#endif
-- #if RTLNX_VER_MAX(5,0,0) && !RTLNX_RHEL_MAJ_PREREQ(7,7) && !RTLNX_RHEL_MAJ_PREREQ(8,1)
-- 				 vbox->ttm.bo_global_ref.ref.object,
-- #endif
--@@ -429,7 +456,11 @@ int vbox_mm_init(struct vbox_private *vb
-- 	return 0;
-- 
-- err_device_release:
--+#if RTLNX_VER_MIN(5,13,0)
--+	ttm_device_fini(&vbox->ttm.bdev);
--+#else
-- 	ttm_bo_device_release(&vbox->ttm.bdev);
--+#endif
-- #if RTLNX_VER_MAX(5,0,0) && !RTLNX_RHEL_MAJ_PREREQ(7,7) && !RTLNX_RHEL_MAJ_PREREQ(8,1)
-- err_ttm_global_release:
-- 	vbox_ttm_global_release(vbox);
--@@ -446,7 +477,11 @@ void vbox_mm_fini(struct vbox_private *v
-- #else
-- 	arch_phys_wc_del(vbox->fb_mtrr);
-- #endif
--+#if RTLNX_VER_MIN(5,13,0)
--+        ttm_device_fini(&vbox->ttm.bdev);
--+#else
-- 	ttm_bo_device_release(&vbox->ttm.bdev);
--+#endif
-- #if RTLNX_VER_MAX(5,0,0) && !RTLNX_RHEL_MAJ_PREREQ(7,7) && !RTLNX_RHEL_MAJ_PREREQ(8,1)
-- 	vbox_ttm_global_release(vbox);
-- #endif
--@@ -528,7 +563,9 @@ int vbox_bo_create(struct drm_device *de
-- {
-- 	struct vbox_private *vbox = dev->dev_private;
-- 	struct vbox_bo *vboxbo;
--+#if RTLNX_VER_MAX(5,13,0)
-- 	size_t acc_size;
--+#endif
-- 	int ret;
-- 
-- 	vboxbo = kzalloc(sizeof(*vboxbo), GFP_KERNEL);
--@@ -551,16 +588,20 @@ int vbox_bo_create(struct drm_device *de
-- 
-- 	vbox_ttm_placement(vboxbo, VBOX_MEM_TYPE_VRAM | VBOX_MEM_TYPE_SYSTEM);
-- 
--+#if RTLNX_VER_MAX(5,13,0)
-- 	acc_size = ttm_bo_dma_acc_size(&vbox->ttm.bdev, size,
-- 				       sizeof(struct vbox_bo));
--+#endif
-- 
-- 	ret = ttm_bo_init(&vbox->ttm.bdev, &vboxbo->bo, size,
-- 			  ttm_bo_type_device, &vboxbo->placement,
-- #if RTLNX_VER_MAX(4,17,0) && !RTLNX_RHEL_MAJ_PREREQ(7,6) && !RTLNX_SUSE_MAJ_PREREQ(15,1) && !RTLNX_SUSE_MAJ_PREREQ(12,5)
-- 			  align >> PAGE_SHIFT, false, NULL, acc_size,
---#else
--+#elif RTLNX_VER_MAX(5,13,0) /* < 5.13.0 */
-- 			  align >> PAGE_SHIFT, false, acc_size,
---#endif
--+#else /* > 5.13.0 */
--+			  align >> PAGE_SHIFT, false,
--+#endif /* > 5.13.0 */
-- #if RTLNX_VER_MIN(3,18,0) || RTLNX_RHEL_MAJ_PREREQ(7,2)
-- 			  NULL, NULL, vbox_bo_ttm_destroy);
-- #else
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.22.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.26.bb
-similarity index 94%
-rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.22.bb
-rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.26.bb
-index 19b8f8f46e..1b2fb44036 100644
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.22.bb
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.26.bb
-@@ -13,11 +13,11 @@ VBOX_NAME = "VirtualBox-${PV}"
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 5787ae4bd7..7cf08f4719 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -168,11 +168,6 @@ do_install() {
+     sed -i -e 's,@BINDIR@,${bindir},g' -e 's,@PREFIX@,${prefix},g' ${D}${systemd_unitdir}/system/mysqld.service \
+                                                                    ${D}${systemd_unitdir}/system/install_db.service
  
- SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
-     file://Makefile.utils \
--    file://40-linux-5.13-support.patch \
-     file://add__divmoddi4.patch \
- "
--SRC_URI[md5sum] = "abb1a20021e5915fe38c666e8c11cf80"
--SRC_URI[sha256sum] = "99816d2a15205d49362a31e8ffeb8262d2fa0678c751dfd0a7c43b2faca8be49"
-+
-+SRC_URI[md5sum] = "fce04bbef244b4df1a50e53d132d3e6f"
-+SRC_URI[sha256sum] = "0212602eea878d6c9fd7f4a3e0182da3e4505f31d25f5539fb8f7b1fbe366195"
- 
- S ?= "${WORKDIR}/vbox_module"
- S_task-patch = "${WORKDIR}/${VBOX_NAME}"
+-    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+-        install -d ${D}${sysconfdir}/tmpfiles.d
+-        echo "f /var/log/mysqld.err 0640 mysql mysql -" \
+-            > ${D}${sysconfdir}/tmpfiles.d/99-mysqld.conf
+-    fi
+     install -d ${D}${bindir}
+     install -m 755 ${WORKDIR}/mysql-systemd-start ${D}${bindir}
+     install -d ${D}${datadir}/doc/${PN}
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/my.cnf b/meta-oe/recipes-dbs/mysql/mariadb/my.cnf
+index dc4c172e54..75db46a559 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb/my.cnf
++++ b/meta-oe/recipes-dbs/mysql/mariadb/my.cnf
+@@ -10,7 +10,7 @@ user 						= mysql
+ port 						= 3306
+ socket 						= /var/lib/mysql/mysql.sock
+ pid-file 					= /var/lib/mysql/mysqld.pid
+-log-error 					= /var/log/mysqld.err
++log-error 					= /var/log/mysqld.log
+ basedir 					= /usr
+ datadir 					= /var/lib/mysql
+ skip-external-locking
 -- 
 2.25.1
 
