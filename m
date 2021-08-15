@@ -1,200 +1,152 @@
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web10.11336.1629036412076821608
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.web12.11485.1629036412833640541
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 15 Aug 2021 07:06:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=eeJtb9xr;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id c17so12559735plz.2
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=TZXbUfDk;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id u21-20020a17090a8915b02901782c36f543so28300773pjn.4
         for <openembedded-devel@lists.openembedded.org>; Sun, 15 Aug 2021 07:06:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=a0BPJsS2/diwyJPSqW7WdN3v0PUDh2tLcn1cgnNKhnw=;
-        b=eeJtb9xro6wDpalhVpbUk8hES1A/5DsUYCnsY7BVxXy5rL2pF5Yp9FQGWxD4mb0PB4
-         o87HPuZ9mCLq82/So1QfsapJ1Ugz8WaRriLz0PorDUOteEesov9FBpTSDZcQ7/AcJprO
-         wwW06ZRVXYQU44E5wTbmscknYQ4wN2z4PTqN6hvRnxsUqA80XfMF0lrZvURyq8+NtOyT
-         zGNMDMMpvkf0ga1TBndg0cf44pG4DidjTU/8aNMEth+2HeD2ZcP7p5O/YrIynEJHro5l
-         urMeSQg3bOAx728MRxgRVgboCd/SX0bRPAKUHw9Tsh7REXne4OFaB5WJyhK3PXkjtpWR
-         J88g==
+        bh=n+a5e8JiK5LGy+WCVAN5Q5x3m867DSJymFrLz04mO3c=;
+        b=TZXbUfDkj71CQhv4gr5i1kqs8FTUHaDtvqor8aTEKOYB2UbxZe9jd7xiqjVlev/uD+
+         kwJ0/pvKKWcl1O71Lf0T7mGe17hIif6CIte75zjUQjhdg+14M7Nuje/rJAdYDxn7gP+/
+         lhxVbWbe6PCK69NUEdAv+a0yobi6ZcRyBVCvaPqsYDpg2Z5HlAnrhDg8AMwVrlB2uiOr
+         LNFgBNCNb3nyJjW5nWa3SGC3c3fq5G56naIqToM7G0Wn0ZgMWVxaS1x6K7GCKAFkTrOy
+         y6JKpksTaH3LzLxhTqBiDs+JCUiug6EDg9QUGMipSSZ9h7xVjKgLRdnq7FKbDWNVhBWl
+         Jc8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=a0BPJsS2/diwyJPSqW7WdN3v0PUDh2tLcn1cgnNKhnw=;
-        b=K1w/NmWwzuVg1XY0uo/KEyYMNRq+UnLGPupW7l6QgA8kWsBlIxqSJCW/0+KylhB8wq
-         S1aiMR3+XcFc4x+Eqb2b2C7kp+RLqyFb+9G3a+zT7IiBIk+MSyDS+jgDEQPKccDKZ7rJ
-         FBBAiSNde9JEZXNQGgtemkZQt1zKD4mhqPfr05ukL5vwEkf2qCsSKMr8JC7heW+pGZ1M
-         d3rzk7+YO3Pq84SbGmKdHPQVIZ231Yq2tr0Z24kpjmsbzVCsHnfZGTEhloaWv8DOG7zC
-         U0eGKMzIMRKY8WWjAhuB2DpfEBkj1iSKytHiFIG3x67PZHtDP6E6i7dHLQdDHWhRYcbF
-         tr3w==
-X-Gm-Message-State: AOAM5326uFM0WnR4p9bkVzFyw1h0En6t1d/lqcQv1jtHzyWYF3mCkjnH
-	jZmMhksVGMnM8Lbqjz0TfvV+8uVXJWpJpg==
-X-Google-Smtp-Source: ABdhPJwASnbLA67pM1W0M/SGczhlBLSDjOqcC9eyXllnDsmbDXesegdAo8oU9uCgepF/PcJKR98fGQ==
-X-Received: by 2002:a05:6a00:1904:b029:3b9:e4ea:1f22 with SMTP id y4-20020a056a001904b02903b9e4ea1f22mr11855193pfi.79.1629036411457;
-        Sun, 15 Aug 2021 07:06:51 -0700 (PDT)
+        bh=n+a5e8JiK5LGy+WCVAN5Q5x3m867DSJymFrLz04mO3c=;
+        b=pEUzACV7U0BS4yyGeJS7cBKmMjz/E/dmkMy/ZpJtS+vriK3szvn8/KbnRYX1HHkhqt
+         huSMnFPKMDpgyZr0haH/rBsjmid1Q904kFJbbY61BlVMg3bHVvPlx1+8dgOPoasEhulr
+         6HANYtKtYnlezp+Qeevzwu7j4vJhmxrgIiwFV0PWEnxa3wc530APX64DOhGWPXrJ7idd
+         v4GvwIlnqjPHGB3wgtpUgugirhCNUrv9L4IGucziB668dfWXu8I0bdEHxA3ezd9aDYJe
+         2o+ZAWJhNEOJ1QS0QLzaAewaUvY87w1AVf35zQ7wyzvWOF5a6JBzLHsDdqiJAPItdCAB
+         iXgQ==
+X-Gm-Message-State: AOAM530Zuxr81SQt23CT0X1xpPPha1mcc2kWWMQX80Au+iUUPu+iPRwU
+	xWtIwKTjzI25AsJDITK5pMm36LLl4MbU0w==
+X-Google-Smtp-Source: ABdhPJwfPhE3GWo+go/W0xM1yxQLFO+QzXB7Ar29Cvgu+9RkAIeN+CL3CdgOFvZSf0UPIKSH9qcmlQ==
+X-Received: by 2002:a63:da44:: with SMTP id l4mr11318902pgj.405.1629036412267;
+        Sun, 15 Aug 2021 07:06:52 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:162c:344d:280d:4a4c])
-        by smtp.gmail.com with ESMTPSA id y67sm8332901pfg.218.2021.08.15.07.06.50
+        by smtp.gmail.com with ESMTPSA id y67sm8332901pfg.218.2021.08.15.07.06.51
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Aug 2021 07:06:51 -0700 (PDT)
+        Sun, 15 Aug 2021 07:06:52 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 13/18] ndpi: fix CVE-2021-36082
-Date: Sun, 15 Aug 2021 07:06:25 -0700
-Message-Id: <64a6b6f8decdd5d229bc01f1c40ab5ac453e134d.1629036279.git.akuster808@gmail.com>
+Subject: [hardknott 14/18] libdbi-perl: fix CVE-2014-10402
+Date: Sun, 15 Aug 2021 07:06:26 -0700
+Message-Id: <aaa1c12b2cdea197d420953c8df873e8af5cc507.1629036279.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1629036279.git.akuster808@gmail.com>
 References: <cover.1629036279.git.akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Changqing Li <changqing.li@windriver.com>
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Backport patch to fix CVE-2014-10402.
+
+CVE: CVE-2014-10402
+
+Ref:
+https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=972180#12
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit c80b3757ffc762a1577bcf7d0da41ebf1954b3f1)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../ntopng/files/CVE-2021-36082.patch         | 116 ++++++++++++++++++
- .../recipes-support/ntopng/ndpi_3.4.bb        |   1 +
- 2 files changed, 117 insertions(+)
- create mode 100644 meta-networking/recipes-support/ntopng/files/CVE-2021-36082.patch
+ .../perl/libdbi-perl/CVE-2014-10402.patch     | 56 +++++++++++++++++++
+ .../perl/libdbi-perl_1.643.bb                 |  4 +-
+ 2 files changed, 59 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2014-10402.patch
 
-diff --git a/meta-networking/recipes-support/ntopng/files/CVE-2021-36082.patch b/meta-networking/recipes-support/ntopng/files/CVE-2021-36082.patch
+diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2014-10402.patch b/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2014-10402.patch
 new file mode 100644
-index 0000000000..8fdd62d186
+index 0000000000..b41bbe0a50
 --- /dev/null
-+++ b/meta-networking/recipes-support/ntopng/files/CVE-2021-36082.patch
-@@ -0,0 +1,116 @@
-+From 1ec621c85b9411cc611652fd57a892cfef478af3 Mon Sep 17 00:00:00 2001
-+From: Luca Deri <deri@ntop.org>
-+Date: Sat, 15 May 2021 19:53:46 +0200
-+Subject: [PATCH] Added further checks
++++ b/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2014-10402.patch
+@@ -0,0 +1,56 @@
++Backport patch to fix CVE-2014-10402.
 +
-+Upstream-Status: Backport [https://github.com/ntop/nDPI/commit/1ec621c85b9411cc611652fd57a892cfef478af3]
-+CVE: CVE-2021-36082
++CVE: CVE-2014-10402
++Upstream-Status: Backport [https://github.com/rehsack/dbi/commit/19d0fb1]
 +
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
++Ref:
++https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=972180#12
 +
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++
++
++From 19d0fb169eed475e1c053e99036b8668625cfa94 Mon Sep 17 00:00:00 2001
++From: Jens Rehsack <sno@netbsd.org>
++Date: Tue, 6 Oct 2020 10:22:17 +0200
++Subject: [PATCH] lib/DBD/File.pm: fix CVE-2014-10401
++
++Dig into the root cause of RT#99508 - which resulted in CVE-2014-10401 - and
++figure out that DBI->parse_dsn is the wrong helper to parse our attributes in
++DSN, since in DBD::dr::connect only the "dbname" remains from DSN which causes
++parse_dsn to bailout.
++
++Parsing on our own similar to parse_dsn shows the way out.
++
++Signed-off-by: Jens Rehsack <sno@netbsd.org>
 +---
-+ src/lib/protocols/netbios.c |  2 +-
-+ src/lib/protocols/tls.c     | 32 +++++++++++++++++---------------
-+ 2 files changed, 18 insertions(+), 16 deletions(-)
++ lib/DBD/File.pm | 7 +++++--
++ 1 file changed, 5 insertions(+), 2 deletions(-)
 +
-+diff --git a/src/lib/protocols/netbios.c b/src/lib/protocols/netbios.c
-+index 1f3850cb..0d3b705f 100644
-+--- a/src/lib/protocols/netbios.c
-++++ b/src/lib/protocols/netbios.c
-+@@ -42,7 +42,7 @@ int ndpi_netbios_name_interpret(char *in, size_t inlen, char *out, u_int out_len
-+   int ret = 0, len, idx = inlen;
-+   char *b;
++diff --git a/lib/DBD/File.pm b/lib/DBD/File.pm
++index fb14e9a..f55076f 100644
++--- a/lib/DBD/File.pm
+++++ b/lib/DBD/File.pm
++@@ -109,7 +109,11 @@ sub connect
++     # We do not (yet) care about conflicting attributes here
++     # my $dbh = DBI->connect ("dbi:CSV:f_dir=test", undef, undef, { f_dir => "text" });
++     # will test here that both test and text should exist
++-    if (my $attr_hash = (DBI->parse_dsn ($dbname))[3]) {
+++    #
+++    # Parsing on our own similar to parse_dsn to find attributes in 'dbname' parameter.
+++    if ($dbname) {
+++	my @attrs = split /;/ => $dbname;
+++	my $attr_hash = { map { split /\s*=>?\s*|\s*,\s*/, $_} @attrs };
++ 	if (defined $attr_hash->{f_dir} && ! -d $attr_hash->{f_dir}) {
++ 	    my $msg = "No such directory '$attr_hash->{f_dir}";
++ 	    $drh->set_err (2, $msg);
++@@ -120,7 +124,6 @@ sub connect
++     if ($attr and defined $attr->{f_dir} && ! -d $attr->{f_dir}) {
++ 	my $msg = "No such directory '$attr->{f_dir}";
++ 	$drh->set_err (2, $msg);
++-	$attr->{RaiseError} and croak $msg;
++ 	return;
++ 	}
 + 
-+-  len = (*in++)/2;
-++  len = (*in++)/2, inlen--;
-+   b  = out;
-+   *out = 0;
-+ 
-+diff --git a/src/lib/protocols/tls.c b/src/lib/protocols/tls.c
-+index 5b572cae..c115ac08 100644
-+--- a/src/lib/protocols/tls.c
-++++ b/src/lib/protocols/tls.c
-+@@ -994,21 +994,23 @@ int processClientServerHello(struct ndpi_detection_module_struct *ndpi_struct,
-+ 	i += 4 + extension_len, offset += 4 + extension_len;
-+       }
-+ 
-+-      ja3_str_len = snprintf(ja3_str, sizeof(ja3_str), "%u,", ja3.tls_handshake_version);
-++      ja3_str_len = snprintf(ja3_str, JA3_STR_LEN, "%u,", ja3.tls_handshake_version);
-+ 
-+-      for(i=0; i<ja3.num_cipher; i++) {
-+-	rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, "%s%u", (i > 0) ? "-" : "", ja3.cipher[i]);
-++      for(i=0; (i<ja3.num_cipher) && (JA3_STR_LEN > ja3_str_len); i++) {
-++	rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, "%s%u", (i > 0) ? "-" : "", ja3.cipher[i]);
-+ 
-+ 	if(rc <= 0) break; else ja3_str_len += rc;
-+       }
-+ 
-+-      rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, ",");
-+-      if(rc > 0 && ja3_str_len + rc < JA3_STR_LEN) ja3_str_len += rc;
-++      if(JA3_STR_LEN > ja3_str_len) {
-++          rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, ",");
-++          if(rc > 0 && ja3_str_len + rc < JA3_STR_LEN) ja3_str_len += rc;
-++      }
-+ 
-+       /* ********** */
-+ 
-+-      for(i=0; i<ja3.num_tls_extension; i++) {
-+-	int rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, "%s%u", (i > 0) ? "-" : "", ja3.tls_extension[i]);
-++      for(i=0; (i<ja3.num_tls_extension) && (JA3_STR_LEN-ja3_str_len); i++) {
-++	int rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, "%s%u", (i > 0) ? "-" : "", ja3.tls_extension[i]);
-+ 
-+ 	if(rc <= 0) break; else ja3_str_len += rc;
-+       }
-+@@ -1443,41 +1445,41 @@ int processClientServerHello(struct ndpi_detection_module_struct *ndpi_struct,
-+ 	      int rc;
-+ 
-+ 	    compute_ja3c:
-+-	      ja3_str_len = snprintf(ja3_str, sizeof(ja3_str), "%u,", ja3.tls_handshake_version);
-++	      ja3_str_len = snprintf(ja3_str, JA3_STR_LEN, "%u,", ja3.tls_handshake_version);
-+ 
-+ 	      for(i=0; i<ja3.num_cipher; i++) {
-+-		rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, "%s%u",
-++		rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, "%s%u",
-+ 			      (i > 0) ? "-" : "", ja3.cipher[i]);
-+ 		if(rc > 0 && ja3_str_len + rc < JA3_STR_LEN) ja3_str_len += rc; else break;
-+ 	      }
-+ 
-+-	      rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, ",");
-++	      rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, ",");
-+ 	      if(rc > 0 && ja3_str_len + rc < JA3_STR_LEN) ja3_str_len += rc;
-+ 
-+ 	      /* ********** */
-+ 
-+ 	      for(i=0; i<ja3.num_tls_extension; i++) {
-+-		rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, "%s%u",
-++		rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, "%s%u",
-+ 			      (i > 0) ? "-" : "", ja3.tls_extension[i]);
-+ 		if(rc > 0 && ja3_str_len + rc < JA3_STR_LEN) ja3_str_len += rc; else break;
-+ 	      }
-+ 
-+-	      rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, ",");
-++	      rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, ",");
-+ 	      if(rc > 0 && ja3_str_len + rc < JA3_STR_LEN) ja3_str_len += rc;
-+ 
-+ 	      /* ********** */
-+ 
-+ 	      for(i=0; i<ja3.num_elliptic_curve; i++) {
-+-		rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, "%s%u",
-++		rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, "%s%u",
-+ 			      (i > 0) ? "-" : "", ja3.elliptic_curve[i]);
-+ 		if(rc > 0 && ja3_str_len + rc < JA3_STR_LEN) ja3_str_len += rc; else break;
-+ 	      }
-+ 
-+-	      rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, ",");
-++	      rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, ",");
-+ 	      if(rc > 0 && ja3_str_len + rc < JA3_STR_LEN) ja3_str_len += rc;
-+ 
-+ 	      for(i=0; i<ja3.num_elliptic_curve_point_format; i++) {
-+-		rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, "%s%u",
-++		rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, "%s%u",
-+ 			      (i > 0) ? "-" : "", ja3.elliptic_curve_point_format[i]);
-+ 		if(rc > 0 && ja3_str_len + rc < JA3_STR_LEN) ja3_str_len += rc; else break;
-+ 	      }
 +-- 
 +2.17.1
 +
-diff --git a/meta-networking/recipes-support/ntopng/ndpi_3.4.bb b/meta-networking/recipes-support/ntopng/ndpi_3.4.bb
-index 22e4d8e9ae..b90f575b93 100644
---- a/meta-networking/recipes-support/ntopng/ndpi_3.4.bb
-+++ b/meta-networking/recipes-support/ntopng/ndpi_3.4.bb
-@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
- SRCREV = "64929a75e0a7a60d864bd25a9fd97fdf9ac892a2"
- SRC_URI = "git://github.com/ntop/nDPI.git;branch=3.4-stable \
-            file://0001-autogen.sh-not-generate-configure.patch \
-+           file://CVE-2021-36082.patch \
- "
+diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb b/meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb
+index 75fad46bfd..c8abae628f 100644
+--- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb
++++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb
+@@ -9,7 +9,9 @@ SECTION = "libs"
+ LICENSE = "Artistic-1.0 | GPL-1.0+"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=10982c7148e0a012c0fd80534522f5c5"
  
- S = "${WORKDIR}/git"
+-SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz"
++SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz \
++           file://CVE-2014-10402.patch \
++           "
+ SRC_URI[md5sum] = "352f80b1e23769c116082a90905d7398"
+ SRC_URI[sha256sum] = "8a2b993db560a2c373c174ee976a51027dd780ec766ae17620c20393d2e836fa"
+ 
 -- 
 2.25.1
 
