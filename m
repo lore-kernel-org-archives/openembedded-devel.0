@@ -1,86 +1,200 @@
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web10.11335.1629036411279701071
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.web10.11336.1629036412076821608
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Aug 2021 07:06:51 -0700
+ Sun, 15 Aug 2021 07:06:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=KWZuWVrs;
- spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id a5so17862451plh.5
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Aug 2021 07:06:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=eeJtb9xr;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f178.google.com with SMTP id c17so12559735plz.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Aug 2021 07:06:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=pCnaHacChEXzsf4eDZmnJfubtfTKjytvF//qLc9Y3BM=;
-        b=KWZuWVrshKaFg/pY/FepPIkJcfGlaSzBe7t1Su36tjEP59PLUDomG/kH4dGdKZ1N1T
-         gwVIBkvJt+rYf4eYiRNqWzuJ7yiKGqMkzq1vJSWotMXxfIR3gMD7ZHmwGyuRlNnAM4vp
-         S6ExqmtjiaZvwPUvLKq5NQ2+0NI6yOs8VZU7GxCQnsQ/13dEanO7OLw2VVFwAVXrPceS
-         QUUEYw7qa5EmoXZnF9TvxPvJWv/l1ajMDRiRIBTEzI0J2pDYeXz6jKKts+rKXhGc6Nh/
-         +h6cxzH7UbmaW1dUoIQJxiFCe3jqGts6joBNAt7qMJdKPP7xj2wwolRaEViZ5cBzTihx
-         lzVQ==
+        bh=a0BPJsS2/diwyJPSqW7WdN3v0PUDh2tLcn1cgnNKhnw=;
+        b=eeJtb9xro6wDpalhVpbUk8hES1A/5DsUYCnsY7BVxXy5rL2pF5Yp9FQGWxD4mb0PB4
+         o87HPuZ9mCLq82/So1QfsapJ1Ugz8WaRriLz0PorDUOteEesov9FBpTSDZcQ7/AcJprO
+         wwW06ZRVXYQU44E5wTbmscknYQ4wN2z4PTqN6hvRnxsUqA80XfMF0lrZvURyq8+NtOyT
+         zGNMDMMpvkf0ga1TBndg0cf44pG4DidjTU/8aNMEth+2HeD2ZcP7p5O/YrIynEJHro5l
+         urMeSQg3bOAx728MRxgRVgboCd/SX0bRPAKUHw9Tsh7REXne4OFaB5WJyhK3PXkjtpWR
+         J88g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=pCnaHacChEXzsf4eDZmnJfubtfTKjytvF//qLc9Y3BM=;
-        b=rVvMjaJBnDPRcaA50wyvlXKCh9dR7GXYKy+M+H7fbWVfG9yiuVoSiYRs/ODTRpuBVi
-         IFHbBVqsJoOJR2MJbKIBm4kM6fmP9nSvCCzoMJAaS03xrB3a/zvrxFrCbkxb5RjcPmy5
-         vmGqscjD//GUj++/GXgZBUUEmP/RefLoWBL1dk8RFlG1QWQQVopYuVd7wrJpmuGD3UWm
-         J75ScDSd44hi63Rf9L+7CrBWcRBTXRc8iUPMWKg/kQeBYkiG2+FXXeQnIyLxf8EMIuZS
-         OlDBsktMzMfcgE5WpDVs3g4pM2LWcBfznfxIdFU/KNinNTRTGBY5JwMZ3LudqtUOlJGf
-         U7yQ==
-X-Gm-Message-State: AOAM532Nod0M0I4grmGI3ssXhoVfxEolZxDYZOJEKwfSwNOCuhmz04Gk
-	dKIr/Xkq7nlZtGaeNIwZMOzzzYd30q4NmQ==
-X-Google-Smtp-Source: ABdhPJz15z5YZRzFGpJoYj8AG96fhWEqvdWs7+wFSvhxq2YwCMNl+mpnAnqFpse3EzuqQaiIrOrUrQ==
-X-Received: by 2002:a63:4d15:: with SMTP id a21mr11268319pgb.245.1629036410786;
-        Sun, 15 Aug 2021 07:06:50 -0700 (PDT)
+        bh=a0BPJsS2/diwyJPSqW7WdN3v0PUDh2tLcn1cgnNKhnw=;
+        b=K1w/NmWwzuVg1XY0uo/KEyYMNRq+UnLGPupW7l6QgA8kWsBlIxqSJCW/0+KylhB8wq
+         S1aiMR3+XcFc4x+Eqb2b2C7kp+RLqyFb+9G3a+zT7IiBIk+MSyDS+jgDEQPKccDKZ7rJ
+         FBBAiSNde9JEZXNQGgtemkZQt1zKD4mhqPfr05ukL5vwEkf2qCsSKMr8JC7heW+pGZ1M
+         d3rzk7+YO3Pq84SbGmKdHPQVIZ231Yq2tr0Z24kpjmsbzVCsHnfZGTEhloaWv8DOG7zC
+         U0eGKMzIMRKY8WWjAhuB2DpfEBkj1iSKytHiFIG3x67PZHtDP6E6i7dHLQdDHWhRYcbF
+         tr3w==
+X-Gm-Message-State: AOAM5326uFM0WnR4p9bkVzFyw1h0En6t1d/lqcQv1jtHzyWYF3mCkjnH
+	jZmMhksVGMnM8Lbqjz0TfvV+8uVXJWpJpg==
+X-Google-Smtp-Source: ABdhPJwASnbLA67pM1W0M/SGczhlBLSDjOqcC9eyXllnDsmbDXesegdAo8oU9uCgepF/PcJKR98fGQ==
+X-Received: by 2002:a05:6a00:1904:b029:3b9:e4ea:1f22 with SMTP id y4-20020a056a001904b02903b9e4ea1f22mr11855193pfi.79.1629036411457;
+        Sun, 15 Aug 2021 07:06:51 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:162c:344d:280d:4a4c])
         by smtp.gmail.com with ESMTPSA id y67sm8332901pfg.218.2021.08.15.07.06.50
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Aug 2021 07:06:50 -0700 (PDT)
+        Sun, 15 Aug 2021 07:06:51 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 12/18] mariadb: Update SRC_URI
-Date: Sun, 15 Aug 2021 07:06:24 -0700
-Message-Id: <dc423467a0e70d63bb39fb2f50fcf8435ebff1c6.1629036279.git.akuster808@gmail.com>
+Subject: [hardknott 13/18] ndpi: fix CVE-2021-36082
+Date: Sun, 15 Aug 2021 07:06:25 -0700
+Message-Id: <64a6b6f8decdd5d229bc01f1c40ab5ac453e134d.1629036279.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1629036279.git.akuster808@gmail.com>
 References: <cover.1629036279.git.akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Mingli Yu <mingli.yu@windriver.com>
+From: Changqing Li <changqing.li@windriver.com>
 
-The previous SRC_URI only stores the latest source tarball and we
-will meet do_fetch issue if not upgrade timely.
-
-Update the SRC_URI which stores all versions to fix some warning
-like below:
-WARNING: mariadb-10.5.9-r0 do_fetch: Failed to fetch URL https://downloads.mariadb.org/interstitial/mariadb-10.5.9/source/mariadb-10.5.9.tar.gz, attempting MIRRORS if available
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit da798f15ffd93759e1ba3f21bd1ba80c73e962af)
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-dbs/mysql/mariadb.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../ntopng/files/CVE-2021-36082.patch         | 116 ++++++++++++++++++
+ .../recipes-support/ntopng/ndpi_3.4.bb        |   1 +
+ 2 files changed, 117 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ntopng/files/CVE-2021-36082.patch
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 7cf08f4719..63ab940928 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -4,7 +4,7 @@ SECTION = "libs"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b1becf0cfa3366e0f4d854d1d264f311"
+diff --git a/meta-networking/recipes-support/ntopng/files/CVE-2021-36082.patch b/meta-networking/recipes-support/ntopng/files/CVE-2021-36082.patch
+new file mode 100644
+index 0000000000..8fdd62d186
+--- /dev/null
++++ b/meta-networking/recipes-support/ntopng/files/CVE-2021-36082.patch
+@@ -0,0 +1,116 @@
++From 1ec621c85b9411cc611652fd57a892cfef478af3 Mon Sep 17 00:00:00 2001
++From: Luca Deri <deri@ntop.org>
++Date: Sat, 15 May 2021 19:53:46 +0200
++Subject: [PATCH] Added further checks
++
++Upstream-Status: Backport [https://github.com/ntop/nDPI/commit/1ec621c85b9411cc611652fd57a892cfef478af3]
++CVE: CVE-2021-36082
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++
++---
++ src/lib/protocols/netbios.c |  2 +-
++ src/lib/protocols/tls.c     | 32 +++++++++++++++++---------------
++ 2 files changed, 18 insertions(+), 16 deletions(-)
++
++diff --git a/src/lib/protocols/netbios.c b/src/lib/protocols/netbios.c
++index 1f3850cb..0d3b705f 100644
++--- a/src/lib/protocols/netbios.c
+++++ b/src/lib/protocols/netbios.c
++@@ -42,7 +42,7 @@ int ndpi_netbios_name_interpret(char *in, size_t inlen, char *out, u_int out_len
++   int ret = 0, len, idx = inlen;
++   char *b;
++ 
++-  len = (*in++)/2;
+++  len = (*in++)/2, inlen--;
++   b  = out;
++   *out = 0;
++ 
++diff --git a/src/lib/protocols/tls.c b/src/lib/protocols/tls.c
++index 5b572cae..c115ac08 100644
++--- a/src/lib/protocols/tls.c
+++++ b/src/lib/protocols/tls.c
++@@ -994,21 +994,23 @@ int processClientServerHello(struct ndpi_detection_module_struct *ndpi_struct,
++ 	i += 4 + extension_len, offset += 4 + extension_len;
++       }
++ 
++-      ja3_str_len = snprintf(ja3_str, sizeof(ja3_str), "%u,", ja3.tls_handshake_version);
+++      ja3_str_len = snprintf(ja3_str, JA3_STR_LEN, "%u,", ja3.tls_handshake_version);
++ 
++-      for(i=0; i<ja3.num_cipher; i++) {
++-	rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, "%s%u", (i > 0) ? "-" : "", ja3.cipher[i]);
+++      for(i=0; (i<ja3.num_cipher) && (JA3_STR_LEN > ja3_str_len); i++) {
+++	rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, "%s%u", (i > 0) ? "-" : "", ja3.cipher[i]);
++ 
++ 	if(rc <= 0) break; else ja3_str_len += rc;
++       }
++ 
++-      rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, ",");
++-      if(rc > 0 && ja3_str_len + rc < JA3_STR_LEN) ja3_str_len += rc;
+++      if(JA3_STR_LEN > ja3_str_len) {
+++          rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, ",");
+++          if(rc > 0 && ja3_str_len + rc < JA3_STR_LEN) ja3_str_len += rc;
+++      }
++ 
++       /* ********** */
++ 
++-      for(i=0; i<ja3.num_tls_extension; i++) {
++-	int rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, "%s%u", (i > 0) ? "-" : "", ja3.tls_extension[i]);
+++      for(i=0; (i<ja3.num_tls_extension) && (JA3_STR_LEN-ja3_str_len); i++) {
+++	int rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, "%s%u", (i > 0) ? "-" : "", ja3.tls_extension[i]);
++ 
++ 	if(rc <= 0) break; else ja3_str_len += rc;
++       }
++@@ -1443,41 +1445,41 @@ int processClientServerHello(struct ndpi_detection_module_struct *ndpi_struct,
++ 	      int rc;
++ 
++ 	    compute_ja3c:
++-	      ja3_str_len = snprintf(ja3_str, sizeof(ja3_str), "%u,", ja3.tls_handshake_version);
+++	      ja3_str_len = snprintf(ja3_str, JA3_STR_LEN, "%u,", ja3.tls_handshake_version);
++ 
++ 	      for(i=0; i<ja3.num_cipher; i++) {
++-		rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, "%s%u",
+++		rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, "%s%u",
++ 			      (i > 0) ? "-" : "", ja3.cipher[i]);
++ 		if(rc > 0 && ja3_str_len + rc < JA3_STR_LEN) ja3_str_len += rc; else break;
++ 	      }
++ 
++-	      rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, ",");
+++	      rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, ",");
++ 	      if(rc > 0 && ja3_str_len + rc < JA3_STR_LEN) ja3_str_len += rc;
++ 
++ 	      /* ********** */
++ 
++ 	      for(i=0; i<ja3.num_tls_extension; i++) {
++-		rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, "%s%u",
+++		rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, "%s%u",
++ 			      (i > 0) ? "-" : "", ja3.tls_extension[i]);
++ 		if(rc > 0 && ja3_str_len + rc < JA3_STR_LEN) ja3_str_len += rc; else break;
++ 	      }
++ 
++-	      rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, ",");
+++	      rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, ",");
++ 	      if(rc > 0 && ja3_str_len + rc < JA3_STR_LEN) ja3_str_len += rc;
++ 
++ 	      /* ********** */
++ 
++ 	      for(i=0; i<ja3.num_elliptic_curve; i++) {
++-		rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, "%s%u",
+++		rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, "%s%u",
++ 			      (i > 0) ? "-" : "", ja3.elliptic_curve[i]);
++ 		if(rc > 0 && ja3_str_len + rc < JA3_STR_LEN) ja3_str_len += rc; else break;
++ 	      }
++ 
++-	      rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, ",");
+++	      rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, ",");
++ 	      if(rc > 0 && ja3_str_len + rc < JA3_STR_LEN) ja3_str_len += rc;
++ 
++ 	      for(i=0; i<ja3.num_elliptic_curve_point_format; i++) {
++-		rc = snprintf(&ja3_str[ja3_str_len], sizeof(ja3_str)-ja3_str_len, "%s%u",
+++		rc = snprintf(&ja3_str[ja3_str_len], JA3_STR_LEN-ja3_str_len, "%s%u",
++ 			      (i > 0) ? "-" : "", ja3.elliptic_curve_point_format[i]);
++ 		if(rc > 0 && ja3_str_len + rc < JA3_STR_LEN) ja3_str_len += rc; else break;
++ 	      }
++-- 
++2.17.1
++
+diff --git a/meta-networking/recipes-support/ntopng/ndpi_3.4.bb b/meta-networking/recipes-support/ntopng/ndpi_3.4.bb
+index 22e4d8e9ae..b90f575b93 100644
+--- a/meta-networking/recipes-support/ntopng/ndpi_3.4.bb
++++ b/meta-networking/recipes-support/ntopng/ndpi_3.4.bb
+@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
+ SRCREV = "64929a75e0a7a60d864bd25a9fd97fdf9ac892a2"
+ SRC_URI = "git://github.com/ntop/nDPI.git;branch=3.4-stable \
+            file://0001-autogen.sh-not-generate-configure.patch \
++           file://CVE-2021-36082.patch \
+ "
  
--SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz \
-+SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
-            file://my.cnf \
-            file://mysqld.service \
-            file://install_db.service \
+ S = "${WORKDIR}/git"
 -- 
 2.25.1
 
