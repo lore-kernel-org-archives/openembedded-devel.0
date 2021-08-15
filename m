@@ -1,90 +1,109 @@
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.web12.11482.1629036406915441412
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
+ by mx.groups.io with SMTP id smtpd.web12.11484.1629036408195351556
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Aug 2021 07:06:47 -0700
+ Sun, 15 Aug 2021 07:06:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=vRhMZ/wr;
- spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id l11so17883546plk.6
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Aug 2021 07:06:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=uxv7UGCn;
+ spf=pass (domain: gmail.com, ip: 209.85.216.46, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f46.google.com with SMTP id cp15-20020a17090afb8fb029017891959dcbso28325827pjb.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Aug 2021 07:06:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=tQZYTcBSB/aBVQtFIl1ASE2hMQuAmE5lXLTMkwJ4od0=;
-        b=vRhMZ/wrPHgOHST7jFsHARxdSvWJP7ekOtvNtLoj0ABpjotWhiCg2Eg+sBaXFQbq8J
-         nqJejW4UKnmbPNAhBlAh8GmX9/970tHzcSu+5B2AHZOGLYkn+C90+RDM47GaHg32KeBE
-         80YDxMWNiJqNJrq8TVlPmGZw3rVDd4hGETK48pdGcTPAmsasaliA2RbNYMXHb62R9eVE
-         GMHRoKYU6Uyx/KRcPLpQAdaJhMmkpEhFBQQfPW7LPLHnpjCGKQ8oyJlMrIHVwUTTudlG
-         tgNKrCNJDp2k6IXusep/PotuVbL9WD2xUpNC1Zg9F1ftL/WEZ5gnLQhifEzboy0r3IoL
-         1Crw==
+        bh=1u7JLgtwb66+5lj/kbuIMEzhuSpoxRZCFi0AB7Gc458=;
+        b=uxv7UGCnh723upQMBXh+qCT5IqS3yO/j1Gu/qQXx653XqwvVPN/Cj6HlJL+cfM3BSV
+         KOHfdb3WKTMYowWjrYOSp9kNDZh6X+ad+z1jjzgDUEQWxKNpZy3A3X4w2f7aDilKd+oW
+         S4nI45Y6BemirlsLaYq+lF+xDTgdbHGUJdplMIVxeluFyKZgUzGdsZZPsNcu5Ltgd59Q
+         ngwssmYUKY9J8vYEBiWFjeCrwvY8OCHBB0gEdWgG9kcvTrvXcSRX9ZXE8srd/THF3O/8
+         LEXVSvJd4fQrzvVVVuJhM6+e/jyBdWQSoXtelIsKxr8fE3yhk4B4cxCDbCdJW+c6GpBu
+         jSuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=tQZYTcBSB/aBVQtFIl1ASE2hMQuAmE5lXLTMkwJ4od0=;
-        b=CkmHSdz96ccurFMfg011sDi8R1j7yGZhoapW8QGh2bLfj4PZJeEqEY83ay2Uh6iBSu
-         c4b/6BuUHGhOSrVzTexnhlu92AjByW10iSewH+Sue536xgZ66+nqCxC3d+S3+5FnAQR4
-         wfndDYMiA++kDhyEQYJciwikpAoGFo6WYnhMD8p20548heWOHlZDoc6w73XJBKY/5B1o
-         qNHcVKIE1Qic/JWy3HHQKkVCLQocJkKm/EYuwvqAqI2B9GETomHEVVBb1y+VPBNWAsUl
-         6Wqwsaq5WhOt5A6L91T7L8KYNts3xWcSjGew7qZ6Fwas1phXJImbOi37pIZ6uRz4OAd+
-         r1yg==
-X-Gm-Message-State: AOAM531PZQ7mQm22hUtMgYnIMs8dDfRpiomlWNh1zVROAR705mveS7xZ
-	BfA/g9lJ+GmfswL0IeDbkhwm1z/9d4R+wA==
-X-Google-Smtp-Source: ABdhPJyeIEGWL/TR/s4NHRv6e9HzdLss/JXtW2a5+sOW5MbBmXM5phSDzbdoqSUy8k862/GNVPlZSA==
-X-Received: by 2002:a17:902:848c:b029:12c:daf3:94f1 with SMTP id c12-20020a170902848cb029012cdaf394f1mr9538493plo.50.1629036406373;
-        Sun, 15 Aug 2021 07:06:46 -0700 (PDT)
+        bh=1u7JLgtwb66+5lj/kbuIMEzhuSpoxRZCFi0AB7Gc458=;
+        b=qI3diqj0fzMgiUIQePN7bb/8dCbGuc3Of3g58E/YUtezJrXhVywVvSMXw5nVHRPcl+
+         3lVXxtt1y9gFmfnKctdcCoDpSg7L4gbRXF21dFK6UKWt+QMrHrNMjijVjIypZ42x+l8g
+         64aStyt1xo/uci2cRdRNJgd561LgRmJpTYb0i7rtN1yryQBVeCqQ7u+CqyszXjQtwbbE
+         u2A3GIqepNEXrZU6zgx4rQEz936Ysv7HBHNolRW8xgsOUAyj/gpkA5TJdqW2lUtowNfW
+         v5YnDxLjlG8NDbXuqnN9lWt5QdH+sDPsUAvi2nErv6LBsLp6fnx0wM1awKMPjaCIMQ6N
+         O8UA==
+X-Gm-Message-State: AOAM5332zH+BMeUSvSWgE6jHoz0ESH5aK2kqV9hDkgK6DLGacVHmo7HO
+	bA5S+oQ+TQ2WfPCLpGEjcYvg+cjLKYBDCQ==
+X-Google-Smtp-Source: ABdhPJw8PxY2IZlI9+zhOcCcsgscI/xnP62JmvMDvltTOeiSrTSAYj/6MAGSiOUKf7NYK5zDhfV/+Q==
+X-Received: by 2002:a65:68d1:: with SMTP id k17mr11723460pgt.285.1629036407599;
+        Sun, 15 Aug 2021 07:06:47 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:162c:344d:280d:4a4c])
-        by smtp.gmail.com with ESMTPSA id y67sm8332901pfg.218.2021.08.15.07.06.45
+        by smtp.gmail.com with ESMTPSA id y67sm8332901pfg.218.2021.08.15.07.06.46
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Aug 2021 07:06:46 -0700 (PDT)
+        Sun, 15 Aug 2021 07:06:47 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 07/18] net-snmp: fix QA Issue after LDFLAGS change
-Date: Sun, 15 Aug 2021 07:06:19 -0700
-Message-Id: <eee9348f79b0f70fbd57db28b5def4db85d564c6.1629036279.git.akuster808@gmail.com>
+Subject: [hardknott 08/18] Suppress eol in functionfs setup scripts (#147)
+Date: Sun, 15 Aug 2021 07:06:20 -0700
+Message-Id: <b97e6c971639072f3866e26218505e390fd26cae.1629036279.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1629036279.git.akuster808@gmail.com>
 References: <cover.1629036279.git.akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Tony Battersby <tonyb@cybernetics.com>
+From: Devendra Tewari <devendra.tewari@gmail.com>
 
-Adding -f*-prefix-map to LDFLAGS caused the following issue:
+Stray newline character causes errors in functionfs setup scripts
+used by android-tools-adbd.service, when using musl libc and/or toybox.
 
-QA Issue: netsnmp-agent.pc failed sanity test (tmpdir)
-
-Fix by filtering out -f*-prefix-map from *.pc files.
-
-[YOCTO #14481]
-
-Signed-off-by: Tony Battersby <tonyb@cybernetics.com>
+Signed-off-by: Devendra Tewari <devendra.tewari@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 5e042ac2079bffa3ae3d9839a50bf6a3d3f1930a)
+(cherry picked from commit db5f48734404a52ee5323659082f1d6baa225ca7)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ .../android-tools-conf-configfs/android-gadget-cleanup        | 2 +-
+ .../android-tools-conf-configfs/android-gadget-setup          | 4 ++--
+ .../android-tools-conf-configfs/android-gadget-start          | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb
-index 7c3d5babd8..0150d3e38a 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb
-@@ -131,6 +131,11 @@ do_install_append() {
-         -e 's@[^ ]*PKG_CONFIG_LIBDIR=[^ "]*@@g' \
-         -i ${D}${bindir}/net-snmp-config
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-cleanup b/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-cleanup
+index 517227d4a6..f27d77df51 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-cleanup
++++ b/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-cleanup
+@@ -6,7 +6,7 @@ cd /sys/kernel/config/usb_gadget
  
-+    sed -e 's@[^ ]*-ffile-prefix-map=[^ "]*@@g' \
-+        -e 's@[^ ]*-fdebug-prefix-map=[^ "]*@@g' \
-+        -e 's@[^ ]*-fmacro-prefix-map=[^ "]*@@g' \
-+        -i ${D}${libdir}/pkgconfig/netsnmp*.pc
-+
-     # ${STAGING_DIR_HOST} is empty for native builds, and the sed command below
-     # will result in errors if run for native.
-     if [ "${STAGING_DIR_HOST}" ]; then
+ cd adb
+ 
+-echo "" > UDC || true
++echo -n "" > UDC || true
+ 
+ killall adbd || true
+ 
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-setup b/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-setup
+index e44d1bacbe..dbd7115151 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-setup
++++ b/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-setup
+@@ -23,8 +23,8 @@ mkdir configs/c.1
+ mkdir functions/ffs.usb0
+ mkdir strings/0x409
+ mkdir configs/c.1/strings/0x409
+-echo 0x18d1 > idVendor
+-echo 0xd002 > idProduct
++echo -n 0x18d1 > idVendor
++echo -n 0xd002 > idProduct
+ echo "$serial" > strings/0x409/serialnumber
+ echo "$manufacturer" > strings/0x409/manufacturer
+ echo "$model" > strings/0x409/product
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-start b/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-start
+index ca6c3df275..d67878fef9 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-start
++++ b/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-start
+@@ -4,4 +4,4 @@ set -e
+ 
+ sleep 3
+ 
+-ls /sys/class/udc/ > /sys/kernel/config/usb_gadget/adb/UDC
++ls /sys/class/udc/ | xargs echo -n > /sys/kernel/config/usb_gadget/adb/UDC
 -- 
 2.25.1
 
