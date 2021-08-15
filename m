@@ -1,153 +1,101 @@
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web09.11450.1629036416649155021
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.web09.11644.1629037602413973631
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Aug 2021 07:06:56 -0700
+ Sun, 15 Aug 2021 07:26:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=BDIBZTU9;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id a5so17862648plh.5
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Aug 2021 07:06:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=IQo1zUIz;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id u21-20020a17090a8915b02901782c36f543so28344828pjn.4
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Aug 2021 07:26:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=0V2/ibKeZgTINJkw4/m8QEjWosYLcSp6HlhgXEGhAT8=;
-        b=BDIBZTU9lbsyBXB1S55jTwU7ZW31fCOxCgOeYvYbWctofRXliuD2PVLpY7kS2USrNf
-         IvymoAMUvoXNx8yg4Fe9bNLkysrhqCHj5Cu6jwwl9173zO2OuaN8hZLSFeHklWpq46/E
-         82UeZkTJwTWznnpNmPiaV5xHdCbn/h4SlCPPwBR0FP8Wya/K3QJLIN8K6XZRDDP7pXUW
-         sjTa52z24SqA6B8sadxaaPi2rDJKIuoodkebmttO7pX3JqJHT7bJ4sAcqNHR0VvaG6ww
-         1Ep4WmqZm7Jqk4VoagkxQcxWMRafr8guajxIC7l3VWMydaz825pGVh2mIqE3+GmR6I1S
-         iTPg==
+        bh=umu56zORYF5eso1pY8q/hwvukQ7uAcDhiBSwC+wqIzQ=;
+        b=IQo1zUIzxtm3usMZbjXIZT8Q8UPnR7rgCuVrbwq4t4B9/UM/lCCOVj+WCOmEuqFzCs
+         xD2QZ0iO19p04cdqnw5urxw+0daVYLrfvEBrClgEQlrpEDW3TKdQzkHo/7KQwhZ1W2d0
+         xBHpNdKRK2A22c+197Yq4AzIcVT4g99dKkHXBNOx5Wx0GdOIhVev9dK6OWXrnmPxvpHf
+         gxGJhkW3a8YlcxtpRRxj6uDiGL3U+XDAm8EjgoTFQDL7ys11Xh7Wn5k0Wtq2klYcezzP
+         Wr5cIsvPHn/w6DZGGQW6QIA/04c0dd3dAwwJsSS7Ul4ti/+5yWvUgQDq/8F7lyI1o+RM
+         IYjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=0V2/ibKeZgTINJkw4/m8QEjWosYLcSp6HlhgXEGhAT8=;
-        b=uDfvjE/RkaIZSx+wVnU1UvEZODCyODkaM+PRwryjOccbY0n/54ablMdECnNr6gGQmu
-         wYkp2lfnVbm8D2Qt+MW1dEI4bbYPyxzaREQ04mTciQacxpnRk+mooGW2RUCBGmuyNW7M
-         oxjGOOXfm6DNUke63Jm1f7PTDuR7UQOpTVeKF7Y8o1Q+D5GFzu6+R4rMI5KNlFdMApaK
-         3SwDvmqCFcl2qWAPDl0j/teAmdlJc9TWoSqevOE8+jLiHFU6Gc11277YcbbkBLcLRS41
-         OE4e2Oou5zT7O9DMAOsixFvHFRKxX3lj68sDfrkBJX9P/8eF99kFoJXJBD3sO42RNJx9
-         +jrQ==
-X-Gm-Message-State: AOAM532504LJ9tWcHkpRbvKP8/x60D96ImxwYDwFUmEMNuOido+tCAA1
-	o5qCnwEb48fxqZpKL8eExfJWXyl2OzVdqQ==
-X-Google-Smtp-Source: ABdhPJzMHKj0sWyd/mA6bBXrKIER1dXITxsUvcQb/CNk0G77GFZMyN6vx7OyIWbBLU3fTn7XXC8WmQ==
-X-Received: by 2002:a62:ee16:0:b029:2fe:ffcf:775a with SMTP id e22-20020a62ee160000b02902feffcf775amr11387386pfi.59.1629036416089;
-        Sun, 15 Aug 2021 07:06:56 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=umu56zORYF5eso1pY8q/hwvukQ7uAcDhiBSwC+wqIzQ=;
+        b=XTjWUoyrG+jd7aNLdjg3kcxhVoPQpS8L17knSu3hY7KMXhCSow/5uhPXb6jDDyng40
+         X72kc5K8erQx94zjiN0h30+3dM/2dYP+7dk81UwhGWG1KVuH84gp2uthwfTl+Yaoi8AF
+         08hBeRsZp2rSbvljvIlWFbH5juJvaOqA3Kl8KGbTMZ65FyyFSZj8UXbS8ENo1hrjRyQx
+         0zKP+7COmDKuQspaKUcnqYSj5JD826zWQTD/jh5Fo5GNDrGu/vXRm/XoA78+Bt3zhsPU
+         PPvCKAxu3I78q2H6Crwinpxw/TQkjDs8OXVRLilhjuCahZ35vyE6dDGnPLvRsM2gpPc0
+         e2Cg==
+X-Gm-Message-State: AOAM531OqpWY7thprcSNcoySgxMtum2YpUChBUK5ATK5r8HxLfTqWTXA
+	juwnj64jV9T6HAgaGKT4Y5bw83GceWAY6w==
+X-Google-Smtp-Source: ABdhPJyQOXqB906+1pWYmmMoKiLzsie1A1/76MZeC1FE4SlvsMVpf+HGdL4hN5K1hjYz9KsONdAZsw==
+X-Received: by 2002:a62:7c4a:0:b029:3dd:a141:c932 with SMTP id x71-20020a627c4a0000b02903dda141c932mr2046256pfc.68.1629037601736;
+        Sun, 15 Aug 2021 07:26:41 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:162c:344d:280d:4a4c])
-        by smtp.gmail.com with ESMTPSA id y67sm8332901pfg.218.2021.08.15.07.06.55
-        for <openembedded-devel@lists.openembedded.org>
+        by smtp.gmail.com with ESMTPSA id d15sm1668901pfd.115.2021.08.15.07.26.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Aug 2021 07:06:55 -0700 (PDT)
+        Sun, 15 Aug 2021 07:26:41 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 18/18] redis: fix CVE-2021-32625
-Date: Sun, 15 Aug 2021 07:06:30 -0700
-Message-Id: <acf5769aff4edb67b187d70ac339a6484e1cc527.1629036279.git.akuster808@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][hardknott][PATCH 1/2] fvwm: Package extra files and man pages
+Date: Sun, 15 Aug 2021 07:26:39 -0700
+Message-Id: <20210815142640.2929628-1-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1629036279.git.akuster808@gmail.com>
-References: <cover.1629036279.git.akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Tony Tascioglu <tony.tascioglu@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-CVE: CVE-2021-32625
-Upstream-Status: Backport [e9a1438ac4c52aa68dfa2a8324b6419356842116]
+Avoids using installed-vs-shipped
 
-Fix integer overflow in STRALGO LCS (CVE-2021-32625) (#9011)
-An integer overflow bug in Redis version 6.0 or newer can be exploited using the
-STRALGO LCS command to corrupt the heap and potentially result with remote code
-execution. This is a result of an incomplete fix by CVE-2021-29477.
-
-Signed-off-by: Tony Tascioglu <tony.tascioglu@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 566049b4f1ddc049c1f89a5838d1a71bb429faa3)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../redis/redis/fix-CVE-2021-32625.patch      | 61 +++++++++++++++++++
- meta-oe/recipes-extended/redis/redis_6.2.2.bb |  1 +
- 2 files changed, 62 insertions(+)
- create mode 100644 meta-oe/recipes-extended/redis/redis/fix-CVE-2021-32625.patch
+ meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb | 18 ++++++++++++------
+ 1 file changed, 12 insertions(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/redis/redis/fix-CVE-2021-32625.patch b/meta-oe/recipes-extended/redis/redis/fix-CVE-2021-32625.patch
-new file mode 100644
-index 0000000000..6311a5db10
---- /dev/null
-+++ b/meta-oe/recipes-extended/redis/redis/fix-CVE-2021-32625.patch
-@@ -0,0 +1,61 @@
-+From e9a1438ac4c52aa68dfa2a8324b6419356842116 Mon Sep 17 00:00:00 2001
-+From: Oran Agra <oran@redislabs.com>
-+Date: Tue, 1 Jun 2021 09:12:45 +0300
-+Subject: [PATCH] Fix integer overflow in STRALGO LCS (CVE-2021-32625) (#9011)
-+
-+An integer overflow bug in Redis version 6.0 or newer can be exploited using the
-+STRALGO LCS command to corrupt the heap and potentially result with remote code
-+execution. This is a result of an incomplete fix by CVE-2021-29477.
-+
-+(cherry picked from commit 1ddecf1958924b178b76a31d989ef1e05af81964)
-+
-+
-+CVE: CVE-2021-32625
-+Upstream-Status: Backport [e9a1438ac4c52aa68dfa2a8324b6419356842116]
-+
-+Signed-off-by: Tony Tascioglu <tony.tascioglu@windriver.com>
-+---
-+ src/t_string.c | 18 +++++++++++++++++-
-+ 1 file changed, 17 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/t_string.c b/src/t_string.c
-+index 490d5983a..587d3aeb8 100644
-+--- a/src/t_string.c
-++++ b/src/t_string.c
-+@@ -797,6 +797,12 @@ void stralgoLCS(client *c) {
-+         goto cleanup;
-+     }
-+ 
-++    /* Detect string truncation or later overflows. */
-++    if (sdslen(a) >= UINT32_MAX-1 || sdslen(b) >= UINT32_MAX-1) {
-++        addReplyError(c, "String too long for LCS");
-++        goto cleanup;
-++    }
-++
-+     /* Compute the LCS using the vanilla dynamic programming technique of
-+      * building a table of LCS(x,y) substrings. */
-+     uint32_t alen = sdslen(a);
-+@@ -805,9 +811,19 @@ void stralgoLCS(client *c) {
-+     /* Setup an uint32_t array to store at LCS[i,j] the length of the
-+      * LCS A0..i-1, B0..j-1. Note that we have a linear array here, so
-+      * we index it as LCS[j+(blen+1)*j] */
-+-    uint32_t *lcs = zmalloc((size_t)(alen+1)*(blen+1)*sizeof(uint32_t));
-+     #define LCS(A,B) lcs[(B)+((A)*(blen+1))]
-+ 
-++    /* Try to allocate the LCS table, and abort on overflow or insufficient memory. */
-++    unsigned long long lcssize = (unsigned long long)(alen+1)*(blen+1); /* Can't overflow due to the size limits above. */
-++    unsigned long long lcsalloc = lcssize * sizeof(uint32_t);
-++    uint32_t *lcs = NULL;
-++    if (lcsalloc < SIZE_MAX && lcsalloc / lcssize == sizeof(uint32_t))
-++        lcs = ztrymalloc(lcsalloc);
-++    if (!lcs) {
-++        addReplyError(c, "Insufficient memory");
-++        goto cleanup;
-++    }
-++
-+     /* Start building the LCS table. */
-+     for (uint32_t i = 0; i <= alen; i++) {
-+         for (uint32_t j = 0; j <= blen; j++) {
-+-- 
-+2.32.0
-+
-diff --git a/meta-oe/recipes-extended/redis/redis_6.2.2.bb b/meta-oe/recipes-extended/redis/redis_6.2.2.bb
-index a36c190af3..a9e6eaffaa 100644
---- a/meta-oe/recipes-extended/redis/redis_6.2.2.bb
-+++ b/meta-oe/recipes-extended/redis/redis_6.2.2.bb
-@@ -18,6 +18,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://0006-Define-correct-gregs-for-RISCV32.patch \
-            file://fix-CVE-2021-29477.patch \
-            file://fix-CVE-2021-29478.patch \
-+           file://fix-CVE-2021-32625.patch \
-            "
- SRC_URI[sha256sum] = "7a260bb74860f1b88c3d5942bf8ba60ca59f121c6dce42d3017bed6add0b9535"
+diff --git a/meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb b/meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb
+index 51f5a4eca1..c93c510976 100644
+--- a/meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb
++++ b/meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb
+@@ -88,6 +88,8 @@ do_install_append() {
+ # as well)
+ PACKAGES = " \
+     ${PN} \
++    ${PN}-extra \
++    ${PN}-doc \
+     ${PN}-dbg \
+ "
  
+@@ -98,12 +100,16 @@ FILES_${PN} = " \
+     ${datadir}/fvwm/ConfigFvwmDefaults \
+ "
+ 
+-RDEPENDS_${PN} = " \
+-    xuser-account \
++FILES_${PN}-extra = " \
++    ${bindir} \
++    ${libexecdir} \
++    ${sysconfdir}/xdg/fvwm \
++"
++FILES_${PN}-doc = " \
++    ${mandir} \
++    ${datadir}/fvwm \
+ "
+ 
+-# by default a lot of stuff is installed and it's not easy to control what to
+-# install, so install everything, but skip the check
+-INSANE_SKIP_${PN} = " \
+-    installed-vs-shipped \
++RDEPENDS_${PN} = " \
++    xuser-account \
+ "
 -- 
 2.25.1
 
