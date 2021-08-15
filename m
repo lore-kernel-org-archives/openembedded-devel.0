@@ -1,77 +1,88 @@
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.web09.11448.1629036405465182191
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.web10.11331.1629036406207285741
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Aug 2021 07:06:45 -0700
+ Sun, 15 Aug 2021 07:06:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=PDLXwGfk;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id om1-20020a17090b3a8100b0017941c44ce4so9991431pjb.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Aug 2021 07:06:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=UDem0xWk;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id hv22-20020a17090ae416b0290178c579e424so23283214pjb.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Aug 2021 07:06:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=di+bvZD/Rkw3azV3SNpTUUa4BXJeL29l7RMPpHOg+ZQ=;
-        b=PDLXwGfkC3z9was/5RVR90QPccDNi+1eNpvjPd978m+5ff3It/86T7VFOyN925OWMN
-         KL6CrhN96u8lZ9JXUkEcLgvl0XWBmRm9mazVkGsuspY2/GagUISecFc5l4IvNOUESvSC
-         rFFCEHZHIWgVHO2h0HWlSDTtAMlj2pw55c4vb0m65YEgCP1K7nPNgajDk9SXN5IKa2hV
-         M3kwErq5rFWzQ+zJwpsd34e1Sgb/QsTye/Fi2fY6oS5XqovULKIRFl870Yftx/BncGxQ
-         JYOz0VUjqnQIJYUr2nPjFsgyVaTN7U+zxGYJFMK8bE/wwEUatn9/AXUVCkG8qCewIID/
-         neFw==
+        bh=On4xthMxiePw83lKJrr8JtnSnXXHFQJa88/yg8n5IxA=;
+        b=UDem0xWkoeBK4wkJma14BEGcqqfn4JD8oUQYwqpl4+FDaiF23/EcLeaS+yqpt7G9Bq
+         jNgxMS09vpyybWIuz0au0D3eXtuR7sebtkWA0SvgTJyBq4akarIhiARBc5VTaWGulPXJ
+         YCpkvF6TMbeiiGeJxAMNICPRzq/NKWdLYeqcmsqZIeNUD6bpnLl6zI+4ZkpV3QBJiofm
+         ikm/7nWH/IjbLF84wrFZGvc2pUJU34v++9q4domlMaUA7fSFtyu84fD9mZq2Wf0jF0y+
+         gIEu6aCmW32ZndQRLwzV/P2ddKG19cRvzoymZZDOviGJ88M3wf/yMxWOBuPklp3TcXBI
+         MWfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=di+bvZD/Rkw3azV3SNpTUUa4BXJeL29l7RMPpHOg+ZQ=;
-        b=hbsEx78RyO4hAUYIJXm3KHxVRb2+VSt9iUxPOvZ2o3PNn45jo3UlQpw1HrJxqBfTyp
-         ZjGwl9QIObAarBbcZ6qHn07g3DbrgLfSPjnJ52aJKwBrsRskO9Ag4EGZRoihVJO7VZKd
-         PaGZi/5UcUs/wPtsxNqI2NeAG6XnSB/tXKtCXf3eyrRLQQ41dczQ978/KP5tq5Krc3AQ
-         f96sGLOhIvVTw3HAqKWwu/Rp9Nf0fo4sO5pksY9wXaSn57XsuTxPS0qIUeLUnXy77QjR
-         ToTin/oAwzb4EPWC1R5MT7ZhwX2iIjSaYh5FLyCA+nalGIvxDh7RgEcxi49eVp7abnlg
-         rLmA==
-X-Gm-Message-State: AOAM530SILgnYHHvesRnJr5DwowPky8jzlgrWwxzbVzgvMQXQlsE42t9
-	BkR/arK5PRLhsh5sS5Nzw/l9tj+hU+/3Pw==
-X-Google-Smtp-Source: ABdhPJyEybdudkYQNEj3U1JeOz24TNhNnojAe9oY5G6eQHcV+9DA8QrAq5kAVZNMyCGVOfSCNc2U9g==
-X-Received: by 2002:a63:2024:: with SMTP id g36mr11392484pgg.213.1629036404985;
-        Sun, 15 Aug 2021 07:06:44 -0700 (PDT)
+        bh=On4xthMxiePw83lKJrr8JtnSnXXHFQJa88/yg8n5IxA=;
+        b=rUFEDjxTweCt7AbFjYWFuMVzR1K7kTw+f5UH5shG0xpFieHcC1O8MDZvE2MX06Q647
+         orP0tyc6aa7SRJ326LvKAEyJb7FMZ8fJxNm+HDt/6zjvn5EY3GVQjvsUdxiRX1vg2sSG
+         idHSxhA1Fw9mHwdqH7GYo6NikS5ca9XP/HQBMTmBeW6JUUlRG67eaPISl6H6WIWVFpJX
+         vAIVNKGqpqGzYruhoX7uwhTYBr31PVqPnO3CoAoKCyxaX4eGs1nQ75XdT+F5P7BUcf6i
+         qvW2fk5MyDCmkbFItuHviRmKc6dJvBm0F4oUPqLzNGLxnAVCMrP1RiWTMwO18b+221tQ
+         loeg==
+X-Gm-Message-State: AOAM531Rp7Upq1he2l0YHxrGtZArD//Hi/enad1W0DREd1+C4gwXWBB4
+	jXvMFjoWjUnttnPRZrPnW6agIH4B/hdQuQ==
+X-Google-Smtp-Source: ABdhPJy0TyJSLjOT5Lim6N58ke7+9wns9ahpywEssIHWjSR40b4d6ej5xhwN3axZ8d1stxg2lzx7bg==
+X-Received: by 2002:a17:90b:1bc5:: with SMTP id oa5mr10653362pjb.170.1629036405705;
+        Sun, 15 Aug 2021 07:06:45 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:162c:344d:280d:4a4c])
-        by smtp.gmail.com with ESMTPSA id y67sm8332901pfg.218.2021.08.15.07.06.44
+        by smtp.gmail.com with ESMTPSA id y67sm8332901pfg.218.2021.08.15.07.06.45
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Aug 2021 07:06:44 -0700 (PDT)
+        Sun, 15 Aug 2021 07:06:45 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 05/18] htop: Add ncurses-terminfo-base to RDEPENDS
-Date: Sun, 15 Aug 2021 07:06:17 -0700
-Message-Id: <864b9a12593452a09749812b3e37b24b57177802.1629036279.git.akuster808@gmail.com>
+Subject: [hardknott 06/18] php: move to version 7.4.21
+Date: Sun, 15 Aug 2021 07:06:18 -0700
+Message-Id: <69dcf5bac8adfd55f1a40cff1e989ed8806607cb.1629036279.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1629036279.git.akuster808@gmail.com>
 References: <cover.1629036279.git.akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Paulo Neves <ptsneves@gmail.com>
+From: Joe Slater <joe.slater@windriver.com>
 
-Without it there are no terminal configurations on the target
-and htop refuses to run.
+Lots of bug fixes.
 
-(cherry picked from commit b5d74f8a6bd33e8468dd04d990f08d89d1e6928a)
+CVE: CVE-2021-21704 CVE-2021-21705
+
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 93045c3db744a9f1cd0a9b0ce992d44d9c44c309)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/htop/htop_3.0.5.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-devtools/php/{php_7.4.16.bb => php_7.4.21.bb} | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/php/{php_7.4.16.bb => php_7.4.21.bb} (99%)
 
-diff --git a/meta-oe/recipes-support/htop/htop_3.0.5.bb b/meta-oe/recipes-support/htop/htop_3.0.5.bb
-index 8e9b95d91d..c757f7fb59 100644
---- a/meta-oe/recipes-support/htop/htop_3.0.5.bb
-+++ b/meta-oe/recipes-support/htop/htop_3.0.5.bb
-@@ -31,3 +31,5 @@ PACKAGECONFIG[delayacct] = "--enable-delayacct,--disable-delayacct,libnl"
- PACKAGECONFIG[sensors] = "--with-sensors,--without-sensors,lmsensors,lmsensors-libsensors"
+diff --git a/meta-oe/recipes-devtools/php/php_7.4.16.bb b/meta-oe/recipes-devtools/php/php_7.4.21.bb
+similarity index 99%
+rename from meta-oe/recipes-devtools/php/php_7.4.16.bb
+rename to meta-oe/recipes-devtools/php/php_7.4.21.bb
+index 821d9cd046..4d427252f1 100644
+--- a/meta-oe/recipes-devtools/php/php_7.4.16.bb
++++ b/meta-oe/recipes-devtools/php/php_7.4.21.bb
+@@ -33,7 +33,8 @@ SRC_URI_append_class-target = " \
+           "
  
- FILES_${PN} += "${datadir}/icons/hicolor/scalable/apps/htop.svg"
+ S = "${WORKDIR}/php-${PV}"
+-SRC_URI[sha256sum] = "85710f007cfd0fae94e13a02a3a036f4e81ef43693260cae8a2e1ca93659ce3e"
++SRC_URI[sha256sum] = "36ec6102e757e2c2b7742057a700bbff77c76fa0ccbe9c860398c3d24e32822a"
 +
-+RDEPENDS_${PN} += "ncurses-terminfo-base"
+ 
+ inherit autotools pkgconfig python3native gettext
+ 
 -- 
 2.25.1
 
