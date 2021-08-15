@@ -1,89 +1,85 @@
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.web10.11337.1629036414653152535
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.web11.11426.1629036415829220988
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Aug 2021 07:06:54 -0700
+ Sun, 15 Aug 2021 07:06:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=StH2+Es6;
- spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id c4so1659824plh.7
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Aug 2021 07:06:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=csCbckb8;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id j12-20020a17090aeb0c00b00179530520b3so7874616pjz.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Aug 2021 07:06:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=9aZ8l1rAIb4FNoGYav+fl1KNygxdCOKexoNJX2O87Mo=;
-        b=StH2+Es6VPaF5fMYdRCVrbQyFORLM+mjo8tkn2uDxr8N1mPIWo90c/9oNGsyQUEZfD
-         LROHup4iss9hGKBwk8uukDsi91E6jqPBYI/4TcQDKg90gM2bthetJM3xQVN/ECCmk5vj
-         WQLNctVFDSMSdJwX6FdyxMT40sL6EdMSJNOCrEIK2Z8/LpKwncngdFuPNKkaZfVcl7hj
-         mySBLXmGHb+p6/wmVY7eUgsZykWoc2XrC0gXcv2hAtS66jPkjhXJKLhJqBP0mNq6GhbX
-         ITtcO9grnMif6sfZPt9L0t+ck1xBgQp0ZxDhRmimaMhHrnnPZNOd2p2hydq7hKoS74R/
-         Wdmg==
+        bh=eF2hsPiW5AFCZgJEKDscwjsbO83CuZPTWeOCxyTA32Q=;
+        b=csCbckb8przoHttwwNx+JBn0wlRi1EhVY+PVPuHddXy3qfubFeqdrpjA36CZmnDRnf
+         dcO59BA+IFInt44vX4T833DeNM3epE0TygRdxrHMBLOuQZrFomtllFu8jM0kKEYtt9UA
+         suSBR9jK6n4mFcdf5qywI1aIIeznKwEyY48haEe6NImarmhLwXiNAepFUpq8zogrZvmR
+         Z9yMwLBHAvN/xG+wFi3cHF8eR+UnWavGWiuAIcWY4BGMUs1SlDYFwGzAR1Fy6EHtrmV/
+         /5HFSzsrsazG8KylhdNEWeFRGQwVj9OzRrNO4RcYpDD0ATNgkrQ1jtJDkz71Wt40Cztq
+         C0gQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=9aZ8l1rAIb4FNoGYav+fl1KNygxdCOKexoNJX2O87Mo=;
-        b=jTrhTABhb13S+/q1frOYOsEpmQbdVPxvoKlztdfJxmj17WVQpHZQXSZspaDcN5kHW5
-         4PO7Eb4YuXOtMvecKc3z/bcEedSf6n/duZttIOCdtrPtSJ+eSZWLL+llHVrqyuerG+u/
-         tkEZmisXPnbMJQXFBJCqo5nBwMM8VHApMOl2/3QbkZAgKuvASrpJK3afA1oeS5mCleEZ
-         /bJfdNXeZKQY0Sf+FZCwBYfQh9oL1/6t3x86dvhIIbLh3MDbZYQgPmP/Kn3Lvj9WHNEw
-         ORoo1zwbD3a0p5BeZrsXWsqTCmqGsNZs/AfiO6Ytw2FRscDFqVEVLunA0OmzSs/iW+7D
-         jBCg==
-X-Gm-Message-State: AOAM530H7ia9rHON8TaNKqV0mIJ5Mcp65pQhx3GjRNtCvWl47JTdfWs7
-	kmibIiqDEj26EcJIJBv5000Zi8T/dtVYcQ==
-X-Google-Smtp-Source: ABdhPJy73RYcoWiORU1tS7zGAcV74EF/Gje8ViH1HwHanJbhvCurroOEnn4yYbsgSzhCSAcDzAi44A==
-X-Received: by 2002:a62:178f:0:b029:3e0:35c4:f0f with SMTP id 137-20020a62178f0000b02903e035c40f0fmr11726930pfx.64.1629036414124;
-        Sun, 15 Aug 2021 07:06:54 -0700 (PDT)
+        bh=eF2hsPiW5AFCZgJEKDscwjsbO83CuZPTWeOCxyTA32Q=;
+        b=gbQjncTsoMRqMCAeJ1r7TbcugiWrMftfyMZ4V4lkLrpflsSJQ3Q+XJQlkeKGrvZL2O
+         BaDKt/b+aeysrsbmrta0Jp+MPqnhQ1bHPHUB0doNxS23Toqo5YmYB7OJE1T5Io8ollqT
+         v+1IOlmgqpsBI7QkJBdbNqMoHNLzUmCdkeZ/a3DxsYCd20dZUKdcwM49MZRkguCHIUXU
+         y0tJ1uhHVbJbVPiQiCye4bKS5JuIDm75gNVG+sm7aiBn72nhHnZvMc2H4XzybYmDZW1+
+         g91FN/9Rg8EHu9QocxEV11fa1qI0GIyI04Gi/XR+AWxoJerKp/OW1rmLWK5R1JkaFhRd
+         93/A==
+X-Gm-Message-State: AOAM532Ypr4OsbyPbBzrfqw85aOMBa/8+HQo5EYcTkBx3jxXOuVOyC4u
+	2eYEGBo09ZaqFMhcPDdKXKMPbmEFC43J4Q==
+X-Google-Smtp-Source: ABdhPJzK9U4Vc1peFwv1Cx18zYMG2oT3JhwXL7NckCgSkzoGIRyXZznWCqU3rJnnZ0QPifJFcOv/JA==
+X-Received: by 2002:a05:6a00:1784:b0:3e1:388:9ff9 with SMTP id s4-20020a056a00178400b003e103889ff9mr11146780pfg.40.1629036415287;
+        Sun, 15 Aug 2021 07:06:55 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:162c:344d:280d:4a4c])
-        by smtp.gmail.com with ESMTPSA id y67sm8332901pfg.218.2021.08.15.07.06.53
+        by smtp.gmail.com with ESMTPSA id y67sm8332901pfg.218.2021.08.15.07.06.54
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Aug 2021 07:06:53 -0700 (PDT)
+        Sun, 15 Aug 2021 07:06:54 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 16/18] ldns: fix QA Issue after LDFLAGS change
-Date: Sun, 15 Aug 2021 07:06:28 -0700
-Message-Id: <2e794f33a43d71bb98619f3d7efaa460ebd7e12f.1629036279.git.akuster808@gmail.com>
+Subject: [hardknott 17/18] bigbuckbunny-1080p: fix sample video URL
+Date: Sun, 15 Aug 2021 07:06:29 -0700
+Message-Id: <b2c8972406a263fac9e8b8f3a41251b6d451ef10.1629036279.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1629036279.git.akuster808@gmail.com>
 References: <cover.1629036279.git.akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Tony Battersby <tonyb@cybernetics.com>
+From: Michael Opdenacker <michael.opdenacker@bootlin.com>
 
-Adding -f*-prefix-map to LDFLAGS caused the following issue:
+Replace a link that's now broken.
 
-QA Issue: ldns.pc failed sanity test (tmpdir)
+The original download link on blender.org still works
+(https://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_1080p_surround.avi)
+but is still extremely slow.
 
-Fix by filtering out -f*-prefix-map from *.pc files.
-
-[YOCTO #14481]
-
-Signed-off-by: Tony Battersby <tonyb@cybernetics.com>
+Signed-off-by: Michael Opdenacker <michael.opdenacker@bootlin.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit a4791bf2f37de55dd51971d34ac2252d3cf68f30)
+(cherry picked from commit 223243d649b623db398d2f39f067b4c72b54e710)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-devtools/ldns/ldns_1.7.1.bb | 7 +++++++
- 1 file changed, 7 insertions(+)
+ .../recipes-multimedia/sample-content/bigbuckbunny-1080p.bb     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/ldns/ldns_1.7.1.bb b/meta-oe/recipes-devtools/ldns/ldns_1.7.1.bb
-index 2a52dd688a..2ce669154a 100644
---- a/meta-oe/recipes-devtools/ldns/ldns_1.7.1.bb
-+++ b/meta-oe/recipes-devtools/ldns/ldns_1.7.1.bb
-@@ -16,3 +16,10 @@ PACKAGECONFIG[drill] = "--with-drill,--without-drill"
+diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
+index 70eb6e4be7..c651d8113d 100644
+--- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
++++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
+@@ -3,7 +3,7 @@ LICENSE = "CC-BY-3.0"
+ # http://www.bigbuckbunny.org/index.php/about/
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
  
- EXTRA_OECONF = "--with-ssl=${STAGING_EXECPREFIXDIR} \
-                 libtool=${TARGET_PREFIX}libtool"
-+
-+do_install:append() {
-+    sed -e 's@[^ ]*-ffile-prefix-map=[^ "]*@@g' \
-+        -e 's@[^ ]*-fdebug-prefix-map=[^ "]*@@g' \
-+        -e 's@[^ ]*-fmacro-prefix-map=[^ "]*@@g' \
-+        -i ${D}${libdir}/pkgconfig/*.pc
-+}
+-SRC_URI = "http://themazzone.com/big_buck_bunny_1080p_surround.avi"
++SRC_URI = "https://www.mediaspip.net/IMG/avi/big_buck_bunny_1080p_surround.avi"
+ SRC_URI[md5sum] = "223991c8b33564eb77988a4c13c1c76a"
+ SRC_URI[sha256sum] = "69fe2cfe7154a6e752688e3a0d7d6b07b1605bbaf75b56f6470dc7b4c20c06ea"
+ 
 -- 
 2.25.1
 
