@@ -1,121 +1,85 @@
-Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com [209.85.222.172])
- by mx.groups.io with SMTP id smtpd.web08.13820.1629049298552283806
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.4])
+ by mx.groups.io with SMTP id smtpd.web12.18661.1629077115007991545
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Aug 2021 10:41:38 -0700
+ Sun, 15 Aug 2021 18:25:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dGOxejQc;
- spf=pass (domain: gmail.com, ip: 209.85.222.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f172.google.com with SMTP id b207so7130673qkg.9
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Aug 2021 10:41:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
-        bh=aR3KSncYcde2gvvJO9THXeN42iX6J/2F/OqtVtEyjhM=;
-        b=dGOxejQc/0jbIj60npmp7nRE3phXvh+MmZ/GyGCs63DAv9gIKItUHla7N3CM7aeoOz
-         iBRfCMEk/aP1gl11yO5ZBZl6QDi5+enorF1DGp6P68MnOtsmrxNu1lSw6IKMv0PX7hcU
-         9naZSjGK1nvwJm/qqdeL8EFVfCQYCg6Z5cM0nXDxs310XsJJgWiqFM/Gggf6JjJtVD1Y
-         cljH3X481bLMNdM8sRpEzmeamJ/hXNyXO5Sq6fVEjFfMLfboL34yRju8wg33hRPeCcGw
-         ytyudYC/9p6sleZSQY5zq724lvyEl5X62UrNIxXdAMgFFg5qF2LwhG6tU0SgC9NzMi/t
-         d5Cw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to;
-        bh=aR3KSncYcde2gvvJO9THXeN42iX6J/2F/OqtVtEyjhM=;
-        b=rJrmvKoC4m/53+QnMFTCIdNSpK9Wn+PvHSpHeUeZlICrXEvNYTYfuiiJr9tBXv1TWm
-         GdyQVvxfr+1kR8bCuhTeQ5ecWeQRqKw/Z3JjyI2lHpsuiGHnwkTXsvKYM40/DmuQf9pp
-         32GMUA0opAR0xpmxKSEQjc/exrFnNgYND5jPn4K8Ah7i2bOFJUm6AKo3hL1aSyKXN03/
-         5mzQc7ERZ2BONmkCJFVPQI84Bm/DyIuDLdUVgqVzNv1wsr+0FtmBpiiDEUvaDN41kjOs
-         sq6F7I7VPAceI8YL886Vqq34+YimoYV8qyLOfuy+Wu89lCL91J4dt4oMOoCPZs+3QULV
-         yrXQ==
-X-Gm-Message-State: AOAM533g6nFEKZ9/MQgpcmQqoHWQdF3bPKl5KMnrPDjDzkeWW2QjdxFb
-	h0oUIutPLE4kbDKC206Jul81SxpDn+9C/Oxn4NE=
-X-Google-Smtp-Source: ABdhPJyVMmzdeWu+yoWXikPWQJX6wOeLKn5LARY977m+j6BzRVRb1J9KXx2IRkpJFzpV1c8rDTBu6xB50jMbKMZTTrA=
-X-Received: by 2002:a05:620a:88d:: with SMTP id b13mr12468063qka.125.1629049297589;
- Sun, 15 Aug 2021 10:41:37 -0700 (PDT)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=vZ5vx1D3;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.4, mailfrom: leimaohui@fujitsu.com)
+Return-Path: <leimaohui@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1629077112; i=@fujitsu.com;
+	bh=dJ6HkTErPImPDeNJGawsz6kUwa0EmQR0DEgA9sKqfoA=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=vZ5vx1D3M7fcWWkvUJaKCz03I6janHVQSOX5JUOUlIX5obqNTcMRcr69pXpr4KSRD
+	 hOOgatnqwG5SV/OfBUggNNHlTtp3TF0hkbTh0RK11vmLnkibuN063Aj36PQnt4z1jq
+	 MZtLCuUjew2/AA9q7HnJQVpGLITUMI7pLdXj1ghkX2qXzck1B/xPuQanAKuxhLtnmw
+	 X3iXEx+8IKca66FEBEoNyrdysCd/9LmhaQQATcMhwaeYvvpVIRJNdF/OY6tVhFMwBP
+	 G1veCjUOhvTMchiZDz1mmmx4hVYAe5YDT30ude2dmP1obvZkd0TRqLQeuKHJVKiM09
+	 HLQtIRce/S4yA==
+Received: from [100.113.1.232] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-4.bemta.az-a.eu-central-1.aws.symcld.net id EB/EB-31171-87EB9116; Mon, 16 Aug 2021 01:25:12 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprOIsWRWlGSWpSXmKPExsViZ8MxRbdin2S
+  iwaLlTBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aTX3tZCh6zVvw7nNDA2MTaxcjFISQwm0ni
+  e+thFghnL6PEy1Wf2bsYOTnYBDQkdk+9zAxiiwjoSyydvQfMZhZQkzj68ieYLSwQKLF4+hpWE
+  JtFQFXi4KGzLCA2r4CrxJKJC8BsCQEFiSkP3zNDxAUlTs58wgIxR0Li4IsXzBA1ShJvL+1hhL
+  ArJGbNamOawMg7C0nLLCQtCxiZVjFaJBVlpmeU5CZm5ugaGhjoGhoa6xrqmhrqJVbpJuqlluo
+  mp+aVFCUCJfUSy4v1iitzk3NS9PJSSzYxAsMrpZDReAfjwdcf9A4xSnIwKYnyZhySSBTiS8pP
+  qcxILM6ILyrNSS0+xCjDwaEkwcuySzJRSLAoNT21Ii0zBxjqMGkJDh4lEd7mLUBp3uKCxNziz
+  HSI1ClGRSlxXqW9QAkBkERGaR5cGyy+LjHKSgnzMjIwMAjxFKQW5WaWoMq/YhTnYFQS5rUDmc
+  KTmVcCN/0V0GImoMU+BmCLSxIRUlINTL4RwZPrE7dqvP2UOuvxSnbP7bq13c5NTqrJrnkPHrw
+  RTgr1OVIkr37HOeqp+sysig6lPxv+GQfIBHRZ6ySz8s/I2NwSasGZ8vTHr3CVjt+ZZQWX2lZx
+  x0ltXcP1pStdwOdmXevsgrZ7E41TJF5q3uO/+/4e2w/X6SvSakOLMtdOnHyvSOTznVMJrI4Hl
+  3ew6dy4dIDPf3btW3Md+0lvtBn5H205J3J8g9WeLZNO3yy8/PLMEs+9b490MLl+D1DISgq04R
+  b5I3DFSDIwosvlhmID2/rHa/Q9Lyb5FV053m/Z2WgVyL9ux2bR+P3yF3rn3n65tLTmb7gDK59
+  deALnsi8Fx3beObdcgvH5X+UZSizFGYmGWsxFxYkA789y9ioDAAA=
+X-Env-Sender: leimaohui@fujitsu.com
+X-Msg-Ref: server-4.tower-226.messagelabs.com!1629077111!95532!1
+X-Originating-IP: [62.60.8.148]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 25105 invoked from network); 16 Aug 2021 01:25:12 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-4.tower-226.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 16 Aug 2021 01:25:12 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17G1P645019068
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Aug 2021 02:25:11 +0100
+Received: from localhost.localdomain (10.167.225.227) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Mon, 16 Aug 2021 02:25:04 +0100
+From: "leimaohui" <leimaohui@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Lei Maohui <leimaohui@fujitsu.com>
+Subject: [oe] [meta-oe][PATCH] packagegroup-meta-oe: Update ttf-ipa package name.
+Date: Mon, 16 Aug 2021 18:24:57 +0800
+Message-ID: <1629109498-55444-1-git-send-email-leimaohui@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <1628871245-5054-1-git-send-email-leimaohui@fujitsu.com> <7ec64059-4784-0bbe-4ff0-49542fa645dc@gmail.com>
-In-Reply-To: <7ec64059-4784-0bbe-4ff0-49542fa645dc@gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sun, 15 Aug 2021 10:41:11 -0700
-Message-ID: <CAMKF1sqr=tUTE=NqN0T4e99UN5Waw3B14rGTWOQGyqhZagMA3A@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] takao-fonts: It should be in ttf-fonts directory as the other ttf fonts.
-To: leimaohui <leimaohui@fujitsu.com>, 
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+X-Originating-IP: [10.167.225.227]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Type: text/plain
 
-There are additional recipes which depend on this package and they
-should be adjusted accordingly as well see
+Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
+---
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-  meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb:    takao-fonts \
- meta-oe/recipes-graphics/ttf-fonts/ttf-takao_003.03.01.bb:HOMEPAGE =
-"https://launchpad.net/takao-fonts"
- meta-oe/recipes-support/uim/uim_1.8.8.bb:DEPENDS:append:class-target
-= " intltool-native gtk+ gtk+3 uim-native takao-fonts"
- meta-oe/recipes-support/uim/uim_1.8.8.bb:RDEPENDS:uim-anthy =
-"takao-fonts anthy libanthy0"
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index b7abe2197..0e58d9b65 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -524,7 +524,7 @@ RDEPENDS:packagegroup-meta-oe-graphics ="\
+     ttf-gentium \
+     ttf-hunky-sans \
+     ttf-hunky-serif \
+-    ttf-ipa \
++    ttf-ipag ttf-ipagp ttf-ipamp ttf-ipam \
+     ttf-lohit \
+     ttf-inconsolata \
+     ttf-liberation-sans-narrow \
+-- 
+2.25.1
 
-please send a v2 with these fixed to reflect the recipe rename change as well.
-
-On Fri, Aug 13, 2021 at 9:33 AM Khem Raj <raj.khem@gmail.com> wrote:
->
->
->
-> On 8/13/21 9:14 AM, leimaohui wrote:
-> > - Moved it to ttf-fonts directory.
-> > - Rename to ttf-takao.
-> > - Use ttf.inc instead of rewrite do_install.
-> >
-> > Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
-> > ---
-> >   .../ttf-takao_003.03.01.bb}                      | 16 ++++++++++++----
-> >   1 file changed, 12 insertions(+), 4 deletions(-)
-> >   rename meta-oe/recipes-graphics/{takao-fonts/takao-fonts_003.03.01.bb => ttf-fonts/ttf-takao_003.03.01.bb} (57%)
-> >
-> > diff --git a/meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.03.01.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-takao_003.03.01.bb
-> > similarity index 57%
-> > rename from meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.03.01.bb
-> > rename to meta-oe/recipes-graphics/ttf-fonts/ttf-takao_003.03.01.bb
-> > index 9ddfc6ae7..2c373f946 100644
-> > --- a/meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.03.01.bb
-> > +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-takao_003.03.01.bb
-> > @@ -1,3 +1,5 @@
-> > +require ttf.inc
-> > +
-> >   SUMMARY = "Takao Fonts are a community developed derivatives of IPA Fonts."
-> >   DESCRIPTION = "Takao Fonts are a community developed derivatives of IPA Fonts."
-> >
-> > @@ -6,14 +8,20 @@ SECTION = "User Interface/X"
-> >
-> >   LICENSE = "IPA"
-> >   LIC_FILES_CHKSUM = "file://IPA_Font_License_Agreement_v1.0.txt;md5=6cd3351ba979cf9db1fad644e8221276"
-> > +PR = "r0"
->
-> explicit PR setting is not needed here. I have removed it before staging
-> but keep this in mind for future
->
-> > +
-> >   SRC_URI = "https://launchpad.net/${BPN}/trunk/15.03/+download/TakaoFonts_00303.01.tar.xz"
-> >   SRC_URI[md5sum] = "8cd3fe724faa5034a9369e98cf108d2d"
-> >   SRC_URI[sha256sum] = "e9871f72ac69acb3e277aebbee7ca01fbebf54800733e29fafdc46133fc3552f"
-> >
-> >   S = "${WORKDIR}/TakaoFonts_00303.01"
-> > -do_install() {
-> > -    install -m 0755 -d ${D}/${datadir}/fonts
-> > -    install -m 0644 -p ${S}/*.ttf ${D}/${datadir}/fonts/
-> > -}
-> > +
-> > +PACKAGES = "ttf-takao-pgothic ttf-takao-gothic ttf-takao-pmincho ttf-takao-mincho"
-> > +FONT_PACKAGES = "ttf-takao-pgothic ttf-takao-gothic ttf-takao-pmincho ttf-takao-mincho"
-> > +
-> > +FILES:ttf-takao-pgothic = "${datadir}/fonts/truetype/TakaoPGothic.ttf"
-> > +FILES:ttf-takao-gothic = "${datadir}/fonts/truetype/TakaoGothic.ttf"
-> > +FILES:ttf-takao-pmincho = "${datadir}/fonts/truetype/TakaoPMincho.ttf"
-> > +FILES:ttf-takao-mincho = "${datadir}/fonts/truetype/TakaoMincho.ttf"
-> >
-> >   FILES:${PN} += "${datadir}/fonts/*.ttf"
-> >
-> >
-> >
-> > 
-> >
