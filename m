@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.24715.1629123164368860905
+ by mx.groups.io with SMTP id smtpd.web08.24734.1629123169338877931
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Aug 2021 07:12:45 -0700
+ Mon, 16 Aug 2021 07:12:49 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=57306 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mFdLy-0005El-GS; Mon, 16 Aug 2021 17:12:43 +0300
+	id 1mFdM3-0005El-G8; Mon, 16 Aug 2021 17:12:48 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-ujson: Upgrade 4.0.2 -> 4.1.0
-Date: Mon, 16 Aug 2021 17:12:30 +0300
-Message-Id: <20210816141231.13824-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-pycurl: Upgrade 7.44.0 -> 7.44.1
+Date: Mon, 16 Aug 2021 17:12:31 +0300
+Message-Id: <20210816141231.13824-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210816141231.13824-1-leon.anavi@konsulko.com>
 References: <20210816141231.13824-1-leon.anavi@konsulko.com>
@@ -30,37 +30,32 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 4.1.0:
+Upgrade to release 7.44.1:
 
-- Add gcov coverage testing for C code
-- Test Python 3.10-dev
-- Remove explicit handling of manylinux platform tag
-- Remove unused variable
-- dconv no longer uses global instances of StringToDoubleConverter
-- Switch shebang for the manylinux-wheels script
-- Fix typos in error message
+- Repair incorrect Python thread initialization logic which caused
+  operations to hang
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-ujson_4.0.2.bb => python3-ujson_4.1.0.bb}   | 2 +-
+ .../{python3-pycurl_7.44.0.bb => python3-pycurl_7.44.1.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-ujson_4.0.2.bb => python3-ujson_4.1.0.bb} (89%)
+ rename meta-python/recipes-devtools/python/{python3-pycurl_7.44.0.bb => python3-pycurl_7.44.1.bb} (87%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ujson_4.0.2.bb b/meta-python/recipes-devtools/python/python3-ujson_4.1.0.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-ujson_4.0.2.bb
-rename to meta-python/recipes-devtools/python/python3-ujson_4.1.0.bb
-index 096b5722af..d8e83c58a1 100644
---- a/meta-python/recipes-devtools/python/python3-ujson_4.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-ujson_4.1.0.bb
-@@ -4,7 +4,7 @@ DESCRIPTION = "UltraJSON is an ultra fast JSON encoder and decoder written in pu
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=10fa10456417c0252bcb8a498e498ffe"
+diff --git a/meta-python/recipes-devtools/python/python3-pycurl_7.44.0.bb b/meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb
+similarity index 87%
+rename from meta-python/recipes-devtools/python/python3-pycurl_7.44.0.bb
+rename to meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb
+index 72b87dafb2..a80fed62de 100644
+--- a/meta-python/recipes-devtools/python/python3-pycurl_7.44.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=4fbd65380cdd255951079008b364516c \
+                     file://COPYING-MIT;md5=75f131c591546fd1277ca49c9a81ab1b \
+                     "
  
--SRC_URI[sha256sum] = "c615a9e9e378a7383b756b7e7a73c38b22aeb8967a8bfbffd4741f7ffd043c4d"
-+SRC_URI[sha256sum] = "22b63ec4409f0d2f2c4c9d5aa331997e02470b7a15a3233f3cc32f2f9b92d58c"
+-SRC_URI[sha256sum] = "2ce9905626d8ceafcbadee666e2f45397e29c7618ddcdc63fc22d85e5046c6d6"
++SRC_URI[sha256sum] = "5bcef4d988b74b99653602101e17d8401338d596b9234d263c728a0c3df003e8"
  
- inherit pypi ptest setuptools3
+ inherit pypi setuptools3
  
 -- 
 2.17.1
