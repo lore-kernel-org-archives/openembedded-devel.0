@@ -1,62 +1,86 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.24734.1629123169338877931
+Received: from kozue.soulik.info (kozue.soulik.info [108.61.200.231])
+ by mx.groups.io with SMTP id smtpd.web11.25003.1629124731060347106
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Aug 2021 07:12:49 -0700
+ Mon, 16 Aug 2021 07:38:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=57306 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.93)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mFdM3-0005El-G8; Mon, 16 Aug 2021 17:12:48 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
+ dkim=missing; spf=pass (domain: soulik.info, ip: 108.61.200.231, mailfrom: ayaka@soulik.info)
+Received: from [192.168.10.3] (unknown [112.65.48.221])
+	by kozue.soulik.info (Postfix) with ESMTPSA id 60B9810202E
+	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Aug 2021 23:37:11 +0900 (JST)
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-pycurl: Upgrade 7.44.0 -> 7.44.1
-Date: Mon, 16 Aug 2021 17:12:31 +0300
-Message-Id: <20210816141231.13824-3-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210816141231.13824-1-leon.anavi@konsulko.com>
-References: <20210816141231.13824-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+From: "Randy Li" <ayaka@soulik.info>
+Subject: [meta-android-ndk]: initial version that could build some simple utility
+Message-ID: <886093c9-8b20-cf35-d1d8-73afeea11b8d@soulik.info>
+Date: Mon, 16 Aug 2021 22:38:41 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Upgrade to release 7.44.1:
+Hello All:
 
-- Repair incorrect Python thread initialization logic which caused
-  operations to hang
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../{python3-pycurl_7.44.0.bb => python3-pycurl_7.44.1.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pycurl_7.44.0.bb => python3-pycurl_7.44.1.bb} (87%)
+I post this to the wrong list last time while I was fixing the compiling 
+issue with the Android c++.
 
-diff --git a/meta-python/recipes-devtools/python/python3-pycurl_7.44.0.bb b/meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-pycurl_7.44.0.bb
-rename to meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb
-index 72b87dafb2..a80fed62de 100644
---- a/meta-python/recipes-devtools/python/python3-pycurl_7.44.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=4fbd65380cdd255951079008b364516c \
-                     file://COPYING-MIT;md5=75f131c591546fd1277ca49c9a81ab1b \
-                     "
- 
--SRC_URI[sha256sum] = "2ce9905626d8ceafcbadee666e2f45397e29c7618ddcdc63fc22d85e5046c6d6"
-+SRC_URI[sha256sum] = "5bcef4d988b74b99653602101e17d8401338d596b9234d263c728a0c3df003e8"
- 
- inherit pypi setuptools3
- 
--- 
-2.17.1
+
+It now could compile some simple projects(likes libpng and its unit 
+test), I could run it on an Android 11 board. But there are still many 
+problems waiting for solving.
+
+
+The building above would fail the OE package QA test. There is not a 
+library linker file in Android, all the library files won't have a 
+version suffix, I am still finding a method to let this checking being 
+disable for the Android target.
+
+You could try it here
+
+https://github.com/hizukiayaka/meta-android-ndk 
+<https://github.com/hizukiayaka/meta-android-ndk>
+
+
+I am not sure I understand all the variables that were not recorded from 
+the reference manuals. So I didn't package the Android NDK toolchain 
+into an OE toolchain and I skip the canadian toolchain as I don't think 
+an external toolchain would need it. I left many things hardcode in the 
+tcmode file as I have no idea how to make the meta-clang not try to 
+build me a new clang cross compiler. I am not familiar with LLVM as 
+well, I don't much idea on which library comes from where and Google 
+also lacks documents for it.
+
+
+Let me list those things I am not sure whether I did it right here, 
+please help me solve them.
+
+ 1. I have to export some variables globally, like HOST_SYS,
+    TARGET_PREFIX, and TARGET_OS. I thought the meta-external-clang
+    would help me overwrite them but it doesn't.
+ 2. Both HOST_PREFIX and TARGET_PREFIX objdump would be used in some
+    classes but android only provides a version. Also, there is an
+    llvm-objcopy(and llvm-objdump), I didn't found meta-clang would use it;
+ 3. Should I package the Android NDK toolchain into
+    clang-cross-${TARGET_ARCH} ? I could certainly skip the candian part
+    right?
+ 4. How to deal with those recipes depending on a kernel module?
+    Although I could let the OE build a kernel image it just would not
+    be used anywhere, could I just make a dummy target?
+
+
+Later we could move to the final packing, we should not ship those 
+public libraries from the Android NDK and get rid of all the daemon 
+service files. But I could just copy what I need from the staging 
+directory so far, we could think of this later.
+
+
+I may start another layer called meta-android-vndk which would be used 
+for packing the image for the andoird vendor partition. Because it is 
+hard to deal with symbols exporting with application.
+
+
+Yours
+
+ayaka
 
