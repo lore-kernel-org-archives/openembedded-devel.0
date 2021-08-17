@@ -1,83 +1,91 @@
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web10.25960.1629128391111489963
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web08.34694.1629171303313869941
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Aug 2021 08:39:51 -0700
+ Mon, 16 Aug 2021 20:35:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=ijL8JW/J;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id n12so20481042plf.4
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Aug 2021 08:39:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=n8MKEw5OxNEv9uHwSvLNUiO8hzz25WOMqf0AGlhyeoU=;
-        b=ijL8JW/JrwbH/r2VLnKiynr5YJ1Z2QEwrD4Kxv2LF6Tc28JkKE2ZmWXLEBWZc9HnFn
-         Y8ah9Y1IqpMo5xz2I1iab1QHvyRlZGHqvtjzU09PoWsKwV/xlNCOFZqwbNeYVt14ouxT
-         iRbbr+RFyQ5DiT2ceMg8dWTnrPUaHfSMeCS6JTFLoQSGjo+jRH3ejdEL/G/Rs1XYKVj6
-         dfQ7KzRRpiSKhgXQfEXt2bwt0dlcLauPfIMT6EWjdzWrctev/e+3BMLRh8a4c4rgYd6V
-         vDb7S6nRQY3/ZtdBukxqhHr0nn8E360Jn6YpJsHYr7Mk79DwTQtESo2BNOZoT6Qn63az
-         IF3g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=n8MKEw5OxNEv9uHwSvLNUiO8hzz25WOMqf0AGlhyeoU=;
-        b=qJkKqE1NvqhpaTr+sr+616YhnMLF1L2o+57JHsPFE7jCEy0LmGGidmSwAxGqaP1VgA
-         EgiJLGGG4+/V7V/Micurv3xmz/bqVB6A6plSnu3VU7LsE+C32L2NNTEOg8wmH/Ub/9fp
-         EuUiOU55Zc2EC/83nApVCUvCqIV8jsZI6oy1qNYABLoYliY53HHi8tD1b5DUXZF1OawL
-         GQV1kCw/jjnVZtJNp34ldXT+NatRf9STwYeVay382FwEbvSKy7conq64REAZ4isWezv7
-         g23nn0ntCo8URj4n44DTCkfd1Fwl5IAE08+mo0LRxO4XOC1WTt0rnAmQfcZOuqzEByBY
-         v05A==
-X-Gm-Message-State: AOAM531IxvYameYxhz9nZu26oNjdZ8TR2gtyVXd5NTSCV+F1lHggcwA1
-	+PthSEUjOhsOV+J9fJMsJlw7sSo9vjkfuQ==
-X-Google-Smtp-Source: ABdhPJx0jPBiVImmXv6SpM+djZBbeJHJx2+eUR9CJ+/SeCoDUwipS/gk164qaV8ZVFpdKw/NYwSUeg==
-X-Received: by 2002:a05:6a00:10cb:b029:3c6:8cc9:5098 with SMTP id d11-20020a056a0010cbb02903c68cc95098mr17089611pfu.41.1629128390218;
-        Mon, 16 Aug 2021 08:39:50 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::8e60])
-        by smtp.gmail.com with ESMTPSA id ds6sm10010484pjb.32.2021.08.16.08.39.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Aug 2021 08:39:49 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Lei Maohui <leimaohui@fujitsu.com>
-Subject: [meta-oe][PATCH] layer.conf: Add ttf-ipa to SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS on fontconfig
-Date: Mon, 16 Aug 2021 08:39:47 -0700
-Message-Id: <20210816153947.214562-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.32.0
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=PBnGLjV3;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: leimaohui@fujitsu.com)
+Return-Path: <leimaohui@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1629171301; i=@fujitsu.com;
+	bh=u0Rwk1P9/BqHisTKExctDx7ENtx5AKNsplXXUn6qzEw=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=PBnGLjV33KnnIXiZC7hP9BeVZscN/eQ7pFWtyeI1dJ5AJYxJlHy3T8uhj6D5PWVR4
+	 bLlnxGw3zxYXbfa8Fnp/AgiR8sWwcWCzvvzPnaUos/yCbbgbXMkRYRTk2cW4zyu90S
+	 6xgKOxWZtOaodGLXogGoanM43xh15f7BML0JBo+n7tuAsOwZST2mayHT1zJIw8vheb
+	 c+ptoUxA4uQ1V0gwm50rlOEKDzUTcEDGvR2n1zX8/CaUy4yR/et7iUqXoUyNyfzYsr
+	 Jy4gcfR8jtDmRAWrB/SlBb2KkWZQiQiSLaCCpgNNstxZo8Vbz0Ry1N64fi0k1GZhEb
+	 OIqLok8EpkXZw==
+Received: from [100.113.0.182] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-a.eu-central-1.aws.symcld.net id 82/2C-21493-56E2B116; Tue, 17 Aug 2021 03:35:01 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprJIsWRWlGSWpSXmKPExsViZ8MxRTdFTzr
+  R4ONJDYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaPl4h3Wgo0cFY+6J7E2MB5i72Lk4hASmM0k
+  8W3eUiYIZy+jxPZ/O4AcTg42AQ2J3VMvM4PYIgL6Ektn7wGzmQXUJI6+/AlmCwu4SPya+JwFx
+  GYRUJV4eLeJEcTmFXCVuPf5F1hcQkBBYsrD98wQcUGJkzOfsEDMkZA4+OIFM0SNksTbS3sYIe
+  wKiVmz2pgmMPLOQtIyC0nLAkamVYyWSUWZ6RkluYmZObqGBga6hobGuoa6RkZmeolVuol6qaW
+  6yal5JUWJQFm9xPJiveLK3OScFL281JJNjMAQSylkfLSD8fTrD3qHGCU5mJREeW+dkkoU4kvK
+  T6nMSCzOiC8qzUktPsQow8GhJMG76ixQTrAoNT21Ii0zBxjuMGkJDh4lEd7XutKJQrzFBYm5x
+  ZnpEKlTjIpS4rzLVgD1CYAkMkrz4NpgMXaJUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjBvhQ
+  bQeJ7MvBK46a+AFjMBLfYxkARZXJKIkJJqYEplTuIKClje9XxtjnjmB0vJ9TUnGWccubSzkOP
+  bzdZNp53yzvS8uRZ9dsZt0dLYumZvgzsh36oeXdcRrvT6ZLB1ln/nw4aTP0PuvOgwfrY+mvmt
+  m9yPjM9/QiTYk3riZTPTdH8nHOeQKPWX8uYXrzZ/ZFogJHXG4ttCVUnByyvyPJiaVpgGGpx6z
+  OzXYKFX+ECi7sO8u9cnTp9Vqv7tntznhHuCuZduOL+QuPboHMOONyfS9jr+vdOns+j139vKIs
+  0HcxcVl3wKm/phcZPigRtft9bo/kh4fHyfJa/y24jJSrOLokP+uCc51yZqcE02jNkRLOC3wET
+  j8cmpjC0rZrIu3WWfd1BT8851rRuvIpRYijMSDbWYi4oTAfQQYzAsAwAA
+X-Env-Sender: leimaohui@fujitsu.com
+X-Msg-Ref: server-17.tower-228.messagelabs.com!1629171300!225103!1
+X-Originating-IP: [62.60.8.148]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 24701 invoked from network); 17 Aug 2021 03:35:00 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-17.tower-228.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Aug 2021 03:35:00 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17H3Yq9V032268
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Aug 2021 04:35:00 +0100
+Received: from localhost.localdomain (10.167.225.227) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Tue, 17 Aug 2021 04:34:51 +0100
+From: "leimaohui" <leimaohui@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Lei Maohui <leimaohui@fujitsu.com>
+Subject: [oe] [meta-oe][PATCH] uim: Dleted takao fonts from DEPENDS.
+Date: Tue, 17 Aug 2021 20:34:45 +0800
+Message-ID: <1629203685-75382-1-git-send-email-leimaohui@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.227]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Type: text/plain
 
-This is newly added font recipe but missed the entry here
+It is odd that specify fonts in uim DEPENDS.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Lei Maohui <leimaohui@fujitsu.com>
+Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
 ---
- meta-oe/conf/layer.conf | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/uim/uim_1.8.8.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index bfb3e59057..8aaff84b9f 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -5,7 +5,7 @@
- # Therefore if you want a given layer to be considered high priority
- # for the .inc and .conf etc. then consider it adding at the beginning
- # of BBPATH. For bblayers bitbake will use BBFILES_PRIORITY to resolve
--# the recipe contention so the order of directories in BBFILES does
-+# the recipe contention so the order of directories in BBFILES does
- # not matter.
+diff --git a/meta-oe/recipes-support/uim/uim_1.8.8.bb b/meta-oe/recipes-support/uim/uim_1.8.8.bb
+index 862250240..18b455ce2 100644
+--- a/meta-oe/recipes-support/uim/uim_1.8.8.bb
++++ b/meta-oe/recipes-support/uim/uim_1.8.8.bb
+@@ -17,10 +17,10 @@ SRC_URI[sha256sum] = "34599bbcc4e5ab87832370763e38be5100984a64237555e9234a1ea225
+ UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
+ 
+ DEPENDS = "anthy fontconfig libxft libxt glib-2.0 ncurses intltool libedit"
+-DEPENDS:append:class-target = " intltool-native gtk+ gtk+3 uim-native takao-fonts"
++DEPENDS:append:class-target = " intltool-native gtk+ gtk+3 uim-native"
+ 
+ RDEPENDS:uim = "libuim0 libedit"
+-RDEPENDS:uim-anthy = "takao-fonts anthy libanthy0"
++RDEPENDS:uim-anthy = "anthy libanthy0"
+ RDEPENDS:uim-anthy:append:libc-glibc = " glibc-utils glibc-gconv-euc-jp"
+ 
+ LEAD_SONAME = "libuim.so.1"
+-- 
+2.25.1
 
- # We have a conf and classes directory, append to BBPATH
-@@ -81,6 +81,7 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
-   ttf-gentium->fontconfig \
-   ttf-hunkyfonts->fontconfig \
-   ttf-inconsolata->fontconfig \
-+  ttf-ipa->fontconfig \
-   ttf-liberation->fontconfig \
-   ttf-liberation-sans-narrow->fontconfig \
-   ttf-lklug->fontconfig \
---
-2.32.0
