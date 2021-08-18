@@ -1,21 +1,24 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.52286.1629279651174601141
+ by mx.groups.io with SMTP id smtpd.web08.52080.1629279653873017487
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Aug 2021 02:40:51 -0700
+ Wed, 18 Aug 2021 02:40:54 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=57436 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mGI3u-00018Q-GV; Wed, 18 Aug 2021 12:40:47 +0300
+	id 1mGI3z-00018Q-Gf; Wed, 18 Aug 2021 12:40:52 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-bitarray: Upgrade 2.2.5 -> 2.3.0
-Date: Wed, 18 Aug 2021 12:40:34 +0300
-Message-Id: <20210818094038.21474-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-langtable: Upgrade 0.0.54 -> 0.0.56
+Date: Wed, 18 Aug 2021 12:40:35 +0300
+Message-Id: <20210818094038.21474-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210818094038.21474-1-leon.anavi@konsulko.com>
+References: <20210818094038.21474-1-leon.anavi@konsulko.com>
+MIME-Version: 1.0
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -27,45 +30,37 @@ X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Upgrade to release 2.3.0:
+Upgrade to release 0.0.56:
 
-- add optional `buffer` argument to `bitarray()` to import the
-  buffer of another object
-- update `.buffer_info()` to include: a read-only flag, an
-  imported buffer flag, and the number of buffer exports
-- add optional start and stop arguments to `util.rindex()`
-- add [memory-mapped file](../examples/mmapped-file.py) example
-- ignore underscore (`_`) in string input,
-  e.g. `bitarray('1100_0111')`
-- add missing type hinting for new `.bytereverse()` arguments
-- fix `.extend()` type annotations, #145
-- avoid `.reverse()` using temporary memory
-- make `.unpack()`, `util.serialize()`, `util.vl_encode()`
-  and `.__reduce__()` more memory efficient
-- add and improve tests
+- Fallback to translations in “xx” from “xx_Zzzz”
+  only if “Zzzz” is the main script of “xx”
+- Get translation changes for mt from CLDR
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-bitarray_2.2.5.bb => python3-bitarray_2.3.0.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-bitarray_2.2.5.bb => python3-bitarray_2.3.0.bb} (77%)
+ ...python3-langtable_0.0.54.bb => python3-langtable_0.0.56.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-langtable_0.0.54.bb => python3-langtable_0.0.56.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_2.2.5.bb b/meta-python/recipes-devtools/python/python3-bitarray_2.3.0.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-bitarray_2.2.5.bb
-rename to meta-python/recipes-devtools/python/python3-bitarray_2.3.0.bb
-index f8e2489070..b198b47004 100644
---- a/meta-python/recipes-devtools/python/python3-bitarray_2.2.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-bitarray_2.3.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
- LICENSE = "PSF"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
+diff --git a/meta-python/recipes-devtools/python/python3-langtable_0.0.54.bb b/meta-python/recipes-devtools/python/python3-langtable_0.0.56.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-langtable_0.0.54.bb
+rename to meta-python/recipes-devtools/python/python3-langtable_0.0.56.bb
+index e41cfd5dd5..b8f052ea31 100644
+--- a/meta-python/recipes-devtools/python/python3-langtable_0.0.54.bb
++++ b/meta-python/recipes-devtools/python/python3-langtable_0.0.56.bb
+@@ -6,8 +6,7 @@ SECTION = "devel/python"
  
--SRC_URI[sha256sum] = "efb2dc83f0acb832a94af3687eea558d72512cf2e54a64fca56a10aacf57934c"
-+SRC_URI[sha256sum] = "21f2e10420f9ae74d3bdfd3cb74947ddbe9fbc0b2e5662f2f039001954f1d8b6"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
  
- inherit setuptools3 pypi
+-SRC_URI[md5sum] = "bf2db4302dbed534ff322612f5f5a16e"
+-SRC_URI[sha256sum] = "2a6298267586fcade84ce977736fc35102ef95d68975bc90ceaa06117d42d5a6"
++SRC_URI[sha256sum] = "318af0fd616711ce5cd2a7b11a6761183ba9c1ff76a762919e08d85645fc854b"
+ 
+ inherit pypi setuptools3 python3native
  
 -- 
 2.17.1
