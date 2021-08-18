@@ -1,105 +1,87 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web08.56125.1629300494255570288
+Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com [209.85.167.42])
+ by mx.groups.io with SMTP id smtpd.web12.56620.1629301175916499404
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Aug 2021 08:28:14 -0700
+ Wed, 18 Aug 2021 08:39:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: sakib.sajal@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 17IFSCm9016165
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 18 Aug 2021 08:28:12 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Wed, 18 Aug 2021 08:28:12 -0700
-Received: from yow-lpggp3.wrs.com (128.224.137.13) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Wed, 18 Aug 2021 08:28:12 -0700
-From: "Sakib Sajal" <sakib.sajal@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH V2] lmdb: use libprefix in Makefile to install libraries
-Date: Wed, 18 Aug 2021 11:28:11 -0400
-Message-ID: <20210818152811.26905-1-sakib.sajal@windriver.com>
-X-Mailer: git-send-email 2.32.0
+ dkim=pass header.i=@linaro.org header.s=google header.b=t7Qw9pE/;
+ spf=pass (domain: linaro.org, ip: 209.85.167.42, mailfrom: dmitry.baryshkov@linaro.org)
+Received: by mail-lf1-f42.google.com with SMTP id w20so5533133lfu.7
+        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Aug 2021 08:39:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=uo2uh2+hinlPzIrQTCyNX0wAt/RexVqeauGYMxo/kYE=;
+        b=t7Qw9pE/QDvEfFGg1Rgpk4FcWZ6pU88xgfOg0BtYcpZI4UEY3aFMAeO3F0rU2m+jc2
+         mgZGL4cLXnimIin0L6/Wx3E5AIXFmzBY5+K9TPp8isinIS/CZR24pYRMs5JJRF3epaSR
+         Uw9ncYMFSz+atFVBWt1k3yZaN1m8hlBS5yKwqVP2YAsRX1FhqD6RW2WD0H61n52sX1iq
+         LSqk65bIjBsUd3LxJDTq0qB/gi4M3sviAs+sBMxKo9BocnX4+bomJWVHZlwFJGl+NwEN
+         6wZQa8m+zXAR86JJTpdgdv9R6HD2/WxTJqqrNZY38z7zHDx/ZxvDhnw/KPqxJyCx2e1B
+         1YsA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=uo2uh2+hinlPzIrQTCyNX0wAt/RexVqeauGYMxo/kYE=;
+        b=pgJXE1DLr+FLd7Bj6QxrTyAiymR2d8Bg5HTNSa8Nj/vA+koEEo4qNICR2FFiBxQPii
+         uFJYlMdZZaIT/XK/9HrwdVr27YzR6OhuvVFSlu45h72ohqjSBJ8oLNa+iwwI4ZUdy7zv
+         ex9hfCUaQeJDDcM4y3OmrmmhzGtS/0klX1HgyEDlb1nlDmG9TTcjW9vvTOUezhxs2QJu
+         LH2wmaeKRR200xpB1y5D8ax5SQvEkIHGjSkn2TK9q41IqE6hvPqxzPrzoglELNF86xfA
+         7iGvYNPknjb1rYzSYt9mfFm76MCwk9QHtljtfDlIoXikpVO/cTfDPV2Pwy0TBcpvCfzd
+         WGzw==
+X-Gm-Message-State: AOAM5339DsDWOeahxCX20QCNTJaiNvEvUOGptQep2DahEXbA7cW6Uk7I
+	TGpBRmJW0ZtsYOMtgIcLLBSiuQN4j2VX4A==
+X-Google-Smtp-Source: ABdhPJyQUpL1agAKJqgTwf8glPM2kkGF1Z/D6Ob1BITL2Tk0BeJul0kD6XZD2iyQrsjuuPyr8KDgHA==
+X-Received: by 2002:a05:6512:33c7:: with SMTP id d7mr6918047lfg.545.1629301173545;
+        Wed, 18 Aug 2021 08:39:33 -0700 (PDT)
+Return-Path: <dmitry.baryshkov@linaro.org>
+Received: from umbar.lan ([37.153.55.125])
+        by smtp.gmail.com with ESMTPSA id o22sm6510lfr.32.2021.08.18.08.39.32
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 18 Aug 2021 08:39:33 -0700 (PDT)
+From: "Dmitry Baryshkov" <dbaryshkov@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] image_types_sparse: stop using ext2simg
+Date: Wed, 18 Aug 2021 18:39:32 +0300
+Message-Id: <20210818153932.3365328-1-dmitry.baryshkov@linaro.org>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-Makefile used libdir which had hardcoded "$(exec_prefix)/lib"
-directory to install libraries. This is a problem for MULTILIB
-builds as libraries are installed in "lib64" directory.
-Hence use libprefix which contains the correct path for installing
-libraries.
+Under some conditions ext2simg can corrupt the file system (see
+https://lore.kernel.org/linux-ext4/CAP71WjwVdqmLEq1NGWK36JkEd-i05YcAu4jeY6GFjsk6TS=Mtg@mail.gmail.com/).
+This has been reproduced with the ext2simg currently found meta-oe's
+android-tools-native). Stop using ext2simg and always use img2simg. This
+results in bigger images, but without the risk of image corruption.
 
-Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 ---
- ...file-use-libprefix-instead-of-libdir.patch | 33 +++++++++++++++++++
- meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb       |  5 +--
- 2 files changed, 36 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch
+ meta-oe/classes/image_types_sparse.bbclass | 12 ++----------
+ 1 file changed, 2 insertions(+), 10 deletions(-)
 
-diff --git a/meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch b/meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch
-new file mode 100644
-index 000000000..2cc98e6d6
---- /dev/null
-+++ b/meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch
-@@ -0,0 +1,33 @@
-+From 4a11d4d03ef66729d302cc122fa0c693299a7776 Mon Sep 17 00:00:00 2001
-+From: Sakib Sajal <sakib.sajal@windriver.com>
-+Date: Wed, 18 Aug 2021 10:49:38 -0400
-+Subject: [PATCH] Makefile: use libprefix instead of libdir
-+
-+libdir expands to "$(exec_prefix)/lib" where "lib" is hardcoded.
-+This is a problem for builds that enable MULTILIB since libraries
-+are to be installed in "lib64" directory. Hence allow the directory
-+to be configurable.
-+
-+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
-+---
-+ libraries/liblmdb/Makefile | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index f254511..1ec74e6 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -46,11 +46,11 @@ all:	$(ILIBS) $(PROGS)
-+ 
-+ install: $(ILIBS) $(IPROGS) $(IHDRS)
-+ 	mkdir -p $(DESTDIR)$(bindir)
-+-	mkdir -p $(DESTDIR)$(libdir)
-++	mkdir -p $(DESTDIR)$(libprefix)
-+ 	mkdir -p $(DESTDIR)$(includedir)
-+ 	mkdir -p $(DESTDIR)$(mandir)/man1
-+ 	for f in $(IPROGS); do cp $$f $(DESTDIR)$(bindir); done
-+-	for f in $(ILIBS); do cp $$f $(DESTDIR)$(libdir); done
-++	for f in $(ILIBS); do cp $$f $(DESTDIR)$(libprefix); done
-+ 	for f in $(IHDRS); do cp $$f $(DESTDIR)$(includedir); done
-+ 	for f in $(IDOCS); do cp $$f $(DESTDIR)$(mandir)/man1; done
-+ 
-diff --git a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
-index 0746da141..3c6ffe04e 100644
---- a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
-+++ b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
-@@ -10,7 +10,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972"
+diff --git a/meta-oe/classes/image_types_sparse.bbclass b/meta-oe/classes/image_types_sparse.bbclass
+index 65d980fd913f..4263593a8dd1 100644
+--- a/meta-oe/classes/image_types_sparse.bbclass
++++ b/meta-oe/classes/image_types_sparse.bbclass
+@@ -2,15 +2,7 @@ inherit image_types
  
- SRC_URI = "git://github.com/LMDB/lmdb.git;nobranch=1 \
-            file://run-ptest \
--"
-+           file://0001-Makefile-use-libprefix-instead-of-libdir.patch \
-+           "
- 
- SRCREV = "LMDB_${PV}"
- 
-@@ -26,7 +27,7 @@ do_compile() {
- 
- do_install() {
-     oe_runmake CC="${CC}" DESTDIR="${D}" prefix="${prefix}" libprefix="${libdir}" manprefix="${mandir}" SOEXT=".so.${PV}" LDFLAGS="${LDFLAGS}" install
--    cd ${D}/${libdir}
-+    cd ${D}${libdir}
-     ln -s liblmdb.so.${PV} liblmdb.so
-     rm liblmdb.a
- }
+ CONVERSIONTYPES += "sparse"
+ CONVERSION_CMD:sparse = " \
+-    case "${type}" in \
+-        ext*) \
+-            ext2simg "${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}" \
+-                     "${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}.sparse" \
+-            ;; \
+-        *) \
+-            img2simg "${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}" \
+-                     "${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}.sparse" \
+-            ;; \
+-    esac \
++    img2simg "${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}" \
++             "${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}.sparse" \
+ "
+ CONVERSION_DEPENDS_sparse = "android-tools-native"
 -- 
-2.32.0
+2.30.2
 
