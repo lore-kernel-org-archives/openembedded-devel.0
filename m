@@ -1,64 +1,105 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.56285.1629300142350188278
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web08.56125.1629300494255570288
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Aug 2021 08:22:23 -0700
+ Wed, 18 Aug 2021 08:28:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=59570 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.93)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mGNOS-0005Z4-3k; Wed, 18 Aug 2021 18:22:21 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-astroid: Upgrade 2.7.0 -> 2.7.1
-Date: Wed, 18 Aug 2021 18:22:03 +0300
-Message-Id: <20210818152203.2165-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210818152203.2165-1-leon.anavi@konsulko.com>
-References: <20210818152203.2165-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: sakib.sajal@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 17IFSCm9016165
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 18 Aug 2021 08:28:12 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Wed, 18 Aug 2021 08:28:12 -0700
+Received: from yow-lpggp3.wrs.com (128.224.137.13) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Wed, 18 Aug 2021 08:28:12 -0700
+From: "Sakib Sajal" <sakib.sajal@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH V2] lmdb: use libprefix in Makefile to install libraries
+Date: Wed, 18 Aug 2021 11:28:11 -0400
+Message-ID: <20210818152811.26905-1-sakib.sajal@windriver.com>
+X-Mailer: git-send-email 2.32.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Upgrade to release 2.7.1:
+Makefile used libdir which had hardcoded "$(exec_prefix)/lib"
+directory to install libraries. This is a problem for MULTILIB
+builds as libraries are installed in "lib64" directory.
+Hence use libprefix which contains the correct path for installing
+libraries.
 
-- When processing dataclass attributes, only do typing inference
-  on collection types. Support for instantiating other typing
-  types is left for the future, if desired.
-- Fixed LookupMixIn missing from ``astroid.node_classes``.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
 ---
- .../{python3-astroid_2.7.0.bb => python3-astroid_2.7.1.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-astroid_2.7.0.bb => python3-astroid_2.7.1.bb} (89%)
+ ...file-use-libprefix-instead-of-libdir.patch | 33 +++++++++++++++++++
+ meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb       |  5 +--
+ 2 files changed, 36 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-astroid_2.7.0.bb b/meta-python/recipes-devtools/python/python3-astroid_2.7.1.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-astroid_2.7.0.bb
-rename to meta-python/recipes-devtools/python/python3-astroid_2.7.1.bb
-index f95c5138cc..4ed051d22d 100644
---- a/meta-python/recipes-devtools/python/python3-astroid_2.7.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-astroid_2.7.1.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
+diff --git a/meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch b/meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch
+new file mode 100644
+index 000000000..2cc98e6d6
+--- /dev/null
++++ b/meta-oe/recipes-dbs/lmdb/files/0001-Makefile-use-libprefix-instead-of-libdir.patch
+@@ -0,0 +1,33 @@
++From 4a11d4d03ef66729d302cc122fa0c693299a7776 Mon Sep 17 00:00:00 2001
++From: Sakib Sajal <sakib.sajal@windriver.com>
++Date: Wed, 18 Aug 2021 10:49:38 -0400
++Subject: [PATCH] Makefile: use libprefix instead of libdir
++
++libdir expands to "$(exec_prefix)/lib" where "lib" is hardcoded.
++This is a problem for builds that enable MULTILIB since libraries
++are to be installed in "lib64" directory. Hence allow the directory
++to be configurable.
++
++Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
++---
++ libraries/liblmdb/Makefile | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index f254511..1ec74e6 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -46,11 +46,11 @@ all:	$(ILIBS) $(PROGS)
++ 
++ install: $(ILIBS) $(IPROGS) $(IHDRS)
++ 	mkdir -p $(DESTDIR)$(bindir)
++-	mkdir -p $(DESTDIR)$(libdir)
+++	mkdir -p $(DESTDIR)$(libprefix)
++ 	mkdir -p $(DESTDIR)$(includedir)
++ 	mkdir -p $(DESTDIR)$(mandir)/man1
++ 	for f in $(IPROGS); do cp $$f $(DESTDIR)$(bindir); done
++-	for f in $(ILIBS); do cp $$f $(DESTDIR)$(libdir); done
+++	for f in $(ILIBS); do cp $$f $(DESTDIR)$(libprefix); done
++ 	for f in $(IHDRS); do cp $$f $(DESTDIR)$(includedir); done
++ 	for f in $(IDOCS); do cp $$f $(DESTDIR)$(mandir)/man1; done
++ 
+diff --git a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
+index 0746da141..3c6ffe04e 100644
+--- a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
++++ b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
+@@ -10,7 +10,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972"
  
--SRC_URI[sha256sum] = "1472a98322b64869b9dc95007a0fbbaa71d580e3c8abf73c989b740873c673f3"
-+SRC_URI[sha256sum] = "f3083366b7bb8b3a72c0e12841ab07f14b0d7ff5cc1c89676b84d8f5832e4b61"
+ SRC_URI = "git://github.com/LMDB/lmdb.git;nobranch=1 \
+            file://run-ptest \
+-"
++           file://0001-Makefile-use-libprefix-instead-of-libdir.patch \
++           "
  
- inherit pypi setuptools3
+ SRCREV = "LMDB_${PV}"
  
+@@ -26,7 +27,7 @@ do_compile() {
+ 
+ do_install() {
+     oe_runmake CC="${CC}" DESTDIR="${D}" prefix="${prefix}" libprefix="${libdir}" manprefix="${mandir}" SOEXT=".so.${PV}" LDFLAGS="${LDFLAGS}" install
+-    cd ${D}/${libdir}
++    cd ${D}${libdir}
+     ln -s liblmdb.so.${PV} liblmdb.so
+     rm liblmdb.a
+ }
 -- 
-2.17.1
+2.32.0
 
