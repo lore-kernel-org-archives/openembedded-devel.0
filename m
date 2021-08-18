@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.52287.1629279659537195264
+ by mx.groups.io with SMTP id smtpd.web11.51777.1629279663418745697
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Aug 2021 02:41:00 -0700
+ Wed, 18 Aug 2021 02:41:04 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=57436 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mGI44-00018Q-GS; Wed, 18 Aug 2021 12:40:58 +0300
+	id 1mGI4A-00018Q-68; Wed, 18 Aug 2021 12:41:02 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/5] python3-pandas: Upgrade 1.3.1 -> 1.3.2
-Date: Wed, 18 Aug 2021 12:40:36 +0300
-Message-Id: <20210818094038.21474-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/5] python3-tzlocal: Upgrade 2.1 -> 3.0
+Date: Wed, 18 Aug 2021 12:40:37 +0300
+Message-Id: <20210818094038.21474-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210818094038.21474-1-leon.anavi@konsulko.com>
 References: <20210818094038.21474-1-leon.anavi@konsulko.com>
@@ -30,68 +30,33 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 1.3.2:
+Upgrade to release 3.0:
 
-- Performance regression in DataFrame.isin() and Series.isin() for
-  nullable data types
-- Regression in updating values of Series using boolean index,
-  created by using DataFrame.pop()
-- Regression in DataFrame.from_records() with empty records
-- Fixed regression in DataFrame.shift() where TypeError occurred
-  when shifting DataFrame created by concatenation of slices and
-  fills with values
-- Regression in DataFrame.agg() when the func argument returned
-  lists and axis=1
-- Regression in DataFrame.drop() does nothing if MultiIndex has
-  duplicates and indexer is a tuple or list of tuples
-- Fixed regression where read_csv() raised a ValueError when
-  parameters names and prefix were both set to None
-- Fixed regression in comparisons between Timestamp object and
-  datetime64 objects outside the implementation bounds for
-  nanosecond datetime64
-- Fixed regression in Styler.highlight_min() and
-  Styler.highlight_max() where pandas.NA was not successfully
-  ignored
-- Fixed regression in concat() where copy=False was not honored
-  in axis=1 Series concatenation
-- Regression in Series.nlargest() and Series.nsmallest() with
-  nullable integer or float dtype
-- Fixed regression in Series.quantile() with Int64Dtype
-- Bug in read_excel() modifies the dtypes dictionary when reading
-  a file with duplicate columns
-- 1D slices over extension types turn into N-dimensional slices
-  over ExtensionArrays
-- Fixed bug in Series.rolling() and DataFrame.rolling() not
-  calculating window bounds correctly for the first row when
-  center=True and window is an offset that covers all the rows
-- Styler.hide_columns() now hides the index name header row as
-  well as column headers
-- Styler.set_sticky() has amended CSS to control the column/index
-  names and ensure the correct sticky positions
-- Bug in de-serializing datetime indexes in PYTHONOPTIMIZED mode
+- Modernized the packaging, moving to setup.cfg etc.
+- Handles if the text config files incorrectly is a TZ file.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-pandas_1.3.1.bb => python3-pandas_1.3.2.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pandas_1.3.1.bb => python3-pandas_1.3.2.bb} (89%)
+ .../python/{python3-tzlocal_2.1.bb => python3-tzlocal_3.0.bb}  | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-tzlocal_2.1.bb => python3-tzlocal_3.0.bb} (62%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pandas_1.3.1.bb b/meta-python/recipes-devtools/python/python3-pandas_1.3.2.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-pandas_1.3.1.bb
-rename to meta-python/recipes-devtools/python/python3-pandas_1.3.2.bb
-index 95fd1fc719..55700b51cf 100644
---- a/meta-python/recipes-devtools/python/python3-pandas_1.3.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pandas_1.3.2.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "http://pandas.pydata.org/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3f23c5c092b74d245d48eeef72bc3fd2"
+diff --git a/meta-python/recipes-devtools/python/python3-tzlocal_2.1.bb b/meta-python/recipes-devtools/python/python3-tzlocal_3.0.bb
+similarity index 62%
+rename from meta-python/recipes-devtools/python/python3-tzlocal_2.1.bb
+rename to meta-python/recipes-devtools/python/python3-tzlocal_3.0.bb
+index 56a8fc06f8..a9d372ee98 100644
+--- a/meta-python/recipes-devtools/python/python3-tzlocal_2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-tzlocal_3.0.bb
+@@ -3,7 +3,6 @@ HOMEPAGE = "https://pypi.org/project/tzlocal/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=57e0bd61643d81d05683cdce65b11d10"
  
--SRC_URI[sha256sum] = "341935a594db24f3ff07d1b34d1d231786aa9adfa84b76eab10bf42907c8aed3"
-+SRC_URI[sha256sum] = "cbcb84d63867af3411fa063af3de64902665bb5b3d40b25b2059e40603594e87"
+-SRC_URI[md5sum] = "c0877603ff9de71cd8ca6ee2b50d2ebd"
+-SRC_URI[sha256sum] = "643c97c5294aedc737780a49d9df30889321cbe1204eac2c2ec6134035a92e44"
++SRC_URI[sha256sum] = "f4e6e36db50499e0d92f79b67361041f048e2609d166e93456b50746dc4aef12"
  
  inherit pypi setuptools3
- 
 -- 
 2.17.1
 
