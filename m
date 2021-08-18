@@ -1,23 +1,21 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.52289.1629279668435272938
+ by mx.groups.io with SMTP id smtpd.web08.56012.1629300138860581149
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Aug 2021 02:41:09 -0700
+ Wed, 18 Aug 2021 08:22:19 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=57436 helo=localhost.localdomain)
+Received: from [78.130.197.211] (port=59570 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mGI4E-00018Q-22; Wed, 18 Aug 2021 12:41:07 +0300
+	id 1mGNOM-0005Z4-Mp; Wed, 18 Aug 2021 18:22:16 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-zeroconf: Upgrade 0.34.3 -> 0.36.0
-Date: Wed, 18 Aug 2021 12:40:38 +0300
-Message-Id: <20210818094038.21474-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-dbus-next: Upgrade 0.2.2 -> 0.2.3
+Date: Wed, 18 Aug 2021 18:22:02 +0300
+Message-Id: <20210818152203.2165-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210818094038.21474-1-leon.anavi@konsulko.com>
-References: <20210818094038.21474-1-leon.anavi@konsulko.com>
 X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -30,31 +28,36 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 0.36.0:
+Upgrade to release 0.2.3:
 
-- Fill incomplete IPv6 tuples to avoid WinError on windows
+- Include py.typed in Manifest.in
+- Fix property validation error message
+- Don't log errors if call failed after disconnect
+- Support PEP563 annotations
+- Service: support async properties
+- Client: Support coroutines as signal handlers
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-zeroconf_0.34.3.bb => python3-zeroconf_0.36.0.bb}  | 2 +-
+ .../{python3-dbus-next_0.2.2.bb => python3-dbus-next_0.2.3.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-zeroconf_0.34.3.bb => python3-zeroconf_0.36.0.bb} (79%)
+ rename meta-python/recipes-devtools/python/{python3-dbus-next_0.2.2.bb => python3-dbus-next_0.2.3.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-zeroconf_0.34.3.bb b/meta-python/recipes-devtools/python/python3-zeroconf_0.36.0.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-zeroconf_0.34.3.bb
-rename to meta-python/recipes-devtools/python/python3-zeroconf_0.36.0.bb
-index a8b9aeb73b..5f6f0a2987 100644
---- a/meta-python/recipes-devtools/python/python3-zeroconf_0.34.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-zeroconf_0.36.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/jstasiak/python-zeroconf"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3bb705b228ea4a14ea2728215b780d80"
+diff --git a/meta-python/recipes-devtools/python/python3-dbus-next_0.2.2.bb b/meta-python/recipes-devtools/python/python3-dbus-next_0.2.3.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-dbus-next_0.2.2.bb
+rename to meta-python/recipes-devtools/python/python3-dbus-next_0.2.3.bb
+index 1970fdec1c..3ee11b9d55 100644
+--- a/meta-python/recipes-devtools/python/python3-dbus-next_0.2.2.bb
++++ b/meta-python/recipes-devtools/python/python3-dbus-next_0.2.3.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/acrisci/python-dbus-next"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=94e750c96e56788499b56c81de91431c"
  
--SRC_URI[sha256sum] = "145e67c182d361b350f057fb9240dedec5e79a7c61f465a01138d4a49a4b87b3"
-+SRC_URI[sha256sum] = "549f685a318c06d5345ed6533f54f33b206816b564ed7f7876e7b9522e77bf29"
+-SRC_URI[sha256sum] = "f656a3d3450b670f228248ffb1c3a703a69c4a8cb10cce63b108f17c8bd6c3de"
++SRC_URI[sha256sum] = "f4eae26909332ada528c0a3549dda8d4f088f9b365153952a408e28023a626a5"
  
- inherit pypi setuptools3
+ PYPI_PACKAGE = "dbus_next"
  
 -- 
 2.17.1
