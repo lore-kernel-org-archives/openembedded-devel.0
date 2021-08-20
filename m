@@ -1,180 +1,93 @@
-Received: from mail3.bemta25.messagelabs.com (mail3.bemta25.messagelabs.com [195.245.230.81])
- by mx.groups.io with SMTP id smtpd.web11.80094.1629439798049632255
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.68])
+ by mx.groups.io with SMTP id smtpd.web10.81136.1629439894771638655
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Aug 2021 23:09:58 -0700
+ Thu, 19 Aug 2021 23:11:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=mp/HPtrk;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.81, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=mBxtmj8R;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.68, mailfrom: wangmy@fujitsu.com)
 Return-Path: <wangmy@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1629439796; i=@fujitsu.com;
-	bh=a+x1IKMIW70Jld4aZRXqqLDVqJd+ReEEH3dxDatk794=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=mp/HPtrkLEuX6VnyE0zlSf5irFuh1uvUi9tYWZsmPKtHYHAjy65l9Ro/PHzUAFwKB
-	 CGJ+inx6wuz/C9/rq/uVREpv0IaSokEMkoz2UvmsYEwAgW+F9ZGDr/RIgdb9nxSyn6
-	 wl2C3HbfspADSN83m1Hh2aPAGL8xabXL2vM56dg8dmezX9j4laoF86Wz3aUO+7CseB
-	 5NISVkj9qjUKcNYs3yMm3WZ5EWn6A9thJc6DvEdSSbngP+tozFo534t7kiL1yZV1sw
-	 6131Xe3CjM/CZbymf2qHeqA+IBQwkkFPdPTJA4LFTYpFZLdXSFcIcbv9xsrUNb4MiJ
-	 Oj2YTWH1NJ/tA==
+	s=170520fj; t=1629439892; i=@fujitsu.com;
+	bh=85XbapARxYIczy6u/ohv3QbSRcUPxO0PNtcZ51ZLiZo=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=mBxtmj8RajG8UOvu7WzIsw5q3/TDh4ROoXE4OlXufRbdbDl/7M9TCLEiUFdTeyIPm
+	 iOapxCoTbUtqgz5XDH0JXXd9S0tPD2J64YTbb/33vn5JIDvNfmHfxDvSDXXSeM+qRT
+	 J64zT/Ej2hSOUb8VUgzhsKt+pvRbLZRRdx94PhSNEooLnnNllodHMkfpUEAjTggwC8
+	 g0/O/Cri418388je8W+9If3DAQOwynvS8IrFjhDRcQ6dawWPlOpnjzHoNUB6DWdQUU
+	 2gkDt5be9OVi2nN6QE72hBU0uKhdlQzt9HFqvK/5jBq5MP3+J2kqyD8mQ5LrvRsAKt
+	 WOFd1oR90ZtQA==
 Received: from [100.112.199.201] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-b.eu-west-1.aws.symcld.net id ED/9B-02582-4374F116; Fri, 20 Aug 2021 06:09:56 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrMIsWRWlGSWpSXmKPExsViZ8MRqmvsLp9
-  o8LTJ2uLi4aXMDowe5zauYAxgjGLNzEvKr0hgzVh0+h57QZd6xeoXn9gaGC8rdTFycggJzGaS
-  eH/cqIuRC8g+wSjRda6dCSTBJqAmMf3WDVYQW0RAX2Lp7D3MIDazgIrEi9897CC2sICHxOyn1
-  xlBbBYBVYmtUy6A1fMKOEmsmN4ANkdCQEFiysP3zBBxQYmTM5+wQMyRkDj44gUzRI2ixOzLzS
-  wQdoXErFltTBMYeWchaZmFpGUBI9MqRoukosz0jJLcxMwcXUMDA11DQyNdQ0szXSNDY73EKt0
-  kvdRS3fLU4hJdQ73E8mK94src5JwUvbzUkk2MwPBKKThydQdj95sPeocYJTmYlER5Vc3kE4X4
-  kvJTKjMSizPii0pzUosPMcpwcChJ8Ea5AuUEi1LTUyvSMnOAoQ6TluDgURLhLXYGSvMWFyTmF
-  memQ6ROMepyvPu5eBGzEEtefl6qlDhvpxtQkQBIUUZpHtwIWNxdYpSVEuZlZGBgEOIpSC3KzS
-  xBlX/FKM7BqCTMuxZkCk9mXgncpldARzABHSGkKgtyREkiQkqqgamWOzZ2pc376aJ72OUXBDZ
-  L6ehZzHBcc/HYnr8HH61q45rr+/tepMnabdnc89931fyba62hsXzZ51bPW/p515tfhvREnjyo
-  aZcSFbjI8sDGv1LufxaWNMrf1ZppHzynrKpA8JX1HuMb+VfvpJ9LLDvYdPW7pKw+r9Uf83dz9
-  7QKqferZ4o8uvTs5wSnQyfu8HLZCt46OC3/Vm1FeRX/Xc8VF0NzZp3ZwH3j6i6tFrWdhuvbF1
-  0/92n20ZXK1z9/4LbY6XaMW/jSQu2nTzZ8/vRsnv76xshtr1kC7ydasDA3lHyYxD19sbyUaKZ
-  sBdPU/dK1e/dfs5C59XjGFpdtxxfr/X0vKXc0+mBgYI4m68liJZbijERDLeai4kQAeVYRdjYD
-  AAA=
+	by server-4.bemta.az-b.eu-west-1.aws.symcld.net id 3A/76-29858-4974F116; Fri, 20 Aug 2021 06:11:32 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrFIsWRWlGSWpSXmKPExsViZ8MRojvFXT7
+  R4NR2aYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPVg8usBSc4K/7sbmZqYHzC0cXIySEkMJtJ
+  ovurLIR9glHi8DY5EJtNQE1i+q0brCC2iIC+xNLZe5hBbGYBFYkXv3vYQWxhAVeJPw9mMYHYL
+  AKqEssOLQWL8wo4SVyf9pYNxJYQUJCY8vA9WC+ngLPEzZPbGCF2OUl0nWtmgqgXlDg58wkLxH
+  wJiYMvXjBD9CpKzL7czAJhV0jMmtXGNIGRfxaSlllIWhYwMq1itEgqykzPKMlNzMzRNTQw0DU
+  0NNI1tDTXNTKx1Eus0k3SSy3VLU8tLtE11EssL9YrrsxNzknRy0st2cQIDMaUgqM/dzA+fP1B
+  7xCjJAeTkiivqpl8ohBfUn5KZUZicUZ8UWlOavEhRhkODiUJ3ihXoJxgUWp6akVaZg4wMmDSE
+  hw8SiK8xc5Aad7igsTc4sx0iNQpRl2OL6uWLGIWYsnLz0uVEuftdAMqEgApyijNgxsBi9JLjL
+  JSwryMDAwMQjwFqUW5mSWo8q8YxTkYlYR514JM4cnMK4Hb9AroCCagI4RUZUGOKElESEk1MK2
+  fPrW9fXaNsOmsE5EvCu9XZm5qDCt9n29Ul7dx4/GfFttf+y1+vYl305+ZFb+M3xVuSOlJiZps
+  91pl8oS1Icu0xd0PKrd/0BIuejflTciiF6wznlxbM5/dIWvFJeFdmQ7159ne+JiyNt5YKKb3u
+  8r38ty6F/dWzri174FqgnayQcnRH9v1KlNeuC+byySf/CqCLYZr3Z8f/zJtVMMy/sXdWTbbdp
+  vW596TJwqb7pxvLvLnULbtr713TzO8wk2YMXt73TLeco+d7Loz6o9seKggf8FYdHnWTN73oct
+  +zr6/93m9y5MTe7rT1kw55aEi3nBevfQtm+HiXYlfn56xdeTb9/xoRG/J5ubswrPROWVKLMUZ
+  iYZazEXFiQCCHGE3TQMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-11.tower-285.messagelabs.com!1629439795!2238761!1
-X-Originating-IP: [62.60.8.85]
+X-Msg-Ref: server-15.tower-287.messagelabs.com!1629439892!714051!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 8623 invoked from network); 20 Aug 2021 06:09:55 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-11.tower-285.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 20 Aug 2021 06:09:55 -0000
+Received: (qmail 19197 invoked from network); 20 Aug 2021 06:11:32 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-15.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 20 Aug 2021 06:11:32 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17K69tIC001538
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17K6BW1Q026145
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Aug 2021 07:09:55 +0100
+	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Aug 2021 07:11:32 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 20 Aug 2021 07:09:53 +0100
+ (TLS) id 15.0.1497.18; Fri, 20 Aug 2021 07:11:29 +0100
 From: "wangmy" <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] netplan: upgrade 0.102 -> 0.103
-Date: Fri, 20 Aug 2021 14:09:36 +0800
-Message-ID: <1629439776-46256-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] live555: upgrade 20210720 -> 20210809
+Date: Fri, 20 Aug 2021 14:11:10 +0800
+Message-ID: <1629439871-46349-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1629439871-46349-1-git-send-email-wangmy@fujitsu.com>
+References: <1629439871-46349-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.33]
 X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-0001-Handle-enum-element-override.patch
-removed since it is included in 0.103
-
-Add patch to fix bug for 32bit format string bug.
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../0001-Handle-enum-element-override.patch   | 34 -------------------
- ...001-parse-nm-fix-32bit-format-string.patch | 25 ++++++++++++++
- .../{netplan_0.102.bb => netplan_0.103.bb}    | 11 +++---
- 3 files changed, 30 insertions(+), 40 deletions(-)
- delete mode 100644 meta-networking/recipes-connectivity/netplan/netplan/0001-Handle-enum-element-override.patch
- create mode 100644 meta-networking/recipes-connectivity/netplan/netplan/0001-parse-nm-fix-32bit-format-string.patch
- rename meta-networking/recipes-connectivity/netplan/{netplan_0.102.bb => netplan_0.103.bb} (92%)
+ .../live555/{live555_20210720.bb => live555_20210809.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-multimedia/live555/{live555_20210720.bb => live555_20210809.bb} (97%)
 
-diff --git a/meta-networking/recipes-connectivity/netplan/netplan/0001-Handle-enum-element-override.patch b/meta-networking/recipes-connectivity/netplan/netplan/0001-Handle-enum-element-override.patch
-deleted file mode 100644
-index dfc6f90c4c..0000000000
---- a/meta-networking/recipes-connectivity/netplan/netplan/0001-Handle-enum-element-override.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From 6d284f1ff81494a5fca91a399b92b218ea1a9ea8 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 8 Jun 2021 08:53:30 -0700
--Subject: [PATCH] Handle enum element override
--
--NETPLAN_DEF_TYPE_VIRTUAL and NETPLAN_DEF_TYPE_BRIDGE point
--to same value in enum, however here they are assigned individually
--which results in overriding the initialization of the objects
--
--Fixes
--src/netplan.h:85:33: error: initializer overrides prior initialization of this subobject [-Werror,-Winitializer-overrides]
--    [NETPLAN_DEF_TYPE_BRIDGE] = "bridges",
--                                ^~~~~~~~~
--Upstream-Status: Submitted [https://github.com/canonical/netplan/pull/213]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/netplan.h | 1 -
-- 1 file changed, 1 deletion(-)
--
--diff --git a/src/netplan.h b/src/netplan.h
--index d2c538b..26574f8 100644
----- a/src/netplan.h
--+++ b/src/netplan.h
--@@ -81,7 +81,6 @@ static const char* const netplan_def_type_to_str[NETPLAN_DEF_TYPE_MAX_] = {
--     [NETPLAN_DEF_TYPE_ETHERNET] = "ethernets",
--     [NETPLAN_DEF_TYPE_WIFI] = "wifis",
--     [NETPLAN_DEF_TYPE_MODEM] = "modems",
---    [NETPLAN_DEF_TYPE_VIRTUAL] = NULL,
--     [NETPLAN_DEF_TYPE_BRIDGE] = "bridges",
--     [NETPLAN_DEF_TYPE_BOND] = "bonds",
--     [NETPLAN_DEF_TYPE_VLAN] = "vlans",
---- 
--2.32.0
--
-diff --git a/meta-networking/recipes-connectivity/netplan/netplan/0001-parse-nm-fix-32bit-format-string.patch b/meta-networking/recipes-connectivity/netplan/netplan/0001-parse-nm-fix-32bit-format-string.patch
-new file mode 100644
-index 0000000000..72f04a15ad
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/netplan/netplan/0001-parse-nm-fix-32bit-format-string.patch
-@@ -0,0 +1,25 @@
-+From 2f0ff65eaa93f18d9edb5d03329b00d8e5e73869 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Lukas=20M=C3=A4rdian?= <lukas.maerdian@canonical.com>
-+Date: Wed, 4 Aug 2021 15:55:00 +0200
-+Subject: [PATCH] parse-nm: fix 32bit format string
-+
-+---
-+ src/parse-nm.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/parse-nm.c b/src/parse-nm.c
-+index 9b09e34..bf998b7 100644
-+--- a/src/parse-nm.c
-++++ b/src/parse-nm.c
-+@@ -136,7 +136,7 @@ static void
-+ handle_bridge_uint(GKeyFile* kf, const gchar* key, NetplanNetDefinition* nd, char** dataptr) {
-+     if (g_key_file_get_uint64(kf, "bridge", key, NULL)) {
-+         nd->custom_bridging = TRUE;
-+-        *dataptr = g_strdup_printf("%lu", g_key_file_get_uint64(kf, "bridge", key, NULL));
-++        *dataptr = g_strdup_printf("%"G_GUINT64_FORMAT, g_key_file_get_uint64(kf, "bridge", key, NULL));
-+         _kf_clear_key(kf, "bridge", key);
-+     }
-+ }
-+-- 
-+2.25.1
-+
-diff --git a/meta-networking/recipes-connectivity/netplan/netplan_0.102.bb b/meta-networking/recipes-connectivity/netplan/netplan_0.103.bb
-similarity index 92%
-rename from meta-networking/recipes-connectivity/netplan/netplan_0.102.bb
-rename to meta-networking/recipes-connectivity/netplan/netplan_0.103.bb
-index 6c624ce4e9..682a6b611d 100644
---- a/meta-networking/recipes-connectivity/netplan/netplan_0.102.bb
-+++ b/meta-networking/recipes-connectivity/netplan/netplan_0.103.bb
-@@ -11,13 +11,12 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-oe/recipes-multimedia/live555/live555_20210720.bb b/meta-oe/recipes-multimedia/live555/live555_20210809.bb
+similarity index 97%
+rename from meta-oe/recipes-multimedia/live555/live555_20210720.bb
+rename to meta-oe/recipes-multimedia/live555/live555_20210809.bb
+index 52230cdda5..b6a7d9488c 100644
+--- a/meta-oe/recipes-multimedia/live555/live555_20210720.bb
++++ b/meta-oe/recipes-multimedia/live555/live555_20210809.bb
+@@ -16,7 +16,7 @@ SRC_URI = "https://download.videolan.org/pub/contrib/live555/live.${URLV}.tar.gz
+ # only latest live version stays on http://www.live555.com/liveMedia/public/, add mirror for older
+ MIRRORS += "http://www.live555.com/liveMedia/public/ http://download.videolan.org/contrib/live555/ \n"
  
- S = "${WORKDIR}/git"
--SRCREV = "62701436991e42606c4e9e8dbdcdc5067d64f69b"
--PV = "0.102+git${SRCPV}"
-+SRCREV = "51c872d856db80281ea810ebc02e05c09d5310fa"
-+PV = "0.103"
-+
-+SRC_URI = "git://github.com/CanonicalLtd/netplan.git;branch=main \
-+           file://0001-parse-nm-fix-32bit-format-string.patch"
+-SRC_URI[sha256sum] = "3a9a83618b07192c5fb0d824bdafaece466086bb44b5634fac32e8f9e00c7994"
++SRC_URI[sha256sum] = "31ce35f13d676033da3fafdb67c6f26e9717438112230743a107dd3a67ebe285"
  
--SRC_URI = " \
--        git://github.com/CanonicalLtd/netplan.git \
--        file://0001-Handle-enum-element-override.patch \
--"
- SRC_URI:append:libc-musl = " file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch"
+ S = "${WORKDIR}/live"
  
- DEPENDS = "glib-2.0 libyaml ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 -- 
 2.25.1
 
