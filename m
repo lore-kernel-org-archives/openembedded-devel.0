@@ -1,216 +1,100 @@
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web10.80682.1629435245794874847
+Received: from mail3.bemta25.messagelabs.com (mail3.bemta25.messagelabs.com [195.245.230.85])
+ by mx.groups.io with SMTP id smtpd.web11.80090.1629439777048295500
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Aug 2021 21:54:05 -0700
+ Thu, 19 Aug 2021 23:09:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=MELdTsJP;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: ticotimo@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id w6so5269099plg.9
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Aug 2021 21:54:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=jfli/SP1dP/eJG1lc6Ub2RUuoHLlpVkZHePW/V+RKvg=;
-        b=MELdTsJPP9oVYHuuKVyYazvlxDvKnaum+GAOfTP1vqR9MkbYI7BPP0Uih9xGSKPO67
-         GyyMJW5b7r5oJfgRaTyvIG1nuRoTb7DukZfQq3OozZgpwdw5xzr9/yyqKBuz0BFR7Mal
-         rh8DaYwpvD7PqIpD7XyXOKbSQpbiydGdqjQ3iWNgIBEhjxwgeKudnhfIU313lGcfoN+o
-         t95Zqllw3DGWA71vhosDFXCI31fr328SBTYZ8nOi92Ec1TpR70zZFSP+VW6to/1vqgKG
-         fJ7azXETxcD3j5vl3biAEEhKFeEnujzx6/URiyjPlXBENfzwQqwbgDlN/E0xgQDGANQf
-         p3pg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=jfli/SP1dP/eJG1lc6Ub2RUuoHLlpVkZHePW/V+RKvg=;
-        b=MyR9B67jt4ZV8lTw3UcV6uCw4TsYD+YNm6LZmjM0wYU122FUzh5sHSTEZhiuAZJDbX
-         1988Rvky5Ddbf+QA0IbPt7QmOXjWZ0o9+/E4VCxY+vqCdoTYOL68CMdPfO3JqcWThsAZ
-         yON9Wwk2mQNnsVZjZlGnAhcD4BwI2rawcv/JmfCu88if0kLemneHm864AWUfQ0HrRahS
-         ArnD4YX/kmcGEbo81FyRYmAtUpbR1wLv/Y0UL0jrCGx+U53sLuhoNDdlgttPVlhdDfup
-         K6YVmPO/CJe41lw7Ixa2ugJTHDSbfTFtMXlYvzvsAfQbSF9dBIKWnW41BSLUbEoP3zlH
-         8OOg==
-X-Gm-Message-State: AOAM531Buai4RosIxm51oCa26+jwDVpAjtD7ogDK1ZlQ75jzpAWF7Wds
-	olxTLFXbnKcqydOS9qCmvDZitEJq1X0=
-X-Google-Smtp-Source: ABdhPJwoi4kLe1dDqMqTkuwEP90BphacrGyIxlA5pkFqebSFVA/U9YFGY3GTJna5tVEMOfExjYB61Q==
-X-Received: by 2002:a17:90a:af8f:: with SMTP id w15mr2628025pjq.90.1629435244922;
-        Thu, 19 Aug 2021 21:54:04 -0700 (PDT)
-Return-Path: <ticotimo@gmail.com>
-Received: from nereus.local ([2601:1c0:6000:1830:bd83:4d24:dd3e:4962])
-        by smtp.gmail.com with ESMTPSA id c2sm5351740pfp.138.2021.08.19.21.54.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Aug 2021 21:54:04 -0700 (PDT)
-From: "Tim Orling" <ticotimo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tim Orling <ticotimo@gmail.com>
-Subject: [meta-oe][PATCH v3] bootchart: drop; unfetchable
-Date: Thu, 19 Aug 2021 21:52:51 -0700
-Message-Id: <20210820045250.3620987-1-ticotimo@gmail.com>
-X-Mailer: git-send-email 2.30.2
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=MRnADnl9;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.85, mailfrom: wangmy@fujitsu.com)
+Return-Path: <wangmy@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1629439774; i=@fujitsu.com;
+	bh=kjxkjqGidCTeMU/frFxpMwZtIxCdGBrvQBL1SfK7s7k=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=MRnADnl9uJw4H7kvWwdcaVx1hpPI8QgV7+sSmNdP0/AI/X1QRw03jEScJ/iY5Ba1u
+	 wuXaHSKXIQJq43/g47+6/8Tw5nY5MyxKx6zr+HqdnKEANDphtb+8fbp3vN7Y0sinXv
+	 ebiJpOk1JlGAeYMAR4VevqBu4MoFTtQgxFpHvL7W6ZhzAwvZ842T49yx1MKRZLNrsO
+	 JFavCj25XZmD4Kksi0KptqB9O18+j50Xf/TMMaWWW4aExWvqDfiYHcFD0k0VI6hREw
+	 /kYuyjLoXJxVv77pbRF4gQYPLTC2YrL9HpZaa9k+pXWs/WHree8NVPbjPAD0j6zO2d
+	 p/OYCE6OJ3I6w==
+Received: from [100.112.199.201] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-5.bemta.az-b.eu-west-1.aws.symcld.net id 87/EF-31512-E174F116; Fri, 20 Aug 2021 06:09:34 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrMIsWRWlGSWpSXmKPExsViZ8MRqivrLp9
+  ocHubssXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvHl7RKWgkdcFcsfvGVtYDzF2cXIySEkMJtJ
+  4vbE8C5GLiD7BKPEy54OdpAEm4CaxPRbN1hBbBEBfYmls/cwg9jMAioSL373gNUICzhLNPVeB
+  YuzCKhKXNhwCayeV8BJYuecCWC2hICCxJSH75kh4oISJ2c+YYGYIyFx8MULZogaRYnZl5tZIO
+  wKiVmz2pgmMPLOQtIyC0nLAkamVYwWSUWZ6RkluYmZObqGBga6hoZGuoaW5rpGJpZ6iVW6SXq
+  ppbrlqcUluoZ6ieXFesWVuck5KXp5qSWbGIHhlVJw9OcOxoevP+gdYpTkYFIS5VU1k08U4kvK
+  T6nMSCzOiC8qzUktPsQow8GhJMEb5QqUEyxKTU+tSMvMAYY6TFqCg0dJhLfYGSjNW1yQmFucm
+  Q6ROsWoy3Fl1ZJFzEIsefl5qVLivLxuQEUCIEUZpXlwI2Bxd4lRVkqYl5GBgUGIpyC1KDezBF
+  X+FaM4B6OSMO9akCk8mXklcJteAR3BBHSEkKosyBEliQgpqQammV6ODhYCvqazAieyLdUqcz6
+  foR/3QOPm9ZnH5U6yeBxP+djDqyP/tf3Hxr33KzQmfP/u5bMig+H9h9iTM9JlIkrM1/0J0biQ
+  bL05ZWtHIavq12X7qnVr+D7XfGeZ+vW6SLzmNt0Zl79MuyH6tXnWYd9lP7LibxoIHnmUFKPML
+  MNUYP70/c2Pej41jlK/uLIXqEQcNzzn8+npvInsReudxM7uenjK/sXmRpM+t32vy1RYyiNO/y
+  4I7Qi+LiLNVBB09MmN+NtVGW9Kfize+opvE2Prjd1/919dc/BdaMy6rIlv1ew+irjxR+yIO8i
+  fdlDs/77tTCGh1RO5e/zObOpVO7xEIczS/CgP7/rD6zf5KrEUZyQaajEXFScCAEdWiM42AwAA
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-2.tower-285.messagelabs.com!1629439773!352536!1
+X-Originating-IP: [62.60.8.85]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 26479 invoked from network); 20 Aug 2021 06:09:33 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-2.tower-285.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 20 Aug 2021 06:09:33 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17K69RXo001418
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Aug 2021 07:09:33 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Fri, 20 Aug 2021 07:09:25 +0100
+From: "wangmy" <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH v2] c-ares: upgrade 1.17.1 -> 1.17.2
+Date: Fri, 20 Aug 2021 14:09:10 +0800
+Message-ID: <1629439750-46207-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Type: text/plain
 
-This was replaced by bootchart2 long ago in oe-core.
-gitorious.org no longer exists, so this is unfetchable.
-
-Also, this has seen no development since bootchart2 was
-created.
-
-Signed-off-by: Tim Orling <ticotimo@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
-Changes since v2:
-  also drop from packagegroup-meta-oe
+ .../c-ares/{c-ares_1.17.1.bb => c-ares_1.17.2.bb}   | 13 +++++--------
+ 1 file changed, 5 insertions(+), 8 deletions(-)
+ rename meta-oe/recipes-support/c-ares/{c-ares_1.17.1.bb => c-ares_1.17.2.bb} (64%)
 
-Changes since v1:
-  add meta-oe subject prefix
-
- .../packagegroups/packagegroup-meta-oe.bb     |  1 -
- ...-rudimentary-support-for-ARM-cpuinfo.patch | 49 -------------------
- ...release-and-use-PRETTY_NAME-for-the-.patch | 39 ---------------
- .../bootchart/bootchart_git.bb                | 21 --------
- 4 files changed, 110 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/bootchart/bootchart/0001-svg-add-rudimentary-support-for-ARM-cpuinfo.patch
- delete mode 100644 meta-oe/recipes-devtools/bootchart/bootchart/0002-svg-open-etc-os-release-and-use-PRETTY_NAME-for-the-.patch
- delete mode 100644 meta-oe/recipes-devtools/bootchart/bootchart_git.bb
-
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 0e58d9b653d..c3f48670715 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -227,7 +227,6 @@ RDEPENDS:packagegroup-meta-oe-dbs-python2 ="\
- RDEPENDS:packagegroup-meta-oe-devtools ="\
-     abseil-cpp \
-     breakpad \
--    bootchart \
-     android-tools-conf \
-     android-tools \
-     concurrencykit \
-diff --git a/meta-oe/recipes-devtools/bootchart/bootchart/0001-svg-add-rudimentary-support-for-ARM-cpuinfo.patch b/meta-oe/recipes-devtools/bootchart/bootchart/0001-svg-add-rudimentary-support-for-ARM-cpuinfo.patch
-deleted file mode 100644
-index 4581ef25fce..00000000000
---- a/meta-oe/recipes-devtools/bootchart/bootchart/0001-svg-add-rudimentary-support-for-ARM-cpuinfo.patch
-+++ /dev/null
-@@ -1,49 +0,0 @@
--From 8d40b4c286e005e82fa50b66fbbbde22b7e65e15 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sun, 20 May 2012 21:35:34 +0200
--Subject: [PATCH 1/2] svg: add rudimentary support for ARM cpuinfo
+diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.17.1.bb b/meta-oe/recipes-support/c-ares/c-ares_1.17.2.bb
+similarity index 64%
+rename from meta-oe/recipes-support/c-ares/c-ares_1.17.1.bb
+rename to meta-oe/recipes-support/c-ares/c-ares_1.17.2.bb
+index f9575a3fce..53cc1b68f0 100644
+--- a/meta-oe/recipes-support/c-ares/c-ares_1.17.1.bb
++++ b/meta-oe/recipes-support/c-ares/c-ares_1.17.2.bb
+@@ -5,14 +5,11 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=fb997454c8d62aa6a47f07a8cd48b006"
+ 
+-PV = "1.17.1"
 -
--On ARM /proc/cpuinfo looks like this:
--
--root@beagleboneA3-0428:~# cat /proc/cpuinfo
--Processor	: ARMv7 Processor rev 2 (v7l)
--BogoMIPS	: 498.89
--Features	: swp half thumb fastmult vfp edsp thumbee neon vfpv3 tls
--CPU implementer	: 0x41
--CPU architecture: 7
--CPU variant	: 0x3
--CPU part	: 0xc08
--CPU revision	: 2
--
--Hardware	: am335xevm
--Revision	: 0000
--Serial		: 0000000000000000
--
--So no real way to get the actual SoC name, TI AM3359, but a lot better than 'Unknown'
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
--
--Upstream-Status: submitted
--
-- svg.c |    4 ++++
-- 1 file changed, 4 insertions(+)
--
--diff --git a/svg.c b/svg.c
--index 80e0292..53724b2 100644
----- a/svg.c
--+++ b/svg.c
--@@ -178,6 +178,10 @@ void svg_title(void)
-- 				strncpy(cpu, &buf[13], 255);
-- 				break;
-- 			}
--+			if (strstr(buf, "Processor")) {
--+				strncpy(cpu, &buf[12], 255);
--+				break;
--+			}
-- 		}
-- 		fclose(f);
-- 	}
---- 
--1.7.10
--
-diff --git a/meta-oe/recipes-devtools/bootchart/bootchart/0002-svg-open-etc-os-release-and-use-PRETTY_NAME-for-the-.patch b/meta-oe/recipes-devtools/bootchart/bootchart/0002-svg-open-etc-os-release-and-use-PRETTY_NAME-for-the-.patch
-deleted file mode 100644
-index f63d98aee51..00000000000
---- a/meta-oe/recipes-devtools/bootchart/bootchart/0002-svg-open-etc-os-release-and-use-PRETTY_NAME-for-the-.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--From e3adb4c312c6ba3491b7c173559efac7a53e5abc Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sun, 20 May 2012 22:12:29 +0200
--Subject: [PATCH 2/2] svg: open /etc/os-release and use PRETTY_NAME for the
-- 'Build' name
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
--
--Upstream-Status: Submitted
--
-- svg.c |   11 +++++++++++
-- 1 file changed, 11 insertions(+)
--
--diff --git a/svg.c b/svg.c
--index 53724b2..c675d84 100644
----- a/svg.c
--+++ b/svg.c
--@@ -194,6 +194,17 @@ void svg_title(void)
-- 		fclose(f);
-- 	}
-- 
--+	f = fopen("/etc/os-release", "r");
--+	if(f) {
--+		while (fgets(buf, 255, f)) {
--+			if (strstr(buf, "PRETTY_NAME=")) {
--+				strncpy(build, &buf[12], 255);
--+				break;
--+			}
--+		}
--+		fclose(f);
--+	}
--+
-- 	svg("<text class=\"t1\" x=\"0\" y=\"30\">Bootchart for %s - %s</text>\n",
-- 	    uts.nodename, date);
-- 	svg("<text class=\"t2\" x=\"20\" y=\"50\">System: %s %s %s %s</text>\n",
---- 
--1.7.10
--
-diff --git a/meta-oe/recipes-devtools/bootchart/bootchart_git.bb b/meta-oe/recipes-devtools/bootchart/bootchart_git.bb
-deleted file mode 100644
-index 2b75eaac9d8..00000000000
---- a/meta-oe/recipes-devtools/bootchart/bootchart_git.bb
-+++ /dev/null
-@@ -1,21 +0,0 @@
--DESCRIPTION = "Monitors where the system spends its time at start, creating a graph of all processes, disk utilization, and wait time."
--HOMEPAGE = "http://meego.gitorious.org/meego-developer-tools/bootchart"
--
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=fcb02dc552a041dee27e4b85c7396067"
--
--PV = "1.17"
--PR = "r1"
--PE = "1"
--
--SRC_URI = "git://gitorious.org/meego-developer-tools/bootchart.git;protocol=https \
--           file://0001-svg-add-rudimentary-support-for-ARM-cpuinfo.patch \
--           file://0002-svg-open-etc-os-release-and-use-PRETTY_NAME-for-the-.patch \
+-SRC_URI = "\
+-    git://github.com/c-ares/c-ares.git \
+-    file://cmake-install-libcares.pc.patch \
+-    file://0001-fix-configure-error-mv-libcares.pc.cmakein-to-libcar.patch \
 -"
--
--SRCREV = "a2c7561d4060a9f075339bda89e793c76f2ff6dd"
--
--S = "${WORKDIR}/git"
--
--inherit autotools
--
+-SRCREV = "39c73b503d9ef70a58ad1f4a4643f15b01407c66"
++SRC_URI = "git://github.com/c-ares/c-ares.git;branch=main \
++           file://cmake-install-libcares.pc.patch \
++           file://0001-fix-configure-error-mv-libcares.pc.cmakein-to-libcar.patch \
++           "
++SRCREV = "6654436a307a5a686b008c1d4c93b0085da6e6d8"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "cares-(?P<pver>\d+_(\d_?)+)"
+ 
 -- 
-2.30.2
+2.25.1
 
