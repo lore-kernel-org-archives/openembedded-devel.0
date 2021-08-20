@@ -1,59 +1,59 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.5])
- by mx.groups.io with SMTP id smtpd.web09.82052.1629452248587195184
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.2])
+ by mx.groups.io with SMTP id smtpd.web10.82421.1629452266754373536
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Aug 2021 02:37:29 -0700
+ Fri, 20 Aug 2021 02:37:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=TnSvXv5p;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.5, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=wgf0AT55;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.2, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1629452246; i=@fujitsu.com;
-	bh=oRjTXSo0BYvAjQ3D8vXRi1Vz8Mzwv9mhtKZo0tmnkns=;
+	s=170520fj; t=1629452264; i=@fujitsu.com;
+	bh=KCPnOEWgF79uHLsx7VZm9hn1dxeLiYtOnm6eZP0bUOI=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=TnSvXv5pdjcYZx61wDR4RoSgY0OT1B41lz/1Qo0NT4t0qvAnw5YwOmDGHqQBGRgL/
-	 mwwG5prLDkXVCujOXfsV48qE858OwvEjr0SO7MxFdBTULjy459VTyQl4u1c6V4VJzw
-	 bkCCNvmmaTwp3Ll1UvNztigV+O6SvN2dIdOd+ejVrM2ezM75Rfyn7E3TN9kcQNEFFV
-	 a2PNlutYzD20+tpoYnGGwleqzHub2Rp424S/OSTsNCG05yL90b1eIMh2E/ZRmVUA5m
-	 26YqOMByDhzuA+q829BGBpeK6HVDIPe4PoJNZW04vKBK7CiwfhRM45tFyfY6fRoEzt
-	 e40da94JTOIcQ==
-Received: from [100.113.1.232] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-5.bemta.az-a.eu-central-1.aws.symcld.net id D8/8A-17140-5D77F116; Fri, 20 Aug 2021 09:37:25 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuplkeJIrShJLcpLzFFi42Kxs+EI0b1aLp9
-  o0LJW0+Li4aXMDowe5zauYAxgjGLNzEvKr0hgzTjauZOp4DBnxZylS9gbGF9xdDFycQgJzGaS
-  +H9oOTOEc4JRYvnxj+xdjJwcbAI6Eh0vullAbBEBfYmls/cwg9jCAoESjdtmsYHYLAKqEg135
-  rOC2LwC7hJ/O46DxSUEFCSmPHzPDBEXlDg58wnYHGYBCYmDL14wQ9QoSmzfeYYFwq6QeH34Ev
-  MERp5ZSFpmIWlZwMi0itEyqSgzPaMkNzEzR9fQwEDX0NBY11DXyMhML7FKN1EvtVQ3OTWvpCg
-  RKKuXWF6sV1yZm5yTopeXWrKJERhKKYWMj3Ywnn79Qe8QoyQHk5Ior6qZfKIQX1J+SmVGYnFG
-  fFFpTmrxIUYZDg4lCd5LZUA5waLU9NSKtMwcYFjDpCU4eJREeIuLgNK8xQWJucWZ6RCpU4yKU
-  uK8R0H6BEASGaV5cG2wWLrEKCslzMvIwMAgxFOQWpSbWYIq/4pRnINRSZh3FsgUnsy8Erjpr4
-  AWMwEtFlKVBVlckoiQkmpgUvjLELFT8PURscd7GBrZFgmGhYWs+W6+5Uv9xX3PFfVOeR/gnXJ
-  Kd1Xn0wtqsl91Yndk/7vI+zdu3ukPssYzS4NsWDnYdXalPI+c2vdDnTV3QtPXhrlqXTGaD0Nn
-  KwkrS64UzJGc9+uGRICArPbBim3bvfU29teusvKPm7emedmirIqdXEtiAna/LSxR2jVf6dd8q
-  UilOPagYytWTjLZ8sNG8dD7rqTbMlyz7z72ufzu5dqyA9xqZ/kOxTUnrp196tIzSbuvkwOZov
-  oktj5uPXFKxfnSRNfN4u//Gj08cf/W3jS+Xd4VsVIz1N/meG3JVz+0ct9Fq7xzm36wZxieZLk
-  lNdVz9YM/E1+tWfvelEmJpTgj0VCLuag4EQCY8LBjIAMAAA==
+	b=wgf0AT55bcU1a1LbOGDGprtWSEZctNvVQnho4HaOMgYi7MXpxok15fPiABpGauo/i
+	 hv7Vtl2VAwURnuTCk4Knw9M3fIKnx0Gy6zGhBoHTiUOrauKSJBOyGdMrX49ZMxg0cp
+	 6PFnR8zElnm2gQFb3XF2PuJNaZ48fkkyYAcB/OewhQZECFBhez9AC5pvdIvMbMv66Y
+	 /lARjg2dpi9JOM1K+EquLjSPklThqZhSU8Mc+oNlUqSzhB8lEcuR42xeLHRmrT5hwh
+	 E1qC6j/euFeumv8/zta1IkBS23jIHnfJMfZWqWz1cLTJo1SmjOL6I+IrfV7J9JzuM6
+	 n+8q7W4v9BipA==
+Received: from [100.113.2.110] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-a.eu-central-1.aws.symcld.net id A3/CC-09754-8E77F116; Fri, 20 Aug 2021 09:37:44 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+GYqvuiXD7
+  RoL+Ry+Li4aXMDowe5zauYAxgjGLNzEvKr0hgzViwdC1jwRbuiq/b9zA3MK7m6mLk4hASmM0k
+  8aKhl62LkRPIOcEo8Xe5CIjNJqAj0fGimwXEFhHQl1g6ew8ziC0sECTxrX8lK4jNIqAqcenpZ
+  7BeXgF3iYk9M8FqJAQUJKY8fM8MEReUODnzCdgcZgEJiYMvXkDVKEps33mGBcKukHh9+BLzBE
+  aeWUhaZiFpWcDItIrRMqkoMz2jJDcxM0fX0MBA19DQWNdI18jQTC+xSjdRL7VUNzk1r6QoESi
+  rl1herFdcmZuck6KXl1qyiREYSCmFTDd2MH57/UHvEKMkB5OSKK+qmXyiEF9SfkplRmJxRnxR
+  aU5q8SFGGQ4OJQneS2VAOcGi1PTUirTMHGBQw6QlOHiURHiLi4DSvMUFibnFmekQqVOMilLiv
+  EdB+gRAEhmleXBtsEi6xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmYdxbIFJ7MvBK46a+AFj
+  MBLRZSlQVZXJKIkJJqYDrPv+VdurXImdomu9+sRksPTt4nm7F3fUrUyRvW97fcDJy2utfkI7/
+  jsaI3wXu61q+q0cyXLPc/sDJnssDlNwu4vDy+Sbozaqcvu3LHaJt3hfG6g/8fzZn+6k771tC9
+  3uGcNWt6H1mIuz3/uDCcb5mrx3benUebE/q+MJa/5fo/9/KbiuwZizJO3DV9Lbc3u016J59Az
+  Z/SjP+1RdpZW0Umyy+JWdjuuc3Y4R7TZa+sg/pdC3IvnVf537H7abHIjy9XGoKror00pb6Kqi
+  sfvi8j/erR87TS35W/P6ju+Km/eO9vAZOXrk8TnitdFXA+I2gs0/FEIfax+sPf7e19z54mmvT
+  Jvj8yd14C27a8AlMlluKMREMt5qLiRAC2oJlCHwMAAA==
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-15.tower-232.messagelabs.com!1629452245!31851!1
-X-Originating-IP: [62.60.8.84]
+X-Msg-Ref: server-11.tower-232.messagelabs.com!1629452263!32083!1
+X-Originating-IP: [62.60.8.149]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 24038 invoked from network); 20 Aug 2021 09:37:25 -0000
-Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-15.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 20 Aug 2021 09:37:25 -0000
+Received: (qmail 29477 invoked from network); 20 Aug 2021 09:37:44 -0000
+Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
+  by server-11.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 20 Aug 2021 09:37:44 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17K9bJ2L028065
+	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17K9bhPu025157
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Aug 2021 10:37:25 +0100
+	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Aug 2021 10:37:43 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 20 Aug 2021 10:37:18 +0100
+ (TLS) id 15.0.1497.18; Fri, 20 Aug 2021 10:37:42 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-flask-migrate: upgrade 3.0.1 -> 3.1.0
-Date: Fri, 20 Aug 2021 17:37:11 +0800
-Message-ID: <1629452231-16372-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-flask-socketio: upgrade 5.1.0 -> 5.1.1
+Date: Fri, 20 Aug 2021 17:37:36 +0800
+Message-ID: <1629452256-16432-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -61,28 +61,35 @@ X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
+Release 5.1.1 - 2021-08-02
+
+Only use SSL socket if at least one SSL kwarg is not None #1639 (commit) (thanks JT Raber!)
+Remove unused SSL arguments from eventlet server options #1639 (commit)
+Remove executable permissions from files that lack shebang lines #1621 (commit) (thanks Ben Beasley!)
+Improved project structure (commit)
+
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- ...n3-flask-migrate_3.0.1.bb => python3-flask-migrate_3.1.0.bb} | 2 +-
+ ...-flask-socketio_5.1.0.bb => python3-flask-socketio_5.1.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-flask-migrate_3.0.1.bb => python3-flask-migrate_3.1.0.bb} (79%)
+ rename meta-python/recipes-devtools/python/{python3-flask-socketio_5.1.0.bb => python3-flask-socketio_5.1.1.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-flask-migrate_3.0.1.bb b/meta-python/recipes-devtools/python/python3-flask-migrate_3.1.0.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-flask-migrate_3.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-flask-migrate_3.1.0.bb
-index 04b71c6018..7a7c3fa3f3 100644
---- a/meta-python/recipes-devtools/python/python3-flask-migrate_3.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask-migrate_3.1.0.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "SQLAlchemy database migrations for Flask applications using Alemb
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b69377f79f3f48c661701236d5a6a85"
+diff --git a/meta-python/recipes-devtools/python/python3-flask-socketio_5.1.0.bb b/meta-python/recipes-devtools/python/python3-flask-socketio_5.1.1.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-flask-socketio_5.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-flask-socketio_5.1.1.bb
+index deca5f5d8e..3d7a1cb6a8 100644
+--- a/meta-python/recipes-devtools/python/python3-flask-socketio_5.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-flask-socketio_5.1.1.bb
+@@ -9,7 +9,7 @@ inherit pypi setuptools3
  
--SRC_URI[sha256sum] = "4d42e8f861d78cb6e9319afcba5bf76062e5efd7784184dd2a1cccd9de34a702"
-+SRC_URI[sha256sum] = "57d6060839e3a7f150eaab6fe4e726d9e3e7cffe2150fb223d73f92421c6d1d9"
+ PYPI_PACKAGE = "Flask-SocketIO"
  
- PYPI_PACKAGE = "Flask-Migrate"
+-SRC_URI[sha256sum] = "b41b9f6fb0d7f3fcadd54c44653307a9b96e985c7da73f92779480248b5b6874"
++SRC_URI[sha256sum] = "1efdaacc7a26e94f2b197a80079b1058f6aa644a6094c0a322349e2b9c41f6b1"
  
+ RDEPENDS:${PN} += "\
+     ${PYTHON_PN}-flask \
 -- 
 2.25.1
 
