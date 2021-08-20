@@ -1,59 +1,59 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.4])
- by mx.groups.io with SMTP id smtpd.web11.80180.1629440553251644036
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.116])
+ by mx.groups.io with SMTP id smtpd.web11.80184.1629440578586379033
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Aug 2021 23:22:33 -0700
+ Thu, 19 Aug 2021 23:22:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=szpuhBpp;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.4, mailfrom: zhengrq.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WFdt6Jhf;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.116, mailfrom: zhengrq.fnst@fujitsu.com)
 Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1629440551; i=@fujitsu.com;
-	bh=tYWh7mQRFuqm6uYUWH78mIdWIqIWtBo1vc8F/aa+qfg=;
+	s=170520fj; t=1629440576; i=@fujitsu.com;
+	bh=qL4n0CB/QwCbtrHXqA4GE362JLwG52qQ7JrO2rYEgwM=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=szpuhBppwXJm3h1lZ/ClJfMZhaEgmzSBhqTf4YdEDolELtTLAbIq/BTgf7e92oKl7
-	 oQgSyeefxPdMhZm73nmAX/ORGQTkALeb/J7qyytAYsjZNnd3U5ICI8CvUISI28RNSL
-	 sn16hE1rCnmHibfxu95EqokCCkq5umJgBsG4d006PrnPLhY+qGtiwzLNgXk+XQSf1T
-	 1kmuleXcvtlk1+dR523F7Iz0sYnqlQ4yeM1Ft0VLCysrsLluo+ENj0knlXNoAYpLD/
-	 lACNwL5+1cuO/svdorYF2UPmCm3MFS1ycXSC8XwPRJZYZv3PO3VLn/daMuKqcR95LH
-	 Hg3R8HoN2cK1w==
-Received: from [100.112.192.137] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-a.eu-west-1.aws.symcld.net id B6/A4-05324-72A4F116; Fri, 20 Aug 2021 06:22:31 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupikeJIrShJLcpLzFFi42Kxs+GYoqvuJZ9
-  o8O4gh8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnHsxRfmgh2cFY+/bWdqYLzN0cXIxSEkMJtJ
-  4tDun4wQzh5GiRcv/rF2MXJysAnoSpx7vJYdxBYR0JdYOnsPM4gtLOAmcW7RHbA4i4CqROP+G
-  UwgNq+Ah8SVCzfAaiQEFCSmPHzPDBEXlDg58wkLiM0sICFx8MULoDgHUI2ixOzp8hDlFRKvD1
-  9insDIMwtJxywkHQsYmVYxmicVZaZnlOQmZuboGhoY6BoaGukaWhrpmpjoJVbpJuqlluqWpxa
-  X6BrqJZYX6xVX5ibnpOjlpZZsYgQGUUrBAZ0djD9ffdA7xCjJwaQkyqtqJp8oxJeUn1KZkVic
-  EV9UmpNafIhRhoNDSYL3oTtQTrAoNT21Ii0zBxjQMGkJDh4lEd6bHkBp3uKCxNzizHSI1ClGR
-  Slx3hUgCQGQREZpHlwbLIouMcpKCfMyMjAwCPEUpBblZpagyr9iFOdgVBLmfWMFNIUnM68Ebv
-  oroMVMQIuFVGVBFpckIqSkGpgsW+c/bNc9MUNAfs6tjgpTnkvb+77kSn6dbLhXwu+jtZHQFgG
-  PgDurdV923XPfLh7jcK7ZZtdVt83L9U+L7/p1yM1xbtqBlhxHJQ6jR36M1hdrnsxt2M674URa
-  Q/16r7Npe+ec2qK1LvSD1FWFy6lvljmqNp6JP/MsuXbmIdZOY0UDnlPbX5a/X/RpbgLvHmlzD
-  /n9JX/L2YKOXPg7wXfzNLGZX0VnaLyZwOm0ifG/7J4tVfqJhn+PHwjtMr9gLHreZ2nSFJ4Zv3
-  bMi3ysFcywY0vTAecojnmfe9edUOTxrmEq3NYtyrLh0N77+89OnxtrE1sS5biyMFnam+u71OR
-  pD8y0VusmW86cMOf3jVO/lViKMxINtZiLihMBzxg97B0DAAA=
+	b=WFdt6Jhf04tmJ+H/IcERGnB5/OZVv/kxzWlpQRmXl67ohk3Z4S+p0s89jCk9vYhXI
+	 YNRx+Hdf8hcI+GoXflpkp8+pOs3K3KbgORyOXKCC2NYN4ziWmY38gbsi15M2TS5yWy
+	 dPbCsHAFpJWwLTP6TIeXqvsX4rI7rDoCdrat29ABkHr2y8wmfaV4c/suV0sHG2S+jK
+	 0nbN98yD3kTstAGFHs/B2t6HH5SXMe0JFTZjteyD906oAXDeat9r3+7TrMCzjxU+FQ
+	 iAcjUZORD4PJRxw3rFMtSsTNuqx1edtO9RkUPJCXwXX7PhRqyOWrmDuyS75xmAOwo+
+	 TIqoXAyNRBrbA==
+Received: from [100.113.7.73] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-5.bemta.az-b.eu-central-1.aws.symcld.net id 94/FE-01664-04A4F116; Fri, 20 Aug 2021 06:22:56 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+GYouvgJZ9
+  osH8hm8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvFt/UXmggXsFYsubWZuYDzL1sXIxSEkMJtJ
+  4uilJnYIZw+jxP6djUAOJwebgK7EucdrwWwRAX2JpbP3MIPYwgIuEp/v3WMFsVkEVCU2fjvEA
+  mLzCnhIXFjYBBaXEFCQmPLwPTNEXFDi5MwnYDXMAhISB1+8AIpzANUoSsyeLg9RXiHx+vAl5g
+  mMPLOQdMxC0rGAkWkVo2VSUWZ6RkluYmaOrqGBga6hobGuOZBlqpdYpZukl1qqm5yaV1KUCJT
+  VSywv1iuuzE3OSdHLSy3ZxAgMpJRC9swdjJPffNA7xCjJwaQkyqtqJp8oxJeUn1KZkVicEV9U
+  mpNafIhRhoNDSYL3oTtQTrAoNT21Ii0zBxjUMGkJDh4lEd6bHkBp3uKCxNzizHSI1ClGRSlx3
+  hUgCQGQREZpHlwbLJIuMcpKCfMyMjAwCPEUpBblZpagyr9iFOdgVBLmnQgyhSczrwRu+iugxU
+  xAi4VUZUEWlyQipKQamC7XvPFbv0rSe8Hyit3+nTtUi/+vMdjU4rvmyKnbEbtPcU9pX8qy7Yr
+  y98Mapb7b3p3KNnQzOWm3UfLKmZOzxWfNYXxf9Fbh85+g7GOB5x+G6bglzPrPwzR5+97pfut2
+  Hl1yoO/bvTluEmKVwT8s+Tut5NV2Ze7KXbDl4fvMBi0vsynPpyzYfjJmc8eTi1ua3mpdmjZpf
+  hGjtYBGiJbx3oNN4dILjG1MV3GVv/9heWhPI6fq+puKJk1G8pPYzDw9TryueJwwdxZX0X2zTV
+  bynxNmKBa/+rPx6dFnKoWLyzR2ik8Oalzio/XYRN7Fe9LEHR2ae1PWCkqtTs1uOBjtxRmbseb
+  er43Fcf0zgv9J3ldWYinOSDTUYi4qTgQABo33ex8DAAA=
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-10.tower-265.messagelabs.com!1629440550!767948!1
+X-Msg-Ref: server-5.tower-238.messagelabs.com!1629440575!113010!1
 X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 3837 invoked from network); 20 Aug 2021 06:22:31 -0000
+Received: (qmail 25459 invoked from network); 20 Aug 2021 06:22:56 -0000
 Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-10.tower-265.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 20 Aug 2021 06:22:31 -0000
+  by server-5.tower-238.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 20 Aug 2021 06:22:56 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17K6MUcF003910
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17K6MtQS004114
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Aug 2021 07:22:30 +0100
+	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Aug 2021 07:22:55 +0100
 Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 20 Aug 2021 07:22:28 +0100
+ (TLS) id 15.0.1497.18; Fri, 20 Aug 2021 07:22:53 +0100
 From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-perl] [PATCH] libencode-perl: upgrade 3.11 -> 3.12
-Date: Fri, 20 Aug 2021 14:22:22 +0800
-Message-ID: <1629440542-34589-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] sedutil: upgrade 1.15.1 -> 1.15.1.01
+Date: Fri, 20 Aug 2021 14:22:50 +0800
+Message-ID: <1629440570-34634-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.35]
@@ -63,26 +63,24 @@ Content-Type: text/plain
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../{libencode-perl_3.11.bb => libencode-perl_3.12.bb}          | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libencode/{libencode-perl_3.11.bb => libencode-perl_3.12.bb} (97%)
+ meta-oe/recipes-extended/sedutil/sedutil_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-perl/recipes-perl/libencode/libencode-perl_3.11.bb b/meta-perl/recipes-perl/libencode/libencode-perl_3.12.bb
-similarity index 97%
-rename from meta-perl/recipes-perl/libencode/libencode-perl_3.11.bb
-rename to meta-perl/recipes-perl/libencode/libencode-perl_3.12.bb
-index f1d44b3090..90ae623f79 100644
---- a/meta-perl/recipes-perl/libencode/libencode-perl_3.11.bb
-+++ b/meta-perl/recipes-perl/libencode/libencode-perl_3.12.bb
-@@ -15,7 +15,7 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
- LIC_FILES_CHKSUM = "file://META.json;beginline=8;endline=10;md5=b12e3be1e17a7e99ca4f429ff32c28b5"
+diff --git a/meta-oe/recipes-extended/sedutil/sedutil_git.bb b/meta-oe/recipes-extended/sedutil/sedutil_git.bb
+index 1e7a393193..53330c0675 100644
+--- a/meta-oe/recipes-extended/sedutil/sedutil_git.bb
++++ b/meta-oe/recipes-extended/sedutil/sedutil_git.bb
+@@ -8,8 +8,8 @@ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://Common/LICENSE.txt;md5=d32239bcb673463ab874e80d47fae504"
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/DANKOGAI/Encode-${PV}.tar.gz"
--SRC_URI[sha256sum] = "47e05cefb550ef039808564e6181a22dbf2e50d0475f8eb9de63f9d9f4912e7c"
-+SRC_URI[sha256sum] = "38da5b7f74bc402075f5994557b5f1426636291efea0f39fcdf4b1366b0756fd"
- 
- UPSTREAM_CHECK_REGEX = "Encode\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
- 
+ BASEPV = "1.15.1"
+-PV = "${BASEPV}+git${SRCPV}"
+-SRCREV = "358cc758948be788284d5faba46ccf4cc1813796"
++PV = "1.15.1.01"
++SRCREV = "565670749ef6947a905c451477a3a9a15e7e0ba5"
+ SRC_URI = "git://github.com/Drive-Trust-Alliance/sedutil.git \
+ 	file://0001-Fix-build-on-big-endian-architectures.patch \
+         file://0001-DtaAnnotatedDump-Add-typedef-name-to-the-union.patch \
 -- 
 2.25.1
 
