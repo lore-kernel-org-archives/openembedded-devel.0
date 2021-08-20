@@ -1,86 +1,59 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.116])
- by mx.groups.io with SMTP id smtpd.web11.80184.1629440578586379033
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web08.81482.1629448956239598721
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Aug 2021 23:22:58 -0700
+ Fri, 20 Aug 2021 01:42:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WFdt6Jhf;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.116, mailfrom: zhengrq.fnst@fujitsu.com)
-Return-Path: <zhengrq.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1629440576; i=@fujitsu.com;
-	bh=qL4n0CB/QwCbtrHXqA4GE362JLwG52qQ7JrO2rYEgwM=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=WFdt6Jhf04tmJ+H/IcERGnB5/OZVv/kxzWlpQRmXl67ohk3Z4S+p0s89jCk9vYhXI
-	 YNRx+Hdf8hcI+GoXflpkp8+pOs3K3KbgORyOXKCC2NYN4ziWmY38gbsi15M2TS5yWy
-	 dPbCsHAFpJWwLTP6TIeXqvsX4rI7rDoCdrat29ABkHr2y8wmfaV4c/suV0sHG2S+jK
-	 0nbN98yD3kTstAGFHs/B2t6HH5SXMe0JFTZjteyD906oAXDeat9r3+7TrMCzjxU+FQ
-	 iAcjUZORD4PJRxw3rFMtSsTNuqx1edtO9RkUPJCXwXX7PhRqyOWrmDuyS75xmAOwo+
-	 TIqoXAyNRBrbA==
-Received: from [100.113.7.73] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-5.bemta.az-b.eu-central-1.aws.symcld.net id 94/FE-01664-04A4F116; Fri, 20 Aug 2021 06:22:56 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+GYouvgJZ9
-  osH8hm8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvFt/UXmggXsFYsubWZuYDzL1sXIxSEkMJtJ
-  4uilJnYIZw+jxP6djUAOJwebgK7EucdrwWwRAX2JpbP3MIPYwgIuEp/v3WMFsVkEVCU2fjvEA
-  mLzCnhIXFjYBBaXEFCQmPLwPTNEXFDi5MwnYDXMAhISB1+8AIpzANUoSsyeLg9RXiHx+vAl5g
-  mMPLOQdMxC0rGAkWkVo2VSUWZ6RkluYmaOrqGBga6hobGuOZBlqpdYpZukl1qqm5yaV1KUCJT
-  VSywv1iuuzE3OSdHLSy3ZxAgMpJRC9swdjJPffNA7xCjJwaQkyqtqJp8oxJeUn1KZkVicEV9U
-  mpNafIhRhoNDSYL3oTtQTrAoNT21Ii0zBxjUMGkJDh4lEd6bHkBp3uKCxNzizHSI1ClGRSlx3
-  hUgCQGQREZpHlwbLJIuMcpKCfMyMjAwCPEUpBblZpagyr9iFOdgVBLmnQgyhSczrwRu+iugxU
-  xAi4VUZUEWlyQipKQamC7XvPFbv0rSe8Hyit3+nTtUi/+vMdjU4rvmyKnbEbtPcU9pX8qy7Yr
-  y98Mapb7b3p3KNnQzOWm3UfLKmZOzxWfNYXxf9Fbh85+g7GOB5x+G6bglzPrPwzR5+97pfut2
-  Hl1yoO/bvTluEmKVwT8s+Tut5NV2Ze7KXbDl4fvMBi0vsynPpyzYfjJmc8eTi1ua3mpdmjZpf
-  hGjtYBGiJbx3oNN4dILjG1MV3GVv/9heWhPI6fq+puKJk1G8pPYzDw9TryueJwwdxZX0X2zTV
-  bynxNmKBa/+rPx6dFnKoWLyzR2ik8Oalzio/XYRN7Fe9LEHR2ae1PWCkqtTs1uOBjtxRmbseb
-  er43Fcf0zgv9J3ldWYinOSDTUYi4qTgQABo33ex8DAAA=
-X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-5.tower-238.messagelabs.com!1629440575!113010!1
-X-Originating-IP: [62.60.8.148]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.4; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 25459 invoked from network); 20 Aug 2021 06:22:56 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-5.tower-238.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 20 Aug 2021 06:22:56 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17K6MtQS004114
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Aug 2021 07:22:55 +0100
-Received: from localhost.localdomain (10.167.225.35) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 20 Aug 2021 07:22:53 +0100
-From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] sedutil: upgrade 1.15.1 -> 1.15.1.01
-Date: Fri, 20 Aug 2021 14:22:50 +0800
-Message-ID: <1629440570-34634-1-git-send-email-zhengrq.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=59332 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.93)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1mH06X-0004p8-6H; Fri, 20 Aug 2021 11:42:27 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-qrcode: Upgrade 7.2 -> 7.3
+Date: Fri, 20 Aug 2021 11:42:14 +0300
+Message-Id: <20210820084216.23017-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+Upgrade to release 7.3:
+
+- Skip color mask if QR is black and white
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-extended/sedutil/sedutil_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../python/{python3-qrcode_7.2.bb => python3-qrcode_7.3.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-qrcode_7.2.bb => python3-qrcode_7.3.bb} (73%)
 
-diff --git a/meta-oe/recipes-extended/sedutil/sedutil_git.bb b/meta-oe/recipes-extended/sedutil/sedutil_git.bb
-index 1e7a393193..53330c0675 100644
---- a/meta-oe/recipes-extended/sedutil/sedutil_git.bb
-+++ b/meta-oe/recipes-extended/sedutil/sedutil_git.bb
-@@ -8,8 +8,8 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://Common/LICENSE.txt;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-python/recipes-devtools/python/python3-qrcode_7.2.bb b/meta-python/recipes-devtools/python/python3-qrcode_7.3.bb
+similarity index 73%
+rename from meta-python/recipes-devtools/python/python3-qrcode_7.2.bb
+rename to meta-python/recipes-devtools/python/python3-qrcode_7.3.bb
+index c9e9ebf097..f195f47177 100644
+--- a/meta-python/recipes-devtools/python/python3-qrcode_7.2.bb
++++ b/meta-python/recipes-devtools/python/python3-qrcode_7.3.bb
+@@ -4,7 +4,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=4b802d2a65df4626623c79757f486af9"
  
- BASEPV = "1.15.1"
--PV = "${BASEPV}+git${SRCPV}"
--SRCREV = "358cc758948be788284d5faba46ccf4cc1813796"
-+PV = "1.15.1.01"
-+SRCREV = "565670749ef6947a905c451477a3a9a15e7e0ba5"
- SRC_URI = "git://github.com/Drive-Trust-Alliance/sedutil.git \
- 	file://0001-Fix-build-on-big-endian-architectures.patch \
-         file://0001-DtaAnnotatedDump-Add-typedef-name-to-the-union.patch \
+ PYPI_PACKAGE = "qrcode"
+-SRC_URI[sha256sum] = "153ad96f5892e6fe2f3699296240976ac3a6d068e2eb48bbfc64b4c4c4d675ea"
++SRC_URI[sha256sum] = "d72861b65e26b611609f0547f0febe58aed8ae229d6bf4e675834f40742915b3"
+ 
+ inherit pypi setuptools3
+ 
 -- 
-2.25.1
+2.17.1
 
