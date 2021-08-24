@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.36247.1629793120646220115
+ by mx.groups.io with SMTP id smtpd.web12.36378.1629793126048650984
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Aug 2021 01:18:41 -0700
+ Tue, 24 Aug 2021 01:18:47 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=45220 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mIRdh-0003rk-Br; Tue, 24 Aug 2021 11:18:38 +0300
+	id 1mIRdm-0003rk-Ia; Tue, 24 Aug 2021 11:18:43 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/5] python3-simplejson: Upgrade 3.17.4 -> 3.17.5
-Date: Tue, 24 Aug 2021 11:18:14 +0300
-Message-Id: <20210824081816.1806-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/5] python3-bitarray: Upgrade 2.3.0 -> 2.3.2
+Date: Tue, 24 Aug 2021 11:18:15 +0300
+Message-Id: <20210824081816.1806-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210824081816.1806-1-leon.anavi@konsulko.com>
 References: <20210824081816.1806-1-leon.anavi@konsulko.com>
@@ -30,35 +30,33 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 3.17.5:
+Upgrade to release 2.3.2:
 
-- Fix the C extension module to harden is_namedtuple against
-  looks-a-likes such as Mocks. Also prevent dict encoding from
-  causing an unraised SystemError when encountering a non-Dict.
-  Noticed by running user tests against a CPython interpreter
-  with C asserts enabled (COPTS += -UNDEBUG).
+- fix slice assignment for shared buffer with offset case
+- add tests (including internal debug mode tests for
+  `buffers_overlap()`)
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ython3-simplejson_3.17.4.bb => python3-simplejson_3.17.5.bb} | 2 +-
+ .../{python3-bitarray_2.3.0.bb => python3-bitarray_2.3.2.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-simplejson_3.17.4.bb => python3-simplejson_3.17.5.bb} (87%)
+ rename meta-python/recipes-devtools/python/{python3-bitarray_2.3.0.bb => python3-bitarray_2.3.2.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-simplejson_3.17.4.bb b/meta-python/recipes-devtools/python/python3-simplejson_3.17.5.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-simplejson_3.17.4.bb
-rename to meta-python/recipes-devtools/python/python3-simplejson_3.17.5.bb
-index e50aac67a9..7c92761c40 100644
---- a/meta-python/recipes-devtools/python/python3-simplejson_3.17.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-simplejson_3.17.5.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://cheeseshop.python.org/pypi/simplejson"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c6338d7abd321c0b50a2a547e441c52e"
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_2.3.0.bb b/meta-python/recipes-devtools/python/python3-bitarray_2.3.2.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-bitarray_2.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-bitarray_2.3.2.bb
+index b198b47004..8b473b543d 100644
+--- a/meta-python/recipes-devtools/python/python3-bitarray_2.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-bitarray_2.3.2.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+ LICENSE = "PSF"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
  
--SRC_URI[sha256sum] = "2af85e028714c4b6cb2eb6fc03aa91f39ffd654f2eb2f6f8f860e14aeefa6be1"
-+SRC_URI[sha256sum] = "91cfb43fb91ff6d1e4258be04eee84b51a4ef40a28d899679b9ea2556322fb50"
+-SRC_URI[sha256sum] = "21f2e10420f9ae74d3bdfd3cb74947ddbe9fbc0b2e5662f2f039001954f1d8b6"
++SRC_URI[sha256sum] = "4bee3ba9164b66cef64f1099e9a3b88e99ddcd0c943807e99443613e184b48b4"
  
- inherit pypi setuptools3
+ inherit setuptools3 pypi
  
 -- 
 2.17.1
