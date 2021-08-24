@@ -1,20 +1,20 @@
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.36378.1629793126048650984
+ by mx.groups.io with SMTP id smtpd.web11.36580.1629793129486617472
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Aug 2021 01:18:47 -0700
+ Tue, 24 Aug 2021 01:18:50 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
 Received: from [78.130.197.211] (port=45220 helo=localhost.localdomain)
 	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mIRdm-0003rk-Ia; Tue, 24 Aug 2021 11:18:43 +0300
+	id 1mIRdr-0003rk-VU; Tue, 24 Aug 2021 11:18:48 +0300
 From: "Leon Anavi" <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-bitarray: Upgrade 2.3.0 -> 2.3.2
-Date: Tue, 24 Aug 2021 11:18:15 +0300
-Message-Id: <20210824081816.1806-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-watchdog: Upgrade 2.1.3 -> 2.1.5
+Date: Tue, 24 Aug 2021 11:18:16 +0300
+Message-Id: <20210824081816.1806-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210824081816.1806-1-leon.anavi@konsulko.com>
 References: <20210824081816.1806-1-leon.anavi@konsulko.com>
@@ -30,33 +30,33 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 
-Upgrade to release 2.3.2:
+Upgrade to release 2.1.5:
 
-- fix slice assignment for shared buffer with offset case
-- add tests (including internal debug mode tests for
-  `buffers_overlap()`)
+- Fix regression introduced in 2.1.4 (reverted "Allow overriding
+  or adding custom event handlers to event dispatch map.
+- Convert regexes of type str to list.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-bitarray_2.3.0.bb => python3-bitarray_2.3.2.bb}    | 2 +-
+ .../{python3-watchdog_2.1.3.bb => python3-watchdog_2.1.5.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-bitarray_2.3.0.bb => python3-bitarray_2.3.2.bb} (77%)
+ rename meta-python/recipes-devtools/python/{python3-watchdog_2.1.3.bb => python3-watchdog_2.1.5.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_2.3.0.bb b/meta-python/recipes-devtools/python/python3-bitarray_2.3.2.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-bitarray_2.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-bitarray_2.3.2.bb
-index b198b47004..8b473b543d 100644
---- a/meta-python/recipes-devtools/python/python3-bitarray_2.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-bitarray_2.3.2.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
- LICENSE = "PSF"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
+diff --git a/meta-python/recipes-devtools/python/python3-watchdog_2.1.3.bb b/meta-python/recipes-devtools/python/python3-watchdog_2.1.5.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-watchdog_2.1.3.bb
+rename to meta-python/recipes-devtools/python/python3-watchdog_2.1.5.bb
+index 97d46b4f18..55b966a90f 100644
+--- a/meta-python/recipes-devtools/python/python3-watchdog_2.1.3.bb
++++ b/meta-python/recipes-devtools/python/python3-watchdog_2.1.5.bb
+@@ -4,7 +4,7 @@ DEPENDS = "${PYTHON_PN}-argh"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
--SRC_URI[sha256sum] = "21f2e10420f9ae74d3bdfd3cb74947ddbe9fbc0b2e5662f2f039001954f1d8b6"
-+SRC_URI[sha256sum] = "4bee3ba9164b66cef64f1099e9a3b88e99ddcd0c943807e99443613e184b48b4"
+-SRC_URI[sha256sum] = "e5236a8e8602ab6db4b873664c2d356c365ab3cac96fbdec4970ad616415dd45"
++SRC_URI[sha256sum] = "5563b005907613430ef3d4aaac9c78600dd5704e84764cb6deda4b3d72807f09"
  
- inherit setuptools3 pypi
+ inherit pypi setuptools3
  
 -- 
 2.17.1
