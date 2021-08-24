@@ -1,47 +1,60 @@
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by mx.groups.io with SMTP id smtpd.web11.32408.1629761989446173059
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web08.34485.1629775445560257558
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Aug 2021 16:39:49 -0700
+ Mon, 23 Aug 2021 20:24:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kernel.org header.s=k20201202 header.b=fQYG7wIR;
- spf=pass (domain: kernel.org, ip: 198.145.29.99, mailfrom: okaya@kernel.org)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 88046613A7;
-	Mon, 23 Aug 2021 23:39:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1629761987;
-	bh=GlBCcFxSflAo5dgNVul2bk0vn94ux7zGFH8kDLxDttM=;
-	h=From:To:Cc:Subject:Date:From;
-	b=fQYG7wIRva6aGKN+DTh2Bep8fdqyTuDATIbodUXDWXk/LBgFv/8AMOBzLVcpI9G2H
-	 C+xtrxen/4oYnl1WfgYG8bFCZR4y6rMhliQk/82F0yLg7zuZHy9bjMlG/onlTy+VHF
-	 FxiW3jfz/XBFEL3IB1+M6IxsQrLvgHHqfeY+4suWuqcEnoVTC4vKLha2CtfHOBj0bV
-	 cfX9cmGtzTLvNN+sfM8BFCb+1NAjKluO1okwNLKUqer7G2R/uIyJw9oQK7oz7nISO6
-	 Q/Ut8dr/WkVtgH2bR2QIlvm0e2IUN33gL8w3rWcapr2v9tp4Ar0hlDsfuWJQFMtdhM
-	 2yv9HLP8eRLYw==
-From: "Sinan Kaya" <okaya@kernel.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: Sinan Kaya <okaya@kernel.org>
-Subject: [meta-oe][PATCH 1/2] libkcapi: add a hash only packageconfig
-Date: Mon, 23 Aug 2021 23:39:37 +0000
-Message-Id: <20210823233938.13795-1-okaya@kernel.org>
-X-Mailer: git-send-email 2.17.1
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: mingli.yu@windriver.com)
+Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 17O3O3s0015928
+	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Aug 2021 20:24:04 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 17O3O3Fh006105
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Aug 2021 20:24:03 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Mon, 23 Aug 2021 20:24:02 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Mon, 23 Aug 2021 20:24:02 -0700
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] jemalloc: improve reproducibility
+Date: Tue, 24 Aug 2021 11:20:37 +0800
+Message-ID: <20210824032037.6791-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.29.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Signed-off-by: Sinan Kaya <okaya@kernel.org>
+From: Mingli Yu <mingli.yu@windriver.com>
+
+Remove build host info from config file to improve reproducibility.
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- meta-oe/recipes-crypto/libkcapi/libkcapi_1.2.1.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-devtools/jemalloc/jemalloc_5.2.1.bb | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi_1.2.1.bb b/meta-oe/recipes-crypto/libkcapi/libkcapi_1.2.1.bb
-index e86b9dcf99..2b2591f12a 100644
---- a/meta-oe/recipes-crypto/libkcapi/libkcapi_1.2.1.bb
-+++ b/meta-oe/recipes-crypto/libkcapi/libkcapi_1.2.1.bb
-@@ -16,6 +16,7 @@ inherit autotools
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[testapp] = "--enable-kcapi-test,,,bash"
- PACKAGECONFIG[apps] = "--enable-kcapi-speed --enable-kcapi-hasher --enable-kcapi-rngapp --enable-kcapi-encapp --enable-kcapi-dgstapp,,,"
-+PACKAGECONFIG[hasher_only] = "--enable-kcapi-hasher --disable-lib-kdf --disable-lib-sym --disable-lib-aead --disable-lib-rng,,,"
+diff --git a/meta-oe/recipes-devtools/jemalloc/jemalloc_5.2.1.bb b/meta-oe/recipes-devtools/jemalloc/jemalloc_5.2.1.bb
+index b5d53bb11..d4fed864d 100644
+--- a/meta-oe/recipes-devtools/jemalloc/jemalloc_5.2.1.bb
++++ b/meta-oe/recipes-devtools/jemalloc/jemalloc_5.2.1.bb
+@@ -28,6 +28,12 @@ EXTRA_AUTORECONF += "--exclude=autoheader"
  
- do_install:append() {
-     # bindir contains testapp and apps.  However it is always created, even
+ EXTRA_OECONF:append:libc-musl = " --with-jemalloc-prefix=je_"
+ 
++do_install:append() {
++	sed -i -e 's@${STAGING_DIR_HOST}@@g' \
++               -e 's@${STAGING_DIR_NATIVE}@@g' \
++               -e 's@${WORKDIR}@@g' ${D}${bindir}/jemalloc-config
++}
++
+ do_compile_ptest() {
+ 	oe_runmake tests
+ }
 -- 
-2.17.1
+2.29.2
 
