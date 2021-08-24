@@ -1,60 +1,77 @@
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web08.34485.1629775445560257558
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web09.36536.1629793111198997884
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Aug 2021 20:24:05 -0700
+ Tue, 24 Aug 2021 01:18:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: mingli.yu@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 17O3O3s0015928
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Aug 2021 20:24:04 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 17O3O3Fh006105
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Aug 2021 20:24:03 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Mon, 23 Aug 2021 20:24:02 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Mon, 23 Aug 2021 20:24:02 -0700
-From: "Yu, Mingli" <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] jemalloc: improve reproducibility
-Date: Tue, 24 Aug 2021 11:20:37 +0800
-Message-ID: <20210824032037.6791-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.29.2
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 spf.securedserverspace.com}: parse error for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=45220 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.93)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1mIRdV-0003rk-G3; Tue, 24 Aug 2021 11:18:26 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-colorlog: Upgrade 5.0.1 -> 6.4.1
+Date: Tue, 24 Aug 2021 11:18:12 +0300
+Message-Id: <20210824081816.1806-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.17.1
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Upgrade to release 6.4.1:
 
-Remove build host info from config file to improve reproducibility.
+- Renamed colorlog.logging to colorlog.wrappers
+- Import log levels from the logging module
+- Dropped support for Python 2 and Python versions below 3.5
+- Added type hints and added mypy to CI
+- Support 256 colour ANSI codes
+- Support "light" ANSI codes
+- Support the NO_COLOR environment variable, and a no_color option
+- Updated various examples and documentation
+- Merged TTYColoredFormatter into ColoredFormatter, and ensure no
+  ANSI codes are printed when colors are disabled
+- Replaced LevelFormatter with a far simpler implementation
+- Fixed version_info check for the Formatter validate parameter
+- Define formatMessage instead of format, so that ColoredRecord is
+  used in fewer places
+- Use setuptool's "normalised" format for the version number
+- Add PEP 561 typing marker so mypy can find type annotations
+- Renamed internal modules
+- colorlog.colorlog is now colorlog.formatter
+- colorlog.logging is now colorlog.wrappers
+- Removed colorlog.escape_codes object so that the
+  colorlog.escape_codes module can be imported and used
+- Import log levels from the logging module
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-devtools/jemalloc/jemalloc_5.2.1.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+ .../{python3-colorlog_5.0.1.bb => python3-colorlog_6.4.1.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-colorlog_5.0.1.bb => python3-colorlog_6.4.1.bb} (75%)
 
-diff --git a/meta-oe/recipes-devtools/jemalloc/jemalloc_5.2.1.bb b/meta-oe/recipes-devtools/jemalloc/jemalloc_5.2.1.bb
-index b5d53bb11..d4fed864d 100644
---- a/meta-oe/recipes-devtools/jemalloc/jemalloc_5.2.1.bb
-+++ b/meta-oe/recipes-devtools/jemalloc/jemalloc_5.2.1.bb
-@@ -28,6 +28,12 @@ EXTRA_AUTORECONF += "--exclude=autoheader"
+diff --git a/meta-python/recipes-devtools/python/python3-colorlog_5.0.1.bb b/meta-python/recipes-devtools/python/python3-colorlog_6.4.1.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-colorlog_5.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-colorlog_6.4.1.bb
+index 61b8152a1e..59a0e94939 100644
+--- a/meta-python/recipes-devtools/python/python3-colorlog_5.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-colorlog_6.4.1.bb
+@@ -7,4 +7,4 @@ inherit pypi setuptools3
  
- EXTRA_OECONF:append:libc-musl = " --with-jemalloc-prefix=je_"
+ PYPI_PACKAGE = "colorlog"
  
-+do_install:append() {
-+	sed -i -e 's@${STAGING_DIR_HOST}@@g' \
-+               -e 's@${STAGING_DIR_NATIVE}@@g' \
-+               -e 's@${WORKDIR}@@g' ${D}${bindir}/jemalloc-config
-+}
-+
- do_compile_ptest() {
- 	oe_runmake tests
- }
+-SRC_URI[sha256sum] = "f17c013a06962b02f4449ee07cfdbe6b287df29efc2c9a1515b4a376f4e588ea"
++SRC_URI[sha256sum] = "af99440154a01f27c09256760ea3477982bf782721feaa345904e806879df4d8"
 -- 
-2.29.2
+2.17.1
 
