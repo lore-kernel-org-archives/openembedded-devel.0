@@ -1,94 +1,80 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.2])
- by mx.groups.io with SMTP id smtpd.web11.8360.1629854172739227862
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.web08.8981.1629857723101160018
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Aug 2021 18:16:13 -0700
+ Tue, 24 Aug 2021 19:15:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=LIsRX4wD;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1629854170; i=@fujitsu.com;
-	bh=enk1nQev4ktz+fG3aYFdQlIpweva4QUHR8bXSb+4PVw=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=LIsRX4wDbHieQRb1rvwgHHcPiWXiXaJkgR72a6bt2Y7CBvQp7j6RBjc3ATzJFvwru
-	 r7HqI/MKPN6XvXiKuqGEpTTUMqEr2Dzgj/cxNfANYInuRkaZRcAtkzkBsUlX6Thnne
-	 vzTYUVl5L58sKOSjCdLaCQCmJ2sSlwq0nLvgiShddxzR3aQhXc6tBT/cmZmWEjw5IZ
-	 kMsq8LgZj34kAx/LzPIWbTxLLgffq5dLrrwjJ/orspt9O8mQdCdEm0rIJ1VZtCx+oy
-	 a5EPxoeJLZyjvH/yZ3Yv+kT8DvfYqyBQ2uTGE8jk43IVSAWVvgQ2GgfnKbCH9oAFfS
-	 T9NIVSq1P79KQ==
-Received: from [100.112.192.29] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-west-1.aws.symcld.net id 1B/EC-25315-AD995216; Wed, 25 Aug 2021 01:16:10 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+GYqntzpmq
-  iwdpdBhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bftwfsBXe4Kj4v3cXcwHiRs4uRi0NIYDaT
-  xJdFb5ggnBOMEh3HNrF2MXJysAnoSHS86GYBsUUE9CWWzt7DDGILC/hLtP9YBBZnEVCVWHxxD
-  1g9r4CbxJz/nUwgtoSAgsSUh++ZIeKCEidnPgGrZxaQkDj44gUzRI2ixPadZ1gg7AqJ14cvMU
-  9g5JmFpGUWkpYFjEyrGC2SijLTM0pyEzNzdA0NDHQNDY10DS2B2MREL7FKN1EvtVS3PLW4RNd
-  QL7G8WK+4Mjc5J0UvL7VkEyMwkFIKDkzYwbj/9Qe9Q4ySHExKoryXtVQThfiS8lMqMxKLM+KL
-  SnNSiw8xynBwKEnwfpkOlBMsSk1PrUjLzAEGNUxagoNHSYQ3GiTNW1yQmFucmQ6ROsWoKCXO6
-  zMDKCEAksgozYNrg0XSJUZZKWFeRgYGBiGegtSi3MwSVPlXjOIcjErCvNNApvBk5pXATX8FtJ
-  gJaHEBH9jikkSElFQDE0/T/tPS9juqzm08ISXT51x1WXuC9cmZIc84fwlWn+K1tdBiibi325Z
-  hmujndx4To44fa7/4+1Dr0ZVbhco0tgaZWwfFPFuVeXDK/BWf7kzrZ+ReVDBFyjPiuvDdd1vf
-  RghrrS24lMw1h2mDdN++rZHNZxacu7sz93LuIVmW3uf7eSRW/Fbna5eOOyHa8V9rmeNOgVn5D
-  Ftn/i285hD5ffu2WZEHWVr0VCNb/7Nciywol058c2Cp9qN+neK2ZlalIMfcb9IPQhYzzf6zn3
-  fZ/lSNaa6VDWcuHDs4a/E2lWebKg/VLd2gdJy7TNLG5/t+4x3f5G0cZ+yXa06eJZ/otvXS+QT
-  D3nXSG+LDBI6Y7lBiKc5INNRiLipOBABpze3kHwMAAA==
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-29.tower-267.messagelabs.com!1629854169!85329!1
-X-Originating-IP: [62.60.8.149]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.4; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 2467 invoked from network); 25 Aug 2021 01:16:09 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-29.tower-267.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 25 Aug 2021 01:16:09 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17P1G47w016816
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Aug 2021 02:16:09 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Wed, 25 Aug 2021 02:16:02 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-perl] [PATCH] libio-socket-ssl-perl: upgrade 2.071 -> 2.072
-Date: Wed, 25 Aug 2021 09:15:55 +0800
-Message-ID: <1629854155-7095-1-git-send-email-zangrc.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=mzbI/QHD;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: ticotimo@gmail.com)
+Received: by mail-pl1-f173.google.com with SMTP id c4so13402020plh.7
+        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Aug 2021 19:15:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=IJc2Na3U4AuFHnF8tF5G6LJg0e3CakK2Q0Pm7C+47cI=;
+        b=mzbI/QHD/sEqT8inSb7s3NtKPS+s6rq2CUvHfTGptgjpXTMuptM5FePLmbCZW+wUK8
+         56h1EG6baLrL+IpDSQ3mcW9IsxW1DapF+MovYcY7geTIcE5OJyDaiQsnYSjaMaloQBn+
+         W63afABtItS2+YNm/nOZ5Z7OfBWb1J3eSFYM7dAiEwP5M8sAU75ieP8+WyfpgUk2xZlg
+         7hiZbvqz4+IuPslZVfQTBcNkkt8U5KLWsEzLdHoVe2LLRGS3cOgdTNZZEAOFWBWPfQ+U
+         nJ02yvbzM2en05xFbG4H0tJ5qX4ETuL4wBYlaeLreQUMU6yX6m6ipn7DonG12HqiOcRw
+         2pLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=IJc2Na3U4AuFHnF8tF5G6LJg0e3CakK2Q0Pm7C+47cI=;
+        b=ElH01HC9vVS+F9RXgoOF+IUBLxFgMOQe1VPtscjUVpgpqxYmD0/3NDUt6THLvahmKL
+         jvt3wayCiWXuIbM29vhstCe5jxs0PxA2f3mTqexpHIk4tMts7F3u5SciAFtiNSuWkBJd
+         fGkARMtsqoQzNOStnDCd557iGTSpNx474opUoNmzJrFu6hyZ2W4mFrYeQanCGGYIXJwM
+         I5L9OGrTWTufaKeDV85FlpdS5jakDOJCd0kieEXsjgMywxkHRFNQN85EYtiwyo8/YP8O
+         /9J73pF+3SFU9l0oVSkJQq+AbYvSaJ1CwlO5zU+IamhIZcpQRj8l/+ek4vVxg6SVPFvY
+         wz/Q==
+X-Gm-Message-State: AOAM533eLTkHXYV5GVG2Ke00cwHcWKWJxmY/Dd0ji85+1FZ7/QAnMhHd
+	ZeaU1L62jUb1PDIaenCW0mp1wEZD6gc=
+X-Google-Smtp-Source: ABdhPJw3bJjpGlrJdor4EZVCMTHvryCpZiRgY+ekxG8KpL777APShmF3GapfrvmrqdrBipYe5YY+lA==
+X-Received: by 2002:a17:90a:8b08:: with SMTP id y8mr7796758pjn.173.1629857722168;
+        Tue, 24 Aug 2021 19:15:22 -0700 (PDT)
+Return-Path: <ticotimo@gmail.com>
+Received: from thetis.hsd1.or.comcast.net ([2601:1c0:6000:1830::47f3])
+        by smtp.gmail.com with ESMTPSA id c15sm20085198pfl.181.2021.08.24.19.15.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 24 Aug 2021 19:15:21 -0700 (PDT)
+From: "Tim Orling" <ticotimo@gmail.com>
+X-Google-Original-From: Tim Orling <timothy.t.orling@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Tim Orling <timothy.t.orling@intel.com>
+Subject: [meta-python][PATCH] python3-django_2.2.x: only check upstream 2.2.x
+Date: Wed, 25 Aug 2021 02:15:11 +0000
+Message-Id: <20210825021511.1393477-1-timothy.t.orling@intel.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-2.072
-- add PEM_certs2file and PEM_file2certs in IO::Socket::SSL::Utils based
-  on idea by rovo89 in #101
-- certs/*.p12 used for testing should now work with OpenSSL 3.0 too #108
-- update public suffix database
+AUH currently sees this recipe needing to upgrade to 3.x but we do
+not want that. We are intentionally pinning at the 2.2.x LTS for this
+recipe.
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+References:
+https://www.djangoproject.com/download/
+
+Signed-off-by: Tim Orling <timothy.t.orling@intel.com>
 ---
- ...-socket-ssl-perl_2.071.bb => libio-socket-ssl-perl_2.072.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libio/{libio-socket-ssl-perl_2.071.bb => libio-socket-ssl-perl_2.072.bb} (94%)
+ meta-python/recipes-devtools/python/python3-django_2.2.24.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.071.bb b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.072.bb
-similarity index 94%
-rename from meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.071.bb
-rename to meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.072.bb
-index 4ab5531ce6..d49b2cd5eb 100644
---- a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.071.bb
-+++ b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.072.bb
-@@ -22,7 +22,7 @@ RDEPENDS:${PN} += "\
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz \
-            file://run-ptest \
-           "
--SRC_URI[sha256sum] = "40da40948ecc9c787ed39c95715872679eebfd54243721174993a2003e32ab0a"
-+SRC_URI[sha256sum] = "b5bee81db3905a9069340a450a48e1e1b32dec4ede0064f5703bafb9a707b89d"
+diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.24.bb b/meta-python/recipes-devtools/python/python3-django_2.2.24.bb
+index 2c0bcf720e..982362bdd1 100644
+--- a/meta-python/recipes-devtools/python/python3-django_2.2.24.bb
++++ b/meta-python/recipes-devtools/python/python3-django_2.2.24.bb
+@@ -1,4 +1,8 @@
+ require python-django.inc
++
++# Pin to 2.2.x LTS releases ONLY for this recipe
++UPSTREAM_CHECK_REGEX = "/${PYPI_PACKAGE}/(?P<pver>(2\.2\.\d*)+)/"
++
+ inherit setuptools3
  
- S = "${WORKDIR}/IO-Socket-SSL-${PV}"
- 
+ SRC_URI[md5sum] = "ebf3bbb7716a7b11029e860475b9a122"
 -- 
-2.25.1
+2.30.2
 
