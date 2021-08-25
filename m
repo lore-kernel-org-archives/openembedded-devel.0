@@ -1,77 +1,107 @@
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web12.10243.1629865834488097502
+Received: from mail-qv1-f53.google.com (mail-qv1-f53.google.com [209.85.219.53])
+ by mx.groups.io with SMTP id smtpd.web10.10438.1629867302446074156
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Aug 2021 21:30:34 -0700
+ Tue, 24 Aug 2021 21:55:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=mGXV9q6d;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id u11-20020a17090adb4b00b00181668a56d6so3844395pjx.5
-        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Aug 2021 21:30:34 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Em8qqyMI;
+ spf=pass (domain: gmail.com, ip: 209.85.219.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f53.google.com with SMTP id v1so13037705qva.7
+        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Aug 2021 21:55:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=me2sAjf1FreKWlLkQRR8LIcXZYGcfLaFYbhSWKSmDL8=;
-        b=mGXV9q6dDBb85OgiRV7rq+J0HuxEye3T7F9gMB5SdonBl4pgzZUEBw3AY0Ss1JeLsS
-         Yy3HwcWbJ0meF6Fu3lKv1ChtWMGhPqgXiySGywe/TsyqueTlkUWPQ79ak234xYo6kKa8
-         ANq4aHb4uYl7S/tl1WWfprHDrN9pBeyfyXv+250vcCoYhuUDC33WSvo95pH41jXjGllc
-         wvXn8nFFKBroTvomaV7wc7myzfJS9gtyz1ztTvZbjLjC4ptpFL46ud6MbPWnuUYkjLIS
-         xUFsoQODkMmL+HtBsPANxP3a3FoiR9j/sqt48qCKgyszcxTEtlF8T/tledS926fFTmHH
-         m+Ww==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=BQsUFUumD8kvThZCEDdUYkZzNrC8dIUc2z4lgfOVi60=;
+        b=Em8qqyMIWL5cPfLexXVzUzDGWND9zhAuFGRcJUuu39N2L7ZR0q/V4dmOBS7q2YeqMO
+         k1korH+aP4Cn8SoPlcL8c1pU/1rYWgJ8Ih0/Hkabr6a+rI9t0Ug70HHxruN7n1n6jvda
+         xVSr9WZkO0tBd/11BvQFd1FkDDxiUDWz+GzcAS2JRNq1k/1mBoYWoBu5RPQFMXaimeR7
+         Xok0KVnTDbgJy7IlwLQXA8gdnm2FITXTucy8TosiPfwk3VEnm130+dwhsifSmhaH8PFy
+         vLQUrODI2Mlma2pjFZ8w+AijejTyZbd50815EowApxETF5CL7FoWDLlbt87aYUnwSREX
+         bwpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=me2sAjf1FreKWlLkQRR8LIcXZYGcfLaFYbhSWKSmDL8=;
-        b=CawMXck14VVPog2lOg1tVPpc+/Y00pc7VofupcbsUUWExO38OBvDaR/QfzA8DI0BiK
-         IxOXX3aEG0T3Pu6QWXGP6QciIkhA9N/AMATtMtfkjIqHxi6jtKXf9bn1sQ9LjJkoWq+l
-         blSEQgLqN5jy/zz113pIKhZ9me4O+2sMjGTzezJIBSbY3h05YDcckv8TgiBoZsVJgQ5a
-         fOhscxkOwHRXXqK84idJ9XpAGQirDAAsKAWeNLg/cnfQ8ABTDUYyIYiJNmpNz8d2Pi/Y
-         BsDJz2Xy1B8SfwncXPQFTyy/xLSWbLeKujL48OCdB+zM9WSw1VV1hYns5ux61OwFuB8w
-         W6FA==
-X-Gm-Message-State: AOAM5339x8xc6LQ3PShjnOFB+dGOMCU/y3+8IEaB7jj/6NfhA0jePlz+
-	f2IJ99AIWbdLc66wHR8KRVH4uKGiZj4=
-X-Google-Smtp-Source: ABdhPJxBubICdGpKF7VIMcxzYpHT3eld4FcZ2mABNOlgKTgIerobYKjvIvHgNAiYIN+AAydT+bfVHw==
-X-Received: by 2002:a17:902:ed84:b0:137:cb1b:89cb with SMTP id e4-20020a170902ed8400b00137cb1b89cbmr787522plj.56.1629865833971;
-        Tue, 24 Aug 2021 21:30:33 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:9989:489c:6f9c:8144])
-        by smtp.gmail.com with ESMTPSA id b190sm23864007pgc.91.2021.08.24.21.30.33
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Aug 2021 21:30:33 -0700 (PDT)
-From: "Armin Kuster" <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][dunfell][PATCH 2/2] tcpdump: Exclude CVE-2020-8036 from check
-Date: Tue, 24 Aug 2021 21:30:30 -0700
-Message-Id: <20210825043030.33513-2-akuster808@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210825043030.33513-1-akuster808@gmail.com>
-References: <20210825043030.33513-1-akuster808@gmail.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=BQsUFUumD8kvThZCEDdUYkZzNrC8dIUc2z4lgfOVi60=;
+        b=bQ/D9kIbsTAjHiEilppEBpRuibnuSwld2dGnQitaVWOJX9gPoC2h6YfppZqWhDSigK
+         ffWdg8ADhYL1CVKsNCQwEKmB4lYN1pcb+eyFjN4VSmtoJGBIzY7JKZupGh4A1Uef8zoX
+         edONPPkUVtHrfdp+FCag45IGH1ot+mNwCSzOma91VyvaTJsLq4fsq42Jb7dogwYYgxIK
+         TL+N6e0EkZswE8F/hltYMsThhUzwkx9PnLwb/G7ol7pbwFHxDWADWWIukUTJy+izqX1s
+         FljBN4CU58nhBV0KMajbv1Ifl3WX4WrVaJzLLMWCVR3M1nhi6nPfl90Q0DuIIuR4Js8b
+         c2Fg==
+X-Gm-Message-State: AOAM533nzTemYfKe1Swb+1cqqLpaBdE4ESB9x304ZExNVQ8r2dRSHwmY
+	nSImgC13rFk8WXlJuFtGAGfr4UE3R64q5G3pVVo=
+X-Google-Smtp-Source: ABdhPJxIuXq+s3P2nIX7SdqLB+ZQpQtn0JLDBsCQvSABmisfSN2eHk529CTJDP1DAY9dnUIBcsgwnwewm/6yv8/izkk=
+X-Received: by 2002:ad4:59cf:: with SMTP id el15mr15512860qvb.55.1629867301563;
+ Tue, 24 Aug 2021 21:55:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <a131f078-9c98-5677-6660-484595441866@gmail.com>
+In-Reply-To: <a131f078-9c98-5677-6660-484595441866@gmail.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Tue, 24 Aug 2021 21:54:34 -0700
+Message-ID: <CAMKF1sr5cEq57G2gOADDzzOvtcQOfu9WS0FjvoDzBz-JMwmHyw@mail.gmail.com>
+Subject: Re: dunfell merge request Aug 24th
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-This issue was introduce in 4.9 by 246ca110 Autosar SOME/IP protocol support which is after
-4.9.3
+merged thanks Armin
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb | 5 +++++
- 1 file changed, 5 insertions(+)
-
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
-index 8f7bd59f18..2ea493863a 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
-@@ -50,3 +50,8 @@ do_install_append() {
- do_compile_ptest() {
-     oe_runmake buildtest-TESTS
- }
-+
-+#https://nvd.nist.gov/vuln/detail/CVE-2020-8036
-+#Introduce in 4.9 by 246ca110 Autosar SOME/IP protocol support
-+#which does not exist in 4.9.3
-+CVE_CHECK_WHITELIST += "CVE-2020-8036"
--- 
-2.25.1
-
+On Tue, Aug 24, 2021 at 9:25 PM akuster808 <akuster808@gmail.com> wrote:
+>
+> The following changes since commit 85f8047c71047d93cf79a954142157f85079968d:
+>
+>   php: Upgrade to 7.4.16 (2021-07-26 16:05:08 -0700)
+>
+> are available in the Git repository at:
+>
+>   https://git.openembedded.org/meta-openembedded dunfell-next
+>
+> for you to fetch changes up to 4a0d93d250576177e1237fa559f55c4f9d371809:
+>
+>   nginx: fix CVE-2021-3618 (2021-08-21 12:16:49 -0700)
+>
+> ----------------------------------------------------------------
+> Anatol Belski (1):
+>       backport: xmlsec1: Fix configure QA error caused by host lookup path
+>
+> Jate Sujjavanich (1):
+>       ufw: Fix interpreter for installed ufw and test ufw
+>
+> Joe Slater (2):
+>       php: move to version 7.4.21
+>       nginx: fix CVE-2021-3618
+>
+> Kai Kang (1):
+>       libdbi-perl: fix CVE-2014-10402
+>
+> Khem Raj (2):
+>       fvwm: Package extra files and man pages
+>       fvwm: Fix build time paths in target perl/python scripts
+>
+> Michael Opdenacker (1):
+>       bigbuckbunny-1080p: fix sample video URL
+>
+>  .../recipes-multimedia/sample-content/bigbuckbunny-1080p.bb     |  2 +-
+>  .../Add-code-to-detect-openembedded-python-interpreter.patch    |  8 +--
+>  .../ufw/ufw/setup-only-make-one-reference-to-env.patch          | 14 +----
+>  meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2014-10402.patch  | 56
+> ++++++++++++++++++
+>  meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb              |  4 +-
+>  meta-oe/recipes-devtools/php/{php_7.4.16.bb => php_7.4.21.bb}   |  3 +-
+>  meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb                     | 23
+> ++++++--
+>  .../xmlsec1/xmlsec1/ensure-search-path-non-host.patch           | 22
+> +++++++
+>  meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.30.bb               |  1 +
+>  meta-webserver/recipes-httpd/nginx/files/CVE-2021-3618.patch    | 89
+> +++++++++++++++++++++++++++++
+>  meta-webserver/recipes-httpd/nginx/nginx.inc                    |  1 +
+>  11 files changed, 199 insertions(+), 24 deletions(-)
+>  create mode 100644
+> meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2014-10402.patch
+>  rename meta-oe/recipes-devtools/php/{php_7.4.16.bb => php_7.4.21.bb} (99%)
+>  create mode 100644
+> meta-oe/recipes-support/xmlsec1/xmlsec1/ensure-search-path-non-host.patch
+>  create mode 100644
+> meta-webserver/recipes-httpd/nginx/files/CVE-2021-3618.patch
