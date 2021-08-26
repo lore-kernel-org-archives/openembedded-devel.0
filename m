@@ -1,57 +1,74 @@
-Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
- by mx.groups.io with SMTP id smtpd.web10.29634.1629979607106904884
+Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com [209.85.208.172])
+ by mx.groups.io with SMTP id smtpd.web08.30469.1629985437327798450
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Aug 2021 05:06:48 -0700
+ Thu, 26 Aug 2021 06:43:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=axis-central1 header.b=m1OaB2Y0;
- spf=pass (domain: axis.com, ip: 195.60.68.18, mailfrom: peter.kjellerstedt@axis.com)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=okU/61oP;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.172, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f172.google.com with SMTP id s12so5322549ljg.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Aug 2021 06:43:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; q=dns/txt; s=axis-central1; t=1629979607;
-  x=1661515607;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=RKjaUMw3toSB9kuUesnB3kjGCUdWNrjO5oKpd+jFBVo=;
-  b=m1OaB2Y0oE/odTjL1aCgJEWCBymhhAHPZTL/YoC+4c5/n/uv/AIZpoa+
-   /doDK6QZ/AS0jE/V3SfuQTKjQPhr0EG4QweCf7A+6kahG2zAwUwm3Teeo
-   sxVyPoNKcQklChAo+xR2UWt5//K3aKtOxSWq4X9pWf+fTiAuon1WlAh7U
-   Q4/n5KfDcqDB1HUulm5jGikPOLcAlseeFy29xMLX+ByLodZUa91UStc5V
-   BNB2LVRnRNrRKB1kip+dn7NmEnQUpfELNFWWje1ftAs8DSeoY+v/8L/ev
-   X7EY95/9I8lf0OU6nWLrc5bMa9OCHn6DqOSFxETZYz40OYl2nkToCUyDl
-   Q==;
-From: "Peter Kjellerstedt" <peter.kjellerstedt@axis.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] poppler: Explicitly enable/disable boost together with splash
-Date: Thu, 26 Aug 2021 14:06:41 +0200
-Message-ID: <20210826120641.28049-1-pkj@axis.com>
-X-Mailer: git-send-email 2.21.3
+        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Fck/A42bFS9TPh6foNaUrk1+evLGehQ08VNVdo67of8=;
+        b=okU/61oPMlbkUzgOwAUi9vTWKlh2x9KhPGYpEMAosMnkWU24QMpxvlGoz8lfjp21bU
+         LydHZNuwPb5OH42gWpJoVGWZprMcdB1DF7wSA4oW5cd61Le5GUaJ0w3/5Xu61Hf/JIHR
+         JaJzZ23yw7K9fdrFU2C957u4qgCBrdxsY5JoWVVLB0Yng69V4FNlbQdKT/2MlNwEp6qa
+         RaR9HB4oGxTgsBW3DI8pXpp7QPgUR2X9Kas983WPp+NiYTFF/7p2DGHo9iq9M6WJlcPf
+         kfSLkle4iq4ZXTMy0jRxrrZY7TGULoDKsEF2NM8b1y/Z4aRZLC6Cf5LzsGH8WptxvDXe
+         zeTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Fck/A42bFS9TPh6foNaUrk1+evLGehQ08VNVdo67of8=;
+        b=Alo3odjOZAJgN6lyOb11f6B8pPGxmKy8/m/toBtxmOGe9+VTUKBivKTEZxBpC63UxC
+         GstVbGy7iWmhufhjBNSVhH0e+lPxK5sguHpAgZWMs5kHVUY2LhTwTBeLivpJWraaRpYV
+         KGHwxnA/pDT37eHKNXZDRYxMRSb5i+dCDAhddsrVB98E2stnuxLOx3HYVmP9hkJ8QMPg
+         w2oOCtG2epQ6NacE8WWbDj37EWHcEDjqpYzBpAzlweeTgsDnPRuQqFvFjGd9S3JKfP6k
+         GZFIOzr8Ipxb4dRFXKTcIk2l/3csYXMphUwVemUsRnqNJHW6RWMhKkbF8z7RSmg1urAV
+         op+Q==
+X-Gm-Message-State: AOAM5302akvF0vXYHwpb7Nnj/hGoyBXTlcxKyQCslnn2VF5g52sLuRKF
+	7m82SYBGQ+OxfPWBOEfTM6GGeJImdiKpoweF
+X-Google-Smtp-Source: ABdhPJyNsF5JVNSeJPAejcpUpO7RRQr0ykPArCEjhbM2X3Sd8p6NMNtgF+yvHawSfPHLQ0hZNr8qpA==
+X-Received: by 2002:a2e:b4b0:: with SMTP id q16mr3272008ljm.184.1629985434711;
+        Thu, 26 Aug 2021 06:43:54 -0700 (PDT)
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from localhost.localdomain (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
+        by smtp.gmail.com with ESMTPSA id p18sm327571lfr.12.2021.08.26.06.43.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 26 Aug 2021 06:43:54 -0700 (PDT)
+From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-oe][PATCH 1/5] font-adobe-100dpi: fix UPSTREAM_CHECK_REGEX
+Date: Thu, 26 Aug 2021 15:43:23 +0200
+Message-Id: <20210826134327.2535535-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Return-Path: pkj@axis.com
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-This avoids the following error when splash is not enabled in
-PACKAGECONFIG:
+'-100dpi' is part of the package name, not version.
 
-  -- Could NOT find Boost (missing: Boost_INCLUDE_DIR) (Required is at
-     least version "1.58.0")
-  CMake Error at CMakeLists.txt:196 (message):
-    -- Boost recommended for Splash.  Use ENABLE_BOOST=OFF to skip.
-
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- meta-oe/recipes-support/poppler/poppler_21.08.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-graphics/xorg-font/font-adobe-100dpi_1.0.3.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler_21.08.0.bb b/meta-oe/recipes-support/poppler/poppler_21.08.0.bb
-index d3135a44c..1fc3bf3f4 100644
---- a/meta-oe/recipes-support/poppler/poppler_21.08.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_21.08.0.bb
-@@ -21,7 +21,7 @@ PACKAGECONFIG[curl] = "-DENABLE_LIBCURL=ON,-DENABLE_LIBCURL=OFF,curl"
- PACKAGECONFIG[openjpeg] = "-DENABLE_LIBOPENJPEG=openjpeg2,-DENABLE_LIBOPENJPEG=none,openjpeg"
- PACKAGECONFIG[qt5] = "-DENABLE_QT5=ON,-DENABLE_QT5=OFF,qtbase qttools-native"
- PACKAGECONFIG[nss] = "-DWITH_NSS3=ON,-DWITH_NSS3=OFF,nss"
--PACKAGECONFIG[splash] = "-DENABLE_SPLASH=ON,-DENABLE_SPLASH=OFF,boost"
-+PACKAGECONFIG[splash] = "-DENABLE_SPLASH=ON -DENABLE_BOOST=ON,-DENABLE_SPLASH=OFF -DENABLE_BOOST=OFF,boost"
+diff --git a/meta-oe/recipes-graphics/xorg-font/font-adobe-100dpi_1.0.3.bb b/meta-oe/recipes-graphics/xorg-font/font-adobe-100dpi_1.0.3.bb
+index 8fcdb7ca4..36f05b727 100644
+--- a/meta-oe/recipes-graphics/xorg-font/font-adobe-100dpi_1.0.3.bb
++++ b/meta-oe/recipes-graphics/xorg-font/font-adobe-100dpi_1.0.3.bb
+@@ -10,6 +10,8 @@ DEPENDS = "util-macros-native font-util-native bdftopcf-native font-util"
+ RDEPENDS:${PN} = "encodings font-util"
+ RDEPENDS:${PN}:class-native = "font-util-native"
  
- # surprise - did not expect this to work :)
- inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
++UPSTREAM_CHECK_REGEX = "font\-adobe\-100dpi\-(?P<pver>\d+(\.\d+)+).tar.gz"
++
+ inherit features_check
+ # depends on bdftopcf-native -> virtual/libx11
+ REQUIRED_DISTRO_FEATURES = "x11"
+-- 
+2.25.1
+
