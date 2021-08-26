@@ -1,95 +1,88 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.68])
- by mx.groups.io with SMTP id smtpd.web09.4314.1630042909857234268
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.67])
+ by mx.groups.io with SMTP id smtpd.web10.4359.1630043189288360222
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Aug 2021 22:41:50 -0700
+ Thu, 26 Aug 2021 22:46:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WqvMjMkk;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.68, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=xIiah3aF;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.67, mailfrom: zhengrq.fnst@fujitsu.com)
+Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1630042898; i=@fujitsu.com;
-	bh=tsLlHpiSLKPQ2WCqeJqMK372d80yBhsjiFbthDAdmJw=;
+	s=170520fj; t=1630043175; i=@fujitsu.com;
+	bh=0UIOpaPZhRveZbJyiCqI2Fzbhxg7P1qjkLx5RI6Qs3c=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=WqvMjMkkhNsz+xQSYvbicBWO7vn5XLRcILqDVSi9yEwetPK4bsrJwy/gIcwZAADu7
-	 jhWcg/pNJml49K8FGhUQKe1nwDM4jhnZ80tFLp+XMPbVEiqbRWS27JhPV7gQI+F25p
-	 YswWUg7lSlQNJbDLixkwIJbiTPosEcfc59jdHFGz1yhM9Dtcw850uhfRf1W6Ym3+Vv
-	 BtaC+tVHy0rukMTnBeTwwQ+1P8wdPvqzMhsLVZgLdSRozdj0w7hd92YEwb5nQdYEmN
-	 CmuK5xab3Sf1Yo8RWdPUT9VxUwyL0BW9PyBvtb+SdIoXqUnBYT6o6iNn/O6fBchfyX
-	 lnl8BkT9JoAIg==
+	b=xIiah3aFQfnDmgaPjyZW2vajgSjsjP9vRuks05aG1uLU39PuQVpr4UWZcb1jzoThm
+	 fPGGKSZ49TUmE8wBy6jF99GJI5EdbRUmhkLyC1QKIzfKRL4DAiwYyU67Qs8ohoccoV
+	 qw9cK8NEUZ4iMFMY5Ge/zkFyRNsf2YX2Rq5i0Wtekwdt5bBlYBMhOCPwhBN85Mhel/
+	 Him1v5yEfRWI0ayW0WjCuxGEgiaop7Oebz4EhBpyb1gbHhBh2VK6lMhG84o4sLfpk0
+	 m8JrPvkheV8Daam4Mccb3I4p1rzpe3EdOGz3kDvcAvdfk+U9hHgdt8tLFsJNYYTuft
+	 DCi+NMTQUOZ6g==
 Received: from [100.112.196.227] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-b.eu-west-1.aws.symcld.net id AF/84-28239-11B78216; Fri, 27 Aug 2021 05:41:37 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprBIsWRWlGSWpSXmKPExsViZ8MxVVewWiP
-  RoHmjgsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvH9422mgrdcFesuLmBsYOzg6mLk4hASmM0k
-  cfrUOXYI5wSjxLMrd1i7GDk52AR0JDpedLOA2CIC+hJLZ+9hBrGFBfwlLn/5zAhiswioSsy9c
-  5kNxOYVcJfY8P84mC0hoCAx5eF7Zoi4oMTJmU/A5jALSEgcfPGCGaJGUWL7zjMsEHaFxOvDl5
-  gnMPLMQtIyC0nLAkamVYwWSUWZ6RkluYmZObqGBga6hoZGuoaWZrpGhiZ6iVW6SXqppbrlqcU
-  luoZ6ieXFesWVuck5KXp5qSWbGIGBlFJw5NoOxgOvP+gdYpTkYFIS5d2RrpEoxJeUn1KZkVic
-  EV9UmpNafIhRhoNDSYJ3XQVQTrAoNT21Ii0zBxjUMGkJDh4lEd6eSqA0b3FBYm5xZjpE6hSjL
-  seEv/MWMQux5OXnpUqJ8zJXARUJgBRllObBjYBF2CVGWSlhXkYGBgYhnoLUotzMElT5V4ziHI
-  xKwrxhIKt4MvNK4Da9AjqCCeiIAj5VkCNKEhFSUg1MB8MmOPdZXVveUpHlfMHD2EwoxMhcuma
-  B6vStxrOkpD43uDnlb5JcF9T0JKlnbdnWORWPPkS8LomfwC24IsB9487koNlRMXMmeLv/PF2x
-  ++455qdz23vrtBsKi4yc3UxS6hQdDQP8CmUuiW7evtz0X/XMjbf6t09N132iEGZmc+Xl8c1Xp
-  qb925Aw+/e/1aveWs//s9btS033gkePmOX/fn7osWyz9OmQ+xq7vH4yCrv3Xvh+3EpbU1Ixwb
-  HH2L0iuPhtusY/A1YBj+5T3ROiI09Z1Ea+nSm76q39hRs1r9nkNTiv6u+Z5u1sfLZS6JyfeWh
-  //DrBVP3OJt9XizSu98aff7Hw4vnEdT9eJQcpsRRnJBpqMRcVJwIA4y1K3CsDAAA=
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-17.tower-287.messagelabs.com!1630042897!120251!1
+	by server-3.bemta.az-b.eu-west-1.aws.symcld.net id 06/F0-28459-72C78216; Fri, 27 Aug 2021 05:46:15 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupikeJIrShJLcpLzFFi42Kxs+GYqqtWo5F
+  osGevvsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmrHk0UamgjccFbPv1DcwTufoYuTiEBKYzSSx
+  /vkKJghnD6PE1BUdrF2MnBxsAroS5x6vZQexRQT0JZbO3sMMYgsLBEg07FjCAmKzCKhKTO48C
+  RbnFXCXeHR1GpgtIaAgMeXhe6i4oMTJmU/A6pkFJCQOvngBFOcAqlGUmD1dHqK8QuL14UvMEx
+  h5ZiHpmIWkYwEj0ypGi6SizPSMktzEzBxdQwMDXUNDI11DSwtdI0NTvcQq3SS91FLd8tTiEl1
+  DvcTyYr3iytzknBS9vNSSTYzAIEopOHZ9B+PV1x/0DjFKcjApifLuSNdIFOJLyk+pzEgszogv
+  Ks1JLT7EKMPBoSTBu64CKCdYlJqeWpGWmQMMaJi0BAePkghvTRVQmre4IDG3ODMdInWKUVFKn
+  HczSEIAJJFRmgfXBouiS4yyUsK8jAwMDEI8BalFuZklqPKvGMU5GJWEefeDTOHJzCuBm/4KaD
+  ET0OICPlWQxSWJCCmpBqYrSS/V1F4eCf+25svh/84fdI8zRxgeMIvpk9tole31Uq+LKafeoNr
+  63QWRHYv266tJt/AbnM1T+9RYrleU3Pz3oLnlj8X3J+zV07LO+27gXeG9aB6PhaaIs+6Zb6Gb
+  xVIuVDcyXJ4kKybc+2bmOeaEYO3q/5Vfulf5pXCeWlobdXw9F/tf/U/B65eJm06bHbjhW1EB6
+  +QjLefN/XRk2BMFcs/eXGUfy7g2MGWi3OE8v+M2/07Z1dXKHO9Jusz7sv/p9u8//dfVGlx/ZK
+  0vsfbZ90uXpbdXN6mVBXZaSVR+8T/5ZL9vy9N+ibCJxwLNZD5N8tlQeWZW5tdiM++K6V3dnex
+  yF4pXvom4oPSgV4mlOCPRUIu5qDgRADoc6ZgdAwAA
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-11.tower-291.messagelabs.com!1630043174!120721!1
 X-Originating-IP: [62.60.8.149]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 23505 invoked from network); 27 Aug 2021 05:41:37 -0000
+Received: (qmail 24769 invoked from network); 27 Aug 2021 05:46:14 -0000
 Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-17.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 27 Aug 2021 05:41:37 -0000
+  by server-11.tower-291.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 27 Aug 2021 05:46:14 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17R5fbXe027348
+	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17R5kEJ2028526
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Aug 2021 06:41:37 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
+	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Aug 2021 06:46:14 +0100
+Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 27 Aug 2021 06:41:35 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
+ (TLS) id 15.0.1497.18; Fri, 27 Aug 2021 06:46:12 +0100
+From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-pyephem: upgrade 3.7.7.1 -> 4.0.0.2
-Date: Fri, 27 Aug 2021 13:41:30 +0800
-Message-ID: <1630042890-53300-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-regex: upgrade 2021.8.3 -> 2021.8.27
+Date: Thu, 26 Aug 2021 10:55:55 +0800
+Message-ID: <1629946555-7256-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
+X-Originating-IP: [10.167.225.35]
 X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
--License-Update: Change to MIT License.
-
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- ...ython3-pyephem_3.7.7.1.bb => python3-pyephem_4.0.0.2.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-extended/python-pyephem/{python3-pyephem_3.7.7.1.bb => python3-pyephem_4.0.0.2.bb} (54%)
+ .../{python3-regex_2021.8.3.bb => python3-regex_2021.8.27.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-regex_2021.8.3.bb => python3-regex_2021.8.27.bb} (80%)
 
-diff --git a/meta-python/recipes-extended/python-pyephem/python3-pyephem_3.7.7.1.bb b/meta-python/recipes-extended/python-pyephem/python3-pyephem_4.0.0.2.bb
-similarity index 54%
-rename from meta-python/recipes-extended/python-pyephem/python3-pyephem_3.7.7.1.bb
-rename to meta-python/recipes-extended/python-pyephem/python3-pyephem_4.0.0.2.bb
-index 7cf88ec332..ce2a802849 100644
---- a/meta-python/recipes-extended/python-pyephem/python3-pyephem_3.7.7.1.bb
-+++ b/meta-python/recipes-extended/python-pyephem/python3-pyephem_4.0.0.2.bb
-@@ -1,10 +1,10 @@
- SUMMARY = "PyEphem astronomical calculations"
- HOMEPAGE = "http://rhodesmill.org/pyephem/"
+diff --git a/meta-python/recipes-devtools/python/python3-regex_2021.8.3.bb b/meta-python/recipes-devtools/python/python3-regex_2021.8.27.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-regex_2021.8.3.bb
+rename to meta-python/recipes-devtools/python/python3-regex_2021.8.27.bb
+index 2c35faf553..c869003c9f 100644
+--- a/meta-python/recipes-devtools/python/python3-regex_2021.8.3.bb
++++ b/meta-python/recipes-devtools/python/python3-regex_2021.8.27.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=f0a3e4a2554ebb89c0
  
--LICENSE = "LGPL-3.0"
--LIC_FILES_CHKSUM = "file://COPYING;md5=f288303760f6e5ceaafe3aaa32186ab1"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=9c930b395b435b00bb13ec83b0c99f40"
+ inherit pypi setuptools3
  
--SRC_URI[sha256sum] = "36b51a8dc7cfdeb456dd6b8ab811accab8341b2d562ee3c6f4c86f6d3dbb984e"
-+SRC_URI[sha256sum] = "d03de73ebf6a91681d597eb5b5d43bcf6f0c67e292bba2f9a974734b4f15757e"
+-SRC_URI[sha256sum] = "8935937dad2c9b369c3d932b0edbc52a62647c2afb2fafc0c280f14a8bf56a6a"
++SRC_URI[sha256sum] = "e9700c52749cb3e90c98efd72b730c97b7e4962992fca5fbcaf1363be8e3b849"
  
- PYPI_PACKAGE = "ephem"
- 
+ RDEPENDS:${PN} += " \
+ 	python3-stringold \
 -- 
 2.25.1
 
