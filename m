@@ -1,82 +1,92 @@
-Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com [209.85.208.180])
- by mx.groups.io with SMTP id smtpd.web11.30623.1629985600058809144
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web10.32122.1629990449882486244
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Aug 2021 06:46:40 -0700
+ Thu, 26 Aug 2021 08:07:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=MSkDdV/I;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.180, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f180.google.com with SMTP id m4so5208225ljq.8
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Aug 2021 06:46:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=featfttNzvwk21MyesnAj089FnND/hw472XgM8ZYd8o=;
-        b=MSkDdV/IqBGxU0QUIGn07fopPQZSv2BNNmbXnsJfYzfBVpevG/itBIY3WTNrpFORgq
-         zHXKhl3LVdqMyrt9mw/G0rfkuVYXapIO1V2sn3p+s4zGHEQ0+bj+Yhve7k++6qsjx2qK
-         dj9OvN3FeRFWu2IE10bNigFcD0gOfAVSncYjI7QeRGgrr+C0YhIiFODDjkOgpapL+lG3
-         9GTkFM7EkQTN7uOyOe0t3A3z64R+PJl39x5r2jPS4mTg5BikfSmGwbPIenkWl72pUr6s
-         nIRIJwblq18Ug2Z218TKzgvq3WqskdkdxuRsBVWBQoS0Gn6uI2qIN8kTI4AMGZ0XUiG1
-         Loig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=featfttNzvwk21MyesnAj089FnND/hw472XgM8ZYd8o=;
-        b=AZdKaqydbq5+P/PLa2EYp821dddD7wPM1WiRo6wWTh9usrtqDgXSYvPiyS8TpQ3PGW
-         qgj7T17j2AhAU34/hMMfbenmfAYZOeBskFeMX+1+XeW6b9z4K9EdGfoDL7ThsCTlvFn9
-         kQuwcLxcxI0MHvuMm1l/tZa/O8rUtVCOfqX52cumnMO1kXd+OstCgTy4+o1GIbRbm4zw
-         TgB/yj0KRoCNaGrBgxFlwkDSN8+cPqihNH8zLLOvspEJXrjp+sepRpMDvQigXx0KR6eo
-         Pv1mrPPZ3qGqNKcgGCvDw9m5JrEbFCYX40mwONBFo+K3y+7msEG3+iviF8ChNcum8H2P
-         wHgw==
-X-Gm-Message-State: AOAM531OO3L81wCSe8W0wOG37P2kpl6jcmWhKD9SG47i+gJ5QHg9S1Dm
-	1avlCFjXApc17pz62FZAYuD1Mjq8Yov4Fzok
-X-Google-Smtp-Source: ABdhPJy7E3+OGEYi6a0jRY4+BYGl+Z8d2CsFwI2YPFZ58dAUQ3DXX4TIDlXTNiOQdYPPScFbXzxB3w==
-X-Received: by 2002:a2e:9b0b:: with SMTP id u11mr3101892lji.463.1629985597936;
-        Thu, 26 Aug 2021 06:46:37 -0700 (PDT)
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from localhost.localdomain (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
-        by smtp.gmail.com with ESMTPSA id x16sm323757lfa.244.2021.08.26.06.46.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Aug 2021 06:46:37 -0700 (PDT)
-From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-oe][PATCH] iwd: update to 1.17
-Date: Thu, 26 Aug 2021 15:46:35 +0200
-Message-Id: <20210826134635.2545299-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: sakib.sajal@windriver.com)
+Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 17QF7SwA013782
+	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Aug 2021 08:07:28 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 17QF7Rdo019472
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Aug 2021 08:07:27 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Thu, 26 Aug 2021 08:07:27 -0700
+Received: from yow-lpggp3.wrs.com (128.224.137.13) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Thu, 26 Aug 2021 08:07:26 -0700
+From: "Sakib Sajal" <sakib.sajal@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][hardknott][PATCH] gd: fix CVE-2021-38115
+Date: Thu, 26 Aug 2021 11:07:26 -0400
+Message-ID: <20210826150726.33182-1-sakib.sajal@windriver.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Changelog:
-- Fix issue with sending additional and vendor IEs
-- Fix issue with IE ordering for 802.11-2020 support
-- Fix issue with frequency update on channel switch events
-- Fix issue with drivers and handling of IF_OPER_UP setting
-
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
 ---
- meta-oe/recipes-connectivity/iwd/{iwd_1.16.bb => iwd_1.17.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/iwd/{iwd_1.16.bb => iwd_1.17.bb} (94%)
+ ...-of-bands-in-reading-tga-header-file.patch | 33 +++++++++++++++++++
+ meta-oe/recipes-support/gd/gd_2.3.2.bb        |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-oe/recipes-support/gd/gd/0001-fix-read-out-of-bands-in-reading-tga-header-file.patch
 
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.16.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.17.bb
-similarity index 94%
-rename from meta-oe/recipes-connectivity/iwd/iwd_1.16.bb
-rename to meta-oe/recipes-connectivity/iwd/iwd_1.17.bb
-index 6bace616a..00d94f36e 100644
---- a/meta-oe/recipes-connectivity/iwd/iwd_1.16.bb
-+++ b/meta-oe/recipes-connectivity/iwd/iwd_1.17.bb
-@@ -8,7 +8,7 @@ DEPENDS = "ell"
- SRC_URI = "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar.xz \
-            file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-for-e.patch \
+diff --git a/meta-oe/recipes-support/gd/gd/0001-fix-read-out-of-bands-in-reading-tga-header-file.patch b/meta-oe/recipes-support/gd/gd/0001-fix-read-out-of-bands-in-reading-tga-header-file.patch
+new file mode 100644
+index 000000000..649b9b744
+--- /dev/null
++++ b/meta-oe/recipes-support/gd/gd/0001-fix-read-out-of-bands-in-reading-tga-header-file.patch
+@@ -0,0 +1,33 @@
++From 8b111b2b4a4842179be66db68d84dda91a246032 Mon Sep 17 00:00:00 2001
++From: maryam ebrahimzadeh <maryam.ebr@student.sharif.edu>
++Date: Mon, 19 Jul 2021 10:07:13 +0430
++Subject: [PATCH] fix read out-of-bands in reading tga header file
++
++CVE: CVE-2021-38115
++Upstream-Status: Backport [8b111b2b4a4842179be66db68d84dda91a246032]
++
++Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
++---
++ src/gd_tga.c | 6 +++++-
++ 1 file changed, 5 insertions(+), 1 deletion(-)
++
++diff --git a/src/gd_tga.c b/src/gd_tga.c
++index cae9428..286febb 100644
++--- a/src/gd_tga.c
+++++ b/src/gd_tga.c
++@@ -191,7 +191,11 @@ int read_header_tga(gdIOCtx *ctx, oTga *tga)
++ 			return -1;
++ 		}
++ 
++-		gdGetBuf(tga->ident, tga->identsize, ctx);
+++		
+++		if (gdGetBuf(tga->ident, tga->identsize, ctx) != tga->identsize) {
+++			gd_error("fail to read header ident");
+++			return -1;
+++		}
++ 	}
++ 
++ 	return 1;
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-support/gd/gd_2.3.2.bb b/meta-oe/recipes-support/gd/gd_2.3.2.bb
+index 37896415e..557b45dc4 100644
+--- a/meta-oe/recipes-support/gd/gd_2.3.2.bb
++++ b/meta-oe/recipes-support/gd/gd_2.3.2.bb
+@@ -14,6 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8e5bc8627b9494741c905d65238c66b7"
+ DEPENDS = "freetype libpng jpeg zlib tiff"
+ 
+ SRC_URI = "git://github.com/libgd/libgd.git;branch=master \
++           file://0001-fix-read-out-of-bands-in-reading-tga-header-file.patch \
            "
--SRC_URI[sha256sum] = "af548398aea2089a3a5103e5586561f24791090a17d4b2e50785e2faab5ed03a"
-+SRC_URI[sha256sum] = "6f946f823b0dc3205e4e72becf8ad1915448d194f5b10d8003e4c8c5a18e4ef7"
  
- inherit autotools manpages pkgconfig python3native systemd
- 
+ SRCREV = "2e40f55bfb460fc9d8cbcd290a0c9eb908d5af7e"
 -- 
-2.25.1
+2.32.0
 
