@@ -1,62 +1,62 @@
-Received: from mail3.bemta25.messagelabs.com (mail3.bemta25.messagelabs.com [195.245.230.81])
- by mx.groups.io with SMTP id smtpd.web10.24867.1629941628024800588
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.3])
+ by mx.groups.io with SMTP id smtpd.web11.24684.1629941631012933625
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Aug 2021 18:33:48 -0700
+ Wed, 25 Aug 2021 18:33:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=grQ6CAYx;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.81, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=C42qKpOG;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.3, mailfrom: wangmy@fujitsu.com)
 Return-Path: <wangmy@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1629941625; i=@fujitsu.com;
-	bh=ghiUxHtkogbHYc5ULoPGw0C+8+HXXkTeqf/RyYubm8A=;
+	s=170520fj; t=1629941628; i=@fujitsu.com;
+	bh=Egl20T3DXcjOaFk7gztN8TEm7831jNKaOci70USwMXU=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=grQ6CAYxi1npHRocRxsJUpMWfqMSA8oj5iyz/GHVxJ5i1ms9bJ63qWBxsGGOBjTpH
-	 GE70/zRZpyF1GNE3Ah/L2M78LLkneNr8wIXKM92KwNr/BYjhBZzwiZzXm4psNis2Ra
-	 61Iqt9kTpuhfOmc9p4OHtv0+JlDJbY14p8dRbMRemCt5mY76mPoHpUvjZ35661fSoi
-	 BkppVFnC33ORISv29pbCQs7gpdGEbrywmgXt/GJ8kfUaq3DLaptoDKb9Pz4WaH2L56
-	 +RLKzkUk8JYRZ2P11x/vfOMeOZRO4NUo/nMdAE0InbPpEKHhBqCyqzYrZ6gbNCCsvM
-	 xziz0/VkeR/Hg==
-Received: from [100.112.198.31] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-b.eu-west-1.aws.symcld.net id 44/4C-27439-87FE6216; Thu, 26 Aug 2021 01:33:44 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrLIsWRWlGSWpSXmKPExsViZ8MxVbfivVq
-  iwdNtChYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8b+O0/ZCpbxVay8+pStgfE6TxcjF4eQwGwm
-  if7+M4wQzglGiWUbJgM5nBxsAmoS02/dYAWxRQT0JZbO3sMMYjMLqEi8+N3D3sXIwSEsYC9x6
-  lkNSJhFQFXi8LLDYK28Ak4Sv9YdBSuXEFCQmPLwPZjNKeAs8evMaVaQViGgmqtzoyDKBSVOzn
-  zCAjFdQuLgixdQrYoSsy83s0DYFRKzZrUxTWDkn4WkZRaSlgWMTKsYzZOKMtMzSnITM3N0DQ0
-  MdA0NjXQNLc10zUz0Eqt0k/RSS3XLU4tLdA31EsuL9Yorc5NzUvTyUks2MQJDMaXgiMMOxvuv
-  P+gdYpTkYFIS5Z1/UC1RiC8pP6UyI7E4I76oNCe1+BCjDAeHkgTvt9dAOcGi1PTUirTMHGBcw
-  KQlOHiURHhnvAVK8xYXJOYWZ6ZDpE4xKkqJ824HSQiAJDJK8+DaYLF4iVFWSpiXkYGBQYinIL
-  UoN7MEVf4VozgHo5Iw7xKQKTyZeSVw018BLWYCWlzApwqyuCQRISXVwOS1nfVYnYpYp5GOZeh
-  yM+5vH2vbp8aGljw+yXrzej/70w81FvdlPnw9/+Tw7Mqzf89fmMS3w1h0ZtScyiUa1RIHL3gx
-  Rj526z1nF3psypq47VoebBmn9SIalnz+p2QS8tl6rm4TK4fNPeOYk4FeD89LnM62ZmNoMzVpk
-  zr8h8Vk03mTg10p7XnTTiw/s76loPdxza1gtUzTJ/1aH/dovvi56WSU4YFnWW8PnQwV4RV4vs
-  5FTsD7e+9Sff/jy+ZtXdW4MYXH6N6z6qZtfCaKRj+alnFMij3mHxs4O/KYZ+zRNSkfnO7IqDb
-  wC25f4L2g8X9c2fafJcumT9NtOSh3I87hjhzXlwz2LXkmndtVFiqxFGckGmoxFxUnAgChnPLU
-  QAMAAA==
+	b=C42qKpOGiW3+rJyr2puq/0n93i4N1y6YNwaGPHqA8G7sJQebdS+5zmu5EzO2KxeQ9
+	 7QGITBSaB4SqcX61h7a1mmdVBduBM/ADIRUUYT8FzU/Nvkrxli5qxNh/2W1ECC+Ut5
+	 iANUUBQu1PWi20taf/Qx/UR0B7L94C/Z9C9lVY3Ewha+fOhrquoWw97KD0cCLKuMWU
+	 6H06nWJRpFUuBt/aM0Ztu8gQwl+cFg4eUvd5KLaBjiFRvIZ93FldzyjaAONwsicT50
+	 dsQpcZIjiNDxf6UVb3zNnLNqcVvZe3+fCPgxCBQ+2XzkFryKmeIU3sbhwYGprJsQPG
+	 vi5LoU3jPaCxQ==
+Received: from [100.112.192.137] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta.az-a.eu-west-1.aws.symcld.net id A1/C5-28466-C7FE6216; Thu, 26 Aug 2021 01:33:48 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrFIsWRWlGSWpSXmKPExsViZ8MRolvzXi3
+  R4OkSPouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeP6mZtsBQ85K87uesbcwPiYo4uRk0NIYDaT
+  RMd7IJsLyD7BKLF6wX92kASbgJrE9Fs3WEFsEQF9iaWz9zCD2MwCKhIvfveA1QgLeEv0Lp0GF
+  mcRUJW48fMOmM0r4CTxtO8XmC0hoCAx5eF7MJtTwFni15nTQDM5gJY5SVydGwVRLihxcuYTFo
+  jxEhIHX7yAalWUmH25mQXCrpCYNauNaQIj/ywkLbOQtCxgZFrFaJFUlJmeUZKbmJmja2hgoGt
+  oaKRraAnEJiZ6iVW6iXqppbrlqcUluoZ6ieXFesWVuck5KXp5qSWbGIHBmFJwYMIOxv2vP+gd
+  YpTkYFIS5Z1/UC1RiC8pP6UyI7E4I76oNCe1+BCjDAeHkgTvt9dAOcGi1PTUirTMHGBkwKQlO
+  HiURHj93gGleYsLEnOLM9MhUqcYdTkuX5+3iFmIJS8/L1VKnHcZSJEASFFGaR7cCFiUXmKUlR
+  LmZWRgYBDiKUgtys0sQZV/xSjOwagkzDsZZApPZl4J3KZXQEcwAR1RwKcKckRJIkJKqoGJM6V
+  8o+jxHccU+gMlow93bEjYK3l08tcnfDv1za+te5KbNvnLPQ+t426RPycxSq1dlPnZs1czb51V
+  dYFn+Q6JtAPBAc+5Pu/NPNnyzejXbo/vuZ/8rhz7G7CAw/EE3+xrez82rz132zVRoFL2Rcj2w
+  N9zKorMzV4d7uq7IStw7NuC0ouLRZl3sT6tmBPSa8e5Y933/c+cOlOnmOilfss/Z+3wodKzIs
+  9gXkJRz16HPQZMZlYaVlmL1bS7FR+vUdGocPm6MaD2+SKZKWfTJSPYF3f+Ez2oKP3pUPcNhXO
+  bNO46uy/yUfaY+PLuuX3ck9PNkvunciy9oMPEkDR3e399yjEJ9oJ/N7YubfmX9aJJiaU4I9FQ
+  i7moOBEAs2Vvg00DAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-44.tower-285.messagelabs.com!1629941624!223615!1
-X-Originating-IP: [62.60.8.149]
+X-Msg-Ref: server-2.tower-267.messagelabs.com!1629941627!103913!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 1898 invoked from network); 26 Aug 2021 01:33:44 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-44.tower-285.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 26 Aug 2021 01:33:44 -0000
+Received: (qmail 7031 invoked from network); 26 Aug 2021 01:33:48 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-2.tower-267.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 26 Aug 2021 01:33:48 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17Q1XZj3018832
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17Q1XjWe017333
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Aug 2021 02:33:44 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Aug 2021 02:33:47 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 26 Aug 2021 02:33:40 +0100
+ (TLS) id 15.0.1497.18; Thu, 26 Aug 2021 02:33:43 +0100
 From: "wangmy" <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] doxygen: upgrade 1.9.1 -> 1.9.2
-Date: Thu, 26 Aug 2021 09:33:16 +0800
-Message-ID: <1629941597-62033-4-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-filesystems] [PATCH] xfsprogs: upgrade 5.12.0 -> 5.13.0
+Date: Thu, 26 Aug 2021 09:33:17 +0800
+Message-ID: <1629941597-62033-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1629941597-62033-1-git-send-email-wangmy@fujitsu.com>
 References: <1629941597-62033-1-git-send-email-wangmy@fujitsu.com>
@@ -66,43 +66,28 @@ X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-Features
-issue #2732: Adding support for C++20 concepts (Origin: bugzilla #499352)
-Introducing new sidebar layout via FULL_SIDEBAR option.
-Added -q commandline-parameter for quiet operation
-Add config option SHOW_HEADERFILE
-Add config option WARN_IF_INCOMPLETE_DOC
-Add config options GENERATE_SQLITE3, SQLITE3_OUTPUT and SQLITE3_RECREATE_DB to better control the sqlite3 output.
-Add config option MATHJAX_VERSION to support both MathJax 2.x and 3.x
-Allow more fine tuning of semanitic syntax highlighting via CSS classes
-Use language name to get code coloring
-Extra settings for MathJax V3
-Support vertical alignment in multirow table
-Add option for an anchor to the image command
-Portuguese translators updated to 1.9.0.
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../doxygen/{doxygen_1.9.1.bb => doxygen_1.9.2.bb}              | 2 +-
+ .../xfsprogs/{xfsprogs_5.12.0.bb => xfsprogs_5.13.0.bb}         | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/doxygen/{doxygen_1.9.1.bb => doxygen_1.9.2.bb} (86%)
+ rename meta-filesystems/recipes-utils/xfsprogs/{xfsprogs_5.12.0.bb => xfsprogs_5.13.0.bb} (96%)
 
-diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.9.1.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.9.2.bb
-similarity index 86%
-rename from meta-oe/recipes-devtools/doxygen/doxygen_1.9.1.bb
-rename to meta-oe/recipes-devtools/doxygen/doxygen_1.9.2.bb
-index 023c8565a6..fc5df4c71f 100644
---- a/meta-oe/recipes-devtools/doxygen/doxygen_1.9.1.bb
-+++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.9.2.bb
-@@ -10,7 +10,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
-            file://0001-build-don-t-look-for-Iconv.patch \
- "
- SRC_URI:append:class-native = " file://doxygen-native-only-check-python3.patch"
--SRC_URI[sha256sum] = "67aeae1be4e1565519898f46f1f7092f1973cce8a767e93101ee0111717091d1"
-+SRC_URI[sha256sum] = "060f254bcef48673cc7ccf542736b7455b67c110b30fdaa33512a5b09bbecee5"
+diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.12.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.13.0.bb
+similarity index 96%
+rename from meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.12.0.bb
+rename to meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.13.0.bb
+index 323493e7e1..64873ac038 100644
+--- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.12.0.bb
++++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.13.0.bb
+@@ -12,7 +12,7 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
+            file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch \
+            file://0001-support-usrmerge.patch \
+            "
+-SRC_URI[sha256sum] = "bec44445cf18f49e63971d4f27dc4e90a17b118b852714a1104b621ea30e3507"
++SRC_URI[sha256sum] = "4e142d4babe086adf9016d8c606c805829da08e46389a4433f40346204f90cdb"
+ inherit autotools-brokensep
  
- inherit cmake python3native
- 
+ PACKAGES =+ "${PN}-fsck ${PN}-mkfs ${PN}-repair libhandle"
 -- 
 2.25.1
 
