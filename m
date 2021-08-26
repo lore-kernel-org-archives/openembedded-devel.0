@@ -1,88 +1,89 @@
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web08.22991.1629932454264501315
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web08.24651.1629941627360568590
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Aug 2021 16:00:54 -0700
+ Wed, 25 Aug 2021 18:33:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: sakib.sajal@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 17PN0qbp032418
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Aug 2021 16:00:53 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 17PN0pao026039
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Aug 2021 16:00:52 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Wed, 25 Aug 2021 16:00:51 -0700
-Received: from yow-lpggp3.wrs.com (128.224.137.13) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Wed, 25 Aug 2021 16:00:51 -0700
-From: "Sakib Sajal" <sakib.sajal@windriver.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=er5ISahf;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: wangmy@fujitsu.com)
+Return-Path: <wangmy@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1629941625; i=@fujitsu.com;
+	bh=bd5tsfJvj2YcQgUKFmfmclRgTyHFi7AEvtiQlXyulfc=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=er5ISahfiuMlSngThzl+zk814TSJGqQfhJX4pfd2kFdTwSKcBozWOuBIc4BsfEPIv
+	 ieCIl9W1eI5XBZlFhydKzJgw+bg+h7dEbslKXZW0QNmUHG/+MN5vTc9w2HHD6FikFB
+	 eBU3Winjsk6kBA2NsOeHRea0+eko7yU943yW/jZzJjemBS5rqOHxQUtmh6qlKSkw0v
+	 533nkspjLo6ryJEK2jMkUYhy5ycMQi4xWpoaGxxJhQANfmCrPlthLnBaLNiZgLPAej
+	 2LU+A8Skb0Efmsb5/zowiCgm0Iju6ZYImzrQa0V4DAJVMTwRYByeNG/Pn4M+RCbbzQ
+	 qZEJAjeXDRwcg==
+Received: from [100.113.3.182] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-a.eu-central-1.aws.symcld.net id 24/0A-27444-87FE6216; Thu, 26 Aug 2021 01:33:44 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrKIsWRWlGSWpSXmKPExsViZ8MxVbfivVq
+  iwYYFMhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8b/1k9MBSc4K279f8PSwPiEo4uRi0NIYDaT
+  xOy5kxghnBOMEl8mrGbuYuTkYBNQk5h+6wYriC0ioC+xdPYesDizgIrEi9897CC2sICrxLOj+
+  8HiLAKqEi8a9oDFeQWcJN4smQgWlxBQkJjy8D0zRFxQ4uTMJywQcyQkDr54AVWjKDH7cjMLhF
+  0hMWtWG9MERt5ZSFpmIWlZwMi0itEyqSgzPaMkNzEzR9fQwEDX0NBY11jX0NJEL7FKN1EvtVQ
+  3OTWvpCgRKKuXWF6sV1yZm5yTopeXWrKJERhiKYXMh3YwPnn9Qe8QoyQHk5Io7/yDaolCfEn5
+  KZUZicUZ8UWlOanFhxhlODiUJHi/vQbKCRalpqdWpGXmAMMdJi3BwaMkwjvjLVCat7ggMbc4M
+  x0idYpRl+PLqiWLmIVY8vLzUqXEebeDFAmAFGWU5sGNgMXeJUZZKWFeRgYGBiGegtSi3MwSVP
+  lXjOIcjErCvEtApvBk5pXAbXoFdAQT0BEFfKogR5QkIqSkGpiEN02KY7fjXaAc8Gu/Xp6JRQV
+  flsypj//ZGJbcMd0xKfv7mevXvnuaVBwonfPHbsrCe+9P3lv89Ma7sxOsPs9b9nTrmh/Tn5+8
+  ur7b82L7/k07LHuydhSvddjP/sG6KV/96jY7p8JffgzvGEPXJ0W3OXf33N2l82POwm8zv+1fL
+  nNYsHPjUivmT8zmZ2X+2Prcigp7ySZj9exXgfThIxGsMx9+u9j4ry8s7EZwevrCptrQWv+YXb
+  8aWR/Ma2zWSPoj0PfyG5d6pFZecMbhRK87a1/Oepp8z03q4jyDw/WnJJ9Pv/T0Bc/cy5G3PdX
+  33d0dPvN4JcO/kCav8nTTrfNEui2ulpuYbZ7154GwV940MyWW4oxEQy3mouJEANBy6KY4AwAA
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-3.tower-228.messagelabs.com!1629941624!192934!1
+X-Originating-IP: [62.60.8.149]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.4; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 25284 invoked from network); 26 Aug 2021 01:33:44 -0000
+Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
+  by server-3.tower-228.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 26 Aug 2021 01:33:44 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17Q1XZix018832
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Aug 2021 02:33:44 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Thu, 26 Aug 2021 02:33:33 +0100
+From: "wangmy" <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] gd: fix CVE-2021-38115
-Date: Wed, 25 Aug 2021 19:00:51 -0400
-Message-ID: <20210825230051.3773-1-sakib.sajal@windriver.com>
-X-Mailer: git-send-email 2.32.0
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] live555: upgrade 20210809 -> 20210824
+Date: Thu, 26 Aug 2021 09:33:13 +0800
+Message-ID: <1629941597-62033-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...-of-bands-in-reading-tga-header-file.patch | 29 +++++++++++++++++++
- meta-oe/recipes-support/gd/gd_2.3.2.bb        |  1 +
- 2 files changed, 30 insertions(+)
- create mode 100644 meta-oe/recipes-support/gd/gd/0001-fix-read-out-of-bands-in-reading-tga-header-file.patch
+ .../live555/{live555_20210809.bb => live555_20210824.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-multimedia/live555/{live555_20210809.bb => live555_20210824.bb} (97%)
 
-diff --git a/meta-oe/recipes-support/gd/gd/0001-fix-read-out-of-bands-in-reading-tga-header-file.patch b/meta-oe/recipes-support/gd/gd/0001-fix-read-out-of-bands-in-reading-tga-header-file.patch
-new file mode 100644
-index 000000000..6152a1184
---- /dev/null
-+++ b/meta-oe/recipes-support/gd/gd/0001-fix-read-out-of-bands-in-reading-tga-header-file.patch
-@@ -0,0 +1,29 @@
-+From 8b111b2b4a4842179be66db68d84dda91a246032 Mon Sep 17 00:00:00 2001
-+From: maryam ebrahimzadeh <maryam.ebr@student.sharif.edu>
-+Date: Mon, 19 Jul 2021 10:07:13 +0430
-+Subject: [PATCH] fix read out-of-bands in reading tga header file
-+
-+---
-+ src/gd_tga.c | 6 +++++-
-+ 1 file changed, 5 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/gd_tga.c b/src/gd_tga.c
-+index cae9428..286febb 100644
-+--- a/src/gd_tga.c
-++++ b/src/gd_tga.c
-+@@ -191,7 +191,11 @@ int read_header_tga(gdIOCtx *ctx, oTga *tga)
-+ 			return -1;
-+ 		}
-+ 
-+-		gdGetBuf(tga->ident, tga->identsize, ctx);
-++		
-++		if (gdGetBuf(tga->ident, tga->identsize, ctx) != tga->identsize) {
-++			gd_error("fail to read header ident");
-++			return -1;
-++		}
-+ 	}
-+ 
-+ 	return 1;
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-support/gd/gd_2.3.2.bb b/meta-oe/recipes-support/gd/gd_2.3.2.bb
-index c9ed029f9..32484ce79 100644
---- a/meta-oe/recipes-support/gd/gd_2.3.2.bb
-+++ b/meta-oe/recipes-support/gd/gd_2.3.2.bb
-@@ -15,6 +15,7 @@ DEPENDS = "freetype libpng jpeg zlib tiff"
+diff --git a/meta-oe/recipes-multimedia/live555/live555_20210809.bb b/meta-oe/recipes-multimedia/live555/live555_20210824.bb
+similarity index 97%
+rename from meta-oe/recipes-multimedia/live555/live555_20210809.bb
+rename to meta-oe/recipes-multimedia/live555/live555_20210824.bb
+index b6a7d9488c..deacab2ac0 100644
+--- a/meta-oe/recipes-multimedia/live555/live555_20210809.bb
++++ b/meta-oe/recipes-multimedia/live555/live555_20210824.bb
+@@ -16,7 +16,7 @@ SRC_URI = "https://download.videolan.org/pub/contrib/live555/live.${URLV}.tar.gz
+ # only latest live version stays on http://www.live555.com/liveMedia/public/, add mirror for older
+ MIRRORS += "http://www.live555.com/liveMedia/public/ http://download.videolan.org/contrib/live555/ \n"
  
- SRC_URI = "git://github.com/libgd/libgd.git;branch=master \
-            file://0001-replace-uint32-with-uint32_t-and-uint16-with-uint16_.patch \
-+           file://0001-fix-read-out-of-bands-in-reading-tga-header-file.patch \
-            "
+-SRC_URI[sha256sum] = "31ce35f13d676033da3fafdb67c6f26e9717438112230743a107dd3a67ebe285"
++SRC_URI[sha256sum] = "ce95a1c79f6d18e959f9dc129b8529b711c60e76754acc285e60946303b923ec"
  
- SRCREV = "2e40f55bfb460fc9d8cbcd290a0c9eb908d5af7e"
+ S = "${WORKDIR}/live"
+ 
 -- 
-2.32.0
+2.25.1
 
