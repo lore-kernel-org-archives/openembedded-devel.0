@@ -1,89 +1,129 @@
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web12.34008.1629998239319645195
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web10.35221.1630002603377956376
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Aug 2021 10:17:19 -0700
+ Thu, 26 Aug 2021 11:30:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=bkA3vLSE;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id u13-20020a17090abb0db0290177e1d9b3f7so7065992pjr.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Aug 2021 10:17:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=SJ0NOud7;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id u13-20020a17090abb0db0290177e1d9b3f7so7201156pjr.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Aug 2021 11:30:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :references:from:organization:in-reply-to:content-transfer-encoding;
-        bh=HOO7gRXgdRWKUlN0jW5dr/lwWN4BR4Ure5uTDqUzgsw=;
-        b=bkA3vLSElcMbyebEXaAxSlkQRO8a2tZW6lzNi0bf5M7UFQivFzmEvJpYm61c0GGZtU
-         tz00Sx9jkrPtPKK+uyNAsWlLZYI51/arfmsRH0SushtB14i1ZFQONuH0W8nq48SJaKmH
-         jgWnol/r6tLoWyuGGPKaWcRyA1J9bHZTVBeI78WfMG90HptDXDlMLYV4hzxrfH7YPAit
-         OVGH8iIevJ8ecsiafpjF/y5d52H8Y3d7wmUVP/F7zu/sLsz2AoeztdMt8f2wBDISidUG
-         7+BWugZ1ULWaHQtwSOOqUVkcJcxgshGsug+oE1+zfXn6yzQyXvU7XR/ZXb0vgBO34yOf
-         nlow==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=EWGO1MtPLEZLPvhvVGziqSL/XU2wd/1FaohD/wEZnFE=;
+        b=SJ0NOud7C1qCng3FBbH1j/FTggwdMv/LrulgYzCvg2yJoZH1fDkGlAAMh/9rDCAJyv
+         hvUHRMKPRzVFXhb9zXhvy5IqFgs6DI6YpFTsT2/Kbv/g+PBT98J73cuHnFsJGlk/Uvqc
+         LiQ0s6QRESkxqD5v57ZKaZmG6sTkTmvpne6RtguusT4PuUQrtA/DCgUy26F37WfsDFOZ
+         FK5kdvktMak+4zcgmZB5ggBRcHiSMMrCZZEpt6O+J+II6zXlhJb2pH1SLLupjaIQ52px
+         /KS6fe4loL4RAtDBlMR16HXO4XclhzCT5Rf8vm6/alKPXhwuQIPguZm7IShlDM7P6vw4
+         anbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:references:from:organization:in-reply-to
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=HOO7gRXgdRWKUlN0jW5dr/lwWN4BR4Ure5uTDqUzgsw=;
-        b=WC0baL5PZzfrX2kuoImDw8daLiV1zQ87qL/ZGKYDScw8eYoaqeYQPL4vQcASN0lgHs
-         famwIE2omuRrspd9Hqh48sDm/kg0jtXRSjSuoeUmlTnaQD1+hEwwZU7NiqJg0awL6ZER
-         UP+M9rlfGfIvvFOkF8M0BpMylkX+ZSuqRe9ymzEEiD61pU11830OHnNqM5WmZdF8GHx1
-         VJhrkYD0GvsoCPZbu9hiTnS9NvnfMHnfnZUkXFsySE9ie18uXdlT0O54EFT3SojsO/EE
-         qVwQQ9vE/mgu9p+3og9OKnVZbd4sGp5gpWl3vAC7oub8B5Xd+9MZ3+gkVDPVndOgR20c
-         Ur9g==
-X-Gm-Message-State: AOAM531k4VyxfeQa6b91Hy38QRT95eOIbTa7W7SbBsl0Cvjc5EfwWQdL
-	7awov4sk+LwDZrt/L0VnA3c=
-X-Google-Smtp-Source: ABdhPJxeB/P8apfnqsRexHdCL6rNk7HsG/YI5Ksu1BwJbi69mPIdzCKJH8I2fs0LwYGSROaAS2gHGg==
-X-Received: by 2002:a17:90a:4a95:: with SMTP id f21mr18303377pjh.122.1629998238794;
-        Thu, 26 Aug 2021 10:17:18 -0700 (PDT)
+        bh=EWGO1MtPLEZLPvhvVGziqSL/XU2wd/1FaohD/wEZnFE=;
+        b=grU+HtiCbUP7sKcia3gMP9tsxnqCM5kpmTn9RJfjEPvSBfsm/jmaQ8RKiFZ22CPr3h
+         hswcpTS81epuw0tg8Es5Jw0ikwXqYvCMH1wjGM4HtopKr9dZym7+/cyK8KhX6wCg0LAL
+         TyO+ORCscPQurhtrl3wGnV2+6E1IbMovSOmcaEdTxK6MDjh4cCUzwISyCq2HihvkUfEq
+         7csEfJFDw6fk8MalliAqc+e0KN/RC4wkea9k4TarySRXwqe/G+N7cM1EHzW88zzGIMM+
+         shR61bZFXi+7I+OWFXZuYX2mn4Xq50uzp+ryexggNQrIC5vULz+Ow6RZwOiEBWTF8uYj
+         stCw==
+X-Gm-Message-State: AOAM532GtP98+s99qS2VDKS/LDC7JYlTtZ5a5Za5q//UK9yR4wvR/qBd
+	h6poJzzjF7z/lpkV6hIxn9llmlcTHqmXgA==
+X-Google-Smtp-Source: ABdhPJw/rhsW8DQ6aC8WEvojNuckjSdlPIUzD9uQY3M8oxmgn7sLyA1XzfV+SxNLKlbhKT5olA4jaQ==
+X-Received: by 2002:a17:90a:3fca:: with SMTP id u10mr15074580pjm.148.1630002602669;
+        Thu, 26 Aug 2021 11:30:02 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
-Received: from ?IPV6:2601:646:9200:a0f0:7c29:e163:6b18:8f6c? ([2601:646:9200:a0f0:7c29:e163:6b18:8f6c])
-        by smtp.gmail.com with UTF8SMTPSA id y12sm3453987pfa.25.2021.08.26.10.17.18
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 26 Aug 2021 10:17:18 -0700 (PDT)
-Message-ID: <bd46a4b1-2635-a88c-412b-9a3019933ea9@gmail.com>
-Date: Thu, 26 Aug 2021 10:17:17 -0700
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.0.2
-Subject: Re: [oe] [meta-python][RFC] python3-kivy
-To: William Huang <whuang8933@gmail.com>,
- openembedded-devel@lists.openembedded.org
-References: <YPWj.1629947089031625845.Nxxr@lists.openembedded.org>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::1d09])
+        by smtp.gmail.com with ESMTPSA id w9sm9732711pjc.14.2021.08.26.11.30.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 26 Aug 2021 11:30:02 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-In-Reply-To: <YPWj.1629947089031625845.Nxxr@lists.openembedded.org>
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Ruslan Bilovol <rbilovol@cisco.com>,
+	Alexander Kanavin <alex.kanavin@gmail.com>
+Subject: [meta-oe][PATCH] libnss-nisplus: Remove
+Date: Thu, 26 Aug 2021 11:29:57 -0700
+Message-Id: <20210826182957.3558448-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.33.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
+The support for NIS+ has been dropped in libnsl2 [1]
+moreover the upstream repository has been archived [2] which indicates that
+this component is no more actively maintained
 
+[1] https://github.com/thkukuk/libnsl/commit/74c9cdf0ee0cc1a21936a20dd4eb4542faa03867
+[2] https://github.com/thkukuk/libnss_nisplus
 
-On 8/25/21 8:04 PM, William Huang wrote:
-> Hello,
-> I would like to request for comments on a Kivy recipe. Not sure how I 
-> should include the recipe but I added it as an attachment for now. I've 
-> also included a recipe that installs example programs into 
-> /usr/share/kivy-examples/examples.
-> 
-> I managed to get it running on a Rockchip rk3399 in a X environment, as 
-> well as on a imx8 in a Wayland environment, although I did need to 
-> reconfigure libsdl2 to use GLES libraries and remove X11 package in the 
-> case of the imx8.
-> 
-> Any feedback would be great! Not sure if the recipe would be good enough 
-> to be included in the meta-python layer as well.
-> 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Ruslan Bilovol <rbilovol@cisco.com>
+Cc: Alexander Kanavin <alex.kanavin@gmail.com>
+---
+ .../packagegroups/packagegroup-meta-oe.bb     |  3 +-
+ .../libnss-nisplus/libnss-nisplus.bb          | 31 -------------------
+ 2 files changed, 1 insertion(+), 33 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb
 
-These looks ok on quick look. You could perhaps merge them into a single 
-recipe and use PACKAGES to separate out examples into its own output 
-package.
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index c3f4867071..f58905f0bc 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -395,7 +395,6 @@ RDEPENDS:packagegroup-meta-oe-extended ="\
+     libusbmuxd \
+     liblockfile \
+     liblogging \
+-    libnss-nisplus \
+     libpwquality \
+     ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "libreport", "", d)} \
+     libserialport \
+@@ -434,7 +433,7 @@ RDEPENDS:packagegroup-meta-oe-extended:append:libc-musl = " libexecinfo"
+ RDEPENDS:packagegroup-meta-oe-extended:append:x86-64 = " pmdk libx86-1"
+ RDEPENDS:packagegroup-meta-oe-extended:append:x86 = " libx86-1"
 
-Please format it into a patch and email the patch if you want to 
-consider it to include into meta-python
-
-> Thanks,
-> William Huang
-> 
-> 
-> 
-> 
+-RDEPENDS:packagegroup-meta-oe-extended:remove:libc-musl = "libnss-nisplus sysdig"
++RDEPENDS:packagegroup-meta-oe-extended:remove:libc-musl = "sysdig"
+ RDEPENDS:packagegroup-meta-oe-extended:remove:mipsarch = "upm mraa minifi-cpp tiptop"
+ RDEPENDS:packagegroup-meta-oe-extended:remove:mips = "sysdig"
+ RDEPENDS:packagegroup-meta-oe-extended:remove:powerpc = "upm mraa minifi-cpp"
+diff --git a/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb b/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb
+deleted file mode 100644
+index 602e963752..0000000000
+--- a/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb
++++ /dev/null
+@@ -1,31 +0,0 @@
+-# Copyright (C) 2019 Ruslan Bilovol <rbilovol@cisco.com>
+-# Released under the MIT license (see COPYING.MIT for the terms)
+-
+-SUMMARY = "NSS module for glibc, to provide NIS+ support for glibc"
+-
+-DESCRIPTION = "This package contains the NSS NIS+ plugin for glibc.\
+-This code was formerly part of glibc, but is now standalone to\
+-be able to link against TI-RPC for IPv6 support."
+-
+-HOMEPAGE = "https://github.com/thkukuk/libnss_nisplus"
+-LICENSE = "LGPL-2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+-SECTION = "libs"
+-DEPENDS += "libtirpc libnsl2"
+-
+-PV = "1.3+git${SRCPV}"
+-
+-SRCREV = "116219e215858f4af9370171d3ead63baca8fdb4"
+-
+-SRC_URI = "git://github.com/thkukuk/libnss_nisplus \
+-          "
+-
+-S = "${WORKDIR}/git"
+-
+-inherit autotools pkgconfig
+-
+-BBCLASSEXTEND += "native nativesdk"
+-#
+-# We will skip parsing this packagegeoup for non-glibc systems
+-#
+-COMPATIBLE_HOST:libc-musl = 'null'
+--
+2.33.0
