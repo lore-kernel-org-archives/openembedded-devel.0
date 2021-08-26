@@ -1,93 +1,105 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.3])
- by mx.groups.io with SMTP id smtpd.web11.24684.1629941631012933625
- for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Aug 2021 18:33:51 -0700
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=C42qKpOG;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.3, mailfrom: wangmy@fujitsu.com)
-Return-Path: <wangmy@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1629941628; i=@fujitsu.com;
-	bh=Egl20T3DXcjOaFk7gztN8TEm7831jNKaOci70USwMXU=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=C42qKpOGiW3+rJyr2puq/0n93i4N1y6YNwaGPHqA8G7sJQebdS+5zmu5EzO2KxeQ9
-	 7QGITBSaB4SqcX61h7a1mmdVBduBM/ADIRUUYT8FzU/Nvkrxli5qxNh/2W1ECC+Ut5
-	 iANUUBQu1PWi20taf/Qx/UR0B7L94C/Z9C9lVY3Ewha+fOhrquoWw97KD0cCLKuMWU
-	 6H06nWJRpFUuBt/aM0Ztu8gQwl+cFg4eUvd5KLaBjiFRvIZ93FldzyjaAONwsicT50
-	 dsQpcZIjiNDxf6UVb3zNnLNqcVvZe3+fCPgxCBQ+2XzkFryKmeIU3sbhwYGprJsQPG
-	 vi5LoU3jPaCxQ==
-Received: from [100.112.192.137] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-a.eu-west-1.aws.symcld.net id A1/C5-28466-C7FE6216; Thu, 26 Aug 2021 01:33:48 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrFIsWRWlGSWpSXmKPExsViZ8MRolvzXi3
-  R4OkSPouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeP6mZtsBQ85K87uesbcwPiYo4uRk0NIYDaT
-  RMd7IJsLyD7BKLF6wX92kASbgJrE9Fs3WEFsEQF9iaWz9zCD2MwCKhIvfveA1QgLeEv0Lp0GF
-  mcRUJW48fMOmM0r4CTxtO8XmC0hoCAx5eF7MJtTwFni15nTQDM5gJY5SVydGwVRLihxcuYTFo
-  jxEhIHX7yAalWUmH25mQXCrpCYNauNaQIj/ywkLbOQtCxgZFrFaJFUlJmeUZKbmJmja2hgoGt
-  oaKRraAnEJiZ6iVW6iXqppbrlqcUluoZ6ieXFesWVuck5KXp5qSWbGIHBmFJwYMIOxv2vP+gd
-  YpTkYFIS5Z1/UC1RiC8pP6UyI7E4I76oNCe1+BCjDAeHkgTvt9dAOcGi1PTUirTMHGBkwKQlO
-  HiURHj93gGleYsLEnOLM9MhUqcYdTkuX5+3iFmIJS8/L1VKnHcZSJEASFFGaR7cCFiUXmKUlR
-  LmZWRgYBDiKUgtys0sQZV/xSjOwagkzDsZZApPZl4J3KZXQEcwAR1RwKcKckRJIkJKqoGJM6V
-  8o+jxHccU+gMlow93bEjYK3l08tcnfDv1za+te5KbNvnLPQ+t426RPycxSq1dlPnZs1czb51V
-  dYFn+Q6JtAPBAc+5Pu/NPNnyzejXbo/vuZ/8rhz7G7CAw/EE3+xrez82rz132zVRoFL2Rcj2w
-  N9zKorMzV4d7uq7IStw7NuC0ouLRZl3sT6tmBPSa8e5Y933/c+cOlOnmOilfss/Z+3wodKzIs
-  9gXkJRz16HPQZMZlYaVlmL1bS7FR+vUdGocPm6MaD2+SKZKWfTJSPYF3f+Ez2oKP3pUPcNhXO
-  bNO46uy/yUfaY+PLuuX3ck9PNkvunciy9oMPEkDR3e399yjEJ9oJ/N7YubfmX9aJJiaU4I9FQ
-  i7moOBEAs2Vvg00DAAA=
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-2.tower-267.messagelabs.com!1629941627!103913!1
-X-Originating-IP: [62.60.8.84]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.4; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 7031 invoked from network); 26 Aug 2021 01:33:48 -0000
-Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-2.tower-267.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 26 Aug 2021 01:33:48 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17Q1XjWe017333
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Aug 2021 02:33:47 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Thu, 26 Aug 2021 02:33:43 +0100
-From: "wangmy" <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-filesystems] [PATCH] xfsprogs: upgrade 5.12.0 -> 5.13.0
-Date: Thu, 26 Aug 2021 09:33:17 +0800
-Message-ID: <1629941597-62033-5-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1629941597-62033-1-git-send-email-wangmy@fujitsu.com>
-References: <1629941597-62033-1-git-send-email-wangmy@fujitsu.com>
+Subject: [meta-python][RFC] python3-kivy
+To: openembedded-devel@lists.openembedded.org
+From: "William Huang" <whuang8933@gmail.com>
+X-Originating-Location: Woodbridge, Ontario, CA (97.108.30.204)
+X-Originating-Platform: Mac Chrome 92
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+Date: Wed, 25 Aug 2021 20:04:49 -0700
+Message-ID: <YPWj.1629947089031625845.Nxxr@lists.openembedded.org>
+X-Groupsio-MsgNum: 92748
+Content-Type: multipart/mixed; boundary="b43PzPZpfheTwFheuV7Z"
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- .../xfsprogs/{xfsprogs_5.12.0.bb => xfsprogs_5.13.0.bb}         | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-filesystems/recipes-utils/xfsprogs/{xfsprogs_5.12.0.bb => xfsprogs_5.13.0.bb} (96%)
+--b43PzPZpfheTwFheuV7Z
+Content-Type: multipart/alternative; boundary="HsSIGwChO3lQR1bvc0ma"
 
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.12.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.13.0.bb
-similarity index 96%
-rename from meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.12.0.bb
-rename to meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.13.0.bb
-index 323493e7e1..64873ac038 100644
---- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.12.0.bb
-+++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.13.0.bb
-@@ -12,7 +12,7 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
-            file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch \
-            file://0001-support-usrmerge.patch \
-            "
--SRC_URI[sha256sum] = "bec44445cf18f49e63971d4f27dc4e90a17b118b852714a1104b621ea30e3507"
-+SRC_URI[sha256sum] = "4e142d4babe086adf9016d8c606c805829da08e46389a4433f40346204f90cdb"
- inherit autotools-brokensep
- 
- PACKAGES =+ "${PN}-fsck ${PN}-mkfs ${PN}-repair libhandle"
--- 
-2.25.1
+--HsSIGwChO3lQR1bvc0ma
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
+Hello,
+I would like to request for comments on a Kivy recipe. Not sure how I shoul=
+d include the recipe but I added it as an attachment for now. I've also inc=
+luded a recipe that installs example programs into /usr/share/kivy-examples=
+/examples.
+
+I managed to get it running on a Rockchip rk3399 in a X environment, as wel=
+l as on a imx8 in a Wayland environment, although I did need to reconfigure=
+ libsdl2 to use GLES libraries and remove X11 package in the case of the im=
+x8.
+
+Any feedback would be great! Not sure if the recipe would be good enough to=
+ be included in the meta-python layer as well.
+
+Thanks,
+William Huang
+
+--HsSIGwChO3lQR1bvc0ma
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hello,<br />I would like to request for comments on a Kivy recipe. Not sure=
+ how I should include the recipe but I added it as an attachment for now. I=
+'ve also included a recipe that installs example programs into /usr/share/k=
+ivy-examples/examples.&nbsp;<br /><br />I managed to get it running on a Ro=
+ckchip rk3399 in a X environment, as well as on a imx8 in a Wayland environ=
+ment, although I did need to reconfigure libsdl2 to use GLES libraries and =
+remove X11 package in the case of the imx8.<br /><br />Any feedback would b=
+e great! Not sure if the recipe would be good enough to be included in the =
+meta-python layer as well.<br /><br />Thanks,<br />William Huang
+
+--HsSIGwChO3lQR1bvc0ma--
+
+--b43PzPZpfheTwFheuV7Z
+Content-Type: application/octet-stream; name="python3-kivy_2.0.0.bb"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="python3-kivy_2.0.0.bb"
+
+U1VNTUFSWSA9ICJSZWNpcGllIHRvIGVtYmVkZGVkIHRoZSBQeXRob24gUGlQIFBhY2thZ2UgS2l2
+eSIKSE9NRVBBR0UgPSAiaHR0cHM6Ly9raXZ5Lm9yZy8iCkxJQ0VOU0UgPSAiTUlUIgoKTElDX0ZJ
+TEVTX0NIS1NVTSA9ICJmaWxlOi8vTElDRU5TRTttZDU9ZjBjODUxZDYwNDk1YzdlMjcyMjVhODE5
+ZTE3OTIwOGEiCgppbmhlcml0IHNldHVwdG9vbHMzCgpTUkNfVVJJID0gIlwKICAgIGdpdDovL2dp
+dGh1Yi5jb20va2l2eS9raXZ5LmdpdDtwcm90b2NvbD1naXQ7XAogICAgIgoKIyBLaXZ5J3Mgc2V0
+dXAgZmlsZXMgb25seSBsb29rIGZvciBHTEVTIGxpYnJhcmllcyBmb3IgYW5kcm9pZCwgaU9zLCBS
+YXNwYmVycnkgUGksIGFuZCBtYWxpLWJhc2VkIE9TJ3MKIyBXZSBuZWVkIHRvIHBhdGNoIHRoZSBz
+ZXR1cCBmaWxlIHRvIHRlbGwgS2l2eSBzZXR1cCB0aGF0IG91ciBtYWNoaW5lIGhhcyBHTEVTIGxp
+YmFyaWVzIGluc3RhbGxlZCBhcyB3ZWxsClNSQ19VUkkgKz0gIiBcCiAgICBmaWxlOi8vMDAwMS1h
+ZGQtc3VwcG9ydC1mb3ItZ2xlc3YyLnBhdGNoIFwKIgpTUkNSRVYgPSAiZGVkY2I2YmNhYmUzZDhk
+Njc1OGRjZWU2MDdlOGMzM2IxNzRkNzgyYiIKClMgPSAiJHtXT1JLRElSfS9naXQiCgpVU0VfV0FZ
+TEFORCA9ICIke0BiYi51dGlscy5jb250YWlucygnRElTVFJPX0ZFQVRVUkVTJywgJ3dheWxhbmQn
+LCAnMScsICcwJywgZCl9IgpleHBvcnQgVVNFX1dBWUxBTkQKCiMgaWYgdXNpbmcgV2F5bGFuZCwg
+bGV0J3MgdXNlIHB1cmUgV2F5bGFuZCAoYW5kIG5vdCBYV2F5bGFuZCkKIyBzbyBkbyBub3QgYnVp
+bGQgdXNpbmcgWDExIGZsYWcgd2hlbiB3ZSBkZXRlY3QgV2F5bGFuZApVU0VfWDExID0gIiBcCiAg
+ICAke0BiYi51dGlscy5jb250YWlucygnRElTVFJPX0ZFQVRVUkVTJywgJ3dheWxhbmQnLCAgJzAn
+LCBcCiAgICAgICBiYi51dGlscy5jb250YWlucygnRElTVFJPX0ZFQVRVUkVTJywgJ3gxMScsICAg
+ICAgJzEnLCBcCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgJzAnLCBkKSwgZCl9IgpleHBvcnQgVVNFX1gxMQoKIyBVc2UgT3BlbkdMIEVTIDIu
+MCBsaWJyYXJ5CktJVllfR1JBUEhJQ1MgPSAiZ2xlcyIKZXhwb3J0IEtJVllfR1JBUEhJQ1MKCktJ
+VllfQ1JPU1NfU1lTUk9PVD0iJHtXT1JLRElSfS9yZWNpcGUtc3lzcm9vdCIKZXhwb3J0IEtJVllf
+Q1JPU1NfU1lTUk9PVAoKREVQRU5EUyArPSAiIFwKICAgIGdzdHJlYW1lcjEuMCBcCiAgICBnc3Ry
+ZWFtZXIxLjAtcHl0aG9uIFwKICAgIGxpYnNkbDIgXAogICAgbGlic2RsMi10dGYgXAogICAgbGli
+c2RsMi1pbWFnZSBcCiAgICBsaWJzZGwyLW1peGVyIFwKICAgIHBhbmdvIFwKICAgIHB5dGhvbjMg
+XAogICAgcHl0aG9uMy1jeXRob24tbmF0aXZlIFwKIgoKUkRFUEVORFNfJHtQTn0gPSAiIFwKICAg
+IGdzdHJlYW1lcjEuMCBcCiAgICBnc3RyZWFtZXIxLjAtcHl0aG9uIFwKICAgIGxpYnNkbDIgXAog
+ICAgbGlic2RsMi10dGYgXAogICAgbGlic2RsMi1pbWFnZSBcCiAgICBsaWJzZGwyLW1peGVyIFwK
+ICAgIHBhbmdvIFwKICAgIHB5dGhvbjMgXAogICAgcHl0aG9uMy1kb2N1dGlscyBcCiAgICBweXRo
+b24zLWZjbnRsIFwKICAgIHB5dGhvbjMtaW1hZ2UgXAogICAgcHl0aG9uMy1waWxsb3cgXAogICAg
+cHl0aG9uMy1weWdtZW50cyBcCiIKCiMgcmVtb3ZlIGtpdnktZXhhbXBsZXMKZG9faW5zdGFsbF9h
+cHBlbmQoKSB7CiAgICBybSAtcmYgJHtEfS91c3Ivc2hhcmUKfQo=
+
+--b43PzPZpfheTwFheuV7Z
+Content-Type: application/octet-stream; name="kivy-examples_2.0.0.bb"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="kivy-examples_2.0.0.bb"
+
+U1VNTUFSWSA9ICJSZWNpcGllIHRvIGVtYmVkZGVkIHRoZSBQeXRob24gUGlQIFBhY2thZ2UgS2l2
+eSIKSE9NRVBBR0UgPSAiaHR0cHM6Ly9raXZ5Lm9yZy8iCkxJQ0VOU0UgPSAiTUlUIgoKTElDX0ZJ
+TEVTX0NIS1NVTSA9ICJmaWxlOi8vTElDRU5TRTttZDU9ZjBjODUxZDYwNDk1YzdlMjcyMjVhODE5
+ZTE3OTIwOGEiCgpTUkNfVVJJID0gIlwKICAgIGdpdDovL2dpdGh1Yi5jb20va2l2eS9raXZ5Lmdp
+dDtwcm90b2NvbD1naXQ7XAogICAgIgpTUkNSRVYgPSAiZGVkY2I2YmNhYmUzZDhkNjc1OGRjZWU2
+MDdlOGMzM2IxNzRkNzgyYiIKClMgPSAiJHtXT1JLRElSfS9naXQiCgoKZG9fY29tcGlsZSgpIHsK
+fQoKZG9fY29uZmlndXJlKCkgewp9Cgpkb19pbnN0YWxsKCkgewogICAgaW5zdGFsbCAtZCAke0R9
+L3Vzci9zaGFyZS9raXZ5LWV4YW1wbGVzCiAgICBjcCAtciAke1N9L2V4YW1wbGVzICR7RH0vdXNy
+L3NoYXJlL2tpdnktZXhhbXBsZXMKfQoKRklMRVNfJHtQTn0gKz0gIiR7U30vZXhhbXBsZXMiCg==
+
+--b43PzPZpfheTwFheuV7Z--
