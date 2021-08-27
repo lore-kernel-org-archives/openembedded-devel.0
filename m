@@ -1,84 +1,88 @@
-Received: from mail-lj1-f179.google.com (mail-lj1-f179.google.com [209.85.208.179])
- by mx.groups.io with SMTP id smtpd.web10.7714.1630069601783008694
+Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
+ by mx.groups.io with SMTP id smtpd.web08.8015.1630070584589165806
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Aug 2021 06:06:42 -0700
+ Fri, 27 Aug 2021 06:23:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=l8G4rDP5;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.179, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f179.google.com with SMTP id q21so11290294ljj.6
-        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Aug 2021 06:06:41 -0700 (PDT)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=Mw65KwcS;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.45, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f45.google.com with SMTP id c8so1763868lfi.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Aug 2021 06:23:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=GSYpyS0BJnkAwDfOXYcjLT3i5F59b/EcOiFMXA0XgGc=;
-        b=l8G4rDP5WJf00y+Nrtg4218wJkVkPHEGZXw+WDqH9xrp2+ppqmQPbZdIAxpABza4/x
-         1TiHyzWr108PNGSUGxIn4RyPEzPDIZpG5PLoS/WaH7snaTVQ1doFuCV9bn8HGQapNTGL
-         fiTbNHn2CXNPLUGvtYYgvISO79kXqrT2M2HRU69FWymKm+nNdWj6dSQLABlzd3brmp2y
-         nILIfYkAiRFYvA7QG7P2IDFFi6EdtD2PWsqAlij24UP7+Ul8HfZdoxp9wOI9i0mTENnY
-         SuCNGJI1CWKPcUck5Yz3Q2zVbCrWw6TH+4+t6psGDxTDlojEvP3Og8JpdDFGBGMZlZzg
-         AvjA==
+        bh=6eFA08cXF9koUoS71ydcRO4RQyptYftBICleu+U+Xo4=;
+        b=Mw65KwcSpjpYrssi6xBtrKIKCYq2EaYphT6TWh57+U/R2uXGzLmxpz5Rfpefn/Mrlu
+         rxEJGMewUWddE+Zu6kc3JzEBbASFsXjBj12f8oxLkGlTuYigU5qeQdGyhmfIa10bKwWD
+         epCgVGVOPiGBbpRfD5D1pQVL7FRFTsY5QAjoxw3d6UPR2gbHLokMFD0B2KnXP3yqKzI+
+         TaJD1ZADrt2TQplRo+hWZgZJQ8OUxXmmraNwcuUxFJiSn7LwJr5JvIqKWe2BDOJatCRw
+         LeWu5MC/Br+wpABPO8sF4a7qCUwzD8/HAFZ3x3oBkOZo2aT2qyVaq1tZB70RpHnfIjUq
+         Fpug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=GSYpyS0BJnkAwDfOXYcjLT3i5F59b/EcOiFMXA0XgGc=;
-        b=UoRA2udsRPQg4Jrw1tmh/5gJBn8/2D+o8NR9TrwdbHyxNeCxF+yT9o34nADvkzP3RA
-         woC1GEuygPLdu2BqbrAcEF6VcC5VWGl9pS5z9OeD10cTGfkZ1LF738E1L674gB7vcOla
-         M9/Fn4wLQN0yZ+nCcuUZ1ilwIoDdwsKCJTQUjgFXlOAVIfsssYHghgaNin/3rQY/sdUO
-         kv9F/yCe61BidWLn8IXSFrXzn1tp5g61CO1rwQmW2MwJKuuStpyY84ZrR0HcC5dss6YQ
-         ldE3EPLNmtqLNDIjEFKTSH759lLErLZ84NCCDqEQ3XWutkS6sioY3XucXyrJxZIwv5jY
-         p69g==
-X-Gm-Message-State: AOAM532iFMR/zEIonwYBG6yhCf9DoE0GDyj8BnqeFIayA8nkcr7dJ4bH
-	YvlIg83d7TSzQ+cZlRQnXK84w9Sl9hsafuOT
-X-Google-Smtp-Source: ABdhPJzOtcMpRxX41QuZ3FEZSzZjU7mvMIyr+Py7aCjVxb1+U9zgnlvvWDSz/tX/1/IwwmW8ZwjTzw==
-X-Received: by 2002:a2e:8e8f:: with SMTP id z15mr7349084ljk.121.1630069599089;
-        Fri, 27 Aug 2021 06:06:39 -0700 (PDT)
+        bh=6eFA08cXF9koUoS71ydcRO4RQyptYftBICleu+U+Xo4=;
+        b=kicBwDgP0ID3Oj205L/bElcET6xFR+L36QHuGIBDPyL2zydrLNZQSqnvNYeOu5uP6W
+         G0y3aC9EYs2pgpExCG3f4CQqZcc7pOl3qb/C1v0AzUVz1nK8YgdvPmzi1lZVqkQf4gGE
+         fG4djuoIJWM9v377phIpIMiPQg4KF/sZWRl05h1B5vbdC4u5uIOhdPnJ5Yc2hGjewrQV
+         lTZT6Vxmt3VA48aL+cfnbNRK0zgZEEJLVHi8svopb10LI3y2bRPa8/hfxdD18kQwe7W7
+         P9HNnVRJb7GfhXcahvqDjaEwsDdvz6VEmiAgzmXGALaN8/iJruU6+40xzNigWJnExXjW
+         ZZMQ==
+X-Gm-Message-State: AOAM533XzJvkhPAGuJ8pqz0E2ePzA7Y4t3kdZlGZAg830qNveIONQ1eU
+	EV1D90SEt/VAcayB6DNYELrKjGX9Le5Tegb1
+X-Google-Smtp-Source: ABdhPJzxYYj4SJsHqyaLAANB4F6L0Fn+lj4XPl6aGC1Yf4rkMMb+OgeE7wFqnhi3GUXA2QgQ41N4AQ==
+X-Received: by 2002:a05:6512:2088:: with SMTP id t8mr6664965lfr.88.1630070581922;
+        Fri, 27 Aug 2021 06:23:01 -0700 (PDT)
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from localhost.localdomain (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
-        by smtp.gmail.com with ESMTPSA id m5sm591068lfk.267.2021.08.27.06.06.37
+        by smtp.gmail.com with ESMTPSA id d1sm596445lfh.209.2021.08.27.06.23.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Aug 2021 06:06:38 -0700 (PDT)
+        Fri, 27 Aug 2021 06:23:01 -0700 (PDT)
 From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-oe][PATCH] can-tuils: update to 2021.08.0
-Date: Fri, 27 Aug 2021 15:06:31 +0200
-Message-Id: <20210827130631.2865172-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-oe][PATCH] xf86-input-tslib: update to 1.1.1
+Date: Fri, 27 Aug 2021 15:22:59 +0200
+Message-Id: <20210827132259.3006674-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../{can-utils_git.bb => can-utils_2021.08.0.bb}         | 9 ++-------
- 1 file changed, 2 insertions(+), 7 deletions(-)
- rename meta-oe/recipes-extended/socketcan/{can-utils_git.bb => can-utils_2021.08.0.bb} (80%)
+ ...f86-input-tslib_0.0.7.bb => xf86-input-tslib_1.1.1.bb} | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-driver/{xf86-input-tslib_0.0.7.bb => xf86-input-tslib_1.1.1.bb} (81%)
 
-diff --git a/meta-oe/recipes-extended/socketcan/can-utils_git.bb b/meta-oe/recipes-extended/socketcan/can-utils_2021.08.0.bb
-similarity index 80%
-rename from meta-oe/recipes-extended/socketcan/can-utils_git.bb
-rename to meta-oe/recipes-extended/socketcan/can-utils_2021.08.0.bb
-index ad7fc596e..c470caf62 100644
---- a/meta-oe/recipes-extended/socketcan/can-utils_git.bb
-+++ b/meta-oe/recipes-extended/socketcan/can-utils_2021.08.0.bb
-@@ -1,14 +1,9 @@
- SUMMARY = "Linux CAN network development utilities"
--LICENSE = "GPLv2 & BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://include/linux/can.h;endline=44;md5=a9e1169c6c9a114a61329e99f86fdd31"
--
-+BUGTRACKER = "https://github.com/linux-can/can-utils/issues" LICENSE = "GPLv2 & BSD-3-Clause" LIC_FILES_CHKSUM = "file://include/linux/can.h;endline=44;md5=a9e1169c6c9a114a61329e99f86fdd31" 
- DEPENDS = "libsocketcan"
+diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.7.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_1.1.1.bb
+similarity index 81%
+rename from meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.7.bb
+rename to meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_1.1.1.bb
+index 830ca7ac9..9f445ff26 100644
+--- a/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.7.bb
++++ b/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_1.1.1.bb
+@@ -1,16 +1,16 @@
+ require recipes-graphics/xorg-driver/xorg-driver-input.inc
++
+ SUMMARY = "X.Org X server -- tslib input driver"
++LIC_FILES_CHKSUM = "file://COPYING;md5=f1524518264f7776a9707c19c8affbbf"
++
+ DEPENDS += "tslib"
+ RRECOMMENDS:${PN} += "tslib-calibrate"
  
- SRC_URI = "git://github.com/linux-can/${BPN}.git;protocol=git"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=f1524518264f7776a9707c19c8affbbf"
 -
--SRCREV = "e9dd86fa5c4e6ecdfc34e487634a32f19e5c4d63"
--
--PV = "2021.06.0"
-+SRCREV = "3615bac17e539a06835dcb90855eae844ee18053"
+ SRC_URI = "https://github.com/merge/xf86-input-tslib/releases/download/${PV}/xf86-input-tslib-${PV}.tar.xz \
+            file://99-xf86-input-tslib.rules \
+ "
  
- S = "${WORKDIR}/git"
+-SRC_URI[md5sum] = "c5ffb03bccccfa1c4ba11079fef0036e"
+-SRC_URI[sha256sum] = "1439a9efa50eb481e6a0ab5319ab0765d457732e7da64e3c15f3c0cd13b44297"
++SRC_URI[sha256sum] = "b596168c4ed2f1023212dc828ce49cbe82a0bbd1aac3c5e2958154d78870ca88"
  
+ do_install:append() {
+     install -d ${D}${nonarch_base_libdir}/udev/rules.d
 -- 
 2.25.1
 
