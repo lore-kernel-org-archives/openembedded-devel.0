@@ -1,88 +1,95 @@
-Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
- by mx.groups.io with SMTP id smtpd.web08.8015.1630070584589165806
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.web10.312.1630082975315722784
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Aug 2021 06:23:05 -0700
+ Fri, 27 Aug 2021 09:49:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=Mw65KwcS;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.167.45, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f45.google.com with SMTP id c8so1763868lfi.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Aug 2021 06:23:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=VVR7s1+y;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id y11so6144140pfl.13
+        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Aug 2021 09:49:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
+        d=gmail.com; s=20161025;
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :cc:references:from:organization:in-reply-to
          :content-transfer-encoding;
-        bh=6eFA08cXF9koUoS71ydcRO4RQyptYftBICleu+U+Xo4=;
-        b=Mw65KwcSpjpYrssi6xBtrKIKCYq2EaYphT6TWh57+U/R2uXGzLmxpz5Rfpefn/Mrlu
-         rxEJGMewUWddE+Zu6kc3JzEBbASFsXjBj12f8oxLkGlTuYigU5qeQdGyhmfIa10bKwWD
-         epCgVGVOPiGBbpRfD5D1pQVL7FRFTsY5QAjoxw3d6UPR2gbHLokMFD0B2KnXP3yqKzI+
-         TaJD1ZADrt2TQplRo+hWZgZJQ8OUxXmmraNwcuUxFJiSn7LwJr5JvIqKWe2BDOJatCRw
-         LeWu5MC/Br+wpABPO8sF4a7qCUwzD8/HAFZ3x3oBkOZo2aT2qyVaq1tZB70RpHnfIjUq
-         Fpug==
+        bh=hXq7JGmE6OM/epKa41hTIH+1K7O6ZafSsttyOrt8sUw=;
+        b=VVR7s1+yzZRl/gl8xCsS6jaimo7RxnKS+AFctbdAsriuN6C62XOsybCxUzC6+VR9VI
+         bVTmeeBMwRqRNR8F06UVG/Pi2GbGiElbAT51k10vbu/REKXt4nGZIshMYADN1RugDM8X
+         /TicjNk89MtasNnXllxqaK7Vx335tz3RZsz/nC6/1T7m42TTYiASPWo2c7hCwhKIVd+I
+         I2dbeU2dgQO9rIs5a4a1R6bQG4+K1BsusivjYIyYnQSBBKtUJa/mpFEE2InnuYxEaYQA
+         b5V1BECNt/9egIkxaz7RqjaUUo09eS+oXm/DSI/eBlCIz7LUc3D5s5d75oyXQ5NqApEh
+         ZSgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:cc:references:from:organization:in-reply-to
          :content-transfer-encoding;
-        bh=6eFA08cXF9koUoS71ydcRO4RQyptYftBICleu+U+Xo4=;
-        b=kicBwDgP0ID3Oj205L/bElcET6xFR+L36QHuGIBDPyL2zydrLNZQSqnvNYeOu5uP6W
-         G0y3aC9EYs2pgpExCG3f4CQqZcc7pOl3qb/C1v0AzUVz1nK8YgdvPmzi1lZVqkQf4gGE
-         fG4djuoIJWM9v377phIpIMiPQg4KF/sZWRl05h1B5vbdC4u5uIOhdPnJ5Yc2hGjewrQV
-         lTZT6Vxmt3VA48aL+cfnbNRK0zgZEEJLVHi8svopb10LI3y2bRPa8/hfxdD18kQwe7W7
-         P9HNnVRJb7GfhXcahvqDjaEwsDdvz6VEmiAgzmXGALaN8/iJruU6+40xzNigWJnExXjW
-         ZZMQ==
-X-Gm-Message-State: AOAM533XzJvkhPAGuJ8pqz0E2ePzA7Y4t3kdZlGZAg830qNveIONQ1eU
-	EV1D90SEt/VAcayB6DNYELrKjGX9Le5Tegb1
-X-Google-Smtp-Source: ABdhPJzxYYj4SJsHqyaLAANB4F6L0Fn+lj4XPl6aGC1Yf4rkMMb+OgeE7wFqnhi3GUXA2QgQ41N4AQ==
-X-Received: by 2002:a05:6512:2088:: with SMTP id t8mr6664965lfr.88.1630070581922;
-        Fri, 27 Aug 2021 06:23:01 -0700 (PDT)
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from localhost.localdomain (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
-        by smtp.gmail.com with ESMTPSA id d1sm596445lfh.209.2021.08.27.06.23.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Aug 2021 06:23:01 -0700 (PDT)
-From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-oe][PATCH] xf86-input-tslib: update to 1.1.1
-Date: Fri, 27 Aug 2021 15:22:59 +0200
-Message-Id: <20210827132259.3006674-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+        bh=hXq7JGmE6OM/epKa41hTIH+1K7O6ZafSsttyOrt8sUw=;
+        b=gNbexmi8nUXuDp7HTgVEw2TevyHJuuKtyEsBIccsSPxztCSSH5rlHrMa6Nx7XLF5+b
+         Pib+wbYf+NneN4KSz0FC2+1WdetpbtiIo7XIjX196AMs3/IPkod/ANuPQqiLHadIhvPS
+         LUtiVBKOYQNezy7bBKhZLxOJvzVrF4dLSzugXE5BN1meq+CG6fmsLnqzRzeItg8O68ju
+         XI2Ur7AgIEdFzOdDLSMq5KZGgtOBkq6TUhSIbfi2fS6HaJc2iC32s0pR03RaR0ubfPk9
+         8NX7lITAmGz030nTRxiR+vl185xDIF8hqB/mhCLJnvlL01DUzPR+fCapCeraCCNL2jqT
+         +ozg==
+X-Gm-Message-State: AOAM532zPuep41U082nG25GPZDcuJKvo4aJlNJehWbA2GY31Yohq/b4U
+	Bri0hFg2OI07KNaqRY4Qnfg=
+X-Google-Smtp-Source: ABdhPJwdE39nz/tGJ4iXxCwgOExY32RoeL82yR3aiDh+kevYPtR514UmheiSaRa8Zkf+4wxpTivDYA==
+X-Received: by 2002:aa7:8151:0:b029:3e0:bba6:9754 with SMTP id d17-20020aa781510000b02903e0bba69754mr10175450pfn.19.1630082974759;
+        Fri, 27 Aug 2021 09:49:34 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPV6:2601:646:9200:a0f0:2885:b622:d56f:490e? ([2601:646:9200:a0f0:2885:b622:d56f:490e])
+        by smtp.gmail.com with ESMTPSA id q12sm6923692pfj.153.2021.08.27.09.49.33
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 27 Aug 2021 09:49:34 -0700 (PDT)
+Message-ID: <f0a92ad5-1cc1-c383-7ca2-31825762c761@gmail.com>
+Date: Fri, 27 Aug 2021 09:49:32 -0700
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.0.3
+Subject: Re: [oe] [meta-gnome][PATCH] metacity: Use autotools-brokensep
+To: zboszor@pr.hu, openembedded-devel@lists.openembedded.org
+Cc: zboszor@gmail.com
+References: <20210827084346.2770947-1-zboszor@pr.hu>
+From: "Khem Raj" <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+In-Reply-To: <20210827084346.2770947-1-zboszor@pr.hu>
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- ...f86-input-tslib_0.0.7.bb => xf86-input-tslib_1.1.1.bb} | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-graphics/xorg-driver/{xf86-input-tslib_0.0.7.bb => xf86-input-tslib_1.1.1.bb} (81%)
 
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.7.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_1.1.1.bb
-similarity index 81%
-rename from meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.7.bb
-rename to meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_1.1.1.bb
-index 830ca7ac9..9f445ff26 100644
---- a/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.7.bb
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_1.1.1.bb
-@@ -1,16 +1,16 @@
- require recipes-graphics/xorg-driver/xorg-driver-input.inc
-+
- SUMMARY = "X.Org X server -- tslib input driver"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f1524518264f7776a9707c19c8affbbf"
-+
- DEPENDS += "tslib"
- RRECOMMENDS:${PN} += "tslib-calibrate"
- 
--LIC_FILES_CHKSUM = "file://COPYING;md5=f1524518264f7776a9707c19c8affbbf"
--
- SRC_URI = "https://github.com/merge/xf86-input-tslib/releases/download/${PV}/xf86-input-tslib-${PV}.tar.xz \
-            file://99-xf86-input-tslib.rules \
- "
- 
--SRC_URI[md5sum] = "c5ffb03bccccfa1c4ba11079fef0036e"
--SRC_URI[sha256sum] = "1439a9efa50eb481e6a0ab5319ab0765d457732e7da64e3c15f3c0cd13b44297"
-+SRC_URI[sha256sum] = "b596168c4ed2f1023212dc828ce49cbe82a0bbd1aac3c5e2958154d78870ca88"
- 
- do_install:append() {
-     install -d ${D}${nonarch_base_libdir}/udev/rules.d
--- 
-2.25.1
 
+On 8/27/21 1:43 AM, Zoltan Boszormenyi via lists.openembedded.org wrote:
+> From: Zoltán Böszörményi <zboszor@gmail.com>
+> 
+> The split build directory causes a make error because
+> build/src/core is not created during the build but generated
+> sources are moved to it which fails.
+> 
+> Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
+> ---
+>   meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb b/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb
+> index a5c704740..969fe13dd 100644
+> --- a/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb
+> +++ b/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb
+> @@ -21,6 +21,8 @@ DEPENDS = " \
+>   # depends on startup-notification which depends on virtual/libx11
+>   REQUIRED_DISTRO_FEATURES = "x11"
+>   
+> +GNOMEBASEBUILDCLASS = "autotools-brokensep"
+> +
+
+this does not fail on jenkins so I wonder what are the conditions to 
+reproduce it.
+
+>   inherit gnomebase gsettings gettext upstream-version-is-even features_check
+>   
+>   SRC_URI[archive.sha256sum] = "224c1f65487eac21f0c1d9856152343768ee726c48b1a8a2835a46a8ad9015b5"
+> 
+> 
+> 
+> 
+> 
