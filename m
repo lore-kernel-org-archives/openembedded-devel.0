@@ -1,59 +1,59 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.4])
- by mx.groups.io with SMTP id smtpd.web10.4317.1630042850853726595
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web10.4322.1630042875246045955
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Aug 2021 22:40:51 -0700
+ Thu, 26 Aug 2021 22:41:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Y/JwEQLt;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.4, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=aJL7H8c2;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1630042848; i=@fujitsu.com;
-	bh=qPmq8MwUi2B1s1Nm8PRYGHYfVYlfSFcaWq5M7xcXlDU=;
+	s=170520fj; t=1630042873; i=@fujitsu.com;
+	bh=y/I1TwAnm5NvJ75+IJJ7wJW4sJVIxB69T4dGqjfkNhk=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=Y/JwEQLtLXGzri7fjRd+JOS45FdrMLHTrQCQB323un9V88+LkFmarWJRnu+MsdzoW
-	 rYUCcC8OtUgiJqhcor5YNIolmYzj+XWpCTcBuc3zEncvvhXQKslS6kMPrcaVuz0njS
-	 7DkVhXyI5bvS7SVnrYi/YgAVePjPP8TvZBfh1W4kUV6Nk8XDG+5kRHKdM97CYrV5Km
-	 cCkeA/puHWvLfWuk9NTQQ8nIFNBZjUDGuBcUreeLz+Md/xlNymPmmCQDGEUBRspAD4
-	 35GEwJASyIvmOQQ6AtGytaUXzbt4MofiZUGiWtCpD5IihX+I4Jmo6nvI2Lq8JiR5wx
-	 zHcgDMeOPBZPA==
-Received: from [100.113.3.88] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-a.eu-central-1.aws.symcld.net id 1F/68-28153-0EA78216; Fri, 27 Aug 2021 05:40:48 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuplkeJIrShJLcpLzFFi42Kxs+GYonu/SiP
-  R4Fq/tsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmtHReZWp4AZXxeqbrYwNjMs4uxi5OIQEZjNJ
-  XHn6gBnCOcEoseHpBJYuRk4ONgEdiY4X3WC2iIC+xNLZe5hBbGEBD4m7GzrAbBYBVYm5q7Ywg
-  ti8Au4S1+8fAquXEFCQmPLwPTNEXFDi5MwnYHFmAQmJgy9eMEPUKEps33kGqr5C4vXhS8wTGH
-  lmIWmZhaRlASPTKkbLpKLM9IyS3MTMHF1DAwNdQ0NjXWNdQ0sTvcQq3US91FLd5NS8kqJEoKx
-  eYnmxXnFlbnJOil5easkmRmAopRQyH9rB+OT1B71DjJIcTEqivDvSNRKF+JLyUyozEosz4otK
-  c1KLDzHKcHAoSfCuqwDKCRalpqdWpGXmAMMaJi3BwaMkwttTCZTmLS5IzC3OTIdInWJUlBLn9
-  QdJCIAkMkrz4NpgsXSJUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjBvGMgUnsy8Erjpr4AWMw
-  EtLuBTBVlckoiQkmpg8hTNX9cjdszy2rPZl0tUVvBcf9p6flf5BYM+hgnHNp7jv7rv8LQ7h96
-  v199borFonWH87S+6cw+cO5PHtHJFEbundEtoHF+V/er+R6/jn3xfkNB8wlexL/UTB9e+5ZuO
-  edTeYrbim315ee6EPaXbg3/rp/x/KB+6XnQCx/kNHHdLJuiYr7PhNr+sNuuC0q3zCme17yz95
-  Lh8jdbF0/n86R4yl5/GRNxdLftd9dz3fwL1EfOOm0pUORyYm8VQ3KXXV1Wovqi5gvvY/pzP7S
-  WP0qJYHJn3c23K36Wj9EVCII1V9Jn4Ee+VMwSZTk9R8Mo7/0X6sNpURpsTa568Lf0lu9I3JeN
-  BaA73Wq+z9xZ9alBiKc5INNRiLipOBAAkhpcVIAMAAA==
+	b=aJL7H8c2sSu/casw9eL3OknJPx1GTxUPQZB56MrU+eWQJDGlNf2VjkQqOUCpMvNb1
+	 yLACqDiI1cZ0Y6Zr3C+Z9PqfQqIVuNCp/YKipyme6J/gbdB+F7e8GmFHB7OpxynW4U
+	 5uZHWKY3pgdOVGEiMQsXeqcHbyJ5QBoPpfi8n65QQqT0tEwr1BR9TJBLs3o7V6Dh9F
+	 pvDR/R4K9Q/b2hIrAgANZrqwzMUehu0ivjQDCc8vCR2GW1mEQtBtaKAFgSJIJwOWRw
+	 3qriuu0t4kRGCnpuB7ovF/zTjAKETEs+yrWY6EiOX9zIuIZlCZMj0OPLuKDdPbu0vj
+	 iT7eKSY1ZDIqA==
+Received: from [100.113.6.84] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-b.eu-central-1.aws.symcld.net id 48/A1-27408-8FA78216; Fri, 27 Aug 2021 05:41:12 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+GYovujSiP
+  R4PQqDYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeP+w92MBbM5K5rPrWRrYDzI0cXIySEkMJtJ
+  YvVsoy5GLiD7BKPEpP49TCAJNgEdiY4X3SwgtoiAvsTS2XuYQWxhAV+J8xObwWpYBFQlzhyeD
+  hbnFXCXeL/yKFi9hICCxJSH76HighInZz4BizMLSEgcfPGCGaJGUWL7zjNQ9RUSrw9fYp7AyD
+  MLScssJC0LGJlWMVomFWWmZ5TkJmbm6BoaGOgaGhrrmuoamRjqJVbpJumlluomp+aVFCUCZfU
+  Sy4v1iitzk3NS9PJSSzYxAgMppZD14w7GQ68/6B1ilORgUhLl3ZGukSjEl5SfUpmRWJwRX1Sa
+  k1p8iFGGg0NJgnddBVBOsCg1PbUiLTMHGNQwaQkOHiUR3p5KoDRvcUFibnFmOkTqFKOilDivP
+  0hCACSRUZoH1waLpEuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHnDQKbwZOaVwE1/BbSYCW
+  hxAZ8qyOKSRISUVAMTa4Ff+besbzXCuubr2ZXO62voK+1knpv31i2qKbt1p9RR/VvH9Vsz85+
+  uSu7pMLpoGtzl4nHvX/iMeZ0e6tdmzdj8++906aPnPhc+e/BaqNf+q+yf2uqdrHyV3K9K2o/t
+  Z/FnfTjpq2R5h93sxLcPH1xNaxR583G5x1RzGT6XWzkH/7jcunogpVIzbGH+z9IdTi27vt93u
+  n/liiPL5OnN+zOmRIdseCkosHXfCv9LZnOYmN/slRfUsjp3Lkb6TVC3kYjq/7NVTJ/1naO2+Z
+  euKdK6VhEe7Otfts9KKNfw57fbOpyFayX3mP45oyRa9uyrnl1ZsfR+sSmPw00a+TYEvL4l9Tz
+  +Y0DFsT0TgvOVWIozEg21mIuKEwHDjuvnHwMAAA==
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-12.tower-232.messagelabs.com!1630042847!122479!1
+X-Msg-Ref: server-7.tower-248.messagelabs.com!1630042872!123027!1
 X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 2158 invoked from network); 27 Aug 2021 05:40:47 -0000
+Received: (qmail 12408 invoked from network); 27 Aug 2021 05:41:12 -0000
 Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-12.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 27 Aug 2021 05:40:47 -0000
+  by server-7.tower-248.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 27 Aug 2021 05:41:12 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17R5elre013287
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17R5fCDi013425
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Aug 2021 06:40:47 +0100
+	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Aug 2021 06:41:12 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.18; Fri, 27 Aug 2021 06:40:45 +0100
+ (TLS) id 15.0.1497.18; Fri, 27 Aug 2021 06:41:10 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-h5py: upgrade 3.3.0 -> 3.4.0
-Date: Fri, 27 Aug 2021 13:40:40 +0800
-Message-ID: <1630042840-53158-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-haversine: upgrade 2.3.1 -> 2.4.0
+Date: Fri, 27 Aug 2021 13:41:05 +0800
+Message-ID: <1630042865-53233-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -63,34 +63,26 @@ Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../python/{python3-h5py_3.3.0.bb => python3-h5py_3.4.0.bb}    | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-h5py_3.3.0.bb => python3-h5py_3.4.0.bb} (86%)
+ .../{python3-haversine_2.3.1.bb => python3-haversine_2.4.0.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-haversine_2.3.1.bb => python3-haversine_2.4.0.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-h5py_3.3.0.bb b/meta-python/recipes-devtools/python/python3-h5py_3.4.0.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-h5py_3.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-h5py_3.4.0.bb
-index 68cd8ea850..cc23802626 100644
---- a/meta-python/recipes-devtools/python/python3-h5py_3.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-h5py_3.4.0.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=113251d71fb0384712c719b567261c5c"
+diff --git a/meta-python/recipes-devtools/python/python3-haversine_2.3.1.bb b/meta-python/recipes-devtools/python/python3-haversine_2.4.0.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-haversine_2.3.1.bb
+rename to meta-python/recipes-devtools/python/python3-haversine_2.4.0.bb
+index c24c6124e0..9eda659e1d 100644
+--- a/meta-python/recipes-devtools/python/python3-haversine_2.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-haversine_2.4.0.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Calculate the distance between 2 points on Earth"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
  
--SRC_URI[sha256sum] = "e0dac887d779929778b3cfd13309a939359cc9e74756fc09af7c527a82797186"
-+SRC_URI[sha256sum] = "ee1c683d91ab010d5e85cb61e8f9e7ee0d8eab545bf3dd50a9618f1d0e8f615e"
+-SRC_URI[sha256sum] = "75a7f859b3fb6df746564ca66ad1fd5b4052cdbab3d74ff16e8f1a7c3d4a26a5"
++SRC_URI[sha256sum] = "6dcdee48b854b7bd0a121a04a2cb775dc7d9e2354f1e22d29ff62110189305b0"
  
- SRC_URI:append = " \
-            file://0001-setup_build.py-avoid-absolute-path.patch \
-@@ -26,6 +26,7 @@ DEPENDS = "python3-pkgconfig-native \
+ inherit pypi setuptools3
  
- RDEPENDS:${PN} = "python3-numpy \
-                   python3-six \
-+                  python3-json \
-                  "
- 
- export HDF5_VERSION="1.8.21"
 -- 
 2.25.1
 
