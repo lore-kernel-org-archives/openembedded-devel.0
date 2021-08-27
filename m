@@ -1,129 +1,88 @@
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web10.35221.1630002603377956376
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.1])
+ by mx.groups.io with SMTP id smtpd.web08.4300.1630042747581410137
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Aug 2021 11:30:03 -0700
+ Thu, 26 Aug 2021 22:39:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=SJ0NOud7;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id u13-20020a17090abb0db0290177e1d9b3f7so7201156pjr.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Aug 2021 11:30:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=EWGO1MtPLEZLPvhvVGziqSL/XU2wd/1FaohD/wEZnFE=;
-        b=SJ0NOud7C1qCng3FBbH1j/FTggwdMv/LrulgYzCvg2yJoZH1fDkGlAAMh/9rDCAJyv
-         hvUHRMKPRzVFXhb9zXhvy5IqFgs6DI6YpFTsT2/Kbv/g+PBT98J73cuHnFsJGlk/Uvqc
-         LiQ0s6QRESkxqD5v57ZKaZmG6sTkTmvpne6RtguusT4PuUQrtA/DCgUy26F37WfsDFOZ
-         FK5kdvktMak+4zcgmZB5ggBRcHiSMMrCZZEpt6O+J+II6zXlhJb2pH1SLLupjaIQ52px
-         /KS6fe4loL4RAtDBlMR16HXO4XclhzCT5Rf8vm6/alKPXhwuQIPguZm7IShlDM7P6vw4
-         anbQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=EWGO1MtPLEZLPvhvVGziqSL/XU2wd/1FaohD/wEZnFE=;
-        b=grU+HtiCbUP7sKcia3gMP9tsxnqCM5kpmTn9RJfjEPvSBfsm/jmaQ8RKiFZ22CPr3h
-         hswcpTS81epuw0tg8Es5Jw0ikwXqYvCMH1wjGM4HtopKr9dZym7+/cyK8KhX6wCg0LAL
-         TyO+ORCscPQurhtrl3wGnV2+6E1IbMovSOmcaEdTxK6MDjh4cCUzwISyCq2HihvkUfEq
-         7csEfJFDw6fk8MalliAqc+e0KN/RC4wkea9k4TarySRXwqe/G+N7cM1EHzW88zzGIMM+
-         shR61bZFXi+7I+OWFXZuYX2mn4Xq50uzp+ryexggNQrIC5vULz+Ow6RZwOiEBWTF8uYj
-         stCw==
-X-Gm-Message-State: AOAM532GtP98+s99qS2VDKS/LDC7JYlTtZ5a5Za5q//UK9yR4wvR/qBd
-	h6poJzzjF7z/lpkV6hIxn9llmlcTHqmXgA==
-X-Google-Smtp-Source: ABdhPJw/rhsW8DQ6aC8WEvojNuckjSdlPIUzD9uQY3M8oxmgn7sLyA1XzfV+SxNLKlbhKT5olA4jaQ==
-X-Received: by 2002:a17:90a:3fca:: with SMTP id u10mr15074580pjm.148.1630002602669;
-        Thu, 26 Aug 2021 11:30:02 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::1d09])
-        by smtp.gmail.com with ESMTPSA id w9sm9732711pjc.14.2021.08.26.11.30.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Aug 2021 11:30:02 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Ruslan Bilovol <rbilovol@cisco.com>,
-	Alexander Kanavin <alex.kanavin@gmail.com>
-Subject: [meta-oe][PATCH] libnss-nisplus: Remove
-Date: Thu, 26 Aug 2021 11:29:57 -0700
-Message-Id: <20210826182957.3558448-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.33.0
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Zp3ZDX4R;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.1, mailfrom: zangrc.fnst@fujitsu.com)
+Return-Path: <zangrc.fnst@fujitsu.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1630042745; i=@fujitsu.com;
+	bh=lglry8XtjXpqJdXHtcCx1ou80G735XFrJjriEvNiOUk=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=Zp3ZDX4RyzvLoBhdWGqMIM7jboUur6BeSETK3JEml4fFYQUohPnuIm2ee5romWp51
+	 VC0LoFFDpe4BR0ReKhHDzHSmPkQMjPU3T6GyTKrZp3lCdgQL2nVz2D2Gcw2peKFHBG
+	 uXMWFG4bG7u+Sn5iy+S0KdlxRhv5/dUNjBjYUS6aNaD2wydRfW6SqVa47XXnK7ALVF
+	 G2a/Prwsu5Xv4HceXvr6QCz7RUJGfj9/pDI67XU63f74invZhc58nG/Z0VgBz9w2Lo
+	 E9uCBWXOlcvp/gzCRbTweTWvUlw35N13oMjZbsnmJt52hKXhX+J1K5HtjcCShpXnEF
+	 Ee6Hqb6Lrkc2w==
+Received: from [100.112.192.29] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-a.eu-west-1.aws.symcld.net id B0/0A-13722-97A78216; Fri, 27 Aug 2021 05:39:05 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYqltRpZF
+  o8PKEjsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvGy/yhbwSHOinc7TrE0ML7g6GLk4hASmM0k
+  sXP6c6YuRk4g5wSjxKEv4iA2m4CORMeLbhYQW0RAX2Lp7D3MILawQIDE+9UfweIsAqoSC/atA
+  7N5BdwlPh29yAhiSwgoSEx5+J4ZIi4ocXLmE7AaZgEJiYMvXjBD1ChKbN95hgXCrpB4ffgS8w
+  RGnllIWmYhaVnAyLSK0SKpKDM9oyQ3MTNH19DAQNfQ0EjX0BKIjcz0Eqt0E/VSS3XLU4tLdA3
+  1EsuL9Yorc5NzUvTyUks2MQLDKKXgQN0OxgevP+gdYpTkYFIS5d2RrpEoxJeUn1KZkVicEV9U
+  mpNafIhRhoNDSYJ3XQVQTrAoNT21Ii0zBxjSMGkJDh4lEd6eSqA0b3FBYm5xZjpE6hSjopQ4r
+  z9IQgAkkVGaB9cGi6NLjLJSwryMDAwMQjwFqUW5mSWo8q8YxTkYlYR5w0Cm8GTmlcBNfwW0mA
+  locQGfKsjikkSElFQD0/Y/bwT71TJnaTBXbIgqb94j4j0h3KX5aMPCM2LrZENjv/hGeN252/6
+  5z6ucW+A0f3cVZ0DM8mebL4cHeZWLq8R+3X+8+EOxq5xIr1R5fOahrAM3Dhxc9rlp/o3D09el
+  bHTLF5K3/7Ztjvcxp4ylPVd3bNS4VVr97vnvLQ2/UteWvXVzkpivyxn632Tuh5RjkvsMdv/Us
+  hYu2Vz1OnqTU8yNR2HXc6/G//LX0Dty5eHannsmwoKq2pf2XezUKRe+vJr1mHnwUx1ZvbPbeb
+  InrvwcxXomI0j9UjNHj3SM6b6ALVPeRUYuFrZx3V/2OoApTtnnRA/TCS1h169VTSfvd9YmNn7
+  hMN50dO92eQ5hJZbijERDLeai4kQA6hgbxR4DAAA=
+X-Env-Sender: zangrc.fnst@fujitsu.com
+X-Msg-Ref: server-8.tower-267.messagelabs.com!1630042744!109062!1
+X-Originating-IP: [62.60.8.149]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.4; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 19215 invoked from network); 27 Aug 2021 05:39:04 -0000
+Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
+  by server-8.tower-267.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 27 Aug 2021 05:39:04 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 17R5cuLR026581
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Aug 2021 06:39:04 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.18; Fri, 27 Aug 2021 06:38:55 +0100
+From: "zangrc" <zangrc.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-python] [PATCH] python3-aiohttp-jinja2: upgrade 1.4.2 -> 1.5
+Date: Fri, 27 Aug 2021 13:38:48 +0800
+Message-ID: <1630042728-52954-1-git-send-email-zangrc.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Type: text/plain
 
-The support for NIS+ has been dropped in libnsl2 [1]
-moreover the upstream repository has been archived [2] which indicates that
-this component is no more actively maintained
-
-[1] https://github.com/thkukuk/libnsl/commit/74c9cdf0ee0cc1a21936a20dd4eb4542faa03867
-[2] https://github.com/thkukuk/libnss_nisplus
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Ruslan Bilovol <rbilovol@cisco.com>
-Cc: Alexander Kanavin <alex.kanavin@gmail.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../packagegroups/packagegroup-meta-oe.bb     |  3 +-
- .../libnss-nisplus/libnss-nisplus.bb          | 31 -------------------
- 2 files changed, 1 insertion(+), 33 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb
+ ...n3-aiohttp-jinja2_1.4.2.bb => python3-aiohttp-jinja2_1.5.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-aiohttp-jinja2_1.4.2.bb => python3-aiohttp-jinja2_1.5.bb} (78%)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index c3f4867071..f58905f0bc 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -395,7 +395,6 @@ RDEPENDS:packagegroup-meta-oe-extended ="\
-     libusbmuxd \
-     liblockfile \
-     liblogging \
--    libnss-nisplus \
-     libpwquality \
-     ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "libreport", "", d)} \
-     libserialport \
-@@ -434,7 +433,7 @@ RDEPENDS:packagegroup-meta-oe-extended:append:libc-musl = " libexecinfo"
- RDEPENDS:packagegroup-meta-oe-extended:append:x86-64 = " pmdk libx86-1"
- RDEPENDS:packagegroup-meta-oe-extended:append:x86 = " libx86-1"
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.4.2.bb b/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.5.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.4.2.bb
+rename to meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.5.bb
+index f97cf12dbf..c86ec092a6 100644
+--- a/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.4.2.bb
++++ b/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.5.bb
+@@ -3,7 +3,7 @@ SUMMARY = "jinja2 template renderer for aiohttp.web (http server for asyncio)"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=29dca541e03964615590ca7b50392d97"
+ 
+-SRC_URI[sha256sum] = "9c22a0e48e3b277fc145c67dd8c3b8f609dab36bce9eb337f70dfe716663c9a0"
++SRC_URI[sha256sum] = "7c3ba5eac060b691f4e50534af2d79fca2a75712ebd2b25e6fcb1295859f910b"
+ 
+ inherit pypi setuptools3
+ 
+-- 
+2.25.1
 
--RDEPENDS:packagegroup-meta-oe-extended:remove:libc-musl = "libnss-nisplus sysdig"
-+RDEPENDS:packagegroup-meta-oe-extended:remove:libc-musl = "sysdig"
- RDEPENDS:packagegroup-meta-oe-extended:remove:mipsarch = "upm mraa minifi-cpp tiptop"
- RDEPENDS:packagegroup-meta-oe-extended:remove:mips = "sysdig"
- RDEPENDS:packagegroup-meta-oe-extended:remove:powerpc = "upm mraa minifi-cpp"
-diff --git a/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb b/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb
-deleted file mode 100644
-index 602e963752..0000000000
---- a/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb
-+++ /dev/null
-@@ -1,31 +0,0 @@
--# Copyright (C) 2019 Ruslan Bilovol <rbilovol@cisco.com>
--# Released under the MIT license (see COPYING.MIT for the terms)
--
--SUMMARY = "NSS module for glibc, to provide NIS+ support for glibc"
--
--DESCRIPTION = "This package contains the NSS NIS+ plugin for glibc.\
--This code was formerly part of glibc, but is now standalone to\
--be able to link against TI-RPC for IPv6 support."
--
--HOMEPAGE = "https://github.com/thkukuk/libnss_nisplus"
--LICENSE = "LGPL-2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
--SECTION = "libs"
--DEPENDS += "libtirpc libnsl2"
--
--PV = "1.3+git${SRCPV}"
--
--SRCREV = "116219e215858f4af9370171d3ead63baca8fdb4"
--
--SRC_URI = "git://github.com/thkukuk/libnss_nisplus \
--          "
--
--S = "${WORKDIR}/git"
--
--inherit autotools pkgconfig
--
--BBCLASSEXTEND += "native nativesdk"
--#
--# We will skip parsing this packagegeoup for non-glibc systems
--#
--COMPATIBLE_HOST:libc-musl = 'null'
---
-2.33.0
