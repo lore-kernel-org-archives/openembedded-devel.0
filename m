@@ -1,70 +1,84 @@
-Received: from mail6.pr.hu (mail6.pr.hu [87.242.0.6])
- by mx.groups.io with SMTP id smtpd.web11.5534.1630053837333600377
+Received: from mail-lj1-f179.google.com (mail-lj1-f179.google.com [209.85.208.179])
+ by mx.groups.io with SMTP id smtpd.web10.7714.1630069601783008694
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Aug 2021 01:43:58 -0700
+ Fri, 27 Aug 2021 06:06:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@pr.hu header.s=pr20170203 header.b=BYidHI6q;
- spf=pass (domain: pr.hu, ip: 87.242.0.6, mailfrom: zboszor@pr.hu)
-Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
-	by frontdoor.pr.hu with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.89)
-	(envelope-from <zboszor@pr.hu>)
-	id 1mJXSs-0002nV-6d; Fri, 27 Aug 2021 10:43:54 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
-	s=pr20170203; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
-	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=+7XsWd0IYJdbTuUp9ZKSd99zfhRSucVzU4KT9svxFO8=; b=BYidHI6qv7ryaNjDlgvTY0rngM
-	e4ZWCYCDnN8/HWxtPbYdwadWQ7MGVDBNYjUN3DdriWe/zo8K9xDPKVFB86pxpC1DySoe+zkYr0ZXO
-	UgdxHemYmtRw/uFlkEjwPlxVmzEhmbMmDunjpF7mZo7bewc90NKIZyO//vS4P1uNW1RHrTF7oQeRd
-	QrgNzbNi5a94k54cT5wPFtkARRR/ydD8wWvwA/LEBuNZengptjpjHgVH3+pl/Ss/PZpYO0fpQ18Zr
-	Cj+FxRzD9BH/hyR6m0nZd0xzkoVk/XZUXAWYx4FlO4597ePdMd4QUjt5HWdoA3dy8mZKu88CTyl85
-	kkmVki2Q==;
-Received: from host-87-242-23-58.prtelecom.hu ([87.242.23.58] helo=localhost.lan)
-	by mail.pr.hu with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <zboszor@pr.hu>)
-	id 1mJXSo-0007iN-91; Fri, 27 Aug 2021 10:43:52 +0200
-From: "Zoltan Boszormenyi" <zboszor@pr.hu>
+ dkim=pass header.i=@oleksandr-kravchuk-com.20150623.gappssmtp.com header.s=20150623 header.b=l8G4rDP5;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com, ip: 209.85.208.179, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f179.google.com with SMTP id q21so11290294ljj.6
+        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Aug 2021 06:06:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=GSYpyS0BJnkAwDfOXYcjLT3i5F59b/EcOiFMXA0XgGc=;
+        b=l8G4rDP5WJf00y+Nrtg4218wJkVkPHEGZXw+WDqH9xrp2+ppqmQPbZdIAxpABza4/x
+         1TiHyzWr108PNGSUGxIn4RyPEzPDIZpG5PLoS/WaH7snaTVQ1doFuCV9bn8HGQapNTGL
+         fiTbNHn2CXNPLUGvtYYgvISO79kXqrT2M2HRU69FWymKm+nNdWj6dSQLABlzd3brmp2y
+         nILIfYkAiRFYvA7QG7P2IDFFi6EdtD2PWsqAlij24UP7+Ul8HfZdoxp9wOI9i0mTENnY
+         SuCNGJI1CWKPcUck5Yz3Q2zVbCrWw6TH+4+t6psGDxTDlojEvP3Og8JpdDFGBGMZlZzg
+         AvjA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=GSYpyS0BJnkAwDfOXYcjLT3i5F59b/EcOiFMXA0XgGc=;
+        b=UoRA2udsRPQg4Jrw1tmh/5gJBn8/2D+o8NR9TrwdbHyxNeCxF+yT9o34nADvkzP3RA
+         woC1GEuygPLdu2BqbrAcEF6VcC5VWGl9pS5z9OeD10cTGfkZ1LF738E1L674gB7vcOla
+         M9/Fn4wLQN0yZ+nCcuUZ1ilwIoDdwsKCJTQUjgFXlOAVIfsssYHghgaNin/3rQY/sdUO
+         kv9F/yCe61BidWLn8IXSFrXzn1tp5g61CO1rwQmW2MwJKuuStpyY84ZrR0HcC5dss6YQ
+         ldE3EPLNmtqLNDIjEFKTSH759lLErLZ84NCCDqEQ3XWutkS6sioY3XucXyrJxZIwv5jY
+         p69g==
+X-Gm-Message-State: AOAM532iFMR/zEIonwYBG6yhCf9DoE0GDyj8BnqeFIayA8nkcr7dJ4bH
+	YvlIg83d7TSzQ+cZlRQnXK84w9Sl9hsafuOT
+X-Google-Smtp-Source: ABdhPJzOtcMpRxX41QuZ3FEZSzZjU7mvMIyr+Py7aCjVxb1+U9zgnlvvWDSz/tX/1/IwwmW8ZwjTzw==
+X-Received: by 2002:a2e:8e8f:: with SMTP id z15mr7349084ljk.121.1630069599089;
+        Fri, 27 Aug 2021 06:06:39 -0700 (PDT)
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from localhost.localdomain (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
+        by smtp.gmail.com with ESMTPSA id m5sm591068lfk.267.2021.08.27.06.06.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 27 Aug 2021 06:06:38 -0700 (PDT)
+From: "Oleksandr Kravchuk" <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: zboszor@gmail.com
-Subject: [meta-gnome][PATCH] metacity: Use autotools-brokensep
-Date: Fri, 27 Aug 2021 10:43:46 +0200
-Message-Id: <20210827084346.2770947-1-zboszor@pr.hu>
-X-Mailer: git-send-email 2.31.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-oe][PATCH] can-tuils: update to 2021.08.0
+Date: Fri, 27 Aug 2021 15:06:31 +0200
+Message-Id: <20210827130631.2865172-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Spam-Score: -0.8 (/)
-X-Scan-Signature: 179ef3736e309226eac6e039e192467d
-X-Spam-Tracer: backend.mail.pr.hu -0.8 20210827084352Z
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Zoltán Böszörményi <zboszor@gmail.com>
-
-The split build directory causes a make error because
-build/src/core is not created during the build but generated
-sources are moved to it which fails.
-
-Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../{can-utils_git.bb => can-utils_2021.08.0.bb}         | 9 ++-------
+ 1 file changed, 2 insertions(+), 7 deletions(-)
+ rename meta-oe/recipes-extended/socketcan/{can-utils_git.bb => can-utils_2021.08.0.bb} (80%)
 
-diff --git a/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb b/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb
-index a5c704740..969fe13dd 100644
---- a/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb
-+++ b/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb
-@@ -21,6 +21,8 @@ DEPENDS = " \
- # depends on startup-notification which depends on virtual/libx11
- REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-oe/recipes-extended/socketcan/can-utils_git.bb b/meta-oe/recipes-extended/socketcan/can-utils_2021.08.0.bb
+similarity index 80%
+rename from meta-oe/recipes-extended/socketcan/can-utils_git.bb
+rename to meta-oe/recipes-extended/socketcan/can-utils_2021.08.0.bb
+index ad7fc596e..c470caf62 100644
+--- a/meta-oe/recipes-extended/socketcan/can-utils_git.bb
++++ b/meta-oe/recipes-extended/socketcan/can-utils_2021.08.0.bb
+@@ -1,14 +1,9 @@
+ SUMMARY = "Linux CAN network development utilities"
+-LICENSE = "GPLv2 & BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://include/linux/can.h;endline=44;md5=a9e1169c6c9a114a61329e99f86fdd31"
+-
++BUGTRACKER = "https://github.com/linux-can/can-utils/issues" LICENSE = "GPLv2 & BSD-3-Clause" LIC_FILES_CHKSUM = "file://include/linux/can.h;endline=44;md5=a9e1169c6c9a114a61329e99f86fdd31" 
+ DEPENDS = "libsocketcan"
  
-+GNOMEBASEBUILDCLASS = "autotools-brokensep"
-+
- inherit gnomebase gsettings gettext upstream-version-is-even features_check
+ SRC_URI = "git://github.com/linux-can/${BPN}.git;protocol=git"
+-
+-SRCREV = "e9dd86fa5c4e6ecdfc34e487634a32f19e5c4d63"
+-
+-PV = "2021.06.0"
++SRCREV = "3615bac17e539a06835dcb90855eae844ee18053"
  
- SRC_URI[archive.sha256sum] = "224c1f65487eac21f0c1d9856152343768ee726c48b1a8a2835a46a8ad9015b5"
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.31.1
+2.25.1
 
