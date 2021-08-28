@@ -1,394 +1,131 @@
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web08.1293.1630136684154209287
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com (EUR05-AM6-obe.outbound.protection.outlook.com [40.107.22.42])
+ by mx.groups.io with SMTP id smtpd.web11.2569.1630149921712462825
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 28 Aug 2021 00:44:44 -0700
+ Sat, 28 Aug 2021 04:25:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=WrTqsxMM;
- spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f48.google.com with SMTP id lc21so18991055ejc.7
-        for <openembedded-devel@lists.openembedded.org>; Sat, 28 Aug 2021 00:44:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=0gxmQ/NtUA2dGlPYWJnyWtmHIFr1Ng2oH3EeshtNwFc=;
-        b=WrTqsxMMu86aSZ6tCQ2hftNv5yZes6eFRs8hKoIvO7HUnEDv4+xUNJsqxua99cux/q
-         Z0i5mt9ceQ0l4hMQIuavcqz/zXYDX0VYTSFiJlhEmDy18618//x3/CBJKZHbVUle1B73
-         4c94eRcrsyyLwToTAdyziGjHPY2ayQlWDglbTTI9MXbtOOIbRNTRh1l/4AVoZYiEom57
-         xFpbBSUqDaQHXvYuFeuVE8cHp9TcvtTfvxDBStkA829lSVTPTyrZ3fKCSNEZ1jv4gpuA
-         0BFW4/ppHTiKnLNX+1KCu06XmdFIVYWKneug5eI67wurvUA1+DCLl5+QciRut5tDp34e
-         yOwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=0gxmQ/NtUA2dGlPYWJnyWtmHIFr1Ng2oH3EeshtNwFc=;
-        b=nzTrjlWxoWP3YDD8WrQ+iEHP8jJY6e5NTGaPTxe3onyNIZGe8Y7GVFDtKHxjo6qbpZ
-         2FwxGgQeC06fF9FENAUskHGLJ4pFHZLwQW8Dr7excQAbXR7oxRDEkaJzI50w+KWDGDHY
-         4YsyObqsjc8zH/uzm1IbpxBwCOuJnYVGlSkfhEXKWIB/ZFXBjmNLj9EcTorSwqjr8qdH
-         m/8OoiDkbAv2JsT+GuQTov5rm39YNOZTw67+HYUvuF58tRj9OVhYLQZCR2gG6LqX16hH
-         Fm8agZVLqyRME3uOwa2g6AeNpi3edLYEf34c+9gLvWKdNmaPPLgL3yi9otg4Z2IBngZP
-         Zs3g==
-X-Gm-Message-State: AOAM533Qvn6o7mGCC798KqijLLMRYgdgGmpUFnKpZInmXxyTa9tj+UdF
-	AXHBXbHhci71n/4/r0BdaqY6zAaJFkcO1qWjIA0=
-X-Google-Smtp-Source: ABdhPJyxbKuU0vD+yhQwbLzCL46cEXh3Vtk8GTl3+NwtCONjaZrlaNQhMak1nzUC8UzpTLJlw4zLNGnY1tuJMDUjXmA=
-X-Received: by 2002:a17:907:990d:: with SMTP id ka13mr14300514ejc.392.1630136682476;
- Sat, 28 Aug 2021 00:44:42 -0700 (PDT)
+ dkim=fail reason="body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=ZW9OXEqO;
+ spf=pass (domain: vaisala.com, ip: 40.107.22.42, mailfrom: vesa.jaaskelainen@vaisala.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=SPoEsGPZW68wp+NAcfrUJIgNpXv3grsaADk3+uCfurccMaqGsVPgsYK4H14j4rJ/uSNd5Td/2XgxnmVI+mUe+rvOH1iS466ZRKz0pUsGlkxg38Oln5ugeHLCm4HjNm6gGFzwe3ASTPpoUC1VhihybHEyTCq3SDaWKy5bjde7w2OiEk5aFB+uVCjcFx/m/LbcA6AlQIOYhDLxXlOZ58ZBtstfWVvvcAAXemr7oDkqtKDt5AGkNkQM+BcWoga1+f7BfcJXPY2YATJxHjabfJOtfEEPyHEHdupWlRWXpZ1BN6fwfH1GoD5Dz0kHNsC23pv5LT4hFsLSrzNfEoOw2RLQag==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2WmYSHmhPbWu4LgjvPVlSZlBzJtfZmEOGSJPw0yYkF4=;
+ b=RX+6kb+y2gcZDJE9PlYHTX0v/D+lmaKWLGcKQK26LEC5a5QUtE38RttMc8QROyjTdoHzs9uDNrn7wu1kPcvV07y3Eh48fqAgUk5g7T9uoQsWOoGmuqAfFTtMljo81+u3qoZoJNVp9dz0Qq/+RxLfqKQ0nKTVMrbWcXz8IcleFeoCZbHhQLavHZuZr0or4EDuVGVSmrAXkhoKwKB314RjfXCXIB/+p2b+WpNBO0cEvMDNKrY+Rd/KKJktwrWIMLIYbcnH0RAVwHE8yyzoPQvu/z7KeBemp7OeW7NsjIa+CYF+wmoOTOy0LJ+RbOAnyTyD7wyidGkYfwg4gg0cpxmbow==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
+ dkim=pass header.d=vaisala.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2WmYSHmhPbWu4LgjvPVlSZlBzJtfZmEOGSJPw0yYkF4=;
+ b=ZW9OXEqOxXjm+5xeMuDhB3S9rWVCCwIb2oUmFvS1YmcOxjgy+iMAUPsbshrwZdlitE+2DaqhIkK2dMrsArl8DQ1tPsJ6zhvoGgL7KuwTXbsdhDH1CvYC21NeUUFMqsCQ2swITGXuPW+JeQsb89/QzNmAZGsJZvKCxtWYaInsyG4Ic8PUX8H5eFj5vWF7ZzqnluAu8+PuB6IamoPMADq2dxUzfzHdvnqib1f6kPSyOyJth8ZQAAIW4O5XrbHPTNX6B8hEbc0XqNEsUIRBkFN6yvb/3pr0zH9uPO0kn1wk9vtDcfgsMceLu/oi/Z1I7bdp8KQH/wNHM8d5wQy0Hrby8g==
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=vaisala.com;
+Received: from HE1PR0602MB3241.eurprd06.prod.outlook.com (2603:10a6:7:17::28)
+ by HE1PR0602MB2841.eurprd06.prod.outlook.com (2603:10a6:3:dd::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4457.18; Sat, 28 Aug
+ 2021 11:25:17 +0000
+Received: from HE1PR0602MB3241.eurprd06.prod.outlook.com
+ ([fe80::213c:5e2f:60ab:ecf4]) by HE1PR0602MB3241.eurprd06.prod.outlook.com
+ ([fe80::213c:5e2f:60ab:ecf4%3]) with mapi id 15.20.4436.019; Sat, 28 Aug 2021
+ 11:25:17 +0000
+From: =?UTF-8?B?VmVzYSBKw6TDpHNrZWzDpGluZW4=?= <vesa.jaaskelainen@vaisala.com>
+To: openembedded-devel@lists.openembedded.org
+CC: =?UTF-8?q?Vesa=20J=C3=A4=C3=A4skel=C3=A4inen?= <vesa.jaaskelainen@vaisala.com>
+Subject: [meta-oe][PATCH] opensc: Upgrade to 0.22.0
+Date: Sat, 28 Aug 2021 14:24:58 +0300
+Message-ID: <20210828112458.247264-1-vesa.jaaskelainen@vaisala.com>
+X-Mailer: git-send-email 2.25.1
+X-ClientProxiedBy: HE1P190CA0015.EURP190.PROD.OUTLOOK.COM (2603:10a6:3:bc::25)
+ To HE1PR0602MB3241.eurprd06.prod.outlook.com (2603:10a6:7:17::28)
+Return-Path: vesa.jaaskelainen@vaisala.com
 MIME-Version: 1.0
-References: <20210824202648.22554-1-pkj@axis.com>
-In-Reply-To: <20210824202648.22554-1-pkj@axis.com>
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-Date: Sat, 28 Aug 2021 09:44:31 +0200
-Message-ID: <CA+chaQeo6qcG7YJrW5+NiXrYXGNg6SFQmZtb2Wy00KpNtJaOgg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/2] gpsd: Let scons install the udev and systemd files
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000e4f74405ca99c58d"
-
---000000000000e4f74405ca99c58d
-Content-Type: text/plain; charset="UTF-8"
-
-This breaks the build without systemd enabled.
-
-mkdir -p
-/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/gpsd/3.23-r0/image/usr/lib/udev/rules.d
-cp
-/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/gpsd/3.23-r0/gpsd-3.23/gpsd-3.23/gpsd.rules
-/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/gpsd/3.23-r0/image/usr/lib/udev/rules.d/25-gpsd.rules
-cp
-/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/gpsd/3.23-r0/gpsd-3.23/gpsd-3.23/gpsd.hotplug
-/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/gpsd/3.23-r0/image/usr/lib/udev
-cp: cannot stat
-'/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/gpsd/3.23-r0/gpsd-3.23/gpsd-3.23/gpsd.hotplug':
-No such file or directory
-scons: *** [gpsd-3.23/udev-install] Error 1
-
-scons fails to install gpsd.hotplug with:
-
-if env['systemd']:
-...
-    hotplug_wrapper_install = []
-else:
-    hotplug_wrapper_install = [
-        'cp $SRCDIR/gpsd.hotplug ' + DESTDIR + env['udevdir'],
-        'chmod a+x ' + DESTDIR + env['udevdir'] + '/gpsd.hotplug'
-    ]
-
-because SRCDIR is set to cwd as
-gpsd/3.23-r0/gpsd-3.23/gpsd-3.23/
-but the gpsd.hotplug is only in source directory one level above as:
-gpsd/3.23-r0/gpsd-3.23/gpsd.hotplug
-
-It's also not clear why do_install:append installs gpsd.hotplug _again_ for
-sysvinit after scons did (once it's fixed) or if it's needed for systemd as
-Sconscript explicitly doesn't install hotplug when systemd is enabled.
-
-On Tue, Aug 24, 2021 at 10:26 PM Peter Kjellerstedt <
-peter.kjellerstedt@axis.com> wrote:
-
-> With the update to 3.23 (commit 87f3070f), the recipe was changed to
-> incorrectly install the gpsd.rules.in file instead of gpsd.rules. It
-> also missed that a new template string (@RUNDIR@) was introduced in the
-> systemd files, making them unusable.
->
-> Instead of trying to keep up with upstream changes, let scons do the job
-> and install the udev and systemd files by using the "udev-install"
-> production instead of "install".
->
-> In addition to the correct files being installed,
-> "/etc/udev/rules.d/gpsd.rules" is now "/lib/udev/rules.d/25-gpsd.rules".
->
-> Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-> ---
->  meta-oe/recipes-navigation/gpsd/gpsd_3.23.bb | 45 ++++++++------------
->  1 file changed, 18 insertions(+), 27 deletions(-)
->
-> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.23.bb
-> b/meta-oe/recipes-navigation/gpsd/gpsd_3.23.bb
-> index 1d031ee95..350eaaf12 100644
-> --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.23.bb
-> +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.23.bb
-> @@ -35,11 +35,13 @@ EXTRA_OESCONS = " \
->      nostrip='true' \
->      systemd='${SYSTEMD_OESCONS}' \
->      libdir='${libdir}' \
-> +    udevdir='${nonarch_base_libdir}/udev' \
-> +    unitdir='${systemd_system_unitdir}' \
->      manbuild='false' \
->      LINK='${CC}' \
->      ${PACKAGECONFIG_CONFARGS} \
->  "
-> -# this cannot be used, because then chrpath is not found and only static
-> lib is built
-> +# This cannot be used, because then chrpath is not found and only static
-> lib is built
->  # target=${HOST_SYS}
->
->  do_compile:prepend() {
-> @@ -58,34 +60,24 @@ do_install() {
->      export LINKFLAGS="${LDFLAGS}"
->
->      export DESTDIR="${D}"
-> -    # prefix is used for RPATH and DESTDIR/prefix for instalation
-> -    ${STAGING_BINDIR_NATIVE}/scons prefix=${prefix}
-> python_libdir=${libdir} install ${EXTRA_OESCONS} || \
-> +    # prefix is used for RPATH and DESTDIR/prefix for installation
-> +    ${STAGING_BINDIR_NATIVE}/scons prefix=${prefix}
-> python_libdir=${libdir} udev-install ${EXTRA_OESCONS} || \
->        bbfatal "scons install execution failed."
->  }
->
->  do_install:append() {
-> -    install -d ${D}/${sysconfdir}/init.d
-> -    install -m 0755 ${WORKDIR}/gpsd.init ${D}/${sysconfdir}/init.d/gpsd
-> -    install -d ${D}/${sysconfdir}/default
-> -    install -m 0644 ${S}/packaging/deb/etc_default_gpsd
-> ${D}/${sysconfdir}/default/gpsd.default
-> -
-> -    #support for udev
-> -    install -d ${D}/${sysconfdir}/udev/rules.d
-> -    install -m 0644 ${S}/gpsd.rules.in ${D}/${sysconfdir}/udev/rules.d/
-> -    install -d ${D}${base_libdir}/udev/
-> -    install -m 0755 ${S}/gpsd.hotplug ${D}${base_libdir}/udev/
-> -
-> -    #support for python
-> -    install -d ${D}/${PYTHON_SITEPACKAGES_DIR}/gps
-> -    install -m 755 ${S}/gps/*.py ${D}/${PYTHON_SITEPACKAGES_DIR}/gps
-> -
-> -    #support for systemd
-> -    install -d ${D}${systemd_unitdir}/system/
-> -    install -m 0644 ${S}/systemd/${BPN}.service.in
-> ${D}${systemd_unitdir}/system/${BPN}.service
-> -    sed -i -e 's,@SBINDIR@,/usr/sbin,g'
-> ${D}${systemd_unitdir}/system/${BPN}.service
-> -    install -m 0644 ${S}/systemd/${BPN}ctl@.service.in
-> ${D}${systemd_unitdir}/system/${BPN}ctl@.service
-> -    sed -i -e 's,@SBINDIR@,/usr/sbin,g'
-> ${D}${systemd_unitdir}/system/${BPN}ctl@.service
-> -    install -m 0644 ${S}/systemd/${BPN}.socket.in
-> ${D}${systemd_unitdir}/system/${BPN}.socket
-> +    install -d ${D}${sysconfdir}/init.d
-> +    install -m 0755 ${WORKDIR}/gpsd.init ${D}${sysconfdir}/init.d/gpsd
-> +    install -d ${D}${sysconfdir}/default
-> +    install -m 0644 ${S}/packaging/deb/etc_default_gpsd
-> ${D}${sysconfdir}/default/gpsd.default
-> +
-> +    # Support for udev
-> +    install -d ${D}${nonarch_base_libdir}/udev
-> +    install -m 0755 ${S}/gpsd.hotplug ${D}${nonarch_base_libdir}/udev
-> +
-> +    # Support for python
-> +    install -d ${D}${PYTHON_SITEPACKAGES_DIR}/gps
-> +    install -m 755 ${S}/gps/*.py ${D}${PYTHON_SITEPACKAGES_DIR}/gps
->  }
->
->  PACKAGES =+ "libgps libgpsd python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl
-> gps-utils"
-> @@ -99,7 +91,7 @@ RDEPENDS:${PN} = "gpsd-gpsctl"
->  RRECOMMENDS:${PN} = "gpsd-conf gpsd-udev gpsd-machine-conf"
->
->  SUMMARY:gpsd-udev = "udev relevant files to use gpsd hotplugging"
-> -FILES:gpsd-udev = "${base_libdir}/udev ${sysconfdir}/udev/*"
-> +FILES:gpsd-udev = "${nonarch_base_libdir}/udev"
->  RDEPENDS:gpsd-udev += "udev gpsd-conf"
->
->  SUMMARY:libgpsd = "C service library used for communicating with gpsd"
-> @@ -135,7 +127,6 @@ RREPLACES:${PN} += "${PN}-systemd"
->  RCONFLICTS:${PN} += "${PN}-systemd"
->  SYSTEMD_SERVICE:${PN} = "${BPN}.socket ${BPN}ctl@.service"
->
-> -
->  ALTERNATIVE:${PN} = "gpsd-defaults"
->  ALTERNATIVE_LINK_NAME[gpsd-defaults] = "${sysconfdir}/default/gpsd"
->  ALTERNATIVE_TARGET[gpsd-defaults] = "${sysconfdir}/default/gpsd.default"
->
-> 
->
->
-
---000000000000e4f74405ca99c58d
-Content-Type: text/html; charset="UTF-8"
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from localhost.localdomain (87.92.181.210) by HE1P190CA0015.EURP190.PROD.OUTLOOK.COM (2603:10a6:3:bc::25) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4457.17 via Frontend Transport; Sat, 28 Aug 2021 11:25:16 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 8c94edea-ae55-4062-9aad-08d96a1682ff
+X-MS-TrafficTypeDiagnostic: HE1PR0602MB2841:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: 
+	<HE1PR0602MB2841BC868933FCE8CF91784DEDC99@HE1PR0602MB2841.eurprd06.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:421;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	asWW0nv4yvTWG3tWMVJjC2OuO573Vl6WQ4lmx1r3H62a+UnrLxoeNYT4g5IHdaDqdMFHeET9BreMuwvRxrZzbI18T7azOAMayHD1P/qDUmGuEvcYI9StwNn97/2YDHF45Tt+ZtpAEfMw/San8J6NZi/BD2ffVy9FEcnVVn4FzW87RWV1hV4J5bOM3c3PCEM55Utyn2R23IIZ9Eo+lWT0tQMoaxFMzIgl+T3QOU/ZACzR3fFdYrnVw9VkrLhIc/THf/B+8gJrdZdcjJ1xTh8mA/Ab47X9m16tTA6YVFmbsiRsIehBxgLuFrDibXnQco9vmdeQQ8t08JGRP9M5T6xArUNYMbHkBNd2yrO+XsSaaHhM51c/jA26Q4KcEUR4rovmj6eK/QBKCnEeBbSagPwKepPzxN0bKtOGHGZ3CVqFLsguonQZVrKRQNJeL8RmXHasw8bwlc4qjYlaK8/Y+juw5OWxslEPbIRtuEPqvEWLm8UI8NEQlMPV8lwQ3Vcqrqb0WFg5ja0nUVT2Cdh4f6J6CtgAxWeWRiT9gmN/OGkrwA8tPMQ/fjjf+ayV0Gv2cEsUnHpKDdBUHq9xafkVuzUtH8ifoty3QGONUqA2dnJYdUcn5LWAYuvlEHecIPByb4A9QoJiHQO/COc8uEufxV1Uh+U691YnKVBn0IcJfrS7z3opiIGkUIUXrNaqRfifNg6SqUkNLzlaSVX6//Z+yEn5Kg==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:HE1PR0602MB3241.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(396003)(136003)(346002)(366004)(39850400004)(6666004)(8936002)(8676002)(316002)(1076003)(38350700002)(956004)(6486002)(4326008)(38100700002)(478600001)(66476007)(5660300002)(52116002)(2906002)(26005)(6916009)(186003)(83380400001)(6506007)(107886003)(66946007)(36756003)(6512007)(86362001)(2616005)(66556008);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?953rPdDrpiwi+c3yHinrJkH5gShnHiXlLIrZvQaWp46+ZvVtlJusd5LaOMmC?=
+ =?us-ascii?Q?teXOGa5pWiG+dq0RV28tij4ETrfcEe0iSgKw6xKGBnz2Us/puLKfCmQz5Eul?=
+ =?us-ascii?Q?+BZXVdz/fN2hwGApB9ERyrG0t8CQZ/zFvaXVvI/q2J6XLV5MVt4prWACtAQj?=
+ =?us-ascii?Q?VjT4+fuH4VkWUB/ugFSF5si9bPZdaR7qlJ/fF/F/scvo57BVs+pq4O6GWPH5?=
+ =?us-ascii?Q?9REdfALh/QzhmmzwoBsd3FagjSJ319NnfrXG6996ULf6wsNH1i/cQFzrAtwG?=
+ =?us-ascii?Q?PDYOympouF7vxyvPFX3HU60nHJYtuSvzl6m0QBUEbZsdxVjVmSIJ1hwIRG+J?=
+ =?us-ascii?Q?LB1iK6MQFfuH6dsk5Gj8crRrjmoEzUq5G0VE48uTALQtyjpbIJr5Hadqxx4G?=
+ =?us-ascii?Q?xa6mK4czzbDRXQDF0uF9hpQpw/x0WNdlv4hm/+pIDQLUw6+2XKBp3QrQM8q/?=
+ =?us-ascii?Q?uN5TvXgEd1Jl0VK+lgKnS6YcRwBdwav1a6hbSzlfr3xvtpckTD6MM2+lbg63?=
+ =?us-ascii?Q?MutAXGGkWFXeQvM9aojMqb32Mf6mUfBfAgEQGbFhzgCzFhZ/aXi9Tk/pXulB?=
+ =?us-ascii?Q?s28nlU6O8wZD0PIAe5JU6kpcD5W4ry+Gg0bwz6eYLQ2OcpYC/4KHHrgG1eBG?=
+ =?us-ascii?Q?D0ZIPV+WuqCDPIyeFqtIok2LOiZn1foxj3mBXzX+e4gF77asRYnE1nFBt2ko?=
+ =?us-ascii?Q?3Z5+td/HmCaOdUT73lFmItEeJIIipmNvQ4V5mPbF69YbB6gqgDhVAwogdpma?=
+ =?us-ascii?Q?YenOtyLWwvOUYpnziAHdWVxdtK2ebho6m096MX50RNeEnzdABcckXDNKeLbn?=
+ =?us-ascii?Q?DSU1qAv4o6yrXIQ90YQcmZ432J2oVlSZnl53UCXqYRjK/ZFg34PcCF1Pb8sU?=
+ =?us-ascii?Q?twvccG6Kugol8uaKb92RIbp0uu6ZOy8iGgrRTBeYD2tUXjla/tgvXfwLPa9G?=
+ =?us-ascii?Q?fyCbD7VEhouuKR5o7l/Bfao++GK3pfwf1/1/iX4Kn8Jf+EL3WlBV6XIE932a?=
+ =?us-ascii?Q?IClYqTtSwgPFxfS+bhczvf56Bp2ebB7OHaA07Ag26PZKFk8Q8O5ZB6ZbuJr7?=
+ =?us-ascii?Q?nICopctqdw9pmcQh4whfyOx9t/gmZt9XD9uEoK3XzP3FhRgUsvc34fXNJ7Ol?=
+ =?us-ascii?Q?XJSyCMci1KzI3Lih2Od/YFKdo2a9Y1fRgTSdgfFP6rHuhtRVWqm09MSw27Tt?=
+ =?us-ascii?Q?2I8CdreOsBH/urJhqCBh1+Dc+PCH1FCRp5NhSKMClSZPBD3oOoAnrVJqGPqp?=
+ =?us-ascii?Q?BdJXyPhS3BSjm32eZUFesx3dVhdGZl7JkIUKX59px8h+T6QPnQY2uGjLPP/e?=
+ =?us-ascii?Q?UzsHcMO9qUVCzZGmqk53i/vq?=
+X-OriginatorOrg: vaisala.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8c94edea-ae55-4062-9aad-08d96a1682ff
+X-MS-Exchange-CrossTenant-AuthSource: HE1PR0602MB3241.eurprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2021 11:25:17.0479
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Sr1xvTxYwlMtp+dqOq1DNFBqAnN5x4OKHRw2XNUPhYiOE0Sh72wWkU7ZKvapGhCZ5PfGSBts13TYVyR1mO+2d8f9fIAkaysZS85Nz8fOG00=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR0602MB2841
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">This breaks the build without systemd enabled.<div><br></d=
-iv><div>mkdir -p /OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/gpsd/3.=
-23-r0/image/usr/lib/udev/rules.d<br>cp /OE/build/oe-core/tmp-glibc/work/cor=
-e2-64-oe-linux/gpsd/3.23-r0/gpsd-3.23/gpsd-3.23/gpsd.rules /OE/build/oe-cor=
-e/tmp-glibc/work/core2-64-oe-linux/gpsd/3.23-r0/image/usr/lib/udev/rules.d/=
-25-gpsd.rules<br>cp /OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/gpsd=
-/3.23-r0/gpsd-3.23/gpsd-3.23/gpsd.hotplug /OE/build/oe-core/tmp-glibc/work/=
-core2-64-oe-linux/gpsd/3.23-r0/image/usr/lib/udev<br>cp: cannot stat &#39;/=
-OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/gpsd/3.23-r0/gpsd-3.23/gp=
-sd-3.23/gpsd.hotplug&#39;: No such file or directory<br>scons: *** [gpsd-3.=
-23/udev-install] Error 1<br></div><div><br></div><div>scons fails to instal=
-l gpsd.hotplug with:</div><div><br></div><div>if env[&#39;systemd&#39;]:<br=
->...<br>=C2=A0 =C2=A0 hotplug_wrapper_install =3D []<br>else:<br>=C2=A0 =C2=
-=A0 hotplug_wrapper_install =3D [<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;cp $S=
-RCDIR/gpsd.hotplug &#39; + DESTDIR + env[&#39;udevdir&#39;],<br>=C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 &#39;chmod a+x &#39; + DESTDIR + env[&#39;udevdir&#39;] +=
- &#39;/gpsd.hotplug&#39;<br>=C2=A0 =C2=A0 ]<br></div><div><br></div><div>be=
-cause SRCDIR is set to cwd as</div><div>gpsd/3.23-r0/gpsd-3.23/gpsd-3.23/<b=
-r></div><div>but the gpsd.hotplug is only in source directory one level abo=
-ve as:</div><div>gpsd/3.23-r0/gpsd-3.23/gpsd.hotplug<br></div><div><br></di=
-v><div>It&#39;s also not clear why do_install:append installs gpsd.hotplug =
-_again_ for sysvinit after scons did (once it&#39;s fixed) or if it&#39;s n=
-eeded for systemd as Sconscript explicitly doesn&#39;t install hotplug when=
- systemd is enabled.</div></div><br><div class=3D"gmail_quote"><div dir=3D"=
-ltr" class=3D"gmail_attr">On Tue, Aug 24, 2021 at 10:26 PM Peter Kjellerste=
-dt &lt;<a href=3D"mailto:peter.kjellerstedt@axis.com">peter.kjellerstedt@ax=
-is.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"m=
-argin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left=
-:1ex">With the update to 3.23 (commit 87f3070f), the recipe was changed to<=
-br>
-incorrectly install the <a href=3D"http://gpsd.rules.in" rel=3D"noreferrer"=
- target=3D"_blank">gpsd.rules.in</a> file instead of gpsd.rules. It<br>
-also missed that a new template string (@RUNDIR@) was introduced in the<br>
-systemd files, making them unusable.<br>
-<br>
-Instead of trying to keep up with upstream changes, let scons do the job<br=
->
-and install the udev and systemd files by using the &quot;udev-install&quot=
-;<br>
-production instead of &quot;install&quot;.<br>
-<br>
-In addition to the correct files being installed,<br>
-&quot;/etc/udev/rules.d/gpsd.rules&quot; is now &quot;/lib/udev/rules.d/25-=
-gpsd.rules&quot;.<br>
-<br>
-Signed-off-by: Peter Kjellerstedt &lt;<a href=3D"mailto:peter.kjellerstedt@=
-axis.com" target=3D"_blank">peter.kjellerstedt@axis.com</a>&gt;<br>
----<br>
-=C2=A0meta-oe/recipes-navigation/gpsd/<a href=3D"http://gpsd_3.23.bb" rel=
-=3D"noreferrer" target=3D"_blank">gpsd_3.23.bb</a> | 45 ++++++++-----------=
--<br>
-=C2=A01 file changed, 18 insertions(+), 27 deletions(-)<br>
-<br>
-diff --git a/meta-oe/recipes-navigation/gpsd/<a href=3D"http://gpsd_3.23.bb=
-" rel=3D"noreferrer" target=3D"_blank">gpsd_3.23.bb</a> b/meta-oe/recipes-n=
-avigation/gpsd/<a href=3D"http://gpsd_3.23.bb" rel=3D"noreferrer" target=3D=
-"_blank">gpsd_3.23.bb</a><br>
-index 1d031ee95..350eaaf12 100644<br>
---- a/meta-oe/recipes-navigation/gpsd/<a href=3D"http://gpsd_3.23.bb" rel=
-=3D"noreferrer" target=3D"_blank">gpsd_3.23.bb</a><br>
-+++ b/meta-oe/recipes-navigation/gpsd/<a href=3D"http://gpsd_3.23.bb" rel=
-=3D"noreferrer" target=3D"_blank">gpsd_3.23.bb</a><br>
-@@ -35,11 +35,13 @@ EXTRA_OESCONS =3D &quot; \<br>
-=C2=A0 =C2=A0 =C2=A0nostrip=3D&#39;true&#39; \<br>
-=C2=A0 =C2=A0 =C2=A0systemd=3D&#39;${SYSTEMD_OESCONS}&#39; \<br>
-=C2=A0 =C2=A0 =C2=A0libdir=3D&#39;${libdir}&#39; \<br>
-+=C2=A0 =C2=A0 udevdir=3D&#39;${nonarch_base_libdir}/udev&#39; \<br>
-+=C2=A0 =C2=A0 unitdir=3D&#39;${systemd_system_unitdir}&#39; \<br>
-=C2=A0 =C2=A0 =C2=A0manbuild=3D&#39;false&#39; \<br>
-=C2=A0 =C2=A0 =C2=A0LINK=3D&#39;${CC}&#39; \<br>
-=C2=A0 =C2=A0 =C2=A0${PACKAGECONFIG_CONFARGS} \<br>
-=C2=A0&quot;<br>
--# this cannot be used, because then chrpath is not found and only static l=
-ib is built<br>
-+# This cannot be used, because then chrpath is not found and only static l=
-ib is built<br>
-=C2=A0# target=3D${HOST_SYS}<br>
-<br>
-=C2=A0do_compile:prepend() {<br>
-@@ -58,34 +60,24 @@ do_install() {<br>
-=C2=A0 =C2=A0 =C2=A0export LINKFLAGS=3D&quot;${LDFLAGS}&quot;<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0export DESTDIR=3D&quot;${D}&quot;<br>
--=C2=A0 =C2=A0 # prefix is used for RPATH and DESTDIR/prefix for instalatio=
-n<br>
--=C2=A0 =C2=A0 ${STAGING_BINDIR_NATIVE}/scons prefix=3D${prefix} python_lib=
-dir=3D${libdir} install ${EXTRA_OESCONS} || \<br>
-+=C2=A0 =C2=A0 # prefix is used for RPATH and DESTDIR/prefix for installati=
-on<br>
-+=C2=A0 =C2=A0 ${STAGING_BINDIR_NATIVE}/scons prefix=3D${prefix} python_lib=
-dir=3D${libdir} udev-install ${EXTRA_OESCONS} || \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0bbfatal &quot;scons install execution failed.&qu=
-ot;<br>
-=C2=A0}<br>
-<br>
-=C2=A0do_install:append() {<br>
--=C2=A0 =C2=A0 install -d ${D}/${sysconfdir}/init.d<br>
--=C2=A0 =C2=A0 install -m 0755 ${WORKDIR}/gpsd.init ${D}/${sysconfdir}/init=
-.d/gpsd<br>
--=C2=A0 =C2=A0 install -d ${D}/${sysconfdir}/default<br>
--=C2=A0 =C2=A0 install -m 0644 ${S}/packaging/deb/etc_default_gpsd ${D}/${s=
-ysconfdir}/default/gpsd.default<br>
--<br>
--=C2=A0 =C2=A0 #support for udev<br>
--=C2=A0 =C2=A0 install -d ${D}/${sysconfdir}/udev/rules.d<br>
--=C2=A0 =C2=A0 install -m 0644 ${S}/<a href=3D"http://gpsd.rules.in" rel=3D=
-"noreferrer" target=3D"_blank">gpsd.rules.in</a> ${D}/${sysconfdir}/udev/ru=
-les.d/<br>
--=C2=A0 =C2=A0 install -d ${D}${base_libdir}/udev/<br>
--=C2=A0 =C2=A0 install -m 0755 ${S}/gpsd.hotplug ${D}${base_libdir}/udev/<b=
-r>
--<br>
--=C2=A0 =C2=A0 #support for python<br>
--=C2=A0 =C2=A0 install -d ${D}/${PYTHON_SITEPACKAGES_DIR}/gps<br>
--=C2=A0 =C2=A0 install -m 755 ${S}/gps/*.py ${D}/${PYTHON_SITEPACKAGES_DIR}=
-/gps<br>
--<br>
--=C2=A0 =C2=A0 #support for systemd<br>
--=C2=A0 =C2=A0 install -d ${D}${systemd_unitdir}/system/<br>
--=C2=A0 =C2=A0 install -m 0644 ${S}/systemd/${BPN}.<a href=3D"http://servic=
-e.in" rel=3D"noreferrer" target=3D"_blank">service.in</a> ${D}${systemd_uni=
-tdir}/system/${BPN}.service<br>
--=C2=A0 =C2=A0 sed -i -e &#39;s,@SBINDIR@,/usr/sbin,g&#39; ${D}${systemd_un=
-itdir}/system/${BPN}.service<br>
--=C2=A0 =C2=A0 install -m 0644 ${S}/systemd/${BPN}ctl@.<a href=3D"http://se=
-rvice.in" rel=3D"noreferrer" target=3D"_blank">service.in</a> ${D}${systemd=
-_unitdir}/system/${BPN}ctl@.service<br>
--=C2=A0 =C2=A0 sed -i -e &#39;s,@SBINDIR@,/usr/sbin,g&#39; ${D}${systemd_un=
-itdir}/system/${BPN}ctl@.service<br>
--=C2=A0 =C2=A0 install -m 0644 ${S}/systemd/${BPN}.<a href=3D"http://socket=
-.in" rel=3D"noreferrer" target=3D"_blank">socket.in</a> ${D}${systemd_unitd=
-ir}/system/${BPN}.socket<br>
-+=C2=A0 =C2=A0 install -d ${D}${sysconfdir}/init.d<br>
-+=C2=A0 =C2=A0 install -m 0755 ${WORKDIR}/gpsd.init ${D}${sysconfdir}/init.=
-d/gpsd<br>
-+=C2=A0 =C2=A0 install -d ${D}${sysconfdir}/default<br>
-+=C2=A0 =C2=A0 install -m 0644 ${S}/packaging/deb/etc_default_gpsd ${D}${sy=
-sconfdir}/default/gpsd.default<br>
-+<br>
-+=C2=A0 =C2=A0 # Support for udev<br>
-+=C2=A0 =C2=A0 install -d ${D}${nonarch_base_libdir}/udev<br>
-+=C2=A0 =C2=A0 install -m 0755 ${S}/gpsd.hotplug ${D}${nonarch_base_libdir}=
-/udev<br>
-+<br>
-+=C2=A0 =C2=A0 # Support for python<br>
-+=C2=A0 =C2=A0 install -d ${D}${PYTHON_SITEPACKAGES_DIR}/gps<br>
-+=C2=A0 =C2=A0 install -m 755 ${S}/gps/*.py ${D}${PYTHON_SITEPACKAGES_DIR}/=
-gps<br>
-=C2=A0}<br>
-<br>
-=C2=A0PACKAGES =3D+ &quot;libgps libgpsd python3-pygps gpsd-udev gpsd-conf =
-gpsd-gpsctl gps-utils&quot;<br>
-@@ -99,7 +91,7 @@ RDEPENDS:${PN} =3D &quot;gpsd-gpsctl&quot;<br>
-=C2=A0RRECOMMENDS:${PN} =3D &quot;gpsd-conf gpsd-udev gpsd-machine-conf&quo=
-t;<br>
-<br>
-=C2=A0SUMMARY:gpsd-udev =3D &quot;udev relevant files to use gpsd hotpluggi=
-ng&quot;<br>
--FILES:gpsd-udev =3D &quot;${base_libdir}/udev ${sysconfdir}/udev/*&quot;<b=
-r>
-+FILES:gpsd-udev =3D &quot;${nonarch_base_libdir}/udev&quot;<br>
-=C2=A0RDEPENDS:gpsd-udev +=3D &quot;udev gpsd-conf&quot;<br>
-<br>
-=C2=A0SUMMARY:libgpsd =3D &quot;C service library used for communicating wi=
-th gpsd&quot;<br>
-@@ -135,7 +127,6 @@ RREPLACES:${PN} +=3D &quot;${PN}-systemd&quot;<br>
-=C2=A0RCONFLICTS:${PN} +=3D &quot;${PN}-systemd&quot;<br>
-=C2=A0SYSTEMD_SERVICE:${PN} =3D &quot;${BPN}.socket ${BPN}ctl@.service&quot=
-;<br>
-<br>
--<br>
-=C2=A0ALTERNATIVE:${PN} =3D &quot;gpsd-defaults&quot;<br>
-=C2=A0ALTERNATIVE_LINK_NAME[gpsd-defaults] =3D &quot;${sysconfdir}/default/=
-gpsd&quot;<br>
-=C2=A0ALTERNATIVE_TARGET[gpsd-defaults] =3D &quot;${sysconfdir}/default/gps=
-d.default&quot;<br>
-<br>
-<br>
-<br>
-</blockquote></div>
+Signed-off-by: Vesa J=C3=A4=C3=A4skel=C3=A4inen <vesa.jaaskelainen@vaisala.=
+com>
+---
+ .../opensc/{opensc_0.21.0.bb =3D> opensc_0.22.0.bb}             | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/opensc/{opensc_0.21.0.bb =3D> opensc_0.22.0=
+.bb} (95%)
 
---000000000000e4f74405ca99c58d--
+diff --git a/meta-oe/recipes-support/opensc/opensc_0.21.0.bb b/meta-oe/reci=
+pes-support/opensc/opensc_0.22.0.bb
+similarity index 95%
+rename from meta-oe/recipes-support/opensc/opensc_0.21.0.bb
+rename to meta-oe/recipes-support/opensc/opensc_0.22.0.bb
+index ea832ec0f..c17850d7b 100644
+--- a/meta-oe/recipes-support/opensc/opensc_0.21.0.bb
++++ b/meta-oe/recipes-support/opensc/opensc_0.22.0.bb
+@@ -11,8 +11,8 @@ SECTION =3D "System Environment/Libraries"
+ LICENSE =3D "LGPLv2+"
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dcb8aedd3bced19bd8026d96a8b6876d=
+7"
+=20
+-#v0.21.0
+-SRCREV =3D "30180986a08cf71fe4af4b50251a8bb5b1ab95af"
++#v0.22.0
++SRCREV =3D "c902e1992195e00ada12d71beb1029287cd72037"
+ SRC_URI =3D "git://github.com/OpenSC/OpenSC \
+           "
+ DEPENDS =3D "virtual/libiconv openssl"
+--=20
+2.25.1
+
