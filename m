@@ -1,128 +1,140 @@
-Received: from mail6.pr.hu (mail6.pr.hu [87.242.0.6])
- by mx.groups.io with SMTP id smtpd.web09.181.1630124249868439657
+Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com [209.85.222.172])
+ by mx.groups.io with SMTP id smtpd.web09.287.1630125317490899932
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Aug 2021 21:17:31 -0700
+ Fri, 27 Aug 2021 21:35:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@pr.hu header.s=pr20170203 header.b=M11F+VDi;
- spf=pass (domain: pr.hu, ip: 87.242.0.6, mailfrom: zboszor@pr.hu)
-Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
-	by frontdoor.pr.hu with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.89)
-	(envelope-from <zboszor@pr.hu>)
-	id 1mJpma-0002on-8A; Sat, 28 Aug 2021 06:17:28 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
-	s=pr20170203; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=btcSaqscpkg4DeptrQCH9GQ9f60g93U4eDU6kIVkLJw=; b=M11F+VDiAPeT/+k6+YcQL1lU0n
-	wL0O05fOMrrRjWmxgTIuMY++aJ464vJgJ6sNrvRBHYrdOiJjX9VahKtFYYPuk7VQ+YtfWkypfVeD4
-	1lFKoNVtjPjrjKIe1Q/JuOZyxJzBVDSUjr1pxor9PAWznHEhibACHBYxmU0XGZmxjsond0WazVqil
-	4wKWJYC81YWkCVozDEI1yDi0biKYBkhp9f1Nu4+/zFNHwC/p9H0g2EkscSR7gZO8zgUI6qVG2cUR9
-	XVRBjrtytWxgknW3KEXVJU0/tzlnR57MtTxZ9jYc8dEzcHEQZuYV2PAjV8vCOdwp2+NDtClim9Fq0
-	nXAqilvQ==;
-Received: from host-87-242-23-58.prtelecom.hu ([87.242.23.58] helo=localhost.lan)
-	by mail.pr.hu with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <zboszor@pr.hu>)
-	id 1mJpmW-0006RR-4X; Sat, 28 Aug 2021 06:17:26 +0200
-From: "Zoltan Boszormenyi" <zboszor@pr.hu>
-To: openembedded-devel@lists.openembedded.org
-Cc: zboszor@gmail.com
-Subject: [meta-gnome][PATCH] metacity: Add a patch to create build/src/core before moving generated sources to it
-Date: Sat, 28 Aug 2021 06:17:20 +0200
-Message-Id: <20210828041720.2817832-1-zboszor@pr.hu>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <ef6e4f5b-044e-0649-ae59-aa25ecba95dd@pr.hu>
-References: <ef6e4f5b-044e-0649-ae59-aa25ecba95dd@pr.hu>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=emAyvf16;
+ spf=pass (domain: gmail.com, ip: 209.85.222.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f172.google.com with SMTP id y144so9519899qkb.6
+        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Aug 2021 21:35:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=DZ9c2AHpTy8+fFDSoKhp0orChP4Eu4L7SuUpgiKKMc8=;
+        b=emAyvf16qBMEK0e8pLxbM8lkRM7LigTnVHc43i5cjN3eHjyvDa21DPzREwPcfPzDVv
+         fGtEKF+/H3xba9EGToQ3vbC+wLSdLbro9By731IR0XJ4yCMPFvKHs7e/D0fm2KfHFlo3
+         s9RV2r+VgpT7uep5GgJ3NkSAJxnsyX6pWnPDo+Jt5zJ0HBQY6MRtjOGl3jJ4VC2DhVCO
+         iL93TdcJ2OGhGOacKMTQnpuxkA3goN769B9y5QSiy305orJEwIv0d6Me0/1Mblh/jxLb
+         qDAMaXhrtzOAAtcX3YYWawj3I2oe9X8/UrM1Yz0AEXZX2N+zLkqaUSZp+mmKDYsKk2xv
+         A6Yg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=DZ9c2AHpTy8+fFDSoKhp0orChP4Eu4L7SuUpgiKKMc8=;
+        b=YFUeO2VpC6vx0NJN1bjYXve4T7+vqqws9RC57ng/lq/6QKKKOIGxrcMlt4DL0FCPaC
+         1M4MHhrQe2gOhy5sOtqhf4XUAOLJ1e5Ce8n76sTNbwHmpL4gvWYJnUahW8v08SjDlUcj
+         vatJ4PKsAWuEOZgDawtjEK8mgStAmGJBYZotkr0FL1I3KUkfbXonhrMMrD+fS2wXrr42
+         vihu3zJDKBpkZBQtNrTS8xMkhFznc2zYU3Cth6sZIilKUKid+WfUhkwhFAVZwpL0gpqZ
+         JZQUVKLVll4mw4joSkA0SqJz7a65E/MIrmGlePJnAPLHl762lBbv01ygiaa7umGGl5Xv
+         BMhw==
+X-Gm-Message-State: AOAM530RBgg9jUuGQztjvOoRP3bU9lJcUNkeSvwuE6tMW7qvAHZH5y4E
+	DyfqZRelqWBEZ7DC+7dGrkEedvoNKcY/Cx+kEaQ=
+X-Google-Smtp-Source: ABdhPJx558dgVasMEcjMj5r1b4db0SxX08A3B7QgdZOYDyN/3VA/nJlmX1OFUoIL0NMKpZGw2pzLGDXjdDEPcE9aS9c=
+X-Received: by 2002:a37:bc8:: with SMTP id 191mr12730308qkl.25.1630125316555;
+ Fri, 27 Aug 2021 21:35:16 -0700 (PDT)
 MIME-Version: 1.0
-X-Spam-Score: -0.8 (/)
-X-Scan-Signature: b899a7fb3baab380f674538c2418a553
-X-Spam-Tracer: backend.mail.pr.hu -0.8 20210828041726Z
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20210827084346.2770947-1-zboszor@pr.hu> <f0a92ad5-1cc1-c383-7ca2-31825762c761@gmail.com>
+ <32da7686-4098-2025-bbf4-43aab27c9f4c@pr.hu> <CAMKF1sqPuFD9FiDKOZLKGxZ_adC2D0=ps48crffTtx0oG01jBg@mail.gmail.com>
+ <ef6e4f5b-044e-0649-ae59-aa25ecba95dd@pr.hu>
+In-Reply-To: <ef6e4f5b-044e-0649-ae59-aa25ecba95dd@pr.hu>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Fri, 27 Aug 2021 21:34:50 -0700
+Message-ID: <CAMKF1sr8H+DSu-w1irXb51cZLAjp5uzXjxs3ex4gTJw2Le1aDQ@mail.gmail.com>
+Subject: Re: [oe] [meta-gnome][PATCH] metacity: Use autotools-brokensep
+To: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@pr.hu>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	=?UTF-8?B?Wm9sdMOhbiBCw7ZzesO2cm3DqW55aQ==?= <zboszor@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Zoltán Böszörményi <zboszor@gmail.com>
+this patch is better, perhaps worth sharing with metacirty upstream as well=
+.
 
-Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
----
- ...before-moving-generated-sources-into.patch | 49 +++++++++++++++++++
- .../recipes-gnome/metacity/metacity_3.40.0.bb |  5 +-
- 2 files changed, 53 insertions(+), 1 deletion(-)
- create mode 100644 meta-gnome/recipes-gnome/metacity/metacity/0001-Create-src-core-before-moving-generated-sources-into.patch
-
-diff --git a/meta-gnome/recipes-gnome/metacity/metacity/0001-Create-src-core-before-moving-generated-sources-into.patch b/meta-gnome/recipes-gnome/metacity/metacity/0001-Create-src-core-before-moving-generated-sources-into.patch
-new file mode 100644
-index 000000000..935a31d09
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/metacity/metacity/0001-Create-src-core-before-moving-generated-sources-into.patch
-@@ -0,0 +1,49 @@
-+From b2f31fc2ce5a7bc14c084ddbe6ec12578c1aaf29 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?=
-+ <zboszor@gmail.com>
-+Date: Sat, 28 Aug 2021 05:58:25 +0200
-+Subject: [PATCH] Create src/core before moving generated sources into it
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+With split build and source directories, there's a reproducible
-+make failure:
-+
-+| Making all in src
-+| make[2]: Entering directory '.../metacity/1_3.40.0-r0/build/src'
-+| .../metacity/1_3.40.0-r0/recipe-sysroot-native/usr/bin/glib-mkenums --template ../../metacity-3.40.0/src/core/meta-enum-types.c.in ../../metacity-3.40.0/src/core/window-private.h ../../metacity-3.40.0/src/include/meta-compositor.h  > \
-+| 	meta-enum-types.c.tmp && mv meta-enum-types.c.tmp core/meta-enum-types.c
-+| .../metacity/1_3.40.0-r0/recipe-sysroot-native/usr/bin/glib-mkenums --template ../../metacity-3.40.0/src/core/meta-enum-types.h.in ../../metacity-3.40.0/src/core/window-private.h ../../metacity-3.40.0/src/include/meta-compositor.h  > \
-+| 	meta-enum-types.h.tmp && mv meta-enum-types.h.tmp core/meta-enum-types.h
-+| mv: cannot move 'meta-enum-types.c.tmp' to 'core/meta-enum-types.c'mv: cannot move 'meta-enum-types.h.tmp' to 'core/meta-enum-types.h': No such file or directory
-+| : No such file or directory
-+| make[2]: *** [Makefile:2240: core/meta-enum-types.c] Error 1
-+
-+Upstream-Status: Inappropriate [oe-specific]
-+
-+Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
-+---
-+ src/Makefile.am | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/src/Makefile.am b/src/Makefile.am
-+index f86af600..487c30d3 100644
-+--- a/src/Makefile.am
-++++ b/src/Makefile.am
-+@@ -204,10 +204,12 @@ ENUM_TYPES = \
-+ 	$(NULL)
-+ 
-+ core/meta-enum-types.c: core/meta-enum-types.c.in $(ENUM_TYPES) Makefile.am
-++	$(MKDIR_P) $(builddir)/core
-+ 	$(AM_V_GEN) $(GLIB_MKENUMS) --template $(srcdir)/core/meta-enum-types.c.in $(ENUM_TYPES) > \
-+ 		meta-enum-types.c.tmp && mv meta-enum-types.c.tmp core/meta-enum-types.c
-+ 
-+ core/meta-enum-types.h: core/meta-enum-types.h.in $(ENUM_TYPES) Makefile.am
-++	$(MKDIR_P) $(builddir)/core
-+ 	$(AM_V_GEN) $(GLIB_MKENUMS) --template $(srcdir)/core/meta-enum-types.h.in $(ENUM_TYPES) > \
-+ 		meta-enum-types.h.tmp && mv meta-enum-types.h.tmp core/meta-enum-types.h
-+ 
-+-- 
-+2.31.1
-+
-diff --git a/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb b/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb
-index a5c704740..0fd631fba 100644
---- a/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb
-+++ b/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb
-@@ -24,7 +24,10 @@ REQUIRED_DISTRO_FEATURES = "x11"
- inherit gnomebase gsettings gettext upstream-version-is-even features_check
- 
- SRC_URI[archive.sha256sum] = "224c1f65487eac21f0c1d9856152343768ee726c48b1a8a2835a46a8ad9015b5"
--SRC_URI += "file://0001-drop-zenity-detection.patch"
-+SRC_URI += " \
-+    file://0001-drop-zenity-detection.patch \
-+    file://0001-Create-src-core-before-moving-generated-sources-into.patch \
-+"
- 
- PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama"
- # enable as neccessary until new warnings are dealt with
--- 
-2.31.1
-
+On Fri, Aug 27, 2021 at 9:16 PM B=C3=B6sz=C3=B6rm=C3=A9nyi Zolt=C3=A1n <zbo=
+szor@pr.hu> wrote:
+>
+> (Resending from the subscriber email.)
+>
+> 2021. 08. 27. 19:11 keltez=C3=A9ssel, Khem Raj =C3=ADrta:
+> > On Fri, Aug 27, 2021 at 10:04 AM B=C3=B6sz=C3=B6rm=C3=A9nyi Zolt=C3=A1n=
+ <zboszor@pr.hu> wrote:
+> >>
+> >> 2021. 08. 27. 18:49 keltez=C3=A9ssel, Khem Raj =C3=ADrta:
+> >>>
+> >>>
+> >>> On 8/27/21 1:43 AM, Zoltan Boszormenyi via lists.openembedded.org wro=
+te:
+> >>>> From: Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi <zboszor@gmail.com>
+> >>>>
+> >>>> The split build directory causes a make error because
+> >>>> build/src/core is not created during the build but generated
+> >>>> sources are moved to it which fails.
+> >>>>
+> >>>> Signed-off-by: Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi <zboszor@gmail=
+.com>
+> >>>> ---
+> >>>>    meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb | 2 ++
+> >>>>    1 file changed, 2 insertions(+)
+> >>>>
+> >>>> diff --git a/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb
+> >>>> b/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb
+> >>>> index a5c704740..969fe13dd 100644
+> >>>> --- a/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb
+> >>>> +++ b/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb
+> >>>> @@ -21,6 +21,8 @@ DEPENDS =3D " \
+> >>>>    # depends on startup-notification which depends on virtual/libx11
+> >>>>    REQUIRED_DISTRO_FEATURES =3D "x11"
+> >>>> +GNOMEBASEBUILDCLASS =3D "autotools-brokensep"
+> >>>> +
+> >>>
+> >>> this does not fail on jenkins so I wonder what are the conditions to =
+reproduce it.
+> >>
+> >> Fedora 33 build host, master branches of oe-core and meta-oe.
+> >> I also use meta-clang and meta-intel.
+> >>
+> >> The commit message says it all. metacity-3.40.0/src/core exists
+> >> because it was there in the tarball, but build/src/core does
+> >> not get created automatically for some reason here.
+> >
+> > the builders are ubuntu 18.04 and I wonder if there is some race
+> > condition here in creating these dirs
+> > Does it happen all the time?
+>
+> For me, it's 3 failures out of 3 attempts.
+>
+> >
+> >>
+> >> I can carry this assignment or the equivalent B =3D "${S}" in my local=
+ bbappend.
+> >>
+> >
+> > I think if we can understand the underlying problem we can fix it in
+> > code itself.
+>
+> The attached proof of concept patch helps.
+> (Only not attaching this time, sending a properly signed patch to the lis=
+t instead.)
+>
+> >
+> >> Best regards,
+> >> Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi
+> >>
+> >>>
+> >>>>    inherit gnomebase gsettings gettext upstream-version-is-even feat=
+ures_check
+> >>>>    SRC_URI[archive.sha256sum] =3D
+> >>>> "224c1f65487eac21f0c1d9856152343768ee726c48b1a8a2835a46a8ad9015b5"
+> >>>>
+> >>>>
+> >>>>
+> >>>>
+> >>>>
+> >>>
+> >>>
+> >>>=20
+> >>>
+> >>
+>
