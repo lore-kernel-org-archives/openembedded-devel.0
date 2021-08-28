@@ -1,58 +1,58 @@
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.web08.3882.1630159910034565374
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.web09.3928.1630160035314632873
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 28 Aug 2021 07:11:50 -0700
+ Sat, 28 Aug 2021 07:13:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=H6YETp9S;
- spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id s11so8694510pgr.11
-        for <openembedded-devel@lists.openembedded.org>; Sat, 28 Aug 2021 07:11:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=qZtgJfNy;
+ spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f172.google.com with SMTP id g184so8730010pgc.6
+        for <openembedded-devel@lists.openembedded.org>; Sat, 28 Aug 2021 07:13:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=message-id:date:mime-version:user-agent:subject:content-language:to
          :references:from:organization:in-reply-to:content-transfer-encoding;
-        bh=XQZsCWqY2zqobgViGj+q+/DaGJ+0KEiV8ZsvL+8z0Pw=;
-        b=H6YETp9S37g7ezB6LI5RHsa3nji/pTwQOVt96B6ecX5eME4e7GZnt8ZSvaUCailJFx
-         9rfBId62e0Tjrb92sZMJU7Rdr4ub5KVudfCZGRCv7aa4u+SQV28HT8+o5fdx8UjwSoYg
-         gYCU+cG0GBHUwBGcATvOIH2tzaJovO3/aZFb2p0UPWL1ctg+bXRUu3K2EGWfmn6v50CR
-         JK9RFYNt0CUZeS/UxKB/Z6bHX9UFIPMsEN/kCfjoin8PA77imaQls3sCATftzion5LLS
-         jVlVzu0rJXCB/yBopdvvXfkhvqJloC7kslwdMr5BYif+B5PU3RB24vV0/sSm3Iwrkr3J
-         Vyog==
+        bh=1nIN9w83tkurhdLbj5XrEyJDA9sDvUgEvrW5Ttdl0Sg=;
+        b=qZtgJfNyTV7hsl0dPfmlmFEBKaiOZEM+9Xz3jD0uMhP8rD6jApoURY6IZBRoG2E86C
+         tODod43H6/G6hvF40EF+sihn7457EwfVLXkCjsegc8U3ykPg91nzJs41eV4SqrU/ZBoc
+         OZlGQC2rBgz5FCxv0PFtADOqg0RVI3HetfEYSOJ8Hx1xDy1ZTX2WLQwtvNNyo6zu/eIm
+         ryXSxRSZjMD58GurjncOZQm34BxRk1agAU3+e9DIgIAMROv+vY5kQ2G7RMRU/LngX9+8
+         Bqg5MebqldUlBb/ydqeVhxT/TFKXIDtQxLVksurCuChbrG+LLSNvfEUTF9QHRBCh81lx
+         kQGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
          :content-language:to:references:from:organization:in-reply-to
          :content-transfer-encoding;
-        bh=XQZsCWqY2zqobgViGj+q+/DaGJ+0KEiV8ZsvL+8z0Pw=;
-        b=Y9BFbP8d091sMwrcNdpOv834A/Jgnk2pLanHJPWbKHNzIkxY3a0L69Qi9n14R73tMm
-         Ff3zPF0esd3mcjPuFXTVAutjfgshjUbAecBuWcD0zB319abjBkXC0rp+XxY1J12AJQk+
-         3vBNBOURPVu7KcGzRIPGBiENN/VZOgtLA1cBtFM10AI3Jajk5yfqKbuzHrv/et89uOb/
-         8K0Dq6YJBku45jqfamHJJRLeGT7Z1F6ltrmuTU0l3xkpL6TlAE9DKrWuE9fuTl29g6QI
-         KEw4is+8RjDyWpPb+3myRfp/cxyui1PKlbBPl4xEm0kf9hOiTBSQMbjxaOT3iC9UX9eZ
-         XYvg==
-X-Gm-Message-State: AOAM5307KWI6Ff+qHJLlb1s8PlBiTR5LhX4hwfDHfuWVq0b3BobtEesm
-	mSNQY1KlKl/Fze/ioWLmYmx3iN6JkILN5Q==
-X-Google-Smtp-Source: ABdhPJxuc8jSOaGZ9NbF2W+Uqa0UtHFdm3BiXBxwjxXIAC30oUGGmLPeSmwAiJYgnM4wPuDm64gZWw==
-X-Received: by 2002:a63:c147:: with SMTP id p7mr12545623pgi.247.1630159909595;
-        Sat, 28 Aug 2021 07:11:49 -0700 (PDT)
+        bh=1nIN9w83tkurhdLbj5XrEyJDA9sDvUgEvrW5Ttdl0Sg=;
+        b=qqAc0EVLRpvD4B5MQ31uzGFkMTgENvWWrTPlzBvOizNxusRHhFz13zwvdB1NLxwp2o
+         kLswfnJ7kGa5gYcCMuhNoRmeEsckUsBWmzh95F1NT52XhMiEN0UZGrQ/DfBUcrjDDy2z
+         xH6EStTqF+oA5o+G0INY3auAQUz/OBuO3lSr955cNqcmxMVpCoLkcTL3dd8liJnmCmXL
+         yUgrw/tSF19vDyQ6WfcA1GvXU9WmfJDEtBhjC1HBXuZuw5TViF5cHOCrd2yrEI3yiLYr
+         fPZ2RS5nL5TCy0Y4RJ9dMZz3v3Bq9pw9J/8r6pIDrPpaE+B0GWSK4QiY/FJE6eoKLT90
+         +7rQ==
+X-Gm-Message-State: AOAM532NQPh5734KOBDQI9jhiKBCAboeRl97LeI2smDYHQtB7Nzggbec
+	v2ZEDXQToEnqnZ3HW/j6i3j6HoSWdbnmyQ==
+X-Google-Smtp-Source: ABdhPJykaLc0OWDdHWOgFICLGZ+NxjYgqxzgUQ7lpFwWZdYKQXWMOrsmvC7ndQfMIwPSnwDlWvN9jA==
+X-Received: by 2002:a05:6a00:796:b0:3ed:989b:f0c3 with SMTP id g22-20020a056a00079600b003ed989bf0c3mr14582622pfu.9.1630160034741;
+        Sat, 28 Aug 2021 07:13:54 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from ?IPV6:2601:646:9200:a0f0:718a:f86b:7e24:3a01? ([2601:646:9200:a0f0:718a:f86b:7e24:3a01])
-        by smtp.gmail.com with ESMTPSA id f24sm9628897pjh.15.2021.08.28.07.11.48
+        by smtp.gmail.com with ESMTPSA id x129sm9830281pfx.198.2021.08.28.07.13.54
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 28 Aug 2021 07:11:49 -0700 (PDT)
-Message-ID: <b7f3d268-2b9d-c081-87e4-65967d4d2632@gmail.com>
-Date: Sat, 28 Aug 2021 07:11:48 -0700
+        Sat, 28 Aug 2021 07:13:54 -0700 (PDT)
+Message-ID: <841b8c92-8246-b1ca-3b24-10216128ed60@gmail.com>
+Date: Sat, 28 Aug 2021 07:13:53 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
  Gecko/20100101 Thunderbird/91.0.3
-Subject: Re: [oe] [meta-python][PATCH 1/2] python3-cached-property: Add recipe for version 1.5.2
+Subject: Re: [oe] [meta-python][PATCH 2/2] python3-pkcs11: Add recipe for version 0.7.0
 To: =?UTF-8?B?VmVzYSBKw6TDpHNrZWzDpGluZW4=?= <vesa.jaaskelainen@vaisala.com>,
  openembedded-devel@lists.openembedded.org
 References: <20210828134727.277771-1-vesa.jaaskelainen@vaisala.com>
- <20210828134727.277771-2-vesa.jaaskelainen@vaisala.com>
+ <20210828134727.277771-3-vesa.jaaskelainen@vaisala.com>
 From: "Khem Raj" <raj.khem@gmail.com>
 Organization: HIMVIS LLC
-In-Reply-To: <20210828134727.277771-2-vesa.jaaskelainen@vaisala.com>
+In-Reply-To: <20210828134727.277771-3-vesa.jaaskelainen@vaisala.com>
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
@@ -60,36 +60,51 @@ Content-Transfer-Encoding: 8bit
 
 
 On 8/28/21 6:47 AM, Vesa Jääskeläinen wrote:
-> "A decorator for caching properties in classes."
+> "A high level, “more Pythonic” interface to the PKCS#11 (Cryptoki)
+> standard to support HSM and Smartcard devices in Python."
 > 
+
+since these are new recipes please add them to packagegroup-meta-python 
+as well.
+
 > Signed-off-by: Vesa Jääskeläinen <vesa.jaaskelainen@vaisala.com>
 > ---
->   .../python/python3-cached-property_1.5.2.bb         | 13 +++++++++++++
->   1 file changed, 13 insertions(+)
->   create mode 100644 meta-python/recipes-devtools/python/python3-cached-property_1.5.2.bb
+>   .../python/python3-pkcs11_0.7.0.bb            | 26 +++++++++++++++++++
+>   1 file changed, 26 insertions(+)
+>   create mode 100644 meta-python/recipes-devtools/python/python3-pkcs11_0.7.0.bb
 > 
-> diff --git a/meta-python/recipes-devtools/python/python3-cached-property_1.5.2.bb b/meta-python/recipes-devtools/python/python3-cached-property_1.5.2.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-pkcs11_0.7.0.bb b/meta-python/recipes-devtools/python/python3-pkcs11_0.7.0.bb
 > new file mode 100644
-> index 000000000..6f9266325
+> index 000000000..8fe31c9f1
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-cached-property_1.5.2.bb
-> @@ -0,0 +1,13 @@
-> +SUMMARY = "A decorator for caching properties in classes."
-> +DESCRIPTION = "Makes caching of time or computational expensive properties quick and easy."
-> +HOMEPAGE = "https://pypi.org/project/cached-property/"
+> +++ b/meta-python/recipes-devtools/python/python3-pkcs11_0.7.0.bb
+> @@ -0,0 +1,26 @@
+> +SUMMARY = "PKCS#11 (Cryptoki) support for Python"
+> +DESCRIPTION = "A high level, “more Pythonic” interface to the PKCS#11 (Cryptoki) standard to support HSM and Smartcard devices in Python."
+> +HOMEPAGE = "https://pypi.org/project/python-pkcs11/"
 > +SECTION = "devel/python"
-> +LICENSE = "BSD-3-Clause"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=db7ff60c4e14f58534201242803d8abc"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://README.rst;beginline=337;endline=358;md5=f68bda54505b4002e6ec86e08125ef79"
 > +
-> +SRC_URI[md5sum] = "3451c63f8733ea0756ca1dd2b0c04bb8"
-
-you can ignore md5sums now a days only sha256sum is enough
-
-> +SRC_URI[sha256sum] = "9fa5755838eecbb2d234c3aa390bd80fbd3ac6b6869109bfc1b499f7bd89a130"
+> +SRC_URI[md5sum] = "4998d6f038d2997958f2004f482580da"
+> +SRC_URI[sha256sum] = "9737e0c24cabb8bc9d48bf8c57c3df2a70f8cdd96b70c50290803286f9e46bf7"
+> +
+> +PYPI_PACKAGE = "python-pkcs11"
 > +
 > +inherit pypi setuptools3
 > +
 > +BBCLASSEXTEND = "native"
+> +
+> +DEPENDS += " \
+> +    python3-cython-native \
+> +    python3-setuptools-scm-native \
+> +    python3 \
+> +"
+> +
+> +RDEPENDS:${PN} += " \
+> +    python3-asn1crypto \
+> +    python3-cached-property \
+> +"
 > 
 > 
 > 
