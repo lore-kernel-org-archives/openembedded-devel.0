@@ -1,25 +1,25 @@
 Received: from EUR04-VI1-obe.outbound.protection.outlook.com (EUR04-VI1-obe.outbound.protection.outlook.com [40.107.8.50])
  by mx.groups.io with SMTP id smtpd.web08.3661.1630158469877099771
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 28 Aug 2021 06:47:52 -0700
+ Sat, 28 Aug 2021 06:47:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=yocfct9G;
+ dkim=fail reason="body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=FFAHI86i;
  spf=pass (domain: vaisala.com, ip: 40.107.8.50, mailfrom: vesa.jaaskelainen@vaisala.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cS1frCF4DmGASFsHHOqARsuaipIxG6edarGU7LfZYktsRs/sh6sMMP2UBEm7zmkxQBck4fSHs+GUSYQCt+nST/ciFPf9kRrki3qrwwEGctZB+C5zXkJZ17klBwzWgJ6QdUWVR/6yT/KYTaEAKN2q1zR7j1wQw1JscAmBfm6/1VpkHdDsiD8FouWuUrcKMlRbHWPz+STuTxg7g5zr5BCK+LU1I760izETbszV2vk2XABqdSxa87akdlqSjMQDzNM/9JYzMrfFj6VoZVPDE92jv5X5GS6V7ddebKpR0iG1Ih5SNrxQWQc6mLZwbtgUt03DXvn2+N5tfaXEt7j1sjXD9Q==
+ b=blqjdO5o2vc1KdUPYS2MgfAM7Odj0IWEAu6syk4/clq8PC+VeLGZ7b3SqdB9UoCv/TPWbPx6bITrkZSERV9smuiFQXGpYajhJNiWlcncuP7EcNqOZEumVIXx62SgbZTEWSrLPkf3EbNN4kxpUHudNzeojd9enTra70BM6iPJvHGpQCdrpnMQ4UZSm7JDkNp9ZNYKpi9w0n5ZLZjGV6o5Z4nDKYdHTJAv99A3jW1AAYDKoyPxI/9YxJB8/4gEqavVck43LAL7Vh3Ehzoh6ofTsON6rBlV1/zcPrRohd4PuSINkPs0qQ/jQayNJUtrP2OjwZ/9loA9Hn+6rYHdkXKUEw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AwkpZ0ed8odCGD2E3KCxouSKnkBDojRBXSLWIYzOvuU=;
- b=NZb/3H2kBP++Fw0xrcZiLQwXSHXeTqXco3WmG90rsAH3KeFi4dS+kdbRcKzxnNj5c/aSQy8iO62mA4bkJcd60p5FvA3On3h+Atnr5Suq2917lZcHvoXXa8q9yec4sJi1qv9h5o17eniIzUuNKx3BeJvz9cxhyqd0gJF8ZJlouLKIHaiN4intBK8pZG9uJtck/KnFR4ygEhlmo9uSIBx8JoDfrFr3CFbavsBbfRfMgpkz1Uz95myBU6Qp4q0W3kCfpdpaq6c3BX/3tFpm9hudDQB1PDn3EJ7hbYG/0mQxH4b3rWZQH8xdVLezzSICB29a7eGZE2NZ7q/ZXy2YEItIIA==
+ bh=Ha9WskbNlYneJZ6a6c6KFaSOltCjs79xdmGUbVJxypE=;
+ b=O+2illkEEEhD/vVXVY77mpcyCZi5+tHUJM+xEFqPNEyLbyJTser8+Xkuu9emrAEOlX0NmTgZ+fZK9tCgK1U5bXiI0lXn7tingMRxUyLW9geRg6IpOtqmQ7jXFOd5iJ8j0814poReovf3hz9OV31PcbTr/I9LPin6uxJWHQPErd2ShMYjdlI0ETXf6uy7ZI0AoAGBrRjf6E5FduaXrFTcBgyyvbTYcQroTyWd/2RmCq4vs8zCNUWOhCLQaU4Tkk1sT9BVwy0Tf/6AJ4OijaI38eqs3AUDw/07ef0TFxewWgWDV8d7+JY2I0JJSlRjPopBi2KB5x7G/h/TxdWvIRLEzQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
  dkim=pass header.d=vaisala.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AwkpZ0ed8odCGD2E3KCxouSKnkBDojRBXSLWIYzOvuU=;
- b=yocfct9GgNVpJcgV6uSYXYFuEvzeWnnFecx/RuCi58+OxJlNvbHTZCcgc63j7+9DPTDshT/wVchJXePijL3BFFJVJT9HlcBO6BPztVhFgJP2SB9vmGNuTM/3DAZbl6CrcWsUuFL3gm/EuqIqTFUPpNpWRfmKLswPddNKUCgWeeCmqYbXQZQR7WyShg7iLTX1Ko8K9UCUMXTr+6lAlsy+3I5D6uVFecBXNdZPJKBOoy5StI/CO12h/9PM58uvHi/KgL47AhG50nwzO6Ghh50bqIr9f3iEWs9HXCawJD2l7Ez9jQASwv8xGFoVHfRsvJ9aD8YZ4Y3FL0BxJPEFYjW9qA==
+ bh=Ha9WskbNlYneJZ6a6c6KFaSOltCjs79xdmGUbVJxypE=;
+ b=FFAHI86ik5nqBE64J13pZAZ7+J97Kc/IQmQ7F5HQ/hZE9ysF8Obj+CkrZ0vBUf2H7IddZVkIto7PpsjFmkF798E9RV16YOIMgTngh/kuX6XUSp3oblWS9IAyP7ijXbopxzpUNDcVFZpQqG0aQF7NkaafNrHYPWN7zN3Oz1+VtN5vEStiZld7/B2MrDv8f+dsN/o2NO/EQx2ARpidi3LMfwizdX2ecGMOX3yuFPkmYcA8sdhn+Asta6XWXlMwK6uT9lGC2q1txu9ZO0IY83UN0qOddteKxVAZep2jfHVUb6z8CykkoD40J3blpn2QJRJLU3dM9s7FyHtEo8V8nNPFDg==
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=vaisala.com;
@@ -27,20 +27,18 @@ Received: from HE1PR0602MB3241.eurprd06.prod.outlook.com (2603:10a6:7:17::28)
  by HE1PR0602MB2746.eurprd06.prod.outlook.com (2603:10a6:3:d7::23) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4457.23; Sat, 28 Aug
- 2021 13:47:46 +0000
+ 2021 13:47:45 +0000
 Received: from HE1PR0602MB3241.eurprd06.prod.outlook.com
  ([fe80::213c:5e2f:60ab:ecf4]) by HE1PR0602MB3241.eurprd06.prod.outlook.com
  ([fe80::213c:5e2f:60ab:ecf4%3]) with mapi id 15.20.4436.019; Sat, 28 Aug 2021
- 13:47:46 +0000
+ 13:47:45 +0000
 From: =?UTF-8?B?VmVzYSBKw6TDpHNrZWzDpGluZW4=?= <vesa.jaaskelainen@vaisala.com>
 To: openembedded-devel@lists.openembedded.org
 CC: =?UTF-8?q?Vesa=20J=C3=A4=C3=A4skel=C3=A4inen?= <vesa.jaaskelainen@vaisala.com>
-Subject: [meta-python][PATCH 1/2] python3-cached-property: Add recipe for version 1.5.2
-Date: Sat, 28 Aug 2021 16:47:26 +0300
-Message-ID: <20210828134727.277771-2-vesa.jaaskelainen@vaisala.com>
+Subject: [meta-python][PATCH 0/2] Add python3-pkcs11 recipe and it's dependencies
+Date: Sat, 28 Aug 2021 16:47:25 +0300
+Message-ID: <20210828134727.277771-1-vesa.jaaskelainen@vaisala.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210828134727.277771-1-vesa.jaaskelainen@vaisala.com>
-References: <20210828134727.277771-1-vesa.jaaskelainen@vaisala.com>
 X-ClientProxiedBy: HE1PR0402CA0051.eurprd04.prod.outlook.com
  (2603:10a6:7:7c::40) To HE1PR0602MB3241.eurprd06.prod.outlook.com
  (2603:10a6:7:17::28)
@@ -49,92 +47,73 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 Received: from localhost.localdomain (87.92.181.210) by HE1PR0402CA0051.eurprd04.prod.outlook.com (2603:10a6:7:7c::40) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4457.17 via Frontend Transport; Sat, 28 Aug 2021 13:47:45 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 6de6ab74-79ff-4d61-932d-08d96a2a6a9f
+X-MS-Office365-Filtering-Correlation-Id: 429d011e-c67b-4fd5-7bea-08d96a2a6a75
 X-MS-TrafficTypeDiagnostic: HE1PR0602MB2746:
 X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<HE1PR0602MB274623068D429083E18B5651EDC99@HE1PR0602MB2746.eurprd06.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:568;
+	<HE1PR0602MB27460FED18FF5BF77E105EC9EDC99@HE1PR0602MB2746.eurprd06.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2582;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	pQMlpMAgOEiLIc45U9O8BL//d/o0sdLOMRbPpW4IT7gg1LIO7hLkBdWJmckPSnZX2glXjZvmSOvnsxbgdbw/2cdsDdFMjvpj7pH0HUfLwCMFkctSTtO76EDiU7hQy3pnSCld19ImydfKYD4NmRPP4h//I/CGRtNmCXoWjk2o5cUcoT6H6GpP+jx//6ss4BZKm38FiXXJVIjveBg8dTN3R/gS5xC7uwCjUlmo8Cc243dBCteouvXdbM3SyzeQ2t9MtUHaALOLq+qmo2EOiKPUOxu9/oX6Z3+z1MU2L8+aqtjCGpMsK4CJqcZl5dy3IqTyIGaxKAAgclYqZt9gGRExjEx0syMRXIQ5t2XxYyVUIR/lvuj9lo8Z0oW+7SaBma7c8Kow2/JaFD+pGgOjasl8G89XDyMrx4l4mtXuUqWB8sNZtZuU9uWA177ipIVZ6m2K/g+hjn0akJyuSw1/MF4t54/wDl5y1jEMNi/SHjYBlDQIIrGX+OAimZB16PxHbLfrM2BfwiQTvfiz1HXqMuBvYZCCA5K710Tl+eRiHcWS3W4Kdzv1rZXJb1DdAIaGge8o7TGLvRkeUYKLgDLUnooGakknqsomqcv6IIhOPHgeSSQGKVeumdvdr94xQ4e4IYPdfHhhL5reK0pyyUR1Hq09dqtEseCMuMTfbniWSWV0IPEkTnH+QsB+DVzj4sWHaELDfTGQMVPe4SHRDjaFPo9QFd/XQx2d6jmU3iOweqvOPY/JggWPdIFTmL0XArVZTM+TM4CpMYNkSQMgpB3LjPN5N0gLSCfKTEpnrrwJU5ORc9Y=
+	+2jO69YSCMu04XFlJU1LIGjPZqN9m0IncTzozkOWe+1JPywzhaGQVwE4mphoZQzAOaV80nL7gRux1hXjlevjetPTaaRT06BpsOpwcnbTVFxHe8XCjHyIuun17AQ7yA8mubeXGqR4ghG4ov9HXRDvzsdy8VdSV0VVW0LTq98UQAXMVvQuJY5AIR6ZkkOCUKtBG0UmpAfH5x9WLw5QHUDCnkWHlaVLe3KfN/rVrLArWg1+LTVUcZQPvq6q2QzEFbCYHJiPUkGIPdeRzHTEWQWzMj4e+xTGLAXpMta7n7u0kk+ZSpg36AvgLGMdjk0VW/qNi2byXIlZrPWlWk4ubXMn3Wm+5l+Wi16072jXkDpMf6MtwvCWX+3coZGaIhcBkJtCJtuBGfP/pF3AdHKpgiSO07LyP0KHtDbsl8VZ/gTYwqxeiZIRpSYaDLZYyCFaXP2i0B75odSiJyjemJfxULiaRuv+Q/2YrdZsgS5UsnEPv33iO5aIXod65K++EpwTK6YM3xq2T5nWDoZOwLT4bOADBB0AwAaxRS/mC8xqiUFa15eMxSkLLNx6+BPSKmO5W4OM9Qg5ebFfJF2nOF9zSK2Zm/v6PVVd2d6ycCbhryRku9VIQtFFMA31pxq6xDW9jPPabHudsiemVNQ3ju10TOKDfGG6M4noAAAFArD8Wgys0Ve/T8gUknYVLr2hOJgFqpTQ/QXtmpG3hBGm0CVSBeuGhA==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:HE1PR0602MB3241.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(376002)(136003)(39850400004)(366004)(396003)(52116002)(66476007)(2906002)(66556008)(6916009)(478600001)(956004)(2616005)(6512007)(5660300002)(6666004)(86362001)(6486002)(66946007)(26005)(6506007)(8676002)(107886003)(4326008)(8936002)(38350700002)(38100700002)(1076003)(36756003)(316002)(186003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:HE1PR0602MB3241.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(376002)(136003)(39850400004)(366004)(396003)(52116002)(66476007)(2906002)(66556008)(6916009)(478600001)(956004)(2616005)(6512007)(5660300002)(6666004)(86362001)(6486002)(66946007)(4744005)(26005)(6506007)(8676002)(107886003)(4326008)(8936002)(38350700002)(38100700002)(1076003)(36756003)(316002)(186003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?D2Uxr32F95/nNYwT9GnW2bnSxA5IO+BsFOu6ye9TOXazyG0ib/kdBObINwj3?=
- =?us-ascii?Q?B/fbeO30dClwCf+hbDdfJEL/5JIu3TWssH8PRFAJhOCVgwNWlFa36j6gCoaX?=
- =?us-ascii?Q?76zpdhA3S5BYDUnshjxHyUQmCK5QQLIs5TT335J/QCYeeDHasWnBMb7C7z/J?=
- =?us-ascii?Q?9jMZH7/eODVwAFq5Plkitp3sVxaW/0OBuoOKQkvN2rCfDVpbt3kM2Yu4Avdi?=
- =?us-ascii?Q?es+4GAX2J1/LA5f/2VAlbIxQ4YkHuydMt43YFgjfvSOJxsljFRtXz+hudn1N?=
- =?us-ascii?Q?zRFBRkxdz6tLkHlkOCPlMESbUtO5fJfLxm2Tz+aCtu4KRnWrcy/ZhzHVAx8w?=
- =?us-ascii?Q?4ofBtD1oshX0Nl14AZRcb4WehlW1G+eU8FJr6BOfUy4Yp1Rr2gd3A2jiqz5o?=
- =?us-ascii?Q?X7qGrqSTSqdxB782csAZBN9HUDUiGBRDruG+bh7e2M9+Hats9KF0hS6k1wPq?=
- =?us-ascii?Q?9dOY6FKk11o1MnV18GAMTRgyKNTFUlIfcEq3RNa7DvElRtZKHm99AECaoXJx?=
- =?us-ascii?Q?qfeHDK3/ncCTMswKCSp7DbC1L94dLzDsTJPKs6fp+ig8CCqAVL86Qbv+CMSS?=
- =?us-ascii?Q?ex9hDoZqdiwuTGB0HicBYtXvY2ipRnPmXe3CBma2VPAp/PEpKxb6mjYnrpkl?=
- =?us-ascii?Q?rEL6pz6Guea0oxbzaGKgjKgu3wg4m6+JM8h/ucnWG+rr8WhhopskM4K8HIfe?=
- =?us-ascii?Q?oDLid+3DQVTSWaIQ6LnGpQ9XlClbmoekPHgCcCGAWpFyj9S38yo/6qsDebiJ?=
- =?us-ascii?Q?+WJ7B4X+cmmHWNBuizHwQQ19ysRri0HernTJMVC2VXBuzm5gt1EYRCWCOOhs?=
- =?us-ascii?Q?vC68upZzEb8EtIKWzrdEqH3BZfSFtkHKcfhmgo6ZYSgO9gavaeFjwwgIINjR?=
- =?us-ascii?Q?bi6FgBHqG5sYoDbYHKxfsrT/QSxM+ib53f9xizK9d5gVytZcf80JClYS8Op1?=
- =?us-ascii?Q?4skxC83utq942o5gOiFCJYS65peKmwuEVx7dz/X2PVbsASxGjGaM7xQ0kQYv?=
- =?us-ascii?Q?RsoF0cY97w37yEJ4uXPSnUZMzZunZNcRPmfasFt3QU7ocH+qMMaqlhhmT7/v?=
- =?us-ascii?Q?BTKG94EGeizvDhHk5kDkJ5156ri/rl2tSAdLOJ45eTzTIb0KDAINUFHVYZnL?=
- =?us-ascii?Q?Bz6ZPyZMkee0c4kMuxEhS5BYo5q/fVQJbExcceXxdbopG8i11M30+r1esP7E?=
- =?us-ascii?Q?MCGxKANfDuv3vrRaXLTNeJh9zryauYO2hkcRgyKVzySM1pBhNBDyyYOoW4+N?=
- =?us-ascii?Q?V1d3E97gXQmhH6VOxbPd2anz1/gPTAslkrbz6/hnO2hMVMuUGmRN8PNiV5mE?=
- =?us-ascii?Q?bVFgnhn22znoRk5wyMahEQuB?=
+	=?us-ascii?Q?ie75Ubh5+kDsI5MRV3AgeTem635+aasX8bnF5O+Zr4NY5Zh/7WZxFMFayM9R?=
+ =?us-ascii?Q?YD5IqbPvIJ5ACMTP9DuqB6443i8ffgtq7EgFmCHxTMFJ+Z7x3udYtTxSLT3r?=
+ =?us-ascii?Q?/ON1yMNUwSV6LJepRuX/zm9V78nb3iR4vfAm3RLRr9TT4DF/AXlG9SEY156F?=
+ =?us-ascii?Q?cLzBfSnOn9SvW0OWtcMK6e/d++RK9MVObtSEQk9SctEu+YSF/BODy+IR/6bj?=
+ =?us-ascii?Q?QOwx4OJioDmMMVkMrfUmixcUEUNGnbPO4F9KngsLLrmFLxdPQb9+WbQItcZR?=
+ =?us-ascii?Q?RLntXM0S8xM66YhCfV9T0fpmlu8orwMXnyUFPa1KPCW7zP80kM8AF1ZkPGs3?=
+ =?us-ascii?Q?9NBsGUqMq5v7GYSurOovLQUN+QqStBM5xSO9CIL5psQuMrcPay7jzPAwGdK3?=
+ =?us-ascii?Q?WdJedTxBpty9609O23UUqMJvpH6jyCWcorg0D2YS7nFhB8s5zwwfP+fFG9ka?=
+ =?us-ascii?Q?ORZXbSjvsXHt0wv9v/kFwYmqg9fEn6PNhdQLrgGrlQo9VwEv6GI1bXFCy9cd?=
+ =?us-ascii?Q?fPorLZotXm46MM8vS03+93nandAdcFIrFdM1rmt1mjsE6aI/aP0XKlbK2eyb?=
+ =?us-ascii?Q?UhcUgriLjY+haHQwK62a5UrM+aBNxVVCIrsyTYFFd16wbO6TxcrhzK8Dd6hG?=
+ =?us-ascii?Q?yaUAjGKOHUBjlpzvkCOAZDasU/AvDg2boibhP4u9L2oM3Vppb6gSMn1Z/Yc+?=
+ =?us-ascii?Q?WGw+u7EcCr++RoGSPR8l4hTXv6V9xqwS/AxkyS1IKPYA8DRGi7LNmOIT0T8W?=
+ =?us-ascii?Q?lkH5Q+7KFeEK4TummkwZ7lxNuJXJFOq1a2IIQCUMkkRRLYlDvfPD6+wfnYjS?=
+ =?us-ascii?Q?ZSkuml9n2fa4yeZCw3p7qcRyyIVnqdvXBE7jKJ3tr7nWqKvTmaUuAOxj49Bu?=
+ =?us-ascii?Q?qNgih6ufFHR62AmL6D/UDjsXCYHcj7ZHlFYYfCMhXRhUzjzPJVvU1umoV7x8?=
+ =?us-ascii?Q?Hw3ItKdPI3pX6xCJaeAkR7gTlRA2ZW9VSt0Crsqt9p0t3viHgeuwMmMIKm1T?=
+ =?us-ascii?Q?UckUnVjxOux+ztE/j0ubH3ykcEjeMYfD/tPxkKwlcXT0JQ6ui8jf+c1XoTSc?=
+ =?us-ascii?Q?qCCpPwp0JT2KdxMyvMliAUbIkZ92PxbK9yuv7IaIcBMRfVSJ/LlzNBwpJc67?=
+ =?us-ascii?Q?hGLbPu93Dp5nJADfoHq15oYY9fUyHxe4u2Q15Unx2FdCqI5LpelGdxWJrmOw?=
+ =?us-ascii?Q?NmCiiVKBQ4qgfuUhrMPUUkha4apxTEsg7ioc5xuCR8AGKz2uI3ra/nmMMZjF?=
+ =?us-ascii?Q?FC6tpHA1hvk8+vXctzbk+mbniJ27rVIlBVrBtuAt706UI6LcPzDwWmes0GKB?=
+ =?us-ascii?Q?H/1u85e9TMUwRS5jDjvP7cZA?=
 X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6de6ab74-79ff-4d61-932d-08d96a2a6a9f
+X-MS-Exchange-CrossTenant-Network-Message-Id: 429d011e-c67b-4fd5-7bea-08d96a2a6a75
 X-MS-Exchange-CrossTenant-AuthSource: HE1PR0602MB3241.eurprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2021 13:47:46.0728
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2021 13:47:45.7970
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 9EzF1Qj4pWhRT3tSz+jsMlNq/7kgPonMK3Z/z+YciWnfnwhPpLEuabHNybuvhiRJWgo4g235jwMf2nqqhfvDhD4iaM4vjErsTU/sBSEl0Dw=
+X-MS-Exchange-CrossTenant-UserPrincipalName: pBf8d5D7Mw6SvnIcEBVgBnsaIlV9qvJL03cLAf0mbjRxMAkTstlIanF3UsO+JmPsdSFwsl/y+wLVTX/yF2pkUTPm9HDCiN1rdk243VALDMQ=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR0602MB2746
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-"A decorator for caching properties in classes."
+Adds recipe for python3-pkcs11 package and it's dependency for
+python3-cached-property.
 
-Signed-off-by: Vesa J=C3=A4=C3=A4skel=C3=A4inen <vesa.jaaskelainen@vaisala.=
-com>
----
- .../python/python3-cached-property_1.5.2.bb         | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+Vesa J=C3=A4=C3=A4skel=C3=A4inen (2):
+  python3-cached-property: Add recipe for version 1.5.2
+  python3-pkcs11: Add recipe for version 0.7.0
+
+ .../python/python3-cached-property_1.5.2.bb   | 13 ++++++++++
+ .../python/python3-pkcs11_0.7.0.bb            | 26 +++++++++++++++++++
+ 2 files changed, 39 insertions(+)
  create mode 100644 meta-python/recipes-devtools/python/python3-cached-prop=
 erty_1.5.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-pkcs11_0.7.=
+0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-cached-property_1.=
-5.2.bb b/meta-python/recipes-devtools/python/python3-cached-property_1.5.2.=
-bb
-new file mode 100644
-index 000000000..6f9266325
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-cached-property_1.5.2.bb
-@@ -0,0 +1,13 @@
-+SUMMARY =3D "A decorator for caching properties in classes."
-+DESCRIPTION =3D "Makes caching of time or computational expensive properti=
-es quick and easy."
-+HOMEPAGE =3D "https://pypi.org/project/cached-property/"
-+SECTION =3D "devel/python"
-+LICENSE =3D "BSD-3-Clause"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddb7ff60c4e14f58534201242803d8ab=
-c"
-+
-+SRC_URI[md5sum] =3D "3451c63f8733ea0756ca1dd2b0c04bb8"
-+SRC_URI[sha256sum] =3D "9fa5755838eecbb2d234c3aa390bd80fbd3ac6b6869109bfc1=
-b499f7bd89a130"
-+
-+inherit pypi setuptools3
-+
-+BBCLASSEXTEND =3D "native"
 --=20
 2.25.1
 
