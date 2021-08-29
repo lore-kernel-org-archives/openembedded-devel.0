@@ -1,144 +1,157 @@
-Received: from mail6.pr.hu (mail6.pr.hu [87.242.0.6])
- by mx.groups.io with SMTP id smtpd.web11.625.1630215401306049877
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
+ by mx.groups.io with SMTP id smtpd.web10.1398.1630224255804555892
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 28 Aug 2021 22:36:43 -0700
+ Sun, 29 Aug 2021 01:04:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@pr.hu header.s=pr20170203 header.b=K8JPPNQn;
- spf=pass (domain: pr.hu, ip: 87.242.0.6, mailfrom: zboszor@pr.hu)
-Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
-	by frontdoor.pr.hu with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.89)
-	(envelope-from <zboszor@pr.hu>)
-	id 1mKDUj-0005A4-Am; Sun, 29 Aug 2021 07:36:37 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
-	s=pr20170203; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=w7utBuPZ+nDiLy97/1JaeYbs0iSWwnEr2wcQlJ3qAVk=; b=K8JPPNQnUu+qemdefY7R9Thjsd
-	i5qwFV2MwLVXzK89jNWkqPC+n0Tpmi3RtC2KWlK7jpD2yuyeHkYyDbqCGle3RxxS78E3bOfHii0Xx
-	IAT//TBZtisPjX+GKWjb4QhDZ+ygnvYtx8ZyhSGeEiZdllUStuE0VMElPzP8gDrlN9eV7KlxguE0P
-	y9dx/25wYCSDuqMRmwOACezPKYEPlIz/aMnBu4FFP5ECkjU8D20GbyQt3WpNCzzygtEA+FTyjwqN/
-	qRZaxdxTITYj7TF//mkDDxVuDU85eg3dvqhIQGBMoDDJMFj7zucyfIBlv+REhR9iTDE1XOTdUQ0ym
-	eKh504vA==;
-Received: from host-87-242-23-58.prtelecom.hu ([87.242.23.58] helo=localhost.lan)
-	by mail.pr.hu with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <zboszor@pr.hu>)
-	id 1mKDUd-0002Gp-Fg; Sun, 29 Aug 2021 07:36:35 +0200
-From: "Zoltan Boszormenyi" <zboszor@pr.hu>
-To: openembedded-devel@lists.openembedded.org
-Cc: zboszor@gmail.com
-Subject: [meta-gnome][PATCH v2] metacity: Add a patch to create build/src/core before moving generated sources to it
-Date: Sun, 29 Aug 2021 07:36:23 +0200
-Message-Id: <20210829053623.6991-1-zboszor@pr.hu>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <ef6e4f5b-044e-0649-ae59-aa25ecba95dd@pr.hu>
-References: <ef6e4f5b-044e-0649-ae59-aa25ecba95dd@pr.hu>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=jVEOm2U3;
+ spf=pass (domain: gmail.com, ip: 209.85.208.43, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f43.google.com with SMTP id dm15so16622113edb.10
+        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Aug 2021 01:04:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=AKUBs3SwO3LMtI8KQqWjJWKm1IZurc3BstUzPMQx+bc=;
+        b=jVEOm2U363i4MEfCnZy0Gy0DmEL8Mlq235dwlnl63/F6dCu8jNq3fsu2BetM/YiG06
+         HiyqdPo0flCXSRuKjgEli7gZtOEmuUyNRQJSSO3ogkVHV4D1BiFybdlX7sFEw12dB2VA
+         7PCpD6bZlUjjpHs2CJQRTOUOr4meMb41OOHL2Z9PN4O9guG1Hs24zGzLpAttfng5TFhn
+         vDnWVm/syMU4JWpzMzqwC/FqO6/twbE8KOmYXc2FBsKqjOvZblkbfAJ4R4pFotrYgs5s
+         3+8fyAEkPbRbQANgTeh2oj7I0xpj0n1QvMele+kQd77IMQ3kYcabQKA84jRQBmr35sGP
+         vsQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=AKUBs3SwO3LMtI8KQqWjJWKm1IZurc3BstUzPMQx+bc=;
+        b=TlfJYAFbbzm++w7cmMt16twSvH8sAfSKNOqQMlQAw2jomh8AzMq8I9G63c0MOvpNVR
+         2OZhdI7UyC/hE4dSxoUUBIDBykhOIAyB1xuyjZfUflSThS270mjHFbtDt9X6Q4QaLmOl
+         0Wa3OnSMWqOdBn9d03SS7dwkR6cs7JLdOZEThdSJ2/xp3A41OxvPfBinij7NQz9FlfHh
+         vv8VVEhrNO8EovaOO+FYnf3qrrXJbJdQFGiwEJaBfJYu0+kDdiFo8F+xkNaMvEmrIZJD
+         8L2YtX05H8XdydYzpDEMWhmNyS6JnDbEjI9Pr0g5LHP6qSMhFgGr78s4fRMOABZtw2jc
+         d8eg==
+X-Gm-Message-State: AOAM531o185cD4E1s4E6ouHS/C7metgTXejphAIKOUlDZvGlmzJQPNCi
+	bo2gxbpzRTSB0QRnvz6I6fO2c9MViuzGLrBBoBY=
+X-Google-Smtp-Source: ABdhPJx1reIvoNPm+sofTPHCoUi0rDAJlW3vpy0R5osGIZdkE9DNq9mOkrX7n8KKJ7AUmKlLmgHVNCGrGCSui4ozE0k=
+X-Received: by 2002:a05:6402:2925:: with SMTP id ee37mr18626777edb.264.1630224254307;
+ Sun, 29 Aug 2021 01:04:14 -0700 (PDT)
 MIME-Version: 1.0
-X-Spam-Score: -0.8 (/)
-X-Scan-Signature: 8aa51b574381c52da4c37a712af1dc9c
-X-Spam-Tracer: backend.mail.pr.hu -0.8 20210829053635Z
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20210802090220.10668-1-liuxiwei@inspur.com> <1698168669EBF7A3.25094@lists.yoctoproject.org>
+In-Reply-To: <1698168669EBF7A3.25094@lists.yoctoproject.org>
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+Date: Sun, 29 Aug 2021 10:04:03 +0200
+Message-ID: <CA+chaQdxbJBpw9m7NZZ+FJR4Ysg9_n_StUgg+qoqtYe7K8SCgg@mail.gmail.com>
+Subject: Re: [yocto] [oe][meta-security][PATCH] meta: Fix typos
+To: Martin Jansa <Martin.Jansa@gmail.com>
+Cc: George Liu <liuxiwei1013@gmail.com>, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	akuster808 <akuster808@gmail.com>, sergio.prado@toradex.com, 
+	George Liu <liuxiwei@inspur.com>
+Content-Type: multipart/alternative; boundary="00000000000095103205caae29b5"
 
-From: Zoltán Böszörményi <zboszor@gmail.com>
+--00000000000095103205caae29b5
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
----
- ...ild-with-disable-dependency-tracking.patch | 65 +++++++++++++++++++
- .../recipes-gnome/metacity/metacity_3.40.0.bb |  5 +-
- 2 files changed, 69 insertions(+), 1 deletion(-)
- create mode 100644 meta-gnome/recipes-gnome/metacity/metacity/0001-fix-build-with-disable-dependency-tracking.patch
+Please merge this one.
 
-diff --git a/meta-gnome/recipes-gnome/metacity/metacity/0001-fix-build-with-disable-dependency-tracking.patch b/meta-gnome/recipes-gnome/metacity/metacity/0001-fix-build-with-disable-dependency-tracking.patch
-new file mode 100644
-index 000000000..864d0baa2
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/metacity/metacity/0001-fix-build-with-disable-dependency-tracking.patch
-@@ -0,0 +1,65 @@
-+From 632670273cc880917e78a152a3ae39e209b57864 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?=
-+ <zboszor@gmail.com>
-+Date: Sat, 28 Aug 2021 05:58:25 +0200
-+Subject: [PATCH] fix build with --disable-dependency-tracking
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+With split build and source directories AND --disable-dependency-tracking
-+(like the way Yocto builds are done) there's a reproducible make
-+failure on my Fedora 33 build host:
-+
-+| Making all in src
-+| make[2]: Entering directory '.../metacity/1_3.40.0-r0/build/src'
-+| .../metacity/1_3.40.0-r0/recipe-sysroot-native/usr/bin/glib-mkenums --template ../../metacity-3.40.0/src/core/meta-enum-types.c.in ../../metacity-3.40.0/src/core/window-private.h ../../metacity-3.40.0/src/include/meta-compositor.h  > \
-+| 	meta-enum-types.c.tmp && mv meta-enum-types.c.tmp core/meta-enum-types.c
-+| .../metacity/1_3.40.0-r0/recipe-sysroot-native/usr/bin/glib-mkenums --template ../../metacity-3.40.0/src/core/meta-enum-types.h.in ../../metacity-3.40.0/src/core/window-private.h ../../metacity-3.40.0/src/include/meta-compositor.h  > \
-+| 	meta-enum-types.h.tmp && mv meta-enum-types.h.tmp core/meta-enum-types.h
-+| mv: cannot move 'meta-enum-types.c.tmp' to 'core/meta-enum-types.c'mv: cannot move 'meta-enum-types.h.tmp' to 'core/meta-enum-types.h': No such file or directory
-+| : No such file or directory
-+| make[2]: *** [Makefile:2240: core/meta-enum-types.c] Error 1
-+
-+https://gitlab.gnome.org/GNOME/metacity/-/merge_requests/24
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
-+---
-+ configure.ac    | 1 +
-+ src/Makefile.am | 2 ++
-+ 2 files changed, 3 insertions(+)
-+
-+diff --git a/configure.ac b/configure.ac
-+index ebb00b85..04aafb94 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -139,6 +139,7 @@ dnl **************************************************************************
-+ AC_SUBST(ACLOCAL_AMFLAGS, "\${ACLOCAL_FLAGS}")
-+ 
-+ AC_PROG_CC
-++AC_PROG_MKDIR_P
-+ AC_ISC_POSIX
-+ AC_HEADER_STDC
-+ 
-+diff --git a/src/Makefile.am b/src/Makefile.am
-+index f86af600..4aa3fdae 100644
-+--- a/src/Makefile.am
-++++ b/src/Makefile.am
-+@@ -204,10 +204,12 @@ ENUM_TYPES = \
-+ 	$(NULL)
-+ 
-+ core/meta-enum-types.c: core/meta-enum-types.c.in $(ENUM_TYPES) Makefile.am
-++	$(MKDIR_P) core
-+ 	$(AM_V_GEN) $(GLIB_MKENUMS) --template $(srcdir)/core/meta-enum-types.c.in $(ENUM_TYPES) > \
-+ 		meta-enum-types.c.tmp && mv meta-enum-types.c.tmp core/meta-enum-types.c
-+ 
-+ core/meta-enum-types.h: core/meta-enum-types.h.in $(ENUM_TYPES) Makefile.am
-++	$(MKDIR_P) core
-+ 	$(AM_V_GEN) $(GLIB_MKENUMS) --template $(srcdir)/core/meta-enum-types.h.in $(ENUM_TYPES) > \
-+ 		meta-enum-types.h.tmp && mv meta-enum-types.h.tmp core/meta-enum-types.h
-+ 
-+-- 
-+2.31.1
-+
-diff --git a/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb b/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb
-index a5c704740..e7570ec59 100644
---- a/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb
-+++ b/meta-gnome/recipes-gnome/metacity/metacity_3.40.0.bb
-@@ -24,7 +24,10 @@ REQUIRED_DISTRO_FEATURES = "x11"
- inherit gnomebase gsettings gettext upstream-version-is-even features_check
- 
- SRC_URI[archive.sha256sum] = "224c1f65487eac21f0c1d9856152343768ee726c48b1a8a2835a46a8ad9015b5"
--SRC_URI += "file://0001-drop-zenity-detection.patch"
-+SRC_URI += " \
-+    file://0001-drop-zenity-detection.patch \
-+    file://0001-fix-build-with-disable-dependency-tracking.patch \
-+"
- 
- PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama"
- # enable as neccessary until new warnings are dealt with
--- 
-2.31.1
+On Wed, Aug 4, 2021 at 1:20 PM Martin Jansa via lists.yoctoproject.org
+<Martin.Jansa=gmail.com@lists.yoctoproject.org> wrote:
 
+> Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+>
+> On Mon, Aug 2, 2021 at 11:02 AM George Liu <liuxiwei1013@gmail.com> wrote:
+>
+>> Fix the variable spelling errors
+>> s/SKIP_META_SECUIRTY_SANITY_CHECK/SKIP_META_SECURITY_SANITY_CHECK
+>>
+>> Signed-off-by: George Liu <liuxiwei@inspur.com>
+>> ---
+>>  classes/sanity-meta-security.bbclass | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/classes/sanity-meta-security.bbclass
+>> b/classes/sanity-meta-security.bbclass
+>> index b6c6b9c..f9e2698 100644
+>> --- a/classes/sanity-meta-security.bbclass
+>> +++ b/classes/sanity-meta-security.bbclass
+>> @@ -1,7 +1,7 @@
+>>  addhandler security_bbappend_distrocheck
+>>  security_bbappend_distrocheck[eventmask] = "bb.event.SanityCheck"
+>>  python security_bbappend_distrocheck() {
+>> -    skip_check = e.data.getVar('SKIP_META_SECUIRTY_SANITY_CHECK') == "1"
+>> +    skip_check = e.data.getVar('SKIP_META_SECURITY_SANITY_CHECK') == "1"
+>>      if 'security' not in e.data.getVar('DISTRO_FEATURES').split() and
+>> not skip_check:
+>>          bb.warn("You have included the meta-security layer, but \
+>>  'security' has not been enabled in your DISTRO_FEATURES. Some bbappend
+>> files \
+>> --
+>> 2.30.2
+>>
+>>
+>>
+>>
+>>
+> 
+>
+>
+
+--00000000000095103205caae29b5
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Please merge this one.</div><br><div class=3D"gmail_quote"=
+><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Aug 4, 2021 at 1:20 PM Marti=
+n Jansa via <a href=3D"http://lists.yoctoproject.org">lists.yoctoproject.or=
+g</a> &lt;Martin.Jansa=3D<a href=3D"mailto:gmail.com@lists.yoctoproject.org=
+">gmail.com@lists.yoctoproject.org</a>&gt; wrote:<br></div><blockquote clas=
+s=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid r=
+gb(204,204,204);padding-left:1ex"><div dir=3D"ltr">Acked-by:=C2=A0Martin Ja=
+nsa &lt;<a href=3D"mailto:Martin.Jansa@gmail.com" target=3D"_blank">Martin.=
+Jansa@gmail.com</a>&gt;</div><br><div class=3D"gmail_quote"><div dir=3D"ltr=
+" class=3D"gmail_attr">On Mon, Aug 2, 2021 at 11:02 AM George Liu &lt;<a hr=
+ef=3D"mailto:liuxiwei1013@gmail.com" target=3D"_blank">liuxiwei1013@gmail.c=
+om</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margi=
+n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
+">Fix the variable spelling errors<br>
+s/SKIP_META_SECUIRTY_SANITY_CHECK/SKIP_META_SECURITY_SANITY_CHECK<br>
+<br>
+Signed-off-by: George Liu &lt;<a href=3D"mailto:liuxiwei@inspur.com" target=
+=3D"_blank">liuxiwei@inspur.com</a>&gt;<br>
+---<br>
+=C2=A0classes/sanity-meta-security.bbclass | 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+<br>
+diff --git a/classes/sanity-meta-security.bbclass b/classes/sanity-meta-sec=
+urity.bbclass<br>
+index b6c6b9c..f9e2698 100644<br>
+--- a/classes/sanity-meta-security.bbclass<br>
++++ b/classes/sanity-meta-security.bbclass<br>
+@@ -1,7 +1,7 @@<br>
+=C2=A0addhandler security_bbappend_distrocheck<br>
+=C2=A0security_bbappend_distrocheck[eventmask] =3D &quot;bb.event.SanityChe=
+ck&quot;<br>
+=C2=A0python security_bbappend_distrocheck() {<br>
+-=C2=A0 =C2=A0 skip_check =3D e.data.getVar(&#39;SKIP_META_SECUIRTY_SANITY_=
+CHECK&#39;) =3D=3D &quot;1&quot;<br>
++=C2=A0 =C2=A0 skip_check =3D e.data.getVar(&#39;SKIP_META_SECURITY_SANITY_=
+CHECK&#39;) =3D=3D &quot;1&quot;<br>
+=C2=A0 =C2=A0 =C2=A0if &#39;security&#39; not in e.data.getVar(&#39;DISTRO_=
+FEATURES&#39;).split() and not skip_check:<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0bb.warn(&quot;You have included the meta-=
+security layer, but \<br>
+=C2=A0&#39;security&#39; has not been enabled in your DISTRO_FEATURES. Some=
+ bbappend files \<br>
+-- <br>
+2.30.2<br>
+<br>
+<br>
+<br>
+<br>
+</blockquote></div>
+<br>
+<br>
+<br>
+</blockquote></div>
+
+--00000000000095103205caae29b5--
