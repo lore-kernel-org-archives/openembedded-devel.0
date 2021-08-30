@@ -1,80 +1,138 @@
-Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com [66.111.4.27])
- by mx.groups.io with SMTP id smtpd.web10.5.1630343878933858273
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.web10.2747.1630355787579569302
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 Aug 2021 10:17:59 -0700
+ Mon, 30 Aug 2021 13:36:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@cold-front.org header.s=mesmtp header.b=qYHzPyh6;
- spf=pass (domain: cold-front.org, ip: 66.111.4.27, mailfrom: jsbronder@cold-front.org)
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.46])
-	by mailout.nyi.internal (Postfix) with ESMTP id 1BCD25C0170;
-	Mon, 30 Aug 2021 13:17:58 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
-  by compute6.internal (MEProxy); Mon, 30 Aug 2021 13:17:58 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
-	 h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding; s=mesmtp; bh=Dn75ihXSBVqTEAHe8MBX52O
-	ueVcf69IKCTm1/UDNxnk=; b=qYHzPyh6+4Ug7g6pRbdGR6p/LtyXkCjcnUS/kh4
-	2BeBtOL6jt2SEvQFYeLY/pVUfizxvHzXx0rg8Z8PIx6uekzdxMeWJgkYFL3loQfN
-	A+wJTH9XRXLLQqhrl8ovyNXCO7dibQNahu8Fk+yWMw++mzQ/EY4PDjMdISU2aOJp
-	ib14=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-transfer-encoding:date:from
-	:message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=Dn75ihXSBVqTEAHe8
-	MBX52OueVcf69IKCTm1/UDNxnk=; b=krqv41CkDmwvYZX7BqI9SPNqUy8fi2k3E
-	/5tsFPkTi44RYAirQXKOmK3LOSqB4hmcbG98Xl/OsCV21RlI0HaPhX+8gpNUHa6k
-	wwm7HQ7N1pimgQVSe6XPzoPHiUGQFhlnqBXEd0n6uKlxlsjyVG1PVN3Z//vvl56/
-	7kjfTo4HWCUDN5kxHEksKjMDhYEqwPL3RDxeqUbsTEdgzeVkAqAEuC0cKumoJGCM
-	1AFtsxHT+eHGy3klL0IvikCRKkG/a4FtJCqxmnONSzM5Exyt51qKwZn9HQduh+kj
-	RJTmjVbhdXuG8/dIfAHpSgLxyL8Cv3APugYGC/+sqyxz1ezCiM/HA==
-X-ME-Sender: <xms:xRItYcJgqaO04hoJT6_UNWlH-gNzHN9Ya6VHuozkebofpCa-7lJRAQ>
-    <xme:xRItYcKa2pKnQUGQIT0iTt1Ykb6_mGezRRu2Hv-N7IUBG-Uq6f2KeKH0tAtDpC3PY
-    Z6qr5ETkLBnJo_9qg>
-X-ME-Received: <xmr:xRItYcuIVswic4Y5XOGr7JJDCl9BfF0AOnJotKxFaWIf7td-EU9Pa77SjpJXnZM51gmDaVPFfO1VCxVKZXGA2uat8Drxa5ITOjzi0RqM5KXc>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddrudduledgudduudcutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
-    necuuegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffoggfgsedtkeertd
-    ertddtnecuhfhrohhmpefluhhsthhinhcuuehrohhnuggvrhcuoehjshgsrhhonhguvghr
-    segtohhlugdqfhhrohhnthdrohhrgheqnecuggftrfgrthhtvghrnhepvdfhtdfhffeiff
-    evteevieefuedvtdfhleduieetudekgefgveffgffffffffffhnecuvehluhhsthgvrhfu
-    ihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhhssghrohhnuggvrhestgholh
-    guqdhfrhhonhhtrdhorhhg
-X-ME-Proxy: <xmx:xRItYZYMxikKyvhOxphlUijmDHR0LShBd6_KpIFBD-qSc2EMQWMH_A>
-    <xmx:xRItYTbkLaMKWiwMbkM7Si0lJQMVEwpepiAu6onm6anqPDYbnLa6RA>
-    <xmx:xRItYVBLQWxGgh9b5LJOOOD2R5mnkuID74evYgbx0ilipE1tVch14Q>
-    <xmx:xhItYUDUwRjpKBgFzdnhbzyFhownEn2f9i7m2eWGEhqwh2yZXYQZHA>
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 30 Aug 2021 13:17:57 -0400 (EDT)
-From: "Justin Bronder" <jsbronder@cold-front.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: Justin Bronder <jsbronder@cold-front.org>
-Subject: [meta-oe][PATCH v2] hidapi: add rdep on glibc-gconv-utf-16
-Date: Mon, 30 Aug 2021 13:17:42 -0400
-Message-Id: <20210830171741.11805-1-jsbronder@cold-front.org>
-X-Mailer: git-send-email 2.33.0
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=LuYcJMzZ;
+ spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: dbaryshkov@gmail.com)
+Received: by mail-ej1-f44.google.com with SMTP id me10so33829377ejb.11
+        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Aug 2021 13:36:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=+q52QpY1JYUxFfML8tritivBePlEK2CEwk4J3DKRIfM=;
+        b=LuYcJMzZ68Y1SE/D/fhhrxDHe8ZSMgqaK/G5HLIMF/bMwVQr+0BpG5XUt4gON7AlSo
+         tlOA5N9LabzNhhvn7KFjuNRiZxV3vbjVUF7g2N1rUJciONVcf301O7hMv0NdQO4zkxXu
+         RPy0f/AB/nrJ+q/X67td9ypbfsrxyn7ses27dEc7twx7KsG8wspXYe9JMmjZq/tud5NR
+         +B+WQ0oHEmeNE0i2a7AGEziBWxP83N6Ro8nOCDysSblx+PlVXhGsZzXHK07BdOScwXkj
+         /pll/+09UsJDWNjNYlIoPoQRRn23IpTloktmfuoEQ1b/lI2gR6ri/OvjzX43RgzSWkSJ
+         ptdA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=+q52QpY1JYUxFfML8tritivBePlEK2CEwk4J3DKRIfM=;
+        b=SWDdeVpcOr+i/QvLuCM1DNaLBARk0rC4tu+r4vgPWVWaHSQmHHugMV3RAveXXBySIq
+         Yc6DZnzQ02HWm7XQrJ0UFm8En0QtG/7sX8F2kHpVT9JWAp81tAswoZuqjEY2Cdp2fNi1
+         FwXbg7MjPufOvbFS4K6116dCa6BEwkbjLbVW9mdq/rK6GNBst8PjtXIqO3u+JeluGcTA
+         bmdjCDWlTYkHnGx5rMK1hZO35dcNgp/JLdjcNX/i4cKsQ6QrExfyIawCV5rq5EnIO+Ky
+         49h1FfrS8evbl8jbZVyXUnwp9cMfoKJ1+7D9xKIw2wlYUTGhQpg+qnXhBAfmiskriZIu
+         Xtqw==
+X-Gm-Message-State: AOAM532TWgVTRtUf4yleAewyk+ObZeuB8ExQ8nhgj1/kyQiMbjsPupmH
+	p5mfkzJqQIpxVajHF5sXCOsTJNaiwm861YXUVqI=
+X-Google-Smtp-Source: ABdhPJxKu5cvO1fAJa9Gkt2lv4yNB6qDCc/SiJav3er4hvVFrk+VE2Y3Y+Q4q0R1mqnL3Js90oYdSTIKo+3+BeDxBWQ=
+X-Received: by 2002:a17:906:4452:: with SMTP id i18mr27520804ejp.374.1630355786032;
+ Mon, 30 Aug 2021 13:36:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210818153932.3365328-1-dmitry.baryshkov@linaro.org>
+ <CAMKF1sqL1aaJrNr4Fj1kkSb0+Ctd5sC8sUkDYiqKMYvJ3cyLUA@mail.gmail.com>
+ <CALT56yMBWzhbyH_exaKPgBZFceYfJFviLd1nX2d+tSs0U0MwqA@mail.gmail.com> <CAMKF1sqmXR2xAc=3SOXKODvaO9BPbe52Y8Ct42V99FcV5Dma5A@mail.gmail.com>
+In-Reply-To: <CAMKF1sqmXR2xAc=3SOXKODvaO9BPbe52Y8Ct42V99FcV5Dma5A@mail.gmail.com>
+From: "Dmitry Baryshkov" <dbaryshkov@gmail.com>
+Date: Mon, 30 Aug 2021 23:36:14 +0300
+Message-ID: <CALT56yPOQh2Qi-KxBDj7UhLZP+e1oYBw0dboue_P_A+LQuV1dw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] image_types_sparse: stop using ext2simg
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-libhidapi-libusb needs to convert from UTF-16LE to WCHAR_T in order to
-read various libusb string descriptors.
+=D0=BF=D1=82, 20 =D0=B0=D0=B2=D0=B3. 2021 =D0=B3. =D0=B2 21:03, Khem Raj <r=
+aj.khem@gmail.com>:
+>
+>
+>
+> On Fri, Aug 20, 2021 at 7:43 AM Dmitry Baryshkov <dbaryshkov@gmail.com> w=
+rote:
+>>
+>> =D1=81=D1=80, 18 =D0=B0=D0=B2=D0=B3. 2021 =D0=B3. =D0=B2 21:23, Khem Raj=
+ <raj.khem@gmail.com>:
+>> >
+>> > On Wed, Aug 18, 2021 at 8:39 AM Dmitry Baryshkov <dbaryshkov@gmail.com=
+> wrote:
+>> > >
+>> > > Under some conditions ext2simg can corrupt the file system (see
+>> > > https://lore.kernel.org/linux-ext4/CAP71WjwVdqmLEq1NGWK36JkEd-i05YcA=
+u4jeY6GFjsk6TS=3DMtg@mail.gmail.com/).
+>> > > This has been reproduced with the ext2simg currently found meta-oe's
+>> > > android-tools-native). Stop using ext2simg and always use img2simg. =
+This
+>> > > results in bigger images, but without the risk of image corruption.
+>> >
+>> > how big are the images ?
+>>
+>> Just checked. I've 1GB (964 MB) ext4 image. gzipped it takes 227 MB.
+>> Given that I got:
+>> ext2simg - 518MB
+>> img2simg - 655 MB
+>
+>
+> Hmm so Choice is corrupted at times and small or big but not corrupted I =
+guess we should take the second option as it seems more stable
 
-Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
----
- meta-oe/recipes-support/hidapi/hidapi_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+Gracious ping.
 
-diff --git a/meta-oe/recipes-support/hidapi/hidapi_git.bb b/meta-oe/recipes-support/hidapi/hidapi_git.bb
-index 76f5dc762..e45445073 100644
---- a/meta-oe/recipes-support/hidapi/hidapi_git.bb
-+++ b/meta-oe/recipes-support/hidapi/hidapi_git.bb
-@@ -7,6 +7,7 @@ LICENSE = "BSD-3-Clause | GPLv3"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7c3949a631240cb6c31c50f3eb696077"
- 
- DEPENDS = "libusb udev"
-+RDEPENDS:${PN}:append:libc-glibc = " glibc-gconv-utf-16"
- 
- inherit autotools pkgconfig
- 
--- 
-2.33.0
+>>
+>>
+>>
+>> >
+>> > >
+>> > > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+>> > > ---
+>> > >  meta-oe/classes/image_types_sparse.bbclass | 12 ++----------
+>> > >  1 file changed, 2 insertions(+), 10 deletions(-)
+>> > >
+>> > > diff --git a/meta-oe/classes/image_types_sparse.bbclass b/meta-oe/cl=
+asses/image_types_sparse.bbclass
+>> > > index 65d980fd913f..4263593a8dd1 100644
+>> > > --- a/meta-oe/classes/image_types_sparse.bbclass
+>> > > +++ b/meta-oe/classes/image_types_sparse.bbclass
+>> > > @@ -2,15 +2,7 @@ inherit image_types
+>> > >
+>> > >  CONVERSIONTYPES +=3D "sparse"
+>> > >  CONVERSION_CMD:sparse =3D " \
+>> > > -    case "${type}" in \
+>> > > -        ext*) \
+>> > > -            ext2simg "${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}" \
+>> > > -                     "${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}.spa=
+rse" \
+>> > > -            ;; \
+>> > > -        *) \
+>> > > -            img2simg "${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}" \
+>> > > -                     "${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}.spa=
+rse" \
+>> > > -            ;; \
+>> > > -    esac \
+>> > > +    img2simg "${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}" \
+>> > > +             "${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}.sparse" \
+>> > >  "
+>> > >  CONVERSION_DEPENDS_sparse =3D "android-tools-native"
+>> > > --
+>> > > 2.30.2
+>> > >
+>> > >
+>> > >=20
+>> > >
+>>
+>>
+>>
+>> --
+>> With best wishes
+>> Dmitry
 
+
+
+--=20
+With best wishes
+Dmitry
