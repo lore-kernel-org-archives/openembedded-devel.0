@@ -1,120 +1,78 @@
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.web11.6297.1630373263132104090
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+ by mx.groups.io with SMTP id smtpd.web09.3815.1630407488071192670
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 Aug 2021 18:27:43 -0700
+ Tue, 31 Aug 2021 03:58:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=qAKeMPCT;
- spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f49.google.com with SMTP id n13-20020a17090a4e0d00b0017946980d8dso774665pjh.5
-        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Aug 2021 18:27:43 -0700 (PDT)
+ dkim=pass header.i=@nathanrossi.com header.s=google header.b=SoHt7z7d;
+ spf=pass (domain: nathanrossi.com, ip: 209.85.214.170, mailfrom: nathan@nathanrossi.com)
+Received: by mail-pl1-f170.google.com with SMTP id e7so971619plh.8
+        for <openembedded-devel@lists.openembedded.org>; Tue, 31 Aug 2021 03:58:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=M2blIFc4ZEXBF1twwI3m3Su3vj3ApwWmvAMr1W5c5Yk=;
-        b=qAKeMPCTvNJt3VTYjQv4x3rC5LGtjkGb5RcwWnQpJQH5sI7JMyxOmpizDHERblYOmu
-         PowNnoR23zkM2cS7Tz13AKj8JbPN8lc05o1vkTgJgkFd60P7H4Incqb8kdkn9vhxDGh2
-         O02H+hEI5dvncQAOROljKUkd819x1gL6lmVFQFRnw5KysNxjXAeK+X3OWnHdr+3XgTj6
-         OOoB2Xyt6pyqDZjJU5vrZg8tDHheClX4nFTtx1UzwUFUK9DUYiu76X8XyCj4XLb/A0Kd
-         WhWpOX6UNyNwJJlylL2amFSNtZq7qiTgmehFY/R1otyipkDJ9yiFz3YOUiqzvK+0EPip
-         blLw==
+        d=nathanrossi.com; s=google;
+        h=date:message-id:from:to:cc:subject:content-transfer-encoding
+         :mime-version;
+        bh=FUKQ8p8IqW2gEhKJbjrG568gcqP5G4HEmN6o4IfAjsw=;
+        b=SoHt7z7dZuq4lAgfWC6ZrFBTHF4aqI1FJYJEzIieViO+5oEHERzdJA4vgDW22Zx2si
+         duQuIasMF+y4rjPvSWtKR/uUD9CrOv3j6e2S2ryxLLCezYof3CgBhyx/+kzuL9aMw2Kh
+         BBDjl+XoRx5FXRpFT9Bk3maoe1Eikx/Xmv4MHErs+xH5dE2zIWS1p8LvGfy0whL/Lplf
+         0AvNX7+vNKXqyjbN+5JBy9bssj2tKrBru9/AZDJ0IHG9/+07o9OSWcq7PVTClxecPuzj
+         RsDlnaORJ+euacX7atG/XFpwe/9YlWpTucbMKd34xRlveu0t8BsSAYW1iw11RkVCcEAQ
+         D5rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=M2blIFc4ZEXBF1twwI3m3Su3vj3ApwWmvAMr1W5c5Yk=;
-        b=bivuSyOxXLi2fCfBDUmBcvaRVUjz+DcAOIp69C3rAvzl/Czi31yOE2WxFdZKjtSrMb
-         bWWNFrDAxFBWaA+sZ/mpgszoP6CnaDTdR9vlnkv75YqdxY4TAQChazo4QEziS+Et18ng
-         cT21KAQjfXv7syf6kNwiKb4Ko/PX9ZIshHf6Lg6K5Z4WWTdRjyDAWTp2wSB2EH0giXjx
-         y4tklC+rSvBrkv5D7P2xW/haLceJVV4UH8H4jW0amB6u028BQlNwqRHIrzYe51qGSMZm
-         AuGbKU9eCGHLpzd2cS+98NyGymXFx1sGrIEmvNCtRxfN7QwDrYezzqX8+l+b2eS/sGfd
-         LRYg==
-X-Gm-Message-State: AOAM533YJ1D9BDUCADz1WnR5mMyFl0kLQ/lr1m1JkLYvgV9CBmbcxE6i
-	aTTBltsbSId8JcJvwIc/3nk=
-X-Google-Smtp-Source: ABdhPJysl/WeI7STNisgNZn+ijUz10UBD5Kro4tQYWp06LYx0/DL1WakPPDUPZm3OeWpwpb++aWuSQ==
-X-Received: by 2002:a17:90a:bc49:: with SMTP id t9mr2217544pjv.48.1630373262548;
-        Mon, 30 Aug 2021 18:27:42 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0:2619:95c9:ae9:9dfe? ([2601:202:4180:a5c0:2619:95c9:ae9:9dfe])
-        by smtp.gmail.com with ESMTPSA id t14sm18591360pga.62.2021.08.30.18.27.41
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 30 Aug 2021 18:27:42 -0700 (PDT)
-Subject: Re: [yocto] [oe][meta-security][PATCH] meta: Fix typos
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: George Liu <liuxiwei1013@gmail.com>,
- Yocto-mailing-list <yocto@lists.yoctoproject.org>,
- openembedded-devel <openembedded-devel@lists.openembedded.org>,
- sergio.prado@toradex.com, George Liu <liuxiwei@inspur.com>
-References: <20210802090220.10668-1-liuxiwei@inspur.com>
- <1698168669EBF7A3.25094@lists.yoctoproject.org>
- <CA+chaQdxbJBpw9m7NZZ+FJR4Ysg9_n_StUgg+qoqtYe7K8SCgg@mail.gmail.com>
-From: "Armin Kuster" <akuster808@gmail.com>
-Message-ID: <9a6c3318-1aeb-34c2-01bb-a0187dc7d1de@gmail.com>
-Date: Mon, 30 Aug 2021 18:27:40 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+        h=x-gm-message-state:date:message-id:from:to:cc:subject
+         :content-transfer-encoding:mime-version;
+        bh=FUKQ8p8IqW2gEhKJbjrG568gcqP5G4HEmN6o4IfAjsw=;
+        b=MFlRZcYtNttKeIkEtM3ULzarVw/J9E6S4V2eu1IqsywxaMRnVeDr+LGwqWGjfaR5/B
+         p48kfqIhSGWnDzBjAmAIcNd1DXQYwPo+O84xe8fmYEevycy36hC5QV6tXN5PA+iccmqK
+         VIM06XC7BSf7Ni+g5MTJPirN30HK/9IBdW0YZEtX+C1SLarb9aUYWdTWmja8abB19dVD
+         tPPTDrDWP2QRgd+xk0UE17qmJsP0d5hfecwT/awjiVNjpnVeRI8ILwUmV3+jdKuHPdp5
+         lrjTqIpif5YcrqbzRGBVEUewJGnJeV6p54cVWz7LGMM+po/P7gp+gMsuECAjXGfRJQz2
+         T8Qw==
+X-Gm-Message-State: AOAM5327IuAGlBFaGAWfMstfqPpABFiYwIgIPYYQmoRZjURmmZ8PJGES
+	8xx7H2g8CW5w5NNOgQxUuQZGPg==
+X-Google-Smtp-Source: ABdhPJxLSEFeWBoOQtI/svZ1BKHFxJo8Lkpzgoi6Z9zPrf6Ln88ozosnkk28aiNlL5h2F81TkUQgGw==
+X-Received: by 2002:a17:902:8543:b029:12d:461f:a6a8 with SMTP id d3-20020a1709028543b029012d461fa6a8mr4210484plo.1.1630407487421;
+        Tue, 31 Aug 2021 03:58:07 -0700 (PDT)
+Return-Path: <nathan@nathanrossi.com>
+Received: from [127.0.1.1] (117-20-69-24.751445.bne.nbn.aussiebb.net. [117.20.69.24])
+        by smtp.gmail.com with UTF8SMTPSA id i6sm17706255pfa.44.2021.08.31.03.58.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 31 Aug 2021 03:58:07 -0700 (PDT)
+Date: Tue, 31 Aug 2021 10:57:56 +0000
+Message-Id: <20210831105756.217662-1-nathan@nathanrossi.com>
+From: "Nathan Rossi" <nathan@nathanrossi.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Nathan Rossi <nathan@nathanrossi.com>, Khem Raj <raj.khem@gmail.com>,
+ Derek Straka <derek@asterius.io>
+Subject: [meta-webserver][PATCH] nginx: Fix off_t size passed in configure
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQdxbJBpw9m7NZZ+FJR4Ysg9_n_StUgg+qoqtYe7K8SCgg@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
 
+For linux, nginx will always compile with '-D_FILE_OFFSET_BITS=64'. This
+means that off_t will always be 8 bytes long, even on 32-bit targets.
 
+This configuration change resolves some issues with nginx and handling
+range headers.
 
-On 8/29/21 1:04 AM, Martin Jansa wrote:
-> Please merge this one.
-you are right. Some how dropped that one. Its merged not.
+Signed-off-by: Nathan Rossi <nathan@nathanrossi.com>
+---
+ meta-webserver/recipes-httpd/nginx/nginx.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-thanks for the reminder.
-
--armin
->
-> On Wed, Aug 4, 2021 at 1:20 PM Martin Jansa via lists.yoctoproject.org
-> <http://lists.yoctoproject.org>
-> <Martin.Jansa=gmail.com@lists.yoctoproject.org
-> <mailto:gmail.com@lists.yoctoproject.org>> wrote:
->
->     Acked-by: Martin Jansa <Martin.Jansa@gmail.com
->     <mailto:Martin.Jansa@gmail.com>>
->
->     On Mon, Aug 2, 2021 at 11:02 AM George Liu <liuxiwei1013@gmail.com
->     <mailto:liuxiwei1013@gmail.com>> wrote:
->
->         Fix the variable spelling errors
->         s/SKIP_META_SECUIRTY_SANITY_CHECK/SKIP_META_SECURITY_SANITY_CHECK
->
->         Signed-off-by: George Liu <liuxiwei@inspur.com
->         <mailto:liuxiwei@inspur.com>>
->         ---
->          classes/sanity-meta-security.bbclass | 2 +-
->          1 file changed, 1 insertion(+), 1 deletion(-)
->
->         diff --git a/classes/sanity-meta-security.bbclass
->         b/classes/sanity-meta-security.bbclass
->         index b6c6b9c..f9e2698 100644
->         --- a/classes/sanity-meta-security.bbclass
->         +++ b/classes/sanity-meta-security.bbclass
->         @@ -1,7 +1,7 @@
->          addhandler security_bbappend_distrocheck
->          security_bbappend_distrocheck[eventmask] = "bb.event.SanityCheck"
->          python security_bbappend_distrocheck() {
->         -    skip_check =
->         e.data.getVar('SKIP_META_SECUIRTY_SANITY_CHECK') == "1"
->         +    skip_check =
->         e.data.getVar('SKIP_META_SECURITY_SANITY_CHECK') == "1"
->              if 'security' not in
->         e.data.getVar('DISTRO_FEATURES').split() and not skip_check:
->                  bb.warn("You have included the meta-security layer, but \
->          'security' has not been enabled in your DISTRO_FEATURES. Some
->         bbappend files \
->         -- 
->         2.30.2
->
->
->
->
->
->     
->
-
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
+index ab37fa3146..7637002f23 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx.inc
++++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+@@ -65,7 +65,7 @@ do_configure () {
+     --with-ptr-size=${PTRSIZE} \
+     --with-sig-atomic-t=${PTRSIZE} \
+     --with-size-t=${PTRSIZE} \
+-    --with-off-t=${PTRSIZE} \
++    --with-off-t=8 \
+     --with-time-t=${PTRSIZE} \
+     --with-sys-nerr=132 \
+     --conf-path=${sysconfdir}/nginx/nginx.conf \
+---
+2.33.0
