@@ -1,141 +1,169 @@
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web11.9524.1630509672875990074
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
+ by mx.groups.io with SMTP id smtpd.web11.151.1630516336175114319
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Sep 2021 08:21:13 -0700
+ Wed, 01 Sep 2021 10:12:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=XnDdml+1;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id e16so51714pfc.6
-        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Sep 2021 08:21:12 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ehaZWihN;
+ spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f178.google.com with SMTP id 17so107946pgp.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Sep 2021 10:12:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=ZtdWWq9UMhQOpkEoxf/O0HOslrdJZfQ5eUWjdimFO4Q=;
-        b=XnDdml+1vB5X9BS28t1H+TiBHQT4JtquyWL6fNUdQ0fj935QEWan9cdoeGSqYWQOm6
-         rpxXYT7RckXkdVWlR18g7n9T4fikt8CKVYPgxZ6xDvoi35B+hnbQhEgErR63xV8zEtLF
-         0nNgqPYF13jTgHy4/ZWDty5dGOtTcbhIJO1oQeNPk7XdSz+5+BulxILrvg7Mu0spdtzO
-         wNEWi0lDcsx/jhe+DGLzQfvCeEH1lrWTf+jSJzO1xdfX3yd989dNbUOqIYM5V3ksoiOU
-         Or140THu20B4U0sVpOtYhRsanB0+WoISmpQsIdYmdYh9Qnk0QLeQpKMTn1VerngQpPXx
-         hCZg==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=T6IMce/j3t0f13yWmkzae/mntcDmzGov5rduC0X2LTE=;
+        b=ehaZWihNfw/yx0X8FYAtB6WJj7fjs+Y5/NknnfPSeE7VfbLx2/jn9a054xVdAs8aa8
+         AMil9Sg6+vBrmiYRVnTJAcumAZx56gyT0LLVxgjoxS7oEP8FhfpPKmV+cWVlRj2yBj36
+         tKm3MldipxNg3e4Yq4m7svAW8c5mRNXmBKWX89poa2IfWNnkFl1WBCeNfMj+VH1/kOSW
+         3me8b06GXh4aBvXaPBoBT2Svn1gjk75Cgp/V0HkNYZ/uB07knUBbYKf31OE7IJ9VbeVa
+         FIHbboXUuFYjkCGHNIxJughbb4sXqMyIg/KZCSOWDinTS/KYJDLQrYKM9aO950C+dGVF
+         uEsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=ZtdWWq9UMhQOpkEoxf/O0HOslrdJZfQ5eUWjdimFO4Q=;
-        b=QPkB5g9F7CvOouYIT7MX8y2rjx8FHfOjxg34jm7SylSRGtn9jNuYLzw4zjs9TTgw0l
-         fQ0UndEWGWqMVjr3dAxA1Ng2TCbBxddYGA06DZ7RSKDN9pdSgdaBBTybdm95/6n44EJq
-         2boyEW/161edvDNRx+X/5ClY46p/DPax968J40KVxt/U2gte/G6ZxHjWGCmjikSWVD9H
-         /nNEOhgWn/4dJQFZQ+RYy9RZ0VkLAFPCrdAup7cRcXuohhQc3r1eREUnf1Yq3gYAHO+5
-         7q9tH0aev55OHY9sBI8H85Ikp1zO9rbt5/cUY9D2bRMRE2rb7Xoul8xqY0pf+79TKXYt
-         7wwQ==
-X-Gm-Message-State: AOAM532LK4d/cXzQflqPY5Q+HvpLx9XNhiRM7uy0G7Frd/SyZg2xJ3V1
-	4Rqqc12nn4gK1WBua2aWFy2ZQC3yP7h+nQ==
-X-Google-Smtp-Source: ABdhPJxkOnOTSeqJTfhSmCnpD5MnhwAyYcMxoDNT/iCu7k24tFd91OJ4rY1m1Z72vog22Q2lXQ3yIA==
-X-Received: by 2002:a63:4614:: with SMTP id t20mr14422pga.372.1630509672070;
-        Wed, 01 Sep 2021 08:21:12 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=T6IMce/j3t0f13yWmkzae/mntcDmzGov5rduC0X2LTE=;
+        b=pGliBpSQMVw9flnMN2vHwm6Fg9lorCNXtF46/UUbDLAiRqbmeN46EKQ4NjRoGCrlMn
+         W2zCj+zrqDfEmFbZ0Zh0sksugS9xlo1S+3u8sDzvYIEtwDaTEq4QTAJM7tzyXe+RKZuM
+         hsFyqdrPkYwjDo//kBOCS6uqA8H2auNJn92LKQVLuzfgfuOj9kOQXHaN8B2f0C+KAkrI
+         my0YfheaamcI9utVRblErfNkE/5FIOxToLMQ7MZfkDi3EJBoh4yTKGl+bLq5eoh2Bc8M
+         MRpeEG4A+WP5TAx8doxO2lMdHgAgXXKYnA63PbaN8xWB001fVm/iBndaktx0mfvBHE6f
+         EPqA==
+X-Gm-Message-State: AOAM531hiW29UY7vBVsUP/HXfPNPwl6ghZjLAqu6msdbxuXJif2ImP6e
+	+YeONfEGw9yA6cJL+3N0tCmvo8h69qMIbQ==
+X-Google-Smtp-Source: ABdhPJzPcAR8vRqFh77jKxuQ7+bz3DHsksyKidz/kQYOiQ3Vf3pvjP9KuDUFmVc8L+ercg5uH3Do0Q==
+X-Received: by 2002:a63:2fc3:: with SMTP id v186mr133492pgv.358.1630516335223;
+        Wed, 01 Sep 2021 10:12:15 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::1d09])
-        by smtp.gmail.com with ESMTPSA id r15sm326489pfh.45.2021.09.01.08.21.11
+        by smtp.gmail.com with ESMTPSA id b5sm103341pjq.2.2021.09.01.10.12.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Sep 2021 08:21:11 -0700 (PDT)
+        Wed, 01 Sep 2021 10:12:14 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 2/2] bluealsa: Add recipe
-Date: Wed,  1 Sep 2021 08:21:08 -0700
-Message-Id: <20210901152108.24811-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] apitrace: Enable on glibc >= 2.34
+Date: Wed,  1 Sep 2021 10:12:11 -0700
+Message-Id: <20210901171211.46098-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20210901152108.24811-1-raj.khem@gmail.com>
-References: <20210901152108.24811-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Implementation of bluetoooth audio over alsa backend esepcially with
-bluez5
+Drop unused patch
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../bluealsa/bluealsa/bluealsa.service        | 11 ++++++
- .../bluealsa/bluealsa_git.bb                  | 39 +++++++++++++++++++
- .../packagegroup-meta-multimedia.bb           |  1 +
- 3 files changed, 51 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/bluealsa/bluealsa/bluealsa.service
- create mode 100644 meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
+ .../packagegroups/packagegroup-meta-oe.bb     |  1 +
+ ...-2.34-build-failure-by-disabling-dls.patch | 28 ++++++++++++++++
+ .../0001-libbacktrace-include-config.h.patch  | 33 -------------------
+ .../apitrace/apitrace_10.0.bb                 |  4 +--
+ 4 files changed, 30 insertions(+), 36 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/apitrace/apitrace/0001-Workaround-glibc-2.34-build-failure-by-disabling-dls.patch
+ delete mode 100644 meta-oe/recipes-devtools/apitrace/apitrace/0001-libbacktrace-include-config.h.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa/bluealsa.service b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa/bluealsa.service
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index f58905f0bc..c36feb334c 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -226,6 +226,7 @@ RDEPENDS:packagegroup-meta-oe-dbs-python2 ="\
+
+ RDEPENDS:packagegroup-meta-oe-devtools ="\
+     abseil-cpp \
++    apitrace \
+     breakpad \
+     android-tools-conf \
+     android-tools \
+diff --git a/meta-oe/recipes-devtools/apitrace/apitrace/0001-Workaround-glibc-2.34-build-failure-by-disabling-dls.patch b/meta-oe/recipes-devtools/apitrace/apitrace/0001-Workaround-glibc-2.34-build-failure-by-disabling-dls.patch
 new file mode 100644
-index 0000000000..671815e031
+index 0000000000..92edc4404c
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa/bluealsa.service
-@@ -0,0 +1,11 @@
-+[Unit]
-+Description=Bluetooth Audio ALSA Backend
-+After=bluetooth.service
-+Requires=bluetooth.service
++++ b/meta-oe/recipes-devtools/apitrace/apitrace/0001-Workaround-glibc-2.34-build-failure-by-disabling-dls.patch
+@@ -0,0 +1,28 @@
++From 1926700b367745e976dae9d9dc2236da21f4435b Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 1 Sep 2021 10:07:48 -0700
++Subject: [PATCH] Workaround glibc 2.34 build failure by disabling dlsym
++ wrapper
 +
-+[Service]
-+Type=simple
-+ExecStart=/usr/bin/bluealsa
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ wrappers/dlsym.cpp | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
-new file mode 100644
-index 0000000000..058bafc2cc
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
-@@ -0,0 +1,39 @@
-+SUMMARY = "Bluetooth Audio ALSA Backend"
-+HOMEPAGE = "https://github.com/Arkq/bluez-alsa"
-+SECTION = "libs"
++diff --git a/wrappers/dlsym.cpp b/wrappers/dlsym.cpp
++index 5ab8465b..d353bbf7 100644
++--- a/wrappers/dlsym.cpp
+++++ b/wrappers/dlsym.cpp
++@@ -34,7 +34,7 @@
++ #include "os.hpp"
 +
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=72d868d66bdd5bf51fe67734431de057"
 +
-+DEPENDS += "alsa-lib bluez5 systemd glib-2.0 sbc"
++-#if defined(__GLIBC__) && !defined(__UCLIBC__)
+++#if defined(__GLIBC__) && !defined(__UCLIBC__) && !(__GLIBC__ == 2 && __GLIBC_MINOR__ >= 34)
 +
-+SRCREV = "aac8742a9e7dd12a1fead9cbce7d2dc8b961999c"
 +
-+SRC_URI = " \
-+    git://github.com/Arkq/bluez-alsa.git;protocol=https;branch=master \
-+    file://bluealsa.service \
-+"
++ #include <dlfcn.h>
++--
++2.33.0
 +
-+S  = "${WORKDIR}/git"
-+
-+PACKAGECONFIG[aac]  = "--enable-aac, --disable-aac,"
-+PACKAGECONFIG[aptx] = "--enable-aptx,--disable-aptx,"
-+PACKAGECONFIG[hcitop]   = "--enable-hcitop, --disable-hcitop, libbsd ncurses"
-+PACKAGECONFIG[systemd]   = "--enable-systemd, --disable-systemd,"
-+
-+PACKAGECONFIG += "hcitop ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-+
-+inherit autotools pkgconfig systemd
-+
-+FILES:${PN} += "\
-+    ${datadir}/alsa/alsa.conf.d/20-bluealsa.conf\
-+    ${libdir}/alsa-lib/libasound_module_ctl_bluealsa.so\
-+    ${libdir}/alsa-lib/libasound_module_pcm_bluealsa.so\
-+"
-+
-+FILES:${PN}-staticdev += "\
-+    ${libdir}/alsa-lib/libasound_module_ctl_bluealsa.a\
-+    ${libdir}/alsa-lib/libasound_module_pcm_bluealsa.a\
-+"
-+
-+SYSTEMD_SERVICE:${PN} = "bluealsa.service bluealsa-aplay.service"
-diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-index 5522731a29..7e581392b6 100644
---- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-+++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-@@ -22,6 +22,7 @@ RDEPENDS:packagegroup-meta-multimedia = "\
- RDEPENDS:packagegroup-meta-multimedia = "\
-     alsa-equal \
-     aom \
-+    bluealsa \
-     caps \
-     cdparanoia \
-     dcadec \
+diff --git a/meta-oe/recipes-devtools/apitrace/apitrace/0001-libbacktrace-include-config.h.patch b/meta-oe/recipes-devtools/apitrace/apitrace/0001-libbacktrace-include-config.h.patch
+deleted file mode 100644
+index 87fb4992d4..0000000000
+--- a/meta-oe/recipes-devtools/apitrace/apitrace/0001-libbacktrace-include-config.h.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-From bdd5f0834d95a9598b0d87a18e7e96afade9d418 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Mon, 10 May 2021 15:28:05 -0700
+-Subject: [PATCH] libbacktrace: include config.h
+-
+-Fixes
+-thirdparty/libbacktrace/backtrace.h:53:10: fatal error: gstdint.h: No such file or directory
+-   53 | #include "gstdint.h"
+-      |          ^~~~~~~~~~~
+-compilation terminated.
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- thirdparty/libbacktrace/backtrace.h | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/thirdparty/libbacktrace/backtrace.h b/thirdparty/libbacktrace/backtrace.h
+-index 2814763f..802cf989 100644
+---- a/thirdparty/libbacktrace/backtrace.h
+-+++ b/thirdparty/libbacktrace/backtrace.h
+-@@ -33,6 +33,7 @@ POSSIBILITY OF SUCH DAMAGE.  */
+- #ifndef BACKTRACE_H
+- #define BACKTRACE_H
+-
+-+#include <config.h>
+- #include <stddef.h>
+- #include <stdio.h>
+-
+---
+-2.31.1
+-
+diff --git a/meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb b/meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb
+index 872aeb824a..ca828b0b44 100644
+--- a/meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb
++++ b/meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb
+@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=aeb969185a143c3c25130bc2c3ef9a50 \
+ SRCREV = "9d42f667e2a36a6624d92b9bd697de097cc4e619"
+ PV .= "+10.0.1+git${SRCPV}"
+ SRC_URI = "gitsm://github.com/${BPN}/${BPN}.git \
++           file://0001-Workaround-glibc-2.34-build-failure-by-disabling-dls.patch \
+           "
+
+ S = "${WORKDIR}/git"
+@@ -30,6 +31,3 @@ EXTRA_OECMAKE += "\
+ "
+
+ SECURITY_CFLAGS:toolchain-clang = ""
+-
+-# see https://github.com/apitrace/apitrace/issues/756
+-PNBLACKLIST[apitrace] ?= "Needs porting to glibc 2.34+"
 --
 2.33.0
