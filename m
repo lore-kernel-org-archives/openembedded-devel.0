@@ -1,121 +1,144 @@
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.web09.2071.1630529940533357822
+Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
+ by mx.groups.io with SMTP id smtpd.web08.2047.1630529941475247216
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Sep 2021 13:59:00 -0700
+ Wed, 01 Sep 2021 13:59:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=WUxrpWZp;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id m4so469992pll.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Sep 2021 13:59:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=U+KXctSp;
+ spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f177.google.com with SMTP id t1so769844pgv.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Sep 2021 13:59:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Nl6sNw5FsV3pRPY7Ycg5My+wPvxrO+Gr3BVBwNWqoX4=;
-        b=WUxrpWZpNtEOXiFpEnYjjz0m5h1UEdLQsm6ZylNKzwmbT/slk6YReVfEvlPYbyb+f1
-         pVid251icWICXTVzXomBsNprTz+y6nt1XQuUsm+8ZZ5d4F60Xk/9y12xSmi+WCPj8D0X
-         FnYS8vAdyl92fhnKbEq6xVb0T7O7XVGr57G7C3R55rlf+iY2CnbFeJHlb5pomszOFrNf
-         dEWKhm6OvViIC29AksOmDYQdbxJqJxgHmIJLWL6pkvfyNxkAHA7daoMhLaBxS6NJgrUP
-         FixrKvcl2tXizrgr91J4hp2wZF2Uih4C+yp7bl/t1SqGkd5HCHT6+HxP5zgcI7P+2bUr
-         zFTQ==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=rxE0ZTiXWY5bNG5tPdJluhttQPDINM0E4vpw8eSzK7I=;
+        b=U+KXctSp3+8DhBeVN4yinWLTMjDv2RNS5/nIBk+qRfmT7iM+PyqBJduQgjVoTR47Ag
+         FJqMtvObgmbQqYEn59tBLTUHWxVmszbh5JQod/9RYpcahqPggpCJPf0FqiDwYrA0vh1r
+         BXfG6f7UGMj6KN7FjWEiv74wI+hYGHfgF/vjqm+1TBSzedSbrEVRUXyvXk1gs0BgMGOK
+         wnuVdOiG4f5w/S+vMFznDPEzhBK6NlM6tqpVvIe219Mz8lYMjBwd0PFOktqeQCGOGrV3
+         MYf8m5wDwht5dJ137w2+/ZPraYGgQruPfzJ0yGRUkkq+GiRchGZWPoL9iIVn1NR1hz3e
+         Hlpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Nl6sNw5FsV3pRPY7Ycg5My+wPvxrO+Gr3BVBwNWqoX4=;
-        b=p5AhAp/TiA3t4pgyjeNZcjFAfTbxW45n7MhBufHenEUZcFCkl9greODsx1m/tZY9Jm
-         0OlvENs56arohjGT080wX3xOAbdRKlXMraVF7cERG8OltC0RBSx8UP7hm4QDVDMKpuVg
-         TCmzinCw08D/3YK4ONSLkQBKQiZtfcFuOgu6wrnppNgYkdSxFaeLnWLhIM3v0Y6bsF6F
-         qK/uAkFfj3GRvScSFKEXD6biByJQKgp+eNThFsoE1fo0CaA8qyGpH0od1dAjEF3zay5C
-         mv9uQfa1y8O/puGhfGIAQ0ikYSEEK5qUCrYpyy/iAdDz47uSqFqfkuGc9ehezx0c/OXl
-         r/SA==
-X-Gm-Message-State: AOAM532K67tNFvIdufQCC/uUqjPBTAFpYzWhRb2iFKyeMR5QyirCLeH9
-	iUgxI3gUhm4VnIFwq6tGtL7f+ChQf1FOUQ==
-X-Google-Smtp-Source: ABdhPJyhCQ5KAZZV7sWnBIowLQJ0Lh04LKQ6YVLCCkrayRb4jcuVMEenbMMsZQvxu5gcE9G7SL9lNg==
-X-Received: by 2002:a17:902:6b8c:b0:12d:b95c:30fb with SMTP id p12-20020a1709026b8c00b0012db95c30fbmr1269849plk.81.1630529939769;
-        Wed, 01 Sep 2021 13:58:59 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=rxE0ZTiXWY5bNG5tPdJluhttQPDINM0E4vpw8eSzK7I=;
+        b=mARQtCxq2KMP/mp2Z91Wp+wOZmRKAY6jnIWjWtr2tiOFljz/9QwXl1d9AEb5syBz2P
+         MCTCX72RTZTeyzMp5b9nVZWcONaC5o81ibJN/KeoHbDgIpcTgn4AiZSfr8C0Oc77Oz8A
+         qyJ9VzYFr7LTSnOzFOD2H8Tthr/ajxfCmr8mCh8RG/bB7Pr59uxpjstOCpzLkvJgDXW8
+         dqGIlTP/fHdOEKbWt9PdshbOr6xbREm4pQ5PL/6TOdrq1QC9k8eydRggjHQZEPpNpbdg
+         YO18GuqKTpzQ87T9PRJXLLVdvrP/UESAhjFA+EPophh3OaK3i3fIg8QTUjbeL9OXSixM
+         svDQ==
+X-Gm-Message-State: AOAM53392KweLHvPtnwnVtyJ84DsWjepCbUhpBdb2tc3R7llH8UeRsZM
+	/qNVBLSqr6ckEYpOWDXvEJAkBqw4QWKPIA==
+X-Google-Smtp-Source: ABdhPJz5AQnhshK5hH7sEMoQfTjPxPe95nnEHhfjjJpgmgQYRaBM9xC9u6eRK30oLk9Lmj/W32//JA==
+X-Received: by 2002:a63:5c51:: with SMTP id n17mr904611pgm.376.1630529940618;
+        Wed, 01 Sep 2021 13:59:00 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::1d09])
-        by smtp.gmail.com with ESMTPSA id t15sm554753pgk.13.2021.09.01.13.58.58
+        by smtp.gmail.com with ESMTPSA id t15sm554753pgk.13.2021.09.01.13.58.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Sep 2021 13:58:59 -0700 (PDT)
+        Wed, 01 Sep 2021 13:59:00 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH v2 1/2] pipewire: Upgrade to 0.3.34
-Date: Wed,  1 Sep 2021 13:58:55 -0700
-Message-Id: <20210901205856.99727-1-raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH v2 2/2] bluealsa: Add recipe
+Date: Wed,  1 Sep 2021 13:58:56 -0700
+Message-Id: <20210901205856.99727-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.33.0
+In-Reply-To: <20210901205856.99727-1-raj.khem@gmail.com>
+References: <20210901205856.99727-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Enable systemd user services as well as they are required for user
-pipewire sessions
-
-Turn pw-cat into a packageconfig
-
-Enable systemd-user-service only for systemd
+Implementation of bluetoooth audio over alsa backend esepcially with
+bluez5
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-v2: Move pw-cat to a packageconfig
-    Make all systemd enabled features controlled by systemd
-    packageconfig
+v2: Move systemd dependency to be added only when systemd packageconfig
+    is enabled
 
- .../pipewire/{pipewire_0.3.31.bb => pipewire_0.3.34.bb}  | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.31.bb => pipewire_0.3.34.bb} (96%)
+ .../bluealsa/bluealsa/bluealsa.service        | 11 ++++++
+ .../bluealsa/bluealsa_git.bb                  | 39 +++++++++++++++++++
+ .../packagegroup-meta-multimedia.bb           |  1 +
+ 3 files changed, 51 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/bluealsa/bluealsa/bluealsa.service
+ create mode 100644 meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.31.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.34.bb
-similarity index 96%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.31.bb
-rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.34.bb
-index 1c18ba0328..c841ae2050 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.31.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.34.bb
-@@ -11,7 +11,7 @@ SECTION = "multimedia"
-
- DEPENDS = "dbus"
-
--SRCREV = "c43dabcc96e2e072cdf08e5f094bb677d9017c6b"
-+SRCREV = "1924c2c29824955b5e763f1def6967f68e403c7c"
- SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https"
-
- S = "${WORKDIR}/git"
-@@ -46,7 +46,6 @@ USERADD_PARAM:${PN} = "--system --home / --no-create-home \
- EXTRA_OEMESON += " \
-     -Daudiotestsrc=enabled \
-     -Devl=disabled \
--    -Dsystemd-user-service=disabled \
-     -Dtests=disabled \
-     -Dudevrulesdir=${nonarch_base_libdir}/udev/rules.d/ \
-     -Dvideotestsrc=enabled \
-@@ -59,7 +58,7 @@ EXTRA_OEMESON += " \
- PACKAGECONFIG ??= "\
-     ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)} \
-     ${@bb.utils.filter('DISTRO_FEATURES', 'alsa systemd', d)} \
--    gstreamer jack v4l2 \
-+    gstreamer jack pw-cat v4l2 \
- "
-
- # "jack" and "pipewire-jack" packageconfigs cannot be both enabled,
-@@ -75,7 +74,8 @@ PACKAGECONFIG[gstreamer] = "-Dgstreamer=enabled,-Dgstreamer=disabled,glib-2.0 gs
- PACKAGECONFIG[jack] = "-Djack=enabled,-Djack=disabled,jack,,,pipewire-jack"
- PACKAGECONFIG[sdl2] = "-Dsdl2=enabled,-Dsdl2=disabled,virtual/libsdl2"
- PACKAGECONFIG[sndfile] = "-Dsndfile=enabled,-Dsndfile=disabled,libsndfile1"
--PACKAGECONFIG[systemd] = "-Dsystemd=enabled -Dsystemd-system-service=enabled ,-Dsystemd=disabled -Dsystemd-system-service=disabled,systemd"
-+PACKAGECONFIG[systemd] = "-Dsystemd=enabled -Dsystemd-system-service=enabled -Dsystemd-user-service=enabled,-Dsystemd=disabled -Dsystemd-system-service=disabled -Dsystemd-user-service=disabled,systemd"
-+PACKAGECONFIG[pw-cat] = "-Dpw-cat=enabled -Dsndfile=enabled,-Dpw-cat=disabled,libsndfile1"
- PACKAGECONFIG[v4l2] = "-Dv4l2=enabled,-Dv4l2=disabled,udev"
- PACKAGECONFIG[pipewire-alsa] = "-Dpipewire-alsa=enabled,-Dpipewire-alsa=disabled,alsa-lib"
- PACKAGECONFIG[pipewire-jack] = "-Dpipewire-jack=enabled -Dlibjack-path=${libdir}/${PW_MODULE_SUBDIR}/jack,-Dpipewire-jack=disabled,jack,,,jack"
-@@ -250,6 +250,7 @@ FILES:${PN}-media-session = " \
-     ${bindir}/pipewire-media-session \
-     ${datadir}/pipewire/media-session.d/* \
-     ${systemd_system_unitdir}/pipewire-media-session.service \
-+    ${systemd_user_unitdir}/pipewire-media-session.service \
- "
- RPROVIDES:${PN}-media-session = "virtual-pipewire-sessionmanager"
-
+diff --git a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa/bluealsa.service b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa/bluealsa.service
+new file mode 100644
+index 0000000000..671815e031
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa/bluealsa.service
+@@ -0,0 +1,11 @@
++[Unit]
++Description=Bluetooth Audio ALSA Backend
++After=bluetooth.service
++Requires=bluetooth.service
++
++[Service]
++Type=simple
++ExecStart=/usr/bin/bluealsa
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
+new file mode 100644
+index 0000000000..674017606e
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
+@@ -0,0 +1,39 @@
++SUMMARY = "Bluetooth Audio ALSA Backend"
++HOMEPAGE = "https://github.com/Arkq/bluez-alsa"
++SECTION = "libs"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=72d868d66bdd5bf51fe67734431de057"
++
++DEPENDS += "alsa-lib bluez5 glib-2.0 sbc"
++
++SRCREV = "aac8742a9e7dd12a1fead9cbce7d2dc8b961999c"
++
++SRC_URI = " \
++    git://github.com/Arkq/bluez-alsa.git;protocol=https;branch=master \
++    file://bluealsa.service \
++"
++
++S  = "${WORKDIR}/git"
++
++PACKAGECONFIG[aac]  = "--enable-aac, --disable-aac,"
++PACKAGECONFIG[aptx] = "--enable-aptx,--disable-aptx,"
++PACKAGECONFIG[hcitop]   = "--enable-hcitop, --disable-hcitop, libbsd ncurses"
++PACKAGECONFIG[systemd]   = "--enable-systemd, --disable-systemd, systemd"
++
++PACKAGECONFIG += "hcitop ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
++
++inherit autotools pkgconfig systemd
++
++FILES:${PN} += "\
++    ${datadir}/alsa/alsa.conf.d/20-bluealsa.conf\
++    ${libdir}/alsa-lib/libasound_module_ctl_bluealsa.so\
++    ${libdir}/alsa-lib/libasound_module_pcm_bluealsa.so\
++"
++
++FILES:${PN}-staticdev += "\
++    ${libdir}/alsa-lib/libasound_module_ctl_bluealsa.a\
++    ${libdir}/alsa-lib/libasound_module_pcm_bluealsa.a\
++"
++
++SYSTEMD_SERVICE:${PN} = "bluealsa.service bluealsa-aplay.service"
+diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+index 5522731a29..7e581392b6 100644
+--- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
++++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+@@ -22,6 +22,7 @@ RDEPENDS:packagegroup-meta-multimedia = "\
+ RDEPENDS:packagegroup-meta-multimedia = "\
+     alsa-equal \
+     aom \
++    bluealsa \
+     caps \
+     cdparanoia \
+     dcadec \
 --
 2.33.0
