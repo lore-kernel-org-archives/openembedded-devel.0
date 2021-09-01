@@ -1,144 +1,85 @@
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
- by mx.groups.io with SMTP id smtpd.web08.2047.1630529941475247216
+Received: from wout3-smtp.messagingengine.com (wout3-smtp.messagingengine.com [64.147.123.19])
+ by mx.groups.io with SMTP id smtpd.web10.2692.1630532879776812306
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Sep 2021 13:59:01 -0700
+ Wed, 01 Sep 2021 14:48:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=U+KXctSp;
- spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f177.google.com with SMTP id t1so769844pgv.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Sep 2021 13:59:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=rxE0ZTiXWY5bNG5tPdJluhttQPDINM0E4vpw8eSzK7I=;
-        b=U+KXctSp3+8DhBeVN4yinWLTMjDv2RNS5/nIBk+qRfmT7iM+PyqBJduQgjVoTR47Ag
-         FJqMtvObgmbQqYEn59tBLTUHWxVmszbh5JQod/9RYpcahqPggpCJPf0FqiDwYrA0vh1r
-         BXfG6f7UGMj6KN7FjWEiv74wI+hYGHfgF/vjqm+1TBSzedSbrEVRUXyvXk1gs0BgMGOK
-         wnuVdOiG4f5w/S+vMFznDPEzhBK6NlM6tqpVvIe219Mz8lYMjBwd0PFOktqeQCGOGrV3
-         MYf8m5wDwht5dJ137w2+/ZPraYGgQruPfzJ0yGRUkkq+GiRchGZWPoL9iIVn1NR1hz3e
-         Hlpg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=rxE0ZTiXWY5bNG5tPdJluhttQPDINM0E4vpw8eSzK7I=;
-        b=mARQtCxq2KMP/mp2Z91Wp+wOZmRKAY6jnIWjWtr2tiOFljz/9QwXl1d9AEb5syBz2P
-         MCTCX72RTZTeyzMp5b9nVZWcONaC5o81ibJN/KeoHbDgIpcTgn4AiZSfr8C0Oc77Oz8A
-         qyJ9VzYFr7LTSnOzFOD2H8Tthr/ajxfCmr8mCh8RG/bB7Pr59uxpjstOCpzLkvJgDXW8
-         dqGIlTP/fHdOEKbWt9PdshbOr6xbREm4pQ5PL/6TOdrq1QC9k8eydRggjHQZEPpNpbdg
-         YO18GuqKTpzQ87T9PRJXLLVdvrP/UESAhjFA+EPophh3OaK3i3fIg8QTUjbeL9OXSixM
-         svDQ==
-X-Gm-Message-State: AOAM53392KweLHvPtnwnVtyJ84DsWjepCbUhpBdb2tc3R7llH8UeRsZM
-	/qNVBLSqr6ckEYpOWDXvEJAkBqw4QWKPIA==
-X-Google-Smtp-Source: ABdhPJz5AQnhshK5hH7sEMoQfTjPxPe95nnEHhfjjJpgmgQYRaBM9xC9u6eRK30oLk9Lmj/W32//JA==
-X-Received: by 2002:a63:5c51:: with SMTP id n17mr904611pgm.376.1630529940618;
-        Wed, 01 Sep 2021 13:59:00 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::1d09])
-        by smtp.gmail.com with ESMTPSA id t15sm554753pgk.13.2021.09.01.13.58.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Sep 2021 13:59:00 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+ dkim=pass header.i=@stwcx.xyz header.s=fm2 header.b=lmHzPxEQ;
+ spf=pass (domain: stwcx.xyz, ip: 64.147.123.19, mailfrom: patrick@stwcx.xyz)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.46])
+	by mailout.west.internal (Postfix) with ESMTP id 69B383200979;
+	Wed,  1 Sep 2021 17:47:57 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute6.internal (MEProxy); Wed, 01 Sep 2021 17:47:57 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stwcx.xyz; h=
+	from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding; s=fm2; bh=5Lz9QhncOrAOEnPgOs4QYx5Wvn
+	uxdF2YcBYmSTPrG1M=; b=lmHzPxEQMUspCzxEyJGUDRQBO35UoGgLHZKhmvg4JC
+	LTfmSZf6RgQPFXXkyreK0tkO+n0YkOfmvrDkahqrfiT1kIeXicTB0zQSsVAjlpcf
+	egMdEqtRDSMYE11jyVTqG/vHj5rkCjuYfprJapQwNxBb3zZYOflZZr9JSDVMJ8jw
+	/1BVonhFw5xK/9KDXn6CIi0PPO4Uknnew+Boeezb7gIW7bzrJ6R0m/FIZ4CeOzrm
+	SMoSQjXoUSlujJzkyzgHI8YSSysGzDc12OGXvP93gwemQPLBNE0ymo/Az3NgbooF
+	YuryXWJu6qGG6nQ/WpT7IcmdMbCgYtHYMSBq6oJF0NJQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:content-transfer-encoding:date:from
+	:message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=5Lz9QhncOrAOEnPgO
+	s4QYx5WvnuxdF2YcBYmSTPrG1M=; b=wX4G1DNzQr/S0nac/7r7FVNBlTpsSA5f8
+	Cx/xP1NYvjco5tUkHw8YAbKdw0XEgzYOsl2i90lhBE+UQ6ZHNDZnldvDfkUeD11U
+	Ue9YLKBc6+Q+DUBq9LBmjpur9Xo1OL1kJMK9VGs/VB9Mc27kigc5rox52CDuE50b
+	1cUcKCUZxszuOVz63LvQfwys6LwnYHYBVbBvQgI9Ck85ZkwJ6SiJeyUL7geSzORh
+	gy+fwwt9KXmizMmkOwVfOvgYMPPmJAaJYSoMjIKrEqFxIHGP2SDp4eSZXKsn7C+w
+	zM3f5BkMc4igVjeZyE+Z6IA4WUPjAeijNabSWZ2RfHiMvXjHmSJ9A==
+X-ME-Sender: <xms:DPUvYc8ChNZajeoPlT1JreG2dGTLOnWA2VYmGdZpvKxntaF-0NMGew>
+    <xme:DPUvYUtIhVGZJvue4UCBAblWIcZ0-vUAm36MCF-IZxK4kmyFRXdfVto50deuAYLma
+    4pp8IaLHLxYLLOdeuc>
+X-ME-Received: <xmr:DPUvYSCCNxtqSippYyQimqUjwzNfgmNVjyNmEqMh9uhQjxNFrQGHUyTgRoBe5NnJDMbWDer9mYZ3kQDyoTxNMCSGe7o6LTzD2LNPmA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddruddvgedgtdduucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucgfrhhlucfvnfffucdljedtmdenucfjughrpefhvf
+    fufffkofgggfestdekredtredttdenucfhrhhomheprfgrthhrihgtkhcuhghilhhlihgr
+    mhhsuceophgrthhrihgtkhesshhtfigtgidrgiihiieqnecuggftrfgrthhtvghrnheptd
+    eludegheejteelheduudegkeehleetfeekiedtfefgleeifeelhefgveejhfffnecuvehl
+    uhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepphgrthhrihgtkh
+    esshhtfigtgidrgiihii
+X-ME-Proxy: <xmx:DPUvYceT7m_9DBpxxkCNv5KPWCPWN_Y-SxQndcWCsoJEYuibAdTRMQ>
+    <xmx:DPUvYRN6EQubOyddj_RmAyX49_8nhEGwt5PKNBTLbVfG9MT8gwifeA>
+    <xmx:DPUvYWmoiO7RAlNVYzB0NJUk9pH2gtZhP41WE40KBqNL8YNmkobbOg>
+    <xmx:DfUvYTXD5tJKtWu5vWdvewPgpu4tr18mxP2EU32Trodx3FfQCaAUpg>
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 1 Sep 2021 17:47:56 -0400 (EDT)
+From: "Patrick Williams" <patrick@stwcx.xyz>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH v2 2/2] bluealsa: Add recipe
-Date: Wed,  1 Sep 2021 13:58:56 -0700
-Message-Id: <20210901205856.99727-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20210901205856.99727-1-raj.khem@gmail.com>
-References: <20210901205856.99727-1-raj.khem@gmail.com>
+Cc: Patrick Williams <patrick@stwcx.xyz>
+Subject: [meta-networking][PATCH] ndisc6: fix typo in DESCRIPTION variable name
+Date: Wed,  1 Sep 2021 16:47:53 -0500
+Message-Id: <20210901214753.3331060-1-patrick@stwcx.xyz>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Implementation of bluetoooth audio over alsa backend esepcially with
-bluez5
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Patrick Williams <patrick@stwcx.xyz>
 ---
-v2: Move systemd dependency to be added only when systemd packageconfig
-    is enabled
+ recipes-support/ndisc6/ndisc6_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- .../bluealsa/bluealsa/bluealsa.service        | 11 ++++++
- .../bluealsa/bluealsa_git.bb                  | 39 +++++++++++++++++++
- .../packagegroup-meta-multimedia.bb           |  1 +
- 3 files changed, 51 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/bluealsa/bluealsa/bluealsa.service
- create mode 100644 meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
+diff --git a/recipes-support/ndisc6/ndisc6_git.bb b/recipes-support/ndisc6/ndisc6_git.bb
+index e9af2c43f..d1e006c08 100644
+--- a/recipes-support/ndisc6/ndisc6_git.bb
++++ b/recipes-support/ndisc6/ndisc6_git.bb
+@@ -60,11 +60,11 @@ IPv4 world."
+ DESCRIPTION:${PN}-rdisc6    = "ICMPv6 Router Discovery tool. \
+ Queries IPv6 routers on the network for advertised prefixes. Can be used \
+ to detect rogue IPv6 routers, monitor legitimate IPv6 routers."
+-DESCRITPION_${PN}-tcpspray6    = "Performs bandwidth measurements of TCP \
++DESCRIPTION:${PN}-tcpspray6    = "Performs bandwidth measurements of TCP \
+ sessions between the local system and a remote echo server in either IPv6 \
+ or IPv4."
+ 
+-DESCRITPION_${PN}-rdnssd       = "Daemon to autoconfigure the list of DNS \
++DESCRIPTION:${PN}-rdnssd       = "Daemon to autoconfigure the list of DNS \
+ servers through slateless IPv6 autoconfiguration."
+ 
+ # The tcptraceroute6 and tracert6 commands depend on rltraceroute6 to
+-- 
+2.31.1
 
-diff --git a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa/bluealsa.service b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa/bluealsa.service
-new file mode 100644
-index 0000000000..671815e031
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa/bluealsa.service
-@@ -0,0 +1,11 @@
-+[Unit]
-+Description=Bluetooth Audio ALSA Backend
-+After=bluetooth.service
-+Requires=bluetooth.service
-+
-+[Service]
-+Type=simple
-+ExecStart=/usr/bin/bluealsa
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
-new file mode 100644
-index 0000000000..674017606e
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
-@@ -0,0 +1,39 @@
-+SUMMARY = "Bluetooth Audio ALSA Backend"
-+HOMEPAGE = "https://github.com/Arkq/bluez-alsa"
-+SECTION = "libs"
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=72d868d66bdd5bf51fe67734431de057"
-+
-+DEPENDS += "alsa-lib bluez5 glib-2.0 sbc"
-+
-+SRCREV = "aac8742a9e7dd12a1fead9cbce7d2dc8b961999c"
-+
-+SRC_URI = " \
-+    git://github.com/Arkq/bluez-alsa.git;protocol=https;branch=master \
-+    file://bluealsa.service \
-+"
-+
-+S  = "${WORKDIR}/git"
-+
-+PACKAGECONFIG[aac]  = "--enable-aac, --disable-aac,"
-+PACKAGECONFIG[aptx] = "--enable-aptx,--disable-aptx,"
-+PACKAGECONFIG[hcitop]   = "--enable-hcitop, --disable-hcitop, libbsd ncurses"
-+PACKAGECONFIG[systemd]   = "--enable-systemd, --disable-systemd, systemd"
-+
-+PACKAGECONFIG += "hcitop ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-+
-+inherit autotools pkgconfig systemd
-+
-+FILES:${PN} += "\
-+    ${datadir}/alsa/alsa.conf.d/20-bluealsa.conf\
-+    ${libdir}/alsa-lib/libasound_module_ctl_bluealsa.so\
-+    ${libdir}/alsa-lib/libasound_module_pcm_bluealsa.so\
-+"
-+
-+FILES:${PN}-staticdev += "\
-+    ${libdir}/alsa-lib/libasound_module_ctl_bluealsa.a\
-+    ${libdir}/alsa-lib/libasound_module_pcm_bluealsa.a\
-+"
-+
-+SYSTEMD_SERVICE:${PN} = "bluealsa.service bluealsa-aplay.service"
-diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-index 5522731a29..7e581392b6 100644
---- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-+++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-@@ -22,6 +22,7 @@ RDEPENDS:packagegroup-meta-multimedia = "\
- RDEPENDS:packagegroup-meta-multimedia = "\
-     alsa-equal \
-     aom \
-+    bluealsa \
-     caps \
-     cdparanoia \
-     dcadec \
---
-2.33.0
