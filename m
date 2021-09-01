@@ -1,38 +1,38 @@
 Received: from wout3-smtp.messagingengine.com (wout3-smtp.messagingengine.com [64.147.123.19])
- by mx.groups.io with SMTP id smtpd.web10.2692.1630532879776812306
+ by mx.groups.io with SMTP id smtpd.web08.2695.1630532908166071637
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Sep 2021 14:48:00 -0700
+ Wed, 01 Sep 2021 14:48:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@stwcx.xyz header.s=fm2 header.b=lmHzPxEQ;
+ dkim=pass header.i=@stwcx.xyz header.s=fm2 header.b=fR0QuH/y;
  spf=pass (domain: stwcx.xyz, ip: 64.147.123.19, mailfrom: patrick@stwcx.xyz)
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.46])
-	by mailout.west.internal (Postfix) with ESMTP id 69B383200979;
-	Wed,  1 Sep 2021 17:47:57 -0400 (EDT)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.42])
+	by mailout.west.internal (Postfix) with ESMTP id 931563200986;
+	Wed,  1 Sep 2021 17:48:26 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
-  by compute6.internal (MEProxy); Wed, 01 Sep 2021 17:47:57 -0400
+  by compute2.internal (MEProxy); Wed, 01 Sep 2021 17:48:26 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stwcx.xyz; h=
 	from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding; s=fm2; bh=5Lz9QhncOrAOEnPgOs4QYx5Wvn
-	uxdF2YcBYmSTPrG1M=; b=lmHzPxEQMUspCzxEyJGUDRQBO35UoGgLHZKhmvg4JC
-	LTfmSZf6RgQPFXXkyreK0tkO+n0YkOfmvrDkahqrfiT1kIeXicTB0zQSsVAjlpcf
-	egMdEqtRDSMYE11jyVTqG/vHj5rkCjuYfprJapQwNxBb3zZYOflZZr9JSDVMJ8jw
-	/1BVonhFw5xK/9KDXn6CIi0PPO4Uknnew+Boeezb7gIW7bzrJ6R0m/FIZ4CeOzrm
-	SMoSQjXoUSlujJzkyzgHI8YSSysGzDc12OGXvP93gwemQPLBNE0ymo/Az3NgbooF
-	YuryXWJu6qGG6nQ/WpT7IcmdMbCgYtHYMSBq6oJF0NJQ==
+	:content-transfer-encoding; s=fm2; bh=oDzYqN3d+ekQkdMuCIR74O0jwA
+	apusTmOIu2R4CjBG4=; b=fR0QuH/y7onLMXJ8JneRV8XlTvmRQ4uDjfEiUboXGb
+	YplOqoY/lBWxKNQEw+Uxdmg7sOxAJqOTgFTDQvKLK2rzJqoNbsUudL7/A5N317Xb
+	S+QoBYDHPSBTbWCoBmQFRdTLhVSOKHBn+ylkoN0kZQ0YdFd6U24QOCCb7K6OlFfx
+	oKMYAm6Qbs/EinHtgTCRZ+r6KLXWJT5Y39BoI8M8aaMbiRS4nq+1zmT+S+SWlGdw
+	mrobBaKBZMZR1XIAIh/sMCl/cRDeN+q3txrTjmuzN+VCsi2KAq5/w18Yfuv+F+Z8
+	r8qwxkhM3PxlSPiclJS6vqY5EXjqKDyiDv3vvN62eW8Q==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:content-transfer-encoding:date:from
 	:message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=5Lz9QhncOrAOEnPgO
-	s4QYx5WvnuxdF2YcBYmSTPrG1M=; b=wX4G1DNzQr/S0nac/7r7FVNBlTpsSA5f8
-	Cx/xP1NYvjco5tUkHw8YAbKdw0XEgzYOsl2i90lhBE+UQ6ZHNDZnldvDfkUeD11U
-	Ue9YLKBc6+Q+DUBq9LBmjpur9Xo1OL1kJMK9VGs/VB9Mc27kigc5rox52CDuE50b
-	1cUcKCUZxszuOVz63LvQfwys6LwnYHYBVbBvQgI9Ck85ZkwJ6SiJeyUL7geSzORh
-	gy+fwwt9KXmizMmkOwVfOvgYMPPmJAaJYSoMjIKrEqFxIHGP2SDp4eSZXKsn7C+w
-	zM3f5BkMc4igVjeZyE+Z6IA4WUPjAeijNabSWZ2RfHiMvXjHmSJ9A==
-X-ME-Sender: <xms:DPUvYc8ChNZajeoPlT1JreG2dGTLOnWA2VYmGdZpvKxntaF-0NMGew>
-    <xme:DPUvYUtIhVGZJvue4UCBAblWIcZ0-vUAm36MCF-IZxK4kmyFRXdfVto50deuAYLma
-    4pp8IaLHLxYLLOdeuc>
-X-ME-Received: <xmr:DPUvYSCCNxtqSippYyQimqUjwzNfgmNVjyNmEqMh9uhQjxNFrQGHUyTgRoBe5NnJDMbWDer9mYZ3kQDyoTxNMCSGe7o6LTzD2LNPmA>
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=oDzYqN3d+ekQkdMuC
+	IR74O0jwAapusTmOIu2R4CjBG4=; b=br1fY0oaPnZzUgbG3/w8bdXLbXXrpnjg0
+	ZLd0sd7x9qevaFR1HW/Ue/XyjhD5RIUqFXgWtWgdN6SC7nSHSj4gjJvWDnt1Fqg4
+	e0PJxiXM4UJOdoPr8c1ighbZk6rc+SOkyz2wkyiUw9z+OQ6kBAQ7yI8NS14cVEBb
+	iVLa4QlczIsZQpx5NWXIkIXyS5FIn0AqZIXy6QFgHouULwQNFK1jbmJmXmrKRc7p
+	3yW4EPFrZ2IRSej6AcU8Rk7bs/ULP47Jo4OylVHqfKgmF5k93w/HjHfRmaj/Q7fA
+	N94GYSgmEGIkM8ohRxNDK/NDH8Do9KUjkjalfBcOIG4+NSnEQugRQ==
+X-ME-Sender: <xms:KfUvYdTydbmm55ybH-BZGaW28kp2pnjX7i01KP78Ro-BvCn1i9RNcQ>
+    <xme:KfUvYWz4yOqwwN217Y6kL4df_jZjVkyZA18HdHhEo7luEuTksvCNayWuoCIQg8mpR
+    7iDRseoAbClDxkpETs>
+X-ME-Received: <xmr:KfUvYS0msykuN3mALmttjCxdqC2mlVb9AoDTVLJvkVjWIaYBkNQj7t0ApqEhuSv-bzYJ4RTNpdRaUQ1K2p3RTY3xuJWq-NJTLJ_C3w>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddruddvgedgtdduucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucgfrhhlucfvnfffucdljedtmdenucfjughrpefhvf
@@ -41,45 +41,37 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddruddvgedgtdduucetufdoteggod
     eludegheejteelheduudegkeehleetfeekiedtfefgleeifeelhefgveejhfffnecuvehl
     uhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepphgrthhrihgtkh
     esshhtfigtgidrgiihii
-X-ME-Proxy: <xmx:DPUvYceT7m_9DBpxxkCNv5KPWCPWN_Y-SxQndcWCsoJEYuibAdTRMQ>
-    <xmx:DPUvYRN6EQubOyddj_RmAyX49_8nhEGwt5PKNBTLbVfG9MT8gwifeA>
-    <xmx:DPUvYWmoiO7RAlNVYzB0NJUk9pH2gtZhP41WE40KBqNL8YNmkobbOg>
-    <xmx:DfUvYTXD5tJKtWu5vWdvewPgpu4tr18mxP2EU32Trodx3FfQCaAUpg>
+X-ME-Proxy: <xmx:KfUvYVAb8zGa188ns5CDLfrDolxTa6Lk4cW6oLdmY_yc4yK-eJ22TA>
+    <xmx:KfUvYWhFEHmE3VZsWxOREAgXcd1ytrVMdG0RM1EIHBMpGlo4FBV0fA>
+    <xmx:KfUvYZqZD9ejJP0MhqDRCBjDd2_3uV_NCkRzKEJOYC74bRqsIlzkGA>
+    <xmx:KvUvYeL7m0R2BayB-iqaYgRccRZw6eYc302QhseuOiGTMeXyIKm05A>
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 1 Sep 2021 17:47:56 -0400 (EDT)
+ 1 Sep 2021 17:48:25 -0400 (EDT)
 From: "Patrick Williams" <patrick@stwcx.xyz>
 To: openembedded-devel@lists.openembedded.org
 Cc: Patrick Williams <patrick@stwcx.xyz>
-Subject: [meta-networking][PATCH] ndisc6: fix typo in DESCRIPTION variable name
-Date: Wed,  1 Sep 2021 16:47:53 -0500
-Message-Id: <20210901214753.3331060-1-patrick@stwcx.xyz>
+Subject: [meta-gnome][PATCH] gjs: fix typo in RDEPENDS variable name
+Date: Wed,  1 Sep 2021 16:48:22 -0500
+Message-Id: <20210901214822.3331260-1-patrick@stwcx.xyz>
 X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Patrick Williams <patrick@stwcx.xyz>
 ---
- recipes-support/ndisc6/ndisc6_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-gnome/gjs/gjs_1.58.8.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-support/ndisc6/ndisc6_git.bb b/recipes-support/ndisc6/ndisc6_git.bb
-index e9af2c43f..d1e006c08 100644
---- a/recipes-support/ndisc6/ndisc6_git.bb
-+++ b/recipes-support/ndisc6/ndisc6_git.bb
-@@ -60,11 +60,11 @@ IPv4 world."
- DESCRIPTION:${PN}-rdisc6    = "ICMPv6 Router Discovery tool. \
- Queries IPv6 routers on the network for advertised prefixes. Can be used \
- to detect rogue IPv6 routers, monitor legitimate IPv6 routers."
--DESCRITPION_${PN}-tcpspray6    = "Performs bandwidth measurements of TCP \
-+DESCRIPTION:${PN}-tcpspray6    = "Performs bandwidth measurements of TCP \
- sessions between the local system and a remote echo server in either IPv6 \
- or IPv4."
+diff --git a/recipes-gnome/gjs/gjs_1.58.8.bb b/recipes-gnome/gjs/gjs_1.58.8.bb
+index 75138125f..a16455bfd 100644
+--- a/recipes-gnome/gjs/gjs_1.58.8.bb
++++ b/recipes-gnome/gjs/gjs_1.58.8.bb
+@@ -35,4 +35,4 @@ FILES:${PN} += "${datadir}/gjs-1.0/lsan"
  
--DESCRITPION_${PN}-rdnssd       = "Daemon to autoconfigure the list of DNS \
-+DESCRIPTION:${PN}-rdnssd       = "Daemon to autoconfigure the list of DNS \
- servers through slateless IPv6 autoconfiguration."
- 
- # The tcptraceroute6 and tracert6 commands depend on rltraceroute6 to
+ PACKAGES =+ "${PN}-valgrind"
+ FILES:${PN}-valgrind = "${datadir}/gjs-1.0/valgrind"
+-RSEPENDS_${PN}-valgrind += "valgrind"
++RDEPENDS:${PN}-valgrind += "valgrind"
 -- 
 2.31.1
 
