@@ -1,94 +1,168 @@
-Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
- by mx.groups.io with SMTP id smtpd.web12.3875.1630568424088438550
+Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
+ by mx.groups.io with SMTP id smtpd.web12.5546.1630581911365138376
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Sep 2021 00:40:24 -0700
+ Thu, 02 Sep 2021 04:25:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=DJ5z6Xid;
- spf=pass (domain: gmail.com, ip: 209.85.222.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f170.google.com with SMTP id a10so1074002qka.12
-        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Sep 2021 00:40:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=OO96gmOg;
+ spf=pass (domain: gmail.com, ip: 209.85.222.178, mailfrom: whuang8933@gmail.com)
+Received: by mail-qk1-f178.google.com with SMTP id m21so1531432qkm.13
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Sep 2021 04:25:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=TlRDDg5CTp8vpCkqxThgeMK097t0GbPLIbU8Jy8/Ewg=;
-        b=DJ5z6XidvCtgFeHSIkHMTXLbmjpLq7aHUz2f4GbVunwgppO2lGpWSf58EloX6LpctP
-         4OK2uYTmO2RFIuB1cAn7CKqkCuGyUAwWB8cxg/wRL6W1CngLjMpBQGeZGH3MyJkjRB9n
-         LVWAA4zKW5GjlnIlQ22wslvMYMMmLWubes5wHqKrAN9dOqd7tEXCMA3haY7sbQVH926Q
-         NaEke651jum/poxcNbAOsV3JQULVO7gyGUiabaLhA9NRuSS9OE0AhqUNBaP/9Pw0tRdk
-         S2WGAe086dk5eMALvENaNNXip10w+Z08CQ7YWcd2qx8wodjwmKyACtwwIqJOY0x69rQp
-         G6RQ==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=/80onwq8rX5y3mCoU06lNdbNMJDin6XVYWf7ecJHqfY=;
+        b=OO96gmOgpuxZWLFOphADKHWtMVlzm88cXaNORtf136EsK9gpsZYYPBjhESdWhYP1Rk
+         8fFH1KzpORlXyoUlh/eo492BhkuM0hbJ4AszAbnNIzav7nnkbwwV5MILsacfOtV7HThG
+         jifD0WZNaVa+OIHJxMAiRG57Wbzd5Hs4wNRPSSkYF28okWEDy4YscNEAW/cuwuDWL5jC
+         i6FeBQl9f4WsrkD3h88oSygp7XjpGSWFNWyipbsTWQVuRCTYaoTorJpP3m3G0wvjZizi
+         PeP7BTm/BPJPMwySHPl7NETr/uJ2pyspilwRPAx0pDV0EoL118lqf1yi+2sNAzWWhhBN
+         LvpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=TlRDDg5CTp8vpCkqxThgeMK097t0GbPLIbU8Jy8/Ewg=;
-        b=inXnmVKVwNgt4NtwHP9Rso5n6guwR5u2Zifnt55d7qOZNt1EW7Dyo/V84klGzFZyKS
-         oWkql4+FikxM1sxz6Wn2kviM1V8vF/3U78i8ZbqatkSIOCADgxr5Rwp2+9M2r5Wk+moy
-         kagFWuJ7puZg87v0mXyY10ENYlUhGKG+0ft52NvtWLs0aKLwpnyER89Twpo0Yt+Isrfq
-         Ijg6O8UtmelfERQ4s8BsnXuacRKRQTqpWj2sqjP5LSTFOfDiIKc3vP0T3KJy3wEnX0UV
-         Aj/xzJsyiN5k6vKuDXY3kkFbo6JyG921kVDHuuQ1t6UICL2ZjjC4xgFIMWu8SA0BLP/h
-         gkXA==
-X-Gm-Message-State: AOAM532h7envbd01r+mUbIRTGsKQ2Cn+IpZYFgI3M7nOAsxWeSJOlRZd
-	0Iu32ruWULLXIaXU5lmAVr9bVkInhtVNqg/w6WA=
-X-Google-Smtp-Source: ABdhPJwCLQ5FCOPeryNSw8o/anryX2XrHwxejy9j08hGAw27KxUN9lxZaugg/bC1gr4SoDzZle6G1GAYvvWDclzchFU=
-X-Received: by 2002:a05:620a:799:: with SMTP id 25mr1895490qka.119.1630568423047;
- Thu, 02 Sep 2021 00:40:23 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=/80onwq8rX5y3mCoU06lNdbNMJDin6XVYWf7ecJHqfY=;
+        b=MZvDE2PaHa+ctmNSob8brVt3+TsiGpn1yE4BbpRaHmcd9ocEiFGoLmJRIKilg3eqqh
+         h2h8xGOQN5iWDGP92YLa7qFiaXS+D1BkImmUDCrh6FSkFkY9kJ4IY9Wejk2h1rnTN5at
+         pb8QeFZiRot2CXOJ4vDc2hr6g9WpcTdsfv+k1vk95XcUcFlRxfAxisEwc+AY7O67oSfl
+         9ksHVZRLhl3CCi9PlZ24WI8j1hM0cZ1/zoIRRQn3ODyma0DcujGzVtKtoXnKdhTqsBm1
+         jJv+A2H7WZIupkSGM5+TwQkoUr9yr9LW69shMUbIgnMCl7r+eYOc2aVNY0Tgsf4J08sG
+         WXwg==
+X-Gm-Message-State: AOAM530i8hvYhXHoOGy5qChrWwHWXdMK3VLc6WZ0M46BGzQeGG8He5vw
+	jaVkjS0RiVFy9Vtg07OukY6qLY0ECYqr/A==
+X-Google-Smtp-Source: ABdhPJwKWorYgfLSUHOOp8Znp0TGeb4UtkK7G4W3bn3eHQ5ExsSrVV2MUE7gWQgXvoFowOwMQ0jJeA==
+X-Received: by 2002:a05:620a:1aaa:: with SMTP id bl42mr2650150qkb.469.1630581910257;
+        Thu, 02 Sep 2021 04:25:10 -0700 (PDT)
+Return-Path: <whuang8933@gmail.com>
+Received: from dfedgebuild.ht.home ([2607:9880:2d78:22:fed1:6d0e:981c:b5db])
+        by smtp.gmail.com with ESMTPSA id z6sm1179844qke.24.2021.09.02.04.25.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 02 Sep 2021 04:25:09 -0700 (PDT)
+From: "William Huang" <whuang8933@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: William Huang <whuang8933@gmail.com>
+Subject: [meta-python][PATCH] recipes-devtools: python: add support for Kivy
+Date: Thu,  2 Sep 2021 07:25:07 -0400
+Message-Id: <20210902112507.3635856-1-whuang8933@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20210901120005.775345-1-trevor.gamblin@windriver.com>
-In-Reply-To: <20210901120005.775345-1-trevor.gamblin@windriver.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 2 Sep 2021 00:39:56 -0700
-Message-ID: <CAMKF1src+XLKjNYQ2QWq4p1K=k-PJij3nmCupOMn8weTYEP7BA@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-pytest-subtests: add recipe
-To: Trevor Gamblin <trevor.gamblin@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-it failed with sha256 checksums errors in fetcher which I fixed and
-then it failed again in compile with
+---
+ .../0001-add-support-for-glesv2.patch         | 24 +++++++
+ .../python/python3-kivy_2.0.0.bb              | 71 +++++++++++++++++++
+ 2 files changed, 95 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-kivy/0001-add-support-for-glesv2.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-kivy_2.0.0.bb
 
-https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1499
+diff --git a/meta-python/recipes-devtools/python/python3-kivy/0001-add-support-for-glesv2.patch b/meta-python/recipes-devtools/python/python3-kivy/0001-add-support-for-glesv2.patch
+new file mode 100644
+index 000000000..e50c7e7e2
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-kivy/0001-add-support-for-glesv2.patch
+@@ -0,0 +1,24 @@
++diff --git a/setup.py b/setup.py
++index 9a507c6c4..3f5b70866 100644
++--- a/setup.py
+++++ b/setup.py
++@@ -680,7 +680,18 @@ def determine_gl_flags():
++         c_options['use_x11'] = True
++         c_options['use_egl'] = True
++     else:
++-        flags['libraries'] = ['GL']
+++        if cross_sysroot:
+++            flags['include_dirs'] = [cross_sysroot + '/usr/include']
+++            flags['library_dirs'] = [cross_sysroot + '/usr/lib']
+++
+++        if c_options['use_opengl_es2']:
+++            print("using GLESv2 libraries")
+++            flags['libraries'] = ['GLESv2']
+++        else:
+++            flags['libraries'] = ['GL']
+++
+++
+++    print("cross_sysroot: " + str(cross_sysroot))
++     return flags, base_flags
++ 
++ 
+diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.0.0.bb b/meta-python/recipes-devtools/python/python3-kivy_2.0.0.bb
+new file mode 100644
+index 000000000..3f6bafda8
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-kivy_2.0.0.bb
+@@ -0,0 +1,71 @@
++SUMMARY = "Open source Python library for rapid development of applications \
++    that make use of innovative user interfaces, such as multi-touch apps."
++HOMEPAGE = "https://kivy.org/"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=f0c851d60495c7e27225a819e179208a"
++
++inherit setuptools3
++
++SRC_URI = "\
++    git://github.com/kivy/kivy.git;protocol=git;\
++"
++
++# Kivy's setup files only look for GLES libraries for Android, iOS, RPi,
++# and mali-based OS's. We need to patch the setup file to tell Kivy setup
++# that our machine has GLES libaries installed as well
++# Also, if using SDL2 as backend, SDL2 needs to be configured wth gles
++SRC_URI += " \
++    file://0001-add-support-for-glesv2.patch \
++"
++SRCREV = "dedcb6bcabe3d8d6758dcee607e8c33b174d782b"
++
++S = "${WORKDIR}/git"
++
++PACKAGES += "${PN}-examples"
++FILES:${PN}-examples = "/usr/share/kivy-examples"
++
++USE_WAYLAND = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '1', '0', d)}"
++export USE_WAYLAND
++
++# if using Wayland, let's use pure Wayland (and not XWayland)
++# so do not build using X11 flag when we detect Wayland
++USE_X11 = " \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland',  '0', \
++       bb.utils.contains('DISTRO_FEATURES', 'x11',      '1', \
++                                                        '0', d), d)}"
++export USE_X11
++
++# Use OpenGL ES 2.0 library
++KIVY_GRAPHICS = "gles"
++export KIVY_GRAPHICS
++
++KIVY_CROSS_SYSROOT="${WORKDIR}/recipe-sysroot"
++export KIVY_CROSS_SYSROOT
++
++DEPENDS += " \
++    gstreamer1.0 \
++    gstreamer1.0-python \
++    libsdl2 \
++    libsdl2-ttf \
++    libsdl2-image \
++    libsdl2-mixer \
++    pango \
++    python3 \
++    python3-cython-native \
++"
++
++RDEPENDS_${PN} = " \
++    gstreamer1.0 \
++    gstreamer1.0-python \
++    libsdl2 \
++    libsdl2-ttf \
++    libsdl2-image \
++    libsdl2-mixer \
++    pango \
++    python3 \
++    python3-docutils \
++    python3-fcntl \
++    python3-image \
++    python3-pillow \
++    python3-pygments \
++"
+-- 
+2.25.1
 
-also you forgot to add it to test package group.
-
-
-On Wed, Sep 1, 2021 at 5:00 AM Trevor Gamblin
-<trevor.gamblin@windriver.com> wrote:
->
-> Newer versions of python3-cryptography will rely on the subtests fixture
-> for their ptests. Add this recipe so that cryptography can be given the
-> necessary RDEPENDS when it is upgraded.
->
-> Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->  .../python/python3-pytest-subtests_0.5.0.bb        | 14 ++++++++++++++
->  1 file changed, 14 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python3-pytest-subtests_0.5.0.bb
->
-> diff --git a/meta-python/recipes-devtools/python/python3-pytest-subtests_0.5.0.bb b/meta-python/recipes-devtools/python/python3-pytest-subtests_0.5.0.bb
-> new file mode 100644
-> index 000000000..c2bf47203
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-pytest-subtests_0.5.0.bb
-> @@ -0,0 +1,14 @@
-> +DESCRIPTION = "unittest subTest() support and subtests fixture."
-> +
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=242b4e17fa287dcf7aef372f6bc3dcb1"
-> +
-> +SRC_URI[sha256sum] = "c62d68a84f94f8bc49bbb01b39392953e26a52570ad380581a3b2cc8d7eaa037"
-> +
-> +inherit pypi setuptools3
-> +
-> +RDEPENDS:${PN} += " \
-> +    ${PYTHON_PN}-pytest \
-> +"
-> +
-> +BBCLASSEXTEND = "native nativesdk"
-> --
-> 2.31.1
->
->
-> 
->
