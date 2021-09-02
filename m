@@ -1,167 +1,256 @@
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web08.883.1630597172047296744
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web08.1.1630617561647237920
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Sep 2021 08:39:32 -0700
+ Thu, 02 Sep 2021 14:19:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=Sb8iMrYV;
- spf=pass (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=4879085da6=trevor.gamblin@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 182DvIxt007255
-	for <openembedded-devel@lists.openembedded.org>; Thu, 2 Sep 2021 08:39:31 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=IO8W4KlU;
+ spf=pass (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=48793745fc=joe.slater@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 182LCgKR019111
+	for <openembedded-devel@lists.openembedded.org>; Thu, 2 Sep 2021 21:19:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
  subject : date : message-id : content-transfer-encoding : content-type :
  mime-version; s=PPS06212021;
- bh=iJn1Vrh/kU43NyAb7nPNJZWdXFkrK0CWf+JuBxVnpTg=;
- b=Sb8iMrYV6TI3LkycJoaTAioWze+vsFtNdNjI2nasrDsg3fC7sGEfxP2Xgfg+raMXXc1f
- eU4Fcl1BTit8lEGRnMrR3QV054h3/Kiw+q6vrJ3WQx/lg7e3Jwzrk5N8Ab2OmB9jUPsb
- l2VQrGPyD1tg6FL0T8LVLKI+UF1Vhua6X+l73W56JLBy6olafLTL+0XyPkVMECkZ87M7
- R12wWDjpGehJxkexjAoUMhO4rr6molwUZfeiLqV6SXhBU94NqxWeJhOOejERrjfDTBUX
- S40Bb0JQ4dLIBRD1ig87n149FpV74tAH1xqrZtJwnNkbhZDfzt8USpotfTdyyYf39PGy LQ== 
-Received: from nam11-co1-obe.outbound.protection.outlook.com (mail-co1nam11lp2174.outbound.protection.outlook.com [104.47.56.174])
-	by mx0a-0064b401.pphosted.com with ESMTP id 3atdx6rsnn-1
+ bh=tHuC9hJEkoZeJl7P2/nUXZqqduU6jl69EnUfBdv38cU=;
+ b=IO8W4KlUL/xsrju1w3S7CaMNIHi1ebVZCn2PmnvxfvOwXfSTRM1Oi1+6RdMVkyiHWzuh
+ dST1SIxHZ6scXkjdvjD+qdK3KNmJkuADEp5Mt9Sx6F+icNTREvmvzentO13lsPj417g/
+ mfbq0ny2ZSqGshIrB3hDKatQmCWIf55b89CTqNZiFD7womdiyvYKYyoV6dDsabeZGRpp
+ tANwIA8yTa/uJ3+xhiOEVAWu4O4lqIjca7tsnbs78rwH+ipL+Fz5Bjk9MdNL63jtg01z
+ kFhWozdU004v2iKILegKjE0S4t3YgLnkqNpYRRZ/BIxlb4AVaRD/5dVXe6All4NxazEM +A== 
+Received: from nam12-dm6-obe.outbound.protection.outlook.com (mail-dm6nam12lp2177.outbound.protection.outlook.com [104.47.59.177])
+	by mx0a-0064b401.pphosted.com with ESMTP id 3atdx1s30g-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 02 Sep 2021 08:39:31 -0700
+	for <openembedded-devel@lists.openembedded.org>; Thu, 02 Sep 2021 21:19:20 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bMfTt6AEWllJr6xUgi0xc31NWlmZJN3ZSKV6uRhJrTxXw4rnZxbwp3PhDK34sUzkbbyLHWGzNhIls1JsFnEi1tb+rUw16+P4SBA1/D+vqDCPESMbJqVWNc9zQKdUMfG6DS0UKCs0Uz1Fkom94S7DXU61U8hYBqWHSA0FnQgnassvUQpMz0Y7hfcsK9hvzr+DbxKroc5IGluHqXV197iW4MqsLZKcDZSWjx6ryz23OHv2p/otQfms9lWN6yWSHYAxyLIUIh24FcfFS1WIKQ3FNkBbwk7znijs47RWekgfk3ZdZm8VFcC/tX0sj2gV2cAmGqj/Svd1IdfFFKC+mGMbCA==
+ b=YJ9GThMp6nvVjSytjZZUfJ6EEPFafISnF9ZTHdCUBjwOmg8ogKItuqOHYNYKqpjnh4iKu/FIHR1+TlGOPCqCI7emnWIBEjjm0j/4Dk86zyVzA8aK4PiFWw8pTih3n4TjDGvXipOWE+U1DzmI1KvKSm760mV67GSzxZwME0Y0f31R2Qw4YNwZTu5/aEE2gaYzBTdpM2xjfEcP50UprFOrW1zw/CQkZmFPXGbUexUVFSmFAZfQ+psq1S45PWQHtl6tbJORb1o3Z5qzDG6qPUpK+VJYwpvZwrhjfgsl7oY+2cRxTPfgg/3XRLEfwAnQiGyH4nVNIwBz/1qcqK2+5QfgVA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
- bh=iJn1Vrh/kU43NyAb7nPNJZWdXFkrK0CWf+JuBxVnpTg=;
- b=VgFUdvhNv4X+cys9eTFbJd4pqPQpouNxsygLJyth1rSrkSbjPgZn8bCQgx/2Pg49HygqL/Vyo2jbrXNZMkfassT0FBIBQOqR8zYOQv97c2ymuxj4t8WMcJH9tHZQWnMQ9TW3KsddgJ+UFrg+svQDfBGyllIPLlOV4AeUX/klhfTiSuXgzxhG6ZAW7Yd4o5sxOnq+KmquKNpPKRGCH5BYa1d4ZaH3dwtMH8CAmINLm1UqeqWgsihvAi80zCT7PjzqU38cSfTFEaQQHieRRHrAiizLzKMLWkTRhiomQVyce7kfoENc7TWQBzK/VtKSBHZyeLxzSZyRiS/HOQ09pvikyA==
+ bh=tHuC9hJEkoZeJl7P2/nUXZqqduU6jl69EnUfBdv38cU=;
+ b=l3r8Hzb5FlT3D12QAMBD98k9W0kevAEGGTBchOQNMnJrGZ/wrErtwJow0LKta1wDaRq/VeXXLL8ABMei2esOzo85H/DLtZYPVRs1YkbizNy9wROeha0FlpBFFpzLRetqsZ1B+KEX/xU38RMkc7SQGGUxm0G53CXOQ35C6EFGaYHtHFWPg3AiRHVfbDlHV2UAEl+pnvQn+mzT1e9xfQMHd01T4DKXTF6sKTs29S4yKqt87oL5DMgBViNHsSRQ6HMvDzSGNPFCL1uwOGCHmVTqjPPs+kDjthq3g0EsvS1ZnFVRIf2yjd6BkxRzZJ+BWYSJBc1YNsUQBnb0EtT2f7yqXw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
  header.d=none;lists.openembedded.org; dmarc=none action=none
  header.from=windriver.com;
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by SJ0PR11MB4862.namprd11.prod.outlook.com (2603:10b6:a03:2de::16) with
+Received: from BY5PR11MB3992.namprd11.prod.outlook.com (2603:10b6:a03:188::10)
+ by BY5PR11MB3992.namprd11.prod.outlook.com (2603:10b6:a03:188::10) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4478.22; Thu, 2 Sep
- 2021 15:39:28 +0000
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::fdd3:dc0f:a385:34d1]) by BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::fdd3:dc0f:a385:34d1%4]) with mapi id 15.20.4457.024; Thu, 2 Sep 2021
- 15:39:28 +0000
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4478.19; Thu, 2 Sep
+ 2021 21:19:17 +0000
+Received: from BY5PR11MB3992.namprd11.prod.outlook.com
+ ([fe80::8136:f22:7050:c089]) by BY5PR11MB3992.namprd11.prod.outlook.com
+ ([fe80::8136:f22:7050:c089%3]) with mapi id 15.20.4478.019; Thu, 2 Sep 2021
+ 21:19:17 +0000
+From: "Joe Slater" <joe.slater@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH v3] python3-pytest-subtests: add recipe
-Date: Thu,  2 Sep 2021 11:39:10 -0400
-Message-Id: <20210902153910.820023-1-trevor.gamblin@windriver.com>
+Cc: joe.slater@windriver.com, randy.macleod@windriver.com
+Subject: [meta-web][hardknott][PATCH 1/1] nginx: fix CVE-2021-3618
+Date: Thu,  2 Sep 2021 14:19:01 -0700
+Message-Id: <20210902211901.172705-1-joe.slater@windriver.com>
 X-Mailer: git-send-email 2.31.1
-X-ClientProxiedBy: BL1PR13CA0436.namprd13.prod.outlook.com
- (2603:10b6:208:2c3::21) To BY5PR11MB3909.namprd11.prod.outlook.com
- (2603:10b6:a03:191::13)
+X-ClientProxiedBy: BY3PR05CA0007.namprd05.prod.outlook.com
+ (2603:10b6:a03:254::12) To BY5PR11MB3992.namprd11.prod.outlook.com
+ (2603:10b6:a03:188::10)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from yow-tgamblin-lx3.corp.ad.wrs.com (2607:fea8:c29d:d7c0:fa88:8bc5:c0d2:27cc) by BL1PR13CA0436.namprd13.prod.outlook.com (2603:10b6:208:2c3::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4500.7 via Frontend Transport; Thu, 2 Sep 2021 15:39:28 +0000
+Received: from ala-lpggp3.wrs.com (147.11.105.124) by BY3PR05CA0007.namprd05.prod.outlook.com (2603:10b6:a03:254::12) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4500.4 via Frontend Transport; Thu, 2 Sep 2021 21:19:17 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: b784d435-46b7-4808-a0bb-08d96e27d9c6
-X-MS-TrafficTypeDiagnostic: SJ0PR11MB4862:
+X-MS-Office365-Filtering-Correlation-Id: 89fc1b9b-f459-4907-9e0f-08d96e575280
+X-MS-TrafficTypeDiagnostic: BY5PR11MB3992:
+X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<SJ0PR11MB4862F4B4B11E1C87DDE68A5B9FCE9@SJ0PR11MB4862.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:5516;
+	<BY5PR11MB39926D8FC0566D510AEDFDD488CE9@BY5PR11MB3992.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:94;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	quB0nOCC5uL8mGl2NuQJUhgeGzUnmy0Lj2xIR9HTnsPYWhx7orbM2sm05UiptQygbWVMnX6BHOQcktv/Z7qW2gvEG54xPsA+GAs5ZMAplxHyYZdaUzNUmoLyU0/ebGeTg0/igXUAARjkSaARQRJbYcD4972rf0rY6vIaiI6m9RbxT8jdA41tn8XZcprK2cXdbJ21ULKBFA8ZpnwdKabv/j2SaODnVqN4UYmKaM4beDb7E82WCTMBFMGcU/jpjtRLOZYxequPVC6Yqvcv5ISQ1QnsQm1eHlW3wk7dtyVePkmT7SOc6hA0ZVyw2KR6lCsNfEQp35ok7R6j9r728XscJPglh6/ahSMoqB2DQkxPWK8fxOATJFyC5p33gl15rCQ2YL711bwCAAc7KtrG3jX0rwcgCkePj0AVshYtf7ctLmbkSdMgA7XaA1AGnMn5gTgBqNvnIrtuvM3Ue0YRcT5QaAJCgxCUccDhHzPRj5oUJSBJo6eI//2O060oa7+ajPMifR2ztfGYNeVBgKWNsowCkEy1RTE+CnboFpmhDHhbCLO0KBUnZKDV+8RQN3BjP83xjqQ1KOcEJHq1p10GuN7pvj5ojNrLR63XXyPLAuDH3uy+lUKCePWsl+Sk9I68cttmobp77Vy8ILve6z28k/KUVA==
+	QNGQLy9PdqQJ/Pn+DCm2vvQKdpjuwt0SkzsoqTj5bX34QKrODl47aQtyrc7jZ0D1sZCKn6xdl+1BSR/yT0sLoz4SEduOKnvXrjXLUIPWrUC1ItGtBStsJSr3RCIvwAnkyPFN295CjoG9kEF3m52TxGB8lahG7XI01pAGe4qI7W0mVy88qnuLg9qgmBQvbZodb7v4rstenAw1tOqTZfb2Uiqg6NQSMpBRNdvfauCrSxrmRxj6nC/8CNzLRBXEVA/PNk1uSWlbkAFS7SU6v96LSGi4IYOsthu+7Rx1FfOqBgSj9pg8E0fys36z48DHD4mu1zBHw0mTxAvGQQDa2+EiBqE8SzF3Vo6AYVSDTh2x+jKqhTkxgI4lCF0S2eknfNGK0cL1BUZ9HGnxzHfwmYnV6hWO/nx7FECKozNP5F+9Jw9i+tWk7fguRiTsrQHMRArABLT4DgMMwF2EOu5NYLM7TxRRdu3YiBaHGsnaHdjRHH92bwuYLCaNFbhaI7a7uWBdrksvNiLUaa2vkuJrGYvrEvHeQU8zpUd4VSbxgqLv6eCptrTrI0AzsOfZ137dw5DbVbpyiQvPZsF8YBwoDDcM3frMFXoQzroFdSj6S5rNdkVVgDj3a7lTnkWwoVYRdNIq1ZGtQjGZVqITDzd3hSnh6u92HfjgoHHXNWX3Ys3ELA6R9aSIUMJs1mwmTUMvq0uzGejHBNB+Y2jeWfLgEJ1EuBWr4Dc+M5OnUsgV9er74JW2fc7CM9qmIXE2+IIS/vzknufh4YyovHVioBf6zFkfs9Cby5BhPzcArjxkVKvIZeg=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(366004)(396003)(346002)(376002)(136003)(66476007)(6916009)(186003)(66556008)(44832011)(316002)(66946007)(38100700002)(52116002)(478600001)(6486002)(6506007)(5660300002)(6666004)(6512007)(8936002)(8676002)(1076003)(86362001)(36756003)(2906002)(83380400001)(2616005);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3992.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(396003)(39850400004)(376002)(346002)(136003)(26005)(186003)(2616005)(44832011)(4326008)(956004)(83380400001)(107886003)(6486002)(966005)(1076003)(38100700002)(8936002)(5660300002)(66556008)(66476007)(38350700002)(316002)(66946007)(8676002)(36756003)(52116002)(6916009)(6506007)(86362001)(478600001)(2906002)(6666004)(6512007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?CRN9FScE/QYDVEP4UBstEVq+hN8BsP/NxQjZuRxffQm0e8qyXjOV1tzt62DU?=
- =?us-ascii?Q?Ndloza2Igq0nQUJdzVjQI7/2urVxE7KeRHHRbZk6sbNYPLqShD4w7kEHcAs9?=
- =?us-ascii?Q?46ZX+rHerqud+fjK+DN5SeapC1jwyOna5IycKkhULKb1iiXwE0YQTMxM93O3?=
- =?us-ascii?Q?OMKHjssQOjlH856yp8bXj+NKrH/vE3djctgXTontbDLzzLl09JsSMJXlXQBS?=
- =?us-ascii?Q?tdQV5WJCaeUvYJgEHlQJ833qj0BnsJGihUmWtOs0o/Qet9tDwe0MGSh9vaZe?=
- =?us-ascii?Q?EZ9ntq2q4Lt7t5RWsjuvvlMUWlGfVo6RRIjhp6M9un7ltMpO9GmuoVFwUYyb?=
- =?us-ascii?Q?BfqKQveIu6RJ/ophwTILWL/yFazqISN707qvl7/NrLQ8YCYeqInc0ZNcykR8?=
- =?us-ascii?Q?LK2UpatqBu0drRyUOdhlK/hjR5AJ2Bq9SVlzdvCwdCtBEzVxquXzY8cAnaBT?=
- =?us-ascii?Q?jHoUvcJAi0QoT5/2RQBrcJFykqO1IXR9OoqA8rXT48zh8wrajVEKmbAawaWY?=
- =?us-ascii?Q?R1yPb3kij/J0GTFfy23N9HiAc0ZufUqQSm5081wJlPhGwdhq8vpuihFgr4cJ?=
- =?us-ascii?Q?wJfMVNcMqEC2LkfKyqrneeOeefwhfeS81CihGIuF5+eUtwL24R+Fgm7yPWrD?=
- =?us-ascii?Q?1dB2fIh5mVziF7rSfZMlHxyLeg79pVIBJnMI1ax87Nb5M8OK8WZXO0zM0HDV?=
- =?us-ascii?Q?3N3XMOHqkwVKN40AhaDsh6wqiJtGaUXt13Kbl4mO7Vvvxy6U72AXY9KMImsT?=
- =?us-ascii?Q?2tB5mXhiftPb91XNlrlITdpn0YUxIiqjx2lKFcgCt9mtXfQUDYfSXV10njlP?=
- =?us-ascii?Q?lADjMUmxiTAJqmExuQKRlRNFKhieG2tuCiy/PV2cDM9Qy8zrc+BR4Uk8CkOl?=
- =?us-ascii?Q?vlEeM+LX+u+rLgWNWnYjDbURsyl5po2f1jjv3p0lq3RPw89bHFOKLokWdZTN?=
- =?us-ascii?Q?YoT7/TSjjqXzNnem8oKJ7VqLx/D/sTkxrkQNExXzsLTjYPB613xs3WutcBsX?=
- =?us-ascii?Q?lPnORtuau9puNO7psqfjr0bMHTBYixtBlFLHgNaNyO7D2x4JkGk324MxXOjM?=
- =?us-ascii?Q?aUbFk7KzJQxaDZUSEYqwqk70PzSY2mGL8NSLPiGfJkasSAsgDkD53gzmeDqs?=
- =?us-ascii?Q?pCYF6qEyra1Y6HecsKpGwzi23yOyj+nDsvldL9Jrml+FK5jN/Lm01kJwdFjc?=
- =?us-ascii?Q?ylvgEM9Sm3jmhccLo1PUI1Q+OeNifP/Ls26flia8nVKHSz5VmqrK+LgwRuc0?=
- =?us-ascii?Q?vmgtzjEIGKqBCWAGFrG0O/WwEB4t+m2c3dTaXbzWh+DPW1uNo8xU8atf2FxV?=
- =?us-ascii?Q?EySDgjkk4XSkbamLZq6JldHXxYs0y/RmeLK1+6Yeq/hmlunGFK8sowudHq3/?=
- =?us-ascii?Q?j4qa3AkQ6zeDPoNphgLGy5qQapSl?=
+	=?us-ascii?Q?zx0x4ku6dsG6HymWnjbmM7pKdeOlPwDgO/gpttwaC2fqNYBmW9x9C5x/nEXg?=
+ =?us-ascii?Q?ZhlyekIRfmXUM5/nOubkycUdyOTM+Xa4x6NmC4DMmtatQ2PvSj3O+K+FHdbS?=
+ =?us-ascii?Q?KRl4/Fs2VCBltSe+VjWHcISZ7/NSlWLK5048BDfUlobnp3jO0yK205pth7gU?=
+ =?us-ascii?Q?/nMWCyOu1TUo5PWMmtma+EHkofY1EASQUrTVbbbTqWEM9CD9aeVTRfH/7zlO?=
+ =?us-ascii?Q?tAJkwYD2GVKEjX0EyPPWGxDGq9Hv0nPc0m5rLSZIYkSncj26U0XqUMuQLZaH?=
+ =?us-ascii?Q?78NM7mdNOnjvjt/+lGJ2I0oN1SxDwrya//ceyfyBj6b8I15QsFdYz1oPyKFV?=
+ =?us-ascii?Q?z99CbwarAMH0z4TIyJuQeShUqJUkZTvUX85TXnfUXcq8tc/V+t5pXCmZLXQL?=
+ =?us-ascii?Q?QVfzssWdU0FIEcFgRWxu/8Z7S0x8qrVgRfLFbpcRlbFN1YdPw42IA0tI9+Rw?=
+ =?us-ascii?Q?QLxq765IsX3gNHVBdFZSCeV/4zWNmZ4gMakC3FaZNr2LYWEOdVUtUE/T/t2D?=
+ =?us-ascii?Q?2XgqUnKkdAwIM/elvJ43/IrWDrikNNPcWzK4/YuN5L22caFwkHgKmHYDNQNc?=
+ =?us-ascii?Q?48L+QLnZnyXWNIpzURFWzHhxXSzVZQc/24O9syuHUzj1fQEub91s3ITc85Io?=
+ =?us-ascii?Q?FhDPQWQWvuah65r0WbOUUxkMeLv3NasDZdIZ7Z+4qJTGHwiDiRgxZ2X8eP2r?=
+ =?us-ascii?Q?zwjnw+YiEFLhUZ7yoWDPKDh2PQQrt2/ekHB74upILDNFLcCTKMHLIeOQ+OzD?=
+ =?us-ascii?Q?mw873MGaaGRXPUTZI/ah1qGFPchUgqe1trNmaszqMT02K8L8t81ZJ2AxuQ2M?=
+ =?us-ascii?Q?zlMWnFHHzIMPiifbQbJf2x56D3RvYxuUXo8pXHxFVCx8O73PkWqKnav1PRny?=
+ =?us-ascii?Q?ekwsknKJmg6pJHm5Sr55uQ2HJzU9Q0bJXeljCDCmJkL78eM5ioLWzOCe0yEL?=
+ =?us-ascii?Q?6GGUky1kSw8Ggo0kZk81UECO63aHsfULkMKgobx/V70jQKkhsh+DINPWqz9B?=
+ =?us-ascii?Q?j2wb8IuRNn7+cAcinP4oKhnQqZjMnS50vPYxBoI2uI03N5Cjw9Uq+g6mbK75?=
+ =?us-ascii?Q?vIeu5XG9QPSQAhUNgH2vcXOSSdCi2jSb/OdAaeHvMfPcwiVtKLMbYeO/JDsk?=
+ =?us-ascii?Q?X9UZ6DI1ospm/gv0y0kGp1ju21P99rY0pE2V6N5URjhVeGrippv4hIZdScos?=
+ =?us-ascii?Q?t1uSDK9mp9cazcEBodLLkGVKcGaD7xtJZLXpam79VNqBUbxq4N6rmCzCun7w?=
+ =?us-ascii?Q?bE2eTmPmOmKs6bkh+HxyO41bdu1GgHvptWNEKb0AsWkUJ4b1kOPL2D6zHNvt?=
+ =?us-ascii?Q?beTgby4qm6/EQh5ki5n44Zq+?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b784d435-46b7-4808-a0bb-08d96e27d9c6
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 89fc1b9b-f459-4907-9e0f-08d96e575280
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3992.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2021 15:39:28.8177
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2021 21:19:17.6775
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 9/5x5jMuIyP8spByeLWDYI3BAnBm9zFlDZVALJmm8A+c4E5FALKzbJS1ZTCNFGTgI1uNzGWTa3aEijstdDfKnighpYeOB319FYjR51TTrr0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB4862
-X-Proofpoint-ORIG-GUID: ljbOLwnQEpRp-wPHnQmZ67t6mtExij7o
-X-Proofpoint-GUID: ljbOLwnQEpRp-wPHnQmZ67t6mtExij7o
+X-MS-Exchange-CrossTenant-UserPrincipalName: cR5mKR5Zjx4YryRxjK1KZxKdAC7vrbvc2eKge9lEwPP5QKQeacOeQjp7sZwxRRgDlTa8GBtLH8VTIAr7EcAnDbL3o9wmWLpRW0g9ecgGP9g=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB3992
+X-Proofpoint-GUID: KGTrTFT7wpVudJ6rn3tcsdCDiK461vBs
+X-Proofpoint-ORIG-GUID: KGTrTFT7wpVudJ6rn3tcsdCDiK461vBs
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
  definitions=2021-09-02_04,2021-09-02_03,2020-04-07_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 malwarescore=0
- phishscore=0 adultscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0
- mlxscore=0 spamscore=0 priorityscore=1501 mlxlogscore=658 suspectscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2108310000
- definitions=main-2109020093
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
+ suspectscore=0 mlxscore=0 adultscore=0 malwarescore=0 impostorscore=0
+ spamscore=0 bulkscore=0 clxscore=1011 mlxlogscore=722 phishscore=0
+ priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2108310000 definitions=main-2109020122
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Newer versions of python3-cryptography will rely on the subtests fixture
-for their ptests. Add this recipe so that cryptography can be given the
-necessary RDEPENDS when it is upgraded.
+Apply patch made to version 1.20.1 to version 1.18.0.
 
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
- .../packagegroups/packagegroup-meta-python.bb    |  1 +
- .../python/python3-pytest-subtests_0.5.0.bb      | 16 ++++++++++++++++
- 2 files changed, 17 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pytest-subtests_0.5.0.bb
+ .../nginx/files/CVE-2021-3618.patch           | 107 ++++++++++++++++++
+ .../recipes-httpd/nginx/nginx_1.18.0.bb       |   2 +
+ 2 files changed, 109 insertions(+)
+ create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2021-3618.patch
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index ea5683ce6..b5a2f5d7d 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -348,6 +348,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
-     python3-pytest-html \
-     python3-pytest-metadata \
-     python3-pytest-runner \
-+    python3-pytest-subtests \
-     python3-pytest-tempdir \
-     python3-pytest-timeout \
-     python3-pythonping \
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-subtests_0.5.0.bb b/meta-python/recipes-devtools/python/python3-pytest-subtests_0.5.0.bb
+diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2021-3618.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2021-3618.patch
 new file mode 100644
-index 000000000..2e03512bd
+index 000000000..be42a1ed5
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pytest-subtests_0.5.0.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "unittest subTest() support and subtests fixture."
++++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2021-3618.patch
+@@ -0,0 +1,107 @@
++From 6dafcdebde58577f4fcb190be46a0eb910cf1b96 Mon Sep 17 00:00:00 2001
++From: Maxim Dounin <mdounin@mdounin.ru>
++Date: Wed, 19 May 2021 03:13:31 +0300
++Subject: [PATCH 1/1] Mail: max_errors directive.
 +
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=242b4e17fa287dcf7aef372f6bc3dcb1"
++Similarly to smtpd_hard_error_limit in Postfix and smtp_max_unknown_commands
++in Exim, specifies the number of errors after which the connection is closed.
++--- end of original header ---
 +
-+SRC_URI[sha256sum] = "5bd1e4bf0eda4c89a6cd42b0ee28e1d2ca0848de3fd67ad8cdd6d559ed00f120"
++CVE: CVE-2021-3618
 +
-+inherit pypi setuptools3
++Upstream-Status: Backport
++                 https://github.com/nginx/nginx.git
++                 commit 173f16f736c10eae46cd15dd861b04b82d91a37a
 +
-+DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
++---
++ src/mail/ngx_mail.h             |  3 +++
++ src/mail/ngx_mail_core_module.c | 10 ++++++++++
++ src/mail/ngx_mail_handler.c     | 15 ++++++++++++++-
++ 3 files changed, 27 insertions(+), 1 deletion(-)
 +
-+RDEPENDS:${PN} += " \
-+    ${PYTHON_PN}-pytest \
-+"
++diff --git a/src/mail/ngx_mail.h b/src/mail/ngx_mail.h
++index b865a3b9..76cae37a 100644
++--- a/src/mail/ngx_mail.h
+++++ b/src/mail/ngx_mail.h
++@@ -115,6 +115,8 @@ typedef struct {
++     ngx_msec_t              timeout;
++     ngx_msec_t              resolver_timeout;
++ 
+++    ngx_uint_t              max_errors;
+++
++     ngx_str_t               server_name;
++ 
++     u_char                 *file_name;
++@@ -231,6 +233,7 @@ typedef struct {
++     ngx_uint_t              command;
++     ngx_array_t             args;
++ 
+++    ngx_uint_t              errors;
++     ngx_uint_t              login_attempt;
++ 
++     /* used to parse POP3/IMAP/SMTP command */
++diff --git a/src/mail/ngx_mail_core_module.c b/src/mail/ngx_mail_core_module.c
++index 40831242..115671ca 100644
++--- a/src/mail/ngx_mail_core_module.c
+++++ b/src/mail/ngx_mail_core_module.c
++@@ -85,6 +85,13 @@ static ngx_command_t  ngx_mail_core_commands[] = {
++       offsetof(ngx_mail_core_srv_conf_t, resolver_timeout),
++       NULL },
++ 
+++    { ngx_string("max_errors"),
+++      NGX_MAIL_MAIN_CONF|NGX_MAIL_SRV_CONF|NGX_CONF_TAKE1,
+++      ngx_conf_set_num_slot,
+++      NGX_MAIL_SRV_CONF_OFFSET,
+++      offsetof(ngx_mail_core_srv_conf_t, max_errors),
+++      NULL },
+++
++       ngx_null_command
++ };
++ 
++@@ -163,6 +170,8 @@ ngx_mail_core_create_srv_conf(ngx_conf_t *cf)
++     cscf->timeout = NGX_CONF_UNSET_MSEC;
++     cscf->resolver_timeout = NGX_CONF_UNSET_MSEC;
++ 
+++    cscf->max_errors = NGX_CONF_UNSET_UINT;
+++
++     cscf->resolver = NGX_CONF_UNSET_PTR;
++ 
++     cscf->file_name = cf->conf_file->file.name.data;
++@@ -182,6 +191,7 @@ ngx_mail_core_merge_srv_conf(ngx_conf_t *cf, void *parent, void *child)
++     ngx_conf_merge_msec_value(conf->resolver_timeout, prev->resolver_timeout,
++                               30000);
++ 
+++    ngx_conf_merge_uint_value(conf->max_errors, prev->max_errors, 5);
++ 
++     ngx_conf_merge_str_value(conf->server_name, prev->server_name, "");
++ 
++diff --git a/src/mail/ngx_mail_handler.c b/src/mail/ngx_mail_handler.c
++index 0aaa0e78..71b81512 100644
++--- a/src/mail/ngx_mail_handler.c
+++++ b/src/mail/ngx_mail_handler.c
++@@ -871,7 +871,20 @@ ngx_mail_read_command(ngx_mail_session_t *s, ngx_connection_t *c)
++         return NGX_MAIL_PARSE_INVALID_COMMAND;
++     }
++ 
++-    if (rc == NGX_IMAP_NEXT || rc == NGX_MAIL_PARSE_INVALID_COMMAND) {
+++    if (rc == NGX_MAIL_PARSE_INVALID_COMMAND) {
+++
+++        s->errors++;
+++
+++        if (s->errors >= cscf->max_errors) {
+++            ngx_log_error(NGX_LOG_INFO, c->log, 0,
+++                          "client sent too many invalid commands");
+++            s->quit = 1;
+++        }
+++
+++        return rc;
+++    }
+++
+++    if (rc == NGX_IMAP_NEXT) {
++         return rc;
++     }
++ 
++-- 
++2.25.1
 +
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.18.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.18.0.bb
+index ac303e47d..c20ca6f40 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.18.0.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.18.0.bb
+@@ -1,5 +1,7 @@
+ require nginx.inc
+ 
++SRC_URI += "file://CVE-2021-3618.patch"
++
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=52e384aaac868b755b93ad5535e2d075"
+ 
+ SRC_URI[md5sum] = "b2d33d24d89b8b1f87ff5d251aa27eb8"
 -- 
 2.31.1
 
