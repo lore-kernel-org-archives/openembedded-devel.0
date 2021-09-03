@@ -1,25 +1,25 @@
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.web11.2893.1630667765070063660
+Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
+ by mx.groups.io with SMTP id smtpd.web11.2950.1630668203339653451
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Sep 2021 04:16:05 -0700
+ Fri, 03 Sep 2021 04:23:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
 Received: from fwd81.dcpf.telekom.de (fwd81.aul.t-online.de [10.223.144.107])
-	by mailout08.t-online.de (Postfix) with SMTP id D9AA2D15A
-	for <openembedded-devel@lists.openembedded.org>; Fri,  3 Sep 2021 13:13:36 +0200 (CEST)
+	by mailout09.t-online.de (Postfix) with SMTP id B22EA14CBB
+	for <openembedded-devel@lists.openembedded.org>; Fri,  3 Sep 2021 13:23:19 +0200 (CEST)
 Received: from flk.fritz.box ([84.154.173.166]) by fwd81.t-online.de
 	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
-	esmtp id 1mM78Y-2Jex9t0; Fri, 3 Sep 2021 13:13:34 +0200
+	esmtp id 1mM7Hz-44Ie930; Fri, 3 Sep 2021 13:23:19 +0200
 From: "Markus Volk" <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: MarkusVolk <f_l_k@t-online.de>
-Subject: [PATCH] gimp: add recipe for current developement version
-Date: Fri,  3 Sep 2021 13:13:12 +0200
-Message-Id: <20210903111312.3861-1-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH v2] gimp: add recipe for current developement version
+Date: Fri,  3 Sep 2021 13:23:08 +0200
+Message-Id: <20210903112308.4288-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1630667614-00013856-25B2E698/0/0 CLEAN NORMAL
-X-TOI-MSGID: 13e859d1-bae5-4a9a-bba3-c222926cbd21
+X-TOI-EXPURGATEID: 150726::1630668199-00013856-5B96B170/0/0 CLEAN NORMAL
+X-TOI-MSGID: 557c909c-0874-48d9-8cba-812e4da7f40a
 Content-Transfer-Encoding: quoted-printable
 
 Reworked the gimp recipe to use the latest developement release.
@@ -27,10 +27,73 @@ Switched buildsystem to meson.
 
 Signed-off-by: MarkusVolk <f_l_k@t-online.de>
 ---
- meta-gnome/recipes-gimp/gimp/gimp_2.99.6.bb | 109 ++++++++++++++++++++
- 1 file changed, 109 insertions(+)
+ .../gimp/0001-meson-make-gir-buildable.patch  |  43 +++++++
+ meta-gnome/recipes-gimp/gimp/gimp_2.99.6.bb   | 109 ++++++++++++++++++
+ 2 files changed, 152 insertions(+)
+ create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-meson-make-gir=
+-buildable.patch
  create mode 100644 meta-gnome/recipes-gimp/gimp/gimp_2.99.6.bb
 
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-meson-make-gir-builda=
+ble.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-meson-make-gir-buildab=
+le.patch
+new file mode 100644
+index 000000000..632ae17c2
+--- /dev/null
++++ b/meta-gnome/recipes-gimp/gimp/gimp/0001-meson-make-gir-buildable.pat=
+ch
+@@ -0,0 +1,43 @@
++From c8f73f57d63779cfaad140e0521be40972fbec8f Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Wed, 1 Sep 2021 16:44:13 +0200
++Subject: [PATCH] meson: make gir buildable
++
++yocto/oe is capable of building gobject introspection despite cross-comp=
+iling.
++add an option to enable gir build even if cross-compiling
++
++Signed-off-by: Markus Volk <f_l_k@t-online.de>
++---
++ libgimp/meson.build | 2 +-
++ meson_options.txt   | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/libgimp/meson.build b/libgimp/meson.build
++index 9e7b4fbbe3..99614733d7 100644
++--- a/libgimp/meson.build
+++++ b/libgimp/meson.build
++@@ -384,7 +384,7 @@ libgimpui_introspectable_files =3D [
++   libgimpwidgets_introspectable,
++ ]
++=20
++-if meson.is_cross_build()
+++if meson.is_cross_build() and not get_option('introspection')
++   have_gobject_introspection =3D false
++   gobject_introspection_warning =3D '\n      '.join(['',
++     'GObject Introspection is disabled while cross-compiling because',
++diff --git a/meson_options.txt b/meson_options.txt
++index 7b6ad78045..c29fdb5b40 100644
++--- a/meson_options.txt
+++++ b/meson_options.txt
++@@ -52,7 +52,7 @@ option('headless-tests',    type: 'feature', value: 'a=
+uto', description: 'Use xv
++ option('gtk-doc',           type: 'boolean', value: true,   description=
+: 'Build developer documentation')
++ option('gtk-doc-app',       type: 'boolean', value: false,  description=
+: 'Build developer documentation for app')
++ option('g-ir-doc',          type: 'boolean', value: false,  description=
+: 'Build developer documentation for introspected API')
++-
+++option('introspection',   type: 'boolean', value: false,  description: =
+'GIR is buildable even if crosscompiling')
++ option('linux-input',       type: 'feature', value: 'auto', description=
+: 'Linux input event controller module')
++ option('vec-icons',         type: 'boolean', value: true,   description=
+: 'Use vector icons rather than raster ones')
++=20
++--=20
++2.25.1
++
 diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.99.6.bb b/meta-gnome/rec=
 ipes-gimp/gimp/gimp_2.99.6.bb
 new file mode 100644
