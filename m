@@ -1,52 +1,52 @@
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web09.2684.1630632254513646157
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web11.2757.1630632404966638671
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Sep 2021 18:24:14 -0700
+ Thu, 02 Sep 2021 18:26:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=K23jKyJY;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id 18so3034218pfh.9
-        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Sep 2021 18:24:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=qVxaZ7rN;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id g14so3055430pfm.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Sep 2021 18:26:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
         bh=pkazdYHw9QVV2A6fwacEzZM6jpugg7HDzQUO/qjIFiU=;
-        b=K23jKyJYKEHFiffXqwPTAfSChG2vICwXvpyFpkW8eD4DgiRHKzF9+3KHqmlFD/BJvU
-         NCyUeZawyrO2ya7CQN2Lvp1fIpkvPGCA6++ByUxnklc14FM6n5p3HHu8+QIrduqyujFd
-         L6YQmF+H4O2R4rPIdrm++MWErTPxxs+oL4wIlyVERhtb2Iqyu4E8/lRkA3Lcl3flFb9+
-         zRmjwmQQzNbfPEUEORb7WWJDXuZzjsc7fEhscSamE7P0WHXVaZb5XVqgQuSRV9fNr35F
-         PybQtFiACDfSCO1whKhwxAffvm4Yl2paa+d+Wv3jOTKIhvzkzPZil4FVGkrMjX1mT5o9
-         uYIw==
+        b=qVxaZ7rN8BhmrQASFkjassMDb+MUMjPKbn8u1Y57Ml7YQ5rEFs4MkCxL0pVuSycfMu
+         2ALhzxQM4I0gsWO89aWzPklLAMq6yQgNLpcP9HJJgAKMb57QaE/OWtXwQGVOEjSfbK18
+         b/ViLpWlq4+oZOtd+N9VOTBtjL7HDXavJGKaXhoskl8gyzEJOKncIhyXP6rUQqvC6Lf5
+         sYITm1yagNGFkvEnUardtES5bvVlRlGTi4OHyP4WO6EhlQd1C/FsVxuS0QF0lid7vo4i
+         uZma+anVTJDBDXnsbZi8gosKMlmBEmhfc49kdsDzkMQD1k/u8vNVF3ePe8HjwXiyHB1g
+         UPSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
         bh=pkazdYHw9QVV2A6fwacEzZM6jpugg7HDzQUO/qjIFiU=;
-        b=gZkxBRTcWO+bC80g0OBqlw+OrqtwobI7XO0JZtwJvFVGFQAQn2PvBOHUJHrLDph3W8
-         ZkIvU6i1vk00LhYDHCYPG1BNsrjSY9e0vsUnnYgciKr0XY6C9DsFXhtnae6E4/RjA9jB
-         JA2G5iL5siHFiAurvfUZGergUVY/1sCNm3D8jphkzDBc9TD5Gzui6cZpltZYx0oBLjS8
-         jVHEHSm5lBYlan+g2fzwK2FGfCxS8I56IUaSS3hXvc2E0+lRKrGSpJE/UgToLEcdrqA4
-         4EX2V9YQeYqig3ogHZmrVKpD3AAiDT8zXAixHo3Z79M4oDLWeK0sIMqDPfGmxjuevaJM
-         7www==
-X-Gm-Message-State: AOAM533okcehUMvi+nsy76e556n3x4ZsVVrCYGVx1DPUVkOzBC7w/o0u
-	mBXGH7/ptqitukQx7uGvgUFySdaBEXk=
-X-Google-Smtp-Source: ABdhPJxb7f1+UBOgt53SRREK/Mnlmr3zPpxkTJ3z0Qii7kA83Kx8RkcB/e+2g6PDvmG1ROrdCJcVkQ==
-X-Received: by 2002:a63:e510:: with SMTP id r16mr1206340pgh.34.1630632253617;
-        Thu, 02 Sep 2021 18:24:13 -0700 (PDT)
+        b=rXNPeAXp7VlpXf9YV67VkwyR0zoMzBHcMHO7H5KTuW1cdO82auIIyL56keHtgv9Kkd
+         G2ev1qb17wiHRfM7e5Mc1qi+eB8R2lrqTcoOBT6eK1uabzCmqumYGPIM9zDK9sHQKCuj
+         NnrWZIszxi9Fxf6ESDWhqgR3Dhoi8YMDlc3uIiZ0UVUYIPeI3iGy3zbrJRPFsMxt15ty
+         4oFy1OG6Uyoa6eZ7TBxuJuEe6AmmjKidfidVX1DF7lcdUfgeHbu0U8x4v+Jws6HYE7pm
+         2JgQX5w1RjSZz8gr0KeuwaeAg6RJ2ayAsIMMMR41j1Qr91YmpVBfuaoUy/0ZXPiQ8w79
+         bOew==
+X-Gm-Message-State: AOAM533++Md3HMTfGE86Sn7HT06gbWvqX+30xOgD27Il1gwyXPN5wVdO
+	Dfsz+Rt/6zDbUPigWxjJB4OnIN7u3Rs=
+X-Google-Smtp-Source: ABdhPJwIFixRqxtaT7v3xcXkRFEcxSot6qKHhVVFeN0VP7V5vQB/GKzWZUhXxWNa13xPwqXnaBhVMw==
+X-Received: by 2002:a62:520e:0:b0:3e2:1c21:f1ba with SMTP id g14-20020a62520e000000b003e21c21f1bamr1149244pfb.78.1630632404187;
+        Thu, 02 Sep 2021 18:26:44 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:5019:494:e14a:977])
-        by smtp.gmail.com with ESMTPSA id k20sm3518373pfu.133.2021.09.02.18.24.12
+        by smtp.gmail.com with ESMTPSA id y26sm3295183pfe.69.2021.09.02.18.26.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 02 Sep 2021 18:24:13 -0700 (PDT)
+        Thu, 02 Sep 2021 18:26:43 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Changqing Li <changqing.li@windriver.com>,
 	Khem Raj <raj.khem@gmail.com>,
 	Armin Kuster <akuster@mvista.com>
-Subject: [meta-webserver][hardknott]] apache2: upgrade 2.4.46 -> 2.4.48
-Date: Thu,  2 Sep 2021 18:24:11 -0700
-Message-Id: <20210903012411.3260339-1-akuster808@gmail.com>
+Subject: [meta-webserver][dunfell]] apache2: upgrade 2.4.46 -> 2.4.48
+Date: Thu,  2 Sep 2021 18:26:42 -0700
+Message-Id: <20210903012642.3260628-1-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
