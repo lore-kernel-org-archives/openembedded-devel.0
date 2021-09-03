@@ -1,102 +1,167 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.65])
- by mx.groups.io with SMTP id smtpd.web11.5391.1631181451401348616
+Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
+ by mx.groups.io with SMTP id smtpd.web11.2893.1630667765070063660
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Sep 2021 02:57:31 -0700
+ Fri, 03 Sep 2021 04:16:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@fujitsu.com header.s=170520fj header.b=pDAMbu1d;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.65, mailfrom: zhengrq.fnst@fujitsu.com)
-Return-Path: <zhengrq.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1631181449; i=@fujitsu.com;
-	bh=7AbvxtDhPFRjyM07zVOrO5JhKjx2Te68CCmogXwPTnw=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	b=pDAMbu1dPqj+Yxyp1XNpqKZX2XzBru4cSmejd8p4zuZf0yuZQgqJLQhqVBdw80BKz
-	 uwVyUoYXTLv7rc/pzy7xtMO+kXIiVA0l4S3IY99U0vgsHGH2r4SLvBKfLZP/3l612E
-	 g9ArkUEu5pT1l7dO6RWEnwIDppO2Ko5BHKXHKAZR08SyNapvWeV+yp3EZ5/uAYhCu9
-	 ew/F1vrTIeMz6us7+UHGvt4Lpw6PxF/i42NVeBC0mCUJsY8vocNgBbEN8ygzIgUljJ
-	 nQ4nEDnTc9E8gi16B41AJly5NCnpVym1WTzfmcLAuKdidMOnDwmGMJsU2oEXgL5Da3
-	 h4IOIKdsKpzFg==
-Received: from [100.112.196.248] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-b.eu-west-1.aws.symcld.net id 0F/25-30018-98AD9316; Thu, 09 Sep 2021 09:57:29 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrIIsWRWlGSWpSXmKPExsViZ8MxRbfzlmW
-  iweF1ghYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8a0VRuZCpbxVjz9cpKtgXEZdxcjJ4eQwCwm
-  iSeHFLsYuYDs3YwSxy+/ZQFJsAnoSpx7vJYdxBYR0JdYOnsPcxcjB4ewgIPEsuk1IGEWARWJ1
-  RcugZXzCnhKrJ7UCVYuIaAgMeXhe2aIuKDEyZlPwGqYBVQluo88ZYKw5SWat84GGykhoCgxe7
-  o8RGuFxOvDl5gnMPLOQtI9C0n3LCTdCxiZVzFaJBVlpmeU5CZm5ugaGhjoGhoa6RpaWugaGZr
-  qJVbpJumlluqWpxaX6BrqJZYX6xVX5ibnpOjlpZZsYgSGXErBses7GK++/qB3iFGSg0lJlNfs
-  pmWiEF9SfkplRmJxRnxRaU5q8SFGGQ4OJQnehOtAOcGi1PTUirTMHGD4w6QlOHiURHjVQNK8x
-  QWJucWZ6RCpU4yKUuK8liAzBUASGaV5cG2wmLvEKCslzMvIwMAgxFOQWpSbWYIq/4pRnINRSZ
-  j3MMgUnsy8Erjpr4AWMwEt9r1mAbK4JBEhJdXApKTTc+44d9Wx7R6Zrm5TzS5LzZC78/NS8qx
-  Sg3slN7m6972d06d85zDf/V+LambLfWyeUXp8/xn5DrH9ncpdR6UUG7TnvqvT/cGcl+8q+aZd
-  OaArY+rt6oNF95K7GIWvJ96+OPP8lE7tlTFSn/s89/3kEmtPnrFt3R6GuOyC20t/CpRs8f38S
-  UDonblnTO+s3skThEoYdm6+Fay/hn/pnV2d5iZuutkzNn0xiL4Xe2HCAwbH+C+T2yaZePTfSp
-  6uF7csVdVgZvI0Yd5iRXGVxu/qkuzJaQaxRqV9ZVFqHhm+Tap7j7Cd5+3MWiPTl6kYvvijQlt
-  o0M79XmZHOjfPKTKpajCZ1Ru6uOLQEU8lluKMREMt5qLiRADd3NChNAMAAA==
-X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-8.tower-287.messagelabs.com!1631181448!77345!1
-X-Originating-IP: [62.60.8.148]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.4; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 31710 invoked from network); 9 Sep 2021 09:57:29 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-8.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 9 Sep 2021 09:57:29 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1899vScT011146
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Sep 2021 10:57:28 +0100
-Received: from localhost.localdomain (10.167.225.35) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Thu, 9 Sep 2021 10:57:27 +0100
-From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] libeigen: upgrade 3.3.9 -> 3.4.0
-Date: Wed, 8 Sep 2021 15:07:58 +0800
-Message-ID: <1631084878-101207-1-git-send-email-zhengrq.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
+Received: from fwd81.dcpf.telekom.de (fwd81.aul.t-online.de [10.223.144.107])
+	by mailout08.t-online.de (Postfix) with SMTP id D9AA2D15A
+	for <openembedded-devel@lists.openembedded.org>; Fri,  3 Sep 2021 13:13:36 +0200 (CEST)
+Received: from flk.fritz.box ([84.154.173.166]) by fwd81.t-online.de
+	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
+	esmtp id 1mM78Y-2Jex9t0; Fri, 3 Sep 2021 13:13:34 +0200
+From: "Markus Volk" <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: MarkusVolk <f_l_k@t-online.de>
+Subject: [PATCH] gimp: add recipe for current developement version
+Date: Fri,  3 Sep 2021 13:13:12 +0200
+Message-Id: <20210903111312.3861-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain; charset="y"
+X-TOI-EXPURGATEID: 150726::1630667614-00013856-25B2E698/0/0 CLEAN NORMAL
+X-TOI-MSGID: 13e859d1-bae5-4a9a-bba3-c222926cbd21
 Content-Transfer-Encoding: quoted-printable
 
--License-Update: Delete empty lines.
+Reworked the gimp recipe to use the latest developement release.
+Switched buildsystem to meson.
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+Signed-off-by: MarkusVolk <f_l_k@t-online.de>
 ---
- .../libeigen/{libeigen_3.3.9.bb =3D> libeigen_3.4.0.bb}       | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/libeigen/{libeigen_3.3.9.bb =3D> libeigen_3.4.0.bb} (80%)
+ meta-gnome/recipes-gimp/gimp/gimp_2.99.6.bb | 109 ++++++++++++++++++++
+ 1 file changed, 109 insertions(+)
+ create mode 100644 meta-gnome/recipes-gimp/gimp/gimp_2.99.6.bb
 
-diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.3.9.bb b/meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb
-similarity index 80%
-rename from meta-oe/recipes-support/libeigen/libeigen_3.3.9.bb
-rename to meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb
-index 8ce26ff632..54b6f74d8c 100644
---- a/meta-oe/recipes-support/libeigen/libeigen_3.3.9.bb
-+++ b/meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb
-@@ -3,15 +3,15 @@ AUTHOR =3D "Beno=C3=AEt Jacob and Ga=C3=ABl Guennebaud and others"
- HOMEPAGE =3D "http://eigen.tuxfamily.org/"
- LICENSE =3D "MPL-2.0 & Apache-2.0 & BSD-3-Clause & GPLv3 & LGPLv2.1 & MINPACK"
- LIC_FILES_CHKSUM =3D "file://COPYING.MPL2;md5=3D815ca599c9df247a0c7f619bab123dad \
--                    file://COPYING.BSD;md5=3D543367b8e11f07d353ef894f71b574a0 \
-+                    file://COPYING.BSD;md5=3D2dd0510ee95e59ca28834b875bc96596 \
-                     file://COPYING.GPL;md5=3Dd32239bcb673463ab874e80d47fae504 \
-                     file://COPYING.LGPL;md5=3D4fbd65380cdd255951079008b364516c \
--                    file://COPYING.MINPACK;md5=3D5fe4603e80ef7390306f51ef74449bbd \
-+                    file://COPYING.MINPACK;md5=3D71d91b0f75ce79a75d3108a72bef8116 \
- "
- 
- SRC_URI =3D "git://gitlab.com/libeigen/eigen.git;protocol=3Dhttp;nobranch=3D1"
- 
--SRCREV =3D "0fd6b4f71dd85b2009ee4d1aeb296e2c11fc9d68"
-+SRCREV =3D "3147391d946bb4b6c68edd901f2add6ac1f31f8c"
- 
- S =3D "${WORKDIR}/git"
- 
--- 
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.99.6.bb b/meta-gnome/rec=
+ipes-gimp/gimp/gimp_2.99.6.bb
+new file mode 100644
+index 000000000..c1e33d23d
+--- /dev/null
++++ b/meta-gnome/recipes-gimp/gimp/gimp_2.99.6.bb
+@@ -0,0 +1,109 @@
++SUMMARY =3D "The GIMP is the GNU Image Manipulation Program"
++HOMEPAGE =3D "http://www.gimp.org"
++SECTION =3D "graphics"
++LICENSE =3D "GPLv3"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc678957b0c8e964aa6c70fd77641a=
+71e"
++
++REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
++
++DEPENDS =3D " \
++    appstream-glib \
++    atk \
++    babl \
++    bison-native \
++    cairo \
++    dbus-glib \
++    fontconfig \
++    freetype \
++    gdk-pixbuf-native \
++    gegl \
++    gegl-native \
++    gexiv2 \
++    gtk+3 \
++    harfbuzz \
++    intltool-native \
++    json-glib \
++    lcms \
++    libarchive \
++    libexif \
++    libmypaint \
++    libxslt-native \
++    mypaint-brushes-1.0 \
++    pango \
++    poppler \
++    poppler-data \
++"
++
++DEPENDS:append:libc-musl =3D " libexecinfo"
++RDEPENDS:${PN} =3D "mypaint-brushes-1.0 glib-networking"
++
++inherit meson gtk-icon-cache mime-xdg pkgconfig features_check gobject-i=
+ntrospection
++
++SRC_URI =3D " \
++    git://github.com/GNOME/gimp.git;protocol=3Dhttps \
++    file://0001-meson-make-gir-buildable.patch \
++"
++
++S =3D "${WORKDIR}/git"
++SRCREV =3D "GIMP_2_99_6"
++
++PACKAGECONFIG[aa] =3D "-Daa=3Denabled,-Daa=3Ddisabled,aalib"
++PACKAGECONFIG[alsa] =3D "-Dalsa=3Denabled,-Dalsa=3Ddisabled,alsa-lib"
++PACKAGECONFIG[appdata-test] =3D "-Dappdata-test=3Denabled,-Dappdata-test=
+=3Ddisabled,appstream-glib-native"
++PACKAGECONFIG[bzip2] =3D ",,bzip2"
++PACKAGECONFIG[cairo-pdf] =3D "-Dcairo-pdf=3Denabled,-Dcairo-pdf=3Ddisabl=
+ed"
++PACKAGECONFIG[check-update] =3D "-Dcheck-update=3Dtrue,-Dcheck-update=3D=
+false"
++PACKAGECONFIG[enable-console-bin] =3D "-Denable-console-bin=3Dtrue,-Dena=
+ble-console-bin=3Dfalse"
++PACKAGECONFIG[ghostscript] =3D "-Dghostscript=3Denabled,-Dghostscript=3D=
+disabled,ghostscript"
++PACKAGECONFIG[gtk-doc] =3D "-Dgtk-doc=3Dtrue,-Dgtk-doc=3Dfalse,gtk-doc-n=
+ative"
++PACKAGECONFIG[gtk-doc-app] =3D "-Dgtk-doc-app=3Dtrue,-Dgtk-doc-app=3Dfal=
+se,gtk-doc-native"
++PACKAGECONFIG[gudev] =3D "-Dgudev=3Denabled,-Dgudev=3Ddisabled,libgudev"
++PACKAGECONFIG[javascript] =3D "-Djavascript=3Dtrue,-Djavascript=3Dfalse,=
+,openjre-8"
++PACKAGECONFIG[jpeg2000] =3D "-Djpeg2000=3Denabled,-Djpeg2000=3Ddisabled,=
+jasper"
++PACKAGECONFIG[jpeg] =3D ",,jpeg"
++PACKAGECONFIG[lua] =3D "-Dlua=3Dtrue,-Dlua=3Dfalse,,luajit lgi"
++PACKAGECONFIG[lzma] =3D ",,xz"
++PACKAGECONFIG[mng] =3D "-Dmng=3Denabled,-Dmng=3Ddisabled,libmng"
++PACKAGECONFIG[png] =3D "-Dpng=3Denabled,-Dpng=3Ddisabled,libpng"
++PACKAGECONFIG[python] =3D "-Dpython=3Dtrue,-Dpython=3Dfalse,,python3 pyt=
+hon3-pygobject"
++PACKAGECONFIG[rsvg] =3D ",,librsvg"
++PACKAGECONFIG[tiff] =3D ",,tiff"
++PACKAGECONFIG[vala-plugins] =3D "-Dvala-plugins=3Denabled,-Dvala-plugins=
+=3Ddisabled"
++PACKAGECONFIG[webkit] =3D "-Dwebkit=3Denabled,-Dwebkit=3Ddisabled,webkit=
+gtk"
++PACKAGECONFIG[webp] =3D "-Dwebp=3Denabled,-Dwebp=3Ddisabled,libwebp"
++PACKAGECONFIG[xcursor] =3D "-Dxcursor=3Denabled,-Dxcursor=3Ddisabled,lib=
+xcursor"
++PACKAGECONFIG[x11] =3D "-Dxpm=3Denabled,-Dxpm=3Ddisabled,libxpm libxmu"
++PACKAGECONFIG[zlib] =3D ",,zlib"
++
++PACKAGECONFIG ?=3D " \
++    ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)} \
++    alsa \
++    bzip2 \
++    cairo-pdf \
++    gtk-doc-app \
++    gudev \
++    jpeg \
++    jpeg2000 \
++    lua \
++    lzma \
++    mng \
++    png \
++    python \
++    rsvg \
++    tiff \
++    webp \
++    zlib \
++"
++
++FILES:${PN} +=3D " \
++    ${datadir}/metainfo \
++    ${datadir}/gir-1.0 \
++    ${datadir}/appdata \
++    ${libdir}/girepository-1.0 \
++"
++
++EXTRA_OEMESON +=3D " \
++    -Dshmem-type=3Dposix \
++    --buildtype release \
++"
++
+--=20
 2.25.1
 
