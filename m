@@ -1,256 +1,400 @@
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web08.1.1630617561647237920
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.web09.2684.1630632254513646157
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Sep 2021 14:19:22 -0700
+ Thu, 02 Sep 2021 18:24:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=IO8W4KlU;
- spf=pass (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=48793745fc=joe.slater@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 182LCgKR019111
-	for <openembedded-devel@lists.openembedded.org>; Thu, 2 Sep 2021 21:19:20 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : content-transfer-encoding : content-type :
- mime-version; s=PPS06212021;
- bh=tHuC9hJEkoZeJl7P2/nUXZqqduU6jl69EnUfBdv38cU=;
- b=IO8W4KlUL/xsrju1w3S7CaMNIHi1ebVZCn2PmnvxfvOwXfSTRM1Oi1+6RdMVkyiHWzuh
- dST1SIxHZ6scXkjdvjD+qdK3KNmJkuADEp5Mt9Sx6F+icNTREvmvzentO13lsPj417g/
- mfbq0ny2ZSqGshIrB3hDKatQmCWIf55b89CTqNZiFD7womdiyvYKYyoV6dDsabeZGRpp
- tANwIA8yTa/uJ3+xhiOEVAWu4O4lqIjca7tsnbs78rwH+ipL+Fz5Bjk9MdNL63jtg01z
- kFhWozdU004v2iKILegKjE0S4t3YgLnkqNpYRRZ/BIxlb4AVaRD/5dVXe6All4NxazEM +A== 
-Received: from nam12-dm6-obe.outbound.protection.outlook.com (mail-dm6nam12lp2177.outbound.protection.outlook.com [104.47.59.177])
-	by mx0a-0064b401.pphosted.com with ESMTP id 3atdx1s30g-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 02 Sep 2021 21:19:20 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YJ9GThMp6nvVjSytjZZUfJ6EEPFafISnF9ZTHdCUBjwOmg8ogKItuqOHYNYKqpjnh4iKu/FIHR1+TlGOPCqCI7emnWIBEjjm0j/4Dk86zyVzA8aK4PiFWw8pTih3n4TjDGvXipOWE+U1DzmI1KvKSm760mV67GSzxZwME0Y0f31R2Qw4YNwZTu5/aEE2gaYzBTdpM2xjfEcP50UprFOrW1zw/CQkZmFPXGbUexUVFSmFAZfQ+psq1S45PWQHtl6tbJORb1o3Z5qzDG6qPUpK+VJYwpvZwrhjfgsl7oY+2cRxTPfgg/3XRLEfwAnQiGyH4nVNIwBz/1qcqK2+5QfgVA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
- bh=tHuC9hJEkoZeJl7P2/nUXZqqduU6jl69EnUfBdv38cU=;
- b=l3r8Hzb5FlT3D12QAMBD98k9W0kevAEGGTBchOQNMnJrGZ/wrErtwJow0LKta1wDaRq/VeXXLL8ABMei2esOzo85H/DLtZYPVRs1YkbizNy9wROeha0FlpBFFpzLRetqsZ1B+KEX/xU38RMkc7SQGGUxm0G53CXOQ35C6EFGaYHtHFWPg3AiRHVfbDlHV2UAEl+pnvQn+mzT1e9xfQMHd01T4DKXTF6sKTs29S4yKqt87oL5DMgBViNHsSRQ6HMvDzSGNPFCL1uwOGCHmVTqjPPs+kDjthq3g0EsvS1ZnFVRIf2yjd6BkxRzZJ+BWYSJBc1YNsUQBnb0EtT2f7yqXw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BY5PR11MB3992.namprd11.prod.outlook.com (2603:10b6:a03:188::10)
- by BY5PR11MB3992.namprd11.prod.outlook.com (2603:10b6:a03:188::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4478.19; Thu, 2 Sep
- 2021 21:19:17 +0000
-Received: from BY5PR11MB3992.namprd11.prod.outlook.com
- ([fe80::8136:f22:7050:c089]) by BY5PR11MB3992.namprd11.prod.outlook.com
- ([fe80::8136:f22:7050:c089%3]) with mapi id 15.20.4478.019; Thu, 2 Sep 2021
- 21:19:17 +0000
-From: "Joe Slater" <joe.slater@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=K23jKyJY;
+ spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f179.google.com with SMTP id 18so3034218pfh.9
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Sep 2021 18:24:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=pkazdYHw9QVV2A6fwacEzZM6jpugg7HDzQUO/qjIFiU=;
+        b=K23jKyJYKEHFiffXqwPTAfSChG2vICwXvpyFpkW8eD4DgiRHKzF9+3KHqmlFD/BJvU
+         NCyUeZawyrO2ya7CQN2Lvp1fIpkvPGCA6++ByUxnklc14FM6n5p3HHu8+QIrduqyujFd
+         L6YQmF+H4O2R4rPIdrm++MWErTPxxs+oL4wIlyVERhtb2Iqyu4E8/lRkA3Lcl3flFb9+
+         zRmjwmQQzNbfPEUEORb7WWJDXuZzjsc7fEhscSamE7P0WHXVaZb5XVqgQuSRV9fNr35F
+         PybQtFiACDfSCO1whKhwxAffvm4Yl2paa+d+Wv3jOTKIhvzkzPZil4FVGkrMjX1mT5o9
+         uYIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=pkazdYHw9QVV2A6fwacEzZM6jpugg7HDzQUO/qjIFiU=;
+        b=gZkxBRTcWO+bC80g0OBqlw+OrqtwobI7XO0JZtwJvFVGFQAQn2PvBOHUJHrLDph3W8
+         ZkIvU6i1vk00LhYDHCYPG1BNsrjSY9e0vsUnnYgciKr0XY6C9DsFXhtnae6E4/RjA9jB
+         JA2G5iL5siHFiAurvfUZGergUVY/1sCNm3D8jphkzDBc9TD5Gzui6cZpltZYx0oBLjS8
+         jVHEHSm5lBYlan+g2fzwK2FGfCxS8I56IUaSS3hXvc2E0+lRKrGSpJE/UgToLEcdrqA4
+         4EX2V9YQeYqig3ogHZmrVKpD3AAiDT8zXAixHo3Z79M4oDLWeK0sIMqDPfGmxjuevaJM
+         7www==
+X-Gm-Message-State: AOAM533okcehUMvi+nsy76e556n3x4ZsVVrCYGVx1DPUVkOzBC7w/o0u
+	mBXGH7/ptqitukQx7uGvgUFySdaBEXk=
+X-Google-Smtp-Source: ABdhPJxb7f1+UBOgt53SRREK/Mnlmr3zPpxkTJ3z0Qii7kA83Kx8RkcB/e+2g6PDvmG1ROrdCJcVkQ==
+X-Received: by 2002:a63:e510:: with SMTP id r16mr1206340pgh.34.1630632253617;
+        Thu, 02 Sep 2021 18:24:13 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:5019:494:e14a:977])
+        by smtp.gmail.com with ESMTPSA id k20sm3518373pfu.133.2021.09.02.18.24.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 02 Sep 2021 18:24:13 -0700 (PDT)
+From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: joe.slater@windriver.com, randy.macleod@windriver.com
-Subject: [meta-web][hardknott][PATCH 1/1] nginx: fix CVE-2021-3618
-Date: Thu,  2 Sep 2021 14:19:01 -0700
-Message-Id: <20210902211901.172705-1-joe.slater@windriver.com>
-X-Mailer: git-send-email 2.31.1
-X-ClientProxiedBy: BY3PR05CA0007.namprd05.prod.outlook.com
- (2603:10b6:a03:254::12) To BY5PR11MB3992.namprd11.prod.outlook.com
- (2603:10b6:a03:188::10)
+Cc: Changqing Li <changqing.li@windriver.com>,
+	Khem Raj <raj.khem@gmail.com>,
+	Armin Kuster <akuster@mvista.com>
+Subject: [meta-webserver][hardknott]] apache2: upgrade 2.4.46 -> 2.4.48
+Date: Thu,  2 Sep 2021 18:24:11 -0700
+Message-Id: <20210903012411.3260339-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Received: from ala-lpggp3.wrs.com (147.11.105.124) by BY3PR05CA0007.namprd05.prod.outlook.com (2603:10b6:a03:254::12) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4500.4 via Frontend Transport; Thu, 2 Sep 2021 21:19:17 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 89fc1b9b-f459-4907-9e0f-08d96e575280
-X-MS-TrafficTypeDiagnostic: BY5PR11MB3992:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<BY5PR11MB39926D8FC0566D510AEDFDD488CE9@BY5PR11MB3992.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:94;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	QNGQLy9PdqQJ/Pn+DCm2vvQKdpjuwt0SkzsoqTj5bX34QKrODl47aQtyrc7jZ0D1sZCKn6xdl+1BSR/yT0sLoz4SEduOKnvXrjXLUIPWrUC1ItGtBStsJSr3RCIvwAnkyPFN295CjoG9kEF3m52TxGB8lahG7XI01pAGe4qI7W0mVy88qnuLg9qgmBQvbZodb7v4rstenAw1tOqTZfb2Uiqg6NQSMpBRNdvfauCrSxrmRxj6nC/8CNzLRBXEVA/PNk1uSWlbkAFS7SU6v96LSGi4IYOsthu+7Rx1FfOqBgSj9pg8E0fys36z48DHD4mu1zBHw0mTxAvGQQDa2+EiBqE8SzF3Vo6AYVSDTh2x+jKqhTkxgI4lCF0S2eknfNGK0cL1BUZ9HGnxzHfwmYnV6hWO/nx7FECKozNP5F+9Jw9i+tWk7fguRiTsrQHMRArABLT4DgMMwF2EOu5NYLM7TxRRdu3YiBaHGsnaHdjRHH92bwuYLCaNFbhaI7a7uWBdrksvNiLUaa2vkuJrGYvrEvHeQU8zpUd4VSbxgqLv6eCptrTrI0AzsOfZ137dw5DbVbpyiQvPZsF8YBwoDDcM3frMFXoQzroFdSj6S5rNdkVVgDj3a7lTnkWwoVYRdNIq1ZGtQjGZVqITDzd3hSnh6u92HfjgoHHXNWX3Ys3ELA6R9aSIUMJs1mwmTUMvq0uzGejHBNB+Y2jeWfLgEJ1EuBWr4Dc+M5OnUsgV9er74JW2fc7CM9qmIXE2+IIS/vzknufh4YyovHVioBf6zFkfs9Cby5BhPzcArjxkVKvIZeg=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3992.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(396003)(39850400004)(376002)(346002)(136003)(26005)(186003)(2616005)(44832011)(4326008)(956004)(83380400001)(107886003)(6486002)(966005)(1076003)(38100700002)(8936002)(5660300002)(66556008)(66476007)(38350700002)(316002)(66946007)(8676002)(36756003)(52116002)(6916009)(6506007)(86362001)(478600001)(2906002)(6666004)(6512007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?zx0x4ku6dsG6HymWnjbmM7pKdeOlPwDgO/gpttwaC2fqNYBmW9x9C5x/nEXg?=
- =?us-ascii?Q?ZhlyekIRfmXUM5/nOubkycUdyOTM+Xa4x6NmC4DMmtatQ2PvSj3O+K+FHdbS?=
- =?us-ascii?Q?KRl4/Fs2VCBltSe+VjWHcISZ7/NSlWLK5048BDfUlobnp3jO0yK205pth7gU?=
- =?us-ascii?Q?/nMWCyOu1TUo5PWMmtma+EHkofY1EASQUrTVbbbTqWEM9CD9aeVTRfH/7zlO?=
- =?us-ascii?Q?tAJkwYD2GVKEjX0EyPPWGxDGq9Hv0nPc0m5rLSZIYkSncj26U0XqUMuQLZaH?=
- =?us-ascii?Q?78NM7mdNOnjvjt/+lGJ2I0oN1SxDwrya//ceyfyBj6b8I15QsFdYz1oPyKFV?=
- =?us-ascii?Q?z99CbwarAMH0z4TIyJuQeShUqJUkZTvUX85TXnfUXcq8tc/V+t5pXCmZLXQL?=
- =?us-ascii?Q?QVfzssWdU0FIEcFgRWxu/8Z7S0x8qrVgRfLFbpcRlbFN1YdPw42IA0tI9+Rw?=
- =?us-ascii?Q?QLxq765IsX3gNHVBdFZSCeV/4zWNmZ4gMakC3FaZNr2LYWEOdVUtUE/T/t2D?=
- =?us-ascii?Q?2XgqUnKkdAwIM/elvJ43/IrWDrikNNPcWzK4/YuN5L22caFwkHgKmHYDNQNc?=
- =?us-ascii?Q?48L+QLnZnyXWNIpzURFWzHhxXSzVZQc/24O9syuHUzj1fQEub91s3ITc85Io?=
- =?us-ascii?Q?FhDPQWQWvuah65r0WbOUUxkMeLv3NasDZdIZ7Z+4qJTGHwiDiRgxZ2X8eP2r?=
- =?us-ascii?Q?zwjnw+YiEFLhUZ7yoWDPKDh2PQQrt2/ekHB74upILDNFLcCTKMHLIeOQ+OzD?=
- =?us-ascii?Q?mw873MGaaGRXPUTZI/ah1qGFPchUgqe1trNmaszqMT02K8L8t81ZJ2AxuQ2M?=
- =?us-ascii?Q?zlMWnFHHzIMPiifbQbJf2x56D3RvYxuUXo8pXHxFVCx8O73PkWqKnav1PRny?=
- =?us-ascii?Q?ekwsknKJmg6pJHm5Sr55uQ2HJzU9Q0bJXeljCDCmJkL78eM5ioLWzOCe0yEL?=
- =?us-ascii?Q?6GGUky1kSw8Ggo0kZk81UECO63aHsfULkMKgobx/V70jQKkhsh+DINPWqz9B?=
- =?us-ascii?Q?j2wb8IuRNn7+cAcinP4oKhnQqZjMnS50vPYxBoI2uI03N5Cjw9Uq+g6mbK75?=
- =?us-ascii?Q?vIeu5XG9QPSQAhUNgH2vcXOSSdCi2jSb/OdAaeHvMfPcwiVtKLMbYeO/JDsk?=
- =?us-ascii?Q?X9UZ6DI1ospm/gv0y0kGp1ju21P99rY0pE2V6N5URjhVeGrippv4hIZdScos?=
- =?us-ascii?Q?t1uSDK9mp9cazcEBodLLkGVKcGaD7xtJZLXpam79VNqBUbxq4N6rmCzCun7w?=
- =?us-ascii?Q?bE2eTmPmOmKs6bkh+HxyO41bdu1GgHvptWNEKb0AsWkUJ4b1kOPL2D6zHNvt?=
- =?us-ascii?Q?beTgby4qm6/EQh5ki5n44Zq+?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 89fc1b9b-f459-4907-9e0f-08d96e575280
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3992.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2021 21:19:17.6775
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cR5mKR5Zjx4YryRxjK1KZxKdAC7vrbvc2eKge9lEwPP5QKQeacOeQjp7sZwxRRgDlTa8GBtLH8VTIAr7EcAnDbL3o9wmWLpRW0g9ecgGP9g=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB3992
-X-Proofpoint-GUID: KGTrTFT7wpVudJ6rn3tcsdCDiK461vBs
-X-Proofpoint-ORIG-GUID: KGTrTFT7wpVudJ6rn3tcsdCDiK461vBs
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
- definitions=2021-09-02_04,2021-09-02_03,2020-04-07_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- suspectscore=0 mlxscore=0 adultscore=0 malwarescore=0 impostorscore=0
- spamscore=0 bulkscore=0 clxscore=1011 mlxlogscore=722 phishscore=0
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2108310000 definitions=main-2109020122
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-Apply patch made to version 1.20.1 to version 1.18.0.
+From: Changqing Li <changqing.li@windriver.com>
 
-Signed-off-by: Joe Slater <joe.slater@windriver.com>
+Source: https://git.openembedded.org/meta-openembedded
+https://git.openembedded.org/meta-openembedded
+MR: 112869, 112835, 105131, 112702, 112829
+Type: Security Fix
+Disposition: Backport from https://git.openembedded.org/meta-openembedded/commit/meta-webserver/recipes-httpd/apache2?id=ba016d73b5233a43ec6e398b45445d13ddaad745
+ChangeID: f3ac0bc1005c94a694573b823c8f3f7d4a15360c
+Description:
+
+Apache2 2.4.x is an LTS version with bug and CVE fixes.
+https://downloads.apache.org/httpd/CHANGES_2.4.48
+
+Includes these CVE fixes:
+
+2.4.48
+CVE-2021-31618
+
+2.4.47
+CVE-2020-13938
+CVE-2020-11985
+CVE-2021-33193
+CVE-2019-17567
+
+Drop these patches included in update:
+CVE-2020-13950.patch
+CVE-2020-35452.patch
+CVE-2021-26690.patch
+CVE-2021-26691.patch
+CVE-2021-30641.patch
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit ba016d73b5233a43ec6e398b45445d13ddaad745)
+Signed-off-by: Armin Kuster <akuster@mvista.com>
 ---
- .../nginx/files/CVE-2021-3618.patch           | 107 ++++++++++++++++++
- .../recipes-httpd/nginx/nginx_1.18.0.bb       |   2 +
- 2 files changed, 109 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2021-3618.patch
+ .../apache2/apache2/CVE-2020-13950.patch      | 45 -------------
+ .../apache2/apache2/CVE-2020-35452.patch      | 49 --------------
+ .../apache2/apache2/CVE-2021-26690.patch      | 39 -----------
+ .../apache2/apache2/CVE-2021-26691.patch      | 35 ----------
+ .../apache2/apache2/CVE-2021-30641.patch      | 66 -------------------
+ .../{apache2_2.4.46.bb => apache2_2.4.48.bb}  |  9 +--
+ 6 files changed, 2 insertions(+), 241 deletions(-)
+ delete mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-13950.patch
+ delete mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-35452.patch
+ delete mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26690.patch
+ delete mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26691.patch
+ delete mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-30641.patch
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.46.bb => apache2_2.4.48.bb} (96%)
 
-diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2021-3618.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2021-3618.patch
-new file mode 100644
-index 000000000..be42a1ed5
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2021-3618.patch
-@@ -0,0 +1,107 @@
-+From 6dafcdebde58577f4fcb190be46a0eb910cf1b96 Mon Sep 17 00:00:00 2001
-+From: Maxim Dounin <mdounin@mdounin.ru>
-+Date: Wed, 19 May 2021 03:13:31 +0300
-+Subject: [PATCH 1/1] Mail: max_errors directive.
-+
-+Similarly to smtpd_hard_error_limit in Postfix and smtp_max_unknown_commands
-+in Exim, specifies the number of errors after which the connection is closed.
-+--- end of original header ---
-+
-+CVE: CVE-2021-3618
-+
-+Upstream-Status: Backport
-+                 https://github.com/nginx/nginx.git
-+                 commit 173f16f736c10eae46cd15dd861b04b82d91a37a
-+
-+Signed-off-by: Joe Slater <joe.slater@windriver.com>
-+---
-+ src/mail/ngx_mail.h             |  3 +++
-+ src/mail/ngx_mail_core_module.c | 10 ++++++++++
-+ src/mail/ngx_mail_handler.c     | 15 ++++++++++++++-
-+ 3 files changed, 27 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/mail/ngx_mail.h b/src/mail/ngx_mail.h
-+index b865a3b9..76cae37a 100644
-+--- a/src/mail/ngx_mail.h
-++++ b/src/mail/ngx_mail.h
-+@@ -115,6 +115,8 @@ typedef struct {
-+     ngx_msec_t              timeout;
-+     ngx_msec_t              resolver_timeout;
-+ 
-++    ngx_uint_t              max_errors;
-++
-+     ngx_str_t               server_name;
-+ 
-+     u_char                 *file_name;
-+@@ -231,6 +233,7 @@ typedef struct {
-+     ngx_uint_t              command;
-+     ngx_array_t             args;
-+ 
-++    ngx_uint_t              errors;
-+     ngx_uint_t              login_attempt;
-+ 
-+     /* used to parse POP3/IMAP/SMTP command */
-+diff --git a/src/mail/ngx_mail_core_module.c b/src/mail/ngx_mail_core_module.c
-+index 40831242..115671ca 100644
-+--- a/src/mail/ngx_mail_core_module.c
-++++ b/src/mail/ngx_mail_core_module.c
-+@@ -85,6 +85,13 @@ static ngx_command_t  ngx_mail_core_commands[] = {
-+       offsetof(ngx_mail_core_srv_conf_t, resolver_timeout),
-+       NULL },
-+ 
-++    { ngx_string("max_errors"),
-++      NGX_MAIL_MAIN_CONF|NGX_MAIL_SRV_CONF|NGX_CONF_TAKE1,
-++      ngx_conf_set_num_slot,
-++      NGX_MAIL_SRV_CONF_OFFSET,
-++      offsetof(ngx_mail_core_srv_conf_t, max_errors),
-++      NULL },
-++
-+       ngx_null_command
-+ };
-+ 
-+@@ -163,6 +170,8 @@ ngx_mail_core_create_srv_conf(ngx_conf_t *cf)
-+     cscf->timeout = NGX_CONF_UNSET_MSEC;
-+     cscf->resolver_timeout = NGX_CONF_UNSET_MSEC;
-+ 
-++    cscf->max_errors = NGX_CONF_UNSET_UINT;
-++
-+     cscf->resolver = NGX_CONF_UNSET_PTR;
-+ 
-+     cscf->file_name = cf->conf_file->file.name.data;
-+@@ -182,6 +191,7 @@ ngx_mail_core_merge_srv_conf(ngx_conf_t *cf, void *parent, void *child)
-+     ngx_conf_merge_msec_value(conf->resolver_timeout, prev->resolver_timeout,
-+                               30000);
-+ 
-++    ngx_conf_merge_uint_value(conf->max_errors, prev->max_errors, 5);
-+ 
-+     ngx_conf_merge_str_value(conf->server_name, prev->server_name, "");
-+ 
-+diff --git a/src/mail/ngx_mail_handler.c b/src/mail/ngx_mail_handler.c
-+index 0aaa0e78..71b81512 100644
-+--- a/src/mail/ngx_mail_handler.c
-++++ b/src/mail/ngx_mail_handler.c
-+@@ -871,7 +871,20 @@ ngx_mail_read_command(ngx_mail_session_t *s, ngx_connection_t *c)
-+         return NGX_MAIL_PARSE_INVALID_COMMAND;
-+     }
-+ 
-+-    if (rc == NGX_IMAP_NEXT || rc == NGX_MAIL_PARSE_INVALID_COMMAND) {
-++    if (rc == NGX_MAIL_PARSE_INVALID_COMMAND) {
-++
-++        s->errors++;
-++
-++        if (s->errors >= cscf->max_errors) {
-++            ngx_log_error(NGX_LOG_INFO, c->log, 0,
-++                          "client sent too many invalid commands");
-++            s->quit = 1;
-++        }
-++
-++        return rc;
-++    }
-++
-++    if (rc == NGX_IMAP_NEXT) {
-+         return rc;
-+     }
-+ 
-+-- 
-+2.25.1
-+
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.18.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.18.0.bb
-index ac303e47d..c20ca6f40 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.18.0.bb
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.18.0.bb
-@@ -1,5 +1,7 @@
- require nginx.inc
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-13950.patch b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-13950.patch
+deleted file mode 100644
+index 4eb6b85b1a..0000000000
+--- a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-13950.patch
++++ /dev/null
+@@ -1,45 +0,0 @@
+-From 8c162db8b65b2193e622b780e8c6516d4265f68b Mon Sep 17 00:00:00 2001
+-From: Yann Ylavic <ylavic@apache.org>
+-Date: Mon, 11 May 2015 15:48:58 +0000
+-Subject: [PATCH] mod_proxy_http: follow up to r1656259. The proxy connection
+- may be NULL during prefetch, don't try to dereference it! Still
+- origin->keepalive will be set according to p_conn->close by the caller
+- (proxy_http_handler).
+-
+-git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1678771 13f79535-47bb-0310-9956-ffa450edef68
+-
+-Upstream-Status: Backport
+-CVE: CVE-2020-35504
+-
+-Reference to upstream patch:
+-https://bugzilla.redhat.com/show_bug.cgi?id=1966738
+-https://github.com/apache/httpd/commit/8c162db8b65b2193e622b780e8c6516d4265f68b
+-
+-Signed-off-by: Li Wang <li.wang@windriver.com>
+----
+- modules/proxy/mod_proxy_http.c | 2 --
+- 1 file changed, 2 deletions(-)
+-
+-diff --git a/modules/proxy/mod_proxy_http.c b/modules/proxy/mod_proxy_http.c
+-index ec1e042..5f507d5 100644
+---- a/modules/proxy/mod_proxy_http.c
+-+++ b/modules/proxy/mod_proxy_http.c
+-@@ -570,7 +570,6 @@ static int ap_proxy_http_prefetch(proxy_http_req_t *req,
+-     apr_off_t bytes;
+-     int force10, rv;
+-     apr_read_type_e block;
+--    conn_rec *origin = p_conn->connection;
+- 
+-     if (apr_table_get(r->subprocess_env, "force-proxy-request-1.0")) {
+-         if (req->expecting_100) {
+-@@ -630,7 +629,6 @@ static int ap_proxy_http_prefetch(proxy_http_req_t *req,
+-                       "chunked body with Content-Length (C-L ignored)",
+-                       c->client_ip, c->remote_host ? c->remote_host: "");
+-         req->old_cl_val = NULL;
+--        origin->keepalive = AP_CONN_CLOSE;
+-         p_conn->close = 1;
+-     }
+- 
+--- 
+-2.7.4
+-
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-35452.patch b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-35452.patch
+deleted file mode 100644
+index 001ca9252d..0000000000
+--- a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2020-35452.patch
++++ /dev/null
+@@ -1,49 +0,0 @@
+-From 3b6431eb9c9dba603385f70a2131ab4a01bf0d3b Mon Sep 17 00:00:00 2001
+-From: Yann Ylavic <ylavic@apache.org>
+-Date: Mon, 18 Jan 2021 17:39:12 +0000
+-Subject: [PATCH] Merge r1885659 from trunk:
+-
+-mod_auth_digest: Fast validation of the nonce's base64 to fail early if
+-                 the format can't match anyway.
+-
+-Submitted by: ylavic
+-Reviewed by: ylavic, covener, jailletc36
+-
+-git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.4.x@1885666 13f79535-47bb-0310-9956-ffa450edef68
+-
+-Upstream-Status: Backport
+-CVE: CVE-2020-35452
+-
+-Reference to upstream patch:
+-https://security-tracker.debian.org/tracker/CVE-2020-35452
+-https://github.com/apache/httpd/commit/3b6431eb9c9dba603385f70a2131ab4a01bf0d3b
+-
+-Signed-off-by: Li Wang <li.wang@windriver.com>
+----
+- modules/aaa/mod_auth_digest.c | 9 +++++++--
+- 1 file changed, 7 insertions(+), 2 deletions(-)
+-
+-diff --git a/modules/aaa/mod_auth_digest.c b/modules/aaa/mod_auth_digest.c
+-index b760941..0825b1b 100644
+---- a/modules/aaa/mod_auth_digest.c
+-+++ b/modules/aaa/mod_auth_digest.c
+-@@ -1422,9 +1422,14 @@ static int check_nonce(request_rec *r, digest_header_rec *resp,
+-     time_rec nonce_time;
+-     char tmp, hash[NONCE_HASH_LEN+1];
+- 
+--    if (strlen(resp->nonce) != NONCE_LEN) {
+-+    /* Since the time part of the nonce is a base64 encoding of an
+-+     * apr_time_t (8 bytes), it should end with a '=', fail early otherwise.
+-+     */
+-+    if (strlen(resp->nonce) != NONCE_LEN
+-+            || resp->nonce[NONCE_TIME_LEN - 1] != '=') {
+-         ap_log_rerror(APLOG_MARK, APLOG_ERR, 0, r, APLOGNO(01775)
+--                      "invalid nonce %s received - length is not %d",
+-+                      "invalid nonce '%s' received - length is not %d "
+-+                      "or time encoding is incorrect",
+-                       resp->nonce, NONCE_LEN);
+-         note_digest_auth_failure(r, conf, resp, 1);
+-         return HTTP_UNAUTHORIZED;
+--- 
+-2.7.4
+-
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26690.patch b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26690.patch
+deleted file mode 100644
+index d3aea9e122..0000000000
+--- a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26690.patch
++++ /dev/null
+@@ -1,39 +0,0 @@
+-From 67bd9bfe6c38831e14fe7122f1d84391472498f8 Mon Sep 17 00:00:00 2001
+-From: Yann Ylavic <ylavic@apache.org>
+-Date: Mon, 1 Mar 2021 20:07:08 +0000
+-Subject: [PATCH] mod_session: save one apr_strtok() in
+- session_identity_decode().
+-
+-When the encoding is invalid (missing '='), no need to parse further.
+-
+-git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1887050 13f79535-47bb-0310-9956-ffa450edef68
+-
+-Upstream-Status: Backport
+-CVE: CVE-2021-26690
+-
+-Reference to upstream patch:
+-https://security-tracker.debian.org/tracker/CVE-2021-26690
+-https://github.com/apache/httpd/commit/67bd9bfe6c38831e14fe7122f1d84391472498f8
+-
+-Signed-off-by: Li Wang <li.wang@windriver.com>
+----
+- modules/session/mod_session.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/modules/session/mod_session.c b/modules/session/mod_session.c
+-index ebd05b0..af70f6b 100644
+---- a/modules/session/mod_session.c
+-+++ b/modules/session/mod_session.c
+-@@ -404,8 +404,8 @@ static apr_status_t session_identity_decode(request_rec * r, session_rec * z)
+-         char *plast = NULL;
+-         const char *psep = "=";
+-         char *key = apr_strtok(pair, psep, &plast);
+--        char *val = apr_strtok(NULL, psep, &plast);
+-         if (key && *key) {
+-+            char *val = apr_strtok(NULL, sep, &plast);
+-             if (!val || !*val) {
+-                 apr_table_unset(z->entries, key);
+-             }
+--- 
+-2.7.4
+-
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26691.patch b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26691.patch
+deleted file mode 100644
+index f9cf868d01..0000000000
+--- a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-26691.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-From 7e09dd714fc62c08c5b0319ed7b9702594faf49b Mon Sep 17 00:00:00 2001
+-From: Yann Ylavic <ylavic@apache.org>
+-Date: Mon, 1 Mar 2021 20:13:54 +0000
+-Subject: [PATCH] mod_session: account for the '&' in identity_concat().
+-
+-git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1887052 13f79535-47bb-0310-9956-ffa450edef68
+-
+-Upstream-Status: Backport
+-CVE: CVE-2021-26691
+-
+-Reference to upstream patch:
+-https://bugzilla.redhat.com/show_bug.cgi?id=1966732
+-https://github.com/apache/httpd/commit/7e09dd714fc62c08c5b0319ed7b9702594faf49b
+-
+-Signed-off-by: Li Wang <li.wang@windriver.com>
+----
+- modules/session/mod_session.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/modules/session/mod_session.c b/modules/session/mod_session.c
+-index 7ee477c..ebd05b0 100644
+---- a/modules/session/mod_session.c
+-+++ b/modules/session/mod_session.c
+-@@ -317,7 +317,7 @@ static apr_status_t ap_session_set(request_rec * r, session_rec * z,
+- static int identity_count(void *v, const char *key, const char *val)
+- {
+-     int *count = v;
+--    *count += strlen(key) * 3 + strlen(val) * 3 + 1;
+-+    *count += strlen(key) * 3 + strlen(val) * 3 + 2;
+-     return 1;
+- }
+- 
+--- 
+-2.7.4
+-
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-30641.patch b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-30641.patch
+deleted file mode 100644
+index 7f74c85e33..0000000000
+--- a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2021-30641.patch
++++ /dev/null
+@@ -1,66 +0,0 @@
+-From 6141d5aa3f5cf8f1b89472e7fdb66578810d0ae3 Mon Sep 17 00:00:00 2001
+-From: Eric Covener <covener@apache.org>
+-Date: Wed, 21 Apr 2021 01:02:11 +0000
+-Subject: [PATCH] legacy default slash-matching behavior w/ 'MergeSlashes OFF'
+-
+-git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1889036 13f79535-47bb-0310-9956-ffa450edef68
+-
+-Upstream-Status: Backport
+-CVE: CVE-2021-30641
+-
+-Reference to upstream patch:
+-https://httpd.apache.org/security/vulnerabilities_24.html#CVE-2021-30641
+-https://github.com/apache/httpd/commit/6141d5aa3f5cf8f1b89472e7fdb66578810d0ae3
+-
+-Signed-off-by: Li Wang <li.wang@windriver.com>
+----
+- server/request.c | 19 ++++++++++++++++---
+- 1 file changed, 16 insertions(+), 3 deletions(-)
+-
+-diff --git a/server/request.c b/server/request.c
+-index d5c558a..18625af 100644
+---- a/server/request.c
+-+++ b/server/request.c
+-@@ -1419,7 +1419,20 @@ AP_DECLARE(int) ap_location_walk(request_rec *r)
+- 
+-     cache = prep_walk_cache(AP_NOTE_LOCATION_WALK, r);
+-     cached = (cache->cached != NULL);
+--    entry_uri = r->uri;
+-+
+-+   /*
+-+    * When merge_slashes is set to AP_CORE_CONFIG_OFF the slashes in r->uri
+-+    * have not been merged. But for Location walks we always go with merged
+-+    * slashes no matter what merge_slashes is set to.
+-+    */
+-+    if (sconf->merge_slashes != AP_CORE_CONFIG_OFF) {
+-+        entry_uri = r->uri;
+-+    }
+-+    else {
+-+        char *uri = apr_pstrdup(r->pool, r->uri);
+-+        ap_no2slash(uri);
+-+        entry_uri = uri;
+-+    }
+- 
+-     /* If we have an cache->cached location that matches r->uri,
+-      * and the vhost's list of locations hasn't changed, we can skip
+-@@ -1486,7 +1499,7 @@ AP_DECLARE(int) ap_location_walk(request_rec *r)
+-                     pmatch = apr_palloc(rxpool, nmatch*sizeof(ap_regmatch_t));
+-                 }
+- 
+--                if (ap_regexec(entry_core->r, entry_uri, nmatch, pmatch, 0)) {
+-+                if (ap_regexec(entry_core->r, r->uri, nmatch, pmatch, 0)) {
+-                     continue;
+-                 }
+- 
+-@@ -1496,7 +1509,7 @@ AP_DECLARE(int) ap_location_walk(request_rec *r)
+-                         apr_table_setn(r->subprocess_env,
+-                                        ((const char **)entry_core->refs->elts)[i],
+-                                        apr_pstrndup(r->pool,
+--                                       entry_uri + pmatch[i].rm_so,
+-+                                       r->uri + pmatch[i].rm_so,
+-                                        pmatch[i].rm_eo - pmatch[i].rm_so));
+-                     }
+-                 }
+--- 
+-2.7.4
+-
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.46.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.48.bb
+similarity index 96%
+rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.46.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.48.bb
+index 4fc1f16317..7af824dd16 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.46.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.48.bb
+@@ -15,11 +15,6 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
+            file://0007-apache2-allow-to-disable-selinux-support.patch \
+            file://apache-configure_perlbin.patch \
+            file://0001-support-apxs.in-force-destdir-to-be-empty-string.patch \
+-           file://CVE-2020-13950.patch \
+-           file://CVE-2020-35452.patch \
+-           file://CVE-2021-26690.patch \
+-           file://CVE-2021-26691.patch \
+-           file://CVE-2021-30641.patch \
+           "
  
-+SRC_URI += "file://CVE-2021-3618.patch"
-+
- LIC_FILES_CHKSUM = "file://LICENSE;md5=52e384aaac868b755b93ad5535e2d075"
+ SRC_URI_append_class-target = " \
+@@ -31,8 +26,8 @@ SRC_URI_append_class-target = " \
+            "
  
- SRC_URI[md5sum] = "b2d33d24d89b8b1f87ff5d251aa27eb8"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
+-SRC_URI[md5sum] = "7d661ea5e736dac5e2761d9f49fe8361"
+-SRC_URI[sha256sum] = "740eddf6e1c641992b22359cabc66e6325868c3c5e2e3f98faf349b61ecf41ea"
++SRC_URI[md5sum] = "a7088cec171b0d00bf43394ce64d3909"
++SRC_URI[sha256sum] = "1bc826e7b2e88108c7e4bf43c026636f77a41d849cfb667aa7b5c0b86dbf966c"
+ 
+ S = "${WORKDIR}/httpd-${PV}"
+ 
 -- 
-2.31.1
+2.25.1
 
