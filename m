@@ -1,102 +1,87 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.2])
- by mx.groups.io with SMTP id smtpd.web09.16960.1630891288686044932
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.2])
+ by mx.groups.io with SMTP id smtpd.web08.17372.1630894344369405078
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Sep 2021 18:21:29 -0700
+ Sun, 05 Sep 2021 19:12:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=LoFeZ0g6;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.2, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=qx4qrBKV;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: zhengrq.fnst@fujitsu.com)
+Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1630891287; i=@fujitsu.com;
-	bh=X7dlkGYQGornMRtqNpZSAn7ovw4m2X9uAeDHA18rGMk=;
+	s=170520fj; t=1630894336; i=@fujitsu.com;
+	bh=dEgxRLlaY75MU4QhLDBmlBq/eBT10YSoIKSr56ztQeY=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=LoFeZ0g6D5Vaz/bLxU7ElDtmbDVMFBAJJJbS1LnKCHdIqxb40mKyb1x88S+Nd01xG
-	 /R61erQBtWt4g5+z+IRR0Joo/4J/hD4CyJeGI0YSku/7E92lW94G9Eomm0L7DRadBL
-	 3k2R7uHAWgaahFvlunV4G5dNqVyswUjAYKkgg0N/5vc6jJesuVszB77OIzblqsrHR3
-	 7ii+xqCkwBVWFFXCl2X4XNv3e7QODu0DFOyZK0BzvPpaxcnWYSlWghOtv7p1hXAJJL
-	 m2dXosrzcmD4fHMFvrFpah4Gy5h4oYdeNDA/tOMhP/EHdzL3E56AojYITYtj9YyXrG
-	 J7X3CPOSJyq1g==
-Received: from [100.113.2.26] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-central-1.aws.symcld.net id 34/7D-23460-61D65316; Mon, 06 Sep 2021 01:21:26 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+GYoiuWa5p
-  oMOO9sMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvHn72+2gkm8FVfvH2ZuYHzC3cXIxSEkMItJ
-  YuLzB4wQznFGiU0LfrB1MXJysAnoSHS86GYBsUUE9CWWzt7DDGILC/hJTHm0nxHEZhFQkTgx7
-  w5YPa+Au8S7/v3sILaEgILElIfvmSHighInZz4Bm8MsICFx8MULZogaRYntO8+wQNgVEq8PX2
-  KewMgzC0nLLCQtCxiZVjFaJBVlpmeU5CZm5ugaGhjoGhoa6xrqmhrqJVbpJuqlluomp+aVFCU
-  CJfUSy4v1iitzk3NS9PJSSzYxAgMppZDReAfjwdcf9A4xSnIwKYnyatiZJgrxJeWnVGYkFmfE
-  F5XmpBYfYpTh4FCS4I3KAsoJFqWmp1akZeYAgxomLcHBoyTCeyIbKM1bXJCYW5yZDpE6xagoJ
-  c5bDpIQAElklObBtcEi6RKjrJQwLyMDA4MQT0FqUW5mCar8K0ZxDkYlYd7WeKApPJl5JXDTXw
-  EtZgJa3PbQBGRxSSJCSqqBaVH75IojR+YXsN294Bws3b5lVoT64YBF3cL5ImfvVm6ZV9d14r5
-  S4zWbeYsWJibMe8D14l3fn3NfE+vjpR5/v15mq1v/xYFpabe+92eXm2rXXWLvGK94P/cW98T/
-  syOvxvf9PPuV/5bqPe5jHzilf3W9+JJ67ZYJv8IXC4/Opwn1utUqsT2MZ75OY76quY15gtP0A
-  FXLIoMF9v/ibH8vMiu57TGxrd/7a+y65fE/ZDR7FQouZD68ten0r0wW0ch1RtVPWy8ZvTNQ5v
-  C50nDhy5GfWtOkTIRDnj455FP+fMK1JF/p1b5T2Q2avEqDI3c7XJALPcTYd8hMpWnRmw8/9pU
-  73TTqPnZsrZiasG3lfiWW4oxEQy3mouJEAEzrFZEfAwAA
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-4.tower-232.messagelabs.com!1630891286!231703!1
+	b=qx4qrBKVO39BO4hOn5Y91Ah45jaVuKHQIrhxXENENmW2bQmpHIMucL3zmxU/4jy/E
+	 T7CVq4nUz1CDTrUanid0cJ8PmlSmUoDXWw+fE1icI+7NX5Vq29tf8vEMjSgq3570oZ
+	 HoajvtnrWccOP7Xf+xaXMrArqu1fbpKqd21aZssjy/CLW1smLbJLWy8xqE7sgAqlnX
+	 /34rtJzS/vVPQRaonoKLlX9AjKE5yJluNxoK1KG8YQCVea6G3WiEZe+RkrpW0KOpiA
+	 bIW7sF2xiYsLoS8hHr3db3KbefNuVWw1XpBIuUbUxNJ1592xvECnMbvIjP8+B26zQA
+	 /t3Oj3FoX3fLg==
+Received: from [100.112.194.228] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-a.eu-west-1.aws.symcld.net id 9C/22-02979-FF875316; Mon, 06 Sep 2021 02:12:15 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupikeJIrShJLcpLzFFi42Kxs+GYovu/wjT
+  RYPYrVYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeNo+wq2gpkcFW9bbjA2MB5k72Lk4hASmMUk
+  0X55OyuEs5tR4unjW0AZTg42AV2Jc4/XgtkiAvoSS2fvYQaxhQU8JVobvgE1cHCwCKhIPGmrA
+  gnzCnhI3DvwnQnElhBQkJjy8D0zRFxQ4uTMJywgNrOAhMTBFy+YQVolBBQlZk+XhyivkHh9+B
+  LzBEaeWUg6ZiHpWMDItIrRIqkoMz2jJDcxM0fX0MBA19DQSNfQ0kjXyMBEL7FKN1EvtVS3PLW
+  4RNdQL7G8WK+4Mjc5J0UvL7VkEyMwiFIKDpzZwXjq9Qe9Q4ySHExKorwadqaJQnxJ+SmVGYnF
+  GfFFpTmpxYcYZTg4lCR4txUD5QSLUtNTK9Iyc4ABDZOW4OBREuG9UgaU5i0uSMwtzkyHSJ1iV
+  JQS53UtB0oIgCQySvPg2mBRdIlRVkqYl5GBgUGIpyC1KDezBFX+FaM4B6OSMG8YyBSezLwSuO
+  mvgBYzAS1ue2gCsrgkESEl1cC09trzqfnsU+MqrvB/v1Zx5rDwv18qm86InKpXvB+3ZHHc5rw
+  9ehpNQqH5c4sv9Kx13TZhxvlHbpJCW3wCwndxlPUn5B6I+D0l6cq5HbUea7ZM8n/ONqfyXaK2
+  lXOvxjp7H4PJp6Z/eP/H6FbJOrk9V0vnuf6SNjy/89Ybdbb76/RkpmVFq6W8/dO0RC3KS31ZU
+  Y0Ro5eHpebNp6o3Wy4Jvvq3J2vjNuNy1t6g7xw/X2cub+/4e9jr79/Gra3fOpnS3kSv4Nny1K
+  qf2y7sUukKbXHPF5rX/E7UMBS/3clvEnHL+NP0g1+meQksuc/3LiBPqNrGf+uWX92JlkGXmbi
+  3rpivlWHc8jvsZvRCwXsvlFiKMxINtZiLihMBDJonFh0DAAA=
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-10.tower-271.messagelabs.com!1630894335!227255!1
 X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 16230 invoked from network); 6 Sep 2021 01:21:26 -0000
+Received: (qmail 16236 invoked from network); 6 Sep 2021 02:12:15 -0000
 Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-4.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 6 Sep 2021 01:21:26 -0000
+  by server-10.tower-271.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 6 Sep 2021 02:12:15 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1861LPtq022037
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1862CAY0012895
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 6 Sep 2021 02:21:25 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
+	for <openembedded-devel@lists.openembedded.org>; Mon, 6 Sep 2021 03:12:15 +0100
+Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Mon, 6 Sep 2021 02:21:24 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
+ (TLS) id 15.0.1497.23; Mon, 6 Sep 2021 03:12:08 +0100
+From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-kiwisolver: upgrade 1.3.1 -> 1.3.2
-Date: Mon, 6 Sep 2021 09:21:17 +0800
-Message-ID: <1630891277-61511-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] wireshark: upgrade 3.4.7 -> 3.4.8
+Date: Sun, 5 Sep 2021 07:22:32 +0800
+Message-ID: <1630797752-44177-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
+X-Originating-IP: [10.167.225.35]
 X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-CI: fix building wheels on GHA 
-* ci: fix wheel build command
-* ci: remove references to submodules
-* ci: fix sdist command and remove Python 3.6 from the matrix
-* ci: slightly alter invocation
-* ci: disable emulation
-* ci: smaller matrix
-* ci: use a small matrix but with all python versions
-* ci: use manylinux 2010 for CPython 3.9+
-* ci: split again matrix per python version given how slow emulation is
-Fix also the artifact upload
-* ci: fix typo
-* ci: typo
-
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- ...python3-kiwisolver_1.3.1.bb => python3-kiwisolver_1.3.2.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-kiwisolver_1.3.1.bb => python3-kiwisolver_1.3.2.bb} (73%)
+ .../wireshark/{wireshark_3.4.7.bb => wireshark_3.4.8.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_3.4.7.bb => wireshark_3.4.8.bb} (97%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-kiwisolver_1.3.1.bb b/meta-python/recipes-devtools/python/python3-kiwisolver_1.3.2.bb
-similarity index 73%
-rename from meta-python/recipes-devtools/python/python3-kiwisolver_1.3.1.bb
-rename to meta-python/recipes-devtools/python/python3-kiwisolver_1.3.2.bb
-index fb66619dbd..cf14c49e6c 100644
---- a/meta-python/recipes-devtools/python/python3-kiwisolver_1.3.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-kiwisolver_1.3.2.bb
-@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/nucleic/kiwi"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://setup.py;endline=7;md5=e54bd74bd9d0a84ae3f8f6d21ada0ab4"
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.4.7.bb b/meta-networking/recipes-support/wireshark/wireshark_3.4.8.bb
+similarity index 97%
+rename from meta-networking/recipes-support/wireshark/wireshark_3.4.7.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_3.4.8.bb
+index fc360f6691..faf2a3ad1f 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.4.7.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.4.8.bb
+@@ -19,7 +19,7 @@ SRC_URI += " \
  
--SRC_URI[md5sum] = "81012578317ddcfa3daed806142f8fed"
--SRC_URI[sha256sum] = "950a199911a8d94683a6b10321f9345d5a3a8433ec58b217ace979e18f16e248"
-+SRC_URI[sha256sum] = "fc4453705b81d03568d5b808ad8f09c77c47534f6ac2e72e733f9ca4714aa75c"
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
  
- inherit pypi setuptools3
+-SRC_URI[sha256sum] = "6c4cee51ef997cb9d9aaee84113525a5629157d3c743d7c4e320000de804a09d"
++SRC_URI[sha256sum] = "58a7fa8dfe2010a8c8b7dcf66438c653e6493d47eb936ba48ef49d4aa4dbd725"
+ 
+ PE = "1"
  
 -- 
 2.25.1
