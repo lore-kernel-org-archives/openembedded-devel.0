@@ -1,89 +1,194 @@
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com [209.85.222.181])
- by mx.groups.io with SMTP id smtpd.web10.10819.1630855971477149725
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.web09.13419.1630869479820933673
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Sep 2021 08:32:51 -0700
+ Sun, 05 Sep 2021 12:17:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=MiScpg7J;
- spf=pass (domain: gmail.com, ip: 209.85.222.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f181.google.com with SMTP id t4so4372466qkb.9
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Sep 2021 08:32:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=mx6ICGgV;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id j10-20020a17090a94ca00b00181f17b7ef7so2962648pjw.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Sep 2021 12:17:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=3iEGgazAF8onNDSZPWXq9+ODuLa+LyeG9fHIQQBBOs8=;
-        b=MiScpg7JU5U9V5r9a4D+vIRJqR0BJcB4KQCSvqzMkrQKOLCpsXpl3WVL9H+oyZQtlV
-         jRgfTakhYpy5fpydAFz+U7A81oUwoSnfM7uqsXd2eWD8c17p7ZioZmuXAdGPM4s0KRoi
-         m43XulZzEqxkbwN/PuQuRm6cRI0ErbvU0QWdGt2Jc0MVUDB7eOg9qf7zXFtBgIG8uJ9q
-         i6IHw5tl4v8lYciOBb3zGLxbDGdQq9SVWHypdrKSzM+4jAyINXx/h0IN5nmewjzvWopG
-         gBSdCl4QJizww4Fz1CzV84koBghaJy3qgg58iIdOcpbLhkOf+ATJLjx20s9CNPHMdPXY
-         j/2g==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=zaDWleZ2JsZ2oWnEpVZlyEK6tG8dUxW858IviX2J3YA=;
+        b=mx6ICGgV40aG/RdW+BHpOHl/AIfoOzWVvRwrgn35i+hvCFrh885c+eVaeEz/viDRiy
+         oWMOrFovmNxX+LsBxW52pc0OkCX7TGiB3OFG5rwaozBK+w3TQqMK8ETRpHqCoAsCumv8
+         JszRq3LDWLIJg6qeHinNuacUrN8tGd9rDZldkOpKJm1lNehyHJNziTyxJ8ZSU4uEYDyW
+         mjGcqdLoANNEdo8wpZsHzepYRQAJdCJtH2MdsLXUeHAN5ZatRv90OypmRjHpSlTOxa9u
+         z2L+EMVS2tvxX70LFqpmvDHpzy+qoei70k4XNilz2qE9/vZUfcfqM4AEJPM8mRhE0RE2
+         7L8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=3iEGgazAF8onNDSZPWXq9+ODuLa+LyeG9fHIQQBBOs8=;
-        b=EOSRjeVvO5YKLj9GHzUNpVkbMlAeBFFSrxU/ULYHQ+GkyLWdKp/86792xaILrjeWjv
-         GfHou8MzdYJIWM1x8LMCBwWyzH16WsHMRWNhlWly2GfE1soLdRbdkYOPOejfgjYnOCbW
-         godc5nxqV8lLL977cSRvKw0hgmo2R+d8MGUD8WmwUYBko3jJl4H0vNo7Hv4t6abLFjA4
-         XBtom9Mclk6tuzdVVy6dDtUTRiXtAqUm98dCc2BdvWN9h1nkDtumbs3Km2fWO93sApZw
-         vgs3NHlgy1f+vnHY6DcDrABXdFtwTJKgflc4ZV60T5sjMKJpR0JZBoNUvkTsjyi3PdwR
-         xvhQ==
-X-Gm-Message-State: AOAM5300pVtAIoALlFBnJNqTk+pbRTh1qL9/6WoGS+Yoq/B0ZwYE311L
-	gpBk0eMLIg9ZMKDEwzCSFRU91zpJEdfaZJqE5SD+L6DsNaY=
-X-Google-Smtp-Source: ABdhPJwXc0sTed0eXDjZfpJ7ZKWhsSU2Xjwzgo3i71EX55YosdP7douVFYTR7ZlOxbqD6wC+smXp4JfRo9L6V/SSTGg=
-X-Received: by 2002:a37:ac19:: with SMTP id e25mr7226161qkm.47.1630855970571;
- Sun, 05 Sep 2021 08:32:50 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=zaDWleZ2JsZ2oWnEpVZlyEK6tG8dUxW858IviX2J3YA=;
+        b=GcNFHgeOIpY1T02SLFVkhjExdwgKjpjujn99N/Ka9cDV+LMMA78sIy4WFUnIyv7+Zc
+         cdmXOV5SxlUMYbtR7bBKvXiKTErYN/H9WV5LMuYghnpjBjdqKxfaTsJ8FlQI6WD8Tx/t
+         ZNdKVNd4cO3HFCie/OGvBPwPT8bR05R1+p+YBxsEHqYDd8g0DCw3f8UcxNmsga9eed2K
+         BYwlRxLlxbfJS4/P+FXX9Kmmru7kbttKIUeDd1gCRTU5BZIygOo6Mej391njh6WvLW2s
+         faIzE8ZMsergOXe9C1xldgXiU3VRtMhx0xBoTZ07mR1R1LWCtV+teA4n4lXDxGCqTX/i
+         61+g==
+X-Gm-Message-State: AOAM531pM2Cb2QdfRMJaNYZ2zGk9Fu+Om0Lpfc7KqnZVGQBU2fy8Dg0z
+	B7L4J1LkQ/KsJszxW6vyC8smzZ79qPg=
+X-Google-Smtp-Source: ABdhPJzMIMZ+awQLhnEiff12h03q0c1vMmaiJbn63kgRnWfDxX8G9lXVpth05EgtLrXSrZ1qdO7r/Q==
+X-Received: by 2002:a17:902:bd88:b0:130:1c3d:4c02 with SMTP id q8-20020a170902bd8800b001301c3d4c02mr7777585pls.80.1630869479127;
+        Sun, 05 Sep 2021 12:17:59 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:741f:21b:dc9f:801])
+        by smtp.gmail.com with ESMTPSA id 68sm5184414pjz.0.2021.09.05.12.17.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 05 Sep 2021 12:17:58 -0700 (PDT)
+From: "Armin Kuster" <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Gianfranco <costamagna.gianfranco@gmail.com>,
+	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	Gianfranco Costamagna <locutusofborg@debian.org>,
+	Khem Raj <raj.khem@gmail.com>,
+	Scott Murray <scott.murray@konsulko.com>
+Subject: [meta-oe][hardknott][PATCH] dlt-daemon: update from 2.18.6 to 2.18.7
+Date: Sun,  5 Sep 2021 12:17:57 -0700
+Message-Id: <20210905191757.2080802-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20210904234839.2689048-1-raj.khem@gmail.com> <f02146dd4ad14777a0352d28d72d463a@axis.com>
-In-Reply-To: <f02146dd4ad14777a0352d28d72d463a@axis.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sun, 5 Sep 2021 08:32:23 -0700
-Message-ID: <CAMKF1spKMDHZcZDyc4LRXZ6Z_Ox91JjVaaH0hnhyGr3NFnKARA@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH] toybox-inittab: Use 0BSD for LIC_FILES_CHKSUM
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, Sep 5, 2021 at 1:43 AM Peter Kjellerstedt
-<peter.kjellerstedt@axis.com> wrote:
->
-> > -----Original Message-----
-> > From: Khem Raj <raj.khem@gmail.com>
-> > Sent: den 5 september 2021 01:49
-> > To: openembedded-devel@lists.openembedded.org
-> > Cc: Khem Raj <raj.khem@gmail.com>; Peter Kjellerstedt
-> > <peter.kjellerstedt@axis.com>
-> > Subject: [meta-oe][PATCH] toybox-inittab: Use 0BSD for LIC_FILES_CHKSUM
-> >
-> > BSD-0-Clause has been deleted from common licenses
-> >
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > Cc: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-> > ---
-> >  meta-oe/recipes-core/toybox/toybox-inittab_0.8.2.bb | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-oe/recipes-core/toybox/toybox-inittab_0.8.2.bb b/meta-
-> > oe/recipes-core/toybox/toybox-inittab_0.8.2.bb
-> > index b91a1d864e..21d4dcc19f 100644
-> > --- a/meta-oe/recipes-core/toybox/toybox-inittab_0.8.2.bb
-> > +++ b/meta-oe/recipes-core/toybox/toybox-inittab_0.8.2.bb
-> > @@ -1,6 +1,6 @@
-> >  SUMMARY = "Toybox Inittab Configuration"
-> >  LICENSE = "BSD-0-Clause"
->
-> Might as well change to use 0BSD for LICENSE as well then.
->
-right, staged this change as well on master-next
+From: Gianfranco <costamagna.gianfranco@gmail.com>
 
-> > -LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/BSD-0-Clause;md5=81eeb0083e31f11ab1e33ded846d521c"
-> > +LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/0BSD;md5=f667a3c3830a55a17ec3067709f4526c"
-> >
-> >  # Unpack to ${S}/orig
-> >  #
-> > --
-> > 2.33.0
->
-> //Peter
->
+- add an upstream proposed patch 317.patch to fix a build failure with enab=
+led systemd binding
+
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 01fa60898c2fe65f327bea2f84aaca00aef3f371)
+[Stable version, bug fix only]
+Signed-off-by: Scott Murray <scott.murray@konsulko.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../dlt-daemon/dlt-daemon/317.patch           | 43 +++++++++++++++++++
+ ...-daemon_2.18.6.bb =3D> dlt-daemon_2.18.7.bb} |  7 +--
+ 2 files changed, 47 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/317.patch
+ rename meta-oe/recipes-extended/dlt-daemon/{dlt-daemon_2.18.6.bb =3D> dlt-=
+daemon_2.18.7.bb} (93%)
+
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/317.patch b/met=
+a-oe/recipes-extended/dlt-daemon/dlt-daemon/317.patch
+new file mode 100644
+index 0000000000..fe40334b65
+--- /dev/null
++++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/317.patch
+@@ -0,0 +1,43 @@
++Origin: https://github.com/GENIVI/dlt-daemon/pull/317
++From 55d31216823841a1547fe261cdf8e3b1002d5f94 Mon Sep 17 00:00:00 2001
++From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
++Date: Thu, 1 Jul 2021 12:58:20 +0200
++Subject: [PATCH] dlt-control-common.c: Fix build failure due to out-of-bou=
+nd
++ write -Werror=3Dstringop-truncation
++
++cd /build/dlt-daemon-2.18.7/obj-x86_64-linux-gnu/src/console/logstorage &&=
+ /usr/bin/cc -DCONFIGURATION_FILES_DIR=3D\"/etc\" -DDLT_DAEMON_USE_FIFO_IPC=
+ -DDLT_LIB_USE_FIFO_IPC -DDLT_NETWORK_TRACE_ENABLE -DDLT_SYSTEMD_ENABLE -DD=
+LT_SYSTEMD_JOURNAL_ENABLE -DDLT_UNIT_TESTS -DDLT_USER_IPC_PATH=3D\"/tmp\" -=
+DDLT_USE_IPv6 -DEXTENDED_FILTERING -D_GNU_SOURCE -I/build/dlt-daemon-2.18.7=
+ -I/build/dlt-daemon-2.18.7/obj-x86_64-linux-gnu/include/dlt -I/build/dlt-d=
+aemon-2.18.7/include/dlt -I/build/dlt-daemon-2.18.7/src/shared -I/build/dlt=
+-daemon-2.18.7/src/core_dump_handler -I/build/dlt-daemon-2.18.7/src/offline=
+logstorage -I/build/dlt-daemon-2.18.7/src/lib -I/build/dlt-daemon-2.18.7/sr=
+c/daemon -I/build/dlt-daemon-2.18.7/src/console -I/build/dlt-daemon-2.18.7/=
+src/gateway -I/build/dlt-daemon-2.18.7/systemd/3rdparty -g -O2 -ffile-prefi=
+x-map=3D/build/dlt-daemon-2.18.7=3D. -fstack-protector-strong -Wformat -Wer=
+ror=3Dformat-security -Wdate-time -D_FORTIFY_SOURCE=3D2   -Werror -std=3Dgn=
+u99 -Wall -Wextra -Wno-variadic-macros -Wno-strict-aliasing -o CMakeFiles/d=
+lt-logstorage-ctrl.dir/__/dlt-control-common.c.o -c /build/dlt-daemon-2.18.=
+7/src/console/dlt-control-common.c
++make[3]: Leaving directory '/build/dlt-daemon-2.18.7/obj-x86_64-linux-gnu'
++In file included from /usr/include/string.h:495,
++                 from /build/dlt-daemon-2.18.7/src/console/dlt-control-com=
+mon.c:56:
++In function 'strncpy',
++    inlined from 'dlt_json_filter_load' at /build/dlt-daemon-2.18.7/src/co=
+nsole/dlt-control-common.c:716:13:
++/usr/include/x86_64-linux-gnu/bits/string_fortified.h:106:10: error: '__bu=
+iltin_strncpy' specified bound 4 equals destination size [-Werror=3Dstringo=
+p-truncation]
++  106 |   return __builtin___strncpy_chk (__dest, __src, __len, __bos (__d=
+est));
++      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
+~~~~~
++In function 'strncpy',
++    inlined from 'dlt_json_filter_load' at /build/dlt-daemon-2.18.7/src/co=
+nsole/dlt-control-common.c:721:13:
++/usr/include/x86_64-linux-gnu/bits/string_fortified.h:106:10: error: '__bu=
+iltin_strncpy' specified bound 4 equals destination size [-Werror=3Dstringo=
+p-truncation]
++  106 |   return __builtin___strncpy_chk (__dest, __src, __len, __bos (__d=
+est));
++      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
+~~~~~
++
++Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
++Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
++---
++ src/console/dlt-control-common.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/src/console/dlt-control-common.c b/src/console/dlt-control-co=
+mmon.c
++index 8a9d29f0..f58d8268 100644
++--- a/src/console/dlt-control-common.c
+++++ b/src/console/dlt-control-common.c
++@@ -671,8 +671,8 @@ DltReturnValue dlt_json_filter_load(DltFilter *filter,=
+ const char *filename, int
++     struct json_object *j_payload_max;
++     enum json_tokener_error jerr;
++=20
++-    char app_id[DLT_ID_SIZE] =3D "";
++-    char context_id[DLT_ID_SIZE] =3D "";
+++    char app_id[DLT_ID_SIZE + 1] =3D "";
+++    char context_id[DLT_ID_SIZE + 1] =3D "";
++     int32_t log_level =3D 0;
++     int32_t payload_max =3D INT32_MAX;
++     int32_t payload_min =3D 0;
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.6.bb b/met=
+a-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.7.bb
+similarity index 93%
+rename from meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.6.bb
+rename to meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.7.bb
+index b3cfb4709f..a16e810be6 100644
+--- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.6.bb
++++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.7.bb
+@@ -12,13 +12,14 @@ SECTION =3D "console/utils"
+ LICENSE =3D "MPLv2"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D8184208060df880fe3137b93eb88aee=
+a"
+=20
+-DEPENDS =3D "zlib gzip-native"
++DEPENDS =3D "zlib gzip-native json-c"
+=20
+ SRC_URI =3D "git://github.com/GENIVI/${BPN}.git;protocol=3Dhttps \
+     file://0002-Don-t-execute-processes-as-a-specific-user.patch \
+     file://0004-Modify-systemd-config-directory.patch \
++    file://317.patch \
+ "
+-SRCREV =3D "22715aeceaa81ace2c832312529bde3a42d0814f"
++SRCREV =3D "24d197214bfdcec7430d31b42e5c87df27287aaf"
+=20
+ S =3D "${WORKDIR}/git"
+=20
+@@ -44,7 +45,7 @@ PACKAGECONFIG[dlt-console] =3D "-DWITH_DLT_CONSOLE=3DON,-=
+DWITH_DLT_CONSOLE=3DOFF,,dlt-
+=20
+ inherit autotools gettext cmake systemd
+=20
+-EXTRA_OECMAKE +=3D "-DSYSTEMD_UNITDIR=3D${systemd_system_unitdir}"
++EXTRA_OECMAKE +=3D "-DWITH_EXTENDED_FILTERING=3DON -DSYSTEMD_UNITDIR=3D${s=
+ystemd_system_unitdir}"
+=20
+ PACKAGES +=3D "${PN}-systemd"
+ SYSTEMD_PACKAGES =3D "${PN} ${PN}-systemd"
+--=20
+2.25.1
+
