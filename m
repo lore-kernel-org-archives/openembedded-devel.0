@@ -1,60 +1,59 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.3])
- by mx.groups.io with SMTP id smtpd.web10.19556.1630917936730883208
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.2])
+ by mx.groups.io with SMTP id smtpd.web12.19462.1630917948515063295
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Sep 2021 01:45:37 -0700
+ Mon, 06 Sep 2021 01:45:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=wP2jDGh6;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.3, mailfrom: zhengrq.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ICIleM78;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.2, mailfrom: zhengrq.fnst@fujitsu.com)
 Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1630917934; i=@fujitsu.com;
-	bh=gAJuslYgFtQI6Cgd4B+cGlgm4WAiNEllNY5wknBj9dw=;
+	s=170520fj; t=1630917946; i=@fujitsu.com;
+	bh=VuxBWzQ/0jLnCDv4OZSHRL6utLupNTYaQWSWAIlLIeo=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=wP2jDGh6ki0454R7kXhQ4jb672+BT0mGLwJIByJyBL6Rk392TG6lm5jOvtyLEIh9x
-	 PC/wxc3gltgzl+0FWmOs9IfCwhkct/hKpP2waypHlURSnB+QYY19zM/1DBRnUXxsow
-	 BKM0vyprtMFJtL8cKpO18nNHzAru6KNgS76vcnaQCp/gTxFlBZj1vmXvnAYDDbLzFF
-	 W80QkXaGTHAP1v9Hco/GiMWjnWbxEXA2kiWESI7Gs6lwy5o0nOMtpWziH+x4oRlMju
-	 ZMWjzCgrdHt3x/AWof5RM+kB7tf/67gs1Zy6DBwUOEEfKodgN7gtrJ/jaO46tZRluj
-	 BwMMG/pEEcmMQ==
-Received: from [100.113.2.26] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-a.eu-central-1.aws.symcld.net id CE/FB-32481-E25D5316; Mon, 06 Sep 2021 08:45:34 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrHIsWRWlGSWpSXmKPExsViZ8MxVVf3qmm
-  iwbb1ZhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aTt88YCzoVKk4dPM7ewNgt08XIxSEkMItJ
-  ovdQP2MXIyeQs5tR4sT5MBCbTUBX4tzjtewgtoiAvsTS2XuYQWxhAXuJK9e3gtksAioSm8++Z
-  Opi5ODgFfCQOPtbFSQsIaAgMeXhe7ASXgFBiZMzn7CA2MwCEhIHX7xgBimXEFCUmD1dHqK8Qu
-  L14UvMExh5ZiHpmIWkYwEj0ypGy6SizPSMktzEzBxdQwMDXUNDY10DXSNTI73EKt1EvdRS3eT
-  UvJKiRKCsXmJ5sV5xZW5yTopeXmrJJkZgEKUUMvzZwbj6zQe9Q4ySHExKorzPDpomCvEl5adU
-  ZiQWZ8QXleakFh9ilOHgUJLgvXgJKCdYlJqeWpGWmQMMaJi0BAePkghv7GWgNG9xQWJucWY6R
-  OoUoyvHu5+LFzFzvFm7BEi23bsLJGcuOLiameN++6HVzEIsefl5qVLivIdBmgVAmjNK8+BGw6
-  LxEqOslDAvIwMDgxBPQWpRbmYJqvwrRnEORiVh3v8gU3gy80rgLngFdBwT0HFtD01AjitJREh
-  JNTA1OmTNUbGcsSDl6+yEK/dlbz8Uf7f89n7tQvFVLGerKv9xhDwNfn4laCPTfT2P+G2rfqds
-  P/jf7zZPq/31LVxdK5zqTZrfsvklPmg7L595LIOvo89wZb1nhZDRAfXjx1oCTO58OmEg9Exhf
-  mfH/vl8nqH+3ql6N5LMrVQTFNgid347cN9ANWHP9K01M0W8b+rxRJvMmrpuq8AtzhnTVjKZ+r
-  HPqDyt0bZb0+TG8WWNKUbHCo8ryHh6X1f4oG0oZiDN9nz53FOPO3nfHNn2M8v/5ZwMo/NP+DW
-  WzTi+VLcr8+S6GI1NApsu13H2OqydJv8ivKAm5LGMUkBlDFPw+g1t79k5a12OBWrslfseUaHE
-  UpyRaKjFXFScCADb5Rv/QQMAAA==
+	b=ICIleM78dcgzGv6pWDO6OTiPcjSqFnKmrgjKtlhEsSSpzr26ElmkOHtZjkjKLqVKA
+	 MdSWYXg63s0xeR35FWjrY5AFnaLl6f5EDJKFNyclCpuMzmg6hvcxS2lnlYPKsdsdWr
+	 iAoXousIJF/UtobQqQIqxSy31+joLMl4poDH0DcvddOQ8d96NFSthcgPoriBb+QD+h
+	 h7ZKMFaeaqWYNOI70+FrLQ09Qn+Yq6iickSw64QtRWx+MgDtcxx/uTCE0U1glZ4KZd
+	 Foe6YqjleOdsXK9jWC3zbd7QHu+87cb0W0vf5p8lt8KrREjuheMR+1xx65aRy8mh85
+	 pyVwaJL/9lP6g==
+Received: from [100.113.3.182] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-a.eu-central-1.aws.symcld.net id 8F/6D-23460-A35D5316; Mon, 06 Sep 2021 08:45:46 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprLIsWRWlGSWpSXmKPExsViZ8MRqmt11TT
+  R4OJdVYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaN1yWT2gm8cFWdXt7M0MK7m6GLk4hASmMUk
+  sf3yTmYIZzejxKflr9i7GDk52AR0Jc49XgtmiwjoSyydvYcZxBYW8JFY2jWHDcRmEVCR+HD6J
+  xOIzSvgIbHt5C2wuISAgsSUh++ZIeKCEidnPmEBsZkFJCQOvngBFOcAqlGUmD1dHqK8QuL14U
+  vMExh5ZiHpmIWkYwEj0ypGi6SizPSMktzEzBxdQwMDXUNDY10jXVNDvcQq3US91FLd5NS8kqJ
+  EoKReYnmxXnFlbnJOil5easkmRmAYpRQyGe9gvPb6g94hRkkOJiVR3mcHTROF+JLyUyozEosz
+  4otKc1KLDzHKcHAoSfBevASUEyxKTU+tSMvMAYY0TFqCg0dJhDf2MlCat7ggMbc4Mx0idYrRm
+  OPy9XmLmDlOrlqyiFmIJS8/L1VKnPcwSKkASGlGaR7cIFisXWKUlRLmZWRgYBDiKUgtys0sQZ
+  V/xSjOwagkzPsfZApPZl4J3L5XQKcwAZ3S9tAE5JSSRISUVANTheOxjufuvbqyj+3C9me6Gzz
+  Jz/+y8N6hXr22qTkX3vjozas9GLf8Xqemv5bgdRXve2mHprX47ZmwtVHr4MxmDZs/MxTUln43
+  r6hmman/edW2IIutyZ+vHLuwt14p1Prcmbo79R+WX/5fzHn61f6okwqnd0lXpfK7yETePqdt4
+  +d/JzNns8TbxPP2hTv/fKlh2dhj9/i9i27v685al23tG147rTi2O33lkc3iWZdTp62/oK6Yqj
+  xdJbF5n58Vp0hKx2PfYM5TBkxbWCTO83/uufvBbuMHlsuv72ZNl5FpuHLjuK3D07cf/574FZK
+  5cXnGVBnXQwu54me88ivf2vG93O+M5okViokyBqwrZ7DoK7EUZyQaajEXFScCAC/mEj8wAwAA
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-8.tower-228.messagelabs.com!1630917933!287201!1
-X-Originating-IP: [62.60.8.149]
+X-Msg-Ref: server-4.tower-226.messagelabs.com!1630917946!234584!1
+X-Originating-IP: [62.60.8.85]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 27971 invoked from network); 6 Sep 2021 08:45:33 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-8.tower-228.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 6 Sep 2021 08:45:33 -0000
+Received: (qmail 9033 invoked from network); 6 Sep 2021 08:45:46 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-4.tower-226.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 6 Sep 2021 08:45:46 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1868jX2O021726
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1868jksp023911
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 6 Sep 2021 09:45:33 +0100
+	for <openembedded-devel@lists.openembedded.org>; Mon, 6 Sep 2021 09:45:46 +0100
 Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Mon, 6 Sep 2021 09:45:31 +0100
+ (TLS) id 15.0.1497.23; Mon, 6 Sep 2021 09:45:44 +0100
 From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] avro-c: upgrade 1.9.2 -> 1.10.2
-Date: Sun, 5 Sep 2021 13:55:57 +0800
-Message-ID: <1630821357-48968-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] xf86-video-nouveau: upgrade 1.0.16 -> 1.0.17
+Date: Sun, 5 Sep 2021 13:56:13 +0800
+Message-ID: <1630821373-49004-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.35]
@@ -62,113 +61,26 @@ X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-0001-cmake-Use-GNUInstallDirs-instead-of-hard-coded-paths.patch
-Removed since this is included in 1.10.2
-
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- ...tallDirs-instead-of-hard-coded-paths.patch | 70 -------------------
- .../{avro-c_1.9.2.bb => avro-c_1.10.2.bb}     |  5 +-
- 2 files changed, 2 insertions(+), 73 deletions(-)
- delete mode 100644 meta-oe/recipes-support/avro/avro-c/0001-cmake-Use-GNUInstallDirs-instead-of-hard-coded-paths.patch
- rename meta-oe/recipes-support/avro/{avro-c_1.9.2.bb => avro-c_1.10.2.bb} (66%)
+ ...86-video-nouveau_1.0.16.bb => xf86-video-nouveau_1.0.17.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-driver/{xf86-video-nouveau_1.0.16.bb => xf86-video-nouveau_1.0.17.bb} (77%)
 
-diff --git a/meta-oe/recipes-support/avro/avro-c/0001-cmake-Use-GNUInstallDirs-instead-of-hard-coded-paths.patch b/meta-oe/recipes-support/avro/avro-c/0001-cmake-Use-GNUInstallDirs-instead-of-hard-coded-paths.patch
-deleted file mode 100644
-index 6496b92dfe..0000000000
---- a/meta-oe/recipes-support/avro/avro-c/0001-cmake-Use-GNUInstallDirs-instead-of-hard-coded-paths.patch
-+++ /dev/null
-@@ -1,70 +0,0 @@
--From f24f863f3a8ca86f44123a58613f62c3b511da1e Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 19 Dec 2019 18:23:41 -0800
--Subject: [PATCH] cmake: Use GNUInstallDirs instead of hard-coded paths
--
--This ensures that it can be built on platforms where libdir is not
--/usr/lib e.g. ppc64
--
--Upstream-Status: Submitted [https://github.com/apache/avro/pull/749]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- lang/c/CMakeLists.txt     |  2 +-
-- lang/c/src/CMakeLists.txt | 16 +++++++++-------
-- 2 files changed, 10 insertions(+), 8 deletions(-)
--
--diff --git a/lang/c/CMakeLists.txt b/lang/c/CMakeLists.txt
--index 11cbf018e..6c8d7aaf3 100644
----- a/lang/c/CMakeLists.txt
--+++ b/lang/c/CMakeLists.txt
--@@ -16,7 +16,7 @@
-- # specific language governing permissions and limitations
-- # under the License.
-- #
---cmake_minimum_required(VERSION 2.4)
--+cmake_minimum_required(VERSION 3.1)
-- project(AvroC)
-- enable_testing()
-- 
--diff --git a/lang/c/src/CMakeLists.txt b/lang/c/src/CMakeLists.txt
--index 6f5659750..c1761c8de 100644
----- a/lang/c/src/CMakeLists.txt
--+++ b/lang/c/src/CMakeLists.txt
--@@ -106,17 +106,19 @@ install(DIRECTORY
--         DESTINATION include
--         FILES_MATCHING PATTERN "*.h")
-- 
--+include(GNUInstallDirs)
--+
-- if (WIN32)
-- install(TARGETS avro-static
---        RUNTIME DESTINATION bin
---        LIBRARY DESTINATION lib
---        ARCHIVE DESTINATION lib
--+	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
--+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
--+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
--        )
-- else(WIN32)
-- install(TARGETS avro-static avro-shared
---        RUNTIME DESTINATION bin
---        LIBRARY DESTINATION lib
---        ARCHIVE DESTINATION lib
--+	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
--+	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
--+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
--        )
-- endif(WIN32)
-- 
--@@ -126,7 +128,7 @@ set(prefix ${CMAKE_INSTALL_PREFIX})
-- set(VERSION ${AVRO_VERSION})
-- configure_file(avro-c.pc.in avro-c.pc)
-- install(FILES ${CMAKE_CURRENT_BINARY_DIR}/avro-c.pc
---        DESTINATION lib/pkgconfig)
--+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
-- 
-- add_executable(avrocat avrocat.c)
-- target_link_libraries(avrocat avro-static)
---- 
--2.24.1
--
-diff --git a/meta-oe/recipes-support/avro/avro-c_1.9.2.bb b/meta-oe/recipes-support/avro/avro-c_1.10.2.bb
-similarity index 66%
-rename from meta-oe/recipes-support/avro/avro-c_1.9.2.bb
-rename to meta-oe/recipes-support/avro/avro-c_1.10.2.bb
-index 0642179fb3..b86bfead76 100644
---- a/meta-oe/recipes-support/avro/avro-c_1.9.2.bb
-+++ b/meta-oe/recipes-support/avro/avro-c_1.10.2.bb
-@@ -7,10 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=6d502b41f76179fc84e536236f359cae"
+diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.16.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.17.bb
+similarity index 77%
+rename from meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.16.bb
+rename to meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.17.bb
+index fb24c63847..d9d09a242f 100644
+--- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.16.bb
++++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.17.bb
+@@ -15,5 +15,4 @@ REQUIRED_DISTRO_FEATURES += "opengl"
  
- DEPENDS = "jansson zlib xz"
+ COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
  
--BRANCH = "branch-1.9"
--SRCREV = "bf20128ca6138a830b2ea13e0490f3df6b035639"
-+BRANCH = "branch-1.10"
-+SRCREV = "8111cdc35430ff68dcb644306362859de40999d9"
- SRC_URI = "git://github.com/apache/avro;branch=${BRANCH} \
--           file://0001-cmake-Use-GNUInstallDirs-instead-of-hard-coded-paths.patch;patchdir=../../ \
-           "
- 
- S = "${WORKDIR}/git/lang/c"
+-SRC_URI[md5sum] = "ecd9be89d853301167e3d564c49f7a8e"
+-SRC_URI[sha256sum] = "304060806415579cdb5c1f71f1c54d11cacb431b5552b170decbc883ed43bf06"
++SRC_URI[sha256sum] = "499322e27a55c8183166bf2dd1e47d085eb834143e0d7036baba8427b90c156b"
 -- 
 2.25.1
 
