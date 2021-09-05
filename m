@@ -1,50 +1,50 @@
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
- by mx.groups.io with SMTP id smtpd.web10.13290.1630869684048439114
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web10.13291.1630869686319698770
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Sep 2021 12:21:24 -0700
+ Sun, 05 Sep 2021 12:21:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=D5CFKif4;
- spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f50.google.com with SMTP id u13-20020a17090abb0db0290177e1d9b3f7so2973216pjr.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Sep 2021 12:21:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ZRV7el9k;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id w7so4495137pgk.13
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Sep 2021 12:21:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=RMy03Gq5wm63HDhEg68uOwW5QVm043SV9TLfEZYwT8Q=;
-        b=D5CFKif4dfw03VzlNJmatewZQI6zfLdRFa70mKsfrf8S3dTK37L9pUthi42Pjs19y9
-         INDoz/J+0gMzRFLGNrr3sPOH9YBdt0hrzg3CXIRP/QinI6lK5zYJWSwTiWF5+06kRiCS
-         M/p8WyJw478SeY02iKlzixRW4zeMxwdev55npnr8gNtxVxX8AKiP6keKcTQd45tISUNm
-         xbLcgiuypcuvKCkgPNEqhBDc9Yzc+ssZf7vNRP1e+iEhJyQUNWs28wFAXDJQkIhVf13Y
-         JQkOK2+vkteD9suWOU3jwnI9Y2McBkeActPiVpa6f6eeb3dsL9/kdXpDH0pSbeS8T/Lo
-         QawQ==
+        bh=bX0wEtqrs7qwAnbdzRqPoeLBcJdfXpNUjXa8bVUqOrY=;
+        b=ZRV7el9kDWLqkxAtknfnAz8O1JrlMx/FjwZMV6xKp+CCzMvsSvpdCoaG28Kyi2WsaM
+         ANXGTcK1SsEIyA49hezjecACNmrN7aV926gquLNVRkZMXN0qvyxbytP/SZqGD+CuWEpI
+         ttlrLgykJ6mN0miaVkBQ0qbd0hqezcTpCKt4kRo2WIVFRJxYtHJvc9ojo8srQwA+fXmn
+         lSq09qUeI+ep7DQQtTMF6r2MM7t5dNv7A3Mn3vmhe39XRBbYC0YxEtyl+a0/U/QkAnP1
+         4xOdNaeTj1DRnGtZaKocLutn3c9syWZ0zIB72N0EqGi5rx3NZDIeAYrk1h3xSjgpOKsc
+         5Elg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=RMy03Gq5wm63HDhEg68uOwW5QVm043SV9TLfEZYwT8Q=;
-        b=NRZvNTRb2kMC2ktTJUsBIePa98H7bRu0caeq+hLm2dtLeZGRD4oeCCWA21d3KhkYJ4
-         GupfGzr2uY4N4JckJ9MwqFlO/lmiiRvziXLHt1cc5JNEPglmUUbQN6RrvtGt7zCjKiNP
-         EiRDdCbuc3OeMStfvlN95O9MVPdsvbJUaxQitnXFWkSd2JuH3TPM1Lgd16XGPWBVbhfk
-         bvI+BdP8k30xrKDLZgFZrXnO5wVROrb73T3OE+VHysJ9nkHTmXNSOsAV7jbWSbWrjER4
-         dgvPYaI0lo/rGEITM2VAL0yA9yejmpxJN9hdAbO7D9NPyYsTkjLK7sfKtVaeQ99Jtayg
-         wFwQ==
-X-Gm-Message-State: AOAM533t/kvJa+bkO3HyEbN9bgD2zPbX4Qn3/Zl37sLtfCSQxGU46QLX
-	XH4cy1Fjxu3U3xLLCIyLmhWfb9wTCeA=
-X-Google-Smtp-Source: ABdhPJwf1I9sxBC/U+MX9/LK7AHrlcJ6DsmWeglCBGEnoZGUVz5/Om7uv42uU8xLTalFTZCJ4CLnQg==
-X-Received: by 2002:a17:90a:7185:: with SMTP id i5mr10292516pjk.236.1630869681887;
-        Sun, 05 Sep 2021 12:21:21 -0700 (PDT)
+        bh=bX0wEtqrs7qwAnbdzRqPoeLBcJdfXpNUjXa8bVUqOrY=;
+        b=QRdqlLuAidVL05UtL8HoNg6QLAJTg7RZ9KBwRTpupdvYpdQnTgRatmQfU9Bjp5SoH0
+         mp7r2ZelJPpVhxibxKdL9r2WRp1kNnxJhKiqFSaRmxQmeFBc7FG6GZI7JSGPSb0n9HNX
+         l55grSzLM3wKjNKKTuqRNTy/DXBjpMWK0ar81kXK95Js7cFtl1e7YvryQAYNDJVWyrfe
+         2841Bn7p+DHXFMXIsRDekXrhgxUHJjB5WsKojuMpEUlR2SAJXYKBSyt+b252snk+OZMn
+         BIvHWY/Cw/7qAx534maRpCKJFCFrG4TwJ8gDTl0tXCMbrZ7cL9EMnNsK+/PBKIRl/wPb
+         GNpQ==
+X-Gm-Message-State: AOAM532PoziKzjkyOThWAdGIn2JwCUEWTFr2ytEIVoBhxmmSVfN9q8SD
+	sQLYle02ro58JKPOAXOVLWNODXXB8V4=
+X-Google-Smtp-Source: ABdhPJwH5Ivu1hzDBvmyrhQ44Lx/nqauGK3DjXnzyqQJoyMbJSUwujMs2/ee+P+UU89qcnMUMtbgtA==
+X-Received: by 2002:a65:6658:: with SMTP id z24mr9042394pgv.266.1630869684332;
+        Sun, 05 Sep 2021 12:21:24 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:741f:21b:dc9f:801])
-        by smtp.gmail.com with ESMTPSA id b17sm6207128pgl.61.2021.09.05.12.21.18
+        by smtp.gmail.com with ESMTPSA id b17sm6207128pgl.61.2021.09.05.12.21.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Sep 2021 12:21:20 -0700 (PDT)
+        Sun, 05 Sep 2021 12:21:23 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Armin Kuster <akuster@mvista.com>
-Subject: [PATCH 8/8] nss: Two Security fixes CVE-2020-6829 and 12400
-Date: Sun,  5 Sep 2021 12:21:11 -0700
-Message-Id: <20210905192112.2081037-8-akuster808@gmail.com>
+Subject: [meta-oe][hardknott][PATCH] nss: Two Security fixes CVE-2020-6829 and 12400
+Date: Sun,  5 Sep 2021 12:21:12 -0700
+Message-Id: <20210905192112.2081037-9-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210905192112.2081037-1-akuster808@gmail.com>
 References: <20210905192112.2081037-1-akuster808@gmail.com>
@@ -65,11 +65,6 @@ Affects NSS < 3.55
 This address both VE-2020-6829 and CVE-2020-12400
 
 Signed-off-by: Armin Kuster <akuster@mvista.com>
----
- .../nss/nss/CVE-2020-6829_12400.patch         | 19789 ++++++++++++++++
- meta-oe/recipes-support/nss/nss_3.51.1.bb     |     1 +
- 2 files changed, 19790 insertions(+)
- create mode 100644 meta-oe/recipes-support/nss/nss/CVE-2020-6829_12400.patch
 
 diff --git a/meta-oe/recipes-support/nss/nss/CVE-2020-6829_12400.patch b/meta-oe/recipes-support/nss/nss/CVE-2020-6829_12400.patch
 new file mode 100644
