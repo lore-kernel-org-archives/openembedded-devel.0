@@ -1,59 +1,59 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.4])
- by mx.groups.io with SMTP id smtpd.web09.16948.1630891244435061999
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.2])
+ by mx.groups.io with SMTP id smtpd.web09.16960.1630891288686044932
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Sep 2021 18:20:44 -0700
+ Sun, 05 Sep 2021 18:21:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=FNnOFE4m;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.4, mailfrom: zangrc.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=LoFeZ0g6;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.2, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1630891242; i=@fujitsu.com;
-	bh=Wwr6kSr7WmaJGD8pF7xY9MEY35MAzuhOpjKWdxtyxQU=;
+	s=170520fj; t=1630891287; i=@fujitsu.com;
+	bh=X7dlkGYQGornMRtqNpZSAn7ovw4m2X9uAeDHA18rGMk=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=FNnOFE4mFx3WEfJDG/locH7lB1ADGMWx8i9WZcMtXQJUWluqN7OeJvUuEJpd5/Bcf
-	 tVmTN2Qz0+42reUgVlb4gaJGd5yvm/YFKgN4puE366qMPTO43CibiTA3zXnvcejzFd
-	 BBU7sXJ+qSnLqn8UaPjM4Dl+eGtSeVplalIW0aP7Jcci8NNYhjoy9lur8pvttiTMRo
-	 HsJHyDihqFwAgHYDXmb3insLQG68mlgf5hr4FRZ6UtciQXqmZkOSxsUds4jLutbtb9
-	 bLw084sRfJ3n7tm/7hNArld2uqZtTo+E8SS19clXiUjC1WxeiAhaJNqtN012iYOgQ/
-	 zrtqru6hbAO7w==
-Received: from [100.113.2.146] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-a.eu-central-1.aws.symcld.net id 20/AA-29868-AEC65316; Mon, 06 Sep 2021 01:20:42 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+EI1X2ZY5p
-  osPizjcXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmrFl3Q6mgmlcFU8WXWdsYJzN2cXIySEkMItJ
-  4toLxS5GLiD7OKPEna8nmEESbAI6Eh0vullAbBEBfYmls/eAxYUFfCXmPP0MFmcRUJG43HKAD
-  cTmFXCX2LgHokZCQEFiysP3zBBxQYmTM5+A1TMLSEgcfPECqkZRYvvOMywQdoXE68OXmCcw8s
-  xC0jILScsCRqZVjBZJRZnpGSW5iZk5uoYGBrqGhsa6hrqmhnqJVbqJeqmlusmpeSVFiUBJvcT
-  yYr3iytzknBS9vNSSTYzAMEopZDTewXjw9Qe9Q4ySHExKorwadqaJQnxJ+SmVGYnFGfFFpTmp
-  xYcYZTg4lCR4o7KAcoJFqempFWmZOcCQhklLcPAoifCeyAZK8xYXJOYWZ6ZDpE4xKkqJ85aDJ
-  ARAEhmleXBtsDi6xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmYtzUeaApPZl4J3PRXQIuZgB
-  a3PTQBWVySiJCSamCSFt5u6X1g98yCzdvkTX3tnmx50Jkj2LP7auHHXyHPv2yczecxQbP7WPc
-  x7+3Fq7yvqyzZeK2337hqRpDKkVUVb1em3rwvpbnxWuWOmpbXy2L3dO6v1f1WuF/5lvflp2eN
-  LT8Fe7AvyrNjXa/XaF3QeHHb3fiQPzO7TP03Fez6/3Ke1EG7hq4E366HW86X9falqbCmaiqsf
-  pMuOOu2CveDmyEmTKYaofukJ3YWLZm6VFv3pmPm1EPru26tKp5aZpeSyRSfHO8l02r2rdj+/d
-  FOjb7jpley/SexGjd4v7aqubUwQvWHYIuGyuXtmVeVZcOf9ov3tZv4da8O5W18dsJP70aY2+t
-  vpmVZvMHczEosxRmJhlrMRcWJANaDaB4eAwAA
+	b=LoFeZ0g6D5Vaz/bLxU7ElDtmbDVMFBAJJJbS1LnKCHdIqxb40mKyb1x88S+Nd01xG
+	 /R61erQBtWt4g5+z+IRR0Joo/4J/hD4CyJeGI0YSku/7E92lW94G9Eomm0L7DRadBL
+	 3k2R7uHAWgaahFvlunV4G5dNqVyswUjAYKkgg0N/5vc6jJesuVszB77OIzblqsrHR3
+	 7ii+xqCkwBVWFFXCl2X4XNv3e7QODu0DFOyZK0BzvPpaxcnWYSlWghOtv7p1hXAJJL
+	 m2dXosrzcmD4fHMFvrFpah4Gy5h4oYdeNDA/tOMhP/EHdzL3E56AojYITYtj9YyXrG
+	 J7X3CPOSJyq1g==
+Received: from [100.113.2.26] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-a.eu-central-1.aws.symcld.net id 34/7D-23460-61D65316; Mon, 06 Sep 2021 01:21:26 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+GYoiuWa5p
+  oMOO9sMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvHn72+2gkm8FVfvH2ZuYHzC3cXIxSEkMItJ
+  YuLzB4wQznFGiU0LfrB1MXJysAnoSHS86GYBsUUE9CWWzt7DDGILC/hJTHm0nxHEZhFQkTgx7
+  w5YPa+Au8S7/v3sILaEgILElIfvmSHighInZz4Bm8MsICFx8MULZogaRYntO8+wQNgVEq8PX2
+  KewMgzC0nLLCQtCxiZVjFaJBVlpmeU5CZm5ugaGhjoGhoa6xrqmhrqJVbpJuqlluomp+aVFCU
+  CJfUSy4v1iitzk3NS9PJSSzYxAgMppZDReAfjwdcf9A4xSnIwKYnyatiZJgrxJeWnVGYkFmfE
+  F5XmpBYfYpTh4FCS4I3KAsoJFqWmp1akZeYAgxomLcHBoyTCeyIbKM1bXJCYW5yZDpE6xagoJ
+  c5bDpIQAElklObBtcEi6RKjrJQwLyMDA4MQT0FqUW5mCar8K0ZxDkYlYd7WeKApPJl5JXDTXw
+  EtZgJa3PbQBGRxSSJCSqqBaVH75IojR+YXsN294Bws3b5lVoT64YBF3cL5ImfvVm6ZV9d14r5
+  S4zWbeYsWJibMe8D14l3fn3NfE+vjpR5/v15mq1v/xYFpabe+92eXm2rXXWLvGK94P/cW98T/
+  syOvxvf9PPuV/5bqPe5jHzilf3W9+JJ67ZYJv8IXC4/Opwn1utUqsT2MZ75OY76quY15gtP0A
+  FXLIoMF9v/ibH8vMiu57TGxrd/7a+y65fE/ZDR7FQouZD68ten0r0wW0ch1RtVPWy8ZvTNQ5v
+  C50nDhy5GfWtOkTIRDnj455FP+fMK1JF/p1b5T2Q2avEqDI3c7XJALPcTYd8hMpWnRmw8/9pU
+  73TTqPnZsrZiasG3lfiWW4oxEQy3mouJEAEzrFZEfAwAA
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-6.tower-226.messagelabs.com!1630891241!193445!1
-X-Originating-IP: [62.60.8.85]
+X-Msg-Ref: server-4.tower-232.messagelabs.com!1630891286!231703!1
+X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 15587 invoked from network); 6 Sep 2021 01:20:41 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-6.tower-226.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 6 Sep 2021 01:20:41 -0000
+Received: (qmail 16230 invoked from network); 6 Sep 2021 01:21:26 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-4.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 6 Sep 2021 01:21:26 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1861KfOp023560
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1861LPtq022037
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 6 Sep 2021 02:20:41 +0100
+	for <openembedded-devel@lists.openembedded.org>; Mon, 6 Sep 2021 02:21:25 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Mon, 6 Sep 2021 02:20:40 +0100
+ (TLS) id 15.0.1497.23; Mon, 6 Sep 2021 02:21:24 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-ipython: upgrade 7.26.0 -> 7.27.0
-Date: Mon, 6 Sep 2021 09:20:33 +0800
-Message-ID: <1630891233-61443-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-kiwisolver: upgrade 1.3.1 -> 1.3.2
+Date: Mon, 6 Sep 2021 09:21:17 +0800
+Message-ID: <1630891277-61511-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -61,33 +61,43 @@ X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-IPython 7.27 is a minor release that fixes a couple of issues and compatibility.
-Add support for GTK4 PR 
-Add support for Qt6 PR
-Fix an issue with pip magic on windows PR
+CI: fix building wheels on GHA 
+* ci: fix wheel build command
+* ci: remove references to submodules
+* ci: fix sdist command and remove Python 3.6 from the matrix
+* ci: slightly alter invocation
+* ci: disable emulation
+* ci: smaller matrix
+* ci: use a small matrix but with all python versions
+* ci: use manylinux 2010 for CPython 3.9+
+* ci: split again matrix per python version given how slow emulation is
+Fix also the artifact upload
+* ci: fix typo
+* ci: typo
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../{python3-ipython_7.26.0.bb => python3-ipython_7.27.0.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-ipython_7.26.0.bb => python3-ipython_7.27.0.bb} (89%)
+ ...python3-kiwisolver_1.3.1.bb => python3-kiwisolver_1.3.2.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-kiwisolver_1.3.1.bb => python3-kiwisolver_1.3.2.bb} (73%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ipython_7.26.0.bb b/meta-python/recipes-devtools/python/python3-ipython_7.27.0.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-ipython_7.26.0.bb
-rename to meta-python/recipes-devtools/python/python3-ipython_7.27.0.bb
-index 4c1d4ebd70..2ec0722c35 100644
---- a/meta-python/recipes-devtools/python/python3-ipython_7.26.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-ipython_7.27.0.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
+diff --git a/meta-python/recipes-devtools/python/python3-kiwisolver_1.3.1.bb b/meta-python/recipes-devtools/python/python3-kiwisolver_1.3.2.bb
+similarity index 73%
+rename from meta-python/recipes-devtools/python/python3-kiwisolver_1.3.1.bb
+rename to meta-python/recipes-devtools/python/python3-kiwisolver_1.3.2.bb
+index fb66619dbd..cf14c49e6c 100644
+--- a/meta-python/recipes-devtools/python/python3-kiwisolver_1.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-kiwisolver_1.3.2.bb
+@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/nucleic/kiwi"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://setup.py;endline=7;md5=e54bd74bd9d0a84ae3f8f6d21ada0ab4"
  
- PYPI_PACKAGE = "ipython"
+-SRC_URI[md5sum] = "81012578317ddcfa3daed806142f8fed"
+-SRC_URI[sha256sum] = "950a199911a8d94683a6b10321f9345d5a3a8433ec58b217ace979e18f16e248"
++SRC_URI[sha256sum] = "fc4453705b81d03568d5b808ad8f09c77c47534f6ac2e72e733f9ca4714aa75c"
  
--SRC_URI[sha256sum] = "0cff04bb042800129348701f7bd68a430a844e8fb193979c08f6c99f28bb735e"
-+SRC_URI[sha256sum] = "58b55ebfdfa260dad10d509702dc2857cb25ad82609506b070cf2d7b7df5af13"
+ inherit pypi setuptools3
  
- RDEPENDS:${PN} = "\
-     ${PYTHON_PN}-setuptools \
 -- 
 2.25.1
 
