@@ -1,120 +1,98 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.5])
- by mx.groups.io with SMTP id smtpd.web09.16879.1630890882278072475
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.3])
+ by mx.groups.io with SMTP id smtpd.web12.16631.1630891072079924738
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Sep 2021 18:14:42 -0700
+ Sun, 05 Sep 2021 18:17:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=KFsmLXPt;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.5, mailfrom: wangmy@fujitsu.com)
-Return-Path: <wangmy@fujitsu.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=PI6LDsj0;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.3, mailfrom: zangrc.fnst@fujitsu.com)
+Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1630890880; i=@fujitsu.com;
-	bh=uzmtbyjD1teLPkrEJRgUW49v8dk+Y4SbiNoK0gLnEho=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=KFsmLXPtmTlKTvhl/QpMXfgfQdRclmzVpkMBSIXu/OaTizxOUaquD5rcQUg4/m7Ta
-	 0RxGj7MUAG15QkMw2fricjr//+UpXJqCbZeiLA2HAe8MA31yEQcrRnxOT1N3zmarcW
-	 yPT3meBnnAUacQK5KHSQRxAnIWB/MGa4tlTrSz1iDFXzVZ72um+E6p9wYSTuSMkBde
-	 KimCX5V+9DR94Vte2qt6/aKhdV085q3HOwWN5OX1GUowT0PH4C9V56F6h+QXKoidBn
-	 8JfpMSFGIlaSaSg7ZsBuhb+R1Rcx6qy/5M7AJwMiFmseJ8mkN190ZuaXTxUf5AAj3c
-	 K1dLnwSboHNxA==
-Received: from [100.113.2.26] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-5.bemta.az-a.eu-central-1.aws.symcld.net id 45/85-29877-F7B65316; Mon, 06 Sep 2021 01:14:39 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprGIsWRWlGSWpSXmKPExsViZ8MxRbc+2zT
-  RYNVXBYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPZ/nVMBeeFKxb++cXYwHhFsIuRi0NIYBaT
-  xLZNS1ghnOOMEttWnmLuYuTkYBNQk5h+6wYriC0ioC+xdPYesDizgIrEi9897F2MHBzCAm4Sd
-  5YVg5gsQOEpXX4gFbwCThK75/9nBLElBBQkpjx8zwwRF5Q4OfMJC8QUCYmDL14wQ9QoSsy+3M
-  wCYVdIzJrVxjSBkXcWkpZZSFoWMDKtYrRIKspMzyjJTczM0TU0MNA1NDTWNdI1NdRLrNJN1Es
-  t1U1OzSspSgRK6iWWF+sVV+Ym56To5aWWbGIEBldKIZPxDsZrrz/oHWKU5GBSEuXVsDNNFOJL
-  yk+pzEgszogvKs1JLT7EKMPBoSTBG5UFlBMsSk1PrUjLzAEGOkxagoNHSYSXHyTNW1yQmFucm
-  Q6ROsWoKCXOqwOSEABJZJTmwbXBousSo6yUMC8jAwODEE9BalFuZgmq/CtGcQ5GJWHe1nigKT
-  yZeSVw018BLWYCWtz20ARkcUkiQkqqgSnl+8vprgI7ror//KfHGalaUdNUtmXGkruCm6zuX68
-  RvBhyXeNFjo/+mUtVoiFTJsr8eMvOJMq1uaRxubaaWI1EUI/g+n8h5kd3dpanX18daFTlOp3z
-  zUHBY79NOBexfDjwWvPyEhF+4xvr123v+X7qm9HmF296jHeoSIrt9Uu//rIjIvKqxer2Sbkrd
-  BOFFh1ImyBYeWuKSV+6lcquCs6bnck3LSa5BaXcz1KrjWN2MEn+oHrbLbFw64z553c0GdfYNt
-  fM38h3SY9nUuPpxo7jBRdto/TctAyP7+f07eZi36X4ieN6CeOeWfKe6qdOZ7B+Orma+d7C7t+
-  3j5XfEz/3df9K6RT3DVPUNvsVlCmxFGckGmoxFxUnAgAccIxRKQMAAA==
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-4.tower-226.messagelabs.com!1630890879!193112!1
-X-Originating-IP: [62.60.8.148]
+	s=170520fj; t=1630891070; i=@fujitsu.com;
+	bh=yjiP93gnLirGZ3zNegoy7ZYY+IIUzZ3OxhGlvuKrNio=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=PI6LDsj0cO6cP2xm1KBhxzShVikxwaTjddjIS+Mx2iNAwjYuLw9B2PhOViupQQc2H
+	 h7GfMa0NQLDjYHm7hTyVo6P7QImOasxfmrxxCQ4qkXvNaOp+q+fvlHf9CoYL+5FNE1
+	 iOTFIYva7dNmtQ/H1sALlJcGSUJAJB5e0QxreKt+BlaBRFH+N98ogPh5EOvDOLQ2EY
+	 mZIrLpdltbaF0ovxuRi3qVM2oCCfwghSDA2zXrxjUlrNxehVgwOaDnJx3L1vL/D9Sd
+	 2V5P7JqCGZvPQwCGH71uyQA6Smu4mWQ3fgPoQiUI2sXoXsEykjkLVWjECXx44j/nde
+	 rSPXY8nofp7xA==
+Received: from [100.113.3.182] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta.az-a.eu-central-1.aws.symcld.net id FD/C3-32481-D3C65316; Mon, 06 Sep 2021 01:17:49 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+EI1bXNMU0
+  0+PlOxOLi4aXMDowe5zauYAxgjGLNzEvKr0hgzXi/cyNjwVHBik376xoY7/F3MXJxCAnMYpJ4
+  9/UiexcjJ5BznFFi5msjEJtNQEei40U3C4gtIqAvsXT2HmYQW1ggQeL3ymawOIuAisS1PV2MI
+  DavgLvEtf5DTCC2hICCxJSH75kh4oISJ2c+AatnFpCQOPjiBTNEjaLE9p1nWCDsConXhy8xT2
+  DkmYWkZRaSlgWMTKsYLZOKMtMzSnITM3N0DQ0MdA0NjXWBpLGBXmKVbqJeaqlucmpeSVEiUFY
+  vsbxYr7gyNzknRS8vtWQTIzCMUgoZmnYwvnv1Qe8QoyQHk5Ior4adaaIQX1J+SmVGYnFGfFFp
+  TmrxIUYZDg4lCd6oLKCcYFFqempFWmYOMKRh0hIcPEoivPwgad7igsTc4sx0iNQpRkUpcd6LI
+  AkBkERGaR5cGyyOLjHKSgnzMjIwMAjxFKQW5WaWoMq/YhTnYFQS5m2NB5rCk5lXAjf9FdBiJq
+  DFbQ9NQBaXJCKkpBqYHmkb3V8g3fSjvuWK8JWI5XUhW/5eCgjOWzjv2Yv0M0WVnCkq4nEvJ79
+  MuZC+fR0r09m7OmtuMom/W5a6081mR8SxQ91B3F51l56e37i99KkC1yajooB3rucnvy6y1y9x
+  KLV8P33rS44+xQ8uEs88lqUqXlX6cNigUaM0Ne6xSa7m+sbqJ6d8VEIkps6wzptZyPGn5ta0L
+  mnxTxUSi950h0oyVEz+fuTrv9ZXi/kevInM/Fg95cpFE7nTV16Klko3PX8w+d4h8Yd3N9htWM
+  BZ8IXHamFkyzfmv/Hr256csHgjvKrcinHGvTv7J87U3H+mLexbWuQn67CKDNPfL85usZh1OEz
+  s+r2osq6eaeX3TyuxFGckGmoxFxUnAgAGxvllHgMAAA==
+X-Env-Sender: zangrc.fnst@fujitsu.com
+X-Msg-Ref: server-6.tower-226.messagelabs.com!1630891069!193291!1
+X-Originating-IP: [62.60.8.85]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 11267 invoked from network); 6 Sep 2021 01:14:39 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-4.tower-226.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 6 Sep 2021 01:14:39 -0000
+Received: (qmail 29568 invoked from network); 6 Sep 2021 01:17:49 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-6.tower-226.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 6 Sep 2021 01:17:49 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1861Edgs019263
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1861HmbM022559
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 6 Sep 2021 02:14:39 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
+	for <openembedded-devel@lists.openembedded.org>; Mon, 6 Sep 2021 02:17:48 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Mon, 6 Sep 2021 02:14:37 +0100
-From: "wangmy" <wangmy@fujitsu.com>
+ (TLS) id 15.0.1497.23; Mon, 6 Sep 2021 02:17:47 +0100
+From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] nlohmann-json: upgrade 3.9.1 -> 3.10.2
-Date: Mon, 6 Sep 2021 09:14:28 +0800
-Message-ID: <1630890868-12113-1-git-send-email-wangmy@fujitsu.com>
+Subject: [PATCH] [oe] [meta-python] [PATCH] python3-cryptography-vectors: upgrade 3.4.7 -> 3.4.8
+Date: Mon, 6 Sep 2021 09:17:40 +0800
+Message-ID: <1630891060-61201-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-Release date: 2021-08-26
-SHA-256: 059743e48b37e41579ee3a92e82e984bfa0d2a9a2b20b175d04db8089f46f047 (json.hpp)
-61e605be15e88deeac4582aaf01c09d616f8302edde7adcaba9261ddc3b4ceca (include.zip)
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Summary
-This release is made days after the 3.10.1 release due to a bug in the release script:
-The 3.10.1 release at GitHub contained the correct files,
-but the associated tag v3.10.1 points to the wrong commit.
-This release is made with a fixed build script. All changes are backward-compatible.
-
-Improvements
-Fix the release scripts to correctly tag releases. https://github.com/nlohmann/json/issues/2973
-Fix some -Wunused warnings on JSON_DIAGNOSTICS when the library is built without CMake.
-https://github.com/nlohmann/json/issues/2975
-https://github.com/nlohmann/json/pull/2976
-
-Deprecated functions
-Passing iterator pairs or pointer/length pairs to parsing functions
-(basic_json::parse, basic_json::accept, basic_json::sax_parse, basic_json::from_cbor,
-basic_json::from_msgpack, basic_json::from_ubjson, basic_json::from_bson)
-via initializer lists is deprecated.
-Instead, pass two iterators; for instance, call basic_json::from_cbor(ptr, ptr+len)
-instead of basic_json::from_cbor({ptr, len}).
-
--License-Update: Copyright year updated to 2021.
+Changed the version scheme. This will result in us incrementing the major version more frequently, but does not change our existing backwards compatibility policy.
+BACKWARDS INCOMPATIBLE: The X.509 certificate parser no longer allows negative serial numbers. RFC 5280 has always prohibited these.
+BACKWARDS INCOMPATIBLE: Invalid ASN.1 found during certificate parsing will raise an error on initial parse rather than when the invalid field is accessed.
+BACKWARDS INCOMPATIBLE: Values passed to the X.509 PEM parser must be a single PEM payload and will error on extraneous data.
+Added support for OpenSSL 3.0.0 as a compilation target.
+Added support for SM3 and SM4, when using OpenSSL 1.1.1. These algorithms are provided for compatibility in regions where they may be required, and are not generally recommended.
+We now ship manylinux_2_24 wheels, in addition to our manylinux2010 and manylinux2014 wheels.
+Added rfc4514_attribute_name attribute to x509.NameAttribute,
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{nlohmann-json_3.9.1.bb => nlohmann-json_3.10.2.bb}       | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/nlohmann-json/{nlohmann-json_3.9.1.bb => nlohmann-json_3.10.2.bb} (82%)
+ ...y-vectors_3.4.7.bb => python3-cryptography-vectors_3.4.8.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-cryptography-vectors_3.4.7.bb => python3-cryptography-vectors_3.4.8.bb} (81%)
 
-diff --git a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.9.1.bb b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.10.2.bb
-similarity index 82%
-rename from meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.9.1.bb
-rename to meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.10.2.bb
-index c0a1560cdb..d2015771ac 100644
---- a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.9.1.bb
-+++ b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.10.2.bb
-@@ -2,12 +2,12 @@ SUMMARY = "JSON for modern C++"
- HOMEPAGE = "https://nlohmann.github.io/json/"
- SECTION = "libs"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=dd0607f896f392c8b7d0290a676efc24"
-+LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=441793d25a658d58d79a1f87516a6ad1"
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.7.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.8.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.7.bb
+rename to meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.8.bb
+index 565e223bfc..2fb48f3cf7 100644
+--- a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.7.bb
++++ b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.8.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "Apache-2.0 | BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
  
- SRC_URI = "git://github.com/nlohmann/json.git;nobranch=1 \
-            "
+-SRC_URI[sha256sum] = "a7ac3aaa57514687696ad65f833e5e39b6fa3c5d41de2b8c938346ee119204c2"
++SRC_URI[sha256sum] = "4c84410257993d3de058b44b777a49e1da2ae35ebea2970a360c7e3aa0f580f2"
  
--SRCREV = "db78ac1d7716f56fc9f1b030b715f872f93964e4"
-+SRCREV = "626e7d61e44dee32887126c8f437dd077dec09cf"
- 
- S = "${WORKDIR}/git"
+ PYPI_PACKAGE = "cryptography_vectors"
  
 -- 
 2.25.1
