@@ -1,110 +1,73 @@
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.112])
- by mx.groups.io with SMTP id smtpd.web11.30543.1630978029668347819
+Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com [209.85.219.180])
+ by mx.groups.io with SMTP id smtpd.web12.30121.1630978602720074123
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Sep 2021 18:27:10 -0700
+ Mon, 06 Sep 2021 18:36:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=wGKJbJi1;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1630978027; i=@fujitsu.com;
-	bh=QQDDXVDcJtFZx5r9T1meJZEo9lsuRNfSYWvS8huM+go=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=wGKJbJi1gPbl47IYxsTL5dBBrC1SUxcQsJ5JzA4Kqw3UnvI4MFq2plnGH+g3aqx/C
-	 p+TkcF64PJXswi5LwTweEbJprVkGyoH4kHdrVxJniyt8t4iwYPLHza84J/6boSb/4+
-	 6/qrXI5Ax1mXuz682TxIvRqfqcKUHewKyqpZRwMOaEWNMyJghvjPIeu6VKMeGp1V/l
-	 EJ+UO0o5kpk5iNnBJJaszTzXAVjtV0OYB83EjMuXiK/Zt2VvgsRzFi4zGU93zlvsV4
-	 geDbBXVW1xv5q6YtbNfqMShtw4Ks1kvGB2lKHZSMp7zDQkEFjw6fq1Phux1FuqwIZZ
-	 pxKyx8EYpGT7A==
-Received: from [100.113.6.150] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-b.eu-central-1.aws.symcld.net id 63/66-23595-BEFB6316; Tue, 07 Sep 2021 01:27:07 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+GYovtqv1m
-  iwZnH+hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bDObeZCmbyVexZfpS1gfEcTxcjF4eQwCwm
-  iaYTN1khnOOMEv2fvwE5nBxsAjoSHS+6WUBsEQF9iaWz9zCD2MIC5hIvDi0DquHgYBFQkXg93
-  QEkzCvgLvH17UtGEFtCQEFiysP3zBBxQYmTM5+AjWEWkJA4+OIFM0SNosT2nWdYIOwKideHLz
-  FPYOSZhaRlFpKWBYxMqxgtk4oy0zNKchMzc3QNDQx0DQ2Ndc11jUyN9BKrdJP0Ukt1k1PzSoo
-  SgbJ6ieXFesWVuck5KXp5qSWbGIGBlFLI/mcH4/XXH/QOMUpyMCmJ8v4oM0sU4kvKT6nMSCzO
-  iC8qzUktPsQow8GhJMFbsw8oJ1iUmp5akZaZAwxqmLQEB4+SCO+yPUBp3uKCxNzizHSI1ClGR
-  Slx3knbgBICIImM0jy4NlgkXWKUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzHsUZDtPZl4J3P
-  RXQIuZgBa3PTQBWVySiJCSamBSe1o+3fr/nOvsJcIpe7g8a25WzArv6Fzv8vnR86dt/Fzer+R
-  nOUyqro51n7fiT/qRP+7xTyMdTKfsO3ZWbtn1v0knLkcoXbh56GfUcR22C9uXW3DGnAkwSy/u
-  Sjt35WW3Sf4SVj4lg6T+1tlcGyyni8aGicpKNKbtenIqklNaf3nHnClpInNlFyiLeZR8LAvOZ
-  fi67f+9t08Tor0ylgbfu9B0SWq1sx4LT6O8wYRTekINBbf7Q/c0LAqO23HK/2a180+j2oUPw5
-  n5Kz84zhSZ+PGnVs7dxyXzc4ozvhqa3lDx/sj/5MgCnTfMYSpXNlxR6djN5vxW+727eset7/Y
-  3+BJtHMvsdYqdnvetMlBiKc5INNRiLipOBAB6CVtUHwMAAA==
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-20.tower-245.messagelabs.com!1630978026!56634!1
-X-Originating-IP: [62.60.8.148]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.4; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 11176 invoked from network); 7 Sep 2021 01:27:06 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-20.tower-245.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 7 Sep 2021 01:27:06 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1871Qwvb015282
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 7 Sep 2021 02:27:06 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Tue, 7 Sep 2021 02:26:57 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] gsl: upgrade 2.6 -> 2.7
-Date: Tue, 7 Sep 2021 09:26:50 +0800
-Message-ID: <1630978010-83147-1-git-send-email-zangrc.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Mze9F1kV;
+ spf=pass (domain: gmail.com, ip: 209.85.219.180, mailfrom: whuang8933@gmail.com)
+Received: by mail-yb1-f180.google.com with SMTP id c206so16641824ybb.12
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Sep 2021 18:36:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=XbiU9r1r/PPOobQz3CJnsLfS62bzKXXBaS2oppVfIEc=;
+        b=Mze9F1kVJ0Qi9Gi8g95sTz2pWF8d/1yB4mNxgIEzSTBdMNFsOZa9xKFfU+7UmgGTKa
+         XNAEoi0C6xbW+ONKNsEMsP/m3hAp+PYQ8WZouyw3vRPUCuwySoEcmPCcJAHjakraib/G
+         h22RMFbYHFwvOZGu+HTo0+b5WiPP5KNkTorlmsKZcpk+K+Lv7WC6Ojy4SSg47fP29SfR
+         x3qtRNnI2hU6iMw8oHF1FhmN8BjYFBGdTHbeaOarAoxTCjsQqVKxuJ12nhuPyuI7GALG
+         CDZITFawjRR21dUWw/zCIbCSTmbgXTrjJ92AhLt8s06HNUYi8hljLfSDid5aurDgqsOP
+         UfRA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=XbiU9r1r/PPOobQz3CJnsLfS62bzKXXBaS2oppVfIEc=;
+        b=SePwqFZNgnRie/ACh60OEHPXyRvPLHTYiRqZ12e/WTJzJO+EzfsG07YIsJIbOT//3C
+         oNXnmoH0x/GkeZvr3LvXSuVoX9/hjAGyXXADV9sQPR5Iz8SUmt4k9x+zp2iaa+fpFgOQ
+         ZjApXtzZOtZcrsW6jRsNgGMhoSsXMRnToL12FDj0ZGDLz/OZjUSxVBjs5OpsgwH/1K5n
+         7UOZf95Pk7VtZyGpFFaE/X4Ip7PWhyi5rgTMEf4HooYQ+7mlaivlF3WsuDxKnu0ABNmO
+         enYeo9Qx/zRcEBJIWrUTyBLBOmVLyP7m+XdJAN3gP6RL200csG4+XpHt4RnNdh3ZiwR2
+         3dkw==
+X-Gm-Message-State: AOAM532dPd0jkJD4iI1J5kDP5BGUeuzqc+R0NIthlNmADdfMtzEHCGLn
+	Fz93bccN35GtwE/AkhtkbJLhIv/viDYyYtaYk5Y=
+X-Google-Smtp-Source: ABdhPJyDVR09v/2qiW2uBDCsJGBZ1dRe8QfRLE+mwIgEV1yk5NOhtMe9DN4wOnoFCkyL4VpztUrToE0tvevvpZTxuL0=
+X-Received: by 2002:a25:f50e:: with SMTP id a14mr18786698ybe.351.1630978601893;
+ Mon, 06 Sep 2021 18:36:41 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+References: <20210904174506.2263139-1-raj.khem@gmail.com> <20210904174506.2263139-3-raj.khem@gmail.com>
+In-Reply-To: <20210904174506.2263139-3-raj.khem@gmail.com>
+From: "William Huang" <whuang8933@gmail.com>
+Date: Mon, 6 Sep 2021 21:36:31 -0400
+Message-ID: <CADa-vC1YQFxhXsotB=AgucRP3_fSvWoargn-v3MnCJjdPs4cFQ@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 3/3] packagegroup-meta-python: Add python3-kivy
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 
-* What is new in gsl-2.7:
+Thanks for fixing up the recipe!
 
-** fixed doc bug for gsl_histogram_min_bin (lhcsky at 163.com)
-** fixed bug #60335 (spmatrix test failure, J. Lamb)
-** fixed bug #36577
-** clarified documentation on interpolation accelerators (V. Krishnan)
-** fixed bug #45521 (erroneous GSL_ERROR_NULL in ode-initval2, thanks to M. Sitte)
-** fixed doc bug #59758
-** fixed bug #58202 (rstat median for n=5)
-** added support for native C complex number types in gsl_complex
-   when using a C11 compiler
-** upgraded to autoconf 2.71, automake 1.16.3, libtool 2.4.6
-** updated exponential fitting example for nonlinear least squares
-** added banded LU decomposition and solver (gsl_linalg_LU_band)
-
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
----
- meta-oe/recipes-support/gsl/gsl_2.6.bb | 5 -----
- meta-oe/recipes-support/gsl/gsl_2.7.bb | 4 ++++
- 2 files changed, 4 insertions(+), 5 deletions(-)
- delete mode 100644 meta-oe/recipes-support/gsl/gsl_2.6.bb
- create mode 100644 meta-oe/recipes-support/gsl/gsl_2.7.bb
-
-diff --git a/meta-oe/recipes-support/gsl/gsl_2.6.bb b/meta-oe/recipes-support/gsl/gsl_2.6.bb
-deleted file mode 100644
-index 367a08321e..0000000000
---- a/meta-oe/recipes-support/gsl/gsl_2.6.bb
-+++ /dev/null
-@@ -1,5 +0,0 @@
--include gsl.inc
--
--SRC_URI = "${GNU_MIRROR}/gsl/gsl-${PV}.tar.gz"
--SRC_URI[md5sum] = "bda73a3dd5ff2f30b5956764399db6e7"
--SRC_URI[sha256sum] = "b782339fc7a38fe17689cb39966c4d821236c28018b6593ddb6fd59ee40786a8"
-diff --git a/meta-oe/recipes-support/gsl/gsl_2.7.bb b/meta-oe/recipes-support/gsl/gsl_2.7.bb
-new file mode 100644
-index 0000000000..d40eebb4ca
---- /dev/null
-+++ b/meta-oe/recipes-support/gsl/gsl_2.7.bb
-@@ -0,0 +1,4 @@
-+include gsl.inc
-+
-+SRC_URI = "${GNU_MIRROR}/gsl/gsl-${PV}.tar.gz"
-+SRC_URI[sha256sum] = "efbbf3785da0e53038be7907500628b466152dbc3c173a87de1b5eba2e23602b"
--- 
-2.25.1
-
+On Sat, Sep 4, 2021 at 1:45 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  .../recipes-core/packagegroups/packagegroup-meta-python.bb       | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> index b5a2f5d7d9..2d51b4e1a3 100644
+> --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> @@ -210,6 +210,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
+>      python3-kconfiglib \
+>      python3-keras-applications \
+>      python3-keras-preprocessing \
+> +    ${@bb.utils.contains("DISTRO_FEATURES", "x11 opengl", "python3-kivy", "", d)} \
+>      python3-kiwisolver \
+>      python3-langtable \
+>      python3-lazy-object-proxy \
+> --
+> 2.33.0
+>
+> 
+>
