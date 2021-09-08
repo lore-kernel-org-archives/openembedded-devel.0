@@ -1,51 +1,51 @@
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.web11.11951.1631110810289630174
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.web11.11952.1631110810784665075
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Sep 2021 07:20:10 -0700
+ Wed, 08 Sep 2021 07:20:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=B7sxnqX3;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id k5-20020a05600c1c8500b002f76c42214bso1755274wms.3
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=BDsX2Ke2;
+ spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-wr1-f48.google.com with SMTP id t18so3658231wrb.0
         for <openembedded-devel@lists.openembedded.org>; Wed, 08 Sep 2021 07:20:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=Qqetvo4Eh5mfkHmx/KwE4gm5QX1nObSO8+FO6tueEZg=;
-        b=B7sxnqX32p7wgYAkzEQ5pwHKvg+gErhaE6Bkfov5dZP0hGweYtSclwd+9Myr6yO2jf
-         EF+gbA7ABt0hWBS9EE04B6nUBiAvltoQr5cTFUiFSVKnOAYqMp7i9GEPNVf4AUwJZCR0
-         sI2+EbNFtX019Rbm8l9owLZ8UzIUCZji9+eDWlzi+8VmzFMEzL5rKowOMzYFnGrzzXD+
-         4FOHLsj3C/17KU9yVw1kxOZriRdxOJpmaUdy3CtuMyXY/RvMpm6/DEgRPIy/99Y4y0cy
-         B5gNTlc9hWc3dDNWRdAfZ+t5k/OJw9Bi2XJ5A9BI4z+cnFvty7L5Dl6AAI6WcbJs55sj
-         yrtw==
+        bh=NSiNo/otGVRc/E1bJte9lT73Cq8d3Y9xZaT+8XgBF0o=;
+        b=BDsX2Ke2RGNHevQd99hRhxLBJBAND7kM8d3n9BNBKNJoNfJEXKcObllLKyCsBtkKgK
+         vZ9nBg2s/cSkYtts99AhL+SRq0p2SCrbDhEZgP5e4TKcWV/azYbOtZXA8mzpHMMZyo5r
+         iYdrsTY0ezh+4kBpKYoO9qmi8I1mwNXc1liaVy6qgjBdeAtYVXOImgC7O2QMXTJrkgy0
+         7t3/gsmB3M52eizJthU9613IUhW5Ok55C0HicX/rnUGN9b9p/wA8HGHROO+urjgFWXlq
+         Xvzf80GQh4yGlpgXo7yhX9/CScWRrEyf+tB79YBtS8fEwnNDfD/xwNRu/kCMBRwVLC4X
+         SgTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
+        d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=Qqetvo4Eh5mfkHmx/KwE4gm5QX1nObSO8+FO6tueEZg=;
-        b=eOI5EVFHvwcMfKIsf2u2pmWSSnOFCVbONauYmOtfUicjcl6sk8t/JqUgk0o1MNuWzp
-         NC2RSL6YJHVtyOUCJsVxiyRXEwUZd0OmokemKnB4SZUzwkhA5GTf7oCWfn0B83O3ZR3r
-         /MBkZtaPtgfVl3jUGntYWwKSl86UM+ePWkhsBk9LhFRxqvUrCAqJIeuozbmFv4LrKtZs
-         j3Zil7JQ6wR0OGlmga5vdESyv9GJOXQ2GKc3O0Nw+9Q1OIaNznq718/GcpyjmVVmu09F
-         veb/AYcdpH/T+EskOdKwu7utRyhGUPijzLBqdJnfMR3qkQ5yb5Q0uzJ8rJrjFmrsJGVV
-         VJhQ==
-X-Gm-Message-State: AOAM533fdlNm3DVbK6A4Eeyige07XW/zUjyhJS69BDd6SJqFF1zqxcl8
-	VBZ8F6VM+xyTFHjxUsKI46fyjhcxS/s=
-X-Google-Smtp-Source: ABdhPJyYhHkgj1XaaVxWgLaXEtoGEyX2u0ltN8GLcuvjiTBkvzSrTIURJo3VjDEymehaIPg2J3Ihvw==
-X-Received: by 2002:a05:600c:3b0d:: with SMTP id m13mr53437wms.1.1631110808759;
-        Wed, 08 Sep 2021 07:20:08 -0700 (PDT)
+        bh=NSiNo/otGVRc/E1bJte9lT73Cq8d3Y9xZaT+8XgBF0o=;
+        b=8KP5rm/lZkVf6fHiRj0NlPzeUtPC6Pn2SO66el1up/6uX2Qrn4dbSX9qwMvyC2U7yt
+         X1URwvnzchQfV6T5x27J9esarBeRwYEe+prA6TaywsGUUlk0BwUOoFgs759vCKKaiQt+
+         WJLYMniRrSl6/wO4wLJ/E8o2WK2k0dXSXMDZiSbwFUTB35JnUY/NDzUy5UR/pjAXt6sJ
+         ePeljYLb5TeoOz4cD6NUfaXftnSfaimsyDfIcXmK2rIi7eF/Sgo3CuxWy02uKrMVsxUV
+         3E80liIh9sRn+kxz7fB7MepsGf29AEzfzoVCAJsYqI3yHNyhZE4ZJQSlMXNP7WMtFNhR
+         4J9g==
+X-Gm-Message-State: AOAM533MjftHm4/h0w735sG+MsEsxc1BEYz2ISkYYnx+INT6nKacNxDz
+	hL77+a5AhZrVGyc5g51EqmH257VvOKw=
+X-Google-Smtp-Source: ABdhPJyqeDuvctv/CWn7jIa5M0v4aYrwREMZR53YGZkqBI+HIP4vAD3DtyPv700DZugWgvnWxI8zOg==
+X-Received: by 2002:adf:e6d0:: with SMTP id y16mr4412780wrm.284.1631110809394;
+        Wed, 08 Sep 2021 07:20:09 -0700 (PDT)
 Return-Path: <alex.kanavin@gmail.com>
 Received: from nereus.lab.linutronix.de. (b2b-109-90-143-203.unitymedia.biz. [109.90.143.203])
         by smtp.gmail.com with ESMTPSA id t7sm2553710wrq.90.2021.09.08.07.20.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Sep 2021 07:20:08 -0700 (PDT)
+        Wed, 08 Sep 2021 07:20:09 -0700 (PDT)
 From: "Alexander Kanavin" <alex.kanavin@gmail.com>
 X-Google-Original-From: Alexander Kanavin <alex@linutronix.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alexander Kanavin <alex@linutronix.de>
-Subject: [PATCH 3/4] fmt: update 7.1.3 -> 8.0.1
-Date: Wed,  8 Sep 2021 16:19:57 +0200
-Message-Id: <20210908141958.866476-3-alex@linutronix.de>
+Subject: [PATCH 4/4] spdlog: update 1.8.2 -> 1.9.2
+Date: Wed,  8 Sep 2021 16:19:58 +0200
+Message-Id: <20210908141958.866476-4-alex@linutronix.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20210908141958.866476-1-alex@linutronix.de>
 References: <20210908141958.866476-1-alex@linutronix.de>
@@ -54,27 +54,25 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ---
- meta-oe/recipes-support/fmt/{fmt_7.1.3.bb => fmt_8.0.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/fmt/{fmt_7.1.3.bb => fmt_8.0.1.bb} (82%)
+ .../recipes-support/spdlog/{spdlog_1.8.2.bb => spdlog_1.9.2.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/spdlog/{spdlog_1.8.2.bb => spdlog_1.9.2.bb} (93%)
 
-diff --git a/meta-oe/recipes-support/fmt/fmt_7.1.3.bb b/meta-oe/recipes-support/fmt/fmt_8.0.1.bb
-similarity index 82%
-rename from meta-oe/recipes-support/fmt/fmt_7.1.3.bb
-rename to meta-oe/recipes-support/fmt/fmt_8.0.1.bb
-index 9820b8647..0dc8e038d 100644
---- a/meta-oe/recipes-support/fmt/fmt_7.1.3.bb
-+++ b/meta-oe/recipes-support/fmt/fmt_8.0.1.bb
-@@ -4,8 +4,8 @@ HOMEPAGE = "https://fmt.dev"
+diff --git a/meta-oe/recipes-support/spdlog/spdlog_1.8.2.bb b/meta-oe/recipes-support/spdlog/spdlog_1.9.2.bb
+similarity index 93%
+rename from meta-oe/recipes-support/spdlog/spdlog_1.8.2.bb
+rename to meta-oe/recipes-support/spdlog/spdlog_1.9.2.bb
+index 40ef4646b..c103c3493 100644
+--- a/meta-oe/recipes-support/spdlog/spdlog_1.8.2.bb
++++ b/meta-oe/recipes-support/spdlog/spdlog_1.9.2.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/gabime/spdlog/wiki"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=af88d758f75f3c5c48a967501f24384b"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
  
--SRC_URI += "git://github.com/fmtlib/fmt"
--SRCREV = "7bdf0628b1276379886c7f6dda2cef2b3b374f0b"
-+SRC_URI = "git://github.com/fmtlib/fmt"
-+SRCREV = "d141cdbeb0fb422a3fb7173b285fd38e0d1772dc"
- 
- S = "${WORKDIR}/git"
+-SRCREV = "de0dbfa3596a18cd70a4619b6a9766847a941276"
++SRCREV = "eb3220622e73a4889eee355ffa37972b3cac3df5"
+ SRC_URI = "git://github.com/gabime/spdlog.git;protocol=git;branch=v1.x; \
+            file://0001-Enable-use-of-external-fmt-library.patch"
  
 -- 
 2.20.1
