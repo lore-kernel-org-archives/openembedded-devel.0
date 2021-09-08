@@ -1,129 +1,78 @@
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.web11.11950.1631110808592632751
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.web10.12142.1631110809337556107
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Sep 2021 07:20:08 -0700
+ Wed, 08 Sep 2021 07:20:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=KngJ2Lu3;
- spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id b6so3538716wrh.10
-        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Sep 2021 07:20:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=bqbEAxPb;
+ spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-wr1-f50.google.com with SMTP id i28so3600229wrb.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Sep 2021 07:20:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3Q6TsunVzOZPQxrbiX0yOLIuQAwJZPC+PkS8cny0No4=;
-        b=KngJ2Lu3zybH2q62zrGCPZDk07CTk9auhvjkK9Bh6tbzKfnL4fiPO8yH5J7we7mh/z
-         GYL1QmpjuHauZ3Gpe1JofAM/aKwUBt8B+E4vo8hzF4cq8evZbZ85Vp3WhRQzdTXx0MCP
-         +LYSd6XvX4dRRNNf4j4YhlUkIDWZdRt388Z1Xk0CwDnZve/Hf6ayigCeMId+NZPe7Ko+
-         WGzWFGUsNCjc+p74CYxHO0A/uNvprJGaLZr3Ud8FSsGv9km/ZU4PTYTjdJJgKTmORMIA
-         /txiS5QOhUx0rvi+kopu7Orzp1oWXOmKxpOgM6Laayr9vIbGcJoeFt7tjsXeg7FrNxLP
-         sEkg==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=QAZ7VeEZLdj5m3VaYAoino+8OUw2+WPDRduWrZIug24=;
+        b=bqbEAxPb2Pi9ZTi+8gakn5e32LXZWLFCUul0XsUHNt+tZya5NnL36P4SHZxjgJlHl6
+         8IV56cuC48FTGxnvmpTfJhw1ijXReX124+NCOxFhKhF7mBY9s3qtSJ8pg+7T/tfRnaP9
+         SPa7vvvTQa31XjagS9LyxlA67HtzRtsQYyM0v2Ee47VWBWK69sdnT9i0/lauepf7tiEB
+         PdvtveUdT5Dt1rOYXzxNxlYf+/Rwyw6ddo0aohCgAcD8P27Epoj7RuN98afHzJhkdpQS
+         IYUHWvNHweToKmCgzRPDZpdODyOyfH8TZtGlWAvkrVDNtkSENwEdpw55LNfloTx+Is29
+         edUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3Q6TsunVzOZPQxrbiX0yOLIuQAwJZPC+PkS8cny0No4=;
-        b=MxMfgtVgVW/+ypqfo9L7foAJz505qsDpMT8++Vb5brfPYVqyph20Kbxkgf/WJ9R2cU
-         Wm/LlEilo0vC7Wc91NeZKB8xvXnkHbfV3ZQc+BwMtm9MYxjiMWqLoVv6vVd/cGW2ygjz
-         D4AdA/tFDyDBICETvBv+4pSSpOXAobot8yV1T+Gs9Dh16AZ/H92YojZ0kVxozR0pRrew
-         BMe1rvl0EVLs8Z+aVMyfg/qSDMbZ3BtcXCVCnsTMJBwFbLTDccfb7fZUD2NIJUGA//FZ
-         sN1gNOGP4ilNEkcevnzm2gFnIXY7oBbzn7MILXlHSknNxgAEyr3nxigy7LEhdTJHBD6R
-         6dwA==
-X-Gm-Message-State: AOAM532XEla1MMCZpFtYs8uPPwR8GURJ8lfebUAzKy/Hi31Oco55CYRP
-	C8udr5Ot3ZKvXtvMHCN1OyM26e7WE60=
-X-Google-Smtp-Source: ABdhPJxf4dub/sux0zfZaKPoVwn19PRUDvPpSdeQdyApdNKUFgezlhOtQkwVxNtJFftURm3dCBxf8g==
-X-Received: by 2002:adf:c14c:: with SMTP id w12mr4477021wre.115.1631110807075;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=QAZ7VeEZLdj5m3VaYAoino+8OUw2+WPDRduWrZIug24=;
+        b=heJ880q5dux28QsyrZRvn0+NO89htvhjd32YKnCoGbobc6IfuTHXhKSKXuyUJEwi0p
+         +k1z1Bx8JFNFksd6Wj/T/3ixiPUHEPqNs2dOqOq0oPS1QIRTayKuV+c4C/GshndlWN31
+         T3VfIbwBGYdPBWIhqMNrntYiATNxM1sj4HjRnW8a/9cPaR/3hihi0DdNf/W9FRpJ1L8T
+         srlxwW4aW5fkrzjww/PIk0ESjYPZs0BRahWYDYncJ1FXujPFAFN+xzBgubrWZJ/0n2ft
+         H2FIVyxiKOhGv75WG9jp3UR+TIhg2kG+RBKZDt1Eitpc1ibcjP/hfPG62Klu6h5hsVwu
+         iFUw==
+X-Gm-Message-State: AOAM531In3HY1CymKUf3kShBu8IW3X0hOacNifdMqlIOnRffuVFRZWV5
+	dfwl2KLvBU3iXF9TWf9FCs1dKJEhuAI=
+X-Google-Smtp-Source: ABdhPJxlQOrjsalDid7MLCCP/qo2hmHMT1WQrB8Ms67TZr9zCSgTl8dtMibcRXpj2Mt8hSNNB31O/A==
+X-Received: by 2002:a5d:47cd:: with SMTP id o13mr4458921wrc.246.1631110807982;
         Wed, 08 Sep 2021 07:20:07 -0700 (PDT)
 Return-Path: <alex.kanavin@gmail.com>
 Received: from nereus.lab.linutronix.de. (b2b-109-90-143-203.unitymedia.biz. [109.90.143.203])
-        by smtp.gmail.com with ESMTPSA id t7sm2553710wrq.90.2021.09.08.07.20.05
+        by smtp.gmail.com with ESMTPSA id t7sm2553710wrq.90.2021.09.08.07.20.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Sep 2021 07:20:06 -0700 (PDT)
+        Wed, 08 Sep 2021 07:20:07 -0700 (PDT)
 From: "Alexander Kanavin" <alex.kanavin@gmail.com>
 X-Google-Original-From: Alexander Kanavin <alex@linutronix.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alexander Kanavin <alex@linutronix.de>
-Subject: [PATCH 1/4] msgpack-c: update 3.2.1 -> 4.0.0, add msgpack-cpp
-Date: Wed,  8 Sep 2021 16:19:55 +0200
-Message-Id: <20210908141958.866476-1-alex@linutronix.de>
+Subject: [PATCH 2/4] can-utils: rrecommend iproute2 to make it possible to configure can interfaces
+Date: Wed,  8 Sep 2021 16:19:56 +0200
+Message-Id: <20210908141958.866476-2-alex@linutronix.de>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20210908141958.866476-1-alex@linutronix.de>
+References: <20210908141958.866476-1-alex@linutronix.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Upstream has split the C and C++ versions into separate
-components so add the recipe for CPP flavour.
-
-The only consumer in meta-oe, tmate, still builds fine.
+This replicates the fix from canutils.bb, for the same issue. See the link
+in the comment for details.
 
 Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ---
- .../packagegroups/packagegroup-meta-oe.bb     |  1 +
- ...{msgpack-c_3.2.1.bb => msgpack-c_4.0.0.bb} |  5 ++---
- .../msgpack/msgpack-cpp_4.0.2.bb              | 22 +++++++++++++++++++
- 3 files changed, 25 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/msgpack/{msgpack-c_3.2.1.bb => msgpack-c_4.0.0.bb} (83%)
- create mode 100644 meta-oe/recipes-devtools/msgpack/msgpack-cpp_4.0.2.bb
+ meta-oe/recipes-extended/socketcan/can-utils_git.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index c36feb334..d56e3d302 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -278,6 +278,7 @@ RDEPENDS:packagegroup-meta-oe-devtools ="\
-     capnproto-compiler \
-     mpich \
-     msgpack-c \
-+    msgpack-cpp \
-     mercurial \
-     nodejs \
-     openocd \
-diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-c_3.2.1.bb b/meta-oe/recipes-devtools/msgpack/msgpack-c_4.0.0.bb
-similarity index 83%
-rename from meta-oe/recipes-devtools/msgpack/msgpack-c_3.2.1.bb
-rename to meta-oe/recipes-devtools/msgpack/msgpack-c_4.0.0.bb
-index 5224f32b0..1bb371add 100644
---- a/meta-oe/recipes-devtools/msgpack/msgpack-c_3.2.1.bb
-+++ b/meta-oe/recipes-devtools/msgpack/msgpack-c_4.0.0.bb
-@@ -9,10 +9,9 @@ LIC_FILES_CHKSUM = "file://NOTICE;md5=7a858c074723608e08614061dc044352 \
- 
- PV .= "+git${SRCPV}"
- 
--SRC_URI = "git://github.com/msgpack/msgpack-c \
-+SRC_URI = "git://github.com/msgpack/msgpack-c;branch=c_master \
-            "
--# cpp-3.2.1
--SRCREV = "8085ab8721090a447cf98bb802d1406ad7afe420"
-+SRCREV = "a9a48cea3a78ba661ee8096b5dab456361b0ff23"
- 
- S = "${WORKDIR}/git"
- 
-diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-cpp_4.0.2.bb b/meta-oe/recipes-devtools/msgpack/msgpack-cpp_4.0.2.bb
-new file mode 100644
-index 000000000..f66a00bd8
---- /dev/null
-+++ b/meta-oe/recipes-devtools/msgpack/msgpack-cpp_4.0.2.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "MessagePack implementation for C and C++"
-+DESCRIPTION = "MessagePack is an efficient binary serialization format. It's like JSON. but fast and small"
-+HOMEPAGE = "http://msgpack.org/index.html"
-+LICENSE = "BSL-1.0"
-+LIC_FILES_CHKSUM = "file://NOTICE;md5=7a858c074723608e08614061dc044352 \
-+                    file://COPYING;md5=0639c4209b6f2abf1437c813b208f2d3 \
-+                    file://LICENSE_1_0.txt;md5=e4224ccaecb14d942c71d31bef20d78c \
-+                   "
+diff --git a/meta-oe/recipes-extended/socketcan/can-utils_git.bb b/meta-oe/recipes-extended/socketcan/can-utils_git.bb
+index 8d63a10e5..1a2d33090 100644
+--- a/meta-oe/recipes-extended/socketcan/can-utils_git.bb
++++ b/meta-oe/recipes-extended/socketcan/can-utils_git.bb
+@@ -45,3 +45,8 @@ ALTERNATIVE:${PN} = "candump cansend cansequence"
+ ALTERNATIVE_LINK_NAME[candump] = "${bindir}/candump"
+ ALTERNATIVE_LINK_NAME[cansend] = "${bindir}/cansend"
+ ALTERNATIVE_LINK_NAME[cansequence] = "${bindir}/cansequence"
 +
-+PV .= "+git${SRCPV}"
++# busybox ip fails to configure can interfaces, so we need iproute2 to do so.
++# See details in http://www.armadeus.com/wiki/index.php?title=CAN_bus_Linux_driver.
++RRECOMMENDS:${PN} += "iproute2"
 +
-+SRC_URI = "git://github.com/msgpack/msgpack-c;branch=cpp_master \
-+           "
-+SRCREV = "3bdbf0d2ee75d46d71afa691a594777d89a22cf7"
-+
-+DEPENDS += "boost"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit cmake pkgconfig
-+
-+BBCLASSEXTEND += "native nativesdk"
 -- 
 2.20.1
 
