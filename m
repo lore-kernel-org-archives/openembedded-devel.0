@@ -1,96 +1,96 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.65])
- by mx.groups.io with SMTP id smtpd.web08.5262.1631181429822072392
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.114])
+ by mx.groups.io with SMTP id smtpd.web12.5072.1631181429794196861
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 09 Sep 2021 02:57:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=PyHq6xk8;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.65, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=NGUBkMvD;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.114, mailfrom: zhengrq.fnst@fujitsu.com)
+Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1631181427; i=@fujitsu.com;
-	bh=eHUNZOSYad5aYjLYSj3Vh+ApJDaI2rkQMMWozrdHxSI=;
+	s=170520fj; t=1631181428; i=@fujitsu.com;
+	bh=bCi7JNUyRLInJW4ttUYx/arraf9ZeZIYo9d6UiWqS9A=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=PyHq6xk8xzXBVJpD0zhVYWE5FApv6uh33UIPtP++6EZKY32CK/pw3zbvVqV91sYqP
-	 bPgvbfio4rk23YjtFgu2qJTfJlE1192LZfh8YcOHzYrG5MQKqR2Uo8rawhM5BE48h0
-	 /14z1lDLR9C+LVbCe83lwPyLnec6fGBRAC7WkPevD9oRuWUi3DVi9mTQVCFd4AJufB
-	 QQRu2BKc7FYHZTGjAvBtqPuKYffSUJWTmK1LqulQdj/PirsGwc4E3/7qIojWb0jckz
-	 0T9PF86fo4KsY33cmg76iRlqTwYPrQM4Qr24/7QAXqPbJR/Cb+WjQ3K27bHthNytfq
-	 WJ+cw4FKLisCw==
-Received: from [100.112.196.248] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-b.eu-west-1.aws.symcld.net id 65/F3-30018-37AD9316; Thu, 09 Sep 2021 09:57:07 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupikeJIrShJLcpLzFFi42Kxs+EI1S2+ZZl
-  osGu6iMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnFh2gWmgpXcFQdnH2JpYNzF1cXIxSEkMItJ
-  YtuhR4wQznFGiSuHdzB3MXJysAnoSHS86GYBsUUE9CWWzt4DFhcW8JdYf2E5O4jNIqAqcfLeM
-  aA4BwevgJvE9G/xIGEJAQWJKQ/fg5XzCghKnJz5BGwMs4CExMEXL5ghahQltu88wwJhV0i8Pn
-  yJeQIjzywkLbOQtCxgZFrFaJ5UlJmeUZKbmJmja2hgoGtoaKRraGmua2agl1ilm6SXWqpbnlp
-  comuol1herFdcmZuck6KXl1qyiREYRCkFR212MH54/UHvEKMkB5OSKK/ZTctEIb6k/JTKjMTi
-  jPii0pzU4kOMMhwcShK8CdeBcoJFqempFWmZOcCAhklLcPAoifCqgaR5iwsSc4sz0yFSpxgVp
-  cR5LUFmCoAkMkrz4NpgUXSJUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjDvYZApPJl5JXDTXw
-  EtZgJa7HvNAmRxSSJCSqqBacmlhV+mzni72XujzGKtqCUlrsfFry79Y/Jb9v/X8Dj+dXO6rY5
-  P+XvKssZIaZLQzKw1UaZuspYxVZ98tN6vO+ia9V88/pX+5NsK/d8vm89dq3bSfWmK/p663U/u
-  pVsdEHvYG/jp1Nd/rZs2nn6YPOP9e5Z7PdPyjkS+/sUwQdJF4vqWy8FCvyZ8qZvsVmV7/tc1A
-  8GYDwt+iZzKsllvGmaxJfVXY3/aLT/DqakMUVtb7r6y0rO1tNhQeinWfbrrh4nmK5c/Nk6VWR
-  +Ys+XPuifJVzhN9t44ozsretIhtxPhHiyfWCsPiiuHGG0VNeqcO1tjVWTKXE8fhhnV2odyXc0
-  O3NdewnJGMuP25eJrp7uUWIozEg21mIuKEwEZRWlyHQMAAA==
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-5.tower-291.messagelabs.com!1631181426!149358!1
-X-Originating-IP: [62.60.8.85]
+	b=NGUBkMvD0F4gN1xbGjwjfYMbBUhy/rE17829IMyqadzhG5w+UTeKhBZmYfRJqrSOx
+	 hcaSBIO+du2sxl4XwWBDpTzm3UfveLqFXQkqHUB6GmcHUWn1DfJuCY+DpXZMcYfwMQ
+	 O/URBNl/sk+N6i+V7fzoY76X0sRoFnlyGmOUplFCA5uEPanHYY6LAsEh3AUWvC3pyZ
+	 y2/A4BoqipP1F1wrrzoc4H+yryFwdcqMHnntXHEkSwSpgo7QtB+7aonTDRj5oLIt1I
+	 C+0Q6Ud0mo1BNfhCgkvUJN2NUEMWlOIpsaE7FHrdeGP5rb2yk3nBqlwI54w7jG21I+
+	 aUEfmHMh/aW1A==
+Received: from [100.113.6.150] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta.az-b.eu-central-1.aws.symcld.net id 4B/EE-23198-47AD9316; Thu, 09 Sep 2021 09:57:08 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYolt8yzL
+  R4MB8Q4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWNO5z32giccFQ0H/zI3MN5j72Lk4hASmMUk
+  MW/SFzYIZzejxJYLO4EcTg42AV2Jc4/XsoPYIgL6Ektn72EGsYUF7CXW7d7LCGKzCKhIHFv3i
+  AXE5hXwlHj6Yw9YvYSAgsSUh++ZIeKCEidnPgGrYRaQkDj44gVQnAOoRlFi9nR5iPIKideHLz
+  FPYOSZhaRjFpKOBYxMqxgtkooy0zNKchMzc3QNDQx0DQ2Ndc2ALL3EKt0kvdRS3eTUvJKiRKC
+  kXmJ5sV5xZW5yTopeXmrJJkZgGKUUsnHtYHz6+oPeIUZJDiYlUV6zm5aJQnxJ+SmVGYnFGfFF
+  pTmpxYcYZTg4lCR4E64D5QSLUtNTK9Iyc4AhDZOW4OBREuFVA0nzFhck5hZnpkOkTjEqSonzW
+  oLMFABJZJTmwbXB4ugSo6yUMC8jAwODEE9BalFuZgmq/CtGcQ5GJWHewyBTeDLzSuCmvwJazA
+  S02PeaBcjikkSElFQDk/Ol6bMs/iy7X2VQYOs31UHXbONm4ZV8f2/v/XXv0wMjrtQnlhczlYI
+  0V6+97TyfPXGLSVbc/a4Y9XtXctZdnr1PS6Qj4GVp6cMd///PrNo89ZHtK9X4WlEtfaMzRr5K
+  K65HRj1yWHooOds8rl8rtEotZL35vcb7d2p+S9amiEwU3/2Gz/V48oZgwcNX9+VufBDJPuGeq
+  K6JAJPNrLUmIk+un9LO2P5cZ8my/y0a2/+IhixZW1Pr6PJe4tgWq7xIlwOl576ktK5atoB/ma
+  DBt29BdqUtB/tE335jqC0z+VSxrpd187J4e7+kxeYZLj9fL7njfF6p1nOLhl5KwCbPN/Vf2Bh
+  sc/d0b78h/LNgkxJLcUaioRZzUXEiALdrrLceAwAA
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-9.tower-245.messagelabs.com!1631181427!80697!1
+X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 13527 invoked from network); 9 Sep 2021 09:57:07 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-5.tower-291.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 9 Sep 2021 09:57:07 -0000
+Received: (qmail 4183 invoked from network); 9 Sep 2021 09:57:07 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-9.tower-245.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 9 Sep 2021 09:57:07 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1899v6Qq020795
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1899v7dE010974
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Sep 2021 10:57:06 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
+	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Sep 2021 10:57:07 +0100
+Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Thu, 9 Sep 2021 10:57:05 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
+ (TLS) id 15.0.1497.23; Thu, 9 Sep 2021 10:57:06 +0100
+From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-lrparsing: upgrade 1.0.16 -> 1.0.17
-Date: Fri, 10 Sep 2021 05:57:00 +0800
-Message-ID: <1631224620-4633-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libjcat: upgrade 0.1.7 -> 0.1.8
+Date: Wed, 8 Sep 2021 15:07:36 +0800
+Message-ID: <1631084856-101162-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
+X-Originating-IP: [10.167.225.35]
 X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-  * New: Default to everything using python3
-  * New: Port to Debian bullseye
+Version 0.1.8
+~~~~~~~~~~~~~
+Released: 2021-05-24
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+Bugfixes:
+ - Fix a warning when used in a subproject (Richard Hughes)
+ - Fix compilation on FreeBSD (Richard Hughes)
+
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- ...on3-lrparsing_1.0.16.bb => python3-lrparsing_1.0.17.bb} | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-lrparsing_1.0.16.bb => python3-lrparsing_1.0.17.bb} (79%)
+ .../libjcat/{libjcat_0.1.7.bb => libjcat_0.1.8.bb}              | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-gnome/libjcat/{libjcat_0.1.7.bb => libjcat_0.1.8.bb} (94%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-lrparsing_1.0.16.bb b/meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-lrparsing_1.0.16.bb
-rename to meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb
-index 85a54af30d..24e4e2671d 100644
---- a/meta-python/recipes-devtools/python/python3-lrparsing_1.0.16.bb
-+++ b/meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb
-@@ -8,8 +8,11 @@ BUGTRACKER = "https://sourceforge.net/p/lrparsing/tickets/"
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/lrparsing/files/"
- UPSTREAM_CHECK_REGEX = "lrparsing-(?P<pver>\d+(\.\d+)+)"
- SRC_URI = "${SOURCEFORGE_MIRROR}/lrparsing/lrparsing-${PV}.tar.gz"
--SRC_URI[md5sum] = "34357d69bce87654d792cd8f02d148b2"
--SRC_URI[sha256sum] = "b45afda44001dc5ba632934f74c043d40cce653f1a7526cfbcb68f6be055b8d7"
-+SRC_URI[sha256sum] = "7c060d9f03cf582fdbc0ae0fef0ea2ff6fd56251047ba7e425af97e23f46f582"
-+
-+RDEPENDS:${PN} = " \
-+	python3-crypt \
-+"
+diff --git a/meta-oe/recipes-gnome/libjcat/libjcat_0.1.7.bb b/meta-oe/recipes-gnome/libjcat/libjcat_0.1.8.bb
+similarity index 94%
+rename from meta-oe/recipes-gnome/libjcat/libjcat_0.1.7.bb
+rename to meta-oe/recipes-gnome/libjcat/libjcat_0.1.8.bb
+index e96ef004a3..977c3213f5 100644
+--- a/meta-oe/recipes-gnome/libjcat/libjcat_0.1.7.bb
++++ b/meta-oe/recipes-gnome/libjcat/libjcat_0.1.8.bb
+@@ -11,7 +11,7 @@ SRC_URI = "\
+     git://github.com/hughsie/libjcat.git \
+     file://run-ptest \
+ "
+-SRCREV = "e5307885528cf07058be073d0621624749cc10df"
++SRCREV = "356cd2faf2d2197156b0dae7984482cf781d64db"
+ S = "${WORKDIR}/git"
  
- inherit setuptools3
- 
+ inherit gobject-introspection gtk-doc meson ptest-gnome vala
 -- 
 2.25.1
 
