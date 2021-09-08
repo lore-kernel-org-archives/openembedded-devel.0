@@ -1,93 +1,127 @@
-Received: from mail3.bemta25.messagelabs.com (mail3.bemta25.messagelabs.com [195.245.230.83])
- by mx.groups.io with SMTP id smtpd.web08.5257.1631181407693437061
+Received: from mail3.bemta25.messagelabs.com (mail3.bemta25.messagelabs.com [195.245.230.85])
+ by mx.groups.io with SMTP id smtpd.web10.5349.1631181418774932935
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Sep 2021 02:56:48 -0700
+ Thu, 09 Sep 2021 02:56:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Be3mpFke;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.83, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=CkZobKwr;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.85, mailfrom: zhengrq.fnst@fujitsu.com)
+Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1631181405; i=@fujitsu.com;
-	bh=CsSEQJPr+Bc68NhDCq1V9UADz9CMP9twrGWg8z34HEc=;
+	s=170520fj; t=1631181417; i=@fujitsu.com;
+	bh=fS0UGQywjb+DF4ECMYyM5bvq3/j53dFsmO/E713ACWs=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=Be3mpFkeaPRASu5oHb3ytxj2Ma7742q+aO20yViWyJ0aSaf5cfmQkZocJk6uQQhU5
-	 0i+Gz5F3XtAfgjryvmWDE33701TnwaK/+BYXNskJsrgZllbbUM+nPuU+B5vy7cYBFI
-	 ljJ8YSFyXEOe9f2zS/mNo2zlsmI+wdiNFjMLqGun+O0qYM0MDezk46m2sZgFdPpO3e
-	 N3AVgVpU5SmjWLwN8bnWnm3Bz2yI7EaGitCN0dxk3Gwhv2LBAGehckj494UI41R/UW
-	 ljYy+lM3XVAyg9Op9DEFkF3nz2iHom1dU9WkIi7LvlIxtmJZEXaYkYw6na7kUi/o4h
-	 9VynFr609WXqg==
-Received: from [100.112.199.201] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-b.eu-west-1.aws.symcld.net id 6B/3A-25352-D5AD9316; Thu, 09 Sep 2021 09:56:45 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+EI1Y25ZZl
-  osGi/lcXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmjHj0CeWguecFW23zzE1MDZwdjFycQgJzGKS
-  +Nl3mxXCOc4o8WZVK3MXIycHm4CORMeLbhYQW0RAX2Lp7D1gcWEBH4mFG76B2SwCqhJ3T79mB
-  LF5BdwkHq0+xQ5iSwgoSEx5+J4ZIi4ocXLmE7A5zAISEgdfvGCGqFGU2L7zDAuEXSHx+vAl5g
-  mMPLOQtMxC0rKAkWkVo3lSUWZ6RkluYmaOrqGBga6hoZGuoaWZrpmJXmKVbpJeaqlueWpxia6
-  hXmJ5sV5xZW5yTopeXmrJJkZgGKUUHHHYwXj/9Qe9Q4ySHExKorxmNy0ThfiS8lMqMxKLM+KL
-  SnNSiw8xynBwKEnwJlwHygkWpaanVqRl5gBDGiYtwcGjJMKrBpLmLS5IzC3OTIdInWJUlBLn3
-  XEDKCEAksgozYNrg8XRJUZZKWFeRgYGBiGegtSi3MwSVPlXjOIcjErCvLwgl/Fk5pXATX8FtJ
-  gJaLHvNQuQxSWJCCmpBqa8h75+epbmyUKhi0Or2B6ueO/JH3xr1gF/xYSWusSTASvWb+37KjT
-  Bxmbf3smhKre+/mzMPrDXPXbvIhdHpfUxQR9ncj6vqrCLDpUUTwsWXREY/1IlKq6+YqPrl7fp
-  sd8M3mqWutVM15hd/d/iXWFjmqKrh4KA7/Z2v8jMfA2NzI1azz+pObQWiEu286WvuhpTufHc7
-  /Zve962XVQqkN+bdmMpx4K5zqFF06wVX668/cPgXPTyFCdVebW5YtNLSh88KlrA9/361mUFN0
-  /nLV09mXnHEcvkg8sC7KPd9wd8e/fsofZxgfonnxw/8ryJrzedPds/W/7Xgnezwpp0P/9Y9Fs
-  qwqdb4pCJSLnqQiWW4oxEQy3mouJEAO9IWe4eAwAA
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-4.tower-285.messagelabs.com!1631181404!76308!1
+	b=CkZobKwr8TghwqVSZUh6vWyJe2vXa3lIgjbpIxUQlEK2lQyy0l298Za05WsuiKGXR
+	 qZEFiD0l6k+GCvro4ucd/I0QmpnnzrelXeOy41c/jlT7P1BJqv6pUU/Cz2pQgxsM+V
+	 4n48LLBBzxZND8F6clpNXtK/0G//iUqsbUpCwB2MLkDJVZh3laJrnUNqJh+d972ZUE
+	 KtZn4r/OEVlJhxiHVJsB4xJzGwA2aeG280N99QVc3RHceZx5pj4/xa+7Rsoy/cfOZH
+	 RBJH2+7ffB0/t5zKEa/C6jDLJgdK+chc7dbpHCnrbQXPYD9HMQNPSlAwWnfjxbxt1j
+	 ASxLkMyRtoeEg==
+Received: from [100.112.197.4] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-5.bemta.az-b.eu-west-1.aws.symcld.net id 97/54-19003-86AD9316; Thu, 09 Sep 2021 09:56:56 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrIIsWRWlGSWpSXmKPExsViZ8MRqptxyzL
+  RYG+3tsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnFsUhdrwRLBiuUL1jA1MM7k72Lk4hASmMUk
+  8X3FCUYIZzejxOXnq5m7GDk52AR0Jc49XssOYosI6Essnb0HLC4sYC9xpb2JFcRmEVCR6N8wh
+  QnE5hXwlJjx6jJYjYSAgsSUh++ZIeKCEidnPmEBsZkFJCQOvngBFOcAqlGUmD1dHqK8QuL14U
+  vMExh5ZiHpmIWkYwEj0ypGi6SizPSMktzEzBxdQwMDXUNDI11DS0tdIyNzvcQq3SS91FLd8tT
+  iEl1DvcTyYr3iytzknBS9vNSSTYzAMEopOP54B+OKNx/0DjFKcjApifKa3bRMFOJLyk+pzEgs
+  zogvKs1JLT7EKMPBoSTBm3AdKCdYlJqeWpGWmQMMaZi0BAePkgivGkiat7ggMbc4Mx0idYoxn
+  OPN2iWLmDnegsm2e3eBZDuYnLng4Gpmjllg8n77ISD5AEQKseTl56VKifNaglwiADIuozQPbh
+  ksZi8xykoJ8zIyMDAI8RSkFuVmlqDKv2IU52BUEuY9DDKFJzOvBO6mV0DnMgGd63vNAuTckkS
+  ElFQDk/DSt3O091/lWmX4+dG7yZPq3x96wFSZpZ/V/Prq49e714s+OuLpW+USYPnyf1opo0Vs
+  U9QuZ+1jhW5mCtE+PVtDztSve9y7qIfJMdF3ohiDd+bLj7FiS7LmnnL/br9r98dD292fq7n+M
+  1ZqOBOS90TSlUHU2Ea/J1M++vs7do2Hf13Yku8uX7Lpw7eq7CdJv85vyihRuJT87dzabx7reW
+  /cbKkwWbv6ocAxiTO+d3b9rAlkbTQ4ys38+MV7jazVvOFmU/3kdvuGuAqaX4jsu2r1KC499cv
+  v9ZVR0iLz29czxS16fEntRNPtNxslN1Q/0v16XHkLn1pCldzJ+5fMUq0Os7YGpkrI3o2ZUdEz
+  R4mlOCPRUIu5qDgRALkujw5UAwAA
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-7.tower-285.messagelabs.com!1631181416!76856!1
 X-Originating-IP: [62.60.8.85]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 19505 invoked from network); 9 Sep 2021 09:56:44 -0000
+Received: (qmail 19093 invoked from network); 9 Sep 2021 09:56:56 -0000
 Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-4.tower-285.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 9 Sep 2021 09:56:44 -0000
+  by server-7.tower-285.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 9 Sep 2021 09:56:56 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1899ui65020448
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1899uuiu020603
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Sep 2021 10:56:44 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
+	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Sep 2021 10:56:56 +0100
+Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Thu, 9 Sep 2021 10:56:43 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
+ (TLS) id 15.0.1497.23; Thu, 9 Sep 2021 10:56:55 +0100
+From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-bitarray: upgrade 2.3.2 -> 2.3.3
-Date: Fri, 10 Sep 2021 05:56:37 +0800
-Message-ID: <1631224597-4529-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libbytesize: upgrade 2.4 -> 2.6
+Date: Wed, 8 Sep 2021 15:07:26 +0800
+Message-ID: <1631084846-101126-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
+X-Originating-IP: [10.167.225.35]
 X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-2021-09-05   2.3.3:
--------------------
-  * improve some error messages
-  * add tests
+Libbytesize 2.6
+---------------
+Hela Basa (1):
+- Added translation using Weblate (Sinhala)
+Ricky Tigg (1):
+- Translated using Weblate (Finnish)
+Vojtech Trefny (3):
+- Sync spec with downstream
+- Squashed 'translation-canary/' changes from fccbb1b..4d4e65b
+- Make sure Size can be interpreted as integer in Python 3.10
+Weblate (1):
+- Update translation files
+simmon (2):
+- Added translation using Weblate (Korean)
+- Translated using Weblate (Korean)
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+Libbytesize 2.5
+---------------
+Adolfo Jayme Barrientos (2):
+- Translated using Weblate (Spanish)
+- Translated using Weblate (Asturian)
+Ricky Tigg (1):
+- Translated using Weblate (Finnish)
+Vojtech Trefny (6):
+- Sync spec with downstream
+- travis: Add --nogpgcheck when using dnf on Fedora
+- bscalc: Add option to print only single "human readable" result
+- tests: Run pylint and pycodestyle on bscalc
+- travis: Print logs after failed tests
+- tools: Read input from stdin when not running in a tty
+Weblate (1):
+- Update translation files
+Yaron Shahrabani (2):
+- Added translation using Weblate (Hebrew)
+- Translated using Weblate (Hebrew)
+gururajrkatti (1):
+- Add support to ppc64le for debian build
+
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../{python3-bitarray_2.3.2.bb => python3-bitarray_2.3.3.bb}    | 2 +-
+ .../libbytesize/{libbytesize_2.4.bb => libbytesize_2.6.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-bitarray_2.3.2.bb => python3-bitarray_2.3.3.bb} (77%)
+ rename meta-oe/recipes-support/libbytesize/{libbytesize_2.4.bb => libbytesize_2.6.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_2.3.2.bb b/meta-python/recipes-devtools/python/python3-bitarray_2.3.3.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-bitarray_2.3.2.bb
-rename to meta-python/recipes-devtools/python/python3-bitarray_2.3.3.bb
-index 8b473b543d..17b5d931ca 100644
---- a/meta-python/recipes-devtools/python/python3-bitarray_2.3.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-bitarray_2.3.3.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
- LICENSE = "PSF"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
+diff --git a/meta-oe/recipes-support/libbytesize/libbytesize_2.4.bb b/meta-oe/recipes-support/libbytesize/libbytesize_2.6.bb
+similarity index 93%
+rename from meta-oe/recipes-support/libbytesize/libbytesize_2.4.bb
+rename to meta-oe/recipes-support/libbytesize/libbytesize_2.6.bb
+index ba21ffaf02..118259e4fd 100644
+--- a/meta-oe/recipes-support/libbytesize/libbytesize_2.4.bb
++++ b/meta-oe/recipes-support/libbytesize/libbytesize_2.6.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
+ S = "${WORKDIR}/git"
+ B = "${S}"
  
--SRC_URI[sha256sum] = "4bee3ba9164b66cef64f1099e9a3b88e99ddcd0c943807e99443613e184b48b4"
-+SRC_URI[sha256sum] = "0edf630a4471a48627aec0b840cf3b8e10901191d328f6511560420459de282e"
+-SRCREV = "732ee8d28492e4bc9b52c29bcb81a5c19388d002"
++SRCREV = "c9864f4dd03736839f40d225da494cb1eb64e654"
+ SRC_URI = "git://github.com/rhinstaller/libbytesize;branch=master"
  
- inherit setuptools3 pypi
- 
+ inherit gettext autotools python3native
 -- 
 2.25.1
 
