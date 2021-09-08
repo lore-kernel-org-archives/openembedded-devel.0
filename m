@@ -1,62 +1,62 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.4])
- by mx.groups.io with SMTP id smtpd.web10.12578.1631112389238364331
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.3])
+ by mx.groups.io with SMTP id smtpd.web11.12380.1631112394908869201
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Sep 2021 07:46:29 -0700
+ Wed, 08 Sep 2021 07:46:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=YXc3V12c;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.4, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=HFDG4k9Q;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.3, mailfrom: wangmy@fujitsu.com)
 Return-Path: <wangmy@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1631112387; i=@fujitsu.com;
-	bh=/baZyCu0mup3fPXNs9jTR0koQeUqcq/h/dPVqyn8yic=;
+	s=170520fj; t=1631112392; i=@fujitsu.com;
+	bh=YBNZmaUcmbi9ipg7FFK4jphF/HQDZuL7y2vxgCA9JIo=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=YXc3V12cGNTjqZeodm/mjY6al2RA2+EM0u26JpE3S2idWDj+B96RcJreCxVs2Zipf
-	 GEB16TsD9ZcQRKttupbkFaNiDMeADArwGOXfzfk/xtm9eoGNc1wMOA3Mxco/iRvDY5
-	 mKT8sRxy/PaeUf3gI4iUI4rfimvgJSvyzRFnubaWKOkTa/cf1fWRk0Xrv+HOmGqGt+
-	 4vGH3DIdCo/jvZpsj0AMoN6xiWTNvzbS2b/b5Qdm5NrgrzwJ+7jPqI2+/tWQmXV4Bd
-	 B4KnCWoiLfoy+fnqAnGtMN8tIxXUrdaqCcwUQm0tB1zj3NKguRzFn0GuKdhwg+p5iq
-	 jyFpUGGk5KMOw==
-Received: from [100.112.194.253] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-a.eu-west-1.aws.symcld.net id DE/CC-12623-3CCC8316; Wed, 08 Sep 2021 14:46:27 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrLIsWRWlGSWpSXmKPExsViZ8MRonvojEW
-  iwdW5ehYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8acpS/ZCx5xVKx9s4etgfE/excjF4eQwCwm
-  iWPz1rB1MXICOccZJSZvTQax2QTUJKbfusEKYosI6Essnb2HGcRmFlCRePG7B6iZg0NYwEFi+
-  WRrkDALUPjctpvMIGFeASeJ9V+iQcISAgoSUx6+B+vkFHCWmDO9jR1ik5PEr5s/GUFsXgFBiZ
-  Mzn7BATJeQOPjiBTNEr6LE7MvNLBB2hcSsWW1MExj5ZyFpmYWkZQEj0ypGi6SizPSMktzEzBx
-  dQwMDXUNDI11DSyA2MtNLrNJN1Est1S1PLS7RNdRLLC/WK67MTc5J0ctLLdnECAzFlIIDdTsY
-  H7z+oHeIUZKDSUmUd9dui0QhvqT8lMqMxOKM+KLSnNTiQ4wyHBxKEryap4BygkWp6akVaZk5w
-  LiASUtw8CiJ8DodAUrzFhck5hZnpkOkTjEqSonzzj0NlBAASWSU5sG1wWLxEqOslDAvIwMDgx
-  BPQWpRbmYJqvwrRnEORiVh3icgU3gy80rgpr8CWswEtLjtoQnI4pJEhJRUA9PjaX/frLteHMg
-  utf/3Sha5pdpCm19Wb8mVjHC7kTlZP0/5XfqKFTcVvqxujnkRLxcgvH759FsWj88L/t5x7Pw5
-  R+2PMzYxNmWEGa1p2eMlriirkr+/iW+amNFjf6GEG46OW7RPi/OabFWZmKXOH9GsfdAwpbrdM
-  Lk84QpHseQBxSv+fjGlxrNVOSVrd5+6cnZ+yAm5VoGbV+s/Tl18SWyyjsj82x179Lee9y7n0N
-  qym+nVsZRUjXWRp65NF4riCvq3e8sppVPhzd51x5yub/l+dMbFLsV6liAB/f1/Io9PmKq5MNW
-  3yvq7Nc+WL3f+aQdefpi/Ufhg73SX+K/FJ7/Y9m5fsDPu7ofCh//r4xWUWIozEg21mIuKEwG6
-  fNe2QAMAAA==
+	b=HFDG4k9QR4/ooBDeNFTjAJYUwo+JR8SfMmLZx768kgIM8qtlsVXkTdKux4vPs1E+0
+	 jd9Ljp3tlC/gdK3ywJLWJcL9diZfbS2u4Amoi10oEuLL6w1aM2jdQRUKwPEyj+RYxg
+	 M2j/LuHMWNuh99hCIdsfIEQ9PhTPDyeXJwlCNivJ0QZJyhJmx/1YTRPe5ieXBku3uH
+	 a2RoxwzAezUUAx9pMI8QlHMpMnDxNiHvvgpMj94HdIC9ZYNH3dQd3GaEI7Vgd1oaDK
+	 VhoRxzgjN7/+M3fcoBKyY8ztsBBkwkzmMYH0yBgrNJB2ANSOSdGm+PcJsZ0+tAb+c8
+	 VQ+RKIofLWFaA==
+Received: from [100.112.195.172] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta.az-a.eu-west-1.aws.symcld.net id D7/B2-14609-8CCC8316; Wed, 08 Sep 2021 14:46:32 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrLIsWRWlGSWpSXmKPExsViZ8MxVffEGYt
+  Eg7tvhCwuHl7K7MDocW7jCsYAxijWzLyk/IoE1oxvS0oKbnNVfJ62g6WB8RtnFyMXh5DALCaJ
+  a5vvsEI4xxklfh96wd7FyMnBJqAmMf3WDVYQW0RAX2Lp7D3MIDazgIrEi989YDXCAh4SzfOPM
+  oHYLEDxtb0bWboYOTh4BZwkPv0SBQlLCChITHn4HqyVU8BZYs70NrBWIaCSXzd/MoLYvAKCEi
+  dnPmGBGC8hcfDFC2aIXkWJ2ZebWSDsColZs9qYJjDyz0LSMgtJywJGplWM5klFmekZJbmJmTm
+  6hgYGuoaGRrqGlia6ZmZ6iVW6iXqppbrlqcUluoZ6ieXFesWVuck5KXp5qSWbGIGhmFJwyGkH
+  4/vXH/QOMUpyMCmJ8u7abZEoxJeUn1KZkVicEV9UmpNafIhRhoNDSYJX8xRQTrAoNT21Ii0zB
+  xgXMGkJDh4lEV6nI0Bp3uKCxNzizHSI1ClGRSlx3rmngRICIImM0jy4NlgsXmKUlRLmZWRgYB
+  DiKUgtys0sQZV/xSjOwagkzPsEZApPZl4J3PRXQIuZgBa3PTQBWVySiJCSamCazjxDXrlo8gf
+  /pF/fL3k9O8tht7BjHe/MmkPvFerSwqM+Gb9WU3g3595nYcX6qCaPYyFGW1f9MO1lFMtgtZbb
+  kWme+Kiz4RTTgeWMG+/s/5vlFKy9/k/o3mdHfsfO/N7HsZMpKP/kdUnpM8eEv1Z2qlyqnHNp3
+  /Sms+4Xl3O9XS0t9+KI7KXYG5O8vBmFGo1++V7o+ih+4LrBZQUBl5X6cYerb9fHLkhIzHjO48
+  TAVfukR2zhpWnxnmtcuxt2pAT63ai78bele6Kw574NGZ+E82YIuq//rhlzLOFFxL4Ph3VLdm1
+  8tERgR+H9KUUGu5s2zjAOEvshOjOt0zVA8m93ospcJ8u1b2VySxmXXzRSYinOSDTUYi4qTgQA
+  zZg7a0ADAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-21.tower-267.messagelabs.com!1631112386!54461!1
-X-Originating-IP: [62.60.8.84]
+X-Msg-Ref: server-22.tower-267.messagelabs.com!1631112391!54482!1
+X-Originating-IP: [62.60.8.149]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 16270 invoked from network); 8 Sep 2021 14:46:26 -0000
-Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-21.tower-267.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 Sep 2021 14:46:26 -0000
+Received: (qmail 22217 invoked from network); 8 Sep 2021 14:46:32 -0000
+Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
+  by server-22.tower-267.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 Sep 2021 14:46:32 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 188EkQBd021289
+	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 188EkVDP016694
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 8 Sep 2021 15:46:26 +0100
+	for <openembedded-devel@lists.openembedded.org>; Wed, 8 Sep 2021 15:46:31 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Wed, 8 Sep 2021 15:46:24 +0100
+ (TLS) id 15.0.1497.23; Wed, 8 Sep 2021 15:46:30 +0100
 From: "wangmy" <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] libqmi: upgrade 1.30.0 -> 1.30.2
-Date: Wed, 8 Sep 2021 22:46:01 +0800
-Message-ID: <1631112363-19399-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] lockfile-progs: upgrade 0.1.18 -> 0.1.19
+Date: Wed, 8 Sep 2021 22:46:02 +0800
+Message-ID: <1631112363-19399-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1631112363-19399-1-git-send-email-wangmy@fujitsu.com>
 References: <1631112363-19399-1-git-send-email-wangmy@fujitsu.com>
@@ -68,26 +68,27 @@ Content-Type: text/plain
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libqmi/{libqmi_1.30.0.bb => libqmi_1.30.2.bb}               | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.30.0.bb => libqmi_1.30.2.bb} (90%)
+ .../{lockfile-progs_0.1.18.bb => lockfile-progs_0.1.19.bb}     | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-extended/lockfile-progs/{lockfile-progs_0.1.18.bb => lockfile-progs_0.1.19.bb} (85%)
 
-diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.30.0.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.30.2.bb
-similarity index 90%
-rename from meta-oe/recipes-connectivity/libqmi/libqmi_1.30.0.bb
-rename to meta-oe/recipes-connectivity/libqmi/libqmi_1.30.2.bb
-index 61fe0eef81..c337abde37 100644
---- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.30.0.bb
-+++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.30.2.bb
-@@ -14,7 +14,7 @@ inherit autotools pkgconfig bash-completion gobject-introspection
+diff --git a/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.18.bb b/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.19.bb
+similarity index 85%
+rename from meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.18.bb
+rename to meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.19.bb
+index a82f10b919..df88afa310 100644
+--- a/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.18.bb
++++ b/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.19.bb
+@@ -9,8 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+ DEPENDS = "liblockfile"
  
- SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
+ SRC_URI = "${DEBIAN_MIRROR}/main/l/${BPN}/${BPN}_${PV}.tar.gz"
+-SRC_URI[md5sum] = "4eb83bdf88016db836b7cc09591fb0f3"
+-SRC_URI[sha256sum] = "a42995a4b97e6188efc90fcc1a761163c4b2cff5c81b936f85c84301ddb05ce6"
++SRC_URI[sha256sum] = "2c5704b01c8f474f82921780e4592a927b2bf6a6d7616354a6c5d7cd5664857e"
  
--SRC_URI[sha256sum] = "c039cdb5d3522b45a50d2287ab6311cdc9f99d46a719a1ea4beb7591787b8a1b"
-+SRC_URI[sha256sum] = "be01ece0ea2c2194cbea5744bf5aaf06c04ba5fb7ec7887a13116c76d114fedd"
- 
- PACKAGECONFIG ??= "udev mbim"
- PACKAGECONFIG[udev] = ",--without-udev,libgudev"
+ do_compile() {
+     oe_runmake CFLAGS=' -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -fasynchronous-unwind-tables'
 -- 
 2.25.1
 
