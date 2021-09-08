@@ -1,49 +1,46 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web09.8766.1631091342121573406
+Received: from david.siemens.de (david.siemens.de [192.35.17.14])
+ by mx.groups.io with SMTP id smtpd.web11.10155.1631101709776808568
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Sep 2021 01:55:42 -0700
+ Wed, 08 Sep 2021 04:48:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: mingli.yu@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 1888te8i009931
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 8 Sep 2021 01:55:40 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Wed, 8 Sep 2021 01:55:39 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Wed, 8 Sep 2021 01:55:39 -0700
-From: "Yu, Mingli" <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] polkit: add the CVE tag
-Date: Wed, 8 Sep 2021 16:51:31 +0800
-Message-ID: <20210908085131.9920-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=missing; spf=pass (domain: siemens.com, ip: 192.35.17.14, mailfrom: samuel.dolt.ext@siemens.com)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id 188BmRTG018448
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 8 Sep 2021 13:48:27 +0200
+Received: from dev.vm7.ccp.siemens.com ([144.145.220.57])
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id 188BmREY024930;
+	Wed, 8 Sep 2021 13:48:27 +0200
+Received: from dev.localdomain (localhost [127.0.0.1])
+	by dev.vm7.ccp.siemens.com (Postfix) with ESMTP id C6AF479596A;
+	Wed,  8 Sep 2021 13:48:27 +0200 (CEST)
+From: samuel.dolt.ext@siemens.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Samuel Dolt <samuel.dolt.ext@siemens.com>
+Subject: [meta-python][PATCH 1/3] python3-alembic: add native and nativesdk to BBCLASSEXTEND
+Date: Wed,  8 Sep 2021 13:48:23 +0200
+Message-Id: <20210908114825.15679-1-samuel.dolt.ext@siemens.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-From: Mingli Yu <mingli.yu@windriver.com>
+From: Samuel Dolt <samuel.dolt.ext@siemens.com>
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Samuel Dolt <samuel.dolt.ext@siemens.com>
 ---
- meta-oe/recipes-extended/polkit/polkit/CVE-2021-3560.patch | 2 ++
+ meta-python/recipes-devtools/python/python3-alembic_1.6.5.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/polkit/polkit/CVE-2021-3560.patch b/meta-oe/recipes-extended/polkit/polkit/CVE-2021-3560.patch
-index daf0b1edb..76308ffdb 100644
---- a/meta-oe/recipes-extended/polkit/polkit/CVE-2021-3560.patch
-+++ b/meta-oe/recipes-extended/polkit/polkit/CVE-2021-3560.patch
-@@ -5,6 +5,8 @@ Subject: [PATCH] GHSL-2021-074: authentication bypass vulnerability in polkit
- 
- initial values returned if error caught
- 
-+CVE: CVE-2021-3560
+diff --git a/meta-python/recipes-devtools/python/python3-alembic_1.6.5.bb b/meta-python/recipes-devtools/python/python3-alembic_1.6.5.bb
+index 9af21c92f..e1f29cad2 100644
+--- a/meta-python/recipes-devtools/python/python3-alembic_1.6.5.bb
++++ b/meta-python/recipes-devtools/python/python3-alembic_1.6.5.bb
+@@ -15,3 +15,5 @@ RDEPENDS:${PN} += "\
+     ${PYTHON_PN}-sqlalchemy \
+     ${PYTHON_PN}-misc \
+ "
 +
- Upstream-Status: Backport [https://gitlab.freedesktop.org/polkit/polkit/-/commit/a04d13affe0fa53ff618e07aa8f57f4c0e3b9b81]
- 
- Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++BBCLASSEXTEND = "native nativesdk"
 -- 
-2.17.1
+2.20.1
 
