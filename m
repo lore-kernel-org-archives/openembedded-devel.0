@@ -1,87 +1,119 @@
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- by mx.groups.io with SMTP id smtpd.web09.11576.1631291413516793313
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
+ by mx.groups.io with SMTP id smtpd.web12.12401.1631294615074357950
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Sep 2021 09:30:14 -0700
+ Fri, 10 Sep 2021 10:23:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmx.net header.s=badeba3b8450 header.b=eCecQFA+;
- spf=pass (domain: gmx.de, ip: 212.227.17.21, mailfrom: dl9pf@gmx.de)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
-	s=badeba3b8450; t=1631291411;
-	bh=3BH7quAde5A2DXB5+NMk0VxkP9Eoblwbc3Y02W2mipA=;
-	h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
-	b=eCecQFA+vHlYz+FYlV125X5wp5ELQAqhDYuEZBA2FTOnWoIl4AomaLP/GDE+DHS7K
-	 2NS5PwwdlJwZkrNtPu/81PfM0ap0dvmw33Qfn8lXpqDH/7RJwSn9fiEiRulyKImu3U
-	 0t1FZidHvCb6ieh26P1RGXrqKASkbSV9i5FdQE54=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from gmx.de ([95.88.57.223]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MMobU-1mhVHr1UJw-00Ihh3; Fri, 10
- Sep 2021 18:30:11 +0200
-From: =?UTF-8?B?SmFuLVNpbW9uIE3DtmxsZXI=?= <dl9pf@gmx.de>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=bstYhEvx;
+ spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f181.google.com with SMTP id 5so1575828plo.5
+        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Sep 2021 10:23:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=zfqrDMa1THF+yPJ+u5XdCFsQYRID7YmxZoqgFvPPkOo=;
+        b=bstYhEvxp4eW2BiZZWFSyecHzosY5DnreBWt7KufVgMGuEK85eIKp8t0SNGWy+j6cV
+         NLF2ZArYYoDn+/6uVXqf0h5WGqQ+/MIUY97u1VaLumaK1xiR1ubzMLn456dLv6VYB5Yh
+         JEUWxiidJdqBCw7ZRIMs8nnq8zX5wD+2a5jHZNn9aBE/HraucED8RveZa/3JjZRfTOaW
+         dknvkOpZp7N+aGInK0otBDBJGpUdIQqrw1o+pchy+2NCDGx7DpDQSwfKqhxRvQWtkOXh
+         72l6BTNeZabs1gbn5CF4XKL9rs560mPvEnxCwfymFZNoGqcOjYXNFEx70eLVsxbuMqKx
+         q2lw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=zfqrDMa1THF+yPJ+u5XdCFsQYRID7YmxZoqgFvPPkOo=;
+        b=hZegUuQnitDWLT8pPOjHuqktCUJ1XL7aWzqvUvo5vnEPI3I3g4xbw67pck950zG6Hz
+         KMPz1VRjfjZVz6EqmBZA/o1ZHcnCwwPZaLF1krRJP2QS0b4V2+FahGO2mKJyktvW1OD0
+         nH5VtBEQaVTT8Bdxld5vbwNgH5jpHDBm6DDx+wR/sLyI72KAHLQ8gt+Du1QT3ZPb6vdI
+         tAZuQxTh9CvR6L6KfCd2CrkG76+7wVnuPU8xuuwwcNUkGdNplQkcOah+bIPGXNBb0trK
+         ORfsXlFg8GcAFXgVXeGhgMVpaLNNRJGUJFt7c+KZw1yT7FdDMp5iBLS1qKhlpyBsZo+v
+         e7gQ==
+X-Gm-Message-State: AOAM531bRWo4blpfZf8+XFlfZ+vfw/D+qNLA5oio5WAxyu1zbm+QZJ+C
+	FABlO/UkpEdGZ243Qq643s/wCUyHG+8=
+X-Google-Smtp-Source: ABdhPJw3DoUzZEAlo7e33J6I+q8teP39MyauNxZnFa1OmUQMGttKpXYBvSWpK2AyhV/0Hg/OuG25rg==
+X-Received: by 2002:a17:90a:4049:: with SMTP id k9mr10742589pjg.175.1631294614366;
+        Fri, 10 Sep 2021 10:23:34 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from keaua.caveonetworks.com ([2601:202:4180:a5c0:9fd1:b728:fff3:766f])
+        by smtp.gmail.com with ESMTPSA id gk8sm5409674pjb.49.2021.09.10.10.23.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 10 Sep 2021 10:23:34 -0700 (PDT)
+From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jan-Simon Moeller <dl9pf@gmx.de>
-Subject: [meta-oe][PATCH] Remove patch that produces a segfault in the ptest of lua
-Date: Fri, 10 Sep 2021 18:29:49 +0200
-Message-Id: <20210910162949.3732-1-dl9pf@gmx.de>
-X-Mailer: git-send-email 2.32.0
+Cc: Pierre-Jean Texier <pjtexier@koncepto.io>,
+	Khem Raj <raj.khem@gmail.com>,
+	Armin Kuster <akuster@mvista.com>
+Subject: [meta-networking][dunfell][PATCH] stunnel: upgrade 5.56 -> 5.57
+Date: Fri, 10 Sep 2021 10:23:32 -0700
+Message-Id: <20210910172332.2671280-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Provags-ID: V03:K1:OYLDvwHGJGbr1GiBWAzD3f/YY4q/dnzb4tSEaVz5eU3FFtdXs5x
- Dr25zZmAVVpfhi06AFCaCNpQmJmXc6vSSuPv2/+jqSjnk1nN29zADrAHWsblyMYz+8vdp4w
- esPZQ5CpJ1F/lMxfe0HNqokVrP+lB+lZ+oxM0p5Kc6lOz8dfwuZ7wttq9yvML3cCvJhJk9R
- NZNcDH3K5YoXYHTCyP+5w==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:ms1qeQLzPyA=:0fVNv4yZKyXD0qmMPRjiEu
- VaB9SiEodwOdNH0vGKe56Qe7AHKVhp6U/3IyrqMlTrlJVv4ef/QHcMmPTIWOaIcdJAYyL/kXs
- gItQw6dsYX+x+jjGksnXBPch5o21Y38eOtlUh+V3Nc78BV/uYu1luxkYSZ4/Z+5/EW9qGPDEY
- 80ZgliinntpFXvhb+5Ob/oyrSKUJ0ai3bIx1g+Uu4Kvb9gpLEfnVg81dRMHlZag9bhdc2w9l4
- IJXTgwWdHUOOkqFhGmk/DNETNQTKx94LSugQnM5qHMAKBhGOfBq7InlYiIHY2Pt44i62yVNOK
- prGeuyoexztHbyx5SBUcnfz1DpbfnNgSJ6knTlT6fzWI0GXP9c2s/MUp0+gEd1gK0BupeS95W
- P1036k1UFqgpZGvRTIDpjtiEeAXFIPeQeOcgj2XmH4aPzJj0MBCSoLw/btM50WMaIMDNGBEii
- LYJSpPtczzdrId5sGN7B/nV8rlxOyhcMfRobfrNsPFOMyMUim0Vmclgjqk5nF7WqDimnK6oGP
- YXY/uDg04wHHYPqxZbr6f5WHYigh6++mjIiuRGfiav/vTrU3+7JyuoNNZ1awEobg6vSlCvxDK
- CaenBT90s31xFTdFOnqA+Gbg9unZK0+NIEyp6pP0cH0o4HEYinNr9KcHeq2fQteQ6Rk9ojODH
- Vcz7sNIjf3dUqsFZCvt5BBmi5cQtfNpuIv0kYtTwM9sjoGZYTosS9SFlm2b6IOiKoNwss/ccT
- ZLxwRApQxeZJBXPpz/Cwbabul15zK7R0IlZiWb5FbdZ0ZofwH40AMZcvMb9DRm89Vt64HIzKa
- uAfXALKfTkkx89N2pLVxqWXqVpvsf5sUTJ4KmWRLwLDFWsn1V9gzlBAidaJMfE5PuP7u7DZLJ
- FO3fijKfn8q2rNSgjzcdO9J0d/yTttbrHYv0zxrrB2Mwrpp07h7bEdNl5CBUEfz0FueMI8j3t
- B8ybMJ9M2x/leMarNBfcHZaLtWyYWx6G8fDVeP3D2XWflCIIFBWYvm8RwZ2mMw7KPOCNsLLhM
- WXgBQNfRlOu5Kz7TsJi86hTjdx3qJgB6sWmrQVJbIutYr2SKEcj8+o2k9YRN/uafew==
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Jan-Simon Moeller <dl9pf@gmx.de>
+From: Pierre-Jean Texier <pjtexier@koncepto.io>
 
-The patch file CVE-2020-15945.patch does cause a segfault in the lua ptest=
- (db.lua test).
-According to upstream developers the patch is not correct and causes the s=
-egfault.
+Source: https://git.openembedded.org/meta-openembedded
+MR: 109039
+Type: Security Fix
+Disposition: Backport from https://git.openembedded.org/meta-openembedded/commit/meta-networking/recipes-support/stunnel?h=gatesgarth&id=b76712700c79e4627028787ae65ab306c21eed02
+ChangeID: 2543a2516b0f00024ed117a1fe33d1157b3d725f
+Description:
 
-Reproduce: build core-image-minimal with lua and ptest-pkgs on .
-Run: ptest-runner lua
+Affects < 5.57
 
-This test passes if the patch is removed.
+License-Update: copyright years updated.
 
-Please also backport to dunfell as well.
+This is a bug fix release:
 
-Signed-off-by: Jan-Simon Moeller <dl9pf@gmx.de>
-=2D--
- meta-oe/recipes-devtools/lua/lua_5.3.6.bb | 1 -
- 1 file changed, 1 deletion(-)
+ - X.509 v3 extensions required by modern versions of OpenSSL are added to generated self-signed test certificaes.
+ - Fixed a tiny memory leak in configuration file reload error handling (thx to Richard Könning).
+ - Merged Debian 05-typos.patch (thx to Peter Pentchev).
+ - Merged with minor changes Debian 06-hup-separate.patch (thx to Peter Pentchev).
+ - Merged Debian 07-imap-capabilities.patch (thx to Ansgar).
+ - Merged Debian 08-addrconfig-workaround.patch (thx to Peter Pentchev).
+ - Fixed tests on the WSL2 platform.
 
-diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.6.bb b/meta-oe/recipes-d=
-evtools/lua/lua_5.3.6.bb
-index f830e0925..af3054dcb 100644
-=2D-- a/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
-+++ b/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
-@@ -8,7 +8,6 @@ SRC_URI =3D "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=
-=3Dtarballsrc \
-            file://lua.pc.in \
-            file://0001-Allow-building-lua-without-readline-on-Linux.patch=
- \
-            file://CVE-2020-15888.patch \
--           file://CVE-2020-15945.patch \
-            file://0001-Fixed-bug-barriers-cannot-be-active-during-sweep.p=
-atch \
-            "
+Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit b76712700c79e4627028787ae65ab306c21eed02)
+[Includes CVE-2021-20230 per changelog
+Full commit https://github.com/mtrojnar/stunnel/commit/ebad9ddc4efb2635f37174c9d800d06206f1edf9
+]
 
-=2D-
-2.32.0
+Signed-off-by: Armin Kuster <akuster@mvista.com>
+---
+ .../stunnel/{stunnel_5.56.bb => stunnel_5.57.bb}             | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-support/stunnel/{stunnel_5.56.bb => stunnel_5.57.bb} (86%)
+
+diff --git a/meta-networking/recipes-support/stunnel/stunnel_5.56.bb b/meta-networking/recipes-support/stunnel/stunnel_5.57.bb
+similarity index 86%
+rename from meta-networking/recipes-support/stunnel/stunnel_5.56.bb
+rename to meta-networking/recipes-support/stunnel/stunnel_5.57.bb
+index 3411e5d0c7..8f6de571f3 100644
+--- a/meta-networking/recipes-support/stunnel/stunnel_5.56.bb
++++ b/meta-networking/recipes-support/stunnel/stunnel_5.57.bb
+@@ -6,7 +6,7 @@ SECTION = "net"
+ # a combined work based on stunnel. Thus, the terms and conditions of the GNU
+ # General Public License cover the whole combination.
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING.md;md5=d6d635d290ba1705821254a0278f1ef7"
++LIC_FILES_CHKSUM = "file://COPYING.md;md5=6bae28875b3b599f8f621f4335b17955"
+ 
+ DEPENDS = "autoconf-archive libnsl2 openssl"
+ 
+@@ -14,8 +14,7 @@ SRC_URI = "ftp://ftp.stunnel.org/stunnel/archive/5.x/${BP}.tar.gz \
+            file://fix-openssl-no-des.patch \
+ "
+ 
+-SRC_URI[md5sum] = "01b0ca9e071f582ff803a85d5ed72166"
+-SRC_URI[sha256sum] = "7384bfb356b9a89ddfee70b5ca494d187605bb516b4fff597e167f97e2236b22"
++SRC_URI[sha256sum] = "af5ab973dde11807c38735b87bdd87563a47d2fa1c72a07929fcfce80a600fe1"
+ 
+ inherit autotools
+ 
+-- 
+2.25.1
 
