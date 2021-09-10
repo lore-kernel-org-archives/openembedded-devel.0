@@ -1,92 +1,107 @@
-Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
- by mx.groups.io with SMTP id smtpd.web12.2795.1631233803722703451
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web11.3654.1631239401050386263
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Sep 2021 17:30:03 -0700
+ Thu, 09 Sep 2021 19:03:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=UGJNsrGY;
- spf=pass (domain: gmail.com, ip: 209.85.222.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f171.google.com with SMTP id a66so292463qkc.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Sep 2021 17:30:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=6s7OouUJWEzMAopQbXDEw2ebOoPgZNcsOZ3BdCho71E=;
-        b=UGJNsrGY9KJrHnzD7GvoOSgCOEzqBLyHiMLTA9y1yRv34SZ53OGb3xdKFxx6BuGlM9
-         lA5U1+CNF5zda2743MNynuGoD310MvMGm6OhFl3qO0OiSA4jKZXKptLJtBf1pxnP8DF8
-         npSgFNOCEOwIbOVOIkIwYVahQ5YsW6vC/YX+frACqiIF/CEA3xu727xoB5Yzz6wkfYLS
-         pYIiiYtczuiwcOT8k7ekVRUAFDHUc+RAPN1N582qa+mqboZlw6wIT1a7+wK3aw5W/lLK
-         jFc5kX3s0hQn209IpSPXQYdjTmtGWXgQ8PED5a8A8nAugvFA49sLwenXHxuMBBRm5LHP
-         bLZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=6s7OouUJWEzMAopQbXDEw2ebOoPgZNcsOZ3BdCho71E=;
-        b=iQYsBYgMfEShVp/ngkJyjGAJwikzWaoDfRTxh+ULPVT1i3fa6cnhcf3YZRa3t+dMfn
-         whoY7QgK8i2y8vqSb3Oou28cq2JfkiFq1iJn/8A8mjoQFJvhbJ1wgDXphJr/kwFl3MYa
-         i0pSdgvJ5F0VPWNtb+VH/y7t2C/opswd6O5Ilyshe8fanMEkZqrFyXwvJOQ6TCAORrSq
-         4gVP3zR67EIw1kJtTFaarZoBb8gJUiQ0joIUyfbdzz4cysZkCHBCXaADwPYKxkWzZhnc
-         QsuGqTZZYsCmlYsizUVu/aldHUtvQ8V84WDWtfhTtzWF8hV0T+NxDO316I/HstCv/hTL
-         y8SA==
-X-Gm-Message-State: AOAM532UU+xMpMPVOTXPuwMECvrqGt1FUzk6IStJ/7+Suo9JRKORHfFB
-	vqEeNbO/BYWW1uTlZjnGHQM9xTURgPri5UouK1ecFqCFsPs=
-X-Google-Smtp-Source: ABdhPJxsznP6orF5miJXQdpFqDPxtyhFCTYYAMO81zToLZ0LaUWond0msvFGCwrNZu9IBNO419gop/2yx9jikUHgtwA=
-X-Received: by 2002:a37:a04e:: with SMTP id j75mr5446795qke.98.1631233802529;
- Thu, 09 Sep 2021 17:30:02 -0700 (PDT)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: changqing.li@windriver.com)
+Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 18A23JvJ031860
+	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Sep 2021 19:03:19 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 18A23Jhs025551
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Sep 2021 19:03:19 -0700 (PDT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Thu, 9 Sep 2021 19:03:18 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.14; Thu, 9 Sep 2021 19:03:18 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Thu, 9 Sep 2021 19:03:17 -0700
+From: "Changqing Li" <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-networking][PATCH 1/2] ndpi: upgrade 3.4 -> 4.0
+Date: Fri, 10 Sep 2021 09:59:03 +0800
+Message-ID: <20210910015904.3378-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20210909190030.74738-1-joe.slater@windriver.com> <CAMKF1sq8iVBodq3kMa0GxV2wkUyH-r6W=OwVg16AYrGYF1XU2g@mail.gmail.com>
-In-Reply-To: <CAMKF1sq8iVBodq3kMa0GxV2wkUyH-r6W=OwVg16AYrGYF1XU2g@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 9 Sep 2021 17:29:36 -0700
-Message-ID: <CAMKF1srUDJ_QBGabpGnSQXZju6ANL9H0qSpFD32MPwcqoCmg2g@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/1] redis: advance to version 6.2.5
-To: Joe Slater <joe.slater@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	Randy MacLeod <randy.macleod@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
 
-On Thu, Sep 9, 2021 at 2:38 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> Hi Joe
->
-> Seeing reproducible issue
->
-> https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1521
->
-> can you take a look
+From: Changqing Li <changqing.li@windriver.com>
 
-nm, it seems it was an AB glitch.
->
-> On Thu, Sep 9, 2021 at 12:00 PM Joe Slater <joe.slater@windriver.com> wrote:
-> >
-> > Pull in fix for CVE-2021-32761.
-> >
-> > Signed-off-by: Joe Slater <joe.slater@windriver.com>
-> > ---
-> >  .../recipes-extended/redis/{redis_6.2.4.bb => redis_6.2.5.bb}   | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >  rename meta-oe/recipes-extended/redis/{redis_6.2.4.bb => redis_6.2.5.bb} (96%)
-> >
-> > diff --git a/meta-oe/recipes-extended/redis/redis_6.2.4.bb b/meta-oe/recipes-extended/redis/redis_6.2.5.bb
-> > similarity index 96%
-> > rename from meta-oe/recipes-extended/redis/redis_6.2.4.bb
-> > rename to meta-oe/recipes-extended/redis/redis_6.2.5.bb
-> > index 0db71240e..58d759b59 100644
-> > --- a/meta-oe/recipes-extended/redis/redis_6.2.4.bb
-> > +++ b/meta-oe/recipes-extended/redis/redis_6.2.5.bb
-> > @@ -17,7 +17,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-> >             file://GNU_SOURCE.patch \
-> >             file://0006-Define-correct-gregs-for-RISCV32.patch \
-> >             "
-> > -SRC_URI[sha256sum] = "ba32c406a10fc2c09426e2be2787d74ff204eb3a2e496d87cff76a476b6ae16e"
-> > +SRC_URI[sha256sum] = "4b9a75709a1b74b3785e20a6c158cab94cf52298aa381eea947a678a60d551ae"
-> >
-> >  inherit autotools-brokensep update-rc.d systemd useradd
-> >
-> > --
-> > 2.25.1
-> >
-> >
-> > 
-> >
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ .../0001-autogen.sh-not-generate-configure.patch     | 12 ++++++++----
+ .../ntopng/{ndpi_3.4.bb => ndpi_4.0.bb}              |  7 +++----
+ 2 files changed, 11 insertions(+), 8 deletions(-)
+ rename meta-networking/recipes-support/ntopng/{ndpi_3.4.bb => ndpi_4.0.bb} (76%)
+
+diff --git a/meta-networking/recipes-support/ntopng/files/0001-autogen.sh-not-generate-configure.patch b/meta-networking/recipes-support/ntopng/files/0001-autogen.sh-not-generate-configure.patch
+index ffc6ec1ef..1cbf059ef 100644
+--- a/meta-networking/recipes-support/ntopng/files/0001-autogen.sh-not-generate-configure.patch
++++ b/meta-networking/recipes-support/ntopng/files/0001-autogen.sh-not-generate-configure.patch
+@@ -8,15 +8,18 @@ Only use autogen.sh to generate configure.ac.
+ Upstream-Status: Inappropriate [embedded specific]
+ 
+ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++
++refresh patch to 4.0
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ ---
+- autogen.sh | 8 --------
+- 1 file changed, 8 deletions(-)
++ autogen.sh | 9 ---------
++ 1 file changed, 9 deletions(-)
+ 
+ diff --git a/autogen.sh b/autogen.sh
+-index df734ce9..d7bbf8cb 100755
++index cf5d7057..cb73cf9d 100755
+ --- a/autogen.sh
+ +++ b/autogen.sh
+-@@ -52,11 +52,3 @@ cat configure.seed | sed \
++@@ -52,12 +52,3 @@ cat configure.seed | sed \
+      -e "s/@NDPI_VERSION_SHORT@/$NDPI_VERSION_SHORT/g" \
+      -e "s/@FUZZY@/$FUZZY/g" \
+      > configure.ac
+@@ -25,6 +28,7 @@ index df734ce9..d7bbf8cb 100755
+ -cat configure | sed "s/#define PACKAGE/#define NDPI_PACKAGE/g" | sed "s/#define VERSION/#define NDPI_VERSION/g"  > configure.tmp
+ -cat configure.tmp > configure
+ -
++-echo "./configure $@"
+ -chmod +x configure
+ -./configure $@
+ -
+diff --git a/meta-networking/recipes-support/ntopng/ndpi_3.4.bb b/meta-networking/recipes-support/ntopng/ndpi_4.0.bb
+similarity index 76%
+rename from meta-networking/recipes-support/ntopng/ndpi_3.4.bb
+rename to meta-networking/recipes-support/ntopng/ndpi_4.0.bb
+index 89450f562..aee2d8c6f 100644
+--- a/meta-networking/recipes-support/ntopng/ndpi_3.4.bb
++++ b/meta-networking/recipes-support/ntopng/ndpi_4.0.bb
+@@ -3,15 +3,14 @@ DESCRIPTION = "nDPI is an open source LGPLv3 library for deep-packet \
+ inspection. Based on OpenDPI it includes ntop extensions"
+ 
+ SECTION = "libdevel"
+-DEPENDS = "libpcap"
++DEPENDS = "libpcap json-c"
+ RDEPENDS:${PN} += " libpcap"
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
+ 
+-SRCREV = "64929a75e0a7a60d864bd25a9fd97fdf9ac892a2"
+-SRC_URI = "git://github.com/ntop/nDPI.git;branch=3.4-stable \
++SRCREV = "dabab0e9515c2e6a71a91bdc807453e416f831ca"
++SRC_URI = "git://github.com/ntop/nDPI.git;branch=4.0-stable \
+            file://0001-autogen.sh-not-generate-configure.patch \
+-           file://CVE-2021-36082.patch \
+ "
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.17.1
+
