@@ -1,100 +1,102 @@
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web10.12435.1631295488151000470
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web08.13771.1631301110569837084
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Sep 2021 10:38:08 -0700
+ Fri, 10 Sep 2021 12:11:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=DfoBluUf;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id j2so1613087pll.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Sep 2021 10:38:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=PAcfuiri;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id y17so2684066pfl.13
+        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Sep 2021 12:11:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :references:from:organization:in-reply-to:content-transfer-encoding;
-        bh=d+3GWtbMBaOGrb8BbnFJTy8ENgtSL7W0XB9iqbsfUZM=;
-        b=DfoBluUfhWoaVJHwt73yJZT70NX2NsDTyOOiC1oT9sYfg46PVPZY3rNtMFy3qWG1Yc
-         egnW+C4zeUcZm1B8oAKiZDVWLG15gV0PC3Yv9l0RtwaYEGfVe5uR4TO+cz4jKTXbKKod
-         zH2PeMeoJegoaKLAgrTO5a8aa1s2y0qVvetdtnSrKWszSVl8Z1D8zsUqO0k2kd4Sq32A
-         KS8RlJpN2f9mlDHZmieumo/9oi0s5A4fKfkxMZVXgFAJR0HdbjReuc812Ux+2rNNqh5s
-         8pDdNsEO2yvg62GJv4jOVnPUOqUVHzSLGFp3giAX2+MY27ynFNezZJPqkyG6urcDEu96
-         Gyfg==
+        h=subject:to:references:from:message-id:date:user-agent:mime-version
+         :in-reply-to:content-transfer-encoding:content-language;
+        bh=CHEBU2NE62CAakvCaqH3Z7D+VMqZG/9U2KAQLsXrJgQ=;
+        b=PAcfuirilcHKhiT3VxO4eSW7dox97XwNVFMVXDX2Lhwx+JbsRdXYRHN/Um731YtrFW
+         GuIn0c+HJYWa+TulUbdXvUi6nSmJCPICqwbFeyu0pCL1RZNx6kNcpOEmp5gBsEFjpcjZ
+         7qtaa4YwgzMTwqHpWhN9yxh+59FknUFTtfHFAU63FfthbqTKvzH9JBC3xRvhiXDP5JhM
+         lJdXKInl9tgZXoF11v9SW/0CkSPymlrE02d/UKZ9lyhRSoPtPNKa3NDZTs0u9C0Hlfn9
+         O8jVJJMXUBUgrZPLbAQr7nEKRbLWkgpf+9LVPLCNpl4vM8z1Y03U/qE1E/UAlQvVtrSv
+         DSZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:references:from:organization:in-reply-to
-         :content-transfer-encoding;
-        bh=d+3GWtbMBaOGrb8BbnFJTy8ENgtSL7W0XB9iqbsfUZM=;
-        b=X9UOrl/HrhruwmvUO+JvBdFuWU+sHqXvCGuY1gbWPlB6GZEMDvjvY7Q+mPFxX7sZLn
-         ovcGAQkFBmjZK7cjR1kuTzleQYitJuFT4/1G04prbJQwjKhoEiIGyd1XWFkBmnyrShA6
-         FImelkrCnM5RajKcuPaCSc2x+Mfk6kAshcRvvfU5Ak1AYGJ/wnqkehsVro8/uu6OwOlm
-         S8sQbHhc/NugB7rSx3OEJn1BTaAr0vtBtPQ8ngkpB3WP6+bI2udLKVCVhsTrW+zZwumW
-         3sGMAEcntXrOBAsHgquMysKMVhIjqavjerT4FaqKIFpOYFA0289jxT4TU9YbHRWGvaDZ
-         0cNg==
-X-Gm-Message-State: AOAM532H4eirTVkH/u/frOixJ36SRPZA6jTFSFoKR8fwfwC0YQix6SfP
-	FoXMhl4d9x1prVCORWKK58o=
-X-Google-Smtp-Source: ABdhPJzVAo7r6h0sagr50V7U7iOxkjF2s7dqqkFC0znKrrOD/pfEsnbyHgQjS3bcwRJGCL2yg2szGw==
-X-Received: by 2002:a17:902:cacb:b0:13a:5f28:e4cb with SMTP id y11-20020a170902cacb00b0013a5f28e4cbmr8602398pld.37.1631295487451;
-        Fri, 10 Sep 2021 10:38:07 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from ?IPV6:2601:646:9200:a0f0:1c4a:aeb8:db4f:6b43? ([2601:646:9200:a0f0:1c4a:aeb8:db4f:6b43])
-        by smtp.gmail.com with ESMTPSA id m12sm5914069pjc.18.2021.09.10.10.38.06
+        h=x-gm-message-state:subject:to:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=CHEBU2NE62CAakvCaqH3Z7D+VMqZG/9U2KAQLsXrJgQ=;
+        b=cdXW4vbnrdPe5gkUlXyFbbcmUVGfu3clNOCoOLKqouDYIgKgFBeauPUKyisiJYYMUu
+         Fi0utx/C8AH5XryOE/w9NjhE9TQpQ4AOMFvA+51VJuvQzYiLN9VpAMzqq5q+hjK8KMkW
+         VV4w5syOckTdJEL02TbFBraC8lXSWrA87dF3D9UQZew/PkPdyN4J+6tu+f3gkRVtLrwW
+         Y69WVDvUzR8/79lU2cj2NoW7wi7YF/MQ90BtdCpcEphs0CAJoy9qO4TKLvmrS9udYmAL
+         0CV2tzHqwCIy34pTEGWAbwZ9kS9xLbR+0kUZ8TFQGa1i1WuN2CjBBkbKrRHT+gSkcQp0
+         EK2g==
+X-Gm-Message-State: AOAM533Crl2d+SA2PLIrcfc8JEqGlITbVkE7XX9dpUdNoo7/yVW9T6mw
+	MINEKy1t+szmoadC016/4mfBo1L9U2Y=
+X-Google-Smtp-Source: ABdhPJxeDz4uE+UwIBAXNtttVIXqkJliMEOlbU+wMdZJ0/SgX9Q7z59oGtL3BdD9D0FIKLdxiYhFDQ==
+X-Received: by 2002:a62:61c1:0:b0:414:5e28:d8 with SMTP id v184-20020a6261c1000000b004145e2800d8mr9594310pfb.45.1631301109632;
+        Fri, 10 Sep 2021 12:11:49 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from ?IPv6:2601:202:4180:a5c0:9fd1:b728:fff3:766f? ([2601:202:4180:a5c0:9fd1:b728:fff3:766f])
+        by smtp.gmail.com with ESMTPSA id 21sm5467748pfh.103.2021.09.10.12.11.48
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 10 Sep 2021 10:38:07 -0700 (PDT)
-Message-ID: <7c070bf3-f90d-88f4-7220-b1d8faca0176@gmail.com>
-Date: Fri, 10 Sep 2021 10:38:05 -0700
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.1.0
+        Fri, 10 Sep 2021 12:11:49 -0700 (PDT)
 Subject: Re: [oe] [meta-oe][PATCH] Remove patch that produces a segfault in the ptest of lua
-To: =?UTF-8?Q?Jan-Simon_M=c3=b6ller?= <dl9pf@gmx.de>,
- openembedded-devel@lists.openembedded.org
+To: openembedded-devel@lists.openembedded.org
 References: <20210910162949.3732-1-dl9pf@gmx.de>
-From: "Khem Raj" <raj.khem@gmail.com>
-Organization: HIMVIS LLC
+From: "Armin Kuster" <akuster808@gmail.com>
+Message-ID: <b7a54a10-9ac5-14da-a292-540dc4ae85c1@gmail.com>
+Date: Fri, 10 Sep 2021 12:11:48 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
+MIME-Version: 1.0
 In-Reply-To: <20210910162949.3732-1-dl9pf@gmx.de>
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
 
 
 On 9/10/21 9:29 AM, Jan-Simon Möller wrote:
 > From: Jan-Simon Moeller <dl9pf@gmx.de>
-> 
+>
 > The patch file CVE-2020-15945.patch does cause a segfault in the lua ptest (db.lua test).
 > According to upstream developers the patch is not correct and causes the segfault.
-> 
+Their patch or the one ported to meta-oe as in a incomplete backport?
+
+
+-armin
+
+ 
+>
 > Reproduce: build core-image-minimal with lua and ptest-pkgs on .
 > Run: ptest-runner lua
-> 
+>
 > This test passes if the patch is removed.
-> 
+>
 > Please also backport to dunfell as well.
-> 
+>
 > Signed-off-by: Jan-Simon Moeller <dl9pf@gmx.de>
 > ---
->   meta-oe/recipes-devtools/lua/lua_5.3.6.bb | 1 -
->   1 file changed, 1 deletion(-)
-> 
+>  meta-oe/recipes-devtools/lua/lua_5.3.6.bb | 1 -
+>  1 file changed, 1 deletion(-)
+>
 > diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.6.bb b/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
 > index f830e0925..af3054dcb 100644
 > --- a/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
 > +++ b/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
 > @@ -8,7 +8,6 @@ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
->              file://lua.pc.in \
->              file://0001-Allow-building-lua-without-readline-on-Linux.patch \
->              file://CVE-2020-15888.patch \
+>             file://lua.pc.in \
+>             file://0001-Allow-building-lua-without-readline-on-Linux.patch \
+>             file://CVE-2020-15888.patch \
 > -           file://CVE-2020-15945.patch \
-
-Can you also remove/delete the patch file itelf too and resend ?
-
->              file://0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch \
->              "
-> 
+>             file://0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch \
+>             "
+>
 > --
 > 2.32.0
+>
+>
 > 
-> 
-> 
-> 
-> 
+>
+
