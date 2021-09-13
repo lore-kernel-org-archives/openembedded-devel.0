@@ -1,59 +1,60 @@
 Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com [85.158.142.4])
- by mx.groups.io with SMTP id smtpd.web09.26478.1631520567476180265
+ by mx.groups.io with SMTP id smtpd.web10.27106.1631524617429760835
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Sep 2021 01:09:28 -0700
+ Mon, 13 Sep 2021 02:16:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Tz6l5Cvl;
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=QnOdWrsl;
  spf=pass (domain: fujitsu.com, ip: 85.158.142.4, mailfrom: zangrc.fnst@fujitsu.com)
 Return-Path: <zangrc.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1631520565; i=@fujitsu.com;
-	bh=iZVcGPDWtSF81Zs84Ye444g69kn5AYost0M9LHt8Qbk=;
+	s=170520fj; t=1631524615; i=@fujitsu.com;
+	bh=w08IxwTlNmAhnAKtpYlDpif5qJY8bk3Aha1Y515nBaQ=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=Tz6l5CvljZvU2eFqws6mdHCC/cH4HupeL4VupqxWhewf9BIMflNhh1cP0BGfk45GR
-	 5G7dpeBxF996L8vjI1WKVS15U/NcK224lK9ttcBD85nMdJCQIv6z0vIQyzHk0c+KWM
-	 HkliV/yK6pahdB+0IvawZJTSklXOv7SwwbYE+XxgJZ7m9qUJNHfRUAAXm+yV5Dxz0n
-	 6EdoSPEYox8FSCJaqUGSBq0oI4oaDu3K6AuZluvTA20GzyBl9+lj4F6Vy52N/PJcUL
-	 /y6DIoO2GSI6RU6rCNW2T5z5ojjVFxPQ/k8rCt9fBj4KfqoIPyZ6oJ3ZDmdCHjrrF8
-	 NB2WZJIMmwcaA==
-Received: from [100.113.2.26] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-a.eu-central-1.aws.symcld.net id 39/25-29868-5370F316; Mon, 13 Sep 2021 08:09:25 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+EI0TVlt08
-  06LnBanHx8FJmB0aPcxtXMAYwRrFm5iXlVySwZkx8PJ+94DJnxd1pXewNjHs5uhi5OIQEZjNJ
-  fO/YxQzhnGCU2HLkEWMXIycHm4CORMeLbhYQW0RAX2Lp7D1ARRwcwgL2EjfORICEWQRUJdY8P
-  c0OYvMKuEkcntPMCmJLCChITHn4nhkiLihxcuYTsDHMAhISB1+8YIaoUZTYvvMMC4RdIfH68C
-  XmCYw8s5C0zELSsoCRaRWjZVJRZnpGSW5iZo6uoYGBrqGhsa6BrpGpkV5ilW6iXmqpbnJqXkl
-  RIlBWL7G8WK+4Mjc5J0UvL7VkEyMwkFIKGf7sYFz95oPeIUZJDiYlUd79v+wShfiS8lMqMxKL
-  M+KLSnNSiw8xynBwKEnwKrDZJwoJFqWmp1akZeYAgxomLcHBoyTC+5QRKM1bXJCYW5yZDpE6x
-  agoJc6rCtInAJLIKM2Da4NF0iVGWSlhXkYGBgYhnoLUotzMElT5V4ziHIxKwrxVrEBTeDLzSu
-  CmvwJazAS0+OspG5DFJYkIKakGJsbzvzs7zp6x1ZAy2jpld965soDD28sFAvm0lz7LOfDx+MV
-  nPGra22Z+WTr3eaHg3fMrOq9NuTg1rugtL3eJgXitcCjTtAlTz6jKmhVMk7lmmmDcb+2eLypw
-  yLH5jH/Gj8siC450aRr/X8BVsWgJ183NM6UySrqP7kvbFcSt/D2oa/P+Q9Pu7AmW3PVM5/HM+
-  ZGzLix/ecRm9zfLnTb8IjMezjRbm55uOPG0nH9MxY4XLWfmnlxTr+fN+vX1bZverCC5/Qf03N
-  MXfikXn33EM+DJJ+aEz8k5hxTrEjneWXDeL+AqP87//U1bTfbi1S68pkcMko6o9l6rYg7IOvj
-  iRElj5eT9EhpKl3UD3a80LFFiKc5INNRiLipOBAAAW9zIHwMAAA==
+	b=QnOdWrslRStS1Bj4yBDd4oHjV5i4jTUetv+0c0czfWfmjqA0naA61H4NonHU34sF+
+	 47LGfNWa4c9BYsPjAknZnpckVWPvUOh9HyAW0VvT9kh61KELI4jSK0bEiMDOlf+E/a
+	 lMIX86IgftkCHPqpHog5f5sKsGdJYTtYDAuV/0ZH/V0gd+fLV4zV5QP8neKgr0SYbK
+	 ZsoSzEJ1SRra+NDYPo5WijPXyWq4ZcaFuBEOEKKDwrKMIgSgf8BURRwgFpuGFFBE92
+	 4EQBN0MtiwlFrbawr1L2Nk9qiFJn3KVe2RDzVb9emT5MJuozAIwqtX+wGKPY+nuxuV
+	 iAXtyDuz+oTVQ==
+Received: from [100.113.3.88] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-4.bemta.az-a.eu-central-1.aws.symcld.net id AF/2A-29868-7071F316; Mon, 13 Sep 2021 09:16:55 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrNIsWRWlGSWpSXmKPExsViZ8MxVZdd3D7
+  RoGMNm8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmtHw5AxzQTNnxc/GHYwNjBM5uhi5OIQEZjNJ
+  bFnzjBXCOcEosXvWbcYuRk4ONgEdiY4X3SwgtoiAvsTS2XuYQWxhASeJydc/sIPYLAKqEn+v3
+  2cCsXkF3CTmLG5mA7ElBBQkpjx8zwwRF5Q4OfMJ2BxmAQmJgy9eMEPUKEps33mGBcKukHh9+B
+  LzBEaeWUhaZiFpWcDItIrRMqkoMz2jJDcxM0fX0MBA19DQWBdIGhvoJVbpJuqlluomp+aVFCU
+  CZfUSy4v1iitzk3NS9PJSSzYxAkMppZChaQfju1cf9A4xSnIwKYny7v9llyjEl5SfUpmRWJwR
+  X1Sak1p8iFGGg0NJgtdSxD5RSLAoNT21Ii0zBxjWMGkJDh4lEd5gIaA0b3FBYm5xZjpE6hSjP
+  cebtUsWMXO03bsLJGcuOLiameN++6HVzEIsefl5qVLivMtEgdoEQNoySvPghsLi8BKjrJQwLy
+  MDA4MQT0FqUW5mCar8K0ZxDkYlYd5fILfxZOaVwO1+BXQWE9BZX0/ZgJxVkoiQkmpg2r2pinW
+  /J6fejKgS32XvRMolD9XEr5oZP3lGWsY8m03tGYW5j5nZ+yZ7FwZKJK92s+B9Nm+d+Uve+IN3
+  8yc/THy0QWf9rnfXS3t8/zxZWfDz9i3+QsuA31mWwukOp9lnNb0Pt6n+fVDqYLxuCnfOZJfWF
+  garr5uZV4l7G7+dznA1pspvh/fzXPsNCgpvtGx/nNJZPlFw/R3drD0mx0/u3q09gafpntiCuI
+  w9u/pernNMiXXnWvTicierg9dSFclZx7YZv49Zd/mHhNo8npLVFdsf+jzvYbitZmmwSflu1LN
+  gDrGnK1yLn6Y8S5B/ErP4tnil2pW9wTNOF1x9fCkt/191p9Iio8XucjmvVoc5KrEUZyQaajEX
+  FScCANfMfuA+AwAA
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-6.tower-226.messagelabs.com!1631520564!193853!1
-X-Originating-IP: [62.60.8.84]
+X-Msg-Ref: server-4.tower-232.messagelabs.com!1631524614!9292!1
+X-Originating-IP: [62.60.8.149]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 29443 invoked from network); 13 Sep 2021 08:09:25 -0000
-Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-6.tower-226.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 13 Sep 2021 08:09:25 -0000
+Received: (qmail 27414 invoked from network); 13 Sep 2021 09:16:55 -0000
+Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
+  by server-4.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 13 Sep 2021 09:16:55 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 18D89IjP028765
+	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 18D9FjXl003126
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Sep 2021 09:09:24 +0100
+	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Sep 2021 10:15:51 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Mon, 13 Sep 2021 09:09:17 +0100
+ (TLS) id 15.0.1497.23; Mon, 13 Sep 2021 10:15:44 +0100
 From: "zangrc" <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] libxmlb: upgrade 0.3.1 -> 0.3.2
-Date: Tue, 14 Sep 2021 04:09:10 +0800
-Message-ID: <1631563750-4838-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] dnf-plugin-tui: upgrade 1.2 -> 1.3
+Date: Tue, 14 Sep 2021 05:15:38 +0800
+Message-ID: <1631567738-5985-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
@@ -61,37 +62,34 @@ X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-Version 0.3.2
-~~~~~~~~~~~~~
-Released: 2021-05-24
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Bugfixes:
- - Respect XB_BUILDER_NODE_FLAG_IGNORE when exporting (Richard Hughes)
- - Use the chosen chunk size when reading from a stream (Richard Hughes)
- - Use the correct pkgconfig export package name in the GIR file (Richard Hughes)
+2021/09/08:
+Release v1.3.
+1.When installing with package list, add the function of detecting whether the package exists.
+2.Added the function of generating installed package info csv file.
+3.Delete the pseudo directory in each init phase.
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libxmlb/{libxmlb_0.3.1.bb => libxmlb_0.3.2.bb}              | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-gnome/libxmlb/{libxmlb_0.3.1.bb => libxmlb_0.3.2.bb} (90%)
+ meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.1.bb b/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.2.bb
-similarity index 90%
-rename from meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.1.bb
-rename to meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.2.bb
-index 72d3aba44f..cacb493a1d 100644
---- a/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.1.bb
-+++ b/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.2.bb
-@@ -6,7 +6,7 @@ SRC_URI = "\
-     git://github.com/hughsie/libxmlb.git \
-     file://run-ptest \
- "
--SRCREV = "98fc241305306de9468249301474820696acb4be"
-+SRCREV = "994fd0ec3d28da82b5965949a9d925510f603562"
- S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+index 8835f3233d..60ca2ab282 100644
+--- a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
++++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+@@ -4,8 +4,8 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- inherit gobject-introspection gtk-doc meson ptest-gnome
+ SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git;branch=master "
+-SRCREV = "6d3fab9b9559b6a483fe668e39c29126cdbb58d8"
+-PV = "1.2"
++SRCREV = "b0d80b7129f1d84cc563a4098d869e7420bcf4bc"
++PV = "1.3"
+ 
+ SRC_URI:append:class-target = " file://oe-remote.repo.sample"
+ 
 -- 
 2.25.1
 
