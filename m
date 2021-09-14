@@ -1,32 +1,32 @@
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.6154.1631599343898764220
+ by mx.groups.io with SMTP id smtpd.web10.6029.1631599344481470681
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Sep 2021 23:02:24 -0700
+ Mon, 13 Sep 2021 23:02:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=ocMuoH0s;
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=XTM+hC2q;
  spf=pass (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=4891c338f9=yi.zhao@windriver.com)
 Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 18E5MchH005654
-	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Sep 2021 23:02:23 -0700
+	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 18E5MchI005654
+	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Sep 2021 23:02:24 -0700
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : in-reply-to : references :
- content-transfer-encoding : content-type : mime-version; s=PPS06212021;
- bh=YhvD7baBkCXiJM+05J4s57uA+HznJtjXi6rkHfvLx68=;
- b=ocMuoH0sa6YBM9IOT7jv9dflueyO2NEkZockzyf5ZnZrF2uiBvnf5sqCXDWWixY0zOv6
- A5hAsaJSh3p7NNJz+zr4dcCArGjTyDqq1ViaYkcIzXYGjAI06aXSFfVslLJWF3lslTFb
- GA9pPJaHrG1HyiGYqVOjge4Uxz5K0rSeIx+KOIpxCCUtq7+dWs/4MYhPXHbvwZfUzapR
- nY40kCLb4CnM5OW6YmMYVHQycKBbIqzLOzYM4ozjIVveVkWgOKdjGsIRBx47eGdA5bVn
- 8Gr21Zmx1NnM2e+hRxa/f4znfb5t8K25l9lf/8utdJKgXvpNFOe4HWBDmPlrIQQ5N8xj /g== 
+ subject : date : message-id : content-transfer-encoding : content-type :
+ mime-version; s=PPS06212021;
+ bh=rzLBe7HLab2FIsPoOUwcKkwmuBsph8FmwXng6Rliwi4=;
+ b=XTM+hC2qrchhKb+Ixqsvj9IOGIWAayMbXyKJuGuiFNm+943KvVN4dp+y+kiyCXWu+Uv2
+ jdxAridsqyVAvUvpJLLTtxnhBTQTwx+wpbdJaOxFFz30WMPEo21rFFKrPfuk6znKoKCL
+ l48uvvXXussv22xAbtdh8USPgMapN88QhWZdXSJIF7UuwMfaklq1n05nqGzhAUujxcQo
+ 9f7RphJM/86jumytDik3EFC3cxdBFeSnfpXzJkQBD+1dDxn1QV6ydfW4nY7dCHPhIm9x
+ vZBYrIk7LfwRbc2SuKbCG5OBMdEtHhnwrK86DmJRzD5+O3zXfAcHBqCZdou7X3wrhNDB 3A== 
 Received: from nam10-bn7-obe.outbound.protection.outlook.com (mail-bn7nam10lp2100.outbound.protection.outlook.com [104.47.70.100])
-	by mx0a-0064b401.pphosted.com with ESMTP id 3b2jswr7un-1
+	by mx0a-0064b401.pphosted.com with ESMTP id 3b2jswr7un-2
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Sep 2021 23:02:23 -0700
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WYJ4vlsn+vtp80lbyLQuQOyPxdWo/Vvx/5ioyvQjbeiCEosQb8MDMV/ES3wcOMcWHChzg0WimKhAz1IrSUlo+eM7wsr6qux6F/ao92YUY/fIOefwJ8grgxbDLJqmkNFre9xEv7P01TRH52MgZ2DhkeU50Gv5lCUULWMalqoW82T+/a3Px3mhSgdS8aDhM/r2jnzBS5URSGML/rdSPTkX6LpJC2bhIFQmXWtHRHTmgVsS4bhSPl/O8cRqFdNZly1405uUcEM5xyrzaKwwvHPBmb7AvJVCWHKDfWUxDEMfCm2xLlfkllwr3+f662NrNluCm+WKGKVFWTntyJdTmk1k2g==
+ b=IQmVjuD1miEzgYs+bQJKD499IFefdiE2qzBYLMoFX7Ll+m/MruSsGD9hHaUWrujP8Kt0ULzDr2V2J9VigSxinKH1Gn3UBI8BqrteN3cF0JYDrIT1En7vCP9aEyTAyZEjRqh5R4E9UPBIMYxvIGj8mb2LljTOhroX+fsQuLlWgDcmQpV9PXSVVgtaSOAflZtZseNK2d2Ua9O1av+FLvpj4Pm7hLReAONyeys32NHh9t6oicj2IVgQkjmIZrJtLPZv3P5GyM3KdEHhMPAbVo61r4Oe2qH5aZ9DE9GhQ/0abZcYOgWtn9VciycRSfqZvGXvYPTVwbUkwj7W3ONAKRxFLw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
- bh=YhvD7baBkCXiJM+05J4s57uA+HznJtjXi6rkHfvLx68=;
- b=UHqHl4CnWJiiUWBVw+8MfXfCn8fo6PQ9cA1AC4sU1GZPm53faYKAlZ9fjwB2QoVwsPsOWY4wsWPQqdli332hznf0wZd5qBju9PFOApRlZI21Qh6oFuksOyP7o7hfyyWSg5URukKwlctj+oo+3irKZ6bXMpw3KUw9PpWsVRWAF70RCXffMOH8/o5OpFoxrHMXz/j2NVpMAZsRXUddMz2/zLGlkOEQl01ZjAi5szP2O9Uaoj8BQVV2o8/DtodxV/uBZcmJklFjFozuQlf2vAlslaOjiBewmQZ2MlMWrHtQVKn7FLxE9NJVggwZjFkKHsk/68yOnfdkXUIdBVfLznzMlw==
+ bh=rzLBe7HLab2FIsPoOUwcKkwmuBsph8FmwXng6Rliwi4=;
+ b=JeW/uNYsYTo7LpuPbgIsUPQQ56x70WIm5pZtNobJ5fca18YK7Z3MuNOHM80CfxEwd3ih4C2Xyk1020YsxMA78IKGOf13muRAuzxxeBilMRsZW1TDtI+MTfMztouTAMkQyj1rxOuGw57iMQqZ/taciU6OcEVLgu/+5f7+nzt2F+iuoFlUJ2Uhlrru6XvL8njqKAOkcUv1Y4jSDAPMSMljvfuH7ucIkAnQO4p5tiGmD2KjhwS9GzhvJmAJ6+5kZUKslCJmemtXkwp/yl/PP0uaJ8tL2g+hxSliVV7yDdHygSgXWaRTtMfvsdTvfvrZ6kcBwk5WyNcWqubPROjw0vs7Cw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -37,75 +37,73 @@ Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
  by CO1PR11MB4945.namprd11.prod.outlook.com (2603:10b6:303:9c::8) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4500.14; Tue, 14 Sep
- 2021 06:02:20 +0000
+ 2021 06:02:19 +0000
 Received: from CO1PR11MB4867.namprd11.prod.outlook.com
  ([fe80::3975:1563:a18e:2017]) by CO1PR11MB4867.namprd11.prod.outlook.com
  ([fe80::3975:1563:a18e:2017%9]) with mapi id 15.20.4500.019; Tue, 14 Sep 2021
- 06:02:20 +0000
+ 06:02:19 +0000
 From: "Yi Zhao" <yi.zhao@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH 2/2] net-snmp: make sure snmpd always exit after displaying usage
-Date: Tue, 14 Sep 2021 14:02:08 +0800
-Message-Id: <20210914060208.39200-2-yi.zhao@windriver.com>
+Subject: [meta-networking][PATCH 1/2] net-snmp: drop unused patch
+Date: Tue, 14 Sep 2021 14:02:07 +0800
+Message-Id: <20210914060208.39200-1-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210914060208.39200-1-yi.zhao@windriver.com>
-References: <20210914060208.39200-1-yi.zhao@windriver.com>
 X-ClientProxiedBy: HK2PR03CA0064.apcprd03.prod.outlook.com
  (2603:1096:202:17::34) To CO1PR11MB4867.namprd11.prod.outlook.com
  (2603:10b6:303:9a::13)
 MIME-Version: 1.0
-Received: from pek-yzhao1-d1.wrs.com (60.247.85.82) by HK2PR03CA0064.apcprd03.prod.outlook.com (2603:1096:202:17::34) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4523.9 via Frontend Transport; Tue, 14 Sep 2021 06:02:19 +0000
+Received: from pek-yzhao1-d1.wrs.com (60.247.85.82) by HK2PR03CA0064.apcprd03.prod.outlook.com (2603:1096:202:17::34) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4523.9 via Frontend Transport; Tue, 14 Sep 2021 06:02:18 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: d80a7763-9fa5-4888-bed2-08d9774536ac
+X-MS-Office365-Filtering-Correlation-Id: 51ad8400-ae03-4884-f7a4-08d9774535e4
 X-MS-TrafficTypeDiagnostic: CO1PR11MB4945:
 X-Microsoft-Antispam-PRVS: 
-	<CO1PR11MB494572116E98DA5FA7EBC77EF9DA9@CO1PR11MB4945.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:773;
+	<CO1PR11MB49451C4BF833AB1250E868D2F9DA9@CO1PR11MB4945.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	3OAHDa7UeTJmI5hP0ObtTTCpm1a3CBunQldl5a/04VYxhxeUtLTImk+p54yZbfaPVtv1dsOZEpgz45hrNdR5t2ZCeegHp/LqIoTUZz8Lf+H6A4N8hS29z0XzZbVFq7Sclxc5FuImvY+Qj6A3+sYflRWq+1ps67JDi+vem8w9FIc67qW9HSiJrd6eM67kDFSmCvkq65MCKJccq7XhrCy+SQus8k1lGafGUEzwA9GQBheuxsaDZGb7akaYzMt5+xHSW74ceM6v58EtQyxnAIFrEYadMWsgeMVcwebpQ7pnLSjEsmUBiUtnn+5NadAtNp6HxskCzVvATRDudzqffEO9v3EjME+eNMPPTsoh+YvU7LgmYQ4uV6iiIdda+tYXemLqY6WXs8OMEXUTbdLt27aB0mymk4njvcuEDigtU49EchdsJmGYsIbW4yVm167DevEw9BtlDPSXxClKzf2Zjv3k8FX40UnuCrkDHNoxPZfZFXmxg7V9K6tnK/Hx9uS4FdmsMeyNqz2nA+9e2EguX0MoJoy1+/FIcyJMXVCdE2fDXTIJlJ4fwelt8BLhd0asARV4wLPgF30N6kEvjcoZmkQjPyfDrhOuHhHaj850TxQkMM3AwRpUXs2b2huEILWi/IgKPA2j7drAX2rAiRhEHVkMrPI3cWwjFEk27d12ynlVz4fcB6LJIG8vP04AOdLbXrdNKaUd7fioo7bQD6qUzq8bRaK1rQAGFwfnHJuZHEQQ8yD7zn+QcxauV98emL4cLKzKzne8aHyjKgDzmjXZYHLsYQEM4jJcOvhOVJdPel+EUr8=
+	coUXp9zoGnz00kerQ80mLXfx6bYpk98QZrbIOoJbXwngEVZbdKZ+0ESUzvHsHdvfEUkub5AHJVxS/2Wh9pumRcgM2Gr+8ZDAn64/E8yRLtCmKqT6UUsF2MT7aNshUGBZUrS2F95o4WHnGwA/zatrb+u2nw4z9muH/Gwnbt+sF+nLGjlT3dJUwaLfqYOlg9UV3hxVhwdPqmM/17sgWUzi/amwMz84rXzNADve69OAZ929K3xdo2xc4aGAk6P4AssxTiYe72IH9+NpV6cHubD+r9gFmR7bk7nVVSkPY2RrVnrqiQWDu5dPM4TctYRdS/tVo7uM01S29b9trd+3Awe4KG4iMcqr1MYi6IznD0V5WKl4k3LBjABwPfHVCVuNMRttfqUWTzWhYrnpF3zeWgyJjsvnz5svMM/MibH/PEsVZMirpo78v0TrYR0YUiBIK9THbMldp5oi8QQCmwaMX40z9tAgeIQPAOvlqUdqxBNB9mqFtGgT+Yj5fJfEKqeQ7W5+d9ZyekiQd/ip87y75LsJ/sKCs3rMjbM//BBC5+nf+CBweO4WVq0LOb6zqXjj2CwUzwCWro4eAMU5mg9808e0WJJi/+p0MakXfLVlPFcxGFTldB+7fWUfXbJ+T40qxItqsRa8vtcFtN9BdX/DvqJNHFdZ74Hrk6rysY1r9ZrU9wXmAmLBSeTxQcOpMyytvGfGVuOz35bTtz0vxTXGY3x8ob5DrEv4H6j9g2XVKO3pVwM=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(396003)(376002)(39850400004)(136003)(366004)(44832011)(2616005)(66476007)(66556008)(26005)(956004)(6486002)(38100700002)(38350700002)(66946007)(316002)(6512007)(6916009)(86362001)(36756003)(2906002)(186003)(478600001)(6506007)(6666004)(83380400001)(8936002)(8676002)(52116002)(1076003)(5660300002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(396003)(376002)(39850400004)(136003)(366004)(44832011)(2616005)(66476007)(66556008)(26005)(956004)(6486002)(38100700002)(38350700002)(966005)(66946007)(316002)(19627235002)(6512007)(6916009)(86362001)(36756003)(2906002)(186003)(478600001)(66574015)(6506007)(6666004)(83380400001)(8936002)(8676002)(52116002)(30864003)(1076003)(5660300002)(21314003)(559001)(579004);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?Af7C1XpTzsuZJuBKMdZaFtdKtv4VBcuZVaNPwYBfaa/aC5WB/JJmvGIbJXK4?=
- =?us-ascii?Q?qtDwBUtT4lN1JVvLgB1FzZG3m1lcFoznY3TLrm9Gjw7g83w1anAELqm3ZgQW?=
- =?us-ascii?Q?z1OMHLGdrs17pheu71SX+/YufQSGP9PqA2IGpi5BHVetEEYIfaidHu7EZZ3m?=
- =?us-ascii?Q?7wPFFmYZERPerkSwizRnffRxx68ixaI8BJcFBcMN2m8qLfsknhFZsTXKyHFG?=
- =?us-ascii?Q?5fWUOSEgjgSwBQvaDAK+zXle9dzzTnYLY0W4WSqIXgPLS0E8Z9UJNDZAzuAm?=
- =?us-ascii?Q?h6qZ7+W2C7mYrC/hRXXYHwlIVqmLTUkW/hg/lJneItwb7NU9IIBgInyq0kwI?=
- =?us-ascii?Q?2dIaeLABTeaoFKcGUojBBDlbzQw6n/B8skGCMyjrez3ecdulPIko9SD9upgb?=
- =?us-ascii?Q?IQw2CZXZSTPH4NPJmNsVOEWaOgZNzr9F0llMJFvxPvyyuabwMEPIGtE+cXTU?=
- =?us-ascii?Q?YONb4MBfiO6u+T8WpdbsZD7CCw7avIhYzv1l5nCInwMlbEgnCugor3rzqzy8?=
- =?us-ascii?Q?D+51M6/UvyHya5exJLxWELaf0RTfkYn8SdQn3tTl9laYIymWA5AS4ucERT4z?=
- =?us-ascii?Q?YYaZKlBbUb2K7tTTzEo7/3KgOQ1MgMyEgoyiMAb1hk/WynxD+OTc+Ez0Fm3x?=
- =?us-ascii?Q?ogsHHwHlpeUx+CDLMORGOLFVOGGJSIhlPQoxONHvEUrLJLErfpzFi81OmGyl?=
- =?us-ascii?Q?MQrRcOkT3EIqJsL9KhXqWvL6N8/PqkIDW+INRmsfCzLVyTFCy3u9lVyGGucp?=
- =?us-ascii?Q?Jo0qasqnKfw4GtKOT8qhw8sqtNV5/O6YcgZIpiJctWxNape2IJ+gQgqzEWie?=
- =?us-ascii?Q?/BXJz+1bbsIyqP8r/PIpqGMOmT7037qDo7olJLiBAHQQsKEo07eF4acKbwjx?=
- =?us-ascii?Q?A0nNEN1h3c2CkfgqYi/zF1FiDuvqOzTOzXGtIlQC5dVn6A37n1enjklG6p39?=
- =?us-ascii?Q?UVVwbBlDQXi5fAqPyc5hUKGlnLQGvQHYnlyo1tPQRrTmznbhiYIIzVfOSV/8?=
- =?us-ascii?Q?Cyy0o8Oabs6azY3DpakcaenxqgCOGe5ATrPli0YNCd76gWRY4ueLSb6YaZUk?=
- =?us-ascii?Q?M3b3EdgK0K244K+2qP3CFtbohRY9vvm2XDZr09T1PwVgyUnEfayN+RSmkf77?=
- =?us-ascii?Q?okA94QuAwbKecrucUPZe4UHGwrMR3dQK3LosfDvRyItjWzEqOWlPLAGA2vIH?=
- =?us-ascii?Q?QnWJx1dNFLnEn/3JuRiCbTQZzZ6EBiJszqnj4I2826mor2B+jColHl55wraB?=
- =?us-ascii?Q?e5s2TjvlE/GkMo89ZASwSwmyuFJSf/0WhfTlzja0J+wgnXmAXy/SiC81hTlg?=
- =?us-ascii?Q?DHC3iq6SppmfBqTn96a/WlFB?=
+	=?us-ascii?Q?tDSaY8z70s9bX2UQCu20LWMlMKISqmnIvjA1Big/BlzaQfnGiW/PnNZers0U?=
+ =?us-ascii?Q?EYKa6RvQvjj2cIfuc2QinmJMzYCOh/sOHUPK/wNCo03cvSvYB+G8UkCSqpKI?=
+ =?us-ascii?Q?dy6wYLP0TUSmPB6wtwSSBKq288EiD5nbk579v6qpgjpwBpQ4bIIZlO0rtfQP?=
+ =?us-ascii?Q?6N6wRdRywjINyBprCmqf9rTGeMsI8JEiWvGXkh8QJq/pIb5cxMABIPI/UzRJ?=
+ =?us-ascii?Q?Ihn+OCWAZHbnLIWG/vF8K+DE/P2DnCQe4T5LNXV+ZiR7Xf8Ml7p4K0u7k5so?=
+ =?us-ascii?Q?IrvrJ7Jkw0yWbyVRXf9lvLa0lrvhGyCdA0xyO1//7EQNGQ8v5KuutomQorsi?=
+ =?us-ascii?Q?POhAm1RkPzj+YHCz0hp19uT64+S++zFQmLsLBX/ZCWwYcbAHwbyAZJWar1X/?=
+ =?us-ascii?Q?OXxniIcMo20NNU6Gleif1ZE71tHDySlg4AnXJRUli6I0IX9syARtbEoTZJ2a?=
+ =?us-ascii?Q?q/ve3tjNg9tnXhKZhYUGWAQWNs1WAo3FED4colw5YB+XOA+qXvzZEBQZKOyn?=
+ =?us-ascii?Q?0J97+9sRtlpOa1kwk+DM2USNHdliXHkJyiKEVbmeDlA2qZtICIkIilrEqnkV?=
+ =?us-ascii?Q?SkW4yx4syg8IgqmetBS/RrozwrdPYtscv9TLFUSthbT6zJTQliBVirqYKBXX?=
+ =?us-ascii?Q?7FakYAqGUKVfXWifGtkTAi9VjLI2Fm2y6uRVmRtO4pWL72Od9JkiF3iyt512?=
+ =?us-ascii?Q?fteWwytGLbJb4j5ZZyIzy6hFPjqSY0+1DZEk3vqVCb6/GjbMQGQVwWVQ5i41?=
+ =?us-ascii?Q?YmGt1FVP1LWV8r9Vz9qqB9OBX/StUjvnVC+I/w1Wo9Alqo5oxMK3KSBkOnrm?=
+ =?us-ascii?Q?EPeZTDN/HHfVFViIk8XfP9M2H96a0/nrTlHHH0wh7IDuzTxK6wtFi7TWYhCJ?=
+ =?us-ascii?Q?wOdqSoaivUi5gVS+qEMOl0Xx31llG1J6pMiACqFQDEvY8MTSV6UhHepoxp04?=
+ =?us-ascii?Q?gu8QU8HYlzzfNvsiVs0hOWHLgl7s246a5zpToFI59GBwvTKEq2Z/CFqIZsfr?=
+ =?us-ascii?Q?GUqd2dCV4f8coNioGmOzD2usdXDf4hOIv6QyPOomsWHYyIV3K17drlpwEk9A?=
+ =?us-ascii?Q?20Rx2+rd925VLsMloxLBcxX2mhY1Q+6o81wfipS4sU7R8JsuEnK/Z2a9Zd77?=
+ =?us-ascii?Q?h33tQh1cUy1zP3h5yz1563o/fasVvK2Q0HCOQ2LPmU9uT6fco+1Lz3PN76Sd?=
+ =?us-ascii?Q?5/kf8ivD/2MMDHA5kddH8DB9lS09uZ3B4uDx4BLebRg9dDzz2MFbeBnSjZEB?=
+ =?us-ascii?Q?BqnXG5AcDjCp1d56XExPHMovEJBgUBQqtw3T9Gaes51EsVIzpSYn20l+t6Bv?=
+ =?us-ascii?Q?4DRPPI/aAzj4hS/CWD0hqLFk?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d80a7763-9fa5-4888-bed2-08d9774536ac
+X-MS-Exchange-CrossTenant-Network-Message-Id: 51ad8400-ae03-4884-f7a4-08d9774535e4
 X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Sep 2021 06:02:20.4490
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Sep 2021 06:02:19.4225
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2WR32rYrd8z7uYxmy6f/BI8GhBpMEFEfXtgfAHUsPbKJhTbkER17U/LwEUOnFkt3bTl9J8aLYOnsqdwyPRzjrg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7Nvw0NYDnSXTdGkaQwEdO23+27BUiSXVqqNExxwYbEXCKivwd9hhw+rtyffLqd64v+5abzvzBV+tbrqTmCO7xw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR11MB4945
-X-Proofpoint-ORIG-GUID: _LjtSNHgypFFbYfVYwRm5tngc8EWb7EW
-X-Proofpoint-GUID: _LjtSNHgypFFbYfVYwRm5tngc8EWb7EW
+X-Proofpoint-ORIG-GUID: tX3LSo0l15aLBdT-PwvLDUv2KHFSMCVA
+X-Proofpoint-GUID: tX3LSo0l15aLBdT-PwvLDUv2KHFSMCVA
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
  definitions=2021-09-13_09,2021-09-09_01,2020-04-07_01
@@ -117,97 +115,1672 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamsco
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Currently, viewing the help text with snmpd -h results in snmpd being
-started in the background.
-
-$ snmpd -h
-Usage:  snmpd [OPTIONS] [LISTENING ADDRESSES]
-[snip]
-$ ps -ef | grep snmpd
-root    1477    1  0 05:46 ?    00:00:00 snmpd -h
-
-Backport a patch to fix this issue.
+Remove backported patch systemd-support.patch.
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- ...d-always-exit-after-displaying-usage.patch | 55 +++++++++++++++++++
- .../net-snmp/net-snmp_5.9.1.bb                |  1 +
- 2 files changed, 56 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0001-snmpd-always-exit-after-displaying-usage.patch
+ .../net-snmp/net-snmp/systemd-support.patch   | 1652 -----------------
+ 1 file changed, 1652 deletions(-)
+ delete mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.patch
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-snmpd-always-exit-after-displaying-usage.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-snmpd-always-exit-after-displaying-usage.patch
-new file mode 100644
-index 000000000..4fc9e54b4
---- /dev/null
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-snmpd-always-exit-after-displaying-usage.patch
-@@ -0,0 +1,55 @@
-+From 94ca941e06bef157bf0e13251f8ca1471daa9393 Mon Sep 17 00:00:00 2001
-+From: Kaarle Ritvanen <kaarle.ritvanen@datakunkku.fi>
-+Date: Fri, 27 Aug 2021 14:21:45 +0300
-+Subject: [PATCH] snmpd: always exit after displaying usage
-+
-+Currently, viewing the help text with -h results in snmpd being started
-+in the background, whereas this does not happen with --help. Similarly,
-+when an error is detected in command line syntax, the help text is
-+displayed but sometimes snmpd gets started anyway, depending on the
-+execution path.
-+
-+This patch makes snmpd consistently terminate whenever the usage
-+function gets called. It also removes the goto statements no longer
-+needed.
-+
-+Upstream-Status: Backport
-+[https://github.com/net-snmp/net-snmp/commit/94ca941e06bef157bf0e13251f8ca1471daa9393]
-+
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+---
-+ agent/snmpd.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/agent/snmpd.c b/agent/snmpd.c
-+index f5aab0af8..90de12d99 100644
-+--- a/agent/snmpd.c
-++++ b/agent/snmpd.c
-+@@ -289,6 +289,8 @@ usage(char *prog)
-+            "  -S d|i|0-7\t\tuse -Ls <facility> instead\n"
-+            "\n"
-+            );
-++    SOCK_CLEANUP;
-++    exit(1);
-+ }
-+ 
-+ static void
-+@@ -494,7 +496,6 @@ main(int argc, char *argv[])
-+         case '-':
-+             if (strcasecmp(optarg, "help") == 0) {
-+                 usage(argv[0]);
-+-                goto out;
-+             }
-+             if (strcasecmp(optarg, "version") == 0) {
-+                 version();
-+@@ -783,7 +784,6 @@ main(int argc, char *argv[])
-+             fprintf(stderr, "%s: Illegal argument -X:"
-+ 		            "AgentX support not compiled in.\n", argv[0]);
-+             usage(argv[0]);
-+-            goto out;
-+ #endif
-+             break;
-+ 
-+-- 
-+2.25.1
-+
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb
-index 5fa617094..e6ea2ddae 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb
-@@ -27,6 +27,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
-            file://net-snmp-fix-for-disable-des.patch \
-            file://reproducibility-have-printcap.patch \
-            file://0001-ac_add_search_path.m4-keep-consistent-between-32bit.patch \
-+           file://0001-snmpd-always-exit-after-displaying-usage.patch \
-            "
- SRC_URI[sha256sum] = "eb7fd4a44de6cddbffd9a92a85ad1309e5c1054fb9d5a7dd93079c8953f48c3f"
- 
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.patch
+deleted file mode 100644
+index c6af8c0f3..000000000
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.patch
++++ /dev/null
+@@ -1,1652 +0,0 @@
+-From 0cad0c6c36af2a2d589563804c9ed2b37b7085fb Mon Sep 17 00:00:00 2001
+-From: Li xin <lixin.fnst@cn.fujitsu.com>
+-Date: Fri, 21 Aug 2015 14:37:02 +0900
+-Subject: [PATCH] ystemd support backported from the master branch as of
+- 23/04/2012 (post 5.7.1, pre 5.8).
+-
+-The following commits have been cherry-picked:
+-
+-19499c3c90bf9d7b2b9e5d08baa26cc6bba28a11
+-fef6cddfdb94da1a6b1fb768af62918b80f11fd3
+-0641e43c694c485cbbffef0556efc4641bd3ff50
+-76530a89f1c8bbd0b63acce63e10d5d4812a1a16 (conflict resolved)
+-bf108d7f1354f6276fc43c129963f2c49b9fc242
+-3692875172352f72cf3afd0d35f355e83d7e421b
+-74412748067c685e1d8ab6ed3bcc3ca9c2774844
+-86132e3f1e6ef7b4e0b96d8fa24e37c81b71b0e0
+-63557cf8986a33dba1d4429b583a901361052c4f
+-
+-Upstream-Status: Backport
+-
+-Signed-off-by: Thomas Fitzsimmons <fitzsim@cisco.com>
+----
+- README.systemd                             |  41 +++
+- agent/snmpd.c                              |  33 +-
+- apps/snmptrapd.c                           |  32 +-
+- configure.d/config_modules_lib             |   8 +
+- configure.d/config_project_with_enable     |   9 +
+- dist/snmpd.servic                          |  18 +
+- dist/snmpd.socket                          |  17 +
+- dist/snmptrapd.service                     |  16 +
+- dist/snmptrapd.socket                      |  14 +
+- include/net-snmp/library/sd-daemon.h       | 290 ++++++++++++++++
+- snmplib/sd-daemon.c                        | 532 +++++++++++++++++++++++++++++
+- snmplib/transports/snmpTCPDomain.c         |  43 ++-
+- snmplib/transports/snmpTCPIPv6Domain.c     |  46 ++-
+- snmplib/transports/snmpUDPIPv4BaseDomain.c |  33 +-
+- snmplib/transports/snmpUDPIPv6Domain.c     |  34 +-
+- snmplib/transports/snmpUnixDomain.c        |  66 ++--
+- win32/libsnmp/Makefile.in                  |   6 +
+- win32/net-snmp/net-snmp-config.h           |   2 +
+- win32/net-snmp/net-snmp-config.h.in        |   2 +
+- 19 files changed, 1176 insertions(+), 66 deletions(-)
+- create mode 100644 README.systemd
+- create mode 100644 dist/snmpd.servic
+- create mode 100644 dist/snmpd.socket
+- create mode 100644 dist/snmptrapd.service
+- create mode 100644 dist/snmptrapd.socket
+- create mode 100644 include/net-snmp/library/sd-daemon.h
+- create mode 100644 snmplib/sd-daemon.c
+-
+-diff --git a/README.systemd b/README.systemd
+-new file mode 100644
+-index 0000000..dba15d1
+---- /dev/null
+-+++ b/README.systemd
+-@@ -0,0 +1,41 @@
+-+README.systemd
+-+--------------
+-+Net-SNMP provides two daemons, which support systemd system manager.
+-+See http://www.freedesktop.org/wiki/Software/systemd to learn how
+-+systemd works. Both socket activation and notification is supported by these
+-+daemons.
+-+
+-+To enable systemd support, the sources must be compiled with
+-+--with-systemd configure option.
+-+
+-+snmpd - The SNMP agent
+-+----------------------
+-+Socket activation od snmpd daemon is implemented, but it's discouraged.
+-+The reason is simple - snmpd not only listens and processes SNMP requests
+-+from network, but also gathers system statistics counters, sends traps and
+-+communicates with subagents. It even opens few netlink sockets.
+-+
+-+In other words, snmpd should run from system start to properly work.
+-+This can be done in two ways:
+-+1) either as snmpd service unit with 'Type=notification' and without a socket
+-+   unit
+-+2) or as snmpd service unit with 'Type=simple', appropriate socket socket unit
+-+   and the snmpd service enabled. This way systemd creates the snmpd listening
+-+   socket early during boot and passes the sockets to snmpd slightly later
+-+   (but still during machine boot). This way systemd can paralelize start of
+-+   services, which depend on snmpd. Admins must adjust the socket file manually,
+-+   depending if the snmpd support AgentX, IPv6, SMUX etc.
+-+
+-+snmpd should be started with '-f' command line parameter to disable forking -
+-+systemd does that for us automatically.
+-+
+-+
+-+snmptrapd - The trap processing daemon
+-+--------------------------------------
+-+snmptrapd supports full socket activation and also notification (if needed).
+-+Both 'Type=simple' (with appropriate socket unit) and 'Type=notify' services
+-+will work. Again, '-f' parameter should be provided on snmptrapd command line.
+-+
+-+If integration with SNMP agent using AgentX protocol is enabled, snmptrapd should
+-+start during boot and not after first SNMP trap arrives. Same rules as for snmpd
+-+applies then.
+-diff --git a/agent/snmpd.c b/agent/snmpd.c
+-index cfc7bce..116ee5c 100644
+---- a/agent/snmpd.c
+-+++ b/agent/snmpd.c
+-@@ -164,6 +164,10 @@ typedef long    fd_mask;
+- 
+- #endif
+- 
+-+#ifndef NETSNMP_NO_SYSTEMD
+-+#include <net-snmp/library/sd-daemon.h>
+-+#endif
+-+
+- netsnmp_feature_want(logging_file)
+- netsnmp_feature_want(logging_stdio)
+- netsnmp_feature_want(logging_syslog)
+-@@ -443,19 +447,29 @@ main(int argc, char *argv[])
+-     int             agent_mode = -1;
+-     char           *pid_file = NULL;
+-     char            option_compatability[] = "-Le";
+-+#ifndef WIN32
+-+    int             prepared_sockets = 0;
+-+#endif
+- #if HAVE_GETPID
+-     int fd;
+-     FILE           *PID;
+- #endif
+- 
+- #ifndef WIN32
+-+#ifndef NETSNMP_NO_SYSTEMD
+-+    /* check if systemd has sockets for us and don't close them */
+-+    prepared_sockets = netsnmp_sd_listen_fds(0);
+-+#endif /* NETSNMP_NO_SYSTEMD */
+-+
+-     /*
+-      * close all non-standard file descriptors we may have
+-      * inherited from the shell.
+-      */
+--    for (i = getdtablesize() - 1; i > 2; --i) {
+--        (void) close(i);
+--    }
+-+    if (!prepared_sockets) {
+-+        for (i = getdtablesize() - 1; i > 2; --i) {
+-+            (void) close(i);
+-+        }    
+-+}
+- #endif /* #WIN32 */
+-     
+-     /*
+-@@ -1107,6 +1121,19 @@ main(int argc, char *argv[])
+-     netsnmp_addrcache_initialise();
+- 
+-     /*
+-+     * Let systemd know we're up.
+-+     */
+-+#ifndef NETSNMP_NO_SYSTEMD
+-+    netsnmp_sd_notify(1, "READY=1\n");
+-+    if (prepared_sockets)
+-+        /*
+-+         * Clear the environment variable, we already processed all the sockets
+-+         * by now.
+-+         */
+-+        netsnmp_sd_listen_fds(1);
+-+#endif
+-+
+-+    /*
+-      * Forever monitor the dest_port for incoming PDUs.  
+-      */
+-     DEBUGMSGTL(("snmpd/main", "We're up.  Starting to process data.\n"));
+-diff --git a/apps/snmptrapd.c b/apps/snmptrapd.c
+-index bce0d47..c6a74ec 100644
+---- a/apps/snmptrapd.c
+-+++ b/apps/snmptrapd.c
+-@@ -125,6 +125,10 @@ SOFTWARE.
+- 
+- #include <net-snmp/net-snmp-features.h>
+- 
+-+#ifndef NETSNMP_NO_SYSTEMD
+-+#include <net-snmp/library/sd-daemon.h>
+-+#endif
+-+
+- #ifndef BSD4_3
+- #define BSD4_2
+- #endif
+-@@ -657,16 +661,25 @@ main(int argc, char *argv[])
+-     int             agentx_subagent = 1;
+- #endif
+-     netsnmp_trapd_handler *traph;
+-+#ifndef WIN32
+-+    int             prepared_sockets = 0;
+-+#endif
+- 
+- 
+- #ifndef WIN32
+-+#ifndef NETSNMP_NO_SYSTEMD
+-+    /* check if systemd has sockets for us and don't close them */
+-+    prepared_sockets = netsnmp_sd_listen_fds(0);
+-+#endif
+-     /*
+-      * close all non-standard file descriptors we may have
+-      * inherited from the shell.
+-      */
+--    for (i = getdtablesize() - 1; i > 2; --i) {
+--        (void) close(i);
+--    }
+-+    if (!prepared_sockets) {
+-+        for (i = getdtablesize() - 1; i > 2; --i) {
+-+            (void) close(i);
+-+        }    
+-+}
+- #endif /* #WIN32 */
+-     
+- #ifdef SIGTERM
+-@@ -1318,6 +1331,19 @@ main(int argc, char *argv[])
+- #endif
+- #endif
+- 
+-+    /*
+-+     * Let systemd know we're up.
+-+     */
+-+#ifndef NETSNMP_NO_SYSTEMD
+-+    netsnmp_sd_notify(1, "READY=1\n");
+-+    if (prepared_sockets)
+-+        /*
+-+         * Clear the environment variable, we already processed all the sockets
+-+         * by now.
+-+         */
+-+        netsnmp_sd_listen_fds(1);
+-+#endif
+-+
+- #ifdef WIN32SERVICE
+-     trapd_status = SNMPTRAPD_RUNNING;
+- #endif
+-diff --git a/configure.d/config_modules_lib b/configure.d/config_modules_lib
+-index 362ba0a..bb69daa 100644
+---- a/configure.d/config_modules_lib
+-+++ b/configure.d/config_modules_lib
+-@@ -53,6 +53,14 @@ if test "x$PARTIALTARGETOS" = "xmingw32" -o "x$PARTIALTARGETOS" = "xmingw32msvc"
+-   other_ftobjs_list="$other_ftobjs_list winpipe.ft"
+- fi
+- 
+-+# Linux systemd
+-+if test "x$with_systemd" == "xyes"; then
+-+  other_src_list="$other_src_list sd-daemon.c"
+-+  other_objs_list="$other_objs_list sd-daemon.o"
+-+  other_lobjs_list="$other_lobjs_list sd-daemon.lo"
+-+  other_ftobjs_list="$other_ftobjs_list sd-daemon.ft"
+-+fi
+-+
+- AC_SUBST(other_src_list)
+- AC_SUBST(other_objs_list)
+- AC_SUBST(other_lobjs_list)
+-diff --git a/configure.d/config_project_with_enable b/configure.d/config_project_with_enable
+-index 61ba026..d782d12 100644
+---- a/configure.d/config_project_with_enable
+-+++ b/configure.d/config_project_with_enable
+-@@ -690,6 +690,15 @@ if test "x$with_dummy_values" != "xyes"; then
+-      data for])
+- fi
+- 
+-+NETSNMP_ARG_WITH(systemd,
+-+[  --with-systemd                 Provide systemd support. See README.systemd
+-+                                  for details.])
+-+# Define unless specifically suppressed (i.e., option defaults to false).
+-+if test "x$with_systemd" != "xyes"; then
+-+  AC_DEFINE(NETSNMP_NO_SYSTEMD, 1,
+-+    [If you don't want to integrate with systemd.])
+-+fi
+-+
+- NETSNMP_ARG_ENABLE(set-support,
+- [  --disable-set-support           Do not allow SNMP set requests.])
+- if test "x$enable_set_support" = "xno"; then
+-diff --git a/dist/snmpd.servic b/dist/snmpd.servic
+-new file mode 100644
+-index 0000000..31391e5
+---- /dev/null
+-+++ b/dist/snmpd.servic
+-@@ -0,0 +1,18 @@
+-+#
+-+# SNMP agent service file for systemd
+-+#
+-+#
+-+# The service should be enabled, i.e. snmpd should start during machine boot.
+-+# Socket activation shall not be used. See README.systemd for details.
+-+
+-+[Unit]
+-+Description=Simple Network Management Protocol (SNMP) daemon.
+-+After=syslog.target network.target
+-+
+-+[Service]
+-+# Type=notify is also supported. It should be set when snmpd.socket is not used.
+-+Type=simple
+-+ExecStart=/usr/sbin/snmpd -f
+-+
+-+[Install]
+-+WantedBy=multi-user.target
+-diff --git a/dist/snmpd.socket b/dist/snmpd.socket
+-new file mode 100644
+-index 0000000..7f3a2d9
+---- /dev/null
+-+++ b/dist/snmpd.socket
+-@@ -0,0 +1,17 @@
+-+[Unit]
+-+Description=Socket listening for SNMP and AgentX messages
+-+
+-+[Socket]
+-+ListenDatagram=0.0.0.0:161
+-+# Uncomment other listening addresses as needed - TCP, UDP6, TCP6.
+-+# It must match listening addresses/ports defined in snmpd.service
+-+# or snmpd.conf.
+-+# ListenStream=0.0.0.0:161
+-+# ListenDatagram=[::]:161
+-+# ListenStream=[::]:161
+-+#
+-+# Uncomment AgentX socket if snmpd.conf enables AgentX protocol.
+-+# ListenStream=/var/agentx/master
+-+
+-+[Install]
+-+WantedBy=sockets.target
+-diff --git a/dist/snmptrapd.service b/dist/snmptrapd.service
+-new file mode 100644
+-index 0000000..e88a5b4
+---- /dev/null
+-+++ b/dist/snmptrapd.service
+-@@ -0,0 +1,16 @@
+-+#
+-+# SNMP trap-processing service file for systemd
+-+#
+-+
+-+[Unit]
+-+Description=Simple Network Management Protocol (SNMP) Trap daemon.
+-+After=syslog.target network.target
+-+
+-+[Service]
+-+# Type=notify is also supported. It should be set when snmptrapd.socket is not
+-+# used.
+-+Type=simple
+-+ExecStart=/usr/sbin/snmptrapd -f
+-+
+-+[Install]
+-+WantedBy=multi-user.target
+-diff --git a/dist/snmptrapd.socket b/dist/snmptrapd.socket
+-new file mode 100644
+-index 0000000..2d24fb8
+---- /dev/null
+-+++ b/dist/snmptrapd.socket
+-@@ -0,0 +1,14 @@
+-++[Unit]
+-++Description=Socket listening for SNMP trap messages
+-++
+-++[Socket]
+-++ListenDatagram=0.0.0.0:162
+-++# Uncomment other listening addresses as needed - TCP, UDP6, TCP6.
+-++# It must match listening addresses/ports defined in snmptrapd.service
+-++# or snmptrapd.conf.
+-++# ListenStream=0.0.0.0:162
+-++# ListenDatagram=[::]:162
+-++# ListenStream=[::]:162
+-++
+-++[Install]
+-++WantedBy=sockets.target
+-diff --git a/include/net-snmp/library/sd-daemon.h b/include/net-snmp/library/sd-daemon.h
+-new file mode 100644
+-index 0000000..85274c9
+---- /dev/null
+-+++ b/include/net-snmp/library/sd-daemon.h
+-@@ -0,0 +1,290 @@
+-+/*-*- Mode: C; c-basic-offset: 8; indent-tabs-mode: nil -*-*/
+-+
+-+#ifndef SNMPD_SD_DAEMON_H
+-+#define SNMPD_SD_DAEMON_H
+-+
+-+/***
+-+  Copyright 2010 Lennart Poettering
+-+
+-+  Permission is hereby granted, free of charge, to any person
+-+  obtaining a copy of this software and associated documentation files
+-+  (the "Software"), to deal in the Software without restriction,
+-+  including without limitation the rights to use, copy, modify, merge,
+-+  publish, distribute, sublicense, and/or sell copies of the Software,
+-+  and to permit persons to whom the Software is furnished to do so,
+-+  subject to the following conditions:
+-+
+-+  The above copyright notice and this permission notice shall be
+-+  included in all copies or substantial portions of the Software.
+-+
+-+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+-+  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+-+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+-+  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+-+  BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+-+  ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+-+  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+-+  SOFTWARE.
+-+***/
+-+
+-+#ifdef HAVE_SYS_TYPES_H
+-+#include <sys/types.h>
+-+#endif
+-+#ifdef HAVE_INTTYPES_H
+-+#include <inttypes.h>
+-+#endif
+-+
+-+#ifdef __cplusplus
+-+extern "C" {
+-+#endif
+-+
+-+/*
+-+  Reference implementation of a few systemd related interfaces for
+-+  writing daemons. These interfaces are trivial to implement. To
+-+  simplify porting we provide this reference implementation.
+-+  Applications are welcome to reimplement the algorithms described
+-+  here if they do not want to include these two source files.
+-+
+-+  The following functionality is provided:
+-+
+-+  - Support for logging with log levels on stderr
+-+  - File descriptor passing for socket-based activation
+-+  - Daemon startup and status notification
+-+  - Detection of systemd boots
+-+
+-+  You may compile this with -DDISABLE_SYSTEMD to disable systemd
+-+  support. This makes all those calls NOPs that are directly related to
+-+  systemd (i.e. only sd_is_xxx() will stay useful).
+-+
+-+  Since this is drop-in code we don't want any of our symbols to be
+-+  exported in any case. Hence we declare hidden visibility for all of
+-+  them.
+-+
+-+  You may find an up-to-date version of these source files online:
+-+
+-+  http://cgit.freedesktop.org/systemd/plain/src/sd-daemon.h
+-+  http://cgit.freedesktop.org/systemd/plain/src/sd-daemon.c
+-+
+-+  This should compile on non-Linux systems, too, but with the
+-+  exception of the sd_is_xxx() calls all functions will become NOPs.
+-+
+-+  See sd-daemon(7) for more information.
+-+*/
+-+
+-+#ifndef _sd_printf_attr_
+-+#if __GNUC__ >= 4
+-+#define _sd_printf_attr_(a,b) __attribute__ ((format (printf, a, b)))
+-+#else
+-+#define _sd_printf_attr_(a,b)
+-+#endif
+-+#endif
+-+
+-+/*
+-+  Log levels for usage on stderr:
+-+
+-+          fprintf(stderr, SD_NOTICE "Hello World!\n");
+-+
+-+  This is similar to printk() usage in the kernel.
+-+*/
+-+#define SD_EMERG   "<0>"  /* system is unusable */
+-+#define SD_ALERT   "<1>"  /* action must be taken immediately */
+-+#define SD_CRIT    "<2>"  /* critical conditions */
+-+#define SD_ERR     "<3>"  /* error conditions */
+-+#define SD_WARNING "<4>"  /* warning conditions */
+-+#define SD_NOTICE  "<5>"  /* normal but significant condition */
+-+#define SD_INFO    "<6>"  /* informational */
+-+#define SD_DEBUG   "<7>"  /* debug-level messages */
+-+
+-+/* The first passed file descriptor is fd 3 */
+-+#define SD_LISTEN_FDS_START 3
+-+
+-+/*
+-+  Returns how many file descriptors have been passed, or a negative
+-+  errno code on failure. Optionally, removes the $LISTEN_FDS and
+-+  $LISTEN_PID file descriptors from the environment (recommended, but
+-+  problematic in threaded environments). If r is the return value of
+-+  this function you'll find the file descriptors passed as fds
+-+  SD_LISTEN_FDS_START to SD_LISTEN_FDS_START+r-1. Returns a negative
+-+  errno style error code on failure. This function call ensures that
+-+  the FD_CLOEXEC flag is set for the passed file descriptors, to make
+-+  sure they are not passed on to child processes. If FD_CLOEXEC shall
+-+  not be set, the caller needs to unset it after this call for all file
+-+  descriptors that are used.
+-+
+-+  See sd_listen_fds(3) for more information.
+-+*/
+-+int netsnmp_sd_listen_fds(int unset_environment);
+-+
+-+/*
+-+  Helper call for identifying a passed file descriptor. Returns 1 if
+-+  the file descriptor is a FIFO in the file system stored under the
+-+  specified path, 0 otherwise. If path is NULL a path name check will
+-+  not be done and the call only verifies if the file descriptor
+-+  refers to a FIFO. Returns a negative errno style error code on
+-+  failure.
+-+
+-+  See sd_is_fifo(3) for more information.
+-+*/
+-+int netsnmp_sd_is_fifo(int fd, const char *path);
+-+
+-+/*
+-+  Helper call for identifying a passed file descriptor. Returns 1 if
+-+  the file descriptor is a special character device on the file
+-+  system stored under the specified path, 0 otherwise.
+-+  If path is NULL a path name check will not be done and the call
+-+  only verifies if the file descriptor refers to a special character.
+-+  Returns a negative errno style error code on failure.
+-+
+-+  See sd_is_special(3) for more information.
+-+*/
+-+int netsnmp_sd_is_special(int fd, const char *path);
+-+
+-+/*
+-+  Helper call for identifying a passed file descriptor. Returns 1 if
+-+  the file descriptor is a socket of the specified family (AF_INET,
+-+  ...) and type (SOCK_DGRAM, SOCK_STREAM, ...), 0 otherwise. If
+-+  family is 0 a socket family check will not be done. If type is 0 a
+-+  socket type check will not be done and the call only verifies if
+-+  the file descriptor refers to a socket. If listening is > 0 it is
+-+  verified that the socket is in listening mode. (i.e. listen() has
+-+  been called) If listening is == 0 it is verified that the socket is
+-+  not in listening mode. If listening is < 0 no listening mode check
+-+  is done. Returns a negative errno style error code on failure.
+-+
+-+  See sd_is_socket(3) for more information.
+-+*/
+-+int netsnmp_sd_is_socket(int fd, int family, int type, int listening);
+-+
+-+/*
+-+  Helper call for identifying a passed file descriptor. Returns 1 if
+-+  the file descriptor is an Internet socket, of the specified family
+-+  (either AF_INET or AF_INET6) and the specified type (SOCK_DGRAM,
+-+  SOCK_STREAM, ...), 0 otherwise. If version is 0 a protocol version
+-+  check is not done. If type is 0 a socket type check will not be
+-+  done. If port is 0 a socket port check will not be done. The
+-+  listening flag is used the same way as in sd_is_socket(). Returns a
+-+  negative errno style error code on failure.
+-+
+-+  See sd_is_socket_inet(3) for more information.
+-+*/
+-+int netsnmp_sd_is_socket_inet(int fd, int family, int type, int listening, uint16_t port);
+-+
+-+/*
+-+  Helper call for identifying a passed file descriptor. Returns 1 if
+-+  the file descriptor is an AF_UNIX socket of the specified type
+-+  (SOCK_DGRAM, SOCK_STREAM, ...) and path, 0 otherwise. If type is 0
+-+  a socket type check will not be done. If path is NULL a socket path
+-+  check will not be done. For normal AF_UNIX sockets set length to
+-+  0. For abstract namespace sockets set length to the length of the
+-+  socket name (including the initial 0 byte), and pass the full
+-+  socket path in path (including the initial 0 byte). The listening
+-+  flag is used the same way as in sd_is_socket(). Returns a negative
+-+  errno style error code on failure.
+-+
+-+  See sd_is_socket_unix(3) for more information.
+-+*/
+-+int netsnmp_sd_is_socket_unix(int fd, int type, int listening, const char *path, size_t length);
+-+
+-+/*
+-+  Informs systemd about changed daemon state. This takes a number of
+-+  newline separated environment-style variable assignments in a
+-+  string. The following variables are known:
+-+
+-+     READY=1      Tells systemd that daemon startup is finished (only
+-+                  relevant for services of Type=notify). The passed
+-+                  argument is a boolean "1" or "0". Since there is
+-+                  little value in signaling non-readiness the only
+-+                  value daemons should send is "READY=1".
+-+
+-+     STATUS=...   Passes a single-line status string back to systemd
+-+                  that describes the daemon state. This is free-from
+-+                  and can be used for various purposes: general state
+-+                  feedback, fsck-like programs could pass completion
+-+                  percentages and failing programs could pass a human
+-+                  readable error message. Example: "STATUS=Completed
+-+                  66% of file system check..."
+-+
+-+     ERRNO=...    If a daemon fails, the errno-style error code,
+-+                  formatted as string. Example: "ERRNO=2" for ENOENT.
+-+
+-+     BUSERROR=... If a daemon fails, the D-Bus error-style error
+-+                  code. Example: "BUSERROR=org.freedesktop.DBus.Error.TimedOut"
+-+
+-+     MAINPID=...  The main pid of a daemon, in case systemd did not
+-+                  fork off the process itself. Example: "MAINPID=4711"
+-+
+-+  Daemons can choose to send additional variables. However, it is
+-+  recommended to prefix variable names not listed above with X_.
+-+
+-+  Returns a negative errno-style error code on failure. Returns > 0
+-+  if systemd could be notified, 0 if it couldn't possibly because
+-+  systemd is not running.
+-+
+-+  Example: When a daemon finished starting up, it could issue this
+-+  call to notify systemd about it:
+-+
+-+     sd_notify(0, "READY=1");
+-+
+-+  See sd_notifyf() for more complete examples.
+-+
+-+  See sd_notify(3) for more information.
+-+*/
+-+int netsnmp_sd_notify(int unset_environment, const char *state);
+-+
+-+/*
+-+  Similar to sd_notify() but takes a format string.
+-+
+-+  Example 1: A daemon could send the following after initialization:
+-+
+-+     sd_notifyf(0, "READY=1\n"
+-+                   "STATUS=Processing requests...\n"
+-+                   "MAINPID=%lu",
+-+                   (unsigned long) getpid());
+-+
+-+  Example 2: A daemon could send the following shortly before
+-+  exiting, on failure:
+-+
+-+     sd_notifyf(0, "STATUS=Failed to start up: %s\n"
+-+                   "ERRNO=%i",
+-+                   strerror(errno),
+-+                   errno);
+-+
+-+  See sd_notifyf(3) for more information.
+-+*/
+-+int netsnmp_sd_notifyf(int unset_environment, const char *format, ...) _sd_printf_attr_(2,3);
+-+
+-+/*
+-+  Returns > 0 if the system was booted with systemd. Returns < 0 on
+-+  error. Returns 0 if the system was not booted with systemd. Note
+-+  that all of the functions above handle non-systemd boots just
+-+  fine. You should NOT protect them with a call to this function. Also
+-+  note that this function checks whether the system, not the user
+-+  session is controlled by systemd. However the functions above work
+-+  for both user and system services.
+-+
+-+  See sd_booted(3) for more information.
+-+*/
+-+int netsnmp_sd_booted(void);
+-+
+-+/**
+-+ * Find an socket with given parameters. See man sd_is_socket_inet for
+-+ * description of the arguments.
+-+ *
+-+ * Returns the file descriptor if it is found, 0 otherwise.
+-+ */
+-+int netsnmp_sd_find_inet_socket(int family, int type, int listening, int port);
+-+
+-+/**
+-+ * Find an unix socket with given parameters. See man sd_is_socket_unix for
+-+ * description of the arguments.
+-+ *
+-+ * Returns the file descriptor if it is found, 0 otherwise.
+-+ */
+-+int
+-+netsnmp_sd_find_unix_socket(int type, int listening, const char *path);
+-+
+-+#ifdef __cplusplus
+-+}
+-+#endif
+-+
+-+#endif /* SNMPD_SD_DAEMON_H */
+-diff --git a/snmplib/sd-daemon.c b/snmplib/sd-daemon.c
+-new file mode 100644
+-index 0000000..42dba29
+---- /dev/null
+-+++ b/snmplib/sd-daemon.c
+-@@ -0,0 +1,532 @@
+-+/*
+-+ * Systemd integration parts.
+-+ *
+-+ * Most of this file is directly copied from systemd sources.
+-+ * Changes:
+-+ * - all functions were renamed to have netsnmp_ prefix
+-+ * - includes were  changed to match Net-SNMP style.
+-+ * - removed gcc export macros
+-+ * - removed POSIX message queues
+-+ */
+-+
+-+#include <net-snmp/net-snmp-config.h>
+-+#include <net-snmp/net-snmp-features.h>
+-+#include <net-snmp/types.h>
+-+#include <net-snmp/library/snmp_debug.h>
+-+
+-+#ifndef NETSNMP_NO_SYSTEMD
+-+
+-+/***
+-+  Copyright 2010 Lennart Poettering
+-+
+-+  Permission is hereby granted, free of charge, to any person
+-+  obtaining a copy of this software and associated documentation files
+-+  (the "Software"), to deal in the Software without restriction,
+-+  including without limitation the rights to use, copy, modify, merge,
+-+  publish, distribute, sublicense, and/or sell copies of the Software,
+-+  and to permit persons to whom the Software is furnished to do so,
+-+  subject to the following conditions:
+-+
+-+  The above copyright notice and this permission notice shall be
+-+  included in all copies or substantial portions of the Software.
+-+
+-+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+-+  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+-+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+-+  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+-+  BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+-+  ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+-+  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+-+  SOFTWARE.
+-+***/
+-+
+-+#ifndef _GNU_SOURCE
+-+#define _GNU_SOURCE
+-+#endif
+-+
+-+#include <sys/types.h>
+-+#include <sys/stat.h>
+-+#include <sys/socket.h>
+-+#include <sys/un.h>
+-+#include <sys/fcntl.h>
+-+#include <netinet/in.h>
+-+#include <stdlib.h>
+-+#include <errno.h>
+-+#include <unistd.h>
+-+#include <string.h>
+-+#include <stdarg.h>
+-+#include <stdio.h>
+-+#include <stddef.h>
+-+#include <limits.h>
+-+
+-+#include <net-snmp/library/sd-daemon.h>
+-+
+-+int netsnmp_sd_listen_fds(int unset_environment) {
+-+
+-+        int r, fd;
+-+        const char *e;
+-+        char *p = NULL;
+-+        unsigned long l;
+-+
+-+        if (!(e = getenv("LISTEN_PID"))) {
+-+                r = 0;
+-+                goto finish;
+-+        }
+-+
+-+        errno = 0;
+-+        l = strtoul(e, &p, 10);
+-+
+-+        if (errno != 0) {
+-+                r = -errno;
+-+                goto finish;
+-+        }
+-+
+-+        if (!p || *p || l <= 0) {
+-+                r = -EINVAL;
+-+                goto finish;
+-+        }
+-+
+-+        /* Is this for us? */
+-+        if (getpid() != (pid_t) l) {
+-+                r = 0;
+-+                goto finish;
+-+        }
+-+
+-+        if (!(e = getenv("LISTEN_FDS"))) {
+-+                r = 0;
+-+                goto finish;
+-+        }
+-+
+-+        errno = 0;
+-+        l = strtoul(e, &p, 10);
+-+
+-+        if (errno != 0) {
+-+                r = -errno;
+-+                goto finish;
+-+        }
+-+
+-+        if (!p || *p) {
+-+                r = -EINVAL;
+-+                goto finish;
+-+        }
+-+
+-+        for (fd = SD_LISTEN_FDS_START; fd < SD_LISTEN_FDS_START + (int) l; fd ++) {
+-+                int flags;
+-+
+-+                if ((flags = fcntl(fd, F_GETFD)) < 0) {
+-+                        r = -errno;
+-+                        goto finish;
+-+                }
+-+
+-+                if (flags & FD_CLOEXEC)
+-+                        continue;
+-+
+-+                if (fcntl(fd, F_SETFD, flags | FD_CLOEXEC) < 0) {
+-+                        r = -errno;
+-+                        goto finish;
+-+                }
+-+        }
+-+
+-+        r = (int) l;
+-+
+-+finish:
+-+        if (unset_environment) {
+-+                unsetenv("LISTEN_PID");
+-+                unsetenv("LISTEN_FDS");
+-+        }
+-+
+-+        return r;
+-+}
+-+
+-+int netsnmp_sd_is_fifo(int fd, const char *path) {
+-+        struct stat st_fd;
+-+
+-+        if (fd < 0)
+-+                return -EINVAL;
+-+
+-+        memset(&st_fd, 0, sizeof(st_fd));
+-+        if (fstat(fd, &st_fd) < 0)
+-+                return -errno;
+-+
+-+        if (!S_ISFIFO(st_fd.st_mode))
+-+                return 0;
+-+
+-+        if (path) {
+-+                struct stat st_path;
+-+
+-+                memset(&st_path, 0, sizeof(st_path));
+-+                if (stat(path, &st_path) < 0) {
+-+
+-+                        if (errno == ENOENT || errno == ENOTDIR)
+-+                                return 0;
+-+
+-+                        return -errno;
+-+                }
+-+
+-+                return
+-+                        st_path.st_dev == st_fd.st_dev &&
+-+                        st_path.st_ino == st_fd.st_ino;
+-+        }
+-+
+-+        return 1;
+-+}
+-+
+-+int netsnmp_sd_is_special(int fd, const char *path) {
+-+        struct stat st_fd;
+-+
+-+        if (fd < 0)
+-+                return -EINVAL;
+-+
+-+        if (fstat(fd, &st_fd) < 0)
+-+                return -errno;
+-+
+-+        if (!S_ISREG(st_fd.st_mode) && !S_ISCHR(st_fd.st_mode))
+-+                return 0;
+-+
+-+        if (path) {
+-+                struct stat st_path;
+-+
+-+                if (stat(path, &st_path) < 0) {
+-+
+-+                        if (errno == ENOENT || errno == ENOTDIR)
+-+                                return 0;
+-+
+-+                        return -errno;
+-+                }
+-+
+-+                if (S_ISREG(st_fd.st_mode) && S_ISREG(st_path.st_mode))
+-+                        return
+-+                                st_path.st_dev == st_fd.st_dev &&
+-+                                st_path.st_ino == st_fd.st_ino;
+-+                else if (S_ISCHR(st_fd.st_mode) && S_ISCHR(st_path.st_mode))
+-+                        return st_path.st_rdev == st_fd.st_rdev;
+-+                else
+-+                        return 0;
+-+        }
+-+
+-+        return 1;
+-+}
+-+
+-+static int sd_is_socket_internal(int fd, int type, int listening) {
+-+        struct stat st_fd;
+-+
+-+        if (fd < 0 || type < 0)
+-+                return -EINVAL;
+-+
+-+        if (fstat(fd, &st_fd) < 0)
+-+                return -errno;
+-+
+-+        if (!S_ISSOCK(st_fd.st_mode))
+-+                return 0;
+-+
+-+        if (type != 0) {
+-+                int other_type = 0;
+-+                socklen_t l = sizeof(other_type);
+-+
+-+                if (getsockopt(fd, SOL_SOCKET, SO_TYPE, &other_type, &l) < 0)
+-+                        return -errno;
+-+
+-+                if (l != sizeof(other_type))
+-+                        return -EINVAL;
+-+
+-+                if (other_type != type)
+-+                        return 0;
+-+        }
+-+
+-+        if (listening >= 0) {
+-+                int accepting = 0;
+-+                socklen_t l = sizeof(accepting);
+-+
+-+                if (getsockopt(fd, SOL_SOCKET, SO_ACCEPTCONN, &accepting, &l) < 0)
+-+                        return -errno;
+-+
+-+                if (l != sizeof(accepting))
+-+                        return -EINVAL;
+-+
+-+                if (!accepting != !listening)
+-+                        return 0;
+-+        }
+-+
+-+        return 1;
+-+}
+-+
+-+union sockaddr_union {
+-+        struct sockaddr sa;
+-+        struct sockaddr_in in4;
+-+        struct sockaddr_in6 in6;
+-+        struct sockaddr_un un;
+-+        struct sockaddr_storage storage;
+-+};
+-+
+-+int netsnmp_sd_is_socket(int fd, int family, int type, int listening) {
+-+        int r;
+-+
+-+        if (family < 0)
+-+                return -EINVAL;
+-+
+-+        if ((r = sd_is_socket_internal(fd, type, listening)) <= 0)
+-+                return r;
+-+
+-+        if (family > 0) {
+-+                union sockaddr_union sockaddr;
+-+                socklen_t l;
+-+
+-+                memset(&sockaddr, 0, sizeof(sockaddr));
+-+                l = sizeof(sockaddr);
+-+
+-+                if (getsockname(fd, &sockaddr.sa, &l) < 0)
+-+                        return -errno;
+-+
+-+                if (l < sizeof(sa_family_t))
+-+                        return -EINVAL;
+-+
+-+                return sockaddr.sa.sa_family == family;
+-+        }
+-+
+-+        return 1;
+-+}
+-+
+-+int netsnmp_sd_is_socket_inet(int fd, int family, int type, int listening, uint16_t port) {
+-+        union sockaddr_union sockaddr;
+-+        socklen_t l;
+-+        int r;
+-+
+-+        if (family != 0 && family != AF_INET && family != AF_INET6)
+-+                return -EINVAL;
+-+
+-+        if ((r = sd_is_socket_internal(fd, type, listening)) <= 0)
+-+                return r;
+-+
+-+        memset(&sockaddr, 0, sizeof(sockaddr));
+-+        l = sizeof(sockaddr);
+-+
+-+        if (getsockname(fd, &sockaddr.sa, &l) < 0)
+-+                return -errno;
+-+
+-+        if (l < sizeof(sa_family_t))
+-+                return -EINVAL;
+-+
+-+        if (sockaddr.sa.sa_family != AF_INET &&
+-+            sockaddr.sa.sa_family != AF_INET6)
+-+                return 0;
+-+
+-+        if (family > 0)
+-+                if (sockaddr.sa.sa_family != family)
+-+                        return 0;
+-+
+-+        if (port > 0) {
+-+                if (sockaddr.sa.sa_family == AF_INET) {
+-+                        if (l < sizeof(struct sockaddr_in))
+-+                                return -EINVAL;
+-+
+-+                        return htons(port) == sockaddr.in4.sin_port;
+-+                } else {
+-+                        if (l < sizeof(struct sockaddr_in6))
+-+                                return -EINVAL;
+-+
+-+                        return htons(port) == sockaddr.in6.sin6_port;
+-+                }
+-+        }
+-+
+-+        return 1;
+-+}
+-+
+-+int netsnmp_sd_is_socket_unix(int fd, int type, int listening, const char *path, size_t length) {
+-+        union sockaddr_union sockaddr;
+-+        socklen_t l;
+-+        int r;
+-+
+-+        if ((r = sd_is_socket_internal(fd, type, listening)) <= 0)
+-+                return r;
+-+
+-+        memset(&sockaddr, 0, sizeof(sockaddr));
+-+        l = sizeof(sockaddr);
+-+
+-+        if (getsockname(fd, &sockaddr.sa, &l) < 0)
+-+                return -errno;
+-+
+-+        if (l < sizeof(sa_family_t))
+-+                return -EINVAL;
+-+
+-+        if (sockaddr.sa.sa_family != AF_UNIX)
+-+                return 0;
+-+
+-+        if (path) {
+-+                if (length <= 0)
+-+                        length = strlen(path);
+-+
+-+                if (length <= 0)
+-+                        /* Unnamed socket */
+-+                        return l == offsetof(struct sockaddr_un, sun_path);
+-+
+-+                if (path[0])
+-+                        /* Normal path socket */
+-+                        return
+-+                                (l >= offsetof(struct sockaddr_un, sun_path) + length + 1) &&
+-+                                memcmp(path, sockaddr.un.sun_path, length+1) == 0;
+-+                else
+-+                        /* Abstract namespace socket */
+-+                        return
+-+                                (l == offsetof(struct sockaddr_un, sun_path) + length) &&
+-+                                memcmp(path, sockaddr.un.sun_path, length) == 0;
+-+        }
+-+
+-+        return 1;
+-+}
+-+
+-+int netsnmp_sd_notify(int unset_environment, const char *state) {
+-+        int fd = -1, r;
+-+        struct msghdr msghdr;
+-+        struct iovec iovec;
+-+        union sockaddr_union sockaddr;
+-+        const char *e;
+-+
+-+        if (!state) {
+-+                r = -EINVAL;
+-+                goto finish;
+-+        }
+-+
+-+        if (!(e = getenv("NOTIFY_SOCKET")))
+-+                return 0;
+-+
+-+        /* Must be an abstract socket, or an absolute path */
+-+        if ((e[0] != '@' && e[0] != '/') || e[1] == 0) {
+-+                r = -EINVAL;
+-+                goto finish;
+-+        }
+-+
+-+        if ((fd = socket(AF_UNIX, SOCK_DGRAM|SOCK_CLOEXEC, 0)) < 0) {
+-+                r = -errno;
+-+                goto finish;
+-+        }
+-+
+-+        memset(&sockaddr, 0, sizeof(sockaddr));
+-+        sockaddr.sa.sa_family = AF_UNIX;
+-+        strncpy(sockaddr.un.sun_path, e, sizeof(sockaddr.un.sun_path));
+-+
+-+        if (sockaddr.un.sun_path[0] == '@')
+-+                sockaddr.un.sun_path[0] = 0;
+-+
+-+        memset(&iovec, 0, sizeof(iovec));
+-+        iovec.iov_base = (char *)state;
+-+        iovec.iov_len = strlen(state);
+-+
+-+        memset(&msghdr, 0, sizeof(msghdr));
+-+        msghdr.msg_name = &sockaddr;
+-+        msghdr.msg_namelen = offsetof(struct sockaddr_un, sun_path) + strlen(e);
+-+
+-+        if (msghdr.msg_namelen > sizeof(struct sockaddr_un))
+-+                msghdr.msg_namelen = sizeof(struct sockaddr_un);
+-+
+-+        msghdr.msg_iov = &iovec;
+-+        msghdr.msg_iovlen = 1;
+-+
+-+        if (sendmsg(fd, &msghdr, MSG_NOSIGNAL) < 0) {
+-+                r = -errno;
+-+                goto finish;
+-+        }
+-+
+-+        r = 1;
+-+
+-+finish:
+-+        if (unset_environment)
+-+                unsetenv("NOTIFY_SOCKET");
+-+
+-+        if (fd >= 0)
+-+                close(fd);
+-+
+-+        return r;
+-+}
+-+
+-+int netsnmp_sd_notifyf(int unset_environment, const char *format, ...) {
+-+        va_list ap;
+-+        char *p = NULL;
+-+        int r;
+-+
+-+        va_start(ap, format);
+-+        r = vasprintf(&p, format, ap);
+-+        va_end(ap);
+-+
+-+        if (r < 0 || !p)
+-+                return -ENOMEM;
+-+
+-+        r = netsnmp_sd_notify(unset_environment, p);
+-+        free(p);
+-+
+-+        return r;
+-+}
+-+
+-+int netsnmp_sd_booted(void) {
+-+        struct stat a, b;
+-+
+-+        /* We simply test whether the systemd cgroup hierarchy is
+-+         * mounted */
+-+
+-+        if (lstat("/sys/fs/cgroup", &a) < 0)
+-+                return 0;
+-+
+-+        if (lstat("/sys/fs/cgroup/systemd", &b) < 0)
+-+                return 0;
+-+
+-+        return a.st_dev != b.st_dev;
+-+}
+-+
+-+/* End of original sd-daemon.c from systemd sources */
+-+
+-+int
+-+netsnmp_sd_find_inet_socket(int family, int type, int listening, int port)
+-+{
+-+    int count, fd;
+-+
+-+    count = netsnmp_sd_listen_fds(0);
+-+    if (count <= 0) {
+-+        DEBUGMSGTL(("systemd:find_inet_socket", "No LISTEN_FDS found.\n"));
+-+        return 0;
+-+    }
+-+    DEBUGMSGTL(("systemd:find_inet_socket", "LISTEN_FDS reports %d sockets.\n",
+-+            count));
+-+
+-+    for (fd = 3; fd < 3+count; fd++) {
+-+        int rc = netsnmp_sd_is_socket_inet(fd, family, type, listening, port);
+-+        if (rc < 0)
+-+            DEBUGMSGTL(("systemd:find_inet_socket",
+-+                    "sd_is_socket_inet error: %d\n", rc));
+-+        if (rc > 0) {
+-+            DEBUGMSGTL(("systemd:find_inet_socket",
+-+                    "Found the socket in LISTEN_FDS\n"));
+-+            return fd;
+-+        }
+-+    }
+-+    DEBUGMSGTL(("systemd:find_inet_socket", "Socket not found in LISTEN_FDS\n"));
+-+    return 0;
+-+}
+-+
+-+int
+-+netsnmp_sd_find_unix_socket(int type, int listening, const char *path)
+-+{
+-+    int count, fd;
+-+
+-+    count = netsnmp_sd_listen_fds(0);
+-+    if (count <= 0) {
+-+        DEBUGMSGTL(("systemd:find_unix_socket", "No LISTEN_FDS found.\n"));
+-+        return 0;
+-+    }
+-+    DEBUGMSGTL(("systemd:find_unix_socket", "LISTEN_FDS reports %d sockets.\n",
+-+            count));
+-+
+-+    for (fd = 3; fd < 3+count; fd++) {
+-+        int rc = netsnmp_sd_is_socket_unix(fd, type, listening, path, 0);
+-+        if (rc < 0)
+-+            DEBUGMSGTL(("systemd:find_unix_socket",
+-+                    "netsnmp_sd_is_socket_unix error: %d\n", rc));
+-+        if (rc > 0) {
+-+            DEBUGMSGTL(("systemd:find_unix_socket",
+-+                    "Found the socket in LISTEN_FDS\n"));
+-+            return fd;
+-+        }
+-+    }
+-+    DEBUGMSGTL(("systemd:find_unix_socket", "Socket not found in LISTEN_FDS\n"));
+-+    return 0;
+-+}
+-+
+-+#endif /* ! NETSNMP_NO_SYSTEMD */
+-diff --git a/snmplib/transports/snmpTCPDomain.c b/snmplib/transports/snmpTCPDomain.c
+-index 7feb028..a41b926 100644
+---- a/snmplib/transports/snmpTCPDomain.c
+-+++ b/snmplib/transports/snmpTCPDomain.c
+-@@ -43,6 +43,10 @@
+- #include <net-snmp/library/snmpTCPBaseDomain.h>
+- #include <net-snmp/library/tools.h>
+- 
+-+#ifndef NETSNMP_NO_SYSTEMD
+-+#include <net-snmp/library/sd-daemon.h>
+-+#endif
+-+
+- /*
+-  * needs to be in sync with the definitions in snmplib/snmpUDPDomain.c
+-  * and perl/agent/agent.xs
+-@@ -149,6 +153,7 @@ netsnmp_tcp_transport(struct sockaddr_in *addr, int local)
+-     netsnmp_transport *t = NULL;
+-     netsnmp_udp_addr_pair *addr_pair = NULL;
+-     int rc = 0;
+-+    int socket_initialized = 0;
+- 
+- #ifdef NETSNMP_NO_LISTEN_SUPPORT
+-     if (local)
+-@@ -178,7 +183,19 @@ netsnmp_tcp_transport(struct sockaddr_in *addr, int local)
+-     t->domain_length =
+-         sizeof(netsnmp_snmpTCPDomain) / sizeof(netsnmp_snmpTCPDomain[0]);
+- 
+--    t->sock = socket(PF_INET, SOCK_STREAM, 0);
+-+#ifndef NETSNMP_NO_SYSTEMD
+-+    /*
+-+     * Maybe the socket was already provided by systemd...
+-+     */
+-+    if (local) {
+-+        t->sock = netsnmp_sd_find_inet_socket(PF_INET, SOCK_STREAM, 1,
+-+                ntohs(addr->sin_port));
+-+        if (t->sock)
+-+            socket_initialized = 1;
+-+    }
+-+#endif
+-+    if (!socket_initialized)
+-+        t->sock = socket(PF_INET, SOCK_STREAM, 0);
+-     if (t->sock < 0) {
+-         netsnmp_transport_free(t);
+-         return NULL;
+-@@ -215,11 +232,13 @@ netsnmp_tcp_transport(struct sockaddr_in *addr, int local)
+-         setsockopt(t->sock, SOL_SOCKET, SO_REUSEADDR, (void *)&opt,
+- 		   sizeof(opt));
+- 
+--        rc = bind(t->sock, (struct sockaddr *)addr, sizeof(struct sockaddr));
+--        if (rc != 0) {
+--            netsnmp_socketbase_close(t);
+--            netsnmp_transport_free(t);
+--            return NULL;
+-+        if (!socket_initialized) {
+-+            rc = bind(t->sock, (struct sockaddr *)addr, sizeof(struct sockaddr));
+-+            if (rc != 0) {
+-+                netsnmp_socketbase_close(t);
+-+                netsnmp_transport_free(t);
+-+                return NULL;
+-+            }
+-         }
+- 
+-         /*
+-@@ -236,11 +255,13 @@ netsnmp_tcp_transport(struct sockaddr_in *addr, int local)
+-          * Now sit here and wait for connections to arrive.  
+-          */
+- 
+--        rc = listen(t->sock, NETSNMP_STREAM_QUEUE_LEN);
+--        if (rc != 0) {
+--            netsnmp_socketbase_close(t);
+--            netsnmp_transport_free(t);
+--            return NULL;
+-+        if (!socket_initialized) {
+-+            rc = listen(t->sock, NETSNMP_STREAM_QUEUE_LEN);
+-+            if (rc != 0) {
+-+                netsnmp_socketbase_close(t);
+-+                netsnmp_transport_free(t);
+-+                return NULL;
+-+            }
+-         }
+-         
+-         /*
+-diff --git a/snmplib/transports/snmpTCPIPv6Domain.c b/snmplib/transports/snmpTCPIPv6Domain.c
+-index d2e0a2d..22de6d4 100644
+---- a/snmplib/transports/snmpTCPIPv6Domain.c
+-+++ b/snmplib/transports/snmpTCPIPv6Domain.c
+-@@ -49,6 +49,10 @@
+- #include <net-snmp/library/snmpTCPBaseDomain.h>
+- #include <net-snmp/library/tools.h>
+- 
+-+#ifndef NETSNMP_NO_SYSTEMD
+-+#include <net-snmp/library/sd-daemon.h>
+-+#endif
+-+
+- #include "inet_ntop.h"
+- 
+- oid netsnmp_TCPIPv6Domain[] = { TRANSPORT_DOMAIN_TCP_IPV6 };
+-@@ -140,6 +144,8 @@ netsnmp_tcp6_transport(struct sockaddr_in6 *addr, int local)
+- {
+-     netsnmp_transport *t = NULL;
+-     int             rc = 0;
+-+    char           *str = NULL;
+-+    int             socket_initialized = 0;
+- 
+- #ifdef NETSNMP_NO_LISTEN_SUPPORT
+-     if (local)
+-@@ -174,7 +180,19 @@ netsnmp_tcp6_transport(struct sockaddr_in6 *addr, int local)
+-     t->domain = netsnmp_TCPIPv6Domain;
+-     t->domain_length = sizeof(netsnmp_TCPIPv6Domain) / sizeof(oid);
+- 
+--    t->sock = socket(PF_INET6, SOCK_STREAM, 0);
+-+#ifndef NETSNMP_NO_SYSTEMD
+-+    /*
+-+     * Maybe the socket was already provided by systemd...
+-+     */
+-+    if (local) {
+-+        t->sock = netsnmp_sd_find_inet_socket(PF_INET6, SOCK_STREAM, 1,
+-+                ntohs(addr->sin6_port));
+-+        if (t->sock)
+-+            socket_initialized = 1;
+-+    }
+-+#endif
+-+    if (!socket_initialized)
+-+        t->sock = socket(PF_INET6, SOCK_STREAM, 0);
+-     if (t->sock < 0) {
+-         netsnmp_transport_free(t);
+-         return NULL;
+-@@ -220,12 +238,14 @@ netsnmp_tcp6_transport(struct sockaddr_in6 *addr, int local)
+- 
+-         setsockopt(t->sock, SOL_SOCKET, SO_REUSEADDR, (void *)&opt, sizeof(opt));
+- 
+--        rc = bind(t->sock, (struct sockaddr *) addr,
+--		  sizeof(struct sockaddr_in6));
+--        if (rc != 0) {
+--            netsnmp_socketbase_close(t);
+--            netsnmp_transport_free(t);
+--            return NULL;
+-+        if (!socket_initialized) {
+-+            rc = bind(t->sock, (struct sockaddr *) addr,
+-+                    sizeof(struct sockaddr_in6));
+-+            if (rc != 0) {
+-+                netsnmp_socketbase_close(t);
+-+                netsnmp_transport_free(t);
+-+                return NULL;
+-+            }
+-         }
+- 
+-         /*
+-@@ -242,11 +262,13 @@ netsnmp_tcp6_transport(struct sockaddr_in6 *addr, int local)
+-          * Now sit here and wait for connections to arrive.  
+-          */
+- 
+--        rc = listen(t->sock, NETSNMP_STREAM_QUEUE_LEN);
+--        if (rc != 0) {
+--            netsnmp_socketbase_close(t);
+--            netsnmp_transport_free(t);
+--            return NULL;
+-+        if (!socket_initialized) {
+-+            rc = listen(t->sock, NETSNMP_STREAM_QUEUE_LEN);
+-+            if (rc != 0) {
+-+                netsnmp_socketbase_close(t);
+-+                netsnmp_transport_free(t);
+-+                return NULL;
+-+            }
+-         }
+-         
+-         /*
+-diff --git a/snmplib/transports/snmpUDPIPv4BaseDomain.c b/snmplib/transports/snmpUDPIPv4BaseDomain.c
+-index 8c0fb05..00e5bbc 100644
+---- a/snmplib/transports/snmpUDPIPv4BaseDomain.c
+-+++ b/snmplib/transports/snmpUDPIPv4BaseDomain.c
+-@@ -40,6 +40,10 @@
+- 
+- #include <net-snmp/library/snmpSocketBaseDomain.h>
+- 
+-+#ifndef NETSNMP_NO_SYSTEMD
+-+#include <net-snmp/library/sd-daemon.h>
+-+#endif
+-+
+- #if defined(HAVE_IP_PKTINFO) || defined(HAVE_IP_RECVDSTADDR)
+- int netsnmp_udpipv4_recvfrom(int s, void *buf, int len, struct sockaddr *from,
+-                              socklen_t *fromlen, struct sockaddr *dstip,
+-@@ -64,6 +68,7 @@ netsnmp_udpipv4base_transport(struct sockaddr_in *addr, int local)
+-     char           *client_socket = NULL;
+-     netsnmp_indexed_addr_pair addr_pair;
+-     socklen_t       local_addr_len;
+-+    int             socket_initialized = 0;
+- 
+- #ifdef NETSNMP_NO_LISTEN_SUPPORT
+-     if (local)
+-@@ -88,7 +93,19 @@ netsnmp_udpipv4base_transport(struct sockaddr_in *addr, int local)
+-         free(str);
+-     }
+- 
+--    t->sock = socket(PF_INET, SOCK_DGRAM, 0);
+-+#ifndef NETSNMP_NO_SYSTEMD
+-+    /*
+-+     * Maybe the socket was already provided by systemd...
+-+     */
+-+    if (local) {
+-+        t->sock = netsnmp_sd_find_inet_socket(PF_INET, SOCK_DGRAM, -1,
+-+                ntohs(addr->sin_port));
+-+        if (t->sock)
+-+            socket_initialized = 1;
+-+    }
+-+#endif
+-+    if (!socket_initialized)
+-+        t->sock = socket(PF_INET, SOCK_DGRAM, 0);
+-     DEBUGMSGTL(("UDPBase", "openned socket %d as local=%d\n", t->sock, local)); 
+-     if (t->sock < 0) {
+-         netsnmp_transport_free(t);
+-@@ -151,12 +168,14 @@ netsnmp_udpipv4base_transport(struct sockaddr_in *addr, int local)
+-             }
+-         }
+- #endif /* !defined(WIN32) */
+--        rc = bind(t->sock, (struct sockaddr *) addr,
+--                  sizeof(struct sockaddr));
+--        if (rc != 0) {
+--            netsnmp_socketbase_close(t);
+--            netsnmp_transport_free(t);
+--            return NULL;
+-+        if (!socket_initialized) {
+-+            rc = bind(t->sock, (struct sockaddr *) addr,
+-+                    sizeof(struct sockaddr));
+-+            if (rc != 0) {
+-+                netsnmp_socketbase_close(t);
+-+                netsnmp_transport_free(t);
+-+                return NULL;
+-+            }
+-         }
+-         t->data = NULL;
+-         t->data_length = 0;
+-diff --git a/snmplib/transports/snmpUDPIPv6Domain.c b/snmplib/transports/snmpUDPIPv6Domain.c
+-index 18de876..fd2ced4 100644
+---- a/snmplib/transports/snmpUDPIPv6Domain.c
+-+++ b/snmplib/transports/snmpUDPIPv6Domain.c
+-@@ -67,6 +67,10 @@ static const struct in6_addr in6addr_any = IN6ADDR_ANY_INIT;
+- #include <net-snmp/library/snmpSocketBaseDomain.h>
+- #include <net-snmp/library/tools.h>
+- 
+-+#ifndef NETSNMP_NO_SYSTEMD
+-+#include <net-snmp/library/sd-daemon.h>
+-+#endif
+-+
+- #include "inet_ntop.h"
+- #include "inet_pton.h"
+- 
+-@@ -190,6 +194,8 @@ netsnmp_udp6_transport(struct sockaddr_in6 *addr, int local)
+- {
+-     netsnmp_transport *t = NULL;
+-     int             rc = 0;
+-+    char           *str = NULL;
+-+    int             socket_initialized = 0;
+- 
+- #ifdef NETSNMP_NO_LISTEN_SUPPORT
+-     if (local)
+-@@ -217,7 +223,19 @@ netsnmp_udp6_transport(struct sockaddr_in6 *addr, int local)
+-     t->domain_length =
+-         sizeof(netsnmp_UDPIPv6Domain) / sizeof(netsnmp_UDPIPv6Domain[0]);
+- 
+--    t->sock = socket(PF_INET6, SOCK_DGRAM, 0);
+-+#ifndef NETSNMP_NO_SYSTEMD
+-+    /*
+-+     * Maybe the socket was already provided by systemd...
+-+     */
+-+    if (local) {
+-+        t->sock = netsnmp_sd_find_inet_socket(PF_INET6, SOCK_DGRAM, -1,
+-+                ntohs(addr->sin6_port));
+-+        if (t->sock)
+-+            socket_initialized = 1;
+-+    }
+-+#endif
+-+    if (!socket_initialized)
+-+        t->sock = socket(PF_INET6, SOCK_DGRAM, 0);
+-     if (t->sock < 0) {
+-         netsnmp_transport_free(t);
+-         return NULL;
+-@@ -243,12 +261,14 @@ netsnmp_udp6_transport(struct sockaddr_in6 *addr, int local)
+-         }
+- #endif
+- 
+--        rc = bind(t->sock, (struct sockaddr *) addr,
+--		  sizeof(struct sockaddr_in6));
+--        if (rc != 0) {
+--            netsnmp_socketbase_close(t);
+--            netsnmp_transport_free(t);
+--            return NULL;
+-+        if (!socket_initialized) {
+-+            rc = bind(t->sock, (struct sockaddr *) addr,
+-+                    sizeof(struct sockaddr_in6));
+-+            if (rc != 0) {
+-+                netsnmp_socketbase_close(t);
+-+                netsnmp_transport_free(t);
+-+                return NULL;
+-+            }
+-         }
+-         t->local = (unsigned char*)malloc(18);
+-         if (t->local == NULL) {
+-diff --git a/snmplib/transports/snmpUnixDomain.c b/snmplib/transports/snmpUnixDomain.c
+-index 47dffc1..8f34c37 100644
+---- a/snmplib/transports/snmpUnixDomain.c
+-+++ b/snmplib/transports/snmpUnixDomain.c
+-@@ -37,6 +37,10 @@
+- #include <net-snmp/library/system.h> /* mkdirhier */
+- #include <net-snmp/library/tools.h>
+- 
+-+#ifndef NETSNMP_NO_SYSTEMD
+-+#include <net-snmp/library/sd-daemon.h>
+-+#endif
+-+
+- netsnmp_feature_child_of(transport_unix_socket_all, transport_all)
+- netsnmp_feature_child_of(unix_socket_paths, transport_unix_socket_all)
+- 
+-@@ -295,6 +299,8 @@ netsnmp_unix_transport(struct sockaddr_un *addr, int local)
+-     netsnmp_transport *t = NULL;
+-     sockaddr_un_pair *sup = NULL;
+-     int             rc = 0;
+-+    char           *string = NULL;
+-+    int             socket_initialized = 0;
+- 
+- #ifdef NETSNMP_NO_LISTEN_SUPPORT
+-     /* SPECIAL CIRCUMSTANCE: We still want AgentX to be able to operate,
+-@@ -333,7 +339,18 @@ netsnmp_unix_transport(struct sockaddr_un *addr, int local)
+-     t->data_length = sizeof(sockaddr_un_pair);
+-     sup = (sockaddr_un_pair *) t->data;
+- 
+--    t->sock = socket(PF_UNIX, SOCK_STREAM, 0);
+-+#ifndef NETSNMP_NO_SYSTEMD
+-+    /*
+-+     * Maybe the socket was already provided by systemd...
+-+     */
+-+    if (local) {
+-+        t->sock = netsnmp_sd_find_unix_socket(SOCK_STREAM, 1, addr->sun_path);
+-+        if (t->sock)
+-+            socket_initialized = 1;
+-+    }
+-+#endif
+-+    if (!socket_initialized)
+-+        t->sock = socket(PF_UNIX, SOCK_STREAM, 0);
+-     if (t->sock < 0) {
+-         netsnmp_transport_free(t);
+-         return NULL;
+-@@ -357,25 +374,26 @@ netsnmp_unix_transport(struct sockaddr_un *addr, int local)
+- 
+-         t->flags |= NETSNMP_TRANSPORT_FLAG_LISTEN;
+- 
+--        unlink(addr->sun_path);
+--        rc = bind(t->sock, (struct sockaddr *) addr, SUN_LEN(addr));
+--
+--        if (rc != 0 && errno == ENOENT && create_path) {
+--            rc = mkdirhier(addr->sun_path, create_mode, 1);
+-+        if (!socket_initialized) {
+-+            unlink(addr->sun_path);
+-+            rc = bind(t->sock, (struct sockaddr *) addr, SUN_LEN(addr));
+-+            if (rc != 0 && errno == ENOENT && create_path) {
+-+                rc = mkdirhier(addr->sun_path, create_mode, 1);
+-+                if (rc != 0) {
+-+                    netsnmp_unix_close(t);
+-+                    netsnmp_transport_free(t);
+-+                    return NULL;
+-+                }
+-+                rc = bind(t->sock, (struct sockaddr *) addr, SUN_LEN(addr));
+-+            }
+-             if (rc != 0) {
+-+                DEBUGMSGTL(("netsnmp_unix_transport",
+-+                        "couldn't bind \"%s\", errno %d (%s)\n",
+-+                        addr->sun_path, errno, strerror(errno)));
+-                 netsnmp_unix_close(t);
+-                 netsnmp_transport_free(t);
+-                 return NULL;
+-             }
+--            rc = bind(t->sock, (struct sockaddr *) addr, SUN_LEN(addr));
+--        }
+--        if (rc != 0) {
+--            DEBUGMSGTL(("netsnmp_unix_transport",
+--                        "couldn't bind \"%s\", errno %d (%s)\n",
+--                        addr->sun_path, errno, strerror(errno)));
+--            netsnmp_unix_close(t);
+--            netsnmp_transport_free(t);
+--            return NULL;
+-         }
+- 
+-         /*
+-@@ -391,14 +409,16 @@ netsnmp_unix_transport(struct sockaddr_un *addr, int local)
+-          * Now sit here and listen for connections to arrive.
+-          */
+- 
+--        rc = listen(t->sock, NETSNMP_STREAM_QUEUE_LEN);
+--        if (rc != 0) {
+--            DEBUGMSGTL(("netsnmp_unix_transport",
+--                        "couldn't listen to \"%s\", errno %d (%s)\n",
+--                        addr->sun_path, errno, strerror(errno)));
+--            netsnmp_unix_close(t);
+--            netsnmp_transport_free(t);
+--            return NULL;
+-+        if (!socket_initialized) {
+-+            rc = listen(t->sock, NETSNMP_STREAM_QUEUE_LEN);
+-+            if (rc != 0) {
+-+                DEBUGMSGTL(("netsnmp_unix_transport",
+-+                            "couldn't listen to \"%s\", errno %d (%s)\n",
+-+                            addr->sun_path, errno, strerror(errno)));
+-+                netsnmp_unix_close(t);
+-+                netsnmp_transport_free(t);
+-+                return NULL;
+-+            }
+-         }
+- 
+-     } else {
+-diff --git a/win32/libsnmp/Makefile.in b/win32/libsnmp/Makefile.in
+-index 98d83c8..b228d20 100644
+---- a/win32/libsnmp/Makefile.in
+-+++ b/win32/libsnmp/Makefile.in
+-@@ -42,6 +42,7 @@ LIB32_OBJS= \
+- 	"$(INTDIR)\read_config.obj" \
+- 	"$(INTDIR)\readdir.obj" \
+- 	"$(INTDIR)\scapi.obj" \
+-+        "$(INTDIR)\sd-daemon.obj" \
+- 	"$(INTDIR)\snmp-tc.obj" \
+- 	"$(INTDIR)\snmp.obj" \
+- 	"$(INTDIR)\snmpCallbackDomain.obj" \
+-@@ -138,6 +139,11 @@ SOURCE=..\..\snmplib\asn1.c
+- "$(INTDIR)\asn1.obj" : $(SOURCE) "$(INTDIR)"
+- 	$(CPP) $(CPP_PROJ) $(SOURCE)
+- 
+-+SOURCE=..\..\snmplib\sd-daemon.c
+-+
+-+"$(INTDIR)\sd-daemon.obj" : $(SOURCE) "$(INTDIR)"
+-+       $(CPP) $(CPP_PROJ) $(SOURCE)
+-+
+- 
+- SOURCE=..\..\snmplib\callback.c
+- 
+-diff --git a/win32/net-snmp/net-snmp-config.h b/win32/net-snmp/net-snmp-config.h
+-index 1608563..7aec547 100644
+---- a/win32/net-snmp/net-snmp-config.h
+-+++ b/win32/net-snmp/net-snmp-config.h
+-@@ -1717,6 +1717,8 @@ enum {
+- #define DMALLOC_FUNC_CHECK
+- #endif
+- 
+-++#define NETSNMP_NO_SYSTEMD
+-++
+- /* #undef NETSNMP_ENABLE_LOCAL_SMUX */
+- 
+- /* define if agentx transport is to use domain sockets only */
+-diff --git a/win32/net-snmp/net-snmp-config.h.in b/win32/net-snmp/net-snmp-config.h.in
+-index 9693730..96ec3d9 100644
+---- a/win32/net-snmp/net-snmp-config.h.in
+-+++ b/win32/net-snmp/net-snmp-config.h.in
+-@@ -1717,6 +1717,8 @@ enum {
+- #define DMALLOC_FUNC_CHECK
+- #endif
+- 
+-+#define NETSNMP_NO_SYSTEMD
+-+
+- /* #undef NETSNMP_ENABLE_LOCAL_SMUX */
+- 
+- /* define if agentx transport is to use domain sockets only */
+--- 
+-1.8.4.2
+-
 -- 
 2.25.1
 
