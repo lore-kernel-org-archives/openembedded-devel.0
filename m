@@ -1,96 +1,176 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.1])
- by mx.groups.io with SMTP id smtpd.web09.2467.1631674302014438267
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.web11.3444.1631682158414421465
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Sep 2021 19:51:42 -0700
+ Tue, 14 Sep 2021 22:02:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=k3hBqLOf;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.1, mailfrom: zhengrq.fnst@fujitsu.com)
-Return-Path: <zhengrq.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1631674300; i=@fujitsu.com;
-	bh=uXfU4eEAPSTPdB1seAf1mr+rBBi/r34lfnm16tql10w=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=k3hBqLOfZF0rCPNF/swWqXhSc9o55zEBAxrXpjrT5ik3WJNVFWCsoUUM3mpKMZRzL
-	 OODT9/8b5vo7mRohwjruL1+VeEW3sZU8Q1T29MDLcQvfIl35CazVmgXX89U3k7SdBR
-	 oVXX+ffl+PxRkr7Zl2zH86I9TdmuEuZcY9xzgPCxFMesAmCA3u44Taked8oHM4hYil
-	 4Zj/eHQek7mA04kAqpwiCtaHIqI7jVWGe/pPf0WwfybjVqrLXI6Z45oH+HmhHnI88i
-	 FDGS8yFcKB9eLDlZgiXnZL23NsaNRXNki0fPGAad7XPHP+SOT9XEpEWJ/Zm4WC9Nlr
-	 r3OwW094Y+bVQ==
-Received: from [100.112.192.69] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-a.eu-west-1.aws.symcld.net id 36/31-08194-BBF51416; Wed, 15 Sep 2021 02:51:39 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprOIsWRWlGSWpSXmKPExsViZ8MxRXd3vGO
-  iQeMaZYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePStydMBe+5K2ZcWMfUwHiBq4uRi0NIYDaT
-  xOOjOxkhnD2MElte3GLrYuTkYBPQlTj3eC07iC0ioC+xdPYeZhBbWMBSYvf1q2A1LAKqEpcWT
-  gCL8wp4SExe9IIVxJYQUJCY8vA9VFxQ4uTMJywgNrOAhMTBFy+A4hxANYoSs6fLQ5RXSLw+fI
-  l5AiPPLCQds5B0LGBkWsVokVSUmZ5RkpuYmaNraGCga2hopGtoCcRGZnqJVbqJeqmluuWpxSW
-  6hnqJ5cV6xZW5yTkpenmpJZsYgWGUUnCgbgfjg9cf9A4xSnIwKYny+gQ7JgrxJeWnVGYkFmfE
-  F5XmpBYfYpTh4FCS4NWLA8oJFqWmp1akZeYAQxomLcHBoyTCqwWS5i0uSMwtzkyHSJ1i1OW4f
-  H3eImYhlrz8vFQpcd4LIEUCIEUZpXlwI2DxdYlRVkqYl5GBgUGIpyC1KDezBFX+FaM4B6OSMO
-  9zkCk8mXklcJteAR3BBHTEkf0OIEeUJCKkpBqYHvl3nznC5S+xWNX36tH6aQrrKybxRXyQsWT
-  nfzk5e1GIp8Qxlymf+tm3zq/cxnHq0Dbd2lMrzfpay+o+B677u3vuVKtJbQ81pyhrOHdarNsZ
-  p+I8W0Pn1Gzu3ukuAu3u04SLJbY7md9LNpuw80euRWeBwdG7XU9vst8UKZNda+zg1XHZZr75x
-  QtGdrv0JYs2qtaGbTdO7qy9tuDoUs2jzD+2pAqHsz9O9NPa3f4xxSUxarkA44RnfcFX1xXvdJ
-  FqDlpinqo6P3XDtJD29X6ZF+9F/TT7VntRyD18zwt7KeXZOyo2FfD3Re6ZvfalvUqKV7nGmuR
-  4jad3A+pjeI/mB13LcglarSrwaK1saZ0SS3FGoqEWc1FxIgAf+PVNKgMAAA==
-X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-9.tower-267.messagelabs.com!1631674299!99407!1
-X-Originating-IP: [62.60.8.148]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.4; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 10366 invoked from network); 15 Sep 2021 02:51:39 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-9.tower-267.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 15 Sep 2021 02:51:39 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 18F2pdp7011510
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Sep 2021 03:51:39 +0100
-Received: from localhost.localdomain (10.167.225.35) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Wed, 15 Sep 2021 03:51:37 +0100
-From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] xterm: upgrade 367 -> 368
-Date: Tue, 14 Sep 2021 08:02:09 +0800
-Message-ID: <1631577729-67594-1-git-send-email-zhengrq.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@tanous-net.20150623.gappssmtp.com header.s=20150623 header.b=JgDgg0fR;
+ spf=none, err=permanent DNS error (domain: tanous.net, ip: 209.85.214.176, mailfrom: ed@tanous.net)
+Received: by mail-pl1-f176.google.com with SMTP id v2so880231plp.8
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Sep 2021 22:02:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=tanous-net.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=gfmlfkFTdqBkhlV522UHqVco9XZ7JqP5jh36S4juBrE=;
+        b=JgDgg0fRJFQu/U+TsYBQqyu9UC0DaJjfG0ahgyjAQyqLy03HWeilqlerH65U6wVuYB
+         lzYWOeXzwJf0mwBbVlA0r0AhM01OxUrSIrpCtSwIoE57Ji218vg+CGOw7W5dflKzYLf/
+         4aq4YeaW2tV1qhku/LZ8+oOnoBLOWSU4dlamXJvS6ILaqzwqvUJMc7yZ/WU0PLvxnsve
+         p5EQKJQF71MT+WX8qqhcDV+4j/D4N+qoP2efZtN6hZt9A8pvMR9qquwBeIFoMBWpJeEE
+         lp2hhlczd7Fr94OKIoMmkrc+Afoi3mpcJhintoFO3flYMGAKKUcD2XwxB4VPHiaB10VV
+         TVwg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=gfmlfkFTdqBkhlV522UHqVco9XZ7JqP5jh36S4juBrE=;
+        b=cwi+K84Gz6krAdxIfFa4hxKP3dNSl614/3fPnZzFqK2RUkW8Dz39MhK+UaJG3BNFRD
+         kepum4Vk7Xa8pIO/TXlCm2dunp8h7ZDc1SQPM0hbrqbeizHpc6PZtISKen0gsvmGvSE7
+         O2MmlQI2/IOQAvTJgvlb41Jq36julPYkmOzn5QrJ5jkck1cYdafew0Ve3ZdOVjQrobCG
+         jJhoT5v1gWy2j7hio1ywhxE+lwn0VhInZP4cb7EoevCSUVgUtafMYTMjmiZctZpPHYc6
+         +knyp/O72njJcdT0zaPTQ13b20dDpt0uaIZHsje0pOnHe09BKQo9Svvi+dvaFF6ICTrj
+         vD1w==
+X-Gm-Message-State: AOAM5304U7t1Z5FV1Du2lityVAvRbyVTsGdWgD3GOMqNIlxXjF61M1EZ
+	3DJf2i7A16B2fcgaqoxtyuDtbr+p0dk85Q==
+X-Google-Smtp-Source: ABdhPJwkXXDOu0sz2i3RvvirnyM8RXrS5eVYwPZVhqlrjIQwA+jjxy4iaG7ij7mLC/F7mgKljjeOqQ==
+X-Received: by 2002:a17:902:7b88:b0:138:7c09:1165 with SMTP id w8-20020a1709027b8800b001387c091165mr18050369pll.32.1631682157233;
+        Tue, 14 Sep 2021 22:02:37 -0700 (PDT)
+Return-Path: <ed@tanous.net>
+Received: from edtanous.svl.corp.google.com ([2620:15c:2c5:13:89e1:c404:1565:3f11])
+        by smtp.gmail.com with ESMTPSA id w67sm10473888pfb.99.2021.09.14.22.02.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 14 Sep 2021 22:02:36 -0700 (PDT)
+From: "Ed Tanous" <ed@tanous.net>
+To: openembedded-devel@lists.openembedded.org
+Cc: Ed Tanous <ed@tanous.net>
+Subject: [meta-oe][PATCH] Boost-url Move to latest version
+Date: Tue, 14 Sep 2021 22:02:32 -0700
+Message-Id: <20210915050232.3655567-1-ed@tanous.net>
+X-Mailer: git-send-email 2.33.0.464.g1972c5931b-goog
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-add DefaultOff option to RenderFont resource, as part of
-the session-management feature.
-add auto-scroll-lock feature (patch by add Stelios Bounanos).
-update the window-size information returned via TIOCGWINSZ when
-rows/columns are unchanged but the font-size changes (report by Nick Black).
-improve session-management feature by saving/restoring the font settings.
-update config.guess, config.sub
+From: Ed Tanous <ed@tanous.net>
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+This commit aims to update the version of boost-url to latest, and to
+make compatibility changes to make the latest version build.
+
+As of 0b96da0e4727c692c48cc95a32d82634cb41aaaf on the boost url repo,
+the standalone build type has been removed, which breaks this recipe.  A
+quick discussion with the maintainers [1] shows that the cmake was never
+really intended to be used for installation, even if it worked in the
+past, and in the future only intended for use within the boost
+superproject.  They recommended that since this is a header only
+library, that a simple copy would be a better way to stay up to date
+with this library.  As such, this commit removes the cmake bbclass, and
+replaces it with a simple do_install that is a simply copy into the
+include directories.
+
+At the same time, the previous patch to add GNUInstallDirs support to
+the cmake no longer applies, and is no longer needed, so it is removed
+at the same time.
+
+The SHA1 is also updated to the latest available.
+
+[1] https://cpplang.slack.com/archives/C01JR6C9C4U/p1631654296241200
+
+Signed-off-by: Ed Tanous <ed@tanous.net>
 ---
- .../recipes-graphics/xorg-app/{xterm_367.bb => xterm_368.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-graphics/xorg-app/{xterm_367.bb => xterm_368.bb} (94%)
+ ...rs-instead-of-hard-wiring-install-di.patch | 57 -------------------
+ .../boost-url/boost-url_git.bb                | 13 +++--
+ 2 files changed, 7 insertions(+), 63 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/boost-url/boost-url/0001-Use-GNUInstallDirs-instead-of-hard-wiring-install-di.patch
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_367.bb b/meta-oe/recipes-graphics/xorg-app/xterm_368.bb
-similarity index 94%
-rename from meta-oe/recipes-graphics/xorg-app/xterm_367.bb
-rename to meta-oe/recipes-graphics/xorg-app/xterm_368.bb
-index ee25dc872c..8f6a7ef766 100644
---- a/meta-oe/recipes-graphics/xorg-app/xterm_367.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xterm_368.bb
-@@ -8,7 +8,7 @@ SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz \
-            file://0001-Add-configure-time-check-for-setsid.patch \
-           "
+diff --git a/meta-oe/recipes-devtools/boost-url/boost-url/0001-Use-GNUInstallDirs-instead-of-hard-wiring-install-di.patch b/meta-oe/recipes-devtools/boost-url/boost-url/0001-Use-GNUInstallDirs-instead-of-hard-wiring-install-di.patch
+deleted file mode 100644
+index 4c996656c..000000000
+--- a/meta-oe/recipes-devtools/boost-url/boost-url/0001-Use-GNUInstallDirs-instead-of-hard-wiring-install-di.patch
++++ /dev/null
+@@ -1,57 +0,0 @@
+-From 329e27c8ad30e76ab50c7949cc95ba8eb0efabd2 Mon Sep 17 00:00:00 2001
+-From: Anton Blanchard <anton@ozlabs.org>
+-Date: Tue, 17 Aug 2021 09:53:41 +1000
+-Subject: [PATCH] Use GNUInstallDirs instead of hard wiring install directories
+-
+-On a multilib setup cmake files should go into lib64.
+-
+-Upstream-Status: Submitted [https://github.com/CPPAlliance/url/pull/38]
+----
+- CMakeLists.txt | 10 ++++++----
+- 1 file changed, 6 insertions(+), 4 deletions(-)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 5b53f31..ebb7346 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -109,20 +109,22 @@ else()
+- endif()
+- 
+- if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR AND NOT BOOST_URL_IN_BOOST_TREE)
+-+    include(GNUInstallDirs)
+-+
+-     set_target_properties(boost_url PROPERTIES EXPORT_NAME url)
+-     install(TARGETS boost_url EXPORT boost_url_targets)
+- 
+-     install(EXPORT boost_url_targets
+-         FILE boost_url-targets.cmake
+-         NAMESPACE Boost::
+--        DESTINATION lib/cmake/boost_url
+-+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/boost_url
+-     )
+- 
+-     include(CMakePackageConfigHelpers)
+- 
+-     configure_package_config_file(cmake/config.cmake.in
+-         ${CMAKE_CURRENT_BINARY_DIR}/boost_url-config.cmake
+--        INSTALL_DESTINATION lib/cmake/boost_url
+-+        INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/boost_url
+-     )
+- 
+-     write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/boost_url-config-version.cmake
+-@@ -132,10 +134,10 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR AND NOT BOOST_URL_IN_BOOST
+-     install(FILES
+-         ${CMAKE_CURRENT_BINARY_DIR}/boost_url-config.cmake
+-         ${CMAKE_CURRENT_BINARY_DIR}/boost_url-config-version.cmake
+--        DESTINATION lib/cmake/boost_url
+-+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/boost_url
+-     )
+- 
+--    install(DIRECTORY include/ DESTINATION include)
+-+    install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+- endif()
+- 
+- if(BOOST_URL_BUILD_TESTS)
+--- 
+-2.31.1
+-
+diff --git a/meta-oe/recipes-devtools/boost-url/boost-url_git.bb b/meta-oe/recipes-devtools/boost-url/boost-url_git.bb
+index cb3664fe3..9f759100b 100644
+--- a/meta-oe/recipes-devtools/boost-url/boost-url_git.bb
++++ b/meta-oe/recipes-devtools/boost-url/boost-url_git.bb
+@@ -4,16 +4,17 @@ SECTION = "libs"
+ LICENSE = "BSL-1.0"
+ LIC_FILES_CHKSUM = "file://LICENSE_1_0.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
  
--SRC_URI[sha256sum] = "27f1a8b1c756e269fd5684e60802b545f0be9b36b8b5d6bdbc840c6b000dc51f"
-+SRC_URI[sha256sum] = "2ff5169930b6b49ef0bafb5e1331c94f1a98c310442bba7798add821c76ae712"
+-SRC_URI = "git://github.com/CPPAlliance/url.git;branch=develop \
+-           file://0001-Use-GNUInstallDirs-instead-of-hard-wiring-install-di.patch \
+-           "
++SRC_URI = "git://github.com/CPPAlliance/url.git;branch=develop"
  
- PACKAGECONFIG ?= ""
- PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
+-SRCREV = "2c867fbe284ae532f1329b87a86ad3f8cd382867"
++SRCREV = "4f712ed69a04a344957d22efa5dc111b415b3aff"
+ 
+ S = "${WORKDIR}/git"
+ 
+-inherit cmake
+-
+ DEPENDS = "boost"
+ 
+ BBCLASSEXTEND = "native nativesdk"
++
++do_install() {
++    mkdir -p ${D}/${includedir}
++    cp -r ${S}/include/** ${D}/${includedir}/
++}
 -- 
-2.25.1
+2.33.0.464.g1972c5931b-goog
 
