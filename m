@@ -1,86 +1,129 @@
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.web08.7960.1631714128848879592
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
+ by mx.groups.io with SMTP id smtpd.web12.7951.1631714129783750166
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Sep 2021 06:55:28 -0700
+ Wed, 15 Sep 2021 06:55:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=fwgwOlwG;
- spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id q22so2847310pfu.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Sep 2021 06:55:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Ocd+xMoS;
+ spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f179.google.com with SMTP id t1so2813476pgv.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Sep 2021 06:55:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=4hb7g9SyV14ZDj2pko+DwZITL5IeV5KJGdLJyBnUP7I=;
-        b=fwgwOlwGEwYwQlf8kvopbjGZkCQQuNFA5oSZwah2WGna5dgpeuYAvqYJoVf7uAjPEO
-         JcvnxHfe0lW56Qs9tXoof+ApfrWot+CVVHfhSOYkLL/1wgLIq2dT2jLmd/fIHPBC91e+
-         uselL0sAh3yqrWMgvjmrUaqxTaBy3TKvnN95aU0ChrRQLOuyrCg7cwuBuFDwhre21E61
-         JicierdvLhNHAr1sOz3K2RS246Yi391uhO05Qq1wgUy4opmFktXTJv1lZYVxl+GTvITa
-         WPTKd9NyxNZpPCeZypB+o+4B8snwD5Wj0qMh78eXb4S+H89Y48gOpmDQCQvN0IgXzreo
-         qkaA==
+        bh=h88V9t1ddY3TjprLjJcb4HzUqsieWSNspWvMM6BeYhM=;
+        b=Ocd+xMoS6wp0pECAvFtyZGLk+DR9VZLjXWz6C3KBFoBB7ec0TF+OGBJXGyc771MSS+
+         3s/aZWnTmRuNWh6JCDhUfUxYwURlKKY8iTJtXGqo7BUx7nNI/yC4dT41E6KaR/qF2kyd
+         a1Q2hifUyQjydiRZN+lBOmpetfyCPLc3MzEkFTd75ot9kyZWZsWw5S3h/W7HF2kpP8Em
+         EdhBLrKTK2FhxH+/uajLt580YFoOztXztG428LnmFQTceq45m4Efe35xdQGnQ2C4TXYN
+         JKY0B79aa0dIFU6JX2IJ3lI79u2ONBy76k6FNVelqO8MMRga2Ujo2DisZzJH+XsPBjNT
+         QqHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=4hb7g9SyV14ZDj2pko+DwZITL5IeV5KJGdLJyBnUP7I=;
-        b=zN2jzGq5oGWlodZ99uasQt9FwrupZR5rDUWt/CoSpM30jCoMdivKmkx8ywxJLqhVPi
-         YxCBwlOIc5xKkFHTDQCAwLKqxPOJIh2vsc/ZgITSXy6kXHFkrd1GVtR40lj58clsbbt3
-         tQJJOEUES/ukdH32/p5PWkzEj7lK70kphh2A/q+R6zg13un1rHxxCLAOdlFnCNFvJAt4
-         +7itYZgO3dD2wAUTpsuQnuCfIH8RRcJVGE23UKU4f7CBcuPgOhLPXIgA2a+jqTOS8sOr
-         FjWUfU6R6z+Qm9wJaXBMSLrJL+AF1wZIDUojbqBraqdJ7Q6R5whzsl+fvH5FO/fFijr7
-         mc9Q==
-X-Gm-Message-State: AOAM533VCJTX1tj2Ug7F5LwdEjnZwD5gkJAKFOnBo/hb7J7OY3rSe/jQ
-	v+gNf6bvyeXQsmw7B7U/fi9L4SziR/U=
-X-Google-Smtp-Source: ABdhPJxvrLJk5icLxwqz7GlRwRtvA2flF45SPbSIASY01Lqk92wtrbt1r2BJHhThPjrL2eG99cl2/g==
-X-Received: by 2002:a62:5c7:0:b029:3e0:dd9c:8fd2 with SMTP id 190-20020a6205c70000b02903e0dd9c8fd2mr10811703pff.28.1631714128148;
-        Wed, 15 Sep 2021 06:55:28 -0700 (PDT)
+        bh=h88V9t1ddY3TjprLjJcb4HzUqsieWSNspWvMM6BeYhM=;
+        b=zeFNh/WH766Pvy1nSTvdOq4TGOh4kD56UFQ2cRXvTBkf8OYmrnOCG5yL+rFIxHRGOl
+         x8V0fE9voCQfsKs2alyEKU0hagjAWt7pZu8/ZnI9EvL1mIjdSm6MSLxualgZuNNOHn2+
+         yiYylcvYmuKc05MC6a/RsosmLbPqUqCdtF89Eq+spIWDbz8ghcqUtar3d4wWBdvv9z8S
+         EpzKu/uahk0tC+bhmVgN5wwRKZzFuFSJBnES4nEgn4u/jl3gj9f37njfuDEtuE+I78M7
+         XdWzHrTMkQm5H7NvkfNW8BiGJ/RHN7GPeLFSSKkmtiBfwPewl5dAickFcJAGp+3XAb8w
+         yY3g==
+X-Gm-Message-State: AOAM530BZUJkqvgulACt5DVBZ3CXBBLbkK3shwgRaF/7tUiVmUCIB3Yb
+	ytvaa/yWzlBDBSH+3F+hfRYnCg1sCnU=
+X-Google-Smtp-Source: ABdhPJzJICy5y2iwyL/hiigSZB6+Y99vnfHAr313vh5TqK9ucaSGpd6bIKIEzefx88f2KIuvbF0GOw==
+X-Received: by 2002:a65:434c:: with SMTP id k12mr20669981pgq.17.1631714129120;
+        Wed, 15 Sep 2021 06:55:29 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:35e:ec78:cef4:300f])
-        by smtp.gmail.com with ESMTPSA id v7sm4824941pjk.37.2021.09.15.06.55.27
+        by smtp.gmail.com with ESMTPSA id v7sm4824941pjk.37.2021.09.15.06.55.28
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 15 Sep 2021 06:55:27 -0700 (PDT)
+        Wed, 15 Sep 2021 06:55:28 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 4/9] cryptsetup: upgrade 2.3.5 -> 2.3.6
-Date: Wed, 15 Sep 2021 06:55:15 -0700
-Message-Id: <110b275c6dae189399184ab6c745818544857696.1631713963.git.akuster808@gmail.com>
+Subject: [hardknott 5/9] cryptsetup: Only recommend kernel modules when building for target
+Date: Wed, 15 Sep 2021 06:55:16 -0700
+Message-Id: <7aca7fa6dbf294ca6424c3dd4244c20dbd08a20e.1631713963.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1631713963.git.akuster808@gmail.com>
 References: <cover.1631713963.git.akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: zangrc <zangrc.fnst@fujitsu.com>
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+Otherwise cryptsetup-native depends on the target kernel and thus the
+target compiler, as can be seen by:
+
+  $ bitbake -g cryptsetup-native
+  $ grep 'cryptsetup.*linux-yocto' task-depends.dot
+  "cryptsetup-native.do_build" -> "linux-yocto.do_deploy"
+  "cryptsetup-native.do_build" -> "linux-yocto.do_package_write_rpm"
+  "cryptsetup-native.do_populate_sysroot" -> "linux-yocto.do_populate_sysroot"
+  $ grep 'linux-yocto.*gcc-cross' task-depends.dot
+  "linux-yocto.do_kernel_configme" -> "gcc-cross-x86_64.do_populate_sysroot"
+  "linux-yocto.do_prepare_recipe_sysroot" -> "gcc-cross-x86_64.do_populate_sysroot"
+
+This also moves the runtime dependencies to near the end of the recipe,
+which is more customary.
+
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 056d0892f0e2d1eb30029dbe9810b0800e87e634)
-[Bugz fix only update]
+(cherry picked from commit 497602b4840720e8351ecf961ac6f85103093750)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../cryptsetup/{cryptsetup_2.3.5.bb => cryptsetup_2.3.6.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.3.5.bb => cryptsetup_2.3.6.bb} (96%)
+ .../cryptsetup/cryptsetup_2.3.6.bb            | 25 ++++++++++---------
+ 1 file changed, 13 insertions(+), 12 deletions(-)
 
-diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb
-similarity index 96%
-rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
-rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb
-index 0da9a26e83..562ac83fb1 100644
---- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.5.bb
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb
+index 562ac83fb1..9e83b90eab 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb
 +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb
-@@ -21,8 +21,8 @@ RDEPENDS_${PN} = " \
+@@ -16,10 +16,6 @@ DEPENDS = " \
+     util-linux-libuuid \
  "
  
+-RDEPENDS_${PN} = " \
+-    libdevmapper \
+-"
+-
  SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
--SRC_URI[md5sum] = "408620e0df577ec04108ec0bc2b91dee"
--SRC_URI[sha256sum] = "ced9946f444d132536daf92fc8aca4277638a3c2d96e20540b2bae4d36fd70c1"
-+SRC_URI[md5sum] = "504d1ab22cbc4d1a59a8d8c7ee5ed3bf"
-+SRC_URI[sha256sum] = "b296b7a21ea576c2b180611ccb19d06aec8dddaedf7c704b0c6a81210c25635f"
+ SRC_URI[md5sum] = "504d1ab22cbc4d1a59a8d8c7ee5ed3bf"
+ SRC_URI[sha256sum] = "b296b7a21ea576c2b180611ccb19d06aec8dddaedf7c704b0c6a81210c25635f"
+@@ -71,14 +67,6 @@ PACKAGECONFIG[kernel] = "--with-crypto_backend=kernel"
+ PACKAGECONFIG[nettle] = "--with-crypto_backend=nettle,,nettle"
+ PACKAGECONFIG[luks2] = "--with-default-luks-format=LUKS2,--with-default-luks-format=LUKS1"
  
- inherit autotools gettext pkgconfig
+-RRECOMMENDS_${PN} = "kernel-module-aes-generic \
+-                     kernel-module-dm-crypt \
+-                     kernel-module-md5 \
+-                     kernel-module-cbc \
+-                     kernel-module-sha256-generic \
+-                     kernel-module-xts \
+-"
+-
+ EXTRA_OECONF = "--enable-static"
+ # Building without largefile is not supported by upstream
+ EXTRA_OECONF += "--enable-largefile"
+@@ -89,4 +77,17 @@ EXTRA_OECONF += "--disable-libargon2"
  
+ FILES_${PN} += "${@bb.utils.contains('DISTRO_FEATURES','systemd','${exec_prefix}/lib/tmpfiles.d/cryptsetup.conf', '', d)}"
+ 
++RDEPENDS_${PN} = " \
++    libdevmapper \
++"
++
++RRECOMMENDS_${PN}_class-target = " \
++    kernel-module-aes-generic \
++    kernel-module-dm-crypt \
++    kernel-module-md5 \
++    kernel-module-cbc \
++    kernel-module-sha256-generic \
++    kernel-module-xts \
++"
++
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.25.1
 
