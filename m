@@ -1,89 +1,114 @@
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web09.3666.1631684906539398300
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web12.7950.1631714125158453987
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Sep 2021 22:48:27 -0700
+ Wed, 15 Sep 2021 06:55:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: mingli.yu@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 18F5mPL1018719
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Sep 2021 22:48:25 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Tue, 14 Sep 2021 22:48:24 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Tue, 14 Sep 2021 22:48:23 -0700
-From: "Yu, Mingli" <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][hardknott][PATCH] mariadb: Upgrade to 10.5.12
-Date: Wed, 15 Sep 2021 13:43:56 +0800
-Message-ID: <20210915054356.7723-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.32.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=i8n8OcsI;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id f129so2820466pgc.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Sep 2021 06:55:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=0N7kD2NKWnsHdRReNv4NYUM12hAyGtwpusikG/K/BAc=;
+        b=i8n8OcsIQ24Ot8l0VOPJJk7Ngp+Zz6+OEr2MiZvR7qWJwW9/grXaz1gZHeED0lFI09
+         zX8lCZYijz3/k3jL32NvE8FXQwEjb0Dj6y1BHRWXHzVwlgOQpz9cQxulcSdEMvf2EyU5
+         y84sg5BohFg7YLsH06dtO9yjW9xXby/rJT7/w6ihDS9tDCgJvvqxwJa6f7IQE+55cW5I
+         O4XHky/TeTYKpaxcg7KKMs0crIx996OdBFDY2iFjLbzRCq6xMG1MGLznxsZ57J9US3bD
+         jmm9tcsV2IA68HTheXDEeoIOGNmmtbdUQ5hrVzNbhZsos2iBqmMyRAnfE44O+P4UAO9t
+         Ckew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=0N7kD2NKWnsHdRReNv4NYUM12hAyGtwpusikG/K/BAc=;
+        b=lAQ86bJzNbptr7/kp7UqtHybagCcbSM8Vr2kVotXt5gRTtzyoahOdK/Y5DjStRuqIs
+         yfEdHLUWkSwBr5wwRgtheLoPbo1zymH2+83r2oYuNNH5t8Ym9vttiNx0HbqGlxdGe3Dy
+         04Uo/h4oBY0VpmfJhIOzGOr1egdWibI+goe1mGlA5X1Vh3wPG3IrJRU4z8g/M6DOlumY
+         MNIJDOghbyr08lcaoSPi/nFq6cj4jf2t057yY3mIXBX6PqBechsWl9En9Xr9bA+dcSjI
+         yN7C65JxBFUDU18Axfxptp2tYzd7YTBVdVVR9ROyRcbA+b5dzuf2Na2K2eB1zinO2sjP
+         K1Iw==
+X-Gm-Message-State: AOAM530l9Sovf4Whw+YZ7tcr9G4US3GLzozJE8L6HzH0r9BXNufcS7MP
+	SodrOZAuY0CWvROfKKK/jmhKQuyFW9Q=
+X-Google-Smtp-Source: ABdhPJzWXaEBlVW9Y7ND7IKeq4bOyyA1aVBmbuxYOqjG83KqUUc/YXAOyN2UQEQrLuNgQMfNBaE/eg==
+X-Received: by 2002:a63:7a10:: with SMTP id v16mr20869112pgc.146.1631714124241;
+        Wed, 15 Sep 2021 06:55:24 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:35e:ec78:cef4:300f])
+        by smtp.gmail.com with ESMTPSA id v7sm4824941pjk.37.2021.09.15.06.55.23
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 15 Sep 2021 06:55:23 -0700 (PDT)
+From: "Armin Kuster" <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [hardknott 0/9] Patch review Sept 15th
+Date: Wed, 15 Sep 2021 06:55:11 -0700
+Message-Id: <cover.1631713963.git.akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Please have comments back by Friday
 
-Fixes for the following security vulnerabilities:
- CVE-2021-2372
- CVE-2021-2389
+The following changes since commit 7bd7e1da9034e72ca4262dba55f70b2b23499aae:
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- .../{mariadb-native_10.5.11.bb => mariadb-native_10.5.12.bb}  | 0
- meta-oe/recipes-dbs/mysql/mariadb.inc                         | 2 +-
- .../mysql/mariadb/clang_version_header_conflict.patch         | 4 ++--
- .../mysql/{mariadb_10.5.11.bb => mariadb_10.5.12.bb}          | 0
- 4 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.5.11.bb => mariadb-native_10.5.12.bb} (100%)
- rename meta-oe/recipes-dbs/mysql/{mariadb_10.5.11.bb => mariadb_10.5.12.bb} (100%)
+  dlt-daemon: update from 2.18.6 to 2.18.7 (2021-09-04 10:39:29 -0700)
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.11.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.5.12.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.5.11.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.5.12.bb
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 63ab94092..3ecb29256 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -25,7 +25,7 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
-           "
- SRC_URI_append_libc-musl = " file://ppc-remove-glibc-dep.patch"
- 
--SRC_URI[sha256sum] = "761053605fe30ce393f324852117990350840a93b3e6305ef4d2f8c8305cc47a"
-+SRC_URI[sha256sum] = "ab4f1ca69a30c5372e191a68e8b543a74168327680fb1f4067e8cc0a5582e4bd"
- 
- UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
- 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/clang_version_header_conflict.patch b/meta-oe/recipes-dbs/mysql/mariadb/clang_version_header_conflict.patch
-index c77a86944..2b7afa34e 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb/clang_version_header_conflict.patch
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/clang_version_header_conflict.patch
-@@ -15,7 +15,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-    set(MRN_SOURCE_DIR ${CMAKE_SOURCE_DIR})
-  endif()
-  
---file(READ ${MRN_SOURCE_DIR}/version        MRN_VERSION)
-+-file(READ ${MRN_SOURCE_DIR}/version_full   MRN_VERSION)
- +file(READ ${MRN_SOURCE_DIR}/ver            MRN_VERSION)
-  file(READ ${MRN_SOURCE_DIR}/version_major  MRN_VERSION_MAJOR)
-  file(READ ${MRN_SOURCE_DIR}/version_minor  MRN_VERSION_MINOR)
-@@ -25,7 +25,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
- @@ -0,0 +1 @@
- +7.07
- \ No newline at end of file
----- a/storage/mroonga/version
-+--- a/storage/mroonga/version_full
- +++ /dev/null
- @@ -1 +0,0 @@
- -7.07
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.5.11.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.5.12.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb_10.5.11.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb_10.5.12.bb
+are available in the Git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib stable/hardknott-nut
+  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/hardknott-nut
+
+Changqing Li (1):
+  c-ares: fix CVE-2021-3672
+
+Joe Slater (1):
+  redis: fix CVE-2021-32761
+
+Khem Raj (1):
+  vboxguestdrivers: Remove __divmoddi4 patch
+
+Kristian Klausen (1):
+  cryptsetup: Add runtime dependency on lvm2-udevrules for udev
+
+Peter Kjellerstedt (1):
+  cryptsetup: Only recommend kernel modules when building for target
+
+Yi Zhao (1):
+  krb5: fix CVE-2021-36222
+
+wangmy (1):
+  cjson: upgrade 1.7.14 -> 1.7.15
+
+zangrc (1):
+  cryptsetup: upgrade 2.3.5 -> 2.3.6
+
+zhengruoqin (1):
+  wireshark: upgrade 3.4.7 -> 3.4.8
+
+ ...{wireshark_3.4.7.bb => wireshark_3.4.8.bb} |   2 +-
+ .../krb5/krb5/CVE-2021-36222.patch            | 121 +++++++++
+ .../recipes-connectivity/krb5/krb5_1.17.2.bb  |   1 +
+ ...ryptsetup_2.3.5.bb => cryptsetup_2.3.6.bb} |  31 ++-
+ .../{cjson_1.7.14.bb => cjson_1.7.15.bb}      |   2 +-
+ .../redis/redis/CVE-2021-32761.patch          | 257 ++++++++++++++++++
+ meta-oe/recipes-extended/redis/redis_6.2.2.bb |   1 +
+ .../c-ares/c-ares/0001-CVE-2021-3672.patch    |  91 +++++++
+ .../c-ares/c-ares/0002-CVE-2021-3672.patch    | 104 +++++++
+ .../recipes-support/c-ares/c-ares_1.16.1.bb   |   2 +
+ .../vboxguestdrivers/add__divmoddi4.patch     |  36 ---
+ .../vboxguestdrivers_6.1.26.bb                |   1 -
+ 12 files changed, 595 insertions(+), 54 deletions(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_3.4.7.bb => wireshark_3.4.8.bb} (97%)
+ create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/CVE-2021-36222.patch
+ rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.3.5.bb => cryptsetup_2.3.6.bb} (88%)
+ rename meta-oe/recipes-devtools/cjson/{cjson_1.7.14.bb => cjson_1.7.15.bb} (90%)
+ create mode 100644 meta-oe/recipes-extended/redis/redis/CVE-2021-32761.patch
+ create mode 100644 meta-oe/recipes-support/c-ares/c-ares/0001-CVE-2021-3672.patch
+ create mode 100644 meta-oe/recipes-support/c-ares/c-ares/0002-CVE-2021-3672.patch
+ delete mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/add__divmoddi4.patch
+
 -- 
-2.32.0
+2.25.1
 
