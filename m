@@ -1,59 +1,59 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.5])
- by mx.groups.io with SMTP id smtpd.web11.8559.1631783992140920594
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.65])
+ by mx.groups.io with SMTP id smtpd.web08.8518.1631783997763278129
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Sep 2021 02:19:52 -0700
+ Thu, 16 Sep 2021 02:19:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=P+yS9eh3;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.5, mailfrom: zhengrq.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=XPK6ZY0u;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.65, mailfrom: zhengrq.fnst@fujitsu.com)
 Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1631783989; i=@fujitsu.com;
-	bh=UZR8Jzx/Khnjcg/M7bbBzWuVWMFZzRl0lDMPL5d1OoA=;
+	s=170520fj; t=1631783995; i=@fujitsu.com;
+	bh=M4OxPtLdIsoxHm1016mEjwfSbgWwDcbZluij5dv4xhI=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=P+yS9eh3af2yV6Yept2J2FuAnH0FyXiK6oIy/Sfs0kDTlsRwlloEWYIr+fLE6giB2
-	 HOBuSrX8oHA9N9/zNgmqnE3s9fkiTze2ikRP9E8OfPPLGCU9Lhm2pJpA14msW1wZa1
-	 cAw7eCDtpdioQCdIpX/b0aOtjnzmNueG4saOgKBmOIBMopErxuqREfh6ulAZ8+qKwl
-	 MyjjvI5K5x9MkE1g3gjtwXxF4h+fG7yS2kkPcx5KMXKtigdwqJhHY+FZXUyXy72U0z
-	 uXBqmS5QkWL5iHgwr5jbCyN4hst+elX+blmViuOcWcDIMJl9rvSZA8LN9Qoh/OsNui
-	 J7BbdD3gn0AMw==
-Received: from [100.112.195.149] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-5.bemta.az-a.eu-west-1.aws.symcld.net id B6/C4-01625-53C03416; Thu, 16 Sep 2021 09:19:49 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+EI1TXlcU4
-  02LtMwOLi4aXMDowe5zauYAxgjGLNzEvKr0hgzXiwcjJbwUfeiq6v+5kaGK/zdDFycQgJzGaS
-  OLCjgx3C2cMoMeHqYaYuRk4ONgFdiXOP17KD2CIC+hJLZ+9hBrGFBXwk5nQ8ZQGxWQRUJSad/
-  QcW5xXwkJj3fz1YXEJAQWLKw/dQcUGJkzOfgMWZBSQkDr54ARTnAKpRlJg9XR6ivELi9eFLzB
-  MYeWYh6ZiFpGMBI9MqRoukosz0jJLcxMwcXUMDA11DQyNdQ0sjXSMDE73EKt1EvdRS3fLU4hJ
-  dQ73E8mK94src5JwUvbzUkk2MwDBKKThwZgfjqdcf9A4xSnIwKYnyHrzplCjEl5SfUpmRWJwR
-  X1Sak1p8iFGGg0NJgpebwzlRSLAoNT21Ii0zBxjSMGkJDh4lEd4CLqA0b3FBYm5xZjpE6hSjo
-  pQ47z6QhABIIqM0D64NFkeXGGWlhHkZGRgYhHgKUotyM0tQ5V8xinMwKgnzuoJM4cnMK4Gb/g
-  poMRPQ4iP7HUAWlyQipKQamCKdUjQvmh/Q5Tb9fjsmZCtnzbvSK/Nsfis/8dBvzH+ZWvhr/r6
-  JnFaPue+/f1alUt7PLrdMP/qk7vwlH+6ElXcla69/Wr21XG1R3c9Y9cJu25XSp20ul85RTf5l
-  /GDp/avTL0xq9Zr9UUX8d/rM4yerj2sJCOXM/eNY/12m7fK1FbXSb5axpM7t+pIVfurs41erO
-  k+w9dSsu3X07bsS785/T1dNdyjZk/nlWMG2UwsWtiq7nqnOn12f0zhHpu9B9ZR3Z+p9RBNrq1
-  e25Gxc84JpzgG2FyqlN6NnXqiJsdyt5OjHuOWOenbapeoru7v8GqdtXPPgguM/pYrAlNpMrgx
-  3C0fNe0eiGrauylG50qnEUpyRaKjFXFScCAATREUmHgMAAA==
+	b=XPK6ZY0u/Qqa8OTZJWCUTwc9InXRqRYneM0X+i9/WZ+KbK02opcb2NEO23vcvSnf2
+	 b6wLmSuojbN+S3MW3gRlKXlhbv2a9C5hC3YM7rPtaJ6Henw10POx7KK8ZV/x02Yjan
+	 usJyBo8ZXdzfauMWyyHaVTz4pOAQeeYXClk/Mqnp4e8baSu3ehESQujVHIWHnicnle
+	 Udyew53syl8FfVYiP87SwpS5vD8G2uvfPg79Bu0aGxoAzOKQ+5/DgPDUWCQ3fhrg53
+	 9iQEOxLjNXYkl3n1hbRpqJsmysq9y6X8d/95Uk9iJ66miuRkLO4fP1YwO7UPe8/muR
+	 h1JERWXJSvb4w==
+Received: from [100.112.196.227] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-b.eu-west-1.aws.symcld.net id CF/79-30018-B3C03416; Thu, 16 Sep 2021 09:19:55 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupikeJIrShJLcpLzFFi42Kxs+EI0bXmcU4
+  02LeNw+Li4aXMDowe5zauYAxgjGLNzEvKr0hgzXi+spWlYApnxcTPDSwNjPs5uhi5OIQEZjNJ
+  fHm1iRHC2cMo0fF7PlMXIycHm4CuxLnHa9lBbBEBfYmls/cwg9jCAv4SNxf8AathEVCVaJj8E
+  SjOwcEr4CHx+IwZSFhCQEFiysP3YOW8AoISJ2c+YQGxmQUkJA6+eAFWLiGgKDF7ujxEeYXE68
+  OXmCcw8sxC0jELSccCRqZVjBZJRZnpGSW5iZk5uoYGBrqGhka6hpaWukZG5nqJVbpJeqmluuW
+  pxSW6hnqJ5cV6xZW5yTkpenmpJZsYgUGUUnD88Q7GFW8+6B1ilORgUhLlPXjTKVGILyk/pTIj
+  sTgjvqg0J7X4EKMMB4eSBC83h3OikGBRanpqRVpmDjCgYdISHDxKIrwFXEBp3uKCxNzizHSI1
+  ClGRSlx3n0gCQGQREZpHlwbLIouMcpKCfMyMjAwCPEUpBblZpagyr9iFOdgVBLmdQWZwpOZVw
+  I3/RXQYiagxUf2O4AsLklESEk1MGkvnP8zLy7MPVX5ZqY8v2d8LEuQ3O6m19MinqldL154Va6
+  dq3/xdfWk/PZ+n32dB9+ynlMo8To1tUiU5fBuKem95895S5es+bTs9/o5yfO9qjzrJX9YVZfP
+  n5bJNrX4Ys8DX/eSytuLZz/NitjloR4Qw97Feco5wlAtYBsHQ8+8pU1KXLs/nJA1Xvdx6X6D/
+  OnNTS8XBp8R2WPpc1lw5Z30g088lq6QiBLxSuUqdz9XsfPbqR2v7vOYTPhafKlPkePkTV6XjT
+  GH+n0+ljJOS/rtlsj+s0Oog7mvNGc99+JrXb7MIuF9mmvjJl3rdpl1LOqEnkdThNG3jXu2zF/
+  O/03ukh53lUffVNuw6KOOSizFGYmGWsxFxYkAY1RunR0DAAA=
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-12.tower-267.messagelabs.com!1631783988!168803!1
-X-Originating-IP: [62.60.8.85]
+X-Msg-Ref: server-16.tower-287.messagelabs.com!1631783994!78554!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 8350 invoked from network); 16 Sep 2021 09:19:49 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-12.tower-267.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 16 Sep 2021 09:19:49 -0000
+Received: (qmail 14425 invoked from network); 16 Sep 2021 09:19:55 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-16.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 16 Sep 2021 09:19:55 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 18G9Jhkx021546
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 18G9JrPG004357
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 16 Sep 2021 10:19:48 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 16 Sep 2021 10:19:54 +0100
 Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Thu, 16 Sep 2021 10:19:42 +0100
+ (TLS) id 15.0.1497.23; Thu, 16 Sep 2021 10:19:52 +0100
 From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-openpyxl: upgrade 3.0.7 -> 3.0.8
-Date: Wed, 15 Sep 2021 14:30:14 +0800
-Message-ID: <1631687414-89214-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-pulsectl: upgrade 21.5.18 -> 21.9.1
+Date: Wed, 15 Sep 2021 14:30:24 +0800
+Message-ID: <1631687424-89250-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.35]
@@ -61,46 +61,28 @@ X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-Bugfixes
-Ignore blank ignored in existing Data Validations
-Add support for cell protection for merged cell ranges
-Timezone-aware datetimes raise an Exception
-Improved normalisation of chart series
-Catch OverflowError for out of range datetimes
-Alignment.relativeIndent can be negative
-Incorrect default value groupBy attribute
-
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- ...-openpyxl_3.0.7.bb => python3-openpyxl_3.0.8.bb} | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-openpyxl_3.0.7.bb => python3-openpyxl_3.0.8.bb} (61%)
+ .../{python3-pulsectl_21.5.18.bb => python3-pulsectl_21.9.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pulsectl_21.5.18.bb => python3-pulsectl_21.9.1.bb} (84%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-openpyxl_3.0.7.bb b/meta-python/recipes-devtools/python/python3-openpyxl_3.0.8.bb
-similarity index 61%
-rename from meta-python/recipes-devtools/python/python3-openpyxl_3.0.7.bb
-rename to meta-python/recipes-devtools/python/python3-openpyxl_3.0.8.bb
-index 52489b8543..3d1f46e50b 100644
---- a/meta-python/recipes-devtools/python/python3-openpyxl_3.0.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-openpyxl_3.0.8.bb
-@@ -9,6 +9,15 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148
+diff --git a/meta-python/recipes-devtools/python/python3-pulsectl_21.5.18.bb b/meta-python/recipes-devtools/python/python3-pulsectl_21.9.1.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-pulsectl_21.5.18.bb
+rename to meta-python/recipes-devtools/python/python3-pulsectl_21.9.1.bb
+index 22603209ee..5871ee2164 100644
+--- a/meta-python/recipes-devtools/python/python3-pulsectl_21.5.18.bb
++++ b/meta-python/recipes-devtools/python/python3-pulsectl_21.9.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/mk-fg/python-pulse-control"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=f1d10048469ff90123263eb5e214061d"
  
- inherit pypi setuptools3
+-SRC_URI[sha256sum] = "14e34563cdad5f01d193f1ef7cd859a0fbdaa846726d44b0b68f4451a7458458"
++SRC_URI[sha256sum] = "8eef4dbfc97d984e63fd609a3f690d005173ec5342be88d10f67dd507affdf32"
  
--SRC_URI[sha256sum] = "6456a3b472e1ef0facb1129f3c6ef00713cebf62e736cd7a75bcc3247432f251"
-+SRC_URI[sha256sum] = "4f2770348c029ce9433316ced8f91ed37d2a605e654f8bfdc93a3524561a8ce2"
- 
--RDEPENDS:${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-io ${PYTHON_PN}-pprint ${PYTHON_PN}-shell ${PYTHON_PN}-jdcal ${PYTHON_PN}-et-xmlfile"
-+RDEPENDS:${PN} += "\
-+	${PYTHON_PN}-compression \
-+	${PYTHON_PN}-io \
-+	${PYTHON_PN}-pprint \
-+	${PYTHON_PN}-shell \
-+	${PYTHON_PN}-jdcal \
-+	${PYTHON_PN}-et-xmlfile \
-+	${PYTHON_PN}-numbers \
-+	${PYTHON_PN}-xml \
-+"
+ RDEPENDS:${PN} += " \
+ 	libpulse \
 -- 
 2.25.1
 
