@@ -1,88 +1,78 @@
-Received: from mail3.bemta25.messagelabs.com (mail3.bemta25.messagelabs.com [195.245.230.82])
- by mx.groups.io with SMTP id smtpd.web11.8617.1631784371754601791
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
+ by mx.groups.io with SMTP id smtpd.web08.557.1631804810515732837
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Sep 2021 02:26:12 -0700
+ Thu, 16 Sep 2021 08:06:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=tNjSXFZi;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.82, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1631784369; i=@fujitsu.com;
-	bh=WUmvYz/ZOU7HrZW0MW5Zgl4vhsWWo3III6AqqFiTUQc=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=tNjSXFZiB+ax0DPD11NcKOxI0z4t5biPazX4zqtSzaJsci24hbIllRp8/x/iyvDok
-	 o93yGmDA/rpKuR9Z7iXN5fW3Vhxgerk6V0l1gbXBUUZVkOASJdMg3Ga2l42SARsma3
-	 tEo2eaQxSvDFDER4kVTF4hdniD0TNuoWRkMPTqJoEDf9HxagxnuAgfHURv/LfjtYEK
-	 sigNPY6eKJcCS264dFedUewhgQUJAwAwWx8/lj3MG1K4M92QvTNowddD7Ed18AYwVm
-	 anByD1b0q2NMp80y7g5Y5O5UQUa3K4Oy8vmbr0v0nf/nSf+vjKQPLpMF7LoqK4JZCe
-	 t9EfcT1AqWWVw==
-Received: from [100.112.197.4] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-b.eu-west-1.aws.symcld.net id 73/91-21482-1BD03416; Thu, 16 Sep 2021 09:26:09 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupikeJIrShJLcpLzFFi42Kxs+EI0d3I65x
-  o8PqxpMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmrFm0WK2gu+cFTdb/zE1MJ7h6GLk4hASmM0k
-  seHRSbYuRk4g5wSjxITp7CA2m4CORMeLbhYQW0RAX2Lp7D3MILawgI/E/X/7GEFsFgFViR87Z
-  gDFOTh4BdwkHj5KAwlLCChITHn4HqycV0BQ4uTMJ2BjmAUkJA6+eMEMUaMosX3nGRYIu0Li9e
-  FLzBMYeWYhaZmFpGUBI9MqRoukosz0jJLcxMwcXUMDA11DQyNdQ0sLXUNzY73EKt0kvdRS3fL
-  U4hJdQ73E8mK94src5JwUvbzUkk2MwCBKKTi2dgdjz5sPeocYJTmYlER5D950ShTiS8pPqcxI
-  LM6ILyrNSS0+xCjDwaEkwfuAyzlRSLAoNT21Ii0zBxjQMGkJDh4lEd4CkDRvcUFibnFmOkTqF
-  KOilDivODAOhARAEhmleXBtsCi6xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmY9zYP0BSezL
-  wSuOmvgBYzAS0+st8BZHFJIkJKqoGpJs7jbGZl5q3F9SrrL0/8tvBx7oansxly27bsfCbmEx6
-  1/27UdflXZt+4Lrj76vOlNFs6llm81Oxye6F6XkcoebZpeOzvx0ZS4bl7XY7WJP9f9Pjn8a9+
-  BpJV+3/Vp/G18Qv61zycfnj/xcZd0sez1R/XndKODJ+41fBq3O8NcurneF+Uc3+bJ/Vt19tVh
-  RNdJL845Si5Tk3xnKafr1bFWn5h+9nZjXyOumwLFghMXrlXwqUnm3eN7r+cwzHahV8DXnxIvX
-  DZbNWNQmemZYUcalMnpOfO+tD00fJ4yLt0kY7TLoXuNSZZF/6Zqn96+/+2TneS3PszOYGFPTM
-  f/1wX/clGqTnj90qrrWKvA7YosRRnJBpqMRcVJwIAK3rDQR0DAAA=
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-3.tower-285.messagelabs.com!1631784369!10620!1
-X-Originating-IP: [62.60.8.84]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.4; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 6972 invoked from network); 16 Sep 2021 09:26:09 -0000
-Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-3.tower-285.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 16 Sep 2021 09:26:09 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 18G9Q98o007743
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 16 Sep 2021 10:26:09 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Thu, 16 Sep 2021 10:26:07 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-grpcio: upgrade 1.39.0 -> 1.40.0
-Date: Fri, 17 Sep 2021 05:26:01 +0800
-Message-ID: <1631827561-4712-1-git-send-email-zangrc.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ZCyIhVW8;
+ spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f181.google.com with SMTP id y8so6141005pfa.7
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Sep 2021 08:06:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=snQhQ9kU4VZSS+hOdnPL6hDWaZyoA5Dq8JMmi/JmwVg=;
+        b=ZCyIhVW8SHy2b5y0qkQSsSLvMmbhN2HkK9bRMD6x5clfnlBBNs9HsI8U1f8vZ/SmtE
+         43SlRLYbvY6vHNHvmyrMIngTWDyg42oyIAHaiRwDq+A35eCaT8rYGEIKlDA1igNH7Glv
+         207xTifh5cp6fELytae0V+csF8E6bIaEkPtNjj4LdDDBikZkuixiQEnbwVIQolb+ckKK
+         AM3PvGw4zVfamTbEBMLDwKpQIPg8MHfxwH05rM7oKhjWl6q8N5oXW7hTyEHVeMh00M52
+         9/c5Ly3npx1d+Jp7ti0CHJ0WbXtEkxh42zGCf4zLFvOM6FdRsXr7veyfuEOOSlTdKwYx
+         IVOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=snQhQ9kU4VZSS+hOdnPL6hDWaZyoA5Dq8JMmi/JmwVg=;
+        b=Abs5bmgqRcgnXhP7WdBufjCbKYXEOpQgLEHYVW8lSYTrXzjeHN9/vpZ2WIs2N9kR1p
+         5VCkiY8BZsKCnZZGn4yn33ETJUPsW4eS27/ugVrf4x2rfroVBIbd7E0NvHse0Q+iN+mP
+         qwklIeVqWOEa3Gk8CVg5KaxQo6mgJ80h+Xv03avkhdJJi1d96vFSGtusp3yYhyqvUwGD
+         0d8ccfDRqWtbS/dlshVUR1dRIzwxVkW3T/e4pNwRPYND+EPCtcyV93SKYnXzTg2tRMP3
+         y22z5fVlKIodQEfQ0YcOOhN6FrOnwgjrPRRLwuJB33fShIqFNAfuTltgo8GhUr2WDXuP
+         PbEA==
+X-Gm-Message-State: AOAM5330S9gQjCUxZXsiDyIVwbYlgBwY2OtFfzt/B109AT+btWnwop0M
+	f1zydUSCrZvuZagIv5ssfWGF/gqQMPK1bA==
+X-Google-Smtp-Source: ABdhPJwCxpi2OQYB0RKg4DvyAv7Zw7RHQSB37l2i2kTm99gA2Ake2SroVZ2wrPO/WDwHCswMfSGKSw==
+X-Received: by 2002:aa7:9841:0:b0:439:c4cb:fe9a with SMTP id n1-20020aa79841000000b00439c4cbfe9amr5725444pfq.13.1631804809722;
+        Thu, 16 Sep 2021 08:06:49 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::728f])
+        by smtp.gmail.com with ESMTPSA id v4sm3519566pff.11.2021.09.16.08.06.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 16 Sep 2021 08:06:49 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>,
+	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Subject: [meta-gnome][PATCH] gdm: Add polkit to required distro features
+Date: Thu, 16 Sep 2021 08:06:47 -0700
+Message-Id: <20210916150647.4034139-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+it depends on accountservice package which already needs this
+DISTRO_FEATURE
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{python3-grpcio_1.39.0.bb => python3-grpcio_1.40.0.bb}      | 2 +-
+ meta-gnome/recipes-gnome/gdm/gdm_3.36.3.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-grpcio_1.39.0.bb => python3-grpcio_1.40.0.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.39.0.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.40.0.bb
-similarity index 93%
-rename from meta-python/recipes-devtools/python/python3-grpcio_1.39.0.bb
-rename to meta-python/recipes-devtools/python/python3-grpcio_1.40.0.bb
-index 76d38a2646..1cfb967493 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio_1.39.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio_1.40.0.bb
-@@ -12,7 +12,7 @@ SRC_URI:append:class-target = " file://ppc-boringssl-support.patch \
-                                 file://mips_bigendian.patch \
-                                 file://0001-absl-always-use-asm-sgidefs.h.patch \
+diff --git a/meta-gnome/recipes-gnome/gdm/gdm_3.36.3.bb b/meta-gnome/recipes-gnome/gdm/gdm_3.36.3.bb
+index 74e2bd677f..e4c590e482 100644
+--- a/meta-gnome/recipes-gnome/gdm/gdm_3.36.3.bb
++++ b/meta-gnome/recipes-gnome/gdm/gdm_3.36.3.bb
+@@ -10,7 +10,7 @@ DEPENDS = " \
+     libpam \
  "
--SRC_URI[sha256sum] = "57974361a459d6fe04c9ae0af1845974606612249f467bbd2062d963cb90f407"
-+SRC_URI[sha256sum] = "3d172158fe886a2604db1b6e17c2de2ab465fe0fe36aba2ec810ca8441cefe3a"
  
- RDEPENDS:${PN} = "${PYTHON_PN}-protobuf \
-                   ${PYTHON_PN}-setuptools \
+-REQUIRED_DISTRO_FEATURES = "x11 systemd pam"
++REQUIRED_DISTRO_FEATURES = "x11 systemd pam polkit"
+ 
+ inherit gnomebase gsettings gobject-introspection gettext systemd useradd upstream-version-is-even features_check
+ 
 -- 
-2.25.1
+2.33.0
 
