@@ -1,75 +1,76 @@
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web11.868.1631984272003212391
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.web11.870.1631984272982434641
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Sep 2021 09:57:52 -0700
+ Sat, 18 Sep 2021 09:57:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Mw8ieZJU;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id s16so3941519pfk.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Sep 2021 09:57:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=JYuiWyBw;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id w19so12109510pfn.12
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Sep 2021 09:57:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=0X9qiEMO9t/JaOdlwDKlafRIWsrDvi9CRTI9Hz9NF68=;
-        b=Mw8ieZJU6VfUT1PWPPxLrBPlX+yyetgwrboe3mDjESe+4w6Cwg1p9e2Sb+jbPi7uoJ
-         pcwgXYfuhos9Vj3nNtWsdfp+O9Bl9G9URU5dlChAiJjATWdXgq3c+677D7ebV1v0Z8j5
-         ItqIsEarz0JmRAZVKApIqlI82qJ/dZxLoVsKGZMkZtKQwo/r23wmlbsOb2e+SJVhMopj
-         ivI/I+iiKW8DjEaqxB4M+NIcMqkz5eShr+n2hjXprgSkMsgdav4fTBsVbqGODtKr0XwN
-         ZjRtPFShSRz+nSPJXdzi3XQGZfdr6Yu6maoPwJ3nxepVUl9f5aTPVJuqq2dXpmK+CZdW
-         DX1w==
+        bh=IiC6enG+fkzh90QKye+9Lz0RhvRHdJnC6aNuwo4MQHU=;
+        b=JYuiWyBwwbOdpXxqxdd53j7kxZC8kW2cR5xqe6acUFBNaG4DEEYSGnT8grEswg0EuN
+         dkEq+CCRH3Bcb7q4FX5kQwkZYrQ3pZbcmycaAwDJ5XvVyyfnSb/8uSC83C+GW86va9ah
+         zWhOlPGDSP6swIAvaz9EtM4E7Br8Q6r5nxAzIb9R2Kd9z919r7wPaagaXwspO1yBzYy4
+         6EK217wdrwoimGIcrVinY+SiDORtNsySLyaiZBXRYudIfhL/PxbkAiIh4xiLwsh5qXYW
+         MDNx17NBTFLJ7v/+SnTjbioLguq0J07C3PCXeJpHCLVtj43CqpOCweTRjjKnWv0CbFN6
+         F17w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=0X9qiEMO9t/JaOdlwDKlafRIWsrDvi9CRTI9Hz9NF68=;
-        b=AeC/klYpuQzo8maLZ9afVrY8pHGC2s6usajGpMxFO7LeYkFvP6Lul8CKCdcYnErY4h
-         Oml/IFobvmIjptxVAM854l01SimrwTKd4CKjNeWsjaKbFJTCaEdyLzoG/v50JRU/x93z
-         oO7IADN/r4fFRgq305c/sBL6bLx+O7V1DU0iJVS/4KvVt/k8DYZyMnoEkUBunnb78Tpy
-         ZsgVHU8WFqsjrhJOdFno6SyXPpgkuraNN8Hwn2NMT/4WZk8Td4qwxIJyaNB76k7THWfn
-         +Add+CyXPE8Li64MOTFIWFVO4jwXTyFQntJnIzm7zLXPfpKStNg3DrmjhJsqhMEp3hd1
-         /yFw==
-X-Gm-Message-State: AOAM530OOSGrryX/p63udGyuwELDPz0cR267Syg7vPk+vcjmbf3DiOl6
-	0vrEhhFSk4OOpgtIDikunupJ0wkl7Tk=
-X-Google-Smtp-Source: ABdhPJzHoOJeiuA+5MgfZr6PafasWv5nY9Xzjn4/1uef6q2aIUmrIFiCz/JGj4VXdY7kESBGbZColg==
-X-Received: by 2002:a63:9911:: with SMTP id d17mr15615896pge.111.1631984271373;
-        Sat, 18 Sep 2021 09:57:51 -0700 (PDT)
+        bh=IiC6enG+fkzh90QKye+9Lz0RhvRHdJnC6aNuwo4MQHU=;
+        b=nvCDDwH+2d+LBqlDXIsUSCwCOWnhHPY8uQ7BpBvjqa2EM7glwYKjH8btniJ5YN0W6f
+         tfxwFzpt6/s8LUY2XUk4fL6hxupp4IxQv+NkV/yEIljxSls8zUInvmb0GNN4KEXABKBn
+         1ggVmCUMpJ1zU5hOjJtnt0xMyLzh1w1konnW7MdyidKI3t2eWeDhbH+lml83s7P+zw0s
+         OpcuciCPjL/4QTIiRH6yQfARJJb+XYPLL4YMd/RfRcSppeXD8u7z52hunZf6ecuP8GPb
+         +JN27Hc6Bp5C/ou30UoFlruwrutMJBsZHg8JbvfB3QWMfD0g+8Wrhfpgic9zjeSpZjRm
+         Kogg==
+X-Gm-Message-State: AOAM532juIUjL2UfqkHWaxH4uNtPugqVBNOR9ntQLjQ/QxaVJABa3sXo
+	tDmdbXaC/5fRCXuKxdvFldt2L7CtuJw=
+X-Google-Smtp-Source: ABdhPJwNNNDzsOQNPT2s6RbASbQ3+AYbBze890Jt0wueVILC6/HbXbaMABndYFKTe7CzRLH9gugBLg==
+X-Received: by 2002:a05:6a00:1307:b0:43d:2b4:419a with SMTP id j7-20020a056a00130700b0043d02b4419amr17063325pfu.62.1631984272376;
+        Sat, 18 Sep 2021 09:57:52 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:f923:d379:e6c9:abf7])
-        by smtp.gmail.com with ESMTPSA id ga24sm13485274pjb.41.2021.09.18.09.57.50
+        by smtp.gmail.com with ESMTPSA id ga24sm13485274pjb.41.2021.09.18.09.57.51
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 18 Sep 2021 09:57:50 -0700 (PDT)
+        Sat, 18 Sep 2021 09:57:52 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 15/18] python3-kiwisolver: set precise BSD license
-Date: Sat, 18 Sep 2021 09:57:35 -0700
-Message-Id: <20210918165738.2581429-15-akuster808@gmail.com>
+Subject: [meta-python][PATCH 16/18] python3-jdcal: set precise BSD license
+Date: Sat, 18 Sep 2021 09:57:36 -0700
+Message-Id: <20210918165738.2581429-16-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210918165738.2581429-1-akuster808@gmail.com>
 References: <20210918165738.2581429-1-akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-"BSD" is ambiguous, use the precise licenses BSD-3-Clause
+"BSD" is ambiguous, use the precise licenses BSD-2-Clause
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-kiwisolver_1.3.2.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-jdcal_1.4.1.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-kiwisolver_1.3.2.bb b/meta-python/recipes-devtools/python/python3-kiwisolver_1.3.2.bb
-index cf14c49e6c..dac6cd48b9 100644
---- a/meta-python/recipes-devtools/python/python3-kiwisolver_1.3.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-kiwisolver_1.3.2.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "A fast implementation of the Cassowary constraint solver"
- HOMEPAGE = "https://github.com/nucleic/kiwi"
--LICENSE = "BSD"
-+LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://setup.py;endline=7;md5=e54bd74bd9d0a84ae3f8f6d21ada0ab4"
+diff --git a/meta-python/recipes-devtools/python/python3-jdcal_1.4.1.bb b/meta-python/recipes-devtools/python/python3-jdcal_1.4.1.bb
+index 765de4d4f4..8655150b03 100644
+--- a/meta-python/recipes-devtools/python/python3-jdcal_1.4.1.bb
++++ b/meta-python/recipes-devtools/python/python3-jdcal_1.4.1.bb
+@@ -4,7 +4,7 @@ and another function for converting Julian calendar dates to Julian dates are de
+ Two functions for the reverse calculations are also defined."
  
- SRC_URI[sha256sum] = "fc4453705b81d03568d5b808ad8f09c77c47534f6ac2e72e733f9ca4714aa75c"
+ HOMEPAGE = "https://github.com/phn/jdcal"
+-LICENSE = "BSD"
++LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;md5=bd236e1f590973467a427bb354be0f46"
+ 
+ inherit pypi setuptools3 ptest
 -- 
 2.25.1
 
