@@ -1,87 +1,77 @@
-Received: from mail-qv1-f43.google.com (mail-qv1-f43.google.com [209.85.219.43])
- by mx.groups.io with SMTP id smtpd.web11.2656.1631994644081215919
+Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com [209.85.222.176])
+ by mx.groups.io with SMTP id smtpd.web09.2811.1631994863576100628
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Sep 2021 12:50:44 -0700
+ Sat, 18 Sep 2021 12:54:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=RKEG9ui6;
- spf=pass (domain: gmail.com, ip: 209.85.219.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f43.google.com with SMTP id a14so809074qvb.6
-        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Sep 2021 12:50:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ZdMryP2w;
+ spf=pass (domain: gmail.com, ip: 209.85.222.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f176.google.com with SMTP id p4so28692712qki.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Sep 2021 12:54:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=jpRr7QjCNhjqdBijXxjRXDxBuBdfb7Adsebnufljh/U=;
-        b=RKEG9ui6XV53v8gIgF7jxflLxjqGNsFb+Kl7nsycGHQuTFGZbwGMw8ILDFor/2kiO8
-         N7bHwpEb8jgmxMyllWc/fKR+iwuA1LGR/quJtLHB9rEJDhCdY67gA6gvMJqoy4d8XV20
-         4iWEPG29/R7DGTtqDMGnCWHv7V/JMTGECJ5oSZGMvojwtVCeIi8VG6ZcEcz5jAabu8GH
-         PbJEfesixQSw41imliMGg+u8bABboqFdhfyN61F5QWwQviSlOQsYSMktBMDdJ5Im56h+
-         LCOM5rq6ZK2zztkpGgjI+ANmPh5fDSuM5Y9f3NFC4XKF7NtDPXyelSlN8u3VIu3tiF2K
-         L2XQ==
+        bh=v3I+v13kwAf9jmG0758joTnrFzwo+6G3fX+qEHQ3pWs=;
+        b=ZdMryP2wLnfXh2uOq5syXLuE6WDL02tYWKeoTH4KOH9xmZz5Q3F/ODo2eiz6eAEiUU
+         vUhTP9ePqzizC0DMcc8YWBXgovQuyoG+geUy80ghAYgUOdGG2JQTClYs1PFXXVQYaQtH
+         wuxzgO7BGx/Kd4tUtwCeQIqm0SHPeap+o2p3HwlR9Ra5X5uQhSDDAz4lYrTBBOIU9cud
+         bzdrn2g8b8nvBJP0DGT5P9v71gBS9UGNm1m3XdTzC23J5oTsMWq4Yjun3C8SuBQdx0oL
+         xiVp5Jg2R+9EIsPKBOtGxYQVbtIW1sWAU+unx0hBflRe4qUdrQtbHwK9IYMD9Ulk6YL8
+         CKGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=jpRr7QjCNhjqdBijXxjRXDxBuBdfb7Adsebnufljh/U=;
-        b=aL34SrXBirxIlg05MGPU5vMe5MUbnn+GAYHDa/q8X39XTixIGF8zFLtxgDmLtFK669
-         i7ZyZA9baCDJXG56xHQejITeEU+axB/Dkt05NNyZCoFY379nGoHFSU/NEwpi9eiNXiOs
-         WJSTxV/sc62OHxl7XKvSzdptV4WT8jAWIYMOzgju8tNowA+bn6IsSRLdTJKKxNZ8Cuwo
-         2ieoD6cw4Ec7xARzBjADQNc4nGoroAIPBXgeDE2KQr8mcRj0uqCaBqqXeB/A1O7vv/ne
-         sm18+rsl3q8f5LDI+yCca5DTHgfPUbrXnAq76NEOO/9dxo/SVkrRaCveGeESlCvfRidb
-         Ctng==
-X-Gm-Message-State: AOAM530UbzG9a6DNdLExjOycdXGBZWT4aF2lvQaRAWlGShdOROQpdNjk
-	UkExTMskS0e2ESc/sUbgAI1tTWCiwjEzYQxYAuE=
-X-Google-Smtp-Source: ABdhPJzViSU1p/F0O47uoP93qv8LZOGVVsMP5U+rGMLTtRO1lmDcX085uIo48U4yTXwJv+P88q+pDmVUtHoUCE4uMi4=
-X-Received: by 2002:a05:6214:50b:: with SMTP id v11mr17793401qvw.41.1631994643214;
- Sat, 18 Sep 2021 12:50:43 -0700 (PDT)
+        bh=v3I+v13kwAf9jmG0758joTnrFzwo+6G3fX+qEHQ3pWs=;
+        b=yx29Al9v1ZHqcB+lUzIdCEjuUzA/f34HgeMLJQgsZVyVhsx6a/ZVITLsyyTHNfe15L
+         ABex1Zp+YZjMt5Cn4bhMazlQYhoyNAkBcfcNz/7jsxr9cMcapu5pVg+snmEKhIky+6o1
+         rBX8wGtffEkZV3+B8K+u5XKotOxq4lsL/0MeZfRQp25X2GyV6YxAEJiMHfHRq/oPi+eR
+         vja4d8pRMUXfSktdeOhmBy9klR3FvmXI6oS+8KDzpxYBAJJGQ7so/A561RU4egvUdiQN
+         SRlghWBnyBy1i/KBz+iRVr0Cij3ZbZyKHkrzRltHWnYCtfef02MJxsYggVBsT79ZX5+g
+         VL4g==
+X-Gm-Message-State: AOAM5308vHCphjX3fZlsXDujwBwGs6ueA0jBQHY3nkiUmtBu9oDkOdGX
+	PPSXDu7on39G8GidGQ6IqECOIJH6ghyQQr9xRvY=
+X-Google-Smtp-Source: ABdhPJw5GXYmcuLsSuw1Ke4sI/z1awDZ48sSyrqXaBUvf86PmO/X6WAE3rGX4is29147y47Gsx26CM2wkmplRKyKjz4=
+X-Received: by 2002:a37:48f:: with SMTP id 137mr16892qke.105.1631994862359;
+ Sat, 18 Sep 2021 12:54:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <01841159-90c6-ba5f-62e6-b4e5859a770e@gmail.com>
-In-Reply-To: <01841159-90c6-ba5f-62e6-b4e5859a770e@gmail.com>
+References: <20210918165738.2581429-1-akuster808@gmail.com> <20210918165738.2581429-12-akuster808@gmail.com>
+In-Reply-To: <20210918165738.2581429-12-akuster808@gmail.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sat, 18 Sep 2021 12:50:17 -0700
-Message-ID: <CAMKF1soS4f_4KqwBVZOPu5ks8VJsAtwzMDVM6Xk15RGW9Va==w@mail.gmail.com>
-Subject: Re: [oe] meta-networking: fping license
+Date: Sat, 18 Sep 2021 12:53:56 -0700
+Message-ID: <CAMKF1srmqAz0im-MQTnudb+bmg3yghwyiVJEj=D0a0dn+5bQaw@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 12/18] python3-geojson: set precise BSD license
 To: Armin Kuster <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-it seems like stanford version of BSD-3 see debian's license file
-https://tracker.debian.org/media/packages/f/fping/copyright-4.2-1
+On Sat, Sep 18, 2021 at 9:57 AM Armin Kuster <akuster808@gmail.com> wrote:
+>
+> "BSD" is ambiguous, use the precise licenses BSD-3-Clause
+>
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> ---
+>  meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb b/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb
+> index 1a21230113..5c60673af4 100644
+> --- a/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb
+> @@ -1,6 +1,6 @@
+>  SUMMARY = "Python bindings and utilities for GeoJSON"
+>  HOMEPAGE = "https://pypi.org/project/geojson/"
+> -LICENSE = "BSD"
+> +LICENSE = "BSD-3-clause"
 
-On Sat, Sep 18, 2021 at 12:10 PM Armin Kuster <akuster808@gmail.com> wrote:
+it should be 'Clause' this comes with warning on AB see
+https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1551
+
+>  LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=f48972abe5cddee79e301574742ed745"
 >
-> Hello,
->
-> The LICENSE listed in this recipe is "BSD" and it clearly is not that
-> nor could I find the below wording matching any of the BSD variants (
-> Not a Lawyer). Now that SPDX data can be generated easier from core,
-> this may barf with the invalid "License".  This is the last outstanding
-> invalid BSD license in meta-oe and if anyone uses this package, maybe
-> you can dig into finding out what the proper license should be.
->
-> - Armin
->
->
-> Constance of 'COPYING':
->
-> * Original author:  Roland Schemers  <schemers@stanford.edu>
->  * IPv6 Support:     Jeroen Massar    <jeroen@unfix.org / jeroen@ipng.nl>
->  * Improved main loop: David Schweikert <david@schweikert.ch>
->  * Debian Merge, TOS settings: Tobi Oetiker <tobi@oetiker.ch>
->  * Bugfixes, byte order & senseful seq.-numbers: Stephan Fuhrmann
-> (stephan.fuhrmann AT 1und1.de)
->  *
->  * Redistribution and use in source and binary forms are permitted
->  * provided that the above copyright notice and this paragraph are
->  * duplicated in all such forms and that any documentation,
->  * advertising materials, and other materials related to such
->  * distribution and use acknowledge that the software was developed
->  * by Stanford University.  The name of the University may not be used
->  * to endorse or promote products derived from this software without
->  * specific prior written permission.
->  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
->  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
->  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+>  SRC_URI[md5sum] = "14753ed28678828b1de73f68b04e2324"
+> --
+> 2.25.1
 >
 >
 > 
