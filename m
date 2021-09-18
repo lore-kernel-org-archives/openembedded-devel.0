@@ -1,50 +1,50 @@
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web09.869.1631984262671025711
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web10.838.1631984263231628584
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Sep 2021 09:57:42 -0700
+ Sat, 18 Sep 2021 09:57:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=pxztE1mS;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id bb10so8286956plb.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Sep 2021 09:57:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=OTSp4z0D;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id l6so3506923plh.9
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Sep 2021 09:57:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=JeCAQLkwgAivPA91q6KV4qQa47lD7MCI9oaCnEToSFg=;
-        b=pxztE1mS6FQFzLAJtGC2mPEAaid3CDvrYMvMf8gPIxOLwQI6ZyqUeSKK7OoParuhCp
-         Qr7+8Ckbc8HJNMFzWJNkcSjXfFeFYxivd9fVeFWFIGV1334zh591FrjmX4bLK60GSEO2
-         2M8ccUZ/JNkQUXcwH3yjxc8j3ui4GxOBkU8C7bOkxSMWUt+rLWDwcutOtJIgcWvq8VRq
-         wFum/obhd85TR3jm3kOMqIW4uMziAYmgOkNeIYan8DxC+cyYy7irvUQ6PnNTnwXzI+t0
-         N6ky5F+qFlibNJ3khhIM8UwoJWTw1CPOyezeKCkKcVOT62Be/qW6ZECGUhVLTY7Y+Pt3
-         H2cA==
+        bh=Q+LKXchSA5uWR7ohTaDuGJpaorKp6JoGe+hCKIKjdj4=;
+        b=OTSp4z0DmU6wsw3+Xe1Iz1OtDOaf9BbCmQpMvNvygFbg3GdQzO1FIHTyeRLog6XgaT
+         zrMIujNSWEUz3inPozeA31mzjjSFS1hbM3+QF2SJ3RGqdrROWY6NAnftMI5pScro8EIU
+         49OKo0b7GAyZEzY7sMKouirHdzK3sd/RXCRr/mpwU0f62XcxJ6DNAv8mKgmsmd+Iwlza
+         1KcPeSRDmSJ3Xwf1aeDX82hcZWB/9Lu7nad2XbrBttFGZcVsIg/NDX6RkW0c1JEbNpGN
+         kH9qiNXRxK0rEHBmb+TMxu+kofhXSQQI/oHMDR7/UA6QjayK4YB/D8mkpq3Aq4b9mUy/
+         pg2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=JeCAQLkwgAivPA91q6KV4qQa47lD7MCI9oaCnEToSFg=;
-        b=Wl+YpGbkXd657zZzROUOhHUoS+YxQUB1tmCemhN8iTW1G97eKyiqy5rsfnev5k0wLI
-         nCbNP7yavViB13c+IKZfQfp2Q6TpLOKTyMQmAqoOR6azRhs1PjYuMy/Jtc+zhpDfqjn6
-         iZsohnv3QHlsgTMBpCFeUFZHC5Qb86MO54h2BFehxuWIuok5RW84w4ZKNiVsdh6dugGs
-         bizuXKSYVvswBdk5hhHdHPn0Uym70K3FEZdShnkXJSDj1+X5F47W3Ih1ZY/mwYebmxK1
-         1dfnxd74vu1fAoHEiLAUZNNgEBDP9R08RByQHfW3UCfJJ6blKQ3EphRF4LFYXeeN1iCx
-         HY9Q==
-X-Gm-Message-State: AOAM531lSHcAqediN4giBVbRKQEQxNKWv34K0zO7a0vEpNu7P7IjTwDt
-	RZ0IiKoAXfAKDhuCFFGPjjRUu7D4iWM=
-X-Google-Smtp-Source: ABdhPJz1NqdyyusUEN5GjJxehDN0qCp1Uf6otoZrZ7kM+hnguWuMr/RzdqTSWdN90YMl6objh3WcmA==
-X-Received: by 2002:a17:90a:1b2a:: with SMTP id q39mr19319056pjq.219.1631984262006;
+        bh=Q+LKXchSA5uWR7ohTaDuGJpaorKp6JoGe+hCKIKjdj4=;
+        b=49a/MSBw6I+jSLWXBeB8u6KArAOzkVEjGhTJ9Yw5ZC+OxjwxwvuKWM1wfUbdfUuj+b
+         wjpErDYMtbiWrlA/szXr1AGeuDN52c62c+ZG22FRw8YB8v7lvxF2YWPdlPU/CCIRkDNk
+         Hi/nBT9KhiH5tR/ipGb1n6Rj78wjkBsawcUbIys+g/aQiy18Wi0MeXf0sq/cgkDiyAub
+         IqKUAicWctu2UIarODruUYFMLTMbysvH2U0HyzrYqORg9u44eJmL1YtcgoOw9Au2JzDf
+         +6j4DsP/BCIW0UP2XkhtE9jtq2KtShn4YX6vpS8hOz3PNuCSpwTd8z9wbYlC4qSyHyOn
+         2R/Q==
+X-Gm-Message-State: AOAM533uOS60ZQ/ATUiTOqOnX8szDN22DxaaryQyl06xNEc46LxIUgqm
+	05in57UIt9Y5ZZ6Swi2g2E4QWKpLtu8=
+X-Google-Smtp-Source: ABdhPJxgLnUsPud+DChBpbs1PvSgfFBYDqj3BDQC1kn1ZV35p1gnQLBogrK8gfn2w51vFJhdEAqunA==
+X-Received: by 2002:a17:90a:eb02:: with SMTP id j2mr28352675pjz.174.1631984262652;
         Sat, 18 Sep 2021 09:57:42 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:f923:d379:e6c9:abf7])
-        by smtp.gmail.com with ESMTPSA id ga24sm13485274pjb.41.2021.09.18.09.57.41
+        by smtp.gmail.com with ESMTPSA id ga24sm13485274pjb.41.2021.09.18.09.57.42
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 18 Sep 2021 09:57:41 -0700 (PDT)
+        Sat, 18 Sep 2021 09:57:42 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 04/18] python3-traitlets: set precise BSD license
-Date: Sat, 18 Sep 2021 09:57:24 -0700
-Message-Id: <20210918165738.2581429-4-akuster808@gmail.com>
+Subject: [meta-python][PATCH 05/18] python3-parallax: set precise BSD license
+Date: Sat, 18 Sep 2021 09:57:25 -0700
+Message-Id: <20210918165738.2581429-5-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210918165738.2581429-1-akuster808@gmail.com>
 References: <20210918165738.2581429-1-akuster808@gmail.com>
@@ -55,22 +55,21 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-traitlets_5.1.0.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-parallax_1.0.6.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-traitlets_5.1.0.bb b/meta-python/recipes-devtools/python/python3-traitlets_5.1.0.bb
-index da234215ea..120604a8be 100644
---- a/meta-python/recipes-devtools/python/python3-traitlets_5.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-traitlets_5.1.0.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "Traitlets Python config system"
- HOMEPAGE = "http://ipython.org"
- AUTHOR = "IPython Development Team <ipython-dev@scipy.org>"
+diff --git a/meta-python/recipes-devtools/python/python3-parallax_1.0.6.bb b/meta-python/recipes-devtools/python/python3-parallax_1.0.6.bb
+index 00a4ec86b7..14c90ffb58 100644
+--- a/meta-python/recipes-devtools/python/python3-parallax_1.0.6.bb
++++ b/meta-python/recipes-devtools/python/python3-parallax_1.0.6.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Execute commands and copy files over SSH to multiple machines at once."
+ HOMEPAGE = "https://github.com/krig/parallax/"
 -LICENSE = "BSD"
 +LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING.md;md5=eec4de4d599518742e54e75954e33b46"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=52c67ffa6102f288a0347f8c5802fd18"
  
- PYPI_PACKAGE = "traitlets"
+ SRC_URI[md5sum] = "e312397b083426af84db7076dc2a28d7"
 -- 
 2.25.1
 
