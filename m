@@ -1,50 +1,50 @@
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web12.892.1631984268627966587
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web09.872.1631984269668747580
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Sep 2021 09:57:48 -0700
+ Sat, 18 Sep 2021 09:57:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=HZv4L8fy;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id l6so3507020plh.9
-        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Sep 2021 09:57:48 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=QLURjBbJ;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id u13-20020a17090abb0db0290177e1d9b3f7so12230029pjr.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Sep 2021 09:57:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=RYzmvSrNtnZPjTM65pEcmVCbAKdCp4NeYf/InvrrqIU=;
-        b=HZv4L8fyN362KasoAA8dRZFjem0rc2pY06Y7N3JVleRDB2BV4XXzzD4uPwju2SChCQ
-         fG0dboBjFMeoUgFCOLeHuKmngljhTEZh5sWIAayDMxr3LMYPyVU9nf4TBHN6u486qQ77
-         XOQo1Gl5pTmJZpHxTmzIrCAnxI64l0geyOp7T47VLxFJbpq/DrWhB+Sv6vFU1FK0uxJD
-         n3XF5gfnVITACZEUyOESK9Z/Z5gXU8DTBMdh2VKkQckc63HTqyhLeYv80uONw1EGpm4j
-         3JYd93oOlpG6sG/zpsHOqVpNsRMcWoL3QZVbQ4uTqbEqc0Sq6pdzxuWdlQKoH0qHr74v
-         irOg==
+        bh=lMDlr1570k78MokSSBSbpBuG+7TyVMVjq4qVtUvy2Aw=;
+        b=QLURjBbJN653gwBmm1rcHkQt+l18rwNIQXgncPYBs9Cqikzg5mTiQl/LsVZdlkQ1v7
+         exiKw+23G73asCiRr9cUf04j6EI2tWpQpe21vy/gxs2rA72uDwlXCN2/BH1dRMtAdVgm
+         X0gqt29EukiLzMS8GhubpcQg5mz52NbjbU0G8NDW/OIlyg4aMa1CxTjFzcdfwkDK99fH
+         EPOZz3Pe7ojdO9dgMSzS6x0NEEEqYdyTF8ghJvUTu5JginrW9Jrc0WeoSHqanflRnwXT
+         diTa/TsBwObr7OqzF60necGsphI45u0iK8KpoKcsS3JqinAUxZ8xp+4o5PSYHrq2G39b
+         MpNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=RYzmvSrNtnZPjTM65pEcmVCbAKdCp4NeYf/InvrrqIU=;
-        b=YIcEPTxVsStbdsQ7WMpyEluPh8pIDcMAwOUF5B6HOxDSoONWDWLWFCAl00VzTafT5z
-         RpCqgHOSPe2e0pbP34QNoI6DOKwYEtxrZosy5tlsR7PvS8H86MpE05woRcZcOZu9laVw
-         R+FleXbn3LUJu5pXd1rN/kS4gEr6Y7uD8qsxn6uwcokSgk5NKgytRqRzQAEBMZk6uFUP
-         n9nv9DIO33/5bIoR4eD0mIBxaM8J0+2AcbyMwcY3txKIf8fJg6yLhvJ0X8Bm/7D25wUn
-         HdIh5MLhly/DbIS210Hj7gNM5h6ZPKvMnBHzFVoSaaNDGbhncFHljezEseSD48ru1ngX
-         Kf0w==
-X-Gm-Message-State: AOAM531kfH2us+El/+dd1xnngEiPi4RUQppXlLilCvujn7Z7QMNUnfcb
-	9JBUXqpU/XiUCBNDFjxjs9qlRDiCQ5w=
-X-Google-Smtp-Source: ABdhPJzYAeR2+axkXaTJAQNzfChzCshyp+LAePt9TJ9vAB869ni6a7AHpkafKJYTRlvX8ebpxebLyg==
-X-Received: by 2002:a17:902:ce83:b0:13b:67d5:2c4e with SMTP id f3-20020a170902ce8300b0013b67d52c4emr15081124plg.45.1631984268085;
+        bh=lMDlr1570k78MokSSBSbpBuG+7TyVMVjq4qVtUvy2Aw=;
+        b=GZbAeZxM5wTwFei3NUphci4WBNlPesXyuZuiaP3vNDqKBviIEY+LZmSLRlaDO2J+lA
+         ZVcURruxzB/qLvpHlSwp85glzxlQW2WCKu1QPQACuDBT6QMr31HRVC3vuMEtrJao9Ldk
+         Nu3v6s9zcnkuxp5djOqEMODJi+ueIQMlzEjiZHQW1s4X00EWMdoHITMCvcYcZZX3Hd+a
+         UoAf1PiMJMwVHSLHuOoNDjvDYRynCv0ZZ1jnhP42kotQS7RjeUcDSTpHLp+/JuaH3ua5
+         DTtwcx47lz1i/moqg9TfpozHx8NeinxYtIbjgm3n0P0Pb/iQFyDpr5oCa4iF4JnMpMfL
+         nDUQ==
+X-Gm-Message-State: AOAM532wPSzWXpMhUI/M8TOO2zCHcDrBmFiCmDpg613QcTYWOXYQFnqD
+	SmPrDQ87GqquPU1MM6KHYbteVPJrHc8=
+X-Google-Smtp-Source: ABdhPJzh3msBRHA1MaZQTGzWyT+AVimrEiRPUXBIDZBmjBfA9WZnz+RjveZIeI0VWEQIri9I0HsYyA==
+X-Received: by 2002:a17:902:b694:b0:138:a031:610d with SMTP id c20-20020a170902b69400b00138a031610dmr15263405pls.36.1631984268907;
         Sat, 18 Sep 2021 09:57:48 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:f923:d379:e6c9:abf7])
-        by smtp.gmail.com with ESMTPSA id ga24sm13485274pjb.41.2021.09.18.09.57.47
+        by smtp.gmail.com with ESMTPSA id ga24sm13485274pjb.41.2021.09.18.09.57.48
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 18 Sep 2021 09:57:47 -0700 (PDT)
+        Sat, 18 Sep 2021 09:57:48 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 11/18] python3-pyperclip:set precise BSD license
-Date: Sat, 18 Sep 2021 09:57:31 -0700
-Message-Id: <20210918165738.2581429-11-akuster808@gmail.com>
+Subject: [meta-python][PATCH 12/18] python3-geojson: set precise BSD license
+Date: Sat, 18 Sep 2021 09:57:32 -0700
+Message-Id: <20210918165738.2581429-12-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210918165738.2581429-1-akuster808@gmail.com>
 References: <20210918165738.2581429-1-akuster808@gmail.com>
@@ -55,21 +55,21 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-pyperclip_1.8.2.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyperclip_1.8.2.bb b/meta-python/recipes-devtools/python/python3-pyperclip_1.8.2.bb
-index 5295bdaed3..2870ec9c01 100644
---- a/meta-python/recipes-devtools/python/python3-pyperclip_1.8.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyperclip_1.8.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb b/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb
+index 1a21230113..5c60673af4 100644
+--- a/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb
++++ b/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb
 @@ -1,6 +1,6 @@
- DESCRIPTION = "A cross-platform clipboard module for Python. (only handles plain text for now)"
- HOMEPAGE = "https://github.com/asweigart/pyperclip"
+ SUMMARY = "Python bindings and utilities for GeoJSON"
+ HOMEPAGE = "https://pypi.org/project/geojson/"
 -LICENSE = "BSD"
-+LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=d7dd4b0d1f7153322a546e89b5a0a632"
++LICENSE = "BSD-3-clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=f48972abe5cddee79e301574742ed745"
  
- SRC_URI[sha256sum] = "105254a8b04934f0bc84e9c24eb360a591aaf6535c9def5f29d92af107a9bf57"
+ SRC_URI[md5sum] = "14753ed28678828b1de73f68b04e2324"
 -- 
 2.25.1
 
