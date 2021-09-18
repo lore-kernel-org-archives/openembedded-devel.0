@@ -1,50 +1,50 @@
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
- by mx.groups.io with SMTP id smtpd.web09.873.1631984270365879146
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.web10.841.1631984271087415199
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Sep 2021 09:57:50 -0700
+ Sat, 18 Sep 2021 09:57:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=LNHktWMo;
- spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f182.google.com with SMTP id m21so3703896pgu.13
-        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Sep 2021 09:57:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=f9Q7SCx+;
+ spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f179.google.com with SMTP id 203so4327048pfy.13
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Sep 2021 09:57:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=xHU5vmhX6DSIshk5j0D5LLCvwLntBfu6+VBFDtW/pD4=;
-        b=LNHktWMo0EweiLGY2IIByc7d/vhYxgepN53689B48fcSCdhnMVMKuXrkA/ggLU/PUv
-         ZXB1a35vl5fTeUwe5Q6A6g5RIIpXNyZ9THGWQs6EUHPPA9kTQM0jjQocuLAuqOfDQVas
-         l85O+wJUU8UrrlaOyrnx4q68eqkNkFZaEm1BX4CBe17bo26AIblAmf0UJfRFvQQofaKo
-         T5nAapz0RTfoAQfic/SQBV5X0xABh07DXbrGSr/SFzXI061jQdGm0UCfgOy8Exd/BgQk
-         ckw/oTE5l6ZFnQ1Tt6EhT9Qh23M5+Fa/aQCeh1pb+/DRCKCWyf4OfYP8Ae+kDp+tXH8V
-         Z3kw==
+        bh=uxz0QldAY6rfvecHdVtw7iD9N6CM/ZQN59YSfXW7fig=;
+        b=f9Q7SCx+/L/5vLvl3tbSr/6IXvT+jNKGe/9T4hnJl4NYwSviH2EpdIkhvnrRKpv2DF
+         OP+FoGGlWbYSUkeYLtv/+pi6Uz212/Lacwg4Y016Cq9LnJwvI7sBTutvPQ0zsGEgALqA
+         X4Bh5CgqiHlvh5FSnPlijKzqBYsL23jV4zlPZ0d+H4sTWPy73spfQ7GxyonNjtN6qIv/
+         3NilHQ/dWfZGkJ6V9YD+bl0n8B1q3p3lwojbgmmfhHM0v8IIL53KC0I2g5mV4PYveZt0
+         ukfppztehtH9NVPwonuvz9iXlXk/F89+PwBrvNkd+5TuREL2Uzn06DiLOUe8CPemRxnR
+         8ZdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=xHU5vmhX6DSIshk5j0D5LLCvwLntBfu6+VBFDtW/pD4=;
-        b=edBYZTa17IEv7H1ZAQ2DWX6P2mFUlHS2ojayfN1dMrcJj9ernYaEIox7TyaLLqiEP3
-         kAlKZHv+megu3VkKxgxgwFimhxPCz3KK1elCSE/oixD2zcdrYet0TdfauAiMJQU1VdeU
-         KYnEBa7gsLgntnz4amI2eDI3iQ+tJfkUtnI4o4kmJm6VjQM3qrFCPaxG9/+xTJzXSbMu
-         hNIwldBOZ5/DhBVrx6kz+hn1HRh4rwBJRqJE+JRV0Jo7KWmHYj5JptzPCshCWKmgXcV9
-         b9dsIfpZQYZM/vi22iLUNyY2QFnq8uulLgI8/v1IbxDrt/c8B73HHZROY370b0+fAFI/
-         KEkw==
-X-Gm-Message-State: AOAM5309AO6ykDnkdnTCY5iqKWWhwfX9jTLLzFksLl41BTJvwxm573uo
-	qWpZ06LIvXm6aeoJxLKbUaglcknzCLc=
-X-Google-Smtp-Source: ABdhPJzKbsSXvB25WahFGCJHhN+sE8fsNmrjVhmYkqyEybckoaP9wQ9e+eeptFQ8wBwYgWx7O4bL+Q==
-X-Received: by 2002:a63:b20c:: with SMTP id x12mr8361183pge.10.1631984269725;
-        Sat, 18 Sep 2021 09:57:49 -0700 (PDT)
+        bh=uxz0QldAY6rfvecHdVtw7iD9N6CM/ZQN59YSfXW7fig=;
+        b=ovzYOmTpXkHEnw8+fyuT81xpdTg4OTOFgf9aYKkRPGBCBtxx1Mjjn9P+21ZH2hR90V
+         ZK/f00Y8WjXmpbAvb5k4SBuhZ5+dXz7Vk7FspPq4yPdE/TzrWIGxs/an5xPHIkJY0Jxh
+         ythkVQ13c5jaGAHS+oCEmCkRcp4KKr68exNWNqp5qfW5uB1ppV5dwh4KC0kE7k93J1YI
+         JYWLJ1/mAkZfYSyda0tXGfamOTCd/ZVjWsu7U5lktk3d5ANyqWwaNjIVmQsRSq3gdlsK
+         8Qm0FDUQ9gHe2SU3kIUe+qHOJG4N0XXOi5vbF6PVcFaalsgkm7iINLBpOhm3+ioUxrah
+         EqAQ==
+X-Gm-Message-State: AOAM5301ZiXTjZOCz6Ku29XB3n5gN0u/hcAr8/EH/wLBDpE4BHim5Pe+
+	V5dO+9Nlr6Aw+4hkRykR/wu5LfU3RzQ=
+X-Google-Smtp-Source: ABdhPJzAETZFiVzs/H35fn4tiLoMluBVKZsRLpgwpI+c2wZGa/XXkWxFzcg9Zbm/YQQ01TkitCx9rw==
+X-Received: by 2002:a62:7985:0:b0:437:36f1:d0df with SMTP id u127-20020a627985000000b0043736f1d0dfmr16697263pfc.52.1631984270476;
+        Sat, 18 Sep 2021 09:57:50 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:f923:d379:e6c9:abf7])
         by smtp.gmail.com with ESMTPSA id ga24sm13485274pjb.41.2021.09.18.09.57.49
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 18 Sep 2021 09:57:49 -0700 (PDT)
+        Sat, 18 Sep 2021 09:57:50 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 13/18] python3-aenum: set precise BSD license
-Date: Sat, 18 Sep 2021 09:57:33 -0700
-Message-Id: <20210918165738.2581429-13-akuster808@gmail.com>
+Subject: [meta-python][PATCH 14/18] python3-gnupg: set precise BSD license
+Date: Sat, 18 Sep 2021 09:57:34 -0700
+Message-Id: <20210918165738.2581429-14-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210918165738.2581429-1-akuster808@gmail.com>
 References: <20210918165738.2581429-1-akuster808@gmail.com>
@@ -55,21 +55,21 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-aenum_3.1.0.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-gnupg_0.4.7.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-aenum_3.1.0.bb b/meta-python/recipes-devtools/python/python3-aenum_3.1.0.bb
-index cb5eab15ae..999fd5a3d1 100644
---- a/meta-python/recipes-devtools/python/python3-aenum_3.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-aenum_3.1.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-gnupg_0.4.7.bb b/meta-python/recipes-devtools/python/python3-gnupg_0.4.7.bb
+index 5808c8db05..83ee57926e 100644
+--- a/meta-python/recipes-devtools/python/python3-gnupg_0.4.7.bb
++++ b/meta-python/recipes-devtools/python/python3-gnupg_0.4.7.bb
 @@ -1,6 +1,6 @@
- SUMMARY = "Advanced Enumerations library"
- HOMEPAGE = "https://pypi.org/project/aenum/"
+ SUMMARY = "A wrapper for the Gnu Privacy Guard (GPG or GnuPG)"
+ SECTION = "devel/python"
 -LICENSE = "BSD"
 +LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://aenum/LICENSE;md5=c6a85477543f8b8591b9c1f82abebbe9"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b0b7ac63b60085b23fa9f7e1951daa1d"
  
- SRC_URI[sha256sum] = "87f0e9ef4f828578ab06af30e4d7944043bf4ecd3f4b7bd1cbe37e2173cde94a"
+ PYPI_PACKAGE = "python-gnupg"
 -- 
 2.25.1
 
