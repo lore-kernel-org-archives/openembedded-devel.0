@@ -1,79 +1,87 @@
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web12.2192.1631991333336371579
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
+ by mx.groups.io with SMTP id smtpd.web10.2255.1631992229170315365
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Sep 2021 11:55:33 -0700
+ Sat, 18 Sep 2021 12:10:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=iRsgTq/Z;
- spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id g14so12407786pfm.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Sep 2021 11:55:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=F44TrrgA;
+ spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f176.google.com with SMTP id h3so13123480pgb.7
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Sep 2021 12:10:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=MSu4FPP304UfEJR0U9WIM+nKEo25ASSJ1F1o2TQEADg=;
-        b=iRsgTq/ZbX9PakIXtDKQ7UWcVC+1dmpdRQNcWz3lfLToNHiQKyXu17xeR8uhpwNRBq
-         U3uQgviyNUWEb4QLoNjndnbVKKR6s3mOEZ/kw2Rhv9a3jESY2/p58E+sqkHF0Xj2nXjp
-         g3gvGH4XN/sVdFSBrBqcr3uBhoMUKVkz0x5H3JS7BEDWza5i2XbrHF7Dan0V3isfW6Eo
-         LDxp9O4aDBb8e/t6VYPnoKoC7ODIKHZrHEV0zLhxWqRnfPaQQIb8yYO8VaeZ6cm6LnsL
-         gQGP+SnnAk2Rm8aUpNwACglG7Qs+EuiGwgEzyhg2mzoyFze3mKcbT9tlIf/EO2k0j61M
-         yTmg==
+        h=to:from:subject:message-id:date:user-agent:mime-version
+         :content-transfer-encoding:content-language;
+        bh=8z+6ygBhE+/zOwKXMv93BN2TRKFaeO3eZISqZX/pMsA=;
+        b=F44TrrgAIjS6vIGlfE4eZ3BuHDKHam0RMRxSspG4tXRcdTyKt4Z2j3wb2sKT2HH5dQ
+         WfGVJ5ulPjzWd/vXswwfXTdt+ymuLZjiBUAwxrqA2CtiePOhniSSghdJUllSPflZZwMG
+         nVv2GzfDrEawuKYlXNO9pleqzA4V4usYe6QR1iFGGp89wWt46gO1Vu7tlRk/KYfTggX+
+         XnriP7lva4CjSisP7Bektzh/G2fpVWtaru1dYPKiIkoTrCaX7hcR3GtiPcTKQL2fhkNm
+         HxszUntXbqrVrGUyNduMCecwRmvTOh71UVq/03Q7lIIHiPYIysMvDS8y++I79IRUIauW
+         YHWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=MSu4FPP304UfEJR0U9WIM+nKEo25ASSJ1F1o2TQEADg=;
-        b=ML9/ht8SJkautc8s0GUtKpvLcXgh8csOlTTvWKcrjxwE55/L8cmk160TWJK0wjAkiP
-         QK/qeMn7QVTS6KP6HJQ6VtExKhINOuN4ZHbfUgR59JJmXiM1icuuxtKDu1ZyDkD1zG/J
-         74c3WdkXH3YajGXSNWAxRcDLBRuw5sOQnNpuQbKlwLeepp40B9TIDSXGZblMJYM3JWYJ
-         I59svK2pbYFNg8SJGBZvICaGlf1k85fgOhgxuPyXrQtyO1JTzs8/n5DpQq5kb2eJe2ft
-         KmZCpHvUMSrRn1qn84ecNRt5iNlIPNnKkhtmFYwuQDXLIq/kFPFA9MxTEEn+JIS9D5id
-         2W/g==
-X-Gm-Message-State: AOAM5327FVM6oHIFu3GTvjZwg+6ygkej6rkKuoTfdtgf++195lcsK9Wm
-	otVxk5FkPZkUjwmoh3IqklkN5vARW6o=
-X-Google-Smtp-Source: ABdhPJzAEfKWKe8MgSRMdRNI9IbEmlP9zZebF12vjEnUOMuIbrPMDfD2LKM1TgD0R2IEUjeEjF3ypA==
-X-Received: by 2002:a62:76c8:0:b0:3f2:6a5:b8eb with SMTP id r191-20020a6276c8000000b003f206a5b8ebmr16844108pfc.58.1631991332741;
-        Sat, 18 Sep 2021 11:55:32 -0700 (PDT)
+        h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+         :mime-version:content-transfer-encoding:content-language;
+        bh=8z+6ygBhE+/zOwKXMv93BN2TRKFaeO3eZISqZX/pMsA=;
+        b=n/janLfO/Bh3dipVCHR5b3oGTxlr+4JiLRSy5GCpVDysqa/UBXP3bZFu+D0Odf4j6A
+         iYmfxy3F+eBLVWRWD/1R4p1Bn2cK9xOd4D1UkkTEk/rQW2K0UvPdxEJrpp3BY/PBYbEr
+         KCbQ75nQTUQslT6tuU78eXzjWbyGy+eLDc7NNjSRakEjuEurZaQ2wcfg84K7d9DpdTMB
+         JrjK5OgAjudw4uK8Y1MWrZuVySJOO48xYoTS6B16UJ2na02F7y+S1z08nRGiCcSe4UyI
+         7h81UtVpJ1iadthnou8LId2GQRG/nHYGRqLUGMUM+5j/Ifc8TvXpnpyPRjDm1KaRoEq9
+         qCyQ==
+X-Gm-Message-State: AOAM533yoVigeDErTuzUDJs8KmXWvMd8/k/uMb1xzVR+TlWkmD3Yd1Vu
+	h4XbCkmDYB+mzoz59gRLn+cFXB84HOI=
+X-Google-Smtp-Source: ABdhPJz7V7mzzS/2XpDL8HTuAp8vnXNaWJJiP+7c/wHAyzbL1C+hu4RPK7sSroZ5sQJm1jX9FFsoDw==
+X-Received: by 2002:a63:741b:: with SMTP id p27mr16089769pgc.140.1631992228478;
+        Sat, 18 Sep 2021 12:10:28 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
-Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:f923:d379:e6c9:abf7])
-        by smtp.gmail.com with ESMTPSA id j11sm14579383pjd.45.2021.09.18.11.55.32
+Received: from ?IPv6:2601:202:4180:a5c0:f923:d379:e6c9:abf7? ([2601:202:4180:a5c0:f923:d379:e6c9:abf7])
+        by smtp.gmail.com with ESMTPSA id 11sm9119820pfl.41.2021.09.18.12.10.27
         for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 18 Sep 2021 11:55:32 -0700 (PDT)
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 18 Sep 2021 12:10:28 -0700 (PDT)
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 From: "Armin Kuster" <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] autossh: set precise BSD licenses
-Date: Sat, 18 Sep 2021 11:55:31 -0700
-Message-Id: <20210918185531.3691939-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Subject: meta-networking: fping license
+Message-ID: <01841159-90c6-ba5f-62e6-b4e5859a770e@gmail.com>
+Date: Sat, 18 Sep 2021 12:10:27 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-One file is BSD-1-Clause while another is BSD-4-Clause
-Set and check accourdingly
+Hello,
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../recipes-connectivity/autossh/autossh_1.4g.bb            | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+The LICENSE listed in this recipe is "BSD" and it clearly is not that
+nor could I find the below wording matching any of the BSD variants (
+Not a Lawyer). Now that SPDX data can be generated easier from core,
+this may barf with the invalid "License".  This is the last outstanding
+invalid BSD license in meta-oe and if anyone uses this package, maybe
+you can dig into finding out what the proper license should be.
 
-diff --git a/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb b/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb
-index 125dfaaa97..3dc304b23c 100644
---- a/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb
-+++ b/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb
-@@ -1,8 +1,10 @@
- DESCRIPTION = "autossh is a program to start a copy of ssh and monitor it, restarting it as necessary should it die or stop passing traffic"
- HOMEPAGE = "https://www.harding.motd.ca/autossh/"
- 
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://autossh.spec;md5=80a6701134723fd3420e733b46a0eb97"
-+LICENSE = "BSD-1-Clause & BSD-4-Clause"
-+LIC_FILES_CHKSUM = "file://autossh.spec;md5=80a6701134723fd3420e733b46a0eb97 \
-+                    file://autossh.c;md5=76c37acd40ac45050a4ced145b1e2707;startline=7;endline=23 \
-+                    file://daemon.h;md5=6bbeaac616b9bc8de7b40049004f4289;startline=7;endline=39"
- 
- SRC_URI = "https://www.harding.motd.ca/autossh/${BP}.tgz"
- SRC_URI[md5sum] = "2b804bc1bf6d2f2afaa526d02df7c0a2"
--- 
-2.25.1
+- Armin
+
+
+Constance of 'COPYING':
+
+* Original author:  Roland Schemers  <schemers@stanford.edu>
+ * IPv6 Support:     Jeroen Massar    <jeroen@unfix.org / jeroen@ipng.nl>
+ * Improved main loop: David Schweikert <david@schweikert.ch>
+ * Debian Merge, TOS settings: Tobi Oetiker <tobi@oetiker.ch>
+ * Bugfixes, byte order & senseful seq.-numbers: Stephan Fuhrmann
+(stephan.fuhrmann AT 1und1.de)
+ *
+ * Redistribution and use in source and binary forms are permitted
+ * provided that the above copyright notice and this paragraph are
+ * duplicated in all such forms and that any documentation,
+ * advertising materials, and other materials related to such
+ * distribution and use acknowledge that the software was developed
+ * by Stanford University.  The name of the University may not be used
+ * to endorse or promote products derived from this software without
+ * specific prior written permission.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+ * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 
