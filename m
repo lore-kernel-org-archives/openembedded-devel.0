@@ -1,50 +1,50 @@
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web10.838.1631984263231628584
+Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
+ by mx.groups.io with SMTP id smtpd.web09.870.1631984264150839343
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Sep 2021 09:57:43 -0700
+ Sat, 18 Sep 2021 09:57:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=OTSp4z0D;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id l6so3506923plh.9
-        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Sep 2021 09:57:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=acnbqKQx;
+ spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f174.google.com with SMTP id m21so3703698pgu.13
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Sep 2021 09:57:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=Q+LKXchSA5uWR7ohTaDuGJpaorKp6JoGe+hCKIKjdj4=;
-        b=OTSp4z0DmU6wsw3+Xe1Iz1OtDOaf9BbCmQpMvNvygFbg3GdQzO1FIHTyeRLog6XgaT
-         zrMIujNSWEUz3inPozeA31mzjjSFS1hbM3+QF2SJ3RGqdrROWY6NAnftMI5pScro8EIU
-         49OKo0b7GAyZEzY7sMKouirHdzK3sd/RXCRr/mpwU0f62XcxJ6DNAv8mKgmsmd+Iwlza
-         1KcPeSRDmSJ3Xwf1aeDX82hcZWB/9Lu7nad2XbrBttFGZcVsIg/NDX6RkW0c1JEbNpGN
-         kH9qiNXRxK0rEHBmb+TMxu+kofhXSQQI/oHMDR7/UA6QjayK4YB/D8mkpq3Aq4b9mUy/
-         pg2w==
+        bh=HlVbPIwUpKFuiggsQqIBULFcwu4N4P8+AtLU0hlfXWI=;
+        b=acnbqKQxLu3+7mQ9/9nuGNszQ+4wTU/qOV5oyeFQLaWGLvJLpnDvQ775xTnRxn1gaV
+         Vorw0EFJDUS2ZloMH4efxpowmVqg0Qt2llfWH/NyX3O1a6KoAzv7M4TfiyXkXSSyfIu+
+         sBGuBrllD+r4iD1+hFxei+/CCMi/C7J8Xn9nLmDEBYOGynFf/TqAh5590+QHx9gPaOOc
+         HXZGXFvLvT/Me6zqXxtPJTFVYlsnpB/Afer4T8fep4HrzkCaaMQgWMhPmyjzB41/vzCs
+         81Caei+gOSxmznRL6DXKBw4esEDUwn+nuoSPkLAsR315vVXu/BOdUqnFVkfrzByd0ZJW
+         pDXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=Q+LKXchSA5uWR7ohTaDuGJpaorKp6JoGe+hCKIKjdj4=;
-        b=49a/MSBw6I+jSLWXBeB8u6KArAOzkVEjGhTJ9Yw5ZC+OxjwxwvuKWM1wfUbdfUuj+b
-         wjpErDYMtbiWrlA/szXr1AGeuDN52c62c+ZG22FRw8YB8v7lvxF2YWPdlPU/CCIRkDNk
-         Hi/nBT9KhiH5tR/ipGb1n6Rj78wjkBsawcUbIys+g/aQiy18Wi0MeXf0sq/cgkDiyAub
-         IqKUAicWctu2UIarODruUYFMLTMbysvH2U0HyzrYqORg9u44eJmL1YtcgoOw9Au2JzDf
-         +6j4DsP/BCIW0UP2XkhtE9jtq2KtShn4YX6vpS8hOz3PNuCSpwTd8z9wbYlC4qSyHyOn
-         2R/Q==
-X-Gm-Message-State: AOAM533uOS60ZQ/ATUiTOqOnX8szDN22DxaaryQyl06xNEc46LxIUgqm
-	05in57UIt9Y5ZZ6Swi2g2E4QWKpLtu8=
-X-Google-Smtp-Source: ABdhPJxgLnUsPud+DChBpbs1PvSgfFBYDqj3BDQC1kn1ZV35p1gnQLBogrK8gfn2w51vFJhdEAqunA==
-X-Received: by 2002:a17:90a:eb02:: with SMTP id j2mr28352675pjz.174.1631984262652;
-        Sat, 18 Sep 2021 09:57:42 -0700 (PDT)
+        bh=HlVbPIwUpKFuiggsQqIBULFcwu4N4P8+AtLU0hlfXWI=;
+        b=q5L5ZtPbB6RyBHLY4iKwfLUBb1OM6wuxAzGxypRYVbzd1MnrlU/mb+KTwuVg/C8AH7
+         /kzkn0PG49qq5btX5560QUw3M8hZyfWshyOk7daVL2dZ1jdl7tVlOYMAhp81wjkAoGrh
+         P2YSNzRv00IjTJErIH/1HSh5oGcvJny6uN4XsBIoLAWGRiqgzPUmjkitBe9TjZT1px3C
+         ZyuYIjhwuMzKX/oKOXi87ULNnlHMMOBewv+CyxanXiVzswQEAP+Cmmu9fnx3gTgZoqyv
+         8JVoYgopTXy4e9SgmYkdxyD6mQ7F7mU3bEaD4EaYNT9JhL4qZaxv/EykzUmYxOs9GKKQ
+         Lekw==
+X-Gm-Message-State: AOAM533ux8I/OnRqfB4+lPnZy+HUDE2+01EuSqt/gofBTJjx4n6Xp1bV
+	m34ocmS3b6sfs/3GDMQzxLQPpJrZhCI=
+X-Google-Smtp-Source: ABdhPJxwN1O1Hjopqx7wjjFCq7L9IVb2V93dfQg6VL0aCXyC+GSGzPWFl70LoZzCUAA26nTIIqebiA==
+X-Received: by 2002:a65:4cc3:: with SMTP id n3mr15598697pgt.326.1631984263419;
+        Sat, 18 Sep 2021 09:57:43 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:f923:d379:e6c9:abf7])
         by smtp.gmail.com with ESMTPSA id ga24sm13485274pjb.41.2021.09.18.09.57.42
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 18 Sep 2021 09:57:42 -0700 (PDT)
+        Sat, 18 Sep 2021 09:57:43 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 05/18] python3-parallax: set precise BSD license
-Date: Sat, 18 Sep 2021 09:57:25 -0700
-Message-Id: <20210918165738.2581429-5-akuster808@gmail.com>
+Subject: [meta-python][PATCH 06/18] python3-ipython:set precise BSD license
+Date: Sat, 18 Sep 2021 09:57:26 -0700
+Message-Id: <20210918165738.2581429-6-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210918165738.2581429-1-akuster808@gmail.com>
 References: <20210918165738.2581429-1-akuster808@gmail.com>
@@ -55,21 +55,22 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-parallax_1.0.6.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-ipython_7.27.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-parallax_1.0.6.bb b/meta-python/recipes-devtools/python/python3-parallax_1.0.6.bb
-index 00a4ec86b7..14c90ffb58 100644
---- a/meta-python/recipes-devtools/python/python3-parallax_1.0.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-parallax_1.0.6.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Execute commands and copy files over SSH to multiple machines at once."
- HOMEPAGE = "https://github.com/krig/parallax/"
+diff --git a/meta-python/recipes-devtools/python/python3-ipython_7.27.0.bb b/meta-python/recipes-devtools/python/python3-ipython_7.27.0.bb
+index 2ec0722c35..3c64b82c2d 100644
+--- a/meta-python/recipes-devtools/python/python3-ipython_7.27.0.bb
++++ b/meta-python/recipes-devtools/python/python3-ipython_7.27.0.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "IPython: Productive Interactive Computing"
+ HOMEPAGE = "https://ipython.org"
+ AUTHOR = "The IPython Development Team <ipython-dev@python.org>"
 -LICENSE = "BSD"
 +LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=52c67ffa6102f288a0347f8c5802fd18"
+ LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
  
- SRC_URI[md5sum] = "e312397b083426af84db7076dc2a28d7"
+ PYPI_PACKAGE = "ipython"
 -- 
 2.25.1
 
