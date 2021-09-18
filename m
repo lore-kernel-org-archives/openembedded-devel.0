@@ -1,76 +1,76 @@
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
- by mx.groups.io with SMTP id smtpd.web11.870.1631984272982434641
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.web11.871.1631984273611943072
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 18 Sep 2021 09:57:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=JYuiWyBw;
- spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f177.google.com with SMTP id w19so12109510pfn.12
-        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Sep 2021 09:57:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=kPsr7Mvn;
+ spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f172.google.com with SMTP id 17so12916316pgp.4
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Sep 2021 09:57:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=IiC6enG+fkzh90QKye+9Lz0RhvRHdJnC6aNuwo4MQHU=;
-        b=JYuiWyBwwbOdpXxqxdd53j7kxZC8kW2cR5xqe6acUFBNaG4DEEYSGnT8grEswg0EuN
-         dkEq+CCRH3Bcb7q4FX5kQwkZYrQ3pZbcmycaAwDJ5XvVyyfnSb/8uSC83C+GW86va9ah
-         zWhOlPGDSP6swIAvaz9EtM4E7Br8Q6r5nxAzIb9R2Kd9z919r7wPaagaXwspO1yBzYy4
-         6EK217wdrwoimGIcrVinY+SiDORtNsySLyaiZBXRYudIfhL/PxbkAiIh4xiLwsh5qXYW
-         MDNx17NBTFLJ7v/+SnTjbioLguq0J07C3PCXeJpHCLVtj43CqpOCweTRjjKnWv0CbFN6
-         F17w==
+        bh=b17Puuo78CcRs4idQeMyvIi0gkSSAIbRi2e309B0RVs=;
+        b=kPsr7MvntVNX/NxVJ2UHTNZRuarmfstJOVrQJg+B/fzHUHUT40VcypZixYZGKnc0Gq
+         FRqkDthleSeVUw7czHXY6O9ezwJZ2AMv7cKy1yCJAlcY+0kPrxvVciKO4G6sGUilUrpE
+         IaYROA0EtixCs9oLOq9LwfM5ukUV/OuQnBi1n8BKn8jDy55LAR1CxP6YcMUHwofb5bXL
+         uc2DDaobQXtgiMRPtNdhqFyaPRIPXxDjtxloBCTk+C7iJjj74Fp9WpsW4WrNG+Lold2c
+         nIfiDTNdYd9Oob2OVXJTYNeoTOa1ywuCBPvZC6N2XkW2JJm0OcYKrb5wNzzktkTm86uF
+         h8EQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=IiC6enG+fkzh90QKye+9Lz0RhvRHdJnC6aNuwo4MQHU=;
-        b=nvCDDwH+2d+LBqlDXIsUSCwCOWnhHPY8uQ7BpBvjqa2EM7glwYKjH8btniJ5YN0W6f
-         tfxwFzpt6/s8LUY2XUk4fL6hxupp4IxQv+NkV/yEIljxSls8zUInvmb0GNN4KEXABKBn
-         1ggVmCUMpJ1zU5hOjJtnt0xMyLzh1w1konnW7MdyidKI3t2eWeDhbH+lml83s7P+zw0s
-         OpcuciCPjL/4QTIiRH6yQfARJJb+XYPLL4YMd/RfRcSppeXD8u7z52hunZf6ecuP8GPb
-         +JN27Hc6Bp5C/ou30UoFlruwrutMJBsZHg8JbvfB3QWMfD0g+8Wrhfpgic9zjeSpZjRm
-         Kogg==
-X-Gm-Message-State: AOAM532juIUjL2UfqkHWaxH4uNtPugqVBNOR9ntQLjQ/QxaVJABa3sXo
-	tDmdbXaC/5fRCXuKxdvFldt2L7CtuJw=
-X-Google-Smtp-Source: ABdhPJwNNNDzsOQNPT2s6RbASbQ3+AYbBze890Jt0wueVILC6/HbXbaMABndYFKTe7CzRLH9gugBLg==
-X-Received: by 2002:a05:6a00:1307:b0:43d:2b4:419a with SMTP id j7-20020a056a00130700b0043d02b4419amr17063325pfu.62.1631984272376;
-        Sat, 18 Sep 2021 09:57:52 -0700 (PDT)
+        bh=b17Puuo78CcRs4idQeMyvIi0gkSSAIbRi2e309B0RVs=;
+        b=sKN1dVZruP/1ymKkwc7arj+fez0/8JZZuEOZiVA4mngyHyUyQ13WBV2qSpdsVqR1BZ
+         cmQ0zQfvgseY0aEfSkVWRetL0nV5OK/CeO5SYgGzMwV/qaqKA6vLoKZ2fanlPTv+ie1S
+         +VuNekW4VqzeKFKMek7muCBjViYYkrLooCdj4mEmZUUOhlSaIuG/qFZbFFVbhF/HQd0D
+         c/tKKG6+JsdRes9km1gUnEaXfyM3OWxjtHE5nFHeas6F0PqtM5UMoqi1HjdqhTieol0O
+         3KklzCB8ot2p9KGkEon3R/fcE7S3hW0bPbIfQ4NLagLIYHJDvtx3uqtjNyWDtBjZEE54
+         BmnQ==
+X-Gm-Message-State: AOAM533CKV/EfiDUwZ6Mrm7eDrHxQB/6QAR1/Lmuvqj8yvT6lA/vWC2s
+	yqwMTG+QxeVixNV40cnCaKVnmg5XE80=
+X-Google-Smtp-Source: ABdhPJw1KWQM6vpctUJX3SV0SI7I9RNO7Qt3dtT3w28GvQ7p0tmyPt2UmheGqdi0ECCzdAwOzTH9eA==
+X-Received: by 2002:a05:6a00:983:b0:444:ac28:1ee1 with SMTP id u3-20020a056a00098300b00444ac281ee1mr9888743pfg.49.1631984273061;
+        Sat, 18 Sep 2021 09:57:53 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:f923:d379:e6c9:abf7])
-        by smtp.gmail.com with ESMTPSA id ga24sm13485274pjb.41.2021.09.18.09.57.51
+        by smtp.gmail.com with ESMTPSA id ga24sm13485274pjb.41.2021.09.18.09.57.52
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sat, 18 Sep 2021 09:57:52 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 16/18] python3-jdcal: set precise BSD license
-Date: Sat, 18 Sep 2021 09:57:36 -0700
-Message-Id: <20210918165738.2581429-16-akuster808@gmail.com>
+Subject: [meta-python][PATCH 17/18] python-flask-bootstrap: Update LICENSES
+Date: Sat, 18 Sep 2021 09:57:37 -0700
+Message-Id: <20210918165738.2581429-17-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210918165738.2581429-1-akuster808@gmail.com>
 References: <20210918165738.2581429-1-akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-"BSD" is ambiguous, use the precise licenses BSD-2-Clause
+"BSD" is ambiguous, use the precise licenses BSD-3-Clause
+
+Missing MIT and Apache 2-0...
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-jdcal_1.4.1.bb | 2 +-
+ meta-python/recipes-devtools/python/python-flask-bootstrap.inc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-jdcal_1.4.1.bb b/meta-python/recipes-devtools/python/python3-jdcal_1.4.1.bb
-index 765de4d4f4..8655150b03 100644
---- a/meta-python/recipes-devtools/python/python3-jdcal_1.4.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-jdcal_1.4.1.bb
-@@ -4,7 +4,7 @@ and another function for converting Julian calendar dates to Julian dates are de
- Two functions for the reverse calculations are also defined."
- 
- HOMEPAGE = "https://github.com/phn/jdcal"
+diff --git a/meta-python/recipes-devtools/python/python-flask-bootstrap.inc b/meta-python/recipes-devtools/python/python-flask-bootstrap.inc
+index 688622afa6..58b542dd16 100644
+--- a/meta-python/recipes-devtools/python/python-flask-bootstrap.inc
++++ b/meta-python/recipes-devtools/python/python-flask-bootstrap.inc
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "An extension that includes Bootstrap in your project, without any boilerplate code."
 -LICENSE = "BSD"
-+LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://PKG-INFO;md5=bd236e1f590973467a427bb354be0f46"
++LICENSE = "Apache-2.0 && MIT && BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;md5=a03749709f06118a17349deb5a210619"
  
- inherit pypi setuptools3 ptest
+ SRC_URI[md5sum] = "e40d50f5c5b6438c1c6200a6f2871f81"
 -- 
 2.25.1
 
