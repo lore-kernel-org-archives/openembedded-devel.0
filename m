@@ -1,74 +1,79 @@
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web11.2125.1631991292446001169
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.web12.2192.1631991333336371579
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Sep 2021 11:54:52 -0700
+ Sat, 18 Sep 2021 11:55:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=TWDsHH64;
- spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id v2so8378781plp.8
-        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Sep 2021 11:54:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=iRsgTq/Z;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f180.google.com with SMTP id g14so12407786pfm.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Sep 2021 11:55:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=GzntSOwYhH38Q88PsTOINH22OgHVsKnLkTXWwTEJwRw=;
-        b=TWDsHH647XB1qkp7dsGDcGcI+WU8sNS0BMw6OWZvPFBnazXdZX2fntS25XpQHmtZoG
-         z645qwMPxpqTuDBMDiitR5FB+rb0vyQIxwYhPXDO+ighixjjSMZjIv4Hyw52EIfAApK6
-         LEV6oF1tZAK5FoqzbVTyiz7QD77Q4G9fkwbjvj/QZW4OzIUrqcJvXBzwF05bmwKIBNdS
-         SAIBFhyRinSkzsjPLCBCduSpMVqxhRtktVGfTpIRR5oREA4yUO4cZ4tgM6XjuujTKCaC
-         boISON6cOcIk2jEA8MAVLY5rFOsw7vGZ86tlVd82H+gSOeZgcGZQhBIzo6TvvPItzoSD
-         tYQw==
+        bh=MSu4FPP304UfEJR0U9WIM+nKEo25ASSJ1F1o2TQEADg=;
+        b=iRsgTq/ZbX9PakIXtDKQ7UWcVC+1dmpdRQNcWz3lfLToNHiQKyXu17xeR8uhpwNRBq
+         U3uQgviyNUWEb4QLoNjndnbVKKR6s3mOEZ/kw2Rhv9a3jESY2/p58E+sqkHF0Xj2nXjp
+         g3gvGH4XN/sVdFSBrBqcr3uBhoMUKVkz0x5H3JS7BEDWza5i2XbrHF7Dan0V3isfW6Eo
+         LDxp9O4aDBb8e/t6VYPnoKoC7ODIKHZrHEV0zLhxWqRnfPaQQIb8yYO8VaeZ6cm6LnsL
+         gQGP+SnnAk2Rm8aUpNwACglG7Qs+EuiGwgEzyhg2mzoyFze3mKcbT9tlIf/EO2k0j61M
+         yTmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=GzntSOwYhH38Q88PsTOINH22OgHVsKnLkTXWwTEJwRw=;
-        b=lyJmYdlxjQthsR5aqd+YjQFRfHg+Ctz6FHIj+CvfKJZhsD5M5q2fu74XIM66WBSMh4
-         wZQu2LQAMVbGiLsN5v5TCDbpJwrNKXn7/WaEiBryPE8Un2ownv+veBQyCcJLh/7z5DcN
-         SXE9RRkP9y5Wj0y5QcXMRNdZPRl95N6lMhOJQ7C+occRBQ/m6gZS5AhDVDbGHVJjtcC7
-         87DwDYE2hp6eh9/9ekskk9uM+mgHcb782d4ZNXCrmclfY/JtpvCuJwJRk7d7zxgrFYvp
-         /lcPeOZHUCgHJ6zm/1Llt4FVr48K4Ekt+jblmrg2IMiEU/Gb4rnuQ59F4KbT2k7gv4Dj
-         Dg8Q==
-X-Gm-Message-State: AOAM533KwcqQ4lD9ZaCii0JGKRAZbJ6SxYdA+e2psoZMoI5UY6tYuEuL
-	qdSmHINv25iotc1uOVzvKruJnAhor3A=
-X-Google-Smtp-Source: ABdhPJzTS1xf7maQ8QmARMceyx7vA7RnHYMLvrQXKVilJsdFR7qGp6CFGXS8KXvDJOF8nYcM5UMhlQ==
-X-Received: by 2002:a17:902:6b49:b0:136:3f21:7a9 with SMTP id g9-20020a1709026b4900b001363f2107a9mr15388324plt.81.1631991291703;
-        Sat, 18 Sep 2021 11:54:51 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=MSu4FPP304UfEJR0U9WIM+nKEo25ASSJ1F1o2TQEADg=;
+        b=ML9/ht8SJkautc8s0GUtKpvLcXgh8csOlTTvWKcrjxwE55/L8cmk160TWJK0wjAkiP
+         QK/qeMn7QVTS6KP6HJQ6VtExKhINOuN4ZHbfUgR59JJmXiM1icuuxtKDu1ZyDkD1zG/J
+         74c3WdkXH3YajGXSNWAxRcDLBRuw5sOQnNpuQbKlwLeepp40B9TIDSXGZblMJYM3JWYJ
+         I59svK2pbYFNg8SJGBZvICaGlf1k85fgOhgxuPyXrQtyO1JTzs8/n5DpQq5kb2eJe2ft
+         KmZCpHvUMSrRn1qn84ecNRt5iNlIPNnKkhtmFYwuQDXLIq/kFPFA9MxTEEn+JIS9D5id
+         2W/g==
+X-Gm-Message-State: AOAM5327FVM6oHIFu3GTvjZwg+6ygkej6rkKuoTfdtgf++195lcsK9Wm
+	otVxk5FkPZkUjwmoh3IqklkN5vARW6o=
+X-Google-Smtp-Source: ABdhPJzAEfKWKe8MgSRMdRNI9IbEmlP9zZebF12vjEnUOMuIbrPMDfD2LKM1TgD0R2IEUjeEjF3ypA==
+X-Received: by 2002:a62:76c8:0:b0:3f2:6a5:b8eb with SMTP id r191-20020a6276c8000000b003f206a5b8ebmr16844108pfc.58.1631991332741;
+        Sat, 18 Sep 2021 11:55:32 -0700 (PDT)
 Return-Path: <akuster808@gmail.com>
 Received: from keaua.hsd1.ca.comcast.net ([2601:202:4180:a5c0:f923:d379:e6c9:abf7])
-        by smtp.gmail.com with ESMTPSA id q21sm8503698pjg.55.2021.09.18.11.54.51
+        by smtp.gmail.com with ESMTPSA id j11sm14579383pjd.45.2021.09.18.11.55.32
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 18 Sep 2021 11:54:51 -0700 (PDT)
+        Sat, 18 Sep 2021 11:55:32 -0700 (PDT)
 From: "Armin Kuster" <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] gpsd-machine-conf: set precise BSD license
-Date: Sat, 18 Sep 2021 11:54:49 -0700
-Message-Id: <20210918185449.3691848-2-akuster808@gmail.com>
+Subject: [meta-networking][PATCH] autossh: set precise BSD licenses
+Date: Sat, 18 Sep 2021 11:55:31 -0700
+Message-Id: <20210918185531.3691939-1-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210918185449.3691848-1-akuster808@gmail.com>
-References: <20210918185449.3691848-1-akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-"BSD" is ambiguous, use the precise licenses BSD-3-Clause
+One file is BSD-1-Clause while another is BSD-4-Clause
+Set and check accourdingly
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-navigation/gpsd/gpsd-machine-conf_1.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-connectivity/autossh/autossh_1.4g.bb            | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-machine-conf_1.0.bb b/meta-oe/recipes-navigation/gpsd/gpsd-machine-conf_1.0.bb
-index d2058ba570..8d74eb4a2c 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd-machine-conf_1.0.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd-machine-conf_1.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Machine specific gpsd config"
--LICENSE = "BSD"
-+LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/BSD;md5=3775480a712fc46a69647678acb234cb"
+diff --git a/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb b/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb
+index 125dfaaa97..3dc304b23c 100644
+--- a/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb
++++ b/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb
+@@ -1,8 +1,10 @@
+ DESCRIPTION = "autossh is a program to start a copy of ssh and monitor it, restarting it as necessary should it die or stop passing traffic"
+ HOMEPAGE = "https://www.harding.motd.ca/autossh/"
  
- # empty by default
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://autossh.spec;md5=80a6701134723fd3420e733b46a0eb97"
++LICENSE = "BSD-1-Clause & BSD-4-Clause"
++LIC_FILES_CHKSUM = "file://autossh.spec;md5=80a6701134723fd3420e733b46a0eb97 \
++                    file://autossh.c;md5=76c37acd40ac45050a4ced145b1e2707;startline=7;endline=23 \
++                    file://daemon.h;md5=6bbeaac616b9bc8de7b40049004f4289;startline=7;endline=39"
+ 
+ SRC_URI = "https://www.harding.motd.ca/autossh/${BP}.tgz"
+ SRC_URI[md5sum] = "2b804bc1bf6d2f2afaa526d02df7c0a2"
 -- 
 2.25.1
 
