@@ -1,74 +1,72 @@
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.web08.343.1632168388709870292
+Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
+ by mx.groups.io with SMTP id smtpd.web10.845.1632170523063704852
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Sep 2021 13:06:28 -0700
+ Mon, 20 Sep 2021 13:42:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=dCUdFdOi;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: geoffhp@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id lb1-20020a17090b4a4100b001993f863df2so808276pjb.5
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Sep 2021 13:06:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=n9puxEgg;
+ spf=pass (domain: gmail.com, ip: 209.85.167.52, mailfrom: jacob.kroon@gmail.com)
+Received: by mail-lf1-f52.google.com with SMTP id y28so71161642lfb.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Sep 2021 13:42:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=SDgAvLNbhVtNRfA8mZFcEe/QP1268rn+5vO2VJlvAUE=;
-        b=dCUdFdOiFseQJVZxTbIs27fYZR+j9jtaGLvp4ZYLkBtcNo29EdMorlBp/MY/WCrUY/
-         +NuQfkd6ykD5Nz6IpWntP0+G0Xr+Y4MgJO9euvdHZ5EGEu44s8lVY3e23maFcbmxWK+e
-         ckAOff8J9FGguvYKpUGG15++/QBKaQzmPq4G14DfAcqnqsJjQyF7GLdoGrWAGcb2oSnT
-         EKPfRHnCHF65CHgIthMLjYK72Pe5yJABNaPDnQPplULWjOKF4Bsa2ONX2Y+7Ay291mRu
-         I2PON+t+aihNezLssjFP/reUDsW7R7FPoFldDVcim+mrDGhjsLOVvnZ4AOXNM4DpUKLZ
-         qylA==
+        bh=fJzNBsR3aOf26vnVcqq3etAzho359J3mOQBJZSqYPGE=;
+        b=n9puxEggeNk6jcC0D/M5oNNfwloQaMTHnzIYQ2Fwa+UcCWD2G9MdzRq17jRF+47d4m
+         LYYhajZ+Vv4RnDSzsfHqUQooZeCHE+8wPOo3ms5sov9PWvs/R6hTefQaNW/HRQrsGqk7
+         CAxk3+uHZuouDPjwr1TKr5LKF+Tf6O19gB6JH8D4TADVEwkuDGs6OgqXUlwH2n15EY2b
+         mNGAw6Qort8zPfdiDa9yVRumYfA/kdzRj3Fsf8vTl1/VgAEwUJGvoU509K0vrYgvLT8D
+         CmGkoZT+I5HJVCImPvB9V0v1K3khlTnVkGMo1l0ScKpWF6Nb7GlXD00LOpJRu0fBoLOy
+         EhQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=SDgAvLNbhVtNRfA8mZFcEe/QP1268rn+5vO2VJlvAUE=;
-        b=FYoD52iLzUpd3VERalZQa9umJTRnjsAZmR8+aJNrVdPNot5PQUdxb+1OuOMz8nBmLT
-         2yRqwdjReWerOgVcy1yZ+POsT1Vr9Gpj1q1+Uo4avF0snlFqpelex6B9KNZ8pAUfYqYg
-         a0zBZmN3jnPE38tNVRe16WqYWr90KbwOomMFL5+pi5DyOaT5z5OLvz5bOaLT8n0PJVc7
-         GaSG5A2qFzWYdDnp02zHHB+4C1B6fjhKuU8RmiGBNkmTdy5DGt4SJkM4dBTXWEUXevuk
-         Hr+hPfFoAENm0rWVFtVrNpuznGJe/sI2blxIRu2Nd3v380vA7p+y8OJFGi7ANAAQl3lR
-         PHbA==
-X-Gm-Message-State: AOAM532mMW91bTl9XNCINJFCH4N8N95MSnEEy4cNDjkls17cHXKUIiUj
-	zsuxu/alIdmkiKJQBMl60GgTHy3ESVc=
-X-Google-Smtp-Source: ABdhPJxvryNwqI6RTCkxhdZt85/BkfVUPf5Flu0ii2PemZYBcFK7MgUAiRXqjoweJ6CVBu4FDV6jNQ==
-X-Received: by 2002:a17:902:c10a:b0:132:580a:90b4 with SMTP id 10-20020a170902c10a00b00132580a90b4mr3472821pli.7.1632168387942;
-        Mon, 20 Sep 2021 13:06:27 -0700 (PDT)
-Return-Path: <geoffhp@gmail.com>
-Received: from localhost.localdomain (cpe-107-185-48-203.socal.res.rr.com. [107.185.48.203])
-        by smtp.gmail.com with ESMTPSA id f127sm15372201pfa.25.2021.09.20.13.06.27
+        bh=fJzNBsR3aOf26vnVcqq3etAzho359J3mOQBJZSqYPGE=;
+        b=ZpzY13R0XpcK4fe0dZqLp9uSMDkw1/TGHEz0Xzk8s+YIklWBy1oBPzV1/BOZd6ydM4
+         g+hC05kmSdf+V8d7lYd5QFY00SUYxmpsgdr7hhecpIAvvpqx81mXHkwSeoVOtyunL09G
+         1McHFykqCdA94WGaFfP97XD/LFsfIG9YHgszQNXf+ecnwJY/AiP0VSSfsnGWxKNJ0+Ph
+         PAZdUtbwtcTRNcXbWYA9LZSvoFbP5XW6LjJQUn/rNw11/ztd8Q42qDxVahM3prhRVmVo
+         zSNPHHrd5SzcdN38tu9mvo4ssvrNC5xdusUg78MCV9ntL9mXXWPy87RwVaUwCCiSZDVx
+         PV/Q==
+X-Gm-Message-State: AOAM530HWih4IDQVdI2ufPQi0wjX2OlB+xAjjzAsnHmwRUsmNA8beQk9
+	4C95rx/JdYfnNO2wIc5B7KOIbhYQZmDgpg==
+X-Google-Smtp-Source: ABdhPJxZEFY6XDnuOXDCDGjd+BqW2NIWQqbs2gtwPXMCW3wc8Imv9oIEp6EsBiYtuQ2Ylj72R14ijA==
+X-Received: by 2002:a2e:6808:: with SMTP id c8mr24561305lja.70.1632170520969;
+        Mon, 20 Sep 2021 13:42:00 -0700 (PDT)
+Return-Path: <jacob.kroon@gmail.com>
+Received: from localhost.localdomain (37-247-29-68.customers.ownit.se. [37.247.29.68])
+        by smtp.gmail.com with ESMTPSA id n26sm1350919lfe.72.2021.09.20.13.42.00
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Sep 2021 13:06:27 -0700 (PDT)
-From: "Geoff Parker" <geoffhp@gmail.com>
+        Mon, 20 Sep 2021 13:42:00 -0700 (PDT)
+From: "Jacob Kroon" <jacob.kroon@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Geoff Parker <geoffrey.parker@arthrex.com>
-Subject: [meta=java][PATCH] layer.conf: Mark as compatible with honister
-Date: Mon, 20 Sep 2021 13:06:07 -0700
-Message-Id: <20210920200607.929739-1-geoffhp@gmail.com>
-X-Mailer: git-send-email 2.30.2
+Subject: [meta-java][PATCH 1/2] openjdk7: Use bb.parse.vars_from_file()
+Date: Mon, 20 Sep 2021 22:41:22 +0200
+Message-Id: <20210920204123.1449479-1-jacob.kroon@gmail.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Geoff Parker <geoffrey.parker@arthrex.com>
+bb.parse.BBHandler.vars_from_file() was removed in:
+https://git.openembedded.org/bitbake/commit/?id=aaa5292ef96ea27f505bc5c5a4b1eb4f497ed061
 
-Signed-off-by: Geoff Parker <geoffrey.parker@arthrex.com>
+Signed-off-by: Jacob Kroon <jacob.kroon@gmail.com>
 ---
- conf/layer.conf | 2 +-
+ recipes-core/openjdk/openjdk-7-common.inc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index 7ef116d..7791178 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -7,7 +7,7 @@ BBFILES += "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/recipes*/*/*.bbappend"
- BBFILE_COLLECTIONS += "meta-java"
- BBFILE_PATTERN_meta-java := "^${LAYERDIR}/"
- BBFILE_PRIORITY_meta-java = "10"
--LAYERSERIES_COMPAT_meta-java = "dunfell gatesgarth hardknott"
-+LAYERSERIES_COMPAT_meta-java = "dunfell gatesgarth hardknott honister"
- LAYERDEPENDS_meta-java += "openembedded-layer"
+diff --git a/recipes-core/openjdk/openjdk-7-common.inc b/recipes-core/openjdk/openjdk-7-common.inc
+index 61b62b9..0435233 100644
+--- a/recipes-core/openjdk/openjdk-7-common.inc
++++ b/recipes-core/openjdk/openjdk-7-common.inc
+@@ -4,7 +4,7 @@ LICENSE  = "GPL-2.0-with-classpath-exception"
+ PRIORITY = "optional"
+ SECTION  = "libs"
  
- LICENSE_PATH += "${LAYERDIR}/licenses"
--- 
-2.30.2
-
+-ICEDTEA_VERSION = "${@bb.parse.BBHandler.vars_from_file(d.getVar('FILE', False),d)[1].split("-")[1] or '1.0'}"
++ICEDTEA_VERSION = "${@bb.parse.vars_from_file(d.getVar('FILE', False),d)[1].split("-")[1] or '1.0'}"
+ 
+ S = "${WORKDIR}/${ICEDTEA}"
+ 
