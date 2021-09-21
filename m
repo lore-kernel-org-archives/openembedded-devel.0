@@ -1,132 +1,54 @@
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
- by mx.groups.io with SMTP id smtpd.web10.1389.1632245379383062155
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.web12.1869.1632248133309813526
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Sep 2021 10:29:39 -0700
+ Tue, 21 Sep 2021 11:15:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=O81SWGsu;
- spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f174.google.com with SMTP id s11so21394144pgr.11
-        for <openembedded-devel@lists.openembedded.org>; Tue, 21 Sep 2021 10:29:39 -0700 (PDT)
+ dkim=pass header.i=@burtonini-com.20210112.gappssmtp.com header.s=20210112 header.b=ORUR4WH8;
+ spf=pass (domain: burtonini.com, ip: 209.85.221.47, mailfrom: ross@burtonini.com)
+Received: by mail-wr1-f47.google.com with SMTP id t18so41864096wrb.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 21 Sep 2021 11:15:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=aoFKnf5zK3850/nGduKe/lO1Efbsw77Tf0g0T6p9+D4=;
-        b=O81SWGsuj/DtCYxARIv7I/r2n/2FoatBcdy+Cl1t7s/fc7ZTXzKpex6eJCEQNG+sMg
-         Xx6WY5W1hKtHZb5MuANmm+7L3vMdk+E2v2bDy+bVEhyFp1b4G4p5y9Xrq+PtnPrvitSG
-         +IduQw2r74/gWbDcNDLdjMCO9iHkHPS1pPD90W8MIgb+R5VTEgdx2L8FgfSGNTmzD928
-         VgDEnvxpTz7mLdNnvV3QtIMdv+KsOSpoVfuJ/FqKVDC5/ug4WHvSQmNoTB1dszkGd7oG
-         LuzTnquz02cNyoVTG/9QyoSk4yN//RvORwgpVhcaEYyoscQOvv/uUAjkIbG6dElayAyh
-         PqOQ==
+        d=burtonini-com.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=HeR97jhfi79qEFPfmZDZdPBtgpsRVS9v+TdOb8TScWE=;
+        b=ORUR4WH8Kz2edSDJ1D4cmNf1I7ajQkGIpuSrHOX6NHKAI5bb1Mbzx0Xfx6ugoy7ppu
+         BzCUH/Nw6fnpagXZaJ1ab2o6GXyA0ARDecTiqveLl2c8RUx3YsnQLg11IVwbw0ol4enE
+         NRBO9o6fIQQsszoD0vro0T4KYqMr/g4Rpp9Q+ZJwaioFKN9vVVXXqtfjbJKaxxgOcxyh
+         doglkRR9b7NJB6MkKZgNyxaGerfckvWrYJTWG7FquxYYkf6YRNZe4sir4MseZmcseoAi
+         YCI2uWVNzz9zX3mv7oJkEGtSLeN1TYSXyyIVkRsYYSYgOsrBl9lUHqT7kN62Hqa+pwmr
+         QexQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=aoFKnf5zK3850/nGduKe/lO1Efbsw77Tf0g0T6p9+D4=;
-        b=srArQuVqdMZvOeXZVv+/YS/O+kNu1xvbv5fHgoRJpykcPhb/1MndRjmy+gm4jamZ2O
-         MFn1Q6mac5PRUc7/n0OyTVn9fpzSkLAzJ2CNTFjpozh2PwYCUC+beFkS4qk8Zoh/M4OM
-         0PEAkUd3VOil1T7zMyMI92NDgtukj6SVsib1Z3TARVC5mUXfyDyPVmFxtfqdwcv6/yS4
-         TBX+uIGfB4+NhTEhFww7DFevAmH6v0n/iAb/KSI4etX3HslMB46VppISHQA+XY7EZPmt
-         sXHaB0HAlBr6UqLU5g2pJCUYUsOHHXHRQvh5xv52/s45nDjlmQRXpvVI+dVhR+n6kr5k
-         Rhpg==
-X-Gm-Message-State: AOAM533uRaTSbTj7u45qpP8EKAA3fXxmzihHrO/PSRvIStGAr0e6rTER
-	WPObDAfZh+Zkx+8nqky1X58pdYObKctzpA==
-X-Google-Smtp-Source: ABdhPJzzqX+A5XIUhY7W3Wn99kUbdQKAIM5P8tVOyd1kYQ2V4WotdyjR7cUVP4Ll007Lk/TBznZtew==
-X-Received: by 2002:a65:52cd:: with SMTP id z13mr29199528pgp.405.1632245378743;
-        Tue, 21 Sep 2021 10:29:38 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::728f])
-        by smtp.gmail.com with ESMTPSA id r193sm6578530pfc.197.2021.09.21.10.29.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 Sep 2021 10:29:38 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH 2/2] site: Remove local site files
-Date: Tue, 21 Sep 2021 10:29:31 -0700
-Message-Id: <20210921172931.3132388-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20210921172931.3132388-1-raj.khem@gmail.com>
-References: <20210921172931.3132388-1-raj.khem@gmail.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=HeR97jhfi79qEFPfmZDZdPBtgpsRVS9v+TdOb8TScWE=;
+        b=DdLUPppdVxVM9N/Hb+Cl03fTlWiBlG3x3OQAZp38zLOwLQXTMXmQZejyNGrVp+KwyZ
+         B2LAtncywcdKfG4yPiBVWkKokvyXxkI4Ey0nDz+a9sew5j4CP3J46+XKp3WQd03c8SvV
+         zY0GkRjm/9tvndq42+M3pVxrd+hTTFPYNExY2ZgbT0NwO7AdYQRBQyXPm3qraqwe1U5X
+         WyJyRBlU3rQdbQrKxorTX6wMn3IBOKhuxVBlBp6oystUxQIMoPP+7ViFNt569Yk6dV7E
+         hAEGM9ALMJGYBp9MQeV9rHBU1rKXVWc962H8/145ZZs5yu22rbQsAqZ6Dk1ETUr/sJnY
+         ACXw==
+X-Gm-Message-State: AOAM533Ra7J/xoq8R4DisYlXqYj/V5/9LHPxAcnZWUq7edWe7a040M5e
+	zjYoVp6dIMU19ZIXSKvbMb6uJ8CJn4iVt2zvTxBGuA==
+X-Google-Smtp-Source: ABdhPJyn4qFdEeKIPLOhNdOXa9SPKFwQhe0G72+226tcef5KfQMRWqmPhw0H2Qr/EeA8PipN9iUb6Xzjs11VRzSS+AY=
+X-Received: by 2002:adf:cd92:: with SMTP id q18mr36750799wrj.211.1632248131566;
+ Tue, 21 Sep 2021 11:15:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210921172931.3132388-1-raj.khem@gmail.com>
+In-Reply-To: <20210921172931.3132388-1-raj.khem@gmail.com>
+From: "Ross Burton" <ross@burtonini.com>
+Date: Tue, 21 Sep 2021 19:15:20 +0100
+Message-ID: <CAAnfSTsph=Kk8Rqthz07M0D6mu6Os51jxjoWiVS4kw79Z_z5=g@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH 1/2] rp-pppoe: Add configure cached variable via recipe
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-These entries are either in core or redundant
+On Tue, 21 Sept 2021 at 18:29, Khem Raj <raj.khem@gmail.com> wrote:
+> +EXTRA_OECONF:append = "${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'be', 'rpppoe_cv_pack_bitfields=${rpppoe_cv_pack_bitfields=normal}', 'rpppoe_cv_pack_bitfields=${rpppoe_cv_pack_bitfields=rev}', d)}"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-gnome/site/arm-64        | 13 -------------
- meta-gnome/site/riscv64-linux | 16 ----------------
- meta-gnome/site/x86_64-linux  | 17 -----------------
- 3 files changed, 46 deletions(-)
- delete mode 100644 meta-gnome/site/arm-64
- delete mode 100644 meta-gnome/site/riscv64-linux
- delete mode 100644 meta-gnome/site/x86_64-linux
+I think CACHED_CONFIGUREVARS was intended to be used for this, for
+what it's worth.
 
-diff --git a/meta-gnome/site/arm-64 b/meta-gnome/site/arm-64
-deleted file mode 100644
-index f474d2cc40..0000000000
---- a/meta-gnome/site/arm-64
-+++ /dev/null
-@@ -1,13 +0,0 @@
--# ORBit2
--ac_cv_alignof_CORBA_boolean=1
--ac_cv_alignof_CORBA_char=1
--ac_cv_alignof_CORBA_double=8
--ac_cv_alignof_CORBA_float=4
--ac_cv_alignof_CORBA_long=4
--ac_cv_alignof_CORBA_long_double=8
--ac_cv_alignof_CORBA_long_long=8
--ac_cv_alignof_CORBA_octet=1
--ac_cv_alignof_CORBA_pointer=4
--ac_cv_alignof_CORBA_short=2
--ac_cv_alignof_CORBA_struct=1
--ac_cv_alignof_CORBA_wchar=2
-diff --git a/meta-gnome/site/riscv64-linux b/meta-gnome/site/riscv64-linux
-deleted file mode 100644
-index e3a41ea0e1..0000000000
---- a/meta-gnome/site/riscv64-linux
-+++ /dev/null
-@@ -1,16 +0,0 @@
--# libidl
--libIDL_cv_long_long_format=${libIDL_cv_long_long_format=ll}
--
--# ORBit2
--ac_cv_alignof_CORBA_boolean=1
--ac_cv_alignof_CORBA_char=1
--ac_cv_alignof_CORBA_double=8
--ac_cv_alignof_CORBA_float=4
--ac_cv_alignof_CORBA_long=4
--ac_cv_alignof_CORBA_long_double=8
--ac_cv_alignof_CORBA_long_long=8
--ac_cv_alignof_CORBA_octet=1
--ac_cv_alignof_CORBA_pointer=4
--ac_cv_alignof_CORBA_short=2
--ac_cv_alignof_CORBA_struct=1
--ac_cv_alignof_CORBA_wchar=2
-diff --git a/meta-gnome/site/x86_64-linux b/meta-gnome/site/x86_64-linux
-deleted file mode 100644
-index eba1fee2bb..0000000000
---- a/meta-gnome/site/x86_64-linux
-+++ /dev/null
-@@ -1,17 +0,0 @@
--# ORBit2
--ac_cv_alignof_CORBA_boolean=1
--ac_cv_alignof_CORBA_char=1
--ac_cv_alignof_CORBA_double=8
--ac_cv_alignof_CORBA_float=4
--ac_cv_alignof_CORBA_long=4
--ac_cv_alignof_CORBA_long_double=8
--ac_cv_alignof_CORBA_long_long=8
--ac_cv_alignof_CORBA_octet=1
--ac_cv_alignof_CORBA_pointer=8
--ac_cv_alignof_CORBA_short=2
--ac_cv_alignof_CORBA_struct=1
--ac_cv_alignof_CORBA_wchar=2
--
--lf_cv_sane_realloc=yes
--as_cv_unaligned_access=${as_cv_unaligned_access=yes}
--
--- 
-2.33.0
-
+Ross
