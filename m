@@ -1,103 +1,286 @@
-Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
- by mx.groups.io with SMTP id smtpd.web12.2596.1632251233287443067
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web09.2516.1632253131723317984
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Sep 2021 12:07:13 -0700
+ Tue, 21 Sep 2021 12:38:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=PJZocvXl;
- spf=pass (domain: gmail.com, ip: 209.85.222.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f178.google.com with SMTP id d207so1236188qkg.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 21 Sep 2021 12:07:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=6sod5mef6rFyVClj3PYuLywnPuhqXgzMe9nIFK4WoGs=;
-        b=PJZocvXlPpR1srYrKHTvXOF7GFi4x5/egTlCf15HBHrM784HbXcyWkJ4+H+fiNy8oS
-         WOGxaxftaPH9etE5xw5gZKBmtjEYievgy3E7FwxfwRCLw463vg3E75HEyfMc+FeM8x/3
-         BZMFhO00eTH6cJusGzKZwMhXPIVnAuxkSGtxgtAh6CjPi0dX7zxFg5j0/7dFQ5mqwJG2
-         k3SuKSKd3b3kIsUV2AhPyaVvQZWuBXYcAOPOrVCdTpKsKwuOmj0k5VKKq9qKU+tsu5LX
-         yJrNYxqywGwxQYfEofYBTkCQ2ph05gHPRlmW3UcDS/Rjb2WjyvKs2DSlwHdrUqTw0qS6
-         nWIQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=6sod5mef6rFyVClj3PYuLywnPuhqXgzMe9nIFK4WoGs=;
-        b=EJMnKKaIhgb0kfdUbAvpc3Y5QXnUZ/D/Xfg41LtO2w6F0KaW5xvm6r8yG+8lUU/JY8
-         hfNP84fzqJI0SNsyP9dFDIFoMnvHjrws/Nu2Byr39QLUxeEcrKqNCCD6ty4GzBAes7Yi
-         4zgvPFbXXl4r9jbiXnXL4JuE5o/hkcHVW7JeiHbc/ORn0F3kkfniwYNU2SDThFy0yXzT
-         i8eEtK3XSmZZBw0+TSaL0p/IN6es1QcXYqeUyDrqHZuu95LxqVnwwE28+dpcLf0br7D4
-         BfwtfDLhpBmjuEAO94j8tvN92fT6h2TKMIXyI6knuJ7JORvuRSGS7C+jIvBGaM020Qrf
-         UE3w==
-X-Gm-Message-State: AOAM532rgBAHug2DZahaPQZ2zEKSoLgpQ7LMuE9e80NC+TmuUdyHhxTX
-	ZSndJOv1hF75802eKrvmc3yLi/6KJZRZ6gCCvpk=
-X-Google-Smtp-Source: ABdhPJylxTS2pA22zcbNpX7EMpqScYk5ScxrlsUz8GKQgX46JX1jrrYaxUxkfqtibDt5g/CYPEEG5YTUECSx6mUuonk=
-X-Received: by 2002:a37:9c46:: with SMTP id f67mr3995292qke.98.1632251232335;
- Tue, 21 Sep 2021 12:07:12 -0700 (PDT)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: sakib.sajal@windriver.com)
+Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 18LJcoit016264
+	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Sep 2021 12:38:50 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com [147.11.82.252])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 18LJcntc018819
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Sep 2021 12:38:50 -0700 (PDT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Tue, 21 Sep 2021 12:38:49 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.14; Tue, 21 Sep 2021 12:38:49 -0700
+Received: from yow-lpggp3.wrs.com (128.224.137.13) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Tue, 21 Sep 2021 12:38:49 -0700
+From: "Sakib Sajal" <sakib.sajal@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] gd: upgrade 2.3.2 -> 2.3.3
+Date: Tue, 21 Sep 2021 15:38:48 -0400
+Message-ID: <20210921193848.22683-1-sakib.sajal@windriver.com>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
-References: <20210921172931.3132388-1-raj.khem@gmail.com> <CAAnfSTsph=Kk8Rqthz07M0D6mu6Os51jxjoWiVS4kw79Z_z5=g@mail.gmail.com>
-In-Reply-To: <CAAnfSTsph=Kk8Rqthz07M0D6mu6Os51jxjoWiVS4kw79Z_z5=g@mail.gmail.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Tue, 21 Sep 2021 12:07:01 -0700
-Message-ID: <CAMKF1srE3cbJ+iEYKfO7QqFZZm+t+7F05FS0O7yDV1hGJmE_rw@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH 1/2] rp-pppoe: Add configure cached variable via recipe
-To: Ross Burton <ross@burtonini.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000e33a8005cc861a55"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
---000000000000e33a8005cc861a55
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
+---
+ ...-of-bands-in-reading-tga-header-file.patch |  29 ---
+ ...ith-uint32_t-and-uint16-with-uint16_.patch | 170 ------------------
+ .../gd/{gd_2.3.2.bb => gd_2.3.3.bb}           |   8 +-
+ 3 files changed, 3 insertions(+), 204 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/gd/gd/0001-fix-read-out-of-bands-in-reading-tga-header-file.patch
+ delete mode 100644 meta-oe/recipes-support/gd/gd/0001-replace-uint32-with-uint32_t-and-uint16-with-uint16_.patch
+ rename meta-oe/recipes-support/gd/{gd_2.3.2.bb => gd_2.3.3.bb} (81%)
 
-On Tue, Sep 21, 2021 at 11:15 AM Ross Burton <ross@burtonini.com> wrote:
+diff --git a/meta-oe/recipes-support/gd/gd/0001-fix-read-out-of-bands-in-reading-tga-header-file.patch b/meta-oe/recipes-support/gd/gd/0001-fix-read-out-of-bands-in-reading-tga-header-file.patch
+deleted file mode 100644
+index 6152a1184..000000000
+--- a/meta-oe/recipes-support/gd/gd/0001-fix-read-out-of-bands-in-reading-tga-header-file.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 8b111b2b4a4842179be66db68d84dda91a246032 Mon Sep 17 00:00:00 2001
+-From: maryam ebrahimzadeh <maryam.ebr@student.sharif.edu>
+-Date: Mon, 19 Jul 2021 10:07:13 +0430
+-Subject: [PATCH] fix read out-of-bands in reading tga header file
+-
+----
+- src/gd_tga.c | 6 +++++-
+- 1 file changed, 5 insertions(+), 1 deletion(-)
+-
+-diff --git a/src/gd_tga.c b/src/gd_tga.c
+-index cae9428..286febb 100644
+---- a/src/gd_tga.c
+-+++ b/src/gd_tga.c
+-@@ -191,7 +191,11 @@ int read_header_tga(gdIOCtx *ctx, oTga *tga)
+- 			return -1;
+- 		}
+- 
+--		gdGetBuf(tga->ident, tga->identsize, ctx);
+-+		
+-+		if (gdGetBuf(tga->ident, tga->identsize, ctx) != tga->identsize) {
+-+			gd_error("fail to read header ident");
+-+			return -1;
+-+		}
+- 	}
+- 
+- 	return 1;
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-support/gd/gd/0001-replace-uint32-with-uint32_t-and-uint16-with-uint16_.patch b/meta-oe/recipes-support/gd/gd/0001-replace-uint32-with-uint32_t-and-uint16-with-uint16_.patch
+deleted file mode 100644
+index faf349b0b..000000000
+--- a/meta-oe/recipes-support/gd/gd/0001-replace-uint32-with-uint32_t-and-uint16-with-uint16_.patch
++++ /dev/null
+@@ -1,170 +0,0 @@
+-From 4ae9904a10f61ed60f4d4ee02eb1994a95664d7b Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Thu, 22 Apr 2021 22:48:59 -0700
+-Subject: [PATCH] replace uint32 with uint32_t and uint16 with uint16_6
+-
+-uint16 and uint32 are now deprecated in libtiff and suggestion is to use
+-standard C99 types
+-
+-Upstream-Status: Submitted [https://github.com/libgd/libgd/pull/694]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/gd_tiff.c | 52 +++++++++++++++++++++++++--------------------------
+- 1 file changed, 26 insertions(+), 26 deletions(-)
+-
+-diff --git a/src/gd_tiff.c b/src/gd_tiff.c
+-index b22ee6c..699d719 100644
+---- a/src/gd_tiff.c
+-+++ b/src/gd_tiff.c
+-@@ -237,10 +237,10 @@ void tiffWriter(gdImagePtr image, gdIOCtx *out, int bitDepth)
+- 	int transparentColorR = -1;
+- 	int transparentColorG = -1;
+- 	int transparentColorB = -1;
+--	uint16 extraSamples[1];
+--	uint16 *colorMapRed = NULL;
+--	uint16 *colorMapGreen = NULL;
+--	uint16 *colorMapBlue = NULL;
+-+	uint16_t extraSamples[1];
+-+	uint16_t *colorMapRed = NULL;
+-+	uint16_t *colorMapGreen = NULL;
+-+	uint16_t *colorMapBlue = NULL;
+- 
+- 	tiff_handle *th;
+- 
+-@@ -292,18 +292,18 @@ void tiffWriter(gdImagePtr image, gdIOCtx *out, int bitDepth)
+- 
+- 	/* build the color map for 8 bit images */
+- 	if(bitDepth != 24) {
+--		colorMapRed   = (uint16 *) gdMalloc(3 * (1 << bitsPerSample));
+-+		colorMapRed   = (uint16_t *) gdMalloc(3 * (1 << bitsPerSample));
+- 		if (!colorMapRed) {
+- 			gdFree(th);
+- 			return;
+- 		}
+--		colorMapGreen = (uint16 *) gdMalloc(3 * (1 << bitsPerSample));
+-+		colorMapGreen = (uint16_t *) gdMalloc(3 * (1 << bitsPerSample));
+- 		if (!colorMapGreen) {
+- 			gdFree(colorMapRed);
+- 			gdFree(th);
+- 			return;
+- 		}
+--		colorMapBlue  = (uint16 *) gdMalloc(3 *  (1 << bitsPerSample));
+-+		colorMapBlue  = (uint16_t *) gdMalloc(3 *  (1 << bitsPerSample));
+- 		if (!colorMapBlue) {
+- 			gdFree(colorMapRed);
+- 			gdFree(colorMapGreen);
+-@@ -448,7 +448,7 @@ BGD_DECLARE(void) gdImageTiffCtx(gdImagePtr image, gdIOCtx *out)
+- /* Check if we are really in 8bit mode */
+- static int checkColorMap(n, r, g, b)
+- int n;
+--uint16 *r, *g, *b;
+-+uint16_t *r, *g, *b;
+- {
+- 	while (n-- > 0)
+- 		if (*r++ >= 256 || *g++ >= 256 || *b++ >= 256)
+-@@ -460,8 +460,8 @@ uint16 *r, *g, *b;
+- /* Read and convert a TIFF colormap */
+- static int readTiffColorMap(gdImagePtr im, TIFF *tif, char is_bw, int photometric)
+- {
+--	uint16 *redcmap, *greencmap, *bluecmap;
+--	uint16 bps;
+-+	uint16_t *redcmap, *greencmap, *bluecmap;
+-+	uint16_t bps;
+- 	int i;
+- 
+- 	if (is_bw) {
+-@@ -473,7 +473,7 @@ static int readTiffColorMap(gdImagePtr im, TIFF *tif, char is_bw, int photometri
+- 			gdImageColorAllocate(im, 255,255,255);
+- 		}
+- 	} else {
+--		uint16 min_sample_val, max_sample_val;
+-+		uint16_t min_sample_val, max_sample_val;
+- 
+- 		if (!TIFFGetField(tif, TIFFTAG_MINSAMPLEVALUE, &min_sample_val)) {
+- 			min_sample_val = 0;
+-@@ -515,7 +515,7 @@ static int readTiffColorMap(gdImagePtr im, TIFF *tif, char is_bw, int photometri
+- 
+- static void readTiffBw (const unsigned char *src,
+- 			gdImagePtr im,
+--			uint16       photometric,
+-+			uint16_t       photometric,
+- 			int          startx,
+- 			int          starty,
+- 			int          width,
+-@@ -547,7 +547,7 @@ static void readTiffBw (const unsigned char *src,
+- 
+- static void readTiff8bit (const unsigned char *src,
+-                           gdImagePtr im,
+--                          uint16       photometric,
+-+                          uint16_t       photometric,
+-                           int          startx,
+-                           int          starty,
+-                           int          width,
+-@@ -634,10 +634,10 @@ static void readTiff8bit (const unsigned char *src,
+- 	}
+- }
+- 
+--static int createFromTiffTiles(TIFF *tif, gdImagePtr im, uint16 bps, uint16 photometric,
+-+static int createFromTiffTiles(TIFF *tif, gdImagePtr im, uint16_t bps, uint16_t photometric,
+-                                char has_alpha, char is_bw, int extra)
+- {
+--	uint16  planar;
+-+	uint16_t  planar;
+- 	int im_width, im_height;
+- 	int tile_width, tile_height;
+- 	int  x, y, height, width;
+-@@ -682,11 +682,11 @@ end:
+- 	return success;
+- }
+- 
+--static int createFromTiffLines(TIFF *tif, gdImagePtr im, uint16 bps, uint16 photometric,
+-+static int createFromTiffLines(TIFF *tif, gdImagePtr im, uint16_t bps, uint16_t photometric,
+-                                char has_alpha, char is_bw, int extra)
+- {
+--	uint16  planar;
+--	uint32 im_height, im_width, y;
+-+	uint16_t  planar;
+-+	uint32_t im_height, im_width, y;
+- 
+- 	unsigned char *buffer;
+- 	int success = GD_SUCCESS;
+-@@ -761,11 +761,11 @@ static int createFromTiffRgba(TIFF * tif, gdImagePtr im)
+- 	int color;
+- 	int width = im->sx;
+- 	int height = im->sy;
+--	uint32 *buffer;
+--	uint32 rgba;
+-+	uint32_t *buffer;
+-+	uint32_t rgba;
+- 	int success;
+- 
+--	buffer = (uint32 *) gdCalloc(sizeof(uint32), width * height);
+-+	buffer = (uint32_t *) gdCalloc(sizeof(uint32_t), width * height);
+- 	if (!buffer) {
+- 		return GD_FAILURE;
+- 	}
+-@@ -810,11 +810,11 @@ BGD_DECLARE(gdImagePtr) gdImageCreateFromTiffCtx(gdIOCtx *infile)
+- 	TIFF *tif;
+- 	tiff_handle *th;
+- 
+--	uint16 bps, spp, photometric;
+--	uint16 orientation;
+-+	uint16_t bps, spp, photometric;
+-+	uint16_t orientation;
+- 	int width, height;
+--	uint16 extra, *extra_types;
+--	uint16 planar;
+-+	uint16_t extra, *extra_types;
+-+	uint16_t planar;
+- 	char	has_alpha, is_bw, is_gray;
+- 	char	force_rgba = FALSE;
+- 	char	save_transparent;
+-@@ -867,7 +867,7 @@ BGD_DECLARE(gdImagePtr) gdImageCreateFromTiffCtx(gdIOCtx *infile)
+- 	}
+- 
+- 	if (!TIFFGetField (tif, TIFFTAG_PHOTOMETRIC, &photometric)) {
+--		uint16 compression;
+-+		uint16_t compression;
+- 		if (TIFFGetField(tif, TIFFTAG_COMPRESSION, &compression) &&
+- 		        (compression == COMPRESSION_CCITTFAX3 ||
+- 		         compression == COMPRESSION_CCITTFAX4 ||
+diff --git a/meta-oe/recipes-support/gd/gd_2.3.2.bb b/meta-oe/recipes-support/gd/gd_2.3.3.bb
+similarity index 81%
+rename from meta-oe/recipes-support/gd/gd_2.3.2.bb
+rename to meta-oe/recipes-support/gd/gd_2.3.3.bb
+index 32484ce79..cbd45c088 100644
+--- a/meta-oe/recipes-support/gd/gd_2.3.2.bb
++++ b/meta-oe/recipes-support/gd/gd_2.3.3.bb
+@@ -9,16 +9,14 @@ HOMEPAGE = "http://libgd.github.io/"
+ 
+ SECTION = "libs"
+ LICENSE = "GD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=8e5bc8627b9494741c905d65238c66b7"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ace63adfdac78400fc30fa22ee9c1bb1"
+ 
+ DEPENDS = "freetype libpng jpeg zlib tiff"
+ 
+-SRC_URI = "git://github.com/libgd/libgd.git;branch=master \
+-           file://0001-replace-uint32-with-uint32_t-and-uint16-with-uint16_.patch \
+-           file://0001-fix-read-out-of-bands-in-reading-tga-header-file.patch \
++SRC_URI = "git://github.com/libgd/libgd.git;nobranch=1 \
+            "
+ 
+-SRCREV = "2e40f55bfb460fc9d8cbcd290a0c9eb908d5af7e"
++SRCREV = "b5319a41286107b53daa0e08e402aa1819764bdc"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.33.0
 
-> On Tue, 21 Sept 2021 at 18:29, Khem Raj <raj.khem@gmail.com> wrote:
-> > +EXTRA_OECONF:append =3D "${@oe.utils.conditional('SITEINFO_ENDIANNESS'=
-,
-> 'be', 'rpppoe_cv_pack_bitfields=3D${rpppoe_cv_pack_bitfields=3Dnormal}',
-> 'rpppoe_cv_pack_bitfields=3D${rpppoe_cv_pack_bitfields=3Drev}', d)}"
->
-> I think CACHED_CONFIGUREVARS was intended to be used for this, for
-> what it's worth.
-
-
-yeah although it will work in both cases I don=E2=80=99t remember why I int=
-roduced
-that variable but I guess it was that in sone cases it needed to be
-embedded in shell environment
-
->
->
-> Ross
->
-
---000000000000e33a8005cc861a55
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Tue, Sep 21, 2021 at 11:15 AM Ross Burton &lt;<a href=3D=
-"mailto:ross@burtonini.com">ross@burtonini.com</a>&gt; wrote:<br></div><blo=
-ckquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #c=
-cc solid;padding-left:1ex">On Tue, 21 Sept 2021 at 18:29, Khem Raj &lt;<a h=
-ref=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>&=
-gt; wrote:<br>
-&gt; +EXTRA_OECONF:append =3D &quot;${@oe.utils.conditional(&#39;SITEINFO_E=
-NDIANNESS&#39;, &#39;be&#39;, &#39;rpppoe_cv_pack_bitfields=3D${rpppoe_cv_p=
-ack_bitfields=3Dnormal}&#39;, &#39;rpppoe_cv_pack_bitfields=3D${rpppoe_cv_p=
-ack_bitfields=3Drev}&#39;, d)}&quot;<br>
-<br>
-I think CACHED_CONFIGUREVARS was intended to be used for this, for<br>
-what it&#39;s worth.</blockquote><div dir=3D"auto"><br></div><blockquote cl=
-ass=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;p=
-adding-left:1ex" dir=3D"auto"></blockquote><div dir=3D"auto">yeah although =
-it will work in both cases I don=E2=80=99t remember why I introduced that v=
-ariable but I guess it was that in sone cases it needed to be embedded in s=
-hell environment=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"marg=
-in:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex" dir=3D"auto"><br=
->
-<br>
-Ross<br>
-</blockquote></div></div>
-
---000000000000e33a8005cc861a55--
