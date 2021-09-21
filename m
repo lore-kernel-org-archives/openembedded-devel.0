@@ -1,178 +1,141 @@
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com (EUR05-DB8-obe.outbound.protection.outlook.com [40.107.20.109])
- by mx.groups.io with SMTP id smtpd.web12.3983.1632204117614041367
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com (EUR04-HE1-obe.outbound.protection.outlook.com [40.107.7.95])
+ by mx.groups.io with SMTP id smtpd.web10.3924.1632204217956217715
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Sep 2021 23:01:59 -0700
+ Mon, 20 Sep 2021 23:03:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@skidata.com header.s=selector1 header.b=qnCzJqI1;
- spf=pass (domain: skidata.com, ip: 40.107.20.109, mailfrom: richard.leitner@skidata.com)
+ dkim=pass header.i=@skidata.com header.s=selector1 header.b=eGbm/0Cs;
+ spf=pass (domain: skidata.com, ip: 40.107.7.95, mailfrom: richard.leitner@skidata.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WGBMK27S6C+kuoanowCQEdc0BA8CT9mEzP4zSGVa/i/1OXgl5axtg6n9thJuxtMxvrC5plj8vikmyg793r+pJtjMs2bv0D89vbIqe5cxXhWxtUKuYrbPCXEptDqNOUii0ZGEDwbEvwkE/LwNTj7m4EweYBiivyUkrNEVje3wr6OWYI4kvlCXxYgTqf5fjfDQUMH6KDj2UaQC+NohX8RJ/vqHQogzNp35encyZD9Te4PNN1WJdaWCxbREEgvCr+U+JrPihL1Gp1Q1+je9pKDWyLWhtlInVkqrAvBGt+xns79gN3Ppc6/G48hIVip720XhN+WuNLf7kAvE9aBF/6CNZg==
+ b=eNodHTjRDZcRFCsGB3/7BnENfAixryEF7RS3TYl89lb25kCldkiW7Q7x9CvDBqwdb3WW2uAattP56C3ROV00h81UjZ6OUTLA6N7nKntmq9xyppIiBxfnqCnme9p3ryAxz3Z+Vmea6OEqtRtOG19z+OZknYXN6GChYYv2MWRNctiwxUTgWoFqOilPV/HcCG51HQc2ff+zcY3tDYp3l8rygbgZZJhjKzw4o+VFZAjmSj0NarTJNfgVE1f0bv7CpVpJh2+4jEjZM8pY38zdXqSxSPsQxgP9FP32ZeNqkhqk5Sgt030WCQMe03Lxc5+ASUmZAh09P/BtrAJQKhBeRdvF6g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
- bh=fhIwqbpbaOdS3/tylI/U1hflB7pXWtDiAMc7lrR9JqQ=;
- b=W3zFpYp0VuSEZTyt/sQOWm+JSJbNsUy3vKr9UmXi1M64YOl87lRdO0pig72OOxWrqC6bHWq6OK0Kf5XxV4cqRCLfIsptY4w5AfpHtxAps+bnfco6/2EudtWdpPSqYa3Npw8UtgT9z1QMU2lcgdzHAlvHxpODXiHcMNuWD9VhdI/01gsYyAZ4YOgJS1R1t12EtU1acd44LVk4B0MILc/gFzG/OE6vWWTadoaLaRWh43pnI1UxL9LHgiPXeZCNbSTkA0IU9qt1OMOk0yUiTeauzdX+g5peauGC31igUr7j0++hRnSN/D8mMapTN0pGauu//qz+CZ+rJ9/p3Cr4ziUJXw==
+ bh=Nq0XvAZEMesbOju3hG9A8eiRJG0TOsoh2eY2Srr9nRY=;
+ b=oVLty4xEVV8XIZtd5rGzd67cg4gO4KP/4zw37KcB6fQ4euzFMt3/ouZGhiEaPFe4B87R88HhiSckDeXV4kLy1EcZTRmo9dH85dPgdRxWa838CnIGK6mqZLE3D7sJVfk7j4wbDALLaDx3zRb2B3xpLL+5DbYjeIAS0HtLb5MA+3Y8bZ1XW/VBZSbiYDNqItRZW/dkYkAorsk4DJpE4KxfjDkayXCxXYftX1RPsCthb6HvDZc8rMgOpED30YitwHXCCF4RAWvb1bhoc4+lKz2aQ4blpRcvFmM9ScX1g7/vDdMd8EROBe7jjD44yzLjzxE1MkNLH9mevV3EgQxjEdX0uQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=skidata.com; dmarc=pass action=none header.from=skidata.com;
  dkim=pass header.d=skidata.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=skidata.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fhIwqbpbaOdS3/tylI/U1hflB7pXWtDiAMc7lrR9JqQ=;
- b=qnCzJqI1XsYT+NDhRYsLgPMMIW9Cl2WvyVw3BnK4fJT3ViqFI0yrHb/SMl8c+BrPM1TrjHVDKnF/lccfmS6BKg8h3sDI46FtSgcafoVxmGyfbnlYYEARQL7W6eS/F1G4FW0tekR9L6tEKAtuius+JZoVtXXew1vQZgJjUE7rZqdy3IkiXRwByTqQAVM3TXL+NBSsswMh/S9KW7+6Bk5JGKoIpv1obZhPj0Ndt64n0D/FfoMftTe8pSo+Wxa4ZpOnUxFHaVbeAGov6lT7V5HsGu8ywCPa0x0NHRgkAI2TU1KvUFqJavfYAX2TakDLSJRSI5c+rFAEoIurB7ixKuxS1g==
+ bh=Nq0XvAZEMesbOju3hG9A8eiRJG0TOsoh2eY2Srr9nRY=;
+ b=eGbm/0CsX30dLe5I4Oz1ulmWKk2/MOQUxlsxeJDoeG4y9P1a3vo4g5scyxFQptpIskhRnWLlHpfNfFvMpr8TG+dkwqLvYt8s4DtC0QjPn1Wx88LgkpUTZmOQAjPJA5LdgH6tN36Cfz27sY+J1L3KVQz0iq2LoBG4izSBxfnLld6mkrRa1nz9131SpKTPpp+8LGt3fxHXgQxZjlUc/x/2TZWUfuytUyJp74Mw4OXw7nvLX9nGY5Atu4HncDtKj64ChVWqeugNPaODQdACPrnAaolLNYn5KHZltEvNk9VIZmNH+oGxbpTl3MdXvHa5f9pV7reZQaXiGSXDaC3LpPdY5g==
 Received: from VE1PR05MB7376.eurprd05.prod.outlook.com (2603:10a6:800:1b3::19)
- by VI1PR05MB6752.eurprd05.prod.outlook.com (2603:10a6:800:131::18) with
+ by VI1PR05MB4560.eurprd05.prod.outlook.com (2603:10a6:802:62::26) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4544.13; Tue, 21 Sep
- 2021 06:01:55 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4523.17; Tue, 21 Sep
+ 2021 06:03:34 +0000
 Received: from VE1PR05MB7376.eurprd05.prod.outlook.com
  ([fe80::dc9b:c50d:7c4d:fae7]) by VE1PR05MB7376.eurprd05.prod.outlook.com
  ([fe80::dc9b:c50d:7c4d:fae7%3]) with mapi id 15.20.4523.019; Tue, 21 Sep 2021
- 06:01:54 +0000
+ 06:03:34 +0000
 From: "Richard Leitner" <richard.leitner@skidata.com>
 To: "geoffhp@gmail.com" <geoffhp@gmail.com>
 CC: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>, Geoff Parker
 	<geoffrey.parker@arthrex.com>
-Subject: Re: [oe] [meta-java][PATCH] update recipes for new override syntax introduced in Yocto 3.4 honister
-Thread-Topic: [oe] [meta-java][PATCH] update recipes for new override syntax
- introduced in Yocto 3.4 honister
-Thread-Index: AQHXrmujbuyD3X9xE0SCiSnWfyXMHaut/4KA
-Date: Tue, 21 Sep 2021 06:01:54 +0000
-Message-ID: <YUl1UTrdACZuDh0S@ltleri2>
-References: <20210920220522.938556-1-geoffhp@gmail.com>
-In-Reply-To: <20210920220522.938556-1-geoffhp@gmail.com>
+Subject: Re: [oe] [meta=java][PATCH] layer.conf: Mark as compatible with honister
+Thread-Topic: [oe] [meta=java][PATCH] layer.conf: Mark as compatible with
+ honister
+Thread-Index: AQHXrlsD2RoiqNf7F0OkZfnyrOGRSauuABqA
+Date: Tue, 21 Sep 2021 06:03:34 +0000
+Message-ID: <YUl1tUiZI31wm/vc@ltleri2>
+References: <20210920200607.929739-1-geoffhp@gmail.com>
+In-Reply-To: <20210920200607.929739-1-geoffhp@gmail.com>
 Accept-Language: en-AT, en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 authentication-results: gmail.com; dkim=none (message not signed)
  header.d=none;gmail.com; dmarc=none action=none header.from=skidata.com;
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 40357dcf-c136-4b9f-84e1-08d97cc55046
-x-ms-traffictypediagnostic: VI1PR05MB6752:
+x-ms-office365-filtering-correlation-id: 7abb138d-17d6-4a65-1a5e-08d97cc58b92
+x-ms-traffictypediagnostic: VI1PR05MB4560:
 x-microsoft-antispam-prvs: 
- <VI1PR05MB67521DB70E3BA7637CD0F00CF0A19@VI1PR05MB6752.eurprd05.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:6430;
+ <VI1PR05MB45607B0535E39FAA79A9ACD9F0A19@VI1PR05MB4560.eurprd05.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:8273;
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- o6LOgemCDl1B7QIDWYILDdlBt+z5nDJLRDX1SW0CRpcI6VPJstL5VfRYXpKSaVvXlU4JbPY7e6D8qMb7/AeHaRyilYZ9e1Y8tPy8VRAS9KaI6N6KVokU0ULzUKcBC3/iCJKBINCCr00O8l/OEcqnrIF59k8mY1oj727Gb4wNq/I7QYkNr+0Otehz7SmdH+gx3LQG2f7yXw6ANxy2vIB5utx4uelYjwdSC12Ux+kiic9dAR2kQEe7XwtCQvKbk5Bm0EpOysfR5LL4GkMXtUdASKXZbGGYpfiTJwmsNaOQvFk9CvM5mYf3SVCcfDJjDpNXC1p0hOku52Ukjd+yo756ZEBN2Pomxy+VG/3cKOGfQX6srGDSNzyvV6CqpiDk9265bfVuQzVBF5oo1BrkGeIQRY8QfBJgf/rvTcoBt49Ohiwv8nXoKZT2NWFfYi4Wb5EpK+mDJRaULmEsvg+7/c8kNgpJxMRvgox7wOmqiOc4ROO+aQuoRG6LywDZLttwS3GLBuiQelZG5BqKKgtp+qY1KBKUAZdGCWpHz675sh6IldnAFDwA4dat+ctKX8Bp9haz/RBhjJqbc8tq4DWS+U7sqtujaQH+jVYUKIweeZj3qrW8qofTlF8Dph9WVvaD2YdYQnI0c9GwfrMpv5bLLVU9gOQftKLXLnfEQFr2NGRsjUw2renWqlCIq1th3mvzYtPZsH89WsWKrfikJdE5/U1PXg==
+ 1JDwYbe2jgnHcGlEJf7mD3u0pOIOGAQTBvu/PugEdqJRgVinklrAHFFKC2pARq03sHwwUoyGbYkWcSLNycd5jm1nUvZebRoP55CFGZ9hL6BR1riQj2XUFz86so78YcsK+SC9ZbdCRTbBx9gNJPS0OljqeKWKrbIz18Pm5mFkCfbztfwdd8ucAc+UFYa0t/RM7m4ai8H8FYAj/rHenvHPTikX2quoP7il+vm+O0NCwfNAPCOK3UyyRhlvDyjWvFu4JFTzbkDFXYYVpk0mAodC5qCcEizS2Fc8D/cMp5POvx4i0UpX5rXUMYHVXHVgvvfYbw+DrQWtCiI/5k58JqkqHdLm13XzVi2Y5Zo0bLVOlvNo8sN1SYv62N+fC7ts2tZKA1149cnBCcw1U4M0Ce88nWe0r42cK4DvG2d6szQBFvVwWYjHcyIE0loN98oXMxMrefrqw+Ny73OR0RByF5BaWfrhhEtkL4aPFEHoJ8KnJKiox+pHrKXpQ4b4OAfsViWDGp/FP824g5y7jmz1npSTdyQMKhN0mZdHmFAyFlqfMhsDTMRaxk2p0eo89FSR4jv+N2ljD5rkpEgtPEZzF3gnsZ4NqUUc8qR78TwIkZdDhB9fk0/BJ5iotksDoe+NyGZJoHH4XxCr/LKjTlcrl8mVXu8o19n55PR2PP+DrFTS8C3SMpmEsePrMuTIPpeMCsLFWhrp/kfKSzbjBBAxeqFT99Bxj57BPLiSBeO/cmiBlkSIB4BmH1m45RPwXoqKJ7mOWUVomG8q0dcCYurWD4IN7UIlSGoEkYu5wW4tzS7N08A=
 x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR05MB7376.eurprd05.prod.outlook.com;PTR:;CAT:NONE;SFS:(7916004)(4636009)(366004)(6916009)(86362001)(66476007)(186003)(6512007)(66556008)(15650500001)(8936002)(64756008)(38100700002)(316002)(2906002)(6506007)(6486002)(26005)(122000001)(9686003)(5660300002)(71200400001)(66446008)(8676002)(66946007)(38070700005)(33716001)(508600001)(83380400001)(4326008)(54906003)(76116006);DIR:OUT;SFP:1102;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR05MB7376.eurprd05.prod.outlook.com;PTR:;CAT:NONE;SFS:(7916004)(4636009)(366004)(38100700002)(966005)(26005)(6916009)(2906002)(122000001)(508600001)(4326008)(186003)(8936002)(38070700005)(9686003)(5660300002)(6512007)(83380400001)(86362001)(8676002)(66476007)(76116006)(6486002)(66946007)(71200400001)(54906003)(66556008)(316002)(66446008)(6506007)(64756008)(33716001);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0: 
- =?us-ascii?Q?WLwCKIWRnWp6fSgYA8GzAWxzsVh3TAHpmEwDWMellGPyx+oI6b6ZrAGWNa6D?=
- =?us-ascii?Q?KP9746NGAvtYa9FU2nt4icf0YoK94kuTz/PtojMGsuc3tJGiDK8X4nOtS8wZ?=
- =?us-ascii?Q?7hWuGAAOH1yraO8tjjd133hD9hnOlNvNsK+UAsbppzZwI+NV76zKOp4uglol?=
- =?us-ascii?Q?5aWqwYgx15NSz0RZxDp065MFZBQOUnTlMjc8EARLzGEdI1pD0e7ltwIzVjAG?=
- =?us-ascii?Q?4RbrJBwSj+ejRmFeDjRoFLgQBfAV/PeOJ+rkUJHVomSPq4lcdO8aJSa5zsgI?=
- =?us-ascii?Q?d/G0Ic4S4n3xOlEhFWjCd3ADGo2irVXCinvE8IqbV5GLqCEvChHP3Ea4zar9?=
- =?us-ascii?Q?VLXx4+H9KmLvEXB1qg1G7GOgyobbuTx5+ir7DomquLnkU91I8X7hfNkEv9Yk?=
- =?us-ascii?Q?CVVFA6fPCwge/ky/zDV/PEJynmEIjvwoNB1L00WwrB3PC/J4CfGr2C4IYgTR?=
- =?us-ascii?Q?V3Q7sNgDk0x5mLPsRMNjas0rm6aKPdiqi1dsXDtHbqiRPKFeRoqCSGmAbj5Y?=
- =?us-ascii?Q?OkAOQvL9PD+jwAqlfQhSg0zpFdSAEM8yY5NBVAS39vaJc0xBrhvjlmr6u5pT?=
- =?us-ascii?Q?xxV3PD8MB93ZXdg3eyYCzJo+A+99eDiVvGCdRpT6+/Kx9DoLdOwufxbrK8jx?=
- =?us-ascii?Q?Wu26hTNFhdxPtxZugFCOY4GvnrQLRfRK3itnuOSScuIOuXIsrEezf/l7YjKC?=
- =?us-ascii?Q?nrkhc/bWnXeIHO4Ah/yPsjp92vIWmNqFzeo214FDRQgFI909i5TB0JpKlKiT?=
- =?us-ascii?Q?PBvMWVCUVxtPCnFNTgZyzM+CY+TnGd7UAiS5nQGi2cSXBj2Tn6PlTAOLmEGA?=
- =?us-ascii?Q?CoGPAlqYz/Y33R13ltS2wXAdnjHR3X1Mlu8+2xHw5jPY+bAhtkUhqCOZAW8q?=
- =?us-ascii?Q?QR6Q4hAXwyNg6mcttAJPlcIuNZq7A9zRHN+cjtpWa/DAtd28+dHmuPfEeb8o?=
- =?us-ascii?Q?pvV6BBmhqYtYXY4vbh8Gq+MF4qdgJAZM6kFkyRGeBkFZvg9QiVTNxpjksIPH?=
- =?us-ascii?Q?BahTZqA9nQ74S0+KWCYZxRTuunSTWbkEypuY/vHFuhVl1N2OnojBCWJnA44q?=
- =?us-ascii?Q?qUHi1YaMUHdwVXuDJPv7K4SjP2IVR6Hf/r07sVQhL7OPuE2dISTUEuQyfgOG?=
- =?us-ascii?Q?AQWW/56OPLf27IHvpRPQewj9/nH/1ns29wC0kp7nTvkabAsHqCMZVkcuuQdE?=
- =?us-ascii?Q?fXSrgTFO/3cdHFr1hUdOClxzWb8N8gcn82NmUHU28f1r862jIt0GAgpXHAI7?=
- =?us-ascii?Q?Fp0lV2HqFGU92zpvWsWW19rcNUDsE0ZfknweoUyQK5zjC+3RmqBRthsKTH9E?=
- =?us-ascii?Q?ngi67bMPSEczsR7GK62tzzJRNp7KTy/lo0OZQX1rYIdthg=3D=3D?=
+ =?us-ascii?Q?EOiMAj5KNXZKbzjZ/AF4jty5qxBKAhqZcQNK/kzi59NpMd8Xzol4RahcHlyt?=
+ =?us-ascii?Q?lT1RA3sG0pUZhqY6FnlsdYMVbyZbH8ExXNUG50kOa22yD8yEohgb9sB/xgiT?=
+ =?us-ascii?Q?PgdFtyMCHcgjWBk5KHI558BjkWBCah7SuKnvj3xWU87LQhFvXQZza2kzbAZ+?=
+ =?us-ascii?Q?jMq8bcdAJycL9g9mKv96P+oPmk8niyp9CNBFliu8Td1K1Wd15srC/h2bxvXR?=
+ =?us-ascii?Q?UB7ZrbbB91m96ALZ+tGAYvHwDD2TkNGOSKZN3U5dLE2hjgo42ue+CmKMk/Z5?=
+ =?us-ascii?Q?5PvB6ZpNTgzv4SRnrtTFG84570KufcjpnedI61lXZMeIW4pMBlVBHEjM/87C?=
+ =?us-ascii?Q?hbJhtqLLL1bbofNPBiVAI/sZ514nurTP8BO+hLEoPDrIbCtI864naoy/qRyD?=
+ =?us-ascii?Q?4HUxcb35RnH/rR9r0IiNbCmAGhKNH6PYtNzYILKLcnhONOBSTtKthxoLBPPb?=
+ =?us-ascii?Q?5vcsUIlPpjdFMTiJyD82EQSd5SlG9b6VpJ8eLkUiwHYnrxHWZXJWf6IRT3Bu?=
+ =?us-ascii?Q?9OF7IXh68uJiSAlJpZW7WotQTciRoP2AICvYG1fEBZZk5Vxrx1GjHh6vwpF1?=
+ =?us-ascii?Q?tOc99x0VjaeA7jmWKrIsKCaUeSc3YM7VJr/XvY4wddfa/43LgREJWqcYTnU/?=
+ =?us-ascii?Q?LTvQeiZu1JqOprlcI1OArDEtE7rIp+9u7H0HNahctA+sdZ1gNkrUzNtizIoE?=
+ =?us-ascii?Q?mHkTsX2m3DRyzFpeE3Rlw8OqG04RB94hQB7WV1kKdNYO0TKrZKE78dFoG33h?=
+ =?us-ascii?Q?hm7VbJWSaf6xAn+UYBdy59ZDem95JQJ/dxDwnkA6Wy1hNLJtxSzUJm2W+88T?=
+ =?us-ascii?Q?3i/LHRSLMCn8bQebdGSGaS89vttUFuhWOMjmViz+iTPX4lG3orBphlkmvokD?=
+ =?us-ascii?Q?4shTZ2zvABxSOoYS1yBE/oHyQ145oyYBW/ffBSP+B9XoQdk2X5FzUWMOhyUL?=
+ =?us-ascii?Q?/yCC2922zZSiT7wPddK2qpJh11FjrCIiwyZH0tLef6NoQHmI4Vb+a4SoStJu?=
+ =?us-ascii?Q?s5b1pCDyTEPe1ebuLTy4/4j9KR0rjADBKr/5YdHcZcFg+nwtwt3/T2JT8fxw?=
+ =?us-ascii?Q?Bg9Ypd5NVnkmuylT2o/JpC2/1XoX/jztLFeoseS2KjTmxzcmZ+s1GthNed+y?=
+ =?us-ascii?Q?NxdZN+AeaGypv342HVLbVbkjZnrPoMlA2V6HevH4BumDGqer2fk7XmEay5+1?=
+ =?us-ascii?Q?szTkGLIiGsuWzfXJrHbvxscUHQ37tQChcJbzewYNvewZNO0xf2UCYwmW4S8Y?=
+ =?us-ascii?Q?STZYAoMe1AZhjYmxko7Vq3W05ZvmtkbfokVfv6N4MSbKEbKFhfziR9h/f/ad?=
+ =?us-ascii?Q?Xp2ocfBd3nd2us1wX7Ks4Tqi3dzRz4MnlP/roe+We+OI0Q=3D=3D?=
 x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
 X-OriginatorOrg: skidata.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: VE1PR05MB7376.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 40357dcf-c136-4b9f-84e1-08d97cc55046
-X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Sep 2021 06:01:54.2704
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7abb138d-17d6-4a65-1a5e-08d97cc58b92
+X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Sep 2021 06:03:34.0361
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: e5733095-4425-4f08-b6ba-487b9a46a425
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: +IZH3lwrHpjlNx09J0nrcVSk27CoatvnjPiTqiQlYVtzQKwNRY41Vp1WqOSpuD+t/JfgzxCR7lyzpEBnaX2Qexeh2QZ9Bj3XMjMU/8lu3Yg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB6752
+X-MS-Exchange-CrossTenant-userprincipalname: vnDFokn9e9JTlei/wP6W4fABSQSvsxxiYQ6LNPR2YhJZQ05H6/8FKxCmf05gqy9o0W8uZsKVAhjehWhx39C4LrKBhCoC8ycyVEvx37a9ppM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB4560
 Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
-Content-ID: <D7FFC90A06947F4C97328D2DD1811407@eurprd05.prod.outlook.com>
+Content-ID: <4F5C30FFA76E384BB26412E89D5AC68F@eurprd05.prod.outlook.com>
 Content-Transfer-Encoding: quoted-printable
 
 Hi Geoff,
 
-On Mon, Sep 20, 2021 at 03:05:22PM -0700, Geoff Parker via lists.openembedd=
+On Mon, Sep 20, 2021 at 01:06:07PM -0700, Geoff Parker via lists.openembedd=
 ed.org wrote:
 > From: Geoff Parker <geoffrey.parker@arthrex.com>
->=20
-> Ran convert-overrides.py script with some manual edits after review.
 
-Thanks for the patch! Nonetheless we have a similar one already in
-master-next. Can you please verify it fit's your needs and maybe give a
-"Tested-by" or "Reviewed-by" tag for the commits from AJ Bagwell?
+Thanks for the patch, but we have the same already in master-next! I'll
+try to finish the tests and merge master-next into master today.
 
-Thanks; rl
+regards;rl
 
->=20
 > Signed-off-by: Geoff Parker <geoffrey.parker@arthrex.com>
 > ---
->  classes/java-library.bbclass                  |  6 +-
->  classes/openjdk-build-helper.bbclass          |  4 +-
->  classes/openjdk-test-image.bbclass            |  2 +-
->  classes/openjre-test-image.bbclass            |  2 +-
->  recipes-core/ant/ant-native_1.8.1.bb          |  2 +-
->  recipes-core/antlr/antlr_2.7.7.bb             |  6 +-
->  .../ca-certificates-java_20180516.bb          | 12 +--
->  .../cacao/cacao-initial-native_0.98.bb        |  2 +-
->  recipes-core/cacao/cacao_git.bb               | 24 +++---
->  .../classpath-initial-native_0.93.bb          |  2 +-
->  .../classpath/classpath-native_0.99.bb        |  2 +-
->  recipes-core/classpath/classpath.inc          | 40 +++++-----
->  recipes-core/cup/cup_0.10k.bb                 |  8 +-
->  recipes-core/fastjar/fastjar.inc              |  6 +-
->  recipes-core/icedtea/icedtea7-native.inc      | 20 ++---
->  .../icedtea/openjdk-7-release-03b147.inc      |  4 +-
->  .../commons-beanutils_1.8.0.bb                |  2 +-
->  .../commons-configuration_1.5.bb              |  2 +-
->  .../jakarta-commons/commons-digester_1.8.bb   |  2 +-
->  .../jakarta-commons/commons-discovery_0.4.bb  |  2 +-
->  .../jakarta-commons/commons-el_1.0.bb         |  2 +-
->  .../commons-fileupload_1.2.1.bb               |  2 +-
->  .../jakarta-commons/commons-httpclient_3.1.bb |  4 +-
->  .../jakarta-commons/commons-jxpath_1.3.bb     |  2 +-
->  .../jakarta-commons/commons-net_1.4.1.bb      |  4 +-
->  .../jamvm/jamvm-initial-native_1.4.5.bb       |  4 +-
->  recipes-core/jamvm/jamvm.inc                  | 30 ++++----
->  recipes-core/jamvm/jamvm_git.bb               |  2 +-
->  .../javasqlite/javasqlite_20150419.bb         | 10 +--
->  recipes-core/jcraft/jsch_0.1.40.bb            |  4 +-
->  recipes-core/jikes/jikes_1.22.bb              | 10 +--
->  recipes-core/jlex/jlex_1.2.6.bb               |  8 +-
->  recipes-core/libmatthew/libmatthew.inc        | 22 +++---
->  recipes-core/openjdk/openjdk-7-common.inc     | 76 +++++++++----------
->  recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb |  2 +-
->  recipes-core/openjdk/openjdk-8-common.inc     | 16 ++--
->  recipes-core/openjdk/openjdk-8-cross.inc      | 14 ++--
->  recipes-core/openjdk/openjdk-8-native.inc     | 18 ++---
->  .../openjdk/openjdk-8-release-aarch32.inc     | 30 ++++----
->  .../openjdk/openjdk-8-release-aarch64.inc     | 16 ++--
->  .../openjdk/openjdk-8-release-common.inc      | 54 ++++++-------
->  recipes-core/openjdk/openjdk-8-release.inc    |  4 +-
->  recipes-core/openjdk/openjdk-8_272.bb         | 24 +++---
->  recipes-core/openjdk/openjre-8_272.bb         | 16 ++--
->  recipes-core/rhino/rhino_1.7r4.bb             | 10 +--
->  recipes-core/servlet-api/jsp2.0_5.5.26.bb     |  2 +-
->  recipes-core/xalan-j/xalan-j_2.7.1.bb         |  4 +-
->  recipes-core/xerces-j/xerces-j_2.11.0.bb      |  4 +-
->  recipes-core/xml-commons/jaxme_0.5.2.bb       |  2 +-
->  recipes-core/xml-commons/xpp3_1.1.3.4.O.bb    |  4 +-
->  recipes-extended/dbus/dbus-java_2.7.bb        | 14 ++--
->  recipes-extended/rxtx/rxtx_2.2.0.bb           | 18 ++---
->  recipes-images/images/openjdk-7-test-image.bb |  2 +-
->  recipes-images/images/openjdk-8-test-image.bb |  2 +-
->  recipes-images/images/openjre-7-test-image.bb |  2 +-
->  recipes-images/images/openjre-8-test-image.bb |  2 +-
->  56 files changed, 295 insertions(+), 295 deletions(-)=
+>  conf/layer.conf | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index 7ef116d..7791178 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -7,7 +7,7 @@ BBFILES +=3D "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/rec=
+ipes*/*/*.bbappend"
+>  BBFILE_COLLECTIONS +=3D "meta-java"
+>  BBFILE_PATTERN_meta-java :=3D "^${LAYERDIR}/"
+>  BBFILE_PRIORITY_meta-java =3D "10"
+> -LAYERSERIES_COMPAT_meta-java =3D "dunfell gatesgarth hardknott"
+> +LAYERSERIES_COMPAT_meta-java =3D "dunfell gatesgarth hardknott honister"
+>  LAYERDEPENDS_meta-java +=3D "openembedded-layer"
+> =20
+>  LICENSE_PATH +=3D "${LAYERDIR}/licenses"
+> --=20
+> 2.30.2
+>=20
+
+>=20
+>=20
+>=20
