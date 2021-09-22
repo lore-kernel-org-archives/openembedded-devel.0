@@ -1,50 +1,50 @@
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.web12.959.1632338537606586979
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.web10.922.1632338538596587531
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Sep 2021 12:22:17 -0700
+ Wed, 22 Sep 2021 12:22:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=cIhZ/RVZ;
- spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f173.google.com with SMTP id m26so3591116pff.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:17 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=QHuh28Dv;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id v19so2805617pjh.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=4q7Qhfr9G1dqT+ubR2SPx6HFKHTFfViAcDP/JkCy2tM=;
-        b=cIhZ/RVZrXuJ8nx73lQTf/YR0xIOwo5Nbftr9FwVVsyN1omfWOcRDXw1WALYFwsbBN
-         UPXyNvBPksxU9LjVmpdidt/dGgNI4o7OuQv8/8Tdx9r2yXI8YXUhRgqeXas8tNrzOmar
-         EQG18DQ2vtzGIyq1IOoCK8Q4pUv6z8tplpxKx3GIRyjH7DNKK6NbTGfHtTU4OOKbGLa2
-         FbxKHZchSV9m2XSnVAC3R4U71soMAms9kGN+8NVi8mP3KmD1Pv7rzQPup78EB6wVgA1V
-         J8B5rNybEbdVsdTNCMwLiObpN2Eoi9xYO61rgpZH1QotNVNtpORbMCDfcHt9Y6tPzyUs
-         y62Q==
+        bh=vAwtsF+lOrMXG4rzQ0hMshXkTh0yENW7qvHKOQAr4DY=;
+        b=QHuh28DvSnQW53yeMSyplyizMYk6nn+GLQxhDRRzKx4TNg8hddHDDyRTM35Et/zlB2
+         PkynSUlc1shKN/FHQU8vxLUhK3BzalQUYJ6KYHFL59UUq8Q0tYBwhc9dLe6vRuoakuFb
+         +jKXK1ubAqtcqJbIL7tRlcfyu+0Z6rV1e+ahJIzn+quXXQR8nkNUk/LH5MoOURZawmrJ
+         JRj9k6cwsET3TK66z7s2OCXSow6hmM767F/jbzNufQeYgHHq9CSUT+/5vpsOmJEoYELr
+         zLVRZ1dqoKr2TE+gx6tcS4yIihsGyAoE6zqfR3/ZhakC7pb6awXnAnQeJjNnujZ88FIN
+         srZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=4q7Qhfr9G1dqT+ubR2SPx6HFKHTFfViAcDP/JkCy2tM=;
-        b=mzMeMHZgZ3sPLO5Krf1znKfzOZ7F53X3uya+LBqzuoeaTYBR7vRtx/pKbzKiqm+2Ah
-         ZDL90Oq0yIhnayDH+R2QkYoFyfy+2byKrHGjPG3Vn5xRtR8D15iAxh+nCAB85d00zLhl
-         eK15N5rEo0ue7D+s5ggKnoLScXnauBfzhWJP1twE9jQ23W6WJR1WKBC61nSOhFBR9ZLd
-         IAUIo+qY5yW0v8tXPRIGJ4Ju/tWyudDYMFFQGYrV5Cs1DdcVnlMF90PxAdjlvWf08Es/
-         X6AZrrwzdi0xO2wmzCwEfjF+pJq/CCWKXwy30YGpNWGYr4gYn+lXcKJGoUnYs05U14u8
-         xCbQ==
-X-Gm-Message-State: AOAM530D5VCLLdQG8Am3JO5NA2GOScYNZG4wMoJMQmY6b9sT/zMy/q36
-	POhY0k5lZkm+k2aUwB5B2Cez1mY5aawYUQ==
-X-Google-Smtp-Source: ABdhPJyiM1KWTJp8G+jWAgOD0tMY/0YEY2qoYGS3rJtctg24Op3yXH4Ju6V5C+JZsOzmBxcjN37xiA==
-X-Received: by 2002:a05:6a00:a10:b0:412:448c:89c7 with SMTP id p16-20020a056a000a1000b00412448c89c7mr352176pfh.83.1632338536960;
-        Wed, 22 Sep 2021 12:22:16 -0700 (PDT)
+        bh=vAwtsF+lOrMXG4rzQ0hMshXkTh0yENW7qvHKOQAr4DY=;
+        b=35IKL3e3l6lZIWLcE041Ete7Cc53/hB8AgvA7AOTfPSZp60dVrCcJYiVdW4m4ZSOBj
+         MgHvg+KEDh5d2IW9djYZFt2/LuoJxi5R9uK98WOlIXb5oAOLgweYAHH7B8aRrtsDKHby
+         OHnsFOfS6ZH68VIi84qux5KqzEjYqb/j9WtY74RIQU2OMyUVoyGWMvH9O1uecs9g5Xzi
+         3pUVPNxKG8VnE4nQeuTMAdvQWyFcAN5zh841sQSPGqKpukb6cwoXy8g9yi1JZL2vWFMM
+         8cOnfEr31HEIn1wGh5tg5IKreZ+qvPWLQPHwecM+O2S3ODbY05xFgyuUScM7OWRdXuF2
+         ow6g==
+X-Gm-Message-State: AOAM531SsYb6OqPnOKPlUY4vkVFLj6FDNtPu175FImhqcKb9sPCZr4c/
+	npTYDvzirzOBjLU0Vg25torMn745cpcvsA==
+X-Google-Smtp-Source: ABdhPJyadVnplt4O5aa7bY9rFjhdnaGK3gm7rGhto6rxxzAr0A6rPQsb1Y6kF9tEP5PRhIfcBMixMg==
+X-Received: by 2002:a17:903:1208:b0:13a:8c8:8a33 with SMTP id l8-20020a170903120800b0013a08c88a33mr316093plh.89.1632338537779;
+        Wed, 22 Sep 2021 12:22:17 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::728f])
-        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.16
+        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Sep 2021 12:22:16 -0700 (PDT)
+        Wed, 22 Sep 2021 12:22:17 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 02/39] libgnt: Inherit pkgconfig
-Date: Wed, 22 Sep 2021 12:21:36 -0700
-Message-Id: <20210922192213.3062719-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 03/39] portaudio-v19: Inherit pkgconfig
+Date: Wed, 22 Sep 2021 12:21:37 -0700
+Message-Id: <20210922192213.3062719-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20210922192213.3062719-1-raj.khem@gmail.com>
 References: <20210922192213.3062719-1-raj.khem@gmail.com>
@@ -53,22 +53,22 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/pidgin/libgnt_2.14.1.bb | 2 +-
+ meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/pidgin/libgnt_2.14.1.bb b/meta-oe/recipes-support/pidgin/libgnt_2.14.1.bb
-index 7c9a2cbf6b..2450d31966 100644
---- a/meta-oe/recipes-support/pidgin/libgnt_2.14.1.bb
-+++ b/meta-oe/recipes-support/pidgin/libgnt_2.14.1.bb
-@@ -5,7 +5,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c9a1abacd0166f595a9fbe6afb1f0d5e"
- DEPENDS = "glib-2.0 ncurses libxml2 glib-2.0-native"
+diff --git a/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb b/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb
+index c0b32e725d..ac360659ae 100644
+--- a/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb
++++ b/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb
+@@ -13,7 +13,7 @@ SRC_URI = " \
+ SRCREV = "147dd722548358763a8b649b3e4b41dfffbcfbb6"
+ S = "${WORKDIR}/git"
  
--inherit meson
-+inherit meson pkgconfig
+-inherit cmake
++inherit cmake pkgconfig
  
- # SRCREV = "0a44b1d01c41"
- # SRC_URI = "hg://keep.imfreedom.org/${BPN};module=${BPN}
+ PACKAGECONFIG ??= "alsa jack"
+ PACKAGECONFIG[alsa] = ",,alsa-lib"
 -- 
 2.33.0
 
