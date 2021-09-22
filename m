@@ -1,50 +1,50 @@
-Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
- by mx.groups.io with SMTP id smtpd.web08.920.1632338548328160548
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
+ by mx.groups.io with SMTP id smtpd.web11.953.1632338549247030641
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Sep 2021 12:22:28 -0700
+ Wed, 22 Sep 2021 12:22:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=She+WNRW;
- spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f178.google.com with SMTP id f129so3811350pgc.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=TFsCnIH+;
+ spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f171.google.com with SMTP id q68so3762122pga.9
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=HQUSbjhvmWaCicFF4y0EtcFdYyiQmlm3DvDgUHo/Nn4=;
-        b=She+WNRWSPpL6+d779deUS+LIDZ0YgHOVaos0oN51dZUq7VWjPVWSgx2UpFMROKRl2
-         ErBNK6+9YU0dkCpXoAMjSG70uUqkKFA8XOqZQS43ziLYMktULXd+lkxZbTr0jifEl51R
-         T4X0uQxkH3I9eeP68TRdM8oliJC9X1Lx+B8mHsrZUY7hC0vbJPE1tBnWKaZbxQ2Yckf/
-         I/PcnZP52TMigJXdWrzP6ubqac8K6EzTXR1+dI72r57v9fQUlu3LYTR1nJJLECcz9eU2
-         8juofim8dvN62gOZVRgI1iyMQtuoZQt+S+pqGjXM5TPHTh1WfWpG3+E04z6Qsk7nfHfN
-         IYPw==
+        bh=HSFGgd/CkLhzVZ0FskD/hTSNK6+5d82wFNetUm/UFRo=;
+        b=TFsCnIH+o29qCoUpbNftS0/CuETUn44JrCE47CerW21FpvnXO1Ug78XM6cCeKUfbP3
+         kiSUQd7Wuyw9u33s14q3SXbAzKAffqf386m7IPd5E61W0udnDsS8RJoIbIxzKpRSaIqV
+         my1c/ezo1/gFEw0zjay/vmHjl6rMUhMZnum7xEDPBUrMmWAPt/SnD4jBqR7Q69VV8Fhj
+         f2NP+dLETpo2ujBrhecKk+J+FJoMuUi41LIorCKbIcO5nnO+ZCAVfY9tMreU+GvJPj+j
+         D3PVeEn4+lrfpVvd2rG8vVwaVbn6w90DR6H7AEzKfUlemioGqGhnLyc60wLPyFfvi0m+
+         xzKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=HQUSbjhvmWaCicFF4y0EtcFdYyiQmlm3DvDgUHo/Nn4=;
-        b=G7mN4JPm3FxDSu6saxGZRYEs+jARIXFbqgAOJhRCELdVmYM/rfs2I+aK5HefVxGrBn
-         pXIhuKC3QKmVJbtA30RgHaHtZwzYebJphvXNTffVwzLUXl81ystUHyoelN/lPq5bACNQ
-         MbgUwuUsu9+JFjqZP+6EyIsv+nxZoNwGD6OkEF2inJbfcFEvRC/KxHaw4iz/aDRAmLy3
-         HltZLiWgbDVAaZlDY/PegVtilOkvWvl0shD8MioIQ6NdyScRrN1G78uLHC873VNwvre4
-         4EAdnsVXMLfT4EPQo+izgnQKV2IyHEw8+Cyu4uPJGpaNrHdeNOL5+2rYj+k8T/+n4aor
-         Fm7w==
-X-Gm-Message-State: AOAM530vs6H3o3yBNOfAQa1WkbqnWN/HrbODzJZwFdO0b6GuB4ski6RJ
-	9wwcR3HsNYPVaG5e7eCIYyskmkVVj2LcxQ==
-X-Google-Smtp-Source: ABdhPJyZFqOjBYJ/X0zlZyi837oW6C1U0rtrebeGE+yBaMbAbukZvhPcIQPmOniT+i6+9NaIiYQzqA==
-X-Received: by 2002:aa7:83c6:0:b029:3e0:1f64:6f75 with SMTP id j6-20020aa783c60000b02903e01f646f75mr355966pfn.69.1632338547684;
-        Wed, 22 Sep 2021 12:22:27 -0700 (PDT)
+        bh=HSFGgd/CkLhzVZ0FskD/hTSNK6+5d82wFNetUm/UFRo=;
+        b=r60iwb6Uzkwksk7Nxb7volM/6VjBXjhH4RlfV+uwYbDd1jhICvN6MkdxASK/ZvSlcU
+         +l3n2LGNoiaXNI6VZrpHNMJaM7kB+5U3waz5iF7UMhhm1B4rz/tnj2F9lkQzgF8/3Hq9
+         kFJpkV6N1f8sOfvpbcgDPYvr7EdGYeK8y5KfaTjLe0y6bZjr6QwDmmNQIpxDUE9uflpR
+         EPkXhDze3xpj9rxdb7XSdCze4LacA9NyKO3++PMKM/2rw9as6IZOQpOo14svjZTYnxzX
+         uwN6V3edsXb4sUvRvc1p4E6pOREhmk4kYxTENF4BO3NQQ9Ki591ieaZ9Im7oTrBD385g
+         r66A==
+X-Gm-Message-State: AOAM532b7OBatPPYbejRabHAnnyMwQALDif0ZOskPfNEum4dD6N/LnoG
+	9ZPdGA7U4wtnycCvomYZlSJZkrDT1w+07Q==
+X-Google-Smtp-Source: ABdhPJyFbjyiuOUiXx3783i6fH5phkKYI2UQqzK3yZj3+te1pNGDcyh9+4U08lbpDilSBA920TbbUA==
+X-Received: by 2002:a63:7c5e:: with SMTP id l30mr465872pgn.235.1632338548621;
+        Wed, 22 Sep 2021 12:22:28 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::728f])
-        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.26
+        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Sep 2021 12:22:27 -0700 (PDT)
+        Wed, 22 Sep 2021 12:22:28 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 14/39] pavucontrol: Inherit pkgconfig
-Date: Wed, 22 Sep 2021 12:21:48 -0700
-Message-Id: <20210922192213.3062719-14-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 15/39] python3-icu: Inherit pkgconfig
+Date: Wed, 22 Sep 2021 12:21:49 -0700
+Message-Id: <20210922192213.3062719-15-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20210922192213.3062719-1-raj.khem@gmail.com>
 References: <20210922192213.3062719-1-raj.khem@gmail.com>
@@ -52,27 +52,34 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Fixes
-../pavucontrol-4.0/configure: line 6444: syntax error near unexpected token `GUILIBS,'
-../pavucontrol-4.0/configure: line 6444: `PKG_CHECK_MODULES(GUILIBS,  gtkmm-3.0 >= 3.0 sigc++-2.0 libcanberra-gtk3 >= 0.16 )'
+RuntimeError:
+Please install pkg-config on your system or set the PYICU_CFLAGS environment
+variable to the flags required by the C++ compiler to find the header files
+for ICU, and possibly -std=c++11 if using ICU version >= 60
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python3-icu_2.7.2.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb
-index 3e98e71c60..591703e868 100644
---- a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb
-+++ b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb
-@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
- # mind when doing version upgrades).
- DEPENDS = "libxml-parser-perl-native intltool-native glib-2.0-native gtkmm3 libcanberra pulseaudio"
+diff --git a/meta-python/recipes-devtools/python/python3-icu_2.7.2.bb b/meta-python/recipes-devtools/python/python3-icu_2.7.2.bb
+index 4c064c3d4c..2433a8c9d3 100644
+--- a/meta-python/recipes-devtools/python/python3-icu_2.7.2.bb
++++ b/meta-python/recipes-devtools/python/python3-icu_2.7.2.bb
+@@ -3,11 +3,11 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://setup.py;beginline=244;endline=252;md5=3e00c41c6d04310707992b93307a224f"
  
--inherit autotools features_check perlnative
-+inherit autotools features_check perlnative pkgconfig
+-DEPENDS += "pkgconfig icu"
++DEPENDS += "icu"
  
- REQUIRED_DISTRO_FEATURES = "x11"
+ PYPI_PACKAGE = "PyICU"
+ SRC_URI[sha256sum] = "1382869b22d91cc99274f9b525fa7d9199b44d9007ff0036a09747839a01e9dc"
  
+ SRC_URI += "file://0001-Fix-host-contamination-of-include-files.patch"
+ 
+-inherit pypi setuptools3
++inherit pkgconfig pypi setuptools3
 -- 
 2.33.0
 
