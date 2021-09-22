@@ -1,50 +1,50 @@
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web09.961.1632338551069657877
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web10.930.1632338551905044364
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Sep 2021 12:22:31 -0700
+ Wed, 22 Sep 2021 12:22:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=HTKXp/mF;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id f3-20020a17090a638300b00199097ddf1aso5270809pjj.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Pc2/5Zr8;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id 17so3783036pgp.4
         for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=8OPKXsh5xvrk4aLfcwAxSqYlSKGgHHqJTnUGSR9g3ZU=;
-        b=HTKXp/mFf4qGikxEgz7CyvEXQGUGmXTHPaOdH+B9Y4G79Kh3dg27IaLTfNZjg+zUvP
-         Ekcor4wadLneX4Jj69UHWaGMDwFrJbXswlPoau5EcEE75WSecnK8SV+lVXqoNjtepZnt
-         hUbPD+sbjr/+0L4WS4CM4Lf1j7KKmCMdIJDTjpFi9/mYp8tND1ThLpUCxIN3jVsuKvV3
-         7KC7c56tvCGBBa8hpvP+EYgE7eGYrBj8onBLpzNtZ15qdIieIz+zorka4oaglEs+oxrA
-         yuK3xMaeJNDhPXG1FwJw7ab/LUnhaFsz9PZQaDkThWM5sGS3Pd+1maVQM655g3mFj1R+
-         nq8Q==
+        bh=k2UjJv+TFkAqqUR3NYsOAcSHZiYzuL+441pornlXMOU=;
+        b=Pc2/5Zr8hB7eYjNf56B5S71BNe/MkInHPw14jV/2O8b2hweOamCulKuCJh2LNcYVU0
+         GeEySg+VslYCs/UYs/o57z+zD2B3D6aiYQg1zArBNu2lSP0ion2021PyIX+dTxUaWq2A
+         yw/WRSEgpiBzPJ2bD1KdexHPE6ZluaXz3S5fWthKKOY1gh1DKd4jW7DKkLo4ABJj5fGW
+         rAmtGG2seItrFH1nZqI6odXblLmM9aftEsiQXC23stQsoFnQwa/KiJELdKa1tgPugyFS
+         V2Cry9+B/MNDvZQbHznjqUoslSHLyJpu2qctHDKhbMnnVDqQ6CMwT0MXgHOUFfKkNZpC
+         FDyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=8OPKXsh5xvrk4aLfcwAxSqYlSKGgHHqJTnUGSR9g3ZU=;
-        b=PW/PLtoM7skVbDVhj44DmIAZ1nzdMrLrFMeLW2uCbMNizR/PkgM7TVLBqoDK6NjPNi
-         mCKRnOpTOx5qCSsuQswAOoh/Q2Ia14MQVPCeZDRRoM/6IBxa0StX5hTDG5ZF6GfcRQZ0
-         HW9xSi1JDimPOrEW4FFcLIY4NtaCBOdvBAZYNERs8z0rR9othrLPEHFSutJbMlWKV5IH
-         G4UGXtanfLC67rEEwxNO91RzzuTxkIpkVQwEjzmrXTkuIxeIwlV6BKEjh6+/Gte6XpDl
-         OT/q92kDhrWo1OZ7i2YLvBY2kF44l2Sf6rXI4JsJjsLP2eaUl6eQs5o7EXYLj9zuBzoL
-         OxcQ==
-X-Gm-Message-State: AOAM531+xI/8blj3FDj65cKJrrGzIyMY9LVsbX9KojqoyTS0RIzq6UD6
-	qhEH8c1q4O5O4NyxJ7Omt+S7AwczypqDkA==
-X-Google-Smtp-Source: ABdhPJzyuZz4bNC3EDHjU4c8G9+xcJ2mt3PRFq9Uy2BlhIgsaOuT4S1Wc+xtpCcLIG9k+4QS/lsdGg==
-X-Received: by 2002:a17:90a:6283:: with SMTP id d3mr716077pjj.73.1632338550455;
-        Wed, 22 Sep 2021 12:22:30 -0700 (PDT)
+        bh=k2UjJv+TFkAqqUR3NYsOAcSHZiYzuL+441pornlXMOU=;
+        b=n+dASFYQHehz22SOaLkcu1e1tiP2aCGQPnuCmZdB/E2B78AEHSmBfYrqkTYzPrt0Hz
+         0a1Xw4neb2dy72Z0NpBlf4Q4PCY4M1+gRC8fIlUBnhmra2HqtjX+HzjrRzsN4fyU4x1z
+         jm5kh3Mnhj6VTj1osAZe4sgG0uYZ5llE2/U9aKul49sJh551RLaObjm1HCybvzOkdpP7
+         gEWJL6KU18SHfaK/I11u3BGUPLfHrjtGrjfLofy5I4Awm2Qy8iCqt5T3rSUHcjIwQ+TD
+         KfOEP8Yex8EAhnYsT246uWHCY/ZpOZZbAsGNwgpbZ/xfiOGixO2ceilUBRbn2NiGoGBZ
+         jR9Q==
+X-Gm-Message-State: AOAM531EjekyDLdKlhcV5CA3fC4lzOpo75J+NVf5NqmtRjxI1sucCvhH
+	9iASC/ePUOFVhZCJqRms+TAfbo5a/XfPTw==
+X-Google-Smtp-Source: ABdhPJxfSQEL/PgUjLWDaznqu5PBOe/QsNVuTmXiH9hayiQAloxxCbXiBtDgggS5hESOaLaZ/D6mUA==
+X-Received: by 2002:a05:6a00:1789:b0:43d:ea98:7ea8 with SMTP id s9-20020a056a00178900b0043dea987ea8mr717856pfg.67.1632338551336;
+        Wed, 22 Sep 2021 12:22:31 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::728f])
-        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.29
+        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Sep 2021 12:22:30 -0700 (PDT)
+        Wed, 22 Sep 2021 12:22:31 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 17/39] mimic: Inherit pkgconfig
-Date: Wed, 22 Sep 2021 12:21:51 -0700
-Message-Id: <20210922192213.3062719-17-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 18/39] python3-h5py: Inherit pkgconfig
+Date: Wed, 22 Sep 2021 12:21:52 -0700
+Message-Id: <20210922192213.3062719-18-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20210922192213.3062719-1-raj.khem@gmail.com>
 References: <20210922192213.3062719-1-raj.khem@gmail.com>
@@ -52,27 +52,25 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Fixes
-configure.ac:132: error: possibly undefined macro: m4_ignore
-      If this token and others are legitimate, please use m4_pattern_allow.
-      See the Autoconf documentation.
+error: pkg-config probably not installed: FileNotFoundError(2, 'No such file or directory')
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-h5py_3.4.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb b/meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb
-index f4e26d52c3..412a272eed 100644
---- a/meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb
-+++ b/meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb
-@@ -25,7 +25,7 @@ SRC_URI = "git://github.com/MycroftAI/mimic1.git \
-            file://0001-cmu_indic_lang-Make-cst_rx_not_indic-as-extern-decla.patch \
+diff --git a/meta-python/recipes-devtools/python/python3-h5py_3.4.0.bb b/meta-python/recipes-devtools/python/python3-h5py_3.4.0.bb
+index cc23802626..89000b7936 100644
+--- a/meta-python/recipes-devtools/python/python3-h5py_3.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-h5py_3.4.0.bb
+@@ -11,7 +11,7 @@ SRC_URI:append = " \
+            file://0001-setup.py-Fix-numpy-version.patch \
            "
  
--inherit autotools
-+inherit autotools pkgconfig
+-inherit pypi setuptools3
++inherit pkgconfig pypi setuptools3
  
- S = "${WORKDIR}/git"
+ BBCLASSEXTEND = "native"
  
 -- 
 2.33.0
