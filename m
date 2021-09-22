@@ -1,76 +1,150 @@
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web11.1421.1632322911135880030
+Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
+ by mx.groups.io with SMTP id smtpd.web11.248.1632333293613116368
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Sep 2021 08:01:51 -0700
+ Wed, 22 Sep 2021 10:54:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=juFBMw6u;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id v19so2276779pjh.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 08:01:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=IizetA/M;
+ spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: jan.vermaete@gmail.com)
+Received: by mail-ed1-f41.google.com with SMTP id v22so12601783edd.11
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 10:54:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=S1fbvCWyRfZ93WJQ40bz1veOktktQ9oV6u6tVb66rjQ=;
-        b=juFBMw6uf+NhDig4YYM3QUCWCvLslvwcp1kbjiO+8+eUi4hAmLvyURJGUrmQAH25kA
-         6QK+bxQ4CNo1uf4ra4vc05+ii1jAOkXacDJUEuToj6RvA2PellCovm5awkE90EXHWLz2
-         9ElTG3Jf5xiACAgrG4mJQgzto6xU1v7VKgXXfGX4zdCu7kdUZBtT7AXAzT4GcqaFpjus
-         n3QzSv58cOUYpFeRCNAlZj0vZSFRzVwTV/YLIPCe16faYIJTOO3KdZ8YsqXqkmNob4o0
-         gB+DSkk60la0BWJzOZVPOBvVD0ZASbAT41awZKiT3/amIKKpR1h+/Y81igflcSJqORjy
-         XHjw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=+AgCcjlzaExv9aX91yZAvkPayiMCY0xF2zCs5Pf/xns=;
+        b=IizetA/MahVYL34YeAASQn7cEtrLlKVnpXXUuRjuL5XBUE8YjlCFVPyP2CWcgFN7ty
+         p7/S8cbKpkiSimelCuQ5wPz4L9FNSH0/lq3wvtiQpCEGaubGS2eTAqcSKfR0lUL8eRE3
+         dDUZFGAnx8a7iYMEqyz1n94HKeitEpzZbZ0UrbNdai6v6hXuSp182/PhcxgCl1Voii79
+         lWRBgTxcPP9THzKeBs48nTllYiVtm/ZFNJDEmkDzVzXLoAcxiDdcgCRFMDSwiPKfWzrx
+         iZmgFsWevk0qIyclYm++otwYuJn2HtVWZn2/p8iQ0Zqh2ilBaP4S+WopjXFuQYXALy/+
+         tOUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=S1fbvCWyRfZ93WJQ40bz1veOktktQ9oV6u6tVb66rjQ=;
-        b=uAsfNOAZVR/NHvi+QuBIP0Sb8jx5qbjFsbMDwa6G4b+/MK+w/cbPUJxCGlmoZevZ85
-         p59ZVKc4clQdF/b/jl62nXvoLF+CcGLYg8nMZVdrA3WFudFlA/IgxtwgTpSejKAhVzx9
-         3LPx4W92gfGE1AHF1M2idVE5OdqcHkNe9hhCx1Yb8Ge0jkEkBVxRM7HpYkKHXQoEupVf
-         Do+eRtBEvu8DrzECIJE8I7mg6biXnd+inyFqvFhhkoos6Ma3cYei7AK9piz+wKDUekQs
-         YeIb76ZPBWTvg7GrwnxTjvvICINGwQRIlG5lmL/WZL4VSZSPz9iFqzJZe98wb3dVX4M+
-         yZJA==
-X-Gm-Message-State: AOAM5331v3RZuZyXKVibB+gPVPWDerti2vHutUxzVL28TQhyFp/0LF8D
-	UOf52uZc+PUpZsZsGsD7BAZgz6JV2vqhFg==
-X-Google-Smtp-Source: ABdhPJyZSWPaFKK0iVNoOWp2mdoZ1eLNxiSlQA1bpqfgDlw4sRZ4siZUt6gGfPm6AMHBkomIlO468w==
-X-Received: by 2002:a17:902:bc8a:b0:13b:78bc:9e18 with SMTP id bb10-20020a170902bc8a00b0013b78bc9e18mr271165plb.53.1632322910442;
-        Wed, 22 Sep 2021 08:01:50 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::728f])
-        by smtp.gmail.com with ESMTPSA id t15sm2767392pja.1.2021.09.22.08.01.49
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=+AgCcjlzaExv9aX91yZAvkPayiMCY0xF2zCs5Pf/xns=;
+        b=BAmpQvQFJ+Spfqt3nnQMyfCPvJydnyHj6lpTpB+FjI586APDIw/XPpJAlgV9eLlPx6
+         L1FLBB9QghM4DahUZboMZyJDbPUhghE1k/KB5CPDiF50rAXgdqUpu2Vxo4A/G/oKYa/N
+         ry2MqMCg+xzRo6HWJkrmQQyz089RIjRJcw5OFP8WpDxDeCEm8N6M2xp3aRfMoLmleFL+
+         EASKw4sk+QJ+DBje8DdfPOZFD3ecWlDZ0Z7AVF7/XTVC7FlenAlH/Q46wcNVlz/n9RGp
+         6QAEaiw5FaXlvDAPJ5YT83xJrkxm8DzMztoixbSaXTEB3sCl+UUewsVRPAt3QJemOt3w
+         Nc1g==
+X-Gm-Message-State: AOAM533m0jfd0cVtyGqw1bmVrBtwz2rsxKVOgLMp8zraFL1waZsVN0t8
+	+k+oTxkMIxrrB5eQD43lntHKYnfN04o=
+X-Google-Smtp-Source: ABdhPJymwQbZZI/8KFihb+Q7XnDk2Pt0M9HDXc8NLNpZk95m/aXNIiyJEfglS3UYbAJwuZP78RdTxg==
+X-Received: by 2002:aa7:d392:: with SMTP id x18mr669915edq.334.1632333291220;
+        Wed, 22 Sep 2021 10:54:51 -0700 (PDT)
+Return-Path: <jan.vermaete@gmail.com>
+Received: from localhost.localdomain (78-20-166-56.access.telenet.be. [78.20.166.56])
+        by smtp.googlemail.com with ESMTPSA id b3sm1313056ejb.7.2021.09.22.10.54.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Sep 2021 08:01:50 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+        Wed, 22 Sep 2021 10:54:50 -0700 (PDT)
+From: "jan" <jan.vermaete@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 3/3] python3-lxml: Inherit pkgconfig
-Date: Wed, 22 Sep 2021 08:01:45 -0700
-Message-Id: <20210922150145.705595-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20210922150145.705595-1-raj.khem@gmail.com>
-References: <20210922150145.705595-1-raj.khem@gmail.com>
+Cc: Jan Vermaete <jan.vermaete@gmail.com>
+Subject: [meta-webserver][PATCH v2] netdata: Fixed the recipe (v2).
+Date: Wed, 22 Sep 2021 19:54:32 +0200
+Message-Id: <20210922175432.2907192-1-jan.vermaete@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-It was part of default dependencies before
+The netdata website was not accessable due to some (changed) permissions.
+The systemd service file will start netdata deamon with the netdata user.
+The netdata group as existing, but the netdata user was missing.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+I moved some directory creations from systemd to the bitbake recipe.
+
+The project website address changed too.
+
+Removed the creation of the pid file in the service of systemd.
+Netdata itself has an option to create the pid file.  Because it's an
+options, it's probably also not needed in systemd.
+
+Tested with meta-raspberrypi on rpi4-32.
+
+Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-lxml_4.6.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../netdata/netdata/netdata.service           | 12 +++++++-----
+ .../recipes-webadmin/netdata/netdata_git.bb   | 19 ++++++++++++++-----
+ 2 files changed, 21 insertions(+), 10 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-lxml_4.6.3.bb b/meta-python/recipes-devtools/python/python3-lxml_4.6.3.bb
-index 241ffcfc0d..669c2eaeeb 100644
---- a/meta-python/recipes-devtools/python/python3-lxml_4.6.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-lxml_4.6.3.bb
-@@ -20,7 +20,7 @@ DEPENDS += "libxml2 libxslt"
+diff --git a/meta-webserver/recipes-webadmin/netdata/netdata/netdata.service b/meta-webserver/recipes-webadmin/netdata/netdata/netdata.service
+index b244d1866..ca13f7287 100644
+--- a/meta-webserver/recipes-webadmin/netdata/netdata/netdata.service
++++ b/meta-webserver/recipes-webadmin/netdata/netdata/netdata.service
+@@ -1,13 +1,15 @@
++# SPDX-License-Identifier: GPL-3.0-or-later
+ [Unit]
+-Description=Netdata, Real-time performance monitoring
++Description=Real time performance monitoring
+ RequiresMountsFor=/var
++After=network.target
  
- SRC_URI[sha256sum] = "39b78571b3b30645ac77b95f7c69d1bffc4cf8c3b157c435a34da72e78c82468"
+ [Service]
+-User=root
++Type=simple
+ ExecStartPre=/bin/mkdir -p /var/log/netdata
+-ExecStartPre=/bin/chown -R nobody.netdata @@datadir/netdata/web
+-ExecStartPre=/bin/chown -R nobody.netdata /var/cache/netdata
+-ExecStart=/usr/sbin/netdata -nd
++ExecStartPre=/bin/chown -R netdata.netdata /var/log/netdata
++ExecStart=/usr/sbin/netdata -D -u netdata
++
  
--inherit pypi setuptools3
-+inherit pkgconfig pypi setuptools3
+ [Install]
+ WantedBy=multi-user.target
+diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_git.bb b/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
+index 7c48b8a37..7ec989815 100644
+--- a/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
++++ b/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
+@@ -1,17 +1,19 @@
+-HOMEPAGE = "https://github.com/firehol/netdata/"
++HOMEPAGE = "https://github.com/netdata/netdata/"
+ SUMMARY = "Real-time performance monitoring"
++DESCRIPTION = "Netdata is high-fidelity infrastructure monitoring and troubleshooting. \
++               Open-source, free, preconfigured, opinionated, and always real-time."
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
  
- # {standard input}: Assembler messages:
- # {standard input}:1488805: Error: branch out of range
+-SRC_URI = "git://github.com/firehol/netdata.git;protocol=https"
++SRC_URI:append = " git://github.com/firehol/netdata.git;protocol=https"
+ SRCREV = "1be9200ba8e11dc81a2101d85a2725137d43f766"
+ PV = "1.22.1"
+ 
+ # default netdata.conf for netdata configuration
+-SRC_URI += "file://netdata.conf"
++SRC_URI += " file://netdata.conf"
+ 
+ # file for providing systemd service support
+-SRC_URI += "file://netdata.service"
++SRC_URI += " file://netdata.service"
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -31,7 +33,7 @@ SYSTEMD_AUTO_ENABLE:${PN} = "enable"
+ 
+ #User specific
+ USERADD_PACKAGES = "${PN}"
+-GROUPADD_PARAM:${PN} = "--system netdata"
++USERADD_PARAM:${PN} = "--system --no-create-home --home-dir ${localstatedir}/run/netdata --user-group netdata"
+ 
+ do_install:append() {
+     #set S UID for plugins
+@@ -50,6 +52,13 @@ do_install:append() {
+     sed -i -e 's,@@sysconfdir,${sysconfdir},g' ${D}${sysconfdir}/netdata/netdata.conf
+     sed -i -e 's,@@libdir,${libexecdir},g' ${D}${sysconfdir}/netdata/netdata.conf
+     sed -i -e 's,@@datadir,${datadir},g' ${D}${sysconfdir}/netdata/netdata.conf
++
++    install --group netdata --owner netdata --directory ${D}${localstatedir}/cache/netdata
++    install --group netdata --owner netdata --directory ${D}${localstatedir}/lib/netdata
++
++    chown -R netdata:netdata ${D}${datadir}/netdata/web
+ }
+ 
++FILES_${PN} += "${localstatedir}/cache/netdata/ ${localstatedir}/lib/netdata/"
++
+ RDEPENDS:${PN} = "bash zlib"
 -- 
-2.33.0
+2.25.1
 
