@@ -1,72 +1,74 @@
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web12.958.1632338536933194863
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.web12.959.1632338537606586979
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 22 Sep 2021 12:22:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=PEeIdW10;
- spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id k17so3572187pff.8
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:16 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=cIhZ/RVZ;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id m26so3591116pff.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=7R1TdzAxghQZhWxDvmTmx/Egq/1swzsIFmXcvz4v3TU=;
-        b=PEeIdW10PqxRvfzQrGDzQIWzvJ8uzaDefv0KfHAa6ljpPN3Iuj+juzR5DMIP0Oo39Q
-         3lFlQ4TP+PrQNZyQGfBVnSROVKhScl1bT/HWrD60BJJ5x+GjDLwiyR86co0Dx7tREqiJ
-         z/mhHn2g4GPncRYs+x3U2m4s4GKQh2pKohUdSl/6bAi+3VaxC1EhmenNzGSk146KlrdZ
-         9q7Mc+VpN7QgGpWIBsLAGXZXoJYV4PHYVPYh7zIaxJH22eO08Mi87U/ZaOU8ScOS2WEC
-         /g3zedGGXP/fFBp86SkSUnc1vf9Csao7PAit0kAng0jh7PLWV9/XSQajzbhfF2GV0gOF
-         q54Q==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=4q7Qhfr9G1dqT+ubR2SPx6HFKHTFfViAcDP/JkCy2tM=;
+        b=cIhZ/RVZrXuJ8nx73lQTf/YR0xIOwo5Nbftr9FwVVsyN1omfWOcRDXw1WALYFwsbBN
+         UPXyNvBPksxU9LjVmpdidt/dGgNI4o7OuQv8/8Tdx9r2yXI8YXUhRgqeXas8tNrzOmar
+         EQG18DQ2vtzGIyq1IOoCK8Q4pUv6z8tplpxKx3GIRyjH7DNKK6NbTGfHtTU4OOKbGLa2
+         FbxKHZchSV9m2XSnVAC3R4U71soMAms9kGN+8NVi8mP3KmD1Pv7rzQPup78EB6wVgA1V
+         J8B5rNybEbdVsdTNCMwLiObpN2Eoi9xYO61rgpZH1QotNVNtpORbMCDfcHt9Y6tPzyUs
+         y62Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=7R1TdzAxghQZhWxDvmTmx/Egq/1swzsIFmXcvz4v3TU=;
-        b=UEEABWa+GM0XbC03n34pz3nPZqQrbMrfAFmS7ggjQkJgbKZX5o80Fi4G9hoes2itix
-         ZtG2ROu/VhiKJXSwzaP0Bl9mVDHKBnREfUt6e1BWqtq9dM2oGrSE8pjp5N5UArdRU4q9
-         PoKgKQuFQzKDlEjivZVCbDaU0T4eqI1CVNMY/zL3StZOGOP8sm+xSsUdLuPkOKlI3NmC
-         QGW5GlnWd0yWCP0lksG4CV9SxlU6HTydAp4pUkH//YaIlrMpcm3MsYMPqa7xJVl8KbPX
-         E1B4ltD70zKPRyzD7SKqe+KaMX8aYACm7PUiWbefaeKs+soljv90kZarajPSm6+TvSvp
-         /DhQ==
-X-Gm-Message-State: AOAM530wu/V7IyEPDVdJ6I39O9+QD67/Pjl1A1/JEE6Tf7IGPQAPDVkC
-	sjWGi0Hq1h+EvJpHMmeXjw0ijhRwWosNxg==
-X-Google-Smtp-Source: ABdhPJyBvA+vtZykcPSflv2rwV19seOF4HJdbx3Jij+ObOGMQj2k9y0WocCMDWOuJpaNJj6q88sOvg==
-X-Received: by 2002:a63:2cce:: with SMTP id s197mr463549pgs.45.1632338536168;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=4q7Qhfr9G1dqT+ubR2SPx6HFKHTFfViAcDP/JkCy2tM=;
+        b=mzMeMHZgZ3sPLO5Krf1znKfzOZ7F53X3uya+LBqzuoeaTYBR7vRtx/pKbzKiqm+2Ah
+         ZDL90Oq0yIhnayDH+R2QkYoFyfy+2byKrHGjPG3Vn5xRtR8D15iAxh+nCAB85d00zLhl
+         eK15N5rEo0ue7D+s5ggKnoLScXnauBfzhWJP1twE9jQ23W6WJR1WKBC61nSOhFBR9ZLd
+         IAUIo+qY5yW0v8tXPRIGJ4Ju/tWyudDYMFFQGYrV5Cs1DdcVnlMF90PxAdjlvWf08Es/
+         X6AZrrwzdi0xO2wmzCwEfjF+pJq/CCWKXwy30YGpNWGYr4gYn+lXcKJGoUnYs05U14u8
+         xCbQ==
+X-Gm-Message-State: AOAM530D5VCLLdQG8Am3JO5NA2GOScYNZG4wMoJMQmY6b9sT/zMy/q36
+	POhY0k5lZkm+k2aUwB5B2Cez1mY5aawYUQ==
+X-Google-Smtp-Source: ABdhPJyiM1KWTJp8G+jWAgOD0tMY/0YEY2qoYGS3rJtctg24Op3yXH4Ju6V5C+JZsOzmBxcjN37xiA==
+X-Received: by 2002:a05:6a00:a10:b0:412:448c:89c7 with SMTP id p16-20020a056a000a1000b00412448c89c7mr352176pfh.83.1632338536960;
         Wed, 22 Sep 2021 12:22:16 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::728f])
-        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.15
+        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Sep 2021 12:22:15 -0700 (PDT)
+        Wed, 22 Sep 2021 12:22:16 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 01/39] libgnt: Inherit pkgconfig
-Date: Wed, 22 Sep 2021 12:21:35 -0700
-Message-Id: <20210922192213.3062719-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 02/39] libgnt: Inherit pkgconfig
+Date: Wed, 22 Sep 2021 12:21:36 -0700
+Message-Id: <20210922192213.3062719-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.33.0
+In-Reply-To: <20210922192213.3062719-1-raj.khem@gmail.com>
+References: <20210922192213.3062719-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-networking/recipes-support/libtevent/libtevent_0.10.2.bb | 2 +-
+ meta-oe/recipes-support/pidgin/libgnt_2.14.1.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/libtevent/libtevent_0.10.2.bb b/meta-networking/recipes-support/libtevent/libtevent_0.10.2.bb
-index fa5b4ade8c..5d7e1a0d60 100644
---- a/meta-networking/recipes-support/libtevent/libtevent_0.10.2.bb
-+++ b/meta-networking/recipes-support/libtevent/libtevent_0.10.2.bb
-@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = "file://tevent.h;endline=26;md5=4e458d658cb25e21efc16f720e78b
- SRC_URI[md5sum] = "105c7a4dbb96f1751eb27dfd05e7fa84"
- SRC_URI[sha256sum] = "f8427822e5b2878fb8b28d6f50d96848734f3f3130612fb574fdd2d2148a6696"
+diff --git a/meta-oe/recipes-support/pidgin/libgnt_2.14.1.bb b/meta-oe/recipes-support/pidgin/libgnt_2.14.1.bb
+index 7c9a2cbf6b..2450d31966 100644
+--- a/meta-oe/recipes-support/pidgin/libgnt_2.14.1.bb
++++ b/meta-oe/recipes-support/pidgin/libgnt_2.14.1.bb
+@@ -5,7 +5,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=c9a1abacd0166f595a9fbe6afb1f0d5e"
+ DEPENDS = "glib-2.0 ncurses libxml2 glib-2.0-native"
  
--inherit waf-samba
-+inherit pkgconfig waf-samba
+-inherit meson
++inherit meson pkgconfig
  
- PACKAGECONFIG ??= "\
-     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
+ # SRCREV = "0a44b1d01c41"
+ # SRC_URI = "hg://keep.imfreedom.org/${BPN};module=${BPN}
 -- 
 2.33.0
 
