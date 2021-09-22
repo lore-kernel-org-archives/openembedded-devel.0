@@ -1,50 +1,50 @@
-Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
- by mx.groups.io with SMTP id smtpd.web11.958.1632338560142681954
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.web08.928.1632338560922584671
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Sep 2021 12:22:40 -0700
+ Wed, 22 Sep 2021 12:22:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=GvT9mQXz;
- spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f178.google.com with SMTP id q68so3762774pga.9
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=A7YZ6QZY;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id y8so3576443pfa.7
         for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=mFKSPObRhuhcBjPun0qKmzwduCIaeg1Xwvld1P8alOw=;
-        b=GvT9mQXzHb08XjpJCtjFeLP3ljPCpIJVsuJweKQ3txzpfSO+Lr9WXD7fwA/63TyEXN
-         Hwgo9YsdyfAmq9NrQD5ZHHDadL5x/m7otnSzTEeRye/UdMfmh8VsiSnv0wwg2P7tngv1
-         W1xf7TGZcrs/c2SuwYFpzIjGtnwCoKRc0b7/aVI/ixMub6y+1WOmMyy3bYi1T+GdYlGO
-         dPBU33XbxBey0pfiznz4zOjBSmTqmYqX9M47hrQ0I82zbLoqeftid1BoxnAZeLjObthQ
-         vZxJS833UInQX41HXaNI7Qv8L5NDZLm41ZsBFQ1B/Rcj7CtYZj+Mmi0R4DJOp6fFHSMm
-         WpjQ==
+        bh=H4VkgQ4gGeEeIstqR8YbTO241CwQt5nJRWKOybDZVxg=;
+        b=A7YZ6QZYhlArsOuJUe8XPmxqC4brkATUfFE7eO3x9dwHHjnTxJ2n1MxqrCc67AYYss
+         D0UvrV7Ha08KArg9xL10beds08YqTU9lptlhRUnSYQyMArBzdzJb6oD1TwaBJTBM0wPI
+         WFPqjeSmnwtKJH3PuO3Fboa01MSewdHVE5MdevY2UA2bIH6s2Rww3AVw9B+upJ+MqVcn
+         7wGDM2l2m/t8APDosMkHMWd+ReKIvaR4uxEMX82zolCIfzuMXLt4VJDB+dx3ZAJwGVxA
+         Oxq/Zv0XMiFqxd6wvu75W+MAOl/ztUocqLGaeaOGhTeGr4izU3iK6lb8LZ/LvNeKIF6Z
+         IO5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=mFKSPObRhuhcBjPun0qKmzwduCIaeg1Xwvld1P8alOw=;
-        b=dUS9I+pOlPZ8TeBDbo/sXzQxAESzbrFhAU5tT8Ov5XDtiJ2+sH/6F6SmRr7Rxo4V4g
-         jNmAqgPKlGFA9aaXm9/KAERX6D938Yq4wL5luiHcLu/YdVyn7AFObSSsaL6BN4zdSVzh
-         UDQl5SZkijf60tWX+We2829IytaOVUPXJXv4jwVXkMv0OKAN6Fk29WI2tDihPUcha4jr
-         jfyGQcVznctu3+Ufd2moYxfBnWvSlEoEKH5Y36Y7VY0rvX3k98cAAtdQjP7MMuthwDBh
-         6A7YSOMB1vz8R83YMkbcDnK8uN4mw9p88tHJDfTrnJHsQKP5Ss62PqN43Tlpjd4vHegd
-         K9lw==
-X-Gm-Message-State: AOAM530EzgFBtmb2/0VP2D9M+OF3+WrpeT+UY5YZ/cfE5BACYBuPxePX
-	+H51RyUu6CH4kJM3/N413G+yqyvvaKuQIA==
-X-Google-Smtp-Source: ABdhPJwrWBwioOEq5IAUDCFjrBejhkj990n038t42gp23CKomB9VYvzojF77+drpGtq4Mf90s7bopg==
-X-Received: by 2002:a63:a112:: with SMTP id b18mr454600pgf.387.1632338559540;
-        Wed, 22 Sep 2021 12:22:39 -0700 (PDT)
+        bh=H4VkgQ4gGeEeIstqR8YbTO241CwQt5nJRWKOybDZVxg=;
+        b=ona8mi+yIX4wybg9VKSkX18enUrFCnNXGT0a+Od5EVg7egks1neLeRyx7ztFtspZLD
+         vMmnXGGVfQv1SoFHC4+HSj0+BcZisBtVXY2lLATNI5WL65JvYfmKQixjg4ABu40sNnk2
+         MCwgV2SO2fUF+U6T6Z66OBnG2NB/HRhuzwisS2I4ywSBHpYsl8OTR8TBtmE90j/KyDgA
+         tkOCLquwVyxNBjZ/+MiGtOZBiCqa+l9Hmk20Cyst0Zs3SpsizRntONg4aM/yTIMSQKUu
+         WG9OTs6AAqMgfJ3cuKK9tNYf71i1TN0gIo31COaNEmxOOSbGRoKe1P9ApSIbaxFY0dLK
+         nPwg==
+X-Gm-Message-State: AOAM532Az42GDM3UZAycjiWYQCk7l4aYrO2DKjoGE5/yeVMpFARAHeAi
+	S3Om2DM1U/TnUc4Y+m9MJophRvRWJaFY2g==
+X-Google-Smtp-Source: ABdhPJxVyKrrONtKEzYym4jOO0pgh0yZ2paj9hFGMjiiHgWwW9RjwQU1tNDCYhhBM9on2VUE16vgWw==
+X-Received: by 2002:a62:1a97:0:b0:447:df99:95a7 with SMTP id a145-20020a621a97000000b00447df9995a7mr417136pfa.10.1632338560365;
+        Wed, 22 Sep 2021 12:22:40 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::728f])
-        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.38
+        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Sep 2021 12:22:39 -0700 (PDT)
+        Wed, 22 Sep 2021 12:22:40 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 27/39] remmina: Inherit pkgconfig
-Date: Wed, 22 Sep 2021 12:22:01 -0700
-Message-Id: <20210922192213.3062719-27-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 28/39] python3-pyparted: Inherit pkgconfig
+Date: Wed, 22 Sep 2021 12:22:02 -0700
+Message-Id: <20210922192213.3062719-28-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20210922192213.3062719-1-raj.khem@gmail.com>
 References: <20210922192213.3062719-1-raj.khem@gmail.com>
@@ -52,27 +52,26 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Fixes
-  Could NOT find GTK3 (missing: Cairo_FOUND) (Required is at least version
-  "3.14.0")
+FileNotFoundError: [Errno 2] No such file or directory: 'pkg-config'
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/remmina/remmina_1.4.18.bb | 2 +-
+ .../recipes-extended/python-pyparted/python3-pyparted_3.11.7.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/remmina/remmina_1.4.18.bb b/meta-oe/recipes-support/remmina/remmina_1.4.18.bb
-index f52378b4bb..5a915c4766 100644
---- a/meta-oe/recipes-support/remmina/remmina_1.4.18.bb
-+++ b/meta-oe/recipes-support/remmina/remmina_1.4.18.bb
-@@ -29,7 +29,7 @@ SRCREV = "045862cc7d7dd986b349c68131df2f86b9b1cd9c"
- SRC_URI = "git://gitlab.com/Remmina/Remmina;protocol=https"
- S = "${WORKDIR}/git"
+diff --git a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.7.bb b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.7.bb
+index 765201ca7b..ef04024aaf 100644
+--- a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.7.bb
++++ b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.7.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "\
+ SRC_URI[md5sum] = "69284f943982f54ded76960c92098a02"
+ SRC_URI[sha256sum] = "61cde7b096bccd69ddc75c85b17f8baed45c3687d404706d91403a319453b903"
  
--inherit cmake features_check mime mime-xdg gtk-icon-cache
-+inherit cmake features_check mime mime-xdg gtk-icon-cache pkgconfig
- REQUIRED_DISTRO_FEATURES = "x11"
+-inherit pypi distutils3
++inherit pkgconfig pypi distutils3
  
- EXTRA_OECMAKE += "-DWITH_APPINDICATOR=OFF -DWITH_GETTEXT=OFF -DWITH_TRANSLATIONS=OFF"
+ DEPENDS += "parted"
+ 
 -- 
 2.33.0
 
