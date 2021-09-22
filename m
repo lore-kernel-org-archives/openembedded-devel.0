@@ -1,50 +1,50 @@
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.web10.940.1632338569696971643
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.web11.964.1632338570631636387
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Sep 2021 12:22:49 -0700
+ Wed, 22 Sep 2021 12:22:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=T1YM/KTU;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id w19so3540217pfn.12
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=H+qZLKgW;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f42.google.com with SMTP id me5-20020a17090b17c500b0019af76b7bb4so5233770pjb.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=Oqnou93QRXpNpgsbxebiIwjLIteQj3FqmZsOTvmsSic=;
-        b=T1YM/KTUfhGdkm5KozJ0r8E0q8xeD24+PxB5IzjlpHbEdzTkaOwE2UjY0dvxTvbaT+
-         JB+k7RBk4JKeaVTlVddN6TMkCpzHYqlIy4s0WAi2u9JQ/WQQwXbTYZlkOpRbFcunPQkX
-         NnSbZP57foklRPfUUydtdQVWgnBWyc7qV7wQWs4D65cn+MmBqWhEWczHYwNDFdLq0zRP
-         HUGZhmCPxWfYTQg+B9GhvgQlMEd3KGthMJ5K3XWhZ5Q/wTiSyRVn2/eRJBsJYN27vMvJ
-         n33RHtn+xgvnQPWriZglc/wQI74w9qX7MoJ1h3akEwjDIEoD46YWyTMHKKBGrENgpiKS
-         988A==
+        bh=ZS1dWCyC2QR63KlUdOIxY6rEFKRoudF/PxF4C04IvVo=;
+        b=H+qZLKgWNYu9G35yv5vTxB43AbEddVP7t7gAo8hwqSRizgffXxymEKasjHy2hEnS/d
+         2T8/sqZcfEdPo1e+2PABlFY1kRqP4RUu//lgDqChCXHcKfWtN7H2KKa/nzIfB9ty3rrJ
+         qNmJVNMxaD5MzTNHHr7UEWb8opXOjy8aWQhRMasZ+6orCRM0UMIRD1aAlV3T0y7Ez5kz
+         qLcEmw4eJTruZdkhCv2gIGWSc5C1ZiwAr9zMCkG91v6pdxXkstgwVZyZfe7XgMd4iAja
+         E6PvjtNqyWhY8A09dA8IKfLFJChGmioEJ1h2hraMhhxTvLISvfxynHONR99iKMmbNTa2
+         kfTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=Oqnou93QRXpNpgsbxebiIwjLIteQj3FqmZsOTvmsSic=;
-        b=Mp0sxrbSexQQEg3tiY+J+5wHARiQCpBn9Ns1dLLaNQhReubojCBoEdVtvwaKcBSpZZ
-         iRIsi010zhrf5VLyjLy0yIRwYzYPoCND8/BOZ5vBWulUCDrNk/RhCe+GRZWmCQqe7m6Q
-         McZza13z2WEqmSA+HlX4zVeup+U4Som81pw5VPWpJQM3Ho3bp46rU7QeEg8jP62B6ZDu
-         ZY9bjqKvpe/Xbg2UPpXO37AMc+BfuNfoscwFXSbIIZzSczdqFa18vSU/iZ4Q7SVROnEo
-         BeRAd5W5c6aDVVyaXimCa7DHzgkESm0+w/gCyl+3AYmMpjttPUWfyTk8k8Ki25vYLHzF
-         qRQQ==
-X-Gm-Message-State: AOAM532FxZv+jPtvOQas7Ra8yQlXUJO1Mb7Hha0RhqeWtwkInKTrN8Qn
-	ypO7gsgMzj4yYF3qQAi0RuiPZdrOMctwKA==
-X-Google-Smtp-Source: ABdhPJzfVVQ33jpCQFX73JNG42+DnSypV9iDNdZsucrA+jKiGM0Wa7PoLNsP4mNtPBHkOWPdqefW0w==
-X-Received: by 2002:a63:5942:: with SMTP id j2mr532408pgm.78.1632338569137;
-        Wed, 22 Sep 2021 12:22:49 -0700 (PDT)
+        bh=ZS1dWCyC2QR63KlUdOIxY6rEFKRoudF/PxF4C04IvVo=;
+        b=q7V2hr8iFjnIGK0ra2XVQyLVn8s3+Wsi0EV7HZd0/ZgAg1adEjjvf/uMPUaMYtLRYb
+         pb2ZxFlTlWutQPHVQNvILPp24719zqxfWjOJY7hT5f/hgEoEd/mQdufCmajCDoTe93iu
+         r42xJIkAGDxuBixcRTQ/p7rbnpbtRH3Q5Q6uy+T7wN7wLBAeIyq1mC8IlRM7q6AbgKDb
+         fQtstR8bS+CXVpxFLjRv6Y03Dg0xw3RqnPKfBNl0jkbQtT3AdhnGWdbM//lAki6+5Kbx
+         tOXKlSMDJgMI7QfMyK4cRp//P22Q+od73TysTrk2+56eeEBGw+5r2WhdTPhQXQxD/Hie
+         MgpA==
+X-Gm-Message-State: AOAM530FynziGCc5BPekLpouTI2/wssHxdRGVOJzPFIQ1282ejZA2rgE
+	3jvov7Ces96HDMwMAIGK+/jiwwFxFHl34w==
+X-Google-Smtp-Source: ABdhPJxVgRmp2Y2Lb/UvpDYmWSJmv+lv6niMQWqxD6KhyUyx4hS1j7h52xLMTMemAaromo+0axupkg==
+X-Received: by 2002:a17:90b:33c8:: with SMTP id lk8mr13199745pjb.241.1632338570028;
+        Wed, 22 Sep 2021 12:22:50 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::728f])
-        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.48
+        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Sep 2021 12:22:48 -0700 (PDT)
+        Wed, 22 Sep 2021 12:22:49 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 38/39] yad: Inherit pkgconfig
-Date: Wed, 22 Sep 2021 12:22:12 -0700
-Message-Id: <20210922192213.3062719-38-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 39/39] mscgen: Inherit pkgconfig
+Date: Wed, 22 Sep 2021 12:22:13 -0700
+Message-Id: <20210922192213.3062719-39-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20210922192213.3062719-1-raj.khem@gmail.com>
 References: <20210922192213.3062719-1-raj.khem@gmail.com>
@@ -52,27 +52,26 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Fixes
-../git/configure: line 4933: syntax error near unexpected token `GTK,'
-../git/configure: line 4933: `PKG_CHECK_MODULES(GTK, gtk+-3.0 >= 3.22.0 gtk+-unix-print-3.0)'
+../mscgen-0.20/configure: line 5586: PKG_PROG_PKG_CONFIG: command not found
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-graphics/yad/yad_6.0.bb | 2 +-
+ meta-oe/recipes-support/mscgen/mscgen_0.20.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/yad/yad_6.0.bb b/meta-oe/recipes-graphics/yad/yad_6.0.bb
-index 46ce671317..6ede557c7c 100644
---- a/meta-oe/recipes-graphics/yad/yad_6.0.bb
-+++ b/meta-oe/recipes-graphics/yad/yad_6.0.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- SRC_URI = "git://github.com/v1cont/yad.git"
- SRCREV = "a5b1a7a3867bc7dffbbc539f586f301687b6ec02"
+diff --git a/meta-oe/recipes-support/mscgen/mscgen_0.20.bb b/meta-oe/recipes-support/mscgen/mscgen_0.20.bb
+index 25cfafafa8..da8ea35d26 100644
+--- a/meta-oe/recipes-support/mscgen/mscgen_0.20.bb
++++ b/meta-oe/recipes-support/mscgen/mscgen_0.20.bb
+@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "3c3481ae0599e1c2d30b7ed54ab45249127533ab2f20e768a0ae58d855
  
--inherit autotools gsettings features_check
-+inherit autotools gsettings features_check pkgconfig
+ DEPENDS = "gd "
  
- REQUIRED_DISTRO_FEATURES = "x11"
+-inherit autotools gettext
++inherit autotools gettext pkgconfig
  
+ do_configure:prepend() {
+ 	sed -i "s#AC_PATH_PROG(GDLIB_CONFIG,gdlib-config)#AC_PATH_PROG([GDLIB_CONFIG],[gdlib-config], ,[${STAGING_BINDIR_CROSS}])#" ${S}/configure.ac
 -- 
 2.33.0
 
