@@ -1,150 +1,72 @@
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
- by mx.groups.io with SMTP id smtpd.web11.248.1632333293613116368
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.web12.958.1632338536933194863
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Sep 2021 10:54:54 -0700
+ Wed, 22 Sep 2021 12:22:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=IizetA/M;
- spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-ed1-f41.google.com with SMTP id v22so12601783edd.11
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 10:54:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=PEeIdW10;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f180.google.com with SMTP id k17so3572187pff.8
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=+AgCcjlzaExv9aX91yZAvkPayiMCY0xF2zCs5Pf/xns=;
-        b=IizetA/MahVYL34YeAASQn7cEtrLlKVnpXXUuRjuL5XBUE8YjlCFVPyP2CWcgFN7ty
-         p7/S8cbKpkiSimelCuQ5wPz4L9FNSH0/lq3wvtiQpCEGaubGS2eTAqcSKfR0lUL8eRE3
-         dDUZFGAnx8a7iYMEqyz1n94HKeitEpzZbZ0UrbNdai6v6hXuSp182/PhcxgCl1Voii79
-         lWRBgTxcPP9THzKeBs48nTllYiVtm/ZFNJDEmkDzVzXLoAcxiDdcgCRFMDSwiPKfWzrx
-         iZmgFsWevk0qIyclYm++otwYuJn2HtVWZn2/p8iQ0Zqh2ilBaP4S+WopjXFuQYXALy/+
-         tOUw==
+        bh=7R1TdzAxghQZhWxDvmTmx/Egq/1swzsIFmXcvz4v3TU=;
+        b=PEeIdW10PqxRvfzQrGDzQIWzvJ8uzaDefv0KfHAa6ljpPN3Iuj+juzR5DMIP0Oo39Q
+         3lFlQ4TP+PrQNZyQGfBVnSROVKhScl1bT/HWrD60BJJ5x+GjDLwiyR86co0Dx7tREqiJ
+         z/mhHn2g4GPncRYs+x3U2m4s4GKQh2pKohUdSl/6bAi+3VaxC1EhmenNzGSk146KlrdZ
+         9q7Mc+VpN7QgGpWIBsLAGXZXoJYV4PHYVPYh7zIaxJH22eO08Mi87U/ZaOU8ScOS2WEC
+         /g3zedGGXP/fFBp86SkSUnc1vf9Csao7PAit0kAng0jh7PLWV9/XSQajzbhfF2GV0gOF
+         q54Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=+AgCcjlzaExv9aX91yZAvkPayiMCY0xF2zCs5Pf/xns=;
-        b=BAmpQvQFJ+Spfqt3nnQMyfCPvJydnyHj6lpTpB+FjI586APDIw/XPpJAlgV9eLlPx6
-         L1FLBB9QghM4DahUZboMZyJDbPUhghE1k/KB5CPDiF50rAXgdqUpu2Vxo4A/G/oKYa/N
-         ry2MqMCg+xzRo6HWJkrmQQyz089RIjRJcw5OFP8WpDxDeCEm8N6M2xp3aRfMoLmleFL+
-         EASKw4sk+QJ+DBje8DdfPOZFD3ecWlDZ0Z7AVF7/XTVC7FlenAlH/Q46wcNVlz/n9RGp
-         6QAEaiw5FaXlvDAPJ5YT83xJrkxm8DzMztoixbSaXTEB3sCl+UUewsVRPAt3QJemOt3w
-         Nc1g==
-X-Gm-Message-State: AOAM533m0jfd0cVtyGqw1bmVrBtwz2rsxKVOgLMp8zraFL1waZsVN0t8
-	+k+oTxkMIxrrB5eQD43lntHKYnfN04o=
-X-Google-Smtp-Source: ABdhPJymwQbZZI/8KFihb+Q7XnDk2Pt0M9HDXc8NLNpZk95m/aXNIiyJEfglS3UYbAJwuZP78RdTxg==
-X-Received: by 2002:aa7:d392:: with SMTP id x18mr669915edq.334.1632333291220;
-        Wed, 22 Sep 2021 10:54:51 -0700 (PDT)
-Return-Path: <jan.vermaete@gmail.com>
-Received: from localhost.localdomain (78-20-166-56.access.telenet.be. [78.20.166.56])
-        by smtp.googlemail.com with ESMTPSA id b3sm1313056ejb.7.2021.09.22.10.54.50
+        bh=7R1TdzAxghQZhWxDvmTmx/Egq/1swzsIFmXcvz4v3TU=;
+        b=UEEABWa+GM0XbC03n34pz3nPZqQrbMrfAFmS7ggjQkJgbKZX5o80Fi4G9hoes2itix
+         ZtG2ROu/VhiKJXSwzaP0Bl9mVDHKBnREfUt6e1BWqtq9dM2oGrSE8pjp5N5UArdRU4q9
+         PoKgKQuFQzKDlEjivZVCbDaU0T4eqI1CVNMY/zL3StZOGOP8sm+xSsUdLuPkOKlI3NmC
+         QGW5GlnWd0yWCP0lksG4CV9SxlU6HTydAp4pUkH//YaIlrMpcm3MsYMPqa7xJVl8KbPX
+         E1B4ltD70zKPRyzD7SKqe+KaMX8aYACm7PUiWbefaeKs+soljv90kZarajPSm6+TvSvp
+         /DhQ==
+X-Gm-Message-State: AOAM530wu/V7IyEPDVdJ6I39O9+QD67/Pjl1A1/JEE6Tf7IGPQAPDVkC
+	sjWGi0Hq1h+EvJpHMmeXjw0ijhRwWosNxg==
+X-Google-Smtp-Source: ABdhPJyBvA+vtZykcPSflv2rwV19seOF4HJdbx3Jij+ObOGMQj2k9y0WocCMDWOuJpaNJj6q88sOvg==
+X-Received: by 2002:a63:2cce:: with SMTP id s197mr463549pgs.45.1632338536168;
+        Wed, 22 Sep 2021 12:22:16 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::728f])
+        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Sep 2021 10:54:50 -0700 (PDT)
-From: "jan" <jan.vermaete@gmail.com>
+        Wed, 22 Sep 2021 12:22:15 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-webserver][PATCH v2] netdata: Fixed the recipe (v2).
-Date: Wed, 22 Sep 2021 19:54:32 +0200
-Message-Id: <20210922175432.2907192-1-jan.vermaete@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 01/39] libgnt: Inherit pkgconfig
+Date: Wed, 22 Sep 2021 12:21:35 -0700
+Message-Id: <20210922192213.3062719-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The netdata website was not accessable due to some (changed) permissions.
-The systemd service file will start netdata deamon with the netdata user.
-The netdata group as existing, but the netdata user was missing.
-
-I moved some directory creations from systemd to the bitbake recipe.
-
-The project website address changed too.
-
-Removed the creation of the pid file in the service of systemd.
-Netdata itself has an option to create the pid file.  Because it's an
-options, it's probably also not needed in systemd.
-
-Tested with meta-raspberrypi on rpi4-32.
-
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../netdata/netdata/netdata.service           | 12 +++++++-----
- .../recipes-webadmin/netdata/netdata_git.bb   | 19 ++++++++++++++-----
- 2 files changed, 21 insertions(+), 10 deletions(-)
+ meta-networking/recipes-support/libtevent/libtevent_0.10.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata/netdata.service b/meta-webserver/recipes-webadmin/netdata/netdata/netdata.service
-index b244d1866..ca13f7287 100644
---- a/meta-webserver/recipes-webadmin/netdata/netdata/netdata.service
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata/netdata.service
-@@ -1,13 +1,15 @@
-+# SPDX-License-Identifier: GPL-3.0-or-later
- [Unit]
--Description=Netdata, Real-time performance monitoring
-+Description=Real time performance monitoring
- RequiresMountsFor=/var
-+After=network.target
+diff --git a/meta-networking/recipes-support/libtevent/libtevent_0.10.2.bb b/meta-networking/recipes-support/libtevent/libtevent_0.10.2.bb
+index fa5b4ade8c..5d7e1a0d60 100644
+--- a/meta-networking/recipes-support/libtevent/libtevent_0.10.2.bb
++++ b/meta-networking/recipes-support/libtevent/libtevent_0.10.2.bb
+@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = "file://tevent.h;endline=26;md5=4e458d658cb25e21efc16f720e78b
+ SRC_URI[md5sum] = "105c7a4dbb96f1751eb27dfd05e7fa84"
+ SRC_URI[sha256sum] = "f8427822e5b2878fb8b28d6f50d96848734f3f3130612fb574fdd2d2148a6696"
  
- [Service]
--User=root
-+Type=simple
- ExecStartPre=/bin/mkdir -p /var/log/netdata
--ExecStartPre=/bin/chown -R nobody.netdata @@datadir/netdata/web
--ExecStartPre=/bin/chown -R nobody.netdata /var/cache/netdata
--ExecStart=/usr/sbin/netdata -nd
-+ExecStartPre=/bin/chown -R netdata.netdata /var/log/netdata
-+ExecStart=/usr/sbin/netdata -D -u netdata
-+
+-inherit waf-samba
++inherit pkgconfig waf-samba
  
- [Install]
- WantedBy=multi-user.target
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_git.bb b/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
-index 7c48b8a37..7ec989815 100644
---- a/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
-@@ -1,17 +1,19 @@
--HOMEPAGE = "https://github.com/firehol/netdata/"
-+HOMEPAGE = "https://github.com/netdata/netdata/"
- SUMMARY = "Real-time performance monitoring"
-+DESCRIPTION = "Netdata is high-fidelity infrastructure monitoring and troubleshooting. \
-+               Open-source, free, preconfigured, opinionated, and always real-time."
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
- 
--SRC_URI = "git://github.com/firehol/netdata.git;protocol=https"
-+SRC_URI:append = " git://github.com/firehol/netdata.git;protocol=https"
- SRCREV = "1be9200ba8e11dc81a2101d85a2725137d43f766"
- PV = "1.22.1"
- 
- # default netdata.conf for netdata configuration
--SRC_URI += "file://netdata.conf"
-+SRC_URI += " file://netdata.conf"
- 
- # file for providing systemd service support
--SRC_URI += "file://netdata.service"
-+SRC_URI += " file://netdata.service"
- 
- S = "${WORKDIR}/git"
- 
-@@ -31,7 +33,7 @@ SYSTEMD_AUTO_ENABLE:${PN} = "enable"
- 
- #User specific
- USERADD_PACKAGES = "${PN}"
--GROUPADD_PARAM:${PN} = "--system netdata"
-+USERADD_PARAM:${PN} = "--system --no-create-home --home-dir ${localstatedir}/run/netdata --user-group netdata"
- 
- do_install:append() {
-     #set S UID for plugins
-@@ -50,6 +52,13 @@ do_install:append() {
-     sed -i -e 's,@@sysconfdir,${sysconfdir},g' ${D}${sysconfdir}/netdata/netdata.conf
-     sed -i -e 's,@@libdir,${libexecdir},g' ${D}${sysconfdir}/netdata/netdata.conf
-     sed -i -e 's,@@datadir,${datadir},g' ${D}${sysconfdir}/netdata/netdata.conf
-+
-+    install --group netdata --owner netdata --directory ${D}${localstatedir}/cache/netdata
-+    install --group netdata --owner netdata --directory ${D}${localstatedir}/lib/netdata
-+
-+    chown -R netdata:netdata ${D}${datadir}/netdata/web
- }
- 
-+FILES_${PN} += "${localstatedir}/cache/netdata/ ${localstatedir}/lib/netdata/"
-+
- RDEPENDS:${PN} = "bash zlib"
+ PACKAGECONFIG ??= "\
+     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
 -- 
-2.25.1
+2.33.0
 
