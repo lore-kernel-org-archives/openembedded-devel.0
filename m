@@ -1,50 +1,50 @@
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
- by mx.groups.io with SMTP id smtpd.web11.956.1632338557486336657
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.web09.966.1632338558317977328
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Sep 2021 12:22:37 -0700
+ Wed, 22 Sep 2021 12:22:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=V8/hOQFU;
- spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f176.google.com with SMTP id e7so3809408pgk.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=oNdQkG2g;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id 203so3531178pfy.13
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=2aygg3h04lq8qdqz6ha4uOeGIpAHDGraKpYqbccA1B4=;
-        b=V8/hOQFUuM6yh6h+Z/PF+jnDQC0nBzsZ+rS0srigvnvPXDefHORTSZH5YoaPngnoDl
-         9+MZVncFiwCjbYQrEpLCmPj5HlnpXa6HSuFAbFnjCy5CFnl+CXcKXxoOwIyTTHICxjn2
-         iN8AFyGqwOkU1juHqNK/GxQ2gtqBLrz0UbHvlAkqquFnOk0pZdO+NcnQi1b9PRUYGGYI
-         zvk11xeR//UZGfh5n/h41Q7RImdvScTQziT8/+vyzDsXeGiy0yW0M34MvjRiSQpLZu4+
-         fWlZwFb7TjeArR9eMbsbbIkTPpG8ATfuAgrR43c9sQPgMNL94IfzAMP3cxWqH1e0qPPp
-         iyNw==
+        bh=ZQgpbz8i5vwsPXFZtMV+dGEckfOavQbEL484IPIIJnU=;
+        b=oNdQkG2gGRNVc6+ufNvJKbqgd8OHn16gxiWeITKj8F3U3czfsd5V11gjmSpklIk8tt
+         hiZQc/NrF6Qamw5z/vfwrpff+l+IKLlXxxEnnZdjdjXuD5SBuNpDabiSqe0AnhsrIu8F
+         Kzssg1WfOyAG5o/7qgMfK6d6Hz462wCN1JfGOoMKSN/SprnEsPYnQG5k2YD9XSZ5MIhz
+         haNsF3dVRb3hihKiFFTyPeOYANbOan/aiBhadnvyvFiWOy3VrvTkcltBi+F07wbkNINd
+         +JNz1DRODegApDsm787EAaz2wuxLrQBublhbGTb+o9F/j7HHIljhk0VJC9WfzITYaGGx
+         Vz7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=2aygg3h04lq8qdqz6ha4uOeGIpAHDGraKpYqbccA1B4=;
-        b=bs7B8luLOzGg/0GoViYuHFxVRzgh326B13u2P08neoE8O5T1WBfMTotHiTXOpuz710
-         Gmmzg2fDde6IPwWA5U4ZQ37LPPhrB+q5WqUpbP6z5yUvsiZhF9qzP106AylNFkSrNdyw
-         EJflMQXEp4wgq66OW6prquX81RPUMFEzgnSrv7M4R9GqUNakLP0xDcsaiQMwqYVI8hQ8
-         BumnKI+ex9ZI8pfV8bAExbW3Nsunx5HSol3oAP3i18FGepBDTXjO/y4oaQOO6tBAKWX7
-         DF9NodN2FeJ8Jg0ZRDipuXzbvq6r4HiQNbYYmn6TyrEtaqZ1hiTutm412jup7twaM83P
-         EXLw==
-X-Gm-Message-State: AOAM533VfnrhyF+F0YlmHu0Tga6T5wNOSst5EHu39sR9GhJ/BMDXj7A2
-	Ri78JYbRE4L7DHLmiy9YnbQtBvoADnJsXQ==
-X-Google-Smtp-Source: ABdhPJwP9Fqvy6B07pHOJPzIsjdTbRcTXznjVf+vfNc0mYwEqvsaqxS3yFxFcCTzUdfPpKSk2db1Vg==
-X-Received: by 2002:a65:4147:: with SMTP id x7mr478790pgp.23.1632338556799;
-        Wed, 22 Sep 2021 12:22:36 -0700 (PDT)
+        bh=ZQgpbz8i5vwsPXFZtMV+dGEckfOavQbEL484IPIIJnU=;
+        b=OgdDtwlc10HIp6JY1A5itG0z3qDqRCIGXhUZMTu6B6tQqGeGAUsun1LiRA+R6i101u
+         4SX5B7EVvclPlS4T7PH9Vh5QgalqMezSE751f68mXOeQzjPomsFbysG29q/RHebho1Y0
+         8EIyHEhBUVC1KER5aIVWLGrm1BoM1KR9lhoe+7ueJGhdLu0srYu5dGb/5dgNXBdTuKHf
+         5OxKvCXMdhDkCpUyHz525jF0ZhALOnvXQOwrINdThXNEli5thW4lvSReIZxrtQm7zaMA
+         SeV3BlIIsNSqHxqZfmyMpDcNQEwb3C0J5NCWHKFjVL/pdMibbCofImmExu/LHk38HO+E
+         qkkA==
+X-Gm-Message-State: AOAM532SH48BwPspjpKGtd3QHVLPJYOHiva7h9KXCnmsuE3/BBk7iIXD
+	t9Y2f3wUdu5oWETi3xsfAib5DZ6QLDzHSQ==
+X-Google-Smtp-Source: ABdhPJwbwD3HX4Wl1v3mxTpQoXMIA8IfjWru8PLU8cX0yOgG8s9kJDUOwVHtdSqA+Asbk2z5YA/dNw==
+X-Received: by 2002:a62:31c5:0:b0:447:b30c:9a79 with SMTP id x188-20020a6231c5000000b00447b30c9a79mr632054pfx.67.1632338557711;
+        Wed, 22 Sep 2021 12:22:37 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::728f])
         by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Sep 2021 12:22:36 -0700 (PDT)
+        Wed, 22 Sep 2021 12:22:37 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 24/39] mpc: Inherit pkgconfig
-Date: Wed, 22 Sep 2021 12:21:58 -0700
-Message-Id: <20210922192213.3062719-24-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 25/39] avro-c: Inherit pkgconfig
+Date: Wed, 22 Sep 2021 12:21:59 -0700
+Message-Id: <20210922192213.3062719-25-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20210922192213.3062719-1-raj.khem@gmail.com>
 References: <20210922192213.3062719-1-raj.khem@gmail.com>
@@ -52,26 +52,23 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Fixes
-Did not find pkg-config by name 'pkg-config'
+-- Could NOT find PkgConfig (missing: PKG_CONFIG_EXECUTABLE)
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/musicpd/mpc_0.33.bb | 2 +-
+ meta-oe/recipes-support/avro/avro-c_1.10.2.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpc_0.33.bb b/meta-multimedia/recipes-multimedia/musicpd/mpc_0.33.bb
-index dcfc3df0bf..32ec15defe 100644
---- a/meta-multimedia/recipes-multimedia/musicpd/mpc_0.33.bb
-+++ b/meta-multimedia/recipes-multimedia/musicpd/mpc_0.33.bb
-@@ -3,7 +3,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- HOMEPAGE = "https://www.musicpd.org/clients/mpc/"
+diff --git a/meta-oe/recipes-support/avro/avro-c_1.10.2.bb b/meta-oe/recipes-support/avro/avro-c_1.10.2.bb
+index b86bfead76..98f464fd04 100644
+--- a/meta-oe/recipes-support/avro/avro-c_1.10.2.bb
++++ b/meta-oe/recipes-support/avro/avro-c_1.10.2.bb
+@@ -14,4 +14,4 @@ SRC_URI = "git://github.com/apache/avro;branch=${BRANCH} \
  
--inherit meson
-+inherit meson pkgconfig
+ S = "${WORKDIR}/git/lang/c"
  
- DEPENDS += "libmpdclient"
- 
+-inherit cmake
++inherit cmake pkgconfig
 -- 
 2.33.0
 
