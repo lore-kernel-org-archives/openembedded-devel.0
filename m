@@ -1,50 +1,50 @@
-Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
- by mx.groups.io with SMTP id smtpd.web11.949.1632338543014245145
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+ by mx.groups.io with SMTP id smtpd.web09.958.1632338543850981350
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 22 Sep 2021 12:22:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ZLNvfd0I;
- spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f178.google.com with SMTP id s11so3744427pgr.11
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:22 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=p5ilnPbG;
+ spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f175.google.com with SMTP id s11so3744465pgr.11
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=cS8+fNBFvrJwzya+6UOMRnyUnmVyG2QOxX1q9LJapLg=;
-        b=ZLNvfd0IHuExAyizLIIDuRbESl9/m2CDaWvlAr0Hdn7P5O0bPODgcQ1zW+Ee4LrkZJ
-         vj+oREGlFN4Naue9/t+wRye49KLPvjVbfYS16XybVNqNBQQWAdnb7CnKxH6NBFMGsIS9
-         ZMcg+GfYoo2XbHpU3bDjC2UtSMA9IdsE1YgecTfcSXNwDfTDUP1ZNrrv6HwoNmtM4v/5
-         TJnE4cSXNmaiJT0JmD7Zlp5puzjWpLcgtM1GS8GoTPtgEXVNNx6/A/qy41Hawmc6qpXr
-         Glh5NdamQyJ41o+KdJPIwLrM3mbfdu7zWR9j+3ubfx3DsOAStr5gIwtw4c6raPNmTWNY
-         INPA==
+        bh=jwCu597kuREHYPP2ch+LNNpdkVAZ/B+orVwT6SzqthU=;
+        b=p5ilnPbGPpVTJrkXVJ9cHmbwj/bbmqn2FF2fz5SFMN0lwQv+avyjc/jOGq9JsLzvb+
+         JEXYyMrpeIPQAE6VUk5iwMWTmNuDuP3y8ZiTNKKqRhfye3/zTgja91lJY+Q4ltDQnYOo
+         6BxwN2+zbvnjn0SNJflsbwX7xJJApce/uru2+qSjXcexgOu/tRey3hy7GB413fOdbwv5
+         kNErVeSRmR/756DihjletTIOvTi8nU+d3Uij0O852anpdKxAJKSUSWW77vrp0Am59YwF
+         xBfut3ZAeLvOGXHCPG1dx7naz3lZUamVci+C5V+M5fLiSqEyrR2FPYEG43j65bU3WUF0
+         9m4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=cS8+fNBFvrJwzya+6UOMRnyUnmVyG2QOxX1q9LJapLg=;
-        b=3sCC3FPGR3K1W0g/l8g+VEngLKih6K1BXwbayoSxHTN+UFxsD+1LsmwmOrEzyQ7gky
-         dWAusG+2tN5qeKG6gQW8wSiG67EHt02Hl7kAYWe+Y0W6dsGNamLGU9RSHrkcHYx5+ThI
-         u8kktAcgzzrBGjFJPvX/xTLqubDnKpSl+s/tusPhRtlQHM7cKmyrZApXXaqnW/AoTPp3
-         lqTG6lxV7U8eWqleWQA4cBV0EE6kJGH4j55f21e1sd9C7XGI9BPjKmzPUTzv12IAK2pj
-         q0QvaEHHhVcOfnNGhoyx8WNlcMAlt3E8bIliVjs/TmUiVohGHCX3o4d3bXiUTOdHz9Cj
-         X/HA==
-X-Gm-Message-State: AOAM531ezBxt0ccAUtBBmtNZijGLv0iX+rMVh4OHMRjcndave69GsyBE
-	Z+dTnsFqWbJmwVuZAhHBA2WG/lq2wTnM/Q==
-X-Google-Smtp-Source: ABdhPJwONj+j3SFrUd+jhw60zktFNVuS+APSqtma3SZBvrNrutUEP9wNzkrmz2hpI+BGtJhCLhkBaA==
-X-Received: by 2002:a63:6e48:: with SMTP id j69mr495491pgc.460.1632338542400;
-        Wed, 22 Sep 2021 12:22:22 -0700 (PDT)
+        bh=jwCu597kuREHYPP2ch+LNNpdkVAZ/B+orVwT6SzqthU=;
+        b=IBLdmTRUS2muWmTNRc3H7ClLsXrahY1jvjMWLxIqQEguaOI+42KQytQi2MDGXbRC3d
+         M5ITT0ifynliaMOtonvWTP5vvKsl/nCb1/8rly75bQwd7u5neiKpqVOIHBx1Mru5LAYN
+         LImpo5TREPA1gTvVFTOTGV0OCzgjdt40HcNRqxvLIqvmc0DK76feMEucoJ+X0UGcuhnL
+         0xkPsC3TqweSzjC5AnNuO+Rx32BGDWZ67q67l7ylc0YkLPHDRCgSrLjwUQ73nJc5pqOv
+         BJPq5WjlUKdwcwKa48nSRGHC7TmdhTq3dl+PQxxYhrkhoPXOWKHhNHjxDMRRfuYAcNmS
+         Qpww==
+X-Gm-Message-State: AOAM531SVv3rRqsMw4L2KIP7oC8SiKrO3LsUZBnK3LzjyLJG+N9CRAEZ
+	QskwAiKkibZ5wJpBh9NulYHbm1U21kW0GQ==
+X-Google-Smtp-Source: ABdhPJwI51Q53soez2lVzyljPuBhhh1P7Mvpv+YmIt4z803YoQnYHiKHtaXtnWyuQHy31gtZfdqhdg==
+X-Received: by 2002:a65:414a:: with SMTP id x10mr447038pgp.403.1632338543268;
+        Wed, 22 Sep 2021 12:22:23 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::728f])
-        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.21
+        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Wed, 22 Sep 2021 12:22:22 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 08/39] rrdtool: Inherit pkgconfig
-Date: Wed, 22 Sep 2021 12:21:42 -0700
-Message-Id: <20210922192213.3062719-8-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 09/39] libbytesize: Inherit pkgconfig
+Date: Wed, 22 Sep 2021 12:21:43 -0700
+Message-Id: <20210922192213.3062719-9-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20210922192213.3062719-1-raj.khem@gmail.com>
 References: <20210922192213.3062719-1-raj.khem@gmail.com>
@@ -52,26 +52,26 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Fixes
-configure: error: Please fix the library issues listed above and try again.
+../git/configure: line 13851: `PKG_CHECK_MODULES(PCRE2, libpcre2-8, , LIBBYTESIZE_SOFT_FAILURE($[PCRE2]_PKG_ERRORS))'
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb | 2 +-
+ meta-oe/recipes-support/libbytesize/libbytesize_2.6.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb
-index a1919e7400..e96138ea83 100644
---- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb
-+++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb
-@@ -15,7 +15,7 @@ SRC_URI = "\
+diff --git a/meta-oe/recipes-support/libbytesize/libbytesize_2.6.bb b/meta-oe/recipes-support/libbytesize/libbytesize_2.6.bb
+index 118259e4fd..7b8d4a3f91 100644
+--- a/meta-oe/recipes-support/libbytesize/libbytesize_2.6.bb
++++ b/meta-oe/recipes-support/libbytesize/libbytesize_2.6.bb
+@@ -12,7 +12,7 @@ B = "${S}"
+ SRCREV = "c9864f4dd03736839f40d225da494cb1eb64e654"
+ SRC_URI = "git://github.com/rhinstaller/libbytesize;branch=master"
  
- S = "${WORKDIR}/git"
+-inherit gettext autotools python3native
++inherit gettext autotools pkgconfig python3native
  
--inherit cpan autotools-brokensep gettext python3native python3-dir systemd
-+inherit cpan autotools-brokensep gettext pkgconfig python3native python3-dir systemd
- 
- BBCLASSEXTEND = "native"
- 
+ DEPENDS += " \
+     libpcre2 \
 -- 
 2.33.0
 
