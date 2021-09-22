@@ -1,50 +1,50 @@
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.web11.953.1632338549247030641
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.web08.921.1632338550167387739
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Sep 2021 12:22:29 -0700
+ Wed, 22 Sep 2021 12:22:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=TFsCnIH+;
- spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id q68so3762122pga.9
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=o4BkWqvq;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id j15so1020400plh.7
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=HSFGgd/CkLhzVZ0FskD/hTSNK6+5d82wFNetUm/UFRo=;
-        b=TFsCnIH+o29qCoUpbNftS0/CuETUn44JrCE47CerW21FpvnXO1Ug78XM6cCeKUfbP3
-         kiSUQd7Wuyw9u33s14q3SXbAzKAffqf386m7IPd5E61W0udnDsS8RJoIbIxzKpRSaIqV
-         my1c/ezo1/gFEw0zjay/vmHjl6rMUhMZnum7xEDPBUrMmWAPt/SnD4jBqR7Q69VV8Fhj
-         f2NP+dLETpo2ujBrhecKk+J+FJoMuUi41LIorCKbIcO5nnO+ZCAVfY9tMreU+GvJPj+j
-         D3PVeEn4+lrfpVvd2rG8vVwaVbn6w90DR6H7AEzKfUlemioGqGhnLyc60wLPyFfvi0m+
-         xzKQ==
+        bh=tS4ioYiZPG7jcpdyqo5qZmc/+N1Zi4og9t+TP7Tx3F8=;
+        b=o4BkWqvqWh5qVTQNf7fqG9Wo1/jJAgQop1/jJJXL6GoZIojEo2sA7BQ8FOT6unHf0b
+         476+S+YNTsCPoPARFHjK1CGJKUdxt9gtHGaEw6x3dbRiSXZhkaLaR4uVknr8NS59oVPd
+         +n/BNIS71mtfiXn5BTcnKfS/Ar6npjstf118o/lWP+gmgm1Np7mLjv5nm+d0XdoKTJhB
+         vvLOGzPfdvZF7XytWRK319A1bE3IRCLZE613AMP9tWDTF3qrrG7Jbdk4zhTgyPpjZ9qC
+         E0Kj5rVdcRkn9cKQorvfvFRJ+OPEiGbSMFYZU1I750GBov3DTTc874d6P7AHWtyn7eGd
+         q3wA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=HSFGgd/CkLhzVZ0FskD/hTSNK6+5d82wFNetUm/UFRo=;
-        b=r60iwb6Uzkwksk7Nxb7volM/6VjBXjhH4RlfV+uwYbDd1jhICvN6MkdxASK/ZvSlcU
-         +l3n2LGNoiaXNI6VZrpHNMJaM7kB+5U3waz5iF7UMhhm1B4rz/tnj2F9lkQzgF8/3Hq9
-         kFJpkV6N1f8sOfvpbcgDPYvr7EdGYeK8y5KfaTjLe0y6bZjr6QwDmmNQIpxDUE9uflpR
-         EPkXhDze3xpj9rxdb7XSdCze4LacA9NyKO3++PMKM/2rw9as6IZOQpOo14svjZTYnxzX
-         uwN6V3edsXb4sUvRvc1p4E6pOREhmk4kYxTENF4BO3NQQ9Ki591ieaZ9Im7oTrBD385g
-         r66A==
-X-Gm-Message-State: AOAM532b7OBatPPYbejRabHAnnyMwQALDif0ZOskPfNEum4dD6N/LnoG
-	9ZPdGA7U4wtnycCvomYZlSJZkrDT1w+07Q==
-X-Google-Smtp-Source: ABdhPJyFbjyiuOUiXx3783i6fH5phkKYI2UQqzK3yZj3+te1pNGDcyh9+4U08lbpDilSBA920TbbUA==
-X-Received: by 2002:a63:7c5e:: with SMTP id l30mr465872pgn.235.1632338548621;
-        Wed, 22 Sep 2021 12:22:28 -0700 (PDT)
+        bh=tS4ioYiZPG7jcpdyqo5qZmc/+N1Zi4og9t+TP7Tx3F8=;
+        b=A7N2tK9UdRZzKpZsLIkJKqnVjL3S7LCpDHc+/FdiQnF3GEGHpjI9SllJ4oS0JnG/je
+         xWYIwcDXLzguqkGU1aVISa83U+c2gsPEx3sT3A/NXv25fB3Ebd5jFutR5jFZHcsYWqL0
+         MMQ6kkjYTg7FTOalJioA+UPnuLsduVraq5D3jXoxyGO6+wrK12Jh1P4AcrL739/0qbnp
+         z9xA3AuJKzWlH0B1ZKi1kwYUufdA/JSKx6jC12qMOYHdIQm7CKx34ZyXmDVjZZbf0LaW
+         Hn0FwzZqZASIp6RCD6dLKKifQ1JYWJEPSszrj1KT0GblVEUBLh71IK+1M/7vhcKCN+mc
+         LTvQ==
+X-Gm-Message-State: AOAM531W07a7jqcvt9LX/+dKfHUGxY6cURF5EZL2+c+hw485w2ivx4G1
+	WV8WkjJ7NkB5rFhjlYhfbf5IRrVFSxTSvw==
+X-Google-Smtp-Source: ABdhPJwcC8rsYhBF+9DBagz9AD8C5/oAJ3npf7jm/X++Xfs9tqNF4rfxyCVna3W8Cs+/M24trfKooA==
+X-Received: by 2002:a17:90b:1e09:: with SMTP id pg9mr13209886pjb.73.1632338549563;
+        Wed, 22 Sep 2021 12:22:29 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::728f])
-        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.27
+        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Sep 2021 12:22:28 -0700 (PDT)
+        Wed, 22 Sep 2021 12:22:29 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 15/39] python3-icu: Inherit pkgconfig
-Date: Wed, 22 Sep 2021 12:21:49 -0700
-Message-Id: <20210922192213.3062719-15-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 16/39] blueman: Inherit pkgconfig
+Date: Wed, 22 Sep 2021 12:21:50 -0700
+Message-Id: <20210922192213.3062719-16-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20210922192213.3062719-1-raj.khem@gmail.com>
 References: <20210922192213.3062719-1-raj.khem@gmail.com>
@@ -52,34 +52,27 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Fixes
-RuntimeError:
-Please install pkg-config on your system or set the PYICU_CFLAGS environment
-variable to the flags required by the C++ compiler to find the header files
-for ICU, and possibly -std=c++11 if using ICU version >= 60
+../blueman-2.2.1/configure: line 15660: syntax error near unexpected token `PYTHON,'
+../blueman-2.2.1/configure: line 15660: `PKG_CHECK_MODULES(PYTHON, python-${PYTHON_VERSION})'
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-icu_2.7.2.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-networking/recipes-connectivity/blueman/blueman_2.2.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-icu_2.7.2.bb b/meta-python/recipes-devtools/python/python3-icu_2.7.2.bb
-index 4c064c3d4c..2433a8c9d3 100644
---- a/meta-python/recipes-devtools/python/python3-icu_2.7.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-icu_2.7.2.bb
-@@ -3,11 +3,11 @@ SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://setup.py;beginline=244;endline=252;md5=3e00c41c6d04310707992b93307a224f"
+diff --git a/meta-networking/recipes-connectivity/blueman/blueman_2.2.1.bb b/meta-networking/recipes-connectivity/blueman/blueman_2.2.1.bb
+index 6ccb425e38..8e874edd5e 100644
+--- a/meta-networking/recipes-connectivity/blueman/blueman_2.2.1.bb
++++ b/meta-networking/recipes-connectivity/blueman/blueman_2.2.1.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
  
--DEPENDS += "pkgconfig icu"
-+DEPENDS += "icu"
+ DEPENDS = "bluez5 python3-pygobject python3-cython-native python3-setuptools-native intltool-native"
  
- PYPI_PACKAGE = "PyICU"
- SRC_URI[sha256sum] = "1382869b22d91cc99274f9b525fa7d9199b44d9007ff0036a09747839a01e9dc"
+-inherit autotools gettext systemd gsettings python3native gtk-icon-cache
++inherit autotools gettext systemd gsettings pkgconfig python3native gtk-icon-cache
  
- SRC_URI += "file://0001-Fix-host-contamination-of-include-files.patch"
- 
--inherit pypi setuptools3
-+inherit pkgconfig pypi setuptools3
+ SRC_URI = " \
+     https://github.com/blueman-project/blueman/releases/download/${PV}/blueman-${PV}.tar.xz \
 -- 
 2.33.0
 
