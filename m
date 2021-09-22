@@ -1,50 +1,50 @@
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web08.921.1632338550167387739
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web09.961.1632338551069657877
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Sep 2021 12:22:30 -0700
+ Wed, 22 Sep 2021 12:22:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=o4BkWqvq;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id j15so1020400plh.7
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:30 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=HTKXp/mF;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id f3-20020a17090a638300b00199097ddf1aso5270809pjj.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Sep 2021 12:22:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=tS4ioYiZPG7jcpdyqo5qZmc/+N1Zi4og9t+TP7Tx3F8=;
-        b=o4BkWqvqWh5qVTQNf7fqG9Wo1/jJAgQop1/jJJXL6GoZIojEo2sA7BQ8FOT6unHf0b
-         476+S+YNTsCPoPARFHjK1CGJKUdxt9gtHGaEw6x3dbRiSXZhkaLaR4uVknr8NS59oVPd
-         +n/BNIS71mtfiXn5BTcnKfS/Ar6npjstf118o/lWP+gmgm1Np7mLjv5nm+d0XdoKTJhB
-         vvLOGzPfdvZF7XytWRK319A1bE3IRCLZE613AMP9tWDTF3qrrG7Jbdk4zhTgyPpjZ9qC
-         E0Kj5rVdcRkn9cKQorvfvFRJ+OPEiGbSMFYZU1I750GBov3DTTc874d6P7AHWtyn7eGd
-         q3wA==
+        bh=8OPKXsh5xvrk4aLfcwAxSqYlSKGgHHqJTnUGSR9g3ZU=;
+        b=HTKXp/mFf4qGikxEgz7CyvEXQGUGmXTHPaOdH+B9Y4G79Kh3dg27IaLTfNZjg+zUvP
+         Ekcor4wadLneX4Jj69UHWaGMDwFrJbXswlPoau5EcEE75WSecnK8SV+lVXqoNjtepZnt
+         hUbPD+sbjr/+0L4WS4CM4Lf1j7KKmCMdIJDTjpFi9/mYp8tND1ThLpUCxIN3jVsuKvV3
+         7KC7c56tvCGBBa8hpvP+EYgE7eGYrBj8onBLpzNtZ15qdIieIz+zorka4oaglEs+oxrA
+         yuK3xMaeJNDhPXG1FwJw7ab/LUnhaFsz9PZQaDkThWM5sGS3Pd+1maVQM655g3mFj1R+
+         nq8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=tS4ioYiZPG7jcpdyqo5qZmc/+N1Zi4og9t+TP7Tx3F8=;
-        b=A7N2tK9UdRZzKpZsLIkJKqnVjL3S7LCpDHc+/FdiQnF3GEGHpjI9SllJ4oS0JnG/je
-         xWYIwcDXLzguqkGU1aVISa83U+c2gsPEx3sT3A/NXv25fB3Ebd5jFutR5jFZHcsYWqL0
-         MMQ6kkjYTg7FTOalJioA+UPnuLsduVraq5D3jXoxyGO6+wrK12Jh1P4AcrL739/0qbnp
-         z9xA3AuJKzWlH0B1ZKi1kwYUufdA/JSKx6jC12qMOYHdIQm7CKx34ZyXmDVjZZbf0LaW
-         Hn0FwzZqZASIp6RCD6dLKKifQ1JYWJEPSszrj1KT0GblVEUBLh71IK+1M/7vhcKCN+mc
-         LTvQ==
-X-Gm-Message-State: AOAM531W07a7jqcvt9LX/+dKfHUGxY6cURF5EZL2+c+hw485w2ivx4G1
-	WV8WkjJ7NkB5rFhjlYhfbf5IRrVFSxTSvw==
-X-Google-Smtp-Source: ABdhPJwcC8rsYhBF+9DBagz9AD8C5/oAJ3npf7jm/X++Xfs9tqNF4rfxyCVna3W8Cs+/M24trfKooA==
-X-Received: by 2002:a17:90b:1e09:: with SMTP id pg9mr13209886pjb.73.1632338549563;
-        Wed, 22 Sep 2021 12:22:29 -0700 (PDT)
+        bh=8OPKXsh5xvrk4aLfcwAxSqYlSKGgHHqJTnUGSR9g3ZU=;
+        b=PW/PLtoM7skVbDVhj44DmIAZ1nzdMrLrFMeLW2uCbMNizR/PkgM7TVLBqoDK6NjPNi
+         mCKRnOpTOx5qCSsuQswAOoh/Q2Ia14MQVPCeZDRRoM/6IBxa0StX5hTDG5ZF6GfcRQZ0
+         HW9xSi1JDimPOrEW4FFcLIY4NtaCBOdvBAZYNERs8z0rR9othrLPEHFSutJbMlWKV5IH
+         G4UGXtanfLC67rEEwxNO91RzzuTxkIpkVQwEjzmrXTkuIxeIwlV6BKEjh6+/Gte6XpDl
+         OT/q92kDhrWo1OZ7i2YLvBY2kF44l2Sf6rXI4JsJjsLP2eaUl6eQs5o7EXYLj9zuBzoL
+         OxcQ==
+X-Gm-Message-State: AOAM531+xI/8blj3FDj65cKJrrGzIyMY9LVsbX9KojqoyTS0RIzq6UD6
+	qhEH8c1q4O5O4NyxJ7Omt+S7AwczypqDkA==
+X-Google-Smtp-Source: ABdhPJzyuZz4bNC3EDHjU4c8G9+xcJ2mt3PRFq9Uy2BlhIgsaOuT4S1Wc+xtpCcLIG9k+4QS/lsdGg==
+X-Received: by 2002:a17:90a:6283:: with SMTP id d3mr716077pjj.73.1632338550455;
+        Wed, 22 Sep 2021 12:22:30 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::728f])
-        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.28
+        by smtp.gmail.com with ESMTPSA id y13sm3083119pjc.50.2021.09.22.12.22.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Sep 2021 12:22:29 -0700 (PDT)
+        Wed, 22 Sep 2021 12:22:30 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 16/39] blueman: Inherit pkgconfig
-Date: Wed, 22 Sep 2021 12:21:50 -0700
-Message-Id: <20210922192213.3062719-16-raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH 17/39] mimic: Inherit pkgconfig
+Date: Wed, 22 Sep 2021 12:21:51 -0700
+Message-Id: <20210922192213.3062719-17-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20210922192213.3062719-1-raj.khem@gmail.com>
 References: <20210922192213.3062719-1-raj.khem@gmail.com>
@@ -52,27 +52,28 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Fixes
-../blueman-2.2.1/configure: line 15660: syntax error near unexpected token `PYTHON,'
-../blueman-2.2.1/configure: line 15660: `PKG_CHECK_MODULES(PYTHON, python-${PYTHON_VERSION})'
+configure.ac:132: error: possibly undefined macro: m4_ignore
+      If this token and others are legitimate, please use m4_pattern_allow.
+      See the Autoconf documentation.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-networking/recipes-connectivity/blueman/blueman_2.2.1.bb | 2 +-
+ meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/blueman/blueman_2.2.1.bb b/meta-networking/recipes-connectivity/blueman/blueman_2.2.1.bb
-index 6ccb425e38..8e874edd5e 100644
---- a/meta-networking/recipes-connectivity/blueman/blueman_2.2.1.bb
-+++ b/meta-networking/recipes-connectivity/blueman/blueman_2.2.1.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb b/meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb
+index f4e26d52c3..412a272eed 100644
+--- a/meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb
++++ b/meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb
+@@ -25,7 +25,7 @@ SRC_URI = "git://github.com/MycroftAI/mimic1.git \
+            file://0001-cmu_indic_lang-Make-cst_rx_not_indic-as-extern-decla.patch \
+           "
  
- DEPENDS = "bluez5 python3-pygobject python3-cython-native python3-setuptools-native intltool-native"
+-inherit autotools
++inherit autotools pkgconfig
  
--inherit autotools gettext systemd gsettings python3native gtk-icon-cache
-+inherit autotools gettext systemd gsettings pkgconfig python3native gtk-icon-cache
+ S = "${WORKDIR}/git"
  
- SRC_URI = " \
-     https://github.com/blueman-project/blueman/releases/download/${PV}/blueman-${PV}.tar.xz \
 -- 
 2.33.0
 
