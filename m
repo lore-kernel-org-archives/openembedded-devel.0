@@ -1,59 +1,59 @@
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.2])
- by mx.groups.io with SMTP id smtpd.web11.586.1632375099728136471
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com [195.245.230.66])
+ by mx.groups.io with SMTP id smtpd.web12.542.1632375121335354457
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Sep 2021 22:31:40 -0700
+ Wed, 22 Sep 2021 22:32:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=JDB5UbQn;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: zhengrq.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=NIxnlf65;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.66, mailfrom: zhengrq.fnst@fujitsu.com)
 Return-Path: <zhengrq.fnst@fujitsu.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1632375097; i=@fujitsu.com;
-	bh=RlqgyedQHGseGPpci6Qm3ur2aSULHSMmnWUcvvjq6CY=;
+	s=170520fj; t=1632375119; i=@fujitsu.com;
+	bh=eALz3YBzu6sNHCDkDuX7dlSvRjkZoq+3jQvswIPgihY=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=JDB5UbQnPR1DCbFkS0hYCccHUb2BG3wkrDLU2z84URtzEVg1KFAiidZUA1t0TF2d2
-	 WYwsji7Aj2s8mWyIQ/MonNiYTz7PKeEUUGW59uFM3FrF5MrH5wy4ebQmTvxhtXkzSI
-	 U4OQnY3fQ3aEg7MmISZLhzBIjH8lYHwyl0tcwJMk3akBvFZlol+aGWpPMS/anE1fJ7
-	 eWbn/GKyNEviplFmXFp6UQQfkMX8U3d7/BxVS9kbhF/3wlb61+xA6hERVhGtNF0mM7
-	 4QV65MdCQxYjzR8hXpioiQBtW4RfjysF2ZA0uShrVj0OBlw5hZ1TqmQLN/GJSFK23j
-	 sWhUdbNeEUKuA==
-Received: from [100.112.195.149] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-west-1.aws.symcld.net id B2/12-02979-9311C416; Thu, 23 Sep 2021 05:31:37 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYqmsp6JN
-  oMHeHpMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnFw0QHGgoMcFf8e/2JuYHzK3sXIxSEkMJtJ
-  Yte8vYwQzh5GiY7mvUxdjJwcbAK6Eucer2UHsUUE9CWWzt7DDGILCzhLdP84CVbDIqAqsXPTQ
-  bA4r4CHxMFTi8FsCQEFiSkP30PFBSVOznzCAmIzC0hIHHzxAijOAVSjKDF7ujxEeYXE68OXmC
-  cw8sxC0jELSccCRqZVjBZJRZnpGSW5iZk5uoYGBrqGhka6hpZAbGKil1ilm6iXWqpbnlpcomu
-  ol1herFdcmZuck6KXl1qyiREYRikFBybsYNz/+oPeIUZJDiYlUd50AZ9EIb6k/JTKjMTijPii
-  0pzU4kOMMhwcShK8Z/iBcoJFqempFWmZOcCQhklLcPAoifAqcAOleYsLEnOLM9MhUqcYFaXEe
-  U1BZgqAJDJK8+DaYHF0iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5Iw7x6Q7TyZeSVw018BLW
-  YCWsy/0gNkcUkiQkqqgUm2Jce54cnpSwzfl/1fYl12N1Rn/rOEt8o6Z+xVJgVcmnXlgVvD7Jw
-  jnfuu2zwJNczfHHpqb7ZkodXuh4svSvov73NhbtavOCT8U/DjRBE79bvP6xyb9y3b5V7tdKxG
-  4vrRFinvm2ekn+ncS7eXPPSU99zb19u/nN7r4LFBaeqRS+L7Dn4oeT7751alpyIxPl9MeJR+c
-  Wu+/q8jbndD5ma515KHF4Qb/9wxC3ha+fZkcsuNquA9hrwbGyLCdvRelPpQ+e31R2/X5DrX+l
-  01RY567bwPJGyMPu6WMVsZ19oT9Ni22XFTRn96COPUazfWzHyn1rQoO4CP/3T9x7gLLYE87bX
-  GPlHvLWYlPZn3rEWJpTgj0VCLuag4EQC9eeufHgMAAA==
+	b=NIxnlf65qG1FGR4Byznmj0oYp7ML9cTzHn71NLicLbxAqbXS6SW6EdBvSyLCZa4mm
+	 qHqYXr85Z4RMHrR2gRx7+hLDc6BU2U7sqGgDLJzpKWPYzqj5zl4fYdIOSbnS04pdeX
+	 JMhE+tfReVyIu8Nmii4mJm/cgpHjg+xNRvC6CEh1a2g5zhkGwDER8h4tnkU48Y8p5m
+	 rtVh47pTGJnVGQC9WcRW3nUF0OwXjjFg/q8y0ZkMv4tfJmw77Y8hUNh2D18HICoguR
+	 UPqNmh5759FU6gKhi0hMmzFxbk2pK9AGpBuujywnwAufOl33OHUjLoxHdOJrSI5C83
+	 5TpKjATG6OD1w==
+Received: from [100.112.197.4] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-b.eu-west-1.aws.symcld.net id 6C/22-21482-F411C416; Thu, 23 Sep 2021 05:31:59 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+EI0fUX9Ek
+  0WDqLw+Li4aXMDowe5zauYAxgjGLNzEvKr0hgzdi9bB5TwRGDiiMTD7A3MP7Q7GLk4hASmM0k
+  ceXTYRYIZw+jxILZi9i7GDk52AR0Jc49XgtmiwjoSyydvYcZxBYWcJKYu/4hC4jNIqAq0fVqB
+  1gNr4CHRPO9+6wgtoSAgsSUh++ZIeKCEidnPgGrZxaQkDj44gVQnAOoRlFi9nR5iPIKideHLz
+  FPYOSZhaRjFpKOBYxMqxgtkooy0zNKchMzc3QNDQx0DQ2NdA0tzXUNjc31Eqt0k/RSS3XLU4t
+  LdA31EsuL9Yorc5NzUvTyUks2MQLDKKXgaOcOxl+vPugdYpTkYFIS5U0X8EkU4kvKT6nMSCzO
+  iC8qzUktPsQow8GhJMF7hh8oJ1iUmp5akZaZAwxpmLQEB4+SCK8CN1Cat7ggMbc4Mx0idYpRU
+  Uqc1xRkpgBIIqM0D64NFkeXGGWlhHkZGRgYhHgKUotyM0tQ5V8xinMwKgnz7gHZzpOZVwI3/R
+  XQYiagxfwrPUAWlyQipKQamDgUxS38Xwe4rDnLI9m5fdanw0zbuA8LbTmydukmn+5krtcrdm4
+  7WHZgr6PpmZ9tl+/42zd2nfsrqOfs8vOb9uRXu5vkeveJ9Mr6x/JmNuzdfT7FY+1uTteLv67O
+  1fjz+/tVLiHWtiv7Dp3dPX8fzwfONRERYYIPm96YsS2+0yyatuGWSn7p6mmJwYsOqVnEVkb9m
+  C+nopnG9uzGwq2THk+tc/r01IjNPEHmOZP8N7G5+bt+RG54kdT2oPZhCnOYyeMVKxlPWK1crv
+  dyVpKP73+vuqyzvxj4715JllOwaPhTbPLlctJlXok/Dz5WqZyOuKcnvfnbQyfb12ut5qs8aNl
+  5NShv+UQxufyVPepxF/mUWIozEg21mIuKEwGDIJw0HgMAAA==
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-22.tower-265.messagelabs.com!1632375097!48256!1
-X-Originating-IP: [62.60.8.149]
+X-Msg-Ref: server-7.tower-287.messagelabs.com!1632375118!259641!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 10359 invoked from network); 23 Sep 2021 05:31:37 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-22.tower-265.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 23 Sep 2021 05:31:37 -0000
+Received: (qmail 20624 invoked from network); 23 Sep 2021 05:31:59 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-7.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 23 Sep 2021 05:31:59 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 18N5VbUx003122
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 18N5Vwx6021660
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 23 Sep 2021 06:31:37 +0100
+	for <openembedded-devel@lists.openembedded.org>; Thu, 23 Sep 2021 06:31:58 +0100
 Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Thu, 23 Sep 2021 06:31:35 +0100
+ (TLS) id 15.0.1497.23; Thu, 23 Sep 2021 06:31:57 +0100
 From: "zhengruoqin" <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] span-lite: upgrade 0.10.0 -> 0.10.1
-Date: Thu, 23 Sep 2021 22:31:29 +0800
-Message-ID: <1632407489-15626-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] protobuf: upgrade 3.17.3 -> 3.18.0
+Date: Thu, 23 Sep 2021 22:31:50 +0800
+Message-ID: <1632407510-15664-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.35]
@@ -61,30 +61,133 @@ X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 Content-Type: text/plain
 
-Release 0.10.1 fixes https://github.com/martinmoene/span-lite/issues/71.
+C++
+Fix warnings raised by clang 11 (#8664)
+Make StringPiece constructible from std::string_view (#8707)
+Add missing capability attributes for LLVM 12 (#8714)
+Stop using std::iterator (deprecated in C++17). (#8741)
+Move field_access_listener from libprotobuf-lite to libprotobuf (#8775)
+Fix #7047 Safely handle setlocale (#8735)
+Remove deprecated version of SetTotalBytesLimit() (#8794)
+Support arena allocation of google::protobuf::AnyMetadata (#8758)
+Fix undefined symbol error around SharedCtor() (#8827)
+Fix default value of enum(int) in json_util with proto2 (#8835)
+Better Smaller ByteSizeLong
+Introduce event filters for inject_field_listener_events
+Reduce memory usage of DescriptorPool
+For lazy fields copy serialized form when allowed.
+Re-introduce the InlinedStringField class
+v2 access listener
+Reduce padding in the proto's ExtensionRegistry map.
+GetExtension performance optimizations
+Make tracker a static variable rather than call static functions
+Support extensions in field access listener
+Annotate MergeFrom for field access listener
+Fix incomplete types for field access listener
+Add map_entry/new_map_entry to SpecificField in MessageDifferencer. They
+record the map items which are different in MessageDifferencer's reporter.
+Reduce binary size due to fieldless proto messages
+TextFormat: ParseInfoTree supports getting field end location in addition to
+start.
+Fix repeated enum extension size in field listener
+Enable Any Text Expansion for Descriptors::DebugString()
+Switch from int{8,16,32,64} to int{8,16,32,64}_t
+Java
+Fix errorprone conflict (#8723)
+Removing deprecated TimeUtil class. (#8749)
+Optimized FieldDescriptor.valueOf() to avoid array copying.
+Removing deprecated TimeUtil class.
+Add Durations.parseUnchecked(String) and Timestamps.parseUnchecked(String)
+FieldMaskUtil: Add convenience method to mask the fields out of a given proto.
+JavaScript
+Optimize binary parsing of repeated float64
+Fix for optimization when reading doubles from binary wire format
+Replace toArray implementation with toJSON.
+PHP
+Migrate PHP & Ruby to ABSL wyhash (#8854)
+Added support for PHP 8.1 (currently in RC1) to the C extension (#8964)
+Fixed PHP SEGV when constructing messages from a destructor. (#8969)
+Ruby
+Move DSL implementation from C to pure Ruby (#8850)
+Fixed a memory bug with RepeatedField#+. (#8970)
+Python
+Drops support for 2.7 and 3.5.
+Other
+[csharp] ByteString.CreateCodedInput should use ArraySegment offset and count (#8740)
+[ObjC] Add support for using the proto package to prefix symbols. (#8760)
+field_presence.md: fix Go example (#8788)
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../span-lite/{span-lite_0.10.0.bb => span-lite_0.10.1.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/span-lite/{span-lite_0.10.0.bb => span-lite_0.10.1.bb} (86%)
+ ...am-include-descriptor.cc-when-building-libp.patch | 12 +++++++-----
+ .../{protobuf_3.17.3.bb => protobuf_3.18.0.bb}       |  6 +++---
+ 2 files changed, 10 insertions(+), 8 deletions(-)
+ rename meta-oe/recipes-devtools/protobuf/{protobuf_3.17.3.bb => protobuf_3.18.0.bb} (95%)
 
-diff --git a/meta-oe/recipes-support/span-lite/span-lite_0.10.0.bb b/meta-oe/recipes-support/span-lite/span-lite_0.10.1.bb
-similarity index 86%
-rename from meta-oe/recipes-support/span-lite/span-lite_0.10.0.bb
-rename to meta-oe/recipes-support/span-lite/span-lite_0.10.1.bb
-index 4cf0dee112..15ba099826 100644
---- a/meta-oe/recipes-support/span-lite/span-lite_0.10.0.bb
-+++ b/meta-oe/recipes-support/span-lite/span-lite_0.10.1.bb
-@@ -4,7 +4,7 @@ LICENSE = "BSL-1.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-Makefile.am-include-descriptor.cc-when-building-libp.patch b/meta-oe/recipes-devtools/protobuf/protobuf/0001-Makefile.am-include-descriptor.cc-when-building-libp.patch
+index fc7286122c..bd3a277a3d 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf/0001-Makefile.am-include-descriptor.cc-when-building-libp.patch
++++ b/meta-oe/recipes-devtools/protobuf/protobuf/0001-Makefile.am-include-descriptor.cc-when-building-libp.patch
+@@ -1,7 +1,8 @@
+-From 321709837f412e2f590e36e3fe33571bb40036a7 Mon Sep 17 00:00:00 2001
++From 8515ceec5ba3e2fcdbc819b5bf10fe742d7c9d5d Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Thu, 27 Jun 2019 13:27:18 +0000
+-Subject: [PATCH] Makefile.am: include descriptor.pb.cc when building libprotoc.so
++Subject: [PATCH] Makefile.am: include descriptor.pb.cc when building
++ libprotoc.so
  
- SRC_URI += "git://github.com/martinmoene/span-lite"
--SRCREV = "2987dd8d3b8fe7c861e3c3f879234cc1c412f03f"
-+SRCREV = "da49b231a25600b4431e00b564a6a20be95c1108"
+ * otherwise plugin.pb.o has undefined symbol scc_info_FileDescriptorProto_google_2fprotobuf_2fdescriptor_2eproto
+   and build with gold fails with:
+@@ -10,19 +11,20 @@ Subject: [PATCH] Makefile.am: include descriptor.pb.cc when building libprotoc.s
  
+ Upstream-Status: Pending
+ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++
+ ---
+  src/Makefile.am | 1 +
+  1 file changed, 1 insertion(+)
+ 
+ diff --git a/src/Makefile.am b/src/Makefile.am
+-index be18ba761..57e3daec1 100644
++index d4f11ce79..96d911746 100644
+ --- a/src/Makefile.am
+ +++ b/src/Makefile.am
+-@@ -313,6 +313,7 @@ libprotoc_la_LDFLAGS += -Wl,--version-script=$(srcdir)/libprotoc.map
++@@ -323,6 +323,7 @@ libprotoc_la_LDFLAGS += -Wl,--version-script=$(srcdir)/libprotoc.map
+  EXTRA_libprotoc_la_DEPENDENCIES = libprotoc.map
+  endif
+  libprotoc_la_SOURCES =                                         \
+ +  google/protobuf/descriptor.pb.cc                             \
+    google/protobuf/compiler/code_generator.cc                   \
+    google/protobuf/compiler/command_line_interface.cc           \
+-   google/protobuf/compiler/plugin.cc                           \
++   google/protobuf/compiler/cpp/cpp_enum.cc                     \
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.17.3.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.18.0.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/protobuf/protobuf_3.17.3.bb
+rename to meta-oe/recipes-devtools/protobuf/protobuf_3.18.0.bb
+index 4de2c93d40..9f501124a0 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_3.17.3.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.18.0.bb
+@@ -10,14 +10,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
+ DEPENDS = "zlib"
+ DEPENDS:append:class-target = " protobuf-native"
+ 
+-SRCREV = "909a0f36a10075c4b4bc70fdee2c7e32dd612a72"
++SRCREV = "89b14b1d16eba4d44af43256fc45b24a6a348557"
+ 
+-SRC_URI = "git://github.com/protocolbuffers/protobuf.git \
++SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=3.18.x \
+            file://run-ptest \
+            file://0001-protobuf-fix-configure-error.patch \
+            file://0001-Makefile.am-include-descriptor.cc-when-building-libp.patch \
+            file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
+-"
++           "
  S = "${WORKDIR}/git"
  
+ inherit autotools-brokensep pkgconfig ptest
 -- 
 2.25.1
 
