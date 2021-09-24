@@ -1,57 +1,108 @@
-Received: from mailout10.rmx.de (mailout10.rmx.de [94.199.88.75])
- by mx.groups.io with SMTP id smtpd.web10.5877.1632475715797101481
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.web09.492.1632496725303937673
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Sep 2021 02:28:39 -0700
+ Fri, 24 Sep 2021 08:18:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: arri.de, ip: 94.199.88.75, mailfrom: ceggers@arri.de)
-Received: from kdin02.retarus.com (kdin02.dmz1.retloc [172.19.17.49])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout10.rmx.de (Postfix) with ESMTPS id 4HG6Cg2GwGz33rm;
-	Fri, 24 Sep 2021 11:28:31 +0200 (CEST)
-Received: from mta.arri.de (unknown [217.111.95.66])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by kdin02.retarus.com (Postfix) with ESMTPS id 4HG6Cd2nNhz2TRkV;
-	Fri, 24 Sep 2021 11:28:29 +0200 (CEST)
-Received: from n95hx1g2.localnet (192.168.55.132) by mta.arri.de
- (192.168.100.104) with Microsoft SMTP Server (TLS) id 14.3.498.0; Fri, 24 Sep
- 2021 11:28:28 +0200
-From: "Christian Eggers" <ceggers@arri.de>
-To: <openembedded-devel@lists.openembedded.org>
-CC: OpenBMC Maillist <openbmc@lists.ozlabs.org>, Matt Johnston
-	<matt@codeconstruct.com.au>, Khem Raj <raj.khem@gmail.com>
-Subject: Re: [oe] openssh-dev package and populate_sdk conflicts
-Date: Fri, 24 Sep 2021 11:28:23 +0200
-Message-ID: <2617274.mvXUDI8C0e@n95hx1g2>
-Organization: Arnold & Richter Cine Technik GmbH & Co. Betriebs KG
-In-Reply-To: <94429904ec0c9d75919cda42339a2fafcbc35fe4.camel@codeconstruct.com.au>
-References: <94429904ec0c9d75919cda42339a2fafcbc35fe4.camel@codeconstruct.com.au>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=P+CqmuSB;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f170.google.com with SMTP id s16so9235698pfk.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Sep 2021 08:18:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :references:from:organization:in-reply-to:content-transfer-encoding;
+        bh=e+XE9yCnWYfEGxuQCnhmTu9OS6SKAjXa2XwPWRCvaJw=;
+        b=P+CqmuSB/Kt9bpbnSE2Lu0r8dX/0U9IoaZR2i5agdDL5rGgd8FNMsXWx1RYgR7TiaV
+         m84m3mG+oQxg1T8Wlx48Amgoo9HcwyUldSshCNj4EQI1tvWAmJ8hwfsicMsTx2i+ziVG
+         d8G1gVuL7rH7+4dKg2kbugUfOC8N4su4pPA0388kuIdPoR66RF3MskgQrlCcLut2YrHF
+         PFAbewTC3lSZicRLAjbkQbeqlTC8hRes/P1H55qkLpZU3vyvcKPTC5eVbO+HE3yZK97a
+         iTPDjHRmm9zouVpyVFs2qRvDXuxt8Sd/4COmuNlVN8EWyR+Ioji0KAMLzcP9pGjHH2Rz
+         Ppxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:references:from:organization:in-reply-to
+         :content-transfer-encoding;
+        bh=e+XE9yCnWYfEGxuQCnhmTu9OS6SKAjXa2XwPWRCvaJw=;
+        b=H/slNXhGFf3cmH15boAXJMqvGVm/4Ryyz6H0X9YRxTQTdJxclL68OArabqyUpqe+z+
+         7Emh4Of84OcUNJl7aHUsrirqm3jBhFlsCdViMgLSeBpmg8TV0AOqvyhWlvufx4B7hkMD
+         QT65N0dS8gnHGsCPGU6Wcy5n7UGh4KRCL2ttlQ1DK9Gzr88Elpvw/drjrdC/ZXJFjkQd
+         m+YB4TPjzgdMvPDc/a/X5xtDFtT/NWtjlPDXEO89NoRxAq8/d1JVaAlHzgaGdfIzDq6Z
+         QGeebHDu1FgjT1QYoDANWcaX7Qpk6rLCSY2+ozpY7IUC2S6LrGN6YItCMkoruDTkD+nf
+         goTQ==
+X-Gm-Message-State: AOAM533L++7jRmFFVEJ3X/p87DW40pmzLVSLvLYn2Jdsq9ZUAEguMSTK
+	kMTM25UpgtyGdQdA7SCb1kk=
+X-Google-Smtp-Source: ABdhPJwZi5xd7e0hwozoSYfDyumLCC+hqAuEQ35JNrOzMMRjjCEf6exIGfd9p2GBxV9a4oTatMa3Ww==
+X-Received: by 2002:a62:7997:0:b0:43d:f9e1:939c with SMTP id u145-20020a627997000000b0043df9e1939cmr10179014pfc.2.1632496724702;
+        Fri, 24 Sep 2021 08:18:44 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from ?IPV6:2601:646:9200:a0f0:1dda:37cf:b1d6:5d51? ([2601:646:9200:a0f0:1dda:37cf:b1d6:5d51])
+        by smtp.gmail.com with ESMTPSA id u10sm8737471pjf.46.2021.09.24.08.18.43
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 24 Sep 2021 08:18:43 -0700 (PDT)
+Message-ID: <1057dbcb-11ae-ae41-0b33-d42c6009ae80@gmail.com>
+Date: Fri, 24 Sep 2021 08:18:42 -0700
 MIME-Version: 1.0
-X-Originating-IP: [192.168.55.132]
-X-RMX-ID: 20210924-112829-MBWVyXJMTMVz-0@out02.hq
-X-RMX-SOURCE: 217.111.95.66
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.1.1
+Subject: Re: [oe] [meta-python] [PATCH] python3-rdflib: upgrade 6.0.0 -> 6.0.1
+To: zangrc <zangrc.fnst@fujitsu.com>,
+ openembedded-devel@lists.openembedded.org
+References: <1632514953-4648-1-git-send-email-zangrc.fnst@fujitsu.com>
+From: "Khem Raj" <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+In-Reply-To: <1632514953-4648-1-git-send-email-zangrc.fnst@fujitsu.com>
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Friday, 24 September 2021, 05:08:04 CEST, Matt Johnston wrote:
-> Recently OpenBMC merged a change to install openssh-sftp-server package
-> alongside dropbear sshd [1]. That caused a conflict in "populate_sdk" which
-> installs all available -dev packages [2]. 'openssh-dev' pulls in an
-> 'openssh' -> 'openssh-sshd' dependency which conflicts with 'dropbear' [3].
+
+
+On 9/24/21 1:22 PM, zangrc wrote:
+> 2021/09/17 RELEASE 6.0.1
+> ========================
+> Minor release to fix a few small errors, in particular with JSON-LD parsing & serializing integration from rdflib-jsonld. Also, a few other niceties, such as allowing graph `add()`, `remove()` etc. to be chainable.
 > 
-> What would be the recommended way to handle that situation? For now OpenBMC
-> has merged a change to disable building openssh-dev (it's empty since
-> openssh doesn't have libraries) [4].
+> * Add test for adding JSON-LD to guess_format()
+> * Add JSON-LD to guess_format()
+> * add dateTimeStamp, fundamental & constraining facets, 7-prop data model
+> * fix: remove log message on import
+> * Make graph and other methods chainable
+> * fix: use correct name for json-ld
+> * Allowing Container Membership Properties in RDF namespace (#873)
+> * Update intro_to_sparql.rst
+> * Iterate over dataset return quads
+> 
+> Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+> ---
+>   .../{python3-rdflib_6.0.0.bb => python3-rdflib_6.0.1.bb}      | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-rdflib_6.0.0.bb => python3-rdflib_6.0.1.bb} (65%)
+> 
+> diff --git a/meta-python/recipes-devtools/python/python3-rdflib_6.0.0.bb b/meta-python/recipes-devtools/python/python3-rdflib_6.0.1.bb
+> similarity index 65%
+> rename from meta-python/recipes-devtools/python/python3-rdflib_6.0.0.bb
+> rename to meta-python/recipes-devtools/python/python3-rdflib_6.0.1.bb
+> index 589e6638bf..c08ad81c50 100644
+> --- a/meta-python/recipes-devtools/python/python3-rdflib_6.0.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-rdflib_6.0.1.bb
+> @@ -1,8 +1,8 @@
+>   SUMMARY = "RDFLib is a pure Python package for working with RDF"
+>   LICENSE = "BSD-3-Clause"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=89aa9a14f80a6ac70e1d5da763a309ed"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=b6cde159c801514e0e45a40cf0a9d3d9"
 
+why did license checksum change ? can you add a line in commit msg 
+explaining that ?
 
-I had a similar problem. It set the following in my rootfs image recipe:
-
-# SDK: openssh-dev cannot be installed because dropbear is already installed.
-PACKAGE_EXCLUDE_COMPLEMENTARY += "openssh"
-
-regards
-Christian
-
-
-
+>   
+> -SRC_URI[sha256sum] = "7ce4d757eb26f4dd43205ec340d8c097f29e5adfe45d6ea20238c731dc679879"
+> +SRC_URI[sha256sum] = "f071caff0b68634e4a7bd1d66ea3416ac98f1cc3b915938147ea899c32608728"
+>   
+>   inherit pypi setuptools3
+>   
+> 
+> 
+> 
+> 
+> 
