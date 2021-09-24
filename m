@@ -1,112 +1,57 @@
-Received: from mail3.bemta25.messagelabs.com (mail3.bemta25.messagelabs.com [195.245.230.81])
- by mx.groups.io with SMTP id smtpd.web12.5355.1632471968508812609
+Received: from mailout10.rmx.de (mailout10.rmx.de [94.199.88.75])
+ by mx.groups.io with SMTP id smtpd.web10.5877.1632475715797101481
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Sep 2021 01:26:09 -0700
+ Fri, 24 Sep 2021 02:28:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=A1FwdTiB;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.81, mailfrom: zangrc.fnst@fujitsu.com)
-Return-Path: <zangrc.fnst@fujitsu.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1632471960; i=@fujitsu.com;
-	bh=LqCxBtlRfCTYQIy2gvcjz2CoLlxM+mYI3yN0piG/M9c=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=A1FwdTiBz8PxMRIHNLQKZDzL6PTeuwVJha/gM0Q8s6EPBSVWGsJ0et7wkbWZeRgy/
-	 W+9vrS6ei7AeAXcI0qodse8JTh1TCGI+q1WwnVPz0vUjdka7ceD3PFcAGxQdvudyKg
-	 EVfjvhTeZKJmFGsC/b7eNWwCpnR1Tai1GqcRr7X8G7SCluQm3BMwIvCTgOv+0/Rr/o
-	 AH7yCixqQUZ5KBFvV2e+ErWBjzaSWTvor5mtPsre4nAr3YJ+8WQwphg4VI6hL0JhGd
-	 XT5x/LzmvayZCGU6qiBjhvfSVog39cEBSoq8UGi1V0YqxDZhWSzz/Jai0uiv5WtFA8
-	 O8SvN1clXLczQ==
-Received: from [100.112.196.227] (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-b.eu-west-1.aws.symcld.net id CD/79-30018-89B8D416; Fri, 24 Sep 2021 08:26:00 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupikeJIrShJLcpLzFFi42Kxs+GYqjuj2zf
-  R4MNqNouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPdIr2Cu7wVOyZvZ2xgXM3TxcjFISQwm0ni
-  +pkGRgjnBKPE/Fdn2LoYOTnYBHQkOl50s4DYIgL6Ektn72EGsYUFvCSOvvzL2sXIwcEioCrx4
-  ZgpSJhXwE3i4faVYK0SAgoSUx6+Z4aIC0qcnPkEbAyzgITEwRcvmCFqFCW27zzDAmFXSLw+fI
-  l5AiPPLCQts5C0LGBkWsVokVSUmZ5RkpuYmaNraGCga2hopGtoaa5raGyul1ilm6SXWqpbnlp
-  comuol1herFdcmZuck6KXl1qyiREYRCkFRzt3MP569UHvEKMkB5OSKK98l2+iEF9SfkplRmJx
-  RnxRaU5q8SFGGQ4OJQneF01AOcGi1PTUirTMHGBAw6QlOHiURHgngLTyFhck5hZnpkOkTjEqS
-  onzfmsFSgiAJDJK8+DaYFF0iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5IwrxHIeJ7MvBK46a
-  +AFjMBLX4+1wdkcUkiQkqqgWn7oTWNwswHJr0MVWK+W+wcaNp99rni3iOf+wse7t9kcK2L7yb
-  vtuvnD/bGaIddl7LaxF995i6f7MytymoVdzgaOR+1Rne2/xbrrPnvKSQXov5I0dpi+j7/E/8m
-  Gv+6usrW36/nXaLRTucv7xdU3898IzDZ8cjNX7zS7olyBs4d/Wdr3zDGz4hdYWpuM2vevPu3z
-  RKSzW9yVl3JUaqc+GxWUMu3kzZXsrJ2GilvjbMwuvqgvjyaT42vc4rZppzv2zzXepZc3/lfyO
-  h2VitfQt6xPVv55syZMevknmu3L4l98F7s9rRkTu67S9Lul+1VW5PnzvV0WjfrsVKpn9/DmGj
-  Wm1lha7ey+e0xYg3eclyJpTgj0VCLuag4EQCCTW/HHQMAAA==
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-6.tower-285.messagelabs.com!1632471959!64858!1
-X-Originating-IP: [62.60.8.149]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.4; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 28016 invoked from network); 24 Sep 2021 08:26:00 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-  by server-6.tower-285.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Sep 2021 08:26:00 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 18O8PxMf006431
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Sep 2021 09:25:59 +0100
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Fri, 24 Sep 2021 09:25:58 +0100
-From: "zangrc" <zangrc.fnst@fujitsu.com>
+ dkim=missing; spf=pass (domain: arri.de, ip: 94.199.88.75, mailfrom: ceggers@arri.de)
+Received: from kdin02.retarus.com (kdin02.dmz1.retloc [172.19.17.49])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout10.rmx.de (Postfix) with ESMTPS id 4HG6Cg2GwGz33rm;
+	Fri, 24 Sep 2021 11:28:31 +0200 (CEST)
+Received: from mta.arri.de (unknown [217.111.95.66])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by kdin02.retarus.com (Postfix) with ESMTPS id 4HG6Cd2nNhz2TRkV;
+	Fri, 24 Sep 2021 11:28:29 +0200 (CEST)
+Received: from n95hx1g2.localnet (192.168.55.132) by mta.arri.de
+ (192.168.100.104) with Microsoft SMTP Server (TLS) id 14.3.498.0; Fri, 24 Sep
+ 2021 11:28:28 +0200
+From: "Christian Eggers" <ceggers@arri.de>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-tqdm: upgrade 4.62.2 -> 4.62.3
-Date: Sat, 25 Sep 2021 04:25:52 +0800
-Message-ID: <1632515152-4850-1-git-send-email-zangrc.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+CC: OpenBMC Maillist <openbmc@lists.ozlabs.org>, Matt Johnston
+	<matt@codeconstruct.com.au>, Khem Raj <raj.khem@gmail.com>
+Subject: Re: [oe] openssh-dev package and populate_sdk conflicts
+Date: Fri, 24 Sep 2021 11:28:23 +0200
+Message-ID: <2617274.mvXUDI8C0e@n95hx1g2>
+Organization: Arnold & Richter Cine Technik GmbH & Co. Betriebs KG
+In-Reply-To: <94429904ec0c9d75919cda42339a2fafcbc35fe4.camel@codeconstruct.com.au>
+References: <94429904ec0c9d75919cda42339a2fafcbc35fe4.camel@codeconstruct.com.au>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-Content-Type: text/plain
+X-Originating-IP: [192.168.55.132]
+X-RMX-ID: 20210924-112829-MBWVyXJMTMVz-0@out02.hq
+X-RMX-SOURCE: 217.111.95.66
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
--License-Update: Modify part description.
-old: If a copy of the MPL was not distributed with this project,
-new: If a copy of the MPL was not distributed with this file,
+On Friday, 24 September 2021, 05:08:04 CEST, Matt Johnston wrote:
+> Recently OpenBMC merged a change to install openssh-sftp-server package
+> alongside dropbear sshd [1]. That caused a conflict in "populate_sdk" which
+> installs all available -dev packages [2]. 'openssh-dev' pulls in an
+> 'openssh' -> 'openssh-sshd' dependency which conflicts with 'dropbear' [3].
+> 
+> What would be the recommended way to handle that situation? For now OpenBMC
+> has merged a change to disable building openssh-dev (it's empty since
+> openssh doesn't have libraries) [4].
 
-v4.62.3 (2021-09-20)#
-whl|asc
-fix minor typo (#1246)
-minor example fix (#1246)
-misc tidying & refactoring
-misc build/dev framework updates
-update dependencies
-update linters
-update docs deployment branches
-misc test/ci updates
-test forks
-tidy OS & Python version tests
-bump primary python version 3.7 => 3.8
-beta py3.10 testing
-fix py2.7 tests
-better timeout handling
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
----
- .../python/{python3-tqdm_4.62.2.bb => python3-tqdm_4.62.3.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-tqdm_4.62.2.bb => python3-tqdm_4.62.3.bb} (65%)
+I had a similar problem. It set the following in my rootfs image recipe:
 
-diff --git a/meta-python/recipes-devtools/python/python3-tqdm_4.62.2.bb b/meta-python/recipes-devtools/python/python3-tqdm_4.62.3.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-tqdm_4.62.2.bb
-rename to meta-python/recipes-devtools/python/python3-tqdm_4.62.3.bb
-index bbdd795aab..148431d0ad 100644
---- a/meta-python/recipes-devtools/python/python3-tqdm_4.62.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-tqdm_4.62.3.bb
-@@ -3,9 +3,9 @@ HOMEPAGE = "http://tqdm.github.io/"
- SECTION = "devel/python"
- 
- LICENSE = "MIT & MPL-2.0"
--LIC_FILES_CHKSUM = "file://LICENCE;md5=59e4271a933d33edfe60237db377a14b"
-+LIC_FILES_CHKSUM = "file://LICENCE;md5=1672e2674934fd93a31c09cf17f34100"
- 
--SRC_URI[sha256sum] = "a4d6d112e507ef98513ac119ead1159d286deab17dffedd96921412c2d236ff5"
-+SRC_URI[sha256sum] = "d359de7217506c9851b7869f3708d8ee53ed70a1b8edbba4dbcb47442592920d"
- 
- inherit pypi setuptools3
- 
--- 
-2.25.1
+# SDK: openssh-dev cannot be installed because dropbear is already installed.
+PACKAGE_EXCLUDE_COMPLEMENTARY += "openssh"
+
+regards
+Christian
+
+
 
