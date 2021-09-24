@@ -1,131 +1,209 @@
-Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com [209.85.160.170])
- by mx.groups.io with SMTP id smtpd.web12.2416.1632433187769968214
+Received: from mail-qv1-f46.google.com (mail-qv1-f46.google.com [209.85.219.46])
+ by mx.groups.io with SMTP id smtpd.web11.2817.1632449447441003572
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Sep 2021 14:39:47 -0700
+ Thu, 23 Sep 2021 19:10:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=fquNEI93;
- spf=pass (domain: gmail.com, ip: 209.85.160.170, mailfrom: twoerner@gmail.com)
-Received: by mail-qt1-f170.google.com with SMTP id e16so7518064qte.13
-        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Sep 2021 14:39:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=PCCvU3vi;
+ spf=pass (domain: gmail.com, ip: 209.85.219.46, mailfrom: twoerner@gmail.com)
+Received: by mail-qv1-f46.google.com with SMTP id a9so5508102qvf.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Sep 2021 19:10:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=/tbF5Cwt0d6yi5idvywIgbJ5safpGiTSnGxxkI3alhI=;
-        b=fquNEI93eK4vY33W/wCkIdHPtQiRldhpsEqzdRP/z/sGswpeJKl7azPU+MOIQSFOiM
-         Uy1sF7MehLj2tzKcp0lyfL4iSeaXka+C/7U3jliSWb787VvhJ54StREQqtBqIDVR0Jur
-         clBOnIuqi7LwmyE0A6cM3ZUatfCqPn0gdoEsW7hhbD0y9FbXKZbWDLBuGjQRznU+Hgq8
-         qHYgOZ+Kn7QzaAz5EJ5/b2NXH8UdsozaXLN+TuRIK0FzO49B3+VhIYML0NDCEijG6gjl
-         qCqRiVqq9cqI9e7VHXmgS5X0X4cgk3zAqHPMJcFymOQFAjm5hqybaYQdQnJ8xiZeKe30
-         gctg==
+        bh=AAnc8XTVkL4QUsM38OfWD/Wjg+43F5Hj8dCdoASyCKA=;
+        b=PCCvU3vizHGv15tqSl2UqV0kitVJk9LSI6IoOzfiEI4vjgpUHf68BGaawWyOIL45EV
+         9ZbZGO4Gr+JHFJs3Hn0jVmQoU5d0XHhepbUrg2yWn4LGs1Bv1OPno8KDAcpdgyM8l5x7
+         /IOeNAsfslIUdzKHJMcvcF833Ma2WtIrVb3YZEi2iBhGeGQDjZaMv+YicJWPWy3uNeHL
+         bKlCB7NYhwvSzgn8Fh19bVjYxWFBjeAO8Jn1cxNStBjVdPyYfFY+Ap/pwPcKvyAtr6/+
+         pfNwwRaf68EHmJPc4amSb/JKCg03kTSfeZR10xfFiZfeMuvGsZMgXvML90IrnrJLmzIi
+         fjUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=/tbF5Cwt0d6yi5idvywIgbJ5safpGiTSnGxxkI3alhI=;
-        b=rJqZT7g844mpiV8dgILg4vZFjp7ofsosxerSVgHIlsjyzqv6qUg1xIv4VkYngs8DpX
-         q+5WzWjpvd5yBp4Iqi0gWWG6xnYW0rQeq9PuCJufKn+a0kKs9P2oA9vn7ENIwx1oFaY0
-         uFgJzbjmEy44eHe+B3EROsIEuFLRWjMWS3H4LPBNY7+ZaIM+nM52bjcKffyQA3jY1/Hl
-         QxbvT/qheTvq4WKVBnP7l4Sz4xscLnS09FBVPssmeADANjiKq/arkn0D82UoHMBxpN+f
-         pNE8meLIswbm4758JEjwhr9KOodWdhz4YiMKKCt8lE/XzYcehlP+Av2URNO0qUQEczhO
-         wPuQ==
-X-Gm-Message-State: AOAM530/CKcp91yGttxqWMEJoHXTZOn8WFt7dqpLtrtgnBdpDsSuU444
-	nIjYgHBO66ujFPQ20pqVK4YAUuFyHX8=
-X-Google-Smtp-Source: ABdhPJyO/u0O2jdEiCB1st7m4R7AX9YrDoqW9c4J08lrjNj/RRc9YKrh3F1cdtZABE/KNWuVEogaHw==
-X-Received: by 2002:a05:622a:295:: with SMTP id z21mr935563qtw.125.1632433186292;
-        Thu, 23 Sep 2021 14:39:46 -0700 (PDT)
+        bh=AAnc8XTVkL4QUsM38OfWD/Wjg+43F5Hj8dCdoASyCKA=;
+        b=lbqD/l91WNlbe7J9LFQdah0Hvs1jC//P10Jxu0F2OagMBuTcDZDQCkgDhGUIZf7vCg
+         5QuQweJCSVen6Vm0GGkLFLp5uLUDGUFnfiPm+Qcl3uTRT5QayrwHQEweFsNveF+26KrD
+         0RFUrjG5zjk9rsqhTvSx/fINvSl+v5T9AHQCesb40q5bFVe6jBHfVouRZUoe+23Cr4GF
+         ILiOZyEHI9R1L9D2+RXVx9Qs6t+stkCQ4tYc9/SAyWZZtAyXX5DAUKBdvqtQ+i5ZvjSm
+         uRcKKJJglPhpAHVPvsxEQquLqbOombzLoOZVhkKyK7W7iakLY/QF7qp2LE2nsKY8zaga
+         1pOg==
+X-Gm-Message-State: AOAM530IeNiTAmrTgGgwzdu6Rxc/1ep5qSrzU+2oBMfxvrjvat7lXPyd
+	esOr8LkX2ZZeVp4peg9oa7IX9wO6Zng=
+X-Google-Smtp-Source: ABdhPJzn1CgS+9bLksoKBA4ekYeRqLjVAUdmqFlwDY3KBgl0/N+aQ5hy824oCabO7s312SgH83enVA==
+X-Received: by 2002:a0c:80e4:: with SMTP id 91mr7499415qvb.57.1632449445930;
+        Thu, 23 Sep 2021 19:10:45 -0700 (PDT)
 Return-Path: <twoerner@gmail.com>
 Received: from localhost.localdomain (pppoe-209-91-167-254.vianet.ca. [209.91.167.254])
-        by smtp.gmail.com with ESMTPSA id v8sm4000018qta.21.2021.09.23.14.39.45
+        by smtp.gmail.com with ESMTPSA id d23sm4591871qto.91.2021.09.23.19.10.45
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Sep 2021 14:39:45 -0700 (PDT)
+        Thu, 23 Sep 2021 19:10:45 -0700 (PDT)
 From: "Trevor Woerner" <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH v3] vk-gl-cts: allow the user to specify the target
-Date: Thu, 23 Sep 2021 17:39:41 -0400
-Message-Id: <20210923213941.24426-1-twoerner@gmail.com>
+Subject: [meta-oe][PATCH] vk-gl-cts: fix soname linking
+Date: Thu, 23 Sep 2021 22:10:40 -0400
+Message-Id: <20210924021040.40271-1-twoerner@gmail.com>
 X-Mailer: git-send-email 2.30.0.rc0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-When building opengl-es-cts (for example), instead of hard-coding a
-specific target to build (surfaceless), leave the choice empty by default
-which instructs the package's build system to search the sysroot and try to
-determine which target to use (i.e. the "Default" target).
-
-Provide overrides (in the form of PACAKGECONFIGs) to allow the user to
-specify a specific target to build (if they don't want the target selected
-automatically).
+The code/build explicitly links to the GL library names instead of their
+sonames. Update the names that are used for linking so the libraries are
+found at runtime.
 
 Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
-changes in v3:
-- incorporate feedback from Saur:
-  - use the 6th argument to PACKAGECONFIG to enforce mutual exclusion
-  - use bb.utils.contains_any() instead of checking for 0 packageconfigs
-- the code works as-is, but would have to be re-written if more
-  packageconfigs are added, especially if they don't have anything to do with
-  the cts targets
-- not to mention these updates are more elegant than my original code
+ ...0001-use-library-sonames-for-linking.patch | 126 ++++++++++++++++++
+ .../vk-gl-cts/khronos-cts.inc                 |   1 +
+ 2 files changed, 127 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/vk-gl-cts/files/0001-use-library-sonames-for-linking.patch
 
-changes in v2:
-- add logic to try to guess which dependencies (x11/wayland) will be
-  required in the case where the user doesn't set a target explicitly
-- add comments to explain the code, and explain how the newly added
-  PACKAGECONFIGs work
----
- .../vk-gl-cts/khronos-cts.inc                 | 29 +++++++++++++++++--
- 1 file changed, 26 insertions(+), 3 deletions(-)
-
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/files/0001-use-library-sonames-for-linking.patch b/meta-oe/recipes-graphics/vk-gl-cts/files/0001-use-library-sonames-for-linking.patch
+new file mode 100644
+index 000000000..cb396c37d
+--- /dev/null
++++ b/meta-oe/recipes-graphics/vk-gl-cts/files/0001-use-library-sonames-for-linking.patch
+@@ -0,0 +1,126 @@
++From acd25c4b8d5b7e420a7a89bdfd6551c70de828b3 Mon Sep 17 00:00:00 2001
++From: Trevor Woerner <twoerner@gmail.com>
++Date: Thu, 23 Sep 2021 19:36:43 -0400
++Subject: [PATCH] use library sonames for linking
++
++The recommended "best practices" for applications is to link to library
++sonames (e.g. libGL.so.1) instead of library names (e.g. libGL.so). This
++ensures that applications don't try to use libraries if an incompatible ABI
++change occurs.
++
++Upstream-Status: Submitted [https://github.com/KhronosGroup/VK-GL-CTS/pull/288]
++Signed-off-by: Trevor Woerner <twoerner@gmail.com>
++---
++ framework/egl/egluGLContextFactory.cpp                      | 4 ++--
++ framework/egl/wrapper/eglwLibrary.cpp                       | 2 +-
++ framework/platform/android/tcuAndroidPlatform.cpp           | 2 +-
++ framework/platform/lnx/X11/tcuLnxX11EglDisplayFactory.cpp   | 2 +-
++ .../platform/lnx/wayland/tcuLnxWaylandEglDisplayFactory.cpp | 2 +-
++ framework/platform/surfaceless/tcuSurfacelessPlatform.cpp   | 6 +++---
++ 6 files changed, 9 insertions(+), 9 deletions(-)
++
++diff --git a/framework/egl/egluGLContextFactory.cpp b/framework/egl/egluGLContextFactory.cpp
++index 8fbea2af1..8d42f19eb 100644
++--- a/framework/egl/egluGLContextFactory.cpp
+++++ b/framework/egl/egluGLContextFactory.cpp
++@@ -63,7 +63,7 @@ using std::vector;
++ #	if (DE_OS == DE_OS_WIN32)
++ #		define DEQP_GLES2_LIBRARY_PATH "libGLESv2.dll"
++ #	else
++-#		define DEQP_GLES2_LIBRARY_PATH "libGLESv2.so"
+++#		define DEQP_GLES2_LIBRARY_PATH "libGLESv2.so.2"
++ #	endif
++ #endif
++ 
++@@ -75,7 +75,7 @@ using std::vector;
++ #	if (DE_OS == DE_OS_WIN32)
++ #		define DEQP_OPENGL_LIBRARY_PATH "opengl32.dll"
++ #	else
++-#		define DEQP_OPENGL_LIBRARY_PATH "libGL.so"
+++#		define DEQP_OPENGL_LIBRARY_PATH "libGL.so.1"
++ #	endif
++ #endif
++ 
++diff --git a/framework/egl/wrapper/eglwLibrary.cpp b/framework/egl/wrapper/eglwLibrary.cpp
++index d7e07fe18..ebdf68b14 100644
++--- a/framework/egl/wrapper/eglwLibrary.cpp
+++++ b/framework/egl/wrapper/eglwLibrary.cpp
++@@ -148,7 +148,7 @@ DefaultLibrary::~DefaultLibrary (void)
++ const char* DefaultLibrary::getLibraryFileName (void)
++ {
++ #if (DE_OS == DE_OS_ANDROID) || (DE_OS == DE_OS_UNIX)
++-	return "libEGL.so";
+++	return "libEGL.so.1";
++ #elif (DE_OS == DE_OS_WIN32)
++ 	return "libEGL.dll";
++ #else
++diff --git a/framework/platform/android/tcuAndroidPlatform.cpp b/framework/platform/android/tcuAndroidPlatform.cpp
++index b9a4c716f..05cec0b49 100644
++--- a/framework/platform/android/tcuAndroidPlatform.cpp
+++++ b/framework/platform/android/tcuAndroidPlatform.cpp
++@@ -57,7 +57,7 @@ static const eglu::NativeWindow::Capability		WINDOW_CAPABILITIES		= (eglu::Nativ
++ class NativeDisplay : public eglu::NativeDisplay
++ {
++ public:
++-									NativeDisplay			(void) : eglu::NativeDisplay(DISPLAY_CAPABILITIES), m_library("libEGL.so") {}
+++									NativeDisplay			(void) : eglu::NativeDisplay(DISPLAY_CAPABILITIES), m_library("libEGL.so.1") {}
++ 	virtual							~NativeDisplay			(void) {}
++ 
++ 	virtual EGLNativeDisplayType	getLegacyNative			(void)			{ return EGL_DEFAULT_DISPLAY;	}
++diff --git a/framework/platform/lnx/X11/tcuLnxX11EglDisplayFactory.cpp b/framework/platform/lnx/X11/tcuLnxX11EglDisplayFactory.cpp
++index 009c05e18..237c5e16f 100644
++--- a/framework/platform/lnx/X11/tcuLnxX11EglDisplayFactory.cpp
+++++ b/framework/platform/lnx/X11/tcuLnxX11EglDisplayFactory.cpp
++@@ -75,7 +75,7 @@ class Library : public eglw::DefaultLibrary
++ {
++ public:
++ 	Library (void)
++-		: eglw::DefaultLibrary("libEGL.so")
+++		: eglw::DefaultLibrary("libEGL.so.1")
++ 	{
++ 	}
++ 
++diff --git a/framework/platform/lnx/wayland/tcuLnxWaylandEglDisplayFactory.cpp b/framework/platform/lnx/wayland/tcuLnxWaylandEglDisplayFactory.cpp
++index 97bc3a0ed..3a20d63d3 100644
++--- a/framework/platform/lnx/wayland/tcuLnxWaylandEglDisplayFactory.cpp
+++++ b/framework/platform/lnx/wayland/tcuLnxWaylandEglDisplayFactory.cpp
++@@ -66,7 +66,7 @@ public:
++ 													 EGL_PLATFORM_WAYLAND_KHR,
++ 													 "EGL_KHR_platform_wayland")
++ 									, m_display		(waylandDisplay)
++-									, m_library		("libEGL.so") {}
+++									, m_library		("libEGL.so.1") {}
++ 
++ 	~Display(void) {}
++ 	wayland::Display&			getWaylandDisplay	(void)	{ return *m_display; }
++diff --git a/framework/platform/surfaceless/tcuSurfacelessPlatform.cpp b/framework/platform/surfaceless/tcuSurfacelessPlatform.cpp
++index 9783eaeab..a1d8ac667 100644
++--- a/framework/platform/surfaceless/tcuSurfacelessPlatform.cpp
+++++ b/framework/platform/surfaceless/tcuSurfacelessPlatform.cpp
++@@ -69,7 +69,7 @@ using std::vector;
++ 
++ // Default library names
++ #if !defined(DEQP_GLES2_LIBRARY_PATH)
++-#	define DEQP_GLES2_LIBRARY_PATH "libGLESv2.so"
+++#	define DEQP_GLES2_LIBRARY_PATH "libGLESv2.so.2"
++ #endif
++ 
++ #if !defined(DEQP_GLES3_LIBRARY_PATH)
++@@ -77,7 +77,7 @@ using std::vector;
++ #endif
++ 
++ #if !defined(DEQP_OPENGL_LIBRARY_PATH)
++-#	define DEQP_OPENGL_LIBRARY_PATH "libGL.so"
+++#	define DEQP_OPENGL_LIBRARY_PATH "libGL.so.1"
++ #endif
++ 
++ namespace tcu
++@@ -238,7 +238,7 @@ glu::RenderContext* ContextFactory::createContext(const glu::RenderConfig& confi
++ }
++ 
++ EglRenderContext::EglRenderContext(const glu::RenderConfig& config, const tcu::CommandLine& cmdLine)
++-	: m_egl("libEGL.so")
+++	: m_egl("libEGL.so.1")
++ 	, m_contextType(config.type)
++ 	, m_eglDisplay(EGL_NO_DISPLAY)
++ 	, m_eglContext(EGL_NO_CONTEXT)
 diff --git a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
-index f61921473..881d6ca82 100644
+index 881d6ca82..1faee4d3a 100644
 --- a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
 +++ b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
-@@ -18,9 +18,9 @@ S = "${WORKDIR}/git"
- 
- inherit pkgconfig cmake features_check
- 
--REQUIRED_DISTRO_FEATURES += "opengl"
-+ANY_OF_DISTRO_FEATURES += "opengl wayland"
- 
--DEPENDS += "libpng zlib virtual/libgles2 virtual/egl"
-+DEPENDS += "libpng zlib virtual/libgles2"
- 
+@@ -25,6 +25,7 @@ DEPENDS += "libpng zlib virtual/libgles2"
  SRC_URI += "file://0001-Workaround-for-GCC-11-uninit-variable-warnings-946.patch;patchdir=external/amber/src \
              file://0001-Include-limits-header-for-numeric_limits.patch;patchdir=external/vulkancts \
-@@ -36,7 +36,30 @@ SRC_URI:append:toolchain-clang = "\
- 	file://fix-clang-private-operator.patch \
+             file://0001-vulkancts.patch \
++            file://0001-use-library-sonames-for-linking.patch \
  "
  
--EXTRA_OECMAKE:append = " -DDEQP_TARGET=surfaceless"
-+# The best thing for the user to do is to not specify any of the following
-+# PACKAGECONFIGs (i.e. leave it blank) which tells the project to do its own
-+# probing and build what it thinks is appropriate.
-+# However, if you want, you can specify one of the following PACKAGECONFIGs
-+# to override this behaviour.
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[surfaceless] = "-DDEQP_TARGET=surfaceless,,,,,wayland x11_egl x11_glx x11_egl_glx"
-+PACKAGECONFIG[wayland] = "-DDEQP_TARGET=wayland,,wayland,,,surfaceless x11_egl x11_glx x11_egl_glx"
-+PACKAGECONFIG[x11_egl] = "-DDEQP_TARGET=x11_egl,,virtual/libx11 virtual/egl,,,surfaceless wayland x11_glx x11_egl_glx"
-+PACKAGECONFIG[x11_glx] = "-DDEQP_TARGET=x11_glx,,virtual/libx11,,,surfaceless wayland x11_egl x11_egl_glx"
-+PACKAGECONFIG[x11_egl_glx] = "-DDEQP_TARGET=x11_glx,,virtual/libx11 virtual/egl,,,surfaceless wayland x11_egl x11_glx"
-+
-+python __anonymous() {
-+    # if the user doesn't specify any PACKAGECONFIG then the cts build system
-+    # is going to probe the sysroot to try to figure out what to build
-+    # in this case we try to guess whether the user is building for wayland
-+    # or x11 and add the required dependencies automatically
-+    distrofeatures = (d.getVar("DISTRO_FEATURES") or "")
-+    if not bb.utils.contains_any("PACKAGECONFIG", ["surfaceless", "wayland", "x11_egl", "x11_glx", "x11_egl_glx"], True, False, d):
-+        if "wayland" in distrofeatures:
-+            d.appendVar("DEPENDS", " wayland ")
-+        if "x11" in distrofeatures:
-+            d.appendVar("DEPENDS", " virtual/libx11 virtual/egl ")
-+}
- 
- CTSDIR = "/usr/lib/${BPN}"
- 
+ SRC_URI:append:libc-musl = "\
 -- 
 2.30.0.rc0
 
