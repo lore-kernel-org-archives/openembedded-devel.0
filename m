@@ -1,69 +1,80 @@
-Return-Path: <denis@denix.org>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 357E3C433F5
-	for <webhook@archiver.kernel.org>; Fri, 24 Sep 2021 22:21:16 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.363.1632522073879264413
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E4C0BC433F5
+	for <webhook@archiver.kernel.org>; Sat, 25 Sep 2021 11:33:14 +0000 (UTC)
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+ by mx.groups.io with SMTP id smtpd.web08.6012.1632569592280417980
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Sep 2021 15:21:15 -0700
+ Sat, 25 Sep 2021 04:33:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
- mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id ADA8940C46;
-	Fri, 24 Sep 2021 22:21:12 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rUOBwOdsgZq2; Fri, 24 Sep 2021 22:21:12 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
- [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 65BF440C1C;
-	Fri, 24 Sep 2021 22:21:08 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id BA052174675; Fri, 24 Sep 2021 18:21:07 -0400 (EDT)
-Date: Fri, 24 Sep 2021 18:21:07 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	openembedded-architecture <openembedded-architecture@lists.openembedded.org>,
-	Yocto Project <yocto@yoctoproject.org>,
-	openembedded-members@lists.openembedded.org
-Subject: OpenEmbedded Happy Hour September 29 during ELC hours and after
-Message-ID: <20210924222107.GR1528@denix.org>
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=B3lQFOK3;
+ spf=pass (domain: axis.com, ip: 195.60.68.18,
+ mailfrom: peter.kjellerstedt@axis.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=axis.com; q=dns/txt; s=axis-central1; t=1632569594;
+  x=1664105594;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=IXGnZbbG5srNecCkYe1HZzhemYXuypjYO2lqfEIBeyA=;
+  b=B3lQFOK3Noy0kj8/boCoSCP/FPi7Vjj5WLDN+kPTnEfw+6rqsw3h/lSI
+   UvyE5S4S9nzCrChwvpxzvg+mDpx7SrynPpPcBRUuaUQFnnqv4H5U1jRAS
+   k7Pccz0T1+YEkI8tHIM9rIN/l+6J4ZbPvAkz+L6j0zSoa/Scnqp3zdJXF
+   xWJgE9WTT2kdplqPcvtjr2izRtt9x/XGebPFekdUwsrQF5isSrkrJ1Juq
+   S6/voEilVSooI9ebtFo1s2DVSqEGiXThwl46mFfS2x2v5sDoGQFwzhge2
+   tbGUP/cj+E4HAL2iTLyp3Q11YA3m0Tfh9GvuOux3SZsz9Imxrp4rZlxVs
+   Q==;
+From: Peter Kjellerstedt <pkj@axis.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-webserver][PATCH] netdata: Move the version to the file name
+ and correct the SRC_URI
+Date: Sat, 25 Sep 2021 13:33:05 +0200
+Message-ID: <20210925113305.4675-1-pkj@axis.com>
+X-Mailer: git-send-email 2.21.3
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 24 Sep 2021 22:21:16 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 25 Sep 2021 11:33:14 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93128
+ https://lists.openembedded.org/g/openembedded-devel/message/93129
 
-Oops, sorry, updated the subject to the correct date.
+The HOMEPAGE was updated in commit 371adeaa (netdata: Fixed the recipe),
+but not the SRC_URI.
 
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+---
+ .../netdata/{netdata_git.bb => netdata_1.22.1.bb}          | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+ rename meta-webserver/recipes-webadmin/netdata/{netdata_git.bb => netdata_1.22.1.bb} (93%)
 
-On Fri, Sep 24, 2021 at 06:19:10PM -0400, Denys Dmytriyenko wrote:
-> All,
-> 
-> As you are aware, next week is LF Embedded Linux Conference, which coincides 
-> with our OE Happy Hour. The Board has decided to extend the Happy Hour for the 
-> entire duration of Wednesday ELC sessions for people to come and go throughout 
-> the day and meet during breaks or for the entire hallway sessions. Hope to see 
-> you there!
-> 
-> https://www.openembedded.org/wiki/Happy_Hours
-
--- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_git.bb b/meta-webserver/recipes-webadmin/netdata/netdata_1.22.1.bb
+similarity index 93%
+rename from meta-webserver/recipes-webadmin/netdata/netdata_git.bb
+rename to meta-webserver/recipes-webadmin/netdata/netdata_1.22.1.bb
+index 7ec989815..fb4d27294 100644
+--- a/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
++++ b/meta-webserver/recipes-webadmin/netdata/netdata_1.22.1.bb
+@@ -5,15 +5,14 @@ DESCRIPTION = "Netdata is high-fidelity infrastructure monitoring and troublesho
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
+ 
+-SRC_URI:append = " git://github.com/firehol/netdata.git;protocol=https"
++SRC_URI = "git://github.com/netdata/netdata.git;protocol=https"
+ SRCREV = "1be9200ba8e11dc81a2101d85a2725137d43f766"
+-PV = "1.22.1"
+ 
+ # default netdata.conf for netdata configuration
+-SRC_URI += " file://netdata.conf"
++SRC_URI += "file://netdata.conf"
+ 
+ # file for providing systemd service support
+-SRC_URI += " file://netdata.service"
++SRC_URI += "file://netdata.service"
+ 
+ S = "${WORKDIR}/git"
+ 
 
