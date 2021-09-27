@@ -2,137 +2,121 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6EBEBC433EF
-	for <webhook@archiver.kernel.org>; Mon, 27 Sep 2021 15:43:19 +0000 (UTC)
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
- [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web12.856.1632757398384395618
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 37CCDC433EF
+	for <webhook@archiver.kernel.org>; Mon, 27 Sep 2021 17:50:38 +0000 (UTC)
+Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com
+ [209.85.160.181])
+ by mx.groups.io with SMTP id smtpd.web09.2675.1632765037686140689
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Sep 2021 08:43:18 -0700
+ Mon, 27 Sep 2021 10:50:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=UKU7xnaC;
- spf=pass (domain: gmail.com, ip: 209.85.214.179,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=jkRY0JPh;
+ spf=pass (domain: gmail.com, ip: 209.85.160.181,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id y5so9611040pll.3
+Received: by mail-qt1-f181.google.com with SMTP id c20so17441172qtb.2
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Sep 2021 08:43:18 -0700 (PDT)
+ Mon, 27 Sep 2021 10:50:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :references:from:organization:in-reply-to:content-transfer-encoding;
-        bh=t702SqYCOzlxkNeg/22lADmzvTY7h7d/1QUbxutxGGM=;
-        b=UKU7xnaCT5FBXBFYkD5dHUr9ifDv6e0BcZGXpvCd9fmQn48fSF4XLt63W913raeZ6n
-         Rc2CNLBqOXWl1WEZ9JPr2/nbM5q5LOTq0Yavk9YOFfVxD7jRDiUGrExfvhX3UKrFERS6
-         k/iwalxRrVaf8OOtASA88NanCedsDGaTnL+cX+b/ew2+RU9vGlhDQ3Bu2aMWkVpbmkmj
-         da9gBCuQ7nPPxlHz9efLgIBJGFR6pcaA475q+pkJNX1v8Zbnggpf2iaQM2EbEJcXGzMt
-         Ee1V98yLWUS52ku4JSgr8yd2ZXoBfub4Y6s9qIh+FEwp+tsfSUFF5uDU4YtaO9j+j763
-         QfAA==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=X1iAHHgKiVpC6UTwX+Yt14KOdKzcR+xTnNn/QTkvKW4=;
+        b=jkRY0JPhECUSySVOf80HNzdVXJxFLrs0AQ5zMIafZUmv3Jcg29G2eO4OSpHYHyNgvh
+         GWikpjyksu2zhQxD+lIqcdjbjN64Fbh5na2HZH6ubr87LBgWueHYT4zFlc8ElC7b3HPM
+         5Q/mTIXjcDLCf4PdM43dmjTG4lSchIsMpx7fcsr0zEBCCII6R7y9ordzT6vMWtmR0f/6
+         dy1lViLbfacSljKZowa3Vy65FdbjzHZWbxkDRfnH6FHwDHUp4OoZ0OGdMRi9kxdNMBDW
+         FVonhyjyGJp+Fr5ScXsac2zvDyD+bR0Ely4zhUwSyl+7GlL+Bluc80+Vc3JyNjW5nkN/
+         EjXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:references:from:organization:in-reply-to
-         :content-transfer-encoding;
-        bh=t702SqYCOzlxkNeg/22lADmzvTY7h7d/1QUbxutxGGM=;
-        b=BTZDl/51p2Vys6qRzD7k8jIbtA0mFRZC4aOnS6bC26XEVK4LRJp01ui+MIrMTDbbVx
-         l/ZQgYui8+UtZgp1nPF3PkMkmjVMzO7pPlp72aWagRQiiRV+iCK9rmRwbIM2sEOckN1F
-         q+stU/m8OsSlhqrEINSHlstOov49lfpfHj+abG2MDrJ4nHgRArSGVTTlxOJ+tYoEKHaJ
-         RoS4oAhGFGSUp46VFsH1aPmnPldu1PrEc7L397o7MtelZeag5TzsFbFQhTnxIyKklKXS
-         ZD+PhbDIe6vHPA+X8Q+Sv7vH+lLdlW8Fos9YPcBlKo5AZ6ztmHXhuP83vFJlGmRnNx30
-         470g==
-X-Gm-Message-State: AOAM530vgPb93mT4DUPTlbw7Qva7H2HBtVNoKwjtcAodJxFoBzApRCe4
-	OXTtLUlyJfvpwm09KbEk6tM=
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=X1iAHHgKiVpC6UTwX+Yt14KOdKzcR+xTnNn/QTkvKW4=;
+        b=1edMJaaTxg1ZbIBo7j0cW4SHhbNzmSsrSiLjZhzJnbdJVogxRM9UXHAIpu4eAi9cW7
+         raH7LQy7eBBFz93lnlBq65aaCEUc+g2ApZODgNwYIZJ6giCiUnsudp20b0WVryimn60y
+         5iS90+ZBYXtpbtQ9Ev8+e5bLOhLQmTkWXt+LkipTSno779c/7/vMnqgFJxDzIoPd+KcF
+         mU6U4uoEF7kBioDjjkSx5hPcgpQ9jQMXsJFeYBQ7mqGPJeKmXBBopolIjnCrCIBVBXtQ
+         YMU6hGokPlSg0kUp2uo9RuiJ+eoYmNPe92Hd0MakwGqXWIf4P296rj3/XdL7P+GE+gcG
+         U7tg==
+X-Gm-Message-State: AOAM533RqC+zEcw+TnI+Hl2YiiRHSdxl6zKv2Qc/jRAuXi4Op4NQxdbh
+	ZeWU+5yBvlb6LFqvX+AGct9O5pnD7gUzFNi4+0s=
 X-Google-Smtp-Source: 
- ABdhPJxaqqJWluvT+G+AAdfdhDw3019RcaDMsKVauCJQRFQOB+Y7YHm1aXX0wD7IJkeoVTsZ5AC2oA==
-X-Received: by 2002:a17:902:7d89:b0:13c:a5e1:f0f1 with SMTP id
- a9-20020a1709027d8900b0013ca5e1f0f1mr218415plm.24.1632757397793;
-        Mon, 27 Sep 2021 08:43:17 -0700 (PDT)
-Received: from ?IPV6:2601:646:9200:a0f0:15c7:3503:63b:40fb?
- ([2601:646:9200:a0f0:15c7:3503:63b:40fb])
-        by smtp.gmail.com with ESMTPSA id
- n18sm17494506pfa.42.2021.09.27.08.43.17
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 27 Sep 2021 08:43:17 -0700 (PDT)
-Message-ID: <107383eb-3eed-35e0-03f3-e46d427ab8c8@gmail.com>
-Date: Mon, 27 Sep 2021 08:43:16 -0700
+ ABdhPJzZZUDIkMWx7m+hPe2nyoNhprLjVSgDHePZmeGgc9/19gFa8xt+af+nTEl6QQQ7Q/6ZPln9KwLXgxW7Grctar8=
+X-Received: by 2002:ac8:1e0b:: with SMTP id n11mr1153694qtl.274.1632765036524;
+ Mon, 27 Sep 2021 10:50:36 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.1.1
-Subject: Re: [oe] [meta-oe] [PATCH] libjs-jquery-cookie: Add recipe
-Content-Language: en-US
-To: zangrc <zangrc.fnst@fujitsu.com>,
- openembedded-devel@lists.openembedded.org
-References: <1632708170-7789-1-git-send-email-zangrc.fnst@fujitsu.com>
+References: <1632708185-7854-1-git-send-email-zangrc.fnst@fujitsu.com>
+In-Reply-To: <1632708185-7854-1-git-send-email-zangrc.fnst@fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-In-Reply-To: <1632708170-7789-1-git-send-email-zangrc.fnst@fujitsu.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Date: Mon, 27 Sep 2021 10:50:10 -0700
+Message-ID: 
+ <CAMKF1spoxFR7Z11SPPhzVvo+uetTc_vrJH7Z8nM4Gr0v89C6iQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] libjs-jquery-globalize: Add recipe
+To: zangrc <zangrc.fnst@fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Sep 2021 15:43:19 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Sep 2021 17:50:38 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93154
+ https://lists.openembedded.org/g/openembedded-devel/message/93156
 
+fails build QA check
 
+https://errors.yoctoproject.org/Errors/Details/609178/
 
-On 9/26/21 7:02 PM, zangrc wrote:
-> A simple, lightweight JavaScript API for handling browser cookies.
-> 
+On Sun, Sep 26, 2021 at 7:03 PM zangrc <zangrc.fnst@fujitsu.com> wrote:
+>
+> A JavaScript library for internationalization and localization that
+> leverages the official Unicode CLDR JSON data.
+>
 > Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 > ---
->   .../libjs/libjs-jquery-cookie_3.0.1.bb        | 30 +++++++++++++++++++
->   1 file changed, 30 insertions(+)
->   create mode 100644 meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.1.bb
-> 
-> diff --git a/meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.1.bb b/meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.1.bb
+>  .../libjs/libjs-jquery-globalize_1.7.0.bb     | 24 +++++++++++++++++++
+>  1 file changed, 24 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/libjs/libjs-jquery-globalize_1.7.0.bb
+>
+> diff --git a/meta-oe/recipes-support/libjs/libjs-jquery-globalize_1.7.0.bb b/meta-oe/recipes-support/libjs/libjs-jquery-globalize_1.7.0.bb
 > new file mode 100644
-> index 0000000000..e10c6c4d33
+> index 0000000000..ec218299b2
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.1.bb
-> @@ -0,0 +1,30 @@
-> +SUMMARY = "A simple, lightweight JavaScript API for handling cookies."
-> +HOMEPAGE = "https://github.com/js-cookie/js-cookie"
+> +++ b/meta-oe/recipes-support/libjs/libjs-jquery-globalize_1.7.0.bb
+> @@ -0,0 +1,24 @@
+> +DESCRIPTION = "A JavaScript library for internationalization and localization that leverages the official Unicode CLDR JSON data"
+> +SECTION = "console/network"
+> +HOMEPAGE = "https://github.com/globalizejs/globalize"
 > +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=e16cf0e247d84f8999bf55865a9c98cf"
 > +
-> +SRC_URI = "git://github.com/js-cookie/js-cookie.git;protocol=http"
+> +S = "${WORKDIR}/globalize-${PV}"
 > +
-> +SRCREV = "0ba77141dd215782cc7770347a457906908c66ff"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=4db68fb4d1d9986d736b35039f2ad9ea"
 > +
-> +S = "${WORKDIR}/git"
+> +SRC_URI = "https://github.com/globalizejs/globalize/archive/refs/tags/${PV}.tar.gz"
 > +
-> +RDEPENDS_${PN} = "rpm"
-
-Please use new override syntax. Secondly, does it really depend on rpm ?
-
+> +SRC_URI[sha256sum] = "51928dd6dbaceaab8cd89e7b430aa366b3029a8b70e74d4ca4be2d89cc929bab"
 > +
-> +JQUERYCOOKIEDIR = "${datadir}/javascript/jquery-cookie"
-> +JQUERYCOOKIEDOCDIR = "${docdir}/libjs-jquery-cookie"
+> +FILES:${PN} = "${datadir}/javascript/jquery-globalize"
+> +FILES:${PN}-doc += "${docdir}/${PN}"
 > +
 > +do_install() {
-> +        install -d ${D}${JQUERYCOOKIEDIR}
-> +        install -m 0644 ${S}/*.js ${D}${JQUERYCOOKIEDIR}
-> +        install -m 0644 ${S}/src/*.mjs ${D}${JQUERYCOOKIEDIR}
-> +        install -m 0644 ${S}/*.json ${D}${JQUERYCOOKIEDIR}
+> +        install -d ${D}${datadir}/javascript/jquery-globalize/
+> +        install -m 0644 ${S}/dist/*.js ${D}${datadir}/javascript/jquery-globalize/
+> +        install -m 0644 ${S}/dist/globalize/*.js ${D}${datadir}/javascript/jquery-globalize/
 > +
-> +        install -d ${D}${JQUERYCOOKIEDOCDIR}
-> +        install -m 0644 ${S}/*.md ${D}${JQUERYCOOKIEDOCDIR}
-> +
+> +        install -d ${D}${docdir}/${PN}/
+> +        install -m 0644 ${S}/LICENSE ${D}${docdir}/${PN}/
 > +}
-> +
-> +FILES:${PN} += "${datadir}/javascript/jquery-cookie"
-> +FILES:${PN}-doc += "${docdir}/libjs-jquery-cookie"
-> +
-> 
-> 
-> 
+> --
+> 2.25.1
+>
+>
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#93136): https://lists.openembedded.org/g/openembedded-devel/message/93136
-> Mute This Topic: https://lists.openembedded.org/mt/85891855/1997914
+> View/Reply Online (#93135): https://lists.openembedded.org/g/openembedded-devel/message/93135
+> Mute This Topic: https://lists.openembedded.org/mt/85891854/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
-> 
+>
 
