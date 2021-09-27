@@ -1,361 +1,123 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <zangrc.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F839C433F5
-	for <webhook@archiver.kernel.org>; Mon, 27 Sep 2021 00:20:43 +0000 (UTC)
-Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com
- [209.85.160.180])
- by mx.groups.io with SMTP id smtpd.web11.24910.1632702042046832013
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60B3EC433EF
+	for <webhook@archiver.kernel.org>; Mon, 27 Sep 2021 02:03:16 +0000 (UTC)
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com
+ [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web09.25865.1632708195102688241
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Sep 2021 17:20:42 -0700
+ Sun, 26 Sep 2021 19:03:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=BL03Aspy;
- spf=pass (domain: gmail.com, ip: 209.85.160.180,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f180.google.com with SMTP id d8so15200661qtd.5
-        for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Sep 2021 17:20:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=hzB94eQQ2F2sIHZJWGo64e8GGOG6yb06j5XBnA4K1lM=;
-        b=BL03Aspynbs50Gs3iJ9QI1B3sfTIqLeEswLck2w3Bs3vq520P9yj/cxkTu9bjFDITe
-         tjUf1QK1NlfmcSvuUO949p8S0YD9rhAtcsSvG+LIQW+Dl5RZ9jt+oY9P6RNaoElOnqmt
-         KFKArx0SQ8NDOp08PE/13rg9SAlnKGXWufgJX1E+bC9bov7c1G/MeByXdQXUtGCPQE3W
-         NfWMN1wFUFQ8OvPUJ6JbFNA5A/y0rYi5tfFDDVXCF+q9pnUDCwmRZcKZd6/pDpTCehYS
-         mW3kM4+nsZxjJxiuSzRpEyQXZIlSlCXmdhCBth/WCwsRWyWWA2GepzYvTdMzVVaholjf
-         oU+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=hzB94eQQ2F2sIHZJWGo64e8GGOG6yb06j5XBnA4K1lM=;
-        b=HXxrIRBRf7vtGQmujXca57337N0Ge9+vK6ACHWfzJNkqXzNp8NzMlaFHv79FYD8W/h
-         GSw0gdtPwqfeE1E93UU/Ni5AKBBn2EVT5rnFJhb4jNoEExhZjgi9xIzq9mo8ILyek7vb
-         a8WKS+qi6XLTxHTs+UG0svdtkvK0dev9VyT75VV4IpgPwPs9ZvQtWb/Hk6j4TESbAJ5e
-         3UrSUE1VhV7QF3NAAv9n4cK+kpMQqOsiYRXhN+PXBBljK4DvBWyoaYKNxuD3Ok4hownw
-         G0PgDAcFDRNo1nvL2LJeGEMVSVbaNwJ78tBhor0EOmF+gCd7ThW4SNsybi0aGiWmBKfh
-         qaDQ==
-X-Gm-Message-State: AOAM53293fnBF7AKCx9sWU4Ph4cEo4FYdCluHNnOrh02VqSHfccjfItI
-	ivTTeVrb7Bt0vwaVOpyjp4Pk/hc2XD50gpahX0c=
-X-Google-Smtp-Source: 
- ABdhPJy/V8JBEb1Vu8hJp6TNdq+SZ09oDeCh48aeYAhDl+tL/kiJl4gu2+2pzkb9c7bw/NSYk6ruL16dFzP09Lqxecs=
-X-Received: by 2002:ac8:6893:: with SMTP id
- m19mr16213332qtq.116.1632702041026;
- Sun, 26 Sep 2021 17:20:41 -0700 (PDT)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=eugOHQ4U;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112,
+ mailfrom: zangrc.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1632708193; i=@fujitsu.com;
+	bh=dfCKm3T/F81ao8hHojDELmOAmbkW2x/0Grb+izSbUy8=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=eugOHQ4U35Z1xm902ICBLFqimbxXreBlMiYaEW/j0ejQ6At043GYYOgbYg6Sivx+G
+	 pvYF8TL8ORD/E0cYOKwk4mCryX9IpjsuGWaWZQYehd8pALiDatK5+pZuRsk3GRYuS0
+	 tzG8NC3pp2ms31O6LPxFOKVl/yv8HMvg89dTsDezydaXsseVWfOeAcdmlQcSb3+EAs
+	 opJwy+EY9u8+/J8Bmr3sf0m0TvYhCycsPspUd7IBD9mliRd6iHgHFB9tBpR8phuf6H
+	 kAcaQP4gRqJw8xIWufORCWLsphEv5LDoq4DiQ9x06bZgtp7PTEUCL/bcMQ/K9f0TuG
+	 FOc7ceSBoCdxQ==
+Received: from [100.113.4.108] (using TLSv1.2 with cipher
+ DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-b.eu-central-1.aws.symcld.net id D0/90-23595-16621516;
+ Mon, 27 Sep 2021 02:03:13 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuplkeJIrShJLcpLzFFi42Kxs+GYqpugFph
+  ocHaLnsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmjGz8RNTwTueiiVdJ1gaGHdzdzFycQgJzGaS
+  OL9zByOEc4JR4sCCy6xdjJwcbAI6Eh0vullAbBEBfYmls/cwg9jCAk4SF2ZMA7NZBFQl7q3Zx
+  ARi8wq4SaycPZ0dxJYQUJCY8vA9M0RcUOLkzCdgc5gFJCQOvnjBDFGjKLF95xkWCLtC4vXhS8
+  wTGHlmIWmZhaRlASPTKkbLpKLM9IyS3MTMHF1DAwNdQ0NjXXNdI1MjvcQq3SS91FLd5NS8kqJ
+  EoKxeYnmxXnFlbnJOil5easkmRmAopRSy/9nBeP31B71DjJIcTEqivCpsgYlCfEn5KZUZicUZ
+  8UWlOanFhxhlODiUJHg/qwDlBItS01Mr0jJzgGENk5bg4FES4VWSBErzFhck5hZnpkOkTjEqS
+  onzTlEFSgiAJDJK8+DaYLF0iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5Iw7zKQKTyZeSVw01
+  8BLWYCWlw7KQBkcUkiQkqqgUnRZ+mtk4/f5S3k1u7eytRRarMvdslLQ0/J7Xm8H2o7Q1d+u8z
+  4Um6/luaELUl1p/7MuN/kmWEe+Gj392bmRc+Pp/xPSk03zTkhfble1Dli2gtfKaMzKTfre9VU
+  Ehv/Jdo+bOw6WaA3e6flpXnn1XYdKYo+dEZfONHI4W1zdOolxTNcMrN0k8S4k/u0NsU01M7qv
+  RLQcHSi++U7B3uEb773e3Sk41jnfotIR/Nwr6cWpfMdb059mB5RUCHhl1l2IO/whh+HUzPmmc
+  tW6hT7PjT1XX9//oqHx+/7bctgktRbX1ufusEsX75tTYHC2bdTbPlOn7ToTP8U83P5GcVNPY9
+  epqpY3A/72xj409rqpRJLcUaioRZzUXEiAOezkwAgAwAA
+X-Env-Sender: zangrc.fnst@fujitsu.com
+X-Msg-Ref: server-14.tower-245.messagelabs.com!1632708192!288917!1
+X-Originating-IP: [62.60.8.149]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.4; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 918 invoked from network); 27 Sep 2021 02:03:12 -0000
+Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
+  by server-14.tower-245.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 27 Sep 2021 02:03:12 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 18R23CMK018175
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Mon, 27 Sep 2021 03:03:12 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.81) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.23; Mon, 27 Sep 2021 03:03:11 +0100
+From: Zang Ruochen <zangrc.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-oe] [PATCH] libjs-jquery-globalize: Add recipe
+Date: Mon, 27 Sep 2021 10:03:05 +0800
+Message-ID: <1632708185-7854-1-git-send-email-zangrc.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <20210926221001.1834800-1-akuster808@gmail.com>
- <CAMKF1spy19ixoDXn4CyKXeRYydbADXDz_s2=zeqVjsueu2-dtQ@mail.gmail.com>
- <f6809fb1-6b03-d17f-a961-a702e51249f8@gmail.com>
-In-Reply-To: <f6809fb1-6b03-d17f-a961-a702e51249f8@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 26 Sep 2021 17:20:13 -0700
-Message-ID: 
- <CAMKF1srgSOY3drj4Bpg9XSqW_7jp4wfo76aN4eek36sfABc+LA@mail.gmail.com>
-Subject: Re: [oe] [PATCH] README: update to main repo
-To: akuster808 <akuster808@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.81]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Sep 2021 00:20:43 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Sep 2021 02:03:16 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93134
+ https://lists.openembedded.org/g/openembedded-devel/message/93135
 
-On Sun, Sep 26, 2021 at 5:05 PM akuster808 <akuster808@gmail.com> wrote:
->
->
->
-> On 9/26/21 4:49 PM, Khem Raj wrote:
-> >
-> >
-> > On Sun, Sep 26, 2021 at 3:10 PM Armin Kuster <akuster808@gmail.com
-> > <mailto:akuster808@gmail.com>> wrote:
-> >
-> >     The main repo is sourced from git://git.openembedded.org
-> >     <http://git.openembedded.org> not github.
-> >
-> >
-> > I think we wanted to load balance cloning IIRC that=E2=80=99s why it po=
-inted
-> > to GitHub repo but I guess making it consistent it still better
->
-> I understand. My next thought was to inform them of github and how to
-> use that for their and our benefit. The yocto project does have two
-> different urls for pushing and pulling for load balancing.
->
-> my .gitconfg
->
-> [url "ssh://git@push.yoctoproject.org/"]
->         pushInsteadOf =3D yocto:
-> [url "git://git.yoctoproject.org/"]
->         insteadOf =3D yocto
-> :
-> Something Micheal H sent out years ago, not sure if this is still in play=
-.
->
-> maybe documenting something similar for OE may work?
->
-> I wonder something in the top level README may be where this can be
-> explained instead of in each sub layer.
+A JavaScript library for internationalization and localization that
+leverages the official Unicode CLDR JSON data.
 
-sounds good yes.
+Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+---
+ .../libjs/libjs-jquery-globalize_1.7.0.bb     | 24 +++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libjs/libjs-jquery-globalize_1.7.0.bb
 
->
-> - armin
->
-> >
-> >     Don't think oe-core.git exists.
-> >
-> >     Lets be constent across all sub layers.
-> >
-> >     Drop Revisions and Prioriiy from repo references as they are not us=
-ed.
-> >
-> >     Signed-off-by: Armin Kuster <akuster808@gmail.com
-> >     <mailto:akuster808@gmail.com>>
-> >     ---
-> >      meta-gnome/README      | 6 ++----
-> >      meta-initramfs/README  | 3 +--
-> >      meta-multimedia/README | 6 ++----
-> >      meta-networking/README | 9 +++------
-> >      meta-oe/README         | 1 -
-> >      meta-perl/README       | 2 --
-> >      meta-python/README     | 2 --
-> >      meta-webserver/README  | 6 ++----
-> >      meta-xfce/README       | 7 +++----
-> >      9 files changed, 13 insertions(+), 29 deletions(-)
-> >
-> >     diff --git a/meta-gnome/README b/meta-gnome/README
-> >     index 1a91050004..fbb0d72476 100644
-> >     --- a/meta-gnome/README
-> >     +++ b/meta-gnome/README
-> >     @@ -2,13 +2,11 @@ Dependencies
-> >      ------------
-> >      This layer depends on:
-> >
-> >     -URI: git://github.com/openembedded/oe-core.git
-> >     <http://github.com/openembedded/oe-core.git>
-> >     +URI: git://git.openembedded.org/openembedded-core
-> >     <http://git.openembedded.org/openembedded-core>
-> >      branch: master
-> >     -revision: HEAD
-> >
-> >     -URI: git://github.com/openembedded/meta-oe.git
-> >     <http://github.com/openembedded/meta-oe.git>
-> >     +URI: git://git.openembedded.org/meta-openembedded
-> >     <http://git.openembedded.org/meta-openembedded>
-> >      branch: master
-> >     -revision: HEAD
-> >
-> >      Send pull requests to openembedded-devel@lists.openembedded.org
-> >     <mailto:openembedded-devel@lists.openembedded.org> with
-> >     '[meta-gnome]' in the subject'
-> >
-> >     diff --git a/meta-initramfs/README b/meta-initramfs/README
-> >     index a8f17ba859..119293a741 100644
-> >     --- a/meta-initramfs/README
-> >     +++ b/meta-initramfs/README
-> >     @@ -11,9 +11,8 @@ Dependencies
-> >
-> >      This layer depends on:
-> >
-> >     -URI: git://github.com/openembedded/oe-core.git
-> >     <http://github.com/openembedded/oe-core.git>
-> >     +URI: git://git.openembedded.org/meta-openembedded
-> >     <http://git.openembedded.org/meta-openembedded>
-> >      branch: master
-> >     -revision: HEAD
-> >
-> >
-> >      Maintenance
-> >     diff --git a/meta-multimedia/README b/meta-multimedia/README
-> >     index 9c649ff87c..235c34331b 100644
-> >     --- a/meta-multimedia/README
-> >     +++ b/meta-multimedia/README
-> >     @@ -1,13 +1,11 @@
-> >      This layer depends on:
-> >
-> >     -URI: git://github.com/openembedded/oe-core.git
-> >     <http://github.com/openembedded/oe-core.git>
-> >     +URI: git://git.openembedded.org/openembedded-core
-> >     <http://git.openembedded.org/openembedded-core>
-> >      branch: master
-> >     -revision: HEAD
-> >
-> >     -URI: git://github.com/openembedded/meta-oe.git
-> >     <http://github.com/openembedded/meta-oe.git>
-> >     +URI: git://git.openembedded.org/meta-openembedded
-> >     <http://git.openembedded.org/meta-openembedded>
-> >      layers: meta-oe
-> >      branch: master
-> >     -revision: HEAD
-> >
-> >      Send pull requests to openembedded-devel@lists.openembedded.org
-> >     <mailto:openembedded-devel@lists.openembedded.org> with
-> >     '[meta-multimedia]' in the subject
-> >
-> >     diff --git a/meta-networking/README b/meta-networking/README
-> >     index e1ba27d83b..1aea8a6613 100644
-> >     --- a/meta-networking/README
-> >     +++ b/meta-networking/README
-> >     @@ -17,21 +17,18 @@ Dependencies
-> >
-> >      This layer depends on:
-> >
-> >     -URI: git://github.com/openembedded/openembedded-core.git
-> >     <http://github.com/openembedded/openembedded-core.git>
-> >     +URI: git://git.openembedded.org/openembedded-core
-> >     <http://git.openembedded.org/openembedded-core>
-> >      branch: master
-> >     -revision: HEAD
-> >
-> >      For some recipes, the meta-oe layer is required:
-> >
-> >     -URI: git://github.com/openembedded/meta-openembedded.git
-> >     <http://github.com/openembedded/meta-openembedded.git>
-> >     +URI: git://git.openembedded.org/meta-openembedded
-> >     <http://git.openembedded.org/meta-openembedded>
-> >      subdirectory: meta-oe
-> >      branch: master
-> >     -revision: HEAD
-> >
-> >     -URI: git://github.com/openembedded/meta-openembedded.git
-> >     <http://github.com/openembedded/meta-openembedded.git>
-> >     +URI: git://git.openembedded.org/meta-openembedded
-> >     <http://git.openembedded.org/meta-openembedded>
-> >      subdirectory: meta-python
-> >      branch: master
-> >     -revision: HEAD
-> >
-> >      Maintenance
-> >      -----------
-> >     diff --git a/meta-oe/README b/meta-oe/README
-> >     index 98f671d7c2..bf17415391 100644
-> >     --- a/meta-oe/README
-> >     +++ b/meta-oe/README
-> >     @@ -5,7 +5,6 @@ This layer depends on:
-> >
-> >      URI: git://github.com/openembedded/openembedded-core.git
-> >     <http://github.com/openembedded/openembedded-core.git>
-> >      branch: master
-> >     -revision: HEAD
-> >
-> >      luajit recipe requires host compiler to be able to generate 32bit
-> >     code when target is 32bit
-> >      e.g. arm, so ensure that $CC -m32 is functional on build host, if
-> >     building this recipe, needed
-> >     diff --git a/meta-perl/README b/meta-perl/README
-> >     index c519dff524..13014b0ff3 100644
-> >     --- a/meta-perl/README
-> >     +++ b/meta-perl/README
-> >     @@ -53,8 +53,6 @@ This layer depends on:
-> >
-> >        URI: git://git.openembedded.org/openembedded-core
-> >     <http://git.openembedded.org/openembedded-core>
-> >        branch: master
-> >     -  revision: HEAD
-> >     -  prio: default
-> >
-> >      Adding the meta-perl layer to your build
-> >      ---------------------------------------
-> >     diff --git a/meta-python/README b/meta-python/README
-> >     index df6abe0e2e..194bac39c7 100644
-> >     --- a/meta-python/README
-> >     +++ b/meta-python/README
-> >     @@ -14,12 +14,10 @@ The meta-python layer depends on:
-> >             URI: git://git.openembedded.org/openembedded-core
-> >     <http://git.openembedded.org/openembedded-core>
-> >             layers: meta
-> >             branch: master
-> >     -       revision: HEAD
-> >
-> >             URI: git://git.openembedded.org/meta-openembedded
-> >     <http://git.openembedded.org/meta-openembedded>
-> >             layers: meta-oe
-> >             branch: master
-> >     -       revision: HEAD
-> >
-> >      Please follow the recommended setup procedures of your OE
-> >     distribution.
-> >      For Angstrom that is:
-> >     diff --git a/meta-webserver/README b/meta-webserver/README
-> >     index 7b60630700..d23f6cc65c 100644
-> >     --- a/meta-webserver/README
-> >     +++ b/meta-webserver/README
-> >     @@ -11,17 +11,15 @@ Dependencies
-> >
-> >      This layer depends on:
-> >
-> >     -URI: git://github.com/openembedded/oe-core.git
-> >     <http://github.com/openembedded/oe-core.git>
-> >     +URI: git://git.openembedded.org/openembedded-core
-> >     <http://git.openembedded.org/openembedded-core>
-> >      subdirectory: meta
-> >      branch: master
-> >     -revision: HEAD
-> >
-> >      For some recipes, the meta-oe layer is required:
-> >
-> >     -URI: git://github.com/openembedded/meta-oe.git
-> >     <http://github.com/openembedded/meta-oe.git>
-> >     +URI: git://git.openembedded.org/meta-openembedded
-> >     <http://git.openembedded.org/meta-openembedded>
-> >      subdirectory: meta-oe
-> >      branch: master
-> >     -revision: HEAD
-> >
-> >
-> >
-> >     diff --git a/meta-xfce/README b/meta-xfce/README
-> >     index bbf4b2edf2..1e9acc471d 100644
-> >     --- a/meta-xfce/README
-> >     +++ b/meta-xfce/README
-> >     @@ -1,12 +1,11 @@
-> >      This layer depends on:
-> >
-> >     -URI: git://github.com/openembedded/oe-core.git
-> >     <http://github.com/openembedded/oe-core.git>
-> >     +URI: git://git.openembedded.org/openembedded-core
-> >     <http://git.openembedded.org/openembedded-core>
-> >      branch: master
-> >     -revision: HEAD
-> >
-> >     -URI: git://github.com/openembedded/meta-oe.git
-> >     <http://github.com/openembedded/meta-oe.git>
-> >     +URI: git://git.openembedded.org/meta-openembedded
-> >     <http://git.openembedded.org/meta-openembedded>
-> >      branch: master
-> >     -revision: HEAD
-> >     +
-> >      meta-xfce depends on meta-oe, meta-gnome and meta-multimedia in
-> >     this repository.
-> >
-> >      To avoid dependencies on meta-multimedia you need to mask recipes
-> >     by adding
-> >     --
-> >     2.25.1
-> >
-> >
-> >     -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >     Links: You receive all messages sent to this group.
-> >     View/Reply Online (#93131):
-> >     https://lists.openembedded.org/g/openembedded-devel/message/93131
-> >     <https://lists.openembedded.org/g/openembedded-devel/message/93131>
-> >     Mute This Topic:
-> >     https://lists.openembedded.org/mt/85888414/1997914
-> >     <https://lists.openembedded.org/mt/85888414/1997914>
-> >     Group Owner: openembedded-devel+owner@lists.openembedded.org
-> >     <mailto:openembedded-devel%2Bowner@lists.openembedded.org>
-> >     Unsubscribe:
-> >     https://lists.openembedded.org/g/openembedded-devel/unsub
-> >     <https://lists.openembedded.org/g/openembedded-devel/unsub>
-> >     [raj.khem@gmail.com <mailto:raj.khem@gmail.com>]
-> >     -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
->
+diff --git a/meta-oe/recipes-support/libjs/libjs-jquery-globalize_1.7.0.bb b/meta-oe/recipes-support/libjs/libjs-jquery-globalize_1.7.0.bb
+new file mode 100644
+index 0000000000..ec218299b2
+--- /dev/null
++++ b/meta-oe/recipes-support/libjs/libjs-jquery-globalize_1.7.0.bb
+@@ -0,0 +1,24 @@
++DESCRIPTION = "A JavaScript library for internationalization and localization that leverages the official Unicode CLDR JSON data"
++SECTION = "console/network"
++HOMEPAGE = "https://github.com/globalizejs/globalize"
++LICENSE = "MIT"
++
++S = "${WORKDIR}/globalize-${PV}"
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=4db68fb4d1d9986d736b35039f2ad9ea"
++
++SRC_URI = "https://github.com/globalizejs/globalize/archive/refs/tags/${PV}.tar.gz"
++
++SRC_URI[sha256sum] = "51928dd6dbaceaab8cd89e7b430aa366b3029a8b70e74d4ca4be2d89cc929bab"
++
++FILES:${PN} = "${datadir}/javascript/jquery-globalize"
++FILES:${PN}-doc += "${docdir}/${PN}"
++
++do_install() {
++        install -d ${D}${datadir}/javascript/jquery-globalize/
++        install -m 0644 ${S}/dist/*.js ${D}${datadir}/javascript/jquery-globalize/
++        install -m 0644 ${S}/dist/globalize/*.js ${D}${datadir}/javascript/jquery-globalize/
++
++        install -d ${D}${docdir}/${PN}/
++        install -m 0644 ${S}/LICENSE ${D}${docdir}/${PN}/
++}
+-- 
+2.25.1
+
 
