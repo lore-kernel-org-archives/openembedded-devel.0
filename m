@@ -2,69 +2,69 @@ Return-Path: <zangrc.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A165C433F5
-	for <webhook@archiver.kernel.org>; Mon, 27 Sep 2021 02:03:17 +0000 (UTC)
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com
- [85.158.142.114])
- by mx.groups.io with SMTP id smtpd.web09.25866.1632708196299954103
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 32C39C433F5
+	for <webhook@archiver.kernel.org>; Mon, 27 Sep 2021 02:03:29 +0000 (UTC)
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com
+ [195.245.230.5])
+ by mx.groups.io with SMTP id smtpd.web12.25902.1632708208310397577
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Sep 2021 19:03:16 -0700
+ Sun, 26 Sep 2021 19:03:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=sAAnR1W9;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.114,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ymGlc/r1;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.5,
  mailfrom: zangrc.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1632708188; i=@fujitsu.com;
-	bh=sylluqZlIAltqmapkObvwBWkvoAKh+ADoDBEekDM9aE=;
+	s=170520fj; t=1632708206; i=@fujitsu.com;
+	bh=kvyMLYqG21Q6OR8go01R+WOO53yBz2eTdnybG8Q3VkA=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=sAAnR1W9jnwDcz5Qb2H3geZRKSI9eWm99j7RjBvD+SsRlcu5rV7pFUDHsnMkOBQ1o
-	 wstQuOdIHxiD8PXz5jy01WprQGqHQ4yCHH+PTwCt0RU942a1SdI9n4kkXnqvj0J9bJ
-	 qBfHpl4D6yDpXKeY4stbTOVa1uV5qFvTQHEHtbsJ8c2/CePw3aw6pdI6DuLWrpTEhe
-	 51pJP3/q3nyKXAxZat8gOmLq5ViikxdyfHKjjGcDENrHvGhOJU7JTGFJuvk8KJZ+Bc
-	 Mc00FFtl1FYLGR+8Axk9LthmPf9OFPgwrLMD2dB4+/d+iIFhIfvFxpxt1e2zBzwd0b
-	 /Ic/bW9af4x2A==
-Received: from [100.113.4.108] (using TLSv1.2 with cipher
+	b=ymGlc/r1n4rxffgdu5m4RezQDCzFQKqORtZf66ViJykRFJfHtnDqnCxDZ4D7hFuYZ
+	 tsX7MAbh/JhGUYK2g5gu+N1ptjgOfsmiIR+A94cSFEv22Qytma74GouJrCGA00Ah9r
+	 iAqPp3qOb2Kp8kTHlXHuSKGBb9ZP9vN+D1SOOQNV+piS4is8/snydPZhRcYeBeaZbC
+	 iMxrM0keGB9H+FrUon0Ndb48V51oNuKJ6vHHCT6otM4i+lx0Wu7bY5XrZZ8IRWyCq8
+	 jW9bULxpHhPg6vDlmFetLzZzU/P9IBIwp8GGmWgXJajPE9hZM8zLPHD2iPNW0ZH2F4
+	 v54vAUiSqC5Ig==
+Received: from [100.112.195.149] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-b.eu-central-1.aws.symcld.net id 5F/2E-23198-C5621516;
- Mon, 27 Sep 2021 02:03:08 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+GYohutFph
-  oMO+SvsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvFsfxtzwVKeiouXlrM0MD7j6mLk4hASmM0k
-  8bFpC1MXIyeQc4JRYkOvP4jNJqAj0fGimwXEFhHQl1g6ew8ziC0sYC/xZsssMJtFQFXi4tbjY
-  L28Am4SV7d/AItLCChITHn4nhkiLihxcuYTsDnMAhISB1+8gKpRlNi+8wwLhF0h8frwJeYJjD
-  yzkLTMQtKygJFpFaNFUlFmekZJbmJmjq6hgYGuoaGxrhmQpZdYpZukl1qqm5yaV1KUCJTUSyw
-  v1iuuzE3OSdHLSy3ZxAgMo5RCNq4djE9ff9A7xCjJwaQkyqvCFpgoxJeUn1KZkVicEV9UmpNa
-  fIhRhoNDSYL3swpQTrAoNT21Ii0zBxjSMGkJDh4lEV4lSaA0b3FBYm5xZjpE6hSjopQ47xRVo
-  IQASCKjNA+uDRZHlxhlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ8y4DmcKTmVcCN/0V0GImoM
-  W1kwJAFpckIqSkGpiuxORPPq/ClFN12ddtr8aak4mXbA7HFh2c0/daL9Hhb3GAfeaW9zxJkUH
-  p4ucsNdfnuzLuOb3Xenpix5bfWzzvzWO4Wvw7cU4pz65pVvfzf9QeTNM4t6nm9KzPTytTgres
-  P3HspeiOVVei1kpaLdh3bUvo8bKvP9UYpuQF7dl3063S8fvvp42L1swsuCuxb/sJycidzpuSu
-  EMedV16cVHgiULG55rNS5NzOidyPCtOnlyYd6r1Ux/TrSiVfcrH7dZH5B8Lnzjx8eEpCyVP/W
-  u+31YhdI3nwXm5WekyL9+w2W+17DQS7L/Kfqfyac7KCRtk23b9Z9RrOhfybsqP23GbYwJN7lz
-  KyWSf7tQqz3PTSomlOCPRUIu5qDgRAO4UvFAeAwAA
+	by server-5.bemta.az-a.eu-west-1.aws.symcld.net id 5F/CD-01625-D6621516;
+ Mon, 27 Sep 2021 02:03:25 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmkeJIrShJLcpLzFFi42Kxs+EI0c1VC0w
+  02LRYxeLi4aXMDowe5zauYAxgjGLNzEvKr0hgzWh4GFLwVLji6s6DzA2MywW7GLk4hARmM0k8
+  7LzKCOGcYJT42L6GrYuRk4NNQEei40U3C4gtIqAvsXT2HmYQW1jAXmLrlKlgNSwCqhKH1l9nA
+  rF5Bdwkru46DmZLCChITHn4nhkiLihxcuYTsDnMAhISB1+8YIaoUZTYvvMMC4RdIfH68CXmCY
+  w8s5C0zELSsoCRaRWjRVJRZnpGSW5iZo6uoYGBrqGhka6hpZGukYGJXmKVbqJeaqlueWpxia6
+  hXmJ5sV5xZW5yTopeXmrJJkZgGKUUHDizg/HU6w96hxglOZiURHlV2AIThfiS8lMqMxKLM+KL
+  SnNSiw8xynBwKEnwflYBygkWpaanVqRl5gBDGiYtwcGjJMKrJAmU5i0uSMwtzkyHSJ1iVJQS5
+  52iCpQQAElklObBtcHi6BKjrJQwLyMDA4MQT0FqUW5mCar8K0ZxDkYlYd5lIFN4MvNK4Ka/Al
+  rMBLS4dlIAyOKSRISUVAMT0yd9Ew8XnnP8ybe7ePZt8/+osCMjhmOq+ArukN45C+2Nljw/Mtl
+  FveXt/zO3Vk147FdWF8I+e+tBsyyFycXr/jwXvOHY9/216K730721PM6my531DotoZBZ+/vDI
+  +6XTPsj/WV+vFvD/gNfXM6dv79wuFfJQRsAgoS3k95zdFjvVLddbrrLfZHN/X1VaQ7Q+b+hXl
+  6gPz36blk6ZKsXJ69XMtHvZuvMn7e13cMa8kZ7y5IKXwpL08EAviylndNmrI86XtywzuLZE7A
+  zLyxn1ySlWmy0UHuQ9LPzk831xdU3Xwy9Hpt//5JDexyoWEKP/+NPvGea/DzzjMpv6xd/zv/S
+  O+ben2RZfm1BvdGwalxJLcUaioRZzUXEiALgI4HAeAwAA
 X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-13.tower-238.messagelabs.com!1632708187!286574!1
-X-Originating-IP: [62.60.8.148]
+X-Msg-Ref: server-4.tower-265.messagelabs.com!1632708205!354604!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 2550 invoked from network); 27 Sep 2021 02:03:07 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-13.tower-238.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 27 Sep 2021 02:03:07 -0000
+Received: (qmail 4795 invoked from network); 27 Sep 2021 02:03:25 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-4.tower-265.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 27 Sep 2021 02:03:25 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 18R22vKK015976
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 18R23P0M027490
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Sep 2021 03:03:07 +0100
+ Mon, 27 Sep 2021 03:03:25 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.81) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Mon, 27 Sep 2021 03:02:56 +0100
+ (TLS) id 15.0.1497.23; Mon, 27 Sep 2021 03:03:23 +0100
 From: Zang Ruochen <zangrc.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] libjs-jquery-cookie: Add recipe
-Date: Mon, 27 Sep 2021 10:02:50 +0800
-Message-ID: <1632708170-7789-1-git-send-email-zangrc.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libjs-jquery-icheck: Add recipe
+Date: Mon, 27 Sep 2021 10:03:18 +0800
+Message-ID: <1632708198-7906-1-git-send-email-zangrc.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -74,53 +74,65 @@ X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Sep 2021 02:03:17 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Sep 2021 02:03:29 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93136
+ https://lists.openembedded.org/g/openembedded-devel/message/93137
 
-A simple, lightweight JavaScript API for handling browser cookies.
+Highly customizable checkboxes and radio buttons (jQuery & Zepto).
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
 ---
- .../libjs/libjs-jquery-cookie_3.0.1.bb        | 30 +++++++++++++++++++
- 1 file changed, 30 insertions(+)
- create mode 100644 meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.1.bb
+ .../libjs/libjs-jquery-icheck_1.0.3.bb        | 42 +++++++++++++++++++
+ 1 file changed, 42 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libjs/libjs-jquery-icheck_1.0.3.bb
 
-diff --git a/meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.1.bb b/meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.1.bb
+diff --git a/meta-oe/recipes-support/libjs/libjs-jquery-icheck_1.0.3.bb b/meta-oe/recipes-support/libjs/libjs-jquery-icheck_1.0.3.bb
 new file mode 100644
-index 0000000000..e10c6c4d33
+index 0000000000..f14b619a94
 --- /dev/null
-+++ b/meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.1.bb
-@@ -0,0 +1,30 @@
-+SUMMARY = "A simple, lightweight JavaScript API for handling cookies."
-+HOMEPAGE = "https://github.com/js-cookie/js-cookie"
++++ b/meta-oe/recipes-support/libjs/libjs-jquery-icheck_1.0.3.bb
+@@ -0,0 +1,42 @@
++DESCRIPTION = "Highly customizable checkboxes and radio buttons (jQuery & Zepto)"
++SECTION = "console/network"
++HOMEPAGE = "http://fronteed.com/iCheck"
++
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=e16cf0e247d84f8999bf55865a9c98cf"
++LIC_FILES_CHKSUM = "file://icheck.js;start_line=1;end_line=8;md5=404078d7de9f05ed64d364274f790055"
 +
-+SRC_URI = "git://github.com/js-cookie/js-cookie.git;protocol=http"
++DEPENDS = "virtual/libc"
 +
-+SRCREV = "0ba77141dd215782cc7770347a457906908c66ff"
++SRC_URI = "git://github.com/fronteed/icheck.git;protocol=https;branch=${PV};tag=${PV}"
++
++FILES:${PN} += "${datadir}/javascript/jquery-icheck"
 +
 +S = "${WORKDIR}/git"
 +
-+RDEPENDS_${PN} = "rpm"
-+
-+JQUERYCOOKIEDIR = "${datadir}/javascript/jquery-cookie"
-+JQUERYCOOKIEDOCDIR = "${docdir}/libjs-jquery-cookie"
-+
 +do_install() {
-+        install -d ${D}${JQUERYCOOKIEDIR}
-+        install -m 0644 ${S}/*.js ${D}${JQUERYCOOKIEDIR}
-+        install -m 0644 ${S}/src/*.mjs ${D}${JQUERYCOOKIEDIR}
-+        install -m 0644 ${S}/*.json ${D}${JQUERYCOOKIEDIR}
++        install -d ${D}${datadir}/javascript/jquery-icheck/
++        install -m 0644 ${S}/icheck.js ${D}${datadir}/javascript/jquery-icheck/
++        install -m 0644 ${S}/icheck.min.js ${D}${datadir}/javascript/jquery-icheck/
 +
-+        install -d ${D}${JQUERYCOOKIEDOCDIR}
-+        install -m 0644 ${S}/*.md ${D}${JQUERYCOOKIEDOCDIR}
++        install -d ${D}${datadir}/javascript/jquery-icheck/skins/
++        install -m 0644 ${S}/skins/all.css ${D}${datadir}/javascript/jquery-icheck/skins/
 +
++        install -d ${D}${datadir}/javascript/jquery-icheck/skins/flat/
++        install -m 0644 ${S}/skins/flat/* ${D}${datadir}/javascript/jquery-icheck/skins/flat/
++
++        install -d ${D}${datadir}/javascript/jquery-icheck/skins/futurico/
++        install -m 0644 ${S}/skins/futurico/* ${D}${datadir}/javascript/jquery-icheck/skins/futurico/
++
++        install -d ${D}${datadir}/javascript/jquery-icheck/skins/line/
++        install -m 0644 ${S}/skins/line/* ${D}${datadir}/javascript/jquery-icheck/skins/line/
++
++        install -d ${D}${datadir}/javascript/jquery-icheck/skins/minimal/
++        install -m 0644 ${S}/skins/minimal/* ${D}${datadir}/javascript/jquery-icheck/skins/minimal/
++
++        install -d ${D}${datadir}/javascript/jquery-icheck/skins/polaris/
++        install -m 0644 ${S}/skins/polaris/* ${D}${datadir}/javascript/jquery-icheck/skins/polaris/
++
++        install -d ${D}${datadir}/javascript/jquery-icheck/skins/square/
++        install -m 0644 ${S}/skins/square/* ${D}${datadir}/javascript/jquery-icheck/skins/square/
 +}
-+
-+FILES:${PN} += "${datadir}/javascript/jquery-cookie"
-+FILES:${PN}-doc += "${docdir}/libjs-jquery-cookie"
 +
 -- 
 2.25.1
