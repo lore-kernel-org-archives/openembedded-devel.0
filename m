@@ -1,118 +1,115 @@
-Return-Path: <zhengrq.fnst@fujitsu.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F3833C433F5
-	for <webhook@archiver.kernel.org>; Mon, 27 Sep 2021 09:19:48 +0000 (UTC)
-Received: from mail3.bemta25.messagelabs.com (mail3.bemta25.messagelabs.com
- [195.245.230.83])
- by mx.groups.io with SMTP id smtpd.web11.28679.1632734387209003403
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8F371C433FE
+	for <webhook@archiver.kernel.org>; Mon, 27 Sep 2021 12:52:32 +0000 (UTC)
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com
+ [85.158.142.114])
+ by mx.groups.io with SMTP id smtpd.web10.30701.1632747150971494614
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Sep 2021 02:19:47 -0700
+ Mon, 27 Sep 2021 05:52:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=vTMCnu/y;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.83,
- mailfrom: zhengrq.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=p3B7cD8+;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.114,
+ mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1632734385; i=@fujitsu.com;
-	bh=+J32FLUBXGnvgCUqabyYpDyt+AIAEaiOzt1zTmuksx0=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=vTMCnu/y7mem6lbmtDzVsgxr0m+azHJo0zl8sQFd6p6OD2aL0bipXj9chFYknlZY0
-	 /UIBBhH/sEpNGe8f2PR6L+ibnOS+f1KP6O3Xc5yJ5fAOMoNsx3SIGBdib4Ss/qOpa4
-	 OIM6pI4EaUAC3bjC05mbW0vA/a6yf3vvti+kpFkMPZQ+lkAyiRaYXg/JwTIuo7x2xn
-	 e0r/DoBHTrY6o7H6xbwmEoXRooax8BxN0z10G0jv4wTIRfvWvqiD6NttMpZL25UXzS
-	 m+gn8eiXg5q7d9EgZp6nz6L/2y8m/cfWSX2/kRGTFTkayl0OpvS7FnXZFlIn4w+Agn
-	 egC01bV6hvBag==
-Received: from [100.112.199.201] (using TLSv1.2 with cipher
+	s=170520fj; t=1632747149; i=@fujitsu.com;
+	bh=MtWJduQRptFBHOD5wLMvb7NiMGBkH7BIaAPcRPW/VgY=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=p3B7cD8+Q6Yeuw25dMisj4xyzsB7eFi+m118+r5N+YHPerMDLvNSze17j9zzNO2xP
+	 OWQedEKjvWVYlAHS/ksJw864lZGMByjOhiXSaAERz++dx2mmVQ4PCjyIFF71vYkC0R
+	 kf+BXsz99xFqVTLKBn+aBLye+uvt4NYjMaFXBvuJkCCYb4HGXaszEJ2LkWFZBXCD5f
+	 ytGy2DQvXJmgbKTkr1/yrDZs05EpFytKuCM+OQ+9MuVGZl0g2a1sRhhTKbCdMfLVSh
+	 F2p8+zLNeHmVEWxlnQM7qd44IdDJBaYSKZbYCfBHe3jfwF5oR3is1zcQikb0LSf8gY
+	 Jlf3ZBAWdtlNQ==
+Received: from [100.113.6.157] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-b.eu-west-1.aws.symcld.net id 99/7B-25352-0BC81516;
- Mon, 27 Sep 2021 09:19:44 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprGIsWRWlGSWpSXmKPExsViZ8MRqruhJzD
-  RYGa3psXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnF1wRa2gkPcFW/W9zM2MG7n6mLk4hASmM0k
-  8enLUSYIZw+jxJm5p1m7GDk52AR0Jc49XssOYosI6Essnb2HuYuRg0NYwEPiwCxVkDCLgKrE2
-  g/LmUFsXqDw2V1XwcolBBQkpjx8DxUXlDg58wkLiM0sICFx8MULsDESAooSs6fLQ5RXSLw+fI
-  l5AiPPLCQds5B0LGBkWsVokVSUmZ5RkpuYmaNraGCga2hopGtoaaFraGygl1ilm6SXWqpbnlp
-  comuol1herFdcmZuck6KXl1qyiREYRCkFx5p2MJ58/UHvEKMkB5OSKK9gUmCiEF9SfkplRmJx
-  RnxRaU5q8SFGGQ4OJQlevS6gnGBRanpqRVpmDjCgYdISHDxKIrz17UBp3uKCxNzizHSI1ClGX
-  Y53PxcvYhZiycvPS5US59XpBioSACnKKM2DGwGLrkuMslLCvIwMDAxCPAWpRbmZJajyrxjFOR
-  iVhHmNQC7hycwrgdv0CugIJqAjaicFgBxRkoiQkmpgmvbM8nXIqk/Hnnf8fMt+4dWfOac0PQJ
-  +RdV8+mRw7sPrNUv+sofZR2ScKN8s9Sf+1p1tTjfef74lIl4y9de1B60hSiUyhimCd1dPOBoq
-  E3p456Z9BqZLPmSYfbcWnnwxOW+mZpGNmLpD1ZOvJ3b+qF+qlmsV+GNeY0rWjdprHGrq9/iz5
-  /zeuP75Idf4yILM1VGPt3THFGq3PFzL8a88qdf474fd7hwTusQv7RX7fVnk1g95Jz29TPm7bT
-  Hdc4+as4rfEUk9cdjDdalL4Z2pj/9+cCuYeN/VlunOmuSCp6b5F57mPvQtONS2tG2DsueqVWm
-  81R971x7kalaRXHdz5S/OK077hYJ8brJHXsydma7EUpyRaKjFXFScCAAAxlShKQMAAA==
-X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-6.tower-285.messagelabs.com!1632734384!310166!1
-X-Originating-IP: [62.60.8.85]
+	by server-3.bemta.az-b.eu-central-1.aws.symcld.net id EA/67-23198-C8EB1516;
+ Mon, 27 Sep 2021 12:52:28 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrAIsWRWlGSWpSXmKPExsViZ8MRotuzLzD
+  R4OQBLYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePPrhlsBV+5KnaemcHewPiLs4uRi0NIYDaT
+  xOTHNxkhnBOMEh9Xb2PuYuTkYBNQk5h+6wYriC0ioC+xdPYesDizgIrEi9897CC2sICnxL99V
+  8DiLAKqEk9//2XrYuTg4BVwkjj9wwQkLCGgIDHl4XuwEk4BZ4mN918wgdhCQCV/nt5kA7F5BQ
+  QlTs58wgIxXkLi4IsXzBC9ihKzLzezQNgVErNmtTFNYOSfhaRlFpKWBYxMqxgtk4oy0zNKchM
+  zc3QNDQx0DQ2Ndc10jUwM9BKrdJP0Ukt1k1PzSooSgbJ6ieXFesWVuck5KXp5qSWbGIEBmVLI
+  9mEH45Q3H/QOMUpyMCmJ8oasDUwU4kvKT6nMSCzOiC8qzUktPsQow8GhJME7Yw9QTrAoNT21I
+  i0zBxgdMGkJDh4lEV6OvUBp3uKCxNzizHSI1ClGRSlxXgOQhABIIqM0D64NFpGXGGWlhHkZGR
+  gYhHgKUotyM0tQ5V8xinMwKgnzZoNM4cnMK4Gb/gpoMRPQ4tpJASCLSxIRUlINTGWH+zaduGJ
+  gMsu//4L3Nj/nMMmnqu5VH+dFPjx93WX+I12eWx/9dqz5Hs7wP0FXarFyyel5CZdY+H+lPY5e
+  JfpBKZDH48v6dy8kJSZe2R70UJCnUPm3vMyWnKr34Q2r+wrnv8xZfz0oJyJCRn9WkYaico7D7
+  9iLpyx1KtdMbjzTntQYqxuSEdDj4JPDXPD2lFtjRfWTno15Djf/qf++/EX963rHXUYXEzdomb
+  Jl1woePtOzPfzHzhj+lg/yGSdnbJJvajk7xz+1zVaxcWGO1gEllssfjjgWnVyzMVbr9a0vxTr
+  ZZcsv6t99LWHDn9pz/OO7WRJn09ZtNdln7ze5V+IP26S/nXu2br7AfkS7RomlOCPRUIu5qDgR
+  AC+IKCJDAwAA
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-18.tower-245.messagelabs.com!1632747148!355252!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 7998 invoked from network); 27 Sep 2021 09:19:44 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-6.tower-285.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 27 Sep 2021 09:19:44 -0000
+Received: (qmail 23492 invoked from network); 27 Sep 2021 12:52:28 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-18.tower-245.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 27 Sep 2021 12:52:28 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 18R9Ji8P028937
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 18RCqI1U007977
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Sep 2021 10:19:44 +0100
-Received: from localhost.localdomain (10.167.225.35) by
+ Mon, 27 Sep 2021 13:52:28 +0100
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Mon, 27 Sep 2021 10:19:42 +0100
-From: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+ (TLS) id 15.0.1497.23; Mon, 27 Sep 2021 13:52:19 +0100
+From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-huey: upgrade 2.4.0 -> 2.4.1
-Date: Tue, 28 Sep 2021 02:19:36 +0800
-Message-ID: <1632766776-92433-1-git-send-email-zhengrq.fnst@fujitsu.com>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] snort: upgrade 2.9.18 -> 2.9.18.1
+Date: Mon, 27 Sep 2021 20:52:06 +0800
+Message-ID: <1632747129-70797-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1632747129-70797-1-git-send-email-wangmy@fujitsu.com>
+References: <1632747129-70797-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Sep 2021 09:19:48 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Sep 2021 12:52:32 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93141
+ https://lists.openembedded.org/g/openembedded-devel/message/93144
 
-* Attempt to reconnect to database if connection becomes unusable (e.g. due to
-  a server restart). See: `huey.contrib.sql_huey.SqlHuey`.
-* Do not use a soft file-lock for `FileStorage` - use `fcntl.flock()` instead.
+snort 2.9.18.1
 
-[View commits](https://github.com/coleifer/huey/compare/2.4.0...2.4.1)
+	* snort/src/dynamic-preprocessors/dcerpc2/dce2_smb.c:
+	  Fixed possible memory corruption in SMB preprocessor.
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-huey_2.4.0.bb => python3-huey_2.4.1.bb}     | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-huey_2.4.0.bb => python3-huey_2.4.1.bb} (51%)
+ .../snort/{snort_2.9.18.bb => snort_2.9.18.1.bb}                | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-connectivity/snort/{snort_2.9.18.bb => snort_2.9.18.1.bb} (97%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-huey_2.4.0.bb b/meta-python/recipes-devtools/python/python3-huey_2.4.1.bb
-similarity index 51%
-rename from meta-python/recipes-devtools/python/python3-huey_2.4.0.bb
-rename to meta-python/recipes-devtools/python/python3-huey_2.4.1.bb
-index afdc65b246..64bd8880ec 100644
---- a/meta-python/recipes-devtools/python/python3-huey_2.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-huey_2.4.1.bb
-@@ -5,7 +5,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5cac039fcc82f01141cc170b48f315d4"
+diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.18.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.18.1.bb
+similarity index 97%
+rename from meta-networking/recipes-connectivity/snort/snort_2.9.18.bb
+rename to meta-networking/recipes-connectivity/snort/snort_2.9.18.1.bb
+index 47c201fa13..1e2495406e 100644
+--- a/meta-networking/recipes-connectivity/snort/snort_2.9.18.bb
++++ b/meta-networking/recipes-connectivity/snort/snort_2.9.18.1.bb
+@@ -14,7 +14,7 @@ SRC_URI = "https://www.snort.org/downloads/archive/snort/${BP}.tar.gz \
+     file://disable-run-test-program-while-cross-compiling.patch \
+     file://configure.in-disable-tirpc-checking-for-fedora.patch \
+ "
+-SRC_URI[sha256sum] = "d0308642f69e0d36f70db9703e5766afce2f44ff05b7d2c9cc8e3ac8323b2c77"
++SRC_URI[sha256sum] = "da8af0f1b2e4f247d970c6a3c0e83fb6dcd5c84faa21aea49f306f269e8e28aa"
  
- PYPI_PACKAGE = "huey"
- 
--SRC_URI[sha256sum] = "82981fb8f1964e8c9ee8f4ebcd5a2ebad561dd93ce8b454bf4f4ecfb54bd1411"
-+SRC_URI[sha256sum] = "bd55e90746cec16e7a61d6dc60d4591c74cba59000dca96c387a4d4eee1395f6"
-+
-+RDEPENDS:${PN} += " \
-+	python3-datetime \
-+	python3-logging \
-+	python3-multiprocessing \
-+	python3-json \
-+"
- 
- inherit pypi setuptools3
- 
+ UPSTREAM_CHECK_URI = "https://www.snort.org/downloads"
+ UPSTREAM_CHECK_REGEX = "snort-(?P<pver>\d+(\.\d+)+)\.tar"
 -- 
 2.25.1
 
