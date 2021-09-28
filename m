@@ -1,131 +1,177 @@
-Return-Path: <ckalluri@xilinx.com>
+Return-Path: <mingli.yu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 16CC8C433FE
-	for <webhook@archiver.kernel.org>; Tue, 28 Sep 2021 02:49:43 +0000 (UTC)
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (NAM02-SN1-obe.outbound.protection.outlook.com [40.107.96.63])
- by mx.groups.io with SMTP id smtpd.web08.8783.1632797381544972376
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BFB5C433EF
+	for <webhook@archiver.kernel.org>; Tue, 28 Sep 2021 08:20:55 +0000 (UTC)
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web10.11205.1632817253919835847
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Sep 2021 19:49:41 -0700
+ Tue, 28 Sep 2021 01:20:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@xilinx.onmicrosoft.com
- header.s=selector2-xilinx-onmicrosoft-com header.b=Xr1lKR9r;
- spf=pass (domain: xilinx.com, ip: 40.107.96.63,
- mailfrom: ckalluri@xilinx.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NFzBnyHl/LgRqF6s5PEn6fhvorBX+IeGQvnh9J7LRZkVF5US2NWkf9hMgnhuOGDQhMko8pvkJVUXM2oBUgux95h+M1ojjRx4QLhO1kLPyllEgTqB5Gwj6FZdHoApz6IZADPVlLuMLLLc2RY+iQPll7bZ4Kc7Jw/8mZmMsBwJqgzgm31AhVuLclx8EnWwT4hJ9EX3dwX8TJF5dKN2p1tYeowIkC2D1eRLWm+j4XOCIDGrRDo46Zoge8vACTRoHQN/GgXu+Ou0FQ0PHQmW6sKLYla0pVowG7Bsd+VRFe6ogowgw2rEN+xe40lw2klepYylOjXeNDjPYhm094tqnaYicw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
- bh=xmOlYsX4M4UcTkXgvDtLy5cb3ejKKn0bYfAKNSsW2z4=;
- b=NXbQ3WfZ/WBRLT+6A4Sh3jXDM08nMgAUX4WzKe46bvDErIXKjtFcZydn6H51yLkeJ1B5oxXVjWv37UEo+DfuffT9Tgq5SUIZH57lWZXoGSxsl/USnwyVlApADM3nVEYqPBjIPqOUNI4GyFmJdl6YuW+n0/L1TPa1r0dRohMR6qjED1Tc4RbZ0xwv4BLu/bZ5VOPqQlUlrHgLjV4eUfXr/AtXpq4/0iUcauFvGk9TYVWPvPvHITkQOOxYHb/4xYO0Z/jiEfAii3aOnb4jQTpBP1beGHuIW0qZGQu7s6r371cJ+0wnxys+72ZzMnyEQ/w8Qkm6tsFROUjfzVEdZB69Jw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 149.199.62.198) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=xilinx.com; dmarc=pass (p=none sp=none pct=100) action=none
- header.from=xilinx.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=xilinx.onmicrosoft.com; s=selector2-xilinx-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xmOlYsX4M4UcTkXgvDtLy5cb3ejKKn0bYfAKNSsW2z4=;
- b=Xr1lKR9roe380Z2/5by0DIRAcjtDBuzt5I0AciIIF9+TpIYYddIHkQVMzfy/xKPg/UhEDsZXYiwHjFdmk5BmnFSD431HZtRu4iynAZgtcoX0ZdYv8k1X98OAGE/s7KbgMQZN/hjqj49tU+ULTR/T8jT83q/NaX6nDQ8PWERddrE=
-Received: from BN6PR17CA0013.namprd17.prod.outlook.com (2603:10b6:404:65::23)
- by BYAPR02MB5830.namprd02.prod.outlook.com (2603:10b6:a03:122::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4544.18; Tue, 28 Sep
- 2021 02:49:39 +0000
-Received: from BN1NAM02FT051.eop-nam02.prod.protection.outlook.com
- (2603:10b6:404:65:cafe::2a) by BN6PR17CA0013.outlook.office365.com
- (2603:10b6:404:65::23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4544.14 via Frontend
- Transport; Tue, 28 Sep 2021 02:49:39 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.199.62.198)
- smtp.mailfrom=xilinx.com; lists.openembedded.org; dkim=none (message not
- signed) header.d=none;lists.openembedded.org; dmarc=pass action=none
- header.from=xilinx.com;
-Received-SPF: Pass (protection.outlook.com: domain of xilinx.com designates
- 149.199.62.198 as permitted sender) receiver=protection.outlook.com;
- client-ip=149.199.62.198; helo=xsj-pvapexch02.xlnx.xilinx.com;
-Received: from xsj-pvapexch02.xlnx.xilinx.com (149.199.62.198) by
- BN1NAM02FT051.mail.protection.outlook.com (10.13.2.159) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.4544.13 via Frontend Transport; Tue, 28 Sep 2021 02:49:39 +0000
-Received: from xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) by
- xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) with Microsoft SMTP Server
+ dkim=missing;
+ spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: mingli.yu@windriver.com)
+Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 18S8KqFv026043
+	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 28 Sep 2021 01:20:52 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 18S8KqFi011931
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 28 Sep 2021 01:20:52 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2176.14; Mon, 27 Sep 2021 19:49:37 -0700
-Received: from smtp.xilinx.com (172.19.127.95) by
- xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) with Microsoft SMTP Server id
- 15.1.2176.14 via Frontend Transport; Mon, 27 Sep 2021 19:49:37 -0700
-Envelope-to: openembedded-devel@lists.openembedded.org
-Received: from [172.19.2.12] (port=41598 helo=xsjckalluri50.xilinx.com)
-	by smtp.xilinx.com with esmtp (Exim 4.90)
-	(envelope-from <chandana.kalluri@xilinx.com>)
-	id 1mV3BZ-0004P7-Lq; Mon, 27 Sep 2021 19:49:37 -0700
-From: Sai Hari Chandana Kalluri <chandana.kalluri@xilinx.com>
+ 15.1.2242.12; Tue, 28 Sep 2021 01:20:51 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Tue, 28 Sep 2021 01:20:51 -0700
+From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Sai Hari Chandana Kalluri <chandana.kalluri@xilinx.com>
-Subject: [oe][meta-python][PATCH] python3-humanfriendly: Add nativesdk to
- BBCLASSEXTEND
-Date: Mon, 27 Sep 2021 19:49:36 -0700
-Message-ID: <1632797376-32747-1-git-send-email-chandana.kalluri@xilinx.com>
-X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] libqb: Upgrade to 2.0.3
+Date: Tue, 28 Sep 2021 16:19:45 +0800
+Message-ID: <20210928081945.3704-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: e95e3761-2dba-4100-dfb1-08d9822a9d84
-X-MS-TrafficTypeDiagnostic: BYAPR02MB5830:
-X-Microsoft-Antispam-PRVS: 
-	<BYAPR02MB5830ABC37CD7DEE98BE75E87B0A89@BYAPR02MB5830.namprd02.prod.outlook.com>
-X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
-X-MS-Oob-TLC-OOBClassifiers: OLM:3826;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	wABpuDWZn+k/7UcHwCtBjj+KX+6MdmB1k3UOm8UwmKyvoPnIpiAjwHMvk9Q0gNU351/K2AuIULRKgd5q+b0vgOvtRmiw5Sb4H5hv/BSaS8WZo4jXxPONxYeNNMiyczEUCYQ01/LXv4wWyUB/McxMKZu9NxAulJ7BQqMeX9Gkgc41J1m2RsPflTNHy3LVFQsrrUfgirgogfFejhpflCvQDWQTBneQIUafKfiYM6OJqADBGTSgnZmzAFbctza0PJR+SH7GjO59vp2UEHKZFdxidrKRa7Iv0YIPfIlJsJGDZpBe6p5z9FcIBNQT8MC26/H/r3ncRJycptqd2kkhDPrPb0+cTx24ttVFGACbeyc7sAbh66+28bMBQ4xLXSBbbkWdopgMDK9tVEc1/iVsPLgvn0lep3EXwLH+9nPXYEBuEdKuZeD0WqCMktHnz0cSNhsBgjjnfXrNyrL687HitgUq8TxgaAMR8PcggC8s8Y9jLuXtLlySuBJ/Iybb9MLaBeJHraaWOrel2DvTTHZUf4Fk/0Rs8ik+aX1jVSWPvtZhgnLPHNEtNBifVd6fjgsYfPYWDfLvcFqIqDolq6kp1kKsFOcsgV2hEv38tYu/a3tBkDxbvoc+oZPldu6QaJZbcgUNHx0DvjMu8iQ0PLqxrTtNu7I2YFH84rIdz+ot1zUpx4SY7wpCv5pz3PPvIUxlMn6BXTjxFg3k9QfgiE8bx/Pbr6c20ZojgUxfZ5sOHyhTBZA=
-X-Forefront-Antispam-Report: 
-	CIP:149.199.62.198;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:xsj-pvapexch02.xlnx.xilinx.com;PTR:unknown-62-198.xilinx.com;CAT:NONE;SFS:(4636009)(36840700001)(46966006)(9786002)(5660300002)(426003)(4744005)(336012)(4326008)(26005)(6916009)(508600001)(186003)(36756003)(7696005)(2616005)(8936002)(70586007)(70206006)(8676002)(36906005)(7636003)(83380400001)(2906002)(82310400003)(36860700001)(356005)(107886003)(316002)(47076005)(102446001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2021 02:49:39.1204
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- e95e3761-2dba-4100-dfb1-08d9822a9d84
-X-MS-Exchange-CrossTenant-Id: 657af505-d5df-48d0-8300-c31994686c5c
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: 
- TenantId=657af505-d5df-48d0-8300-c31994686c5c;Ip=[149.199.62.198];Helo=[xsj-pvapexch02.xlnx.xilinx.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	BN1NAM02FT051.eop-nam02.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR02MB5830
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mail1.wrs.com id
+ 18S8KqFv026043
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 28 Sep 2021 02:49:43 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 Sep 2021 08:20:55 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93159
+ https://lists.openembedded.org/g/openembedded-devel/message/93160
 
-Add nativesdk to BBCLASSEXTEND to enable recipes that produce files intended
-for host portion the SDK
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Signed-off-by: Sai Hari Chandana Kalluri <chandana.kalluri@xilinx.com>
+Remove one backported patch and add libxml2 to DEPNEDS to fix below
+configure error:
+ | configure: error: Package requirements (libxml-2.0) were not met:
+ |
+ | No package 'libxml-2.0' found
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- meta-python/recipes-devtools/python/python3-humanfriendly_9.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...ure-script-neglecting-re-enable-out-.patch | 56 -------------------
+ .../libqb/{libqb_1.0.5.bb =3D> libqb_2.0.3.bb}  |  8 +--
+ 2 files changed, 4 insertions(+), 60 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/libqb/libqb/0001-build-fix-c=
+onfigure-script-neglecting-re-enable-out-.patch
+ rename meta-oe/recipes-extended/libqb/{libqb_1.0.5.bb =3D> libqb_2.0.3.b=
+b} (90%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-humanfriendly_9.2.bb b/meta-python/recipes-devtools/python/python3-humanfriendly_9.2.bb
-index d87ed4d..e4b9e88 100644
---- a/meta-python/recipes-devtools/python/python3-humanfriendly_9.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-humanfriendly_9.2.bb
-@@ -21,4 +21,4 @@ RDEPENDS:${PN}:class-target += " \
-     ${PYTHON_PN}-stringold \
- "
- 
--BBCLASSEXTEND = "native"
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.7.4
+diff --git a/meta-oe/recipes-extended/libqb/libqb/0001-build-fix-configur=
+e-script-neglecting-re-enable-out-.patch b/meta-oe/recipes-extended/libqb=
+/libqb/0001-build-fix-configure-script-neglecting-re-enable-out-.patch
+deleted file mode 100644
+index c82f3bf01..000000000
+--- a/meta-oe/recipes-extended/libqb/libqb/0001-build-fix-configure-scrip=
+t-neglecting-re-enable-out-.patch
++++ /dev/null
+@@ -1,56 +0,0 @@
+-From 73d2aea33e32272bac693550e8a3b0e3ad89707f Mon Sep 17 00:00:00 2001
+-From: =3D?UTF-8?q?Jan=3D20Pokorn=3DC3=3DBD?=3D <jpokorny@redhat.com>
+-Date: Tue, 26 Dec 2017 00:02:26 +0100
+-Subject: [PATCH] build: fix configure script neglecting, re-enable out-o=
+f-tree
+- builds
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=3DUTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-For the former, a prototype and the final code got (hm, mysteriously)
+-intertwisted.  For the latter, I am clearly guilty of (rare, anyway)
+-testing of the out-of-tree builds only with libqb-already-system-wide
+-scenario, which is rather shortsighted.
+-
+-Thanks Fabio and his ci.kronosnet.org project for spotting that.
+-
+-X-mas-present-for: Fabio M. Di Nitto <fdinitto@redhat.com>
+-Signed-off-by: Jan Pokorn=C3=BD <jpokorny@redhat.com>
+----
+-Upstream-Status: Backport
+-
+- configure.ac    | 2 +-
+- lib/Makefile.am | 4 +++-
+- 2 files changed, 4 insertions(+), 2 deletions(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 9900310..f9761cc 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -710,7 +710,7 @@ if test "x${GCC}" =3D xyes; then
+- 			                      | grep __stop___verbose | cut -d" " -f 3)
+- 			 test "${verbose_start_addr}" =3D "${verbose_stop_addr}" \
+- 			   && gcc_has_attribute_section_visible=3Dno \
+--			   || { verbose_start_type=3D$(${READELF} -s backup \
+-+			   || { verbose_start_type=3D$(${READELF} -s "conftest${shrext_cmds}=
+" \
+- 			                             | sed -n '/__start___verbose/{s/^\s*//p=
+;q}' \
+- 			                             | tr -s ' ' \
+- 			                             | cut -d" " -f6)
+-diff --git a/lib/Makefile.am b/lib/Makefile.am
+-index 6ca6b15..b035f0b 100644
+---- a/lib/Makefile.am
+-+++ b/lib/Makefile.am
+-@@ -101,7 +101,9 @@ endif
+- endif
+-=20
+- qblog_script.ld: %.ld: %.ld.in
+--	$(AM_V_GEN)$(CPP) -xc -I$(top_srcdir)/include -D_GNU_SOURCE -C -P $< \
+-+	$(AM_V_GEN)$(CPP) -C -D_GNU_SOURCE -P \
+-+	  -I$(top_srcdir)/include -I$(top_builddir)/include \
+-+	  -xc $< \
+- 	  | sed -n "/$$(sed -n '/^[^#]/{s/[*\/]/\\&/g;p;q;}' $<)/,$$ p" \
+- 	  > $@
+-=20
+---=20
+-2.16.2
+-
+diff --git a/meta-oe/recipes-extended/libqb/libqb_1.0.5.bb b/meta-oe/reci=
+pes-extended/libqb/libqb_2.0.3.bb
+similarity index 90%
+rename from meta-oe/recipes-extended/libqb/libqb_1.0.5.bb
+rename to meta-oe/recipes-extended/libqb/libqb_2.0.3.bb
+index d14fbaed3..76dac6730 100644
+--- a/meta-oe/recipes-extended/libqb/libqb_1.0.5.bb
++++ b/meta-oe/recipes-extended/libqb/libqb_2.0.3.bb
+@@ -9,13 +9,13 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D321bf41f280c=
+f805086dd5a720b37785"
+=20
+ inherit autotools pkgconfig
+=20
+-# v1.0.5
+-SRCREV =3D "d08dbcf08b0da418bce9b5427dfd89522916322a"
+-SRC_URI =3D "git://github.com/ClusterLabs/${BPN}.git;branch=3Dversion_1 =
+\
+-           file://0001-build-fix-configure-script-neglecting-re-enable-o=
+ut-.patch \
++SRCREV =3D "404adbcd998ec83643e47d92b3ea8d9c3970e68b"
++SRC_URI =3D "git://github.com/ClusterLabs/${BPN}.git \
+           "
+ S =3D "${WORKDIR}/git"
+=20
++DEPENDS +=3D "libxml2"
++
+ # otherwise do_configure fails
+ # configure:21609: checking whether linker workaround for orphan section=
+s usable
+ # configure:21639: i586-oe-linux-gcc  -m32 -march=3Di586 --sysroot=3DWOR=
+KDIR/libqb/1.0.3+gitAUTOINC+c235284b5f-r0/recipe-sysroot -o conftest  -O =
+-fno-omit-frame-pointer -g -feliminate-unused-debug-types -fdebug-prefix-=
+map=3DWORKDIR/libqb/1.0.3+gitAUTOINC+c235284b5f-r0=3D/usr/src/debug/libqb=
+/1.0.3+gitAUTOINC+c235284b5f-r0 -fdebug-prefix-map=3DWORKDIR/libqb/1.0.3+=
+gitAUTOINC+c235284b5f-r0/recipe-sysroot=3D -fdebug-prefix-map=3DWORKDIR/l=
+ibqb/1.0.3+gitAUTOINC+c235284b5f-r0/recipe-sysroot-native=3D  -pipe  -pth=
+read -D_REENTRANT  -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -Wl,con=
+ftest.ld conftest.c  >&5
+--=20
+2.17.1
 
 
