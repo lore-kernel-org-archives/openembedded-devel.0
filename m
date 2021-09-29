@@ -2,139 +2,102 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FDC3C433F5
-	for <webhook@archiver.kernel.org>; Wed, 29 Sep 2021 13:42:43 +0000 (UTC)
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com
- [209.85.208.48])
- by mx.groups.io with SMTP id smtpd.web10.9030.1632922962739120061
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 61BF4C433FE
+	for <webhook@archiver.kernel.org>; Wed, 29 Sep 2021 14:29:30 +0000 (UTC)
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com
+ [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.web09.9554.1632925769691398351
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Sep 2021 06:42:43 -0700
+ Wed, 29 Sep 2021 07:29:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=UMmWHk8b;
- spf=pass (domain: gmail.com, ip: 209.85.208.48,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=a57nKToX;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173,
  mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f48.google.com with SMTP id l8so9073345edw.2
+Received: by mail-pf1-f173.google.com with SMTP id g14so2152221pfm.1
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Sep 2021 06:42:42 -0700 (PDT)
+ Wed, 29 Sep 2021 07:29:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=E2HGDsb+teCm3V7bl0bmKbMjPNdhTvuZOSljvJf2kRY=;
-        b=UMmWHk8b3CO0yTbr5XTb37ZgsHCaQns3YViQW0vMl9JwJeyjFNGicxtt9zn06bBmxG
-         rp/jlOJszvoBk3a8uU94DTSj/PfNFsr4m4/+VxNaUa/mC7dh/zIe19Cr3etm6ZzVdOiS
-         ShCRL4ZVjJ7P8up3i0pgY1sPv6kHNwhnINUKxgcaqKekszBPXNHQDYnnHYb9RooFUqTU
-         4On5xJKHbc2YCbJ7TM5ztGc8kOGMPamfdLLhyMM/alOTF7kk/z5OyfzelngsT2FleVSy
-         yYcfuLbNWVAwzway5W3F3pvoYp/WcxMo7y4Xx7yPLCo6WURvupFbrzkzWX9Ivy7jeZaw
-         N9Gw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=giclGISZFtmYbxUO0r/VJDeIx5S23iS6NGdWmEW5qLQ=;
+        b=a57nKToXvZI9uvy2A+/vXQCrKDNWWVP7BhlpPPIfLWd/70PnB/yLa/c7CE3yGeCo6M
+         KmdxsIjVDjDjIWne7vmJH6JtMxfmwu/7nyimZRut4Uze8zjquW1/iHYcXIn3FzXrc4dG
+         2IvDtS6OX/qOhmjY45tNVkHBb2M0NiVjVjgMNd8XJKYFXxOC0IH6FqwaZwKIECXfSOFm
+         dR7mBMGlGops7qBaAhKwkU+VJGBpNauq25PGDX8VhM6gTXxa/rbFHRJa9q7oBAoEgPDw
+         td5q4BFl+GVCQnXOCNTsUkNsXoAB4Hvvz4WAY+scJcYQUViQiSiplcuqlkJd2DDVgRN0
+         KXLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=E2HGDsb+teCm3V7bl0bmKbMjPNdhTvuZOSljvJf2kRY=;
-        b=waYDLMHh7+oMorijNwJnWANmifaI7kRERCHbytiXilGiL5K7ltegdNVIrSXhiHNa1X
-         dXVxMUYToYSU4g4dXvkKsw9iJIt9gm6T/ltd3v4ZpyqHJc4MskFM3ZxFYKXQe+TpoxtW
-         UZ/qt1pu4MDbz9dxY3gogr7bcnrHYmTRcUasmKE11Fy6CgvWNzH6BQwEdSssxsilPhLz
-         RBHu6T157qu2ZcsOdEPS5gPhK2pSXc8cFlbQrKsYZX9CkaCQ9vV+gNnVOJB/JLe+Dqck
-         KQjTW9ZJBVx2LSQlrlKPQgvn7z66jsyPsEC7akMacEkIEy2Mn4Ya7Y04d5bOKVNyQfQt
-         7NdA==
-X-Gm-Message-State: AOAM532sZaPCW3hP6TSf3E4c49gS07PW+iUAekNdHU3dwYJBxRkhioic
-	4hDXxtEc0DUGtUpvpEP4cfnW/yDC0DY=
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=giclGISZFtmYbxUO0r/VJDeIx5S23iS6NGdWmEW5qLQ=;
+        b=51ZYMLBoJRuGTgedAer1LhAPSfVjXHJ/w/WcZXkyC+2iGZv2XpcAoavUiwqAJM97sp
+         pEx+LrH7zlVI8oFNpP6baLS43oaL7eDX9qAbUo4we6DoRuWKdbAUZBoEXH+qLk5CVl/1
+         ijVsE7e3lnD/35VRdJS6A/sO5a7y6KWul8jkjyIeqLWUe1nSuiDSi6lMEF/d3OF8aTM8
+         40NysvlJKlmbdmlJV9fKMbSpqsfN1Bdyvr/vmbG77vLyBaYl9NYoH2sT5soDeTtz5MLr
+         OJus0iMjCI8OmKtvYOuDGucCxFszJPNBtNQapxC42DMKzW+2m49aHxqpuLFzZtWZxW4b
+         mMCw==
+X-Gm-Message-State: AOAM533pnKKTn1iozHtPIdVgFeupplMZGnsnhCem7/h4ICpoxGlN5SaU
+	mQ905FPFT1dnW4L75uCA26b+rUCnjfr+aD4LwOc=
 X-Google-Smtp-Source: 
- ABdhPJz2stXHQ54h40NkIvRpxhGr1VpzC4sxixzQg8ynkVkGPUfPPuVIeh2Mmov3hGpe/E9HIl3j4A==
-X-Received: by 2002:a17:906:2bc7:: with SMTP id
- n7mr13493177ejg.238.1632922958193;
-        Wed, 29 Sep 2021 06:42:38 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id
- y4sm1440506ejr.101.2021.09.29.06.42.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Sep 2021 06:42:37 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] opencv: fix build with protobuf-3.18 when dnn
- PACKAGECONFIG is enabled
-Date: Wed, 29 Sep 2021 15:42:34 +0200
-Message-Id: <20210929134234.484149-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.32.0
+ ABdhPJwQUc+bm7hoeUU/kC7gE3ijYFa0mHvw9iGhOAaxN1lyhXM54V4ywDWRfhEp5UqQG90diwWW7zWdIMluC70RdtA=
+X-Received: by 2002:a63:ed03:: with SMTP id d3mr287361pgi.24.1632925769064;
+ Wed, 29 Sep 2021 07:29:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <1632407510-15664-1-git-send-email-zhengrq.fnst@fujitsu.com>
+ <CA+chaQd=SMxM__MgS2fSEHo4-QHLo5ECikYuc1srRzbT4_hTxg@mail.gmail.com>
+ <eb937949-2f47-dfb3-a91f-4984a9c7d452@gmail.com>
+In-Reply-To: <eb937949-2f47-dfb3-a91f-4984a9c7d452@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 29 Sep 2021 16:29:18 +0200
+Message-ID: 
+ <CA+chaQf2j+7zKpQkOV+uq2+ACPgo+_ed+Yjj5++q-+DxAc4tzQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] protobuf: upgrade 3.17.3 -> 3.18.0
+To: Khem Raj <raj.khem@gmail.com>
+Cc: zhengruoqin <zhengrq.fnst@fujitsu.com>,
+ openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000068e45205cd2328a6"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 29 Sep 2021 13:42:43 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 29 Sep 2021 14:29:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93170
+ https://lists.openembedded.org/g/openembedded-devel/message/93172
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- ...gument-version-of-SetTotalBytesLimit.patch | 41 +++++++++++++++++++
- .../recipes-support/opencv/opencv_4.5.2.bb    |  1 +
- 2 files changed, 42 insertions(+)
- create mode 100644 meta-oe/recipes-support/opencv/opencv/0001-Use-the-one-argument-version-of-SetTotalBytesLimit.patch
+--00000000000068e45205cd2328a6
+Content-Type: text/plain; charset="UTF-8"
 
-diff --git a/meta-oe/recipes-support/opencv/opencv/0001-Use-the-one-argument-version-of-SetTotalBytesLimit.patch b/meta-oe/recipes-support/opencv/opencv/0001-Use-the-one-argument-version-of-SetTotalBytesLimit.patch
-new file mode 100644
-index 0000000000..5d88d1a6ab
---- /dev/null
-+++ b/meta-oe/recipes-support/opencv/opencv/0001-Use-the-one-argument-version-of-SetTotalBytesLimit.patch
-@@ -0,0 +1,41 @@
-+From 9cfa84313c5833d7295fcf57be93d5d2aaadfd88 Mon Sep 17 00:00:00 2001
-+From: Vincent Rabaud <vrabaud@google.com>
-+Date: Sat, 10 Jul 2021 00:21:52 +0200
-+Subject: [PATCH] Use the one argument version of SetTotalBytesLimit.
-+
-+The two argument versions has been deprecated, cf
-+https://developers.google.com/protocol-buffers/docs/reference/cpp/google.protobuf.io.coded_stream
-+
-+Upstream-Status: Backport [9cfa84313c5833d7295fcf57be93d5d2aaadfd88 - from master after 4.5.3 tag]
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+---
-+ modules/dnn/src/caffe/caffe_io.cpp | 5 +++++
-+ 1 file changed, 5 insertions(+)
-+
-+diff --git a/modules/dnn/src/caffe/caffe_io.cpp b/modules/dnn/src/caffe/caffe_io.cpp
-+index 2fc4d84f46..ebecf95eea 100644
-+--- a/modules/dnn/src/caffe/caffe_io.cpp
-++++ b/modules/dnn/src/caffe/caffe_io.cpp
-+@@ -92,6 +92,7 @@
-+ #ifdef HAVE_PROTOBUF
-+ #include <google/protobuf/io/coded_stream.h>
-+ #include <google/protobuf/io/zero_copy_stream_impl.h>
-++#include <google/protobuf/stubs/common.h>
-+ #include <google/protobuf/text_format.h>
-+ 
-+ #include <opencv2/core.hpp>
-+@@ -1111,7 +1112,11 @@ static const int kProtoReadBytesLimit = INT_MAX;  // Max size of 2 GB minus 1 by
-+ 
-+ bool ReadProtoFromBinary(ZeroCopyInputStream* input, Message *proto) {
-+     CodedInputStream coded_input(input);
-++#if GOOGLE_PROTOBUF_VERSION >= 3006000
-++    coded_input.SetTotalBytesLimit(kProtoReadBytesLimit);
-++#else
-+     coded_input.SetTotalBytesLimit(kProtoReadBytesLimit, 536870912);
-++#endif
-+ 
-+     return proto->ParseFromCodedStream(&coded_input);
-+ }
-+-- 
-+2.32.0
-+
-diff --git a/meta-oe/recipes-support/opencv/opencv_4.5.2.bb b/meta-oe/recipes-support/opencv/opencv_4.5.2.bb
-index 7eefbccfe0..361ac0cb95 100644
---- a/meta-oe/recipes-support/opencv/opencv_4.5.2.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_4.5.2.bb
-@@ -52,6 +52,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
-            file://download.patch \
-            file://0001-Make-ts-module-external.patch \
-            file://0001-sfm-link-with-Glog_LIBS.patch;patchdir=../contrib \
-+           file://0001-Use-the-one-argument-version-of-SetTotalBytesLimit.patch \
-            "
- SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=../contrib"
- 
--- 
-2.32.0
+On Wed, Sep 29, 2021 at 4:22 PM Khem Raj <raj.khem@gmail.com> wrote:
 
+>
+>
+> On 9/29/21 06:26, Martin Jansa wrote:
+> > FYI: this breaks opencv build, I'll send fix shortly.
+> >
+>
+> interesting, why dont we see the failure in OE world builds I wonder.
+>
+
+It happens only with dnn PACKAGECONFIG enabled, which isn't by default.
+
+--00000000000068e45205cd2328a6
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">On Wed, Sep 29, 2021 at 4:22 PM Khem Raj =
+&lt;<a href=3D"mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt; wrote:=
+<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" styl=
+e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
+g-left:1ex"><br>
+<br>
+On 9/29/21 06:26, Martin Jansa wrote:<br>
+&gt; FYI: this breaks opencv build, I&#39;ll send fix shortly.<br>
+&gt; <br>
+<br>
+interesting, why dont we see the failure in OE world builds I wonder.<br></=
+blockquote><div><br></div><div>It happens only with dnn PACKAGECONFIG enabl=
+ed, which isn&#39;t by default.=C2=A0</div></div></div>
+
+--00000000000068e45205cd2328a6--
 
