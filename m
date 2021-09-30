@@ -1,126 +1,108 @@
-Return-Path: <zhengrq.fnst@fujitsu.com>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 38892C433FE
-	for <webhook@archiver.kernel.org>; Thu, 30 Sep 2021 05:55:10 +0000 (UTC)
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com
- [195.245.230.67])
- by mx.groups.io with SMTP id smtpd.web11.8628.1632981309383600258
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4578AC433F5
+	for <webhook@archiver.kernel.org>; Thu, 30 Sep 2021 09:33:52 +0000 (UTC)
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com
+ [209.85.208.48])
+ by mx.groups.io with SMTP id smtpd.web12.10224.1632994431239878439
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Sep 2021 22:55:09 -0700
+ Thu, 30 Sep 2021 02:33:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@fujitsu.com
- header.s=170520fj header.b=yzQulD7g;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.67,
- mailfrom: zhengrq.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1632981306; i=@fujitsu.com;
-	bh=d2q358hVebbA09idpKq+JJyWYL5alcJNUBTN17rcLmc=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	b=yzQulD7gigQYRo5xcU9XE8L6TxgfDREb2jDKdAgfbBRIz09DNgEh3OPdGxAvwb44X
-	 fLfMijmeEPEgF7rCj8yNQeqpD24l+nG9AHuSf0o5FYPVCzbuhXfClrza+fzf+2NXlo
-	 VdHkm9KyELzi628iKEFDPHijPHXIP6DTpUAepUKXomw0ShtSwFjpNYQkX653CRK8bj
-	 ufq/3EA5yevqExzjqJGCGjWhbafr7YiWkg+fZJC1wFGm/WMxht1tIM2y2pF1qnsrQZ
-	 CmcDb+5VfgOKDK4FV+dWxBJxtQX+qLAQca2VlR3klIgEncArDj5nfXvwJmXl7JK/0P
-	 zoqsypIPBvMiw==
-Received: from [100.112.199.201] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-b.eu-west-1.aws.symcld.net id 54/F1-25352-A3155516;
- Thu, 30 Sep 2021 05:55:06 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrMIsWRWlGSWpSXmKPExsViZ8MRqmsVGJp
-  osO2KoMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnHz+232gi7eive/X7M3MJ7j7mLk4hASmM0k
-  cXl6NzOEs4dR4kfberYuRk4ONgFdiXOP17KD2CIC+hJLZ+9hBrGFBewlJuyfxApiswioSmw++
-  AgszivgIfF94hlGEFtCQEFiysP3UHFBiZMzn7CA2MxA9d1HnjJB2PISzVtnA9VwANUrSsyeLg
-  /RWiHx+vAl5gmMvLOQdM9C0j0LSfcCRuZVjBZJRZnpGSW5iZk5uoYGBrqGhka6hpYWuobGBnq
-  JVbpJeqmluuWpxSW6hnqJ5cV6xZW5yTkpenmpJZsYgWGXUnCsaQfjydcf9A4xSnIwKYnyKvqE
-  JgrxJeWnVGYkFmfEF5XmpBYfYpTh4FCS4BX3B8oJFqWmp1akZeYAYwAmLcHBoyTCu90PKM1bX
-  JCYW5yZDpE6xagoJc4r4Q2UEABJZJTmwbXB4u4So6yUMC8jAwODEE9BalFuZgmq/CtGcQ5GJW
-  HeDpDtPJl5JXDTXwEtZgJanNUeArK4JBEhJdXAJHv1rPa7Q78MJ3eLf7DYEhqzKmBN6fJqfsH
-  yGd//ZYjfDCvk4lktafZMarq4mIXJg6NyX1NMzmqfPs/NzOO84+Ta5YZ1u0qeZ1uFnVoUd+BX
-  pJlsS+L0E4ofJmY90JSoWJDDf+3Ooy5PqbnfPl64uiaHLy1qhc2rlWwar2rkBMvq5v73j5riJ
-  PP21iKndZWezo5PDd799DHaN/t4hSpjXxwPS+3ETIk9qSUHGcOiXW1DBOdOXXVWas6Sm0d49J
-  Pye2aee1XfoG+yf/kf3oPZla8+efVucxOW+PPrK+u5B9+YourWhR2vMTkRcvP+tpXSItcdM3+
-  eWsUgvSZt/kXx6YGubhV7bl0s2XaLZ9aGq0osxRmJhlrMRcWJAGum1jA2AwAA
-X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-15.tower-291.messagelabs.com!1632981305!103079!1
-X-Originating-IP: [62.60.8.85]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.4; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 24253 invoked from network); 30 Sep 2021 05:55:06 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-15.tower-291.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 30 Sep 2021 05:55:06 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 18U5t5jv012358
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Sep 2021 06:55:05 +0100
-Received: from localhost.localdomain (10.167.225.35) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Thu, 30 Sep 2021 06:55:04 +0100
-From: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] cmark: upgrade 0.30.1 -> 0.30.2
-Date: Thu, 30 Sep 2021 22:54:57 +0800
-Message-ID: <1633013697-14584-1-git-send-email-zhengrq.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=PnDMFD7D;
+ spf=pass (domain: gmail.com, ip: 209.85.208.48,
+ mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f48.google.com with SMTP id g8so19902909edt.7
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 30 Sep 2021 02:33:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=7UFZWsM34JmGdT/cq9IyZrZViwQJCtVpVuQHPqehDaE=;
+        b=PnDMFD7D0KZPHYLfnHyAeCQeYhfCJqnBQiDRwVF2R/MHikUwD/yF9YPwMeg0W/PfyP
+         oK4QV48tML6AIbcPhBo2aq8dcrU5F96M2S9TSJLyHxTAwKEkujBIgKoorYjJDwNRrenV
+         UpzTeGsTrQDCSbNgEYpcrnE7ZPsDhMdO9BOpGNsOfCueJfOuHf2Iy3jF/gd2BFAOYK0G
+         qe3shcssLPe2koWLHf+4Io/uRiDlR1wSP2dNbITDRPsHE8g/MGLy8RZPhCrQeIjxi8Ob
+         KOO0Cvc3H3hx2oWpcjYIweqanIgvD0ymsHkIzUckFx2JJ+ThtdrGKQTZNxwdCZz9w6lt
+         hnwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=7UFZWsM34JmGdT/cq9IyZrZViwQJCtVpVuQHPqehDaE=;
+        b=KkEE5/J5mCK6CPZ3UlIjrF7PD2T3kVGYFouDOO/hrV0pf5nDc98bLr3iTbmlzCjAf/
+         XuNwB2EFPDNA4mIPv7r6cMMZMNaGcEhVt2oW84Jl1+c6VyluMvL8267ZEkJahbMpOLDf
+         GuWV1yzUw+aD3qDDhFs1JYaJksZ8a4krJXWyovfaT5mxpDL4pf8qLsu8/RPPg5AIycpC
+         G8I5TEEY4mzc/CZlURybIGhmcWcQUaNAHGSQPFy9A75TOsUscmDCrPJFxL8CNdgKdzV/
+         tUTgoNFpQXPHQrwifn38Nfjp8wGIZWVD5VSpT8TeuArNG1L9DJFKnx+u7VPl8ZsCxaAO
+         CvGA==
+X-Gm-Message-State: AOAM531d2HTUDTL9FjLri/JmDDdQTyVMBDxoppCrPc7GPzpUSLUECf/w
+	XXMueYpYkH2ffXzCZt5OLerkdm9fQM8=
+X-Google-Smtp-Source: 
+ ABdhPJwwORBApnM/8xxaOlJFQR9QJaJBVHrlZmLLSjtIf6v7M7xDBnYqCx14YQRa4jUSNf2U7pxqYA==
+X-Received: by 2002:a50:cfc3:: with SMTP id i3mr5816981edk.36.1632994429259;
+        Thu, 30 Sep 2021 02:33:49 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id e9sm1128759ejh.0.2021.09.30.02.33.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 30 Sep 2021 02:33:48 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH] README: mention linux-libc-dev:i386 for luajit on
+ ubuntu-21.10
+Date: Thu, 30 Sep 2021 11:33:46 +0200
+Message-Id: <20210930093346.740721-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="y"
-Content-Transfer-Encoding: quoted-printable
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Sep 2021 05:55:10 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 Sep 2021 09:33:52 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93179
+ https://lists.openembedded.org/g/openembedded-devel/message/93180
 
-Fix parsing of emphasis before links (#424, Nick Wellnhofer).
-Fixes a regression introduced with commit ed0a4bf.
+* for host* parts you need to install linux-libc-dev:i386 on ubuntu-21.10
+  (not pulled by gcc-multilib already mentioned in meta-oe/README), otherwise
+  build for 32bit target will fail like this:
 
-Update to Unicode 14.0 (data-man).
+  cortexa7t2hf-neon-vfpv4-oe-linux-gnueabi/luajit/2.1.0~beta3-210112-r0/git/src$ gcc  -m32   -Wall   -I. -DLUAJIT_TARGET=LUAJIT_ARCH_arm -DLJ_ARCH_HASFPU=1 -DLJ_ABI_SOFTFP=0 -isystem/OE/build/oe-core/tmp-glibc/work/cortexa7t2hf-neon-vfpv4-oe-linux-gnueabi/luajit/2.1.0~beta3-210112-r0/recipe-sysroot-native/usr/include -O2 -pipe -c -o host/minilua.o host/minilua.c
+  In file included from /usr/include/bits/errno.h:26,
+                   from /usr/include/errno.h:28,
+                   from host/minilua.c:40:
+  /usr/include/linux/errno.h:1:10: fatal error: asm/errno.h: No such file or directory
+      1 | #include <asm/errno.h>
+        |          ^~~~~~~~~~~~~
+  compilation terminated.
 
-Add ~ to safe href character set (#394, frogtile).
+  while for 64bit taget it would build without -m32 and work fine without linux-libc-dev:i386:
 
-Update CMakeLists.txt (Saleem Abdulrasool). Bump the minimum required
-CMake to 3.7. Imperatively define output name for static library.
+  cortexa7t2hf-neon-vfpv4-oe-linux-gnueabi/luajit/2.1.0~beta3-210112-r0/git/src$ gcc    -Wall   -I. -DLUAJIT_TARGET=LUAJIT_ARCH_arm -DLJ_ARCH_HASFPU=1 -DLJ_ABI_SOFTFP=0 -isystem/OE/build/oe-core/tmp-glibc/work/cortexa7t2hf-neon-vfpv4-oe-linux-gnueabi/luajit/2.1.0~beta3-210112-r0/recipe-sysroot-native/usr/include -O2 -pipe -c -o host/minilua.o host/minilua.c
+  <OK>
 
-Fix install paths in libcmark.pc (Sebasti=C3=A1n Mancilla).
-CMAKE_INSTALL_<dir> can be relative or absolute path, so it is wrong to
-prefix CMAKE_INSTALL_PREFIX because if CMAKE_INSTALL_<dir> is set to an
-absolute path it will result in a malformed path with two absolute paths
-joined together. Instead, use CMAKE_INSTALL_FULL_<dir> from
-GNUInstallDirs.
-
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-support/cmark/{cmark_0.30.1.bb =3D> cmark_0.30.2.bb}  | 2 +-
+ meta-oe/README | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/cmark/{cmark_0.30.1.bb =3D> cmark_0.30.2.bb} (88%)
 
-diff --git a/meta-oe/recipes-support/cmark/cmark_0.30.1.bb b/meta-oe/recipes-support/cmark/cmark_0.30.2.bb
-similarity index 88%
-rename from meta-oe/recipes-support/cmark/cmark_0.30.1.bb
-rename to meta-oe/recipes-support/cmark/cmark_0.30.2.bb
-index e2db8aa762..6669c6e500 100644
---- a/meta-oe/recipes-support/cmark/cmark_0.30.1.bb
-+++ b/meta-oe/recipes-support/cmark/cmark_0.30.2.bb
-@@ -4,7 +4,7 @@ LICENSE =3D "BSD-2-Clause & MIT"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D81f9cae6293cc0345a9144b78152ab62"
+diff --git a/meta-oe/README b/meta-oe/README
+index 98f671d7c2..a0a28189c6 100644
+--- a/meta-oe/README
++++ b/meta-oe/README
+@@ -15,7 +15,7 @@ e.g. on archlinux based distributions install prerequisites like below
+ pacman -S lib32-gcc-libs lib32-glibc
  
- SRC_URI =3D "git://github.com/commonmark/cmark.git"
--SRCREV =3D "977b128291c0cf6c5053cdcf2ac72e627f09c105"
-+SRCREV =3D "a8da5a2f252b96eca60ae8bada1a9ba059a38401"
- S =3D "${WORKDIR}/git"
+ Ubuntu
+-sudo apt-get install gcc-multilib
++sudo apt-get install gcc-multilib linux-libc-dev:i386
  
- inherit cmake lib_package
+ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe]' in the subject'
+ 
 -- 
-2.25.1
+2.32.0
 
 
