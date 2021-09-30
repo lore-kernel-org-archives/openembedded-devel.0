@@ -1,108 +1,78 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <scott.murray@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4578AC433F5
-	for <webhook@archiver.kernel.org>; Thu, 30 Sep 2021 09:33:52 +0000 (UTC)
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com
- [209.85.208.48])
- by mx.groups.io with SMTP id smtpd.web12.10224.1632994431239878439
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 81F8DC433EF
+	for <webhook@archiver.kernel.org>; Thu, 30 Sep 2021 15:23:34 +0000 (UTC)
+Received: from mail-io1-f51.google.com (mail-io1-f51.google.com
+ [209.85.166.51])
+ by mx.groups.io with SMTP id smtpd.web11.14193.1633015413630304198
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Sep 2021 02:33:51 -0700
+ Thu, 30 Sep 2021 08:23:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=PnDMFD7D;
- spf=pass (domain: gmail.com, ip: 209.85.208.48,
- mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f48.google.com with SMTP id g8so19902909edt.7
+ dkim=pass header.i=@konsulko.com header.s=google header.b=SYHOaLnR;
+ spf=pass (domain: konsulko.com, ip: 209.85.166.51,
+ mailfrom: scott.murray@konsulko.com)
+Received: by mail-io1-f51.google.com with SMTP id d18so8019914iof.13
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Sep 2021 02:33:51 -0700 (PDT)
+ Thu, 30 Sep 2021 08:23:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=7UFZWsM34JmGdT/cq9IyZrZViwQJCtVpVuQHPqehDaE=;
-        b=PnDMFD7D0KZPHYLfnHyAeCQeYhfCJqnBQiDRwVF2R/MHikUwD/yF9YPwMeg0W/PfyP
-         oK4QV48tML6AIbcPhBo2aq8dcrU5F96M2S9TSJLyHxTAwKEkujBIgKoorYjJDwNRrenV
-         UpzTeGsTrQDCSbNgEYpcrnE7ZPsDhMdO9BOpGNsOfCueJfOuHf2Iy3jF/gd2BFAOYK0G
-         qe3shcssLPe2koWLHf+4Io/uRiDlR1wSP2dNbITDRPsHE8g/MGLy8RZPhCrQeIjxi8Ob
-         KOO0Cvc3H3hx2oWpcjYIweqanIgvD0ymsHkIzUckFx2JJ+ThtdrGKQTZNxwdCZz9w6lt
-         hnwA==
+        d=konsulko.com; s=google;
+        h=date:from:to:cc:subject:in-reply-to:message-id:references
+         :mime-version;
+        bh=CbTzeZv6dXVLObGR2tAnahuOnvJ84nxzyIh742Mo9b8=;
+        b=SYHOaLnRSDe8z29mRmwl7VFPx3ujnez4F2kLMADJKSdNgGGV30Xzp2+P9UD9HYiW36
+         xiH1FwrQU+bGwcxt+yG7+53zl1Nz+9i+7fgRGokO42dtMXgDD0rAz88u8PLPy0BBaMFU
+         r0K+8vWuWb6HEp41zNsIk5eGMmvgyaSJAI6/Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=7UFZWsM34JmGdT/cq9IyZrZViwQJCtVpVuQHPqehDaE=;
-        b=KkEE5/J5mCK6CPZ3UlIjrF7PD2T3kVGYFouDOO/hrV0pf5nDc98bLr3iTbmlzCjAf/
-         XuNwB2EFPDNA4mIPv7r6cMMZMNaGcEhVt2oW84Jl1+c6VyluMvL8267ZEkJahbMpOLDf
-         GuWV1yzUw+aD3qDDhFs1JYaJksZ8a4krJXWyovfaT5mxpDL4pf8qLsu8/RPPg5AIycpC
-         G8I5TEEY4mzc/CZlURybIGhmcWcQUaNAHGSQPFy9A75TOsUscmDCrPJFxL8CNdgKdzV/
-         tUTgoNFpQXPHQrwifn38Nfjp8wGIZWVD5VSpT8TeuArNG1L9DJFKnx+u7VPl8ZsCxaAO
-         CvGA==
-X-Gm-Message-State: AOAM531d2HTUDTL9FjLri/JmDDdQTyVMBDxoppCrPc7GPzpUSLUECf/w
-	XXMueYpYkH2ffXzCZt5OLerkdm9fQM8=
+        h=x-gm-message-state:date:from:to:cc:subject:in-reply-to:message-id
+         :references:mime-version;
+        bh=CbTzeZv6dXVLObGR2tAnahuOnvJ84nxzyIh742Mo9b8=;
+        b=c2QUjegX0ujaEOxZMCuRWTDwbrwoejf3Iyn5gls+0NjAAL4+eSfPM/X1zAFHJKqR/v
+         lgksKkkdMD8VaMNHJiqevzSc/XLvNEUGIJ5V0zw0rHD2P0pmCV8amiOP6FBxfFBk/smq
+         Xqb2fUBDP9QCWJsLdoEeJOBvvrF36BSim3nWwJwyIf4bxGOejOtovawxVe8LL4ig9dZM
+         OiZqqKn248mh9HI8zyd76ky1vZSikgdko0fmb7fA7N7fAey1JfWCyw7Wcv7WMMhyVCw6
+         HBLjHWtLi3SjXnxBeLPvMVDtxhoFGM3kboVPAc8ugOHym5EWBmboSQFXyQDQabfib6E0
+         It9A==
+X-Gm-Message-State: AOAM533d7OcKL4dWKU+UYZ429aHXF76d5dUBWd6PqIlpUCmb38VfFc9T
+	xvbOO412Gq1+UktFQiUuw6fxkg==
 X-Google-Smtp-Source: 
- ABdhPJwwORBApnM/8xxaOlJFQR9QJaJBVHrlZmLLSjtIf6v7M7xDBnYqCx14YQRa4jUSNf2U7pxqYA==
-X-Received: by 2002:a50:cfc3:: with SMTP id i3mr5816981edk.36.1632994429259;
-        Thu, 30 Sep 2021 02:33:49 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id e9sm1128759ejh.0.2021.09.30.02.33.48
+ ABdhPJw6L7wjBIf74J0vQU7actV6tdm/ed4ch9+kyy5lSvpP/lI+ZJvMfBvVT+hoMMHFSdZzWUsyMw==
+X-Received: by 2002:a5e:d618:: with SMTP id w24mr4366832iom.178.1633015413027;
+        Thu, 30 Sep 2021 08:23:33 -0700 (PDT)
+Received: from godzilla (192-0-174-222.cpe.teksavvy.com. [192.0.174.222])
+        by smtp.gmail.com with ESMTPSA id
+ f7sm1934785ilc.82.2021.09.30.08.23.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Sep 2021 02:33:48 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] README: mention linux-libc-dev:i386 for luajit on
- ubuntu-21.10
-Date: Thu, 30 Sep 2021 11:33:46 +0200
-Message-Id: <20210930093346.740721-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.32.0
+        Thu, 30 Sep 2021 08:23:32 -0700 (PDT)
+Date: Thu, 30 Sep 2021 11:23:31 -0400 (EDT)
+From: Scott Murray <scott.murray@konsulko.com>
+To: LiweiSong <liwei.song@windriver.com>
+cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe][meta-oe][PATCH] chipsec: platform security assessment
+ framework
+In-Reply-To: <20210928092958.19196-1-liwei.song@windriver.com>
+Message-ID: <5d1e1868-add6-a677-f179-8ab2756a95c@spiteful.org>
+References: <20210928092958.19196-1-liwei.song@windriver.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Sep 2021 09:33:52 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 Sep 2021 15:23:34 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93180
+ https://lists.openembedded.org/g/openembedded-devel/message/93181
 
-* for host* parts you need to install linux-libc-dev:i386 on ubuntu-21.10
-  (not pulled by gcc-multilib already mentioned in meta-oe/README), otherwise
-  build for 32bit target will fail like this:
+On Tue, 28 Sep 2021, LiweiSong wrote:
 
-  cortexa7t2hf-neon-vfpv4-oe-linux-gnueabi/luajit/2.1.0~beta3-210112-r0/git/src$ gcc  -m32   -Wall   -I. -DLUAJIT_TARGET=LUAJIT_ARCH_arm -DLJ_ARCH_HASFPU=1 -DLJ_ABI_SOFTFP=0 -isystem/OE/build/oe-core/tmp-glibc/work/cortexa7t2hf-neon-vfpv4-oe-linux-gnueabi/luajit/2.1.0~beta3-210112-r0/recipe-sysroot-native/usr/include -O2 -pipe -c -o host/minilua.o host/minilua.c
-  In file included from /usr/include/bits/errno.h:26,
-                   from /usr/include/errno.h:28,
-                   from host/minilua.c:40:
-  /usr/include/linux/errno.h:1:10: fatal error: asm/errno.h: No such file or directory
-      1 | #include <asm/errno.h>
-        |          ^~~~~~~~~~~~~
-  compilation terminated.
+> Add chipsec, tools to dump or analyzing hardware, system firmware
+> components, like PCH register, ioport or iomem configuration space.
+>
+> Signed-off-by: Liwei Song <liwei.song@windriver.com>
+[snip]
 
-  while for 64bit taget it would build without -m32 and work fine without linux-libc-dev:i386:
+This sounds like something that might be a better fit in meta-security?
 
-  cortexa7t2hf-neon-vfpv4-oe-linux-gnueabi/luajit/2.1.0~beta3-210112-r0/git/src$ gcc    -Wall   -I. -DLUAJIT_TARGET=LUAJIT_ARCH_arm -DLJ_ARCH_HASFPU=1 -DLJ_ABI_SOFTFP=0 -isystem/OE/build/oe-core/tmp-glibc/work/cortexa7t2hf-neon-vfpv4-oe-linux-gnueabi/luajit/2.1.0~beta3-210112-r0/recipe-sysroot-native/usr/include -O2 -pipe -c -o host/minilua.o host/minilua.c
-  <OK>
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/README | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/README b/meta-oe/README
-index 98f671d7c2..a0a28189c6 100644
---- a/meta-oe/README
-+++ b/meta-oe/README
-@@ -15,7 +15,7 @@ e.g. on archlinux based distributions install prerequisites like below
- pacman -S lib32-gcc-libs lib32-glibc
- 
- Ubuntu
--sudo apt-get install gcc-multilib
-+sudo apt-get install gcc-multilib linux-libc-dev:i386
- 
- Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe]' in the subject'
- 
--- 
-2.32.0
-
+Scott
 
