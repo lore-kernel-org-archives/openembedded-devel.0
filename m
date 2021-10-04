@@ -1,124 +1,111 @@
-Return-Path: <daniel@qtec.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1CCFFC433F5
-	for <webhook@archiver.kernel.org>; Sun,  3 Oct 2021 11:02:52 +0000 (UTC)
-Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com
- [209.85.167.45])
- by mx.groups.io with SMTP id smtpd.web11.21267.1633258969198868939
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 91F29C433EF
+	for <webhook@archiver.kernel.org>; Mon,  4 Oct 2021 18:36:20 +0000 (UTC)
+Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com
+ [209.85.222.176])
+ by mx.groups.io with SMTP id smtpd.web11.14162.1633372579186703496
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 03 Oct 2021 04:02:50 -0700
+ Mon, 04 Oct 2021 11:36:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qtec.com header.s=google header.b=GaPOWYTv;
- spf=pass (domain: qtec.com, ip: 209.85.167.45, mailfrom: daniel@qtec.com)
-Received: by mail-lf1-f45.google.com with SMTP id x27so58341919lfa.9
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=YHTmtaA/;
+ spf=pass (domain: gmail.com, ip: 209.85.222.176,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f176.google.com with SMTP id 73so17460134qki.4
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 03 Oct 2021 04:02:48 -0700 (PDT)
+ Mon, 04 Oct 2021 11:36:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=qtec.com; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=uwuotM+VR4/A5yTE1lfWH+2wjhbOSlAMV1spOKlNux4=;
-        b=GaPOWYTvivwZaqfva2JD252SWOg5j3msXLsSSe+4LSwpNt6XxJqH75uRvZe6QcEKjz
-         YPW3Lu984OciH/HhvZeXLE/4PeV6dJkqJgez/NKvwVwTkVz8kTiPzN/Upuq6OLQtNvxC
-         Jz74q/NSuR0UnAeI99pNHElFAjMR5dQ/W/WuHhKne06mCarITbRRHN1gObP1sBZJGNd4
-         VUbHuP2/i3RDboDL2t9cVV/LJdg4skvc0eEJFaS/juaZ2fjkPMZMKJkeQ6kZ3NnyQwjg
-         iCeHS7oplrN5OG2oUQZ8ENeV2KxD0VyAn2fqhnlKmPeHT1PwUlKNckh5yxd0RZckhJbG
-         yPbA==
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=RhvO8pmYrkbok6HzLUUqcCW1QnIhB2XT5DxOJ161/7g=;
+        b=YHTmtaA/s54NFbo6LJUB6Zx0e4/2D468pvLrGBaG4gcD2LFbFEg2NmA9irehLph+F/
+         DssbClK8V4oZu7SL+TvjdDppMs7o9szMuRoqghsDbdEfZp6U+EFGXVTvQbWfuD4n6HWg
+         D89NWjhVbp4isZvnwcRFPXSPN7oq7b2Y/boRKCO+iV3fmQ7K8/IMp1HAjrxemGUc+7jl
+         N2u7oAP2H4TZboJ1urp1g+HCWcX18e/xwfTDoLmOWtm7s0QAmpE5gfIsdPVlDpbofRzD
+         kXIZzGIVCS22D7A7va5xT9Nldlos7vHnL19GvqYeqYYxBZEHWfrrCgRCAuZr5dz5xf5a
+         ggZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=uwuotM+VR4/A5yTE1lfWH+2wjhbOSlAMV1spOKlNux4=;
-        b=AsiubGdl/XUf3btmiGTf4wmEoEFSR8aZP+XW8aGopS0EQc3KV4CylBKGfnNCSAYvxz
-         Erfo6fbi1Y1d8QXqiD+w3u6YRjG4e2WXTu3sir2DVkGeU9DUCyBEYbUyGbckvqHWpRG4
-         BOn1GCIGQIDw9x32uNgDP70G0I+Z1vTz4FtlX3UhN+a6MBCco7X9sVTN2Cd7Zm9IxjHC
-         XQJXnBS8lSHHHrGd2iCEnSGii1oruLqT5tU9brRDsRSxzGUSNftVhXfDv0JkPAWjy3Z7
-         faLQrab/VW6ffjLUeCJgUg8ADXB3svlbJTud6ZWF4W1qtuEjFy/4Gmn0s+yV7DeGMGaM
-         t9BQ==
-X-Gm-Message-State: AOAM533x9Eqx39OPUtjbHhPdpoFBYUeXFFSySUmTpGPxMr/386CT0YoK
-	bumF/JicWNZbVYpyb7ktCsysT7YYMwZMIp1QBQ8cbB4YuE406C+rFpGgysA8BMik/GKmjLHKa7V
-	vyfybZ36mZfam6BJB/oBKymTnxhslidzZJi/RaTNULBBdQ0N9M1tLxrulf2Oc4Erg6pgIN7PPW4
-	iFMQq/+Yt7LE/7LSfF
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=RhvO8pmYrkbok6HzLUUqcCW1QnIhB2XT5DxOJ161/7g=;
+        b=np1Ae2qbhgVsK0emAAeQ/LEbGbLqolD9LTHg6QZNaytCxOffibC1zFK0d5Rz1skwE4
+         7uBqDY3AUQIhDrWAdPp02S0rKtqeyCGVryWj8vWp1YAJAI75lKB9Owld5OzB4N+NwkB0
+         XWvNnxv04xRG/VhFhJ6loolsiNI8TB0kJXkJzsbDipATR9nZGjLvABv3Kekfy9sauu4V
+         DjsTk4ZPmb5yEK7YTS1YliIJiGHa0gPYs1WOaVq+QdosadDU/kODo7UA83KnZdzbsFME
+         QK3AmWjZXIym3EY4zrngoylc7lTvYUXzUNJZBQp8vcftjILrCU5OW4RtANKbtleDnKoh
+         Wl7g==
+X-Gm-Message-State: AOAM532ev7UfFZ8varE6f0Q1PU2DlLPNFvnIMfDALAR82CYxkJ2pCzRb
+	QVh8d1qnuJjxHUg8ypsL3XQGkOw13y6h4I4/eXU=
 X-Google-Smtp-Source: 
- ABdhPJwkcscCXiO23WpB0DBc9cD2XHqu5fqY67/s43gSTgrtdTTQ3/EuJrknUMyXrMnt52bIdQtL7Q==
-X-Received: by 2002:a2e:3508:: with SMTP id z8mr7818484ljz.402.1633258966265;
-        Sun, 03 Oct 2021 04:02:46 -0700 (PDT)
-Received: from localhost (87-52-47-7-cable.dk.customer.tdc.net. [87.52.47.7])
-        by smtp.gmail.com with ESMTPSA id
- v138sm1414500lfa.120.2021.10.03.04.02.45
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 03 Oct 2021 04:02:45 -0700 (PDT)
-From: Daniel Gomez <daniel@qtec.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: dagmcr@gmail.com,
-	Daniel Gomez <daniel@qtec.com>
-Subject: [meta-java][PATCH] openjdk-7: Replace url wildebeest -> classpath
-Date: Sun,  3 Oct 2021 13:02:24 +0200
-Message-Id: <20211003110224.524133-1-daniel@qtec.com>
-X-Mailer: git-send-email 2.30.2
+ ABdhPJwJgKictd2l5Uc2Si4RKLZYOHNuHRdbyqyPJKoyf/CIFbMMYqThgG5zf5rDWWFt5zCeb1r9ZCz5bfbXQ7p7xxA=
+X-Received: by 2002:a37:618c:: with SMTP id
+ v134mr11610951qkb.231.1633372578205;
+ Mon, 04 Oct 2021 11:36:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <91c42cda-e056-7291-789a-985a95761a5e@gmail.com>
+In-Reply-To: <91c42cda-e056-7291-789a-985a95761a5e@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 4 Oct 2021 11:35:52 -0700
+Message-ID: 
+ <CAMKF1sopHKMG_WbDxkf8CwriDVfL2WFuoebXYetawXf43uF-Mg@mail.gmail.com>
+Subject: Re: dunfell merge request Oct 4th
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 03 Oct 2021 11:02:52 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Oct 2021 18:36:20 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93194
+ https://lists.openembedded.org/g/openembedded-devel/message/93196
 
-icedtea.wildebeest.org is down. Replace it with icedtea.classpath.org to
-be able to fetch the sources for cacao, icedtea and jamvm.
+merged now thank you
 
-Signed-off-by: Daniel Gomez <daniel@qtec.com>
----
- recipes-core/icedtea/openjdk-7-release-03b147.inc | 6 +++---
- recipes-core/openjdk/openjdk-7-common.inc         | 2 +-
- 2 files changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/recipes-core/icedtea/openjdk-7-release-03b147.inc b/recipes-core/icedtea/openjdk-7-release-03b147.inc
-index 627501c..7e0c808 100644
---- a/recipes-core/icedtea/openjdk-7-release-03b147.inc
-+++ b/recipes-core/icedtea/openjdk-7-release-03b147.inc
-@@ -7,7 +7,7 @@ FILESPATH =. "${FILE_DIRNAME}/openjdk-7-03b147:"
- # Force arm mode for now
- ARM_INSTRUCTION_SET_armv4t = "ARM"
-
--ICEDTEA_URI = "http://icedtea.wildebeest.org/download/source/${ICEDTEA}.tar.gz;name=iced"
-+ICEDTEA_URI = "http://icedtea.classpath.org/download/source/${ICEDTEA}.tar.gz;name=iced"
-
- ICEDTEA_PREFIX = "icedtea7-forest-2.1"
- ICEDTEA_HG_URL = "http://icedtea.classpath.org/hg/release/${ICEDTEA_PREFIX}"
-@@ -64,13 +64,13 @@ SRC_URI[langtools.sha256sum] = "c77dd42d83f06d18fa8aa65c93d137608a2e02cf24b68fc1
- CACAO_VERSION = "a567bcb7f589"
- CACAO_FILE_UPSTREAM = "${CACAO_VERSION}.tar.gz"
- CACAO_FILE_DOWNLOAD = "cacao-${CACAO_VERSION}.tar.gz"
--CACAO_URI = "http://icedtea.wildebeest.org/download/drops/cacao/${CACAO_FILE_UPSTREAM};name=cacao;unpack=false;downloadfilename=${CACAO_FILE_DOWNLOAD}"
-+CACAO_URI = "http://icedtea.classpath.org/download/drops/cacao/${CACAO_FILE_UPSTREAM};name=cacao;unpack=false;downloadfilename=${CACAO_FILE_DOWNLOAD}"
- SRC_URI[cacao.md5sum] = "ec1def7f0d3d25e9e7da47c480f26a73"
- SRC_URI[cacao.sha256sum] = "d49f79debc131a5694cae6ab3ba2864e7f3249ee8d9dc09aae8afdd4dc6b09f9"
-
- JAMVM_VERSION = "4617da717ecb05654ea5bb9572338061106a414d"
- JAMVM_FILE = "jamvm-${JAMVM_VERSION}.tar.gz"
--JAMVM_URI = "http://icedtea.wildebeest.org/download/drops/jamvm/${JAMVM_FILE};name=jamvm;unpack=false"
-+JAMVM_URI = "http://icedtea.classpath.org/download/drops/jamvm/${JAMVM_FILE};name=jamvm;unpack=false"
- SRC_URI[jamvm.md5sum] = "740c2587502831cac6797d1233a7e27b"
- SRC_URI[jamvm.sha256sum] = "47fce7bd556c1b1d29a93b8c45497e0d872b48b7f535066b303336f29d0f0d8d"
-
-diff --git a/recipes-core/openjdk/openjdk-7-common.inc b/recipes-core/openjdk/openjdk-7-common.inc
-index c87266d..b679f2a 100644
---- a/recipes-core/openjdk/openjdk-7-common.inc
-+++ b/recipes-core/openjdk/openjdk-7-common.inc
-@@ -332,7 +332,7 @@ BUILD_DIR_ECJ = "openjdk.build-ecj"
- # Force arm mode for now
- ARM_INSTRUCTION_SET_armv4t = "ARM"
-
--ICEDTEA_URI = "http://icedtea.wildebeest.org/download/source/${ICEDTEA}.tar.gz;name=iced"
-+ICEDTEA_URI = "http://icedtea.classpath.org/download/source/${ICEDTEA}.tar.gz;name=iced"
-
- ICEDTEA_MAJOR = "icedtea7"
- ICEDTEA_DROP_URL = "http://icedtea.classpath.org/download/drops/${ICEDTEA_MAJOR}/${ICEDTEA_VERSION}"
---
-2.30.2
-
+On Mon, Oct 4, 2021 at 8:30 AM akuster808 <akuster808@gmail.com> wrote:
+>
+> The following changes since commit 2e7e98cd0cb82db214b13224c71134b9335a719b:
+>
+>   dnsmasq: Security fix CVE-2021-3448 (2021-09-10 15:16:48 -0700)
+>
+> are available in the Git repository at:
+>
+>   git://git.openembedded.org/meta-openembedded dunfell-next
+>
+> for you to fetch changes up to 3cf22d15885cf0e3e16078705e9a20f3d21f12db:
+>
+>   tcpdump: Update CVE-2020-8037 tag (2021-10-01 14:49:10 -0700)
+>
+> ----------------------------------------------------------------
+> Marek Vasut (1):
+>       dstat: Add missing python-six runtime dependency
+>
+> Neetika Singh (1):
+>       c-ares: Add fix for CVE-2021-3672
+>
+> Purushottam Choudhary (1):
+>       tcpdump: Update CVE-2020-8037 tag
+>
+> wangmy (1):
+>       apache2: upgrade 2.4.48 -> 2.4.49
+>
+>  ...1-PPP-When-un-escaping-don-t-allocate-a-too-large-buff.patch |   1 +
+>  .../ares_expand_name-fix-formatting-and-handling-of-root.patch  | 115
+> ++++++++++++++++++++++++++++
+>  .../c-ares/ares_expand_name-should-escape-more-characters.patch |  90
+> ++++++++++++++++++++++
+>  meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb                 |   2 +
+>  meta-oe/recipes-support/dstat/dstat_0.7.4.bb                    |   2 +-
+>  .../apache2/{apache2_2.4.48.bb => apache2_2.4.49.bb}            |   3 +-
+>  6 files changed, 210 insertions(+), 3 deletions(-)
+>  create mode 100644
+> meta-oe/recipes-support/c-ares/c-ares/ares_expand_name-fix-formatting-and-handling-of-root.patch
+>  create mode 100644
+> meta-oe/recipes-support/c-ares/c-ares/ares_expand_name-should-escape-more-characters.patch
+>  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.48.bb =>
+> apache2_2.4.49.bb} (98%)
+>
 
