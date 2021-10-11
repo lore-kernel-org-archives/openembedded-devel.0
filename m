@@ -2,61 +2,60 @@ Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CBF8C4332F
-	for <webhook@archiver.kernel.org>; Mon, 11 Oct 2021 18:41:55 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
- [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.web12.2736.1633977714910365016
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E7AEC43217
+	for <webhook@archiver.kernel.org>; Mon, 11 Oct 2021 18:41:56 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
+ [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.web12.2738.1633977715797109494
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Oct 2021 11:41:55 -0700
+ Mon, 11 Oct 2021 11:41:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=C7cQ1J9o;
- spf=pass (domain: gmail.com, ip: 209.85.221.43,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=kehSqWJH;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47,
  mailfrom: alex.kanavin@gmail.com)
-Received: by mail-wr1-f43.google.com with SMTP id r10so59183747wra.12
+Received: by mail-wr1-f47.google.com with SMTP id m22so59253528wrb.0
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Oct 2021 11:41:54 -0700 (PDT)
+ Mon, 11 Oct 2021 11:41:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=2ecG+JEj1PBe4yqaazcU2hCHao9Am4NsMFB4veYKFi4=;
-        b=C7cQ1J9oAD2WrN4GQFcjaCAZWEFaMt7wPbKX74+563F7gi/wJJl5FuSN25AMf5e3Bu
-         kKoifrPxvjg/jeQ7FXcKY/De0Mo6ftCpXPOM5AwLzDsjVR5z5HXL+KMekwJy+PU9GMYX
-         ctBnc7lkqOIoNA9U/fm2Grsw3ChCjMSG3ZMurwMbZUKvhPkkFqWTNiCTGS46/9Ednimv
-         EfLMCzgK/vJSLjsernAOzCQamRwQ3wi28bMVx8BDtHtHSpbq4A2loGkyfv3DWzVI6s7r
-         kyMY3y17VMEWb/VQDf1woPlgKY+nvM/IhwvbpGsHvGM9kS+zSU+ZWw92R+2o13FOnNiz
-         UN1Q==
+        bh=ZcXemCUQkhb8xv1FfRYrypc58rGHin72dWxcBO1HIek=;
+        b=kehSqWJHFtK6zHHwy2la2gYNiWel1F8zPt8vums6nLVdOgUxQA3swTZK5Ht/+nCr0f
+         RQ+getG8LwpWPbBcMmtPUlgeLNg1R0Qw6ds9u1vWgr6TMecnJ6DKn04IHPozl8PIVj2W
+         R/n9jdxtsviEQqKBmkhQJqWqjD0LPaIltYectKBUYOKnU2p1xTd83z+NcAeyPufyvseU
+         PgytMDLg7Kk8yndx2H/z5b92EWIlMOKAIipQ+h33SikLkmcsfA9QKVh0tt0RyvW4qzvw
+         1eaEdTVi3LX5O0apqcbFpT92RCXK95myuJenkKFadhL1gHgvdwjNGLNwBPlixmQpJhy0
+         nPYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=2ecG+JEj1PBe4yqaazcU2hCHao9Am4NsMFB4veYKFi4=;
-        b=sC+zfwKWAsUrbvE9ohRqYgp+Jw/aHIFoN6030B5EnMNnUTWdIVQKn1zSv1cprlze0g
-         E4EGUqtS5K7l0PMZYS3UOBmQzca7VOfb9lM3/KGTYYASMfAREGPasHjL46ZcHgDx/F+s
-         vT1OHn2IrlWpd/6DLU97SJ3aUPKm8yeryyirn9fphSDyNLGaWR9DslQ9X+4z1qVr9t/d
-         3C7A2XfeJQqA1nuEdFYO+3pAaLAz12wzqp/t/aY0UtjrwbMS00pJ7kmYC7HYv6UgSssu
-         +jFHuX8OecwgwenPlQsfbHylouqZ/RbIpi0W3Typ0S7acqez+qOP6toqFUDkznf7l2IS
-         sxPw==
-X-Gm-Message-State: AOAM533vZ3fBNy3tjU+kzNPyPhiko5/QbXrQfskxv7/8VjmcLovl8Z9w
-	280vFhT08/oKRzPVz7j2bRnHkvzpPFCzPQ==
+        bh=ZcXemCUQkhb8xv1FfRYrypc58rGHin72dWxcBO1HIek=;
+        b=VxI9TBsYc9sqHhcFuL45wvw/98hKQGMWFO99pnLwi5xba+U03s0hamMC/OnzJBYEPD
+         eHrJvw1DRAJR8b81PtJbOFJ2S4X+fJscML8lWwT/v8jrfoxNn9LUtjamvk0A/JsS5DuO
+         nY/ytCTYLzX70eMEBlleoCfU2lTKnu1lVjuPDx2R+taXCq7p53/b9QWUH6ic8kfJD0Mg
+         v8UZY9VmSpEqC9Jcg2ctVt/KFayYFrNv2O52GE++o1EzRfZIq8biWpP54gNgmJZgWjdS
+         nODdp10kZCNt1WxhSiPhG9ztq3evhLnFqgQDJwMJPz0QQN3NdBWp6oMGCgZXC397iJIb
+         sBiw==
+X-Gm-Message-State: AOAM531/EqfYP4kSeZjuE6ADsHkO7d27ZcJ2hThQ8PrH8WLMOjPlSKL0
+	Sv/0CVaGAMxlQ6Kfw9Q2VZQGoyYXG8pQ7A==
 X-Google-Smtp-Source: 
- ABdhPJwuLJJ/nPl3YZNL3hJzqKh3YyoYKmeBRAbOXdMxJ2a8+FDP39mdY1MBCwH4ftjnt4y0fvtC8A==
-X-Received: by 2002:adf:a550:: with SMTP id
- j16mr27184712wrb.180.1633977713517;
-        Mon, 11 Oct 2021 11:41:53 -0700 (PDT)
+ ABdhPJwLK/+RQPRuKkOPCOkrxS+eIkQHvzp4TNL5G8AnM6gWhDlZN7o2lyjmwrOOVH3cT95Du+xAog==
+X-Received: by 2002:a7b:c397:: with SMTP id s23mr732075wmj.22.1633977714483;
+        Mon, 11 Oct 2021 11:41:54 -0700 (PDT)
 Received: from nereus.lab.linutronix.de. (b2b-109-90-143-203.unitymedia.biz.
  [109.90.143.203])
-        by smtp.gmail.com with ESMTPSA id u5sm272936wmm.39.2021.10.11.11.41.52
+        by smtp.gmail.com with ESMTPSA id u5sm272936wmm.39.2021.10.11.11.41.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Mon, 11 Oct 2021 11:41:53 -0700 (PDT)
 From: Alexander Kanavin <alex.kanavin@gmail.com>
 X-Google-Original-From: Alexander Kanavin <alex@linutronix.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alexander Kanavin <alex@linutronix.de>
-Subject: [PATCH 10/24] openipmi: add a python 3.10 compatibility patch
-Date: Mon, 11 Oct 2021 20:41:26 +0200
-Message-Id: <20211011184140.653609-10-alex@linutronix.de>
+Subject: [PATCH 11/24] strongswan: disable openssl PACKAGECONFIG
+Date: Mon, 11 Oct 2021 20:41:27 +0200
+Message-Id: <20211011184140.653609-11-alex@linutronix.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20211011184140.653609-1-alex@linutronix.de>
 References: <20211011184140.653609-1-alex@linutronix.de>
@@ -65,76 +64,30 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 11 Oct 2021 18:41:55 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 11 Oct 2021 18:41:56 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93224
+ https://lists.openembedded.org/g/openembedded-devel/message/93225
+
+Until upstream addresses openssl 3.x compatibility issues.
 
 Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ---
- ..._devel.m4-do-not-check-for-distutils.patch | 41 +++++++++++++++++++
- .../openipmi/openipmi_2.0.31.bb               |  1 +
- 2 files changed, 42 insertions(+)
- create mode 100644 meta-networking/recipes-support/openipmi/files/0001-m4-ax_python_devel.m4-do-not-check-for-distutils.patch
+ meta-networking/recipes-support/strongswan/strongswan_5.9.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/openipmi/files/0001-m4-ax_python_devel.m4-do-not-check-for-distutils.patch b/meta-networking/recipes-support/openipmi/files/0001-m4-ax_python_devel.m4-do-not-check-for-distutils.patch
-new file mode 100644
-index 000000000..00956fb11
---- /dev/null
-+++ b/meta-networking/recipes-support/openipmi/files/0001-m4-ax_python_devel.m4-do-not-check-for-distutils.patch
-@@ -0,0 +1,41 @@
-+From 3a35611687864cf3599712d0d2ff54532b0118ac Mon Sep 17 00:00:00 2001
-+From: Alexander Kanavin <alex@linutronix.de>
-+Date: Sun, 3 Oct 2021 21:42:32 +0200
-+Subject: [PATCH] m4/ax_python_devel.m4: do not check for distutils
-+
-+With py 3.10 this prints a deprecation warning which is
-+taken as an error. Upstream should rework the code to not
-+use distuils.
-+
-+Upstream-Status: Inappropriate [needs a proper fix upstream]
-+Signed-off-by: Alexander Kanavin <alex@linutronix.de>
-+---
-+ m4/ax_python_devel.m4 | 15 ---------------
-+ 1 file changed, 15 deletions(-)
-+
-+diff --git a/m4/ax_python_devel.m4 b/m4/ax_python_devel.m4
-+index e0804c5..cfc0b24 100644
-+--- a/m4/ax_python_devel.m4
-++++ b/m4/ax_python_devel.m4
-+@@ -138,21 +138,6 @@ variable to configure. See ``configure --help'' for reference.
-+ 		fi
-+ 	fi
-+ 
-+-	#
-+-	# Check if you have distutils, else fail
-+-	#
-+-	AC_MSG_CHECKING([for the distutils Python package])
-+-	ac_distutils_result=`$PYTHON -c "import distutils" 2>&1`
-+-	if test -z "$ac_distutils_result"; then
-+-		AC_MSG_RESULT([yes])
-+-	else
-+-		AC_MSG_RESULT([no])
-+-		AC_MSG_ERROR([cannot import Python module "distutils".
-+-Please check your Python installation. The error was:
-+-$ac_distutils_result])
-+-		PYTHON_VERSION=""
-+-	fi
-+-
-+ 	#
-+ 	# Check for Python include path
-+ 	#
-diff --git a/meta-networking/recipes-support/openipmi/openipmi_2.0.31.bb b/meta-networking/recipes-support/openipmi/openipmi_2.0.31.bb
-index ecc98dd8b..4b85d9427 100644
---- a/meta-networking/recipes-support/openipmi/openipmi_2.0.31.bb
-+++ b/meta-networking/recipes-support/openipmi/openipmi_2.0.31.bb
-@@ -31,6 +31,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
-            file://include_sys_types.patch \
-            file://openipmi-helper \
-            file://ipmi.service \
-+           file://0001-m4-ax_python_devel.m4-do-not-check-for-distutils.patch \
-            "
+diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.9.3.bb b/meta-networking/recipes-support/strongswan/strongswan_5.9.3.bb
+index ad104e44e..e76636af0 100644
+--- a/meta-networking/recipes-support/strongswan/strongswan_5.9.3.bb
++++ b/meta-networking/recipes-support/strongswan/strongswan_5.9.3.bb
+@@ -23,7 +23,7 @@ EXTRA_OECONF = " \
  
- S = "${WORKDIR}/OpenIPMI-${PV}"
+ EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
+ 
+-PACKAGECONFIG ?= "curl gmp openssl sqlite3 swanctl \
++PACKAGECONFIG ?= "curl gmp sqlite3 swanctl \
+         ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-charon', 'charon', d)} \
+ "
+ PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,,${PN}-plugin-aesni"
 -- 
 2.20.1
 
