@@ -1,107 +1,168 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 49158C433F5
-	for <webhook@archiver.kernel.org>; Tue, 12 Oct 2021 21:48:33 +0000 (UTC)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com
- [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web11.634.1634075312101312748
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 62A58C433F5
+	for <webhook@archiver.kernel.org>; Tue, 12 Oct 2021 23:50:12 +0000 (UTC)
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com
+ [85.158.142.4])
+ by mx.groups.io with SMTP id smtpd.web10.1118.1634082610826420107
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Oct 2021 14:48:32 -0700
+ Tue, 12 Oct 2021 16:50:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=PGkfnWAK;
- spf=pass (domain: gmail.com, ip: 209.85.214.169,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id f21so441253plb.3
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Oct 2021 14:48:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=w0HMBmOp6Za/x93vkHCuNvzrQR+PsxmZNEf+RRPt1v8=;
-        b=PGkfnWAKeK4Ug24DcQEnFYZfCbHszl5ecCthtVwwigglrNIVl1BoGSipSuTF4mbH6D
-         5+vtVa5vD/A3DWW5CO/GR9B0XYh/81PquuZGnnS3cqHGGRtCuwjdXpgMFKU5nPMRPJbt
-         mFNRdaAThvx8YUTQwneqgalajaByZqvwC2ySJj+1nlXOGrDq95cM2qggVSWixmrjwi7G
-         oaQGrpg4HaLHfb5Wy7jLxfps5HXYXayiMp+paeUHst8uQnSw8pYvkESi/6ZCMbfz8slK
-         Vgsf7aRyQaUSBaa8Juik+S3O0NrVfZatfIEzXVrnLnzTHlK0/1zb9g+DC6eaod+hpDyw
-         5skQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=w0HMBmOp6Za/x93vkHCuNvzrQR+PsxmZNEf+RRPt1v8=;
-        b=hZkQ0oUeXnSHisHduF6uI5EHjUpIL+/NlqXcAB52vF3ezTeyHIsUpek2NWaTUlVLUf
-         2rCSEosP5zMY7arGFUXmkiM4GF6dN4YpVY569kuy0Pf8Tfrbf9ea9Px7UOh4cvUvOtk3
-         JfzlOAeFtv57k5/2dwedYg+yTq7RIFjNXiiE6DASx5jspp59cZSjz+ARE5OYjwD3ICz8
-         BNS7oCvRyG5i+ZDOgEG6vvNGx2a6Dz52AymlW4A+a81j7W5BCE1z65TNOWBncPRQ09cQ
-         wLxrCFepgE9KvGWBbDVx2ER3G9f2LYKEApsilrr5Mt0SQXl2ad1PxxHyEkfwDQgqNCEQ
-         5Tbg==
-X-Gm-Message-State: AOAM533hubhbtySyLpUkXL4NdXfAKqS1x+wYPanI47ebFDYsxhKH2xwX
-	voOo2OI+L5RSubdZvPPovRHDTD+atoxmfw==
-X-Google-Smtp-Source: 
- ABdhPJwiEh+AGqQAE2olBQ8B0x+iD8kQUf05GvAax0uXQ/mvEiv/FzmX5uJYeQDA/+Kvsff6N2n2OQ==
-X-Received: by 2002:a17:90b:1c82:: with SMTP id
- oo2mr9138552pjb.53.1634075311389;
-        Tue, 12 Oct 2021 14:48:31 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ba74])
-        by smtp.gmail.com with ESMTPSA id
- e15sm11555948pfc.134.2021.10.12.14.48.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Oct 2021 14:48:30 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH 3/3] devilspie2: Switch to using github repo
-Date: Tue, 12 Oct 2021 14:48:27 -0700
-Message-Id: <20211012214827.3477092-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20211012214827.3477092-1-raj.khem@gmail.com>
-References: <20211012214827.3477092-1-raj.khem@gmail.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=SA8bTW8E;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.4,
+ mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1634082608; i=@fujitsu.com;
+	bh=t7c7YPN9V1XrtutlAWveza+w5/Vn9qReE0VXr/SLp9Q=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=SA8bTW8Eu5eqsZ1oNe69lYgTNPbQHZw3CTEF/o8fWOP/M4+kFw9nGLOzMh02IaQeA
+	 +B/CmRDF7wzEhVTggZz11PJf2feOO8y/naIxZURhP3rjwshM6cGC3wGn1q/V64UZ1E
+	 wUcI1MtBs9PghqI3WNnK9DgUguIZKya8ak9plwbg2isqoTF6yVeoMqk3gNA8k17ymd
+	 mJ0btNyOHpHiYpqe9UsUhStrC4UfOIto1nQ4px63Nr652odg+q9FgDJwGBvLYhAUgb
+	 kDvbPMCiBTcEBNpix01tG4ZKvCNizmDR18GEtxOU5bq1BKN2eFyvykQjpB04vYLWn/
+	 e1Mh5LScA5Txw==
+Received: from [100.113.2.26] (using TLSv1.2 with cipher
+ DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-4.bemta.az-a.eu-central-1.aws.symcld.net id 15/1D-09980-03F16616;
+ Tue, 12 Oct 2021 23:50:08 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrFIsWRWlGSWpSXmKPExsViZ8ORqGsgn5Z
+  o0NzMYXHx8FJmB0aPcxtXMAYwRrFm5iXlVySwZizbe4K14KBsxbT3s1kaGC9LdjFycQgJPGGU
+  2Pp8BiuEc4FJovXcTijnBKNE/5xFLF2MnBxsAmoS02/dYAWxRQT0JZbO3sMMYjMLqEi8+N3D3
+  sXIwSEsYCvx5GIpSJhFQFViwvt57CA2r4CzxN3Hb8FsCQEFiSkP34O1cgq4SHx7OIUNxBYCqj
+  l+6RALRL2gxMmZT1ggxktIHHzxghmiV1Fi9uVmFgi7QmLWrDYmCFtN4uq5TcwTGAVnIWmfhaR
+  9ASPTKkaLpKLM9IyS3MTMHF1DAwNdQ0NjXUNdU0O9xCrdRL3UUt3k1LySokSgpF5iebFecWVu
+  ck6KXl5qySZGYACnFDIa72A8+PqD3iFGSQ4mJVFeu4WpiUJ8SfkplRmJxRnxRaU5qcWHGGU4O
+  JQkeK9IpyUKCRalpqdWpGXmAKMJJi3BwaMkwlsvA5TmLS5IzC3OTIdInWI05rh4cMkiZo7mSc
+  u3Mwux5OXnpUqJ80bKApUKgJRmlObBDYJF+SVGWSlhXkYGBgYhnoLUotzMElT5V4ziHIxKwrx
+  OAkBTeDLzSuD2vQI6hQnolMCoFJBTShIRUlINTJ3/z0R+kZHsjnQR8PSPCDgldPywZ1WKoLDH
+  htp1/5ucVvMZ/kyPiw+ZkLnsyblE03kaqYfWXVhy3jU1Zeec1GORv03E+l9sWdH9T5BJap/Ow
+  jbzzcz8Dmbav+OtlVm+ue05t2ph2/b/r85+vBO4s9VQ9GfjbpGCTZtff2mdVq7XGX34QkJNza
+  bY0EXmoqsPnZ96wjdA916ja/+fmT0nlse32Ak680sttDMRSbkguiqy8HEp65lQxar04tyjh2T
+  fXjK5KrlUk6+/5UuLf938Y6fOKggLsCdz7JgRePf/7bN6Yiwe28tDJSJWBuT1Ru3w+bHlZUj6
+  usNOf/sMVk5xXqxsWZ0auedCRr0QW8ZVJZbijERDLeai4kQAbP2yRW0DAAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-10.tower-228.messagelabs.com!1634082607!234122!1
+X-Originating-IP: [62.60.8.97]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.4; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 23305 invoked from network); 12 Oct 2021 23:50:08 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-10.tower-228.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 12 Oct 2021 23:50:08 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 8AF241009EB
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 13 Oct 2021 00:50:07 +0100 (BST)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 1E2531009DF
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 13 Oct 2021 00:50:07 +0100 (BST)
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.23; Wed, 13 Oct 2021 00:50:04 +0100
+From: Wang Mingyu <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] redis: upgrade 6.2.5 -> 6.2.6
+Date: Wed, 13 Oct 2021 07:49:34 +0800
+Message-ID: <1634082575-112891-2-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1634082575-112891-1-git-send-email-wangmy@fujitsu.com>
+References: <1634082575-112891-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 12 Oct 2021 21:48:33 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 12 Oct 2021 23:50:12 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93259
+ https://lists.openembedded.org/g/openembedded-devel/message/93261
 
-Use the latest commit on master branch which has lua 5.4 support as
-well.
+Upgrade urgency: SECURITY, contains fixes to security issues.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Security Fixes:
+
+(CVE-2021-41099) Integer to heap buffer overflow handling certain string
+commands and network payloads, when proto-max-bulk-len is manually configured
+to a non-default, very large value [reported by yiyuaner].
+(CVE-2021-32762) Integer to heap buffer overflow issue in redis-cli and
+redis-sentinel parsing large multi-bulk replies on some older and less common
+platforms [reported by Microsoft Vulnerability Research].
+(CVE-2021-32687) Integer to heap buffer overflow with intsets, when
+set-max-intset-entries is manually configured to a non-default, very large
+value [reported by Pawel Wieczorkiewicz, AWS].
+(CVE-2021-32675) Denial Of Service when processing RESP request payloads with
+a large number of elements on many connections.
+(CVE-2021-32672) Random heap reading issue with Lua Debugger [reported by
+Meir Shpilraien].
+(CVE-2021-32628) Integer to heap buffer overflow handling ziplist-encoded
+data types, when configuring a large, non-default value for
+hash-max-ziplist-entries, hash-max-ziplist-value, zset-max-ziplist-entries
+or zset-max-ziplist-value [reported by sundb].
+(CVE-2021-32627) Integer to heap buffer overflow issue with streams, when
+configuring a non-default, large value for proto-max-bulk-len and
+client-query-buffer-limit [reported by sundb].
+(CVE-2021-32626) Specially crafted Lua scripts may result with Heap buffer
+overflow [reported by Meir Shpilraien].
+Bug fixes that involve behavior changes:
+
+GEO* STORE with empty source key deletes the destination key and return 0 (#9271)
+Previously it would have returned an empty array like the non-STORE variant.
+PUBSUB NUMPAT replies with number of patterns rather than number of subscriptions (#9209)
+This actually changed in 6.2.0 but was overlooked and omitted from the release notes.
+Bug fixes that are only applicable to previous releases of Redis 6.2:
+
+Fix CLIENT PAUSE, used an old timeout from previous PAUSE (#9477)
+Fix CLIENT PAUSE in a replica would mess the replication offset (#9448)
+Add some missing error statistics in INFO errorstats (#9328)
+Other bug fixes:
+
+Fix incorrect reply of COMMAND command key positions for MIGRATE command (#9455)
+Fix appendfsync to always guarantee fsync before reply, on MacOS and FreeBSD (kqueue) (#9416)
+Fix the wrong mis-detection of sync_file_range system call, affecting performance (#9371)
+CLI tools:
+
+When redis-cli received ASK response, it didn't handle it (#8930)
+Improvements:
+
+Add latency monitor sample when key is deleted via lazy expire (#9317)
+Sanitize corrupt payload improvements (#9321, #9399)
+Delete empty keys when loading RDB file or handling a RESTORE command (#9297, #9349)
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-gnome/recipes-gnome/devilspie/devilspie2_0.43.bb | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+ .../recipes-extended/redis/{redis_6.2.5.bb => redis_6.2.6.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/redis/{redis_6.2.5.bb => redis_6.2.6.bb} (96%)
 
-diff --git a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.43.bb b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.43.bb
-index 69c23d562a..ce2f51fc68 100644
---- a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.43.bb
-+++ b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.43.bb
-@@ -6,13 +6,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=00aefaa50aad75c21367df66102d542c \
+diff --git a/meta-oe/recipes-extended/redis/redis_6.2.5.bb b/meta-oe/recipes-extended/redis/redis_6.2.6.bb
+similarity index 96%
+rename from meta-oe/recipes-extended/redis/redis_6.2.5.bb
+rename to meta-oe/recipes-extended/redis/redis_6.2.6.bb
+index 58d759b59d..87fade7e04 100644
+--- a/meta-oe/recipes-extended/redis/redis_6.2.5.bb
++++ b/meta-oe/recipes-extended/redis/redis_6.2.6.bb
+@@ -17,7 +17,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://GNU_SOURCE.patch \
+            file://0006-Define-correct-gregs-for-RISCV32.patch \
+            "
+-SRC_URI[sha256sum] = "4b9a75709a1b74b3785e20a6c158cab94cf52298aa381eea947a678a60d551ae"
++SRC_URI[sha256sum] = "5b2b8b7a50111ef395bf1c1d5be11e6e167ac018125055daa8b5c2317ae131ab"
  
- DEPENDS = "gtk+ glib-2.0 libwnck lua virtual/libx11"
- 
--SRC_URI = " \
--    http://download.savannah.gnu.org/releases/${BPN}/${BPN}_${PV}-src.tar.gz \
-+PV .= "+git${SRCPV}"
-+
-+SRCREV = "a3ee65b815a0247a0dbdaa39353444cef6f93499"
-+
-+SRC_URI = "git://github.com/dsalt/devilspie2;branch=master \
-     file://default.lua \
-     file://devilspie2.desktop \
- "
--SRC_URI[md5sum] = "26eed0b5b4af5c7e13c551eceaeab832"
--SRC_URI[sha256sum] = "ecffc17c62b41e196b72340192a90c4223329df041f135e74c0990860595f828"
-+
-+S = "${WORKDIR}/git"
- 
- inherit features_check pkgconfig gettext
+ inherit autotools-brokensep update-rc.d systemd useradd
  
 -- 
-2.33.0
+2.25.1
 
 
