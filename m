@@ -2,60 +2,60 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CEFCBC433FE
-	for <webhook@archiver.kernel.org>; Tue, 12 Oct 2021 21:48:31 +0000 (UTC)
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com
- [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.web10.634.1634075311161911699
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49158C433F5
+	for <webhook@archiver.kernel.org>; Tue, 12 Oct 2021 21:48:33 +0000 (UTC)
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com
+ [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web11.634.1634075312101312748
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Oct 2021 14:48:31 -0700
+ Tue, 12 Oct 2021 14:48:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=GiQlKje6;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id
- oa12-20020a17090b1bcc00b0019f715462a8so679921pjb.3
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=PGkfnWAK;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id f21so441253plb.3
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Oct 2021 14:48:31 -0700 (PDT)
+ Tue, 12 Oct 2021 14:48:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=jIXLxQiOY7q2HKdOnRjbXVqMQMsGzkzTQxHZj+8aeYw=;
-        b=GiQlKje6XKpYSbUlD1EW/OqUzA+6PBmS1LiNfG5sCrZnhNL5MFAoSWer7g0JJcvCo3
-         fNCcNQ3kLACveigFtbqiurdDX+a7y0P5TjYKtGknG+9Cj5c25Z0QkSaA6VSxyq+dUxz+
-         QBrpmODlXHiT24Jxrcf0KA69G0jDZr50MIZ+9ZGrIhECiBClJ1rDp1rbK3N6yavQ1dj5
-         Isbr/mpo0Evs77COFfP6n4H8P3X/1Nm+Jlvs/1LLageMFvmpKViuTL6/ABPISquUVyaQ
-         ZQCM3Vwv/xpHrH8wQut2QAUblnRDtkb7F9dssRP3T6iYpaE91KgpmxF6xTHdwaEpsZqL
-         BpmA==
+        bh=w0HMBmOp6Za/x93vkHCuNvzrQR+PsxmZNEf+RRPt1v8=;
+        b=PGkfnWAKeK4Ug24DcQEnFYZfCbHszl5ecCthtVwwigglrNIVl1BoGSipSuTF4mbH6D
+         5+vtVa5vD/A3DWW5CO/GR9B0XYh/81PquuZGnnS3cqHGGRtCuwjdXpgMFKU5nPMRPJbt
+         mFNRdaAThvx8YUTQwneqgalajaByZqvwC2ySJj+1nlXOGrDq95cM2qggVSWixmrjwi7G
+         oaQGrpg4HaLHfb5Wy7jLxfps5HXYXayiMp+paeUHst8uQnSw8pYvkESi/6ZCMbfz8slK
+         Vgsf7aRyQaUSBaa8Juik+S3O0NrVfZatfIEzXVrnLnzTHlK0/1zb9g+DC6eaod+hpDyw
+         5skQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=jIXLxQiOY7q2HKdOnRjbXVqMQMsGzkzTQxHZj+8aeYw=;
-        b=nzceF+TedDA3bms+JBOO7z2AhE5WEPeer2JbiIkbwxprvszJvVu3WgoYt/lOHq4Mvv
-         fsK5eLwdnaQ9Y/uUZAHOOKq1TddTZ5wbBT9OD3Bjk59iEidlidQvedc/72Ju4Fq20Df0
-         7Wn6JMNsT8RmtTLmMWTK7Jhbu9TFkz2yvqHB/05fh5JjTtmJDmCTfglL7oKhEjzgaJPg
-         at2yfhj5WgIXhZKo7VYo6PBN1KqeNpK4MWTTob4bsJeeBE28bUfGDlAGcLTZJGNBfaSM
-         gQinXgi6uybxMxhqRl6kzjMFmlmWqYqkU20pdFYNJzvxxpsexeVYJMrLTYznZZGpsXIA
-         T2lg==
-X-Gm-Message-State: AOAM5332uHbgYeIO66xwoDTwMSUsx/5Ny3U0pMpKBpnbowanz3/teKPh
-	WnKBhDYurefyjjek9e18xqkfnzVgthazlw==
+        bh=w0HMBmOp6Za/x93vkHCuNvzrQR+PsxmZNEf+RRPt1v8=;
+        b=hZkQ0oUeXnSHisHduF6uI5EHjUpIL+/NlqXcAB52vF3ezTeyHIsUpek2NWaTUlVLUf
+         2rCSEosP5zMY7arGFUXmkiM4GF6dN4YpVY569kuy0Pf8Tfrbf9ea9Px7UOh4cvUvOtk3
+         JfzlOAeFtv57k5/2dwedYg+yTq7RIFjNXiiE6DASx5jspp59cZSjz+ARE5OYjwD3ICz8
+         BNS7oCvRyG5i+ZDOgEG6vvNGx2a6Dz52AymlW4A+a81j7W5BCE1z65TNOWBncPRQ09cQ
+         wLxrCFepgE9KvGWBbDVx2ER3G9f2LYKEApsilrr5Mt0SQXl2ad1PxxHyEkfwDQgqNCEQ
+         5Tbg==
+X-Gm-Message-State: AOAM533hubhbtySyLpUkXL4NdXfAKqS1x+wYPanI47ebFDYsxhKH2xwX
+	voOo2OI+L5RSubdZvPPovRHDTD+atoxmfw==
 X-Google-Smtp-Source: 
- ABdhPJw7d6GFL5+oXSUIau+jJbclcpjwDCQURHFAoAkkP0oCerpvAQXEEp/ykQ9zDDAEOVWrVK/JmQ==
-X-Received: by 2002:a17:902:bcc6:b0:138:d3ca:c356 with SMTP id
- o6-20020a170902bcc600b00138d3cac356mr32314688pls.6.1634075310501;
-        Tue, 12 Oct 2021 14:48:30 -0700 (PDT)
+ ABdhPJwiEh+AGqQAE2olBQ8B0x+iD8kQUf05GvAax0uXQ/mvEiv/FzmX5uJYeQDA/+Kvsff6N2n2OQ==
+X-Received: by 2002:a17:90b:1c82:: with SMTP id
+ oo2mr9138552pjb.53.1634075311389;
+        Tue, 12 Oct 2021 14:48:31 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ba74])
         by smtp.gmail.com with ESMTPSA id
- e15sm11555948pfc.134.2021.10.12.14.48.29
+ e15sm11555948pfc.134.2021.10.12.14.48.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Tue, 12 Oct 2021 14:48:30 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/3] luaposix: Use lua 5.4
-Date: Tue, 12 Oct 2021 14:48:26 -0700
-Message-Id: <20211012214827.3477092-2-raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH 3/3] devilspie2: Switch to using github repo
+Date: Tue, 12 Oct 2021 14:48:27 -0700
+Message-Id: <20211012214827.3477092-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20211012214827.3477092-1-raj.khem@gmail.com>
 References: <20211012214827.3477092-1-raj.khem@gmail.com>
@@ -64,29 +64,42 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 12 Oct 2021 21:48:31 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 12 Oct 2021 21:48:33 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93258
+ https://lists.openembedded.org/g/openembedded-devel/message/93259
 
-OE-core has lua version 5.4
+Use the latest commit on master branch which has lua 5.4 support as
+well.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-gnome/recipes-gnome/devilspie/devilspie2_0.43.bb | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb b/meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb
-index 720e2eab8f..9a66d8fb28 100644
---- a/meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb
-+++ b/meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb
-@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/luaposix/luaposix.git;branch=release \
- "
- SRCREV = "8e4902ed81c922ed8f76a7ed85be1eaa3fd7e66d"
- S = "${WORKDIR}/git"
--LUA_VERSION = "5.3"
-+LUA_VERSION = "5.4"
+diff --git a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.43.bb b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.43.bb
+index 69c23d562a..ce2f51fc68 100644
+--- a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.43.bb
++++ b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.43.bb
+@@ -6,13 +6,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=00aefaa50aad75c21367df66102d542c \
  
- inherit autotools pkgconfig
+ DEPENDS = "gtk+ glib-2.0 libwnck lua virtual/libx11"
+ 
+-SRC_URI = " \
+-    http://download.savannah.gnu.org/releases/${BPN}/${BPN}_${PV}-src.tar.gz \
++PV .= "+git${SRCPV}"
++
++SRCREV = "a3ee65b815a0247a0dbdaa39353444cef6f93499"
++
++SRC_URI = "git://github.com/dsalt/devilspie2;branch=master \
+     file://default.lua \
+     file://devilspie2.desktop \
+ "
+-SRC_URI[md5sum] = "26eed0b5b4af5c7e13c551eceaeab832"
+-SRC_URI[sha256sum] = "ecffc17c62b41e196b72340192a90c4223329df041f135e74c0990860595f828"
++
++S = "${WORKDIR}/git"
+ 
+ inherit features_check pkgconfig gettext
  
 -- 
 2.33.0
