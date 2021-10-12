@@ -2,144 +2,117 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2EC96C433EF
-	for <webhook@archiver.kernel.org>; Tue, 12 Oct 2021 23:50:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 21622C433F5
+	for <webhook@archiver.kernel.org>; Tue, 12 Oct 2021 23:50:33 +0000 (UTC)
 Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com
- [85.158.142.2])
- by mx.groups.io with SMTP id smtpd.web12.1106.1634082610459711498
+ [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web12.1113.1634082631790017450
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Oct 2021 16:50:11 -0700
+ Tue, 12 Oct 2021 16:50:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=pUk9FnWx;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.2,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=j1gDUmJX;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1634082608; i=@fujitsu.com;
-	bh=Puc+boYWe0pijq7D7nLiiwvOANZxXRF91jFCl9gllF4=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=pUk9FnWxGCP4lYlCKBxpy3e9lat/JeCZl+EO9Vo6zgwvLFAYsVfScGX4K1w32i37O
-	 g2Cr+m+0sMdsssxNdJeq1Q1VFzossXh9e9pVLYpL8g2r1PjKSAMGfppeMyAoNinnJ9
-	 YwBqBxWkFedqmwcXXlB0IJj/tBrW/PLz7p/oiFUe5H4fdLODQ3g+AlK7wNW10O0HTr
-	 RfbKidWOrRzs7FbbUN6uULpPGZHv9rtQpjQw0fY3TidOUUE3OYp9yiMFJHyExxTRTN
-	 lOTXWcEgKJaF8lfl5WYBuVXnkaNQuUAMontnMdBpu8MfmZ9mPqhovvT4GsGinu/rLG
-	 ZIlm3E3M935ZA==
+	s=170520fj; t=1634082629; i=@fujitsu.com;
+	bh=0TvlWTZAk6kRc09aiMoRULzyhZsCh1YA0vIR31SXfLo=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=j1gDUmJXcMx9dOlDfFY8wCenkq6PXUlF3m723QOGR7TvdNuNu7G6qfym+rSkVBX33
+	 bnnxJt1UkjsH4Y7dhm+TOLwco071+CfujGRIxZY2Z1K0E7sHlA7SoY6bruDm0s4p3T
+	 Tjyj4aU81BwL+zbDbrQNdJbC/GpzhlcIHT3uIk5Vt3rMZPdnlSRy0JDzwoCrt6zMz3
+	 rKHr5ZWu39x6eL3zd0T7//k1D/dyIQ8LGYCEJeWkZGvuYxACsp2D0NfMwSYfZP6/47
+	 0QDAluL1HS0GPtRDmWZRFt8ppcHgo+D6vVTNEUVwBTRLTRGtHZqwu975U7NWBycn2W
+	 Wj2nds/gfCyhw==
 Received: from [100.113.2.26] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-central-1.aws.symcld.net id FF/7F-08252-03F16616;
- Tue, 12 Oct 2021 23:50:08 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrPIsWRWlGSWpSXmKPExsViZ8ORqKsvn5Z
-  ocPuUhsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmrHz4XqmggcCFTO//GFtYFzP18XIySEk8IRR
-  4toU9y5GLiD7ApNE799jzBDOCUaJ10u+soNUsQmoSUy/dYMVxBYR0JdYOnsPM4jNLKAi8eJ3D
-  1iNsIC7xILZR8FsFgFViZ19s8FqeAWcJaZe/8YIYksIKEhMefgeKi4ocXLmExaIORISB1+8YI
-  aoUZSYfbmZBcKukJg1q40JwlaTuHpuE/MERv5ZSNpnIWlfwMi0itEyqSgzPaMkNzEzR9fQwED
-  X0NBYF0gaG+glVukm6qWW6ian5pUUJQJl9RLLi/WKK3OTc1L08lJLNjECQzKlkKFpB+O7Vx/0
-  DjFKcjApifLaLUxNFOJLyk+pzEgszogvKs1JLT7EKMPBoSTBe0U6LVFIsCg1PbUiLTMHGB8wa
-  QkOHiUR3ptyQGne4oLE3OLMdIjUKUZ7jpdrlyxi5mi6dxdITllwcDUzx532Q6uZhVjy8vNSpc
-  R5b8gCtQmAtGWU5sENhcXzJUZZKWFeRgYGBiGegtSi3MwSVPlXjOIcjErCvE4CQFN4MvNK4Ha
-  /AjqLCeiswKgUkLNKEhFSUg1MrUdP9Lx3us6fpnevw1b97va5H03ffZ5af0AoVEzx7O7spz//
-  lQh/NbW+YNn848iV/8VMfkF3I3WPHTJKXHF57w1T67w5Ta3rFdN3hsz+b+MetCzmtJlMwe+bm
-  8rmt92sv3jo6YRjgsyP4x8Y1i3gWx55Qi76T9q3R4bZH7cml/9KKNgxoej6xvNZd0q3+55+Ff
-  ei7EDO2Q3dn1TPpcx1cL/2eMWrtE1/0oUr19Vvyd1R0LmM+VSv/YXjK2wME2WsXL/PdGbxW5f
-  TtXr1+XtN55VXydZ3TDR6m8h5RH3+iWe7ZS9O/7Em61ZJVuZzIYWwK9GXFWMKSiIYD2/5d8Nl
-  fcu5Cr8r3+51xfQduZL4co4SS3FGoqEWc1FxIgCk7X1VYgMAAA==
+	by server-1.bemta.az-a.eu-central-1.aws.symcld.net id 28/53-29929-54F16616;
+ Tue, 12 Oct 2021 23:50:29 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrDIsWRWlGSWpSXmKPExsViZ8MxRddFPi3
+  RoG+zgcXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmtFzdBdzwQ7OiqdzDrE1MF7m6GLk4hASmM0k
+  MWHpeyYI5wSjxMon9xm7GDk52ATUJKbfusEKYosI6Essnb2HGcRmFlCRePG7hx3EFhZwltj+d
+  yuYzSKgKvHx8y8gm4ODFyi+8UkCSFhCQEFiysP3YK2cAi4S3x5OYQOxhYBKjl86xAJi8woISp
+  yc+YQFYryExMEXL5ghehUlZl9uZoGwKyRmzWpjmsDIPwtJyywkLQsYmVYxWiYVZaZnlOQmZub
+  oGhoY6BoaGusCSWMDvcQq3US91FLd5NS8kqJEoKxeYnmxXnFlbnJOil5easkmRmBAphQyNO1g
+  fPfqg94hRkkOJiVRXruFqYlCfEn5KZUZicUZ8UWlOanFhxhlODiUJHivSKclCgkWpaanVqRl5
+  gCjAyYtwcGjJMJ7Uw4ozVtckJhbnJkOkTrFGMvx7ufiRcwcb9YuAZJvwWTbvbtAsh1MzlxwcD
+  Uzxywweb/9EJB8ACKFWPLy81KlxHlvyAINFQAZmlGaB7cSlgguMcpKCfMyMjAwCPEUpBblZpa
+  gyr9iFOdgVBLmdRIAmsKTmVcCd9kroKOZgI4OjEoBObokESEl1cB0+cX3e3pcEu0bheTW+f+Q
+  aQp048osS32wZW9Ln/6NlzNMTC/nvXvxz1bMM95gh57D77C1uw2s2M6s+CTx/ppvh7h9U0Lu6
+  Ww+iePW7VpK1ycfN3k54WDGNvcLO7MfHjO/VHY218Ntxl9Xdb9H3C3FnwIO3p5gMttrQu6xFV
+  +EL3GurL11vE9X6cIn97L7efaHVvg+1n2W0rpR/prLhsK1J3WnRIlc7LGti87aJdQ4VerCpN8
+  sbUU8QjPyytaFXDz7rEB1h0n099BLViGp8qtrv85aGvwq9tecbsfMkIBH/5btdLywq0Rkyb8F
+  sUmmf33vJ2atWzbHJej4P+25vh9KQ1aGslXc/NMvse3o3u3WSizFGYmGWsxFxYkAeMiW2X8DA
+  AA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-4.tower-226.messagelabs.com!1634082607!128705!1
-X-Originating-IP: [62.60.8.97]
+X-Msg-Ref: server-20.tower-232.messagelabs.com!1634082628!2231910!1
+X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 6524 invoked from network); 12 Oct 2021 23:50:07 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-4.tower-226.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 12 Oct 2021 23:50:07 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 1444E10025E
+Received: (qmail 10420 invoked from network); 12 Oct 2021 23:50:28 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-20.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 12 Oct 2021 23:50:28 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 19CNoKQv023072
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Oct 2021 00:50:07 +0100 (BST)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 012B5100248
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Oct 2021 00:50:07 +0100 (BST)
+ Wed, 13 Oct 2021 00:50:28 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Wed, 13 Oct 2021 00:49:45 +0100
+ (TLS) id 15.0.1497.23; Wed, 13 Oct 2021 00:50:18 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] openvpn: upgrade 2.5.3 -> 2.5.4
-Date: Wed, 13 Oct 2021 07:49:33 +0800
-Message-ID: <1634082575-112891-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] span-lite: upgrade 0.10.1 -> 0.10.3
+Date: Wed, 13 Oct 2021 07:49:35 +0800
+Message-ID: <1634082575-112891-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1634082575-112891-1-git-send-email-wangmy@fujitsu.com>
+References: <1634082575-112891-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
 X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 12 Oct 2021 23:50:15 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 12 Oct 2021 23:50:33 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93260
+ https://lists.openembedded.org/g/openembedded-devel/message/93262
 
-2021.10.04 -- Version 2.5.4
+Fixes:
 
-Antonio Quartulli (3):
-      route.c: pass the right parameter to IN6_IS_ADDR_UNSPECIFIED
-      configure: search also for rst2{man, html}.py
-      networking: add networking API net_addr_ll_set() and use it on Linux
-
-Arne Schwabe (1):
-      Move examples into openvpn-examples(5) man page
-
-David Korczynski (1):
-      Fix argv leaks in add_route() and add_route_ipv6()
-
-David Sommerseth (2):
-      doc: Use generic rules for man/html generation
-      man: Clarify IV_HWADDR
-
-Gert Doering (1):
-      Add error reporting to get_console_input_win32().
-
-Lev Stipakov (3):
-      Fix console prompts with redirected log
-      Add building man page on Windows
-      GitHub Actions: remove Ubuntu 16.04 environment
-
-Max Fillinger (1):
-      Update Fox e-mail address in copyright notices
-
-Selva Nair (1):
-      Minor doc correction: tls-crypt-v2 key generation
+Properly constrain constructor from iterators
+(https://github.com/martinmoene/span-lite/issues/69)
+Add [noreturn] to throw_out_of_range()
+(https://github.com/martinmoene/span-lite/issues/73)
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../openvpn/{openvpn_2.5.3.bb => openvpn_2.5.4.bb}             | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-networking/recipes-support/openvpn/{openvpn_2.5.3.bb => openvpn_2.5.4.bb} (95%)
+ .../span-lite/{span-lite_0.10.1.bb => span-lite_0.10.3.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/span-lite/{span-lite_0.10.1.bb => span-lite_0.10.3.bb} (86%)
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.5.3.bb b/meta-networking/recipes-support/openvpn/openvpn_2.5.4.bb
-similarity index 95%
-rename from meta-networking/recipes-support/openvpn/openvpn_2.5.3.bb
-rename to meta-networking/recipes-support/openvpn/openvpn_2.5.4.bb
-index a70e9708de..6b588a5f50 100644
---- a/meta-networking/recipes-support/openvpn/openvpn_2.5.3.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.5.4.bb
-@@ -14,8 +14,7 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
+diff --git a/meta-oe/recipes-support/span-lite/span-lite_0.10.1.bb b/meta-oe/recipes-support/span-lite/span-lite_0.10.3.bb
+similarity index 86%
+rename from meta-oe/recipes-support/span-lite/span-lite_0.10.1.bb
+rename to meta-oe/recipes-support/span-lite/span-lite_0.10.3.bb
+index 15ba099826..0079cf7298 100644
+--- a/meta-oe/recipes-support/span-lite/span-lite_0.10.1.bb
++++ b/meta-oe/recipes-support/span-lite/span-lite_0.10.3.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSL-1.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
  
- UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
+ SRC_URI += "git://github.com/martinmoene/span-lite"
+-SRCREV = "da49b231a25600b4431e00b564a6a20be95c1108"
++SRCREV = "cbb9c3c5162a0d7018c7b3e053153a04d4fbbbb9"
  
--SRC_URI[md5sum] = "08895fd1142f25fdd94a98315632e1bf"
--SRC_URI[sha256sum] = "75f0044df449430555ca7b995a2b77ab24f2946fdc3668301b8edc23986a5f7e"
-+SRC_URI[sha256sum] = "f80f3c3df1b94a8892ae547df84f152583250684a24bd022ccc98ef56fa93d97"
+ S = "${WORKDIR}/git"
  
- # CVE-2020-7224 and CVE-2020-27569 are for Aviatrix OpenVPN client, not for openvpn.
- CVE_CHECK_WHITELIST += "CVE-2020-7224 CVE-2020-27569"
 -- 
 2.25.1
 
