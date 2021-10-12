@@ -1,86 +1,94 @@
-Return-Path: <alex.kanavin@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 76371C433F5
-	for <webhook@archiver.kernel.org>; Mon, 11 Oct 2021 22:02:49 +0000 (UTC)
-Received: from mail-vk1-f171.google.com (mail-vk1-f171.google.com
- [209.85.221.171])
- by mx.groups.io with SMTP id smtpd.web11.5376.1633989768256836086
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE790C433EF
+	for <webhook@archiver.kernel.org>; Tue, 12 Oct 2021 00:03:18 +0000 (UTC)
+Received: from mail-qv1-f47.google.com (mail-qv1-f47.google.com
+ [209.85.219.47])
+ by mx.groups.io with SMTP id smtpd.web10.6855.1633996997495456796
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Oct 2021 15:02:48 -0700
+ Mon, 11 Oct 2021 17:03:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=PuSOWIlB;
- spf=pass (domain: gmail.com, ip: 209.85.221.171,
- mailfrom: alex.kanavin@gmail.com)
-Received: by mail-vk1-f171.google.com with SMTP id m199so8104932vka.6
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Sr8509og;
+ spf=pass (domain: gmail.com, ip: 209.85.219.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f47.google.com with SMTP id v10so3034668qvb.10
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Oct 2021 15:02:48 -0700 (PDT)
+ Mon, 11 Oct 2021 17:03:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=ClEof9MoT4hqCUl3V61UjNZ4KCmHTTVEeJgqNrIUTiI=;
-        b=PuSOWIlBSJ3A0ggdAjYc7LFrMZiUiQY5T6uuNc+LuUKANCjLShCFt6ymXzgUhewX0t
-         qP6QsgCKZGvPxZ3Yy9Onjl/H33K2MJbpv0WjhsGHiZ5J0zuWH3GEFyAPEQrPKerFaI83
-         ARC5hy6duPKsP+vMyx3fnAdZ2yywpXjcEltb7MZ7NmzQ+z789PIF0p6aleVZlHBfbo7s
-         D7bZu4phliMVZugKU4VxTdHPc2e0OVlJZOWoAaxCpg0wiQ9nrnuYCpn42Nv2t6J5ak94
-         l6xForoSqCr52DvMgzvJZXLCpTn4iIG9CmxVy8qdtIWERlNZf70bVTjH7w9bUXaCUTDX
-         tn7A==
+        bh=jHJz/gKQmCvhuQY9T+nr8HTAOUNddFB+M1cO+iscThg=;
+        b=Sr8509oghXEsstGxvIBrqaK4svunWISlWvGMi0yyzxAKVIQCpyZqn5k2e5SWt8e30P
+         pj95s69zHGOAPUutmJi12a2QoGg54+JVUntfqg7VlIKdrdeC+KPHlAQWaRSxDfySGCuh
+         7K7nxrU67f/GSyZY2knoJCaHtKhCWojorLpR63D0CITv/KB3tExbedtvgqzRIwim4B3i
+         S0wgLq765OtIvDbDhKugR4gwzIppF6+SPMY4MCs/bsR9j2yTTgWEQ2iwDp0CaSNoKQ52
+         47vJsLumrPrbdME6QQVGqQ39UGcoxrHRUhoRRUA672v76d8iKKS/KQ5IcbI9TK7lvC3F
+         OBQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=ClEof9MoT4hqCUl3V61UjNZ4KCmHTTVEeJgqNrIUTiI=;
-        b=JCgvKrc/65qwgEqaSrHmdl5mj5fL/Pc7jvwWnLIDAajOHsTrQOayI+7IG2LnMBwyMP
-         rDLHVr2dVeRd7oFSVnuo5hVFiTdSdrf9It/v+qdLxp/PKJhMloWun7erMUQZuZaIOQNr
-         WUs9Cfmy5tzK8jH6RBrni4zoTiWyFkrX95f8XLXBVG9dIHtmY4OawtTRIhhjGOy8jF3o
-         eHa3rKSNcGiAb7p5FxPCOGs7bKYYJoeKImX4NweWXg3J8aJbVS5RA+9oMMb2WfXhNKOK
-         rmuMUXc5l8xQu2E4XjadWV4d808eAq1MUEzyFoQaUI4fgJnMU2qT1z/gtb38XWcIRJua
-         sFzQ==
-X-Gm-Message-State: AOAM532d543x7B4SaA0ncbqjDMO3pfoMN7s3RDMbnDiGJDdP0Y9wqCOy
-	OhC9bZzFt0u8ELDEyzrsqgdckegvVuTKD84m/IPaCU4HYQE=
+        bh=jHJz/gKQmCvhuQY9T+nr8HTAOUNddFB+M1cO+iscThg=;
+        b=tGx3gQ5wOr7bCF1eU6s2awHeFizGIRSbhkmvpuO6mp42sYw5ZKEZ31K1Iz1veeHoQQ
+         Z51Rr/m2b6M/k5aGPASMNa/Cj8QrPGan5qPS8nm41aR1+2azJM53GtCSYK3UJaPmg594
+         3yJGLj1OQ6taBgmZelKbdu3tYLVPiQRPVLyU08sNmqPZgPfGbqQV1mbv+TU38eIn7UH+
+         89wYbfbtT/XRqF1Csy7J1D+5LwQT3cpOcPhrK6qHW8mzgnYp4FUWBs1w735dEGqbS9rw
+         sTkIC9X5LANOtTNouQjOuvqFkCRd44ld25XeUPYcBVBepyu17pSOQYyXnvmPMtJpXKa2
+         pRCQ==
+X-Gm-Message-State: AOAM530tZ8MMma2bqEeByaFWi1u31Y7504H+LDUrYMyVtOLplwyBDQf6
+	sINYY7tXrewgxeigmOqFQTQyJ5ohl71lh1N0uus=
 X-Google-Smtp-Source: 
- ABdhPJwNs/6lRfZl7IUQiyJM2cTn95zVQ0pAAdtLVrpCqlYY88tH3ZzcF2GGFZjA0w+yQcqJ+HPm0YhNrx4gu5EoA6A=
-X-Received: by 2002:a05:6122:2203:: with SMTP id
- bb3mr3144066vkb.12.1633989766827;
- Mon, 11 Oct 2021 15:02:46 -0700 (PDT)
+ ABdhPJwBOoi15tz6b5+1/7lQPvA5Z/spqYHTAg2RiZ2LKdwGoKr9FxvRHzSU7K1xoeB3T/WcINFQmjkWHaUnUcQAtD8=
+X-Received: by 2002:ad4:5303:: with SMTP id y3mr18557753qvr.62.1633996996457;
+ Mon, 11 Oct 2021 17:03:16 -0700 (PDT)
 MIME-Version: 1.0
 References: <20211011184140.653609-1-alex@linutronix.de>
  <20211011184140.653609-8-alex@linutronix.de>
  <7c6e8695-6be2-c6d7-4f5f-beceda56cdd9@gmail.com>
- <16AD18E7A1A76060.20343@lists.openembedded.org>
-In-Reply-To: <16AD18E7A1A76060.20343@lists.openembedded.org>
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Tue, 12 Oct 2021 00:02:35 +0200
+ <CANNYZj9sFQQW7C+PVPBaXrDek-aEkpz-neKYHvw1+eEcQT2c-Q@mail.gmail.com>
+In-Reply-To: 
+ <CANNYZj9sFQQW7C+PVPBaXrDek-aEkpz-neKYHvw1+eEcQT2c-Q@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 11 Oct 2021 17:03:05 -0700
 Message-ID: 
- <CANNYZj9kSFhZe2ZxrVKoUBVJOMjCK_6PW9vsX7uKFnUfF-wOXw@mail.gmail.com>
+ <CAMKF1soK1hTruTp1rPS5ZAuXoKzPnJtrNOiN5x-gGpG=GL0z0w@mail.gmail.com>
 Subject: Re: [oe] [PATCH 08/24] netplan: do not use -Werror
 To: Alexander Kanavin <alex.kanavin@gmail.com>
-Cc: Khem Raj <raj.khem@gmail.com>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Alexander Kanavin <alex@linutronix.de>
-Content-Type: multipart/alternative; boundary="0000000000009e55cd05ce1ae319"
+Cc: Alexander Kanavin <alex@linutronix.de>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="00000000000089b9af05ce1c926f"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 11 Oct 2021 22:02:49 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 12 Oct 2021 00:03:18 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93244
+ https://lists.openembedded.org/g/openembedded-devel/message/93245
 
---0000000000009e55cd05ce1ae319
+--00000000000089b9af05ce1c926f
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-(should not :)
-
-On Tue, 12 Oct 2021 at 00:00, Alexander Kanavin via lists.openembedded.org
-<alex.kanavin=gmail.com@lists.openembedded.org> wrote:
+On Mon, Oct 11, 2021 at 3:00 PM Alexander Kanavin <alex.kanavin@gmail.com>
+wrote:
 
 > Sorry - it was due to the same openssl 3.x deprecation warnings turning
 > into errors. Generally I think we should want -Werror anywhere, it's
 > something only upstream should use, not distro integrators.
+> M
 >
-> Alex
+
+That=E2=80=99s fine if the project provides a convenient way to do so via c=
+onfig
+arguments or some such but if we need to maintain patches to achieve this
+then it=E2=80=99s something we have to be mindful of Since this will requir=
+e
+maintenance however for this patch please add this to commit msg as to why
+we are disabling it and then perhaps drop it when it=E2=80=99s fixed in fut=
+ure
+
+Alex
 >
 > On Mon, 11 Oct 2021 at 22:32, Khem Raj <raj.khem@gmail.com> wrote:
 >
@@ -89,23 +97,29 @@ On Tue, 12 Oct 2021 at 00:00, Alexander Kanavin via lists.openembedded.org
 >> On 10/11/21 11:41 AM, Alexander Kanavin wrote:
 >> > Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 >> > ---
->> >   .../0001-Makefile-do-not-use-Werror.patch     | 23 +++++++++++++++++++
+>> >   .../0001-Makefile-do-not-use-Werror.patch     | 23 +++++++++++++++++=
+++
 >> >   ...-t-fail-if-GLOB_BRACE-is-not-defined.patch |  7 ++++--
 >> >   .../netplan/netplan_0.103.bb                  |  4 +++-
 >> >   3 files changed, 31 insertions(+), 3 deletions(-)
 >> >   create mode 100644
->> meta-networking/recipes-connectivity/netplan/netplan/0001-Makefile-do-not-use-Werror.patch
+>> meta-networking/recipes-connectivity/netplan/netplan/0001-Makefile-do-no=
+t-use-Werror.patch
 >> >
 >> > diff --git
->> a/meta-networking/recipes-connectivity/netplan/netplan/0001-Makefile-do-not-use-Werror.patch
->> b/meta-networking/recipes-connectivity/netplan/netplan/0001-Makefile-do-not-use-Werror.patch
+>> a/meta-networking/recipes-connectivity/netplan/netplan/0001-Makefile-do-=
+not-use-Werror.patch
+>> b/meta-networking/recipes-connectivity/netplan/netplan/0001-Makefile-do-=
+not-use-Werror.patch
 >> > new file mode 100644
 >> > index 000000000..ddc44c3ca
 >> > --- /dev/null
 >> > +++
->> b/meta-networking/recipes-connectivity/netplan/netplan/0001-Makefile-do-not-use-Werror.patch
+>> b/meta-networking/recipes-connectivity/netplan/netplan/0001-Makefile-do-=
+not-use-Werror.patch
 >> > @@ -0,0 +1,23 @@
->> > +From a06c77557ed951249d5b344441ad6ec57410e63f Mon Sep 17 00:00:00 2001
+>> > +From a06c77557ed951249d5b344441ad6ec57410e63f Mon Sep 17 00:00:00 200=
+1
 >> > +From: Alexander Kanavin <alex@linutronix.de>
 >> > +Date: Sun, 3 Oct 2021 21:52:16 +0200
 >> > +Subject: [PATCH] Makefile: do not use -Werror
@@ -120,9 +134,9 @@ On Tue, 12 Oct 2021 at 00:00, Alexander Kanavin via lists.openembedded.org
 >> > +index 8645aee..50fc0da 100644
 >> > +--- a/Makefile
 >> > ++++ b/Makefile
->> > +@@ -7,7 +7,6 @@ BUILDFLAGS = \
->> > +     -D_XOPEN_SOURCE=500 \
->> > +     -DSBINDIR=\"$(SBINDIR)\" \
+>> > +@@ -7,7 +7,6 @@ BUILDFLAGS =3D \
+>> > +     -D_XOPEN_SOURCE=3D500 \
+>> > +     -DSBINDIR=3D\"$(SBINDIR)\" \
 >> > +     -Wall \
 >> > +-    -Werror \
 >>
@@ -131,19 +145,25 @@ On Tue, 12 Oct 2021 at 00:00, Alexander Kanavin via lists.openembedded.org
 >>
 >> > +     $(NULL)
 >> > +
->> > + SYSTEMD_GENERATOR_DIR=$(shell pkg-config
->> --variable=systemdsystemgeneratordir systemd)
+>> > + SYSTEMD_GENERATOR_DIR=3D$(shell pkg-config
+>> --variable=3Dsystemdsystemgeneratordir systemd)
 >> > diff --git
->> a/meta-networking/recipes-connectivity/netplan/netplan/0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch
->> b/meta-networking/recipes-connectivity/netplan/netplan/0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch
+>> a/meta-networking/recipes-connectivity/netplan/netplan/0001-don-t-fail-i=
+f-GLOB_BRACE-is-not-defined.patch
+>> b/meta-networking/recipes-connectivity/netplan/netplan/0001-don-t-fail-i=
+f-GLOB_BRACE-is-not-defined.patch
 >> > index 0fa6ba48a..c7d371dfa 100644
 >> > ---
->> a/meta-networking/recipes-connectivity/netplan/netplan/0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch
+>> a/meta-networking/recipes-connectivity/netplan/netplan/0001-don-t-fail-i=
+f-GLOB_BRACE-is-not-defined.patch
 >> > +++
->> b/meta-networking/recipes-connectivity/netplan/netplan/0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch
+>> b/meta-networking/recipes-connectivity/netplan/netplan/0001-don-t-fail-i=
+f-GLOB_BRACE-is-not-defined.patch
 >> > @@ -1,16 +1,19 @@
->> > -From ceb4111af317ecc54d97bb21878dcccbfdb2983e Mon Sep 17 00:00:00 2001
->> > +From e0df1f07d1707d5daf0358cc60b30f06121f7e60 Mon Sep 17 00:00:00 2001
+>> > -From ceb4111af317ecc54d97bb21878dcccbfdb2983e Mon Sep 17 00:00:00 200=
+1
+>> > +From e0df1f07d1707d5daf0358cc60b30f06121f7e60 Mon Sep 17 00:00:00 200=
+1
 >> >   From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 >> >   Date: Fri, 25 Dec 2020 11:41:43 +0900
 >> >   Subject: [PATCH] don't fail if GLOB_BRACE is not defined
@@ -169,56 +189,62 @@ On Tue, 12 Oct 2021 at 00:00, Alexander Kanavin via lists.openembedded.org
 >> > index 682a6b611..3527bceeb 100644
 >> > --- a/meta-networking/recipes-connectivity/netplan/netplan_0.103.bb
 >> > +++ b/meta-networking/recipes-connectivity/netplan/netplan_0.103.bb
->> > @@ -15,7 +15,9 @@ SRCREV = "51c872d856db80281ea810ebc02e05c09d5310fa"
->> >   PV = "0.103"
+>> > @@ -15,7 +15,9 @@ SRCREV =3D "51c872d856db80281ea810ebc02e05c09d5310fa=
+"
+>> >   PV =3D "0.103"
 >> >
->> >   SRC_URI = "git://github.com/CanonicalLtd/netplan.git;branch=main \
+>> >   SRC_URI =3D "git://github.com/CanonicalLtd/netplan.git;branch=3Dmain=
+ \
 >> > -           file://0001-parse-nm-fix-32bit-format-string.patch"
 >> > +           file://0001-parse-nm-fix-32bit-format-string.patch \
 >> > +           file://0001-Makefile-do-not-use-Werror.patch \
 >> > +           "
 >> >
->> >   SRC_URI:append:libc-musl = "
+>> >   SRC_URI:append:libc-musl =3D "
 >> file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch"
 >> >
 >> >
 >> >
 >> >
->> >
+>> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> > Links: You receive all messages sent to this group.
+>> > View/Reply Online (#93221):
+>> https://lists.openembedded.org/g/openembedded-devel/message/93221
+>> > Mute This Topic: https://lists.openembedded.org/mt/86244755/1997914
+>> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub
+>> [raj.khem@gmail.com]
+>> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >> >
 >>
 >
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#93243):
-> https://lists.openembedded.org/g/openembedded-devel/message/93243
-> Mute This Topic: https://lists.openembedded.org/mt/86244755/1686489
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> alex.kanavin@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
->
 
---0000000000009e55cd05ce1ae319
+--00000000000089b9af05ce1c926f
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">(should not :)<br></div><br><div class=3D"gmail_quote"><di=
-v dir=3D"ltr" class=3D"gmail_attr">On Tue, 12 Oct 2021 at 00:00, Alexander =
-Kanavin via <a href=3D"http://lists.openembedded.org">lists.openembedded.or=
-g</a> &lt;alex.kanavin=3D<a href=3D"mailto:gmail.com@lists.openembedded.org=
-">gmail.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote clas=
-s=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid r=
-gb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div>Sorry - it was due =
-to the same openssl 3.x deprecation warnings turning into errors. Generally=
- I think we should want -Werror anywhere, it&#39;s something only upstream =
-should use, not distro integrators.</div><div><br></div><div>Alex<br></div>=
-</div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">=
-On Mon, 11 Oct 2021 at 22:32, Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail=
-.com" target=3D"_blank">raj.khem@gmail.com</a>&gt; wrote:<br></div><blockqu=
-ote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px=
- solid rgb(204,204,204);padding-left:1ex"><br>
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Mon, Oct 11, 2021 at 3:00 PM Alexander Kanavin &lt;<a hr=
+ef=3D"mailto:alex.kanavin@gmail.com">alex.kanavin@gmail.com</a>&gt; wrote:<=
+br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;borde=
+r-left:1px #ccc solid;padding-left:1ex"><div dir=3D"ltr"><div>Sorry - it wa=
+s due to the same openssl 3.x deprecation warnings turning into errors. Gen=
+erally I think we should want -Werror anywhere, it&#39;s something only ups=
+tream should use, not distro integrators.</div><div dir=3D"auto">M</div></d=
+iv></blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">That=E2=80=99=
+s fine if the project provides a convenient way to do so via config argumen=
+ts or some such but if we need to maintain patches to achieve this then it=
+=E2=80=99s something we have to be mindful of Since this will require maint=
+enance however for this patch please add this to commit msg as to why we ar=
+e disabling it and then perhaps drop it when it=E2=80=99s fixed in future=
+=C2=A0</div><div dir=3D"auto"><br></div><blockquote class=3D"gmail_quote" s=
+tyle=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><div=
+ dir=3D"ltr"><div dir=3D"auto"></div><div>Alex<br></div></div><br><div clas=
+s=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, 11 Oct 2021=
+ at 22:32, Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_bl=
+ank">raj.khem@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_=
+quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,=
+204);padding-left:1ex"><br>
 <br>
 On 10/11/21 11:41 AM, Alexander Kanavin wrote:<br>
 &gt; Signed-off-by: Alexander Kanavin &lt;<a href=3D"mailto:alex@linutronix=
@@ -346,28 +372,25 @@ use-Werror.patch \<br>
 &gt; <br>
 &gt; <br>
 &gt; <br>
-&gt; <br>
+&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt; Links: You receive all messages sent to this group.<br>
+&gt; View/Reply Online (#93221): <a href=3D"https://lists.openembedded.org/=
+g/openembedded-devel/message/93221" rel=3D"noreferrer" target=3D"_blank">ht=
+tps://lists.openembedded.org/g/openembedded-devel/message/93221</a><br>
+&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/86244755=
+/1997914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.o=
+rg/mt/86244755/1997914</a><br>
+&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
+bedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.o=
+rg</a><br>
+&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
+devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedde=
+d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com"=
+ target=3D"_blank">raj.khem@gmail.com</a>]<br>
+&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 &gt; <br>
 </blockquote></div>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#93243): <a href=3D"https://lists.openembedded.org/g/ope=
-nembedded-devel/message/93243" rel=3D"noreferrer" target=3D"_blank">https:/=
-/lists.openembedded.org/g/openembedded-devel/message/93243</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/86244755/1686=
-489" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/86244755/1686489</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:alex.kanavin@gmail.com" =
-target=3D"_blank">alex.kanavin@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
+</blockquote></div></div>
 
---0000000000009e55cd05ce1ae319--
+--00000000000089b9af05ce1c926f--
 
