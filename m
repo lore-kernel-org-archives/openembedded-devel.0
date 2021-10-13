@@ -2,123 +2,95 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CBDCC433F5
-	for <webhook@archiver.kernel.org>; Wed, 13 Oct 2021 15:27:26 +0000 (UTC)
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
- [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.web10.9855.1634138845911633200
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 411B9C433FE
+	for <webhook@archiver.kernel.org>; Wed, 13 Oct 2021 15:27:27 +0000 (UTC)
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com
+ [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.web08.9767.1634138846474387500
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 13 Oct 2021 08:27:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=PxMB2RzV;
- spf=pass (domain: gmail.com, ip: 209.85.210.170,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Wdma24Hs;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id y7so2776139pfg.8
+Received: by mail-pl1-f171.google.com with SMTP id 21so2040097plo.13
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Oct 2021 08:27:25 -0700 (PDT)
+ Wed, 13 Oct 2021 08:27:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=SUzxthjrNUTOuWia2wHm4j7IatQjHBRbgnoKq14e874=;
-        b=PxMB2RzVo1+6maYlrZIJdvBbCwdFDPtOVMerHfoxhp4903jRsYR82XBlca8u3AyDz+
-         gLjJIp03NXEuaWSIAZrOnTjOLK014dkprcPMPxtrow6RD3YO9iA8XSlVg94zStqv8nHU
-         DJrI/klvejoP053p5nA4LlJb9Z3pODThcbmTNycEPxcq49Y9WxoAZyGbJF3MqGD9HSTH
-         wdTmTZ2jV8hmnNDbxUlcOeDxXkOfiq7j43y9q1dkXZpLtTjqtxczwqN5OXKjN14pPDh4
-         MyYgNW3D5CU1fE0JpHzy8POSnbmAXu8ATc/G0/kvbVq5oFPy5cFmSo7r3eQRHZ91BKkT
-         tQ6g==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=EFLNbE42JtVTqIEq2OezPj+LJ+H/zVm8+Qr7LVvSp2w=;
+        b=Wdma24HsyuS25MJKOjZO+mQbkeDOfuDSvykc+v76xUJ9Al9BHya3hE2oXFSoUJTbrn
+         aprNcNdWGJWeoeYVv5bBBByl6K/SUnfFgPn6vK/lUh2cel97kcAudh7h9OngafP783Kz
+         MSzJU5RTMOH4KGly82axfGCKQ1ya/NdQrXMPrw4KJFL/fzGwC+NY1ZdHggEGrQd5ginp
+         idWUbnlSSdC0zjGosXm8twIlNabyUAkmECLGtsqTTV2CuGPRpUzYiDfPBg1wMmy8Nv+A
+         RWusrNibIhkkampkGHeCIobT1nxCb265EbPRdx2yGH0Kz0KEm5gRLLCsJIGklgVYkMwg
+         EeWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=SUzxthjrNUTOuWia2wHm4j7IatQjHBRbgnoKq14e874=;
-        b=eU93tky+GgPxNXA0NnLfZd4UuWmig6qvELKihAxXKHDfHwA6/9dLu4L6nfg6n2JVTB
-         HGAZoVlUgS/MVZFrxfasoUtPlUplGI1d4PRt0PPvT5jNm49bh6hhbwefCfpXD9jx2EPq
-         gKDg7hxuV83kYCqlyqVfhsOD9XpL0OolKlSTBq60pL5ZX0kzcTf+h7eFBdK4WU/xt4c3
-         jjeLH+LaUXNf/ElC9zHdyzCp31vXaje4XV47IKYPcWKNxkMjKx53SYkbRd2dcx+b+rkn
-         ViVOgGgpwCX3aqnZ03pSnNWrADQYsUhZqBCtNGvriPw7JKFbxknYJgIr/ZZSe0cd36rs
-         daww==
-X-Gm-Message-State: AOAM531blD7FBb5C06ySbS10O+TEqBBlG45JhatGRBa/qRucPI6VD9Ls
-	2sPR1tdXFKlrvk3Jk4Cct1VYUbWnhLI3Ug==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=EFLNbE42JtVTqIEq2OezPj+LJ+H/zVm8+Qr7LVvSp2w=;
+        b=jJP+rusFSqSfqvKY+bioFWvUIFKfYaloD6cHnmpA4Jt9PRUNJpYX83rpX9J2qOxeSW
+         b0mP+AfMMNlNRSROMQ/RJgwekJEDfOknZJdu2Lq3vUkqava13TavWK4fIT5o8zDE1U0Y
+         pmH25Ks7TFxwgegg6f/MNohOQoGVokRSiSjd7bqW8XlBTQ0ueEX7Ul5mbk67Iy4w3+lF
+         gJfrpneikydlylE5Jp5Roi7FVpvQhvmskSxmsvmUWXCYAFmsxlI5v23mfdAT2sk9VdRk
+         IxQcb6YN2QE7qPCMn9BeO3KYaCqB/E02mTcvapxSFBPFA1baVFAaYCE1qvi5WTvR0t7A
+         YzgQ==
+X-Gm-Message-State: AOAM532pxvCr95Q+5NajbLsa30FdFtFVepZ3jBt48E7cmORCt4el/2mF
+	udYzgHauobLhKx/9ZXHtn8CVEqdFb0+WqA==
 X-Google-Smtp-Source: 
- ABdhPJxjmAsas0I95aTb9l7kD1lBgBkYUzAWzMlkguM/Dt1PKifwSiePdAUgymInkmaodTj0enNnSw==
-X-Received: by 2002:a63:2a07:: with SMTP id q7mr28071989pgq.221.1634138844915;
-        Wed, 13 Oct 2021 08:27:24 -0700 (PDT)
+ ABdhPJxeMaJWB89Y6pOakirhRGymcoNHdmZGQxhO6kOGeLnnw/GLTjAqiFBjSiOqACFdZxJT/GTQ1g==
+X-Received: by 2002:a17:90a:bb13:: with SMTP id
+ u19mr14170868pjr.42.1634138845706;
+        Wed, 13 Oct 2021 08:27:25 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ba74])
         by smtp.gmail.com with ESMTPSA id
- h4sm14830856pgn.6.2021.10.13.08.27.24
+ h4sm14830856pgn.6.2021.10.13.08.27.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 13 Oct 2021 08:27:24 -0700 (PDT)
+        Wed, 13 Oct 2021 08:27:25 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 1/2] python3-anyjson: Do not enable 2to3
-Date: Wed, 13 Oct 2021 08:27:20 -0700
-Message-Id: <20211013152721.978756-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 2/2] python3-pybluez: Do not set 2to3
+Date: Wed, 13 Oct 2021 08:27:21 -0700
+Message-Id: <20211013152721.978756-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.33.0
+In-Reply-To: <20211013152721.978756-1-raj.khem@gmail.com>
+References: <20211013152721.978756-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 Oct 2021 15:27:26 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 Oct 2021 15:27:27 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93280
+ https://lists.openembedded.org/g/openembedded-devel/message/93281
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-setup.py-Do-not-use-2to3.patch       | 29 +++++++++++++++++++
- .../python/python3-anyjson_0.3.3.bb           |  1 +
- 2 files changed, 30 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-anyjson/0001-setup.py-Do-not-use-2to3.patch
+ meta-python/recipes-devtools/python/python3-pybluez_0.23.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-anyjson/0001-setup.py-Do-not-use-2to3.patch b/meta-python/recipes-devtools/python/python3-anyjson/0001-setup.py-Do-not-use-2to3.patch
-new file mode 100644
-index 0000000000..2b9e6e52e8
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-anyjson/0001-setup.py-Do-not-use-2to3.patch
-@@ -0,0 +1,29 @@
-+From 4fb61d7c621599b0db9c2c45f4243f07936c5953 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 13 Oct 2021 08:20:00 -0700
-+Subject: [PATCH] setup.py: Do not use 2to3
-+
-+This helps compiling with setuptools 0.58+
-+and it seems to compile fine with python3
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ setup.py | 2 --
-+ 1 file changed, 2 deletions(-)
-+
-+diff --git a/setup.py b/setup.py
-+index 9fe4902..f2098e1 100644
-+--- a/setup.py
-++++ b/setup.py
-+@@ -2,8 +2,6 @@ import os
-+ import sys
-+ 
-+ extra = {}
-+-if sys.version_info >= (3, 0):
-+-    extra.update(use_2to3=True)
-+ 
-+ try:
-+     from setuptools import setup, find_packages
-+-- 
-+2.33.0
-+
-diff --git a/meta-python/recipes-devtools/python/python3-anyjson_0.3.3.bb b/meta-python/recipes-devtools/python/python3-anyjson_0.3.3.bb
-index 07cc99860d..2b8abb8b80 100644
---- a/meta-python/recipes-devtools/python/python3-anyjson_0.3.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-anyjson_0.3.3.bb
-@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=989aa97e73c912a83a3c873fa11deb08"
- inherit pypi setuptools3 ptest
+diff --git a/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb b/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
+index e8d14416f8..cc659ea678 100644
+--- a/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
++++ b/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
+@@ -11,8 +11,13 @@ SRC_URI[md5sum] = "afbe8429bb82d2c46a3d0f5f4f898f9d"
+ SRC_URI[sha256sum] = "c8f04d2e78951eaa9de486b4d49381704e8943d0a6e6e58f55fcd7b8582e90de"
  
- SRC_URI += " \
-+	file://0001-setup.py-Do-not-use-2to3.patch \
- 	file://run-ptest \
- "
+ PYPI_PACKAGE = "PyBluez"
++
+ inherit pypi setuptools3
  
++do_configure:prepend() {
++   sed -i -e "/use_2to3=True,/d" ${S}/setup.py
++}
++
+ RDEPENDS:${PN} += "\
+     bluez5 \
+     ${PYTHON_PN}-fcntl \
 -- 
 2.33.0
 
