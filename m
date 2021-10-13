@@ -1,197 +1,129 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 486CEC433EF
-	for <webhook@archiver.kernel.org>; Wed, 13 Oct 2021 02:20:43 +0000 (UTC)
-Received: from mail-il1-f174.google.com (mail-il1-f174.google.com
- [209.85.166.174])
- by mx.groups.io with SMTP id smtpd.web09.2653.1634091641901881777
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AAEBC433EF
+	for <webhook@archiver.kernel.org>; Wed, 13 Oct 2021 04:56:11 +0000 (UTC)
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
+ [209.85.215.171])
+ by mx.groups.io with SMTP id smtpd.web12.3796.1634100970410983930
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Oct 2021 19:20:42 -0700
+ Tue, 12 Oct 2021 21:56:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=cGsiO2rb;
- spf=pass (domain: gmail.com, ip: 209.85.166.174,
- mailfrom: ticotimo@gmail.com)
-Received: by mail-il1-f174.google.com with SMTP id i11so1015462ila.12
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=JK73Ui+H;
+ spf=pass (domain: gmail.com, ip: 209.85.215.171,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f171.google.com with SMTP id f5so1112410pgc.12
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Oct 2021 19:20:41 -0700 (PDT)
+ Tue, 12 Oct 2021 21:56:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=RS5QMzIZhfEOZhNTsa2h9GCa3bs2jqdpaJz5Jt6cGO8=;
-        b=cGsiO2rb9GFHfWg56OvcIdN2iZdDFuN6CR4H/yQs6FkJcDAvgCCYKnephGNpSjZsJ6
-         J1jDph9sYTWHBVG5jp6eGbWwRUGtHeQkz1rUL8ZvxQuZRqs+XqvTRnUAO6GWbnO5e7EN
-         UG1cMiIMua6tm56aOgYCo/sOOVGc+vpT2OfnbLcny5NTDXPdX86RKSclguww+VZzeOYn
-         7gwgwUkMcxfC3Ha38fUU0NGlD6uv1GQLWt8axYsbZQPw2gT1iWP8PfW+Shic9QOjUKBU
-         UO4JZs9mdYlOzl7Xd+LS0JOF7SMJZQKbXCpMKlKzHBitkR/w0KOfke8F3bvBz6ZmKoWR
-         dSPA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=0g6iOBArTuKpH9hl4zxEFcJGDcKe40wVgXBoprCcZDY=;
+        b=JK73Ui+HwtbianRlXU0AhbIrCZ1pmuNtR0PGkFHihrjzM/xZdXnaS40G5O1jHrcHny
+         TV9IWurb3XKxbgv8pcGkBOf9AYLo3rTgTsMLbHypndSL0HarnSvaVzMfrp10C1zirgEJ
+         z6+0yu9uzZTEsOgEE1YUE0pXCdoIo/vcfaQ8RQ9BCuTiSEFrL5fEXKSD27D5Xsh7IhyJ
+         nkDsBvpzZHCSyXuUN8fvkvwef6UD2aaL+gaZH9ZGhzKsZCR8qVeD7UlTljyvIWLUd3+U
+         ZOaL27Da1Lgl8CZTUUUTduCdFaygdN8WU8BYXG4tyA1Zg+SEwf6EFHpHodb1cig4ynJE
+         waTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=RS5QMzIZhfEOZhNTsa2h9GCa3bs2jqdpaJz5Jt6cGO8=;
-        b=VpKqoyfE/JJz7FfpVRwd5FIoHnlUz7IrMHkkTmnjbTQTl/FD9bewUDDtG6PQGfS042
-         LL0uJ3XSdVaW7ylSebgGiZdQNbqK16pBYJ25H4tapzAAh4CvPhohx7kbQelGduJ2ZAkz
-         P0SgOdGNVZQzmCHPpnsax3byuOUEOwlJG+TpWwVtdOCQ8yqmLCeqm9TRAupSsfT66xqG
-         XkwV7PEwH+jtib1T5cuMsSi499XnMOJqDKrB8Q6KofZO1tT/QFW/rvfif9xiGTgDzefr
-         K+xAzfQjffK78HcPShaI2zwW+E32N8V/i6G5HYKjMpKuT4rRZH51lGFCqWjE0lX0gG7A
-         xEiA==
-X-Gm-Message-State: AOAM533UbFadKH2PXKK43ghYH72sLY3OYKZPw97Fyy9ByvpXAaicx76I
-	mMRKjIK1e/6EMkMTeVppry6Fx0t5y7H+ImgbAqc=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=0g6iOBArTuKpH9hl4zxEFcJGDcKe40wVgXBoprCcZDY=;
+        b=qKvRB5Vp63oTg4UOAIXE8vDfl85OKWZ28dAfQF8/uqZftdxVSjAIj67Cyx80uJMqMr
+         jcGpPPS3uqGzEsDhrtfQhF9f3PP18MCOyjdoUDh8O6MJT2wt+lektPjejdEW/QSVRNjE
+         01mbWZFqt/3W25ZHUeGrgiKm5hiTB/Y/ZH/Jjv4oZpup8XFdKu48iq4QB94S8H5dloM0
+         jCrXDo9ORJz7PFcdo8WvMk7kti1QFkLnFSdpufOgKYVH3extxIGgcuR6Kuh35/9kcjDm
+         UaltqzGWWBApD8IYAbNWAbQ0aGLzlQf6Io/mBLR04VwlVGe8Lo/bbx1p37cHAb58sjhz
+         APJA==
+X-Gm-Message-State: AOAM532+07VD6ruSzHJwmpJ63yQPUy6LhXDKFgZC1fAFY6NSs0jAk4O1
+	gWfIsmMkde9UXCirbYLG1jjl+SwkJSwM4Q==
 X-Google-Smtp-Source: 
- ABdhPJwA2EnBUMlwjeKflyo9jevqHt3ToVAO6u9KZD/IJj/Ab+LQnOBvE67YRlfXqPcnCKZ9mmxzqBc0aepLRYZ7SGo=
-X-Received: by 2002:a05:6e02:c2e:: with SMTP id
- q14mr27141112ilg.109.1634091641060;
- Tue, 12 Oct 2021 19:20:41 -0700 (PDT)
+ ABdhPJyMh3/AvhH8lblGcCkqDplMmIRWDO91fW0bbRRs1u+cUNJZ6yV20o4dvvRReevzAT+hXOPhSg==
+X-Received: by 2002:a63:2a0e:: with SMTP id
+ q14mr26418617pgq.217.1634100969533;
+        Tue, 12 Oct 2021 21:56:09 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ba74])
+        by smtp.gmail.com with ESMTPSA id
+ x30sm8516257pfj.219.2021.10.12.21.56.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 12 Oct 2021 21:56:09 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 1/3] kronosnet: Correct path to poll.h
+Date: Tue, 12 Oct 2021 21:56:05 -0700
+Message-Id: <20211013045607.399687-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
-References: <20211012214827.3477092-1-raj.khem@gmail.com>
-In-Reply-To: <20211012214827.3477092-1-raj.khem@gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Tue, 12 Oct 2021 19:20:30 -0700
-Message-ID: 
- <CANx9H-AGt0Z+cR59_Gk2ZXLOSij17xctcbG1nKDGqgUF73B5Gg@mail.gmail.com>
-Subject: Re: [oe] [meta-gnome][PATCH 1/3] gjs: Inherit pkgconfig
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000cbbfaf05ce329bea"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 Oct 2021 02:20:43 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 Oct 2021 04:56:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93263
+ https://lists.openembedded.org/g/openembedded-devel/message/93264
 
---000000000000cbbfaf05ce329bea
-Content-Type: text/plain; charset="UTF-8"
-
-On Tue, Oct 12, 2021 at 2:48 PM Khem Raj <raj.khem@gmail.com> wrote:
-
-> Fixes
-> configure: error: Package requirements (glib-2.0 >= 2.58.0 gobject-2.0 >=
-> 2.58.0 gio-2.0 >= 2.58.0 gobject-introspection-1.0 libffi gthread-2.0
-> gio-2.0 >= 2.58.0 mozjs-60) were not met:
->
-> No package 'mozjs-60' found
->
-
-Thank you this. I caught it during a forthcoming upgrade to gjs that I have
-in the works.
-
-
-> Consider adjusting the PKG_CONFIG_PATH environment variable if you
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
->  meta-gnome/recipes-gnome/gjs/gjs_1.58.8.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.58.8.bb
-> b/meta-gnome/recipes-gnome/gjs/gjs_1.58.8.bb
-> index ccac08d060..096e277bb4 100644
-> --- a/meta-gnome/recipes-gnome/gjs/gjs_1.58.8.bb
-> +++ b/meta-gnome/recipes-gnome/gjs/gjs_1.58.8.bb
-> @@ -9,7 +9,7 @@ GNOMEBASEBUILDCLASS = "autotools"
->
->  DEPENDS = "mozjs gtk+3"
->
-> -inherit gnomebase gsettings gobject-introspection vala gettext
-> features_check upstream-version-is-even
-> +inherit gnomebase gsettings gobject-introspection vala gettext
-> features_check upstream-version-is-even pkgconfig
->
->  SRC_URI[archive.sha256sum] =
-> "7fb3eb746c17363d9ee47f4a5d0bb048f0075611763eb0da11d85e0e57aff381"
->  SRC_URI += "file://0001-Disable-tests-on-host.patch \
-> --
-> 2.33.0
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#93257):
-> https://lists.openembedded.org/g/openembedded-devel/message/93257
-> Mute This Topic: https://lists.openembedded.org/mt/86274322/924729
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> ticotimo@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
->
+ ...ests-Correct-include-path-for-poll.h.patch | 29 +++++++++++++++++++
+ .../kronosnet/kronosnet_1.22.bb               |  4 ++-
+ 2 files changed, 32 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-extended/kronosnet/kronosnet/0001-libknet-tests-Correct-include-path-for-poll.h.patch
 
---000000000000cbbfaf05ce329bea
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+diff --git a/meta-networking/recipes-extended/kronosnet/kronosnet/0001-libknet-tests-Correct-include-path-for-poll.h.patch b/meta-networking/recipes-extended/kronosnet/kronosnet/0001-libknet-tests-Correct-include-path-for-poll.h.patch
+new file mode 100644
+index 0000000000..0d261fd4ef
+--- /dev/null
++++ b/meta-networking/recipes-extended/kronosnet/kronosnet/0001-libknet-tests-Correct-include-path-for-poll.h.patch
+@@ -0,0 +1,29 @@
++From cae68083fda5d4ca832ff3cc8a533454df2efe23 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 12 Oct 2021 20:35:53 -0700
++Subject: [PATCH] libknet/tests: Correct include path for poll.h
++
++Fixes
++/usr/include/sys/poll.h:1:2: error: redirec
++ting incorrect #include <sys/poll.h> to <poll.h> [-Werror,-W#warnings]
++| #warning redirecting incorrect #include <sys/poll.h> to <poll.h>
++
++Upstream-Status: Submitted [https://github.com/kronosnet/kronosnet/pull/363]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ libknet/tests/test-common.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/libknet/tests/test-common.c b/libknet/tests/test-common.c
++index 86b76b0..8f8b6ca 100644
++--- a/libknet/tests/test-common.c
+++++ b/libknet/tests/test-common.c
++@@ -20,7 +20,7 @@
++ #include <pthread.h>
++ #include <dirent.h>
++ #include <sys/select.h>
++-#include <sys/poll.h>
+++#include <poll.h>
++ 
++ #include "libknet.h"
++ #include "test-common.h"
+diff --git a/meta-networking/recipes-extended/kronosnet/kronosnet_1.22.bb b/meta-networking/recipes-extended/kronosnet/kronosnet_1.22.bb
+index 3d49a2365a..28d740cb41 100644
+--- a/meta-networking/recipes-extended/kronosnet/kronosnet_1.22.bb
++++ b/meta-networking/recipes-extended/kronosnet/kronosnet_1.22.bb
+@@ -12,7 +12,9 @@ SECTION = "libs"
+ DEPENDS = "doxygen-native libqb-native libxml2-native bzip2 libqb libxml2 libnl lksctp-tools lz4 lzo openssl nss xz zlib zstd"
+ 
+ SRCREV = "0123ecebce0ad6aba3cdb320027192e15fd71e23"
+-SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1"
++SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1 \
++           file://0001-libknet-tests-Correct-include-path-for-poll.h.patch \
++           "
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/kronosnet/kronosnet/releases"
+ 
+-- 
+2.33.0
 
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Tue, Oct 12, 2021 at 2:48 PM Khem Raj &lt;<a href=3D"mai=
-lto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt; wrote:<br></div><blockqu=
-ote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc s=
-olid;padding-left:1ex">Fixes<br>
-configure: error: Package requirements (glib-2.0 &gt;=3D 2.58.0 gobject-2.0=
- &gt;=3D 2.58.0 gio-2.0 &gt;=3D 2.58.0 gobject-introspection-1.0 libffi gth=
-read-2.0 gio-2.0 &gt;=3D 2.58.0 mozjs-60) were not met:<br>
-<br>
-No package &#39;mozjs-60&#39; found<br>
-</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Thank you this. =
-I caught it during a forthcoming upgrade to gjs that I have in the works.</=
-div><div dir=3D"auto"><br></div><blockquote class=3D"gmail_quote" style=3D"=
-margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><br>
-Consider adjusting the PKG_CONFIG_PATH environment variable if you<br>
-<br>
-Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D=
-"_blank">raj.khem@gmail.com</a>&gt;</blockquote><blockquote class=3D"gmail_=
-quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1=
-ex" dir=3D"auto">---<br>
-=C2=A0meta-gnome/recipes-gnome/gjs/<a href=3D"http://gjs_1.58.8.bb" rel=3D"=
-noreferrer" target=3D"_blank">gjs_1.58.8.bb</a> | 2 +-<br>
-=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-<br>
-diff --git a/meta-gnome/recipes-gnome/gjs/<a href=3D"http://gjs_1.58.8.bb" =
-rel=3D"noreferrer" target=3D"_blank">gjs_1.58.8.bb</a> b/meta-gnome/recipes=
--gnome/gjs/<a href=3D"http://gjs_1.58.8.bb" rel=3D"noreferrer" target=3D"_b=
-lank">gjs_1.58.8.bb</a><br>
-index ccac08d060..096e277bb4 100644<br>
---- a/meta-gnome/recipes-gnome/gjs/<a href=3D"http://gjs_1.58.8.bb" rel=3D"=
-noreferrer" target=3D"_blank">gjs_1.58.8.bb</a><br>
-+++ b/meta-gnome/recipes-gnome/gjs/<a href=3D"http://gjs_1.58.8.bb" rel=3D"=
-noreferrer" target=3D"_blank">gjs_1.58.8.bb</a><br>
-@@ -9,7 +9,7 @@ GNOMEBASEBUILDCLASS =3D &quot;autotools&quot;<br>
-<br>
-=C2=A0DEPENDS =3D &quot;mozjs gtk+3&quot;<br>
-<br>
--inherit gnomebase gsettings gobject-introspection vala gettext features_ch=
-eck upstream-version-is-even<br>
-+inherit gnomebase gsettings gobject-introspection vala gettext features_ch=
-eck upstream-version-is-even pkgconfig<br>
-<br>
-=C2=A0SRC_URI[archive.sha256sum] =3D &quot;7fb3eb746c17363d9ee47f4a5d0bb048=
-f0075611763eb0da11d85e0e57aff381&quot;<br>
-=C2=A0SRC_URI +=3D &quot;file://0001-Disable-tests-on-host.patch \<br>
--- <br>
-2.33.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#93257): <a href=3D"https://lists.openembedded.org/g/ope=
-nembedded-devel/message/93257" rel=3D"noreferrer" target=3D"_blank">https:/=
-/lists.openembedded.org/g/openembedded-devel/message/93257</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/86274322/9247=
-29" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt/=
-86274322/924729</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
-et=3D"_blank">ticotimo@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---000000000000cbbfaf05ce329bea--
 
