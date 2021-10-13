@@ -1,97 +1,102 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <steve@sakoman.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 411B9C433FE
-	for <webhook@archiver.kernel.org>; Wed, 13 Oct 2021 15:27:27 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com
- [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web08.9767.1634138846474387500
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42A48C433F5
+	for <webhook@archiver.kernel.org>; Wed, 13 Oct 2021 15:45:09 +0000 (UTC)
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com
+ [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web09.9849.1634139907744500523
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Oct 2021 08:27:26 -0700
+ Wed, 13 Oct 2021 08:45:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Wdma24Hs;
- spf=pass (domain: gmail.com, ip: 209.85.214.171,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id 21so2040097plo.13
+ dkim=pass header.i=@sakoman-com.20210112.gappssmtp.com header.s=20210112
+ header.b=uNUP300j;
+ spf=softfail (domain: sakoman.com, ip: 209.85.215.181,
+ mailfrom: steve@sakoman.com)
+Received: by mail-pg1-f181.google.com with SMTP id s11so2690663pgr.11
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Oct 2021 08:27:26 -0700 (PDT)
+ Wed, 13 Oct 2021 08:45:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=EFLNbE42JtVTqIEq2OezPj+LJ+H/zVm8+Qr7LVvSp2w=;
-        b=Wdma24HsyuS25MJKOjZO+mQbkeDOfuDSvykc+v76xUJ9Al9BHya3hE2oXFSoUJTbrn
-         aprNcNdWGJWeoeYVv5bBBByl6K/SUnfFgPn6vK/lUh2cel97kcAudh7h9OngafP783Kz
-         MSzJU5RTMOH4KGly82axfGCKQ1ya/NdQrXMPrw4KJFL/fzGwC+NY1ZdHggEGrQd5ginp
-         idWUbnlSSdC0zjGosXm8twIlNabyUAkmECLGtsqTTV2CuGPRpUzYiDfPBg1wMmy8Nv+A
-         RWusrNibIhkkampkGHeCIobT1nxCb265EbPRdx2yGH0Kz0KEm5gRLLCsJIGklgVYkMwg
-         EeWA==
+        d=sakoman-com.20210112.gappssmtp.com; s=20210112;
+        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+         :content-transfer-encoding;
+        bh=63CnG3c1Lv4G19LxT0CyO0OSJrfhPPYdGkB7wa1DPMY=;
+        b=uNUP300jQ7vbhWBpdNsDtdRhYv0I3Ziqp1QVG4WMi3Q2GEg4c3XqfkyZLg3cgJEbqp
+         Zpm3jv2hp3tJp6mQX6Pd5AhAX+dGB76MlZojuMMaVUOujodUQehgjR5I9iNvHOYs/srO
+         V37pweuNQyQVMNA3z2/Ylc6p3ygGmxPcBaNrT5W3lfRh3uFp38/pKxWx5tT4ZUR1uQLB
+         h4narct4RpFBOE9fNaKnjkheJYIHo4jDVxPQ3ZHariOFLzKrauCrLFjA8v4dwIv5tLVT
+         VxlU+rQwR0PYcp/3VbEh4cTe1mGX3rTRSj/mudJqo/hX+H8thTWJ60VlhxuUL38XZeif
+         MpCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=EFLNbE42JtVTqIEq2OezPj+LJ+H/zVm8+Qr7LVvSp2w=;
-        b=jJP+rusFSqSfqvKY+bioFWvUIFKfYaloD6cHnmpA4Jt9PRUNJpYX83rpX9J2qOxeSW
-         b0mP+AfMMNlNRSROMQ/RJgwekJEDfOknZJdu2Lq3vUkqava13TavWK4fIT5o8zDE1U0Y
-         pmH25Ks7TFxwgegg6f/MNohOQoGVokRSiSjd7bqW8XlBTQ0ueEX7Ul5mbk67Iy4w3+lF
-         gJfrpneikydlylE5Jp5Roi7FVpvQhvmskSxmsvmUWXCYAFmsxlI5v23mfdAT2sk9VdRk
-         IxQcb6YN2QE7qPCMn9BeO3KYaCqB/E02mTcvapxSFBPFA1baVFAaYCE1qvi5WTvR0t7A
-         YzgQ==
-X-Gm-Message-State: AOAM532pxvCr95Q+5NajbLsa30FdFtFVepZ3jBt48E7cmORCt4el/2mF
-	udYzgHauobLhKx/9ZXHtn8CVEqdFb0+WqA==
+        bh=63CnG3c1Lv4G19LxT0CyO0OSJrfhPPYdGkB7wa1DPMY=;
+        b=uvf4d7RIJljlS2jAZlqGpqwigUQdHdd6QSp3jkchb/dE+KXY3ySKwoWJ8HKkvafEqc
+         CEGDBDBnygLlaY0dI3NLAquKJVeiD+b6HeRUd3FjKi2N4MLGmmU7MojR8byJPFxZWuJY
+         wECzIqDsMAKkMnMY1OxJphhtYmh69qrQeIJPWR8ujDToaN9jvybn1jaCq9pY5gVRdZ8y
+         tz68hoxrvuncj8D49rPFVbEg452qAMAy/KplbZAfDB2R+KMfhuDeYFH28R12gIaLHape
+         0Gpj5l8B6i4hJ4MSvmdrF5Dzv3dzOxP4bSXWPJXLbrkGqh1905e2vJ+dPmwLF32B9kN5
+         rUAw==
+X-Gm-Message-State: AOAM531YKKIGTd9Cz0hpnn0ueVPNOgJGxMt46z8prq8p2QecFWZLgnTd
+	Qor0XQ67Ypyn70WhgYW/FKnE80jyiYif6Fdgd6A=
 X-Google-Smtp-Source: 
- ABdhPJxeMaJWB89Y6pOakirhRGymcoNHdmZGQxhO6kOGeLnnw/GLTjAqiFBjSiOqACFdZxJT/GTQ1g==
-X-Received: by 2002:a17:90a:bb13:: with SMTP id
- u19mr14170868pjr.42.1634138845706;
-        Wed, 13 Oct 2021 08:27:25 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ba74])
+ ABdhPJzVAxDY5dxmWNRhE+UxDFaGLs9+HikYczObrVgNnm3CvD2HfNu6AF6QQfRK1/+VLbou6gG92Q==
+X-Received: by 2002:a62:1ac4:0:b0:44c:4c4e:1d3c with SMTP id
+ a187-20020a621ac4000000b0044c4c4e1d3cmr138534pfa.8.1634139906244;
+        Wed, 13 Oct 2021 08:45:06 -0700 (PDT)
+Received: from hexa.router0800d9.com (rrcs-66-91-142-162.west.biz.rr.com.
+ [66.91.142.162])
         by smtp.gmail.com with ESMTPSA id
- h4sm14830856pgn.6.2021.10.13.08.27.25
+ p9sm16542751pfh.162.2021.10.13.08.45.05
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 13 Oct 2021 08:27:25 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Wed, 13 Oct 2021 08:45:05 -0700 (PDT)
+From: Steve Sakoman <steve@sakoman.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 2/2] python3-pybluez: Do not set 2to3
-Date: Wed, 13 Oct 2021 08:27:21 -0700
-Message-Id: <20211013152721.978756-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20211013152721.978756-1-raj.khem@gmail.com>
-References: <20211013152721.978756-1-raj.khem@gmail.com>
+Subject: [oe][meta-oe][dunfell 1/2] gattlib: remove includedir from base
+ package
+Date: Wed, 13 Oct 2021 05:44:47 -1000
+Message-Id: 
+ <66fe30c9d07226906f578162b821cdd2d9d87337.1634139781.git.steve@sakoman.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1634139781.git.steve@sakoman.com>
+References: <cover.1634139781.git.steve@sakoman.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 Oct 2021 15:27:27 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 Oct 2021 15:45:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93281
+ https://lists.openembedded.org/g/openembedded-devel/message/93283
 
+From: Konrad Weihmann <kweihmann@outlook.com>
+
+as it's already packaged to ${PN}-dev, so the setting was
+without any effect anyway
+
+Signed-off-by: Konrad Weihmann <kweihmann@outlook.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 1d26b2656b87a95b72d674954283ac014da8793b)
+Signed-off-by: Steve Sakoman <steve@sakoman.com>
 ---
- meta-python/recipes-devtools/python/python3-pybluez_0.23.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-oe/recipes-connectivity/gattlib/gattlib_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb b/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
-index e8d14416f8..cc659ea678 100644
---- a/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
-+++ b/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
-@@ -11,8 +11,13 @@ SRC_URI[md5sum] = "afbe8429bb82d2c46a3d0f5f4f898f9d"
- SRC_URI[sha256sum] = "c8f04d2e78951eaa9de486b4d49381704e8943d0a6e6e58f55fcd7b8582e90de"
+diff --git a/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb b/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb
+index 6b4decce5..d79dbed87 100644
+--- a/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb
++++ b/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb
+@@ -28,5 +28,5 @@ EXTRA_OECMAKE += "-DGATTLIB_BUILD_DOCS=OFF"
  
- PYPI_PACKAGE = "PyBluez"
-+
- inherit pypi setuptools3
+ inherit pkgconfig cmake
  
-+do_configure:prepend() {
-+   sed -i -e "/use_2to3=True,/d" ${S}/setup.py
-+}
-+
- RDEPENDS:${PN} += "\
-     bluez5 \
-     ${PYTHON_PN}-fcntl \
+-FILES_${PN} = "${libdir}/* ${includedir}/*"
++FILES_${PN} = "${libdir}/*"
+ FILES_${PN}-dev = "${includedir}/*"
 -- 
-2.33.0
+2.25.1
 
 
