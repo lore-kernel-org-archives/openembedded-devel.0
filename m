@@ -1,95 +1,94 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2502FC433EF
-	for <webhook@archiver.kernel.org>; Thu, 14 Oct 2021 14:17:30 +0000 (UTC)
-Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com
- [209.85.167.45])
- by mx.groups.io with SMTP id smtpd.web11.10192.1634221048751777920
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83F47C433EF
+	for <webhook@archiver.kernel.org>; Thu, 14 Oct 2021 16:23:29 +0000 (UTC)
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com
+ [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.web08.422.1634228609193037130
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Oct 2021 07:17:29 -0700
+ Thu, 14 Oct 2021 09:23:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=R4VtRggm;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.167.45, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f45.google.com with SMTP id y15so27772176lfk.7
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=hnN3sRFd;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id r2so5993481pgl.10
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Oct 2021 07:17:28 -0700 (PDT)
+ Thu, 14 Oct 2021 09:23:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
+        d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=0Y340xZOT4Z7xp8+EJu5sazkBu3wvP1f+WDK+Pb/ehA=;
-        b=R4VtRggmEWB+O1zzVaqVgR4VC1mTr2LLXQTXf7MUiz8TZ7ECsJR40OXECCLXw+Q1Tn
-         Dt2ZPCIC3YX2tnt0VyCRPaqrDAH1nrXIdNr0PinFrXTxuwaJ0NBkevQqKtxwQxuCtrnl
-         lmhHC9JbM2YKNGT6cVNqSRLx+4LOHe2dryeo2CmDlanXQuXeYarxdelZaCp8nKBkhwd9
-         Jmex3kYzcpDaDZEOY9x7Z/qj4SZtcze3SNfFgv4rpM7cMxlXBZmUuHIrxXkwKtGVO5m8
-         FdOv5syBtL25GDZzOL1qH7f7khsZGsmhh0mxs32SS6i1Kpn9TlkBA+PjfwnIfVgvGRHR
-         LI9w==
+        bh=MvgnNwsir0RrxvFCW7FzwuHnNZhBwmvMsxKj7gfvwCk=;
+        b=hnN3sRFdGlp2inZb5/WYG32veT3W3cdUQJPgkuct9lfCykuaynKgc6o0BUmsAfW/1y
+         Cl+P1Fre2xwGC1C9QLPIMuhdBkxowrun8vJRTbn4Xpo880EpbPEYtdHPn5LEzvYgebyQ
+         N0xKtcVOg/uampcSd5m+N7/Wy+1xGB+ttDHOXg3+VMYYyaF5D52Yrh9f33YhRfLkani/
+         2tVdWpaKbc9uCIy20KV1PQWYRbkuGIq8WMDx9bCEDEBOe6kUNhtWfZserDWEfXs8xZ3t
+         gxIQEqzkFEzTILyRRwPfY8tmPWHQ2ov82/wWtUHQ1Jmw0Y0h+HNz4L1qWpjg7759QyL8
+         CXuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=0Y340xZOT4Z7xp8+EJu5sazkBu3wvP1f+WDK+Pb/ehA=;
-        b=VN7erjJxtaJZKf2F+qlf2vQP0evLExV1nolOCGd69GKVmE0Xrwa7H3sGI/R+WOExed
-         6KOsPwhtxpRStz75FZ+Up2FqMhVY0nVc+S3TQgd831kweX1VGp5S9Lrn/OaD5qrCkC0Y
-         yfPef9BEdYREQrhV4UxzvsAmrQoFbe0LATUztZxoovaagpfBFAfq2v0r5KuROhgMCWIZ
-         EvC0VIicbjeeTUBPaIpldOYQk9eTqrfCtzq7o+Rr5Z4Hed2q1r0jdSEIerUj+44oqieO
-         JLnPZlis5TB5lPBIRZ9qp91jbmU5YKDrQT00M9fkmq9VCPjZX4PknqdfOcGE1idS/QKH
-         3eTw==
-X-Gm-Message-State: AOAM530esCOZUjxp8i5McfoiZeE73W9Z/nqRiGUm64nZdwKX3l2JKL44
-	dFoCCMmhT8IeJ/ho5XehzrzjDfJ294mcQQ==
+        bh=MvgnNwsir0RrxvFCW7FzwuHnNZhBwmvMsxKj7gfvwCk=;
+        b=uCtfoB1fqgF9+3ggGe9Ly/9JJhiULUOU1fXeLtS1Gyx5exNe2aSXQAOsYipLD10cNY
+         SLXb6rm2zmJpiZAX7iM4+jPpTI6TpklYLBpLDmrH5hCtkGJyaO2FEngcRbllPcnJlmGL
+         Yri6vO9QaoEQ2GvtFs1tI/5ldSvSlPXQ0xm5UnGV0yigExQ652s0k+vt65ejAAiKhVNR
+         tNP3d3fFBLvrDuEQqHdp6+X4KBfxAF9wKtIvWGGw9HtqaeFkuRlaDk8qgaJ13y7iaHlF
+         J5TLWLrJGJg1EnzX3ARUaDKUW3BxHpw3HGF8JCnv5PDN3PaiVyhfAS3xJDR854ZjtTj7
+         7Fpw==
+X-Gm-Message-State: AOAM5333M3Xlvv6fUJcUXSzM2d4AQayuLIj5Noue9zuxRu6e80mGW72A
+	dcpyiuDbZsZa7FD9juV3ecVbvzkOb9dxCA==
 X-Google-Smtp-Source: 
- ABdhPJyr9VlAXe5kAibyQz/GXlRLAZBe3CASgWVhFNpdXonAmnRYLLMSvw2gmsYqa9K/9a8y1oPW9Q==
-X-Received: by 2002:ac2:4471:: with SMTP id y17mr5177780lfl.681.1634221046190;
-        Thu, 14 Oct 2021 07:17:26 -0700 (PDT)
-Received: from localhost.localdomain
- (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
+ ABdhPJxtqhCPplgaXCSPeDgJF43Vcmv6CvG3pEz7ChsVkaQuZsso7YA91D37yeN2CHYMj9Ot+MnnBA==
+X-Received: by 2002:a62:7a8b:0:b0:44d:47e2:99bf with SMTP id
+ v133-20020a627a8b000000b0044d47e299bfmr5916542pfc.64.1634228608321;
+        Thu, 14 Oct 2021 09:23:28 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ba74])
         by smtp.gmail.com with ESMTPSA id
- p23sm237059lfd.127.2021.10.14.07.17.25
+ x129sm3014848pfc.140.2021.10.14.09.23.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 14 Oct 2021 07:17:25 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+        Thu, 14 Oct 2021 09:23:27 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-oe][PATCH] nano: update to 5.9
-Date: Thu, 14 Oct 2021 16:17:24 +0200
-Message-Id: <20211014141724.3612811-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-xfce][PATCH] xfce.bbclass: Mark string as raw in a regexp
+Date: Thu, 14 Oct 2021 09:23:25 -0700
+Message-Id: <20211014162325.463369-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 14 Oct 2021 14:17:30 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 14 Oct 2021 16:23:29 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93298
+ https://lists.openembedded.org/g/openembedded-devel/message/93299
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Fixes python Deprecated behavior warning
+
+xfce.bbclass:3: DeprecationWarning: invalid escape sequence \.
+  m = re.match("^([0-9]+)\.([0-9]+)", v)
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/nano/{nano_5.8.bb => nano_5.9.bb} | 2 +-
+ meta-xfce/classes/xfce.bbclass | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/nano/{nano_5.8.bb => nano_5.9.bb} (88%)
 
-diff --git a/meta-oe/recipes-support/nano/nano_5.8.bb b/meta-oe/recipes-support/nano/nano_5.9.bb
-similarity index 88%
-rename from meta-oe/recipes-support/nano/nano_5.8.bb
-rename to meta-oe/recipes-support/nano/nano_5.9.bb
-index 146ad55c6..85c81fb79 100644
---- a/meta-oe/recipes-support/nano/nano_5.8.bb
-+++ b/meta-oe/recipes-support/nano/nano_5.9.bb
-@@ -13,7 +13,7 @@ RDEPENDS:${PN} = "ncurses-terminfo-base"
- PV_MAJOR = "${@d.getVar('PV').split('.')[0]}"
+diff --git a/meta-xfce/classes/xfce.bbclass b/meta-xfce/classes/xfce.bbclass
+index 7cd806701c..913202be59 100644
+--- a/meta-xfce/classes/xfce.bbclass
++++ b/meta-xfce/classes/xfce.bbclass
+@@ -1,6 +1,6 @@
+ def xfce_verdir(v):
+     import re
+-    m = re.match("^([0-9]+)\.([0-9]+)", v)
++    m = re.match(r"^([0-9]+)\.([0-9]+)", v)
+     return "%s.%s" % (m.group(1), m.group(2))
  
- SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
--SRC_URI[sha256sum] = "e43b63db2f78336e2aa123e8d015dbabc1720a15361714bfd4b1bb4e5e87768c"
-+SRC_URI[sha256sum] = "757db8cda4bb2873599e47783af463e3b547a627b0cabb30ea7bf71fb4c24937"
- 
- UPSTREAM_CHECK_URI = "https://ftp.gnu.org/gnu/nano"
- 
+ HOMEPAGE = "http://www.xfce.org"
 -- 
-2.25.1
+2.33.0
 
 
