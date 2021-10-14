@@ -1,112 +1,96 @@
-Return-Path: <zangrc.fnst@fujitsu.com>
+Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA67FC433EF
-	for <webhook@archiver.kernel.org>; Thu, 14 Oct 2021 08:20:33 +0000 (UTC)
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com
- [195.245.230.2])
- by mx.groups.io with SMTP id smtpd.web08.6527.1634199632154612741
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 13ABBC433EF
+	for <webhook@archiver.kernel.org>; Thu, 14 Oct 2021 12:49:04 +0000 (UTC)
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com
+ [209.85.167.48])
+ by mx.groups.io with SMTP id smtpd.web11.8988.1634215742651945708
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Oct 2021 01:20:32 -0700
+ Thu, 14 Oct 2021 05:49:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=TBu/w++2;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.2,
- mailfrom: zangrc.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1634199630; i=@fujitsu.com;
-	bh=Sqqu1JVpEl1dKWDvv+xvYAe8yfdZLKrgd/v2O1m9wIY=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=TBu/w++2SqH386G+PK+KixG+O7VfxVfZKir01Fr2mc/kDb4DI4+o58avHu+9sMw05
-	 JY5E7AWvCiKp+fAFLB00Q250qAF7s0KnCGDtrMcNmvMCs2w/HrgakiITXSmGZnvXt7
-	 MjQsiEAw51G6GrHym8V0QxPJbGsn5mw6OoteXEnbwKs05K09r+vI7B8gZEHByjc8E3
-	 PTT79scniYpamtQTaZPes5UPjRbEOvPekSJclCWjEy90P/2ByDTHPbnk3LX1+Y8SEm
-	 2fmZP+inJsD37KNgT9GhGOKa6oRYYjBh2s4aUQek3ig7dwUDdUtCKOeRNrUprpBWVa
-	 jAVaBgCVAj7WA==
-Received: from [100.112.194.154] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-west-1.aws.symcld.net id FA/22-16630-D48E7616;
- Thu, 14 Oct 2021 08:20:29 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrKIsWRWlGSWpSXmKPExsViZ8MxSdf3RXq
-  iwekj2hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bL18uZCv5yVezs/cLewLiCq4uRi0NI4Amj
-  xL1tX5ggnAtMEscXfWKDcE4wSkybchQow8nBJqAj0fGimwXEFhHQl1g6ew8ziC0sECGx4fBsN
-  hCbRUBVYuGbbewgNq+Am8TZE72MILaEgILElIfvmSHighInZz4Bm8MsICFx8MULZogaRYntO8
-  +wQNgVEq8PX4KKq0lcPbeJeQIj3ywk7bOQtC9gZFrFaJFUlJmeUZKbmJmja2hgoGtoaKRraGm
-  sa2RsopdYpZuol1qqW55aXKJrqJdYXqxXXJmbnJOil5dasokRGHopBQdf7WBc+eaD3iFGSQ4m
-  JVHefefSE4X4kvJTKjMSizPii0pzUosPMcpwcChJ8HI8B8oJFqWmp1akZeYA4wAmLcHBoyTC+
-  +YxUJq3uCAxtzgzHSJ1ilFRSpw3HKRPACSRUZoH1waLvUuMslLCvIwMDAxCPAWpRbmZJajyrx
-  jFORiVhHkFQKbwZOaVwE1/BbSYCWhxYFQKyOKSRISUVAOT4cQv8o9eZUwq+1go/uZw6OwlS22
-  mFSzrdjskpudnFrxqc7veXI2ceRtUnZeF3rf/ftW0Z+MMtdnrBS/cXT2xtpL/ktjhcpblW7e8
-  ObNweqXFG13Frx+W7ux5NEnvzcyGHIM7x8OebDl5cP5JbbeQU5e3Hj/6ZsGxgNiAy6+uBU2tr
-  l3xT8DyinvI8j2ry9R/7ljl9WDL/smqjpfP/Vh5fcqJ6a8TjXgEjzC7KdsU+SlsYt2QaCSzwi
-  hq2qZat9sSxydWiR9cfvC1efT7rwzOYp1/ak/NXnEmTs1uy+Mnufsc1otdX76PZ44dy1+R+R7
-  1gi/XfvkgHRD1Ptb4/mb7pj9vhabu2tMbvFqqdqpyr8JfJZbijERDLeai4kQA2dF2DTgDAAA=
-X-Env-Sender: zangrc.fnst@fujitsu.com
-X-Msg-Ref: server-7.tower-271.messagelabs.com!1634199629!1100!1
-X-Originating-IP: [62.60.8.146]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.4; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 18691 invoked from network); 14 Oct 2021 08:20:29 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-7.tower-271.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 14 Oct 2021 08:20:29 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 32650101B78
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Oct 2021 09:20:29 +0100 (BST)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 25B37100A3D
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Oct 2021 09:20:29 +0100 (BST)
-Received: from localhost.localdomain.localdomain (10.167.225.81) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Thu, 14 Oct 2021 09:20:07 +0100
-From: Zang Ruochen <zangrc.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-networking] [PATCH] networkmanager-openvpn: upgrade 1.8.14
- -> 1.8.16
-Date: Fri, 15 Oct 2021 04:20:00 +0800
-Message-ID: <1634242800-6136-1-git-send-email-zangrc.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
+ header.s=20210112 header.b=O2YaLM5B;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
+ ip: 209.85.167.48, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f48.google.com with SMTP id r19so25956163lfe.10
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 14 Oct 2021 05:49:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=oSWh2bIF7FacMStJxgewbPBceIkLeMC9uaKSmWdTwmI=;
+        b=O2YaLM5BNjhlkeV3c5AQsmaVmcu+IjpHVzPDVCe9h//TO9culW3Vbpn0i3wUheFOim
+         MOpC8Zr3vLcrzgypWyEC3VesrTUL5Xlp4j9pmSCh66IUejMMIUdl8A04OGwC29r3cJpq
+         eCTQsfj3uc3HHr+c7w0wBlJcXRUmUHkZrPcomSb44eyqFJY20tZqQKyN4QcCAvWnhajx
+         ivPd3qbcwE658zTu7vm9KVDAR+VSoNfk64PDAs/pC70qCmTJD3Yml4Ud0OgfMDJffG3P
+         juvCRTJh9H0LESuhA8qAxVpMDgQn/qz/QWFOXudO72euTpvqFA5dGUD5zXBx14j87H6j
+         CscA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=oSWh2bIF7FacMStJxgewbPBceIkLeMC9uaKSmWdTwmI=;
+        b=t+RsP0qYmExRzmOxd1TtcH3tz2YeENksXTD1Nn4h+UQbfRei0wDwzNomzadaf/08Y0
+         aJ84A8dodLnTWcl1lljHOCTMQNyqxpkhY1fz9YaL5+5FsMugu/wKZEcnNFpoSsKOcwBY
+         0npDZIAbxseg8oOccqWVDo2g/RcenBhkVyukg/QrHOZtQtbCyQ8thcFft/dCsdX6QHXJ
+         DFQXYgi1NwQzjE9c5Bf/UtottZclEIeVPT/AHDdo+8Xvm8UNJ1HNAJlhS7Mf45EKPxgu
+         D1GRPEZxxqe5AoijEXyMWsDuYgAbE0GVDKFxxtB8M6A3ogMA1oEkyz3PPWXL1hgVVDi1
+         +ZmA==
+X-Gm-Message-State: AOAM533y9c/wfwMSLOkfFsIBd4Xn6pcjulkcpkGf7yQiD3Kd3viX+Kuo
+	7BLNvYevYBxpL2/ZlMBY8qHyWGb60JU0UcZ/
+X-Google-Smtp-Source: 
+ ABdhPJzzZtrFcglZBymnDMl7Ce2pn+bwUvYS2EV7+xxxYbH3gvvCauaVvWkS3kQhtHc6/X79W4ZPmw==
+X-Received: by 2002:a05:6512:12d3:: with SMTP id
+ p19mr4898432lfg.328.1634215735672;
+        Thu, 14 Oct 2021 05:48:55 -0700 (PDT)
+Received: from localhost.localdomain
+ (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
+        by smtp.gmail.com with ESMTPSA id
+ z22sm255981ljh.73.2021.10.14.05.48.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 14 Oct 2021 05:48:55 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-python][PATCH] python3-jsmin: update to 3.0.0
+Date: Thu, 14 Oct 2021 14:48:52 +0200
+Message-Id: <20211014124852.1345370-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.81]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 14 Oct 2021 08:20:33 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 14 Oct 2021 12:49:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93290
+ https://lists.openembedded.org/g/openembedded-devel/message/93291
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@fujitsu.com>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- ...ager-openvpn_1.8.14.bb => networkmanager-openvpn_1.8.16.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/networkmanager/{networkmanager-openvpn_1.8.14.bb => networkmanager-openvpn_1.8.16.bb} (91%)
+ .../python/{python3-jsmin_2.2.2.bb => python3-jsmin_3.0.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-jsmin_2.2.2.bb => python3-jsmin_3.0.0.bb} (75%)
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.14.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.16.bb
-similarity index 91%
-rename from meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.14.bb
-rename to meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.16.bb
-index 9f3054a7c2..19cac13458 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.14.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.16.bb
-@@ -10,8 +10,7 @@ inherit gnomebase useradd gettext systemd
+diff --git a/meta-python/recipes-devtools/python/python3-jsmin_2.2.2.bb b/meta-python/recipes-devtools/python/python3-jsmin_3.0.0.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-jsmin_2.2.2.bb
+rename to meta-python/recipes-devtools/python/python3-jsmin_3.0.0.bb
+index 1a0578edd..7990bb014 100644
+--- a/meta-python/recipes-devtools/python/python3-jsmin_2.2.2.bb
++++ b/meta-python/recipes-devtools/python/python3-jsmin_3.0.0.bb
+@@ -5,8 +5,8 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3a3301ce2ad647e172f4a1016c67324d"
  
- SRC_URI = "${GNOME_MIRROR}/NetworkManager-openvpn/${@gnome_verdir("${PV}")}/NetworkManager-openvpn-${PV}.tar.xz"
+ inherit setuptools3 pypi ptest
+-SRC_URI[md5sum] = "00e7a3179a4591aab2ee707b3214e2fd"
+-SRC_URI[sha256sum] = "b6df99b2cd1c75d9d342e4335b535789b8da9107ec748212706ef7bbe5c2553b"
++
++SRC_URI[sha256sum] = "88fc1bd6033a47c5911dbcada7d279c7a8b7ad0841909590f6a742c20c4d2e08"
  
--SRC_URI[md5sum] = "bef67eca77bee68da703609b92f804a0"
--SRC_URI[sha256sum] = "e7419053fc3b5a7e25f1a7517c313ad4531b6ea280255524ebb85a70c76fdbeb"
-+SRC_URI[sha256sum] = "8920de09c7ae5f1f520c83f844455db8faec31427350268fe2dd95b860f91fb5"
- 
- S = "${WORKDIR}/NetworkManager-openvpn-${PV}"
+ BBCLASSEXTEND = "native nativesdk"
  
 -- 
 2.25.1
