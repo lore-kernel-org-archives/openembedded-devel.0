@@ -1,209 +1,100 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <scott.murray@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2053BC433F5
-	for <webhook@archiver.kernel.org>; Thu, 14 Oct 2021 19:14:02 +0000 (UTC)
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com
- [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.web10.1764.1634238840716692996
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 573FBC433FE
+	for <webhook@archiver.kernel.org>; Thu, 14 Oct 2021 19:18:24 +0000 (UTC)
+Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com
+ [209.85.222.172])
+ by mx.groups.io with SMTP id smtpd.web09.1742.1634239103070049476
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Oct 2021 12:14:00 -0700
+ Thu, 14 Oct 2021 12:18:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=kkVk4j68;
- spf=pass (domain: gmail.com, ip: 209.85.214.181,
- mailfrom: martin.jansa@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id v20so4818998plo.7
+ dkim=pass header.i=@konsulko.com header.s=google header.b=RJvzSlvx;
+ spf=pass (domain: konsulko.com, ip: 209.85.222.172,
+ mailfrom: scott.murray@konsulko.com)
+Received: by mail-qk1-f172.google.com with SMTP id ay35so6435952qkb.10
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Oct 2021 12:14:00 -0700 (PDT)
+ Thu, 14 Oct 2021 12:18:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=eNVGstCPGTH/+HA2YOJ6OpNlC22GjKsOP/zddNKk8GA=;
-        b=kkVk4j68bkkMPM30IIpOyqXxgFSaXRvUgWPlc1M+1hNDAC3f1Cr7vQltIRbxdP91OH
-         HKGVGvlwZbPJCUDaMPnA8EGw4sxo3UB+K7ltqgRZHSN6nZuo0IuxrnF4FQY3CfuBTGxO
-         A8WTzNrtUwhoL1Z/8uoEiJxIbc+NnbdKnvUZYpPXLKnD5C0jZ78gzEJcIf8+DSv2lKyy
-         VcHvg82HaBS8BS/ZtF2Fjv+vDEOhbnM3MxvW49cwm8t6tXA05ElEs/ydEOKZDLEFEBpA
-         hife0MfevgTgyZeOD2A/2pGb9Oj/2KiXvvMSpuFZXhFqDu7xs39QKB1JHP2mSaeieMDf
-         wUHg==
+        d=konsulko.com; s=google;
+        h=date:from:to:cc:subject:in-reply-to:message-id:references
+         :mime-version;
+        bh=y39B3BPgt5ZoJkcq0GtmEDNNWS6EnCQRLge8GM41WYs=;
+        b=RJvzSlvxbPTNdqPlRR7Ajx4B8ao60f9qm95aki5UGpdF2s7TvhmG4e3o7monqN9kvh
+         fNwnL0yFswkG8o8eUNJNSFYYrmtYWk44oqD6zicNc6yhNzLQnxhR0Pc7kadnmKYbHaL4
+         8gjT9SGkQlEL1tzGVSbbuG6+MJWcv/4ualcGo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=eNVGstCPGTH/+HA2YOJ6OpNlC22GjKsOP/zddNKk8GA=;
-        b=d5I1kvjJdbsmLGQnuvOEBL+6Fai8L3o012NYSLKPGLjggyoB/lKq/WBUYVaz41ptKF
-         MvtH1uWMdncGCPDqEBHy3gOa9Gtc+Zg3vmC4U0V9HCdJgXMLze9v5KI9jQFX0Z6AlPhu
-         4P9ORCe/YOSncHggeZiPAQHuXFGukLrTxg2tnmfpMbFrkMx8MvAILSo7RsYynysHg6WW
-         d/ID8zEy/gY0XluyvAMlg7cs1Mzg46bnM69uyMpWL+lmVGZxDLVMaLKTHf2Vwq1FZra4
-         HRnYwRUKAYBdnBRYS8pPT0X4UHonAMIoYxvLNsN2tINT13n6P9LLkt+ZrcU2YdCkIQCu
-         uhhQ==
-X-Gm-Message-State: AOAM530o2e+5roHBBO1+Sh7hjkgleViFEdwLXFeWK9i3TbgSCVq1NDFr
-	CVbkhgu1m9XQnceZ7YrpaNe/QAgi02glU+MyfXM=
+        h=x-gm-message-state:date:from:to:cc:subject:in-reply-to:message-id
+         :references:mime-version;
+        bh=y39B3BPgt5ZoJkcq0GtmEDNNWS6EnCQRLge8GM41WYs=;
+        b=dgD5HHC8Z/V7HtQdMuKfxI/hvvOa8Y7jqPfYN/WUYLZ5GX19EluDZEbAlalUIZeOGK
+         4hlEPGl/fCWmSBTxAvHsYVCJR3M91gkCtqQ/kxqkl96JEOesSMRwBXvoVsCFVsT5JQI2
+         ZWAbxZzH1EK+E5nn98KrNxAuY4L1eU7nbtruPPEAjTyQ0mU/jcnutOa9Zd4KSBhF9CdC
+         QrGvYvXrSZvUs4NkkvOrXXFBiJqIhZPJGXW20aVKGaIT9iUDyrI4NvTOYNF9twNks0IX
+         80IpuGqhQdSe9uZDV/IwR9obQA6mgPHFKQGkhGErt9x4ejy/MHyeP5iZSIZlZPNuoP2S
+         60tQ==
+X-Gm-Message-State: AOAM533HQ1pK9YCcrWgOTaxTP4aRK4QVhyAzqjfEd8d6k4Erj9JXw4Zy
+	pkEChDZX/x8SuoXjwvxIyow8+g==
 X-Google-Smtp-Source: 
- ABdhPJxB1K2DCJamE9J6Y4W+6YMYOKfM277zqQgeU42iDke3MwxErcs5mkxZcgKqWszvt2yJYUkulDPCFHMr6Rj571s=
-X-Received: by 2002:a17:90a:df0e:: with SMTP id
- gp14mr8149596pjb.35.1634238840034;
- Thu, 14 Oct 2021 12:14:00 -0700 (PDT)
+ ABdhPJzC3kiPfu3DQ5fvgCG2nx1BtRjEhYP0MAAKtSf/sVyICotxlQfhmiTNct5cz4mhtVOplmshdQ==
+X-Received: by 2002:a37:b981:: with SMTP id
+ j123mr6397275qkf.445.1634239102135;
+        Thu, 14 Oct 2021 12:18:22 -0700 (PDT)
+Received: from godzilla (192-0-174-222.cpe.teksavvy.com. [192.0.174.222])
+        by smtp.gmail.com with ESMTPSA id
+ l7sm1788380qth.81.2021.10.14.12.18.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 14 Oct 2021 12:18:21 -0700 (PDT)
+Date: Thu, 14 Oct 2021 15:18:21 -0400 (EDT)
+From: Scott Murray <scott.murray@konsulko.com>
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [meta-python][PATCH] python3-jsmin: update to 3.0.0
+In-Reply-To: <20211014124852.1345370-1-open.source@oleksandr-kravchuk.com>
+Message-ID: <5f5fff8b-8666-8327-5a3a-bae35b66598e@spiteful.org>
+References: <20211014124852.1345370-1-open.source@oleksandr-kravchuk.com>
 MIME-Version: 1.0
-References: <20211011184140.653609-1-alex@linutronix.de>
- <20211011184140.653609-14-alex@linutronix.de>
-In-Reply-To: <20211011184140.653609-14-alex@linutronix.de>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 14 Oct 2021 21:13:49 +0200
-Message-ID: 
- <CA+chaQdUbrVTb7tmGoDtj4xkJMKhzXN8Y5JpXDcLr8DPs2oZ1A@mail.gmail.com>
-Subject: Re: [oe] [PATCH 14/24] nodejs: use -fpermissive
-To: Alexander Kanavin <alex.kanavin@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Alexander Kanavin <alex@linutronix.de>
-Content-Type: multipart/alternative; boundary="00000000000089d70805ce54e117"
+Content-Type: text/plain; charset=US-ASCII
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 14 Oct 2021 19:14:02 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 14 Oct 2021 19:18:24 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93300
+ https://lists.openembedded.org/g/openembedded-devel/message/93301
 
---00000000000089d70805ce54e117
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Thu, 14 Oct 2021, Oleksandr Kravchuk wrote:
 
-This doesn't seem to cover nodejs-native build where it still fails with:
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 
-| ../src/node_crypto.cc:4585:37: error: invalid conversion from =E2=80=98co=
-nst
-dsa_st*=E2=80=99 to =E2=80=98DSA*=E2=80=99 {aka =E2=80=98dsa_st*=E2=80=99} =
-[-fpermissive]
-|  4585 |     DSA* dsa_key =3D EVP_PKEY_get0_DSA(pkey.get());
-|       |                    ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
-|       |                                     |
-|       |                                     const dsa_st*
-| ../src/node_crypto.cc:4587:34: warning: =E2=80=98const BIGNUM* DSA_get0_q=
-(const
-DSA*)=E2=80=99 is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
-|  4587 |     bits =3D BN_num_bits(DSA_get0_q(dsa_key));
-|       |                        ~~~~~~~~~~^~~~~~~~~
+This fixes a 2to3 related failure I saw doing an AGL test build with
+latest poky + meta-python, so looks good to me:
 
-On Mon, Oct 11, 2021 at 8:42 PM Alexander Kanavin <alex.kanavin@gmail.com>
-wrote:
+Tested-by: Scott Murray <scott.murray@konsulko.com>
 
-> This resolves openssl 3.x errors until upstream addresses them properly.
->
-> Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 > ---
->  meta-oe/recipes-devtools/nodejs/nodejs_14.17.1.bb | 3 +++
->  1 file changed, 3 insertions(+)
+>  .../python/{python3-jsmin_2.2.2.bb => python3-jsmin_3.0.0.bb} | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python3-jsmin_2.2.2.bb => python3-jsmin_3.0.0.bb} (75%)
 >
-> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_14.17.1.bb
-> b/meta-oe/recipes-devtools/nodejs/nodejs_14.17.1.bb
-> index 471501979..e44398721 100644
-> --- a/meta-oe/recipes-devtools/nodejs/nodejs_14.17.1.bb
-> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_14.17.1.bb
-> @@ -128,6 +128,9 @@ python do_create_v8_qemu_wrapper () {
->  do_create_v8_qemu_wrapper[dirs] =3D "${B}"
->  addtask create_v8_qemu_wrapper after do_configure before do_compile
+> diff --git a/meta-python/recipes-devtools/python/python3-jsmin_2.2.2.bb b/meta-python/recipes-devtools/python/python3-jsmin_3.0.0.bb
+> similarity index 75%
+> rename from meta-python/recipes-devtools/python/python3-jsmin_2.2.2.bb
+> rename to meta-python/recipes-devtools/python/python3-jsmin_3.0.0.bb
+> index 1a0578edd..7990bb014 100644
+> --- a/meta-python/recipes-devtools/python/python3-jsmin_2.2.2.bb
+> +++ b/meta-python/recipes-devtools/python/python3-jsmin_3.0.0.bb
+> @@ -5,8 +5,8 @@ LICENSE = "MIT"
+>  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3a3301ce2ad647e172f4a1016c67324d"
 >
-> +# Keep until openssl 3.x compatibility is fixed
-> +CXXFLAGS +=3D "-fpermissive"
+>  inherit setuptools3 pypi ptest
+> -SRC_URI[md5sum] = "00e7a3179a4591aab2ee707b3214e2fd"
+> -SRC_URI[sha256sum] = "b6df99b2cd1c75d9d342e4335b535789b8da9107ec748212706ef7bbe5c2553b"
 > +
->  LDFLAGS:append:x86 =3D " -latomic"
+> +SRC_URI[sha256sum] = "88fc1bd6033a47c5911dbcada7d279c7a8b7ad0841909590f6a742c20c4d2e08"
 >
->  # Node is way too cool to use proper autotools, so we install two
-> wrappers to forcefully inject proper arch cflags to workaround gypi
-> --
-> 2.20.1
+>  BBCLASSEXTEND = "native nativesdk"
 >
 >
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#93228):
-> https://lists.openembedded.org/g/openembedded-devel/message/93228
-> Mute This Topic: https://lists.openembedded.org/mt/86244764/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> Martin.Jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---00000000000089d70805ce54e117
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">This doesn&#39;t seem to cover nodejs-native build where i=
-t still fails with:<div><br></div><div>| ../src/node_crypto.cc:4585:37: err=
-or: invalid conversion from =E2=80=98const dsa_st*=E2=80=99 to =E2=80=98DSA=
-*=E2=80=99 {aka =E2=80=98dsa_st*=E2=80=99} [-fpermissive]<br>| =C2=A04585 |=
- =C2=A0 =C2=A0 DSA* dsa_key =3D EVP_PKEY_get0_DSA(pkey.get());<br>| =C2=A0 =
-=C2=A0 =C2=A0 | =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0~~~~~~~~~~~~~~~~~^~~~~~~~~~~~<br>| =C2=A0 =C2=A0 =C2=A0 | =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |<br>| =C2=A0 =C2=A0 =C2=A0 |=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 const dsa_st*<br>| ../=
-src/node_crypto.cc:4587:34: warning: =E2=80=98const BIGNUM* DSA_get0_q(cons=
-t DSA*)=E2=80=99 is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declaration=
-s]<br>| =C2=A04587 | =C2=A0 =C2=A0 bits =3D BN_num_bits(DSA_get0_q(dsa_key)=
-);<br>| =C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0~~~~~~~~~~^~~~~~~~~<br></div></div=
-><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mo=
-n, Oct 11, 2021 at 8:42 PM Alexander Kanavin &lt;<a href=3D"mailto:alex.kan=
-avin@gmail.com">alex.kanavin@gmail.com</a>&gt; wrote:<br></div><blockquote =
-class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
-id rgb(204,204,204);padding-left:1ex">This resolves openssl 3.x errors unti=
-l upstream addresses them properly.<br>
-<br>
-Signed-off-by: Alexander Kanavin &lt;<a href=3D"mailto:alex@linutronix.de" =
-target=3D"_blank">alex@linutronix.de</a>&gt;<br>
----<br>
-=C2=A0meta-oe/recipes-devtools/nodejs/<a href=3D"http://nodejs_14.17.1.bb" =
-rel=3D"noreferrer" target=3D"_blank">nodejs_14.17.1.bb</a> | 3 +++<br>
-=C2=A01 file changed, 3 insertions(+)<br>
-<br>
-diff --git a/meta-oe/recipes-devtools/nodejs/<a href=3D"http://nodejs_14.17=
-.1.bb" rel=3D"noreferrer" target=3D"_blank">nodejs_14.17.1.bb</a> b/meta-oe=
-/recipes-devtools/nodejs/<a href=3D"http://nodejs_14.17.1.bb" rel=3D"norefe=
-rrer" target=3D"_blank">nodejs_14.17.1.bb</a><br>
-index 471501979..e44398721 100644<br>
---- a/meta-oe/recipes-devtools/nodejs/<a href=3D"http://nodejs_14.17.1.bb" =
-rel=3D"noreferrer" target=3D"_blank">nodejs_14.17.1.bb</a><br>
-+++ b/meta-oe/recipes-devtools/nodejs/<a href=3D"http://nodejs_14.17.1.bb" =
-rel=3D"noreferrer" target=3D"_blank">nodejs_14.17.1.bb</a><br>
-@@ -128,6 +128,9 @@ python do_create_v8_qemu_wrapper () {<br>
-=C2=A0do_create_v8_qemu_wrapper[dirs] =3D &quot;${B}&quot;<br>
-=C2=A0addtask create_v8_qemu_wrapper after do_configure before do_compile<b=
-r>
-<br>
-+# Keep until openssl 3.x compatibility is fixed<br>
-+CXXFLAGS +=3D &quot;-fpermissive&quot;<br>
-+<br>
-=C2=A0LDFLAGS:append:x86 =3D &quot; -latomic&quot;<br>
-<br>
-=C2=A0# Node is way too cool to use proper autotools, so we install two wra=
-ppers to forcefully inject proper arch cflags to workaround gypi<br>
--- <br>
-2.20.1<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#93228): <a href=3D"https://lists.openembedded.org/g/ope=
-nembedded-devel/message/93228" rel=3D"noreferrer" target=3D"_blank">https:/=
-/lists.openembedded.org/g/openembedded-devel/message/93228</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/86244764/3617=
-156" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/86244764/3617156</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:Martin.Jansa@gmail.com" =
-target=3D"_blank">Martin.Jansa@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---00000000000089d70805ce54e117--
 
