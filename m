@@ -1,70 +1,102 @@
-Return-Path: <geoffhp@gmail.com>
+Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E2535C433F5
-	for <webhook@archiver.kernel.org>; Thu, 14 Oct 2021 21:32:43 +0000 (UTC)
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
- [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web11.1237.1634247133672751781
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 11ABAC433F5
+	for <webhook@archiver.kernel.org>; Thu, 14 Oct 2021 22:08:09 +0000 (UTC)
+Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com
+ [209.85.167.42])
+ by mx.groups.io with SMTP id smtpd.web10.1693.1634249263261001981
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Oct 2021 14:32:13 -0700
+ Thu, 14 Oct 2021 15:07:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=pwimNdgC;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: geoffhp@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id
- nn3-20020a17090b38c300b001a03bb6c4ebso5764394pjb.1
+ dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
+ header.s=20210112 header.b=cpPJn+i5;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
+ ip: 209.85.167.42, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f42.google.com with SMTP id g36so16300781lfv.3
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Oct 2021 14:32:13 -0700 (PDT)
+ Thu, 14 Oct 2021 15:07:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=VGLesYvyaW9T8Tajs2WjXZwQLnWmPn/hP8X8iF2YS4A=;
-        b=pwimNdgCVAdcqDbSyQko5fMmCBG1uZNY60MUOr7BuXzIR7ia9i7pAwAWuIxYL3sSol
-         ffoKwrYzuFuMnputhauxCVA0HaOrSLVOPct/EgUxvlxxqJQw7RtXDs0D0YgVLFfxTPoK
-         lLS7LCJyadGqz1SV5mCndGb+0b7kf4LzHXGiQgHGyl/J0JC9qLiVOCfWfjPzbJ0z4qLd
-         Ft3+ivGJ18nUGje/Px6vmjiRiArkJngL4AqSQBzVp+hkfFg/2NmQTwvpOOuwrIuljryi
-         I3U6gFzAPf1eM+fHgqn7poha+YtLkCn8jX8qJVWSoWy8BJ1VxmeFgGPxDwnJq1JgWLJd
-         cA4w==
+        d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=cjr/PHONTqIVPVGkHIS9A2eiAfDg84jw2WaREho44DI=;
+        b=cpPJn+i5ApzXN2oD08Qj3dTqEozZb7NKYKquN7vymgOM4frbO/mdogX1cpAFWApI4x
+         foliWcm0wdw0n8U5YXnFnVHxZixwRTIZrMgPIjpKYKFvk4Xf8/RQgw3En//Z12zVzSsy
+         y4GunRuoT78k1TiGhee0BFq8ySJiTADy99gdmvXfHHNUDo/D2k4qb+R9E4Ut8Gh5+oY+
+         4hKfGIYvGVLAY7Iw0hIh3d0/p4eISdh2OaM3KZ4ZMA0BxBa1RAyl9W4QQQRdnFPcPTOc
+         Qt+NKd3neXVE8gdlNdituI5g1Y0nA1HZzEBYRG7Y+Xu+HBVxz5gt5wvZwMMZ5G0NJEUo
+         +Lhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=VGLesYvyaW9T8Tajs2WjXZwQLnWmPn/hP8X8iF2YS4A=;
-        b=0To/zS6uLp/ulfI6OlCkP83TZ8Ii41lFiO9gzWP6boE6Dmt/qenPLR/wgzqWKh4iOm
-         YkUUGfDIg0CxGosAlHPeSwMs/UKxCsG00lZcQT6+6PvbGHG/3UY8ttYiU5LpgsGko5S/
-         +KiqN0iRI43IrrYV3yWoNClRleGdj4/Iyef/OOwsAX0oNjYRrjWAYpkrGDoDF2/xy2WJ
-         8/MGh4xdCGy11IWL997Q827yEkCxgV2dumM09c41mcdKFIid6X1fSwbZLL49ETj7k/0k
-         yRtciWDdNpucn48oj8rqJcL+hHrSpskZ6KhUkFRIA50h9JeIXpWY1EcwzmCOOx9r2/x6
-         X/1Q==
-X-Gm-Message-State: AOAM531jdWv6wxy5ysMMm+63R4q3uuFuZ1htQZh5R2wOyPMgVC1aRENC
-	9CtVBr6nRc/1C6PdULwOkGaZT4HnbuynmRk5ymOZZb7nUqQ=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=cjr/PHONTqIVPVGkHIS9A2eiAfDg84jw2WaREho44DI=;
+        b=fI3hk+h5fKghXpn0/OVxeaDpWksE/fPPV2DJCiWwNppLaTNm7nX1GEyS5Oz4iimqPW
+         orojT1ZV+Z8ldLY37rMaZLTgTa7+Oe/7Ge/oo/XsVzbPM8f+u7jLaa1j5uY3wwy529fv
+         aDqRdMFk9gyEaSQppacPTCRPjqxLLl4Uv0Kt01oCsmA9+E8cKI5JwAgzzAFo3mo2jAne
+         WtMepSdl5XDXCytj/untIxzCKGTh+P+xSf8rUUwZCVWxrcoYZYIkkTAmsePAzsUs3StM
+         SSRE4Bi4F1HLT67G677HT4CXo/4UCSHHFFPIxb3yFnmKsVRhSU7saUZPhxT+ak8BXFcu
+         M9sA==
+X-Gm-Message-State: AOAM53108ZTYKl2/DgQf216V3n3nhX3+JLsiEmMAJXGoWm4L2E01JDZk
+	uRSx4okJakzZD6dYoXDun+4AVRozNLOj/sva
 X-Google-Smtp-Source: 
- ABdhPJz9i6vmrh3gkeSxzsgdA6K5PUmOd7yVjqkRTMT4SZhB+hOh+4Rs1yUO2fqWiHZoA/sOwy/RKYohTvA0QkP7+iM=
-X-Received: by 2002:a17:90a:4e43:: with SMTP id
- t3mr23320134pjl.163.1634247132850;
- Thu, 14 Oct 2021 14:32:12 -0700 (PDT)
-MIME-Version: 1.0
-From: Geoff Parker <geoffhp@gmail.com>
-Date: Thu, 14 Oct 2021 14:32:02 -0700
-Message-ID: 
- <CAHNuFGLJZ_y2PfoWPBW-sQt+92KoeT74eC7geYzCUJoeQD4eLw@mail.gmail.com>
-Subject: [meta-java] Request to pull honister branch and override syntax
- commits from master-next to master branch
+ ABdhPJyo7R3u/h9Csu7FEaC5Nbz9bf6JiE7jJ7YIr3v3xaOOWRXiZuXFE40D/cJymsNz0pDCBcKQeQ==
+X-Received: by 2002:a2e:bc17:: with SMTP id b23mr8941768ljf.434.1634249261002;
+        Thu, 14 Oct 2021 15:07:41 -0700 (PDT)
+Received: from localhost.localdomain
+ (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
+        by smtp.gmail.com with ESMTPSA id d24sm372290ljc.2.2021.10.14.15.07.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 14 Oct 2021 15:07:40 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-oe][PATCH] thingsboard-gateway: update to 2.8
+Date: Fri, 15 Oct 2021 00:07:35 +0200
+Message-Id: <20211014220735.3679483-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 14 Oct 2021 21:32:43 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 14 Oct 2021 22:08:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93304
+ https://lists.openembedded.org/g/openembedded-devel/message/93305
 
-Request that these commits that have been in meta-next for a while get
-merged into master of meta-java  so that builds using meta-java can be
-built with master or honister core layers.
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ ...ingsboard-gateway_2.5.2.bb => thingsboard-gateway_2.8.bb} | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/{thingsboard-gateway_2.5.2.bb => thingsboard-gateway_2.8.bb} (93%)
 
-147677c layer.conf: Update to new honister release name
-a1eb2b9 all: manual fixes for new override syntax
-b71a986 all: run convert-overrides (0.9.3) script to convert to new
-override format
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_2.5.2.bb b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_2.8.bb
+similarity index 93%
+rename from meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_2.5.2.bb
+rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_2.8.bb
+index 3c89c377a..6ff98abe5 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_2.5.2.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_2.8.bb
+@@ -7,8 +7,7 @@ HOMEPAGE = "https://thingsboard.io/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
+ 
+-SRC_URI[md5sum] = "469c8b5cd1c16c20ef40f0a97a3a0fda"
+-SRC_URI[sha256sum] = "b328f4e315c3541ac80a4931974a34a81afe4d1f382f48e8604669a55816c0d7"
++SRC_URI[sha256sum] = "35a8aa0268e61b15d689439927756934a28757dc77ad5f03ee6a9119edc37199"
+ 
+ inherit pypi setuptools3
+ 
+@@ -65,4 +64,4 @@ do_install:append(){
+ 
+     install -d ${D}${systemd_unitdir}/system/
+     install -m 0644 ${WORKDIR}/thingsboard-gateway.service     ${D}${systemd_system_unitdir}/thingsboard-gateway.service
+-}
+\ No newline at end of file
++}
+-- 
+2.25.1
+
 
