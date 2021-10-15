@@ -1,113 +1,110 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 56EE9C433EF
-	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 12:59:46 +0000 (UTC)
-Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com
- [209.85.222.170])
- by mx.groups.io with SMTP id smtpd.web08.8912.1634302784836613925
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9FDF3C43219
+	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 13:31:36 +0000 (UTC)
+Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com
+ [209.85.167.50])
+ by mx.groups.io with SMTP id smtpd.web10.9358.1634304694951022854
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Oct 2021 05:59:45 -0700
+ Fri, 15 Oct 2021 06:31:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=CWiw+BHo;
- spf=pass (domain: gmail.com, ip: 209.85.222.170,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f170.google.com with SMTP id r15so8365433qkp.8
+ dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
+ header.s=20210112 header.b=zoh9c96W;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
+ ip: 209.85.167.50, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f50.google.com with SMTP id r19so40689050lfe.10
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Oct 2021 05:59:44 -0700 (PDT)
+ Fri, 15 Oct 2021 06:31:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=OzdUWeBLR1mGRGJApcHipq+LXYf9zVZqwQzaxSBMSCk=;
-        b=CWiw+BHocbyWJ64uKjfzna80G8O1edQBRBjxEMFxp3Cw62bDrW+ZRm99tCdxAaWmyH
-         lE/EsLNuBy5Bt+Rac+CqDv7sNtAExI9HFS/431B0u4mYJEI3Ff+H34hfIJ9wJSyBvtqW
-         zvQ+8SRwr7E+c+z082nB95APHpCyGLegnvuBS5YFivCiuzPxI3oxvKT+MNiOQ0EVZrNE
-         v78P0P0S98Up1rVT2SKUGJrrMhuPhAhslS4M6VXHrVNFJRSEq7mLIB7tNgAchSUiVwIL
-         pFDI8YiNNoyUrVaqxou9gKEfZHZ/oyg53usr99d0on1c6Ox8OvLpjXOb0ow9cO0knBHP
-         qxGw==
+        d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=52tRsh8irtcRlfIeB/PQNRHXRc2kJlEQzJyCyWbBuBY=;
+        b=zoh9c96W9+NhOH4ypjB8Y1LXnebbL4spnwL/7/cP6IV4OYBvf0nzb4cEmgRLKKUK9M
+         +U7C4Non9ncAEfWr7zAoEuaYg8C8N7PM/dCzd/TiSkpdrw218fBubGd3oNPmSKlDb2H+
+         5I1P7p1qCdAOdxQYjxW0Ikq5Dlk26d0nRiQVkPtsITteW2011pphZ7vXnjKf6KMTQWdT
+         xAPGrU1XYykAZmpjdeim0yO4oTuL4NY32H5JH+KIi8LsNwZajYxb4+1L1sOMHhKlu9C7
+         jYRfacJ0tGX8LhDyZpJAUs2ts2izVA2bnTttI64MvGeXwGhgRSNXZqRV/Uh6Kx5tB8dp
+         yDeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=OzdUWeBLR1mGRGJApcHipq+LXYf9zVZqwQzaxSBMSCk=;
-        b=TaBDnLMJ0xS4SR013CZzX31/gUmoS7cFbm8Gr+nto/pBHf5DRltOyF1DdV5D0WM800
-         MciiEKMOfMVTnvZazqst8vyi9fQP/tWqr50ONEbaJ6JsvZrbiKGbuyUV4ujsHGW6TKnH
-         1y0Ez7xmcVlLAMwqlwGWNS50wWPkGV3JGTOHoBOk7p3cjwUnIJSTZ8gSqzWyeWubxT3q
-         f7BTL9czz/Lh5bEUj2BY7TqXaqKVUF5p5AFcyific/Fl8lu6mrJlUXl1ALKms4TSEK1v
-         Svw/kbEr/RVPTc/EICm8L94O79JvM+RcthkxSQQVdj8Eio2OUsQ8r2YeNr7UrKZUuSuQ
-         67jQ==
-X-Gm-Message-State: AOAM533zpptzus+di81iL5bQEVpQPMzXWgeKCEAP+ELK5dNad/WGD5GV
-	UslBO758/NCMKreI/Bka6JG0rV7jA+o7oPqMcUg=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=52tRsh8irtcRlfIeB/PQNRHXRc2kJlEQzJyCyWbBuBY=;
+        b=fe/oCcchQP/F9qLXapEP751ombhmYWPQV4MPbKw6Q7fRqdPGHVX2O7TJsjmTGmiZc7
+         v9675sQscrcKHxEqy4LomnC+LjzJIHApzQweQEhJ1W7OmaQkc2ys9p6f9v1z8ygAVLLd
+         dawKKTmLdR5BmLZatzgsaZrW6hNmjcYSkc5OPW5x37YBTSphG4Lh9rG/ULo2FgsiKTM8
+         tBYMRyWb+9L2XLXyZgXxHdeNLJn2atD7PttGwnAulHVvzG2MXl7lSY7p3T438D0wjAQA
+         F+e5cNir0J5ENS5PLZdKlAyfCvANbU3QaNtSHUs6sSkunglh41FoLtzkXAmBrORYpDaS
+         XBlA==
+X-Gm-Message-State: AOAM531ZvVtlrNEGynfhZt+bZFNpYb+eu1FZDqSqLcE4192IPPnyZvzF
+	7YGnwQuoft5OcU5Tgi45cSb1TmnENfn1d3Yt
 X-Google-Smtp-Source: 
- ABdhPJzwY2lh79Hq3HW9Ryv1gFUxYD26/Bnj+4AA/J/zH+J5oUAoSlW7RsH6kEID6LFFmz/w6AGp6X42lomH4p7PIyg=
-X-Received: by 2002:a37:9ec7:: with SMTP id
- h190mr9624075qke.105.1634302783930;
- Fri, 15 Oct 2021 05:59:43 -0700 (PDT)
+ ABdhPJz1fvAFEYzWlPDPhKr5baxx6vbjTsfJQ5yxFwW7f43Sz2ZHQoMZk1X1X0StQ1u7+8sm9wM9vQ==
+X-Received: by 2002:ac2:4f01:: with SMTP id k1mr11507679lfr.390.1634304692024;
+        Fri, 15 Oct 2021 06:31:32 -0700 (PDT)
+Received: from localhost.localdomain
+ (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
+        by smtp.gmail.com with ESMTPSA id
+ w18sm553806ljj.134.2021.10.15.06.31.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 15 Oct 2021 06:31:31 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-oe][PATCH] fftw: update to 3.3.10
+Date: Fri, 15 Oct 2021 15:31:23 +0200
+Message-Id: <20211015133123.690681-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20211014133214.2548068-1-open.source@oleksandr-kravchuk.com>
-In-Reply-To: <20211014133214.2548068-1-open.source@oleksandr-kravchuk.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 15 Oct 2021 05:59:17 -0700
-Message-ID: 
- <CAMKF1sp0oja8JmGhKPJQq2cZir-KhCx2UjaMGXU5hf4ve4bFaw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] iwd: update to 1.18
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 12:59:46 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 13:31:36 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93324
+ https://lists.openembedded.org/g/openembedded-devel/message/93325
 
-fails on musl
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ .../fftw/{fftw_3.3.9.bb => fftw_3.3.10.bb}          | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/fftw/{fftw_3.3.9.bb => fftw_3.3.10.bb} (81%)
 
-https://errors.yoctoproject.org/Errors/Details/612213/
+diff --git a/meta-oe/recipes-support/fftw/fftw_3.3.9.bb b/meta-oe/recipes-support/fftw/fftw_3.3.10.bb
+similarity index 81%
+rename from meta-oe/recipes-support/fftw/fftw_3.3.9.bb
+rename to meta-oe/recipes-support/fftw/fftw_3.3.10.bb
+index 38bf3a19c..0487c2e3a 100644
+--- a/meta-oe/recipes-support/fftw/fftw_3.3.9.bb
++++ b/meta-oe/recipes-support/fftw/fftw_3.3.10.bb
+@@ -1,4 +1,10 @@
+-DESCRIPTION = "FFTW"
++SUMMARY = "FFTW library for computing Fourier transforms"
++DESCRIPTION = "FFTW is a C subroutine library for computing the discrete \
++Fourier transform (DFT) in one or more dimensions, of arbitrary input size, \
++and of both real and complex data (as well as of even/odd data, i.e. \
++the discrete cosine/sine transforms or DCT/DST)."
++HOMEPAGE = "https://www.fftw.org/"
++BUGTRACKER = "https://github.com/FFTW/fftw3/issues"
+ SECTION = "libs"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+@@ -9,7 +15,10 @@ SRC_URI = " \
+     file://install-bench.patch \
+     file://run-ptest \
+ "
+-SRC_URI[sha256sum] = "bf2c7ce40b04ae811af714deb512510cc2c17b9ab9d6ddcf49fe4487eea7af3d"
++SRC_URI[sha256sum] = "56c932549852cddcfafdab3820b0200c7742675be92179e59e6215b340e26467"
++
++UPSTREAM_CHECK_REGEX = "fftw\-(?P<pver>\d+(\.\d+)+).tar.gz"
++UPSTREAM_CHECK_URI = "https://fftw.org/pub/fftw/"
+ 
+ inherit autotools pkgconfig ptest
+ 
+-- 
+2.25.1
 
-On Thu, Oct 14, 2021 at 6:32 AM Oleksandr Kravchuk
-<open.source@oleksandr-kravchuk.com> wrote:
->
-> Changelog:
-> - Add support for Access Point FILS IP Address Assignment IE.
-> - Add support for P2P GO-side 4-way handshake IP allocation.
-> - Add support for forcing SAE group 19 if BSS requires it.
-> - Fix issue with handling faulty SAE duplicate commits.
->
-> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-> ---
->  meta-oe/recipes-connectivity/iwd/{iwd_1.17.bb => iwd_1.18.bb} | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-oe/recipes-connectivity/iwd/{iwd_1.17.bb => iwd_1.18.bb} (94%)
->
-> diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.17.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.18.bb
-> similarity index 94%
-> rename from meta-oe/recipes-connectivity/iwd/iwd_1.17.bb
-> rename to meta-oe/recipes-connectivity/iwd/iwd_1.18.bb
-> index 00d94f36e..8d58a7a84 100644
-> --- a/meta-oe/recipes-connectivity/iwd/iwd_1.17.bb
-> +++ b/meta-oe/recipes-connectivity/iwd/iwd_1.18.bb
-> @@ -8,7 +8,7 @@ DEPENDS = "ell"
->  SRC_URI = "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar.xz \
->             file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-for-e.patch \
->            "
-> -SRC_URI[sha256sum] = "6f946f823b0dc3205e4e72becf8ad1915448d194f5b10d8003e4c8c5a18e4ef7"
-> +SRC_URI[sha256sum] = "0225ab81579f027e0fcbf255517f432fcf355d14f3645c36813c71a441dfab55"
->
->  inherit autotools manpages pkgconfig python3native systemd
->
-> --
-> 2.25.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#93295): https://lists.openembedded.org/g/openembedded-devel/message/93295
-> Mute This Topic: https://lists.openembedded.org/mt/86312421/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
 
