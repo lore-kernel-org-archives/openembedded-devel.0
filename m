@@ -2,91 +2,90 @@ Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99CCFC433F5
-	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 22:57:16 +0000 (UTC)
-Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com
- [209.85.167.44])
- by mx.groups.io with SMTP id smtpd.web11.4289.1634338635441922064
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A8AFDC433EF
+	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 22:57:43 +0000 (UTC)
+Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com
+ [209.85.167.51])
+ by mx.groups.io with SMTP id smtpd.web08.4319.1634338662931434677
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Oct 2021 15:57:15 -0700
+ Fri, 15 Oct 2021 15:57:43 -0700
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=XfJ0Ia8d;
+ header.s=20210112 header.b=Uarkib+P;
  spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.167.44, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f44.google.com with SMTP id j21so48223601lfe.0
+ ip: 209.85.167.51, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f51.google.com with SMTP id i24so46552278lfj.13
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Oct 2021 15:57:15 -0700 (PDT)
+ Fri, 15 Oct 2021 15:57:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=UvMDR1gCSfWdp1WhLuBpNqYC9cAWDX7xZgRCJOJWt7M=;
-        b=XfJ0Ia8d3oAWkMCeeR875ZxVrMuAKTnXt/OiACtcc7MAmz+jx/vCEGcgTVcIpGPuy5
-         DpK5wDDJjhxB2Zc6Q7aOICLlsXJft1ckWPbfxZf9MlJPiycwZb3uyDBq0NpsFGZ1T+fR
-         mh5BIAx2rBvC4WlA5TFGBrsWbxn9n/D5Tz/9z72aJg5o+5n8OQW8QaZX6boWc9ymXal/
-         prW7b0zYecz0vaPInXBRbHjVYg/RFcLh7PG8kNYWKcIIU+GBbG19sPp0o8tbLWBi1ab0
-         /TkGl5W48OzQp2xkByKoy7CsPNvwZhuG1QCM2XtF+3bMm5tmJU0q73DywejeYehOtpR9
-         d8NA==
+        bh=bSve28glj3LfB3wTWxsmeJ4hD625brFSLMF56FEPqss=;
+        b=Uarkib+PbDmr64890UhFQRN/ksXmenxmodSdijpADKOUSw4Ml4QRb3WHr0oZBln9tT
+         swwrqQeZbMV9mlhOu7nCYrwMO35rjTj+kMXPBFRiDv+x7qwa9lxK+g+cavIAS/4d651l
+         GNt+mmnXCyBRwGSfXw9mDhRzWHzrcp/PgBqIFepjSuEJsecNmemzjxqSsko61snogUhP
+         kgLX1sXJat9ZmafUZwx59hSYk5aBeYgZsvfvP5ebdc6JH1F64x06tpfYyyBzewD6zHbw
+         Z5SAGzNP6+eqe0BnZ3Vhf/s/nbci+x/UJUYVXM6erxXPswnnCwOXAOUeOe1DrmkJ+ADN
+         Km1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=UvMDR1gCSfWdp1WhLuBpNqYC9cAWDX7xZgRCJOJWt7M=;
-        b=TThB4lmMd21w+Mlk64gxDH1HRYDfgLCzM4D3JNuvFG+RSQUEUqwnBAG7xKYqCthTGV
-         xlvvzQwrHTOtFQK8Z5ozVzW0xXByercBdEMTwlqi2vxFKBXHMiM5rhq8vtyct/T4GfH9
-         liYz6iwi5SxjtiRChn4ZW4iubdSX9uMgvzwODc6Ib7Nik8nQXTD/zkp6VnBeNUJl5L7N
-         eHR+UIg/gbn0sahbVCUoM8iYjTDEO9rGG5LfnNSICFzkH7klxxM6DRwolpjkbuN51OuN
-         M9x2o/jo9R/L/32Q2dnmY1dl/KbpJ0xnKV/PzSNP7yf0wXJBIyf/6tARXD+BYD2wnC5Z
-         o5nA==
-X-Gm-Message-State: AOAM532ZW6YxuQkazEibl3ydqek7cUMoC6ZJvu8CbBR0iHTfLJ2CPIp7
-	RzaXS3N3arQZl0Pl/RJNOtSkvbNBNvtW8w==
+        bh=bSve28glj3LfB3wTWxsmeJ4hD625brFSLMF56FEPqss=;
+        b=hId5A+Hcn9tHBrn8lNkhJxUNt7Az3WbNGuMPk6HyW22vSvYP8QRjOLP0wHZ1qFcehO
+         YfOhv5xVktdUhW5cGRhlungPLJxAFP0mQ2VGuA2LQ83qf3nVBCZerFdFu0ogA1fiGZAt
+         +F16Jp9x7dVPX1y92ty+mLMwLANTqNHzMFcM73LtxzH5nIk9fs15+Z+yp8HG/YdaOJfQ
+         CTAI8IS7s7+AZ/CnYl/y4yPAJIsa/w5WF//6hqloUZn1yc4guFK2G9Xc3AaWNj4DRV9X
+         X6oGyYWi1qjU1DPhwPPn3FwH+vNuIGnkPq+OvtMR7hf12yg45Vjj1WIvc2dXlatOIFub
+         Xnwg==
+X-Gm-Message-State: AOAM53092rnxDMiuIFxBfGNVZJWY0O6SHqJFmJ0uR4TTN9n4QvlRUyVX
+	tHfMl32hdrrtEwRn3J6sqDVN1b8bMBkaP74y
 X-Google-Smtp-Source: 
- ABdhPJzs5KBUcjQv6urrQBgj+0F3ojEaRady0roTedQNfsF2Mb3Efx5tJ+8z8KAwe5ktbFdTkRuJaw==
-X-Received: by 2002:a05:6512:6c8:: with SMTP id
- u8mr14083192lff.453.1634338633535;
-        Fri, 15 Oct 2021 15:57:13 -0700 (PDT)
+ ABdhPJw5cS2PJdordGP1o2paEbCZaP5EGOMw0bc2m9pb3RESCaJOr70tEyOf/fBHpdSoX4L7pNtQCw==
+X-Received: by 2002:a19:ad0c:: with SMTP id t12mr2000475lfc.173.1634338660639;
+        Fri, 15 Oct 2021 15:57:40 -0700 (PDT)
 Received: from localhost.localdomain
  (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
         by smtp.gmail.com with ESMTPSA id
- x15sm610967lfu.21.2021.10.15.15.57.12
+ b23sm656140lff.148.2021.10.15.15.57.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 15 Oct 2021 15:57:13 -0700 (PDT)
+        Fri, 15 Oct 2021 15:57:40 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python][PATCH] python3-httplib2: update to 0.20.1
-Date: Sat, 16 Oct 2021 00:57:11 +0200
-Message-Id: <20211015225711.4163673-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-python][PATCH] python3-haversine: update to 2.5.1
+Date: Sat, 16 Oct 2021 00:57:38 +0200
+Message-Id: <20211015225738.4163912-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 22:57:16 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 22:57:43 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93368
+ https://lists.openembedded.org/g/openembedded-devel/message/93369
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../{python3-httplib2_0.19.1.bb => python3-httplib2_0.20.1.bb}  | 2 +-
+ .../{python3-haversine_2.4.0.bb => python3-haversine_2.5.1.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-httplib2_0.19.1.bb => python3-httplib2_0.20.1.bb} (82%)
+ rename meta-python/recipes-devtools/python/{python3-haversine_2.4.0.bb => python3-haversine_2.5.1.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-httplib2_0.19.1.bb b/meta-python/recipes-devtools/python/python3-httplib2_0.20.1.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-httplib2_0.19.1.bb
-rename to meta-python/recipes-devtools/python/python3-httplib2_0.20.1.bb
-index 3f244eccd..8a0b6c9e5 100644
---- a/meta-python/recipes-devtools/python/python3-httplib2_0.19.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-httplib2_0.20.1.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
+diff --git a/meta-python/recipes-devtools/python/python3-haversine_2.4.0.bb b/meta-python/recipes-devtools/python/python3-haversine_2.5.1.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-haversine_2.4.0.bb
+rename to meta-python/recipes-devtools/python/python3-haversine_2.5.1.bb
+index 9eda659e1..1ed67d326 100644
+--- a/meta-python/recipes-devtools/python/python3-haversine_2.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-haversine_2.5.1.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Calculate the distance between 2 points on Earth"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=56e5e931172b6164b62dc7c4aba6c8cf"
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
  
--SRC_URI[sha256sum] = "0b12617eeca7433d4c396a100eaecfa4b08ee99aa881e6df6e257a7aad5d533d"
-+SRC_URI[sha256sum] = "0efbcb8bfbfbc11578130d87d8afcc65c2274c6eb446e59fc674e4d7c972d327"
+-SRC_URI[sha256sum] = "6dcdee48b854b7bd0a121a04a2cb775dc7d9e2354f1e22d29ff62110189305b0"
++SRC_URI[sha256sum] = "357e41dfddc4a0f2b1c941d92a590cac840f7ce4b3da14b45b68d968b3ad7cc7"
  
  inherit pypi setuptools3
  
