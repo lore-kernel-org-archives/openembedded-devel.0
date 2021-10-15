@@ -2,94 +2,92 @@ Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D49CC433EF
-	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 22:55:55 +0000 (UTC)
-Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com
- [209.85.167.45])
- by mx.groups.io with SMTP id smtpd.web10.4185.1634338554756138560
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A228AC433F5
+	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 22:55:58 +0000 (UTC)
+Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com
+ [209.85.167.52])
+ by mx.groups.io with SMTP id smtpd.web08.4284.1634338557062929847
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Oct 2021 15:55:55 -0700
+ Fri, 15 Oct 2021 15:55:57 -0700
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=QaUTOrk4;
+ header.s=20210112 header.b=2hmeH4oz;
  spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.167.45, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f45.google.com with SMTP id j21so48213707lfe.0
+ ip: 209.85.167.52, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f52.google.com with SMTP id i24so46538826lfj.13
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Oct 2021 15:55:54 -0700 (PDT)
+ Fri, 15 Oct 2021 15:55:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=TfrEvCPfPe+PLvt+B+LL4xo8DOHBGrL7UJ8EpYMlmn4=;
-        b=QaUTOrk4XtNhHCKj3AK5GexmUpHN11ZzehF6g9oqX86bkrxEqGcNPYCh3XtbpW4hzn
-         2ICOO+LSMzOrFdahhsoPbplQdNDXm/FYh3nbiWfN4d7knplyHDax76LzIlWDV1dl0Lj6
-         Y6Wuuc7nxM6WMLV+uLSRu5Cak5hPPjcX0PF/3DBYae9WHyAq39wRVyttWI9OiJq1E3jw
-         Yhu+VObS4Hqe0nmDwwajFqlBr3sgBK59CCI/JOesAfSx+1M0+zsZ+dEHJ6CtOlhmDjdR
-         VBui5XzEfQr3VDzcAX6ha9Kh+e/NDk5/0uAEyJOOlTgqFH/R0hlGmiybs6Cufschsb+v
-         RVVA==
+        bh=moruFQPgSOVxEM1EYmT5iexH8L4aB0w81Pg3Cdxcf0Y=;
+        b=2hmeH4ozsk1G3ZH/O0lwlgbxJ394b7I/wBDzjc7j9EBQfNxFV0VPo+ZxObPPFj5Aca
+         9/ajm0+vShHlixzUOjjJZZ2ARdp9oU9GyaS3THhKGsHG7wPiaHciY98ZqCV9/iCYnjBQ
+         gP0z/lA02OB/0rRY3xXyGmMqGKTYw8JMsANYKW9cWiawGsEK3IXUbfsUvzbszxahUDib
+         MgBvbNJpdAizwjXsi1/+Mujr0IZx0HvcG8SERSbneDbGan6985hAuvwv07DiaUSwxI6w
+         BCqfavvALFIwMdZieLOE4fNnboXY7QZzh2PrkuEWdYRgitrLjjtHKKG6AJ3vSZ3/xVr/
+         PwDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=TfrEvCPfPe+PLvt+B+LL4xo8DOHBGrL7UJ8EpYMlmn4=;
-        b=4++fm5h9ffQluWR7hzsm456BZfrp4e/wuccqdo0xXROjv4OLwScmr+xkZui/+SfxHN
-         4ifIVsscZCLwuPbHL4FSZRv8D+iJeRoc/L9QtkhhmWjS0CyUtzgfu6u5hnAKGeZQtwMw
-         Ge+gBsHapTiGFQ+hoxnm4SOiCCrpjN7HSTiHHjFwMmeym3vP2aBE2vVkdgCQyFdsjUyh
-         zHlzo3k17owjbNPcK5K/ysk5Z4mJ87YZV3KuLTt4WBaryXh85PXVJMz+Wyeq9wnVhD8Y
-         l2+uKFfjxsYUNjARrZ0dyidcn59HkFpBCJnE4gMFq/HM5FLHjK0j92oe9MU70zWl5S1/
-         mP0w==
-X-Gm-Message-State: AOAM533lPIeP8gNgmWBfyrZgjWST3R9+x1lVyEXNXGDeCKwa6fTujBtU
-	PEj6vEj0ov2YWx84n0+Kf93xK6DntnKIjBUL
+        bh=moruFQPgSOVxEM1EYmT5iexH8L4aB0w81Pg3Cdxcf0Y=;
+        b=QLMHhS9w05cw5Hn3mj9IMNVXDK41I9QgAkiTW0Kf/jzX/OJRDhcycG+vAbmS5aC+L9
+         0PaSoKYlV3k3FYPgbai8abVJUOpaweMjiSYhmO1P2ZBY41AlPN4ccD3+30T8gGI0SBkW
+         tfKFkL9czTmmc2PDrMjqx6eOZjY0dV1JLkEMiVe6n8Bxt5dtxh8NDXCJodrAmxIomHVD
+         Zs08y0A2KostS/+c4tilaWavgaZ5jb+z1W+LnYAR+OJoP/WmKtfoWbBPOzUdxknfCLcZ
+         efDGPbwyiYt/28H+DaFQFGx1YSqESvW3lU8B06z8ugXagLyst4nkcbLyGq/vWG0lSk1b
+         miRA==
+X-Gm-Message-State: AOAM530dLz3DoSPO8N3dv+CphDr1ue+tQDSf73GVSjYz0bjMEuDiRfpH
+	JH/ZluCzX3PkCRN5+3MNX2J7m3TZK98Hx7I7
 X-Google-Smtp-Source: 
- ABdhPJzf3sZhUT2fXJZW1U4rNrlkuAL9eACIcgBx8BEgrMORu6xAWXNXziNsywvGHt2QvizfWQshRA==
-X-Received: by 2002:a05:651c:113b:: with SMTP id
- e27mr16052640ljo.137.1634338552813;
-        Fri, 15 Oct 2021 15:55:52 -0700 (PDT)
+ ABdhPJzlQvI4uU5ItTj0PAxrcFYLLmhPS7mqHyzZiftLyHdN13IHhtphAZe2xyqi9VeEhyuzhVZBGg==
+X-Received: by 2002:a05:6512:214b:: with SMTP id
+ s11mr11596736lfr.296.1634338555042;
+        Fri, 15 Oct 2021 15:55:55 -0700 (PDT)
 Received: from localhost.localdomain
  (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
-        by smtp.gmail.com with ESMTPSA id
- c23sm706461ljr.85.2021.10.15.15.55.52
+        by smtp.gmail.com with ESMTPSA id v3sm698985ljv.7.2021.10.15.15.55.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 15 Oct 2021 15:55:52 -0700 (PDT)
+        Fri, 15 Oct 2021 15:55:54 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python][PATCH] python3-uritemplate: update to 4.1.1
-Date: Sat, 16 Oct 2021 00:55:50 +0200
-Message-Id: <20211015225550.4161910-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-python][PATCH] python3-ujson: update to 4.2.0
+Date: Sat, 16 Oct 2021 00:55:53 +0200
+Message-Id: <20211015225553.4161966-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 22:55:55 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 22:55:58 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93341
+ https://lists.openembedded.org/g/openembedded-devel/message/93342
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- ...thon3-uritemplate_3.0.1.bb => python3-uritemplate_4.1.1.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-uritemplate_3.0.1.bb => python3-uritemplate_4.1.1.bb} (82%)
+ .../python/{python3-ujson_4.1.0.bb => python3-ujson_4.2.0.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-ujson_4.1.0.bb => python3-ujson_4.2.0.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-uritemplate_3.0.1.bb b/meta-python/recipes-devtools/python/python3-uritemplate_4.1.1.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-uritemplate_3.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-uritemplate_4.1.1.bb
-index 0d63803bb..eaf8bda84 100644
---- a/meta-python/recipes-devtools/python/python3-uritemplate_3.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-uritemplate_4.1.1.bb
-@@ -6,8 +6,7 @@ AUTHOR = "Ian Cordasco"
- LICENSE = "Apache-2.0 | BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0f6d769bdcfacac3c1a1ffa568937fe0"
+diff --git a/meta-python/recipes-devtools/python/python3-ujson_4.1.0.bb b/meta-python/recipes-devtools/python/python3-ujson_4.2.0.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-ujson_4.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-ujson_4.2.0.bb
+index d8e83c58a..3dbfe44fa 100644
+--- a/meta-python/recipes-devtools/python/python3-ujson_4.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-ujson_4.2.0.bb
+@@ -4,7 +4,7 @@ DESCRIPTION = "UltraJSON is an ultra fast JSON encoder and decoder written in pu
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=10fa10456417c0252bcb8a498e498ffe"
  
--SRC_URI[md5sum] = "869fb44fbd56713490db7272eb36c8ae"
--SRC_URI[sha256sum] = "5af8ad10cec94f215e3f48112de2022e1d5a37ed427fbd88652fa908f2ab7cae"
-+SRC_URI[sha256sum] = "4346edfc5c3b79f694bccd6d6099a322bbeb628dbf2cd86eea55a456ce5124f0"
+-SRC_URI[sha256sum] = "22b63ec4409f0d2f2c4c9d5aa331997e02470b7a15a3233f3cc32f2f9b92d58c"
++SRC_URI[sha256sum] = "fffe509f556861c7343c6cba57ed05fe7bcf4b48a934a5b946ccb45428cf8883"
  
- inherit pypi setuptools3 ptest
+ inherit pypi ptest setuptools3
  
 -- 
 2.25.1
