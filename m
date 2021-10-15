@@ -2,93 +2,91 @@ Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99383C433EF
-	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 22:55:43 +0000 (UTC)
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com
- [209.85.167.53])
- by mx.groups.io with SMTP id smtpd.web09.4253.1634338542744567254
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8935EC433EF
+	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 22:55:45 +0000 (UTC)
+Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com
+ [209.85.167.52])
+ by mx.groups.io with SMTP id smtpd.web09.4255.1634338544678902070
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Oct 2021 15:55:43 -0700
+ Fri, 15 Oct 2021 15:55:45 -0700
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=dZy5Mqh2;
+ header.s=20210112 header.b=wQrJpdDt;
  spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.167.53, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f53.google.com with SMTP id p16so47909082lfa.2
+ ip: 209.85.167.52, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f52.google.com with SMTP id x27so48010297lfu.5
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Oct 2021 15:55:42 -0700 (PDT)
+ Fri, 15 Oct 2021 15:55:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=VhZ8rtPcSSvBV64cEcVeHcMLRhar2l//LUh4mi0s7wg=;
-        b=dZy5Mqh24L2UMIFayp/TrJzNNX6hsZLuN4zJPdLAfETreCheEr3/AL1mOw9TAYdyTc
-         Y5Feugoun9Ed7MlwYxQfZyAo4k/K7Bpx5pjLywV6ydIrKIX04JZD0Cc/Ex510PCbO+1t
-         Da7jVgygfsIENAoSFi04ZDIF9r8HTJsrViCWeBqF1GFjW2Or5CgOqiABc8dqFq5Wunoy
-         VZbCliHcwGZkRWv0/tJWMwSuIfRazGK46IiTXTyhBOFmOMbu0g6x+5CZGf5gCv6hF5Zn
-         hDJLzHbIW1EKH0uf3thOLF/ndCtmwLq9huGq/yNzIIRk3r/7NgDZ7I/he5l5A5bPO5Ti
-         awFw==
+        bh=tUnYbyoiV+0RwIQ1WY1JwEh+3v5fHzICnKqcElV7co4=;
+        b=wQrJpdDtCrzF6gLhJ+EeCug+BYGsCWEyogWhVuD/YuQiZ5YdfxjwHmIj1KKinzpjXo
+         gDkzHc+gzpoqfQiw0sXMOwCXd85Q44VZY+ANKBqVMrNdoCXnlbhaN20y9DYLfWta+V+K
+         I1VNs/nudtWjntz8BfZwKCvJa+kmb4XG4fdgz74AmLXoCrwEJ1jK7q69Q2b0jn5sfdlN
+         TI8rMQmfUWx9cGsYHwXoTxf9KgxAItWbDydTN7zOBbDYheME8TGJ5+0l5gSJbo5ZkVER
+         fzXENKbbpeF90+lxlVic0j0jPHiqRNpLkdi7SgvtAwizLHFAj2Ec8ToIebNrMz3YyED5
+         WoSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=VhZ8rtPcSSvBV64cEcVeHcMLRhar2l//LUh4mi0s7wg=;
-        b=5GjetMiZTOVmSPmMLkUYbFmcLauVEburTMsJnXFMqPGM3lfqtEpVL48w2gYHkc2MZ9
-         Ena/bwisKqw/Cr3xDbpY2IDWMjtW9mcHSBFO47z/OsxJbv+yFM7zqZjDqawi64crHtbL
-         IH9q/JLw6wCvehuKWS6tmOPaZGEBO++YQakUcuW3YtlzSNNoNotu6d8PU1/ZdOmVjooO
-         wq2xGTq9uJElRlPYHzd1EvX5St5Hoz4hfNjDZzOcw7EfI46mw5PR2XMmDRPq2VCWCfH0
-         hSmBFEG5i+BxsdzrEh6FNT2Z3ZWjzCfQR78O1DFwSMHWt+tfLikCgkte5RS7yerw+ER1
-         w/Pw==
-X-Gm-Message-State: AOAM532mMhrIZmpLjvefOW/t/9qwQ1uhBfKQBx3kVv/XueiC3vRVvz2P
-	YL7YLszQPtsVsxlcCNAjRwzc2LgRDf43AGSv
+        bh=tUnYbyoiV+0RwIQ1WY1JwEh+3v5fHzICnKqcElV7co4=;
+        b=5lH3rjc2gL6ogTcrVVLyRZc5e0ReQ39FqBC7xvMrIUMWzlL5vrVBM9JGUrfB0p8yod
+         dfkOwdZHa9tvhTdl64FJxKKDDj1EA0YdFj0PYMDynF+3giPaqyAcBgKCD8uVhHcAY4Wk
+         iLWQoGIGUrKkqaT+SoCh/CuI6d1X2jimifbbL28RuT5/RV5isLrGEXMgTGO+4KLZJ9Pd
+         sIYUZrXpAyBgKjpM2sijXpaluOfaMCZIUq/xhnVrtywVCR1QBaec4PgstG4rhWQYM65E
+         4Lp7aVidtDknWEbQt1Sh8DUUaHDOspRahjLIoYjaMmvUzIFDplPurDPdlJUwZyx05zdi
+         wrdQ==
+X-Gm-Message-State: AOAM533/R66NSEAN2e7qJmWcLa0HhOJhZTrrel1egeT9POVFstJDxVat
+	qcacFz6Z3zu8f3Wg0xIXMSXlbDWNvoopeBXr
 X-Google-Smtp-Source: 
- ABdhPJzV7huDfsetQW+lRcKm48UGL7M0yAF/kGhlHY/qviNH2iluN1pnZVuQbXgzGecu2zTeGZHrvg==
-X-Received: by 2002:a05:6512:6c1:: with SMTP id
- u1mr13913161lff.203.1634338540615;
-        Fri, 15 Oct 2021 15:55:40 -0700 (PDT)
+ ABdhPJxb334U/XB0lDH9rGexiBotzjlU5YwMYeXGXwgKDyRj3F02/GGUp2m1gtdEi0iJ9ajMwjbDEA==
+X-Received: by 2002:a2e:b804:: with SMTP id u4mr15584950ljo.425.1634338542609;
+        Fri, 15 Oct 2021 15:55:42 -0700 (PDT)
 Received: from localhost.localdomain
  (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
-        by smtp.gmail.com with ESMTPSA id a6sm672382ljd.67.2021.10.15.15.55.39
+        by smtp.gmail.com with ESMTPSA id v3sm698925ljv.7.2021.10.15.15.55.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 15 Oct 2021 15:55:40 -0700 (PDT)
+        Fri, 15 Oct 2021 15:55:42 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python][PATCH] python3-xmlschema: update to 1.8.0
-Date: Sat, 16 Oct 2021 00:55:38 +0200
-Message-Id: <20211015225538.4161679-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-python][PATCH] python3-xlsxwriter: update to 3.0.1
+Date: Sat, 16 Oct 2021 00:55:40 +0200
+Message-Id: <20211015225540.4161742-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 22:55:43 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 22:55:45 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93337
+ https://lists.openembedded.org/g/openembedded-devel/message/93338
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../{python3-xmlschema_1.6.2.bb => python3-xmlschema_1.8.0.bb}  | 2 +-
+ ...{python3-xlsxwriter_1.4.5.bb => python3-xlsxwriter_3.0.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-xmlschema_1.6.2.bb => python3-xmlschema_1.8.0.bb} (84%)
+ rename meta-python/recipes-devtools/python/{python3-xlsxwriter_1.4.5.bb => python3-xlsxwriter_3.0.1.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-xmlschema_1.6.2.bb b/meta-python/recipes-devtools/python/python3-xmlschema_1.8.0.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-xmlschema_1.6.2.bb
-rename to meta-python/recipes-devtools/python/python3-xmlschema_1.8.0.bb
-index 217e77e50..d720dd334 100644
---- a/meta-python/recipes-devtools/python/python3-xmlschema_1.6.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-xmlschema_1.8.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/xmlschema"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=47489cb18c469474afeb259ed1d4832f"
+diff --git a/meta-python/recipes-devtools/python/python3-xlsxwriter_1.4.5.bb b/meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.1.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-xlsxwriter_1.4.5.bb
+rename to meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.1.bb
+index ffd3072a9..aeb27cef4 100644
+--- a/meta-python/recipes-devtools/python/python3-xlsxwriter_1.4.5.bb
++++ b/meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.1.bb
+@@ -16,6 +16,6 @@ RDEPENDS:${PN} += " \
+ 	python3-io \
+ "
  
--SRC_URI[sha256sum] = "31ddf77a44e4b121de212beeb2cc039e2e8b7a7a4f1678c9b29be1f5341aec52"
-+SRC_URI[sha256sum] = "fa4e22a708f08d15f605c9191e2500149ba1a848fff7fa4904c2f2c57dc1087f"
+-SRC_URI[sha256sum] = "0956747859567ec01907e561a7d8413de18a7aae36860f979f9da52b9d58bc19"
++SRC_URI[sha256sum] = "3f39bf581c55f3ad1438bc170d7f4c4649cee8b6b7a80d21f79508118eeea52a"
  
- PYPI_PACKAGE = "xmlschema"
- inherit pypi setuptools3
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.25.1
 
