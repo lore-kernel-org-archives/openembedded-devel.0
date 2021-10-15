@@ -2,104 +2,101 @@ Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9429DC433F5
-	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 22:56:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 99B2BC433EF
+	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 22:57:07 +0000 (UTC)
 Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com
  [209.85.167.45])
- by mx.groups.io with SMTP id smtpd.web09.4271.1634338599373019354
+ by mx.groups.io with SMTP id smtpd.web12.4333.1634338626263743621
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Oct 2021 15:56:39 -0700
+ Fri, 15 Oct 2021 15:57:06 -0700
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=PyZDJuIb;
+ header.s=20210112 header.b=M0vt2dEc;
  spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
  ip: 209.85.167.45, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f45.google.com with SMTP id p16so47916616lfa.2
+Received: by mail-lf1-f45.google.com with SMTP id x192so12710205lff.12
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Oct 2021 15:56:39 -0700 (PDT)
+ Fri, 15 Oct 2021 15:57:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=RQu1elHHVDe28XvxicLEiCUlMIfdOt/JI2+VDmSd5vU=;
-        b=PyZDJuIbRE1pHSMIdBuaMJUugeV5KEfoIDui/yhvR0skDj9njljla6LHb++WOzw1sl
-         MtYWZkSUZk/buXhEN/EYr/f1OB2j/IaNYvJtUoCbi6qMYDcAVTV8gkSeqkZKnQCbDR4+
-         DBLj/y03s6S6zk9yCTFwGifFGO45XQ8/vkBi63rMBuv/plCXq2N2YMdADYTF9T+ilYBk
-         Ust13I2v6zbS3KWOchUkBl+SudqRAj0t3fs0xtqetVVvurQXr1Ggh+VwFCcLmPCZNMdm
-         GOJWWKwkRjl0dAy2WwwzAAGVpBdLQoznfEdy09KkHWp02ADcHroGJnBGrU4Qc4TdS0Np
-         5dNw==
+        bh=R93/VaBxgpl0s0CD6aMI4lJkQSbe12/lcji6p1vENno=;
+        b=M0vt2dEcfgq6bB2xVxD8EFGfTVdHrUFZu4v7GuWQPr2WxxHUtyj6J8TWlGT9ECJO1s
+         bckg4X/mx6a9yLOVTVshcGhf6Ed3AGhWdNxxfP3PsOxZfqLs7k/JG1ORXwTpE3ikdPYb
+         fetoU+/hZnzYIkUqlMy0e/drxhWDK9sek0g0+vibwQxpXob91rLI8I8LnuVnnxmzJppg
+         6XatLaBzqe9GYGaUraOMAgQbw88c4EToKaRo+qen164esYP1QAlGfpCh81oK8FZfGbED
+         fyQZlDpK/mW1yYCPSATN4Dwb3viM4d2h1D2TDnvLH7DSpT7u+Kgi0WCp/9Z6K8vKYxyH
+         np8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=RQu1elHHVDe28XvxicLEiCUlMIfdOt/JI2+VDmSd5vU=;
-        b=GkHui+TQb1slTU99kkrJ5pOduvtwtSnhobBhKTbL/wAM2tU9pdlyXkyIfXfyIQeygO
-         Rx1u9dS+cZm1grSqkHqATg1s1xQvTsyGI1hfqF2jj0WQO2RKc6i/g3/G9z0wMXvAyAm0
-         a3QELlTyEHNVAfUPzOCt2lD/LvLT7DE/0oBmjBdXnssK0rpAoyJ58CYGubV4kFQr9Poa
-         nXyArcbxDDmyhFhqmnIku67QSfyCcuN5umCwM5OESQ9kpwRP9U81hkN1fxdAVlPDbQyD
-         YnBWfD/aWN8yFVgkC2XwIocCs4Wdd71/tXhptWUrkWONfgQF7HilKR9Tb5/ZLY9l0bHt
-         5qSQ==
-X-Gm-Message-State: AOAM532wPMlfLnyFyNT9B30o9LDhD+X64Ku6ip+AhjFErQb4q+tdbovR
-	JCLqcFuhwRZEt7e6WlF6YH9S0ShThnZB4AQe
+        bh=R93/VaBxgpl0s0CD6aMI4lJkQSbe12/lcji6p1vENno=;
+        b=Jo9nosMEnV9Cqi9z+bnu4pKmgix5pq3CQCrDGSF25cIdQ68OyTHktxZ5GtxvdtbeIa
+         QZviamhOTFzxslBtpOT2ibLvR2XqfepxmAXU0BXKI7ArrbmNXWH3xoPkTGDA0miRAd4H
+         +iC7f7TPmmduKxnesr0KEnnsJzM6gya9cDcfN4mp64/BTTs/a9Sek+gCXBBRHCCNFZR/
+         YL3cJv8mcX9bd8JAep3myIV4Mu2pWOWogfPydG285wCoh7TaanRCa9l7hAg/DtnRLM9X
+         De8OQCjIFs0w7FjG3uNTDXZAxsb6MOajIJmIcxGELnBqucLa++KkHUIRroTfX7iWIeLU
+         D0dg==
+X-Gm-Message-State: AOAM532O63ekGzAGNh2df/wiGN+BL0EM7D6H5/k17uZQ2DP9SPqv4bCW
+	y4Y4S/oIg4AGHua0MTd+y7Kh3MnvoRLXe6eG
 X-Google-Smtp-Source: 
- ABdhPJywY91xCC6laKq7dC3pD8vN53s5iQGyJvIdFuevEvnsQO85x7ewUDq+c9MqAYAVqzaus80gDg==
-X-Received: by 2002:a2e:8756:: with SMTP id
- q22mr15359619ljj.271.1634338597475;
-        Fri, 15 Oct 2021 15:56:37 -0700 (PDT)
+ ABdhPJzBOf0eEPnmgBDRuslR9BpoFtMphKl+xVqs2ITv5GyJ6OGtPsP7J6t4p1zfFxXXwxDDUGrkVg==
+X-Received: by 2002:a2e:868e:: with SMTP id
+ l14mr15435270lji.230.1634338624318;
+        Fri, 15 Oct 2021 15:57:04 -0700 (PDT)
 Received: from localhost.localdomain
  (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
         by smtp.gmail.com with ESMTPSA id
- r14sm655722lfe.13.2021.10.15.15.56.36
+ b20sm653548lff.121.2021.10.15.15.57.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 15 Oct 2021 15:56:37 -0700 (PDT)
+        Fri, 15 Oct 2021 15:57:03 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python][PATCH] python3-jsonrpcserver: update to 5.0.3
-Date: Sat, 16 Oct 2021 00:56:35 +0200
-Message-Id: <20211015225635.4163153-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-python][PATCH] python3-joblib: update to 1.1.0
+Date: Sat, 16 Oct 2021 00:57:02 +0200
+Message-Id: <20211015225702.4163448-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 22:56:40 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 22:57:07 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93363
+ https://lists.openembedded.org/g/openembedded-devel/message/93364
 
 License-Update: copyright years updated.
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- ...jsonrpcserver_4.2.0.bb => python3-jsonrpcserver_5.0.3.bb} | 5 ++---
+ .../{python3-joblib_1.0.1.bb => python3-joblib_1.1.0.bb}     | 5 ++---
  1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-jsonrpcserver_4.2.0.bb => python3-jsonrpcserver_5.0.3.bb} (70%)
+ rename meta-python/recipes-devtools/python/{python3-joblib_1.0.1.bb => python3-joblib_1.1.0.bb} (57%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.2.0.bb b/meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.3.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-jsonrpcserver_4.2.0.bb
-rename to meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.3.bb
-index 492ed658e..c2500300f 100644
---- a/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.3.bb
-@@ -1,9 +1,9 @@
- SUMMARY = "Library to process JSON-RPC requests"
- HOMEPAGE = "https://github.com/bcb/jsonrpcserver"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=c89120516900f96f4c60d35fdc4c3f15"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=61b63ea9d36f6fb63ddaaaac8265304f"
+diff --git a/meta-python/recipes-devtools/python/python3-joblib_1.0.1.bb b/meta-python/recipes-devtools/python/python3-joblib_1.1.0.bb
+similarity index 57%
+rename from meta-python/recipes-devtools/python/python3-joblib_1.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-joblib_1.1.0.bb
+index e325ad877..e69cfefd1 100644
+--- a/meta-python/recipes-devtools/python/python3-joblib_1.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-joblib_1.1.0.bb
+@@ -1,11 +1,10 @@
+ SUMMARY = "Joblib is a set of tools to provide lightweight pipelining in Python."
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=32b289008fb813a27c9025f02b59d03d"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2e481820abf0a70a18011a30153df066"
  
--SRC_URI[sha256sum] = "0c9e5b9445621138521e912016ae39b3badadd2607140dcbb0c8062934ab4854"
-+SRC_URI[sha256sum] = "0cc514559596fa380bf188e31b0cdf3d9e6d9cc162fdca8a49ed511b291a9ae1"
+ inherit setuptools3 pypi
  
- inherit pypi setuptools3
+-SRC_URI[md5sum] = "9914b330916395c0a1feca54949867a3"
+-SRC_URI[sha256sum] = "9c17567692206d2f3fb9ecf5e991084254fe631665c450b443761c4186a613f7"
++SRC_URI[sha256sum] = "4158fcecd13733f8be669be0683b96ebdbbd38d23559f54dca7205aea1bf1e35"
  
-@@ -19,4 +19,3 @@ RDEPENDS:${PN} += "\
- "
- 
- BBCLASSEXTEND = "native nativesdk"
--
+ RDEPENDS:${PN} += " \
+     python3-asyncio \
 -- 
 2.25.1
 
